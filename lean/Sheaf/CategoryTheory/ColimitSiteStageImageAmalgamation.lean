@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.ColimitSiteStageImageAmalgamation
-public import WeilConjectures.CategoryTheory.ArrowsFunctor
-public import WeilConjectures.CategoryTheory.FinitePrecoverage
-public import WeilConjectures.CategoryTheory.ColimitSiteStageImage

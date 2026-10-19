@@ -8,7 +8,7 @@ public import Sheaf.AlgebraicGeometry.AffineCoordinateModuleModels
 public import Sheaf.AlgebraicGeometry.PerfectHomCochainCounit
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
-import Sheaf.CategoryTheory.AdjunctionSquareComposition
+import WeilConjectures.CategoryTheory.AdjunctionSquareComposition
 
 /-! # Canonical underived comparison in affine coordinates
 Source: Stacks Project, Tags 01I9 and 08DW.

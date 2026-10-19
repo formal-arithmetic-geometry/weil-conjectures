@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.TailOpenCohomologyLegNaturality
-public import WeilConjectures.AlgebraicGeometry.TailOpenCohomologyArrowLaws

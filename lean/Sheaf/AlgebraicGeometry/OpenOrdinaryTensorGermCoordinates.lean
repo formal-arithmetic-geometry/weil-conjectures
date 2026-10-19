@@ -3,7 +3,7 @@ module
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import Sheaf.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounitIso
 import Sheaf.AlgebraicGeometry.OpenOrdinaryTensorStalkRingCoordinates
-import Sheaf.AlgebraicGeometry.SemilinearTensorComplexIso
+import WeilConjectures.AlgebraicGeometry.SemilinearTensorComplexIso
 import Sheaf.AlgebraicGeometry.OpenOrdinaryTensorPureGermCoordinates
 import Sheaf.AlgebraicGeometry.OpenSemilinearInputComplexIso
 

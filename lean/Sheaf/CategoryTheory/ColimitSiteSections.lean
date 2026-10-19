@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.ColimitSiteSections
-public import Mathlib.CategoryTheory.Category.Cat
-public import Mathlib.CategoryTheory.Comma.Over.Basic
-public import WeilConjectures.CategoryTheory.SiteFilteredColimitSections

@@ -5,7 +5,7 @@ Authors: SHEAF group V2
 -/
 module
 
-public import Sheaf.CategoryTheory.Abelian.RightDerived.InjectivelyExactSquare
+public import WeilConjectures.CategoryTheory.Abelian.RightDerived.InjectivelyExactSquare
 import Sheaf.CategoryTheory.Abelian.RightDerived.InjectivelyExactSquareBoundarySquareNaturality
 import Mathlib.Algebra.Homology.HomologySequenceLemmas
 

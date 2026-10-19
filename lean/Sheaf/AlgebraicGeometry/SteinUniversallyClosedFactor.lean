@@ -1,8 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.SteinUniversallyClosedFactor
-public import Mathlib.AlgebraicGeometry.Morphisms.Flat
-public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
-public import Mathlib.AlgebraicGeometry.Pullbacks
-public import Mathlib.AlgebraicGeometry.Morphisms.Integral
-public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction

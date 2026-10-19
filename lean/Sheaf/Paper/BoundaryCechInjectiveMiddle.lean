@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.ModuleCechComparison
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyBoundary
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Sheaf.CategoryTheory.Abelian.HorseshoeResolutions
+import WeilConjectures.CategoryTheory.Abelian.HorseshoeResolutions
 import Sheaf.Paper.BoundaryHorseshoeRepresentative
 import Sheaf.Paper.CechHorseshoeLiftClass
 import WeilConjectures.Topology.Sheaves.CechComparison

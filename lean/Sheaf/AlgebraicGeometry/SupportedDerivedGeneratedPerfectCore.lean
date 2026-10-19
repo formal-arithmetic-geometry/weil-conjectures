@@ -5,7 +5,7 @@ public import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 import Sheaf.AlgebraicGeometry.SupportedCompactDetectorModel
 import Sheaf.CategoryTheory.CompactGeneratorsBuildObjects
-import Sheaf.CategoryTheory.GeneratorTowerNormalize
+import WeilConjectures.CategoryTheory.GeneratorTowerNormalize
 
 /-! # Telescope construction for a given supported compact detector
 

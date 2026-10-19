@@ -14,7 +14,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.DerivedPullbackAcrossUniversesMonoidalAdjunction
 import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
 import Sheaf.AlgebraicGeometry.PerfectTensorHomDuality
-import Sheaf.CategoryTheory.MonoidalProjectionConjugate
+import WeilConjectures.CategoryTheory.MonoidalProjectionConjugate
 
 /-! # The direct-image factorization of a tensor precomposition
 

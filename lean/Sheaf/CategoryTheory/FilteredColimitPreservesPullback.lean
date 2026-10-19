@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.FilteredColimitPreservesPullback
-public import Mathlib.CategoryTheory.Filtered.Basic
-public import WeilConjectures.CategoryTheory.ArrowsFunctor
-public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Pullbacks

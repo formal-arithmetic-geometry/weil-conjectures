@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstantCounit
-public import Mathlib.AlgebraicGeometry.Sites.Small
-public import Mathlib.CategoryTheory.Sites.ConstantSheaf
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify

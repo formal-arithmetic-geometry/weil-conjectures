@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.FinitePresieveFilteredColimit
-public import Mathlib.CategoryTheory.Sites.IsSheafFor
-public import Mathlib.CategoryTheory.Filtered.Basic

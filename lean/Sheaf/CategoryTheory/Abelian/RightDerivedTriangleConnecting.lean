@@ -8,7 +8,7 @@ module
 public import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
-import Sheaf.CategoryTheory.Abelian.HorseshoeResolutions
+import WeilConjectures.CategoryTheory.Abelian.HorseshoeResolutions
 import Sheaf.CategoryTheory.Abelian.HorseshoeDerivedTriangleComparison
 
 /-!

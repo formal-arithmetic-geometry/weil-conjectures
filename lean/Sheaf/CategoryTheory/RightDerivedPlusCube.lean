@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.RightDerivedPlusCube
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange

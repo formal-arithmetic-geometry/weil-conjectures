@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Low
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
 public import Mathlib.CategoryTheory.Adjunction.CompositionIso
 import WeilConjectures.SixFunctors.Etale.Derived.HeartGluing
-import Sheaf.CategoryTheory.AdjunctionSquareComposition
+import WeilConjectures.CategoryTheory.AdjunctionSquareComposition
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 
 /-!

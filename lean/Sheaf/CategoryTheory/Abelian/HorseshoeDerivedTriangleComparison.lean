@@ -5,7 +5,7 @@ Authors: SHEAF group Q1
 -/
 module
 
-public import Sheaf.CategoryTheory.Abelian.NatComplexDerivedBoundary
+public import WeilConjectures.CategoryTheory.Abelian.NatComplexDerivedBoundary
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 import Sheaf.CategoryTheory.Abelian.HorseshoeComparisonBoundary

@@ -16,7 +16,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
 import WeilConjectures.AlgebraicGeometry.Modules.AffineHom
 import Sheaf.AlgebraicGeometry.DerivedTensorQCohClosure
-import Sheaf.AlgebraicGeometry.SelfTorAffineChartSections
+import WeilConjectures.AlgebraicGeometry.SelfTorAffineChartSections
 import Sheaf.AlgebraicGeometry.SelfTorAmbientSectionCoordinates
 
 /-! # Ambient affine self-Tor comparison

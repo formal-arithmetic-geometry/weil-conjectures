@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ZariskiCohomologyLocallyZero
-public import Mathlib.AlgebraicGeometry.Scheme
-public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic

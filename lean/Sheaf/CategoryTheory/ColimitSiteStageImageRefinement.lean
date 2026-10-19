@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.ColimitSiteStageImageRefinement
-public import WeilConjectures.CategoryTheory.ArrowsFunctor
-public import WeilConjectures.CategoryTheory.ColimitSiteStageImage

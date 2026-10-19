@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.Abelian.HorseshoeHomotopyCorrection
-public import Mathlib.CategoryTheory.Abelian.Injective.Resolution

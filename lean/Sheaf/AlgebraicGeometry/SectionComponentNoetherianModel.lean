@@ -7,7 +7,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.SectionComponentPullback
-import Sheaf.AlgebraicGeometry.SectionNoetherianDescent
+import WeilConjectures.AlgebraicGeometry.SectionNoetherianDescent
 
 /-!
 # Local noetherian models for the component selected by a section

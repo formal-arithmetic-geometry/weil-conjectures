@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.Abelian.HorseshoeMorphismLift
-public import Mathlib.CategoryTheory.Abelian.Injective.Resolution

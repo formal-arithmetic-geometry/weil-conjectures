@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.ExistsDirectedReindexing
-public import Mathlib.CategoryTheory.Filtered.Basic

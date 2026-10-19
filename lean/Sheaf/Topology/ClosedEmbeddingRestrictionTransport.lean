@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
-import Sheaf.Topology.EmbeddingPushforwardTransport
+import WeilConjectures.Topology.EmbeddingPushforwardTransport
 import WeilConjectures.CategoryTheory.InverseMateEquivalence
 
 /-!

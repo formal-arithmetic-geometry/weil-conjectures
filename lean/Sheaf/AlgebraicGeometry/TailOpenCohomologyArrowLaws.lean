@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.TailOpenCohomologyArrowLaws
-public import WeilConjectures.AlgebraicGeometry.EtaleLimitOpenCohomologyCocone

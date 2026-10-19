@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.LinearAlgebra.Basis.Defs
 import Sheaf.AlgebraicGeometry.SmoothSectionDifferentialData
-import Sheaf.RingTheory.SmoothConormalSequenceExact
+import WeilConjectures.RingTheory.SmoothConormalSequenceExact
 import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 
 /-! # Stabilization of the differentials of a smooth section

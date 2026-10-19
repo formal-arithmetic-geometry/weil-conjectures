@@ -5,7 +5,7 @@ Released under the Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.AffineCoordinateTensorComparison
-import Sheaf.CategoryTheory.CounitComparisonComposition
+import WeilConjectures.CategoryTheory.CounitComparisonComposition
 
 /-! # Derived comparisons from concrete affine models
 Source: Stacks Project, Tags 08DW, 06Y1 and 0D5S.

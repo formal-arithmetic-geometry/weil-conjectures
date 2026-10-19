@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.StageCohomologyComparison
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-public import Mathlib.Algebra.Category.Grp.Colimits

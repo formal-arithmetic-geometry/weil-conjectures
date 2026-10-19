@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
-public import Mathlib.CategoryTheory.Monoidal.Ring

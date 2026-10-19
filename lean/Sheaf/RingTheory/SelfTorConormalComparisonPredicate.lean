@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.RingTheory.ConormalExteriorModule
+public import WeilConjectures.RingTheory.ConormalExteriorModule
 public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic

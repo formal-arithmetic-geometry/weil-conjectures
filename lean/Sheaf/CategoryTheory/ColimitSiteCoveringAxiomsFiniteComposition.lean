@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.ColimitSiteCoveringAxiomsFiniteComposition
-public import Mathlib.CategoryTheory.Filtered.Basic
-public import WeilConjectures.CategoryTheory.ArrowsFunctor
-public import WeilConjectures.CategoryTheory.FinitePrecoverage

@@ -5,7 +5,7 @@ Authors: SHEAF group K2
 -/
 module
 
-public import Sheaf.CategoryTheory.Abelian.DerivedBottomComparison
+public import WeilConjectures.CategoryTheory.Abelian.DerivedBottomComparison
 import Sheaf.CategoryTheory.Abelian.DerivedBottomCycleTransport
 
 /-! # Canonical-cycle normalization of the specified bottom comparison
