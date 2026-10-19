@@ -1,0 +1,113 @@
+{
+ "id": "lem-wf-fibre-functor-uniqueness",
+ "kind": "statement",
+ "title": "Any two fibre functors on a Galois category are isomorphic",
+ "statement": "Let $C$ be a category with morphisms in universe $u$ and a GaloisCategory structure in the Mathlib sense. Let $F,F\\prime:C\\to\\mathrm{FintypeCat}_u$ be fibre functors in the Mathlib PreGaloisCategory.FiberFunctor sense: they preserve finite limits, finite coproducts, epimorphisms and quotients by finite groups and reflect isomorphisms. Then there exists a natural isomorphism $F\\cong F\\prime$.",
+ "source": {
+  "document": "lean/WeilConjectures/Mathlib/CategoryTheory/Galois/Prorepresentability.lean",
+  "place": "nonempty_iso_of_fiberFunctor and its proved helpers homEquivSectionsFibers, bijective_app_of_fiberFunctor, isIso_of_fiberFunctor"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "By Mathlib pro-representability, the fibre functor F is a colimit of the corepresentable functors of its pointed Galois objects. The universal property of this colimit identifies natural transformations F to F-prime with compatible sections of the F-prime fibres on pointed Galois objects. This is the proved homEquivSectionsFibers equivalence in the cited source.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The category of pointed Galois objects is cofiltered by Mathlib. Each F-prime fibre there is nonempty because the underlying Galois object is connected; it is finite because F-prime takes values in finite sets. Apply [lem-trf-cofiltered-finite-sets-section] to obtain a compatible section, hence a natural transformation eta:F to F-prime.",
+   "uses": [
+    "lem-trf-cofiltered-finite-sets-section"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a Galois object, eta is equivariant for its automorphism group. Evaluation of automorphisms at a fibre point is bijective for either fibre functor: equivariance and freeness give injectivity of eta, and equality of both finite fibre cardinalities with the automorphism group gives surjectivity. For a general object, lift a pair of points to one Galois object over its square; equality of their images gives equality of the two induced arrows by connected-object evaluation injectivity, hence equality of the original points. For surjectivity lift a target point along a Galois object and use bijectivity there. Thus eta is componentwise bijective, and consequently a natural isomorphism. These arguments are the proved bijective_app_of_isGalois, bijective_app_of_fiberFunctor and isIso_of_fiberFunctor helpers in the same source.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-cofiltered-finite-sets-section"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/Mathlib/CategoryTheory/Galois/Prorepresentability.lean",
+  "place": "Full existing Lean proof and module documentation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Any two fiber functors on a Galois category are naturally isomorphic",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.instFiberFunctorGetFiberFunctor; CategoryTheory.GaloisCategory.hasFiberFunctor; CategoryTheory.PreGaloisCategory.PointedGaloisObject.congr_simp; CategoryTheory.PreGaloisCategory.FiberFunctor.preservesFiniteCoproducts; CategoryTheory.PreGaloisCategory.GaloisCategory.getFiberFunctor; CategoryTheory.PreGaloisCategory.natTrans_ext_of_isGalois; CategoryTheory.PreGaloisCategory.FiberFunctor.reflectsIsos; CategoryTheory.PreGaloisCategory.FiberFunctor",
+   "date": "2026-10-19",
+   "verdict": "no match in Mathlib; an exact proved theorem is present in the source library instead"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.PreGaloisCategory.nonempty_iso_of_fiberFunctor",
+   "results": "0 hits:  loogle: unknown identifier 'CategoryTheory.PreGaloisCategory.nonempty_iso_of_fiberFunctor'",
+   "date": "2026-10-19",
+   "verdict": "no match in Mathlib; an exact proved theorem is present in the source library instead"
+  },
+  {
+   "tool": "grep",
+   "query": "nonempty_iso_of_fiberFunctor|isIso_of_fiberFunctor|homEquivSectionsFibers",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "no match in Mathlib; an exact proved theorem is present in the source library instead"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Galois.ExactFiniteGsetsForgetful",
+  "date": "2026-10-19",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-wf-fundamental-representation",
+   "place": "Definition paragraph: After the usual transport of the stalk from Phi_X(xbar) to xbar; uniqueness of fibre functors supplies the finite-cover path underlying that transport.",
+   "via": [
+    "lem-wf-exact-finite-gsets-forgetful",
+    "lem-wf-fibre-functor-basepoint-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-d-geometry",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Mathlib.CategoryTheory.Galois.Prorepresentability",
+  "declaration": "CategoryTheory.PreGaloisCategory.nonempty_iso_of_fiberFunctor",
+  "statement": "theorem nonempty_iso_of_fiberFunctor : Nonempty (F ≅ F')",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-19",
+  "note": "Existing proved theorem. Context: {C : Type u₁} [Category.{u₂} C] [GaloisCategory C] (F F' : C ⥤ FintypeCat.{u₂}) [FiberFunctor F] [FiberFunctor F']. No new Lean module or unproved declaration. It was found by searching lean/WeilConjectures after the Mathlib searches failed."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261019T132228-L-1204169",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261019T132228-L-1204169",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
