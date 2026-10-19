@@ -1,6 +1,6 @@
 # Work queue
 
-1003 items; claim with `tools/claim.py next <group> [--stage N]`.
+1002 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (6)
 
@@ -48,7 +48,7 @@
 
 Not open yet: 295 nodes that below a finished node, not needed, 3 nodes that wait for stage 1 (statement downstream not grounded), 123 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (969)
+## Stage 3: modules to prove (968)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -336,7 +336,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.ZlFrameworkOpenExchange` | 9 | 7 | proof | route |
 | `Sheaf.SixFunctors.FieldTensor` | 9 | 1 | proof | route |
 | `Sheaf.SixFunctors.FlatModel` | 9 | 4 | proof | route |
-| `WeilConjectures.WeilSheaf.PoincareDualityLisse` | 9 | 1 | proof | route |
 | `Sheaf.Paper.AdicConstructibleFiniteReductions` | 10 | 5 | proof | route |
 | `Sheaf.Paper.UniformConstructibleExtIntegral` | 10 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.AdicFiniteStratificationPullback` | 11 | 1 | proof | route |
