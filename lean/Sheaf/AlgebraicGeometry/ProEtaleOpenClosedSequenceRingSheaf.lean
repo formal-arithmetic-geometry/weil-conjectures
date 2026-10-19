@@ -1,29 +1,15 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group Q64
+Authors: SHEAF group E5
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-public import Sheaf.CategoryTheory.RingedSiteModules
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
-public import Mathlib.Algebra.Homology.ExactSequence
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Sheaf.AlgebraicGeometry.ProEtaleRingSheafOperations
 
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import WeilConjectures.CategoryTheory.SiteMorphismComposition
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import WeilConjectures.CategoryTheory.SiteMorphismComposition
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
+import Sheaf.AlgebraicGeometry.ProEtaleRingSheafClosedLocalization
+import Sheaf.AlgebraicGeometry.ProEtaleRingSheafBaseChangeMates
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.FullyFaithful
 
 /-!
 # Open–closed localization with arbitrary ring-sheaf coefficients
@@ -41,6 +27,7 @@ coefficients. Base-change coefficient transport uses the specified composition i
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
 
 universe u
 
@@ -49,76 +36,9 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Module inverse image, with inverse-image coefficients and the transported action.
-Source: Stacks, Tags 03D2 and 09A5
-(blueprint: det-sf-open-closed-sequence-ring-sheaf). -/
-abbrev ringSheafInverseImage {T X : Scheme.{u}} (f : T ⟶ X)
-    (B : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj B] :=
-  (upperStar Ab.{u + 1} f).mapMod B
-
-/-- Module direct image, with scalars restricted through the canonical ring unit.
-Source: Stacks, Tag 03D3 and Pro-etale Cohomology, section 09A5
-(blueprint: det-sf-open-closed-sequence-ring-sheaf). -/
-abbrev ringSheafDirectImage {T X : Scheme.{u}} (f : T ⟶ X)
-    (B : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj B] :=
-  (lowerStar Ab.{u + 1} f).mapMod ((upperStar Ab.{u + 1} f).obj B) ⋙
-    Mod.comap ((upperStarLowerStarAdjunction Ab.{u + 1} f).unitAlgHom B)
-
-/-- The actual inverse-image/direct-image module adjunction.
-Source: Stacks, Tag 03D3
-(blueprint: det-sf-open-closed-sequence-ring-sheaf). -/
-abbrev ringSheafAdjunction {T X : Scheme.{u}} (f : T ⟶ X)
-    (B : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj B] :
-    ringSheafInverseImage f B ⊣ ringSheafDirectImage f B :=
-  (upperStarLowerStarAdjunction Ab.{u + 1} f).mapModAdjunction B
-
-/-- Extension by zero with its coefficient action supplied by the existing projection
-formula linearization. Its carrier is the sheafification of extension by zero of the
-underlying abelian presheaf, and its action is the sheafified original action.
-Source: Stacks, Tags 03DI, 03DJ and 09AE
-(blueprint: det-sf-open-closed-sequence-ring-sheaf). -/
-abbrev ringSheafOpenExtension {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
-    (B : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj B] :=
-  (openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).mapModLeft B
-
-/-- The extension-by-zero adjunction with its specified underlying abelian unit and counit.
-Source: Stacks, Tag 03DI
-(blueprint: det-sf-open-closed-sequence-ring-sheaf). -/
-abbrev ringSheafOpenAdjunction {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
-    (B : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj B] :
-    ringSheafOpenExtension j B ⊣ ringSheafInverseImage j B :=
-  (openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).mapModLeftAdjunction
-
-/-- The fixed inverse-image composition comparison on a pullback square.
-Source: Stacks, Tags 03CB and 03CC; blueprint clause (4)
-(blueprint: det-sf-open-closed-sequence-ring-sheaf). -/
-abbrev ringSheafSquareComparison {X' T X : Scheme.{u}} (g : X' ⟶ X) (f : T ⟶ X) :=
-  upperStarCompIso Ab.{u + 1} (pullback.condition (f := g) (g := f))
-
-/-- The canonical coefficient identification, with the two successive inverse-image
-ring structures made explicit, rather than the structure on a composite functor.
-Source: Stacks, Tags 03CB and 03CC; blueprint clause (4)
-(blueprint: det-sf-open-closed-sequence-ring-sheaf). -/
-def ringSheafSquareCoefficient {X' T X : Scheme.{u}} (g : X' ⟶ X) (f : T ⟶ X)
-    (B : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) :
-    (upperStar Ab.{u + 1} (pullback.fst g f)).obj ((upperStar Ab.{u + 1} g).obj B) ⟶
-      (upperStar Ab.{u + 1} (pullback.snd g f)).obj ((upperStar Ab.{u + 1} f).obj B) :=
-  (ringSheafSquareComparison g f).hom.app B
-
-/-- Pullback along the fibre projection, with scalars identified by the fixed canonical
-composition comparison. Multiplicativity of this comparison is concluded in the theorem.
-Source: Stacks, Tags 03CB and 03CC; blueprint clause (4)
-(blueprint: det-sf-open-closed-sequence-ring-sheaf). -/
-abbrev ringSheafSquarePullback {X' T X : Scheme.{u}} (g : X' ⟶ X) (f : T ⟶ X)
-    (B : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj B]
-    [IsMonHom (ringSheafSquareCoefficient g f B)] :
-    Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) ((upperStar Ab.{u + 1} f).obj B) ⥤
-      Mod (Sheaf (Scheme.ProEt.topology (pullback g f)) Ab.{u + 1})
-        ((upperStar Ab.{u + 1} (pullback.fst g f)).obj
-          ((upperStar Ab.{u + 1} g).obj B)) :=
-  ringSheafInverseImage (pullback.snd g f) ((upperStar Ab.{u + 1} f).obj B) ⋙
-    Mod.comap (ringSheafSquareCoefficient g f B)
-
+set_option maxHeartbeats 400000 in
+-- Comparing transported module structures needs additional elaboration heartbeats.
+set_option linter.unusedVariables false in
 /-- The open–closed sequence over an arbitrary ring sheaf, and canonical base change.
 The square restriction comparisons are normalized on underlying sheaves. The open
 comparison is characterized by its transpose of the open unit; the closed comparison
@@ -239,6 +159,94 @@ theorem proEtale_openClosed_sequence_ring_sheaf
                   ((ringSheafInverseImage g B).obj M) ≫
               (ringSheafDirectImage (pullback.fst g i)
                 ((upperStar Ab.{u + 1} g).obj B)).map (gamma.hom.app M))) := by
-  sorry
+  obtain ⟨hcol, hc, hz, hs⟩ := ringSheaf_closed_localization i j _hU B
+  refine ⟨inferInstance, inferInstance, inferInstance, ?_, ?_, ?_, hcol, hc, hz, hs, ?_⟩
+  · have : (ringSheafOpenExtension j B).IsLeftAdjoint :=
+      (ringSheafOpenAdjunction j B).isLeftAdjoint
+    infer_instance
+  · intro N
+    have h : IsIso ((Mod.forget _).map ((ringSheafOpenAdjunction j B).unit.app N)) := by
+      change IsIso (((ringSheafOpenAdjunction j B).unit.app N).hom)
+      simp only [ringSheafOpenAdjunction, Adjunction.mapModLeftAdjunction,
+        Adjunction.mkOfHomEquiv_unit_app]
+      change IsIso ((openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).homEquiv _ _
+        (𝟙 ((openImmersionLowerShriek Ab.{u + 1} j).obj N.X)))
+      rw [Adjunction.homEquiv_id]
+      have := Adjunction.unit_isIso_of_L_fully_faithful
+        (openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j)
+      infer_instance
+    exact isIso_of_reflects_iso _ (Mod.forget _)
+  · have : (ringSheafDirectImage i B).IsRightAdjoint :=
+      (ringSheafAdjunction i B).isRightAdjoint
+    infer_instance
+  · intro X' _ _ g
+    obtain ⟨hu, hz', delta, gamma, hd, hg, alpha, beta, ha, hb⟩ :=
+      ringSheaf_baseChange_mates i j _hU B g
+    have := hu
+    have := hz'
+    have hU' : Set.range (pullback.fst g j) = (Set.range (pullback.fst g i))ᶜ := by
+      rw [Scheme.Pullback.range_fst, Scheme.Pullback.range_fst, _hU]
+      rfl
+    have hs' := (ringSheaf_closed_localization (pullback.fst g i)
+      (pullback.fst g j) hU' ((upperStar Ab.{u + 1} g).obj B)).2.2.2
+    refine ⟨hu, hz', delta, gamma, hd, hg, ?_, alpha, beta, ha, hb, ?_, ?_⟩
+    · intro M
+      exact hs' ((ringSheafInverseImage g B).obj M)
+    · intro M
+      let adj' := ringSheafOpenAdjunction (pullback.fst g j)
+        ((upperStar Ab.{u + 1} g).obj B)
+      apply (cancel_epi (alpha.inv.app ((ringSheafInverseImage j B).obj M))).1
+      simp only [Iso.inv_hom_id_app_assoc]
+      apply (adj'.homEquiv _ _).injective
+      rw [adj'.homEquiv_naturality_right, ha]
+      rw [adj'.homEquiv_naturality_left]
+      dsimp only [adj']
+      simp only [Adjunction.homEquiv_unit]
+      rw [← Category.assoc, ← Functor.comp_map]
+      rw [Category.assoc]
+      have hd := delta.inv.naturality
+        ((ringSheafOpenAdjunction j B).counit.app M)
+      simp only [Functor.comp_obj] at hd ⊢
+      rw [← hd]
+      simp only [Functor.comp_map]
+      change (ringSheafSquarePullback g j B).map
+          ((ringSheafOpenAdjunction j B).unit.app ((ringSheafInverseImage j B).obj M)) ≫
+          (ringSheafSquarePullback g j B).map
+            ((ringSheafInverseImage j B).map
+              ((ringSheafOpenAdjunction j B).counit.app M)) ≫ delta.inv.app M = _
+      rw [← Category.assoc, ← Functor.map_comp,
+        (ringSheafOpenAdjunction j B).right_triangle_components]
+      simp only [Category.assoc, Adjunction.right_triangle_components, Category.comp_id]
+      apply Mod.Hom.ext
+      simp only [Functor.id_obj, Functor.comp_obj, Functor.comp_map,
+        Functor.mapMod_map, Mod.id_hom', Mod.comp_hom',
+        Mod.comap_map_hom, Mod.homMk_hom]
+      rw [(upperStar Ab.{u + 1} (pullback.snd g j)).map_id]
+      exact Category.id_comp ((delta.inv.app M).hom)
+    · intro M
+      let adj' := ringSheafAdjunction (pullback.fst g i)
+        ((upperStar Ab.{u + 1} g).obj B)
+      apply (adj'.homEquiv _ _).symm.injective
+      rw [adj'.homEquiv_naturality_left_symm]
+      dsimp only [adj']
+      simp only [Functor.comp_obj, Functor.id_obj] at hb ⊢
+      rw [hb ((ringSheafInverseImage i B).obj M)]
+      change _ = (adj'.homEquiv _ _).symm ((adj'.homEquiv _ _) (gamma.hom.app M))
+      rw [Equiv.symm_apply_apply]
+      rw [← Category.assoc, ← Functor.comp_map]
+      rw [gamma.hom.naturality]
+      change gamma.hom.app M ≫
+          (ringSheafSquarePullback g i B).map
+            ((ringSheafInverseImage i B).map ((ringSheafAdjunction i B).unit.app M)) ≫
+          (ringSheafSquarePullback g i B).map
+            ((ringSheafAdjunction i B).counit.app ((ringSheafInverseImage i B).obj M)) = _
+      rw [← (ringSheafSquarePullback g i B).map_comp,
+        (ringSheafAdjunction i B).left_triangle_components M]
+      apply Mod.Hom.ext
+      simp only [Functor.comp_obj, Functor.id_obj, Functor.comp_map,
+        Functor.mapMod_map, Mod.id_hom', Mod.comp_hom',
+        Mod.comap_map_hom, Mod.homMk_hom]
+      rw [(upperStar Ab.{u + 1} (pullback.snd g i)).map_id]
+      exact Category.comp_id ((gamma.hom.app M).hom)
 
 end AlgebraicGeometry.ProEtale

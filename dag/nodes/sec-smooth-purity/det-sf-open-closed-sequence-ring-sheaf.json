@@ -27,158 +27,52 @@
  ],
  "proof": [
   {
-   "text": "Fix on every scheme over $X$ the coefficient sheaf given by inverse image of $B$. For $f:T\\to S$, define $f^*F$ by applying the abelian inverse image to $F$ and to its action: $f^{-1}(B_S\\times F)\\simeq f^{-1}B_S\\times f^{-1}F\\to f^{-1}F$. Define $(f_*H)(W)=H(T\\times_SW)$, with $B_S$-action through $B_S\\to f_*f^{-1}B_S$. The constructions and the finite-product comparison are in [def-weil-proetale-inverse-image]; no tensor extension of coefficients is needed because the chosen coefficients are precisely the inverse images. Thus these module functors have the abelian functors as carriers. By [lem-weil-pbc-module-sheaves-colimits-forgetful], forgetting actions is faithful and preserves kernels and cokernels. It reflects zero objects, since zero underlying sections give the zero module, and isomorphisms, since the inverse of a bijective linear map is linear. Hence it reflects exactness as well. These constructions do not use commutativity of $B$.",
+   "text": "Import the closed localization lemma to obtain finite-colimit preservation for i_*, its invertible counit, disjoint-support vanishing and the exact counit-unit sequence.",
    "uses": [
-    "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+    "lem-sf-ring-sheaf-closed-localization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A5 (section-morphism); Tag 09AE (definition-extension-zero); module actions: sites-modules.tex Tags 03D3, 03CY, 03DA"
-   }
+   "elementary": false
   },
   {
-   "text": "Clauses (1),(4) of [lem-weil-proetale-weakly-etale-localization] identify the open site with the slice and give at most one factorization of an object through $U$. In the inverse-image formula [def-weil-proetale-inverse-image], for $V\\to U$ the pair $(V\\to X,\\phi:V\\xrightarrow{\\sim}U\\times_XV)$ is initial in $\\mathcal I_V$: a map from it to $(W,\\psi)$ is uniquely the $X$-map $V\\to W$ encoded by $\\psi$. It is therefore final in $\\mathcal I_V^{\\mathrm{op}}$, so the colimit is $F(V\\to X)$. These values already form a sheaf because slice coverings are the coverings over $U$. Thus $j^*$, including on $B$, is slice restriction. By [def-weil-extension-by-zero-presheaf], its presheaf extension is $P_N(W)=N(W\\to U)$ when $W$ factors through $U$, and zero otherwise, with restricted $B(W)$-action. Define $j_!N=P_N^\\#$ using [def-weil-presheaf-modules-sheafification]; its carrier is exactly abelian extension by zero.",
+   "text": "The existing module-object inverse image and open extension preserve finite limits, and inverse image preserves finite colimits. Open extension preserves finite colimits because its actual module adjunction makes it a left adjoint; closed direct image preserves finite limits because its module adjunction makes it a right adjoint. Forget the open module unit: by the definition of mapModLeftAdjunction its carrier is the abelian open unit. Full faithfulness of abelian extension by zero makes that unit invertible; Mod.forget reflects isomorphisms.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-weil-proetale-inverse-image",
-    "def-weil-extension-by-zero-presheaf",
-    "def-weil-presheaf-modules-sheafification"
+    "def-sf-proetale-ring-sheaf-operations",
+    "lem-sfb-finite-extension-by-zero-fully-faithful"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A5 (section-morphism); Tag 09AE (definition-extension-zero); module actions: sites-modules.tex Tags 03D3, 03CY, 03DA"
-   }
+   "elementary": false
   },
   {
-   "text": "The adjunction $f^{-1}\\dashv f_*$ on abelian sheaves restricts to these module categories. Explicitly write $L=f^{-1}$, $R=f_*$, unit $\\eta$, and actions $\\mu_M,\\mu_H$. The action-map calculation below takes place in sheaves of sets; additivity of the maps is already given by the abelian adjunction. An abelian map $a:LM\\to H$ has adjunct $b=Ra\\circ\\eta_M$. The two sides of $a\\circ L\\mu_M=\\mu_H\\circ(1\\times a)$ have adjuncts $b\\circ\\mu_M$ and $R\\mu_H\\circ(\\eta_{B_S}\\times b)$, respectively: this is naturality of $\\eta$ on $B_S\\times M$, using its product compatibility. The former equality is $f^{-1}B_S$-linearity of $a$, the latter is $B_S$-linearity of $b$. Thus the hom bijection restricts in both directions, and its unit and counit are exactly the underlying abelian ones. No coefficient commutativity enters these equations.",
+   "text": "Import canonical base-change mates. The ranges of the pulled-back immersions are inverse images of the original ranges, so remain complementary. Apply closed localization on X′ to g^*M to obtain the base-changed short exact sequence.",
    "uses": [
-    "def-weil-proetale-inverse-image"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D3 (lemma-adjoint-push-pull-modules), with the omitted reverse implication supplied by the equality of adjuncts"
-   }
-  },
-  {
-   "text": "Apply the existing [lem-weil-pbc-proetale-ringed-open-closed] with the commutative coefficient sheaf $\\mathbb Z_X$, not with a finite coefficient ring. Abelian sheaves are canonically $\\mathbb Z_X$-module sheaves: the integer $n$ acts by repeated addition, and this action extends uniquely to the sheafification of the constant integer presheaf [def-weil-pbc-constant-sheaf]. Every abelian sheaf map preserves that action. On a scheme $T\\to X$, the canonical map $f^{-1}\\mathbb Z_X\\to\\mathbb Z_T$ constructed in [def-weil-proetale-inverse-image] lets every abelian sheaf on $T$ carry an $f^{-1}\\mathbb Z_X$-action by restriction of its integer action; thus the cited theorem applies to every abelian sheaf on both the open and closed pieces. Its module inverse images with the identified coefficient sheaves have the abelian inverse images as carriers by Steps 1--2. Consequently the cited statement supplies on abelian sheaves the adjunction $j_!\\dashv j^*$, exactness of $j_!$ and $i_*$, natural isomorphisms $j^*j_!\\simeq1$ and $i^*i_*\\simeq1$, the vanishings $j^*i_*=0$ and $i^*j_!=0$, and the canonical short exact sequence $0\\to j_!j^*F\\to F\\to i_*i^*F\\to0$. Its hypotheses hold because the complementary open immersion in the item is quasi-compact. This is a use of the cited statement, not a transport of a finite-coefficient proof.",
-   "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-proetale-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09AA (lemma-closed-immersion), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09BN (lemma-open-immersion), 09AG (lemma-jshriek-zero), 09AH (lemma-ses-associated-to-open)"
-   }
-  },
-  {
-   "text": "To verify that the particular adjunction maps are invertible, first observe that $i_*$ reflects isomorphisms: applying $i^*$ to $i_*a$ and conjugating by the stated natural isomorphism $i^*i_*\\simeq1$ recovers $a$. The localization sequence for $F=i_*G$ and $j^*i_*=0$ show that its unit $\\eta_{i,i_*G}$ is invertible. The triangle identity $i_*\\varepsilon_{i,G}\\circ\\eta_{i,i_*G}=1$ makes $i_*\\varepsilon_{i,G}$ invertible, hence $\\varepsilon_{i,G}$ is invertible. Similarly $j_!$ reflects isomorphisms using $j^*j_!\\simeq1$; the sequence for $F=j_!N$ and $i^*j_!=0$ make $\\varepsilon_{j,j_!N}$ invertible, and $\\varepsilon_{j,j_!N}\\circ j_!\\eta_{j,N}=1$ gives invertibility of $\\eta_{j,N}$. Thus we obtain the actual unit and counit isomorphisms, without interpreting an unspecified functor isomorphism as an adjunction map.",
-   "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09AA (lemma-closed-immersion), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09BN (lemma-open-immersion), 09AG (lemma-jshriek-zero), 09AH (lemma-ses-associated-to-open)"
-   }
-  },
-  {
-   "text": "For the open module adjunction, a linear map $P_N\\to M$ is determined by its components on objects over $U$, where it is a map $N\\to j^*M$; on all other objects its source is zero. Naturality of these components gives the converse map of presheaves. The universal property in [def-weil-presheaf-modules-sheafification] therefore gives $\\operatorname{Hom}_B(j_!N,M)=\\operatorname{Hom}_{j^*B}(N,j^*M)$, with the same underlying abelian unit and counit. The exactness of $j_!$ and the unit isomorphism in clause (1) follow from Steps 4--5 and the forgetful comparison of Step 1. Moreover every inverse image $f^*$ with these inverse-image coefficients is exact: its underlying abelian functor is exact by [lem-weil-pbc-site-pullback-abelian-exact]. This proves the remaining assertion about $j^*$ and will also apply to $i^*,g^*,i'^*,j'^*$.",
-   "uses": [
-    "def-weil-extension-by-zero-presheaf",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-site-pullback-abelian-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03DI (lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact); Tag 04JC (lemma-flat-pullback-exact), first assertion"
-   }
-  },
-  {
-   "text": "By Steps 1--5, exactness of $i_*$, invertibility of its counit, and $j^*i_*=0$ in clause (2) hold for $B$-modules. The counit is the module counit by Step 3. For full faithfulness, the bijections $\\operatorname{Hom}_B(i_*G,i_*H)=\\operatorname{Hom}_{i^*B}(i^*i_*G,H)=\\operatorname{Hom}_{i^*B}(G,H)$ identify the forward map with $i_*$ by the triangle identity. Likewise the two module maps in clause (3) forget to exactly the counit and unit of the abelian sequence of Step 4, so that sequence is exact for $B$-modules. We will use the resulting detection criterion: if $j^*F=i^*F=0$ then this sequence gives $F=0$; if a morphism becomes invertible under both restrictions, exactness of the restrictions makes its kernel and cokernel have zero restrictions, so they vanish and the morphism is invertible.",
-   "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09AA, 09BM, 09AH; module exactness: sites-modules.tex Tag 03DA"
-   }
-  },
-  {
-   "text": "For clause (4), the base changes $j'$ and $i'$ are open and closed immersions by [lem-weil-pbc-open-immersion-base-change] and [lem-weil-pbc-closed-immersion-base-change], and $j'$ is quasi-compact by [lem-pc-quasi-compact-base-change]. They are complementary: the open is $g^{-1}(U)$ and the closed fibre has support $g^{-1}(|Z|)$ (affine locally it is cut out by the image of the ideal of $Z$). Thus Steps 1--7 apply also on $X'$. Composition of the site inverse images has its canonical adjunction-compatible identification by [lem-weil-pbc-site-morphism-composition]. Indeed direct image along a composite evaluates to $H(T\\times_SW)$ by associativity of fibre products, using [def-weil-proetale-inverse-image]. These identifications lift to our module categories by the action construction in Step 1. We henceforth use $i'^*g^*\\simeq g_Z^*i^*$ and $j'^*g^*\\simeq g_U^*j^*$, with these specified identifications on coefficient sheaves as well.",
-   "uses": [
+    "lem-sf-ring-sheaf-base-change-mates",
+    "lem-sf-ring-sheaf-closed-localization",
     "lem-weil-pbc-open-immersion-base-change",
     "lem-weil-pbc-closed-immersion-base-change",
-    "lem-pc-quasi-compact-base-change",
-    "lem-weil-pbc-site-morphism-composition",
-    "def-weil-proetale-inverse-image"
+    "lem-pc-quasi-compact-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tags 01JY (schemes-lemma-base-change-immersion, both open and closed cases), 01K5 (schemes-lemma-quasi-compact-preserved-base-change); also morphisms.tex Tag 01QR (lemma-base-change-closed-immersion); site composition: sites.tex Tags 03CB, 03CC"
-   }
+   "elementary": false
   },
   {
-   "text": "Open base change is a direct adjunction calculation. On an object $W\\to U$, both $(j^*g_*H)(W)$ and $(g_{U*}j'^*H)(W)$ equal $H(X'\\times_XW)$, with the same coefficient action and restrictions. Consequently there are natural bijections $\\operatorname{Hom}(g^*j_!N,H)=\\operatorname{Hom}(N,j^*g_*H)=\\operatorname{Hom}(N,g_{U*}j'^*H)=\\operatorname{Hom}(j'_!g_U^*N,H)$. The isomorphism $\\alpha_N:g^*j_!N\\xrightarrow{\\sim}j'_!g_U^*N$ is the one corresponding to identity maps under this hom identification: applying it to the identity on either represented object gives inverse maps because the bijections are natural. This proves the first canonical isomorphism. The sectionwise direct-image equality used here is valid for arbitrary $g$.",
-   "uses": [
-    "def-weil-proetale-inverse-image"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/det-sf-open-closed-sequence-ring-sheaf.proof.md",
-    "place": "Current blueprint proof part (4), open base change; adjunction argument made explicit using sectionwise direct image"
-   }
-  },
-  {
-   "text": "Let $\\varepsilon_i:i^*i_*\\to1$ be the closed counit. Define the canonical closed comparison $\\beta_G:g^*i_*G\\to i'_*g_Z^*G$ as the $i'^*\\dashv i'_*$ adjunct of $i'^*g^*i_*G\\simeq g_Z^*i^*i_*G\\xrightarrow{g_Z^*\\varepsilon_{i,G}}g_Z^*G$. After $j'^*$ its source and target vanish, since $j'^*g^*i_*G\\simeq g_U^*j^*i_*G=0$ and $j'^*i'_*=0$. Its closed restriction satisfies $\\varepsilon_{i',g_Z^*G}\\circ i'^*\\beta_G=g_Z^*\\varepsilon_{i,G}$ under the composition identification. Both counits are isomorphisms by clause (2), so $i'^*\\beta_G$ is an isomorphism. Detection from Step 7 on $X'$ proves that $\\beta_G$ is an isomorphism. This uses the composition theorem [lem-weil-pbc-site-morphism-composition], not a base-change theorem restricted to weakly etale $g$.",
-   "uses": [
-    "lem-weil-pbc-site-morphism-composition"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/det-sf-open-closed-sequence-ring-sheaf.proof.md",
-    "place": "Current blueprint proof part (4), closed base change; the inverse-image composition and mate/counit equation replace its unsupported weakly-etale localization citation"
-   }
-  },
-  {
-   "text": "Finally these isomorphisms identify the actual sequence maps. Put $\\delta_M:j'^*g^*M\\simeq g_U^*j^*M$ and $\\gamma_M:i'^*g^*M\\simeq g_Z^*i^*M$. For the open map, put $N=j^*M$ and use the composite adjunction bijection $\\operatorname{Hom}_{X'}(g^*j_!N,g^*M)\\cong\\operatorname{Hom}_{U}(N,j^*g_*g^*M)\\cong\\operatorname{Hom}_{U}(N,g_{U*}j'^*g^*M)$. Under this bijection both $g^*\\varepsilon_{j,M}$ and $\\varepsilon_{j',g^*M}\\circ j'_!(\\delta_M^{-1})\\circ\\alpha_{j^*M}$ correspond to\n$N\\xrightarrow{\\eta^{g_U}_N}g_{U*}g_U^*N\\xrightarrow{g_{U*}(\\delta_M^{-1})}g_{U*}j'^*g^*M$, by the two triangle identities and the defining adjunction property of $\\alpha$. Hence the open maps agree. For the closed map, the $i'^*$-adjunct of $\\beta_{i^*M}\\circ g^*\\eta_{i,M}$ is the composite $i'^*g^*M\\xrightarrow{\\gamma_M}g_Z^*i^*M\\xrightarrow{\\mathrm{id}}g_Z^*i^*M$: the counit equation for $\\beta$ reduces it to $g_Z^*(\\varepsilon_{i,i^*M}\\circ i^*\\eta_{i,M})=\\mathrm{id}$ by the triangle identity. This is also the adjunct of $i'_*(\\gamma_M)\\circ\\eta_{i',g^*M}$, so those two maps agree. Thus the pulled-back counit and unit are exactly the new counit and unit. Exactness of $g^*$ from Step 6 now sends the sequence of clause (3) to that for $g^*M$, as asserted.",
-   "uses": [
-    "lem-weil-pbc-site-morphism-composition"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 03CB, 03CC: adjunction-compatible composition; current blueprint proof part (4), final sentence, with both map equations supplied"
-   }
+   "text": "For the open sequence-arrow equation, cancel alpha inverse, transpose through the pulled-back open adjunction, substitute its defining transpose, and use naturality of delta inverse and the right triangle identity for the original open adjunction. For the closed equation, transpose through the pulled-back closed adjunction, substitute the defining transpose of beta, and use naturality of gamma and the left triangle identity. Injectivity of the hom equivalences proves the actual arrow equations.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-extension-by-zero-presheaf",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-presheaf-modules-sheafification",
-  "def-weil-proetale-inverse-image",
+  "def-sf-proetale-ring-sheaf-operations",
   "lem-pc-quasi-compact-base-change",
+  "lem-sf-ring-sheaf-base-change-mates",
+  "lem-sf-ring-sheaf-closed-localization",
+  "lem-sfb-finite-extension-by-zero-fully-faithful",
   "lem-weil-pbc-closed-immersion-base-change",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-open-immersion-base-change",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-site-morphism-composition",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-weil-proetale-weakly-etale-localization"
+  "lem-weil-pbc-open-immersion-base-change"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/det-sf-open-closed-sequence-ring-sheaf.proof.md",
-  "place": "Coefficient paragraph and parts (1)--(4), repaired using Stacks Tags 09AA, 09BM, 09AH and formal adjunction calculations"
+  "group": "E5",
+  "date": "2026-10-18",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/det-sf-open-closed-sequence-ring-sheaf.md",
+  "place": "Original open/closed route; complete Lean proof from the proved localization and canonical mate lemmas, categorical exactness instances, the open unit, and both triangle-identity sequence-arrow equations. No residual holes."
  },
  "mathlib_searches": [
   {
@@ -337,16 +231,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-weil-pbc-site-morphism-composition",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-weil-pbc-open-immersion-base-change",
-  "lem-weil-pbc-closed-immersion-base-change",
-  "lem-pc-quasi-compact-base-change"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -359,14 +244,6 @@
   "module": "Sheaf.AlgebraicGeometry.ProEtaleOpenClosedSequenceRingSheaf",
   "declaration": "AlgebraicGeometry.ProEtale.proEtale_openClosed_sequence_ring_sheaf",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.ringSheafInverseImage",
-   "AlgebraicGeometry.ProEtale.ringSheafDirectImage",
-   "AlgebraicGeometry.ProEtale.ringSheafAdjunction",
-   "AlgebraicGeometry.ProEtale.ringSheafOpenExtension",
-   "AlgebraicGeometry.ProEtale.ringSheafOpenAdjunction",
-   "AlgebraicGeometry.ProEtale.ringSheafSquareComparison",
-   "AlgebraicGeometry.ProEtale.ringSheafSquareCoefficient",
-   "AlgebraicGeometry.ProEtale.ringSheafSquarePullback",
    "AlgebraicGeometry.ProEtale.proEtale_openClosed_sequence_ring_sheaf"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleOpenClosedSequenceRingSheaf.lean",
@@ -396,5 +273,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-6ec2b",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261019T093345-L-2300588",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical to the live clone; 8 moved operation blocks byte-identical and re-exported by public import; 4 delivered modules compile clean; axioms only propext/Classical.choice/Quot.sound; all 12 direct importers compile against the delivery; node changes limited to proof fields, tool_uses and lean.declarations moved to the new def node"
  }
 }

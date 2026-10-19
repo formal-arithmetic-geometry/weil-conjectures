@@ -1,0 +1,152 @@
+{
+ "id": "lem-sf-ring-sheaf-base-change-mates",
+ "kind": "statement",
+ "title": "Canonical open and closed base-change mates for arbitrary ring sheaves",
+ "statement": "Let X be qcqs, i:Z→X closed and j:U→X quasi-compact open with complementary ranges, and B an arbitrary ring object in abelian pro-etale sheaves. For every g:X′→X with X′ qcqs, the two fixed coefficient square comparison maps [def-sf-proetale-ring-sheaf-operations] are multiplicative. There exist module inverse-image square isomorphisms delta and gamma whose carriers are precisely the fixed comparisons, and natural isomorphisms alpha:g^*j_!≅j′_!g_U^* and beta:g^*i_*≅i′_*g_Z^*. The adjoint of alpha inverse is g_U^* of the open unit followed by delta inverse at j_!; the adjoint of beta is gamma at i_* followed by g_Z^* of the closed counit. No sequence exactness or compatibility with its two arrows is asserted here.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/det-sf-open-closed-sequence-ring-sheaf.proof.md",
+  "place": "Proof part (4), paragraphs constructing alpha and beta by adjunction; Stacks Tags 03CB and 03CC"
+ },
+ "stmt_deps": [
+  "def-sf-proetale-ring-sheaf-operations"
+ ],
+ "proof": [
+  {
+   "text": "For inverse-image composition, the conjugate of the monoidal direct-image composition comparison is monoidal, by isMonoidal_conjugateEquiv_symm. The monoidal adjunction and its composite supply the required structures. Congruence along equal scheme maps is monoidal by substitution. Consequently upperStarCompIso is monoidal. Its coefficient component is multiplicative; reconcile successive and composite MonObj structures with monObjObj_comp and IsMonHom.of_eq. Construct delta and gamma with NatIso.ofComponents and Mod.isoMk. Naturality and the monoidal tensor equation prove linearity, with exactly the prescribed underlying comparison.",
+   "uses": [
+    "def-sf-proetale-ring-sheaf-operations",
+    "lem-sfb-finite-monoidal-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Complementary exact restrictions jointly detect isomorphisms: the abelian supported-unit theorem detects zero objects, Mod.forget reflects zero, and exact inverse image transports kernels and cokernels. The open module unit is invertible by the carrier calculation and full faithfulness of abelian open extension.",
+   "uses": [
+    "def-sf-proetale-ring-sheaf-operations",
+    "lem-weil-pbc-proetale-abelian-closed-support",
+    "lem-sfb-finite-extension-by-zero-fully-faithful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The pulled-back immersions remain complementary, since their ranges are inverse images of the original ranges; the geometric base-change instances preserve their immersion and quasi-compactness hypotheses. Apply the proved closed-localization theorem on both schemes for the invertible closed counits and vanishing j^*i_*. Adjunction transposition also gives i^*j_!=0 on each scheme.",
+   "uses": [
+    "lem-sf-ring-sheaf-closed-localization",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-pc-quasi-compact-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define t:j′_!g_U^*→g^*j_! as the inverse adjunct of the pulled-back open unit followed by delta inverse. Naturality follows by transposing, using naturality of delta inverse and of the unit. Its closed restriction is a map between zero objects, by i^*j_!=0 and gamma. Its open restriction is invertible because its composite with the invertible open unit is the prescribed composite of isomorphisms. Joint detection makes t invertible. Set alpha to its inverse. Its transpose equation is Equiv.apply_symm_apply.",
+   "uses": [
+    "def-sf-proetale-ring-sheaf-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Define v:g^*i_*→i′_*g_Z^* as the adjunct of gamma followed by the pulled-back closed counit. Naturality follows by transposing and using naturality of gamma and the counit. Its open restriction is a map between zero objects. After closed restriction, its composite with the invertible closed counit is the prescribed composite of isomorphisms. Joint detection makes v invertible. Set beta=asIso v. Its transpose equation is Equiv.symm_apply_apply.",
+   "uses": [
+    "def-sf-proetale-ring-sheaf-operations"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-proetale-ring-sheaf-operations",
+  "lem-pc-quasi-compact-base-change",
+  "lem-sf-ring-sheaf-closed-localization",
+  "lem-sfb-finite-extension-by-zero-fully-faithful",
+  "lem-sfb-finite-monoidal-adjunction",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proetale-abelian-closed-support"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E5",
+  "date": "2026-10-18",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Stacks Tags 03CB and 03CC and blueprint part (4); implemented monoidal comparison and both canonical mates, with invertibility detected by complementary restrictions. Complete Lean proof; no residual hole."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "open closed localization short exact sequence for sheaves with module objects and base change",
+   "results": "8 hits: SheafOfModules.instAbelian, PresheafOfModules.homEquivOfIsLocallyBijective, PresheafOfModules.homEquivOfIsLocallyBijective_apply, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, ModuleCat.localizedModule_functor_map_exact, PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply",
+   "date": "2026-10-18",
+   "verdict": "No matching pro-etale arbitrary-ring localization or canonical base-change theorem. Generic adjunction and module-sheaf hits were inspected and used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "date": "2026-10-18",
+   "verdict": "No matching pro-etale arbitrary-ring localization or canonical base-change theorem. Generic adjunction and module-sheaf hits were inspected and used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "openClosed|open_closed|mapModLeftAdjunction",
+   "results": "21 hits: Mathlib/NumberTheory/Padics/WithVal.lean, Mathlib/NumberTheory/Padics/WithVal.lean, Mathlib/NumberTheory/Padics/PadicIntegers.lean, Mathlib/Topology/Algebra/Valued/ValuationTopology.lean, Mathlib/Topology/Algebra/Valued/ValuationTopology.lean, Mathlib/Topology/Algebra/Valued/ValuationTopology.lean, Mathlib/Topology/Algebra/Valued/ValuationTopology.lean, Mathlib/Topology/Algebra/Valued/ValuationTopology.lean",
+   "date": "2026-10-18",
+   "verdict": "No matching pro-etale arbitrary-ring localization or canonical base-change theorem. Generic adjunction and module-sheaf hits were inspected and used where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pro etale sheaf module open closed localization and base change canonical mate adjunction",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, ModuleCat.Tilde.openToLocalization, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+   "date": "2026-10-18",
+   "verdict": "No matching pro-etale arbitrary-ring localization or canonical base-change theorem. Generic adjunction and module-sheaf hits were inspected and used where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleOpenClosedSequenceRingSheaf",
+  "date": "2026-10-18",
+  "group": "E5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-open-closed-sequence-ring-sheaf",
+   "place": "Proof part (4), paragraphs constructing alpha and beta by adjunction; Stacks Tags 03CB and 03CC",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-closed-unit",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleRingSheafBaseChangeMates",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleRingSheafBaseChangeMates.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ringSheaf_baseChange_mates",
+  "statement": "theorem ringSheaf_baseChange_mates\n    {X Z U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]\n    (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j]\n    [QuasiCompact j] (_hU : Set.range j = (Set.range i)ᶜ)\n    (B : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj B] :\n    (∀ {X' : Scheme.{u}} [CompactSpace X'] [QuasiSeparatedSpace X'] (g : X' ⟶ X),\n      Exists fun [_hu : IsMonHom (ringSheafSquareCoefficient g j B)] ↦\n      Exists fun [_hz : IsMonHom (ringSheafSquareCoefficient g i B)] ↦\n      ∃ delta : ringSheafInverseImage g B ⋙\n            ringSheafInverseImage (pullback.fst g j) ((upperStar Ab.{u + 1} g).obj B) ≅\n          ringSheafInverseImage j B ⋙ ringSheafSquarePullback g j B,\n      ∃ gamma : ringSheafInverseImage g B ⋙\n            ringSheafInverseImage (pullback.fst g i) ((upperStar Ab.{u + 1} g).obj B) ≅\n          ringSheafInverseImage i B ⋙ ringSheafSquarePullback g i B,\n        (∀ M, (delta.hom.app M).hom = (ringSheafSquareComparison g j).hom.app M.X) ∧\n        (∀ M, (gamma.hom.app M).hom = (ringSheafSquareComparison g i).hom.app M.X) ∧\n        ∃ alpha : ringSheafOpenExtension j B ⋙ ringSheafInverseImage g B ≅\n            ringSheafSquarePullback g j B ⋙\n              ringSheafOpenExtension (pullback.fst g j) ((upperStar Ab.{u + 1} g).obj B),\n        ∃ beta : ringSheafDirectImage i B ⋙ ringSheafInverseImage g B ≅\n            ringSheafSquarePullback g i B ⋙\n              ringSheafDirectImage (pullback.fst g i) ((upperStar Ab.{u + 1} g).obj B),\n          (∀ N, (ringSheafOpenAdjunction (pullback.fst g j)\n                ((upperStar Ab.{u + 1} g).obj B)).homEquiv _ _ (alpha.inv.app N) =\n            (ringSheafSquarePullback g j B).map ((ringSheafOpenAdjunction j B).unit.app N) ≫\n              delta.inv.app ((ringSheafOpenExtension j B).obj N)) ∧\n          (∀ G, ((ringSheafAdjunction (pullback.fst g i)\n                ((upperStar Ab.{u + 1} g).obj B)).homEquiv _ _).symm (beta.hom.app G) =\n            gamma.hom.app ((ringSheafDirectImage i B).obj G) ≫\n              (ringSheafSquarePullback g i B).map ((ringSheafAdjunction i B).counit.app G)))",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-6ec2b",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261019T093345-L-2300588",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-6ec2b",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261019T093345-L-2300588",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical to the live clone; 8 moved operation blocks byte-identical and re-exported by public import; 4 delivered modules compile clean; axioms only propext/Classical.choice/Quot.sound; all 12 direct importers compile against the delivery; node changes limited to proof fields, tool_uses and lean.declarations moved to the new def node"
+ }
+}

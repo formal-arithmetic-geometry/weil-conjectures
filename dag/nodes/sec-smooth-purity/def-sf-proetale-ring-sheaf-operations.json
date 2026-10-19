@@ -1,0 +1,121 @@
+{
+ "id": "def-sf-proetale-ring-sheaf-operations",
+ "kind": "definition",
+ "title": "Canonical operations on arbitrary pro-etale ring-sheaf module objects",
+ "statement": "For a scheme morphism f:T→X and a ring object B in abelian pro-etale sheaves [def-weil-pbc-proetale-site, def-weil-sheaf-of-modules-category], define module inverse image by mapMod of abelian inverse image [def-weil-proetale-inverse-image], direct image by mapMod of direct image followed by restriction along the adjunction unit, and their adjunction by mapModAdjunction. For an open immersion j define extension by zero and its adjunction by mapModLeft and mapModLeftAdjunction of the existing abelian extension-by-zero adjunction [def-weil-extension-by-zero-presheaf]. For the cartesian square of g:X′→X and f:T→X [def-pc-fibre-product], let the square comparison be upperStarCompIso of pullback.condition, its coefficient map be its component at B, and square pullback be the module inverse image along the second projection followed by restriction of scalars through this coefficient map whenever it is multiplicative. These are the same eight transparent definitions previously in the parent module.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/det-sf-open-closed-sequence-ring-sheaf.proof.md",
+  "place": "Coefficient constructions and proof part (4), fixed inverse-image comparisons"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-proetale-inverse-image",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E5",
+  "date": "2026-10-18",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Coefficient constructions and proof part (4), fixed inverse-image comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "open closed localization short exact sequence for sheaves with module objects and base change",
+   "results": "8 hits: SheafOfModules.instAbelian, PresheafOfModules.homEquivOfIsLocallyBijective, PresheafOfModules.homEquivOfIsLocallyBijective_apply, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, ModuleCat.localizedModule_functor_map_exact, PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply",
+   "date": "2026-10-18",
+   "verdict": "No matching pro-etale arbitrary-ring localization or canonical base-change theorem. Generic adjunction and module-sheaf hits were inspected and used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "date": "2026-10-18",
+   "verdict": "No matching pro-etale arbitrary-ring localization or canonical base-change theorem. Generic adjunction and module-sheaf hits were inspected and used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "openClosed|open_closed|mapModLeftAdjunction",
+   "results": "21 hits: Mathlib/NumberTheory/Padics/WithVal.lean, Mathlib/NumberTheory/Padics/WithVal.lean, Mathlib/NumberTheory/Padics/PadicIntegers.lean, Mathlib/Topology/Algebra/Valued/ValuationTopology.lean, Mathlib/Topology/Algebra/Valued/ValuationTopology.lean, Mathlib/Topology/Algebra/Valued/ValuationTopology.lean, Mathlib/Topology/Algebra/Valued/ValuationTopology.lean, Mathlib/Topology/Algebra/Valued/ValuationTopology.lean",
+   "date": "2026-10-18",
+   "verdict": "No matching pro-etale arbitrary-ring localization or canonical base-change theorem. Generic adjunction and module-sheaf hits were inspected and used where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pro etale sheaf module open closed localization and base change canonical mate adjunction",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, ModuleCat.Tilde.openToLocalization, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+   "date": "2026-10-18",
+   "verdict": "No matching pro-etale arbitrary-ring localization or canonical base-change theorem. Generic adjunction and module-sheaf hits were inspected and used where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleOpenClosedSequenceRingSheaf",
+  "date": "2026-10-18",
+  "group": "E5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-open-closed-sequence-ring-sheaf",
+   "place": "Coefficient constructions and proof part (4), fixed inverse-image comparisons",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-closed-unit",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleRingSheafOperations",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleRingSheafOperations.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ringSheafInverseImage",
+  "statement": "abbrev ringSheafInverseImage {T X : Scheme.{u}} (f : T ⟶ X)\n    (B : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj B]",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-18",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ringSheafInverseImage",
+   "AlgebraicGeometry.ProEtale.ringSheafDirectImage",
+   "AlgebraicGeometry.ProEtale.ringSheafAdjunction",
+   "AlgebraicGeometry.ProEtale.ringSheafOpenExtension",
+   "AlgebraicGeometry.ProEtale.ringSheafOpenAdjunction",
+   "AlgebraicGeometry.ProEtale.ringSheafSquareComparison",
+   "AlgebraicGeometry.ProEtale.ringSheafSquareCoefficient",
+   "AlgebraicGeometry.ProEtale.ringSheafSquarePullback"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-6ec2b",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261019T093345-L-2300588",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-6ec2b",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261019T093345-L-2300588",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical to the live clone; 8 moved operation blocks byte-identical and re-exported by public import; 4 delivered modules compile clean; axioms only propext/Classical.choice/Quot.sound; all 12 direct importers compile against the delivery; node changes limited to proof fields, tool_uses and lean.declarations moved to the new def node"
+ }
+}

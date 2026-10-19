@@ -1,0 +1,139 @@
+{
+ "id": "lem-sf-ring-sheaf-closed-localization",
+ "kind": "statement",
+ "title": "Closed localization for arbitrary pro-etale ring-sheaf module objects",
+ "statement": "Let X be qcqs, i:Z→X closed and j:U→X quasi-compact open with complementary ranges, and B an arbitrary ring object in abelian pro-etale sheaves. For the operations [def-sf-proetale-ring-sheaf-operations], i_* preserves finite colimits; the actual counit i^*i_*G→G is an isomorphism for every G; j^*i_*G is zero; and for every B-module M the actual counit j_!j^*M→M is mono, the actual unit M→i_*i^*M is epi, and these maps form an exact sequence.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/det-sf-open-closed-sequence-ring-sheaf.proof.md",
+  "place": "Proof parts (2)--(3); Stacks Tags 09AA, 09BM, 09AG, 09AH; module actions Tag 03DA"
+ },
+ "stmt_deps": [
+  "def-sf-proetale-ring-sheaf-operations"
+ ],
+ "proof": [
+  {
+   "text": "Use the abelian supported-unit theorem: if both restrictions of F are zero, its closed unit identifies F with the direct image of a zero object. Forgetting module actions reflects zero objects. Exact module inverse image commutes with kernels and cokernels, so the two restrictions jointly reflect isomorphisms by the mono/epi criterion.",
+   "uses": [
+    "def-sf-proetale-ring-sheaf-operations",
+    "lem-weil-pbc-proetale-abelian-closed-support"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The carrier of the lifted closed counit is precisely the abelian closed counit, by mapModAdjunction_counit_app_hom. Reflect its invertibility through Mod.forget. For disjoint ranges, isZero_openImmersionRestriction_lowerStar and upperStarIsoOpenImmersionRestriction give zero open restriction of closed direct image. Faithfulness of Mod.forget lifts this vanishing. The open module unit is invertible because its carrier is the abelian fully faithful open-extension unit.",
+   "uses": [
+    "def-sf-proetale-ring-sheaf-operations",
+    "lem-weil-pbc-proetale-abelian-closed-counit",
+    "lem-sfb-finite-extension-by-zero-fully-faithful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Adjunction transposition proves i^*j_!N=0 and that the actual open counit followed by the closed unit is zero. Form the resulting ShortComplex. On the closed piece its first term vanishes and its second arrow is invertible by the closed triangle identity; on the open piece its last term vanishes and its first arrow is invertible by the open triangle identity. JointlyReflectIsomorphisms.shortExact_iff for the pair of exact restrictions reflects these short exact sequences. Convert its exactness to ComposableArrows.Exact.",
+   "uses": [
+    "lem-weil-pbc-jointly-reflect-short-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an epimorphism on Z, naturality and invertibility of the closed counit make the closed restriction of its direct image epi. Exact restrictions commute with the cokernel. Closed restriction of this cokernel is zero; its open restriction is zero because both closed direct images have zero open restriction. Joint zero detection kills the cokernel, so direct image preserves epimorphisms. It preserves limits as a right adjoint. Apply preservesHomology_of_preservesEpis_and_kernels and preservesFiniteColimits_of_preservesHomology.",
+   "uses": [
+    "def-sf-proetale-ring-sheaf-operations"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-proetale-ring-sheaf-operations",
+  "lem-sfb-finite-extension-by-zero-fully-faithful",
+  "lem-weil-pbc-jointly-reflect-short-exact",
+  "lem-weil-pbc-proetale-abelian-closed-counit",
+  "lem-weil-pbc-proetale-abelian-closed-support"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E5",
+  "date": "2026-10-18",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Stacks Tags 09AA, 09BM, 09AG and 09AH; implemented from existing abelian closed support/counit, disjoint-support vanishing, exact restriction, and joint reflection of short exactness. Complete Lean proof; no residual hole."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "open closed localization short exact sequence for sheaves with module objects and base change",
+   "results": "8 hits: SheafOfModules.instAbelian, PresheafOfModules.homEquivOfIsLocallyBijective, PresheafOfModules.homEquivOfIsLocallyBijective_apply, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, ModuleCat.localizedModule_functor_map_exact, PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply",
+   "date": "2026-10-18",
+   "verdict": "No matching pro-etale arbitrary-ring localization or canonical base-change theorem. Generic adjunction and module-sheaf hits were inspected and used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "date": "2026-10-18",
+   "verdict": "No matching pro-etale arbitrary-ring localization or canonical base-change theorem. Generic adjunction and module-sheaf hits were inspected and used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "openClosed|open_closed|mapModLeftAdjunction",
+   "results": "21 hits: Mathlib/NumberTheory/Padics/WithVal.lean, Mathlib/NumberTheory/Padics/WithVal.lean, Mathlib/NumberTheory/Padics/PadicIntegers.lean, Mathlib/Topology/Algebra/Valued/ValuationTopology.lean, Mathlib/Topology/Algebra/Valued/ValuationTopology.lean, Mathlib/Topology/Algebra/Valued/ValuationTopology.lean, Mathlib/Topology/Algebra/Valued/ValuationTopology.lean, Mathlib/Topology/Algebra/Valued/ValuationTopology.lean",
+   "date": "2026-10-18",
+   "verdict": "No matching pro-etale arbitrary-ring localization or canonical base-change theorem. Generic adjunction and module-sheaf hits were inspected and used where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pro etale sheaf module open closed localization and base change canonical mate adjunction",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, ModuleCat.Tilde.openToLocalization, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+   "date": "2026-10-18",
+   "verdict": "No matching pro-etale arbitrary-ring localization or canonical base-change theorem. Generic adjunction and module-sheaf hits were inspected and used where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleOpenClosedSequenceRingSheaf",
+  "date": "2026-10-18",
+  "group": "E5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-open-closed-sequence-ring-sheaf",
+   "place": "Proof parts (2)--(3); Stacks Tags 09AA, 09BM, 09AG, 09AH; module actions Tag 03DA",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-closed-unit",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleRingSheafClosedLocalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleRingSheafClosedLocalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ringSheaf_closed_localization",
+  "statement": "theorem ringSheaf_closed_localization\n    {X Z U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]\n    (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j]\n    [QuasiCompact j] (_hU : Set.range j = (Set.range i)ᶜ)\n    (B : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj B] :\n    PreservesFiniteColimits (ringSheafDirectImage i B) ∧\n    (∀ G, IsIso ((ringSheafAdjunction i B).counit.app G)) ∧\n    (∀ G, IsZero ((ringSheafInverseImage j B).obj ((ringSheafDirectImage i B).obj G))) ∧\n    (∀ M, Mono ((ringSheafOpenAdjunction j B).counit.app M) ∧\n      Epi ((ringSheafAdjunction i B).unit.app M) ∧\n      (ComposableArrows.mk₂ ((ringSheafOpenAdjunction j B).counit.app M)\n        ((ringSheafAdjunction i B).unit.app M)).Exact)",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-6ec2b",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261019T093345-L-2300588",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-6ec2b",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261019T093345-L-2300588",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical to the live clone; 8 moved operation blocks byte-identical and re-exported by public import; 4 delivered modules compile clean; axioms only propext/Classical.choice/Quot.sound; all 12 direct importers compile against the delivery; node changes limited to proof fields, tool_uses and lean.declarations moved to the new def node"
+ }
+}
