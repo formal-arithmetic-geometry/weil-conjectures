@@ -30,104 +30,73 @@
  ],
  "proof": [
   {
-   "text": "The coefficient definition gives that $A$ is a finite commutative ring. The compactification has open $j$ and proper finite-type $p$; since $Y$ is finite type over $k$, so is $\\overline X$. A field is Noetherian (its only ideals are $0$ and the whole field), so [lem-weil-pbc-finite-type-over-noetherian] makes $X,Y,\\overline X$ Noetherian. Thus [thm-amb-etale-exceptional-adjoint] applies to this compactification and supplies $F_c\\dashv f_c^\\times$ on ordinary unbounded étale $A$-module derived categories. These are precisely the coefficient categories in the statement, without any change to condensed or completed coefficients.",
+   "text": "The coefficient ring A is finite by [def-weil-l-adic-coefficient-extension]. The given compactification c supplies HasCompactification f. Quasi-compactness of the given structure map aY to Spec k gives CompactSpace Y. Use the ordinary etale exceptional adjunction of [thm-amb-etale-exceptional-adjoint], implemented by Etale.rightDerivedUpperShriekAdjunction. Transport its left functor to the literal supplied c by the unbounded canonical comparison Etale.rightDerivedLowerShriekIso from [lem-amb-unbounded-compact-support-comparisons]. Thus G may be chosen as the existing ordinary rightDerivedUpperShriek, and adj is its adjunction transported by ofNatIsoLeft. Neither an arbitrary Hom equivalence nor an identification of the opaque chosen compactification with c is used.",
    "uses": [
     "def-weil-l-adic-coefficient-extension",
     "def-weil-compactifications-refinements",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "thm-amb-etale-exceptional-adjoint"
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-amb-unbounded-compact-support-comparisons"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.md",
-    "place": "Proof, first paragraph: existence of the ordinary étale right adjoint; unit clause (a) used in clause (c)."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
+    "place": "Ordinary etale right adjoint used in the displayed chain."
    }
   },
   {
-   "text": "Apply [thm-sf-fullcd-class] to $p:\\overline X\\to Y$: both schemes are finite type over the fixed algebraically closed finite-field base, $p$ is proper finite type, the coefficient stage is positive, and $\\dim\\overline X\\leq d$. Its conclusion is exactly $\\operatorname{FullCD}_{\\mathrm{cls}}(p,A;2d)$ of [def-sf-fullcd-class], including the same bound after every pro-étale base change, with original-source étale-origin sheaves pulled back to that base change. This proves clause (1); it makes no assertion for arbitrary pro-étale sheaves.",
+   "text": "Prove clause (1), the two conjuncts of [def-sf-fullcd-class], by the comparison argument of [thm-sf-fullcd-class]. Its published theorem carries an unused invertible-exponent hypothesis, so use its underlying Etale.isZero_higherDirectImage_of_isPullback_of_isProper directly. For an arbitrary pullback of the proper part and an etale-origin sheaf M, choose an etale sheaf M0 and its isomorphism to M. The higher direct image of M0 vanishes in degrees r > 2d by that theorem. Exact comparison inverse image preserves the zero object. Transport its homology along the single-functor isomorphism of the chosen origin, rightDerivedLowerStarComparisonIso', and mapDerivedCategoryHomologyFunctorIso. This proves the vanishing for M on every such pullback. The identity square gives the first conjunct; etaleOrigin_upperStar_obj supplies the origin of the restricted sheaf in the second conjunct. This includes arbitrary pro-etale base changes and uses no invertible-exponent witness.",
    "uses": [
     "thm-sf-fullcd-class",
     "def-sf-fullcd-class"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.md",
-    "place": "Proof, opening sentence: Clause (1) is thm-sf-fullcd-class."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
+    "place": "Opening sentence: clause (1)."
    }
   },
   {
-   "text": "Here is the global upper-amplitude bound needed in the next step. Apply [lem-kun-relative-torsion-direct-image-dimension-bound] with source $\\overline X$, target $Y$, morphism $p$, coefficient ring $A$, and bound $d$. The field $k$ is separably closed, $A$ is finite and hence its additive group is torsion, $p$ is quasi-compact and locally finite type, and $Y\\to\\operatorname{Spec}k$ is locally finite type. Consequently $R^qp_{\\mathrm{et},*}M=0$ for every étale $A$-module sheaf $M$ and $q>2d$. The module direct image is additive and left exact by [lem-weil-pbc-module-direct-image-left-exact], and its source category has enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]. Therefore [lem-sf-finite-cd-derived-upper-bound] gives $Rp_{\\mathrm{et},*}D^{\\le m}\\subseteq D^{\\le m+2d}$ for every integer $m$, including complexes unbounded below. By [lem-weil-pbc-extension-by-zero-exact], termwise $j_!^{\\mathrm{et}}$ commutes with kernels and cokernels, hence with cohomology, so it preserves $D^{\\le m}$. The definition $F_c=Rp_{\\mathrm{et},*}Dj_!^{\\mathrm{et}}$ in [def-amb-etale-compact-support] now gives $F_cD^{\\le m}\\subseteq D^{\\le m+2d}$. The use of the total-derived upper-bound theorem, rather than a bounded-below spectral sequence, is essential here.",
+   "text": "The existing quasi-compact-target theorem [lem-etale-upper-shriek-quasicompact-bounded-below] already derives finite amplitude and its orthogonality consequence. Apply Etale.plus_rightDerivedUpperShriek_obj to G. Derived comparison direct image sends a bounded-below input L to a bounded-below etale object, by rightDerivedFunctorPlusCompatibility and the bounded-below derived functor. Therefore H_L = G Rnu_Y,* L is bounded below. Exact comparison inverse image [def-sf-comparison-derived-pullback] preserves that lower bound, so nu_X^* H_L is bounded below. For the current separately specified right adjoint, compare its adjunction to adj of Step 1 using rightAdjointUniq and transport this same object property along the resulting isomorphism. For the retained existence theorem G is selected as in Step 1, and that last transport is unnecessary.",
    "uses": [
-    "lem-kun-relative-torsion-direct-image-dimension-bound",
-    "lem-weil-pbc-module-direct-image-left-exact",
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "lem-sf-finite-cd-derived-upper-bound",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "def-amb-etale-compact-support"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 07K7 (lemma-unbounded-right-derived), (4)(c), applied to the proper part; realizes the blueprint first paragraph finite-cohomological-dimension inference."
-   }
-  },
-  {
-   "text": "Apply [lem-etale-upper-shriek-bounded-below-from-amplitude] to the global bound of Step 3. It follows that the chosen right adjoint preserves $D^+$. The orthogonality argument applies to the adjunction of Step 1 itself, so it gives the conclusion for that chosen adjoint as well. Explicitly, if $H\\in D^{\\ge a}$ then $f_c^\\times H\\in D^{\\ge a-2d}$: adjunction tests a morphism from an object of $D^{\\le a-2d-1}$ against $H$ after applying $F_c$, where the upper bound is $a-1$. The orthogonality argument is exactly the assertion used from the cited lemma. The bounded-below comparison adjunction of [thm-weil-pbc-site-comparison] sends $L\\in D^+(Y_{\\mathrm{proet}},A)$ to $R\\nu_{Y,*}L\\in D^+(Y_{\\mathrm{et}},A)$. Hence $H_L=f_c^\\times R\\nu_{Y,*}L$ is bounded below, and the termwise exact pullback of [def-sf-comparison-derived-pullback] makes $R_cL=\\nu_X^*H_L$ bounded below. The left functor $F_c$ also sends $D^+$ to $D^+$: exact extension by zero preserves the lower cohomological bound, and a bounded-below injective representative of its output is K-injective, so the unbounded proper direct image and the bounded-below construction of [def-weil-pbc-direct-image] are both computed by $p_*$ on that representative. Implementation at the literal specified compactification: the existing quasi-compact-target theorem [lem-etale-upper-shriek-quasicompact-bounded-below] already supplies bounded-below preservation for the right adjoint of the chosen ordinary etale lower shriek. Install HasCompactification f from the given c, without identifying its opaque extracted compactification with c. Use the unbounded common-refinement comparison rightDerivedLowerShriekIso from [lem-amb-unbounded-compact-support-comparisons] to transport the chosen adjunction to the literal left functor F_c. CategoryTheory.Adjunction.rightAdjointUniq then identifies its right adjoint with the given instance-selected right adjoint of F_c. The comparison direct image of L is bounded below by plus_rightDerivedFunctor_comparisonLowerStar_obj. Apply Etale.plus_rightDerivedUpperShriek_obj to it and transfer this object property along the inverse component of that unique-right-adjoint isomorphism. This proves specifiedExceptionalEtale_boundedBelow without repeating the amplitude argument of Steps 3-4 and without equating the two compactifications.",
-   "uses": [
-    "lem-etale-upper-shriek-bounded-below-from-amplitude",
-    "thm-weil-pbc-site-comparison",
-    "def-sf-comparison-derived-pullback",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "def-weil-pbc-direct-image",
     "lem-etale-upper-shriek-quasicompact-bounded-below",
-    "lem-amb-unbounded-compact-support-comparisons"
+    "thm-weil-pbc-site-comparison",
+    "def-sf-comparison-derived-pullback"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.md",
-    "place": "Proof, first paragraph: f-times preserves bounded-below objects, so all comparison arguments lie in D-plus."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
+    "place": "Finite amplitude and bounded-below preservation before the Hom chain."
    }
   },
   {
-   "text": "Choose an étale-origin witness $\\alpha:\\nu_X^*G\\xrightarrow{\\sim}K$ with $G\\in D^+$, as in [def-weil-pbc-etale-origin-witness]. The natural compact-support comparison of [lem-sf-class-compact-support-comparison] and the comparison adjunction in [thm-weil-pbc-site-comparison], followed by the ordinary adjunction of [thm-amb-etale-exceptional-adjoint], give\n$$\\operatorname{Hom}(P_cK,L)\\cong\\operatorname{Hom}(\\nu_Y^*F_cG,L)\\cong\\operatorname{Hom}(F_cG,R\\nu_{Y,*}L)\\cong\\operatorname{Hom}(G,H_L).$$\nBoth $G$ and $H_L$ are bounded below by Step 4. Full faithfulness in [thm-weil-pbc-site-comparison] identifies the last Hom set with $\\operatorname{Hom}(\\nu_X^*G,\\nu_X^*H_L)$; composition with $\\alpha^{-1}$ identifies this with $\\operatorname{Hom}(K,R_cL)$. Every arrow of this chain is an invertible Hom identification. In particular its final comparison uses full faithfulness at $X$, with no second direct image on the source.",
+   "text": "For a bounded-below etale representative K0, compose the following explicit Hom bijections: fixedCompactSupportComparisonIso of [lem-sf-class-compact-support-comparison], the comparison adjunction of [thm-weil-pbc-site-comparison], adj of Step 1, and the map of comparison inverse image on Hom sets. The last map is bijective by comparison full faithfulness because H_L is bounded below by Step 3. In Lean this is representativeHomEquiv. Naturality follows by the inverse compact-support comparison naturality equation, the two adjunction homEquiv_naturality equations, and functoriality of comparison. For the current primary interface, additionally conjugate by the retained origin witness isomorphism, exactly as specifiedExceptionalHomEquiv does.",
    "uses": [
+    "lem-sf-class-compact-support-comparison",
+    "thm-weil-pbc-site-comparison",
+    "thm-amb-etale-exceptional-adjoint",
+    "def-weil-pbc-etale-origin-witness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
+    "place": "Displayed Hom chain and the following full-faithfulness sentence."
+   }
+  },
+  {
+   "text": "Lift bounded-below etale comparison to the full subcategory plusEtaleOrigin. Its fullness and faithfulness are precisely the comparison Hom bijection; essential surjectivity unpacks the origin property [def-weil-pbc-etale-origin-witness]. Thus comparisonOriginLift is an equivalence. Transport the explicit Hom equivalences of Step 4 through its representative isomorphisms. To prove naturality in the source, lift the conjugate of a source morphism through the equivalence and apply representative naturality; naturality in the target commutes with the same transports. On an object literally in the image, representative naturality and cancellation show that the descended bijection equals the original bijection. These are comparisonHomDescent_left, comparisonHomDescent_right and comparisonHomDescent_obj. Hence the result is independent of the choice of witness and has the prescribed normalization. The only representative choices are those of an established equivalence, determined up to the isomorphisms used by the transport.",
+   "uses": [
+    "thm-weil-pbc-site-comparison",
     "def-weil-pbc-etale-origin-witness",
-    "lem-sf-class-compact-support-comparison",
-    "thm-weil-pbc-site-comparison",
-    "thm-amb-etale-exceptional-adjoint"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.md",
-    "place": "Proof, first paragraph, displayed Hom chain; unit proof, displayed Hom chain."
-   }
-  },
-  {
-   "text": "For witnesses $(G,\\alpha)$ and $(G',\\alpha')$ of $K$, full faithfulness of [thm-weil-pbc-site-comparison] gives a unique isomorphism $u:G\\to G'$ with $\\nu_X^*u=\\alpha'^{-1}\\alpha$ (lift the inverse as well, and use faithfulness). Naturality in the witness of [lem-sf-class-compact-support-comparison] and naturality of the two adjunction bijections imply that the intermediate maps $b:G\\to H_L$ and $b':G'\\to H_L$ obtained in Step 5 satisfy $b=b'u$. Thus $\\nu_X^*b\\,\\alpha^{-1}=\\nu_X^*b'\\,\\alpha'^{-1}$, proving independence of the witness. Write $\\Phi_{c,K,L}$ for the resulting bijection. For a morphism $v:K\\to K'$ with witnesses $(G,\\alpha)$ and $(G',\\alpha')$, lift $\\alpha'^{-1}v\\alpha$ uniquely to $u:G\\to G'$. If $h:P_cK'\\to L$ corresponds to $b':G'\\to H_L$, naturality of the compact-support comparison and the adjunctions says that $h\\circ P_c(v)$ corresponds to $b'u$. Since $\\nu_X^*u\\circ\\alpha^{-1}=\\alpha'^{-1}\\circ v$, this gives $\\Phi_{c,K,L}(h\\circ P_c(v))=\\Phi_{c,K',L}(h)\\circ v$. For $h:P_cK\\to L$ and $w:L\\to L'$, the intermediate map for $w\\circ h$ is $f_c^\\times R\\nu_{Y,*}(w)\\circ b$, where $b$ is that for $h$; hence $\\Phi_{c,K,L'}(w\\circ h)=R_c(w)\\circ\\Phi_{c,K,L}(h)$. Therefore Step 5 gives the claimed natural relative adjunction.",
-   "uses": [
-    "thm-weil-pbc-site-comparison",
-    "lem-sf-class-compact-support-comparison",
-    "thm-amb-etale-exceptional-adjoint"
+    "lem-sf-class-compact-support-comparison"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.md",
-    "place": "Proof, last paragraph: the bijection is natural and independent of the witness."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
+    "place": "Naturality and independence of the witness."
    }
   },
   {
-   "text": "By clause (ii) of [lem-sf-proetale-constructible-origin], every bounded constructible pro-étale complex has a bounded constructible étale representative and in particular a bounded-below étale-origin witness. Bounded constructible target complexes are bounded below. Hence Step 5 applies to the bounded constructible inputs of the statement. This uses only the inclusion of the bounded constructible class in étale origin, not an identification of all étale-origin sheaves with constructible sheaves.",
-   "uses": [
-    "lem-sf-proetale-constructible-origin"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.md",
-    "place": "Unit proof, final sentence (Stacks Tag 09AK); item clause (2), last sentence."
-   }
-  },
-  {
-   "text": "For compactifications $c,c'$, let $e_{c,c'}:F_c\\xrightarrow{\\sim}F_{c'}$ on $D^+$ be the canonical comparison of [lem-amb-etale-compact-comparisons]. For $K=\\nu_X^*G$ let $a_c(G):P_c\\nu_X^*G\\xrightarrow{\\sim}\\nu_Y^*F_cG$ be [lem-sf-class-compact-support-comparison]. Define the comparison on this class by\n$$t_{c,c'}(\\nu_X^*G)=a_{c'}(G)^{-1}\\circ\\nu_Y^*(e_{c,c'}(G))\\circ a_c(G).$$\nFor a general witness $\\alpha:\\nu_X^*G\\xrightarrow{\\sim}K$, conjugate by $P_c\\alpha$ and $P_{c'}\\alpha$. For $u:G\\to G'$, the two naturality equations are $a_c(G')\\circ P_c(\\nu_X^*u)=\\nu_Y^*(F_cu)\\circ a_c(G)$ and $e_{c,c'}(G')\\circ F_cu=F_{c'}u\\circ e_{c,c'}(G)$. Substitution in the displayed formula gives $t_{c,c'}(\\nu_X^*G')\\circ P_c(\\nu_X^*u)=P_{c'}(\\nu_X^*u)\\circ t_{c,c'}(\\nu_X^*G)$. For witnesses $(G,\\alpha)$ of $K$ and $(G',\\alpha')$ of $K'$ and a map $v:K\\to K'$, full faithfulness lifts $\\alpha'^{-1}v\\alpha$ to such a $u$. Conjugating this equation gives naturality in $v$, and taking $v=1_K$ proves independence of the witness. The identities $e_{c,c}=1$ and $e_{c',c''}e_{c,c'}=e_{c,c''}$ give $t_{c,c}=1$ and $t_{c',c''}t_{c,c'}=t_{c,c''}$ by cancellation of $a_{c'}a_{c'}^{-1}$. Thus the lower-functor comparisons, normalized by the canonical étale comparison, are canonical and satisfy the cocycle condition.",
+   "text": "For compactifications c,d, transport the canonical etale comparison of [lem-amb-etale-compact-comparisons] by fixedCompactSupportComparisonIso at c and d, obtaining exactly fixedCompactSupportOriginIso on every etale representative. Fully faithful whiskering by comparisonOriginLift descends this isomorphism to the origin subcategory: this is originComparison. The map_preimage equation proves its prescribed normalization. The etale cocycle gives the cocycle on representatives after cancelling the adjacent inverse compact-support comparisons. Faithfulness then gives originComparison_trans on the whole origin subcategory, and cancellation in its c=c=d instance gives originComparison_refl.",
    "uses": [
     "lem-amb-etale-compact-comparisons",
     "lem-sf-class-compact-support-comparison",
@@ -135,114 +104,55 @@
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.md",
-    "place": "Proof, final paragraph: transport canonical coherent étale compactification comparisons through the fixed comparison functors."
-   }
-  },
-  {
-   "text": "For another compactification $c'=(j',p')$, its middle scheme is finite type over $k$ by [def-weil-compactifications-refinements]. Thus [lem-kun-dimension-finite-type] supplies $d'\\ge0$ with $\\dim\\overline X'\\le d'$ (choose $0$ for the empty scheme), and [lem-weil-pbc-finite-type-over-noetherian] makes it Noetherian. Apply [thm-amb-etale-exceptional-adjoint] to obtain $F_{c'}\\dashv f_{c'}^\\times$. The dimension bound for $c'$ need not equal the original $d$, which is used only for clause (1).",
-   "uses": [
-    "def-weil-compactifications-refinements",
-    "lem-kun-dimension-finite-type",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "thm-amb-etale-exceptional-adjoint"
-   ],
-   "elementary": false,
-   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
-    "place": "Final paragraph: bounded-below restriction and canonical compactification comparisons; expanded original Step 9."
+    "place": "Coherent compactification comparisons."
    }
   },
   {
-   "text": "Apply [lem-kun-relative-torsion-direct-image-dimension-bound] to $p'$ with $d'$ from Step 9: the field is separably closed, $A$ is torsion, properness makes $p'$ quasi-compact and locally of finite type, and $Y$ is locally of finite type over $k$. It gives $R^qp'_*M=0$ for $q>2d'$ for all ordinary étale $A$-module sheaves. Additive left exactness [lem-weil-pbc-module-direct-image-left-exact] and enough injectives [lem-weil-pbc-module-sheaves-enough-injectives] verify the hypotheses of [lem-sf-finite-cd-derived-upper-bound]. It follows that $Rp'_*D^{\\le m}\\subseteq D^{\\le m+2d'}$, also for inputs unbounded below. Exact extension by zero [lem-weil-pbc-extension-by-zero-exact] and the definition [def-amb-etale-compact-support] give the same bound for $F_{c'}$. Now [lem-etale-upper-shriek-bounded-below-from-amplitude] implies that $f_{c'}^\\times$ preserves $D^+$. As in the last sentence of Step 4, $F_{c'}$ also sends $D^+$ to $D^+$: $j'^{\\mathrm{et}}_!$ is exact and keeps the lower bound, and a bounded-below injective representative of its output is K-injective, so $Rp'_{\\mathrm{et},*}$ is computed by $p'_*$ on it as in [def-weil-pbc-direct-image]. Together with Step 4, both adjunctions $F_c\\dashv f_c^\\times$ and $F_{c'}\\dashv f_{c'}^\\times$ therefore restrict to adjunctions between $D^+(X_{\\mathrm{et}},A)$ and $D^+(Y_{\\mathrm{et}},A)$; the full subcategories inherit their Hom bijections.",
+   "text": "Normalize every right functor in the retained interface to nu_X^* G Rnu_Y,*. For every compactification c define its Hom bijection by first precomposing with the inverse of originComparison c c0 and then using the descended bijection at c0. Source and target naturality follow from Step 5 and naturality of originComparison. The normalization equation follows from originComparison_refl and comparisonHomDescent_obj, followed by cancellation of the two adjunction bijections and the compact-support isomorphism. To compare c and d, use the inverse component of the cocycle originComparison c d c0 and cancel originComparison c d against its inverse. This proves comparison_homEquiv; the right comparison is the identity because all right functors have been normalized to the same G. Together with Step 3 these are exactly the fields of buildFixedComparisonClassAdjunction. Combining that structure with Step 2 proves exists_fixedComparisonClassAdjunction. For any separately selected ordinary adjoints, uniqueness of right adjoints transports this normalized description to theirs, preserving the specified Hom chain.",
    "uses": [
-    "lem-kun-relative-torsion-direct-image-dimension-bound",
-    "lem-weil-pbc-module-direct-image-left-exact",
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "lem-sf-finite-cd-derived-upper-bound",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "def-amb-etale-compact-support",
-    "lem-etale-upper-shriek-bounded-below-from-amplitude",
-    "def-weil-pbc-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
-    "place": "Final paragraph: bounded-below restriction and canonical compactification comparisons; expanded original Step 9."
-   }
-  },
-  {
-   "text": "On the bounded-below étale categories use [def-weil-pbc-adjunction-conjugate] with $L_1=F_{c'}$, $L_2=F_c$ and $\\tau=e_{c,c'}$ of [lem-amb-etale-compact-comparisons]. Its conjugate is a natural isomorphism $b_{c,c'}:f_{c'}^\\times\\xrightarrow{\\sim}f_c^\\times$, with no Yoneda representability argument left implicit. The transpose characterization in [def-weil-pbc-adjunction-mate] says\n$$\\varepsilon^c_H\\circ F_c(b_{c,c'}(H))=\\varepsilon^{c'}_H\\circ e_{c,c'}(f_{c'}^\\times H).$$\nWriting $J^c$ for the étale adjunction Hom bijection, naturality of $e$ and this equation identify the inverse $J^c$-image of $b_{c,c'}(H)\\circ J^{c'}(z)$ with $z\\circ e_{c,c'}(G)$. Hence\n$$J^c_{G,H}(z\\circ e_{c,c'}(G))=b_{c,c'}(H)\\circ J^{c'}_{G,H}(z).$$\nThis equation determines each $b(H)$ by taking $G=f_{c'}^\\times H$ and $z=\\varepsilon^{c'}_H$, so the comparison is uniquely normalized.",
-   "uses": [
-    "def-weil-pbc-adjunction-conjugate",
-    "def-weil-pbc-adjunction-mate",
-    "lem-amb-etale-compact-comparisons"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
-    "place": "Final paragraph: bounded-below restriction and canonical compactification comparisons; expanded original Step 9."
-   }
-  },
-  {
-   "text": "The identity and reversed-composition laws in [def-weil-pbc-adjunction-conjugate], applied to the identity and cocycle laws for $e$ in [lem-amb-etale-compact-comparisons], give $b_{c,c}=1$ and $b_{c,c'}\\circ b_{c',c''}=b_{c,c''}$. Thus this is a coherent canonical system on $D^+$. Since [thm-weil-pbc-site-comparison] sends bounded-below $L$ to bounded-below $R\\nu_{Y,*}L$, applying it and the fixed pullback [def-sf-comparison-derived-pullback] gives natural isomorphisms\n$$r_{c,c'}(L)=\\nu_X^*b_{c,c'}(R\\nu_{Y,*}L):R_{c'}L\\xrightarrow{\\sim}R_cL.$$\nFunctoriality carries the displayed identity and composition equations to $r$.",
-   "uses": [
-    "def-weil-pbc-adjunction-conjugate",
     "lem-amb-etale-compact-comparisons",
-    "thm-weil-pbc-site-comparison",
-    "def-sf-comparison-derived-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
-    "place": "Final paragraph: bounded-below restriction and canonical compactification comparisons; expanded original Step 9."
-   }
-  },
-  {
-   "text": "For $h:P_{c'}K\\to L$ the compatibility is\n$$\\Phi_{c,K,L}(h\\circ t_{c,c'}(K))=r_{c,c'}(L)\\circ\\Phi_{c',K,L}(h).$$\nHere is the substitution in the Hom chain. For $K=\\nu_X^*G$, the definition in Step 8 gives $a_{c'}(G)t_{c,c'}(K)=\\nu_Y^*e_{c,c'}(G)a_c(G)$, where $a$ is [lem-sf-class-compact-support-comparison]. Thus the first identification in Step 5 changes $h\\circ t$ into precomposition by $\\nu_Y^*e$. Naturality of the comparison adjunction [thm-weil-pbc-site-comparison] changes this into precomposition by $e$. The normalized conjugate equation of Step 11 changes the next identification into postcomposition by $b$. The last identification, full faithfulness of $\\nu_X^*$ from that same comparison theorem, sends this to postcomposition by $\\nu_X^*b=r(L)$. For a general witness $\\alpha$, conjugate this equality by $\\alpha^{-1}$; Step 6 ensures witness independence. This proves the displayed equation on the stated class. Steps 8 and 12 give its canonical cocycle comparisons; no ambient pro-étale adjunction is invoked.",
-   "uses": [
     "lem-sf-class-compact-support-comparison",
     "thm-weil-pbc-site-comparison",
-    "def-weil-pbc-adjunction-conjugate"
+    "thm-amb-etale-exceptional-adjoint"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
+    "place": "The final sentence, implemented with a single normalized ordinary right adjoint."
+   }
+  },
+  {
+   "text": "The bounded constructible application in the natural-language statement follows from [lem-sf-proetale-constructible-origin]: such an input has a bounded-below etale representative, so it belongs to the same origin class. This application is not an extra field or a strengthened input restriction in the retained existence theorem; no constructibility hypothesis enters any preceding step.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
-    "place": "Final paragraph: bounded-below restriction and canonical compactification comparisons; expanded original Step 9."
+    "place": "Application to the bounded constructible inputs of the unit."
    }
   }
  ],
  "proof_deps": [
   "def-weil-l-adic-coefficient-extension",
   "def-weil-compactifications-refinements",
-  "lem-weil-pbc-finite-type-over-noetherian",
   "thm-amb-etale-exceptional-adjoint",
+  "lem-amb-unbounded-compact-support-comparisons",
   "thm-sf-fullcd-class",
   "def-sf-fullcd-class",
-  "lem-kun-relative-torsion-direct-image-dimension-bound",
-  "lem-weil-pbc-module-direct-image-left-exact",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-sf-finite-cd-derived-upper-bound",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "def-amb-etale-compact-support",
-  "lem-etale-upper-shriek-bounded-below-from-amplitude",
+  "lem-etale-upper-shriek-quasicompact-bounded-below",
   "thm-weil-pbc-site-comparison",
   "def-sf-comparison-derived-pullback",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-etale-origin-witness",
   "lem-sf-class-compact-support-comparison",
-  "lem-sf-proetale-constructible-origin",
+  "def-weil-pbc-etale-origin-witness",
   "lem-amb-etale-compact-comparisons",
-  "lem-kun-dimension-finite-type",
-  "def-weil-pbc-adjunction-conjugate",
-  "def-weil-pbc-adjunction-mate",
-  "lem-etale-upper-shriek-quasicompact-bounded-below",
-  "lem-amb-unbounded-compact-support-comparisons"
+  "lem-sf-proetale-constructible-origin"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.md",
-  "place": "## Proof, expanded along unit clause (c), with the global amplitude bridge from Stacks Tag 07K7. E7, 2026-10-18: the specified-compactification boundedness part of Step 4 uses the existing quasi-compact-target boundedness theorem and the canonical unbounded lower-shriek comparison, followed by uniqueness of right adjoints; the other clauses and their planned steps are retained."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
+  "place": "G2, 2026-10-19: the implemented retained existence proof and the published specified-compactification Hom chain. Reuses ordinary exceptional adjunction, quasi-compact-target boundedness, explicit comparison Hom bijections and canonical etale compactification comparisons; descends through the comparison equivalence. No new unproved lemmas."
  },
  "mathlib_searches": [
   {
@@ -491,21 +401,11 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-finite-type-over-noetherian",
   "thm-amb-etale-exceptional-adjoint",
   "thm-sf-fullcd-class",
-  "lem-kun-relative-torsion-direct-image-dimension-bound",
-  "lem-weil-pbc-module-direct-image-left-exact",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-sf-finite-cd-derived-upper-bound",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-etale-upper-shriek-bounded-below-from-amplitude",
   "thm-weil-pbc-site-comparison",
   "lem-sf-proetale-constructible-origin",
-  "lem-amb-etale-compact-comparisons",
-  "lem-kun-dimension-finite-type",
-  "def-weil-pbc-adjunction-conjugate",
-  "def-weil-pbc-adjunction-mate"
+  "lem-amb-etale-compact-comparisons"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -540,13 +440,13 @@
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-19",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E7",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261018T150146-L-3799369",
-  "kind": "proof",
+  "landing": "20261019T005259-L-2747609",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

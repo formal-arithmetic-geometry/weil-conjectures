@@ -23,12 +23,9 @@ public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.CategoryTheory.RingedSiteModules
-import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
-import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
-import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
 
-import Sheaf.AlgebraicGeometry.CompactifiableOverField
-import Sheaf.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
+import Mathlib.CategoryTheory.EssentialImage
 /-!
 # Exceptional adjunction on the comparison class
 
@@ -47,6 +44,72 @@ bounded-below étale representative, rather than being chosen as a free coherent
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+
+section HomDescent
+
+universe v₁ v₂ v₃ v₄ u₁ u₂ u₃ u₄
+
+namespace CategoryTheory
+
+variable {C : Type u₁} {D : Type u₂} {E : Type u₃} {B : Type u₄}
+  [Category.{v₁} C] [Category.{v₂} D] [Category.{v₃} E] [Category.{v₄} B]
+  (U : C ⥤ D) [U.IsEquivalence] (F : D ⥤ E) (I : D ⥤ B) (R : E ⥤ B)
+  (Q : ObjectProperty E)
+  (e : ∀ (X : C) (Y : E), Q Y → ((F.obj (U.obj X) ⟶ Y) ≃ (I.obj (U.obj X) ⟶ R.obj Y)))
+
+/-- Transport the given Hom bijections using the canonical representative of each object. -/
+private def comparisonHomDescent (X : D) (Y : E) (hY : Q Y) :
+    (F.obj X ⟶ Y) ≃ (I.obj X ⟶ R.obj Y) :=
+  (F.mapIso (U.objObjPreimageIso X)).symm.homFromEquiv.trans
+    ((e (U.objPreimage X) Y hY).trans (I.mapIso (U.objObjPreimageIso X)).homFromEquiv)
+
+variable
+  (el : ∀ (X X' : C) (Y : E) (hY : Q Y) (a : X ⟶ X')
+    (b : F.obj (U.obj X') ⟶ Y),
+    e X Y hY (F.map (U.map a) ≫ b) = I.map (U.map a) ≫ e X' Y hY b)
+  (er : ∀ (X : C) (Y Y' : E) (hY : Q Y) (hY' : Q Y')
+    (a : F.obj (U.obj X) ⟶ Y) (b : Y ⟶ Y'),
+    e X Y' hY' (a ≫ b) = e X Y hY a ≫ R.map b)
+
+include el in
+/-- Naturality in the source follows by lifting its conjugate to the full functor. -/
+private theorem comparisonHomDescent_left (X X' : D) (Y : E) (hY : Q Y)
+    (a : X ⟶ X') (b : F.obj X' ⟶ Y) :
+    comparisonHomDescent U F I R Q e X Y hY (F.map a ≫ b) =
+      I.map a ≫ comparisonHomDescent U F I R Q e X' Y hY b := by
+  let a₀ := U.inv.map a
+  have ha : U.map a₀ =
+      (U.objObjPreimageIso X).hom ≫ a ≫ (U.objObjPreimageIso X').inv :=
+    U.fun_inv_map X X' a
+  have h := el (U.objPreimage X) (U.objPreimage X') Y hY a₀
+    (F.map (U.objObjPreimageIso X').hom ≫ b)
+  simp only [ha, Functor.map_comp, Category.assoc] at h
+  simpa [comparisonHomDescent, Category.assoc] using
+    congrArg (fun t ↦ I.map (U.objObjPreimageIso X).inv ≫ t) h
+
+include er in
+/-- Naturality in the target is preserved by the transport. -/
+private theorem comparisonHomDescent_right (X : D) (Y Y' : E) (hY : Q Y) (hY' : Q Y')
+    (a : F.obj X ⟶ Y) (b : Y ⟶ Y') :
+    comparisonHomDescent U F I R Q e X Y' hY' (a ≫ b) =
+      comparisonHomDescent U F I R Q e X Y hY a ≫ R.map b := by
+  simpa [comparisonHomDescent, Category.assoc] using
+    congrArg (fun t ↦ I.map (U.objObjPreimageIso X).inv ≫ t)
+      (er (U.objPreimage X) Y Y' hY hY' (F.map (U.objObjPreimageIso X).hom ≫ a) b)
+
+include el in
+/-- On an object in the image the descended bijection is exactly the original one. -/
+private theorem comparisonHomDescent_obj (X : C) (Y : E) (hY : Q Y)
+    (a : F.obj (U.obj X) ⟶ Y) :
+    comparisonHomDescent U F I R Q e (U.obj X) Y hY a = e X Y hY a := by
+  let a₀ := U.preimage (U.objObjPreimageIso (U.obj X)).hom
+  have h := el (U.objPreimage (U.obj X)) X Y hY a₀ a
+  simp only [a₀, Functor.map_preimage] at h
+  simp [comparisonHomDescent, h]
+
+end CategoryTheory
+
+end HomDescent
 
 universe u
 
@@ -208,6 +271,274 @@ structure FixedComparisonClassAdjunction
     homEquiv c K hK L hL ((comparison c d).hom.app ⟨K, hK⟩ ≫ a) =
       homEquiv d K hK L hL a
 
+private abbrev comparisonOriginLift (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    (X : Scheme.{u}) :
+    DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
+      (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X).FullSubcategory :=
+  (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X).lift
+    (DerivedCategory.Plus.ι ⋙ D(ν^*(X)[ModuleCat.{u + 1} Λ]))
+    (fun K ↦ DerivedCategory.plusEtaleOrigin_mapDerivedCategory_obj K.property)
+
+private local instance comparisonOriginLift_full (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    (X : Scheme.{u}) : (comparisonOriginLift Λ X).Full where
+  map_surjective {K L} a := by
+    obtain ⟨b, hb⟩ :=
+      (bijective_comparisonUpperStar_mapDerivedCategory_map K.obj L.obj L.property).2 a.hom
+    exact ⟨ObjectProperty.homMk b, by ext; exact hb⟩
+
+private local instance comparisonOriginLift_faithful (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    (X : Scheme.{u}) : (comparisonOriginLift Λ X).Faithful where
+  map_injective {K L} a b h := by
+    ext
+    exact (bijective_comparisonUpperStar_mapDerivedCategory_map K.obj L.obj L.property).1
+      (congrArg (fun t ↦ t.hom) h)
+
+private local instance comparisonOriginLift_essSurj (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    (X : Scheme.{u}) : (comparisonOriginLift Λ X).EssSurj where
+  mem_essImage K := by
+    obtain ⟨K₀, hK₀, ⟨e⟩⟩ := K.property
+    exact ⟨⟨K₀, hK₀⟩, ⟨ObjectProperty.isoMk _ e⟩⟩
+
+private local instance comparisonOriginLift_isEquivalence
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (X : Scheme.{u}) :
+    (comparisonOriginLift Λ X).IsEquivalence where
+
+private def originComparison (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f] (c d : Compactification f) :
+    (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X).ι ⋙
+        rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c ≅
+      (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X).ι ⋙
+        rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) d :=
+  ((Functor.whiskeringLeft _ _ _).obj (comparisonOriginLift Λ X)).preimageIso
+    (fixedCompactSupportOriginIso Λ c d)
+
+private theorem originComparison_normalized (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f] (c d : Compactification f)
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (originComparison Λ c d).hom.app ((comparisonOriginLift Λ X).obj K) =
+      (fixedCompactSupportOriginIso Λ c d).hom.app K := by
+  exact congrArg (fun t ↦ t.app K)
+    (((Functor.whiskeringLeft _ _ _).obj (comparisonOriginLift Λ X)).map_preimage
+      (X := (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X).ι ⋙
+        rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c)
+      (Y := (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X).ι ⋙
+        rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) d)
+      (fixedCompactSupportOriginIso Λ c d).hom)
+
+private theorem fixedCompactSupportOriginIso_trans
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f] (c d e : Compactification f) :
+    fixedCompactSupportOriginIso Λ c d ≪≫ fixedCompactSupportOriginIso Λ d e =
+      fixedCompactSupportOriginIso Λ c e := by
+  ext K
+  simp only [fixedCompactSupportOriginIso, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
+    Category.assoc, Iso.inv_hom_id_app_assoc, ← Functor.map_comp_assoc]
+  rw [← Etale.rightDerivedLowerShriekOfCompactificationPlusιIso_trans Λ c d e]
+  simp
+
+private theorem originComparison_trans (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f] (c d e : Compactification f) :
+    originComparison Λ c d ≪≫ originComparison Λ d e = originComparison Λ c e := by
+  apply ((Functor.whiskeringLeft _ _ _).obj (comparisonOriginLift Λ X)).mapIso_injective
+  ext K
+  simp only [Functor.mapIso_trans, Iso.trans_hom, NatTrans.comp_app,
+    Functor.mapIso_hom, Functor.whiskeringLeft_obj_map, Functor.whiskerLeft_app]
+  rw [originComparison_normalized, originComparison_normalized, originComparison_normalized]
+  exact congrArg (fun t ↦ t.hom.app K) (fixedCompactSupportOriginIso_trans Λ c d e)
+
+private theorem etaleComparisonRight_boundedBelow
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [CompactSpace Y]
+    (L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)))
+    (hL : _root_.DerivedCategory.TStructure.t.plus L) :
+    _root_.DerivedCategory.TStructure.t.plus
+      ((Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj
+        (R(ν_*(Y)[ModuleCat.{u + 1} Λ]).obj L)) := by
+  apply Etale.plus_rightDerivedUpperShriek_obj
+  exact _root_.DerivedCategory.TStructure.t.plus.prop_of_iso
+    ((comparisonLowerStar (ModuleCat.{u + 1} Λ) Y).rightDerivedFunctorPlusCompatibility.app
+      ⟨L, hL⟩)
+    ((R+(ν_*(Y)[ModuleCat.{u + 1} Λ])).obj ⟨L, hL⟩).property
+
+private def representativeHomEquiv
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c₀ : Compactification f)
+    (G : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
+      _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (adj : Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c₀ ⊣ G)
+    (hG : ∀ L, _root_.DerivedCategory.TStructure.t.plus L →
+      _root_.DerivedCategory.TStructure.t.plus
+        (G.obj (R(ν_*(Y)[ModuleCat.{u + 1} Λ]).obj L)))
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)))
+    (hL : _root_.DerivedCategory.TStructure.t.plus L) :
+    ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c₀).obj
+        (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K.obj) ⟶ L) ≃
+      ((D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K.obj) ⟶
+        (R(ν_*(Y)[ModuleCat.{u + 1} Λ]) ⋙ G ⋙
+          D(ν^*(X)[ModuleCat.{u + 1} Λ])).obj L) :=
+  ((fixedCompactSupportComparisonIso Λ c₀).app K).homFromEquiv.trans
+    (((derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) Y).homEquiv _ L).trans
+      ((adj.homEquiv K.obj _).trans
+        (Equiv.ofBijective (fun a ↦ D(ν^*(X)[ModuleCat.{u + 1} Λ]).map a)
+          (bijective_comparisonUpperStar_mapDerivedCategory_map _ _ (hG L hL)))))
+
+private theorem representativeHomEquiv_left
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c₀ : Compactification f)
+    (G : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
+      _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (adj : Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c₀ ⊣ G)
+    (hG : ∀ L, _root_.DerivedCategory.TStructure.t.plus L →
+      _root_.DerivedCategory.TStructure.t.plus
+        (G.obj (R(ν_*(Y)[ModuleCat.{u + 1} Λ]).obj L)))
+    (K K' : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)))
+    (hL : _root_.DerivedCategory.TStructure.t.plus L) (a : K ⟶ K')
+    (b : (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c₀).obj
+      (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K'.obj) ⟶ L) :
+    representativeHomEquiv Λ c₀ G adj hG K L hL
+        ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c₀).map
+          (D(ν^*(X)[ModuleCat.{u + 1} Λ]).map a.hom) ≫ b) =
+      D(ν^*(X)[ModuleCat.{u + 1} Λ]).map a.hom ≫
+        representativeHomEquiv Λ c₀ G adj hG K' L hL b := by
+  have h := (fixedCompactSupportComparisonIso Λ c₀).inv.naturality_assoc a b
+  change D(ν^*(Y)[ModuleCat.{u + 1} Λ]).map
+      ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c₀).map
+        a.hom) ≫ (fixedCompactSupportComparisonIso Λ c₀).inv.app K' ≫ b =
+    (fixedCompactSupportComparisonIso Λ c₀).inv.app K ≫
+      (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c₀).map
+        (D(ν^*(X)[ModuleCat.{u + 1} Λ]).map a.hom) ≫ b at h
+  simp only [representativeHomEquiv, Equiv.trans_apply, Equiv.ofBijective_apply]
+  dsimp only [Iso.homFromEquiv, Equiv.coe_fn_mk]
+  erw [← h]
+  erw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_left,
+    Functor.map_comp]
+  rfl
+
+private theorem representativeHomEquiv_right
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c₀ : Compactification f)
+    (G : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
+      _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (adj : Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c₀ ⊣ G)
+    (hG : ∀ L, _root_.DerivedCategory.TStructure.t.plus L →
+      _root_.DerivedCategory.TStructure.t.plus
+        (G.obj (R(ν_*(Y)[ModuleCat.{u + 1} Λ]).obj L)))
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (L L' : _root_.DerivedCategory
+      (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)))
+    (hL : _root_.DerivedCategory.TStructure.t.plus L)
+    (hL' : _root_.DerivedCategory.TStructure.t.plus L')
+    (a : (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c₀).obj
+      (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K.obj) ⟶ L) (b : L ⟶ L') :
+    representativeHomEquiv Λ c₀ G adj hG K L' hL' (a ≫ b) =
+      representativeHomEquiv Λ c₀ G adj hG K L hL a ≫
+        (R(ν_*(Y)[ModuleCat.{u + 1} Λ]) ⋙ G ⋙
+          D(ν^*(X)[ModuleCat.{u + 1} Λ])).map b := by
+  simp only [representativeHomEquiv, Equiv.trans_apply, Equiv.ofBijective_apply]
+  dsimp only [Iso.homFromEquiv, Equiv.coe_fn_mk]
+  erw [← Category.assoc]
+  erw [(derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) Y).homEquiv_naturality_right
+    (((fixedCompactSupportComparisonIso Λ c₀).app K).inv ≫ a) b]
+  erw [adj.homEquiv_naturality_right, Functor.map_comp]
+  rfl
+
+private theorem originComparison_refl (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f] (c : Compactification f) :
+    originComparison Λ c c = Iso.refl _ := by
+  have h := originComparison_trans Λ c c c
+  ext K
+  apply (cancel_epi ((originComparison Λ c c).hom.app K)).1
+  simpa using congrArg (fun t ↦ t.hom.app K) h
+
+private def buildFixedComparisonClassAdjunction
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f] (c₀ : Compactification f)
+    (G : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
+      _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (adj : Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c₀ ⊣ G)
+    (hG : ∀ L, _root_.DerivedCategory.TStructure.t.plus L →
+      _root_.DerivedCategory.TStructure.t.plus
+        (G.obj (R(ν_*(Y)[ModuleCat.{u + 1} Λ]).obj L))) :
+    FixedComparisonClassAdjunction Λ f c₀ G adj
+      (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X)
+      _root_.DerivedCategory.TStructure.t.plus := by
+  let P := DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X
+  let U := comparisonOriginLift Λ X
+  let F := P.ι ⋙ rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c₀
+  let R := R(ν_*(Y)[ModuleCat.{u + 1} Λ]) ⋙ G ⋙ D(ν^*(X)[ModuleCat.{u + 1} Λ])
+  let e := representativeHomEquiv Λ c₀ G adj hG
+  let Φ := comparisonHomDescent U F P.ι R _root_.DerivedCategory.TStructure.t.plus e
+  have el := representativeHomEquiv_left Λ c₀ G adj hG
+  have er := representativeHomEquiv_right Λ c₀ G adj hG
+  refine
+    { boundedBelow := ?_
+      homEquiv := fun c K hK L hL ↦
+        ((originComparison Λ c c₀).app ⟨K, hK⟩).homFromEquiv.trans (Φ ⟨K, hK⟩ L hL)
+      homEquiv_normalized := ?_
+      naturality_left := ?_
+      naturality_right := ?_
+      comparison := originComparison Λ
+      comparison_normalized := fun c d K hK ↦ originComparison_normalized Λ c d K
+      comparison_refl := originComparison_refl Λ
+      comparison_trans := fun c d e ↦ (originComparison_trans Λ c d e).symm
+      comparison_homEquiv := ?_ }
+  · intro L hL
+    obtain ⟨n, hn⟩ := hG L hL
+    exact ⟨n, (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).isGE_mapDerivedCategory_obj
+      _ n⟩
+  · intro K hK L hL a
+    change Φ (U.obj K) L hL
+      ((originComparison Λ c₀ c₀).inv.app (U.obj K) ≫
+        (fixedCompactSupportComparisonIso Λ c₀).hom.app K ≫
+          ((derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) Y).homEquiv _ L).symm a) = _
+    rw [originComparison_refl]
+    simp only [Iso.refl_inv, NatTrans.id_app]
+    change comparisonHomDescent U F P.ι R _ e (U.obj K) L hL _ = _
+    rw [comparisonHomDescent_obj U F P.ι R _ e el K L hL]
+    change representativeHomEquiv Λ c₀ G adj hG K L hL
+      (𝟙 _ ≫ (fixedCompactSupportComparisonIso Λ c₀).hom.app K ≫
+        ((derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) Y).homEquiv _ L).symm a) = _
+    rw [Category.id_comp]
+    change D(ν^*(X)[ModuleCat.{u + 1} Λ]).map
+      ((adj.homEquiv _ _) ((derivedComparisonAdjunction
+        (ModuleCat.{u + 1} Λ) Y).homEquiv _ L
+          ((fixedCompactSupportComparisonIso Λ c₀).inv.app K ≫
+            (fixedCompactSupportComparisonIso Λ c₀).hom.app K ≫
+              ((derivedComparisonAdjunction
+                (ModuleCat.{u + 1} Λ) Y).homEquiv _ L).symm a))) = _
+    simp only [Iso.inv_hom_id_app_assoc, Equiv.apply_symm_apply]
+    rfl
+  · intro c K K' hK hK' L hL a b
+    let a' : (⟨K, hK⟩ : P.FullSubcategory) ⟶ ⟨K', hK'⟩ := ObjectProperty.homMk a
+    have h := (originComparison Λ c c₀).inv.naturality_assoc a' b
+    change F.map a' ≫ (originComparison Λ c c₀).inv.app ⟨K', hK'⟩ ≫ b =
+      (originComparison Λ c c₀).inv.app ⟨K, hK⟩ ≫
+        (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c).map a ≫ b at h
+    change Φ ⟨K, hK⟩ L hL
+      ((originComparison Λ c c₀).inv.app ⟨K, hK⟩ ≫
+        (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c).map a ≫ b) =
+      a ≫ Φ ⟨K', hK'⟩ L hL ((originComparison Λ c c₀).inv.app ⟨K', hK'⟩ ≫ b)
+    rw [← h]
+    exact comparisonHomDescent_left U F P.ι R _ e el _ _ L hL a' _
+  · intro c K hK L L' hL hL' a b
+    change Φ ⟨K, hK⟩ L' hL'
+      ((originComparison Λ c c₀).inv.app ⟨K, hK⟩ ≫ a ≫ b) =
+      Φ ⟨K, hK⟩ L hL ((originComparison Λ c c₀).inv.app ⟨K, hK⟩ ≫ a) ≫ R.map b
+    rw [← Category.assoc]
+    exact comparisonHomDescent_right U F P.ι R _ e er _ L L' hL hL' _ b
+  · intro c d K hK L hL a
+    have h := congrArg (fun t ↦ t.inv.app ⟨K, hK⟩)
+      (originComparison_trans Λ c d c₀)
+    simp only [Iso.trans_inv, NatTrans.comp_app] at h
+    change Φ ⟨K, hK⟩ L hL ((originComparison Λ c c₀).inv.app ⟨K, hK⟩ ≫
+      (originComparison Λ c d).hom.app ⟨K, hK⟩ ≫ a) =
+      Φ ⟨K, hK⟩ L hL ((originComparison Λ d c₀).inv.app ⟨K, hK⟩ ≫ a)
+    rw [← h]
+    simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+
 /-- The etale exceptional adjoint, transported by comparison, is the exceptional adjoint
 relative to bounded-below etale-origin inputs, with uniform class-restricted vanishing
 and coherent compactification comparisons.
@@ -254,6 +585,42 @@ theorem exists_fixedComparisonClassAdjunction
           (DerivedCategory.plusEtaleOrigin
             (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) X)
           _root_.DerivedCategory.TStructure.t.plus) := by
-  sorry
+  let Λ := Padic.coefficientExtensionRing l E n
+  let : Finite Λ := Padic.finite_coefficientExtensionRing l E n _hn
+  have : IsAlgClosed D.k := IsAlgClosure.isAlgClosed D.k₀
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
+  have : HasCompactification f := ⟨⟨c⟩⟩
+  let G := Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f
+  let adj := (Etale.rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).ofNatIsoLeft
+    (Etale.rightDerivedLowerShriekIso Λ c).symm
+  refine ⟨?_, G, adj, ?_⟩
+  · have van {X' Y' : Scheme.{u}} (q : X' ⟶ c.Z) (p : X' ⟶ Y') (g : Y' ⟶ Y)
+        (sq : IsPullback q p c.g g)
+        (M : Sheaf (Scheme.ProEt.topology X') (ModuleCat.{u + 1} Λ))
+        (hM : etaleOrigin (ModuleCat.{u + 1} Λ) X' M) (r : ℤ) (hr : (2 * d : ℤ) < r) :
+        IsZero ((_root_.DerivedCategory.homologyFunctor _ r).obj
+          ((lowerStar (ModuleCat.{u + 1} Λ) p).rightDerivedFunctor.obj
+            ((_root_.DerivedCategory.singleFunctor _ 0).obj M))) := by
+      have : IsProper p := MorphismProperty.of_isPullback sq inferInstance
+      obtain ⟨M₀, ⟨e⟩⟩ := hM
+      have hv := Etale.isZero_higherDirectImage_of_isPullback_of_isProper Λ c.g
+        (c.g ≫ aY) aY rfl d _hd sq M₀ r hr
+      let K := (_root_.DerivedCategory.Plus.singleFunctor _ 0).obj M₀
+      refine IsZero.of_iso
+        (Functor.map_isZero (comparisonUpperStar (ModuleCat.{u + 1} Λ) Y') hv) ?_
+      exact (_root_.DerivedCategory.homologyFunctor _ r).mapIso
+          ((lowerStar (ModuleCat.{u + 1} Λ) p).rightDerivedFunctor.mapIso
+            (((_root_.DerivedCategory.singleFunctor _ 0).mapIso e).symm ≪≫
+              (((comparisonUpperStar (ModuleCat.{u + 1} Λ) X').mapDerivedCategorySingleFunctor
+                0).app M₀).symm) ≪≫
+            ((rightDerivedLowerStarComparisonIso' p (ModuleCat.{u + 1} Λ)).app K).symm) ≪≫
+        (((comparisonUpperStar (ModuleCat.{u + 1} Λ) Y').mapDerivedCategoryHomologyFunctorIso
+          r).app _).symm
+    exact ⟨fun M hM r hr ↦ van (𝟙 _) c.g (𝟙 _) (IsPullback.of_id_fst (f := c.g))
+        M hM r (by exact_mod_cast hr),
+      fun V _ q p sq M hM r hr ↦ van q p V.hom sq _
+        (etaleOrigin_upperStar_obj q hM) r (by exact_mod_cast hr)⟩
+  · exact ⟨buildFixedComparisonClassAdjunction Λ c G adj
+      (etaleComparisonRight_boundedBelow Λ f)⟩
 
 end AlgebraicGeometry.ProEtale
