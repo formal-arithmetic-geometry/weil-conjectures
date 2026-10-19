@@ -11,7 +11,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafTopInvertible
 import Sheaf.AlgebraicGeometry.Modules.DeterminantShortExactExists
-import Sheaf.AlgebraicGeometry.Modules.ExteriorTensorLiftHomExt
+import WeilConjectures.AlgebraicGeometry.Modules.ExteriorTensorLiftHomExt
 
 /-!
 # Determinants in short exact sequences

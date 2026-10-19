@@ -5,7 +5,7 @@ Authors: SHEAF group V2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Curve.ReductionUnitsPowerKernel
+public import WeilConjectures.AlgebraicGeometry.Curve.ReductionUnitsPowerKernel
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact

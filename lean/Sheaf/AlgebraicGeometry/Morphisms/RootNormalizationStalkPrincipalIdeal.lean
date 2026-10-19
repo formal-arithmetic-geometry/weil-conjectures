@@ -15,7 +15,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 
 import Mathlib.RingTheory.Flat.TorsionFree
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
-import Sheaf.AlgebraicGeometry.Morphisms.NormalizationStalkBaseChange
+import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationStalkBaseChange
 import Sheaf.AlgebraicGeometry.Morphisms.RelativeNormalizationNormalStalks
 import Sheaf.RingTheory.SmoothNormalRing
 import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField

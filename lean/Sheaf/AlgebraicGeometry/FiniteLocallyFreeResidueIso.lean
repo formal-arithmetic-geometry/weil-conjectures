@@ -6,9 +6,9 @@ Authors: SHEAF group G1
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-public import Sheaf.AlgebraicGeometry.Modules.ResidueFiber
+public import WeilConjectures.AlgebraicGeometry.Modules.ResidueFiber
 import Sheaf.AlgebraicGeometry.StalkFiniteFree
-import Sheaf.AlgebraicGeometry.LocalFreeBaseChangeReflectsIso
+import WeilConjectures.AlgebraicGeometry.LocalFreeBaseChangeReflectsIso
 
 /-!
 # Residue-field criterion for finite locally free modules

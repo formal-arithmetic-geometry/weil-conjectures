@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.AlgebraicGeometry.CechSheafLocalPositiveSections
+import WeilConjectures.AlgebraicGeometry.CechSheafLocalPositiveSections
 /-! # Positive-degree exactness of a locally restricted Cech complex
 
 Source: blueprint `lem-pc-cech-resolution`, proof paragraph 1.

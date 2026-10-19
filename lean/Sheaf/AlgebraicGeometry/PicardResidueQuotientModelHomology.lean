@@ -1,9 +1,10 @@
 module
-public import Sheaf.AlgebraicGeometry.AffineResidueCycleHomology
+public import WeilConjectures.AlgebraicGeometry.AffineResidueCycleHomology
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
-import Sheaf.AlgebraicGeometry.AffineResidueScalarTransport
+import WeilConjectures.AlgebraicGeometry.AffineResidueScalarTransport
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import Sheaf.Paper.DerivedHomMayerVietoris
 @[expose] public section
 set_option autoImplicit false
 universe v

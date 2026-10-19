@@ -11,8 +11,8 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResol
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Sheaf.CategoryTheory.TruncationRawExact
-import Sheaf.CategoryTheory.TruncationQuadrantVanishing
+import WeilConjectures.CategoryTheory.TruncationRawExact
+import WeilConjectures.CategoryTheory.TruncationQuadrantVanishing
 import Sheaf.CategoryTheory.TruncationAbutmentCocone
 import Sheaf.CategoryTheory.TruncationCoupleNaturality
 

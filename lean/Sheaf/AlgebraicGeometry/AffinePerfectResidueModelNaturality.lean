@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.CategoryTheory.Adjunction.Additive
 import Sheaf.AlgebraicGeometry.ResidueTildeHomologyComparison
 import Sheaf.AlgebraicGeometry.AffinePerfectSectionsCounit
-import Sheaf.AlgebraicGeometry.AffineResidueScalarTransport
+import WeilConjectures.AlgebraicGeometry.AffineResidueScalarTransport
 import all Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
 import all Sheaf.AlgebraicGeometry.LocalizedStrictPerfectResidueHomology
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde

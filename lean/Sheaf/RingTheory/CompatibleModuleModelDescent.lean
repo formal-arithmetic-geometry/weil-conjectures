@@ -8,8 +8,8 @@ module
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.Algebra.Category.Ring.Colimits
-import Sheaf.RingTheory.ElementwiseFpModuleEquivDescent
-import Sheaf.RingTheory.TensorTailColimitElementwise
+import WeilConjectures.RingTheory.ElementwiseFpModuleEquivDescent
+import WeilConjectures.RingTheory.TensorTailColimitElementwise
 
 /-! # Descending a module comparison along compatible coefficient maps
 

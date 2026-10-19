@@ -10,8 +10,8 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.RingTheory.KrullDimension.Basic
 
-import Sheaf.RingTheory.FilteredColimitPrimeChainContraction
-import Sheaf.RingTheory.FilteredColimitPrimeChainDimensionBound
+import WeilConjectures.RingTheory.FilteredColimitPrimeChainContraction
+import WeilConjectures.RingTheory.FilteredColimitPrimeChainDimensionBound
 
 /-!
 # Prime chains and dimension of filtered ring colimits

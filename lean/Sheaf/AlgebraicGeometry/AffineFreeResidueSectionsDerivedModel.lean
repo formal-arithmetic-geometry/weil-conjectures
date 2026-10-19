@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import Sheaf.AlgebraicGeometry.AffineFreeTerminalSectionsReconstruction
-import Sheaf.AlgebraicGeometry.AffineResidueScalarTransport
+import WeilConjectures.AlgebraicGeometry.AffineResidueScalarTransport
 import Sheaf.AlgebraicGeometry.AffineKFlatResiduePullbackModel
 /-! # Derived residue model from affine free sections
 

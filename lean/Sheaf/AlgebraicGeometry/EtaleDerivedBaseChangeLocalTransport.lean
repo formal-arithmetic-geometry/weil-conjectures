@@ -14,7 +14,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.SixFunctors.BaseChange.Pasting
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompConjugate
-import Sheaf.CategoryTheory.DerivedExactMateCompatibility
+import WeilConjectures.CategoryTheory.DerivedExactMateCompatibility
 
 /-!
 # Transport of degreewise exchange invertibility to a single etale chart

@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Limits
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
-import Sheaf.AlgebraicGeometry.EtaleSheafClopenProduct
+import WeilConjectures.AlgebraicGeometry.EtaleSheafClopenProduct
 import WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic
 
 /-! # Cohomology of a finite coproduct is the product of component cohomologies

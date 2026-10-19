@@ -6,7 +6,7 @@ Authors: SHEAF contributors
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleFieldPointFunctor
-import Sheaf.AlgebraicGeometry.EtaleCoproductOfFiniteSeparableFields
+import WeilConjectures.AlgebraicGeometry.EtaleCoproductOfFiniteSeparableFields
 import Sheaf.AlgebraicGeometry.GaloisSetEmbeddingDecomposition
 import Sheaf.AlgebraicGeometry.EtaleCoproductEmbeddingPoints
 

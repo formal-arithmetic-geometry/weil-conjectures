@@ -7,8 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.AlgebraicGeometry.SeparatedOpenInduction
-import Sheaf.AlgebraicGeometry.QuasiCompactOpenIntersectionProperty
+import WeilConjectures.AlgebraicGeometry.SeparatedOpenInduction
+import WeilConjectures.AlgebraicGeometry.QuasiCompactOpenIntersectionProperty
 
 /-!
 # Induction principle for quasi-compact opens

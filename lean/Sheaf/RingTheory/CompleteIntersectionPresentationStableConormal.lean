@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 import Mathlib.LinearAlgebra.TensorProduct.Pi
 import Mathlib.RingTheory.LocalProperties.Basic
-import Sheaf.RingTheory.PrincipalLocalizationConormalAtPrimeBaseChange
+import WeilConjectures.RingTheory.PrincipalLocalizationConormalAtPrimeBaseChange
 import Sheaf.RingTheory.GlobalCompleteIntersectionLocalRegularSequence
 import Sheaf.RingTheory.RegularSequenceConormal
 

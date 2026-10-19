@@ -8,8 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import Sheaf.AlgebraicGeometry.SheafCoinductionAction
-import Sheaf.AlgebraicGeometry.SheafCoinductionCounit
+import WeilConjectures.AlgebraicGeometry.SheafCoinductionAction
+import WeilConjectures.AlgebraicGeometry.SheafCoinductionCounit
 
 /-!
 # The sheaf coinduction adjunction

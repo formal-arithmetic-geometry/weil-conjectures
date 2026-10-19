@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import Mathlib.Algebra.Category.Grp.Ulift
 import Mathlib.CategoryTheory.Abelian.Exact
 import Sheaf.AlgebraicGeometry.Curve.NilIdealUnitsImageLinearization
-import Sheaf.AlgebraicGeometry.Curve.ReductionUnitsPowerInclusion
+import WeilConjectures.AlgebraicGeometry.Curve.ReductionUnitsPowerInclusion
 
 /-! # Comparison of the multiplicative and additive nilradical-power cokernels
 

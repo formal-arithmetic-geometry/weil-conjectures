@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.KrullTopology
-import Sheaf.AlgebraicGeometry.EtaleFieldGeometricAction
+import WeilConjectures.AlgebraicGeometry.EtaleFieldGeometricAction
 import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.GeometricLifts
 import Mathlib.FieldTheory.IsAlgClosed.Classification
 

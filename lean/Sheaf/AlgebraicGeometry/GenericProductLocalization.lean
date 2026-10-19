@@ -13,9 +13,9 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Nilpotent.Lemmas
 
-import Sheaf.AlgebraicGeometry.GenericProductMapDenominators
+import WeilConjectures.AlgebraicGeometry.GenericProductMapDenominators
 import Sheaf.AlgebraicGeometry.GenericProductKernelBound
-import Sheaf.AlgebraicGeometry.GenericProductIdempotentBound
+import WeilConjectures.AlgebraicGeometry.GenericProductIdempotentBound
 
 /-!
 # GenericProductLocalization

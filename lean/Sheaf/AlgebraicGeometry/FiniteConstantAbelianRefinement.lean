@@ -6,7 +6,7 @@ Authors: SHEAF group V3
 module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-import Sheaf.AlgebraicGeometry.FiniteConstantAbelianNeighborhood
+import WeilConjectures.AlgebraicGeometry.FiniteConstantAbelianNeighborhood
 
 /-!
 # Refining a finite set trivialization to an abelian trivialization

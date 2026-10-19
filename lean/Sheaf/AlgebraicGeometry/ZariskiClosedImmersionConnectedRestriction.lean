@@ -10,7 +10,7 @@ import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
-import Sheaf.Topology.SpectralClosedRestriction
+import WeilConjectures.Topology.SpectralClosedRestriction
 import Sheaf.Topology.ClosedEmbeddingRestrictionTransport
 
 /-!

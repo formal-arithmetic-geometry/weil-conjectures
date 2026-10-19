@@ -6,7 +6,7 @@ Authors: SHEAF group J4
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleCompactSupportNormalizationData
-import Sheaf.AlgebraicGeometry.EtaleSheafClopenProduct
+import WeilConjectures.AlgebraicGeometry.EtaleSheafClopenProduct
 import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 

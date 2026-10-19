@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
-import Sheaf.AlgebraicGeometry.GlueComponentReducedCoverSections
+import WeilConjectures.AlgebraicGeometry.GlueComponentReducedCoverSections
 import Sheaf.AlgebraicGeometry.NonvanishingGeneratingLocus
 import Mathlib.Topology.DiscreteSubset
 

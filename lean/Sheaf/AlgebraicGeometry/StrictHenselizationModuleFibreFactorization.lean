@@ -5,11 +5,11 @@ Authors: SHEAF group R2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.GeometricFibreExchangeGerms
+public import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeGerms
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.SixFunctors.BaseChange.GlobalSections
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.AlgebraicGeometry.GeometricFibreExchangeRepresentative
+import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeRepresentative
 import Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiber
 import Sheaf.AlgebraicGeometry.StrictLocalExchangeCompatibility

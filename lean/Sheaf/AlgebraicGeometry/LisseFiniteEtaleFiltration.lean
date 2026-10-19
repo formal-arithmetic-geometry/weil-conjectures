@@ -33,7 +33,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import Sheaf.Paper.LisseModuleSheaves
 import WeilConjectures.ConstructibleSheaf.Pullback
-import Sheaf.RepresentationTheory.PrimaryPGroupFiltration
+import WeilConjectures.RepresentationTheory.PrimaryPGroupFiltration
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.GroupTheory.Sylow
 

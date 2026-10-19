@@ -14,8 +14,8 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 import Sheaf.AlgebraicGeometry.Morphisms.GaloisCoverBaseChange
-import Sheaf.AlgebraicGeometry.Morphisms.NormalizationStalkBaseChange
-import Sheaf.AlgebraicGeometry.Morphisms.StalkGenericOpenPullback
+import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationStalkBaseChange
+import WeilConjectures.AlgebraicGeometry.Morphisms.StalkGenericOpenPullback
 
 /-!
 # Comparison of stalk normalization with normalization of the local generic torsor
