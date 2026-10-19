@@ -16989,3 +16989,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:44 L: merged deliver/Z9/Sheaf.CategoryTheory.FlatScalarTowerCoherence (stage 3; reviewer PASS; first push; landing 20261019T034417-L-430344 (interface); batch 20261019T034248; modules 1; new nodes 0; change records: coord/changes/flat-scalar-tower-proof-sections.md)
 - 03:44 L: merged deliver/Z9/Sheaf.Paper.ConstantRealizationDerivedScalarExtension (stage 3; reviewer PASS; first push; landing 20261019T034418-L-430511 (proof); batch 20261019T034248; modules 1; new nodes 0)
 - 03:53 L: merged deliver/Q145/lem-per-partial-parameters-quotient-dimension (stage 2; reviewer PASS; parallel immutable checks)
+- 03:53 L: returned deliver/Q55/def-per-potential-dualizing-complex (reviewer RETURN: L: independent stage-2 immutable head 5e97190a4f00: Item def-per-potential-dualizing-complex is itself in side coord/rou)
