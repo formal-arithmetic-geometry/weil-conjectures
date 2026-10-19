@@ -1,0 +1,153 @@
+{
+ "id": "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+ "kind": "statement",
+ "title": "Ordinary flat algebra and quotients of a completed constant ring",
+ "statement": "Let T be a scheme, A a commutative Noetherian ring and I an ideal. Let B be the inverse limit of the constant ring sheaves A/I^(n+1), and let S be a specified isomorphic presentation of B. Let c: underline A → S have the canonical composites with every projection. Then S, restricted along c, is flat over underline A, and extension of scalars along c is exact. For every n, any ring-sheaf presentation H of underline(A/I^(n+1)) and the transported projection p:S → H, the scalar-extension morphism from the constant A-module A/I^(n+1) to H is invertible whenever it sends b tensor the constant x to p(b) times the specified image of x. All constants, tensor products and scalar extensions are the constructions of [def-weil-pbc-adic-lisse-module] and [def-weil-pbc-adic-coefficient-datum]; flatness is [def-pc-flat-sheaf-modules]. This statement concerns modules in degree zero and asserts no complex, finite-projective resolution or constants-to-functions comparison.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093M, lemma-completion-flat; applied to each ideal power, with cofinal powers and the canonical quotient formula."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-adic-lisse-module",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "Replace the pro-etale site by AsSmall at the coefficient universe, using the topology induced by the equivalence. The constant-sheaf comparison is the inverse of the continuous-pushforward/sheafification compatibility isomorphism, and is normalized on the sheafification unit. Its naturality identifies the quotient systems. The preserved-limit isomorphism identifies their completions, projections and the coefficient map. Apply ConstantCompletion.flat_and_quotients in [lem-weil-pbc-constant-completion-equivalence] on this small site.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-weil-pbc-sheafification",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved explicit-site/monoidal tensor comparison of [lem-weil-pbc-independent-sheaf-tensor-colimits] to express the existing flatness as exactness of the explicit tensor functor. The existing flatness yields local finite-relation factorizations by [lem-weil-pbc-flat-local-relations-universes]. Map each original relation through the constant and completed ring isomorphisms, apply that theorem on the small site, and pull the covering sieve back along the inverse site equivalence. Map the coefficients and sections back through the inverse ring isomorphisms. Naturality gives the original factorization and zero coefficient sums, so [lem-weil-pbc-site-flat-equational-criterion-universes] proves flatness on the original site.",
+   "uses": [
+    "lem-weil-pbc-flat-local-relations-universes",
+    "lem-weil-pbc-site-flat-equational-criterion-universes",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Interchange the factors of each sectionwise scalar tensor product to identify the underlying additive sheaf of scalar extension with tensoring by the restricted completed algebra. Pure tensors check naturality. Abelian sheafification gives the corresponding natural isomorphism after sheafification. The forgetful functor to additive sheaves preserves finite limits and colimits and reflects them: colimit preservation follows from the module-sheafification adjunction and its fully faithful right adjoint. Transport exactness of tensor by the flat module through this isomorphism and reflection.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-sheafification",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fix n and transport the surjectivity and generated-kernel formulas from ConstantCompletion.flat_and_quotients back through the completed and quotient ring isomorphisms. For X equal to scalar extension of the constant A-module A/I^(n+1), its natural section z=1 tensor 1 defines an S-linear map t:S→X. Balancedness and linearity of constant-module sheafification give t(c(a))=1 tensor the class of a, so t kills each generator a in I^(n+1). Induction on ideal-span membership shows ker(p) is contained in ker(t). Sectionwise quotient-linear-map descent therefore defines s:H→X with s(p(b))=t(b); surjectivity of p and naturality of t make these section maps a morphism of module sheaves. The assumed formula for r gives r(s(p(b)))=p(b). For the other inverse identity, use the scalar-tensor adjunction and constant-module sheafification adjunction; both maps agree on 1 tensor the constant class of every a in A, since s(r(1 tensor class(a)))=s(p(c(a)))=t(c(a)). Quotient surjectivity supplies every class and the two adjunctions prove s∘r=id. Thus r is an isomorphism. Empty objects, zero rings, I=0 and I=A require no extra hypotheses.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093M, lemma-completion-flat; T4 proof transports the existing constant-completion flatness and sectionwise kernels through AsSmall, then proves scalar-extension exactness and the explicit cyclic-generator quotient inverse."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Completion of a constant sheaf of a Noetherian ring is flat and its tensor product with each ideal power quotient is that constant quotient sheaf",
+   "results": "AdicCompletion.flat_of_isNoetherian and finite-module tensor-completion comparisons concern ordinary module completion, not completion of a constant ring sheaf with its specified unit and tensor generators.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"Flat\"",
+   "results": "AdicCompletion.flat_of_isNoetherian; no sheafwise completion statement.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*flat|flat.*completed|flat_and_quotients",
+   "results": "No Mathlib match. Local library search found ConstantCompletion.flat_and_quotients, but its site has equal object and Hom universes; it does not directly apply to Scheme.ProEt.",
+   "date": "2026-10-19",
+   "verdict": "no directly applicable match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse limit of constant ideal power quotient sheaves over a Noetherian ring is flat and reduction is the constant quotient sheaf",
+   "results": "AdicCompletion.flat_of_isNoetherian, AdicCompletion, SheafOfModules.hasLimit and ordinary completion tensor comparisons; no sheafwise completion theorem with the canonical projection and scalar-extension formulas. Recorded successful query at 2026-10-19T06:43:02Z in searches.jsonl.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedConstantSheafReduction",
+  "date": "2026-10-19",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
+   "place": "proof steps 1–3: the ordinary flat-completion and quotient assertion of Stacks Tag 093M",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedConstantAlgebraFlatQuotients",
+  "file": "lean/Sheaf/Paper/CompletedConstantAlgebraFlatQuotients.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completed_constant_algebra_flat_quotients",
+  "statement": "theorem completed_constant_algebra_flat_quotients\n    (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A]\n    (I : Ideal A) (S : Sheaf (ProEt.topology T) CommRingCat.{u + 1})\n    (e : adicLisseCompletedRing T I ≅ S) (c : adicLisseConstantRing T A ⟶ S)\n    (hc : ∀ n : ℕ, c ≫ e.inv ≫ limit.π (adicLisseRingSystem T I) (op n) =\n      (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map\n        (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))) :\n    SheafOfModules.IsFlatOnSite\n      ((SheafOfModules.restrictScalars ((adicLisseForget T).map c)).obj\n        (SheafOfModules.unit ((adicLisseForget T).obj S))) ∧\n    exactFunctor _ _ (completedAdicChange T c) ∧\n    ∀ (n : ℕ) (H : Sheaf (ProEt.topology T) CommRingCat.{u + 1})\n      (d : adicLisseConstantRing T (A ⧸ I ^ (n + 1)) ≅ H)\n      (p : S ⟶ H)\n      (_hp : p = e.inv ≫ limit.π (adicLisseRingSystem T I) (op n) ≫ d.hom)\n      (r : (completedAdicChange T c).obj\n        ((adicLisseConstantModules T A).obj (ModuleCat.of A (A ⧸ I ^ (n + 1)))) ⟶\n          (SheafOfModules.restrictScalars ((adicLisseForget T).map p)).obj\n            (SheafOfModules.unit ((adicLisseForget T).obj H))),\n      (∀ (U : T.ProEtᵒᵖ) (b : S.obj.obj U) (x : A ⧸ I ^ (n + 1)),\n        r.val.app U (tensorSection T c _ U b\n          ((toSheafify (ProEt.topology T)\n            ((Functor.const T.ProEtᵒᵖ).obj\n              (AddCommGrpCat.of (ModuleCat.of A (A ⧸ I ^ (n + 1)))))).app U x)) =\n            p.hom.app U b * d.hom.hom.app U\n              ((adicLisseConstantUnit T (A ⧸ I ^ (n + 1))).app U x)) → IsIso r",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-19"
+ },
+ "proof_deps": [
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-sheafification",
+  "def-pur-sheaf-inverse-limit",
+  "lem-weil-pbc-flat-local-relations-universes",
+  "lem-weil-pbc-site-flat-equational-criterion-universes",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-pbc-adic-coefficient-datum"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261019T192838-L-1875455",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261019T192838-L-1875455",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
