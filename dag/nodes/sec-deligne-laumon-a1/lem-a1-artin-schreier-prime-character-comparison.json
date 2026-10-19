@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Every element of $k_0$ has additive order $p$, so every additive character $\\psi:(k_0,+)\\to L^\\times$ takes values in the group $\\mu_p(L)$ of $p$-th roots of unity, which is cyclic of order $p$. The fixed nontrivial $\\Psi$ is an injective homomorphism $\\mathbf F_p\\to\\mu_p(L)$ (its kernel is a proper subgroup of a group of prime order), hence an isomorphism. Thus $\\lambda=\\Psi^{-1}\\circ\\psi:k_0\\to\\mathbf F_p$ is the unique additive, i.e. $\\mathbf F_p$-linear, map with $\\psi(c)=\\Psi(\\lambda(c))$ for all $c$. By the nondegenerate trace pairing [lem-a1-trace-pairing-nondegenerate], the $\\mathbf F_p$-linear map $k_0\\to\\operatorname{Hom}_{\\mathbf F_p}(k_0,\\mathbf F_p)$, $b\\mapsto(c\\mapsto\\operatorname{Tr}_{k_0/\\mathbf F_p}(bc))$, has zero kernel, and both sides have $q$ elements, so it is bijective. Hence $\\lambda(c)=\\operatorname{Tr}_{k_0/\\mathbf F_p}(bc)$ for a unique $b\\in k_0$, i.e. $\\psi(c)=\\Psi(\\operatorname{Tr}_{k_0/\\mathbf F_p}(bc))$ for a unique $b$; $b=0$ gives the trivial character, so nontriviality of $\\psi$ forces $b\\ne0$ (this is the parametrization of Laumon (0.2) with $\\psi_q=\\Psi\\circ\\operatorname{Tr}$).",
+   "text": "Put chi = Psi composed with trace. Nondegeneracy of trace shows chi is nontrivial, hence primitive. Mathlib AddChar.to_mulShift_inj_of_isPrimitive makes its multiplicative-shift map injective. Distinct characters are linearly independent as functions on k, so the number of characters is at most |k|; the injective shift map therefore is bijective. Obtain the unique b with psi = chi.mulShift b. Nontriviality excludes b = 0, giving the required unit and uniqueness.",
    "uses": [
     "def-fd-additive-character",
     "lem-a1-trace-pairing-nondegenerate"
@@ -22,11 +22,11 @@
    "elementary": true,
    "source": {
     "document": "literature/laumon-transformation-de-fourier_PMIHES-1987-65.pdf",
-    "place": "(0.2), p. 135: parametrization of additive characters by the trace character"
+    "place": "(1.1.3), pp. 139–140: character sheaves by pushout of the Lang torsor; agent-written trace-polynomial comparison with the prime-degree presentation"
    }
   },
   {
-   "text": "Apply [lem-a1-artin-schreier-trace-cover-map] to this $b$, $X$ and $f$: $\\pi_q$ is finite étale with $k_0$ acting simply transitively through the $\\sigma_c$ on every geometric fibre; $\\theta_b:Y_q\\to Y_{p,b}$ is an $X$-morphism with $\\theta_b\\circ\\sigma_c=\\tau_{\\operatorname{Tr}(bc)}\\circ\\theta_b$, surjective on every geometric fibre; and all of this is compatible with base change along $h:X'\\to X$. Apply [lem-fd-as-cover] to the function $bf$ on $X$: $\\pi_{p,b}$ is finite étale and $\\mathbf F_p$ acts simply transitively through the $\\tau_d$ on every geometric fibre.",
+   "text": "Use the trace-cover theorem to obtain M, its translation-equivariant theta and its coordinate-preserving base-change maps. Map each explicit function cover to the universal Artin-Schreier cover by its root coordinate; this is a cartesian square. Transport the universal translation-transitivity assertion to these covers. For the prime cover use ULift (ZMod p) as the base field, with its structure map induced by the given prime-field algebra map; naturality of GammaSpecIso identifies its constants with those of M.",
    "uses": [
     "lem-a1-artin-schreier-trace-cover-map",
     "lem-fd-as-cover"
@@ -34,54 +34,57 @@
    "elementary": false,
    "source": {
     "document": "literature/laumon-transformation-de-fourier_PMIHES-1987-65.pdf",
-    "place": "(1.1.3), pp. 139–140: pushout of the Lang torsor"
+    "place": "(1.1.3), pp. 139–140: character sheaves by pushout of the Lang torsor; agent-written trace-polynomial comparison with the prime-degree presentation"
    }
   },
   {
-   "text": "Stalks and the comparison map. Let $\\bar x$ be a geometric point of $X$. By the finite stalk formula [lemma-weil-pbc-finite-stalk-formula], restriction of germs identifies $(\\pi_{q*}L)_{\\bar x}$ with the space $\\operatorname{Map}(Y_{q,\\bar x},L)$ of functions on the finite geometric fibre, and $(\\pi_{p,b*}L)_{\\bar x}$ with $\\operatorname{Map}(Y_{p,b,\\bar x},L)$ (the stalk of the constant sheaf $L$ at each geometric point is $L$). Restriction of germs is compatible with pullback along morphisms of finite $X$-schemes, so under these identifications $\\sigma_c^*$, $\\tau_d^*$ act by precomposition with the induced bijections of fibres. Let $\\theta_b^*:\\pi_{p,b*}L\\to\\pi_{q*}L$ send a section $s\\in L(Y_{p,b}\\times_XU)$ over an étale $U\\to X$ to $s\\circ(\\theta_b\\times_XU)$; on the stalk at $\\bar x$ it is precomposition with the surjective map $\\theta_{b,\\bar x}:Y_{q,\\bar x}\\to Y_{p,b,\\bar x}$ of step 2, hence injective. Since $\\theta_b\\circ\\sigma_c=\\tau_{\\operatorname{Tr}(bc)}\\circ\\theta_b$ we get $\\sigma_c^*\\theta_b^*=\\theta_b^*\\tau_{\\operatorname{Tr}(bc)}^*$.",
+   "text": "On any geometric stalk of either finite cover, the finite stalk formula identifies sections with the product of the constant stalks over the fibre. Transitivity makes evaluation on a single point monic on the character-projector image, by the proved generic isotypic lemma. For surjectivity take the germ supported at that point, apply the projector and multiply by the order of the group: freeness kills every nonidentity summand and the identity summand evaluates to the original germ. Thus evaluation is an isomorphism. Freeness follows by mapping to the universal cover and using its translation-coordinate formula.",
    "uses": [
     "lemma-weil-pbc-finite-stalk-formula",
-    "lem-a1-artin-schreier-trace-cover-map"
+    "lem-fd-as-cover"
    ],
    "elementary": false,
    "source": {
     "document": "literature/laumon-transformation-de-fourier_PMIHES-1987-65.pdf",
-    "place": "(1.1.3), pp. 139–140: character sheaf as the isotypic part of the pushed-forward Lang torsor; stalk computation written out here"
+    "place": "(1.1.3), pp. 139–140: character sheaves by pushout of the Lang torsor; agent-written trace-polynomial comparison with the prime-degree presentation"
    }
   },
   {
-   "text": "Isotypic parts. Put $e_\\psi=\\frac1q\\sum_{c\\in k_0}\\psi(-c)\\sigma_c^*$ and $e_\\Psi=\\frac1p\\sum_{d\\in\\mathbf F_p}\\Psi(-d)\\tau_d^*$ ($q$, $p$ are invertible in $L$). Reindexing $c\\mapsto c-a$ gives $\\sigma_a^*e_\\psi=\\psi(a)e_\\psi$, and $e_\\psi$ is the identity on sections $g$ with $\\sigma_c^*g=\\psi(c)g$ for all $c$; so $\\operatorname{im}e_\\psi$ is exactly the subsheaf of $\\pi_{q*}L$ on which each $\\sigma_c^*$ acts by $\\psi(c)$, and likewise $\\operatorname{im}e_\\Psi\\subseteq\\pi_{p,b*}L$ is the subsheaf on which each $\\tau_d^*$ acts by $\\Psi(d)$. If $\\tau_d^*g=\\Psi(d)g$ for all $d$, then by step 3 and step 1 $\\sigma_c^*\\theta_b^*g=\\theta_b^*\\tau_{\\operatorname{Tr}(bc)}^*g=\\Psi(\\operatorname{Tr}(bc))\\theta_b^*g=\\psi(c)\\theta_b^*g$. Hence $\\theta_b^*$ restricts to an injective morphism $\\operatorname{im}e_\\Psi\\to\\operatorname{im}e_\\psi$. Stalks are exact, so $(\\operatorname{im}e_\\psi)_{\\bar x}$ is the $\\psi$-eigenspace of $k_0$ acting on $\\operatorname{Map}(Y_{q,\\bar x},L)$; as $Y_{q,\\bar x}$ is a $k_0$-torsor (step 2), choosing $y_0$ identifies this with the regular representation, whose $\\psi$-eigenspace is the line spanned by $c\\cdot y_0\\mapsto\\psi(c)$. The same holds for $\\Psi$ on the $\\mathbf F_p$-torsor $Y_{p,b,\\bar x}$. An injective linear map between one-dimensional $L$-spaces is bijective; a morphism of sheaves on $X_{\\mathrm{Et}}$ bijective on all geometric stalks is an isomorphism. This gives the displayed isomorphism, induced by $\\theta_b^*$.",
+   "text": "Let phi be the prime-image inclusion followed by pullback of constant sections along theta. Equivariance of theta and the character identity make phi an eigenmap of character psi. Its adjoint along the q-cover is an isomorphism: on each geometric stalk, the constant-sheaf map calculus expresses it as prime-image evaluation at theta(s), followed by the canonical isomorphism between constant stalks. The generic isotypic descent criterion makes the induced map phi followed by the q-projector image factorization invertible after pullback to the q-cover. Surjectivity of that cover makes pullback reflect isomorphisms, producing e. The identity action of the projector on phi gives the required inclusion equation.",
    "uses": [
+    "lem-a1-artin-schreier-trace-cover-map",
+    "lemma-weil-pbc-finite-stalk-formula",
     "def-weil-pbc-etale-site"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/laumon-transformation-de-fourier_PMIHES-1987-65.pdf",
-    "place": "(1.1.3), pp. 139–140: pushout of the Lang torsor by the character; eigenspace computation written out here"
-   }
-  },
-  {
-   "text": "Lisseness. By [lem-weil-pbc-finite-etale-etale-local-split] applied to $\\pi_{p,b}$, every point of $X$ has an étale neighbourhood $U$ with $Y_{p,b}\\times_XU=\\coprod_{j\\in J}V_j$, $J$ finite, each $V_j\\to U$ an isomorphism. $U$ is locally Noetherian (étale over the finite-type $k_0$-scheme $X$), so we may replace $U$ by the connected component containing the given point; then each $V_j\\cong U$ is connected, and each $U$-automorphism $\\tau_d\\times_XU$ maps each $V_j$ onto a connected open and closed subscheme, i.e. onto some $V_{j'}$. Hence $\\pi_{p,b*}L|_U\\cong L^J$ is constant, with each $\\tau_d^*$ acting by a fixed permutation of $J$, and $\\operatorname{im}e_\\Psi|_U$, the image of a constant idempotent of $L^J$, is a constant sheaf, of rank one by step 4. So $\\operatorname{im}e_\\Psi$ is a lisse $L$-sheaf of rank one, and so is $\\operatorname{im}e_\\psi$ by step 4; the isomorphism is one of lisse $L$-sheaves.",
-   "uses": [
-    "lem-weil-pbc-finite-etale-etale-local-split"
-   ],
    "elementary": false,
    "source": {
     "document": "literature/laumon-transformation-de-fourier_PMIHES-1987-65.pdf",
-    "place": "(1.1.3), pp. 139–140: the pushout is a lisse rank-one sheaf; written out here"
+    "place": "(1.1.3), pp. 139–140: character sheaves by pushout of the Lang torsor; agent-written trace-polynomial comparison with the prime-degree presentation"
    }
   },
   {
-   "text": "Identification with [def-fd-artin-schreier-sheaf] and naturality. In the current definition ([def-fd-artin-schreier-sheaf], blueprint main-20261015) $\\mathcal L_{\\psi,f}=f^*\\mathcal L_\\psi$, where $\\mathcal L_\\psi$ is the image of $e_\\psi=\\frac1q\\sum_c\\psi(-c)\\sigma_c^*$ on $(\\mathrm{AS}_q)_*L$ for $\\mathrm{AS}_q:\\mathbf A^1_{k_0}\\to\\mathbf A^1_{k_0}$, $x\\mapsto x^q-x$, and $f$ is viewed as $X\\to\\mathbf A^1_{k_0}$. The square with $Y_q\\to\\mathbf A^1_{k_0}$ given by $y$ is cartesian ($Y_q=X\\times_{f,\\mathbf A^1,\\mathrm{AS}_q}\\mathbf A^1$), compatibly with the translations. By [lemma-weil-pbc-finite-exchange] the exchange map $f^*(\\mathrm{AS}_q)_*L\\to\\pi_{q*}L$ is an isomorphism compatible with the stalk formula on both sides; by step 3 the translations act on both stalks by the same precomposition, so the exchange isomorphism intertwines $f^*\\sigma_c^*$ with $\\sigma_c^*$; as $f^*$ is exact it carries $\\operatorname{im}e_\\psi$ to $\\operatorname{im}e_\\psi$, so $\\mathcal L_{\\psi,f}$ is the left-hand side, and by step 4 it is the prime-degree $\\Psi$-character sheaf of $bf$ (for $\\psi=\\Psi\\circ\\operatorname{Tr}$, $b=1$, this is the prime-degree presentation of the imported statement of [def-fd-artin-schreier-sheaf]). For $h:X'\\to X$ with $f'=h^*f$, step 2 (base-change clause of [lem-a1-artin-schreier-trace-cover-map]) identifies $Y'_q$, $Y'_{p,b}$, $\\sigma'_c$, $\\tau'_d$, $\\theta'_b$ with base changes; [lemma-weil-pbc-finite-exchange] gives $h^*\\pi_{q*}L\\cong\\pi'_{q*}L$ and $h^*\\pi_{p,b*}L\\cong\\pi'_{p,b*}L$ compatibly with the stalk formulas, so on stalks (functions on the same geometric fibres) they intertwine $h^*\\theta_b^*$, $h^*\\sigma_c^*$, $h^*\\tau_d^*$ with $\\theta_b'^*$, $\\sigma_c'^*$, $\\tau_d'^*$. Applying the exact functor $h^*$ to the images, the isomorphism of step 4 for $(X,f)$ pulls back to the one for $(X',f')$.",
+   "text": "The existing universal Artin-Schreier sheaf map to the pushed-forward constant sheaf has character psi and invertible adjoint. Apply the same generic isotypic descent criterion to the q-cover to identify artinSchreierSheafOf X psi f with its q-projector image. The existing lisseness theorem for artinSchreierSheafOf transports across this isomorphism and across e, proving both lisseness assertions. This uses the upstream universal-sheaf trivialization directly, without a new finite-etale local splitting or finite exchange argument.",
    "uses": [
     "def-fd-artin-schreier-sheaf",
-    "lemma-weil-pbc-finite-exchange",
-    "lem-a1-artin-schreier-trace-cover-map"
+    "lem-fd-as-characters",
+    "lem-fd-as-lisse"
    ],
    "elementary": false,
    "source": {
     "document": "literature/laumon-transformation-de-fourier_PMIHES-1987-65.pdf",
-    "place": "(1.1.3.6), p. 140: L(f)=f^*L; finite base change written out here"
+    "place": "(1.1.3), pp. 139–140: character sheaves by pushout of the Lang torsor; agent-written trace-polynomial comparison with the prime-degree presentation"
+   }
+  },
+  {
+   "text": "Use the trace-cover base-change clause for M prime. Its theta-equivariance follows by composing with the two legs of the prime-cover pullback square and applying its hom_ext. Construct e prime by the same fixed-cover comparison. Composition of pullback-of-sections maps proves the theta naturality square. Apply the same formula to every prime translation and sum to obtain projector compatibility. Finally use idempotence of the prime projector and the two inclusion equations to compute image(P) inclusion followed by the base map, the new image retraction, e prime and the new q-image inclusion; it equals e followed by the old q-image inclusion and its base map. This is the stated adjoint naturality equation.",
+   "uses": [
+    "lem-a1-artin-schreier-trace-cover-map",
+    "def-fd-artin-schreier-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/laumon-transformation-de-fourier_PMIHES-1987-65.pdf",
+    "place": "(1.1.3), pp. 139–140: character sheaves by pushout of the Lang torsor; agent-written trace-polynomial comparison with the prime-degree presentation"
    }
   }
  ],
@@ -92,14 +95,14 @@
   "lem-fd-as-cover",
   "lemma-weil-pbc-finite-stalk-formula",
   "def-weil-pbc-etale-site",
-  "lem-weil-pbc-finite-etale-etale-local-split",
   "def-fd-artin-schreier-sheaf",
-  "lemma-weil-pbc-finite-exchange"
+  "lem-fd-as-characters",
+  "lem-fd-as-lisse"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/laumon-transformation-de-fourier_PMIHES-1987-65.pdf",
-  "place": "(0.2) and (1.1.3), pp. 135 and 139–140; explicit trace-polynomial comparison"
+  "place": "Laumon (0.2), (1.1.3), (1.1.3.6), pp. 135 and 139–140; explicit trace-cover comparison implemented using generic isotypic descent and evaluation on geometric fibres (F8, 2026-10-19)"
  },
  "mathlib_searches": [
   {
@@ -210,5 +213,15 @@
   "group": "NX",
   "result": "pass",
   "note": "Read the node, the 3 stmt_deps (including main-20261015 updates), the live ArtinSchreierTraceCoverMap module, the upstream isotypicIdempotent/lowerStarConstantSheaf*/artinSchreierSheafOf/IsLocallyConstantSheaf, and Laumon (0.2), (1.1.3), (1.1.3.6). Every clause matches: unique b in kˣ; projectors with denominators q, p and χ(-g) signs, acting by pullback; iso characterized by θ-pullback (checked true on stalks); both images locally constant (lisse for discrete coefficients); Nonempty iso with the current degree-q artinSchreierSheafOf; naturality over all k-morphisms h via root-preserving cartesian maps (checked true). The ∃ M chooses nothing because the coordinate fields determine the maps. Edge cases (empty X, f=0, r=1, p=2, p|r) are covered; universes are explicit, L : Type (u+1) as in the upstream API. Return L's duplicate module is removed and there are no name collisions. Helpers are non-hollow; docstrings have source, blueprint id and all 6 proof steps; only the lean field changed and lean.statement is verbatim. nt_compile (--json, side overlay) exits 0 in 5.3 s with no errors or warnings; axioms are only the theorem's sorry. Minor, not faults: CharZero L is redundant; the lisse rendering has no rank clause."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261019T231153-L-557158",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
