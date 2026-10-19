@@ -19,127 +19,77 @@
  ],
  "proof": [
   {
-   "text": "Use the current [def-pur-conventions]: $\\Lambda=A=A_{E,n}$ is the finite coefficient ring, $A_Y$ is its degree-zero constant coefficient unit, and $Rs^!$ denotes the constructible exceptional inverse image of [def-weil-exceptional-inverse-image] on the stated bounded constructible categories. The input $A_X(1)$ and the support object below are the finite-level objects of those conventions. Put $X=\\mathbf A^1_Y$, $U=\\mathbf G_{m,Y}$, $p:X\\to Y$, $\\pi=pj$, and $F=Rs^!A_X(1)[2]$. Use precisely [def-pur-affine-line-datum], including its present coefficient-level convention $e(E/\\mathbf Q_\\ell)\\mid n$ and the specified etale/pro-etale identification of the twist and Kummer class; no integral or rational coefficients are asserted here. The base is separated finite type over $k$, as assumed in the item. By [lem-pur-gysin-structure], $F\\in D^b_{ctf}(Y,A)$ and $\\mathcal H^i(F)=0$ for $i\\ne0$. Put $L=\\mathcal H^0(F)$. Applying [lem-pur-concentrated-complex-shift](1) with $r=0$ gives $F\\simeq L[0]$. The fully faithful degree-zero embedding of [lem-weil-pbc-derived-single-fully-faithful] therefore identifies\n$$\\operatorname{Hom}_{D(Y,A)}(A_Y,F)=\\operatorname{Hom}_{A_Y}(A_Y,L)=\\Gamma(Y,L).$$\nThe last bijection sends a sheaf map to the image of $1$; its inverse sends a section $v$ to $a\\mapsto av$, on every object of the site. This also explains why the Hom group is a module of global sections, not a rank-one sheaf or necessarily a rank-one module.",
+   "text": "Apply [thm-pur-affine-line-orientation] to obtain the normalized global support chart, coordinate morphism, fibre charts, transports and residue isomorphisms. Assemble OrientationRestrictionData from these witnesses. Apply each residue isomorphism to the desired family equality: the orientation has residue one, and the inverse residue sends one to the normalized family.",
    "uses": [
-    "def-pur-conventions",
-    "def-weil-exceptional-inverse-image",
-    "def-pur-affine-line-datum",
-    "lem-pur-gysin-structure",
-    "lem-pur-concentrated-complex-shift",
-    "lem-weil-pbc-derived-single-fully-faithful"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/prop-pur-affine-line-orientation-uniqueness.proof.md",
-    "place": "Steps 1–4; expanded with the unit rank-one calculation"
-   }
-  },
-  {
-   "text": "By [lem-pur-twist-sheaf-locally-free](4), $A_X(1)$ lies in $D^b_c(X,A)$; so [lem-sf-proetale-constructible-origin](ii) gives $B\\in D^b_c(X_{\\mathrm{et}},A)\\subset D^+(X_{\\mathrm{et}},A)$ with $\\nu_X^*B\\cong A_X(1)$. Apply [lem-pur-retracted-support-localization-comparison] to this $B$ and $K=A_X(1)$; then $j^*K=A_U(1)$ is the pro-etale twist carrying the class $\\kappa(t)$ of [def-pur-affine-line-datum]. Its hypotheses hold: $p$ is affine of finite type, $s$ is the closed section $t=0$, and $j$ is the principal open $D(t)$; all schemes are separated finite type over $k$. We obtain the triangle\n$$Rs^!A_X(1)\\longrightarrow Rp_*A_X(1)\\longrightarrow R\\pi_*A_U(1)\\longrightarrow Rs^!A_X(1)[1].$$\nThe cohomology sequence of [lem-sf-derived-homology-long-exact] and the vanishing $R^1p_*A_X(1)=R^2p_*A_X(1)=0$ in [prop-pur-gm-relative-kummer](1) give an isomorphism\n$$\\delta:R^1\\pi_*A_U(1)\\xrightarrow{\\sim}\\mathcal H^2(Rs^!A_X(1))=L.$$\nClause (2) of [prop-pur-gm-relative-kummer] gives the isomorphism $A_Y\\to R^1\\pi_*A_U(1)$ carrying $1$ to the edge image of $\\kappa(t)$. Compose it with $\\delta$ to obtain an isomorphism $o:A_Y\\to L$. The boundary-edge equality of the comparison lemma sends this section to the edge image of $\\partial\\kappa(t)$. By [lem-pur-gysin-structure] and the definition of [thm-pur-affine-line-orientation], that is precisely the section corresponding to $\\mathcal H^0(\\operatorname{pur}_s)$. Maps out of $A_Y$ are determined by the image of $1$, so $o=\\mathcal H^0(\\operatorname{pur}_s)$. Thus the actual Kummer orientation trivializes $L$.",
-   "uses": [
-    "lem-pur-retracted-support-localization-comparison",
-    "lem-pur-twist-sheaf-locally-free",
-    "lem-sf-proetale-constructible-origin",
-    "def-pur-affine-line-datum",
-    "lem-sf-derived-homology-long-exact",
-    "prop-pur-gm-relative-kummer",
-    "lem-pur-gysin-structure",
     "thm-pur-affine-line-orientation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/prop-pur-affine-line-orientation-uniqueness.proof.md",
-    "place": "Steps 1–4; expanded with the unit rank-one calculation"
-   }
-  },
-  {
-   "text": "Combining the degree-zero Hom identification of step 1 with $o^{-1}$ of step 2 identifies every $\\varphi:A_Y\\to F$ with a unique section $a\\in\\Gamma(Y,A_Y)$. Explicitly the endomorphism $m_a:A_Y\\to A_Y$, $b\\mapsto ab$, satisfies\n$$\\varphi=\\operatorname{pur}_s\\circ m_a.$$\nIndeed both sides correspond to the sheaf map $o\\circ m_a$ under the fully faithful single-complex embedding. The orientation corresponds to the section $1$. This is a calculation of sheaf maps on the degree-zero representatives, so it does not require a claim that geometric pullback is faithful on an arbitrary derived category.",
-   "uses": [
-    "lem-weil-pbc-derived-single-fully-faithful"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/prop-pur-affine-line-orientation-uniqueness.proof.md",
-    "place": "Steps 1–4; expanded with the unit rank-one calculation"
+    "place": "Steps 1–4, using the existing Gysin bijection and etale-origin stalk test"
    }
   },
   {
-   "text": "Fix $g:\\bar y=\\operatorname{Spec}\\Omega\\to Y$, with $\\Omega$ algebraically closed, and let $h:X'=\\mathbf A^1_{\\bar y}\\to X$, $p':X'\\to\\bar y$ and $s':\\bar y\\hookrightarrow X'$ be the base changes, so $h^{-1}(s(Y))=s'(\\bar y)$. Put $K=A_X(1)$. By [lem-pur-supported-hom] and the counit $\\epsilon:s_*Rs^!K\\to K$ of the finite-level adjunction of [def-weil-exceptional-inverse-image] (its source $A_Y$ is bounded below of etale origin), $\\varphi$ corresponds to the supported class $c(\\varphi)\\in H^2_{s(Y)}(X,K)$ represented by $\\epsilon[2]\\circ s_*\\varphi:s_*A_Y\\to K[2]$; the component $r_{\\bar y}(\\varphi)$ is its pullback $h^*c(\\varphi)\\in H^2_{s'(\\bar y)}(X',A_{X'}(1))$ along the map of pairs, which is natural in the coefficient complex [thm-pur-with-support-exactness]. Put $b=p^{-1}a\\in\\Gamma(X,A_X)$. Multiplication by a global section of the commutative coefficient ring sheaf commutes with every chain map of complexes of $A_X$-modules, hence with every morphism of $D(X,A)$, each being a roof of such maps. Since $s^{-1}b=(ps)^{-1}a=a$, $s_*m_a$ is multiplication by $b$ on $s_*A_Y$. With step 3,\n$$\\epsilon[2]\\circ s_*\\varphi=\\epsilon[2]\\circ s_*\\operatorname{pur}_s\\circ b=b_{K[2]}\\circ\\epsilon[2]\\circ s_*\\operatorname{pur}_s,$$\nso naturality of [lem-pur-supported-hom] in its coefficient gives $c(\\varphi)=H^2_{s(Y)}(b_K)\\,c(\\operatorname{pur}_s)$, and naturality of the pullback gives $r_{\\bar y}(\\varphi)=H^2_{s'(\\bar y)}(h^*b_K)\\,r_{\\bar y}(\\operatorname{pur}_s)$. Here $h^*b_K$ is multiplication by $h^{-1}b=p'^{-1}g^{-1}a$. Let $m_a^{\\mathrm{et}}$ be the etale endomorphism of $A_{Y_{\\mathrm{et}}}$ with $\\nu_Y^*m_a^{\\mathrm{et}}=m_a$; it exists by [lem-sf-comparison-pullback-exact](1),(2), [thm-weil-pbc-site-comparison] and [lem-weil-pbc-derived-single-fully-faithful]. By [lem-weil-pbc-comparison-pullback], $g^*m_a=\\nu^*g^{-1}m_a^{\\mathrm{et}}$, and by [lem-weil-pbc-geometric-point-pullback-stalk] this is multiplication by the element $a_{\\bar y}\\in A$ given by the stalk of $m_a^{\\mathrm{et}}$ at $\\bar y$ applied to $1$. Thus $h^{-1}b$ is the constant $a_{\\bar y}$, and the $A$-linear functor $H^2_{s'(\\bar y)}$ sends multiplication by it to multiplication by $a_{\\bar y}$:\n$$r_{\\bar y}(\\varphi)=a_{\\bar y}\\,r_{\\bar y}(\\operatorname{pur}_s).$$\nThe normalization in [thm-pur-affine-line-orientation] and the $A$-linear residue isomorphism $\\rho_{\\bar y}$ of [thm-pur-rank-one-local-calculation] yield\n$$\\rho_{\\bar y}(r_{\\bar y}(\\varphi))=a_{\\bar y}.$$\nNo base-change isomorphism for the exceptional functor, no finite exchange comparison, and no finite-type hypothesis on $\\operatorname{Spec}\\Omega$ is used.",
+   "text": "For any two transports over the same affine-space base map, the terminal maps coincide: compose with the monic projection from the pullback of the identity, and use their over-morphism equations. Their supportUnit maps then agree after composition with the monic kernel inclusion, by supportUnit_spec, so they agree. The published right-derived base-change construction and homology therefore give the same orientationSupportRestriction for the two transports.",
    "uses": [
-    "lem-pur-supported-hom",
-    "def-weil-exceptional-inverse-image",
-    "thm-pur-with-support-exactness",
+    "lem-pur-supported-hom-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/prop-pur-affine-line-orientation-uniqueness.proof.md",
+    "place": "Steps 1–4, using the existing Gysin bijection and etale-origin stalk test"
+   }
+  },
+  {
+   "text": "For two derived morphisms with equal supported geometric restrictions, use [lem-pur-gysin-structure] to choose an etale model H of the degree-zero cohomology sheaf and its comparison isomorphism e. Write v(m) for the H0 sheaf map from the coefficient unit, including the standard H0(single) comparison. Fullness of the etale-to-pro-etale comparison lifts v(m1) followed by e inverse and v(m2) followed by e inverse to etale sheaf maps f and g into H. Thus nu(f) followed by e is v(m1), and similarly for g. This uses fullness on ordinary sheaves directly; no derived single-complex Hom argument is required.",
+   "uses": [
+    "lem-pur-gysin-structure",
     "lem-sf-comparison-pullback-exact",
-    "thm-weil-pbc-site-comparison",
-    "lem-weil-pbc-derived-single-fully-faithful",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-weil-pbc-geometric-point-pullback-stalk",
-    "thm-pur-affine-line-orientation",
-    "thm-pur-rank-one-local-calculation"
+    "thm-weil-pbc-site-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/prop-pur-affine-line-orientation-uniqueness.proof.md",
-    "place": "Steps 1–4; expanded with the unit rank-one calculation"
+    "place": "Steps 1–4, using the existing Gysin bijection and etale-origin stalk test"
    }
   },
   {
-   "text": "Suppose $r_{\\bar y}(\\varphi)=r_{\\bar y}(\\psi)$ for every geometric point, and write $a,b\\in\\Gamma(Y,A_Y)$ for their sections in step 3. Step 4 gives $a_{\\bar y}=b_{\\bar y}$ everywhere. We justify the section test in the correct category. The constant sheaf $A_Y$ is the exact comparison pullback of its etale model, by [lem-sf-comparison-pullback-exact](1),(2). Full faithfulness on $D^+$ in [thm-weil-pbc-site-comparison], together with [lem-weil-pbc-derived-single-fully-faithful], identifies its pro-etale sheaf endomorphisms with its etale sheaf endomorphisms. These identifications respect geometric inverse image by [lem-weil-pbc-comparison-pullback]. Let $f$ be the etale endomorphism corresponding to $m_a-m_b$. Its stalk maps are zero by step 4 and [lem-weil-pbc-geometric-point-pullback-stalk]. On underlying abelian sheaves put $I=\\operatorname{im}f$. Exactness of etale geometric stalks [prop-weil-pbc-geometric-stalks-exact] gives $I_{\\bar y}=\\operatorname{im}f_{\\bar y}=0$. Applying [lemma-weil-pbc-geometric-stalk-conservative] to $0\\to I$ gives $I=0$, hence $f=0$, hence $m_a=m_b$ and $a=b$. Step 3 then gives $\\varphi=\\psi$. This proves injectivity of the displayed restriction homomorphism. The test was made on etale sheaves and transported by full faithfulness; geometric stalks need not be conservative on arbitrary pro-etale sheaves.",
+   "text": "Test f and g at the algebraic-closure point of every underlying point of Y. The composite of this geometric point with a equips its algebraically closed field with the required k-algebra structure. Apply [lem-pur-affine-line-support-stalk] to obtain a canonical transport p and a support-to-stalk isomorphism gamma. Step 2 replaces the transport of OrientationRestrictionData by p. Applying gamma to equality of the supported components now gives equality of the stalk maps f and g evaluated on the canonical coefficient unit. Precompose both stalk maps with the inverse constant-sheaf stalk isomorphism; these are linear maps from A, so equality on 1 implies equality on every scalar. Cancel this isomorphism. The etale geometric-stalk morphism extensionality theorem yields f=g. The generic constant-sheaf stalk isomorphism and the existing module-valued morphism extensionality theorem suffice; no separate image, stalk-exactness or geometric-point equivalence argument is needed here.",
    "uses": [
-    "lem-sf-comparison-pullback-exact",
-    "thm-weil-pbc-site-comparison",
-    "lem-weil-pbc-derived-single-fully-faithful",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-weil-pbc-geometric-point-pullback-stalk",
-    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-pur-affine-line-support-stalk",
     "lemma-weil-pbc-geometric-stalk-conservative"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/prop-pur-affine-line-orientation-uniqueness.proof.md",
-    "place": "Steps 1–4; expanded with the unit rank-one calculation"
+    "place": "Steps 1–4, using the existing Gysin bijection and etale-origin stalk test"
    }
   },
   {
-   "text": "The morphism $\\operatorname{pur}_s$ exists by [thm-pur-affine-line-orientation] and has every geometric component equal to the class corresponding to $1\\in A$ under [thm-pur-rank-one-local-calculation]. Therefore the all-ones family lies in the image. If another morphism has these same components, injectivity from step 5 makes it equal to $\\operatorname{pur}_s$. No connectedness of $Y$ was assumed: on a disconnected base sections can take different values on different components and the product tests each of them. If $Y$ is empty, its sheaf module category and the Hom group are zero and the empty product is the zero group, so the same assertion and uniqueness hold.",
+   "text": "Use f=g and the displayed lift equations to conclude v(m1)=v(m2), and hence equality of their evaluations. The injective half of the bijection gysinHomToSections in [lem-pur-gysin-structure] gives m1=m2. This proves injectivity of the actual supported geometric restriction. Apply this injectivity to any morphism with the normalized family to obtain equality with the coordinate morphism produced in Step 1. No connectedness is used, and for the empty scheme the etale stalk test has no points and still proves equality.",
    "uses": [
-    "thm-pur-affine-line-orientation",
-    "thm-pur-rank-one-local-calculation"
+    "lem-pur-gysin-structure"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/prop-pur-affine-line-orientation-uniqueness.proof.md",
-    "place": "Steps 1–4; expanded with the unit rank-one calculation"
+    "place": "Steps 1–4, using the existing Gysin bijection and etale-origin stalk test"
    }
   }
  ],
  "proof_deps": [
-  "def-pur-conventions",
-  "def-weil-exceptional-inverse-image",
-  "def-pur-affine-line-datum",
-  "lem-pur-gysin-structure",
-  "lem-pur-concentrated-complex-shift",
-  "lem-weil-pbc-derived-single-fully-faithful",
-  "lem-pur-retracted-support-localization-comparison",
-  "lem-pur-twist-sheaf-locally-free",
-  "lem-sf-proetale-constructible-origin",
-  "lem-sf-derived-homology-long-exact",
-  "prop-pur-gm-relative-kummer",
   "thm-pur-affine-line-orientation",
-  "lem-pur-supported-hom",
-  "thm-pur-with-support-exactness",
+  "lem-pur-supported-hom-pullback",
+  "lem-pur-gysin-structure",
   "lem-sf-comparison-pullback-exact",
   "thm-weil-pbc-site-comparison",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-geometric-point-pullback-stalk",
-  "thm-pur-rank-one-local-calculation",
-  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-pur-affine-line-support-stalk",
   "lemma-weil-pbc-geometric-stalk-conservative"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/prop-pur-affine-line-orientation-uniqueness.proof.md",
-  "place": "Steps 1–4, with the localization/Kummer normalization of sk-prop-a1 made explicit and etale-origin correction of the stalk argument"
+  "place": "Steps 1–4: use the published Gysin Hom/sections bijection, isolate the source canonical support-fibre/stalk identification, and apply etale morphism extensionality directly"
  },
  "mathlib_searches": [
   {
@@ -318,31 +268,9 @@
   ]
  },
  "tool_uses": [
-  "lem-pur-concentrated-complex-shift",
-  "lem-weil-pbc-derived-single-fully-faithful",
-  "lem-exc-closed-support-triangle",
-  "lem-pc-right-derived-functor-triangulated",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-derived-direct-image-composition",
-  "def-weil-exceptional-inverse-image",
-  "prop-weil-pbc-comparison-direct-image",
   "lem-sf-comparison-pullback-exact",
-  "lem-sf-derived-homology-long-exact",
-  "lem-pur-supported-hom",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-geometric-point-pullback-stalk",
-  "lem-weil-pbc-comparison-pullback",
-  "prop-weil-pbc-geometric-stalks-exact",
   "lemma-weil-pbc-geometric-stalk-conservative",
-  "def-weil-size-convention",
-  "lem-weil-pbc-affine-scheme-qcqs",
-  "def-weil-finite-type-morphism",
-  "def-weil-quasi-separated-morphism",
-  "lemma-weil-pbc-finite-stalk-formula",
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "thm-weil-pbc-site-comparison",
-  "lem-pur-twist-sheaf-locally-free",
-  "lem-sf-proetale-constructible-origin"
+  "thm-weil-pbc-site-comparison"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -377,5 +305,15 @@
   "group": "Q154",
   "result": "pass",
   "note": "Reviewed node, source, dependencies, Lean module, report, edge cases, route-pivot compliance, and docstrings. scompile.py passed in sandbox and library overlays; no substantive or mechanical faults found."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261019T192715-L-1857472",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
