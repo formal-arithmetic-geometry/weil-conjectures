@@ -10,25 +10,16 @@ public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Sheaf.Paper.ProEtaleConstructibleSheaf
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
-import Sheaf.Paper.FiniteRingConstructibleSheafOrigin
+import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.Paper.ProEtaleConstantModuleEncoding
+import Sheaf.Paper.ProEtaleConstantModuleConstructibility
 import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import Sheaf.Paper.ProEtaleLisseOrigin
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
-import Sheaf.AlgebraicGeometry.ConstructiblePartitionLocalClosedStratum
-import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
-import Mathlib.CategoryTheory.Triangulated.Pretriangulated
-import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
-import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
-import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
-import Sheaf.AlgebraicGeometry.ComparisonDirectImage
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.AlgebraicGeometry.ProEtaleOpenClosedSequence
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-import Sheaf.AlgebraicGeometry.ProEtaleStalkConservative
-import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-import WeilConjectures.AlgebraicGeometry.DerivedCategories
 
 /-!
 # Constructible pro-etale coefficients are of etale origin
@@ -88,6 +79,7 @@ noncomputable def originConstantRingComparison :
     (sheafificationAdjunction (Scheme.ProEt.topology T) RingCat.{u + 1})).app
       ((Functor.const T.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} B)))
 
+set_option linter.unusedSectionVars false in
 /-- The canonical constant-ring comparison is invertible.
 Source: Stacks, sheafification of algebraic structures
 (blueprint: lem-sf-proetale-constructible-origin).
@@ -100,7 +92,22 @@ Thus its ring sheafification has the commutative-ring sheafification universal p
 The displayed comparison is the unique map extending the same unit, and the two universal
 properties give its inverse. Both composites extend the unit and hence are identities. -/
 theorem isIso_originConstantRingComparison : IsIso (originConstantRingComparison T B) := by
-  sorry
+  have : (Scheme.ProEt.topology T).PreservesSheafification
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) := by
+    constructor
+    intro P Q f hf
+    change (Scheme.ProEt.topology T).W
+      (Functor.whiskerRight f (forget₂ CommRingCat RingCat))
+    have hi : Presheaf.IsLocallyInjective (Scheme.ProEt.topology T) f :=
+      hf.isLocallyInjective
+    have hs : Presheaf.IsLocallySurjective (Scheme.ProEt.topology T) f :=
+      hf.isLocallySurjective
+    apply ((Scheme.ProEt.topology T).W_iff_isLocallyBijective _).mpr
+    constructor
+    · exact ⟨fun x y h ↦ Presheaf.equalizerSieve_mem (Scheme.ProEt.topology T) f x y h⟩
+    · exact ⟨fun x ↦ Presheaf.imageSieve_mem (Scheme.ProEt.topology T) f x⟩
+  dsimp only [originConstantRingComparison]
+  infer_instance
 
 attribute [instance] isIso_originConstantRingComparison
 
@@ -123,11 +130,185 @@ noncomputable def originConstantModules :
     OriginModules T B ⥤ Scheme.proEtaleRingModules T (Scheme.proEtaleConstantRing T B) :=
   SheafOfModules.restrictScalars.{u + 1} (originCoefficientMap T B)
 
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem originScalar_fac :
+    Scheme.proEtaleModuleScalarUnit T B ≫ (originCoefficientMap T B).hom =
+      @finiteCoefficientScalarMap.{u} T (ULift.{u + 1, u} B) _ _ ⊥
+        (discreteTopology_bot _) := by
+  have hc := sheafComposeNatTrans_fac (Scheme.ProEt.topology T)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})
+    (sheafificationAdjunction (Scheme.ProEt.topology T) CommRingCat.{u + 1})
+    (sheafificationAdjunction (Scheme.ProEt.topology T) RingCat.{u + 1})
+    ((Functor.const T.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} B)))
+  change toSheafify (Scheme.ProEt.topology T)
+      ((Functor.const T.ProEtᵒᵖ).obj (RingCat.of (ULift.{u + 1, u} B))) ≫
+    (originConstantRingComparison T B).hom = Scheme.proEtaleModuleScalarUnit T B at hc
+  have hm : originConstantRingComparison T B ≫ originCoefficientMap T B =
+      ((sheafificationAdjunction (Scheme.ProEt.topology T) RingCat.{u + 1}).homEquiv
+        _ _).symm (@finiteCoefficientScalarMap.{u} T (ULift.{u + 1, u} B)
+          _ _ ⊥ (discreteTopology_bot _)) := by
+    change (asIso (originConstantRingComparison T B)).hom ≫
+      ((asIso (originConstantRingComparison T B)).inv ≫ _) = _
+    rw [Iso.hom_inv_id_assoc]
+  rw [← hc, Category.assoc, ← ObjectProperty.FullSubcategory.comp_hom, hm]
+  exact ((sheafificationAdjunction (Scheme.ProEt.topology T) RingCat.{u + 1}).homEquiv
+    _ _).apply_symm_apply _
+
+
 /-- The recorded canonical inverse image on module sheaves.
 Source: blueprint, site comparison (blueprint: lem-sf-proetale-constructible-origin). -/
 noncomputable abbrev originComparison :
     Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) ⥤ OriginModules T B :=
   @finiteCoefficientComparison.{u} T (ULift.{u + 1, u} B) _ _ ⊥ (discreteTopology_bot _)
+
+private theorem fixedDerivedOrigin (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ)))
+    (hc : ∀ q : ℤ, IsConstructible Λ
+      ((DerivedCategory.homologyFunctor _ q).obj K))
+    (a b : ℤ) (hz : ∀ q : ℤ, (q < a ∨ b < q) →
+      IsZero ((DerivedCategory.homologyFunctor _ q).obj K)) :
+    ∃ L : Etale.DerivedCategoryModule Λ T,
+      Etale.DerivedCategory.isBoundedConstructible Λ T L ∧
+      Nonempty ((comparisonUpperStar (ModuleCat.{u + 1} Λ) T).mapDerivedCategory.obj L ≅ K) := by
+  let ν := comparisonUpperStar (ModuleCat.{u + 1} Λ) T
+  have : IsIso (derivedComparisonAdjunctionPlus (ModuleCat.{u + 1} Λ) T).unit :=
+    isIso_compactSupportComparisonUnit T Λ
+  have : ν.mapDerivedCategoryPlus.Full :=
+    (derivedComparisonAdjunctionPlus (ModuleCat.{u + 1} Λ) T).fullyFaithfulLOfIsIsoUnit.full
+  let F := ν.mapDerivedCategoryPlus ⋙ DerivedCategory.Plus.ι
+  let P := ν.essImage
+  have hP (G : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ)) (hG : P G) :
+      F.essImage ((DerivedCategory.singleFunctor _ 0).obj G) := by
+    obtain ⟨H, ⟨e⟩⟩ := hG
+    refine ⟨(DerivedCategory.Plus.singleFunctor _ 0).obj H, ⟨?_⟩⟩
+    exact (ν.mapDerivedCategoryPlusCompatibility.app _) ≪≫
+      ν.mapDerivedCategory.mapIso ((DerivedCategory.Plus.singleFunctorιIso _ 0).app H) ≪≫
+      (ν.mapDerivedCategorySingleFunctor 0).app H ≪≫
+      (DerivedCategory.singleFunctor _ 0).mapIso e
+  have hGE : K.IsGE a := (DerivedCategory.isGE_iff K a).mpr
+    (fun q hq ↦ hz q (Or.inl hq))
+  have hLE : K.IsLE b := (DerivedCategory.isLE_iff K b).mpr
+    (fun q hq ↦ hz q (Or.inr hq))
+  have hK : F.essImage K := DerivedCategory.prop_of_bounded F.essImage P hP K
+    ⟨⟨a, hGE⟩, ⟨b, hLE⟩⟩ (fun q ↦ by
+      obtain ⟨G, _, he⟩ := exists_isConstructibleSheaf_iso_comparisonUpperStar_obj Λ (hc q)
+      exact ⟨G, he⟩)
+  obtain ⟨L, ⟨e⟩⟩ := hK
+  let e' : ν.mapDerivedCategory.obj L.obj ≅ K :=
+    (ν.mapDerivedCategoryPlusCompatibility.app L).symm ≪≫ e
+  refine ⟨L.obj, ⟨?_, ?_⟩, ⟨e'⟩⟩
+  · intro q
+    have hq := isConstructible_of_iso
+      ((DerivedCategory.homologyFunctor _ q).mapIso e'.symm) (hc q)
+    have hν := isConstructible_of_iso
+      ((ν.mapDerivedCategoryHomologyFunctorIso q).symm.app L.obj) hq
+    obtain ⟨G, hG, ⟨eG⟩⟩ :=
+      exists_isConstructibleSheaf_iso_comparisonUpperStar_obj Λ hν
+    have : Scheme.IsConstructibleSheaf G := hG
+    exact (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
+      (Scheme.IsConstructibleSheaf.of_iso (ν.preimageIso eG))
+  · refine ⟨min a b, b, min_le_right _ _, fun q hq ↦ ?_⟩
+    apply ν.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj
+    exact (hz q (hq.imp (fun h ↦ lt_of_lt_of_le h (min_le_left _ _)) id)).of_iso
+      ((DerivedCategory.homologyFunctor _ q).mapIso e')
+
+private noncomputable def originRealizationUnit :
+    𝟭 (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} B))) ⟶
+      @finiteCoefficientRealization.{u} T (ULift.{u + 1, u} B) _ _ ⊥
+        (discreteTopology_bot _) ⋙ originConstantModules T B ⋙
+          Scheme.proEtaleModuleRestriction T B where
+  app F := by
+    let P : PresheafOfModules.{u + 1}
+        ((Functor.const T.ProEtᵒᵖ).obj (RingCat.of (ULift.{u + 1, u} B))) :=
+      (finiteCoefficientModulePresheaf T.ProEt (ULift.{u + 1, u} B)).obj F.obj
+    let τ := (PresheafOfModules.sheafificationAdjunction.{u + 1}
+      (@finiteCoefficientScalarMap.{u} T (ULift.{u + 1, u} B) _ _ ⊥
+        (discreteTopology_bot _))).unit.app P
+    refine ⟨{ app := ?_, naturality := ?_ }⟩
+    · intro U
+      refine ModuleCat.ofHom (X := F.obj.obj U)
+        (Y := ((Scheme.proEtaleModuleRestriction T B).obj
+          ((originConstantModules T B).obj
+            ((@finiteCoefficientRealization.{u} T (ULift.{u + 1, u} B) _ _ ⊥
+              (discreteTopology_bot _)).obj F))).obj.obj U)
+        { toFun := τ.app U
+          map_add' := map_add _
+          map_smul' := ?_ }
+      intro b m
+      have hs := ConcreteCategory.congr_hom
+        (congr_app (originScalar_fac T B).symm U) b
+      change (@finiteCoefficientScalarMap.{u} T (ULift.{u + 1, u} B) _ _ ⊥
+        (discreteTopology_bot _)).app U b =
+        (originCoefficientMap T B).hom.app U
+          ((Scheme.proEtaleModuleScalarUnit T B).app U b) at hs
+      let N := ((@finiteCoefficientRealization.{u} T (ULift.{u + 1, u} B)
+        _ _ ⊥ (discreteTopology_bot _)).obj F).val.obj U
+      change τ.app U (b • m) =
+        (originCoefficientMap T B).hom.app U
+          ((Scheme.proEtaleModuleScalarUnit T B).app U b) • (show N from τ.app U m)
+      calc
+        _ = (@finiteCoefficientScalarMap.{u} T (ULift.{u + 1, u} B) _ _ ⊥
+            (discreteTopology_bot _)).app U b • (show N from τ.app U m) :=
+          (τ.app U).hom.map_smul b m
+        _ = _ := by rw [hs]
+    · intro U V f
+      ext m
+      exact ConcreteCategory.congr_hom (τ.naturality f) m
+  naturality {F G} f := by
+    ext U m
+    exact ConcreteCategory.congr_hom
+      (congr_app (toSheafify_naturality (Scheme.ProEt.topology T)
+        (Functor.whiskerRight f.hom
+          (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1, u} B))
+            AddCommGrpCat.{u + 1}))) U) m
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem originRealizationUnit_isIso : IsIso (originRealizationUnit T B) := by
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro F
+  rw [← isIso_iff_of_reflects_iso _ (sheafCompose (Scheme.ProEt.topology T)
+    (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) AddCommGrpCat.{u + 1}))]
+  rw [← isIso_iff_of_reflects_iso _
+    (sheafToPresheaf (Scheme.ProEt.topology T) AddCommGrpCat)]
+  have he : (sheafToPresheaf (Scheme.ProEt.topology T) AddCommGrpCat).map
+      ((sheafCompose (Scheme.ProEt.topology T)
+        (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) AddCommGrpCat.{u + 1})).map
+          ((originRealizationUnit T B).app F)) =
+      toSheafify (Scheme.ProEt.topology T)
+        (F.obj ⋙ forget₂ (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) AddCommGrpCat.{u + 1}) := by
+    ext U m
+    rfl
+  rw [he]
+  exact isIso_toSheafify (Scheme.ProEt.topology T)
+    ((sheafCompose (Scheme.ProEt.topology T)
+      (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) AddCommGrpCat.{u + 1})).obj F).property
+
+private noncomputable def originFixedModules :
+    OriginModules T B ⥤
+      Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) :=
+  originConstantModules T B ⋙ Scheme.proEtaleModuleRestriction T B
+
+private noncomputable instance originFixedModules_additive :
+    (originFixedModules T B).Additive where
+  map_add := by intros; rfl
+
+private noncomputable instance originFixedModules_equivalence :
+    (originFixedModules T B).IsEquivalence := by
+  let E := @finiteCoefficientRealization.{u} T (ULift.{u + 1, u} B) _ _ ⊥
+    (discreteTopology_bot _)
+  have := originRealizationUnit_isIso T B
+  have : (E ⋙ originFixedModules T B).IsEquivalence :=
+    Functor.isEquivalence_of_iso (asIso (originRealizationUnit T B))
+  exact Functor.isEquivalence_of_comp_left E (originFixedModules T B)
+
+private noncomputable def originFixedComparisonIso :
+    originComparison T B ⋙ originFixedModules T B ≅
+      comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) T :=
+  have := originRealizationUnit_isIso T B
+  Functor.isoWhiskerLeft
+    (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) T)
+    (asIso (originRealizationUnit T B)).symm
 
 /-- The recorded canonical derived inverse image.
 Source: blueprint, site comparison (blueprint: lem-sf-proetale-constructible-origin). -/
@@ -153,6 +334,82 @@ Source: blueprint, final clause (blueprint: lem-sf-proetale-constructible-origin
 noncomputable abbrev etaleOriginBoundedConstructible : ObjectProperty (OriginDerivedCategory T B) :=
   @isBoundedConstructibleFiniteCoefficient.{u} T (ULift.{u + 1, u} B) _ _ ⊥
     (discreteTopology_bot _)
+
+private noncomputable def originFixedDerivedIso :
+    originDerivedComparison T B ⋙ (originFixedModules T B).mapDerivedCategory ≅
+      (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) T).mapDerivedCategory :=
+  (Functor.mapDerivedCategoryCompIso (originComparison T B)
+    (originFixedModules T B)).symm ≪≫
+    Functor.mapDerivedCategoryNatIso (originFixedComparisonIso T B)
+
+private theorem intrinsicOrigin_iso {K L : OriginDerivedCategory T B} (e : K ≅ L)
+    (hK : intrinsicOriginBoundedConstructible T B K) :
+    intrinsicOriginBoundedConstructible T B L := by
+  constructor
+  · intro q
+    apply (Scheme.proEtaleModuleRestriction_constructible_iff T B _).mpr
+    exact isConstructible_of_iso
+      ((originFixedModules T B).mapIso ((DerivedCategory.homologyFunctor _ q).mapIso e))
+      ((Scheme.proEtaleModuleRestriction_constructible_iff T B _).mp (hK.1 q))
+  · obtain ⟨a, b, hab, hz⟩ := hK.2
+    exact ⟨a, b, hab, fun q hq ↦ (hz q hq).of_iso
+      ((DerivedCategory.homologyFunctor _ q).mapIso e.symm)⟩
+
+private theorem intrinsicOrigin_image
+    (L : Etale.DerivedCategoryModule (ULift.{u + 1, u} B) T)
+    (hL : Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1, u} B) T L) :
+    intrinsicOriginBoundedConstructible T B ((originDerivedComparison T B).obj L) := by
+  let E := originFixedModules T B
+  let ν := comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) T
+  let e := originFixedDerivedIso T B
+  constructor
+  · intro q
+    apply (Scheme.proEtaleModuleRestriction_constructible_iff T B _).mpr
+    have : Scheme.IsConstructibleSheaf ((DerivedCategory.homologyFunctor _ q).obj L) :=
+      (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp (hL.1 q)
+    have hc := isConstructible_comparisonUpperStar_obj
+      ((DerivedCategory.homologyFunctor _ q).obj L)
+    exact isConstructible_of_iso
+      ((ν.mapDerivedCategoryHomologyFunctorIso q).app L ≪≫
+        (DerivedCategory.homologyFunctor _ q).mapIso (e.app L).symm ≪≫
+        (E.mapDerivedCategoryHomologyFunctorIso q).symm.app _) hc
+  · obtain ⟨a, b, hab, hz⟩ := hL.2
+    exact ⟨a, b, hab, fun q hq ↦
+      (originComparison T B).isZero_homologyFunctor_mapDerivedCategory_obj (hz q hq)⟩
+
+private theorem intrinsicOrigin_preimage (K : OriginDerivedCategory T B)
+    (hK : intrinsicOriginBoundedConstructible T B K) :
+    ∃ L : Etale.DerivedCategoryModule (ULift.{u + 1, u} B) T,
+      Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1, u} B) T L ∧
+        Nonempty ((originDerivedComparison T B).obj L ≅ K) := by
+  let E := originFixedModules T B
+  obtain ⟨a, b, _, hz⟩ := hK.2
+  have hc (q : ℤ) : IsConstructible (ULift.{u + 1, u} B)
+      ((DerivedCategory.homologyFunctor _ q).obj (E.mapDerivedCategory.obj K)) := by
+    exact isConstructible_of_iso ((E.mapDerivedCategoryHomologyFunctorIso q).app K)
+      ((Scheme.proEtaleModuleRestriction_constructible_iff T B _).mp (hK.1 q))
+  obtain ⟨L, hL, ⟨e⟩⟩ := fixedDerivedOrigin T (ULift.{u + 1, u} B)
+    (E.mapDerivedCategory.obj K) hc a b
+    (fun q hq ↦ E.isZero_homologyFunctor_mapDerivedCategory_obj (hz q hq))
+  exact ⟨L, hL, ⟨E.mapDerivedCategory.preimageIso
+    ((originFixedDerivedIso T B).app L ≪≫ e)⟩⟩
+
+private theorem etaleOrigin_iff (K : OriginDerivedCategory T B) :
+    etaleOriginBoundedConstructible T B K ↔
+      ∃ L : Etale.DerivedCategoryModule (ULift.{u + 1, u} B) T,
+        Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1, u} B) T L ∧
+          Nonempty ((originDerivedComparison T B).obj L ≅ K) := by
+  constructor
+  · rintro ⟨L, ⟨hc, hb⟩, he⟩
+    refine ⟨L, ⟨?_, hb⟩, he⟩
+    intro q
+    obtain ⟨S, _, hS⟩ := hc q
+    exact ⟨S, hS⟩
+  · rintro ⟨L, ⟨hc, hb⟩, he⟩
+    refine ⟨L, ⟨?_, hb⟩, he⟩
+    intro q
+    obtain ⟨S, hS⟩ := hc q
+    exact ⟨S, S.isConstructible_stratum, hS⟩
 
 /-- Both equivalences are induced by the specified comparison, expressed by natural
 isomorphisms after the full inclusions. The last equality compares object properties
@@ -248,6 +505,78 @@ theorem constructible_proEtale_origin
     (n : ℕ) (hn : 1 ≤ n) (T : Scheme.{u}) :
     @ConstructibleOriginComparison.{u} T (Padic.coefficientExtensionRing l E n) _
       (Padic.finite_coefficientExtensionRing l E n hn) := by
-  sorry
+  classical
+  let B := Padic.coefficientExtensionRing l E n
+  let : Finite B := Padic.finite_coefficientExtensionRing l E n hn
+  let A := ULift.{u + 1, u} B
+  let ν := comparisonUpperStar (ModuleCat.{u + 1} A) T
+  let R := Scheme.proEtaleModuleRestriction T B
+  have : R.IsEquivalence := Scheme.proEtaleModuleRestriction_isEquivalence T B
+  let F := originComparison T B ⋙ originConstantModules T B
+  let P : ObjectProperty (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
+    Scheme.IsConstructibleEtaleModuleSheaf
+  let Q : ObjectProperty (Scheme.proEtaleRingModules T
+      (Scheme.proEtaleConstantRing T B)) := Scheme.IsConstructibleProEtaleModuleSheaf T B
+  let eF : F ⋙ R ≅ ν := originFixedComparisonIso T B
+  have : (F ⋙ R).Full := Functor.Full.of_iso eF.symm
+  have : (F ⋙ R).Faithful := Functor.Faithful.of_iso eF.symm
+  have : F.Full := Functor.Full.of_comp_faithful F R
+  have : F.Faithful := Functor.Faithful.of_comp F R
+  have hp (G : P.FullSubcategory) : Q (F.obj G.obj) := by
+    apply (Scheme.proEtaleModuleRestriction_constructible_iff T B _).mpr
+    have : Scheme.IsConstructibleSheaf G.obj :=
+      (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp G.property
+    exact isConstructible_of_iso (eF.app G.obj).symm
+      (isConstructible_comparisonUpperStar_obj G.obj)
+  let H := Q.lift (P.ι ⋙ F) hp
+  have : H.EssSurj := ⟨fun M ↦ by
+    obtain ⟨G, hG, ⟨eG⟩⟩ := exists_isConstructibleSheaf_iso_comparisonUpperStar_obj A
+      ((Scheme.proEtaleModuleRestriction_constructible_iff T B _).mp M.property)
+    let G' : P.FullSubcategory :=
+      ⟨G, (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr hG⟩
+    exact ⟨G', ⟨Q.isoMk (R.preimageIso (eF.app G ≪≫ eG))⟩⟩⟩
+  have : H.IsEquivalence := {}
+  refine ⟨⟨H.asEquivalence, ⟨Iso.refl _⟩⟩, ?_, ?_⟩
+  · let P' := Etale.DerivedCategory.isBoundedConstructible A T
+    let Q' := intrinsicOriginBoundedConstructible T B
+    let D := originDerivedComparison T B
+    let J := Q'.lift (P'.ι ⋙ D)
+      (fun L ↦ intrinsicOrigin_image T B L.obj L.property)
+    have hplus (L : P'.FullSubcategory) : DerivedCategory.TStructure.t.plus L.obj := by
+      obtain ⟨a, b, _, hz⟩ := L.property.2
+      exact ⟨a, (DerivedCategory.isGE_iff L.obj a).mpr (fun q hq ↦ hz q (Or.inl hq))⟩
+    have hbij (L M : P'.FullSubcategory) : Function.Bijective
+        (fun f : L.obj ⟶ M.obj ↦ D.map f) := by
+      let E' := originFixedModules T B
+      let e := originFixedDerivedIso T B
+      have hb := bijective_comparisonUpperStar_mapDerivedCategory_map
+        (A := ModuleCat.{u + 1} A) (X := T) L.obj M.obj (hplus M)
+      have hcomp : Function.Bijective
+          (fun f : L.obj ⟶ M.obj ↦ E'.mapDerivedCategory.map (D.map f)) := by
+        have heq : (fun f : L.obj ⟶ M.obj ↦ E'.mapDerivedCategory.map (D.map f)) =
+            fun f ↦ (e.app L.obj).hom ≫ ν.mapDerivedCategory.map f ≫ (e.app M.obj).inv := by
+          funext f
+          exact (NatIso.naturality_2 e f).symm
+        rw [heq]
+        exact ((e.app L.obj).homCongr (e.app M.obj)).symm.bijective.comp hb
+      exact ⟨fun f g h ↦ hcomp.1 (congrArg E'.mapDerivedCategory.map h), fun f ↦ by
+        obtain ⟨g, hg⟩ := hcomp.2 (E'.mapDerivedCategory.map f)
+        exact ⟨g, E'.mapDerivedCategory.map_injective hg⟩⟩
+    have : J.Full := ⟨fun {L M} f ↦ by
+      obtain ⟨g, hg⟩ := (hbij L M).2 f.hom
+      exact ⟨P'.homMk g, Q'.hom_ext hg⟩⟩
+    have : J.Faithful := ⟨fun {L M} f g h ↦
+      P'.hom_ext ((hbij L M).1 (congrArg (·.hom) h))⟩
+    have : J.EssSurj := ⟨fun K ↦ by
+      obtain ⟨L, hL, ⟨e⟩⟩ := intrinsicOrigin_preimage T B K.obj K.property
+      exact ⟨⟨L, hL⟩, ⟨Q'.isoMk e⟩⟩⟩
+    have : J.IsEquivalence := {}
+    exact ⟨J.asEquivalence, ⟨Iso.refl _⟩⟩
+  · funext K
+    apply propext
+    rw [etaleOrigin_iff]
+    exact ⟨intrinsicOrigin_preimage T B K, fun ⟨L, hL, ⟨e⟩⟩ ↦
+      intrinsicOrigin_iso T B e (intrinsicOrigin_image T B L hL)⟩
+
 
 end AlgebraicGeometry.ProEtale

@@ -32,169 +32,75 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 ($\\nu_T^*$ preserves constructibility).* Let $G$ be a constructible sheaf of $A$-modules on $T_{\\Et}$, with a partition $T=\\bigsqcup_{\\nu=1}^NT_\\nu$ by locally closed constructible subschemes $i_\\nu:T_\\nu\\to T$ such that every $i_\\nu^{-1}G$ is lisse (locally constant with finite stalks) [def-weil-pbc-constructible-complexes]. The sheaf $\\nu_T^*G$ is a sheaf of $A$-modules on $T_{\\Proet}$ [def-weil-pbc-site-comparison-morphism]. For every $\\nu$, the pro-étale inverse image of $\\nu_T^*G$ along $i_\\nu$ is $i_{\\nu,\\Proet}^{-1}\\nu_T^*G\\cong\\nu_{T_\\nu}^*i_{\\nu,\\Et}^{-1}G$ by [lem-weil-pbc-comparison-pullback] (the module inverse image of [def-weil-proetale-constructible-sheaf] is the sheaf inverse image, the coefficient sheaves being constant: $i_\\nu^{-1}A_T=A_{T_\\nu}$). By [lem-sf-proetale-locally-constant-origin] (a) this is locally constant with finite stalks on $(T_\\nu)_{\\Proet}$. Hence the same partition shows that $\\nu_T^*G$ is constructible in the sense of [def-weil-proetale-constructible-sheaf].",
+   "text": "Forgetting commutativity preserves sheafification: a commutative-ring sheafification equivalence is locally injective and surjective, and these conditions depend only on the unchanged underlying functions. Apply sheafComposeNatTrans to prove isIso_originConstantRingComparison. Its factorization through the sheafification unit proves originScalar_fac. The module sheafification unit is therefore linear after restriction to constant scalars; its underlying additive map is the invertible sheafification unit of an additive sheaf. This constructs originRealizationUnit and proves it invertible. The finite coefficient realization equivalence then makes originFixedModules an additive equivalence and identifies originComparison with fixed-module comparison.",
    "uses": [
-    "def-weil-pbc-constructible-complexes",
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-sf-proetale-locally-constant-origin",
-    "def-weil-proetale-constructible-sheaf"
+    "def-weil-pbc-proetale-modules",
+    "lem-weil-pbc-proetale-constant-module-encoding"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Pro-etale Cohomology, proof of Lemma Tag 09AK (label lemma-compare-constructible), first two sentences ($\\epsilon^{-1}$ commutes with restriction to the strata); literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf, Lemma 5.4.1, p. 39, and Corollary 5.1.5, p. 35"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 2 (full faithfulness; classical sheaves).* By [prop-weil-pbc-site-comparison-finite-level] the unit $\\eta_G:G\\to\\nu_{T,*}\\nu_T^*G$ is an isomorphism for every sheaf of $A$-modules $G$ on $T_{\\Et}$. Hence for two such sheaves $G,G'$ the map $\\operatorname{Hom}(G,G')\\to\\operatorname{Hom}(\\nu_T^*G,\\nu_T^*G')$ induced by $\\nu_T^*$ is the composite of $(\\eta_{G'})_*:\\operatorname{Hom}(G,G')\\xrightarrow{\\sim}\\operatorname{Hom}(G,\\nu_{T,*}\\nu_T^*G')$ with the adjunction bijection $\\operatorname{Hom}(G,\\nu_{T,*}\\nu_T^*G')\\cong\\operatorname{Hom}(\\nu_T^*G,\\nu_T^*G')$ of $\\nu_T^*\\dashv\\nu_{T,*}$ [def-weil-pbc-site-comparison-morphism], so it is bijective: $\\nu_T^*$ is fully faithful on sheaves of $A$-modules, in particular on constructible ones. Call a sheaf $\\mathcal F$ of $A$-modules on $T_{\\Proet}$ *classical* if $\\mathcal F\\cong\\nu_T^*G$ for some sheaf of $A$-modules $G$ on $T_{\\Et}$. Then $\\mathcal F$ is classical if and only if the counit $\\varepsilon_{\\mathcal F}:\\nu_T^*\\nu_{T,*}\\mathcal F\\to\\mathcal F$ is an isomorphism: if it is, take $G=\\nu_{T,*}\\mathcal F$; conversely, by naturality of $\\varepsilon$ it suffices to treat $\\mathcal F=\\nu_T^*G$, and there the triangle identity $\\varepsilon_{\\nu_T^*G}\\circ\\nu_T^*(\\eta_G)=\\mathrm{id}$ with $\\eta_G$ invertible shows that $\\varepsilon_{\\nu_T^*G}$ is invertible.",
+   "text": "Use the existing fixed-module constructible-origin theorem, preserving the global finite strata, and the two encoding comparisons. The canonical comparison is fully faithful; its restriction to the constructible full subcategories is fully faithful and essentially surjective. The lift is an equivalence, and its inclusion composite agrees with the specified comparison.",
    "uses": [
-    "prop-weil-pbc-site-comparison-finite-level",
-    "def-weil-pbc-site-comparison-morphism"
+    "lem-weil-pbc-fixed-module-constructible-origin",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-weil-pbc-proetale-constant-module-constructibility"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 5.1.2 and Definition 5.1.3, p. 34 ($\\nu^*$ fully faithful because $F\\simeq\\nu_*\\nu^*F$; $F$ classical iff $\\nu^*\\nu_*F\\to F$ is an isomorphism)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 3 (being classical is Zariski-local).* Let $v:V\\hookrightarrow T$ be an open subscheme. The étale and pro-étale sites of $V$ are the localizations of those of $T$ at $V$, so $(\\nu_{T,*}\\mathcal F)|_{V}=\\nu_{V,*}(\\mathcal F|_V)$ (both have sections $\\mathcal F(W)$ over an étale $W\\to V$), and $v^{-1}\\nu_T^*\\cong\\nu_V^*v^{-1}$ by [lem-weil-pbc-comparison-pullback]; under these identifications the restriction of $\\varepsilon_{\\mathcal F}$ to $V$ is $\\varepsilon_{\\mathcal F|_V}$. Now let $T=\\bigcup_aV_a$ be an open cover with every $\\mathcal F|_{V_a}$ classical. By Step 2 every $\\varepsilon_{\\mathcal F|_{V_a}}$ is an isomorphism, i.e. the restriction of $\\varepsilon_{\\mathcal F}$ to every member of the covering $\\{V_a\\to T\\}$ of $T_{\\Proet}$ is an isomorphism; by [lem-cbc-proetale-stalk-conservative] (1) $\\varepsilon_{\\mathcal F}$ is an isomorphism, so $\\mathcal F$ is classical by Step 2.",
+   "text": "Prove fixedDerivedOrigin by bounded devissage. The invertible bounded-below comparison unit makes comparison fully faithful on D-plus. Composing with the full inclusion into D makes its essential image a triangulated subcategory. A constructible fixed-module sheaf in degree zero lies in that image by the sheaf-origin theorem and compatibility of exact derived comparison with singleFunctor. Apply the source-library DerivedCategory.prop_of_bounded: its finite amplitude induction uses the truncation triangle, closure of the essential image under extensions, and the single-degree description. This descends every bounded complex with constructible cohomology to a bounded-below etale complex. Exact comparison commutes with homology. Full faithfulness on sheaves reflects constructibility using the fixed-module origin theorem; faithful exact comparison reflects cohomology vanishing. The preimage is consequently bounded constructible.",
    "uses": [
-    "lem-weil-pbc-comparison-pullback",
-    "lem-cbc-proetale-stalk-conservative",
-    "prop-weil-pbc-site-comparison-finite-level"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 5.1.4, p. 34 (a sheaf that is classical on the members of a cover is classical), here for a Zariski cover; literature/stacks-project/proetale.tex proof of Lemma Tag 09AK, 'it suffices to prove this locally on X'"
-   }
-  },
-  {
-   "text": "*Step 4 (an extension of classical sheaves is classical).* Let $0\\to\\nu_T^*G'\\xrightarrow{a}\\mathcal F\\xrightarrow{b}\\nu_T^*G''\\to0$ be an exact sequence of sheaves of $A$-modules on $T_{\\Proet}$, with $G',G''$ sheaves of $A$-modules on $T_{\\Et}$. By [lem-sf-derived-ses-triangle] there is a distinguished triangle $\\nu_T^*G'\\xrightarrow{a}\\mathcal F\\xrightarrow{b}\\nu_T^*G''\\xrightarrow{\\delta}(\\nu_T^*G')[1]$ in $D(T_{\\Proet},A)$ (sheaves placed in degree $0$). Since $\\nu_T^*$ is exact on sheaves, it induces a triangulated functor $\\nu_T^*:D(T_{\\Et},A)\\to D(T_{\\Proet},A)$ which commutes with shifts and with placing a sheaf in degree $0$ [lem-sf-exact-functor-derived-triangulated]. As $G''$ and $G'[1]$ lie in $\\Dplus(T_{\\Et},A)$, [thm-weil-pbc-site-comparison] gives a unique $\\varphi:G''\\to G'[1]$ with $\\nu_T^*(\\varphi)=\\delta$. By (TR1) choose a distinguished triangle $G''[-1]\\xrightarrow{-\\varphi[-1]}G'\\to H\\to G''$, and rotate it by (TR2) [def-weil-triangulated-category] to the distinguished triangle $G'\\to H\\to G''\\xrightarrow{\\varphi}G'[1]$. Its image $\\nu_T^*G'\\to\\nu_T^*H\\to\\nu_T^*G''\\xrightarrow{\\delta}(\\nu_T^*G')[1]$ is distinguished. Rotating both triangles so that they start with $\\nu_T^*G''\\xrightarrow{\\delta}(\\nu_T^*G')[1]$ and applying (TR3) to the pair $(\\mathrm{id},\\mathrm{id})$ gives a morphism of distinguished triangles whose first two components are identities; by [lem-sf-triangle-morphism-iso] its third component $(\\nu_T^*H)[1]\\to\\mathcal F[1]$ is an isomorphism, so $\\nu_T^*H\\cong\\mathcal F$ in $D(T_{\\Proet},A)$. In the long exact cohomology sequence [lem-sf-derived-homology-long-exact] of $G'\\to H\\to G''\\to$ the outer terms vanish outside degree $0$, so $\\mathcal H^q(H)=0$ for $q\\neq0$ and $H\\cong G[0]$ with $G=\\mathcal H^0(H)$ [lem-sf-derived-concentrated-single]. Applying $\\mathcal H^0$ to $\\nu_T^*(G[0])\\cong\\nu_T^*H\\cong\\mathcal F[0]$ (an exact functor commutes with the cohomology of a complex) gives $\\nu_T^*G\\cong\\mathcal F$: $\\mathcal F$ is classical.",
-   "uses": [
-    "lem-sf-derived-ses-triangle",
-    "lem-sf-exact-functor-derived-triangulated",
     "thm-weil-pbc-site-comparison",
-    "def-weil-triangulated-category",
-    "lem-sf-triangle-morphism-iso",
-    "lem-sf-derived-homology-long-exact",
-    "lem-sf-derived-concentrated-single"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Corollary 5.1.9, p. 35 ($\\nu^*(\\mathrm{Ab}(X_{\\mathrm{et}}))\\subset\\mathrm{Ab}(X_{\\mathrm{proet}})$ is a Serre subcategory, from the equivalence on Ext groups) and Proposition 5.2.6 (1), p. 37 ($\\nu^*$ fully faithful on $D^+$)"
-   }
-  },
-  {
-   "text": "*Step 5 (every constructible pro-étale sheaf is classical).* We prove by induction on $N\\geq0$: for every scheme $Y$ and every sheaf $\\mathcal F$ of $A$-modules on $Y_{\\Proet}$ admitting a partition as in [def-weil-proetale-constructible-sheaf] with at most $N$ nonempty strata, $\\mathcal F$ is classical. If $N=0$ then $Y=\\emptyset$ and $\\mathcal F=0=\\nu_Y^*0$. Let $N\\geq1$, and let $Y=\\bigsqcup_\\nu Y_\\nu$, $i_\\nu:Y_\\nu\\to Y$, be the partition. By Step 3 it suffices to find for every $y\\in Y$ an open $V\\ni y$ with $\\mathcal F|_V$ classical. Let $y\\in Y_k$ and choose an affine open $V\\ni y$ as in [lem-sf-constructible-partition-local-closed-stratum]. The sets $Y_\\nu\\cap V$, with the open subscheme structures of $Y_\\nu\\cap V\\subseteq Y_\\nu$, form a partition of $V$ by locally closed constructible subschemes, and $(\\mathcal F|_V)|_{Y_\\nu\\cap V}$ is the restriction of the locally constant sheaf $i_\\nu^*\\mathcal F$ with finite stalks to an open subscheme of $Y_\\nu$ (inverse images compose [def-weil-proetale-inverse-image]), hence again locally constant with finite stalks; so $\\mathcal F_V:=\\mathcal F|_V$ is constructible for this partition. Put $Z=Y_k\\cap V$: it is closed in $V$, so the immersion $i:Z\\to V$ is a closed immersion; its complement $j:U=V\\setminus Z\\hookrightarrow V$ is quasi-compact because $U$ is quasi-compact and $V$ is affine. By [lem-sf-proetale-open-closed-sequence] there is an exact sequence $0\\to j_!j^*\\mathcal F_V\\to\\mathcal F_V\\to i_*i^*\\mathcal F_V\\to0$. (a) $j^*\\mathcal F_V$ is constructible on $U_{\\Proet}$ for the partition by the $Y_\\nu\\cap U$, $\\nu\\neq k$, which has at most $N-1$ nonempty strata, so by induction $j^*\\mathcal F_V\\cong\\nu_U^*B$ for a sheaf $B$ on $U_{\\Et}$, and $j_!j^*\\mathcal F_V\\cong j_!\\nu_U^*B\\cong\\nu_V^*(j_!B)$ by [lem-cbc-proetale-extension-zero-comparison]. (b) $i^*\\mathcal F_V$ is locally constant with finite stalks on $Z_{\\Proet}$, so $i^*\\mathcal F_V\\cong\\nu_Z^*C$ for a lisse $C$ on $Z_{\\Et}$ by [lem-sf-proetale-locally-constant-origin] (b); the closed immersion $i$ is quasi-compact and quasi-separated, so [prop-weil-pbc-comparison-direct-image] gives $\\nu_V^*Ri_{\\Et,*}C\\cong Ri_{\\Proet,*}\\nu_Z^*C$, and taking $\\mathcal H^0$ (with $\\nu_V^*$ exact and $\\mathcal H^0Ri_*=i_*$) gives $i_*i^*\\mathcal F_V\\cong i_*\\nu_Z^*C\\cong\\nu_V^*(i_*C)$. Thus $\\mathcal F_V$ is an extension of $\\nu_V^*(i_*C)$ by $\\nu_V^*(j_!B)$, and it is classical by Step 4 (applied on $V$).",
-   "uses": [
-    "def-weil-proetale-constructible-sheaf",
-    "lem-sf-constructible-partition-local-closed-stratum",
-    "def-weil-proetale-inverse-image",
-    "lem-sf-proetale-open-closed-sequence",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "lem-sf-proetale-locally-constant-origin",
-    "prop-weil-pbc-comparison-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Pro-etale Cohomology, proof of Lemma Tag 09AK (label lemma-compare-constructible): reduction to $X$ qcqs, induction on the number of strata, a closed stratum $Z=X_k$ near $x$, the sequence of Lemma Tag 09AH, and the comparisons Lemma Tag 09AF ($j_!$) and Tag 09A6 ($i_*$); with literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf, Lemma 6.1.11, p. 43, Lemma 6.2.3 (4), p. 45 ($k_!\\circ\\nu^*\\simeq\\nu^*\\circ k_!$) and Corollary 5.1.9, p. 35, in place of the five lemma"
-   }
-  },
-  {
-   "text": "*Step 6 (a sheaf whose pullback is constructible is constructible; proof of (i)).* Let $G$ be a sheaf of $A$-modules on $T_{\\Et}$ such that $\\nu_T^*G$ is constructible, with partition $T=\\bigsqcup_\\nu T_\\nu$, $i_\\nu:T_\\nu\\to T$. For every $\\nu$, $\\nu_{T_\\nu}^*(i_\\nu^{-1}G)\\cong i_\\nu^{-1}\\nu_T^*G$ [lem-weil-pbc-comparison-pullback] is locally constant with finite stalks, so by [lem-sf-proetale-locally-constant-origin] (b) it is isomorphic to $\\nu_{T_\\nu}^*H_\\nu$ with $H_\\nu$ lisse on $(T_\\nu)_{\\Et}$, and by Step 2 on $T_\\nu$ the isomorphism $\\nu_{T_\\nu}^*(i_\\nu^{-1}G)\\cong\\nu_{T_\\nu}^*H_\\nu$ is $\\nu_{T_\\nu}^*$ of an isomorphism $i_\\nu^{-1}G\\cong H_\\nu$; so $i_\\nu^{-1}G$ is lisse and $G$ is constructible [def-weil-pbc-constructible-complexes]. Now (i): by Step 1, $\\nu_T^*$ carries constructible étale sheaves to constructible pro-étale sheaves; by Step 2 it is fully faithful on them; and every constructible $\\mathcal F$ on $T_{\\Proet}$ is $\\cong\\nu_T^*G$ for some $G$ by Step 5, where $G$ is constructible by what was just shown. So $\\nu_T^*$ is an equivalence between the two categories of constructible sheaves of $A$-modules.",
-   "uses": [
-    "lem-weil-pbc-comparison-pullback",
-    "lem-sf-proetale-locally-constant-origin",
-    "prop-weil-pbc-site-comparison-finite-level",
-    "def-weil-pbc-constructible-complexes",
-    "def-weil-proetale-constructible-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Pro-etale Cohomology, Lemma Tag 09AK (label lemma-compare-constructible), the 'details omitted' that the essential preimage is constructible; literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf, proof of Corollary 5.1.5, p. 35"
-   }
-  },
-  {
-   "text": "*Step 7 ((ii): $\\nu_T^*$ maps $\\Dbc(T_{\\Et},A)$ fully faithfully into the intrinsic class).* Let $L\\in\\Dbc(T_{\\Et},A)$ with $\\mathcal H^q(L)=0$ for $q\\notin[a,b]$ [def-weil-pbc-constructible-complexes]. The functor $\\nu_T^*$ on $D(T_{\\Et},A)$ is applied termwise [lem-sf-exact-functor-derived-triangulated], and an exact functor commutes with the cohomology of a complex, so $\\mathcal H^q(\\nu_T^*L)\\cong\\nu_T^*\\mathcal H^q(L)$ [def-weil-derived-cohomology-sheaves]; this vanishes for $q\\notin[a,b]$ and is constructible for every $q$ by Step 1. So $\\nu_T^*L$ lies in the intrinsic class. Since $\\Dbc(T_{\\Et},A)\\subset\\Dplus(T_{\\Et},A)$ [def-weil-pbc-derived-categories], $\\nu_T^*$ is fully faithful on it by [thm-weil-pbc-site-comparison].",
-   "uses": [
-    "def-weil-pbc-constructible-complexes",
-    "lem-sf-exact-functor-derived-triangulated",
-    "def-weil-derived-cohomology-sheaves",
-    "def-weil-pbc-derived-categories",
-    "thm-weil-pbc-site-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Pro-etale Cohomology, Lemma Tag 09AL (label lemma-compare-constructible-derived), first half; literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf, Proposition 5.2.6 (1), p. 37"
-   }
-  },
-  {
-   "text": "*Step 8 ((ii): essential surjectivity, by induction on the amplitude).* Let $K\\in D(T_{\\Proet},A)$ have constructible cohomology sheaves vanishing outside $[a,b]$; we find $K'\\in\\Dbc(T_{\\Et},A)$ with $\\nu_T^*K'\\cong K$, by induction on $b-a$ (if $K\\cong0$ take $K'=0$). If $a=b$, then $K\\cong\\mathcal H^a(K)[-a]$ [lem-sf-derived-concentrated-single], and by (i) $\\mathcal H^a(K)\\cong\\nu_T^*F'$ with $F'$ constructible, so $K\\cong\\nu_T^*(F'[-a])$ [lem-sf-exact-functor-derived-triangulated]. If $a<b$, take the truncation triangle $K_1\\to K\\to K_2\\xrightarrow{\\delta}K_1[1]$ of [lem-sf-derived-truncation-triangle] for $b$: $\\mathcal H^q(K_1)=0$ for $q>b-1$ and $\\mathcal H^q(K_2)=0$ for $q<b$, so by the long exact sequence [lem-sf-derived-homology-long-exact] $\\mathcal H^q(K_1)\\cong\\mathcal H^q(K)$ for $q\\leq b-1$ and $\\mathcal H^q(K_2)\\cong\\mathcal H^q(K)$ for $q\\geq b$; thus $K_1$ has constructible cohomology in $[a,b-1]$ and $K_2$ has cohomology only in degree $b$. By induction $K_1\\cong\\nu_T^*L'$ with $L'\\in\\Dbc(T_{\\Et},A)$, and by the case $a=b$, $K_2\\cong\\nu_T^*M'$ with $M'=F'_b[-b]$. Transported along these isomorphisms, $\\delta$ becomes a morphism $\\nu_T^*M'\\to\\nu_T^*(L'[1])$, which by [thm-weil-pbc-site-comparison] is $\\nu_T^*(\\varphi)$ for a unique $\\varphi:M'\\to L'[1]$ in $\\Dplus(T_{\\Et},A)$. As in Step 4, (TR1) and (TR2) [def-weil-triangulated-category] give a distinguished triangle $L'\\to K'\\to M'\\xrightarrow{\\varphi}L'[1]$; its image under the triangulated functor $\\nu_T^*$ [lem-sf-exact-functor-derived-triangulated] and the truncation triangle agree on the morphism $\\nu_T^*M'\\to\\nu_T^*(L'[1])$, so after rotation (TR3) gives a morphism of distinguished triangles with two components isomorphisms, and [lem-sf-triangle-morphism-iso] gives $\\nu_T^*K'\\cong K$. Finally $K'\\in\\Dbc(T_{\\Et},A)$: $\\nu_T^*\\mathcal H^q(K')\\cong\\mathcal H^q(K)$ (Step 7), which is $0$ for $q\\notin[a,b]$, whence $\\mathcal H^q(K')\\cong\\nu_{T,*}\\nu_T^*\\mathcal H^q(K')=0$ [prop-weil-pbc-site-comparison-finite-level]; and is constructible for every $q$, whence $\\mathcal H^q(K')$ is constructible by Step 6. This step uses only the étale side and the comparison, not that the intrinsic pro-étale class is triangulated.",
-   "uses": [
+    "lem-weil-pbc-fixed-module-constructible-origin",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-sf-derived-truncation-triangle",
     "lem-sf-derived-concentrated-single",
     "lem-sf-exact-functor-derived-triangulated",
-    "lem-sf-derived-truncation-triangle",
-    "lem-sf-derived-homology-long-exact",
-    "thm-weil-pbc-site-comparison",
-    "def-weil-triangulated-category",
-    "lem-sf-triangle-morphism-iso",
-    "prop-weil-pbc-site-comparison-finite-level",
-    "def-weil-pbc-constructible-complexes"
+    "def-weil-derived-cohomology-sheaves"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 5.2.6 (3), p. 37 (the essential image of $\\nu^*$ on $D^+$ consists of the complexes whose cohomology sheaves are classical; 'chasing triangles and truncations'), made explicit for bounded complexes; literature/stacks-project/proetale.tex, Lemma Tag 09AL"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 9 (the two readings agree).* By [def-weil-pbc-proetale-modules] the étale-origin reading of the bounded constructible pro-étale category consists of the objects $K\\in D(T_{\\Proet},A)$ isomorphic to $\\nu_T^*L$ for some $L\\in\\Dbc(T_{\\Et},A)$. By Step 7 every such object lies in the intrinsic class, and by Step 8 every object of the intrinsic class is of this form. So the two full subcategories of $D(T_{\\Proet},A)$ have the same objects, and $\\nu_T^*$ is an equivalence from $\\Dbc(T_{\\Et},A)$ onto either of them.",
+   "text": "Derive the additive encoding equivalence. Functor.mapDerivedCategoryCompIso and mapDerivedCategoryNatIso identify the recorded derived comparison after encoding with fixed-module derived comparison. Exactness and the constructibility encoding theorem prove intrinsicOrigin_image. Apply fixedDerivedOrigin to the encoded intrinsic complex and lift the resulting isomorphism through the fully faithful derived encoding to obtain intrinsicOrigin_preimage. Restrict the recorded derived comparison to the bounded constructible full subcategories. Its Hom maps are bijective by bounded-below comparison and the encoding isomorphism, and intrinsicOrigin_preimage gives essential surjectivity. Thus this restricted functor is an equivalence with the required inclusion isomorphism.",
    "uses": [
-    "def-weil-pbc-proetale-modules"
+    "def-weil-pbc-proetale-modules",
+    "lem-weil-pbc-proetale-constant-module-constructibility",
+    "thm-weil-pbc-site-comparison",
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-weil-pbc-constructible-complexes"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Pro-etale Cohomology, Lemma Tag 09AL (label lemma-compare-constructible-derived)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Unfold the recorded etale-origin property. Its explicit stratification predicate equals isBoundedConstructible: Stratification already records constructibility of every stratum. Intrinsic constructibility is invariant under isomorphism, by the fixed-module encoding and cohomology functors. intrinsicOrigin_image and intrinsicOrigin_preimage therefore give both implications between the intrinsic and etale-origin properties. Apply propositional and function extensionality. Finally specialize the finite ring to the positive-level coefficient quotient, using its recorded finiteness theorem.",
+   "uses": [
+    "def-weil-pbc-proetale-modules",
+    "def-weil-pbc-constructible-complexes",
+    "lem-weil-pbc-proetale-constant-module-constructibility",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-constructible-complexes",
-  "def-weil-pbc-site-comparison-morphism",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-sf-proetale-locally-constant-origin",
-  "def-weil-proetale-constructible-sheaf",
-  "prop-weil-pbc-site-comparison-finite-level",
-  "lem-cbc-proetale-stalk-conservative",
-  "lem-sf-derived-ses-triangle",
-  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-pbc-proetale-modules",
+  "lem-weil-pbc-proetale-constant-module-encoding",
+  "lem-weil-pbc-fixed-module-constructible-origin",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
   "thm-weil-pbc-site-comparison",
-  "def-weil-triangulated-category",
-  "lem-sf-triangle-morphism-iso",
-  "lem-sf-derived-homology-long-exact",
-  "lem-sf-derived-concentrated-single",
-  "lem-sf-constructible-partition-local-closed-stratum",
-  "def-weil-proetale-inverse-image",
-  "lem-sf-proetale-open-closed-sequence",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "prop-weil-pbc-comparison-direct-image",
-  "def-weil-derived-cohomology-sheaves",
-  "def-weil-pbc-derived-categories",
   "lem-sf-derived-truncation-triangle",
-  "def-weil-pbc-proetale-modules"
+  "lem-sf-derived-concentrated-single",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-l-adic-coefficient-extension"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Pro-etale Cohomology, Section 61.27, Lemma Tag 09AK (label lemma-compare-constructible) and Lemma Tag 09AL (label lemma-compare-constructible-derived); the comparison inputs follow literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf, §5.1 (Lemmas 5.1.2, 5.1.4, Corollaries 5.1.5, 5.1.9, pp. 34-35), Proposition 5.2.6, p. 37, §6.1 Lemma 6.1.11, p. 43, §6.2 Lemma 6.2.3 (4), p. 45"
+  "place": "Tags 09AK and 09AL, labels lemma-compare-constructible and lemma-compare-constructible-derived; B2 Lean proof reuses the fixed-module origin theorem and the bounded-devissage induction DerivedCategory.prop_of_bounded (2026-10-18)."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -278,5 +184,15 @@
   "group": "Q14",
   "result": "pass",
   "note": "Wrote review.md. Checked statement clauses, dependencies, canonical constructions, universes, edge cases, docstrings, and verbatim signatures. Both immutable Lean modules compile cleanly through scompile.py’s local side overlay. No fixes required; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-ccd22",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261019T002504-L-2140805",
+  "kind": "proof",
+  "note": "independent cc review: delivered ProEtaleConstructibleOrigin.lean vs live clone (only imports, two sorry→proofs, private helpers) and node vs Lean; #print axioms clean; 51/51 direct importers compiled; unit sk-prop-sf-comparison realized empty"
  }
 }
