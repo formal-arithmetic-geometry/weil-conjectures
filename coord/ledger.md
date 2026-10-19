@@ -17624,3 +17624,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:28 L: merged deliver/Z5/Sheaf.Paper.FlatRingedCechBaseChange (stage 3; reviewer PASS; first push; landing 20261019T192857-L-1879681 (interface); batch 20261019T192638; modules 2; new nodes 1)
 - 19:28 L: merged deliver/Z9/Sheaf.Paper.LocalizeRingedSiteMorphism (stage 3; reviewer PASS; first push; landing 20261019T192859-L-1880046 (proof); batch 20261019T192638; modules 1; new nodes 0)
 - 19:29 L: merged deliver/Z9/Sheaf.Paper.RationalRestrictionGlue (stage 3; reviewer PASS; first push; landing 20261019T192900-L-1880384 (proof); batch 20261019T192638; modules 1; new nodes 0)
+- 19:31 L: merged deliver/NQ/cor-coef-verdier-weil-equivariance (stage 2; reviewer PASS; parallel immutable checks)
