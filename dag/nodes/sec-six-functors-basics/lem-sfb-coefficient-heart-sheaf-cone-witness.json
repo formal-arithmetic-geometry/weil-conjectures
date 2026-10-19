@@ -1,0 +1,135 @@
+{
+ "id": "lem-sfb-coefficient-heart-sheaf-cone-witness",
+ "kind": "statement",
+ "title": "Finite cone construction of a shifted constructible coefficient sheaf",
+ "statement": "Let $\\ell$ be prime, let $X$ be a Noetherian scheme, and let $\\Lambda=E$ for a finite intermediate extension $\\mathbf Q_\\ell\\subset E\\subset \\overline{\\mathbf Q}_\\ell$, or $\\Lambda=\\overline{\\mathbf Q}_\\ell$, with the recorded condensed coefficient sheaves. Let $M$ be a constructible $\\Lambda_X$-module in the finite constant scalar model convention [sk-def-sfb-constructible], let $n\\in\\mathbf Z$, and let $K\\in D(X_{\\mathrm{pro\\acute et}},\\Lambda)$ [def-weil-abstract-derived-category] be isomorphic to $M[0][n]$. There exist $N\\geq0$ and objects $F_0,\\ldots,F_N$ with $F_N=K$ such that each $F_r$ is either isomorphic to $a_!L[m]$ for a locally closed immersion $a:S\\hookrightarrow X$, a lisse $\\Lambda_S$-module $L$, and $m\\in\\mathbf Z$ [sk-lem-coefficient-heart; det-lem-coefficient-heart-filtration], or belongs to a distinguished triangle $F_i\\to F_j\\to F_r[m]\\to F_i[1]$ for some $i,j<r$ and $m\\in\\mathbf Z$ [def-weil-triangulated-category].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-coefficient-heart-ii/sk-cor-coefficient-heart-ii-generation.proof.md",
+  "place": "Single sheaves paragraph: filtration, short exact sequence triangles and shifts"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-constructible",
+  "sk-lem-coefficient-heart",
+  "det-lem-coefficient-heart-filtration",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Unfold the finite-constant-model constructibility predicate on a Noetherian scheme to obtain a finite adapted stratification. Forget only its constructibility fields using a generic predicate on immersions, then apply the common-stratification assertion to obtain open prefixes and lisse refined restrictions. Finite free scalar models give adaptedness for the filtration theorem.",
+   "uses": [
+    "det-lem-coefficient-heart-common-stratification",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the counit-image filtration theorem. Its endpoints are bottom and top subobjects, its inclusions are monomorphisms, and its successive cokernels are the specified locally closed extensions of lisse restrictions.",
+   "uses": [
+    "det-lem-coefficient-heart-filtration"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Concatenate finite witnesses with Fin.append and append each cone with Fin.snoc. Each subobject inclusion and its cokernel form a short exact sequence. Shift its degree-zero distinguished triangle and inversely rotate it; natural-number induction constructs the tower. The zero lisse module gives the initial generator. Prove preservation of zero by the locally closed extension first for a generic condensed ring to avoid unfolding coefficient instances.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use shift-addition isomorphisms for the shifted quotient generators. Identify the top subobject with M and append a distinguished contractible triangle to transport the last vertex through each isomorphism, including the given isomorphism to K. The zero-object base also handles empty or non-strict filtrations and rank-zero quotients.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-lem-coefficient-heart-common-stratification",
+  "sk-def-sfb-constructible",
+  "det-lem-coefficient-heart-filtration",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-weil-triangulated-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-coefficient-heart-ii/sk-cor-coefficient-heart-ii-generation.proof.md",
+  "place": "Single sheaves paragraph: filtration, short exact sequence triangles and shifts"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A constructible sheaf is a finite extension of extensions by zero of lisse sheaves",
+   "results": "CategoryTheory.Sheaf.isConstant_iff_mem_essImage, LightCondensed.lanLightCondSet, Topology.IsLocallyConstructible, SheafOfModules.isFinitePresentation, CategoryTheory.sheafIsAbelian, TopCat.Sheaf.forget, CategoryTheory.Sheaf.IsConstant, Condensed.lanCondensedSet",
+   "date": "2026-10-19",
+   "verdict": "No exact match; the results do not give this finite cone witness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible sheaf admits a finite filtration with lisse locally closed extensions by zero as successive quotients",
+   "results": "SheafOfModules.IsFiniteType, SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.Presentation.IsFinite, Topology.IsConstructible.isLocallyConstructible, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.GeneratingSections.IsFiniteType",
+   "date": "2026-10-19",
+   "verdict": "No exact match; the results do not give this finite cone witness."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|lisse|extension.by.zero",
+   "results": "No hits",
+   "date": "2026-10-19",
+   "verdict": "No exact match; the results do not give this finite cone witness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientHeartGeneration",
+  "date": "2026-10-19",
+  "group": "P7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-cor-coefficient-heart-ii-generation",
+   "place": "Single sheaves paragraph: filtration, short exact sequence triangles and shifts",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-coefficient-heart-ii",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientHeartSheafConeWitness",
+  "file": "lean/Sheaf/Paper/CoefficientHeartSheafConeWitness.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientHeart_sheaf_cone_witness",
+  "statement": "theorem coefficientHeart_sheaf_cone_witness (ℓ : ℕ) [Fact ℓ.Prime]\n    (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})\n    [IsCommMonObj (coefficientHeartRingObj Λ)]\n    (hΛ : (∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ),\n      FiniteDimensional ℚ_[ℓ] E ∧ Λ = Profinite.padicSubfieldCondensedRing ℓ E) ∨\n      Λ = Profinite.padicAlgClCondensedRing ℓ)\n    (X : Scheme.{u}) [IsNoetherian X]\n    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (coefficientHeartRingObj Λ) X))\n    (hM : IsConstantModelConstructible (coefficientHeartRingObj Λ) X M)\n    (n : ℤ) (K : DerivedCategory\n      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n        (condensedRingObj (coefficientHeartRingObj Λ) X)))\n    (hK : Nonempty (K ≅ ((DerivedCategory.singleFunctor _ 0).obj M)⟦n⟧)) :\n    ∃ (N : ℕ) (F : Fin (N + 1) → DerivedCategory\n      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n        (condensedRingObj (coefficientHeartRingObj Λ) X))),\n      F (Fin.last N) = K ∧ ∀ r : Fin (N + 1),\n        (∃ (S : Scheme.{u}) (a : S ⟶ X) (ha : IsImmersion a)\n          (L : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})\n            (condensedRingObj (coefficientHeartRingObj Λ) S)) (n : ℤ),\n          IsLisseCoefficientModule (coefficientHeartRingObj Λ) L ∧\n            Nonempty (F r ≅ ((DerivedCategory.singleFunctor _ 0).obj\n              ((coefficientHeartLocallyClosedExtension\n                (coefficientHeartRingObj Λ) a ha).obj L))⟦n⟧)) ∨\n        (∃ (i j : Fin (N + 1)), i < r ∧ j < r ∧\n          ∃ (n : ℤ) (f : F i ⟶ F j) (g : F j ⟶ (F r)⟦n⟧)\n            (h : (F r)⟦n⟧ ⟶ (F i)⟦(1 : ℤ)⟧),\n            Pretriangulated.Triangle.mk f g h ∈ distTriang _)",
+  "branch": "sheaf-dag",
+  "by": "P7",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261019T154021-L-3028121",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261019T154021-L-3028121",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

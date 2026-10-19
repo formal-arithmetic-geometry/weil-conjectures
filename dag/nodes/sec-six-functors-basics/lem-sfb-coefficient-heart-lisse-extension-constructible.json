@@ -1,0 +1,131 @@
+{
+ "id": "lem-sfb-coefficient-heart-lisse-extension-constructible",
+ "kind": "statement",
+ "title": "Constructibility of a locally closed lisse coefficient extension",
+ "statement": "Let $\\ell$ be prime, let $X$ be a Noetherian scheme, and let $\\Lambda=E$ for a finite intermediate extension $\\mathbf Q_\\ell\\subset E\\subset \\overline{\\mathbf Q}_\\ell$, or $\\Lambda=\\overline{\\mathbf Q}_\\ell$, with the recorded condensed coefficient sheaves. For every locally closed immersion $a:S\\hookrightarrow X$ and lisse $\\Lambda_S$-module $L$ [sk-lem-coefficient-heart], let $a_!L$ be the canonical extension [det-lem-coefficient-heart-filtration], defined by open extension into the scheme-theoretic image followed by closed direct image. Its degree-zero derived object $(a_!L)[0]$ [def-weil-abstract-derived-category] is bounded constructible in the finite constant scalar model convention [sk-def-sfb-constructible].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-coefficient-heart-ii/sk-cor-coefficient-heart-ii-generation.proof.md",
+  "place": "Converse paragraph: constructibility of each unshifted generator"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-constructible",
+  "sk-lem-coefficient-heart",
+  "det-lem-coefficient-heart-filtration",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Factor a into the open immersion into its scheme-theoretic closure followed by the closed immersion into X. Every open in either ambient space is quasi-compact by Noetherianity, so the complementary open immersions satisfy the quasi-compactness hypotheses.",
+   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the condensed open-closed recollement comparisons and the existing disjoint-support pullback vanishing lemma. The open unit identifies the open restriction of u_!L with L; the complementary restriction is zero. Closed recollement similarly identifies the closed restriction of i_*M with M and its open restriction with zero. Finite locally free modules have finite constant models: the inverse image of the finite free module on the point is finite free of the same rank, since the monoidal pullback preserves finite biproducts.",
+   "uses": [
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-weil-pbc-module-constructible-extension-zero",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Combine stratifications first for an arbitrary predicate on schemes with maps to X, using the existing open-closed concatenation. Then specialize this predicate to finite constant local models of the module restriction, transporting models by the pullback-composition isomorphism. Apply the open case and then the closed case to the two factors of the canonical extension. For the degree-zero derived object, boundedness is immediate; its zeroth cohomology is the module, up to the single-functor comparison, and all other cohomology vanishes. Constructibility transports under isomorphism and a zero module has a rank-zero constant model.",
+   "uses": [
+    "det-def-sfb-constructible-tor-amplitude",
+    "sk-def-sfb-constructible",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-weil-pbc-module-constructible-extension-zero",
+  "sk-prop-sfb-cartesian-coefficients",
+  "det-def-sfb-constructible-tor-amplitude",
+  "sk-def-sfb-constructible",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-coefficient-heart-ii/sk-cor-coefficient-heart-ii-generation.proof.md",
+  "place": "Converse paragraph: constructibility of each unshifted generator"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero of a lisse sheaf along a locally closed immersion is constructible",
+   "results": "Function.ExtendByZero.linearMap, HasCompactSupport.extend_zero, LightCondensed.lanLightCondSet, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, HasCompactSupport.continuous_extend_zero, ContinuousLinearMap.extend_zero, AlgebraicGeometry.IsImmersion.mk, AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support",
+   "date": "2026-10-19",
+   "verdict": "No match for finite-constant-model constructibility of the specified lisse extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The extension by zero of a lisse sheaf along a locally closed immersion is constructible",
+   "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, Topology.IsLocallyConstructible.isConstructible, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, Topology.IsConstructible.isLocallyConstructible, Topology.IsConstructible.preimage_of_isOpenEmbedding, Topology.IsConstructible.image_of_isClosedEmbedding, PrimeSpectrum.ConstructibleSetData",
+   "date": "2026-10-19",
+   "verdict": "No match for finite-constant-model constructibility of the specified lisse extension."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|lisse|extension.by.zero",
+   "results": "No hits",
+   "date": "2026-10-19",
+   "verdict": "No match for finite-constant-model constructibility of the specified lisse extension."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientHeartGeneration",
+  "date": "2026-10-19",
+  "group": "P7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-cor-coefficient-heart-ii-generation",
+   "place": "Converse paragraph: constructibility of each unshifted generator",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-coefficient-heart-ii",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientHeartLisseExtensionConstructible",
+  "file": "lean/Sheaf/Paper/CoefficientHeartLisseExtensionConstructible.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientHeart_lisse_extension_constructible",
+  "statement": "theorem coefficientHeart_lisse_extension_constructible (ℓ : ℕ) [Fact ℓ.Prime]\n    (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})\n    [IsCommMonObj (coefficientHeartRingObj Λ)]\n    (_hΛ : (∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ),\n      FiniteDimensional ℚ_[ℓ] E ∧ Λ = Profinite.padicSubfieldCondensedRing ℓ E) ∨\n      Λ = Profinite.padicAlgClCondensedRing ℓ)\n    (X : Scheme.{u}) [IsNoetherian X]\n    (S : Scheme.{u}) (a : S ⟶ X) (ha : IsImmersion a)\n    (L : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})\n      (condensedRingObj (coefficientHeartRingObj Λ) S))\n    (hL : IsLisseCoefficientModule (coefficientHeartRingObj Λ) L) :\n    constantModelBoundedConstructible (coefficientHeartRingObj Λ) X\n      ((DerivedCategory.singleFunctor _ 0).obj\n        ((coefficientHeartLocallyClosedExtension (coefficientHeartRingObj Λ) a ha).obj L)) ",
+  "branch": "sheaf-dag",
+  "by": "P7",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261019T154021-L-3028121",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261019T154021-L-3028121",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,123 @@
+{
+ "id": "lem-sfb-bounded-cohomology-cone-witness",
+ "kind": "statement",
+ "title": "Finite cone construction from the cohomology of a bounded derived object",
+ "statement": "Let $A$ be an abelian category with derived category $D(A)$ [def-weil-abstract-derived-category], and let $K\\in D(A)$ have cohomology vanishing outside a finite interval. There exist $N\\geq 0$ and objects $F_0,\\ldots,F_N$ with $F_N=K$ such that, for each $r$, either $F_r\\simeq H^q(K)[n]$ for some $q,n\\in\\mathbf Z$, with $H^q(K)$ placed in degree zero, or there are $i,j<r$ and $n\\in\\mathbf Z$ with a distinguished triangle $F_i\\to F_j\\to F_r[n]\\to F_i[1]$ [def-weil-triangulated-category].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-coefficient-heart-ii/sk-cor-coefficient-heart-ii-generation.proof.md",
+  "place": "Complexes paragraph: successive upper truncations and finite assembly"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Extract lower and upper bounds from the canonical t-structure. Represent K by Q.objPreimage K and transport the bounds to this complex. The lower truncation at a-1 is zero by the homology comparison for its inclusion; the inclusion of the upper truncation at a-1+(b-(a-1)).toNat is a quasi-isomorphism. This formula also handles crossing bounds.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-kun-truncations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each q in the finite interval from a to b, use the successive truncation triangle and inverse rotation to express the q-th truncation as the cone of H^q(K)[-q-1] into the preceding truncation. The signed connecting arrow is retained.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The zero cohomology H^(a-1)(K) gives a one-entry witness for every zero object. Concatenate valid witnesses using Fin.append and append each cone using Fin.snoc. Induct on the natural length of the truncation interval. A degree-q single object is a shift of the degree-zero q-th cohomology of K by the singleFunctors.shiftIso and homologyFunctorFactors comparisons. At the last step, append the isomorphic target as the cone of zero into the last truncation, using the contractible distinguished triangle. These bookkeeping lemmas are fully proved in the delivered module.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-kun-truncations",
+  "lem-weil-pbc-truncation-triangle",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-coefficient-heart-ii/sk-cor-coefficient-heart-ii-generation.proof.md",
+  "place": "Complexes paragraph: successive upper truncations and finite assembly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Bounded derived objects are finite iterated cones of their shifted cohomology objects",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.instIsLEObjSingleFunctor, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.TStructure.t, DerivedCategory.instIsTriangulated, CochainComplex.mappingCone, DerivedCategory.IsGE, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+   "date": "2026-10-19",
+   "verdict": "No exact match; the results do not give this finite cone witness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded derived category object has a finite sequence of cones of shifted cohomology sheaves",
+   "results": "DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.isLE_iff, DerivedCategory.TStructure.t",
+   "date": "2026-10-19",
+   "verdict": "No exact match; the results do not give this finite cone witness."
+  },
+  {
+   "tool": "grep",
+   "query": "singleTriangle_distinguished|truncation_triangle",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/SingleTriangle.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExtClass.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExtClass.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean",
+   "date": "2026-10-19",
+   "verdict": "No exact match; the results do not give this finite cone witness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientHeartGeneration",
+  "date": "2026-10-19",
+  "group": "P7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-cor-coefficient-heart-ii-generation",
+   "place": "Complexes paragraph: successive upper truncations and finite assembly",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-coefficient-heart-ii",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedCategory.BoundedCohomologyConeWitness",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/BoundedCohomologyConeWitness.lean",
+  "declaration": "DerivedCategory.bounded_cohomology_cone_witness",
+  "statement": "theorem bounded_cohomology_cone_witness (A : Type u) [Category.{v} A] [Abelian A]\n    [HasDerivedCategory.{w} A] (K : DerivedCategory A)\n    (hK : TStructure.t.bounded K) :\n    ∃ (N : ℕ) (F : Fin (N + 1) → DerivedCategory A),\n      F (Fin.last N) = K ∧ ∀ r : Fin (N + 1),\n        (∃ q n : ℤ, Nonempty (F r ≅\n          ((singleFunctor A 0).obj ((homologyFunctor A q).obj K))⟦n⟧)) ∨\n        (∃ (i j : Fin (N + 1)), i < r ∧ j < r ∧\n          ∃ (n : ℤ) (f : F i ⟶ F j) (g : F j ⟶ (F r)⟦n⟧)\n            (h : (F r)⟦n⟧ ⟶ (F i)⟦(1 : ℤ)⟧),\n            Pretriangulated.Triangle.mk f g h ∈ distTriang _)",
+  "branch": "sheaf-dag",
+  "by": "P7",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261019T154021-L-3028121",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261019T154021-L-3028121",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

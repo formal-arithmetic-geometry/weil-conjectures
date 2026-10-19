@@ -20,96 +20,44 @@
  ],
  "proof": [
   {
-   "text": "Let $\\mathcal T$ be the class of objects admitting the finite construction in the statement. Its starting class contains $0$: take $a=\\mathrm{id}_X$ and the locally free module of rank zero. Finite witnesses can be concatenated, so a cone of a morphism between two already constructed objects can be appended after their two witnesses. The class is closed under isomorphism: if $B$ has been constructed and $B'\\simeq B$, append $B'$ as a cone of $0\\to B$, whose cone is $B$ by the mapping-cone formula. It is closed under shifts: shift each entry of a finite witness; the generators remain generators. Three rotations of a cone triangle with vertices $A,B,C$ give a distinguished triangle with vertices $A[1],B[1],C[1]$ and signed shifted arrows. Thus $C[1]$ is again a cone of a morphism between the shifted earlier objects; no removal of all three signs is asserted. Three inverse rotations give the same assertion for $[-1]$, and iteration handles every integer shift. These observations prove closure directly for finite witnesses, without taking an infinite closure or adding direct summands.",
+   "text": "Define the finite construction witness with its stated generator predicate and shifted distinguished-cone relation. Prove that valid finite lists concatenate, and append one new cone after the two lists. Strong induction over the position in a witness proves its elimination principle. Applying this principle with the predicate of admitting a second kind of witness proves substitution of witnesses for all generators. These are explicit Fin.append and Fin.snoc constructions in Lean.",
    "uses": [
-    "sk-lem-coefficient-heart",
     "def-weil-abstract-derived-category",
     "def-weil-triangulated-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-coefficient-heart-ii/sk-cor-coefficient-heart-ii-generation.proof.md",
-    "place": "Single sheaves and Complexes: finite witnesses, zero base case, shifts and cone assembly"
-   }
+   "elementary": true
   },
   {
-   "text": "We first prove the converse. Factor $a=i\\circ u$ through the scheme-theoretic closure $Z$ of $S$, where $u:S\\hookrightarrow Z$ is open and $i:Z\\hookrightarrow X$ is closed; by [sk-lem-coefficient-heart], $a_!=i_*u_!$ is exact. Apply [lem-weil-pbc-proetale-ringed-open-closed] first on $Z$ and then on $X$, with the coefficient sheaves identified by [sk-prop-sfb-cartesian-coefficients]. Its formulas give $(a_!L)|_S\\simeq L$, $(a_!L)|_{Z\\setminus S}=0$, and $(a_!L)|_{X\\setminus Z}=0$. Here are the quasi-compactness checks for both applications. By [lem-weil-pbc-noetherian-open-subscheme-noetherian], every open $W$ of $X$ is quasi-compact. By [def-weil-closed-immersion], $Z$ has the topology of a closed subset of $X$. Every open $V$ of $Z$ is $Z\\cap W$ for an open $W$ of $X$, hence is closed in the quasi-compact space $W$ and is quasi-compact: add $W\\setminus V$ to any open cover of $V$ to extract a finite subcover. The inverse image of each affine open under either complementary open immersion is an open of its ambient space $X$ or $Z$, so is quasi-compact by these observations. Thus both complementary open immersions are quasi-compact morphisms, exactly as the ringed open-closed node requires. The three locally closed pieces $S$, $Z\\setminus S$, $X\\setminus Z$, omitting empty pieces, form a finite constructible stratification. On its pieces the restrictions are lisse, including the zero module of rank zero. Thus the constructibility criterion in [sk-lem-coefficient-heart] gives $a_!L\\in\\Cons(X,\\Lambda)$; [sk-def-sfb-constructible] gives $a_!L[n]\\in\\Dbc(X,\\Lambda)$. Finally [det-cor-coefficient-heart-ii-triangulated] and induction on the length of any witness put every object of $\\mathcal T$ in $\\Dbc(X,\\Lambda)$.",
+   "text": "For the forward direction apply the generic bounded-cohomology finite cone witness to K. Each leaf is a shift of a constructible cohomology sheaf. Replace each leaf by its sheaf-filtration cone witness. The substitution lemma concatenates the finite data and preserves the last vertex K.",
    "uses": [
-    "sk-lem-coefficient-heart",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "sk-prop-sfb-cartesian-coefficients",
-    "sk-def-sfb-constructible",
-    "det-cor-coefficient-heart-ii-triangulated",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "def-weil-closed-immersion"
+    "lem-sfb-bounded-cohomology-cone-witness",
+    "lem-sfb-coefficient-heart-sheaf-cone-witness",
+    "sk-def-sfb-constructible"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09AA (lemma-closed-immersion), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09BN (lemma-open-immersion), 09AH (lemma-ses-associated-to-open), 09AG (lemma-jshriek-zero); blueprint proof Converse"
-   }
+   "elementary": true
   },
   {
-   "text": "Let $F\\in\\Cons(X,\\Lambda)$. The constructibility criterion of [sk-lem-coefficient-heart] supplies a finite stratification adapted to $F$. Refine and order it by [det-lem-coefficient-heart-common-stratification](1); part (2) ensures that the restrictions of $F$ are still lisse on the refined strata. Apply [det-lem-coefficient-heart-filtration] with this ordered adapted stratification. It supplies $0=F_0\\subset F_1\\subset\\cdots\\subset F_m=F$, and identifies $F_k/F_{k-1}$ with $A_k=a_{k!}L_k$, where $L_k=F|_{S_k}$ is lisse. Consequently each $0\\to F_{k-1}\\to F_k\\to A_k\\to0$ is short exact in the ambient abelian category of $\\Lambda_X$-modules.",
+   "text": "For the converse, the lisse-extension lemma puts each unshifted generator in the bounded constructible category. Specialize the existing triangulated theorem to the coefficient ring: split the coefficient disjunction and package the finite subextension as FiniteIntermediateField. Its repleteness and shift closure handle each shifted generator. Strong induction over the given finite witness uses cone closure and then undoes the output shift to establish membership of every entry and finally K.",
    "uses": [
-    "sk-lem-coefficient-heart",
-    "det-lem-coefficient-heart-common-stratification",
-    "det-lem-coefficient-heart-filtration"
+    "lem-sfb-coefficient-heart-lisse-extension-constructible",
+    "det-cor-coefficient-heart-ii-triangulated"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-coefficient-heart-ii/sk-cor-coefficient-heart-ii-generation.proof.md",
-    "place": "Single sheaves: the finite filtration, with the existence and ordering of an adapted stratification made explicit"
-   }
-  },
-  {
-   "text": "Regard the short exact sequence in step 3 as a degree-zero short exact sequence of complexes. By [lem-weil-pbc-complex-ses-triangle] it gives a distinguished triangle $F_{k-1}\\to F_k\\to A_k\\xrightarrow{\\delta_k}F_{k-1}[1]$. Inverse rotation, using [def-weil-triangulated-category], gives $A_k[-1]\\xrightarrow{-\\delta_k[-1]}F_{k-1}\\to F_k\\to A_k$. Thus $F_k$ is a cone of a morphism from the generator $A_k[-1]$ to the previously constructed $F_{k-1}$. Start with $F_0=0$ from step 1 and induct on $k=1,\\ldots,m$, appending the generator and then this cone at each stage. This is a finite witness for $F=F_m$. Shifting the witness, as in step 1, gives one for every $F[n]$. If $F=0$, the witness consisting of $0$ already suffices.",
-   "uses": [
-    "lem-weil-pbc-complex-ses-triangle",
-    "def-weil-triangulated-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0152, lemma-derived-canonical-delta-functor; inverse rotation (Tag 0145); blueprint proof Single sheaves"
-   }
-  },
-  {
-   "text": "For $K\\in\\Dbc(X,\\Lambda)$ choose a representing complex $C$ and integers $a\\le b$ with $H^q(C)=0$ outside $[a,b]$; this boundedness and the constructibility of every $H^q(C)$ are exactly [sk-def-sfb-constructible]. Put $T_q=\\tau_{\\le q}C$ in the derived category. The formulas in [def-kun-truncations] give $H^r(T_q)=H^r(C)$ for $r\\le q$ and zero otherwise: below $q$ the kernel and image are unchanged, at $q$ their quotient is $\\ker(d^q)/\\operatorname{im}(d^{q-1})$, and above $q$ every term vanishes. Hence $T_{a-1}$ is acyclic and $T_b\\to C$ is a quasi-isomorphism, so [def-weil-abstract-derived-category] identifies $T_{a-1}\\simeq0$ and $T_b\\simeq K$. For each $q=a,\\ldots,b$, [lem-weil-pbc-truncation-triangle] gives $T_{q-1}\\to T_q\\to H^q(C)[-q]\\xrightarrow{\\partial_q}T_{q-1}[1]$. Inverse rotation gives $H^q(C)[-q-1]\\xrightarrow{-\\partial_q[-1]}T_{q-1}\\to T_q\\to H^q(C)[-q]$. By steps 3–4 its first term has a finite witness. Starting with the witness for $T_{a-1}\\simeq0$, concatenate that witness and the witness for the first term, and append $T_q$ as their cone. Induction through the finite interval $[a,b]$ constructs $T_b$, and the isomorphism closure proved in step 1 constructs $K$ itself. Vanishing cohomology degrees cause no exception, since their first term is zero. If all cohomology vanishes, $0\\to C$ is already a quasi-isomorphism and the zero case of step 1 applies. Together with step 2 this proves both directions.",
-   "uses": [
-    "sk-def-sfb-constructible",
-    "def-kun-truncations",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-truncation-triangle",
-    "def-weil-triangulated-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08J5, remark-truncation-distinguished-triangle (successive upper truncations); Tag 0118, homology-section-truncations; blueprint proof Complexes"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "sk-lem-coefficient-heart",
   "def-weil-abstract-derived-category",
   "def-weil-triangulated-category",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-bounded-cohomology-cone-witness",
+  "lem-sfb-coefficient-heart-sheaf-cone-witness",
   "sk-def-sfb-constructible",
-  "det-cor-coefficient-heart-ii-triangulated",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "def-weil-closed-immersion",
-  "det-lem-coefficient-heart-common-stratification",
-  "det-lem-coefficient-heart-filtration",
-  "lem-weil-pbc-complex-ses-triangle",
-  "def-kun-truncations",
-  "lem-weil-pbc-truncation-triangle"
+  "lem-sfb-coefficient-heart-lisse-extension-constructible",
+  "det-cor-coefficient-heart-ii-triangulated"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-coefficient-heart-ii/sk-cor-coefficient-heart-ii-generation.proof.md",
-  "place": "Converse; Single sheaves; Complexes, with finite-witness details and Stacks Tags 0152, 08J5, 0118, 09AA, 09BM, 09BN, 09AH, 09AG"
+  "place": "Converse, Single sheaves and Complexes; finite witness concatenation and substitution formalized by P7"
  },
  "mathlib_searches": [
   {
@@ -195,11 +143,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-truncation-triangle",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -237,5 +181,15 @@
   "group": "Q61",
   "result": "fix",
   "note": "[launcher 2026-10-18: Codex fallback verdict not landed after the Codex reviewers stopped; handed to the cc lander]"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261019T154021-L-3028121",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
