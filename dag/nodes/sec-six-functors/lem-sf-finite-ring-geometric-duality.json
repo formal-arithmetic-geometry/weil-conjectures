@@ -1,0 +1,108 @@
+{
+ "id": "lem-sf-finite-ring-geometric-duality",
+ "kind": "statement",
+ "title": "Existing finite-ring geometric Verdier duality",
+ "statement": "Let $A$ be a finite commutative ring, let $k$ be an algebraically closed field such that the additive exponent of $A$ is invertible in $k$, and let $a:X\\to\\operatorname{Spec}k$ be separated of finite type. Work in the derived category of ordinary constant-$A$ module sheaves on the small etale site [def-weil-pbc-derived-categories]. Let $D_X=R\\mathcal Hom_A(-,Ra^!A)$ and let $\\delta$ be its canonical evaluation transpose [lem-weil-duality-pairing]. If $K$ is bounded constructible [def-weil-pbc-constructible-complexes] and has finite Tor amplitude [def-kun-tor-amplitude], then $\\delta_K$ is an isomorphism and $D_XK$ is again bounded constructible with finite Tor amplitude. Here separated finite type is as in [def-weil-proper-morphism], without requiring properness.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/VerdierBiduality.lean",
+  "place": "constructibleFiniteTor_verdierDual (line 56) and isIso_verdierDualDoubleDual_app (line 74), with their existing source proofs"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "lem-weil-duality-pairing",
+  "def-weil-pbc-constructible-complexes",
+  "def-kun-tor-amplitude",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing source proofs attached below. Preservation is constructibleFiniteTor_verdierDual: choose a finite dimension bound and apply constructibleFiniteTor_and_torAmplitudeIn_verdierDual_of_perfectField, since an algebraically closed field is perfect. Biduality is isIso_verdierDualDoubleDual_app, proved by isIso_verdierDualDoubleDual_app_of_isAlgClosed in GeometricBidualityInduction. The latter performs simultaneous strong induction on the dimension over algebraically closed fields: nonclosed stalks of the cone vanish by geometric generic fibers of smaller dimension; the remaining finite-support cone has zero proper pushforward by point biduality, hence is zero by its finite-support cohomology calculation; dense compactification and restriction then give the general case. These are already compiled Lean proofs, not new unproved assertions or a second copy of the item theorem. No new Lean module or hole is introduced.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/VerdierBiduality.lean",
+  "place": "The already implemented source proofs, including GeometricBidualityInduction and VerdierPreservation; attached rather than restated in a new Lean module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "Verdier biduality for constructible complexes of finite Tor amplitude on the etale site",
+   "results": [
+    "dualTensorHomEquiv",
+    "TensorProduct.dualDistribEquiv"
+   ],
+   "date": "2026-10-20",
+   "verdict": "No etale geometric duality theorem; results concern algebraic module duals."
+  },
+  {
+   "tool": "Loogle",
+   "query": "\"verdierDual\"",
+   "results": [],
+   "date": "2026-10-20",
+   "verdict": "No Mathlib declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "verdierDual|constructibleFiniteTor",
+   "results": [],
+   "date": "2026-10-20",
+   "verdict": "No Mathlib declaration; the exact proved results are in the source library."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleGeometricBiduality",
+  "date": "2026-10-20",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-etale-geometric-biduality",
+   "place": "Proof: the finite-stage geometric isomorphism and preservation, before the final categorical anti-equivalence assembly.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality",
+  "declaration": "AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app",
+  "declarations": [
+   "AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app",
+   "AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual"
+  ],
+  "statement": "theorem isIso_verdierDualDoubleDual_app [IsAlgClosed k] {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) : IsIso ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) a).app K)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-20",
+  "note": "A source attachment only: both declarations and their proofs already exist. The second clause is constructibleFiniteTor_verdierDual under the same assumptions (it even requires only a perfect field). No new theorem, definition or sorry is added."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261019T192731-L-1860863",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261019T192731-L-1860863",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
