@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
+import Mathlib.RingTheory.Spectrum.Prime.Noetherian
 import Mathlib.AlgebraicGeometry.Limits
 
 /-!
@@ -55,6 +55,22 @@ theorem localSpectrum_open_classification (A : Type u) [CommRing A] [IsNoetheria
     (IsLocalRing.closedPoint A ∈ W → W = ⊤) ∧
       (IsLocalRing.closedPoint A ∉ W →
         Finite W ∧ DiscreteTopology W ∧ IsAffine W.toScheme) := by
-  sorry
+  constructor
+  · exact (IsLocalRing.closedPoint_mem_iff W).mp
+  · intro hW
+    have hmin (p : W) : IsMin (α := PrimeSpectrum A) p.val := by
+      rcases Order.krullDim_le_one_iff.mp hdim p.val with hp | hp
+      · exact hp
+      · have heq : p.val = IsLocalRing.closedPoint A := hp.eq_top
+        exact False.elim (hW (heq ▸ p.property))
+    have : Finite W :=
+      ((PrimeSpectrum.finite_setOfPred_isMin A).subset fun p hp ↦ hmin ⟨p, hp⟩).to_subtype
+    have : T1Space W := t1Space_iff_specializes_imp_eq.mpr fun p q hpq ↦ by
+      apply Subtype.ext
+      exact (hmin q).eq_of_le
+        ((PrimeSpectrum.le_iff_specializes p.val q.val).mpr
+          (hpq.map continuous_subtype_val))
+    have : DiscreteTopology W := inferInstance
+    exact ⟨inferInstance, inferInstance, inferInstance⟩
 
 end AlgebraicGeometry
