@@ -24,7 +24,7 @@
  ],
  "proof": [
   {
-   "text": "Unfold regularity of $\\varphi$ using [def-weil-pbc-g-ring]. The map $A\\to B$ is flat, and for every prime $\\mathfrak p\\subset A$ the ring $F_{\\mathfrak p}=B\\otimes_A\\kappa(\\mathfrak p)$ is Noetherian and geometrically regular over $\\kappa(\\mathfrak p)$. Take the degree-one finite purely inseparable extension $\\kappa(\\mathfrak p)/\\kappa(\\mathfrak p)$ in this definition. The canonical identification $\\kappa(\\mathfrak p)\\otimes_{\\kappa(\\mathfrak p)}F_{\\mathfrak p}\\cong F_{\\mathfrak p}$ sends $a\\otimes x$ to $ax$ with inverse $x\\mapsto1\\otimes x$; hence $F_{\\mathfrak p}$ is regular. By [def-weil-regular-scheme], every prime localization of $F_{\\mathfrak p}$ is therefore a regular local ring.",
+   "text": "Unfold regularity of $\\varphi$ using [def-weil-pbc-g-ring]. The map $A\\to B$ is flat, and for every prime $\\mathfrak p\\subset A$ the ring $F_{\\mathfrak p}=B\\otimes_A\\kappa(\\mathfrak p)$ is Noetherian and geometrically regular over $\\kappa(\\mathfrak p)$. Take a universe-lifted copy of the degree-one finite purely inseparable extension $\\kappa(\\mathfrak p)/\\kappa(\\mathfrak p)$ in this definition. The canonical identification $\\kappa(\\mathfrak p)\\otimes_{\\kappa(\\mathfrak p)}F_{\\mathfrak p}\\cong F_{\\mathfrak p}$ sends $a\\otimes x$ to $ax$ with inverse $x\\mapsto1\\otimes x$; hence $F_{\\mathfrak p}$ is regular. By [def-weil-regular-scheme], every prime localization of $F_{\\mathfrak p}$ is therefore a regular local ring. In Lean use ULift.algEquiv, Module.Finite.of_surjective and AlgEquiv.isPurelyInseparable for this extension, then transport IsRegularRing along Algebra.TensorProduct.congr followed by Algebra.TensorProduct.lid. Only the ring predicates of [def-weil-regular-scheme], already in Mathlib.RingTheory.RegularLocalRing.Defs, are used; no scheme construction is needed.",
    "uses": [
     "def-weil-pbc-g-ring",
     "def-weil-regular-scheme"
@@ -94,7 +94,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 07QK, lemma-reduced-goes-up, proof via Algebra Tags 031R, 0339 and 033A; the regular-fibre reducedness input is expanded using Tags 00NP and 00HN"
+  "place": "Tag 07QK, lemma-reduced-goes-up, proof via Algebra Tags 031R, 0339 and 033A; the regular-fibre reducedness input is expanded using Tags 00NP and 00HN; Lean realization by P6 on 2026-10-19 follows these five steps, with ULift for the identity residue-field extension"
  },
  "mathlib_searches": [
   {
@@ -205,5 +205,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261019T112508-L-3947286",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -17331,3 +17331,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:25 L: merged deliver/P2/Sheaf.AlgebraicGeometry.ProEtaleConstantExact (stage 3; reviewer PASS; first push; landing 20261019T112505-L-3946307 (interface); batch 20261019T112432; modules 1; new nodes 0; change records: coord/changes/P2-proetale-constant-tensor-private-scopes.md)
 - 11:25 L: merged deliver/P2/Sheaf.Paper.EtaleIsoDescent (stage 3; reviewer PASS; first push; landing 20261019T112506-L-3946633 (proof); batch 20261019T112432; modules 1; new nodes 0)
 - 11:25 L: merged deliver/P2/Sheaf.Paper.PurityNormalBundle (stage 3; reviewer PASS; first push; landing 20261019T112507-L-3947029 (proof); batch 20261019T112432; modules 1; new nodes 0)
+- 11:25 L: merged deliver/P6/Sheaf.RingTheory.RegularMapReducedTarget (stage 3; reviewer PASS; first push; landing 20261019T112508-L-3947286 (proof); batch 20261019T112432; modules 1; new nodes 0)
