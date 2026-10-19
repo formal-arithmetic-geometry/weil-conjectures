@@ -17040,3 +17040,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:58 L: returned deliver/Q40/lem-per-regular-model-completion (reviewer RETURN: L: independent stage-2 immutable head ede3020f6122: stage-2 checks: (c) lean/Sheaf/AlgebraicGeometry/RegularModelComplet)
 - 03:58 L: returned deliver/Q32/lem-per-noetherian-base-generic-open-finiteness (reviewer RETURN: Route: the item is on line 1724 of the side coord/route-pivot-dropped.txt, in the 2026-10-19 artin-gabber section. Its o)
 - 03:59 L: returned deliver/Q31/lem-per-dvr-open-image-closed-fibre-finiteness (reviewer RETURN: F1 route-pivot: the item lem-per-dvr-open-image-closed-fibre-finiteness is itself on the 2026-10-19 artin-gabber dropped)
+- 03:59 L: returned deliver/Q147/lem-per-algebraic-dualizing-localization (reviewer RETURN: Error F: the item has been dropped from the route. The mechanical finding is upheld and goes further. In the side coord/)
