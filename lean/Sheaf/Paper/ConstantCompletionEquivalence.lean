@@ -53,6 +53,7 @@ import Sheaf.Paper.KoszulComplex
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 /-!
 # Constant coefficients and their sheafwise adic completion
 
@@ -122,7 +123,11 @@ theorem quotient_step (n : ℕ) :
     ((Functor.const ℕᵒᵖ).obj (constant J A)).map (homOfLE (Nat.le_succ n)).op ≫
         quotient J A I n =
       quotient J A I (n + 1) ≫ (finiteSystem J A I).map (homOfLE (Nat.le_succ n)).op := by
-  sorry
+  simp only [Functor.const_obj_map, finiteSystem,
+    Functor.ofOpSequence_map_homOfLE_succ]
+  change _ = (constantSheaf J CommRingCat).map _ ≫ (constantSheaf J CommRingCat).map _
+  rw [← Functor.map_comp]
+  congr 1
 
 /-- The quotient cone, using the actual quotient maps. Source: Stacks 093M
 (blueprint: lem-weil-pbc-constant-completion-equivalence). -/
@@ -190,7 +195,39 @@ The sections formula determines the ideal subsheaf uniquely, by proof irrelevanc
 theorem kernelIdeal_existsUnique {O S : Sheaf J CommRingCat.{u}} (q : O ⟶ S) :
     ∃! K : RingedSiteIdeal O,
       ∀ U : C, K.sections U = RingHom.ker (q.hom.app (op U)).hom := by
-  sorry
+  let K : RingedSiteIdeal O :=
+    { sections := fun U ↦ RingHom.ker (q.hom.app (op U)).hom
+      restriction := by
+        intro U V g a ha
+        change q.hom.app (op V) (O.obj.map g.op a) = 0
+        have h := ConcreteCategory.congr_hom (q.hom.naturality g.op) a
+        change q.hom.app (op V) (O.obj.map g.op a) =
+          S.obj.map g.op (q.hom.app (op U) a) at h
+        rw [h, ha, map_zero]
+      local_mem := by
+        intro U a T hT ha
+        change q.hom.app (op U) a = 0
+        have hS : Presieve.IsSheaf J (S.obj ⋙ forget CommRingCat) :=
+          (isSheaf_iff_isSheaf_of_type J _).mp
+            ((sheafCompose J (forget CommRingCat)).obj S).property
+        apply (hS.isSeparated T hT).ext
+        intro V g hg
+        change S.obj.map g.op (q.hom.app (op U) a) = S.obj.map g.op 0
+        have h := ConcreteCategory.congr_hom (q.hom.naturality g.op) a
+        change q.hom.app (op V) (O.obj.map g.op a) =
+          S.obj.map g.op (q.hom.app (op U) a) at h
+        rw [← h, map_zero]
+        exact ha V g hg }
+  refine ⟨K, fun _ ↦ rfl, ?_⟩
+  intro L hL
+  have h : L.sections = K.sections := funext hL
+  have hext (M N : RingedSiteIdeal O) (h : M.sections = N.sections) : M = N := by
+    cases M
+    cases N
+    dsimp only at h
+    cases h
+    rfl
+  exact hext L K h
 
 /-- The specified kernel ideal subsheaf, selected by its unique sections formula.
 Source: Stacks 093M (blueprint: lem-weil-pbc-constant-completion-equivalence). -/
@@ -245,6 +282,7 @@ theorem equivalence (J : GrothendieckTopology C) (A : Type u) [CommRing A]
         ObjectProperty.ι (IsComplete (projection J A I 0)) ⋙ dres (coefficientMap J A I)) := by
   sorry
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The ordinary scalar-extension map respects identities and composition.
 Source: Stacks 06YY (blueprint: lem-weil-pbc-constant-completion-equivalence).
 Proof: before sheafification these are the identity and composition laws of the
@@ -255,7 +293,22 @@ theorem change_laws {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S) :
       SheafOfModules.changeOfRingsHom.{u, u, u} φ M (f ≫ g) =
         SheafOfModules.changeOfRingsHom.{u, u, u} φ M f ≫
           SheafOfModules.changeOfRingsHom.{u, u, u} φ N g) := by
-  sorry
+  let := HasDerivedCategory.standard (Mod R)
+  let := HasDerivedCategory.standard (Mod S)
+  obtain ⟨E, hobj, hmap, _, _⟩ :=
+    SheafOfModules.derivedChangeOfRingsIndependentCoefficients φ
+  have hm {M N : Mod R} (f : M ⟶ N) :
+      SheafOfModules.changeOfRingsHom φ M f =
+        eqToHom (hobj M).symm ≫ E.map f ≫ eqToHom (hobj N) := by
+    rw [hmap]
+    simp
+  constructor
+  · intro M
+    rw [hm, E.map_id]
+    simp
+  · intro M N L f g
+    simp only [hm, E.map_comp, Category.assoc, eqToHom_trans_assoc,
+      eqToHom_refl, Category.id_comp]
 
 /-- The additive ordinary scalar extension, with the recorded objects and maps.
 Source: Stacks 06YY (blueprint: lem-weil-pbc-constant-completion-equivalence). -/
@@ -265,13 +318,20 @@ def change {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S) : Mod R ⥤ Mod S wher
   map_id := (change_laws φ).1
   map_comp f g := (change_laws φ).2 _ _ _ f g
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Ordinary scalar extension is additive.
 Source: Stacks 06YY (blueprint: lem-weil-pbc-constant-completion-equivalence).
 Proof: its objects and maps are those of the additive witness in the recorded
 independent-coefficient derived change-of-rings theorem; transport its additive law. -/
 theorem change_additive {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S) :
     (change φ).Additive := by
-  sorry
+  let := HasDerivedCategory.standard (Mod R)
+  let := HasDerivedCategory.standard (Mod S)
+  obtain ⟨E, hobj, hmap, hAdd, _⟩ :=
+    SheafOfModules.derivedChangeOfRingsIndependentCoefficients φ
+  have hE : E = change φ := Functor.ext hobj (fun _ _ f ↦ hmap f)
+  subst E
+  exact hAdd
 
 attribute [instance] change_additive
 
@@ -297,7 +357,17 @@ localization universal property gives the complex-level universal property, and 
 K-flat computation transports across those factorization isomorphisms. -/
 theorem derivedExtension_exists {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S) :
     Nonempty (DerivedExtension φ) := by
-  sorry
+  let := HasDerivedCategory.standard (Mod R)
+  let := HasDerivedCategory.standard (Mod S)
+  obtain ⟨E, hobj, hmap, hpres, T, hpw, ε, huniv, htri, hcomp⟩ :=
+    (SheafOfModules.nonempty_derivedChangeOfRingsCochainModel φ).some
+  have hE : E = change φ := Functor.ext hobj (fun _ _ f ↦ hmap f)
+  subst E
+  exact ⟨{ functor := T
+           comparison := ε
+           universal := huniv
+           computation := fun P hP ↦ hcomp P
+             ((CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat P).2 hP) }⟩
 
 /-- Select the universal derived pair, which is determined up to its unique normalized
 natural isomorphism; no arbitrary tensor functor is chosen. Source: Stacks 06YY
@@ -443,7 +513,15 @@ Source: Stacks 06YY (blueprint: lem-weil-pbc-constant-completion-equivalence).
 Proof: evaluate the additive-functor identity at each tower index. The chosen tensor functor
 and restriction of scalars are additive. Evaluation is jointly faithful. -/
 theorem reductionTower_additive (b : Bool) : (reductionTower J A I b).Additive := by
-  sorry
+  constructor
+  intro M N f g
+  apply NatTrans.ext
+  funext n
+  change (reduction J A I b n.unop).map (f + g) = _
+  have : (reduction J A I b n.unop).Additive := by
+    dsimp only [reduction, res]
+    infer_instance
+  exact Functor.map_add (reduction J A I b n.unop)
 
 attribute [instance] reductionTower_additive
 
@@ -508,7 +586,14 @@ Proof: specialize ringedStrictTowerHomotopyLimit to O with commutativity retaine
 the standard localizations. Project its universal right-derived pair and its computation
 on K-injective tower complexes. These are precisely the fields displayed here. -/
 theorem strictLimit_exists (O : Sheaf J CommRingCat.{u}) : Nonempty (StrictLimit O) := by
-  sorry
+  let := HasDerivedCategory.standard (Mod O)
+  let := HasDerivedCategory.standard (ℕᵒᵖ ⥤ Mod O)
+  obtain ⟨RF, η, huniv, hcomp, _⟩ :=
+    ringedStrictTowerHomotopyLimit J (siteModuleRings O) (fun U a b ↦ @mul_comm (O.obj.obj U) _ a b)
+  exact ⟨{ functor := RF
+           comparison := η
+           universal := huniv
+           computation := hcomp }⟩
 
 /-- Select the total derived strict limit by its universal comparison.
 Source: Stacks 0940 (blueprint: lem-weil-pbc-constant-completion-equivalence). -/
@@ -531,6 +616,7 @@ Source: Stacks 099M (blueprint: lem-weil-pbc-constant-completion-equivalence). -
 abbrev reductionComplex (b : Bool) (P : Cx (coefficients J A I b)) :=
   ((reductionTower J A I b).mapHomologicalComplex (ComplexShape.up ℤ)).obj P
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The ordinary limit unit is the unique chain map with the prescribed quotient components.
 Source: Stacks 099M, 0940 (blueprint: lem-weil-pbc-constant-completion-equivalence).
 Proof: at degree q use limit.lift on the strict quotient-unit cone. The differential
@@ -541,7 +627,39 @@ theorem ordinaryUnit_existsUnique (b : Bool) (P : Cx (coefficients J A I b)) :
       ∀ (q : ℤ) (n : ℕ), f.f q ≫
         limit.π ((reductionComplex J A I b P).X q) (op n) =
           ((reductionUnit J A I b).app (P.X q)).app (op n) := by
-  sorry
+  let f : P ⟶
+      (ordinaryLimit (coefficients J A I b)).obj (reductionComplex J A I b P) :=
+    { f := fun q ↦ limit.lift _
+        { pt := P.X q
+          π := (reductionUnit J A I b).app (P.X q) }
+      comm' := by
+        intro q q' h
+        apply limit.hom_ext
+        intro n
+        rw [Category.assoc, Category.assoc]
+        change limit.lift _ _ ≫ limMap ((reductionComplex J A I b P).d q q') ≫
+          limit.π _ n = _
+        rw [limMap_π, limit.lift_π_assoc]
+        calc
+          _ = P.d q q' ≫ ((reductionUnit J A I b).app (P.X q')).app n :=
+            (congrArg (fun t ↦ t.app n)
+              ((reductionUnit J A I b).naturality (P.d q q'))).symm
+          _ = _ := congrArg (fun t ↦ P.d q q' ≫ t)
+            (limit.lift_π (F := (reductionTower J A I b).obj (P.X q'))
+              { pt := P.X q', π := (reductionUnit J A I b).app (P.X q') } n).symm }
+  refine ⟨f, ?_, ?_⟩
+  · intro q n
+    exact limit.lift_π _ _
+  · intro g hg
+    apply HomologicalComplex.hom_ext
+    intro q
+    apply limit.hom_ext
+    intro n
+    change g.f q ≫ limit.π ((reductionTower J A I b).obj (P.X q)) n =
+      limit.lift _ { pt := P.X q, π := (reductionUnit J A I b).app (P.X q) } ≫
+        limit.π ((reductionTower J A I b).obj (P.X q)) n
+    rw [limit.lift_π]
+    exact hg q n.unop
 
 /-- The actual ordinary strict-limit unit, fixed by its quotient projections.
 Source: Stacks 099M (blueprint: lem-weil-pbc-constant-completion-equivalence). -/
@@ -682,6 +800,7 @@ theorem completion_restriction [IsNoetherianRing A] :
         (dres (coefficientMap J A I)).map ((completionUnit J A I true).app M) := by
   sorry
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Restriction preserves the Koszul-to-quotient comparison itself and both units.
 Source: Stacks 099M, 0A0E (blueprint: lem-weil-pbc-constant-completion-equivalence).
 Proof: the finite Koszul complexes are finite sums of the chosen representative with
@@ -713,7 +832,26 @@ theorem koszul_quotient_restriction [IsNoetherianRing A] (r : ℕ) (a : Fin r �
       (∀ M : D (completed J A I),
         θR.hom.app ((dres (coefficientMap J A I)).obj M) ≫ χ.hom.app M =
           κ.hom.app M ≫ (dres (coefficientMap J A I)).map (θB.hom.app M)) := by
-  sorry
+  obtain ⟨KR, ⟨θR, hR⟩, _⟩ := koszul_quotient_reflector J A I false r a ha
+  obtain ⟨KB, ⟨θB, hB⟩, _⟩ := koszul_quotient_reflector J A I true r a ha
+  obtain ⟨χ, hχ⟩ := completion_restriction J A I
+  let F := dres (coefficientMap J A I)
+  let κ : F ⋙ koszulCompletion J A I KR ≅ koszulCompletion J A I KB ⋙ F :=
+    Functor.isoWhiskerLeft F θR ≪≫ χ ≪≫ Functor.isoWhiskerRight θB.symm F
+  refine ⟨KR, KB, θR, θB, κ, χ, hR, hB, ?_, hχ, ?_⟩
+  · intro M
+    change koszulUnit J A I KR (F.obj M) ≫
+      (θR.hom.app (F.obj M) ≫ χ.hom.app M ≫ F.map (θB.inv.app M)) = _
+    rw [← Category.assoc, hR, ← Category.assoc, hχ, ← hB M, F.map_comp]
+    simp only [Category.assoc, ← F.map_comp, θB.hom_inv_id_app, Category.comp_id]
+    rfl
+  · intro M
+    change θR.hom.app (F.obj M) ≫ χ.hom.app M =
+      (θR.hom.app (F.obj M) ≫ χ.hom.app M ≫ F.map (θB.inv.app M)) ≫
+        F.map (θB.hom.app M)
+    simp only [Category.assoc, ← F.map_comp, θB.inv_hom_id_app, F.map_id]
+    exact congrArg (fun t ↦ θR.hom.app (F.obj M) ≫ t)
+      (Category.comp_id (χ.hom.app M)).symm
 
 variable {J A I}
 
@@ -730,7 +868,11 @@ by siteRestrictScalars_exact, and finite limits and colimits of functors are poi
 theorem tres_exact {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
     (tres φ).Additive ∧ PreservesFiniteLimits (tres φ) ∧
       PreservesFiniteColimits (tres φ) := by
-  sorry
+  have := (siteRestrictScalars_exact φ).1
+  have := (siteRestrictScalars_exact φ).2
+  change ((Functor.whiskeringRight ℕᵒᵖ (Mod B) (Mod R)).obj (res φ)).Additive ∧ _
+  dsimp only [tres, res]
+  refine ⟨inferInstance, ⟨fun K _ _ ↦ ?_⟩, ⟨fun K _ _ ↦ ?_⟩⟩ <;> infer_instance
 
 /-- The additive structure of the specified levelwise restriction.
 Source: Stacks 0940 (blueprint: lem-weil-pbc-constant-completion-equivalence). -/
@@ -798,7 +940,13 @@ Equality after every evaluation is equality in the strict functor category. -/
 theorem restrictionReduction_additive (J : GrothendieckTopology C) (A : Type u)
     [CommRing A] (I : Ideal A) :
     (res (coefficientMap J A I) ⋙ reductionTower J A I false).Additive := by
-  sorry
+  have : (res (coefficientMap J A I)).Additive := inferInstance
+  constructor
+  intro M N f g
+  change (reductionTower J A I false).map
+    ((res (coefficientMap J A I)).map (f + g)) = _
+  rw [Functor.map_add]
+  exact Functor.map_add (reductionTower J A I false)
 
 attribute [instance] restrictionReduction_additive
 
@@ -809,7 +957,7 @@ addition of module maps, so their composite does as well. -/
 theorem reductionRestriction_additive (J : GrothendieckTopology C) (A : Type u)
     [CommRing A] (I : Ideal A) :
     (reductionTower J A I true ⋙ tres (coefficientMap J A I)).Additive := by
-  sorry
+  infer_instance
 
 attribute [instance] reductionRestriction_additive
 
@@ -819,7 +967,7 @@ Proof: apply the additive identity of reductionRestriction_additive to the zero 
 theorem reductionRestriction_preservesZero (J : GrothendieckTopology C) (A : Type u)
     [CommRing A] (I : Ideal A) :
     (reductionTower J A I true ⋙ tres (coefficientMap J A I)).PreservesZeroMorphisms := by
-  sorry
+  infer_instance
 
 attribute [instance] reductionRestriction_preservesZero
 
@@ -858,6 +1006,7 @@ theorem derivedReductionTowerComparison (J : GrothendieckTopology C) (A : Type u
             ((quotientPresentation J A I true).comparison.app P) := by
   sorry
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Ordinary inverse limits commute with scalar restriction by their coordinate maps.
 Source: Stacks 0940 (blueprint: lem-weil-pbc-constant-completion-equivalence).
 Proof: module restriction preserves limits, computed on underlying additive sheaves.
@@ -870,7 +1019,26 @@ theorem limitRestriction_existsUnique {R B : Sheaf J CommRingCat.{u}} (φ : R �
         (e.hom.app P).f q ≫
           limit.π (((tres φ).mapHomologicalComplex (ComplexShape.up ℤ)).obj P |>.X q) (op n) =
         (res φ).map (limit.π (P.X q) (op n)) := by
-  sorry
+  have : PreservesLimitsOfSize.{u, u} (res φ) := siteRestrictScalars_preservesLimits φ
+  have : PreservesLimitsOfSize.{0, 0} (res φ) := preservesLimitsOfSize_shrink (res φ)
+  let e : ordinaryLimit B ⋙ (res φ).mapHomologicalComplex (ComplexShape.up ℤ) ≅
+      (tres φ).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ ordinaryLimit R :=
+    NatIso.mapHomologicalComplex (preservesLimitNatIso (res φ)) (ComplexShape.up ℤ)
+  have he (P : CochainComplex (ℕᵒᵖ ⥤ Mod B) ℤ) (q : ℤ) (n : ℕ) :
+      (e.hom.app P).f q ≫
+        limit.π (((tres φ).mapHomologicalComplex (ComplexShape.up ℤ)).obj P |>.X q) (op n) =
+      (res φ).map (limit.π (P.X q) (op n)) :=
+    preservesLimitIso_hom_π (res φ) (P.X q) (op n)
+  refine ⟨e, he, ?_⟩
+  intro g hg
+  apply Iso.ext
+  apply NatTrans.ext
+  funext P
+  apply HomologicalComplex.hom_ext
+  intro q
+  apply limit.hom_ext
+  intro n
+  exact (hg P q n.unop).trans (he P q n.unop).symm
 
 /-- The ordinary limit comparison fixed by its actual projections. Source: Stacks 0940
 (blueprint: lem-weil-pbc-constant-completion-equivalence). -/
@@ -960,6 +1128,7 @@ theorem inverseImageData_exists (L : Sheaf J (Type u) ⥤ Sheaf J' (Type u))
 
 variable {L : Sheaf J (Type u) ⥤ Sheaf J' (Type u)} (F : InverseImageData L)
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The inverse-image maps to finite coefficients form the canonical projection cone.
 Source: Stacks 099L (blueprint: lem-weil-pbc-constant-completion-equivalence).
 Proof: apply F.rings to projection naturality and use naturality of F.constants for
@@ -972,7 +1141,40 @@ theorem pulledProjection_naturality (A : Type u) [CommRing A] (I : Ideal A)
       (F.rings.map (projection J A I m.unop) ≫
         (F.constants.app (CommRingCat.of (A ⧸ I ^ (m.unop + 1)))).hom) ≫
           (finiteSystem J' A I).map f := by
-  sorry
+  have hstep (k : ℕ) :
+      ((Functor.const ℕᵒᵖ).obj (F.rings.obj (completed J A I))).map
+          (homOfLE (Nat.le_succ k)).op ≫
+        (F.rings.map (projection J A I k) ≫
+          (F.constants.app (CommRingCat.of (A ⧸ I ^ (k + 1)))).hom) =
+      (F.rings.map (projection J A I (k + 1)) ≫
+          (F.constants.app (CommRingCat.of (A ⧸ I ^ (k + 1 + 1)))).hom) ≫
+        (finiteSystem J' A I).map (homOfLE (Nat.le_succ k)).op := by
+    simp only [Functor.const_obj_map, finiteSystem,
+      Functor.ofOpSequence_map_homOfLE_succ]
+    change F.rings.map (projection J A I k) ≫
+        (F.constants.app (CommRingCat.of (A ⧸ I ^ (k + 1)))).hom =
+      (F.rings.map (projection J A I (k + 1)) ≫
+        (F.constants.app (CommRingCat.of (A ⧸ I ^ (k + 1 + 1)))).hom) ≫
+          transition J' A I k
+    have hnat := F.constants.hom.naturality
+      (CommRingCat.ofHom (Ideal.Quotient.factorPow I (Nat.le_succ (k + 1))))
+    change F.rings.map (transition J A I k) ≫
+        (F.constants.app (CommRingCat.of (A ⧸ I ^ (k + 1)))).hom =
+      (F.constants.app (CommRingCat.of (A ⧸ I ^ (k + 1 + 1)))).hom ≫
+        transition J' A I k at hnat
+    have hproj : projection J A I (k + 1) ≫ transition J A I k =
+        projection J A I k := by
+      simpa only [projection, finiteSystem, Functor.ofOpSequence_map_homOfLE_succ] using
+        limit.w (finiteSystem J A I) (homOfLE (Nat.le_succ k)).op
+    calc
+      _ = F.rings.map (projection J A I (k + 1) ≫ transition J A I k) ≫
+          (F.constants.app (CommRingCat.of (A ⧸ I ^ (k + 1)))).hom := by rw [hproj]
+      _ = _ := by rw [F.rings.map_comp, Category.assoc, hnat, Category.assoc]
+  exact (NatTrans.ofOpSequence
+    (F := (Functor.const ℕᵒᵖ).obj (F.rings.obj (completed J A I)))
+    (G := finiteSystem J' A I)
+    (fun k ↦ F.rings.map (projection J A I k) ≫
+      (F.constants.app (CommRingCat.of (A ⧸ I ^ (k + 1)))).hom) hstep).naturality f
 
 /-- The canonical map from the inverse image of the completed coefficient sheaf to the
 completion on the second site, formed from its finite projections.
