@@ -66,7 +66,7 @@ Proof: this is the object-identification clause of the recorded derived-change-o
 existence theorem, specialized to its selected ordinary functor. -/
 theorem proEtaleRingExtension_obj (M : proEtaleRingModules T R) :
     (proEtaleRingExtension a).obj M = SheafOfModules.changeOfRings a M := by
-  sorry
+  exact (reductionChangeExistence T a).choose_spec.choose M
 
 /-- Reuse the published tensor-unit normalized ordinary scalar adjunction.
 Source: Stacks 03D3, 06YY (blueprint: def-weil-pbc-four-corners). -/
@@ -99,6 +99,8 @@ noncomputable def proEtaleReductionPullbackInv :
     (proEtaleRingDerivedExtensionAdjunction aU)).symm
       (proEtaleRingRestrictionDerivedPullback f RV SV RU SU aV aU cR cS comm).inv
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The specified reduction/pullback mate is invertible in the quotient-coefficient
 category itself. Source: blueprint four corners; Stacks Tags 06YY and 0D6D
 (blueprint: def-weil-pbc-four-corners).
@@ -111,7 +113,43 @@ SU-linear. Its inverse is the ordinary tensor reassociation. Both maps commute w
 restriction and differentials, and localization preserves their inverse identities. -/
 theorem proEtaleReductionPullbackInv_isIso :
     IsIso (proEtaleReductionPullbackInv f RV SV RU SU aV aU cR cS comm) := by
-  sorry
+  -- The other mate is the published invertible direct-image comparison.
+  -- Taking both mates is conjugation between composite adjunctions.
+  let av := proEtaleRingDerivedExtensionAdjunction aV
+  let au := proEtaleRingDerivedExtensionAdjunction aU
+  let ar := proEtaleRingDerivedAdjunction f RV RU cR
+  let az := proEtaleRingDerivedAdjunction f SV SU cS
+  let b := proEtaleRingRestrictionDerivedPullback f RV SV RU SU aV aU cR cS comm
+  let d := proEtaleRingRestrictionDerivedDirectImage f RV SV RU SU aV aU cR cS comm
+  let α := TwoSquare.mk _ _ _ _ b.inv
+  have hmate : (mateEquiv az ar α).natTrans = d.hom := by
+    apply NatTrans.ext
+    funext N
+    have h := (proEtaleRingSheafChangeAdjunction
+      f RV SV RU SU aV aU cR cS comm).2.2
+      ((proEtaleRingDerivedDirectImage f SV SU cS).obj N) N (az.counit.app N)
+    have hid : az.homEquiv _ _ (az.counit.app N) = 𝟙 _ := by
+      rw [← az.homEquiv_symm_id N]
+      exact (az.homEquiv _ _).apply_symm_apply _
+    change ar.homEquiv _ _ (b.inv.app _ ≫
+      (proEtaleRingRestrictScalars aU).mapDerivedCategory.map (az.counit.app N)) =
+        (proEtaleRingRestrictScalars aV).mapDerivedCategory.map
+          (az.homEquiv _ _ (az.counit.app N)) ≫ d.hom.app N at h
+    rw [hid, CategoryTheory.Functor.map_id, Category.id_comp] at h
+    rw [← h]
+    simp only [α, mateEquiv_apply, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+      Functor.comp_obj,
+      Functor.comp_map, Functor.rightUnitor_inv_app, Functor.whiskerLeft_app,
+      Functor.whiskerRight_app,
+      Functor.associator_hom_app, Functor.associator_inv_app, Functor.leftUnitor_hom_app,
+      Category.id_comp, Adjunction.homEquiv_unit, Functor.map_comp]
+    erw [Category.comp_id]
+  let γ := (mateEquiv av au).symm α
+  have hm : mateEquiv av au γ = α := (mateEquiv av au).apply_symm_apply α
+  have hc : IsIso (conjugateEquiv (av.comp az) (ar.comp au) γ.natTrans) := by
+    rw [← iterated_mateEquiv_conjugateEquiv av au ar az γ, hm, hmate]
+    infer_instance
+  exact conjugateEquiv_of_iso (av.comp az) (ar.comp au) γ.natTrans
 
 /-- The coefficient-reduction comparison chi, in the displayed direction of the node.
 Source: blueprint four corners; Stacks Tags 06YY and 0D6D
@@ -129,7 +167,8 @@ Source: blueprint four corners (blueprint: def-weil-pbc-four-corners).
 Proof: level n is A/I^(n+1). The finite-quotient clause of the adic datum
 gives its finiteness, including when the quotient is the zero ring. -/
 theorem AdicCoefficientDatum.ringTower_finite (n : ℕᵒᵖ) : Finite (d.ringTower.obj n) := by
-  sorry
+  change Finite (A ⧸ d.ideal ^ (n.unop + 1))
+  infer_instance
 
 attribute [instance] AdicCoefficientDatum.ringTower_finite
 
@@ -145,6 +184,8 @@ noncomputable def AdicCoefficientDatum.finiteRingIso {U V : Scheme.{u}} (f : U �
       ((proEtale_profinite_coefficient_inverse_image d.ringTower).1 U V f (op n)) ≪≫
     pbcLevelConstantComparison U d n
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The finite coefficient comparisons retain every quotient transition.
 Source: blueprint four corners; Stacks 098T (blueprint: def-weil-pbc-four-corners).
 Proof: the published constants-to-functions comparison commutes with quotient maps.
@@ -156,7 +197,51 @@ theorem AdicCoefficientDatum.integralRingComponent_naturality {U V : Scheme.{u}}
         (d.finiteRingIso f m.unop).hom ≫ (reductionCoefficientSystem U d).map a =
       (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map (d.projection V n.unop) ≫
         (d.finiteRingIso f n.unop).hom := by
-  sorry
+  let eU := pbcConstantSystemComparison U d
+  let eV := pbcConstantSystemComparison V d
+  let t : adicLisseRingSystem V d.ideal ⋙
+      proEtaleSheafInverseImage f CommRingCat.{u + 1} ⟶
+      adicLisseRingSystem U d.ideal :=
+    NatTrans.ofOpSequence (fun k ↦ (proEtaleConstantComparison f).app
+      (CommRingCat.of (A ⧸ d.ideal ^ (k + 1)))) (by
+        intro k
+        simpa only [Functor.comp_map, adicLisseRingSystem,
+          Functor.ofOpSequence_map_homOfLE_succ] using
+          (proEtaleConstantComparison f).naturality
+            (CommRingCat.ofHom (Ideal.Quotient.factorPowSucc d.ideal (k + 1))))
+  have hn := congrArg (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map
+    (eV.inv.naturality a)
+  have ht := t.naturality a
+  have hu := eU.hom.naturality a
+  simp only [Functor.map_comp] at hn
+  change (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map
+      ((reductionCoefficientSystem V d).map a) ≫
+        (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map
+          (pbcLevelConstantComparison V d n.unop).inv =
+    (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map
+      (pbcLevelConstantComparison V d m.unop).inv ≫
+        (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map
+          ((adicLisseRingSystem V d.ideal).map a) at hn
+  change (adicLisseRingSystem V d.ideal ⋙
+    proEtaleSheafInverseImage f CommRingCat.{u + 1}).map a ≫
+      (proEtaleConstantComparison f).app (d.ringTower.obj n) =
+    (proEtaleConstantComparison f).app (d.ringTower.obj m) ≫
+      (adicLisseRingSystem U d.ideal).map a at ht
+  change (adicLisseRingSystem U d.ideal).map a ≫
+      (pbcLevelConstantComparison U d n.unop).hom =
+    (pbcLevelConstantComparison U d m.unop).hom ≫
+      (reductionCoefficientSystem U d).map a at hu
+  dsimp only [finiteRingIso, Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom,
+    asIso_hom]
+  simp only [Category.assoc]
+  rw [← hu, ← Category.assoc _ _ ((pbcLevelConstantComparison U d n.unop).hom)]
+  rw [← ht]
+  simp only [Functor.comp_map, Category.assoc]
+  rw [← reassoc_of% hn]
+  simp only [← Functor.map_comp_assoc]
+  simp only [AdicCoefficientDatum.projection, completedReductionProjection,
+    ← Category.assoc, limit.w]
+
 
 /-- The completed coefficient structure map is the actual limit lift of its projections.
 Source: blueprint four corners; Stacks 098T (blueprint: def-weil-pbc-four-corners). -/
@@ -170,6 +255,21 @@ noncomputable def AdicCoefficientDatum.integralRingMap {U V : Scheme.{u}} (f : U
              naturality _ _ a := (Category.id_comp _).trans
                (d.integralRingComponent_naturality f a).symm } }
 
+private noncomputable def fourCornersConstantTowerIso (T : Scheme.{u}) :
+    proEtaleCoefficientTower T d.ringTower ≅ adicLisseRingSystem T d.ideal := by
+  let t : proEtaleCoefficientTower T d.ringTower ⟶ adicLisseRingSystem T d.ideal :=
+    NatTrans.ofOpSequence (fun _ ↦ 𝟙 _) (by
+      intro n
+      simp only [proEtaleCoefficientTower, Functor.comp_map, AdicCoefficientDatum.ringTower,
+        adicLisseRingSystem, Functor.ofOpSequence_map_homOfLE_succ, Category.comp_id,
+        Category.id_comp]
+      rfl)
+  have : ∀ n, IsIso (t.app n) := fun _ ↦ inferInstanceAs (IsIso (𝟙 _))
+  have : IsIso t := NatIso.isIso_of_isIso_app t
+  exact asIso t
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The specified limit structure map is invertible by the profinite coefficient theorem.
 Source: blueprint four corners; Stacks 098T (blueprint: def-weil-pbc-four-corners).
 Proof: the published constant-system comparison identifies both coefficient limits
@@ -179,7 +279,34 @@ The profinite inverse-image theorem makes it invertible. No preservation of arbi
 infinite limits is assumed. -/
 theorem AdicCoefficientDatum.integralRingMap_isIso {U V : Scheme.{u}} (f : U ⟶ V) :
     IsIso (d.integralRingMap f) := by
-  sorry
+  let L := proEtaleSheafInverseImage f CommRingCat.{u + 1}
+  let e (T : Scheme.{u}) := HasLimit.isoOfNatIso
+    (fourCornersConstantTowerIso d T ≪≫ pbcConstantSystemComparison T d)
+  have : IsIso (proEtaleProfiniteComparison f d.ringTower) :=
+    (proEtale_profinite_coefficient_inverse_image d.ringTower).2.1 U V f
+  have he : d.integralRingMap f =
+      L.map (e V).inv ≫ proEtaleProfiniteComparison f d.ringTower ≫ (e U).hom := by
+    apply limit.hom_ext
+    intro n
+    dsimp only [e]
+    simp only [Category.assoc]
+    erw [HasLimit.isoOfNatIso_hom_π]
+    rw [← Category.assoc _ _ ((fourCornersConstantTowerIso d U ≪≫
+      pbcConstantSystemComparison U d).hom.app n)]
+    rw [(proEtale_profinite_coefficient_inverse_image d.ringTower).2.2.1 U V f n]
+    simp only [Category.assoc]
+    rw [← Functor.map_comp_assoc]
+    rw [HasLimit.isoOfNatIso_inv_π]
+    dsimp [AdicCoefficientDatum.integralRingMap, AdicCoefficientDatum.finiteRingIso,
+      fourCornersConstantTowerIso]
+    simp only [L, pbcConstantSystemComparison, AdicCoefficientDatum.projection,
+      completedReductionProjection, reductionCoefficientSystem, limit.lift_π,
+      NatIso.isIso_inv_app, Functor.comp_obj, NatTrans.ofOpSequence_app, op_unop,
+      IsIso.inv_id, Functor.map_comp, Category.id_comp, Category.assoc]
+    erw [CategoryTheory.Functor.map_id, Category.id_comp]
+    rfl
+  rw [he]
+  infer_instance
 
 /-- The canonical profinite coefficient comparison in the published function presentation.
 Source: blueprint four corners; Stacks 098T (blueprint: def-weil-pbc-four-corners). -/
@@ -197,7 +324,7 @@ theorem AdicCoefficientDatum.projection_comm {U V : Scheme.{u}} (f : U ⟶ V) (n
     (d.integralRingIso f).hom ≫ d.projection U n =
       (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map (d.projection V n) ≫
         (d.finiteRingIso f n).hom := by
-  sorry
+  exact limit.lift_π _ (op n)
 
 /-- Ordinary integral derived pullback, without completion.
 Source: blueprint four corners (blueprint: def-weil-pbc-four-corners). -/
@@ -230,6 +357,49 @@ noncomputable def AdicCoefficientDatum.chi {U V : Scheme.{u}} (f : U ⟶ V) (n :
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g)
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem fourCornersFinite_comp {U V W : Scheme.{u}}
+    (h : U ⟶ V) (k : V ⟶ W) (n : ℕ) :
+    d.finiteRingIso (h ≫ k) n = proEtaleRingCompositeCoefficients h k
+      (d.finiteRing W n) (d.finiteRing V n) (d.finiteRing U n)
+      (d.finiteRingIso k n) (d.finiteRingIso h n) := by
+  apply Iso.ext
+  dsimp only [AdicCoefficientDatum.finiteRingIso, proEtaleRingCompositeCoefficients,
+    Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, asIso_hom, Iso.app_hom]
+  rw [(proEtale_profinite_coefficient_inverse_image d.ringTower).2.2.2.2.2.2.2.2.2.1
+    U V W h k (op n)]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← reassoc_of% ((proEtaleRingInverseImageComp h k).hom.naturality
+    (pbcLevelConstantComparison W d n).inv)]
+  simp only [← Functor.map_comp_assoc, Iso.hom_inv_id, CategoryTheory.Functor.map_id,
+    Category.id_comp]
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem fourCornersIntegral_comp {U V W : Scheme.{u}}
+    (h : U ⟶ V) (k : V ⟶ W) :
+    d.integralRingIso (h ≫ k) = proEtaleRingCompositeCoefficients h k
+      (d.completedRing W) (d.completedRing V) (d.completedRing U)
+      (d.integralRingIso k) (d.integralRingIso h) := by
+  apply Iso.ext
+  apply limit.hom_ext
+  intro n
+  change (d.integralRingIso (h ≫ k)).hom ≫ d.projection U n.unop =
+    (proEtaleRingInverseImageComp h k).hom.app (d.completedRing W) ≫
+      (proEtaleSheafInverseImage h CommRingCat.{u + 1}).map
+        (d.integralRingIso k).hom ≫
+      (d.integralRingIso h).hom ≫ d.projection U n.unop
+  rw [d.projection_comm, d.projection_comm]
+  rw [← Functor.map_comp_assoc, d.projection_comm]
+  rw [Functor.map_comp]
+  simp only [Category.assoc]
+  rw [← reassoc_of% ((proEtaleRingInverseImageComp h k).hom.naturality
+    (d.projection W n.unop))]
+  rw [fourCornersFinite_comp d h k n.unop]
+  rfl
+
 include sq in
 /-- Commutativity of integral coefficients around the square follows from the composite
 coherence of the profinite comparison. Source: blueprint four corners; Stacks Tag 098T
@@ -242,7 +412,8 @@ theorem AdicCoefficientDatum.integral_coherent :
       (d.completedRing X') (d.integralRingIso f) (d.integralRingIso g'))
     (proEtaleRingCompositeCoefficients f' g (d.completedRing Y) (d.completedRing Y')
       (d.completedRing X') (d.integralRingIso g) (d.integralRingIso f')) := by
-  sorry
+  rw [← fourCornersIntegral_comp d g' f, ← fourCornersIntegral_comp d f' g]
+  exact congr_arg_heq (fun q : X' ⟶ Y ↦ d.integralRingIso q) sq.w
 
 include sq in
 /-- The same composition identity for each finite coefficient level.
@@ -254,7 +425,8 @@ theorem AdicCoefficientDatum.finite_coherent (n : ℕ) :
       (d.finiteRing X' n) (d.finiteRingIso f n) (d.finiteRingIso g' n))
     (proEtaleRingCompositeCoefficients f' g (d.finiteRing Y n) (d.finiteRing Y' n)
       (d.finiteRing X' n) (d.finiteRingIso g n) (d.finiteRingIso f' n)) := by
-  sorry
+  rw [← fourCornersFinite_comp d g' f n, ← fourCornersFinite_comp d f' g n]
+  exact congr_arg_heq (fun q : X' ⟶ Y ↦ d.finiteRingIso q n) sq.w
 
 /-- The canonical ambient exchange with integral completed coefficients.
 Source: blueprint four corners; Stacks Tag 07A7 (blueprint: def-weil-pbc-four-corners). -/
