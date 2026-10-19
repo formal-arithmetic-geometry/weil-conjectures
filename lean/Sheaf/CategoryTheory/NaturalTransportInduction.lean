@@ -92,6 +92,30 @@ theorem compared_eq
     (hτ : ∀ (n : ℕ) (M : C),
       τ (n + 1) M = τ n M ≫ η.app ((P n).obj M) ≫ H.map ((b n).hom.app M)) :
     ∀ (n : ℕ) (M : C), compared H T P d η n M = τ n M := by
-  sorry
+  intro n
+  induction n with
+  | zero =>
+    intro M
+    rw [hτ₀]
+    simp [compared, repeated, power, hd]
+  | succ n ih =>
+    intro M
+    have he : repeated H T η M (n + 1) =
+        compared H T P d η n M ≫ H.map ((d n).hom.app M) := by
+      simp [compared, Category.assoc, ← H.map_comp]
+    have hb : T.map ((d n).hom.app M) ≫ (d (n + 1)).inv.app M =
+        (b n).hom.app M := by
+      exact congrArg (fun α ↦ α.app M) (hdb n)
+    calc
+      compared H T P d η (n + 1) M =
+          (repeated H T η M (n + 1) ≫ η.app ((power T (n + 1)).obj M)) ≫
+            H.map ((d (n + 1)).inv.app M) := rfl
+      _ = compared H T P d η n M ≫ η.app ((P n).obj M) ≫
+          H.map ((b n).hom.app M) := by
+        rw [he]
+        simp only [Category.assoc]
+        rw [← Category.assoc (H.map ((d n).hom.app M)), η.naturality]
+        simp only [Functor.comp_map, Category.assoc, ← H.map_comp, hb]
+      _ = τ (n + 1) M := by rw [ih, hτ]
 
 end CategoryTheory.NaturalTransport
