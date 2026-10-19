@@ -4,8 +4,8 @@ public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import Mathlib.RingTheory.Smooth.Basic
 import Sheaf.RingTheory.PopescuLifting
-public import Sheaf.RingTheory.SingularIdeal
-import Sheaf.RingTheory.PopescuSmoothQuotientFactor
+public import WeilConjectures.RingTheory.SingularIdeal
+import WeilConjectures.RingTheory.PopescuSmoothQuotientFactor
 
 @[expose] public section
 

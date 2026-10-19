@@ -6,7 +6,7 @@ Authors: SHEAF group M1
 module
 
 public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersectionPresentation
-public import Sheaf.RingTheory.SingularIdeal
+public import WeilConjectures.RingTheory.SingularIdeal
 public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import Mathlib.RingTheory.Smooth.StandardSmoothCotangent
@@ -14,7 +14,7 @@ import Mathlib.RingTheory.Localization.Ideal
 import Mathlib.RingTheory.Localization.Module
 import WeilConjectures.LinearAlgebra.Matrix.CauchyBinet
 import Sheaf.RingTheory.RelativeGlobalCompleteIntersectionConormalFree
-import Sheaf.RingTheory.SmoothLocalizationConormalSplit
+import WeilConjectures.RingTheory.SmoothLocalizationConormalSplit
 
 /-!
 # The Jacobian criterion for a relative global complete intersection

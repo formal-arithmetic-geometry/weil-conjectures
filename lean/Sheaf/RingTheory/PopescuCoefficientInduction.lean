@@ -7,13 +7,13 @@ module
 
 public import Sheaf.RingTheory.GRing
 public import Sheaf.RingTheory.PopescuResolution
-public import Sheaf.RingTheory.EssentiallySmooth
+public import WeilConjectures.RingTheory.EssentiallySmooth
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Artinian.Defs
 public import Mathlib.RingTheory.Regular.RegularSequence
 import Sheaf.RingTheory.PopescuCoefficientStart
 import Sheaf.RingTheory.PopescuCoefficientStep
-import Sheaf.RingTheory.EssentiallySmoothSmallLocalModel
+import WeilConjectures.RingTheory.EssentiallySmoothSmallLocalModel
 import Mathlib.RingTheory.LocalRing.RingHom.Basic
 import Sheaf.RingTheory.EssentiallySmoothComp
 

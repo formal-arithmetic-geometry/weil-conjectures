@@ -6,7 +6,7 @@ Authors: SHEAF group K4
 module
 
 public import Mathlib.Algebra.MvPolynomial.Basic
-public import Sheaf.RingTheory.EssentiallySmooth
+public import WeilConjectures.RingTheory.EssentiallySmooth
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Artinian.Defs
 public import Mathlib.RingTheory.Localization.AtPrime.Basic

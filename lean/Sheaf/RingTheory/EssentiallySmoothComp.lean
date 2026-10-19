@@ -5,7 +5,7 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.RingTheory.EssentiallySmooth
+public import WeilConjectures.RingTheory.EssentiallySmooth
 import Sheaf.RingTheory.SmoothOverEssentiallySmoothBase
 import Mathlib.RingTheory.Localization.LocalizationLocalization
 

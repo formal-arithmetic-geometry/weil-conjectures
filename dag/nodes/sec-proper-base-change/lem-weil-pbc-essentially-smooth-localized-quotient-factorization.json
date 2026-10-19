@@ -132,13 +132,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.EssentiallySmoothLocalizedQuotientFactorization",
-  "file": "lean/Sheaf/RingTheory/EssentiallySmoothLocalizedQuotientFactorization.lean",
+  "module": "WeilConjectures.RingTheory.EssentiallySmoothLocalizedQuotientFactorization",
+  "file": "lean/WeilConjectures/RingTheory/EssentiallySmoothLocalizedQuotientFactorization.lean",
   "declaration": "Algebra.essentiallySmooth_localized_quotient_factorization",
   "statement": "theorem essentiallySmooth_localized_quotient_factorization\n    {R : Type u} {C : Type v} {T : Type w}\n    [CommRing R] [CommRing C] [CommRing T] [Algebra R C] [Algebra R T]\n    (γ : C →ₐ[R] T) (q : PrimeSpectrum T) (J : Ideal R)\n    (γ₀ : (C ⧸ J.map (algebraMap R C)) →ₐ[R ⧸ J]\n      (T ⧸ J.map (algebraMap R T)))\n    (q₀ : PrimeSpectrum (T ⧸ J.map (algebraMap R T)))\n    (hγ : γ₀.toRingHom.comp (Ideal.Quotient.mk (J.map (algebraMap R C))) =\n      (Ideal.Quotient.mk (J.map (algebraMap R T))).comp γ.toRingHom)\n    (hq : PrimeSpectrum.comap (Ideal.Quotient.mk (J.map (algebraMap R T))) q₀ = q)\n    (hfactor :\n      let Q := Localization.AtPrime (q.asIdeal.under R)\n      let L := Localization.AtPrime q.asIdeal\n      letI := Localization.AtPrime.algebraOfLiesOver (q.asIdeal.under R) q.asIdeal\n      let JQ := J.map (algebraMap R Q)\n      let JL := (J.map (algebraMap R T)).map (algebraMap T L)\n      ∃ (I : Ideal Q) (K : Ideal L),\n        I ≤ JQ ∧ K ≤ JL ∧ I.map (algebraMap Q L) ≤ K ∧\n        ∃ (D : Type (max u v)) (_ : CommRing D) (_ : Algebra Q D)\n          (_ : Algebra (Q ⧸ I) D) (_ : IsScalarTower Q (Q ⧸ I) D),\n          EssentiallySmooth (Q ⧸ I) D ∧\n          ∃ (f : Q ⊗[R] C →ₐ[Q] D) (g : D →ₐ[Q] L ⧸ K),\n            g.comp f = Algebra.TensorProduct.lift (Algebra.ofId Q (L ⧸ K))\n              ((Ideal.Quotient.mkₐ R K).comp\n                ((IsScalarTower.toAlgHom R T L).comp γ))\n              (fun _ _ ↦ Commute.all _ _)) :\n    let R₀ := R ⧸ J\n    let C₀ := C ⧸ J.map (algebraMap R C)\n    let T₀ := T ⧸ J.map (algebraMap R T)\n    let P := Localization.AtPrime (q₀.asIdeal.under R₀)\n    let L₀ := Localization.AtPrime q₀.asIdeal\n    letI := Localization.AtPrime.algebraOfLiesOver (q₀.asIdeal.under R₀) q₀.asIdeal\n    ∃ (E : Type (max u v)) (_ : CommRing E) (_ : Algebra P E),\n      EssentiallySmooth P E ∧\n      ∃ (f : P ⊗[R₀] C₀ →ₐ[P] E) (g : E →ₐ[P] L₀),\n        g.comp f = Algebra.TensorProduct.lift (Algebra.ofId P L₀)\n          ((IsScalarTower.toAlgHom R₀ T₀ L₀).comp γ₀)\n          (fun _ _ ↦ Commute.all _ _)",
   "branch": "sheaf-dag",
   "by": "G2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.EssentiallySmoothLocalizedQuotientFactorization; points at its upstream twin."
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",

@@ -16,7 +16,7 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Sheaf.AlgebraicGeometry.Morphisms.NormalFiniteStageDiagram
-import Sheaf.AlgebraicGeometry.Morphisms.DominantFiniteRefinementLimit
+import WeilConjectures.AlgebraicGeometry.Morphisms.DominantFiniteRefinementLimit
 import Sheaf.AlgebraicGeometry.DescendFlatFinitePresentation
 import Sheaf.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
 import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties

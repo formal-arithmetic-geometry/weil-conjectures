@@ -5,12 +5,12 @@ Authors: SHEAF group H1
 -/
 module
 
-public import Sheaf.RingTheory.StrictlyStandardElement
-public import Sheaf.RingTheory.SingularIdeal
+public import WeilConjectures.RingTheory.StrictlyStandardElement
+public import WeilConjectures.RingTheory.SingularIdeal
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Sheaf.RingTheory.DesingularizeAnnihilatorConstruction
-import Sheaf.RingTheory.SingularIdealsOfAnnihilatorBound
+import WeilConjectures.RingTheory.DesingularizeAnnihilatorConstruction
+import WeilConjectures.RingTheory.SingularIdealsOfAnnihilatorBound
 
 /-!
 # Desingularization along a strictly standard element

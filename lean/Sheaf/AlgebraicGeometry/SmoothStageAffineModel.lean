@@ -2,8 +2,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Sheaf.AlgebraicGeometry.Morphisms.AffineLimitSmoothStage
-import Sheaf.RingTheory.SmoothAlgebraFilteredColimitDescent
+import WeilConjectures.AlgebraicGeometry.Morphisms.AffineLimitSmoothStage
+import WeilConjectures.RingTheory.SmoothAlgebraFilteredColimitDescent
 
 @[expose] public section
 

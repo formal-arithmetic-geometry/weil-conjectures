@@ -5,16 +5,16 @@ Authors: SHEAF group K4
 -/
 module
 
-public import Sheaf.RingTheory.EssentiallySmooth
+public import WeilConjectures.RingTheory.EssentiallySmooth
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Artinian.Defs
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Regular.RegularSequence
 import Sheaf.RingTheory.ArtinianCoefficientEnlargement
 import Sheaf.RingTheory.EssentiallySmoothComp
-import Sheaf.RingTheory.RegularSequencePowers
+import WeilConjectures.RingTheory.RegularSequencePowers
 import Sheaf.AlgebraicGeometry.Ogoma
-import Sheaf.RingTheory.PopescuLocalizedCoefficientRelation
+import WeilConjectures.RingTheory.PopescuLocalizedCoefficientRelation
 import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.RingTheory.Localization.Integer
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem

@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.Extension.Presentation.Basic
 public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
-import Sheaf.RingTheory.PresentationLocalizedConormalSplit
+import WeilConjectures.RingTheory.PresentationLocalizedConormalSplit
 import Sheaf.RingTheory.LocalizedSymmetricDifferentialsSplit
 import Sheaf.RingTheory.SymmetricAlgebraBaseChange
 import Sheaf.RingTheory.SymmetricAlgebraFinitePresentation

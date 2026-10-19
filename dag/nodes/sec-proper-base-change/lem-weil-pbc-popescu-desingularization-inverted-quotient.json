@@ -114,14 +114,15 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "module": "Sheaf.RingTheory.PopescuDesingularizationInvertedQuotient",
+  "module": "WeilConjectures.RingTheory.PopescuDesingularizationInvertedQuotient",
   "declaration": "Algebra.desingularization_inverted_quotient_equiv",
-  "file": "lean/Sheaf/RingTheory/PopescuDesingularizationInvertedQuotient.lean",
+  "file": "lean/WeilConjectures/RingTheory/PopescuDesingularizationInvertedQuotient.lean",
   "statement": "theorem desingularization_inverted_quotient_equiv (R : Type u) (A : Type w) [CommRing R] [CommRing A] [Algebra R A] (π : R) (n m c : ℕ) (P : Presentation R A (Fin n) (Fin m)) (hc : c ≤ m) (s : Fin n → Fin c → R) (g : Fin c → MvPolynomial (ULift.{w} (Fin c ⊕ Fin n)) R) (hg : ∀ j : Fin c, aeval (R := R) (fun i : Fin n ↦ C π ^ 2 * ∑ k, C (s i k) * X (σ := ULift.{w} (Fin c ⊕ Fin n)) (ULift.up (Sum.inl k)) + C π ^ 3 * X (σ := ULift.{w} (Fin c ⊕ Fin n)) (ULift.up (Sum.inr i))) (P.relation (Fin.castLE hc j)) = C π ^ 3 * g j) : let Q := MvPolynomial (ULift.{w} (Fin c ⊕ Fin n)) R let ξ : Fin n → Q := fun i ↦ C π ^ 2 * ∑ k, C (s i k) * X (ULift.up (Sum.inl k)) + C π ^ 3 * X (ULift.up (Sum.inr i)) let S := Q ⧸ Ideal.span (Set.range g) let K := Ideal.map (Ideal.Quotient.mk (Ideal.span (Set.range g))) (Ideal.span (Set.range (fun j : Fin m ↦ aeval (R := R) ξ (P.relation j)))) Nonempty (Localization.Away (algebraMap R (S ⧸ K) π) ≃ₐ[R] MvPolynomial (Fin c) (Localization.Away (algebraMap R A π)))",
   "branch": "sheaf-dag",
   "by": "V1",
   "date": "2026-10-13",
-  "existing": false
+  "existing": false,
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.PopescuDesingularizationInvertedQuotient; points at its upstream twin."
  },
  "lean_audit": {
   "master": {

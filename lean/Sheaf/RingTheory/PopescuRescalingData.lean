@@ -7,11 +7,11 @@ module
 
 public import Sheaf.RingTheory.GRing
 public import Sheaf.RingTheory.PopescuResolution
-public import Sheaf.RingTheory.EssentiallySmooth
+public import WeilConjectures.RingTheory.EssentiallySmooth
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Artinian.Defs
 import Sheaf.RingTheory.PopescuCoefficientRescaling
-import Sheaf.RingTheory.PolynomialParameterQuotientChart
+import WeilConjectures.RingTheory.PolynomialParameterQuotientChart
 
 /-!
 # Rescaling data before polynomial coefficient base change

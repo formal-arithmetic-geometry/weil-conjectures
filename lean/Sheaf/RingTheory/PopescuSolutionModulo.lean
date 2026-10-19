@@ -6,7 +6,7 @@ Authors: SHEAF group J1
 module
 
 public import Sheaf.RingTheory.GRing
-public import Sheaf.RingTheory.EssentiallySmooth
+public import WeilConjectures.RingTheory.EssentiallySmooth
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Artinian.Defs
 public import Mathlib.RingTheory.LocalRing.Defs

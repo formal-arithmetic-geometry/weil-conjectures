@@ -6,13 +6,13 @@ Authors: SHEAF group B3
 module
 
 public import Sheaf.RingTheory.PopescuResolution
-public import Sheaf.RingTheory.StrictlyStandardElement
+public import WeilConjectures.RingTheory.StrictlyStandardElement
 public import Mathlib.RingTheory.TensorProduct.Basic
-import Sheaf.RingTheory.PopescuStandardizerSmoothOpens
-import Sheaf.RingTheory.SingularIdealLocalizationSmooth
+import WeilConjectures.RingTheory.PopescuStandardizerSmoothOpens
+import WeilConjectures.RingTheory.SingularIdealLocalizationSmooth
 import Sheaf.RingTheory.ImprovePresentation
 import Sheaf.RingTheory.SmoothFreeDifferentialsStrictlyStandardPower
-import Sheaf.RingTheory.StrictlyStandardBaseChange
+import WeilConjectures.RingTheory.StrictlyStandardBaseChange
 import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 import Mathlib.RingTheory.Localization.BaseChange
 

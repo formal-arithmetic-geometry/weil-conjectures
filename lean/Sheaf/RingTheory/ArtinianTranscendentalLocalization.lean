@@ -5,13 +5,13 @@ Authors: SHEAF group X3
 -/
 module
 
-public import Sheaf.RingTheory.EssentiallySmooth
+public import WeilConjectures.RingTheory.EssentiallySmooth
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Algebraic.Defs
 public import Mathlib.RingTheory.Artinian.Defs
-import Sheaf.RingTheory.ArtinianTranscendentalLocalizationProperties
+import WeilConjectures.RingTheory.ArtinianTranscendentalLocalizationProperties
 import Sheaf.RingTheory.ArtinianTranscendentalLocalizationEvaluation
 
 /-!

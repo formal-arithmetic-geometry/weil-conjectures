@@ -2,7 +2,7 @@ module
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Localization.FractionRing
 public import WeilConjectures.FieldTheory.SeparableExtension
-public import Sheaf.RingTheory.SingularIdeal
+public import WeilConjectures.RingTheory.SingularIdeal
 import Sheaf.RingTheory.RegularLocalSeparableResidueSmooth
 import Mathlib.RingTheory.AlgebraicIndependent.Basic
 

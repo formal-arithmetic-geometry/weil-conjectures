@@ -11,7 +11,7 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.RingTheory.MvPolynomial.Localization
 import Sheaf.RingTheory.RegularSequencePolynomialVariables
-import Sheaf.RingTheory.RegularSequencePowers
+import WeilConjectures.RingTheory.RegularSequencePowers
 import Sheaf.AlgebraicGeometry.Ogoma
 
 /-!

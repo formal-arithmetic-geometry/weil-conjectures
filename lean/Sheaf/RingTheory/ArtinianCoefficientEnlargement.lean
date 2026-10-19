@@ -5,7 +5,7 @@ Authors: SHEAF groups F1 and K4
 -/
 module
 
-public import Sheaf.RingTheory.EssentiallySmooth
+public import WeilConjectures.RingTheory.EssentiallySmooth
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.Defs
 import Mathlib.RingTheory.LocalRing.ResidueField.Basic
