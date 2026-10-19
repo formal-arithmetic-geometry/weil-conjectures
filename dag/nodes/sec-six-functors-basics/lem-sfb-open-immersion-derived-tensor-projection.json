@@ -1,0 +1,119 @@
+{
+ "id": "lem-sfb-open-immersion-derived-tensor-projection",
+ "kind": "statement",
+ "title": "Open immersion derived tensor projection formula",
+ "statement": "Let Lambda be a commutative condensed ring [sk-def-sfb-condensed-ring], k a field, and S,X schemes separated, quasi-compact and locally of finite type over Spec k. Let f:S -> X be an open immersion over Spec k. On ordinary unbounded derived categories [sk-def-sfb-derived-categories], with relative derived tensor [def-sfb-derived-tensor-modules], E=f_! [def-sfb-module-open-lower-shriek] satisfies a natural isomorphism E(M) tensor_X N = E(M tensor_S f^*N), where f^* is coefficient-compatible upperStar [def-sfb-module-upper-star]. This is an isomorphism of bifunctors with no boundedness or Tor-amplitude hypothesis.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+  "place": "Open immersions, sheaves; Derived version. This is a strictly smaller immersion case of det-lem-int-tensor-projection."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-derived-tensor-modules",
+  "def-sfb-module-upper-star",
+  "def-sfb-module-open-lower-shriek"
+ ],
+ "proof": [
+  {
+   "text": "choose the reduced closed complement of the open image using its vanishing\nideal. The ambient scheme X is Noetherian, since it is quasi-compact and locally of finite type\nover a field, so the open immersion is quasi-compact. Apply\n`openClosedInternalHomFormulas` to this complementary pair. Write E for extension by\nzero, r for supportPullback on derived categories and R for derived direct image.\nFor arbitrary M,N,T the existing adjunctions and the open internal-Hom isomorphism give\n\nHom(E(M tensor rN), T) = Hom(M tensor rN, rT)\n  = Hom(rN, RHom(M,rT)) = Hom(N, R RHom(M,rT))\n  = Hom(N, RHom(EM,T)) = Hom(EM tensor N,T).\n\nEvery equality here is an equivalence of Hom sets. Naturality in T follows from the\nordinary adjunction naturality and the covariant naturality of the open Hom formula;\nnaturality in M follows from the parametrized tensor--Hom adjunction and its\ncontravariant naturality; naturality in N is the ordinary left-variable adjunction\nnaturality. Yoneda therefore gives an isomorphism natural in M and N. Finally transport\nr to the specified upperStar using supportPullbackIsoUpperStar and\nmapDerivedCategoryNatIso. No finiteness of the complexes or Tor-amplitude is used.\nEmpty source or target and zero coefficients are included: the adjunctions and Yoneda\nargument remain valid in the zero categories.",
+   "uses": [
+    "lem-sfb-open-closed-internal-hom-formulas",
+    "def-sfb-condensed-pullback-tensor-comparison",
+    "sk-def-sfb-derived-tensor-hom",
+    "det-lem-formal-closed-support-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-open-closed-internal-hom-formulas",
+  "def-sfb-condensed-pullback-tensor-comparison",
+  "sk-def-sfb-derived-tensor-hom",
+  "det-lem-formal-closed-support-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+  "place": "Immersion case, reusing existing normalized internal-Hom and projection declarations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for extension by zero and tensor product along an open or closed immersion",
+   "results": "8 hits; restriction and adjunction statements, no derived immersion projection formula.",
+   "date": "2026-10-19",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"Adjunction\"",
+   "results": "0 hits",
+   "date": "2026-10-19",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|lowerShriek",
+   "results": "0 hits",
+   "date": "2026-10-19",
+   "verdict": "No direct Mathlib match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unbounded derived tensor projection formula for extension by zero along an open immersion and direct image along a closed immersion of schemes with condensed coefficients",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.IsOpenImmersion.instFstScheme, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackConeOfLeftLift_snd, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackConeOfLeftLift_fst, Algebra.instIsStandardOpenImmersionTensorProduct, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd",
+   "date": "2026-10-19",
+   "verdict": "No match: the results concern scheme module restriction, open-immersion base change and affine tensor products, not unbounded derived tensor over condensed coefficients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntTensorProjection",
+  "date": "2026-10-19",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-tensor-projection",
+   "place": "Proof, Open immersions, sheaves; Derived version.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-tensor",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenImmersionTensorProjection",
+  "file": "lean/Sheaf/SixFunctors/OpenImmersionTensorProjection.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.openImmersionTensorProjection",
+  "statement": "theorem openImmersionTensorProjection\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]\n    (k : Type u) [Field k] {S X : Scheme.{u}}\n    [S.Over (Spec (.of k))] [X.Over (Spec (.of k))]\n    [IsSeparated (S ↘ Spec (.of k))]\n    [LocallyOfFiniteType (S ↘ Spec (.of k))]\n    [QuasiCompact (S ↘ Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (X ↘ Spec (.of k))]\n    (f : S ⟶ X) [f.IsOver (Spec (.of k))]\n    [IsOpenImmersion f] :\n    Nonempty (\n      (((Functor.whiskeringLeft₂ _).obj\n          (openImmersionLowerShriek Λ f).mapDerivedCategory).obj (𝟭 _)).obj\n        (derivedTensor Λ X) ≅\n      (Functor.postcompose₂.obj\n        (openImmersionLowerShriek Λ f).mapDerivedCategory).obj\n        ((((Functor.whiskeringLeft₂ _).obj (𝟭 _)).obj\n          ((f)^*⟦Λ⟧.mapDerivedCategory)).obj (derivedTensor Λ S)))",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261019T002609-L-2157997",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261019T002609-L-2157997",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
