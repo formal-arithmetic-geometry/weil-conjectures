@@ -244,12 +244,26 @@ def select(entries, failures, imports, changes, messages=None, *, checkpoint=lam
 
 def dependents(entries, suspects, imports):
     """Transitive delivery dependency closure, including multi-module deliveries."""
-    import leanindex as li
-    removed = {id(e) for e in suspects}; modules = {m for e in suspects for m in e['modules']}
-    memo = {}
-    while True:
-        added = [e for e in entries if id(e) not in removed and
-                 any(li.closure(m, imports, memo) & modules for m in e['modules'])]
-        if not added: break
-        removed.update(id(e) for e in added); modules.update(m for e in added for m in e['modules'])
+    # 2026-10-19 (launcher): walk the reverse import graph from the removed modules instead of building the transitive
+    # closure of every module of the library (20k sets, 3 GB, 25+ min at 100% CPU while live stayed red)
+    rev = {}
+    for m, ims in imports.items():
+        for i in ims:
+            rev.setdefault(i, set()).add(m)
+    removed = {id(e) for e in suspects}
+    owner = {}
+    for e in entries:
+        for m in e['modules']:
+            owner.setdefault(m, []).append(e)
+    seen = {m for e in suspects for m in e['modules']}
+    stack = list(seen)
+    while stack:
+        for y in rev.get(stack.pop(), ()):
+            if y in seen: continue
+            seen.add(y); stack.append(y)
+            for e in owner.get(y, ()):
+                if id(e) not in removed:
+                    removed.add(id(e))
+                    for m in e['modules']:
+                        if m not in seen: seen.add(m); stack.append(m)
     return [e for e in entries if id(e) in removed and e not in suspects]
