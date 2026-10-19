@@ -6,7 +6,8 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.CategoryTheory.Galois.StacksGaloisAxioms
-import Sheaf.CategoryTheory.Galois.StacksGaloisCategory
+import Sheaf.CategoryTheory.Galois.StacksMonoComplement
+import Mathlib.CategoryTheory.Galois.Decomposition
 
 /-!
 # Galois objects above connected objects
@@ -42,6 +43,46 @@ theorem exists_stacksGaloisObject_hom_of_isConnected
     {C : Type u} [Category.{v} C] (F : C ⥤ Type w)
     (hG : IsStacksGaloisCategory F) (X : C) [IsConnected X] :
     ∃ (Z : C) (_ : Z ⟶ X), IsStacksGaloisObject F Z := by
-  sorry
+  let := hG.hasFiniteLimits
+  let := hG.hasFiniteColimits
+  let := hG.preservesFiniteLimits
+  let := hG.preservesFiniteColimits
+  let := hG.reflectsIsomorphisms
+  let F' : C ⥤ FintypeCat.{w} := ObjectProperty.lift _ F hG.finite_obj
+  let : Limits.PreservesFiniteLimits (F' ⋙ FintypeCat.incl) := hG.preservesFiniteLimits
+  let : Limits.PreservesFiniteColimits (F' ⋙ FintypeCat.incl) := hG.preservesFiniteColimits
+  let : (F' ⋙ FintypeCat.incl).ReflectsIsomorphisms := hG.reflectsIsomorphisms
+  let : Limits.PreservesFiniteLimits F' :=
+    Limits.preservesFiniteLimits_of_reflects_of_preserves F' FintypeCat.incl
+  let : Limits.PreservesFiniteColimits F' :=
+    Limits.preservesFiniteColimits_of_reflects_of_preserves F' FintypeCat.incl
+  let : F'.ReflectsIsomorphisms := reflectsIsomorphisms_of_comp F' FintypeCat.incl
+  let : PreGaloisCategory C := {
+    monoInducesIsoOnDirectSummand := fun i ↦ stacksGalois_mono_complement F hG i
+    hasQuotientsByFiniteGroups := fun G _ _ ↦ by
+      obtain ⟨G', hgroup, hfinite, ⟨e⟩⟩ := Finite.exists_type_univ_nonempty_mulEquiv G
+      let := hgroup
+      let := hfinite
+      let := Fintype.ofFinite G'
+      exact Limits.hasColimitsOfShape_of_equivalence e.toSingleObjEquiv.symm }
+  let : F'.PreservesEpimorphisms := {
+    preserves := fun f _ ↦ by
+      apply ConcreteCategory.epi_of_surjective
+      exact ((stacksGaloisCategory_axioms.{0, 0, w, v, u} F hG).2.1 f).2.mp
+        inferInstance }
+  let : FiberFunctor F' := {
+    preservesQuotientsByFiniteGroups := fun G _ _ ↦ by
+      obtain ⟨G', hgroup, hfinite, ⟨e⟩⟩ := Finite.exists_type_univ_nonempty_mulEquiv G
+      let := hgroup
+      let := hfinite
+      let := Fintype.ofFinite G'
+      exact Limits.preservesColimitsOfShape_of_equiv e.toSingleObjEquiv.symm F' }
+  let : GaloisCategory C := {
+    hasFiberFunctor := ⟨F' ⋙ FintypeCat.uSwitch.{w, v}, ⟨inferInstance⟩⟩ }
+  obtain ⟨Z, f, hZ⟩ := exists_hom_from_galois_of_connected F' X
+  let := hZ
+  obtain ⟨z⟩ := nonempty_fiber_of_isConnected F' Z
+  refine ⟨Z, f, inferInstance, ?_⟩
+  exact Nat.card_eq_of_bijective _ (evaluation_aut_bijective_of_isGalois F' Z z)
 
 end CategoryTheory
