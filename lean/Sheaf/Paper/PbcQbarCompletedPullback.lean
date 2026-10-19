@@ -7,8 +7,8 @@ module
 
 public import Sheaf.Paper.PbcActualStrictPullback
 public import Sheaf.Paper.PbcDescentFunctors
-import Sheaf.Paper.IntegralOperationsPreserveConstructible
-import Sheaf.Paper.IntegralOperationsScalarComparisons
+import Sheaf.Paper.PbcUniformCompleteTriangulated
+import Sheaf.Paper.PbcActualRingedExchange
 
 /-! # Completed pullback on the actual common-stage Qbar category
 
@@ -65,7 +65,63 @@ theorem pbcQbarPullFamily_existsUnique :
       (∀ E : Padic.FiniteCoefficientFields l Ω,
         F.Φ E = pbcDescentPullback l Ω f (pbcQbarIntegralPull_mem l Ω f) E) ∧
       PbcPullbackBetaSpec l Ω f (pbcQbarIntegralPull_mem l Ω f) F := by
-  sorry
+  let h := pbcQbarIntegralPull_mem l Ω f
+  have hunique
+      (h : ∀ E : Padic.FiniteCoefficientFields l Ω,
+        ∀ K : pbcIntegralStage l Ω Y E,
+          PbcIsBoundedConstructibleComplete X (pbcStageDatum.{u} l Ω E)
+            ((pbcActualCompletedPull f (pbcStageDatum.{u} l Ω E)).obj K.obj))
+      {F G : StageSystem.Morphism
+          (pbcScalarSystem l Ω Y dY.out iY.out) (pbcScalarSystem l Ω X dX.out iX.out)}
+      (hF : (∀ E : Padic.FiniteCoefficientFields l Ω,
+          F.Φ E = pbcDescentPullback l Ω f h E) ∧ PbcPullbackBetaSpec l Ω f h F)
+      (hG : (∀ E : Padic.FiniteCoefficientFields l Ω,
+          G.Φ E = pbcDescentPullback l Ω f h E) ∧ PbcPullbackBetaSpec l Ω f h G) :
+      F = G := by
+    rcases F with ⟨Φ, β, coh⟩
+    rcases G with ⟨Ψ, γ, coh'⟩
+    have e : Φ = Ψ := funext fun E ↦ (hF.1 E).trans (hG.1 E).symm
+    cases e
+    have eβ : @β = @γ := by
+      funext E F hEF
+      apply Iso.ext_inv
+      apply NatTrans.ext
+      funext K
+      rcases K with ⟨K⟩
+      have e₁ := hF.2 hEF (hF.1 E) (hF.1 F) K
+      have e₂ := hG.2 hEF (hF.1 E) (hF.1 F) K
+      have ee := eq_of_heq (e₁.trans e₂.symm)
+      simp only [Iso.trans_inv, Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
+        NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+        Category.assoc] at ee
+      apply (cancel_epi _).mp at ee
+      apply (cancel_epi _).mp at ee
+      apply (cancel_mono _).mp at ee
+      exact ee
+    cases eβ
+    rfl
+  have hid (Z : Scheme.{u}) [IsNoetherian Z]
+      (hd : ∃ n : ℕ, topologicalKrullDim Z ≤ (n : WithBot ℕ∞))
+      (hi : ∀ z : Z, IsUnit (l : Z.presheaf.stalk z))
+      (E : Padic.FiniteCoefficientFields l Ω) (K : pbcIntegralStage l Ω Z E) :
+      PbcIsBoundedConstructibleComplete Z (pbcStageDatum.{u} l Ω E)
+        ((pbcActualDerivedPush (𝟙 Z) (pbcStageDatum.{u} l Ω E)).obj K.obj) := by
+    let := (pbcIntegralUniformComplete_isTriangulated l (pbcFiniteField.{u} l Ω E)
+      Z hd hi).1
+    exact ObjectProperty.prop_of_iso _
+      ((pbcActualDerivedDirectIdIso (pbcStageDatum.{u} l Ω E) Z).app K.obj).symm
+      K.property
+  let sq : ChosenCartesianSquare f (𝟙 X) (𝟙 Y) f :=
+    { w := by simp
+      isoPullback := (asIso (pullback.snd (𝟙 Y) f)).symm
+      hom_fst := by simp
+      hom_snd := by simp }
+  obtain ⟨Rf, Rf', Lg, Lg', hRf, hRf', hLg, hLg', hβRf, hβRf', hβLg, rest⟩ :=
+    pbcDescentOperations l Ω Y Y X X (𝟙 Y) (𝟙 X) f f sq
+      (hid Y dY.out iY.out) (hid X dX.out iX.out) h h
+  refine ⟨Lg.base, ⟨hLg, hβLg⟩, ?_⟩
+  intro G hG
+  exact hunique h hG ⟨hLg, hβLg⟩
 
 /-- The unique normalized common-stage family of actual completed pullbacks.
 Source: BS Remark 6.8.15 (blueprint: def-weil-pbc-completed-pullback). -/
