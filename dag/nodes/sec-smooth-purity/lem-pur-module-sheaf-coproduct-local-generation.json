@@ -1,0 +1,154 @@
+{
+ "id": "lem-pur-module-sheaf-coproduct-local-generation",
+ "kind": "statement",
+ "title": "Local finite-sum normal form in a coproduct of module sheaves",
+ "statement": "Let C be a small category with pullbacks and K a precoverage satisfying [def-weil-pbc-sites-and-cohomology]. Let R be a sheaf of rings, with abelian sheafification and locally bijective equivalences, so that module sheafification [def-weil-presheaf-modules-sheafification] exists. Let I be a small set with decidable equality, H_i sheaves of R-modules [def-weil-sheaf-of-modules-category], and Q their chosen coproduct [def-weil-pbc-category-colimit], with insertions ι_i and coordinate retractions π_i. For every object V and section x∈Q(V), there is a small covering family a_α:U_α→V belonging to K and finite sets B_α⊆I such that x|U_α=∑_{i∈B_α}ι_i(π_i(x|U_α)). Empty index types and empty covering families are allowed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03DB, lemma-limits-colimits, coproduct as sheafification of the sectionwise direct sum; local representative and finite-sum consequence."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Form the coproduct P of the underlying module presheaves. By the sectionwise-colimit theorem, evaluation carries P to the coproduct of modules, identified with their direct sum. Each element t is the sum of its finitely many support coordinates.",
+   "uses": [
+    "lem-weil-pbc-presheaf-modules-colimits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB, lemma-limits-colimits and its proof (module-sheaf coproduct is the sheafification of the sectionwise coproduct); explicit image in the sectionwise product."
+   }
+  },
+  {
+   "text": "The module-sheafification adjunction identifies the sheafification of P with Q by the coproduct universal property, compatibly with insertions. The comparison P→Q is the sheafification unit followed by an isomorphism. Its underlying abelian-presheaf map is locally surjective, since the sheafification unit is.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB, lemma-limits-colimits and its proof (module-sheaf coproduct is the sheafification of the sectionwise coproduct); explicit image in the sectionwise product."
+   }
+  },
+  {
+   "text": "Refine the covering image sieve of x to a K-covering presieve. This refinement property follows by induction on the generated Grothendieck topology: generating covers and maximal sieves have refinements, pullbacks use the covering-pullback axiom, and transitivity uses bind composition. Write the presieve as a small family and choose on each arrow a preimage in P. Its finite support and the sectionwise direct-sum identity give a finite-sum expression for the restricted x.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB, lemma-limits-colimits and its proof (module-sheaf coproduct is the sheafification of the sectionwise coproduct); explicit image in the sectionwise product."
+   }
+  },
+  {
+   "text": "Apply each coordinate retraction to this expression. In its own summand it is the identity, and on every other summand it is zero. Hence each coefficient in the support equals the corresponding retraction of the restricted x. Substitute these coefficients into the finite sum. This proves the stated normal form, including the empty direct sum and empty covering cases.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB, lemma-limits-colimits and its proof (module-sheaf coproduct is the sheafification of the sectionwise coproduct); explicit image in the sectionwise product."
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03DB: local finite-sum consequence of sheafified sectionwise coproduct."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coproduct.*local|local.*coproduct|sum_support_of",
+   "results": "[\"Mathlib/CategoryTheory/Subobject/Lattice.lean\", \"Mathlib/CategoryTheory/Subobject/Lattice.lean\", \"Mathlib/Algebra/DirectSum/Decomposition.lean\", \"Mathlib/Algebra/DirectSum/Basic.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Preadditive/LeftExact.lean\", \"Mathlib/CategoryTheory/Preadditive/LeftExact.lean\", \"Mathlib/CategoryTheory/Preadditive/Indization.lean\"]",
+   "date": "2026-10-19",
+   "verdict": "Related sheafification and direct-sum APIs found; no theorem gives this local finite-sum normal form for arbitrary module sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallySurjective\"",
+   "results": "[\"CategoryTheory.Presheaf.IsLocallySurjective\", \"CategoryTheory.Sheaf.IsLocallySurjective\", \"CategoryTheory.Sheaf.instIsLocallySurjectiveFunToImage\", \"CategoryTheory.Presheaf.instIsLocallySurjectiveFunToRangeSheafify\", \"CategoryTheory.Presheaf.isLocallySurjective_toSheafify'\", \"CategoryTheory.Sheaf.epi_of_isLocallySurjective'\", \"CategoryTheory.Presheaf.isLocallySurjective_of_iso\", \"CategoryTheory.Sheaf.isLocallySurjective_iff_epi\"]",
+   "date": "2026-10-19",
+   "verdict": "Related sheafification and direct-sum APIs found; no theorem gives this local finite-sum normal form for arbitrary module sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of a coproduct of sheaves of modules are locally finite sums of sections of the summands",
+   "results": "[\"SheafOfModules.GeneratingSections.IsFiniteType\", \"SheafOfModules.freeCofan\", \"SheafOfModules.GeneratingSections.I\", \"SheafOfModules.GeneratingSections\", \"SheafOfModules.isColimitFreeCofan\", \"SheafOfModules.GeneratingSections.s\", \"SheafOfModules.free\", \"SheafOfModules.freeSection\"]",
+   "date": "2026-10-19",
+   "verdict": "Related sheafification and direct-sum APIs found; no theorem gives this local finite-sum normal form for arbitrary module sheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of a coproduct of sheaves of modules are locally finite sums of sections of the summands",
+   "results": "[\"AlgebraicGeometry.LocallyRingedSpace.coproduct\", \"AlgebraicGeometry.Scheme.coprodPresheafObjIso\", \"SheafOfModules.\\u03b9Free\", \"SheafOfModules.sections\", \"SheafOfModules.free\", \"SheafOfModules.GeneratingSections.IsFiniteType\", \"CategoryTheory.Sheaf.instHasFiniteCoproducts\", \"SheafOfModules.GeneratingSections.IsFiniteType.mk\"]",
+   "date": "2026-10-19",
+   "verdict": "No match: these results construct free sheaves or coproducts of spaces, not a local finite-sum normal form for an arbitrary family of module sheaves."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleSheafCoproductLocalSupport",
+  "date": "2026-10-19",
+  "group": "J6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-flasque-support",
+   "place": "Coproduct construction in the unrestricted support comparison: finite-support representatives in the sheafified presheaf coproduct; auxiliary local normal form for lem-pur-module-sheaf-coproduct-local-support.",
+   "via": [
+    "lem-pur-module-sheaf-coproduct-local-support"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleSheafCoproductLocalGeneration",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleSheafCoproductLocalGeneration.lean",
+  "declaration": "CategoryTheory.moduleSheaf_coproduct_localGeneration",
+  "statement": "theorem moduleSheaf_coproduct_localGeneration\n    {C : Type u} [SmallCategory C] (K : Precoverage C)\n    (hK : K.IsSiteForCoverings) [HasPullbacks C]\n    (R : Sheaf K.toGrothendieck RingCat.{r})\n    [HasSheafify K.toGrothendieck AddCommGrpCat.{u}]\n    [K.toGrothendieck.WEqualsLocallyBijective AddCommGrpCat.{u}]\n    (I : Type u) [DecidableEq I] (H : I → ringedSiteModules.{u} R)\n    (V : C) (s : (∐ H).val.obj (op V)) :\n    ∃ (A : Type u) (U : A → C) (a : ∀ α : A, U α ⟶ V),\n      Presieve.ofArrows U a ∈ K V ∧\n      ∃ B : A → Finset I, ∀ α : A,\n        (∐ H).val.map (a α).op s =\n          ∑ i ∈ B α, (Sigma.ι H i).val.app (op (U α))\n            ((Sigma.π H i).val.app (op (U α)) ((∐ H).val.map (a α).op s)) ",
+  "branch": "sheaf-dag",
+  "by": "J6",
+  "date": "2026-10-19"
+ },
+ "proof_deps": [
+  "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261019T093457-L-2315971",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261019T093457-L-2315971",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
