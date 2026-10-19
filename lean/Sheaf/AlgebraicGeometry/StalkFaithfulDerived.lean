@@ -13,23 +13,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Mathlib.CategoryTheory.Triangulated.Pretriangulated
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import Mathlib.CategoryTheory.Sites.Point.Skyscraper
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
-import Sheaf.AlgebraicGeometry.GeometricStalkAsPullback
-import Sheaf.AlgebraicGeometry.GeometricStalkCohomology
-import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
-import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
-import Sheaf.AlgebraicGeometry.DerivedGlobalGerm
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.AlgebraicGeometry.DerivedCategories
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 
 /-!
 # Stalk faithfulness for derived étale objects
@@ -87,6 +73,34 @@ theorem stalk_faithful_derived
       ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
         (t : Spec (.of Ω) ⟶ T),
         IsIso ((upperStar AddCommGrpCat.{u + 1} t).mapDerivedCategory.map α) := by
-  sorry
+  constructor
+  · intro h Ω _ _ t
+    exact Functor.map_isIso _ α
+  · intro h
+    apply (_root_.DerivedCategory.isIso_iff _ α).2
+    intro q
+    apply Scheme.isIso_of_isIso_sheafFiber_map
+    intro s
+    let Ω := AlgebraicClosure (T.residueField s)
+    let t : Spec (.of Ω) ⟶ T := T.algClosurePoint s
+    have : IsIso ((upperStar AddCommGrpCat.{u + 1} t).mapDerivedCategory.map α) :=
+      h Ω t
+    have : IsIso ((upperStar AddCommGrpCat.{u + 1} t).map
+        ((_root_.DerivedCategory.homologyFunctor _ q).map α)) :=
+      (NatIso.isIso_map_iff
+        ((upperStar AddCommGrpCat.{u + 1} t).mapDerivedCategoryHomologyFunctorIso q) α).2
+          (by change IsIso ((_root_.DerivedCategory.homologyFunctor _ q).map
+                ((upperStar AddCommGrpCat.{u + 1} t).mapDerivedCategory.map α))
+              infer_instance)
+    have e := upperStarCompUliftSheafFiberIso AddCommGrpCat.{u + 1} t
+      (𝟙 (Spec (.of Ω)))
+    simp only [Category.id_comp] at e
+    apply (NatIso.isIso_map_iff e
+      ((_root_.DerivedCategory.homologyFunctor _ q).map α)).1
+    change IsIso ((((Scheme.pointSmallEtale (𝟙 (Spec (.of Ω)))).ulift.{u + 1}).sheafFiber
+      (A := AddCommGrpCat.{u + 1})).map
+        ((upperStar AddCommGrpCat.{u + 1} t).map
+          ((_root_.DerivedCategory.homologyFunctor _ q).map α)))
+    infer_instance
 
 end AlgebraicGeometry.Etale
