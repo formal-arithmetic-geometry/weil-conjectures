@@ -233,5 +233,23 @@
   "group": "Q75",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-18fa1ebea (reviewer sub-agent of L); spot-checked: I read the item, the new node, the statements of all 13 cited nodes, Stacks 01MY (constructions.tex l.2053-2135) and 07Z2 (algebra.tex l.13686-13727), and the parent's Steps 2 and 4. The item statement is unchanged, true, and gives the parent what it uses; no C_0=A_0 or Noetherian hypothesis is assumed. Step 1 proves U(iota)=Proj A by degree-projecting homogeneous generators, so every coefficient lands in C_+. Step 2: injectivity of the chart maps comes from injectivity of iota through the annihilator relation. Step 3: the g^d/f^e degree indexing matches lem-weil-pbc-proj-basic-open-intersection. Step 5 gives the inverse-image formula, which is 01MY(2). Step 6: the module fractions M_(f),0 equal A_(iota f),0 with scalar action alpha_f, which feeds 01WI(2). Step 7: 00GK and 00GQ on the injective finite chart maps give surjectivity. The new node lem-per-finite-graded-module-dehomogenization is exactly 07Z2(2) with R=C_0, restricted to nonnegatively graded M. It is statement-only and self-contained, with all three kinds of search recorded; the only Mathlib near-hit, Away.finiteType, is clause (1). I tested it on small cases (M=k[x]/(x), nilpotent f, non-standard degrees). No duplicate: only the delivery cites 07Z2 in the DAG, the blueprint has no 07Z2 node, and the Proj nodes nearby state other things. The new node does not restate a clause of the item. All non-definition citations are Mathlib leaves, so the route is fine and no tool_uses is needed. No SGA, no cycle, proof_deps equals the union of uses, and every step is under 2000 characters. Minor, not a fault: 'canonical Proj map [def-pc-proj]' cites a node that does not define induced maps, but the statement pins r by its chart formulas on a cover. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteGradedProjMorphism",
+  "declaration": "AlgebraicGeometry.Proj.exists_isFinite_surjective_of_finite_graded",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteGradedProjMorphism.lean",
+  "statement": "theorem Proj.exists_isFinite_surjective_of_finite_graded {C A : Type u} [CommRing C] [CommRing A] (𝒞 : ℕ → AddSubgroup C) (𝒜 : ℕ → AddSubgroup A) [GradedRing 𝒞] [GradedRing 𝒜] (iota : 𝒞 →+*ᵍ 𝒜) (_hinj : Function.Injective iota) (_hft : (algebraMap (𝒞 0) C).FiniteType) (_hfinite : iota.toRingHom.Finite) : ∃ r : Proj 𝒜 ⟶ Proj 𝒞, IsFinite r ∧ Surjective r ∧ ∀ (d : ℕ) (hd : 0 < d) (f : C) (hf : f ∈ 𝒞 d), r ⁻¹ᵁ Proj.basicOpen 𝒞 f = Proj.basicOpen 𝒜 (iota f) ∧ Proj.awayι 𝒜 (iota f) (iota.2 hf) hd ≫ r = Spec.map (CommRingCat.ofHom (Away.map iota f)) ≫ Proj.awayι 𝒞 f hf hd",
+  "branch": "newtargets-dag",
+  "by": "Q155",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-92ff89627",
+  "group": "Q155",
+  "result": "pass",
+  "note": "Clause-by-clause match: injective graded iota (𝒞 →+*ᵍ 𝒜), (algebraMap (𝒞 0) C).FiniteType, iota.toRingHom.Finite; ∃ r : Proj 𝒜 ⟶ Proj 𝒞 with IsFinite, Surjective, preimage of basicOpen f = basicOpen (iota f), and awayι chart square through Away.map (map_mk is c/f^m ↦ ι c/ι f^m). r is pinned uniquely because the charts cover. No C0=A0, Noetherian or other extra hypothesis; the shared universe u is forced by the Hom of schemes. Mathlib Proj.map needs the stronger irrelevant-ideal inclusion (k[x^2]⊂k[x] counterexample), so it is no duplicate. Edge cases (empty Proj, nilpotent f, degree-0 concentration) covered. sorry-only proof; docstrings carry source, blueprint and 7 steps; plain imports are the proof-dep mathlib_match modules (rule 7); lean.statement verbatim; only the lean field changed vs live. nt_compile --json clean, 4.7 s. Advisory: RingHom.Finite vs recorded Module.Finite."
  }
 }

@@ -214,5 +214,24 @@
   "group": "Q114",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-9b6a98623 (reviewer sub-agent of L); spot-checked: Read in full: the item, the three new nodes, every cited statement, ILO X Prop. 1.2 pp.136-138 ((4)-(5), Serre 12 §2.3/13 §14.4 lift), ILO §1.3 p.139 (Λ localizes to Q(µ) or a DVR), Stacks 0AP2 lemma-Dedekind-etale-extension, and Mathlib Type.lean:544-548. The item statement is unchanged. The proof is correct. Step 1 shows |G| is a unit. Step 2 uses the field-or-DVR node and Brauer splitting over K=Frac Λ⊂C (char 0, ζ_N, exponent divides N). Step 3 uses lattices L_i, which are free by lem-sc-dvr-fg-torsionfree-free. Step 4 builds the integral map f. Step 5 compares trace forms: H=m·perm, so det=±m^m, and H=MᵀTM. Step 6 gets det M a unit and adj(M) as the inverse. Small cases checked: N=1, C2, Q8 over Q(i), p=(0), S3. The new nodes lem-per-cyclotomic-local-ring-dvr (Φ_N étale over Z[1/N], then 0AP2) and lem-per-cyclotomic-field-brauer-splitting (Serre 12.3) are true and not duplicates. Fault, B3 and the batch-5 flag: the new Cauchy leaf's only citation [def-pod-finite-continuous-module] (sec-poincare-duality) does not define 'finite group'. The report says it was added only to pass the preflight citation gate. That node is a general definition outside the batch-5 assumptions, but the citation is spurious. Repair: the leaf is dropped. Item Step 1 now realizes G as a finite group of Q-automorphisms of Q(x_g:g∈G) and cites the existing Mathlib leaf lem-exc-finite-group-cauchy (plus def-pc-field-extension). proof_deps recomputed. The closure of the fixed item reaches no sec-trace-formula, sec-poincare-duality or sk-thm-trace-transport node. No tool_uses: the off-unit citations are Mathlib leaves. Maintainer note: the preflight 'cites no node' gate rejects self-contained Mathlib leaves.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.LocalCyclotomicGroupAlgebraSplit",
+  "declaration": "MonoidAlgebra.exists_algEquiv_pi_matrix_local_cyclotomic",
+  "file": "lean/Sheaf/RepresentationTheory/LocalCyclotomicGroupAlgebraSplit.lean",
+  "statement": "theorem exists_algEquiv_pi_matrix_local_cyclotomic (N : ℕ) (hN : 0 < N) (G : Type v) [Group G] [Finite G] (hG : ∀ g : G, g ^ N = 1) (ζ : ℂ) (hζ : IsPrimitiveRoot ζ N) (A : Subalgebra ℤ ℂ) (hA : A = Algebra.adjoin ℤ {ζ, (N : ℂ)⁻¹}) (p : Ideal A) [p.IsPrime] (Λ : Type u) [CommRing Λ] [Algebra A Λ] [IsLocalization.AtPrime Λ p] : ∃ (r : ℕ) (d : Fin r → ℕ), 0 < r ∧ (∀ i : Fin r, 0 < d i) ∧ Nonempty (MonoidAlgebra Λ G ≃ₐ[Λ] Π i : Fin r, Matrix (Fin (d i)) (Fin (d i)) Λ)",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-19",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-98a3580e3"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-98a3580e3",
+  "group": "Q49",
+  "result": "fix",
+  "note": "Lean statement matches node clause-for-clause (N>0, Finite Group G with g^N=1, IsPrimitiveRoot ζ N, A = adjoin ℤ {ζ,1/N} in ℂ, IsLocalization.AtPrime Λ p, ∃ r>0, d_i>0, Nonempty (MonoidAlgebra Λ G ≃ₐ[Λ] Π Matrix (Fin d_i) (Fin d_i) Λ)); no extra hypotheses, universes independent, edge cases N=1 and p=0 covered, statement true; node changed only in lean, statement verbatim, docstrings carry source/blueprint and all 6 proof steps; no integral version in Mathlib or side. Fault H9: plain imports Perm.Cycle.Type, FreeModule.PID, Matrix.Adjugate unused and not transitive (#check probe). fixes/LocalCyclotomicGroupAlgebraSplit.lean drops them; delivered and fixed modules both compile clean via nt_compile --json (2.5 s / 3.0 s)."
  }
 }
