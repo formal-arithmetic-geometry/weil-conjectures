@@ -383,5 +383,23 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-a63c39f5b (reviewer sub-agent of L); spot-checked: Read the item and all 9 new nodes in full against Stacks resolve.tex: 0BGN (whole proof), 0B4N, 0BG0, 0B4P, 0AXL, 0B4Q, 0B4U, 0BBV and 0BGE. The item statement is unchanged and matches 0BGN with resolve-definition-resolution. Steps 1-10 follow the 0BGN route. Step 1: strong induction over all complete regular bases of dimension 2. Steps 2-3: the degree-1 base case and the construction of B = A∩L (normal, finite, complete local, dimension 2, degree drops). Steps 4-5: normalization in K, completed-degree bound, then refinement, completion descent and globalization; hypotheses checked against the statements of the existing nodes. Step 6: separable/degree-p dichotomy; [K:M]=p forces M=F and n=p, R has characteristic p. Steps 7-10: rational model (0B4P), Gorenstein blowups (0BBV), propagation (0BG0), RDP resolution (0BGE), globalization. The new nodes are faithful to their tags. The Gorenstein node replaces 'has a dualizing complex' by 'essentially of finite type over a complete local ring' (implies it by 0BFR) and reads 'ω invertible' as 'Gorenstein local rings', which is correct because normal surfaces are CM. The completed-degree node is true: CM over regular gives flat (00R4), so π is locally free of rank d; completion splits into free factors of rank ≤ d; the completions are normal (0C23); the 'Moreover' clause holds by cancellation of properness. No new node restates a clause of the item; no duplicates found by grep over the snapshot DAG; no SGA citation; the item is still unsplit on live. Batch-5: lem-per-complete-local-excellence (closure reaches only trf universal-catenarity/CM algebra), lem-trf-closed-dominant-dimension (dimension formula), lem-trf-finite-domain-fraction-degree (Mathlib leaf) and lem-trf-projective-bundle-proper are generic algebra/geometry. Their closures contain no sk-thm-trace-transport, assumption leaf or sec-poincare-duality node, so I accept all four. The declared tool_uses are accepted as generic."
+ },
+ "lean": {
+  "module": "Sheaf.DeligneLaumon.CompleteNormalSurfaceResolution",
+  "declaration": "AlgebraicGeometry.exists_regular_proper_model_of_complete_normal_surface",
+  "file": "lean/Sheaf/DeligneLaumon/CompleteNormalSurfaceResolution.lean",
+  "statement": "theorem exists_regular_proper_model_of_complete_normal_surface (A : Type u) [CommRing A] [IsNoetherianRing A] [IsDomain A] [IsIntegrallyClosed A] [IsLocalRing A] (𝔪 : Ideal A) [𝔪.IsMaximal] (h𝔪 : 𝔪 = IsLocalRing.maximalIdeal A) (hdim : ringKrullDim A = (2 : WithBot ℕ∞)) (hcomplete : IsAdicComplete 𝔪 A) : ∃ (T : Scheme.{u}) (_ : IsIntegral T) (f : T ⟶ Spec (.of A)), IsProper f ∧ IsRegularScheme T ∧ ∃ hη : f (genericPoint T) = genericPoint (Spec (.of A)), IsIso (f.functionFieldMap hη)",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-258f31e2e",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Statement matches Stacks 0BGN and the node clause by clause, using the recorded dependency declarations: Noetherian, IsDomain+IsIntegrallyClosed, local ring with h𝔪, ringKrullDim=2, IsAdicComplete 𝔪 A; ∃ integral T in Scheme.{u}, IsProper f to Spec A, IsRegularScheme T, generic point to generic point with IsIso of the genuine functionFieldMap (stalkSpecializes ≫ stalkMap). No extra hypotheses; universe is that of A; edge cases checked (dim 0/1 and zero ring excluded, empty scheme cannot witness, identity when A is regular). Only the lean field changed vs the live node; lean.statement verbatim; sorry-only proof; source place and blueprint docstrings present; full 10-step proof plan in the theorem docstring; every proof dependency with a recorded lean module imported without public. No duplicate found in Mathlib or the side Sheaf/WeilConjectures trees. nt_compile --json clean (2.5 s). Advisory only: [𝔪.IsMaximal] is redundant; functionFieldMap is an upstream declaration no stmt_dep records, used the same way in landed modules."
  }
 }

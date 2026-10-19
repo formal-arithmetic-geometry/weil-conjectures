@@ -199,5 +199,23 @@
   "group": "Q31",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-43fc40001 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-per-etale-local-lift-torsor-quasi-coherent and every cited statement in full. Sources read in the Stacks project: spaces-more-morphisms.tex 061A lemma-sheaf, 061C lemma-action-sheaf, 061D remark-special-case and 04AM lemma-smooth-formally-smooth, which uses the same argument (pseudo-torsor, local sections (I), qc H^1 vanishing (II), torsors-H1). The tags 02H0, 03AJ and 03P2 map to the cited labels. The item statement and stmt_deps are identical to the live unsplit node. The statement is true; the lfp hypothesis is used exactly for quasi-coherence of Hom(a0^*Ω, I). Step 1 applies the new node to the affine square. Step 2 is correctly elementary: the given a_j are sections of L, translation trivializes L on the jointly surjective étale cover, so L is a torsor in def-sc-gm-torsor's general abelian clause. Step 3: lem-sc-etale-affine-qcoherent with q=1 applies to H on affine T, and its H_et is the same associated sheaf. Step 4: lem-sc-torsor-h1 covers arbitrary abelian sheaves and sends 0 to the trivial torsor, giving a global lift. Steps 5 and 6 are exact instances of def-sbc-formally-smooth (affine thickenings over S) and def-sbc-smooth-morphisms (lfp + formally smooth). New node: true, because Ω_{V/W} is finitely presented for lfp f, Hom out of a finitely presented module is quasi-coherent and commutes with flat pullback, and lifts differ by W-derivations into I O_U. Tested at I=0, at V=A^1_W, with no global lift (the action is conditional on a section), and with non-affine T. It is statement-only and self-contained (B1–B9), with no existence clause, so it is not a restatement of the item (D1/D2). DAG search over 061A/061C/04FJ/04AM/02H6 and square-zero lift/torsor/smooth statements found only log-smooth calculus nodes, ring-level lifting nodes and finite-M torsor nodes; no duplicate. The tool uses lem-sc-etale-affine-qcoherent and lem-sc-torsor-h1 are generic black boxes, declared and accepted. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleLocalInfinitesimalLiftsSmooth",
+  "declaration": "AlgebraicGeometry.smooth_of_etale_local_infinitesimal_lifts",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLocalInfinitesimalLiftsSmooth.lean",
+  "statement": "theorem smooth_of_etale_local_infinitesimal_lifts {V W : Scheme.{u}} (f : V ⟶ W) [LocallyOfFinitePresentation f] (h_lift : ∀ (T₀ T : Scheme.{u}) [IsAffine T₀] [IsAffine T] (i : T₀ ⟶ T), IsFirstOrderThickening i → ∀ (a₀ : T₀ ⟶ V) (b : T ⟶ W), a₀ ≫ f = i ≫ b → ∃ (J : Type u) (Tj : J → Scheme.{u}) (v : ∀ j : J, Tj j ⟶ T), (∀ j : J, Etale (v j)) ∧ (∀ t : T, ∃ (j : J) (x : Tj j), v j x = t) ∧ ∃ a : ∀ j : J, Tj j ⟶ V, ∀ j : J, a j ≫ f = v j ≫ b ∧ pullback.snd i (v j) ≫ a j = pullback.fst i (v j) ≫ a₀) : Smooth f",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2da0acb7d",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Every clause matches the node: affine T0 and T, IsFirstOrderThickening (closed immersion with ker^2=⊥), a0≫f=i≫b, a jointly surjective étale family indexed by J:Type u, a j≫f=v j≫b, the restriction via pullback.snd/fst i (v j), and the conclusion Smooth f. No extra hypotheses. Same-universe test schemes and J:Type u lose nothing. Empty T and zero ideal are covered. The statement is true (Stacks 04AM/02H6 with 03P2 and 03AJ). Node unchanged except lean; lean.statement is verbatim in the file; recorded stmt_dep declarations are used. No duplicate in Mathlib or side lean/Sheaf. No definitions, proof is sorry, docstrings give source and blueprint and follow node Steps 1-6. nt_compile --json compiled clean in 1.9 s, exit 0. Advisory: the worker report wrongly says the node has no proof steps."
  }
 }

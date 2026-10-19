@@ -319,5 +319,23 @@
   "group": "Q43",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-c31ac571a (reviewer sub-agent of L); spot-checked: PASS with no fixes; I read the full mathematics. Source: Stacks 0551 (more-morphisms.tex, about line 6771), read with 054R and 025O. The item is 0551 specialized to an integral Noetherian base and the statement is unchanged. It matches the parent lem-trf-contracted-component-no-extra-generic step 1. No new nodes and no SGA. Steps: 1) affine chart, A a Noetherian domain, finite type by the base-change clause of lem-sfb-finite-type-composition-base-change. 2) lem-sbc-generic-components-split gives L/K finite étale; finite dimension via def-weil-finite-integral-morphism on Spec K; separable via lem-weil-pbc-etale-residue-field-extension-separable. 3) lem-weil-pbc-spread-finite-separable-extension: its hypotheses hold. Compatibility over K is the natural reading of 'fraction field K'' and the node's proof builds B=S[α] inside L, so it holds. 4) D(c) ≅ Spec A[c^-1] as an open subscheme, by an explicit stalk/gluing argument that is genuinely elementary; I found no existing node to cite instead. 5) S is integral via 025O (etale-proposition-etale-reduced) and the domain's generic point; κ(ξ)=B_(0)=L. 6) H ≅ G over L by the fibre-product universal property, compatible with every E/L; a homeomorphism preserves components. Edge cases checked: empty X (vacuous), T a field (reduces to 054R), non-reduced or inseparable generic fibres (the notion is topological). Duplicate search: the five lem-sbc 0551 nodes give étale neighbourhoods or spread supplied data, so none is a duplicate. Accepted tool_uses: the sbc, pbc, sfb and pqf generic-geometry nodes, none in trf or pod. Maintainer note: the blueprint ancestry is the inherited historical Temkin input under lem-trf-local-term-locality, which main-20261015 replaced; this is not a fault of the delivery."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleGenericComponentSplitting",
+  "declaration": "AlgebraicGeometry.exists_finite_etale_generic_component_splitting",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleGenericComponentSplitting.lean",
+  "statement": "theorem exists_finite_etale_generic_component_splitting {X T : Scheme.{u}} [IsIntegral T] [IsLocallyNoetherian T] [CompactSpace T] (f : X ⟶ T) [LocallyOfFiniteType f] [QuasiCompact f] : ∃ U : T.Opens, (U : Set T).Nonempty ∧ IsAffineOpen U ∧ ∃ S : Scheme.{u}, IsIntegral S ∧ IsAffine S ∧ ∃ π : S ⟶ U.toScheme, IsFinite π ∧ Etale π ∧ Surjective π ∧ ∃ ξ : S, IsGenericPoint ξ Set.univ ∧ ∀ A ∈ irreducibleComponents ↥((pullback.snd f (π ≫ U.ι)).fiber ξ), ∀ (E : Type u) (_ : Field E) (z : Spec (CommRingCat.of E) ⟶ Spec (S.residueField ξ)), IsIrreducible ((pullback.fst ((pullback.snd f (π ≫ U.ι)).fiberToSpecResidueField ξ) z) ⁻¹' A)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a944939f6",
+  "group": "NA",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0551 clause by clause: integral T, locally Noetherian + compact (the node's Noetherian), finite type = LocallyOfFiniteType+QuasiCompact; nonempty affine open U, integral affine S, finite étale surjective π : S ⟶ U, generic point ξ, fibre of pullback.snd f (π≫U.ι) at ξ, every component's preimage IsIrreducible (nonempty included) under every Spec E ⟶ Spec κ(ξ), same convention as landed lem-sbc-generic-components-split. Edge cases (empty or non-dominant X, field base, non-reduced X, universes in u) fine. No new decls, sorry-only proof, docstrings carry source and blueprint plus 6 steps, imports = statement + stated proof_deps, statement verbatim, no side collision, report sections present. nt_compile --json clean in 2.0 s."
  }
 }

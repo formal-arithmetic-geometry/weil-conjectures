@@ -11,7 +11,10 @@
   "def-trf-fs-log-blowup",
   "def-per-fs-log-smooth-etale",
   "def-weil-pbc-geometric-stalks",
-  "def-sbc-smooth-morphisms"
+  "def-sbc-smooth-morphisms",
+  "def-per-log-differential-stalk",
+  "def-per-strict-log-morphism",
+  "def-per-log-cotangent-comparison"
  ],
  "proof": [
   {
@@ -193,5 +196,23 @@
   "group": "Q102",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-e2d562e9a (reviewer sub-agent of L); spot-checked: PASS: the item statement is unchanged and every step checks out; no fixes or dropped nodes. Statement: it is byte-identical to the Q84-created version and matches ILO X Prop 1.2 proof, printed p.138: b′ strict, X and X′ log smooth over Y, k(x)⊗Ω injective, hence smooth at x. Same hypotheses as the source, nothing weakened. Steps: (1) The calculus gives étale-local bases for ω. Injectivity over the geometric residue field k implies injectivity over κ(u) because κ(u)⊂k. Stacks 00O0 (residue-localization-strong) then gives a left inverse r with r∘u=1. (2) U→Y is lfp, from 01TQ on U→S and Y→S plus 00F4(4) applied to R→B→C over compatible affine opens. (3) Give T the structure b^*M_Y, which is fine, and T₀ its pullback, so the thickening is strict. Strictness of h makes a₀ a log map over S. The calculus gives étale-local lifts a. (4) The torsor clause for Y/S gives δ with ha=b+δ. Put ε=−δ∘a₀^*r. Then h(a+ε)−ha=ε∘a₀^*u=−δ, so ha′=b; I checked the signs on both functions and log sections. (5) The new node applied to U→Y, plus the pointwise étale-source clause, gives smoothness near x̄. New node lem-per-etale-local-infinitesimal-lifts-smooth: it is true by the 02H6 torsor proof on T_ét. The sheaf Hom(a₀^*Ω,I) is quasi-coherent because Ω is finitely presented (f lfp), and its H¹ vanishes on affine T by 03P2. It is statement-only and self-contained, with no SGA. It is not a duplicate: 02HX at-point needs global Artinian lifts, lem-per-fs-log-infinitesimal-criterion is the log notion, and def-sbc-smooth needs a global lift. It is not a restated clause of the item. Batch-5 flag on lem-trf-etale-source-smoothness: it is generic Stacks 036U. Its 119-node closure contains only generic scheme nodes plus the Mathlib leaf lem-trf-smooth-composition: no trace-transport node, no Poincaré node and no batch-4 target. It is outside the assumed statements and their proofs, so I accept it. The worker's tool_uses are accepted: residue-localization, the two Mathlib fp leaves, and 036U. No cycle. Minor: the report mentions a citations.json that the commit does not contain."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictLogJacobianCriterion",
+  "declaration": "AlgebraicGeometry.EtaleLogHom.smooth_near_of_strict_logCotangent_injective",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLogJacobianCriterion.lean",
+  "statement": "theorem EtaleLogHom.smooth_near_of_strict_logCotangent_injective {X Y S : FineSaturatedLogScheme.{u}} (f : EtaleLogHom X S) (g : EtaleLogHom Y S) (h : EtaleLogHom X Y) (hf : f.IsLogSmooth) (hg : g.IsLogSmooth) (hover : h.CompEq g f) (hstrict : h.IsStrict) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme) (hinj : EtaleLogHom.IsLogCotangentInjective f g h t) : ∃ U : X.scheme.Opens, t default ∈ U ∧ Smooth (U.ι ≫ h.base)",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-64103f005",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Re-delivery after H13/H4 RETURN of 419b630e0b33 makes exactly the prescribed repair. The def-per-strict-log-morphism record is byte-identical to NG's live existing:true LogFanChartBlowup record. StrictLogMorphismCharts.lean is deleted. The item is a non-module file importing LogFanChartBlowup with hstrict : h.IsStrict; the direction (source = pullback of target) is correct. lean.statement is verbatim; stmt_deps, the NL statement/proof and the def-per-log-cotangent-comparison node/module are unchanged from the version accepted before. No parallel duplicate: NZ lem-per-log-cotangent-characteristic-quotient is a different statement; the citer equivariant-log-smooth-chart uses the same IsStrict. nt_compile --json: both files clean (2.5 s / 3.0 s, rc 0)."
  }
 }

@@ -197,5 +197,23 @@
   "group": "Q58",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-883e2c153 (reviewer sub-agent of L); spot-checked: I read Stacks 08P2 (simplicial.tex 5884-5961) in full, plus the two cited Mathlib-leaf statements, which are the normalization N into C with the d_0 / ker d_{i≥1} convention, and free-chain homotopy invariance with R=ℤ. The item statement matches 08P2, with the zig-zag homotopy notion written out, no additivity assumed for g, and nothing weakened. Step 1: the evaluation square commutes because f is additive, and the step proves that a homotopy equivalence gives a homology isomorphism. Step 2: each link of the zig-zag gives an equality on homology, and functoriality of F then makes H(N(Ff)) bijective. Step 3: surjectivity via the lift [y]-[0_n], with every face zero in the d_0 convention and degree 0 checked. Step 4: injectivity via the lift [y]-[0_{n+1}], using f(0)=0 and d_0ỹ=Ff(x̃). These follow Stacks paragraphs 2 and 3, correctly adapted from Stacks' opposite-face convention. Step 5: the reindexing H^{-n}=H_n is correct, and positive degrees are zero. Edge cases checked: constant zero (this case is why the old FZ≅Z transport was wrong, and the new proof avoids it), constant A, and non-additive g. Duplicate search: the only 08P2 hits are the item and its citer cotangent-resolution-coherence. The surjective-boundary-lifting node is the converse, and the model-structure node lem-cbc-simplicial-module-model is not a restatement. No new nodes, no SGA, no cycle (both proof deps are leaves), proof_deps equals the union of uses, and every step is under 2000 characters. I accept the two generic tool_uses (normalization and free homotopy invariance). The citations.json named in the report is not in the commit, which is harmless. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SimplicialAbelianSetHomotopyQuasiIso",
+  "declaration": "AlgebraicTopology.quasiIso_alternatingFaceMap_of_underlying_homotopy_equivalence",
+  "file": "lean/Sheaf/AlgebraicTopology/SimplicialAbelianSetHomotopyQuasiIso.lean",
+  "statement": "theorem quasiIso_alternatingFaceMap_of_underlying_homotopy_equivalence {X Y : SimplicialObject AddCommGrpCat.{u}} (f : X ⟶ Y) (h : ∃ g : Y ⋙ forget AddCommGrpCat.{u} ⟶ X ⋙ forget AddCommGrpCat.{u}, Relation.EqvGen (fun a b ↦ Nonempty (SSet.Homotopy a b)) (Functor.whiskerRight f (forget AddCommGrpCat.{u}) ≫ g) (𝟙 (X ⋙ forget AddCommGrpCat.{u})) ∧ Relation.EqvGen (fun a b ↦ Nonempty (SSet.Homotopy a b)) (g ≫ Functor.whiskerRight f (forget AddCommGrpCat.{u})) (𝟙 (Y ⋙ forget AddCommGrpCat.{u}))) : QuasiIso (HomologicalComplex.extendMap ((alternatingFaceMapComplex AddCommGrpCat.{u}).map f) ComplexShape.embeddingDownNat)",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-79e8c43ad",
+  "group": "NL",
+  "result": "pass",
+  "note": "Statement matches Stacks 08P2 (simplicial.tex 5884-5961) and the node clause by clause: X,Y : SimplicialObject AddCommGrpCat.{u}; underlying SSets via forget; ∃ g arbitrary SSet map; gf, fg related to identities by Relation.EqvGen of Nonempty SSet.Homotopy (cylinder K⊗Δ[1], ι₀/ι₁ endpoints), which is exactly the finite two-way chain; conclusion QuasiIso of extendMap of alternatingFaceMapComplex along embeddingDownNat (n↦-n, zero in positive degrees), all r∈ℤ. No extra hypotheses or universe restriction; edge cases (n=0, r>0, zero/constant groups, chain of length 0, g not additive) covered. Only the lean field changed vs the live node; lean.statement verbatim in the file; docstrings carry source place, blueprint id and the node's proof steps; sorry only, no definitions. H4: Mathlib congr_sSetHomologyMap is only the free-chain proof dependency, and 08P2 appears only in this item and its proof-only citer. def-weil-pbc-simplicial-set has no lean record but is matched to Mathlib SSet, as other landed citers already use it. nt_compile --json clean (1.6 s, exit 0). Advisory: the NL second reading is a self-review."
  }
 }
