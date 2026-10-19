@@ -7,7 +7,7 @@ module
 
 public import Mathlib.LinearAlgebra.Basis.Defs
 public import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists
-public import Sheaf.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism
+public import WeilConjectures.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 
 import Sheaf.AlgebraicGeometry.ProjectiveSpace.HomogeneousBasisProjCoproduct

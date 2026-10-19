@@ -5,7 +5,7 @@ Authors: SHEAF group Q34
 -/
 module
 
-public import Sheaf.RingTheory.FormalGlueingData
+public import WeilConjectures.RingTheory.FormalGlueingData
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Finiteness.Defs
@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 import Sheaf.RingTheory.FormalGlueingEquivalence
 import Sheaf.RingTheory.FormalGlueingComplexExact
 import Sheaf.RingTheory.FiniteIffFormalGlueing
-import Sheaf.RingTheory.FormalGlueingH0
+import WeilConjectures.RingTheory.FormalGlueingH0
 
 /-!
 # Formal glueing of finite commutative algebras

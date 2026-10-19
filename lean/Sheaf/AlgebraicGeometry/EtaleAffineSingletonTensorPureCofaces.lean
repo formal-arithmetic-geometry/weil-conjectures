@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeComparison
-import Sheaf.AlgebraicGeometry.EtaleTensorSections
+import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
 import WeilConjectures.RingTheory.FaithfullyFlat.Amitsur
 import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorPureCofaceFixed
 

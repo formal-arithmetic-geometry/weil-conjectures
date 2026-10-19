@@ -5,7 +5,7 @@ Authors: SHEAF group T1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineChartTransitions
+public import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineChartTransitions
 import Mathlib.Algebra.Module.LocalizedModule.IsLocalization
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
 

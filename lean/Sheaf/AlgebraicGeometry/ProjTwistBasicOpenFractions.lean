@@ -6,10 +6,10 @@ Authors: SHEAF group G3
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
-public import Sheaf.Algebra.Module.DegreeZeroFractions
+public import WeilConjectures.Algebra.Module.DegreeZeroFractions
 import Sheaf.AlgebraicGeometry.ProjTwistFractionDescent
-import Sheaf.AlgebraicGeometry.ProjTwistFractionRealization
-import Sheaf.AlgebraicGeometry.ProjBasicOpenLocalizationDetection
+import WeilConjectures.AlgebraicGeometry.ProjTwistFractionRealization
+import WeilConjectures.AlgebraicGeometry.ProjBasicOpenLocalizationDetection
 
 /-!
 # Basic-open fractions for a single Proj twist

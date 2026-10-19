@@ -5,11 +5,11 @@ Authors: SHEAF group J3
 -/
 module
 
-public import Sheaf.RingTheory.FormalGlueingData
+public import WeilConjectures.RingTheory.FormalGlueingData
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Sheaf.RingTheory.FormalGlueingInjectiveApproximation
-import Sheaf.RingTheory.FormalGlueingExtensionTransport
+import WeilConjectures.RingTheory.FormalGlueingInjectiveApproximation
+import WeilConjectures.RingTheory.FormalGlueingExtensionTransport
 import Mathlib.Algebra.Module.LocalizedModule.Exact
 import WeilConjectures.AlgebraicGeometry.TorsionModuleFlatBaseChangeIso
 import Sheaf.RingTheory.TorsionExtensionFlatDescent

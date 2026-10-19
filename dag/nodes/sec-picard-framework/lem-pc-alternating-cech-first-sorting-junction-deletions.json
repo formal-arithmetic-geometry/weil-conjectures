@@ -120,13 +120,14 @@
  "unit": "sk-thm-picard-pn",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingJunctionDeletions",
-  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechFirstSortingJunctionDeletions.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AlternatingCechFirstSortingJunctionDeletions",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AlternatingCechFirstSortingJunctionDeletions.lean",
   "declaration": "AlgebraicGeometry.Scheme.cechFirstSortingJunctionDeletions",
   "statement": "theorem cechFirstSortingJunctionDeletions (X : Scheme.{u}) {I : Type v} [LinearOrder I]\n    (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})\n    (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤)))\n    (p : ℕ) (s : S.cochains F (p + 1)) (t : Fin (p + 2) → I) :\n    let E := fun (σ : Equiv.Perm (Fin (p + 2))) (a : Fin (p + 2))\n        (τ : Equiv.Perm (Fin (p + 2))) (r : Fin (p + 3)) ↦\n      ((-1 : ℤ) ^ a.val * (Equiv.Perm.sign τ : ℤ)) •\n        F.map (S.indexMap t (cechJunction σ τ a)).op\n          ((-1 : ℤ) ^ r.val •\n            F.map (S.indexMap (t ∘ cechJunction σ τ a) r.succAbove).op\n              (s ((t ∘ cechJunction σ τ a) ∘ r.succAbove)))\n    let B : ℕ → S.cochains F (p + 1) := fun a t ↦\n      ∑ σ : Equiv.Perm (Fin (p + 2)), ∑ τ : Equiv.Perm (Fin (p + 2)),\n        if cechStableSort t σ ∧\n            (∀ k, k.val < a → τ k = σ k) ∧\n            (∀ i j, a ≤ i.val → i < j → τ i < τ j) then\n          (Equiv.Perm.sign τ : ℤ) • F.map (S.indexMap t τ).op (s (t ∘ τ)) else 0\n    (∑ σ : Equiv.Perm (Fin (p + 2)), ∑ a : Fin (p + 2),\n      ∑ τ : Equiv.Perm (Fin (p + 2)), ∑ r : Fin (p + 3),\n        if (cechStableSort t σ ∧ cechPartialSort σ τ a) ∧\n            cechJunction σ τ a r = σ a then E σ a τ r else 0) =\n      ∑ a : Fin (p + 2), (B a.val t - B (a.val + 1) t)",
   "branch": "sheaf-dag",
   "by": "H3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingJunctionDeletions; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

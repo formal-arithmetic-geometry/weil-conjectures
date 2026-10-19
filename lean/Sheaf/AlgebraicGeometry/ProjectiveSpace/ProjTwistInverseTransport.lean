@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism
+public import WeilConjectures.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 
 import Sheaf.AlgebraicGeometry.ProjectiveSpace.ProjectiveLineTwistData

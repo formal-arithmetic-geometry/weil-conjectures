@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartSectionModules
+public import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionChartSectionModules
 import Mathlib.Algebra.Module.LocalizedModule.IsLocalization
 
 @[expose] public section

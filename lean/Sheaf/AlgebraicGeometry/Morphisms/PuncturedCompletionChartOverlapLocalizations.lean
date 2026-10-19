@@ -5,8 +5,8 @@ Authors: SHEAF group J4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartSectionModules
-import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartLocalization
+public import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionChartSectionModules
+import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionChartLocalization
 
 /-!
 # Localization of actual chart sections on double intersections

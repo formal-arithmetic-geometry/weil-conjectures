@@ -7,8 +7,8 @@ module
 public import Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.CategoryTheory.SiteCechComplex
 public import Mathlib.Algebra.Homology.Homotopy
-import Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingIdentity
-import Sheaf.AlgebraicGeometry.AlternatingCechSecondSortingIdentity
+import WeilConjectures.AlgebraicGeometry.AlternatingCechFirstSortingIdentity
+import WeilConjectures.AlgebraicGeometry.AlternatingCechSecondSortingIdentity
 
 /-!
 # Null homotopy for the kernel of ordered restriction

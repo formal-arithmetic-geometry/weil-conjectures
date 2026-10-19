@@ -7,14 +7,14 @@ module
 
 public import Mathlib.Algebra.Homology.ExactSequence
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
-public import Sheaf.Algebra.Module.DegreeZeroFractions
+public import WeilConjectures.Algebra.Module.DegreeZeroFractions
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 
-import Sheaf.AlgebraicGeometry.ProjectiveSpace.FixedChartMap
-import Sheaf.Algebra.Module.ProjAwayDegreeZeroExactPair
-import Sheaf.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
-import Sheaf.AlgebraicGeometry.ProjStandardOpenProperties
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.FixedChartMap
+import WeilConjectures.Algebra.Module.ProjAwayDegreeZeroExactPair
+import WeilConjectures.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
+import WeilConjectures.AlgebraicGeometry.ProjStandardOpenProperties
 
 /-!
 # Exact maps on fixed associated graded-module sheaves

@@ -6,14 +6,14 @@ Authors: SHEAF group Q33
 module
 
 public import Sheaf.AlgebraicGeometry.SchemeZariskiEtaleQuasiCoherentEquivalence
-public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsMapNaturality
+public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsMapNaturality
 public import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 public import Sheaf.CategoryTheory.RingedToposMorphism
 import WeilConjectures.AlgebraicGeometry.ZariskiEtaleInclusionMorphismOfSites
 import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import Mathlib.CategoryTheory.Adjunction.Mates
-import Sheaf.AlgebraicGeometry.EtaleTensorSections
+import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
 import Sheaf.CategoryTheory.RingedSiteModules
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 

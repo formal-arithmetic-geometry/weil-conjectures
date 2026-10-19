@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeHomNormalization
-import Sheaf.AlgebraicGeometry.EtaleAffineSingletonProductRing
+import WeilConjectures.AlgebraicGeometry.EtaleAffineSingletonProductRing
 import Sheaf.AlgebraicGeometry.EtaleAffineTensorSectionsEquiv
 
 /-! # Affine singleton tensor sections before the outer Čech product

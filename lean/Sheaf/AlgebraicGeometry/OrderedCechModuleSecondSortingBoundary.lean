@@ -6,9 +6,9 @@ Authors: SHEAF group H2
 module
 
 public import Sheaf.AlgebraicGeometry.OrderedCechModuleProjectionLift
-public import Sheaf.AlgebraicGeometry.AlternatingCechSortingOperators
+public import WeilConjectures.AlgebraicGeometry.AlternatingCechSortingOperators
 public import Mathlib.Algebra.Homology.Homotopy
-import Sheaf.AlgebraicGeometry.AlternatingCechSecondSortingIdentity
+import WeilConjectures.AlgebraicGeometry.AlternatingCechSecondSortingIdentity
 import Sheaf.AlgebraicGeometry.OrderedCechModuleSecondSortingLift
 import Mathlib.Algebra.Homology.Embedding.ExtendHomotopy
 import WeilConjectures.Topology.Sheaves.CechComparison

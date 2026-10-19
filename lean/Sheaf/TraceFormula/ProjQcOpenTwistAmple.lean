@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
-import Sheaf.AlgebraicGeometry.ProjStandardOpenProperties
+import WeilConjectures.AlgebraicGeometry.ProjStandardOpenProperties
 import Sheaf.AlgebraicGeometry.ProjTwistSectionBasicOpen
 import Sheaf.TraceFormula.ProjCommonDegreeTwistInvertible
 

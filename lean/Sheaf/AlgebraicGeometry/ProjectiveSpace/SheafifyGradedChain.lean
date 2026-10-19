@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.ExactSequence
 public import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists
-public import Sheaf.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism
+public import WeilConjectures.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism
 
 import Sheaf.AlgebraicGeometry.ProjectiveSpace.GradedChainMapsExact
 import Sheaf.AlgebraicGeometry.ProjectiveSpace.GradedModuleChartData

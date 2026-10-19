@@ -6,7 +6,7 @@ Authors: SHEAF group T2
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
-import Sheaf.AlgebraicGeometry.EtaleTensorSectionsMapNaturality
+import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsMapNaturality
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 public import Mathlib.CategoryTheory.Sites.Abelian
 public import Mathlib.Algebra.Category.Grp.Ulift
@@ -14,8 +14,8 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 import Mathlib.CategoryTheory.Sites.LocallyBijective
 import Mathlib.Algebra.Category.Grp.Abelian
 import Mathlib.CategoryTheory.Preadditive.LeftExact
-import Sheaf.AlgebraicGeometry.EtaleTensorSectionsLocalSurjectivity
-import Sheaf.AlgebraicGeometry.EtaleTensorSectionsCokernelExact
+import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsLocalSurjectivity
+import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsCokernelExact
 
 /-! # Right exactness of sheafified tensor sections
 

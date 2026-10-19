@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.UnitToTwist
 public import WeilConjectures.AlgebraicGeometry.Ample
-public import Sheaf.AlgebraicGeometry.ProjStandardOpenProperties
+public import WeilConjectures.AlgebraicGeometry.ProjStandardOpenProperties
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 

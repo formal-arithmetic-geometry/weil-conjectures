@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import WeilConjectures.CategoryTheory.CommAlgebraSheafModule
 public import Sheaf.Paper.DerivedHomMayerVietoris
 
-import Sheaf.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
+import WeilConjectures.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
 import Sheaf.Paper.SquareZeroGluedLinearOperators
 import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 

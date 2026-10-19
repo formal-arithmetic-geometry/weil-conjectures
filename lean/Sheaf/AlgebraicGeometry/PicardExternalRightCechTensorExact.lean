@@ -4,7 +4,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.CechAcyclic
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.Topology.Sheaves.CechComparison
-import Sheaf.Algebra.Homology.FirstQuadrantExtendedTotalExact
+import WeilConjectures.Algebra.Homology.FirstQuadrantExtendedTotalExact
 import Mathlib.RingTheory.Flat.CategoryTheory
 @[expose] public section
 universe w

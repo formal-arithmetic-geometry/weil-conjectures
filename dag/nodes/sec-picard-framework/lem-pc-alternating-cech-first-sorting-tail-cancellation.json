@@ -94,13 +94,14 @@
  "unit": "sk-thm-picard-pn",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingTailCancellation",
-  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechFirstSortingTailCancellation.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AlternatingCechFirstSortingTailCancellation",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AlternatingCechFirstSortingTailCancellation.lean",
   "declaration": "AlgebraicGeometry.Scheme.cechFirstSortingTailCancellation",
   "statement": "theorem cechFirstSortingTailCancellation {I : Type v} [LinearOrder I] {B : Type w} [AddCommGroup B]\n    (p : ℕ) (t : Fin (p + 2) → I) (f : (Fin (p + 2) → Fin (p + 2)) → B) :\n    let before := fun (j : Fin (p + 2)) (σ : Equiv.Perm (Fin (p + 1)))\n        (b : Fin (p + 1)) ↦\n      t j < t (j.succAbove (σ b)) ∨\n        (t j = t (j.succAbove (σ b)) ∧ j < j.succAbove (σ b))\n    (∑ σ : Equiv.Perm (Fin (p + 2)), ∑ a : Fin (p + 2),\n      ∑ τ : Equiv.Perm (Fin (p + 2)), ∑ r : Fin (p + 3),\n        if ((cechStableSort t σ ∧ cechPartialSort σ τ a) ∧\n            cechJunction σ τ a r ≠ σ a) ∧ ¬ r.val < a.val then\n          (((-1 : ℤ) ^ a.val * (Equiv.Perm.sign τ : ℤ)) * (-1 : ℤ) ^ r.val) •\n            f (cechJunction σ τ a ∘ r.succAbove) else 0) +\n      (∑ j : Fin (p + 2), ∑ σ : Equiv.Perm (Fin (p + 1)), ∑ b : Fin (p + 1),\n        ∑ τ : Equiv.Perm (Fin (p + 1)),\n          if (cechStableSort (t ∘ j.succAbove) σ ∧ cechPartialSort σ τ b) ∧\n              ¬ before j σ b then\n            ((-1 : ℤ) ^ j.val * ((-1 : ℤ) ^ b.val * (Equiv.Perm.sign τ : ℤ))) •\n              f (j.succAbove ∘ cechJunction σ τ b) else 0) = 0",
   "branch": "sheaf-dag",
   "by": "E3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingTailCancellation; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

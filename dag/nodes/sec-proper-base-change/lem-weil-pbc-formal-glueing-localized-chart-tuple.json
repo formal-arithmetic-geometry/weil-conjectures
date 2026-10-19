@@ -88,13 +88,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.FormalGlueingLocalizedChartTuple",
-  "file": "lean/Sheaf/RingTheory/FormalGlueingLocalizedChartTuple.lean",
+  "module": "WeilConjectures.RingTheory.FormalGlueingLocalizedChartTuple",
+  "file": "lean/WeilConjectures/RingTheory/FormalGlueingLocalizedChartTuple.lean",
   "declaration": "FormalGlueing.localized_chart_tuple_compatible",
   "statement": "theorem localized_chart_tuple_compatible {t : ℕ} (φ : R →+* S)\n    (f : Fin t → R) (X : Data.{u, v, w} φ f) (i : Fin t)\n    (x : piece (f i) (X.M i)) :\n    letI : Algebra R S := φ.toAlgebra\n    let A := ModuleCat.of R (restrict φ X.M' × ∀ j : Fin t, piece (f j) (X.M j))\n    let p : ∀ j : Fin t, A →ₗ[R] piece (f j) (X.M j) :=\n      fun j ↦ (LinearMap.proj j).comp (LinearMap.snd R _ _)\n    let a := fun j : Fin t ↦\n      (((X.alpha j).toLinearMap.comp\n        (LocalizedModule.mkLinearMap _ (restrict φ X.M'))).comp\n          (LinearMap.fst R _ _) -\n        (TensorProduct.mk R S (piece (f j) (X.M j)) 1).comp (p j))\n    let b := fun j k : Fin t ↦\n      (((X.alpha_overlap j k).toLinearMap.comp\n        (LocalizedModule.mkLinearMap _ (piece (f j) (X.M j)))).comp (p j) -\n        (LocalizedModule.mkLinearMap _ (piece (f k) (X.M k))).comp (p k))\n    let T := Submonoid.powers (f i)\n    let ell₀ := LocalizedModule.mkLinearMap T (restrict φ X.M')\n    let ell₁ : (∀ j, piece (f j) (X.M j)) →ₗ[R]\n        (∀ j, LocalizedModule T (piece (f j) (X.M j))) :=\n      LinearMap.pi fun j ↦ (LocalizedModule.mkLinearMap T _).comp (LinearMap.proj j)\n    let e := IsLocalizedModule.linearEquiv T (ell₀.prodMap ell₁)\n      (LocalizedModule.mkLinearMap T A)\n    let z := e ((X.alpha i).symm (TensorProduct.tmul R (1 : S) x),\n      fun j ↦ X.alpha_overlap i j (LocalizedModule.mk x 1))\n    (∀ j, localMap (f i) (a j) z = 0) ∧\n      (∀ j k, localMap (f i) (b j k) z = 0)",
   "branch": "sheaf-dag",
   "by": "G1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.FormalGlueingLocalizedChartTuple; points at its upstream twin."
  },
  "proof_deps": [
   "def-weil-pbc-formal-glueing-data",

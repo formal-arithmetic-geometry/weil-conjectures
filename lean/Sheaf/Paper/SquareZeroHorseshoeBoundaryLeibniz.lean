@@ -14,7 +14,7 @@ import Sheaf.AlgebraicGeometry.CechH1MapNatural
 import Sheaf.CategoryTheory.Abelian.RightDerivedTriangleConnecting
 import WeilConjectures.Topology.Sheaves.CechComparison
 
-import Sheaf.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
+import WeilConjectures.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
 
 /-! # The Leibniz identity for a fixed quotient action and horseshoe boundary
 

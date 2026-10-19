@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.Algebra.Module.DegreeZeroFractions
+public import WeilConjectures.Algebra.Module.DegreeZeroFractions
 public import Mathlib.Algebra.Module.GradedModule
 public import Mathlib.Algebra.DirectSum.Module
 public import Mathlib.Algebra.Module.LocalizedModule.Exact

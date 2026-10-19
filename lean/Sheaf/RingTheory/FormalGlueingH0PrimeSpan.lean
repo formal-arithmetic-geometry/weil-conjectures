@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.RingTheory.FormalGlueingH0
+public import WeilConjectures.RingTheory.FormalGlueingH0
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.LinearAlgebra.Span.Basic

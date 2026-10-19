@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeHomNormalization
 import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorSectionsSpan
 import Sheaf.AlgebraicGeometry.EtaleSingletonTensorNormalizedRange
-import Sheaf.AlgebraicGeometry.EtaleTensorSections
+import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde

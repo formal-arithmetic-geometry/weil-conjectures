@@ -5,7 +5,7 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.Algebra.Homology.DoubleComplexVerticalTowerMaps
+public import WeilConjectures.Algebra.Homology.DoubleComplexVerticalTowerMaps
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 import Sheaf.Algebra.Homology.DoubleComplexVerticalTowerComparisonFinite
 import Sheaf.Algebra.Homology.DoubleComplexVerticalTowerComparisonTop

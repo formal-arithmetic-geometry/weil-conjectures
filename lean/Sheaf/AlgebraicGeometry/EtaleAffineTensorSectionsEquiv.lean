@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeHomNormalization
 import Sheaf.AlgebraicGeometry.AffineTopTensorSections
-import Sheaf.AlgebraicGeometry.EtaleTensorSectionsTransport
+import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsTransport
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Normalized affine tensor sections

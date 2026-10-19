@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.CategoryTheory.Sites.Continuous
-import Sheaf.AlgebraicGeometry.EtaleTensorOpenSectionsNaturality
+import WeilConjectures.AlgebraicGeometry.EtaleTensorOpenSectionsNaturality
 
 /-! # Direct image of tensor-sections sheaves
 

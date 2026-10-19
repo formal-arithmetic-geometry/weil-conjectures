@@ -5,12 +5,12 @@ Authors: SHEAF group H3
 -/
 module
 
-public import Sheaf.Algebra.Module.DegreeZeroFractions
+public import WeilConjectures.Algebra.Module.DegreeZeroFractions
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 import Sheaf.AlgebraicGeometry.ProjGradedModuleChartGluing
 import Sheaf.AlgebraicGeometry.ProjGradedModuleChartQuasicoherent
-import Sheaf.AlgebraicGeometry.ProjStandardOpenProperties
+import WeilConjectures.AlgebraicGeometry.ProjStandardOpenProperties
 import Sheaf.Topology.SheafOfModulesFromIndexedBasis
 
 /-!

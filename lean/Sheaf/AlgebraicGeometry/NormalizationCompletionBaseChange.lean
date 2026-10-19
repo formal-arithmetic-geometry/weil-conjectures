@@ -17,7 +17,7 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import Sheaf.AlgebraicGeometry.ComponentwiseNormalizationAffineCharts
 import Sheaf.RingTheory.FibrePrimesResidueFields
-import Sheaf.RingTheory.FormalGlueingData
+import WeilConjectures.RingTheory.FormalGlueingData
 import Sheaf.RingTheory.FormalGlueingFiniteAlgebras
 import Sheaf.RingTheory.JapaneseDomain
 import Sheaf.RingTheory.NagataOfCompleteLocal

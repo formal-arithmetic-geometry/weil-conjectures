@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AlgebraicSpace
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-public import Sheaf.AlgebraicGeometry.EtaleTensorSections
+public import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
 import Mathlib.CategoryTheory.Sites.Limits
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Sheaf.CategoryTheory.RingedSiteModules

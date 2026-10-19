@@ -6,7 +6,7 @@ Authors: SHEAF group X2
 module
 
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
-public import Sheaf.Algebra.Module.DegreeZeroFractions
+public import WeilConjectures.Algebra.Module.DegreeZeroFractions
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 

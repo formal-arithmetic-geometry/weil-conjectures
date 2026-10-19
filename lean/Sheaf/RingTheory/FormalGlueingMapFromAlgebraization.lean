@@ -10,9 +10,9 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.LinearAlgebra.TensorProduct.Tower
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 import Sheaf.RingTheory.FormalGlueingEquivalence
-import Sheaf.RingTheory.FormalGlueingReplacePrime
+import WeilConjectures.RingTheory.FormalGlueingReplacePrime
 import Mathlib.RingTheory.Finiteness.Ideal
-import Sheaf.RingTheory.FormalGlueingData
+import WeilConjectures.RingTheory.FormalGlueingData
 
 /-!
 # Algebraization of a map that is an isomorphism away from an ideal

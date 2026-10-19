@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
 public import Sheaf.AlgebraicGeometry.InvertibleGeneratingSectionsFibre
 public import Sheaf.AlgebraicGeometry.ProjectiveSpaceFunctorOfPoints
-public import Sheaf.AlgebraicGeometry.EtaleTensorSections
+public import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth

@@ -5,7 +5,7 @@ Authors: SHEAF group Z7
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleTensorSections
+public import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
 
 /-! # The structural tensor-section pullback formula
 

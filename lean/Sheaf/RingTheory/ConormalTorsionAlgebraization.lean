@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.RingTheory.Noetherian.Defs
 
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.RingTheory.FormalGlueingData
+import WeilConjectures.RingTheory.FormalGlueingData
 import WeilConjectures.Mathlib.RingTheory.Henselian
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Mathlib.RingTheory.Henselian

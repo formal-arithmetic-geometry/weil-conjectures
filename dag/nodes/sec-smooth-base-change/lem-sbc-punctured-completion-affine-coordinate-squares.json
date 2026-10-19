@@ -129,13 +129,14 @@
  "unit": "sk-prop-input-spreading",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineCoordinateSquares",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedCompletionAffineCoordinateSquares.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineCoordinateSquares",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/PuncturedCompletionAffineCoordinateSquares.lean",
   "declaration": "AlgebraicGeometry.Scheme.CompletionGluingData.exists_affine_coordinate_squares",
   "statement": "theorem exists_affine_coordinate_squares\n    {A : Type u} [CommRing A] [IsLocalRing A]\n    {U : (Spec (.of A)).Opens}\n    {Y : Scheme.{u}} {q : Y ⟶ U.toScheme} [IsFinite q]\n    {E : Scheme.{u}} {s : E ⟶ Spec\n      (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))} [IsFinite s]\n    (D : CompletionGluingData A U q E s) (t : ℕ) (g : Fin t → A)\n    (hcharts : ∀ j, PrimeSpectrum.basicOpen (g j) ≤ U) :\n    let C := AdicCompletion (IsLocalRing.maximalIdeal A) A\n    let φ := algebraMap A C\n    let V : Fin t → Y.Opens := fun j ↦ (q ≫ U.ι) ⁻¹ᵁ PrimeSpectrum.basicOpen (g j)\n    let aY := ((ΓSpecIso (.of A)).inv ≫ (q ≫ U.ι).appTop).hom\n    let aE := ((ΓSpecIso (.of A)).inv ≫ (s ≫ completionSpecMap A).appTop).hom\n    letI : Algebra A Γ(Y, ⊤) := aY.toAlgebra\n    letI : Algebra A Γ(E, ⊤) := aE.toAlgebra\n    letI : ∀ j, Algebra A Γ(Y, V j) := fun j ↦\n      ((Y.presheaf.map (homOfLE (le_top : V j ≤ ⊤)).op).hom.comp aY).toAlgebra\n    let O := pullback q (completionSpecMap A ∣_ U)\n    let p : O ⟶ Y := pullback.fst q (completionSpecMap A ∣_ U)\n    letI : Algebra A C := φ.toAlgebra\n    ∃ (X : FormalGlueing.Data.{u, u, u} φ g)\n      (e : FormalGlueing.restrict φ X.M' ≃ₗ[A] Γ(E, ⊤))\n      (d : ∀ j, FormalGlueing.piece (g j) (X.M j) ≃ₗ[A] Γ(Y, V j))\n      (b : ∀ j, FormalGlueing.restrict φ\n        (FormalGlueing.extend φ (FormalGlueing.piece (g j) (X.M j))) ≃ Γ(O, p ⁻¹ᵁ V j))\n      (c : ∀ i j, FormalGlueing.localize (g i)\n        (FormalGlueing.piece (g j) (X.M j)) ≃ Γ(Y, V i ⊓ V j)),\n      (∀ j m, b j (X.alpha j (LocalizedModule.mk m 1)) =\n        O.presheaf.map (homOfLE (le_top : p ⁻¹ᵁ V j ≤ ⊤)).op\n          (D.toCompleted.appTop (e m))) ∧\n      (∀ j m, b j (TensorProduct.tmul A (1 : C) m) = p.app (V j) (d j m)) ∧\n      (∀ i j m, c i j (X.alpha_overlap i j (LocalizedModule.mk m 1)) =\n        Y.presheaf.map (homOfLE (inf_le_left : V i ⊓ V j ≤ V i)).op (d i m)) ∧\n      (∀ i j m, c i j (LocalizedModule.mk m 1) =\n        Y.presheaf.map (homOfLE (inf_le_right : V i ⊓ V j ≤ V j)).op (d j m))",
   "branch": "sheaf-dag",
   "by": "G3",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineCoordinateSquares; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

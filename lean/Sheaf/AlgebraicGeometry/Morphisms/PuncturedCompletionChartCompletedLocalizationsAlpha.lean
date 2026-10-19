@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartSectionModules
+public import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionChartSectionModules
 import Sheaf.AlgebraicGeometry.Morphisms.CompletedAffineSectionLocalization
 import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartTensorSections
 

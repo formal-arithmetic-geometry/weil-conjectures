@@ -5,7 +5,7 @@ Authors: SHEAF group J3
 -/
 module
 
-public import Sheaf.RingTheory.FormalGlueingData
+public import WeilConjectures.RingTheory.FormalGlueingData
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Sheaf.RingTheory.FormalGlueingMorphismTuple

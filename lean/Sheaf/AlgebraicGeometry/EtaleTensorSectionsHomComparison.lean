@@ -5,7 +5,7 @@ Authors: SHEAF group F2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleTensorSections
+public import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleHom
 import Sheaf.AlgebraicGeometry.EtaleTensorHomEvaluationNaturality
 

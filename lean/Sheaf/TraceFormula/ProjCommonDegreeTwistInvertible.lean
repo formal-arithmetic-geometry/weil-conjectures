@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 import Sheaf.AlgebraicGeometry.ProjTwistSectionBasicOpen
-import Sheaf.AlgebraicGeometry.ProjStandardOpenProperties
+import WeilConjectures.AlgebraicGeometry.ProjStandardOpenProperties
 
 /-!
 # Common-degree twists on a quasi-compact Proj open

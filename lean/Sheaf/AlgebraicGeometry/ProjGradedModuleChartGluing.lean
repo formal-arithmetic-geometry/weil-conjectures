@@ -5,10 +5,10 @@ Authors: SHEAF group Q2
 -/
 module
 
-public import Sheaf.Algebra.Module.DegreeZeroFractions
+public import WeilConjectures.Algebra.Module.DegreeZeroFractions
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import Sheaf.Algebra.Module.GradedModuleAwayRestriction
-import Sheaf.AlgebraicGeometry.ProjStandardOpenProperties
+import WeilConjectures.Algebra.Module.GradedModuleAwayRestriction
+import WeilConjectures.AlgebraicGeometry.ProjStandardOpenProperties
 import Sheaf.RingTheory.CoverModuleExact
 
 /-!

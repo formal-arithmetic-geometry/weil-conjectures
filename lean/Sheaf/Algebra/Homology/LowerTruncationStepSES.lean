@@ -6,7 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
-import Sheaf.Algebra.Homology.LowerTruncationTransitionKernel
+import WeilConjectures.Algebra.Homology.LowerTruncationTransitionKernel
 
 /-!
 # Successive canonical lower truncations

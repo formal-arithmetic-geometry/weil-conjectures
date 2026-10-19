@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 import Sheaf.AlgebraicGeometry.SerreSectionModuleComparison
-import Sheaf.AlgebraicGeometry.SerreSectionModuleFractionAdd
+import WeilConjectures.AlgebraicGeometry.SerreSectionModuleFractionAdd
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
 
 /-!

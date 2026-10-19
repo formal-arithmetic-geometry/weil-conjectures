@@ -1,13 +1,13 @@
 module
-public import Sheaf.Algebra.Homology.DoubleComplexVerticalTowerMaps
+public import WeilConjectures.Algebra.Homology.DoubleComplexVerticalTowerMaps
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact
 import WeilConjectures.FromJoel.Algebra.Homology.TotalComplex
-import Sheaf.Algebra.Homology.FirstQuadrantExtendedTotalExact
+import WeilConjectures.Algebra.Homology.FirstQuadrantExtendedTotalExact
 import Sheaf.Algebra.Homology.FirstQuadrantVerticalConeFiltration
 import Sheaf.CategoryTheory.DegreewiseFilteredAcyclic
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
-import Sheaf.Algebra.Homology.VerticalCutoffQuotientComparison
+import WeilConjectures.Algebra.Homology.VerticalCutoffQuotientComparison
 @[expose] public section
 universe v u
 open CategoryTheory CategoryTheory.Limits

@@ -127,13 +127,14 @@
  "unit": "sk-prop-input-spreading",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionFormalGlueingChart",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedCompletionFormalGlueingChart.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionFormalGlueingChart",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/PuncturedCompletionFormalGlueingChart.lean",
   "declaration": "AlgebraicGeometry.Scheme.CompletionGluingData.exists_formalGlueingData_matching_chart",
   "statement": "theorem exists_formalGlueingData_matching_chart\n    {A : Type u} [CommRing A] [IsLocalRing A]\n    {U : (Spec (.of A)).Opens}\n    (hU : ∀ x : Spec (.of A), x ∈ U ↔ x ≠ IsLocalRing.closedPoint A)\n    {Y : Scheme.{u}} {q : Y ⟶ U.toScheme} [IsFinite q]\n    {E : Scheme.{u}} {s : E ⟶ Spec\n      (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))} [IsFinite s]\n    (D : CompletionGluingData A U q E s) (t : ℕ) (g : Fin t → A)\n    (hgen : Ideal.span (Set.range g) = IsLocalRing.maximalIdeal A) (i : Fin t) :\n    let C := AdicCompletion (IsLocalRing.maximalIdeal A) A\n    let φ := algebraMap A C\n    let W := (D.modelMap ∣_ U) ⁻¹ᵁ (U.ι ⁻¹ᵁ PrimeSpectrum.basicOpen (g i))\n    let ρ := ((ΓSpecIso D.matchingRing).inv ≫\n      (W.ι ≫ (D.modelMap ⁻¹ᵁ U).ι).appTop).hom\n    let ψ := (D.puncturedMap ∣_ W).appTop.hom\n    letI : Algebra A D.matchingRing := D.baseMap.hom.toAlgebra\n    letI : Algebra A Γ((D.puncturedMap ⁻¹ᵁ W).toScheme, ⊤) :=\n      ((ψ.comp ρ).comp D.baseMap.hom).toAlgebra\n    ∃ (X : FormalGlueing.Data.{u, u, u} φ g)\n      (b : FormalGlueing.h0 φ g X ≃ₗ[A] D.matchingRing)\n      (c : FormalGlueing.piece (g i) (X.M i) ≃ₗ[A]\n        Γ((D.puncturedMap ⁻¹ᵁ W).toScheme, ⊤)),\n      ∀ h, ψ (ρ (b h)) = c (h.val.2 i)",
   "branch": "sheaf-dag",
   "by": "N1",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionFormalGlueingChart; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

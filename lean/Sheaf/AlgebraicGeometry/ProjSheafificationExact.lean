@@ -8,9 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.ProjTildeFunctorial
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.Algebra.Module.ProjAwayDegreeZeroExact
-import Sheaf.AlgebraicGeometry.Modules.BasisExactness
-import Sheaf.AlgebraicGeometry.ProjStandardOpenProperties
+import WeilConjectures.Algebra.Module.ProjAwayDegreeZeroExact
+import WeilConjectures.AlgebraicGeometry.Modules.BasisExactness
+import WeilConjectures.AlgebraicGeometry.ProjStandardOpenProperties
 
 /-!
 # Exactness of associated sheaves on the projective line

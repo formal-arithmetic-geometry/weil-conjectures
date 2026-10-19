@@ -136,13 +136,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineChartRealization",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedCompletionAffineChartRealization.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineChartRealization",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/PuncturedCompletionAffineChartRealization.lean",
   "declaration": "AlgebraicGeometry.Scheme.CompletionGluingData.exists_affine_chart_realization",
   "statement": "theorem exists_affine_chart_realization\n    {A : Type u} [CommRing A] [IsLocalRing A]\n    {U : (Spec (.of A)).Opens}\n    {Y : Scheme.{u}} {q : Y ⟶ U.toScheme} [IsFinite q]\n    {E : Scheme.{u}} {s : E ⟶ Spec\n      (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))} [IsFinite s]\n    (D : CompletionGluingData A U q E s) (t : ℕ) (f : Fin t → A)\n    (hf : ∀ i, PrimeSpectrum.basicOpen (f i) ≤ U) :\n    let C := AdicCompletion (IsLocalRing.maximalIdeal A) A\n    let φ := algebraMap A C\n    letI : Algebra A C := φ.toAlgebra\n    let g : CommRingCat.of C ⟶ Γ(E, ⊤) := (ΓSpecIso (.of C)).inv ≫ s.appTop\n    letI : Module C Γ(E, ⊤) := Module.compHom _ g.hom\n    let V := fun i ↦ (q ≫ U.ι) ⁻¹ᵁ PrimeSpectrum.basicOpen (f i)\n    let O := pullback q (completionSpecMap A ∣_ U)\n    let p : O ⟶ Y := pullback.fst q (completionSpecMap A ∣_ U)\n    ∃ (X : FormalGlueing.Data.{u, u, u} φ f) (e : X.M' ≃ₗ[C] Γ(E, ⊤))\n      (c : ∀ i, FormalGlueing.piece (f i) (X.M i) ≃+ Γ(Y, V i))\n      (b : ∀ i j, FormalGlueing.localize (f i) (FormalGlueing.piece (f j) (X.M j)) ≃+\n        Γ(Y, V i ⊓ V j))\n      (d : ∀ i, FormalGlueing.extend φ (FormalGlueing.piece (f i) (X.M i)) ≃+\n        Γ(O, p ⁻¹ᵁ V i)),\n      (∀ i j m, b i j (X.alpha_overlap i j (LocalizedModule.mk m 1)) =\n        Y.presheaf.map (homOfLE (inf_le_left : V i ⊓ V j ≤ V i)).op (c i m)) ∧\n      (∀ i j m, b i j (LocalizedModule.mk m 1) =\n        Y.presheaf.map (homOfLE (inf_le_right : V i ⊓ V j ≤ V j)).op (c j m)) ∧\n      (∀ i m, d i (X.alpha i (LocalizedModule.mk m 1)) =\n        O.presheaf.map (homOfLE (le_top : p ⁻¹ᵁ V i ≤ ⊤)).op\n          (D.toCompleted.appTop (e m))) ∧\n      (∀ i m, d i (TensorProduct.tmul A (1 : C) m) = p.app (V i) (c i m))",
   "branch": "sheaf-dag",
   "by": "E1",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineChartRealization; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

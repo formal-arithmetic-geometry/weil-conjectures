@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeHomNormalization
-import Sheaf.AlgebraicGeometry.EtaleTensorSections
+import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
 
 /-! # EtaleSingletonTensorNormalizedRestriction
 Source: Stacks Project, Tags 03P2 and 03DR.

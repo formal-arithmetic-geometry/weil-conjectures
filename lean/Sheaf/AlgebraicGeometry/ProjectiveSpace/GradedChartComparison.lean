@@ -8,8 +8,8 @@ module
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-public import Sheaf.Algebra.Module.DegreeZeroFractions
-import Sheaf.AlgebraicGeometry.ProjStandardOpenProperties
+public import WeilConjectures.Algebra.Module.DegreeZeroFractions
+import WeilConjectures.AlgebraicGeometry.ProjStandardOpenProperties
 import Sheaf.Topology.SheafOfModulesFromBasis
 import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 import Mathlib.RingTheory.Localization.Module

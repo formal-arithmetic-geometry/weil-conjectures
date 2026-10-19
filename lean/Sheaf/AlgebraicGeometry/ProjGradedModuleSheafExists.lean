@@ -5,15 +5,15 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.Algebra.Module.DegreeZeroFractions
+public import WeilConjectures.Algebra.Module.DegreeZeroFractions
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import Sheaf.Algebra.Module.GradedModuleAwayRestriction
-import Sheaf.AlgebraicGeometry.ProjStandardOpenProperties
+import WeilConjectures.Algebra.Module.GradedModuleAwayRestriction
+import WeilConjectures.AlgebraicGeometry.ProjStandardOpenProperties
 import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExtension
 import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafStalks
-import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafGlobalSections
+import WeilConjectures.AlgebraicGeometry.ProjGradedModuleSheafGlobalSections
 import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 
 /-!

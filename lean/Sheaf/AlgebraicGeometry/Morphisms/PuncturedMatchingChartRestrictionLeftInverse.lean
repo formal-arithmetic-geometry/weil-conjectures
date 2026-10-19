@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingSections
-import Sheaf.AlgebraicGeometry.Morphisms.PuncturedMatchingChartRestrictionRingEquiv
+public import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingSections
+import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedMatchingChartRestrictionRingEquiv
 
 @[expose] public section
 

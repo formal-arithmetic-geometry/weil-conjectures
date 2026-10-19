@@ -5,14 +5,14 @@ Authors: SHEAF group P3
 -/
 module
 
-public import Sheaf.Algebra.Module.DegreeZeroFractions
+public import WeilConjectures.Algebra.Module.DegreeZeroFractions
 public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 import Sheaf.AlgebraicGeometry.SerreSectionModuleFractionLift
 import Sheaf.AlgebraicGeometry.SerreSectionModuleFractionEquality
-import Sheaf.AlgebraicGeometry.SerreSectionModuleFractionAdd
+import WeilConjectures.AlgebraicGeometry.SerreSectionModuleFractionAdd
 import Sheaf.AlgebraicGeometry.SerreSectionModuleComparison
 
 /-!

@@ -83,13 +83,14 @@
  "unit": "sk-thm-reduction",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ProjGradedModuleSheafGlobalSections",
-  "file": "lean/Sheaf/AlgebraicGeometry/ProjGradedModuleSheafGlobalSections.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ProjGradedModuleSheafGlobalSections",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ProjGradedModuleSheafGlobalSections.lean",
   "declaration": "AlgebraicGeometry.Proj.gradedModuleSheaf_globalSections",
   "statement": "theorem gradedModuleSheaf_globalSections\n    (𝓜 : ℤ → AddSubgroup M) (_h𝓜 : DirectSum.IsInternal 𝓜)\n    (hsmul : ∀ (n : ℕ) (z : ℤ) (a : S) (y : M),\n      a ∈ 𝒜 n → y ∈ 𝓜 z → a • y ∈ 𝓜 (n + z))\n    (Z : ∀ f : Fidx, Submodule R[f] N[f])\n    (hZ : (∀ f : Fidx, (Z f : Set N[f]) = degreeZeroFractions\n        (fun n : ℕ ↦ (𝒜 n : Set S)) (fun n : ℕ ↦ (𝓜 n : Set M))\n        (Submonoid.powers f.val.1)))\n    (rhoS : ∀ (f g : Fidx), D[g] ≤ D[f] → R[f] →+* R[g])\n    (rho : ∀ (f g : Fidx), D[g] ≤ D[f] → Z f →+ Z g)\n    (hlaws : (∀ (f g : Fidx) (i : D[g] ≤ D[f]),\n        (∃ (e k : ℕ) (a : S), 0 < e ∧ a ∈ 𝒜 k ∧ g.val.1 ^ e = a * f.val.1) ∧\n        (∀ (r : R[f]) (q : Z f), rho f g i (r • q) = rhoS f g i r • rho f g i q) ∧\n        (∀ (e k : ℕ) (a : S), 0 < e → a ∈ 𝒜 k → g.val.1 ^ e = a * f.val.1 →\n          ∀ (m : ℕ) (y : M) (q : Z f),\n            (q : N[f]) = mk y (⟨f.val.1 ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f.val.1) →\n            (rho f g i q : N[g]) = mk (a ^ m • y)\n              (⟨g.val.1 ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g.val.1))) ∧\n      (∀ (f : Fidx) (i : D[f] ≤ D[f]) (q : Z f), rho f f i q = q) ∧\n      (∀ (f g h : Fidx) (i : D[g] ≤ D[f]) (j : D[h] ≤ D[g]) (q : Z f),\n        rho g h j (rho f g i q) = rho f h (j.trans i) q) ∧\n      (∀ (f g : Fidx) (i : D[g] ≤ D[f]), D[f] = D[g] →\n        Function.Bijective (rho f g i)))\n    (F : SheafOfModules.{u} (moduleRings (Proj 𝒜).toRingedSpace))\n    (alpha : ∀ f : Fidx, F.val.obj (op D[f]) ≃+ Z f)\n    (hchart : (∀ (f : Fidx) (r : R[f]) (s : F.val.obj (op D[f])),\n        alpha f ((awayToSection 𝒜 f.val.1 r) • s) = r • alpha f s) ∧\n      (∀ (f g : Fidx) (i : D[g] ≤ D[f]) (s : F.val.obj (op D[f])),\n        alpha g (F.val.map (homOfLE i).op s) = rho f g i (alpha f s)))\n    (hcanonical : ∀ (f g : Fidx) (i : D[g] ≤ D[f]),\n      ∃ l : Localization.Away f.val.1 →+* Localization.Away g.val.1,\n        (∀ a : S, l (algebraMap S (Localization.Away f.val.1) a) =\n          algebraMap S (Localization.Away g.val.1) a) ∧\n        ∀ r : R[f], (rhoS f g i r).val = l r.val)\n    (hring : ∀ (f g : Fidx) (i : D[g] ≤ D[f]) (r : R[f]),\n      (Proj 𝒜).presheaf.map (homOfLE i).op (awayToSection 𝒜 f.val.1 r) =\n        awayToSection 𝒜 g.val.1 (rhoS f g i r)) :\n    ∃ (eta : 𝒜 0 →+* (Proj 𝒜).presheaf.obj (op ⊤))\n      (gamma : 𝓜 0 →+ F.val.obj (op ⊤)),\n      (∀ (r : 𝒜 0) (f : Fidx),\n        (Proj 𝒜).presheaf.map (homOfLE (le_top : D[f] ≤ ⊤)).op (eta r) =\n          awayToSection 𝒜 f.val.1 (fromZeroRingHom 𝒜 _ r)) ∧\n      (∀ (r : 𝒜 0) (m : 𝓜 0),\n        gamma ⟨(r : S) • (m : M), hsmul 0 0 r m r.property m.property⟩ =\n          eta r • gamma m) ∧\n      (∀ (m : 𝓜 0) (f : Fidx),\n        (alpha f (F.val.map (homOfLE (le_top : D[f] ≤ ⊤)).op (gamma m)) : N[f]) =\n          mk (m : M) 1)",
   "branch": "sheaf-dag",
   "by": "H3",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.ProjGradedModuleSheafGlobalSections; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

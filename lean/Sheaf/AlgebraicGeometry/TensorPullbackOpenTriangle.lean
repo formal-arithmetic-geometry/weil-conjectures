@@ -6,7 +6,7 @@ Authors: SHEAF group C3
 module
 
 public import Sheaf.AlgebraicGeometry.ScalarGlobalSectionsComparison
-import Sheaf.AlgebraicGeometry.EtaleTensorSections
+import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
 
 /-! # Normalized restriction of a projection pullback
 

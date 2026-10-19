@@ -10,7 +10,7 @@ import Sheaf.AlgebraicGeometry.AffineCapSectionOpen
 import Sheaf.AlgebraicGeometry.AmpleFiniteSetAffine
 import Sheaf.AlgebraicGeometry.AmpleIdealSection
 import Sheaf.AlgebraicGeometry.ClosedSubsetQcIdeal
-import Sheaf.RingTheory.GradedPrimeAvoidance
+import WeilConjectures.RingTheory.GradedPrimeAvoidance
 import Sheaf.AlgebraicGeometry.AmpleProjCanonicalMap
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 

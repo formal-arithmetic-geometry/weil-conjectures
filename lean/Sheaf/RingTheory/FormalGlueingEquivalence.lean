@@ -5,12 +5,12 @@ Authors: SHEAF group Q1
 -/
 module
 
-public import Sheaf.RingTheory.FormalGlueingData
+public import WeilConjectures.RingTheory.FormalGlueingData
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Sheaf.Paper.FormalGlueingCanonicalMaps
 import Sheaf.RingTheory.FormalGlueingComplexExact
-import Sheaf.RingTheory.FormalGlueingCanonicalFunctor
+import WeilConjectures.RingTheory.FormalGlueingCanonicalFunctor
 import Sheaf.RingTheory.FormalGlueingMorphismLifting
 import Sheaf.RingTheory.FormalGlueingEssentialSurjectivity
 

@@ -7,8 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.AmpleProjOpen
-import Sheaf.AlgebraicGeometry.ProjStandardOpenProperties
-import Sheaf.RingTheory.GradedPrimeAvoidance
+import WeilConjectures.AlgebraicGeometry.ProjStandardOpenProperties
+import WeilConjectures.RingTheory.GradedPrimeAvoidance
 import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
 /-! # Affine neighbourhoods of finite sets on schemes with an ample invertible module

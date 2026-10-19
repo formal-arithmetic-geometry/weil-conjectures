@@ -6,7 +6,7 @@ Authors: SHEAF group D2
 module
 
 public import Sheaf.AlgebraicGeometry.OrderedCechDegreewiseProjection
-public import Sheaf.AlgebraicGeometry.AlternatingCechSortingOperators
+public import WeilConjectures.AlgebraicGeometry.AlternatingCechSortingOperators
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-! # Locally linear second-sorting maps

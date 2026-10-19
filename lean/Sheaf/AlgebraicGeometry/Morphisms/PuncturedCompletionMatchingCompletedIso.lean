@@ -5,8 +5,8 @@ Authors: SHEAF group T3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingSections
-import Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapInjective
+public import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingSections
+import WeilConjectures.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapInjective
 import Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapSurjective
 
 /-! # The completed comparison for matching sections

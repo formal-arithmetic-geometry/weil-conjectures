@@ -8,9 +8,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 public import Sheaf.AlgebraicGeometry.TensorPullback
-public import Sheaf.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism
+public import WeilConjectures.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism
 import Sheaf.AlgebraicGeometry.ProjectiveLineTwistExists
-import Sheaf.AlgebraicGeometry.ProjTwistTransportedData
+import WeilConjectures.AlgebraicGeometry.ProjTwistTransportedData
 
 /-!
 # Comparing a Proj twist with a prescribed glued twist

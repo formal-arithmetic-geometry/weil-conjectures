@@ -7,8 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
-public import Sheaf.AlgebraicGeometry.EtaleTensorOpenSectionsNaturality
-public import Sheaf.AlgebraicGeometry.GabberH0ZariskiConstructions
+public import WeilConjectures.AlgebraicGeometry.EtaleTensorOpenSectionsNaturality
+public import WeilConjectures.AlgebraicGeometry.GabberH0ZariskiConstructions
 public import Sheaf.AlgebraicGeometry.CoherentFiniteType
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 public import Sheaf.TraceFormula.SpaceQCSeparatedEtaleLocal

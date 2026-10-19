@@ -4,9 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingSections
-import Sheaf.AlgebraicGeometry.Morphisms.PuncturedMatchingChartPowerLift
-import Sheaf.AlgebraicGeometry.Morphisms.PuncturedMatchingChartKernelTorsion
+public import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingSections
+import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedMatchingChartPowerLift
+import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedMatchingChartKernelTorsion
 
 /-! # The localized ring equivalence behind the punctured section comparison
 

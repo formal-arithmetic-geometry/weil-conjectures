@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.Algebra.Homology.DoubleComplexVerticalTowerMaps
-import Sheaf.Algebra.Homology.RestrictedComplementaryTruncationComparison
+public import WeilConjectures.Algebra.Homology.DoubleComplexVerticalTowerMaps
+import WeilConjectures.Algebra.Homology.RestrictedComplementaryTruncationComparison
 import Sheaf.Algebra.Homology.FirstQuadrantVerticalConeFiltration
 import Sheaf.CategoryTheory.DegreewiseFilteredAcyclic
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic

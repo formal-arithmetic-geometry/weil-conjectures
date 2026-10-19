@@ -17,7 +17,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.AlgebraicGeometry.PullbackCarrier
 import Mathlib.RingTheory.Adjoin.Tower
 import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper
-import Sheaf.RingTheory.GradedPrimeAvoidance
+import WeilConjectures.RingTheory.GradedPrimeAvoidance
 import Sheaf.AlgebraicGeometry.ProjStandardOpenBasis
 import Sheaf.AlgebraicGeometry.AffineGroupoidOrbitFibres
 import Sheaf.TraceFormula.ProjQcOpenTwistAmple

@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 import WeilConjectures.AlgebraicGeometry.EtaleCechVanishingCriterion
 import Sheaf.AlgebraicGeometry.EtaleAffineTensorCechVanishing
 import Sheaf.AlgebraicGeometry.EtaleAffineOpenCechDerivedEvaluation
-import Sheaf.AlgebraicGeometry.EtaleTensorOpenSections
+import WeilConjectures.AlgebraicGeometry.EtaleTensorOpenSections
 import WeilConjectures.AlgebraicGeometry.ZariskiEtaleCore
 import WeilConjectures.Topology.Sheaves.CechComparison
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products

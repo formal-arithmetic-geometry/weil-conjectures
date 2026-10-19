@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleTensorSections
+public import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
 public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
 
 /-! # The normalized restriction equation for the structure module

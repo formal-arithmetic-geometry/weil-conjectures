@@ -6,7 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
-public import Sheaf.RingTheory.FormalGlueingData
+public import WeilConjectures.RingTheory.FormalGlueingData
 import Mathlib.RingTheory.Localization.BaseChange
 
 /-!

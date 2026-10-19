@@ -5,7 +5,7 @@ Authors: SHEAF group E2
 -/
 module
 
-public import Sheaf.Algebra.Homology.DoubleComplexVerticalWindow
+public import WeilConjectures.Algebra.Homology.DoubleComplexVerticalWindow
 public import Mathlib.Algebra.Homology.TotalComplex
 public import WeilConjectures.Mathlib.Algebra.Homology.ComplexShapeSigns
 public import Mathlib.Algebra.Homology.SpectralObject.SpectralSequence

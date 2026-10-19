@@ -3,7 +3,7 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
+import WeilConjectures.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
 
 /-!
 # Local sections of finite locally free quotients

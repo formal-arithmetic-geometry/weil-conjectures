@@ -5,12 +5,12 @@ Authors: SHEAF group R2
 -/
 module
 
-public import Sheaf.Algebra.Module.DegreeZeroFractions
+public import WeilConjectures.Algebra.Module.DegreeZeroFractions
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.AlgebraicGeometry.ProjGradedModuleChartBasisComparison
-import Sheaf.Algebra.Module.GradedModuleAwayRestriction
+import WeilConjectures.Algebra.Module.GradedModuleAwayRestriction
 import Mathlib.Topology.Sheaves.SheafCondition.Sites
 
 /-!

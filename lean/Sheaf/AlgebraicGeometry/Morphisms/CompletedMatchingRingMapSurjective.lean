@@ -5,7 +5,7 @@ Authors: SHEAF group H2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMap
+public import WeilConjectures.AlgebraicGeometry.Morphisms.CompletedMatchingRingMap
 import Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapResidueLift
 import Mathlib.RingTheory.Nakayama
 

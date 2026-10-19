@@ -116,13 +116,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Module.ProjAwayDegreeZeroExact",
-  "file": "lean/Sheaf/Algebra/Module/ProjAwayDegreeZeroExact.lean",
+  "module": "WeilConjectures.Algebra.Module.ProjAwayDegreeZeroExact",
+  "file": "lean/WeilConjectures/Algebra/Module/ProjAwayDegreeZeroExact.lean",
   "declaration": "LocalizedModule.proj_away_degreeZero_exact",
   "statement": "theorem proj_away_degreeZero_exact\n    (k : Type u) [Field k]\n    (M : Fin 3 → Type u) [∀ j, AddCommGroup (M j)]\n    [∀ j, Module (MvPolynomial (Fin 2) k) (M j)]\n    (𝓜 : ∀ j, ℤ → AddSubgroup (M j))\n    (h𝓜 : ∀ j, DirectSum.IsInternal (𝓜 j))\n    (hsmul : ∀ (j : Fin 3) (n : ℕ) (z : ℤ) (a : MvPolynomial (Fin 2) k) (y : M j),\n      a ∈ homogeneousSubmodule (Fin 2) k n → y ∈ 𝓜 j z → a • y ∈ 𝓜 j (n + z))\n    (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d)\n    (hf : f ∈ homogeneousSubmodule (Fin 2) k d)\n    (A : Fin 3 → Type u) [∀ j, AddCommGroup (A j)]\n    (alpha : ∀ j, A j →+ LocalizedModule.Away f (M j))\n    (halpha : ∀ j, Function.Injective (alpha j) ∧\n      Set.range (alpha j) = degreeZeroFractions\n        (fun n : ℕ ↦ (homogeneousSubmodule (Fin 2) k n : Set (MvPolynomial (Fin 2) k)))\n        (fun n : ℕ ↦ (𝓜 j n : Set (M j))) (Submonoid.powers f))\n    (phi : M 0 →ₗ[MvPolynomial (Fin 2) k] M 1)\n    (psi : M 1 →ₗ[MvPolynomial (Fin 2) k] M 2)\n    (hphi : ∀ (z : ℤ) (y : M 0), y ∈ 𝓜 0 z → phi y ∈ 𝓜 1 z)\n    (hpsi : ∀ (z : ℤ) (y : M 1), y ∈ 𝓜 1 z → psi y ∈ 𝓜 2 z)\n    (hinj : Function.Injective phi) (hexact : Function.Exact phi psi)\n    (hsurj : Function.Surjective psi)\n    (i : A 0 →+ A 1) (q : A 1 →+ A 2)\n    (hi : ∀ (m : ℕ) (y : M 0) (s : A 0),\n      alpha 0 s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) →\n      alpha 1 (i s) = mk (phi y) (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f))\n    (hq : ∀ (m : ℕ) (y : M 1) (s : A 1),\n      alpha 1 s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) →\n      alpha 2 (q s) = mk (psi y) (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f)) :\n    Function.Injective i ∧ Function.Exact i q ∧ Function.Surjective q",
   "branch": "sheaf-dag",
   "by": "W2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.Algebra.Module.ProjAwayDegreeZeroExact; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

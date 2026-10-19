@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import Sheaf.AlgebraicGeometry.ProjStandardOpenProperties
+import WeilConjectures.AlgebraicGeometry.ProjStandardOpenProperties
 
 /-!
 # Positive-degree standard opens of Proj form an affine basis

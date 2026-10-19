@@ -111,13 +111,14 @@
  "unit": "sk-prop-input-spreading",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartRestriction",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedCompletionChartRestriction.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionChartRestriction",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/PuncturedCompletionChartRestriction.lean",
   "declaration": "AlgebraicGeometry.Scheme.CompletionGluingData.exists_matching_chart_restriction",
   "statement": "theorem exists_matching_chart_restriction\n    {A : Type u} [CommRing A] [IsLocalRing A]\n    {U : (Spec (.of A)).Opens}\n    {Y : Scheme.{u}} {q : Y ⟶ U.toScheme}\n    {E : Scheme.{u}} {s : E ⟶ Spec\n      (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))}\n    (D : CompletionGluingData A U q E s) (f : A) :\n    let V := (q ≫ U.ι) ⁻¹ᵁ PrimeSpectrum.basicOpen f\n    let W := (D.modelMap ∣_ U) ⁻¹ᵁ (U.ι ⁻¹ᵁ PrimeSpectrum.basicOpen f)\n    let ρ := ((ΓSpecIso D.matchingRing).inv ≫\n      (W.ι ≫ (D.modelMap ⁻¹ᵁ U).ι).appTop).hom\n    let ψ := (D.puncturedMap ∣_ W).appTop.hom\n    let P := pullback.fst\n      (pullback.fst q (completionSpecMap A ∣_ U)).appTop D.toCompleted.appTop\n    let aY := ((ΓSpecIso (.of A)).inv ≫ (q ≫ U.ι).appTop).hom\n    letI : Algebra A Γ(Y, V) :=\n      ((Y.presheaf.map (homOfLE (le_top : V ≤ ⊤)).op).hom.comp aY).toAlgebra\n    letI : Algebra A Γ((D.puncturedMap ⁻¹ᵁ W).toScheme, ⊤) :=\n      ((ψ.comp ρ).comp D.baseMap.hom).toAlgebra\n    ∃ c : Γ(Y, V) ≃ₗ[A] Γ((D.puncturedMap ⁻¹ᵁ W).toScheme, ⊤),\n      ∀ z : D.matchingRing,\n        ψ (ρ z) = c (Y.presheaf.map (homOfLE (le_top : V ≤ ⊤)).op (P z))",
   "branch": "sheaf-dag",
   "by": "J2",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartRestriction; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

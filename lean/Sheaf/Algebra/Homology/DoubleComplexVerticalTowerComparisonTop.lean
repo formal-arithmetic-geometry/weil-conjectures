@@ -3,9 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
-public import Sheaf.Algebra.Homology.DoubleComplexVerticalTowerMaps
+public import WeilConjectures.Algebra.Homology.DoubleComplexVerticalTowerMaps
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
-import Sheaf.Algebra.Homology.FirstQuadrantTotalShortExact
+import WeilConjectures.Algebra.Homology.FirstQuadrantTotalShortExact
 import Sheaf.Algebra.Homology.DoubleComplexVerticalQuotientComparison
 import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact
 /-! # Top endpoint comparison for the smart vertical tower

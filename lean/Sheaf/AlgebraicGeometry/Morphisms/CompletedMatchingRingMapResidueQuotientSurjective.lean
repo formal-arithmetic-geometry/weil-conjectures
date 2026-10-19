@@ -1,9 +1,9 @@
 module
-public import Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMap
+public import WeilConjectures.AlgebraicGeometry.Morphisms.CompletedMatchingRingMap
 public import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import Sheaf.RingTheory.FormalGlueingH0PrimeSpan
-import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionFormalGlueingData
+import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionFormalGlueingData
 @[expose] public section
 noncomputable section
 universe u

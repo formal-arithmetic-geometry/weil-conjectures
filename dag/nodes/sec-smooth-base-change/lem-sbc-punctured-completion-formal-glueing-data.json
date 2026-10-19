@@ -133,13 +133,14 @@
  "unit": "sk-prop-input-spreading",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionFormalGlueingData",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedCompletionFormalGlueingData.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionFormalGlueingData",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/PuncturedCompletionFormalGlueingData.lean",
   "declaration": "AlgebraicGeometry.Scheme.CompletionGluingData.exists_formalGlueingData_matching_projection",
   "statement": "theorem exists_formalGlueingData_matching_projection\n    {A : Type u} [CommRing A] [IsLocalRing A]\n    {U : (Spec (.of A)).Opens}\n    (hU : ∀ x : Spec (.of A), x ∈ U ↔ x ≠ IsLocalRing.closedPoint A)\n    {Y : Scheme.{u}} {q : Y ⟶ U.toScheme} [IsFinite q]\n    {E : Scheme.{u}} {s : E ⟶ Spec\n      (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))} [IsFinite s]\n    (D : CompletionGluingData A U q E s) (t : ℕ) (f : Fin t → A)\n    (hgen : Ideal.span (Set.range f) = IsLocalRing.maximalIdeal A) :\n    let C := AdicCompletion (IsLocalRing.maximalIdeal A) A\n    let φ := algebraMap A C\n    let g : CommRingCat.of C ⟶ Γ(E, ⊤) := (ΓSpecIso (.of C)).inv ≫ s.appTop\n    letI : Module C Γ(E, ⊤) := Module.compHom _ g.hom\n    ∃ (X : FormalGlueing.Data.{u, u, u} φ f) (e : X.M' ≃ₗ[C] Γ(E, ⊤))\n      (k : FormalGlueing.h0 φ f X → D.matchingRing),\n      ∀ h, pullback.snd\n        (pullback.fst q (completionSpecMap A ∣_ U)).appTop D.toCompleted.appTop\n          (k h) = e h.val.1",
   "branch": "sheaf-dag",
   "by": "G4",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionFormalGlueingData; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

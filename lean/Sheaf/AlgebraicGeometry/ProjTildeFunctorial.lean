@@ -6,7 +6,7 @@ Authors: SHEAF group Q1
 module
 
 public import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists
-import Sheaf.AlgebraicGeometry.ProjStandardOpenProperties
+import WeilConjectures.AlgebraicGeometry.ProjStandardOpenProperties
 import Mathlib.Topology.Sheaves.SheafCondition.Sites
 
 /-!

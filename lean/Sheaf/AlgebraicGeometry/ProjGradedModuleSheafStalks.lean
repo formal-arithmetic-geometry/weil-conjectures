@@ -5,14 +5,14 @@ Authors: SHEAF group H3
 -/
 module
 
-public import Sheaf.Algebra.Module.DegreeZeroFractions
+public import WeilConjectures.Algebra.Module.DegreeZeroFractions
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import Sheaf.AlgebraicGeometry.ProjStandardOpenProperties
+import WeilConjectures.AlgebraicGeometry.ProjStandardOpenProperties
 import Mathlib.Topology.Sheaves.Stalks
 import Sheaf.AlgebraicGeometry.ProjGradedModuleStalkMap
-import Sheaf.AlgebraicGeometry.HomogeneousVectorAnnihilator
+import WeilConjectures.AlgebraicGeometry.HomogeneousVectorAnnihilator
 
 /-!
 # ProjGradedModuleSheafStalks

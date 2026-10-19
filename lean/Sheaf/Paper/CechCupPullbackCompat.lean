@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.CechRefinementCochainMap
 public import Sheaf.Paper.CechCupProduct
 public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
-public import Sheaf.AlgebraicGeometry.EtaleTensorSections
+public import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import Sheaf.Paper.CechRefinementComparisonSquare
 import Sheaf.Paper.CechCupResolutionRepresentatives

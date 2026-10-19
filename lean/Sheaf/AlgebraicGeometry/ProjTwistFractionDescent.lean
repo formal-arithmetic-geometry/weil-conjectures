@@ -6,10 +6,10 @@ Authors: SHEAF group R2
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
-public import Sheaf.Algebra.Module.DegreeZeroFractions
+public import WeilConjectures.Algebra.Module.DegreeZeroFractions
 import Sheaf.AlgebraicGeometry.ProjTwistFiniteLocalizationData
 import Sheaf.RingTheory.CoverModuleExact
-import Sheaf.AlgebraicGeometry.ProjTwistDegreeDetection
+import WeilConjectures.AlgebraicGeometry.ProjTwistDegreeDetection
 
 /-!
 # Descent of locally homogeneous fractions on a Proj basic open

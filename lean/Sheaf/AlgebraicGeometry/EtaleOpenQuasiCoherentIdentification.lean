@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.AlgebraicGeometry.EtaleOpenQuasiCoherentIdentificationNaturality
+import WeilConjectures.AlgebraicGeometry.EtaleOpenQuasiCoherentIdentificationNaturality
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 
 /-! # Quasi-coherent coefficients under restriction to an open etale site

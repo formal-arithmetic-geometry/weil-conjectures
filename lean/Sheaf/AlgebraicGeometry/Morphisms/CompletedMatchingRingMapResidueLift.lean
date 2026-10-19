@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q2
 -/
 module
-public import Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMap
+public import WeilConjectures.AlgebraicGeometry.Morphisms.CompletedMatchingRingMap
 public import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapResidueQuotientSurjective
 @[expose] public section

@@ -6,8 +6,8 @@ Authors: SHEAF group X2
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
-public import Sheaf.Algebra.Module.DegreeZeroFractions
-import Sheaf.Algebra.Module.FinitePiAwayFractions
+public import WeilConjectures.Algebra.Module.DegreeZeroFractions
+import WeilConjectures.Algebra.Module.FinitePiAwayFractions
 import Sheaf.AlgebraicGeometry.ProjTwistBasicOpenFractions
 
 /-!
