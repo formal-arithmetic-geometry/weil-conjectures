@@ -29,7 +29,7 @@ public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
 import WeilConjectures.ConstructibleSheaf.Pullback
 import Sheaf.Paper.PurityConventions
-import Sheaf.SixFunctors.SmoothDualityBaseChangeCompat
+public import Sheaf.SixFunctors.SmoothDualityBaseChangeCompat
 
 /-! # Normalized ordinary etale specialization along a smooth section
 

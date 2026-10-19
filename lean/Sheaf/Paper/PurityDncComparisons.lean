@@ -16,7 +16,7 @@ import Sheaf.Paper.PurityDncFamilyIntrinsic
 import Sheaf.Paper.PurityNormalCone
 import Sheaf.Paper.PuritySectionInvariantIntrinsic
 import Sheaf.Paper.VectorBundlePurity
-import Sheaf.SixFunctors.SmoothDualityBaseChangeCompat
+public import Sheaf.SixFunctors.SmoothDualityBaseChangeCompat
 
 /-! # Canonical fibre comparisons for the deformation of a smooth section
 
