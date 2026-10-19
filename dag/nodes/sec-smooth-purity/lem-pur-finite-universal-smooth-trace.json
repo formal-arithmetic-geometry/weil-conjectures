@@ -689,5 +689,40 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteUniversalSmoothTrace",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finite_universal_smooth_trace",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.primeTraceSetting",
+   "WeilConjectures.PurityFiniteSetting.traceTwist",
+   "WeilConjectures.PurityFiniteSetting.tracePulledUnitIso",
+   "WeilConjectures.PurityFiniteSetting.traceEtaleUnitIso",
+   "WeilConjectures.PurityFiniteSetting.traceComparedUnitIso",
+   "WeilConjectures.PurityFiniteSetting.traceTensorUnitIso",
+   "WeilConjectures.PurityFiniteSetting.traceSource",
+   "WeilConjectures.PurityFiniteSetting.traceSourceIso",
+   "WeilConjectures.PurityFiniteSetting.traceTwistExtensionIso",
+   "WeilConjectures.PurityFiniteSetting.traceOnTwist",
+   "WeilConjectures.PurityFiniteSetting.traceSupportModel",
+   "WeilConjectures.PurityFiniteSetting.traceCompactComparison",
+   "WeilConjectures.PurityFiniteSetting.traceUnitExtensionIso",
+   "WeilConjectures.PurityFiniteSetting.finite_universal_smooth_trace"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteUniversalSmoothTrace.lean",
+  "statement": "theorem finite_universal_smooth_trace (P : PurityFiniteSetting.{u}) (r : ℕ) (hr : 1 ≤ r) (_hlevel : P.level = P.ramificationIndex * r) {X Y : Scheme.{u}} [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [IsSeparated (X ↘ Spec (.of P.field.k))] [IsSeparated (Y ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of P.field.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (d : ℕ) [SmoothOfRelativeDimension d f] : ∃ (eA : (primeTraceSetting P r hr).Ring ≃+* ULift.{u} (ZMod (primeTraceSetting P r hr).diagonalExponent)) (hB : ((primeTraceSetting P r hr).diagonalExponent : P.Ring) = 0) (hA : (P.diagonalExponent : (primeTraceSetting P r hr).Coefficient) = 0) (q : X.rootsOfUnitySheaf P.diagonalExponent ⟶ X.rootsOfUnitySheaf (primeTraceSetting P r hr).diagonalExponent) (a : finiteEtaleTateLine X P.diagonalExponent (primeTraceSetting P r hr).Coefficient hA ≅ finiteEtaleTateLine X (primeTraceSetting P r hr).diagonalExponent (primeTraceSetting P r hr).Coefficient (primeTraceSetting P r hr).diagonalExponent_annihilates) (σ : Etale.FiniteSmoothPurity.CoefficientLineComparison (finiteGeneralRingCoefficientMap (primeTraceSetting P r hr) P.Ring hB eA).ulift P.diagonalExponent P.diagonalExponent hA P.diagonalExponent_annihilates X), FiniteGeneralRingKummerComparison (primeTraceSetting P r hr).Coefficient P.diagonalExponent (primeTraceSetting P r hr).diagonalExponent hA (primeTraceSetting P r hr).diagonalExponent_annihilates X q a ∧ σ.roots = 𝟙 _ ∧ (∀ M : proEtaleDerivedCategory X (primeTraceSetting P r hr).Ring, finiteTorConstructible (primeTraceSetting P r hr).coefficients.l (primeTraceSetting P r hr).extension r hr X M → IsIso (traceCompactComparison P f r hr (finiteGeneralRingCoefficientMap (primeTraceSetting P r hr) P.Ring hB eA) M)) ∧ traceCompactComparison P f r hr (finiteGeneralRingCoefficientMap (primeTraceSetting P r hr) P.Ring hB eA) (traceTwist (primeTraceSetting P r hr) X d) ≫ (smoothCompactSupport P f).map (traceTwistExtensionIso P (primeTraceSetting P r hr) (finiteGeneralRingCoefficientMap (primeTraceSetting P r hr) P.Ring hB eA) X d hA a σ).hom ≫ traceOnTwist P f d = (scalarExtensionFunctor (finiteGeneralRingCoefficientMap (primeTraceSetting P r hr) P.Ring hB eA) Y).map (traceOnTwist (primeTraceSetting P r hr) f d) ≫ (traceUnitExtensionIso P (finiteGeneralRingCoefficientMap (primeTraceSetting P r hr) P.Ring hB eA) Y).hom",
+  "branch": "sheaf-dag",
+  "by": "NG",
+  "date": "2026-10-19",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-c81ab2ab8"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c81ab2ab8",
+  "group": "NG",
+  "result": "fix",
+  "note": "Re-push of bdf3c9ea with identical .lean files and node records (only the report and blueprint-index differ). bdf3's FIX was returned at landing on a load timeout of the item module (normally 6-9 s), so both fixes are re-applied. Statement re-checked: A=Z/l^r and B=O_E/l^r via level=e*r, unique ring map, separated finite-type smooth pure-dimension hypotheses with nothing stronger, c = reductionDirectImageComparison (extension by zero then proper counit mate) on the smoothCompactSupport compactification and an iso on every ctf object, q/a/sigma pinned by power map, generators and derived normalization (canonical Z_l(1) tower), canonical unit iso, equation t_B∘c = t_A⊗1; d=0, E=Q_l, r=1 ramified, empty schemes and universes OK; no duplicate; single sorry; statement verbatim. FIX 1: fixes/FiniteFreeCoefficientExtension.lean = live text (cmp identical); the delivered edit adds unneeded braided imports and drops the live LowerShriekLeftAdjoint import, and the live file predates the base; land with --revert-nodes lem-coef-finite-free-extension to keep Q107's record. FIX 2: the theorem docstring merged node Steps 12-13; now 15 steps, docstring only. Compile at load ~100: dependency 30.3 s and item 5.1 s, clean; item alone 8.7 s clean at load ~190; runs at load 140-350 timed out from load (22-24 s CPU in 60 s wall). Retry landing at lower load. Advisory: decls from 5 nodes outside stmt_deps (det-sp-scalar-extension-functor, def-sp-reduction-direct-image-comparison, det-sp-reduction-exceptional, det-sp-finite-general-ring, def-pur-finite-smooth-coefficient-arrows)."
  }
 }
