@@ -13,9 +13,60 @@
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Tags 03DA, 03CY, 03D7 and 03EL; sites-cohomology.tex Tag 07A4, homogeneous tensor construction; composition normalized by Tag 0D6D."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the normalized scalar-extension adjunction. Identify its unit with insertion of 1 tensor x. Naturality of the unit and the actual pullback presentation give naturality of generalized inverse-image generators.",
+   "uses": [
+    "def-pur-cochain-tensor-coherence-data",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For an S-module H, apply the existing transported-module construction to the geometric direct image, using the adjunct of the ring structure map as scalar action. Obtain an R-module P with underlying sheaf uPush(|H|). The inverse-image graph equations for addition and scalar multiplication imply that the set-sheaf adjunction restricts to a bijection of linear morphisms. Compose this with scalar-extension adjunction to obtain Hom_S(f.L M,H) equivalent to Hom_R(M,P), with the displayed generator formula. Use the construction and transport helpers at independent site object and morphism universes; the public small-site theorem statements stay unchanged.",
+   "uses": [
+    "lem-weil-pbc-geometric-module-construction",
+    "lem-weil-pbc-geometric-module-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the coefficient square, the adjuncts of its two structure maps commute with the coefficient maps. Naturality of inverse product comparisons proves that the direct image of H restricted along the target map is the restriction along the source map of the changed direct-image module. Combine the two pullback Hom bijections with the two scalar-extension adjunctions. This gives a bijection between maps out of the changed pullback of source scalar extension and maps out of target scalar extension of the original pullback, characterized by equality on original generalized generators.",
+   "uses": [
+    "lem-weil-pbc-geometric-module-construction",
+    "lem-weil-pbc-geometric-module-transport",
+    "def-pur-cochain-tensor-coherence-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The same adjunctions show that original generalized generators detect morphisms out of the changed source extension. Apply the Hom bijection and its inverse to identity maps to construct both component arrows. The generator equations and detection of morphisms show that these arrows are mutually inverse. Their generator formulas prove naturality in the original module. Assemble the components with NatIso.ofComponents. Two normalized natural isomorphisms agree on generators componentwise, hence are equal. This proves scalarAssociation_existsUnique without any new unproved statement.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Retain the existing definitions of scalarAssociation, kappa, tau and restriction tensor comparison, and the already proved signed total-differential compatibility. The completed unique-existence theorem supplies the canonical coefficient isomorphism with its original normalization, hence the existing coefficient and transition propositions retain their meanings.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pur-cochain-tensor-coherence-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-cochain-tensor-coherence-data",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-geometric-module-construction",
+  "lem-weil-pbc-geometric-module-transport"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY, 03D1, 03D3, 03D7 and 03EL: scalar extension/restriction adjunction, pushforward modules, and pullback/pushforward adjunction. The coefficient comparison is obtained by composing these Hom correspondences, comparing restricted scalar actions, and applying the correspondences to identities."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -150,20 +201,10 @@
   "date": "2026-10-19",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B8",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261019T002510-L-2142261",
+  "landing": "20261019T144018-L-2347992",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CategoryTheory.CochainPullback.extensionAdjunction_existsUnique",
-   "CategoryTheory.CochainPullback.extensionFunctor_laws",
-   "CategoryTheory.CochainPullback.extensionFunctor_mapPresentation",
-   "CategoryTheory.CochainPullback.restrictionTensorComponent_comm",
-   "CategoryTheory.CochainPullback.scalarAssociation_existsUnique"
-  ],
-  "sorry_after": [
-   "CategoryTheory.CochainPullback.scalarAssociation_existsUnique"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

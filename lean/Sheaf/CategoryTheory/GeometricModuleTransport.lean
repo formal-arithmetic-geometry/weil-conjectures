@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Category.Ring.Limits
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 
+import Mathlib.CategoryTheory.Sites.Equivalence
 import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 import Sheaf.CategoryTheory.GeometricModuleConstruction
 import Mathlib.CategoryTheory.Adjunction.Limits
@@ -22,7 +23,7 @@ Source: Stacks Project, Modules on Sites, Tags 03D1--03D3 and 03D7.
 
 @[expose] public section
 
-universe u
+universe u uC vC
 open CategoryTheory CategoryTheory.Limits
 open CategoryTheory.MonoidalCategory
 open scoped ChangeOfRings
@@ -34,23 +35,30 @@ set_option backward.isDefEq.respectTransparency false
 section Helpers
 
 private noncomputable abbrev sheafHasBinaryProduct
-    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
+    {C : Type uC} [Category.{vC} C]
+    {J : GrothendieckTopology C}
     (X Y : Sheaf J (Type u)) : HasBinaryProduct X Y := inferInstance
 
 attribute [local instance] sheafHasBinaryProduct
 
 private noncomputable abbrev ringBase
-    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
+    {C : Type uC} [Category.{vC} C]
+    {J : GrothendieckTopology C}
+    [EssentiallySmall.{u} C]
     (R : Sheaf J CommRingCat.{u}) :=
-  (sheafCompose J (forget₂ CommRingCat RingCat)).obj R
+  (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R
 
 private noncomputable abbrev moduleSets
-    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
+    {C : Type uC} [Category.{vC} C]
+    {J : GrothendieckTopology C}
+    [EssentiallySmall.{u} C]
     (R : Sheaf J CommRingCat.{u}) :=
   toSheaf (ringBase R) ⋙ sheafCompose J (CategoryTheory.forget AddCommGrpCat.{u})
 
 private noncomputable def linearLift
-    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
+    {C : Type uC} [Category.{vC} C]
+    {J : GrothendieckTopology C}
+    [EssentiallySmall.{u} C]
     {R : Sheaf J CommRingCat.{u}}
     {M N : SheafOfModules.{u} (ringBase R)}
     (α : (moduleSets R).obj M ⟶ (moduleSets R).obj N)
@@ -70,21 +78,27 @@ private noncomputable def linearLift
         exact CategoryTheory.congr_fun (α.hom.naturality f) x }
 
 private theorem linearLift_underlying
-    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
+    {C : Type uC} [Category.{vC} C]
+    {J : GrothendieckTopology C}
+    [EssentiallySmall.{u} C]
     {R : Sheaf J CommRingCat.{u}}
     {M N : SheafOfModules.{u} (ringBase R)}
     (α : (moduleSets R).obj M ⟶ (moduleSets R).obj N) (ha hs) :
     (moduleSets R).map (linearLift α ha hs) = α := rfl
 
 private noncomputable def sectionPair
-    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
+    {C : Type uC} [Category.{vC} C]
+    {J : GrothendieckTopology C}
+    [EssentiallySmall.{u} C]
     (X Y : Sheaf J (Type u)) (W : Cᵒᵖ) (x : X.obj.obj W) (y : Y.obj.obj W) :
     (X ⨯ Y).obj.obj W :=
   (prod.lift (CartesianMonoidalCategory.fst X Y)
     (CartesianMonoidalCategory.snd X Y)).hom.app W (x, y)
 
 private theorem sectionPair_fst
-    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
+    {C : Type uC} [Category.{vC} C]
+    {J : GrothendieckTopology C}
+    [EssentiallySmall.{u} C]
     (X Y : Sheaf J (Type u)) (W : Cᵒᵖ) (x : X.obj.obj W) (y : Y.obj.obj W) :
     (prod.fst : X ⨯ Y ⟶ X).hom.app W (sectionPair X Y W x y) = x := by
   exact congrArg (fun f : X ⊗ Y ⟶ X ↦ f.hom.app W (x, y))
@@ -92,7 +106,9 @@ private theorem sectionPair_fst
       (CartesianMonoidalCategory.snd X Y))
 
 private theorem sectionPair_snd
-    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
+    {C : Type uC} [Category.{vC} C]
+    {J : GrothendieckTopology C}
+    [EssentiallySmall.{u} C]
     (X Y : Sheaf J (Type u)) (W : Cᵒᵖ) (x : X.obj.obj W) (y : Y.obj.obj W) :
     (prod.snd : X ⨯ Y ⟶ Y).hom.app W (sectionPair X Y W x y) = y := by
   exact congrArg (fun f : X ⊗ Y ⟶ Y ↦ f.hom.app W (x, y))
@@ -100,7 +116,9 @@ private theorem sectionPair_snd
       (CartesianMonoidalCategory.snd X Y))
 
 private theorem prodMap_fst_apply
-    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
+    {C : Type uC} [Category.{vC} C]
+    {J : GrothendieckTopology C}
+    [EssentiallySmall.{u} C]
     {X Y X' Y' : Sheaf J (Type u)} (f : X ⟶ X') (g : Y ⟶ Y')
     (W : Cᵒᵖ) (x : (X ⨯ Y).obj.obj W) :
     (prod.fst : X' ⨯ Y' ⟶ X').hom.app W ((prod.map f g).hom.app W x) =
@@ -108,7 +126,9 @@ private theorem prodMap_fst_apply
   congrArg (fun h : X ⨯ Y ⟶ X' ↦ h.hom.app W x) (prod.map_fst f g)
 
 private theorem prodMap_snd_apply
-    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
+    {C : Type uC} [Category.{vC} C]
+    {J : GrothendieckTopology C}
+    [EssentiallySmall.{u} C]
     {X Y X' Y' : Sheaf J (Type u)} (f : X ⟶ X') (g : Y ⟶ Y')
     (W : Cᵒᵖ) (x : (X ⨯ Y).obj.obj W) :
     (prod.snd : X' ⨯ Y' ⟶ Y').hom.app W ((prod.map f g).hom.app W x) =
@@ -116,12 +136,16 @@ private theorem prodMap_snd_apply
   congrArg (fun h : X ⨯ Y ⟶ Y' ↦ h.hom.app W x) (prod.map_snd f g)
 
 private noncomputable abbrev ringSets
-    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
+    {C : Type uC} [Category.{vC} C]
+    {J : GrothendieckTopology C}
+    [EssentiallySmall.{u} C]
     (R : Sheaf J CommRingCat.{u}) :=
   (sheafCompose J (CategoryTheory.forget CommRingCat.{u})).obj R
 
 private def addSpec
-    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
+    {C : Type uC} [Category.{vC} C]
+    {J : GrothendieckTopology C}
+    [EssentiallySmall.{u} C]
     {R : Sheaf J CommRingCat.{u}} (M : SheafOfModules.{u} (ringBase R))
     (a : (moduleSets R).obj M ⨯ (moduleSets R).obj M ⟶ (moduleSets R).obj M) : Prop :=
   ∀ W x, a.hom.app W x =
@@ -129,7 +153,9 @@ private def addSpec
       (show M.val.obj W from (prod.snd : _ ⟶ (moduleSets R).obj M).hom.app W x)
 
 private def smulSpec
-    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
+    {C : Type uC} [Category.{vC} C]
+    {J : GrothendieckTopology C}
+    [EssentiallySmall.{u} C]
     {R : Sheaf J CommRingCat.{u}} (M : SheafOfModules.{u} (ringBase R))
     (a : ringSets R ⨯ (moduleSets R).obj M ⟶ (moduleSets R).obj M) : Prop :=
   ∀ W x, a.hom.app W x =
@@ -137,7 +163,9 @@ private def smulSpec
       (show M.val.obj W from (prod.snd : _ ⟶ (moduleSets R).obj M).hom.app W x)
 
 private theorem linear_iff
-    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
+    {C : Type uC} [Category.{vC} C]
+    {J : GrothendieckTopology C}
+    [EssentiallySmall.{u} C]
     {R S : Sheaf J CommRingCat.{u}} (c : R ⟶ S)
     (M : SheafOfModules.{u} (ringBase R)) (N : SheafOfModules.{u} (ringBase S))
     (aM : (moduleSets R).obj M ⨯ (moduleSets R).obj M ⟶ (moduleSets R).obj M)
@@ -148,10 +176,10 @@ private theorem linear_iff
     (hsM : smulSpec M sM) (hsN : smulSpec N sN)
     (α : (moduleSets R).obj M ⟶ (moduleSets S).obj N) :
     (∃ f : M ⟶ (restrictScalars ((sheafCompose J
-      (forget₂ CommRingCat RingCat)).map c)).obj N, (moduleSets R).map f = α) ↔
+      (forget₂ CommRingCat.{u} RingCat.{u})).map c)).obj N, (moduleSets R).map f = α) ↔
       aM ≫ α = prod.map α α ≫ aN ∧
       sM ≫ α = prod.map ((sheafCompose J
-        (CategoryTheory.forget CommRingCat)).map c) α ≫ sN := by
+        (CategoryTheory.forget CommRingCat.{u})).map c) α ≫ sN := by
   constructor
   · rintro ⟨f, rfl⟩
     constructor
@@ -165,7 +193,7 @@ private theorem linear_iff
     · ext W x
       change f.val.app W (sM.hom.app W x) =
         sN.hom.app W ((prod.map ((sheafCompose J
-          (CategoryTheory.forget CommRingCat)).map c)
+          (CategoryTheory.forget CommRingCat.{u})).map c)
           ((moduleSets R).map f)).hom.app W x)
       rw [hsM, hsN]
       erw [prodMap_fst_apply, prodMap_snd_apply]
@@ -187,7 +215,7 @@ private theorem linear_iff
       have h := congrArg (fun f ↦ f.hom.app W p) hs
       change α.hom.app W (sM.hom.app W p) =
         sN.hom.app W ((prod.map ((sheafCompose J
-          (CategoryTheory.forget CommRingCat)).map c) α).hom.app W p) at h
+          (CategoryTheory.forget CommRingCat.{u})).map c) α).hom.app W p) at h
       rw [hsM, hsN, prodMap_fst_apply, prodMap_snd_apply] at h
       simp only [p, sectionPair_fst, sectionPair_snd] at h
       exact h

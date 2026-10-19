@@ -10,6 +10,7 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 
 public import Sheaf.CategoryTheory.RingedToposRingData
 import Sheaf.CategoryTheory.AdjunctionRingOperations
+import Mathlib.CategoryTheory.Sites.Equivalence
 import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 import Mathlib.CategoryTheory.Monoidal.CommGrp_
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
@@ -23,7 +24,7 @@ Source: Stacks Project, Modules on Sites, Tags 03D1--03D3 and 03D7.
 
 @[expose] public section
 
-universe u
+universe u uC vC uD vD uE vE
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace SheafOfModules
 
@@ -34,11 +35,13 @@ set_option backward.isDefEq.respectTransparency.types false
 
 namespace GeometricConstruction
 
-variable {C D : Type u} [Category.{u} C] [Category.{u} D]
+variable {C : Type uC} [Category.{vC} C]
+  {D : Type uD} [Category.{vD} D]
   {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+  [EssentiallySmall.{u} C] [EssentiallySmall.{u} D]
 
 private noncomputable abbrev base (R : Sheaf J CommRingCat.{u}) :=
-  (sheafCompose J (forget₂ CommRingCat RingCat)).obj R
+  (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R
 
 private noncomputable abbrev rset (R : Sheaf J CommRingCat.{u}) :=
   (sheafCompose J (CategoryTheory.forget CommRingCat.{u})).obj R
@@ -381,8 +384,8 @@ private noncomputable def imageModule
     map_comp f g := by
       ext x
       exact congrArg (fun k ↦ k x) ((F.obj ((mset R).obj M)).obj.map_comp f g) }
-  refine ⟨N, (Presheaf.isSheaf_iff_isSheaf_comp K _
-    (CategoryTheory.forget AddCommGrpCat.{u})).2 ?_⟩
+  refine ⟨N, (Presheaf.isSheaf_of_isSheaf_comp K _
+    (CategoryTheory.forget AddCommGrpCat.{u})) ?_⟩
   change Presheaf.IsSheaf K (F.obj ((mset R).obj M)).obj
   exact (F.obj ((mset R).obj M)).property
 
@@ -469,30 +472,35 @@ private noncomputable def imageFunctorUnderlying
   NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intro M N f; rfl)
 
 private noncomputable abbrev productExists
-    {E : Type u} [Category.{u} E] {T : GrothendieckTopology E}
+    {E : Type uE} [Category.{vE} E]
+    {T : GrothendieckTopology E}
     (X Y : Sheaf T (Type u)) : HasBinaryProduct X Y := inferInstance
 
 attribute [local instance] productExists
 
 private noncomputable def fromProd
-    {E : Type u} [Category.{u} E] {T : GrothendieckTopology E}
+    {E : Type uE} [Category.{vE} E]
+    {T : GrothendieckTopology E}
     (X Y : Sheaf T (Type u)) : X ⨯ Y ⟶ X ⊗ Y :=
   CartesianMonoidalCategory.lift prod.fst prod.snd
 
 @[reassoc] private theorem fromProd_fst
-    {E : Type u} [Category.{u} E] {T : GrothendieckTopology E}
+    {E : Type uE} [Category.{vE} E]
+    {T : GrothendieckTopology E}
     (X Y : Sheaf T (Type u)) :
     fromProd X Y ≫ CartesianMonoidalCategory.fst X Y = prod.fst :=
   CartesianMonoidalCategory.lift_fst _ _
 
 @[reassoc] private theorem fromProd_snd
-    {E : Type u} [Category.{u} E] {T : GrothendieckTopology E}
+    {E : Type uE} [Category.{vE} E]
+    {T : GrothendieckTopology E}
     (X Y : Sheaf T (Type u)) :
     fromProd X Y ≫ CartesianMonoidalCategory.snd X Y = prod.snd :=
   CartesianMonoidalCategory.lift_snd _ _
 
 @[reassoc] private theorem fromProd_map
-    {E : Type u} [Category.{u} E] {T : GrothendieckTopology E}
+    {E : Type uE} [Category.{vE} E]
+    {T : GrothendieckTopology E}
     {X Y X' Y' : Sheaf T (Type u)} (f : X ⟶ X') (g : Y ⟶ Y') :
     prod.map f g ≫ fromProd X' Y' = fromProd X Y ≫ (f ⊗ₘ g) := by
   apply CartesianMonoidalCategory.hom_ext <;>
@@ -500,6 +508,7 @@ private noncomputable def fromProd
       CartesianMonoidalCategory.tensorHom_fst, CartesianMonoidalCategory.tensorHom_snd,
       fromProd_fst_assoc, fromProd_snd_assoc, prod.map_fst, prod.map_snd]
 
+omit [EssentiallySmall.{u} C] [EssentiallySmall.{u} D] in
 private theorem fromProd_comparison
     (F : Sheaf J (Type u) ⥤ Sheaf K (Type u)) [F.Monoidal]
     (X Y : Sheaf J (Type u)) :
@@ -512,6 +521,7 @@ private theorem fromProd_comparison
       Functor.Monoidal.μ_snd, fromProd_fst, fromProd_snd,
       prodComparison_fst, prodComparison_snd, ← F.map_comp]
 
+omit [EssentiallySmall.{u} C] [EssentiallySmall.{u} D] in
 private theorem binary_transport_iff
     (F : Sheaf J (Type u) ⥤ Sheaf K (Type u)) [F.Monoidal]
     (X : Sheaf J (Type u)) (A : Sheaf K (Type u)) (e : A ≅ F.obj X)
@@ -572,6 +582,7 @@ private theorem ringIso_isMonHom
   rw [← hOne]
   simp only [Category.assoc, e.inv_hom_id, Category.comp_id]
 
+omit [EssentiallySmall.{u} C] [EssentiallySmall.{u} D] in
 private theorem adjunct_binary
     (L : Sheaf J (Type u) ⥤ Sheaf K (Type u))
     (V : Sheaf K (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
@@ -604,6 +615,7 @@ private theorem adjunct_binary
     adj.homEquiv_naturality_right, hp]
   rfl
 
+omit [EssentiallySmall.{u} C] [EssentiallySmall.{u} D] in
 private theorem adjunct_constant
     (L : Sheaf J (Type u) ⥤ Sheaf K (Type u))
     (V : Sheaf K (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
@@ -618,6 +630,7 @@ private theorem adjunct_constant
     exact CartesianMonoidalCategory.toUnit_unique _ _
   rw [← adj.homEquiv_naturality_left, h, adj.homEquiv_naturality_right, ht]
 
+omit [EssentiallySmall.{u} C] [EssentiallySmall.{u} D] in
 private theorem binary_inverse
     (F : Sheaf J (Type u) ⥤ Sheaf K (Type u)) [F.Monoidal]
     (X : Sheaf J (Type u)) (A : Sheaf K (Type u)) (e : A ≅ F.obj X)
@@ -634,21 +647,21 @@ private theorem binary_inverse
     congrArg (fun z ↦ z ≫ e.inv) h.symm
 
 private theorem ringMap_add (R S : Sheaf J CommRingCat.{u}) (c : R ⟶ S) :
-    ringAdd R ≫ (sheafCompose J (CategoryTheory.forget CommRingCat)).map c =
-      ((sheafCompose J (CategoryTheory.forget CommRingCat)).map c ⊗ₘ
-        (sheafCompose J (CategoryTheory.forget CommRingCat)).map c) ≫ ringAdd S := by
+    ringAdd R ≫ (sheafCompose J (CategoryTheory.forget CommRingCat.{u})).map c =
+      ((sheafCompose J (CategoryTheory.forget CommRingCat.{u})).map c ⊗ₘ
+        (sheafCompose J (CategoryTheory.forget CommRingCat.{u})).map c) ≫ ringAdd S := by
   ext W x
   exact (c.hom.app W).hom.map_add x.1 x.2
 
 private theorem ringMap_mul (R S : Sheaf J CommRingCat.{u}) (c : R ⟶ S) :
-    ringMul R ≫ (sheafCompose J (CategoryTheory.forget CommRingCat)).map c =
-      ((sheafCompose J (CategoryTheory.forget CommRingCat)).map c ⊗ₘ
-        (sheafCompose J (CategoryTheory.forget CommRingCat)).map c) ≫ ringMul S := by
+    ringMul R ≫ (sheafCompose J (CategoryTheory.forget CommRingCat.{u})).map c =
+      ((sheafCompose J (CategoryTheory.forget CommRingCat.{u})).map c ⊗ₘ
+        (sheafCompose J (CategoryTheory.forget CommRingCat.{u})).map c) ≫ ringMul S := by
   ext W x
   exact (c.hom.app W).hom.map_mul x.1 x.2
 
 private theorem ringMap_one (R S : Sheaf J CommRingCat.{u}) (c : R ⟶ S) :
-    ringOne R ≫ (sheafCompose J (CategoryTheory.forget CommRingCat)).map c = ringOne S := by
+    ringOne R ≫ (sheafCompose J (CategoryTheory.forget CommRingCat.{u})).map c = ringOne S := by
   ext W x
   exact (c.hom.app W).hom.map_one
 
