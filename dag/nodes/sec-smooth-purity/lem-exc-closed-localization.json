@@ -17,52 +17,35 @@
  ],
  "proof": [
   {
-   "text": "Write $i:Z\\to X$, $v:W\\to X$, $Z_W=Z\\times_XW$, $i_W:Z_W\\to W$, and $v_Z:Z_W\\to Z$. The slice identification identifies $v^*$ and $v_Z^*$ with restriction. For $T\\to W$, the two values $(v^*i_*G)(T)$ and $(i_{W*}v_Z^*G)(T)$ are $G(Z\\times_X T)$ and $G(Z_W\\times_W T)$, respectively. The fiber-product universal property identifies these objects, their arrows, and their coefficient actions. Hence restriction gives a natural isomorphism $v^*i_*\\cong i_{W*}v_Z^*$.",
+   "text": "Set alpha to asIso of localizationRestrictionBaseChangeMap for the flipped pullback square. The source-library theorem isIso_localizationRestrictionBaseChangeMap_of_isPullback proves invertibility. Its definition is sheafPushforwardContinuousNatTrans of pullbackMapComparison, so its component on G and T is definitionally the specified restriction map.",
    "uses": [
-    "lem-weil-pbc-proetale-restriction-injectives",
-    "def-weil-pbc-proetale-operations"
+    "lem-weil-pbc-coefficient-site-weakly-etale-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-closed-localization.md",
-    "place": "node lem-exc-closed-localization, order 1846"
-   }
+   "elementary": false
   },
   {
-   "text": "Compute inverse image using the comma-category colimit followed by sheafification in [def-weil-proetale-inverse-image]. For $T\\to Z_W$, a global index is $(V\\to X,\\phi:T\\to Z\\times_XV)$. Replace it by $V_W=V\\times_XW$ with the unique lift of $\\phi$ using the given $T\\to W$. This is a local index for $i_W$, and the projection $V_W\\to V$ sends a section $s\\in F(V)$ to its restriction in $F(V_W)$. Conversely a local index $(V\\to W,\\psi:T\\to Z_W\\times_WV)$ is a global index by forgetting its W-structure. These maps on colimits are inverse: the projection $V_W\\to V$ is an indexing arrow identifying the original representative with its replacement; for a local V, its graph $V\\to V\\times_XW$ is an indexing arrow identifying the local representative with its replacement. The maps commute with arrows of T. Slice coverings are unchanged, so sheafification gives $v_Z^{-1}i^{-1}F\\cong i_W^{-1}v^{-1}F$. For the constant coefficient module sheaves of the site convention, these maps send $a s$ to $a$ times the image of $s$; the module construction in the operations definition therefore gives the same isomorphism for module inverse images. This constructs the canonical pro-etale inverse-image comparison directly from the base-change functors; no etale inverse-image comparison or presentation theorem is used.",
+   "text": "Let adj and adjprime be the closed pullback/direct-image adjunctions and loc and locprime the weakly etale restriction/direct-image adjunctions. Define beta inverse to be the left-adjoint isomorphism conjugate to squareLowerStarIso under adj.comp locprime and loc.comp adjprime. Apply the injective mates equivalence for locprime and loc. Mathlib iterated_mateEquiv_conjugateEquiv, the inverse law of conjugateEquiv, and the source-library mateEquiv_localizationRestrictionBaseChangeMap identify the mate of beta inverse with alpha hom.",
    "uses": [
-    "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-proetale-restriction-injectives",
-    "def-weil-pbc-proetale-operations"
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-coefficient-site-weakly-etale-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-closed-localization.md",
-    "place": "node lem-exc-closed-localization, order 1846"
-   }
+   "elementary": false
   },
   {
-   "text": "In the inverse-image colimit definition, the unit $F(V)\\to(i_*i^{-1}F)(V)$ sends s to the class indexed by $(V,\\mathrm{id}_{Z\\times_XV})$, followed by sheafification. For the counit $i^{-1}i_*G\\to G$, a representative indexed by $(V,\\phi:T\\to Z\\times_XV)$ is $s\\in G(Z\\times_XV)$ and is sent to $\\phi^*s\\in G(T)$. The restriction maps respect indexing arrows, so this defines a presheaf map and then a sheaf map; the operations definition lifts these very maps to modules. The unit representative under step 2 is its restriction along $V\\times_XW\\to V$, namely the local unit representative. For the counit, the lifted map $\\phi_W:T\\to Z_W\\times_W(V\\times_XW)$ followed by projection is $\\phi$, so $\\phi_W^*\\operatorname{pr}^*s=\\phi^*s$. This equality on every representative proves equality after the colimit and sheafification. Thus both unit and counit commute with the direct-image identification of step 1 and inverse-image identification of step 2.",
-   "uses": [
-    "def-weil-proetale-inverse-image",
-    "def-weil-pbc-proetale-operations"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-closed-localization.md",
-    "place": "node lem-exc-closed-localization, order 1846"
-   }
+   "text": "Apply Mathlib unit_mateEquiv to beta inverse and the preceding mate equality; postcompose with the local closed direct image of beta hom. Functoriality and beta inverse followed by beta hom equal identity give the displayed unit identity. Apply mateEquiv_counit to the same square; precompose with the local closed inverse image of alpha inverse. Functoriality and alpha inverse followed by alpha hom equal identity give the displayed counit identity.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-proetale-operations",
-  "def-weil-proetale-inverse-image",
-  "lem-weil-pbc-proetale-restriction-injectives"
+  "lem-weil-pbc-coefficient-site-weakly-etale-base-change"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-closed-localization.md",
-  "place": "## Proof"
+  "by": "T8 stage 3",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/BaseChange/WeaklyEtale.lean",
+  "place": "localizationRestrictionBaseChangeMap, isIso_localizationRestrictionBaseChangeMap_of_isPullback, mateEquiv_localizationRestrictionBaseChangeMap; Mathlib/CategoryTheory/Adjunction/Mates.lean, iterated_mateEquiv_conjugateEquiv, unit_mateEquiv, mateEquiv_counit",
+  "note": "The existing base-change map supplies the exact section normalization. Double mates replace the comma-colimit construction by the canonical adjoint comparison, without changing the statement or the unit route."
  },
  "mathlib_searches": [
   {
@@ -143,9 +126,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-proetale-restriction-injectives"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -171,5 +152,15 @@
   "group": "Q35",
   "result": "pass",
   "note": "Statement, dependencies, docstrings, edge cases, report sections, and canonical declarations checked; scompile.py passed with no warnings or errors."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261019T005431-L-2770633",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

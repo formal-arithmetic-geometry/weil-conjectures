@@ -5,12 +5,11 @@ Authors: SHEAF group Q35
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ProEtaleFiniteCoefficientDirectImage
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.AlgebraicGeometry.ProEtaleRestrictionInjectives
+
+import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
 
 /-!
 # Closed-site operations under weakly etale localization
@@ -41,22 +40,21 @@ counit formulas it fixes the inverse-image identification as its adjoint compari
 Source: Weil conjectures blueprint, smooth purity, order 1846
 (blueprint: lem-exc-closed-localization).
 
-Proof plan:
-1. Use the slice identification of `lem-weil-pbc-proetale-restriction-injectives`.
-   On `T` over `W`, the two direct images evaluate `G` on `T ×_X Z` and
-   `T ×_W (Z ×_X W)`. The fibre-product comparison is an isomorphism and is natural
-   in `T` and `G`. Its restriction map is linear over the same constant coefficient ring.
-2. Use the comma-colimit and sheafification construction of
-   `def-weil-proetale-inverse-image`. Replace a global index `(V, phi)` by
-   `V ×_X W`, lifting `phi` with the given map to `W`. A local index gives a global
-   one by forgetting its `W`-structure. Projection and graph indexing arrows identify
-   both composites with the original representative. These maps commute with
-   restrictions, sheafification, and scalar multiplication, yielding `beta`.
-3. The unit sends a section to the identity-indexed class. Base change sends this
-   representative to the local unit representative. The counit sends `(phi, s)` to
-   `phi^* s`; the lifted `phi` followed by projection is the original `phi`, so the
-   same restriction results. These are the canonical adjunction maps of
-   `def-weil-pbc-proetale-operations`, giving the two displayed equations. -/
+Proof:
+1. Take `alpha` to be the existing localization restriction base-change map for
+   the flipped pullback square. It is invertible by weakly etale base change, and
+   its definition gives exactly the required formula on sections.
+2. Conjugate `squareLowerStarIso` under the two composite adjunctions to construct
+   `beta.inv`. The iterated-mates identity and the known mate of the restriction
+   base-change map show that the mate of `beta.inv` is `alpha.hom`.
+3. Apply the unit and counit identities for mates. Postcompose the unit identity
+   with the direct image of `beta.hom`, and precompose the counit identity with
+   the inverse image of `alpha.inv`. Functoriality and the inverse laws of the
+   two isomorphisms give the displayed compatibility equations.
+
+The base-change map and its mate are constructed in
+`WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale`; the categorical
+identities are in `Mathlib.CategoryTheory.Adjunction.Mates`. -/
 theorem proEtale_closed_localization {X Z : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] (W : X.ProEt) (Λ : Type (u + 1)) [CommRing Λ] :
     ∃ alpha : lowerStar (ModuleCat.{u + 1} Λ) i ⋙
@@ -94,6 +92,90 @@ theorem proEtale_closed_localization {X Z : Scheme.{u}} (i : Z ⟶ X)
               (pullback.snd i W.hom)).counit.app
                 ((localizationRestriction (ModuleCat.{u + 1} Λ)
                   (pullback.fst i W.hom) inferInstance).obj G)) := by
-  sorry
+  let sq := (IsPullback.of_hasPullback i W.hom).flip
+  generalize hadj : upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i = adj
+  generalize hadj' : upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+    (pullback.snd i W.hom) = adj'
+  generalize hloc : localizationRestrictionLowerStarAdjunction
+    (ModuleCat.{u + 1} Λ) W.hom W.prop = loc
+  generalize hloc' : localizationRestrictionLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+    (pullback.fst i W.hom) inferInstance = loc'
+  have := isIso_localizationRestrictionBaseChangeMap_of_isPullback
+    (ModuleCat.{u + 1} Λ) sq
+  generalize halpha : asIso
+    (localizationRestrictionBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq) = alpha
+  generalize hbeta : ((conjugateIsoEquiv (adj.comp loc') (loc.comp adj')).symm
+    (squareLowerStarIso (ModuleCat.{u + 1} Λ) sq.toCommSq)).symm = beta
+  have hc : conjugateEquiv (adj.comp loc') (loc.comp adj') beta.inv =
+      (squareLowerStarIso (ModuleCat.{u + 1} Λ) sq.toCommSq).hom := by
+    rw [← hbeta]
+    exact (conjugateEquiv (adj.comp loc') (loc.comp adj')).apply_symm_apply
+      (squareLowerStarIso (ModuleCat.{u + 1} Λ) sq.toCommSq).hom
+  have hs : (mateEquiv loc' loc
+        (TwoSquare.mk _ _ _ _ alpha.hom)).natTrans =
+      (squareLowerStarIso (ModuleCat.{u + 1} Λ) sq.toCommSq).hom := by
+    rw [← hloc, ← hloc', ← halpha]
+    exact mateEquiv_localizationRestrictionBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq
+  have hm : mateEquiv adj adj' (TwoSquare.mk _ _ _ _ beta.inv) =
+      TwoSquare.mk _ _ _ _ alpha.hom := by
+    apply (mateEquiv loc' loc).injective
+    apply TwoSquare.ext
+    rw [iterated_mateEquiv_conjugateEquiv]
+    intro G
+    exact congrArg (fun η ↦ η.app G) (hc.trans hs.symm)
+  have hm' := congrArg TwoSquare.natTrans hm
+  refine ⟨alpha, beta, ?_, ?_, ?_⟩
+  · intro G T
+    rw [← halpha]
+    rfl
+  · intro F
+    have h := unit_mateEquiv adj adj' (TwoSquare.mk _ _ _ _ beta.inv) F
+    change _ ≫ ((mateEquiv adj adj' (TwoSquare.mk _ _ _ _ beta.inv)).natTrans).app _ =
+      _ at h
+    rw [hm'] at h
+    rw [← Category.assoc, h, Category.assoc, ← Functor.map_comp]
+    change adj'.unit.app ((localizationRestriction (ModuleCat.{u + 1} Λ)
+      W.hom W.prop).obj F) ≫
+      (lowerStar (ModuleCat.{u + 1} Λ) (pullback.snd i W.hom)).map
+        (beta.inv.app F ≫ beta.hom.app F) =
+      adj'.unit.app ((localizationRestriction (ModuleCat.{u + 1} Λ)
+        W.hom W.prop).obj F)
+    rw [beta.inv_hom_id_app]
+    have hmap :
+        (lowerStar (ModuleCat.{u + 1} Λ) (pullback.snd i W.hom)).map
+            (𝟙 ((localizationRestriction (ModuleCat.{u + 1} Λ)
+              W.hom W.prop ⋙ upperStar (ModuleCat.{u + 1} Λ) (pullback.snd i W.hom)).obj F)) =
+          𝟙 ((lowerStar (ModuleCat.{u + 1} Λ) (pullback.snd i W.hom)).obj
+            ((localizationRestriction (ModuleCat.{u + 1} Λ)
+              W.hom W.prop ⋙ upperStar (ModuleCat.{u + 1} Λ) (pullback.snd i W.hom)).obj F)) :=
+      (lowerStar (ModuleCat.{u + 1} Λ) (pullback.snd i W.hom)).map_id _
+    rw [hmap]
+    exact Category.comp_id _
+  · intro G
+    have h := mateEquiv_counit adj adj' (TwoSquare.mk _ _ _ _ beta.inv) G
+    change (upperStar (ModuleCat.{u + 1} Λ) (pullback.snd i W.hom)).map
+        (((mateEquiv adj adj' (TwoSquare.mk _ _ _ _ beta.inv)).natTrans).app G) ≫ _ =
+      _ at h
+    rw [hm'] at h
+    rw [← h, ← Category.assoc, ← Functor.map_comp]
+    change (upperStar (ModuleCat.{u + 1} Λ) (pullback.snd i W.hom)).map
+        (alpha.inv.app G ≫ alpha.hom.app G) ≫
+      adj'.counit.app ((localizationRestriction (ModuleCat.{u + 1} Λ)
+        (pullback.fst i W.hom) inferInstance).obj G) =
+      adj'.counit.app ((localizationRestriction (ModuleCat.{u + 1} Λ)
+        (pullback.fst i W.hom) inferInstance).obj G)
+    rw [alpha.inv_hom_id_app]
+    have hmap :
+        (upperStar (ModuleCat.{u + 1} Λ) (pullback.snd i W.hom)).map
+            (𝟙 ((localizationRestriction (ModuleCat.{u + 1} Λ)
+              (pullback.fst i W.hom) inferInstance ⋙
+                lowerStar (ModuleCat.{u + 1} Λ) (pullback.snd i W.hom)).obj G)) =
+          𝟙 ((upperStar (ModuleCat.{u + 1} Λ) (pullback.snd i W.hom)).obj
+            ((localizationRestriction (ModuleCat.{u + 1} Λ)
+              (pullback.fst i W.hom) inferInstance ⋙
+                lowerStar (ModuleCat.{u + 1} Λ) (pullback.snd i W.hom)).obj G)) :=
+      (upperStar (ModuleCat.{u + 1} Λ) (pullback.snd i W.hom)).map_id _
+    rw [hmap]
+    exact Category.id_comp _
 
 end AlgebraicGeometry.ProEtale
