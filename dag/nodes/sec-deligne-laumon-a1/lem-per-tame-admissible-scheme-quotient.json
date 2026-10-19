@@ -13,7 +13,8 @@
   "def-weil-geometric-point",
   "def-weil-finite-integral-morphism",
   "pqf-def-locnoeth",
-  "def-weil-pbc-quasi-compact-scheme"
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-per-admissible-finite-scheme-quotient"
  ],
  "proof": [
   {
@@ -221,5 +222,23 @@
   "group": "Q94",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-3e5de9736 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, ILO VI 3.1-3.7(a) (printed pp.73-75; tame = geometric-point stabilizer order prime to char k(x), matches the item) and Stacks 0BRH/0BRI/0BRJ/01YQ. The item statement is unchanged from the Q145 version apart from an appended explicit definition of Noetherian (locally Noetherian + quasi-compact); not weakened. Step 1: the admissible-quotient node gives an affine integral surjective categorical quotient, orbit topology and fibres, and invariant sections on every affine V, hence O_Y = (q_*O_X)^G. Step 2: every affine V has q^-1V = Spec R with R Noetherian. Through an algebraic closure and the injective residue map, the geometric stabilizer equals the inertia I_p, so tameness gives a trace-one element. Step 3: the trace-one node plus the every-affine definition makes q finite. Step 4 (elementary): Y is locally Noetherian and quasi-compact by surjectivity. Step 5: q^-1q(U) = U and q(U) is open. U -> q(U) is finite, surjective, with affine source and Noetherian target, so 01YQ makes q(U) affine; invariant sections then identify the map with Spec R -> Spec R^G. Accepted tool_use: lem-weil-pbc-finite-surjective-affine-target-noetherian (sk-thm-p1); it is needed because the quotient node gives only some chart cover, not the given invariant affines. New node tame-inertia-surjective-group-trace: true, checked through localization at a maximal ideal of A (0BRH), the orbit transitivity of 0BRI, the surjective Galois trace on kappa/kappa^D, the Chinese remainder theorem and T(r) == 1 mod q. Small cases: zero ring; permutation of p copies of F_p (|G| not invertible); Artin-Schreier x -> x+1. New node trace-one-noetherian-invariant-finiteness: true via the skew group ring (e idempotent, eSe = Ae, Se = Re, S right Noetherian) and the Reynolds-type retraction for A Noetherian; consistent with the Nagarajan wild counterexample. Neither node restates an item clause. A DAG grep for trace one, group trace, Reynolds, averaging, skew group and invariant Noetherian/finite found no duplicates; strict-local-invariants, generic-degree, projective/free quotient nodes were distinguished. No SGA. Mathlib searches are real; no leaf. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TameAdmissibleSchemeQuotient",
+  "declaration": "AlgebraicGeometry.exists_tame_admissible_scheme_quotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/TameAdmissibleSchemeQuotient.lean",
+  "statement": "theorem exists_tame_admissible_scheme_quotient (X : Scheme.{u}) [IsNoetherian X] (G : Type v) [Group G] [Finite G] (a : G →* Aut X) (_hadmissible : ∀ x : X, ∃ U : X.Opens, x ∈ U ∧ IsAffineOpen U ∧ ∀ (g : G) (z : X), (a g).hom z ∈ U ↔ z ∈ U) (_htame : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X), IsUnit (Nat.card {g : G // t ≫ (a g).hom = t} : Ω)) : ∃ (Y : Scheme.{u}) (q : X ⟶ Y), IsAdmissibleFiniteSchemeQuotient a q ∧ Surjective q ∧ IsNoetherian Y ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω], Function.Surjective (fun t : Spec (.of Ω) ⟶ X ↦ t ≫ q) ∧ ∀ t s : Spec (.of Ω) ⟶ X, t ≫ q = s ≫ q ↔ ∃ g : G, t ≫ (a g).hom = s) ∧ (∀ (Z : Scheme.{u}) (f : X ⟶ Z), (∀ g : G, (a g).hom ≫ f = f) → ∃! r : Y ⟶ Z, q ≫ r = f) ∧ ∀ (U : X.Opens) (hU : IsAffineOpen U) (_hstable : ∀ (g : G) (z : X), (a g).hom z ∈ U ↔ z ∈ U), ∃ (V : Y.Opens) (hUV : U ≤ q ⁻¹ᵁ V), q '' (U : Set X) = (V : Set Y) ∧ q ⁻¹ᵁ V = U ∧ ∃ C : Subring Γ(X, U), (∀ s : Γ(X, U), s ∈ C ↔ ∀ (g : G) (D : X.Opens) (hD : D ≤ U) (hDg : D ≤ (a g).hom ⁻¹ᵁ U), ((a g).hom.appLE U D hDg).hom s = (X.presheaf.map (homOfLE hD).op).hom s) ∧ ∃ e : V.toScheme ≅ Spec (.of C), hU.isoSpec.hom ≫ Spec.map (CommRingCat.ofHom C.subtype) = q.resLE V U hUV ≫ e.hom",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-364b6545c",
+  "group": "NY",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches the node exactly. X: Scheme.{u} with IsNoetherian. Invariant affine cover via an ↔-stable affine around each point. Tameness via IsUnit of the geometric stabilizer's Nat.card in Ω; this stabilizer is the inertia group for every Ω, so Ω : Type u loses nothing. The conclusion reuses the landed IsAdmissibleFiniteSchemeQuotient (finite, invariant, quotient topology, orbit fibres, O_Y=(q_*O_X)^G on every open) and states Surjective, IsNoetherian Y, geometric-orbit fibres, the universal property for Z : Scheme.{u}, and for every invariant affine U: q''U=V, q⁻¹V=U, and a chart equation pinned through the inclusion of the extensionally specified invariant subring C. No extra hypotheses. Edge cases (empty X, trivial G, char 0, char p free and trivial C_p) are correct. Item node differs from live only in lean and the added stmt_dep def-per-admissible-finite-scheme-quotient; dep records are byte-identical; lean.statement is verbatim; no duplicate theorem. Docstrings carry source, blueprint and five proof steps; the only proof is sorry. nt_compile --json clean (3.8 s, EXIT 0). Advisory: second reading done in the worker's own session; unused private proof-dependency imports; tameness formula inline because no scheme-level tame definition node exists."
  }
 }

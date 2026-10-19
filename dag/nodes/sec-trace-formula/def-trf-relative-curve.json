@@ -1,0 +1,109 @@
+{
+ "id": "def-trf-relative-curve",
+ "kind": "definition",
+ "title": "Relative curves without a separatedness assumption",
+ "status": "split",
+ "statement": "Let $T,X$ be schemes [def-pc-scheme] and $x:X\\to T$ a morphism. It is a relative $T$-curve if it is flat [def-weil-flat-morphism] and finitely presented, meaning locally of finite presentation, quasi-compact and quasi-separated [def-sbc-locally-finite-presentation], and every scheme-theoretic fibre $X_t$ [def-pc-scheme-fibre] has pure dimension $1$ [def-weil-pure-dimension]. No separatedness or properness is required. Empty fibres are allowed, with pure dimension interpreted vacuously on them.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme-fibre",
+  "def-weil-pure-dimension"
+ ],
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Temkin, Stable modification of relative curves, §1.2 (relative curves)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A relative curve is a flat finitely presented scheme morphism whose fibres have pure dimension one, without separatedness",
+   "results": "OK 8 hits: AlgebraicGeometry.Flat.mk, AlgebraicGeometry.Flat, AlgebraicGeometry.flat_iff, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty, AlgebraicGeometry.Flat.rec, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.Flat.comp. No bundled relative-curve predicate.",
+   "date": "2026-10-19",
+   "verdict": "No Mathlib match; reuse the published RelativeCurve structure."
+  },
+  {
+   "tool": "loogle",
+   "query": "RelativeCurve",
+   "results": "OK 0 hit(s) | loogle: unknown identifier 'RelativeCurve'",
+   "date": "2026-10-19",
+   "verdict": "No Mathlib RelativeCurve declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "RelativeCurve|relative.?curve (Mathlib/AlgebraicGeometry; WeilConjectures/AlgebraicGeometry; lean/Sheaf; dag/nodes definition records); blueprint_refs.py search relative curve",
+   "results": "msearch.py grep: OK 0 hit(s). Source repository: only comments on smooth Hilbert schemes and relative effective Cartier divisors, no RelativeCurve definition. lean/Sheaf: AlgebraicGeometry.RelativeCurve is defined in Sheaf.TraceFormula.ValuationHorizontalCurveModels:74, with flat, finitelyPresented, quasiCompact, quasiSeparated, pure fields; other modules use it. No definition node owns this plain predicate. def-trf-multipointed-curve is a pair with marking, not the unmarked morphism predicate; def-trf-strict-semistable-curve adds local charts. blueprint_refs.py: 0 blueprint nodes match relative curve.",
+   "date": "2026-10-19",
+   "verdict": "Exact existing project structure; add ownership record with existing:true, without duplicating it."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-valuation-modification-proper-completion",
+  "date": "2026-10-19",
+  "group": "NC"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The relative-curve notion used in the smooth-target proper-completion reduction, Temkin §1.2 and Lemma 4.4.2.",
+   "via": [
+    "lem-trf-valuation-modification-proper-completion",
+    "lem-trf-smooth-target-modification-exceptional-tree",
+    "lem-trf-valuation-marking-semistable-separation",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.TraceFormula.ValuationHorizontalCurveModels",
+  "declaration": "AlgebraicGeometry.RelativeCurve",
+  "statement": "structure RelativeCurve {T Y : Scheme.{u}} (y : Y ⟶ T) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-19",
+  "existing": true,
+  "note": "Owning definition record for the already published plain structure. Its five fields express flatness, full finite presentation (lfp, qc, qs) and pure dimension one of every fibre. This is independent of horizontal_curve_models and requires none of its proof."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b0619240a",
+  "group": "NC",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b0619240a",
+  "group": "NC",
+  "result": "pass",
+  "note": "Re-delivery after H2/C5 RETURN of 209330a8. Lean module byte-identical (sha256 73a954e6). Item node vs live: only lean record + def stmt_deps (def-weil-pure-dimension, def-trf-modification, def-trf-orgogozo-induction-data, def-trf-relative-curve); theorem stmt_dep lem-trf-valuation-horizontal-curve-models removed. New def-trf-relative-curve: existing:true on unchanged Sheaf.TraceFormula.ValuationHorizontalCurveModels, AlgebraicGeometry.RelativeCurve, signature verbatim; TeX = flat+lfp+qc+qs+fibres pure dim 1, no separatedness, Temkin §1.2; stmt_deps own Scheme/Flat/LFP/Hom.fiber/IsPureDimension. check_existing, check_new_node and check_record report no failures; no parallel owner of RelativeCurve in live/side/runs. Item uses only RelativeCurve from that module. Substance re-confirmed: all hypotheses and conclusion clauses, universes, real helpers, 10-step docstring, sorry only. nt_compile --json clean 14.8 s EXIT 0. Advisory: RelativeCurve docstring blueprint tag still names the theorem node."
+ }
+}

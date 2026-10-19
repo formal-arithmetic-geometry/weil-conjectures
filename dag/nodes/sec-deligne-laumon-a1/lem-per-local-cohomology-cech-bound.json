@@ -154,5 +154,23 @@
   "group": "Q02",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-7c1175ac7 (reviewer sub-agent of L); spot-checked: I read Stacks dualizing.tex Tags 0A6R, 0955 (with the preamble defining the transformation) and 0956, the item, both new nodes and every cited node. The item statement is unchanged and is exactly Tag 0956's module assertion. It holds in my small checks: k[x] with I=(x), a nilpotent generator, f=1, r=0, the zero ring. Step 1: new node lem-per-local-cohomology-adjoint-cech is the module specialization of 0A6R's own termwise-tensor construction, for any ring and the empty list included; the degree-q product over q-subsets is correct. Step 2 is a genuinely elementary termwise identification via the Mathlib leaf lem-weil-pbc-localization-tensor-over-base, and the signs match. New node lem-per-local-cohomology-noetherian-comparison is 0955(3) with the source's factorization through the counit, for unbounded K. Both new nodes are real lemmas strictly smaller than the item, not restatements; no duplicates were found, either in the pbc sheaf-level extended-Čech nodes or in the sbc/per local-cohomology nodes. lem-per-affine-support-cech-localization uses sheaf-cohomology support, not the categorical adjoint. One fault (C1/C4) in Step 3: it identified H^j of the K-injectively computed RΓ_I(M[0]) with R^jΓ_I(M) from the definition node alone, which states neither that an injective resolution is K-injective nor that the identification is natural. Repaired: Step 3 now cites lem-sp-derived-functor-single-identification (natural H^p(Rv(X[0]))≅R^pv(X)); it is added to proof_deps and declared in split_report.tool_uses. There is no cycle. Maintainer note: lem-per-ideal-torsion-cech-computation (Q54) states the same 0956 theorem, and its only proof step cites this item; that duplicate pair should be merged. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.IdealTorsionCechComputation",
+  "declaration": "ModuleCat.idealPowerTorsion_rightDerived_iso_cech",
+  "statement": "theorem idealPowerTorsion_rightDerived_iso_cech\n    {R : Type u} [CommRing R] [IsNoetherianRing R]\n    (r : ℕ) (t : Fin r → R) (q : ℕ) :\n    ∃ e : ∀ M : ModuleCat.{u} R,\n      ((idealPowerTorsion (Ideal.span (Set.range t))).rightDerived q).obj M ≅\n        (IdealTorsionCech.complex t M).homology q,\n      ∀ {M N : ModuleCat.{u} R} (f : M ⟶ N),\n        ((idealPowerTorsion (Ideal.span (Set.range t))).rightDerived q).map f ≫\n            (e N).hom =\n          (e M).hom ≫ HomologicalComplex.homologyMap (IdealTorsionCech.map t f) q",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-19",
+  "existing": true,
+  "note": "Exact existing Tag 0956 module comparison, already reviewed for lem-per-ideal-torsion-cech-computation (Q146). The opposite orientation of the displayed isomorphism is equivalent by taking its inverse, including naturality. IdealTorsionCech.complex and map give the identical extended alternating localization complex and canonical fraction maps; the empty generator list is included. No new declaration or duplicate complex is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-74b606015",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Only change: item lean record existing:true -> ModuleCat.idealPowerTorsion_rightDerived_iso_cech (landed Q146 for duplicate lem-per-ideal-torsion-cech-computation, reviewed PASS). Statement field verbatim in live file. Clause check vs node and Stacks 0956: Noetherian R, t : Fin r -> R, I = span(range t), every ModuleCat.{u} R module, rightDerived of idealPowerTorsion (primaryComponent = exists n with J^n x = 0), C^0 = M, increasing-tuple localized products (zero above r), m -> m/1, face sum with (-1)^a 0-based, localizationMap from exists-unique, natural ModuleCat iso (inverse gives item orientation), r=0 OK. No extra hypotheses or universe restriction. No DAG cycle (closure check); citers unaffected. nt_compile --json of owning module clean (5.0 s, 13.0 s on rerun). Maintainer note: merge the duplicate node into cech-bound; the shared theorem's proof docstring is now self-referential; repoint change-rings."
  }
 }

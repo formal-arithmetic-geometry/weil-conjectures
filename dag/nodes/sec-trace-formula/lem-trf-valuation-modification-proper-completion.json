@@ -22,7 +22,11 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-multivariate-power-series",
   "def-pc-integral-scheme",
-  "def-weil-open-immersion"
+  "def-weil-open-immersion",
+  "def-weil-pure-dimension",
+  "def-trf-modification",
+  "def-trf-orgogozo-induction-data",
+  "def-trf-relative-curve"
  ],
  "proof": [
   {
@@ -371,5 +375,29 @@
   "group": "Q23",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-a47e122a7 (reviewer sub-agent of L); spot-checked: I read all ten steps in full, every cited statement, and Temkin (author PDF) at Prop. 3.5.2, Lemma 4.4.1(i),(ii) and the reduction in the proof of Lemma 4.4.2, pp. 30-31. The split follows Temkin's route: localize, isolate the closed point of the modification locus, compactify the normal affine curve, extend by the identity, normalize. There are no new nodes and the statement is unchanged. review_split passes and there is no cycle. I accept all 13 declared tool_uses as generic permanence facts. Two faults are repaired in fixes/dag/nodes/sec-trace-formula/lem-trf-valuation-modification-proper-completion.json. (1) E1/C4, Step 2: it applied lem-trf-nodal-geometric-fibres-reduced, which needs smooth-or-node at closed points over every algebraically closed Omega. The item only gives this for the geometric fibre over an algebraic closure, and the transfer to larger fields is not elementary. Steps 2 and 3 now use the explicit semistable-curve clause of lem-trf-geometrically-reduced-eta-normal for Y_0 with empty marking, and the nodal lemma is no longer cited. (2) C1, Steps 7 and 8: the preparation lemma gives reduced fibres only after base change to an algebraic closure. The item's clause (every algebraically closed Omega) and lem-trf-sepclosed-valuation-geometric-components (every field extension) need more. Both steps now cite the same-unit node lem-trf-geometric-reducedness-algebraic-closure-test. proof_deps is recomputed. I also checked that the modification locus L_U is closed in the completion, using the finite chain and purely inseparable residue extensions, and that the geometric centre is unique by pure inseparability. Edge cases checked: height 0, identity map, higher finite rank, disconnected generic fibre, imperfect residue field.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ValuationModificationProperCompletion",
+  "declaration": "AlgebraicGeometry.Temkin.valuation_modification_proper_completion",
+  "declarations": [
+   "AlgebraicGeometry.Temkin.valuationCompletionBaseMap",
+   "AlgebraicGeometry.Temkin.valuationCompletionGenericMap",
+   "AlgebraicGeometry.Temkin.valuationCompletionGeometricCentre",
+   "AlgebraicGeometry.Temkin.valuation_modification_proper_completion"
+  ],
+  "file": "lean/Sheaf/TraceFormula/ValuationModificationProperCompletion.lean",
+  "statement": "theorem valuation_modification_proper_completion (K : Type u) [Field K] [IsSepClosed K] (V : ValuationSubring K) [Finite (PrimeSpectrum V)] {C Y : Scheme.{u}} (c : C ⟶ Spec (.of V)) (hC : RelativeCurve c) (f : Y ⟶ C) (hY : RelativeCurve (f ≫ c)) [IsReduced Y] (hCgeneric : Smooth (pullback.snd c (Spec.map (CommRingCat.ofHom V.subtype)))) (hYgeneric : Smooth (pullback.snd (f ≫ c) (Spec.map (CommRingCat.ofHom V.subtype)))) (hf : EtaModification (Spec.map (CommRingCat.ofHom V.subtype)) f c) (x : C) (hx : ∃ W : C.Opens, x ∈ W ∧ Smooth (W.ι ≫ c)) (hpositive : 0 < topologicalKrullDim (f.fiber x)) (hnodal : ∃ N : Y.Opens, (∀ z : Y, f z = x → z ∈ N) ∧ ∀ (t : Spec (.of V)) (z : pullback (C := Scheme.{u}) (f ≫ c) (Orgogozo.geometricPoint (Spec (.of V)) t)), pullback.fst (f ≫ c) (Orgogozo.geometricPoint (Spec (.of V)) t) z ∈ N → (∃ W : (pullback (f ≫ c) (Orgogozo.geometricPoint (Spec (.of V)) t)).Opens, z ∈ W ∧ Smooth (W.ι ≫ pullback.snd (f ≫ c) (Orgogozo.geometricPoint (Spec (.of V)) t))) ∨ Orgogozo.IsOrdinaryDoublePoint (pullback.snd (f ≫ c) (Orgogozo.geometricPoint (Spec (.of V)) t)) z) : ∃ (U : Scheme.{u}) (u : U) (j₀ : U ⟶ pullback c (valuationCompletionBaseMap V (c x))) (Cbar Ybar : Scheme.{u}) (cbar : Cbar ⟶ Spec (.of (Localization.AtPrime (c x).asIdeal))) (j : U ⟶ Cbar) (fbar : Ybar ⟶ Cbar) (i : pullback f (j₀ ≫ pullback.fst c (valuationCompletionBaseMap V (c x))) ⟶ Ybar), IsAffine U ∧ IsOpenImmersion j₀ ∧ (j₀ ≫ pullback.fst c (valuationCompletionBaseMap V (c x))) u = x ∧ IsIntegral Cbar ∧ IsIntegral Ybar ∧ IsProper cbar ∧ IsProper (fbar ≫ cbar) ∧ RelativeCurve cbar ∧ RelativeCurve (fbar ≫ cbar) ∧ IsOpenImmersion j ∧ j ≫ cbar = j₀ ≫ pullback.snd c (valuationCompletionBaseMap V (c x)) ∧ (∀ z : Cbar, IsDomain (Cbar.presheaf.stalk z) ∧ IsIntegrallyClosed (Cbar.presheaf.stalk z)) ∧ GeometricallyReduced cbar ∧ GeometricallyReduced (fbar ≫ cbar) ∧ GeometricallyIntegral (pullback.snd cbar (valuationCompletionGenericMap V (c x))) ∧ GeometricallyIntegral (pullback.snd (fbar ≫ cbar) (valuationCompletionGenericMap V (c x))) ∧ EtaModification (valuationCompletionGenericMap V (c x)) fbar cbar ∧ IsPullback i (pullback.snd f (j₀ ≫ pullback.fst c (valuationCompletionBaseMap V (c x)))) fbar j ∧ cbar (j u) = IsLocalRing.closedPoint (Localization.AtPrime (c x).asIdeal) ∧ IsClosed ({cbar.asFiber (j u)} : Set (cbar.fiber (cbar (j u)))) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (a : Spec (.of Ω) ⟶ U), a (IsLocalRing.closedPoint Ω) = u → {z : pullback (C := Scheme.{u}) cbar ((a ≫ j) ≫ cbar) | pullback.fst cbar ((a ≫ j) ≫ cbar) z = j u} = {valuationCompletionGeometricCentre cbar j a} ∧ (∃ W : (pullback cbar ((a ≫ j) ≫ cbar)).Opens, valuationCompletionGeometricCentre cbar j a ∈ W ∧ Smooth (W.ι ≫ pullback.snd cbar ((a ≫ j) ≫ cbar))) ∧ ∀ W : (pullback cbar ((a ≫ j) ≫ cbar)).Opens, valuationCompletionGeometricCentre cbar j a ∉ W → IsIso ((pullback.snd fbar (pullback.fst cbar ((a ≫ j) ≫ cbar))) ∣_ W)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b0619240a",
+  "group": "NC",
+  "result": "pass",
+  "note": "Re-delivery after H2/C5 RETURN of 209330a8. Lean module byte-identical (sha256 73a954e6). Item node vs live: only lean record + def stmt_deps (def-weil-pure-dimension, def-trf-modification, def-trf-orgogozo-induction-data, def-trf-relative-curve); theorem stmt_dep lem-trf-valuation-horizontal-curve-models removed. New def-trf-relative-curve: existing:true on unchanged Sheaf.TraceFormula.ValuationHorizontalCurveModels, AlgebraicGeometry.RelativeCurve, signature verbatim; TeX = flat+lfp+qc+qs+fibres pure dim 1, no separatedness, Temkin §1.2; stmt_deps own Scheme/Flat/LFP/Hom.fiber/IsPureDimension. check_existing, check_new_node and check_record report no failures; no parallel owner of RelativeCurve in live/side/runs. Item uses only RelativeCurve from that module. Substance re-confirmed: all hypotheses and conclusion clauses, universes, real helpers, 10-step docstring, sorry only. nt_compile --json clean 14.8 s EXIT 0. Advisory: RelativeCurve docstring blueprint tag still names the theorem node."
  }
 }
