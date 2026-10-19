@@ -32,12 +32,10 @@
  ],
  "proof": [
   {
-   "text": "Write $F=g^{-1}$. By clauses 1--3 of [lem-weil-proetale-isomorphism-inverse-image], $F$ is relabelling along the covering-preserving site equivalence $\\Phi_g$, and it preserves limits and colimits. This description also gives an equivalence of module sheaves over any ring sheaf $R$ on $Y$ with module sheaves over $F R$: relabel the underlying abelian sheaf and its action; relabelling by $\\Phi_g^{-1}$ is its inverse, including the action maps. Kernels and cokernels are relabelled, so this equivalence is exact. At finite level use $c^g_{A_{E,n}}$ to identify $F(A_{E,n})_Y$ with $(A_{E,n})_X$. At integral level use the inverse-limit isomorphism in clause 2 and the compatible maps in clause 3 to obtain exactly the ring isomorphism $c_{\\mathcal O_E}$ in the statement. For the completed coefficient projections it satisfies\n$$\\pi_{n,X}c_{\\mathcal O_E}=c^g_{A_{E,n}}F(\\pi_{n,Y});$$\nthis follows by composing the defining limit map with its $n$-th projection. Thus restriction of scalars along the projections commutes with this relabelling. By [lem-weil-pbc-exact-functor-complex-cohomology], $H^i(FK)\\cong F H^i(K)$, naturally, for both coefficient rings. In particular $F$ preserves quasi-isomorphisms. By [lem-sf-exact-functor-derived-triangulated] it induces the termwise triangulated functor on the ambient derived categories. Lean exactness proof: use the underlying abelian natural comparison of [lem-weil-pbc-proetale-module-inverse-image-comparison]; inverse image is an equivalence and hence preserves finite limits and colimits. The faithful exact module-to-abelian-sheaf functor reflects these finite limits and colimits. Restriction along the inverse coefficient isomorphism leaves this underlying functor unchanged. Preservation of binary products gives additivity, which is reflected by the faithful forgetful functor.",
+   "text": "Construct the commutative finite-quotient tower and the cone with vertex the recorded completed coefficient ring. Forgetting commutativity identifies it with the defining limiting ring-sheaf cone, so reflection of limits proves it limiting. By [lem-weil-proetale-isomorphism-inverse-image] inverse image preserves this limit; its natural invertible constant comparisons identify the pulled-back tower with the target tower. Uniqueness of limit objects gives the completed ring isomorphism, its projection equations and its uniqueness. For modules, the underlying abelian comparison [lem-weil-pbc-proetale-module-inverse-image-comparison] identifies the forgetful composite with exact abelian inverse image. The faithful exact forgetful functor reflects finite limits, finite colimits and additivity. This proves exactness of the recorded module inverse image with action transported along the inverse coefficient isomorphism.",
    "uses": [
-    "lem-weil-proetale-isomorphism-inverse-image",
     "def-weil-completed-integral-coefficients",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-proetale-isomorphism-inverse-image",
     "lem-weil-pbc-proetale-module-inverse-image-comparison"
    ],
    "elementary": false,
@@ -47,12 +45,12 @@
    }
   },
   {
-   "text": "For $\\Lambda=A_{E,n}$ the module pullback is $F(-)\\otimes_{F\\Lambda_Y}\\Lambda_X$. Because $c_\\Lambda$ is an isomorphism, multiplication $m\\otimes a\\mapsto a m$ (where the action is transported along $c_\\Lambda$) identifies this functor naturally with $F$; its inverse is $m\\mapsto m\\otimes1$. Choose a K-flat resolution $q:P\\to K$ by [lem-pc-kflat-resolution]. The finite-level definition [def-weil-derived-pullback-tensor-hom] computes $Lg^*K$ by the module pullback of $P$. The displayed multiplication map identifies this representative with $FP$, and $Fq:FP\\to FK$ is a quasi-isomorphism by step 1. Their composite defines $\\lambda_K$ in the ambient derived category. For naturality, let $T$ be the underived module pullback. The multiplication maps define a natural isomorphism $T\\cong F$ on all complexes: for every chain map $u:M\\to N$, both paths send $m\\otimes a$ to $aF(u)(m)$. Both functors preserve quasi-isomorphisms by step 1 and this isomorphism, so this square descends through the localization [def-weil-abstract-derived-category]. By [def-weil-pbc-proetale-operations], in this identified-coefficient case $Lg^*$ is exactly the functor induced by $T$ termwise; its K-flat representative above is identified with $TK$ by $Tq$. The descended multiplication isomorphism is therefore $\\lambda$, independently of any functorial choice of resolutions. This also explains the finite-level termwise computation asserted by the definition, rather than using that assertion as a separate theorem.",
+   "text": "For finite coefficients, apply [lem-weil-sheaf-scalar-extension-ring-iso] to the canonical constant-ring comparison. Its naturality gives a natural isomorphism from the ringed module pullback to termwise inverse image with transported action. The direct-image structure map is the transpose of that same coefficient comparison. Hence the ringed pullback and the recorded intrinsic pullback are left adjoints to naturally isomorphic right adjoints; uniqueness of left adjoints identifies them. Apply exact-functor derived localization to these natural isomorphisms. This compares the recorded finiteDerivedPullback with isomorphismFiniteTermwiseInverseImage on the entire ambient derived category, with no resolution choices.",
    "uses": [
+    "lem-weil-sheaf-scalar-extension-ring-iso",
+    "def-weil-pbc-proetale-operations",
     "def-weil-derived-pullback-tensor-hom",
-    "lem-pc-kflat-resolution",
-    "def-weil-abstract-derived-category",
-    "def-weil-pbc-proetale-operations"
+    "def-weil-pbc-derived-inverse-image"
    ],
    "elementary": false,
    "source": {
@@ -61,148 +59,79 @@
    }
   },
   {
-   "text": "Suppose $K\\in D^b_c(Y,A_{E,n})$. For each of its finitely many nonzero cohomology sheaves choose the finite locally closed constructible partition in [def-weil-finite-torsion-constructibility]. Its inverse images under the scheme isomorphism $g$ form the corresponding finite partition of $X$. The restriction of $g$ to each inverse-image stratum is an isomorphism onto the original stratum, so the site relabelling of step 1 restricts to that stratum. A covering trivializing the restricted sheaf is relabelled to a covering with the same constant finite module; its stalks have the same finite module values. Hence $F H^i(K)$ is constructible. Step 1 gives $H^i(FK)\\cong F H^i(K)$ and introduces no new nonzero degrees. Thus $FK\\in D^b_c(X,A_{E,n})$. The subcategories are full, so the ambient natural isomorphism of step 2 is the required one inside $D^b_c$.",
+   "text": "Convert constructibility of a constant-ring module sheaf to constructibility of its module-valued sheaf by [lem-weil-pbc-proetale-constant-module-constructibility]. Descend a constructible pro-etale sheaf to the etale site, apply the established pullback-stability theorem [prop-constructible-pullback], and use the comparison between etale pullback and pro-etale pullback. Transport back through the module encoding. Exactness identifies homology of the termwise pullback with pullback of homology, so it preserves the finite cohomological support and constructibility of every cohomology sheaf. Transfer this property along the two ambient natural isomorphisms from step 2. Fullness lifts their composite to the constructible subcategories; evaluate the ambient comparison at the finite coefficient object for the last clause.",
    "uses": [
+    "lem-weil-pbc-proetale-constant-module-constructibility",
+    "prop-constructible-pullback",
     "def-weil-finite-torsion-constructibility",
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "lem-weil-pbc-exact-functor-complex-cohomology"
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-proetale-constant-module-pullback-encoding",
+    "lem-weil-proetale-dbc-triangulated"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
     "place": "Coefficient objects and constructible coefficient categories; direct application of their definitions under the site relabelling"
    }
   },
   {
-   "text": "Put $R_Y=\\widehat{\\mathcal O}_{E,Y}$ and $R_X=\\widehat{\\mathcal O}_{E,X}$, with the coefficient identification from step 1. Apply [lem-pur-isomorphism-inverse-image-tensor-hom] to $\\mathcal O=R_Y$: its natural tensor isomorphism sends a local pure tensor to the corresponding tensor, and its scalar-extension clause applies to every projection $R_Y\\to(A_{E,n})_Y$. For complexes, apply the tensor isomorphism to each pair of terms and take the direct sums defining [def-pc-tensor-complex-sheaves]. The equivalence $F$ preserves these sums by step 1. Naturality identifies both $d_M\\otimes1$ and $1\\otimes d_N$, and additivity preserves the sign $(-1)^p$. This proves the chain-level tensor comparison $F(M\\otimes_{R_Y}N)\\cong FM\\otimes_{R_X}FN$.",
+   "text": "Compare sectionwise inverse image with the recorded inverse image over the completed rings. The site map/pullback adjunction induces the sectionwise sheaf adjunction. Transporting scalars along an invertible ring map gives the analogous module adjunction: its triangle identities follow from the sheaf triangles and cancellation of the ring map with its inverse. On constant sheaves, sheafification uniqueness and naturality of constant sections identify the transposed sectionwise coefficient map with the canonical direct-image map. Compose completed maps with every finite quotient projection; the defining limit-lift equations and naturality of both adjunction units reduce equality to this constant case. The direct-image module functors are therefore naturally isomorphic. Uniqueness of left adjoints identifies sectionwise module inverse image with ringed tensor pullback, and [lem-weil-sheaf-scalar-extension-ring-iso] identifies the latter with the recorded transported-action functor. Exact derived localization gives an ambient natural isomorphism of their derived functors.",
    "uses": [
-    "lem-pur-isomorphism-inverse-image-tensor-hom",
-    "def-weil-completed-integral-coefficients",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, sites-modules-lemma-tensor-product-pullback; extend the existing natural sheaf tensor comparison to direct-sum total complexes"
-   }
-  },
-  {
-   "text": "Use [lem-weil-pbc-ringed-topos-kflat-pullback] for the morphism of pro-etale topoi induced by $g$, with source ring $R_Y$, target ring $R_X$, and ring map $c_{\\mathcal O_E}$. The small-site universe is that of [def-weil-pbc-proetale-site], and the required inverse-image adjunction and finite-limit preservation are given by [def-weil-proetale-inverse-image] and step 1. Module pullback along this ring isomorphism is naturally identified with $F$ by the multiplication maps of step 2, now for $R_Y,R_X$. Hence if $P$ is K-flat with flat terms, the cited preservation theorem says exactly that $FP$ is K-flat with flat terms.",
-   "uses": [
-    "lem-weil-pbc-ringed-topos-kflat-pullback",
-    "def-weil-pbc-proetale-site",
-    "def-weil-proetale-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E, sites-cohomology-lemma-pullback-K-flat, with the coefficient-ring isomorphism of step 1"
-   }
-  },
-  {
-   "text": "Choose $P\\to K$ with flat terms by [lem-pc-kflat-resolution]; step 5 makes $FP$ K-flat with flat terms. For $P_n=P\\otimes_{R_Y}(A_{E,n})_Y$, the reduction-tower compatibility node identifies $F(P_n)$ with $FP\\otimes_{R_X}(A_{E,n})_X$ for every $n$, and identifies the maps $P\\to P_n$ and $P_{n+1}\\to P_n$ with the corresponding quotient and transition maps for $FP$. Its naturality, together with [lem-weil-integral-reduction-tower-well-defined], gives compatibility under changes of K-flat representative, so the derived reduction towers of $FK$ and $K$ are identified.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-topos-kflat-pullback",
-    "lem-weil-isomorphism-derived-pullback-reduction-tower",
-    "def-weil-integral-derived-reduction",
-    "def-weil-integral-reduction-tower",
-    "lem-weil-integral-reduction-tower-well-defined"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
-    "place": "Coefficient-object paragraph; agent extraction of the quotient-tower and resolution-comparison argument from the former step 4"
-   }
-  },
-  {
-   "text": "For the K-flat representative $P\\to K$ with flat terms chosen in step 6 put $B(P)=\\prod_n\\operatorname{Res}_nP_n$ and\n$$C(P)=\\operatorname{Cone}(1-s:B(P)\\to B(P))[-1].$$\nHere products are the termwise products of module sheaves; they are exact by [lem-weil-proetale-countable-products-exact] and represent derived products by clause 2 of [lem-weil-derived-limit-existence]. With the cone convention of [def-weil-abstract-derived-category], $C(P)^j=B(P)^{j-1}\\oplus B(P)^j$ and\n$$d(y,x)=(-d_By-(1-s)x,d_Bx).$$\nWriting $a:P\\to B(P)$ for the maps $x\\mapsto x\\otimes1$, the strict equality $(1-s)a=0$ makes $x\\mapsto(0,a(x))$ a chain map $P\\to C(P)$. It gives a natural comparison $\\eta_K:K\\to C(P)$ in the derived category. Apply [lem-weil-finite-free-completed-scalar-comparison] with the coefficient extension $L=E$: its last sentence identifies precisely this zero-shifted-component comparison with the derived-completeness map, and its isomorphism assertion says that $\\eta_K$ is an isomorphism for $K$ derived complete as in [def-weil-derived-complete]. Naturality and independence from the representative are also part of that comparison theorem. This uses the specified strict cone map, rather than an arbitrary isomorphism between two Roos-triangle objects.",
-   "uses": [
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-derived-limit-existence",
-    "def-weil-abstract-derived-category",
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "def-weil-derived-complete"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 3.5.1 and Definition 3.5.2, p. 24; L=E specialization of lem-weil-finite-free-completed-scalar-comparison; Stacks Tag 08TC (derived-definition-derived-limit) for the Roos triangle"
-   }
-  },
-  {
-   "text": "Use the integral definition [def-pur-integral-derived-operations], to which [def-weil-derived-pullback-tensor-hom] refers: $Lg^*K$ is represented by the strict cone of the tower $\\operatorname{Res}_n g_n^*P_n$. The multiplication isomorphisms of step 2 and the projection square of step 1 identify this tower with $F(\\operatorname{Res}_nP_n)$, including its transition maps. The product comparison $F B(P)\\cong\\prod_nF(\\operatorname{Res}_nP_n)$ has $n$-th component $F(\\mathrm{pr}_n)$; it therefore identifies $F(1-s)$ with the endomorphism having components $\\mathrm{pr}_n-F(t_n)\\mathrm{pr}_{n+1}$. Applying $F$ to both coordinates of the cone and to the displayed differential in step 7 gives a natural chain isomorphism from $F C(P)$ to that representative of $Lg^*K$. By [lem-pur-integral-operations-well-defined], these comparisons on K-flat representatives descend to a natural isomorphism $\\theta_K:Lg^*K\\xrightarrow{\\sim}F C(P)$, independent of the resolutions. For a derived-complete $K$, define\n$$\\lambda_K=F(\\eta_K)^{-1}\\circ\\theta_K:Lg^*K\\xrightarrow{\\sim}FK.$$\nThe inverse is natural because $\\eta$ is natural and all its components on this full subcategory are isomorphisms. Thus this comparison has the required naturality for integral coefficients as well.",
-   "uses": [
-    "def-pur-integral-derived-operations",
-    "def-weil-derived-pullback-tensor-hom",
     "lem-weil-proetale-isomorphism-inverse-image",
-    "lem-pur-integral-operations-well-defined"
+    "def-weil-inverse-image-pullback-comparison",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-sheaf-scalar-extension-ring-iso",
+    "def-weil-pbc-derived-inverse-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08TC, definition-derived-limit; strict cone model and its resolution-independent functorial descent in lem-pur-integral-operations-well-defined"
-   }
+   "elementary": false
   },
   {
-   "text": "It remains to put the integral comparison in the stated full subcategory. Apply the triangulated termwise functor of step 1 to a Roos triangle witnessing the derived completeness of $K$ in [def-weil-derived-complete]. By the product identification of step 8 and transition identifications of step 6, and the quotient-arrow identifications of step 6, its image is a Roos triangle for the reduction tower of $FK$, with the required first map from $FK$. Thus $FK$ is derived complete. Step 6 identifies every derived reduction of $FK$ with $F(K\\otimes^L_{\\mathcal O_E}A_{E,n})$. Step 3 makes these reductions bounded constructible, and step 1 gives the same cohomological vanishing interval as on $Y$. The single interval $[r,s]$ supplied by [def-weil-derived-complete-integral-detailed] therefore works for every reduction on $X$. These are exactly the two defining conditions of $D^b_c(X,\\mathcal O_E)$. Fullness puts the natural isomorphism of step 8 in this subcategory.",
+   "text": "Obtain a coherent reduction/total-limit calculus S from [lem-coef-derived-system-evaluation-calculus]. [lem-weil-isomorphism-derived-pullback-comparison-normalization] supplies isomorphisms from completed pullback to sectionwise inverse image of S-completion, natural in every ambient derived morphism. Its stalk-unit assumptions follow from invertibility in the residue fields by the local-ring unit criterion. On the intrinsic constructible category, [lem-trf-integral-pullback-comparison-realization] supplies invertibility of the actual reconstruction unit for its calculus T. T and S have the identical right adjoint, the specified total limit. Uniqueness of left adjoints and its unit compatibility formula transfer invertibility to the unit of S. Assemble its components into a natural isomorphism on the constructible full subcategory. Compose the normalization isomorphism, inverse image of the inverse reconstruction unit, and the ambient comparison of step 4 to obtain the required natural comparison with transported-action inverse image.",
    "uses": [
-    "def-weil-derived-complete",
-    "def-weil-derived-complete-integral-detailed",
-    "lem-sf-exact-functor-derived-triangulated",
-    "def-weil-finite-torsion-constructibility"
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "lem-trf-integral-pullback-comparison-realization",
+    "def-weil-derived-complete-integral-detailed"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 3.5.2 and the constructible integral category; explicit transport of the defining triangle and the uniform reduction interval"
-   }
+   "elementary": false
   },
   {
-   "text": "Finally the coefficient objects placed in degree zero belong to the relevant constructible categories by clauses 1--2 of [lem-weil-constant-coefficient-objects-constructible]. Its auxiliary finite-field datum and algebraic closure may be chosen independently of $X$ and $Y$: that statement allows any scheme $Y$ and requires no map from $Y$ to that finite field. Choose a prime $p\\ne\\ell$, the finite field of size $p$, and an algebraic closure containing the finite extension $E$. This merely instantiates those auxiliary parameters. Specialize the already constructed natural isomorphisms to $K=(A_{E,n})_Y[0]$ and $K=\\widehat{\\mathcal O}_{E,Y}[0]$ respectively. The resulting maps are the asserted $\\lambda_{\\Lambda_Y}$; the coefficient-ring identifications are exactly the maps $c_\\Lambda$ fixed in step 1.",
+   "text": "[lem-pur-integral-operations-preserve-constructible] puts completed pullback of every intrinsic constructible object in the target intrinsic constructible category. Transfer that property across the natural comparison using isomorphism closure from [lem-weil-integral-constructible-triangulated]. Fullness lifts the comparison to the constructible categories. For the integral coefficient specialization, choose a prime different from l, the field ZMod p and its algebraic closure to instantiate the auxiliary finite-field datum of [lem-weil-constant-coefficient-objects-constructible]. That theorem applies to any scheme without a structure morphism to this finite field and supplies both membership and derived completeness of the regular coefficient object. Evaluate the constructed natural comparison at this object. The finite specialization already follows by evaluation of the ambient isomorphism in step 3.",
    "uses": [
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-weil-integral-constructible-triangulated",
     "lem-weil-constant-coefficient-objects-constructible"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
-    "place": "The coefficient objects Lambda_Y and their ordinary cohomology; constructibility supplied by lem-weil-constant-coefficient-objects-constructible"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-proetale-isomorphism-inverse-image",
   "def-weil-completed-integral-coefficients",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-sf-exact-functor-derived-triangulated",
-  "def-weil-derived-pullback-tensor-hom",
-  "lem-pc-kflat-resolution",
-  "def-weil-abstract-derived-category",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-pbc-proetale-module-inverse-image-comparison",
+  "lem-weil-sheaf-scalar-extension-ring-iso",
   "def-weil-pbc-proetale-operations",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-derived-inverse-image",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
+  "prop-constructible-pullback",
   "def-weil-finite-torsion-constructibility",
-  "lem-pur-isomorphism-inverse-image-tensor-hom",
-  "def-pc-tensor-complex-sheaves",
-  "lem-weil-pbc-ringed-topos-kflat-pullback",
-  "def-weil-pbc-proetale-site",
-  "def-weil-proetale-inverse-image",
-  "lem-weil-isomorphism-derived-pullback-reduction-tower",
-  "def-weil-integral-derived-reduction",
-  "def-weil-integral-reduction-tower",
-  "lem-weil-integral-reduction-tower-well-defined",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-derived-limit-existence",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "def-weil-derived-complete",
-  "def-pur-integral-derived-operations",
-  "lem-pur-integral-operations-well-defined",
+  "lem-weil-pbc-proetale-constant-module-pullback-encoding",
+  "lem-weil-proetale-dbc-triangulated",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+  "lem-trf-integral-pullback-comparison-realization",
   "def-weil-derived-complete-integral-detailed",
-  "lem-weil-constant-coefficient-objects-constructible",
-  "lem-weil-pbc-proetale-module-inverse-image-comparison"
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-weil-constant-coefficient-objects-constructible"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
-  "place": "The coefficient objects and their canonical Weil structures; assembly from Stacks Tags 015F, 06YS, 08TC and Bhatt--Scholze Proposition 3.5.1 / Definition 3.5.2; no source states this exact two-coefficient comparison verbatim."
+  "place": "The coefficient objects and their canonical Weil structures; assembly from Stacks Tags 015F, 06YS, 08TC and Bhatt--Scholze Proposition 3.5.1 / Definition 3.5.2; no source states this exact two-coefficient comparison verbatim.",
+  "note": "R1 stage 3: all three remaining holes proved. Completed coefficient limits, exact finite adjoint comparison, and existing normalized completion/reconstruction theorems are assembled with a proved sectionwise-to-recorded module comparison. No new obligations or signature changes."
  },
  "mathlib_searches": [
   {
@@ -367,16 +296,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pc-kflat-resolution",
-  "lem-weil-integral-reduction-tower-well-defined",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-derived-limit-existence",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-pur-integral-operations-well-defined",
-  "lem-pur-isomorphism-inverse-image-tensor-hom",
-  "lem-weil-pbc-ringed-topos-kflat-pullback"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -420,11 +340,11 @@
  "reviewed_proof": {
   "date": "2026-10-19",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C4",
+  "reviewer": "C-23090",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261019T002515-L-2143751",
+  "landing": "20261019T093549-L-2327553",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered IsomorphismDerivedPullback.lean (compiles, 0 sorry left, axioms only via existing sorry deps) and node proof/proof_deps vs the Lean route; 17/18 importers compile, the 18th fails identically on the published build (missing RefinementCategory olean)"
  }
 }
