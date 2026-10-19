@@ -12,9 +12,69 @@
   "def-weil-pbc-mittag-leffler-system",
   "lem-pc-derived-limit-roos-abelian-groups"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $t_{m,i}=g_i\\circ\\cdots\\circ g_{m-1}:B_m\\to B_i$ for $m\\geq i$, with $t_{i,i}=1$. Define towers $P_n=\\prod_{1\\leq i\\leq n}B_i$ and $Q_n=\\prod_{1\\leq i<n}B_i$, with transition maps forgetting the last coordinate; $Q_1=0$. Define $j_n:B_n\\to P_n$ by $j_n(b)_i=t_{n,i}(b)$ and $d_n:P_n\\to Q_n$ by $d_n(x)_i=x_i-g_i(x_{i+1})$ for $i<n$. The equality $t_{n+1,i}=t_{n,i}g_n$ shows that $j$ commutes with transitions. Both ways of composing $d$ with a transition have coordinates $x_i-g_i(x_{i+1})$ for $i<n$, so $d$ also commutes with transitions. These are morphisms of towers in the sense of [def-weil-inverse-system].",
+   "uses": [
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KW, lemma-compute-Rlim, proof: the finite-prefix systems and their difference map."
+   }
+  },
+  {
+   "text": "The sequence $0\\to B_n\\xrightarrow{j_n}P_n\\xrightarrow{d_n}Q_n\\to0$ is exact for every $n$. The last coordinate of $j_n(b)$ is $b$, so $j_n$ is injective. A tuple in $\\ker d_n$ satisfies $x_i=g_i(x_{i+1})$; descending substitution gives $x_i=t_{n,i}(x_n)$, so it equals $j_n(x_n)$. Conversely these identities give $d_nj_n=0$. Given $y\\in Q_n$, set $x_n=0$ and successively set $x_i=y_i+g_i(x_{i+1})$ for $i=n-1,\\ldots,1$; then $d_n(x)=y$. At $n=1$ this is $0\\to B_1\\xrightarrow{1}B_1\\to0\\to0$. Thus Step 1 gives a short exact sequence of towers.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KW, lemma-compute-Rlim, proof: the finite-prefix systems and their difference map."
+   }
+  },
+  {
+   "text": "Apply clause (3) of [lem-weil-pbc-mittag-leffler-limit-exact] to $0\\to B\\xrightarrow{j}P\\xrightarrow{d}Q\\to0$. The index set is the positive integers, the groups are abelian, Steps 1 and 2 give compatible maps and levelwise exactness, and its kernel tower is precisely the given Mittag-Leffler tower $B$ (not $P$ or $Q$). The cited statement therefore gives a surjection $\\varprojlim d:\\varprojlim P_n\\to\\varprojlim Q_n$.",
+   "uses": [
+    "lem-weil-pbc-mittag-leffler-limit-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 02N1, lemma-Mittag-Leffler, clause (3); its proof refers to algebra.tex Tag 0598, lemma-ML-exact-sequence."
+   }
+  },
+  {
+   "text": "Identify both limits of Step 3 with $\\prod_{i\\geq1}B_i$ explicitly. A family $x=(x_i)$ gives the compatible prefixes $(x_1,\\ldots,x_n)$ in $P_n$ and $(x_1,\\ldots,x_{n-1})$ in $Q_n$. Conversely a compatible family of prefixes determines $x_i$ from level $i$ in $P$, and from level $i+1$ in $Q$; projection compatibility makes these values independent of every larger level and recovers all coordinates. These constructions are mutually inverse homomorphisms. Under them, the $i$th coordinate of $\\varprojlim d$ is calculated at any level $n>i$ and is $x_i-g_i(x_{i+1})$. Hence Step 3 says that the actual Roos difference map $1-s:\\prod_iB_i\\to\\prod_iB_i$ is surjective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KW, lemma-compute-Rlim, proof: the finite-prefix systems and their difference map."
+   }
+  },
+  {
+   "text": "By [lem-pc-derived-limit-roos-abelian-groups], the first right derived inverse limit of this same tower is $\\operatorname{coker}(1-s)$. Step 4 makes this cokernel zero: every element of the target product lies in the image, so its quotient by that image is zero. The same cited statement gives $R^q\\varprojlim B_n=0$ for every $q\\geq2$ without any extra hypothesis. Together with the $q=1$ case this proves the assertion for every positive $q$.",
+   "uses": [
+    "lem-pc-derived-limit-roos-abelian-groups"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KW, lemma-compute-Rlim, proof: the finite-prefix systems and their difference map."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-inverse-system",
+  "lem-pc-derived-limit-roos-abelian-groups",
+  "lem-weil-pbc-mittag-leffler-limit-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07KW, lemma-compute-Rlim, proof: the finite-prefix systems and their difference map."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -50,10 +110,38 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightProfinite.surjective_transitionMap\", \"module\": \"Mathlib/Topology/Category/LightProfinite/AsLimit\", \"type\": \"∀ (S : LightProfinite) (n : ℕ), Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (S.transitionMap n))\", \"doc\": \"For a light profinite space $S$ constructed as an inverse limit of finite discrete spaces, the bonding map from the $(n+1)$-th finite approximation to the $n$-th finite approximation in the inverse sy\"}\n  {\"name\": \"LightProfinite.surjective_transitionMapLE\", \"module\": \"Mathlib/Topology/Category/LightProfinite/AsLimit\", \"type\": \"∀ (S : LightProfinite) {n m : ℕ} (h : n ≤ m),\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (S.transitionMapLE h))\", \"doc\": \"For any natural numbers $n$ and $m$ with $n \\\\leq m$, the transition map $S_m \\\\to S_n$ in the inverse limit diagram of a light profinite space $S$ is surjective. This map arises from the refinement of \"}\n  {\"name\": \"CategoryTheory.Functor.surjective_toEventualRanges\", \"module\": \"Mathlib/CategoryTheory/CofilteredSystem\", \"type\": \"∀ {J : Type u} [inst : CategoryTheory.Category.{v_1, u} J] (F : CategoryTheory.Functor J (Type v))\\n  [inst_1 : CategoryTheory.IsCofilteredOrEmpty J],\\n  F.IsMittagLeffler → ∀ ⦃i j : J⦄ (f : i ⟶ j), Function.Surjective (F.toEventualRanges.map f)\", \"doc\": \"If a functor $ F $ satisfies the Mittag-Leffler condition, then for any morphism $ f : i \\to j $ in a cofiltered or empty category $ \\\\mathcal{J} $, the induced map between eventual ranges $ \\\\mathrm{ER}\"}\n  {\"name\": \"AdicCompletion.eval_surjective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  (n : ℕ), Function.Surjective ⇑(AdicCompletion.eval I M n)\", \"doc\": \"For any commutative ring $ R $, ideal $ I $, and $ R $-module $ M $ with additive commutative group structure, the evaluation map from the $ I $-adic completion of $ M $ to the quotient module $ M/I^n\"}\n  {\"name\": \"AdicCompletion.surjective_evalₐ\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (n : ℕ), Function.Surjective ⇑(AdicCompletion.evalₐ I n)\", \"doc\": \"For any natural number $ n $, the canonical $ R $-algebra homomorphism from the $ I $-adic completion of $ R $ to the quotient ring $ R/I^n $ is surjective, meaning every element of $ R/I^n $ is the i\"}\n  {\"name\": \"AdicCompletion.mk_surjective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  Function.Surjective ⇑(AdicCompletion.mk I M)\", \"doc\": \"The canonical $ R $-linear map from the space of $ I $-adic Cauchy sequences in an $ R $-module $ M $ to the $ I $-adic completion of $ M $ is surjective, meaning every element of the completion is th\"}\n  {\"name\": \"CategoryTheory.Functor.isMittagLeffler_of_surjective\", \"module\": \"Mathlib/CategoryTheory/CofilteredSystem\", \"type\": \"∀ {J : Type u} [inst : CategoryTheory.Category.{v_1, u} J] (F : CategoryTheory.Functor J (Type v)),\\n  (∀ ⦃i j : J⦄ (f : i ⟶ j), Function.Surjective (F.map f)) → F.IsMittagLeffler\", \"doc\": \"A functor $ F $ satisfies the Mittag-Leffler condition if every morphism in the category $ J $ is mapped by $ F $ to a surjective function.\"}\n  {\"name\": \"AdicCompletion.of_surjective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsPrecomplete I M], Function.Surjective ⇑(AdicCompletion.of I M)\", \"doc\": \"The canonical $ R $-linear map from an $ R $-module $ M $ to its $ I $-adic completion is surjective if $ M $ is precomplete with respect to the ideal $ I $.\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: the returned declarations do not state this sheaf or derived-inverse-limit comparison; ordinary completion, radical independence, stable ranges, and vanishing on injective objects do not imply it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "Mittag|roos|derivedLimit|lim1",
+   "results": "{\"t\": \"2026-10-19T01:01:28Z\", \"tool\": \"grep\", \"query\": \"Mittag|roos|derivedLimit|lim1\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\"], \"digest\": \"7ff1611359876790\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern set-valued stable ranges, direct colimits, five-lemma surjectivity, or unrelated cohomology; none computes derived inverse limits of arbitrary ML abelian towers"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Surjectivity of one minus shift on products for Mittag Leffler inverse sequences of abelian groups",
+   "results": "{\"t\": \"2026-10-19T01:01:33Z\", \"tool\": \"leansearch\", \"query\": \"Surjectivity of one minus shift on products for Mittag Leffler inverse sequences of abelian groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddMonoidHom.surjective_of_surjective_of_surjective_of_injective\", \"CategoryTheory.Functor.surjective_toEventualRanges\", \"CategoryTheory.Functor.isMittagLeffler_of_surjective\", \"fwdDiff_aux.shiftₗ\", \"MonoidHom.surjective_of_surjective_of_injective_of_left_exact\", \"MonoidHom.surjective_of_surjective_of_surjective_of_injective\", \"CategoryTheory.shift_shift_neg'\", \"inv_surjective\"], \"digest\": \"5158807e4b951833\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern set-valued stable ranges, direct colimits, five-lemma surjectivity, or unrelated cohomology; none computes derived inverse limits of arbitrary ML abelian towers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "All positive right derived inverse limits of a countable Mittag Leffler tower of abelian groups vanish",
+   "results": "{\"t\": \"2026-10-19T01:01:38Z\", \"tool\": \"leanfinder\", \"query\": \"All positive right derived inverse limits of a countable Mittag Leffler tower of abelian groups vanish\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddCommGroup.DirectLimit.of.zero_exact\", \"Module.DirectLimit.of.zero_exact\", \"Profinite.NobelingProof.succ_exact\", \"Ring.DirectLimit.of.zero_exact\", \"localCohomology.ofDiagram\", \"Profinite.NobelingProof.CC_exact\", \"AdicCompletion.map_exact\", \"CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.top_mem_range\"], \"digest\": \"ace98dc28ff3805a\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern set-valued stable ranges, direct colimits, five-lemma surjectivity, or unrelated cohomology; none computes derived inverse limits of arbitrary ML abelian towers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cokernel of the difference map on the product of a Mittag Leffler inverse sequence is zero",
+   "results": "{\"t\": \"2026-10-19T01:02:43Z\", \"tool\": \"leanfinder\", \"query\": \"The cokernel of the difference map on the product of a Mittag Leffler inverse sequence is zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.succ_exact\", \"CategoryTheory.Limits.coker.condition\", \"CategoryTheory.NonPreadditiveAbelian.isColimitσ\", \"CategoryTheory.Limits.colimit_ι_zero_cokernel_desc\", \"AddCommGroup.DirectLimit.of.zero_exact\", \"CategoryTheory.Limits.Concrete.colimit_rep_eq_zero\", \"Module.DirectLimit.of.zero_exact\", \"SemiNormedGrp.explicitCokernelπ_apply_dom_eq_zero\"], \"digest\": \"31e2b885cf22ba69\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern set-valued stable ranges, direct colimits, five-lemma surjectivity, or unrelated cohomology; none computes derived inverse limits of arbitrary ML abelian towers"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-punctured-derived-completion-sections",
@@ -81,5 +169,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-mittag-leffler-derived-limit-acyclic",
+  "worker": "stage1",
+  "summary": "Proved the full countable Mittag-Leffler acyclicity statement, retaining its hypotheses and derived-functor meaning. Constructed and checked the finite-prefix short exact sequence, applied the existing ML-kernel exactness theorem, calculated the limit map as the Roos difference, and used the existing Roos computation. No new nodes. No project declaration was found for attachment.",
+  "blueprint": "Realizes the recorded formal-sections sub-input of lem-per-artin-gabber-affine-curve, current blueprint Step 3 (duality symmetry), through the potential-dualizing and punctured-completion ancestry already recorded in blueprint.from: the ML vanishing needed in the last paragraph of Stacks 0DXI. The ancestor and via chain are retained. Whole-blueprint searches for Mittag and Roos found only the finite-group variant lem-weil-pbc-mittag-leffler, not this arbitrary ML-group statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-mittag-leffler-limit-exact",
+    "why": "Generic exactness of inverse limit on a short exact tower sequence with ML kernel; this supplies the surjection for the explicit finite-prefix sequence. The perverse unit gives no such algebraic tool."
+   },
+   {
+    "node": "lem-pc-derived-limit-roos-abelian-groups",
+    "why": "Generic Roos cokernel computation and higher-degree vanishing for abelian group towers, in exactly the derived-functor sense of the item. The perverse unit has no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-mittag-leffler-limit-exact",
+  "lem-pc-derived-limit-roos-abelian-groups"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-c8c9f5fd3",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-c8c9f5fd3 (reviewer sub-agent of L); spot-checked: Read Stacks 07KW (more-algebra.tex lemma-compute-Rlim; tag checked in tags/tags) and all four cited statements. The item states 07KW (3) plus (1) for arbitrary countable ML towers of abelian groups. Steps 1-2 build the finite-prefix sequence 0->B->P->Q->0 (Stacks' B_n/C_n). I checked commutation with transitions, injectivity, the kernel by descending substitution, surjectivity by recursion, and n=1. Step 3 applies clause (3) of lem-weil-pbc-mittag-leffler-limit-exact with the ML tower B as kernel; its hypotheses hold and it gives exactly surjectivity of lim d. Step 4 identifies lim P and lim Q with prod B_i and lim d with the Roos map 1-s; index and sign match lem-pc-derived-limit-roos-abelian-groups with f_n=g_n. Step 5 gets R^1 = coker(1-s) = 0 and R^q = 0 for q>=2 from that node, in the same derived-functor sense. No cycle: the item is in neither cited closure. Small cases: Z+Z with g(a,b)=(a,0) solved; Z with multiplication by 2 is not ML and has R^1 != 0; zero transitions. No duplicate of ML => R^q lim = 0 found: the nearest nodes are lem-weil-pbc-mittag-leffler (finite groups only) and lem-pc-tower-surjective-lim-acyclic (surjective transitions). Advisory only: Steps 1, 2 and 4 re-derive the existing lem-pc-roos-finite-prefix-construction/-limits inline; the steps are elementary and complete. Both declared tool_uses (ML-kernel limit exactness, Roos computation) are accepted as generic algebraic tools. No SGA, no new nodes, no changes."
  }
 }
