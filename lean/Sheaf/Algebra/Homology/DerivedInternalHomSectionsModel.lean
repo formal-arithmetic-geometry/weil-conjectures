@@ -13,15 +13,8 @@ public import Sheaf.Algebra.Homology.RingedSiteZerothHypercohomologyOfUniverses
 public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplex
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.Adjunction.Basic
+import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
-import Sheaf.Algebra.Homology.KInjectiveHomComplex
-import Sheaf.Algebra.Homology.HomComplexGlobalHomotopy
-import Sheaf.Algebra.Homology.HomTensorTotal
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Mathlib.Algebra.Homology.BifunctorShift
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 /-! # K-injective models for internal Hom and its derived global sections
@@ -143,6 +136,9 @@ noncomputable def totalTensor :
   (curriedTensor (Modules.{c, v, r} R)).map₂HomologicalComplex
     (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ)
 
+set_option backward.isDefEq.respectTransparency true in
+set_option synthInstance.maxSize 2048 in
+set_option linter.unusedSectionVars false in
 /-- Any right adjoint of the derived tensor functor is naturally the recorded internal Hom.
 The hypothesis on T spells out the node's definition of derived tensor: for every K-flat
 representative P of K, its value on any complex is the localized total tensor P tensor N.
@@ -151,16 +147,14 @@ It imposes no flatness or boundedness on the source representative used in the c
 Source: Stacks, Section 08J7 (equation-internal-hom), Lemmas 08J9, 0A95 and 0A96
 (blueprint: lem-sfb-derived-internal-hom-sections-model).
 
-Proof: Choose a K-flat representative P of K and a K-injective representative I of M.
-Hom(P,I) is K-injective by 0A96. The total-tensor/Hom-complex currying isomorphism
-identifies Hom(N,Hom(P,I)) with Hom(Tot(N tensor P),I), with the standard signs.
-Use symmetry of the sheaf tensor to identify this total complex with Tot(P tensor N).
-Taking global sections and zeroth cohomology identifies these groups with derived
-morphisms by 08JA. The given total-tensor comparison identifies the latter object with
-T(N). This is natural in N and M and therefore gives T adjoint to internalHom(K,-).
-Uniqueness of right adjoints identifies any specified H with this functor. Replacing
-P by an arbitrary representative A does not change Hom(A,I) after localization,
-by 0A95; thus no K-flatness of A is required. -/
+Proof: Use the recorded closed symmetric monoidal structure on the derived category.
+Choose a K-flat resolution P of a complex representing K. Its localized augmentation
+identifies Q(P) with K. The model hypothesis and the closed structure's natural
+one-K-flat tensor comparison identify Q followed by T with Q followed by tensorLeft K.
+Fully faithful precomposition with Q lifts this to T isomorphic to tensorLeft K.
+Symmetry identifies tensorLeft K with tensorRight K. Transport the given adjunction
+along this isomorphism, and apply uniqueness of right adjoints to the closed structure's
+adjunction for the recorded internal Hom. -/
 theorem tensorRightAdjoint_iso
     (K : Derived.{c, v, r, w} R) (T H : Derived.{c, v, r, w} R ⥤ Derived.{c, v, r, w} R)
     (model : ∀ (P : Complexes.{c, v, r} R),
@@ -169,7 +163,37 @@ theorem tensorRightAdjoint_iso
       Nonempty (DerivedCategory.Q ⋙ T ≅ (totalTensor.{c, v, r} R).obj P ⋙ DerivedCategory.Q))
     (adj : T ⊣ H) :
     Nonempty (H ≅ (internalHom.{c, v, r, w} R).obj (op K)) := by
-  sorry
+  classical
+  obtain ⟨S, M, β, ⟨h⟩⟩ := ringedDerived_closed_symmetric_monoidal.{c, v, r, w} J R
+  let := S.monoidal
+  let := β
+  let L := DerivedCategory.Q.objPreimage K
+  obtain ⟨P, p, hP, _, hp, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients L
+  have : QuasiIso p := hp
+  let e : DerivedCategory.Q.obj P ≅ K :=
+    asIso (DerivedCategory.Q.map p) ≪≫ DerivedCategory.Q.objObjPreimageIso K
+  obtain ⟨a⟩ := model P hP e
+  let b : (totalTensor.{c, v, r} R).obj P ⋙ DerivedCategory.Q ≅
+      DerivedCategory.Q ⋙ tensorLeft (DerivedCategory.Q.obj P) :=
+    NatIso.ofComponents (fun N ↦ h.tensorIso P N (Or.inl hP)) (by
+      intro N N' f
+      have hn := h.tensorIso_naturality P N P N' (Or.inl hP) (Or.inl hP) (𝟙 P) f
+      simpa only [WeilConjectures.coefficientTotalTensor, Functor.uncurry_obj_map,
+        Functor.map_id, NatTrans.id_app, Category.id_comp, totalTensor, Functor.comp_map,
+        WeilConjectures.CoefficientClosedStructure.tensor, tensorObj, tensorHom,
+        MonoidalCategory.tensor_map, tensorHom_def, tensorLeft, id_whiskerRight,
+        Category.id_comp, Modules, ringedSiteModules, curriedTensor] using hn)
+  let d : tensorLeft (DerivedCategory.Q.obj P) ≅ tensorLeft K :=
+    (curriedTensor (Derived.{c, v, r, w} R)).mapIso e
+  let t : T ≅ tensorLeft K :=
+    (Localization.fullyFaithfulWhiskeringLeft DerivedCategory.Q
+      (HomologicalComplex.quasiIso (Modules.{c, v, r} R) (.up ℤ))
+        (Derived.{c, v, r, w} R)).preimageIso
+      (a ≪≫ b ≪≫ Functor.isoWhiskerLeft DerivedCategory.Q d)
+  exact ⟨(adj.ofNatIsoLeft (t ≪≫ BraidedCategory.tensorLeftIsoTensorRight K)).rightAdjointUniq
+    (S.adjunction K)⟩
+
 
 /-- Natural K-injective models for the internal Hom, its full derived global sections,
 and all of its hypercohomology groups. The third comparison identifies the ordinary
