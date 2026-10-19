@@ -28,11 +28,10 @@
  ],
  "proof": [
   {
-   "text": "By [def-sc-discrete-valuation-ring], $A$ is a principal ideal domain. Apply [lem-weil-pbc-pid-noetherian-normal] to obtain that $A$ is Noetherian and integrally closed, and [lem-sc-dvr-dimension-one] to obtain $\\dim A=1$. Since the finite Galois extension $L/K$ is separable, [lem-weil-pbc-noetherian-normal-separable-integral-closure-finite] gives that its integral closure $B$ is a finite $A$-module.",
+   "text": "By [def-sc-discrete-valuation-ring], A is a PID, hence Noetherian and integrally closed by [lem-weil-pbc-pid-noetherian-normal]. Finite separability gives finite normalization by [lem-weil-pbc-noetherian-normal-separable-integral-closure-finite], applied as Mathlib IsIntegralClosure.finite. No separate Krull-dimension equality is required.",
    "uses": [
     "def-sc-discrete-valuation-ring",
     "lem-weil-pbc-pid-noetherian-normal",
-    "lem-sc-dvr-dimension-one",
     "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite"
    ],
    "elementary": false,
@@ -42,12 +41,12 @@
    }
   },
   {
-   "text": "Apply [lem-sc-integral-closure-dedekind-surjective-fibres] to the Noetherian dimension-one domain $A$ and the finite extension $L/K$. It gives that $B$ is Dedekind and all its residue extensions over $A$ are finite. For the chosen maximal ideal $\\mathfrak n$, [lem-sc-dedekind-localization-dvr] gives that $C=B_{\\mathfrak n}$ is a DVR. By [lem-weil-pbc-integral-closure-finite-extension-normal], $\\operatorname{Frac}(B)=L$. As $B\\subseteq C\\subseteq L$, taking fractions shows also $\\operatorname{Frac}(C)=L$: every fraction of elements of $C$ is in $L$, and every fraction of elements of $B$ is a fraction of elements of $C$. The residue field of $C$ identifies with $B/\\mathfrak n$, since every denominator outside $\\mathfrak n$ has nonzero, hence invertible, image in this field; this is $\\kappa(\\mathfrak n)$ in [def-weil-pbc-localization-at-prime].",
+   "text": "Mathlib IsIntegralClosure.isDedekindDomain directly makes B Dedekind, using the PID Dedekind instance on A, finite separability, finite normalization from Step 1, and integrally closedness from [lem-weil-pbc-integral-closure-finite-extension-normal]. The contraction of a maximal ideal of B is the maximal ideal of A by integrality. It follows that the chosen maximal ideal is nonzero, since the maximal ideal of a DVR is nonzero. Apply [lem-sc-dedekind-localization-dvr] to get C a DVR. The fraction field is L by [lem-weil-pbc-integral-closure-finite-extension-normal]; Mathlib localization lifting extends B into L and IsFractionRing.isFractionRing_of_isDomain_of_isLocalization supplies the localized fraction-ring structure. By [def-weil-pbc-localization-at-prime], the residue field of C is definitionally the prime residue field. This residue field is a quotient of B since the ideal is maximal, so it is a finite A-module. The local residue map from the residue field of A exists by the contraction calculation. Restricting scalars through A and then descending this finite generation gives finiteness over the base residue field. No scheme-theoretic fibre theorem is used.",
    "uses": [
-    "lem-sc-integral-closure-dedekind-surjective-fibres",
     "lem-sc-dedekind-localization-dvr",
     "lem-weil-pbc-integral-closure-finite-extension-normal",
-    "def-weil-pbc-localization-at-prime"
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-pid-noetherian-normal"
    ],
    "elementary": false,
    "source": {
@@ -98,7 +97,7 @@
    }
   },
   {
-   "text": "For $\\sigma\\in P$ and every $i\\geq0$, $(\\sigma-1)(t^iC)\\subseteq t^{i+1}C$. To check this on $t^i a$, use $\\sigma(a)\\equiv a\\pmod t$ and $\\sigma(t)/t\\equiv1\\pmod t$ to obtain $\\sigma(t^ia)-t^ia=t^i((\\sigma(t)/t)^i\\sigma(a)-a)\\in t^{i+1}C$. Now let $\\sigma\\neq1$ have order $m$, finite because $I$ is finite by Step 4. There is $c\\in C$ not fixed by $\\sigma$, since otherwise it fixes $\\operatorname{Frac}(C)=L$. For $d=\\sigma(c)-c\\neq0$, the discrete valuation gives $d\\in t^iC\\setminus t^{i+1}C$ for a finite integer $i\\geq1$. The preceding congruence implies $\\sigma^j(d)\\equiv d\\pmod{t^{i+1}}$ for all $j\\geq0$. Telescoping gives $0=\\sigma^m(c)-c=\\sum_{j=0}^{m-1}\\sigma^j(d)\\equiv m d\\pmod{t^{i+1}}$. Write $d=t^i a$ with $a$ a unit. Dividing the last containment by $t^i$ and reducing modulo $t$ gives $m\\bar a=0$ in the characteristic-$p$ field $k'$, hence $p\\mid m$.",
+   "text": "Restrict the localization action to P. It is faithful: equality on C implies equality on B and hence on its fraction field L. For nonidentity sigma choose c in C with d = sigma(c)-c nonzero. Write d = a*t^i for a unit a. For each power sigma^j the character formula gives sigma^j(t)=b_j*t with residue b_j equal to one. Telescoping sums sigma^j(d) to sigma^m(c)-c=0, where m is the order of sigma. Substituting the unit-times-power decomposition and cancelling nonzero t^i gives the sum of b_j^i*sigma^j(a) equal to zero. Reducing to the residue field gives m times the nonzero residue of a equal to zero. Therefore p divides m. This proves the valuation telescoping step without constructing ideal-power congruences.",
    "uses": [
     "def-sc-discrete-valuation-ring"
    ],
@@ -143,9 +142,7 @@
  "proof_deps": [
   "def-sc-discrete-valuation-ring",
   "lem-weil-pbc-pid-noetherian-normal",
-  "lem-sc-dvr-dimension-one",
   "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
-  "lem-sc-integral-closure-dedekind-surjective-fibres",
   "lem-sc-dedekind-localization-dvr",
   "lem-weil-pbc-integral-closure-finite-extension-normal",
   "def-weil-pbc-localization-at-prime",
@@ -155,9 +152,9 @@
   "lem-exc-field-roots-cyclic-bound"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tags 09E8 (remark-finite-separable-extension) and 09EE (lemma-galois-inertia), proof through parts (1)-(5); normality is checked directly by conjugating the uniformizer character."
+  "place": "Tags 09E8 and 09EE; the original character, conjugation, telescoping, Cauchy and order-comparison route is formalized with private proved helpers. Normalization and finite residue generation specialize Mathlib directly; the telescoping calculation cancels the uniformizer power before reduction."
  },
  "mathlib_searches": [
   {
@@ -251,5 +248,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261019T093501-L-2316592",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
