@@ -14,9 +14,89 @@
   "def-weil-pbc-ample-invertible-module",
   "def-weil-pbc-quasi-compact-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $h=g\\circ f$. By [lem-sfb-finite-type-composition-base-change](1), $h$ is of finite type. In particular $h$ is quasi-compact by [def-weil-finite-type-morphism]. This proves the finite-type clause and supplies the quasi-compactness needed by the affine-cover criterion below.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4M (lemma-composition-quasi-projective), using Tag 01T3 (lemma-composition-finite-type)."
+   }
+  },
+  {
+   "text": "Choose an affine open cover of $S$ and a finite subcover $S=\\bigcup_{i=1}^r V_i$, using [def-pc-scheme] and quasi-compactness [def-weil-pbc-quasi-compact-scheme]. Set $Y_i=g^{-1}(V_i)$, $X_i=h^{-1}(V_i)$, and let $f_i:X_i\\to Y_i$ be the restriction of $f$. Put $L_i=L|_{X_i}$ and $M_i=M|_{Y_i}$. The morphism $f_i$ is the base change of $f$ by $Y_i\\hookrightarrow Y$, hence is of finite type by [lem-sfb-finite-type-composition-base-change](2), and is quasi-compact by [def-weil-finite-type-morphism]. Every affine open $W$ of $Y_i$ is an affine open of $Y$, and $f_i^{-1}(W)=f^{-1}(W)$. Thus $L_i$ is $f_i$-relatively ample directly from the hypothesis on $L$. The hypothesis on $M$, applied to the affine open $V_i$, says that $M_i$ is ample. Restrictions of the two invertible modules remain locally free of rank one by restricting their local trivializations [def-sc-invertible-module].",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-pbc-quasi-compact-scheme",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-weil-finite-type-morphism",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4K (lemma-ample-composition), finite affine covering and restriction; Tag 01VH (definition-relatively-ample); Tag 01T4 (lemma-base-change-finite-type)."
+   }
+  },
+  {
+   "text": "Apply [lem-per-relative-ample-absolute-twist] to $f_i,L_i,M_i$ for each $i$. All its hypotheses were checked in Step 2: quasi-compactness of $f_i$, relative ampleness of $L_i$, and absolute ampleness of $M_i$. Obtain $a_i\\geq0$ such that $L_i\\otimes f_i^*(M_i^{\\otimes a})$ is ample on $X_i$ for every $a\\geq a_i$. Choose $a=\\max(\\{0\\}\\cup\\{a_i:1\\leq i\\leq r\\})$. Then the same exponent works for every member of the finite cover. This also defines $a=0$ when the cover is empty; no bound over an infinite family is asserted.",
+   "uses": [
+    "lem-per-relative-ample-absolute-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4K (lemma-ample-composition), applying Tag 0892 (lemma-pullback-ample-tensor-relatively-ample)(1) on each cover member and taking a common sufficiently large exponent."
+   }
+  },
+  {
+   "text": "Define $N=L\\otimes_{\\mathcal O_X}f^*(M^{\\otimes a})$, using [def-pc-module-pullback] and [def-pur-sheaf-tensor-product]. The tensor power $M^{\\otimes a}$ is invertible by [def-weil-pbc-ample-invertible-module]; its pullback and its tensor product with $L$ are invertible by [lem-weil-pbc-invertible-pullback-tensor](1). If $j_i:X_i\\hookrightarrow X$ and $k_i:Y_i\\hookrightarrow Y$ are the inclusions, then $f\\circ j_i=k_i\\circ f_i$. Parts (2) of that same node, applied to these maps and iterated over the $a$ factors, give $j_i^*N\\cong L_i\\otimes f_i^*(M_i^{\\otimes a})$. For $a=0$, the comparison of units is the defining map $\\mathcal O_{X_i}\\otimes_{\\mathcal O_{Y_i}}\\mathcal O_{Y_i}\\cong\\mathcal O_{X_i}$, $b\\otimes c\\mapsto b f_i^{\\sharp}(c)$, with inverse $b\\mapsto b\\otimes1$. Pullback by an open inclusion is restriction, since $j_i^{-1}\\mathcal O_X=\\mathcal O_{X_i}$ in the pullback formula of [def-pc-module-pullback]. Consequently $N|_{X_i}$ is ample by Step 3; isomorphisms preserve the affine nonvanishing loci in the definition of ampleness [def-weil-pbc-ample-invertible-module].",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4K (lemma-ample-composition), the displayed twist and its restrictions; Modules Tags 01CD (lemma-tensor-product-pullback), 0B8L (lemma-pullback-invertible), 01CT (lemma-constructions-invertible), and Sheaves Tag 0097 (lemma-push-pull-composition-modules)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-scheme-relative-ample-affine-cover] to $h:X\\to S$, the invertible module $N$, and the affine open covering $(V_i)$. Step 1 supplies quasi-compactness of $h$, and Step 4 supplies ampleness of $N|_{h^{-1}(V_i)}$. The cited statement gives ampleness of $N|_{h^{-1}(V)}$ for every affine open $V\\subseteq S$. Together with quasi-compactness of $h$, this is precisely $h$-relative ampleness as defined in the item. The already established finite-type clause finishes the conclusion, including the empty-base case, where any morphism to the empty scheme has empty source.",
+   "uses": [
+    "lem-trf-scheme-relative-ample-affine-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4K (lemma-ample-composition), final use of Tag 01VJ (lemma-characterize-relatively-ample)(3) implies (1); Tag 0C4M (lemma-composition-quasi-projective)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-type-composition-base-change",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sc-invertible-module",
+  "lem-per-relative-ample-absolute-twist",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-trf-scheme-relative-ample-affine-cover"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0C4M (lemma-composition-quasi-projective), expanding the proof of Tag 0C4K (lemma-ample-composition) into its finite affine-cover argument and using Tag 0892(1)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,10 +125,38 @@
    "results": "8 hits; AlgebraicGeometry.quasiCompact_isStableUnderComposition, AlgebraicGeometry.QuasiCompact.of_comp, AlgebraicGeometry.quasiSeparated_isStableUnderComposition, AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderComposition, CategoryTheory.MorphismProperty.IsStableUnderComposition.mk, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, RingHom.QuasiFinite.stableUnderComposition, AlgebraicGeometry.QuasiSeparated.of_comp; note: ; logged digest 967e0ef61f73c914",
    "date": "2026-10-19",
    "verdict": "no match: none of the returned signatures supplies this general scheme relative-ampleness/projective-bundle statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of quasiprojective scheme morphisms over a quasicompact base admits a relatively ample invertible sheaf",
+   "results": "8 hits; AlgebraicGeometry.quasiCompact_isStableUnderComposition, AlgebraicGeometry.quasiCompact_comp, AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact, AlgebraicGeometry.quasiSeparated_isStableUnderComposition, AlgebraicGeometry.quasiSeparated_comp, AlgebraicGeometry.QuasiCompact.of_comp, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.QuasiSeparated.of_comp; ; digest 2ea03a63a29517a2",
+   "date": "2026-10-19",
+   "verdict": "no match: no general scheme relative-ampleness or quasi-projective composition theorem in the returned signatures"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bIsAmple\\b|\\bAmple\\b|[Qq]uasi.?[Pp]rojective|ample.*tensor",
+   "results": "0 hits; ; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-19",
+   "verdict": "no match: no general scheme relative-ampleness or quasi-projective composition theorem in the returned signatures"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasiProjective\"",
+   "results": "0 hits; ; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-19",
+   "verdict": "no match: no general scheme relative-ampleness or quasi-projective composition theorem in the returned signatures"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two finite type scheme morphisms with relatively ample line bundles compose over a quasicompact base to a morphism with a relatively ample line bundle",
+   "results": "8 hits; AlgebraicGeometry.quasiCompact_isStableUnderComposition, AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact, AlgebraicGeometry.locallyOfFiniteType_comp, AlgebraicGeometry.quasiSeparated_comp, AlgebraicGeometry.IsFinite.comp_iff, AlgebraicGeometry.IsFinite.instCompScheme, AlgebraicGeometry.quasiCompact_comp, AlgebraicGeometry.instIsAffineHomCompScheme; ; digest 35c114701a0e84af",
+   "date": "2026-10-19",
+   "verdict": "no match: no general scheme relative-ampleness or quasi-projective composition theorem in the returned signatures"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-projective-bundle-composition",
@@ -76,5 +184,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-quasiprojective-qc-composition",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0C4M via the finite affine-cover proof of 0C4K. Reused existing 0892(1), finite-type composition/base change, invertible tensor-pullback compatibility, and affine-cover relative-ampleness nodes. Checked their statements, restrictions, a common eventual exponent and empty cases. No new nodes; only normalized doubled TeX escapes in the existing statement, without changing its meaning.",
+  "blueprint": "Subsidiary composition-of-quasi-projectives argument 0C4M in the projective-bundle-composition refinement 0C4P of the surface-resolution tower below lem-per-artin-gabber-affine-curve, as recorded in blueprint.from.place. The unit statement and route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic tensor-pullback and invertibility identities used only to construct the twist and identify its restrictions; this unit has no separate statement of these identities."
+   },
+   {
+    "node": "lem-trf-scheme-relative-ample-affine-cover",
+    "why": "Generic scheme affine-cover criterion 01VJ, used to conclude relative ampleness after a finite-cover calculation; this unit has no separate version."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-trf-scheme-relative-ample-affine-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-00d1475ee",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-00d1475ee (reviewer sub-agent of L); spot-checked: Read in full: the item, its 5 steps and every cited statement. There are no new nodes, and the statement is unchanged apart from TeX escapes (finite-type f and g, quasi-compact S, L f-ample, M g-ample). The steps follow Stacks morphisms.tex 0C4M = 01T3 + 0C4K exactly. Step 1: g∘f is of finite type by the sfb node (1), 01T3. Step 2: finite affine cover V_i of S; f_i : f^{-1}(Y_i) → Y_i has finite type by sfb (2); L_i is f_i-ample because affine opens of Y_i are affine opens of Y with the same preimage; M_i is ample by g-ampleness at V_i. Step 3: the twist node (0892(1)) gives every a ≥ a_i, so a = max({0} ∪ {a_i}) works on every V_i. Step 4: N = L⊗f^*M^{⊗a} is invertible and restricts to L_i⊗f_i^*M_i^{⊗a}, by the tensor-pullback node (1)/(2) applied to f∘j_i = k_i∘f_i; open pullback is restriction; the a=0 case is written out. Step 5: the 01VJ (3)⇒(1) affine-cover node gives h-ampleness. The empty base and the affine base (which reduces to 0892(1)) were checked. Duplicate search over 0C4K, 0C4M, 0892 and 'relatively ample' found only the Noetherian-affine special case (not cited, no cycle) and the 0892(2)/0893/01VU nodes, which state different results. The two declared tool_uses are generic and accepted. Batch-5 flag on lem-trf-scheme-relative-ample-affine-cover: it is Stacks 01VJ, general scheme theory that neither assumption gives. Its full closure (1205 nodes) has only generic sec-trace-formula nodes: algebraic spaces, Proj/twist, the 01VJ canonical-Proj criterion, the Zariski–étale quasi-coherent equivalence and 036W descent. It contains no thm-trf, no trace-transport node, no Poincaré node and no batch-4 target, so it is accepted, not RETURNed. No changes."
  }
 }
