@@ -1,0 +1,129 @@
+{
+ "id": "lem-asd-compact-support-graph-sheaf-normalization-transpose",
+ "kind": "statement",
+ "title": "Transpose of graph comparison",
+ "statement": "For the graph comparison map, its transpose under the etale lower-shriek restriction adjunction equals the graph extension unit.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03S3 (definition-extension-zero), 03S5 (proposition-describe-jshriek), 03S6 (lemma-shriek-base-change), 0F4L (lemma-shriek-into-star-separated-etale); more-etale.tex Tags 0F50, 0F51 and 0F7B-0F7F; graph-adjunction normalization on unbounded complexes supplied by the agent"
+ },
+ "stmt_deps": [
+  "def-asd-compact-support-graph-comparison",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-compactifications-refinements",
+  "def-f7-etale-compactification-graph-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply the explicit adjunction transpose formula to the graph construction and simplify its graph and complement restrictions.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate",
+    "def-f7-etale-compactification-graph-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-conjugate",
+  "def-f7-etale-compactification-graph-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03S6 and 0F4L; more-etale.tex Tags 0F7B-0F7F; current blueprint prop-asd-smooth-base-change, coherence (iii)",
+  "note": "Explicit graph construction and termwise descent of the parent normalization argument; the unit route is unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a separated etale morphism and a compactification the graph extension by zero map composes to the canonical map to direct image",
+   "results": "8 hits including HasCompactSupport.extend_zero, AlgebraicGeometry.IsEtale, Scheme.Etale and IsProper.isStableUnderBaseChange; none concerns sheaf graph comparisons.",
+   "date": "2026-10-18",
+   "verdict": "No exact result for constant-ring etale sheaves, their graph comparison or unbounded compact supports."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The graph construction of etale extension by zero into a compactified pushforward respects base change and proper refinement",
+   "results": "8 hits: IsEtale.instIsStableUnderBaseChangeScheme, Scheme.Etale, StandardEtalePair.hasMap_X, StandardEtalePair.HasMap.map, IsEtale.instHasOfPostcompPropertyScheme, RingHom.Etale.isStableUnderBaseChange, Scheme.instCategoryEtale, IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified.",
+   "date": "2026-10-18",
+   "verdict": "No sheaf or derived normalization theorem; use the existing scheme geometry and adjunction APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.natTrans_ext",
+   "results": "CategoryTheory.Localization.natTrans_ext.",
+   "date": "2026-10-18",
+   "verdict": "Useful generic full-faithfulness tool, not the geometric normalization or coherence result."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_counit|fullyFaithfulWhiskeringLeft|graphExtend_graph",
+   "results": "9 hits: Adjunction/Mates.lean conjugateEquiv_counit and _symm; Monoidal/Closed/Basic.lean usage; Localization/Predicate.lean fullyFaithfulWhiskeringLeft; Abelian/SerreClass/Localization.lean wrappers. No graphExtend_graph in Mathlib.",
+   "date": "2026-10-18",
+   "verdict": "Generic categorical tools suffice for the explicit construction and formal assembly, but not its geometric normalization, isomorphism or coherences."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphSheafNormalization",
+  "date": "2026-10-20",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-asd-smooth-base-change",
+   "place": "Proof, coherence (iii): etale inverse image and finite-fibre sum in the smooth chart, with the specified compact-support exchange of coherence (i).",
+   "via": [
+    "lem-asd-etale-compact-support-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphSheafNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCompactSupportGraphSheafNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.compactSupportGraphSheafComparison_normalization_transpose",
+  "statement": "theorem compactSupportGraphSheafComparison_normalization_transpose\n    (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}} (f : U ⟶ X)\n    [Etale f] [IsSeparated f] (c : Compactification f)\n    (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) :\n    (etaleLowerShriekRestrictionAdjunction (ModuleCat.{u + 1} A) f).homEquiv M\n        ((f)_*[ModuleCat.{u + 1} A].obj M)\n      ((etaleCompactificationGraphMap A f c).app M ≫\n        (compactificationSheafToDirectImage A c).app M) =\n      (lowerStarUnit (ModuleCat.{u + 1} A) f).app M",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-20"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261019T192721-L-1859010",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261019T192721-L-1859010",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
