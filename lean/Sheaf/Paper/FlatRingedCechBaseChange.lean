@@ -10,14 +10,11 @@ public import Sheaf.CategoryTheory.LocalExtendedCechDescription
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Sheaf.Paper.ExtendedLocalizationCech
 public import Mathlib.Algebra.Homology.Additive
-import Sheaf.Paper.FlatExtendedCechComparison
-import Sheaf.Paper.SiteRestrictionExact
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 import Sheaf.CategoryTheory.RingedSiteModules
-import WeilConjectures.AlgebraicGeometry.SiteRestrictionExact
+import Sheaf.Paper.FlatRingedCechBaseChangeQuasiIso
 
 /-! # Flat base change of the global augmented Cech model
 
@@ -76,6 +73,23 @@ theorem exists_flat_ringedCech_baseChange
           (SheafOfModules.unit (siteModuleRings B))
     ∃ (L : ringedSiteComplex B) (δ : L ⟶ ringedSiteRingComplex B)
       (u : K ⟶ rc.obj L), QuasiIso u ∧ u ≫ rc.map δ = ε ≫ σ := by
-  sorry
+  dsimp
+  let r := SheafOfModules.restrictScalars.{u}
+    ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)
+  let rc := r.mapHomologicalComplex (.up ℤ)
+  let σ : ringedSiteRingComplex R ⟶ rc.obj (ringedSiteRingComplex B) :=
+    (HomologicalComplex.single _ (.up ℤ) 0).map
+        (SheafOfModules.LocalizationCech.unitMap φ) ≫
+      (HomologicalComplex.singleMapHomologicalComplex r (.up ℤ) 0).inv.app
+        (SheafOfModules.unit (siteModuleRings B))
+  let δ : ringedSiteRingComplex B ⟶ ringedSiteRingComplex B := 𝟙 _
+  let u : K ⟶ rc.obj (ringedSiteRingComplex B) := ε ≫ σ
+  apply Exists.intro (ringedSiteRingComplex B)
+  apply Exists.intro δ
+  apply Exists.intro u
+  constructor
+  · exact flat_ringedCech_baseChange_data_quasiIso φ I hI hflat hquot K ε hK
+      (ringedSiteRingComplex B) δ u (by simp [δ, u, σ, rc, r])
+  · simp [δ, u, σ, rc, r]
 
 end CategoryTheory

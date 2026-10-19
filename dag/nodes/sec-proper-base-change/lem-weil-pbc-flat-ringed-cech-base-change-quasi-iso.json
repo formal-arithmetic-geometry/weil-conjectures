@@ -1,0 +1,115 @@
+{
+ "id": "lem-weil-pbc-flat-ringed-cech-base-change-quasi-iso",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-flat-ringed-cech-base-change",
+   "place": "second proof step: local flat Cech comparison and global quasi-isomorphism"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Quasi-isomorphism of flat ringed Cech base-change data",
+ "statement": "Under the hypotheses of lem-weil-pbc-flat-ringed-cech-base-change, any scalar-extended augmented model (L,delta,u) satisfying the augmentation equation has u a quasi-isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099I and 099H, local comparison and local-to-global conclusion"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-flat-ringed-cech-base-change-data",
+  "lem-weil-pbc-flat-extended-cech-comparison",
+  "lem-weil-pbc-site-restriction-exact",
+  "lem-weil-pbc-slice-restriction-flat"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to finite generating slices, identify the scalar-extended local terms with the extended localization complexes, apply the flat Cech comparison, and globalize the local vanishing of the kernel and cokernel of u.",
+   "uses": [
+    "lem-weil-pbc-flat-extended-cech-comparison",
+    "lem-weil-pbc-site-restriction-exact",
+    "lem-weil-pbc-slice-restriction-flat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-extended-cech-comparison",
+  "lem-weil-pbc-site-restriction-exact",
+  "lem-weil-pbc-slice-restriction-flat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099I and 099H"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "flat scalar extension of augmented Cech complex is a quasi-isomorphism",
+   "results": "No direct match; results concern ordinary flat module tensor comparisons.",
+   "date": "2026-10-20",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat scalar extension augmented Cech complex quasi-isomorphism",
+   "results": "No direct match; returned ordinary module flatness and localization results.",
+   "date": "2026-10-20",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiIso localization Cech flat",
+   "results": "No direct match for sheafified ringed-site complexes.",
+   "date": "2026-10-20",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*Cech.*QuasiIso|QuasiIso.*Cech",
+   "results": "Repository search found only the separate flat extended localization comparison declaration, which is retired from this import closure.",
+   "date": "2026-10-20",
+   "verdict": "No duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FlatRingedCechBaseChange",
+  "date": "2026-10-20",
+  "group": "Z5"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FlatRingedCechBaseChangeQuasiIso",
+  "file": "lean/Sheaf/Paper/FlatRingedCechBaseChangeQuasiIso.lean",
+  "declaration": "CategoryTheory.flat_ringedCech_baseChange_data_quasiIso",
+  "statement": "theorem flat_ringedCech_baseChange_data_quasiIso\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) (I : RingedSiteIdeal R)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (siteModuleRings R))]\n    [∀ U : C, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (siteModuleRings (R.over U)))]\n    (hI : SheafOfModules.IsFiniteType.{u, u, u} I.module)\n    (hflat : SheafOfModules.IsFlat\n      ((SheafOfModules.restrictScalars.{u}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj\n          (SheafOfModules.unit (siteModuleRings B))))\n    (hquot : I.IsQuotientIso φ)\n    (K : ringedSiteComplex R) (ε : K ⟶ ringedSiteRingComplex R)\n    (hK : HasLocalExtendedCechDescription R I.module I.inclusion K ε) :\n    let r := SheafOfModules.restrictScalars.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)\n    let rc := r.mapHomologicalComplex (.up ℤ)\n    let σ : ringedSiteRingComplex R ⟶ rc.obj (ringedSiteRingComplex B) :=\n      (HomologicalComplex.single _ (.up ℤ) 0).map\n          (SheafOfModules.LocalizationCech.unitMap φ) ≫\n        (HomologicalComplex.singleMapHomologicalComplex r (.up ℤ) 0).inv.app\n          (SheafOfModules.unit (siteModuleRings B))\n    ∀ (L : ringedSiteComplex B) (δ : L ⟶ ringedSiteRingComplex B)\n      (u : K ⟶ rc.obj L), u ≫ rc.map δ = ε ≫ σ → QuasiIso u",
+  "branch": "sheaf-dag",
+  "by": "Z5",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261019T192857-L-1879681",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261019T192857-L-1879681",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
