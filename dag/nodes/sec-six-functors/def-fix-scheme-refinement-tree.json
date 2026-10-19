@@ -1,0 +1,118 @@
+{
+ "id": "def-fix-scheme-refinement-tree",
+ "kind": "definition",
+ "title": "Recursive finite scheme refinement trees",
+ "statement": "For schemes W and T [def-pc-scheme], an immersion t:T → W and a predicate allowed on a vertex and its two child morphisms, define a finite refinement tree recursively. A tip records T as quasi-compact and quasi-separated and t as an immersion. A node records the same properties at T, an open immersion l:L → T and closed immersion r:R → T [def-weil-open-immersion, def-weil-closed-immersion], both quasi-compact, with complementary images, an allowed split, and refinement trees over the structural maps l followed by t and r followed by t. AllLeaves P means P holds at every tip. Bind replaces each tip with a supplied refinement tree; AllLeaves predicates are preserved by bind when they are preserved by each replacement, and are monotone under implication.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-finite-type-morphism"
+ ],
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tag 09Y4, lemma-constructible-partition-refined-by-stratification; scheme-theoretic finite binary refinement bookkeeping in the item proof steps 6–9"
+ },
+ "proof": [
+  {
+   "text": "Define the inductive tree by its tip and node constructors. Define AllLeaves and bind by recursion. Prove preservation under bind and monotonicity by induction on the original tree.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 09Y4, lemma-constructible-partition-refined-by-stratification; scheme-theoretic finite binary refinement bookkeeping in the item proof steps 6–9"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tag 09Y4; scheme-theoretic refinement and finite-label bookkeeping implemented by J2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite binary tree admits an enumeration of vertices by Fin n in which parents precede children",
+   "results": "FinEnum.fin, RootedTree.predOrder, Tree.treesOfNumNodesEq_card_eq_catalan, Tree.treesOfNumNodesEq_succ, Fin.OrderEmbedding.instInhabitedOrderEmbeddingNat, FinEnum.instFintype, Tree.get, Fin.instPredOrder",
+   "date": "2026-10-19",
+   "verdict": "Tree enumeration results, no dependent scheme splitting tree theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite binary trees with predicates at leaves, replacement of leaves, and numbering in parent before child order",
+   "results": "8 hits: Ordnode.pmap, Ordnode.attach', Descriptive.Tree.subAt, Ordnode.span, Ordnode.All, Tree.indexOf, Tree.treesOfNumNodesEq, Tree.get",
+   "date": "2026-10-19",
+   "verdict": "No theorem for dependent scheme refinement trees; use the finite order isomorphism for numbering."
+  },
+  {
+   "tool": "loogle",
+   "query": "Fintype.orderIsoFinOfCardEq",
+   "results": "1 hits: Fintype.orderIsoFinOfCardEq",
+   "date": "2026-10-19",
+   "verdict": "No theorem for dependent scheme refinement trees; use the finite order isomorphism for numbering."
+  },
+  {
+   "tool": "grep",
+   "query": "refinement.*tree|tree.*refinement|orderIsoFinOfCardEq",
+   "results": "3 hits: Mathlib/Data/Finset/Sort.lean, Mathlib/Data/Finset/Sort.lean, Mathlib/Data/Finset/Sort.lean",
+   "date": "2026-10-19",
+   "verdict": "No theorem for dependent scheme refinement trees; use the finite order isomorphism for numbering."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ConstructibleOpenClosedRefinement",
+  "group": "J2",
+  "date": "2026-10-19"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Constructible open/closed refinement used in the Weil-operations construction; item proof steps 6–9.",
+   "via": [
+    "lem-fix-constructible-open-closed-refinement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.SchemeRefinementTree",
+  "file": "lean/Sheaf/SixFunctors/SchemeRefinementTree.lean",
+  "declaration": "AlgebraicGeometry.Scheme.SchemeRefinementTree",
+  "statement": "inductive SchemeRefinementTree (W : Scheme.{u}) (allowed : ∀ (T : Scheme.{u}), (T ⟶ W) → ∀ (L R : Scheme.{u}), (L ⟶ T) → (R ⟶ T) → Prop) : ∀ (T : Scheme.{u}), (T ⟶ W) → Type (u + 1)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-19"
+ },
+ "split_report": {
+  "summary": "Defined the recursive tree and proved the relevant tree construction/encoding in Lean. No new sorry.",
+  "blueprint": "Finite binary pullback refinement bookkeeping used below lem-fix-weil-operations, via lem-fix-constructible-open-closed-refinement."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261019T093447-L-2314421",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261019T093447-L-2314421",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

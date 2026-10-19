@@ -17220,3 +17220,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:34 L: merged deliver/H8/Sheaf.Paper.PbcFilteredRetractDescent (stage 3; reviewer PASS; first push; landing 20261019T093443-L-2313373 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:34 L: merged deliver/J1/Sheaf.CategoryTheory.FlatRingedDiagramRestriction (stage 3; reviewer PASS; first push; landing 20261019T093444-L-2313687 (interface); batch 20261019T093237; modules 4; new nodes 3)
 - 09:34 L: merged deliver/J1/Sheaf.Paper.IntegralTowerLimitComparison (stage 3; reviewer PASS; first push; landing 20261019T093446-L-2314070 (proof); batch 20261019T093237; modules 1; new nodes 0)
+- 09:34 L: merged deliver/J2/Sheaf.SixFunctors.ConstructibleOpenClosedRefinement (stage 3; reviewer PASS; first push; landing 20261019T093447-L-2314421 (interface); batch 20261019T093237; modules 4; new nodes 3)

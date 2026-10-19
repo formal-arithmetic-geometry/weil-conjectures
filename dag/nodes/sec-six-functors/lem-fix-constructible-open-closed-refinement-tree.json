@@ -1,0 +1,146 @@
+{
+ "id": "lem-fix-constructible-open-closed-refinement-tree",
+ "kind": "statement",
+ "title": "Finite binary pullback refinement tree",
+ "statement": "Let W be a quasi-compact quasi-separated scheme [def-pc-scheme, def-weil-quasi-separated-morphism] and let s a j:S a j → W be finitely many finite families covering W. Suppose chosen factorizations s a j = c a j followed by o a j have c closed and o open [def-weil-closed-immersion, def-weil-open-immersion], with quasi-compact o. Suppose q a j:Q a j → O a j is a quasi-compact open immersion whose image in W is range(o a j) minus range(s a j), and z a j:Z a j → W is a closed immersion with image the complement of range(o a j). Then there is a finite rooted binary tree of schemes numbered by Fin N, with root W, smaller parents, and quasi-compact quasi-separated immersed vertices. Internal vertices are split by complementary quasi-compact open and closed pullbacks [def-pc-fibre-product] of either (o,z), or (q,c) over a map to O. All leaf images are pairwise disjoint and cover W. Each nonempty leaf factors over W through some S a j of each family a.",
+ "stmt_deps": [
+  "def-fix-scheme-refinement-tree",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-pc-scheme",
+  "def-weil-quasi-separated-morphism"
+ ],
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tag 09Y4, lemma-constructible-partition-refined-by-stratification; scheme-theoretic finite binary refinement bookkeeping in the item proof steps 6–9"
+ },
+ "proof": [
+  {
+   "text": "For each stratum replace a leaf T by the two pullbacks of O and Z, then split its open child by the pullbacks of Q and S. Scheme.Pullback.range_fst identifies the two pairs of ranges as complements. Base-change stability and qcqs permanence supply the vertex and edge properties. The two avoiding leaves miss the stratum; the third has its second projection as a factorization.",
+   "uses": [
+    "def-fix-scheme-refinement-tree",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-fibre-product-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 09Y4, lemma-constructible-partition-refined-by-stratification; scheme-theoretic finite binary refinement bookkeeping in the item proof steps 6–9"
+   }
+  },
+  {
+   "text": "Induct on the finite set of strata using bind, retaining avoidance or a factorization for every processed stratum by composition. On a nonempty final leaf pick a point; covering by each family supplies a stratum whose avoidance is impossible. Apply the numbering theorem to the resulting AllLeaves factorization predicate.",
+   "uses": [
+    "def-fix-scheme-refinement-tree",
+    "lem-fix-scheme-refinement-tree-encoding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 09Y4, lemma-constructible-partition-refined-by-stratification; scheme-theoretic finite binary refinement bookkeeping in the item proof steps 6–9"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-fix-scheme-refinement-tree",
+  "def-pc-fibre-product",
+  "lem-fix-scheme-refinement-tree-encoding",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tag 09Y4; scheme-theoretic refinement and finite-label bookkeeping implemented by J2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite binary tree admits an enumeration of vertices by Fin n in which parents precede children",
+   "results": "FinEnum.fin, RootedTree.predOrder, Tree.treesOfNumNodesEq_card_eq_catalan, Tree.treesOfNumNodesEq_succ, Fin.OrderEmbedding.instInhabitedOrderEmbeddingNat, FinEnum.instFintype, Tree.get, Fin.instPredOrder",
+   "date": "2026-10-19",
+   "verdict": "Tree enumeration results, no dependent scheme splitting tree theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite binary trees with predicates at leaves, replacement of leaves, and numbering in parent before child order",
+   "results": "8 hits: Ordnode.pmap, Ordnode.attach', Descriptive.Tree.subAt, Ordnode.span, Ordnode.All, Tree.indexOf, Tree.treesOfNumNodesEq, Tree.get",
+   "date": "2026-10-19",
+   "verdict": "No theorem for dependent scheme refinement trees; use the finite order isomorphism for numbering."
+  },
+  {
+   "tool": "loogle",
+   "query": "Fintype.orderIsoFinOfCardEq",
+   "results": "1 hits: Fintype.orderIsoFinOfCardEq",
+   "date": "2026-10-19",
+   "verdict": "No theorem for dependent scheme refinement trees; use the finite order isomorphism for numbering."
+  },
+  {
+   "tool": "grep",
+   "query": "refinement.*tree|tree.*refinement|orderIsoFinOfCardEq",
+   "results": "3 hits: Mathlib/Data/Finset/Sort.lean, Mathlib/Data/Finset/Sort.lean, Mathlib/Data/Finset/Sort.lean",
+   "date": "2026-10-19",
+   "verdict": "No theorem for dependent scheme refinement trees; use the finite order isomorphism for numbering."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ConstructibleOpenClosedRefinement",
+  "group": "J2",
+  "date": "2026-10-19"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Constructible open/closed refinement used in the Weil-operations construction; item proof steps 6–9.",
+   "via": [
+    "lem-fix-constructible-open-closed-refinement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ExistsFiniteRefinementTree",
+  "file": "lean/Sheaf/SixFunctors/ExistsFiniteRefinementTree.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finite_refinement_tree",
+  "statement": "theorem exists_finite_refinement_tree\n    {W : Scheme.{u}} [CompactSpace W] [QuasiSeparatedSpace W]\n    (m : ℕ) (n : Fin m → ℕ)\n    (S : ∀ a : Fin m, Fin (n a) → Scheme.{u})\n    (s : ∀ (a : Fin m) (j : Fin (n a)), S a j ⟶ W)\n    (O Q Z : ∀ a : Fin m, Fin (n a) → Scheme.{u})\n    (o : ∀ (a : Fin m) (j : Fin (n a)), O a j ⟶ W)\n    (c : ∀ (a : Fin m) (j : Fin (n a)), S a j ⟶ O a j)\n    (q : ∀ (a : Fin m) (j : Fin (n a)), Q a j ⟶ O a j)\n    (z : ∀ (a : Fin m) (j : Fin (n a)), Z a j ⟶ W)\n    (ho : ∀ a j, IsOpenImmersion (o a j))\n    (hc : ∀ a j, IsClosedImmersion (c a j))\n    (hq : ∀ a j, IsOpenImmersion (q a j))\n    (hz : ∀ a j, IsClosedImmersion (z a j))\n    (hco : ∀ a j, c a j ≫ o a j = s a j)\n    (hcover : ∀ a : Fin m, (⋃ j : Fin (n a), Set.range (s a j).base) = Set.univ)\n    (hoqc : ∀ a j, QuasiCompact (o a j))\n    (hqqc : ∀ a j, QuasiCompact (q a j))\n    (hqr : ∀ a j, Set.range (q a j ≫ o a j).base =\n      Set.range (o a j).base \\ Set.range (s a j).base)\n    (hzr : ∀ a j, Set.range (z a j).base = (Set.range (o a j).base)ᶜ) :\n      ∃ (N : ℕ) (V : Fin N → Scheme.{u}) (toW : ∀ v : Fin N, V v ⟶ W)\n        (root : Fin N) (parent left right : Fin N → Fin N)\n        (leftEdge : ∀ v : Fin N, V (left v) ⟶ V v)\n        (rightEdge : ∀ v : Fin N, V (right v) ⟶ V v)\n        (leaf : Fin N → Prop),\n        (∃ e : V root ≅ W, e.hom = toW root) ∧ parent root = root ∧\n        (∀ v, v ≠ root → (parent v).val < v.val) ∧\n        (∀ v, ¬ leaf v → leftEdge v ≫ toW v = toW (left v)) ∧\n        (∀ v, ¬ leaf v → rightEdge v ≫ toW v = toW (right v)) ∧\n        (∀ v, CompactSpace (V v)) ∧\n        (∀ v, QuasiSeparatedSpace (V v)) ∧\n        (∀ v, IsImmersion (toW v)) ∧\n        (∀ v, v ≠ root →\n          left (parent v) = v ∨ right (parent v) = v) ∧\n        (∀ v, leaf v ↔ ∀ w, w ≠ root → parent w ≠ v) ∧\n        (∀ v, ¬ leaf v → left v ≠ right v ∧\n          v.val < (left v).val ∧ v.val < (right v).val ∧\n          parent (left v) = v ∧ parent (right v) = v ∧\n          IsOpenImmersion (leftEdge v) ∧\n          IsClosedImmersion (rightEdge v) ∧\n          QuasiCompact (leftEdge v) ∧ QuasiCompact (rightEdge v) ∧\n          Set.range (leftEdge v).base ∪ Set.range (rightEdge v).base = Set.univ ∧\n          Disjoint (Set.range (leftEdge v).base)\n            (Set.range (rightEdge v).base)) ∧\n        (∀ v, ¬ leaf v →\n          ∃ a : Fin m, ∃ j : Fin (n a),\n            ((∃ h₁ : V (left v) = pullback (toW v) (o a j),\n                ∃ h₂ : V (right v) = pullback (toW v) (z a j),\n                leftEdge v = eqToHom h₁ ≫ pullback.fst (toW v) (o a j) ∧\n                rightEdge v = eqToHom h₂ ≫ pullback.fst (toW v) (z a j)) ∨\n             (∃ f : V v ⟶ O a j,\n                f ≫ o a j = toW v ∧\n                ∃ h₁ : V (left v) = pullback f (q a j),\n                ∃ h₂ : V (right v) = pullback f (c a j),\n                leftEdge v = eqToHom h₁ ≫ pullback.fst f (q a j) ∧\n                rightEdge v = eqToHom h₂ ≫ pullback.fst f (c a j)))) ∧\n        (∀ x : W, ∃ v : Fin N, leaf v ∧ Nonempty (V v) ∧\n          x ∈ Set.range (toW v).base) ∧\n        (∀ v w, leaf v → leaf w → v ≠ w →\n          Disjoint (Set.range (toW v).base) (Set.range (toW w).base)) ∧\n        (∀ v, leaf v → Nonempty (V v) →\n          ∀ a : Fin m, ∃ j : Fin (n a), ∃ f : V v ⟶ S a j,\n            f ≫ s a j = toW v)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-19"
+ },
+ "split_report": {
+  "summary": "Defined the recursive tree and proved the relevant tree construction/encoding in Lean. No new sorry.",
+  "blueprint": "Finite binary pullback refinement bookkeeping used below lem-fix-weil-operations, via lem-fix-constructible-open-closed-refinement."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261019T093447-L-2314421",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261019T093447-L-2314421",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

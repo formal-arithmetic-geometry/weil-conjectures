@@ -1,0 +1,119 @@
+{
+ "id": "lem-fix-scheme-refinement-tree-encoding",
+ "kind": "statement",
+ "title": "Parent-before-child numbering of refinement trees",
+ "statement": "Let W be a scheme [def-pc-scheme], allowed a predicate on complementary open/closed splits, and P a predicate on structural maps to W. A recursive scheme refinement tree [def-fix-scheme-refinement-tree] rooted at the identity of W, satisfying AllLeaves P, admits a numbering by Fin N. The root scheme is isomorphic to W over W; every nonroot vertex has a strictly smaller parent, is one of that parent’s two children, and the leaves are exactly vertices without proper children. Every internal vertex has distinct later left and right children, with complementary quasi-compact open and closed edge morphisms and an allowed split. Structural maps commute with edges. All vertices are quasi-compact and quasi-separated and immersed in W. Leaf images are pairwise disjoint and cover W, and P holds at every leaf.",
+ "stmt_deps": [
+  "def-fix-scheme-refinement-tree",
+  "def-pc-scheme"
+ ],
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tag 09Y4, lemma-constructible-partition-refined-by-stratification; scheme-theoretic finite binary refinement bookkeeping in the item proof steps 6–9"
+ },
+ "proof": [
+  {
+   "text": "Induct on the tree, constructing a finite linear order of labels: one singleton for a tip, and the lexicographic sum of a new root with the two subtree orders at a node. Reset child-root parents to the new root and retain all other parents. Derive parent and child inequalities from the lexicographic order. Carry the schemes, edges, admissibility and leaf predicates from the constructors. Covering follows by choosing the complementary child containing a point. Cross-subtree disjointness follows from complementary child images and injectivity of the structural immersion; within each subtree use induction. Characterize leaves by their self-children and strict parent inequalities. Apply Fintype.orderIsoFinOfCardEq and transport all data and properties along this order isomorphism.",
+   "uses": [
+    "def-fix-scheme-refinement-tree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 09Y4, lemma-constructible-partition-refined-by-stratification; scheme-theoretic finite binary refinement bookkeeping in the item proof steps 6–9"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-fix-scheme-refinement-tree"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tag 09Y4; scheme-theoretic refinement and finite-label bookkeeping implemented by J2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite binary tree admits an enumeration of vertices by Fin n in which parents precede children",
+   "results": "FinEnum.fin, RootedTree.predOrder, Tree.treesOfNumNodesEq_card_eq_catalan, Tree.treesOfNumNodesEq_succ, Fin.OrderEmbedding.instInhabitedOrderEmbeddingNat, FinEnum.instFintype, Tree.get, Fin.instPredOrder",
+   "date": "2026-10-19",
+   "verdict": "Tree enumeration results, no dependent scheme splitting tree theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite binary trees with predicates at leaves, replacement of leaves, and numbering in parent before child order",
+   "results": "8 hits: Ordnode.pmap, Ordnode.attach', Descriptive.Tree.subAt, Ordnode.span, Ordnode.All, Tree.indexOf, Tree.treesOfNumNodesEq, Tree.get",
+   "date": "2026-10-19",
+   "verdict": "No theorem for dependent scheme refinement trees; use the finite order isomorphism for numbering."
+  },
+  {
+   "tool": "loogle",
+   "query": "Fintype.orderIsoFinOfCardEq",
+   "results": "1 hits: Fintype.orderIsoFinOfCardEq",
+   "date": "2026-10-19",
+   "verdict": "No theorem for dependent scheme refinement trees; use the finite order isomorphism for numbering."
+  },
+  {
+   "tool": "grep",
+   "query": "refinement.*tree|tree.*refinement|orderIsoFinOfCardEq",
+   "results": "3 hits: Mathlib/Data/Finset/Sort.lean, Mathlib/Data/Finset/Sort.lean, Mathlib/Data/Finset/Sort.lean",
+   "date": "2026-10-19",
+   "verdict": "No theorem for dependent scheme refinement trees; use the finite order isomorphism for numbering."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ConstructibleOpenClosedRefinement",
+  "group": "J2",
+  "date": "2026-10-19"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Constructible open/closed refinement used in the Weil-operations construction; item proof steps 6–9.",
+   "via": [
+    "lem-fix-constructible-open-closed-refinement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.SchemeRefinementTreeEncoding",
+  "file": "lean/Sheaf/SixFunctors/SchemeRefinementTreeEncoding.lean",
+  "declaration": "AlgebraicGeometry.Scheme.SchemeRefinementTree.exists_fin_encoding",
+  "statement": "theorem exists_fin_encoding\n    {W : Scheme.{u}}\n    {allowed : ∀ (T : Scheme.{u}), (T ⟶ W) → ∀ (L R : Scheme.{u}),\n      (L ⟶ T) → (R ⟶ T) → Prop}\n    {P : ∀ (T : Scheme.{u}), (T ⟶ W) → Prop}\n    (tree : SchemeRefinementTree W allowed W (𝟙 W))\n    (htree : AllLeaves P tree) :\n      ∃ (N : ℕ) (V : Fin N → Scheme.{u}) (toW : ∀ v : Fin N, V v ⟶ W)\n        (root : Fin N) (parent left right : Fin N → Fin N)\n        (leftEdge : ∀ v : Fin N, V (left v) ⟶ V v)\n        (rightEdge : ∀ v : Fin N, V (right v) ⟶ V v)\n        (leaf : Fin N → Prop),\n        (∃ e : V root ≅ W, e.hom = toW root) ∧ parent root = root ∧\n        (∀ v, v ≠ root → (parent v).val < v.val) ∧\n        (∀ v, ¬ leaf v → leftEdge v ≫ toW v = toW (left v)) ∧\n        (∀ v, ¬ leaf v → rightEdge v ≫ toW v = toW (right v)) ∧\n        (∀ v, CompactSpace (V v)) ∧\n        (∀ v, QuasiSeparatedSpace (V v)) ∧\n        (∀ v, IsImmersion (toW v)) ∧\n        (∀ v, v ≠ root →\n          left (parent v) = v ∨ right (parent v) = v) ∧\n        (∀ v, leaf v ↔ ∀ w, w ≠ root → parent w ≠ v) ∧\n        (∀ v, ¬ leaf v → left v ≠ right v ∧\n          v.val < (left v).val ∧ v.val < (right v).val ∧\n          parent (left v) = v ∧ parent (right v) = v ∧\n          IsOpenImmersion (leftEdge v) ∧\n          IsClosedImmersion (rightEdge v) ∧\n          QuasiCompact (leftEdge v) ∧ QuasiCompact (rightEdge v) ∧\n          Set.range (leftEdge v).base ∪ Set.range (rightEdge v).base = Set.univ ∧\n          Disjoint (Set.range (leftEdge v).base)\n            (Set.range (rightEdge v).base)) ∧\n        (∀ v, ¬ leaf v →\n          allowed (V v) (toW v) (V (left v)) (V (right v))\n            (leftEdge v) (rightEdge v)) ∧\n        (∀ x : W, ∃ v : Fin N, leaf v ∧ Nonempty (V v) ∧\n          x ∈ Set.range (toW v).base) ∧\n        (∀ v w, leaf v → leaf w → v ≠ w →\n          Disjoint (Set.range (toW v).base) (Set.range (toW w).base)) ∧\n        (∀ v, leaf v → P (V v) (toW v))",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-19"
+ },
+ "split_report": {
+  "summary": "Defined the recursive tree and proved the relevant tree construction/encoding in Lean. No new sorry.",
+  "blueprint": "Finite binary pullback refinement bookkeeping used below lem-fix-weil-operations, via lem-fix-constructible-open-closed-refinement."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261019T093447-L-2314421",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261019T093447-L-2314421",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
