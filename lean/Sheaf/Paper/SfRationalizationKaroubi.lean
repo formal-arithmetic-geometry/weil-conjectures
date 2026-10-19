@@ -15,6 +15,10 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 public import Sheaf.CategoryTheory.ScalarLocalizationTriangulated
 
 public import Mathlib.CategoryTheory.Triangulated.Triangulated
+
+import Mathlib.Algebra.Group.Units.Equiv
+import Mathlib.LinearAlgebra.TensorProduct.Map
+import Sheaf.CategoryTheory.SemilinearScalarLocalization
 /-! # Rationalization of the intrinsic integral constructible category
 
 Source: Weil conjectures blueprint, sec-smooth-purity/sk-def-sf-operations,
@@ -137,7 +141,19 @@ theorem sfRationalHomCoordinates_existsUnique
         ((K.obj ⟶ M.obj) ⊗[Padic.coefficientExtensionIntegers l E] E),
       ∀ (a : Localization.Away (Padic.coefficientExtensionUniformizer l E))
         (f : K.obj ⟶ M.obj), e (a ⊗ₜ f) = f ⊗ₜ sfRationalCoefficientEquiv l E a := by
-  sorry
+  let e := ((TensorProduct.congr (sfRationalCoefficientEquiv l E).toLinearEquiv
+    (LinearEquiv.refl (Padic.coefficientExtensionIntegers l E) (K.obj ⟶ M.obj))).trans
+      (TensorProduct.comm (Padic.coefficientExtensionIntegers l E) E (K.obj ⟶ M.obj))).toAddEquiv
+  refine ⟨e, ?_, ?_⟩
+  · intro a f
+    simp [e]
+  · intro e' he'
+    apply AddEquiv.ext
+    intro x
+    induction x using TensorProduct.induction_on with
+    | zero => simp
+    | tmul a f => simp [he', e]
+    | add x y hx hy => simp [hx, hy]
 
 /-- Canonical Hom tensor E coordinates, uniquely fixed on every pure tensor.
 Source: blueprint order 1460 (blueprint: def-weil-rationalization-karoubi). -/
@@ -180,7 +196,75 @@ theorem sfRationalScalarExtension_existsUnique :
                   ((sfConstructibleIntegralScalarExtension p l hl E L ι Y).obj K) ⟶
                 (sfRationalConstructibleLocalization l L Y).obj
                   ((sfConstructibleIntegralScalarExtension p l hl E L ι Y).obj K'))) := by
-  sorry
+  let R := Padic.coefficientExtensionIntegers l E
+  let S := Padic.coefficientExtensionIntegers l L
+  let t := Padic.coefficientExtensionUniformizer l E
+  let b := Padic.coefficientExtensionUniformizer l L
+  let φ := integralScalarIntegerInclusion l E L ι
+  let F := sfConstructibleIntegralScalarExtension p l hl E L ι Y
+  have : F.Additive := ⟨fun {K M f g} ↦ by
+    apply ObjectProperty.hom_ext
+    change (integralScalarExtension l E L ι Y).map (f.hom + g.hom) = _
+    exact (integralScalarExtension l E L ι Y).map_add⟩
+  have hF : ScalarLocalization.IsSemilinear φ F := by
+    intro K M a f
+    apply ObjectProperty.hom_ext
+    change (integralScalarExtension l E L ι Y).map (a • f.hom) =
+      φ a • (F.map f).hom
+    rw [(sfIntegralConstructible_linear l E Y).1,
+      (sfIntegralConstructible_linear l L Y).1]
+    exact sfConstructibleIntegralScalarExtension_smul p l hl E L ι Y K M f a
+  have hu : IsUnit (algebraMap S (Localization.Away b) (φ t)) := by
+    apply (MulEquiv.isUnit_map (sfRationalCoefficientEquiv l L).toMulEquiv).mp
+    change IsUnit (sfRationalCoefficientEquiv l L (algebraMap S (Localization.Away b) (φ t)))
+    rw [AlgEquiv.commutes]
+    change IsUnit (ι (t : E))
+    have ht := (IsLocalization.Away.algebraMap_isUnit t (S := Localization.Away t)).map
+      (sfRationalCoefficientEquiv l E).toRingHom
+    have ht' := ht.map ι.toRingHom
+    change IsUnit (ι (sfRationalCoefficientEquiv l E
+      (algebraMap R (Localization.Away t) t))) at ht'
+    rw [AlgEquiv.commutes] at ht'
+    exact ht'
+  let J := ScalarLocalization.extension t b φ hu F hF
+  have hc : ScalarLocalization.coefficientMap t b φ hu =
+      (sfRationalCoefficientEquiv l L).symm.toRingHom.comp
+        (ι.toRingHom.comp (sfRationalCoefficientEquiv l E).toRingHom) := by
+    symm
+    apply (ScalarLocalization.coefficientMap_unique t b φ hu _).mp
+    ext a
+    apply (sfRationalCoefficientEquiv l L).injective
+    change sfRationalCoefficientEquiv l L
+        ((sfRationalCoefficientEquiv l L).symm
+          (ι (sfRationalCoefficientEquiv l E (algebraMap R (Localization.Away t) a)))) =
+      sfRationalCoefficientEquiv l L (algebraMap S (Localization.Away b) (φ a))
+    rw [AlgEquiv.apply_symm_apply, AlgEquiv.commutes, AlgEquiv.commutes]
+    rfl
+  have hJ (K M : sfIntegralConstructibleCategory l E Y) (f : K ⟶ M)
+      (a : Localization.Away t) :
+      J.map (a ⊗ₜ[R] f : ScalarLocalization.mk K ⟶ ScalarLocalization.mk M) =
+        (sfRationalCoefficientEquiv l L).symm (ι (sfRationalCoefficientEquiv l E a))
+          ⊗ₜ[S] F.map f := by
+    change ScalarLocalization.extensionHom t b φ hu F hF K M (a ⊗ₜ[R] f) = _
+    have hmap := Classical.choose_spec
+      (ScalarLocalization.existsUnique_semilinearHom t b φ hu F hF K M).exists a f
+    change ScalarLocalization.extensionHom t b φ hu F hF K M (a ⊗ₜ[R] f) = _ at hmap
+    rw [hmap, hc]
+    rfl
+  refine ⟨J, ⟨inferInstance, fun _ ↦ rfl, fun K M f a ↦ heq_of_eq (hJ K M f a)⟩, ?_⟩
+  intro J' hJ'
+  have : J'.Additive := hJ'.1
+  refine CategoryTheory.Functor.ext hJ'.2.1 ?_
+  intro K M f
+  induction f using TensorProduct.induction_on with
+  | zero => simp
+  | tmul a f =>
+    apply (conj_eqToHom_iff_heq _ _ (hJ'.2.1 K) (hJ'.2.1 M)).2
+    exact (hJ'.2.2 K.obj M.obj f a).trans (heq_of_eq (hJ K.obj M.obj f a).symm)
+  | add x y hx hy =>
+    rw [J'.map_add, J.map_add]
+    erw [Preadditive.add_comp, Preadditive.comp_add]
+    exact congrArg₂ (· + ·) hx hy
 
 /-- The completed integral scalar transition followed by raw rationalization.
 Source: blueprint order 1460 (blueprint: def-weil-rationalization-karoubi). -/
