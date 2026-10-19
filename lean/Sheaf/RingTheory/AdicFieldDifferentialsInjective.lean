@@ -5,7 +5,7 @@ Authors: SHEAF group G1
 -/
 module
 
-public import Sheaf.RingTheory.FormallySmoothAdic
+public import WeilConjectures.RingTheory.FormallySmoothAdic
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic

@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.AdicCompletion.Noetherian
-import Sheaf.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Sheaf.AlgebraicGeometry.FiniteEtaleLiftingComplete
 
 /-! # Lifting a quotient cover before punctured comparison

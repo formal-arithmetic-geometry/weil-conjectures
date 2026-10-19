@@ -25,8 +25,8 @@ import Mathlib.RingTheory.Algebraic.Integral
 import Mathlib.RingTheory.HopkinsLevitzki
 import Mathlib.RingTheory.Ideal.MinimalPrime.Localization
 import WeilConjectures.RingTheory.PowerSeriesQuotientVariables
-import Sheaf.RingTheory.PowerSeriesCompleteOverCompleteBase
-import Sheaf.RingTheory.PowerSeriesUniversalPropertyComplete
+import WeilConjectures.RingTheory.PowerSeriesCompleteOverCompleteBase
+import WeilConjectures.RingTheory.PowerSeriesUniversalPropertyComplete
 import Sheaf.RingTheory.FiniteOverCompleteRing
 import Sheaf.RingTheory.IntegralExtensionDimension
 import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions

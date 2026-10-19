@@ -13,7 +13,7 @@ import Sheaf.RingTheory.RegularThroughLocalization
 import Sheaf.RingTheory.RegularComposition
 import Sheaf.RingTheory.LocalizationRegular
 import Sheaf.RingTheory.RegularRingEquiv
-import Sheaf.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.FibreRingNoetherian
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 

@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.Ideal.Over
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 public import Mathlib.LinearAlgebra.Basis.Defs
 public import Mathlib.RingTheory.Flat.Basic
-import Sheaf.RingTheory.BasisIffBasisQuotientOfNilpotent
+import WeilConjectures.RingTheory.BasisIffBasisQuotientOfNilpotent
 import Mathlib.RingTheory.Flat.Stability
 import Mathlib.RingTheory.TensorProduct.Quotient
 import Mathlib.RingTheory.Ideal.Quotient.PowTransition

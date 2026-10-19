@@ -12,7 +12,7 @@ import WeilConjectures.RingTheory.Depth
 import WeilConjectures.RingTheory.DepthLeSupportDimension
 import Sheaf.RingTheory.IsRegularIffDimensionDrop
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
-import Sheaf.RingTheory.RegularLocalQuotientKernelParameters
+import WeilConjectures.RingTheory.RegularLocalQuotientKernelParameters
 import Sheaf.RingTheory.RegularSequenceConormal
 
 /-!

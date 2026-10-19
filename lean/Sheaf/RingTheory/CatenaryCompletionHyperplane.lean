@@ -18,7 +18,7 @@ import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.RingTheory.KrullDimension.Regular
 import Mathlib.RingTheory.Ideal.Operations
-import Sheaf.RingTheory.LocalCompletionQuotient
+import WeilConjectures.RingTheory.LocalCompletionQuotient
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 
 /-!

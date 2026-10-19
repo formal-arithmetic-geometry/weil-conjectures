@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Mathlib.RingTheory.Localization.Algebra
 import Mathlib.RingTheory.SurjectiveOnStalks
 import Mathlib.RingTheory.TensorProduct.Quotient
-import Sheaf.RingTheory.LocalCompletionQuotient
+import WeilConjectures.RingTheory.LocalCompletionQuotient
 
 /-!
 # Quotient identification of formal fibres

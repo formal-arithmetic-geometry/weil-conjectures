@@ -10,9 +10,9 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.RingTheory.RingHom.Flat
-public import Sheaf.RingTheory.FormallySmoothAdic
+public import WeilConjectures.RingTheory.FormallySmoothAdic
 import Sheaf.RingTheory.FsAdicClosedFiberModel
-import Sheaf.RingTheory.FormallySmoothAdicLiftIntoComplete
+import WeilConjectures.RingTheory.FormallySmoothAdicLiftIntoComplete
 import Mathlib.RingTheory.Filtration
 import Mathlib.RingTheory.Noetherian.Basic
 import WeilConjectures.RingTheory.FiniteCoefficientTensorReductionSurjective
@@ -23,7 +23,7 @@ import Mathlib.RingTheory.TensorProduct.Maps
 import Mathlib.RingTheory.TensorProduct.Finite
 import Mathlib.RingTheory.AdicCompletion.Functoriality
 import Mathlib.RingTheory.AdicCompletion.Noetherian
-import Sheaf.RingTheory.FiniteModuleComplete
+import WeilConjectures.RingTheory.FiniteModuleComplete
 
 /-!
 # Lifting over a finite coefficient map

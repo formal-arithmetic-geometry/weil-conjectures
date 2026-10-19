@@ -20,8 +20,8 @@ import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.RingTheory.KrullDimension.Basic
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.CompletionDimension
-import Sheaf.RingTheory.CohenPowerSeriesPresentation
+import WeilConjectures.RingTheory.CompletionDimension
+import WeilConjectures.RingTheory.CohenPowerSeriesPresentation
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 
 /-! # Nonvanishing of top local cohomology

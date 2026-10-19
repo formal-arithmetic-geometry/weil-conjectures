@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
 public import Mathlib.LinearAlgebra.TensorProduct.Quotient
 import Sheaf.RingTheory.NoetherianFlatClosedFiberModel
 import WeilConjectures.RingTheory.Flat.LocalizationPreservesFlatness
-import Sheaf.RingTheory.FlatAndFlatOfFlatFibreNoetherian
+import WeilConjectures.RingTheory.FlatAndFlatOfFlatFibreNoetherian
 
 /-!
 # Flatness from flatness over the base and on the closed fibre

@@ -29,8 +29,8 @@ import Sheaf.RingTheory.StrictHenselizationNoetherian
 import Sheaf.RingTheory.StrictHenselizationRegular
 import Sheaf.RingTheory.StrictHenselizationDimension
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.CompletionDimension
-import Sheaf.RingTheory.CompletionRegularLocal
+import WeilConjectures.RingTheory.CompletionDimension
+import WeilConjectures.RingTheory.CompletionRegularLocal
 import Mathlib.RingTheory.Henselian
 import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
 import Sheaf.AlgebraicGeometry.Sites.EtaleSheavesGsetsPoint

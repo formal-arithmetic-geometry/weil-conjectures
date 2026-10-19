@@ -15,16 +15,16 @@ public import Mathlib.LinearAlgebra.TensorProduct.Tower
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Finiteness.Defs
 
-import Sheaf.RingTheory.NagataRing
-import Sheaf.RingTheory.JapaneseDomain
+import WeilConjectures.RingTheory.NagataRing
+import WeilConjectures.RingTheory.JapaneseDomain
 import Sheaf.RingTheory.PolynomialNagata
-import Sheaf.RingTheory.FiniteOverNagata
-import Sheaf.RingTheory.NagataLocalization
+import WeilConjectures.RingTheory.FiniteOverNagata
+import WeilConjectures.RingTheory.NagataLocalization
 import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions
 import Sheaf.AlgebraicGeometry.IntegralClosureDedekindSurjectiveFibres
 import Sheaf.RingTheory.CompletionOfDVR
 import Sheaf.RingTheory.CompletionFiniteExtension
-import Sheaf.RingTheory.CompletionDimension
+import WeilConjectures.RingTheory.CompletionDimension
 import Sheaf.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
 import Mathlib.RingTheory.FiniteType
 import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian

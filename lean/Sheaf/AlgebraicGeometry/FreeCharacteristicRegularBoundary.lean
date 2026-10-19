@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.IsRegularScheme
 public import Sheaf.AlgebraicGeometry.NormalCrossingsDivisor
 public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.RingTheory.StrictHenselizationNoetherian
-import Sheaf.RingTheory.RegularLocalQuotientKernelParameters
+import WeilConjectures.RingTheory.RegularLocalQuotientKernelParameters
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.RingTheory.StrictHenselizationRegular
 import Sheaf.RingTheory.StrictHenselizationComparison

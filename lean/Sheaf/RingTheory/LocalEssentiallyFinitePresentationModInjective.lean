@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 public import Mathlib.RingTheory.Localization.Defs
 public import Mathlib.RingTheory.Ideal.Operations
 public import Mathlib.LinearAlgebra.Quotient.Basic
-import Sheaf.RingTheory.ColimitEventuallyFlat
+import WeilConjectures.RingTheory.ColimitEventuallyFlat
 import Sheaf.LinearAlgebra.TensorProduct.ColimitVaryingRings
 import WeilConjectures.RingTheory.FlatModInjective
 import WeilConjectures.RingTheory.LocalizedBaseChangeQuotientFlat

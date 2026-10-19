@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafAffineUnit
-import Sheaf.LinearAlgebra.GenericExteriorPowerLocalization
+import WeilConjectures.LinearAlgebra.GenericExteriorPowerLocalization
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Quasi-coherence of exterior sheaves on affine schemes

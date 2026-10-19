@@ -5,7 +5,7 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.RingTheory.JapaneseDomain
+public import WeilConjectures.RingTheory.JapaneseDomain
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.PowerSeries.NoZeroDivisors
 import Sheaf.RingTheory.PowerSeriesN2Aux

@@ -14,7 +14,7 @@ import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.RingTheory.LocalRing.RingHom.Basic
 import Mathlib.RingTheory.SurjectiveOnStalks
 import Mathlib.RingTheory.TensorProduct.Quotient
-import Sheaf.RingTheory.LocalCompletionQuotient
+import WeilConjectures.RingTheory.LocalCompletionQuotient
 
 @[expose] public section
 

@@ -4,7 +4,7 @@ public import Sheaf.RingTheory.NoetherianLocalModelTower
 public import Mathlib.RingTheory.Flat.Basic
 import Sheaf.RingTheory.NoetherianLocalModelTowerFiberDiagram
 import Mathlib.Algebra.Category.Ring.FilteredColimits
-import Sheaf.RingTheory.ColimitEventuallyFlat
+import WeilConjectures.RingTheory.ColimitEventuallyFlat
 import WeilConjectures.RingTheory.FlatSemilinearEquiv
 
 @[expose] public section

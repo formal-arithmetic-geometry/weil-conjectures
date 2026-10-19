@@ -5,7 +5,7 @@ Authors: SHEAF group N1
 -/
 module
 
-public import Sheaf.RingTheory.LocalCompletionQuotient
+public import WeilConjectures.RingTheory.LocalCompletionQuotient
 public import Mathlib.RingTheory.AdicCompletion.LocalRing
 public import Mathlib.RingTheory.Regular.RegularSequence
 import Sheaf.RingTheory.LocalGeneratingTuples

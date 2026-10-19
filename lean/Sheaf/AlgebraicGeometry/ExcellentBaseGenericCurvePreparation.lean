@@ -12,8 +12,8 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.Topology.Sober
 import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
-import Sheaf.RingTheory.JapaneseDomain
-import Sheaf.RingTheory.NagataRing
+import WeilConjectures.RingTheory.JapaneseDomain
+import WeilConjectures.RingTheory.NagataRing
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import Sheaf.RingTheory.QuasiExcellentNagata
 import WeilConjectures.AlgebraicGeometry.HomeomorphPurelyInseparableBaseChange
@@ -29,7 +29,6 @@ import Sheaf.AlgebraicGeometry.NormalizationGeonormalInsep
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions
 import Sheaf.AlgebraicGeometry.NormalizationInseparableBaseChange
-import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.AlgebraicGeometry.SteinSmoothGenericCurve
 
 /-!

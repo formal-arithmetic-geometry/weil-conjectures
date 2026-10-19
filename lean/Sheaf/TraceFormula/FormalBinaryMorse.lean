@@ -8,10 +8,10 @@ module
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.Topology.Algebra.Nonarchimedean.AdicTopology
 
-import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
+import WeilConjectures.RingTheory.PowerSeriesFieldCohenRegularComplete
 import Mathlib.RingTheory.LocalRing.Module
 import WeilConjectures.RingTheory.IsRegularSystemOfParameters
-import Sheaf.RingTheory.PowerSeriesFullCoordinatesField
+import WeilConjectures.RingTheory.PowerSeriesFullCoordinatesField
 
 /-! # Formal binary Morse normalization
 

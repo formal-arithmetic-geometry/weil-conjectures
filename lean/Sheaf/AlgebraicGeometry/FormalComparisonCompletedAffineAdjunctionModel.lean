@@ -15,7 +15,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Limits
 import Sheaf.AlgebraicGeometry.FormalComparisonCompletedAffineTransport
 import Sheaf.AlgebraicGeometry.FormalComparisonCompleteBaseAlgebraization
 import WeilConjectures.AlgebraicGeometry.CompletedAffineComplementBaseChange
-import Sheaf.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Mathlib.RingTheory.AdicCompletion.Completeness
 import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
 import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSections

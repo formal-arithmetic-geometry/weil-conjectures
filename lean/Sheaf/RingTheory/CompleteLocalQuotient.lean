@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.Noetherian.Basic
-import Sheaf.RingTheory.FiniteModuleComplete
+import WeilConjectures.RingTheory.FiniteModuleComplete
 import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
 /-!

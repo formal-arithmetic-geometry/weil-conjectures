@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Mathlib.RingTheory.TensorProduct.Quotient
 import Mathlib.RingTheory.Noetherian.Basic
-import Sheaf.RingTheory.FiniteModuleComplete
+import WeilConjectures.RingTheory.FiniteModuleComplete
 
 /-!
 # Complete local base change along a surjection and its closed fibre

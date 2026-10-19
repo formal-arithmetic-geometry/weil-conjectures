@@ -3,7 +3,7 @@ module
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.RegularLocalRing.Defs
-import Sheaf.RingTheory.RegularLocalOfFormallySmoothAdic
+import WeilConjectures.RingTheory.RegularLocalOfFormallySmoothAdic
 
 /-!
 # Smooth algebras over fields have regular local rings

@@ -5,7 +5,7 @@ Authors: SHEAF group G1
 -/
 module
 
-public import Sheaf.RingTheory.JapaneseDomain
+public import WeilConjectures.RingTheory.JapaneseDomain
 public import Mathlib.RingTheory.Noetherian.Defs
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 

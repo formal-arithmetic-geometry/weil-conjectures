@@ -28,13 +28,13 @@ import Sheaf.AlgebraicGeometry.NodalCurveLCICriterion
 import Sheaf.AlgebraicGeometry.UnramifiedFieldFibreDecomposition
 import Sheaf.RingTheory.CompletionFiniteExtension
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
-import Sheaf.RingTheory.CompletionRegularLocal
+import WeilConjectures.RingTheory.CompletionRegularLocal
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Sheaf.RingTheory.GlobalCompleteIntersectionLocalRegularSequence
 import Mathlib.RingTheory.Localization.Integral
-import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
+import WeilConjectures.RingTheory.PowerSeriesFieldCohenRegularComplete
 import WeilConjectures.RingTheory.PowerSeriesNormalDomain
 import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions
 import WeilConjectures.RingTheory.RegularLocalSeparableResidueSmooth

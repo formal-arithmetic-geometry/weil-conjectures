@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.LocalRing.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
-public import Sheaf.RingTheory.FormallySmoothAdic
+public import WeilConjectures.RingTheory.FormallySmoothAdic
 import Sheaf.RingTheory.CompleteLocalMapRegularPresentation
 import Sheaf.RingTheory.CompleteLocalBaseChangeFiber
 import Sheaf.RingTheory.FormallySmoothAdicBaseChange

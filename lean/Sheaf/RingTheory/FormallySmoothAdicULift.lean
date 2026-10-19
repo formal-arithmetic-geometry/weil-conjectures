@@ -5,7 +5,7 @@ Authors: SHEAF group T2
 -/
 module
 
-public import Sheaf.RingTheory.FormallySmoothAdic
+public import WeilConjectures.RingTheory.FormallySmoothAdic
 public import Mathlib.Algebra.Module.ULift
 import Mathlib.Algebra.MvPolynomial.Eval
 

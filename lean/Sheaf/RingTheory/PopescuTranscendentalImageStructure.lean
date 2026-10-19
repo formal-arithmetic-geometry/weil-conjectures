@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 public import Mathlib.RingTheory.Algebraic.Defs
 
-import Sheaf.RingTheory.FlatAndFlatOfFlatFibreNoetherian
+import WeilConjectures.RingTheory.FlatAndFlatOfFlatFibreNoetherian
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.RingTheory.HopkinsLevitzki
 import Mathlib.RingTheory.KrullDimension.Zero

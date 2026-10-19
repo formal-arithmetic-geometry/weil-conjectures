@@ -7,8 +7,8 @@ module
 
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.Derivation.Basic
-public import Sheaf.RingTheory.FormallySmoothAdic
-import Sheaf.RingTheory.FormallySmoothAdicLiftIntoComplete
+public import WeilConjectures.RingTheory.FormallySmoothAdic
+import WeilConjectures.RingTheory.FormallySmoothAdicLiftIntoComplete
 import Mathlib.Algebra.DualNumber
 
 /-!

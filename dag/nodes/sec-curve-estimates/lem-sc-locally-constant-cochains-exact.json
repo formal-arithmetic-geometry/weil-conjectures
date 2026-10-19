@@ -92,13 +92,14 @@
  "unit": "sk-thm-br",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RepresentationTheory.LocallyConstantCochainsExact",
-  "file": "lean/Sheaf/RepresentationTheory/LocallyConstantCochainsExact.lean",
+  "module": "WeilConjectures.RepresentationTheory.LocallyConstantCochainsExact",
+  "file": "lean/WeilConjectures/RepresentationTheory/LocallyConstantCochainsExact.lean",
   "declaration": "Rep.exists_locallyConstantCochains_exact",
   "statement": "theorem exists_locallyConstantCochains_exact\n    (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]\n    [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]\n    (A : Type v) [Category.{w} A] [Abelian A]\n    (E : A ≌ DiscreteContinuousRep.{0, u, max u s} ℤ G)\n    : ∃ C : A ⥤ CochainComplex AddCommGrpCat.{max u s} ℕ,\n      ∃ e : ∀ (M : A) (n : ℕ),\n          (C.obj M).X n ≃+ LocallyConstant (Fin n → G) (E.functor.obj M).obj.V,\n        (∀ (M N : A) (f : M ⟶ N) (n : ℕ) (x : (C.obj M).X n) (g : Fin n → G),\n          e N n (((C.map f).f n) x) g =\n            (E.functor.map f).hom.hom (e M n x g)) ∧\n        (∀ (M : A) (n : ℕ) (x : (C.obj M).X n) (g : Fin (n + 1) → G),\n          e M (n + 1) (((C.obj M).d n (n + 1)) x) g =\n            (E.functor.obj M).obj.ρ (g 0) (e M n x (fun k ↦ g k.succ)) +\n              ∑ k : Fin (n + 1),\n                (-1 : ℤ) ^ (k.val + 1) • e M n x (Fin.contractNth k (· * ·) g)) ∧\n        ∃ a : C.Additive,\n          letI := a\n          ∀ (S : ShortComplex A), S.ShortExact → ∀ n : ℕ,\n            ((S.map C).map (HomologicalComplex.eval\n              AddCommGrpCat.{max u s} (ComplexShape.up ℕ) n)).ShortExact",
   "branch": "sheaf-dag",
   "by": "G4",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RepresentationTheory.LocallyConstantCochainsExact; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

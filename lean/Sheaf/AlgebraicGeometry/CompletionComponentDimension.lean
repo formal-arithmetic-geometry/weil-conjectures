@@ -12,8 +12,8 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
 public import Mathlib.Topology.KrullDimension
 public import Sheaf.RingTheory.ExcellentRing
-import Sheaf.RingTheory.LocalCompletionQuotient
-import Sheaf.RingTheory.CompletionDimension
+import WeilConjectures.RingTheory.LocalCompletionQuotient
+import WeilConjectures.RingTheory.CompletionDimension
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra

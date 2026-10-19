@@ -10,7 +10,7 @@ public import WeilConjectures.RingTheory.CohenRing
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 import Sheaf.RingTheory.CompleteLocalDomainResidueParameterMap
-import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
+import WeilConjectures.RingTheory.PowerSeriesFieldCohenRegularComplete
 import Sheaf.RingTheory.FiniteOverCompleteRing
 import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 import Mathlib.RingTheory.AdicCompletion.Topology

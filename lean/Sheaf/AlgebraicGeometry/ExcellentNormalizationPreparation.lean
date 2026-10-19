@@ -10,8 +10,8 @@ public import Mathlib.Topology.Sober
 import Sheaf.AlgebraicGeometry.ComponentwiseNormalizationAffineCharts
 import Sheaf.AlgebraicGeometry.ExcellentSchemeAffineCover
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
-import Sheaf.RingTheory.JapaneseDomain
-import Sheaf.RingTheory.NagataRing
+import WeilConjectures.RingTheory.JapaneseDomain
+import WeilConjectures.RingTheory.NagataRing
 import Sheaf.RingTheory.QuasiExcellentNagata
 
 /-!

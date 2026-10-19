@@ -3,7 +3,7 @@ module
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-public import Sheaf.RingTheory.FormallySmoothAdic
+public import WeilConjectures.RingTheory.FormallySmoothAdic
 import Sheaf.RingTheory.FormallySmoothAdicLift
 import Sheaf.RingTheory.FormallySmoothAdicULift
 import Mathlib.RingTheory.Noetherian.Basic

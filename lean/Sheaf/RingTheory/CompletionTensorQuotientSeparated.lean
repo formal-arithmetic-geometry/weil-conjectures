@@ -15,7 +15,7 @@ import Mathlib.LinearAlgebra.TensorProduct.Finiteness
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.AdicCompletion.Noetherian
 import Mathlib.RingTheory.Localization.Submodule
-import Sheaf.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 
 /-!
 # Quotient projections separate a completed finite tensor

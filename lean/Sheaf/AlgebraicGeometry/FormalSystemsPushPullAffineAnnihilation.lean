@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Limits
 
 import Sheaf.AlgebraicGeometry.FormalComparisonCompletedAffineModel
 import Sheaf.AlgebraicGeometry.CoherentAffineMapSupportRadical
-import Sheaf.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 
 /-! # Affine annihilation of the canonical formal push-pull comparison
 

@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.MorphismProperty.Comma
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 import Sheaf.AlgebraicGeometry.FiniteEtaleLiftingComplete
-import Sheaf.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.CategoryTheory.Comma.Over.Pullback
 

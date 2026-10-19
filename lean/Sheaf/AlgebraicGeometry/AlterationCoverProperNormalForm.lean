@@ -10,8 +10,8 @@ public import Sheaf.RingTheory.ExcellentRing
 public import Mathlib.AlgebraicGeometry.FunctionField
 import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
-import Sheaf.RingTheory.JapaneseDomain
-import Sheaf.RingTheory.NagataRing
+import WeilConjectures.RingTheory.JapaneseDomain
+import WeilConjectures.RingTheory.NagataRing
 import Sheaf.RingTheory.QuasiExcellentNagata
 import Sheaf.AlgebraicGeometry.EtaleNormalComponents
 import Sheaf.AlgebraicGeometry.IntegralEtaleChartFlatification

@@ -26,7 +26,7 @@ import Sheaf.AlgebraicGeometry.ProductIrreducibleComponentsBijection
 import Sheaf.AlgebraicGeometry.UnramifiedFieldFibreDecomposition
 import Sheaf.FieldTheory.FieldExtensionGeometricallyIrreducible
 import Sheaf.RingTheory.FlatLocalCompletionIso
-import Sheaf.RingTheory.LocalCompletionQuotient
+import WeilConjectures.RingTheory.LocalCompletionQuotient
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth

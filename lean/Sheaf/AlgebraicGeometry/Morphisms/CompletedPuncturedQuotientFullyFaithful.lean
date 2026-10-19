@@ -15,7 +15,7 @@ import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import Mathlib.RingTheory.Regular.Flat
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoPuncturedPrincipalSliceConnected
 import Sheaf.AlgebraicGeometry.Morphisms.CompletePuncturedPrincipalFormalSections
 import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicSectionsTransfer

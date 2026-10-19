@@ -23,8 +23,8 @@ import Sheaf.AlgebraicGeometry.ProjectiveBundleComposition
 import Sheaf.AlgebraicGeometry.ProjectiveGenericallyFinite
 import WeilConjectures.AlgebraicGeometry.SpreadFiniteSeparableExtension
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
-import Sheaf.RingTheory.JapaneseDomain
-import Sheaf.RingTheory.NagataDomainN2
+import WeilConjectures.RingTheory.JapaneseDomain
+import WeilConjectures.RingTheory.NagataDomainN2
 import Sheaf.RingTheory.QuasiExcellentNagata
 import Sheaf.TraceFormula.ProjectiveBundleProper
 import WeilConjectures.AlgebraicGeometry.ChowLemma

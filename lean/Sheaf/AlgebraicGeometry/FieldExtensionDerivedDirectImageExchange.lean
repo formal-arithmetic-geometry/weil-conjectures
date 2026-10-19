@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import Sheaf.AlgebraicGeometry.SmoothLimitDerivedDirectImageExchange
-import Sheaf.FieldTheory.SeparableSmoothColimit
+import WeilConjectures.FieldTheory.SeparableSmoothColimit
 import Mathlib.FieldTheory.SeparablyGenerated
 
 /-! # Derived relative exchange for a torsion sheaf under field extension

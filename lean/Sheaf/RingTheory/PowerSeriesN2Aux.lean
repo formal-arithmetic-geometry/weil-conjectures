@@ -1,11 +1,11 @@
 module
 
-public import Sheaf.RingTheory.JapaneseDomain
+public import WeilConjectures.RingTheory.JapaneseDomain
 public import Mathlib.RingTheory.PowerSeries.NoZeroDivisors
 import WeilConjectures.RingTheory.PowerSeriesNormalDomain
 import Sheaf.RingTheory.TateN2CompletePrincipal
 import Sheaf.RingTheory.IsN2OfFiniteExtension
-import Sheaf.RingTheory.N2AscendsFiniteDomainExtension
+import WeilConjectures.RingTheory.N2AscendsFiniteDomainExtension
 import Mathlib.RingTheory.AdicCompletion.Completeness
 
 /-! Auxiliary N-2 assertion for power series.

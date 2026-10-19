@@ -14,9 +14,9 @@ public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 public import Mathlib.FieldTheory.Perfect
-import Sheaf.RingTheory.CohenRingsExist
+import WeilConjectures.RingTheory.CohenRingsExist
 import WeilConjectures.RingTheory.CohenRing
-import Sheaf.RingTheory.CohenRingModPowFormallySmooth
+import WeilConjectures.RingTheory.CohenRingModPowFormallySmooth
 import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 import Mathlib.RingTheory.Ideal.AssociatedPrime.Localization
 import Sheaf.RingTheory.NormalDomainPrincipalQuotientAssociatedHeight
@@ -27,8 +27,8 @@ import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import Sheaf.RingTheory.CompleteLocalQuotient
 import Mathlib.RingTheory.Localization.Integral
 import Sheaf.RingTheory.NagataOfCompleteLocal
-import Sheaf.RingTheory.NagataRing
-import Sheaf.RingTheory.JapaneseDomain
+import WeilConjectures.RingTheory.NagataRing
+import WeilConjectures.RingTheory.JapaneseDomain
 import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 import Sheaf.RingTheory.FiniteOverCompleteLocalProduct
 import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp

@@ -17,8 +17,8 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Restrict
 import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 import WeilConjectures.AlgebraicGeometry.NormalScheme
-import Sheaf.RingTheory.JapaneseDomain
-import Sheaf.RingTheory.NagataRing
+import WeilConjectures.RingTheory.JapaneseDomain
+import WeilConjectures.RingTheory.NagataRing
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.RingTheory.QuasiExcellentNagata
 import Sheaf.AlgebraicGeometry.EtaleNormalComponents

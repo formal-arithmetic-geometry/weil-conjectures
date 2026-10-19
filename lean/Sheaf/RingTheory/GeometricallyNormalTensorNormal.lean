@@ -28,7 +28,7 @@ import Mathlib.RingTheory.Smooth.Basic
 import Mathlib.RingTheory.Localization.LocalizationLocalization
 import Mathlib.RingTheory.LocalProperties.Reduced
 import Mathlib.Algebra.Field.ULift
-import Sheaf.FieldTheory.SeparableSmoothColimit
+import WeilConjectures.FieldTheory.SeparableSmoothColimit
 import Mathlib.RingTheory.Ideal.MinimalPrime.Localization
 import WeilConjectures.Mathlib.RingTheory.DedekindDomain.IntegralClosure
 

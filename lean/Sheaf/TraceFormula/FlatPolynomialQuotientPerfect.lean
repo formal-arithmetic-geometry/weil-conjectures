@@ -17,7 +17,7 @@ import Sheaf.Algebra.Homology.FlatResolutionTorComparison
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.RingTheory.PolynomialTorBound
 import Sheaf.CategoryTheory.DerivedCategory.BoundedFiniteTorPerfect
-import Sheaf.RingTheory.FiniteFreeResolution
+import WeilConjectures.RingTheory.FiniteFreeResolution
 import Mathlib.Algebra.Module.FinitePresentation
 import Mathlib.RingTheory.Flat.Basic
 import Mathlib.RingTheory.FiniteType

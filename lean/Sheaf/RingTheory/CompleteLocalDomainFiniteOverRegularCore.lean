@@ -3,7 +3,7 @@ module
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 import Sheaf.RingTheory.CompleteLocalDomainParameterMap
-import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
+import WeilConjectures.RingTheory.PowerSeriesFieldCohenRegularComplete
 import Sheaf.RingTheory.FiniteOverCompleteRing
 import Mathlib.RingTheory.Ideal.GoingUp
 import Mathlib.RingTheory.KrullDimension.NonZeroDivisors

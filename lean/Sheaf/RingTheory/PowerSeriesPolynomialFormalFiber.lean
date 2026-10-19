@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.MvPowerSeries.NoZeroDivisors
 public import Sheaf.RingTheory.GRing
 import Mathlib.RingTheory.MvPowerSeries.Equiv
 import Mathlib.RingTheory.Polynomial.Basic
-import Sheaf.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.FibreRingNoetherian
 import Sheaf.RingTheory.PowerSeriesPolynomialFormalFiberGeometricComponent
 

@@ -6,7 +6,7 @@ Authors: SHEAF group NU
 module
 
 public import Sheaf.RingTheory.ExcellentRing
-public import Sheaf.RingTheory.NagataRing
+public import WeilConjectures.RingTheory.NagataRing
 import Sheaf.RingTheory.FiniteTypeGRing
 import Mathlib.RingTheory.Localization.LocalizationLocalization
 import Mathlib.RingTheory.Localization.Submodule

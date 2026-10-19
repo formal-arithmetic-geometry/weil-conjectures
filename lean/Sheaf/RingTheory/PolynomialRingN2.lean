@@ -5,10 +5,10 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.RingTheory.JapaneseDomain
+public import WeilConjectures.RingTheory.JapaneseDomain
 public import Mathlib.Algebra.Polynomial.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
-import Sheaf.RingTheory.N2AscendsFiniteDomainExtension
+import WeilConjectures.RingTheory.N2AscendsFiniteDomainExtension
 import Sheaf.RingTheory.IsN2OfFiniteExtension
 import Sheaf.RingTheory.PolynomialPurelyInseparableIntegralClosureFinite
 import Mathlib.RingTheory.DedekindDomain.IntegralClosure

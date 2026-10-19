@@ -18,8 +18,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Sheaf.AlgebraicGeometry.DominantReducedPart
 
 import Sheaf.RingTheory.QuasiExcellentNagata
-import Sheaf.RingTheory.NagataDomainN2
-import Sheaf.RingTheory.JapaneseDomain
+import WeilConjectures.RingTheory.NagataDomainN2
+import WeilConjectures.RingTheory.JapaneseDomain
 import WeilConjectures.AlgebraicGeometry.Morphisms.GaloisCoverBaseChange
 import Sheaf.RingTheory.RegularRingNormal
 import Sheaf.RingTheory.EtaleNormalRing

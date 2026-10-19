@@ -15,7 +15,7 @@ public import Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.AlterationCoverCalculus
 import Sheaf.AlgebraicGeometry.CompletelyDecomposedEtaleFiniteSubcover
 import Sheaf.RingTheory.CompleteLocalExcellent
-import Sheaf.RingTheory.CompletionDimension
+import WeilConjectures.RingTheory.CompletionDimension
 import Sheaf.RingTheory.HenselianPairApproximation
 import Mathlib.RingTheory.FinitePresentation
 import Sheaf.RingTheory.HenselianNormalCompletionPreparation

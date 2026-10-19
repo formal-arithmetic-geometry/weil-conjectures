@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.StrictNormalCrossingsBoundary
 public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.RingTheory.Noetherian.Defs
-import Sheaf.RingTheory.RegularLocalQuotientKernelParameters
+import WeilConjectures.RingTheory.RegularLocalQuotientKernelParameters
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.RingTheory.RegularLocalUFDBoundaryFactorization
 import Mathlib.RingTheory.LocalRing.Module

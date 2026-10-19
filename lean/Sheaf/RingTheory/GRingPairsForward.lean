@@ -8,7 +8,7 @@ public import Sheaf.RingTheory.GRing
 import Sheaf.RingTheory.QuotientGRing
 import Sheaf.RingTheory.LocalizationRegular
 import Sheaf.RingTheory.RegularComposition
-import Sheaf.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.FibreRingNoetherian
 import Sheaf.RingTheory.GeometricRegularityFieldIso
 

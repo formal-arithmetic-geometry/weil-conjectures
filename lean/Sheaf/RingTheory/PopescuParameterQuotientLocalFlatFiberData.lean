@@ -14,7 +14,7 @@ public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Smooth.Basic
-import Sheaf.FieldTheory.SeparableIndSmoothTransport
+import WeilConjectures.FieldTheory.SeparableIndSmoothTransport
 import WeilConjectures.RingTheory.FlatLocalizedQuotient
 import WeilConjectures.RingTheory.PopescuParameterQuotientResidueEquivs
 import WeilConjectures.RingTheory.FlatOverRegular

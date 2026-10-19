@@ -20,7 +20,7 @@ import Sheaf.RingTheory.CompleteLocalExcellent
 import Sheaf.AlgebraicGeometry.NormalModificationCodimensionOne
 import WeilConjectures.AlgebraicGeometry.Regular
 import Sheaf.AlgebraicGeometry.ClosedDominantDimension
-import Sheaf.RingTheory.CompletionDimension
+import WeilConjectures.RingTheory.CompletionDimension
 import WeilConjectures.Blowup.Proper
 import WeilConjectures.Blowup.FiniteDegree.Algebra
 import Sheaf.AlgebraicGeometry.RegularNormalDecomposition

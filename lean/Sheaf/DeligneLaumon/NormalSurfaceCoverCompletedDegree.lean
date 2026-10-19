@@ -16,19 +16,19 @@ public import Mathlib.Topology.KrullDimension
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Sheaf.RingTheory.GRing
-import Sheaf.RingTheory.JapaneseDomain
+import WeilConjectures.RingTheory.JapaneseDomain
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import Sheaf.RingTheory.QuasiExcellentNagata
 import Sheaf.AlgebraicGeometry.DimensionAffineOpenCover
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.CompletionDimension
+import WeilConjectures.RingTheory.CompletionDimension
 import Sheaf.RingTheory.CompletionFiniteExtension
-import Sheaf.RingTheory.CompletionRegularLocal
+import WeilConjectures.RingTheory.CompletionRegularLocal
 import Sheaf.RingTheory.NormalOfFlatNormalFibers
 import Sheaf.RingTheory.GRingCompletionRegular
 import Sheaf.RingTheory.IntegralExtensionDimension
-import Sheaf.RingTheory.NagataDomainN2
+import WeilConjectures.RingTheory.NagataDomainN2
 import Sheaf.RingTheory.RegularRingNormal
 
 /-!

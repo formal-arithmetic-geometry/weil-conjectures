@@ -12,8 +12,8 @@ public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.Topology.Irreducible
 public import Sheaf.RingTheory.ExcellentRing
 public import Sheaf.RingTheory.QuasiExcellentNagata
-public import Sheaf.RingTheory.NagataRing
-public import Sheaf.RingTheory.JapaneseDomain
+public import WeilConjectures.RingTheory.NagataRing
+public import WeilConjectures.RingTheory.JapaneseDomain
 public import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 public import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveImpliesProper
 public import Sheaf.AlgebraicGeometry.FiniteOverProjective

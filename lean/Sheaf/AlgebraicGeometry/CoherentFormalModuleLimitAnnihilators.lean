@@ -11,7 +11,7 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 
 import Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineLimitModel
 import Sheaf.AlgebraicGeometry.CoherentFormalModulesRestrictionLimits
-import Sheaf.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Mathlib.CategoryTheory.ObjectProperty.Kernels
 
 /-! # Annihilators of affine limits of formal kernels and cokernels -/

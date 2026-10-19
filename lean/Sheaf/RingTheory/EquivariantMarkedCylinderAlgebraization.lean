@@ -35,7 +35,7 @@ import Sheaf.AlgebraicGeometry.OrdinaryHenselianPointedNeighbourhoodLimit
 import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct
 import WeilConjectures.RingTheory.FiniteModuleComplete
 import Sheaf.RingTheory.CompletionFiniteExtension
-import Sheaf.RingTheory.LocalCompletionQuotient
+import WeilConjectures.RingTheory.LocalCompletionQuotient
 import WeilConjectures.RingTheory.FiniteMapColimitDescent
 import Sheaf.AlgebraicGeometry.UnramifiedAlgebraOverFieldProduct
 import Sheaf.RingTheory.ExcellentRing

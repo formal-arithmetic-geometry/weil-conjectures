@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.PopescuSolutionModulo
 import WeilConjectures.RingTheory.ArtinianSeparableResidueLift
-import Sheaf.RingTheory.ArtinianTranscendentalLocalization
+import WeilConjectures.RingTheory.ArtinianTranscendentalLocalization
 
 /-!
 # Enlarging a solution modulo a prime power

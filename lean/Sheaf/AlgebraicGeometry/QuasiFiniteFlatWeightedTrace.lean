@@ -63,7 +63,7 @@ import Sheaf.RingTheory.SimpleFiltration
 import Mathlib.RingTheory.FiniteStability
 import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.RingTheory.Flat.Stability
-import Sheaf.RingTheory.BasisIffBasisQuotientOfNilpotent
+import WeilConjectures.RingTheory.BasisIffBasisQuotientOfNilpotent
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.RingTheory.Spectrum.Prime.Topology
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated

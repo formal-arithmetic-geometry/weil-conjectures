@@ -6,7 +6,7 @@ Authors: SHEAF group P5
 module
 
 public import Sheaf.RingTheory.IndPrincipalZariski
-public import Sheaf.RingTheory.NagataRing
+public import WeilConjectures.RingTheory.NagataRing
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed

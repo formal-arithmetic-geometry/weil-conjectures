@@ -12,9 +12,9 @@ import Sheaf.TraceFormula.FsFaceSharpening
 import Sheaf.AlgebraicGeometry.LogRegularSharpChart
 import Sheaf.AlgebraicGeometry.LogRegularCompletedChart
 import Sheaf.RingTheory.FormalMonoidRingDimension
-import Sheaf.RingTheory.LocalCompletionQuotient
-import Sheaf.RingTheory.CompletionRegularLocal
-import Sheaf.RingTheory.CompletionDimension
+import WeilConjectures.RingTheory.LocalCompletionQuotient
+import WeilConjectures.RingTheory.CompletionRegularLocal
+import WeilConjectures.RingTheory.CompletionDimension
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedImmersionCartesian
 import Sheaf.RingTheory.StrictHenselizationRegular
 import Sheaf.RingTheory.StrictHenselizationDimension

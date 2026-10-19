@@ -27,12 +27,12 @@ import Sheaf.RingTheory.FiniteAfterCompletion
 import Mathlib.RingTheory.FiniteType
 import Sheaf.RingTheory.FlatCompletion
 import WeilConjectures.RingTheory.FlatModInjective
-import Sheaf.RingTheory.LocalCompletionQuotient
+import WeilConjectures.RingTheory.LocalCompletionQuotient
 import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.RingTheory.LocalRing.Module
-import Sheaf.RingTheory.PowerSeriesAdicEvaluation
+import WeilConjectures.RingTheory.PowerSeriesAdicEvaluation
 import WeilConjectures.RingTheory.PowerSeriesCombinedIdealCoefficients
-import Sheaf.RingTheory.PowerSeriesCompleteOverCompleteBase
+import WeilConjectures.RingTheory.PowerSeriesCompleteOverCompleteBase
 import Mathlib.RingTheory.MvPowerSeries.Inverse
 import Mathlib.RingTheory.MvPowerSeries.Equiv
 import Mathlib.RingTheory.Ideal.Quotient.Basic

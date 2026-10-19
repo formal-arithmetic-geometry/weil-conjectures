@@ -10,9 +10,9 @@ public import Mathlib.Algebra.Module.Torsion.Basic
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
 import WeilConjectures.Algebra.ChangeIdealCompletion
-import Sheaf.RingTheory.ExistsCoefficientSubring
-import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
-import Sheaf.RingTheory.PowerSeriesUniversalPropertyComplete
+import WeilConjectures.RingTheory.ExistsCoefficientSubring
+import WeilConjectures.RingTheory.PowerSeriesFieldCohenRegularComplete
+import WeilConjectures.RingTheory.PowerSeriesUniversalPropertyComplete
 
 /-!
 # Parameter maps for complete local domains

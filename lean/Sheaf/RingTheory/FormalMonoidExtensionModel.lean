@@ -16,11 +16,11 @@ import Mathlib.RingTheory.RegularLocalRing.Polynomial
 import Mathlib.RingTheory.AdicCompletion.Completeness
 import Mathlib.LinearAlgebra.FreeModule.PID
 import Sheaf.RingTheory.FormalMonoidRingDimension
-import Sheaf.RingTheory.CompletionRegularLocal
-import Sheaf.RingTheory.LocalCompletionQuotient
-import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
+import WeilConjectures.RingTheory.CompletionRegularLocal
+import WeilConjectures.RingTheory.LocalCompletionQuotient
+import WeilConjectures.RingTheory.PowerSeriesFieldCohenRegularComplete
 import Sheaf.RingTheory.RegularLocalLocalization
-import Sheaf.RingTheory.RegularLocalQuotientKernelParameters
+import WeilConjectures.RingTheory.RegularLocalQuotientKernelParameters
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Sheaf.TraceFormula.FsFaceSharpening
 

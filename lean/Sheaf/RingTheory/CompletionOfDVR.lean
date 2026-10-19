@@ -7,8 +7,8 @@ module
 
 public import Mathlib.RingTheory.AdicCompletion.LocalRing
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Sheaf.RingTheory.CompletionDimension
-import Sheaf.RingTheory.CompletionRegularLocal
+import WeilConjectures.RingTheory.CompletionDimension
+import WeilConjectures.RingTheory.CompletionRegularLocal
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!

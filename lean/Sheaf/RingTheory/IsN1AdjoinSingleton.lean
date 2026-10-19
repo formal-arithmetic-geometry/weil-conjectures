@@ -5,14 +5,14 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.RingTheory.NagataRing
+public import WeilConjectures.RingTheory.NagataRing
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AsSubring
 import Sheaf.RingTheory.IsN1OfFiniteDomainExtension
 import Sheaf.RingTheory.IsN1OfIsAnalyticallyUnramified
 import Sheaf.RingTheory.IsN1OfLocalCharacterization
 import Sheaf.RingTheory.AdjoinSingletonLocalUnramified
-import Sheaf.RingTheory.AdjoinSingletonMaximalFiniteCover
+import WeilConjectures.RingTheory.AdjoinSingletonMaximalFiniteCover
 
 /-!
 # Normalization of a monogenic subalgebra of a normal Nagata domain's fraction field

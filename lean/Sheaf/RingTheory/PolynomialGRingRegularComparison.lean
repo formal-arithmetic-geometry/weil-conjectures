@@ -9,7 +9,7 @@ public import Sheaf.RingTheory.GRing
 public import Mathlib.Algebra.Polynomial.Basic
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.PolynomialAlgebra
-import Sheaf.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.FibreRingNoetherian
 import Sheaf.RingTheory.LocalizationRegular
 import Sheaf.RingTheory.RegularBaseChange

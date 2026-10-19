@@ -5,15 +5,15 @@ Authors: SHEAF group U2
 -/
 module
 
-public import Sheaf.RingTheory.NagataRing
+public import WeilConjectures.RingTheory.NagataRing
 public import WeilConjectures.RingTheory.AnalyticallyUnramified
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Localization.Submodule
 import Sheaf.RingTheory.AdjoinSingletonPrincipalQuotientConditions
-import Sheaf.RingTheory.AnalyticallyUnramifiedPrincipalCriterion
-import Sheaf.RingTheory.FiniteOverNagata
-import Sheaf.RingTheory.NagataLocalization
+import WeilConjectures.RingTheory.AnalyticallyUnramifiedPrincipalCriterion
+import WeilConjectures.RingTheory.FiniteOverNagata
+import WeilConjectures.RingTheory.NagataLocalization
 import Sheaf.RingTheory.IsAnalyticallyUnramifiedOfIsNagataRing
 
 /-!

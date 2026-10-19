@@ -25,7 +25,7 @@ import Sheaf.RingTheory.UniversallyCatenaryDimensionFormula
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import Sheaf.RingTheory.CompleteLocalExcellent
 import Sheaf.AlgebraicGeometry.ExcellentNormalizationPreparation
-import Sheaf.RingTheory.CompletionDimension
+import WeilConjectures.RingTheory.CompletionDimension
 import WeilConjectures.RingTheory.DimensionQuasiFiniteOverPolynomialAlgebra
 import Sheaf.RingTheory.FiniteOverCompleteLocalProduct
 import WeilConjectures.RingTheory.FiniteTypeDomainDimensionTrdeg

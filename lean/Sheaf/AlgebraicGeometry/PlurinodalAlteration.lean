@@ -11,8 +11,8 @@ public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 
 import Sheaf.RingTheory.QuasiExcellentNagata
-import Sheaf.RingTheory.NagataRing
-import Sheaf.RingTheory.JapaneseDomain
+import WeilConjectures.RingTheory.NagataRing
+import WeilConjectures.RingTheory.JapaneseDomain
 import Sheaf.AlgebraicGeometry.IntegralClosureDedekindSurjectiveFibres
 import Mathlib.RingTheory.Localization.Integral
 import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct

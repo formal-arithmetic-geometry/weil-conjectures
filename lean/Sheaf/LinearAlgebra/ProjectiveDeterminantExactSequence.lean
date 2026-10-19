@@ -10,7 +10,7 @@ public import WeilConjectures.RingTheory.FiniteProjectiveStandardFreeCover
 public import Mathlib.LinearAlgebra.ExteriorPower.Basic
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
-import Sheaf.LinearAlgebra.GenericExteriorPowerLocalization
+import WeilConjectures.LinearAlgebra.GenericExteriorPowerLocalization
 import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.Topology.GlueSheavesOfModules
 import Sheaf.AlgebraicGeometry.CoherentFiniteType

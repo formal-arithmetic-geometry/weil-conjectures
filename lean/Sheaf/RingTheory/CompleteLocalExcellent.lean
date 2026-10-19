@@ -12,10 +12,10 @@ import Mathlib.RingTheory.Finiteness.Defs
 import Mathlib.RingTheory.FiniteType
 import Sheaf.RingTheory.RegularLocusOpenFromPrimeQuotients
 import Sheaf.RingTheory.RegularRingUniversallyCatenary
-import Sheaf.RingTheory.CohenStructurePowerSeriesSurjection
+import WeilConjectures.RingTheory.CohenStructurePowerSeriesSurjection
 import Sheaf.RingTheory.CompleteLocalGRing
 import Sheaf.RingTheory.FiniteOverCompleteLocalProduct
-import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
+import WeilConjectures.RingTheory.PowerSeriesFieldCohenRegularComplete
 import Sheaf.RingTheory.RegularLocalLocalization
 import Sheaf.RingTheory.CompleteLocalDomainRegularOpen
 import Sheaf.RingTheory.JTwoFiniteAlgebraCriterion

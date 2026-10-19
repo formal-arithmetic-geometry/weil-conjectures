@@ -10,7 +10,7 @@ public import Sheaf.RingTheory.IndPrincipalZariski
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.RingHom.Flat
 import Sheaf.RingTheory.QuasiExcellentNagata
-import Sheaf.RingTheory.NagataLocalization
+import WeilConjectures.RingTheory.NagataLocalization
 import Sheaf.RingTheory.GRingOfWeaklyEtale
 import Sheaf.RingTheory.LocallyNagataCatenaryOfWeaklyEtale
 import Sheaf.RingTheory.NagataJTwoOfWeaklyEtale

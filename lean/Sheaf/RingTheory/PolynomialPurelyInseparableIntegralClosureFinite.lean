@@ -5,7 +5,7 @@ Authors: SHEAF group F2
 -/
 module
 
-public import Sheaf.RingTheory.JapaneseDomain
+public import WeilConjectures.RingTheory.JapaneseDomain
 public import Mathlib.Algebra.Polynomial.Basic
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed

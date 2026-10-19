@@ -23,7 +23,7 @@ public import Mathlib.CategoryTheory.CofilteredSystem
 import Sheaf.Algebra.Homology.KFlatTelescopeClosure
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Sheaf.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Sheaf.Paper.ConstantModuleSectionProperties
 import Sheaf.RingTheory.NilpotentProjectiveComplexLift
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyContractibleEvaluationColimits
@@ -47,7 +47,6 @@ import Sheaf.AlgebraicGeometry.ProEtale.ConstantRealizationDetectsZero
 import Sheaf.CategoryTheory.ConstantRealizationReflectsIsomorphism
 import Sheaf.CategoryTheory.PerfectConstantDerivedMapLocal
 import Sheaf.Paper.ConstantRealizationDerivedScalarExtension
-import WeilConjectures.RingTheory.AdicCompletionNoetherian
 
 /-! # Constant reductions on a weakly contractible affine
 

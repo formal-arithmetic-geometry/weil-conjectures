@@ -5,10 +5,10 @@ Authors: SHEAF group S2
 -/
 module
 
-public import Sheaf.RingTheory.NagataRing
+public import WeilConjectures.RingTheory.NagataRing
 public import Mathlib.Algebra.Polynomial.Basic
 import Sheaf.RingTheory.MonogenicNagataDomainN2
-import Sheaf.RingTheory.FiniteOverNagata
+import WeilConjectures.RingTheory.FiniteOverNagata
 
 /-!
 # Polynomial rings over Nagata rings

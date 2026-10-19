@@ -5,7 +5,7 @@ Authors: SHEAF group J1
 -/
 module
 
-public import Sheaf.RingTheory.FormallySmoothAdic
+public import WeilConjectures.RingTheory.FormallySmoothAdic
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
 public import Mathlib.RingTheory.Derivation.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
@@ -22,7 +22,7 @@ import Mathlib.RingTheory.TensorProduct.MvPolynomial
 import Mathlib.RingTheory.TensorProduct.Quotient
 import Sheaf.RingTheory.Derivation.DetectNonPthPower
 import Sheaf.RingTheory.Derivation.FormallySmoothAdicExtension
-import Sheaf.RingTheory.FiniteModuleComplete
+import WeilConjectures.RingTheory.FiniteModuleComplete
 import Sheaf.RingTheory.FormallySmoothAdicBaseChange
 import WeilConjectures.RingTheory.Derivation.Localization
 

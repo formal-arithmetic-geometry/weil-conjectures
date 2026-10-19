@@ -18,8 +18,8 @@ import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Sheaf.FieldTheory.FiniteSeparableTensorFieldReduced
 import WeilConjectures.AlgebraicGeometry.DimensionAtPointFieldExtension
 import Sheaf.RingTheory.FlatCompletion
-import Sheaf.RingTheory.PowerSeriesUniversalPropertyComplete
-import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
+import WeilConjectures.RingTheory.PowerSeriesUniversalPropertyComplete
+import WeilConjectures.RingTheory.PowerSeriesFieldCohenRegularComplete
 import WeilConjectures.RingTheory.FlatModInjective
 
 /-!

@@ -5,12 +5,12 @@ Authors: SHEAF group S3
 -/
 module
 
-public import Sheaf.RingTheory.FormallySmoothAdic
+public import WeilConjectures.RingTheory.FormallySmoothAdic
 public import WeilConjectures.RingTheory.CohenRing
 public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.RingTheory.RingHom.Flat
-import Sheaf.RingTheory.ClosedFiberEquationRemoval
+import WeilConjectures.RingTheory.ClosedFiberEquationRemoval
 import WeilConjectures.RingTheory.FlatClosedFiberKernelRigidity
 
 /-! # Removing the equations of a regular closed fibre

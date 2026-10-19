@@ -12,7 +12,7 @@ public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.ExactSequence
 import WeilConjectures.RingTheory.DepthLeSupportDimension
-import Sheaf.RingTheory.CohenMacaulayFreeResolutionConstruction
+import WeilConjectures.RingTheory.CohenMacaulayFreeResolutionConstruction
 import Sheaf.RingTheory.CohenMacaulayFreeResolutionMCM
 
 /-!

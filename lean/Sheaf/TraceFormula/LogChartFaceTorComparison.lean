@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.LogRegularSharpChart
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import WeilConjectures.RingTheory.TorKernelBoundaryConstruction
 public import Mathlib.Algebra.MonoidAlgebra.Basic
-import Sheaf.RingTheory.TorIdealKernelNaturality
+import WeilConjectures.RingTheory.TorIdealKernelNaturality
 import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
 import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
 

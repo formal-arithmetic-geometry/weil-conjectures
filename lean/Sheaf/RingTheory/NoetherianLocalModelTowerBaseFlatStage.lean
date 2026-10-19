@@ -11,7 +11,7 @@ import Mathlib.Algebra.Module.TransferInstance
 import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.Algebra.Category.Ring.FilteredColimits
 import Mathlib.CategoryTheory.Limits.Types.Filtered
-import Sheaf.RingTheory.ColimitEventuallyFlat
+import WeilConjectures.RingTheory.ColimitEventuallyFlat
 
 /-!
 # A base-flat stage in a Noetherian local model tower

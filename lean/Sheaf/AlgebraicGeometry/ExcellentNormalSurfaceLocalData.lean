@@ -15,7 +15,7 @@ public import Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.FiniteOfIsClosedOfClosedPoints
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.CompletionDimension
+import WeilConjectures.RingTheory.CompletionDimension
 import Sheaf.RingTheory.NormalOfFlatNormalFibers
 import Sheaf.RingTheory.GRingCompletionRegular
 import Sheaf.RingTheory.RegularRingNormal

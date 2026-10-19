@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.RingHom.Flat
 import Sheaf.RingTheory.FlatPolynomialAppendTensorFibre
 import Mathlib.RingTheory.MvPolynomial
 import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Sheaf.RingTheory.FlatAndFlatOfFlatFibreNoetherian
+import WeilConjectures.RingTheory.FlatAndFlatOfFlatFibreNoetherian
 
 /-!
 # Appending coordinates regular on the closed fibre preserves flatness

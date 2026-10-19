@@ -5,17 +5,17 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.RingTheory.NagataRing
+public import WeilConjectures.RingTheory.NagataRing
 public import WeilConjectures.RingTheory.AnalyticallyUnramified
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 import WeilConjectures.RingTheory.AdicCompletionRingEquiv
-import Sheaf.RingTheory.AnalyticallyUnramifiedPrincipalCriterion
+import WeilConjectures.RingTheory.AnalyticallyUnramifiedPrincipalCriterion
 import Sheaf.RingTheory.CompletionFiniteExtensionDecomposition
-import Sheaf.RingTheory.FiniteOverNagata
+import WeilConjectures.RingTheory.FiniteOverNagata
 import Sheaf.RingTheory.IntegralExtensionDimension
-import Sheaf.RingTheory.NagataDomainN2
-import Sheaf.RingTheory.NagataLocalization
+import WeilConjectures.RingTheory.NagataDomainN2
+import WeilConjectures.RingTheory.NagataLocalization
 import Sheaf.RingTheory.NormalDomainPrincipalQuotientAssociatedHeight
 import Sheaf.RingTheory.RegularLocalDimOneIffNormal
 

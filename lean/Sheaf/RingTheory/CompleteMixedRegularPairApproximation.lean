@@ -17,12 +17,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Sheaf.RingTheory.CohenRingsExist
-import Sheaf.RingTheory.CohenRingLiftToCompleteLocal
+import WeilConjectures.RingTheory.CohenRingsExist
+import WeilConjectures.RingTheory.CohenRingLiftToCompleteLocal
 import Mathlib.RingTheory.Henselian
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
-import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
-import Sheaf.RingTheory.RegularLocalQuotientKernelParameters
+import WeilConjectures.RingTheory.PowerSeriesFieldCohenRegularComplete
+import WeilConjectures.RingTheory.RegularLocalQuotientKernelParameters
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import WeilConjectures.RingTheory.PowerSeriesCombinedIdealCoefficients
 import Sheaf.RingTheory.CompleteLocalExcellent

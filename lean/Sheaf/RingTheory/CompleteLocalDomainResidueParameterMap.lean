@@ -10,9 +10,9 @@ public import Mathlib.Algebra.Module.Torsion.Basic
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
-import Sheaf.RingTheory.ExistsCoefficientSubring
-import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
-import Sheaf.RingTheory.PowerSeriesUniversalPropertyComplete
+import WeilConjectures.RingTheory.ExistsCoefficientSubring
+import WeilConjectures.RingTheory.PowerSeriesFieldCohenRegularComplete
+import WeilConjectures.RingTheory.PowerSeriesUniversalPropertyComplete
 import WeilConjectures.RingTheory.PowerSeriesQuotientVariables
 import Mathlib.RingTheory.LocalRing.Quotient
 import Mathlib.RingTheory.KrullDimension.Regular

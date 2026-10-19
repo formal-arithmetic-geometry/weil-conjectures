@@ -5,12 +5,12 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.RingTheory.NagataRing
+public import WeilConjectures.RingTheory.NagataRing
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegular
 import Sheaf.RingTheory.CompleteLocalQuotient
-import Sheaf.RingTheory.N2AscendsFiniteDomainExtension
+import WeilConjectures.RingTheory.N2AscendsFiniteDomainExtension
 import Sheaf.RingTheory.PowerSeriesN2
 import Sheaf.RingTheory.TateN2CompletePrincipal
 import Mathlib.RingTheory.MvPowerSeries.Equiv

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.ExcellentRing
 public import Sheaf.RingTheory.IndPrincipalZariski
-public import Sheaf.RingTheory.NagataRing
+public import WeilConjectures.RingTheory.NagataRing
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Mathlib.RingTheory.RingHom.Etale
@@ -17,9 +17,9 @@ import Mathlib.Algebra.Algebra.Shrink
 import Mathlib.RingTheory.EssentialFiniteness
 import Mathlib.RingTheory.TensorProduct.MvPolynomial
 import Mathlib.RingTheory.Noetherian.Basic
-import Sheaf.RingTheory.FiniteOverNagata
+import WeilConjectures.RingTheory.FiniteOverNagata
 import WeilConjectures.Mathlib.RingTheory.Etale.Weakly
-import Sheaf.RingTheory.NagataLocalization
+import WeilConjectures.RingTheory.NagataLocalization
 import Sheaf.RingTheory.PolynomialNagata
 import Sheaf.RingTheory.NagataOfWeaklyEtale
 import Sheaf.RingTheory.WeaklyEtaleLocalComponentDimension

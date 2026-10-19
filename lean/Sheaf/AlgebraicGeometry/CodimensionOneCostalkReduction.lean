@@ -30,8 +30,8 @@ import Sheaf.RingTheory.IndEtaleStability
 import Sheaf.RingTheory.ExcellentOfWeaklyEtale
 import WeilConjectures.RingTheory.QuotientHenselianPair
 import Sheaf.RingTheory.QuasiExcellentNagata
-import Sheaf.RingTheory.NagataDomainN2
-import Sheaf.RingTheory.JapaneseDomain
+import WeilConjectures.RingTheory.NagataDomainN2
+import WeilConjectures.RingTheory.JapaneseDomain
 import Sheaf.AlgebraicGeometry.IntegralClosureDedekindSurjectiveFibres
 import Sheaf.RingTheory.IntegralComponentHenselianPermanence
 import WeilConjectures.AlgebraicGeometry.Regular

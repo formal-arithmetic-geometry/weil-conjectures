@@ -9,8 +9,8 @@ public import Mathlib.Algebra.Polynomial.AlgebraMap
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.AdicCompletion.Algebra
-public import Sheaf.RingTheory.FormallySmoothAdic
-import Sheaf.RingTheory.FormallySmoothAdicCompletion
+public import WeilConjectures.RingTheory.FormallySmoothAdic
+import WeilConjectures.RingTheory.FormallySmoothAdicCompletion
 import Mathlib.RingTheory.Smooth.Basic
 
 /-!

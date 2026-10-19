@@ -5,10 +5,10 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.RingTheory.PowerSeriesCohenFormallySmoothAdic
+public import WeilConjectures.RingTheory.PowerSeriesCohenFormallySmoothAdic
 public import Mathlib.Algebra.Algebra.ZMod
-import Sheaf.RingTheory.ExistsLiftOfFieldCharP
-import Sheaf.RingTheory.PowerSeriesUniversalPropertyComplete
+import WeilConjectures.RingTheory.ExistsLiftOfFieldCharP
+import WeilConjectures.RingTheory.PowerSeriesUniversalPropertyComplete
 import Mathlib.RingTheory.Noetherian.Nilpotent
 
 /-!

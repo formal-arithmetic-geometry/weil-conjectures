@@ -6,7 +6,7 @@ Authors: SHEAF group E1
 module
 
 public import Mathlib.RingTheory.LocalRing.RingHom.Basic
-public import Sheaf.RingTheory.FormallySmoothAdic
+public import WeilConjectures.RingTheory.FormallySmoothAdic
 public import Sheaf.RingTheory.GRing
 import Sheaf.RingTheory.CompleteLocalQuotient
 import Sheaf.RingTheory.FormallySmoothAdicClosedFiber

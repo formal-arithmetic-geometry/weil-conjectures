@@ -9,7 +9,7 @@ public import WeilConjectures.RingTheory.PairHenselization
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.RingHom.FaithfullyFlat
-import Sheaf.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.PairHenselizationFlatQuotients
 import WeilConjectures.RingTheory.PairHenselizationCompletionData
 import Sheaf.RingTheory.PairHenselizationCompletionFaithfullyFlat

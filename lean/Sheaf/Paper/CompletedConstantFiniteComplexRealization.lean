@@ -21,12 +21,12 @@ import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Mathlib.Algebra.Module.FinitePresentation
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.AdicCompletion.Completeness
-import Sheaf.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Mathlib.RingTheory.AdicCompletion.Algebra
 import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.Paper.ConstantModuleSectionProperties
-import Sheaf.RingTheory.FiniteFreeResolution
-import Sheaf.RingTheory.FiniteModuleComplete
+import WeilConjectures.RingTheory.FiniteFreeResolution
+import WeilConjectures.RingTheory.FiniteModuleComplete
 import Mathlib.RingTheory.AdicCompletion.Basic
 import Mathlib.RingTheory.Finiteness.Defs
 import Sheaf.RingTheory.LimitFlatModules
@@ -41,8 +41,6 @@ import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 import Sheaf.Paper.CompletedConstantSheafReduction
 import Sheaf.Paper.ConstantCompletionEquivalence
-import WeilConjectures.RingTheory.AdicCompletionNoetherian
-import WeilConjectures.RingTheory.FiniteModuleComplete
 /-!
 # Completed constant realization of finite complexes
 Source: Stacks Project, proetale.tex, Tags 09BT and 09BV; sites-modules.tex,

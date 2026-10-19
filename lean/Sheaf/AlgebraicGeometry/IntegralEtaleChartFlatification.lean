@@ -20,8 +20,8 @@ public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Sheaf.RingTheory.JapaneseDomain
-import Sheaf.RingTheory.NagataRing
+import WeilConjectures.RingTheory.JapaneseDomain
+import WeilConjectures.RingTheory.NagataRing
 import Sheaf.AlgebraicGeometry.ReducedNormalization
 import Sheaf.RingTheory.QuasiExcellentNagata
 import Sheaf.AlgebraicGeometry.EtaleNormalComponents

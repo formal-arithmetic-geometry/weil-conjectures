@@ -90,13 +90,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.AdjoinSingletonSplittingPolynomialCover",
-  "file": "lean/Sheaf/RingTheory/AdjoinSingletonSplittingPolynomialCover.lean",
+  "module": "WeilConjectures.RingTheory.AdjoinSingletonSplittingPolynomialCover",
+  "file": "lean/WeilConjectures/RingTheory/AdjoinSingletonSplittingPolynomialCover.lean",
   "declaration": "exists_adjoin_singleton_splitting_polynomial_cover",
   "statement": "theorem exists_adjoin_singleton_splitting_polynomial_cover\n    (R : Type u) (K : Type v) [CommRing R] [IsDomain R] [IsIntegrallyClosed R]\n    [Field K] [Algebra R K] [IsFractionRing R K] (hR : IsNagataRing R) (x : K)\n    (m : Ideal (Algebra.adjoin R ({x} : Set K))) [m.IsMaximal] :\n    ∃ (R' K' : Type (max u v)) (_ : CommRing R') (_ : IsDomain R')\n      (_ : IsIntegrallyClosed R') (_ : Field K') (_ : Algebra R' K')\n      (_ : IsFractionRing R' K'),\n      IsNagataRing R' ∧ ∃ (z : K') (M : Submonoid (Algebra.adjoin R' ({z} : Set K'))),\n        M ≤ nonZeroDivisors (Algebra.adjoin R' ({z} : Set K')) ∧\n        ∃ (_ : Algebra (Localization.AtPrime m) (Localization M)),\n          Function.Injective (algebraMap (Localization.AtPrime m) (Localization M)) ∧\n          Module.Finite (Localization.AtPrime m) (Localization M) ∧\n          ∃ (d : ℕ) (roots : Fin d → R'), 0 < d ∧\n            ∀ (q : Ideal (Localization M)) [q.IsMaximal],\n              (q.comap (algebraMap (Algebra.adjoin R' ({z} : Set K'))\n                (Localization M))).IsMaximal ∧\n              (∏ i : Fin d,\n                ((⟨z, Algebra.subset_adjoin (Set.mem_singleton z)⟩ :\n                  Algebra.adjoin R' ({z} : Set K')) -\n                  algebraMap R' (Algebra.adjoin R' ({z} : Set K')) (roots i))) ∈\n                q.comap (algebraMap (Algebra.adjoin R' ({z} : Set K'))\n                  (Localization M))",
   "branch": "sheaf-dag",
   "by": "E1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.AdjoinSingletonSplittingPolynomialCover; points at its upstream twin."
  },
  "proof_deps": [
   "lem-weil-pbc-monogenic-finite-split-algebra",

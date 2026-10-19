@@ -33,8 +33,8 @@ import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import WeilConjectures.AlgebraicGeometry.WeilPbcNormalizationInResidueFieldExtension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 import Sheaf.RingTheory.QuasiExcellentNagata
-import Sheaf.RingTheory.NagataRing
-import Sheaf.RingTheory.JapaneseDomain
+import WeilConjectures.RingTheory.NagataRing
+import WeilConjectures.RingTheory.JapaneseDomain
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 import WeilConjectures.AlgebraicGeometry.Coherent

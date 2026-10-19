@@ -5,10 +5,10 @@ Authors: SHEAF group H1
 -/
 module
 
-public import Sheaf.RingTheory.NagataRing
-import Sheaf.RingTheory.FiniteOverNagata
+public import WeilConjectures.RingTheory.NagataRing
+import WeilConjectures.RingTheory.FiniteOverNagata
 import Sheaf.RingTheory.PolynomialNagata
-import Sheaf.RingTheory.NagataDomainN2
+import WeilConjectures.RingTheory.NagataDomainN2
 
 /-!
 # Nagata rings are universally Japanese

@@ -7,8 +7,8 @@ module
 
 public import Mathlib.RingTheory.TensorProduct.Basic
 import Mathlib.RingTheory.TensorProduct.Maps
-import Sheaf.RingTheory.FormallySmoothAdicUniverseLift
-public import Sheaf.RingTheory.FormallySmoothAdic
+import WeilConjectures.RingTheory.FormallySmoothAdicUniverseLift
+public import WeilConjectures.RingTheory.FormallySmoothAdic
 
 /-!
 # Base change of formal smoothness for an adic topology

@@ -14,7 +14,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Sheaf.RingTheory.CohenPowerSeriesPresentation
+import WeilConjectures.RingTheory.CohenPowerSeriesPresentation
 import Sheaf.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import Sheaf.Algebra.Homology.HomComplex

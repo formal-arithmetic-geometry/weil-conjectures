@@ -4,7 +4,7 @@ public import Sheaf.RingTheory.GRing
 public import WeilConjectures.RingTheory.CohenRing
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Sheaf.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.FibreRingNoetherian
 
 /-! Noetherianity of the generic formal fibre of a regular power-series model.

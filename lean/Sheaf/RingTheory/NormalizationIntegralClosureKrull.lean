@@ -7,7 +7,7 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
 import WeilConjectures.RingTheory.InjectivePiLocalizationAssociatedPrimes
 import WeilConjectures.RingTheory.IntegralClosureFiniteNormalProduct
-import Sheaf.RingTheory.JapaneseDomain
+import WeilConjectures.RingTheory.JapaneseDomain
 import Sheaf.RingTheory.KrullAkizukiNoetherian
 import Sheaf.RingTheory.NagataOfCompleteLocal
 import Sheaf.RingTheory.NormalDomainPrincipalQuotientAssociatedHeight

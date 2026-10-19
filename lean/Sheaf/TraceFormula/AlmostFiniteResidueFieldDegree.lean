@@ -23,7 +23,7 @@ import Mathlib.RingTheory.AdicCompletion.LocalRing
 import WeilConjectures.RingTheory.AdicCompletionNoetherianOfQuotient
 import Sheaf.RingTheory.NormalizationCompletedBranchLift
 import Sheaf.RingTheory.NagataOfCompleteLocal
-import Sheaf.RingTheory.JapaneseDomain
+import WeilConjectures.RingTheory.JapaneseDomain
 
 /-!
 # Finite residue field degrees for almost finite integral extensions

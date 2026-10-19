@@ -124,13 +124,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.ClosedFiberKernelParameterSelection",
-  "file": "lean/Sheaf/RingTheory/ClosedFiberKernelParameterSelection.lean",
+  "module": "WeilConjectures.RingTheory.ClosedFiberKernelParameterSelection",
+  "file": "lean/WeilConjectures/RingTheory/ClosedFiberKernelParameterSelection.lean",
   "declaration": "RingHom.exists_closedFiber_kernel_parameters",
   "statement": "theorem exists_closedFiber_kernel_parameters\n    (A : Type u) (B : Type v) (R : Type w) (S : Type x)\n    [CommRing A] [CommRing B] [CommRing R] [CommRing S]\n    [IsLocalRing A] [IsLocalRing B] [IsNoetherianRing A] [IsNoetherianRing B]\n    [IsRegularLocalRing R] [IsRegularLocalRing S]\n    (f : A →+* B) [IsLocalHom f]\n    (q : R →+* A) [IsLocalHom q] (b : S →+* B) [IsLocalHom b]\n    (i : R →+* S) [IsLocalHom i]\n    (hq : Function.Surjective q) (hb : Function.Surjective b)\n    (hcomm : b.comp i = f.comp q)\n    (t : List R) (z : List S)\n    (ht : IsRegularSystemOfParameters t)\n    (hz : IsRegularSystemOfParameters (t.map i ++ z)) :\n    letI : Algebra A B := f.toAlgebra\n    let I : Ideal B := (maximalIdeal A).map f\n    letI : Algebra (A ⧸ maximalIdeal A) (B ⧸ I) :=\n      Ideal.Quotient.algebraQuotientOfLEComap (Ideal.le_comap_map :\n        maximalIdeal A ≤ I.comap (algebraMap A B))\n    Algebra.FormallySmoothAdic (A ⧸ maximalIdeal A) (B ⧸ I)\n      ((maximalIdeal B).map (Ideal.Quotient.mk I)) →\n    ∃ x y : List S,\n      IsRegularSystemOfParameters (x ++ (t.map i ++ y)) ∧\n      Ideal.ofList x ≤ RingHom.ker b ∧\n      RingHom.ker ((Ideal.Quotient.mk I).comp b) =\n        Ideal.ofList x ⊔ (maximalIdeal R).map i",
   "branch": "sheaf-dag",
   "by": "H3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.ClosedFiberKernelParameterSelection; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

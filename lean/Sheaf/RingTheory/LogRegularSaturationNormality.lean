@@ -11,7 +11,7 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import Sheaf.RingTheory.CompletedMonoidSupportProjection
-import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
+import WeilConjectures.RingTheory.PowerSeriesFieldCohenRegularComplete
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import Sheaf.RingTheory.RegularLocalLocalization
 import Sheaf.RingTheory.RegularRingNormal

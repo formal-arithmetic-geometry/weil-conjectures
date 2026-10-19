@@ -3,7 +3,7 @@ module
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Flat.Basic
-import Sheaf.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.LimitFlatModules
 import Mathlib.RingTheory.AdicCompletion.Completeness
 import Mathlib.LinearAlgebra.TensorProduct.Quotient

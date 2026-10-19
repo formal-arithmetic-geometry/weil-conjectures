@@ -10,9 +10,9 @@ public import Sheaf.RingTheory.LogRegularSaturationNormality
 public import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Sheaf.RingTheory.FormalMonoidRingDimension
 import Sheaf.RingTheory.StrictHenselizationNoetherian
-import Sheaf.RingTheory.CompletionDimension
-import Sheaf.RingTheory.CohenPowerSeriesPresentation
-import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
+import WeilConjectures.RingTheory.CompletionDimension
+import WeilConjectures.RingTheory.CohenPowerSeriesPresentation
+import WeilConjectures.RingTheory.PowerSeriesFieldCohenRegularComplete
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Mathlib.RingTheory.AdicCompletion.Functoriality
 import Mathlib.RingTheory.AdicCompletion.Completeness

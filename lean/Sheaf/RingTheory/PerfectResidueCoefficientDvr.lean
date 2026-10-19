@@ -10,12 +10,12 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.Algebra.CharP.Defs
 public import Mathlib.FieldTheory.Perfect
 public import Mathlib.RingTheory.AdicCompletion.Basic
-public import Sheaf.RingTheory.FormallySmoothAdic
+public import WeilConjectures.RingTheory.FormallySmoothAdic
 import Sheaf.RingTheory.FormallySmoothAdicLift
 import Sheaf.RingTheory.FormallySmoothAdicFlat
 import Sheaf.RingTheory.CompleteLocalQuotient
-import Sheaf.RingTheory.FormallySmoothAdicLiftIntoComplete
-import Sheaf.RingTheory.ExistsLiftOfFieldCharP
+import WeilConjectures.RingTheory.FormallySmoothAdicLiftIntoComplete
+import WeilConjectures.RingTheory.ExistsLiftOfFieldCharP
 
 /-!
 # Perfect-residue coefficient DVR extension and local lifting

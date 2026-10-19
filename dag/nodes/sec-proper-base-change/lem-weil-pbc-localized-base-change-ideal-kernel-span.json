@@ -102,13 +102,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.LocalizedBaseChangeIdealKernelSpan",
-  "file": "lean/Sheaf/RingTheory/LocalizedBaseChangeIdealKernelSpan.lean",
+  "module": "WeilConjectures.RingTheory.LocalizedBaseChangeIdealKernelSpan",
+  "file": "lean/WeilConjectures/RingTheory/LocalizedBaseChangeIdealKernelSpan.lean",
   "declaration": "Module.mem_span_ideal_kernel_localized_baseChange",
   "statement": "theorem mem_span_ideal_kernel_localized_baseChange\n    {R : Type u} {S : Type v} {R' : Type w} {S' : Type z}\n    [CommRing R] [CommRing S] [CommRing R'] [CommRing S']\n    [Algebra R S] [Algebra R R'] [Algebra S S'] [Algebra R' S'] [Algebra R S']\n    [IsScalarTower R S S'] [IsScalarTower R R' S']\n    (I : Ideal R)\n    (M : Type t) [AddCommGroup M] [Module S M] [Module R M]\n    [IsScalarTower R S M]\n    (hloc : ∃ (q : S ⊗[R] R' →+* S') (W : Submonoid (S ⊗[R] R')),\n      (∀ (s : S) (r' : R'), q (s ⊗ₜ[R] r') =\n        algebraMap S S' s * algebraMap R' S' r') ∧\n      (letI := q.toAlgebra; IsLocalization W S'))\n    (hquot : Module.Flat (R ⧸ I) ((R ⧸ I) ⊗[R] M))\n    (θ : I ⊗[R] M →+ (I.map (algebraMap R R')) ⊗[R'] (S' ⊗[S] M))\n    (hθ : ∀ (a : I) (x : M), θ (a ⊗ₜ[R] x) =\n      (⟨algebraMap R R' a, Ideal.mem_map_of_mem (algebraMap R R') a.property⟩ :\n        I.map (algebraMap R R')) ⊗ₜ[R'] ((1 : S') ⊗ₜ[S] x))\n    (z : (I.map (algebraMap R R')) ⊗[R'] (S' ⊗[S] M))\n    (hz : TensorProduct.lift\n      ((LinearMap.lsmul R' (S' ⊗[S] M)).comp (I.map (algebraMap R R')).subtype) z = 0) :\n    TensorProduct.comm R' (I.map (algebraMap R R')) (S' ⊗[S] M) z ∈\n      Submodule.span S'\n        ((fun k : I ⊗[R] M ↦\n          TensorProduct.comm R' (I.map (algebraMap R R')) (S' ⊗[S] M) (θ k)) ''\n          (LinearMap.ker (TensorProduct.lift ((LinearMap.lsmul R M).comp I.subtype)) :\n            Set (I ⊗[R] M)))",
   "branch": "sheaf-dag",
   "by": "Q1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.LocalizedBaseChangeIdealKernelSpan; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

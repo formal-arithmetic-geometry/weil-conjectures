@@ -20,7 +20,7 @@ import Mathlib.RingTheory.FiniteType
 import Mathlib.RingTheory.Localization.Finiteness
 import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.Algebra.Category.Ring.FilteredColimits
-import Sheaf.RingTheory.ColimitEventuallyFlat
+import WeilConjectures.RingTheory.ColimitEventuallyFlat
 import Sheaf.RingTheory.FlatModuleAtPrime
 
 /-! # A flat point in a supplied finite-type approximation

@@ -10,8 +10,8 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 
 import Mathlib.RingTheory.AdicCompletion.Completeness
-import Sheaf.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.FiniteModuleComplete
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.RingTheory.FiniteModuleComplete
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import all Sheaf.AlgebraicGeometry.CoherentAffineMapSupportRadical
 

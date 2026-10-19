@@ -5,13 +5,13 @@ Authors: SHEAF group V2
 -/
 module
 
-public import Sheaf.RingTheory.FormallySmoothAdic
+public import WeilConjectures.RingTheory.FormallySmoothAdic
 public import Mathlib.RingTheory.AdicCompletion.LocalRing
 public import Mathlib.RingTheory.Noetherian.Defs
 import Mathlib.RingTheory.Noetherian.Basic
-import Sheaf.RingTheory.LocalCompletionQuotient
-import Sheaf.RingTheory.FormallySmoothAdicCompletion
-import Sheaf.RingTheory.FormallySmoothAdicRingEquiv
+import WeilConjectures.RingTheory.LocalCompletionQuotient
+import WeilConjectures.RingTheory.FormallySmoothAdicCompletion
+import WeilConjectures.RingTheory.FormallySmoothAdicRingEquiv
 
 /-! # The formally smooth closed fibre after completion
 

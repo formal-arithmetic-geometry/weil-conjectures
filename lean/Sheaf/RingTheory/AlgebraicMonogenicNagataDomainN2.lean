@@ -5,11 +5,11 @@ Authors: SHEAF group S2
 -/
 module
 
-public import Sheaf.RingTheory.NagataRing
+public import WeilConjectures.RingTheory.NagataRing
 public import Mathlib.RingTheory.Algebraic.Defs
-import Sheaf.RingTheory.FiniteOverNagata
+import WeilConjectures.RingTheory.FiniteOverNagata
 import Sheaf.RingTheory.IsN1AdjoinSingleton
-import Sheaf.RingTheory.NagataDomainN2
+import WeilConjectures.RingTheory.NagataDomainN2
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 
 /-!

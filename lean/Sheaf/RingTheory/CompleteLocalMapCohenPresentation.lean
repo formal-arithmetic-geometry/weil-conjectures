@@ -11,8 +11,8 @@ public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.RingTheory.RingHom.Flat
 public import WeilConjectures.RingTheory.CohenRing
 public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
-import Sheaf.RingTheory.CohenPowerSeriesPresentation
-import Sheaf.RingTheory.CohenPowerSeriesParameterExtension
+import WeilConjectures.RingTheory.CohenPowerSeriesPresentation
+import WeilConjectures.RingTheory.CohenPowerSeriesParameterExtension
 import Mathlib.RingTheory.AdicCompletion.Topology
 import Mathlib.Algebra.Ring.ULift
 import Mathlib.Algebra.CharP.Algebra

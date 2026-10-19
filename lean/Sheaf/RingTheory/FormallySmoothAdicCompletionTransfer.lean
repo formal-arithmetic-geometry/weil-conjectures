@@ -3,8 +3,8 @@ module
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
-public import Sheaf.RingTheory.FormallySmoothAdic
-import Sheaf.RingTheory.FormallySmoothAdicCompletion
+public import WeilConjectures.RingTheory.FormallySmoothAdic
+import WeilConjectures.RingTheory.FormallySmoothAdicCompletion
 import Mathlib.RingTheory.AdicCompletion.Completeness
 import Mathlib.RingTheory.LocalRing.RingHom.Basic
 

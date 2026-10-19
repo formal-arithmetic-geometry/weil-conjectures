@@ -5,7 +5,7 @@ Authors: SHEAF group V2
 -/
 module
 
-public import Sheaf.RingTheory.FormallySmoothAdic
+public import WeilConjectures.RingTheory.FormallySmoothAdic
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 import Sheaf.RingTheory.CompleteLocalMapCohenPresentation
 import Sheaf.RingTheory.FlatClosedFiberPowerSeriesModel
 import Sheaf.RingTheory.PowerSeriesParameterMapFormallySmoothAdic
-import Sheaf.RingTheory.FormallySmoothAdicUniverseLift
+import WeilConjectures.RingTheory.FormallySmoothAdicUniverseLift
 import Mathlib.Algebra.CharP.Algebra
 
 /-! # The complete case of the flat closed-fibre criterion

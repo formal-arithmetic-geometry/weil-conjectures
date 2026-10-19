@@ -13,9 +13,9 @@ import Mathlib.Algebra.CharP.Invertible
 import Mathlib.RingTheory.RegularLocalRing.Polynomial
 import Sheaf.RingTheory.LocalizationOfRegularRing
 import Mathlib.RingTheory.QuasiFinite.Basic
-import Sheaf.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegular
-import Sheaf.RingTheory.CompletionRegularLocal
+import WeilConjectures.RingTheory.CompletionRegularLocal
 import Sheaf.RingTheory.FormalFibreQuasiFiniteAscent
 import Sheaf.RingTheory.PowerSeriesPolynomialFormalFiber
 import Sheaf.RingTheory.RegularLocalLocalization

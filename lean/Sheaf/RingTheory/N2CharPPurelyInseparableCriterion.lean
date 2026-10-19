@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.RingTheory.JapaneseDomain
+public import WeilConjectures.RingTheory.JapaneseDomain
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
 public import Mathlib.Algebra.CharP.Basic
 import WeilConjectures.FieldTheory.NormalExtensionFixedField

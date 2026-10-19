@@ -5,11 +5,11 @@ Authors: SHEAF group S2
 -/
 module
 
-public import Sheaf.RingTheory.NagataRing
+public import WeilConjectures.RingTheory.NagataRing
 import Sheaf.RingTheory.AlgebraicMonogenicNagataDomainN2
-import Sheaf.RingTheory.NagataDomainN2
+import WeilConjectures.RingTheory.NagataDomainN2
 import Sheaf.RingTheory.PolynomialRingN2
-import Sheaf.RingTheory.N2AscendsFiniteDomainExtension
+import WeilConjectures.RingTheory.N2AscendsFiniteDomainExtension
 import Mathlib.RingTheory.Algebraic.Basic
 
 /-!

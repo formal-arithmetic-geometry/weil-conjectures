@@ -10,7 +10,7 @@ public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 import Mathlib.RingTheory.RegularLocalRing.Polynomial
 import Sheaf.RingTheory.LCIRegularSequenceGlobalCompleteIntersection
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
-import Sheaf.RingTheory.RegularLocalQuotientKernelParameters
+import WeilConjectures.RingTheory.RegularLocalQuotientKernelParameters
 import Sheaf.RingTheory.SmoothOverFieldRegularLocal
 import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
 import WeilConjectures.Mathlib.Topology.KrullDimension

@@ -5,16 +5,16 @@ Authors: SHEAF group S1
 -/
 module
 
-public import Sheaf.RingTheory.FormallySmoothAdic
+public import WeilConjectures.RingTheory.FormallySmoothAdic
 public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 import Sheaf.RingTheory.CompleteLocalQuotient
 import WeilConjectures.RingTheory.FlatOverRegular
-import Sheaf.RingTheory.RegularLocalOfFormallySmoothAdic
+import WeilConjectures.RingTheory.RegularLocalOfFormallySmoothAdic
 import Sheaf.RingTheory.RegularFiberKernelParameterLift
-import Sheaf.RingTheory.FormallySmoothAdicRingEquiv
+import WeilConjectures.RingTheory.FormallySmoothAdicRingEquiv
 
 /-!
 # Removing the equations of a regular closed fibre

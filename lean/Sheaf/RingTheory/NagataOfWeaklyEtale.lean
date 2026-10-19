@@ -5,10 +5,10 @@ Authors: SHEAF group Q33
 -/
 module
 
-public import Sheaf.RingTheory.NagataRing
+public import WeilConjectures.RingTheory.NagataRing
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Sheaf.RingTheory.IndPrincipalZariski
-import Sheaf.RingTheory.JapaneseDomain
+import WeilConjectures.RingTheory.JapaneseDomain
 import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import WeilConjectures.AlgebraicGeometry.AffineChartBaseChangeIso
 import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
@@ -25,7 +25,6 @@ import Mathlib.CategoryTheory.MorphismProperty.Composition
 import Mathlib.CategoryTheory.MorphismProperty.Limits
 import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 import Sheaf.RingTheory.IndEtaleUniverseTransport
-import WeilConjectures.AlgebraicGeometry.AffineChartBaseChangeIso
 
 /-! # Nagata ascent along weakly etale ring maps
 

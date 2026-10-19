@@ -5,7 +5,7 @@ Authors: SHEAF group A3
 -/
 module
 
-public import Sheaf.RingTheory.FormallySmoothAdic
+public import WeilConjectures.RingTheory.FormallySmoothAdic
 import Mathlib.RingTheory.Ideal.Quotient.PowTransition
 
 /-! # Reduction to square-zero kernels annihilated by the adic ideal

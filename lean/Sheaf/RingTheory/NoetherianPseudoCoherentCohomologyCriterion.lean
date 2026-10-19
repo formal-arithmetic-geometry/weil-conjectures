@@ -9,7 +9,7 @@ public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 import Mathlib.RingTheory.Noetherian.Basic
-import Sheaf.RingTheory.FiniteFreeResolution
+import WeilConjectures.RingTheory.FiniteFreeResolution
 import Sheaf.RingTheory.PseudoCoherentOfCohomology
 import Mathlib.Algebra.Category.ModuleCat.Projective
 import Mathlib.CategoryTheory.Abelian.Projective.Extend

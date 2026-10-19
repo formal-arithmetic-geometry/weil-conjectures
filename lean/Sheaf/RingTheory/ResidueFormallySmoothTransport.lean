@@ -1,8 +1,8 @@
 module
 
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-public import Sheaf.RingTheory.FormallySmoothAdic
-import Sheaf.RingTheory.FormallySmoothAdicRingEquiv
+public import WeilConjectures.RingTheory.FormallySmoothAdic
+import WeilConjectures.RingTheory.FormallySmoothAdicRingEquiv
 
 @[expose] public section
 

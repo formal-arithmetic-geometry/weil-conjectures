@@ -6,7 +6,7 @@ Authors: SHEAF group J1
 module
 
 public import Sheaf.RingTheory.GRing
-import Sheaf.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.FlatLocalCompletionIso
 import Sheaf.RingTheory.RegularLocalMaximal
 import Sheaf.RingTheory.RegularPermanence

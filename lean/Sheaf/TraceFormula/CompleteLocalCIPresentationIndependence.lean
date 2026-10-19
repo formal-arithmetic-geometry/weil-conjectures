@@ -9,13 +9,13 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Regular.RegularSequence
 import Sheaf.AlgebraicGeometry.IsRegularScheme
-import Sheaf.RingTheory.CohenStructurePowerSeriesSurjection
+import WeilConjectures.RingTheory.CohenStructurePowerSeriesSurjection
 import Sheaf.RingTheory.CompletionRegularKernelPreservation
-import Sheaf.RingTheory.CompletionRegularLocal
-import Sheaf.RingTheory.FormallySmoothAdicLiftIntoComplete
-import Sheaf.RingTheory.PowerSeriesAdicEvaluation
+import WeilConjectures.RingTheory.CompletionRegularLocal
+import WeilConjectures.RingTheory.FormallySmoothAdicLiftIntoComplete
+import WeilConjectures.RingTheory.PowerSeriesAdicEvaluation
 import Sheaf.RingTheory.PowerSeriesFieldCohenFsAdic
-import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
+import WeilConjectures.RingTheory.PowerSeriesFieldCohenRegularComplete
 import Sheaf.TraceFormula.RegularLocalSurjectionKernelComparison
 
 /-!

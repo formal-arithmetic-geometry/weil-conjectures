@@ -24,14 +24,14 @@ import Sheaf.RingTheory.HenselizationUniversalProperty
 import Sheaf.RingTheory.HenselianFactorizationCriterion
 import Sheaf.RingTheory.PairHenselizationNoetherianCompletion
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.RingTheory.CompletionDimension
+import WeilConjectures.RingTheory.CompletionDimension
 import Sheaf.TraceFormula.HenselizationPrimeIndEtale
 import Sheaf.RingTheory.IndEtaleStability
 import Sheaf.RingTheory.QuasiExcellentNagata
 import Sheaf.RingTheory.GRingOfWeaklyEtale
 import Sheaf.RingTheory.NagataJTwoOfWeaklyEtale
-import Sheaf.RingTheory.NagataRing
-import Sheaf.RingTheory.JapaneseDomain
+import WeilConjectures.RingTheory.NagataRing
+import WeilConjectures.RingTheory.JapaneseDomain
 import Sheaf.AlgebraicGeometry.ComponentwiseNormalizationAffineCharts
 import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct
 import Sheaf.RingTheory.FiniteTypeGRing
@@ -41,7 +41,7 @@ import Sheaf.RingTheory.RegularRingNormal
 import Sheaf.RingTheory.NormalOfFlatNormalFibers
 import Mathlib.RingTheory.RingHom.Flat
 import Sheaf.RingTheory.CompletionFiniteExtension
-import Sheaf.RingTheory.LocalCompletionQuotient
+import WeilConjectures.RingTheory.LocalCompletionQuotient
 import Sheaf.RingTheory.RatliffFormalCatenarity
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import Sheaf.AlgebraicGeometry.ExcellentNormalizationPreparation

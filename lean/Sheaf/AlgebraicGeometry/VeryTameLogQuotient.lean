@@ -14,7 +14,7 @@ import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct
 import Sheaf.AlgebraicGeometry.InvertibleKummerChartLogRegular
 import Sheaf.AlgebraicGeometry.LogRegularCompletedChart
 import Sheaf.RingTheory.LogRegularSaturationNormality
-import Sheaf.RingTheory.CompletionDimension
+import WeilConjectures.RingTheory.CompletionDimension
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedImmersionCartesian
 import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
 import Sheaf.AlgebraicGeometry.IndEtaleStrictLocalInvariance

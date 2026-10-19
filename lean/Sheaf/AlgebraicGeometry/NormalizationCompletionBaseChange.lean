@@ -19,7 +19,7 @@ import Sheaf.AlgebraicGeometry.ComponentwiseNormalizationAffineCharts
 import Sheaf.RingTheory.FibrePrimesResidueFields
 import WeilConjectures.RingTheory.FormalGlueingData
 import Sheaf.RingTheory.FormalGlueingFiniteAlgebras
-import Sheaf.RingTheory.JapaneseDomain
+import WeilConjectures.RingTheory.JapaneseDomain
 import Sheaf.RingTheory.NagataOfCompleteLocal
 import Sheaf.RingTheory.NagataUniversallyJapanese
 import WeilConjectures.RingTheory.AdicCompletionNoetherian

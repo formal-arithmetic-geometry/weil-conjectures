@@ -21,7 +21,7 @@ import Sheaf.RingTheory.RegularLocalUFDBoundaryFactorization
 import Mathlib.RingTheory.LocalRing.Module
 import Mathlib.RingTheory.RegularLocalRing.Defs
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
-import Sheaf.RingTheory.RegularLocalQuotientKernelParameters
+import WeilConjectures.RingTheory.RegularLocalQuotientKernelParameters
 
 /-!
 # Divisorial charts of regular strict normal crossings pairs

@@ -30,7 +30,7 @@ import Sheaf.RingTheory.RegularSequenceKoszulRegular
 import Sheaf.RingTheory.RegularSequenceConormal
 import Sheaf.RingTheory.KoszulRegularSequenceDualComplex
 import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
-import Sheaf.RingTheory.FiniteFreeResolution
+import WeilConjectures.RingTheory.FiniteFreeResolution
 import WeilConjectures.RingTheory.RingPseudoCoherent
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Sheaf.Algebra.Homology.FlatResolutionTorComparison

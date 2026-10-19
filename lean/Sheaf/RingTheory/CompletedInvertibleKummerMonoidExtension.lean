@@ -9,8 +9,8 @@ public import Sheaf.RingTheory.FormalMonoidExtensionModel
 import Sheaf.TraceFormula.FsFaceSharpening
 import Sheaf.RingTheory.FiniteCompletionFactorIdempotent
 import Mathlib.RingTheory.FiniteType
-import Sheaf.RingTheory.LocalCompletionQuotient
-import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
+import WeilConjectures.RingTheory.LocalCompletionQuotient
+import WeilConjectures.RingTheory.PowerSeriesFieldCohenRegularComplete
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.FiniteEtaleFormalMonoidCoefficientLift
 import Sheaf.RingTheory.FormalMonoidImplicitElimination

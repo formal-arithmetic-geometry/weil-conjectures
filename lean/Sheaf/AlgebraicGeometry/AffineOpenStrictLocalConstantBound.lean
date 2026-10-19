@@ -23,7 +23,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Mathlib.RingTheory.Henselian
-import Sheaf.RingTheory.CompletionDimension
+import WeilConjectures.RingTheory.CompletionDimension
 import Sheaf.RingTheory.GRing
 import Sheaf.AlgebraicGeometry.RegularEtaleDirectImageBaseChange
 import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage

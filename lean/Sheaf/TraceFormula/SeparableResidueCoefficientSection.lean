@@ -5,8 +5,8 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 import Mathlib.RingTheory.Etale.Field
-import Sheaf.RingTheory.FormallySmoothAdic
-import Sheaf.RingTheory.FormallySmoothAdicLiftIntoComplete
+import WeilConjectures.RingTheory.FormallySmoothAdic
+import WeilConjectures.RingTheory.FormallySmoothAdicLiftIntoComplete
 
 /-!
 # Coefficient-field section for a separable residue field

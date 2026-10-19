@@ -29,8 +29,8 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import WeilConjectures.Blowup.InvertibleCenter
 import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 import WeilConjectures.Blowup.Affine.ChartAlgebra
-import Sheaf.RingTheory.JapaneseDomain
-import Sheaf.RingTheory.NagataRing
+import WeilConjectures.RingTheory.JapaneseDomain
+import WeilConjectures.RingTheory.NagataRing
 import Sheaf.AlgebraicGeometry.NagataAffineOpensProjective
 import Sheaf.AlgebraicGeometry.NagataBoundaryDivisorCartier
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization

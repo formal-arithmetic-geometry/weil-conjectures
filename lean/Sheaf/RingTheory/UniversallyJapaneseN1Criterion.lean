@@ -6,8 +6,8 @@ Authors: SHEAF group Q42
 module
 
 public import Mathlib.RingTheory.FiniteType
-public import Sheaf.RingTheory.JapaneseDomain
-public import Sheaf.RingTheory.NagataRing
+public import WeilConjectures.RingTheory.JapaneseDomain
+public import WeilConjectures.RingTheory.NagataRing
 
 import Mathlib.RingTheory.DedekindDomain.IntegralClosure
 import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic

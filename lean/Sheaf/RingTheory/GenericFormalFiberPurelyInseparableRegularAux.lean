@@ -14,7 +14,7 @@ import Sheaf.RingTheory.PowerSeriesPolynomialFormalFiber
 import WeilConjectures.RingTheory.AdicCompletionRingEquiv
 import Sheaf.RingTheory.GeometricRegularityFieldIso
 import Sheaf.RingTheory.RegularLocalLocalization
-import Sheaf.RingTheory.CompletionRegularLocal
+import WeilConjectures.RingTheory.CompletionRegularLocal
 
 /-!
 # Regularity of the generic formal fibre in field and Cohen models

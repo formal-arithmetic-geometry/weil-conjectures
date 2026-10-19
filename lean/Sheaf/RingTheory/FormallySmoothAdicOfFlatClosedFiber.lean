@@ -5,12 +5,12 @@ Authors: SHEAF group H1
 -/
 module
 
-public import Sheaf.RingTheory.FormallySmoothAdic
+public import WeilConjectures.RingTheory.FormallySmoothAdic
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 import Mathlib.RingTheory.AdicCompletion.LocalRing
-import Sheaf.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.FlatCompletion
 import Sheaf.RingTheory.FormallySmoothAdicClosedFiberCompletion
 import Sheaf.RingTheory.FormallySmoothAdicOfFlatClosedFiberComplete

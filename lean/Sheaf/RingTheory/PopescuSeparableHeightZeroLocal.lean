@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 import Mathlib.RingTheory.FiniteStability
 import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.Algebra.Algebra.Shrink
-import Sheaf.FieldTheory.SeparableSmoothColimit
+import WeilConjectures.FieldTheory.SeparableSmoothColimit
 
 /-!
 # The localized zero-dimensional separable problem

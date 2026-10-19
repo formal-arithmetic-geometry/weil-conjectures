@@ -5,13 +5,13 @@ Authors: SHEAF group A3
 -/
 module
 
-public import Sheaf.RingTheory.FormallySmoothAdic
+public import WeilConjectures.RingTheory.FormallySmoothAdic
 public import WeilConjectures.RingTheory.CohenRing
 public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 public import Mathlib.RingTheory.MvPowerSeries.Basic
-import Sheaf.RingTheory.PowerSeriesUniversalPropertyComplete
-import Sheaf.RingTheory.PowerSeriesParameterQuotient
-import Sheaf.RingTheory.FieldCohenPowerSeriesFormallySmooth
+import WeilConjectures.RingTheory.PowerSeriesUniversalPropertyComplete
+import WeilConjectures.RingTheory.PowerSeriesParameterQuotient
+import WeilConjectures.RingTheory.FieldCohenPowerSeriesFormallySmooth
 import Mathlib.RingTheory.Noetherian.Nilpotent
 
 /-! # Ring lifts with prescribed parameter values

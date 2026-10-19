@@ -2,7 +2,7 @@ module
 public import Mathlib.Algebra.Polynomial.Basic
 public import Sheaf.RingTheory.GRing
 import Mathlib.RingTheory.Polynomial.Basic
-import Sheaf.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.FibreRingNoetherian
 @[expose] public section
 universe u

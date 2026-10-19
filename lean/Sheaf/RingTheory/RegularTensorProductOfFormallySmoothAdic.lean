@@ -4,12 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.RingTheory.FormallySmoothAdic
+public import WeilConjectures.RingTheory.FormallySmoothAdic
 public import Sheaf.RingTheory.GRing
 import Sheaf.RingTheory.FormallySmoothAdicBaseChange
 import Sheaf.RingTheory.PurelyInseparableBaseChangeLocalRing
 import Sheaf.RingTheory.RegularLocalLocalization
-import Sheaf.RingTheory.RegularLocalOfFormallySmoothAdic
+import WeilConjectures.RingTheory.RegularLocalOfFormallySmoothAdic
 
 /-! Intermediate regularity assertion for a purely inseparable base change.
 (blueprint: lem-weil-pbc-fs-adic-field-geometrically-regular-regular-base-change) -/

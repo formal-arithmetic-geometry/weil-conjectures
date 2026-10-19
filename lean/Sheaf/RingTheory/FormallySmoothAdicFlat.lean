@@ -5,7 +5,7 @@ Authors: SHEAF group G1
 -/
 module
 
-public import Sheaf.RingTheory.FormallySmoothAdic
+public import WeilConjectures.RingTheory.FormallySmoothAdic
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 public import Mathlib.RingTheory.RingHom.Flat
@@ -13,12 +13,12 @@ import Mathlib.RingTheory.TensorProduct.Quotient
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Sheaf.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.CompleteLocalQuotient
 import Sheaf.RingTheory.ExistsCompleteLocalFlatPresentation
 import WeilConjectures.RingTheory.FlatPermanence
 import Sheaf.RingTheory.FormallySmoothAdicCompleteSourceTarget
-import Sheaf.RingTheory.FormallySmoothAdicLiftIntoComplete
+import WeilConjectures.RingTheory.FormallySmoothAdicLiftIntoComplete
 
 /-!
 # Flatness of adically formally smooth local ring maps

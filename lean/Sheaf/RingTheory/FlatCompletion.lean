@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import WeilConjectures.RingTheory.CompletionRestrictionFlatQuotients
-import Sheaf.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import WeilConjectures.RingTheory.Flat.FlatModulePowers
 
 /-!

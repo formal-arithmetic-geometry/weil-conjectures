@@ -8,7 +8,7 @@ module
 public import Sheaf.RingTheory.GlobalDimension
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.Module
-import Sheaf.RingTheory.CohenMacaulayFreeResolutionConstruction
+import WeilConjectures.RingTheory.CohenMacaulayFreeResolutionConstruction
 import Sheaf.RingTheory.ProjectiveResolutionKernelProjective
 import Mathlib.RingTheory.Noetherian.Basic
 import WeilConjectures.RingTheory.FiniteFreeExactSequenceResolution

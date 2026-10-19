@@ -16,7 +16,7 @@ import WeilConjectures.RingTheory.FiniteSubalgebraFractionField
 import Sheaf.RingTheory.FormalFiberDerivationExtension
 import Sheaf.RingTheory.Derivation.DetectNonPthPower
 import Sheaf.RingTheory.RegularRingNormal
-import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
+import WeilConjectures.RingTheory.PowerSeriesFieldCohenRegularComplete
 import Sheaf.RingTheory.RegularLocalLocalization
 import Mathlib.RingTheory.LocalProperties.IntegrallyClosed
 import Mathlib.Algebra.CharP.Reduced

@@ -6,8 +6,8 @@ Authors: SHEAF group K1
 module
 
 public import WeilConjectures.RingTheory.AnalyticallyUnramified
-public import Sheaf.RingTheory.JapaneseDomain
-import Sheaf.RingTheory.AdicCompletionNoetherian
+public import WeilConjectures.RingTheory.JapaneseDomain
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.NagataOfCompleteLocal
 import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions
 import Mathlib.RingTheory.AdicCompletion.LocalRing

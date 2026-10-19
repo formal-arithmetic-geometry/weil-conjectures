@@ -13,9 +13,9 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.Topology.Algebra.Nonarchimedean.AdicTopology
 public import Sheaf.AlgebraicGeometry.IsRegularScheme
 
-import Sheaf.RingTheory.ExistsCoefficientSubring
-import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
-import Sheaf.RingTheory.PowerSeriesUniversalPropertyComplete
+import WeilConjectures.RingTheory.ExistsCoefficientSubring
+import WeilConjectures.RingTheory.PowerSeriesFieldCohenRegularComplete
+import WeilConjectures.RingTheory.PowerSeriesUniversalPropertyComplete
 import Mathlib.RingTheory.AdicCompletion.Functoriality
 
 /-!

@@ -17,7 +17,7 @@ import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.RingTheory.Unramified.LocalRing
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Sheaf.RingTheory.FlatLocalCompletionIso
-import Sheaf.RingTheory.LocalCompletionQuotient
+import WeilConjectures.RingTheory.LocalCompletionQuotient
 import Sheaf.TraceFormula.CompletedStalkIsomorphismEtale
 import Sheaf.TraceFormula.LocalMapCompletionApproximation
 

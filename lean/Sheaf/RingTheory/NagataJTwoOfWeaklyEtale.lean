@@ -6,7 +6,7 @@ Authors: SHEAF group Q25
 module
 
 public import Sheaf.RingTheory.IndPrincipalZariski
-public import Sheaf.RingTheory.NagataRing
+public import WeilConjectures.RingTheory.NagataRing
 public import Sheaf.RingTheory.ExcellentRing
 public import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.RingTheory.WeaklyEtaleFiniteResidueModel

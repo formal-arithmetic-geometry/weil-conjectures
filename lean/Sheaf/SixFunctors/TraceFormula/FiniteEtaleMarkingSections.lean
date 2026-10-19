@@ -23,8 +23,8 @@ import Sheaf.AlgebraicGeometry.ExcellentSchemeAffineCover
 import WeilConjectures.AlgebraicGeometry.Morphisms.NormalIntegralGenericHomFull
 import WeilConjectures.FieldTheory.GenericSeparableAlgebraSplitting
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
-import Sheaf.RingTheory.JapaneseDomain
-import Sheaf.RingTheory.NagataDomainN2
+import WeilConjectures.RingTheory.JapaneseDomain
+import WeilConjectures.RingTheory.NagataDomainN2
 import Sheaf.RingTheory.QuasiExcellentNagata
 import WeilConjectures.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite

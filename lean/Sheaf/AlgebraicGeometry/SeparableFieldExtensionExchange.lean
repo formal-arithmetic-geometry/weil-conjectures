@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Over
 public import Sheaf.AlgebraicGeometry.InvertibleTorsionOrders
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.FieldTheory.SeparableExtension
-import Sheaf.FieldTheory.SeparableSmoothColimit
+import WeilConjectures.FieldTheory.SeparableSmoothColimit
 import Sheaf.AlgebraicGeometry.SmoothBaseChangeLimit
 import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
 import Mathlib.AlgebraicGeometry.GammaSpecAdjunction

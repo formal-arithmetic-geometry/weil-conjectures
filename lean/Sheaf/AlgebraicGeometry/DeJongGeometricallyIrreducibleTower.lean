@@ -14,8 +14,8 @@ import Sheaf.AlgebraicGeometry.FiniteInseparableGeometricReduction
 import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import WeilConjectures.AlgebraicGeometry.WeilPbcNormalizationInResidueFieldExtension
 import Sheaf.RingTheory.QuasiExcellentNagata
-import Sheaf.RingTheory.NagataRing
-import Sheaf.RingTheory.JapaneseDomain
+import WeilConjectures.RingTheory.NagataRing
+import WeilConjectures.RingTheory.JapaneseDomain
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.AlgebraicGeometry.ReductionGenericFibre
@@ -47,7 +47,6 @@ public import Sheaf.RingTheory.ExcellentRing
 import Sheaf.AlgebraicGeometry.ClosedDominantDimension
 import Sheaf.AlgebraicGeometry.ExcellentBaseMarkedSemistableCurve
 import Sheaf.AlgebraicGeometry.GeometricallyIntegralCurveFactorization
-import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-!
 # de Jong geometrically irreducible alteration tower

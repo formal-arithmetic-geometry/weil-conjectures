@@ -5,7 +5,7 @@ Authors: SHEAF group H1
 -/
 module
 
-public import Sheaf.RingTheory.FormallySmoothAdic
+public import WeilConjectures.RingTheory.FormallySmoothAdic
 public import Sheaf.RingTheory.GRing
 import Sheaf.RingTheory.RegularTensorProductOfFormallySmoothAdic
 
