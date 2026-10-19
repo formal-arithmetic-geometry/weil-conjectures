@@ -19,56 +19,42 @@
  ],
  "proof": [
   {
-   "text": "Because $M$ is finite projective, choose an integer $r\\ge0$ and $A$-linear maps $i:M\\to A^{\\oplus r}$ and $p:A^{\\oplus r}\\to M$ with $p\\circ i=1_M$. Applying the constant-sheaf construction gives a split pair $\\underline M_S\\xrightarrow{\\underline i}\\underline{A^{\\oplus r}}_S\\xrightarrow{\\underline p}\\underline M_S$. The exact inverse-image theorem identifies $g^*\\underline{A^{\\oplus r}}_S$ with $\\underline{A^{\\oplus r}}_{S'}$ and carries this splitting to the corresponding one for $g^*\\underline M_S$, because it preserves compositions and identities.",
+   "text": "Use the proved library theorem ModuleCat.isDualizable_of_projective: a finite projective A-module M admits an exact evaluation/coevaluation pairing with its dual. Swap the pairing using the braiding, giving ExactPairing M-dual M. The constant-sheaf functor [def-weil-pbc-constant-sheaf] is strong monoidal by CategoryTheory.monoidalConstantSheaf, so ExactPairing.map transports this pairing to the constant sheaves. This replaces the explicit finite-free and retract calculation by its already-proved dual-basis formulation.",
    "uses": [
-    "def-weil-pbc-constant-sheaf",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "def-weil-pbc-constant-sheaf"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0GM7, proof of (1), locality paragraph and final finite-projective direct-summand sentence"
+    "place": "Tag 0GM7, label lemma-pullback-internal-hom, proof of (1): the strictly perfect calculation and the final finite-projective identity $h^*\\mathcal Hom(\\mathcal E,\\mathcal F)=\\mathcal Hom(h^*\\mathcal E,h^*\\mathcal F)$"
    }
   },
   {
-   "text": "For the free module $A^{\\oplus r}$, the sheaf tensor--Hom adjunction and the standard basis identify $\\mathcal Hom_{A_S}(\\underline{A^{\\oplus r}}_S,F)$ with $F^{\\oplus r}$: a map is determined by its values on the $r$ basis vectors, and the inverse sends $(f_1,\\ldots,f_r)$ to the map $(a_j)\\mapsto\\sum_j a_jf_j$. The same description on $S'$ identifies $\\mathcal Hom_{A_{S'}}(g^*\\underline{A^{\\oplus r}}_S,g^*F)$ with $(g^*F)^{\\oplus r}$. Additivity and exactness of $g^*$, its identification of the constant ring sheaf, and the canonical tensor comparison identify the pullback of the first $r$-fold sum with the second; in these coordinates the canonical comparison is the identity. The coordinate evaluation map is therefore carried to the coordinate evaluation map.",
-   "uses": [
-    "def-pur-sheaf-hom",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "prop-weil-pbc-inverse-image-modules-exact"
-   ],
+   "text": "The etale inverse-image functor upperStar is strong monoidal, as proved by AlgebraicGeometry.Etale.monoidal_upperStar. Apply the proved general theorem Functor.Monoidal.isIso_ihomComparison_app_of_exactPairing to the constant-sheaf exact pairing from the preceding step and the arbitrary target F. Its comparison is definitionally finiteProjectivePullbackHomComparison, so this proves the required IsIso. This uses neither exactness nor an identification of pulled-back constants.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0GM7, proof of (1), final calculation for a direct summand of a finite free module"
+    "place": "Tag 0GM7, label lemma-pullback-internal-hom, proof of (1): the strictly perfect calculation and the final finite-projective identity $h^*\\mathcal Hom(\\mathcal E,\\mathcal F)=\\mathcal Hom(h^*\\mathcal E,h^*\\mathcal F)$"
    }
   },
   {
-   "text": "Let $c_E:g^*\\mathcal Hom_{A_S}(\\underline E_S,F)\\to\\mathcal Hom_{A_{S'}}(g^*\\underline E_S,g^*F)$ denote the comparison for $E$. Its construction by pulling back evaluation and currying makes it natural in $E$ and $F$. For the splitting in Step 1, the inverse to $c_M$ is the explicit composite\n$$\\mathcal Hom_{A_{S'}}(g^*\\underline M_S,g^*F)\\xrightarrow{\\,\\mathcal Hom(g^*\\underline p,g^*F)\\,}\\mathcal Hom_{A_{S'}}(g^*\\underline{A^{\\oplus r}}_S,g^*F)\\xrightarrow{\\,c_{A^{\\oplus r}}^{-1}\\,}g^*\\mathcal Hom_{A_S}(\\underline{A^{\\oplus r}}_S,F)\\xrightarrow{\\,g^*\\mathcal Hom(\\underline i,F)\\,}g^*\\mathcal Hom_{A_S}(\\underline M_S,F).$$\nNaturality gives the two inverse identities, since both reduce to $p i=1_M$; hence $c_M$ is an isomorphism. The same naturality calculation carries the pulled-back evaluation to evaluation after pullback, and proves naturality in both $M$ and $F$.",
-   "uses": [
-    "def-pur-sheaf-hom",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
-   ],
+   "text": "Naturality in M is precisely Functor.LaxMonoidal.map_pre_app_comp_ihomComparison_app applied to the constant-sheaf map of a. Naturality in F is the naturality of (ihomComparison upperStar constant-M).natTrans. The evaluation identity, with the direction in the statement, is the symmetry of Functor.LaxMonoidal.ihomComparison_ev. Assemble these with the isomorphism from Step 2, respecting the existing quantifier scope over M-prime.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0GM7, proof of (1), final finite-projective identity and evaluation construction"
+    "place": "Tag 0GM7, label lemma-pullback-internal-hom, proof of (1): the strictly perfect calculation and the final finite-projective identity $h^*\\mathcal Hom(\\mathcal E,\\mathcal F)=\\mathcal Hom(h^*\\mathcal E,h^*\\mathcal F)$"
    }
   }
  ],
  "proof_deps": [
-  "def-pur-sheaf-hom",
-  "def-weil-pbc-constant-sheaf",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "def-weil-pbc-constant-sheaf"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 0GM7, lemma-pullback-internal-hom, proof of (1), strictly perfect calculation and final finite-projective identity."
+  "place": "Tag 0GM7, label lemma-pullback-internal-hom, proof of (1): the strictly perfect calculation and the final finite-projective identity $h^*\\mathcal Hom(\\mathcal E,\\mathcal F)=\\mathcal Hom(h^*\\mathcal E,h^*\\mathcal F)$; shorter formal route through the already-proved finite-projective dual pairing and strong-monoidal internal-Hom comparison (G4, 2026-10-19)."
  },
  "mathlib_searches": [
   {
@@ -161,5 +147,15 @@
   "date": "2026-10-17",
   "existing": false,
   "file": "lean/Sheaf/SixFunctors/EtaleFiniteProjectivePullbackHom.lean"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261019T132230-L-1205353",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

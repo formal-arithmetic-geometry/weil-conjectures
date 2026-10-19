@@ -13,10 +13,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.InternalHom
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import Sheaf.CategoryTheory.ModulePullbackTensorIso
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Mathlib.CategoryTheory.Monoidal.Rigid.Braided
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
+import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.Comparison
 
 /-! # Pullback of internal Hom from a finite projective constant module
 
@@ -104,6 +104,22 @@ theorem finiteProjectivePullbackHom
         (ihom.ev ((upperStar (ModuleCat.{u + 1} A) g).obj
           ((constantSheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M))).app
           ((upperStar (ModuleCat.{u + 1} A) g).obj F))) := by
-  sorry
+  refine ⟨?_, ?_⟩
+  · obtain ⟨_⟩ := ModuleCat.isDualizable_of_projective M
+    let K := constantSheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)
+    let : ExactPairing Mᘁ M := BraidedCategory.exactPairing_swap M Mᘁ
+    let : ExactPairing (K.obj Mᘁ) (K.obj M) := ExactPairing.map K Mᘁ M
+    exact Functor.Monoidal.isIso_ihomComparison_app_of_exactPairing
+      (upperStar (ModuleCat.{u + 1} A) g) (K.obj Mᘁ) (K.obj M) F
+  · intro M' _ _ a
+    refine ⟨?_, ?_, ?_⟩
+    · exact Functor.LaxMonoidal.map_pre_app_comp_ihomComparison_app
+        (upperStar (ModuleCat.{u + 1} A) g)
+        ((constantSheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)).map a) F
+    · intro F' b
+      exact (Functor.LaxMonoidal.ihomComparison (upperStar (ModuleCat.{u + 1} A) g)
+        ((constantSheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M)).natTrans.naturality b
+    · exact (Functor.LaxMonoidal.ihomComparison_ev (upperStar (ModuleCat.{u + 1} A) g)
+        ((constantSheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M) F).symm
 
 end AlgebraicGeometry.Etale
