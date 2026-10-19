@@ -3,51 +3,229 @@
  "blueprint": {
   "is": "lem-fd-kernel-composition",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Composition of kernel transforms",
- "statement": "Let $V\\to S$, $V^\\vee\\to S$, $V''\\to S$ be separated finite-type\n$S$-schemes, let $\\mathcal K\\in D^b_c(V\\times_SV^\\vee,E)$ and\n$\\mathcal K'\\in D^b_c(V^\\vee\\times_SV'',E)$, and let\n\n$$\n\\Phi_{\\mathcal K}(K)=p_{2,!}(p_1^*K\\otimes^L\\mathcal K)[a],\\qquad\n\\Phi_{\\mathcal K'}(L)=q_{2,!}(q_1^*L\\otimes^L\\mathcal K')[b]\n$$\n\nbe the corresponding kernel transforms, with $p_i,q_i$ the projections of\n$V\\times_SV^\\vee$ and $V^\\vee\\times_SV''$ and shifts $a,b$. Then\n$\\Phi_{\\mathcal K'}\\circ\\Phi_{\\mathcal K}$ is the kernel transform with\nkernel the *convolution*\n\n$$\n\\mathcal K'\\ast\\mathcal K:=r_{13,!}\\bigl(r_{12}^*\\mathcal K\\otimes^L\nr_{23}^*\\mathcal K'\\bigr)\\in D^b_c(V\\times_SV'',E)\n$$\n\nand shift $[a+b]$, the $r_{ij}$ being the projections of the triple\nproduct $V\\times_SV^\\vee\\times_SV''$. In particular\n$\\operatorname{FT}_{\\psi^{-1}}\\operatorname{FT}_\\psi$ is the kernel\ntransform with kernel $\\mathcal K_{\\psi^{-1}}\\ast\\mathcal K_\\psi$ and shift\n$[2r]$.",
+ "statement": "Use the geometric finite-field and $E$-adic coefficient setting of [def-fix-six-functor-datum]: $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}(k)$, and $E/\\mathbf Q_\\ell$ finite. The notation $D^b_c(-,E)$ means the rationalized derived-complete constructible category, with completed integral operations rationalized as in [def-weil-derived-pullback-tensor-hom, def-weil-integral-rational-qbar-compact-support]. Let $S$ be a separated finite-type $k$-scheme and let $V\\to S$, $V^\\vee\\to S$, $V''\\to S$ be separated finite-type morphisms. The superscript $\\vee$ is just a name in the general assertion. Products are fibre products [def-pc-fibre-product].\n\nLet $\\mathcal K\\in D^b_c(V\\times_SV^\\vee,E)$, $\\mathcal K'\\in D^b_c(V^\\vee\\times_SV'',E)$, and $a,b\\in\\mathbf Z$. With projections $p_i,q_i$ of these two products define\n$$\n\\Phi_{\\mathcal K}(M)=Rp_{2,!}(Lp_1^*M\\otimes^L_E\\mathcal K)[a],\\qquad\n\\Phi_{\\mathcal K'}(N)=Rq_{2,!}(Lq_1^*N\\otimes^L_E\\mathcal K')[b].\n$$\nThen there is an isomorphism of functors, natural in $M$ and in both kernels,\n$$\n\\Phi_{\\mathcal K'}\\circ\\Phi_{\\mathcal K}\\simeq\n\\bigl(M\\longmapsto Rs_{2,!}(Ls_1^*M\\otimes^L_E(\\mathcal K'\\ast\\mathcal K))[a+b]\\bigr),\n$$\nwhere $s_1,s_2$ are the projections of $V\\times_SV''$ and\n$$\n\\mathcal K'\\ast\\mathcal K:=Rr_{13,!}(Lr_{12}^*\\mathcal K\\otimes^L_E Lr_{23}^*\\mathcal K')\\in D^b_c(V\\times_SV'',E),\n$$\nwith $r_{ij}$ the projections of $V\\times_SV^\\vee\\times_SV''$.\n\nIn particular, when $V$ is a vector bundle of rank $r\\ge0$, $V^\\vee$ its dual, $V''$ its bidual, and $E$ contains the values of the chosen additive character $\\psi$, take the two Artin--Schreier kernels $\\mathcal K_\\psi,\\mathcal K_{\\psi^{-1}}$ of [def-fd-kernel] for the evaluation pairings, regarded in $D^b_c(-,E)$ as the rationalizations at $E$ of their completed realizations $\\mathcal L^{\\mathrm{adic}}_{\\Psi^{\\pm1},b}$ of [def-fd-adic-fourier-realization], and $a=b=r$. For the $E$-adic Fourier transforms defined by the displayed formulas, $\\operatorname{FT}_{\\psi^{-1}}\\operatorname{FT}_\\psi$ is the transform with kernel $\\mathcal K_{\\psi^{-1}}\\ast\\mathcal K_\\psi$ and shift $[2r]$. Here the $E$-adic convention is the one of [def-fourier-set]; it is not the derived category of discrete $E$-module sheaves on the small etale site.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-lem-kernel-composition/lem-fd-kernel-composition.md",
   "place": "node lem-fd-kernel-composition, order 2712"
  },
  "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-pc-fibre-product",
   "def-fd-kernel",
-  "def-fd-transform"
+  "def-fourier-set",
+  "def-fd-adic-fourier-realization"
  ],
  "proof": [
   {
-   "text": "Substituting the definitions and using\n$p_2\\circ r_{12}=r_2=q_1\\circ r_{23}$, the base change of\n[prop-functor-package] for the compact-support direct image along $q_1$\ngives $q_1^*p_{2,!}\\cong r_{23,!}r_{12}^*$, and the projection formula of\n[prop-functor-package] for $r_{23}$ moves $r_{23}^*\\mathcal K'$\ninside; the composition law $q_2\\circ r_{23}=r_3$ then gives\n\n$$\n\\Phi_{\\mathcal K'}\\Phi_{\\mathcal K}(K)\n=r_{3,!}\\bigl(r_1^*K\\otimes^Lr_{12}^*\\mathcal K\\otimes^L\nr_{23}^*\\mathcal K'\\bigr)[a+b],\n\\qquad r_1=p_1\\circ r_{12}.\n$$",
+   "text": "Put $T=V\\times_SV^\\vee\\times_SV''$, $P=V\\times_SV^\\vee$, $Q=V^\\vee\\times_SV''$, and $H=V\\times_SV''$. The square with top $r_{12}:T\\to P$, bottom $q_1:Q\\to V^\\vee$, and verticals $r_{23},p_2$ is Cartesian: a map into its fibre product specifies the three maps to $V,V^\\vee,V''$ with equal maps to $S$. Thus its universal property is exactly that of $T$. Every projection forgetting a factor is a base change of that factor's structure map to $S$, hence separated finite type by [lem-pod-separated-finite-type-base-change]. Successive such projections give finite-type product schemes by [lem-sfb-finite-type-composition-base-change]; they are separated over $k$ because the product diagonal is cut out by the closed diagonals of its factors. Set $r_1=p_1r_{12}=s_1r_{13}$ and $r_3=q_2r_{23}=s_2r_{13}$; these are identities of the corresponding projections. The constructible-domain assertion of [prop-functor-package] ensures that all pullbacks, tensors and compact-support images below, including the convolution, lie in $D^b_c(-,E)$.",
    "uses": [
+    "def-pc-fibre-product",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-sfb-finite-type-composition-base-change",
     "prop-functor-package"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-kernel-composition/lem-fd-kernel-composition.proof.md",
+    "place": "first paragraph"
+   }
   },
   {
-   "text": "The kernel transform with kernel $\\mathcal K'\\ast\\mathcal K$ has the same\nvalue: the projection formula for $r_{13}$ together with\n$r_{13}^*s_1^*\\cong r_1^*$, $s_2\\circ r_{13}=r_3$ and the composition law\nturns it into the same expression. Comparing the two expressions identifies\nthe kernels, and the shift is $[a]+[b]$ because the two shifts are those of\nthe two factors.",
-   "uses": [],
-   "elementary": null
+   "text": "First remove the two prescribed shifts. Pullback and extension by zero are termwise at finite level and commute with cochain shifts. If $I$ resolves a complex, $I[a]$ is again a K-injective resolution by [lem-weil-pbc-kinjective-shift], so proper derived direct image also commutes with shifts. These facts apply to the finite-level compactification formula for $Rf_!$ in [def-weil-integral-rational-qbar-compact-support]. The completed operations of [def-weil-derived-pullback-tensor-hom] use the functorial product mapping-fiber model: product commutes with shift degreewise and the cone comparison is $(x,y)\\mapsto(x,(-1)^a y)$. Hence these shift comparisons pass to the integral operations and then to their rationalizations. The tensor comparison in the second slot is [lem-sf-completed-tensor-shift-right]; signed symmetry gives it in the first slot, and the same comparison rationalizes. Since $C[a][b]=C[a+b]$ with the cochain differential convention, the composite equals the unshifted composite followed by $[a+b]$. Each comparison is natural in the input and kernels.",
+   "uses": [
+    "lem-weil-pbc-kinjective-shift",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-sf-completed-tensor-shift-right",
+    "lem-pur-integral-coherence-tower",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-kernel-composition/lem-fd-kernel-composition.proof.md",
+    "place": "first paragraph"
+   }
+  },
+  {
+   "text": "For $M\\in D^b_c(V,E)$ put $A=Lp_1^*M\\otimes^L_E\\mathcal K$. Substitute the definitions without the shifts. The compact-support base-change clause of [prop-functor-package], applied to the Cartesian square in step 1, gives\n$$\nRq_{2,!}(Lq_1^*Rp_{2,!}A\\otimes^L_E\\mathcal K')\\simeq Rq_{2,!}(Rr_{23,!}Lr_{12}^*A\\otimes^L_E\\mathcal K').\n$$\nNo properness of $p_2$ or smoothness of $q_1$ is needed: this is the $!$-exchange clause. By [lem-pur-derived-pullback-tensor-iso] and the pullback-composition identifications in [lem-pur-integral-coherence-tower], rationalized,\n$$Lr_{12}^*A\\simeq Lr_1^*M\\otimes^L_E Lr_{12}^*\\mathcal K.$$\nThese isomorphisms are natural in all three objects.",
+   "uses": [
+    "prop-functor-package",
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-pur-integral-coherence-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-kernel-composition/lem-fd-kernel-composition.proof.md",
+    "place": "first paragraph"
+   }
+  },
+  {
+   "text": "Apply the compact-support projection formula of [prop-functor-package] to $f=r_{23}$, source object $Lr_{12}^*A$ and target object $\\mathcal K'$. Its target finite-Tor condition holds because at field coefficients $D^b_{ctf}=D^b_c$ by [def-weil-finite-tor-amplitude]. Its isomorphism turns the last expression into\n$$Rq_{2,!}Rr_{23,!}(Lr_{12}^*A\\otimes^L_E Lr_{23}^*\\mathcal K').$$\nUse the composition clause of [prop-functor-package], $q_2r_{23}=r_3$, step 3, and the rationalized associator of [lem-pur-integral-coherence-tower]. The result is\n$$Rr_{3,!}(Lr_1^*M\\otimes^L_E Lr_{12}^*\\mathcal K\\otimes^L_E Lr_{23}^*\\mathcal K').$$",
+   "uses": [
+    "prop-functor-package",
+    "def-weil-finite-tor-amplitude",
+    "lem-pur-integral-coherence-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-kernel-composition/lem-fd-kernel-composition.proof.md",
+    "place": "first paragraph"
+   }
+  },
+  {
+   "text": "Set $B=Lr_{12}^*\\mathcal K\\otimes^L_E Lr_{23}^*\\mathcal K'$. The unshifted transform by the stated convolution is $Rs_{2,!}(Ls_1^*M\\otimes^L_E Rr_{13,!}B)$. Use the tensor symmetry of [lem-pur-integral-coherence-tower], rationalized, to put $Rr_{13,!}B$ first. The projection formula of [prop-functor-package] for $r_{13}$, with source object $B$ and target object $Ls_1^*M$, gives\n$$Rs_{2,!}Rr_{13,!}(B\\otimes^L_E Lr_{13}^*Ls_1^*M).$$\nAgain its Tor hypothesis holds by [def-weil-finite-tor-amplitude]. The pullback compositor identifies $Lr_{13}^*Ls_1^*M$ with $Lr_1^*M$. Tensor symmetry and associativity, followed by the compact-support compositor with $s_2r_{13}=r_3$, yield exactly the expression in step 4. All transformations used are natural. Compose the step-4 isomorphism with the inverse of this step-5 isomorphism to obtain the asserted natural isomorphism of unshifted functors; step 2 adds $[a+b]$. This compares the transforms and makes no uniqueness claim for their kernels.",
+   "uses": [
+    "prop-functor-package",
+    "def-weil-finite-tor-amplitude",
+    "lem-pur-integral-coherence-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-kernel-composition/lem-fd-kernel-composition.proof.md",
+    "place": "second paragraph"
+   }
+  },
+  {
+   "text": "For the Fourier assertion use the evaluation Artin--Schreier kernels of [def-fd-kernel] in the adic category stipulated by [def-fourier-set]: since $\\mu_p\\subset E$, the character values lift to $\\mathcal O_E^\\times$, and [def-fd-adic-fourier-realization] gives the completed realization $\\mathcal L^{\\mathrm{adic}}_{\\Psi^{\\pm1},b}\\in D^b_c(-,\\mathcal O_E)$ on the Noetherian products $V\\times_SV^\\vee$ and $V^\\vee\\times_SV''$ (characteristic $p$, finite type over $k$ by step 1); its rationalization is the kernel in $D^b_c(-,E)$. The two functors in the statement are precisely the just-treated kernel transforms with $a=b=r$ and with the dual bundle as the middle factor. Substituting these kernels in the convolution formula and $r+r=2r$ gives the claimed kernel and shift. This is only the composition formula; no computation of the convolution or inversion theorem is used. The normalization convention of [def-fd-transform] is exactly the displayed formula with shift equal to the rank $r$. This citation takes only that normalization: its discrete-module operations are not substituted for the adic operations explicitly specified here.",
+   "uses": [
+    "def-fd-kernel",
+    "def-fourier-set",
+    "def-fd-transform",
+    "def-fd-adic-fourier-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-kernel-composition/lem-fd-kernel-composition.proof.md",
+    "place": "conclusion and specialization to the Fourier kernels"
+   }
   }
  ],
  "proof_deps": [
+  "def-fd-adic-fourier-realization",
+  "def-fd-kernel",
+  "def-fd-transform",
+  "def-fourier-set",
+  "def-pc-fibre-product",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-rationalization-karoubi",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-integral-coherence-tower",
+  "lem-sf-completed-tensor-shift-right",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-kinjective-shift",
   "prop-functor-package"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-lem-kernel-composition/lem-fd-kernel-composition.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-kernel-composition/lem-fd-kernel-composition.proof.md",
+  "place": "Both paragraphs, expanded with the cited existing operation theorems; shifts checked on cochain models."
  },
  "mathlib_searches": [
   {
-   "tool": "text search of the local Mathlib checkout (0df444a360)",
-   "query": "AlgebraicGeometry.Etale.kernelTransformCompIso",
-   "results": [],
-   "date": "2026-10-08"
+   "tool": "grep",
+   "query": "kernelTransform|kernelConvolution|integralTransform|FourierDeligne",
+   "results": {
+    "hits": [],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: no E-adic kernel-transform convolution statement among these hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "kernelTransform, kernelConvolution",
+   "results": {
+    "hits": [],
+    "note": "loogle: unknown identifier 'kernelTransform'",
+    "subdirectory": ""
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary sheaf/pullback or analytic/probabilistic results do not state E-adic kernel-transform convolution; unknown-identifier Loogle query is inconclusive"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of sheaf integral transforms is given by convolution of kernels",
+   "results": {
+    "hits": [
+     "ProbabilityTheory.term_∘ₖ_",
+     "SchwartzMap.convolution",
+     "CategoryTheory.Sheaf.comp_val",
+     "CategoryTheory.GrothendieckTopology.sheafifyMap_sheafifyLift",
+     "AlgebraicGeometry.SheafedSpace.comp_c_app",
+     "AlgebraicGeometry.Scheme.IdealSheafData.map_ker",
+     "CategoryTheory.constantCommuteCompose",
+     "AlgebraicGeometry.SheafedSpace.comp_c_app'"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: no E-adic kernel-transform convolution statement among these hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of integral kernel transforms is the transform with convolution kernel, using compact support pushforward and derived tensor on etale sheaves",
+   "results": {
+    "hits": [
+     "SheafOfModules.pushforwardComp",
+     "AlgebraicGeometry.LocallyRingedSpace.comp_c",
+     "AlgebraicGeometry.Scheme.Hom.ker_comp",
+     "SheafOfModules.pushforwardComp_hom_app_val_app",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp",
+     "AlgebraicGeometry.Scheme.IdealSheafData.map_ker",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr",
+     "SheafOfModules.pushforwardComp_inv_app_val_app"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: no E-adic kernel-transform convolution statement among these hits"
+  },
+  {
+   "tool": "grep",
+   "query": "convolution|Convolution",
+   "results": {
+    "hits": [],
+    "note": "",
+    "subdirectory": "AlgebraicGeometry"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: no E-adic kernel-transform convolution statement among these hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fourier Mukai integral transform composition is naturally isomorphic to the transform by derived convolution of kernels",
+   "results": {
+    "hits": [
+     "CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity",
+     "CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors",
+     "CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh",
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+     "CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr",
+     "CategoryTheory.NatTrans.PullbackShift.natIsoComp"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: no E-adic kernel-transform convolution statement among these hits"
   }
  ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -198,5 +376,59 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry); Lean refresh 7d675a26 (L): moved from WeilConjectures.SixFunctors.Etale.Derived.KernelTransform:365"
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-fd-kernel-composition",
+  "worker": "stage1",
+  "summary": "Expanded the two blueprint paragraphs into six checked steps, reused all operation tools, recorded actual Mathlib searches, and made the inherited geometric E-adic setting explicit. Distinguished natural isomorphism of transform functors from uniqueness of kernels. The finite-coefficient Lean theorem is not an attachment for the E-adic statement. No new nodes.",
+  "blueprint": "First paragraph: steps 1--4 give the Cartesian square, shift bookkeeping, base change, pullback/tensor and first projection formula. Second paragraph: step 5 applies the second projection formula and compares the resulting functors. Step 6 specializes the kernels and shifts.",
+  "tool_uses": [
+   {
+    "node": "prop-functor-package",
+    "why": "Exactly the six-operation base-change/projection/composition package invoked by the unit; it is a generic tool, not a replacement route."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Checks the geometric hypotheses for the product projections; the unit does not supply a general base-change permanence theorem."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Checks that the product schemes are finite type; a generic geometry tool."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-shift",
+    "why": "Checks shifts of the finite-level proper derived direct image on its actual resolution model."
+   },
+   {
+    "node": "lem-sf-completed-tensor-shift-right",
+    "why": "Supplies the completed tensor shift comparison before rationalization; the unit suppresses shift signs."
+   },
+   {
+    "node": "lem-pur-integral-coherence-tower",
+    "why": "Supplies actual tensor associators, symmetry and pullback compositors on integral models, subsequently rationalized."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Supplies the tensor/pullback comparison used when expanding the integrand; the unit leaves this implicit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-functor-package",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-kinjective-shift",
+  "lem-sf-completed-tensor-shift-right",
+  "lem-pur-integral-coherence-tower",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-36e15d644",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-36e15d644 (reviewer sub-agent of L); spot-checked: I read the full item (six steps), the main-20261015 and master blueprint statement and proof, the unit, the statements of all 16 cited nodes and the two citers. There are no new nodes. The base is narrowed to S separated of finite type over k = F̄_q with E/Q_ℓ finite, which is the domain of prop-functor-package and def-fix-six-functor-datum, and the change is reported (E7). Both citers use S = Spec k. Replacing 'kernels agree' by a natural isomorphism of functors matches what the source actually proves and weakens nothing. Steps 1-5 check against the cited statements: the !-base change along q1 (clause 4, any base change); the projection formula for r23 and for r13 (clause 5, with ctf = c at E by def-weil-finite-tor-amplitude); composition and the pullback compositors; and the signed shift comparisons (lem-sf-completed-tensor-shift-right, lem-weil-pbc-kinjective-shift). Small cases (point base, zero kernels, empty factor, a = -b, r = 0) all work. Fault C4/B3 is repaired: step 6 and the specialization took the adic E-kernels from def-fd-kernel, which defines only a discrete Λ-module sheaf. The FIX cites the existing def-fd-adic-fourier-realization (completed realization L^adic_{Ψ,b} in D^b_c(-,O_E) on Noetherian schemes of characteristic p, then rationalized) in the statement, stmt_deps, step 6 uses and proof_deps; it makes no cycle. The seven declared tool uses are accepted. No SGA source. Maintainer note: lem-fd-convolution-kernel and lem-fd-inversion use the result at Q̄_ℓ and with Weil equivariance, which this E-stage statement over k does not give, just as its blueprint source does not.; 1 file(s) fixed by the reviewer"
  }
 }

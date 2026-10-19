@@ -17428,3 +17428,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:22 L: merged deliver/W4/Sheaf.AlgebraicGeometry.LinearIncidenceIrreducible (stage 3; reviewer PASS; first push; landing 20261019T132238-L-1206703 (interface); batch 20261019T132218; modules 1; new nodes 0; change records: coord/changes/W4-linear-incidence-proof-commands.md)
 - 13:32 L: merged deliver/D6/Sheaf.Paper.CompactSupportUniformTorBound (stage 3; reviewer PASS; first push; landing 20261019T133210-L-1272491 (interface); batch 20261019T133206; modules 1; new nodes 0; change records: coord/changes/D6-compact-support-uniform-imports.md)
 - 13:36 L: merged deliver/X5/Sheaf.Algebra.Homology.TwoStepFilteredModuleDerived (stage 3; reviewer PASS; first push; landing 20261019T133629-L-1342677 (proof); batch 20261019T133624; modules 1; new nodes 0)
+- 13:39 L: merged deliver/NZ/lem-fd-kernel-composition (reviewer FIX; first push; new nodes: 0)
