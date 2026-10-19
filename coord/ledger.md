@@ -17118,3 +17118,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:43 L: merged deliver/NE/prop-pur-rational-purity-trace-coherence (stage 2; reviewer FIX; parallel immutable checks)
 - 08:48 L: returned deliver/NN/lem-pur-flag-localized-product (reviewer RETURN: L: independent stage-2 immutable head 0ce4f388ae2e: H2: stmt_deps cite theorem nodes for plain defs. (1) lem-pur-chern-f)
 - 08:54 L: returned deliver/NC/lem-coef-finite-free-compact-composition (reviewer RETURN: L: independent stage-2 immutable head b1f4d5bdb0ff: H2: the delivery added theorem stmt_deps for plain definitions. (1) )
+- 09:00 L: returned deliver/NO/lem-a1-adic-compactification-section-realization (reviewer RETURN: L: independent stage-2 immutable head 0bda8c757340: H4/H12 + spurious stmt_dep: new def node def-a1-galois-lisse-represe)
