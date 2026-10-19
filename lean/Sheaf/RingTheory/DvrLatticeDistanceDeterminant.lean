@@ -12,10 +12,8 @@ public import Mathlib.RingTheory.Length
 public import Mathlib.LinearAlgebra.Determinant
 public import Mathlib.RingTheory.OrderOfVanishing.Noetherian
 
-import Mathlib.LinearAlgebra.FreeModule.PID
-import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
-import Mathlib.RingTheory.PrincipalIdealDomain
-import WeilConjectures.LinearAlgebra.Matrix.CauchyBinet
+import Mathlib.LinearAlgebra.FreeModule.Finite.Quotient
+import Mathlib.Algebra.Module.Lattice
 
 /-!
 # Relative length of DVR lattices and the determinant
@@ -31,6 +29,121 @@ universe u v w
 
 namespace IsDiscreteValuationRing
 
+private theorem length_quotient_eq_ord
+    {R E : Type*} [CommRing R] [IsDomain R] [IsDiscreteValuationRing R]
+    [AddCommGroup E] [Module R E] [Module.Free R E] [Module.Finite R E]
+    (N : Submodule R E) (e : E ≃ₗ[R] N) :
+    Module.length R (E ⧸ N) = Ring.ord R (LinearMap.det (N.subtype ∘ₗ e.toLinearMap)) := by
+  classical
+  let b := Module.Free.chooseBasis R E
+  have h : Module.finrank R N = Module.finrank R E := e.symm.finrank_eq
+  let a := Submodule.smithNormalFormCoeffs b h
+  let b' := Submodule.smithNormalFormTopBasis b h
+  let ab := Submodule.smithNormalFormBotBasis b h
+  let e' : E ≃ₗ[R] N := b'.equiv ab (Equiv.refl _)
+  let f : E →ₗ[R] E := N.subtype ∘ₗ e'.toLinearMap
+  have ha : ∀ i, f (b' i) = a i • b' i := by
+    intro i
+    change (b'.equiv ab (Equiv.refl _) (b' i) : E) = _
+    rw [Module.Basis.equiv_apply, Equiv.refl_apply]
+    exact Submodule.smithNormalFormBotBasis_def b h i
+  have hmat : LinearMap.toMatrix b' b' f = Matrix.diagonal a := by
+    ext i j
+    rw [LinearMap.toMatrix_apply, ha, map_smul, Module.Basis.repr_self, Finsupp.smul_single,
+      smul_eq_mul, mul_one]
+    by_cases hij : i = j
+    · simp [hij]
+    · simp [hij, Finsupp.single_eq_of_ne hij]
+  have hp : Ring.ord R (∏ i, a i) = ∑ i, Ring.ord R (a i) := by
+    have hn : ∀ i, a i ≠ 0 := Submodule.smithNormalFormCoeffs_ne_zero b h
+    induction (Finset.univ : Finset (Module.Free.ChooseBasisIndex R E)) using
+        Finset.induction_on with
+    | empty => simp
+    | @insert i s hi ih =>
+      rw [Finset.prod_insert hi, Finset.sum_insert hi,
+        Ring.ord_mul' R (mem_nonZeroDivisors_of_ne_zero (hn i)), ih]
+  calc
+    Module.length R (E ⧸ N) = ∑ i, Ring.ord R (a i) := by
+      rw [(N.quotientEquivPiSpan b h).length_eq, Module.length_pi_of_fintype]
+      rfl
+    _ = Ring.ord R (LinearMap.det f) := by
+      rw [← LinearMap.det_toMatrix b', hmat, Matrix.det_diagonal, hp]
+    _ = _ := Ring.ord_eq_of_associated
+      (LinearMap.associated_det_comp_equiv N.subtype e' e)
+
+private theorem extend_repr
+    {R K V ι : Type*} [CommRing R] [IsDomain R] [Field K] [Algebra R K]
+    [IsFractionRing R K] [AddCommGroup V] [Module K V] [Module R V]
+    [IsScalarTower R K V] {E : Submodule R V} [Submodule.IsLattice K E]
+    [Finite ι] (b : Module.Basis ι R E) (x : E) (i : ι) :
+    (b.extendOfIsLattice K).repr (x : V) i = algebraMap R K (b.repr x i) := by
+  classical
+  let := Fintype.ofFinite ι
+  have hx : (x : V) = ∑ j, algebraMap R K (b.repr x j) •
+      (b.extendOfIsLattice K) j := by
+    simpa only [Module.Basis.extendOfIsLattice_apply, algebraMap_smul,
+      ← Submodule.coe_smul, ← Submodule.coe_sum] using
+      congrArg (fun y : E ↦ (y : V)) (b.sum_repr x).symm
+  rw [hx, map_sum, Finsupp.finsetSum_apply]
+  simp only [map_smul, Finsupp.smul_apply, Module.Basis.repr_self]
+  simp [Finsupp.single_apply]
+
+private theorem lattice_inclusion_length
+    {R K V : Type*} [CommRing R] [IsDomain R] [IsDiscreteValuationRing R]
+    [Field K] [Algebra R K] [IsFractionRing R K] [AddCommGroup V]
+    [Module K V] [Module R V] [IsScalarTower R K V]
+    (E N : Submodule R V) [Submodule.IsLattice K E] [Submodule.IsLattice K N]
+    (h : N ≤ E) (e : E ≃ₗ[R] N) :
+    ∃ f : V ≃ₗ[K] V, (∀ x : E, f (x : V) = (e x : V)) ∧
+      Module.length R (E ⧸ N.comap E.subtype) ≠ ⊤ ∧
+      ((Module.length R (E ⧸ N.comap E.subtype)).toNat : ℤ) =
+        WithZero.log (Ring.ordFrac R (LinearMap.det f.toLinearMap)) := by
+  classical
+  let b := Module.Free.chooseBasis R E
+  let c := b.map e
+  let f := (b.extendOfIsLattice K).equiv (c.extendOfIsLattice K) (Equiv.refl _)
+  have hf : ∀ x : E, f (x : V) = (e x : V) := by
+    have heq : f.toLinearMap.restrictScalars R ∘ₗ E.subtype = N.subtype ∘ₗ e.toLinearMap := by
+      apply b.ext
+      intro i
+      change f ((b i : E) : V) = (e (b i) : V)
+      dsimp [f]
+      rw [← Module.Basis.extendOfIsLattice_apply]
+      rw [Module.Basis.equiv_apply, Equiv.refl_apply]
+      simp [c]
+    intro x
+    exact congrArg (fun l : E →ₗ[R] V ↦ l x) heq
+  let e' := e.trans (Submodule.comapSubtypeEquivOfLe h).symm
+  let a := (N.comap E.subtype).subtype ∘ₗ e'.toLinearMap
+  have ha : ∀ x : E, (a x : V) = f (x : V) := by
+    intro x
+    simpa [a, e'] using (hf x).symm
+  have hmat : (LinearMap.toMatrix b b a).map (algebraMap R K) =
+      LinearMap.toMatrix (b.extendOfIsLattice K) (b.extendOfIsLattice K)
+        f.toLinearMap := by
+    ext i j
+    simp only [Matrix.map_apply, LinearMap.toMatrix_apply,
+      Module.Basis.extendOfIsLattice_apply]
+    change algebraMap R K (b.repr (a (b j)) i) =
+      (b.extendOfIsLattice K).repr (f (b j)) i
+    rw [← ha, extend_repr]
+  have hd : algebraMap R K (LinearMap.det a) = LinearMap.det f.toLinearMap := by
+    rw [← LinearMap.det_toMatrix b, RingHom.map_det]
+    change ((LinearMap.toMatrix b b a).map (algebraMap R K)).det = _
+    rw [hmat, LinearMap.det_toMatrix]
+  have hn : LinearMap.det a ≠ 0 := by
+    intro hz
+    have := f.isUnit_det'.ne_zero
+    exact this (by rw [← hd, hz, map_zero])
+  have hl := length_quotient_eq_ord (N.comap E.subtype) e'
+  have hfinite : Module.length R (E ⧸ N.comap E.subtype) ≠ ⊤ := by
+    rw [hl]
+    exact Ring.ord_ne_top (mem_nonZeroDivisors_of_ne_zero hn)
+  refine ⟨f, hf, hfinite, ?_⟩
+  rw [hl, ← hd, Ring.ordFrac_eq_ord R hn]
+  rw [← Ring.ordMonoidWithZeroHom_eq_ordMonoidHom ⟨_, mem_nonZeroDivisors_of_ne_zero hn⟩]
+  rfl
+
 /-- The signed relative length of a lattice and its image is the determinant valuation.
 Source: Stacks Project, Algebra, Tags 02MF, 02MG and 02MI
 (blueprint: lem-exc-dvr-lattice-distance-determinant).
@@ -41,56 +154,29 @@ The two lengths are finite, so `ENat.toNat` followed by the cast to `ℤ` retain
 The normalized valuation is `WithZero.log (Ring.ordFrac R x)`: by Tag 02MD and
 `Ring.ordFrac_irreducible`, it takes a uniformizer to `1` and an R-unit to `0`.
 
-Proof, following the nine steps of the node (the DVR case of Tag 02MI):
+Proof (the DVR case of Tag 02MI):
 
-1. The submodule `M` is torsion-free: multiplication by a nonzero element of `R` can be
-   cancelled in `V` using its inverse in `K`. By `lem-sc-dvr-fg-torsionfree-free`, choose
-   a finite R-basis `b` of `M`. It is a K-basis of `V`: full span gives spanning, and
-   clearing denominators reduces linear independence to that over `R`. Its image `g(b)`
-   is likewise a basis of `g(M)`. If the basis is empty, both quotient lengths are zero
-   (`def-weil-pbc-module-length`) and the empty determinant is one
-   (`def-weil-pbc-matrix-determinant`, `def-weil-endomorphism-determinant`).
-2. Choose a uniformizer `t` (`def-sc-discrete-valuation-ring`). The PID is Noetherian
-   (`lem-weil-pbc-pid-noetherian-normal`), so apply
-   `lem-weil-pbc-dvr-unit-times-uniformizer-power` to numerator and denominator: each
-   nonzero fraction is `u t^r`. The exponent is unique, since otherwise a positive power
-   of the nonunit `t` would be a unit. Exponents add under multiplication and negate
-   under inversion. Also `t^q x` lies in `R` when `q ≥ 0` and `q + v_R(x) ≥ 0`.
-3. The ideals containing `t^s R`, for `s ≥ 0`, are exactly `t^j R` with `0 ≤ j ≤ s`:
-   principality and unit-times-power give these ideals, and cancellation gives the
-   containment criterion. Quotient inverse image identifies them with the submodules
-   of `R / t^s R`, giving length `s` (`def-weil-pbc-module-length`). Thus `R / aR`
-   has length `s` for `a = u t^s`. Image and inverse image also show that linear
-   isomorphisms preserve lengths.
-4. Express each vector of `b` in the K-basis `g(b)`. Choose `q ≥ 0` large enough to
-   clear the valuations of all nonzero coefficients. Then `N = t^q M` lies in
-   `H = M ∩ g(M)`, has basis `t^q b`, and spans `V`.
-5. For either `E = M` or `E = g(M)`, apply
-   `lem-sc-dvr-saturation-line-smith-normal-form` to `N ⊆ E`. The Smith bases satisfy
-   `f'_i = a_i e'_i` with all `a_i ≠ 0`. Clearing denominators proves their K-linear
-   independence. Since `N` spans `V`, no basis vector of `E` is omitted, so the two
-   ranks agree. Write `a_i = u_i t^s_i` with `s_i ≥ 0`.
-6. The coordinate map from `E` to the finite sum of `R / a_i R` is surjective with
-   kernel `N`, hence identifies `E/N` with that sum. Each summand has length `s_i`
-   by step 3. Repeatedly apply `lem-weil-pbc-length-additive-short-exact` to insertion
-   and projection of the last coordinate. Thus `E/N` has finite length `∑ s_i`.
-7. Let `A` be the inclusion matrix of a basis `f` of `N` in a basis `e` of `E`.
-   Write `e' = eP` and `f' = fQ`; then `PD = AQ` for `D = diag(a_i)`. The square
-   case of `lem-weil-pbc-cauchy-binet` gives determinant multiplicativity, while
-   `def-weil-pbc-matrix-determinant` gives the diagonal and identity determinants and
-   compatibility with `R → K`. Applying these to the inverse matrices makes `det P`
-   and `det Q` units. Taking valuations of `det A det Q = det P ∏ a_i` therefore gives
-   `v_R(det A) = ∑ s_i = length_R(E/N)`.
-8. Let `G` represent `g` in `b`, and use `t^q b` for both inclusions of `N`. Its matrix
-   in `b` is `t^q I`; its matrix `A_g` in `g(b)` satisfies `G A_g = t^q I`.
-   The determinant formulas and `def-weil-endomorphism-determinant` give finite
-   lengths `length_R(M/N) = qn` and `length_R(g(M)/N) = qn - v_R(det_K(g))`.
-   Subtraction in the integers gives the claimed valuation for this common sublattice.
-9. The quotient maps give exact sequences with left term `H/N`, middle terms `M/N`
-   and `g(M)/N`, and right terms `M/H` and `g(M)/H`. By
-   `lem-weil-pbc-length-additive-short-exact` and step 8 all these modules have finite
-   length. Subtract the two length equalities in the integers and cancel the common
-   `length_R(H/N)` to obtain the result (Tags 02MF and 02MG).
+1. For a finite free module `E` and a submodule `N` isomorphic to `E`, Smith normal
+   form expresses `E/N` as the finite product of the cyclic quotients `R/aᵢR`.
+   Their lengths are `Ring.ord R aᵢ` by definition. Length additivity and determinant
+   multiplicativity show that their sum is the order of the inclusion determinant.
+   Changing the isomorphism `E ≃ₗ[R] N` multiplies the determinant by a unit, preserving
+   its order. This proves `length_quotient_eq_ord`, including rank zero.
+2. For full lattices `N ⊆ E`, extend a basis of `E` and its image under an isomorphism
+   `E ≃ₗ[R] N` to bases of `V`. Their basis equivalence `f` extends that isomorphism.
+   Its matrix is the scalar extension of the inclusion matrix over `R`, since extended
+   coordinates are the images of the original coordinates. Its determinant is nonzero,
+   so its order is finite. The fraction-field order API identifies that finite order
+   with `WithZero.log (Ring.ordFrac R (LinearMap.det f.toLinearMap))`.
+3. Both `M` and `g(M)` are full lattices, and Mathlib's `Submodule.IsLattice.inf` shows
+   that their intersection `H` is also a full lattice. They are finite free of the same
+   rank, equal to the dimension of `V`. Choose an isomorphism `e₁ : M ≃ₗ[R] H`; the
+   isomorphism `t : M ≃ₗ[R] g(M)` induced by `g` gives `e₂ = e₁ ∘ t⁻¹`.
+4. Apply step 2 to `H ⊆ M` and `H ⊆ g(M)`, obtaining ambient equivalences `f₁,f₂`.
+   On `M`, one has `f₁(x) = e₁(x) = e₂(g(x)) = f₂(g(x))`. Since `M` spans `V`,
+   this gives `f₁ = f₂ ∘ g`. Taking determinants and their logarithmic orders gives
+   `v(det f₁) = v(det f₂) + v(det g)`. Subtract the two finite length formulas.
+   The two comaps in the statement are exactly `H` viewed inside the two lattices.
 -/
 theorem lattice_distance_determinant
     (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R]
@@ -109,6 +195,57 @@ theorem lattice_distance_determinant
           (M.map (g.toLinearMap.restrictScalars R) ⧸
             M.comap (M.map (g.toLinearMap.restrictScalars R)).subtype)).toNat : ℤ) =
         WithZero.log (Ring.ordFrac R (LinearMap.det g.toLinearMap)) := by
-  sorry
+  classical
+  let : Submodule.IsLattice K M :=
+    ⟨Module.Finite.iff_fg.mp inferInstance, hspan⟩
+  let P := M.map (g.toLinearMap.restrictScalars R)
+  let t : M ≃ₗ[R] P :=
+    Submodule.equivMapOfInjective (g.toLinearMap.restrictScalars R) g.injective M
+  let : Submodule.IsLattice K P := by
+    refine ⟨(Submodule.IsLattice.fg (M := M)).map _, ?_⟩
+    change Submodule.span K (g '' (M : Set V)) = ⊤
+    rw [Submodule.span_image_linearEquiv, hspan, Submodule.map_top]
+    exact LinearMap.range_eq_top.mpr g.surjective
+  let H := M ⊓ P
+  have hr : Module.finrank R M = Module.finrank R H := by
+    have hrank := (Submodule.IsLattice.rank' K M).trans
+      (Submodule.IsLattice.rank' K H).symm
+    simpa only [← Module.finrank_eq_rank, Nat.cast_inj] using hrank
+  let e : M ≃ₗ[R] H := LinearEquiv.ofFinrankEq M H hr
+  let e' : P ≃ₗ[R] H := t.symm.trans e
+  obtain ⟨f₁, hf₁, hlen₁, hval₁⟩ :=
+    lattice_inclusion_length M H inf_le_left e
+  obtain ⟨f₂, hf₂, hlen₂, hval₂⟩ :=
+    lattice_inclusion_length P H inf_le_right e'
+  have hcomp : f₁.toLinearMap = f₂.toLinearMap ∘ₗ g.toLinearMap := by
+    apply (Module.Free.chooseBasis R M |>.extendOfIsLattice K).ext
+    intro i
+    simp only [Module.Basis.extendOfIsLattice_apply, LinearMap.comp_apply]
+    change f₁ ((Module.Free.chooseBasis R M i : M) : V) =
+      f₂ (g ((Module.Free.chooseBasis R M i : M) : V))
+    rw [hf₁]
+    change _ = f₂ (t (Module.Free.chooseBasis R M i) : V)
+    rw [hf₂]
+    simp [e']
+  have hd := congrArg LinearMap.det hcomp
+  rw [LinearMap.det_comp] at hd
+  have hn₂ : LinearMap.det f₂.toLinearMap ≠ 0 :=
+    f₂.isUnit_det'.ne_zero
+  have hng : LinearMap.det g.toLinearMap ≠ 0 :=
+    g.isUnit_det'.ne_zero
+  have hv := congrArg (fun x ↦ WithZero.log (Ring.ordFrac R x)) hd
+  rw [map_mul, WithZero.log_mul ((map_ne_zero (Ring.ordFrac (K := K) R)).mpr hn₂)
+    ((map_ne_zero (Ring.ordFrac (K := K) R)).mpr hng)] at hv
+  have hH₁ : H.comap M.subtype = P.comap M.subtype := by
+    ext x
+    simp [H]
+  have hH₂ : H.comap P.subtype = M.comap P.subtype := by
+    ext x
+    simp [H]
+  rw [hH₁] at hlen₁ hval₁
+  rw [hH₂] at hlen₂ hval₂
+  refine ⟨hlen₁, hlen₂, ?_⟩
+  rw [hval₁, hval₂]
+  omega
 
 end IsDiscreteValuationRing
