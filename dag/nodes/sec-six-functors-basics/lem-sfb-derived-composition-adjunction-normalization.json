@@ -17,97 +17,79 @@
  ],
  "proof": [
   {
-   "text": "Write $Q$ for localization, with its category understood from the argument, and suppress the canonical termwise composition identifications. By [sk-def-sfb-derived-categories], the three Grothendieck abelian categories have K-injective resolutions. For each $i=a,b,c$, [lem-weil-pbc-right-adjoint-preserves-kinjective] applies to the specified $L_i\\dashv R_i$: additivity is assumed and $L_i$ is exact. Thus $C(R_i)$ preserves K-injectives. In particular, for K-injective $I$ in $\\mathcal C$, both $C(R_b)I$ and $C(R_c)I$ are K-injective, as is $C(R_a)C(R_b)I$. Let $\\beta_{i,J}:Q C(R_i)J\\to\\mathbf R R_i(QJ)$ be the derived-functor comparison of [def-sfb-right-derived-functor]; it is an isomorphism when $J$ is K-injective.",
+   "text": "Use the concrete Grothendieck K-injective resolution instance in WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution. This realizes the K-injective convention of [sk-def-sfb-derived-categories] for the concrete rightDerivedFunctor already appearing in the unchanged statement. Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] to adjb: the exact left adjoint Lb implies Rb preserves K-injective complexes. Thus the canonical right-derived composition isomorphism for Rb followed by Ra exists.",
    "uses": [
     "sk-def-sfb-derived-categories",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "def-sfb-right-derived-functor"
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 08BJ, lemma-adjoint-preserve-K-injectives; 070K, lemma-enough-K-injectives-implies; 070Y, lemma-K-injective-defined"
+    "place": "Tag 09T5, label lemma-derived-adjoint-functors; the composition comparison and adjoint-uniqueness construction in sites-cohomology.tex Tag 0D6E, label lemma-derived-pushforward-composition, specialized to exact left adjoints."
    }
   },
   {
-   "text": "Let $a_i$ be the hom bijection on homotopy categories supplied by [lem-weil-pbc-termwise-adjunction-homotopy], and $\\Phi_i$ the specified derived hom bijection, the canonical bijection of [lem-pc-derived-adjoint-functors]. Its normalization at a K-injective $J$ is\n$$\\Phi_i(Qf)=\\beta_{i,J}\\circ Q(a_i(f)),\\qquad f:C(L_i)X\\to J.$$\nHere and below $f$ may denote a homotopy class. To check the hypotheses and formula in [lem-pc-pre-derived-adjoint-functors-general], take its right functor to be $R_i$ and its left functor to be $L_i$. For a quasi-isomorphism $s:J\\to J'$, [lem-weil-pbc-kinjective-hom-derived] gives a unique homotopy class $t:J'\\to J$ with $ts=1$: lift $(Qs)^{-1}$ using its bijection and use injectivity to check $ts=1$. Thus $1_J$ is final in the outgoing quasi-isomorphism category. The right diagram is essentially constant with value $Q C(R_i)J$, identified with $\\mathbf R R_i(QJ)$ by $\\beta_{i,J}$. On the left, exactness makes every $Q C(L_i)(P\\to X)$ an isomorphism, so their inverses give the representing cone with value $D(L_i)(QX)$. The cited lemma's formula with $s=1_J$, $t=1_X$ gives the display. Every derived map $D(L_i)(QX)\\to QJ$ has a unique homotopy representative by [lem-weil-pbc-kinjective-hom-derived], so this computes the entire hom bijection, not merely selected chain maps. These are precisely the induced adjunctions, with no change of unit or counit.",
+   "text": "Prove the private helper compIso_hom_eq_conjugate, the independent-Hom-universe version of the existing source comparison theorem. Apply rightDerived_ext to the composite right-derived unit. Expand conjugation [def-weil-pbc-adjunction-conjugate]. Naturality moves the derived unit past the comparison. The derived unit and counit factorization equations of [lem-sc-derived-adjunction-from-underived] reduce the result to the ordinary homotopy adjunction. Its unit and counit are termwise by [lem-weil-pbc-termwise-adjunction-homotopy]. Expand the composite counit [def-weil-pbc-composite-adjunction] and the ordinary conjugate equation; the homological-complex quotient maps this identity to the required localized identity. This is the source CompConjugate proof with independent Hom universes, rather than a new mathematical lemma.",
    "uses": [
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-sc-derived-adjunction-from-underived",
     "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-pc-derived-adjoint-functors"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 0DVC, lemma-pre-derived-adjoint-functors, and 0FND, lemma-pre-derived-adjoint-functors-general, normalization on fraction representatives; 070I, lemma-K-injective; 09T5, lemma-derived-adjoint-functors"
-   }
-  },
-  {
-   "text": "Put $L^D_{ba}=D(L_b)D(L_a)$, $R^D_{ab}=(\\mathbf R R_a)(\\mathbf R R_b)$ and $\\lambda^D=D(\\lambda)$. Exactness permits termwise descent of $\\lambda$ and its inverse by [sk-def-sfb-derived-categories]. Use the composite derived adjunction $L^D_{ba}\\dashv R^D_{ab}$ of [def-weil-pbc-composite-adjunction]. Define $\\kappa^D$ to be the conjugate of $\\lambda^D:L^D_{ba}\\to D(L_c)$ under this adjunction and the specified adjunction for $c$. By [def-weil-pbc-adjunction-conjugate], it is a natural isomorphism; its inverse is the conjugate of $(\\lambda^D)^{-1}$. It remains to prove the asserted representative formula for this particular isomorphism.",
-   "uses": [
-    "sk-def-sfb-derived-categories",
-    "def-weil-pbc-composite-adjunction",
-    "def-weil-pbc-adjunction-conjugate"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 09T5, lemma-derived-adjoint-functors; composition/adjoint-uniqueness argument of sites-cohomology.tex Tag 0D6E, lemma-derived-pushforward-composition"
-   }
-  },
-  {
-   "text": "For K-injective $I$ set\n$$\\gamma_I=(\\mathbf R R_a)(\\beta_{b,I})\\circ\\beta_{a,C(R_b)I}:Q C(R_a)C(R_b)I\\xrightarrow{\\sim}R^D_{ab}(QI).$$\nBoth factors are isomorphisms by step 1. If $w:C(L_b)C(L_a)X\\to I$, apply step 2 first for $b$ and then for $a$, whose target $C(R_b)I$ is K-injective. Naturality of $\\Phi_a$ in its target gives\n$$\\Phi_{ba}(Qw)=\\gamma_I\\circ Q\\bigl(a_a(a_b(w))\\bigr).$$\nThis uses exactly the composite hom bijection of [def-weil-pbc-composite-adjunction]: the first transposition gives $\\beta_{b,I}Q(a_b(w))$, and the second gives $(\\mathbf R R_a)(\\beta_{b,I})\\beta_{a,C(R_b)I}Q(a_a(a_b(w)))$. Thus the comparison $\\gamma_I$ records both resolution identifications, including application of $\\mathbf R R_a$ to the inner identification.",
-   "uses": [
     "def-weil-pbc-composite-adjunction"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 0DVC/0FND, pre-derived adjunction hom formula applied twice; categories.tex Tag 0DV0, lemma-compose-counits"
-   }
-  },
-  {
-   "text": "Let $\\varepsilon^0_c$ be the counit on complexes and set $u=\\varepsilon^0_{c,I}\\circ C(\\lambda)_{C(R_c)I}$. The conjugate formula of [def-weil-pbc-adjunction-conjugate], together with the termwise adjunction of [lem-weil-pbc-termwise-adjunction-homotopy], says\n$$a_a(a_b(u))=[C(\\kappa)_I].$$\nIndeed, this is the composite-adjunction transpose of $\\varepsilon^0_{c,I}C(\\lambda)_{C(R_c)I}$; the termwise unit and counit in that transpose are exactly those defining $\\kappa$. Step 2 for $c$, applied to $\\varepsilon^0_{c,I}$, gives $\\Phi_c(Q\\varepsilon^0_{c,I})=\\beta_{c,I}$ by the triangle identity. Equivalently,\n$$\\varepsilon^D_{c,QI}\\circ D(L_c)(\\beta_{c,I})=Q\\varepsilon^0_{c,I}.$$\nBy the defining conjugate formula and naturality of the composite hom bijection in its source, transposing $Qu$ therefore gives $\\kappa^D_{QI}\\beta_{c,I}$. Step 4 gives the same transpose as $\\gamma_I Q(C(\\kappa)_I)$. Cancel $\\beta_{c,I}$ to obtain\n$$\\gamma_I^{-1}\\circ\\kappa^D_{QI}\\circ\\beta_{c,I}=Q(C(\\kappa)_I).$$\nThis is the required representative, with precisely the canonical resolution comparisons.",
-   "uses": [
-    "def-weil-pbc-adjunction-conjugate",
-    "lem-weil-pbc-termwise-adjunction-homotopy"
-   ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 0FND/0DVC and 09T5, derived adjunction normalized by the termwise counit; the explicit conjugate evaluation supplies the normalization in sites-cohomology.tex Tag 0D6E"
+    "place": "Tag 09T5, label lemma-derived-adjoint-functors; the composition comparison and adjoint-uniqueness construction in sites-cohomology.tex Tag 0D6E, label lemma-derived-pushforward-composition, specialized to exact left adjoints."
    }
   },
   {
-   "text": "Every complex $K$ admits a quasi-isomorphism $s:K\\to I$ with $I$ K-injective by step 1. Naturality of the already constructed $\\kappa^D$ gives\n$$\\kappa^D_{QK}=R^D_{ab}(Qs)^{-1}\\circ\\kappa^D_{QI}\\circ(\\mathbf R R_c)(Qs).$$\nThese are the canonical resolution identifications of [def-sfb-right-derived-functor], so step 5 also identifies the comparison computed on any resolution and makes it independent of that choice. Finally the definition of conjugation [def-weil-pbc-adjunction-conjugate] equates the hom bijection for $c$, followed by $\\kappa^D$, with precomposition by $\\lambda^D$ followed by the composite hom bijection. Taking identity morphisms in these bijections gives\n$$R^D_{ab}(\\lambda^D_X)\\circ\\eta^D_{ba,X}=\\kappa^D_{D(L_c)X}\\circ\\eta^D_{c,X},\\qquad\n\\varepsilon^D_{ba,Y}\\circ L^D_{ba}(\\kappa^D_Y)=\\varepsilon^D_{c,Y}\\circ\\lambda^D_{(\\mathbf R R_c)Y}.$$\nThe composite unit and counit here are exactly those of [def-weil-pbc-composite-adjunction]. These equations prove the claimed normalization of both adjunction structures.",
+   "text": "Define kappa to be the ordinary conjugate of eL, and kappaD to be the conjugate of derivedCompositionLeftIso, using [def-weil-pbc-adjunction-conjugate] and [def-weil-pbc-composite-adjunction]. Apply the helper to Rb, Ra, Rc, kappa inverse and eL inverse. The descended left comparison is definitionally the inverse of derivedCompositionLeftIso, so equality of the resulting isomorphisms identifies the inverse of rightDerivedFunctorCompIso' Rb Ra kappa.symm with kappaD.hom.",
    "uses": [
-    "def-sfb-right-derived-functor",
     "def-weil-pbc-adjunction-conjugate",
     "def-weil-pbc-composite-adjunction"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 09T5, lemma-derived-adjoint-functors; sites-cohomology.tex Tag 0D6E, uniqueness of the adjoint comparison; categories.tex Tag 0DV0 for the composite unit and counit"
+    "place": "Tag 09T5, label lemma-derived-adjoint-functors; the composition comparison and adjoint-uniqueness construction in sites-cohomology.tex Tag 0D6E, label lemma-derived-pushforward-composition, specialized to exact left adjoints."
+   }
+  },
+  {
+   "text": "Evaluate that inverse comparison at the homotopy class of I. Unfold rightDerivedFunctorCompIso', rightDerivedFunctorCompIso, rightDerivedFunctorNatIso, rightDerivedFunctorNatTrans and rightDerivedFunctorCompUnit. Their defining factorization equations simplify to beta_c followed by kappaD equals Qh(C(kappa)) followed by the inverse termwise composition identification, beta_a and RRa(beta_b), in exactly the order in the statement. Together with the preserved K-injectivity from step 1 this proves the representative clause.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5, label lemma-derived-adjoint-functors; the composition comparison and adjoint-uniqueness construction in sites-cohomology.tex Tag 0D6E, label lemma-derived-pushforward-composition, specialized to exact left adjoints."
+   }
+  },
+  {
+   "text": "The unit normalization is the symmetric form of Mathlib unit_conjugateEquiv; the counit normalization is conjugateEquiv_counit. Apply them to the same derived adjunctions and the hom of derivedCompositionLeftIso. Thus the witness has the stipulated conjugate value and both normalization equations.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5, label lemma-derived-adjoint-functors; the composition comparison and adjoint-uniqueness construction in sites-cohomology.tex Tag 0D6E, label lemma-derived-pushforward-composition, specialized to exact left adjoints."
    }
   }
  ],
  "proof_deps": [
   "sk-def-sfb-derived-categories",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "def-sfb-right-derived-functor",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-sc-derived-adjunction-from-underived",
   "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-pc-derived-adjoint-functors",
-  "def-weil-pbc-composite-adjunction",
-  "def-weil-pbc-adjunction-conjugate"
+  "def-weil-pbc-composite-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 0FND, 0DVC, 09T5, 070I, 070Y and 08BJ, with the composition-by-adjoint-uniqueness argument in sites-cohomology.tex Tag 0D6E. The explicit K-injective conjugate calculation is supplied by Q21."
+  "place": "Stacks Tags 09T5 and 0D6E; N3 Lean proof using the existing source derived-composition definitions, Mathlib derived unit/counit factorization and conjugation. The private independent-Hom-universe helper follows the proved source CompConjugate argument."
  },
  "mathlib_searches": [
   {
@@ -258,9 +240,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "lem-pc-derived-adjoint-functors"
+  "lem-weil-pbc-termwise-adjunction-homotopy"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -291,5 +271,15 @@
   "group": "Q05",
   "result": "pass",
   "note": "Read node, 6 stmt deps, module, report, upstream mapDerivedCategoryRightDerivedAdjunction (Mathlib Adjunction.derived with canonical α, β = normalized 09T5 adjunction of lem-pc), rightDerivedFunctor/Unit, Grothendieck K-injective instance. Clause by clause: Grothendieck abelian at w=v; independent HasDerivedCategory universes (confirmed by #check); exact = Additive+PreservesFinite(Co)Limits; κ = conjugateIsoEquiv adjc (adja.comp adjb) eL, direction correct; D(λ) helper is a real canonical composite; κD equals the conjugate under the derived c-adjunction and the composite derived adjunction; C(Rb)I K-injective; representative equation type-checked arrow by arrow (β_c;κD = Q(Cκ);comp⁻¹;β_a;RRa(β_b)); unit and counit equations match conjugateEquiv lemmas. No extra hypotheses, no duplicate (CompConjugate theorem lacks representative/unit/counit clauses), only sorry, docstrings with tags and blueprint, node differs only in lean, statement verbatim. nt_compile clean in 1.6 s. Process note only: the Second reading section is the author's self-check."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261019T005350-L-2758485",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
