@@ -1,17 +1,14 @@
 # Work queue
 
-1244 items; claim with `tools/claim.py next <group> [--stage N]`.
+1243 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (4)
+## Stage 1: nodes to split (1)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lem-per-artin-gabber-affine-curve` | - | sorry_here |
-| `lem-per-finite-coefficient-dual-constructible` | - | none |
-| `lem-per-finite-compact-support-fibre-support-bound` | - | none |
 | `lem-trf-hilbert-samuel-local-presentations` | - | none |
 
-## Stage 2: nodes to state (23)
+## Stage 2: nodes to state (25)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -23,23 +20,25 @@
 | `lem-pur-adic-purity-scalar-naturality` | 1 | state | 33 |
 | `det-sp-tower-gluing` | 1 | state | 15 |
 | `prop-pur-rational-purity-trace-coherence` | 1 | state | 6 |
-| `lem-coef-finite-free-extension` | 1 | state | 5 |
 | `sk-thm-sf-tensor-hom` | 1 | state | 4 |
 | `det-prop-diagonal-tower-trace` | 1 | state | 3 |
 | `lem-tw-lisse-rational-realization` | 1 | state | 3 |
 | `lem-pur-flag-localized-product` | 1 | state | 1 |
 | `det-sp-p1-trace` | 1 | state | 0 |
 | `lem-a1-adic-compactification-section-realization` | 1 | state | 0 |
-| `lem-a1-qbar-curve-duality` | 1 | state | 0 |
 | `lem-coef-tower-natural-currying` | 1 | state | 0 |
 | `lem-pur-condensed-exceptional-reconstruction` | 1 | state | 0 |
+| `lem-pur-finite-free-compact-composition` | 1 | state | 0 |
+| `lem-pur-finite-free-projection-exchange` | 1 | state | 0 |
+| `lem-pur-finite-universal-smooth-trace` | 1 | state | 0 |
 | `lem-sf-constant-semilinear-generator-comparison` | 1 | state | 0 |
 | `lem-zl-proper-unit-condensed-realization` | 1 | state | 0 |
 | `thm-pur-vector-bundle-thom` | 1 | state | 0 |
 | `lem-coef-finite-adjunction-transition` | 2 | state | 0 |
+| `lem-coef-finite-free-compact-composition` | 2 | state | 0 |
 | `nt-target-poincare-isiso` | 2 | state | 0 |
 
-Not open yet: 305 nodes that below a finished node, not needed, 2 nodes that wait for stage 1 (statement downstream not grounded), 135 nodes that wait for a statement dependency (bottom-up).
+Not open yet: 304 nodes that below a finished node, not needed, 131 nodes that wait for a statement dependency (bottom-up).
 
 ## Stage 3: modules to prove (1217)
 
@@ -107,9 +106,10 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.UnboundedProperOpenInterchange` | 5 | 1 | proof | route |
 | `Sheaf.SixFunctors.BoundaryDualityDischarge` | 5 | 1 | proof | route |
 | `Sheaf.SixFunctors.IntegralVerdier` | 5 | 1 | proof | route |
-| `Sheaf.WeilSheaf.AffineCurveRangePositive` | 5 | 1 | proof | route |
 | `WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne` | 5 | 1 | proof | route |
 | `Sheaf.Algebra.Homology.RingedInternalHomSignedCalculus` | 6 | 6 | proof | route |
+| `Sheaf.AlgebraicGeometry.AdicDenseOpenImmersionFiniteness` | 6 | 1 | proof | route |
+| `Sheaf.AlgebraicGeometry.AdicProjectiveSpaceFiniteness` | 6 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.BoundedDerivedSmoothBaseChange` | 6 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.EtaleClosedSupportTorAmplitude` | 6 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.EtaleOriginAdjointClass` | 6 | 1 | proof | route |
@@ -148,8 +148,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.SixFunctors.DetSfCompCompositionBaseChange` | 6 | 1 | proof | route |
 | `Sheaf.SixFunctors.FiniteDualitySiteComparison` | 6 | 1 | proof | route |
 | `Sheaf.SixFunctors.FlatModelGeneration` | 6 | 3 | proof | route |
-| `Sheaf.AlgebraicGeometry.AdicDenseOpenImmersionFiniteness` | 7 | 1 | proof | route |
-| `Sheaf.AlgebraicGeometry.AdicProjectiveSpaceFiniteness` | 7 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.CurveOpenDimensionGeneral` | 7 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.DerivedOpenImmersionFullyFaithful` | 7 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.DirectImageFinitenessInputHolds` | 7 | 1 | proof | route |
@@ -158,7 +156,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.EtaleLocalIsomorphismConstructible` | 7 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.FiniteDualityLocallyClosedComparison` | 7 | 2 | proof | route |
 | `Sheaf.AlgebraicGeometry.FiniteEtaleProEtaleAdjunction` | 7 | 2 | proof | route |
-| `Sheaf.AlgebraicGeometry.FrobeniusTrivializationPullback` | 7 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.FullCdAmbientAdjoint` | 7 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.InternalModuleOperationsTransport` | 7 | 2 | proof | route |
 | `Sheaf.AlgebraicGeometry.LisseLatticeFiniteEtaleDescent` | 7 | 1 | proof | route |
@@ -196,8 +193,8 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.SmoothPurity.TensorMateEtalePrecomp` | 7 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.ComparisonGlobalCohomology` | 8 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.CurveOpenConstructibleGeneral` | 8 | 1 | proof | route |
+| `Sheaf.AlgebraicGeometry.FrobeniusTrivializationPullback` | 8 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.OpenImmersionRestriction` | 8 | 1 | proof | route |
-| `Sheaf.AlgebraicGeometry.ProEtaleTensorCompositionUnit` | 8 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.ProperOpenDerivedSupport` | 8 | 1 | proof | route |
 | `Sheaf.Paper.BoundedSiteAdjunctionTranspose` | 8 | 4 | proof | route |
 | `Sheaf.Paper.CompactSupportSiteCoherence` | 8 | 1 | proof | route |
@@ -206,8 +203,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.IntegralLocalizingProperBaseChange` | 8 | 1 | proof | route |
 | `Sheaf.Paper.PurityDncFiniteRealization` | 8 | 1 | proof | route |
 | `Sheaf.Paper.PuritySectionInvariant` | 8 | 1 | proof | route |
-| `Sheaf.Paper.SmoothPullbackSupportDimension` | 8 | 1 | proof | route |
-| `Sheaf.Paper.TraceCompactificationCohomology` | 8 | 1 | proof | route |
 | `Sheaf.SixFunctors.CompactCoefficientComposition` | 8 | 2 | proof | route |
 | `WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine` | 8 | 4 | proof | route |
 | `Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison` | 9 | 1 | proof | route |
@@ -215,20 +210,20 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.HigherDirectImagesLimits` | 9 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.OpenDegreeZeroConstructible` | 9 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.ProEtaleSupportedExteriorProduct` | 9 | 7 | proof | route |
+| `Sheaf.AlgebraicGeometry.ProEtaleTensorCompositionUnit` | 9 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.SupportedProductQuotientModel` | 9 | 7 | proof | route |
 | `Sheaf.CategoryTheory.SiteTruncationDerivedLimit` | 9 | 1 | proof | route |
-| `Sheaf.DeligneLaumon.ConstructibleSubsetClosureDimension` | 9 | 1 | proof | route |
 | `Sheaf.Paper.EtaleFiniteCoefficientHomArrow` | 9 | 7 | proof | route |
 | `Sheaf.Paper.IntegralStratumHomFormula` | 9 | 2 | proof | route |
 | `Sheaf.Paper.ProperHeartBoundTorsion` | 9 | 1 | proof | route |
 | `Sheaf.RepresentationTheory.ProcyclicTwoTerm` | 9 | 1 | proof | route |
 | `Sheaf.RingTheory.QuasiExcellentNagata` | 9 | 1 | proof | route |
 | `Sheaf.SixFunctors.FlatModel` | 9 | 4 | proof | route |
+| `WeilConjectures.WeilSheaf.PoincareDualityLisse` | 9 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.NormalOpenLisseImage` | 10 | 1 | proof | route |
 | `Sheaf.Paper.AdicConstructibleFiniteReductions` | 10 | 5 | proof | route |
 | `Sheaf.RingTheory.JTwoResidueFieldCriterion` | 10 | 1 | proof | route |
 | `Sheaf.RingTheory.NagataJTwoOfWeaklyEtale` | 10 | 1 | proof | route |
-| `Sheaf.SecPurity.NormalLocallyConstantFiniteSection` | 10 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.FiniteNormalClopenConstructibleModule` | 11 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.LisseTrivializedFiniteEtale` | 11 | 1 | proof | route |
 | `Sheaf.Paper.ConstantRealizationDerivedScalarExtension` | 11 | 4 | proof | route |
@@ -236,16 +231,10 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.RingTheory.NonemptyRegularOpenSeparableAscent` | 11 | 1 | proof | route |
 | `Sheaf.RingTheory.GenericSmoothDomain` | 12 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.LisseOpenRelativeLineConstructibility` | 13 | 1 | proof | route |
-| `Sheaf.AlgebraicGeometry.EnlargedEtaleRingedSite` | 14 | 21 | proof | route |
 | `Sheaf.AlgebraicGeometry.ProperSmoothCurvesFiniteModule` | 15 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.AffineLimitFibreDimensionBoundCore` | 16 | 1 | proof | route |
-| `Sheaf.AlgebraicGeometry.EtaleSupportedKernelAdjunction` | 16 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.GoodCurvesPreimageBoundary` | 16 | 1 | proof | route |
-| `Sheaf.AlgebraicGeometry.KunnethSupported` | 16 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.GoodCurvesBoundaryQuasiFinite` | 17 | 1 | proof | route |
-| `Sheaf.AlgebraicGeometry.RelativeHigherDirectImageContinuity` | 17 | 1 | proof | route |
-| `Sheaf.AlgebraicGeometry.SupportedProductLocalization` | 17 | 6 | proof | route |
-| `Sheaf.Paper.ExternalRHomConePairing` | 18 | 1 | proof | route |
 | `Sheaf.Paper.DenseOpenPiOneSurjective` | - | 8 | proof | route |
 | `Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison` | 3 | 1 | proof | 1 |
 | `Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions` | 3 | 3 | proof | 1 |
@@ -307,55 +296,55 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.ZlImmersionWeilLocalBehavior` | 5 | 1 | proof | 1 |
 | `Sheaf.SixFunctors.RationalVerdier` | 5 | 1 | proof | 1 |
 | `Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses` | 6 | 3 | proof | 1 |
-| `Sheaf.DeligneLaumon.RationalSeriesPoleRadius` | 6 | 1 | proof | 1 |
 | `Sheaf.LinearAlgebra.FrobeniusModuleExtensionBounds` | 6 | 1 | proof | 1 |
 | `Sheaf.LinearAlgebra.FrobeniusModuleMixedSubquotient` | 6 | 1 | proof | 1 |
-| `Sheaf.LinearAlgebra.SpectrumExactSequence` | 6 | 1 | proof | 1 |
 | `Sheaf.Paper.CommonStageCalculus` | 6 | 8 | proof | 1 |
-| `Sheaf.Paper.CommonStageCurveWeilMiddleExtension` | 6 | 4 | proof | 1 |
 | `Sheaf.Paper.ConstructibleTruncations` | 6 | 1 | proof | 1 |
-| `Sheaf.Paper.EvenTensorPositivity` | 6 | 1 | proof | 1 |
 | `Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients` | 6 | 21 | proof | 1 |
 | `Sheaf.Paper.IntegralConstructibleCompactness` | 6 | 1 | proof | 1 |
 | `Sheaf.Paper.IntegralProperDirectSums` | 6 | 1 | proof | 1 |
 | `Sheaf.Paper.IsomorphismDerivedPullback` | 6 | 3 | proof | 1 |
-| `Sheaf.Paper.LocalFrobeniusTransportNormalization` | 6 | 8 | proof | 1 |
 | `Sheaf.Paper.PbcVerdierAxioms` | 6 | 2 | proof | 1 |
-| `Sheaf.Paper.RationalStalkExact` | 6 | 1 | proof | 1 |
 | `Sheaf.SixFunctors.FrobeniusPointTransportNatural` | 6 | 4 | proof | 1 |
 | `Sheaf.Algebra.Homology.ScalarInternalHomAdjunction` | 7 | 1 | proof | 1 |
-| `Sheaf.AlgebraicGeometry.NoetherianAffineDimOneOpen` | 7 | 1 | proof | 1 |
 | `Sheaf.LinearAlgebra.FrobeniusPunctualBoundMixed` | 7 | 1 | proof | 1 |
-| `Sheaf.Paper.AdicLisseCohomologyCalculus` | 7 | 1 | proof | 1 |
-| `Sheaf.Paper.AdicMiddleExtensionConstructible` | 7 | 16 | proof | 1 |
-| `Sheaf.Paper.CommonStageFourierTransform` | 7 | 9 | proof | 1 |
 | `Sheaf.Paper.IntegralCohomologicalAdicCriterion` | 7 | 1 | proof | 1 |
+| `Sheaf.Paper.LocalFrobeniusTransportNormalization` | 7 | 8 | proof | 1 |
+| `Sheaf.Paper.RationalStalkExact` | 7 | 1 | proof | 1 |
 | `Sheaf.Paper.WeilTensorProduct` | 7 | 10 | proof | 1 |
 | `Sheaf.AlgebraicGeometry.AffinePuncturedLineAlgebra` | 8 | 1 | proof | 1 |
-| `Sheaf.Paper.A1QbarOpenClosedCohomology` | 8 | 1 | proof | 1 |
-| `Sheaf.Paper.MiddleExtensionHcZero` | 8 | 1 | proof | 1 |
-| `Sheaf.Paper.RealSheavesSetup` | 8 | 2 | proof | 1 |
-| `Sheaf.Paper.WeilOpenImageDelta` | 8 | 1 | proof | 1 |
-| `Sheaf.AlgebraicGeometry.RegularNormalDecomposition` | 10 | 1 | proof | 1 |
+| `Sheaf.LinearAlgebra.SpectrumExactSequence` | 8 | 1 | proof | 1 |
+| `Sheaf.Paper.CommonStageCurveWeilMiddleExtension` | 9 | 4 | proof | 1 |
+| `Sheaf.Paper.CommonStageFourierTransform` | 10 | 9 | proof | 1 |
 | `Sheaf.AlgebraicGeometry.EtaleNormalComponents` | 11 | 1 | proof | 1 |
-| `Sheaf.Paper.FrobeniusCompactSupportExchange` | 13 | 2 | proof | 1 |
+| `Sheaf.AlgebraicGeometry.RegularNormalDecomposition` | 18 | 1 | proof | 1 |
 | `Sheaf.AlgebraicGeometry.ArtinSchreierPrimeCharacterComparison` | - | 1 | proof | 1 |
+| `Sheaf.AlgebraicGeometry.NoetherianAffineDimOneOpen` | - | 1 | proof | 1 |
+| `Sheaf.DeligneLaumon.RationalSeriesPoleRadius` | - | 1 | proof | 1 |
 | `Sheaf.Paper.A1FiniteWeilSectionsDecomposition` | - | 2 | proof | 1 |
+| `Sheaf.Paper.A1QbarOpenClosedCohomology` | - | 1 | proof | 1 |
+| `Sheaf.Paper.AdicLisseCohomologyCalculus` | - | 1 | proof | 1 |
 | `Sheaf.Paper.AdicLocalCharacteristicFactor` | - | 1 | proof | 1 |
+| `Sheaf.Paper.AdicMiddleExtensionConstructible` | - | 16 | proof | 1 |
 | `Sheaf.Paper.CommonStageConstituentNonexceptional` | - | 4 | proof | 1 |
 | `Sheaf.Paper.ConstructibleInternalHomContinuity` | - | 1 | proof | 1 |
 | `Sheaf.Paper.DerivedInternalHomFilteredColimit` | - | 6 | proof | 1 |
 | `Sheaf.Paper.DlConstantFieldCharts` | - | 1 | proof | 1 |
 | `Sheaf.Paper.EtaleWeilSheafEquivalence` | - | 1 | proof | 1 |
+| `Sheaf.Paper.EvenTensorPositivity` | - | 1 | proof | 1 |
 | `Sheaf.Paper.FiniteEtaleLisseWeilImage` | - | 1 | proof | 1 |
 | `Sheaf.Paper.FiniteFieldInternalHomFiniteness` | - | 1 | proof | 1 |
 | `Sheaf.Paper.FrobeniusCoefficientTwistsCanonical` | - | 7 | proof | 1 |
+| `Sheaf.Paper.FrobeniusCompactSupportExchange` | - | 2 | proof | 1 |
 | `Sheaf.Paper.IntegralConstantModelHeart` | - | 1 | proof | 1 |
+| `Sheaf.Paper.MiddleExtensionHcZero` | - | 1 | proof | 1 |
 | `Sheaf.Paper.PurAdicReconstruction` | - | 1 | proof | 1 |
 | `Sheaf.Paper.QbarCohomologyFiniteLevelComparison` | - | 10 | proof | 1 |
 | `Sheaf.Paper.QuasiFiniteCompactSupportWeights` | - | 1 | proof | 1 |
+| `Sheaf.Paper.RealSheavesSetup` | - | 2 | proof | 1 |
 | `Sheaf.Paper.RootOfUnityModulus` | - | 1 | proof | 1 |
 | `Sheaf.Paper.WeilFourierInversion` | - | 2 | proof | 1 |
+| `Sheaf.Paper.WeilOpenImageDelta` | - | 1 | proof | 1 |
 | `Sheaf.SecDeligneLaumonA1.FixedPairTruncationOrthogonality` | - | 1 | proof | 1 |
 | `Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback` | 3 | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Adjunction` | 3 | 1 | proof | 2 |
@@ -437,6 +426,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.FiniteSmoothCanonicalInterfaces` | 6 | 1 | proof | 2 |
 | `Sheaf.Paper.FiniteSmoothPullbackExchange` | 6 | 3 | proof | 2 |
 | `Sheaf.Paper.FiniteStagePairCategory` | 6 | 8 | proof | 2 |
+| `Sheaf.Paper.IntegralCompactSupportCoefficientComparison` | 6 | 35 | proof | 2 |
 | `Sheaf.Paper.IntegralCompactSupportPrescribedReductions` | 6 | 1 | proof | 2 |
 | `Sheaf.Paper.IntegralCompactSupportUniformRestriction` | 6 | 1 | proof | 2 |
 | `Sheaf.Paper.IntegralHomReductionComparison` | 6 | 1 | proof | 2 |
@@ -481,6 +471,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.WeilPullbackLocalFrobenius` | 6 | 1 | proof | 2 |
 | `Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction` | 6 | 1 | proof | 2 |
 | `Sheaf.SixFunctors.ClosedCostalkDuality` | 6 | 2 | proof | 2 |
+| `Sheaf.SixFunctors.CoefIntegralFiniteExtension` | 6 | 5 | proof | 2 |
 | `Sheaf.SixFunctors.CoefMonoidalSquareHomTransport` | 6 | 1 | proof | 2 |
 | `Sheaf.SixFunctors.ConstructibleTensorCompletion` | 6 | 1 | proof | 2 |
 | `Sheaf.SixFunctors.EtaleHomThickLocus` | 6 | 2 | proof | 2 |
@@ -492,7 +483,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.SixFunctors.RingedDerivedMonoidalComparisons` | 6 | 1 | proof | 2 |
 | `Sheaf.SixFunctors.RingedFiniteFreeHomBaseChange` | 6 | 1 | proof | 2 |
 | `Sheaf.TraceFormula.PointTransportComposition` | 6 | 2 | proof | 2 |
-| `Sheaf.AlgebraicGeometry.FrobeniusFactorization` | 7 | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.OpenImmersionHigherDirectImages` | 7 | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.QcqsHigherDirectImage` | 7 | 1 | proof | 2 |
 | `Sheaf.CategoryTheory.AbsoluteTraceExchange` | 7 | 1 | proof | 2 |
@@ -501,49 +491,47 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.CompletedPullbackAdjunction` | 7 | 1 | proof | 2 |
 | `Sheaf.Paper.FiniteReductionRootCharts` | 7 | 3 | proof | 2 |
 | `Sheaf.Paper.IntegralCtfTriangulated` | 7 | 1 | proof | 2 |
-| `Sheaf.Paper.IntegralPointTransportTowerRealization` | 7 | 1 | proof | 2 |
 | `Sheaf.Paper.IntegralTensorProduct` | 7 | 1 | proof | 2 |
 | `Sheaf.Paper.IsomorphismComparisonScalarExtension` | 7 | 5 | proof | 2 |
 | `Sheaf.Paper.IsomorphismReductionTower` | 7 | 1 | proof | 2 |
 | `Sheaf.Paper.OrdinaryCompletedIntegralPullback` | 7 | 9 | proof | 2 |
 | `Sheaf.Paper.PbcConeIndependence` | 7 | 1 | proof | 2 |
 | `Sheaf.Paper.PbcDistinguishedDiagramLifting` | 7 | 1 | proof | 2 |
-| `Sheaf.Paper.PbcWeilCategory` | 7 | 7 | proof | 2 |
 | `Sheaf.Paper.PointSectionsDerivedReduction` | 7 | 1 | proof | 2 |
-| `Sheaf.Paper.PointSectionsFiniteReduction` | 7 | 1 | proof | 2 |
 | `Sheaf.Paper.ProEtaleConstantReductionTower` | 7 | 10 | proof | 2 |
 | `Sheaf.Paper.ProEtaleSectionModuleFunctors` | 7 | 3 | proof | 2 |
 | `Sheaf.Paper.PurInverseImageTensorHom` | 7 | 1 | proof | 2 |
 | `Sheaf.Paper.PurityAffineChartBounds` | 7 | 1 | proof | 2 |
 | `Sheaf.Paper.SfPreservationClass` | 7 | 1 | proof | 2 |
 | `Sheaf.Paper.TwistPreservesFiniteness` | 7 | 1 | proof | 2 |
-| `Sheaf.SixFunctors.FrobeniusFixedPoints` | 7 | 1 | proof | 2 |
-| `Sheaf.SixFunctors.SchemeFrobenius` | 7 | 1 | proof | 2 |
-| `Sheaf.SixFunctors.SelectedSchemeGaloisComparison` | 7 | 1 | proof | 2 |
 | `Sheaf.TraceFormula.IsomorphismDerivedPullbackComparisonNormalization` | 7 | 1 | proof | 2 |
-| `Sheaf.AlgebraicGeometry.OpenDimOneHigherDirectImageVanishing` | 8 | 1 | proof | 2 |
+| `Sheaf.AlgebraicGeometry.FrobeniusFactorization` | 8 | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.ProEtaleRingedClosedKernelAdjoint` | 8 | 1 | proof | 2 |
 | `Sheaf.Paper.AdicStratifiedPerfect` | 8 | 1 | proof | 2 |
-| `Sheaf.Paper.CommonStageWeilShriek` | 8 | 5 | proof | 2 |
-| `Sheaf.Paper.DlLocallyConstructibleAdicHeart` | 8 | 5 | proof | 2 |
 | `Sheaf.Paper.FiniteCoefficientSiteScalarArrow` | 8 | 2 | proof | 2 |
 | `Sheaf.Paper.FiniteReductionChartCalculus` | 8 | 3 | proof | 2 |
+| `Sheaf.Paper.IntegralPointTransportTowerRealization` | 8 | 1 | proof | 2 |
+| `Sheaf.Paper.PbcWeilCategory` | 8 | 7 | proof | 2 |
+| `Sheaf.Paper.PointSectionsFiniteReduction` | 8 | 1 | proof | 2 |
 | `Sheaf.Paper.RingedDerivedSliceLocalization` | 8 | 1 | proof | 2 |
-| `Sheaf.Paper.SmoothLisseIntegralLattice` | 8 | 1 | proof | 2 |
-| `Sheaf.Paper.StratifiedLatticeRank` | 8 | 1 | proof | 2 |
 | `Sheaf.SecSmoothPurity.DirectImageScalarExchange` | 8 | 1 | proof | 2 |
 | `Sheaf.SecSmoothPurity.OpenScalarExchange` | 8 | 1 | proof | 2 |
+| `Sheaf.SixFunctors.FrobeniusFixedPoints` | 8 | 1 | proof | 2 |
+| `Sheaf.SixFunctors.SchemeFrobenius` | 8 | 1 | proof | 2 |
+| `Sheaf.SixFunctors.SelectedSchemeGaloisComparison` | 8 | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.DiscreteNoetherianConstructibleSerre` | 9 | 1 | proof | 2 |
-| `Sheaf.Paper.RationalDirectImageRealization` | 9 | 2 | proof | 2 |
+| `Sheaf.Paper.DlLocallyConstructibleAdicHeart` | 9 | 5 | proof | 2 |
+| `Sheaf.Paper.StratifiedLatticeRank` | 9 | 1 | proof | 2 |
 | `Sheaf.SecSmoothPurity.ClosedUnitAllStages` | 9 | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.CondensedOpenClosedInternalHom` | 10 | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.NormalConstantOpenImage` | 11 | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.NormalizationExtendsCover` | 11 | 1 | proof | 2 |
-| `Sheaf.Paper.SfCbcExtensionZeroCompletion` | 14 | 21 | proof | 2 |
+| `Sheaf.Paper.CommonStageWeilShriek` | 11 | 5 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.ArtinSchreierTraceCoverMap` | - | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.ContinuousEtaleCohomology` | - | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.Curve.ReducedBoundarySmooth` | - | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.FundamentalGroup.ArithmeticLiftFibrePath` | - | 3 | proof | 2 |
+| `Sheaf.AlgebraicGeometry.OpenDimOneHigherDirectImageVanishing` | - | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.ProEtaleContinuousCohomologyLimit` | - | 1 | proof | 2 |
 | `Sheaf.CategoryTheory.OrdinaryTriangleCounitCone` | - | 1 | proof | 2 |
 | `Sheaf.Paper.AdicPurityFiniteTensor` | - | 4 | proof | 2 |
@@ -565,6 +553,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.FieldTorAmplitude` | - | 1 | proof | 2 |
 | `Sheaf.Paper.FieldWeilShriekShiftData` | - | 7 | proof | 2 |
 | `Sheaf.Paper.FiniteCoefficientAdjointComparisons` | - | 1 | proof | 2 |
+| `Sheaf.Paper.FiniteFreeCoefficientExtension` | - | 1 | proof | 2 |
 | `Sheaf.Paper.IntegralConstructibleHeart` | - | 1 | proof | 2 |
 | `Sheaf.Paper.IntegralDirectImageTower` | - | 1 | proof | 2 |
 | `Sheaf.Paper.IntegralExceptionalInverseImage` | - | 12 | proof | 2 |
@@ -577,10 +566,14 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.ProperOpenTowerComparison` | - | 1 | proof | 2 |
 | `Sheaf.Paper.ProperSectionsSemilinearGerms` | - | 3 | proof | 2 |
 | `Sheaf.Paper.PuritySourceTransports` | - | 10 | proof | 2 |
+| `Sheaf.Paper.RationalDirectImageRealization` | - | 2 | proof | 2 |
 | `Sheaf.Paper.RationalSmoothPurityCanonical` | - | 16 | proof | 2 |
 | `Sheaf.Paper.SfCbcCompactSupportCompositionLimit` | - | 1 | proof | 2 |
+| `Sheaf.Paper.SfCbcExtensionZeroCompletion` | - | 21 | proof | 2 |
+| `Sheaf.Paper.SmoothLisseIntegralLattice` | - | 1 | proof | 2 |
 | `Sheaf.Paper.SmoothPurityCoefficientTowersAbelian` | - | 1 | proof | 2 |
 | `Sheaf.Paper.SmoothPurityNormalizedEquivalence` | - | 1 | proof | 2 |
+| `Sheaf.Paper.TraceCompactificationCohomology` | - | 1 | proof | 2 |
 | `Sheaf.Paper.WeilMixedUpperBounds` | - | 6 | proof | 2 |
 | `Sheaf.Paper.WfTensorCompletionFrobenius` | - | 4 | proof | 2 |
 | `Sheaf.Paper.ZlFrameworkPbcOpenExchangeComparison` | - | 7 | proof | 2 |
@@ -662,7 +655,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.FiniteCoefficientSiteChainTensor` | 7 | 1 | proof | 3 |
 | `Sheaf.Paper.FiniteLevelRectangle` | 7 | 1 | proof | 3 |
 | `Sheaf.Paper.FiniteSystemPullbackCoherence` | 7 | 7 | proof | 3 |
-| `Sheaf.Paper.FrobeniusCoefficientReductionCoherence` | 7 | 8 | proof | 3 |
 | `Sheaf.Paper.IntegralCoherenceTower` | 7 | 1 | proof | 3 |
 | `Sheaf.Paper.IntegralComparisonRealizationModels` | 7 | 1 | proof | 3 |
 | `Sheaf.Paper.IntegralInverseImageComparisonComposition` | 7 | 2 | proof | 3 |
@@ -688,9 +680,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.SixFunctors.CoefTowerEvaluationPairing` | 7 | 6 | proof | 3 |
 | `Sheaf.SixFunctors.CoefTowerTraceRectification` | 7 | 9 | proof | 3 |
 | `Sheaf.SixFunctors.FiniteDualityClosedComparison` | 7 | 2 | proof | 3 |
-| `Sheaf.AlgebraicGeometry.AbsoluteFrobeniusSite` | 8 | 1 | proof | 3 |
-| `Sheaf.AlgebraicGeometry.RationalTangentCotangentDuality` | 8 | 1 | proof | 3 |
-| `Sheaf.AlgebraicGeometry.SchemeFrobeniusFiniteRadicial` | 8 | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.SiteClosedCounitTransport` | 8 | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.SupportCohomology` | 8 | 1 | proof | 3 |
 | `Sheaf.CategoryTheory.AdjointMate` | 8 | 1 | proof | 3 |
@@ -699,28 +688,28 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.ConnectedTateLineEndomorphisms` | 8 | 1 | proof | 3 |
 | `Sheaf.Paper.DerivedReductionResolutionIndependence` | 8 | 5 | proof | 3 |
 | `Sheaf.Paper.FiniteClosedShriek` | 8 | 8 | proof | 3 |
-| `Sheaf.Paper.FourierAdicArtinSchreier` | 8 | 3 | proof | 3 |
+| `Sheaf.Paper.FrobeniusCoefficientReductionCoherence` | 8 | 8 | proof | 3 |
 | `Sheaf.Paper.IntegralComparisonSequenceSystems` | 8 | 7 | proof | 3 |
 | `Sheaf.Paper.IntegralTwistBaseChange` | 8 | 1 | proof | 3 |
 | `Sheaf.Paper.IntegralTwistScalarCoherence` | 8 | 1 | proof | 3 |
 | `Sheaf.Paper.ProperOpenCoefficientRefinement` | 8 | 1 | proof | 3 |
 | `Sheaf.Paper.SpecifiedPullbackComparisonAlpha` | 8 | 1 | proof | 3 |
 | `Sheaf.Paper.SystemOperationExchangeRealization` | 8 | 20 | proof | 3 |
-| `Sheaf.Paper.TraceFixedScheme` | 8 | 3 | proof | 3 |
-| `Sheaf.RingTheory.PolynomialDistinctLinearCRT` | 8 | 1 | proof | 3 |
 | `Sheaf.SecSmoothPurity.ScalarExtensionFunctor` | 8 | 15 | proof | 3 |
-| `Sheaf.AlgebraicGeometry.LocalSpectrumOpenClassification` | 9 | 1 | proof | 3 |
+| `Sheaf.AlgebraicGeometry.AbsoluteFrobeniusSite` | 9 | 1 | proof | 3 |
+| `Sheaf.AlgebraicGeometry.RationalTangentCotangentDuality` | 9 | 1 | proof | 3 |
+| `Sheaf.AlgebraicGeometry.SchemeFrobeniusFiniteRadicial` | 9 | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.UnboundedDirectImageComparison` | 9 | 1 | proof | 3 |
 | `Sheaf.CategoryTheory.RingedSheafSliceAdjunction` | 9 | 1 | proof | 3 |
 | `Sheaf.Paper.AdicResidueLissePerfectLift` | 9 | 1 | proof | 3 |
 | `Sheaf.Paper.BoundedBelowCtfReflection` | 9 | 1 | proof | 3 |
-| `Sheaf.Paper.NormalProEtaleMonodromy` | 9 | 1 | proof | 3 |
 | `Sheaf.Paper.TorsionLimitSheafCompleteness` | 9 | 1 | proof | 3 |
+| `Sheaf.Paper.TraceFixedScheme` | 9 | 3 | proof | 3 |
+| `Sheaf.RingTheory.PolynomialDistinctLinearCRT` | 9 | 1 | proof | 3 |
 | `Sheaf.SecSmoothPurity.ReductionDirectImage` | 9 | 2 | proof | 3 |
-| `Sheaf.TraceFormula.SmoothGeometricallyNormal` | 9 | 1 | proof | 3 |
-| `Sheaf.AlgebraicGeometry.AbsoluteFrobeniusUniversalHomeomorphism` | 10 | 1 | proof | 3 |
+| `Sheaf.AlgebraicGeometry.AbsoluteFrobeniusUniversalHomeomorphism` | 11 | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.CondensedPullbackTensorComparison` | 11 | 1 | proof | 3 |
-| `Sheaf.Paper.SupportedCup` | 14 | 4 | proof | 3 |
+| `Sheaf.Paper.FourierAdicArtinSchreier` | 11 | 3 | proof | 3 |
 | `Sheaf.Algebra.Homology.RationalTermHomComparison` | - | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.AbsoluteFrobeniusCoefficientNaturality` | - | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.BertiniIrreducibleMember` | - | 1 | proof | 3 |
@@ -729,6 +718,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.FundamentalGroup.AlgebraicFieldLimit` | - | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteEtaleFieldLimitDescent` | - | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.IntegralModelsStacks` | - | 1 | proof | 3 |
+| `Sheaf.AlgebraicGeometry.LocalSpectrumOpenClassification` | - | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.NowhereDenseDimZero` | - | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.ProEtalePullbackStalkCoherence` | - | 5 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.SurjectiveClosedModuleInvariance` | - | 1 | proof | 3 |
@@ -756,6 +746,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.IntegralHeartDualizable` | - | 1 | proof | 3 |
 | `Sheaf.Paper.InternalSliceDerivedHomComparison` | - | 5 | proof | 3 |
 | `Sheaf.Paper.IteratedWeilCocycle` | - | 1 | proof | 3 |
+| `Sheaf.Paper.NormalProEtaleMonodromy` | - | 1 | proof | 3 |
 | `Sheaf.Paper.OpenCompactSupportFiniteTor` | - | 4 | proof | 3 |
 | `Sheaf.Paper.OrdinaryAdjunctionScalarCompatibility` | - | 14 | proof | 3 |
 | `Sheaf.Paper.PointFibreDerivedTensorBasic` | - | 1 | proof | 3 |
@@ -772,6 +763,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.SmoothPurityReductionTowerNormalized` | - | 1 | proof | 3 |
 | `Sheaf.Paper.SmoothPurityTowerReconstruction` | - | 4 | proof | 3 |
 | `Sheaf.Paper.SmoothPurityTowerShriekLevels` | - | 1 | proof | 3 |
+| `Sheaf.Paper.SupportedCup` | - | 4 | proof | 3 |
 | `Sheaf.Paper.TensorTraceTranspose` | - | 1 | proof | 3 |
 | `Sheaf.Paper.TowerCompactSupportProjectionFormula` | - | 5 | proof | 3 |
 | `Sheaf.Paper.TraceTransposeBaseChange` | - | 1 | proof | 3 |
@@ -788,6 +780,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.SixFunctors.FiniteMappingAdjunction` | - | 1 | proof | 3 |
 | `Sheaf.SixFunctors.GeneratorReductionStatement` | - | 3 | proof | 3 |
 | `Sheaf.SixFunctors.SemilinearProperOpenMatePasting` | - | 20 | proof | 3 |
+| `Sheaf.TraceFormula.SmoothGeometricallyNormal` | - | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.ProjectiveBundleTautologicalGeometry` | 5 | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.SupportedKummerScalarSource` | 5 | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.SupportedKummerSupportHomNaturality` | 5 | 1 | proof | 4 |
@@ -854,15 +847,15 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.SixFunctors.EtaleGenericPerfectHom` | 8 | 1 | proof | 4 |
 | `Sheaf.SixFunctors.EtaleStratifiedStalkIdentification` | 8 | 1 | proof | 4 |
 | `Sheaf.TraceFormula.IntegralConeCounitRealization` | 8 | 1 | proof | 4 |
-| `Sheaf.AlgebraicGeometry.AbsoluteFrobeniusWellDefined` | 9 | 1 | proof | 4 |
-| `Sheaf.AlgebraicGeometry.RelativeFrobeniusFinite` | 9 | 1 | proof | 4 |
-| `Sheaf.AlgebraicGeometry.RelativeFrobeniusIntegralUniversalHomeomorphism` | 9 | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.SupportLocalizationTriangle` | 9 | 5 | proof | 4 |
-| `Sheaf.AlgebraicGeometry.WeaklyEtaleUniversalHomeomorphism` | 9 | 1 | proof | 4 |
 | `Sheaf.Paper.AcyclicFlatProperCoefficientModel` | 9 | 1 | proof | 4 |
 | `Sheaf.Paper.InvertibleTensorScalarExtension` | 9 | 1 | proof | 4 |
 | `Sheaf.Paper.PurIntegralTwistLineInverseImage` | 9 | 1 | proof | 4 |
 | `Sheaf.SecSmoothPurity.CochainTensorCoherenceData` | 9 | 4 | proof | 4 |
+| `Sheaf.AlgebraicGeometry.AbsoluteFrobeniusWellDefined` | 10 | 1 | proof | 4 |
+| `Sheaf.AlgebraicGeometry.RelativeFrobeniusFinite` | 10 | 1 | proof | 4 |
+| `Sheaf.AlgebraicGeometry.RelativeFrobeniusIntegralUniversalHomeomorphism` | 10 | 1 | proof | 4 |
+| `Sheaf.AlgebraicGeometry.WeaklyEtaleUniversalHomeomorphism` | 10 | 1 | proof | 4 |
 | `Sheaf.Paper.DirectImageChangeRingTranspose` | 10 | 1 | proof | 4 |
 | `Sheaf.Paper.SpDirectImageEtaleMate` | 10 | 1 | proof | 4 |
 | `Sheaf.Paper.WContractibleConstantReductionsML` | 10 | 1 | proof | 4 |
@@ -913,6 +906,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.SmoothPurityTowerLevels` | - | 3 | proof | 4 |
 | `Sheaf.Paper.SystemCompactificationProjectionSubstitution` | - | 4 | proof | 4 |
 | `Sheaf.Paper.TraceGraphCorrespondence` | - | 4 | proof | 4 |
+| `Sheaf.SecPurity.NormalLocallyConstantFiniteSection` | - | 1 | proof | 4 |
 | `Sheaf.SecSmoothPurity.AdicScalarTraceCoherence` | - | 1 | proof | 4 |
 | `Sheaf.SixFunctors.ComparisonOpenTensorCoherence` | - | 1 | proof | 4 |
 | `Sheaf.SixFunctors.CtfStabilityDirectImages` | - | 1 | proof | 4 |
@@ -922,7 +916,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.SixFunctors.GraphFrobeniusPointExchange` | - | 1 | proof | 4 |
 | `Sheaf.TraceFormula.CompactFrobeniusTransportComposition` | - | 1 | proof | 4 |
 | `Sheaf.Paper.CompactificationLocalizing` | 5 | 1 | proof | 5 |
-| `Sheaf.AlgebraicGeometry.ModuleExchangeCompositeBaseChange` | 6 | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.ProEtaleUnitLerayChainFormula` | 6 | 1 | proof | 5 |
 | `Sheaf.Paper.ConstantTwoTermResolution` | 6 | 1 | proof | 5 |
 | `Sheaf.Paper.KFlatConeComparison` | 6 | 1 | proof | 5 |
@@ -932,13 +925,13 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.LocalizingLowerShriekComposition` | 7 | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.ClopenSectionComponent` | 8 | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.CondensedCoverRestrictionConservative` | 8 | 1 | proof | 5 |
-| `Sheaf.AlgebraicGeometry.FiniteTypeFibreImageDimensionBounds` | 8 | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.ProEtaleProperOpenSheafComparison` | 8 | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.RelativeAdjointOpenOrigin` | 8 | 1 | proof | 5 |
 | `Sheaf.Paper.BrownExceptionalAdjoint` | 8 | 1 | proof | 5 |
 | `Sheaf.SixFunctors.ProEtale.IntegralOpenDirectImage` | 8 | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.DerivedSupportDirectImageComparison` | 9 | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.EtaleTensorCokernelFlat` | 9 | 1 | proof | 5 |
+| `Sheaf.AlgebraicGeometry.ModuleExchangeCompositeBaseChange` | 9 | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.ProEtalePairFlasque` | 9 | 5 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.PurSupportExact` | 9 | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.Sites.EtaleSheavesGsetsPoint` | 9 | 1 | proof | 5 |
@@ -963,9 +956,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.SupportTriangleConstruction` | 10 | 3 | proof | 5 |
 | `Sheaf.SecSmoothPurity.ProEtaleDerivedOpenRestriction` | 10 | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.AdicFiniteStratificationPullback` | 11 | 1 | proof | 5 |
-| `Sheaf.AlgebraicGeometry.NormalGeometricCoverComponents` | 11 | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.ProEtale.ConstantRealizationDetectsZero` | 11 | 1 | proof | 5 |
-| `Sheaf.AlgebraicGeometry.ProEtaleLocalSystemRepresentability` | 11 | 1 | proof | 5 |
 | `Sheaf.CategoryTheory.PerfectConstantDerivedMapLocal` | 11 | 1 | proof | 5 |
 | `Sheaf.Algebra.Homology.FilteredProjectiveComparison` | - | 6 | proof | 5 |
 | `Sheaf.Algebra.Homology.ModuleHomPrecompHomotopy` | - | 5 | proof | 5 |
@@ -974,14 +965,17 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.ConormalSequenceSmoothImmersion` | - | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.EtaleOriginProperOpenInterchange` | - | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.FiniteOrdinaryPullback` | - | 2 | proof | 5 |
+| `Sheaf.AlgebraicGeometry.FiniteTypeFibreImageDimensionBounds` | - | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.GeometricIrreducibilityAffineLocal` | - | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.GeometricIrreducibilitySubextension` | - | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.GeometricallyIrreducibleAlgebraClosure` | - | 2 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.HypersurfaceNonzeroRelativeDifferential` | - | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.LisseOpenDimensionDrop` | - | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.LisseSplitHomFlatConstructible` | - | 1 | proof | 5 |
+| `Sheaf.AlgebraicGeometry.NormalGeometricCoverComponents` | - | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.OpenDirectImageClassicalAmplitude` | - | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.ProEtale.RepleteOnContractible` | - | 1 | proof | 5 |
+| `Sheaf.AlgebraicGeometry.ProEtaleLocalSystemRepresentability` | - | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.VaryingRingOperations` | - | 14 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.VaryingRingProperOpenArrows` | - | 3 | proof | 5 |
 | `Sheaf.CategoryTheory.DerivedCategory.FrameDualMate` | - | 1 | proof | 5 |
@@ -1018,7 +1012,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.InterchangeProperPasting` | 8 | 1 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.ProEtale.ClosedInverseImageFormula` | 9 | 1 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.ProEtaleOpenInjectiveProperAcyclic` | 9 | 1 | proof | 6 |
-| `Sheaf.DeligneLaumon.IrreducibleFibreDimensionLowerBound` | 9 | 1 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.ClosedImmersionProducts` | 10 | 1 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.ComparisonPullbackOpenUnit` | 10 | 1 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.EtaleSupportedSections` | 10 | 2 | proof | 6 |
@@ -1037,36 +1030,33 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.RingTheory.LocallyNagataCatenaryOfWeaklyEtale` | 10 | 1 | proof | 6 |
 | `Sheaf.RingTheory.RegularMapReducedTarget` | 10 | 1 | proof | 6 |
 | `Sheaf.RingTheory.UniversallyJapaneseN1Criterion` | 10 | 1 | proof | 6 |
-| `Sheaf.AlgebraicGeometry.AlgebraicSpaceFpqcValuativeDescent` | 12 | 1 | proof | 6 |
-| `Sheaf.AlgebraicGeometry.EtaleSheafAlgebraicSpaceRealization` | 12 | 3 | proof | 6 |
-| `Sheaf.AlgebraicGeometry.GeometricCoverComponentQcProper` | 12 | 1 | proof | 6 |
-| `Sheaf.AlgebraicGeometry.NormalEtaleComponentsClopen` | 12 | 1 | proof | 6 |
-| `Sheaf.AlgebraicGeometry.SchemeUniverseEnlargement` | 12 | 2 | proof | 6 |
-| `Sheaf.AlgebraicGeometry.SeparatedEtaleSpaceScheme` | 12 | 1 | proof | 6 |
-| `Sheaf.Paper.CompactFiberStalk` | 13 | 4 | proof | 6 |
-| `Sheaf.Paper.PurityDivisorClass` | 13 | 2 | proof | 6 |
-| `Sheaf.Paper.PurityFrameClass` | 13 | 4 | proof | 6 |
-| `Sheaf.Paper.PurityFrameIndependence` | 14 | 1 | proof | 6 |
-| `Sheaf.Paper.SupportedCupFunctoriality` | 14 | 13 | proof | 6 |
-| `Sheaf.Paper.RelativeSupportBottomDescent` | 15 | 16 | proof | 6 |
-| `Sheaf.AlgebraicGeometry.OrdinaryKunnethFiniteRing` | 17 | 1 | proof | 6 |
-| `Sheaf.AlgebraicGeometry.EtaleConstantProjectionFormula` | 18 | 1 | proof | 6 |
-| `Sheaf.AlgebraicGeometry.EtaleConstantProjectionMap` | 18 | 2 | proof | 6 |
+| `Sheaf.AlgebraicGeometry.AlgebraicSpaceFpqcValuativeDescent` | - | 1 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.CartierReductionSiteComparison` | - | 4 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.CompactProductArrows` | - | 6 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.CompactProductRealizationArrows` | - | 1 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.CompleteFlagBundle` | - | 8 | proof | 6 |
+| `Sheaf.AlgebraicGeometry.EtaleConstantProjectionFormula` | - | 1 | proof | 6 |
+| `Sheaf.AlgebraicGeometry.EtaleConstantProjectionMap` | - | 2 | proof | 6 |
+| `Sheaf.AlgebraicGeometry.EtaleSheafAlgebraicSpaceRealization` | - | 3 | proof | 6 |
+| `Sheaf.AlgebraicGeometry.GeometricCoverComponentQcProper` | - | 1 | proof | 6 |
+| `Sheaf.AlgebraicGeometry.NormalEtaleComponentsClopen` | - | 1 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.OpenBaseChangeSiteTransport` | - | 1 | proof | 6 |
+| `Sheaf.AlgebraicGeometry.OrdinaryKunnethFiniteRing` | - | 1 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.ProjectiveLineDiagonalIntegrals` | - | 1 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.ProperCompositionSiteTransport` | - | 3 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.ProperOpenSiteTransport` | - | 2 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.ProperSupportCompactMaps` | - | 6 | proof | 6 |
+| `Sheaf.AlgebraicGeometry.RelativeHigherDirectImageContinuity` | - | 1 | proof | 6 |
+| `Sheaf.AlgebraicGeometry.SchemeUniverseEnlargement` | - | 2 | proof | 6 |
+| `Sheaf.AlgebraicGeometry.SeparatedEtaleSpaceScheme` | - | 1 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.SupportedBottomGluing` | - | 1 | proof | 6 |
+| `Sheaf.DeligneLaumon.IrreducibleFibreDimensionLowerBound` | - | 1 | proof | 6 |
 | `Sheaf.FieldTheory.FieldExtensionGeometricallyIrreducible` | - | 1 | proof | 6 |
 | `Sheaf.FieldTheory.FiniteRelativeAlgebraicClosure` | - | 1 | proof | 6 |
 | `Sheaf.FieldTheory.SeparableTensorAlgebraicClosure` | - | 1 | proof | 6 |
 | `Sheaf.Paper.CartierClassAgreement` | - | 1 | proof | 6 |
 | `Sheaf.Paper.ChernFlagFormula` | - | 1 | proof | 6 |
+| `Sheaf.Paper.CompactFiberStalk` | - | 4 | proof | 6 |
 | `Sheaf.Paper.ConstantTowerTransition` | - | 1 | proof | 6 |
 | `Sheaf.Paper.DiagonalTowerSystem` | - | 1 | proof | 6 |
 | `Sheaf.Paper.DivisibleExtensionDerivedReduction` | - | 5 | proof | 6 |
@@ -1079,9 +1069,14 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.ProjectiveBundleFormula` | - | 1 | proof | 6 |
 | `Sheaf.Paper.PurReductionLimitShiftAdjunction` | - | 1 | proof | 6 |
 | `Sheaf.Paper.PurityChernClasses` | - | 1 | proof | 6 |
+| `Sheaf.Paper.PurityDivisorClass` | - | 2 | proof | 6 |
+| `Sheaf.Paper.PurityFrameClass` | - | 4 | proof | 6 |
+| `Sheaf.Paper.PurityFrameIndependence` | - | 1 | proof | 6 |
 | `Sheaf.Paper.PurityRegularSection` | - | 17 | proof | 6 |
 | `Sheaf.Paper.RationalSliceCompletedEvaluation` | - | 8 | proof | 6 |
 | `Sheaf.Paper.RationalThickEvaluation` | - | 4 | proof | 6 |
+| `Sheaf.Paper.RelativeSupportBottomDescent` | - | 16 | proof | 6 |
+| `Sheaf.Paper.SupportedCupFunctoriality` | - | 13 | proof | 6 |
 | `Sheaf.SecSmoothPurity.DerivedExchangeCube` | - | 1 | proof | 6 |
 | `Sheaf.SixFunctors.IntegralBasicOperationShift` | - | 1 | proof | 6 |
 | `Sheaf.SixFunctors.IntegralExpressionOccurrences` | - | 6 | proof | 6 |
@@ -1096,35 +1091,37 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.RingTheory.JZeroFiniteTypeDomainDescent` | 11 | 1 | proof | 7 |
 | `Sheaf.RingTheory.RegularLocusOpenFromPrimeQuotients` | 11 | 1 | proof | 7 |
 | `Sheaf.RingTheory.WeaklyEtaleLocalComponentDimension` | 11 | 1 | proof | 7 |
-| `Sheaf.AlgebraicGeometry.AlgebraicSpace` | 13 | 3 | proof | 7 |
-| `Sheaf.AlgebraicGeometry.AlgebraicSpaceFibreProductsEtaleCovers` | 13 | 3 | proof | 7 |
-| `Sheaf.AlgebraicGeometry.AlgebraicSpaceFpqcSheaf` | 13 | 1 | proof | 7 |
-| `Sheaf.AlgebraicGeometry.ChartwiseEtalePermanence` | 13 | 1 | proof | 7 |
-| `Sheaf.AlgebraicGeometry.EtaleDescentThroughSourceCover` | 13 | 1 | proof | 7 |
-| `Sheaf.AlgebraicGeometry.EtaleRelationQuotient` | 13 | 1 | proof | 7 |
-| `Sheaf.AlgebraicGeometry.EtaleSpaceLocallyQuasiFinite` | 13 | 1 | proof | 7 |
-| `Sheaf.AlgebraicGeometry.FlatValuationLifting` | 13 | 1 | proof | 7 |
-| `Sheaf.AlgebraicGeometry.SeparatedLocallyQuasiFiniteSpaceRepresentable` | 13 | 1 | proof | 7 |
-| `Sheaf.AlgebraicGeometry.DivisorTorsorBoundarySigns` | 14 | 1 | proof | 7 |
-| `Sheaf.AlgebraicGeometry.PurityRelativeCone` | 14 | 1 | proof | 7 |
-| `Sheaf.AlgebraicGeometry.SmoothPairLocalCoordinates` | 14 | 1 | proof | 7 |
-| `Sheaf.Paper.PurityFramePrincipalBoundary` | 14 | 2 | proof | 7 |
-| `Sheaf.AlgebraicGeometry.PurEtaleClosedConstantTensor` | 15 | 2 | proof | 7 |
-| `Sheaf.Paper.ShiftedTensorMorphismCalculus` | 15 | 7 | proof | 7 |
-| `Sheaf.Paper.SupportedAffineLineHomotopy` | 15 | 6 | proof | 7 |
-| `Sheaf.RingTheory.LocalGeneratingTuples` | 15 | 1 | proof | 7 |
-| `Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Decomposition` | 16 | 1 | proof | 7 |
-| `Sheaf.CategoryTheory.FirstQuadrantLowestRowEdge` | 16 | 1 | proof | 7 |
-| `Sheaf.Paper.FiniteFieldDerivedTensorSummand` | 18 | 1 | proof | 7 |
+| `Sheaf.AlgebraicGeometry.AlgebraicSpace` | - | 3 | proof | 7 |
+| `Sheaf.AlgebraicGeometry.AlgebraicSpaceFibreProductsEtaleCovers` | - | 3 | proof | 7 |
+| `Sheaf.AlgebraicGeometry.AlgebraicSpaceFpqcSheaf` | - | 1 | proof | 7 |
+| `Sheaf.AlgebraicGeometry.ChartwiseEtalePermanence` | - | 1 | proof | 7 |
 | `Sheaf.AlgebraicGeometry.CommutativeExchangeChart` | - | 1 | proof | 7 |
+| `Sheaf.AlgebraicGeometry.DivisorTorsorBoundarySigns` | - | 1 | proof | 7 |
+| `Sheaf.AlgebraicGeometry.EtaleDescentThroughSourceCover` | - | 1 | proof | 7 |
+| `Sheaf.AlgebraicGeometry.EtaleRelationQuotient` | - | 1 | proof | 7 |
+| `Sheaf.AlgebraicGeometry.EtaleSpaceLocallyQuasiFinite` | - | 1 | proof | 7 |
+| `Sheaf.AlgebraicGeometry.EtaleSupportedKernelAdjunction` | - | 1 | proof | 7 |
 | `Sheaf.AlgebraicGeometry.FiniteAffineProetaleRefinement` | - | 1 | proof | 7 |
+| `Sheaf.AlgebraicGeometry.FlatValuationLifting` | - | 1 | proof | 7 |
 | `Sheaf.AlgebraicGeometry.GeoCartierCycleClass` | - | 1 | proof | 7 |
 | `Sheaf.AlgebraicGeometry.GeometricIrreducibilityFiniteSeparableTest` | - | 1 | proof | 7 |
+| `Sheaf.AlgebraicGeometry.KunnethSupported` | - | 1 | proof | 7 |
 | `Sheaf.AlgebraicGeometry.LocalModelCohomologyDescent` | - | 1 | proof | 7 |
+| `Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Decomposition` | - | 1 | proof | 7 |
+| `Sheaf.AlgebraicGeometry.PurEtaleClosedConstantTensor` | - | 2 | proof | 7 |
+| `Sheaf.AlgebraicGeometry.PurityRelativeCone` | - | 1 | proof | 7 |
+| `Sheaf.AlgebraicGeometry.SeparatedLocallyQuasiFiniteSpaceRepresentable` | - | 1 | proof | 7 |
+| `Sheaf.AlgebraicGeometry.SmoothPairLocalCoordinates` | - | 1 | proof | 7 |
 | `Sheaf.AlgebraicGeometry.TorsionSheafProperBaseChange` | - | 1 | proof | 7 |
+| `Sheaf.CategoryTheory.FirstQuadrantLowestRowEdge` | - | 1 | proof | 7 |
 | `Sheaf.FieldTheory.SeparableQuotientProduct` | - | 1 | proof | 7 |
 | `Sheaf.Paper.ClosedSupportedCupVanishing` | - | 1 | proof | 7 |
+| `Sheaf.Paper.FiniteFieldDerivedTensorSummand` | - | 1 | proof | 7 |
 | `Sheaf.Paper.ProEtaleCompositionTowerNormalization` | - | 1 | proof | 7 |
+| `Sheaf.Paper.PurityFramePrincipalBoundary` | - | 2 | proof | 7 |
+| `Sheaf.Paper.ShiftedTensorMorphismCalculus` | - | 7 | proof | 7 |
+| `Sheaf.Paper.SupportedAffineLineHomotopy` | - | 6 | proof | 7 |
+| `Sheaf.RingTheory.LocalGeneratingTuples` | - | 1 | proof | 7 |
 | `Sheaf.SixFunctors.CompletedTensorShiftRight` | - | 1 | proof | 7 |
 | `Sheaf.AlgebraicGeometry.NormalizedSupportTriangle` | 9 | 13 | proof | 8 |
 | `Sheaf.FieldTheory.FiniteDVRResidueNormalAction` | 12 | 1 | proof | 8 |
@@ -1132,95 +1129,97 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.RingTheory.RegularLocalLiftRegularSequenceQuotient` | 12 | 1 | proof | 8 |
 | `Sheaf.RingTheory.RegularSequencePrincipalNeighbourhood` | 12 | 1 | proof | 8 |
 | `Sheaf.RingTheory.WeaklyEtaleNormalization` | 12 | 1 | proof | 8 |
-| `Sheaf.AlgebraicGeometry.AlgebraicSpaceAffineAtlasOpenCover` | 14 | 1 | proof | 8 |
-| `Sheaf.AlgebraicGeometry.AlgebraicSpaceCoproduct` | 14 | 1 | proof | 8 |
-| `Sheaf.AlgebraicGeometry.AlgebraicSpaceOpenGluing` | 14 | 1 | proof | 8 |
-| `Sheaf.AlgebraicGeometry.EtaleAffineQuotientRepresentable` | 14 | 1 | proof | 8 |
-| `Sheaf.AlgebraicGeometry.EtaleQuasiAffineImageScheme` | 14 | 1 | proof | 8 |
-| `Sheaf.AlgebraicGeometry.EtaleRelationFindingOpens` | 14 | 1 | proof | 8 |
-| `Sheaf.AlgebraicGeometry.EtaleRelationKernelPair` | 14 | 1 | proof | 8 |
-| `Sheaf.AlgebraicGeometry.EtaleRelationRestrictionQuotient` | 14 | 1 | proof | 8 |
-| `Sheaf.AlgebraicGeometry.FiniteFlatAffineRelationQuotient` | 14 | 1 | proof | 8 |
-| `Sheaf.AlgebraicGeometry.ProperEtaleRelationFiniteNeighbourhood` | 14 | 1 | proof | 8 |
-| `Sheaf.AlgebraicGeometry.SeparatedLqfFpqcDescent` | 14 | 1 | proof | 8 |
-| `Sheaf.SecPurity.QcMapAffineEtaleNeighbourhood` | 14 | 1 | proof | 8 |
-| `Sheaf.AlgebraicGeometry.EtaleAtPrimeFlatUnramifiedCriterion` | 15 | 1 | proof | 8 |
-| `Sheaf.AlgebraicGeometry.SmoothPairRegularEquations` | 15 | 1 | proof | 8 |
-| `Sheaf.CategoryTheory.BoundedInjectiveFibreDescent` | 15 | 5 | proof | 8 |
-| `Sheaf.CategoryTheory.SignedFibreTriangulated` | 15 | 1 | proof | 8 |
-| `Sheaf.RingTheory.RelativeRegularEquationsBaseChange` | 15 | 1 | proof | 8 |
-| `Sheaf.Paper.AffineLineOrdinaryInvariance` | 16 | 1 | proof | 8 |
-| `Sheaf.AlgebraicGeometry.EtaleCoordinateSupport` | 17 | 6 | proof | 8 |
+| `Sheaf.AlgebraicGeometry.AlgebraicSpaceAffineAtlasOpenCover` | - | 1 | proof | 8 |
+| `Sheaf.AlgebraicGeometry.AlgebraicSpaceCoproduct` | - | 1 | proof | 8 |
+| `Sheaf.AlgebraicGeometry.AlgebraicSpaceOpenGluing` | - | 1 | proof | 8 |
+| `Sheaf.AlgebraicGeometry.EtaleAffineQuotientRepresentable` | - | 1 | proof | 8 |
+| `Sheaf.AlgebraicGeometry.EtaleAtPrimeFlatUnramifiedCriterion` | - | 1 | proof | 8 |
+| `Sheaf.AlgebraicGeometry.EtaleCoordinateSupport` | - | 6 | proof | 8 |
+| `Sheaf.AlgebraicGeometry.EtaleQuasiAffineImageScheme` | - | 1 | proof | 8 |
+| `Sheaf.AlgebraicGeometry.EtaleRelationFindingOpens` | - | 1 | proof | 8 |
+| `Sheaf.AlgebraicGeometry.EtaleRelationKernelPair` | - | 1 | proof | 8 |
+| `Sheaf.AlgebraicGeometry.EtaleRelationRestrictionQuotient` | - | 1 | proof | 8 |
+| `Sheaf.AlgebraicGeometry.FiniteFlatAffineRelationQuotient` | - | 1 | proof | 8 |
+| `Sheaf.AlgebraicGeometry.ProperEtaleRelationFiniteNeighbourhood` | - | 1 | proof | 8 |
+| `Sheaf.AlgebraicGeometry.SeparatedLqfFpqcDescent` | - | 1 | proof | 8 |
+| `Sheaf.AlgebraicGeometry.SmoothPairRegularEquations` | - | 1 | proof | 8 |
+| `Sheaf.AlgebraicGeometry.SupportedProductLocalization` | - | 6 | proof | 8 |
+| `Sheaf.CategoryTheory.BoundedInjectiveFibreDescent` | - | 5 | proof | 8 |
+| `Sheaf.CategoryTheory.SignedFibreTriangulated` | - | 1 | proof | 8 |
 | `Sheaf.FieldTheory.SepClosedAlgebrasTensorIrreducible` | - | 1 | proof | 8 |
+| `Sheaf.Paper.AffineLineOrdinaryInvariance` | - | 1 | proof | 8 |
 | `Sheaf.Paper.GeoCartierExponentIndependence` | - | 1 | proof | 8 |
 | `Sheaf.Paper.SupportedHomAdjunctionTranspose` | - | 1 | proof | 8 |
+| `Sheaf.RingTheory.RelativeRegularEquationsBaseChange` | - | 1 | proof | 8 |
+| `Sheaf.SecPurity.QcMapAffineEtaleNeighbourhood` | - | 1 | proof | 8 |
 | `Sheaf.SixFunctors.GeoCartierCoeffExtension` | - | 1 | proof | 8 |
-| `Sheaf.AlgebraicGeometry.FiniteCohomologicalDimensionDirectSums` | 9 | 1 | proof | 9 |
-| `Sheaf.AlgebraicGeometry.TruncationHomotopyColimit` | 9 | 1 | proof | 9 |
+| `Sheaf.AlgebraicGeometry.FiniteCohomologicalDimensionDirectSums` | 7 | 1 | proof | 9 |
+| `Sheaf.AlgebraicGeometry.TruncationHomotopyColimit` | 7 | 1 | proof | 9 |
 | `Sheaf.RingTheory.DvrNormValuationSum` | 13 | 1 | proof | 9 |
-| `Sheaf.AlgebraicGeometry.AffineEtaleRelationSeparatedQuasiFinite` | 15 | 1 | proof | 9 |
-| `Sheaf.AlgebraicGeometry.AffineGroupoidBasisDescent` | 15 | 1 | proof | 9 |
-| `Sheaf.AlgebraicGeometry.AffineGroupoidIntegralInvariants` | 15 | 1 | proof | 9 |
-| `Sheaf.AlgebraicGeometry.AffineGroupoidOrbitFibres` | 15 | 1 | proof | 9 |
-| `Sheaf.AlgebraicGeometry.AlgebraicSpaceAffineEtaleCover` | 15 | 1 | proof | 9 |
-| `Sheaf.AlgebraicGeometry.AlgebraicSpaceEtaleOpenImage` | 15 | 4 | proof | 9 |
-| `Sheaf.AlgebraicGeometry.AlgebraicSpaceFibreProductPoint` | 15 | 1 | proof | 9 |
-| `Sheaf.AlgebraicGeometry.BoundsFiberDegreesFieldPoints` | 15 | 1 | proof | 9 |
-| `Sheaf.AlgebraicGeometry.EtaleSchemeMapOpenImage` | 15 | 1 | proof | 9 |
-| `Sheaf.AlgebraicGeometry.FppfAffineRefinement` | 15 | 1 | proof | 9 |
-| `Sheaf.AlgebraicGeometry.FppfSheafCoproductPartition` | 15 | 1 | proof | 9 |
-| `Sheaf.AlgebraicGeometry.FppfSheafRepresentabilityDescentData` | 15 | 1 | proof | 9 |
-| `Sheaf.AlgebraicGeometry.IndQuasiAffineFpqcDescent` | 15 | 1 | proof | 9 |
-| `Sheaf.AlgebraicGeometry.QuasiAffineBaseChange` | 15 | 1 | proof | 9 |
-| `Sheaf.AlgebraicGeometry.QuasiAffineFpqcDescent` | 15 | 1 | proof | 9 |
-| `Sheaf.AlgebraicGeometry.SeparatedEtaleChart` | 15 | 1 | proof | 9 |
-| `Sheaf.AlgebraicGeometry.SpaceSeparatedLqfPermanence` | 15 | 1 | proof | 9 |
-| `Sheaf.RingTheory.FinitePresentationAndFlatOfFiniteFreeStandardCover` | 15 | 1 | proof | 9 |
-| `Sheaf.RingTheory.SemilocalSubmoduleBasis` | 15 | 1 | proof | 9 |
-| `Sheaf.SecTraceFormula.SeparatedLqfFppfEffectiveDescent` | 15 | 1 | proof | 9 |
-| `Sheaf.Algebra.Homology.FilteredLocalizationInjectiveModel` | 16 | 1 | proof | 9 |
-| `Sheaf.RingTheory.QuasiRegularFlatQuotientBaseChange` | 16 | 1 | proof | 9 |
-| `Sheaf.RingTheory.QuasiRegularNoetherianLocal` | 16 | 1 | proof | 9 |
-| `Sheaf.AlgebraicGeometry.SupportedLocalizationComparisons` | 18 | 21 | proof | 9 |
+| `Sheaf.Algebra.Homology.FilteredLocalizationInjectiveModel` | - | 1 | proof | 9 |
+| `Sheaf.AlgebraicGeometry.AffineEtaleRelationSeparatedQuasiFinite` | - | 1 | proof | 9 |
+| `Sheaf.AlgebraicGeometry.AffineGroupoidBasisDescent` | - | 1 | proof | 9 |
+| `Sheaf.AlgebraicGeometry.AffineGroupoidIntegralInvariants` | - | 1 | proof | 9 |
+| `Sheaf.AlgebraicGeometry.AffineGroupoidOrbitFibres` | - | 1 | proof | 9 |
+| `Sheaf.AlgebraicGeometry.AlgebraicSpaceAffineEtaleCover` | - | 1 | proof | 9 |
+| `Sheaf.AlgebraicGeometry.AlgebraicSpaceEtaleOpenImage` | - | 4 | proof | 9 |
+| `Sheaf.AlgebraicGeometry.AlgebraicSpaceFibreProductPoint` | - | 1 | proof | 9 |
+| `Sheaf.AlgebraicGeometry.BoundsFiberDegreesFieldPoints` | - | 1 | proof | 9 |
+| `Sheaf.AlgebraicGeometry.EtaleSchemeMapOpenImage` | - | 1 | proof | 9 |
+| `Sheaf.AlgebraicGeometry.FppfAffineRefinement` | - | 1 | proof | 9 |
+| `Sheaf.AlgebraicGeometry.FppfSheafCoproductPartition` | - | 1 | proof | 9 |
+| `Sheaf.AlgebraicGeometry.FppfSheafRepresentabilityDescentData` | - | 1 | proof | 9 |
+| `Sheaf.AlgebraicGeometry.IndQuasiAffineFpqcDescent` | - | 1 | proof | 9 |
 | `Sheaf.AlgebraicGeometry.PunctualTensorBaseChange` | - | 1 | proof | 9 |
+| `Sheaf.AlgebraicGeometry.QuasiAffineBaseChange` | - | 1 | proof | 9 |
+| `Sheaf.AlgebraicGeometry.QuasiAffineFpqcDescent` | - | 1 | proof | 9 |
+| `Sheaf.AlgebraicGeometry.SeparatedEtaleChart` | - | 1 | proof | 9 |
+| `Sheaf.AlgebraicGeometry.SpaceSeparatedLqfPermanence` | - | 1 | proof | 9 |
+| `Sheaf.AlgebraicGeometry.SupportedLocalizationComparisons` | - | 21 | proof | 9 |
+| `Sheaf.Paper.ExternalRHomConePairing` | - | 1 | proof | 9 |
+| `Sheaf.RingTheory.FinitePresentationAndFlatOfFiniteFreeStandardCover` | - | 1 | proof | 9 |
+| `Sheaf.RingTheory.QuasiRegularFlatQuotientBaseChange` | - | 1 | proof | 9 |
+| `Sheaf.RingTheory.QuasiRegularNoetherianLocal` | - | 1 | proof | 9 |
+| `Sheaf.RingTheory.SemilocalSubmoduleBasis` | - | 1 | proof | 9 |
+| `Sheaf.SecTraceFormula.SeparatedLqfFppfEffectiveDescent` | - | 1 | proof | 9 |
 | `Sheaf.RingTheory.DvrLatticeDistanceDeterminant` | 14 | 1 | proof | 10 |
 | `Sheaf.RingTheory.SemilocalRestrictionLength` | 14 | 1 | proof | 10 |
-| `Sheaf.AlgebraicGeometry.AffineGroupoidInvariantNorm` | 16 | 1 | proof | 10 |
-| `Sheaf.AlgebraicGeometry.AffineGroupoidInvariantRankStrata` | 16 | 1 | proof | 10 |
-| `Sheaf.AlgebraicGeometry.AffineGroupoidPolynomialNormInvariant` | 16 | 1 | proof | 10 |
-| `Sheaf.AlgebraicGeometry.EtaleAtlasPresentation` | 16 | 1 | proof | 10 |
-| `Sheaf.AlgebraicGeometry.FppfFamilyAffineEffectivityReduction` | 16 | 1 | proof | 10 |
-| `Sheaf.AlgebraicGeometry.FpqcInvariantIntersectionNeighbourhoods` | 16 | 1 | proof | 10 |
-| `Sheaf.AlgebraicGeometry.IndQuasiAffinePermanence` | 16 | 1 | proof | 10 |
-| `Sheaf.AlgebraicGeometry.IntersectionCanonicalAffineEmbedding` | 16 | 1 | proof | 10 |
-| `Sheaf.AlgebraicGeometry.IntersectionSectionsFlatBaseChange` | 16 | 2 | proof | 10 |
-| `Sheaf.AlgebraicGeometry.IsLocallyQuasiFiniteEtaleSource` | 16 | 1 | proof | 10 |
-| `Sheaf.AlgebraicGeometry.QuasiAffineRelativeSpecEmbedding` | 16 | 1 | proof | 10 |
-| `Sheaf.RingTheory.FiniteLocallyFreeNormCharacteristicPolynomial` | 16 | 1 | proof | 10 |
-| `Sheaf.Algebra.Homology.FilteredConeLocalization` | 17 | 1 | proof | 10 |
-| `Sheaf.Algebra.Homology.FiniteFilteredLocalization` | 17 | 7 | proof | 10 |
-| `Sheaf.CategoryTheory.EnoughStrictFilteredInjectives` | 17 | 1 | proof | 10 |
-| `Sheaf.Paper.FiniteFilteredGradedExactness` | 17 | 5 | proof | 10 |
-| `Sheaf.RingTheory.QuasiRegularPrefixQuotient` | 17 | 1 | proof | 10 |
-| `Sheaf.Paper.KFlatMapFactorization` | 19 | 1 | proof | 10 |
+| `Sheaf.Algebra.Homology.FilteredConeLocalization` | - | 1 | proof | 10 |
+| `Sheaf.Algebra.Homology.FiniteFilteredLocalization` | - | 7 | proof | 10 |
+| `Sheaf.AlgebraicGeometry.AffineGroupoidInvariantNorm` | - | 1 | proof | 10 |
+| `Sheaf.AlgebraicGeometry.AffineGroupoidInvariantRankStrata` | - | 1 | proof | 10 |
+| `Sheaf.AlgebraicGeometry.AffineGroupoidPolynomialNormInvariant` | - | 1 | proof | 10 |
 | `Sheaf.AlgebraicGeometry.ArbitrarySchemeUntensoredBaseChange` | - | 1 | proof | 10 |
+| `Sheaf.AlgebraicGeometry.EtaleAtlasPresentation` | - | 1 | proof | 10 |
 | `Sheaf.AlgebraicGeometry.FinitePushforwardTensorComparison` | - | 1 | proof | 10 |
+| `Sheaf.AlgebraicGeometry.FppfFamilyAffineEffectivityReduction` | - | 1 | proof | 10 |
+| `Sheaf.AlgebraicGeometry.FpqcInvariantIntersectionNeighbourhoods` | - | 1 | proof | 10 |
+| `Sheaf.AlgebraicGeometry.IndQuasiAffinePermanence` | - | 1 | proof | 10 |
+| `Sheaf.AlgebraicGeometry.IntersectionCanonicalAffineEmbedding` | - | 1 | proof | 10 |
+| `Sheaf.AlgebraicGeometry.IntersectionSectionsFlatBaseChange` | - | 2 | proof | 10 |
+| `Sheaf.AlgebraicGeometry.IsLocallyQuasiFiniteEtaleSource` | - | 1 | proof | 10 |
 | `Sheaf.AlgebraicGeometry.PrimeTorsionCoefficientReduction` | - | 1 | proof | 10 |
-| `Sheaf.AlgebraicGeometry.IntersectionStructureSections` | 17 | 1 | proof | 11 |
-| `Sheaf.AlgebraicGeometry.IsLocallyQuasiFiniteAffineCriterion` | 17 | 1 | proof | 11 |
-| `Sheaf.AlgebraicGeometry.Morphisms.LocallyOfFiniteTypeOfFlatLfpSource` | 17 | 1 | proof | 11 |
-| `Sheaf.AlgebraicGeometry.QuasiAffineOpenAffinizationSquare` | 17 | 1 | proof | 11 |
-| `Sheaf.AlgebraicGeometry.QuasiAffineTargetLocality` | 17 | 1 | proof | 11 |
-| `Sheaf.RingTheory.QuasiFiniteComposition` | 17 | 1 | proof | 11 |
-| `Sheaf.Topology.FilteredSpectrumTopologicalLimit` | 17 | 1 | proof | 11 |
-| `Sheaf.CategoryTheory.InjectiveGradedFiltrationSplits` | 18 | 1 | proof | 11 |
+| `Sheaf.AlgebraicGeometry.QuasiAffineRelativeSpecEmbedding` | - | 1 | proof | 10 |
+| `Sheaf.CategoryTheory.EnoughStrictFilteredInjectives` | - | 1 | proof | 10 |
+| `Sheaf.Paper.FiniteFilteredGradedExactness` | - | 5 | proof | 10 |
+| `Sheaf.Paper.KFlatMapFactorization` | - | 1 | proof | 10 |
+| `Sheaf.RingTheory.FiniteLocallyFreeNormCharacteristicPolynomial` | - | 1 | proof | 10 |
+| `Sheaf.RingTheory.QuasiRegularPrefixQuotient` | - | 1 | proof | 10 |
+| `Sheaf.AlgebraicGeometry.IntersectionStructureSections` | - | 1 | proof | 11 |
+| `Sheaf.AlgebraicGeometry.IsLocallyQuasiFiniteAffineCriterion` | - | 1 | proof | 11 |
+| `Sheaf.AlgebraicGeometry.Morphisms.LocallyOfFiniteTypeOfFlatLfpSource` | - | 1 | proof | 11 |
+| `Sheaf.AlgebraicGeometry.QuasiAffineOpenAffinizationSquare` | - | 1 | proof | 11 |
+| `Sheaf.AlgebraicGeometry.QuasiAffineTargetLocality` | - | 1 | proof | 11 |
+| `Sheaf.CategoryTheory.InjectiveGradedFiltrationSplits` | - | 1 | proof | 11 |
 | `Sheaf.Paper.KunBaseChange` | - | 3 | proof | 11 |
+| `Sheaf.RingTheory.QuasiFiniteComposition` | - | 1 | proof | 11 |
 | `Sheaf.Targets.BaseChangeTowardsFields` | - | 1 | proof | 11 |
-| `Sheaf.RingTheory.FiniteTypeFppfSourceDescent` | 18 | 1 | proof | 12 |
+| `Sheaf.Topology.FilteredSpectrumTopologicalLimit` | - | 1 | proof | 11 |
 | `Sheaf.AlgebraicGeometry.AbelianDegreeZeroFlatBaseChange` | - | 1 | proof | 12 |
 | `Sheaf.AlgebraicGeometry.InvertibleOrdersColimit` | - | 1 | proof | 12 |
 | `Sheaf.AlgebraicGeometry.KunnethBaseChangeFailure` | - | 1 | proof | 12 |
 | `Sheaf.AlgebraicGeometry.NormalGenericFibreVanishing` | - | 1 | proof | 12 |
+| `Sheaf.RingTheory.FiniteTypeFppfSourceDescent` | - | 1 | proof | 12 |
 | `Sheaf.AlgebraicGeometry.EtaleSetDegreeZeroFlatBaseChange` | - | 2 | proof | 13 |
 | `Sheaf.AlgebraicGeometry.OpenProductExchange` | - | 1 | proof | 13 |
 | `Sheaf.AlgebraicGeometry.ZModSheafInvertibleOrders` | - | 1 | proof | 13 |
@@ -1265,7 +1264,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.SplitCellComplexKFlat` | - | 1 | proof | 21 |
 | `Sheaf.CategoryTheory.BoundedFilteredPageFunctorNormalized` | - | 1 | proof | 21 |
 
-## Stage 3: waiting for statements of dependencies (31)
+## Stage 3: waiting for statements of dependencies (30)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -1276,34 +1275,33 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.FiniteReductionOfPurity` | 5 | 8 | `cor-pur-affine-space-zero-section-purity` |
 | `Sheaf.Paper.FiniteTorStability` | 5 | 15 | `cor-pur-affine-space-zero-section-purity` |
 | `Sheaf.SixFunctors.CoefQbarVerdier` | 5 | 1 | `lem-coef-rational-retract-evaluation` |
-| `Sheaf.SixFunctors.RationalOperations` | 5 | 1 | `lem-coef-finite-free-extension` |
+| `Sheaf.SixFunctors.RationalOperations` | 5 | 1 | `lem-coef-finite-scalar-mate-realization` |
 | `Sheaf.Paper.CohomologicalSmoothnessTheorem` | 6 | 1 | `fix-prop-projection-formula` |
 | `Sheaf.Paper.DualizingObjectPurity` | 6 | 1 | `lem-pur-projection-purity-agreement` |
-| `Sheaf.Paper.IntegralCompactSupportCoefficientComparison` | 6 | 35 | `lem-coef-finite-free-extension` |
 | `Sheaf.Paper.PurityCompositionCoherence` | 6 | 12 | `fix-prop-projection-formula` |
-| `Sheaf.SixFunctors.CoefDualFormulaScalarTranspose` | 6 | 8 | `lem-coef-finite-free-extension` |
-| `Sheaf.SixFunctors.CoefIntegralFiniteExtension` | 6 | 5 | `lem-coef-finite-free-extension` |
+| `Sheaf.SixFunctors.CoefDualFormulaScalarTranspose` | 6 | 8 | `lem-coef-finite-exceptional` |
 | `Sheaf.SixFunctors.IntegralDualizing` | 6 | 1 | `lem-coef-finite-adjunction-transition` |
 | `Sheaf.Paper.CohomologicalSmoothComposition` | 7 | 1 | `fix-prop-projection-formula` |
 | `Sheaf.Paper.CohomologicalSmoothEtaleLocality` | 7 | 2 | `fix-prop-projection-formula` |
-| `Sheaf.Paper.DegreeZeroCompactSupportSections` | 7 | 5 | `lem-tw-lisse-rational-realization` |
-| `Sheaf.Paper.DlConstructibleFibresExact` | 7 | 1 | `lem-tw-lisse-rational-realization` |
 | `Sheaf.Paper.PurityDiagonalSectionPasting` | 7 | 15 | `fix-lem-exchanges` |
+| `Sheaf.Paper.DlConstructibleFibresExact` | 8 | 1 | `lem-tw-lisse-rational-realization` |
 | `Sheaf.Paper.SmoothPurityQbar` | 8 | 1 | `det-sp-integral-adjunction-bijection` |
 | `Sheaf.SecSmoothPurity.FiniteEtaleDualizingNormalization` | 8 | 1 | `fix-lem-exchanges` |
-| `Sheaf.Paper.RelativeSupportCoordinateModel` | 16 | 7 | `cor-pur-affine-space-zero-section-purity` |
 | `Sheaf.AlgebraicGeometry.FiniteCoefficientEtaleProjectionFormula` | - | 1 | `def-sf-pf` |
+| `Sheaf.DeligneLaumon.QbarCurveDuality` | - | 2 | `cor-coef-verdier-weil-equivariance` |
 | `Sheaf.Paper.AdicSmoothDualizingComplexes` | - | 12 | `lem-pur-adic-purity-scalar-naturality` |
 | `Sheaf.Paper.ConstructibleDegreeZeroProperSupport` | - | 5 | `lem-a1-adic-compactification-section-realization` |
+| `Sheaf.Paper.DegreeZeroCompactSupportSections` | - | 5 | `lem-tw-lisse-rational-realization` |
 | `Sheaf.Paper.FiniteProductCompactification` | - | 2 | `fix-lem-exchanges` |
 | `Sheaf.Paper.FourierKernelConvolution` | - | 8 | `sk-thm-sf-package` |
 | `Sheaf.Paper.LocalizedTopChern` | - | 9 | `lem-pur-flag-local-comparison` |
 | `Sheaf.Paper.RationalPurityPresentation` | - | 13 | `lem-pur-adic-purity-scalar-naturality` |
 | `Sheaf.Paper.RationalWeilPurityNaturalityMate` | - | 4 | `det-sp-tower-gamma` |
+| `Sheaf.Paper.RelativeSupportCoordinateModel` | - | 7 | `cor-pur-affine-space-zero-section-purity` |
 | `Sheaf.Paper.VerdierExchange` | - | 1 | `fix-lem-exchanges` |
 | `Sheaf.SecSmoothPurity.SmoothPurityNaturality` | - | 1 | `fix-prop-projection-formula` |
 
-## Stage 3: held for an open upstream PR (18)
+## Stage 3: held for an open upstream PR (21)
 
 Not items: an open Orchestra branch or PR of the source library proves the module (~/upstream-pr/upstream-pending.tsv, the human, 2026-10-18: do not duplicate Orchestra's open PRs); the routine sync brings the proof, and the hold ends when no sorry is left.
 
@@ -1321,9 +1319,12 @@ Not items: an open Orchestra branch or PR of the source library proves the modul
 | `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompositionCoherence` | bundle/sec-six-functors-d1,bundle/sec-smooth-purity-d1 |
 | `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Integral` | bundle/sec-poincare-duality-c1,bundle/sec-poincare-duality-d1,bundle/sec-six-functors-c1,bundle/sec-six-functors-d1 |
 | `WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality` | bundle/sec-smooth-purity-d3 |
+| `WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothBaseChange` | bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage` | bundle/sec-smooth-purity-d1 |
 | `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect` | bundle/sec-poincare-duality-c1,bundle/sec-poincare-duality-d1 |
+| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekBaseChange` | bundle/sec-smooth-purity-d1 |
 | `WeilConjectures.WeilSheaf.FourierInversion.OtherSections` | bundle/sec-poincare-duality-c1,bundle/sec-poincare-duality-d1,bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.WeilSheaf.LowerShriekFunctoriality` | bundle/sec-six-functors-c1,bundle/sec-six-functors-d1,bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.WeilSheaf.LowerShriekOperations` | bundle/sec-poincare-duality-c1 |
 | `WeilConjectures.WeilSheaf.PoincareDuality` | bundle/sec-poincare-duality-c1,bundle/sec-poincare-duality-d1 |
+| `WeilConjectures.WeilSheaf.VerdierDual` | bundle/sec-deligne-laumon-a1-d1,bundle/sec-six-functors-d1 |
