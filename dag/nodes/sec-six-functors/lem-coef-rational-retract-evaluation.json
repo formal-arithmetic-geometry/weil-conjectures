@@ -382,5 +382,34 @@
   "group": "Q68",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-e371dfe6e (reviewer sub-agent of L); spot-checked: I read the whole delivery: all 13 item steps, both new nodes, every cited node's statement, the blueprint source (master, which matches main-20261015 and main-20261017), and Stacks sites-cohomology 08JB l.8934, 08JC l.8948, 0A97 l.8965 and 08JJ l.13048. No SGA is cited. The statement is unchanged, proof_deps equals the union of the step uses, and every step is under 1700 characters. I recomputed by hand the transpose identities and the four inverse products of steps 2–4, the retract inverses of steps 4 and 10, the Hom-complex sign in step 8 (it agrees with the Koszul sign of lem-sfb), the ϖ-annihilator triangle argument in step 12 (exponent N(v−u+2)), and the finite-cover argument in step 11. New node lem-coef-rational-scalar-transpose-compatibility is true: its three identities follow from evaluation compatibility and naturality of β, and I tested the identity extension, zero objects and identity splittings. It is short, but I keep it because it answers the 2000-character return. New node lem-coef-rational-bidual-triangle-compatibility is true and is a real lemma (Stacks 08JC leaves the details out). I tested V=0, O[n] and O/ϖ; the node claims no invertibility, and its localization clause holds for central R. Neither node duplicates lem-sfb-ringed-site-duality-maps, lem-sf-rational-thick-evaluation (that is θ_{L,M}, not the double dual) or lem-coef-integral-finite-extension. I made three B3 citation repairs in fixes/: (1) the transpose node now cites def-weil-finite-field-fiber, def-weil-proper-morphism, def-weil-finite-type-morphism and the rational tensor–Hom bijection lem-coef-completed-tensor-hom-transpose; (2) the triangle node now cites def-pur-localized-ringed-site; (3) the item's stmt_deps now include lem-coef-completed-tensor-hom-transpose. I checked by script that none of this creates a cycle. I accept the declared tool use of lem-pur-integral-operations-scalar-extension. For the maintainer, not faults of this delivery: the identification of the completed-tensor and ordinary transposes on site-perfect objects is used without a node; the rational site-perfect model is read as iterated cones; and the new blueprint snapshot moves the item to sk-lem-sp-tower, so its unit binding needs maintainer attention.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.RationalRetractEvaluation",
+  "declaration": "WeilConjectures.coef_rational_retract_evaluation",
+  "file": "lean/Sheaf/SixFunctors/RationalRetractEvaluation.lean",
+  "statement": "theorem coef_rational_retract_evaluation (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (X : Scheme.{u}) [X.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] : RationalRetractEvaluation.Conclusion D l hl X",
+  "branch": "sheaf-dag",
+  "by": "ND",
+  "date": "2026-10-19",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.RationalRetractEvaluation.adjoint",
+   "WeilConjectures.RationalRetractEvaluation.IsPerfect",
+   "WeilConjectures.RationalRetractEvaluation.evaluation",
+   "WeilConjectures.RationalRetractEvaluation.Retracts",
+   "WeilConjectures.RationalRetractEvaluation.EvaluationRestriction",
+   "WeilConjectures.RationalRetractEvaluation.VerdierRestriction",
+   "WeilConjectures.RationalRetractEvaluation.ScalarExtension",
+   "WeilConjectures.RationalRetractEvaluation.Conclusion",
+   "WeilConjectures.coef_rational_retract_evaluation"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2bb18c959",
+  "group": "ND",
+  "result": "pass",
+  "note": "Re-delivery after the 05e512e5 H13/H4 RETURN; the repair is exactly as prescribed. IsSfRationalCoefficientSitePerfect is appended to Q33's Sheaf/Paper/SitePerfectComplex.lean with the live IsRationalCoefficientSitePerfect body clause for clause (only the domain changes, to sfRationalConstructibleCategory), plus a public import of SfRationalizationKaroubi; the rest of the file is unchanged against live. The def-weil-site-perfect-complex record is a superset: same module, file, primary declaration and statement, all 8 Q33 decls plus the new one, and a lean.note. IntrinsicSitePerfectComplex is dropped and the item's import of SitePerfectComplex is public. The item module changes only in its imports; the item node is identical to the returned delivery and the statement is verbatim with one sorry. Re-checked H3: Retracts, EvaluationRestriction, VerdierRestriction (pinned Datum, delta and inverse formulas), ScalarExtension via rationalTensorScalarComparison, site-perfect unit evaluation; edge cases (empty X, zero/identity splittings, iota = id) covered. The other 5 dep records are identical to live; the item is not on the dropped list. nt_compile --json: delivered files clean (2.7 s / 4.8 s); the 5 live importers (BasicOperationsCoefficientReduction, FiniteTorStability, Paper and SixFunctors InternalHomPullback, GeometricFrobeniusInternalHomComparison) compiled clean against the delivered SitePerfectComplex (7.5-24.1 s)."
  }
 }

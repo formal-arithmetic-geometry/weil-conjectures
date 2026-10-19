@@ -9,6 +9,7 @@ public import Sheaf.Paper.StrictPerfectCoefficientPackageOfUniverses
 public import Sheaf.Paper.CompletedIntegralCoefficients
 public import Sheaf.Paper.IntegralDerivedOperations
 public import Sheaf.Paper.AlgebraicallyClosedCoefficients
+public import Sheaf.Paper.SfRationalizationKaroubi
 
 /-!
 # Perfect complexes on the coefficient site
@@ -160,5 +161,25 @@ noncomputable def IsAlgebraicallyClosedCoefficientSitePerfect
         (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) Y P ∧
       Nonempty (K ≅ (AlgebraicallyClosedCoefficients.inclusion
         (D := D) (l := l) (hl := hl) (Ω := Ω) (Y := Y) E).obj P)
+
+set_option backward.isDefEq.respectTransparency false in
+/-- A covering on every pro-etale slice supplies a bounded complex whose terms
+split from finite sums of the coefficient unit in the raw scalar localization.
+Source: Weil blueprint, order 1881 (blueprint: def-weil-site-perfect-complex).
+This is the recorded rational local-model predicate with the intrinsic category
+as its domain; neither integral lifts of the term splittings nor integral
+perfectness are required. -/
+noncomputable def IsSfRationalCoefficientSitePerfect (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    (Y : AlgebraicGeometry.Scheme.{u}) (K : sfRationalConstructibleCategory l E Y) : Prop :=
+  ∀ V : Y.ProEt, ∃ S : Sieve V, S ∈ AlgebraicGeometry.Scheme.ProEt.topology Y V ∧
+    ∀ (U : Y.ProEt) (f : U ⟶ V), S f →
+      ∃ F : CochainComplex (integralTowerModules l E U.left) ℤ,
+        (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (F.X n)) ∧
+        (∀ n : ℤ, IsRationalFiniteProjectiveTerm l E U.left (F.X n)) ∧
+        Nonempty ((ScalarLocalization.mk
+          ((integralDerivedPullback l E U.hom).obj K.obj.obj) :
+            sitePerfectRationalAmbient l E U.left) ≅
+          ScalarLocalization.mk (DerivedCategory.Q.obj F))
 
 end WeilConjectures
