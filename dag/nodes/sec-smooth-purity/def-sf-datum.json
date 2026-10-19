@@ -20,7 +20,10 @@
   "def-sbc-smooth-morphisms",
   "def-weil-pbc-cartesian-square",
   "def-exchange-projection",
-  "def-weil-triangulated-category"
+  "def-weil-triangulated-category",
+  "def-coef-ringed-tensor-hom-model",
+  "def-zl-ringed-site-duality-model",
+  "lem-weil-proetale-dbc-triangulated"
  ],
  "proof": [],
  "proof_deps": [],
@@ -158,5 +161,42 @@
   "group": "Q59",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q59-e46e6093c (reviewer sub-agent of L); spot-checked: Reviewed the complete item, current blueprint source, all eight cited nodes and source locations, unit/chapter route, searches, edge cases, and delivery rules. The definition preserves A1–A6 with correct domains, base-change orientation, projection map, coefficient stages, and dualizing object; no duplicate or new node faults found. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SixFunctorDatum",
+  "declaration": "WeilConjectures.SixFunctorDatum",
+  "declarations": [
+   "WeilConjectures.sixFunctorBoundedTriangulated",
+   "WeilConjectures.sixFunctorAssocCompactification",
+   "WeilConjectures.sixFunctorDirectComposition",
+   "WeilConjectures.sixFunctorExceptionalComposition",
+   "WeilConjectures.SixFunctorCoherentStage",
+   "WeilConjectures.SixFunctorExchangeAxioms",
+   "WeilConjectures.sixFunctorDomainHom",
+   "WeilConjectures.SixFunctorClosedDomain",
+   "WeilConjectures.SixFunctorClosedComparison",
+   "WeilConjectures.sixFunctorDomainChange",
+   "WeilConjectures.SixFunctorClosedChange",
+   "WeilConjectures.SixFunctorVerdierAxioms",
+   "WeilConjectures.sixFunctorRingedModel",
+   "WeilConjectures.SixFunctorAmbientClosedModel",
+   "WeilConjectures.SixFunctorCoefficientClosedModels",
+   "WeilConjectures.SixFunctorDatum"
+  ],
+  "file": "lean/Sheaf/Paper/SixFunctorDatum.lean",
+  "statement": "structure SixFunctorDatum (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum) (E : Type u) [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n) extends SixFunctorOperationDatum D C E n hn",
+  "branch": "sheaf-dag",
+  "by": "NF",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "Axioms A1–A6 extend the recorded actual operation datum on its four coefficient stages. The auxiliaries restrict the recorded internal Hom to finite-Tor inputs, retain the inherited triangulations, express coherent adjunction mates and support composition, and normalize the evaluation-transpose bidual through ordinary ringed-site models. No existence assertion and no theorem is added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-04d344dc0",
+  "group": "NF",
+  "result": "pass",
+  "note": "SixFunctorDatum extends the recorded operation datum; A1-A6 checked clause by clause: A2/A3 require the parent's canonical exchange/projection maps to be isos on finite-Tor domains (proper-or-smooth disjunction), A4 adds the compact-support composition coherence square, A5 adds closed coefficient comparisons, A6 asks exact anti-equivalence plus invertible ringedSiteBidual, with the free closed structures pinned to the normalized RingedSiteDualityModel (identity Hom component, evaluation, symmetry). HEq-identity pins are satisfiable: rfl probe passes at finite (n=m+1) and integral stages; a false control fails. Theorem stmt_dep lem-weil-proetale-dbc-triangulated is genuine: the instance is its .2 and the module fails without it. nt_compile clean 37.1 s (44.5 s with the probe), load ~80. Maintainer notes: ringedSiteBidual is recorded as a definition only by the dropped def-per-ringed-site-bidual-transpose; it is imported via the RingedSitePerfectDuality re-export to clear preflight (c), which is sound because the module is active; un-drop the alias or add ringedSiteBidual to def-zl-ringed-site-duality-model's declarations. Composition helpers unused; FiniteTorAmplitudeSites/ChosenCartesianSquare imports are only for the records; landing may time out under higher load."
  }
 }
