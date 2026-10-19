@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Derivation.Basic
 
-import Sheaf.RingTheory.FiniteSubalgebraFractionField
+import WeilConjectures.RingTheory.FiniteSubalgebraFractionField
 import Sheaf.RingTheory.FormalFiberDerivationExtension
 import Sheaf.RingTheory.Derivation.DetectNonPthPower
 import Sheaf.RingTheory.RegularRingNormal

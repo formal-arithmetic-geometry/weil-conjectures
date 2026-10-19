@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.FieldTheory.IsSepClosed
 import Sheaf.RingTheory.EtaleResidueTriplesFiltered
-import Sheaf.RingTheory.EtaleResidueTriplesExistsColimit
+import WeilConjectures.RingTheory.EtaleResidueTriplesExistsColimit
 
 /-!
 # Filtered colimit of pointed etale algebras

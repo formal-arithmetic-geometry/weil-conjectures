@@ -1,7 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.AbelianDerivedGlobalExtPullback
-public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance

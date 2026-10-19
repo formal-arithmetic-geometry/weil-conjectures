@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Module.LocalizedModule.Away
 public import Mathlib.RingTheory.Finiteness.Projective
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.RingTheory.FiniteProjectiveStandardFreeCover
+import WeilConjectures.RingTheory.FiniteProjectiveStandardFreeCover
 
 /-! # Finite local freeness from finite projective principal localizations
 

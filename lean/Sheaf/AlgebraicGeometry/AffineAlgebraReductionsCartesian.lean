@@ -1,7 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.AffineAlgebraReductionsCartesian
-public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Mathlib.AlgebraicGeometry.Pullbacks
-public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf

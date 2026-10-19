@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Ideal.Operations
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import Sheaf.RingTheory.FiniteGradedModuleLowerBound
-import Sheaf.RingTheory.GradedQuotientSpanDescent
+import WeilConjectures.RingTheory.GradedQuotientSpanDescent
 
 /-!
 # Graded Nakayama generation over the projective-line polynomial ring

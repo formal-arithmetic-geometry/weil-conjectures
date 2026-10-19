@@ -9,7 +9,7 @@ import Mathlib.RingTheory.Artinian.Module
 import Mathlib.RingTheory.LocalRing.RingHom.Basic
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Sheaf.RingTheory.FiniteOverCompleteRing
-import Sheaf.RingTheory.ExtendedCompletionModuleReduction
+import WeilConjectures.RingTheory.ExtendedCompletionModuleReduction
 
 /-!
 # Finite modules after completion

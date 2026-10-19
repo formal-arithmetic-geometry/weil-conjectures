@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.Algebra.Homology.SubcategoryRightResolutionAssembly
-public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex

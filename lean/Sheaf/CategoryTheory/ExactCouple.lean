@@ -6,7 +6,7 @@ Authors: SHEAF group E1
 module
 
 
-import Sheaf.CategoryTheory.DerivedCoupleMapExactness
+import WeilConjectures.CategoryTheory.DerivedCoupleMapExactness
 public import WeilConjectures.CategoryTheory.ExactCouple
 
 /-!

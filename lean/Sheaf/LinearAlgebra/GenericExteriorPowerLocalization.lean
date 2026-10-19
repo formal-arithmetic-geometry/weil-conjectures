@@ -7,7 +7,7 @@ module
 
 public import Mathlib.LinearAlgebra.ExteriorPower.Basic
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Sheaf.LinearAlgebra.ExteriorLocalizationKernelTorsion
+import WeilConjectures.LinearAlgebra.ExteriorLocalizationKernelTorsion
 
 /-! # Localization of exterior powers
 

@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.Valuation.ValuationRing
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.AlgebraicGeometry.ValuationClosedFibreIntegral
+import WeilConjectures.AlgebraicGeometry.ValuationClosedFibreIntegral
 import Sheaf.AlgebraicGeometry.ValuationClosedFibreSectionDivisible
 
 /-! # Vanishing on the closed fibre implies divisibility

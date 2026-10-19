@@ -1,8 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.AffineLocalAcyclicOpenRestriction
-public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs

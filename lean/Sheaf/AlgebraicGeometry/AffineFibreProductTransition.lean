@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.AffineFibreProductTransition
-public import Mathlib.AlgebraicGeometry.Morphisms.Affine

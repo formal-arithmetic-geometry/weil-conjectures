@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.Kaehler.JacobiZariski
 import Mathlib.RingTheory.Extension.ExtendScalars
 import Sheaf.RingTheory.JacobiZariskiHomologySequence
-import Sheaf.RingTheory.JacobiZariskiLeftTermVanishing
+import WeilConjectures.RingTheory.JacobiZariskiLeftTermVanishing
 
 /-! # Jacobi–Zariski sequence for a quotient of a smooth algebra
 

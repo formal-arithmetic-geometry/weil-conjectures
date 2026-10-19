@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.AffineEtaleRestrictionCompositionGamma
-public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleSite
-public import Mathlib.AlgebraicGeometry.Morphisms.Affine

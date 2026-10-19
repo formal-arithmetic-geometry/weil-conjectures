@@ -21,7 +21,7 @@ import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Paper.IntegralReductionTowerWellDefined
 import Sheaf.CategoryTheory.Triangulated.DerivedLimitMorphism
 
-import Sheaf.CategoryTheory.Limits.TowerTransitionEndomorphism
+import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
 import WeilConjectures.Compactification.Refinement
 public import WeilConjectures.Compactification.RefinementCategory
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
@@ -46,7 +46,6 @@ import Sheaf.Paper.DerivedCompleteOnSlices
 import Sheaf.Paper.IntegralReductionTowerWellDefinedUnrestricted
 import Sheaf.Paper.SfCommonStageDirectImage
 import Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
 import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 /-!

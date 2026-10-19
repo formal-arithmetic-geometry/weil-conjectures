@@ -7,7 +7,7 @@ module
 
 public import Mathlib.RepresentationTheory.Basic
 public import Mathlib.GroupTheory.PGroup
-import Sheaf.RepresentationTheory.PrimaryInvariantExtension
+import WeilConjectures.RepresentationTheory.PrimaryInvariantExtension
 import Mathlib.Order.Preorder.Finite
 
 /-!

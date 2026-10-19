@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.AffineAlgebraLocalMaps
-public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf

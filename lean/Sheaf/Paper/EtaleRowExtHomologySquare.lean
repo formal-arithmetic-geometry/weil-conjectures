@@ -6,7 +6,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SheafHExtResolutionSectionsIso
 public import WeilConjectures.AlgebraicGeometry.ExtPullbackHomComplex
-import Sheaf.CategoryTheory.ExtCoefficientCocycle
+import WeilConjectures.CategoryTheory.ExtCoefficientCocycle
 
 /-! # Ext coefficient naturality before sections evaluation
 

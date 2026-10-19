@@ -8,7 +8,7 @@ module
 public import Sheaf.RingTheory.SerreConditions
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import Sheaf.RingTheory.NormalLocalDepthTwo
-import Sheaf.RingTheory.IntegralTotalFractionLocalDenominator
+import WeilConjectures.RingTheory.IntegralTotalFractionLocalDenominator
 import Sheaf.RingTheory.SerreS2TotalFractionMembership
 import Sheaf.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
 import Sheaf.RingTheory.SerreCriterionReduced

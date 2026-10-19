@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.AffineEtaleRestrictionLargeSets
-public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleTopos

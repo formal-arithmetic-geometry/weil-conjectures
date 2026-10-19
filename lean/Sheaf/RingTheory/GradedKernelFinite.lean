@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.DirectSum.Decomposition
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Submodule
-import Sheaf.RingTheory.GradedSubmoduleFinite
+import WeilConjectures.RingTheory.GradedSubmoduleFinite
 
 /-!
 # Finite graded kernels over the two-variable polynomial ring
