@@ -7,10 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.ProEtaleIsomorphismInverseImage
 public import Sheaf.Paper.CompletedIntegralCoefficients
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.ScalarExtensionRingIso
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.CategoryTheory.RingedSiteModules
-import WeilConjectures.CategoryTheory.SiteEquivalenceMorphismOfSites
+import Mathlib.CategoryTheory.Sites.CoverPreserving
 
 /-!
 # Sectionwise inverse image along a scheme isomorphism
@@ -47,7 +44,9 @@ Thus sheaves pull back by precomposition, in every coefficient universe. -/
 @[instance] theorem proEtaleIsoPostcompose_isContinuous
     {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g] :
     (proEtaleIsoPostcompose g).IsContinuous (ProEt.topology X) (ProEt.topology Y) := by
-  sorry
+  have := (proEtaleIsoPostcompose_equivalence g).1
+  exact (Functor.isContinuous_iff_coverPreserving).2
+    (proEtaleIsoPostcompose_equivalence g).2.2.2.1.some
 
 /-- The sectionwise model of inverse image under the canonical site-equivalence
 identification: its value at U is the original sheaf at (U, g ∘ structure).
@@ -72,7 +71,59 @@ theorem isoSectionwiseInverseImage_equivalence {X Y : Scheme.{t}}
     (isoSectionwiseInverseImage g D).IsEquivalence ∧
       PreservesLimitsOfSize.{w', w} (isoSectionwiseInverseImage g D) ∧
       PreservesColimitsOfSize.{w', w} (isoSectionwiseInverseImage g D) := by
-  sorry
+  let F := proEtaleIsoPostcompose g
+  let G := proEtaleIsoPostcompose (inv g)
+  let e := proEtaleIsoPostcompose_equivalence g
+  let := Functor.isContinuous_comp F G (ProEt.topology X)
+    (ProEt.topology Y) (ProEt.topology X)
+  let := Functor.isContinuous_comp G F (ProEt.topology Y)
+    (ProEt.topology X) (ProEt.topology Y)
+  let E : Sheaf (ProEt.topology Y) D ≌ Sheaf (ProEt.topology X) D :=
+    CategoryTheory.Equivalence.mk (isoSectionwiseInverseImage g D)
+      (isoSectionwiseInverseImage (inv g) D)
+      ((Functor.sheafPushforwardContinuousComp G F D _ _ _ ≪≫
+        Functor.sheafPushforwardContinuousId' e.2.2.1.some D _).symm)
+      (Functor.sheafPushforwardContinuousComp F G D _ _ _ ≪≫
+        Functor.sheafPushforwardContinuousId' e.2.1.some D _)
+  let : (isoSectionwiseInverseImage g D).IsEquivalence := E.isEquivalence_functor
+  exact ⟨inferInstance, inferInstance, inferInstance⟩
+
+private theorem sectionwisePostcompose_cocontinuous
+    {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g] :
+    (proEtaleIsoPostcompose g).IsCocontinuous (ProEt.topology X) (ProEt.topology Y) := by
+  let e := proEtaleIsoPostcompose_equivalence g
+  let E : X.ProEt ≌ Y.ProEt := CategoryTheory.Equivalence.mk
+    (proEtaleIsoPostcompose g) (proEtaleIsoPostcompose (inv g))
+    e.2.1.some.symm e.2.2.1.some
+  exact (E.toAdjunction.isCocontinuous_iff_coverPreserving _ _).2 e.2.2.2.2.some
+
+private def sectionwiseConstantCommIso {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
+    (A : CommRingCat.{max r (t + 1)}) :
+    (isoSectionwiseInverseImage g CommRingCat.{max r (t + 1)}).obj
+        ((constantSheaf (ProEt.topology Y) CommRingCat.{max r (t + 1)}).obj A) ≅
+      (constantSheaf (ProEt.topology X) CommRingCat.{max r (t + 1)}).obj A := by
+  have := sectionwisePostcompose_cocontinuous g
+  exact ((proEtaleIsoPostcompose g).pushforwardContinuousSheafificationCompatibility
+    CommRingCat.{max r (t + 1)} (ProEt.topology X) (ProEt.topology Y)).symm.app
+      ((Functor.const Y.ProEtᵒᵖ).obj A)
+
+private theorem sectionwiseConstantCommIso_normalization
+    {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
+    (A : CommRingCat.{max r (t + 1)}) :
+    (proEtaleIsoPostcompose g).op.whiskerLeft
+        (toSheafify (ProEt.topology Y) ((Functor.const Y.ProEtᵒᵖ).obj A)) ≫
+        (sectionwiseConstantCommIso g A).hom.hom =
+      toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj A) := by
+  have := sectionwisePostcompose_cocontinuous g
+  let i := (sheafToPresheaf (ProEt.topology X) CommRingCat.{max r (t + 1)}).mapIso
+    (((proEtaleIsoPostcompose g).pushforwardContinuousSheafificationCompatibility
+      CommRingCat.{max r (t + 1)} (ProEt.topology X) (ProEt.topology Y)).app
+        ((Functor.const Y.ProEtᵒᵖ).obj A))
+  change _ ≫ i.inv = _
+  apply (i.comp_inv_eq).2
+  exact ((proEtaleIsoPostcompose g).toSheafify_pullbackSheafificationCompatibility
+    CommRingCat.{max r (t + 1)} (ProEt.topology X) (ProEt.topology Y)
+      ((Functor.const Y.ProEtᵒᵖ).obj A)).symm
 
 /-- The constant coefficient comparison is uniquely fixed by constant sections.
 Source: Stacks Tags 09A5, 00WX and 0H7J
@@ -96,7 +147,47 @@ theorem isoSectionwiseConstantMap_existsUnique {X Y : Scheme.{t}}
           ((toSheafify (ProEt.topology Y) ((Functor.const Y.ProEtᵒᵖ).obj A)).app
             (op ((proEtaleIsoPostcompose g).obj U)) a) =
         (toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj A)).app (op U) a := by
-  sorry
+  let e := sectionwiseConstantCommIso g A
+  let W := sheafCompose (ProEt.topology X) (forget₂ CommRingCat RingCat)
+  let c := W.map e.hom
+  have hn := sectionwiseConstantCommIso_normalization g A
+  refine ⟨c, ?_, ?_⟩
+  · intro U a
+    exact congrArg (fun f ↦ (f.app (op U)) a) hn
+  · intro d hd
+    let d' : (isoSectionwiseInverseImage g CommRingCat.{max r (t + 1)}).obj
+        ((constantSheaf (ProEt.topology Y) CommRingCat.{max r (t + 1)}).obj A) ⟶
+        (constantSheaf (ProEt.topology X) CommRingCat.{max r (t + 1)}).obj A :=
+      W.preimage d
+    have hmap : W.map d' = d := W.map_preimage _
+    have hd' : (proEtaleIsoPostcompose g).op.whiskerLeft
+        (toSheafify (ProEt.topology Y) ((Functor.const Y.ProEtᵒᵖ).obj A)) ≫
+        d'.hom = toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj A) := by
+      ext U a
+      have hh := hd U.unop a
+      change (W.map d').hom.app U _ = _
+      rw [hmap]
+      exact hh
+    change d = W.map e.hom
+    rw [← hmap]
+    apply congrArg W.map
+    change d' = e.hom
+    apply (cancel_epi e.inv).1
+    apply Sheaf.hom_ext
+    apply sheafify_hom_ext (D := CommRingCat.{max r (t + 1)}) (ProEt.topology X) _ _
+      ((constantSheaf (ProEt.topology X) CommRingCat.{max r (t + 1)}).obj A).property
+    have hni : toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj A) ≫
+        e.inv.hom = (proEtaleIsoPostcompose g).op.whiskerLeft
+          (toSheafify (ProEt.topology Y) ((Functor.const Y.ProEtᵒᵖ).obj A)) := by
+      exact (((sheafToPresheaf (ProEt.topology X)
+        CommRingCat.{max r (t + 1)}).mapIso e).comp_inv_eq).2 hn.symm
+    change toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj A) ≫
+        (e.inv.hom ≫ d'.hom) =
+      toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj A) ≫
+        (e.inv.hom ≫ e.hom.hom)
+    rw [← Category.assoc, ← Category.assoc, hni]
+    exact hd'.trans hn.symm
+
 
 /-- Constant-section coefficient transport, with no choice of an unnormalized map.
 Source: Stacks Tag 0H7J (blueprint: lem-weil-proetale-isomorphism-inverse-image). -/
@@ -112,7 +203,17 @@ composites are identities on constant sections and hence on their sheafification
 @[instance] theorem isoSectionwiseConstantMap_isIso {X Y : Scheme.{t}}
     (g : X ⟶ Y) [IsIso g] (A : CommRingCat.{max r (t + 1)}) :
     IsIso (isoSectionwiseConstantMap g A) := by
-  sorry
+  let e := sectionwiseConstantCommIso g A
+  let W := sheafCompose (ProEt.topology X) (forget₂ CommRingCat RingCat)
+  have he : isoSectionwiseConstantMap g A = W.map e.hom := by
+    apply (isoSectionwiseConstantMap_existsUnique g A).unique
+    · exact (isoSectionwiseConstantMap_existsUnique g A).exists.choose_spec
+    · intro U a
+      exact congrArg (fun f ↦ (f.app (op U)) a)
+        (sectionwiseConstantCommIso_normalization g A)
+  rw [he]
+  infer_instance
+
 
 /-- Inverse image with its action transported through the inverse coefficient map.
 On sections a acts as c inverse(a); all underlying abelian groups are unchanged.
@@ -141,7 +242,50 @@ theorem isoSectionwiseModuleInverseImage_exact {X Y : Scheme.{t}} (g : X ⟶ Y) 
     (isoSectionwiseModuleInverseImage g c).Additive ∧
       PreservesFiniteLimits (isoSectionwiseModuleInverseImage g c) ∧
       PreservesFiniteColimits (isoSectionwiseModuleInverseImage g c) := by
-  sorry
+  let F := proEtaleIsoPostcompose g
+  let G := proEtaleIsoPostcompose (inv g)
+  let e := proEtaleIsoPostcompose_equivalence g
+  let E : X.ProEt ≌ Y.ProEt :=
+    CategoryTheory.Equivalence.mk F G e.2.1.some.symm e.2.2.1.some
+  have : E.functor.IsContinuous (ProEt.topology X) (ProEt.topology Y) :=
+    proEtaleIsoPostcompose_isContinuous g
+  have : E.inverse.IsContinuous (ProEt.topology Y) (ProEt.topology X) :=
+    proEtaleIsoPostcompose_isContinuous (inv g)
+  let adj := E.toAdjunction
+  let shAdj := adj.sheafPushforwardContinuous (E := RingCat.{max r (t + 1)})
+    (ProEt.topology X) (ProEt.topology Y)
+  let φ := inv c
+  let ψ : RY ⟶ (G.sheafPushforwardContinuous RingCat _ _).obj RX :=
+    shAdj.unit.app RY ≫ (G.sheafPushforwardContinuous _ _ _).map c
+  have H₁ : Functor.whiskerRight (NatTrans.op E.counit) RY.obj =
+      ψ.hom ≫ G.op.whiskerLeft φ.hom := by
+    ext U : 2
+    simp [ψ, φ, shAdj, adj]
+  have H₂ : φ.hom ≫ F.op.whiskerLeft ψ.hom ≫
+      Functor.whiskerRight (NatTrans.op E.unit) RX.obj = 𝟙 RX.obj := by
+    have hh : φ ≫ (E.functor.sheafPushforwardContinuous RingCat _ _).map ψ ≫
+        shAdj.counit.app RX = 𝟙 RX := by
+      dsimp only [ψ]
+      simp only [Functor.map_comp, Category.assoc]
+      erw [shAdj.counit.naturality c]
+      have ht := shAdj.left_triangle_components RY
+      calc
+        _ = φ ≫ ((E.functor.sheafPushforwardContinuous RingCat _ _).map
+            (shAdj.unit.app RY) ≫ shAdj.counit.app
+              ((E.functor.sheafPushforwardContinuous RingCat _ _).obj RY)) ≫ c := by
+          simp only [Category.assoc, Functor.id_map]
+          rfl
+        _ = φ ≫ 𝟙 _ ≫ c := congrArg (fun h ↦ φ ≫ h ≫ c) ht
+        _ = _ := by simp [φ]
+    exact congrArg (fun f ↦ f.hom) hh
+  let EM := SheafOfModules.pushforwardPushforwardEquivalence E φ ψ H₁ H₂
+  have : (isoSectionwiseModuleInverseImage g c).IsEquivalence := EM.isEquivalence_functor
+  refine ⟨?_, inferInstance, inferInstance⟩
+  constructor
+  intro M N f h
+  ext U x
+  rfl
+
 
 /-- Additivity supplied by the exact inverse-image theorem.
 Source: Stacks Tag 03DA (blueprint: lem-weil-proetale-isomorphism-inverse-image). -/
