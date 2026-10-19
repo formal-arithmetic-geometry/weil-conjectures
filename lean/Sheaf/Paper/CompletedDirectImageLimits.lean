@@ -9,35 +9,9 @@ public import Sheaf.Paper.CompletedPullback
 public import Sheaf.Paper.FourArrows
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import Mathlib.CategoryTheory.Adjunction.Whiskering
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.Paper.AdicCoefficientDatum
-import Sheaf.Paper.CompletedDerivedInverseLimit
-import Sheaf.Paper.IntrinsicCompletion
-import Sheaf.Paper.ProjectionFormulaBaseChangeNaturality
-import Sheaf.CategoryTheory.SiteCoveringAxioms
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.CategoryTheory.RingedSiteModules
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import Sheaf.Paper.PbcDerivedProductRepresentation
-import Sheaf.Paper.KoszulReconstruction
-import Sheaf.Paper.PbcRoosTriangle
-
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import Sheaf.Algebra.Homology.KInjectiveProductsTermwise
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
-import Sheaf.CategoryTheory.DiagramSiteRealization
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.Paper.IntrinsicCompletionCompleted
-import Sheaf.Paper.PerfectProjectionFormula
-import Sheaf.Paper.ProjectionMateExact
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import WeilConjectures.Algebra.Homology.RoosComplex
 import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
+
 /-!
 # The canonical direct-image/derived-limit comparison
 
@@ -103,7 +77,7 @@ theorem completedTowerEvaluation_kinjective (T : Scheme.{t})
     CochainComplex.IsKInjective
       (((reductionTowerEvaluation T (reductionModuleRing T R) n).mapHomologicalComplex
         (.up ℤ)).obj J) := by
-  sorry
+  exact tower_evaluation_isKInjective _ J (Opposite.op n)
 
 set_option linter.defProp false in
 /-- The exact K-injective normalization of tower direct-image evaluation.
@@ -368,21 +342,6 @@ def AdicCoefficientDatum.towerProjection (K : d.derived U) :
           (d.integralRingIso f)).counit.app K))
 
 
-/-- Perfect quotient coefficients make the specified strict projection invertible.
-Source: blueprint tower compatibility; Stacks Tags 0944 and 015F
-(blueprint: prop-weil-pbc-direct-image-limits).
-Proof: evaluate the tower adjunction mate. The coefficient restriction/pullback
-comparisons identify its evaluation with the restriction of the finite projection.
-The latter is invertible by the perfect projection formula. The cone of the tower map
-therefore has zero cohomology at every index. Tower cohomology is levelwise, hence its
-cone is acyclic and the original strict derived tower map is invertible. This uses
-conservativity for isomorphisms, without claiming faithfulness of derived evaluations. -/
-theorem AdicCoefficientDatum.towerProjection_isIso {U V : Scheme.{t}} (f : U ⟶ V)
-    (K : d.derived U) : IsIso (d.towerProjection f K) := by
-  sorry
-
-attribute [instance] AdicCoefficientDatum.towerProjection_isIso
-
 /-- Evaluate the pushed reduction tower using its canonical K-injective evaluation
 comparison, the normalized reduction counit, and the specified scalar-restriction
 comparison. Source: blueprint direct image and limits, projection-formula clause
@@ -432,6 +391,49 @@ theorem AdicCoefficientDatum.towerProjection_properties (K : d.derived U) :
           (d.directImageRlimIso f).hom.app ((completedReductionTower U d).obj K) := by
   sorry
 
+/-- Perfect quotient coefficients make the specified strict projection invertible.
+Source: blueprint tower compatibility; Stacks Tags 0944 and 015F
+(blueprint: prop-weil-pbc-direct-image-limits).
+Proof: evaluate the tower adjunction mate. The coefficient restriction/pullback
+comparisons identify its evaluation with the restriction of the finite projection.
+The latter is invertible by the perfect projection formula. The cone of the tower map
+therefore has zero cohomology at every index. Tower cohomology is levelwise, hence its
+cone is acyclic and the original strict derived tower map is invertible. This uses
+conservativity for isomorphisms, without claiming faithfulness of derived evaluations. -/
+theorem AdicCoefficientDatum.towerProjection_isIso {U V : Scheme.{t}} (f : U ⟶ V)
+    (K : d.derived U) : IsIso (d.towerProjection f K) := by
+  have he (n : ℕ) : IsIso
+      ((reductionTowerDerivedEvaluation V
+        (reductionModuleRing V (d.completedRing V)) n).map (d.towerProjection f K)) := by
+    have h := (d.towerProjection_properties f K).1 n
+    have : IsIso ((reductionTowerDerivedEvaluation V
+        (reductionModuleRing V (d.completedRing V)) n).map (d.towerProjection f K) ≫
+        d.towerPushReductionEvaluation f K n) := by
+      rw [h]
+      infer_instance
+    have : IsIso (d.towerPushReductionEvaluation f K n) := by
+      unfold AdicCoefficientDatum.towerPushReductionEvaluation
+      infer_instance
+    exact IsIso.of_isIso_comp_right _ (d.towerPushReductionEvaluation f K n)
+  rw [DerivedCategory.isIso_iff]
+  intro i
+  have (n : ℕᵒᵖ) : IsIso
+      (((DerivedCategory.homologyFunctor (d.towers V) i).map
+        (d.towerProjection f K)).app n) := by
+    let E := reductionTowerEvaluation V (reductionModuleRing V (d.completedRing V)) n.unop
+    have : IsIso ((E.mapDerivedCategory ⋙ DerivedCategory.homologyFunctor _ i).map
+        (d.towerProjection f K)) := by
+      change IsIso ((DerivedCategory.homologyFunctor _ i).map
+        ((reductionTowerDerivedEvaluation V
+          (reductionModuleRing V (d.completedRing V)) n.unop).map (d.towerProjection f K)))
+      have := he n.unop
+      infer_instance
+    exact (NatIso.isIso_map_iff (E.mapDerivedCategoryHomologyFunctorIso i)
+      (d.towerProjection f K)).2 inferInstance
+  exact NatIso.isIso_of_isIso_app _
+
+attribute [instance] AdicCoefficientDatum.towerProjection_isIso
+
 /-- Direct image preserves quotient-tower completeness, with the specified completion unit.
 Source: blueprint direct image and limits; Stacks Tag 099N (3), (4)
 (blueprint: prop-weil-pbc-direct-image-limits).
@@ -445,6 +447,14 @@ invertible, which is exactly quotient-tower completeness at V.
 No faithfulness of derived evaluations is invoked. -/
 theorem AdicCoefficientDatum.push_complete (K : d.derived U)
     (hK : d.TowerComplete U K) : d.TowerComplete V ((d.push f).obj K) := by
-  sorry
+  let : IsIso (d.completionUnit U K) := hK
+  change IsIso (d.completionUnit V ((d.push f).obj K))
+  have h := (d.towerProjection_properties f K).2.2
+  have : IsIso (d.completionUnit V ((d.push f).obj K) ≫
+      (completedRlim V (d.completedRing V)).map (d.towerProjection f K)) := by
+    rw [h]
+    infer_instance
+  exact IsIso.of_isIso_comp_right _
+    ((completedRlim V (d.completedRing V)).map (d.towerProjection f K))
 
 end AlgebraicGeometry.Scheme
