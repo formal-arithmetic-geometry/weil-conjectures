@@ -5,7 +5,7 @@ Authors: SHEAF group NP
 -/
 module
 
-public import Sheaf.Paper.CompletedTowerCompatibility
+public import Sheaf.Paper.CompletedTowerCorners
 
 /-!
 # The completed base-change map as the specified ordered composite

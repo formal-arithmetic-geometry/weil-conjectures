@@ -1,0 +1,114 @@
+{
+ "id": "def-weil-pbc-completed-four-towers",
+ "kind": "definition",
+ "title": "The specified strict four towers and their arrows",
+ "statement": "Let $A$ be a commutative ring with adic coefficient datum $d$ [def-weil-pbc-adic-coefficient-datum]. Let $f:X\\to Y$, $f':X'\\to Y'$, $g:Y'\\to Y$, and $g':X'\\to X$ form a chosen cartesian square [def-weil-pbc-cartesian-square]. Write $\\mathcal R_T$ for strict reduction, $L_u^{\\mathrm{Tow}}$ for strict tower pullback, and $R_u^{\\mathrm{Tow}}$ for strict tower direct image [prop-weil-pbc-direct-image-limits]. For $K\\in D(\\operatorname{Mod}(A_X))$, define\n\\[\n A_\\bullet=L_g^{\\mathrm{Tow}}\\mathcal R_Y(Rf_*K),\\quad\n B_\\bullet=L_g^{\\mathrm{Tow}}R_f^{\\mathrm{Tow}}\\mathcal R_X(K),\\quad\n C_\\bullet=\\mathcal R_{Y'}(Rf'_*Lg'^*K),\\quad\n D_\\bullet=R_{f'}^{\\mathrm{Tow}}L_{g'}^{\\mathrm{Tow}}\\mathcal R_X(K).\n\\]\nUsing the specified strict projection comparison $p_u$ and pullback/reduction isomorphism $\\chi_u$, define $h=L_g^{\\mathrm{Tow}}(p_f)$, $h'$ as $p_{f'}$ followed by $R_{f'}^{\\mathrm{Tow}}(\\chi_{g'}^{-1})$, $v=\\chi_g$ followed by strict reduction of the integral exchange [def-weil-pbc-ambient-ringed-exchange], and $v'=h^{-1}$ followed by $v$ and $h'$. The finite corner and arrow notation is [def-weil-pbc-four-corners, def-weil-pbc-four-arrows]. These are the existing strict constructions; no evaluation or rectangle assertion is included.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-tower-compatibility.md",
+  "place": "The four displayed strict tower objects and their arrows, before the evaluation and compatibility assertions"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "prop-weil-pbc-direct-image-limits",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-weil-pbc-four-corners",
+  "def-weil-pbc-four-arrows",
+  "def-weil-pbc-cartesian-square"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "results": "['CategoryTheory.mateEquiv_counit']",
+   "date": "2026-10-19",
+   "verdict": "Generic mate identities only; the existing project constructions are moved unchanged."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "naturality of the adjunction mate and four strict tower evaluation comparisons",
+   "results": "['CategoryTheory.mateEquiv_apply', 'CategoryTheory.mateEquiv_vcomp', 'CategoryTheory.mateEquiv_hcomp', 'CategoryTheory.mateEquiv_symm_apply', 'CategoryTheory.mateEquiv', 'CategoryTheory.mateEquiv_counit', 'CategoryTheory.conjugateEquiv_mateEquiv_vcomp', 'CategoryTheory.mateEquiv_square']",
+   "date": "2026-10-19",
+   "verdict": "Generic mate identities only; the existing project constructions are moved unchanged."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "results": "['CategoryTheory.mateEquiv_counit']",
+   "date": "2026-10-19",
+   "verdict": "Generic mate identities only; the existing project constructions are moved unchanged."
+  },
+  {
+   "tool": "grep",
+   "query": "strictTowerExchangeMateNormalization|exchangeStrict_naturality",
+   "results": "[]",
+   "date": "2026-10-19",
+   "verdict": "Generic mate identities only; the existing project constructions are moved unchanged."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict coefficient reduction towers and their projection formula and base change maps",
+   "results": "8 hits: WeierstrassCurve.Projective.baseChange_polynomial, IsBaseChange.basis_repr_comp, IsBaseChange.pi, IsBaseChange.of_comp, KaehlerDifferential.mapBaseChange, WeierstrassCurve.Projective.baseChange_polynomialY, KaehlerDifferential.cotangentComplexBaseChange, IsBaseChange.finitePow. None defines these strict derived tower objects.",
+   "date": "2026-10-19",
+   "verdict": "no match; reuse the existing project definitions unchanged"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedTowerCompatibility",
+  "date": "2026-10-19",
+  "group": "P8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-tower-compatibility",
+   "place": "The four displayed strict tower objects and their arrows, before the evaluation and compatibility assertions",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedTowerCorners",
+  "file": "lean/Sheaf/Paper/CompletedTowerCorners.lean",
+  "declaration": "AlgebraicGeometry.Scheme.AdicCoefficientDatum.fourTowerCorners",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.fourTowerCorners",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerH",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerH'",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerV",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerV'"
+  ],
+  "statement": "def AdicCoefficientDatum.fourTowerCorners (K : d.derived X) :\n    Fin 4 → DerivedCategory (d.towers Y')",
+  "branch": "sheaf-dag",
+  "by": "P8",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-5bd48",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261019T093539-L-2325287",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-5bd48",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261019T093539-L-2325287",
+  "kind": "interface",
+  "note": "independent cc review: fourTowers_compatibility (statement byte-identical to live) vs strictTowerExchangeMateNormalization .2.1 + towerV' cancellation + exchangeStrict_naturality; moved defs diffed identical to live; CompletedBaseChangeMap import swap forced by the import cycle; 11 importers compiled against the delivered modules"
+ }
+}

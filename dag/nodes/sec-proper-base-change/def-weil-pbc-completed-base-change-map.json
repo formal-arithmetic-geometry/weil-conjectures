@@ -1,203 +1,298 @@
 {
-  "id": "def-weil-pbc-completed-base-change-map",
-  "blueprint": {
-    "is": "def-weil-pbc-completed-base-change-map",
-    "from": null,
-    "same_as": []
+ "id": "def-weil-pbc-completed-base-change-map",
+ "blueprint": {
+  "is": "def-weil-pbc-completed-base-change-map",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Completed base-change map",
+ "statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square of schemes\n[def-weil-pbc-cartesian-square], with $f:X\\to Y$ proper,\n$g:Y'\\to Y$, $g':X'\\to X$, and $f':X'\\to Y'$.\nLet $(A,I)$ be the adic coefficient datum\n[def-weil-pbc-adic-coefficient-datum], with $P_n=A/I^n$ for $n\\geq1$,\nand use its sheaves $A_T$ and $(P_n)_T$ and its strict reduction towers.\nLet $K\\in D(X_{\\Proet},A)$ be derived $I$-complete, meaning that its\ncanonical completion map $K\\to\\Rlim K_\\bullet$ is an isomorphism, where\n$K_n=K\\otimes^L_{A_X}(P_n)_X$ and $\\Rlim$ is\n[def-weil-pbc-derived-inverse-limit]. For each $n$, retain a specified\netale-origin witness $(L_n,\\alpha_n)$\n[def-weil-pbc-etale-origin-witness], with\n$L_n\\in D^+(X_{\\Et},P_n)$ and $\\alpha_n:\\nu_X^*L_n\\xrightarrow{\\sim}K_n$.\n\nWrite $Lg_n^*$ and $Lg_n'^*$ for derived pullback with finite\ncoefficient sheaves $(P_n)_T$, as in\n[def-weil-pbc-completed-pullback]. Use the corners $A_n,B_n,D_n$ of [def-weil-pbc-four-corners] and the\narrows of [def-weil-pbc-four-arrows]:\n$$\n\\begin{aligned}\n A_n&=Lg_n^*((Rf_*K)\\otimes_A^LP_n),&\n B_n&=Lg_n^*Rf_*K_n,&\n D_n&=Rf'_*Lg_n'^*K_n,\\\\\n h_n&=Lg_n^*(\\pi_{f,K,P_n}):A_n\\xrightarrow{\\sim}B_n,&\n v'_n&:B_n\\longrightarrow D_n.\n\\end{aligned}\n$$\nHere $\\pi$ is the specified projection-formula map\n[def-weil-pbc-projection-formula-map], and $v'_n$ is the finite-level\npro-etale exchange map transported using the displayed witness.\nThe tower objects and the tower morphisms $h_\\bullet,v'_\\bullet$ are\nthose supplied by [def-weil-pbc-completed-four-towers]; all finite-level\nobjects are restricted to the ambient $A$-coefficient category before\napplying the triangulated functor $\\Rlim$ of\n[prop-weil-pbc-rlim-functoriality].\n\nWrite $S=Lg^*_{\\mathrm{comp}}Rf_*K$, where completed pullback is\n[def-weil-pbc-completed-pullback]. Fix the canonical identification\n$S\\xrightarrow{\\sim}\\Rlim A_\\bullet$ coming from that definition\napplied to the reduction tower of $Rf_*K$. The completeness of\n$Rf_*K$, the compatible projection-formula isomorphisms, and the\ncanonical direct-image/derived-limit comparison are supplied by\n[prop-weil-pbc-direct-image-limits]. Put\n$$\n s:\\ S\\xrightarrow{\\sim}\\Rlim A_\\bullet\n       \\xrightarrow{\\Rlim(h_\\bullet)}\\Rlim B_\\bullet.\n$$\nFor $M_\\bullet=Lg'^*_{\\operatorname{Tow}}K_\\bullet$, let\n$$\n c_{f',M}:Rf'_*\\Rlim M_\\bullet\n       \\xrightarrow{\\sim}\\Rlim(Rf'_*^{\\operatorname{Tow}}M_\\bullet)\n       =\\Rlim D_\\bullet\n$$\nbe the canonical comparison of [prop-weil-pbc-direct-image-limits],\nusing the tower identifications above. Define the completed base-change\nmap to be exactly the following ordered composite:\n$$\n\\begin{aligned}\n \\Ex^{\\mathrm{comp}}_{\\square,K}:\\quad\n Lg^*_{\\mathrm{comp}}Rf_*K\n &\\xrightarrow{s}\\Rlim B_\\bullet\\\\\n &\\xrightarrow{\\Rlim(v'_\\bullet)}\\Rlim D_\\bullet\\\\\n &\\xrightarrow{c_{f',M}^{-1}}Rf'_*\\Rlim M_\\bullet\n   =Rf'_*Lg'^*_{\\mathrm{comp}}K.\n\\end{aligned}\n$$\nThe specified projection-formula maps, the transported finite-level\nexchange maps, and the inverse of the specified comparison are part of\nthis definition; arbitrary isomorphisms between the displayed objects\nare not substituted for them.\n\nThis is the blueprint's explicit construction of the map whose\nconstruction is omitted in Stacks Tag 09C9\n(proetale.tex, theorem-proper-base-change). Stacks Tag 099N\n(proetale.tex, lemma-pushforward-Noetherian-case, clauses (1), (4), (5))\nprovides the constant-Noetherian-coefficient completion formulas;\nTag 0944 (sites-cohomology.tex, lemma-projection-formula) supplies the\nperfect projection formula, and direct-image/derived-limit commutation is supplied by\n[prop-weil-pbc-direct-image-limits] (its ringed-topos source is\nsites-cohomology.tex, lemma-Rf-commutes-with-Rlim). The strict tower refinement and the\nchosen witness transports here are those of the cited DAG nodes,\nnot additional assertions attributed to Tag 099N.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-completed-base-change-map.md",
+  "place": "node def-weil-pbc-completed-base-change-map, order 1338",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 09C9"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 099N"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 099L"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-pbc-four-corners",
+  "def-weil-pbc-four-arrows",
+  "def-weil-pbc-projection-formula-map",
+  "def-weil-pbc-completed-four-towers",
+  "def-weil-pbc-derived-inverse-limit",
+  "prop-weil-pbc-rlim-functoriality",
+  "def-weil-pbc-completed-pullback",
+  "prop-weil-pbc-direct-image-limits"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Completed proper base change morphism for derived I complete pro etale sheaves constructed as the derived inverse limit of finite coefficient exchange maps",
+   "results": "AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; KaehlerDifferential.isBaseChange_of_formallyEtale; BDeRhamPlus; Algebra.FormallyEtale.comp; Algebra.FormallyEtale.of_restrictScalars",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern etale algebra/morphisms or underived sheaf pullback compositions, not the specified completed exchange morphism"
   },
-  "kind": "definition",
-  "title": "Completed base-change map",
-  "statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square of schemes\n[def-weil-pbc-cartesian-square], with $f:X\\to Y$ proper,\n$g:Y'\\to Y$, $g':X'\\to X$, and $f':X'\\to Y'$.\nLet $(A,I)$ be the adic coefficient datum\n[def-weil-pbc-adic-coefficient-datum], with $P_n=A/I^n$ for $n\\geq1$,\nand use its sheaves $A_T$ and $(P_n)_T$ and its strict reduction towers.\nLet $K\\in D(X_{\\Proet},A)$ be derived $I$-complete, meaning that its\ncanonical completion map $K\\to\\Rlim K_\\bullet$ is an isomorphism, where\n$K_n=K\\otimes^L_{A_X}(P_n)_X$ and $\\Rlim$ is\n[def-weil-pbc-derived-inverse-limit]. For each $n$, retain a specified\netale-origin witness $(L_n,\\alpha_n)$\n[def-weil-pbc-etale-origin-witness], with\n$L_n\\in D^+(X_{\\Et},P_n)$ and $\\alpha_n:\\nu_X^*L_n\\xrightarrow{\\sim}K_n$.\n\nWrite $Lg_n^*$ and $Lg_n'^*$ for derived pullback with finite\ncoefficient sheaves $(P_n)_T$, as in\n[def-weil-pbc-completed-pullback]. Use the corners $A_n,B_n,D_n$ of [def-weil-pbc-four-corners] and the\narrows of [def-weil-pbc-four-arrows]:\n$$\n\\begin{aligned}\n A_n&=Lg_n^*((Rf_*K)\\otimes_A^LP_n),&\n B_n&=Lg_n^*Rf_*K_n,&\n D_n&=Rf'_*Lg_n'^*K_n,\\\\\n h_n&=Lg_n^*(\\pi_{f,K,P_n}):A_n\\xrightarrow{\\sim}B_n,&\n v'_n&:B_n\\longrightarrow D_n.\n\\end{aligned}\n$$\nHere $\\pi$ is the specified projection-formula map\n[def-weil-pbc-projection-formula-map], and $v'_n$ is the finite-level\npro-etale exchange map transported using the displayed witness.\nThe tower objects and the tower morphisms $h_\\bullet,v'_\\bullet$ are\nthose supplied by [lem-weil-pbc-tower-compatibility]; all finite-level\nobjects are restricted to the ambient $A$-coefficient category before\napplying the triangulated functor $\\Rlim$ of\n[prop-weil-pbc-rlim-functoriality].\n\nWrite $S=Lg^*_{\\mathrm{comp}}Rf_*K$, where completed pullback is\n[def-weil-pbc-completed-pullback]. Fix the canonical identification\n$S\\xrightarrow{\\sim}\\Rlim A_\\bullet$ coming from that definition\napplied to the reduction tower of $Rf_*K$. The completeness of\n$Rf_*K$, the compatible projection-formula isomorphisms, and the\ncanonical direct-image/derived-limit comparison are supplied by\n[prop-weil-pbc-direct-image-limits]. Put\n$$\n s:\\ S\\xrightarrow{\\sim}\\Rlim A_\\bullet\n       \\xrightarrow{\\Rlim(h_\\bullet)}\\Rlim B_\\bullet.\n$$\nFor $M_\\bullet=Lg'^*_{\\operatorname{Tow}}K_\\bullet$, let\n$$\n c_{f',M}:Rf'_*\\Rlim M_\\bullet\n       \\xrightarrow{\\sim}\\Rlim(Rf'_*^{\\operatorname{Tow}}M_\\bullet)\n       =\\Rlim D_\\bullet\n$$\nbe the canonical comparison of [prop-weil-pbc-direct-image-limits],\nusing the tower identifications above. Define the completed base-change\nmap to be exactly the following ordered composite:\n$$\n\\begin{aligned}\n \\Ex^{\\mathrm{comp}}_{\\square,K}:\\quad\n Lg^*_{\\mathrm{comp}}Rf_*K\n &\\xrightarrow{s}\\Rlim B_\\bullet\\\\\n &\\xrightarrow{\\Rlim(v'_\\bullet)}\\Rlim D_\\bullet\\\\\n &\\xrightarrow{c_{f',M}^{-1}}Rf'_*\\Rlim M_\\bullet\n   =Rf'_*Lg'^*_{\\mathrm{comp}}K.\n\\end{aligned}\n$$\nThe specified projection-formula maps, the transported finite-level\nexchange maps, and the inverse of the specified comparison are part of\nthis definition; arbitrary isomorphisms between the displayed objects\nare not substituted for them.\n\nThis is the blueprint's explicit construction of the map whose\nconstruction is omitted in Stacks Tag 09C9\n(proetale.tex, theorem-proper-base-change). Stacks Tag 099N\n(proetale.tex, lemma-pushforward-Noetherian-case, clauses (1), (4), (5))\nprovides the constant-Noetherian-coefficient completion formulas;\nTag 0944 (sites-cohomology.tex, lemma-projection-formula) supplies the\nperfect projection formula, and direct-image/derived-limit commutation is supplied by\n[prop-weil-pbc-direct-image-limits] (its ringed-topos source is\nsites-cohomology.tex, lemma-Rf-commutes-with-Rlim). The strict tower refinement and the\nchosen witness transports here are those of the cited DAG nodes,\nnot additional assertions attributed to Tag 099N.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-completed-base-change-map.md",
-    "place": "node def-weil-pbc-completed-base-change-map, order 1338",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 09C9"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 099N"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 099L"
-      }
-    ]
+  {
+   "tool": "grep",
+   "query": "completedBaseChange|completed_base_change|derived.*completion.*base|base.*change.*completion",
+   "results": "Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: the first pattern finds only ordinary adic completion and elliptic-curve base change; the second finds no derived completion or derived limit in CategoryTheory"
   },
-  "stmt_deps": [
-    "def-weil-pbc-cartesian-square",
-    "def-weil-pbc-adic-coefficient-datum",
-    "def-weil-pbc-etale-origin-witness",
-    "def-weil-pbc-four-corners",
-    "def-weil-pbc-four-arrows",
-    "def-weil-pbc-projection-formula-map",
-    "lem-weil-pbc-tower-compatibility",
-    "def-weil-pbc-derived-inverse-limit",
-    "prop-weil-pbc-rlim-functoriality",
-    "def-weil-pbc-completed-pullback",
-    "prop-weil-pbc-direct-image-limits"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Completed proper base change morphism for derived I complete pro etale sheaves constructed as the derived inverse limit of finite coefficient exchange maps",
-      "results": "AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; KaehlerDifferential.isBaseChange_of_formallyEtale; BDeRhamPlus; Algebra.FormallyEtale.comp; Algebra.FormallyEtale.of_restrictScalars",
-      "date": "2026-10-14",
-      "verdict": "no match: hits concern etale algebra/morphisms or underived sheaf pullback compositions, not the specified completed exchange morphism"
-    },
-    {
-      "tool": "grep",
-      "query": "completedBaseChange|completed_base_change|derived.*completion.*base|base.*change.*completion",
-      "results": "Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean",
-      "date": "2026-10-14",
-      "verdict": "no match: the first pattern finds only ordinary adic completion and elliptic-curve base change; the second finds no derived completion or derived limit in CategoryTheory"
-    },
-    {
-      "tool": "leansearch",
-      "query": "The completed base change morphism is the derived inverse limit of exchange morphisms for finite quotient coefficient sheaves",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"baseChange\"",
-      "results": "Submodule.baseChange; LinearMap.baseChange; LinearEquiv.baseChange; LinearMap.baseChange_id; Submodule.baseChange_bot; Submodule.baseChange_top; Submodule.tmul_mem_baseChange_of_mem; Submodule.baseChange_mono",
-      "date": "2026-10-14",
-      "verdict": "no match: ordinary scalar base change or pointwise derived functor/Kan extension existence, not the completed pro-etale composite"
-    },
-    {
-      "tool": "grep",
-      "query": "homotopyLimit|derivedLimit|derivedCompletion",
-      "results": "none",
-      "date": "2026-10-14",
-      "verdict": "no match: the first pattern finds only ordinary adic completion and elliptic-curve base change; the second finds no derived completion or derived limit in CategoryTheory"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Define a morphism between completed derived pullback of pushforward and pushforward of completed pullback by applying a derived limit functor to a natural transformation of inverse systems",
-      "results": "SheafOfModules.pullbackComp; PresheafOfModules.pullbackComp; CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback; SheafOfModules.pullbackIso; CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility; CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso; CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app; TopCat.Sheaf.pullbackIso",
-      "date": "2026-10-14",
-      "verdict": "no match: hits concern etale algebra/morphisms or underived sheaf pullback compositions, not the specified completed exchange morphism"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"derived\", \"limit\"",
-      "results": "CategoryTheory.Functor.HasPointwiseLeftDerivedFunctorAt.hasLimit; CategoryTheory.Functor.HasPointwiseLeftDerivedFunctorAt.hasLimit'; CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit; CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit'; CantorBendixson.iteratedDerivedSet_limit",
-      "date": "2026-10-14",
-      "verdict": "no match: ordinary scalar base change or pointwise derived functor/Kan extension existence, not the completed pro-etale composite"
-    },
-    {
-      "tool": "grep",
-      "query": "Rlim|derivedInverseLimit|completedPullback",
-      "results": "25 hits: Mathlib/Algebra/Category/Ring/Under/Property.lean; Mathlib/Algebra/Category/Ring/Under/Property.lean; Mathlib/Algebra/Category/Ring/Under/Property.lean; Mathlib/Algebra/Category/Ring/Under/Property.lean; Mathlib/Algebra/Category/Ring/Under/Property.lean; Mathlib/CategoryTheory/ObjectProperty/Local.lean; Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean; Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean",
-      "date": "2026-10-14",
-      "verdict": "no match: ordinary limits, underived sheaf adjunctions or inverse systems of types; no completed derived exchange composite"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"sheafPushforward\", \"pullback\"",
-      "results": "1 hits: CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify",
-      "date": "2026-10-14",
-      "verdict": "no match: ordinary limits, underived sheaf adjunctions or inverse systems of types; no completed derived exchange composite"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A derived exchange natural transformation on inverse systems induces a comparison map on their derived limits",
-      "results": "8 hits: InverseSystem.globalEquiv_naturality; InverseSystem.invLimEquiv_apply_coe; InverseSystem.invLimEquiv; InverseSystem.isNatEquiv_piEquivLim; InverseSystem.pEquivOnLim; CategoryTheory.Functor.WellOrderInductionData.Extension.map_limit; InverseSystem.globalEquiv_compatibility; InverseSystem.IsNatEquiv",
-      "date": "2026-10-14",
-      "verdict": "no match: ordinary limits, underived sheaf adjunctions or inverse systems of types; no completed derived exchange composite"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "detailed_form",
-    "backtick_citation",
-    "self_citation"
-  ],
-  "blueprint_kind": "definition",
-  "blueprint_order": 1338,
-  "blueprint_uses": [
-    "def-weil-pbc-completed-pullback",
-    "def-weil-pbc-derived-inverse-limit",
-    "def-weil-pbc-etale-origin-witness",
-    "def-weil-pbc-projection-formula-map"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-completed-pullback",
-    "def-weil-pbc-derived-inverse-limit",
-    "def-weil-pbc-projection-formula-map"
-  ],
-  "blueprint_sketch": [
-    {
-      "statement": "Let $K$ be derived complete and let every $K_n$ have a displayed witness\n$\\epsilon_X^{-1}L_n\\simeq K_n$ with\n$L_n\\in D_c^+(X_{\\mathrm{et}},\\Lambda/I^n)$. Define\n\n$$\n\\operatorname{Ex}^{\\mathrm{comp}}_{\\square,K}:\nLg^*_{\\mathrm{comp}}Rf_*K\\longrightarrow\nRf'_*L(g')^*_{\\mathrm{comp}}K\n$$\n\nto be the ordered composite\n\n$$\n\\begin{aligned}\nLg^*_{\\mathrm{comp}}Rf_*K\n&\\xrightarrow{\\sim}R\\varprojlim_n Lg^*Rf_*K_n\\\\\n&\\xrightarrow{R\\varprojlim_n\\operatorname{Ex}_{\\square,K_n}}\nR\\varprojlim_nRf'_*L(g')^*K_n\\\\\n&\\xrightarrow{\\sim}Rf'_*R\\varprojlim_nL(g')^*K_n\n=Rf'_*L(g')^*_{\\mathrm{comp}}K.\n\\end{aligned}\n$$\n\nIn the notation above, the first two arrows are $H$ followed by $V'$.\nThe first isomorphism uses reconstruction and the perfect projection formula;\nthe second displayed isomorphism is the inverse of direct-image/limit\ncommutation. This definition fills the map-construction omission in Tag\n`09C9`.",
-      "proof": "",
-      "cites": []
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "leansearch",
+   "query": "The completed base change morphism is the derived inverse limit of exchange morphisms for finite quotient coefficient sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "def-weil-pbc-completed-base-change-map",
-    "worker": "stage1",
-    "summary": "Expanded the inherited coefficient and square context; named the corner towers, projection-formula and finite exchange tower maps, the derived-limit functor, and the direct-image comparison in the ordered composite. All constructions and well-definedness inputs are existing nodes. Corrected the stale detailed-suffix remark and distinguished the blueprint map construction from the formulas actually stated by Stacks. No new nodes, proof claims, or coefficient-category identification are introduced.",
-    "blueprint": "Definition, displayed ordered composite and following paragraph: the first arrow is reconstruction/definition of completed pullback followed by Rlim(h); the middle arrow is Rlim(v'); the last arrow is the inverse direct-image/derived-limit comparison. The detailed form is retained; the sketch supplies the inherited derived-complete hypothesis."
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\"",
+   "results": "Submodule.baseChange; LinearMap.baseChange; LinearEquiv.baseChange; LinearMap.baseChange_id; Submodule.baseChange_bot; Submodule.baseChange_top; Submodule.tmul_mem_baseChange_of_mem; Submodule.baseChange_mono",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary scalar base change or pointwise derived functor/Kan extension existence, not the completed pro-etale composite"
   },
-  "reviewed": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "NT-Codex-ND-022ed4c82",
-    "group": "ND",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-022ed4c82 (reviewer sub-agent of L); spot-checked: Read the full item, all eleven cited statements, blueprint route and source passages. The ordered composite is correctly typed, its comparisons have the required directions, and edge cases pass. No new nodes, duplicates or cycles through the item. Exact master condensed coefficients and mate construction were checked; no seeded comparison to this integral map is certified. Detailed checks are in review.md."
+  {
+   "tool": "grep",
+   "query": "homotopyLimit|derivedLimit|derivedCompletion",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: the first pattern finds only ordinary adic completion and elliptic-curve base change; the second finds no derived completion or derived limit in CategoryTheory"
   },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-1f3350d30",
-    "group": "Q44",
-    "result": "fix",
-    "note": "Reviewed all twelve modules, immutable records, sources, hypotheses, coherence clauses, universes and edge cases. Fixed H3/H13: the witness interface wrongly required commutative rings; complete replacements are in fixes/. Original and fixed packets passed per-file server compilation through scompile.py. Full findings and evidence are in review.md."
+  {
+   "tool": "leanfinder",
+   "query": "Define a morphism between completed derived pullback of pushforward and pushforward of completed pullback by applying a derived limit functor to a natural transformation of inverse systems",
+   "results": "SheafOfModules.pullbackComp; PresheafOfModules.pullbackComp; CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback; SheafOfModules.pullbackIso; CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility; CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso; CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app; TopCat.Sheaf.pullbackIso",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern etale algebra/morphisms or underived sheaf pullback compositions, not the specified completed exchange morphism"
   },
-  "lean": {
-    "module": "Sheaf.Paper.CompletedBaseChangeMap",
-    "declaration": "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedBaseChangeMap",
-    "declarations": [
-      "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedExchange",
-      "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedBaseChangeMap"
-    ],
-    "file": "lean/Sheaf/Paper/CompletedBaseChangeMap.lean",
-    "statement": "def AdicCoefficientDatum.completedBaseChangeMap [IsProper f] (K : d.derived X) (_hK : d.TowerComplete X K) (_W : ∀ n : ℕ, FiniteEtaleOriginWitness X (A ⧸ d.ideal ^ (n + 1)) ((d.reduction X n).obj K)) : (d.completedPull g).obj ((d.push f).obj K) ⟶ (d.push f').obj ((d.completedPull g').obj K)",
-    "branch": "newtargets-dag",
-    "by": "Q44",
-    "date": "2026-10-16",
-    "existing": false,
-    "note": "Unstated existing prerequisite, supplied in the same delivery under the human instruction of 2026-10-16. The node has no usable lean record in the read-only checkout or published source. Its canonical objects and maps are constructed in this module, with no arbitrary replacement of canonical maps."
+  {
+   "tool": "loogle",
+   "query": "\"derived\", \"limit\"",
+   "results": "CategoryTheory.Functor.HasPointwiseLeftDerivedFunctorAt.hasLimit; CategoryTheory.Functor.HasPointwiseLeftDerivedFunctorAt.hasLimit'; CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit; CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit'; CantorBendixson.iteratedDerivedSet_limit",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary scalar base change or pointwise derived functor/Kan extension existence, not the completed pro-etale composite"
   },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $K$ be derived complete and let every $K_n$ carry a specified\nétale-origin witness [def-weil-pbc-etale-origin-witness]\n$\\epsilon_X^{-1}L_n\\simeq K_n$ with\n$L_n\\in D_c^+(X_{\\mathrm{et}},\\Lambda/I^n)$. Define\n\n$$\n\\operatorname{Ex}^{\\mathrm{comp}}_{\\square,K}:\nLg^*_{\\mathrm{comp}}Rf_*K\\longrightarrow\nRf'_*L(g')^*_{\\mathrm{comp}}K\n$$\n\nto be the ordered composite\n\n$$\n\\begin{aligned}\nLg^*_{\\mathrm{comp}}Rf_*K\n&\\xrightarrow{\\sim}R\\varprojlim_n Lg^*Rf_*K_n\\\\\n&\\xrightarrow{R\\varprojlim_n\\operatorname{Ex}_{\\square,K_n}}\nR\\varprojlim_nRf'_*L(g')^*K_n\\\\\n&\\xrightarrow{\\sim}Rf'_*R\\varprojlim_nL(g')^*K_n\n=Rf'_*L(g')^*_{\\mathrm{comp}}K.\n\\end{aligned}\n$$\n\nIn the notation above, the first two arrows are $H$ followed by $V'$.\nThe first isomorphism is reconstruction followed by the projection formula\nfor the finite quotients; the last is the inverse of the canonical\ndirect-image/derived-limit comparison.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "grep",
+   "query": "Rlim|derivedInverseLimit|completedPullback",
+   "results": "25 hits: Mathlib/Algebra/Category/Ring/Under/Property.lean; Mathlib/Algebra/Category/Ring/Under/Property.lean; Mathlib/Algebra/Category/Ring/Under/Property.lean; Mathlib/Algebra/Category/Ring/Under/Property.lean; Mathlib/Algebra/Category/Ring/Under/Property.lean; Mathlib/CategoryTheory/ObjectProperty/Local.lean; Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean; Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary limits, underived sheaf adjunctions or inverse systems of types; no completed derived exchange composite"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPushforward\", \"pullback\"",
+   "results": "1 hits: CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary limits, underived sheaf adjunctions or inverse systems of types; no completed derived exchange composite"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived exchange natural transformation on inverse systems induces a comparison map on their derived limits",
+   "results": "8 hits: InverseSystem.globalEquiv_naturality; InverseSystem.invLimEquiv_apply_coe; InverseSystem.invLimEquiv; InverseSystem.isNatEquiv_piEquivLim; InverseSystem.pEquivOnLim; CategoryTheory.Functor.WellOrderInductionData.Extension.map_limit; InverseSystem.globalEquiv_compatibility; InverseSystem.IsNatEquiv",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary limits, underived sheaf adjunctions or inverse systems of types; no completed derived exchange composite"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "backtick_citation",
+  "self_citation"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1338,
+ "blueprint_uses": [
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-derived-inverse-limit",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-pbc-projection-formula-map"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-derived-inverse-limit",
+  "def-weil-pbc-projection-formula-map"
+ ],
+ "blueprint_sketch": [
+  {
+   "statement": "Let $K$ be derived complete and let every $K_n$ have a displayed witness\n$\\epsilon_X^{-1}L_n\\simeq K_n$ with\n$L_n\\in D_c^+(X_{\\mathrm{et}},\\Lambda/I^n)$. Define\n\n$$\n\\operatorname{Ex}^{\\mathrm{comp}}_{\\square,K}:\nLg^*_{\\mathrm{comp}}Rf_*K\\longrightarrow\nRf'_*L(g')^*_{\\mathrm{comp}}K\n$$\n\nto be the ordered composite\n\n$$\n\\begin{aligned}\nLg^*_{\\mathrm{comp}}Rf_*K\n&\\xrightarrow{\\sim}R\\varprojlim_n Lg^*Rf_*K_n\\\\\n&\\xrightarrow{R\\varprojlim_n\\operatorname{Ex}_{\\square,K_n}}\nR\\varprojlim_nRf'_*L(g')^*K_n\\\\\n&\\xrightarrow{\\sim}Rf'_*R\\varprojlim_nL(g')^*K_n\n=Rf'_*L(g')^*_{\\mathrm{comp}}K.\n\\end{aligned}\n$$\n\nIn the notation above, the first two arrows are $H$ followed by $V'$.\nThe first isomorphism uses reconstruction and the perfect projection formula;\nthe second displayed isomorphism is the inverse of direct-image/limit\ncommutation. This definition fills the map-construction omission in Tag\n`09C9`.",
+   "proof": "",
+   "cites": []
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-pbc-completed-base-change-map",
+  "worker": "stage1",
+  "summary": "Expanded the inherited coefficient and square context; named the corner towers, projection-formula and finite exchange tower maps, the derived-limit functor, and the direct-image comparison in the ordered composite. All constructions and well-definedness inputs are existing nodes. Corrected the stale detailed-suffix remark and distinguished the blueprint map construction from the formulas actually stated by Stacks. No new nodes, proof claims, or coefficient-category identification are introduced.",
+  "blueprint": "Definition, displayed ordered composite and following paragraph: the first arrow is reconstruction/definition of completed pullback followed by Rlim(h); the middle arrow is Rlim(v'); the last arrow is the inverse direct-image/derived-limit comparison. The detailed form is retained; the sketch supplies the inherited derived-complete hypothesis."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-022ed4c82",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-022ed4c82 (reviewer sub-agent of L); spot-checked: Read the full item, all eleven cited statements, blueprint route and source passages. The ordered composite is correctly typed, its comparisons have the required directions, and edge cases pass. No new nodes, duplicates or cycles through the item. Exact master condensed coefficients and mate construction were checked; no seeded comparison to this integral map is certified. Detailed checks are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1f3350d30",
+  "group": "Q44",
+  "result": "fix",
+  "note": "Reviewed all twelve modules, immutable records, sources, hypotheses, coherence clauses, universes and edge cases. Fixed H3/H13: the witness interface wrongly required commutative rings; complete replacements are in fixes/. Original and fixed packets passed per-file server compilation through scompile.py. Full findings and evidence are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedBaseChangeMap",
+  "declaration": "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedBaseChangeMap",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedExchange",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedBaseChangeMap"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedBaseChangeMap.lean",
+  "statement": "def AdicCoefficientDatum.completedBaseChangeMap [IsProper f] (K : d.derived X) (_hK : d.TowerComplete X K) (_W : ∀ n : ℕ, FiniteEtaleOriginWitness X (A ⧸ d.ideal ^ (n + 1)) ((d.reduction X n).obj K)) : (d.completedPull g).obj ((d.push f).obj K) ⟶ (d.push f').obj ((d.completedPull g').obj K)",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Unstated existing prerequisite, supplied in the same delivery under the human instruction of 2026-10-16. The node has no usable lean record in the read-only checkout or published source. Its canonical objects and maps are constructed in this module, with no arbitrary replacement of canonical maps."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $K$ be derived complete and let every $K_n$ carry a specified\nétale-origin witness [def-weil-pbc-etale-origin-witness]\n$\\epsilon_X^{-1}L_n\\simeq K_n$ with\n$L_n\\in D_c^+(X_{\\mathrm{et}},\\Lambda/I^n)$. Define\n\n$$\n\\operatorname{Ex}^{\\mathrm{comp}}_{\\square,K}:\nLg^*_{\\mathrm{comp}}Rf_*K\\longrightarrow\nRf'_*L(g')^*_{\\mathrm{comp}}K\n$$\n\nto be the ordered composite\n\n$$\n\\begin{aligned}\nLg^*_{\\mathrm{comp}}Rf_*K\n&\\xrightarrow{\\sim}R\\varprojlim_n Lg^*Rf_*K_n\\\\\n&\\xrightarrow{R\\varprojlim_n\\operatorname{Ex}_{\\square,K_n}}\nR\\varprojlim_nRf'_*L(g')^*K_n\\\\\n&\\xrightarrow{\\sim}Rf'_*R\\varprojlim_nL(g')^*K_n\n=Rf'_*L(g')^*_{\\mathrm{comp}}K.\n\\end{aligned}\n$$\n\nIn the notation above, the first two arrows are $H$ followed by $V'$.\nThe first isomorphism is reconstruction followed by the projection formula\nfor the finite quotients; the last is the inverse of the canonical\ndirect-image/derived-limit comparison.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "statement_change": {
+  "date": "2026-10-19",
+  "by": "P8 stage 2",
+  "old_statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square of schemes\n[def-weil-pbc-cartesian-square], with $f:X\\to Y$ proper,\n$g:Y'\\to Y$, $g':X'\\to X$, and $f':X'\\to Y'$.\nLet $(A,I)$ be the adic coefficient datum\n[def-weil-pbc-adic-coefficient-datum], with $P_n=A/I^n$ for $n\\geq1$,\nand use its sheaves $A_T$ and $(P_n)_T$ and its strict reduction towers.\nLet $K\\in D(X_{\\Proet},A)$ be derived $I$-complete, meaning that its\ncanonical completion map $K\\to\\Rlim K_\\bullet$ is an isomorphism, where\n$K_n=K\\otimes^L_{A_X}(P_n)_X$ and $\\Rlim$ is\n[def-weil-pbc-derived-inverse-limit]. For each $n$, retain a specified\netale-origin witness $(L_n,\\alpha_n)$\n[def-weil-pbc-etale-origin-witness], with\n$L_n\\in D^+(X_{\\Et},P_n)$ and $\\alpha_n:\\nu_X^*L_n\\xrightarrow{\\sim}K_n$.\n\nWrite $Lg_n^*$ and $Lg_n'^*$ for derived pullback with finite\ncoefficient sheaves $(P_n)_T$, as in\n[def-weil-pbc-completed-pullback]. Use the corners $A_n,B_n,D_n$ of [def-weil-pbc-four-corners] and the\narrows of [def-weil-pbc-four-arrows]:\n$$\n\\begin{aligned}\n A_n&=Lg_n^*((Rf_*K)\\otimes_A^LP_n),&\n B_n&=Lg_n^*Rf_*K_n,&\n D_n&=Rf'_*Lg_n'^*K_n,\\\\\n h_n&=Lg_n^*(\\pi_{f,K,P_n}):A_n\\xrightarrow{\\sim}B_n,&\n v'_n&:B_n\\longrightarrow D_n.\n\\end{aligned}\n$$\nHere $\\pi$ is the specified projection-formula map\n[def-weil-pbc-projection-formula-map], and $v'_n$ is the finite-level\npro-etale exchange map transported using the displayed witness.\nThe tower objects and the tower morphisms $h_\\bullet,v'_\\bullet$ are\nthose supplied by [lem-weil-pbc-tower-compatibility]; all finite-level\nobjects are restricted to the ambient $A$-coefficient category before\napplying the triangulated functor $\\Rlim$ of\n[prop-weil-pbc-rlim-functoriality].\n\nWrite $S=Lg^*_{\\mathrm{comp}}Rf_*K$, where completed pullback is\n[def-weil-pbc-completed-pullback]. Fix the canonical identification\n$S\\xrightarrow{\\sim}\\Rlim A_\\bullet$ coming from that definition\napplied to the reduction tower of $Rf_*K$. The completeness of\n$Rf_*K$, the compatible projection-formula isomorphisms, and the\ncanonical direct-image/derived-limit comparison are supplied by\n[prop-weil-pbc-direct-image-limits]. Put\n$$\n s:\\ S\\xrightarrow{\\sim}\\Rlim A_\\bullet\n       \\xrightarrow{\\Rlim(h_\\bullet)}\\Rlim B_\\bullet.\n$$\nFor $M_\\bullet=Lg'^*_{\\operatorname{Tow}}K_\\bullet$, let\n$$\n c_{f',M}:Rf'_*\\Rlim M_\\bullet\n       \\xrightarrow{\\sim}\\Rlim(Rf'_*^{\\operatorname{Tow}}M_\\bullet)\n       =\\Rlim D_\\bullet\n$$\nbe the canonical comparison of [prop-weil-pbc-direct-image-limits],\nusing the tower identifications above. Define the completed base-change\nmap to be exactly the following ordered composite:\n$$\n\\begin{aligned}\n \\Ex^{\\mathrm{comp}}_{\\square,K}:\\quad\n Lg^*_{\\mathrm{comp}}Rf_*K\n &\\xrightarrow{s}\\Rlim B_\\bullet\\\\\n &\\xrightarrow{\\Rlim(v'_\\bullet)}\\Rlim D_\\bullet\\\\\n &\\xrightarrow{c_{f',M}^{-1}}Rf'_*\\Rlim M_\\bullet\n   =Rf'_*Lg'^*_{\\mathrm{comp}}K.\n\\end{aligned}\n$$\nThe specified projection-formula maps, the transported finite-level\nexchange maps, and the inverse of the specified comparison are part of\nthis definition; arbitrary isomorphisms between the displayed objects\nare not substituted for them.\n\nThis is the blueprint's explicit construction of the map whose\nconstruction is omitted in Stacks Tag 09C9\n(proetale.tex, theorem-proper-base-change). Stacks Tag 099N\n(proetale.tex, lemma-pushforward-Noetherian-case, clauses (1), (4), (5))\nprovides the constant-Noetherian-coefficient completion formulas;\nTag 0944 (sites-cohomology.tex, lemma-projection-formula) supplies the\nperfect projection formula, and direct-image/derived-limit commutation is supplied by\n[prop-weil-pbc-direct-image-limits] (its ringed-topos source is\nsites-cohomology.tex, lemma-Rf-commutes-with-Rlim). The strict tower refinement and the\nchosen witness transports here are those of the cited DAG nodes,\nnot additional assertions attributed to Tag 099N.",
+  "what": "Separate references to the existing strict tower definitions from the compatibility assertion: those identical constructions now have the definition-only node def-weil-pbc-completed-four-towers. Mathematical hypotheses, conclusion, maps and Lean signatures are unchanged. The previous combined-node citation created an artificial dependency cycle when using the existing stronger normalization theorem.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-tower-compatibility.md",
+   "place": "The four tower constructions before the evaluation and compatibility assertions"
+  },
+  "citers": [
+   {
+    "id": "cor-weil-pbc-constructible-complete",
+    "holds": true,
+    "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
+   },
+   {
+    "id": "def-cbc-completed-exchange-map",
+    "holds": true,
+    "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
+   },
+   {
+    "id": "def-weil-pbc-completed-frobenius-structures",
+    "holds": true,
+    "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
+   },
+   {
+    "id": "def-weil-pbc-completed-reduction-square",
+    "holds": true,
+    "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
+   },
+   {
+    "id": "def-weil-pbc-quotient-corner-frobenius-structures",
+    "holds": true,
+    "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
+   },
+   {
+    "id": "lem-cbc-complete-proetale-strict-tower-realization",
+    "holds": true,
+    "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
+   },
+   {
+    "id": "lem-weil-pbc-condensed-e-realization",
+    "holds": true,
+    "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
+   },
+   {
+    "id": "lem-weil-pbc-ordered-exchange-coefficient-comparison",
+    "holds": true,
+    "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
+   },
+   {
+    "id": "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+    "holds": true,
+    "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
+   },
+   {
+    "id": "lemma-weil-pbc-completed-exchange-coherence",
+    "holds": true,
+    "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
+   },
+   {
+    "id": "lemma-weil-pbc-completed-map-reduction",
+    "holds": true,
+    "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
+   },
+   {
+    "id": "thm-weil-pbc-complete-proetale",
+    "holds": true,
+    "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-cartesian-square",
+   "def-weil-pbc-adic-coefficient-datum",
+   "def-weil-pbc-etale-origin-witness",
+   "def-weil-pbc-four-corners",
+   "def-weil-pbc-four-arrows",
+   "def-weil-pbc-projection-formula-map",
+   "lem-weil-pbc-tower-compatibility",
+   "def-weil-pbc-derived-inverse-limit",
+   "prop-weil-pbc-rlim-functoriality",
+   "def-weil-pbc-completed-pullback",
+   "prop-weil-pbc-direct-image-limits"
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-5bd48",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261019T093539-L-2325287",
+  "kind": "interface",
+  "note": "independent cc review: fourTowers_compatibility (statement byte-identical to live) vs strictTowerExchangeMateNormalization .2.1 + towerV' cancellation + exchangeStrict_naturality; moved defs diffed identical to live; CompletedBaseChangeMap import swap forced by the import cycle; 11 importers compiled against the delivered modules"
+ }
 }
