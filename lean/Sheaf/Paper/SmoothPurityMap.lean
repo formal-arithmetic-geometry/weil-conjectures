@@ -241,7 +241,8 @@ theorem smoothPurityTensorPresentation (C : Type uC) [Category.{u + 1} C] [Abeli
     (X : Scheme.{u}) :
     ProEtale.derivedTensor C X =
       curriedTensor (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) C)) := by
-  sorry
+  unfold ProEtale.derivedTensor
+  congr 1
 
 /-- The canonical shift comparison in the published tensor presentation is uniquely
 specified by equality, across the two interface types, to the existing K-flat shift.
