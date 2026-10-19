@@ -16710,3 +16710,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:26 L: merged deliver/G8/Sheaf.Topology.ContinuousMapCondensedRingMap (stage 3; reviewer PASS; first push; landing 20261019T002613-L-2159232 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:26 L: merged deliver/G9/Sheaf.SixFunctors.IntegralRestrictionGlue (stage 3; reviewer PASS; first push; landing 20261019T002613-L-2159408 (interface); batch 20261019T002449; modules 4; new nodes 3)
 - 00:26 L: merged deliver/H1/Sheaf.AlgebraicGeometry.FiniteTypeNoetherianSpectrum (stage 3; reviewer PASS; first push; landing 20261019T002614-L-2159534 (proof); batch 20261019T002449; modules 1; new nodes 0)
+- 00:26 L: merged deliver/H1/Sheaf.AlgebraicGeometry.ProEtaleStalkConservative (stage 3; reviewer PASS; first push; landing 20261019T002614-L-2159645 (proof); batch 20261019T002449; modules 1; new nodes 0)
