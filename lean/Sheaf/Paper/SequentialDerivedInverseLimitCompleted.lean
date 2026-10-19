@@ -41,7 +41,21 @@ Source: order 1240; Bhatt--Scholze 4.2.8
 Proof: apply countableProducts_exact to A_T. Its product-of-epis clause, together
 with sectionwise kernels, gives exactness of the countable product functor. -/
 theorem adicDatumCountableAB4Star : CountableAB4Star (adicDatumModules T d) := by
-  sorry
+  have : (lim (J := Discrete ℕ) (C := adicDatumModules T d)).PreservesEpimorphisms :=
+    { preserves := by
+        intro F G f hf
+        have h := (ProEt.countableProducts_exact.{t, t, 0} T
+          (adicDatumRing T d)).2.2 ℕ (fun n ↦ F.obj ⟨n⟩)
+            (fun n ↦ G.obj ⟨n⟩) (fun n ↦ f.app ⟨n⟩) (fun n ↦ inferInstance)
+        have he : lim.map f = (Pi.isoLimit _).inv ≫
+            Limits.Pi.map (fun n ↦ f.app ⟨n⟩) ≫ (Pi.isoLimit _).hom := by
+          apply limit.hom_ext
+          intro ⟨n⟩
+          simp
+        rw [he]
+        infer_instance }
+  have := hasExactLimitsOfShape_of_preservesEpi (adicDatumModules T d) (Discrete ℕ)
+  exact CountableAB4Star.of_hasExactLimitsOfShape_nat _
 
 /-- Countable products in D(Mod(A_T)), canonically up to their limit property.
 Source: order 1240; Tag 07KC (blueprint: def-weil-pbc-derived-inverse-limit). -/
@@ -66,7 +80,17 @@ transformation with all components invertible is invertible. -/
 theorem adicDatumEvaluateComplex_inverts :
     (HomologicalComplex.quasiIso (adicDatumTowers T d) (ComplexShape.up ℤ)).IsInvertedBy
       (adicDatumEvaluateComplex T d) := by
-  sorry
+  intro K L f hf
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro n
+  have : QuasiIso
+      ((((CategoryTheory.evaluation ℕᵒᵖ (adicDatumModules T d)).obj n).mapHomologicalComplex
+        (ComplexShape.up ℤ)).map f) :=
+    (HomologicalComplex.quasiIso_iff_evaluation f).mp hf n
+  change IsIso ((completedConstantQ _).map
+    ((((CategoryTheory.evaluation ℕᵒᵖ (adicDatumModules T d)).obj n).mapHomologicalComplex
+      (ComplexShape.up ℤ)).map f))
+  infer_instance
 
 /-- The canonical localization lift of termwise tower evaluation.
 Source: order 1240 (blueprint: def-weil-pbc-derived-inverse-limit). -/
