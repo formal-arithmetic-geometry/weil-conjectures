@@ -18,15 +18,11 @@ public import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
 public import Sheaf.SixFunctors.ProEtale.DerivedCompletion
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
+import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
+import Mathlib.CategoryTheory.Adjunction.Restrict
+import Mathlib.CategoryTheory.Adjunction.Unique
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.Paper.CompletedConstantSheafReduction
-import Sheaf.Paper.ConstantModuleSectionProperties
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
-import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
-import Sheaf.Paper.WeilCompletedTensorReflector
 
 /-!
 # Constant versus completed integral coefficients
@@ -109,6 +105,171 @@ Source: blueprint constant-coefficients lemma, definition of completeness; Stack
 abbrev Complete (b : Bool) : ObjectProperty
     (D (coefficients (topology X) (integers l E) (ideal l E) b)) :=
   fun M ↦ IsIso ((completionUnit (topology X) (integers l E) (ideal l E) b).app M)
+
+private theorem integers_noetherian : IsNoetherianRing (integers l E) := by
+  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have : IsPrincipalIdealRing (Padic.coefficientExtensionIntegers l E) :=
+    h.2.2.2.2.2.2.2.2.1
+  exact isNoetherianRing_of_ringEquiv (Padic.coefficientExtensionIntegers l E)
+    (ULift.ringEquiv.symm)
+
+private def sectionRingHom {C : Type u} [SmallCategory C]
+    {J : GrothendieckTopology C} {A : Type u} [CommRing A]
+    {O : Sheaf J CommRingCat.{u}} (φ : constant J A ⟶ O) (U : Cᵒᵖ) :
+    A →+* O.obj.obj U :=
+  (φ.hom.app U).hom.comp
+    ((toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of A))).app U).hom
+
+private theorem principal_image {C : Type u} [SmallCategory C]
+    {J : GrothendieckTopology C} {A : Type u} [CommRing A]
+    {O : Sheaf J CommRingCat.{u}} (φ : constant J A ⟶ O) (U : Cᵒᵖ) (t : A) (k : ℕ) :
+    Ideal.span (Set.range (fun a : ↥((Ideal.span {t}) ^ k) ↦
+      (algebraSection φ (a : A)).val U)) =
+        Ideal.span {((algebraSection φ t).val U) ^ k} := by
+  let f := sectionRingHom φ U
+  have hr : Set.range (fun a : ↥((Ideal.span {t}) ^ k) ↦
+      (algebraSection φ (a : A)).val U) = f '' (↑((Ideal.span {t}) ^ k) : Set A) := by
+    ext x
+    exact ⟨fun ⟨a, ha⟩ ↦ ⟨a, a.property, ha⟩,
+      fun ⟨a, ha, hx⟩ ↦ ⟨⟨a, ha⟩, hx⟩⟩
+  rw [hr]
+  change Ideal.map f ((Ideal.span {t}) ^ k) = _
+  rw [Ideal.span_singleton_pow, Ideal.map_span, Set.image_singleton, map_pow]
+  rfl
+
+private theorem finite_kernel (b : Bool) (n : ℕ)
+    (U : Scheme.coefficientProEtaleSiteModel.{u, u} X) :
+    RingHom.ker ((quotientMap l E X b n).hom.app (op U)).hom =
+      Ideal.span {((algebraSection
+        (baseMap (topology X) (integers l E) (ideal l E) b)
+        (ULift.up (Padic.coefficientExtensionUniformizer l E))).val (op U)) ^ (n + 1)} := by
+  have : IsNoetherianRing (integers l E) := integers_noetherian l E
+  have h := flat_and_quotients (topology X) (integers l E) (ideal l E)
+  cases b
+  · exact (h.2.2 n U).2.trans
+      (principal_image (𝟙 (constantRing l E X)) (op U) _ _)
+  · exact (h.2.1 n U).2.trans
+      (principal_image (scalarMap l E X) (op U) _ _)
+
+private theorem inverse_by_reflector
+    {C D : Type*} [Category C] [Category D]
+    (P : ObjectProperty C) (T : ObjectProperty D)
+    (F : C ⥤ D) (G : D ⥤ C) (adj : F ⊣ G)
+    (H : D ⥤ D) (η : 𝟭 D ⟶ H) (hH : ∀ M, T (H.obj M))
+    (hb : ∀ M L, T L → Function.Bijective (fun f : H.obj M ⟶ L ↦ η.app M ≫ f))
+    (e : T.FullSubcategory ≌ P.FullSubcategory)
+    (he : e.functor ⋙ P.ι ≅ T.ι ⋙ G) :
+    Nonempty (e.inverse ⋙ T.ι ≅ P.ι ⋙ F ⋙ H) := by
+  let H' : D ⥤ T.FullSubcategory := T.lift H hH
+  let E (M : D) (L : T.FullSubcategory) : (H'.obj M ⟶ L) ≃ (M ⟶ L.obj) :=
+    T.fullyFaithfulι.homEquiv.trans (Equiv.ofBijective _ (hb M L.obj L.property))
+  have a : H' ⊣ T.ι := Adjunction.mkOfHomEquiv
+    { homEquiv := E
+      homEquiv_naturality_left_symm := by
+        intro M N L f g
+        apply (E M L).injective
+        calc
+          _ = f ≫ g := (E M L).apply_symm_apply _
+          _ = _ := ?_
+        symm
+        change η.app M ≫ ((H.map f) ≫ ((E N L).symm g).hom) = f ≫ g
+        rw [← Category.assoc, ← η.naturality f, Category.assoc]
+        change f ≫ E N L ((E N L).symm g) = f ≫ g
+        exact congrArg (fun k ↦ f ≫ k) ((E N L).apply_symm_apply g)
+      homEquiv_naturality_right := by
+        intro M L L' f g
+        change η.app M ≫ (f.hom ≫ g.hom) = (η.app M ≫ f.hom) ≫ g.hom
+        simp only [Category.assoc] }
+  let a' : P.ι ⋙ F ⋙ H' ⊣ e.functor :=
+    (adj.comp a).restrictFullyFaithful P.fullyFaithfulι (Functor.FullyFaithful.id _)
+      (Iso.refl _) he.symm
+  exact ⟨Functor.isoWhiskerRight (e.symm.toAdjunction.leftAdjointUniq a') T.ι⟩
+
+private theorem precomp_rightKan
+    {B C D H : Type*} [Category B] [Category C] [Category D] [Category H]
+    (q : B ⥤ C) [((Functor.whiskeringLeft B C H).obj q).Full]
+    [((Functor.whiskeringLeft B C H).obj q).Faithful]
+    (L : C ⥤ D) (F : C ⥤ H) (LF : D ⥤ H) (α : L ⋙ LF ⟶ F)
+    [LF.IsRightKanExtension α] :
+    LF.IsRightKanExtension
+      ((Functor.associator q L LF).hom ≫ Functor.whiskerLeft q α) := by
+  let Ψ := Functor.RightExtension.precomp L F q
+  have : Ψ.IsEquivalence := by
+    apply CostructuredArrow.isEquivalenceMap₂
+  constructor
+  refine ⟨?_⟩
+  have h := (IsTerminal.isTerminalIffObj Ψ
+    (Functor.RightExtension.mk LF α)).toFun (LF.isUniversalOfIsRightKanExtension α)
+  exact IsTerminal.ofIso h (CostructuredArrow.isoMk (Iso.refl _) (by
+    ext X
+    dsimp [Ψ, Functor.RightExtension.precomp, Functor.RightExtension.mk]
+    simp only [Category.id_comp, Category.comp_id]))
+
+
+private theorem transport_rightKan
+    {C D H : Type*} [Category C] [Category D] [Category H]
+    {L L' : C ⥤ D} {F F' : C ⥤ H} (T : D ⥤ H)
+    (i : L ≅ L') (j : F ≅ F') (α : L ⋙ T ⟶ F) [T.IsRightKanExtension α] :
+    T.IsRightKanExtension (Functor.whiskerRight i.inv T ≫ α ≫ j.hom) := by
+  have hγ : T.IsRightKanExtension (α ≫ j.hom) :=
+    (Functor.isRightKanExtension_iff_of_iso₂ α (α ≫ j.hom) j (Iso.refl T)
+      (by simp)).mp inferInstance
+  let := hγ
+  let Ψ := (Functor.rightExtensionEquivalenceOfIso₁ i F').functor
+  have : Ψ.IsEquivalence := inferInstance
+  constructor
+  refine ⟨?_⟩
+  have h := (IsTerminal.isTerminalIffObj Ψ
+    (Functor.RightExtension.mk T (α ≫ j.hom))).toFun
+      (T.isUniversalOfIsRightKanExtension (α ≫ j.hom))
+  exact IsTerminal.ofIso h (CostructuredArrow.isoMk (Iso.refl _) (by
+    ext X
+    simp [Ψ, Functor.rightExtensionEquivalenceOfIso₁]
+    rfl))
+
+private theorem derived_scalar_adjunction {C : Type u} [SmallCategory C]
+    {J : GrothendieckTopology C} {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
+    Nonempty (extend φ ⊣ dres φ) := by
+  let := HasDerivedCategory.standard (Mod R)
+  let := HasDerivedCategory.standard (Mod B)
+  obtain ⟨E, hE, hm, hadd, hinv, hpw, LF, ε, hLF, htri, hcalc⟩ :=
+    SheafOfModules.derivedChangeOfRingsIndependentCoefficients φ
+  let : E.Additive := hadd
+  obtain ⟨hl, hc, hadj⟩ := SheafOfModules.sheafRingDerivedCoefficientAdjunction φ
+  let : PreservesFiniteLimits (res φ) := hl
+  let : PreservesFiniteColimits (res φ) := hc
+  obtain ⟨a, ha, hd⟩ := hadj E hE hm
+  obtain ⟨d, hd⟩ := hd LF ε hLF
+  let : LF.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso (Mod R) (.up ℤ)) := hLF
+  let : LF.IsRightKanExtension ε := hLF.isRightKanExtension
+  let q := HomotopyCategory.quotient (Mod R) (.up ℤ)
+  let α := (Functor.associator q DerivedCategory.Qh LF).hom ≫ Functor.whiskerLeft q ε
+  have hα : LF.IsRightKanExtension α := precomp_rightKan q _ _ LF ε
+  let eE : E ≅ change φ := NatIso.ofComponents (fun M ↦ eqToIso (hE M)) (by
+    intro M N f
+    rw [hm f]
+    simp only [eqToIso.hom, Category.assoc, eqToHom_trans, eqToHom_refl, Category.comp_id]
+    rfl)
+  let i := DerivedCategory.quotientCompQhIso (Mod R)
+  let j : q ⋙ (E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh) ≅
+      (change φ).mapHomologicalComplex (.up ℤ) ⋙ Q B :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (E.mapHomotopyCategoryFactors (.up ℤ)) _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (DerivedCategory.quotientCompQhIso (Mod B)) ≪≫
+      Functor.isoWhiskerRight (NatIso.mapHomologicalComplex eE (.up ℤ)) (Q B)
+  let β := Functor.whiskerRight i.inv LF ≫ α ≫ j.hom
+  let : LF.IsRightKanExtension α := hα
+  have hβ : LF.IsRightKanExtension β := transport_rightKan LF i j α
+  let : LF.IsLeftDerivedFunctor β (HomologicalComplex.quasiIso (Mod R) (.up ℤ)) := ⟨hβ⟩
+  let : (extend φ).IsLeftDerivedFunctor (extendComparison φ)
+      (HomologicalComplex.quasiIso (Mod R) (.up ℤ)) := (derivedExtension φ).universal
+  let : (extend φ).IsRightKanExtension (extendComparison φ) :=
+    (derivedExtension φ).universal.isRightKanExtension
+  let e : extend φ ≅ LF :=
+    (extend φ).rightKanExtensionUnique (extendComparison φ) LF β
+  exact ⟨d.ofNatIsoLeft e.symm⟩
 
 /-- Constant and completed integral coefficients have canonically identical finite
 quotients and equivalent derived complete categories. The equivalence is the specified
@@ -197,7 +358,68 @@ theorem integral_constant_completion :
               (Q (finiteRing l E X n)).map
                 ((NatIso.mapHomologicalComplex α (.up ℤ)).hom.app P) =
             β.inv.app ((Q (completedRing l E X)).obj P) ≫
-              (extendComparison (quotientMap l E X true n)).app P := by
-  sorry
+              (extendComparison (quotientMap l E X true n)).app P  := by
+  have : IsNoetherianRing (integers l E) := integers_noetherian l E
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · let M := (res (scalarMap l E X)).obj
+      (SheafOfModules.unit (siteModuleRings (completedRing l E X)))
+    let := SheafOfModules.isMonoidal_W_independentCoefficients (constantRing l E X)
+    let := SheafOfModules.monoidalCategory (constantRing l E X)
+    exact ObjectProperty.prop_of_iso (exactFunctor _ _)
+      (SheafOfModules.siteSheafTensorRightIso (constantRing l E X) M).symm
+      (flat_and_quotients (topology X) (integers l E) (ideal l E)).1
+  · intro b n
+    constructor
+    · apply Presheaf.isLocallySurjective_of_surjective
+      intro U
+      have h := flat_and_quotients (topology X) (integers l E) (ideal l E)
+      cases b
+      · exact (h.2.2 n U.unop).1
+      · exact (h.2.1 n U.unop).1
+    · intro U x
+      constructor
+      · intro hx
+        refine ⟨⊤, (topology X).top_mem U, ?_⟩
+        intro V g hg
+        rw [← finite_kernel l E X b n V]
+        change (quotientMap l E X b n).hom.app (op V)
+          ((coefficients (topology X) (integers l E) (ideal l E) b).obj.map g.op x) = 0
+        rw [NatTrans.naturality_apply, hx, map_zero]
+      · rintro ⟨S, hS, hx⟩
+        apply (finiteRing l E X n).isSeparated U S hS
+        intro V g hg
+        rw [map_zero, ← NatTrans.naturality_apply]
+        exact (show _ ∈ RingHom.ker
+          ((quotientMap l E X b n).hom.app (op V)).hom by
+            rw [finite_kernel l E X b n V]
+            exact hx V g hg)
+  · let a : Fin 1 → integers l E :=
+      fun _ ↦ ULift.up (Padic.coefficientExtensionUniformizer l E)
+    have ha : Ideal.span (Set.range a) = ideal l E := by
+      simp [a, ideal, Set.range_const]
+    have hp (b : Bool) : Complete l E X b =
+        IsComplete (finiteMap (topology X) (integers l E) (ideal l E) b 0) := by
+      obtain ⟨K, hK, hcomplete, hhom, hiff⟩ :=
+        koszul_quotient_reflector (topology X) (integers l E) (ideal l E) b 1 a ha
+      exact funext (fun M ↦ propext (hiff M))
+    rw [hp true, hp false]
+    obtain ⟨e, ⟨he⟩⟩ := equivalence (topology X) (integers l E) (ideal l E)
+    refine ⟨e, ⟨he⟩, ?_⟩
+    obtain ⟨K, hK, hcomplete, hhom, hiff⟩ :=
+      koszul_quotient_reflector (topology X) (integers l E) (ideal l E) true 1 a ha
+    obtain ⟨adj⟩ := derived_scalar_adjunction (scalarMap l E X)
+    exact inverse_by_reflector
+      (IsComplete (quotient (topology X) (integers l E) (ideal l E) 0))
+      (IsComplete (projection (topology X) (integers l E) (ideal l E) 0))
+      (extend (scalarMap l E X)) (dres (scalarMap l E X)) adj
+      (completion (topology X) (integers l E) (ideal l E) true)
+      (completionUnit (topology X) (integers l E) (ideal l E) true)
+      hcomplete hhom e he
+  · intro n
+    refine ⟨finiteComparison (topology X) (integers l E) (ideal l E) n, ?_, ?_⟩
+    · exact (finiteComparison_existsUnique (topology X) (integers l E)
+        (ideal l E) n).exists.choose_spec
+    · obtain ⟨β, hβ⟩ := finiteDerivedComparison (topology X) (integers l E) (ideal l E) n
+      exact ⟨β.symm, hβ⟩
 
 end AlgebraicGeometry.ProEtale.IntegralConstantCompletion
