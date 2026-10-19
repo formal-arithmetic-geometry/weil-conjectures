@@ -17,9 +17,90 @@
   "def-trf-valuation-ring",
   "def-weil-pbc-etale-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the common limit topos, its colimit sheaves and exchange morphisms from [lem-per-admissible-modification-cohomology-presentation]. Apply [lem-per-admissible-modification-fujiwara-valuative-local] to select its conservative subfamily and, at a chosen point $t$, form the explicit local rings $B=B_t$, $C=B'_t$ and the local map $u:B\\to C$. Write $IB=(\\varphi)$ and $\\varphi'=u(\\varphi)$, so $IC=(\\varphi')$. Both generators are nonunit nonzerodivisors. The same lemma supplies the $I$-valuative property, and the canonical formulas for the two stalks as cohomology on $S=B[1/\\varphi]$ and $S'=C[1/\\varphi']$. It also identifies the exchange map at this intermediate stage with pullback along $S\\to S'$.",
+   "uses": [
+    "lem-per-admissible-modification-cohomology-presentation",
+    "lem-per-admissible-modification-fujiwara-valuative-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed p.373: the limit topos and reduction to its henselian I-valuative local rings."
+   }
+  },
+  {
+   "text": "Apply [lem-per-admissible-modification-valuative-ring-reduction] separately to $(B,\\varphi)$ and $(C,\\varphi')$; its principal-ideal hypothesis and henselianity are exactly those obtained in Step 1. Set $P=\\bigcap_n\\varphi^nB$, $Q=\\bigcap_n(\\varphi')^nC$, $V=B/P$, $W=C/Q$, $K=\\operatorname{Frac}(V)$ and $K'=\\operatorname{Frac}(W)$. The lemma gives henselian valuation rings $V,W$, identifies $S/PS=K$ and $S'/QS'=K'$, and gives their valuation topologies with bases $\\bar\\varphi^nV$ and $(\\bar\\varphi')^nW$. In particular their fraction fields are henselian as valued fields, which by definition means that their valuation rings are henselian. Their valuations are nontrivial because $\\bar\\varphi$ and $\\bar\\varphi'$ are nonzero nonunits.",
+   "uses": [
+    "lem-per-admissible-modification-valuative-ring-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed pp.373–374: the henselian localization, intersection prime and valuation quotient."
+   }
+  },
+  {
+   "text": "The congruence lemma [lem-per-admissible-modification-completion-density], applied to the corresponding blowups and the same geometric residue-field closures used in Step 1, gives $B/\\varphi^nB\\simeq C/(\\varphi')^nC$ for every $n\\geq1$. Thus $u^{-1}(Q)=P$: an element lies in the inverse image precisely when it is zero in every one of these quotients. Therefore $u$ induces an injection $V\\hookrightarrow W$ and hence an inclusion $K\\hookrightarrow K'$. Since $P\\subseteq\\varphi^nB$ and $Q\\subseteq(\\varphi')^nC$, the same quotient isomorphisms give $V/\\bar\\varphi^nV\\simeq W/(\\bar\\varphi')^nW$.",
+   "uses": [
+    "lem-per-admissible-modification-completion-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed p.374, final Note: congruences on the corresponding blowups."
+   }
+  },
+  {
+   "text": "For $c\\in W$ and $n\\geq1$, the last quotient isomorphism supplies $b\\in V$ with $c-b\\in(\\bar\\varphi')^nW$. This proves that $V$ is dense in $W$. The same isomorphism says $V\\cap(\\bar\\varphi')^nW=\\bar\\varphi^nV$, so it also identifies the induced topology. For a general $x'=c/(\\bar\\varphi')^r\\in K'=W[1/\\bar\\varphi']$, approximate $c$ by $b\\in V$ modulo $(\\bar\\varphi')^{n+r}W$; then $x'-b/\\bar\\varphi^r\\in(\\bar\\varphi')^nW$. These balls, and their translates, form the field valuation topology by Step 2, so $K$ is dense in $K'$. Moreover $K\\cap(\\bar\\varphi')^nW=\\bar\\varphi^nV$ for $n\\geq1$: write an element of $K$ as $b/\\bar\\varphi^r$ and use $V\\cap(\\bar\\varphi')^{n+r}W=\\bar\\varphi^{n+r}V$. This proves that the topology on $K$ is the induced topology. Set $K_t=K$ and $K'_t=K'$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed p.374: passage from the common formal neighbourhoods to the dense valued-field embedding; elementary congruence argument written out."
+   }
+  },
+  {
+   "text": "Let $E=F_t$ be the inverse image of $F$ on $\\operatorname{Spec}S$, and let $E'$ be its inverse image on $\\operatorname{Spec}S'$, as in Step 1. Define $G_t=i^{-1}E$ for the closed-point map $i:\\operatorname{Spec}K\\to\\operatorname{Spec}S$. Step 2 says $(S,PS)$ and $(S',QS')$ are henselian pairs, with residue fields $K,K'$. All these coefficient sheaves are torsion abelian, since inverse image preserves the local annihilation condition. Apply [prop-weil-pbc-gabber-pair-comparison] to these two pairs and $E,E'$: the canonical restriction maps give $H^q(S,E)\\simeq H^q(K,G_t)$ and $H^q(S',E')\\simeq H^q(K',(i')^{-1}E')$ for every $q\\geq0$. Composing with the punctured-local formulas of Step 1 yields the required stalk identifications; the same sheaf $G_t$ works in every degree.",
+   "uses": [
+    "prop-weil-pbc-gabber-pair-comparison",
+    "lem-per-admissible-modification-fujiwara-valuative-local",
+    "lem-per-admissible-modification-valuative-ring-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed pp.373–374: reduction from the punctured henselian local schemes to the fraction fields of the valuation quotients."
+   }
+  },
+  {
+   "text": "The homomorphisms fit into the commutative square $S\\to S'$, $S\\to K$, $S'\\to K'$, $K\\to K'$: an element $b/\\varphi^r$ has image $u(b)/(\\varphi')^r$ on either path after passing to the quotients. Thus $(i')^{-1}E'$ is canonically the inverse image $G_t|_{K'}$. By the composition and coefficient-naturality assertions of [lem-weil-pbc-cohomology-pullback-functorial], the resulting square of cohomology pullbacks commutes: $(i')^*u_S^*=u_K^*i^*$. Step 1 identifies the stalk exchange with $u_S^*$. Conjugating by the two restriction isomorphisms of Step 5 therefore gives exactly $u_K^*:H^q(K,G_t)\\to H^q(K',G_t|_{K'})$. This proves the asserted exchange compatibility at each of the selected points. The family was already conservative in Step 1; no further inference from conservativity is needed.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-per-admissible-modification-fujiwara-valuative-local",
+    "prop-weil-pbc-gabber-pair-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed pp.373–374: canonical comparison maps, with compatibility verified by the square of ring homomorphisms."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-admissible-modification-cohomology-presentation",
+  "lem-per-admissible-modification-completion-density",
+  "lem-per-admissible-modification-fujiwara-valuative-local",
+  "lem-per-admissible-modification-valuative-ring-reduction",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "prop-weil-pbc-gabber-pair-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XX 4.4, printed pp.373–374; the final completion Note and XX 2.4.4, printed p.365."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,7 +132,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-henselian-completion-open-rigidity",
@@ -63,7 +144,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof Step 3: dimension-normalized Verdier duality; regular finite-torsion local-model purity input. Testing closed-point purity after strict completion. Completion part: compare the open complements by the abelian completion comparison, ILO XX section 4.4, before applying the support triangle. ILO XX 4.4: admissible blowups, their limit spectral sequence, and its valuative stalks.",
+   "place": "Proof Step 3 ('By the duality symmetry of the middle perverse t-structure'): auxiliary purity/completion-rigidity input through descendant lem-per-henselian-completion-open-rigidity; dimension-normalized Verdier duality; regular finite-torsion local-model purity input. Testing closed-point purity after strict completion. Completion part: compare the open complements by the abelian completion comparison, ILO XX section 4.4, before applying the support triangle. ILO XX 4.4: admissible blowups, their limit spectral sequence, and its valuative stalks.",
    "via": [
     "lem-per-henselian-completion-open-rigidity",
     "lem-per-punctual-strict-completion-test",
@@ -78,5 +159,86 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-admissible-modification-valuative-stalks",
+  "worker": "stage1",
+  "summary": "Repair: replace the two clause-restatement nodes with three intermediate lemmas (punctured-local ZRS calculation, henselian valuation-quotient algebra, and infinitesimal congruences). Construct fields and prove density and induced topology explicitly; use the existing henselian-pair comparison and functoriality of pullback to compute the stalks and verify exchange. The item statement is unchanged.",
+  "blueprint": "Ancestor proof Step 3 ('By the duality symmetry of the middle perverse t-structure'): auxiliary completion-rigidity input along the recorded purity descendants; ILO XX 4.4 local rings, valuation quotients, final Note, residue cohomology and exchange square. The original blueprint has no literal ZRS calculation.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-gabber-pair-comparison",
+    "why": "Generic torsion cohomology comparison for a henselian local ring and its residue field; the local-ring residue reduction in ILO requires it and the present unit does not state it."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-functorial",
+    "why": "Generic composition and coefficient naturality of canonical cohomology pullback; used to verify the quotient square, not to replace a unit argument."
+   }
+  ],
+  "citations": [
+   {
+    "step": 1,
+    "node": "lem-per-admissible-modification-cohomology-presentation",
+    "quote": "Let $(A,I)$ be a henselian pair, with $I$ finitely generated, and let $A'=\\widehat A$ be its $I$-adic completion [def-weil-pbc-henselian-terminology, def-weil-pbc-adic-completion]. Put $X=\\operatorname{Spec}A$, $Z=\\operatorname{Spec}(A/I)$, $U=X\\setminus V(I)$, and define $X',Z',U'$ by base change to $A'$ [def-weil-affine-spectrum, def-pc-base-change]. Let $F$ be a torsion abelian etale sheaf on $U$ and $F'$ its inverse image on $U'$ [def-weil-pbc-etale-sheaves, def-weil-pbc-inverse-image]. For finitely generated ideals $J$ with $V(J)=V(I)$, form $B_J=\\operatorname{Bl}_J(X)$, $Z_J=B_J\\times_XZ$, and $j_J:U\\hookrightarrow B_J$ [def-nagata-affine-blowup]. Order these blowups by domination, identifying ideals giving the same blowup. Their closed fibres form a cofiltered system. The limit of their small etale topoi, denoted $\\mathcal T$, has a conservative family of geometric points (compatible geometric points of the closed fibres). Write $p_J:\\mathcal T\\to (Z_J)_{\\mathrm{et}}$ for the projections and\n$$L^q_F=\\varinjlim_Jp_J^{-1}\\bigl((R^qj_{J*}F)|_{Z_J}\\bigr)\\quad(q\\geq0).$$\nHere $R^qj_*$ is the higher direct image on abelian sheaves [def-weil-pbc-direct-image], and the transition maps are the natural pullback/exchange maps. There is a natural first-quadrant cohomological spectral sequence [def-sp-spectral-sequence]\n$$E_2^{p,q}=H^p(\\mathcal T,L^q_F)\\ \\Longrightarrow\\ H^{p+q}(U_{\\mathrm{et}},F).$$\nCohomology on a topos means the right derived functors of global sections, as for [def-weil-pbc-etale-cohomology]. Convergence gives, in total degree $n\\geq0$, a filtration with $n+1$ graded pieces $E_\\infty^{p,n-p}$. Completion identifies $\\mathcal T$ with the corresponding limit topos for $(A',IA')$, by the identifications of the closed fibres of corresponding admissible blowups; the blowups extended from $A$ are cofinal among those for $A'$. Under this identification the exchange maps induce a morphism $L^q_F\\to L^q_{F'}$ and a morphism of the displayed spectral sequences. On their abutments it is the canonical pullback $H^n(U,F)\\to H^n(U',F')$, including the specified filtrations. No isomorphism of the coefficient sheaves $L^q$ or of the abutments is asserted."
+   },
+   {
+    "step": 1,
+    "node": "lem-per-admissible-modification-fujiwara-valuative-local",
+    "quote": "Let $(A,I)$ be a henselian pair with $I$ finitely generated, let $A'=\\widehat A$ be its $I$-adic completion, and put $X=\\operatorname{Spec}A$, $U=X\\setminus V(I)$ and $U'=\\operatorname{Spec}A'\\times_XU$ [def-weil-pbc-henselian-terminology, def-weil-pbc-adic-completion, def-weil-affine-spectrum]. For each finitely generated ideal $J$ with $V(J)=V(I)$ write $Y_J=\\operatorname{Bl}_J(X)$, and write $Y'_J$ for the corresponding blowup over $A'$ [def-nagata-affine-blowup]. Let $\\mathcal T$ and $L^q_F,L^q_{F'}$ be the limit topos and colimit sheaves of [lem-per-admissible-modification-cohomology-presentation], for a torsion abelian etale sheaf $F$ on $U$ and its inverse image $F'$ on $U'$ [def-weil-pbc-etale-sheaves, def-weil-pbc-inverse-image]. There is a conservative family of compatible geometric points $t=(\\bar t_J)$ of the closed fibres for which the following holds. Form\n$$B_t=\\varinjlim_J\\mathcal O^{\\mathrm{sh}}_{Y_J,\\bar t_J},\\qquad B'_t=\\varinjlim_J\\mathcal O^{\\mathrm{sh}}_{Y'_J,\\bar t'_J}$$\nusing the compatible points on corresponding closed fibres and strict henselizations [def-weil-pbc-strict-henselization-limit]. These are nonzero henselian local rings, with the induced local map $u_t:B_t\\to B'_t$. There is a nonunit nonzerodivisor $\\varphi_t\\in B_t$ such that $IB_t=(\\varphi_t)$ and $IB'_t=(\\varphi'_t)$ for $\\varphi'_t=u_t(\\varphi_t)$, also a nonunit nonzerodivisor. In each ring every finitely generated ideal containing a positive power of its displayed principal ideal is principal and generated by a nonzerodivisor; this is the $I$-valuative property used here. Put $S_t=B_t[1/\\varphi_t]$, $S'_t=B'_t[1/\\varphi'_t]$, and let $F_t$ be the inverse image of $F$ under $\\operatorname{Spec}S_t\\to U$, with $F'_t$ its inverse image on $\\operatorname{Spec}S'_t$. There are canonical restriction isomorphisms, for every $q\\geq0$,\n$$(L^q_F)_t\\simeq H^q((\\operatorname{Spec}S_t)_{\\mathrm{et}},F_t),\\qquad (L^q_{F'})_t\\simeq H^q((\\operatorname{Spec}S'_t)_{\\mathrm{et}},F'_t).$$\nUnder these isomorphisms the exchange morphism on stalks is the pullback induced by $S_t\\to S'_t$ [def-weil-pbc-etale-cohomology, def-weil-pbc-cohomology-pullback]."
+   },
+   {
+    "step": 2,
+    "node": "lem-per-admissible-modification-valuative-ring-reduction",
+    "quote": "Let $B$ be a nonzero commutative henselian local ring [def-weil-pbc-henselian-terminology], and let $\\varphi\\in B$ be a nonunit nonzerodivisor. Assume that every finitely generated ideal of $B$ containing $(\\varphi^n)$ for some $n\\geq1$ is principal and generated by a nonzerodivisor. Put $P=\\bigcap_{n\\geq1}\\varphi^nB$, $S=B[1/\\varphi]$, and $V=B/P$. Then $P$ is prime, $S$ is a henselian local ring with maximal ideal $PS$, and $V$ is a henselian valuation ring [def-trf-valuation-ring]. The canonical quotient map identifies\n$$S/PS=V[1/\\bar\\varphi]=\\operatorname{Frac}(V),$$\nwhere $\\bar\\varphi$ is the image of $\\varphi$ in $V$ and $\\operatorname{Frac}(V)$ is its fraction field. Moreover $\\bar\\varphi$ is nonzero and noninvertible, and the ideals $\\bar\\varphi^nV$ form a neighbourhood basis of zero for the valuation topology, whose neighbourhoods are the sets $\\{x:v(x)>\\gamma\\}$ for the additive valuation associated with $V$."
+   },
+   {
+    "step": 3,
+    "node": "lem-per-admissible-modification-completion-density",
+    "quote": "Let $(A,I)$ be a henselian pair with $I$ finitely generated and $A'=\\widehat A$ its $I$-adic completion [def-weil-pbc-henselian-terminology, def-weil-pbc-adic-completion]. Set $X=\\operatorname{Spec}A$ and $X'=\\operatorname{Spec}A'$ [def-weil-affine-spectrum]. For a finitely generated ideal $J\\subseteq A$ with $V(J)=V(I)$ let $Y_J=\\operatorname{Bl}_J(X)$ and $Y'_J=\\operatorname{Bl}_{JA'}(X')$ [def-nagata-affine-blowup]. Then the canonical map induces isomorphisms of infinitesimal closed fibres\n$$Y'_J\\times_{X'}\\operatorname{Spec}(A'/I^nA')\\xrightarrow{\\sim}Y_J\\times_X\\operatorname{Spec}(A/I^n)\\quad(n\\geq1).$$\nChoose a compatible system $\\bar t_J$ of geometric points on the closed fibres of the $Y_J$, and the corresponding system $\\bar t'_J$ on the $Y'_J$, using the same separable residue-field closures. Define\n$$B=\\varinjlim_J\\mathcal O^{\\mathrm{sh}}_{Y_J,\\bar t_J},\\qquad C=\\varinjlim_J\\mathcal O^{\\mathrm{sh}}_{Y'_J,\\bar t'_J},$$\nwhere the colimits use domination of blowups and strict henselizations [def-weil-pbc-strict-henselization-limit]. The induced homomorphism $u:B\\to C$ gives isomorphisms $B/I^nB\\xrightarrow{\\sim}C/I^nC$ for all $n\\geq1$. In particular, if $IB=(\\varphi)$ and $\\varphi'=u(\\varphi)$, these are the maps $B/\\varphi^nB\\xrightarrow{\\sim}C/(\\varphi')^nC$."
+   },
+   {
+    "step": 5,
+    "node": "prop-weil-pbc-gabber-pair-comparison",
+    "quote": "Let $(A,I)$ be a henselian pair [def-weil-pbc-henselian-terminology], $X=\\operatorname{Spec}A$, $Z=\\operatorname{Spec}(A/I)$ and $z:Z\\to X$ the closed immersion. For every torsion abelian sheaf $F$ on $X_{\\Et}$ [def-weil-pbc-torsion-etale-sheaf] the pullback map [def-weil-pbc-cohomology-pullback]\n$$\nz^*:H^q(X_{\\Et},F)\\longrightarrow H^q(Z_{\\Et},z^{-1}F)\n$$\nis an isomorphism for every $q\\ge0$ ($H^q$ etale cohomology [def-weil-pbc-etale-cohomology], $z^{-1}$ the inverse image [def-weil-pbc-inverse-image]). Only the pair form is asserted: for an affine scheme of finite type over $\\operatorname{Spec}A$ in place of $\\operatorname{Spec}A$ the comparison with the closed fibre is false (see the report of lemma-weil-pbc-injective-restriction-acyclicity and the Lean docstring of AlgebraicGeometry.Etale.bijective_cohomologyMap_of_henselianRing)."
+   },
+   {
+    "step": 5,
+    "node": "lem-per-admissible-modification-fujiwara-valuative-local",
+    "quote": "Let $(A,I)$ be a henselian pair with $I$ finitely generated, let $A'=\\widehat A$ be its $I$-adic completion, and put $X=\\operatorname{Spec}A$, $U=X\\setminus V(I)$ and $U'=\\operatorname{Spec}A'\\times_XU$ [def-weil-pbc-henselian-terminology, def-weil-pbc-adic-completion, def-weil-affine-spectrum]. For each finitely generated ideal $J$ with $V(J)=V(I)$ write $Y_J=\\operatorname{Bl}_J(X)$, and write $Y'_J$ for the corresponding blowup over $A'$ [def-nagata-affine-blowup]. Let $\\mathcal T$ and $L^q_F,L^q_{F'}$ be the limit topos and colimit sheaves of [lem-per-admissible-modification-cohomology-presentation], for a torsion abelian etale sheaf $F$ on $U$ and its inverse image $F'$ on $U'$ [def-weil-pbc-etale-sheaves, def-weil-pbc-inverse-image]. There is a conservative family of compatible geometric points $t=(\\bar t_J)$ of the closed fibres for which the following holds. Form\n$$B_t=\\varinjlim_J\\mathcal O^{\\mathrm{sh}}_{Y_J,\\bar t_J},\\qquad B'_t=\\varinjlim_J\\mathcal O^{\\mathrm{sh}}_{Y'_J,\\bar t'_J}$$\nusing the compatible points on corresponding closed fibres and strict henselizations [def-weil-pbc-strict-henselization-limit]. These are nonzero henselian local rings, with the induced local map $u_t:B_t\\to B'_t$. There is a nonunit nonzerodivisor $\\varphi_t\\in B_t$ such that $IB_t=(\\varphi_t)$ and $IB'_t=(\\varphi'_t)$ for $\\varphi'_t=u_t(\\varphi_t)$, also a nonunit nonzerodivisor. In each ring every finitely generated ideal containing a positive power of its displayed principal ideal is principal and generated by a nonzerodivisor; this is the $I$-valuative property used here. Put $S_t=B_t[1/\\varphi_t]$, $S'_t=B'_t[1/\\varphi'_t]$, and let $F_t$ be the inverse image of $F$ under $\\operatorname{Spec}S_t\\to U$, with $F'_t$ its inverse image on $\\operatorname{Spec}S'_t$. There are canonical restriction isomorphisms, for every $q\\geq0$,\n$$(L^q_F)_t\\simeq H^q((\\operatorname{Spec}S_t)_{\\mathrm{et}},F_t),\\qquad (L^q_{F'})_t\\simeq H^q((\\operatorname{Spec}S'_t)_{\\mathrm{et}},F'_t).$$\nUnder these isomorphisms the exchange morphism on stalks is the pullback induced by $S_t\\to S'_t$ [def-weil-pbc-etale-cohomology, def-weil-pbc-cohomology-pullback]."
+   },
+   {
+    "step": 5,
+    "node": "lem-per-admissible-modification-valuative-ring-reduction",
+    "quote": "Let $B$ be a nonzero commutative henselian local ring [def-weil-pbc-henselian-terminology], and let $\\varphi\\in B$ be a nonunit nonzerodivisor. Assume that every finitely generated ideal of $B$ containing $(\\varphi^n)$ for some $n\\geq1$ is principal and generated by a nonzerodivisor. Put $P=\\bigcap_{n\\geq1}\\varphi^nB$, $S=B[1/\\varphi]$, and $V=B/P$. Then $P$ is prime, $S$ is a henselian local ring with maximal ideal $PS$, and $V$ is a henselian valuation ring [def-trf-valuation-ring]. The canonical quotient map identifies\n$$S/PS=V[1/\\bar\\varphi]=\\operatorname{Frac}(V),$$\nwhere $\\bar\\varphi$ is the image of $\\varphi$ in $V$ and $\\operatorname{Frac}(V)$ is its fraction field. Moreover $\\bar\\varphi$ is nonzero and noninvertible, and the ideals $\\bar\\varphi^nV$ form a neighbourhood basis of zero for the valuation topology, whose neighbourhoods are the sets $\\{x:v(x)>\\gamma\\}$ for the additive valuation associated with $V$."
+   },
+   {
+    "step": 6,
+    "node": "lem-weil-pbc-cohomology-pullback-functorial",
+    "quote": "For a morphism of schemes $u:Y\\to X$ [def-pc-scheme] and an abelian sheaf $G$ on $X_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves], let $u^*:H^q(X_{\\Et},G)\\to H^q(Y_{\\Et},u^{-1}G)$ be the pullback map of [def-weil-pbc-cohomology-pullback], built from a K-injective resolution $s:G\\to I^\\bullet$ and a K-injective resolution $r:u^{-1}I^\\bullet\\to J^\\bullet$ [def-weil-pbc-kinjective-resolutions], as $\\mathcal H^q$ of $a\\mapsto r(\\eta_u(a))$, $\\eta_u$ the unit of $u^{-1}\\dashv u_*$ [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image]. For a morphism $\\varphi:G\\to G'$ of abelian sheaves on a scheme $T$ and K-injective resolutions $G\\to I^\\bullet$, $G'\\to I'^\\bullet$, write $H^q(\\varphi):H^q(T_{\\Et},G)\\to H^q(T_{\\Et},G')$ [def-weil-pbc-etale-cohomology] for $\\mathcal H^q(\\Gamma(T,\\tilde\\varphi))$, where $\\tilde\\varphi:I^\\bullet\\to I'^\\bullet$ is any morphism of complexes with $\\tilde\\varphi\\circ(G\\to I^\\bullet)$ homotopic to $(G'\\to I'^\\bullet)\\circ\\varphi$; such $\\tilde\\varphi$ exist and $H^q(\\varphi)$ does not depend on $\\tilde\\varphi$ (step 1), and for $\\varphi=\\mathrm{id}_G$ these are the identifications of the groups computed from different resolutions [prop-weil-pbc-cohomology-resolution-independent]. Then:\n\n1. (Independence.) $u^*$ does not depend on the choice of $I^\\bullet$ and $J^\\bullet$: for a second choice $(I'^\\bullet,J'^\\bullet)$ the two maps $u^*$ agree after the identifications $H^q(\\mathrm{id}_G)$ and $H^q(\\mathrm{id}_{u^{-1}G})$. The same holds for $u^*:\\RGamma(X_{\\Et},K)\\to\\RGamma(Y_{\\Et},u^{-1}K)$, $K\\in\\Dplus(X_{\\Et})$ [def-weil-pbc-derived-categories], [def-weil-pbc-derived-inverse-image], as a morphism of $\\Dplus(\\Ab)$ [def-weil-abstract-derived-category] up to the canonical isomorphisms between the complexes computed from different resolutions.\n2. (Any comparison complex.) Let $t:u^{-1}G\\to M^\\bullet$ be a quasi-isomorphism to a bounded below complex of abelian sheaves on $Y_{\\Et}$ and $\\beta:u^{-1}I^\\bullet\\to M^\\bullet$ a morphism of complexes with $\\beta\\circ u^{-1}(s)=t$. Let $\\gamma:M^\\bullet\\to J^\\bullet$ be a morphism of complexes with $\\gamma\\circ t$ homotopic to $r\\circ u^{-1}(s)$ (it exists, unique up to homotopy). Then $u^*=\\mathcal H^q(\\Gamma(Y,\\gamma))\\circ\\mathcal H^q\\bigl(a\\mapsto\\beta(\\eta_u(a))\\bigr)$, the second map being $\\mathcal H^q$ of $\\Gamma(X,I^\\bullet)\\to\\Gamma(Y,M^\\bullet)$. If $M^\\bullet$ is K-injective, or a complex of $\\Gamma(Y,-)$-acyclic sheaves, then $\\mathcal H^q(\\Gamma(Y,\\gamma))$ is an isomorphism, so that $u^*$ is computed on $\\Gamma(Y,M^\\bullet)$ by $a\\mapsto\\beta(\\eta_u(a))$.\n3. (Naturality.) For a morphism $\\varphi:G\\to G'$ of abelian sheaves on $X_{\\Et}$, $u^*\\circ H^q(\\varphi)=H^q(u^{-1}\\varphi)\\circ u^*$.\n4. (Composition.) For a morphism $v:Z\\to Y$, let $c_{u,v}:v^{-1}u^{-1}\\xrightarrow{\\sim}(u\\circ v)^{-1}$ be the isomorphism of [lem-weil-pbc-inverse-image-composition] (compatible with the units). Then $(u\\circ v)^*=H^q(c_{u,v,G})\\circ v^*\\circ u^*:H^q(X_{\\Et},G)\\to H^q(Z_{\\Et},(u\\circ v)^{-1}G)$, and, with $e_X:\\mathrm{id}_X^{-1}\\xrightarrow{\\sim}\\mathrm{id}$ of the same lemma, $H^q(e_{X,G})\\circ\\mathrm{id}_X^*=\\mathrm{id}$.\n5. (Etale maps.) If $u$ is etale [def-weil-etale-morphism], let $\\rho_G:u^{-1}G\\xrightarrow{\\sim}G|_Y$ be the identification of the inverse image with the restriction, $G|_Y(V)=G(V)$ for $V$ etale over $Y$, of [lem-weil-pbc-etale-inverse-image-restriction]. If $G\\to I^\\bullet$ is a resolution by a bounded below complex of injective abelian sheaves, then $u^{-1}G\\to u^{-1}I^\\bullet$ is a resolution of $u^{-1}G$ by a bounded below complex of injective abelian sheaves, one may take $J^\\bullet=u^{-1}I^\\bullet$, $r=\\mathrm{id}$, and then $u^*$ is $\\mathcal H^q$ of the restriction map $\\Gamma(X,I^\\bullet)=I^\\bullet(X)\\to I^\\bullet(Y)\\cong\\Gamma(Y,u^{-1}I^\\bullet)$ (through $\\rho_{I^\\bullet}(Y)$) along $u:Y\\to X$."
+   },
+   {
+    "step": 6,
+    "node": "lem-per-admissible-modification-fujiwara-valuative-local",
+    "quote": "Let $(A,I)$ be a henselian pair with $I$ finitely generated, let $A'=\\widehat A$ be its $I$-adic completion, and put $X=\\operatorname{Spec}A$, $U=X\\setminus V(I)$ and $U'=\\operatorname{Spec}A'\\times_XU$ [def-weil-pbc-henselian-terminology, def-weil-pbc-adic-completion, def-weil-affine-spectrum]. For each finitely generated ideal $J$ with $V(J)=V(I)$ write $Y_J=\\operatorname{Bl}_J(X)$, and write $Y'_J$ for the corresponding blowup over $A'$ [def-nagata-affine-blowup]. Let $\\mathcal T$ and $L^q_F,L^q_{F'}$ be the limit topos and colimit sheaves of [lem-per-admissible-modification-cohomology-presentation], for a torsion abelian etale sheaf $F$ on $U$ and its inverse image $F'$ on $U'$ [def-weil-pbc-etale-sheaves, def-weil-pbc-inverse-image]. There is a conservative family of compatible geometric points $t=(\\bar t_J)$ of the closed fibres for which the following holds. Form\n$$B_t=\\varinjlim_J\\mathcal O^{\\mathrm{sh}}_{Y_J,\\bar t_J},\\qquad B'_t=\\varinjlim_J\\mathcal O^{\\mathrm{sh}}_{Y'_J,\\bar t'_J}$$\nusing the compatible points on corresponding closed fibres and strict henselizations [def-weil-pbc-strict-henselization-limit]. These are nonzero henselian local rings, with the induced local map $u_t:B_t\\to B'_t$. There is a nonunit nonzerodivisor $\\varphi_t\\in B_t$ such that $IB_t=(\\varphi_t)$ and $IB'_t=(\\varphi'_t)$ for $\\varphi'_t=u_t(\\varphi_t)$, also a nonunit nonzerodivisor. In each ring every finitely generated ideal containing a positive power of its displayed principal ideal is principal and generated by a nonzerodivisor; this is the $I$-valuative property used here. Put $S_t=B_t[1/\\varphi_t]$, $S'_t=B'_t[1/\\varphi'_t]$, and let $F_t$ be the inverse image of $F$ under $\\operatorname{Spec}S_t\\to U$, with $F'_t$ its inverse image on $\\operatorname{Spec}S'_t$. There are canonical restriction isomorphisms, for every $q\\geq0$,\n$$(L^q_F)_t\\simeq H^q((\\operatorname{Spec}S_t)_{\\mathrm{et}},F_t),\\qquad (L^q_{F'})_t\\simeq H^q((\\operatorname{Spec}S'_t)_{\\mathrm{et}},F'_t).$$\nUnder these isomorphisms the exchange morphism on stalks is the pullback induced by $S_t\\to S'_t$ [def-weil-pbc-etale-cohomology, def-weil-pbc-cohomology-pullback]."
+   },
+   {
+    "step": 6,
+    "node": "prop-weil-pbc-gabber-pair-comparison",
+    "quote": "Let $(A,I)$ be a henselian pair [def-weil-pbc-henselian-terminology], $X=\\operatorname{Spec}A$, $Z=\\operatorname{Spec}(A/I)$ and $z:Z\\to X$ the closed immersion. For every torsion abelian sheaf $F$ on $X_{\\Et}$ [def-weil-pbc-torsion-etale-sheaf] the pullback map [def-weil-pbc-cohomology-pullback]\n$$\nz^*:H^q(X_{\\Et},F)\\longrightarrow H^q(Z_{\\Et},z^{-1}F)\n$$\nis an isomorphism for every $q\\ge0$ ($H^q$ etale cohomology [def-weil-pbc-etale-cohomology], $z^{-1}$ the inverse image [def-weil-pbc-inverse-image]). Only the pair form is asserted: for an affine scheme of finite type over $\\operatorname{Spec}A$ in place of $\\operatorname{Spec}A$ the comparison with the closed fibre is false (see the report of lemma-weil-pbc-injective-restriction-acyclicity and the Lean docstring of AlgebraicGeometry.Etale.bijective_cohomologyMap_of_henselianRing)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-gabber-pair-comparison",
+  "lem-weil-pbc-cohomology-pullback-functorial"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-NM-a276b62a4",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-a276b62a4 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, every cited statement and ILO XX 4.4 (pp.373-374: Fujiwara local rings, P=∩I^n, A/P a henselian valuation ring, the final Note on blowups mod I^m). The previous return is repaired. D1/D5: the two restating nodes and their spurious stmt_deps are gone and the item's stmt_deps are back to base. E5/C4: the dense-field iso node is no longer cited. C2: the conservativity step is removed. B2: each new node introduces its own objects. The item statement is unchanged. Ring-reduction node is true: x∉φ^nB divides φ^n because (x,φ^n)=(g) with g a nonzerodivisor, so S is local with maximal ideal P=PS and P is prime. φ̄≠0 and ∩φ̄^nV=0, so v(φ̄) is cofinal and the topology is φ̄-adic. Tested on a DVR and on the rank-2 ring k[[x]]+y k((x))[[y]] with φ=x. Completion-density node is true without flatness: I^k⊂J gives J^mA'=J^m+I^{km}A' and I^nJ^mA'∩A=I^nJ^m, so the Rees algebras agree mod I^n, and strict henselization commutes with quotients. Fujiwara-local node: IB_t is principal through Bl_I, the stalk is H^q of D(φ_t) by limit continuity, and I=A or I nilpotent gives the empty case. No duplicates found by grep of the DAG. Steps: hypotheses match, Step 3 gives u^{-1}(Q)=P, I checked Step 4's density and induced-topology algebra line by line, Step 5 applies to the pairs (S,PS) and (S',QS'), and Step 6 uses composition and naturality on a commuting ring square. Accepted tool_uses: prop-weil-pbc-gabber-pair-comparison and lem-weil-pbc-cohomology-pullback-functorial, both generic. Batch-5: def-trf-valuation-ring is the general valuation-ring definition (Mathlib leaf), outside both assumptions and already in the item's base stmt_deps, so accepted. No fixes."
  }
 }
