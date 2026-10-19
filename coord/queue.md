@@ -1,6 +1,6 @@
 # Work queue
 
-1019 items; claim with `tools/claim.py next <group> [--stage N]`.
+1020 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (6)
 
@@ -13,14 +13,14 @@
 | `lem-fd-stalk-formula` | - | rests_on_sorry |
 | `lem-trf-hilbert-samuel-local-presentations` | - | none |
 
-## Stage 2: nodes to state (31)
+## Stage 2: nodes to state (29)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `def-sf-datum` | 1 | state | 91 |
 | `sk-d-six` | 1 | state | 42 |
 | `sk-def-sp-trace` | 2 | state | 2 |
-| `def-sfb-derived-restrict-levelwise` | 1 | state | 1 |
+| `def-sfb-derived-extend-levelwise-adjunction` | 2 | state | 0 |
 | `lem-coef-finite-exceptional` | 1 | state | 117 |
 | `fix-cor-verdier-exchange` | 2 | state | 105 |
 | `fix-lem-exchanges` | 1 | state | 87 |
@@ -38,10 +38,8 @@
 | `lem-coef-rational-retract-evaluation` | 1 | state | 0 |
 | `lem-coef-rational-scalar-transpose-compatibility` | 1 | state | 0 |
 | `lem-pur-condensed-exceptional-reconstruction` | 1 | state | 0 |
-| `lem-pur-flag-local-comparison` | 1 | state | 0 |
 | `lem-sf-constant-semilinear-generator-comparison` | 1 | state | 0 |
 | `lem-sf-proper-open-tensor-compatibility` | 1 | state | 0 |
-| `lem-trf-finite-structural-maps-commshift` | 1 | state | 0 |
 | `lem-wf-constant-twist-coefficient-comparison` | 1 | state | 0 |
 | `lem-zl-proper-unit-condensed-realization` | 1 | state | 0 |
 | `thm-pur-vector-bundle-thom` | 1 | state | 0 |
@@ -49,9 +47,9 @@
 | `lem-coef-finite-free-compact-composition` | 2 | state | 0 |
 | `nt-target-poincare-isiso` | 2 | state | 0 |
 
-Not open yet: 295 nodes that below a finished node, not needed, 124 nodes that wait for a statement dependency (bottom-up).
+Not open yet: 295 nodes that below a finished node, not needed, 123 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (982)
+## Stage 3: modules to prove (985)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -825,6 +823,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.DirectImageCtfOpenTor` | - | 1 | proof | 5 |
 | `Sheaf.Paper.EtaleIsoDescent` | - | 1 | proof | 5 |
 | `Sheaf.Paper.FiniteForwardProductSymmetry` | - | 1 | proof | 5 |
+| `Sheaf.Paper.LocalizedTopChern` | - | 9 | proof | 5 |
 | `Sheaf.Paper.PointCompletedEvaluation` | - | 3 | proof | 5 |
 | `Sheaf.Paper.PullbackCoefficientIterateCoherence` | - | 2 | proof | 5 |
 | `Sheaf.Paper.PurReductionLimitShiftAdjunction` | - | 1 | proof | 5 |
@@ -873,6 +872,8 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.SupportedBottomGluing` | - | 1 | proof | 6 |
 | `Sheaf.Paper.CartierClassAgreement` | - | 1 | proof | 6 |
 | `Sheaf.Paper.ChernFlagFormula` | - | 1 | proof | 6 |
+| `Sheaf.Paper.FiniteStructuralMapsCommShift` | - | 1 | proof | 6 |
+| `Sheaf.Paper.FlagLocalComparison` | - | 9 | proof | 6 |
 | `Sheaf.Paper.FlagPullbackInjective` | - | 1 | proof | 6 |
 | `Sheaf.Paper.InternalHomDualConstructibleModels` | - | 4 | proof | 6 |
 | `Sheaf.Paper.InternalHomDualTorAmplitude` | - | 1 | proof | 6 |
@@ -1040,7 +1041,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.SplitCellComplexKFlat` | - | 1 | proof | 21 |
 | `Sheaf.CategoryTheory.BoundedFilteredPageFunctorNormalized` | - | 1 | proof | 21 |
 
-## Stage 3: waiting for statements of dependencies (33)
+## Stage 3: waiting for statements of dependencies (32)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -1074,7 +1075,6 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.FiniteProductCompactification` | - | 2 | `fix-lem-exchanges` |
 | `Sheaf.Paper.FiniteUniversalSmoothTrace` | - | 1 | `lem-pur-vector-integration-site-comparison` |
 | `Sheaf.Paper.FourierKernelConvolution` | - | 8 | `sk-thm-sf-package` |
-| `Sheaf.Paper.LocalizedTopChern` | - | 9 | `lem-pur-flag-local-comparison` |
 | `Sheaf.Paper.RationalPurityPresentation` | - | 13 | `lem-pur-adic-purity-scalar-naturality` |
 | `Sheaf.Paper.VerdierExchange` | - | 1 | `fix-lem-exchanges` |
 | `Sheaf.SecSmoothPurity.RationalPurityTraceCoherence` | - | 8 | `lem-pur-adic-purity-scalar-naturality` |
