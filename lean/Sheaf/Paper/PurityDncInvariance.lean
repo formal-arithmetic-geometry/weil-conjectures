@@ -9,40 +9,7 @@ public import Sheaf.Paper.PurityDncComparisons
 public import Sheaf.Paper.PurityDncFamily
 public import Sheaf.Paper.PurityNormalCone
 import WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation
-import WeilConjectures.Blowup.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.Paper.FiniteTypeExceptionalInverseImage
-import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom
-import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
-import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
-import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
-import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Mathlib.CategoryTheory.Adjunction.Additive
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
-import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.Paper.CohomologicalSmoothComposition
-import Sheaf.Paper.CohomologicalSmoothEtaleLocality
-import Sheaf.Paper.CohomologicalSmoothnessTheorem
-import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
-import Sheaf.Paper.DerivedPullbackTensorHom
-import Sheaf.Paper.PurityDncFamilyIntrinsic
-import Sheaf.Paper.TwistPreservesFiniteness
+import WeilConjectures.EtaleCohomology.TateTwist.Normalized
 
 /-! # Deformation invariance of the section dualizing object
 
@@ -174,6 +141,103 @@ theorem existsUnique_dncInvariance (P : PurityFiniteSetting.{u}) {V B : Scheme.{
                 (ModuleCat.{u + 1} P.Coefficient) b).leftDerivedFunctor.mapIso
                 (normalComparison P d g aB s hs) ≪≫
               pullComparison P b (normalEtale P d g aB s hs)).symm := by
-  sorry
+  classical
+  have := noetherian P aB
+  have := SmoothOfRelativeDimension.smooth d g
+  have := compactifiable P g aB
+  have := normalCompactifiable P d g aB s hs
+  have := invertibleExponent P aB
+  have := Scheme.Hom.smoothOfRelativeDimension_deformationSpaceProj d g s hs
+  have hm : ((Scheme.Hom.puncturedLine B).ι ≫ s.deformationSpaceSection) ≫
+      Scheme.Hom.deformationSpaceProj g s = 𝟙 _ ≫ (Scheme.Hom.puncturedLine B).ι := by
+    rw [Category.assoc, Scheme.Hom.deformationSpaceSection_deformationSpaceProj hs,
+      Category.comp_id, Category.id_comp]
+  let sq := Scheme.Hom.isPullback_deformationSpaceGeneric g s
+  let D : Scheme.Hom.DeformationToNormalConeData d g s (Scheme.Hom.normalConeData d hs) :=
+    { scheme := s.ker.deformationSpace
+      proj := Scheme.Hom.deformationSpaceProj g s
+      sect := s.deformationSpaceSection
+      sect_comp_proj := Scheme.Hom.deformationSpaceSection_deformationSpaceProj hs
+      smoothOfRelativeDimension_proj := inferInstance
+      isSeparated_proj := inferInstance
+      hasCompactification_proj :=
+        Scheme.Hom.hasCompactification_deformationSpaceProj g s d hs
+      oneFibre := Scheme.Hom.deformationSpaceOneFibre g s
+      isPullback_oneFibre := Scheme.Hom.isPullback_deformationSpaceOneFibre g s
+      comp_oneFibre := Scheme.Hom.comp_deformationSpaceOneFibre hs
+      zeroFibre := s.ker.normalConeToDeformationSpace
+      isPullback_zeroFibre := Scheme.Hom.isPullback_normalConeToDeformationSpace g s
+      comp_zeroFibre := Scheme.Hom.normalConeZeroSection_comp_normalConeToDeformationSpace
+      puncturedLine := Scheme.Hom.puncturedLine B
+      coe_puncturedLine := Scheme.Hom.coe_puncturedLine B
+      generic := Scheme.Hom.deformationSpaceGeneric g s
+      isPullback_generic := sq
+      exists_sect_generic := ⟨sq.lift _ _ hm, by
+        rw [← Scheme.Hom.deformationSpaceGeneric_toBase g s, sq.lift_fst_assoc,
+          Category.assoc, Scheme.Hom.deformationSpaceSection_toBase, Category.assoc],
+        sq.lift_snd _ _ _, sq.lift_fst _ _ _⟩
+      exists_etale_coordinates :=
+        Scheme.Hom.exists_etale_coordinates_deformationSpace d g s hs }
+  have : NeZero (ringChar P.Coefficient) :=
+    ⟨CharP.ringChar_ne_zero_of_finite P.Coefficient⟩
+  have : HasCompactification (Scheme.Hom.normalConeData d hs).proj :=
+    normalCompactifiable P d g aB s hs
+  obtain ⟨ψ, hψ⟩ := Etale.exists_iso_sectionInvariant_normalCone P.Coefficient d g s
+    (Scheme.Hom.normalConeData d hs) D aB (fibreOne P d g aB s hs)
+      (fibreZero P d g aB s hs)
+  change sourceEtale P d g aB s ≅ normalEtale P d g aB s hs at ψ
+  let α := sourceComparison P d g aB s ≪≫
+    (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) B).mapDerivedCategory.mapIso
+      ψ ≪≫ (normalComparison P d g aB s hs).symm
+  apply existsUnique_of_exists_of_unique
+  · refine ⟨α, ?_⟩
+    intro B' aB' _ _ _ b hb C₀ e
+    have he := hψ b e
+    let ν := (ProEtale.comparisonUpperStar
+      (ModuleCat.{u + 1} P.Coefficient) B).mapDerivedCategory
+    let ν' := (ProEtale.comparisonUpperStar
+      (ModuleCat.{u + 1} P.Coefficient) B').mapDerivedCategory
+    let Lb := (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) b).leftDerivedFunctor
+    let η : ν ⋙ Lb ≅
+        (Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) b).leftDerivedFunctor ⋙ ν' :=
+      Functor.isoWhiskerLeft ν (ProEtale.leftDerivedUpperStarIsoMapDerivedCategory _ b) ≪≫
+        ProEtale.mapDerivedCategoryComparisonUpperStarCompUpperStarIso _ b ≪≫
+          Functor.isoWhiskerRight (Etale.leftDerivedUpperStarIsoMapDerivedCategory _ b).symm ν'
+    have hn := η.hom.naturality ψ.hom
+    change Lb.map (ν.map ψ.hom) ≫ (pullComparison P b _).hom =
+      (pullComparison P b _).hom ≫
+        ν'.map ((Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) b).leftDerivedFunctor.map
+          ψ.hom) at hn
+    rw [← he]
+    apply Iso.ext
+    simp only [α, Functor.mapIso_trans, Functor.mapIso_symm, Iso.trans_hom,
+      Iso.symm_hom, Functor.mapIso_hom, Iso.trans_inv, Functor.mapIso_inv]
+    erw [← reassoc_of% hn]
+    simp only [Iso.hom_inv_id_assoc]
+    rfl
+  · intro α' α'' hα' hα''
+    obtain ⟨κ⟩ := D.nonempty_iso_familyObject_leftDerivedUpperStar P.Coefficient aB
+    have e : (Etale.upperStar (ModuleCat.{u + 1} P.Coefficient)
+        (AffineSpace.map (ULift.{u} (Fin 1)) (𝟙 B))).leftDerivedFunctor.obj
+          (familyEtale P d g aB s hs) ≅
+        (Etale.upperStar (ModuleCat.{u + 1} P.Coefficient)
+          (AffineSpace (ULift.{u} (Fin 1)) B ↘ B)).leftDerivedFunctor.obj
+            (sourceEtale P d g aB s) := by
+      rw [AffineSpace.map_id]
+      exact (Etale.leftDerivedUpperStarId _
+        (AffineSpace (ULift.{u} (Fin 1)) B)).app _ ≪≫ κ
+    have h := (hα' B aB (𝟙 B) (Category.id_comp aB) _ e).trans
+      (hα'' B aB (𝟙 B) (Category.id_comp aB) _ e).symm
+    apply Iso.ext
+    have hhom := congrArg Iso.hom h
+    have hn := (ProEtale.leftDerivedUpperStarId
+      (ModuleCat.{u + 1} P.Coefficient) B).hom.naturality α'.hom
+    have hn' := (ProEtale.leftDerivedUpperStarId
+      (ModuleCat.{u + 1} P.Coefficient) B).hom.naturality α''.hom
+    dsimp at hn hn' hhom
+    rw [hhom] at hn
+    exact (cancel_epi ((ProEtale.leftDerivedUpperStarId
+      (ModuleCat.{u + 1} P.Coefficient) B).hom.app
+        (sourceSection P d g aB s))).mp (hn.symm.trans hn')
 
 end WeilConjectures.PurityFiniteSetting.Dnc

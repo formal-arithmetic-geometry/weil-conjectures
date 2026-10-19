@@ -30,130 +30,64 @@
  ],
  "proof": [
   {
-   "text": "First verify the global domain of the exceptional operations. A field is Noetherian since its only ideals are zero and the unit ideal. Thus $B,V$ and $V\\times_B\\mathbf A^1_B$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]; here $a:\\mathbf A^1_B\\to B$ is finite type on affine charts by adjoining one generator and separated because its diagonal is cut out by $t_1-t_2$, and $V\\times_B\\mathbf A^1_B\\to\\mathbf A^1_B$ is separated finite type by [lem-pod-separated-finite-type-base-change]. The center $s(B)\\times\\{0\\}$ is a closed subscheme. Indeed, on an affine open $U=\\operatorname{Spec}R\\subseteq V$ the closed-immersion description [def-weil-closed-immersion] gives $s^{-1}U=\\operatorname{Spec}(R/I)$, and its zero-time copy in $U\\times_B\\mathbf A^1_B=\\operatorname{Spec}R[t]$ is the quotient $R[t]\\twoheadrightarrow R/I$ with kernel $(I,t)$. These quotient descriptions give a surjective structure-sheaf map, and the image is the closed intersection of the inverse images of $s(B)$ and $\\{t=0\\}$, so the definition of closed immersion applies globally. By [def-sbc-closed-immersion-ideal-sheaf], its kernel ideal is quasi-coherent. Choose an affine open covering of the Noetherian product by rings $R_\\lambda$ which are Noetherian, as in the definition [pqf-def-locnoeth]. On each of these charts the kernel is $\\widetilde{J_\\lambda}$ for an ideal $J_\\lambda\\subseteq R_\\lambda$. Since a Noetherian ring has every ideal finitely generated, the $J_\\lambda$ are finitely generated; these local generators say exactly that the center ideal is of finite type. The blow-up is proper by [lemma-nagata-blowup-proper], hence separated finite type by [def-weil-proper-morphism]. The blow-up is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], applied to its finite-type map to the Noetherian product. Its open subscheme $D_sV$ is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian], and the inverse image of every affine open of the blow-up is likewise a Noetherian open subscheme, hence quasi-compact. Thus its open inclusion is quasi-compact and is of finite type by [lem-weil-pbc-qc-open-immersion-finite-type]. The open inclusion is separated since its diagonal is an isomorphism. The composite $\\widetilde g:D_sV\\to\\mathbf A^1_B$ is separated and locally of finite type by [lem-weil-pbc-proper-fp-permanence](e); it is of finite type since the finite affine covers for the quasi-compact factors compose, and generators of a composite algebra are the union of generators of its two stages. The same composition argument shows $D_sV$ is finite type over $k$. The vector bundle $N_s$ is locally given by $d$ polynomial generators over $B$; a finite trivializing cover of the Noetherian $B$ gives finite type, and its relative diagonal is closed on each trivializing chart, so $\\pi_N$ is separated. Hence all of $g,\\widetilde g,\\pi_N$ satisfy precisely the domain of [def-weil-exceptional-inverse-image]; no ambient right adjoint on all pro-étale complexes is asserted. The structure morphisms of $N_s$ and $D_sV$ are separated by [lem-weil-pbc-proper-fp-permanence](e), since $B$ and $\\mathbf A^1_B$ are separated over $k$. By [lem-pur-dnc-section-geometry](2), $\\widetilde g$ is smooth of pure relative dimension $d$. Thus the family object used below is the well-defined finite-stage object $F=L\\widetilde s^*R\\widetilde g^!\\Lambda_{\\mathbf A^1_B}$ of [def-pur-dnc-section-family], using the exact finite-level pullback of [def-weil-derived-pullback-tensor-hom]. The separated finite-type hypotheses on both $B,V$ now also match the explicit hypotheses of [prop-pur-dnc-family-constancy]. Put $C=C(g,s)$, $C_N=C(\\pi_N,0_N)$, and $a:\\mathbf A^1_B\\to B$; write $i_r$ for the section $t=r$, $r=0,1$. Apply [prop-pur-dnc-family-constancy](1)-(3) to the deformation family of the closed section, with the fixed relative dimension $d$ of the geometry setting. It gives $F\\simeq\\mathcal L_F(d)[2d]$, $C\\simeq\\mathcal L_1(d)[2d]$, and an isomorphism $\\kappa:F\\xrightarrow{\\sim}a^*C$ uniquely characterized by its restriction being the identity at $t=1$. Thus the shift-of-sheaves reduction and the normalized gluing along the affine line are supplied by that proposition, with the same closed smooth section and coefficient conventions as here.",
+   "text": "Use the actual extended-Rees deformation space, projection and augmentation section. Assemble DeformationToNormalConeData from its canonical fibre squares, generic pullback square and etale coordinates. The generic section is the pullback lift of the augmentation section; its equations follow from the projection and base identities. Finite-type Noetherianity, compactifiability and invertibility of the coefficient exponent are supplied by the existing finite-section geometry API. No arbitrary deformation datum or fibre comparison is chosen.",
    "uses": [
-    "prop-pur-dnc-family-constancy",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-pod-separated-finite-type-base-change",
-    "lemma-nagata-blowup-proper",
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-weil-pbc-qc-open-immersion-finite-type",
-    "lem-weil-pbc-proper-fp-permanence",
-    "def-weil-exceptional-inverse-image",
-    "def-sbc-closed-immersion-ideal-sheaf",
     "lem-pur-dnc-section-geometry",
-    "def-pur-dnc-section-family",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-closed-immersion",
-    "pqf-def-locnoeth"
+    "def-pur-normal-bundle"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-dnc/thm-pur-dnc-invariance.md",
-    "place": "Proof, opening sentence; unit Steps 1-3 via the family-constancy proposition; agent expansion of the admissible global domain using the cited permanence and blow-up statements"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/thm-pur-dnc-invariance.proof.md",
+    "place": "Normalized family comparison and its zero fibre; categorical transport to finite pro-etale section objects"
    }
   },
   {
-   "text": "By [lem-pur-dnc-section-geometry](1) the zero fibre is the normal bundle with zero section, and there is its canonical comparison $\\epsilon_0:i_0^*F\\xrightarrow{\\sim}C_N$. Since $a\\circ i_0=\\operatorname{id}_B$, let $\\eta_0:i_0^*a^*C\\xrightarrow{\\sim}C$ be the pullback identification. Define\n$$\\alpha=\\epsilon_0\\circ(i_0^*\\kappa)^{-1}\\circ\\eta_0^{-1}:C\\xrightarrow{\\sim}C_N.$$\nEvery factor is an isomorphism. In particular $i_0^*\\kappa$ initially points from the normal fibre to $C$, so its inverse, rather than itself, has the required direction.",
-   "uses": [
-    "lem-pur-dnc-section-geometry",
-    "def-weil-derived-pullback-tensor-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-dnc/thm-pur-dnc-invariance.md",
-    "place": "Proof, zero-fibre restriction and inverse of the comparison"
-   }
-  },
-  {
-   "text": "For the standard pair, [lem-pur-dnc-section-geometry](4) identifies $F$ with $a^*C$, $C=\\Lambda(d)[2d]$, and the deformation with the product having $x_k=tu_k$. Its pullback identification $\\rho:F\\xrightarrow{\\sim}a^*C$ restricts to the identity at $t=1$. Hence $\\rho=\\kappa$ by [prop-pur-dnc-family-constancy](3). Its zero restriction and $\\epsilon_0$ are the standard product identifications, so the formula of Step 2 is the identity on $\\Lambda(d)[2d]$.\nFor an etale coordinate neighborhood of the section as in [lem-pur-dnc-section-geometry](2), write $B_i\\to B$ for its base chart and $T_i=\\Lambda_{B_i}(d)[2d]$. Choose the base coordinate neighborhoods $B_i$ affine. Around each section point choose an affine coordinate neighborhood in $V\\times_B B_i$, then cover its inverse image under the section by principal affine opens of the affine base chart and restrict the source neighborhood over each. The restricted source remains affine: for a principal base open defined by $h$, it is the principal open defined by the pullback of $h$ in the original affine source. Thus the section factors through the resulting coordinate neighborhood $j_i:W_i\\hookrightarrow V_i=V\\times_B B_i$, with an etale map of pairs $e_i:W_i\\to\\mathbf A^d_{B_i}$ taking it to the zero section. By [lem-weil-pbc-qcqs-morphism-permanence](1), an affine étale chart over the separated (hence quasi-separated) $B$ is of finite presentation, hence of finite type; the locally finite-type composition clause [lem-weil-pbc-proper-fp-permanence](e) and its quasi-compact source make $B_i$ finite type over $k$. The source chart $W_i$ is an open subscheme of the separated finite-type $V_i$, which is Noetherian by Step 1. Its open inclusion is quasi-compact (inverse images of affine opens are Noetherian opens), hence finite type by [lem-weil-pbc-qc-open-immersion-finite-type]; separated composition and the finite-cover argument of Step 1 make $W_i$ separated finite type over $k$. Each etale coordinate map from the affine $W_i$ to the separated affine-space target is finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](1). It is also separated: its relative diagonal is the base change of $\\Delta_{W_i/k}$ along $W_i\\times_{\\mathbf A^d_{B_i}}W_i\\to W_i\\times_kW_i$, so it is closed by [lem-weil-pbc-proper-fp-permanence](b). The deformation sources are separated finite type by the Step 1 argument applied to $(W_i,B_i)$; their etale coordinate maps to the separated standard family are quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](1), hence finite type, and separated by the same relative-diagonal base change. Thus all coordinate morphisms are in the exceptional-operation domain. This chart calculation is used only after the global objects have been defined in Step 1. The coordinate map $e_i$ is etale; no isomorphism of the whole $V_i$ with affine space is asserted. By the coordinate charts of [lem-pur-dnc-section-geometry](2), its deformation chart has coordinates $u_k=x_k/t$, an open inclusion $\\widetilde j_i:D_{s_i}W_i\\hookrightarrow D_{s_i}V_i$ containing the whole family section, and an etale coordinate map to $\\mathbf A^d_{B_i}\\times_{B_i}\\mathbf A^1_{B_i}$. The open inclusion here can also be read directly in the defining blow-up: on a principal affine open $D(h)$ the equality $(J^r)_h=(J_h)^r$ in every degree identifies the restricted Rees algebra with that of the restricted ideal; taking its projective charts and deleting the restricted strict transform gives the claimed open chart of the blow-up in [def-pur-dnc-section-family]. To compare dualizing objects, apply [lem-pur-co-smooth-etale-locality] and [lem-pur-co-smooth-composition] to both $j_i$ and $e_i$: if $p_i:\\mathbf A^d_{B_i}\\to B_i$, then $g_i j_i=p_i e_i$, and\n$$j_i^*\\omega_{g_i}\\simeq\\omega_{g_i j_i}=\\omega_{p_i e_i}\\simeq e_i^*\\omega_{p_i},$$\nbecause $\\omega_{j_i}=\\omega_{e_i}=\\Lambda$. Pulling along the factored section identifies $C_i$ with the section invariant of the standard pair. Write $\\widetilde e_i$ for the deformation coordinate map and $\\widetilde p_i$ for the standard projection to $\\mathbf A^1_{B_i}$. The family comparison is explicitly\n$$\\widetilde j_i^*\\omega_{\\widetilde g_i}\\simeq\\omega_{\\widetilde g_i\\widetilde j_i}=\\omega_{\\widetilde p_i\\widetilde e_i}\\simeq\\widetilde e_i^*\\omega_{\\widetilde p_i},$$\nusing $\\omega_{\\widetilde j_i}=\\omega_{\\widetilde e_i}=\\Lambda$, followed by pullback along the family section. The projections and the deformation morphisms on these affine coordinate neighborhoods are separated, smooth, and of finite type, by geometry (2),(4), so they are cohomologically smooth by [thm-pur-cohomological-smoothness]. Pull this composition comparison back along the section, and apply it also to the deformation coordinate chart. Together with the standard calculation in geometry (4) this gives the coordinate identifications\n$$c_i:C_i\\xrightarrow{\\sim}T_i,\\quad n_i:C_{N,i}\\xrightarrow{\\sim}T_i,\\quad f_i:F_i\\xrightarrow{\\sim}a_i^*T_i.$$\nHere subscript $i$ means pullback to $B_i$ or $\\mathbf A^1_{B_i}$. For the two fibre identities use [thm-pur-cohomological-smoothness](3),(4): base change of the canonical dualizing comparisons agrees with the canonical comparison for the base-changed smooth morphisms and is compatible with composition. At $1$, the maps $\\widetilde j_i$ and the deformation coordinate map become $j_i$ and $e_i$ since $x_k=u_k$. At $0$ they become the maps on the normal bundle given by the normal coordinates $u_k$. Pulling their composition comparisons along the corresponding sections therefore gives exactly\n$$i_1^*f_i=c_i\\epsilon_{1,i},\\qquad i_0^*f_i=n_i\\epsilon_{0,i}.$$ Set $\\rho_i=(a_i^*c_i)^{-1}f_i$. Then $i_1^*\\rho_i$ is the identity under $\\epsilon_{1,i}:i_1^*F_i\\simeq C_i$. By family constancy (4) $\\kappa|_{\\mathbf A^1_{B_i}}$ is the comparison for this base chart, and by its clause (3) it equals $\\rho_i$. Substituting $i_0^*f_i=n_i\\epsilon_{0,i}$ in Step 2 gives $n_i\\alpha_i c_i^{-1}=\\operatorname{id}_{T_i}$. This is the required normalization on each coordinate chart.",
-   "uses": [
-    "lem-pur-dnc-section-geometry",
-    "prop-pur-dnc-family-constancy",
-    "lem-pur-co-smooth-etale-locality",
-    "lem-pur-co-smooth-composition",
-    "thm-pur-cohomological-smoothness",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-proper-fp-permanence",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-pur-dnc-section-family",
-    "lem-weil-pbc-qc-open-immersion-finite-type"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-dnc/thm-pur-dnc-invariance.md",
-    "place": "Proof, coordinate normalization; replaces the reference to Step 3 of a dependency proof"
-   }
-  },
-  {
-   "text": "Let $\\beta:C\\xrightarrow{\\sim}C_N$ satisfy the same coordinate normalization and put $h=\\alpha^{-1}\\circ\\beta\\in\\operatorname{Aut}(C)$. By [prop-pur-dnc-family-constancy](1), $C\\simeq\\mathcal L_1(d)[2d]$ with $\\mathcal L_1$ a finite locally constant rank-one sheaf on $B$. By [prop-weil-twist-preserves], the twist is tensor with an invertible line. Tensor with its inverse and shift by $[-2d]$ to cancel the common twist and shift; the inverse equivalence is tensor with the line and shift by $[2d]$. Conjugating $h$ gives an automorphism of $\\mathcal L_1[0]$. By [lem-weil-pbc-derived-single-fully-faithful], applied to the abelian category of coefficient-module sheaves on $B$, this is induced by a unique automorphism $h_0$ of the sheaf $\\mathcal L_1$. On every coordinate chart of [lem-pur-dnc-section-geometry](2), $\\alpha$ and $\\beta$ are the standard identity. Thus $h$ restricts to the identity, and so does $h_0$, because finite-level pullback is the exact termwise inverse image of [def-weil-derived-pullback-tensor-hom]: it sends a single complex and its sheaf map to the corresponding single complex and sheaf map after restriction. Restriction preserves the chosen invertible-twist equivalence and shift, so the local conjugate of $h$ is the identity. Faithfulness of the local single-complex functor therefore gives the stated identity for the restricted sheaf map. These coordinate charts form a covering family in the small pro-etale site [def-weil-pbc-proetale-site] (an etale covering is such a covering, and one can refine by affine charts). By [lem-weil-proetale-weakly-etale-localization](1)-(3), for each etale chart $u_i:B_i\\to B$ the site $(B_i)_{\\mathrm{proet}}$ is $B_{\\mathrm{proet}}/B_i$, its constant coefficient ring is the restricted one, and its module sheaves are module sheaves on that localization. Thus the sheaf pullback in the preceding paragraph is the restriction of [def-pur-localized-ringed-site]. Explicitly, on an object $W\\to B_i$ the restricted sheaf map is $(h_0)_W$; the base-change functor and the forgetful functor from the slice are adjoint on site objects, so inverse image along $u_i$ has this restriction formula. Exactness gives the identical formula for the corresponding single-complex map. By [lem-pur-sheaf-hom-cover-gluing], applied with $\\mathcal F=\\mathcal G=\\mathcal L_1$, both $h_0$ and $\\operatorname{id}_{\\mathcal L_1}$ are the unique global sheaf morphism restricting to these local identities; hence $h_0=\\operatorname{id}$. Full faithfulness and undoing the equivalences give $h=\\operatorname{id}_C$, so $\\beta=\\alpha$. This proves uniqueness using ordinary sheaf morphisms, without any assertion of faithful etale pullback on arbitrary derived morphisms with the finite-type domain condition already imposed on $B$ in the statement. Here $B$ is separated finite type over $k$ as required by the family-constancy proposition; the sheaf-morphism argument adds no further restriction.",
-   "uses": [
-    "prop-pur-dnc-family-constancy",
-    "prop-weil-twist-preserves",
-    "lem-weil-pbc-derived-single-fully-faithful",
-    "lem-pur-dnc-section-geometry",
-    "def-weil-pbc-proetale-site",
-    "lem-pur-sheaf-hom-cover-gluing",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-pur-localized-ringed-site",
-    "lem-weil-proetale-weakly-etale-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-dnc/thm-pur-dnc-invariance.md",
-    "place": "Proof, uniqueness; expanded via Derived Tag 06XS (lemma-negative-exts) and Sites Modules Tag 03EM (lemma-internal-hom)"
-   }
-  },
-  {
-   "text": "Let $b:B'\\to B$ be any $k$-morphism with $B'$ separated finite type over $k$. By [lem-pod-separated-finite-type-base-change], the pullbacks of $g$, $\\widetilde g$ and $\\pi_N$ are separated finite type. Their bases $B'$ and $\\mathbf A^1_{B'}$ are finite type over $k$, and their sources are finite type over $k$ by the affine-generator and finite-cover composition argument of Step 1. By [lem-sbc-smooth-relative-dimension-permanence](1), $g'$ is smooth of pure dimension $d$; the section stays closed by [lem-weil-pbc-proper-fp-permanence](b). The primed sources are separated over $k$ by separated composition [lem-weil-pbc-proper-fp-permanence](e). Thus the entire primed construction is inside the same exceptional-operation domain. Now put $\\bar b:\\mathbf A^1_{B'}\\to\\mathbf A^1_B$, and use primes for the base-changed data. By [prop-pur-dnc-family-constancy](4), $\\bar b^*\\kappa=\\kappa'$ under the canonical family comparisons. By [lem-pur-dnc-section-geometry](1),(5), the family and its zero fibre identify with $F'$ and $C_{N'}$, and the zero-fibre comparison pulls back to $\\epsilon'_0$. The cartesian equality $\\bar b\\circ i'_0=i_0\\circ b$ identifies $b^*i_0^*$ with $i_0'^*\\bar b^*$; also $\\eta_0$ pulls back to $\\eta'_0$ because both come from $a\\circ i_0=\\operatorname{id}$. Pullback is the functor of [def-weil-derived-pullback-tensor-hom], so it preserves composites and inverses. Substitution into the formula gives\n$$b^*\\alpha=\\epsilon'_0\\circ(i_0'^*\\kappa')^{-1}\\circ(\\eta'_0)^{-1}=\\alpha'.$$\nFor an étale localization $u:U\\to B$ with $U$ separated finite type over $k$ (in particular the affine charts used above), take $b=u$ in the displayed calculation: the equalities $\\bar u^*\\kappa=\\kappa_U$, $u^*\\epsilon_0=\\epsilon_{0,U}$ and $u^*\\eta_0=\\eta_{0,U}$ give $u^*\\alpha=\\epsilon_{0,U}(i_{0,U}^*\\kappa_U)^{-1}\\eta_{0,U}^{-1}=\\alpha_U$. There is no flatness assumption on $b$; the arbitrary-morphism base-change clauses just cited apply inside the separated finite-type $k$-scheme domain. No exceptional inverse image over a base outside that domain is used.",
+   "text": "Apply AlgebraicGeometry.Etale.exists_iso_sectionInvariant_normalCone to this constructed datum and the canonical fibreOne and fibreZero comparisons. This theorem in the family-constancy module constructs the comparison by restricting the unique family isomorphism normalized at one to zero, and gives its equation for every base change and every pulled-back family presentation. Transport its isomorphism through sourceComparison, the derived etale-to-pro-etale comparison functor, and inverse normalComparison. This defines the required pro-etale isomorphism.",
    "uses": [
     "prop-pur-dnc-family-constancy",
     "lem-pur-dnc-section-geometry",
-    "def-weil-derived-pullback-tensor-hom",
-    "lem-pod-separated-finite-type-base-change",
-    "lem-sbc-smooth-relative-dimension-permanence",
-    "lem-weil-pbc-proper-fp-permanence"
+    "def-pur-finite-section-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-dnc/thm-pur-dnc-invariance.md",
-    "place": "Proof, final sentence: etale localization and arbitrary base change"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/thm-pur-dnc-invariance.proof.md",
+    "place": "Normalized family comparison and its zero fibre; categorical transport to finite pro-etale section objects"
+   }
+  },
+  {
+   "text": "Form the natural isomorphism between comparison followed by pro-etale derived pullback and etale derived pullback followed by comparison. Its component is exactly pullComparison. Naturality at the etale comparison isomorphism, together with the all-base-change equation of the preceding step, proves the displayed equation after cancelling inverse comparison maps. This applies to all the quantified finite-type k-base changes and in particular etale localization.",
+   "uses": [
+    "prop-pur-dnc-family-constancy",
+    "def-pur-finite-section-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/thm-pur-dnc-invariance.proof.md",
+    "place": "Normalized family comparison and its zero fibre; categorical transport to finite pro-etale section objects"
+   }
+  },
+  {
+   "text": "For uniqueness, family constancy supplies a global isomorphism kappa from the family to the pullback of the source etale section invariant. Compose kappa with the canonical identity-pullback isomorphism to obtain an admissible presentation e for b=id_B. The stated normalization equations for any two candidates then give identical identity-pullback images. Naturality of L(id_B)^* isomorphic to the identity, and cancellation of its invertible component, make the two original morphisms equal. Iso.ext gives equality of isomorphisms. This uses the already quantified global normalization and makes no claim of faithfulness for arbitrary derived pullback.",
+   "uses": [
+    "prop-pur-dnc-family-constancy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/thm-pur-dnc-invariance.proof.md",
+    "place": "Normalized family comparison and its zero fibre; categorical transport to finite pro-etale section objects"
    }
   }
  ],
  "proof_deps": [
-  "prop-pur-dnc-family-constancy",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-pod-separated-finite-type-base-change",
-  "lemma-nagata-blowup-proper",
-  "def-weil-proper-morphism",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-qc-open-immersion-finite-type",
-  "lem-weil-pbc-proper-fp-permanence",
-  "def-weil-exceptional-inverse-image",
-  "def-sbc-closed-immersion-ideal-sheaf",
   "lem-pur-dnc-section-geometry",
-  "def-pur-dnc-section-family",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-closed-immersion",
-  "pqf-def-locnoeth",
-  "lem-pur-co-smooth-etale-locality",
-  "lem-pur-co-smooth-composition",
-  "thm-pur-cohomological-smoothness",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "prop-weil-twist-preserves",
-  "lem-weil-pbc-derived-single-fully-faithful",
-  "def-weil-pbc-proetale-site",
-  "lem-pur-sheaf-hom-cover-gluing",
-  "def-pur-localized-ringed-site",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-sbc-smooth-relative-dimension-permanence"
+  "def-pur-normal-bundle",
+  "prop-pur-dnc-family-constancy",
+  "def-pur-finite-section-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-dnc/thm-pur-dnc-invariance.md",
-  "place": "Proof, expanded fibre restriction, coordinate normalization, uniqueness, and naturality; unit sk-thm-dnc Steps 1-3"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/thm-pur-dnc-invariance.proof.md",
+  "place": "Existing etale family-constancy/DNC API applied to actual Rees geometry, naturality of comparison, and identity-base-change uniqueness; H2, 2026-10-19"
  },
  "mathlib_searches": [
   {
@@ -355,21 +289,7 @@
    }
   ]
  },
- "tool_uses": [
-  "prop-weil-twist-preserves",
-  "lem-pur-sheaf-hom-cover-gluing",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-pod-separated-finite-type-base-change",
-  "lemma-nagata-blowup-proper",
-  "def-weil-proper-morphism",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-qc-open-immersion-finite-type",
-  "lem-weil-pbc-proper-fp-permanence",
-  "def-weil-exceptional-inverse-image",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-sbc-smooth-relative-dimension-permanence"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -418,5 +338,15 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261019T093433-L-2311000",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
