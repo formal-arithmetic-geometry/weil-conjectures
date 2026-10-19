@@ -1,16 +1,14 @@
 # Work queue
 
-1000 items; claim with `tools/claim.py next <group> [--stage N]`.
+998 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (6)
+## Stage 1: nodes to split (4)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-sfb-constructible-cocone-hom-inj` | - | sorry_here |
 | `lem-sfb-constructible-cocone-hom-surj` | - | sorry_here |
-| `lem-zl-mixed-punctual-cutoff` | - | closed_part |
 | `lem-a1-lisse-sections-stalk-evaluation` | - | none |
-| `lem-fd-stalk-formula` | - | rests_on_sorry |
 | `lem-trf-hilbert-samuel-local-presentations` | - | none |
 
 ## Stage 2: nodes to state (28)
