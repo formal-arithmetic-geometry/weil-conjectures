@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChange
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeStalk
 
 /-!
 # Coefficient comparisons and the compact-support exchange map

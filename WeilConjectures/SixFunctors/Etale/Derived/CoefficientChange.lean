@@ -535,18 +535,6 @@ lemma isStalkPullbackCompatible_geometricStalkRestrictScalarsIso {g : X ⟶ X}
       (leftDerivedUpperStarRestrictScalarsIso_comp_hom_app' ρ h x (x ≫ g) hx.symm)
       (leftDerivedUpperStarRestrictScalarsIso_comp_hom_app' ρ x g (x ≫ g) rfl)) K'
 
-/-- Blueprint `thm-trf-finite-coefficient-map` (subsection `sk-p-trace-coeff`), the pullback
-isomorphism at a geometric point: for a surjection `ρ : Λ →+* Λ'` of finite rings whose exponent
-is invertible on `k`, the canonical coefficient comparison
-`K_x̄ ⊗ᴸ_Λ Λ' ⟶ (K ⊗ᴸ_Λ Λ')_x̄` of geometric stalks
-(`AlgebraicGeometry.Etale.geometricStalkRestrictScalarsIso`) is an isomorphism for every
-`K ∈ Dᵇctf(X, Λ)`. -/
-theorem isCoefficientChange_geometricStalkRestrictScalarsIso [Finite Λ] [Finite Λ']
-    [HasInvertibleExponent Λ (Spec (.of k))] (hρ : Function.Surjective ρ) :
-    IsCoefficientChange ρ (geometricStalk Λ x) (geometricStalk Λ' x)
-      (geometricStalkRestrictScalarsIso ρ x) :=
-  sorry
-
 end Stalk
 
 variable [Finite Λ] [Finite Λ'] {k : Type u} [Field k] [IsSepClosed k] {X : Scheme.{u}}
