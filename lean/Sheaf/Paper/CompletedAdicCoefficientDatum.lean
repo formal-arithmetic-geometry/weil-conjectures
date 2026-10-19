@@ -241,12 +241,112 @@ theorem completedAdicReduction_exists (T : Scheme.{t}) (d : AdicCoefficientDatum
         IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) := by
   sorry
 
+section DerivedReductionModels
+
+variable {B C : Type*} [Category B] [Abelian B] [Category C] [Abelian C]
+  [HasDerivedCategory B] [HasDerivedCategory C]
+  (F : B ⥤ C) [F.Additive] (P : CochainComplex B ℤ → Prop)
+
+/-- A left derived functor, its counit, and its computation on the resolving class.
+Source: Stacks Tag 06YY (blueprint: def-weil-pbc-derived-reduction-model-data). -/
+structure DerivedReductionModelData where
+  reduction : DerivedCategory B ⥤ DerivedCategory C
+  counit : DerivedCategory.Qh ⋙ reduction ⟶
+    F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh
+  isLeftDerived : reduction.IsLeftDerivedFunctor counit
+    (HomotopyCategory.quasiIso B (.up ℤ))
+  isIso_counit : ∀ K : CochainComplex B ℤ, P K →
+    IsIso (counit.app ((HomotopyCategory.quotient B (.up ℤ)).obj K))
+
+/-- Retain the universally specified pair in one record, without changing either choice.
+Source: Stacks Tag 06YY (blueprint: def-weil-pbc-derived-reduction-model-data). -/
+def derivedReductionModelDataOfExists
+    (h : ∃ (LF : DerivedCategory B ⥤ DerivedCategory C)
+      (ε : DerivedCategory.Qh ⋙ LF ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh),
+      LF.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso B (.up ℤ)) ∧
+        ∀ K : CochainComplex B ℤ, P K →
+          IsIso (ε.app ((HomotopyCategory.quotient B (.up ℤ)).obj K))) :
+    DerivedReductionModelData F P where
+  reduction := h.choose
+  counit := h.choose_spec.choose
+  isLeftDerived := h.choose_spec.choose_spec.1
+  isIso_counit := h.choose_spec.choose_spec.2
+
+variable {F P}
+
+/-- The comparison on complexes, including the localization factor isomorphisms.
+Source: Stacks Tag 06YY (blueprint: def-weil-pbc-derived-reduction-model-data). -/
+def DerivedReductionModelData.complexCounit (D : DerivedReductionModelData F P)
+    (K : CochainComplex B ℤ) :
+    D.reduction.obj (DerivedCategory.Q.obj K) ⟶
+      DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj K) :=
+  D.reduction.map ((DerivedCategory.quotientCompQhIso B).inv.app K) ≫
+    D.counit.app ((HomotopyCategory.quotient B (.up ℤ)).obj K) ≫
+    DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors (.up ℤ)).hom.app K) ≫
+    (DerivedCategory.quotientCompQhIso C).hom.app
+      ((F.mapHomologicalComplex (.up ℤ)).obj K)
+
+/-- Computation of the complex comparison on the resolving class.
+Source: Stacks Tag 06YY (blueprint: def-weil-pbc-derived-reduction-model-data).
+Proof: the homotopy counit is invertible by the computation law, and every other
+factor is an image of a localization isomorphism. -/
+theorem DerivedReductionModelData.complexCounit_isIso (D : DerivedReductionModelData F P)
+    (K : CochainComplex B ℤ) (hK : P K) : IsIso (D.complexCounit K) := by
+  have := D.isIso_counit K hK
+  unfold DerivedReductionModelData.complexCounit
+  infer_instance
+
+/-- The right-derived comparison on a complex, with the localization factors retained.
+Source: Stacks Tag 0941 (blueprint: def-weil-pbc-derived-reduction-model-data). -/
+def derivedLimitComplexComparison (L : C ⥤ B) [L.Additive]
+    (RF : DerivedCategory C ⥤ DerivedCategory B)
+    (δ : L.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh ⟶ DerivedCategory.Qh ⋙ RF)
+    (P : CochainComplex C ℤ) :
+    DerivedCategory.Q.obj ((L.mapHomologicalComplex (.up ℤ)).obj P) ⟶
+      RF.obj (DerivedCategory.Q.obj P) :=
+  (DerivedCategory.quotientCompQhIso _).inv.app
+      (((L).mapHomologicalComplex (ComplexShape.up ℤ)).obj P) ≫
+    DerivedCategory.Qh.map
+      (((L).mapHomotopyCategoryFactors (ComplexShape.up ℤ)).inv.app P) ≫
+    δ.app
+      ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P) ≫
+    (RF).map ((DerivedCategory.quotientCompQhIso _).hom.app P)
+
+
+/-- The normalized completion unit on a resolving complex.
+Source: Stacks Tags 06YY and 0941 (blueprint: def-weil-pbc-derived-reduction-model-data). -/
+def derivedCompletionModelUnit (D : DerivedReductionModelData F P)
+    (L : C ⥤ B) [L.Additive] (RF : DerivedCategory C ⥤ DerivedCategory B)
+    (δ : L.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh ⟶ DerivedCategory.Qh ⋙ RF)
+    (u : 𝟭 B ⟶ F ⋙ L) (K : CochainComplex B ℤ) (hK : P K) :
+    DerivedCategory.Q.obj K ⟶ RF.obj (D.reduction.obj (DerivedCategory.Q.obj K)) :=
+  DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex u (.up ℤ)).app K) ≫
+    derivedLimitComplexComparison L RF δ ((F.mapHomologicalComplex (.up ℤ)).obj K) ≫
+      RF.map (@inv _ _ _ _ (D.complexCounit K) (D.complexCounit_isIso K hK))
+
+end DerivedReductionModels
+
+/-- The universal strict reduction pair over the completed coefficients.
+Source: Stacks Tag 06YY (blueprint: def-weil-pbc-derived-reduction-model-data). -/
+abbrev CompletedAdicReductionData (T : Scheme.{t}) (d : AdicCoefficientDatum A) :=
+  DerivedReductionModelData (completedAdicOrdinaryTower T d)
+    (CochainComplex.IsAcyclicTensorKFlat (R := completedAdicCommRing T d))
+
+/-- Bundle the already chosen universal pair. Its universal property determines it
+up to its unique compatible isomorphism.
+Source: Stacks Tag 06YY (blueprint: def-weil-pbc-derived-reduction-model-data). -/
+def completedAdicReductionData (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
+    CompletedAdicReductionData T d :=
+  derivedReductionModelDataOfExists (completedAdicOrdinaryTower T d)
+    (CochainComplex.IsAcyclicTensorKFlat (R := completedAdicCommRing T d))
+    (completedAdicReduction_exists T d)
+
 /-- The reduction tower functor, chosen from its universal derived pair. The universal
 property and invertible K-flat counit determine it up to its unique comparison.
 Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
 def completedAdicReduction (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
     DerivedCategory (CompletedAdicModules T d) ⥤ DerivedCategory (CompletedAdicTowers T d) :=
-  (completedAdicReduction_exists T d).choose
+  (completedAdicReductionData T d).reduction
 
 /-- Exact derived evaluation of strict towers, with every transition retained.
 Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/

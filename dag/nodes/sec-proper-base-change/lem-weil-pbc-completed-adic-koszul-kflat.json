@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-completed-adic-koszul-kflat",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-koszul-reconstruction",
+   "place": "Quasi-isomorphism invariance of the recorded exterior Koszul fibre, bounded finite-free tensor factors"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "K-flatness of the actual completed exterior Koszul complexes",
+ "statement": "Let T be a scheme, A a commutative ring and d an adic coefficient datum [def-weil-pbc-adic-coefficient-datum]. For any finite sequence a in A and natural m, the actual completed exterior Koszul complex completedAdicKoszul(T,d,a,m) of [def-weil-pbc-intrinsic-completion] is K-flat for the sheaf tensor product. No regularity hypothesis on a is needed; the empty sequence and the zero ring are included.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YQ (bounded above complexes of flat modules); Tag 0G7E (change of rings for K-flat complexes)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-intrinsic-completion",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "The constant module-sheaf functor is additive. Its sheafification Hom equivalence and the module-unit/global-sections equivalence show that the specified map from the unit to the constant rank-one module is an isomorphism. The exterior-power basis identifies each exterior Koszul term with a finite coproduct of that unit. This includes exterior degrees exceeding the rank, where the coproduct is empty.",
+   "uses": [
+    "def-weil-pbc-intrinsic-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensoring by a finite coproduct of units is exact. Prove this by the tensor-colimit comparison, pointwise exactness in the functor category and exact finite coproducts in the Grothendieck module category. The reindexed Koszul complex vanishes in positive cochain degrees, and every remaining term is one of these finite free sheaves. The bounded-above flat criterion proves K-flatness of the constant Koszul complex.",
+   "uses": [
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-weil-pbc-independent-bounded-flat-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the change-of-rings K-flat theorem to the constant complex and its flat terms. The object and morphism equations of completedAdicScalarExtensionData give a componentwise complex isomorphism from the recorded completed Koszul complex to that changed complex. Tensor this isomorphism with each acyclic complex and transport vanishing homology.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings",
+    "def-weil-pbc-intrinsic-completion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YQ and 0G7E; exterior basis and normalized scalar-extension computations in Lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The bounded exterior Koszul complex of a finite sequence over a sheaf of rings is K-flat",
+   "results": "8 hits concerning ordinary module flatness and tensor exactness; no matching Koszul K-flat theorem. The existing bounded-flat and change-of-rings declarations are used.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKFlatIndependentCoefficients",
+   "results": "0 hits; the identifier is a project declaration, not a Mathlib theorem.",
+   "date": "2026-10-19",
+   "verdict": "no Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*[Kk][Ff]lat|[Kk][Ff]lat.*koszul",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The bounded exterior Koszul complex of a finite sequence over a sheaf of rings is K-flat",
+   "results": "8 hits, including Module.Flat.of_free and tensor exactness for ordinary modules; no sheaf Koszul K-flat theorem.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.KoszulReconstruction",
+  "date": "2026-10-19",
+  "group": "M6"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedAdicKoszulKFlat",
+  "file": "lean/Sheaf/Paper/CompletedAdicKoszulKFlat.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedAdicKoszul_isKFlat",
+  "statement": "theorem completedAdicKoszul_isKFlat (T : Scheme.{t}) {A : Type t} [CommRing A]\n    (d : AdicCoefficientDatum A) (r : ℕ) (a : Fin r → A) (m : ℕ) :\n    CochainComplex.IsAcyclicTensorKFlat (R := completedAdicCommRing T d)\n      (completedAdicKoszul T d r a m)",
+  "branch": "sheaf-dag",
+  "by": "M6",
+  "date": "2026-10-19"
+ },
+ "proof_deps": [
+  "def-weil-pbc-intrinsic-completion",
+  "lem-pur-kflat-change-of-rings",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-ring-sheaves-grothendieck"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261019T192806-L-1868443",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261019T192806-L-1868443",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
