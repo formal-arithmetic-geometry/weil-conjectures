@@ -69,6 +69,19 @@ structure CoefficientTransposeLaws {A : Type a} [Category.{b} A] [Preadditive A]
   symmetry : ∀ L P phi,
     tau L P phi = (beta P.obj.1.unop L).hom ≫ (S.transpose L P).symm phi
 
+/-- Residue-field inverses transported from the fixed base field. Naming this
+canonical expression avoids repeating its elaboration in the transpose statement.
+Source: blueprint coefficient convention, equivariance proof paragraph 2
+(blueprint: lem-coef-completed-tensor-hom-transpose). -/
+@[instance_reducible] def coefficientTransposeUnits
+    (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
+    (X : Scheme.{u}) [X.Over (Spec (.of D.k))] :
+    ∀ x : X, Invertible (C.l : X.residueField x) :=
+  fun x ↦ (by
+    simpa using (finiteFieldDatumPrimeUnit D C.l C.different).map
+      ((X ↘ Spec (.of D.k)).residueFieldAlgebraMap x) :
+        IsUnit (C.l : X.residueField x)).invertible
+
 /-- Completed and raw rational transposition, with the precise evaluation formula,
 all three naturalities and the signed tensor convention. The permitted pair P
 bundles the node's objects P,Q and exactly its internal-Hom constructibility hypothesis.
@@ -110,39 +123,21 @@ theorem completedTensorHomTranspose
         (L ⟶ (constructibleIntegralHom C.l E X).obj P) ≃ₗ[
           Padic.coefficientExtensionIntegers C.l E]
           ((@constructibleIntegralTensor C.l _ E _ _ _ X
-            (fun x ↦ (by
-              simpa using (finiteFieldDatumPrimeUnit D C.l C.different).map
-                ((X ↘ Spec (.of D.k)).residueFieldAlgebraMap x) :
-                  IsUnit (C.l : X.residueField x)).invertible)).obj (P.obj.1.unop, L) ⟶ P.obj.2),
+            (coefficientTransposeUnits D C X)).obj (P.obj.1.unop, L) ⟶ P.obj.2),
       CoefficientTransposeLaws
-        (@podIntegralClosed C.l _ E _ _ _ X (fun x ↦ (by
-          simpa using (finiteFieldDatumPrimeUnit D C.l C.different).map
-            ((X ↘ Spec (.of D.k)).residueFieldAlgebraMap x) :
-              IsUnit (C.l : X.residueField x)).invertible))
+        (@podIntegralClosed C.l _ E _ _ _ X (coefficientTransposeUnits D C X))
         (@pullbackTensorIntegralBraiding C.l _ E _ _ _ X
-          (fun x ↦ (by
-            simpa using (finiteFieldDatumPrimeUnit D C.l C.different).map
-              ((X ↘ Spec (.of D.k)).residueFieldAlgebraMap x) :
-                IsUnit (C.l : X.residueField x)).invertible))
+          (coefficientTransposeUnits D C X))
         (fun L P phi ↦ tau L P phi)) ∧
     (∃ tau : ∀ (L : sfRationalConstructibleCategory C.l E X)
         (P : (constructibleRationalHomPairs C.l E X).FullSubcategory),
         (L ⟶ (rationalDerivedInternalHom C.l E X).obj P) ≃+
           ((@rationalDerivedTensor C.l _ E _ _ _ X
-            (fun x ↦ (by
-              simpa using (finiteFieldDatumPrimeUnit D C.l C.different).map
-                ((X ↘ Spec (.of D.k)).residueFieldAlgebraMap x) :
-                  IsUnit (C.l : X.residueField x)).invertible)).obj (P.obj.1.unop, L) ⟶ P.obj.2),
+            (coefficientTransposeUnits D C X)).obj (P.obj.1.unop, L) ⟶ P.obj.2),
       CoefficientTransposeLaws
-        (@podRationalClosed C.l _ E _ _ _ X (fun x ↦ (by
-          simpa using (finiteFieldDatumPrimeUnit D C.l C.different).map
-            ((X ↘ Spec (.of D.k)).residueFieldAlgebraMap x) :
-              IsUnit (C.l : X.residueField x)).invertible))
+        (@podRationalClosed C.l _ E _ _ _ X (coefficientTransposeUnits D C X))
         (@pullbackTensorRationalBraiding C.l _ E _ _ _ X
-          (fun x ↦ (by
-            simpa using (finiteFieldDatumPrimeUnit D C.l C.different).map
-              ((X ↘ Spec (.of D.k)).residueFieldAlgebraMap x) :
-                IsUnit (C.l : X.residueField x)).invertible))
+          (coefficientTransposeUnits D C X))
         (fun L P phi ↦ tau L P phi) ∧
       ∀ L P (phi : L ⟶ (rationalDerivedInternalHom C.l E X).obj P) (c : E),
         tau L P ((sfRationalCoefficientEquiv C.l E).symm c • phi) =
