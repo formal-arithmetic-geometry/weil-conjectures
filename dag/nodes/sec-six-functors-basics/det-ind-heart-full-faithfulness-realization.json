@@ -1,0 +1,132 @@
+{
+ "id": "det-ind-heart-full-faithfulness-realization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-ind-heart-full-faithfulness",
+   "place": "steps 3-5: categorical realization after finite presentability",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Generic ind realization by finitely presentable objects",
+ "statement": "Let C be a category with hom sets in universe v and filtered colimits indexed by small categories in Type v. Let P be an object property of C whose full subcategory is essentially small in universe v and such that every P-object is finitely presentable for these filtered colimits. Then there is a functor Φ : Ind(P.FullSubcategory) → C whose restriction along Ind.yoneda is naturally isomorphic to P.ι, which preserves the canonical presentation colimit of every ind-object, is full and faithful, and whose essential image is ObjectProperty.ind P. No isomorphism-closure assumption on P is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-full-faithfulness.proof.md",
+  "place": "paragraph (2), essential-image clause, and unit step 1 (small skeleton)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Let F be the full-subcategory inclusion and N the presheaf-valued restricted Yoneda functor. Construct RZ as the actual colimit of the chosen small filtered presentation of Z after F. The presentation universal property and Yoneda evaluation give inverse maps Hom(RZ,Y) and Nat(Z,N(Y)). Postcomposition is compatible with this equivalence. Define R on morphisms by its inverse applied to precomposition; injectivity proves the identity and composition laws.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transfer arbitrary filtered colimit cocones along the preceding Hom equivalence. The ind inclusion preserves filtered colimits, so the transferred cocone is universal. This proves that R preserves filtered colimits. Apply Yoneda evaluation to the Hom equivalence on representables to construct a natural isomorphism Ind.yoneda composed with R to F.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Finite presentability says each evaluation of N preserves filtered colimits, hence N itself does so. Full faithfulness of F identifies each representable with N(F(X)). Thus the presheaf presentation of Z and the nerve of the defining colimit for RZ are colimits of naturally isomorphic diagrams. The canonical map Z to N(RZ) is their comparison, hence invertible. The Hom equivalence and this invertible map give explicit inverse functions for R on every Hom set, proving fullness and faithfulness.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Every RZ is by definition a filtered colimit of P-objects. This property transports across isomorphisms. Conversely lift a filtered P-presentation of M into the full subcategory, take its ind-colimit, and use preservation of filtered colimits and the Yoneda restriction isomorphism to identify its realization with M. This proves the essential-image equality.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-full-faithfulness.proof.md",
+  "place": "paragraph (2), the essential image clause, and the universal property of colimits"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The ind-category of a full subcategory of finitely presentable objects embeds fully faithfully into the ambient category with filtered colimits",
+   "results": "Ind.inclusion.fullyFaithful; instHasFilteredColimitsInd; isIndObject_colimit; finitely accessible dense subcategory. Read Indization/Category.lean: its fully faithful functor has codomain presheaves, not the ambient category.",
+   "date": "2026-10-18",
+   "verdict": "No theorem with the claimed ambient codomain and realization properties."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Ind",
+   "results": "Ind, Ind.yoneda, instFullIndYoneda, instHasFilteredColimitsInd, instHasColimitsIndOfHasFiniteColimits. Read the declarations in Indization/Category.lean.",
+   "date": "2026-10-18",
+   "verdict": "No ambient realization theorem among these declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "realiz|extension.*Ind|Ind.*extension|Ind.*[Ff]ullyFaithful in Mathlib/CategoryTheory/Limits/Indization",
+   "results": "Ind.inclusion.fullyFaithful and Ind.yoneda.fullyFaithful in Category.lean; no realization extension. Also read IndObject.lean presentations and Adjunction/PartialAdjoint.lean.",
+   "date": "2026-10-18",
+   "verdict": "Presentations and partial adjoints can support the proof, but no existing one-line realization theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-ind-heart",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IndHeartRealization",
+  "file": "lean/Sheaf/Paper/IndHeartRealization.lean",
+  "declaration": "CategoryTheory.ind_realization_of_finitelyPresentable",
+  "statement": "theorem ind_realization_of_finitelyPresentable\n    {C : Type u} [Category.{v} C] [HasFilteredColimits C]\n    (P : ObjectProperty C) [EssentiallySmall.{v} P.FullSubcategory]\n    (hP : ∀ X : P.FullSubcategory,\n      IsFinitelyPresentable.{v} (X.1 : C)) :\n    ∃ Φ : Ind P.FullSubcategory ⥤ C,\n      Nonempty (Ind.yoneda ⋙ Φ ≅ P.ι) ∧\n      (∀ Z : Ind P.FullSubcategory,\n        Nonempty (IsColimit\n          (Φ.mapCocone (colimit.cocone ((Ind.presentation Z).F ⋙ Ind.yoneda))))) ∧\n      Φ.Full ∧ Φ.Faithful ∧\n      (∀ M : C, Φ.essImage M ↔ ObjectProperty.ind.{v} P M)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-19"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IndHeartFullFaithfulness",
+  "group": "M2",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261019T005340-L-2755472",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261019T005340-L-2755472",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

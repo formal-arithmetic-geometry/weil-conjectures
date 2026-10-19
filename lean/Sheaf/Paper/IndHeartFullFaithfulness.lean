@@ -12,11 +12,10 @@ public import Mathlib.CategoryTheory.Limits.Indization.Category
 public import Mathlib.CategoryTheory.Presentable.Finite
 public import Mathlib.CategoryTheory.EssentialImage
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
-import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
-import Sheaf.CategoryTheory.SheafTensorStructure
+import Sheaf.Paper.IndHeartRealization
 import Sheaf.Paper.CoefficientHeartSmall
 import Sheaf.Paper.ConstructibleExtContinuity
-import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
+import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 
 /-!
 # Constructible sheaves are finitely presented and realize the ind-heart fully faithfully
@@ -43,6 +42,53 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
+
+private theorem finitelyPresentable_of_continuity
+    {A : Type*} [Category.{u + 1} A] [HasFilteredColimits A]
+    {D : Type*} [Category.{u + 1} D] [Preadditive D]
+    (F : A ⥤ D) [F.Full] [F.Faithful] (C : A) (T : D) (e : F.obj C ≅ T)
+    (h : ∀ (J : Type (u + 1)) [SmallCategory J] [IsFiltered J] (M : J ⥤ A),
+      IsIso (colimit.post M (F ⋙ preadditiveCoyoneda.obj (Opposite.op T)))) :
+    IsFinitelyPresentable.{u + 1} C := by
+  let G := F ⋙ preadditiveCoyoneda.obj (Opposite.op T)
+  have : PreservesFilteredColimitsOfSize.{u + 1, u + 1} G := by
+    constructor
+    intro J _ _
+    constructor
+    intro M
+    have := h J M
+    exact preservesColimit_of_isIso_post G M
+  let i : coyoneda.obj (Opposite.op C) ≅ G ⋙ forget AddCommGrpCat :=
+    NatIso.ofComponents (fun Y ↦
+      ((Functor.FullyFaithful.ofFullyFaithful F).homEquiv.trans
+        (Iso.homCongr e (Iso.refl (F.obj Y)))).toIso) (by
+          intro Y Z f
+          ext g
+          change e.inv ≫ F.map (g ≫ f) ≫ 𝟙 _ =
+            (e.inv ≫ F.map g ≫ 𝟙 _) ≫ F.map f
+          simp [Functor.map_comp, Category.assoc])
+  rw [isFinitelyPresentable_iff_preservesFilteredColimitsOfSize]
+  exact ⟨fun J _ _ ↦ preservesColimitsOfShape_of_natIso i.symm⟩
+
+private theorem constructible_finitelyPresentable
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (R : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
+    [IsCommMonObj (coefficientHeartRingObj R)]
+    (hR : R = Profinite.padicSubfieldCondensedRing ℓ E ∨
+      R = Profinite.padicAlgClCondensedRing ℓ)
+    (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
+    (C : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (coefficientHeartRingObj R) X))
+    (hC : IsConstantModelConstructible (coefficientHeartRingObj R) X C) :
+    IsFinitelyPresentable.{u + 1} C := by
+  let S := DerivedCategory.singleFunctor
+    (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (coefficientHeartRingObj R) X)) 0
+  apply finitelyPresentable_of_continuity
+    (S ⋙ shiftFunctor _ (0 : ℤ)) C (S.obj C) ((shiftFunctorZero _ ℤ).app (S.obj C))
+  intro J _ _ M
+  exact constructible_sheaf_ext_continuity ℓ E R hR X C hC M
+    (colimit.cocone M) (colimit.isColimit M) 0
 
 /-- The two assertions of det-ind-heart-full-faithfulness for a condensed coefficient ring
 object `Λ` and a scheme `X`, in `Mod_{Λ_X}` (internal modules over `Λ_X = p_X^* Λ`):
@@ -110,6 +156,32 @@ theorem indHeart_fullFaithfulness
     (∀ E : PadicAlgCl.FiniteIntermediateField ℓ,
       IndHeartFullFaithfulnessAssertions (Profinite.continuousMapRingObj.{u} E) X) ∧
     IndHeartFullFaithfulnessAssertions (Profinite.padicAlgClRingObj.{u} ℓ) X := by
-  sorry
-
+  constructor
+  · intro E
+    let R := Profinite.padicSubfieldCondensedRing ℓ E
+    let P := IsConstantModelConstructible (coefficientHeartRingObj R) X
+    let C := ObjectProperty.FullSubcategory P
+    let M := CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (coefficientHeartRingObj R) X)
+    have hfp : ∀ Y : C, IsFinitelyPresentable.{u + 1} (Y.1 : M) := by
+      intro Y
+      exact constructible_finitelyPresentable ℓ E R (Or.inl rfl) X Y.1 Y.2
+    have : EssentiallySmall.{u + 1} C :=
+      coefficientHeart_essentiallySmall ℓ R (Or.inl ⟨E.1, E.2, rfl⟩) X
+    obtain ⟨Φ, hyon, hcol, hfull, hfaith, himage⟩ :=
+      ind_realization_of_finitelyPresentable P hfp
+    exact ⟨hfp, Φ, hyon, hcol, hfull, hfaith, himage⟩
+  · let R := Profinite.padicAlgClCondensedRing ℓ
+    let P := IsConstantModelConstructible (coefficientHeartRingObj R) X
+    let C := ObjectProperty.FullSubcategory P
+    let M := CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (coefficientHeartRingObj R) X)
+    have hfp : ∀ Y : C, IsFinitelyPresentable.{u + 1} (Y.1 : M) := by
+      intro Y
+      exact constructible_finitelyPresentable ℓ (Classical.arbitrary _) R (Or.inr rfl) X Y.1 Y.2
+    have : EssentiallySmall.{u + 1} C :=
+      coefficientHeart_essentiallySmall ℓ R (Or.inr rfl) X
+    obtain ⟨Φ, hyon, hcol, hfull, hfaith, himage⟩ :=
+      ind_realization_of_finitelyPresentable P hfp
+    exact ⟨hfp, Φ, hyon, hcol, hfull, hfaith, himage⟩
 end AlgebraicGeometry.ProEtale
