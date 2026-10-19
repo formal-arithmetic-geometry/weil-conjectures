@@ -12,10 +12,10 @@ public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Algebra.Category.Ring.FilteredColimits
 public import Mathlib.CategoryTheory.Sites.Limits
 public import Mathlib.CategoryTheory.Sites.Pullback
-import Sheaf.Paper.SliceSiteLocalization
-import Sheaf.CategoryTheory.SiteCoveringAxioms
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.CategoryTheory.Sites.LocalizedSheavesOverRepresentable
+import Sheaf.CategoryTheory.Sites.LocalizedSetPullbackComparison
+import Sheaf.CategoryTheory.Sites.LocalizedCommRingPullbackComparison
+import Sheaf.CategoryTheory.Sites.LocalizedModulePullbackComparison
 
 /-!
 # Localization of ringed-site morphisms without extra covering axioms
@@ -59,6 +59,8 @@ abbrev ringedSiteModuleMap :
         ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S) :=
   (sheafCompose K (forget₂ CommRingCat RingCat)).map a
 
+-- Keep the original existential witness names in the unchanged statement.
+set_option linter.unusedVariables false in
 set_option maxHeartbeats 800000 in
 -- The statement expands the set, ring and module comparison squares.
 /-- The slice inverse image and restricted structural map give the canonical module square.
@@ -124,6 +126,20 @@ theorem localize_ringed_site_morphism_general
                       (localizedRingedSiteMap u a V))).homEquiv _ _).symm
                     ((overFunctor ((sheafCompose K (forget₂ CommRingCat RingCat)).obj R) V).map
                       h ≫ beta.hom.app B) := by
-  sorry
+  let hc := overPost_isContinuous K J u V
+  let hl := sliceSetPullback_preservesFiniteLimits (K := K) (J := J) u V
+  let := sliceSetPullbackMap_isIso (K := K) (J := J) u V
+  let es := asIso (sliceSetPullbackMap (K := K) (J := J) u V)
+  let := sliceCommRingPullbackMap_isIso (K := K) (J := J) u V
+  let er := asIso (sliceCommRingPullbackMap (K := K) (J := J) u V)
+  let := sliceModulePullbackMap_isIso u a V
+  let lambda := asIso (sliceModulePullbackMap u (ringedSiteModuleMap u a) V)
+  let beta := sliceModulePushforwardIso u (ringedSiteModuleMap u a) V
+  refine ⟨hc, hl, es, er, ?_, lambda, beta, ?_, ?_⟩
+  · exact sliceCommRingPullbackMap_adjunct u V a
+  · intro G T x
+    rfl
+  · intro A B h
+    exact sliceModulePullbackMap_adjunct u (ringedSiteModuleMap u a) V A B h
 
 end SheafOfModules

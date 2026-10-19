@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-slice-commRing-pullback-isIso",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-perfect-projection-formula",
+   "place": "Detailed form, proof: locality on the target in Stacks 0944 before the finite-complex reduction; localization of the ringed-site morphism at the chosen target object.",
+   "via": [
+    "lem-weil-pbc-localize-ringed-site-morphism",
+    "lem-weil-pbc-ringed-projection-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Invertibility of the canonical commutative-ring slice inverse mate",
+ "statement": "Let $(D,K)$ and $(C,J)$ be small sites [def-weil-pbc-sites-and-cohomology], and $u:D\\to C$ continuous with finite-limit-preserving inverse image on set sheaves. Fix $V\\in D$ and assume the induced $u_V:D/V\\to C/u(V)$ is continuous for the localized topologies [def-pur-localized-ringed-site]. Let $L,L_V$ be the chosen left adjoints on sheaves of commutative rings to precomposition $P,P_V$. Let $j_V,j_U$ be sectionwise restriction, where $U=u(V)$. The direct-image comparison $b:Pj_V\\cong j_UP_V$ is identity on every section. The inverse mate $j_VL_V\\to Lj_U$ of $b$, formed using the chosen sheaf adjunctions, is an isomorphism. Here the inverse mate at A is adjunct to $j_V(\\eta_A)$ followed by $b_{L A}$. This is a statement about that specified map, not just existence of some comparison.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04J0, lemma-localize-morphism-ringed-sites, using Sites Tag 03CF and Tag 00YV"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved normalized set inverse mate and the proved finite-limit preservation theorem for localized set inverse image from the set comparison module.",
+   "uses": [
+    "lem-weil-pbc-slice-set-pullback-isIso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the lifted ring adjunction from the product-preserving set inverse image using the sectionwise equivalence with internal ring objects. Transport by uniqueness of left adjoints, retaining the unit normalization for the forgetful comparison.",
+   "uses": [
+    "lem-weil-pbc-lifted-comm-ring-branch",
+    "lem-weil-pbc-sheaf-algebraic-structures-ring-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the unit equations and injectivity of the localized set adjunction to identify the underlying ring comparison, conjugated by the normalized forgetful isomorphisms, with sliceSetPullbackMap. The forgetful functor reflects isomorphisms, so every component and hence the ring natural transformation is invertible.",
+   "uses": [
+    "lem-weil-pbc-slice-set-pullback-isIso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lifted-comm-ring-branch",
+  "lem-weil-pbc-sheaf-algebraic-structures-ring-core",
+  "lem-weil-pbc-slice-set-pullback-isIso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04J0, lemma-localize-morphism-ringed-sites, using Sites Tag 03CF and Tag 00YV"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical inverse mate for sheaves of rings on localized sites is an isomorphism",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.isoSheafify_inv, AlgebraicGeometry.Scheme.Hom.inv_app, CategoryTheory.sheafificationIso_inv_val, CategoryTheory.isoSheafify_inv, ModuleCat.Tilde.stalkIso_inv, AlgebraicGeometry.Scheme.inv_app, CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+   "date": "2026-10-18",
+   "verdict": "No exact match; inspected results are general mate, pullback composition, or special slice functors, not this canonical arbitrary-site comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of ringed sites pullback of module sheaves commutes with restriction to slice category",
+   "results": "8 hits: SheafOfModules.pullback_assoc, SheafOfModules.pullbackComp, SheafOfModules.pullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-18",
+   "verdict": "No exact match; inspected results are general mate, pullback composition, or special slice functors, not this canonical arbitrary-site comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "over.*(pullback|Pullback).*([Cc]omp|[Aa]dj)|[Bb]eck[Cc]hevalley|[Ee]xact[Ss]quare",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/ColimitsOver.lean, Mathlib/AlgebraicGeometry/ColimitsOver.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Cover/Open.lean",
+   "date": "2026-10-18",
+   "verdict": "No exact match; inspected results are general mate, pullback composition, or special slice functors, not this canonical arbitrary-site comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocalizeRingedSiteMorphismGeneral",
+  "date": "2026-10-18",
+  "group": "Q1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.LocalizedCommRingPullbackComparison",
+  "file": "lean/Sheaf/CategoryTheory/Sites/LocalizedCommRingPullbackComparison.lean",
+  "declaration": "CategoryTheory.sliceCommRingPullbackMap_isIso",
+  "statement": "theorem sliceCommRingPullbackMap_isIso [PreservesFiniteLimits (u.sheafPullback (Type u) K J)] : IsIso (sliceCommRingPullbackMap (K := K) (J := J) u V)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-18",
+  "declarations": [
+   "CategoryTheory.sliceCommRingPushforwardIso",
+   "CategoryTheory.sliceCommRingPullbackMap",
+   "CategoryTheory.sliceCommRingPullbackMap_unit",
+   "CategoryTheory.sliceCommRingPullbackMap_eq_of_unit",
+   "CategoryTheory.sliceCommRingPullbackMap_adjunct",
+   "CategoryTheory.sliceCommRingPullbackMap_isIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261019T122627-L-476681",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261019T122627-L-476681",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

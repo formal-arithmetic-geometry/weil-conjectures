@@ -17392,3 +17392,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:26 L: merged deliver/K6/Sheaf.AlgebraicGeometry.NormalGeometricCoverComponents (stage 3; reviewer PASS; first push; landing 20261019T122618-L-474712 (proof); batch 20261019T121044; modules 1; new nodes 0)
 - 12:26 L: merged deliver/M9/Sheaf.AlgebraicGeometry.PurityAffineLineComponents (stage 3; reviewer PASS; first push; landing 20261019T122622-L-475538 (proof); batch 20261019T121044; modules 1; new nodes 0)
 - 12:26 L: merged deliver/M9/Sheaf.Paper.SmoothExceptionalBaseChangeStatement (stage 3; reviewer PASS; first push; landing 20261019T122625-L-475954 (proof); batch 20261019T121044; modules 1; new nodes 0)
+- 12:26 L: merged deliver/Q1/Sheaf.Paper.LocalizeRingedSiteMorphismGeneral (stage 3; reviewer PASS; first push; landing 20261019T122627-L-476681 (interface); batch 20261019T121044; modules 5; new nodes 4; change records: coord/changes/over-post-continuity.md)

@@ -1,0 +1,160 @@
+{
+ "id": "lem-weil-pbc-slice-set-pullback-isIso",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-perfect-projection-formula",
+   "place": "Detailed form, proof: locality on the target in Stacks 0944 before the finite-complex reduction; localization of the ringed-site morphism at the chosen target object.",
+   "via": [
+    "lem-weil-pbc-localize-ringed-site-morphism",
+    "lem-weil-pbc-ringed-projection-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Invertibility of the canonical set-sheaf slice inverse mate",
+ "statement": "Let $(D,K)$ and $(C,J)$ be small sites [def-weil-pbc-sites-and-cohomology], and $u:D\\to C$ continuous with finite-limit-preserving inverse image on set sheaves. Fix $V\\in D$ and assume the induced $u_V:D/V\\to C/u(V)$ is continuous for the localized topologies [def-pur-localized-ringed-site]. Let $L,L_V$ be the chosen left adjoints on sheaves of sets to precomposition $P,P_V$. Let $j_V,j_U$ be sectionwise restriction, where $U=u(V)$. The direct-image comparison $b:Pj_V\\cong j_UP_V$ is identity on every section. The inverse mate $j_VL_V\\to Lj_U$ of $b$, formed using the chosen sheaf adjunctions, is an isomorphism. Here the inverse mate at A is adjunct to $j_V(\\eta_A)$ followed by $b_{L A}$. This is a statement about that specified map, not just existence of some comparison. The localized inverse image also preserves finite limits.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03CF, lemma-localize-morphism, product calculation, using Tag 00Y1"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "Use the sheafified-representable presentation of slices and the Yoneda adjunction to identify the localized inverse image. Restriction corresponds to product with the sheafified representable. The global inverse image preserves that product and therefore gives the canonical restriction comparison.",
+   "uses": [
+    "lem-weil-pbc-localized-sheaves-over-representable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CF, lemma-localize-morphism, middle diagram and final paragraph"
+   }
+  },
+  {
+   "text": "Under the equivalences between slice sheaves and objects over the sheafified representable, use the induced over-category adjunction. The product comparison is invertible by finite-limit preservation. Its mate has second projection equal to the original section, by naturality of the global unit and the right triangle identity. Consequently its direct-image square is the identity on sections. Uniqueness under the localized adjunction identifies it with sliceSetPullbackMap.",
+   "uses": [
+    "lem-weil-pbc-localized-sheaves-over-representable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CF, lemma-localize-morphism, product calculation, using Tag 00Y1"
+   }
+  },
+  {
+   "text": "For localized finite-limit preservation, transport the localized inverse image across the fibre/extension equivalences by the normalized induced over-category adjunction. The comparison identifies it with Over.post of the global inverse image followed by Over.map of the proved representable isomorphism. Over.post preserves finite limits, Over.map of an isomorphism is an equivalence, and the extension equivalences preserve and reflect finite limits. Apply the explicit composition lemma to combine the finite-limit preservation instances.",
+   "uses": [
+    "lem-weil-pbc-localized-sheaves-over-representable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CF, lemma-localize-morphism, exactness paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localized-sheaves-over-representable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03CF, lemma-localize-morphism, product calculation, using Tag 00Y1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical inverse image comparison with localization of a site is an isomorphism when inverse image of set sheaves preserves finite limits",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms, CategoryTheory.GrothendieckTopology.instIsIsoSheafAppFunctorOppositeSheafComposeNatTransPlusPlusAdjunction, CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction, CategoryTheory.GrothendieckTopology.W_inverseImage_whiskeringLeft, CategoryTheory.Functor.IsCoverDense.iso_of_restrict_iso, CategoryTheory.Functor.IsCoverDense.sheafIso, CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense, CategoryTheory.Functor.IsCoverDense.presheafIso",
+   "date": "2026-10-18",
+   "verdict": "No canonical normalized slice comparison; the mate API supplies normalization identities, and the geometric invertibility remains to be proved."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-18",
+   "verdict": "No canonical normalized slice comparison; the mate API supplies normalization identities, and the geometric invertibility remains to be proved."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback.*[Ff]orget|[Ff]orget.*sheafPullback",
+   "results": "1 hits: Mathlib/Topology/Sheaves/Functors.lean",
+   "date": "2026-10-18",
+   "verdict": "No canonical normalized slice comparison; the mate API supplies normalization identities, and the geometric invertibility remains to be proved."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of a geometric morphism of sites gives a finite limit preserving inverse image on slice sheaves and a canonical invertible restriction comparison",
+   "results": "8 hits: CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, CategoryTheory.GrothendieckTopology.preservesFiniteLimits_sheafification, CategoryTheory.Sheaf.instPreservesFiniteLimitsFunctorOppositeSheafToPresheafOfHasFiniteLimits, CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafLeftAdjointSheafToPresheaf, CategoryTheory.Localization.instPreservesFiniteProductsLocalization'Q', CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafReflectorSheafToPresheaf",
+   "date": "2026-10-19",
+   "verdict": "General sheaf pullback and sheafification exactness results require stronger hypotheses or concern different functors; none gives the normalized slice comparison. Transport through the slice equivalences gives the needed exactness here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocalizeRingedSiteMorphismGeneral",
+  "date": "2026-10-19",
+  "group": "Q1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.LocalizedSetPullbackComparison",
+  "file": "lean/Sheaf/CategoryTheory/Sites/LocalizedSetPullbackComparison.lean",
+  "declaration": "CategoryTheory.sliceSetPullbackMap_isIso",
+  "statement": "theorem sliceSetPullbackMap_isIso\n    [PreservesFiniteLimits (u.sheafPullback (Type u) K J)] :\n    IsIso (sliceSetPullbackMap (K := K) (J := J) u V)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-19",
+  "declarations": [
+   "CategoryTheory.sliceSetPushforwardIso",
+   "CategoryTheory.sliceSetPullbackMap",
+   "CategoryTheory.sliceSetPullbackMap_unit",
+   "CategoryTheory.sliceSetPullbackMap_eq_of_unit",
+   "CategoryTheory.sliceSetPullbackMap_isIso",
+   "CategoryTheory.sliceSetPullback_preservesFiniteLimits"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261019T122627-L-476681",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261019T122627-L-476681",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.Over
 public import Mathlib.CategoryTheory.Sites.Sheafification
 import Mathlib.CategoryTheory.Sites.LocallyBijective
+import Mathlib.CategoryTheory.Sites.Continuous
 
 /-!
 # Localized sheaves over a sheafified representable
@@ -490,4 +491,144 @@ theorem exists_localizedSheavesOverRepresentable
     fun F X ↦ Equiv.refl _, ?_, ?_⟩
   all_goals intros; rfl
 
+/-- The fibre/extension equivalence for an arbitrary Grothendieck topology.
+Source: Stacks Project, Sites, Tag 00Y1, lemma-essential-image-j-shriek.
+(blueprint: lem-weil-pbc-localized-sheaves-over-representable).
+
+Proof: use the same disjoint-union presheaf, sheafification, and fibre constructions
+as in the precoverage interface. The unit is locally bijective by local representation
+of sheafification sections and local equality of representable arrows; the counit is
+locally bijective by forgetting those arrows. Their already proved formulas supply
+the equivalence and all the displayed section and restriction identifications.
+None of these constructions needs a precoverage presentation of the topology. -/
+theorem exists_localizedSheavesOverRepresentable_general
+    {C : Type u} [SmallCategory C]
+    (J : GrothendieckTopology C) [HasWeakSheafify J (Type u)] (U : C) :
+    ∃ (P : Sheaf (J.over U) (Type u) ⥤ Over (yoneda.obj U))
+      (e : ∀ (H : Sheaf (J.over U) (Type u)) (X : C),
+        (P.obj H).left.obj (op X) ≃ Σ a : X ⟶ U, H.obj.obj (op (Over.mk a))),
+      (∀ (H : Sheaf (J.over U) (Type u)) (X : C)
+        (z : (P.obj H).left.obj (op X)),
+        (P.obj H).hom.app (op X) z = (e H X z).1) ∧
+      (∀ (H : Sheaf (J.over U) (Type u)) (X Y : C)
+        (b : Y ⟶ X) (a : X ⟶ U) (s : H.obj.obj (op (Over.mk a))),
+        e H Y ((P.obj H).left.map b.op ((e H X).symm ⟨a, s⟩)) =
+          ⟨b ≫ a, H.obj.map (Over.homMk b rfl).op s⟩) ∧
+      (∀ (H H' : Sheaf (J.over U) (Type u)) (f : H ⟶ H')
+        (X : C) (a : X ⟶ U) (s : H.obj.obj (op (Over.mk a))),
+        e H' X ((P.map f).left.app (op X) ((e H X).symm ⟨a, s⟩)) =
+          ⟨a, f.hom.app (op (Over.mk a)) s⟩) ∧
+      ∃ E : Sheaf (J.over U) (Type u) ≌
+          Over ((presheafToSheaf J (Type u)).obj (yoneda.obj U)),
+        Nonempty (E.functor ≅ P ⋙ Over.post (presheafToSheaf J (Type u))) ∧
+        ∃ r : ∀ (F : Over
+            ((presheafToSheaf J (Type u)).obj (yoneda.obj U))) (X : Over U),
+            (E.inverse.obj F).obj.obj (op X) ≃
+              {s : F.left.obj.obj (op X.left) |
+                F.hom.hom.app (op X.left) s =
+                  (toSheafify J (yoneda.obj U)).app (op X.left) X.hom},
+          (∀ (F : Over
+              ((presheafToSheaf J (Type u)).obj (yoneda.obj U)))
+            (X Y : Over U) (b : X ⟶ Y) (s : (E.inverse.obj F).obj.obj (op Y)),
+            (r F X ((E.inverse.obj F).obj.map b.op s)).val =
+              F.left.obj.map b.left.op (r F Y s).val) ∧
+          (∀ (F G : Over
+              ((presheafToSheaf J (Type u)).obj (yoneda.obj U)))
+            (f : F ⟶ G) (X : Over U) (s : (E.inverse.obj F).obj.obj (op X)),
+            (r G X ((E.inverse.map f).hom.app (op X) s)).val =
+              f.left.hom.app (op X.left) (r F X s).val) := by
+  classical
+  let K := J
+  let P := sigmaFunctor K U
+  let Efun := extensionFunctor K U
+  let R := fibreFunctor K U
+  have : IsIso (unitTransformation K U) := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    exact unitComparison_isIso K U
+  have : IsIso (counitTransformation K U) := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    exact counitComparison_isIso K U
+  let E : Sheaf (K.over U) (Type u) ≌
+      Over ((presheafToSheaf K (Type u)).obj (yoneda.obj U)) :=
+    Equivalence.mk Efun R (asIso (unitTransformation K U))
+      (asIso (counitTransformation K U))
+  refine ⟨P, fun H X ↦ Equiv.refl _, ?_, ?_, ?_, E, ⟨Iso.refl _⟩,
+    fun F X ↦ Equiv.refl _, ?_, ?_⟩
+  all_goals intros; rfl
+
+private def pulledFibre {D C : Type u} [SmallCategory D] [SmallCategory C]
+    (K : GrothendieckTopology D) (J : GrothendieckTopology C) (f : D ⥤ C)
+    [f.IsContinuous K J] (V : D)
+    (F : Over ((presheafToSheaf J (Type u)).obj (yoneda.obj (f.obj V)))) :
+    Subfunctor (((f.sheafPushforwardContinuous (Type u) K J).obj F.left).over V).obj where
+  obj X := {s | F.hom.hom.app (op (f.obj X.unop.left)) s =
+    (toSheafify J (yoneda.obj (f.obj V))).app (op (f.obj X.unop.left))
+      (f.map X.unop.hom)}
+  map {X Y} b s hs := by
+    change F.hom.hom.app _ (F.left.obj.map (f.map b.unop.left).op s) = _
+    rw [NatTrans.naturality_apply, hs, ← NatTrans.naturality_apply]
+    congr 1
+    change f.map b.unop.left ≫ f.map X.unop.hom = f.map Y.unop.hom
+    rw [← f.map_comp, Over.w]
+
+private theorem pulledFibre_isSheaf {D C : Type u} [SmallCategory D] [SmallCategory C]
+    (K : GrothendieckTopology D) (J : GrothendieckTopology C) (f : D ⥤ C)
+    [f.IsContinuous K J] (V : D)
+    (F : Over ((presheafToSheaf J (Type u)).obj (yoneda.obj (f.obj V)))) :
+    Presheaf.IsSheaf (K.over V) (pulledFibre K J f V F).toFunctor := by
+  apply (isSheaf_iff_isSheaf_of_type _ _).mpr
+  apply (Subfunctor.isSheaf_iff _
+    ((isSheaf_iff_isSheaf_of_type _ _).mp
+      (((f.sheafPushforwardContinuous (Type u) K J).obj F.left).over V).property)).mpr
+  intro X s hs
+  change F.hom.hom.app _ s = _
+  let Q := (((f.sheafPushforwardContinuous (Type u) K J).obj
+    ((presheafToSheaf J (Type u)).obj (yoneda.obj (f.obj V)))).over V)
+  apply (((isSheaf_iff_isSheaf_of_type _ _).mp Q.property).isSeparated _ hs).ext
+  intro Y b hb
+  change (sheafify J (yoneda.obj (f.obj V))).map (f.map b.left).op
+    (F.hom.hom.app _ s) = _
+  change (sheafify J (yoneda.obj (f.obj V))).map (f.map b.left).op
+    (F.hom.hom.app _ s) =
+    (sheafify J (yoneda.obj (f.obj V))).map (f.map b.left).op
+      ((toSheafify J (yoneda.obj (f.obj V))).app _ (f.map X.unop.hom))
+  rw [← NatTrans.naturality_apply, ← NatTrans.naturality_apply]
+  change F.hom.hom.app _ (F.left.obj.map (f.map b.left).op s) =
+    (toSheafify J (yoneda.obj (f.obj V))).app _ (f.map b.left ≫ f.map X.unop.hom)
+  rw [← f.map_comp, Over.w]
+  exact hb
+
+/-- A continuous functor remains continuous after localization at an object.
+Source: Stacks Project, Sites, Tag 03CF, first sentence of its proof. A slice
+sheaf is the fibre of a map of global sheaves over a sheafified representable
+(Tag 00Y1). Precomposition preserves global sheaves and their fibres, and the
+unit of the fibre/extension equivalence identifies this fibre with slice
+precomposition. (blueprint: lem-weil-pbc-over-post-continuous-general). -/
+theorem overPost_isContinuous {D C : Type u} [SmallCategory D] [SmallCategory C]
+    (K : GrothendieckTopology D) (J : GrothendieckTopology C) (f : D ⥤ C)
+    [f.IsContinuous K J] (V : D) :
+    (Over.post (X := V) f).IsContinuous (K.over V) (J.over (f.obj V)) := by
+  constructor
+  intro H
+  obtain ⟨_, _, _, _, _, E, _, r, hr, _⟩ :=
+    exists_localizedSheavesOverRepresentable_general J (f.obj V)
+  let F := E.functor.obj H
+  let q : (Over.post (X := V) f).op ⋙ (E.inverse.obj F).obj ≅
+      (pulledFibre K J f V F).toFunctor :=
+    NatIso.ofComponents
+      (fun X ↦ (r F ((Over.post (X := V) f).obj X.unop)).toIso) (by
+        intro X Y b
+        apply ConcreteCategory.hom_ext
+        intro s
+        apply Subtype.ext
+        exact hr F ((Over.post (X := V) f).obj Y.unop)
+          ((Over.post (X := V) f).obj X.unop) ((Over.post (X := V) f).map b.unop) s)
+  let e' : (Over.post (X := V) f).op ⋙ H.obj ≅
+      (pulledFibre K J f V F).toFunctor :=
+    Functor.isoWhiskerLeft (Over.post (X := V) f).op
+      ((sheafToPresheaf (J.over (f.obj V)) (Type u)).mapIso (E.unitIso.app H)) ≪≫ q
+  exact (isSheaf_iff_isSheaf_of_type _ _).mp
+    ((Presheaf.isSheaf_of_iso_iff e').mpr (pulledFibre_isSheaf K J f V F))
+
 end CategoryTheory
+

@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-over-post-continuous-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-perfect-projection-formula",
+   "place": "Detailed form, proof: locality on the target in Stacks 0944 before the finite-complex reduction; localization of the ringed-site morphism at the chosen target object.",
+   "via": [
+    "lem-weil-pbc-localize-ringed-site-morphism",
+    "lem-weil-pbc-ringed-projection-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Continuity of the functor on localized sites",
+ "statement": "Let $(D,K)$ and $(C,J)$ be small sites [def-weil-pbc-sites-and-cohomology], and let $u:D\\to C$ be continuous, meaning that precomposition carries sheaves of sets to sheaves. For every $V\\in D$, the functor $u_V:D/V\\to C/u(V)$ sending $(T,a)$ to $(u(T),u(a))$ is continuous for the localized Grothendieck topologies [def-pur-localized-ringed-site]. No finite-limit hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03CF, lemma-localize-morphism, first sentence of proof, via Tag 00Y1 fibres"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "For a slice sheaf H on C/u(V), the fibre/extension equivalence writes H as the fibre of a map F to the sheafified representable of u(V). Use its explicit extension and invertible unit.",
+   "uses": [
+    "lem-weil-pbc-localized-sheaves-over-representable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00Y1, lemma-essential-image-j-shriek"
+   }
+  },
+  {
+   "text": "Pull F back by precomposition with u, and restrict to D/V. Both resulting ambient presheaves are sheaves by continuity and slice restriction. Their fibre consists of s such that p(s) is eta(u(a)). Naturality preserves this condition. A section locally satisfying the condition satisfies it globally by separatedness of the pulled-back sheafified representable, so Subfunctor.isSheaf_iff proves that this fibre is a sheaf.",
+   "uses": [
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CF, lemma-localize-morphism, continuity sentence; explicit fibre verification"
+   }
+  },
+  {
+   "text": "Whisker the invertible unit of the fibre/extension equivalence by u_V. This identifies precomposition of H with the fibre just proved to be a sheaf. Sheafness is invariant under this presheaf isomorphism, which is precisely continuity.",
+   "uses": [
+    "lem-weil-pbc-localized-sheaves-over-representable"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CF, lemma-localize-morphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-localized-sheaves-over-representable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03CF, lemma-localize-morphism, first sentence of proof, via Tag 00Y1 fibres"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A continuous functor between Grothendieck sites stays continuous on slice sites",
+   "results": "8 hits: CategoryTheory.Functor.IsContinuous.mk, CategoryTheory.Functor.IsContinuous, CategoryTheory.Functor.isContinuous_of_coverPreserving, CategoryTheory.Functor.IsDenseSubsite.instIsContinuous, CategoryTheory.GrothendieckTopology.instIsContinuousOverForgetOver, CategoryTheory.Functor.isContinuous_comp, CategoryTheory.Functor.IsCocontinuous, CategoryTheory.Functor.isContinuous_comp'",
+   "date": "2026-10-18",
+   "verdict": "No exact match; inspected results are general mate, pullback composition, or special slice functors, not this canonical arbitrary-site comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous functor induces a continuous functor on over categories with localized Grothendieck topologies",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.instIsContinuousOverMapOver, CategoryTheory.GrothendieckTopology.instIsContinuousOverForgetOver, CategoryTheory.instIsContinuousOverLeftDiscretePUnitIteratedSliceForwardOver, CategoryTheory.instIsContinuousOverLeftDiscretePUnitIteratedSliceBackwardOver, CategoryTheory.GrothendieckTopology.instIsCocontinuousOverForgetOver, CategoryTheory.Functor.inducedTopology_isCocontinuous, CategoryTheory.instIsCocontinuousOverLeftDiscretePUnitIteratedSliceForwardOver, CategoryTheory.Functor.isContinuous_comp'",
+   "date": "2026-10-18",
+   "verdict": "No exact match; inspected results are general mate, pullback composition, or special slice functors, not this canonical arbitrary-site comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "over.*(pullback|Pullback).*([Cc]omp|[Aa]dj)|[Bb]eck[Cc]hevalley|[Ee]xact[Ss]quare",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/ColimitsOver.lean, Mathlib/AlgebraicGeometry/ColimitsOver.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Cover/Open.lean",
+   "date": "2026-10-18",
+   "verdict": "No exact match; inspected results are general mate, pullback composition, or special slice functors, not this canonical arbitrary-site comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocalizeRingedSiteMorphismGeneral",
+  "date": "2026-10-18",
+  "group": "Q1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.LocalizedSheavesOverRepresentable",
+  "file": "lean/Sheaf/CategoryTheory/Sites/LocalizedSheavesOverRepresentable.lean",
+  "declaration": "CategoryTheory.overPost_isContinuous",
+  "statement": "theorem overPost_isContinuous {D C : Type u} [SmallCategory D] [SmallCategory C] (K : GrothendieckTopology D) (J : GrothendieckTopology C) (f : D ⥤ C) [f.IsContinuous K J] (V : D) : (Over.post (X := V) f).IsContinuous (K.over V) (J.over (f.obj V))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261019T122627-L-476681",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261019T122627-L-476681",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

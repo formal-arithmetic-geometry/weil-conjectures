@@ -254,26 +254,27 @@
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.Sites.LocalizedSheavesOverRepresentable",
-  "declaration": "CategoryTheory.exists_localizedSheavesOverRepresentable",
+  "declaration": "CategoryTheory.exists_localizedSheavesOverRepresentable_general",
   "declarations": [
-   "CategoryTheory.exists_localizedSheavesOverRepresentable"
+   "CategoryTheory.exists_localizedSheavesOverRepresentable",
+   "CategoryTheory.exists_localizedSheavesOverRepresentable_general"
   ],
   "file": "lean/Sheaf/CategoryTheory/Sites/LocalizedSheavesOverRepresentable.lean",
-  "statement": "theorem exists_localizedSheavesOverRepresentable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (U : C) : ∃ (P : Sheaf (J.over U) (Type u) ⥤ Over (yoneda.obj U)) (e : ∀ (H : Sheaf (J.over U) (Type u)) (X : C), (P.obj H).left.obj (op X) ≃ Σ a : X ⟶ U, H.obj.obj (op (Over.mk a))), (∀ (H : Sheaf (J.over U) (Type u)) (X : C) (z : (P.obj H).left.obj (op X)), (P.obj H).hom.app (op X) z = (e H X z).1) ∧ (∀ (H : Sheaf (J.over U) (Type u)) (X Y : C) (b : Y ⟶ X) (a : X ⟶ U) (s : H.obj.obj (op (Over.mk a))), e H Y ((P.obj H).left.map b.op ((e H X).symm ⟨a, s⟩)) = ⟨b ≫ a, H.obj.map (Over.homMk b rfl).op s⟩) ∧ (∀ (H H' : Sheaf (J.over U) (Type u)) (f : H ⟶ H') (X : C) (a : X ⟶ U) (s : H.obj.obj (op (Over.mk a))), e H' X ((P.map f).left.app (op X) ((e H X).symm ⟨a, s⟩)) = ⟨a, f.hom.app (op (Over.mk a)) s⟩) ∧ ∃ E : Sheaf (J.over U) (Type u) ≌ Over ((presheafToSheaf J (Type u)).obj (yoneda.obj U)), Nonempty (E.functor ≅ P ⋙ Over.post (presheafToSheaf J (Type u))) ∧ ∃ r : ∀ (F : Over ((presheafToSheaf J (Type u)).obj (yoneda.obj U))) (X : Over U), (E.inverse.obj F).obj.obj (op X) ≃ {s : F.left.obj.obj (op X.left) | F.hom.hom.app (op X.left) s = (toSheafify J (yoneda.obj U)).app (op X.left) X.hom}, (∀ (F : Over ((presheafToSheaf J (Type u)).obj (yoneda.obj U))) (X Y : Over U) (b : X ⟶ Y) (s : (E.inverse.obj F).obj.obj (op Y)), (r F X ((E.inverse.obj F).obj.map b.op s)).val = F.left.obj.map b.left.op (r F Y s).val) ∧ (∀ (F G : Over ((presheafToSheaf J (Type u)).obj (yoneda.obj U))) (f : F ⟶ G) (X : Over U) (s : (E.inverse.obj F).obj.obj (op X)), (r G X ((E.inverse.map f).hom.app (op X) s)).val = f.left.hom.app (op X.left) (r F X s).val)",
+  "statement": "theorem exists_localizedSheavesOverRepresentable_general {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) [HasWeakSheafify J (Type u)] (U : C) : ∃ (P : Sheaf (J.over U) (Type u) ⥤ Over (yoneda.obj U)) (e : ∀ (H : Sheaf (J.over U) (Type u)) (X : C), (P.obj H).left.obj (op X) ≃ Σ a : X ⟶ U, H.obj.obj (op (Over.mk a))), (∀ (H : Sheaf (J.over U) (Type u)) (X : C) (z : (P.obj H).left.obj (op X)), (P.obj H).hom.app (op X) z = (e H X z).1) ∧ (∀ (H : Sheaf (J.over U) (Type u)) (X Y : C) (b : Y ⟶ X) (a : X ⟶ U) (s : H.obj.obj (op (Over.mk a))), e H Y ((P.obj H).left.map b.op ((e H X).symm ⟨a, s⟩)) = ⟨b ≫ a, H.obj.map (Over.homMk b rfl).op s⟩) ∧ (∀ (H H' : Sheaf (J.over U) (Type u)) (f : H ⟶ H') (X : C) (a : X ⟶ U) (s : H.obj.obj (op (Over.mk a))), e H' X ((P.map f).left.app (op X) ((e H X).symm ⟨a, s⟩)) = ⟨a, f.hom.app (op (Over.mk a)) s⟩) ∧ ∃ E : Sheaf (J.over U) (Type u) ≌ Over ((presheafToSheaf J (Type u)).obj (yoneda.obj U)), Nonempty (E.functor ≅ P ⋙ Over.post (presheafToSheaf J (Type u))) ∧ ∃ r : ∀ (F : Over ((presheafToSheaf J (Type u)).obj (yoneda.obj U))) (X : Over U), (E.inverse.obj F).obj.obj (op X) ≃ {s : F.left.obj.obj (op X.left) | F.hom.hom.app (op X.left) s = (toSheafify J (yoneda.obj U)).app (op X.left) X.hom}, (∀ (F : Over ((presheafToSheaf J (Type u)).obj (yoneda.obj U))) (X Y : Over U) (b : X ⟶ Y) (s : (E.inverse.obj F).obj.obj (op Y)), (r F X ((E.inverse.obj F).obj.map b.op s)).val = F.left.obj.map b.left.op (r F Y s).val) ∧ (∀ (F G : Over ((presheafToSheaf J (Type u)).obj (yoneda.obj U))) (f : F ⟶ G) (X : Over U) (s : (E.inverse.obj F).obj.obj (op X)), (r G X ((E.inverse.map f).hom.app (op X) s)).val = f.left.hom.app (op X.left) (r F X s).val)",
   "branch": "newtargets-dag",
   "by": "NF",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Section 1(B): the recorded theorem required a Precoverage with HasPullbacks, stability and isomorphism axioms. This does not provide the node for an arbitrary Grothendieck topology on a small category without categorical pullbacks, as this consumer requires. The module now takes J : GrothendieckTopology C directly, retaining every disjoint-union, sheafification, fibre, restriction and morphism formula. Sheafification is supplied canonically for the small site; covering refinements use pullback sieves. The natural-language node is unchanged and no existing external declaration uses this theorem."
+  "note": "The original precoverage interface is retained unchanged. The general interface proves the same fibre/extension equivalence for an arbitrary Grothendieck topology and is used by overPost_isContinuous; all constructions and properties are proved without additional axioms."
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-19",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W4",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261018T062943-L-689513",
-  "kind": "proof",
+  "landing": "20261019T122627-L-476681",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
