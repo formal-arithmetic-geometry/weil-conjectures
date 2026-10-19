@@ -7,7 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.CoherentPairFunctorDescent
 public import WeilConjectures.CategoryTheory.StageSystem.Basic
-import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
+import WeilConjectures.CategoryTheory.StageSystem.Functor
 
 /-! # Coherent functor descent on the existing StageSystem quotient
 
@@ -77,7 +77,13 @@ theorem coefficientPairFunctor_exists (hb : pairFunctorCoherent S T φ b) :
             (X := coefficientPairFunctorObject S T φ P)
             (Y := coefficientPairFunctorObject S T φ Q) M hP hQ
             ((b hP).hom.app P.obj ≫ (φ M).map f ≫ (b hQ).inv.app Q.obj))) := by
-  sorry
+  let G : S.Morphism T := ⟨φ, b, hb⟩
+  refine ⟨G.functor, ⟨fun _ ↦ rfl, fun _ _ _ _ ↦ HEq.rfl⟩, ?_⟩
+  intro F hF
+  apply Functor.hext hF.1
+  intro P Q f
+  induction f using PairCategory.hom_induction with
+  | h M hP hQ f => exact hF.2 M hP hQ f
 
 /-- Coherent-pair descent, with uniquely determined object and arrow formulas.
 Source: sketch32, lines 1291--1338 and 1419--1426
