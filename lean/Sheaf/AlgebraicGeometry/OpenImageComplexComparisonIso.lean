@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisData
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
-import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
+import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
 
 /-! # Explicit K-injective comparison for one open
 

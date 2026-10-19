@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import Mathlib.CategoryTheory.Localization.Adjunction
-import Sheaf.Algebra.Homology.OpenExtensionRestrictionIso
+import WeilConjectures.Algebra.Homology.OpenExtensionRestrictionIso
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Monad.Adjunction

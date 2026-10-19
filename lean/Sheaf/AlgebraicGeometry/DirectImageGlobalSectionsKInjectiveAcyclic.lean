@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 import Sheaf.AlgebraicGeometry.GlobalDerivedHom
 import Sheaf.AlgebraicGeometry.RingedSpaceDirectImageKInjectiveAcyclic
 import Sheaf.AlgebraicGeometry.GlobalSectionsPointUnitTransport

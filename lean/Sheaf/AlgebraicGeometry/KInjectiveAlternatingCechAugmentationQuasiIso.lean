@@ -11,7 +11,7 @@ import Sheaf.AlgebraicGeometry.AlternatingCechTotalHomotopy
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 import WeilConjectures.AlgebraicGeometry.AlternatingCechComputes
 import WeilConjectures.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
 
 /-! # Čech augmentation of a K-injective complex
 

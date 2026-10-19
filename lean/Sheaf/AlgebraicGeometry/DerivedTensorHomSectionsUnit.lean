@@ -6,7 +6,7 @@ Authors: SHEAF group W2
 module
 
 public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHomModel
-public import Sheaf.Algebra.Homology.RingedSiteZerothHypercohomology
+public import WeilConjectures.Algebra.Homology.RingedSiteZerothHypercohomology
 import Sheaf.Algebra.Homology.RhomGlobalSections
 
 /-! # Tensor-unit normalization of derived Hom sections

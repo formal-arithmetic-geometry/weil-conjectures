@@ -6,7 +6,7 @@ Authors: SHEAF group J1
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper

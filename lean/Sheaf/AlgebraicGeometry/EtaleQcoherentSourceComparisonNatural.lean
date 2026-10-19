@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.EtaleQcoherentULiftCohomologyNatural
 import Sheaf.AlgebraicGeometry.EtaleZariskiQcohComparison
-import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 
 /-! # Natural comparison of lifted tensor-sheaf cohomology with ordinary H
 

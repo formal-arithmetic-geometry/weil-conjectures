@@ -11,10 +11,10 @@ public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import Sheaf.Paper.PQFCohomology
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
-import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 import Sheaf.AlgebraicGeometry.ModuleCohomologyScalarEndomorphism
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent

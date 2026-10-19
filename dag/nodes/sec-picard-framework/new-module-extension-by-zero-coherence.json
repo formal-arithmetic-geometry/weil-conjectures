@@ -103,13 +103,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkTransitionCoherence",
-  "file": "lean/Sheaf/Algebra/Homology/ModuleExtensionByZeroStalkTransitionCoherence.lean",
+  "module": "WeilConjectures.Algebra.Homology.ModuleExtensionByZeroStalkTransitionCoherence",
+  "file": "lean/WeilConjectures/Algebra/Homology/ModuleExtensionByZeroStalkTransitionCoherence.lean",
   "declaration": "AlgebraicGeometry.ModuleExtensionByZeroStalkTransitionCoherence",
   "statement": "theorem ModuleExtensionByZeroStalkTransitionCoherence (X : RingedSpace.{u})\n    (F : SheafOfModules.{u} (moduleRings X)) :\n    let iota := fun (W W' : Opens X) (h : W ≤ W') ↦\n      ((Classical.choice (open_restriction_adjunction_exact X W).2.2.2.2).homEquiv _ _).symm\n      ((SheafOfModules.overFunctorMap (moduleRings X) (homOfLE h)).inv.app F ≫\n        (SheafOfModules.overMap (moduleRings X) (homOfLE h)).map\n          ((Classical.choice (open_restriction_adjunction_exact X W').2.2.2.2).unit.app\n            ((SheafOfModules.overFunctor.{u} (moduleRings X) W').obj F)) ≫\n        (SheafOfModules.overFunctorMap (moduleRings X) (homOfLE h)).hom.app\n          ((SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W' ⋙\n            PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).obj\n              ((SheafOfModules.overFunctor.{u} (moduleRings X) W').obj F)))\n    (∀ W : Opens X, iota W W le_rfl = 𝟙 _) ∧\n    (∀ (W W' W'' : Opens X) (h : W ≤ W') (h' : W' ≤ W''),\n      iota W W' h ≫ iota W' W'' h' = iota W W'' (h.trans h')) ∧\n    (∀ W : Opens X,\n      iota W ⊤ le_top ≫\n          (Classical.choice (open_restriction_adjunction_exact X ⊤).2.2.2.2).counit.app F =\n        (Classical.choice (open_restriction_adjunction_exact X W).2.2.2.2).counit.app F) ∧\n    ∃ e : (∀ (W : Opens X) (x : X), x ∈ W →\n        ((RingedSpace.moduleStalkFunctor X x).obj F ≅\n          (RingedSpace.moduleStalkFunctor X x).obj\n            ((SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W ⋙\n              PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).obj\n                ((SheafOfModules.overFunctor.{u} (moduleRings X) W).obj F)))),\n      (∀ (W : Opens X) (x : X) (hx : x ∈ W),\n        (e W x hx).inv =\n          (RingedSpace.moduleStalkFunctor X x).map\n            ((Classical.choice (open_restriction_adjunction_exact X W).2.2.2.2).counit.app\n              F)) ∧\n      (∀ (W W' : Opens X) (h : W ≤ W') (x : X) (hx : x ∈ W),\n        (e W x hx).hom ≫ (RingedSpace.moduleStalkFunctor X x).map (iota W W' h) =\n          (e W' x (h hx)).hom)",
   "branch": "sheaf-dag",
   "by": "R1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): Sheaf twin Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkTransitionCoherence retired; now WeilConjectures.Algebra.Homology.ModuleExtensionByZeroStalkTransitionCoherence."
  },
  "reviewed": {
   "date": "2026-10-12",

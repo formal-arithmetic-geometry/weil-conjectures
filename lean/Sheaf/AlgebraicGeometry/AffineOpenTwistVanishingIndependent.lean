@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 import Sheaf.AlgebraicGeometry.AffineRestrictedTwistVanishing
 import Sheaf.AlgebraicGeometry.HigherDirectImageOpenRestriction
-import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 import Sheaf.AlgebraicGeometry.LocalUniformHigherDirectImageBound
 import Mathlib.AlgebraicGeometry.Modules.Tilde

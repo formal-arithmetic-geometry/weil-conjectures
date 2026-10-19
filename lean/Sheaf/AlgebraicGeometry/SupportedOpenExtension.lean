@@ -9,10 +9,10 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.Topology.QuasiSeparated
 import Sheaf.AlgebraicGeometry.SupportedOpenPushforward
-import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
-import Sheaf.Algebra.Homology.OpenExtensionRestrictionIso
-import Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkOutside
+import WeilConjectures.Algebra.Homology.OpenExtensionRestrictionIso
+import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroStalkOutside
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 

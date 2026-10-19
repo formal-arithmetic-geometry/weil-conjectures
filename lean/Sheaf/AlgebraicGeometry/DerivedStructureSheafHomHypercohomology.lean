@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 import Sheaf.AlgebraicGeometry.DerivedStructureSheafGlobalSectionsHom
 import WeilConjectures.Algebra.Homology.DerivedFreeModuleHomology
 

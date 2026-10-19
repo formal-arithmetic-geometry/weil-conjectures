@@ -11,8 +11,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 
 import WeilConjectures.Algebra.Homology.LowerTruncationStepTriangle
-import Sheaf.AlgebraicGeometry.OpenRestrictionModuleCohomology
-import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
+import WeilConjectures.AlgebraicGeometry.OpenRestrictionModuleCohomology
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure

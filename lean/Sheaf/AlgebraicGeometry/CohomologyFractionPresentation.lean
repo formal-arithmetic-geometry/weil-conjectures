@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.Topology.OpenModuleCohomology
+public import WeilConjectures.Topology.OpenModuleCohomology
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 public import Mathlib.Algebra.DirectSum.Basic

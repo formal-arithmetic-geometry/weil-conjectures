@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.EtaleZariskiQcohComparison
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-public import Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences

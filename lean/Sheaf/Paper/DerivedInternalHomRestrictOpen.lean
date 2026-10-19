@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Sheaf.Paper.DerivedHomMayerVietoris
-import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
+import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
 import Sheaf.Algebra.Homology.HomComplexRestrictOpen
 
 /-!

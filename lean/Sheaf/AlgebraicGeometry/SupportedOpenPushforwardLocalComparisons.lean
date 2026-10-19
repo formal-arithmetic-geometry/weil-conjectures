@@ -2,8 +2,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
-import Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkOutside
+import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
+import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroStalkOutside
 import Sheaf.AlgebraicGeometry.SupportedDerivedRestrictionZero
 import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import Mathlib.CategoryTheory.Adjunction.Triple

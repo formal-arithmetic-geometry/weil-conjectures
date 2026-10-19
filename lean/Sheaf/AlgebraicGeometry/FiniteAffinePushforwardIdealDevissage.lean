@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
 import Sheaf.AlgebraicGeometry.AffinePushforwardIdealProduct
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian

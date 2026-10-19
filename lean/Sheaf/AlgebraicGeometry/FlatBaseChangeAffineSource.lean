@@ -5,7 +5,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent
 import Sheaf.AlgebraicGeometry.AffineCohomologySectionEquiv
-import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 
 @[expose] public section

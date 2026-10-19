@@ -5,7 +5,7 @@ Authors: SHEAF group P3
 -/
 module
 
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import Mathlib.Topology.Sheaves.Flasque
 public import Mathlib.AlgebraicGeometry.Scheme
 import Sheaf.AlgebraicGeometry.ModuleAbelianZariskiCohomology

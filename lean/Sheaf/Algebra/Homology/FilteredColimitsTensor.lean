@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 import Sheaf.Algebra.Homology.FilteredColimitsTensorTotal
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
 
 /-!
 # Filtered colimits and tensor complexes of sheaves of modules

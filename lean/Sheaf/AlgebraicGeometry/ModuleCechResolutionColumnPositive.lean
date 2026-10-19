@@ -2,7 +2,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ModuleCechComparison
 
-public import Sheaf.Topology.OpenModuleCohomology
+public import WeilConjectures.Topology.OpenModuleCohomology
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import Mathlib.Algebra.Category.ModuleCat.Products
 import Mathlib.Algebra.Category.Grp.Zero

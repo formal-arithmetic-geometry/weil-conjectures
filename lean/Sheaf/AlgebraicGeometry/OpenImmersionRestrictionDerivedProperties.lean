@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
-import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
+import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 import Mathlib.AlgebraicGeometry.Restrict
 

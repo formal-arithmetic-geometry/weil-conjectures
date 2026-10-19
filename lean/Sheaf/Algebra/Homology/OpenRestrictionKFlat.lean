@@ -8,7 +8,7 @@ module
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Topology.Sheaves.Abelian
-import Sheaf.Algebra.Homology.ModuleExtensionByZeroUnitIsIso
+import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroUnitIsIso
 import Sheaf.Algebra.Homology.OpenRestrictionTensorNatural
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap

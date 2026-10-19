@@ -5,10 +5,10 @@ Authors: SHEAF group D3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNormalization
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNormalization
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import WeilConjectures.AlgebraicGeometry.Modules.Ext
-import Sheaf.AlgebraicGeometry.AbelianReplacementSectionHomotopies
+import WeilConjectures.AlgebraicGeometry.AbelianReplacementSectionHomotopies
 
 /-! # The standard-source abelian Ext section calculation
 

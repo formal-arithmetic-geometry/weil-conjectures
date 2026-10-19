@@ -6,11 +6,11 @@ Authors: SHEAF group P3
 module
 
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
-public import Sheaf.Topology.OpenModuleCohomology
+public import WeilConjectures.Topology.OpenModuleCohomology
 public import WeilConjectures.Topology.Sheaves.CechComparison
 import Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAffineCechComplexes
 import Sheaf.AlgebraicGeometry.ModuleCechBetaAffineQuasiIso
-import Sheaf.AlgebraicGeometry.OpenRestrictionModuleCohomology
+import WeilConjectures.AlgebraicGeometry.OpenRestrictionModuleCohomology
 import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier

@@ -38,13 +38,14 @@
  "mathlib_match": null,
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.FlatTruncationTelescopeComparison",
-  "file": "lean/Sheaf/Algebra/Homology/FlatTruncationTelescopeComparison.lean",
+  "module": "WeilConjectures.Algebra.Homology.FlatTruncationTelescopeComparison",
+  "file": "lean/WeilConjectures/Algebra/Homology/FlatTruncationTelescopeComparison.lean",
   "declaration": "CochainComplex.quasiIso_flat_truncation_telescope",
   "statement": "theorem quasiIso_flat_truncation_telescope {C : Type u} [Category.{u} C] {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{u}} (G : CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (E : ℕ → CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (t : ∀ n : ℕ, E n ⟶ E (n + 1)) (q : ∀ n : ℕ, E n ⟶ G.truncLE (n : ℤ)) (hq : ∀ n : ℕ, QuasiIso (q n)) (hcompat : ∀ n : ℕ, t n ≫ q (n + 1) ≫ G.ιTruncLE ((n + 1 : ℕ) : ℤ) = q n ≫ G.ιTruncLE (n : ℤ)) (f : mappingCone (𝟙 (∐ E) - Sigma.desc (fun n : ℕ ↦ t n ≫ Sigma.ι E (n + 1))) ⟶ G) (hinr : mappingCone.inr _ ≫ f = Sigma.desc (fun n : ℕ ↦ q n ≫ G.ιTruncLE (n : ℤ))) (hinl : (mappingCone.inl _).comp (HomComplex.Cochain.ofHom f) (add_zero _) = 0) : QuasiIso f",
   "branch": "sheaf-dag",
   "by": "T2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): Sheaf twin Sheaf.Algebra.Homology.FlatTruncationTelescopeComparison retired; now WeilConjectures.Algebra.Homology.FlatTruncationTelescopeComparison."
  },
  "statement": "Let $(C,J)$ be a small site and $R$ a sheaf of commutative rings. Let $G$ and $E_n$ ($n\\in\\mathbf N$) be cochain complexes of $R$-modules [def-pc-cochain-complex-modules], with maps $t_n:E_n\\to E_{n+1}$ and quasi-isomorphisms $q_n:E_n\\to\\tau_{\\le n}G$ [def-pc-quasi-iso-modules]. Assume $t_n q_{n+1}\\iota_{n+1}=q_n\\iota_n$, where $\\iota_n$ is the good truncation inclusion into $G$. Set $B=\\bigoplus_nE_n$ and $\\phi=1-\\operatorname{shift}_t:B\\to B$, with shift given on the $n$th summand by $t_n$ into summand $n+1$. If $f:\\operatorname{Cone}(\\phi)\\to G$ is a chain map whose restriction to the unshifted summand is $\\sum_n q_n\\iota_n$ and whose restriction to the shifted summand is zero, then $f$ is a quasi-isomorphism. No flatness, boundedness or epimorphism assumption is imposed on $E_n$ or $q_n$.",
  "proof": [

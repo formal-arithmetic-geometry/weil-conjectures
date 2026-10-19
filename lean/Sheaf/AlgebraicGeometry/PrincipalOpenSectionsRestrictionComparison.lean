@@ -6,7 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.AlgebraicGeometry.PrincipalOpenCechTotal
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 import Mathlib.Algebra.Homology.QuasiIso
 
 /-! # Comparing basic-open sections with sections of the restricted scheme

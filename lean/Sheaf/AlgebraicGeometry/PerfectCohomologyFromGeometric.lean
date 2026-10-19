@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.RingTheory.Finiteness.Projective
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 
 import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine

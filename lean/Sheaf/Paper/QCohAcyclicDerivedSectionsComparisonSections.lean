@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.Paper.QCohAcyclicDerivedSectionsTruncationIso
 import Sheaf.Paper.DerivedSectionsLeftExactBottom
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
-import Sheaf.Topology.RingedSpaceModuleEnoughInjectives
+import WeilConjectures.Topology.RingedSpaceModuleEnoughInjectives
 
 @[expose] public section
 

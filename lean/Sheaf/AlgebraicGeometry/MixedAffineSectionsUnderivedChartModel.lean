@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Mathlib.CategoryTheory.Adjunction.Unique
 import WeilConjectures.AlgebraicGeometry.Cohomology.Defs

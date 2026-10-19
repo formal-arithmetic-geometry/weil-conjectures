@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.AlternatingCechTotalComplex
 public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 import Sheaf.AlgebraicGeometry.QCohAlternatingCechResolutionQuasiIso
 import Sheaf.AlgebraicGeometry.KInjectiveAlternatingCechAugmentationQuasiIso
 

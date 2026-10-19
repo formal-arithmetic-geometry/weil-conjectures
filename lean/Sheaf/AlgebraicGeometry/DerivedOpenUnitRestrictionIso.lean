@@ -1,7 +1,7 @@
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-import Sheaf.Algebra.Homology.OpenExtensionRestrictionIso
+import WeilConjectures.Algebra.Homology.OpenExtensionRestrictionIso
 import Mathlib.CategoryTheory.Adjunction.Triple
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Mathlib.CategoryTheory.Localization.Adjunction

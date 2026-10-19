@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.PrincipalOpenCechTotal
 import Sheaf.AlgebraicGeometry.SingletonCechAugmentationIso
 import Sheaf.AlgebraicGeometry.PrincipalOpenSectionsRestrictionComparison
 import Sheaf.AlgebraicGeometry.QCohComplexAlternatingCechDerivedSections
-import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
+import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-! # Sections of a quasi-coherent resolution on a basic open

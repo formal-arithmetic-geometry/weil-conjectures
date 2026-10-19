@@ -5,7 +5,7 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.Topology.OpenModuleCohomology
+public import WeilConjectures.Topology.OpenModuleCohomology
 public import Mathlib.Algebra.Exact.Basic
 import Sheaf.AlgebraicGeometry.InjectiveRestrictionSurjective
 import Sheaf.CategoryTheory.Abelian.RightDerived.InjectivelyExactSquareBoundaryExact

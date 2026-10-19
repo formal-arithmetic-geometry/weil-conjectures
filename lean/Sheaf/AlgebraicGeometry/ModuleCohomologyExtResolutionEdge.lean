@@ -6,7 +6,7 @@ Authors: SHEAF group S2
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
-public import Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.AlgebraicGeometry.ModuleCohomologyExtSectionDiagram
 

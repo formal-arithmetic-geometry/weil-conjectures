@@ -8,8 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.RingTheory.Noetherian.Defs
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
-public import Sheaf.Topology.RingedSpaceModuleCohomology
-import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 import WeilConjectures.AlgebraicGeometry.AlternatingCechComputes
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts

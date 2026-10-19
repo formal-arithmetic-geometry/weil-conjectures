@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Restrict
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
-import Sheaf.Topology.RingedSpaceModuleEnoughInjectives
+import WeilConjectures.Topology.RingedSpaceModuleEnoughInjectives
 
 /-! # Ordinary higher direct images commute with open restriction
 

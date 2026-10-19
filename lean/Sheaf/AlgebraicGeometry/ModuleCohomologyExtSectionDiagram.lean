@@ -5,7 +5,7 @@ Authors: SHEAF group C2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNormalization
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNormalization
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Sheaf.AlgebraicGeometry.StandardAbelianExtSectionDiagram

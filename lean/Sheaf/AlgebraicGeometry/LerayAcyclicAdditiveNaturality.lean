@@ -6,8 +6,8 @@ Authors: SHEAF group K2
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
-import Sheaf.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
+import WeilConjectures.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
 import Sheaf.AlgebraicGeometry.LeraySectionsResolutionComparison
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
 

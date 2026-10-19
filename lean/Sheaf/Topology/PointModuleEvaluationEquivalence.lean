@@ -5,7 +5,7 @@ Authors: SHEAF group T4
 -/
 module
 
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 import Mathlib.Algebra.Category.Grp.Zero
 
 /-!

@@ -5,12 +5,12 @@ Authors: SHEAF group B3
 -/
 module
 
-public import Sheaf.Topology.OpenModuleCohomology
+public import WeilConjectures.Topology.OpenModuleCohomology
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
-import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
-import Sheaf.Topology.RestrictInjectiveResolution
+import WeilConjectures.Topology.RestrictInjectiveResolution
 import Sheaf.AlgebraicGeometry.ModuleAbelianZariskiCohomology
 
 /-! # Open module cohomology and cohomology of the restricted abelian sheaf

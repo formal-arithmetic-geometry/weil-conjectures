@@ -6,7 +6,7 @@ Authors: SHEAF group X2
 module
 
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 
 /-! # Canonical section transport to an open subscheme
 

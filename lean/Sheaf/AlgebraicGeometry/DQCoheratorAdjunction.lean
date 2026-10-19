@@ -6,7 +6,7 @@ Authors: SHEAF group K1
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 public import Mathlib.CategoryTheory.Adjunction.Basic
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful

@@ -6,11 +6,11 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.AlgebraicGeometry.Coherent
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import WeilConjectures.AlgebraicGeometry.AlternatingCechComputes
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
-import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 
 /-!
 # Finite cohomological dimension for quasi-coherent modules
