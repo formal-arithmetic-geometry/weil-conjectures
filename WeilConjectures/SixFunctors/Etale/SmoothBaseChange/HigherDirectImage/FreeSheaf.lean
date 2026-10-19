@@ -128,7 +128,8 @@ noncomputable def Etale.derivedEtaleLowerShriekUpperStarAdjunctionPlus :
 
 /-- The functor `N ↦ Hom(A[0], N[0]⟦q⟧)` on sheaves of `Λ`-modules on `Z_ét`; for `A = Λ` it is
 the étale cohomology `N ↦ Hᵠ(Z, N)` with coefficients in `Λ`-modules. -/
-noncomputable abbrev Etale.shiftedHomFunctor {Z : Scheme.{u}}
+@[reducible]
+noncomputable def Etale.shiftedHomFunctor {Z : Scheme.{u}}
     (A : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) :
     Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⥤ AddCommGrpCat.{u + 1} :=
   DerivedCategory.Plus.singleFunctor _ 0 ⋙ shiftFunctor _ q ⋙
