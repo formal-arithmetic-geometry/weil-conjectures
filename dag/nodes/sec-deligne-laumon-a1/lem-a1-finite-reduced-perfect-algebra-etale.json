@@ -1,0 +1,106 @@
+{
+ "id": "lem-a1-finite-reduced-perfect-algebra-etale",
+ "kind": "statement",
+ "title": "A finite reduced algebra over a perfect field is etale",
+ "statement": "Let k be a perfect field and A a commutative k-algebra that is finite-dimensional as a k-vector space and reduced (it has no nonzero nilpotent elements). Then A is etale over k. The zero algebra is allowed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00U3 (lemma-etale-over-field), combined with the Artinian decomposition in Tag 00JB (lemma-artinian-finite-length) and perfectness."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "A finite-dimensional algebra over a field is Artinian. An Artinian reduced commutative ring is the product of its finitely many residue fields: the kernel of the product of quotient maps is the nilradical, hence zero, and the Chinese remainder theorem gives surjectivity. Each residue field is finite-dimensional over k as a quotient of A, so it is algebraic and separable because k is perfect. Tag 00U3 makes their finite product etale. If A is the zero algebra, the product is empty and the same conclusion holds. This is exactly the complete existing proof of Algebra.Etale.of_isReduced_of_perfectField in WeilConjectures.Mathlib.RingTheory.Etale.Field; its implementation uses IsArtinianRing.equivPi and the formally etale product criterion.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00JB and 00U3; existing proved source theorem Algebra.Etale.of_isReduced_of_perfectField."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00JB and 00U3; existing source proof in WeilConjectures.Mathlib.RingTheory.Etale.Field."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A reduced zero dimensional scheme of finite type over a perfect field is etale",
+   "results": "Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, AlgebraicGeometry.Scheme.Etale, Algebra.etaleLocus_eq_univ_iff_etale, AlgebraicGeometry.IsEtale.instIsSmooth, Algebra.instEtaleOfIsStandardEtale, Algebra.etaleLocus_eq_univ_iff, StandardEtalePair.instEtaleRing",
+   "date": "2026-10-19",
+   "verdict": "Related Mathlib algebra etale criteria; the exact already-proved source theorem was found by rg and its full signature and proof inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type reduced zero dimensional algebra over a perfect field is etale",
+   "results": "Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.FormallySmooth.of_perfectField, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.instEtaleOfIsStandardEtale, Algebra.Etale, Algebra.Etale.iff_exists_algEquiv_prod",
+   "date": "2026-10-19",
+   "verdict": "Related Mathlib algebra etale criteria; the exact already-proved source theorem was found by rg and its full signature and proof inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite reduced algebra over a perfect field is etale",
+   "results": "Algebra.Etale, Algebra.instEtaleOfIsStandardEtale, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.FormallyEtale.instFormallySmooth, Algebra.FormallyEtale.of_isSeparable, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.iff_isSeparable, RingHom.Etale",
+   "date": "2026-10-19",
+   "verdict": "Related Mathlib algebra etale criteria; the exact already-proved source theorem was found by rg and its full signature and proof inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "rg of_isReduced_of_perfectField lean/WeilConjectures lean/Sheaf; rg finite reduced algebra dag/nodes; inspect Mathlib/RingTheory/Etale/Field.lean",
+   "results": "Exact theorem Algebra.Etale.of_isReduced_of_perfectField in WeilConjectures.Mathlib.RingTheory.Etale.Field, lines 94-101; proof is complete. No existing DAG attachment found for this theorem.",
+   "date": "2026-10-19",
+   "verdict": "Exact existing proved source declaration, used without a new Lean module."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.ReducedBoundarySmooth",
+  "date": "2026-10-19",
+  "group": "V8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-reduced-boundary-smooth",
+   "place": "Affine finite reduced algebra route for the reduced boundary geometry in blueprint Step 2.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Mathlib.RingTheory.Etale.Field",
+  "declaration": "Algebra.Etale.of_isReduced_of_perfectField",
+  "statement": "theorem of_isReduced_of_perfectField (K A : Type*) [Field K] [PerfectField K] [CommRing A] [Algebra K A] [Module.Finite K A] [IsReduced A] : Algebra.Etale K A",
+  "branch": "sheaf-dag",
+  "by": "V8",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261019T112602-L-3958584",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261019T112602-L-3958584",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

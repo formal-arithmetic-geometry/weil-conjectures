@@ -15,17 +15,15 @@ public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.FieldTheory.Perfect
 public import Sheaf.AlgebraicGeometry.PureDimension
+import Mathlib.RingTheory.Jacobson.Artinian
+import WeilConjectures.Mathlib.RingTheory.Etale.Field
 import Mathlib.Topology.Irreducible
+import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Artinian
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.RingTheory.KrullDimension.Zero
 import Sheaf.AlgebraicGeometry.Dimension
 import Sheaf.AlgebraicGeometry.NowhereDenseDimZero
-import Sheaf.AlgebraicGeometry.ClosedPointField
-import Sheaf.AlgebraicGeometry.EtaleCoproductOfFiniteSeparableFields
-import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
 
 /-!
 # The reduced boundary of a smooth curve over a perfect field
@@ -94,6 +92,75 @@ theorem reducedBoundary_smoothOfRelativeDimension_zero
       topologicalKrullDim Z ≤ 0 ∧ (IsEmpty Z → topologicalKrullDim Z = ⊥) ∧
       Smooth (i ≫ C ↘ Spec (.of k)) ∧
       SmoothOfRelativeDimension 0 (i ≫ C ↘ Spec (.of k)) := by
-  sorry
+  classical
+  have hdimC : topologicalKrullDim C ≤ 1 := by
+    unfold topologicalKrullDim Order.krullDim
+    refine iSup_le fun p ↦ ?_
+    obtain ⟨W, hW, hsub⟩ :=
+      exists_mem_irreducibleComponents_subset_of_isIrreducible _ p.last.isIrreducible
+    let F (q : Set.Iic p.last) : TopologicalSpace.IrreducibleCloseds W :=
+      { carrier := Subtype.val ⁻¹' (q.val : Set C)
+        isClosed' := q.val.isClosed.preimage continuous_subtype_val
+        isIrreducible' := by
+          have : IrreducibleSpace (q.val : Set C) :=
+            Subtype.irreducibleSpace q.val.isIrreducible
+          convert (IrreducibleSpace.isIrreducible_univ (q.val : Set C)).image
+            (Set.inclusion (q.property.trans hsub))
+            (continuous_inclusion _).continuousOn using 1
+          ext x
+          simp only [Set.mem_image, Set.mem_univ, true_and, Set.mem_preimage]
+          exact ⟨fun hx ↦ ⟨⟨x.val, hx⟩, rfl⟩, fun ⟨y, hy⟩ ↦ hy ▸ y.property⟩ }
+    have hF : StrictMono F := by
+      intro a b hab
+      refine lt_of_le_of_ne (fun x hx ↦ hab.le hx) ?_
+      intro heq
+      apply hab.ne
+      apply Subtype.ext
+      apply TopologicalSpace.IrreducibleCloseds.ext
+      ext x
+      by_cases hx : x ∈ W
+      · exact Set.ext_iff.mp (congrArg
+          (fun T : TopologicalSpace.IrreducibleCloseds W ↦ (T : Set W)) heq) ⟨x, hx⟩
+      · exact iff_of_false (fun ha ↦ hx (hsub (a.property ha)))
+          (fun hb ↦ hx (hsub (b.property hb)))
+    let p' : LTSeries (Set.Iic p.last) :=
+      ⟨p.length, fun n ↦ ⟨p n, p.monotone (Fin.le_last n)⟩, fun n ↦ p.step n⟩
+    have h := Order.LTSeries.length_le_krullDim (p'.map F hF)
+    change (p.length : WithBot ℕ∞) ≤ topologicalKrullDim W at h
+    simpa [hC W hW] using h
+  have hnow : IsNowhereDense (Set.range i.base) := by
+    apply (isClosed_isNowhereDense_iff_compl.mpr ?_).2
+    rw [hZ, compl_compl]
+    exact ⟨j.isOpenEmbedding.isOpen_range, hj⟩
+  have hdimZ : topologicalKrullDim Z ≤ 0 := by
+    rw [← Scheme.dim_eq_topologicalKrullDim]
+    exact (dim_le_zero_of_isNowhereDense (C ↘ Spec (.of k)) i
+      (by rwa [Scheme.dim_eq_topologicalKrullDim]) hnow).1
+  let f := i ≫ C ↘ Spec (.of k)
+  have : LocallyOfFiniteType f := inferInstance
+  have : QuasiCompact f := inferInstance
+  have : IsLocallyNoetherian Z := LocallyOfFiniteType.isLocallyNoetherian f
+  have : CompactSpace Z := QuasiCompact.compactSpace_of_compactSpace f
+  have : IsLocallyArtinian Z := .of_topologicalKrullDim_le_zero hdimZ
+  have : DiscreteTopology Z := inferInstance
+  have : Finite Z := finite_of_compact_of_discrete
+  have : IsAffine Z := inferInstance
+  have het : Etale f := by
+    rw [HasRingHomProperty.iff_of_isAffine (P := @Etale)]
+    let R := Γ(Spec (.of k), ⊤)
+    let e : R ≃+* k := (Scheme.ΓSpecIso (.of k)).commRingCatIsoToRingEquiv
+    let : Field R := (e.isField (Field.toIsField k)).toField
+    have : PerfectField R := PerfectField.of_ringEquiv e.symm
+    algebraize [f.appTop.hom]
+    have : Algebra.FiniteType R Γ(Z, ⊤) :=
+      (HasRingHomProperty.iff_of_isAffine (P := @LocallyOfFiniteType)).mp inferInstance
+    have : Module.Finite R Γ(Z, ⊤) := Module.finite_of_isArtinianRing R Γ(Z, ⊤)
+    exact RingHom.etale_algebraMap.mpr (Algebra.Etale.of_isReduced_of_perfectField R Γ(Z, ⊤))
+  refine ⟨inferInstance, inferInstance, inferInstance, hdimZ, ?_, inferInstance,
+    inferInstance⟩
+  intro h
+  let := h
+  rw [← Scheme.dim_eq_topologicalKrullDim]
+  exact iSup_of_empty _
 
 end AlgebraicGeometry

@@ -46,53 +46,29 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-finite-type-dim-zero-artinian] to the finite-type $k$-scheme $Z$ of step 1 and the topological dimension bound of step 2. Its statement gives that $|Z|$ is finite and discrete; in particular every singleton $\\{z\\}$ is both open and closed. For every $z\\in Z$, write $Z_z$ for the open subscheme on $\\{z\\}$. This construction has no members when $Z$ is empty.",
+   "text": "By [lem-weil-pbc-finite-type-dim-zero-artinian], the finite-type zero-dimensional scheme Z is locally Artinian and its underlying space is discrete and compact, hence finite. Apply [lem-weil-pbc-finite-discrete-scheme-affine] to Z itself, obtaining Z = Spec A with A its ring of global sections. This includes the empty scheme and the zero ring. The ring A is reduced by [def-pc-reduced-scheme], Artinian by local Artinianness and affineness, and of finite type over k by [def-weil-finite-type-morphism]. The Artinian finite-type criterion Module.finite_of_isArtinianRing (Mathlib.RingTheory.Jacobson.Artinian) therefore makes A finite-dimensional over k. No singleton identifications or scheme coproducts are needed.",
    "uses": [
-    "lem-weil-pbc-finite-type-dim-zero-artinian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Tag 0AAX (lemma-locally-Noetherian-dimension-0), discrete underlying space; Varieties Tag 06LH (lemma-algebraic-scheme-dim-0), finite type gives finitely many summands"
-   }
-  },
-  {
-   "text": "Each singleton scheme $Z_z$ is affine by [lem-weil-pbc-finite-discrete-scheme-affine]; put $B_z=\\Gamma(Z_z,\\mathcal O_Z)$. The only open neighbourhood of $z$ in $Z_z$ is $Z_z$, so the stalk is $B_z$ itself. Thus $B_z$ is a nonzero local ring and is reduced by [def-pc-reduced-scheme]. Since $\\operatorname{Spec}B_z$ has just one point, $B_z$ has exactly one prime ideal $\\mathfrak m_z$ by [def-weil-affine-spectrum]. This prime is minimal. By [lem-weil-pbc-minimal-prime-reduced-localization-field], $(B_z)_{\\mathfrak m_z}$ is a field. The map $B_z\\to(B_z)_{\\mathfrak m_z}$ is an isomorphism: every denominator lies outside the maximal ideal of the local ring $B_z$, hence is a unit, and the inverse sends $b/s$ to $bs^{-1}$. Consequently $B_z$ is a field, its maximal ideal is zero, and its quotient defining the residue field in [def-weil-residue-field] identifies $B_z$ with $\\kappa_Z(z)$. These maps respect the $k$-algebra structures induced by $Z\\to\\operatorname{Spec}k$, giving $Z_z\\simeq\\operatorname{Spec}\\kappa_Z(z)$ over $k$.",
-   "uses": [
+    "lem-weil-pbc-finite-type-dim-zero-artinian",
     "lem-weil-pbc-finite-discrete-scheme-affine",
     "def-pc-reduced-scheme",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-minimal-prime-reduced-localization-field",
-    "def-weil-residue-field"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00EU (lemma-minimal-prime-reduced-ring), applied to each singleton affine ring; singleton decomposition: Varieties Tag 06LH (lemma-algebraic-scheme-dim-0)"
-   }
-  },
-  {
-   "text": "Every $z\\in Z$ is a closed point of the finite-type $k$-scheme $Z$, so part (a) of [lem-kun-closed-point-field] makes $\\kappa_Z(z)/k$ finite. It is separable because $k$ is perfect, using the meaning of perfect specified in the statement. Form the coproduct of the finitely many $\\operatorname{Spec}\\kappa_Z(z)$ using [lem-weil-pbc-scheme-coproduct-family]. The isomorphisms of step 4 identify its summands with the disjoint open subschemes $Z_z$. Their inclusions define a map from the coproduct to $Z$; the inverse maps $Z_z$ to the corresponding summand. The inverses glue since the opens are disjoint and cover $Z$, and the two composites are the identity on every member of these open covers. Hence $Z\\simeq\\coprod_{z\\in |Z|}\\operatorname{Spec}\\kappa_Z(z)$ over $k$. The same gluing argument includes the empty coproduct.",
-   "uses": [
-    "lem-kun-closed-point-field",
-    "lem-weil-pbc-scheme-coproduct-family"
+    "def-weil-finite-type-morphism"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 06LH (lemma-algebraic-scheme-dim-0), singleton decomposition and finite residue algebras; Schemes Tags 01JB (lemma-glue), 01JC (lemma-glue-schemes), disjoint gluing"
+    "place": "Tag 06LH (lemma-algebraic-scheme-dim-0), finite-type zero-dimensional schemes are affine and finite over the base field; the Lean proof uses Artinian.lean and Module.finite_of_isArtinianRing."
    }
   },
   {
-   "text": "Apply [lem-exc-etale-coproduct-etale] to the finite separable extensions $\\kappa_Z(z)/k$ obtained in step 5. Under the displayed $k$-isomorphism its coproduct structure morphism is exactly $Z\\to\\operatorname{Spec}k$, so this morphism is etale. By [lem-weil-pbc-etale-smooth-zero-dimensional-fibres] it is smooth and its fibres have dimension zero at every source point, that is, it is smooth of pure relative dimension zero. If $Z=\\varnothing$, the coproduct theorem applies with empty index set and the relative dimension condition has no points to check. Together with steps 1 and 2 this gives every asserted conclusion, including the empty boundary.",
+   "text": "Identify the global sections R of Spec k with k through Scheme.ΓSpecIso; transport the field and perfect-field structures along this ring equivalence. The affine morphism f induces an R-algebra structure on A. Apply [lem-a1-finite-reduced-perfect-algebra-etale] to this finite reduced algebra over the perfect field R. The affine ring-homomorphism criterion HasRingHomProperty.iff_of_isAffine transports its etaleness to Etale f. Mathlib instances Etale -> SmoothOfRelativeDimension 0 and Etale -> Smooth give the two asserted smoothness conclusions (the definitions in [def-sbc-smooth-morphisms]). Together with the finite-type and dimension conclusions from the earlier steps, and the empty supremum formula for Scheme.dim in the empty case, this proves the conjunction.",
    "uses": [
-    "lem-exc-etale-coproduct-etale",
-    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+    "lem-a1-finite-reduced-perfect-algebra-etale",
+    "def-sbc-smooth-morphisms"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 02GL (lemma-etale-over-field), converse direction; Tag 02GK (lemma-etale-smooth-unramified) and the remark after Definition 02GI (definition-etale): etale is smooth of relative dimension zero"
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U3 (lemma-etale-over-field); compare Morphisms Tags 02GL and 02GK. Lean affine and smooth-relative-dimension-zero criteria: Mathlib.AlgebraicGeometry.Morphisms.Etale."
    }
   }
  ],
@@ -106,18 +82,13 @@
   "lem-weil-pbc-finite-type-dim-zero-artinian",
   "lem-weil-pbc-finite-discrete-scheme-affine",
   "def-pc-reduced-scheme",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-minimal-prime-reduced-localization-field",
-  "def-weil-residue-field",
-  "lem-kun-closed-point-field",
-  "lem-weil-pbc-scheme-coproduct-family",
-  "lem-exc-etale-coproduct-etale",
-  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+  "lem-a1-finite-reduced-perfect-algebra-etale",
+  "def-sbc-smooth-morphisms"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 06LH (lemma-algebraic-scheme-dim-0), singleton decomposition, with Algebra Tag 00EU (lemma-minimal-prime-reduced-ring) and Morphisms Tag 02GL (lemma-etale-over-field); realizes the geometry sentence in the current blueprint Step 2"
+  "place": "Tag 06LH, with Algebra Tag 00U3. Shorter affine/global-sections route using the already proved Algebra.Etale.of_isReduced_of_perfectField, retaining the blueprint boundary geometry and the original dimension-drop argument."
  },
  "mathlib_searches": [
   {
@@ -266,11 +237,7 @@
  },
  "tool_uses": [
   "lem-pc-scheme-dimension-local-rings",
-  "lem-pc-nowhere-dense-dim-zero",
-  "lem-kun-closed-point-field",
-  "lem-weil-pbc-scheme-coproduct-family",
-  "lem-exc-etale-coproduct-etale",
-  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+  "lem-pc-nowhere-dense-dim-zero"
  ],
  "reviewed": {
   "date": "2026-10-18",
@@ -297,5 +264,15 @@
   "group": "Q10",
   "result": "pass",
   "note": "[launcher 2026-10-18: Codex fallback verdict not landed after the Codex reviewers stopped; handed to the cc lander]"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261019T112602-L-3958584",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
