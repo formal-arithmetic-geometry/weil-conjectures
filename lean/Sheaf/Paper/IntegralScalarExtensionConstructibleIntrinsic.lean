@@ -219,6 +219,7 @@ theorem sfConstructibleIntegralScalarExtension_smul
           (integralScalarIntegerInclusion l E L ι a)).app
           ((sfConstructibleIntegralScalarExtension p l _hl E L ι Y).obj K).obj ≫
         ((sfConstructibleIntegralScalarExtension p l _hl E L ι Y).map f).hom := by
-  sorry
+  exact (integralScalarExtensionWellDefined l E L ι Y).2.choose_spec.choose_spec.2.2.2.2
+    a K.obj K'.obj f.hom
 
 end WeilConjectures
