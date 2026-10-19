@@ -17046,3 +17046,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:59 L: returned deliver/Q15/lem-per-derived-completion-pseudocoherent (reviewer RETURN: Route-pivot fault F1 (the error letter for route-pivot drops): the item is itself dropped. The mechanical finding is con)
 - 03:59 L: merged deliver/Q05/lem-per-finite-affine-direct-image-support-bound (reviewer PASS; first push; new nodes: 0)
 - 03:59 L: returned deliver/Q90/lem-per-nagata-surface-normalized-domination (reviewer RETURN: Route pivot, finding 1 (dropped node cited), unrepairable. The item itself is dropped: side coord/route-pivot-dropped.tx)
+- 03:59 L: returned deliver/Q68/lem-per-rdp-blowup-conic-structure (reviewer RETURN: Route-pivot RETURN (F, coord/repair-notes/lem-per-artin-gabber-affine-curve.json): the item lem-per-rdp-blowup-conic-str)
