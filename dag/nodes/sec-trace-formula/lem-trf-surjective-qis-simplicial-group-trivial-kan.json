@@ -2,7 +2,7 @@
  "id": "lem-trf-surjective-qis-simplicial-group-trivial-kan",
  "kind": "statement",
  "title": "Termwise surjective quasi-isomorphisms of simplicial abelian groups are trivial Kan fibrations",
- "statement": "Let $f:X\\to Y$ be a morphism of simplicial objects in the category of abelian groups [def-weil-pbc-simplicial-object]. For a simplicial abelian group $X$ let $s(X)$ be its associated chain complex, with $s(X)_n=X_n$ for $n\\geq0$, $s(X)_n=0$ for $n<0$, and differential $\\sum_{i=0}^n(-1)^id_i:X_n\\to X_{n-1}$ for $n>0$, with the differential in degree $0$ equal to the zero map $X_0\\to0$; $f$ induces a morphism of chain complexes $s(f):s(X)\\to s(Y)$ [def-weil-pbc-module-chain-complex-homology]. Assume that $f_n:X_n\\to Y_n$ is surjective for every $n\\geq0$ and that $H_n(s(f))$ is an isomorphism for every $n$. Then the map of underlying simplicial sets [def-weil-pbc-simplicial-set] is a trivial Kan fibration [def-weil-pbc-trivial-kan-fibration].",
+ "statement": "Let $f:X\\to Y$ be a morphism of simplicial objects in the category of abelian groups [def-weil-pbc-simplicial-object]. For a simplicial abelian group $X$ let $s(X)$ be its associated chain complex, with $s(X)_n=X_n$ for $n\\geq0$, $s(X)_n=0$ for $n<0$, and differential $\\sum_{i=0}^n(-1)^id_i:X_n\\to X_{n-1}$ for $n>0$, with the differential in degree $0$ equal to the zero map $X_0\\to0$; $f$ induces a morphism of chain complexes $s(f):s(X)\\to s(Y)$ [def-weil-pbc-module-chain-complex-homology]. Assume that $f_n:X_n\\to Y_n$ is surjective for every $n\\geq0$ and that $H_n(s(f))$ is an isomorphism for every $n$. Then the map of underlying simplicial sets [def-weil-pbc-simplicial-set] is a trivial Kan fibration.",
  "source": {
   "document": "literature/stacks-project/simplicial.tex",
   "place": "Tag 08P1 (lemma-qis-simplicial-abelian-groups); associated chain complex as in section-complexes, trivial Kan fibration as in Tag definition-trivial-kan."
@@ -10,8 +10,7 @@
  "stmt_deps": [
   "def-weil-pbc-simplicial-object",
   "def-weil-pbc-module-chain-complex-homology",
-  "def-weil-pbc-simplicial-set",
-  "def-weil-pbc-trivial-kan-fibration"
+  "def-weil-pbc-simplicial-set"
  ],
  "proof": [
   {
@@ -142,5 +141,48 @@
   "group": "Q72",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-80830a400 (reviewer sub-agent of L); spot-checked: I read the item, every cited node and Stacks simplicial.tex at 0194 (l.3605-3640), 08NL (l.5514-5546) and 08P1 (l.5837-5881); tag mappings checked. No new nodes. (1) Statement: the only change is a typing fix. Base applied the alternating sum at n=0, which needs a face X_0->X_{-1}; the delivery sets d_0:X_0->0, as in 0194 (U_0->0), and names the change in the report. Nothing is weakened. (2) Step 1 is elementary and correct: C^r=s(X)_{-r}, d^r=d_{-r}, so H^r(C)=ker d_{-r}/im d_{-r+1}=H_{-r}(s(X)). This matches the twin's s(X)^{-n}=X_n with zero positive terms; checked at r=0 and r>0. (3) Step 2 uses the statement of lem-trf-simplicial-abelian-surjective-quasi-iso-boundary-lifting (termwise surjective plus quasi-isomorphism gives fillers for all n>=0), which covers 08NL including the n=0 vertex clause. Small cases checked: identity, zero groups, constant simplicial groups. (4) Duplicate: item and twin are both Stacks 08P1, created the same day (2026-10-18) by Q30 and Q13. Citing an existing restatement is what brief-stage1 prescribes. This is not D1, since no new node was created. There is no cycle (the twin has no proof_deps and does not reach the item), both are in unit sk-i-curve-zero, and the 08P1 proof remains queued on the twin. Maintainer note: merge the two per stages/1-dag.md §2 and split the twin via kernel reduction, lemma-simplicial-group-kan and lemma-quasi-isomorphism. (5) Route pivot: def-weil-pbc-trivial-kan-fibration is an inherited stmt_dep. It is the classical Stacks 08NL boundary-lifting notion (Mathlib I.rlp), used in the classical cotangent-complex branch (08PU) and by the non-dropped parent and twin, and it is used at a named step (Step 2). It is not infinity/model machinery, so I accept it and suggest the maintainer remove it from the dropped list. The 'quillen' hits are only Mathlib search results (SSet.modelCategoryQuillen); 'simplicial set' is the classical notion from def-weil-pbc-simplicial-set. No SGA, no tool_uses, Mathlib searches recorded, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SurjectiveQuasiIsoTrivialKan",
+  "declaration": "CategoryTheory.SimplicialObject.trivialKanFibration_of_surjective_of_quasiIso",
+  "file": "lean/Sheaf/AlgebraicTopology/SurjectiveQuasiIsoTrivialKan.lean",
+  "statement": "theorem trivialKanFibration_of_surjective_of_quasiIso {X Y : SimplicialObject AddCommGrpCat.{u}} (f : X ⟶ Y) (hsurj : ∀ n : ℕ, Function.Surjective (f.app (Opposite.op (SimplexCategory.mk n)))) (hqis : ∀ n : ℤ, IsIso (HomologicalComplex.homologyMap (HomologicalComplex.extendMap ((AlgebraicTopology.alternatingFaceMapComplex AddCommGrpCat.{u}).map f) ComplexShape.embeddingUpNat.op) n)) : SSet.modelCategoryQuillen.I.rlp (Functor.whiskerRight f (forget AddCommGrpCat.{u}))",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-3f4ac8d49"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f4ac8d49",
+  "group": "N6",
+  "result": "fix",
+  "note": "Statement correct clause by clause: SimplicialObject AddCommGrpCat.{u}; alternating-face complex extended along embeddingUpNat.op (shape checked by rfl); hsurj for all n:ℕ; hqis for all n:ℤ; conclusion SSet.modelCategoryQuillen.I.rlp of whiskerRight f forget = 08NL including the degree-0 vertex clause. Statement correction only removes the stmt_dep on route-pivot-dropped def-weil-pbc-trivial-kan-fibration (gate b); meaning unchanged, no dropped-module import, sole citer lem-trf-cotangent-sheaf-model holds. Delivered, probe and fixed files all compile clean via nt_compile --json. FIX (H8): fixes/SurjectiveQuasiIsoTrivialKan.lean replaces the Stacks-proof docstring with the node's two proof steps; signature unchanged. Advisory: Worker report section is stale. Maintainer notes: item proof_deps, twin stmt_deps and citer step 2 still cite the dropped def; the twin boundary-lifting node is the same 08P1 lemma and should reuse this declaration at its stage 2.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-19",
+  "by": "N6 stage 2",
+  "old_statement": "Let $f:X\\to Y$ be a morphism of simplicial objects in the category of abelian groups [def-weil-pbc-simplicial-object]. For a simplicial abelian group $X$ let $s(X)$ be its associated chain complex, with $s(X)_n=X_n$ for $n\\geq0$, $s(X)_n=0$ for $n<0$, and differential $\\sum_{i=0}^n(-1)^id_i:X_n\\to X_{n-1}$ for $n>0$, with the differential in degree $0$ equal to the zero map $X_0\\to0$; $f$ induces a morphism of chain complexes $s(f):s(X)\\to s(Y)$ [def-weil-pbc-module-chain-complex-homology]. Assume that $f_n:X_n\\to Y_n$ is surjective for every $n\\geq0$ and that $H_n(s(f))$ is an isomorphism for every $n$. Then the map of underlying simplicial sets [def-weil-pbc-simplicial-set] is a trivial Kan fibration [def-weil-pbc-trivial-kan-fibration].",
+  "what": "The statement cited def-weil-pbc-trivial-kan-fibration, which is listed in coord/route-pivot-dropped.txt. The route-pivot gate therefore rejects the otherwise exact statement. Removing only that explanatory DAG citation and its stmt_deps edge leaves the source meaning unchanged: the Lean conclusion is the exact Mathlib predicate SSet.modelCategoryQuillen.I.rlp, whose generating family includes the same boundary inclusions and degree-zero vertex lifting.",
+  "source": {
+   "document": "literature/stacks-project/simplicial.tex",
+   "place": "Tag 08P1 (lemma-qis-simplicial-abelian-groups) and Definition 08NL (definition-trivial-kan)"
+  },
+  "citers": [
+   {
+    "id": "lem-trf-cotangent-sheaf-model",
+    "holds": true,
+    "note": "Its proof uses the item only for the trivial-Kan boundary-lifting conclusion; the conclusion and Lean predicate are unchanged."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-simplicial-object",
+   "def-weil-pbc-module-chain-complex-homology",
+   "def-weil-pbc-simplicial-set",
+   "def-weil-pbc-trivial-kan-fibration"
+  ]
  }
 }

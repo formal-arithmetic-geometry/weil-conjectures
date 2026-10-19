@@ -18,7 +18,8 @@
   "def-weil-proper-morphism",
   "def-weil-affine-spectrum",
   "def-sc-function-field",
-  "def-sc-topological-abelian-cohomology"
+  "def-sc-topological-abelian-cohomology",
+  "def-sbc-normal-dominant-galois"
  ],
  "proof": [
   {
@@ -206,5 +207,23 @@
   "group": "Q44",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-63cb56b86 (reviewer sub-agent of L); spot-checked: I read the item and checked it against Stacks resolve.tex 0B4N (definition-reduce-to-rational), 0B4Q (lemma-regular-rational), 0BG0 (lemma-rational-propagates) and the 0BGM proof paragraph 'Let x_a', and more-algebra.tex 07QT and 07QV. The statement is unchanged from the Q51 creation and matches 0B4Q followed by 0BG0 with Stacks' normal-modification convention. def-sc-function-field now covers integral schemes, so its citation is valid. Step 1: excellent includes quasi-excellent, and 07QV makes R Nagata. Step 2: the regular-surface node is exactly 0B4Q. R's normality is carried by the rational-singularity predicate, which is only defined for normal Nagata local domains of dimension 2; the 0BGM proof uses it the same way, so this is not a fault. Step 3: every hypothesis of 0BG0 on A and B is supplied, and nothing about B being regular or proper is used. Step 4 is an elementary unfolding of 0B4N, with the cohomology identified by def-sc-topological-abelian-cohomology. proof_deps equals the union of the step uses, and there is no cycle. There are no new nodes. My grep for 0B4Q, 0BG0 and the related concepts found no duplicate. The declared tool use of lem-exc-quasi-excellent-nagata is accepted as generic algebra; other nodes in this chapter already cite it as a tool. I tested small cases (k[x,y] localized with its point blowup and a blowup chart, and B of dimension 1 is excluded by hypothesis). No SGA is cited. The citer lem-per-surface-resolution-normalized-refinement uses Step 4's conclusion exactly as stated. Minor: the report names a citations.json that is not in the commit; this is harmless."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularSurfaceBirationalRationalLocalRings",
+  "declaration": "AlgebraicGeometry.subsingleton_H_one_of_regular_surface_birational_local_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularSurfaceBirationalRationalLocalRings.lean",
+  "statement": "theorem subsingleton_H_one_of_regular_surface_birational_local_extension (R B : Type u) [CommRing R] [IsRegularLocalRing R] (hRdomain : IsDomain R) [CommRing B] [IsDomain B] [IsLocalRing B] [IsIntegrallyClosed B] (hR : IsExcellent R) (hdimR : ringKrullDim R = 2) (hdimB : ringKrullDim B = 2) (i : R →+* B) [IsLocalHom i] (hi : Function.Injective i) (hfrac : Function.Bijective (IsFractionRing.map (K := FractionRing R) (L := FractionRing B) hi)) (hfinite : i.EssFiniteType) (Z : Scheme.{u}) [IsIntegral Z] (hZ : IsNormalScheme Z) (g : Z ⟶ Spec (.of B)) [IsProper g] (hgeneric : g (genericPoint Z) = genericPoint (Spec (.of B))) (hbirational : Function.Bijective (g.stalkMap (genericPoint Z))) : Subsingleton (Sheaf.H' ((sheafCompose (Opens.grothendieckTopology Z) (forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat)).obj Z.sheaf) 1 (⊤ : Z.Opens))",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-66ccf4052",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Every node clause matched against Stacks 0B4N/0B4Q/0BG0 and the dependency declarations: IsRegularLocalRing (local+Noetherian), IsExcellent, ringKrullDim=2 for R and B, normal local domain B, injective IsLocalHom i, bijective IsFractionRing.map induced by i, i.EssFiniteType, integral IsNormalScheme Z, IsProper g, birationality via hgeneric plus bijective actual generic stalkMap, conclusion Subsingleton Sheaf.H' degree 1 of the additive structure sheaf at the top Zariski open. Nothing stronger than the node; not vacuous (B=R, identity modification); universe u loses nothing. Only node change besides lean is the added stmt_dep def-sbc-normal-dominant-galois citing the existing IsNormalScheme; no dependency record touched. No hollow definitions, sorry-only proof, docstrings carry source place, blueprint id and the 4 proof steps; lean.statement verbatim in the file. nt_compile --json on the snapshot: 2.7 s, exit 0, clean. Advisories: stalkMap form differs from siblings' functionFieldMap form but is equivalent; LocalizedModule import unused; hRdomain implied by IsRegularLocalRing."
  }
 }
