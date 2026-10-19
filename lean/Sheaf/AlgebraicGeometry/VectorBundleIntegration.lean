@@ -102,7 +102,21 @@ theorem vectorIntegration_geometry (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     IsAffineHom (VectorBundleZeroSection.π S d F) ∧
       LocallyOfFiniteType (VectorBundleZeroSection.π S d F) ∧
       IsNoetherian (VectorBundleZeroSection.scheme S d F) := by
-  sorry
+  let : IsAffineHom (VectorBundleZeroSection.π S d F) :=
+    (VectorBundleZeroSection.over S d F).property
+  have hft : LocallyOfFiniteType (VectorBundleZeroSection.π S d F) := by
+    obtain ⟨I, U, hU, e⟩ :=
+      Scheme.Modules.IsFiniteLocallyFreeOfRank.exists_restrict_iso_free F (r := d)
+    apply IsZariskiLocalAtTarget.of_iSup_eq_top (P := @LocallyOfFiniteType) U hU
+    intro i
+    let E := (e i).some
+    let := (VectorBundleZeroSection.trivializationMap_spec S d F (U i) E).1
+    rw [← (VectorBundleZeroSection.trivializationMap_spec S d F (U i) E).2.1]
+    infer_instance
+  let := hft
+  let := LocallyOfFiniteType.isLocallyNoetherian (VectorBundleZeroSection.π S d F)
+  let := QuasiCompact.compactSpace_of_compactSpace (VectorBundleZeroSection.π S d F)
+  exact ⟨inferInstance, hft, ⟨⟩⟩
 
 /-- Canonical inverse image of the ordered shifted Tate tensor: recurse using tensor
 pullback, the normalized finite-line comparison, and the constant-unit comparison.
@@ -180,7 +194,20 @@ theorem vectorIntegrationChart_isPullback (S : Scheme.{u}) [IsNoetherian S] (d :
     (e : VectorBundleZeroSection.Trivialization S d F V) :
     IsPullback (vectorIntegrationChart S d F V e) (affineTraceProjection V.toScheme d)
       (VectorBundleZeroSection.π S d F) V.ι := by
-  sorry
+  let := (VectorBundleZeroSection.trivializationMap_spec S d F V e).1
+  have hw :
+      ((affineTraceAffineSpaceIso V.toScheme d).hom ≫
+        inv (VectorBundleZeroSection.trivializationMap S d F V e)) ≫
+          ((VectorBundleZeroSection.π S d F) ∣_ V) =
+        affineTraceProjection V.toScheme d := by
+    rw [← (VectorBundleZeroSection.trivializationMap_spec S d F V e).2.1]
+    simp [affineTraceAffineSpaceIso, affineTraceToAffineSpace]
+  have hi := IsPullback.of_horiz_isIso
+    (fst := (affineTraceAffineSpaceIso V.toScheme d).hom ≫
+      inv (VectorBundleZeroSection.trivializationMap S d F V e))
+    (g := 𝟙 V.toScheme) (CommSq.mk (by simpa using hw))
+  simpa only [vectorIntegrationChart, Category.id_comp, Category.assoc] using
+    hi.paste_horiz (isPullback_morphismRestrict (VectorBundleZeroSection.π S d F) V).flip
 
 /-- Canonical coefficient identification in the inverse-frame square. The equality of
 its two composites is used between the inverse-image composition comparisons; then the
