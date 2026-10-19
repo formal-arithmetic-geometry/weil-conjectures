@@ -18,8 +18,8 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 /-! # ProEtaleUniformModelEtaleCover
 
 Source: Stacks Project, Tag 099Y, proof of lemma-compare-locally-constant.
-The fixed-coefficient isomorphism sheaf is constructed directly, using finiteness of
-its module model to lift all constant sections on a common covering sieve.
+The fixed-coefficient isomorphism sheaf is constructed directly, using a finite generating
+set of its module model to lift constant sections on a common covering sieve.
 -/
 
 @[expose] public section
@@ -230,7 +230,7 @@ private theorem fixedConstantHom_ext (M N : ModuleCat.{u + 1} Λ) (U : B)
 
 set_option backward.isDefEq.respectTransparency false in
 omit [J.HasSheafCompose (forget (ModuleCat.{u + 1} Λ))] in
-private theorem fixedConstantHom_injective (M N : ModuleCat.{u + 1} Λ) [Finite M] :
+private theorem fixedConstantHom_injective (M N : ModuleCat.{u + 1} Λ) [Module.Finite Λ M] :
     Presheaf.IsLocallyInjective J (fixedConstantHom J Λ M N) where
   equalizerSieve_mem {U} a b hab := by
     classical
@@ -251,16 +251,16 @@ private theorem fixedConstantHom_injective (M N : ModuleCat.{u + 1} Λ) [Finite 
       Presheaf.equalizerSieve (F := (Functor.const Bᵒᵖ).obj N) (X := U) (a x) (b x)
     have hS (x : M) : S x ∈ J U.unop :=
       Presheaf.equalizerSieve_mem J η (a x) (b x) (he x)
-    let := Fintype.ofFinite M
-    apply J.superset_covering _ (J.finset_inf_mem Finset.univ S (fun m _ ↦ hS m))
+    obtain ⟨s, hs⟩ := Module.Finite.fg_top (R := Λ) (M := M)
+    apply J.superset_covering _ (J.finset_inf_mem s S (fun m _ ↦ hS m))
     intro V f hf
     change a = b
-    ext x
-    exact Finset.inf_le (Finset.mem_univ x) (f := S) f hf
+    apply ModuleCat.hom_ext
+    exact LinearMap.ext_on hs (fun x hx ↦ Finset.inf_le hx (f := S) f hf)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Lift the finitely many images simultaneously, then recover a linear map. -/
-private theorem fixedConstantHom_surjective (M N : ModuleCat.{u + 1} Λ) [Finite M] :
+/-- Lift the images of finitely many generators, then recover a linear map. -/
+private theorem fixedConstantHom_surjective (M N : ModuleCat.{u + 1} Λ) [Module.Finite Λ M] :
     Presheaf.IsLocallySurjective J (fixedConstantHom J Λ M N) where
   imageSieve_mem {U} a := by
     classical
@@ -272,8 +272,8 @@ private theorem fixedConstantHom_surjective (M N : ModuleCat.{u + 1} Λ) [Finite
       a.hom.app (op (Over.mk (𝟙 U)))
     let S (m : M) : Sieve U := Presheaf.imageSieve ηN (a₀ m)
     have hS (m : M) : S m ∈ J U := Presheaf.imageSieve_mem J ηN (a₀ m)
-    let := Fintype.ofFinite M
-    apply J.transitive (J.finset_inf_mem Finset.univ S (fun m _ ↦ hS m))
+    obtain ⟨s, hs⟩ := Module.Finite.fg_top (R := Λ) (M := M)
+    apply J.transitive (J.finset_inf_mem s S (fun m _ ↦ hS m))
     intro V f hf
     by_cases hV : (⊥ : Sieve V) ∈ J V
     · exact J.superset_covering bot_le hV
@@ -282,7 +282,9 @@ private theorem fixedConstantHom_surjective (M N : ModuleCat.{u + 1} Λ) [Finite
     let ιN := (ηN.app (op V)).hom
     have hle : LinearMap.range L ≤ LinearMap.range ιN := by
       rintro _ ⟨m, rfl⟩
-      exact Finset.inf_le (Finset.mem_univ m) (f := S) f hf
+      have hspan : Submodule.span Λ (s : Set M) ≤ (LinearMap.range ιN).comap L :=
+        Submodule.span_le.mpr (fun x hx ↦ Finset.inf_le hx (f := S) f hf)
+      exact hspan (by rw [hs]; trivial)
     let e := LinearEquiv.ofInjective ιN hinj
     let g : M ⟶ N := ModuleCat.ofHom (e.symm.toLinearMap.comp
       (L.codRestrict _ fun m ↦ hle (LinearMap.mem_range_self L m)))
@@ -326,7 +328,7 @@ private noncomputable def fixedConstantIsom (M N : ModuleCat.{u + 1} Λ) :
   naturality {_ _} _ := rfl
 
 omit [J.HasSheafCompose (forget (ModuleCat.{u + 1} Λ))] in
-private theorem fixedConstantIsom_injective (M N : ModuleCat.{u + 1} Λ) [Finite M] :
+private theorem fixedConstantIsom_injective (M N : ModuleCat.{u + 1} Λ) [Module.Finite Λ M] :
     Presheaf.IsLocallyInjective J (fixedConstantIsom J Λ M N) := by
   let hMN := fixedConstantHom_injective J Λ M N
   refine ⟨fun {U} a b hab ↦ ?_⟩
@@ -340,7 +342,7 @@ private theorem fixedConstantIsom_injective (M N : ModuleCat.{u + 1} Λ) [Finite
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem fixedConstantIsom_surjective (M N : ModuleCat.{u + 1} Λ)
-    [Finite M] [Finite N] :
+    [Module.Finite Λ M] [Module.Finite Λ N] :
     Presheaf.IsLocallySurjective J (fixedConstantIsom J Λ M N) where
   imageSieve_mem {U} e := by
     let sMN := fixedConstantHom_surjective J Λ M N
@@ -397,9 +399,9 @@ private theorem fixedConstantIsom_surjective (M N : ModuleCat.{u + 1} Λ)
       rw [← Functor.map_comp_apply, ← op_comp]
       rfl)
 
-/-- Constant finite-module isomorphisms identify with their slice isomorphism sheaf. -/
+/-- Constant finite-type module isomorphisms identify with their slice isomorphism sheaf. -/
 private noncomputable def fixedConstantIsomIso (M N : ModuleCat.{u + 1} Λ)
-    [Finite M] [Finite N] :
+    [Module.Finite Λ M] [Module.Finite Λ N] :
     (constantSheaf J (Type (u + 1))).obj (M ≅ N) ≅
       ⟨localIsom ((constantSheaf J _).obj M) ((constantSheaf J _).obj N),
         localIsom_isSheaf _ _⟩ := by
@@ -481,7 +483,7 @@ set_option backward.isDefEq.respectTransparency false in
 private theorem fixedIsom_locallyConstant
     (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ]
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))
-    (M : ModuleCat.{u + 1} Λ) [Finite M] (U : X.ProEt)
+    (M : ModuleCat.{u + 1} Λ) [Module.Finite Λ M] (U : X.ProEt)
     (h : Nonempty (F.over U ≅
       (constantSheaf ((ProEt.topology X).over U) (ModuleCat.{u + 1} Λ)).obj M)) :
     Nonempty (((proEtaleSetRestriction X U).obj
@@ -517,35 +519,34 @@ end AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A fixed finite constant module model trivialized pro-etale locally is trivialized
-etale locally. Source: Stacks Project, Tag 099Y, proof of lemma-compare-locally-constant,
-using Modules on Sites, Tag 093T(2), and Bhatt--Scholze, Lemmas 5.1.1--5.1.4.
+/-- A fixed finitely generated constant module model trivialized pro-etale locally
+is trivialized etale locally, over any discrete commutative coefficient ring.
+Source: Stacks Project, Tag 099Y, proof of lemma-compare-locally-constant; the finite
+lifting argument is extended here from finite underlying sets to finite generating sets.
+(blueprint: det-pe-uniform-finite-type-model-etale-cover).
 
-Proof: On each slice take isomorphisms from the restriction of F to that of constant M.
-Maps and their inverses glue by the sheaf property of internal Hom, giving a sheaf I.
-For finite modules, the map from constant linear maps to the internal Hom between
-constant module sheaves is locally bijective. For local surjectivity, lift the image
-of each of the finitely many elements on a common covering sieve. On an object not
-covered by the empty sieve the constant sheafification unit is injective, so its
-linear inverse on its image gives the desired linear map. Equality of two constant
-maps is likewise detected on a common finite intersection of covering sieves.
-Apply this to an isomorphism and its inverse, and refine once more so the two
-composites are identities. Thus the isomorphism sheaf between constant finite modules
-is the constant set sheaf of module isomorphisms; no ringed-module transport is needed.
+Proof: Isomorphisms of restrictions form a sheaf by gluing maps and their inverses
+in the sheafHom sheaves. For constant modules M,N with M finitely generated, choose
+a finite generating set s. Equality of constant maps is detected after intersecting
+the equalizer sieves for elements of s, since linear maps agreeing on s agree on M.
+For local surjectivity, intersect the image sieves for images of s. Away from the
+empty covering sieve, the constant-sheaf unit of N is injective. Its image is a
+submodule containing the images of s, hence the image of the whole linear map.
+Inverting that unit onto its image recovers a linear map M to N. Equality on constant
+sections and separatedness identify the resulting sheaf map with the given one.
+Lift an isomorphism and its inverse, and refine twice to enforce the inverse laws.
+Thus the isomorphism sheaf between constant finitely generated modules is constant.
 
-The given scheme pullback models transport to slice models through the weakly etale
-slice equivalence and the localization restriction isomorphism. Restriction of I to
-each such slice is the corresponding isomorphism sheaf on that slice, and restriction
-of a constant sheaf remains constant. Consequently I is locally constant with model
-Aut(M), and the given models give local sections. The locally-classical etale-section
-theorem gives an etale covering with sections of I. Transport each section back to a
-scheme pullback model, and shrink the cover by choosing a member above each point of X.
-The construction covers empty X, the zero module and the zero ring without exceptions.
-(blueprint: lem-sf-proetale-uniform-finite-model-etale-cover) -/
-theorem etale_cover_of_proetale_uniform_model
-    (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+Transport the supplied scheme-pullback trivializations across weakly etale slice
+localization. The isomorphism sheaf from F to constant M is locally constant with
+value Aut(M), and is inhabited on the same cover. Apply the existing locally-classical
+etale-section theorem. Each etale-local section is a slice isomorphism; transport it
+back to the small site of the cover member. Shrink the covering index using Cover.ulift.
+The empty scheme, zero ring, zero module, and empty generating set are all included. -/
+theorem etale_cover_of_proetale_uniform_finiteType_model
+    (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ]
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))
-    (M : ModuleCat.{u + 1} Λ) [Finite M]
+    (M : ModuleCat.{u + 1} Λ) [Module.Finite Λ M]
     (hF : ∃ (I : Type (u + 1)) (W : I → Scheme.{u}) (g : ∀ i, W i ⟶ X),
       Presieve.ofArrows W g ∈ proetalePrecoverage X ∧
         ∀ i, Nonempty ((AlgebraicGeometry.ProEtale.upperStar
@@ -605,5 +606,24 @@ theorem etale_cover_of_proetale_uniform_model
       (ModuleCat.{u + 1} Λ) T M).symm⟩
   exact fixedModel_upperStar X Λ F M T e
 
+
+/-- The finite-ring finite-model case of the finite-type model comparison.
+Source: Stacks Project, Tag 099Y, proof of lemma-compare-locally-constant.
+The finite underlying module is finitely generated, so apply the finite-type theorem.
+(blueprint: lem-sf-proetale-uniform-finite-model-etale-cover) -/
+theorem etale_cover_of_proetale_uniform_model
+    (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))
+    (M : ModuleCat.{u + 1} Λ) [Finite M]
+    (hF : ∃ (I : Type (u + 1)) (W : I → Scheme.{u}) (g : ∀ i, W i ⟶ X),
+      Presieve.ofArrows W g ∈ proetalePrecoverage X ∧
+        ∀ i, Nonempty ((AlgebraicGeometry.ProEtale.upperStar
+          (ModuleCat.{u + 1} Λ) (g i)).obj F ≅
+            (constantSheaf (ProEt.topology (W i)) (ModuleCat.{u + 1} Λ)).obj M)) :
+    ∃ 𝒰 : Cover.{u} etalePrecoverage X, ∀ i : 𝒰.I₀,
+      Nonempty ((AlgebraicGeometry.ProEtale.upperStar
+        (ModuleCat.{u + 1} Λ) (𝒰.f i)).obj F ≅
+          (constantSheaf (ProEt.topology (𝒰.X i)) (ModuleCat.{u + 1} Λ)).obj M) := by
+  exact etale_cover_of_proetale_uniform_finiteType_model X Λ F M hF
 
 end AlgebraicGeometry.Scheme

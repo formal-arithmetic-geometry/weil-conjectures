@@ -1,0 +1,129 @@
+{
+ "id": "det-pe-uniform-finite-type-model-etale-cover",
+ "kind": "statement",
+ "title": "Etale trivializations for a fixed finitely generated module model",
+ "statement": "Let $X$ be a scheme, $\\Lambda$ a discrete commutative ring, $M$ a finitely generated $\\Lambda$-module, and $F$ a sheaf of $\\Lambda$-modules on the small pro-etale site. Suppose a pro-etale covering $\\{W_i\\to X\\}$ identifies every scheme inverse image of $F$ with the constant module sheaf of the same $M$. Then an etale covering of $X$, indexed in the universe of $X$, has the same constant model $M$ on every member. No finiteness assumption on the underlying set of $\\Lambda$ or $M$ is imposed. The sites are [def-weil-pbc-proetale-site] and [def-weil-pbc-etale-site], inverse images are [def-weil-proetale-inverse-image], constants are [def-weil-pbc-constant-sheaf], and module sheaves use [def-weil-sheaf-of-modules-category].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099Y, proof of lemma-compare-locally-constant; fixed-coefficient Isom sheaf argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Construct the sheaf I of slice isomorphisms F to constant M by gluing each hom and inverse in sheafHom; separatedness proves the inverse equations. Iterated slices identify its restrictions with the local Isom sheaves.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For finitely generated modules P,Q choose finite generating sets. Intersect the equalizer sieves for the generators to detect equality of constant maps. Intersect their image sieves to lift a sheaf map locally. On an object not covered by the empty sieve the constant module unit is injective. Its linear image contains the images of the generators, hence the whole image of the given linear map. The inverse onto that image produces a linear P-to-Q map. Separatedness and local surjectivity of the constant sheaf unit identify the maps on all sections. Lift both inverse maps of an isomorphism and refine by the two identity equalizers. Sheafify to identify local Isom of constant P,Q with constant Isom(P,Q). Every assertion here is proved by the fixedConstantHom and fixedConstantIsom private helpers.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Transport the original models through the weakly etale slice equivalence. Constant restriction and the previous isomorphism identify every restriction of I with constant Aut(M). The original cover supplies local sections.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-site-constant-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the locally-classical etale-section theorem to I, obtaining an etale covering with sections. Every such section is a module isomorphism on a slice; transport it back to scheme inverse image. Cover.ulift shrinks the index by selecting a member above each point. Empty schemes give empty covers, and zero modules admit empty generating sets.",
+   "uses": [
+    "lem-weil-pbc-proetale-locally-classical-etale-cover",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-site-constant-restriction",
+  "lem-weil-pbc-proetale-locally-classical-etale-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099Y, fixed-coefficient proof; finite generating set extension written and proved by U6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constant sheaves of finitely generated modules have locally constant sheaf of isomorphisms",
+   "results": "8 hits: CategoryTheory.Sheaf.isConstant_of_iso, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app, LightCondMod.LocallyConstant.functorIsoDiscreteComponents, CondensedMod.LocallyConstant.functorIsoDiscreteAux₁, LightCondMod.LocallyConstant.functorIsoDiscreteAux₁, CondensedMod.LocallyConstant.functorIsoDiscrete, CategoryTheory.Sheaf.isConstant_of_forget, CondensedMod.LocallyConstant.functorIsoDiscreteComponents. Receipt 16bd9d6e1382ed53",
+   "date": "2026-10-18",
+   "verdict": "No exact comparison theorem; use the existing library comparison and module finite-generation API."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Module.Finite.fg_top\"",
+   "results": "1 hits: Module.Finite.fg_top. Receipt b8326f748e124fed",
+   "date": "2026-10-18",
+   "verdict": "No exact comparison theorem; use the existing library comparison and module finite-generation API."
+  },
+  {
+   "tool": "grep",
+   "query": "fixedConstantHom|uniform_finiteType_model|finitePresentation.*[Ll]ocal",
+   "results": "25 hits: Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean. Receipt 185e34314b09515f",
+   "date": "2026-10-18",
+   "verdict": "No exact comparison theorem; use the existing library comparison and module finite-generation API."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleFiniteLocalSystemsTwist",
+  "date": "2026-10-19",
+  "group": "U6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-pe-constructible-comparison",
+   "place": "First sentence of its proof: the preceding finite-local-system proposition handles each stratum; the fixed-model Isom sheaf and descent steps of det-pe-finite-local-systems-twist.",
+   "via": [
+    "det-pe-finite-local-systems-twist"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-pe-finite-local-systems",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleUniformModelEtaleCover",
+  "file": "lean/Sheaf/Paper/ProEtaleUniformModelEtaleCover.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etale_cover_of_proetale_uniform_finiteType_model",
+  "statement": "theorem etale_cover_of_proetale_uniform_finiteType_model\n    (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ]\n    (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))\n    (M : ModuleCat.{u + 1} Λ) [Module.Finite Λ M]\n    (hF : ∃ (I : Type (u + 1)) (W : I → Scheme.{u}) (g : ∀ i, W i ⟶ X),\n      Presieve.ofArrows W g ∈ proetalePrecoverage X ∧\n        ∀ i, Nonempty ((AlgebraicGeometry.ProEtale.upperStar\n          (ModuleCat.{u + 1} Λ) (g i)).obj F ≅\n            (constantSheaf (ProEt.topology (W i)) (ModuleCat.{u + 1} Λ)).obj M)) :\n    ∃ 𝒰 : Cover.{u} etalePrecoverage X, ∀ i : 𝒰.I₀,\n      Nonempty ((AlgebraicGeometry.ProEtale.upperStar\n        (ModuleCat.{u + 1} Λ) (𝒰.f i)).obj F ≅\n          (constantSheaf (ProEt.topology (𝒰.X i)) (ModuleCat.{u + 1} Λ)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "U6",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261019T034313-L-419160",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261019T034313-L-419160",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

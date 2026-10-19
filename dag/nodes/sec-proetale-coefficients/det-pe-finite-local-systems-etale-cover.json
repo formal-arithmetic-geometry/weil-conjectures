@@ -1,0 +1,128 @@
+{
+ "id": "det-pe-finite-local-systems-etale-cover",
+ "kind": "statement",
+ "title": "Etale cover retaining finitely presented constant module models",
+ "statement": "Let $X$ be a scheme, $\\Lambda$ a discrete commutative ring and $F$ a pro-etale sheaf of $\\Lambda$-modules. Assume $F$ is locally constant and admits a pro-etale covering with finitely presented constant module models. Then there is an etale scheme covering $\\mathcal U$ indexed in the universe of $X$ such that, for every index $i$, the scheme inverse image of $F$ on $\\mathcal U_i$ is a constant sheaf with a finitely presented $\\Lambda$-module model. The sites are [def-weil-pbc-proetale-site] and [def-weil-pbc-etale-site], inverse images are [def-weil-proetale-inverse-image], constants are [def-weil-pbc-constant-sheaf], and module sheaves use [def-weil-sheaf-of-modules-category].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099Y, proof of lemma-compare-locally-constant; fixed-coefficient Isom sheaf argument"
+ },
+ "stmt_deps": [
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-etale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Convert slice trivializations on the given covering to scheme inverse-image trivializations, using the weakly etale slice equivalence and constant comparison.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-site-constant-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply proEtale_model_type_opens to these actual models. For every model choose its open isomorphism-type locus. Base change the original covering to that open. A point on a nonempty overlap identifies its model with the chosen one. On empty overlap schemes both sheaves are uniquely isomorphic. These give a uniform model cover on the open locus.",
+   "uses": [
+    "lem-sf-proetale-model-type-opens"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite presentation implies finite generation, so apply the uniform finite-type model theorem on each locus. Choose a locus containing each point of X and assemble its etale coverings, indexed by pairs of a point and a local cover index. Composition of inverse images preserves the original chosen models and their finite presentation.",
+   "uses": [
+    "det-pe-uniform-finite-type-model-etale-cover"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-site-constant-restriction",
+  "lem-sf-proetale-model-type-opens",
+  "det-pe-uniform-finite-type-model-etale-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099Y, fixed-coefficient proof; finite generating set extension written and proved by U6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constant sheaves of finitely generated modules have locally constant sheaf of isomorphisms",
+   "results": "8 hits: CategoryTheory.Sheaf.isConstant_of_iso, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app, LightCondMod.LocallyConstant.functorIsoDiscreteComponents, CondensedMod.LocallyConstant.functorIsoDiscreteAux₁, LightCondMod.LocallyConstant.functorIsoDiscreteAux₁, CondensedMod.LocallyConstant.functorIsoDiscrete, CategoryTheory.Sheaf.isConstant_of_forget, CondensedMod.LocallyConstant.functorIsoDiscreteComponents. Receipt 16bd9d6e1382ed53",
+   "date": "2026-10-18",
+   "verdict": "No exact comparison theorem; use the existing library comparison and module finite-generation API."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Module.Finite.fg_top\"",
+   "results": "1 hits: Module.Finite.fg_top. Receipt b8326f748e124fed",
+   "date": "2026-10-18",
+   "verdict": "No exact comparison theorem; use the existing library comparison and module finite-generation API."
+  },
+  {
+   "tool": "grep",
+   "query": "fixedConstantHom|uniform_finiteType_model|finitePresentation.*[Ll]ocal",
+   "results": "25 hits: Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean. Receipt 185e34314b09515f",
+   "date": "2026-10-18",
+   "verdict": "No exact comparison theorem; use the existing library comparison and module finite-generation API."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleFiniteLocalSystemsTwist",
+  "date": "2026-10-19",
+  "group": "U6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-pe-constructible-comparison",
+   "place": "First sentence of its proof: the preceding finite-local-system proposition handles each stratum; the fixed-model Isom sheaf and descent steps of det-pe-finite-local-systems-twist.",
+   "via": [
+    "det-pe-finite-local-systems-twist"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-pe-finite-local-systems",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleFiniteLocalSystemsTwist",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleFiniteLocalSystemsTwist.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.etaleCover_of_finitelyPresentedModels",
+  "statement": "theorem etaleCover_of_finitelyPresentedModels\n    (X : Scheme.{u}) (Λ : Type u) [CommRing Λ]\n    (F : Sheaf (Scheme.ProEt.topology X)\n      (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)))\n    (hF : IsFinitePresentationProEtaleLocalSystem X Λ F) :\n    ∃ 𝒰 : Scheme.Cover.{u} Scheme.etalePrecoverage X, ∀ i : 𝒰.I₀,\n      ∃ M : ModuleCat.{u + 1} (ULift.{u + 1, u} Λ),\n        Module.FinitePresentation (ULift.{u + 1, u} Λ) M ∧\n          Nonempty ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) (𝒰.f i)).obj F ≅\n            (constantSheaf (Scheme.ProEt.topology (𝒰.X i))\n              (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ))).obj M)",
+  "branch": "sheaf-dag",
+  "by": "U6",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261019T034313-L-419160",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261019T034313-L-419160",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

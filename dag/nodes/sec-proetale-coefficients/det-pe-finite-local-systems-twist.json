@@ -29,152 +29,57 @@
  ],
  "proof": [
   {
-   "text": "Apply [det-pe-finite-local-systems-type] to $F$: choose a set of representatives $M$ of finitely presented $\\Lambda$-modules, and obtain the disjoint open and closed decomposition $X=\\coprod_M X_M$ with $E_M=F|_{X_M}$ locally isomorphic to $\\underline M$. Such a representative set can be chosen among cokernels of finite matrices over $\\Lambda$, so it is a set in the universes of [def-weil-size-convention]. By [lem-weil-pbc-open-immersion-etale] the $X_M\\to X$ form an etale covering. Interpret restriction on each pro-etale site by [lem-weil-proetale-weakly-etale-localization]. Use throughout the constant-model identification $\\underline N=\\nu_S^*N_{S,\\Et}$ of [det-pe-finite-local-systems-hom], on each scheme $S$ encountered; the coefficient-ring identification and module functors for this arbitrary discrete ring are those of [det-pe-classical-sheaves-modules]. The two meanings of a constant model agree. For a scheme $S$, a $\\Lambda$-module $N$ and a $\\Lambda_S$-module sheaf $G$ on $S_{\\mathrm{proet}}$, the module adjunction of [det-pe-classical-sheaves-modules] and $(\\nu_{S,*}G)(U)=G(U)$ on etale objects [def-weil-pbc-site-comparison-morphism] give $\\operatorname{Hom}(\\nu_S^*N_{S,\\Et},G)\\cong\\operatorname{Hom}(N_{S,\\Et},\\nu_{S,*}G)\\cong\\operatorname{Hom}_\\Lambda(N,G(S))$: by the universal property of sheafification [def-weil-pbc-sheafification], a map out of the constant sheaf [def-weil-pbc-constant-sheaf] is a map out of the constant presheaf, and such a map is determined by its component at the final object $S$, which may be any $\\Lambda$-linear map. The same two facts on $S_{\\mathrm{proet}}$ give $\\operatorname{Hom}(\\underline N_S,G)\\cong\\operatorname{Hom}_\\Lambda(N,G(S))$ for the pro-etale constant module sheaf of [def-weil-proetale-locally-constant-sheaf]. By the Yoneda lemma $\\nu_S^*N_{S,\\Et}\\cong\\underline N_S$, naturally in $N$, by the isomorphism carrying the constant section $n$ to the constant section $n$; for $N=\\Lambda$ (in rings) this is the ring identification $\\Lambda_S=\\nu_S^*\\Lambda_{S,\\Et}$ of [det-pe-classical-sheaves-modules]. Every identification of constant models used below fixes constant sections, so any two of them agree.",
+   "text": "Apply etaleCover_of_finitelyPresentedModels to obtain an etale covering with the same finitely presented models.",
    "uses": [
-    "det-pe-finite-local-systems-type",
-    "def-weil-size-convention",
-    "lem-weil-pbc-open-immersion-etale",
+    "det-pe-finite-local-systems-etale-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Comparison lower star commutes with etale localization on sections. Its local model is constant M by the constant-comparison isomorphism and the invertible comparison unit. The comparison counit on a local model in the inverse-image essential image is invertible. The counit/localization compatibility and conservativity along an etale cover make the global counit invertible. Thus the actual comparison lower star is an etale local system, with its counit giving the requested origin. The same slice equivalences give HasEtaleTrivializingCover.",
+   "uses": [
+    "lem-sf-proetale-comparison-counit-localization",
     "lem-weil-proetale-weakly-etale-localization",
-    "det-pe-finite-local-systems-hom",
-    "det-pe-classical-sheaves-modules",
-    "def-weil-pbc-site-comparison-morphism",
-    "def-weil-pbc-sheafification",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-proetale-locally-constant-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099Y, lemma-compare-locally-constant, first paragraph of proof; constant-model notation"
-   }
-  },
-  {
-   "text": "On $X_M$ define $T_M(U)=\\operatorname{Isom}_{\\Lambda_{X_M}|_U}(\\underline M|_U,E_M|_U)$ on slice sites [def-pur-localized-ringed-site]. This is a sheaf: for compatible local isomorphisms, apply the sheaf equalizer condition [def-weil-pbc-sites-and-cohomology] to the images of each section of $\\underline M$ and to the images under the inverse maps of each section of $E_M$. They glue uniquely; naturality, additivity, scalar-linearity and the two inverse identities hold because they hold after restriction to the covering [def-weil-sheaf-of-modules-category]. Let $H_M=\\mathcal Aut_{\\Lambda}(\\underline M)$. The formula $h\\cdot\\varphi=\\varphi\\circ h^{-1}$ defines an action. Given two sections $\\varphi,\\psi$, the unique $h$ with $h\\cdot\\varphi=\\psi$ is $h=\\psi^{-1}\\varphi$. Local trivializations of $E_M$ give local sections of $T_M$, also after pullback to every object. Hence $T_M$ is an $H_M$-torsor on the pro-etale site: a group action satisfying the identity and associativity laws, for every section $\\varphi\\in T_M(U)$ the map $h\\mapsto h\\cdot\\varphi$ from $H_M(U)$ to $T_M(U)$ is bijective, and every object has a covering by objects where $T_M$ has a section. These are the clauses of the pro-etale comparison torsor of [def-pe-comparison-torsor], the pro-etale analogue of the etale torsors of [def-constructible-torsor]; step 3 transports the group.",
-   "uses": [
-    "def-pur-localized-ringed-site",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-sheaf-of-modules-category",
-    "def-constructible-torsor",
-    "def-pe-comparison-torsor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099Y, lemma-compare-locally-constant, second paragraph: construction of the Isom torsor; equalizer verification expanded"
-   }
-  },
-  {
-   "text": "The module $M$ is finitely presented, so clause (3) of [det-pe-finite-local-systems-hom] identifies $H_M$ with $\\nu_{X_M}^*H_{M,0}$, where $H_{M,0}=\\operatorname{Aut}_{\\Lambda}(M)_{X_M,\\Et}$. Transport the action of step 2 along this isomorphism of sheaves of groups; since the group law of $\\nu_{X_M}^*H_{M,0}$ in [def-pe-comparison-torsor] is $\\nu^*(m_0)\\circ c^{-1}$, which is the law carried by the isomorphism of clause (3), $T_M$ becomes a comparison torsor for $\\nu_{X_M}^*H_{M,0}$ in the sense of [def-pe-comparison-torsor]. Apply [det-pe-torsor-comparison-glue] to $T_M$. It has a trivializing etale covering $\\{V_{M,a}\\to X_M\\}$, and its sections are module isomorphisms $e_{M,a}:\\underline M|_{V_{M,a}}\\xrightarrow{\\sim}E_M|_{V_{M,a}}$. The group need not be finite or abelian: the cited torsor comparison permits an arbitrary sheaf of groups.",
-   "uses": [
-    "det-pe-finite-local-systems-hom",
-    "def-pe-comparison-torsor",
-    "det-pe-torsor-comparison-glue"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099Y, lemma-compare-locally-constant, second paragraph: constant automorphism group and torsor comparison"
-   }
-  },
-  {
-   "text": "Regard the $V_{M,a}$ as objects over $X$ using [lem-weil-pbc-etale-site-localization-open] for $X_M\\to X$. By composition of covering families [def-weil-pbc-sites-and-cohomology], they give one set-indexed etale covering $\\{V_i\\to X\\}_{i\\in I}$. Write $M_i$ for its model and $e_i:\\underline{M_i}|_{V_i}\\xrightarrow{\\sim}F|_{V_i}$ for its trivialization; put $W_{ij}=V_i\\times_XV_j$ and $W_{ijk}=V_i\\times_XV_j\\times_XV_k$. For every object $W$ of $X_{\\Et}$, apply [lem-weil-pbc-slice-site-localization] to the continuous inclusion defining $\\nu_X$ [def-weil-pbc-site-comparison-morphism] and to $W$. Under the slice identifications [lem-weil-pbc-etale-site-localization-open] and part (1) of [lem-weil-proetale-weakly-etale-localization], the localized inclusion is the inclusion defining $\\nu_W$, so the lemma gives natural isomorphisms $r_{W,G}:(\\nu_X^*G)|_W\\xrightarrow{\\sim}\\nu_W^*(G|_W)$, where both restrictions are slice restrictions. These isomorphisms commute with addition and with every scalar endomorphism by naturality, and the comparison inverse image acts on module sheaves through exactly these structure maps [def-weil-pbc-site-comparison-morphism]; hence they are linear over the constant coefficient ring (linearity for locally represented constant scalars is checked after restriction and then by separatedness). For $Z\\to W\\to X$ in $X_{\\Et}$, $r^X_{Z,G}=r^W_{Z,G|_W}\\circ(r^X_{W,G})|_Z$ under the sectionwise relocalization identification of [def-pur-localized-ringed-site]: the inclusion and the slice functors commute, and both sides are adjunction mates of that commuting square. By [lem-weil-pbc-site-constant-restriction] on both sites and step 1, the restriction of a constant model to $W$ is the constant model on $W$, and $r$ carries $(\\nu_X^*N_{X,\\Et})|_W$ to $\\nu_W^*N_{W,\\Et}$, all maps fixing constant sections. On $W_{ij}$ the transition $t_{ij}=e_j^{-1}e_i$ is a pro-etale module isomorphism from the restriction of $\\underline{M_i}$ to that of $\\underline{M_j}$, hence a map $\\nu_{W_{ij}}^*(M_i)_{W_{ij},\\Et}\\to\\nu_{W_{ij}}^*(M_j)_{W_{ij},\\Et}$. Full faithfulness on $W_{ij}$ from [det-pe-classical-sheaves-modules] gives a unique etale map $\\phi_{ij}$ with $\\nu_{W_{ij}}^*\\phi_{ij}=t_{ij}$. Lift $t_{ij}^{-1}$ too; faithfulness shows that the two composites are identities. Thus $\\phi_{ij}$ is an isomorphism. On each $W_{ijk}$, naturality of $r$ and the relocalization identity identify the pullbacks of $\\phi_{jk}\\phi_{ij}$ and $\\phi_{ik}$ (restricted to $W_{ijk}$) with the restrictions of $(e_k^{-1}e_j)(e_j^{-1}e_i)=e_k^{-1}e_i$; faithfulness on $W_{ijk}$ gives the cocycle identity $\\phi_{ik}=\\phi_{jk}\\phi_{ij}$, including repeated indices.",
-   "uses": [
     "lem-weil-pbc-etale-site-localization-open",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-slice-site-localization",
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-pur-localized-ringed-site",
     "lem-weil-pbc-site-constant-restriction",
-    "det-pe-classical-sheaves-modules"
+    "def-weil-pbc-site-comparison-morphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099Y, lemma-compare-locally-constant, final sentence: descent of the etale-local constant models; explicit cocycle construction"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-site-module-sheaf-gluing] on $X_{\\Et}$ over its final object $X$, with ring sheaf $\\Lambda_{X,\\Et}$, covering $\\{V_i\\to X\\}$ and local constant module sheaves $M_i$. The local coefficient rings are their restrictions, as identified in step 4; all indices and overlap objects lie in the fixed site universe. Step 4 gives precisely the required linear overlap isomorphisms and triple cocycle. Obtain $F_0$ and isomorphisms $d_i:F_0|_{V_i}\\xrightarrow{\\sim}(M_i)_{V_i,\\Et}$ satisfying $\\phi_{ij}d_i=d_j$. In particular $F_0$ is an etale local system with finitely presented models.",
-   "uses": [
-    "lem-weil-pbc-site-module-sheaf-gluing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099Y, lemma-compare-locally-constant, final sentence; gluing via Stacks Tag 04TR, sites-lemma-glue-sheaves"
-   }
-  },
-  {
-   "text": "By step 4, $\\nu^*d_i\\circ r_{V_i,F_0}$ is an isomorphism from $(\\nu_X^*F_0)|_{V_i}$ to $\\underline{M_i}|_{V_i}$, with $r$ from [lem-weil-pbc-slice-site-localization] and the slice identifications [lem-weil-pbc-etale-site-localization-open], [lem-weil-proetale-weakly-etale-localization]. Compose with $e_i$ to obtain $b_i=e_i\\circ\\nu^*d_i\\circ r_{V_i,F_0}$. On $W_{ij}$, after restricting and using the naturality of $r$ and its relocalization identity from step 4 [def-pur-localized-ringed-site], the equations $e_i=e_j\\nu^*\\phi_{ij}$ and $d_j=\\phi_{ij}d_i$ give $b_i=b_j$. The etale covering is a pro-etale covering by [sk-def-pe-site]. For every pro-etale object, pull back this covering and glue the images of a section under the $b_i$ using the equalizer condition [def-weil-pbc-sites-and-cohomology]. Uniqueness makes the resulting maps natural and linear. The local inverse maps agree as well and glue by the same equalizer; both composites are identities after restriction and hence globally. This gives $\\nu_X^*F_0\\cong F$.",
-   "uses": [
-    "lem-weil-pbc-slice-site-localization",
-    "lem-weil-pbc-etale-site-localization-open",
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-pur-localized-ringed-site",
-    "sk-def-pe-site",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099Y, lemma-compare-locally-constant, final sentence; explicit gluing of the comparison isomorphism"
-   }
-  },
-  {
-   "text": "By [det-pe-classical-sheaves-modules], the isomorphism of step 6 makes $F$ classical and identifies $F_0\\cong\\nu_{X,*}F$. Conversely an etale local system $G$ with finitely presented constant models on an etale covering $\\{U_k\\to X\\}$ pulls back to a pro-etale local system: the same covering is pro-etale by [sk-def-pe-site], and $(\\nu_X^*G)|_{U_k}\\cong\\nu_{U_k}^*(G|_{U_k})\\cong\\nu_{U_k}^*(N_k)_{U_k,\\Et}\\cong\\underline{N_k}$ by the isomorphism $r$ of [lem-weil-pbc-slice-site-localization] (linear, as in step 4) and the constant-model identification of step 1, which is the convention of [det-pe-finite-local-systems-hom]. Thus comparison inverse image restricts to the stated local-system categories. It is fully faithful by [det-pe-classical-sheaves-modules] and essentially surjective by steps 1--6. The unit and counit of that node's equivalence onto classical module sheaves restrict to these subcategories, since $\\nu_{X,*}F\\cong F_0$ is an etale local system. They give the asserted quasi-inverse equivalence. The covering $\\{V_i\\to X\\}$ from step 4 already trivializes $F$, with the same finitely presented models.",
+   "text": "Apply proEtaleClassicalSheavesModules to the obtained origin to prove underlying set classicality. For the reverse preservation, use the etale cover as a pro-etale covering, commute comparison inverse image with restriction, and identify pullback of each constant model with the same constant pro-etale model. Comparison full faithfulness and its invertible unit give the Hom bijection and unit clauses. The preceding counit argument works for every pro-etale local system, yielding the counit and lower-star preservation clauses.",
    "uses": [
     "det-pe-classical-sheaves-modules",
     "sk-def-pe-site",
-    "lem-weil-pbc-slice-site-localization",
-    "det-pe-finite-local-systems-hom"
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-etale-site-localization-open",
+    "def-weil-pbc-site-comparison-morphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099Y, lemma-compare-locally-constant, equivalence assertion; classicality via module comparison"
-   }
+   "elementary": false
   },
   {
-   "text": "Finally let $A$ be a finite ring and $M$ a finite $A$-module. The map $q:A^{M}\\to M$ sending the basis vector indexed by $m$ to $m$ is a surjection from a free module with finitely many generators. Its kernel $K$ is a subset of the finite set $A^{M}$, so $K$ is finite. The map $A^{K}\\to A^{M}$ sending the basis vector indexed by $k$ to $k$ has image exactly $K$. Therefore $A^{K}\\to A^{M}\\to M\\to0$ is a finite presentation in the sense of [def-sc-finitely-presented-module]. Apply this to each finite local model. The argument also includes $A=0$ and $M=0$.",
+   "text": "Over a finite ring, the lifted coefficient ring and every finite module model are Noetherian. Mathlib Module.finitePresentation_of_finite gives finite presentation of every finite model. Reuse the displayed covering and local isomorphisms.",
    "uses": [
     "def-sc-finitely-presented-module"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-twist.proof.md",
-    "place": "Finite-ring clause of the blueprint twist detail, proved directly from the finite-presentation definition"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "det-pe-finite-local-systems-type",
-  "def-weil-size-convention",
-  "lem-weil-pbc-open-immersion-etale",
+  "det-pe-finite-local-systems-etale-cover",
+  "lem-sf-proetale-comparison-counit-localization",
   "lem-weil-proetale-weakly-etale-localization",
-  "det-pe-finite-local-systems-hom",
-  "det-pe-classical-sheaves-modules",
-  "def-weil-pbc-site-comparison-morphism",
-  "def-weil-pbc-sheafification",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-proetale-locally-constant-sheaf",
-  "def-pur-localized-ringed-site",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-sheaf-of-modules-category",
-  "def-constructible-torsor",
-  "def-pe-comparison-torsor",
-  "det-pe-torsor-comparison-glue",
   "lem-weil-pbc-etale-site-localization-open",
-  "lem-weil-pbc-slice-site-localization",
   "lem-weil-pbc-site-constant-restriction",
-  "lem-weil-pbc-site-module-sheaf-gluing",
+  "def-weil-pbc-site-comparison-morphism",
+  "det-pe-classical-sheaves-modules",
   "sk-def-pe-site",
   "def-sc-finitely-presented-module"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 099Y, label lemma-compare-locally-constant"
+  "place": "Tag 099Y, proof; fixed-coefficient finite-generator Isom sheaf route and canonical comparison counit, formalized by U6"
  },
  "mathlib_searches": [
   {
@@ -276,9 +181,7 @@
  "tool_uses": [
   "lem-weil-pbc-etale-site-localization-open",
   "lem-weil-proetale-weakly-etale-localization",
-  "lem-weil-pbc-site-constant-restriction",
-  "lem-weil-pbc-site-module-sheaf-gluing",
-  "lem-weil-pbc-slice-site-localization"
+  "lem-weil-pbc-site-constant-restriction"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -324,5 +227,15 @@
   "date": "2026-10-17",
   "existing": false,
   "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleFiniteLocalSystemsTwist.lean"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261019T034313-L-419160",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

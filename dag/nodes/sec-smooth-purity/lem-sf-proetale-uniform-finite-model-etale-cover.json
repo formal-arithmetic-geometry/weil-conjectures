@@ -15,47 +15,20 @@
  ],
  "proof": [
   {
-   "text": "Form I(U) = Isom(F.over U, (constant M).over U), with restrictions given by overMapPullback. Glue the hom and inverse in the sheafHom sheaves. Separatedness makes the glued composites identities, so I is a sheaf. Iterated-slice equivalences identify I.over U with the corresponding isomorphism sheaf on the slice, naturally in restriction. These constructions and identities are proved directly in the private localIsom helpers.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "For finite modules M,N prove that constant linear maps map locally bijectively to the internal Hom of constant module sheaves. For injectivity intersect the finitely many equalizer sieves obtained by evaluation on every element of M. For surjectivity intersect the image sieves of those finitely many elements. Ignore objects covered by the empty sieve; on every other object the constant sheafification unit of N is injective. Its linear inverse on its image recovers the required linear map. Equality on constant sections implies equality everywhere by local surjectivity of sheafification and separatedness. Lift an isomorphism and its inverse this way; refine by the two equalizer sieves enforcing inverse identities. Sheafifying gives the constant set sheaf Isom(M,N). The fixedConstantHom and fixedConstantIsom helpers prove every part, without a finite-presentation hypothesis or ringed-module transport.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "View each given weakly etale scheme-cover map as a small pro-etale object U. The slice equivalence and the canonical comparison between upperStar and localizationRestriction transport the given model to F.over U isomorphic to constant M on the slice. Restriction of the global constant module sheaf is constant. Conjugate the local isomorphism sheaf by these two identifications and use the preceding constant-isomorphism calculation with M=N. Transport across the slice equivalence to see that proEtaleSetRestriction I is the constant set sheaf Aut(M).",
+   "text": "A finite underlying module is finitely generated. Apply the proved fixed finite-type model theorem; the existing finite-ring finite-model signature and every conclusion are unchanged.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-site-constant-restriction"
+    "det-pe-uniform-finite-type-model-etale-cover"
    ],
    "elementary": false
-  },
-  {
-   "text": "The scheme cover gives a CoversTop family on the small pro-etale site, and the fixed models provide sections of I on its members. Thus I is locally constant, hence locally classical. Apply proEtale_locallyClassical_etaleCover to obtain an etale CoversTop family with sections of I. Each section is an isomorphism on the corresponding slice; compose with constant restriction and transport back through the slice equivalence and localizationRestriction to get precisely the required upperStar constant model.",
-   "uses": [
-    "lem-weil-pbc-proetale-locally-classical-etale-cover",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-site-constant-restriction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Convert the etale CoversTop family into a jointly surjective family of etale scheme morphisms by evaluating the covering sieve at the terminal etale object. Form its scheme cover and apply Cover.ulift, which chooses a member above every point of X. The resulting universe-u cover inherits the same fixed model. For empty X this family is empty; zero modules and the zero ring are included by the same constructions.",
-   "uses": [],
-   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-proetale-locally-classical-etale-cover",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-weil-pbc-site-constant-restriction"
+  "det-pe-uniform-finite-type-model-etale-cover"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 099Y, proof; the finite-model case of Modules on Sites Tag 093T(2) is proved directly for ModuleCat-valued sheaves by simultaneous lifting of finitely many sections, followed by the existing locally-classical etale-section theorem and weakly etale slice equivalence"
+  "place": "Tag 099Y; finite-model specialization of the finite generating set proof, U6"
  },
  "mathlib_searches": [
   {
@@ -122,14 +95,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-19",
   "by": "L",
-  "reviewer": "X-b853f",
-  "group": "D3",
+  "reviewer": "COMPILER",
+  "group": "U6",
   "result": "pass",
-  "landing": "20261016T145216-L-3935102",
+  "landing": "20261019T034313-L-419160",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean, DAG node, change record, report, and direct importer matched against packet and repository; all compiled successfully, with allowed axioms only."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
   "master": {
