@@ -21,169 +21,76 @@
  ],
  "proof": [
   {
-   "text": "All schemes used below are Noetherian and qcqs. Indeed $\\operatorname{Spec}k$ is Noetherian (a field has only the ideals $0$ and $k$), and [lem-weil-pbc-finite-type-over-noetherian] applies to each original finite-type $k$-scheme and then to each proper ambient scheme. Their quasi-separatedness follows from [lem-weil-pbc-locally-noetherian-quasi-separated]. Every open inclusion occurring here is quasi-compact: its source is quasi-compact and target quasi-separated, by [lem-weil-pbc-qcqs-morphism-permanence](1). Thus the qcqs hypotheses of the geometric and site-comparison tools hold, including on all the open restrictions below.",
+   "text": "Use the already constructed canonical etale compact-support compositor, its identity comparisons and its associativity law from [lem-amb-etale-compact-comparisons], implemented by rightDerivedLowerShriekPlusCompIso and its two unit theorems and associativity theorem. This is the same proper/open compactification-tower construction, with its geometric and refinement-coherence work retained in that existing implementation, not a new arbitrary compositor. Absorb bounded-below compatibility into the specified compact-support site comparison [lem-sf-class-compact-support-comparison], giving the natural comparison between the two restricted compact-support functors.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "lem-weil-pbc-qcqs-morphism-permanence"
+    "lem-amb-etale-compact-comparisons",
+    "lem-sf-class-compact-support-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7J and 0F7K: qcqs hypotheses; Noetherian finite-type specialization"
+    "place": "Tags 0F7J and 0F7K; transported along the canonical site comparison"
    }
   },
   {
-   "text": "Write $A_T=\\nu_T^*$. For a candidate $F_c=Rp_*j_!$ [def-compact-support-direct-image-detailed], exactness [lem-weil-extension-by-zero-exact], [lem-sf-comparison-pullback-exact] allows the sheaf comparison [lem-cbc-proetale-extension-zero-comparison] to descend termwise through quasi-isomorphisms. Together with [prop-weil-pbc-comparison-direct-image] for the proper qcqs map $p$, it gives\n$$s_c:A_Y(Rp^{e}_*j^{e}_!L)\\xrightarrow{\\sim}Rp^{p}_*j^{p}_!A_XL.$$\nHence the output of every candidate has the bounded-below etale-origin witness $(Rp^{e}_*j^{e}_!L,s_c)$; for a general witness $A_XL\\xrightarrow{a}K$, compose $s_c$ with $F_c(a)$. All displayed comparisons are on $D^+$, and exact comparison pullback preserves this class. By full faithfulness [thm-weil-pbc-site-comparison], any morphism $t:K\\to K'$ between witnessed objects corresponds to a unique $t^e:L\\to L'$ with $A_X(t^e)=a'^{-1}ta$. Consequently a transformation natural in $L$ gives, by this conjugation, a transformation natural for every morphism of [def-sf-etale-origin-subcategory], independently of changing to an isomorphic witness.",
+   "text": "The comparison inverse image is an equivalence from the bounded-below etale category onto the full etale-origin subcategory, by [thm-weil-pbc-site-comparison] and the definition [def-sf-etale-origin-subcategory]. Its precomposition functor is fully faithful. The two preimageIso constructions defining originCompositionAmbient and originComposition are unique preimages of the fixed ordered originCompositionModel. Applying map_preimage identifies their components at every comparison object with that model. In the full-subcategory inclusion, absorb the bounded-below compatibility into originComparisonModel and cancel the adjacent isomorphisms. The resulting originComposition_model is exactly the usual comparison square for a transported compositor.",
    "uses": [
-    "def-compact-support-direct-image-detailed",
-    "lem-weil-extension-by-zero-exact",
-    "lem-sf-comparison-pullback-exact",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "prop-weil-pbc-comparison-direct-image",
     "thm-weil-pbc-site-comparison",
-    "def-sf-etale-origin-subcategory"
+    "def-sf-etale-origin-subcategory",
+    "lem-sf-class-compact-support-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09AF (lemma-jshriek-comparison) and 099R (section-comparison), finite-module bounded-below comparison"
+    "place": "Tags 099R and 09AF; fully faithful transport and map_preimage calculation"
    }
   },
   {
-   "text": "Choose $d=(v:Y\\hookrightarrow\\overline Y,q:\\overline Y\\to S)$ by [thm-nagata-compactification]. The compatible-triangle result [lem-weil-pbc-compatible-compactification-triangle] applied to $f,g,d$ supplies $e=(a:X\\hookrightarrow\\overline X,p:\\overline X\\to\\overline Y)$ of $vf$, $V=\\overline X\\times_{\\overline Y}Y$, $b:V\\hookrightarrow\\overline X$, $p_Y:V\\to Y$, and $c:X\\hookrightarrow V$ with $a=bc$ and $f=p_Yc$. In particular $(c,p_Y)$ compactifies $f$, $(a,qp)$ compactifies $gf$, and $pb=vp_Y$ is Cartesian. We use compactifications and refinements in precisely the category [def-weil-compactifications-refinements].",
+   "text": "For each unit law precompose with the etale-origin equivalence and postcompose with the invertible comparison for the composite. Expand the transported compositor square and the transported identity square. The remaining equation is the corresponding etale unit law from [lem-amb-etale-compact-comparisons], together with naturality of the single-morphism comparison (left unit) or the transported identity (right unit). Equality transport is compatible with the comparison by substitution. Faithfulness reflects the resulting equation.",
    "uses": [
-    "thm-nagata-compactification",
-    "lem-weil-pbc-compatible-compactification-triangle",
-    "def-weil-compactifications-refinements"
+    "lem-amb-etale-compact-comparisons",
+    "thm-weil-pbc-site-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7J, lemma-shriek-composition, first diagram; blueprint Construction"
+    "place": "Tags 0F7J and 0F7K; transported along the canonical site comparison"
    }
   },
   {
-   "text": "For any two composable pro-etale open immersions $j_1,j_2$, the adjunction [lem-weil-extension-by-zero-adjunction] identifies\n$$\\operatorname{Hom}(j_{2!}j_{1!}M,N)=\\operatorname{Hom}(M,j_1^*j_2^*N)=\\operatorname{Hom}(M,(j_2j_1)^*N).$$\nRestriction along opens composes by restriction to the same open, so this gives the canonical $j_{2!}j_{1!}\\cong(j_2j_1)_!$. For three opens both comparisons transpose to the same identity of triple restriction; identity opens do likewise. Exactness [lem-weil-extension-by-zero-exact] lets these natural maps and equations descend degreewise to $D^+$. The comparison with their etale counterparts respects these compositions by [lem-cbc-proetale-extension-zero-comparison].",
+   "text": "For associativity use the elementary private transport_assoc lemma, proved for arbitrary categories and functors. At each object cancel the final comparison isomorphism. Substitute the four compositor squares and the equality-transport square, combine the two adjacent functor images, and apply naturality of the last comparison at the etale compositor. Map the etale associativity equation through the final comparison functor. Naturality of the middle compositor and the fourth compositor square identify the two remaining paths. Specialize this diagram calculation to originComparisonModel and the given canonical compositors, then reflect equality through fully faithful precomposition. This retains the specified associator and Category.assoc equality transport exactly.",
    "uses": [
-    "lem-weil-extension-by-zero-adjunction",
-    "lem-weil-extension-by-zero-exact",
-    "lem-cbc-proetale-extension-zero-comparison"
+    "lem-amb-etale-compact-comparisons",
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7J and 0F7K; transported along the canonical site comparison"
+   }
+  },
+  {
+   "text": "For a retained witness [def-sf-etale-origin-subcategory], keep its same bounded-below etale object L. Apply the inverse of the canonical finite-coefficient realization equivalence to the retained alpha after the bounded-below inclusion compatibility. Prepend the unit isomorphism of the induced derived equivalence and the inverse mapDerivedCategoryCompIso. This constructs an isomorphism from comparison pullback of L to originWitnessFixedAmbient K. The witness still uses the same L and its lower-bound proof, so the required origin predicate follows, with no choice of an arbitrary witness.",
+   "uses": [
+    "def-sf-etale-origin-subcategory"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09AE and 09AF, adjoint characterization and open composition; elementary Hom-bijection calculation"
-   }
-  },
-  {
-   "text": "For a commutative proper/open square $Q$ with top open $k:A\\hookrightarrow B$, bottom open $i:C\\hookrightarrow D$ and proper verticals $r:A\\to C$, $p:B\\to D$, let $\\gamma^e_Q:i^e_!Rr^e_*\\xrightarrow{\\sim}Rp^e_*k^e_!$ be [lem-cbc-proper-open-interchange-coherence]. It needs no Cartesian hypothesis. On a witnessed $N=A_A L$, define the pro-etale map by the fully specified conjugation\n$$i^p_!Rr^p_*A_A L\\xrightarrow{\\sim}A_D(i^e_!Rr^e_*L)\\xrightarrow{A_D\\gamma^e_Q}A_D(Rp^e_*k^e_!L)\\xrightarrow{\\sim}Rp^p_*k^p_!A_A L.$$\nThe outer arrows are the comparisons of step 2. Conjugate further by the input witness for general $N$. This is natural for all morphisms by step 2. Its horizontal and vertical pasting and identity equations are the equations of the cited etale lemma: substitute this expression for each gamma, cancel the adjacent inverse comparisons, and use the composition/identity compatibility of [prop-weil-pbc-comparison-direct-image] and [lem-cbc-proetale-extension-zero-comparison]. Each remaining expression is $A_D$ of the corresponding etale equation, conjugated by the same source and target comparisons. Thus no conservativity of arbitrary pro-etale geometric stalks is used.",
-   "uses": [
-    "lem-cbc-proper-open-interchange-coherence",
-    "prop-weil-pbc-comparison-direct-image",
-    "lem-cbc-proetale-extension-zero-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7B, 0F7C, 0F7D: proper/open map, vertical and horizontal composition; pro-etale comparison by 09AF and 099R"
-   }
-  },
-  {
-   "text": "For the refinement square $r=\\operatorname{id}_X$, $k=j_1$, $i=j_2$, $p=u$, [lem-cbc-proper-open-interchange-coherence] identifies $\\gamma^e_Q$ with the specific etale $\\alpha^e_u$. The named-map equality [lem-sf-proper-open-comparison-site-normalization] then identifies the map of step 5 with the specified pro-etale $\\alpha^p_u$, not just some isomorphism with the same ends. By [def-sf-refinement-comparison-isomorphism](a),(b), its inverse followed by proper-composition is exactly the refinement comparison $\\theta_u$ used in [prop-compactification-coherence-detailed]. Therefore the gamma maps for refinement squares, and their pasting equations from step 5, use the actual compactification-coherence comparisons of the statement.",
-   "uses": [
-    "lem-cbc-proper-open-interchange-coherence",
-    "lem-sf-proper-open-comparison-site-normalization",
-    "def-sf-refinement-comparison-isomorphism",
-    "prop-compactification-coherence-detailed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7B and 0F7G, refinement normalization; Tag 0F7J, comparison squares A, D, E"
-   }
-  },
-  {
-   "text": "Apply step 5 to the Cartesian square $pb=vp_Y$ of step 3, with input $c_!K$, which remains of bounded-below etale origin by step 2. On these models the natural isomorphism is\n$$Rg_!^dRf_!^{(c,p_Y)}=Rq_*v_!Rp_{Y*}c_!\\xrightarrow{Rq_*\\gamma_Q}Rq_*Rp_*b_!c_!\\xrightarrow{\\sim}R(qp)_*a_!=R(gf)_!^{(a,qp)}.$$\nThe last arrow uses step 4 and the finite-level direct-image composition of [lem-weil-derived-direct-image-composition](1). Conjugate this map by the natural compactification comparisons [prop-compactification-coherence-detailed] to obtain $\\alpha_{g,f}$ for the chosen candidates in [def-compact-support-direct-image-detailed]. Every arrow is an isomorphism on the stated witnessed domain. The direct-image compositor is unital and associative by the last paragraph of [lem-weil-derived-direct-image-composition].",
-   "uses": [
-    "lem-weil-derived-direct-image-composition",
-    "prop-compactification-coherence-detailed",
-    "def-compact-support-direct-image-detailed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7J, four-line calculation; blueprint Construction"
-   }
-  },
-  {
-   "text": "We verify that the model map commutes with refinement of a whole tower. Two towers admit a common refining tower by [lem-cbc-compactifiable-compatible-tower], so compare tower 1 refining tower 2. Write the proper refinement maps as $u:\\overline Y_1\\to\\overline Y_2$, $v:\\overline X_1\\to\\overline X_2$, $w:V_1\\to V_2$; the cited node gives all commuting equations, including $p_2v=up_1$ and $p_{Y,2}w=p_{Y,1}$. Put $I_i=v_{i!}$ for the open $v_i:Y\\hookrightarrow\\overline Y_i$, $J_i=c_{i!}$, $B_i=b_{i!}$, $P_i=Rp_{i*}$, $L_i=Rp_{Y,i*}$, $M=Ru_*$, $H=Rv_*$, $H'=Rw_*$. Suppress only canonical coherent compositors, so $P_2H=MP_1$, $L_2H'=L_1$. The refinement squares A, D, E yield $\\gamma_A:J_2\\to H'J_1$, $\\gamma_D:I_2\\to MI_1$, $\\gamma_E:B_2J_2\\to HB_1J_1$. The two model squares give $\\gamma_B:I_2L_2\\to P_2B_2$, $\\gamma_C:I_1L_1\\to P_1B_1$; the connecting square F gives $\\gamma_F:B_2H'\\to HB_1$. All have proper verticals and open horizontals, even though A,D,E,F need not be Cartesian. Step 5 gives\n$$\\gamma_E=(\\gamma_FJ_1)(B_2\\gamma_A),\\qquad(M\\gamma_C)(\\gamma_DL_1)=(P_2\\gamma_F)(\\gamma_BH').$$\nNaturality of $\\gamma_B$ at $\\gamma_{A,K}$ gives\n$$(P_2B_2\\gamma_A)(\\gamma_BJ_2)=(\\gamma_BH'J_1)(I_2L_2\\gamma_A).$$\nSubstitution yields\n$$(P_2\\gamma_E)(\\gamma_BJ_2)=(M\\gamma_CJ_1)(\\gamma_DL_1J_1)(I_2L_2\\gamma_A).$$\nComposition in these formulas is read right to left. Applying $Rq_{2*}$, the compositor of [lem-weil-derived-direct-image-composition] and step 6 identify this equation with the compatibility of the model composition maps with all three specified refinement comparisons. The choice-independent cocycle of [prop-compactification-coherence-detailed] cancels comparisons through the common tower. This proves independence of all tower and compactification choices; the common tower, rather than a mere common refinement in one Comp category, is essential.",
-   "uses": [
-    "lem-cbc-compactifiable-compatible-tower",
-    "lem-weil-derived-direct-image-composition",
-    "prop-compactification-coherence-detailed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7J, lemma-shriek-composition, squares A--F and final pasting calculation"
-   }
-  },
-  {
-   "text": "For $f=\\operatorname{id}_X$ choose the tower with compactification of $f$ equal to $(\\operatorname{id}_X,\\operatorname{id}_X)$, and the same compactification for $g$ and $gf$. The model proper/open square then has identity verticals, so its gamma is the identity by step 5. For $g=\\operatorname{id}_Y$ use its identity compactification and any compactification of $f$; now the model square has identity horizontals and its gamma is the identity. The extension comparisons of step 4 and the direct-image unit comparisons [lem-weil-derived-direct-image-composition] are the canonical unit identifications. Step 8 transfers these equalities to arbitrary chosen compactifications by [prop-compactification-coherence-detailed], yielding both unit laws.",
-   "uses": [
-    "lem-weil-derived-direct-image-composition",
-    "prop-compactification-coherence-detailed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7B--0F7D, identity squares; 0F7J, choice independence"
-   }
-  },
-  {
-   "text": "For $X\\xrightarrow fY\\xrightarrow gS\\xrightarrow hT$, choose successive compactifications $S\\xhookrightarrow{z}\\overline S\\xrightarrow rT$, $Y\\xhookrightarrow{v}\\overline Y\\xrightarrow q\\overline S$ of $zg$, and $X\\xhookrightarrow a\\overline X\\xrightarrow p\\overline Y$ of $vf$, using [thm-nagata-compactification] and [lem-weil-pbc-compatible-compactification-triangle]. Set $W=\\overline Y\\times_{\\overline S}S$, $V=\\overline X\\times_{\\overline Y}W$, $U=\\overline X\\times_{\\overline Y}Y$ [def-pc-fibre-product]. Write the open maps as $d:Y\\hookrightarrow W$, $i:W\\hookrightarrow\\overline Y$, $c:U\\hookrightarrow V$, $b:V\\hookrightarrow\\overline X$, $j:X\\hookrightarrow U$, so $id=v$, $bcj=a$. The proper projections are $q_S:W\\to S$, $p_W:V\\to W$, $p_Y:U\\to Y$; their properties follow by successive applications of the compatible-triangle statement to the compactified maps and their open restrictions. The adjacent squares A, B, C have gamma maps\n$$\\gamma_A:d_!Rp_{Y*}\\to Rp_{W*}c_!,\\quad\\gamma_B:i_!Rp_{W*}\\to Rp_*b_!,\\quad\\gamma_C:z_!Rq_{S*}\\to Rq_*i_!.$$\nBy step 8 compute both parenthesizations on this one staircase. From $Rr_*z_!Rq_{S*}d_!Rp_{Y*}j_!$, the first uses A followed by the vertical rectangle B+C; the second uses C followed by the horizontal rectangle A+B. Step 5 gives\n$$\\gamma_{A+B}=(\\gamma_Bc_!)(i_!\\gamma_A),\\qquad\\gamma_{B+C}=(Rq_*\\gamma_B)(\\gamma_CRp_{W*}).$$\nNaturality of $\\gamma_C$ at $\\gamma_{A,K}$ is precisely\n$$(\\gamma_CRp_{W*}c_!)(z_!Rq_{S*}\\gamma_A)=(Rq_*i_!\\gamma_A)(\\gamma_Cd_!Rp_{Y*}).$$\nWhisker by $Rr_*$ and $j_!$ and compose with $Rq_*\\gamma_Bc_!$. The two paths are now equal to the same map into $Rr_*Rq_*Rp_*b_!c_!j_!$. Step 4 and the associative compositor [lem-weil-derived-direct-image-composition] identify this with $R(rqp)_*a_!$. The cocycle [prop-compactification-coherence-detailed] conjugates this equality to the original choices, proving the associativity clause.",
-   "uses": [
-    "thm-nagata-compactification",
-    "lem-weil-pbc-compatible-compactification-triangle",
-    "def-pc-fibre-product",
-    "lem-weil-derived-direct-image-composition",
-    "prop-compactification-coherence-detailed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7K, lemma-pseudo-functor, staircase A,B,C; Tags 0F7C and 0F7D; blueprint Independence and associativity"
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-sf-comp-composition/thm-sf-comp-composition.md",
+    "place": "Witness conjugation and retained etale-origin category; canonical coefficient equivalence"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "def-compact-support-direct-image-detailed",
-  "lem-weil-extension-by-zero-exact",
-  "lem-sf-comparison-pullback-exact",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "prop-weil-pbc-comparison-direct-image",
+  "lem-amb-etale-compact-comparisons",
+  "lem-sf-class-compact-support-comparison",
   "thm-weil-pbc-site-comparison",
-  "def-sf-etale-origin-subcategory",
-  "thm-nagata-compactification",
-  "lem-weil-pbc-compatible-compactification-triangle",
-  "def-weil-compactifications-refinements",
-  "lem-weil-extension-by-zero-adjunction",
-  "lem-cbc-proper-open-interchange-coherence",
-  "lem-sf-proper-open-comparison-site-normalization",
-  "def-sf-refinement-comparison-isomorphism",
-  "prop-compactification-coherence-detailed",
-  "lem-weil-derived-direct-image-composition",
-  "lem-cbc-compactifiable-compatible-tower",
-  "def-pc-fibre-product"
+  "def-sf-etale-origin-subcategory"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-sf-comp-composition/thm-sf-comp-composition.md",
-  "place": "Construction and Independence and associativity, expanded following Stacks 0F7J/0F7K and transported with 09AF/099R; named refinement normalization exposed as a separate lemma"
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7J/0F7K, reusing the existing canonical etale tower compositor and transporting its coherence by naturality and fully faithful descent; S4, 2026-10-20"
  },
  "mathlib_searches": [
   {
@@ -386,12 +293,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-cbc-proetale-extension-zero-comparison",
-  "lem-weil-extension-by-zero-adjunction",
-  "lem-cbc-proper-open-interchange-coherence",
-  "lem-cbc-compactifiable-compatible-tower"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-15",
   "by": "L",
@@ -407,5 +309,15 @@
   "group": "Q44",
   "result": "pass",
   "note": "Every hypothesis matches the node and none is stronger: field k, prime l invertible in k, E/Q_l finite, n:ℕ+, separated finite-type k-schemes and maps, the IsProper h ∨ IsProper f disjunction, arbitrary compactifications ch/cf/chf, L in D+. All three conclusions match: the composition square with the recorded compositors (Etale.unboundedEtaleLowerShriekCompIso; originCompositionAmbient), c = symm of compactSupportSiteComparison (b, then P(e)), correct order and direction; the refinement square with the actual def (b) refinement map; the proper case c = b under adjunction-built identity-open identifications. The statement is verbatim. Dependency repairs: cor-cbc-proper-coincidence now states that Ex_! equals the PBC exchange, using the recorded maps (the old record was only a Nonempty iso); the other three modules only migrate imports, plus two def (b) helpers in the owning refinement module. No hollow definitions; sorry only in theorems; docstrings and the 10 proof steps present. nt_compile --json on all 5 files: rc 0, clean. Direct importers: ProjectiveLineFullAdjunction compiles before and after; CompactificationCoherence, CompactCoefficientComposition, FiniteCoefficientDirectImage and EtaleGeometricBiduality fail at baseline from unrelated duplicate-import or DeltaRestriction errors, the same way with the delivery, so no regression. Observations only: the recorded pro-etale compositor and proper/open map are conjugations of the etale ones, so the squares are near-formal (inherited from thm-sf-comp-composition); E : Type (u+1) is a presentation convention, not a restriction."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-48ffd",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261019T231337-L-576271",
+  "kind": "interface",
+  "note": "independent cc review: delivered item vs published (old/new type and body hashes identical for all 9 definitions and the 4 theorem types; axioms clean, no sorryAx) and node thm-sf-comp-composition proof/proof_deps vs Lean; 30 direct importers compiled against the delivered olean, all OK; CompactificationCoherence still reachable from TargetsCheck via FiniteCompactSupportConstructibility, unit realized list empty"
  }
 }
