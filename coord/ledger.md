@@ -17062,3 +17062,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:00 L: returned deliver/NS/lem-per-complete-local-branch-approximation (reviewer RETURN: L: independent stage-2 immutable head 6ee41a8f500e: Dropped item: lem-per-complete-local-branch-approximation (route-piv)
 - 04:00 L: returned deliver/Q154/lem-trf-lci-cotangent-presentation (reviewer RETURN: L: independent stage-2 immutable head b5dbc772a4f7: H2: stmt_deps add theorem nodes lem-trf-cotangent-resolution-coheren)
 - 04:00 L: returned deliver/Q143/lem-per-truncated-branch-descent (reviewer RETURN: L: independent stage-2 immutable head 102def43021e: incremental DAG validation: reach: def-per-ordinary-alteration-hyper)
+- 04:00 L: returned deliver/Q118/lem-trf-affinoid-powerbounded-integral (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-affinoid-powerbounded-integral: lem-trf-affino)
