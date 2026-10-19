@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-kflat-tensor-pullback-computation-universes",
+ "kind": "statement",
+ "title": "Derived pullback computes K-flat tensor representatives",
+ "statement": "For a morphism of ringed topoi with independent site object and morphism universes, and any specified total left derived module pullback LF with counit epsilon, the induced complex comparison is invertible on every K-flat complex with flat terms and on the total tensor of any two such complexes.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 07A4 and 0G7E, with tensor-flatness and countable sums"
+ },
+ "stmt_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Prove finite-limit and epimorphism preservation for algebraic inverse image using its underlying-set comparison. It preserves homology. Apply ringed-topos K-flat pullback to identity scalar extension, and cancel the explicit identity extension isomorphism to obtain K-flatness of the inverse image of every flat-term K-flat complex.",
+   "uses": [
+    "lem-weil-pbc-ringed-pullback-preserves-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing independent-universe derived change-of-rings theorem to obtain preservation of quasi-isomorphisms between K-flat complexes after scalar extension. The specified object and morphism equalities identify inverse image followed by this functor with uStar.",
+   "uses": [
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "K-flat flat-term resolutions provide a resolving class of homotopy objects. The preceding preservation result and localization invert all quasi-isomorphisms in this class. Apply the resolving-class derived functor theorem; uniqueness of left derived functors transports the invertible counit to the supplied LF and epsilon. The complex comparison is a composite with canonical quotient isomorphisms.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-left-derived-from-kflat-class",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The existing independent-universe total-tensor model theorem makes the total tensor K-flat with flat terms. Apply the preceding computation to this tensor.",
+   "uses": [
+    "lem-pur-kflat-total-tensor-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-resolution",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-pur-kflat-total-tensor-model"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B4",
+  "date": "2026-10-19",
+  "note": "Completed from the existing independent-universe scalar extension and total-tensor model declarations, the resolving-class theorem and Mathlib uniqueness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The counit of derived pullback is an isomorphism on K-flat complexes with flat terms and their total tensor complexes",
+   "results": "[\"CategoryTheory.Adjunction.derived'_counit\", 'CategoryTheory.Adjunction.derived_counit', 'CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app', 'CategoryTheory.instIsIsoAppFromLeftDerivedZero', 'CategoryTheory.instIsIsoAppToRightDerivedZero', 'CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc', 'CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc', 'CategoryTheory.instIsIsoFunctorFromLeftDerivedZero']",
+   "date": "2026-10-18",
+   "verdict": "Related APIs used where applicable; no matching representative computation or tensor comparison theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor",
+   "results": "['CategoryTheory.Functor.IsLeftDerivedFunctor', 'CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit', \"CategoryTheory.Functor.HasLeftDerivedFunctor.mk'\", 'CategoryTheory.Functor.IsLeftDerivedFunctor.isRightKanExtension', 'CategoryTheory.Functor.IsLeftDerivedFunctor.mk', 'CategoryTheory.Functor.isLeftDerivedFunctor_iff_isRightKanExtension', 'CategoryTheory.Functor.leftDerivedLift', 'CategoryTheory.Functor.leftDerivedUnique']",
+   "date": "2026-10-18",
+   "verdict": "Related APIs used where applicable; no matching representative computation or tensor comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived|IsLeftDerivedFunctor",
+   "results": "['Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean', 'Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean', 'Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean', 'Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean', 'Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean', 'Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean', 'Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean', 'Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean']",
+   "date": "2026-10-18",
+   "verdict": "Related APIs used where applicable; no matching representative computation or tensor comparison theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A left derived pullback functor is computed by K-flat complexes with flat terms and their tensor products",
+   "results": "CategoryTheory.Functor.leftDerived; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj; SheafOfModules.pullback; CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift; CategoryTheory.Functor.leftDerivedToHomotopyCategory; CategoryTheory.Functor.IsLeftDerivedFunctor.mk; CategoryTheory.Functor.leftDerivedLift; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits concern ordinary fully faithful inclusions, restricted adjunctions, projective resolutions or the generic derived universal property; the additional representative descent and unbounded K-flat computation are proved here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses",
+  "date": "2026-10-18",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+   "place": "representative computation and two-variable descent",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedPullbackRepresentativeComputation",
+  "file": "lean/Sheaf/Paper/DerivedPullbackRepresentativeComputation.lean",
+  "declaration": "SheafOfModules.CanonicalTensorPullbackOfUniverses.derivedPullback_kflat_tensor_computation",
+  "statement": "theorem derivedPullback_kflat_tensor_computation\n    {C D : Type s} [Category.{h} C] [Category.{h} D]\n    {JC : GrothendieckTopology C} {JD : GrothendieckTopology D}\n    {R : Sheaf JC CommRingCat.{max s h}} {S RI : Sheaf JD CommRingCat.{max s h}}\n    (uInv : Sheaf JC (Type (max s h)) ⥤ Sheaf JD (Type (max s h)))\n    (uPush : Sheaf JD (Type (max s h)) ⥤ Sheaf JC (Type (max s h)))\n    (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv]\n    (I : AlgebraicInverseImage uInv R RI) (c : RI ⟶ S)\n    (uStar : SheafOfModules.{max s h}\n      ((sheafCompose JC (forget₂ CommRingCat.{max s h} RingCat.{max s h})).obj R) ⥤\n      SheafOfModules.{max s h}\n      ((sheafCompose JD (forget₂ CommRingCat.{max s h} RingCat.{max s h})).obj S))\n    (hobj : ∀ M : SheafOfModules.{max s h}\n      ((sheafCompose JC (forget₂ CommRingCat.{max s h} RingCat.{max s h})).obj R), uStar.obj M =\n        changeOfRings\n        c (I.modules.obj M))\n    (hmap : ∀ {M N : SheafOfModules.{max s h}\n      ((sheafCompose JC (forget₂ CommRingCat.{max s h} RingCat.{max s h})).obj R)} (a : M ⟶ N),\n        uStar.map a =\n      eqToHom (hobj M) ≫ changeOfRingsHom c (I.modules.obj M) (I.modules.map a) ≫\n        eqToHom (hobj N).symm)\n    [uStar.Additive]\n    [HasDerivedCategory.{w} (SheafOfModules.{max s h}\n      ((sheafCompose JC (forget₂ CommRingCat.{max s h} RingCat.{max s h})).obj R))]\n    [HasDerivedCategory.{w} (SheafOfModules.{max s h}\n      ((sheafCompose JD (forget₂ CommRingCat.{max s h} RingCat.{max s h})).obj S))]\n    (LF : DerivedCategory (SheafOfModules.{max s h}\n      ((sheafCompose JC (forget₂ CommRingCat.{max s h} RingCat.{max s h})).obj R)) ⥤ DerivedCategory\n      (SheafOfModules.{max s h}\n      ((sheafCompose JD (forget₂ CommRingCat.{max s h} RingCat.{max s h})).obj S)))\n    (epsilon : DerivedCategory.Qh ⋙ LF ⟶\n      uStar.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)\n    (hLF : LF.IsLeftDerivedFunctor epsilon\n      (HomotopyCategory.quasiIso (SheafOfModules.{max s h}\n      ((sheafCompose JC (forget₂ CommRingCat.{max s h} RingCat.{max s h})).obj R)) (ComplexShape.up\n        ℤ)))\n    :\n    (∀ P : CochainComplex (SheafOfModules.{max s h}\n      ((sheafCompose JC (forget₂ CommRingCat.{max s h} RingCat.{max s h})).obj R)) ℤ,\n      P.IsAcyclicTensorKFlat →\n      (∀ n : ℤ, IsFlatOnSite (J := JC) (R := R) (P.X n)) →\n      IsIso (derivedPullbackComplexComparison uStar LF epsilon P)) ∧\n    (∀ P Q : CochainComplex (SheafOfModules.{max s h}\n      ((sheafCompose JC (forget₂ CommRingCat.{max s h} RingCat.{max s h})).obj R)) ℤ,\n      P.IsAcyclicTensorKFlat →\n      (∀ n : ℤ, IsFlatOnSite (J := JC) (R := R) (P.X n)) →\n      Q.IsAcyclicTensorKFlat →\n      (∀ n : ℤ, IsFlatOnSite (J := JC) (R := R) (Q.X n)) →\n      IsIso (derivedPullbackComplexComparison uStar LF epsilon\n        (CochainComplex.mapBifunctor P Q\n          (@curriedTensor _ _ (monoidalCategory R)))))",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261019T002506-L-2141445",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261019T002506-L-2141445",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

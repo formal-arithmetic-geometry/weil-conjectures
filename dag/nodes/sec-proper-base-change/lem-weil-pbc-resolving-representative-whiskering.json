@@ -1,0 +1,113 @@
+{
+ "id": "lem-weil-pbc-resolving-representative-whiskering",
+ "kind": "statement",
+ "title": "Restriction to resolving representatives is fully faithful",
+ "statement": "Given a full, surjective-on-objects functor p:K→H, a localization q:H→D at a right calculus of fractions W, and full subcategories P and S with P(X) iff S(pX), assume every object of H receives a W-morphism from S. Restriction along (P→K→H→D) squared is fully faithful on functors into any category E.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tags 04VI--04VK, localization universal property; application in sites-cohomology.tex Tag 07A4"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Refine Ore squares and cancellation witnesses by resolving their extra vertices. This gives a right calculus of fractions on S.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The localization of S maps fully faithfully to D: refine roofs for fullness and common refinements for faithfulness. Resolving objects proves essential surjectivity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Precomposition with a localization and its product is fully faithful. Precomposition with a full essentially surjective functor is fully faithful; prove this by transporting components along chosen preimage isomorphisms. Compose these restrictions.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B4",
+  "date": "2026-10-18",
+  "note": "Representative descent argument following the cited localization and derived pullback constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction to a resolving full subcategory of a localization is fully faithful on functor categories",
+   "results": "CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc; CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app; CategoryTheory.ObjectProperty.fullyFaithfulιOfLE; CategoryTheory.ObjectProperty.fullyFaithfulι; CategoryTheory.Adjunction.restrictFullyFaithful; CategoryTheory.Localization.LeftBousfield.isLocalization; CategoryTheory.Adjunction.isLocalization'; CategoryTheory.Ind.inclusion.fullyFaithful",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits concern ordinary fully faithful inclusions, restricted adjunctions, projective resolutions or the generic derived universal property; the additional representative descent and unbounded K-flat computation are proved here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Precomposition by a localization restricted to a resolving full subcategory is fully faithful on functor categories",
+   "results": "CategoryTheory.LocalizerMorphism.functorialRightResolutions.ι; CategoryTheory.Localization.instFullFunctorWhiskeringLeftFunctor'; CategoryTheory.LocalizerMorphism.isLocalizedEquivalence_of_functorial_right_resolutions; CategoryTheory.Localization.full_whiskeringLeft; CategoryTheory.LocalizerMorphism.functorialRightResolutions.W₁_ι_app; CategoryTheory.LocalizerMorphism.essSurj_of_hasLeftResolutions; CategoryTheory.LocalizerMorphism.essSurj_of_hasRightResolutions; CategoryTheory.LocalizerMorphism.isIso_iff_of_hasLeftResolutions",
+   "date": "2026-10-18",
+   "verdict": "The generic localization and fully faithful APIs are used in the proof. No exact theorem includes the resolving restriction and the specified tensor representative square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.fullyFaithfulWhiskeringLeft",
+   "results": "CategoryTheory.Localization.fullyFaithfulWhiskeringLeft",
+   "date": "2026-10-18",
+   "verdict": "The generic localization and fully faithful APIs are used in the proof. No exact theorem includes the resolving restriction and the specified tensor representative square."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLeftDerivedFunctor|fullyFaithfulWhiskeringLeft|preimageIso",
+   "results": "Mathlib/Condensed/Discrete/LocallyConstant.lean; Mathlib/Condensed/Discrete/Characterization.lean; Mathlib/Condensed/Discrete/Characterization.lean; Mathlib/Condensed/Light/Small.lean; Mathlib/Condensed/Light/Functors.lean; Mathlib/AlgebraicGeometry/Restrict.lean; Mathlib/AlgebraicGeometry/Restrict.lean; Mathlib/AlgebraicGeometry/Restrict.lean",
+   "date": "2026-10-18",
+   "verdict": "The generic localization and fully faithful APIs are used in the proof. No exact theorem includes the resolving restriction and the specified tensor representative square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses",
+  "date": "2026-10-18",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+   "place": "representative computation and two-variable descent",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ResolvingRepresentativeWhiskering",
+  "file": "lean/Sheaf/Paper/ResolvingRepresentativeWhiskering.lean",
+  "declaration": "CategoryTheory.resolvingRepresentativesFullyFaithfulWhiskering",
+  "statement": "theorem resolvingRepresentativesFullyFaithfulWhiskering\n    {K : Type u₁} [Category.{v₁} K] {H : Type u₂} [Category.{v₂} H]\n    {D : Type u₃} [Category.{v₃} D] (E : Type u₄) [Category.{v₄} E]\n    (p : K ⥤ H) [p.Full] [p.EssSurj] (hsurj : Function.Surjective p.obj)\n    (W : MorphismProperty H) [W.HasRightCalculusOfFractions]\n    (q : H ⥤ D) [q.IsLocalization W]\n    (P : ObjectProperty K) (S : ObjectProperty H)\n    (hp : ∀ X, P X ↔ S (p.obj X))\n    (hres : ∀ X : H, ∃ (Y : S.FullSubcategory) (s : Y.obj ⟶ X), W s) :\n    Nonempty (((whiskeringLeft (P.FullSubcategory × P.FullSubcategory) (D × D) E).obj\n      ((P.ι ⋙ p ⋙ q).prod (P.ι ⋙ p ⋙ q))).FullyFaithful)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261019T002506-L-2141445",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261019T002506-L-2141445",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

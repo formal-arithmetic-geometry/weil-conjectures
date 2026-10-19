@@ -1,0 +1,101 @@
+{
+ "id": "lem-weil-pbc-tensor-comparison-descent-representatives",
+ "kind": "statement",
+ "title": "Unique descent of tensor comparison from representatives",
+ "statement": "For categories K,H,D,E, functors q:K→D, qprime:H→E, F:K→H, LF:D→E, and epsilon:q LF→F qprime, let P,S be representative full subcategories preserved by F. Assume restriction along (P→K→D) squared is fully faithful, tensor representative isomorphisms r and rprime are given, and b:t F≅(F×F)tprime. If epsilon is invertible on P and on tensors of pairs in P, there exists a unique natural isomorphism T LF≅(LF×LF)Tprime satisfying the representative square.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tags 04VI--04VK, localization universal property; application in sites-cohomology.tex Tag 07A4"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Compose r inverse, epsilon on the tensor, b, rprime, and the inverse epsilon maps on both factors to obtain a natural isomorphism after restriction.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Lift that isomorphism through fully faithful restriction. Cancellation proves its representative square. Restriction is faithful and the outside maps are invertible, so the square determines the lift uniquely.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B4",
+  "date": "2026-10-18",
+  "note": "Representative descent argument following the cited localization and derived pullback constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural tensor comparison descends uniquely along fully faithful restriction to representatives",
+   "results": "CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app; CategoryTheory.Adjunction.restrictFullyFaithful; CategoryTheory.fullyFaithfulShrinkYoneda; CategoryTheory.Functor.FullyFaithful.homNatIso'; CategoryTheory.MonoidalCategory.instFaithfulFunctorTensoringLeft; Rep.coinvariantsTensorIndNatIso; CategoryTheory.Ind.inclusion.fullyFaithful; CategoryTheory.Equivalence.fullyFaithfulToEssImage",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits concern ordinary fully faithful inclusions, restricted adjunctions, projective resolutions or the generic derived universal property; the additional representative descent and unbounded K-flat computation are proved here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between bifunctors descends uniquely through fully faithful precomposition with resolving representatives",
+   "results": "CategoryTheory.LocalizerMorphism.functorialRightResolutions.ι; CategoryTheory.LocalizerMorphism.isIso_iff_of_hasRightResolutions; CategoryTheory.LocalizerMorphism.isIso_iff_of_hasLeftResolutions; CategoryTheory.LocalizerMorphism.functorialRightResolutions.Φ_functor_map_ι_app; CategoryTheory.LocalizerMorphism.functorialRightResolutions.W₁_ι_app; CategoryTheory.Localization.Lifting₂.iso; CategoryTheory.Abelian.LeftResolution.ofCompIso; CategoryTheory.LocalizerMorphism.functorialRightResolutions.localizerMorphismInv_functor",
+   "date": "2026-10-18",
+   "verdict": "The generic localization and fully faithful APIs are used in the proof. No exact theorem includes the resolving restriction and the specified tensor representative square."
+  },
+  {
+   "tool": "grep",
+   "query": "preimageIso|fullyFaithfulWhiskeringLeft",
+   "results": "Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean; Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean; Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean; Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean; Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+   "date": "2026-10-18",
+   "verdict": "The generic localization and fully faithful APIs are used in the proof. No exact theorem includes the resolving restriction and the specified tensor representative square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses",
+  "date": "2026-10-18",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+   "place": "representative computation and two-variable descent",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TensorPullbackRepresentativeDescent",
+  "file": "lean/Sheaf/Paper/TensorPullbackRepresentativeDescent.lean",
+  "declaration": "CategoryTheory.tensorComparisonDescent",
+  "statement": "theorem tensorComparisonDescent\n    {K : Type u₁} [Category.{v₁} K] {H : Type u₂} [Category.{v₂} H]\n    {D : Type u₃} [Category.{v₃} D] {E : Type u₄} [Category.{v₄} E]\n    (q : K ⥤ D) (q' : H ⥤ E) (F : K ⥤ H) (LF : D ⥤ E)\n    (eps : q ⋙ LF ⟶ F ⋙ q')\n    (P : ObjectProperty K) (S : ObjectProperty H)\n    (hF : ∀ X, P X → S (F.obj X))\n    (ff : ((whiskeringLeft (P.FullSubcategory × P.FullSubcategory) (D × D) E).obj\n      ((P.ι ⋙ q).prod (P.ι ⋙ q))).FullyFaithful)\n    (t : K × K ⥤ K) (t' : H × H ⥤ H)\n    (T : D × D ⥤ D) (T' : E × E ⥤ E)\n    (r : (P.ι.prod P.ι) ⋙ t ⋙ q ≅ ((P.ι ⋙ q).prod (P.ι ⋙ q)) ⋙ T)\n    (r' : (S.ι.prod S.ι) ⋙ t' ⋙ q' ≅ ((S.ι ⋙ q').prod (S.ι ⋙ q')) ⋙ T')\n    (b : t ⋙ F ≅ (F.prod F) ⋙ t')\n    (he : ∀ X, P X → IsIso (eps.app X))\n    (het : ∀ X Y, P X → P Y → IsIso (eps.app (t.obj (X, Y)))) :\n    ∃! a : T ⋙ LF ≅ (LF.prod LF) ⋙ T',\n      ∀ (X Y : K) (hx : P X) (hy : P Y),\n        LF.map (r.hom.app (⟨X, hx⟩, ⟨Y, hy⟩)) ≫ a.hom.app (q.obj X, q.obj Y) ≫\n            T'.map (Prod.mkHom (eps.app X) (eps.app Y)) =\n          eps.app (t.obj (X, Y)) ≫ q'.map (b.hom.app (X, Y)) ≫\n            r'.hom.app (⟨F.obj X, hF X hx⟩, ⟨F.obj Y, hF Y hy⟩)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261019T002506-L-2141445",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261019T002506-L-2141445",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
