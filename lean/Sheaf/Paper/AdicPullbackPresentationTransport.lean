@@ -14,20 +14,8 @@ public import Sheaf.Paper.ConstantCompletionEquivalence
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 public import Mathlib.CategoryTheory.Adjunction.Mates
-import Sheaf.Algebra.Homology.DiagramKFlatReplacements
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.Paper.AdicCoefficientDatum
-import Sheaf.Paper.LocalizeRingedSiteMorphismGeneral
-import Sheaf.Paper.PbcQbarCompletedPullback
 /-!
 # Counit-normalized transport of adic pullback presentations
 
@@ -44,10 +32,77 @@ pairs over the same ordinary functor. No invertibility of the completed coeffici
 set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
+private theorem inverseMate_counit_formula
+    {C D E F : Type*} [Category* C] [Category* D] [Category* E] [Category* F]
+    {L₁ : C ⥤ D} {R₁ : D ⥤ C} {L₂ : E ⥤ F} {R₂ : F ⥤ E}
+    (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (H : D ⥤ F) :
+    ((mateEquiv a₁ a₂).symm
+      (TwoSquare.mk R₁ H (L₁ ⋙ H ⋙ R₂) R₂
+        ((Functor.associator _ _ _).inv ≫
+          Functor.whiskerRight a₁.counit _ ≫ (Functor.leftUnitor _).hom))).natTrans =
+      (Functor.associator _ _ _).hom ≫
+        Functor.whiskerLeft (L₁ ⋙ H) a₂.counit ≫ (Functor.rightUnitor _).hom := by
+  apply NatTrans.ext
+  funext M
+  dsimp [mateEquiv]
+  simp [← Functor.map_comp, a₁.left_triangle_components]
+
+private theorem derivedCounitOnComplex_comp
+    {C D : Type*} [Category* C] [Abelian C] [Category* D] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] (L₁ L₂ : DerivedCategory C ⥤ DerivedCategory D)
+    (ε₁ : DerivedCategory.Qh ⋙ L₁ ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (ε₂ : DerivedCategory.Qh ⋙ L₂ ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (e : L₁ ⟶ L₂) (he : Functor.whiskerLeft DerivedCategory.Qh e ≫ ε₂ = ε₁)
+    (P : CochainComplex C ℤ) :
+    e.app (DerivedCategory.Q.obj P) ≫ Functor.leftDerivedCounitOnComplex F L₂ ε₂ P =
+      Functor.leftDerivedCounitOnComplex F L₁ ε₁ P := by
+  have h := congr_app he ((HomotopyCategory.quotient C (.up ℤ)).obj P)
+  dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app] at h
+  dsimp only [Functor.leftDerivedCounitOnComplex]
+  rw [← e.naturality_assoc]
+  simpa only [Category.assoc, Functor.comp_obj] using
+    congrArg (fun f ↦ L₁.map ((DerivedCategory.quotientCompQhIso C).inv.app P) ≫ f ≫
+      DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors (.up ℤ)).hom.app P) ≫
+      (DerivedCategory.quotientCompQhIso D).hom.app
+        ((F.mapHomologicalComplex (.up ℤ)).obj P)) h
+
 namespace AlgebraicGeometry.Scheme
 
 variable {X Y : Scheme.{u}} (g : X ⟶ Y) {A : Type (u + 1)} [CommRing A]
   (d : AdicCoefficientDatum A)
+
+private theorem constantDirect_naturality
+    {B C : CommRingCat.{u + 1}} (φ : B ⟶ C) :
+    (constantSheaf (ProEt.topology Y) CommRingCat.{u + 1}).map φ ≫
+        proEtaleConstantDirectImageMap g CommRingCat.{u + 1} C =
+      proEtaleConstantDirectImageMap g CommRingCat.{u + 1} B ≫
+        (proEtaleSheafDirectImage g CommRingCat.{u + 1}).map
+          ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map φ) := by
+  apply ((sheafificationAdjunction (ProEt.topology Y)
+    CommRingCat.{u + 1}).homEquiv _ _).injective
+  change (sheafificationAdjunction (ProEt.topology Y) CommRingCat.{u + 1}).homEquiv _ _
+    ((presheafToSheaf (ProEt.topology Y) CommRingCat.{u + 1}).map
+      ((Functor.const Y.ProEtᵒᵖ).map φ) ≫ _) = _
+  rw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_right]
+  simp only [proEtaleConstantDirectImageMap, Equiv.apply_symm_apply]
+  apply NatTrans.ext
+  funext V
+  exact congr_app
+    (toSheafify_naturality (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).map φ))
+      ((proEtaleBaseChange g).op.obj V)
+
+private theorem constantInverse_naturality
+    {B C : CommRingCat.{u + 1}} (φ : B ⟶ C) :
+    (proEtaleSheafInverseImage g CommRingCat.{u + 1}).map
+        ((constantSheaf (ProEt.topology Y) CommRingCat.{u + 1}).map φ) ≫
+      proEtaleConstantInverseImageMap g CommRingCat.{u + 1} C =
+    proEtaleConstantInverseImageMap g CommRingCat.{u + 1} B ≫
+      (constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map φ := by
+  unfold proEtaleConstantInverseImageMap
+  rw [← Functor.map_comp_assoc, constantDirect_naturality g φ, Functor.map_comp]
+  simp only [Category.assoc]
+  rw [← (proEtaleSheafAdjunction g CommRingCat.{u + 1}).counit_naturality]
 
 /-- Projection-normalized coefficient presentations are the published coefficient map;
 finite constant-section maps commute with every quotient transition, including identities.
@@ -68,7 +123,35 @@ theorem adic_pullback_coefficient_presentations
         completedFiniteCoefficientMap g d b ≫ pbcAdicQuotient X d b a hab =
           (proEtaleSheafInverseImage g CommRingCat.{u + 1}).map
             (pbcAdicQuotient Y d b a hab) ≫ completedFiniteCoefficientMap g d a := by
-  sorry
+  have unique (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj
+      (pbcAdicCompletion Y d) ⟶ pbcAdicCompletion X d)
+      (hc : ∀ n : ℕ, c ≫ pbcAdicProjection X d n =
+        completedCoefficientComponent g d n) : c = completedCoefficientMap g d := by
+    apply limit.hom_ext
+    intro ⟨n⟩
+    change c ≫ pbcAdicProjection X d n =
+      completedCoefficientMap g d ≫ pbcAdicProjection X d n
+    rw [hc n]
+    unfold completedCoefficientMap pbcAdicProjection
+    symm
+    apply limit.lift_π
+  refine ⟨(unique c₁ h₁).trans (unique c₂ h₂).symm, unique c₁ h₁, ?_⟩
+  let c : adicLisseRingSystem Y d.ideal ⋙
+      proEtaleSheafInverseImage g CommRingCat.{u + 1} ⟶
+      adicLisseRingSystem X d.ideal :=
+    NatTrans.ofOpSequence
+      (fun n ↦ proEtaleConstantInverseImageMap g CommRingCat.{u + 1}
+        (CommRingCat.of (A ⧸ d.ideal ^ (n + 1))))
+      (fun n ↦ by
+        simpa only [Functor.comp_map, adicLisseRingSystem,
+          Functor.ofOpSequence_map_homOfLE_succ] using
+          constantInverse_naturality g
+            (CommRingCat.ofHom (Ideal.Quotient.factorPowSucc d.ideal (n + 1))))
+  let t := Functor.whiskerRight (pbcConstantSystemComparison Y d).inv
+      (proEtaleSheafInverseImage g CommRingCat.{u + 1}) ≫
+    c ≫ (pbcConstantSystemComparison X d).hom
+  intro b a hab
+  exact (t.naturality (homOfLE hab).op).symm
 
 /-- Module pullback for a specified coefficient presentation, using the existing sheaf tensor.
 Source: blueprint CBC presentation argument, Step 2
@@ -99,7 +182,8 @@ theorem adicPresentationOrdinaryUniversal_proof :
     (completedOrdinaryPullback g d).IsLeftDerivedFunctor
       (completedOrdinaryPullbackCounit g d)
       (HomotopyCategory.quasiIso (pbcModules Y (pbcAdicCompletion Y d)) (.up ℤ)) := by
-  sorry
+  unfold completedOrdinaryPullback completedOrdinaryPullbackCounit
+  exact (completedOrdinaryPullback_exists g d).choose_spec.choose_spec.1
 
 /-- The published ordinary pair carries its universal left-derived structure.
 Source: blueprint CBC argument, Step 3; Stacks 05S7
@@ -119,7 +203,8 @@ theorem adicPresentationTowerUniversal_proof :
     (completedTowerPullback g d).IsLeftDerivedFunctor
       (completedTowerPullbackCounit g d)
       (HomotopyCategory.quasiIso (pbcTowers Y (pbcAdicCompletion Y d)) (.up ℤ)) := by
-  sorry
+  unfold completedTowerPullback completedTowerPullbackCounit
+  exact (completedTowerPullback_exists g d).choose_spec.choose_spec.1
 
 /-- The published strict-tower pair carries its universal left-derived structure.
 Source: blueprint CBC argument, Step 3; Stacks 05S7
@@ -198,7 +283,23 @@ The same proof in the abelian strict-tower category gives the second assertion. 
 theorem adic_pullback_presentation_transport :
     (∃! e : L₁ ≅ L₂, Functor.whiskerLeft DerivedCategory.Qh e.hom ≫ ε₂ = ε₁) ∧
     (∃! e : T₁ ≅ T₂, Functor.whiskerLeft DerivedCategory.Qh e.hom ≫ τ₂ = τ₁) := by
-  sorry
+  constructor
+  · refine ⟨Functor.leftDerivedUnique L₂ L₁ ε₁ ε₂
+      (HomotopyCategory.quasiIso (pbcModules Y (pbcAdicCompletion Y d)) (.up ℤ)), ?_, ?_⟩
+    · simp
+    · intro e he
+      apply Iso.ext
+      apply Functor.leftDerived_ext L₂ ε₂
+        (HomotopyCategory.quasiIso (pbcModules Y (pbcAdicCompletion Y d)) (.up ℤ))
+      simpa using he
+  · refine ⟨Functor.leftDerivedUnique T₂ T₁ τ₁ τ₂
+      (HomotopyCategory.quasiIso (pbcTowers Y (pbcAdicCompletion Y d)) (.up ℤ)), ?_, ?_⟩
+    · simp
+    · intro e he
+      apply Iso.ext
+      apply Functor.leftDerived_ext T₂ τ₂
+        (HomotopyCategory.quasiIso (pbcTowers Y (pbcAdicCompletion Y d)) (.up ℤ))
+      simpa using he
 
 end Pairs
 
@@ -274,7 +375,7 @@ theorem adicPresentationEvaluationComplex_eq (n : ℕ)
     ((completedModulePullback g d).mapHomologicalComplex (.up ℤ)).obj
       ((((CategoryTheory.evaluation ℕᵒᵖ (pbcModules Y (pbcAdicCompletion Y d))).obj
         (op n)).mapHomologicalComplex (.up ℤ)).obj P) := by
-  sorry
+  rfl
 
 /-- Evaluation comparison normalized by the actual counits on strict K-flat diagrams.
 Source: CBC Step 4; Stacks 05S7 and 015F
@@ -422,7 +523,72 @@ theorem adicPresentationComparison_squares :
           (adicPresentationEvaluationIso g d L₂ ε₂ T₂ τ₂ n).hom =
         (adicPresentationEvaluationIso g d L₁ ε₁ T₁ τ₁ n).hom ≫
           Functor.whiskerLeft (pbcTowerEvaluation Y (pbcAdicCompletion Y d) n) e.hom := by
-  sorry
+  have hl : e.hom ≫ (adicPresentationOrdinaryIso g d L₂ ε₂).hom =
+      (adicPresentationOrdinaryIso g d L₁ ε₁).hom := by
+    apply Functor.leftDerived_ext (completedOrdinaryPullback g d)
+      (completedOrdinaryPullbackCounit g d)
+      (HomotopyCategory.quasiIso (pbcModules Y (pbcAdicCompletion Y d)) (.up ℤ))
+    simpa [adicPresentationOrdinaryIso, Functor.whiskerLeft_comp,
+      Category.assoc] using hε
+  have ht : et.hom ≫ (adicPresentationTowerIso g d T₂ τ₂).hom =
+      (adicPresentationTowerIso g d T₁ τ₁).hom := by
+    apply Functor.leftDerived_ext (completedTowerPullback g d)
+      (completedTowerPullbackCounit g d)
+      (HomotopyCategory.quasiIso (pbcTowers Y (pbcAdicCompletion Y d)) (.up ℤ))
+    simpa [adicPresentationTowerIso, Functor.whiskerLeft_comp,
+      Category.assoc] using hτ
+  have hi : (adicPresentationTowerIso g d T₁ τ₁).inv ≫ et.hom =
+      (adicPresentationTowerIso g d T₂ τ₂).inv := by
+    apply (cancel_mono (adicPresentationTowerIso g d T₂ τ₂).hom).1
+    simp only [Category.assoc, ht, Iso.inv_hom_id]
+  constructor
+  · apply NatTrans.ext
+    funext K
+    simp only [adicPresentationConstantIso, Iso.trans_hom, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_hom, Iso.symm_hom, NatTrans.comp_app,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app]
+    rw [← Category.assoc, ← Functor.map_comp, ← NatTrans.comp_app, hl]
+    simpa only [Category.assoc, NatTrans.comp_app] using
+      congrArg (fun f ↦
+        (completedDerivedConstant d X).map
+          (((adicPresentationOrdinaryIso g d L₁ ε₁).hom).app K) ≫
+        (completedPullbackConstantIso g d).hom.app K ≫
+        f.app ((completedDerivedConstant d Y).obj K)) hi.symm
+  · intro n
+    let v₁ := adicPresentationEvaluationIso g d L₁ ε₁ T₁ τ₁ n
+    let v := Functor.isoWhiskerRight et.symm
+        (pbcTowerEvaluation X (pbcAdicCompletion X d) n) ≪≫
+      v₁ ≪≫ Functor.isoWhiskerLeft (pbcTowerEvaluation Y (pbcAdicCompletion Y d) n) e
+    have hv₁ : HasAdicPresentationEvaluationNormalization g d L₁ ε₁ T₁ τ₁ n v₁ :=
+      (adicPresentationEvaluationIso_exists g d L₁ ε₁ T₁ τ₁ n).exists.choose_spec
+    have hv : HasAdicPresentationEvaluationNormalization g d L₂ ε₂ T₂ τ₂ n v := by
+      intro P hP
+      have h := hv₁ P hP
+      have htc := derivedCounitOnComplex_comp (completedTowerModulePullback g d)
+        T₁ T₂ τ₁ τ₂ et.hom hτ P
+      have hec := derivedCounitOnComplex_comp (completedModulePullback g d)
+        L₁ L₂ ε₁ ε₂ e.hom hε
+        ((((CategoryTheory.evaluation ℕᵒᵖ (pbcModules Y (pbcAdicCompletion Y d))).obj
+          (op n)).mapHomologicalComplex (.up ℤ)).obj P)
+      apply (cancel_epi
+        ((pbcTowerEvaluation X (pbcAdicCompletion X d) n).map
+          (et.hom.app (DerivedCategory.Q.obj P)))).1
+      simp only [v, Iso.trans_hom, Functor.isoWhiskerRight_hom,
+        Functor.isoWhiskerLeft_hom, Iso.symm_hom, NatTrans.comp_app,
+        Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.assoc]
+      rw [← Functor.map_comp_assoc, htc]
+      rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app,
+        (pbcTowerEvaluation X (pbcAdicCompletion X d) n).map_id, Category.id_comp]
+      rw [← e.hom.naturality_assoc]
+      simp only [Functor.comp_obj]
+      rw [hec]
+      exact h
+    have heq : v = adicPresentationEvaluationIso g d L₂ ε₂ T₂ τ₂ n :=
+      (adicPresentationEvaluationIso_exists g d L₂ ε₂ T₂ τ₂ n).unique hv
+        (adicPresentationEvaluationIso_exists g d L₂ ε₂ T₂ τ₂ n).exists.choose_spec
+    rw [← heq]
+    ext K
+    simp [v, v₁]
 
 include hτ in
 /-- Every finite reduction comparison is unchanged by the unique presentation transport.
@@ -437,7 +603,19 @@ theorem adicPresentationFiniteIso_transport (n : ℕ) :
         (pbcTowerEvaluation X (pbcAdicCompletion X d) n) ≫
       (adicPresentationFiniteIso g d T₂ τ₂ n).hom =
         (adicPresentationFiniteIso g d T₁ τ₁ n).hom := by
-  sorry
+  have ht : et.hom ≫ (adicPresentationTowerIso g d T₂ τ₂).hom =
+      (adicPresentationTowerIso g d T₁ τ₁).hom := by
+    apply Functor.leftDerived_ext (completedTowerPullback g d)
+      (completedTowerPullbackCounit g d)
+      (HomotopyCategory.quasiIso (pbcTowers Y (pbcAdicCompletion Y d)) (.up ℤ))
+    simpa [adicPresentationTowerIso, Functor.whiskerLeft_comp,
+      Category.assoc] using hτ
+  apply NatTrans.ext
+  funext K
+  simpa [adicPresentationFiniteIso, ← Category.assoc] using
+    congrArg (fun f ↦ (pbcTowerEvaluation X (pbcAdicCompletion X d) n).map
+      (f.app ((completedReductionTower Y d).obj K)) ≫
+        (completedReductionFiniteEvaluation g d n).hom.app K) ht
 
 /-- Finite comparisons retain every quotient arrow, including equal indices.
 Source: CBC Step 5; Stacks 099L
@@ -477,7 +655,63 @@ theorem adicPresentationCompletion_transport :
           (adicPresentationLimitComparison d T₁ T₂ et K).hom =
         e.hom.app K ≫
           adicPresentationUnit d L₂ T₂ (adicPresentationConstantIso g d L₂ ε₂ T₂ τ₂) K := by
-  sorry
+  have hl : e.hom ≫ (adicPresentationOrdinaryIso g d L₂ ε₂).hom =
+      (adicPresentationOrdinaryIso g d L₁ ε₁).hom := by
+    apply Functor.leftDerived_ext (completedOrdinaryPullback g d)
+      (completedOrdinaryPullbackCounit g d)
+      (HomotopyCategory.quasiIso (pbcModules Y (pbcAdicCompletion Y d)) (.up ℤ))
+    simpa [adicPresentationOrdinaryIso, Functor.whiskerLeft_comp,
+      Category.assoc] using hε
+  have ht : et.hom ≫ (adicPresentationTowerIso g d T₂ τ₂).hom =
+      (adicPresentationTowerIso g d T₁ τ₁).hom := by
+    apply Functor.leftDerived_ext (completedTowerPullback g d)
+      (completedTowerPullbackCounit g d)
+      (HomotopyCategory.quasiIso (pbcTowers Y (pbcAdicCompletion Y d)) (.up ℤ))
+    simpa [adicPresentationTowerIso, Functor.whiskerLeft_comp,
+      Category.assoc] using hτ
+  have hi : (adicPresentationTowerIso g d T₁ τ₁).inv ≫ et.hom =
+      (adicPresentationTowerIso g d T₂ τ₂).inv := by
+    apply (cancel_mono (adicPresentationTowerIso g d T₂ τ₂).hom).1
+    simp only [Category.assoc, ht, Iso.inv_hom_id]
+  have hc : Functor.whiskerRight e.hom (completedDerivedConstant d X) ≫
+        (adicPresentationConstantIso g d L₂ ε₂ T₂ τ₂).hom =
+      (adicPresentationConstantIso g d L₁ ε₁ T₁ τ₁).hom ≫
+        Functor.whiskerLeft (completedDerivedConstant d Y) et.hom := by
+    apply NatTrans.ext
+    funext K
+    simp only [adicPresentationConstantIso, Iso.trans_hom, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_hom, Iso.symm_hom, NatTrans.comp_app,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app]
+    rw [← Category.assoc, ← Functor.map_comp, ← NatTrans.comp_app, hl]
+    simpa only [Category.assoc, NatTrans.comp_app] using
+      congrArg (fun f ↦
+        (completedDerivedConstant d X).map
+          (((adicPresentationOrdinaryIso g d L₁ ε₁).hom).app K) ≫
+        (completedPullbackConstantIso g d).hom.app K ≫
+        f.app ((completedDerivedConstant d Y).obj K)) hi.symm
+  intro K
+  have hstep :
+      (adicPresentationConstantIso g d L₁ ε₁ T₁ τ₁).hom.app K ≫
+          T₁.map ((completedReductionTowerUnit d Y).app K) ≫
+          et.hom.app ((completedReductionTower Y d).obj K) =
+        (completedDerivedConstant d X).map (e.hom.app K) ≫
+          (adicPresentationConstantIso g d L₂ ε₂ T₂ τ₂).hom.app K ≫
+          T₂.map ((completedReductionTowerUnit d Y).app K) := by
+    have hck := congr_app hc K
+    dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.whiskerRight_app] at hck
+    rw [et.hom.naturality, ← Category.assoc, ← hck, Category.assoc]
+  dsimp only [adicPresentationUnit, adicPresentationLimitComparison]
+  change _ ≫ (completedTowerRlim d X).map (et.hom.app _) = _
+  rw [Category.assoc, ← Functor.map_comp, Category.assoc, hstep,
+    Functor.map_comp, Functor.map_comp]
+  have hu := (completedConstantRlimUnit d X).naturality (e.hom.app K)
+  simp only [Functor.id_map, Functor.comp_map] at hu
+  simpa only [Category.assoc] using
+    congrArg (fun f ↦ f ≫ (completedTowerRlim d X).map
+      ((adicPresentationConstantIso g d L₂ ε₂ T₂ τ₂).hom.app K) ≫
+        (completedTowerRlim d X).map (T₂.map ((completedReductionTowerUnit d Y).app K)))
+      hu.symm
 end TransportSquares
 
 section OpenMateTransport
@@ -550,7 +784,11 @@ theorem adicPresentationInverseMate_counit :
           (SheafOfModules.localizedModuleAdjunctionIndependent (reductionCoefficient X d n)
             ((proEtaleBaseChange g).obj U)).counit ≫
         (Functor.rightUnitor _).hom := by
-  sorry
+  have _ := hU
+  exact inverseMate_counit_formula
+    (SheafOfModules.localizedModuleAdjunctionIndependent (reductionCoefficient Y d n) U)
+    (SheafOfModules.localizedModuleAdjunctionIndependent (reductionCoefficient X d n)
+      ((proEtaleBaseChange g).obj U)) (completedReductionFiniteModules g d n)
 
 include hU in
 /-- Both finite open mates are determined by the same localized comparison, with
@@ -580,7 +818,16 @@ theorem adicPresentationInverseMate_eq
           TwoSquare.mk _ _ _ _ (adicPresentationLocalizedComparison g d U n)) :
     m₁ = adicPresentationInverseMate g d U n ∧
       m₂ = adicPresentationInverseMate g d U n := by
-  sorry
+  have _ := hU
+  constructor
+  · exact (mateEquiv
+      (SheafOfModules.localizedModuleAdjunctionIndependent (reductionCoefficient Y d n) U)
+      (SheafOfModules.localizedModuleAdjunctionIndependent (reductionCoefficient X d n)
+        ((proEtaleBaseChange g).obj U))).injective (h₁.trans (Equiv.apply_symm_apply _ _).symm)
+  · exact (mateEquiv
+      (SheafOfModules.localizedModuleAdjunctionIndependent (reductionCoefficient Y d n) U)
+      (SheafOfModules.localizedModuleAdjunctionIndependent (reductionCoefficient X d n)
+        ((proEtaleBaseChange g).obj U))).injective (h₂.trans (Equiv.apply_symm_apply _ _).symm)
 end OpenMateTransport
 
 end AlgebraicGeometry.Scheme
