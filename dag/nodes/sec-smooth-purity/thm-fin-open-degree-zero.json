@@ -19,140 +19,73 @@
  ],
  "proof": [
   {
-   "text": "Let $k$ be the base field and $\\Lambda$ the finite coefficient ring. Since a field is Noetherian, [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian. If $X$ is empty, its unique module sheaf is zero and the empty stratification proves constructibility by [def-weil-pbc-constructible-complexes].",
+   "text": "Finite type over a field makes X Noetherian, and the open subscheme U is Noetherian. Compare the finite-constant-value constructibility predicate with IsConstructibleSheaf. For each x in U, give its closure Z the reduced induced structure. Z is integral: its underlying space is the irreducible closure of a point and the subscheme is reduced. Pull back F to Z, take a dense lisse open D, and shrink D to a nonempty normal open V. The point over x is generic in Z, so it belongs to every nonempty open, in particular V.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
-    "def-weil-pbc-constructible-complexes"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-fin-open-degree-zero.proof.md",
-    "place": "Proof, first paragraph; returned step 1 re-split without changing the route"
-   }
-  },
-  {
-   "text": "Write $r:X_{\\mathrm{red}}\\to X$, $s:U_{\\mathrm{red}}\\to U$ and $F_{\\mathrm{red}}=s^{-1}F$. The reductions are surjective closed immersions and universal homeomorphisms by [lem-weil-pbc-reduction-universal-homeomorphism]. Topological invariance [thm-weil-pbc-universal-homeomorphism-invariance] and the constant-ring module adjunction [prop-weil-pbc-inverse-image-modules-exact] make their inverse and direct images mutually inverse on $\\Lambda$-module sheaves. By [lem-fin-reduction-open-direct-image], $j_*F\\cong r_*j_{\\mathrm{red},*}F_{\\mathrm{red}}$. The surjective-pullback criterion [lem-weil-pbc-etale-constructible-surjective-pullback] applies: these schemes are Noetherian, hence qcqs. It makes $F_{\\mathrm{red}}$ constructible; if $G=j_{\\mathrm{red},*}F_{\\mathrm{red}}$ is constructible, then $r^{-1}r_*G\\cong G$ makes $r_*G$ constructible. Thus the assertion for reduced schemes implies the original one.",
-   "uses": [
-    "lem-weil-pbc-reduction-universal-homeomorphism",
-    "thm-weil-pbc-universal-homeomorphism-invariance",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-fin-reduction-open-direct-image",
-    "lem-weil-pbc-etale-constructible-surjective-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-fin-open-degree-zero.proof.md",
-    "place": "Proof, first paragraph; returned step 1 re-split without changing the route"
-   }
-  },
-  {
-   "text": "It remains to prove the assertion for every reduced closed subscheme of $X_{\\mathrm{red}}$. Use Noetherian induction on their closed underlying subsets; [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] supplies this induction principle. For each such ambient scheme the inductive assertion quantifies over every open subscheme and every constructible $\\Lambda$-module sheaf on it. At the inductive stage write the ambient reduced scheme again as $X$ and assume the assertion for every proper reduced closed subscheme. Reduced closed subschemes are of finite type over $k$ (affine locally their coordinate algebras are quotients of finitely generated $k$-algebras). If the ambient scheme is empty, its unique module sheaf is zero and the empty stratification makes it constructible by [def-weil-pbc-constructible-complexes], as in step 1; so at the inductive stage $X$ may be assumed nonempty, as step 5 does.",
-   "uses": [
-    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-    "def-weil-pbc-constructible-complexes"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-fin-open-degree-zero.proof.md",
-    "place": "Proof, first paragraph; returned step 1 re-split without changing the route"
-   }
-  },
-  {
-   "text": "If $U$ is not dense, give $Z=\\overline U\\subsetneq X$ the reduced induced closed structure from [lem-weil-pbc-reduced-induced-closed-subscheme]. Since $U$ is reduced, [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] factors $U\\to X$ through $Z$. Over the open $U\\subset X$, the vanishing ideal defining $Z$ is the nilradical of $\\mathcal O_U$, hence zero; thus $Z\\times_XU=U$ and this factorization $a:U\\hookrightarrow Z$ is open. Induction makes $a_*F$ constructible, and [lem-fin-closed-immersion] makes $i_*a_*F$ constructible for $i:Z\\hookrightarrow X$. On each etale $T\\to X$, both $i_*a_*F$ and $j_*F$ have sections $F(T\\times_XU)$; the fibre-product identifications commute with restrictions along every $T^{\\prime}\\to T$. Hence [def-weil-pbc-direct-image] identifies them. This proves the nondense case, so the remaining inductive stage has $U$ dense.",
-   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
     "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
-    "lem-fin-closed-immersion",
-    "def-weil-pbc-direct-image"
+    "prop-constructible-pullback",
+    "prop-constructible-generic-constancy",
+    "lem-fin-dense-normal-open"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-fin-open-degree-zero.proof.md",
-    "place": "Proof, first paragraph; returned step 1 re-split without changing the route"
-   }
+   "elementary": false
   },
   {
-   "text": "Assume $X$ is nonempty, reduced, and $U$ is dense. Its irreducible components $X_a$, with reduced induced structure, are integral, and there are finitely many by [lem-weil-pbc-noetherian-finite-components]. For each generic point $\\eta_a$, its stratum in a constructible partition of $F$ from [def-weil-pbc-constructible-complexes] contains an open neighbourhood of $\\eta_a$ in $X_a\\cap U$: a locally closed subset containing the generic point of an irreducible space contains a dense open there. After removing all other components this neighbourhood is also open in $X$. This nonempty open is integral and of finite type over the field: it is an open of the Noetherian integral finite-type $X_a$, so is quasi-compact and locally of finite type. Apply [lem-fin-dense-normal-open] to this open to obtain a nonempty normal open $V_a$; its restriction of $F$ remains finite locally constant. These $V_a$ are pairwise disjoint. Put $V=\\coprod_aV_a$, $h:V\\hookrightarrow U$, $k=jh$, and $L=h^{-1}F$ with the inverse image of [def-weil-pbc-inverse-image]. The componentwise sheaf $L_a$ is finite locally constant. Applied to $V_a\\hookrightarrow X_a$, [lem-fin-normal-open-lisse-image] gives a constructible direct image. Push it along the closed immersion $X_a\\hookrightarrow X$ using [lem-fin-closed-immersion]. For an etale $T\\to X$, sections of $L$ on $T\\times_X V=\\coprod_a(T\\times_XV_a)$ are the product of its sections on those finitely many disjoint opens, by the sheaf axiom. Consequently [def-weil-pbc-direct-image] identifies $k_*L$ with the finite product of the preceding constructible sheaves. The zero sheaf is lisse, and a finite product is constructible by induction using $0\\to A\\to A\\oplus B\\to B\\to0$ and the extension clause of [thm-constructible-serre].",
+   "text": "Let h:V -> U and a=jh. Put L=h^*F, which is finite locally constant by pullback composition. The quasi-compact immersion a factors as an open immersion into its scheme-theoretic image Y followed by a closed immersion into X. Y is integral: the map V -> Y is dense and scheme-theoretically dominant, so its image is irreducible and Y is reduced. Y is of finite type over the same field. Apply the normal-open direct-image theorem to V -> Y, then closed-immersion constructibility to Y -> X. Composition of direct images identifies the result with j_*h_*L.",
    "uses": [
-    "lem-weil-pbc-noetherian-finite-components",
-    "def-weil-pbc-constructible-complexes",
-    "lem-fin-dense-normal-open",
+    "def-weil-pbc-inverse-image",
     "lem-fin-normal-open-lisse-image",
     "lem-fin-closed-immersion",
-    "thm-constructible-serre",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-fin-open-degree-zero.md",
-    "place": "Proof, paragraph 2; the reduction, generic-open, supported-kernel, and extension argument respectively; supplementary Stacks Tag 03RZ"
-   }
-  },
-  {
-   "text": "Let $K=\\ker(F\\to h_*L)$ for the adjunction unit. It is constructible by [lem-weil-pbc-constructible-subobjects-noetherian]. The restriction functor $h^{-1}$ is exact by [prop-weil-pbc-inverse-image-modules-exact], and $h^{-1}h_*$ is the identity by [lem-kun-open-immersion-restriction]. The adjunction identity therefore says that the restriction of the unit is an isomorphism, so $h^{-1}K=0$. Put $W=X\\setminus V$ with reduced induced structure, $W_U=W\\cap U$, and denote the immersions by $i:W\\hookrightarrow X$, $i':W_U\\hookrightarrow U$, $j_W:W_U\\hookrightarrow W$. By [prop-constructible-pullback], $K'=i'^{-1}K$ is constructible. The closed immersion $i'$ is finite by [lem-weil-pbc-closed-immersion-finite]. For the closed unit $K\\to i'_*K'$, the finite-stalk formula [lemma-weil-pbc-finite-stalk-formula] has one factor at each point of $W_U$ and no factors outside it. At a geometric point of $W_U$ this map is the isomorphism $K_{\\bar u}\\to (i'^{-1}K)_{\\bar u}$ from [lem-weil-pbc-inverse-image-stalk-germ], with the unit compatibility stated there. Outside $W_U$ both stalks vanish, since $K|_V=0$. Thus the unit is an isomorphism by [lemma-weil-pbc-geometric-stalk-conservative]; its underlying abelian isomorphism is $\\Lambda$-linear. For every etale $T\\to X$, [def-weil-pbc-direct-image] evaluates both $j_*i'_*K'$ and $i_*j_{W,*}K'$ as $K'(T\\times_XW_U)$: the canonical identifications of the iterated fibre products commute with each restriction map. Hence $j_*K\\cong i_*j_{W,*}K'$. The nonempty $V$ meets every component, so $W$ is proper closed. Induction gives constructibility of $j_{W,*}K'$, and [lem-fin-closed-immersion] gives constructibility of $j_*K$.",
-   "uses": [
-    "lem-weil-pbc-constructible-subobjects-noetherian",
-    "lemma-weil-pbc-finite-stalk-formula",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-weil-pbc-closed-immersion-finite",
     "def-weil-pbc-direct-image",
-    "lem-fin-closed-immersion",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-kun-open-immersion-restriction",
-    "prop-constructible-pullback",
-    "lem-weil-pbc-inverse-image-stalk-germ"
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-fin-open-degree-zero.md",
-    "place": "Proof, paragraph 3; the reduction, generic-open, supported-kernel, and extension argument respectively; supplementary Stacks Tags 095G, 03Q1"
-   }
+   "elementary": false
   },
   {
-   "text": "Left exactness in [def-weil-pbc-direct-image] gives $j_*K=\\ker(j_*F\\to j_*h_*L)$. For every etale $T\\to X$, the composite $j_*h_*L$ evaluates as $L((T\\times_XU)\\times_UV)$ and $k_*L$ evaluates as $L(T\\times_XV)$. The fibre-product isomorphism $(T\\times_XU)\\times_UV\\cong T\\times_XV$ identifies these evaluations and commutes with the maps induced by every $T'\\to T$, so [def-weil-pbc-direct-image] gives $j_*h_*L\\cong k_*L$. Its image $I$ is a subsheaf of the constructible $k_*L$, hence constructible by [lem-weil-pbc-constructible-subobjects-noetherian]. Thus the short exact sequence $0\\to j_*K\\to j_*F\\to I\\to0$ has constructible outer terms. The extension clause of [thm-constructible-serre] makes $j_*F$ constructible, completing the inductive step. Only left exactness, not exactness, of the open direct image was used.",
+   "text": "The geometric point over x lifts along h because h is an immersion and its image contains x. The unit F -> h_*h^*F is monomorphic on this geometric stalk: under the inverse-image/stalk composition isomorphism, composing the stalk map of the unit with the stalk map of the counit is the identity, by the adjunction triangle identity. Thus for every point there is a map out of F injective on its stalk whose direct image under j is constructible.",
    "uses": [
-    "lem-weil-pbc-constructible-subobjects-noetherian",
-    "thm-constructible-serre",
-    "def-weil-pbc-direct-image"
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-geometric-stalks",
+    "lemma-openclosed-stalk-upperstar"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-fin-open-degree-zero.md",
-    "place": "Proof, paragraph 4; the reduction, generic-open, supported-kernel, and extension argument respectively; supplementary Stacks Tag 03RZ"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply Noetherian finite selection to this family of unit maps, indexed by points of U. It gives a finite subset S such that F -> product_{x in S} G_x is mono. Each j_*G_x is constructible, so their finite product is constructible by finite biproducts and the Serre closure properties. The functor j_* preserves monomorphisms and finite products, hence gives an injection j_*F -> product_{x in S} j_*G_x. Constructibility of subsheaves on Noetherian X gives constructibility of j_*F. Convert back to the original finite-constant-value predicate.",
+   "uses": [
+    "lem-weil-pbc-constructible-noetherian-finite-selection",
+    "thm-constructible-serre",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-constructible-subobjects-noetherian",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-finite-type-over-noetherian",
-  "def-weil-pbc-constructible-complexes",
-  "lem-weil-pbc-reduction-universal-homeomorphism",
-  "thm-weil-pbc-universal-homeomorphism-invariance",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-fin-reduction-open-direct-image",
-  "lem-weil-pbc-etale-constructible-surjective-pullback",
-  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
   "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "prop-constructible-pullback",
+  "prop-constructible-generic-constancy",
+  "lem-fin-dense-normal-open",
+  "def-weil-pbc-inverse-image",
+  "lem-fin-normal-open-lisse-image",
   "lem-fin-closed-immersion",
   "def-weil-pbc-direct-image",
-  "lem-weil-pbc-noetherian-finite-components",
-  "lem-fin-dense-normal-open",
-  "lem-fin-normal-open-lisse-image",
+  "def-weil-pbc-geometric-stalks",
+  "lemma-openclosed-stalk-upperstar",
+  "lem-weil-pbc-constructible-noetherian-finite-selection",
   "thm-constructible-serre",
-  "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-constructible-subobjects-noetherian",
-  "lemma-weil-pbc-finite-stalk-formula",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "lem-weil-pbc-closed-immersion-finite",
-  "lem-kun-open-immersion-restriction",
-  "prop-constructible-pullback",
-  "lem-weil-pbc-inverse-image-stalk-germ"
+  "lem-weil-pbc-constructible-subobjects-noetherian"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-fin-open-degree-zero.md",
-  "place": "## Proof"
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-fin-open-degree-zero.proof.md",
+  "place": "Normal-lisse-open and closed-image construction of paragraph 2, applied to point closures; finite selection of stalk-injective adjunction units replaces the supported-kernel induction of paragraphs 1, 3 and 4."
  },
  "mathlib_searches": [
   {
@@ -364,15 +297,8 @@
  },
  "tool_uses": [
   "lem-weil-pbc-constructible-subobjects-noetherian",
-  "lem-weil-pbc-reduction-universal-homeomorphism",
   "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-etale-constructible-surjective-pullback",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-kun-open-immersion-restriction",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
-  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -399,5 +325,15 @@
   "by": "Q09",
   "date": "2026-10-16",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261019T132220-L-1201749",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
