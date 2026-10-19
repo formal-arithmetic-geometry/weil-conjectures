@@ -1,0 +1,124 @@
+{
+ "id": "lem-exc-categorical-nilpotent-residue-test",
+ "kind": "statement",
+ "title": "Categorical residue test for a nilpotent scalar",
+ "statement": "Let R be a commutative ring and C an R-linear Grothendieck abelian category with a braided closed monoidal structure whose tensor product is additive and R-linear in each variable. Assume C admits functorial flat resolutions, and let D(C) be its derived category [def-weil-abstract-derived-category] with the induced derived tensor. Let r in R be nilpotent, and let kappa in C be isomorphic to the cokernel of r times the identity of the tensor unit. Suppose for every F killed by r and every monomorphism f:X to Y between objects killed by r, f tensor id_F is monic. Then for every K in D(C) and integers a,b, the following are equivalent: (i) for every F in C, K tensor-derived F[0] has zero cohomology in degrees i<a or b<i; (ii) K tensor-derived kappa[0] has zero cohomology in those degrees. No ordering a<=b or boundedness of K is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-sf-proetale-residue-tor-test.proof.md",
+  "place": "The field-tensor argument and finite scalar filtration, abstracted to the categorical hypotheses; see also Stacks more-algebra.tex, lemma-check-tor-dimension-modulo-nilpotent (Tag 0H75)."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "The forward implication evaluates the universal tensor bound at kappa. For the converse, tensor the cokernel presentation of kappa with an object F killed by r. Right exactness and the unit isomorphism identify kappa tensor F with F, because multiplication by r on F is zero.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Choose a K-flat flat-term representative P of K using the assumed functorial flat resolutions. The standard derived-tensor comparison identifies K tensor-derived F[0] with Q(P tensor F), with tensor taken termwise. Every term of P tensor kappa is killed by r. Tensoring with F preserves exactness in each degree: factor the outgoing differential through its image, use right exactness on the resulting epimorphism, and use the assumed preservation of the image inclusion. Associativity and kappa tensor F = F therefore transfer the bounds from P tensor kappa to P tensor F.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For an object M killed by r^(m+1), let I be the image of r on M. The sequence I to M to cokernel(I to M) is short exact, I is killed by r^m, and the cokernel is killed by r. Cancellation against the image monomorphism and its epimorphic factorization proves the first assertion; cancellation against the cokernel projection proves the second.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Induct on m for all M killed by r^m. At m=0 the identity of M is zero, so M and its derived tensor are zero. At a successor, the short exact sequence gives a distinguished triangle after placing it in degree zero and applying K tensor-derived -. The outer terms satisfy both t-structure bounds by induction and the killed-by-r case, so the middle term does as well. Nilpotence gives one exponent for every M. This proves the converse, including an empty interval.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/TorAmplitudeResidue.lean",
+  "place": "Existing proved declaration DerivedCategory.torAmplitudeIn_iff_homologyConcentratedIn_tensor_singleFunctor; its complete implemented proof was read, reused unchanged, and summarized in the steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tor amplitude of a complex of sheaves over an Artinian local ring is detected by derived tensor with its residue field",
+   "results": "Eight hits: DerivedCategory.IsGE, isGE_Q_obj_iff, isGE_iff, IsLE, isLE_Q_obj_iff, isLE_iff, instIsGEObjCochainComplexIntQOfIsGE; CategoryTheory.isZero_Tor_succ_of_projective. None supplies the categorical nilpotent criterion or either sheaf input.",
+   "date": "2026-10-18",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor amplitude in a linear abelian monoidal category is detected by a nilpotent scalar residue object whose tensor functor preserves monomorphisms on annihilated objects",
+   "results": "Tor, Tor', isZero_Tor_succ_of_projective, isZero_Tor'_succ_of_projective, Tor'_obj_obj, Tor'_obj_map, Tor_obj, Tor_map; no match for these sheaf or derived residue statements.",
+   "date": "2026-10-18",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitudeIn_iff|constantSheafQuotientIsoCokernel|mono_whiskerRight_of_smul_id_eq_zero",
+   "results": "msearch grep: 0 Mathlib hits. Direct rg in lean/WeilConjectures found the three already implemented declarations recorded here; rg in dag/nodes found no node carrying them.",
+   "date": "2026-10-18",
+   "verdict": "existing proved source-library declarations; no duplicate Lean added"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ResidueTorAmplitudeTest",
+  "date": "2026-10-18",
+  "group": "X9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-residue-tor-test",
+   "place": "Proof, converse: the field-tensor calculation and finite nilpotent scalar filtration",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeResidue",
+  "declaration": "DerivedCategory.torAmplitudeIn_iff_homologyConcentratedIn_tensor_singleFunctor",
+  "statement": "theorem torAmplitudeIn_iff_homologyConcentratedIn_tensor_singleFunctor (r : R)\n    (hr : IsNilpotent r) {κ : C} (eκ : κ ≅ cokernel (r • 𝟙 (𝟙_ C)))\n    (hmono : ∀ F : C, r • 𝟙 F = 0 → ∀ {X Y : C} (f : X ⟶ Y) [Mono f], r • 𝟙 X = 0 →\n      r • 𝟙 Y = 0 → Mono (f ▷ F))\n    (a b : ℤ) (K : DerivedCategory C) :\n    torAmplitudeIn C a b K ↔ homologyConcentratedIn a b (K ⊗ (singleFunctor C 0).obj κ)",
+  "branch": "slopmaster2",
+  "by": "X9",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261019T112622-L-3962395",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261019T112622-L-3962395",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

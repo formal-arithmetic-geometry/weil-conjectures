@@ -1,0 +1,115 @@
+{
+ "id": "lem-exc-constant-quotient-sheaf-cokernel",
+ "kind": "statement",
+ "title": "Constant scalar quotient sheaf is a cokernel",
+ "statement": "Let C be a site with objects in Type(u+1), morphisms in Type(u), and essentially small in Type(u+1). Let J be its topology, A a commutative ring in Type(u+1), and r in A. In the category of sheaves of A-modules on J, the constant sheaf [def-weil-pbc-constant-sheaf] with value A/(r) is canonically isomorphic to the cokernel of multiplication by r on the tensor unit sheaf.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-sf-proetale-residue-tor-test.proof.md",
+  "place": "The field-tensor argument and finite scalar filtration, abstracted to the categorical hypotheses; see also Stacks more-algebra.tex, lemma-check-tor-dimension-modulo-nilpotent (Tag 0H75)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "In A-modules the range of multiplication by r on A is the principal ideal (r), so the quotient-to-range comparison identifies A/(r) with its cokernel. The constant presheaf functor preserves finite colimits because these are objectwise, and sheafification preserves them as a left adjoint. Apply the resulting constant sheaf functor to this cokernel. Its linearity identifies the resulting endomorphism with r times the identity. Finally the strong monoidal unit comparison of sheafification identifies the constant A sheaf with the tensor unit.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/Derived/TorAmplitudeResidue.lean",
+  "place": "Existing proved declaration CategoryTheory.Sheaf.constantSheafQuotientIsoCokernel; its complete implemented proof was read, reused unchanged, and summarized in the steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tor amplitude of a complex of sheaves over an Artinian local ring is detected by derived tensor with its residue field",
+   "results": "Eight hits: DerivedCategory.IsGE, isGE_Q_obj_iff, isGE_iff, IsLE, isLE_Q_obj_iff, isLE_iff, instIsGEObjCochainComplexIntQOfIsGE; CategoryTheory.isZero_Tor_succ_of_projective. None supplies the categorical nilpotent criterion or either sheaf input.",
+   "date": "2026-10-18",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor amplitude in a linear abelian monoidal category is detected by a nilpotent scalar residue object whose tensor functor preserves monomorphisms on annihilated objects",
+   "results": "Tor, Tor', isZero_Tor_succ_of_projective, isZero_Tor'_succ_of_projective, Tor'_obj_obj, Tor'_obj_map, Tor_obj, Tor_map; no match for these sheaf or derived residue statements.",
+   "date": "2026-10-18",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitudeIn_iff|constantSheafQuotientIsoCokernel|mono_whiskerRight_of_smul_id_eq_zero",
+   "results": "msearch grep: 0 Mathlib hits. Direct rg in lean/WeilConjectures found the three already implemented declarations recorded here; rg in dag/nodes found no node carrying them.",
+   "date": "2026-10-18",
+   "verdict": "existing proved source-library declarations; no duplicate Lean added"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ResidueTorAmplitudeTest",
+  "date": "2026-10-18",
+  "group": "X9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-residue-tor-test",
+   "place": "Proof, converse: the field-tensor calculation and finite nilpotent scalar filtration",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitudeResidue",
+  "declaration": "CategoryTheory.Sheaf.constantSheafQuotientIsoCokernel",
+  "statement": "noncomputable def constantSheafQuotientIsoCokernel (r : Λ) :\n    (constantSheaf J (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ (Λ ⧸ Ideal.span {r})) ≅\n      cokernel (r • 𝟙 (𝟙_ (Sheaf J (ModuleCat.{u + 1} Λ))))",
+  "branch": "slopmaster2",
+  "by": "X9",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261019T112622-L-3962395",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261019T112622-L-3962395",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

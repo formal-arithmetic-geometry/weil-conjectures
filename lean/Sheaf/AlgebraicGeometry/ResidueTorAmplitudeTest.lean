@@ -18,20 +18,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Mathlib.Topology.Algebra.Valued.LocallyCompact
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
-import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
-import Mathlib.CategoryTheory.Sites.Abelian
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Mathlib.Algebra.Homology.HomologySequence
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.ConstantFieldTensorCohomology
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitudeResidue
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 
 /-!
 # Testing finite Tor amplitude at the residue field
@@ -42,9 +30,13 @@ Source: literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-trace
 
 @[expose] public section
 
+-- Keep quotient coefficient rings on the same instance path as the generic residue criterion.
+-- Otherwise checking its specialization unfolds the full quotient-ring construction repeatedly.
+attribute [local instance 20000] CommRing.toRing
+
 universe u
 
-open CategoryTheory CategoryTheory.Limits
+open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open AlgebraicGeometry
 
 namespace Padic
@@ -65,69 +57,71 @@ end Padic
 
 namespace AlgebraicGeometry.Etale
 
+-- Match the braidings used by the existing étale derived tensor construction.
+attribute [local instance 20000] SymmetricCategory.toBraidedCategory sheafBraidedCategory
+
+private theorem derivedTensor_eq_curriedTensor
+    (A : Type*) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
+    [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
+    (T : Scheme.{u}) :
+    derivedTensor A T = curriedTensor (_root_.DerivedCategory (Sheaf T.smallEtaleTopology A)) :=
+  rfl
+
+private theorem homology_bounds {C : Type*} [Category C] [Abelian C]
+    [HasDerivedCategory C] (L : _root_.DerivedCategory C) (a b : ℤ) :
+    _root_.DerivedCategory.homologyConcentratedIn a b L ↔
+      ∀ i : ℤ, i < a ∨ b < i →
+        IsZero ((_root_.DerivedCategory.homologyFunctor C i).obj L) := by
+  constructor
+  · rintro ⟨hlo, hhi⟩ i (hi | hi)
+    · exact (_root_.DerivedCategory.isGE_iff L a).1 hlo i hi
+    · exact (_root_.DerivedCategory.isLE_iff L b).1 hhi i hi
+  · intro h
+    exact ⟨(_root_.DerivedCategory.isGE_iff L a).2 (fun i hi ↦ h i (.inl hi)),
+      (_root_.DerivedCategory.isLE_iff L b).2 (fun i hi ↦ h i (.inr hi))⟩
+
+private theorem residue_test
+    (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) (r : A) (hr : IsNilpotent r)
+    [(Ideal.span {r}).IsMaximal] (a b : ℤ) (K : DerivedCategoryModule A T) :
+    DerivedCategory.hasTorAmplitudeIn A T a b K ↔
+      ∀ i : ℤ, i < a ∨ b < i →
+        IsZero ((_root_.DerivedCategory.homologyFunctor
+          (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) i).obj
+          (((derivedTensor (ModuleCat.{u + 1} A) T).obj K).obj
+            ((_root_.DerivedCategory.singleFunctor _ 0).obj
+              ((constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)).obj
+                (ModuleCat.of A (A ⧸ Ideal.span {r})))))) := by
+  rw [DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn]
+  rw [derivedTensor_eq_curriedTensor (ModuleCat.{u + 1} A) T]
+  refine (_root_.DerivedCategory.torAmplitudeIn_iff_homologyConcentratedIn_tensor_singleFunctor
+    (C := Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) (R := A) r hr
+    (Sheaf.constantSheafQuotientIsoCokernel T.smallEtaleTopology r)
+    (fun F _ _ _ f _ _ hY ↦
+      Sheaf.mono_whiskerRight_of_smul_id_eq_zero r f hY F) a b K).trans ?_
+  exact homology_bounds _ a b
+
 /-- Tor amplitude over `A = 𝒪_E/(ϖ_E^n)` is tested by the residue constant sheaf.
 
 Source: Weil blueprint, smooth purity, trace perfectness, order 1823
 (blueprint: lem-exc-residue-tor-test).
 
 Proof:
-1. By [lem-weil-l-adic-extension-integers-dvr], $\mathcal O_E$ has maximal ideal $(\varpi_E)$ and
-finite residue field. By [lem-weil-valued-dvr-finite-quotients], $A$ is finite local with maximal
-ideal $(\varpi_E)/(\varpi_E^n)$. Thus $\kappa$ is the field $\mathcal O_E/(\varpi_E)$, and
-$\varpi_E^n=0$ in $A$. The constant-sheaf construction [def-weil-pbc-constant-sheaf] and exactness
-of sheafification [lem-weil-pbc-site-module-presheaf-sheafification-exact], applied to the
-constant-presheaf sequence $A\xrightarrow{\varpi_E}A\to\kappa\to0$, identify $A_T/\varpi_E A_T$
-with $\kappa_T$. A sheaf of $A_T$-modules killed by $\varpi_E$ therefore has a unique
-$\kappa_T$-module structure: locally write a section of the quotient ring as the image of a
-section of $A_T$ and let it act using that lift; different lifts differ by $\varpi_E A_T$ and act
-identically.
-2. If $K$ has Tor amplitude in $[a,b]$, take $\mathcal M=\kappa_T$ in the definition [def-kun-tor-
-amplitude]. This gives exactly the asserted cohomology vanishing.
-3. Conversely assume the asserted vanishing. Apply [lem-pc-kflat-resolution] on the ringed site
-$(T_{\Et},A_T)$ to a representative of $K$, obtaining a K-flat resolution $P\to K$ with every term
-$P^q$ flat. By [def-kun-derived-tensor], for any $A_T$-module sheaf $M$ in degree zero,
-$P\otimes_{A_T}M$ represents $K\otimes_A^L M$. Put $C=P\otimes_{A_T}\kappa_T$, a complex of
-$\kappa_T$-modules. The hypothesis says $\mathcal H^i(C)=0$ outside $[a,b]$. No boundedness of $P$
-or $C$ is assumed.
-4. Let $N$ be any $\kappa_T$-module sheaf. Regard $C^q$ and $N$ as presheaves of modules over the
-constant presheaf $U\mapsto\kappa$. For each $U$, tensoring $\kappa$-vector spaces with $N(U)$ is
-exact: a short exact sequence splits after lifting a basis of its quotient, and its tensor is
-again a split sequence. The tensor functor is additive, so these split sequences identify kernels
-and images after tensoring. Apply this to $0\to Z^i\to C^i(U)\to B^{i+1}\to0$ and $0\to B^i\to
-Z^i\to H^i(C(U))\to0$, with $Z^i$ and $B^i$ the cycles and boundaries of $C(U)$. It follows that
-the canonical map $[z]\otimes y\mapsto[z\otimes y]$ is an isomorphism $$H^i(C(U))\otimes_\kappa
-N(U)\simeq H^i(C(U)\otimes_\kappa N(U)).$$ This map is natural in restrictions even though the
-splittings used to prove bijectivity need not be. By [lem-pc-sites-module-sheafification-tensor],
-sheafifying the sectionwise tensor over the constant presheaf $\kappa$ gives
-$C\otimes_{\kappa_T}N$. By [lem-weil-pbc-site-module-presheaf-sheafification-exact],
-sheafification commutes with cohomology. Sheafify the displayed isomorphism and apply the tensor
-comparison again, obtaining $$\mathcal H^i(C\otimes_{\kappa_T}N)\simeq\mathcal
-H^i(C)\otimes_{\kappa_T}N.$$ In particular this vanishes outside $[a,b]$. The balanced maps
-$(x\otimes t)\otimes y\mapsto x\otimes ty$ and $x\otimes y\mapsto(x\otimes1)\otimes y$ are
-balanced over the indicated rings and commute with restrictions and differentials. Sections of a
-sheaf tensor product are locally sums of pure tensors, so these formulas define local maps on
-generators; balancing makes them independent of representatives, and sheafification glues them.
-Their composites fix each pure tensor, hence every local section; the sheaf tensor construction
-[def-pur-sheaf-tensor-product] therefore gives an isomorphism of complexes
-$$(P\otimes_{A_T}\kappa_T)\otimes_{\kappa_T}N\simeq P\otimes_{A_T}N.$$ Thus $\mathcal
-H^i(P\otimes_{A_T}N)=0$ outside $[a,b]$. The calculation uses the field $\kappa$, not the
-generally non-field ring $\kappa_T(U)$.
-5. For an arbitrary $A_T$-module sheaf $M$ put $F_sM=\operatorname{im}(\varpi_E^s:M\to M)$, $0\leq
-s\leq n$. Then $F_0M=M$ and $F_nM=0$. Write $G_s=F_sM/F_{s+1}M$. Multiplication by $\varpi_E$
-sends $F_sM$ into $F_{s+1}M$: locally its section is $\varpi_E^s m$, and its product is
-$\varpi_E^{s+1}m$. Hence $G_s$ is killed by $\varpi_E$, so step 1 makes it a $\kappa_T$-module
-sheaf and step 4 applies to $G_s$. This is a finite filtration for every $M$, including sheaves
-without any finiteness or constructibility condition.
-6. For $0\leq s<n$, tensor the short exact sequence $0\to F_{s+1}M\to F_sM\to G_s\to0$ termwise
-with $P$. Each $P^q$ is flat, so [def-pc-flat-sheaf-modules], with the elementary symmetry
-$x\otimes y\mapsto y\otimes x$, gives a short exact sequence of complexes. By [lem-weil-pbc-
-complex-ses-homology-long-exact], $$\mathcal H^i(P\otimes F_{s+1}M)\longrightarrow\mathcal
-H^i(P\otimes F_sM)\longrightarrow\mathcal H^i(P\otimes G_s)$$ is exact. Fix $i\notin[a,b]$.
-Descending induction on $s$ starts at $F_nM=0$. At the induction step the left group is zero by
-induction and the right group is zero by step 4, so the middle group is zero. At $s=0$ this proves
-$\mathcal H^i(P\otimes M)=0$. By [def-kun-derived-tensor] this is $\mathcal H^i(K\otimes_A^L
-M)=0$. Since $M$ and $i\notin[a,b]$ were arbitrary, [def-kun-tor-amplitude] proves the converse
-with exactly the same interval.
+1. The image r of the chosen uniformizer satisfies r^n = 0. The DVR theorem identifies
+   its principal ideal in the integer ring with the maximal ideal. Mapping this ideal
+   through the level-n quotient gives a maximal ideal because n is positive.
+2. Apply the existing categorical residue criterion
+   `DerivedCategory.torAmplitudeIn_iff_homologyConcentratedIn_tensor_singleFunctor` to
+   the category of module sheaves on the small etale site. Its two sheaf inputs are
+   `Sheaf.constantSheafQuotientIsoCokernel` and
+   `Sheaf.mono_whiskerRight_of_smul_id_eq_zero`. The latter uses sectionwise split
+   monomorphisms of modules over the quotient field and exact sheafification.
+   The categorical criterion computes tensor with a K-flat model and propagates the
+   bounds along the finite filtration by powers of r using distinguished triangles.
+3. The forward implication evaluates the definition at the constant residue module.
+   For the converse, convert explicit vanishing to the standard t-structure bounds,
+   apply the criterion, and convert its bounds back to vanishing for every test sheaf.
+The bounded constructibility hypothesis is retained; the argument works for arbitrary K.
 -/
 theorem residue_tor_amplitude_test
     (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E]
@@ -148,6 +142,33 @@ theorem residue_tor_amplitude_test
                 ((constantSheaf T.smallEtaleTopology
                     (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))).obj
                   (Padic.coefficientExtensionResidueModule l E n))))) := by
-  sorry
+  have _ := hK
+  have hr : (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E n)
+      (Padic.coefficientExtensionUniformizer l E)) ^ n = 0 := by
+    rw [← map_pow]
+    apply Ideal.Quotient.eq_zero_iff_mem.2
+    rw [Padic.coefficientExtensionIdeal, Ideal.span_singleton_pow]
+    exact Ideal.subset_span (Set.mem_singleton _)
+  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have hmax : (Padic.coefficientExtensionMaximalIdeal l E).IsMaximal := h.2.2.2.2.1
+  have hgen : Ideal.span {Padic.coefficientExtensionUniformizer l E} =
+      Padic.coefficientExtensionMaximalIdeal l E := h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+  have : (Ideal.span {Padic.coefficientExtensionUniformizer l E}).IsMaximal := hgen ▸ hmax
+  have hm := Ideal.IsMaximal.map_of_surjective_of_ker_le
+    (f := Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E n))
+    (m := Ideal.span {Padic.coefficientExtensionUniformizer l E})
+    Ideal.Quotient.mk_surjective (by
+      rw [Ideal.mk_ker]
+      exact Ideal.pow_le_self (by omega))
+  have : (Ideal.span {(Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E n)
+      (Padic.coefficientExtensionUniformizer l E))}).IsMaximal := by
+    simpa only [Ideal.map_span, Set.image_singleton] using hm
+  let A := Padic.coefficientExtensionRing l E n
+  let r : A := Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E n)
+    (Padic.coefficientExtensionUniformizer l E)
+  let K' : DerivedCategoryModule A T := K
+  have hg := residue_test A T r ⟨n, hr⟩ a b K'
+  exact hg
 
 end AlgebraicGeometry.Etale

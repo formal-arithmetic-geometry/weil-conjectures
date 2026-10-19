@@ -1,0 +1,116 @@
+{
+ "id": "lem-exc-residue-sheaf-tensor-monomorphism",
+ "kind": "statement",
+ "title": "Tensor preserves monomorphisms into residue-module sheaves",
+ "statement": "Let C be a site with objects in Type(u+1), morphisms in Type(u), and essentially small in Type(u+1), with topology J. Let A be a commutative ring in Type(u+1), and let r in A generate a maximal ideal. For any monomorphism f:X to Y of sheaves of A-modules with r times id_Y zero, and any sheaf F of A-modules, f tensor id_F is a monomorphism. The tensor product is the sheafification of the sectionwise tensor product; no section ring of the constant quotient field sheaf is assumed to be a field.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-sf-proetale-residue-tor-test.proof.md",
+  "place": "The field-tensor argument and finite scalar filtration, abstracted to the categorical hypotheses; see also Stacks more-algebra.tex, lemma-check-tor-dimension-modulo-nilpotent (Tag 0H75)."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The inclusion of sheaves into presheaves preserves monomorphisms. In each section, the target Y(U) is killed by r and hence has the canonical A/(r)-module structure. This is a vector space over a field, so it is semisimple as an A-module. Every monomorphism into it splits: extend the inverse from the image submodule to the whole module.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Tensoring a split monomorphism with F(U) remains split, so the sectionwise presheaf tensor map is monic. Exact sheafification preserves this monomorphism. The natural sheaf tensor comparison identifies its sheafification with f tensor id_F. The splittings need not be natural; only monicity is asserted sectionwise.",
+   "uses": [
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/Derived/TorAmplitudeResidue.lean",
+  "place": "Existing proved declaration CategoryTheory.Sheaf.mono_whiskerRight_of_smul_id_eq_zero; its complete implemented proof was read, reused unchanged, and summarized in the steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tor amplitude of a complex of sheaves over an Artinian local ring is detected by derived tensor with its residue field",
+   "results": "Eight hits: DerivedCategory.IsGE, isGE_Q_obj_iff, isGE_iff, IsLE, isLE_Q_obj_iff, isLE_iff, instIsGEObjCochainComplexIntQOfIsGE; CategoryTheory.isZero_Tor_succ_of_projective. None supplies the categorical nilpotent criterion or either sheaf input.",
+   "date": "2026-10-18",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor amplitude in a linear abelian monoidal category is detected by a nilpotent scalar residue object whose tensor functor preserves monomorphisms on annihilated objects",
+   "results": "Tor, Tor', isZero_Tor_succ_of_projective, isZero_Tor'_succ_of_projective, Tor'_obj_obj, Tor'_obj_map, Tor_obj, Tor_map; no match for these sheaf or derived residue statements.",
+   "date": "2026-10-18",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitudeIn_iff|constantSheafQuotientIsoCokernel|mono_whiskerRight_of_smul_id_eq_zero",
+   "results": "msearch grep: 0 Mathlib hits. Direct rg in lean/WeilConjectures found the three already implemented declarations recorded here; rg in dag/nodes found no node carrying them.",
+   "date": "2026-10-18",
+   "verdict": "existing proved source-library declarations; no duplicate Lean added"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ResidueTorAmplitudeTest",
+  "date": "2026-10-18",
+  "group": "X9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-residue-tor-test",
+   "place": "Proof, converse: the field-tensor calculation and finite nilpotent scalar filtration",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitudeResidue",
+  "declaration": "CategoryTheory.Sheaf.mono_whiskerRight_of_smul_id_eq_zero",
+  "statement": "lemma mono_whiskerRight_of_smul_id_eq_zero (r : Λ) [(Ideal.span {r}).IsMaximal]\n    {X Y : Sheaf J (ModuleCat.{u + 1} Λ)} (f : X ⟶ Y) [Mono f] (hY : r • 𝟙 Y = 0)\n    (F : Sheaf J (ModuleCat.{u + 1} Λ)) : Mono (f ▷ F)",
+  "branch": "slopmaster2",
+  "by": "X9",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261019T112622-L-3962395",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261019T112622-L-3962395",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -22,97 +22,42 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-l-adic-extension-integers-dvr], $\\mathcal O_E$ has maximal ideal $(\\varpi_E)$ and finite residue field. By [lem-weil-valued-dvr-finite-quotients], $A$ is finite local with maximal ideal $(\\varpi_E)/(\\varpi_E^n)$. Thus $\\kappa$ is the field $\\mathcal O_E/(\\varpi_E)$, and $\\varpi_E^n=0$ in $A$. The constant-sheaf construction [def-weil-pbc-constant-sheaf] and exactness of sheafification [lem-weil-pbc-site-module-presheaf-sheafification-exact], applied to the constant-presheaf sequence $A\\xrightarrow{\\varpi_E}A\\to\\kappa\\to0$, identify $A_T/\\varpi_E A_T$ with $\\kappa_T$. A sheaf of $A_T$-modules killed by $\\varpi_E$ therefore has a unique $\\kappa_T$-module structure: locally write a section of the quotient ring as the image of a section of $A_T$ and let it act using that lift; different lifts differ by $\\varpi_E A_T$ and act identically.",
+   "text": "Let r be the image of the chosen uniformizer in A. Its nth power is zero by the defining level-n quotient. From [lem-weil-l-adic-extension-integers-dvr], the principal uniformizer ideal in the integer ring is maximal. Since n>=1 its nth power is contained in itself, so its image in A is maximal. Ideal.map_span identifies this image with (r). These are the coefficient facts needed by the categorical criterion; no separate finiteness or locality result is used.",
    "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-valued-dvr-finite-quotients",
-    "def-weil-pbc-constant-sheaf",
-    "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+    "lem-weil-l-adic-extension-integers-dvr"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EI, lemma-sheafification-exact; elementary quotient-ring action"
-   }
+   "elementary": true
   },
   {
-   "text": "If $K$ has Tor amplitude in $[a,b]$, take $\\mathcal M=\\kappa_T$ in the definition [def-kun-tor-amplitude]. This gives exactly the asserted cohomology vanishing.",
+   "text": "Apply [lem-exc-categorical-nilpotent-residue-test] to C=Sheaf(T_Et,ModuleCat A), R=A and the scalar r. The existing etale tensor [def-kun-derived-tensor] is definitionally this derived monoidal tensor. The quotient residue sheaf is the required cokernel by [lem-exc-constant-quotient-sheaf-cokernel], and [lem-exc-residue-sheaf-tensor-monomorphism] supplies preservation of monomorphisms, using the maximality proved in step 1. The categorical criterion implements exactly the K-flat killed-by-r argument followed by induction on the nilpotent scalar filtration; no comparison with a pro-etale site is made.",
    "uses": [
-    "def-kun-tor-amplitude"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FZ, definition-tor-amplitude, clause (1)"
-   }
-  },
-  {
-   "text": "Conversely assume the asserted vanishing. Apply [lem-pc-kflat-resolution] on the ringed site $(T_{\\Et},A_T)$ to a representative of $K$, obtaining a K-flat resolution $P\\to K$ with every term $P^q$ flat. By [def-kun-derived-tensor], for any $A_T$-module sheaf $M$ in degree zero, $P\\otimes_{A_T}M$ represents $K\\otimes_A^L M$. Put $C=P\\otimes_{A_T}\\kappa_T$, a complex of $\\kappa_T$-modules. The hypothesis says $\\mathcal H^i(C)=0$ outside $[a,b]$. No boundedness of $P$ or $C$ is assumed.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "def-kun-derived-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YS, lemma-K-flat-resolution; Tag 06YU, definition-derived-tor"
-   }
-  },
-  {
-   "text": "Let $N$ be any $\\kappa_T$-module sheaf. By step 1, $\\kappa$ is a field and $\\kappa_T$ is its constant sheaf of rings on $T_{\\Et}$; apply [lem-exc-constant-field-sheaf-tensor-cohomology] to the complex $C$ of $\\kappa_T$-modules from step 3 and to $N$. It gives\n$$\\mathcal H^i(C\\otimes_{\\kappa_T}N)\\simeq\\mathcal H^i(C)\\otimes_{\\kappa_T}N,$$\nwhich vanishes for $i\\notin[a,b]$ by step 3. Next compare with $P\\otimes_{A_T}N$, where $N$ is an $A_T$-module through $A_T\\to\\kappa_T$. The formulas $(x\\otimes t)\\otimes y\\mapsto x\\otimes ty$ and $x\\otimes y\\mapsto(x\\otimes1)\\otimes y$ are balanced over the indicated rings and commute with restrictions and differentials. By [lem-pc-sites-module-sheafification-tensor] and the definition [def-pur-sheaf-tensor-product], each sheaf tensor product is the sheafification of the sectionwise tensor, so local sections are locally sums of pure tensors; the formulas define maps on these generators, balancing makes them independent of representatives, and sheafification glues them. Both composites fix every pure tensor, hence every local section. This gives an isomorphism of complexes\n$$(P\\otimes_{A_T}\\kappa_T)\\otimes_{\\kappa_T}N\\simeq P\\otimes_{A_T}N.$$\nThus $\\mathcal H^i(P\\otimes_{A_T}N)=0$ for $i\\notin[a,b]$.",
-   "uses": [
-    "lem-exc-constant-field-sheaf-tensor-cohomology",
-    "lem-pc-sites-module-sheafification-tensor",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0GMW, lemma-sheafification-tensor, and Section 03EK (tensor product) for the change-of-rings comparison; the field calculation is the new node lem-exc-constant-field-sheaf-tensor-cohomology"
-   }
-  },
-  {
-   "text": "For an arbitrary $A_T$-module sheaf $M$ put $F_sM=\\operatorname{im}(\\varpi_E^s:M\\to M)$, $0\\leq s\\leq n$. Then $F_0M=M$ and $F_nM=0$. Write $G_s=F_sM/F_{s+1}M$. Multiplication by $\\varpi_E$ sends $F_sM$ into $F_{s+1}M$: locally its section is $\\varpi_E^s m$, and its product is $\\varpi_E^{s+1}m$. Hence $G_s$ is killed by $\\varpi_E$, so step 1 makes it a $\\kappa_T$-module sheaf and step 4 applies to $G_s$. This is a finite filtration for every $M$, including sheaves without any finiteness or constructibility condition.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Elementary image/quotient filtration by powers of the scalar; coefficient quotient identified in step 1"
-   }
-  },
-  {
-   "text": "For $0\\leq s<n$, tensor the short exact sequence $0\\to F_{s+1}M\\to F_sM\\to G_s\\to0$ termwise with $P$. Each $P^q$ is flat, so [def-pc-flat-sheaf-modules], with the elementary symmetry $x\\otimes y\\mapsto y\\otimes x$, gives a short exact sequence of complexes. By [lem-weil-pbc-complex-ses-homology-long-exact],\n$$\\mathcal H^i(P\\otimes F_{s+1}M)\\longrightarrow\\mathcal H^i(P\\otimes F_sM)\\longrightarrow\\mathcal H^i(P\\otimes G_s)$$\nis exact. Fix $i\\notin[a,b]$. Descending induction on $s$ starts at $F_nM=0$. At the induction step the left group is zero by induction and the right group is zero by step 4, so the middle group is zero. At $s=0$ this proves $\\mathcal H^i(P\\otimes M)=0$. By [def-kun-derived-tensor] this is $\\mathcal H^i(K\\otimes_A^L M)=0$. Since $M$ and $i\\notin[a,b]$ were arbitrary, [def-kun-tor-amplitude] proves the converse with exactly the same interval.",
-   "uses": [
-    "def-pc-flat-sheaf-modules",
-    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-exc-categorical-nilpotent-residue-test",
     "def-kun-derived-tensor",
+    "lem-exc-constant-quotient-sheaf-cokernel",
+    "lem-exc-residue-sheaf-tensor-monomorphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the forward implication evaluate [def-kun-tor-amplitude] at the constant residue module. Conversely, split the explicit vanishing hypothesis into vanishing below a and above b, then apply DerivedCategory.isGE_iff and isLE_iff to obtain the two standard t-structure bounds. The criterion of step 2 gives those bounds after tensoring with every test sheaf M in degree zero. Convert them back with the same two equivalences and split i<a or b<i. This is exactly the universal vanishing predicate [def-kun-tor-amplitude]. No a<=b hypothesis is used, and bounded constructibility is retained without being needed.",
+   "uses": [
     "def-kun-tor-amplitude"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0117, lemma-long-exact-sequence-cochain; explicit descending induction on the filtration"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-valued-dvr-finite-quotients",
-  "def-weil-pbc-constant-sheaf",
-  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
-  "def-kun-tor-amplitude",
-  "lem-pc-kflat-resolution",
+  "lem-exc-categorical-nilpotent-residue-test",
   "def-kun-derived-tensor",
-  "lem-exc-constant-field-sheaf-tensor-cohomology",
-  "lem-pc-sites-module-sheafification-tensor",
-  "def-pur-sheaf-tensor-product",
-  "def-pc-flat-sheaf-modules",
-  "lem-weil-pbc-complex-ses-homology-long-exact"
+  "lem-exc-constant-quotient-sheaf-cokernel",
+  "lem-exc-residue-sheaf-tensor-monomorphism",
+  "def-kun-tor-amplitude"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/lem-exc-residue-tor-test.md",
-  "place": "Replacement of node-level Proof by a nilpotent scalar filtration; ringed-site ingredients from Stacks Tags 06YS, 06YU, 0GMW, 03EI and 0117"
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/TorAmplitudeResidue.lean",
+  "place": "Existing categorical nilpotent-scalar criterion, with generic site inputs from lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/Derived/TorAmplitudeResidue.lean; applied on the small etale site and combined with explicit coefficient-ideal calculations and t-structure/vanishing equivalences by X9, 2026-10-18. This is the same filtration argument as the previous node proof."
  },
  "mathlib_searches": [
   {
@@ -349,12 +294,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-valued-dvr-finite-quotients",
-  "lem-pc-kflat-resolution",
-  "lem-pc-sites-module-sheafification-tensor",
-  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
-  "lem-weil-pbc-complex-ses-homology-long-exact"
+  "lem-weil-l-adic-extension-integers-dvr"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -385,5 +325,15 @@
   "group": "Q04",
   "result": "pass",
   "note": "Statement, dependencies, helper construction, universes, edge cases, docstrings, report sections, ordinary etale tensor, and compiler evidence all checked; no substantive or mechanical defects found."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261019T112622-L-3962395",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
