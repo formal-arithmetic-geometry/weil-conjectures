@@ -28,64 +28,65 @@
  ],
  "proof": [
   {
-   "text": "For the etale topology, apply the open-closed short exact sequence [lem-weil-pbc-open-closed-short-exact] with $\\Lambda=A$ to $F=\\underline A_T$: $0\\to j_!j^{-1}\\underline A_T\\xrightarrow{\\varepsilon}\\underline A_T\\xrightarrow{\\eta}a_*a^{-1}\\underline A_T\\to0$. By [prop-weil-pbc-inverse-image-modules-exact](1), applied to $u=j$ and to $u=a$, the inverse images of the constant ring sheaf are canonically the constant ring sheaves $\\underline A_{T\\setminus C}$ and $\\underline A_C$, the identifications carrying constant sections to the same scalars. The first arrow is the arrow defining $Q^{\\mathrm{et}}_{T,C}$: by the free-Yoneda bijection [lem-weil-pbc-free-yoneda-presheaf-module] followed by the universal property of sheafification, a map $j_!\\underline A_{T\\setminus C}\\to N$ is determined by the image of the generator $e_{\\mathrm{id}}$ in $N(T\\setminus C)$, because the presheaf of [def-weil-pbc-extension-by-zero] is $\\underline A_T[h_{T\\setminus C}]$ (an etale $V\\to T$ has at most one map to $T\\setminus C$). The counit $\\varepsilon$ is the transpose of the identity of $j^{-1}\\underline A_T$, so it sends the generator to $1|_{T\\setminus C}$, and so does the arrow induced by the inclusion of the open object into the final object. Hence $Q^{\\mathrm{et}}_{T,C}\\cong a_*\\underline A_C$ canonically, and under this isomorphism $r^{\\mathrm{et}}_{T,C}$ is the unit $\\eta$ followed by the identification of (1); it sends the constant section $1$ to the constant section $1$ of $\\underline A_C$. For the pro-etale topology the same argument uses the ringed open-closed exact sequence [lem-weil-pbc-proetale-ringed-open-closed] for the ring sheaf $\\underline A_T$, whose hypothesis is exactly the quasi-compactness of $j$ added to the statement: $0\\to j_!j^{-1}\\underline A_T\\to\\underline A_T\\to a_*a^{-1}\\underline A_T\\to0$. Here $j^{-1}\\underline A_T=\\underline A_T|_{T\\setminus C}=\\underline A_{T\\setminus C}$ by [def-weil-extension-by-zero], whose presheaf $P_M$ for $M=\\underline A_{T\\setminus C}$ is again $\\underline A_T[h_{T\\setminus C}]$, so the first arrow is again the defining arrow. The module pullback of [def-weil-pbc-proetale-operations] gives $a^*\\underline A_T=a^{-1}\\underline A_T\\otimes_{a^{-1}\\underline A_T,c}\\underline A_C\\cong\\underline A_C$. Thus $Q^{\\mathrm{proet}}_{T,C}\\cong a_*\\underline A_C$, with $r^{\\mathrm{proet}}_{T,C}$ the corresponding unit, again sending $1$ to $1$.",
+   "text": "Compute the etale quotient stalk directly from its defining cokernel. On C the extension-by-zero source has zero stalk by lem-weil-pbc-extension-by-zero-stalks; preservation of cokernels makes the stalk of the quotient map invertible. Off C, factor the geometric point through the open complement. Restriction of the open counit is an isomorphism by full faithfulness of extension by zero, and the pullback/stalk isomorphism therefore makes the defining arrow invertible on that stalk; its cokernel is zero. For the normalization on C, the point fiber of the constant presheaf is its coefficient module and the point fiber inverts the sheafification unit. Their composite is exactly the constant-section germ in the statement. Compose its isomorphism with the stalk quotient-map isomorphism and take the inverse; the required generator equation is the inverse identity.",
    "uses": [
-    "lem-weil-pbc-open-closed-short-exact",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-free-yoneda-presheaf-module",
-    "lem-weil-pbc-proetale-ringed-open-closed",
+    "def-weil-pbc-extension-by-zero",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+    "place": "support quotient stalks; the source-library open-extension stalk and point-fiber APIs"
+   }
+  },
+  {
+   "text": "By lem-sfb-etale-flat-geometric-fibers, the etale quotient is flat as a fixed-scalar module-valued sheaf: its stalks are either zero or the rank-one module, both flat. Transfer this to the canonical etale realization of lem-pur-etale-sum-flat-kflat. Given a finite relation over the constant commutative ring sheaf, intersect the covering sieves on which its finitely many coefficients lift to constant scalars. The scalar action in the realization agrees with the original action, by linearity of module sheafification and the canonical constantModuleHomRingIso. Apply lem-sf-fixed-coefficient-flat-local-relations to the restricted constant-scalar relation. Map the factorization matrix back into the constant ring sheaf. Its section equation follows by linearity, and its zero coefficient equation by naturality and preservation of finite sums and products by the scalar map. Covering transitivity gives the local equational criterion, so lem-weil-pbc-site-flat-equational-criterion-universes gives IsFlatOnSite. This includes empty relations and zero rings.",
+   "uses": [
+    "lem-sfb-etale-flat-geometric-fibers",
+    "lem-pur-etale-sum-flat-kflat",
+    "lem-pur-site-constant-module-hom",
+    "lem-sf-fixed-coefficient-flat-local-relations",
+    "lem-weil-pbc-site-flat-equational-criterion-universes",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project, Modules on Sites, Tags 03ER and 08FC; project local relation criteria",
+    "place": "the flatness clause of the support quotient paragraph"
+   }
+  },
+  {
+   "text": "The existing supportQuotientConstantComparison is an isomorphism: compose the constant-sheaf and comparison adjunctions, identify their common right adjoint (global sections at the final object), and use uniqueness of left adjoints. Applying the two Hom equivalences identifies its hom with the exact map in the statement. The canonical comparison for open extension by zero and the restriction comparison are isomorphisms. Apply the unit identity of lem-sf-open-comparison-unit-normalization at the restriction of the constant sheaf; naturality of the restriction comparison and the open-adjunction triangle identity give the commuting square for the two counits. Follow its codomain map by the preceding constant comparison, and its domain map by the image of the restriction of that comparison. Naturality of the pro-etale counit gives a commuting square whose two vertical maps are isomorphisms. The comparison inverse image is a left adjoint and preserves cokernels, so PreservesCokernel.iso followed by cokernel.mapIso gives the required quotient isomorphism and the exact quotient-map identity. The pulled-back quotient map is epic; cancel it to prove uniqueness of the hom and then of the isomorphism.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
     "def-weil-pbc-constant-sheaf",
     "def-weil-pbc-extension-by-zero",
     "def-weil-extension-by-zero",
-    "def-weil-pbc-proetale-operations"
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-sf-open-comparison-unit-normalization"
    ],
    "elementary": false,
    "source": {
-    "document": "Stacks Project, Sites, Modules; project open-closed exactness lemmas",
-    "place": "the support-quotient paragraph of the blueprint"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+    "place": "comparison of the support quotient cokernels; canonical adjunction normalization"
    }
   },
   {
-   "text": "The constant ring sheaf $\\underline A_C$ is free of rank one as a module over itself, hence flat: $G\\otimes_{\\underline A_C}\\underline A_C\\cong G$ naturally, so tensoring with it is exact [def-pc-flat-sheaf-modules]. Apply the open-closed flatness criterion [lem-sfb-open-closed-flatness] to $a$ in each topology: its final clause states that $a_*M$ is flat whenever $M$ is a flat $\\underline A_C$-module sheaf; in the pro-etale case its quasi-compact-open hypothesis is the one in the statement. Flatness is invariant under isomorphism, so by the identifications of step 1 both support quotients $Q^{\\tau}_{T,C}\\cong a_*\\underline A_C$ are flat. Each quotient placed in degree zero is a bounded-above complex whose terms are flat, so it is K-flat [def-pc-kflat-complex] by [lem-pc-bounded-above-flat-kflat-site].",
+   "text": "Apply lem-exc-constant-inverse-image-flat to the fixed-scalar etale quotient and transport flatness across the quotient comparison isomorphism from the preceding step. The coefficient ring is finite and therefore Noetherian. Then lem-sf-intrinsic-realization-flat gives IsFlatOnSite of the specified pro-etale intrinsic realization. For each of the two realized quotient sheaves, its degree-zero single complex is strictly bounded above by zero. Its degree-zero term is the flat sheaf already proved flat; every other term is zero and hence flat; the siteSheafTensorRightIso of lem-weil-pbc-independent-sheaf-tensor-colimits identifies the exact monoidal tensor functor with the explicit site tensor functor used by IsFlatOnSite. Apply lem-weil-pbc-independent-bounded-flat-kflat to obtain precisely IsKFlatIndependentCoefficients. Combine these clauses with the stalk and unique-comparison clauses. No quasi-compactness beyond the unchanged statement is introduced; the direct stalk/comparison route does not need to use that assumption.",
    "uses": [
-    "lem-sfb-open-closed-flatness",
-    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-exc-constant-inverse-image-flat",
+    "lem-sf-intrinsic-realization-flat",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
     "def-pc-flat-sheaf-modules",
-    "def-pc-kflat-complex"
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": false,
    "source": {
-    "document": "project six-functors-basics and Picard-framework lemmas",
-    "place": "support quotient flatness and degree-zero K-flatness"
-   }
-  },
-  {
-   "text": "For an etale geometric point $\\bar t$ of $T$, use that a closed immersion is finite and that finite direct-image stalks are the product of the stalks over the geometric fibre. The fibre of $a$ over $\\bar t$ is empty when $\\bar t$ lies in $T\\setminus C$ and consists of the unique corresponding geometric point of $C$ when it lies on $C$. The constant-sheaf stalk lemma identifies the stalk of $A_C$ at that point with $A$; thus the stalk of $a_*A_C$, and hence of $Q^{\\mathrm{et}}_{T,C}$, is canonically $0$ off $C$ and $A$ on $C$. The identification in Step 1 carries the quotient generator through the unit, so it maps to $1$ on the latter stalk.",
-   "uses": [
-    "lem-weil-pbc-closed-immersion-finite",
-    "lem-weil-pbc-finite-stalk-formula-restriction",
-    "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "lemma-openclosed-stalk-lowerstar"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project, Etale cohomology; project finite-stalk and open-closed stalk lemmas",
-    "place": "geometric-stalk clause of the support quotient"
-   }
-  },
-  {
-   "text": "Let $V$ be $T$ or $U=T\\setminus C$, an open object of both $T_{\\mathrm{et}}$ and $T_{\\mathrm{proet}}$, and write $F^\\tau_V=j_{V!}\\underline A_V$; for $V=T$ this is $\\underline A_T$, since every object has exactly one map to the final object. As in step 1, the free-Yoneda bijection [lem-weil-pbc-free-yoneda-presheaf-module] and the universal property of sheafification, applied to the presheaves of [def-weil-pbc-extension-by-zero] and [def-weil-extension-by-zero], give bijections $\\operatorname{Hom}(F^\\tau_V,N)\\cong N(V)$, $f\\mapsto f(e_V)$, natural in the module sheaf $N$; precomposition with the defining arrow $\\iota^\\tau:F^\\tau_U\\to F^\\tau_T$ is restriction $N(T)\\to N(U)$. For a pro-etale $A$-module sheaf $N$, the module adjunction $\\nu_T^*\\dashv\\nu_{T,*}$ of [def-weil-pbc-site-comparison-morphism] and $(\\nu_{T,*}N)(V)=N(V)$ give bijections, natural in $N$,\n$$\\operatorname{Hom}(\\nu_T^*F^{\\mathrm{et}}_V,N)\\cong\\operatorname{Hom}(F^{\\mathrm{et}}_V,\\nu_{T,*}N)\\cong N(V)\\cong\\operatorname{Hom}(F^{\\mathrm{proet}}_V,N).$$\nBy Yoneda they come from a unique isomorphism $\\varphi_V:\\nu_T^*F^{\\mathrm{et}}_V\\xrightarrow{\\sim}F^{\\mathrm{proet}}_V$, the one sending the pulled-back generator to the generator; for $V=T$ it sends $\\nu_T^*1$ to $1$ and so is the ring identification of [lem-sf-comparison-pullback-exact](1). By naturality of the adjunction, precomposition with $\\nu_T^*\\iota^{\\mathrm{et}}$ is also restriction $N(T)\\to N(U)$, hence $\\varphi_T\\circ\\nu_T^*\\iota^{\\mathrm{et}}=\\iota^{\\mathrm{proet}}\\circ\\varphi_U$. The functor $\\nu_T^*$ is exact by [lem-sf-comparison-pullback-exact](2), so $\\nu_T^*r^{\\mathrm{et}}_{T,C}$ is a cokernel of $\\nu_T^*\\iota^{\\mathrm{et}}$. Therefore $\\varphi_T$ induces an isomorphism $\\psi:\\nu_T^*Q^{\\mathrm{et}}_{T,C}\\xrightarrow{\\sim}Q^{\\mathrm{proet}}_{T,C}$ with $\\psi\\circ\\nu_T^*r^{\\mathrm{et}}_{T,C}=r^{\\mathrm{proet}}_{T,C}\\circ\\varphi_T$, and it is the only such map because $\\nu_T^*r^{\\mathrm{et}}_{T,C}$ is an epimorphism. This is the asserted canonical comparison.",
-   "uses": [
-    "lem-weil-pbc-free-yoneda-presheaf-module",
-    "lem-sf-comparison-pullback-exact",
-    "def-weil-pbc-site-comparison-morphism",
-    "def-weil-pbc-extension-by-zero",
-    "def-weil-extension-by-zero"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "project six-functors comparison lemmas and the blueprint",
-    "place": "comparison of etale and pro-etale support quotients"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+    "place": "flatness and degree-zero K-flatness of the support quotient"
    }
   }
  ],
@@ -95,24 +96,27 @@
   "def-weil-extension-by-zero",
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-extension-by-zero",
-  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-geometric-stalks",
   "def-weil-pbc-site-comparison-morphism",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-sf-comparison-pullback-exact",
-  "lem-sfb-open-closed-flatness",
-  "lem-weil-pbc-closed-immersion-finite",
-  "lem-weil-pbc-constant-sheaf-geometric-stalk",
-  "lem-weil-pbc-finite-stalk-formula-restriction",
-  "lem-weil-pbc-free-yoneda-presheaf-module",
-  "lem-weil-pbc-open-closed-short-exact",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lemma-openclosed-stalk-lowerstar",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-exc-constant-inverse-image-flat",
+  "lem-pur-etale-sum-flat-kflat",
+  "lem-pur-site-constant-module-hom",
+  "lem-sf-fixed-coefficient-flat-local-relations",
+  "lem-sf-intrinsic-realization-flat",
+  "lem-sf-open-comparison-unit-normalization",
+  "lem-sfb-etale-flat-geometric-fibers",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-site-flat-equational-criterion-universes"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "D6",
+  "date": "2026-10-19",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
-  "place": "support quotient has flat terms and its etale quotient pulls back to pro-etale quotient"
+  "place": "support quotient paragraph; direct etale stalk calculation, canonical open-comparison counit square, local relation flatness and independent-universe bounded-flat criterion"
  },
  "mathlib_searches": [
   {
@@ -234,14 +238,7 @@
   ],
   "statement_change": "Added the hypothesis that the complementary pro-etale open immersion j is quasi-compact. The imported statement had no such hypothesis, while both existing pro-etale open-closed exactness and open-closed flatness lemmas explicitly require it; the corrected statement is the source-context form needed for the proof."
  },
- "tool_uses": [
-  "lem-sfb-open-closed-flatness",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-weil-pbc-free-yoneda-presheaf-module",
-  "lem-sf-comparison-pullback-exact",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-finite-stalk-formula-restriction"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -278,5 +275,15 @@
   "group": "Q89",
   "result": "pass",
   "note": "Read check-brief2, the packet, the snapshot node, module and report, all 17 stmt_deps records and the exact declarations. Clause match: finite CommRing A lifted to ULift.{u+1} as in the recorded pro-etale interfaces; IsClosedImmersion a plus QuasiCompact a.openComplement.ι (carrier (range a)ᶜ), nothing stronger. Q_et and Q_proet are cokernels of the Etale/ProEtale openImmersionLowerShriekAdjunction counits at the constant sheaf (the recorded extension by zero; sfIntrinsicExtensionByZero transports the same functor); r = cokernel.π. Flatness is IsFlatOnSite and K-flatness is IsKFlatIndependentCoefficients of the ℤ-indexed single complex in degree 0, through the canonical realizations etaleSumFlatModuleRealization and finiteCoefficientIntrinsicRealization over constant rings. Etale stalk: over all sep-closed Ω in Type u, an iso to ULift A on C normalized by constant-1 germ ≫ stalk(r) ≫ e = 𝟙, IsZero off C. Comparison: ∃! e with ν^*r_et ≫ e = φ ≫ r_proet; comparisonAdjunction is the recorded proEtaleSiteComparisonModules and φ sends constant 1 to 1. The statement field is verbatim in the file. stmt_deps gained landed lem-pur-etale-sum-flat-kflat, which creates no cycle and is allowed. Edge cases C=∅, C=T, T=∅, A=0 and non-reduced C are fine. No duplicate quotient in the side tree; supportedCoefficients are a_* constructions. Gates: no hollow definitions, source/blueprint and proof docstrings present, only sorry, no pro-etale substitute, report sections present. nt_compile --json on the unchanged snapshot module: rc=0, 17.5 s, no errors or warnings; #print axioms shows sorryAx and standard axioms only. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261019T192709-L-1856432",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
