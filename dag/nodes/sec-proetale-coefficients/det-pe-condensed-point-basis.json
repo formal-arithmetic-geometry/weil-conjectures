@@ -23,140 +23,72 @@
  ],
  "proof": [
   {
-   "text": "Finite stages, including the empty product. By [lem-weil-pbc-etale-ring-map-iff-etale-affine] an étale algebra has étale spectrum over the base field. Apply [lem-weil-pbc-etale-algebra-over-field-product] to an étale $\\Omega$-algebra $C$: it is a finite product of finite separable extensions. Each extension is $\\Omega$ by [lem-pc-sepclosed-finite-sep-trivial], so $C\\cong\\Omega^F$ for a finite set $F$, proving (1) after numbering $F$. Conversely, $\\Omega/\\Omega$ is a finite separable field extension: it has basis $1$, and the minimal polynomial of any element $a$ is $X-a$, whose derivative is $1$. Apply [lem-weil-pbc-finite-separable-extension-etale] to obtain étaleness of the identity of $\\operatorname{Spec}\\Omega$. Thus [lem-weil-pbc-etale-algebra-finite-product] and the affine ring equivalence show that every $\\Omega^F$ is an étale algebra of finite presentation. For $F=\\varnothing$ this is the zero algebra; this case is included in both cited product statements.",
+   "text": "Use the existing equivalence of a finite etale algebra over a separably closed field with the product indexed by its finite prime spectrum; enumerate that spectrum by Fin n.",
    "uses": [
-    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
-    "lem-weil-pbc-etale-algebra-over-field-product",
-    "lem-pc-sepclosed-finite-sep-trivial",
-    "lem-weil-pbc-etale-algebra-finite-product",
-    "lem-weil-pbc-finite-separable-extension-etale"
+    "lem-pc-sepclosed-finite-sep-trivial"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00U3 (lemma-etale-over-field); Tag 00U2 (lemma-etale), part (11); blueprint proof paragraph (1)"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/sk-prop-pe-condensed-point-basis.md",
+    "place": "node det-pe-condensed-point-basis, order None"
    }
   },
   {
-   "text": "Finite-source maps. For a finite set $F$, write $e_x\\in\\Omega^F$ for its characteristic idempotents. An $\\Omega$-algebra map $\\varphi:\\Omega^F\\to B$ gives $b_x=\\varphi(e_x)$ with $b_x^2=b_x$, $b_xb_y=0$ for $x\\ne y$, and $\\sum_xb_x=1$; conversely such a family defines the unique map $(a_x)\\mapsto\\sum_x a_xb_x$, since multiplication expands using orthogonality. For $B=LC(T,\\Omega)$, evaluation gives $b_x(t)\\in\\{0,1\\}$ because $\\Omega$ is a field. The sets $U_x=b_x^{-1}(1)$ are clopen (both the fiber and its complement are unions of constant neighbourhoods), pairwise disjoint, and cover $T$ by the sum identity. They are allowed to be empty. Hence they define exactly a continuous map $s:T\\to F$, and the displayed sum is $f\\mapsto f\\circ s$. This proves the required finite-source bijection and its naturality by evaluation. If $F$ is empty the family exists precisely when $B$ is the zero algebra; if $T$ is empty both maps and algebra maps are unique, so no nonempty hypothesis has been inserted.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/sk-prop-pe-condensed-point-basis.proof.md",
-    "place": "Idempotents paragraph; explicit mutually inverse maps"
-   }
-  },
-  {
-   "text": "Construct inverse limits without assuming surjective transitions. Use the size convention [def-weil-size-convention]. Let $J$ be a small cofiltered category, and $(F_j)$ a diagram of finite discrete spaces. Put $P=\\prod_{j\\in J}F_j$ and let $L\\subset P$ consist of the compatible tuples. Each condition $F(a)(x_j)=x_i$ for an arrow $a:j\\to i$ is closed, since the two coordinates take values in the finite discrete space $F_i$. Therefore $L$ is closed. The product is compact by [lem-weil-pbc-tychonoff-product-quasi-compact], and $L$ is compact by [lem-weil-pbc-closed-in-quasi-compact]. Distinct tuples have different coordinates and are separated by disjoint coordinate cylinders. Every connected subset has singleton image under each coordinate projection into a finite discrete space (otherwise the inverse images give a separation); it therefore has at most one point. Thus $L$ is Hausdorff and totally disconnected, hence profinite. A compatible family of continuous maps into the $F_j$ gives the continuous tuple-valued map into $P$ and its factor through $L$, proving the limit universal property. This construction allows empty factors and empty limits.",
-   "uses": [
-    "def-weil-size-convention",
-    "lem-weil-pbc-tychonoff-product-quasi-compact",
-    "lem-weil-pbc-closed-in-quasi-compact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tags 08ZU (theorem-tychonov), 005C (lemma-closed-in-quasi-compact), 0ET8 (lemma-directed-inverse-limit-profinite), explicit finite-discrete specialization"
-   }
-  },
-  {
-   "text": "Recover a profinite $S$ from its finite quotients. Let $J$ have as objects the finite partitions $\\alpha$ of $S$ into nonempty clopen blocks, with one arrow $\\beta\\to\\alpha$ exactly when $\\beta$ refines $\\alpha$. Its objects form a set in the chosen universes. There is at least one partition (the single-block partition for nonempty $S$, and the empty partition for empty $S$). Nonempty intersections of blocks give a common refining partition for any two partitions; parallel arrows already agree. Thus $J$ is cofiltered. Let $F_\\alpha$ be the finite discrete set of blocks. The canonical map $S\\to\\lim_\\alpha F_\\alpha$ is continuous. Clopens separate distinct points by [lem-weil-pbc-profinite-clopen-basis] and the Hausdorff property, so this map is injective. A compatible tuple of blocks has the finite intersection property: a common refining partition supplies a nonempty block contained in any specified finite collection of its blocks. Compactness of $S$ makes their total intersection nonempty, by applying the finite-subcover definition to their open complements. Its point maps to that tuple. When $S$ is empty the empty quotient makes the target empty as well. Thus the map is bijective, and is a homeomorphism by [lem-weil-pbc-compact-hausdorff-bijection], since the target is Hausdorff by the preceding construction. Finite continuous quotient maps are exactly these partitions, up to labeling.",
-   "uses": [
-    "def-weil-size-convention",
-    "lem-weil-pbc-profinite-clopen-basis",
-    "lem-weil-pbc-compact-hausdorff-bijection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 08ZY (lemma-profinite), proof by finite clopen partitions; Tags 08ZZ (lemma-profinite-refine-open-covering) and 08YE (lemma-bijective-map)"
-   }
-  },
-  {
-   "text": "Eventual equality for the inverse system of step 3. Let $f,g:F_i\\to R$ be functions to a set $R$ whose pullbacks to $L$ agree, and put $E=\\{x\\in F_i:f(x)\\ne g(x)\\}$. We claim that some arrow $a:j\\to i$ has $F(a)(F_j)\\cap E=\\varnothing$. If some $F_k$ is empty, take a common predecessor of $k$ and $i$; its finite set is empty, proving the claim. Otherwise every $F_j$ is nonempty. In the compact product $P$ of step 3, the closed compatibility conditions together with $x_i\\in E$ have empty intersection. Compactness, supplied by [lem-weil-pbc-tychonoff-product-quasi-compact], gives a finite subfamily with empty intersection. Add the condition $x_i\\in E$ if necessary. Choose a cone in $J$ over the finitely many objects and arrows appearing in this subfamily, including $i$. To construct it, choose a common predecessor $k$ of all the finitely many objects $v$, with maps $u_v:k\\to v$. For each selected arrow $b:v\\to w$, the composites $b u_v$ and $u_w$ are parallel. Successively precompose all the $u_v$ by an equalizing arrow for each of these finitely many pairs. Previously obtained equalities persist under precomposition, so the final maps form the required cone. These are the duals of the filtered conditions in [def-weil-pbc-category-colimit]. If every arrow to $i$ had image meeting $E$, choose a point in the cone vertex whose $i$-coordinate belongs to $E$. Its cone images satisfy all the selected compatibility conditions. Choose arbitrary elements in all remaining nonempty factors to obtain a tuple of $P$, a contradiction. This proves the claim. Hence $f$ and $g$ become equal after pullback along one transition, even when the transition maps are not surjective.",
-   "uses": [
-    "lem-weil-pbc-tychonoff-product-quasi-compact",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 0A2R (lemma-nonempty-limit), finite-compatibility/compactness argument in its proof; explicit eventual-equality argument expanding the blueprint paragraph (2)"
-   }
-  },
-  {
-   "text": "The locally constant ring is the algebraic colimit. For the arbitrary cofiltered finite system of step 3 and any commutative ring $R$, [lem-weil-pbc-profinite-limit-function-factorization] applies: $J$ is small cofiltered, all finite $F_j$ are profinite, and the constructed cone is limiting. Every $h\\in LC(L,R)$ is thus $f_i\\circ p_i$ for a function $f_i:F_i\\to R$. Given a compatible cocone of $R$-algebra maps $\\psi_i:R^{F_i}\\to B$, define $\\psi(h)=\\psi_i(f_i)$. For two representatives choose a common predecessor and apply step 5 there; equality after a further transition and cocone compatibility show this value is independent of the representative. Two representatives for two elements can be put at a common stage, so pointwise addition, multiplication, the unit and constant scalars show that $\\psi$ is an $R$-algebra map. Every element is represented, so $\\psi$ is unique. This is precisely the universal property in [def-weil-pbc-category-colimit], proving $LC(L,R)\\cong\\varinjlim_{J^{\\mathrm{op}}}R^{F_j}$ with structure maps given by pullback along $p_j$. This is also a colimit in commutative rings: for any compatible cocone of unital ring maps $\\theta_j:R^{F_j}\\to B$, their composites with the constant-function maps $R\\to R^{F_j}$ agree, since any two stages have a common predecessor. Nonemptiness of $J$ therefore gives a single scalar map $R\\to B$, for which every $\\theta_j$ is an $R$-algebra map. The preceding algebra universal property gives the unique ring map out of $LC(L,R)$ extending the cocone; any such ring map respects this scalar map because it agrees with a structure map on constant functions. In particular step 4 gives this description over the finite quotients of any profinite $S$.",
-   "uses": [
-    "lem-weil-pbc-profinite-limit-function-factorization",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/sk-prop-pe-condensed-point-basis.proof.md",
-    "place": "Paragraph (3), colimit formula, and paragraph (2), arbitrary inverse system; factorization input: Stacks Topology Tags 08ZY and 08ZZ / Profinite.exists_locallyConstant"
-   }
-  },
-  {
-   "text": "Prove (3) with its specified map. Use step 6 for the finite quotients $S\\to F_\\alpha$. By the colimit universal property [def-weil-pbc-category-colimit], an $\\Omega$-algebra map $LC(S,\\Omega)\\to LC(T,\\Omega)$ is exactly a compatible family of maps $\\Omega^{F_\\alpha}\\to LC(T,\\Omega)$. Step 2 identifies this family with compatible continuous maps $T\\to F_\\alpha$; its naturality ensures compatibility with refinement. The limit identification of step 4 identifies these with exactly one continuous $s:T\\to S$. For $h=f_\\alpha\\circ q_\\alpha$, the corresponding algebra map sends $h$ to $f_\\alpha\\circ q_\\alpha\\circ s=h\\circ s$. This computes the bijection as exactly the precomposition map in (3), including its compatibility with identities and composition.",
-   "uses": [
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/sk-prop-pe-condensed-point-basis.proof.md",
-    "place": "Paragraph (3), chain of Hom identifications"
-   }
-  },
-  {
-   "text": "Prove (2). By [def-weil-pbc-ind-etale-algebra] an ind-étale $\\Omega$-algebra $A$ has a small filtered presentation by étale algebras of finite presentation. Step 1 identifies its terms with $\\Omega^{F_i}$. Apply step 2 with finite discrete $T=F_j$ to each transition map: it is uniquely the pullback of a set map $F_j\\to F_i$. Uniqueness makes these maps a functor on the opposite, cofiltered index category. Step 3 constructs its profinite limit $S$, and step 6 identifies the given colimit with $LC(S,\\Omega)$. Conversely, the finite-quotient presentation of step 6 has terms $\\Omega^{F_\\alpha}$, all étale of finite presentation by step 1, and the opposite $J^{\\mathrm{op}}$ of the partition category in step 4 is filtered. The cited definition therefore says that every $LC(S,\\Omega)$ is ind-étale. Empty finite sets, which represent zero algebras, were retained throughout.",
+   "text": "Evaluate an ind-etale algebra at each prime using the unique inverse of its separably closed residue-field scalar map. Each element comes from a finite etale stage, proving local constancy. Evaluations separate elements because ind-etale algebras over a field are absolutely flat and reduced. Surjectivity follows from liftPrimeSpectrum and its evaluation congruence. Characteristic functions separate points and show that the spectrum is totally separated, hence profinite.",
    "uses": [
     "def-weil-pbc-ind-etale-algebra",
-    "def-weil-size-convention"
+    "lem-pc-sepclosed-finite-sep-trivial"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/sk-prop-pe-condensed-point-basis.proof.md",
-    "place": "Paragraph (2), filtered étale presentation and its converse"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/sk-prop-pe-condensed-point-basis.md",
+    "place": "node det-pe-condensed-point-basis, order None"
    }
   },
   {
-   "text": "Pass to schemes and identify the test functor. Spectrum is contravariant and gives a bijection between ring maps and morphisms of affine schemes by [def-weil-affine-spectrum]; its base-compatible maps are exactly the $\\Omega$-algebra maps. Thus (3) makes $S\\mapsto\\operatorname{Spec}LC(S,\\Omega)$ fully faithful and (2) makes it essentially surjective onto affine ind-étale $\\Omega$-schemes. Finally [def-sfb-profinite-test-objects] states $X[S]=\\lim_\\alpha\\coprod_{F_\\alpha}X$. For $X=\\operatorname{Spec}\\Omega$, [lem-weil-pbc-finite-affine-coproduct-spectrum] identifies the finite terms with $\\operatorname{Spec}\\Omega^{F_\\alpha}$, with coprojections equal to spectra of the coordinate projections. Their transition maps are spectra of pullback on functions: on each summand indexed by $t\\in F_\\beta$ the pullback followed by evaluation at $t$ is evaluation at its image in $F_\\alpha$. Step 6 and [lem-weil-pbc-spec-small-colimit-limit] identify the limit of this same diagram with $\\operatorname{Spec}LC(S,\\Omega)$. The unique isomorphism of limiting cones is over $X$ and is natural in $S$, because a continuous map induces the pullback maps already computed in step 7. Hence the functor is the stated $X[S]$ functor. This limit comparison proves the last assertion without assuming an uncited tensor/colimit interchange.",
+   "text": "Locally constant algebras are ind-Zariski by the existing finite-discrete-quotient colimit presentation, hence ind-etale. Canonical ULift transports give the across-universes predicate.",
    "uses": [
-    "def-weil-affine-spectrum",
-    "def-sfb-profinite-test-objects",
-    "lem-weil-pbc-finite-affine-coproduct-spectrum",
-    "lem-weil-pbc-spec-small-colimit-limit"
+    "def-weil-pbc-ind-etale-algebra"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/sk-prop-pe-condensed-point-basis.proof.md",
-    "place": "Last paragraph; the already stated inverse-limit description of X[S] replaces the tensor computation"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/sk-prop-pe-condensed-point-basis.md",
+    "place": "node det-pe-condensed-point-basis, order None"
+   }
+  },
+  {
+   "text": "Precomposition is injective since clopen characteristic functions separate points of a profinite space. Given an algebra map use the existing prime-spectrum homeomorphism Spec LC(S, Ω) ≃ S × Spec Ω to construct its continuous map. The vanishing of f minus its value at the resulting point proves that precomposition equals the given map.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/sk-prop-pe-condensed-point-basis.md",
+    "place": "node det-pe-condensed-point-basis, order None"
+   }
+  },
+  {
+   "text": "Apply the proved categorical assembly lemma: the algebraic Hom bijection and fully faithful relative spectrum functor give full faithfulness, and the algebra classification gives essential surjectivity. For the test-object comparison, construct the pushout LC(S, ℤ) ⊔_ℤ Ω = LC(S, Ω). Characteristic functions of fibres become one after localization at the chosen prime, so a ring map on LC(S, Ω) is determined by its scalar map and its restriction to LC(S, ℤ). liftPrimeSpectrum constructs the unique map with these data. Taking spectra gives precisely the defining base-change pullback. Uniqueness of the pullback comparison gives an isomorphism over Spec Ω; the two projection equations prove naturality.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-ind-etale-algebra",
+    "def-sfb-profinite-test-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/sk-prop-pe-condensed-point-basis.md",
+    "place": "node det-pe-condensed-point-basis, order None"
    }
   }
  ],
  "proof_deps": [
   "def-sfb-profinite-test-objects",
   "def-weil-affine-spectrum",
-  "def-weil-pbc-category-colimit",
   "def-weil-pbc-ind-etale-algebra",
-  "def-weil-size-convention",
-  "lem-pc-sepclosed-finite-sep-trivial",
-  "lem-weil-pbc-closed-in-quasi-compact",
-  "lem-weil-pbc-compact-hausdorff-bijection",
-  "lem-weil-pbc-etale-algebra-finite-product",
-  "lem-weil-pbc-etale-algebra-over-field-product",
-  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
-  "lem-weil-pbc-finite-affine-coproduct-spectrum",
-  "lem-weil-pbc-finite-separable-extension-etale",
-  "lem-weil-pbc-profinite-clopen-basis",
-  "lem-weil-pbc-profinite-limit-function-factorization",
-  "lem-weil-pbc-spec-small-colimit-limit",
-  "lem-weil-pbc-tychonoff-product-quasi-compact"
+  "lem-pc-sepclosed-finite-sep-trivial"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/sk-prop-pe-condensed-point-basis.proof.md",
-  "place": "All four proof paragraphs, expanded using Stacks algebra.tex Tag 00U3 and topology.tex Tags 08ZU, 005C, 08ZY, 08ZZ, 08YE and 0A2R. Final test-object identification uses the same finite-stage diagram instead of an implicit tensor/colimit interchange."
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/sk-prop-pe-condensed-point-basis.md",
+  "place": "U5: direct prime-spectrum evaluation, scheme equivalence, and ring pushout test-functor comparison; complete Lean proof with no new holes"
  },
  "mathlib_searches": [
   {
@@ -310,5 +242,15 @@
   "by": "NZ",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261019T034312-L-419059",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
