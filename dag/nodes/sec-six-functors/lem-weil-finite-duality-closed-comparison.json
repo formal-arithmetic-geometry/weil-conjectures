@@ -24,28 +24,9 @@
  ],
  "proof": [
   {
-   "text": "Write $F_W=\\nu_W^*$. The ring $A$ is finite and commutative. The spectrum of the field $k$ is Noetherian: its only ideals are $0,k$ and its spectrum has one point. Thus $T,Z$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. The open $U$ is Noetherian, hence quasi-compact, by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. The schemes are separated over $k$ (and $U$ is an open of the separated scheme $T$), so they are quasi-separated. By [lem-weil-pbc-qcqs-morphism-permanence], both $i$ and $j$ are quasi-compact and quasi-separated. This verifies the hypotheses of the pro-etale closed-support results and of the canonical direct-image comparison for both immersions.",
+   "text": "The existing assumptions already give qcqs closed and open maps. Finiteness of the coefficient quotient is supplied by Padic.finite_coefficientExtensionRing. Unfold the transported canonical component; qcqs invertibility of fixedComparisonDirectImageMatePlus, functorial mapping and composition give its invertibility.",
    "uses": [
     "def-weil-l-adic-coefficient-extension",
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-weil-pbc-qcqs-morphism-permanence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
-    "place": "Proof, first paragraph: compare the closed-support triangles"
-   }
-  },
-  {
-   "text": "First check the boundedness needed to define $\\delta_{I_{\\mathrm{et}}M}$. The etale support triangle of [lem-exc-closed-support-triangle] gives $i_{\\mathrm{et},*}I_{\\mathrm{et}}M\\to M\\to Rj_{\\mathrm{et},*}j_{\\mathrm{et}}^*M\\to$. Exact etale module inverse image [prop-weil-pbc-inverse-image-modules-exact] preserves bounded below objects: exactness identifies kernels and images and thus commutes with cohomology. Since $M$ is bounded, $j_{\\mathrm{et}}^*M$ is bounded below; its derived direct image is bounded below by [def-weil-pbc-direct-image]. Closure of $D^+$ under triangles [def-weil-pbc-bounded-derived-subcategories] shows that $i_{\\mathrm{et},*}I_{\\mathrm{et}}M$ is bounded below. By [lem-kun-04ca], $i_{\\mathrm{et}}^*i_{\\mathrm{et},*}\\cong\\mathrm{id}$ on abelian sheaves. This isomorphism respects constant $A$-actions, since it is natural with respect to multiplication by each scalar; therefore it holds on module sheaves and termwise on complexes. The direct image in the support triangle is termwise; applying the exact $i_{\\mathrm{et}}^*$ gives $I_{\\mathrm{et}}M$ bounded below. In particular the isomorphism $\\delta_{I_{\\mathrm{et}}M}$ of [lem-weil-pbc-comparison-direct-image-canonical-mate] is defined. No constructibility of $I_{\\mathrm{et}}M$ has been used.",
-   "uses": [
-    "lem-exc-closed-support-triangle",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-bounded-derived-subcategories",
-    "lem-kun-04ca",
     "lem-weil-pbc-comparison-direct-image-canonical-mate"
    ],
    "elementary": false,
@@ -55,11 +36,26 @@
    }
   },
   {
-   "text": "On pro-etale module sheaves $i_{\\mathrm{proet},*}$ is exact by [lem-exc-proetale-closed-exact], and its ordinary inverse-image counit $i_{\\mathrm{proet}}^*i_{\\mathrm{proet},*}\\to\\mathrm{id}$ is an isomorphism by [lem-exc-proetale-closed-fully-faithful]. The inverse image is exact by [prop-weil-pbc-proetale-constant-exact]. The module adjunction $i_{\\mathrm{proet}}^*\\dashv i_{\\mathrm{proet},*}$ of [def-weil-pbc-proetale-operations] consequently descends termwise to the ordinary derived categories: apply localization to its termwise unit and counit; their two triangle identities still hold. Its counit is still invertible. Hence closed direct image is fully faithful there: its adjunction bijection identifies maps $i_*P\\to i_*Q$ with maps $i^*i_*P\\to Q$, and composing with the inverse-image counit identifies the latter with maps $P\\to Q$. It reflects isomorphisms, since fullness lifts an inverse and faithfulness verifies its two inverse identities.",
+   "text": "For boundedness, construct the sheaf-level closed right adjoint using the kernel of the open adjunction unit. Exact open restriction kills that kernel, the closed essential-image theorem identifies it with a closed pushforward, and full faithfulness yields the Hom equivalence. Derive this adjunction and use uniqueness of right adjoints to identify the chosen ambient etale right adjoint with the total right derived sheaf adjoint. The Plus/full compatibility then gives a bounded-below lift whenever M is bounded below. Bounded constructible M is bounded below by its cohomological interval.",
+   "uses": [
+    "lem-exc-closed-ambient",
+    "lem-kun-04ca",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-bounded-derived-subcategories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
+    "place": "Proof, first paragraph: compare the closed-support triangles"
+   }
+  },
+  {
+   "text": "Exact closed pro-etale pushforward and exact open inverse image descend termwise. Their composite is zero by disjointness. Under the closed exceptional adjunction followed by the open inverse/direct-image adjunction, maps from P to I_p Rj_* Q identify with maps from j^* Ri_* P to Q. The latter source is zero. Apply this to the identity to prove I_p Rj_* Q is zero.",
    "uses": [
     "lem-exc-proetale-closed-exact",
-    "lem-exc-proetale-closed-fully-faithful",
     "prop-weil-pbc-proetale-constant-exact",
+    "lem-exc-proetale-closed-support",
     "def-weil-pbc-proetale-operations",
     "def-weil-abstract-derived-category"
    ],
@@ -70,31 +66,15 @@
    }
   },
   {
-   "text": "Let $a=a_j:F_Uj_{\\mathrm{et}}^*\\xrightarrow{\\sim}j_{\\mathrm{proet}}^*F_T$ be [lem-weil-pbc-comparison-pullback], and let $b=b_j$ be [lem-weil-pbc-comparison-direct-image-canonical-mate]. Set\n$$\\gamma_M=Rj_{\\mathrm{proet},*}(a_M)\\circ b_{j,j_{\\mathrm{et}}^*M}:F_TRj_{\\mathrm{et},*}j_{\\mathrm{et}}^*M\\xrightarrow{\\sim}Rj_{\\mathrm{proet},*}j_{\\mathrm{proet}}^*F_TM.$$\nAll inputs to $b$ are bounded below by Step 2. We verify the unit square, rather than choosing an unspecified isomorphism. Write $\\eta^e,\\eta^p$ for the open-adjunction units and $\\varepsilon^e$ for the etale open counit. Under $j_{\\mathrm{proet}}^*\\dashv Rj_{\\mathrm{proet},*}$ the transpose of $b_{j,j_{\\mathrm{et}}^*M}\\circ F_T(\\eta^e_M)$ is, by the defining mate formula,\n$$F_U(\\varepsilon^e_{j_{\\mathrm{et}}^*M})\\circ a_{Rj_{\\mathrm{et},*}j_{\\mathrm{et}}^*M}^{-1}\\circ j_{\\mathrm{proet}}^*F_T(\\eta^e_M)\n=F_U(\\varepsilon^e_{j_{\\mathrm{et}}^*M}\\circ j_{\\mathrm{et}}^*\\eta^e_M)\\circ a_M^{-1}=a_M^{-1}.$$\nThe first equality is naturality of $a$, the second the adjunction triangle identity. Applying $a_M$ proves $\\gamma_M\\circ F_T(\\eta^e_M)=\\eta^p_{F_TM}$.",
+   "text": "For bounded-below M, open restriction has its explicit Plus lift. The canonical qcqs direct-image comparison identifies F_T Rj_et,* j_et^* M with a pro-etale open direct image, which the previous step shows is killed by I_p. Apply the exact triangulated functors F_T and I_p to the etale support triangle. Its third object is zero, so I_p F_T of the etale closed counit is invertible. The defining transpose alpha is the exceptional unit followed by I_p of delta inverse and this counit. Closed direct image is fully faithful, so its exceptional unit is invertible. Thus alpha is invertible. This avoids constructing or comparing a pro-etale support triangle.",
    "uses": [
-    "lem-weil-pbc-comparison-pullback",
     "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "def-weil-pbc-adjunction-mate"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
-    "place": "Proof, first paragraph: compare the closed-support triangles"
-   }
-  },
-  {
-   "text": "The exact functor $F_T$ of [lem-sf-comparison-pullback-exact] carries distinguished triangles to distinguished triangles by [lem-sf-exact-functor-derived-triangulated]. Apply it to the etale support triangle [lem-exc-closed-support-triangle] and identify its first term using $\\delta_{I_{\\mathrm{et}}M}$. Its first arrow is then\n$$u_M=F_T(\\epsilon^{\\mathrm{et}}_M)\\circ\\delta_{I_{\\mathrm{et}}M}^{-1}:i_{\\mathrm{proet},*}F_ZI_{\\mathrm{et}}M\\to F_TM.$$\nCompare with the pro-etale support triangle [lem-exc-proetale-support-triangle] at $F_TM$. Its first arrow is the exceptional counit and its second the open unit: these normalizations are explicitly given by [lem-exc-proetale-derived-adjunction-triangle] and [lem-exc-proetale-open-derived-image], using their common K-injective representative. The hypotheses of the derived-adjunction statement hold by Step 3, the restriction description in the open-derived-image statement, and [lem-exc-proetale-closed-essential-image]: closed images have zero open restriction and every sheaf with zero open restriction has invertible closed unit. Identify its derived right adjoint with $I_{\\mathrm{proet}}$ by the unique right-adjoint isomorphism preserving the counit. Step 4 gives the commuting square between the second arrows with vertical maps $1_{F_TM}$ and $\\gamma_M$. Rotate both triangles and apply TR3 in [def-weil-triangulated-category], then rotate back. This supplies a first vertical map\n$$f_M:i_{\\mathrm{proet},*}F_ZI_{\\mathrm{et}}M\\longrightarrow i_{\\mathrm{proet},*}I_{\\mathrm{proet}}F_TM$$\nwith $\\epsilon^{\\mathrm{proet}}_{F_TM}\\circ f_M=u_M$. Since the other two vertical maps are isomorphisms, [lem-sf-triangle-morphism-iso] makes $f_M$ an isomorphism.",
-   "uses": [
+    "lem-exc-closed-support-triangle",
     "lem-sf-comparison-pullback-exact",
     "lem-sf-exact-functor-derived-triangulated",
-    "lem-exc-closed-support-triangle",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-exc-proetale-support-triangle",
-    "lem-exc-proetale-derived-adjunction-triangle",
-    "lem-exc-proetale-open-derived-image",
-    "def-weil-triangulated-category",
-    "lem-sf-triangle-morphism-iso",
-    "lem-exc-proetale-closed-essential-image"
+    "lem-exc-proetale-closed-fully-faithful",
+    "lem-exc-proetale-closed-support",
+    "def-weil-triangulated-category"
    ],
    "elementary": false,
    "source": {
@@ -103,11 +83,24 @@
    }
   },
   {
-   "text": "By the derived full faithfulness in Step 3, $f_M=i_{\\mathrm{proet},*}(\\beta_M)$ for a unique map $\\beta_M:F_ZI_{\\mathrm{et}}M\\to I_{\\mathrm{proet}}F_TM$. The equation from Step 5 says $\\epsilon^{\\mathrm{proet}}_{F_TM}\\circ i_{\\mathrm{proet},*}(\\beta_M)=u_M$. Under the exceptional adjunction [lem-exc-proetale-closed-support], this is exactly the statement that $\\beta_M$ is the transpose of $u_M$, hence $\\beta_M=\\alpha_M$ as defined in the item. Since $i_{\\mathrm{proet},*}$ reflects isomorphisms, $\\alpha_M$ is invertible. Multiplying this equation on the right by $\\delta_{I_{\\mathrm{et}}M}$ gives the required counit identity. Finally $u_M$ is natural, because $\\delta$ is natural by [lem-weil-pbc-comparison-direct-image-canonical-mate] and $\\epsilon^{\\mathrm{et}}$ is the adjunction counit [lem-exc-closed-ambient]. For $h:M\\to N$, naturality of $u$ and of the pro-etale counit shows that the two maps $I_{\\mathrm{proet}}F_T(h)\\circ\\alpha_M$ and $\\alpha_N\\circ F_ZI_{\\mathrm{et}}(h)$ have the same transpose $F_T(h)\\circ u_M=u_N\\circ i_{\\mathrm{proet},*}F_ZI_{\\mathrm{et}}(h)$. Injectivity of the adjunction bijection makes them equal. Thus the specified isomorphism is natural; no natural choice of the TR3 completion is required.",
+   "text": "Combine the named Plus/full compatibility transformations and the canonical Plus mate into one natural transformation on D+. Lift any map between two bounded-below presentations by fullness of the inclusion D+ to D. Naturality of that transformation, conjugated by the presentation isomorphisms, proves naturality of the transported delta, for arbitrary choices of the two lifts.",
    "uses": [
-    "lem-exc-proetale-closed-support",
     "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-exc-closed-ambient"
+    "def-weil-pbc-bounded-derived-subcategories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
+    "place": "Proof, first paragraph: compare the closed-support triangles"
+   }
+  },
+  {
+   "text": "The adjunction inverse-transpose formula immediately gives Rp(alpha) followed by the pro-etale counit equal to delta inverse followed by the pulled-back etale counit. Cancel delta to obtain the stated normalization. For naturality, apply injectivity of the exceptional inverse-transpose bijection, use the naturality equation for delta inverse, then etale counit naturality. This proves the specified equality for arbitrary bounded-below lifts without any natural choice of representatives.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-exc-closed-ambient",
+    "lem-exc-proetale-closed-support",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
    ],
    "elementary": false,
    "source": {
@@ -118,38 +111,28 @@
  ],
  "proof_deps": [
   "def-weil-l-adic-coefficient-extension",
-  "def-weil-proper-morphism",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-exc-closed-support-triangle",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-exc-closed-ambient",
+  "lem-kun-04ca",
   "prop-weil-pbc-inverse-image-modules-exact",
   "def-weil-pbc-direct-image",
   "def-weil-pbc-bounded-derived-subcategories",
-  "lem-kun-04ca",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
   "lem-exc-proetale-closed-exact",
-  "lem-exc-proetale-closed-fully-faithful",
   "prop-weil-pbc-proetale-constant-exact",
+  "lem-exc-proetale-closed-support",
   "def-weil-pbc-proetale-operations",
   "def-weil-abstract-derived-category",
-  "lem-weil-pbc-comparison-pullback",
-  "def-weil-pbc-adjunction-mate",
+  "lem-exc-closed-support-triangle",
   "lem-sf-comparison-pullback-exact",
   "lem-sf-exact-functor-derived-triangulated",
-  "lem-exc-proetale-support-triangle",
-  "lem-exc-proetale-derived-adjunction-triangle",
-  "lem-exc-proetale-open-derived-image",
+  "lem-exc-proetale-closed-fully-faithful",
   "def-weil-triangulated-category",
-  "lem-sf-triangle-morphism-iso",
-  "lem-exc-proetale-closed-essential-image",
-  "lem-exc-proetale-closed-support",
-  "lem-exc-closed-ambient"
+  "def-weil-pbc-adjunction-mate"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
-  "place": "First paragraph, closed-support triangle argument expanded with canonical mates, boundedness and counit normalization; Stacks 04CA, 04JC, 014A supply the general tools."
+  "place": "First paragraph, recollement argument. D6 formalizes boundedness by a derived sheaf adjunction and proves invertibility by applying the pro-etale exceptional right adjoint to the transported etale support triangle; open-image orthogonality replaces a second support-triangle construction."
  },
  "mathlib_match": null,
  "status": "split",
@@ -332,9 +315,6 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-qcqs-morphism-permanence",
   "lem-exc-closed-support-triangle",
   "prop-weil-pbc-inverse-image-modules-exact",
   "lem-kun-04ca",
@@ -342,16 +322,10 @@
   "lem-exc-proetale-closed-exact",
   "lem-exc-proetale-closed-fully-faithful",
   "prop-weil-pbc-proetale-constant-exact",
-  "lem-weil-pbc-comparison-pullback",
   "lem-sf-comparison-pullback-exact",
   "lem-sf-exact-functor-derived-triangulated",
-  "lem-exc-proetale-support-triangle",
-  "lem-exc-proetale-derived-adjunction-triangle",
-  "lem-exc-proetale-open-derived-image",
-  "lem-sf-triangle-morphism-iso",
   "lem-exc-proetale-closed-support",
-  "lem-exc-closed-ambient",
-  "lem-exc-proetale-closed-essential-image"
+  "lem-exc-closed-ambient"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -414,5 +388,15 @@
   ],
   "note": "Encoding: the statement uses the fixed-ring ModuleCat.{u+1} A-valued sheaf encoding of def-weil-pbc-derived-categories and of the recorded canonical mate ProEtale.fixedComparisonDirectImageMatePlus (lem-weil-pbc-comparison-direct-image-canonical-mate), whose comparison functor is ProEtale.comparisonUpperStar (proEtaleSiteComparisonModules of def-weil-pbc-site-comparison-morphism). The recorded declaration of lem-exc-proetale-closed-support, Scheme.sfIntrinsicClosedAmbientAdjunction, is stated for A : Type u on the intrinsic SheafOfModules category and cannot be composed with that mate; the same node's adjunction in this encoding is the existing upstream ProEtale.derivedLowerStarClosedUpperShriekAdjunction (WeilConjectures.SixFunctors.ProEtale.Derived.ClosedImmersion, docstring 'Blueprint lem-exc-proetale-closed-support'), the right derived functor of the kernel construction closedUpperShriek, as in the landed citer prop-sf-closed-immersion-unit. It needs only [IsClosedImmersion i], [IsOpenImmersion j], [QuasiCompact j] and complementary ranges. The qcqs instances on i and j are consequences of the source's finite-type separated setting (T Noetherian). The etale side uses the recorded isLeftAdjoint_rightDerivedLowerStar_of_isClosedImmersion with Functor.rightAdjoint. Review fix: the forwarding instance was replaced by attribute [instance] on the postponed theorem isIso_finiteDualityClosedComparisonDelta_proof, and the two helper definitions carry source/blueprint docstrings.",
   "fixed_by": "NT-stage2-cc-dfb1da15d"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261019T093334-L-2297055",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
