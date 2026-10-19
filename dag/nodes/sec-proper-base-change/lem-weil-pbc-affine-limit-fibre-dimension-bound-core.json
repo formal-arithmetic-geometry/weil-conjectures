@@ -12,36 +12,51 @@
  ],
  "proof": [
   {
-   "text": "Form the open loci where local fibre dimension is at most d using the bounded-open-upstairs theorem, and take their reduced closed complements. Surjective comparison maps carry bad loci backwards. The affine spectrum limit and nonempty-limit theorem give a compatible limiting bad point. After passage to its residue field, the surjective finite-type fibre system stabilizes by Noetherianity; field-extension invariance of local dimension then contradicts the assumed bound on the limiting fibre.",
+   "text": "For each i let Z_i be the complement of the open locus where the local dimension of the fibre of Spec C_i → Spec A_i is at most d. Openness is the scheme-level bounded-local-fibre-dimension theorem. The supremum of local dimensions and the canonical identification of the affine residue-field pullback with the scheme fibre show that the bad-prime hypothesis makes every Z_i nonempty. A closed immersion embeds each later fibre in the base change of the earlier fibre. Local dimension decreases under an embedding and is invariant under the finite-type base change, so transition maps carry Z_j into Z_i. Apply Mathlib exists_mem_of_isClosed_of_nonempty to Spec of the colimit cocone to obtain x whose projections belong to every Z_i.",
    "uses": [
-    "lem-weil-pbc-fibre-dimension-bounded-open-upstairs",
-    "lem-weil-pbc-dimension-at-point-field-extension",
+    "lem-weil-pbc-local-fibre-dimension-open",
     "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "lem-sc-fibre-dimension-after-base-change",
     "lem-weil-pbc-spec-colimit-limit",
-    "lem-weil-pbc-limit-nonempty",
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "lem-pc-filtered-colimit-commrings-elementwise"
+    "lem-weil-pbc-limit-nonempty"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 05M5, affine specialization"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Put s=f(x), K=κ(s), and B_i=C_i ⨿_{A_i} K. Construct their transition maps by the pushout universal property and a colimit cocone with vertex B=(colimit C) ⨿_{colimit A} K. For any cocone the restrictions of its maps to K agree at a common upper bound, and its restrictions to C_i descend uniquely through colimit C. These two descended maps agree on colimit A and determine the unique map out of B. Pushout pasting expresses B_i → B_j as a base change of the given surjective comparison map, hence it is surjective.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Fix i. The ring B_i is finite type over the field K and hence Noetherian. Choose finitely many generators of the kernel B_i → B. Each generator dies at a finite stage by the elementwise filtered-colimit equality criterion. A cocone over the finite family of killing maps gives a single index j killing all generators. Every B_i → B_j and every B_j → B is surjective: a representative at an arbitrary stage can be lifted after passing to a common upper bound. If two elements of B_j have equal images in B, lift them to B_i; their difference lies in the finitely generated kernel and thus is killed in B_j. Therefore B_j → B is bijective.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The point x has a canonical fibre point in X_s, identified by the pushout square with a point y of Spec B. Transport y along the isomorphism B_j → B. Its image in Spec C_j is x_j by the explicit cocone equations. The base-change dimension theorem and the fact that the fibre of a K-scheme over its unique base point is isomorphic to that scheme identify the local dimension there with the local fibre dimension at x_j. Since x_j belongs to Z_j this exceeds d. But the local dimension at y is at most the dimension of the whole limiting fibre, which the hypothesis bounds by d. Contradiction.",
+   "uses": [
+    "lem-sc-fibre-dimension-after-base-change",
+    "lem-weil-pbc-dimension-supremum-local-dimensions"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-dimension-at-point-field-extension",
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-sc-fibre-dimension-after-base-change",
   "lem-weil-pbc-dimension-supremum-local-dimensions",
-  "lem-weil-pbc-fibre-dimension-bounded-open-upstairs",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
   "lem-weil-pbc-limit-nonempty",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lem-weil-pbc-spec-colimit-limit",
-  "lem-pc-filtered-colimit-commrings-elementwise"
+  "lem-weil-pbc-local-fibre-dimension-open",
+  "lem-weil-pbc-spec-colimit-limit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Tag 05M5, bad-locus contradiction"
+  "place": "Tag 05M5, bad-locus contradiction, with explicit pushout-colimit construction and finitely generated kernel stabilization"
  },
  "mathlib_searches": [
   {
@@ -105,13 +120,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-19",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R9",
+  "group": "V4",
   "result": "pass",
-  "landing": "20261018T071220-L-1676611",
-  "kind": "interface",
+  "landing": "20261019T112555-L-3956931",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
