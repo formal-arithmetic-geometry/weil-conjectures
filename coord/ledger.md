@@ -17084,3 +17084,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:52 L: merged deliver/Q02/lem-per-artin-gabber-affine-curve (reviewer FIX; after a return; new nodes: 0)
 - 04:52 L: merged deliver/Q64/lem-per-finite-compact-support-fibre-support-bound (reviewer FIX; first push; new nodes: 0)
 - 04:52 L: returned deliver/Q107/lem-coef-finite-free-extension (reviewer RETURN: L: independent stage-2 immutable head e08263117f25: H2 theorem stmt_dep: the statement uses only plain definitions (Stag)
+- 05:09 L: returned deliver/Q26/def-fix-six-functor-datum (reviewer RETURN: L: independent stage-2 immutable head 5595aa850620: Identical re-delivery: 5595aa85 main 5b7f9412, stages 27f404b9, towe)
