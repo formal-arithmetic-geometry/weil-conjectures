@@ -39,6 +39,7 @@ theorem geometricallyIrreducible_spec_of_field_subextension
       (Spec.map (CommRingCat.ofHom (algebraMap k K)))) :
     GeometricallyIrreducible
       (Spec.map (CommRingCat.ofHom (algebraMap k L))) := by
-  sorry
+  exact geometricallyIrreducible_spec_of_injective (IsScalarTower.toAlgHom k L K)
+    (algebraMap L K).injective hK
 
 end AlgebraicGeometry
