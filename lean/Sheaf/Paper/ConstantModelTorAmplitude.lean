@@ -7,15 +7,7 @@ module
 
 public import Sheaf.Paper.CondensedConstantConstructibility
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
-import Sheaf.AlgebraicGeometry.FiniteConstantLocalModel
-import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.CategoryTheory.SheafTensorClosed
-import Sheaf.CategoryTheory.SheafTensorStructure
-import Sheaf.Paper.ProjectionMateExact
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
-import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
+import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 
 /-!
 # Tor amplitude and `Dᵇ_ctf(X,Λ)` with finite constant scalar models
@@ -53,7 +45,8 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 
-open scoped CategoryTheory.Obj
+open scoped CategoryTheory.Obj ZeroObject
+open CategoryTheory.MonoidalCategory
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -135,6 +128,75 @@ theorem constantModelConstructibleFiniteTor_wellDefined (X : Scheme.{u}) :
     (DerivedCategory.finiteTorAmplitude
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
       ).IsStableUnderRetracts := by
-  sorry
+  classical
+  let C := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
+  have hlocal (Y : Scheme.{u})
+      {M N : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)}
+      (e : M ≅ N) (hM : HasFiniteConstantLocalModel Λ Y M) :
+      HasFiniteConstantLocalModel Λ Y N := by
+    obtain ⟨𝒰, h𝒰⟩ := hM
+    refine ⟨𝒰, fun i ↦ ?_⟩
+    obtain ⟨P, hP, ⟨eP⟩⟩ := h𝒰 i
+    exact ⟨P, hP, ⟨(CondensedRing.upperStar Λ (𝒰.f i)).mapIso e.symm ≪≫ eP⟩⟩
+  have hstrat (Y : Scheme.{u})
+      {M N : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)}
+      (e : M ≅ N) (hM : IsFiniteConstantStratified Λ Y M) :
+      IsFiniteConstantStratified Λ Y N := by
+    obtain ⟨S, hS⟩ := hM
+    exact ⟨S, fun a ↦ hlocal _
+      ((CondensedRing.upperStar Λ (S.immersion a)).mapIso e) (hS a)⟩
+  have hcons : ObjectProperty.IsClosedUnderIsomorphisms
+      (IsConstantModelConstructible Λ X) := ⟨fun e hM ↦ by
+    unfold IsConstantModelConstructible at hM ⊢
+    split_ifs at hM ⊢ with hX
+    · exact hstrat _ e hM
+    · exact fun U hU ↦ hstrat _ ((CondensedRing.upperStar Λ U.ι).mapIso e) (hM U hU)⟩
+  have := hcons
+  have hbounded : (constantModelBoundedConstructible Λ X).IsClosedUnderIsomorphisms :=
+    ⟨fun e hK ↦ ⟨DerivedCategory.TStructure.t.bounded.prop_of_iso e hK.1,
+      fun n ↦ ObjectProperty.prop_of_iso (IsConstantModelConstructible Λ X)
+        ((DerivedCategory.homologyFunctor _ n).mapIso e) (hK.2 n)⟩⟩
+  have hshift (K : DerivedCategory C) (a b m : ℤ)
+      (hK : DerivedCategory.torAmplitudeIn C a b K) :
+      DerivedCategory.torAmplitudeIn C (a - m) (b - m) (K⟦m⟧) := by
+    intro N
+    let F := (curriedTensor (DerivedCategory C)).flip.obj
+      ((DerivedCategory.singleFunctor C 0).obj N)
+    obtain ⟨h₁, h₂⟩ := hK N
+    let e := (F.commShiftIso m).app K
+    have hg : DerivedCategory.TStructure.t.IsGE (F.obj K) a := h₁
+    have hl : DerivedCategory.TStructure.t.IsLE (F.obj K) b := h₂
+    have hg' := DerivedCategory.TStructure.t.isGE_shift (F.obj K) a m (a - m)
+    have hl' := DerivedCategory.TStructure.t.isLE_shift (F.obj K) b m (b - m)
+    exact ⟨⟨(DerivedCategory.TStructure.t.ge (a - m)).prop_of_iso e.symm hg'.ge⟩,
+      ⟨(DerivedCategory.TStructure.t.le (b - m)).prop_of_iso e.symm hl'.le⟩⟩
+  have hext (T : Triangle (DerivedCategory C)) (a b : ℤ) (hT : T ∈ distTriang _)
+      (h₁ : DerivedCategory.torAmplitudeIn C a b T.obj₁)
+      (h₃ : DerivedCategory.torAmplitudeIn C a b T.obj₃) :
+      DerivedCategory.torAmplitudeIn C a b T.obj₂ := by
+    intro N
+    let F := (curriedTensor (DerivedCategory C)).flip.obj
+      ((DerivedCategory.singleFunctor C 0).obj N)
+    obtain ⟨g₁, l₁⟩ := h₁ N
+    obtain ⟨g₃, l₃⟩ := h₃ N
+    exact ⟨DerivedCategory.TStructure.t.isGE₂ _ (F.map_distinguished _ hT) _ g₁ g₃,
+      DerivedCategory.TStructure.t.isLE₂ _ (F.map_distinguished _ hT) _ l₁ l₃⟩
+  have htri : (DerivedCategory.finiteTorAmplitude C).IsTriangulated :=
+    { exists_zero := ⟨0, isZero_zero _, 0, 0, fun N ↦ by
+        let F := (curriedTensor (DerivedCategory C)).flip.obj
+          ((DerivedCategory.singleFunctor C 0).obj N)
+        have hz := F.map_isZero (isZero_zero _)
+        exact ⟨(DerivedCategory.isGE_iff _ _).2 fun q _ ↦ Functor.map_isZero _ hz,
+          (DerivedCategory.isLE_iff _ _).2 fun q _ ↦ Functor.map_isZero _ hz⟩⟩
+      isStableUnderShiftBy := fun m ↦ ⟨fun K ⟨a, b, hK⟩ ↦
+        ⟨a - m, b - m, hshift K a b m hK⟩⟩
+      ext₂' := by
+        rintro T hT ⟨a, b, h₁⟩ ⟨c, d, h₃⟩
+        exact ObjectProperty.le_isoClosure _ _ ⟨min a c, max b d, hext T _ _ hT
+          (h₁.mono (min_le_left _ _) (le_max_left _ _))
+          (h₃.mono (min_le_right _ _) (le_max_right _ _))⟩ }
+  exact ⟨hcons, hbounded, fun _ _ _ ↦ inferInstance, inferInstance,
+    fun K a b _ hK ↦ hshift K a b 1 hK, fun T a b _ hT h₁ h₃ ↦ hext T a b hT h₁ h₃,
+    fun _ _ _ ↦ inferInstance, htri, inferInstance⟩
 
 end AlgebraicGeometry.ProEtale
