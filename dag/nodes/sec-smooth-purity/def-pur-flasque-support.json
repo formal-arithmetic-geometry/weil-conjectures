@@ -27,116 +27,118 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-pur-proetale-open-unit-evaluation] to the finite coefficient ring and the open immersion $j$. It identifies $(j_*j^*M)(V)$ with $M(V\\times_XU)$ and the actual module-adjunction unit with restriction. Kernels in [def-weil-sheaf-of-modules-category] are sectionwise, so their sections are exactly the displayed supported sections, with inherited restriction maps and module actions. Naturality $\\eta_{j,N}f=(j_*j^*f)\\eta_{j,M}$ makes $f$ carry each kernel into the next. These restrictions preserve identities and composition. Applying $s^{-1}$ gives exactly the object and morphism formulas of [def-exc-proetale-sections-with-support].",
+   "text": "Evaluate the functor-category kernel at the sheaf M and site object V. Evaluation preserves kernels; ShortComplex.kernelSequence and moduleCat_range_eq_ker identify the sectionwise inclusion with the kernel of the open adjunction unit. Uniqueness of left adjoints identifies that actual unit with restriction under upperStarIsoOpenImmersionRestriction. Injectivity of the comparison isomorphism identifies the two zero loci.",
    "uses": [
-    "lem-pur-proetale-open-unit-evaluation",
     "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-proetale-operations",
-    "def-exc-proetale-sections-with-support"
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/proetale.tex",
+    "place": "Tags 03DA and 09BN; sectionwise kernels and the open restriction adjunction."
+   }
+  },
+  {
+   "text": "The supported-kernel functor is the limit of the parallel pair of the identity and j inverse-image/direct-image composite, both left exact. limitIsoFlipCompLim and pointwise finite-limit preservation give left exactness. Compose with the exact closed inverse image for finiteClosedUpperShriek.",
+   "uses": [
+    "def-exc-proetale-sections-with-support",
+    "prop-weil-pbc-proetale-constant-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DA, lemma-abelian; proetale.tex Tag 09BN, lemma-open-immersion; explicit kernel and naturality calculation"
+    "place": "Tags 03DA and 04JC; left exactness of kernels and exact constant-coefficient inverse image."
    }
   },
   {
-   "text": "On an object $W\\to U$, the map $W\\times_XU\\to W$ is an isomorphism. The section formula in step 1 gives $(\\mathcal G_ZM)(W)=\\ker(\\mathrm{id}_{M(W)})=0$. By the restriction identification in [lem-weil-proetale-weakly-etale-localization] this says $j^*\\mathcal G_ZM=0$. Assume now that the complementary open immersion $j$ is quasi-compact. The canonical-unit clause of [lem-exc-proetale-closed-essential-image] applies to this module sheaf, without a constructibility hypothesis, and gives $\\mathcal G_ZM\\xrightarrow{\\sim}s_*s^{-1}\\mathcal G_ZM=s_*s^!M$. This is the inverse of the identification written as $s_*s^!M=\\mathcal G_ZM$ in the blueprint; equality is understood up to this specified natural isomorphism. This proves the positive comparison under the stated hypothesis. Steps 5–7 give an explicit counterexample to removing that hypothesis for all pairs; the correction is not inferred merely from the hypothesis of the cited theorem.",
+   "text": "The triangle identity makes the image under j inverse image of the open unit a split monomorphism. Exact inverse image carries its kernel to zero. Apply isIso_upperStarLowerStarAdjunction_unit_app_of_isCompl to this supported kernel; its quasi-compact-complement hypothesis is the one in the statement. Naturality upgrades component isomorphisms to an isomorphism of functors.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-exc-proetale-closed-essential-image"
+    "lem-exc-proetale-closed-essential-image",
+    "prop-weil-pbc-proetale-constant-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AH, lemma-ses-associated-to-open; applying the existing canonical-unit theorem to the kernel"
+    "place": "Tag 09AH; canonical closed-unit isomorphism with quasi-compact complement."
    }
   },
   {
-   "text": "For a left exact sequence $0\\to M'\\xrightarrow{a}M\\xrightarrow{b}M''$, the sectionwise kernel description of [def-weil-sheaf-of-modules-category] identifies $M'(V)$ with $\\ker b_V$ for every object $V$. The restriction of $a_V$ to supported sections is injective. If $m\\in(\\mathcal G_ZM)(V)$ has $b_V(m)=0$, write $m=a_V(m')$ uniquely. Restricting to $V_U=V\\times_XU$ gives $a_{V_U}(m'|_{V_U})=m|_{V_U}=0$; since $a_{V_U}$ is injective, $m'|_{V_U}=0$. Thus $m'$ is supported, proving $0\\to\\mathcal G_ZM'\\to\\mathcal G_ZM\\to\\mathcal G_ZM''$ left exact. The zero sheaf maps to zero by the same formula, and restriction of morphisms to the kernels gives $\\mathcal G_Z(f+g)=\\mathcal G_Zf+\\mathcal G_Zg$, so this functor is additive. Apply the exact constant-coefficient inverse image $s^{-1}$ of [prop-weil-pbc-proetale-constant-exact] to obtain left exactness of $s^!$. This argument does not require $j$ quasi-compact or surjectivity of any section map.",
-   "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "prop-weil-pbc-proetale-constant-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DA, lemma-abelian (sectionwise kernels); Tag 04JC, lemma-flat-pullback-exact (inverse image); elementary kernel calculation"
-   }
-  },
-  {
-   "text": "The condition on $I$ is the stated definition: the cokernel of its open unit is zero in the abelian module-sheaf category [def-weil-sheaf-of-modules-category]. A sheaf cokernel is sheafified, so this condition does not identify epimorphy with surjectivity on every object. As edge checks, if $Z=\\varnothing$ then $j=\\mathrm{id}$ and $\\mathcal G_Z=0$, while pair-flasqueness is automatic; if $Z=X$ then $U=\\varnothing$, $\\mathcal G_Z=\\mathrm{id}$ and $s^!=s^{-1}=\\mathrm{id}$, and pair-flasqueness is again automatic.",
+   "text": "Apply Mathlib Preadditive.epi_iff_isZero_cokernel to the open unit. This is sheaf epimorphy and the sheaf cokernel, with no sectionwise surjectivity claim.",
    "uses": [
     "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
     "place": "Tag 03DA, lemma-abelian; epimorphism criterion and the two identity/empty-complement calculations"
    }
   },
   {
-   "text": "To test the unrestricted comparison, choose a field $k$ of characteristic $p$ and a nonzero finite commutative coefficient ring $\\Lambda$ (for example $k=\\overline{\\mathbf F}_p$ and the allowed ring $A_{E,1}$ with $\\ell\\ne p$). Put $R=\\prod_{n\\ge1}k$, let $e_n$ be the coordinate idempotents, let $J=\\bigoplus_{n\\ge1}k$ be the ideal of finite-support sequences, and put $X=\\operatorname{Spec}R$, $Z=\\operatorname{Spec}(R/J)$ and $X_n=D(e_n)$. Since $e_nR=k$, $X_n\\cong\\operatorname{Spec}k$ is clopen. These opens are disjoint. A prime omitting $J$ omits some $e_n$, hence contains $1-e_n$, and is the coordinate prime for $n$. Thus $U=X\\setminus Z=\\bigcup_nX_n$. No finite subfamily covers $U$, so $j:U\\to X$ is not quasi-compact, as $X$ is affine. There is no finite-type or constructibility hypothesis on the pair. For a pro-etale object $V\\to X$, put $V_n=V\\times_XX_n$ and $H_n(V)=\\Lambda_{X_n}(V_n)$, the direct image along $X_n\\hookrightarrow X$ of [def-weil-proetale-inverse-image]. Form the sectionwise product $P=\\prod_nH_n$ using [lem-weil-pbc-module-sheaves-colimits-forgetful]. Apply [lem-pur-module-sheaf-coproduct-local-support] to these sheaves on $X_{\\mathrm{proet}}$: its $S\\subset P$ is precisely the tuples that are finite-support on members of some covering, and is the coproduct $\\bigoplus_nH_n$. Set $F=\\operatorname{coker}(S\\hookrightarrow P)$ in [def-weil-sheaf-of-modules-category].",
+   "text": "Apply lem-pur-infinite-clopen-pair with k = ULift (ZMod 2) and I = ULift Nat. On each nonempty coordinate clopen use the rank-one sheaf of continuous functions into the discrete ring Lambda, and push it forward to X. The fpqc sheaf theorem for continuous functions proves the sheaf condition. Form c: coproduct H_i → product H_i and M = cokernel c.",
    "uses": [
-    "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-pur-module-sheaf-coproduct-local-support",
+    "lem-pur-infinite-clopen-pair",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/def-pur-flasque-support.md",
+    "place": "def-pur-flasque-support, step 5: infinite product of fields, coordinate clopens and their closed complement."
+   }
+  },
+  {
+   "text": "If c were epic it would be locally surjective. A sheaf colimit is the sheafification of its presheaf colimit: the sheafification adjunction identifies the colimit comparison with the unit followed by an isomorphism. Express the coproduct as a filtered colimit of finite subcoproducts. Local representatives of the tuple of ones therefore have finite supports. Use only finite_cover_refinement from the affine-evaluation module: a finite cover makes the union of those supports finite. Choose a missing coordinate. Its section of ones restricts to zero on this cover, so separatedness makes it zero globally, contrary to nonemptiness of the coordinate piece and nontriviality of Lambda. Hence c is not epic and M is nonzero.",
+   "uses": [
+    "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
     "def-weil-sheaf-of-modules-category"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03DA (lemma-abelian), 03DB (lemma-limits-colimits) and 03CO (lemma-limits-colimits-abelian-sheaves); agent counterexample to the unrestricted blueprint comparison: explicit affine pair and product/coproduct construction"
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/def-pur-flasque-support.md",
+    "place": "def-pur-flasque-support, step 5: infinite product of fields, coordinate clopens and their closed complement."
    }
   },
   {
-   "text": "For this pair $s^{-1}H_n=0$. Indeed, in the inverse-image indexing formula of [def-weil-proetale-inverse-image], replace any index $(V,\\phi:W\\to Z\\times_XV)$ by $V'=V\\times_X(X\\setminus X_n)$. Since $Z$ is disjoint from $X_n$, $Z\\times_XV'=Z\\times_XV$, so $\\phi$ factors through the new index. The arrow $V'\\to V$ gives the restriction $H_n(V)\\to H_n(V')=0$ in the opposite-index colimit. Every colimit generator therefore becomes zero, and its sheafification is zero. The identified-coefficient module inverse image has this same underlying abelian inverse image. The closed-immersion instance of [lem-weil-pbc-proetale-immersion-limit-preservation] applies without a quasi-compact-complement hypothesis and gives $s^{-1}P=\\prod_ns^{-1}H_n=0$; its coefficient-ring-isomorphism requirement is precisely the finite constant coefficient identification already in [prop-weil-pbc-proetale-constant-exact]. Also $s^{-1}S=0$: by the adjunction of [def-weil-pbc-proetale-operations], maps from $s^{-1}S$ to a sheaf $N$ are maps $S\\to s_*N$, hence families of maps $H_n\\to s_*N$, hence families of maps $s^{-1}H_n\\to N$; this is a singleton for every $N$, so $s^{-1}S$ is the zero object. Exactness of [prop-weil-pbc-proetale-constant-exact], applied to $S\\to P\\to F\\to0$, yields $s^{-1}F=0$. On the localized site over $X_n$, every $H_m$ with $m\\ne n$ is zero and $H_n$ is the constant rank-one module sheaf. For an object over $X_n$, every tuple in $P$ has at most the $n$th coordinate, so it already belongs to $S$; hence $S\\to P$ restricts to the identity there. Exactness of the open inverse image, another instance of [prop-weil-pbc-proetale-constant-exact], now gives $F|_{X_n}=0$. By [lem-weil-proetale-weakly-etale-localization] open inverse image is this restriction. The opens $X_n$ cover $U$ in the pro-etale topology of [def-weil-pbc-proetale-site]: every affine open in the disjoint union $U$ meets only finitely many of them. The sheaf condition therefore gives $j^*F=0$.",
+   "text": "Each closed pullback of H_i is zero: pushforward from a clopen equals extension by zero, which vanishes after pullback to the disjoint closed complement. Forgetting scalar structure compares the fixed-module inverse image with set inverse image. The forgetful comparison and immersion limit-preservation theorem show that closed inverse image preserves the product; it therefore kills the product and its cokernel M. On a coordinate clopen all other H_i vanish. The map c there is split epic by the surviving-coordinate insertion and projection, so its cokernel vanishes. Localization conservativity for the coordinate open cover implies j inverse-image M = 0.",
    "uses": [
-    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-sheaf-pullback-forget-comparison",
     "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "prop-weil-pbc-proetale-constant-exact",
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-weil-pbc-proetale-site"
+    "lem-weil-proetale-weakly-etale-localization"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AA (lemma-closed-immersion), clause (1), and Tag 09BN (lemma-open-immersion); agent counterexample, computation of the two inverse images; exact finite constant inverse image via sites-modules.tex Tag 04JC"
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/def-pur-flasque-support.md",
+    "place": "def-pur-flasque-support, step 5: infinite product of fields, coordinate clopens and their closed complement."
    }
   },
   {
-   "text": "For any affine object $V\\to X$, a tuple in $S(V)$ has only finitely many nonzero coordinates globally. In fact its witnessing pro-etale covering has, by the covering definition in [def-weil-pbc-proetale-site], finitely many affine opens in its members whose images cover $V$. Restrict to these affine opens. Each tuple has finite coordinate support there; the union $B$ of these finitely many finite supports is finite. For $n\\notin B$ its $H_n$-coordinate restricts to zero on this finite covering of $V$, hence is zero by the sheaf condition. Apply this to the affine object $X$. The section $t=(1,1,\\ldots)\\in P(X)$, whose $n$th coordinate is the constant section $1$ on $X_n$, does not belong to $S(X)$: every $X_n$ is nonempty and $1\\ne0$ in $\\Lambda$. Let $q:P\\to F$ be the cokernel. Since $S\\hookrightarrow P$ is monic in the abelian category and kernels are sectionwise [def-weil-sheaf-of-modules-category], $\\ker q_X=S(X)$, so $q_X(t)\\ne0$. In particular $F\\ne0$. Step 6 gives $j^*F=s^{-1}F=0$, and the direct image of a zero sheaf is zero by the formula of [def-weil-proetale-inverse-image]. Thus the definitions in step 1 give $\\mathcal G_ZF=F$ and $s^!F=s^{-1}F=0$. The canonical comparison is $F\\to s_*0=0$, which is not an isomorphism. This disproves exactly the unrestricted support identification in the imported source and justifies the corrected quasi-compact-complement scope in step 2. It makes no claim that every non-quasi-compact pair fails.",
+   "text": "Since j inverse-image M = 0, the supported kernel of M is isomorphic to M, using the kernel of the zero unit. Its closed inverse image is zero, so the comparison has nonzero source and zero target and cannot be an isomorphism. Assemble this with the affine pair, closed/open immersions, complementary ranges, and non-quasi-compact open inclusion.",
    "uses": [
-    "def-weil-pbc-proetale-site",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-proetale-inverse-image"
+    "def-exc-proetale-sections-with-support",
+    "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/def-pur-flasque-support.md",
-    "place": "Sentence “thus s_*s^!M=G_ZM”: explicit agent counterexample to its unrestricted scope; finite affine refinement from proetale.tex definition-proetale-covering and sectionwise kernels from sites-modules.tex Tag 03DA"
+    "place": "def-pur-flasque-support, step 5: infinite product of fields, coordinate clopens and their closed complement."
    }
   }
  ],
  "proof_deps": [
-  "lem-pur-proetale-open-unit-evaluation",
   "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-proetale-operations",
-  "def-exc-proetale-sections-with-support",
   "lem-weil-proetale-weakly-etale-localization",
-  "lem-exc-proetale-closed-essential-image",
+  "def-exc-proetale-sections-with-support",
   "prop-weil-pbc-proetale-constant-exact",
+  "lem-exc-proetale-closed-essential-image",
+  "lem-pur-infinite-clopen-pair",
   "def-weil-proetale-inverse-image",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-pur-module-sheaf-coproduct-local-support",
-  "lem-weil-pbc-proetale-immersion-limit-preservation",
-  "def-weil-pbc-proetale-site"
+  "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
+  "lem-weil-pbc-sheaf-pullback-forget-comparison",
+  "lem-weil-pbc-proetale-immersion-limit-preservation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/def-pur-flasque-support.md",
-  "place": "Definition paragraphs, explicit verification of the two asserted properties, and an agent counterexample to the unrestricted comparison; Stacks Tags 03DA, 03DB, 03CO, 04JC, 09AA, 09AH and 09BN through existing nodes."
+  "place": "C7 Lean proof, 2026-10-19: sectionwise kernels and adjunction uniqueness; left-exact kernel functor; existing closed-unit theorem; explicit affine counterexample via filtered finite subcoproducts, finite affine cover refinement, clopen extension by zero, and closed inverse-image limit preservation."
  },
  "mathlib_searches": [
   {
@@ -399,8 +401,7 @@
   "lem-weil-proetale-weakly-etale-localization",
   "lem-exc-proetale-closed-essential-image",
   "prop-weil-pbc-proetale-constant-exact",
-  "lem-weil-pbc-proetale-immersion-limit-preservation",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+  "lem-weil-pbc-proetale-immersion-limit-preservation"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -436,5 +437,15 @@
   "by": "N0",
   "date": "2026-10-16",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261019T132226-L-1203574",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
