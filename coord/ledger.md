@@ -17688,3 +17688,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:11 L: merged deliver/F2/Sheaf.SixFunctors.CoefTowerNaturalCurrying (stage 3; reviewer PASS; first push; landing 20261019T231142-L-555123 (interface); batch 20261019T231019; modules 1; new nodes 0; change records: coord/changes/F2-coef-currying-elaboration-scheduling.md)
 - 23:11 L: merged deliver/F5/Sheaf.AlgebraicGeometry.FiniteClosedPoints (stage 3; reviewer PASS; first push; landing 20261019T231144-L-555409 (proof); batch 20261019T231019; modules 1; new nodes 0)
 - 23:11 L: merged deliver/F5/Sheaf.Paper.IntegralProperDirectSums (stage 3; reviewer PASS; first push; landing 20261019T231147-L-555911 (interface); batch 20261019T231019; modules 7; new nodes 6)
+- 23:11 L: merged deliver/F5/Sheaf.Paper.SystemCompactificationProjectionSubstitution (stage 3; reviewer PASS; first push; landing 20261019T231149-L-556356 (proof); batch 20261019T231019; modules 1; new nodes 0)

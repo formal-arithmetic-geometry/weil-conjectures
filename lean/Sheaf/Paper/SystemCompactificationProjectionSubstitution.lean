@@ -102,7 +102,65 @@ theorem refinementDirectId_existsUnique (X : Scheme.{u}) :
         (e.hom.app M).val.app (op (n, U)) x =
           M.val.map (Prod.mkHom (𝟙 n)
             ((MorphismProperty.Over.pullbackId @WeaklyEtale.{u} ⊤ X).inv.app U)).op x := by
-  sorry
+  let J := coefficientSequenceTopology (Scheme.ProEt.topology X)
+  let A := (sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (R l E X)
+  let e : base (𝟙 X) ≅ 𝟭 (ℕ × X.ProEt) :=
+    NatIso.prod (Iso.refl (𝟭 ℕ)) (MorphismProperty.Over.pullbackId @WeaklyEtale.{u} ⊤ X)
+  let c : R l E X ⟶ ((base (𝟙 X)).sheafPushforwardContinuous
+      CommRingCat.{u + 1} J J).obj (R l E X) :=
+    (Functor.sheafPushforwardContinuousNatTrans
+      (F := base (𝟙 X)) (F' := 𝟭 (ℕ × X.ProEt)) e.hom CommRingCat.{u + 1} J J).app (R l E X)
+  have hc : c = coefficient l E (𝟙 X) := by
+    apply (coefficient_existsUnique l E (𝟙 X)).choose_spec.2 c
+    intro n U a
+    let : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
+      integralCoefficientRingSheafify.{u, u + 1} X
+    have h := (toSheafify (Scheme.ProEt.topology X)
+      ((Functor.const X.ProEtᵒᵖ).obj
+        (CommRingCat.of.{u + 1}
+          (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))))).naturality
+      ((MorphismProperty.Over.pullbackId @WeaklyEtale.{u} ⊤ X).hom.app U).op
+    change (R l E X).obj.map
+      (Prod.mkHom (𝟙 n)
+        ((MorphismProperty.Over.pullbackId @WeaklyEtale.{u} ⊤ X).hom.app U)).op
+      (scalar l E X n U a) = _
+    change (((coefficientSequenceCommRingSystem l E X).map (𝟙 (op n))).hom.app (op U) ≫
+      (integralCoefficientCommRingSheaf l E X n).obj.map
+        ((MorphismProperty.Over.pullbackId @WeaklyEtale.{u} ⊤ X).hom.app U).op)
+      (scalar l E X n U a) = _
+    rw [CategoryTheory.Functor.map_id]
+    simp only [Functor.const_obj_map] at h
+    exact (congrArg (fun t ↦ t a) h).symm
+  let φ : A ⟶ ((base (𝟙 X)).sheafPushforwardContinuous RingCat.{u + 1} J J).obj A :=
+    ⟨Functor.whiskerRight (coefficient l E (𝟙 X)).hom
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩
+  let z := SheafOfModules.pushforwardNatIso.{u + 1}
+    (F := base (𝟙 X)) (G := 𝟭 (ℕ × X.ProEt))
+    (J := J) (K := J) (T := A) (S := A) (𝟙 A) e
+  have hz : (𝟙 A) ≫
+      (Functor.sheafPushforwardContinuousNatTrans
+        (F := base (𝟙 X)) (F' := 𝟭 (ℕ × X.ProEt)) e.hom RingCat.{u + 1} J J).app A = φ := by
+    rw [Category.id_comp]
+    ext V x
+    exact congrArg (fun t ↦ t.hom.app V x) hc
+  let d : direct l E (𝟙 X) ≅ 𝟭 (S l E X) :=
+    (SheafOfModules.pushforwardCongr (F := base (𝟙 X)) hz).symm ≪≫ z.symm ≪≫
+      SheafOfModules.pushforwardId A
+  have hd : ∀ (M : S l E X) (n : ℕ) (U : X.ProEt)
+      (x : ((direct l E (𝟙 X)).obj M).val.obj (op (n, U))),
+      (d.hom.app M).val.app (op (n, U)) x =
+        M.val.map (Prod.mkHom (𝟙 n)
+          ((MorphismProperty.Over.pullbackId @WeaklyEtale.{u} ⊤ X).inv.app U)).op x := by
+    intro M n U x
+    simp only [d, Iso.trans_hom, NatTrans.comp_app, SheafOfModules.comp_val,
+      PresheafOfModules.comp_app, ModuleCat.comp_apply, z]
+    rfl
+  refine ⟨d, hd, ?_⟩
+  intro d' hd'
+  apply Iso.ext
+  ext M V x
+  rcases V with ⟨n, U⟩
+  exact (hd' M n U x).trans (hd M n U x).symm
 
 /-- The inverse-image identity, with its ordinary adjunction-unit normalization.
 Source: Stacks 0F7J (blueprint: lem-pur-system-compactification-pf-substitution). -/
