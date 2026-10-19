@@ -14,7 +14,6 @@ public import Sheaf.AlgebraicGeometry.ProEtaleMilnorEpimorphic
 public import Sheaf.CategoryTheory.Sites.RGammaDerivedLimit
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 import Sheaf.AlgebraicGeometry.ProEtaleProductsDerived
-import Sheaf.AlgebraicGeometry.ProEtaleMilnorSequence
 
 /-!
 # Derived sections of epimorphic inverse limits on the pro-etale site
@@ -125,6 +124,65 @@ theorem continuousCohomology_limit
           (fun n : ℕ ↦ (continuousCohomologySheafSections X W).map
             (F.map (homOfLE (Nat.le_succ n)).op))
           ((continuousCohomologySheafSections X W).obj (limit F)) := by
-  sorry
+  classical
+  let A := continuousCohomologyAbelianSheaves X
+  let R := (sheafCompose (Scheme.ProEt.topology X)
+    (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj
+      (continuousCohomologyIntegerSheaf X)
+  have hc := (milnor_epimorphic.{0, t, w} X R F ht).2.2
+  refine ⟨hc, ?_⟩
+  let := hc
+  let S := DerivedCategory.singleFunctor.{w} A 0
+  let Q := DerivedCategory.Q.{w} (C := A)
+  let K := fun n : ℕ ↦ (Scheme.ProEt.milnorSingleTower F).obj (op n)
+  let f := WeilConjectures.integralOperationsTowerStep (Scheme.ProEt.milnorSingleTower F)
+  let g := towerTransitionEndomorphism (K := K) f
+  obtain ⟨hP⟩ := (Scheme.ProEt.products_derived.{t, 0, w} X R ℕ K).1
+  have hfan : IsLimit (Fan.mk (Q.obj (∏ᶜ K)) (fun n : ℕ ↦ Q.map (Pi.π K n))) :=
+    (Fan.isLimitMapConeEquiv Q K (limit.cone (Discrete.functor K))) hP
+  let : HasProduct (fun n : ℕ ↦ S.obj (F.obj (op n))) :=
+    ⟨⟨Fan.mk (Q.obj (∏ᶜ K)) (fun n : ℕ ↦ Q.map (Pi.π K n)), hfan⟩⟩
+  let e := hfan.conePointUniqueUpToIso (productIsProduct (fun n : ℕ ↦ S.obj (F.obj (op n))))
+  have he (n : ℕ) : e.hom ≫ Pi.π _ n = Q.map (Pi.π K n) :=
+    hfan.conePointUniqueUpToIso_hom_comp _ ⟨n⟩
+  have hg : Q.map g ≫ e.hom = e.hom ≫ towerTransitionEndomorphism
+      (fun n : ℕ ↦ S.map (F.map (homOfLE (Nat.le_succ n)).op)) := by
+    apply Pi.hom_ext
+    intro n
+    rw [Category.assoc, he, ← Q.map_comp,
+      (towerTransitionEndomorphism_eq_iff (K := K) f _).mp rfl n]
+    simp only [Functor.map_sub, Functor.map_comp]
+    rw [Category.assoc, (towerTransitionEndomorphism_eq_iff
+      (K := fun n : ℕ ↦ S.obj (F.obj (op n)))
+      (fun n : ℕ ↦ S.map (F.map (homOfLE (Nat.le_succ n)).op)) _).mp rfl n]
+    simp only [Preadditive.comp_sub, ← Category.assoc, he]
+    rfl
+  let T := Q.mapTriangle.obj (CochainComplex.mappingCocone.triangle g)
+  let c := asIso (Q.map (milnorLimitComparison F))
+  let p := c.hom ≫ T.mor₁ ≫ e.hom
+  let δ := e.inv ≫ T.mor₃ ≫ (shiftFunctor _ (1 : ℤ)).map c.inv
+  have htri : IsDerivedLimitTriangle
+      (fun n : ℕ ↦ S.map (F.map (homOfLE (Nat.le_succ n)).op))
+      (S.obj (limit F)) p δ := by
+    apply Pretriangulated.isomorphic_distinguished T
+      (DerivedCategory.mappingCocone_triangle_distinguished g)
+    refine Pretriangulated.Triangle.isoMk _ _ c e.symm e.symm ?_ ?_ ?_
+    · change p ≫ e.inv = c.hom ≫ T.mor₁
+      simp [p]
+    · change towerTransitionEndomorphism
+        (fun n : ℕ ↦ S.map (F.map (homOfLE (Nat.le_succ n)).op)) ≫ e.inv =
+          e.inv ≫ Q.map g
+      apply (cancel_mono e.hom).1
+      simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id,
+        Iso.inv_hom_id_assoc] using congrArg (fun a ↦ e.inv ≫ a) hg.symm
+    · change δ ≫ (shiftFunctor _ (1 : ℤ)).map c.hom = e.inv ≫ T.mor₃
+      simp [δ, ← Functor.map_comp]
+  intro W
+  obtain ⟨eW, _, hW, _⟩ := site_rgamma_derivedLimit.{t + 1, t, t, w, w'}
+    (Scheme.ProEt.topology X) (continuousCohomologyIntegerSheaf X) W
+    (fun n : ℕ ↦ S.obj (F.obj (op n)))
+    (fun n : ℕ ↦ S.map (F.map (homOfLE (Nat.le_succ n)).op))
+    (S.obj (limit F)) p δ htri
+  exact ⟨_, _, hW⟩
 
 end AlgebraicGeometry.ProEtale
