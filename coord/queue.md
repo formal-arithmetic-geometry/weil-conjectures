@@ -1,6 +1,6 @@
 # Work queue
 
-1514 items; claim with `tools/claim.py next <group> [--stage N]`.
+1508 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (1514)
+## Stage 3: modules to prove (1508)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -878,7 +878,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.FiniteConstantModelResolution` | - | 5 | proof | 3 |
 | `Sheaf.Paper.FiniteEtaleDescent` | - | 1 | proof | 3 |
 | `Sheaf.Paper.FiniteProjectionActionLaws` | - | 8 | proof | 3 |
-| `Sheaf.Paper.FrobeniusOperatorCompactDescription` | - | 1 | proof | 3 |
 | `Sheaf.Paper.IntegralConstructibleReductionFibres` | - | 7 | proof | 3 |
 | `Sheaf.Paper.IntegralHeartDualizable` | - | 1 | proof | 3 |
 | `Sheaf.Paper.IteratedWeilCocycle` | - | 1 | proof | 3 |
@@ -919,7 +918,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.SecSmoothPurity.ReductionCompatibilities` | - | 3 | proof | 3 |
 | `Sheaf.SecSmoothPurity.ReductionExceptional` | - | 5 | proof | 3 |
 | `Sheaf.SixFunctors.AmbientProperOpenPasting` | - | 1 | proof | 3 |
-| `Sheaf.SixFunctors.FiniteMappingAdjunction` | - | 1 | proof | 3 |
 | `Sheaf.SixFunctors.GeneratorReductionStatement` | - | 3 | proof | 3 |
 | `Sheaf.SixFunctors.ProEtale.SmallCoefficientDerivedCompletion` | - | 7 | proof | 3 |
 | `Sheaf.SixFunctors.SemilinearProperOpenMatePasting` | - | 33 | proof | 3 |
@@ -1237,7 +1235,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.FieldTheory.GeometricIrreducibilitySeparable` | - | 1 | proof | 5 |
 | `Sheaf.FieldTheory.GeometricIrreducibilityTranscendental` | - | 1 | proof | 5 |
 | `Sheaf.Paper.CoefficientRealizationTransport` | - | 8 | proof | 5 |
-| `Sheaf.Paper.CompactProductProperSupportCompatibility` | - | 1 | proof | 5 |
 | `Sheaf.Paper.ConnectedConstantH0` | - | 3 | proof | 5 |
 | `Sheaf.Paper.DetThmSfCtfStabilityInternalHom` | - | 1 | proof | 5 |
 | `Sheaf.Paper.DirectImageCtfOpenTor` | - | 1 | proof | 5 |
@@ -1309,18 +1306,15 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.EtaleConstantProjectionFormula` | 18 | 1 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.EtaleConstantProjectionMap` | 18 | 2 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.CompactProductArrows` | - | 6 | proof | 6 |
-| `Sheaf.AlgebraicGeometry.CompactProductRealizationArrows` | - | 1 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.CompleteFlagBundle` | - | 8 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.OpenBaseChangeSiteTransport` | - | 1 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.ProperCompositionSiteTransport` | - | 3 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.ProperOpenSiteTransport` | - | 2 | proof | 6 |
-| `Sheaf.AlgebraicGeometry.ProperSupportCompactMaps` | - | 6 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.SupportedBottomGluing` | - | 1 | proof | 6 |
 | `Sheaf.CategoryTheory.DerivedCategory.PerfectRingSummand` | - | 1 | proof | 6 |
 | `Sheaf.FieldTheory.FieldExtensionGeometricallyIrreducible` | - | 1 | proof | 6 |
 | `Sheaf.FieldTheory.FiniteRelativeAlgebraicClosure` | - | 1 | proof | 6 |
 | `Sheaf.FieldTheory.SeparableTensorAlgebraicClosure` | - | 1 | proof | 6 |
-| `Sheaf.Paper.CartierClassAgreement` | - | 1 | proof | 6 |
 | `Sheaf.Paper.ChernFlagFormula` | - | 1 | proof | 6 |
 | `Sheaf.Paper.ConstantTowerTransition` | - | 1 | proof | 6 |
 | `Sheaf.Paper.FlagPullbackInjective` | - | 1 | proof | 6 |
