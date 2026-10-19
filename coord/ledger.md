@@ -17064,3 +17064,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:00 L: returned deliver/Q143/lem-per-truncated-branch-descent (reviewer RETURN: L: independent stage-2 immutable head 102def43021e: incremental DAG validation: reach: def-per-ordinary-alteration-hyper)
 - 04:00 L: returned deliver/Q118/lem-trf-affinoid-powerbounded-integral (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-affinoid-powerbounded-integral: lem-trf-affino)
 - 04:00 L: returned deliver/Q103/lem-trf-curve-centred-valuation-dvr (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-curve-centred-valuation-dvr: lem-trf-curve-cen)
+- 04:00 L: returned deliver/Q103/lem-trf-partially-defined-module-adjoint (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-partially-defined-module-adjoint: lem-trf-part)
