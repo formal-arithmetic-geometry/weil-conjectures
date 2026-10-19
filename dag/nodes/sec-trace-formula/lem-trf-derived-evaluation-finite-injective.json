@@ -15,9 +15,100 @@
   "def-pc-tensor-complex-sheaves",
   "def-pc-ring-pseudo-coherent-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $F(A)=T\\otimes_R^{\\mathbf L}A$ and $G(A)=R\\operatorname{Hom}_R(R\\operatorname{Hom}_R(A,L),M)$. By [lem-trf-derived-evaluation-canonical-map], these are exact functors and the evaluation-and-composition map $e_A:F(A)\\to G(A)$ is a natural transformation compatible with shifts and distinguished triangles. This is exactly the map specified in the statement.",
+   "uses": [
+    "lem-trf-derived-evaluation-canonical-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0A67 and 0A60; Tag 0A69 uses this map throughout"
+   }
+  },
+  {
+   "text": "Fix bounded injective complexes $J,I$ representing $L,M$ and integers $u,v$ with $J^r=0$ for $r>u$ and $I^r=0$ for $r<v$. They are K-injective by [lem-weil-pbc-dplus-injective-representative], clause (2). In particular $L$ is bounded below, since $J$ is bounded. For each integer $n$ take the standard truncation triangle $A_n=\\tau_{\\le n}K\\to K\\to E_n=\\tau_{\\ge n+1}K\\to A_n[1]$, using [def-sbc-standard-tstructure-derived-category] and [lem-weil-heart-short-exact-triangles], clause (1). Its tail has a representative $B_n$ with $B_n^r=0$ for $r<n+1$, by the representative characterization in the standard t-structure.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A69, truncation triangle; derived.tex Remark Tag 08J5; bounded injective representatives as in Section Injective dimension"
+   }
+  },
+  {
+   "text": "Hypothesis (iii) says $A_n$ is pseudo-coherent for every $n$. Apply [lem-trf-derived-evaluation-pseudocoherent] with $K=A_n$, the bounded-below object $L$ of Step 2 and the finite-injective-dimension object $M$ of hypothesis (i). Thus $e_{A_n}$ is an isomorphism for every $n$.",
+   "uses": [
+    "lem-trf-derived-evaluation-pseudocoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A69, application of Tag 0A68 (2)"
+   }
+  },
+  {
+   "text": "Fix once and for all the Tor-amplitude interval $[a,b]$ of hypothesis (ii). By [lem-pc-module-tor-amplitude-flat-model], $T$ has a bounded flat representative $P$ with terms supported in $[a,b]$. It is K-flat by [lem-pc-module-bounded-flat-kflat]. Hence $F(E_n)$ is represented by $\\operatorname{Tot}(P\\otimes_R B_n)$. By the total tensor formula [def-pc-tensor-complex-sheaves], a nonzero summand in degree $r$ requires indices $i\\ge a$, $j\\ge n+1$ and $i+j=r$. Thus this representative, and its cohomology, vanish in degrees $r<n+1+a$. The integer $a$ does not depend on $n$.",
+   "uses": [
+    "lem-pc-module-tor-amplitude-flat-model",
+    "lem-pc-module-bounded-flat-kflat",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A69, tensor tail; Tags 0654 (lemma-tor-amplitude) and 064K (lemma-derived-tor-quasi-isomorphism)"
+   }
+  },
+  {
+   "text": "The Hom-complex formula in [def-pur-derived-internal-hom], using the K-injective representatives from Step 2, computes $R\\operatorname{Hom}_R(E_n,L)$ by $C_n=\\operatorname{Hom}^\\bullet_R(B_n,J)$. Its degree-$s$ factors are $\\operatorname{Hom}_R(B_n^r,J^{r+s})$. If such a factor is nonzero then $r\\ge n+1$ and $r+s\\le u$, so $s\\le u-n-1$. Next $G(E_n)$ is represented by $\\operatorname{Hom}^\\bullet_R(C_n,I)$. A nonzero degree-$t$ factor requires $s\\le u-n-1$ and $s+t\\ge v$, whence $t\\ge n+1+v-u$. Thus $G(E_n)$ has no cohomology below that bound. Set $c=\\max(-a,u-v)$, independent of $n$. Steps 4 and 5 show that both tails have zero cohomology in every degree $\\le n-c$.",
+   "uses": [
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A69, double-Hom tail; the Hom-complex definition preceding Tag 0A65"
+   }
+  },
+  {
+   "text": "By [lem-trf-derived-evaluation-canonical-map], applying $F,G,e$ to the triangle of Step 2 gives two distinguished triangles and a commuting comparison. Fix a degree $d$ and choose $n\\ge d+c$. Both tail objects have zero $H^{d-1}$ and $H^d$. In the exact cohomology sequences [lem-sf-derived-homology-long-exact], the maps $H^d(F(A_n))\\to H^d(F(K))$ and $H^d(G(A_n))\\to H^d(G(K))$ are therefore isomorphisms: each has zero term immediately before its source and after its target. The comparison square commutes by [lem-weil-pbc-derived-cohomology-ladder], so $H^d(e_K)$ is the conjugate of the isomorphism $H^d(e_{A_n})$ of Step 3 by these horizontal isomorphisms. This holds for every integer $d$. The cohomology criterion [lem-weil-pbc-unbounded-derived-iso-cohomology] gives that $e_K$ is an isomorphism. It is the same canonical map for all choices of $n$, so its naturality in $K,L,M$ is the naturality in Step 1.",
+   "uses": [
+    "lem-trf-derived-evaluation-canonical-map",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-derived-cohomology-ladder",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A69, final comparison of triangles; derived.tex Tags 05RS and 05RT"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-derived-internal-hom",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-module-tor-amplitude-flat-model",
+  "lem-sf-derived-homology-long-exact",
+  "lem-trf-derived-evaluation-canonical-map",
+  "lem-trf-derived-evaluation-pseudocoherent",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-weil-pbc-derived-cohomology-ladder",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A69 (lemma-internal-hom-evaluate-isomorphism-technical), expanding the two tail bounds by Tag 0654 and the Hom-complex formula; Tag 0A68 (2) supplies the truncated case."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,10 +144,59 @@
    "results": "0 hits; top=[]; subdirectory=; note=; digest=4f53cda18c2baa0c",
    "date": "2026-10-18",
    "verdict": "no match: ordinary module reflexivity, Tor vanishing and derived Hom computations do not state the evaluation comparison under these three hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived evaluation RHom L M tensor K to RHom RHom K L M finite injective dimension finite Tor dimension pseudo-coherent truncations",
+   "results": "8 hits; Ext, Tor and derived-category support declarations, no evaluation theorem",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.DerivedCategory RHom evaluation isIso",
+   "results": "0 hits; loogle: Unknown identifier `CategoryTheory.DerivedCategory`",
+   "date": "2026-10-19",
+   "verdict": "unavailable: unknown identifier in Loogle query"
+  },
+  {
+   "tool": "grep",
+   "query": "internal-hom-evaluate-isomorphism|RHom.*tensor.*Hom",
+   "results": "1 generic tensorHom hit in Mathlib/Algebra/Homology/Monoidal.lean:292; no derived evaluation theorem",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor amplitude lower bound derived tensor bounded below complex and cohomological bounds for Hom into bounded injective complexes",
+   "results": "8 hits; top=['DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE', 'CochainComplex.isZero_of_isGE', 'HomologicalComplex.locallySmall', 'CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat', 'DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective', 'CochainComplex.cm5b', 'HomologicalComplex.instHasLimit', 'CochainComplex.isKInjective_iff_rightOrthogonal']; subdirectory=; note=; digest=b64e2084991a4ac0",
+   "date": "2026-10-18",
+   "verdict": "no match: these hits give general functor, support or ordinary module infrastructure, not this derived evaluation comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If T has Tor amplitude [a,b] and E has cohomology in degrees at least q then derived tensor T E has cohomology only in degrees at least q+a",
+   "results": "8 hits; top=['DerivedCategory.IsGE', 'DerivedCategory.isGE_iff', 'DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE', 'DerivedCategory.IsLE', 'DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE', 'DerivedCategory.isLE_iff', 'DerivedCategory.isZero_of_isGE', 'DerivedCategory.TStructure.t']; subdirectory=; note=; digest=8da386f109ef5ca5",
+   "date": "2026-10-18",
+   "verdict": "no match: these hits give general functor, support or ordinary module infrastructure, not this derived evaluation comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsGE\", \"tensor\"",
+   "results": "2 hits; top=['Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced', 'Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct']; subdirectory=; note=; digest=3e85b9066c460e71",
+   "date": "2026-10-18",
+   "verdict": "no match: these hits give general functor, support or ordinary module infrastructure, not this derived evaluation comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "tor.?amplitude|finite.?tor.?dimension|injective.?dimension|IsGE.*tensor",
+   "results": "0 hits; top=[]; subdirectory=Algebra/Homology; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "no match: these hits give general functor, support or ordinary module infrastructure, not this derived evaluation comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-complete-local-coherent-duality",
@@ -89,5 +229,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-derived-evaluation-finite-injective",
+  "worker": "stage1",
+  "summary": "Preserved the item statement and followed Stacks Tag 0A69. Repaired the earlier search transcription and blueprint ancestry; removed the unnecessary tail and false single-truncation gluing helpers. Two statement-only inputs remain: the canonical evaluation map with signed triangle compatibility, and the pseudo-coherent case 0A68 (2). Wrote the tensor and double-Hom tail bounds explicitly with a constant independent of n, and deduced each cohomology isomorphism from existing triangle and detection nodes.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: Canonical unbounded biduality in the second paragraph of the proof of dualizing.tex Tag 0A7C, lemma-dualizing. This is the algebraic evaluation input of the complete-local coherent-duality descendant, not a replacement of the contracting-correspondence route of the ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Uses only the general truncation triangle in clause (1); the unit does not supply this generic derived-category tool."
+   },
+   {
+    "node": "lem-pc-module-tor-amplitude-flat-model",
+    "why": "Uses the ring-module Tor-amplitude flat model (Stacks 0654) to bound the tensor tail; no such general algebraic theorem is stated in this unit."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Uses bounded flat complexes being K-flat (Stacks 064K) to compute the tensor tail; this is a generic ring-module resolution tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-heart-short-exact-triangles",
+  "lem-pc-module-tor-amplitude-flat-model",
+  "lem-pc-module-bounded-flat-kflat"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-8db79d261",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-8db79d261 (reviewer sub-agent of L); spot-checked: I read Stacks more-algebra 0A60 (l.18164), 0A67 (l.18732), 0A68 (2) (l.28562), 0A69 (l.28617), 0654 (l.16906) and the injective-dimension definition (l.17509). The item statement is unchanged from base and matches 0A69 hypothesis by hypothesis. Step 1: the triangle-compatible canonical map is taken from that node's statement. Step 2: bounded injective complexes are K-injective by dplus-injective-representative (2); the truncation triangle comes from heart (1); the D^{>=n+1} representative comes from the standard t-structure def. Step 3: the pseudo-coherent node's three hypotheses all hold. Step 4: the flat model in [a,b] from 0654 is bounded flat, hence K-flat, so Tot(P⊗B_n)=0 below n+1+a. Step 5: the Hom-complex degree count s<=u-n-1, t>=n+1+v-u is correct, and c=max(-a,u-v) does not depend on n. Step 6: with n>=d+c the tails vanish in H^{d-1} and H^d, so the long exact sequences, the ladder and the all-degrees criterion give the isomorphism. I checked this. New node canonical-map (0A67/0A60 with exactness) is true and asserts no invertibility; it is not a duplicate of lem-sfb-ringed-site-duality-maps (two-object, target O), per-relative-bidual-triangles or the coef unit bidual. New node pseudocoherent is exactly 0A68 (2) and strictly smaller than the item; tested at K=R[0] (identity) and at L=0 or M=0. Edge cases checked: zero objects, zero ring, field with L=M=R[0], non-Noetherian R. I accept the declared tool_uses: heart truncation, the 0654 flat model and the bounded-flat K-flatness, all generic algebra. No SGA. FIX (B3): pseudocoherent's 'L bounded below' cited no definition node. I added the meaning H^i(L)=0 for i<<0 and def-weil-pbc-bounded-derived-subcategories to the statement and stmt_deps, in fixes/dag/nodes/sec-trace-formula/lem-trf-derived-evaluation-pseudocoherent.json.; 1 file(s) fixed by the reviewer"
  }
 }
