@@ -98,7 +98,8 @@ Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus).
 Proof: at every level, Hom from the module unit preserves addition of maps.
 Natural transformations are equal when all components are equal. -/
 theorem coefficientTowerSections_additive : (coefficientTowerSections l E W).Additive := by
-  sorry
+  unfold coefficientTowerSections
+  infer_instance
 
 /-- Additivity needed for the total right derived tower-sections functor.
 Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
@@ -135,7 +136,7 @@ Proof: compose with every limit projection; the two maps become the same sum.
 The projections jointly detect equality. -/
 theorem coefficientAbLimit_additive :
     (lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{r}) ⥤ AddCommGrpCat.{r}).Additive := by
-  sorry
+  exact Functor.additive_of_preserves_binary_products _
 
 /-- Additivity for the mapping-complex total-limit functor.
 Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
@@ -297,7 +298,7 @@ theorem coefficientFiniteReductionCounit_isIso
       (J := Scheme.ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W) Q)
     (n : ℕ) : IsIso ((scalarReductionCounit l E W n).app
       ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj Q)) := by
-  sorry
+  exact (scalarReductionDerivedExistence l E W n).choose_spec.choose_spec.2.2 Q hQ
 
 /-- The canonical computation of finite derived reduction on a K-flat complex.
 Source: Stacks 06YY (blueprint: lem-coef-derived-system-evaluation-calculus). -/
@@ -785,7 +786,13 @@ theorem coefficientSequenceTransitionAdjoint_isIso (S : CoefficientDerivedSystem
     (D : CoefficientFiniteQuotientCalculus l E W S) {m n : ℕ} (h : n ≤ m)
     (N : coefficientSequenceDerived l E W) (hN : IsNormalizedCoefficientSequence l E W N) :
     IsIso (coefficientSequenceTransitionAdjoint l E W S D h N) := by
-  sorry
+  apply isIso_of_coyoneda_map_bijective
+  intro P
+  apply Function.Bijective.of_comp_left
+    (f := (D.adjunction h).homEquiv _ P)
+  · simpa only [Function.comp_def, coefficientSequenceTransitionAdjoint,
+      Adjunction.homEquiv_naturality_right, Equiv.apply_symm_apply] using hN h P
+  · exact ((D.adjunction h).homEquiv _ P).injective
 
 /-- The normalization isomorphism alpha is the actual transition-adjoint.
 Source: Stacks 07A6, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
