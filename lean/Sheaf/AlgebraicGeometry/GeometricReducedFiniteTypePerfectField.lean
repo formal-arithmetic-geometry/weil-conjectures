@@ -12,12 +12,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.FieldTheory.Perfect
 
-import Mathlib.AlgebraicGeometry.Fiber
 import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.RingTheory.FinitePresentation
-import WeilConjectures.Mathlib.RingTheory.Nilpotent.GeometricallyReduced
+import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 
 /-!
 # Geometric reducedness over a perfect field
@@ -82,6 +78,14 @@ theorem geometricallyReduced_finiteType_of_perfectField
       QuasiCompact (X ↘ Spec (.of K)) ∧
       QuasiSeparated (X ↘ Spec (.of K)) ∧
       GeometricallyReduced (X ↘ Spec (.of K)) := by
-  sorry
+  let : GeometricallyReduced (X ↘ Spec (.of K)) :=
+    GeometricallyReduced.of_perfectField (X ↘ Spec (.of K))
+  let : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of K))
+  refine ⟨?_, inferInstance, inferInstance, inferInstance, inferInstance, inferInstance⟩
+  intro L _ _
+  exact pullback_of_geometrically
+    (GeometricallyReduced.geometrically_isReduced (f := X ↘ Spec (.of K))) L
+    (Spec.map (CommRingCat.ofHom (algebraMap K L)))
 
 end AlgebraicGeometry
