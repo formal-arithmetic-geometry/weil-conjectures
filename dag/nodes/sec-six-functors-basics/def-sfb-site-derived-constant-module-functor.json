@@ -15,9 +15,34 @@
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Paragraph immediately before Tag 09BD, lemma-map-out-of-locally-constant, defining the functor D(Lambda) to D(C,Lambda); exact module sheafification as in Sites Tag 00WJ and Modules on Sites Tag 03CY."
  },
- "proof": [],
+ "proof": [
+  {
+   "text": "The CommRingCat sheafification unit is locally injective and locally surjective. The RingCat unit obtained by forgetting commutativity has exactly the same underlying functions. Apply Mathlib Presheaf.equalizerSieve_mem and Presheaf.imageSieve_mem to those functions to prove realizationRingUnit_locallyBijective.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Evaluation of the constant module presheaf functor at each site object is the identity module functor. Apply PresheafOfModules.evaluationJointlyReflectsLimits and evaluationJointlyReflectsColimits to prove finite-limit and finite-colimit preservation. Module sheafification preserves finite limits by its Mathlib instance and colimits as a left adjoint. The composite preserves both, and leftExactFunctor_le_additiveFunctor supplies additivity. This proves commutativeSiteConstantModuleFunctor_exact without the separate exactness theorem for the RingCat presentation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For every CommRingCat sheafification equivalence f, use GrothendieckTopology.W_iff_isLocallyBijective to obtain local injectivity and surjectivity. Forgetting commutativity changes neither equalizer nor image sieves, so the same local-bijectivity criterion applies in RingCat. This proves realization_forget_preservesSheafification and constructs realizationRingIso by constantCommuteCompose.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The constantCommuteCompose factorization identifies the two ring-sheafification units (realizationRingIso_fac). For a commuting triangle of locally bijective ring-presheaf maps, first construct the unit of module sheafification over the second coefficient sheaf as a linear map after restriction to the first coefficient sheaf (moduleSheafificationSeed). Apply the first module-sheafification adjunction to obtain moduleSheafificationComparison. Its underlying abelian-sheaf morphism is the identity, by toSheaf_map_sheafificationHomEquiv_symm and the abelian-sheafification adjunction. The forgetful functor reflects isomorphisms, so this comparison is invertible; its naturality follows by faithfulness from identity maps. Apply this to realizationRingIso.inv and whisker with constant module presheaves to obtain commutativeSiteConstantModuleFunctor_transport. Finally apply the exact-functor mapDerivedCategory construction at independent localization sizes.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Paragraph before Tag 09BD; Modules on Sites Tags 03CY and 093J. Lean proof by N2, 2026-10-19, using Mathlib local bijectivity, exact module sheafification, and the module-sheafification adjunction for coefficient transport."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -115,5 +140,15 @@
   "group": "Q73",
   "result": "pass",
   "note": "Item Lean matches node clause by clause: κ = adjunction mate is an iso in D(C,S̲), natural; (1) flat-term K-flat P (IsKFlatForTotalTensor, equivalent to Stacks K-flat on ModuleCat) gives c_R(P) IsKFlatIndependentCoefficients plus IsFlatOnSite termwise, representative isos and the square identifying κ with Q(complexComparison), with the termwise formula in moduleComparison_tensor; (2) unit compatibility via derivedRestrictionIso; (3) transitivity theorem for arbitrary T,b. No extra hypotheses; universes independent (coefficient max u v is the recorded convention). §1(B) repair of def-sfb-site-derived-constant-module-functor justified (RingCat vs forgotten CommRingCat constant sheaf), lean-only with note, transport theorem to the old functor. Derived/ordinary extension as left adjoint of restriction is canonical: the recorded adjunction interface has no functor declaration and quantifies over presentations. No hollow defs, all theorems sorry, docstrings with source and blueprint, statements verbatim, stmt_deps gained only landed nodes. nt_compile --json on both files: rc 0, no errors or warnings. Minor non-blocking: Nonempty transport theorem, possibly unused SiteCoveringAxioms import, possibly redundant PreservesSheafification theorem."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261019T005349-L-2758145",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
