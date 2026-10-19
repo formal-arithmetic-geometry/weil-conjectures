@@ -47,6 +47,13 @@ theorem closedImmersion_comp_products_and_finiteType_openImmersion :
         IsClosedImmersion (pullback.map a₁ a₂ b₁ b₂ i₁ i₂ (𝟙 S) h₁ h₂)) ∧
     (∀ {U Y : Scheme.{u}} (j : U ⟶ Y),
       IsOpenImmersion j → QuasiCompact j → (LocallyOfFiniteType j ∧ QuasiCompact j)) := by
-  sorry
+  refine ⟨?_, ?_, ?_⟩
+  · intro X Y Z f g hf hg
+    exact IsClosedImmersion.comp f g
+  · intro Z₁ Z₂ W₁ W₂ S a₁ a₂ b₁ b₂ i₁ i₂ h₁ h₂ hi₁ hi₂
+    exact MorphismProperty.pullbackMap (P := @IsClosedImmersion) hi₁ hi₂
+      ((Category.comp_id a₁).symm.trans h₁) ((Category.comp_id a₂).symm.trans h₂)
+  · intro U Y j hj hqc
+    exact ⟨inferInstance, hqc⟩
 
 end AlgebraicGeometry
