@@ -21,112 +21,73 @@
  ],
  "proof": [
   {
-   "text": "The module category is abelian by [lem-pur-ringed-site-module-category-abelian] and is Grothendieck abelian by [lem-pur-ringed-site-grothendieck-abelian], applied to the sheaf of commutative rings $\\mathcal O=A_{\\mathcal C}$ on the small site, hence has (functorial) injective embeddings, in particular enough injectives, by [lem-weil-pbc-grothendieck-functorial-injective-embedding]. The abelian sheaf category has enough injectives by [lem-weil-pbc-site-sheaves-enough-injectives]. Evaluation is additive and left exact by [def-weil-pbc-sites-and-cohomology]. The kernel description in [def-weil-sheaf-of-modules-category] gives the same properties for module evaluation and for $S_m^A,S_m^{\\mathrm{ab}}$: a section of a kernel is a section mapped to zero, and restricting it to zero is precisely the same condition in that subsheaf. Forgetting scalars preserves kernels, giving the identity $vS_m^A=S_m^{\\mathrm{ab}}V$. Clause (1) of [lem-weil-pbc-module-sheaves-colimits-forgetful] gives exactness of $V$; its sheafification hypothesis holds on the small site in the given universe. The ordinary module-forgetting $v$ preserves kernels and cokernels sectionwise. Thus both induce the functors on derived categories used in the statement.",
+   "text": "Evaluation is additive and preserves finite limits. The induced kernel maps are additive by cancellation of the monic kernel inclusion. A cone into the kernel functor is a cone into the source evaluation whose composite with restriction is zero; the universal properties of the evaluation limit and the objectwise kernel construct its unique limit lift. This proves finite-limit preservation of both kernel functors. The exact forgetting functors already installed by the ordinary evaluation interface preserve these kernels, and cancellation of the target inclusion proves naturality of the canonical kernel comparison.",
    "uses": [
-    "lem-pur-ringed-site-module-category-abelian",
-    "lem-pur-ringed-site-grothendieck-abelian",
-    "lem-weil-pbc-grothendieck-functorial-injective-embedding",
-    "lem-weil-pbc-site-sheaves-enough-injectives",
     "def-weil-pbc-sites-and-cohomology",
     "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 03FD setup; Modules on Sites Tag 03DA; Injectives Tag 01DU"
-   }
-  },
-  {
-   "text": "For an injective module sheaf $I$, apply [lem-pur-ringed-site-injective-mono-restriction] with $\\mathcal O=A_{\\mathcal C}$ and the given monomorphism $m$. This gives surjectivity of $I(T)\\to I(W)$. Apply the same node with $\\mathcal O=\\mathbf Z_{\\mathcal C}$ to an injective abelian sheaf: its unique integer action identifies abelian sheaves and integer-module sheaves, including their morphisms and injectivity. Hence the restriction-kernel row is short exact for either kind of injective sheaf. This uses module injectivity for $I$, without treating $VI$ as abelian-injective.",
-   "uses": [
-    "lem-pur-ringed-site-injective-mono-restriction",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 093X, lemma-restriction-along-monomorphism-surjective"
-   }
-  },
-  {
-   "text": "For any injective module sheaf $I$, [lem-pe-left-module-derived-evaluation-forget] applied to $I[0]$ says that $VI$ is acyclic for evaluation at both $T$ and $W$. The general objectwise comparison [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] identifies these groups with module-derived evaluation, which vanishes in positive degrees on $I$. Thus $H^q(T,VI)=H^q(W,VI)=0$ for $q>0$, and in degree zero the identifications are the actual sections and restrictions.",
-   "uses": [
-    "lem-pe-left-module-derived-evaluation-forget",
-    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 03FD, lemma-cohomology-modules-abelian-agree"
-   }
-  },
-  {
-   "text": "Take an abelian injective representative $J$ of $VI[0]$ concentrated in nonnegative degrees, using [lem-weil-pbc-dplus-injective-representative]. Step 2 applied to its terms gives a degreewise short exact sequence $0\\to S_m^{\\mathrm{ab}}(J)\\to J(T)\\to J(W)\\to0$. By [lem-weil-pbc-complex-ses-homology-long-exact] and Step 3 its cohomology sequence starts $0\\to S_m^{\\mathrm{ab}}(VI)\\to I(T)\\to I(W)\\to H^1(S_m^{\\mathrm{ab}}(J))\\to0$, and $H^q(S_m^{\\mathrm{ab}}(J))=0$ for $q\\ge2$. Step 2 makes $I(T)\\to I(W)$ surjective, so the remaining $H^1$ also vanishes. Clause (2) of [lem-weil-pbc-right-derived-plus-injective] identifies $S_m^{\\mathrm{ab}}(J)$ with $RS_m^{\\mathrm{ab}}(VI[0])$. Consequently $R^qS_m^{\\mathrm{ab}}(VI)=0$ for every $q>0$. The long exact sequence here is for complexes of abelian groups, not for a sequence of functors.",
-   "uses": [
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-pur-ringed-site-injective-mono-restriction",
-    "lem-weil-pbc-complex-ses-homology-long-exact",
-    "lem-pe-left-module-derived-evaluation-forget",
-    "lem-weil-pbc-right-derived-plus-injective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0117, lemma-long-exact-sequence-cochain; sites-cohomology.tex Tags 093X, 03FD; derived.tex Tags 013K, 05TH"
-   }
-  },
-  {
-   "text": "Choose a bounded-below injective module representative $L$ for $K$ and an abelian injective representative $J$ for $VK$ by [lem-weil-pbc-dplus-injective-representative]. Clause (2) of [lem-weil-pbc-right-derived-plus-injective], applied separately to the module and abelian kernel functors, gives $RS_m^A(K)=Q(S_m^A(L))$ and $RS_m^{\\mathrm{ab}}(VK)=Q(S_m^{\\mathrm{ab}}(J))$ canonically. The underlying complex of $S_m^A(L)$ is $S_m^{\\mathrm{ab}}(VL)$ by Step 1. Thus these two actual kernel complexes represent the two sides to be compared. This invokes the bounded-below injective-complex clause directly.",
-   "uses": [
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-right-derived-plus-injective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 013K and 070J, injective representatives; Tags 05TI and 05TH, computation on bounded-below injective complexes"
-   }
-  },
-  {
-   "text": "The complex $J$ is K-injective by [lem-weil-pbc-dplus-injective-representative]. The bijection of [lem-weil-pbc-kinjective-hom-derived] represents the chosen derived identification $QVL\\simeq QJ$ by a chain map $q:VL\\to J$, necessarily a quasi-isomorphism. For any such $q$, [lem-pe-left-module-derived-evaluation-forget] identifies $q_T$ and $q_W$ with the canonical ordinary derived evaluation comparisons, so they are quasi-isomorphisms. Step 2, applied to all terms of $L$ and $J$, gives degreewise short exact restriction-kernel sequences. Naturality of the chain map $q$ gives $q_W\\,vL(m)=J(m)q_T$; hence restricting $q_T$ to the kernels defines a chain map and a morphism of these short exact sequences.",
-   "uses": [
-    "lem-pe-left-module-derived-evaluation-forget",
-    "lem-pur-ringed-site-injective-mono-restriction",
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-kinjective-hom-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 093X and 03FD; derived.tex Tag 070I, maps into K-injective complexes"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-complex-ses-long-exact-naturality] the two short exact sequences of Step 6 give a commuting ladder of long exact cohomology sequences. For each integer $n$, use the five-term window $H^{n-1}(L(T))\\to H^{n-1}(L(W))\\to H^n(S_m^{\\mathrm{ab}}(VL))\\to H^n(L(T))\\to H^n(L(W))$, with scalar forgetting understood, and the corresponding window for $J$. The first, second, fourth and fifth vertical maps are isomorphisms by Step 6. The abelian five lemma [lem-weil-pbc-five-lemma] makes the middle map an isomorphism. Hence the kernel map is a quasi-isomorphism, completing the assertion for all three displayed maps.",
-   "uses": [
-    "lem-weil-pbc-complex-ses-long-exact-naturality",
-    "lem-weil-pbc-five-lemma"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0117, functorial long exact sequence; Tag 05QB, five lemma"
-   }
-  },
-  {
-   "text": "Let $\\alpha$ be the natural transformation for the abelian kernel functor in clause (1) of [lem-weil-pbc-right-derived-plus-injective]. Apply its naturality to $q:VL\\to J$. Its component on $J$ is an isomorphism by clause (2); therefore the kernel map of Step 7, under the identifications of Step 5 and $Qq$, is exactly $\\alpha_{VL}:Q(S_m^{\\mathrm{ab}}(VL))\\to RS_m^{\\mathrm{ab}}(QVL)$. This defines $c_m(K)$. Maps between injective module representatives are represented by chain maps, uniquely up to homotopy, by [lem-weil-pbc-kinjective-hom-derived]; all the additive functors here preserve homotopies by applying them to $h-h'=ds+sd$. Naturality of $\\alpha$ now proves naturality in $K$ and independence of $L$. For fixed $L$, maps into any abelian injective representative inducing the same derived identification are unique up to homotopy by that same node; thus changing $J,q$ leaves the comparison unchanged. The evaluation maps are the canonical comparisons of [lem-pe-left-module-derived-evaluation-forget]. In degree zero the injective resolutions identify $H^0$ with the original left-exact functors, so the kernel map is precisely the identity $vS_m^A=S_m^{\\mathrm{ab}}V$.",
-   "uses": [
-    "lem-weil-pbc-right-derived-plus-injective",
-    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
     "lem-pe-left-module-derived-evaluation-forget"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 05TI, 05TH and 05SA, right-derived transformation and uniqueness; Tag 070I, maps into K-injectives; sites-cohomology.tex Tag 03FD normalization"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply the source-library small-site theorem SheafOfModules.isGrothendieckAbelian to the actual constant RingCat sheaf. The Mathlib Grothendieck-category enough-injectives instance gives enough injectives for module sheaves. Abelian sheaves have enough injectives by the existing small-site Mathlib instances.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-pur-ringed-site-module-category-abelian",
+    "lem-weil-pbc-grothendieck-functorial-injective-embedding",
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove module-injective restriction surjectivity directly for the constant RingCat sheaf. The right adjoint of exact module sheafification takes an injective sheaf to an injective module presheaf. The free-module presheaf map induced by yoneda(m) is monic because postcomposition with m is injective and Finsupp.mapDomain preserves that injectivity. Extend the free-Yoneda morphism representing a section over W across this monomorphism; naturality evaluated at the identity generator gives its preimage over T. For abelian injectives, apply the existing injective_sheaf_mono_restriction theorem.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-injective-sheaf-mono-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The source theorem injective_module_abelian_acyclic makes positive object cohomology of a forgotten module-injective zero. Transport across nonempty_cohomologyPresheafFunctor_eval_iso_rightDerived to obtain right acyclicity for evaluation at every object.",
+   "uses": [
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lem-sc-site-cohomology-right-derived-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply rightDerived_injective_sequence to kernel inclusion and restriction, using abelian-injective restriction surjectivity and the universal kernel exactness. At a forgotten module-injective, rightDerived_zero_transformation and left exactness identify the zeroth derived restriction with the original surjective restriction. In the derived sequence, exactness and that surjectivity kill degree one of the kernel; evaluation acyclicity at T and W kills every higher degree. This is forgottenKernelAcyclic.",
+   "uses": [
+    "lem-weil-pbc-right-derived-injective-sequence",
+    "lem-weil-pbc-right-derived-zero-transformation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The underived kernel comparison is a natural isomorphism, the forgetting functors are exact, and forgotten module-injectives are kernel-acyclic. Apply isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic to obtain invertibility of the canonical comparison. Apply rightDerivedBaseChange_zero_unit objectwise for its degree-zero normalization.",
+   "uses": [
+    "src-right-derived-functor-plus-base-change-of-right-acyclic",
+    "lem-sbc-right-derived-base-change-zero-unit",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any supplied L,N,q, restriction surjectivity gives both degreewise short exact rows; kernel.lift_ι and restriction naturality give the two squares. Source terms VL are acyclic for the abelian kernel and both evaluations; target terms are injective and thus acyclic. Choose the minimum of the two lower bounds and apply quasiIso_map_of_rightAcyclic to q for each of the three functors. Precomposition with the canonical termwise comparison isomorphisms gives the three asserted quasi-isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-leray-acyclicity-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate rightDerivedFunctorPlusBaseChange_fac on the homotopy class of L. Expand its associators and canonical composition comparisons; use full faithfulness of the inclusion of bounded-below complexes to identify the mapped underived comparison with the specified complexIdentity. Cancel the exact-forgetting factor isomorphisms. Naturality with eL, the supplied identification equation for q, and naturality of the target derived unit with q give comparisonCompute. Apply it first to the kernel identity and then to each evaluation identity. These are the specified representative equations, for every choice of representatives; the canonical natural transformation already ensures naturality and independence.",
+   "uses": [
+    "lem-pe-left-module-derived-evaluation-forget",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -134,24 +95,25 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-sheaf-of-modules-category",
   "lem-pe-left-module-derived-evaluation-forget",
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "lem-pur-ringed-site-injective-mono-restriction",
   "lem-pur-ringed-site-module-category-abelian",
-  "lem-weil-pbc-complex-ses-homology-long-exact",
-  "lem-weil-pbc-complex-ses-long-exact-naturality",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-five-lemma",
+  "lem-sbc-right-derived-base-change-zero-unit",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lem-sc-site-cohomology-right-derived-sections",
   "lem-weil-pbc-grothendieck-functorial-injective-embedding",
-  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-injective-sheaf-mono-restriction",
+  "lem-weil-pbc-leray-acyclicity-quasi-iso",
   "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-right-derived-injective-sequence",
   "lem-weil-pbc-right-derived-plus-injective",
-  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
-  "lem-weil-pbc-site-sheaves-enough-injectives"
+  "lem-weil-pbc-right-derived-zero-transformation",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "src-right-derived-functor-plus-base-change-of-right-acyclic"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Supported refinement of Tags 093X and 03FD; injectives.tex Tag 01DU; derived.tex Tags 013K, 070J, 070I, 05TI and 05TH; homology.tex Tags 0117 and 05QB. The comparison is proved by the explicit kernel-complex argument."
+  "place": "Tags 093X and 03FD; derived.tex Tags 015E, 05TI, 05TH; homology.tex Tag 0117. T4: direct free-Yoneda restriction argument, classical derived exact sequence for kernel acyclicity, acyclic-complex quasi-isomorphism theorem, and explicit derived-unit naturality for all representative normalizations."
  },
  "mathlib_searches": [
   {
@@ -243,9 +205,7 @@
  },
  "tool_uses": [
   "lem-pe-left-module-derived-evaluation-forget",
-  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-pur-ringed-site-grothendieck-abelian"
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -296,5 +256,15 @@
   "group": "Q34",
   "result": "pass",
   "note": "Every node clause matches the Lean: 093X surjectivity, positive-degree S^ab-acyclicity, IsIso of comparison := rightDerivedFunctorPlusBaseChange kernelIdentity.hom (built like lem-pe's), degree-0 normalization, and the arbitrary L/N/q/eL/eN clause with row exactness, both row squares, three quasi-isos and the two derived-equality normalizations. The representative equation was checked by hand via _fac, the direction of _he and unit naturality. Common universe u with free w; HasWeakSheafify is inferable (probe), so no stronger hypothesis; no flatness or V-injectivity. Edge cases m=id, A=0, A=Z, Z/2 on the point, empty site. Real data for S, S₀, kernelIdentity, comparison, row, compute, forgetCompute, kernelMap, evaluationMap; all theorems sorry; docstrings have source and blueprint, main docstring has Steps 1-8. No duplicate notion (only scheme-specific support kernels exist). Imports equal the recorded modules. lean.statement verbatim and 23 declarations present; non-lean node fields equal the side clone. Report has a Worker report and a real Second reading by Q34. nt_compile --json on the snapshot: rc=0, 14.3 s, clean; probe confirmed real elaboration, axioms include sorryAx, #check matches."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261019T112535-L-3952640",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
