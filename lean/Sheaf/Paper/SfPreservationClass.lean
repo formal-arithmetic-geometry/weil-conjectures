@@ -6,13 +6,6 @@ Authors: SHEAF group ND
 module
 
 public import Sheaf.Paper.PurityAffineChartBounds
-import Sheaf.AlgebraicGeometry.IntrinsicConstructibleIntervals
-import Sheaf.AlgebraicGeometry.SfConstructibleExceptionalAdjointDischarge
-import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
-import Sheaf.Paper.ExceptionalAdjointAdmissibility
-import Sheaf.Paper.FiniteTorAmplitudeSites
-import Sheaf.Paper.ProEtaleConstructibleOrigin
-import Sheaf.Paper.PurityFiniteSetting
 /-!
 # Uniform finite-stage exceptional inverse-image preservation
 
@@ -113,6 +106,49 @@ theorem sf_preservation_class
         ProEtale.DerivedCategory.constructibleFiniteTor
           (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) X
           ((ProEtale.sfFiniteExceptionalInverseImage F.k l E n hn c).obj K)) := by
-  sorry
+  classical
+  have hD₀ : C.nonemptyCharts.maxDimension ≤ C.maxDimension := by
+    apply Finset.sup_le
+    intro ij _
+    change C.dimension ij.1
+      (((Fintype.equivFin {j : Fin (C.size ij.1) // Nonempty (C.source ij.1 j)}).symm
+        ij.2).val) ≤ C.maxDimension
+    let j := ((Fintype.equivFin
+      {j : Fin (C.size ij.1) // Nonempty (C.source ij.1 j)}).symm ij.2).val
+    have hj : C.dimension ij.1 j ≤ C.maxDimension := by
+      simpa only [SfAffineChartPresentation.maxDimension] using
+        (Finset.le_sup (f := fun ij : (i : Fin C.count) × Fin (C.size i) ↦
+          C.dimension ij.1 ij.2)
+          (s := Finset.univ) (b := Sigma.mk (ij.1 : Fin C.count) j) (Finset.mem_univ _))
+    exact hj
+  have hD : C.assemblyDimension ≤ C.maxDimension := by
+    unfold SfAffineChartPresentation.assemblyDimension
+    split_ifs
+    · exact hD₀
+    · exact Nat.zero_le _
+  have hLower (a : ℤ) :
+      a - 2 * (C.maxDimension : ℤ) ≤ a - 2 * (C.assemblyDimension : ℤ) := by
+    have : (C.assemblyDimension : ℤ) ≤ (C.maxDimension : ℤ) := by exact_mod_cast hD
+    omega
+  have hUpper (b : ℤ) :
+      b - 2 * (C.assemblyDimension : ℤ) + C.assemblyConstant ≤
+        b + 2 * (sfDimension Y : ℤ) + 1 := by
+    unfold SfAffineChartPresentation.assemblyDimension
+      SfAffineChartPresentation.assemblyConstant
+    split_ifs <;> omega
+  intro n hn a b hab
+  have h := sf_purity_affine_chart_bounds F l _hl E n hn X Y f c C a b hab
+  refine ⟨?_, ?_, ?_⟩
+  · intro L hL
+    obtain ⟨hLc, hLi⟩ := h.1 L hL
+    exact ⟨hLc, hLi.mono (hLower a) (hUpper b)⟩
+  · intro K hK hKt
+    exact ProEtale.DerivedCategory.torAmplitudeIn.mono (hLower a) (hUpper b)
+      (h.2 K hK hKt).2
+  · intro K hK
+    obtain ⟨a', b', hKt⟩ := hK.2
+    exact (sf_purity_affine_chart_bounds F l _hl E n hn X Y f c C
+      (min a' b') b' (min_le_right _ _) |>.2 K hK
+        (ProEtale.DerivedCategory.torAmplitudeIn.mono (min_le_left _ _) le_rfl hKt)).1
 
 end AlgebraicGeometry.Scheme
