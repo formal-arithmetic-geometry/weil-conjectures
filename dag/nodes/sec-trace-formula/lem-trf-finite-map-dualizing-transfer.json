@@ -14,9 +14,84 @@
   "def-pur-derived-internal-hom",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For ordinary modules, restriction $U_0:\\operatorname{Mod}(B)\\to\\operatorname{Mod}(A)$ has right adjoint $C_0(I)=\\operatorname{Hom}_A(B,I)$ with $(b\\varphi)(b')=\\varphi(b'b)$. Explicitly the adjunction sends $f:N\\to C_0(I)$ to $g:n\\mapsto f(n)(1)$, with inverse $g\\mapsto(n\\mapsto[b\\mapsto g(bn)])$. These are linear maps: $f(bn)(1)=(bf(n))(1)=f(n)(b)$, and $g(b'bn)$ verifies $B$-linearity of the inverse; both composites are identities and the formulas commute with pre- and postcomposition. Restriction preserves monomorphisms, since an injective underlying module map remains injective. Thus [lem-exc-rg-right-adjoint-preserves-injectives] applied to $U_0\\dashv C_0$ proves that each injective $A$-module $I$ gives an injective $B$-module $C_0(I)$.",
+   "uses": [
+    "lem-exc-rg-right-adjoint-preserves-injectives"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 08XR, lemma-hom-injective, used in the first paragraph of Tag 0AX0; ordinary adjunction written out."
+   }
+  },
+  {
+   "text": "Choose a bounded complex $I^\\bullet$ of injective $A$-modules representing $L$. It is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]. Hence [def-pur-derived-internal-hom] computes $R\\operatorname{Hom}_A(B[0],L)$ by $J^\\bullet=\\operatorname{Hom}_A^\\bullet(B[0],I^\\bullet)$. By [lem-trf-derived-coinduction-adjunction], this Hom complex with precomposition action represents $C_B(L)\\in D(B)$ and has the required underlying $A$-object. Its degree $q$ term is $\\operatorname{Hom}_A(B,I^q)$, injective over $B$ by Step 1, and it vanishes whenever $I^q$ vanishes. Consequently $\\Omega_B=C_B(L)$ has a bounded injective $B$-representative $J^\\bullet$.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-pur-derived-internal-hom",
+    "lem-trf-derived-coinduction-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0AX0, lemma-dualizing-finite, first paragraph; Tag 0A70 for the derived coinduction model."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-coherent-rhom-finite-injective-dimension] with $K=B[0]$ and the given $L$. The Noetherian hypothesis is on $A$, the only nonzero cohomology of $B[0]$ is the finite $A$-module $B$, and $L$ has finite cohomology and a bounded injective representative. Thus every cohomology module of $\\Omega_B$ is finite over $A$. Each finite set of $A$-generators also generates as a $B$-module: its $B$-span contains its $A$-span, which is the whole module, by the definition [def-weil-finitely-generated-module]. This proves finite $B$-cohomology.",
+   "uses": [
+    "lem-trf-coherent-rhom-finite-injective-dimension",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0AX0, second paragraph (coherence), and Tag 0G4H, lemma-finite-ext-into-bounded-injective."
+   }
+  },
+  {
+   "text": "Set $T=R\\operatorname{Hom}_A(L,L)$ and let $h:A[0]\\xrightarrow{\\sim}T$ be the assumed scalar-action map. For every $n$, the good truncation $\\tau_{\\le n}B[0]$ is either zero or $B[0]$, so it has bounded-above finite cohomology. It is pseudo-coherent by [lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion]. Apply [lem-trf-derived-evaluation-finite-injective] with $R=A$, $K=B[0]$ and both its targets equal to $L$. Both targets have bounded injective representatives. Moreover $T\\cong A[0]$ has Tor amplitude $[0,0]$: the free rank-one complex $A[0]$ itself computes its derived tensor, and $A[0]\\otimes_A N[0]=N[0]$. The cited evaluation theorem therefore makes the composite $$B[0]\\cong A[0]\\otimes_A^{\\mathbf L}B[0]\\xrightarrow{h\\otimes1}T\\otimes_A^{\\mathbf L}B[0]\\longrightarrow R\\operatorname{Hom}_A(R\\operatorname{Hom}_A(B[0],L),L)$$ an isomorphism. Its transpose is evaluation, by the theorem's stated description: $h(1)=\\operatorname{id}_L$, so the subsequent composition into $L$ changes nothing. This composite is precisely the canonical biduality map $\\delta_B$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "lem-trf-derived-evaluation-finite-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7C, lemma-dualizing, canonical biduality proof; more-algebra.tex Tags 066E, 0A67 and 0A69."
+   }
+  },
+  {
+   "text": "Write $U:D(B)\\to D(A)$ for restriction. Apply [lem-trf-algebraic-shriek-derived-hom-adjunction] with its rings $P=A$, $A=B$, its $X=C_B(L)$ and $Y=L$. It identifies $$U R\\operatorname{Hom}_B(C_B(L),C_B(L))\\cong R\\operatorname{Hom}_A(U C_B(L),L).$$ By [lem-trf-derived-coinduction-adjunction], the latter is $R\\operatorname{Hom}_A(R\\operatorname{Hom}_A(B[0],L),L)$. Under this identification, the restriction of the scalar-action map sends $b$ to $[\\varphi\\mapsto(b\\varphi)(1)=\\varphi(b)]$: indeed the cited internal adjunction sends an endomorphism $f$ to $[\\varphi\\mapsto f(\\varphi)(1)]$. This is the evaluation formula for $\\delta_B$ of Step 4 (and $b$ has degree zero, so no sign occurs). Thus the restricted scalar-action map is an isomorphism. Restriction is conservative by [lem-trf-derived-coinduction-adjunction], so the scalar-action map itself is an isomorphism in $D(B)$. Together with Steps 2 and 3 this proves all three conclusions.",
+   "uses": [
+    "lem-trf-algebraic-shriek-derived-hom-adjunction",
+    "lem-trf-derived-coinduction-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0AX0, final displayed Hom calculations, with Tags 0A70 and 0A71; evaluation-at-1 identifies the actual scalar-action morphism."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-weil-finitely-generated-module",
+  "lem-exc-rg-right-adjoint-preserves-injectives",
+  "lem-trf-algebraic-shriek-derived-hom-adjunction",
+  "lem-trf-coherent-rhom-finite-injective-dimension",
+  "lem-trf-derived-coinduction-adjunction",
+  "lem-trf-derived-evaluation-finite-injective",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0AX0, lemma-dualizing-finite"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -52,10 +127,38 @@
    "results": "1 hits; top=['Mathlib/Algebra/Homology/HomotopyFiber.lean']; subdirectory=Algebra; note=; digest=064930e5919f47f9",
    "date": "2026-10-18",
    "verdict": "no match: ordinary dual base change, finite projective module duals and finite algebra definitions do not give derived finite-map dualizing transfer."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite homomorphism of Noetherian rings A to B and a dualizing complex L on A, RHom_A(B,L) is dualizing on B",
+   "results": "Hits include AlgHom.Finite, RingHom.Finite, RingHom.QuasiFinite, IsBaseChange.dual and ordinary dualTensorHomEquiv; no derived dualizing transfer.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.DerivedCategory, ModuleCat, dualizing, RHom",
+   "results": "0 hits; Loogle reports unknown identifier CategoryTheory.DerivedCategory.",
+   "date": "2026-10-19",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite ring map transfers a dualizing complex by derived Hom",
+   "results": "Hits include IsBaseChange.dual, IsBaseChange.toDualBaseChange, Module.dual_finite and ordinary derived-category infrastructure; no dualizing transfer.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]ualizing|[Ss]emidualizing|RHom.*RHom",
+   "results": "25 hits, mainly Algebra/Group/End.lean and unrelated module files; no derived dualizing theorem. Searched subdirectory Algebra.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-complete-local-coherent-duality",
@@ -88,5 +191,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-finite-map-dualizing-transfer",
+  "worker": "stage1",
+  "summary": "Audited Stacks 0AX0, retaining the complete original statement. Reused existing general right-adjoint injectivity, bounded-injective K-injectivity, coherent RHom finiteness, Noetherian pseudo-coherence, derived evaluation, and internal coinduction adjunction nodes. Removed two unnecessary provisional new nodes, writing their elementary specializations explicitly. The five proof steps establish the bounded B-injective model, coherent cohomology, canonical finite-module biduality and compatibility of the scalar-action morphism. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes the existing finite-map-transfer supporting input in blueprint.from.place, reached through the recorded coherent-duality chain from lem-trf-local-term-locality. Steps 1-2 give the bounded Hom(B,I) model of 0AX0, Step 3 its coherence, and Steps 4-5 its derived adjunction/biduality calculation. The long inherited ancestor chain is preserved; no unit-level route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "why": "Generic algebraic criterion makes the bounded-above coherent truncations of B[0] pseudo-coherent for the existing derived-evaluation theorem; no statement of the local-term unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-119f00ead",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-119f00ead (reviewer sub-agent of L); spot-checked: I read Stacks 0AX0 (dualizing.tex:2808) and its proof, and 0A7B/0A5S. The statement is unchanged from live and matches all three dualizing conditions, including the actual scalar-action map. There are no new nodes. Step 1: the U0⊣C0 formulas are correct and restriction preserves monomorphisms, so 015Z (Mathlib leaf) applies. Step 2: the bounded injective I is K-injective, and C_B(L)=Hom^•(B[0],I) is a bounded complex of B-injectives. Step 3: 0G4H with K=B[0] gives finite A-cohomology, so finite B-cohomology. Step 4: the three hypotheses of 0A69 hold (L bounded injective; T≅A[0] has Tor amplitude [0,0]; τ≤n B[0] is 0 or B[0], pseudo-coherent by 066E(2)). The transpose with h(1)=id is b↦(φ↦φ(b)), so δ_B is an isomorphism. Step 5: the general Θ formula f↦(x↦f(x)(1)) sends U(b·id) to δ_B(b); since U is conservative, the scalar-action map is an isomorphism in D(B). Edge cases B=A, B=0, a field extension and DVR→residue field all behave as expected. The grep for 0AX0/0AX1 finds no duplicate, and the cited closures do not contain the item, so there is no cycle. The off-unit tool use of 066E(2) is accepted as a generic black box. Only Stacks is cited, no SGA. Batch-5 flag: the recomputed closure reaches the item outside the trace-formula proof (via lem-per-local-cohomology-top-nonvanishing ← … ← nt-target-weil-conjectures), so the flag is real. But the four cited trf nodes (algebraic-shriek-derived-hom-adjunction 0A70/0A71, coherent-rhom-finite-injective-dimension 0G4H, derived-coinduction-adjunction 0A70, derived-evaluation-finite-injective 0A69) are generic commutative or homological algebra. Their closures contain no other trf/pd node, and none is a step of the proof of the trace formula or of Poincaré duality, so I accept them as outside the assumed statements."
  }
 }
