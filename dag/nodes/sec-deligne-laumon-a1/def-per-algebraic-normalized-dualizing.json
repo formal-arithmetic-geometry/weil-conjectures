@@ -55,7 +55,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-local-cohomology-top-nonvanishing",
@@ -83,5 +83,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "def-per-algebraic-normalized-dualizing",
+  "worker": "stage1",
+  "summary": "Audited this definition against Stacks dualizing.tex Tags 0A7B and 0A7M. Its five statement dependencies already exist and supply Noetherian rings, the ordinary derived category, derived internal Hom, injective objects/resolutions, and finite generation; no new node is needed. The definition has no proof steps. Searched the current blueprint, DAG, and source checkout for duplicate definitions or an exact Lean declaration; none was found. The existing blueprint provenance points to the normalized-dualizing input in the ancestor proof.",
+  "blueprint": "The item realizes the ancestor blueprint proof's supporting input: “the meaning of the normalized algebraic dualizing complex used after completion” in the Tag 0DXE discussion; no separate blueprint node states this definition."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-18fb5197a",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-18fb5197a (reviewer sub-agent of L); spot-checked: Read the item in full; the delivery has no new nodes and no fixes. The delivery adds only status split and a split_report; the statement, stmt_deps and source are unchanged from Q57's node of 2026-10-19. Source checks: Stacks 0A7B (dualizing.tex:2557) clauses (1)-(3) match (i)-(iii). Finite injective dimension is expanded per 0A5R (more-algebra definition-injective-dimension: represented by a finite complex of injectives), which is correct. 0A7M (dualizing.tex:2906): normalized means RHom_A(kappa, omega) = kappa[0] over a Noetherian local ring, and the item restricts it to local A in the same way. Each of the 5 stmt_deps is used and defines what the item takes from it. RHom on the one-object ringed site follows the existing convention of lem-trf-finite-map-dualizing-transfer and def-pc-perfect-rhom-base-change-map. Edge cases: a field (k[0] normalized, k[3] not), A=0 (Omega=0 dualizing; not local), Z (Q to Q/Z dualizing; not local), Artinian local (E(kappa)[0]). Duplicate search: no other def node for algebraic dualizing complexes; the trf/per dualizing nodes are etale or Gabber notions; lem-trf-finite-map-dualizing-transfer only inlines the same three conditions; no blueprint node, so same_as [] is correct. Citers (top-nonvanishing Step 3, generic-degree, local-duality) use the clauses consistently. SGA route lock respected. Four kinds of Mathlib search recorded with no match, which I confirm; their verdict text is a cosmetic boilerplate copy."
  }
 }
