@@ -21,9 +21,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleBoundedContinuitySections
 public import Mathlib.Algebra.Homology.Functor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-!
 # The presheaf description of bounded-below higher direct images
@@ -151,7 +149,38 @@ theorem ringModuleResolution_isKInjective_quasiIso {X : Scheme.{u}}
     (K : CochainComplex (ringedSiteModules.{u + 1} R) ℤ) :
     ((ringModuleResolutionFunctor R).obj K).IsKInjective ∧
       QuasiIso (ringModuleResolutionMap R K) := by
-  sorry
+  let S := ((AsSmall.down : proEtaleSiteModel X ⥤ X.ProEt).sheafPushforwardContinuous
+    RingCat.{u + 1} (proEtaleModelTopology X) (topology X)).obj R
+  let := SheafOfModules.isGrothendieckAbelian S
+  let : (AsSmall.equiv.{u, u + 1, u + 1} (C := X.ProEt)).functor.IsContinuous
+      (topology X) (proEtaleModelTopology X) := proEtaleModelUp_isContinuous X
+  let : (AsSmall.equiv.{u, u + 1, u + 1} (C := X.ProEt)).inverse.IsContinuous
+      (proEtaleModelTopology X) (topology X) := by
+    change AsSmall.down.IsContinuous (proEtaleModelTopology X) (topology X)
+    infer_instance
+  let e : SheafOfModules.{u + 1} S ≌ SheafOfModules.{u + 1} R :=
+    SheafOfModules.pushforwardPushforwardEquivalence
+      (AsSmall.equiv.{u, u + 1, u + 1} (C := X.ProEt)) (𝟙 R) (𝟙 S)
+      (by ext U; dsimp [AsSmall.equiv]; erw [S.obj.map_id]; rfl)
+      (by ext U; dsimp [AsSmall.equiv]; erw [R.obj.map_id]; rfl)
+  let : (proEtaleModuleFromModel R).IsEquivalence :=
+    inferInstanceAs e.functor.IsEquivalence
+  constructor
+  · change CochainComplex.IsKInjective
+      (((proEtaleModuleFromModel R).mapHomologicalComplex (ComplexShape.up ℤ)).obj
+        ((CochainComplex.kInjectiveResolutionFunctor.{u + 1}
+          (ringedSiteModules.{u + 1} S)).obj
+            (((proEtaleModuleToModel R).mapHomologicalComplex (ComplexShape.up ℤ)).obj K)))
+    infer_instance
+  · let A := (proEtaleModuleToModel R).mapHomologicalComplex (ComplexShape.up ℤ)
+    let B := (proEtaleModuleFromModel R).mapHomologicalComplex (ComplexShape.up ℤ)
+    let s := (CochainComplex.toKInjectiveResolution.{u + 1}
+      (ringedSiteModules.{u + 1} S)).app (A.obj K)
+    have : QuasiIso s := (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u + 1}
+      (ringedSiteModules.{u + 1} S) (A.obj K)).2
+    have : QuasiIso (B.map s) := inferInstance
+    change QuasiIso (_ ≫ B.map s)
+    exact quasiIso_comp _ (B.map s)
 
 /-- K-injective resolutions on the original site, with the explicit transported witness.
 Source: Stacks Tag 079P (blueprint: lem-pe-bounded-complex-direct-image-presheaf). -/
@@ -281,7 +310,12 @@ theorem resolvedInverseImageCohomologyEvaluation_naturality {X Y : Scheme.{u}} (
         (resolvedInverseImageCohomologyEvaluation f R q V L).hom =
       (resolvedInverseImageCohomologyEvaluation f R q V K).hom ≫
         (ringHypercohomology X R ((proEtaleBaseChange f).obj V) q).map t := by
-  sorry
+  change (HomologicalComplex.homologyFunctor _ _ q).map _ ≫
+      (HomologicalComplex.homologyFunctor _ _ q).map _ =
+    (HomologicalComplex.homologyFunctor _ _ q).map _ ≫
+      (HomologicalComplex.homologyFunctor _ _ q).map _
+  simp only [← Functor.map_comp]
+  congr 1
 
 /-- The actual natural comparison to the landed hypercohomology functor at V.
 Source: Stacks Tag 0D6I (blueprint: lem-pe-bounded-complex-direct-image-presheaf). -/
@@ -348,7 +382,12 @@ theorem sectionHomologyPresheaf_naturality {Y : Scheme.{u}}
       ((C.sc q).mapHomologyIso
         ((CategoryTheory.evaluation Y.ProEtᵒᵖ AddCommGrpCat.{u + 1}).obj V)).hom ≫
         (C.homology q).map a := by
-  sorry
+  let τ := (CategoryTheory.evaluation Y.ProEtᵒᵖ AddCommGrpCat.{u + 1}).map a
+  have h := ShortComplex.homologyMap_mapNatTrans (C.sc q) τ
+  change ShortComplex.homologyMap ((C.sc q).mapNatTrans τ) ≫ _ = _
+  rw [h]
+  simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  rfl
 
 /-- Sectionwise cohomology is canonically the homology presheaf, using exact evaluation.
 Source: Stacks, proof of lemma-sheafification-cohomology, Tag 0D6I
@@ -397,6 +436,156 @@ noncomputable def boundedComplexDirectImagePresheafIso {X Y : Scheme.{u}} (f : X
       (F.rightDerivedFunctorOfQuasiIsoResolutionsObjIso
         (boundedRingModuleDirectImage_hasKInjectiveResolutions R) s)).symm
 
+private noncomputable def ringModuleResolutionAugmentation {X : Scheme.{u}}
+    (R : Sheaf (topology X) RingCat.{u + 1}) :
+    𝟭 (CochainComplex (ringedSiteModules.{u + 1} R) ℤ) ⟶ ringModuleResolutionFunctor R :=
+  let S := ((AsSmall.down : proEtaleSiteModel X ⥤ X.ProEt).sheafPushforwardContinuous
+    RingCat.{u + 1} (proEtaleModelTopology X) (topology X)).obj R
+  letI := SheafOfModules.isGrothendieckAbelian S
+  let A := (proEtaleModuleToModel R).mapHomologicalComplex (ComplexShape.up ℤ)
+  let B := (proEtaleModuleFromModel R).mapHomologicalComplex (ComplexShape.up ℤ)
+  ((Functor.mapHomologicalComplexIdIso (ringedSiteModules.{u + 1} R)
+      (ComplexShape.up ℤ)).symm ≪≫
+    NatIso.mapHomologicalComplex (ringModuleModelRoundTrip R) (ComplexShape.up ℤ)).hom ≫
+    Functor.whiskerRight (Functor.whiskerLeft A
+      (CochainComplex.toKInjectiveResolution.{u + 1} (ringedSiteModules.{u + 1} S))) B
+
+private noncomputable def sectionHomologyPresheafNatIso {Y : Scheme.{u}} (q : ℤ) :
+    HomologicalComplex.complexOfFunctorsToFunctorToComplex ⋙
+        (Functor.whiskeringRight Y.ProEtᵒᵖ _ _).obj
+          (HomologicalComplex.homologyFunctor AddCommGrpCat.{u + 1} (ComplexShape.up ℤ) q) ≅
+      HomologicalComplex.homologyFunctor (Y.ProEtᵒᵖ ⥤ AddCommGrpCat.{u + 1})
+        (ComplexShape.up ℤ) q :=
+  NatIso.ofComponents (fun C ↦ sectionHomologyPresheafIso C q) (fun t ↦ by
+    apply NatTrans.ext
+    funext V
+    exact ShortComplex.mapHomologyIso_hom_naturality
+      ((HomologicalComplex.shortComplexFunctor _ _ q).map t)
+      ((CategoryTheory.evaluation Y.ProEtᵒᵖ AddCommGrpCat.{u + 1}).obj V))
+
+private noncomputable def exactHomologyNatIso
+    {C : Type*} {D : Type*} [Category C] [Category D]
+    [Abelian C] [Abelian D] (F : C ⥤ D) [F.Additive] [F.PreservesHomology] (q : ℤ) :
+    F.mapHomologicalComplex (ComplexShape.up ℤ) ⋙
+        HomologicalComplex.homologyFunctor D (ComplexShape.up ℤ) q ≅
+      HomologicalComplex.homologyFunctor C (ComplexShape.up ℤ) q ⋙ F :=
+  NatIso.ofComponents (fun K ↦ (K.sc q).mapHomologyIso F)
+    (fun t ↦ ShortComplex.mapHomologyIso_hom_naturality
+      ((HomologicalComplex.shortComplexFunctor _ _ q).map t) F)
+
+private noncomputable def sectionHomologySheafificationNatIso {Y : Scheme.{u}} (q : ℤ) :
+    (sheafToPresheaf (topology Y) AddCommGrpCat.{u + 1}).mapHomologicalComplex
+        (ComplexShape.up ℤ) ⋙
+        HomologicalComplex.homologyFunctor _ (ComplexShape.up ℤ) q ⋙
+        presheafToSheaf (topology Y) AddCommGrpCat.{u + 1} ≅
+      HomologicalComplex.homologyFunctor _ (ComplexShape.up ℤ) q :=
+  let U := sheafToPresheaf (topology Y) AddCommGrpCat.{u + 1}
+  let A := presheafToSheaf (topology Y) AddCommGrpCat.{u + 1}
+  let E : U.mapHomologicalComplex (ComplexShape.up ℤ) ⋙
+        A.mapHomologicalComplex (ComplexShape.up ℤ) ≅ 𝟭 _ :=
+    NatIso.mapHomologicalComplex (asIso (sheafificationAdjunction
+      (topology Y) AddCommGrpCat.{u + 1}).counit) (ComplexShape.up ℤ)
+  Functor.isoWhiskerLeft (U.mapHomologicalComplex (ComplexShape.up ℤ))
+      (exactHomologyNatIso A q).symm ≪≫
+    Functor.isoWhiskerRight E (HomologicalComplex.homologyFunctor _ (ComplexShape.up ℤ) q)
+
+private theorem derivedResolutionComparison_naturality
+    {C : Type*} {D : Type*} [Category C] [Category D]
+    [Abelian C] [Abelian D] [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive]
+    (h : ∀ K : CochainComplex C ℤ,
+      ∃ (I : CochainComplex C ℤ) (s : K ⟶ I), I.IsKInjective ∧ QuasiIso s)
+    {K L I J : CochainComplex C ℤ} [I.IsKInjective] [J.IsKInjective]
+    (s : K ⟶ I) (r : L ⟶ J) [QuasiIso s] [QuasiIso r]
+    (t : K ⟶ L) (g : I ⟶ J) (w : t ≫ r = s ≫ g) :
+    (F.rightDerivedFunctorOfQuasiIsoResolutions h).map (DerivedCategory.Q.map t) ≫
+        (F.rightDerivedFunctorOfQuasiIsoResolutionsObjIso h r).hom =
+      (F.rightDerivedFunctorOfQuasiIsoResolutionsObjIso h s).hom ≫
+        DerivedCategory.Q.map ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map g) := by
+  let RF := F.rightDerivedFunctorOfQuasiIsoResolutions h
+  let η := F.rightDerivedFunctorOfQuasiIsoResolutionsUnit h
+  let H := HomotopyCategory.quotient C (ComplexShape.up ℤ)
+  have := F.rightDerivedFunctorOfQuasiIsoResolutionsUnit_isIso h I
+  have := F.rightDerivedFunctorOfQuasiIsoResolutionsUnit_isIso h J
+  have hw : RF.map (DerivedCategory.Q.map t) ≫ RF.map (DerivedCategory.Q.map r) =
+      RF.map (DerivedCategory.Q.map s) ≫ RF.map (DerivedCategory.Q.map g) := by
+    simp only [← Functor.map_comp, w]
+  have hn := η.naturality (H.map g)
+  dsimp only [Functor.comp_map] at hn
+  have hq := congrArg RF.map ((DerivedCategory.quotientCompQhIso C).inv.naturality g)
+  dsimp only [Functor.comp_map] at hq
+  simp only [Functor.map_comp] at hq
+  have hu : RF.map (DerivedCategory.Qh.map (H.map g)) ≫ inv (η.app (H.obj J)) =
+      inv (η.app (H.obj I)) ≫
+        DerivedCategory.Qh.map ((F.mapHomotopyCategory (ComplexShape.up ℤ)).map (H.map g)) := by
+    apply (cancel_epi (η.app (H.obj I))).1
+    rw [← Category.assoc, ← hn]
+    simp only [Category.assoc, IsIso.hom_inv_id, Category.comp_id,
+      IsIso.hom_inv_id_assoc]
+  have hf := (DerivedCategory.quotientCompQhIso D).hom.naturality
+    ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map g)
+  dsimp only [Functor.comp_map] at hf
+  dsimp only [Functor.rightDerivedFunctorOfQuasiIsoResolutionsObjIso, Iso.trans_hom,
+    Functor.mapIso_hom, Iso.symm_hom, Iso.app_hom, asIso_hom, asIso_inv]
+  change RF.map (DerivedCategory.Q.map t) ≫
+      (RF.map (DerivedCategory.Q.map r) ≫
+        RF.map ((DerivedCategory.quotientCompQhIso C).inv.app J) ≫
+        inv (η.app (H.obj J)) ≫ (DerivedCategory.quotientCompQhIso D).hom.app _) = _
+  simp only [Category.assoc]
+  rw [reassoc_of% hw, reassoc_of% hq, reassoc_of% hu]
+  dsimp only [H] at hu ⊢
+  simp only [Functor.mapHomotopyCategory_map] at *
+  simpa only [HomotopyCategory.quotient_obj_as, H, RF, η, Iso.app_inv,
+    Category.assoc] using congrArg
+    (fun k ↦ RF.map (DerivedCategory.Q.map s) ≫
+    RF.map ((DerivedCategory.quotientCompQhIso C).inv.app I) ≫
+      inv (η.app (H.obj I)) ≫ k) hf
+
+private noncomputable def ringDirectImageResolutionNatIso {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (R : Sheaf (topology X) RingCat.{u + 1}) :
+    DerivedCategory.Q ⋙ boundedRingDerivedDirectImage f R ≅
+      ringModuleResolutionFunctor R ⋙
+        (boundedRingModuleDirectImage f R).mapHomologicalComplex (ComplexShape.up ℤ) ⋙
+          DerivedCategory.Q := by
+  letI (K : CochainComplex (ringedSiteModules.{u + 1} R) ℤ) :
+      ((ringModuleResolutionFunctor R).obj K).IsKInjective :=
+    (ringModuleResolution_isKInjective_quasiIso R K).1
+  letI (K : CochainComplex (ringedSiteModules.{u + 1} R) ℤ) :
+      QuasiIso (ringModuleResolutionMap R K) :=
+    (ringModuleResolution_isKInjective_quasiIso R K).2
+  exact NatIso.ofComponents (fun K ↦
+    (boundedRingModuleDirectImage f R).rightDerivedFunctorOfQuasiIsoResolutionsObjIso
+      (boundedRingModuleDirectImage_hasKInjectiveResolutions R) (ringModuleResolutionMap R K))
+    (fun t ↦ derivedResolutionComparison_naturality _ _ _ _ t
+      ((ringModuleResolutionFunctor R).map t) ((ringModuleResolutionAugmentation R).naturality t))
+
+private noncomputable def boundedComplexDirectImagePresheafNatIso
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (R : Sheaf (topology X) RingCat.{u + 1}) (q : ℤ) :
+    inverseImageCohomologyPresheaf f R q ⋙
+        presheafToSheaf (topology Y) AddCommGrpCat.{u + 1} ≅
+      (DerivedCategory.Q ⋙ boundedRingHigherDirectImage f R q) ⋙
+        SheafOfModules.toSheaf _ := by
+  let F := boundedRingModuleDirectImage f R
+  let T := SheafOfModules.toSheaf.{u + 1}
+    ((proEtaleSheafDirectImage f RingCat.{u + 1}).obj R)
+  letI : PreservesFiniteLimits T := (moduleSheaves_colimits_forgetful _).2.1
+  letI : PreservesFiniteColimits T := (moduleSheaves_colimits_forgetful _).2.2.1
+  let C := ringModuleResolutionFunctor R ⋙ F.mapHomologicalComplex (ComplexShape.up ℤ)
+  let B := C ⋙ T.mapHomologicalComplex (ComplexShape.up ℤ)
+  let A := presheafToSheaf (topology Y) AddCommGrpCat.{u + 1}
+  exact Functor.isoWhiskerRight (inverseImageCohomologyPresheafIso f R q).symm A ≪≫
+    Functor.isoWhiskerRight
+      (Functor.isoWhiskerLeft (inverseImageSectionComplex f R)
+        (sectionHomologyPresheafNatIso q)) A ≪≫
+    Functor.isoWhiskerLeft B (sectionHomologySheafificationNatIso q) ≪≫
+    Functor.isoWhiskerLeft C
+      (exactHomologyNatIso T q) ≪≫
+    Functor.isoWhiskerRight
+      (Functor.isoWhiskerLeft C (DerivedCategory.homologyFunctorFactors _ q).symm) T ≪≫
+    Functor.isoWhiskerRight
+      (Functor.isoWhiskerRight (ringDirectImageResolutionNatIso f R).symm
+        (DerivedCategory.homologyFunctor _ q)) T
+
 /-- The canonical isomorphisms are natural for every chain map between bounded-below
 complexes. The isomorphism itself is the explicitly constructed
 `boundedComplexDirectImagePresheafIso`, so this assertion identifies the actual induced
@@ -432,6 +621,24 @@ theorem boundedComplexDirectImagePresheaf {X Y : Scheme.{u}} (f : X ⟶ Y)
       (boundedComplexDirectImagePresheafIso f R q K hK).hom ≫
         ((DerivedCategory.Q ⋙ boundedRingHigherDirectImage f R q) ⋙
           SheafOfModules.toSheaf _).map t := by
-  sorry
+  have h := (boundedComplexDirectImagePresheafNatIso f R q).hom.naturality t
+  dsimp only [boundedComplexDirectImagePresheafNatIso,
+    boundedComplexDirectImagePresheafIso, sectionHomologySheafificationNatIso,
+    sectionHomologySheafificationIso, sectionHomologyPresheafNatIso,
+    ringDirectImageResolutionNatIso, Functor.mapHomologicalComplexHomologyIso,
+    Functor.mapHomologicalComplexCompShortComplexFunctorIso, exactHomologyNatIso,
+    Functor.associator, Iso.refl, Functor.mapHomologicalComplexIdIso,
+    Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv, Iso.app_hom, Iso.app_inv,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerLeft_inv,
+    Functor.isoWhiskerRight_hom, Functor.isoWhiskerRight_inv,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    NatTrans.comp_app, NatIso.ofComponents_hom_app, NatIso.ofComponents_inv_app,
+    Functor.comp_obj, Functor.comp_map, Functor.mapIso_hom, Functor.mapIso_inv,
+    ] at h
+  dsimp only [boundedComplexDirectImagePresheafIso, sectionHomologySheafificationIso,
+    Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Iso.app_hom]
+  simp only [Category.assoc, Functor.comp_map, Iso.app_inv, Functor.mapIso_inv,
+    sectionHomologyPresheafIso, Functor.comp_obj] at h ⊢
+  convert h using 1 <;> congr 8
 
 end AlgebraicGeometry.Scheme.ProEt

@@ -67,9 +67,8 @@
    }
   },
   {
-   "text": "For a morphism of complexes $t:K\\to L$, choose K-injective resolutions $s:K\\to I$ and $r:L\\to J$ as in Step 1. By [lem-weil-pbc-kinjective-hom-derived], the derived morphism $Q(r)Q(t)Q(s)^{-1}:QI\\to QJ$ is represented by a chain map $h:I\\to J$, uniquely up to chain homotopy. Every additive functor preserves chain homotopies, by applying it to the equation $h-h'=dH+Hd$. Consequently the induced cohomology maps after evaluation and after direct image depend only on $t$. For each arrow $V\\prime\\to V$ of the target site, the square between $h^n(u(V))$, $h^n(u(V\\prime))$ and the restriction maps commutes because $h^n$ is a sheaf morphism. Thus the evaluated cohomology maps form a morphism of presheaves, rather than only unrelated maps on objects. The unit naturality in [def-sfb-right-derived-functor] identifies these maps with the maps of $R\\Gamma(U,-)$ and $Rf_*$. The natural comparison of [lem-weil-pbc-exact-functor-complex-cohomology] commutes with $h$, as does the sheafification unit [def-weil-pbc-sheafification]. Hence the isomorphisms of Step 3 commute with $t$. Applying this to the identity of $K$ with two resolutions also proves independence of resolution, in that case $Q(h)=Q(r)Q(s)^{-1}$, so applying cohomology gives $H^q(h)=H^q(r)H^q(s)^{-1}$ for every $q$. Hence $h$ is a quasi-isomorphism, and therefore a homotopy equivalence by [lem-weil-pbc-kinjective-hom-derived]. The same uniqueness up to homotopy also makes comparison through three resolutions compose correctly. This proves canonicity and the asserted naturality.",
+   "text": "Use the published functorial K-injective replacement on the small model and transport it to the original site. The augmentation is a natural transformation, so for a chain map t:K→L its resolution map g:I→J satisfies t ≫ r = s ≫ g. Expand the canonical right-derived comparison as RF(Qs), the quotient-presentation comparison, and the inverse unit at I. Functoriality, naturality of the quotient comparison and naturality of the derived unit prove RF(Qt) ≫ c_r = c_s ≫ Q(Fg). The exact-functor homology comparisons are natural by ShortComplex.mapHomologyIso_hom_naturality. The pointwise homology comparison is natural both in site arrows and in maps of complexes. Compose these natural isomorphisms with the sheafification counit and with the inverse of the derived-resolution comparison. Their components are exactly the originally specified boundedComplexDirectImagePresheafIso. The naturality of their composite is the asserted square. No choice of chain-map representatives is required, because the resolution was functorial from the outset.",
    "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
     "def-sfb-right-derived-functor",
     "lem-weil-pbc-exact-functor-complex-cohomology",
     "def-weil-pbc-sheafification"
@@ -89,13 +88,12 @@
   "lem-weil-pbc-sheafification-exact",
   "lem-weil-pbc-exact-functor-complex-cohomology",
   "def-weil-pbc-sheafification",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-kinjective-hom-derived"
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-direct-image.proof.md",
-  "place": "First paragraph, expanded via K-injective computation and exact sheafification; agrees with the conclusion of Stacks Tag 0D6I without using Leray as a black box."
+  "place": "First paragraph, expanded via the existing functorial K-injective resolution, exact sheafification and naturality of the right-derived unit; Stacks Tag 0D6I and derived.tex Tag 070Y. Stage-3 implementation by W3 proves naturality for the actual specified comparison."
  },
  "mathlib_searches": [
   {
@@ -319,5 +317,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261019T034335-L-423037",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
