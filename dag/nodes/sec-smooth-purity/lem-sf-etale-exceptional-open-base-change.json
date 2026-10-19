@@ -1,0 +1,111 @@
+{
+ "id": "lem-sf-etale-exceptional-open-base-change",
+ "kind": "statement",
+ "title": "Existing etale exceptional base change for open immersions",
+ "statement": "Let Lambda be a finite commutative ring, and let g′ : X′ -> X, f′ : X′ -> Y′, f : X -> Y and g : Y′ -> Y be a Cartesian square of schemes. Suppose f and f′ are quasi-compact and admit compactifications, and g is an open immersion. The canonical ordinary etale derived exceptional base-change transformation Lg′* Rf! -> Rf′! Lg* is invertible. This is the existing source theorem named in the lean attachment, with no ambient pro-etale adjoint hypothesis.",
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-open-immersion",
+  "def-weil-exceptional-inverse-image"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/UpperShriekBaseChange.lean",
+  "place": "isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion, including the preceding module proof explanation"
+ },
+ "proof": [
+  {
+   "text": "Use the two fully faithful derived open-extension adjunctions. The iterated-mate identity identifies the exceptional comparison with the conjugate of its inverse open mate gamma. On the target open, gamma is invertible because the open units and compact-support base-change transformation are invertible. On the closed complement both endpoints vanish: extension by zero restricts to zero, and compact-support base change identifies the other restriction with the extension from the disjoint pulled-back open. Open and closed restriction jointly reflect isomorphisms, so gamma is invertible. Its conjugate, the specified exceptional comparison, is invertible. The complete checked proof is the existing Lean declaration; this delivery only records it in the DAG.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/UpperShriekBaseChange.lean",
+  "place": "Module docstring and existing complete theorem proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "iterated_mateEquiv_conjugateEquiv|isIso.*mateEquiv",
+   "results": "['Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Adjunction/Mates.lean']; ",
+   "date": "2026-10-19",
+   "verdict": "No direct Mathlib exceptional-base-change result. The source library contains the exact theorem; Mathlib supplies iterated mate calculus."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"IsIso\"",
+   "results": "[]; ",
+   "date": "2026-10-19",
+   "verdict": "No direct Mathlib exceptional-base-change result. The source library contains the exact theorem; Mathlib supplies iterated mate calculus."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image base change along an open immersion is an isomorphism",
+   "results": "['AlgebraicGeometry.Scheme.Hom.isIso_app', 'AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatAppObjOpensOpensFunctor', 'AlgebraicGeometry.Scheme.Hom.appIso', 'AlgebraicGeometry.IsOpenImmersion.ΓIso_inv', 'AlgebraicGeometry.morphismRestrictOpensRange', 'AlgebraicGeometry.Scheme.Hom.appIso_inv_app_assoc', 'AlgebraicGeometry.Scheme.Hom.appIso_inv_app', 'AlgebraicGeometry.Scheme.Hom.appIso_inv_app_apply']; ",
+   "date": "2026-10-19",
+   "verdict": "No direct Mathlib exceptional-base-change result. The source library contains the exact theorem; Mathlib supplies iterated mate calculus."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional inverse image base change along an open immersion is an isomorphism",
+   "results": "Hits read: AlgebraicGeometry.Scheme.Hom.isoImage, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict, AlgebraicGeometry.Scheme.Hom.appIso_inv_app_assoc, AlgebraicGeometry.Scheme.Hom.appIso, AlgebraicGeometry.IsOpenImmersion.opensEquiv_symm_apply, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.instIsIsoInvApp, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.ofRestrict_invApp_apply.",
+   "date": "2026-10-19",
+   "verdict": "No direct Mathlib exceptional-base-change theorem: these hits concern scheme and ringed-space open immersions. The exact theorem already exists in the source library."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfOpenExceptionalBaseChange",
+  "date": "2026-10-19",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-exc-base-change-open-immersion-general",
+   "place": "Independent finite clause: reuse the already proved etale exceptional base-change theorem",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBaseChange",
+  "declaration": "AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion",
+  "statement": "theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion [HasCompactification f]\n    [HasCompactification f'] [QuasiCompact f] [QuasiCompact f'] [IsOpenImmersion g]\n    (sq : IsPullback g' f' f g) :\n    IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-19",
+  "note": "Existing theorem, unchanged. Context: Lambda : Type (u+1), CommRing Lambda, Finite Lambda; g′, f′, f, g are the four scheme morphisms. No Lean declaration or hole is added by this node."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261019T192756-L-1866674",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261019T192756-L-1866674",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
