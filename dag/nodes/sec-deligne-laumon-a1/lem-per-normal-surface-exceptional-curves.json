@@ -23,9 +23,233 @@
   "def-weil-closed-immersion",
   "def-kun-transcendence-degree"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Properness makes $f$ finite type. The finite-type-over-Noetherian theorem makes $Y$ Noetherian. On each affine chart over an affine of $X$, its coordinate ring is a finite type algebra over an excellent ring, hence excellent by the finite-type excellence theorem (take the multiplicative set $\\{1\\}$). The affine-cover criterion then gives excellence on every affine open of $Y$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-trf-excellent-scheme-affine-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBT, lemma-dominate-by-normalized-blowing-up, first proof paragraph; supporting Tags 01T6, 07QU, 0HAB"
+   }
+  },
+  {
+   "text": "Since $Y$ is integral it is reduced and has just one irreducible component, itself. Thus its componentwise normalization is exactly its function-field normalization $\\nu:Z\\to Y$. The excellent normalization preparation theorem gives finiteness and surjectivity of $\\nu$, and normality, Noetherianity and excellence of $Z$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-weil-pbc-reduced-normalization",
+    "lem-per-excellent-normalization-preparation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBT, first proof paragraph; Tags 035S and 035Q"
+   }
+  },
+  {
+   "text": "The affine normalization charts are $\\operatorname{Spec}\\overline A$, where $A$ is a domain and $A\\subseteq\\overline A\\subseteq\\operatorname{Frac}(A)=k(Y)$. Consequently $\\overline A$ is a domain with fraction field $k(Y)$: the inclusions give both inclusions of fraction fields. The generic points of these charts agree on their nonempty overlaps, since they all map to the generic point of $Y$ and have the same fraction-field chart. Hence $Z$ is integral and $k(Y)\\to k(Z)$ is an isomorphism. Composing with the given isomorphism gives $k(X)=k(Z)$.",
+   "uses": [
+    "lem-per-componentwise-normalization-affine-charts",
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035P, lemma-description-normalization; Tag 01RV, lemma-integral-scheme-rational-functions"
+   }
+  },
+  {
+   "text": "Finite morphisms are proper, so $\\nu$ is proper; composition makes $h=f\\nu$ proper. In particular it is finite type and closed. Its generic point maps to the generic point of $X$, so it is dominant. The closed dominant dimension formula, with the function-field extension of transcendence degree zero, gives $\\dim Z=\\dim X=2$. If $Y$ was already normal, apply the finite birational normal-target isomorphism theorem to $\\nu$ to conclude that $\\nu$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-composition",
+    "def-weil-proper-morphism",
+    "lem-trf-closed-dominant-dimension",
+    "lem-trf-finite-birational-normal-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WN (lemma-finite-proper), 01W3 (lemma-composition-proper), 02JX (lemma-alteration-dimension), 0AB1 (lemma-finite-birational-over-normal)"
+   }
+  },
+  {
+   "text": "We will use the following elementary interpretation of local dimension on $X$ and $Z$. At a point $s$ choose an affine neighbourhood $\\operatorname{Spec}A$, with corresponding prime $\\mathfrak p$. The stalk is $A_{\\mathfrak p}$; its primes correspond, preserving strict inclusions in both directions, to primes of $A$ contained in $\\mathfrak p$. These correspond to generizations of $s$ (specialization in an affine spectrum is inclusion of primes). All generizations lie in every open neighbourhood of $s$. Taking closures in the whole scheme therefore identifies their strict chains with chains of irreducible closed subsets ending at $\\overline{\\{s\\}}$. Thus $\\dim\\mathcal O_{S,s}$ is the supremum of lengths of these chains. On an integral scheme such chains can start at the generic point; on our surfaces their lengths are at most $2$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "def-weil-pbc-krull-dimension-ring",
+    "def-kun-topological-krull-dimension",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J7, lemma-specialize-points; affine verification using algebra Tag 00E3, lemma-spec-localization"
+   }
+  },
+  {
+   "text": "The stalks of $X$ and $Z$ are Noetherian: use their Noetherian affine covers, the affine-stalk localization isomorphism, and preservation of Noetherianity under localization. They are normal local domains by normality of the schemes. At any point of local dimension one, the one-dimensional normal local domain theorem therefore says the stalk is a DVR.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-pbc-normal-ring",
+    "lem-sc-normal-dim1-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD, lemma-characterize-dvr, equivalence (5) with (1); localization Noetherianity"
+   }
+  },
+  {
+   "text": "Apply the normal modification theorem to $h:Z\\to X$. Its hypotheses hold: $X$ is Noetherian, $Z$ is integral hence reduced, $h$ is proper, and its generic local-ring map is the function-field isomorphism, so it is birational in the theorem's stated sense. Let $U$ be the maximal open where $h$ is an isomorphism, and $T=X\\setminus U$. Clauses (1) and (2), together with the DVR conclusion of step 6, show that every point of $T$ has local dimension $2$. Clause (3) will also show that any point with a finite fibre belongs to $U$, since every local ring of $X$ is normal.",
+   "uses": [
+    "lem-per-normal-modification-codimension-one",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, clauses (1), (2), (3)"
+   }
+  },
+  {
+   "text": "Every point $t\\in T$ is closed: a proper specialization of $t$ would append one term to a length-two generization chain ending at $t$ (step 5), giving a chain of length three in $X$, contrary to $\\dim X=2$. The closed subset $T$ has finitely many irreducible components by the Noetherian closed-subset component theorem. Each component has a generic point, and that point is closed by the preceding argument; hence the component is a singleton. Thus $T$ is a finite set of closed points. This includes $T=\\varnothing$.",
+   "uses": [
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-sc-scheme-sober",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBT, second proof paragraph: finite closed exceptional set; supporting Tag 0BA8"
+   }
+  },
+  {
+   "text": "If $C\\in B(h)$ and $h(C)=\\{x\\}$, properness of $h$ implies that $\\{x\\}$ is closed, since $C$ is closed and a proper map is closed. Moreover $x\\notin U$: otherwise the isomorphism $h^{-1}U\\simeq U$ would identify the underlying space of $C$ with the singleton $\\{x\\}$, contradicting $\\dim C=1$. Therefore every contracted curve lies over one of the finitely many points of $T$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBT, second proof paragraph, identification of BadCurves with curves above the exceptional points"
+   }
+  },
+  {
+   "text": "For each $x\\in T$, the closed subset $F_x=h^{-1}(\\{x\\})$ is proper in $Z$, because the generic point of $Z$ maps to the generic point of $X$, not to $x$. Every irreducible closed subset of $F_x$ has dimension at most one: adjoining $Z$ to any of its chains adds one strict inclusion in the two-dimensional integral space $Z$. It has finitely many irreducible components by the Noetherian closed-subset component theorem. A one-dimensional irreducible closed subset $C\\subseteq F_x$ must itself be a component: if $C\\subsetneq D$ for an irreducible component $D$ of $F_x$, a length-one chain in $C$ followed by $D$ would give $\\dim D\\geq2$. Conversely every one-dimensional component, endowed with its reduced induced closed scheme structure, is a member of $B(h)$. Thus $B(h)$ is a subset of a finite union of finite component sets, and is finite.",
+   "uses": [
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "def-kun-topological-krull-dimension",
+    "def-weil-closed-immersion",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBT, second proof paragraph, finiteness of BadCurves; no connectedness or purity of the fibres is needed"
+   }
+  },
+  {
+   "text": "If $B(h)=\\varnothing$, every irreducible component of each $F_x$, $x\\in T$, has dimension zero by step 10. Such a component is a singleton: its generic point exists, and a distinct point would give a nontrivial specialization and hence a length-one chain. The finitely many components therefore make $F_x$ finite. Clause (3) of the normal modification theorem now forces $x\\in U$, a contradiction. Hence $T=\\varnothing$ and $h$ is an isomorphism. Conversely an isomorphism cannot contract a one-dimensional closed subset to a singleton, so $h$ an isomorphism implies $B(h)=\\varnothing$.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "lem-per-normal-modification-codimension-one",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBT, second proof paragraph, base case; Tag 0BFP, clause (3)"
+   }
+  },
+  {
+   "text": "Fix $C\\in B(h)$ and put $\\eta=\\eta_C$. Its local dimension on $Z$ is one. Indeed $\\eta$ differs from the generic point of $Z$, so it has a strict generization and local dimension at least one. If its local dimension were at least two, a length-two chain ending at $C=\\overline{\\{\\eta\\}}$, followed by a proper nonempty irreducible closed subset of the one-dimensional $C$, would give a length-three chain in $Z$. This is impossible. Apply step 6, or directly the one-dimensional Noetherian normal local domain theorem, to obtain that $R_C=\\mathcal O_{Z,\\eta}$ is a DVR.",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "lem-sc-normal-dim1-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBT, fourth proof paragraph, use of ord at the generic point of a bad curve; algebra Tag 00PD (5)"
+   }
+  },
+  {
+   "text": "Set $x=h(\\eta)=h(C)$. The stalk map $\\mathcal O_{X,x}\\to\\mathcal O_{Z,\\eta}$ is local by the definition of a scheme morphism. Both rings embed in their function fields: on an integral affine chart the section ring embeds in the generic stalk, and its localization at any prime embeds in the same field by $a/s\\mapsto a/s$. The fraction field of that localization is still the fraction field of the section ring, since it contains the section ring. The stalk map commutes with the maps to the generic stalks, by restriction of the structure-sheaf morphism. Under $k(X)=k(Z)$ its composite with $R_C\\hookrightarrow k(Z)$ is the inclusion $\\mathcal O_{X,x}\\hookrightarrow k(X)$, so it is injective and both fraction fields are this common field.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBT, fourth proof paragraph, common fraction fields; supporting Tags 01RV and 01HV"
+   }
+  },
+  {
+   "text": "Finally take the scheme-theoretic fibre $Z_x=Z\\times_X\\operatorname{Spec}\\kappa(x)$. It is finite type over $\\kappa(x)$ by finite-type base change. The fibre's underlying space is homeomorphic to $F_x$, so the closed irreducible subset $C$ corresponds to a one-dimensional closed irreducible subset of $Z_x$, with corresponding generic point $\\widetilde\\eta$. The dimension/transcendence-degree theorem over a field gives $\\operatorname{trdeg}_{\\kappa(x)}\\kappa_{Z_x}(\\widetilde\\eta)=1$. Its residue field is canonically $\\kappa_Z(\\eta)$ as a $\\kappa(x)$-field: on affine charts this is exactly the fibre-ring primes/residue-fields theorem for $B\\otimes_A\\kappa(\\mathfrak p)$ and the prime of $B$ corresponding to $\\eta$. Thus $\\operatorname{trdeg}_{\\kappa(x)}\\kappa(\\eta_C)=1$, as required.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-sc-closed-irreducible-dimension-trdeg",
+    "lem-weil-pbc-fibre-ring-primes-residue-fields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21 (6), item-dimension-irreducible-trdeg (Tag 0B1C); schemes Tags 01K0/01K1; algebra Tags 00E6 and 0H9M"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-pc-integral-scheme",
+  "def-pc-scheme-fibre",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-proper-morphism",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-per-componentwise-normalization-affine-charts",
+  "lem-per-excellent-normalization-preparation",
+  "lem-per-normal-modification-codimension-one",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-normal-dim1-dvr",
+  "lem-sc-scheme-sober",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-trf-closed-dominant-dimension",
+  "lem-trf-excellent-scheme-affine-cover",
+  "lem-trf-finite-birational-normal-iso",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-fibre-ring-primes-residue-fields",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-proper-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0BBT, lemma-dominate-by-normalized-blowing-up, first two proof paragraphs and fourth paragraph; the component and chain arguments are expanded, with Tags 0BFP, 02JX, 00PD and 0A21(6)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -54,10 +278,45 @@
    "results": "0 hits: none; ; logged digest 4f53cda18c2baa0c",
    "date": "2026-10-19",
    "verdict": "no match: the returned relative-normalization constructions do not give finite exceptional sets, the isomorphism criterion, or the generic DVR and transcendence-degree assertions; grep found none"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*curve|contracted.*curve|birational.*surface",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-19",
+   "verdict": "no match: properness facts and relative normalization constructions do not state the exceptional-curve conclusions; no grep hits for exceptional or contracted curves or birational surfaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper birational morphism of integral Noetherian surfaces to a normal excellent surface has finitely many exceptional curves and is an isomorphism if there are none",
+   "results": "8 hits: AlgebraicGeometry.isProper_eq, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.IsProper, AlgebraicGeometry.IsProper.mk, AlgebraicGeometry.IsProper.instCompScheme, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom; digest 4a534459cf11cb80",
+   "date": "2026-10-19",
+   "verdict": "no match: properness facts and relative normalization constructions do not state the exceptional-curve conclusions; no grep hits for exceptional or contracted curves or birational surfaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"birational\", \"finite\"",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-19",
+   "verdict": "no match: properness facts and relative normalization constructions do not state the exceptional-curve conclusions; no grep hits for exceptional or contracted curves or birational surfaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalize the source of a proper birational surface modification; exceptional curve generic local rings are discrete valuation rings and their residue fields have transcendence degree one",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization; digest 532c57c7815ef07d",
+   "date": "2026-10-19",
+   "verdict": "no match: properness facts and relative normalization constructions do not state the exceptional-curve conclusions; no grep hits for exceptional or contracted curves or birational surfaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely many curves are contracted by a proper modification of a normal two dimensional excellent scheme, and no exceptional curve means isomorphism",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.normalization.hom_ext, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization, AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec, AlgebraicGeometry.Scheme.Hom.fromNormalization; digest 5b550c218a3d00fe",
+   "date": "2026-10-19",
+   "verdict": "no match: properness facts and relative normalization constructions do not state the exceptional-curve conclusions; no grep hits for exceptional or contracted curves or birational surfaces"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-excellent-surface-normalized-domination",
@@ -85,5 +344,109 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-normal-surface-exceptional-curves",
+  "worker": "stage1",
+  "summary": "Q38 expands normalization, codimension-one isomorphism, the finite exceptional-set/component argument, the empty-curve isomorphism criterion, generic DVR stalks and residue transcendence degree. Statement unchanged; every tool already has a DAG node, so no new nodes.",
+  "blueprint": "Technical input through the recorded potential-dualizing surface-resolution ancestry to lem-per-artin-gabber-affine-curve: the normalized-domination subargument realizes resolve Tag 0BBT, first two proof paragraphs and the fourth-paragraph DVR/residue calculation. Does not replace the perverse unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic tool used in step(s) 1 for Excellence is preserved by finite type algebras and localization. The perverse-curve unit has no replacement for this algebraic-geometric surface tool; it does not change the unit route."
+   },
+   {
+    "node": "lem-sc-closed-irreducible-dimension-trdeg",
+    "why": "Generic tool used in step(s) 14 for Dimension of an irreducible closed subset from its generic residue field. The perverse-curve unit has no replacement for this algebraic-geometric surface tool; it does not change the unit route."
+   },
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "Generic tool used in step(s) 3, 13 for Function field of an integral scheme is the fraction field of an affine open. The perverse-curve unit has no replacement for this algebraic-geometric surface tool; it does not change the unit route."
+   },
+   {
+    "node": "lem-sc-noetherian-closed-subset-finite-components",
+    "why": "Generic tool used in step(s) 8, 10 for A closed subset of a Noetherian scheme has finitely many irreducible components. The perverse-curve unit has no replacement for this algebraic-geometric surface tool; it does not change the unit route."
+   },
+   {
+    "node": "lem-sc-normal-dim1-dvr",
+    "why": "Generic tool used in step(s) 6, 12 for One-dimensional normal local rings. The perverse-curve unit has no replacement for this algebraic-geometric surface tool; it does not change the unit route."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Generic tool used in step(s) 5, 8, 11 for Schemes are sober. The perverse-curve unit has no replacement for this algebraic-geometric surface tool; it does not change the unit route."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic tool used in step(s) 14 for Finite-type morphisms are stable under composition and base change. The perverse-curve unit has no replacement for this algebraic-geometric surface tool; it does not change the unit route."
+   },
+   {
+    "node": "lem-trf-closed-dominant-dimension",
+    "why": "Generic tool used in step(s) 4 for Dimension formula for a closed dominant morphism. The perverse-curve unit has no replacement for this algebraic-geometric surface tool; it does not change the unit route."
+   },
+   {
+    "node": "lem-trf-excellent-scheme-affine-cover",
+    "why": "Generic tool used in step(s) 1 for Excellence of a scheme is detected on an affine open cover. The perverse-curve unit has no replacement for this algebraic-geometric surface tool; it does not change the unit route."
+   },
+   {
+    "node": "lem-trf-finite-birational-normal-iso",
+    "why": "Generic tool used in step(s) 4 for A finite birational morphism to a normal integral scheme is an isomorphism. The perverse-curve unit has no replacement for this algebraic-geometric surface tool; it does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic tool used in step(s) 5, 6, 13 for Stalk of a scheme at a point of an affine open: the canonical open immersion and the localization. The perverse-curve unit has no replacement for this algebraic-geometric surface tool; it does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-ring-primes-residue-fields",
+    "why": "Generic tool used in step(s) 14 for Primes and residue fields of the fibre ring. The perverse-curve unit has no replacement for this algebraic-geometric surface tool; it does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Generic tool used in step(s) 4 for Finite morphisms are proper. The perverse-curve unit has no replacement for this algebraic-geometric surface tool; it does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic tool used in step(s) 1 for A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). The perverse-curve unit has no replacement for this algebraic-geometric surface tool; it does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Generic tool used in step(s) 6 for Localizations of Noetherian rings are Noetherian. The perverse-curve unit has no replacement for this algebraic-geometric surface tool; it does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Generic tool used in step(s) 5 for Residue fields of a localization agree with those of the base. The perverse-curve unit has no replacement for this algebraic-geometric surface tool; it does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Generic tool used in step(s) 4 for Properness is stable under composition. The perverse-curve unit has no replacement for this algebraic-geometric surface tool; it does not change the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-finite-type-localization-excellent",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-normal-dim1-dvr",
+  "lem-sc-scheme-sober",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-trf-closed-dominant-dimension",
+  "lem-trf-excellent-scheme-affine-cover",
+  "lem-trf-finite-birational-normal-iso",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-fibre-ring-primes-residue-fields",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-proper-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-4f202ab5d",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-4f202ab5d (reviewer sub-agent of L); spot-checked: I read the whole item. It has 14 steps and no new nodes, and its statement is unchanged. Sources read: Stacks 0BBT (resolve.tex, paragraphs 1, 2 and 4) and 0BFP (varieties.tex, clauses 1-4). I checked the statements of all 30 cited nodes against how each step uses them. Steps 1-4: excellence comes from finite type plus the affine-cover criterion 0HAB; normalization preparation gives ν finite and Z normal, Noetherian and excellent; the affine charts with A ⊂ B ⊂ Frac A give Z integral with k(Z)=k(Y); 02JX applies to the closed, dominant, integral h with r=0 and gives dim Z=2; 0AB1 handles the case of normal Y. Steps 7-11: 0BFP clauses 1 and 2 (with the DVR from step 6) put T at local dimension 2; a chain argument makes T a finite set of closed points; 1-dimensional irreducible subsets of F_x are components, so B(h) is finite; clause 3 plus sobriety give the iso iff B(h) is empty. Steps 12-14: η_C has local dimension 1, so its stalk is a DVR; the stalk map is local and injective through the generic stalks; trdeg is 1 through the fibre Z_x and the fibre-ring residue field theorem. Edge cases checked: identity, blowup of A² at the origin, a 2-dimensional local base, and non-equidimensional Spec R[t] (the argument only uses dim X = dim Z = 2). Batch-5: all five flagged citations, and every trf/pod node in the item's closure (02IJ, 02IX, 02JX, 0066, 0HAB, 0AB1, 0HA5, 07R4, 02JU, 02UP, 02J9, 01KU), are generic Stacks commutative algebra or topology. None is part of the trace formula or Poincaré duality, and the closure reaches no sk-thm-trace-transport or nt-* node; accepted. No SGA citations. tool_uses are declared only in split_report and are generic tools; accepted. No duplicate found (grep for 0BBT/BadCurves)."
  }
 }
