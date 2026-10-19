@@ -1,11 +1,11 @@
 # Work queue
 
-765 items; claim with `tools/claim.py next <group> [--stage N]`.
+767 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (37)
+## Stage 2: nodes to state (33)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -14,7 +14,7 @@
 | `def-sf-cup` | 2 | state | 4 |
 | `sk-def-sp-trace` | 2 | state | 2 |
 | `lem-coef-finite-adjunction-diagram-realization` | 1 | state | 113 |
-| `fix-prop-projection-formula` | 1 | state | 71 |
+| `fix-prop-projection-formula` | 1 | state | 70 |
 | `thm-sf-kunneth-relative` | 1 | state | 37 |
 | `lem-pur-vector-integration-site-comparison` | 1 | state | 36 |
 | `lem-pur-adic-purity-scalar-naturality` | 1 | state | 33 |
@@ -26,16 +26,13 @@
 | `lem-sf-open-external-tensor-normalization` | 1 | state | 2 |
 | `prop-sf-pf-coherence` | 2 | state | 2 |
 | `cor-sf-duality-pullback` | 1 | state | 1 |
-| `fix-lem-tensor-adjunction` | 1 | state | 1 |
 | `lem-coef-cartesian-section-adjoint-mates` | 1 | state | 1 |
 | `lem-sf-identification-coefficient-transport` | 1 | state | 1 |
 | `lem-sf-integral-compactification-comparison-bridge` | 1 | state | 1 |
 | `det-sp-p1-trace` | 1 | state | 0 |
-| `det-sp-tower-p1-adjunction` | 1 | state | 0 |
 | `lem-a1-lisse-sections-stalk-evaluation` | 1 | state | 0 |
 | `lem-pur-condensed-exceptional-reconstruction` | 1 | state | 0 |
 | `lem-pur-finite-adjoint-mate-compatibility` | 1 | state | 0 |
-| `lem-pur-finite-dnc-normalization-reduction` | 1 | state | 0 |
 | `lem-pur-weil-basechange-semilinear-pasting` | 1 | state | 0 |
 | `lem-pur-weil-semilinear-exchange-reindexing` | 1 | state | 0 |
 | `lem-sf-hom-finite-projective` | 1 | state | 0 |
@@ -44,12 +41,11 @@
 | `lem-wf-constant-twist-coefficient-comparison` | 1 | state | 0 |
 | `lem-zl-proper-unit-condensed-realization` | 1 | state | 0 |
 | `thm-pur-vector-bundle-thom` | 1 | state | 0 |
-| `lem-coef-frobenius-exchange-equivalence` | 2 | state | 0 |
 | `nt-target-poincare-isiso` | 2 | state | 0 |
 
 Not open yet: 304 nodes that below a finished node, not needed, 92 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (728)
+## Stage 3: modules to prove (734)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -259,9 +255,11 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.PurityFrameClass` | 7 | 4 | proof | 1 |
 | `Sheaf.Paper.CompactFiberStalk` | 10 | 4 | proof | 1 |
 | `Sheaf.Paper.PurityDivisorClass` | 10 | 2 | proof | 1 |
+| `Sheaf.Paper.AdmissibleVerdierExchange` | - | 1 | proof | 1 |
 | `Sheaf.Paper.ConstructibleInternalHomContinuity` | - | 1 | proof | 1 |
 | `Sheaf.Paper.ExchangeFunctoriality` | - | 10 | proof | 1 |
 | `Sheaf.Paper.FiniteFieldInternalHomFiniteness` | - | 1 | proof | 1 |
+| `Sheaf.SixFunctors.CoefVerdierWeilEquivariance` | - | 1 | proof | 1 |
 | `Sheaf.Paper.ExceptionalCoefficientComparison` | 3 | 4 | proof | 2 |
 | `Sheaf.Paper.FiniteReductionConstructibility` | 3 | 1 | proof | 2 |
 | `Sheaf.Paper.FiniteSmoothGammaNormalization` | 3 | 1 | proof | 2 |
@@ -426,6 +424,8 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.CompactSupportCondensedRealization` | - | 33 | proof | 2 |
 | `Sheaf.Paper.CompletedTensorHomTranspose` | - | 1 | proof | 2 |
 | `Sheaf.Paper.DerivedNakayama` | - | 1 | proof | 2 |
+| `Sheaf.Paper.FiniteDncNormalizationReduction` | - | 1 | proof | 2 |
+| `Sheaf.Paper.FrobeniusExchangeEquivalence` | - | 1 | proof | 2 |
 | `Sheaf.Paper.ModuleObjectRingedSiteDerivedComparison` | - | 1 | proof | 2 |
 | `Sheaf.Paper.ProperOpenTowerComparison` | - | 1 | proof | 2 |
 | `Sheaf.Paper.SfCbcCompactSupportCompositionLimit` | - | 1 | proof | 2 |
@@ -647,6 +647,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.PurLisseMorphismRigidity` | - | 1 | proof | 4 |
 | `Sheaf.Paper.SmoothPurityTowerBound` | - | 1 | proof | 4 |
 | `Sheaf.Paper.SmoothPurityTowerLevels` | - | 3 | proof | 4 |
+| `Sheaf.Paper.SmoothPurityTowerP1Adjunction` | - | 1 | proof | 4 |
 | `Sheaf.Paper.SystemCompactificationProjectionSubstitution` | - | 4 | proof | 4 |
 | `Sheaf.Paper.TwistFrobeniusScalar` | - | 10 | proof | 4 |
 | `Sheaf.SixFunctors.ComparisonOpenTensorCoherence` | - | 1 | proof | 4 |
@@ -683,6 +684,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.RingTheory.QuasiRegularPrefixQuotient` | 14 | 1 | proof | 5 |
 | `Sheaf.Algebra.Homology.RationalTermHomComparison` | - | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.ArbitraryBaseFiniteP1Integrals` | - | 1 | proof | 5 |
+| `Sheaf.AlgebraicGeometry.ProEtalePullbackStalkCoherence` | - | 5 | proof | 5 |
 | `Sheaf.FieldTheory.AlgebraicSeparableSmooth` | - | 1 | proof | 5 |
 | `Sheaf.Paper.CompactificationProjectionPasting` | - | 1 | proof | 5 |
 | `Sheaf.Paper.EtaleIsoDescent` | - | 1 | proof | 5 |
@@ -784,7 +786,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.SplitCellComplexKFlat` | - | 1 | proof | 20 |
 | `Sheaf.CategoryTheory.BoundedFilteredPageFunctorNormalized` | - | 1 | proof | 20 |
 
-## Stage 3: waiting for statements of dependencies (24)
+## Stage 3: waiting for statements of dependencies (23)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -804,15 +806,14 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.CohomologicalSmoothComposition` | 7 | 1 | `fix-prop-projection-formula` |
 | `Sheaf.Paper.RationalWeilPurityNaturalityMate` | 10 | 4 | `det-sp-tower-gamma` |
 | `Sheaf.Paper.RelativeSupportCoordinateModel` | 13 | 7 | `cor-pur-affine-space-zero-section-purity` |
-| `Sheaf.Paper.AdmissibleVerdierExchange` | - | 1 | `fix-lem-tensor-adjunction` |
 | `Sheaf.Paper.CohomologicalSmoothEtaleLocality` | - | 2 | `fix-prop-projection-formula` |
 | `Sheaf.Paper.FiniteFreeCompactComposition` | - | 8 | `lem-coef-finite-adjunction-diagram-realization` |
 | `Sheaf.Paper.FiniteUniversalSmoothTrace` | - | 1 | `lem-pur-vector-integration-site-comparison` |
 | `Sheaf.Paper.RationalPurityPresentation` | - | 13 | `lem-pur-adic-purity-scalar-naturality` |
+| `Sheaf.Paper.TensorAdjunctionExchange` | - | 1 | `fix-prop-projection-formula` |
 | `Sheaf.Paper.VerdierExchange` | - | 1 | `sk-thm-sf-tensor-hom` |
 | `Sheaf.SecSmoothPurity.RationalPurityTraceCoherence` | - | 8 | `lem-pur-adic-purity-scalar-naturality` |
 | `Sheaf.SecSmoothPurity.SmoothPurityNaturality` | - | 1 | `fix-prop-projection-formula` |
-| `Sheaf.SixFunctors.CoefVerdierWeilEquivariance` | - | 1 | `lem-coef-frobenius-exchange-equivalence` |
 | `Sheaf.SixFunctors.FiniteExceptional` | - | 9 | `fix-prop-projection-formula` |
 
 ## Stage 3: held for an open upstream PR (11)
