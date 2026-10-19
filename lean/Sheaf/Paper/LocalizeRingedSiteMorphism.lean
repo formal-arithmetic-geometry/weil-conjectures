@@ -11,9 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Algebra.Category.Ring.FilteredColimits
 public import Mathlib.Algebra.Category.Ring.Limits
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Sheaf.Paper.LocalizeRingedSiteMorphismGeneral
 
 /-!
 # Localization of a morphism of ringed sites
@@ -33,6 +31,7 @@ namespace SheafOfModules
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 
+set_option linter.unusedVariables false in
 set_option maxHeartbeats 800000 in
 -- The signature expands the commuting squares for three kinds of sheaves.
 /-- Localization commutes with ringed inverse image and module pullback and pushforward.
@@ -139,6 +138,17 @@ theorem localize_ringed_site_morphism
               ∀ (G : SheafOfModules.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat.{u}
                 RingCat.{u})).obj S)) (T : Over V)
                 (x : G.val.obj (Opposite.op (u.obj T.left))),
-                ((eM.hom.app G).val.app (Opposite.op T)) x = x := by sorry
+                ((eM.hom.app G).val.app (Opposite.op T)) x = x := by
+  obtain ⟨hcoverV, hpullbackV, _⟩ :=
+    slice_site_localization K J u hcover hpullback V
+  let a := (u.sheafAdjunctionContinuous CommRingCat.{u}
+    K.toGrothendieck J.toGrothendieck).homEquiv R S c
+  obtain ⟨hc, hl, es, er, her, lambda, beta, hbeta, _⟩ :=
+    localize_ringed_site_morphism_general u a V
+  refine ⟨hcoverV, hpullbackV, hc, hl, es, er, localizedRingedSiteMap u a V,
+    ?_, ?_, ⟨lambda⟩, beta, hbeta⟩
+  · intro T
+    rfl
+  · simpa only [a, Equiv.symm_apply_apply] using her
 
 end SheafOfModules
