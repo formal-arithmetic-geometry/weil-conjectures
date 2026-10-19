@@ -139,6 +139,85 @@ theorem fully_faithful_counit_descent
               (Y := (⟨T'D.obj (S_D_A.obj M), hZ⟩ : V.FullSubcategory))
               (t_D.app M))).symm.hom) →
         b'' = b := by
-  sorry
+  have _ := And.intro hδA (And.intro hδBX (And.intro hδBY hc'U))
+  let q : S_C_B.obj (T_C.obj (I_A.obj M)) ⟶
+      S_C_B.obj (I_B.obj (T_D.obj M)) :=
+    (t_C.app (I_A.obj M) ≪≫ T'C.mapIso α_A).hom ≫
+      b'.hom ≫
+      (α_B ≪≫ J_B.mapIso (ObjectProperty.isoMk (P := V)
+        (X := (⟨S_D_B.obj (T_D.obj M), hW⟩ : V.FullSubcategory))
+        (Y := (⟨T'D.obj (S_D_A.obj M), hZ⟩ : V.FullSubcategory))
+        (t_D.app M))).symm.hom
+  let bb : (⟨T_C.obj (I_A.obj M), hPX⟩ : P.FullSubcategory) ⟶
+      (⟨I_B.obj (T_D.obj M), hPY⟩ : P.FullSubcategory) :=
+    hFF.preimage q
+  let b : T_C.obj (I_A.obj M) ⟶ I_B.obj (T_D.obj M) := bb.hom
+  have hq : IsIso q := by
+    dsimp [q]
+    infer_instance
+  have : IsIso ((P.ι ⋙ S_C_B).map bb) := by
+    rw [hFF.map_preimage (X := ⟨T_C.obj (I_A.obj M), hPX⟩)
+      (Y := ⟨I_B.obj (T_D.obj M), hPY⟩) q]
+    infer_instance
+  have : IsIso bb := hFF.isIso_of_isIso_map bb
+  have : IsIso b := by
+    dsimp [b]
+    infer_instance
+  have hb : S_C_B.map b = q := by
+    change (P.ι ⋙ S_C_B).map bb = q
+    exact hFF.map_preimage (X := ⟨T_C.obj (I_A.obj M), hPX⟩)
+      (Y := ⟨I_B.obj (T_D.obj M), hPY⟩) q
+  let j : (⟨S_D_B.obj (T_D.obj M), hW⟩ : V.FullSubcategory) ≅
+      ⟨T'D.obj (S_D_A.obj M), hZ⟩ :=
+    ObjectProperty.isoMk (P := V)
+      (X := (⟨S_D_B.obj (T_D.obj M), hW⟩ : V.FullSubcategory))
+      (Y := (⟨T'D.obj (S_D_A.obj M), hZ⟩ : V.FullSubcategory))
+      (t_D.app M)
+  have hcomp : S_C_B.map b ≫ α_B.hom =
+      (t_C.app (I_A.obj M) ≪≫ T'C.mapIso α_A).hom ≫
+        b'.hom ≫ (J_B.mapIso j).inv := by
+    rw [hb]
+    dsimp [q, j]
+    simp
+  have hEinv : F'p_B.map (J_B.mapIso j).inv ≫
+      E_B ⟨S_D_B.obj (T_D.obj M), hW⟩ =
+        E_B ⟨T'D.obj (S_D_A.obj M), hZ⟩ ≫ (t_D.app M).inv := by
+    apply (cancel_mono (t_D.app M).hom).1
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    rw [hE]
+    change F'p_B.map (J_B.map j.inv) ≫
+        F'p_B.map (J_B.map j.hom) ≫ E_B ⟨T'D.obj (S_D_A.obj M), hZ⟩ = _
+    rw [← F'p_B.map_comp_assoc, ← J_B.map_comp, j.inv_hom_id,
+      J_B.map_id, F'p_B.map_id, Category.id_comp]
+  let b0 :
+      (⟨T_C.obj (I_A.obj M), hX⟩ : C0.FullSubcategory) ⟶
+        (⟨I_B.obj (T_D.obj M), hY⟩ : C0.FullSubcategory) :=
+    ⟨b⟩
+  have hδ := hδ_B _ _ b0
+  refine ⟨b, inferInstance, ?_, ?_, ?_⟩
+  · exact hb
+  · apply hSD
+    apply (cancel_epi (S_D_B.map c.hom)).1
+    simp only [Functor.map_comp]
+    rw [← hCounitB, reassoc_of% hδ]
+    rw [← F'p_B.map_comp_assoc, hcomp]
+    simp only [Iso.trans_hom, Functor.mapIso_hom, Functor.map_comp, Category.assoc]
+    rw [hEinv, reassoc_of% hb', ← reassoc_of% hcoef, reassoc_of% hc']
+    simp only [IsIso.hom_inv_id_assoc]
+    rw [← T'D.map_comp_assoc (F'p_A.map α_A.hom) E_A,
+      ← T'D.map_comp_assoc δ_A, hCounitA]
+    have ht := t_D.hom.naturality (adj_A.counit.app M)
+    change S_D_B.map (T_D.map (adj_A.counit.app M)) ≫ (t_D.app M).hom =
+      (t_D.app (F_A.obj (I_A.obj M))).hom ≫
+        T'D.map (S_D_A.map (adj_A.counit.app M)) at ht
+    rw [← reassoc_of% ht]
+    simp [← Functor.map_comp]
+  · intro b'' _ hb''
+    have hbb : (ObjectProperty.homMk (P := P) (X := ⟨_, hPX⟩)
+        (Y := ⟨_, hPY⟩) b'') = bb := by
+      apply hFF.map_injective
+      change S_C_B.map b'' = S_C_B.map b
+      exact hb''.trans hb.symm
+    exact congrArg (fun f ↦ f.hom) hbb
 
 end CategoryTheory
