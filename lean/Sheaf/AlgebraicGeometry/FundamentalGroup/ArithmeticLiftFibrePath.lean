@@ -114,7 +114,17 @@ theorem arithmeticModelFiber_over {K L : Type u} [Field K] [PerfectField K]
     (z.left ≫ Limits.pullback.fst Q.obj.hom (fieldExtensionBaseMap X₀ E.val)) ≫
       (Q.obj.hom ≫ arithmeticBaseProjection (L := E) X₀) =
         s ≫ arithmeticBaseProjection X₀ := by
-  sorry
+  have hz : z.left ≫ Limits.pullback.snd Q.obj.hom
+      (fieldExtensionBaseMap X₀ E.val) = x := fiber_left_comp x z
+  calc
+    _ = (z.left ≫ Limits.pullback.snd Q.obj.hom
+        (fieldExtensionBaseMap X₀ E.val)) ≫
+          (fieldExtensionBaseMap X₀ E.val ≫ arithmeticBaseProjection (L := E) X₀) := by
+      simp only [Category.assoc, Limits.pullback.condition_assoc]
+    _ = x ≫ arithmeticBaseProjection X₀ := by
+      rw [hz]
+      simp [arithmeticBaseProjection, fieldExtensionBaseMap]
+    _ = _ := hx
 
 /-- The forgetful injection on a finite-model fibre: postcompose with the first projection.
 The equality `hx` only identifies the two specified arithmetic basepoints.
@@ -131,6 +141,125 @@ noncomputable def arithmeticModelFiber {K L : Type u} [Field K] [PerfectField K]
   Over.homMk (z.left ≫ Limits.pullback.fst Q.obj.hom (fieldExtensionBaseMap X₀ E.val))
     (arithmeticModelFiber_over X₀ E Q s x hx z)
 
+private theorem arithmeticModelFiber_injective {K L : Type u} [Field K] [PerfectField K]
+    [Field L] [Algebra K L] (X₀ : Over (Spec (.of K)))
+    (E : IntermediateField K L) [FiniteDimensional K E]
+    (Q : (fieldExtensionBase X₀ E).FiniteEtale)
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω]
+    (s x : Spec (.of Ω) ⟶ fieldExtensionBase X₀ L)
+    (hx : x ≫ arithmeticBaseProjection X₀ = s ≫ arithmeticBaseProjection X₀) :
+    Function.Injective (arithmeticModelFiber X₀ E Q s x hx) := by
+  intro z w h
+  apply fiber_ext x
+  apply Limits.pullback.hom_ext
+  · exact congrArg Over.Hom.left h
+  · exact (fiber_left_comp x z).trans (fiber_left_comp x w).symm
+
+private theorem arithmeticModelFiber_range {K L : Type u} [Field K] [PerfectField K]
+    [Field L] [Algebra K L] (X₀ : Over (Spec (.of K)))
+    (E : IntermediateField K L) [FiniteDimensional K E]
+    (Q : (fieldExtensionBase X₀ E).FiniteEtale)
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω]
+    (s x : Spec (.of Ω) ⟶ fieldExtensionBase X₀ L)
+    (hx : x ≫ arithmeticBaseProjection X₀ = s ≫ arithmeticBaseProjection X₀) :
+    Set.range (arithmeticModelFiber X₀ E Q s x hx) =
+      {z | z.left ≫ Q.obj.hom ≫ Limits.pullback.snd X₀.hom
+          (Spec.map (CommRingCat.ofHom (algebraMap K E))) =
+        x ≫ fieldExtensionBaseMap X₀ E.val ≫ Limits.pullback.snd X₀.hom
+          (Spec.map (CommRingCat.ofHom (algebraMap K E)))} := by
+  ext z
+  constructor
+  · rintro ⟨w, rfl⟩
+    change (w.left ≫ Limits.pullback.fst _ _) ≫ _ ≫ _ = _
+    rw [Category.assoc, ← Category.assoc (Limits.pullback.fst _ _),
+      Limits.pullback.condition]
+    have hw := fiber_left_comp x w
+    change w.left ≫ Limits.pullback.snd _ _ = x at hw
+    simpa only [Category.assoc] using congrArg
+      (fun a ↦ a ≫ fieldExtensionBaseMap X₀ E.val ≫ Limits.pullback.snd X₀.hom
+        (Spec.map (CommRingCat.ofHom (algebraMap K E)))) hw
+  · intro hz
+    have hc : z.left ≫ Q.obj.hom = x ≫ fieldExtensionBaseMap X₀ E.val := by
+      apply Limits.pullback.hom_ext
+      · have hz₀ := fiber_left_comp (s ≫ arithmeticBaseProjection X₀) z
+        change z.left ≫ (Q.obj.hom ≫ arithmeticBaseProjection (L := E) X₀) =
+          s ≫ arithmeticBaseProjection X₀ at hz₀
+        simpa [arithmeticBaseProjection, fieldExtensionBaseMap, Category.assoc] using
+          hz₀.trans hx.symm
+      · exact hz
+    refine ⟨fiberMk x ((pullback (fieldExtensionBaseMap X₀ E.val)).obj Q)
+      (Limits.pullback.lift z.left x hc) (Limits.pullback.lift_snd _ _ _), ?_⟩
+    apply fiber_ext
+    exact Limits.pullback.lift_fst _ _ _
+
+private theorem arithmeticModelFiber_action {K L : Type u} [Field K] [PerfectField K]
+    [Field L] [Algebra K L] (X₀ : Over (Spec (.of K)))
+    (E : IntermediateField K L) [FiniteDimensional K E]
+    (Q : (fieldExtensionBase X₀ E).FiniteEtale)
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω]
+    (s : Spec (.of Ω) ⟶ fieldExtensionBase X₀ L) (a : Aut (fiber s))
+    (z : (fiber s).obj ((pullback (fieldExtensionBaseMap X₀ E.val)).obj Q)) :
+    arithmeticModelFiber X₀ E Q s s rfl (a.hom.app _ z) =
+      (fiberAutBaseChange (arithmeticBaseProjection X₀) s a).hom.app _
+        (arithmeticModelFiber X₀ E Q s s rfl z) := by
+  let A := arithmeticModelCover X₀ E Q
+  let f := fieldExtensionBaseMap X₀ E.val
+  let p := arithmeticBaseProjection (L := L) X₀
+  let φ : (pullback f).obj Q ⟶ (pullback p).obj A :=
+    ObjectProperty.homMk (MorphismProperty.Over.homMk
+      (Limits.pullback.lift (Limits.pullback.fst Q.obj.hom f)
+        (Limits.pullback.snd Q.obj.hom f) (by
+          change Limits.pullback.fst Q.obj.hom f ≫
+              (Q.obj.hom ≫ arithmeticBaseProjection (L := E) X₀) =
+            Limits.pullback.snd Q.obj.hom f ≫ p
+          rw [← Category.assoc, Limits.pullback.condition, Category.assoc]
+          congr 1
+          simp [f, p, fieldExtensionBaseMap, arithmeticBaseProjection]))
+      (Limits.pullback.lift_snd _ _ _))
+  have hz : (fiber s).map φ z =
+      (pullbackFiberIso p s).inv.app A (arithmeticModelFiber X₀ E Q s s rfl z) := by
+    apply fiber_ext s
+    change (z.left ≫ Limits.pullback.lift _ _ _) = Limits.pullback.lift _ _ _
+    apply Limits.pullback.hom_ext
+    · simp [arithmeticModelFiber, f]
+    · simp only [Category.assoc, Limits.pullback.lift_snd]
+      exact fiber_left_comp s z
+  have hn := ConcreteCategory.congr_hom (a.hom.naturality φ) z
+  simp only [ConcreteCategory.comp_apply] at hn
+  have hproj (w : (fiber s).obj ((pullback f).obj Q)) :
+      (pullbackFiberIso p s).hom.app A ((fiber s).map φ w) =
+        arithmeticModelFiber X₀ E Q s s rfl w := by
+    apply fiber_ext
+    change (w.left ≫ Limits.pullback.lift _ _ _) ≫ Limits.pullback.fst _ _ = _
+    simp [arithmeticModelFiber, f]
+  rw [← hproj (a.hom.app _ z), ← hn, hz]
+  rfl
+
+private theorem arithmeticBaseChange_injective {K L : Type u} [Field K]
+    [PerfectField K] [Field L] [Algebra K L] [Algebra.IsSeparable K L]
+    (X₀ : Over (Spec (.of K))) [IsSeparated X₀.hom]
+    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω]
+    (s : Spec (.of Ω) ⟶ fieldExtensionBase X₀ L) :
+    Function.Injective (fiberAutBaseChange (arithmeticBaseProjection X₀) s) := by
+  intro a b hab
+  ext P z
+  obtain ⟨E, hE, Q, ⟨e⟩⟩ := (finiteEtale_fieldLimit_descent X₀).1 P
+  let := hE
+  let w := (fiber s).map e.inv z
+  have hm : a.hom.app _ w = b.hom.app _ w := by
+    apply arithmeticModelFiber_injective X₀ E Q s s rfl
+    exact (arithmeticModelFiber_action X₀ E Q s a w).trans
+      ((congrArg (fun g ↦ g.hom.app _ (arithmeticModelFiber X₀ E Q s s rfl w)) hab).trans
+        (arithmeticModelFiber_action X₀ E Q s b w).symm)
+  have ha := ConcreteCategory.congr_hom (a.hom.naturality e.hom) w
+  have hb := ConcreteCategory.congr_hom (b.hom.naturality e.hom) w
+  simp only [ConcreteCategory.comp_apply] at ha hb
+  have hw : (fiber s).map e.hom w = z := by
+    exact ConcreteCategory.congr_hom ((fiber s).mapIso e).inv_hom_id z
+  rw [hw] at ha hb
+  exact ha.trans ((congrArg ((fiber s).map e.hom) hm).trans hb.symm)
+
 /-- The semilinear constant-field map preserves the arithmetic basepoint.
 Source: Stacks Tag 0BTX, finite-model construction in proof step 5
 (blueprint: lem-wf-arithmetic-lift-fibre-path).
@@ -143,7 +272,7 @@ theorem arithmeticLiftMap_basepoint {K L : Type u} [Field K] [Field L] [Algebra 
     (s : Spec (.of Ω) ⟶ fieldExtensionBase X₀ L) (σ : L ≃ₐ[K] L) :
     (s ≫ arithmeticLiftMap X₀ σ) ≫ arithmeticBaseProjection X₀ =
       s ≫ arithmeticBaseProjection X₀ := by
-  sorry
+  simp [arithmeticLiftMap, arithmeticBaseProjection, fieldExtensionBaseMap]
 
 /-- The same forgetful injection at the semilinearly moved point.
 Source: Stacks Tag 0BTX and the normalization in the node
@@ -159,6 +288,48 @@ noncomputable def arithmeticMovedModelFiber {K L : Type u} [Field K] [PerfectFie
       (fiber (s ≫ arithmeticBaseProjection X₀)).obj (arithmeticModelCover X₀ E Q) :=
   arithmeticModelFiber X₀ E Q s (s ≫ arithmeticLiftMap X₀ σ)
     (arithmeticLiftMap_basepoint X₀ s σ)
+
+private theorem arithmeticModelFiber_ranges {K L : Type u} [Field K] [PerfectField K]
+    [Field L] [Algebra K L] (X₀ : Over (Spec (.of K)))
+    (E : IntermediateField K L) [FiniteDimensional K E]
+    (Q : (fieldExtensionBase X₀ E).FiniteEtale)
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω] [Algebra K Ω]
+    (s : Spec (.of Ω) ⟶ fieldExtensionBase X₀ L) (i : L →ₐ[K] Ω)
+    (hi : s ≫ Limits.pullback.snd X₀.hom
+        (Spec.map (CommRingCat.ofHom (algebraMap K L))) =
+      Spec.map (CommRingCat.ofHom i.toRingHom)) (σ : L ≃ₐ[K] L) :
+    Function.Injective (arithmeticModelFiber X₀ E Q s s rfl) ∧
+    Function.Injective (arithmeticMovedModelFiber X₀ E Q s σ) ∧
+    Set.range (arithmeticModelFiber X₀ E Q s s rfl) =
+      {z | z.left ≫ Q.obj.hom ≫ Limits.pullback.snd X₀.hom
+          (Spec.map (CommRingCat.ofHom (algebraMap K E))) =
+        Spec.map (CommRingCat.ofHom (i.toRingHom.comp E.val.toRingHom))} ∧
+    Set.range (arithmeticMovedModelFiber X₀ E Q s σ) =
+      {z | z.left ≫ Q.obj.hom ≫ Limits.pullback.snd X₀.hom
+          (Spec.map (CommRingCat.ofHom (algebraMap K E))) =
+        Spec.map (CommRingCat.ofHom
+          (i.toRingHom.comp (σ.toRingHom.comp E.val.toRingHom)))} := by
+  refine ⟨arithmeticModelFiber_injective X₀ E Q s s rfl,
+    arithmeticModelFiber_injective X₀ E Q s _ (arithmeticLiftMap_basepoint X₀ s σ),
+    ?_, ?_⟩
+  · have hscalar : s ≫ fieldExtensionBaseMap X₀ E.val ≫ Limits.pullback.snd X₀.hom
+          (Spec.map (CommRingCat.ofHom (algebraMap K E))) =
+        Spec.map (CommRingCat.ofHom (i.toRingHom.comp E.val.toRingHom)) := by
+      simp only [fieldExtensionBaseMap, Limits.pullback.map, Limits.pullback.lift_snd]
+      rw [← Category.assoc, hi, ← Spec.map_comp]
+      rfl
+    rw [arithmeticModelFiber_range, hscalar]
+  · have hscalar : (s ≫ arithmeticLiftMap X₀ σ) ≫ fieldExtensionBaseMap X₀ E.val ≫
+        Limits.pullback.snd X₀.hom
+          (Spec.map (CommRingCat.ofHom (algebraMap K E))) =
+        Spec.map (CommRingCat.ofHom
+          (i.toRingHom.comp (σ.toRingHom.comp E.val.toRingHom))) := by
+      simp only [arithmeticLiftMap, fieldExtensionBaseMap, Limits.pullback.map,
+        Category.assoc, Limits.pullback.lift_snd_assoc, Limits.pullback.lift_snd]
+      rw [← Category.assoc, hi, ← Spec.map_comp, ← Spec.map_comp]
+      rfl
+    change Set.range (arithmeticModelFiber X₀ E Q s _ _) = _
+    rw [arithmeticModelFiber_range, hscalar]
 
 /-- The existing stalk functor restricted to the existing finite locally constant category.
 Source: Stacks Tags 03Q1 and 03RV (blueprint: lem-wf-arithmetic-lift-fibre-path). -/
