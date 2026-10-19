@@ -11,9 +11,80 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-finitely-generated-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct the skew group ring $S=\\bigoplus_{g\\in G}R[g]$ with componentwise addition and $(r[g])(s[h])=r g(s)[gh]$. Its unit is $1[1]$; associativity follows on basis terms because both bracketings of $(r[g])(s[h])(u[k])$ equal $r g(s)(gh)(u)[ghk]$, and hence follows for sums by distributivity. Embed $R$ by $r\\mapsto r[1]$. As a RIGHT $R$-module, $S$ is finite free on the $[g]$: the identity $r[g]=[g]g^{-1}(r)$ gives spanning and uniqueness follows by comparing the original coefficients. Regard this as a left $R$-module by $r\\cdot s=sr$, which is permitted since $R$ is commutative. In particular it is finite in the sense of [def-weil-finitely-generated-module].",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI 3.7(b), printed p.75: motivating finite invariant quotient; agent-written trace-one algebraic argument, expanded from coord/reports/Q94/lem-per-tame-admissible-scheme-quotient.md, Algebraic arguments, second argument."
+   }
+  },
+  {
+   "text": "Put $e=\\sum_{g\\in G}g(a)[g]\\in S$. For each $h\\in G$, reindexing $g\\mapsto hg$ gives $[h]e=e$. Therefore $e^2=\\sum_g g(a)[g]e=(\\sum_g g(a))e=e$. The coefficient-sum map $\\pi:S\\to R$, $\\pi(\\sum r_g[g])=\\sum r_g$, satisfies $\\pi(re)=r\\sum_g g(a)=r$. Thus $r\\mapsto re$ is injective. Also $(\\sum r_g[g])e=(\\sum r_g)e$, so $Se=Re$. These are direct calculations using precisely the assumed trace-one identity, with no division by $|G|$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI 3.7(b), printed p.75: motivating finite invariant quotient; agent-written trace-one algebraic argument, expanded from coord/reports/Q94/lem-per-tame-admissible-scheme-quotient.md, Algebraic arguments, second argument."
+   }
+  },
+  {
+   "text": "The corner $C=eSe=\\{ese:s\\in S\\}$ is a ring under the inherited addition and multiplication with unit $e$, by $e^2=e$. Every $c\\in C$ is uniquely $re$ since $C\\subseteq Se=Re$. Since $[h]c=[h]ese=ese=c$, while $[h]re=h(r)e$, injectivity of $r\\mapsto re$ gives $h(r)=r$ for every $h$, so $r\\in A$. Conversely every $b\\in A$ commutes with each $[g]$ and with $R$, hence with $e$, and $be=ebe\\in C$. Consequently $C=Ae$ and $b\\mapsto be$ is a ring isomorphism $A\\to C$ (multiplication gives $(be)(b'e)=bb'e$). Moreover $r\\mapsto re$ identifies $R$ as an $A$-module with $Se$ as a right $C$-module, because $(re)(be)=rb e$ and $A$ is commutative.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI 3.7(b), printed p.75: motivating finite invariant quotient; agent-written trace-one algebraic argument, expanded from coord/reports/Q94/lem-per-tame-admissible-scheme-quotient.md, Algebraic arguments, second argument."
+   }
+  },
+  {
+   "text": "Let $I=SeS$ denote the two-sided ideal consisting of finite sums $n s$ with $n\\in Se$ and $s\\in S$. It is a right $R$-submodule of the finite right $R$-module $S$. Apply [lem-trf-noetherian-submodule-finitely-presented] to this submodule using the left $R$-module convention of Step 1: $R$ is commutative Noetherian by hypothesis and $S$ is finite. Thus $I$ has finitely many right $R$-generators $y_j$. Expand each $y_j$ as a finite sum $\\sum_k n_{jk}s_{jk}$ with $n_{jk}\\in Se$. Collect the finitely many $n_{jk}$ into $n_1,\\ldots,n_t$. Then $I=\\sum_i n_i S$: the right side is contained in $I$, and it contains every $y_j$ and therefore every right $R$-linear combination of them. This is only a finite-generator extraction from the definition of $SeS$.",
+   "uses": [
+    "lem-trf-noetherian-submodule-finitely-presented"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FP, lemma-Noetherian-finite-type-is-finite-presentation (2), followed by the displayed elementary extraction of generators of SeS."
+   }
+  },
+  {
+   "text": "Multiplying the equality of Step 4 on the right by $e$ gives $Se=Ie=\\sum_i n_i S e$; here $Ie\\subseteq Se$ and $x=xe\\in Ie$ for every $x\\in Se$. Since $n_i=n_i e$, every summand $n_i s e$ equals $n_i(ese)$. Step 3 writes $ese=be$ for some $b\\in A$; write $n_i=r_i e$. For any $r\\in R$, express $re=\\sum_i n_i s_i e=\\sum_i r_i b_i e$ and apply the injectivity from Step 2 to obtain $r=\\sum_i r_i b_i$. Thus $r_1,\\ldots,r_t$ generate $R$ over $A$, exactly [def-weil-finitely-generated-module].",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI 3.7(b), printed p.75: motivating finite invariant quotient; agent-written trace-one algebraic argument, expanded from coord/reports/Q94/lem-per-tame-admissible-scheme-quotient.md, Algebraic arguments, second argument."
+   }
+  },
+  {
+   "text": "It remains to show $A$ Noetherian. Define $\\rho:R\\to A$ by $\\rho(r)=\\sum_g g(ar)$. The sum is invariant by reindexing; $\\rho$ is additive and $A$-linear, and $\\rho(b)=b$ for $b\\in A$ since $\\sum_g g(a)=1$. Let $J$ be any ideal of $A$. By [def-weil-pbc-noetherian-ring], the ideal $JR$ has finitely many generators $f_k$. Expand each $f_k$ as a finite $R$-linear combination of elements of $J$, and collect those finitely many elements as $j_1,\\ldots,j_v\\in J$. They generate $JR$. For $b\\in J$ write $b=\\sum_i j_i r_i$ and apply $\\rho$ to get $b=\\sum_i j_i\\rho(r_i)$. Hence the $j_i$ generate $J$ over $A$. Every ideal of $A$ is finitely generated, so $A$ is Noetherian by the same definition.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI 3.7(b), printed p.75: motivating finite invariant quotient; agent-written trace-one algebraic argument, expanded from coord/reports/Q94/lem-per-tame-admissible-scheme-quotient.md, Algebraic arguments, second argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "lem-trf-noetherian-submodule-finitely-presented",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé VI 3.7(b), printed p.75: motivating finite invariant quotient; agent-written trace-one algebraic argument, expanded from coord/reports/Q94/lem-per-tame-admissible-scheme-quotient.md, Algebraic arguments, second argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,10 +113,52 @@
    "results": "{\"t\": \"2026-10-18T22:49:52Z\", \"tool\": \"leanfinder\", \"query\": \"A Noetherian ring acted on by a finite group, with an element of group trace one, is a finite module over its invariant ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsInvariant.isIntegral\", \"Ideal.Quotient.finite_of_isInvariant\", \"IsIntegralClosure.finite\", \"FiniteDimensional.left\", \"FDRep.instFiniteCarrierVFGModuleCat\", \"Module.Finite.left\", \"FixedPoints.instFiniteDimensionalSubtypeMemSubfieldSubfield\", \"FixedPoints.isIntegral\"], \"digest\": \"0e8a32b8c9772f1d\"}",
    "date": "2026-10-19",
    "verdict": "no match: invariant integrality, finite field extensions, and Noetherianity for already finite algebras do not give this trace-one ring finiteness theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "corner|skewGroup|SkewGroup|[Ii]nvariant.*[Nn]oetherian|[Nn]oetherian.*[Ii]nvariant",
+   "results": "{\"t\": \"2026-10-18T23:13:47Z\", \"tool\": \"grep\", \"query\": \"corner|skewGroup|SkewGroup|[Ii]nvariant.*[Nn]oetherian|[Nn]oetherian.*[Ii]nvariant\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Idempotents.lean\", \"Mathlib/RingTheory/Idempotents.lean\", \"Mathlib/RingTheory/Idempotents.lean\", \"Mathlib/RingTheory/Idempotents.lean\", \"Mathlib/RingTheory/Idempotents.lean\", \"Mathlib/RingTheory/Norm/Transitivity.lean\", \"Mathlib/RingTheory/Norm/Transitivity.lean\", \"Mathlib/RingTheory/Norm/Transitivity.lean\"], \"digest\": \"da50f963f81e44fa\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: corner constructions and general Noetherian module lemmas found, but not a trace-one fixed-ring finiteness theorem; the needed submodule finiteness result is reused through existing node lem-trf-noetherian-submodule-finitely-presented."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If S is a right Noetherian ring and e is an idempotent, Se is a Noetherian right module over the corner ring eSe",
+   "results": "{\"t\": \"2026-10-18T23:13:49Z\", \"tool\": \"leansearch\", \"query\": \"If S is a right Noetherian ring and e is an idempotent, Se is a Noetherian right module over the corner ring eSe\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsNoetherianRing.of_finite\", \"IsIdempotentElem.Corner\", \"IsNoetherian.casesOn\", \"IsNoetherian.recOn\", \"isNoetherian_of_isNoetherianRing_of_finite\", \"isNoetherian_of_fg_of_noetherian\", \"isNoetherian_of_le\", \"isNoetherianRing_iff\"], \"digest\": \"375ad124b0844470\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: corner constructions and general Noetherian module lemmas found, but not a trace-one fixed-ring finiteness theorem; the needed submodule finiteness result is reused through existing node lem-trf-noetherian-submodule-finitely-presented."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian ring with a finite group action and an element with group trace one is finite over its invariant ring",
+   "results": "{\"t\": \"2026-10-18T23:13:52Z\", \"tool\": \"leanfinder\", \"query\": \"A Noetherian ring with a finite group action and an element with group trace one is finite over its invariant ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsInvariant.isIntegral\", \"Ideal.Quotient.finite_of_isInvariant\", \"IsIntegralClosure.finite\", \"FixedPoints.isIntegral\", \"FiniteDimensional.left\", \"FixedPoints.instFiniteDimensionalSubtypeMemSubfieldSubfield\", \"finite_of_algHom_finiteType_of_isJacobsonRing\", \"Algebra.IsInvariant.isIntegral_of_profinite\"], \"digest\": \"56bb85ac19ce6989\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern invariant integrality, fixed fields, or finiteness/Noetherianity under additional assumptions; none states the trace-one invariant finiteness assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNoetherian\", \"invariant\"",
+   "results": "{\"t\": \"2026-10-18T23:13:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsNoetherian\\\", \\\"invariant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern invariant integrality, fixed fields, or finiteness/Noetherianity under additional assumptions; none states the trace-one invariant finiteness assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a commutative Noetherian ring with a finite group of automorphisms whose group trace is surjective, the invariant subring is Noetherian and the extension is module finite",
+   "results": "{\"t\": \"2026-10-18T23:14:31Z\", \"tool\": \"leansearch\", \"query\": \"For a commutative Noetherian ring with a finite group of automorphisms whose group trace is surjective, the invariant subring is Noetherian and the extension is module finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsInvariantSubring.mk\", \"Algebra.IsInvariant.isIntegral\", \"IsGalois.of_fixed_field\", \"Algebra.IsInvariant.isIntegral_of_profinite\", \"IsNoetherianRing.of_finite\", \"Algebra.isInvariant_of_isGalois'\", \"IsGaloisGroup.casesOn\", \"isNoetherian_of_isNoetherianRing_of_finite\"], \"digest\": \"ab4d0f4fde8ba727\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern invariant integrality, fixed fields, or finiteness/Noetherianity under additional assumptions; none states the trace-one invariant finiteness assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Reynolds trace-one element makes a Noetherian ring finitely generated as module over the fixed subring of a finite group of ring automorphisms",
+   "results": "{\"t\": \"2026-10-18T23:14:32Z\", \"tool\": \"leanfinder\", \"query\": \"A Reynolds trace-one element makes a Noetherian ring finitely generated as module over the fixed subring of a finite group of ring automorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsInvariant.isIntegral\", \"Algebra.EssFiniteType.isNoetherianRing\", \"IsIntegralClosure.finite\", \"IsNoetherianRing.of_finite\", \"Algebra.FiniteType.isNoetherianRing\", \"Module.Finite.left\", \"Ideal.Quotient.finite_of_isInvariant\", \"finite_of_algHom_finiteType_of_isJacobsonRing\"], \"digest\": \"d99f95ed9d92e1cb\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern invariant integrality, fixed fields, or finiteness/Noetherianity under additional assumptions; none states the trace-one invariant finiteness assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-tame-admissible-scheme-quotient",
@@ -73,5 +186,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-trace-one-noetherian-invariant-finiteness",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the parent report trace-one skew-group argument into six explicit steps. Finite generation of the right R-submodule SeS is the existing Mathlib leaf lem-trf-noetherian-submodule-finitely-presented; extracting generators in Se and applying the corner calculation proves finiteness over A directly. Noetherianity descends by the displayed A-linear trace retraction. No new nodes.",
+  "blueprint": "Retains the existing ancestor/from/via chain: the algebraic finiteness input for the tame admissible quotient used in the regular-pair purity/duality branch of lem-per-artin-gabber-affine-curve. Steps 1--5 prove the module-finite input motivating ILO VI 3.7(b); Step 6 proves the Noetherian invariant-ring input. No chapter or unit route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-cbe12e79e",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-cbe12e79e (reviewer sub-agent of L); spot-checked: Read the item, its six steps, the three cited nodes, the Q94 citer, ILO VI 3.7(b) (printed p.75, PDF p.81; motivation only, and proof_origin=agent says so honestly) and Stacks 00FP(2). The statement is true and needs no finite-type base; it is consistent with Nagarajan's wild example, where no trace-one element exists. Small cases tested: F_2xF_2 with the swap and a=(1,0) (|G|=0 but trace 1; R free of rank 2 over A); trivial Z/2 on Z[1/2]; R=0; nonfaithful actions. Step checks: skew-group associativity uses (gh)(u)=g(h(u)), and S is right-free on the [g]. [h]e=e, e^2=e and pi(re)=r give injectivity and Se=Re. eSe=Ae because [h]re=h(r)e, and A commutes with each [g]. Step 4 applies the leaf lem-trf-noetherian-submodule-finitely-presented to the right R-submodule SeS of the finite module S; these are exactly its hypotheses, and the n_i extraction is correct. Step 5 uses Se=Ie, n_i s e=r_i b_i e and injectivity, so the r_i generate R over A. Step 6 uses the A-linear retraction rho(r)=sum g(ar) on generators of JR re-chosen in J. No duplicate: the tame-inertia trace node supplies the hypothesis, groupoid-integral-invariants gives only integrality, and Eakin-Nagata finite-quotient-noetherian-descent is a different statement and is not used. No new nodes; the unit route is unaffected. Batch-5 flag on lem-trf-noetherian-submodule-finitely-presented: a sec-trace-formula Mathlib leaf (Stacks 00FP, Module.IsNoetherian.finite) with empty proof_deps and generic definition stmt_deps. It is pure commutative algebra, neither an assumed statement nor a step of the trace-formula or Poincare-duality proofs, so the flag is accepted. No fixes."
  }
 }
