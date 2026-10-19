@@ -15,9 +15,138 @@
   "def-weil-pbc-etale-cohomology",
   "def-weil-pbc-constant-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $N=\\ell^r$, put $B_r=R[u,T_j\\ (j\\ne i),Y]/(u^N\\prod_{j\\ne i}T_j-\\pi)$ and $H_r=C[u]/(u^N-t_i)$. The monic quotient is finite free [lem-weil-pbc-monic-quotient-free]. Its geometric fibre over $\\bar x$ is $\\Omega[u]/(u^N)$, with one geometric point. Thus [lem-trf-finite-base-strict-localization] identifies $\\operatorname{Spec}H_r$ with the strict localization of $\\operatorname{Spec}B_r$ at that point. All exponents are positive and units in $R$. The monomial geometry theorem [lem-per-primitive-monomial-trait-geometry], followed by polynomial regularity [lem-trf-polynomial-ring-regular-base], gives that $B_r$ is regular Noetherian. Strict henselization preserves these properties [lem-sc-strict-henselization-regular, lem-sc-strict-henselization-noetherian]. In particular $H_r$ is a strictly henselian regular local domain [lem-sc-regular-local-domain], and $H_r/(u)$ is the strict localization of the polynomial ring $\\kappa(s)[T_j\\ (j\\ne i),Y]$ [lem-trf-closed-immersion-strict-localization-cartesian]. The same quotient statement holds for any $T_j$ vanishing at $\\bar x$, with $u$ retained and $T_j$ omitted. These descriptions include nilpotents in the finite fibre; no completion is taken.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-trf-finite-base-strict-localization",
+    "lem-per-primitive-monomial-trait-geometry",
+    "lem-trf-polynomial-ring-regular-base",
+    "lem-sc-strict-henselization-regular",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-sc-regular-local-domain",
+    "lem-trf-closed-immersion-strict-localization-cartesian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent root-chart algebra expanding the all-one input on p.251."
+   }
+  },
+  {
+   "text": "We prove the following stronger assertion $E_n$ for all $m$, all points and all $r$ simultaneously. Let $I$ be the set of coordinates vanishing at the original point, so $i\\in I$. For $J\\subseteq I-\\{i\\}$ put $U_{r,J}=\\operatorname{Spec}H_r[1/u,1/T_j\\ (j\\in J)]$. Its diagonally twisted cohomology is the exterior algebra on $\\kappa(u)$ and the $\\kappa(T_j)$ for $j\\in J$, with constants in degree zero. Alongside $E_n$, prove $P_n$: every coordinate divisor in every all-one $n$-coordinate chart, with arbitrary smooth parameters, has its Kummer purity isomorphism. The induction order is: establish $E_n$ using only $P_{n-1}$, and then deduce $P_n$ from $E_n$. For $n=1$, $U_{r,\\varnothing}=\\operatorname{Spec}H_r[1/\\pi]$, so [lem-per-tame-monomial-generic-kummer-algebra] gives $E_1$. Its cohomology vanishes in degrees at least two at every strict localization; [lem-per-divisor-purity-strict-local-criterion] gives $P_1$. There is no appeal here to the parent coordinate-purity node. For coefficient comparisons choose a primitive $\\ell$th root in $C$ by [lem-sbc-strict-local-roots-of-unity]. The roots are its powers, and their pairwise differences are units, so the split polynomial $X^\\ell-1$ identifies $\\mu_\\ell$ with the constant cyclic sheaf. Pull this basis to each $H_r$ and all its opens and closed strata. Tensor powers and the dual basis trivialize all integer Tate twists [lem-asd-etale-finite-twist-pullback]. Thus a diagonal-twist calculation below also computes every other twist in that degree, compatibly with restriction.",
+   "uses": [
+    "lem-per-tame-monomial-generic-kummer-algebra",
+    "lem-per-divisor-purity-strict-local-criterion",
+    "lem-sbc-strict-local-roots-of-unity",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent simultaneous induction starting with the one-variable tame calculation."
+   }
+  },
+  {
+   "text": "Fix $n>1$ and assume $E_{n-1}$ and $P_{n-1}$. Start with $J=I-\\{i\\}$. Coordinates outside $I$ are already units in $H_r$, and $u^N\\prod_{j\\ne i}T_j=\\pi$, so $U_{r,J}=\\operatorname{Spec}H_r[1/\\pi]$. Apply [lem-per-tame-monomial-generic-kummer-algebra] to $B_r$, with multiplicities $N,1,\\ldots,1$. It gives precisely the asserted exterior algebra on the full set of active coordinates. Inactive coordinates contribute no generator. We now restore one divisor at a time until $J=\\varnothing$.",
+   "uses": [
+    "lem-per-tame-monomial-generic-kummer-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent full-generic-open starting point for the inner induction."
+   }
+  },
+  {
+   "text": "Suppose $j\\in J$, set $J'=J-\\{j\\}$, $Y=U_{r,J'}$, $U=U_{r,J}$ and $D=V(T_j)\\subset Y$. On the finite-type chart $\\operatorname{Spec}B_r[1/u,1/T_k\\ (k\\in J')]$, replace $T_j$ by $v_j=u^N T_j$. This is an invertible change of variables, and its equation becomes $v_j\\prod_{k\\ne i,j}T_k=\\pi$, with $u$ an additional invertible smooth parameter. Thus this open chart is an open of an all-one chart with $n-1$ semistable coordinates and $m+1$ smooth parameters; $D$ corresponds to $v_j=0$. The inductive assertion $P_{n-1}$ supplies purity of that divisor on the finite-type chart. By the affine pointed-etale inverse-limit definition [def-weil-pbc-strict-henselization-limit], the map from $Y$ to this affine open chart is affine ind-etale: it is the base change of the structural map $\\operatorname{Spec}H_r\\to\\operatorname{Spec}B_r$, and its rings are the same filtered etale algebras with the indicated elements inverted. Both schemes are Noetherian by Step 1. Hence [lem-per-ind-etale-closed-support-base-change] transports the purity isomorphism to $D\\subset Y$; [lem-per-regular-immersion-class-calculus] transports the supported Kummer class. The equation $T_j$ differs from $v_j$ by a unit, so it cuts out the same divisor with the same class. Only the strictly smaller semistable coordinate count is used.",
+   "uses": [
+    "lem-per-ind-etale-closed-support-base-change",
+    "lem-per-regular-immersion-class-calculus",
+    "def-weil-pbc-strict-henselization-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coordinate substitution and strictly smaller induction input."
+   }
+  },
+  {
+   "text": "By Step 1, $H_r/(T_j)$ is the strict localization of $Q=\\kappa(s)[u,T_k\\ (k\\ne i,j),Y]$ at the induced geometric point. In this polynomial ring set $p=u\\prod_{k\\in J'}T_k$ and use the auxiliary trait $R_0=\\kappa(s)[z]_{(z)}$, with $z\\mapsto p$. The all-one chart over $R_0$ with semistable coordinates $u,(T_k)_{k\\in J'}$ and all other variables smooth is just the localization of $Q$ inverting $h(p)$ for $h\\in\\kappa(s)[z]$ with $h(0)\\ne0$. Each $h(p)$ is already a unit at our point, since $u$ vanishes there. This localization therefore has the same strict local ring, by [lem-trf-ind-etale-strict-local-invariance]. Its full generic open is exactly $D=\\operatorname{Spec}(H_r/(T_j))[1/p]$. Applying [lem-per-tame-monomial-generic-kummer-algebra], now with all multiplicities one over this equal-characteristic trait, computes $H^q(D,A(q))$ as the exterior algebra on $\\kappa(u)$ and the $\\kappa(T_k)$ for $k\\in J'$. This auxiliary-trait argument also covers $J'=\\varnothing$ and arbitrary, possibly imperfect, residue fields.",
+   "uses": [
+    "lem-trf-ind-etale-strict-local-invariance",
+    "lem-per-tame-monomial-generic-kummer-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent auxiliary-trait calculation of the polynomial closed stratum."
+   }
+  },
+  {
+   "text": "Apply [lem-per-pure-principal-divisor-kummer-residue] to the pure divisor of Step 4, with $f=T_j$. Order the known exterior basis of $H^q(U,A(q))$ with $\\kappa(T_j)$ first. Its summands without that generator are cup products of the units $u,(T_k)_{k\\in J'}$ on $Y$, so their residues are zero. A summand $\\kappa(T_j)\\cup\\alpha$ has residue the corresponding basis element $\\alpha|_D$ from Step 5. Thus the residue is surjective in every nonnegative target degree and its kernel is precisely the exterior span without $\\kappa(T_j)$. To change the twist index, cup with the fixed Tate basis section $\\beta$ of Step 2 (a global section of $A(\\pm1)$ on $Y$); by the coefficient naturality clause of [lem-per-pure-principal-divisor-kummer-residue], $\\operatorname{res}_f$ commutes with this cup product, so surjectivity transfers between twists. Surjectivity of the residue one degree earlier makes the preceding Gysin map zero in the localization exact sequence. Consequently restriction $H^q(Y,A(q))\\to H^q(U,A(q))$ is injective with image that kernel. Those kernel basis elements are the restrictions of their actual unit Kummer products on $Y$. This proves the claimed exterior-algebra isomorphism for $J'$ (including degree zero and vanishing above its rank). Descending on the finite size of $J$ proves $E_n$. The exterior relations on $Y$ hold because restriction is injective and they hold on $U$.",
+   "uses": [
+    "lem-per-pure-principal-divisor-kummer-residue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent localization exact-sequence calculation; the inner induction restores one component."
+   }
+  },
+  {
+   "text": "In $E_n$ take $r=0$ and $J=\\varnothing$. It gives $H^q(\\operatorname{Spec}C[1/t_i],A(q))=0$ for every $q\\ge2$. A primitive $\\ell$th root exists in every strictly henselian local coefficient ring by [lem-sbc-strict-local-roots-of-unity]; its powers trivialize every Tate line, so the untwisted groups vanish as well. The choice is only used to test vanishing. All geometric points on every coordinate divisor were included in $E_n$. Their ambient schemes and divisors are regular Noetherian by Step 1 with $r=0$. Hence [lem-per-divisor-purity-strict-local-criterion] gives $P_n$. This completes the simultaneous induction; $P_n$ was not assumed in Steps 3--6.",
+   "uses": [
+    "lem-sbc-strict-local-roots-of-unity",
+    "lem-per-divisor-purity-strict-local-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent closure of the simultaneous induction, using the strict-local criterion."
+   }
+  },
+  {
+   "text": "Now $E_n$ with $J=\\varnothing$ gives the constant-section isomorphism $A\\simeq H^0(V_r,A)$ and $H^q(V_r,A)=0$ for $q\\ge2$, while $H^1(V_r,A(1))$ is generated by $\\kappa(u_r)$. Fix a primitive $\\ell$th root in $C$ using [lem-sbc-strict-local-roots-of-unity]; the same root trivializes $A(1)$ compatibly on every $V_r$. The Kummer connecting homomorphism [lem-amb-kummer-any-base] is natural for pullback and is a group homomorphism on units. Thus along the stated transition, $\\kappa(u_r)$ pulls back to $\\kappa(u_{r+1}^{\\ell})=\\ell\\kappa(u_{r+1})=0$. Concretely the connecting class is represented by the ratios of local $\\ell$th roots on overlaps; this is the torsor description [lem-sc-torsor-h1]. After pullback the unit is $u_{r+1}^{\\ell}$, so choose the global root $u_{r+1}$ and all ratios are $1$. This directly checks that pullback kills the actual generator. Every positive-degree class therefore becomes zero at the next level (and for $q\\ge2$ is already zero). An element of the filtered colimit is represented at some finite level, so its image is zero. This proves the required direct-limit assertion, including $r=0$ where $u_0=t_i$.",
+   "uses": [
+    "lem-sbc-strict-local-roots-of-unity",
+    "lem-amb-kummer-any-base",
+    "lem-sc-torsor-h1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent computation of the actual tower pullback on its Kummer generator."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-amb-kummer-any-base",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-per-divisor-purity-strict-local-criterion",
+  "lem-per-ind-etale-closed-support-base-change",
+  "lem-per-primitive-monomial-trait-geometry",
+  "lem-per-pure-principal-divisor-kummer-residue",
+  "lem-per-regular-immersion-class-calculus",
+  "lem-per-tame-monomial-generic-kummer-algebra",
+  "lem-sbc-strict-local-roots-of-unity",
+  "lem-sc-regular-local-domain",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-strict-henselization-regular",
+  "lem-sc-torsor-h1",
+  "lem-trf-closed-immersion-strict-localization-cartesian",
+  "lem-trf-finite-base-strict-localization",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-trf-polynomial-ring-regular-base",
+  "lem-weil-pbc-monic-quotient-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI Proposition 3.5.12 proof, p.251, semistable input; independent full-generic tame calculation isolated, followed by the explicit two inductions and residue calculation."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,7 +199,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-semistable-coordinate-divisor-purity",
@@ -97,5 +226,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-semistable-coordinate-kummer-tower-acyclic",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Explicit simultaneous induction on the number of semistable coordinates and on the number of inverted components, reducing full-generic tame Kummer algebra to the single-coordinate complement by localization. Two statement-only inputs, genuine root transition computation, no use of the parent purity nodes.",
+  "blueprint": "Historical proof Step 3 of lem-per-artin-gabber-affine-curve, regular finite-coefficient duality input, via the listed ancestors: ILO XVI Theorem 3.6.2, final paragraph p.253, reduces to Proposition 3.5.12. Supporting input: Expose XVI Proposition 3.5.12 proof, printed p.251, all-one semistable case, with Lemma 3.5.13(iv). The source cites Illusie (2004), Theorem 1.4, and Rapoport--Zink (1982), Satz 2.21. Auxiliary input in the coordinate-component split: Acyclicity of the single-coordinate Kummer tower in a strict semistable local chart.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-kummer-any-base",
+    "why": "Generic local algebra, strict-local base change, or coefficient/Kummer criterion used at the cited step; it supplies no semistable or absolute-purity conclusion and does not replace the unit route."
+   },
+   {
+    "node": "lem-sbc-strict-local-roots-of-unity",
+    "why": "Generic local algebra, strict-local base change, or coefficient/Kummer criterion used at the cited step; it supplies no semistable or absolute-purity conclusion and does not replace the unit route."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Generic local algebra, strict-local base change, or coefficient/Kummer criterion used at the cited step; it supplies no semistable or absolute-purity conclusion and does not replace the unit route."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic local algebra, strict-local base change, or coefficient/Kummer criterion used at the cited step; it supplies no semistable or absolute-purity conclusion and does not replace the unit route."
+   },
+   {
+    "node": "lem-sc-strict-henselization-regular",
+    "why": "Generic local algebra, strict-local base change, or coefficient/Kummer criterion used at the cited step; it supplies no semistable or absolute-purity conclusion and does not replace the unit route."
+   },
+   {
+    "node": "lem-trf-closed-immersion-strict-localization-cartesian",
+    "why": "Generic local algebra, strict-local base change, or coefficient/Kummer criterion used at the cited step; it supplies no semistable or absolute-purity conclusion and does not replace the unit route."
+   },
+   {
+    "node": "lem-trf-finite-base-strict-localization",
+    "why": "Generic local algebra, strict-local base change, or coefficient/Kummer criterion used at the cited step; it supplies no semistable or absolute-purity conclusion and does not replace the unit route."
+   },
+   {
+    "node": "lem-trf-ind-etale-strict-local-invariance",
+    "why": "Generic local algebra, strict-local base change, or coefficient/Kummer criterion used at the cited step; it supplies no semistable or absolute-purity conclusion and does not replace the unit route."
+   },
+   {
+    "node": "lem-trf-polynomial-ring-regular-base",
+    "why": "Generic local algebra, strict-local base change, or coefficient/Kummer criterion used at the cited step; it supplies no semistable or absolute-purity conclusion and does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-monic-quotient-free",
+    "why": "Generic local algebra, strict-local base change, or coefficient/Kummer criterion used at the cited step; it supplies no semistable or absolute-purity conclusion and does not replace the unit route."
+   },
+   {
+    "node": "def-weil-pbc-strict-henselization-limit",
+    "why": "Generic Tate-line pullback or ordinary torsor-to-H1 comparison used only to identify coefficients and the explicit root cocycle; no semistable purity or unit-route conclusion is taken from it."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic Tate-line pullback or ordinary torsor-to-H1 comparison used only to identify coefficients and the explicit root cocycle; no semistable purity or unit-route conclusion is taken from it."
+   },
+   {
+    "node": "lem-sc-torsor-h1",
+    "why": "Generic Tate-line pullback or ordinary torsor-to-H1 comparison used only to identify coefficients and the explicit root cocycle; no semistable purity or unit-route conclusion is taken from it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-kummer-any-base",
+  "lem-sbc-strict-local-roots-of-unity",
+  "lem-sc-regular-local-domain",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-strict-henselization-regular",
+  "lem-trf-closed-immersion-strict-localization-cartesian",
+  "lem-trf-finite-base-strict-localization",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-trf-polynomial-ring-regular-base",
+  "lem-weil-pbc-monic-quotient-free",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-sc-torsor-h1"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-66902abd2",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-66902abd2 (reviewer sub-agent of L); spot-checked: I read the item, the parent lem-per-semistable-coordinate-divisor-purity, both new nodes, the full statement of every cited node, the proof of divisor-purity-strict-local-criterion, and ILO XVI Def 3.5.11, Prop 3.5.12, Lemma 3.5.13 (pp.250-251), Thm 3.1.1 and Cor 3.1.3. ILO does not prove the all-one case itself; it cites Illusie 2004 Thm 1.4 and Rapoport-Zink Satz 2.21, which are not in literature/ and which I did not read. Steps 1-8 check out against the cited statements. Step 1: B_r=B[u]/(u^N-T_i) is finite free and its fibre Omega[u]/(u^N) is local, so H_r is the strict localization of B_r; the quotients by u and by T_j are strict localizations of polynomial rings over kappa(s). Step 2: the E_n/P_n induction is set up properly (D4). Step 4: v_j=u^N T_j is an automorphism over R[u^{+-1}]; the chart is an open of an all-one chart with n-1 coordinates and m+1 smooth parameters, and the map from Y is affine ind-etale, so the ind-etale base-change and class-calculus nodes apply. Step 5: the auxiliary trait kappa(s)[z]_(z) with z=p gives a localization of Q in which every h(p) is a unit at the point, and the generic open is exactly D; J' empty is covered. Steps 7-8 hold. Small cases: n=1,m=0 is the tame Galois cohomology of K^sh(pi^{1/l^inf}); n=2 at the crossing; and l=2, where kappa(z)^2=kappa(z)cup kappa(-1)=0 because -1 is a square in H. The generic node is true: D=V(pi) is SNC, so its claim is the stalk formula of ILO XVI Cor 3.1.3. It also checks on d=1 with a=2 and on a=(2,2). It does not restate the item, and searches found no existing node that states it. The residue node is true: localization triangle plus purity identification, linearity of the boundary, and a global sign -1. Its duplicate candidates (cartier-gysin, which assumes excellence; supported-product-calculus; pur-supported-cup) do not state it. One fault (C4): Step 6 changed the twist index using naturality of the residue in the coefficient sheaf, which the residue node did not state. Fix: added that clause (cup with beta in H^0(Y,A(c)) maps the sequence for t to t+c, and res(x cup j*beta)=res(x) cup i*beta) and made Step 6 cite it. Batch-5: all 9 listed citations accepted. The four lem-trf nodes (closed-immersion-strict-localization-cartesian, finite-base-strict-localization, ind-etale-strict-local-invariance, polynomial-ring-regular-base) are generic algebra. The closures of ind-etale-closed-support-base-change, regular-immersion-class-calculus, divisor-purity-strict-local-criterion and primitive-monomial-trait-geometry contain only generic sec-trace-formula infrastructure (bounded-below adjunction, filtered localization, projective bundles, K0/Pic). None of it is the trace formula, Poincare duality, or a step of their proofs. No cycles; no SGA citations. Maintainer note: lem-per-tame-monomial-generic-kummer-algebra implies the parent's purity, so a later split must not route it through ILO XVI 3.1.1/3.1.3, lem-per-absolute-gysin-purity, or log purity derived from them, because that would create a cycle. Its intended source is Illusie 2004 1.4 / RZ 2.21, which are wanted for the literature folder.; 2 file(s) fixed by the reviewer"
  }
 }
