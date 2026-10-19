@@ -1,0 +1,184 @@
+{
+ "id": "det-pe-hypercover-product-wcontractible",
+ "kind": "statement",
+ "title": "A finite product of w-contractible rings is w-contractible.",
+ "statement": "For every finite type I, including the empty type, and every family of commutative w-contractible rings D_i, the dependent product ring (i : I) -> D_i is w-contractible, in the sense of det-pe-wlocal-strict-contractible.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-hypercover/det-pe-hypercover-existence.md",
+  "place": "node det-pe-hypercover-existence, order None",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 09A1"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "det-pe-wlocal-strict-contractible"
+ ],
+ "proof": [
+  {
+   "text": "Use Mathlib PrimeSpectrum.sigmaToPiHomeo to identify the spectrum of the finite product with the disjoint union of the factor spectra. A singleton in a summand is closed exactly when it is closed in the union. The continuous index projection to the discrete index type forces specializations to stay in a summand, so uniqueness of closed specializations and closedness of the closed-point set hold piecewise. Transport this w-local structure along the homeomorphism. Every maximal prime of the product comes from a factor, and its factor prime is maximal by surjectivity of the evaluation ring homomorphism. Mathlib Localization.AtPrime.mapPiEvalRingHom_bijective identifies its localization with that of the factor; transport strict henselianity using IsStrictlyHenselianLocalRing.of_ringEquiv. Finally the disjoint union of the closed-point spaces is homeomorphic to the closed-point space of the disjoint union. WLocalSpace.closedPointsHomeomorph identifies each closed-point space with the corresponding connected-component space, so extremal disconnectedness follows from the sigma-space instance and homeomorphism invariance. All steps also apply when the index type is empty.",
+   "uses": [
+    "det-pe-wlocal-strict-contractible"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-pe-wlocal-strict-contractible"
+ ],
+ "proof_origin": {
+  "by": "C9 stage 3",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-hypercover/det-pe-hypercover-existence.proof.md",
+  "place": "Part 1; direct ring-spectrum and localization proof using Mathlib instead of scheme coproducts"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "w.?contractible|weakly.?contractible|hypercover",
+   "results": "Mathlib/AlgebraicGeometry/Restrict.lean; Mathlib/AlgebraicGeometry/Restrict.lean; Mathlib/AlgebraicGeometry/Gluing.lean; Mathlib/AlgebraicGeometry/Gluing.lean; Mathlib/AlgebraicGeometry/ColimitsOver.lean; Mathlib/AlgebraicGeometry/ColimitsOver.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; inspected Mathlib/AlgebraicGeometry/Sites/Proetale.lean:52-63,105-109 (site and finite-limit definitions, no w-contractible hypercover existence).",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "There exists a hypercover of a quasi compact quasi separated scheme in the proetale topology by affine weakly contractible objects",
+   "results": "AlgebraicGeometry.Scheme.quasiCompactCover; AlgebraicGeometry.QuasiCompactCover.of_finite; AlgebraicGeometry.quasiCompactCover_iff; AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine; AlgebraicGeometry.Scheme.quasiCompactCover_iff; AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen; AlgebraicGeometry.Scheme.affineCover; AlgebraicGeometry.QuasiCompactCover.of_isOpenMap",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplicialObject, AlgebraicGeometry.Scheme",
+   "results": "loogle: unknown identifier 'SimplicialObject'",
+   "date": "2026-10-16",
+   "verdict": "invalid query: unknown identifier; no mathematical absence conclusion from this query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi compact quasi separated object of the proetale site admits a simplicial hypercover by single affine w-contractible schemes",
+   "results": "AlgebraicGeometry.QuasiCompactCover; AlgebraicGeometry.Scheme.quasiCompactCover; AlgebraicGeometry.QuasiCompactCover.inst; AlgebraicGeometry.QuasiCompactCover.singleton; AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X; AlgebraicGeometry.QuasiCompactCover.homCover; AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine; AlgebraicGeometry.Scheme.AffineCover",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "w.?[Cc]ontractible|[Ww]eakly.?[Cc]ontractible|proetale",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; inspected Mathlib/AlgebraicGeometry/Sites/Proetale.lean:52-63,105-109 (site and finite-limit definitions, no w-contractible hypercover existence).",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialObject.Splitting",
+   "results": "CategoryTheory.SimplicialObject.Splitting; CategoryTheory.SimplicialObject.Splitting.N; CategoryTheory.SimplicialObject.Split.mk; CategoryTheory.SimplicialObject.Split.mk'; CategoryTheory.SimplicialObject.Split.s; CategoryTheory.SimplicialObject.Split.mk'_X; CategoryTheory.SimplicialObject.Split.mk'_s; CategoryTheory.SimplicialObject.Splitting.cofan; read Mathlib/AlgebraicTopology/SimplicialObject/Split.lean:16-40 (splitting structure only).",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite disjoint unions of w-contractible affine schemes form the terms of a split hypercover in the pro-etale site",
+   "results": "AlgebraicGeometry.Scheme.GlueData.oneHypercover_X; AlgebraicGeometry.QuasiCompactCover; AlgebraicGeometry.Scheme.GlueData.oneHypercover; AlgebraicGeometry.Scheme.GlueData.oneHypercover_I₀; AlgebraicGeometry.Scheme.GlueData.oneHypercover_Y; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀; AlgebraicGeometry.Scheme.GlueData.oneHypercover_I₁",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "IsWContractible|Projective.*Hypercover|Hypercover.*exists|exists.*Hypercover",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/Category/TopCat/GrothendieckTopology.lean\", \"Mathlib/Topology/Category/TopCat/GrothendieckTopology.lean\", \"Mathlib/Topology/Category/TopCat/GrothendieckTopology.lean\", \"Mathlib/Topology/Category/TopCat/GrothendieckTopology.lean\", \"Mathlib/AlgebraicGeometry/Sites/Pretopology.lean\", \"Mathlib/AlgebraicGeometry/Sites/Pretopology.lean\", \"Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean\", \"Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean\"], \"digest\": \"4d938ca259cb0cf8\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; results concern affine covers and zero/one hypercovers, not all-degree w-contractible hypercovers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite split simplicial hypercover with projective affine schemes in the weakly etale topology exists over each qcqs scheme",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.Scheme.quasiCompactCover\", \"AlgebraicGeometry.QuasiCompactCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.GlueData.oneHypercover\", \"AlgebraicGeometry.QuasiCompactCover.homCover\"], \"digest\": \"85b5e30895c92060\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; results concern affine covers and zero/one hypercovers, not all-degree w-contractible hypercovers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite products of w-contractible rings have extremally disconnected connected components of their prime spectrum",
+   "results": "PrimeSpectrum.sigmaToPi_bijective; PrimeSpectrum.exists_comap_evalRingHom_eq; no complete w-contractible-ring product theorem.",
+   "date": "2026-10-19",
+   "verdict": "use the product spectrum decomposition"
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum.sigmaToPiHomeo",
+   "results": "PrimeSpectrum.sigmaToPiHomeo and PrimeSpectrum.sigmaToPiHomeo_apply in Mathlib/RingTheory/Spectrum/Prime/Topology",
+   "date": "2026-10-19",
+   "verdict": "exact spectrum homeomorphism; remaining class fields proved directly"
+  },
+  {
+   "tool": "grep",
+   "query": "sigmaToPi|mapPiEval",
+   "results": "PrimeSpectrum.sigmaToPiHomeo in Spectrum/Prime/Topology.lean; Localization.AtPrime.mapPiEvalRingHom_bijective in Localization/AtPrime/Basic.lean",
+   "date": "2026-10-19",
+   "verdict": "use spectrum and localization equivalences"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtale.HypercoverExistence",
+  "date": "2026-10-18",
+  "group": "C9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-pe-hypercover-existence",
+   "place": "Proof steps split into clause-level obligations",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-pe-hypercover",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtale.FiniteProductWContractible",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtale/FiniteProductWContractible.lean",
+  "declaration": "isWContractibleRing_pi_of_finite",
+  "statement": "theorem isWContractibleRing_pi_of_finite\n    (I : Type u) [Finite I] (D : I → Type u) [∀ i, CommRing (D i)]\n    [∀ i, IsWContractibleRing (D i)] :\n    IsWContractibleRing (∀ i, D i)",
+  "branch": "sheaf-dag",
+  "by": "C9",
+  "date": "2026-10-18"
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "det-pe-hypercover-product-wcontractible",
+  "worker": "stage3 C9",
+  "summary": "Complete Lean proof of the stated intermediate construction; no sorry remains.",
+  "blueprint": "Realizes the Proof steps split into clause-level obligations in the original unit route.",
+  "tool_uses": [
+   {
+    "node": "det-pe-wlocal-strict-contractible",
+    "why": "Generic categorical or geometric tool used in the same finite-family realization route of Stacks 09A1; its exact Lean declaration is imported and applied."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261019T002520-L-2146027",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261019T002520-L-2146027",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
