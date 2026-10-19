@@ -17297,3 +17297,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:24 L: returned deliver/V7/Sheaf.AlgebraicGeometry.SchemeFrobeniusFiniteRadicial (reviewer RETURN: (the landing tools, head dc5b522d2) the delivery did not land: lean/Sheaf/AlgebraicGeometry/SchemeFrobeniusFiniteRadicia)
 - 11:24 L: returned deliver/W4/Sheaf.LinearAlgebra.FrobeniusModuleExtensionBounds (reviewer RETURN: (the landing tools, head f2ecfdafc) the delivery did not land: lean/Sheaf/LinearAlgebra/FrobeniusModuleExtensionBounds.l)
 - 11:24 L: returned deliver/X2/Sheaf.LinearAlgebra.FrobeniusModuleMixedSubquotient (reviewer RETURN: (the landing tools, head 58afaa263) the delivery did not land: lean/Sheaf/LinearAlgebra/FrobeniusModuleMixedSubquotient.)
+- 11:24 L: returned deliver/Y6/Sheaf.Paper.SpecifiedPullbackComparisonAlpha (reviewer RETURN: (the landing tools, head 05bad8c1a) the delivery did not land: lean/Sheaf/Paper/SpecifiedPullbackComparisonAlpha.lean: <)
