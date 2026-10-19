@@ -1,0 +1,131 @@
+{
+ "id": "lem-proetale-pullback-internal-hom",
+ "kind": "lemma",
+ "title": "Weakly etale coefficient pullback preserves internal Hom of module objects",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-ring-object], let $f:X\\to Y$ be a weakly etale morphism of schemes, and let $M$ be a module object over the pulled-back coefficient ring $\\Lambda_Y$ on the small pro-etale site of $Y$. Use the coefficient inverse image $F=f^*$ of [det-lem-formal-closed-support-adjunction] and the relative closed tensor structure of [def-sfb-modobj-internal-hom]. Then the canonical natural transformation $F\\underline{\\mathrm{Hom}}_{\\Lambda_Y}(M,-)\\to\\underline{\\mathrm{Hom}}_{\\Lambda_X}(FM,F(-))$, adjoint to pullback of evaluation after the monoidal tensor comparison, is an isomorphism. No finite-generation hypothesis on $M$ is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-formal-closed-support-stratum-hom.md",
+  "place": "Proof step 3: restriction of internal evaluation to a finite-projective splitting cover; expanded by the equalizer construction of module internal Hom"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-ring-object",
+  "det-lem-formal-closed-support-adjunction",
+  "def-sfb-modobj-internal-hom"
+ ],
+ "proof": [
+  {
+   "text": "Identify inverse image along the weakly etale f with restriction to the localized pro-etale site. For every object V over X, the slice over V in this localized site is equivalent to the slice over its image in the site of Y. The end formula for internal Hom of abelian sheaves therefore gives an invertible canonical comparison. This is the existing ProEtale.isIso_ihomComparison_upperStar calculation in the source library.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Use [def-sfb-modobj-internal-hom] to express module internal Hom as the equalizer of precomposition by the source action and postcomposition by the target action. Coefficient pullback is exact and the coefficient ring comparison is an isomorphism by the construction in [det-lem-formal-closed-support-adjunction]. It therefore preserves this equalizer. The ambient internal-Hom and tensor comparisons from step 1 identify the two parallel maps with the corresponding maps after pullback: uncurrying reduces each equality to the module action equation. Consequently the induced equalizer comparison is invertible; this is also the proved generic Mod.isIso_mapIhom'Hom lemma.",
+   "uses": [
+    "def-sfb-modobj-internal-hom",
+    "det-lem-formal-closed-support-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the abstract closed internal Hom with the equalizer internal Hom by uniqueness of right adjoints, using the comparison between the relative tensor and the coequalizer tensor. Prove its embedding formula by transposing the counit and computing after the tensor quotient. Assemble the equalizer comparison into a natural isomorphism. After postcomposition with the target embedding, its components are pullback of the source embedding followed by the ambient internal-Hom comparison. Uncurry: the ambient comparison evaluation identity, the tensor quotient comparison, and naturality of the tensorator show that these components are precisely the canonical monoidal internal-Hom comparison. Cancel the embedding and obtain invertibility componentwise. All helper identities are proved in Lean, with no finite generation, nonempty-site, or nonzero-ring assumption.",
+   "uses": [
+    "def-sfb-modobj-internal-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-formal-closed-support-stratum-hom.md",
+  "place": "Proof step 3: restriction of internal evaluation to a finite-projective splitting cover; expanded by the equalizer construction of module internal Hom"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "weakly etale pullback commutes with internal Hom of sheaves of module objects",
+   "results": "Eight hits for SheafOfModules.pullbackComp and pullback of free modules; these use sheaves of modules over a sheaf of rings and do not identify this canonical comparison for condensed coefficient module objects.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.ihomComparison",
+   "results": "Unknown identifier; zero hits.",
+   "date": "2026-10-19",
+   "verdict": "unavailable for the source-library identifier; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomComparison.*upperStar|mapIhom.Hom",
+   "results": "Zero Mathlib hits. Direct source-library reading found ProEtale.isIso_ihomComparison_upperStar for abelian sheaves and Mod.isIso_mapIhom'Hom for the equalizer internal Hom, but not their comparison with the abstract closed structure on coefficient module objects.",
+   "date": "2026-10-19",
+   "verdict": "generic source tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weakly etale inverse image preserves internal Hom of sheaves of module objects",
+   "results": "SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.sheafHom and SheafOfModules.mapFree concern other coefficient categories or Type-valued sheaf Hom; no canonical module-object comparison theorem was found.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedSupportStratumHom",
+  "date": "2026-10-19",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-formal-closed-support-stratum-hom",
+   "place": "Proof step 3: restriction of the finite-projective evaluation map to a splitting cover",
+   "via": [
+    "lem-proetale-finite-projective-dualizable"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtalePullbackInternalHom",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtalePullbackInternalHom.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.supportPullback_ihomComparison_isIso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.supportPullback_monoidal",
+   "AlgebraicGeometry.ProEtale.CondensedRing.supportPullback_ihomComparison_isIso"
+  ],
+  "statement": "theorem supportPullback_ihomComparison_isIso\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [WeaklyEtale f] (M : supportModules Λ Y) :\n    IsIso (Functor.LaxMonoidal.ihomComparison (supportPullback Λ f) M).natTrans",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-19"
+ },
+ "proof_deps": [
+  "def-sfb-modobj-internal-hom",
+  "det-lem-formal-closed-support-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261019T034252-L-415772",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261019T034252-L-415772",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

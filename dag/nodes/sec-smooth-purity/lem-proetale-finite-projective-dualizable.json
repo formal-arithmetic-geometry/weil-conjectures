@@ -1,0 +1,129 @@
+{
+ "id": "lem-proetale-finite-projective-dualizable",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-formal-closed-support-stratum-hom",
+   "place": "Proof step 3, finite locally projective evaluation and duality",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "lemma",
+ "title": "Finite locally projective coefficient modules are dualizable",
+ "statement": "Let Λ be a commutative condensed ring, S any scheme, and L a module over the pulled-back ring Λ_S on the small pro-etale site of S. Suppose that for every site object V there is a covering sieve such that on each domain W the restriction of L is a retract of Λ_W^r for some finite r, in the sense of [def-pur-condensed-finite-locally-projective]. Then L is dualizable for the relative tensor product: there exists a module D and evaluation L tensor D → Λ_S and coevaluation Λ_S → D tensor L satisfying both triangular identities.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-formal-closed-support-stratum-hom.md",
+  "place": "Proof step 3, finite projective evaluation calculation"
+ },
+ "stmt_deps": [
+  "def-pur-condensed-finite-locally-projective",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "For a finite free module, prove dualizability by induction on the number of factors: the empty product is zero and dualizable; the successor product is isomorphic to the biproduct of the unit and the previous product. Dualizability passes to biproducts and retracts. Thus every local splitting in [def-pur-condensed-finite-locally-projective] makes the restricted module dualizable. These are the proved private finite-power and retract lemmas in the Lean module.",
+   "uses": [
+    "def-pur-condensed-finite-locally-projective"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For t = ihomUnitTensorToIhom L L, [lem-proetale-pullback-internal-hom] and the monoidal comparison identify its pullback to each covering domain with the same map for the restricted module. Local dualizability from step 1 makes the latter invertible. This uses Functor.Monoidal.isIso_map_ihomUnitTensorToIhom_of_ihomComparison, whose hypotheses are precisely the monoidality and internal-Hom comparison supplied here.",
+   "uses": [
+    "lem-proetale-pullback-internal-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Forget module structures. Identify inverse image to a covering domain with localization restriction. Evaluate the pulled-back map at the identity object of that domain to obtain invertibility at that object of the original site. Sheaf.isIso_of_isIso_app_of_mem now descends invertibility along the covering sieves. The module forgetful functor reflects isomorphisms. Finally MonoidalClosed.exactPairingOfIsIso constructs the internal-dual exact pairing from invertibility of t; symmetry gives a right dual. All these descent and pairing steps are written out in Lean.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-condensed-finite-locally-projective",
+  "lem-proetale-pullback-internal-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-formal-closed-support-stratum-hom.md",
+  "place": "Proof step 3, local finite-projective duality; finite-power, retract, and local-isomorphism descent implemented with existing rigid and sheaf APIs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite locally projective sheaf of modules is dualizable in the symmetric monoidal category",
+   "results": "Eight hits: light condensed closed structures/internal projectivity and Module.dual_projective; none proves duality for these coefficient module objects.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsDualizable",
+   "results": "Unknown identifier CategoryTheory.IsDualizable; zero hits.",
+   "date": "2026-10-19",
+   "verdict": "unavailable for the source-library identifier; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "IsDualizable|isDualizable|ExactPairing",
+   "results": "Sixteen Mathlib hits, including ExactPairing.ofFaithful/ofFullyFaithful and rigid-category definitions. Source-library retract and biproduct duality APIs also read; no pro-etale locally projective module theorem.",
+   "date": "2026-10-19",
+   "verdict": "generic rigid APIs only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite locally projective sheaf of modules is dualizable for the tensor product",
+   "results": "Module.dual_finite, Module.dual_projective, dualTensorHomEquiv and Module.instIsReflexiveOfFiniteOfProjective are algebraic module results; they do not prove descent of dualizability for these pro-etale coefficient module objects.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [],
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedSupportStratumHom",
+  "date": "2026-10-19",
+  "group": "D3"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleFiniteProjectiveDualizable",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleFiniteProjectiveDualizable.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteLocallyProjective_isDualizable",
+  "statement": "theorem finiteLocallyProjective_isDualizable\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]\n    (S : Scheme.{u}) (L : supportModules Λ S) (hL : IsFiniteLocallyProjective Λ S L) :\n    IsDualizable L",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261019T034252-L-415772",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261019T034252-L-415772",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
