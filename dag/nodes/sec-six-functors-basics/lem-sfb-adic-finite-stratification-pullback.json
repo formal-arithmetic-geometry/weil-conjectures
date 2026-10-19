@@ -74,12 +74,11 @@
    }
   },
   {
-   "text": "We specify the coefficient identifications used to restrict the sheaves. On the etale sites, [lem-weil-pbc-etale-inverse-image-algebraic-structures](1)-(3) gives the geometric inverse image underlying the stated abelian inverse image. On the pro-etale sites it is the geometric inverse image constructed in [def-weil-proetale-inverse-image]. Apply [lem-pe-constant-left-module-inverse-image] to either: for every scheme morphism $f:V\\to W$ it identifies $f^{-1}\\underline R_W$ with $\\underline R_V$, carrying each constant scalar to itself, and transports module structures compatibly with composition and localization. This is the specified structure map adjoint to constant sections. Indeed its adjunct and the specified adjunct both send each $a\\in R$ to the constant section $a$ on every base-changed test object; the universal property of constant sheafification makes the ring maps equal. Hence extension along this ring isomorphism gives exactly the constant-coefficient module inverse image used here, for arbitrary $R$.",
+   "text": "For the coefficient identifications, use the prescribed sheafification and module adjunctions directly. Base change on either scheme site preserves finite limits and hence the terminal object; AsSmall transport preserves this property. The composite of constant sheafification with ring inverse image and target constant sheafification are left adjoint to the same terminal evaluation functor. Uniqueness of left adjoints gives an isomorphism, and its adjunct is rho because both fix constant scalars. For a module M, construct the normalized constant comparison by sheafifying the presheaf map sending m to the constant section m after base change, checking linearity using the scalar equation. Evaluation at a terminal object classifies maps from a constant module presheaf. Thus precomposition by the specified module comparison is bijective on maps into every module sheaf: the two module sheafification adjunctions and the inverse-image adjunction identify it with restriction of scalars along the same constant-section ring equation. The coyoneda criterion makes this comparison invertible, for arbitrary M and R. These are the completed Lean proofs of adicStratificationRingMap_isIso, adicStratificationConstantMap_existsUnique and adicStratificationConstantMap_isIso; no geometric algebraic-structure lift is needed for these canonical module pullbacks.",
    "uses": [
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
     "def-weil-proetale-inverse-image",
-    "lem-pe-constant-left-module-inverse-image",
-    "def-weil-pbc-constant-sheaf"
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-sheaf-of-modules-category"
    ],
    "elementary": false,
    "source": {
@@ -104,10 +103,10 @@
    }
   },
   {
-   "text": "Here is the compatibility with inverse-image composition used in the preceding step. The fixed-ring identifications of [lem-pe-constant-left-module-inverse-image] commute with composition and localization. For the constant module comparison use the description in [lem-sfb-geometric-inverse-image-constant-module]: on underlying sets it is obtained from the coproduct of copies of the terminal sheaf indexed by $M$. For $T\\xrightarrow h S\\xrightarrow a X$, let $\\alpha:(ah)^{-1}\\simeq h^{-1}a^{-1}$ be the canonical composition isomorphism. Both the direct constant comparison $c_{ah}$ and $c_h\\circ h^{-1}(c_a)\\circ\\alpha$ carry the summand labelled $m$ to the constant section labelled $m$, for every $m\\in M$: the adjunction-compatible composition comparison identifies the two successive pullbacks of that same constant section. Equality on all coproduct inclusions implies equality of the maps. The module inverse images have these underlying set comparisons by step 5, so this is also equality of module-sheaf maps. In particular the trivializations of step 6 are compatible with the specified constant-ring isomorphisms and the inverse-image composition isomorphism.",
+   "text": "Specify direct-image pasting on sections by restriction along the finite-fibre-product pasting isomorphism. The scalar maps agree by checking constant scalars under the ring sheafification adjunction. Mathlib pushforwardComp followed by pushforwardCongr₂ supplies this isomorphism, uniquely characterized by its section maps (adicStratificationPushforwardComp_existsUnique). Its adjunction mate is the specified inverse-image composition isomorphism. The conjugate adjunction unit identity computes the adjunct of composition through that mate. Applying the constant-module comparisons twice sends each generator m to m on the iterated fibre product. Naturality of the constant-module sheafification unit identifies this with the direct constant section under pasting. The uniqueness proved in step 5 therefore gives adicStratificationConstantMap_comp. This completes the constant-section composition compatibility in Lean.",
    "uses": [
-    "lem-pe-constant-left-module-inverse-image",
-    "lem-sfb-geometric-inverse-image-constant-module"
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-sheaf-of-modules-category"
    ],
    "elementary": true,
    "source": {
@@ -136,22 +135,21 @@
   "lem-weil-pbc-proper-fp-permanence",
   "def-weil-closed-immersion",
   "def-weil-open-immersion",
-  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
   "def-weil-proetale-inverse-image",
-  "lem-pe-constant-left-module-inverse-image",
   "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
   "lem-weil-pbc-etale-covering-base-change",
   "lem-weil-pbc-weakly-etale-composition-base-change",
   "lem-galois-fpqc-covering-base-change",
   "def-weil-pbc-proetale-site",
   "lem-sfb-geometric-inverse-image-constant-module",
-  "def-weil-pbc-finite-type-locally-constant-module-sheaf",
-  "lem-weil-pbc-localize-ringed-site-morphism"
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "def-weil-pbc-finite-type-locally-constant-module-sheaf"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 093R, lemma-pullback-locally-constant (proof omitted); explicit scheme fibre-product refinement and constant-section coherence supplied using the cited existing nodes"
+  "place": "Tag 093R, with sites.tex Tags 0H7J and 00YV. E7 proved the five coefficient, constant-module and composition helper theorems by terminal evaluation and module adjunctions. The finite geometric common-refinement conclusion remains unproved; its other steps retain the existing plan."
  },
  "mathlib_searches": [
   {
@@ -306,8 +304,6 @@
   "lemma-constructible-pullback-stratification",
   "lem-pur-scheme-constructible-preimage",
   "lem-weil-pbc-proper-fp-permanence",
-  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-  "lem-pe-constant-left-module-inverse-image",
   "lem-weil-pbc-etale-covering-base-change",
   "lem-weil-pbc-weakly-etale-composition-base-change",
   "lem-galois-fpqc-covering-base-change",
@@ -375,5 +371,15 @@
   "group": "Q25",
   "result": "pass",
   "note": "Reviewed immutable node, dependencies, source alignment, module declarations/docstrings, report sections, edge cases, universe assumptions, and pro-etale interface. Reproduced per-file scompile successfully (6.8s sandbox, 7.8s library); no fixes required."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261019T002536-L-2150310",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

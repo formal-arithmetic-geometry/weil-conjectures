@@ -12,15 +12,7 @@ public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 public import Mathlib.CategoryTheory.Limits.Shapes.WidePullbacks
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
-import WeilConjectures.ConstructibleSheaf.Pullback
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Sheaf.Paper.LocalizeRingedSiteMorphism
-import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
-import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
-import Sheaf.Paper.LocalizeRingedSiteMorphismGeneral
-import Sheaf.SixFunctors.GeometricInverseImageConstantModule
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-!
 # Common finite stratifications and pullback of chosen module trivializations
@@ -164,16 +156,97 @@ def adicStratificationRingMap (pro : Bool) (R : Type (u + 1)) [CommRing R]
     (adicStratificationModelTopology pro Y) (adicStratificationModelTopology pro X)).homEquiv
     _ _).symm (adicStratificationRho pro R f)
 
+/-- The specified coefficient map fixes constant scalars, by sheafification adjunction.
+Source: Stacks 0H7J and 093R.
+(blueprint: lem-sfb-adic-finite-stratification-pullback). -/
+private theorem adicStratificationRho_constants
+    (pro : Bool) (R : Type (u + 1)) [CommRing R] {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (W : (adicStratificationModel pro Y)ᵒᵖ) :
+    (toSheafify (adicStratificationModelTopology pro Y)
+      ((Functor.const (adicStratificationModel pro Y)ᵒᵖ).obj (RingCat.of R))).app W ≫
+        (adicStratificationRho pro R f).hom.app W =
+      (toSheafify (adicStratificationModelTopology pro X)
+        ((Functor.const (adicStratificationModel pro X)ᵒᵖ).obj (RingCat.of R))).app
+          ((adicStratificationModelBaseChange pro f).op.obj W) := by
+  let F := ((adicStratificationModelBaseChange pro f).sheafPushforwardContinuous
+    RingCat.{u + 1} (adicStratificationModelTopology pro Y)
+      (adicStratificationModelTopology pro X)).obj
+        ((constantSheaf (adicStratificationModelTopology pro X) RingCat.{u + 1}).obj
+          (RingCat.of R))
+  have h := ((sheafificationAdjunction (adicStratificationModelTopology pro Y)
+    RingCat.{u + 1}).homEquiv _ F).apply_symm_apply
+      (Functor.whiskerLeft (adicStratificationModelBaseChange pro f).op
+        (toSheafify (adicStratificationModelTopology pro X)
+          ((Functor.const (adicStratificationModel pro X)ᵒᵖ).obj (RingCat.of R))))
+  change toSheafify _ _ ≫ (adicStratificationRho pro R f).hom = _ at h
+  exact congrArg (fun k ↦ k.app W) h
+
 /-- The specified ring comparison is invertible, Stacks 0H7J and proof Step 5.
 (blueprint: lem-sfb-adic-finite-stratification-pullback).
-Proof: inverse image preserves coproducts and the terminal sheaf. Thus it sends the
-coproduct of terminal sheaves indexed by R to the same coproduct. Finite-product
-preservation transports the ring operations. Both this comparison and the adjoint of
-rho send each constant scalar to itself, so sheafification uniqueness identifies them.
+Proof: base change preserves a terminal site object, also after transport to AsSmall.
+The composite of constant sheafification and inverse image is therefore left adjoint
+to evaluation at the base-changed terminal object, just as target constant sheafification
+is. Uniqueness of left adjoints gives an isomorphism. Its adjoint agrees with rho:
+apply the source constant-sheaf adjunction and check the constant-section equation
+at the terminal object. Thus the prescribed map is the hom of this isomorphism.
 Neither finiteness nor a Noetherian hypothesis on R enters the argument. -/
 theorem adicStratificationRingMap_isIso (pro : Bool) (R : Type (u + 1)) [CommRing R]
     {X Y : Scheme.{u}} (f : X ⟶ Y) : IsIso (adicStratificationRingMap pro R f) := by
-  sorry
+  let b := adicStratificationModelBaseChange pro f
+  have : HasTerminal (adicStratificationSite pro Y) := by
+    cases pro
+    · exact inferInstanceAs (HasTerminal Y.Etale)
+    · exact inferInstanceAs (HasTerminal Y.ProEt)
+  have : HasTerminal (adicStratificationModel pro Y) := inferInstance
+  have : PreservesFiniteLimits (adicStratificationBaseChange pro f) := by
+    cases pro
+    · exact inferInstanceAs
+        (PreservesFiniteLimits (MorphismProperty.Over.pullback @Etale ⊤ f))
+    · exact proEtaleBaseChange_preservesFiniteLimits f
+  have : PreservesFiniteLimits
+      (AsSmall.down : adicStratificationModel pro Y ⥤ adicStratificationSite pro Y) :=
+    inferInstanceAs (PreservesFiniteLimits
+      (AsSmall.equiv (C := adicStratificationSite pro Y)).inverse)
+  have : PreservesFiniteLimits
+      (AsSmall.up : adicStratificationSite pro X ⥤ adicStratificationModel pro X) :=
+    inferInstanceAs (PreservesFiniteLimits
+      (AsSmall.equiv (C := adicStratificationSite pro X)).functor)
+  have : PreservesFiniteLimits b :=
+    inferInstanceAs (PreservesFiniteLimits
+      (AsSmall.down ⋙ adicStratificationBaseChange pro f ⋙ AsSmall.up))
+  let T := ⊤_ (adicStratificationModel pro Y)
+  let hT : IsTerminal T := terminalIsTerminal
+  let hGT : IsTerminal (b.obj T) := hT.isTerminalObj b T
+  let J := adicStratificationModelTopology pro Y
+  let K := adicStratificationModelTopology pro X
+  let ar := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    b RingCat.{u + 1} J K
+  let av := constantSheafAdj J RingCat.{u + 1} hT
+  let au := constantSheafAdj K RingCat.{u + 1} hGT
+  let ac := (av.comp ar).ofNatIsoRight
+    (b.sheafPushforwardContinuousCompSheafSectionsObjIso RingCat.{u + 1} J K (op T))
+  let c := (ac.leftAdjointUniq au).app (RingCat.of R)
+  have hc : ar.homEquiv _ _ c.hom = adicStratificationRho pro R f := by
+    apply (av.homEquiv _ _).injective
+    have ht := Adjunction.homEquiv_leftAdjointUniq_hom_app ac au (RingCat.of R)
+    change ac.homEquiv _ _ c.hom = _ at ht
+    dsimp only [ac] at ht
+    rw [Adjunction.homEquiv_ofNatIsoRight_apply, Adjunction.comp_homEquiv] at ht
+    change av.homEquiv _ _ (ar.homEquiv _ _ c.hom) ≫ 𝟙 _ = au.unit.app _ at ht
+    rw [Category.comp_id] at ht
+    rw [ht]
+    change (toSheafify K
+      ((Functor.const (adicStratificationModel pro X)ᵒᵖ).obj (RingCat.of R))).app
+        (op (b.obj T)) =
+      (toSheafify J
+        ((Functor.const (adicStratificationModel pro Y)ᵒᵖ).obj (RingCat.of R))).app (op T) ≫
+          (adicStratificationRho pro R f).hom.app (op T)
+    exact (adicStratificationRho_constants pro R f (op T)).symm
+  have hm : adicStratificationRingMap pro R f = c.hom := by
+    apply (ar.homEquiv _ _).injective
+    exact ((ar.homEquiv _ _).apply_symm_apply _).trans hc.symm
+  rw [hm]
+  infer_instance
 
 /-- Actual constant sections of the existing module sheafification, Stacks 093R.
 (blueprint: lem-sfb-adic-finite-stratification-pullback). -/
@@ -188,6 +261,7 @@ def adicStratificationConstantSection (pro : Bool) (R : Type (u + 1)) [CommRing 
         ((SheafOfModules.strictPerfectConstantPresheaf
           (C := adicStratificationModel pro X) R).obj M)).app W) m
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The uniquely normalized comparison for constant modules, Stacks 093R and proof Steps 5–7.
 (blueprint: lem-sfb-adic-finite-stratification-pullback).
 Proof: send each constant generator m to the constant section m after base change.
@@ -208,7 +282,70 @@ theorem adicStratificationConstantMap_existsUnique
           _ _ c).val.app W) (adicStratificationConstantSection pro R Y M W m) =
             adicStratificationConstantSection pro R X M
               ((adicStratificationModelBaseChange pro f).op.obj W) m := by
-  sorry
+  let b := adicStratificationModelBaseChange pro f
+  let J := adicStratificationModelTopology pro Y
+  let K := adicStratificationModelTopology pro X
+  let α := toSheafify J
+    ((Functor.const (adicStratificationModel pro Y)ᵒᵖ).obj (RingCat.of R))
+  let β := toSheafify K
+    ((Functor.const (adicStratificationModel pro X)ᵒᵖ).obj (RingCat.of R))
+  let N := (SheafOfModules.strictPerfectConstantPresheaf
+    (C := adicStratificationModel pro X) R).obj M
+  let η := (PresheafOfModules.sheafificationAdjunction.{u + 1, u + 1, u + 1, u + 1} β).unit.app N
+  let G := (SheafOfModules.strictPerfectConstantSheaf K R).obj M
+  let H := (SheafOfModules.pushforward.{u + 1} (adicStratificationRho pro R f)).obj G
+  let h : (SheafOfModules.strictPerfectConstantPresheaf
+      (C := adicStratificationModel pro Y) R).obj M ⟶
+      (PresheafOfModules.restrictScalars α).obj H.val :=
+    { app W := ModuleCat.ofHom (X := M)
+        (Y := ((PresheafOfModules.restrictScalars α).obj H.val).obj W)
+        (show M →ₗ[R] (((PresheafOfModules.restrictScalars α).obj H.val).obj W) from
+        { toFun := fun m ↦ η.app (b.op.obj W) m
+          map_add' := fun m n ↦ map_add (η.app (b.op.obj W)).hom m n
+          map_smul' := by
+            intro r m
+            change η.app (b.op.obj W) (r • m) =
+              @SMul.smul
+                (((constantSheaf K RingCat.{u + 1}).obj (RingCat.of R)).obj.obj (b.op.obj W))
+                (G.val.obj (b.op.obj W)) inferInstance
+                ((adicStratificationRho pro R f).hom.app W (α.app W r))
+                (η.app (b.op.obj W) m)
+            have hr := ConcreteCategory.congr_hom
+              (adicStratificationRho_constants pro R f W) r
+            change (adicStratificationRho pro R f).hom.app W (α.app W r) =
+              β.app (b.op.obj W) r at hr
+            erw [hr]
+            exact (η.app (b.op.obj W)).hom.map_smul r m })
+      naturality := by
+        intro W V a
+        ext m
+        exact PresheafOfModules.naturality_apply η (b.op.map a) m }
+  let aj := PresheafOfModules.sheafificationAdjunction.{u + 1, u + 1, u + 1, u + 1} α
+  let af := SheafOfModules.pullbackPushforwardAdjunction (adicStratificationRho pro R f)
+  let c := (af.homEquiv _ _).symm ((aj.homEquiv _ _).symm h)
+  have hc : aj.homEquiv _ _ (af.homEquiv _ _ c) = h := by
+    simp only [c, Equiv.apply_symm_apply]
+  have happ (d : (adicStratificationPullback pro R f).obj
+      ((SheafOfModules.strictPerfectConstantSheaf J R).obj M) ⟶ G)
+      (W : (adicStratificationModel pro Y)ᵒᵖ) (m : M) :
+      (aj.homEquiv _ _ (af.homEquiv _ _ d)).app W m =
+        (af.homEquiv _ _ d).val.app W (adicStratificationConstantSection pro R Y M W m) := by
+    rfl
+  refine ⟨c, ?_, ?_⟩
+  · intro W m
+    have hx := congrArg (fun k ↦ k.app W m) hc
+    rw [happ] at hx
+    exact hx
+  · intro c' hc'
+    apply (af.homEquiv _ _).injective
+    apply (aj.homEquiv _ _).injective
+    change aj.homEquiv _ _ (af.homEquiv _ _ c') =
+      aj.homEquiv _ _ (af.homEquiv _ _ c)
+    trans h
+    · ext W m
+      rw [happ]
+      exact hc' W m
+    · exact hc.symm
 
 /-- The map determined uniquely by its constant sections, Stacks 093R.
 (blueprint: lem-sfb-adic-finite-stratification-pullback). -/
@@ -216,6 +353,38 @@ def adicStratificationConstantMap (pro : Bool) (R : Type (u + 1)) [CommRing R]
     {X Y : Scheme.{u}} (f : X ⟶ Y) (M : ModuleCat.{u + 1} R) :=
   Classical.choose (adicStratificationConstantMap_existsUnique pro R f M).exists
 
+set_option backward.isDefEq.respectTransparency false in
+/-- Evaluation at a terminal object classifies maps from constant module presheaves.
+The inverse restricts a linear map along the unique arrows to that terminal object. -/
+private def adicStratificationConstantHomEquiv {C : Type v} [SmallCategory C]
+    (R : Type v) [CommRing R] (T : C) (hT : IsTerminal T)
+    (M : ModuleCat.{v} R)
+    (N : PresheafOfModules.{v} ((Functor.const Cᵒᵖ).obj (RingCat.of R))) :
+    ((SheafOfModules.strictPerfectConstantPresheaf (C := C) R).obj M ⟶ N) ≃
+      (M ⟶ N.obj (op T)) where
+  toFun f := f.app (op T)
+  invFun g :=
+    { app W := g ≫ N.map (hT.from W.unop).op
+      naturality := by
+        intro W V a
+        ext m
+        change N.map (hT.from V.unop).op (g m) =
+          N.map a (N.map (hT.from W.unop).op (g m))
+        rw [← N.map_comp_apply]
+        have h : hT.from V.unop = a.unop ≫ hT.from W.unop := hT.hom_ext _ _
+        rw [h]
+        rfl }
+  left_inv f := by
+    ext W m
+    exact (PresheafOfModules.naturality_apply f (hT.from W.unop).op m).symm
+  right_inv g := by
+    ext m
+    change N.map (hT.from T).op (g m) = g m
+    have h : hT.from T = 𝟙 T := hT.hom_ext _ _
+    rw [h]
+    exact ConcreteCategory.congr_hom (N.map_id _) (g m)
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Constant-module inverse image is invertible, Stacks 093R and proof Step 7.
 (blueprint: lem-sfb-adic-finite-stratification-pullback).
 Proof: on underlying sets the comparison is the inverse image of the coproduct of
@@ -226,7 +395,79 @@ and then locally. This proves invertibility without assuming M finitely presente
 theorem adicStratificationConstantMap_isIso
     (pro : Bool) (R : Type (u + 1)) [CommRing R] {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : ModuleCat.{u + 1} R) : IsIso (adicStratificationConstantMap pro R f M) := by
-  sorry
+  let b := adicStratificationModelBaseChange pro f
+  have : HasTerminal (adicStratificationSite pro Y) := by
+    cases pro
+    · exact inferInstanceAs (HasTerminal Y.Etale)
+    · exact inferInstanceAs (HasTerminal Y.ProEt)
+  have : HasTerminal (adicStratificationModel pro Y) := inferInstance
+  have : PreservesFiniteLimits (adicStratificationBaseChange pro f) := by
+    cases pro
+    · exact inferInstanceAs
+        (PreservesFiniteLimits (MorphismProperty.Over.pullback @Etale ⊤ f))
+    · exact proEtaleBaseChange_preservesFiniteLimits f
+  have : PreservesFiniteLimits
+      (AsSmall.down : adicStratificationModel pro Y ⥤ adicStratificationSite pro Y) :=
+    inferInstanceAs (PreservesFiniteLimits
+      (AsSmall.equiv (C := adicStratificationSite pro Y)).inverse)
+  have : PreservesFiniteLimits
+      (AsSmall.up : adicStratificationSite pro X ⥤ adicStratificationModel pro X) :=
+    inferInstanceAs (PreservesFiniteLimits
+      (AsSmall.equiv (C := adicStratificationSite pro X)).functor)
+  have : PreservesFiniteLimits b :=
+    inferInstanceAs (PreservesFiniteLimits
+      (AsSmall.down ⋙ adicStratificationBaseChange pro f ⋙ AsSmall.up))
+  let T := ⊤_ (adicStratificationModel pro Y)
+  let hT : IsTerminal T := terminalIsTerminal
+  let hBT : IsTerminal (b.obj T) := hT.isTerminalObj b T
+  let J := adicStratificationModelTopology pro Y
+  let K := adicStratificationModelTopology pro X
+  let α := toSheafify J
+    ((Functor.const (adicStratificationModel pro Y)ᵒᵖ).obj (RingCat.of R))
+  let β := toSheafify K
+    ((Functor.const (adicStratificationModel pro X)ᵒᵖ).obj (RingCat.of R))
+  let A := (SheafOfModules.strictPerfectConstantSheaf J R).obj M
+  let B := (SheafOfModules.strictPerfectConstantSheaf K R).obj M
+  let aj := PresheafOfModules.sheafificationAdjunction.{u + 1, u + 1, u + 1, u + 1} α
+  let ak := PresheafOfModules.sheafificationAdjunction.{u + 1, u + 1, u + 1, u + 1} β
+  let af := SheafOfModules.pullbackPushforwardAdjunction (adicStratificationRho pro R f)
+  let c := adicStratificationConstantMap pro R f M
+  apply isIso_of_coyoneda_map_bijective c
+  intro N
+  let eS := (af.homEquiv A N).trans ((aj.homEquiv _ _).trans
+    (adicStratificationConstantHomEquiv R T hT M _))
+  let eT := (ak.homEquiv _ N).trans (adicStratificationConstantHomEquiv R (b.obj T) hBT M _)
+  have hβ : (β.app (op (b.obj T))).hom =
+      ((adicStratificationRho pro R f).hom.app (op T)).hom.comp (α.app (op T)).hom := by
+    exact congrArg RingCat.Hom.hom (adicStratificationRho_constants pro R f (op T)).symm
+  let eN := ModuleCat.restrictScalarsComp'App (α.app (op T)).hom
+    ((adicStratificationRho pro R f).hom.app (op T)).hom
+    (β.app (op (b.obj T))).hom hβ (N.val.obj (op (b.obj T)))
+  have hcompat (x : B ⟶ N) : eS (c ≫ x) = eT x ≫ eN.hom := by
+    change (adicStratificationConstantHomEquiv R T hT M _)
+      (aj.homEquiv _ _ (af.homEquiv A N (c ≫ x))) = _
+    rw [af.homEquiv_naturality_right, aj.homEquiv_naturality_right]
+    ext m
+    change x.val.app (op (b.obj T))
+      ((af.homEquiv _ _ c).val.app (op T)
+        (adicStratificationConstantSection pro R Y M (op T) m)) =
+      x.val.app (op (b.obj T))
+        (adicStratificationConstantSection pro R X M (op (b.obj T)) m)
+    exact congrArg (fun n ↦ x.val.app (op (b.obj T)) n)
+      (Classical.choose_spec (adicStratificationConstantMap_existsUnique pro R f M).exists
+        (op T) m)
+  constructor
+  · intro x y h
+    apply eT.injective
+    apply (cancel_mono eN.hom).mp
+    rw [← hcompat, ← hcompat]
+    exact congrArg eS h
+  · intro y
+    refine ⟨eT.symm (eS y ≫ eN.inv), ?_⟩
+    apply eS.injective
+    rw [hcompat, Equiv.apply_symm_apply, Category.assoc, eN.inv_hom_id]
+    exact Category.comp_id _
+
 
 /-- Pasting of the original base-change functors, Stacks fibre-product universal property.
 (blueprint: lem-sfb-adic-finite-stratification-pullback). -/
@@ -253,6 +494,7 @@ abbrev adicStratificationPushforward (pro : Bool) (R : Type (u + 1)) [CommRing R
     {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   SheafOfModules.pushforward.{u + 1} (adicStratificationRho pro R f)
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The uniquely specified sectionwise direct-image composition, Stacks 093R, proof Step 7.
 (blueprint: lem-sfb-adic-finite-stratification-pullback).
 Proof: pullback pasting identifies the two evaluation objects. Restrict sections along
@@ -271,7 +513,59 @@ theorem adicStratificationPushforwardComp_existsUnique
           ((adicStratificationModelBaseChange pro g).op.obj W))),
         ((e.hom.app G).val.app W) x = G.val.map
           ((adicStratificationModelBaseChangeComp pro f g).hom.app W.unop).op x := by
-  sorry
+  let bf := adicStratificationModelBaseChange pro f
+  let bg := adicStratificationModelBaseChange pro g
+  let J := adicStratificationModelTopology pro Z
+  let K := adicStratificationModelTopology pro Y
+  let H := adicStratificationModelTopology pro X
+  let A := (constantSheaf H RingCat.{u + 1}).obj (RingCat.of R)
+  let i := adicStratificationModelBaseChangeComp pro f g
+  have : (bg ⋙ bf).IsContinuous J H := Functor.isContinuous_comp bg bf J K H
+  let q : (constantSheaf J RingCat.{u + 1}).obj (RingCat.of R) ⟶
+      ((bg ⋙ bf).sheafPushforwardContinuous RingCat.{u + 1} J H).obj A :=
+    adicStratificationRho pro R g ≫
+    (bg.sheafPushforwardContinuous RingCat.{u + 1} J K).map
+      (adicStratificationRho pro R f)
+  have : (bg ⋙ bf).IsContinuous J H := Functor.isContinuous_comp bg bf J K H
+  have hq : q ≫
+      (Functor.sheafPushforwardContinuousNatTrans i.hom RingCat.{u + 1} J H).app A =
+        adicStratificationRho pro R (f ≫ g) := by
+    apply ((sheafificationAdjunction J RingCat.{u + 1}).homEquiv _
+      (((adicStratificationModelBaseChange pro (f ≫ g)).sheafPushforwardContinuous
+        RingCat.{u + 1} J H).obj A)).injective
+    change toSheafify J _ ≫ _ = toSheafify J _ ≫ _
+    ext W : 2
+    change (toSheafify J
+      ((Functor.const (adicStratificationModel pro Z)ᵒᵖ).obj (RingCat.of R))).app W ≫
+        ((adicStratificationRho pro R g).hom.app W ≫
+          (adicStratificationRho pro R f).hom.app (bg.op.obj W)) ≫
+            A.obj.map (i.hom.app W.unop).op =
+      (toSheafify J
+        ((Functor.const (adicStratificationModel pro Z)ᵒᵖ).obj (RingCat.of R))).app W ≫
+          (adicStratificationRho pro R (f ≫ g)).hom.app W
+    rw [← Category.assoc, ← Category.assoc,
+      adicStratificationRho_constants pro R g W,
+      adicStratificationRho_constants pro R f (bg.op.obj W),
+      adicStratificationRho_constants pro R (f ≫ g) W]
+    have hn := (toSheafify H
+      ((Functor.const (adicStratificationModel pro X)ᵒᵖ).obj (RingCat.of R))).naturality
+        (i.hom.app W.unop).op
+    change 𝟙 (RingCat.of R) ≫ _ = _ at hn
+    rw [Category.id_comp] at hn
+    exact hn.symm
+  let e : adicStratificationPushforward pro R f ⋙ adicStratificationPushforward pro R g ≅
+      adicStratificationPushforward pro R (f ≫ g) :=
+    SheafOfModules.pushforwardComp (adicStratificationRho pro R g)
+      (adicStratificationRho pro R f) ≪≫ SheafOfModules.pushforwardCongr₂
+        (F := adicStratificationModelBaseChange pro (f ≫ g)) (G := bg ⋙ bf)
+        (S := A) q i hq
+  refine ⟨e, ?_, ?_⟩
+  · intro G W x
+    rfl
+  · intro e' he'
+    apply Iso.ext
+    ext G W x
+    exact (he' G W x).trans (by rfl)
 
 /-- Canonical direct-image pasting, uniquely determined on sections, Stacks 093R.
 (blueprint: lem-sfb-adic-finite-stratification-pullback). -/
@@ -292,6 +586,7 @@ def adicStratificationPullbackComp (pro : Bool) (R : Type (u + 1)) [CommRing R]
       (SheafOfModules.pullbackPushforwardAdjunction (adicStratificationRho pro R f)))).symm
         (adicStratificationPushforwardComp pro R f g).symm).symm
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Constant sections commute with the specified inverse-image composition,
 Stacks 0H7J and 093R, proof Step 7.
 (blueprint: lem-sfb-adic-finite-stratification-pullback).
@@ -309,7 +604,68 @@ theorem adicStratificationConstantMap_comp
             (adicStratificationModelTopology pro Z) R).obj M) ≫
         (adicStratificationPullback pro R f).map (adicStratificationConstantMap pro R g M) ≫
           adicStratificationConstantMap pro R f M := by
-  sorry
+  let af := SheafOfModules.pullbackPushforwardAdjunction (adicStratificationRho pro R f)
+  let ag := SheafOfModules.pullbackPushforwardAdjunction (adicStratificationRho pro R g)
+  let ad := SheafOfModules.pullbackPushforwardAdjunction
+    (adicStratificationRho pro R (f ≫ g))
+  let ac := ag.comp af
+  let e := adicStratificationPushforwardComp pro R f g
+  let b := adicStratificationPullbackComp pro R f g
+  let A := (SheafOfModules.strictPerfectConstantSheaf
+    (adicStratificationModelTopology pro Z) R).obj M
+  let B := (SheafOfModules.strictPerfectConstantSheaf
+    (adicStratificationModelTopology pro Y) R).obj M
+  let C := (SheafOfModules.strictPerfectConstantSheaf
+    (adicStratificationModelTopology pro X) R).obj M
+  let cg := adicStratificationConstantMap pro R g M
+  let cf := adicStratificationConstantMap pro R f M
+  have hm (k : (adicStratificationPullback pro R g ⋙
+      adicStratificationPullback pro R f).obj A ⟶ C) :
+      ad.homEquiv A C (b.hom.app A ≫ k) = ac.homEquiv A C k ≫ e.hom.app C := by
+    rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, Functor.map_comp]
+    rw [← Category.assoc]
+    have hu := unit_conjugateEquiv_symm ac ad e.hom A
+    change ac.unit.app A ≫ e.hom.app _ = ad.unit.app A ≫
+      (adicStratificationPushforward pro R (f ≫ g)).map (b.hom.app A) at hu
+    rw [← hu, Category.assoc, ← e.hom.naturality k, ← Category.assoc]
+  apply (adicStratificationConstantMap_existsUnique pro R (f ≫ g) M).unique
+    (Classical.choose_spec (adicStratificationConstantMap_existsUnique pro R (f ≫ g) M).exists)
+  intro W m
+  have hk : ad.homEquiv A C
+      (b.hom.app A ≫ (adicStratificationPullback pro R f).map cg ≫ cf) =
+      (ag.homEquiv A B cg) ≫
+        (adicStratificationPushforward pro R g).map (af.homEquiv B C cf) ≫ e.hom.app C := by
+    rw [hm, Adjunction.comp_homEquiv]
+    change ag.homEquiv _ _ (af.homEquiv _ _
+      ((adicStratificationPullback pro R f).map cg ≫ cf)) ≫ e.hom.app C = _
+    rw [af.homEquiv_naturality_left, ag.homEquiv_naturality_right, Category.assoc]
+  rw [hk]
+  change (e.hom.app C).val.app W
+    ((af.homEquiv B C cf).val.app ((adicStratificationModelBaseChange pro g).op.obj W)
+      ((ag.homEquiv A B cg).val.app W (adicStratificationConstantSection pro R Z M W m))) = _
+  have hg : (ag.homEquiv A B cg).val.app W
+      (adicStratificationConstantSection pro R Z M W m) =
+      adicStratificationConstantSection pro R Y M
+        ((adicStratificationModelBaseChange pro g).op.obj W) m :=
+    Classical.choose_spec (adicStratificationConstantMap_existsUnique pro R g M).exists W m
+  have hf : (af.homEquiv B C cf).val.app
+      ((adicStratificationModelBaseChange pro g).op.obj W)
+      (adicStratificationConstantSection pro R Y M
+        ((adicStratificationModelBaseChange pro g).op.obj W) m) =
+      adicStratificationConstantSection pro R X M
+        ((adicStratificationModelBaseChange pro f).op.obj
+          ((adicStratificationModelBaseChange pro g).op.obj W)) m :=
+    Classical.choose_spec (adicStratificationConstantMap_existsUnique pro R f M).exists _ m
+  erw [hg, hf]
+  erw [Classical.choose_spec
+    (adicStratificationPushforwardComp_existsUnique pro R f g).exists]
+  exact PresheafOfModules.naturality_apply
+    ((PresheafOfModules.sheafificationAdjunction.{u + 1, u + 1, u + 1, u + 1}
+      (toSheafify (adicStratificationModelTopology pro X)
+        ((Functor.const (adicStratificationModel pro X)ᵒᵖ).obj (RingCat.of R)))).unit.app
+          ((SheafOfModules.strictPerfectConstantPresheaf
+            (C := adicStratificationModel pro X) R).obj M))
+      ((adicStratificationModelBaseChangeComp pro f g).hom.app W.unop).op m |>.symm
 
 /-- The canonical comparison along a projection whose composite is the stratum map,
 Stacks 093R, proof Steps 4 and 7. Equality transport is followed by the adjunction mate.
