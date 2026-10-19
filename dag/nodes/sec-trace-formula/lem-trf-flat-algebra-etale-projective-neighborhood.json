@@ -16,9 +16,131 @@
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-complete-algebra-devissage-etale-existence] to $N=S$. A finite algebra presentation makes $S$ finitely generated as an $R$-algebra, and $1$ generates $S$ as an $S$-module. Obtain $R_0,S_0,\\mathfrak p_0,\\mathfrak q_0$ and the pointed etale square with the stated residue-field isomorphisms. Under the explicit isomorphism $S\\otimes_SS_0\\to S_0$, $s\\otimes t\\mapsto st$ (inverse $t\\mapsto1\\otimes t$), its complete devissage is one of $S_0/S_0/R_0$ over $\\mathfrak p_0$. No assertion about projectivity has yet been used.",
+   "uses": [
+    "lem-trf-complete-algebra-devissage-etale-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05ID, proposition-finite-presentation-flat-at-point, apply existence of complete devissage; Tag 05I1 algebraic form"
+   }
+  },
+  {
+   "text": "Put $T=S\\otimes_RR_0$ and let $h:T\\to S_0$, $s\\otimes a\\mapsto s a$, be induced by the commutative square. By [lem-weil-pbc-fibre-product-affine-spectra], $\\operatorname{Spec}T=\\operatorname{Spec}S\\times_{\\operatorname{Spec}R}\\operatorname{Spec}R_0$. Its projection to $\\operatorname{Spec}S$ is etale by [lem-weil-pbc-etale-scheme-base-change]. The composite of $\\operatorname{Spec}h$ with this projection is the given etale map $\\operatorname{Spec}S_0\\to\\operatorname{Spec}S$. Hence cancellation in [lem-weil-pbc-etale-composition-cancellation], clause (3), shows that $\\operatorname{Spec}h$ is etale. This does not require the original square to be cartesian.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05B8, lemma-etale-at-point, proof: etale morphism to the base change"
+   }
+  },
+  {
+   "text": "Since $\\operatorname{Spec}h$ is etale, it is locally of finite presentation by [def-weil-etale-morphism]. Both spectra are affine, so [lem-weil-pbc-lfp-affine-opens-finite-presentation], applied to the whole source and target, makes $T\\to S_0$ finitely presented. The base-change part of [lem-weil-pbc-finite-presentation-base-change-composition] makes $R_0\\to T$ finitely presented from the given $R\\to S$. Its composition part therefore gives that $R_0\\to S_0$ is finitely presented.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-finite-presentation-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05ID, finite-presentation hypotheses on the resulting affine diagram; etale permanence and affine finite presentation"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-flat-ring-map-iff-flat-affine], the assumed flatness of $R\\to S$ makes $\\operatorname{Spec}S\\to\\operatorname{Spec}R$ flat. Its base change $\\operatorname{Spec}T\\to\\operatorname{Spec}R_0$ is flat by [lem-weil-pbc-flat-morphism-base-change]; the same affine equivalence gives flatness of $R_0\\to T$. The etaleness of $\\operatorname{Spec}h$ gives flatness of $T\\to S_0$ by [lem-weil-pbc-etale-algebra-flat]. Composition by [lem-weil-pbc-flat-ring-map-comp] proves that $S_0$ is flat as an $R_0$-module. Thus flatness over the new base has been checked, not inferred merely from the commutative square.",
+   "uses": [
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-flat-ring-map-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05ID, flatness over the new etale base (the source uses Tag 05B9; here use the etale map to the cartesian base change)"
+   }
+  },
+  {
+   "text": "The module $S_0$ is finitely presented over itself: take the presentation $S_0^0\\to S_0\\xrightarrow{1}S_0\\to0$. Apply [lem-trf-complete-algebra-devissage-projective-localization] to $R_0\\to S_0$, $N=S_0$, and $\\mathfrak r=\\mathfrak p_0$. Its algebra finite-presentation hypothesis is Step 3, its module flatness hypothesis is Step 4, and its complete-devissage hypothesis is Step 1. Obtain $f\\in R_0\\setminus\\mathfrak p_0$ such that $(S_0)_f$ is projective over $(R_0)_f$. Set $R^{\\prime}=(R_0)_f$ and $S^{\\prime}=(S_0)_f$. The fraction map $S_0\\otimes_{R_0}(R_0)_f\\to(S_0)_f$, $b\\otimes(a/f^k)\\mapsto ab/f^k$, with inverse $b/f^k\\mapsto b\\otimes1/f^k$, identifies these definitions. By [lem-trf-localization-finite-presentation-ring-map], $S^{\\prime}$ remains finitely presented as an $R^{\\prime}$-algebra.",
+   "uses": [
+    "lem-trf-complete-algebra-devissage-projective-localization",
+    "lem-trf-localization-finite-presentation-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05ID, last sentence; Tag 05IB, projectivity after a standard open of the base"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-principal-localization-open-immersion], the spectra of $R^{\\prime}$ and $S^{\\prime}$ are the standard opens $D(f)$ of $\\operatorname{Spec}R_0$ and $\\operatorname{Spec}S_0$: inverse image sends a prime in a localization to a prime avoiding $f$, with inverse $\\mathfrak a\\mapsto\\{b/f^k:b\\in\\mathfrak a\\}$. The cited node supplies the open immersions; hence etale by [lem-weil-pbc-etale-composition-cancellation], clause (1); composing with the original etale neighbourhood maps, using clause (2), proves (1). As $f\\notin\\mathfrak p_0$ and $\\mathfrak q_0\\cap R_0=\\mathfrak p_0$, both primes avoid $f$. Define $\\mathfrak p^{\\prime}=\\mathfrak p_0(R_0)_f$ and $\\mathfrak q^{\\prime}=\\mathfrak q_0(S_0)_f$. Clause (1) of [lem-weil-pbc-localization-prime-residue-field-iso] gives all contractions in (2), and its clauses (2)--(3) identify the local rings and residue fields. Explicitly: Localizing these rings at the marked primes gives the original local rings: inverting $f$ first adds no denominators since $f$ is already outside the prime. The maps $a/s\\mapsto(a/1)/(s/1)$ and $(a/f^k)/(b/f^l)\\mapsto af^l/(bf^k)$ are inverse. Passing to residue fields therefore adds only isomorphisms to the isomorphisms of Step 1, proving (3). Together with Step 5 this proves all four neighbourhood clauses.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05ID, final standard-open replacement; fraction descriptions of primes and local rings"
+   }
+  },
+  {
+   "text": "Apply the construction in Step 2 to the final square. Its horizontal maps are etale by Step 6; thus $\\operatorname{Spec}S^{\\prime}\\to\\operatorname{Spec}(S\\otimes_RR^{\\prime})$ is etale by the same cancellation argument. Base change along $R^{\\prime}\\to\\kappa(\\mathfrak p^{\\prime})$ preserves this by [lem-weil-pbc-etale-scheme-base-change]. Using [lem-weil-pbc-fibre-product-affine-spectra], the resulting ring map is $S\\otimes_R\\kappa(\\mathfrak p^{\\prime})\\to S^{\\prime}\\otimes_{R^{\\prime}}\\kappa(\\mathfrak p^{\\prime})$. If $\\iota:\\kappa(\\mathfrak p)\\xrightarrow{\\sim}\\kappa(\\mathfrak p^{\\prime})$ is Step 6's isomorphism, then $s\\otimes\\lambda\\mapsto s\\otimes\\iota(\\lambda)$, with inverse induced by $\\iota^{-1}$, identifies its source with $C$. Tensor reassociation here is given by $(s\\otimes a)\\otimes t\\mapsto s\\otimes at$, inverse $s\\otimes t\\mapsto(s\\otimes1)\\otimes t$. Thus the induced map $C\\to C^{\\prime}$ has etale spectrum map as required.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IG, first paragraph, etale map between the fibre rings; Tag 05B8 proof"
+   }
+  },
+  {
+   "text": "Let $j:S\\to C$ and $j^{\\prime}:S^{\\prime}\\to C^{\\prime}$ be the maps $b\\mapsto b\\otimes1$, and let $u:C\\to C^{\\prime}$ be Step 7's map. Let $\\mathfrak Q^{\\prime}\\subset C^{\\prime}$ be the prime corresponding to $\\mathfrak q^{\\prime}$. By [lem-weil-pbc-fibre-ring-primes-bijection], $(j^{\\prime})^{-1}(\\mathfrak Q^{\\prime})=\\mathfrak q^{\\prime}$. The equality $u j=j^{\\prime}(S\\to S^{\\prime})$, checked on $b$, implies $j^{-1}(u^{-1}\\mathfrak Q^{\\prime})=\\mathfrak q$ by Step 6's contraction. The bijection in the same cited node identifies the unique prime of $C$ with contraction $\\mathfrak q$ as the fibre prime corresponding to $\\mathfrak q$. Hence $u^{-1}\\mathfrak Q^{\\prime}$ is exactly that prime, which proves the last assertion.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-primes-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IG, fibre-prime correspondence in the first paragraph (with kappa(p-prime) in the second fibre ring)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-complete-algebra-devissage-etale-existence",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-trf-complete-algebra-devissage-projective-localization",
+  "lem-trf-localization-finite-presentation-ring-map",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-fibre-ring-primes-bijection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05ID, proposition-finite-presentation-flat-at-point, structure-sheaf specialization, via Tags 05I1 and 05IB; the fibre refinement uses the proof of Tag 05B8 and the first paragraph of 05IG"
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -54,10 +176,45 @@
    "results": "{\"t\": \"2026-10-17T23:54:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"Projective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Algebra.exists_etale_of_isEtaleAt hits: they assume etaleness, absent here. Read Flat/EquationalCriterion.lean:287-289: Module.Flat.projective_of_finitePresentation requires finite presentation as a module over the base; S is only finitely presented as an algebra and may have infinite rank over R. This does not provide pointed etale neighborhoods or the diagram. No match.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Complete devissage of a finite module over a finite type algebra exists after elementary etale localization",
+   "results": "{\"t\": \"2026-10-18T23:10:30Z\", \"tool\": \"leanfinder\", \"query\": \"Complete devissage of a finite module over a finite type algebra exists after elementary etale localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.Etale.finitePresentation\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.IsStandardSmooth.out\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.Etale.iff_exists_algEquiv_prod\"], \"digest\": \"7a3392baca43a0dc\"}; No match for the item: no result gives pointed etale neighborhoods on both source and base with module projectivity; finite-presentation-as-module hits have an extra hypothesis absent here.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, Module.Projective",
+   "results": "{\"t\": \"2026-10-18T23:10:30Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Etale, Module.Projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No match for the item: no result gives pointed etale neighborhoods on both source and base with module projectivity; finite-presentation-as-module hits have an extra hypothesis absent here.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "devissage|dévissage|completeDevissage",
+   "results": "{\"t\": \"2026-10-18T23:10:46Z\", \"tool\": \"grep\", \"query\": \"devissage|dévissage|completeDevissage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No match for the item: no result gives pointed etale neighborhoods on both source and base with module projectivity; finite-presentation-as-module hits have an extra hypothesis absent here.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complete devissage makes a finitely presented flat module projective after localization on the base",
+   "results": "{\"t\": \"2026-10-18T23:10:58Z\", \"tool\": \"leansearch\", \"query\": \"A complete devissage makes a finitely presented flat module projective after localization on the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.projective_of_localization_maximal'\", \"Module.projective_of_localization_maximal\", \"Module.projective_of_isLocalizedModule\", \"Module.Flat.of_isLocalizedModule\", \"Module.Flat.projective_of_finitePresentation\", \"Module.flat_iff_of_isLocalization\", \"Module.flat_of_isLocalized_maximal\", \"Module.flat_of_isLocalized_span\"], \"digest\": \"96ac2412e924c9c6\"}; No match for the item: no result gives pointed etale neighborhoods on both source and base with module projectivity; finite-presentation-as-module hits have an extra hypothesis absent here.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projective_of_finitePresentation|exists_etale_isIdempotentElem_forall_liesOver_eq|devissage",
+   "results": "{\"t\": \"2026-10-18T23:15:37Z\", \"tool\": \"grep\", \"query\": \"projective_of_finitePresentation|exists_etale_isIdempotentElem_forall_liesOver_eq|devissage\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Etale/Descent.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\"], \"digest\": \"4124aaee6a490c1e\"}; No match for the item: no result gives pointed etale neighborhoods on both source and base with module projectivity; finite-presentation-as-module hits have an extra hypothesis absent here.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-flat-tensor-weakass-fibre",
@@ -90,5 +247,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-flat-algebra-etale-projective-neighborhood",
+  "worker": "stage1",
+  "summary": "Split the structure-sheaf specialization of 05ID into complete devissage existence (05I1), etale graph to the cartesian base change, affine finite presentation and flatness, projectivity after localization (05IB), and explicit preservation of the pointing and the fibre-prime condition. Added the algebraic complete-devissage definition 05HX and two genuinely smaller theorem nodes; retained the item statement and all inherited records and searches. No Lean attachment found.",
+  "blueprint": "Historical supporting algebra under lem-trf-local-term-locality clauses (1)--(2), through the inherited ancestry to lem-trf-flat-tensor-weakass-fibre, Step 2: that proof needs this etale projective neighborhood. The current main-20261015 proof of the ancestor follows contracting correspondences and does not itself assert this commutative-algebra result. This item retains the existing historical algebra branch and splits it by the precise cited Stacks route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Identify spectra of tensor products with affine fibre products in Steps 2 and 7. These are generic scheme/algebra tools; no statement in this trace-formula unit replaces them."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Preserve etaleness under the base changes in Steps 2 and 7. These are generic scheme/algebra tools; no statement in this trace-formula unit replaces them."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Construct the etale map to the cartesian base change, and compose open neighbourhood maps. These are generic scheme/algebra tools; no statement in this trace-formula unit replaces them."
+   },
+   {
+    "node": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "why": "Convert affine locally finitely presented etale graph map into a finitely presented algebra. These are generic scheme/algebra tools; no statement in this trace-formula unit replaces them."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-base-change-composition",
+    "why": "Preserve finite algebra presentations under base change and composition. These are generic scheme/algebra tools; no statement in this trace-formula unit replaces them."
+   },
+   {
+    "node": "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "why": "Translate ring flatness to and from flatness of the corresponding affine morphism. These are generic scheme/algebra tools; no statement in this trace-formula unit replaces them."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Base change the assumed flat affine morphism before using the etale graph. These are generic scheme/algebra tools; no statement in this trace-formula unit replaces them."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-flat",
+    "why": "The etale graph map is flat on rings. These are generic scheme/algebra tools; no statement in this trace-formula unit replaces them."
+   },
+   {
+    "node": "lem-weil-pbc-flat-ring-map-comp",
+    "why": "Compose the two flat ring maps to establish flatness over the new base. These are generic scheme/algebra tools; no statement in this trace-formula unit replaces them."
+   },
+   {
+    "node": "lem-weil-pbc-principal-localization-open-immersion",
+    "why": "Identify Spec of the principal localizations with open subschemes in Step 6. Generic localization tool; no statement of this trace-formula unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Preserve the marked primes, local rings and residue fields after principal localization in Step 6. Generic localization tool; no statement of this trace-formula unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-localization-prime-residue-field-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-e134260f5",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-e134260f5 (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes and every cited node statement. Read Stacks flat.tex: 05HX (l.1652), the definition of an elementary étale localization (l.1629), remark-same-notion, 05I1 (l.1757), 05IB (l.3229), 05ID with its proof (l.3287), the 05B8 proof and the 05IG first paragraph. The item statement and stmt_deps are byte-identical to base. The item is 05ID for O_{Spec S}, with the fibre map formed over κ(p') (05IG typo handled); nothing is weakened. Step checks: S1 existence node with N=S; S2 étale graph T=S⊗R_0→S_0 by base change and cancellation (3), with no cartesian claim; S3 finite presentation via lfp on affines, base change and composition; S4 flatness via base change, étale⇒flat and composition; S5 the 05IB node with all hypotheses met, then localization keeps finite presentation; S6 open immersion, cancellation (1)(2), localization bijection and residue-field isomorphisms, with q'∩R'=p' elementary; S7 the fibre map is étale by base change to κ(p') and ι; S8 fibre-prime uniqueness. The new 05HX definition matches conditions (1)-(8). Its added condition 'rB_i prime' is harmless: it holds whenever the fibre is nonempty (flat, smooth, geometrically irreducible), and 05I1 at q' supplies a nonempty fibre. The 05I1 node only drops the at-q' refinement, so it is true. The 05IB node has exactly the source hypotheses (small case k[x]/k checked). No duplicates in the DAG: 057S, 05I6 and 05FT nodes differ. No new node restates a clause of the item. No SGA. All eleven off-unit lem-weil-pbc-* tool uses are generic and accepted. No fixes."
  }
 }
