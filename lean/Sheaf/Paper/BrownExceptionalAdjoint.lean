@@ -9,13 +9,15 @@ public import Sheaf.Paper.LocalizingExceptionalAdjoint
 public import Sheaf.Paper.CompactificationRefinementLocalizing
 public import Sheaf.CategoryTheory.CompactlyGenerated
 public import Mathlib.CategoryTheory.Triangulated.Adjunction
+public import Sheaf.Paper.CompactificationCoherenceCocycle
+import Sheaf.Paper.CompactificationRefinementIdentity
+import Sheaf.Compactification.BoundaryRefinement
+import Sheaf.Paper.LocalizingClosureExistence
+import Mathlib.CategoryTheory.Limits.FullSubcategory
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 import Sheaf.SixFunctorsBasics.BrownHypotheses
 import Sheaf.Paper.CompactificationLocalizing
 import Sheaf.CategoryTheory.BrownRepresentabilityRightAdjoint
-import Mathlib.CategoryTheory.Yoneda
-import Sheaf.Compactification.BoundaryRefinement
-import Sheaf.Paper.CompactificationCoherenceCocycle
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 
 /-!
 # Brown exceptional adjoints and compactification independence
@@ -34,10 +36,105 @@ map and the K-injective-normalized direct-image compositor.
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 
-universe u
+universe u v w
 
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Scheme
 open scoped CategoryTheory.Obj
+
+private theorem closure_closedUnderIsomorphisms
+    {C : Type*} [Category* C] [HasZeroObject C] [HasShift C ℤ]
+    [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    (S : ObjectProperty C) : (localizingClosure S).IsClosedUnderIsomorphisms where
+  of_iso e h := by
+    intro P hP hS
+    let := hP.2.1
+    exact P.prop_of_iso e (h P hP hS)
+
+private theorem closure_closedUnderSums
+    {C : Type v} [Category* C] [HasZeroObject C] [HasShift C ℤ]
+    [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    (S : ObjectProperty C) (I : Type v) :
+    (localizingClosure S).IsClosedUnderColimitsOfShape (Discrete I) := by
+  let := closure_closedUnderIsomorphisms S
+  apply ObjectProperty.IsClosedUnderColimitsOfShape.mk'
+  rintro _ ⟨F, hF⟩
+  intro P hP hS
+  exact hP.2.2 F inferInstance (fun i ↦ hF ⟨i⟩ P hP hS)
+
+private theorem restricted_preservesColimits
+    {C D J : Type*} [Category* C] [Category* D] [Category* J]
+    (P : ObjectProperty C) (Q : ObjectProperty D)
+    [HasColimitsOfShape J C] [P.IsClosedUnderColimitsOfShape J]
+    (F : C ⥤ D) (h : ∀ K, P K → Q (F.obj K))
+    (hF : ∀ K : J ⥤ C, (∀ j, P (K.obj j)) → PreservesColimit K F) :
+    PreservesColimitsOfShape J (Q.lift (P.ι ⋙ F) (fun K ↦ h K.obj K.property)) := by
+  have : PreservesColimitsOfShape J (P.ι ⋙ F) := by
+    constructor
+    intro K
+    let : PreservesColimit (K ⋙ P.ι) F :=
+      hF (K ⋙ P.ι) (fun j ↦ (K.obj j).property)
+    infer_instance
+  let : PreservesColimitsOfShape J
+      (Q.lift (P.ι ⋙ F) (fun K ↦ h K.obj K.property) ⋙ Q.ι) :=
+    preservesColimitsOfShape_of_natIso (Q.liftCompιIso (P.ι ⋙ F) _).symm
+  exact preservesColimitsOfShape_of_reflects_of_preserves _ Q.ι
+
+private theorem counitCompatibleIsoUnique
+    {C D : Type*} [Category* C] [Category* D]
+    {F : C ⥤ D} {G J : D ⥤ C} (adj : F ⊣ G) (adjJ : F ⊣ J) :
+    ∃! e : G ≅ J, ∀ N,
+      F.map (e.hom.app N) ≫ adjJ.counit.app N = adj.counit.app N := by
+  refine ⟨adj.rightAdjointUniq adjJ, fun N ↦
+    adj.rightAdjointUniq_hom_app_counit adjJ N, ?_⟩
+  intro e he
+  apply Iso.ext
+  apply NatTrans.ext
+  funext N
+  apply (adjJ.homEquiv _ _).symm.injective
+  simpa only [Adjunction.homEquiv_counit] using
+    (he N).trans (adj.rightAdjointUniq_hom_app_counit adjJ N).symm
+
+private theorem coherentRightAdjointComparisons
+    {C D A : Type*} [Category* C] [Category* D]
+    (F : A → C ⥤ D) (G : A → D ⥤ C) (adj : ∀ a, F a ⊣ G a)
+    (phi : ∀ a b, F a ≅ F b)
+    (hid : ∀ a, phi a a = Iso.refl _)
+    (hcomp : ∀ a b c, phi a b ≪≫ phi b c = phi a c) :
+    ∃ gamma : ∀ a b, G a ≅ G b,
+      (∀ a b N, (F b).map ((gamma a b).hom.app N) ≫ (adj b).counit.app N =
+        (phi a b).inv.app ((G a).obj N) ≫ (adj a).counit.app N) ∧
+      (∀ a b (e : G a ≅ G b),
+        (∀ N, (F b).map (e.hom.app N) ≫ (adj b).counit.app N =
+          (phi a b).inv.app ((G a).obj N) ≫ (adj a).counit.app N) →
+        e = gamma a b) ∧
+      (∀ a, gamma a a = Iso.refl _) ∧
+      (∀ a b c, gamma a b ≪≫ gamma b c = gamma a c) := by
+  let gamma := fun a b ↦ conjugateIsoEquiv (adj a) (adj b) (phi a b).symm
+  have hc : ∀ a b N,
+      (F b).map ((gamma a b).hom.app N) ≫ (adj b).counit.app N =
+        (phi a b).inv.app ((G a).obj N) ≫ (adj a).counit.app N := by
+    intro a b N
+    exact conjugateEquiv_counit (adj a) (adj b) (phi a b).inv N
+  refine ⟨gamma, hc, ?_, ?_, ?_⟩
+  · intro a b e he
+    apply Iso.ext
+    apply NatTrans.ext
+    funext N
+    apply ((adj b).homEquiv _ _).symm.injective
+    simpa only [Adjunction.homEquiv_counit] using (he N).trans (hc a b N).symm
+  · intro a
+    apply Iso.ext
+    dsimp [gamma]
+    rw [hid]
+    exact conjugateEquiv_id (adj a)
+  · intro a b c
+    apply Iso.ext
+    change conjugateEquiv (adj a) (adj b) (phi a b).inv ≫
+      conjugateEquiv (adj b) (adj c) (phi b c).inv =
+        conjugateEquiv (adj a) (adj c) (phi a c).inv
+    rw [conjugateEquiv_comp]
+    exact congrArg (conjugateEquiv (adj a) (adj c))
+      (congrArg Iso.inv (hcomp a b c))
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -56,14 +153,9 @@ def brownCompactificationRefinementMap
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :
     (rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj K ⟶
       (rightDerivedLowerShriekOfCompactification Λ d.obj.obj).obj K :=
-  (lowerStar Λ c.obj.obj.g).rightDerivedFunctor.map (localizingRefinementMap Λ r K) ≫
-    (refinementDerivedLowerStarComp Λ r.hom.hom.hom c.obj.obj.g).inv.app
-      ((openImmersionLowerShriek Λ d.obj.obj.i).mapDerivedCategory.obj K) ≫
-    eqToHom (congrArg
-      (fun q ↦ (lowerStar Λ q).rightDerivedFunctor.obj
-        ((openImmersionLowerShriek Λ d.obj.obj.i).mapDerivedCategory.obj K))
-      r.hom.hom.hom_g)
+  compactificationRefinementComponent Λ r K
 
+set_option linter.unusedVariables false in
 /-- Brown representability on the localizing constructible closure gives exact exceptional
 adjoints, with their adjunction-induced coherent shifts. The adjoints are unique among
 counit-compatible natural isomorphisms. Their comparisons for different compactifications
@@ -163,6 +255,126 @@ theorem exists_brownExceptionalAdjoints
               (∀ c, gamma c c = Iso.refl _) ∧
               (∀ c d e, gamma c d ≪≫ gamma d e = gamma c e))
         (triY := hY) := by
-  sorry
+  classical
+  have hpchar : ringChar k = p := ringChar.eq k p
+  have : Fact (ringChar k).Prime := ⟨by
+    rw [hpchar]
+    exact (CharP.char_is_prime_or_zero k p).resolve_right (Nat.ne_of_gt _hp)⟩
+  have : Fact (ringChar k ≠ ℓ) := ⟨by simpa [hpchar] using _hpℓ⟩
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (.of k))
+  have : QuasiSeparatedSpace Y :=
+    quasiSeparatedSpace_of_quasiSeparated (Y ↘ Spec (.of k))
+  let SY := constantModelBoundedConstructible Λ Y ⊓ fun K ↦
+    DerivedCategory.finiteTorAmplitude _ K
+  let := (localizingClosure_exists Λ Y SY).1
+  have hY : (localizingClosureProEtale Λ Y).IsTriangulated :=
+    (localizingClosure_exists Λ Y SY).2.2.2.1.1
+  let := hY
+  have : LocallySmall.{u + 1} (localizingClosureProEtale Λ Y).FullSubcategory :=
+    locallySmall_of_faithful (localizingClosureProEtale Λ Y).ι
+  have hsumsY : HasCoproducts.{u + 1}
+      (localizingClosureProEtale Λ Y).FullSubcategory := by
+    intro I
+    let Q := localizingClosureProEtale Λ Y
+    let : Q.IsClosedUnderColimitsOfShape (Discrete (ULift.{u + 2} I)) :=
+      closure_closedUnderSums SY (ULift.{u + 2} I)
+    let : Q.IsClosedUnderColimitsOfShape (Discrete I) :=
+      ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence
+        (Discrete.equivalence (Equiv.ulift : ULift.{u + 2} I ≃ I))
+    exact hasColimitsOfShape_of_closedUnderColimits (Discrete I) Q
+  let := hsumsY
+  have hpres (c : Compactification.BoundaryCompactification f) :=
+    (compactification_localizing Λ ℓ k f c _hΛ).1
+  refine ⟨hpres, hY, ?_⟩
+  dsimp only
+  have htri : ∀ c : Compactification.BoundaryCompactification f,
+      (localizingLowerShriek Λ c.obj.obj (hpres c)).IsTriangulated := by
+    intro c
+    let P := localizingClosureProEtale Λ X
+    let Q := localizingClosureProEtale Λ Y
+    let F := rightDerivedLowerShriekOfCompactification Λ c.obj.obj
+    have : F.IsTriangulated := by infer_instance
+    exact inferInstanceAs ((Q.lift (P.ι ⋙ F) _).IsTriangulated)
+  let SX := constantModelBoundedConstructible Λ X ⊓ fun K ↦
+    DerivedCategory.finiteTorAmplitude _ K
+  let := (localizingClosure_exists Λ X SX).1
+  have hsum : ∀ (c : Compactification.BoundaryCompactification f) (I : Type (u + 1)),
+      PreservesColimitsOfShape (Discrete I) (localizingLowerShriek Λ c.obj.obj (hpres c)) := by
+    intro c I
+    let P := localizingClosureProEtale Λ X
+    let Q := localizingClosureProEtale Λ Y
+    let F := rightDerivedLowerShriekOfCompactification Λ c.obj.obj
+    let e : Discrete (ULift.{u + 2} I) ≌ Discrete I :=
+      Discrete.equivalence Equiv.ulift
+    let : P.IsClosedUnderColimitsOfShape (Discrete (ULift.{u + 2} I)) :=
+      closure_closedUnderSums SX (ULift.{u + 2} I)
+    let : HasColimitsOfShape (Discrete (ULift.{u + 2} I))
+        (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+          (condensedRingObj Λ X))) :=
+      hasColimitsOfShape_of_equivalence e.symm
+    have hlarge : PreservesColimitsOfShape (Discrete (ULift.{u + 2} I))
+        (localizingLowerShriek Λ c.obj.obj (hpres c)) := by
+      apply restricted_preservesColimits P Q F (hpres c)
+      intro K hK
+      exact (compactification_localizing Λ ℓ k f c _hΛ).2.2.1
+        (ULift.{u + 2} I) K (fun i ↦ hK ⟨i⟩)
+    let := hlarge
+    exact preservesColimitsOfShape_of_equiv e _
+  have hcg : IsCompactlyGeneratedTriangulated.{u + 1}
+      (localizingClosureProEtale Λ X).FullSubcategory := by
+    obtain ⟨I, E, _, hE, hgen⟩ := _hgen
+    exact ⟨I, E, hE, hgen⟩
+  have hleft : ∀ c : Compactification.BoundaryCompactification f,
+      (localizingLowerShriek Λ c.obj.obj (hpres c)).IsLeftAdjoint := by
+    intro c
+    let := htri c
+    exact brownRepresentabilityRightAdjoint.{u + 1} _ hcg (hsum c)
+  choose G hadj using fun c ↦ (hleft c).exists_rightAdjoint
+  let adj := fun c ↦ Classical.choice (hadj c)
+  refine ⟨G, adj, ?_, ?_, ?_⟩
+  · intro c
+    let := htri c
+    let := (adj c).rightAdjointCommShift ℤ
+    have := (adj c).commShift_of_leftAdjoint ℤ
+    exact ⟨(adj c).isTriangulated_rightAdjoint, this⟩
+  · intro c J adjJ
+    exact counitCompatibleIsoUnique (adj c) adjJ
+  · obtain ⟨phi₀, _, hnorm₀, hid₀, hcomp₀⟩ :=
+      compactification_coherence_cocycle Λ ℓ _hΛ f
+    let phi : ∀ c d : Compactification.BoundaryCompactification f,
+        localizingLowerShriek Λ c.obj.obj (hpres c) ≅
+          localizingLowerShriek Λ d.obj.obj (hpres d) := fun c d ↦
+      NatIso.ofComponents
+        (fun K ↦ (localizingClosureProEtale Λ Y).isoMk ((phi₀ c d).app K))
+        (fun v ↦ by
+          apply ObjectProperty.hom_ext
+          exact (phi₀ c d).hom.naturality v)
+    have hid : ∀ c, phi c c = Iso.refl _ := by
+      intro c
+      apply Iso.ext
+      apply NatTrans.ext
+      funext K
+      apply ObjectProperty.hom_ext
+      exact congrArg (fun e ↦ e.hom.app K) (hid₀ c)
+    have hcomp : ∀ c d e, phi c d ≪≫ phi d e = phi c e := by
+      intro c d e
+      apply Iso.ext
+      apply NatTrans.ext
+      funext K
+      apply ObjectProperty.hom_ext
+      exact congrArg (fun e ↦ e.hom.app K) (hcomp₀ c d e)
+    refine ⟨phi, ?_, hid, hcomp, ?_⟩
+    · intro c d r K
+      have hn := hnorm₀ c d.obj d r (𝟙 d.obj) K
+      change (phi₀ c d.obj).hom.app K = compactificationRefinementComponent Λ r K.obj
+      have hrid₀ := compactificationRefinementComponent_id Λ ℓ k p _hp _hpℓ _hΛ f d K.obj
+      rw [hrid₀] at hn
+      exact (Category.comp_id _).symm.trans hn
+    · exact coherentRightAdjointComparisons
+        (C := (localizingClosureProEtale Λ X).FullSubcategory)
+        (D := (localizingClosureProEtale Λ Y).FullSubcategory)
+        (A := Compactification.BoundaryCompactification f)
+        (fun c : Compactification.BoundaryCompactification f ↦
+          localizingLowerShriek Λ c.obj.obj (hpres c)) G adj phi hid hcomp
 
 end AlgebraicGeometry.ProEtale.CondensedRing
