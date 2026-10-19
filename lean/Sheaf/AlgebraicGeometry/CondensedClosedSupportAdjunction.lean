@@ -16,12 +16,9 @@ public import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Mono
 import Sheaf.AlgebraicGeometry.ProEtaleAbelianClosedSupport
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+import WeilConjectures.CategoryTheory.Triangulated.Recollement
 
 /-!
 # Closed support for arbitrary condensed coefficients
@@ -602,6 +599,17 @@ theorem closedSupport_injective_unit_epi {Z U X : Scheme.{u}}
   exact supportInjectiveUnitEpi (supportPullbackAdjunction Λ j)
     (supportOpenExtensionAdjunction Λ j) I
 
+private theorem supportJointZero {Z U X : Scheme.{u}}
+    (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]
+    (hij : Set.range i.base = (Set.range j.base)ᶜ) (M : supportModules Λ X)
+    (hi : IsZero ((supportPullback Λ i).obj M))
+    (hj : IsZero ((supportPullback Λ j).obj M)) : IsZero M := by
+  have hAb := (Mod.forget _).map_isZero hj
+  have hunit := supportUnitOfAbelian Λ i M
+    ((ProEtale.abelian_closed_support i j (by rw [hij, compl_compl])).2 M.X hAb)
+  exact ((lowerStar Λ i).map_isZero hi).of_iso
+    (asIso ((supportPullbackAdjunction Λ i).unit.app M))
+
 /-- Clause (4): the counit/unit localization triangle, natural on the unbounded category.
 Source: blueprint proof Steps 10--11 (blueprint: det-lem-formal-closed-support-adjunction).
 Resolve K by a K-injective I with injective terms. Open restriction preserves
@@ -620,8 +628,158 @@ theorem closedSupport_triangle {Z U X : Scheme.{u}}
         Triangle.mk ((closedSupportDerivedAdjunction Λ i j hij).counit.app K)
           ((closedSupportOpenDerivedAdjunction Λ j).unit.app K) (δ.app K) ∈
             Pretriangulated.distinguishedTriangles := by
-  sorry
+  classical
+  have : PreservesColimitsOfSize.{u + 1, u + 1} (lowerStar Λ i) :=
+    (closedSupportAdjunction Λ i j hij).leftAdjoint_preservesColimits
+  have hc := supportCounitOfAbelian Λ i
+    (ProEtale.abelian_closed_support i j (by rw [hij, compl_compl])).1
+  have ff := (supportPullbackAdjunction Λ i).fullyFaithfulROfIsIsoCounit
+  have := ff.full
+  have := ff.faithful
+  have := supportOpenCounit Λ j
+  have ffj := (supportPullbackAdjunction Λ j).fullyFaithfulROfIsIsoCounit
+  have := ffj.full
+  have := ffj.faithful
+  have : (lowerStar Λ i).PreservesKInjectiveComplexes :=
+    (supportPullbackAdjunction Λ i).preservesKInjectiveComplexes
+  have : (lowerStar Λ j).PreservesKInjectiveComplexes :=
+    (supportPullbackAdjunction Λ j).preservesKInjectiveComplexes
+  let L := (lowerStar Λ i).mapDerivedCategory
+  let J := (supportPullback Λ j).mapDerivedCategory
+  let aj := closedSupportOpenDerivedAdjunction Λ j
+  let ac := closedSupportDerivedAdjunction Λ i j hij
+  have : IsIso aj.counit := aj.counit_isIso_of_R_fully_faithful
+  have : L.Full := Functor.Full.of_iso
+    (lowerStar Λ i).rightDerivedFunctorIsoMapDerivedCategory
+  have : L.Faithful := Functor.Faithful.of_iso
+    (lowerStar Λ i).rightDerivedFunctorIsoMapDerivedCategory
+  have hzero (M : DerivedCategory (supportModules Λ Z)) : IsZero (J.obj (L.obj M)) := by
+    exact (Functor.isZero_mapDerivedCategory_obj (lowerStar Λ i ⋙ supportPullback Λ j)
+      M (fun n ↦ supportCrossZero Λ i j (by rw [hij, compl_compl]) _)).of_iso
+        (((lowerStar Λ i).mapDerivedCategoryCompIso _).symm.app M)
+  have hjoint (M : DerivedCategory (supportModules Λ X))
+      (hi : IsZero ((supportPullback Λ i).mapDerivedCategory.obj M))
+      (hj : IsZero (J.obj M)) : IsZero M := by
+    rw [DerivedCategory.isZero_iff]
+    intro n
+    exact supportJointZero Λ i j hij _
+      (((DerivedCategory.homologyFunctor _ n).map_isZero hi).of_iso
+        (((supportPullback Λ i).mapDerivedCategoryHomologyFunctorIso n).app M))
+      (((DerivedCategory.homologyFunctor _ n).map_isZero hj).of_iso
+        (((supportPullback Λ j).mapDerivedCategoryHomologyFunctorIso n).app M))
+  have hess (M : DerivedCategory (supportModules Λ X)) (hM : IsZero (J.obj M)) :
+      L.essImage M := by
+    let ai := ((supportPullbackAdjunction Λ i).mapDerivedCategoryRightDerivedAdjunction
+      ).ofNatIsoRight (lowerStar Λ i).rightDerivedFunctorIsoMapDerivedCategory
+    have : IsIso ai.counit := ai.counit_isIso_of_R_fully_faithful
+    obtain ⟨W, v, w, hW⟩ := distinguished_cocone_triangle (ai.unit.app M)
+    have hiu : IsIso ((supportPullback Λ i).mapDerivedCategory.map (ai.unit.app M)) :=
+      have := IsIso.id ((supportPullback Λ i).mapDerivedCategory.obj M)
+      IsIso.of_isIso_fac_right (ai.left_triangle_components M)
+    have hju : IsIso (J.map (ai.unit.app M)) :=
+      isIso_of_source_target_iso_zero _ hM.isoZero (hzero _).isoZero
+    have hz : IsZero W := hjoint W
+      ((Triangle.isZero₃_iff_isIso₁ _
+        ((supportPullback Λ i).mapDerivedCategory.map_distinguished _ hW)).2 hiu)
+      ((Triangle.isZero₃_iff_isIso₁ _ (J.map_distinguished _ hW)).2 hju)
+    have : IsIso (ai.unit.app M) := (Triangle.isZero₃_iff_isIso₁ _ hW).1 hz
+    exact ⟨_, ⟨(asIso (ai.unit.app M)).symm⟩⟩
+  have hex (K) := Recollement.existsUnique_distTriang_counit_unit aj ac
+    (Functor.FullyFaithful.ofFullyFaithful L) hzero hess K
+  choose δ hδ huniq using hex
+  refine ⟨{ app := δ, naturality := ?_ }, fun K ↦ hδ K⟩
+  intro K K' f
+  obtain ⟨τ, h₁, h₂, h₃⟩ := Recollement.exists_triangleHom aj ac hzero f (hδ K) (hδ K')
+  have h := τ.comm₃
+  rw [h₁, h₃] at h
+  exact h.symm
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
+private theorem supportOpenUnitComparison {U X : Scheme.{u}} (j : U ⟶ X)
+    [IsOpenImmersion j] [QuasiCompact j]
+    (I : CochainComplex (supportModules Λ X) ℤ) [I.IsKInjective] :
+    ∃ e : (lowerStar Λ j).rightDerivedFunctor.obj
+        ((supportPullback Λ j).mapDerivedCategory.obj (DerivedCategory.Q.obj I)) ≅
+      DerivedCategory.Q.obj
+        (((lowerStar Λ j).mapHomologicalComplex (.up ℤ)).obj
+          (((supportPullback Λ j).mapHomologicalComplex (.up ℤ)).obj I)),
+      (closedSupportOpenDerivedAdjunction Λ j).unit.app (DerivedCategory.Q.obj I) ≫
+        e.hom = DerivedCategory.Q.map
+          ((NatTrans.mapHomologicalComplex (supportPullbackAdjunction Λ j).unit
+            (.up ℤ)).app I) := by
+  let L := supportPullback Λ j
+  let R := lowerStar Λ j
+  let a := supportPullbackAdjunction Λ j
+  let g := (a.mapHomologicalComplex (.up ℤ)).unit.app I
+  let IH := (HomotopyCategory.quotient _ (.up ℤ)).obj I
+  let LI := (L.mapHomologicalComplex (.up ℤ)).obj I
+  have : CochainComplex.IsKInjective LI := closedSupport_open_isKInjective Λ j I
+  let ρ := R.rightDerivedFunctorUnit
+  have : IsIso (ρ.app ((L.mapHomotopyCategory (.up ℤ)).obj IH)) := by
+    change IsIso (R.rightDerivedFunctorUnit.app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj LI))
+    infer_instance
+  let eh := R.rightDerivedFunctor.mapIso (L.mapDerivedCategoryFactorsh.app IH) ≪≫
+    (asIso (ρ.app ((L.mapHomotopyCategory (.up ℤ)).obj IH))).symm
+  have hh : a.mapDerivedCategoryRightDerivedAdjunction.unit.app
+      (DerivedCategory.Qh.obj IH) ≫ eh.hom =
+      DerivedCategory.Qh.map ((a.mapHomotopyCategory (.up ℤ)).unit.app IH) := by
+    have h := (a.mapHomotopyCategory (.up ℤ)).derivedη_fac_app
+      (HomotopyCategory.quasiIso _ (.up ℤ)) L.mapDerivedCategoryFactorsh.hom ρ IH
+    dsimp only [eh, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom]
+    change a.mapDerivedCategoryRightDerivedAdjunction.unit.app
+        (DerivedCategory.Qh.obj IH) ≫ R.rightDerivedFunctor.map
+          (L.mapDerivedCategoryFactorsh.app IH).hom = _ at h
+    rw [← Category.assoc, h]
+    change (_ ≫ ρ.app ((L.mapHomotopyCategory (.up ℤ)).obj IH)) ≫
+      inv (ρ.app ((L.mapHomotopyCategory (.up ℤ)).obj IH)) = _
+    rw [Category.assoc, IsIso.hom_inv_id, Category.comp_id]
+  have hu : (a.mapHomotopyCategory (.up ℤ)).unit.app IH =
+      (HomotopyCategory.quotient _ (.up ℤ)).map g := by
+    rw [Adjunction.mapHomotopyCategory_unit_app_quotient]
+  let e := R.rightDerivedFunctor.mapIso
+      (L.mapDerivedCategory.mapIso ((DerivedCategory.quotientCompQhIso _).app I).symm) ≪≫
+    eh ≪≫ (DerivedCategory.quotientCompQhIso _).app
+      ((R.mapHomologicalComplex (.up ℤ)).obj LI)
+  refine ⟨e, ?_⟩
+  dsimp only [e, Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom]
+  change a.mapDerivedCategoryRightDerivedAdjunction.unit.app (DerivedCategory.Q.obj I) ≫
+    R.rightDerivedFunctor.map (L.mapDerivedCategory.map
+      ((DerivedCategory.quotientCompQhIso _).app I).inv) ≫ eh.hom ≫
+      ((DerivedCategory.quotientCompQhIso _).app
+        ((R.mapHomologicalComplex (.up ℤ)).obj LI)).hom = _
+  have hn := a.mapDerivedCategoryRightDerivedAdjunction.unit.naturality
+    ((DerivedCategory.quotientCompQhIso _).app I).inv
+  change _ = a.mapDerivedCategoryRightDerivedAdjunction.unit.app _ ≫
+    R.rightDerivedFunctor.map (L.mapDerivedCategory.map
+      ((DerivedCategory.quotientCompQhIso _).app I).inv) at hn
+  rw [← Category.assoc, ← Category.assoc, ← hn]
+  simp only [Functor.id_map]
+  have hh' := congrArg (fun f ↦
+    ((DerivedCategory.quotientCompQhIso _).app I).inv ≫ f ≫
+      ((DerivedCategory.quotientCompQhIso _).app
+        ((R.mapHomologicalComplex (.up ℤ)).obj LI)).hom) hh
+  rw [hu] at hh'
+  calc
+    _ = ((DerivedCategory.quotientCompQhIso _).app I).inv ≫
+        DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map g) ≫
+        ((DerivedCategory.quotientCompQhIso _).app
+          ((R.mapHomologicalComplex (.up ℤ)).obj LI)).hom := by
+      dsimp only [IH, Functor.comp_obj] at hh' ⊢
+      simpa only [Category.assoc] using hh'
+    _ = _ := by
+      change _ = DerivedCategory.Q.map g
+      have hnat := DerivedCategory.quotientCompQhIso_hom_naturality g
+      have hresult := congrArg (fun f ↦
+        ((DerivedCategory.quotientCompQhIso _).app I).inv ≫ f) hnat
+      simpa only [Iso.app_inv, Iso.app_hom, Functor.id_obj, Category.assoc,
+        Iso.inv_hom_id_app_assoc, R, L, LI, Functor.comp_obj] using hresult
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
 /-- Clause (4), explicit fibre comparison on K-injective representatives.
 Source: blueprint proof Step 11 (blueprint: det-lem-formal-closed-support-adjunction).
 First replace I by a homotopy equivalent K-injective J with injective terms. Additive
@@ -644,7 +802,43 @@ theorem closedSupport_fiber {Z U X : Scheme.{u}}
           ((CochainComplex.mappingCone
             ((NatTrans.mapHomologicalComplex (supportPullbackAdjunction Λ j).unit
               (ComplexShape.up ℤ)).app I))⟦(-1 : ℤ)⟧))) := by
-  sorry
+  classical
+  have : PreservesColimitsOfSize.{u + 1, u + 1} (lowerStar Λ i) :=
+    (closedSupportAdjunction Λ i j hij).leftAdjoint_preservesColimits
+  obtain ⟨δ, hδ⟩ := closedSupport_triangle Λ i j hij
+  let KI := DerivedCategory.Q.obj I
+  let g := (NatTrans.mapHomologicalComplex (supportPullbackAdjunction Λ j).unit
+    (.up ℤ)).app I
+  let T := Triangle.mk ((closedSupportDerivedAdjunction Λ i j hij).counit.app KI)
+    ((closedSupportOpenDerivedAdjunction Λ j).unit.app KI) (δ.app KI)
+  let S := DerivedCategory.Q.mapTriangle.obj (CochainComplex.mappingCocone.triangle g)
+  obtain ⟨eu, heu⟩ := supportOpenUnitComparison Λ j I
+  let et := isoTriangleOfIso₁₂ T.rotate S.rotate (rot_of_distTriang _ (hδ KI))
+    (rot_of_distTriang _ (DerivedCategory.mappingCocone_triangle_distinguished g))
+    (Iso.refl _) eu (by
+      change _ = 𝟙 _ ≫ DerivedCategory.Q.map g
+      rw [Category.id_comp]
+      convert heu using 1
+      rfl)
+  let ec := (shiftFunctor (DerivedCategory (supportModules Λ X)) (1 : ℤ)).preimageIso
+    (Triangle.π₃.mapIso et)
+  have hc := supportCounitOfAbelian Λ i
+    (ProEtale.abelian_closed_support i j (by rw [hij, compl_compl])).1
+  have ff := (supportPullbackAdjunction Λ i).fullyFaithfulROfIsIsoCounit
+  have := ff.full
+  have := ff.faithful
+  have : (lowerStar Λ i).PreservesKInjectiveComplexes :=
+    (supportPullbackAdjunction Λ i).preservesKInjectiveComplexes
+  have : (lowerStar Λ i).mapDerivedCategory.Full := Functor.Full.of_iso
+    (lowerStar Λ i).rightDerivedFunctorIsoMapDerivedCategory
+  have : (lowerStar Λ i).mapDerivedCategory.Faithful := Functor.Faithful.of_iso
+    (lowerStar Λ i).rightDerivedFunctorIsoMapDerivedCategory
+  let ai := ((supportPullbackAdjunction Λ i).mapDerivedCategoryRightDerivedAdjunction
+    ).ofNatIsoRight (lowerStar Λ i).rightDerivedFunctorIsoMapDerivedCategory
+  have : IsIso ai.counit := ai.counit_isIso_of_R_fully_faithful
+  exact ⟨(closedSupport Λ i j).rightDerivedFunctor.mapIso e ≪≫
+    (asIso (ai.counit.app ((closedSupport Λ i j).rightDerivedFunctor.obj KI))).symm ≪≫
+    (supportPullback Λ i).mapDerivedCategory.mapIso ec⟩
 
 /-- The recorded arbitrary-resolution derived functor agrees with the upstream total
 right derived functor, including its unit; no monomorphic-resolution hypothesis is added.
