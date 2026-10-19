@@ -1,6 +1,6 @@
 # Work queue
 
-1280 items; claim with `tools/claim.py next <group> [--stage N]`.
+1282 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (1280)
+## Stage 3: modules to prove (1282)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -29,12 +29,14 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.WeilSheaf.CompactSupportFiniteCoefficientComparison` | 4 | 1 | proof | route |
 | `WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CohomologicalDimension` | 4 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound` | 5 | 1 | proof | route |
+| `Sheaf.CategoryTheory.LocalizedModuleExactForSystems` | 5 | 2 | proof | route |
 | `Sheaf.WeilSheaf.AffineCurveRangePositive` | 5 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.AdicDenseOpenImmersionFiniteness` | 7 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.AdicProjectiveSpaceFiniteness` | 7 | 1 | proof | route |
 | `WeilConjectures.DeligneLaumon.AffineLine.Exactness` | 7 | 1 | proof | route |
 | `WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy` | 7 | 1 | proof | route |
 | `WeilConjectures.WeilSheaf.DenseOpen` | 7 | 1 | proof | route |
+| `Sheaf.Paper.ConstructibleCompactnessBounded` | 8 | 2 | proof | route |
 | `WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension` | 8 | 4 | proof | route |
 | `WeilConjectures.WeilSheaf.AffineLineCohomology` | 8 | 1 | proof | route |
 | `WeilConjectures.WeilSheaf.ArtinSchreierDual` | 8 | 1 | proof | route |
