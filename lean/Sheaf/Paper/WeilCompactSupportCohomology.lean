@@ -9,6 +9,7 @@ public import Sheaf.Paper.WeilIndSheafCategory
 public import Sheaf.Paper.IntegralRationalQbarCompactSupport
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.Compactification.Defs
+import Mathlib.Algebra.CharP.CharAndCard
 
 /-! # Higher compact-support images in the actual common-stage Weil heart
 
@@ -57,7 +58,8 @@ Proof: a proper map is finite type, and finite type is stable under composition.
 theorem zlCompactificationMiddle_finiteType {X₀ Y₀ : Over (Spec (.of D.k₀))}
     [LocallyOfFiniteType Y₀.hom] (f₀ : X₀ ⟶ Y₀) (c : Compactification f₀.left) :
     LocallyOfFiniteType (zlCompactificationMiddle D f₀ c).hom := by
-  sorry
+  change LocallyOfFiniteType (c.g ≫ Y₀.hom)
+  infer_instance
 
 /-- The middle scheme is quasi-compact over k₀ by properness and composition.
 Source: blueprint compactification construction
@@ -67,7 +69,8 @@ Proof: proper morphisms are quasi-compact, as are their composites. -/
 theorem zlCompactificationMiddle_quasiCompact {X₀ Y₀ : Over (Spec (.of D.k₀))}
     [QuasiCompact Y₀.hom] (f₀ : X₀ ⟶ Y₀) (c : Compactification f₀.left) :
     QuasiCompact (zlCompactificationMiddle D f₀ c).hom := by
-  sorry
+  change QuasiCompact (c.g ≫ Y₀.hom)
+  infer_instance
 
 /-- The open part, over k₀, of the given compactification.
 Source: blueprint compactification construction
@@ -76,7 +79,9 @@ Proof: the equality f₀.left = c.i ≫ c.g and f₀.w show the structure-map eq
 theorem zlCompactificationOpen_w {X₀ Y₀ : Over (Spec (.of D.k₀))}
     (f₀ : X₀ ⟶ Y₀) (c : Compactification f₀.left) :
     c.i ≫ (zlCompactificationMiddle D f₀ c).hom = X₀.hom := by
-  sorry
+  change c.i ≫ (c.g ≫ Y₀.hom) = X₀.hom
+  rw [← Category.assoc, ← c.comm]
+  exact f₀.w
 
 /-- The open part as an arrow of k₀-schemes.
 Source: blueprint compactification construction
@@ -94,7 +99,8 @@ Proof: its underlying map is c.i, an open immersion by the compactification data
 theorem zlCompactificationOpen_isOpenImmersion {X₀ Y₀ : Over (Spec (.of D.k₀))}
     (f₀ : X₀ ⟶ Y₀) (c : Compactification f₀.left) :
     IsOpenImmersion (zlCompactificationOpen D f₀ c).left := by
-  sorry
+  change IsOpenImmersion c.i
+  infer_instance
 
 /-- The proper part as an arrow of k₀-schemes.
 Source: blueprint compactification construction
@@ -204,7 +210,9 @@ stable under base change. -/
 theorem zlGeometricFiber_finiteType (X₀ : Over (Spec (.of D.k₀)))
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] :
     LocallyOfFiniteType ((D.geometricFiber X₀).left ↘ Spec (.of D.k)) := by
-  sorry
+  change LocallyOfFiniteType (pullback.snd X₀.hom
+    (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))))
+  infer_instance
 
 /-- Quasi-compactness survives geometric base change.
 Source: Stacks 01K0; blueprint geometric-fibre convention
@@ -214,7 +222,9 @@ Proof: quasi-compactness is stable under base change, applied to X₀.hom. -/
 theorem zlGeometricFiber_quasiCompact (X₀ : Over (Spec (.of D.k₀)))
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] :
     QuasiCompact ((D.geometricFiber X₀).left ↘ Spec (.of D.k)) := by
-  sorry
+  change QuasiCompact (pullback.snd X₀.hom
+    (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))))
+  infer_instance
 
 /-- The base-changed map respects the specified geometric structure maps.
 Source: blueprint geometric-fibre convention
@@ -225,7 +235,8 @@ theorem zlFiberMap_isOver {X₀ Y₀ : Over (Spec (.of D.k₀))}
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
     [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (f₀ : X₀ ⟶ Y₀) :
     (zlFiberMap D f₀).IsOver (Spec (.of D.k)) := by
-  sorry
+  exact ⟨((Over.pullback
+    (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map f₀).w⟩
 
 /-- Separatedness survives geometric base change.
 Source: Stacks 01L4; blueprint compact-support geometric fibre
@@ -235,7 +246,8 @@ preserves closed diagonals, which characterize separatedness. -/
 @[instance]
 theorem zlFiberMap_separated {X₀ Y₀ : Over (Spec (.of D.k₀))}
     (f₀ : X₀ ⟶ Y₀) [IsSeparated f₀.left] : IsSeparated (zlFiberMap D f₀) := by
-  sorry
+  exact MorphismProperty.overPullbackMap (P := @IsSeparated)
+    (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) f₀ inferInstance
 
 /-- Local finite type survives geometric base change.
 Source: Stacks 01T6; blueprint compact-support geometric fibre
@@ -246,7 +258,8 @@ structure-map pullbacks. Apply locally finite type stability under base change. 
 theorem zlFiberMap_finiteType {X₀ Y₀ : Over (Spec (.of D.k₀))}
     (f₀ : X₀ ⟶ Y₀) [LocallyOfFiniteType f₀.left] :
     LocallyOfFiniteType (zlFiberMap D f₀) := by
-  sorry
+  exact MorphismProperty.overPullbackMap (P := @LocallyOfFiniteType)
+    (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) f₀ inferInstance
 
 /-- Quasi-compactness survives geometric base change.
 Source: Stacks 01K0; blueprint compact-support geometric fibre
@@ -255,7 +268,8 @@ Proof: use the same Cartesian square and quasi-compact base-change stability. -/
 @[instance]
 theorem zlFiberMap_quasiCompact {X₀ Y₀ : Over (Spec (.of D.k₀))}
     (f₀ : X₀ ⟶ Y₀) [QuasiCompact f₀.left] : QuasiCompact (zlFiberMap D f₀) := by
-  sorry
+  exact MorphismProperty.overPullbackMap (P := @QuasiCompact)
+    (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) f₀ inferInstance
 
 include hl in
 /-- The coefficient prime is a unit in the closure field itself.
@@ -265,7 +279,15 @@ Proof: D.card_base and D.cardinality_eq give characteristic D.p in D.k₀ and
 hence D.k. The prime l differs from D.p, so its image in that field is nonzero,
 and therefore invertible. -/
 theorem zlClosurePrimeUnit : IsUnit (l : D.k) := by
-  sorry
+  let := Fintype.ofFinite D.k₀
+  let : Fact D.p.Prime := ⟨D.prime⟩
+  have : CharP D.k₀ D.p := charP_of_card_eq_prime_pow
+    ((Nat.card_eq_fintype_card (α := D.k₀)).symm.trans
+      (D.card_base.trans D.cardinality_eq))
+  have : CharP D.k D.p :=
+    charP_of_injective_algebraMap (algebraMap D.k₀ D.k).injective D.p
+  exact (CharP.isUnit_natCast_iff (R := D.k) D.prime).2
+    (fun h ↦ hl ((Nat.prime_dvd_prime_iff_eq D.prime (Fact.out : l.Prime)).1 h).symm)
 
 /-- Comparison with the prescribed integral/rational/common-stage compact-support
 value, on every integral representative and every geometric compactification.
@@ -317,7 +339,8 @@ target structure map. Apply stability of locally finite type under composition. 
 theorem zlSource_finiteType {X₀ Y₀ : Over (Spec (.of D.k₀))}
     [LocallyOfFiniteType Y₀.hom] (f₀ : X₀ ⟶ Y₀) [LocallyOfFiniteType f₀.left] :
     LocallyOfFiniteType X₀.hom := by
-  sorry
+  rw [← f₀.w]
+  infer_instance
 
 /-- The finite-type source also has quasi-compact structure map.
 Source: blueprint Leray proof, source-domain check
@@ -326,7 +349,8 @@ Proof: use f₀.w and composition of the two quasi-compact maps. -/
 theorem zlSource_quasiCompact {X₀ Y₀ : Over (Spec (.of D.k₀))}
     [QuasiCompact Y₀.hom] (f₀ : X₀ ⟶ Y₀) [QuasiCompact f₀.left] :
     QuasiCompact X₀.hom := by
-  sorry
+  rw [← f₀.w]
+  infer_instance
 
 /-- The source Weil heart with its induced finite-type instances. This packages
 consequences of the hypotheses and adds no source hypothesis to the Leray statement.
