@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-completed-koszul-quotient-comparison",
+ "kind": "statement",
+ "title": "Unit-compatible Koszul-to-quotient comparison in the completed coefficient presentation",
+ "statement": "Let $T$ be a scheme and $d$ a Noetherian adic coefficient datum over a commutative ring $A$ as in [def-weil-pbc-adic-coefficient-datum], with ideal $I$. Let $a:\\operatorname{Fin}(r)\\to A$ generate $I$. For any $K$ in the derived category of modules over the actual completed coefficient ring $A_T$, and any cochain representative $C$ with an isomorphism $e:Q(C)\\simeq K$, there is an isomorphism from the transported intrinsic Koszul completion of [def-weil-pbc-intrinsic-completion] to $\\operatorname{Rlim}(K\\otimes^L_{A_T}(A/I^{n+1})_T)_n$, using the strict reduction tower of [def-weil-pbc-adic-coefficient-datum] and the actual total right derived limit of [prop-weil-pbc-rlim-functoriality]. Composing the specified intrinsic completion unit with this isomorphism gives the derived constant/limit adjunction unit followed by the derived limit of the residue-normalized strict quotient augmentation. No completeness hypothesis is imposed on $K$. The coefficient universe is one above the scheme universe, as in the recorded reductionModules presentation.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/prop-weil-pbc-koszul-reconstruction.md",
+  "place": "current order 1316, Koszul-to-quotient comparison, including its unit equation",
+  "external": [
+   {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul"
+   },
+   {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099L and 099M, derived adic completion"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-intrinsic-completion",
+  "prop-weil-pbc-rlim-functoriality"
+ ],
+ "proof": [
+  {
+   "text": "Identify the finite constant quotient sheaves with the continuous-function coefficient sheaves by the constants comparison. Naturality in all quotient homomorphisms identifies their strict inverse systems, completed rings, and projections. Exact mutually inverse scalar restrictions transport the published Koszul complexes, products, transitions and degree-zero units.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "def-weil-pbc-intrinsic-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a flat-term K-flat representative use the Noetherian Koszul augmentations to the positive quotients. The augmentation cones are pro-zero; exact constant sheafification and tensor by the fixed K-flat representative preserve their zero derived transition maps. Apply the strict-tower homotopy-limit theorem. Cofinality of generator-power ideals and ideal powers gives the quotient completion. Restriction to constant coefficients preserves the strict derived limits and is conservative, so the resulting comparison is invertible also over completed coefficients.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact countable products identify the strict derived Koszul limit with the published explicit fiber. The degree-zero augmentation sends one to one, and the zero homotopy component is preserved. Thus its unit becomes the quotient unit on every K-flat representative. The normalization of completedReductionTowerUnit identifies that quotient unit with the derived constant/limit adjunction unit followed by Rlim of the strict quotient augmentation. Localization and the supplied representative isomorphism transport the equality to C and K.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "def-weil-pbc-intrinsic-completion",
+    "prop-weil-pbc-rlim-functoriality",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "def-weil-pbc-intrinsic-completion",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-proetale-countable-products-exact",
+  "prop-weil-pbc-rlim-functoriality",
+  "def-weil-pbc-adic-coefficient-datum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/prop-weil-pbc-koszul-reconstruction.md",
+  "place": "current order 1316: specialization to the published reductionModules presentation, with the independently specified quotient augmentation and derived-adjunction unit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical isomorphism from Koszul completion of a sheaf complex to the derived inverse limit of its quotient tower preserving the unit",
+   "results": "localCohomology.isoSelfLERadical; localCohomology.isoOfFinal; localCohomology.diagramComp; CondensedMod.IsSolid.isIso_solidification_map; AlgebraicTopology.DoldKan.Γ₀NondegComplexIso; CategoryTheory.Sheaf.ΓNatIsoLim; DerivedCategory.singleFunctorIsoCompQ; SheafOfModules.toSheafCompSheafToPresheafIso",
+   "date": "2026-10-19",
+   "verdict": "no exact derived completed-sheaf comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.isIso_comp_right_iff",
+   "results": "CategoryTheory.isIso_comp_right_iff",
+   "date": "2026-10-19",
+   "verdict": "categorical invertibility criterion used by the consumer"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*quotient|quotient.*koszul",
+   "results": "No hits.",
+   "date": "2026-10-19",
+   "verdict": "no exact derived completed-sheaf comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a Noetherian ring Koszul derived completion agrees with the derived inverse limit of quotient reductions",
+   "results": "AdicCompletion; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.instCommRing; AdicCompletion.subring; AdicCompletion.module; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp; AdicCompletion.submodule; AdicCompletion.liftRingHom.congr_simp",
+   "date": "2026-10-19",
+   "verdict": "no exact derived completed-sheaf comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullback",
+  "date": "2026-10-20",
+  "group": "H6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "last paragraph: the comparison with intrinsic completion, including the completion unit",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedKoszulQuotientComparison",
+  "file": "lean/Sheaf/Paper/CompletedKoszulQuotientComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedKoszulQuotientComparison",
+  "statement": "theorem completedKoszulQuotientComparison\n    (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)\n    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)\n    (K : d.derived T)\n    (C : CochainComplex (reductionModules T (d.completedRing T)) ℤ)\n    (eC : DerivedCategory.Q.obj C ≅ K) :\n    ∃ c : intrinsicCompletion T d r a ha K C eC ≅\n        (completedRlim T (d.completedRing T)).obj ((completedReductionTower T d).obj K),\n      intrinsicCompletionUnit T d r a ha K C eC ≫ c.hom =\n        ((constLimAdj :\n          (Functor.const ℕᵒᵖ : reductionModules T (d.completedRing T) ⥤ d.towers T) ⊣\n            completedTowerLimit T (d.completedRing T)).mapDerivedCategoryRightDerivedAdjunction\n              ).unit.app K ≫\n          (completedRlim T (d.completedRing T)).map ((completedReductionTowerUnit d T).app K)",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261019T231214-L-560879",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261019T231214-L-560879",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
