@@ -1,0 +1,107 @@
+{
+ "id": "def-sf-compactification-identity-square",
+ "kind": "definition",
+ "title": "Identity base-change square of a supplied compactification",
+ "status": "split",
+ "statement": "Fix a finite-field datum $D$ and the category $\\mathscr S$ of finite-type schemes over its specified field $k$, with the compactified Cartesian square record of [def-sf-operation-stages]. Let $X,Y\\in\\mathscr S$, let $f:X\\to Y$ be a $k$-morphism, and let $c=(j:X\\hookrightarrow\\overline X,p:\\overline X\\to Y)$ be a supplied compactification [def-weil-compactifications-refinements], so that $j$ is open, $p$ is proper and $p\\circ j=f$. Define the identity-base-change compactified square $Q(f,c)$ as follows. Its unprimed and primed spaces are $X'=X$, $Y'=Y$ and $Z'=Z=\\overline X$, with $Z$ viewed over $k$ by $\\overline X\\xrightarrow pY\\to\\operatorname{Spec}k$. Its two vertical morphisms are $f'=f$ and $f$; its open factors are $i'=i=j$, its proper factors are $p'=p$, and its horizontal morphisms are $g'=\\operatorname{id}_X$, $g=\\operatorname{id}_Y$ and $h=\\operatorname{id}_{\\overline X}$. The factorization, commutativity and Cartesian-square fields are the resulting identity-square witnesses. This retains the supplied compactification and selects its component of the operation datum's exchange/projection family; it makes no compactification-comparison or coherence assertion.",
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-weil-compactifications-refinements"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "chosen compactification and its base change, specialized to identity base change to select the projection transformation in def-sf-cup"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "identity base change square associated to a compactification of a scheme morphism",
+   "results": "8 hit(s). LinearMap.baseChange_id, CategoryTheory.Square.Hom.id, AlgebraicGeometry.Scheme.id.base, CliffordAlgebra.ofBaseChange_toBaseChange, CliffordAlgebra.toBaseChange_comp_ofBaseChange, AlgebraicGeometry.Scheme.Hom.id_base, AlgebraicGeometry.Scheme.iso_hom_base_inv_base, CategoryTheory.Square.Hom.id_τ₁",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPullback.of_horiz_isIso",
+   "results": "0 hit(s). loogle: unknown identifier 'IsPullback.of_horiz_isIso'",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "identitySquare|SixFunctorCompactifiedSquare",
+   "results": "0 hit(s). No Mathlib hits.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l identitySquare dag/nodes; python3 tools/blueprint_refs.py search identitySquare; python3 tools/blueprint_refs.py search \"identity base-change\"",
+   "results": "identitySquare occurs in lem-fix-projection-compactification-comparison and lem-cbc-enhanced-equivalence-square-mates; neither is a definition node for this square. Blueprint search: 0 blueprint nodes match identitySquare; no identity base-change match. No definition-node attachment found.",
+   "date": "2026-10-19",
+   "verdict": "no existing definition node"
+  },
+  {
+   "tool": "grep",
+   "query": "identitySquare|SixFunctorCompactifiedSquare in lean/.lake/packages/mathlib/Mathlib, lean/WeilConjectures and lean/Sheaf/Paper",
+   "results": "No hits in Mathlib or WeilConjectures. Sheaf.Paper.SixFunctorOperationDatumStages defines the compactified-square record; Sheaf.Paper.FixProjectionCompactificationComparison defines identitySquare at line 62, with uses in higherLaw. This is the exact existing construction.",
+   "date": "2026-10-19",
+   "verdict": "exact existing declaration; attach it without redefining"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "def-sf-cup",
+  "date": "2026-10-19",
+  "group": "NL"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sf-cup",
+   "place": "the projection transformation for the structure morphism with its supplied compactification, at each higher coefficient stage",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-identification",
+ "lean": {
+  "module": "Sheaf.Paper.FixProjectionCompactificationComparison",
+  "declaration": "WeilConjectures.FixProjectionCompactification.identitySquare",
+  "statement": "def identitySquare {D : FiniteFieldDatum.{u}} {X Y : SixFunctorSpace D}\n    (f : X ⟶ Y) (c : Compactification f.hom.left) : SixFunctorCompactifiedSquare D",
+  "branch": "sheaf-dag",
+  "by": "NL",
+  "date": "2026-10-19",
+  "existing": true,
+  "note": "Exact existing plain definition in the published comparison module. Its data directly packages the supplied compactification with identity horizontal maps; it does not choose data from or apply the comparison theorem. Attached as a definition node to repair returned H2 without duplicating the square (H4)."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ae2fcc62",
+  "group": "NL",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ae2fcc62",
+  "group": "NL",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN (096576b3292b). Item Lean module byte-identical (sha256 75ec315f), so the prior full clause-by-clause verdict holds; re-check found no sorry, axiom, theorem or opaque. Node diff: only stmt_deps changed, theorem lem-fix-projection-compactification-comparison replaced by new def node def-sf-compactification-identity-square. That node is existing:true on WeilConjectures.FixProjectionCompactification.identitySquare in the unchanged Sheaf.Paper.FixProjectionCompactificationComparison. Its lean.statement matches the live text (lines 62-63) verbatim, its prose statement matches the Lean data, its stmt_deps are the definition nodes def-sf-operation-stages and def-weil-compactifications-refinements, and the live DAG has no other def node for the square (no H4/H12). nt_compile --json: 3.2 s, rc 0, clean. Advisories: the theorem node still lists identitySquare in its declarations and the module docstring tags it with the theorem node (accepted existing:true pattern); _S unused in the finite wrapper, as before."
+ }
+}

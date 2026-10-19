@@ -17771,3 +17771,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:35 L: merged deliver/NR/lem-a1-lisse-sections-stalk-evaluation (stage 2; reviewer PASS; parallel immutable checks)
 - 23:44 L: merged deliver/NV/lem-sf-hom-finite-projective (stage 2; reviewer PASS; parallel immutable checks)
 - 23:50 L: merged deliver/Q06/lem-sf-proper-product-counit-transpose (stage 2; reviewer PASS; parallel immutable checks)
+- 23:53 L: merged deliver/NL/def-sf-cup (stage 2; reviewer PASS; parallel immutable checks)

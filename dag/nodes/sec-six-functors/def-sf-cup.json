@@ -16,7 +16,8 @@
  },
  "stmt_deps": [
   "def-sf-datum",
-  "def-weil-derived-tensor"
+  "def-weil-derived-tensor",
+  "def-sf-compactification-identity-square"
  ],
  "proof": [],
  "proof_deps": [],
@@ -121,5 +122,33 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-4812334ec (reviewer sub-agent of L); spot-checked: I read the full delivery: the def-sf-cup item and report, with no new nodes. The blueprint def-sf-cup text is word for word the same in master (order 2184) and main-20261015 (order 2528). I also read unit sk-thm-sf-identification, the cited nodes def-sf-datum (A1 counit of La^*⊣Ra_*, A3 type of PF with second input on the target) and def-weil-derived-tensor, the PF data in def-fix-six-functor-datum, def-exchange-projection and def-sf-pf, the citers def-sf-pairing and thm-sf-identification, the same_as node def-pod-mixed-support-cup-product, and the Lean mixedSupportCupProduct at PoincarePairing.lean:138-145. The second reader's correction of the PF input from L to Ra_{X*}L is right: (A3) for a_X needs its second argument on s. It matches the Lean and def-pod. Forming PF does not need Ra_*L to have finite Tor, because the PF of def-exchange-projection is defined on the ambient categories. Edge cases (X empty, X=s, K=Λ_X) behave as expected. The only duplicate candidate is def-pod; it is a different setting and both are blueprint nodes, so same_as is the right relation. Not attaching the Lean is correct, since it is étale and finite-level only. The Mathlib searches cover all three kinds, there is no SGA citation and no tool_uses. I repaired three faults in fixes/dag/nodes/sec-six-functors/def-sf-cup.json. (1) B4: the display had literal \\n sequences and missing line breaks and & alignment marks, so it did not render; I rewrote it with both arrows labelled and the point tensor written over Λ_s. (2) E5: the clause 'levelwise application and transport' now says the composite is formed with the datum's own operations at each stage. (3) The definition asserted that the product is associative, unital and graded-commutative, with no statement node. These do not follow from axioms A1-A6, and graded-commutativity has no meaning for a mixed-support product until a support-order convention is fixed. Following def-pod, they are now marked as properties this definition does not assert. No citer uses them, so no target is affected. I added one sentence to split_report.summary recording these repairs.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SixFunctorMixedSupportCupProduct",
+  "declaration": "WeilConjectures.SixFunctorDatum.commonStageMixedSupportCupProduct",
+  "declarations": [
+   "WeilConjectures.sixFunctorFixedCupHom",
+   "WeilConjectures.sixFunctorFixedMixedSupportCupProduct",
+   "WeilConjectures.sixFunctorFiniteRingCup",
+   "WeilConjectures.sixFunctorStageMixedSupportCupProduct",
+   "WeilConjectures.SixFunctorDatum.finiteMixedSupportCupProduct",
+   "WeilConjectures.SixFunctorDatum.integralMixedSupportCupProduct",
+   "WeilConjectures.SixFunctorDatum.rationalMixedSupportCupProduct",
+   "WeilConjectures.SixFunctorDatum.commonStageMixedSupportCupProduct"
+  ],
+  "file": "lean/Sheaf/Paper/SixFunctorMixedSupportCupProduct.lean",
+  "statement": "def commonStageMixedSupportCupProduct (S : SixFunctorDatum D C E n hn) (X : SixFunctorSpace D) [IsSeparated X.obj.hom] (c : Compactification (sixFunctorStructure X).hom.left) (K L : generalAlgebraicallyClosedConstructibleCategory C.l C.Qbar X.obj.left)",
+  "branch": "sheaf-dag",
+  "by": "NL",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ae2fcc62",
+  "group": "NL",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN (096576b3292b). Item Lean module byte-identical (sha256 75ec315f), so the prior full clause-by-clause verdict holds; re-check found no sorry, axiom, theorem or opaque. Node diff: only stmt_deps changed, theorem lem-fix-projection-compactification-comparison replaced by new def node def-sf-compactification-identity-square. That node is existing:true on WeilConjectures.FixProjectionCompactification.identitySquare in the unchanged Sheaf.Paper.FixProjectionCompactificationComparison. Its lean.statement matches the live text (lines 62-63) verbatim, its prose statement matches the Lean data, its stmt_deps are the definition nodes def-sf-operation-stages and def-weil-compactifications-refinements, and the live DAG has no other def node for the square (no H4/H12). nt_compile --json: 3.2 s, rc 0, clean. Advisories: the theorem node still lists identitySquare in its declarations and the module docstring tags it with the theorem node (accepted existing:true pattern); _S unused in the finite wrapper, as before."
  }
 }
