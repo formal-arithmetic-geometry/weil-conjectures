@@ -12,6 +12,7 @@ public import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
 public import Sheaf.CategoryTheory.SheafTensor
 public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
 public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.Paper.CoefficientRingedTensorHomModel
@@ -80,7 +81,42 @@ sheaf to its underlying ring sheaf does not change this category. -/
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u + 1}) :
     IsGrothendieckAbelian.{u + 1} (SheafOfModules.{u + 1}
       ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) := by
-  sorry
+  classical
+  let S : Sheaf J RingCat.{u + 1} :=
+    (sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R
+  have : HasFilteredColimitsOfSize.{u + 1, u + 1} (SheafOfModules.{u + 1} S) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  have : AB5OfSize.{u + 1, u + 1} (SheafOfModules.{u + 1} S) :=
+    ⟨fun K _ _ ↦ HasExactColimitsOfShape.domain_of_functor K (SheafOfModules.toSheaf S)⟩
+  let T (U : C) := (PresheafOfModules.sheafification.{u + 1} (𝟙 S.obj)).obj
+    ((PresheafOfModules.free S.obj).obj (uliftYoneda.{u + 1}.obj U))
+  have hs : ObjectProperty.IsSeparating (.ofObj T) := by
+    intro M N f g h
+    apply (SheafOfModules.forget S ⋙ PresheafOfModules.toPresheaf S.obj).map_injective
+    ext ⟨U⟩ x
+    let adj := PresheafOfModules.sheafificationAdjunction.{u + 1} (𝟙 S.obj)
+    let e (M : SheafOfModules.{u + 1} S) :=
+      (adj.homEquiv
+        ((PresheafOfModules.free S.obj).obj (uliftYoneda.{u + 1}.obj U)) M).trans
+        (PresheafOfModules.freeHomEquiv.trans uliftYonedaEquiv)
+    have hn (a : T U ⟶ M) (k : M ⟶ N) :
+        (e N) (a ≫ k) = k.val.app (.op U) ((e M) a) := by
+      dsimp only [e, Equiv.trans_apply]
+      rw [adj.homEquiv_naturality_right]
+      let a' := (adj.homEquiv _ _) a
+      let k' := (SheafOfModules.forget S ⋙
+        PresheafOfModules.restrictScalars (𝟙 S.obj)).map k
+      change uliftYonedaEquiv (PresheafOfModules.freeHomEquiv (a' ≫ k')) = _
+      have hh := (PresheafOfModules.freeAdjunction S.obj).homEquiv_naturality_right a' k'
+      rw [PresheafOfModules.freeAdjunction_homEquiv,
+        PresheafOfModules.freeAdjunction_homEquiv] at hh
+      erw [hh, uliftYonedaEquiv_comp]
+    have hh := congrArg (e N) (h _ (ObjectProperty.ofObj_apply T U) ((e M).symm x))
+    rw [hn, hn, Equiv.apply_symm_apply] at hh
+    exact hh
+  have : HasSeparator (SheafOfModules.{u + 1} S) :=
+    ⟨_, hs.isSeparator_coproduct⟩
+  exact {}
 
 /-- Fix the dependency's existing totalization instance for this internal category.
 Source: Stacks 012Z; lem-pe-internal-section-tensor-comparison
@@ -148,6 +184,8 @@ def ordinaryTensorIso (M N : Internal Λ X) :
   (internal_section_tensor_comparison (Scheme.ProEt.topology X)
     (condensedRingObj Λ X)).2.choose M N
 
+attribute [local irreducible] ordinaryTensorIso
+
 /-- The canonical total-complex comparison, characterized on every total summand.
 The ordinary comparison on the right is the dependency's pure-tensor-normalized
 witness; total coproduct inclusions determine the comparison uniquely.
@@ -170,7 +208,17 @@ theorem canonicalComplexTensorComparison (P Q : CochainComplex (Internal Λ X) �
           (ordinaryTensorIso Λ X (P.X p) (Q.X q)).hom ≫
           CochainComplex.ιMapBifunctor ((complexForward Λ X).obj P)
             ((complexForward Λ X).obj Q) (sectionTensor Λ X) p q n h := by
-  sorry
+  obtain ⟨t, ht⟩ := (internal_section_tensor_comparison (Scheme.ProEt.topology X)
+    (condensedRingObj Λ X)).2.choose_spec.choose_spec.2.2.2.2.2.2.2.1 P Q
+  refine ⟨t, ?_⟩
+  intro p q n h
+  have he : ordinaryTensorIso Λ X (P.X p) (Q.X q) =
+      (internal_section_tensor_comparison (Scheme.ProEt.topology X)
+        (condensedRingObj Λ X)).2.choose (P.X p) (Q.X q) := by
+    delta ordinaryTensorIso
+    rfl
+  rw [he]
+  exact ht p q n h
 
 /-- The existing total-complex comparison, pinned on every summand by the
 ordinary tensor comparison and hence on every local pure tensor.
@@ -189,7 +237,7 @@ Proof: unfold the native cochain monoidal instance. Its tensor object is exactly
 HomologicalComplex.mapBifunctor for the relative tensor and the up shape. -/
 theorem internalTotalTensor_eq (P Q : CochainComplex (Internal Λ X) ℤ) :
     internalTotalTensor Λ X P Q = CochainComplex.mapBifunctor P Q (curriedTensor _) := by
-  sorry
+  rfl
 
 /-- The representative-model tensor and the explicit sectionwise sum total agree.
 Source: Stacks 06YL (blueprint: def-sfb-internal-section-total-comparison).
@@ -199,7 +247,7 @@ theorem sectionTotalTensor_eq (P Q : CochainComplex (Modules Λ X) ℤ) :
     CochainComplex.mapBifunctor P Q (sectionTensor Λ X) =
       (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology X) (ring Λ X)).obj
         (P, Q) := by
-  sorry
+  rfl
 
 /-- The canonical summand comparison has the concrete native tensor endpoints.
 Heterogeneous equality records only the equality of the two implementations of
@@ -216,6 +264,9 @@ theorem totalComparison_existsUnique (P Q : CochainComplex (Internal Λ X) ℤ) 
       (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology X) (ring Λ X)).obj
         ((complexForward Λ X).obj P, (complexForward Λ X).obj Q),
       HEq c (complexTensorIso Λ X P Q) := by
-  sorry
+  rw [internalTotalTensor_eq, ← sectionTotalTensor_eq]
+  refine ⟨complexTensorIso Λ X P Q, HEq.rfl, ?_⟩
+  intro c hc
+  exact eq_of_heq hc
 
 end AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison
