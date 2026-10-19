@@ -2,7 +2,7 @@
  "id": "lem-trf-exceptional-contraction-diamond",
  "kind": "statement",
  "title": "Local diamond for two exceptional rational-component contractions",
- "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $(P,M)$ be a semistable multipointed $k$-curve [def-trf-multipointed-curve, def-trf-multipointed-curve-modification], and let $r:P\\to C$ be a morphism to a $k$-scheme [def-pc-scheme]. Assume that the image under $r$ of every connected component [def-weil-connected-scheme] of $P$ contains more than one point. Call an irreducible component $A\\simeq\\mathbf P^1_k$ [def-sc-p1-standard] exceptional when $r(A)$ is a singleton and $A$ contains at most two distinct points of $M\\cup P_{\\mathrm{sing}}$, where $P_{\\mathrm{sing}}$ is the nonsmooth locus. An elementary contraction of $A$ is a scheme pushout [def-weil-pbc-category-colimit] of $P\\leftarrow A\\to\\operatorname{Spec}k$ [def-weil-affine-spectrum] whose quotient pair $(P_A,M_A)$ is semistable, whose marking map $M\\to M_A$ is an isomorphism, and through which $r$ factors. For every supplied elementary contraction $h_A:P\\to P_A$, its curve map is proper [def-weil-proper-morphism] and surjective with connected geometric fibres [def-weil-geometric-fibre], is an isomorphism $P\\setminus A\\simeq P_A\\setminus\\{h_A(A)\\}$, and its induced reference map $r_A:P_A\\to C$ again has image containing more than one point on every connected component. If $A\\ne B$ are exceptional components and elementary contractions $h_A:P\\to P_A$ and $h_B:P\\to P_B$ are supplied, then $h_A|_B$ and $h_B|_A$ identify $B$ and $A$ with exceptional irreducible components $B_A\\subset P_A$ and $A_B\\subset P_B$ for the induced reference maps. There exist elementary contractions $j_A:(P_A,M_A)\\to(T,N)$ of $B_A$ and $j_B:(P_B,M_B)\\to(T,N)$ of $A_B$ to the same semistable multipointed curve, with compatible reference map to $C$, such that $j_Ah_A=j_Bh_B$ as morphisms of pointed $k$-curves. No connectedness, separatedness or properness of the structural maps to $k$ is assumed.",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $(P,M)$ be a semistable multipointed $k$-curve [def-trf-multipointed-curve, def-trf-multipointed-curve-modification], and let $r:P\\to C$ be a proper morphism [def-weil-proper-morphism] of $k$-schemes [def-pc-scheme] (a $k$-morphism). Assume that the image under $r$ of every connected component [def-weil-connected-scheme] of $P$ contains more than one point. Call an irreducible component $A\\simeq\\mathbf P^1_k$ [def-sc-p1-standard] exceptional when $r(A)$ is a singleton and $A$ contains at most two distinct points of $M\\cup P_{\\mathrm{sing}}$, where $P_{\\mathrm{sing}}$ is the nonsmooth locus. An elementary contraction of $A$ is a scheme pushout [def-weil-pbc-category-colimit] of $P\\leftarrow A\\to\\operatorname{Spec}k$ [def-weil-affine-spectrum] whose quotient pair $(P_A,M_A)$ is semistable, whose marking map $M\\to M_A$ is an isomorphism, and through which $r$ factors. For every supplied elementary contraction $h_A:P\\to P_A$, its curve map is proper [def-weil-proper-morphism] and surjective with connected geometric fibres [def-weil-geometric-fibre], is an isomorphism $P\\setminus A\\simeq P_A\\setminus\\{h_A(A)\\}$, and its induced reference map $r_A:P_A\\to C$ is proper and again has image containing more than one point on every connected component. If $A\\ne B$ are exceptional components and elementary contractions $h_A:P\\to P_A$ and $h_B:P\\to P_B$ are supplied, then $h_A|_B$ and $h_B|_A$ identify $B$ and $A$ with exceptional irreducible components $B_A\\subset P_A$ and $A_B\\subset P_B$ for the induced reference maps. There exist elementary contractions $j_A:(P_A,M_A)\\to(T,N)$ of $B_A$ and $j_B:(P_B,M_B)\\to(T,N)$ of $A_B$ to the same semistable multipointed curve, with compatible reference map to $C$, such that $j_Ah_A=j_Bh_B$ as morphisms of pointed $k$-curves. No connectedness, separatedness or properness of the structural maps to $k$ is assumed.",
  "source": {
   "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
   "place": "Appendix B, printed p. 58, elementary exceptional-component pushouts preceding Lemma B.3 and the exceptional-tree argument in its proof. The relative noncollapse hypothesis excludes the absolute unstable cases mentioned after B.3; local diamond formulation and induction are supplied by the worker. Primary PDF read online; archival copy WANTED.",
@@ -21,9 +21,125 @@
   "def-weil-proper-morphism",
   "def-weil-geometric-fibre"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix one exceptional component $A$. The semistable curve is reduced by [lem-trf-nodal-geometric-fibres-reduced]. Put $Q=\\overline{P\\setminus A}_{\\mathrm{red}}$. By [lem-trf-nodal-subcurve-boundary] applied to the subcurve $A$, whose complementary closure is $Q$, $E=A\\cap Q$ is a finite reduced set of nodes of $P$, smooth on both $A$ and $Q$. Applied instead to the subcurve $Q$, whose complementary closure is $A$ (as $P\\setminus Q\\subseteq A$ is a nonempty open of the irreducible $A$), the same lemma shows that $Q$ is nodal; $Q$ is of finite type and pure of dimension one over $k$, so $(Q,\\varnothing)$ is a semistable multipointed $k$-curve. Since $A$ itself is smooth, every singular point of $P$ on $A$ lies in $E$: a node not meeting $Q$ would be a singular point of $A$. If $E$ were empty, $A$ would be an open-and-closed connected component of $P$, contrary to noncollapse. Thus $d=|E|\\in\\{1,2\\}$. If $m=|M\\cap A|$, the disjointness of markings and nodes gives $m+d\\le2$. The reduced subcurves $A,Q$ have scheme-theoretic union $P$: their two ideals intersect to zero since $P$ is reduced and their supports cover $P$. Therefore [lem-trf-closed-union-pushout] gives $P=Q\\amalg_E A$. Finally $Q\\to C$ is proper by [lem-weil-pbc-closed-immersion-proper].",
+   "uses": [
+    "lem-trf-nodal-geometric-fibres-reduced",
+    "lem-trf-nodal-subcurve-boundary",
+    "lem-trf-closed-union-pushout",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, printed p. 58: elementary exceptional-component contraction paragraph preceding Lemma B.3; local diamond argument supplied here. Primary source read at https://arxiv.org/pdf/0707.3953, PDF page 58; archival copy WANTED."
+   }
+  },
+  {
+   "text": "The singleton-image map $A\\to C$ factors through a $k$-point $c:\\operatorname{Spec}k\\to C$. Indeed choose an affine neighbourhood of its image. Global regular functions on $A\\simeq\\mathbf P^1_k$ are $k$: on the standard two charts of [def-sc-p1-standard] a section is a polynomial in $t$ and also a polynomial in $t^{-1}$, hence constant. Thus the affine-target morphism is induced by a ring map into $k$, a $k$-algebra map because $r$ is a $k$-morphism. Apply [lem-trf-relative-nodal-point-pinching] to the proper $k$-morphism $Q\\to C$ and $E\\to\\operatorname{Spec}k$, over $c$, to obtain $Y=Q\\amalg_E\\operatorname{Spec}k$ proper over $C$, with finite map $v:Q\\to Y$. The union pushout of Step 1 gives $h:P\\to Y$. For any target, a map out of $Y$ is exactly a map from $Q$ and a map from $\\operatorname{Spec}k$ agreeing on $E$; equivalently it is a map from $P$ whose restriction to $A$ is that constant map. Consequently $Y$ is the pushout of $P\\leftarrow A\\to\\operatorname{Spec}k$. Any supplied elementary contraction is uniquely isomorphic to this one, with its point leg and factorization to $C$.",
+   "uses": [
+    "lem-trf-relative-nodal-point-pinching",
+    "def-sc-p1-standard",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, printed p. 58: elementary exceptional-component contraction paragraph preceding Lemma B.3; local diamond argument supplied here. Primary source read at https://arxiv.org/pdf/0707.3953, PDF page 58; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Write $y=h(A)$. Away from $y$ the pinching theorem gives $P\\setminus A\\simeq Y\\setminus\\{y\\}$. The fibre over $y$ is $A$ scheme-theoretically: away from $E$ this is immediate, while at each point of $E$ the completed nodal ring of $P$ is $k[[x,z]]/(xz)$ with $A$ cut out by $x$; the pinching description sends the maximal ideal at $y$ to $(x)$. Thus every geometric fibre is a point or $\\mathbf P^1$, and is connected; the map is surjective. It is proper by [lem-weil-pbc-proper-to-separated], since $P\\to C$ is proper and $Y\\to C$ is proper, hence separated. If $d=1$, $y$ is smooth and $m\\le1$; move the possible unique marking on $A$ to $y$. If $d=2$, $y$ is a node and $m=0$. All other markings are unchanged. They remain distinct smooth closed points, so this gives a semistable marking $M_Y$ with $M\\simeq M_Y$. This constructs an elementary contraction even when one was not supplied.",
+   "uses": [
+    "lem-trf-relative-nodal-point-pinching",
+    "lem-weil-pbc-proper-to-separated",
+    "def-trf-multipointed-curve-modification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, printed p. 58: elementary exceptional-component contraction paragraph preceding Lemma B.3; local diamond argument supplied here. Primary source read at https://arxiv.org/pdf/0707.3953, PDF page 58; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Noncollapse is preserved by every such contraction. The finitely many connected components $P_i$ of $P$ are open and closed. Their images under the proper surjection $h$ are closed, connected, cover $Y$, and are pairwise disjoint: a fibre meeting two $P_i$ would be disconnected. Finiteness makes these images open as well, so they are precisely the connected components of $Y$. For each one, $r_Y(h(P_i))=r(P_i)$ has more than one point. In addition $r_Y$ is proper by the pinching theorem. This proves all permanence assertions and supplies exactly the hypotheses needed to repeat Steps 1--3 on the quotient.",
+   "uses": [
+    "lem-trf-relative-nodal-point-pinching",
+    "def-weil-proper-morphism",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, printed p. 58: elementary exceptional-component contraction paragraph preceding Lemma B.3; local diamond argument supplied here. Primary source read at https://arxiv.org/pdf/0707.3953, PDF page 58; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Now let $A\\ne B$ be exceptional. Their intersection is a reduced set of nodes by the boundary statement, and contains at most two points. If it contained two, these exhaust all singular points on each of $A,B$, so no third component could meet $A\\cup B$. Their union would be an open-and-closed connected component, and the two singleton reference images agree at their intersection. This contradicts noncollapse. Hence $|A\\cap B|\\le1$. In the pinching construction for $A$, the component $B\\subset Q$ meets the unique pinched fibre $E$ in at most one point. The subcurve clause of [lem-trf-relative-nodal-point-pinching] shows that $h_A|_B$ is a closed immersion and identifies $B$ with its reduced image $B_A$. This image is an irreducible component: $Q\\to P_A$ is finite and an isomorphism away from finitely many closed points, so the generic points, and their closures, correspond. In particular $B_A\\simeq\\mathbf P^1_k$, with singleton reference image.",
+   "uses": [
+    "lem-trf-nodal-subcurve-boundary",
+    "lem-trf-relative-nodal-point-pinching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, printed p. 58: elementary exceptional-component contraction paragraph preceding Lemma B.3; local diamond argument supplied here. Primary source read at https://arxiv.org/pdf/0707.3953, PDF page 58; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Check the special points on $B_A$. If $A\\cap B=\\varnothing$, the contraction point lies off $B_A$ and nothing changes on $B$. Otherwise write $e=A\\cap B$. For $d=1$, the old node $e$ becomes smooth, unmarked if $m=0$ and marked if $m=1$. For $d=2$, the second point of $E$ is not on $B$, by Step 5; $e$ is replaced by the new node $y$, and there is no marking on $A$. In each case the number of distinct special points on $B_A$ is no larger than on $B$. Thus $B_A$ is exceptional. Interchanging $A,B$ proves the identical assertion for $A_B$. By Step 4, $r_A,r_B$ are proper and satisfy noncollapse, so Steps 1--3 applied to these exceptional components produce elementary contractions $j_A:P_A\\to T_A$ of $B_A$ and $j_B:P_B\\to T_B$, with semistable markings transported isomorphically and induced reference maps to $C$.",
+   "uses": [
+    "lem-trf-relative-nodal-point-pinching",
+    "def-trf-multipointed-curve-modification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, printed p. 58: elementary exceptional-component contraction paragraph preceding Lemma B.3; local diamond argument supplied here. Primary source read at https://arxiv.org/pdf/0707.3953, PDF page 58; archival copy WANTED."
+   }
+  },
+  {
+   "text": "The composite $f_A=j_Ah_A$ is constant on both $A$ and $B$. The pushout property of $h_B$ first gives $v:P_B\\to T_A$ with $vh_B=f_A$. Since $h_B|_A$ is an isomorphism onto $A_B$, $v$ is constant on $A_B$. The pushout property of $j_B$ then gives $\\alpha:T_B\\to T_A$ with $\\alpha j_Bh_B=j_Ah_A$. The symmetric construction gives $\\beta:T_A\\to T_B$ with $\\beta j_Ah_A=j_Bh_B$. These maps are over $C$ and preserve the transported markings: the reference and marking equations hold after the respective quotient maps, whose universal properties determine the factorizations uniquely.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, printed p. 58: elementary exceptional-component contraction paragraph preceding Lemma B.3; local diamond argument supplied here. Primary source read at https://arxiv.org/pdf/0707.3953, PDF page 58; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Each contraction $h$ here is an epimorphism for morphisms of schemes. To check cancellation directly, choose a $k$-point $a:\\operatorname{Spec}k\\to A$. Its point leg $i:\\operatorname{Spec}k\\to P_A$ equals $h|_A\\,a$. Thus maps agreeing after $h$ also agree after $i$, and uniqueness in the pushout makes them equal. The same applies to $j_A,j_B$, since their contracted components are projective lines. The identities of Step 7 imply $\\alpha\\beta j_Ah_A=j_Ah_A$ and $\\beta\\alpha j_Bh_B=j_Bh_B$; cancellation twice gives $\\alpha\\beta=1$ and $\\beta\\alpha=1$. Take $(T,N)=(T_A,M_{T_A})$ and replace $j_B$ by $\\alpha j_B$. Composition with this isomorphism preserves its pushout property and semistable marking. Then $j_Ah_A=j_Bh_B$ as pointed $k$-morphisms over $C$, as required.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, printed p. 58: elementary exceptional-component contraction paragraph preceding Lemma B.3; local diamond argument supplied here. Primary source read at https://arxiv.org/pdf/0707.3953, PDF page 58; archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-nodal-geometric-fibres-reduced",
+  "lem-trf-nodal-subcurve-boundary",
+  "lem-trf-closed-union-pushout",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-trf-relative-nodal-point-pinching",
+  "def-sc-p1-standard",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-proper-to-separated",
+  "def-trf-multipointed-curve-modification",
+  "def-weil-proper-morphism",
+  "def-weil-connected-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Appendix B, printed p. 58: elementary exceptional-component contraction paragraph preceding Lemma B.3; local diamond argument supplied here. Primary source read at https://arxiv.org/pdf/0707.3953, PDF page 58; archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -59,10 +175,45 @@
    "results": "8 hits; top=['WeierstrassCurve.Projective.comp_equiv_comp', 'WeierstrassCurve.Jacobian.comp_equiv_comp', 'WeierstrassCurve.exists_variableChange_of_j_eq', 'WeierstrassCurve.Affine.Point.map_map', 'Matroid.contract_comm', 'WeierstrassCurve.VariableChange.mul_def', 'WeierstrassCurve.VariableChange.map_map', \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\"]; note=; digest=099e7dd51e899d16. Read the returned signatures: generic valuative criteria, normalization/coproduct identities, Weierstrass coordinate changes and matroid contraction do not state this nodal pointed-curve contraction lemma. Grep is in Mathlib/AlgebraicGeometry.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*component|contraction.*curve|semistable|semi.stable",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read the returned signatures: none states the finite closed-point pinching or closed-subscheme union theorem; coproducts and gluing along opens do not apply to closed intersections. Grep subdirectory: AlgebraicGeometry.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two unstable rational components of a nodal marked curve proper over another scheme can be contracted in either order to the same quotient",
+   "results": "8 hits; top=['AlgebraicGeometry.Scheme.RationalMap', 'AlgebraicGeometry.Scheme.instIsOverCompHomOfIsOver', 'AlgebraicGeometry.Scheme.PartialMap.noConfusionType', 'AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization', 'AlgebraicGeometry.Scheme.PartialMap.mk.noConfusion', 'AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization', 'AlgebraicGeometry.Scheme.RationalMap.IsOver.mk', 'AlgebraicGeometry.Scheme.PartialMap.noConfusion']; note=; digest=2ea354b2ceeb1d73. Read the returned signatures: none states the finite closed-point pinching or closed-subscheme union theorem; coproducts and gluing along opens do not apply to closed intersections. Grep subdirectory: all Mathlib.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"contraction\", AlgebraicGeometry.Scheme",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read the returned signatures: none states the finite closed-point pinching or closed-subscheme union theorem; coproducts and gluing along opens do not apply to closed intersections. Grep subdirectory: all Mathlib.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local diamond for contracting two exceptional projective line components of a semistable marked curve proper over its reference scheme with no connected component mapped to a point",
+   "results": "8 hits; top=['AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀', 'AlgebraicGeometry.ValuativeCommSq', \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", 'AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq', 'AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType', 'AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType', 'AlgebraicGeometry.Proj.isSeparated', 'AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index']; note=; digest=908aa5ddfdb70c30. Read the returned signatures: none states the finite closed-point pinching or closed-subscheme union theorem; coproducts and gluing along opens do not apply to closed intersections. Grep subdirectory: all Mathlib.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Confluence of blowdowns of two unstable rational curves in a semistable multipointed relative curve",
+   "results": "8 hits; top=['AlgebraicGeometry.ExistsHomHomCompEqCompAux.hab', 'AlgebraicGeometry.ExistsHomHomCompEqCompAux.g', 'AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq', 'AlgebraicGeometry.ExistsHomHomCompEqCompAux.hb', \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", 'AlgebraicGeometry.Scheme.RationalMap.isOver_iff', 'AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType', 'AlgebraicGeometry.Scheme.Pullback.Triplet.hy']; note=; digest=a077b831adafe333. Read the returned signatures: none states the finite closed-point pinching or closed-subscheme union theorem; coproducts and gluing along opens do not apply to closed intersections. Grep subdirectory: all Mathlib.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-stable-blowdown-uniqueness",
@@ -92,5 +243,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-exceptional-contraction-diamond",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: restore properness of the reference map, which Temkin assumes, because the arbitrary-map nonseparated version has an explicit doubled-origin counterexample. Prove the corrected local diamond via complementary-subcurve finite pinching, special-point counting and pushout universality. Two smaller statement-only lemmas are created; all source and Mathlib searches checked.",
+  "blueprint": "Realizes the elementary contraction/order-independence input from Temkin Appendix B.3 in the recorded semistable-alteration ancestry of lem-trf-local-term-locality. No chapter/unit route changed.",
+  "statement_correction": {
+   "old_statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $(P,M)$ be a semistable multipointed $k$-curve [def-trf-multipointed-curve, def-trf-multipointed-curve-modification], and let $r:P\\to C$ be a morphism to a $k$-scheme [def-pc-scheme]. Assume that the image under $r$ of every connected component [def-weil-connected-scheme] of $P$ contains more than one point. Call an irreducible component $A\\simeq\\mathbf P^1_k$ [def-sc-p1-standard] exceptional when $r(A)$ is a singleton and $A$ contains at most two distinct points of $M\\cup P_{\\mathrm{sing}}$, where $P_{\\mathrm{sing}}$ is the nonsmooth locus. An elementary contraction of $A$ is a scheme pushout [def-weil-pbc-category-colimit] of $P\\leftarrow A\\to\\operatorname{Spec}k$ [def-weil-affine-spectrum] whose quotient pair $(P_A,M_A)$ is semistable, whose marking map $M\\to M_A$ is an isomorphism, and through which $r$ factors. For every supplied elementary contraction $h_A:P\\to P_A$, its curve map is proper [def-weil-proper-morphism] and surjective with connected geometric fibres [def-weil-geometric-fibre], is an isomorphism $P\\setminus A\\simeq P_A\\setminus\\{h_A(A)\\}$, and its induced reference map $r_A:P_A\\to C$ again has image containing more than one point on every connected component. If $A\\ne B$ are exceptional components and elementary contractions $h_A:P\\to P_A$ and $h_B:P\\to P_B$ are supplied, then $h_A|_B$ and $h_B|_A$ identify $B$ and $A$ with exceptional irreducible components $B_A\\subset P_A$ and $A_B\\subset P_B$ for the induced reference maps. There exist elementary contractions $j_A:(P_A,M_A)\\to(T,N)$ of $B_A$ and $j_B:(P_B,M_B)\\to(T,N)$ of $A_B$ to the same semistable multipointed curve, with compatible reference map to $C$, such that $j_Ah_A=j_Bh_B$ as morphisms of pointed $k$-curves. No connectedness, separatedness or properness of the structural maps to $k$ is assumed.",
+   "reason": "Noncollapse alone does not ensure properness of an elementary pushout: attach a P1 bridge between the two origins of the doubled affine line, map the bridge to zero and the doubled line by its standard coordinate to A1. The pushout is A1, but the quotient map is not separated.",
+   "downstream": "lem-trf-valuation-stable-blowdown-uniqueness uses this diamond for an arbitrary reference map. Its application must now supply properness or be reformulated; the current caller statement does not imply properness. No other node was edited."
+  },
+  "tool_uses": [
+   {
+    "node": "lem-trf-nodal-geometric-fibres-reduced",
+    "why": "Generic scheme gluing or nodal-curve geometry tool required for the Appendix B contraction argument; no node of the unit states this input."
+   },
+   {
+    "node": "lem-trf-nodal-subcurve-boundary",
+    "why": "Generic scheme gluing or nodal-curve geometry tool required for the Appendix B contraction argument; no node of the unit states this input."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic scheme gluing or nodal-curve geometry tool required for the Appendix B contraction argument; no node of the unit states this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-nodal-geometric-fibres-reduced",
+  "lem-trf-nodal-subcurve-boundary",
+  "lem-weil-pbc-closed-immersion-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-NM-b5d78c994",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-b5d78c994 (reviewer sub-agent of L); spot-checked: Read Temkin App. B pp.57-58 (local text copy), Stacks 0C4J, 0E25, 0E26, 09NN and 03GN, the item, both new nodes, every cited statement, and the citer lem-trf-valuation-stable-blowdown-uniqueness. The statement correction is right. In the doubled-origin example (P^1 bridge between o1 and o2, r=t and 0 on A), P is an allowed non-separated semistable curve, A is exceptional and the pushout is A^1. The quotient map is not separated, so the old 'curve map proper' clause is false. Requiring r proper is Temkin's own standing hypothesis before B.3, and the correction is recorded under E7. Steps 1-8 check out: E has 1 or 2 points and m+d<=2; P is the union pushout of Q and A over E; pinching gives the contraction, a fibre that is A scheme-theoretically, and properness via proper-to-separated; noncollapse persists through clopen images; |A cap B|<=1 by noncollapse; B_A is exceptional by counting special points; alpha and beta come from the universal properties, and cancellation uses a k-point section. Both new nodes are true. lem-trf-closed-union-pushout is Stacks 0C4J, and the existing union node does not give the pushout. The pinching node holds by Ferrand: 0E25, with 09NN for the affine neighbourhoods, 0E26, and 03GN; completion k[[u]]x_k k[[v]]; the subcurve clause holds. Neither node is a duplicate or restates a clause of the item. FIX, two repairs to the item: (1) E1: the pinching node needs a proper k-morphism, so the statement now says 'proper morphism of k-schemes (a k-morphism)', and Step 2 now says the k-point is k-linear. (2) C4: Step 1's 'Q is nodal' did not follow from the boundary lemma applied to A; it now also applies the lemma with Y=Q and records that (Q,empty) is semistable. The declared tool_uses are same-unit nodes or Mathlib leaves: redundant but accepted. Maintainer: lem-trf-valuation-stable-blowdown-uniqueness (split and reviewed) cites this item for an arbitrary r. It now needs r to be a proper k-morphism, and its citer lem-trf-valuation-contracted-component-inclusion must supply that.; 1 file(s) fixed by the reviewer"
  }
 }
