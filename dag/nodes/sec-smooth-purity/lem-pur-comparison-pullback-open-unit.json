@@ -39,91 +39,75 @@
  ],
  "proof": [
   {
-   "text": "Use the notation $J,P,K,Q$ in the statement and work in the four categories of ordinary constant-$A$ module sheaves. For a pro-etale module sheaf $G$ on $V$ and an etale $W\\to T$, the direct-image formulas give\n$$(\\nu_{T,*}QG)(W)=G(W\\times_TV)=(K\\nu_{V,*}G)(W).$$\nBoth restriction maps along $h:W'\\to W$ are induced by $h\\times_T\\mathrm{id}_V$, so these identities define the natural isomorphism $\\delta:R_2\\to R_1$ specified in the statement. They respect coefficients: both constant-ring maps send $r\\in A$ to the constant section $r$ on $W\\times_TV$. Thus $\\delta$ and its inverse are maps of module sheaves, not just maps of underlying sets.",
+   "text": "Write cT and cV for the comparison adjunctions, and r and s for the etale and pro-etale restriction/direct-image adjunctions. Expand gamma = openComparisonRestrictionIso into the etale localization-uniqueness map, the canonical support-site pullback comparison, and the pro-etale localization-uniqueness map. Conjugation carries the two uniqueness maps to identities. The definition of the middle comparison by conjugateIsoEquiv therefore shows that conjugating gamma under cT.comp s and r.comp cV gives the fixed supportSiteComparisonCoefficientDirectImageIso. This is the private lemma comparisonPullbackOpenUnit_conjugate.",
    "uses": [
-    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-etale-inverse-image-restriction",
     "def-weil-proetale-inverse-image",
-    "def-weil-pbc-site-comparison-morphism"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00WX, lemma-adjoint-sheaves: right adjoint is restriction along the site functor; apply the displayed direct-image definitions"
-   }
-  },
-  {
-   "text": "Write $e:\\mathrm{id}\\to KJ$ and $f:\\mathrm{id}\\to QP$ for the units of the two open-immersion adjunctions. The inverse-image definitions supply these adjunctions for the fixed constant coefficients, and the comparison definition supplies $\\nu_S^*\\dashv\\nu_{S,*}$. The composite-adjunction formula gives units\n$$\\eta_{1,F}=K(\\eta^V_{JF})\\circ e_F,\\qquad \\eta_{2,F}=\\nu_{T,*}(f_{\\nu_T^*F})\\circ\\eta^T_F.$$\nThe first unit has target $R_1L_1F=K\\nu_{V,*}\\nu_V^*JF$, the second target $R_2L_2F=\\nu_{T,*}QP\\nu_T^*F$. These are the actual specified adjunctions; no new adjunction with a rescaled unit is introduced.",
-   "uses": [
-    "def-weil-pbc-inverse-image",
-    "def-weil-proetale-inverse-image",
-    "def-weil-pbc-site-comparison-morphism",
-    "def-weil-pbc-composite-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0DV0, lemma-compose-counits, and the dual unit formula in def-weil-pbc-composite-adjunction"
-   }
-  },
-  {
-   "text": "Apply the conjugate-isomorphism unit equation to $L_1\\dashv R_1$, $L_2\\dashv R_2$ and the isomorphism $\\delta:R_2\\to R_1$ of step 1. Since $\\gamma=a^{-1}$ is this conjugate by the explicit specification in the statement, it satisfies\n$$K\\nu_{V,*}(\\gamma_F)\\circ K(\\eta^V_{JF})\\circ e_F\n=\\delta_{P\\nu_T^*F}\\circ\\nu_{T,*}(f_{\\nu_T^*F})\\circ\\eta^T_F.$$\nThis is the generic conjugate-unit theorem with the two composite units expanded using step 2. Its hypotheses are just two adjunctions between the same two categories and an isomorphism of their right adjoints, all provided above. In particular, we have not asserted that an arbitrary natural isomorphism from the pullback-comparison existence theorem satisfies this equation.",
-   "uses": [
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "def-weil-pbc-composite-adjunction"
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints, unit form; Mathlib CategoryTheory.unit_conjugateEquiv_symm, Mates.lean:311"
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints, applied to the canonical localization adjunctions; Mathlib CategoryTheory/Adjunction/Mates.lean."
    }
   },
   {
-   "text": "Let $W\\to V$ be etale and regard $W$ also as etale over $T$; $j$ is etale [lem-weil-pbc-open-immersion-etale], so the etale restriction-unit theorem applies to $j$. Since $j$ is an open immersion, hence a monomorphism, the projection $\\mathrm{pr}:W\\times_TV\\to W$ is an isomorphism with inverse $\\varphi_0=(\\mathrm{id}_W,\\mathrm{str})$: the entire image of $W\\to T$ lies in $V$. Use this canonical identification throughout. Etale side: clause (2) of the etale restriction-unit theorem makes $\\rho_F\\circ e_F(W)$ the restriction of $F$ along $\\mathrm{pr}$, hence the identity under this identification; $\\rho$ is natural, so it commutes with every scalar endomorphism and the same holds for module sheaves. Pro-etale side, with the identification $\\sigma$ of the statement: by the pro-etale inverse-image definition the adjunction $P\\dashv Q$ is that of [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction], whose bijection is the composite of Stacks 00VE (lemma-adjoints-u) and sheafification; in 00VE the adjunct of $\\alpha$ is $u^p\\alpha\\circ c(\\mathrm{id}_{u(U)})$ (lemma-recover), so the unit $f_M(W):M(W)\\to(PM)(W\\times_TV)$ is the coprojection indexed by $(W,\\mathrm{id})$ followed by $u_pM\\to(u_pM)^\\#$. By clause (1) of [lem-sfb-proetale-object-inverse-image-restriction], $\\sigma^{-1}$ at $W\\times_TV\\to V$ is the coprojection indexed by the initial pair $(W\\times_TV\\to T,\\varphi_0')$ followed by the same sheafification map. The arrow $\\mathrm{pr}$ goes from this pair to $(W,\\mathrm{id})$ in $\\mathcal I$, since $u(\\mathrm{pr})\\varphi_0'=\\mathrm{id}$ on both projections, so the colimit relation gives $\\iota_{(W,\\mathrm{id})}(m)=\\iota_{\\mathrm{init}}(\\mathrm{pr}^*m)$. Thus $\\sigma\\circ f_M(W)$ is restriction along $\\mathrm{pr}$, the identity under the identification, for $M=\\nu_T^*F$. The unit is natural, hence commutes with scalars. No quasi-compactness is used, and the identification of $P$ is exactly the one fixed in the statement.",
+   "text": "Compute the mate of the fixed restriction identity c under s and r. Evaluate it on a pro-etale module sheaf M and an etale object W. Expanding the mate and the restriction adjunctions leaves the composite of the two canonical pullback maps, with identity components from c. Functoriality reduces their equality to the equality of the underlying arrows into the chosen pullback; both projections agree by the pullback lift equations. Thus this mate is exactly supportSiteComparisonCoefficientDirectImageIso. This is comparisonPullbackOpenUnit_directImage_mate, proved componentwise in ModuleCat, so all scalar actions are preserved.",
    "uses": [
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-open-immersion-etale",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-inverse-image",
     "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-    "lem-sfb-proetale-object-inverse-image-restriction",
-    "def-weil-open-immersion"
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-comparison-pullback"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03S2, section-extension-by-zero, restriction description after Definition 03S3; proetale.tex Tag 09BN, lemma-open-immersion, with sites.tex Tag 03CE, lemma-localize-given-products"
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WX, lemma-adjoint-sheaves; localization restriction/direct-image adjunction and its explicit pullback unit and counit."
    }
   },
   {
-   "text": "Evaluate the equation of step 3 at $W\\to T$ and use step 4. By step 1 the component of $\\delta$ is also the identity on the same sections. Thus, with the prescribed restriction identifications, the equation becomes\n$$\\nu_{V,*}(\\gamma_F)(W)\\circ\\eta^V_{JF}(W)\n=c_{\\nu_T^*F}(W)\\circ J(\\eta^T_F)(W).$$\nCompose on the left with $\\nu_{V,*}(a_F)(W)$. Since $a_F\\gamma_F=\\mathrm{id}$, this gives exactly the asserted unit equation at $W$. This works for every etale $W\\to V$, so it is an equality of sheaf morphisms: a natural transformation is determined by its object components. All these components are module homomorphisms by steps 1--4; the equality therefore holds in the stated module category. Applying the component equality to $s\\in F(W\\to T)$ gives the sectionwise formulation, and conversely equality on all such sections gives the component equality.",
+   "text": "Let alpha be the TwoSquare with natural transformation gamma.hom, and theta the TwoSquare with natural transformation c.hom. Apply the injectivity of mateEquiv s r to compare mateEquiv cT cV alpha with theta. The iterated-mate/conjugate equation identifies the former image with the conjugate computed in step 1; step 2 identifies the latter image with the same direct-image comparison. Hence mateEquiv cT cV alpha = theta.",
    "uses": [
     "def-weil-pbc-site-comparison-morphism",
-    "def-weil-sheaf-of-modules-category"
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints, applied to the canonical localization adjunctions; Mathlib CategoryTheory/Adjunction/Mates.lean."
+   }
+  },
+  {
+   "text": "The unit_mateEquiv equation for cT, cV and alpha now gives J(etaT_F) followed by c at nuT^*F equal to etaV at JF followed by nuV_*(gamma_F). Compose with nuV_*(a_F), where a is definitionally gamma inverse. Functoriality, gamma.hom_inv_id_app, and the identity laws cancel these factors and give the exact stated equation. No assumptions on nonemptiness or nonzero coefficients enter, so identity and empty immersions, the zero sheaf and the zero ring are included.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints: specialize the unit equation and cancel the inverse isomorphisms"
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints, applied to the canonical localization adjunctions; Mathlib CategoryTheory/Adjunction/Mates.lean."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-etale-inverse-image-restriction",
   "def-weil-proetale-inverse-image",
-  "def-weil-pbc-site-comparison-morphism",
-  "def-weil-pbc-inverse-image",
   "def-weil-pbc-composite-adjunction",
   "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-open-immersion-etale",
-  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-  "lem-sfb-proetale-object-inverse-image-restriction",
-  "def-weil-open-immersion",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-site-comparison-morphism"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/categories.tex",
-  "place": "Tags 0B65 (lemma-transformation-between-functors-and-adjoints) and 0DV0 (lemma-compose-counits); expand the composite units and evaluate over the open subscheme. This open-restriction refinement is not stated verbatim in Stacks."
+  "place": "Tag 0B65, unit form of conjugation. H8 formalization uses Mathlib unit_mateEquiv and iterated_mateEquiv_conjugateEquiv; the two private mate-identification proofs reuse the already proved derivations in Sheaf.AlgebraicGeometry.OpenComparisonUnitNormalization, with their final combination specialized to the comparison-adjunction unit."
  },
  "mathlib_searches": [
   {
@@ -206,8 +190,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-sfb-proetale-object-inverse-image-restriction"
+  "lem-weil-pbc-etale-inverse-image-restriction"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -240,5 +223,15 @@
   "by": "Q108",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-a21e1",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261019T093442-L-2313044",
+  "kind": "proof",
+  "note": "independent cc review: delivered ComparisonPullbackOpenUnit.lean (compiled, axioms clean, importer DerivedSupportDirectImageComparison compiled) against live clone, node lem-pur-comparison-pullback-open-unit (only proof fields changed) and unit sk-prop-a1-kummer (realized empty, so no unit bypassed)"
  }
 }
