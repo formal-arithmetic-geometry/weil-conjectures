@@ -17079,3 +17079,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:13 L: returned deliver/O4/lem-trf-hilbert-samuel-local-presentations (reviewer RETURN: I read the item (statement and 9 steps), all 5 new nodes, the parent resolution-invariant-calculus (Steps 2/3/5/6/7 cite)
 - 04:14 L: merged deliver/NC/lem-pur-compact-support-condensed-realization (stage 2; reviewer PASS; parallel immutable checks)
 - 04:16 L: merged deliver/Q124/lem-zl-weil-constant-extension-frobenius (stage 2; reviewer PASS; parallel immutable checks)
+- 04:34 L: returned deliver/N7/lem-tw-lisse-rational-realization (reviewer RETURN: L: independent stage-2 immutable head 49c0ff749400: Lean module sha 787e4e0b is byte-identical to returned heads 5c136a5)
