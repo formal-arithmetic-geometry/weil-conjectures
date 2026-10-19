@@ -9,17 +9,13 @@ public import Sheaf.RingTheory.GRing
 public import Sheaf.RingTheory.IndPrincipalZariski
 public import WeilConjectures.RingTheory.ProEtale.WeaklyEtale
 public import Mathlib.RingTheory.Noetherian.Defs
-import Sheaf.RingTheory.Flat.LocalizationPreservesFlatness
+import WeilConjectures.RingTheory.ProEtale.WeaklyEtaleField
 import Sheaf.RingTheory.FibreRingNoetherian
-import Sheaf.RingTheory.IndEtaleStability
-import Sheaf.RingTheory.WeaklyEtaleField
-import Sheaf.RingTheory.FiniteSeparableFibersOfEtaleColimit
-import Sheaf.RingTheory.FormallySmoothAdic
 import Sheaf.RingTheory.FormallySmoothAdicOfFlatClosedFiber
 import Sheaf.RingTheory.FormallySmoothAdicCompleteSourceTarget
-import Sheaf.RingTheory.AdicCompletionNoetherian
-import Mathlib.RingTheory.AdicCompletion.Algebra
 import Sheaf.RingTheory.FormallySmoothCompleteLocalRegular
+import Sheaf.RingTheory.GeometricRegularityFieldIso
+import Sheaf.RingTheory.GeometricallyRegularFieldExtension
 import Sheaf.RingTheory.RegularComposition
 import Sheaf.RingTheory.LocalizationOfRegularRing
 import Sheaf.RingTheory.GeometricRegularitySeparableExtension
@@ -27,11 +23,7 @@ import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.RingTheory.Flat.Localization
 import Mathlib.RingTheory.Etale.Field
 import Mathlib.RingTheory.AdicCompletion.LocalRing
-import Mathlib.RingTheory.AdicCompletion.Completeness
-import Mathlib.RingTheory.AdicCompletion.Basic
 import Mathlib.RingTheory.TensorProduct.Maps
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Sheaf.RingTheory.IndEtaleUniverseTransport
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 
 /-!
@@ -50,116 +42,336 @@ universe u v
 
 namespace RingHom
 
+private theorem field_localization_of_absolutelyFlat
+    {D : Type u} {K : Type v} [CommRing D] [Field K] [Ring.AbsolutelyFlat D]
+    (ε : D →+* K) (hε : ε.SurjectiveOnStalks) :
+    let _ := ε.toAlgebra
+    let _ := RingHom.ker_isPrime ε
+    IsLocalization (RingHom.ker ε).primeCompl K := by
+  let _ := ε.toAlgebra
+  let _ := RingHom.ker_isPrime ε
+  apply (isLocalization_iff (RingHom.ker ε).primeCompl K).mpr
+  refine ⟨?_, ?_, ?_⟩
+  · intro x
+    exact isUnit_iff_ne_zero.mpr x.2
+  · intro y
+    obtain ⟨a, r, c, hc, hr, he⟩ :=
+      (surjective_localRingHom_iff (⊥ : Ideal K)).mp (hε ⊥ inferInstance) y
+    have hc' : c ≠ 0 := hc
+    have hr' : ε r ≠ 0 := hr
+    refine ⟨⟨a, ⟨r, hr'⟩⟩, ?_⟩
+    change y * ε r = ε a
+    exact (mul_comm y (ε r)).trans (mul_left_cancel₀ hc' (by
+      simpa only [mul_assoc] using he))
+  · intro x y hxy
+    change ε x = ε y at hxy
+    obtain ⟨b, hb⟩ := Ring.AbsolutelyFlat.exists_eq_mul_self_mul (x - y)
+    have hεsub : ε (x - y) = 0 := by rw [map_sub, hxy, sub_self]
+    refine ⟨⟨1 - (x - y) * b, ?_⟩, ?_⟩
+    · change ε (1 - (x - y) * b) ≠ 0
+      simp [hεsub]
+    · change (1 - (x - y) * b) * x = (1 - (x - y) * b) * y
+      apply sub_eq_zero.mp
+      calc
+        _ = (x - y) - (x - y) * (x - y) * b := by ring
+        _ = 0 := sub_eq_zero.mpr hb
+
+private theorem regular_localization (D : Type u) (E : Type v)
+    [CommRing D] [CommRing E] [Algebra D E] [IsRegularRing D]
+    (M : Submonoid D) [IsLocalization M E] : IsRegularRing E := by
+  apply RingTheory.isRegularRing_of_localization D E M (algebraMap D E)
+  · exact IsLocalization.map_units E
+  · intro y
+    obtain ⟨⟨r, s⟩, hy⟩ := IsLocalization.surj M y
+    obtain ⟨z, hz⟩ := (IsLocalization.map_units E s).exists_right_inv
+    refine ⟨r, s, z, IsUnit.of_mul_eq_one_right _ hz, hz, ?_⟩
+    calc
+      y = y * (algebraMap D E s * z) := by rw [hz, mul_one]
+      _ = algebraMap D E r * z := by rw [← mul_assoc, hy]
+  · intro r hr
+    obtain ⟨s, hs⟩ := (IsLocalization.eq_iff_exists M E).mp
+      (show algebraMap D E r = algebraMap D E 0 by simpa only [map_zero] using hr)
+    exact ⟨s, by simpa only [mul_zero] using hs⟩
+
+private theorem geometric_localization (k : Type u) (D : Type v) (E : Type*)
+    [Field k] [CommRing D] [CommRing E] [Algebra k D] [Algebra k E]
+    [Algebra D E] [IsScalarTower k D E] (M : Submonoid D) [IsLocalization M E]
+    (hD : Algebra.IsGeometricallyRegular k D) : Algebra.IsGeometricallyRegular k E := by
+  have : IsNoetherianRing D := hD.1
+  refine ⟨IsLocalization.isNoetherianRing M E hD.1, ?_⟩
+  intro K _ _ _ _
+  have : IsRegularRing (TensorProduct k K D) :=
+    Algebra.isRegularRing_tensorProduct_of_isGeometricallyRegular hD K
+      (IntermediateField.fg_top k K)
+  let φ : TensorProduct k K D →ₐ[K] TensorProduct k K E :=
+    Algebra.TensorProduct.lTensor K (IsScalarTower.toAlgHom k D E)
+  let : Algebra (TensorProduct k K D) (TensorProduct k K E) := φ.toRingHom.toAlgebra
+  have : IsScalarTower K (TensorProduct k K D) (TensorProduct k K E) :=
+    IsScalarTower.of_algebraMap_eq' φ.comp_algebraMap.symm
+  have : IsLocalization
+      (M.map (Algebra.TensorProduct.includeRight (R := k) (A := K)))
+      (TensorProduct k K E) := by
+    apply IsLocalization.tensorProduct_tensorProduct_right k K M E
+    ext r
+    change φ (TensorProduct.tmul k 1 r) = TensorProduct.tmul k 1 (algebraMap D E r)
+    simp [φ]
+  exact regular_localization (TensorProduct k K D) (TensorProduct k K E)
+    (M.map (Algebra.TensorProduct.includeRight (R := k) (A := K)))
+
+private theorem cancel_weaklyEtale_fibres
+    (R : Type u) (S : Type v) (C : Type*)
+    [CommRing R] [CommRing S] [CommRing C]
+    [Algebra R S] [Algebra S C] [Algebra R C] [IsScalarTower R S C]
+    [Algebra.WeaklyEtale R S] [IsNoetherianRing C]
+    (hreg : (algebraMap R C).IsRegular) :
+    ∀ (q : Ideal S) [q.IsPrime], Algebra.IsGeometricallyRegular q.ResidueField (q.Fiber C) := by
+  rw [IsRegular, toAlgebra_algebraMap] at hreg
+  intro q hq
+  let p := q.comap (algebraMap R S)
+  let k := p.ResidueField
+  let L := q.ResidueField
+  let F := p.Fiber S
+  let ρ : k →ₐ[R] L := Ideal.ResidueField.mapₐ p q (Algebra.ofId R S) rfl
+  let : Algebra k L := ρ.toRingHom.toAlgebra
+  have : IsScalarTower R k L := IsScalarTower.of_algebraMap_eq' ρ.comp_algebraMap.symm
+  let ε : F →ₐ[k] L :=
+    { __ := Algebra.TensorProduct.lift ρ (IsScalarTower.toAlgHom R S L)
+        (fun _ _ ↦ Commute.all _ _)
+      commutes' x := by
+        change (Algebra.TensorProduct.lift ρ (IsScalarTower.toAlgHom R S L)
+          (fun _ _ ↦ Commute.all _ _)) (TensorProduct.tmul R x 1) = ρ x
+        rw [Algebra.TensorProduct.lift_tmul]
+        simp }
+  let : Algebra F L := ε.toRingHom.toAlgebra
+  have : IsScalarTower k F L := IsScalarTower.of_algebraMap_eq' ε.comp_algebraMap.symm
+  let : Algebra S F := Algebra.TensorProduct.rightAlgebra
+  have : IsScalarTower S F L := IsScalarTower.of_algebraMap_eq fun s ↦ by
+    change algebraMap S L s = ε (TensorProduct.tmul R 1 s)
+    change algebraMap S L s =
+      (Algebra.TensorProduct.lift ρ (IsScalarTower.toAlgHom R S L)
+        (fun _ _ ↦ Commute.all _ _)) (TensorProduct.tmul R 1 s)
+    rw [Algebra.TensorProduct.lift_tmul]
+    simp
+  have hε : ε.toRingHom.SurjectiveOnStalks := by
+    have heq : ε.toRingHom.comp
+        (Algebra.TensorProduct.includeRight : S →ₐ[R] F).toRingHom = algebraMap S L := by
+      ext s
+      change ε (TensorProduct.tmul R 1 s) = algebraMap S L s
+      change (Algebra.TensorProduct.lift ρ (IsScalarTower.toAlgHom R S L)
+        (fun _ _ ↦ Commute.all _ _)) (TensorProduct.tmul R 1 s) = _
+      rw [Algebra.TensorProduct.lift_tmul]
+      simp
+    exact RingHom.SurjectiveOnStalks.of_comp (heq.symm ▸ q.surjectiveOnStalks_residueField)
+  have : Algebra.WeaklyEtale k F := inferInstance
+  have : Ring.AbsolutelyFlat F :=
+    Ring.AbsolutelyFlat.of_flat_lmul' k F (Algebra.WeaklyEtale.flat_lmul' k F)
+  have : (RingHom.ker ε.toRingHom).IsPrime := RingHom.ker_isPrime ε.toRingHom
+  have : IsLocalization (RingHom.ker ε.toRingHom).primeCompl L :=
+    field_localization_of_absolutelyFlat ε.toRingHom hε
+  have : Algebra.WeaklyEtale F L :=
+    Algebra.WeaklyEtale.of_isLocalization F (RingHom.ker ε.toRingHom).primeCompl L
+  have : Algebra.WeaklyEtale k L := Algebra.WeaklyEtale.trans k F L
+  have : Algebra.IsSeparable k L := Algebra.WeaklyEtale.isAlgebraic
+  let D := p.Fiber C
+  let E := TensorProduct S F C
+  let e : E ≃ₐ[k] D := Algebra.IsPushout.cancelBaseChangeAlg R k S F C
+  let εS : F →ₐ[S] L :=
+    { ε.toRingHom with
+      commutes' s := by
+        exact (IsScalarTower.algebraMap_apply S F L s).symm }
+  let fS : E →ₐ[S] q.Fiber C :=
+    Algebra.TensorProduct.map εS (AlgHom.id S C)
+  let f : E →ₐ[k] q.Fiber C :=
+    { fS.toRingHom with
+      commutes' x := by
+        change fS (TensorProduct.tmul S (algebraMap k F x) 1) =
+          TensorProduct.tmul S (algebraMap k L x) 1
+        change ε (algebraMap k F x) ⊗ₜ[S] (1 : C) = _
+        rw [ε.commutes] }
+  let : Algebra E (q.Fiber C) := f.toRingHom.toAlgebra
+  have : IsScalarTower F E (q.Fiber C) := IsScalarTower.of_algebraMap_eq fun x ↦ by
+    change TensorProduct.tmul S (ε x) 1 = f (TensorProduct.tmul S x 1)
+    rfl
+  have : IsScalarTower k E (q.Fiber C) :=
+    IsScalarTower.of_algebraMap_eq' f.comp_algebraMap.symm
+  have : IsLocalization
+      (Algebra.algebraMapSubmonoid E (RingHom.ker ε.toRingHom).primeCompl) (q.Fiber C) := by
+    apply IsLocalization.tensorProduct_tensorProduct S C
+      (RingHom.ker ε.toRingHom).primeCompl L
+    ext c
+    change ε (1 : F) ⊗ₜ[S] c = (1 : L) ⊗ₜ[S] c
+    rw [map_one]
+  have hD : Algebra.IsGeometricallyRegular k D := by
+    simpa [D] using hreg.2 p
+  have hE : Algebra.IsGeometricallyRegular k E :=
+    Algebra.isGeometricallyRegular_of_fieldIso (RingEquiv.refl k) e.symm.toRingEquiv
+      (fun x a ↦ e.symm.toLinearEquiv.map_smul x a) hD
+  have hQ := geometric_localization k E (q.Fiber C)
+    (Algebra.algebraMapSubmonoid E (RingHom.ker ε.toRingHom).primeCompl) hE
+  have : IsNoetherianRing (q.Fiber C) := Ideal.isNoetherianRing_fiber q
+  exact Algebra.isGeometricallyRegular_of_isSeparable k L (q.Fiber C) hQ
+
+private theorem closed_fiber_fs
+    (R : Type u) (S : Type v) [CommRing R] [CommRing S]
+    [IsLocalRing R] [IsLocalRing S] [Algebra R S]
+    [IsLocalHom (algebraMap R S)] [Algebra.WeaklyEtale R S] :
+    let I := (IsLocalRing.maximalIdeal R).map (algebraMap R S)
+    let := Ideal.Quotient.algebraQuotientOfLEComap
+      (Ideal.le_comap_map : IsLocalRing.maximalIdeal R ≤ I.comap (algebraMap R S))
+    Algebra.FormallySmoothAdic (R ⧸ IsLocalRing.maximalIdeal R) (S ⧸ I)
+      ((IsLocalRing.maximalIdeal S).map (Ideal.Quotient.mk I)) := by
+  let k := R ⧸ IsLocalRing.maximalIdeal R
+  let : Field k := Ideal.Quotient.field _
+  let F := TensorProduct R k S
+  have : Algebra.WeaklyEtale k F := inferInstance
+  have : Ring.AbsolutelyFlat F :=
+    Ring.AbsolutelyFlat.of_flat_lmul' k F (Algebra.WeaklyEtale.flat_lmul' k F)
+  have : IsLocalRing F := by
+    change IsLocalRing (TensorProduct R (IsLocalRing.ResidueField R) S)
+    infer_instance
+  let : Field F := (Ring.AbsolutelyFlat.isField_of_isLocalRing F).toField
+  have : Algebra.IsSeparable k F := Algebra.WeaklyEtale.isAlgebraic
+  have : Algebra.FormallyEtale k F := Algebra.FormallyEtale.of_isSeparable k F
+  let I := (IsLocalRing.maximalIdeal R).map (algebraMap R S)
+  let := Ideal.Quotient.algebraQuotientOfLEComap
+    (Ideal.le_comap_map : IsLocalRing.maximalIdeal R ≤ I.comap (algebraMap R S))
+  let ek : F ≃ₐ[k] S ⧸ I :=
+    (Algebra.TensorProduct.quotIdealMapEquivQuotTensor S (IsLocalRing.maximalIdeal R)).symm
+  have : Algebra.FormallySmooth k (S ⧸ I) := Algebra.FormallySmooth.of_equiv ek
+  dsimp only
+  intro D _ _ J hJ a _
+  exact Algebra.FormallySmooth.comp_surjective k (S ⧸ I) J hJ a
+
+private theorem completion_regular
+    (R : Type u) (S : Type v) [CommRing R] [CommRing S]
+    [IsLocalRing R] [IsLocalRing S] [IsNoetherianRing R] [IsNoetherianRing S]
+    (g : R →+* S) [IsLocalHom g]
+    (hfs : letI := g.toAlgebra
+      Algebra.FormallySmoothAdic R S (IsLocalRing.maximalIdeal S)) :
+    ∃ ψ : AdicCompletion (IsLocalRing.maximalIdeal R) R →+*
+        AdicCompletion (IsLocalRing.maximalIdeal S) S,
+      ψ.comp (algebraMap R (AdicCompletion (IsLocalRing.maximalIdeal R) R)) =
+        (algebraMap S (AdicCompletion (IsLocalRing.maximalIdeal S) S)).comp g ∧
+      ψ.IsRegular := by
+  obtain ⟨ψ, hψ, hψfs⟩ := Algebra.exists_formallySmoothAdic_completeSourceTarget R S g
+  have hcomm : ψ.comp (algebraMap R (AdicCompletion (IsLocalRing.maximalIdeal R) R)) =
+      (algebraMap S (AdicCompletion (IsLocalRing.maximalIdeal S) S)).comp g := by
+    apply RingHom.ext
+    intro r
+    apply AdicCompletion.ext_evalₐ
+    intro n
+    exact (hψ n _ r (AdicCompletion.evalₐ_of _ n r)).trans
+      (AdicCompletion.evalₐ_of _ n (g r)).symm
+  have : IsLocalHom ψ := by
+    apply ((IsLocalRing.local_hom_TFAE ψ).out 0 2).mpr
+    rw [AdicCompletion.maximalIdeal_eq_map (R := R), Ideal.map_map, hcomm,
+      ← Ideal.map_map, AdicCompletion.maximalIdeal_eq_map (R := S)]
+    exact Ideal.map_mono (IsLocalRing.map_maximalIdeal_le g)
+  have : IsNoetherianRing (AdicCompletion (IsLocalRing.maximalIdeal R) R) :=
+    AdicCompletion.isNoetherianRing _
+  have : IsNoetherianRing (AdicCompletion (IsLocalRing.maximalIdeal S) S) :=
+    AdicCompletion.isNoetherianRing _
+  refine ⟨ψ, hcomm, isRegular_of_formallySmoothAdic ψ ?_⟩
+  rw [AdicCompletion.maximalIdeal_eq_map (R := S)]
+  exact hψfs hfs
+
 /-- The target of a weakly etale homomorphism of Noetherian rings is a G-ring if its
 source is a G-ring. Source: Greco, Two theorems on excellent rings, Theorem 5.3(i),
 with P = geometrically regular in Section 1.1 and the equivalence in Remark 5.2;
 Stacks Project, Definition 07GH (blueprint: lem-exc-weakly-etale-g-ring).
 
 Proof:
-1. Fix an arbitrary prime $\mathfrak q\subset B$, put $\mathfrak p=f^{-1}(\mathfrak q)$,
-   $R=A_{\mathfrak p}$ and $S=B_{\mathfrak q}$, and let $g:R\to S$ be the induced map. Weak
-   etaleness supplies flatness of $f$ by [def-weil-pbc-ind-etale-algebra]. By
-   [lem-weil-pbc-flat-local-ring-maps], $R$ and $S$ are Noetherian local rings and $g$ is flat and
-   local. Write $u:R\to\widehat R$ and $v:S\to\widehat S$ for their completion maps. The G-ring
-   hypothesis on $A$, unfolded by [def-weil-pbc-g-ring], says exactly that $u$ is regular. It
-   remains to show that $v$ is regular for every such $\mathfrak q$. If $B$ has no primes, this
-   universal condition is vacuous.
-
-2. The localized map $g$ is weakly etale, as follows directly from the flat multiplication
-   criterion. Put $T=B\otimes_A B$ and $U=B\setminus\mathfrak q$. The $T$-module $B$, via
-   multiplication, is flat; [lem-pc-affine-flat-module-localization-preserves-flatness] with this
-   $B$-module and $U$ shows that $S=U^{-1}B$ is flat over $T$. The ring $S\otimes_R S$ is the
-   localization of $T$ obtained by inverting $b\otimes1$ and $1\otimes b$ for $b\in U$: the forward
-   map sends $(b/u)\otimes(c/w)$ to $(b\otimes c)/((u\otimes1)(1\otimes w))$, and the inverse sends
-   $b\otimes c$ to $(b/1)\otimes(c/1)$ and inverts the displayed denominator factors. The balancing
-   relations hold over $A$, and elements of $A\setminus\mathfrak p$ are already units in both
-   factors. Its action on $S$ is multiplication. By [lem-weil-pbc-flat-over-localization], $S$ is
-   flat over $S\otimes_R S$. Together with step 1 this is the two-flatness definition
-   [def-weil-pbc-ind-etale-algebra].
-
-3. For each prime $\mathfrak t\subset R$ put $k_{\mathfrak t}=\kappa(\mathfrak t)$ and $F_{\mathfrak
-   t}=S\otimes_R k_{\mathfrak t}$. This fibre is Noetherian by [lem-weil-pbc-fibre-ring-noetherian]
-   and weakly etale over the field $k_{\mathfrak t}$ by the base-change clause of
-   [lem-weil-pbc-ind-etale-stability]. The ind-etale conclusion of [lem-weil-pbc-weak-etale-field]
-   gives a filtered presentation by etale algebras over this field. Apply
-   [lem-weil-pbc-henselization-finite-separable-fibres] to $k_{\mathfrak t}\to F_{\mathfrak t}$ at
-   the zero prime of the base field. It gives a finite product $F_{\mathfrak t}\cong\prod_{i=1}^r
-   L_i$ with every $L_i/k_{\mathfrak t}$ separable algebraic. The factors are the residue fields
-   $\kappa(\mathfrak s_i)$ of the primes of $S$ contracting to $\mathfrak t$: prime ideals and
-   residue fields on both sides agree by taking first the quotient by $\mathfrak t$ and then
-   inverting the elements of $R\setminus\mathfrak t$. The empty product is allowed if the fibre is
-   empty.
-
-4. At $\mathfrak t=\mathfrak m_R$ the closed fibre $S/\mathfrak m_RS$ is nonzero and local, since
-   $\mathfrak m_RS\subseteq\mathfrak m_S$ and it is a quotient of $S$. A nonzero finite product of
-   fields is local only when there is one factor: for two nonzero coordinate idempotents $e$ and
-   $1-e$, neither is a unit, contradicting locality. Thus this fibre is $L=\kappa(\mathfrak m_S)$
-   and $L/k_{\mathfrak m_R}$ is separable algebraic by step 3. By
-   [lem-exc-separable-algebraic-square-zero-lifting], every $k_{\mathfrak m_R}$-algebra map from $L$
-   to a square-zero quotient lifts. The maximal ideal of $L$ is zero, so every such map kills its
-   first power. This is exactly formal smoothness of the closed fibre for its maximal-ideal-adic
-   topology by [def-weil-pbc-formally-smooth-adic].
-
-5. Apply [lem-weil-pbc-flat-formally-smooth-closed-fibre-adic] to the flat local map $g:R\to S$ of
-   step 1 and the formally smooth closed fibre of step 4. It gives formal smoothness of $S/R$ for
-   the $\mathfrak m_S$-adic topology. Now [lem-weil-pbc-fs-adic-complete-source-target] gives the
-   coordinate homomorphism $\widehat g:\widehat R\to\widehat S$ and formal smoothness of $\widehat
-   S/\widehat R$ for the $\mathfrak m_S\widehat S$-adic topology. The map sends a compatible
-   sequence represented by $r_n\bmod\mathfrak m_R^n$ to $g(r_n)\bmod\mathfrak m_S^n$; locality of
-   $g$ makes these maps well-defined and compatible. Both $\widehat g\circ u$ and $v\circ g$ send
-   $r$ to $g(r)\bmod\mathfrak m_S^n$ at every level, hence they agree.
-
-6. For $T=R,S$, the completion $\widehat T$ is Noetherian by
-   [lem-weil-pbc-adic-completion-noetherian]. Its maximal ideal $\mathfrak m_T$ is finitely
-   generated since $T$ is Noetherian. By [lem-weil-pbc-adic-completion-mod-ideal], $\widehat T$ is
-   complete for $I_T=\mathfrak m_T\widehat T$ and $\widehat T/I_T\cong T/\mathfrak m_T$, a field. By
-   [lem-weil-pbc-adic-complete-jacobson-radical], every maximal ideal contains $I_T$; the field
-   quotient then forces $I_T$ to be the unique maximal ideal. The first-coordinate formula in step 5
-   sends the kernel of $\widehat R\to R/\mathfrak m_R$ into that of $\widehat S\to S/\mathfrak m_S$,
-   so $\widehat g$ is local. Thus step 5 supplies exactly the formal-smoothness hypothesis for this
-   local map of complete Noetherian local rings, and
-   [lem-weil-pbc-formally-smooth-complete-local-regular] proves $\widehat g$ regular.
-
-7. The ring $\widehat S$ is Noetherian by [lem-weil-pbc-adic-completion-noetherian]. For every prime
-   $\mathfrak t\subset R$, its fibre $\widehat S\otimes_R\kappa(\mathfrak t)$ is therefore
-   Noetherian by [lem-weil-pbc-fibre-ring-noetherian]. The regular maps $u$ from step 1 and
-   $\widehat g$ from step 6 consequently satisfy every hypothesis of
-   [lem-weil-pbc-regular-composition]. Their composite $h=v\circ g:R\to\widehat S$ is regular. In
-   particular $D_{\mathfrak t}=\widehat S\otimes_R k_{\mathfrak t}$ is geometrically regular over
-   $k_{\mathfrak t}$.
-
-8. Fix $\mathfrak t$ and the finite product $F_{\mathfrak t}=\prod_iL_i$ of step 3. By
-   [lem-weil-pbc-tensor-cancel-base-change], $D_{\mathfrak t}\cong\widehat S\otimes_SF_{\mathfrak
-   t}$. The maps $c\otimes(x_i)_i\mapsto(c\otimes x_i)_i$ and $(c_i\otimes x_i)_i\mapsto\sum_i
-   c_i\otimes e_ix_i$, extended additively, are mutually inverse: $e_ix_i$ denotes $x_i$ inserted in
-   the $i$th coordinate and zero elsewhere; the $e_i$ are the finitely many orthogonal coordinate
-   idempotents and sum to one. They give $D_{\mathfrak t}\cong\prod_i C_i$, where $C_i=\widehat
-   S\otimes_S L_i=\widehat S\otimes_S\kappa(\mathfrak s_i)$, compatibly with the $k_{\mathfrak
-   t}$-actions. Each $C_i$ is the localization of $D_{\mathfrak t}$ at $e_i$; explicitly all other
-   coordinate idempotents become zero and the $i$th becomes one.
-
-9. Each $C_i$ is geometrically regular over $k_{\mathfrak t}$. Indeed it is Noetherian by
-   [lem-weil-pbc-fibre-ring-noetherian], applied to $S\to\widehat S$ at $\mathfrak s_i$. For any
-   finite purely inseparable field extension $K/k_{\mathfrak t}$, $K\otimes_{k_{\mathfrak t}}C_i$ is
-   the localization of $K\otimes_{k_{\mathfrak t}}D_{\mathfrak t}$ at $1\otimes e_i$, via $(a\otimes
-   d)/(1\otimes e_i)^n\mapsto a\otimes(d/e_i^n)$, with inverse $a\otimes(d/e_i^n)\mapsto(a\otimes
-   d)/(1\otimes e_i)^n$. The balancing and localization relations make these maps well-defined and
-   their composites fix every displayed generator. The latter ring is regular by step 7 and
-   [def-weil-pbc-g-ring]; [lem-weil-pbc-localization-of-regular-ring] makes its localization
-   regular. This is exactly the definition of geometric regularity of $C_i$.
-
-10. For every prime $\mathfrak s\subset S$, choose its contraction $\mathfrak t$ and its factor
-   $L_i=\kappa(\mathfrak s)$ in step 3. Step 9 gives $\widehat S\otimes_S\kappa(\mathfrak s)$
-   geometrically regular over $k_{\mathfrak t}$. The extension $\kappa(\mathfrak s)/k_{\mathfrak t}$
-   is separable algebraic, and this fibre is Noetherian as already checked, so
-   [lem-weil-pbc-geometric-regularity-separable-extension] gives geometric regularity over
-   $\kappa(\mathfrak s)$ itself. The map $v$ is flat by
-   [lem-weil-pbc-local-completion-faithfully-flat]. By [def-weil-pbc-g-ring] it is therefore
-   regular. Since the original prime $\mathfrak q\subset B$ was arbitrary and $B$ is Noetherian by
-   hypothesis, the same definition gives that $B$ is a G-ring. -/
+1. At a prime q of B, put p = f⁻¹(q), R = Aₚ and S = Bq. The induced local map
+   g : R → S is flat. It is weakly etale: compose A → B with B → S, then use
+   localization-flatness and the compatible-scalar tensor equivalence to descend
+   the two flatness conditions from A to R.
+2. The closed fibre F = κ(R) ⊗[R] S is weakly etale over κ(R), hence absolutely
+   flat. It is local, so it is a field. The existing weakly-etale field theorem
+   makes F/κ(R) separable algebraic, hence formally etale. Transport formal
+   smoothness to S/m_R S by the canonical tensor/quotient equivalence. Ordinary
+   formal smoothness implies formal smoothness for the closed-fibre adic topology.
+3. Apply the flat-local closed-fibre criterion to make S/R adically formally
+   smooth, then complete both rings. The coordinate formula for the induced map
+   ψ : R̂ → Ŝ proves ψ ∘ u = v ∘ g. The equality of each completion's maximal
+   ideal with the extended original maximal ideal proves ψ is local. Both
+   completions are Noetherian, so the complete-local formal-smoothness criterion
+   makes ψ regular.
+4. The G-ring assumption makes u regular. Compose u with ψ, using Noetherianity
+   of all fibres of the Noetherian target Ŝ, to make h = v ∘ g regular.
+5. For a prime s of S over t of R, put k = κ(t), L = κ(s), F = k ⊗[R] S.
+   The natural map ε : F → L is surjective on stalks because S → L is. Absolute
+   flatness of F makes L its localization at ker ε: fractions follow from stalk
+   surjectivity, and if ε(x) = ε(y), write x-y = (x-y)²b and use the denominator
+   1-(x-y)b to annihilate x-y. Thus L/k is weakly etale and hence separable
+   algebraic, without any finite-product decomposition of F.
+6. Tensor cancellation identifies D = k ⊗[R] Ŝ with E = F ⊗[S] Ŝ. The fibre
+   Q = L ⊗[S] Ŝ is the localization of E obtained by base change from ε. The
+   regularity of h makes D geometrically regular; transport this to E. For every
+   finite purely inseparable extension K/k, K ⊗[k] Q is the corresponding
+   localization of K ⊗[k] E, so localization of regular rings makes it regular.
+   Noetherianity also localizes. Geometric regularity therefore passes to Q,
+   and then from k to L along the separable algebraic field extension.
+7. The completion map v is flat and all of its fibres Q are geometrically
+   regular by step 6, so it is regular. This holds at every q, proving IsGRing B.
+   If B has no prime ideals, the universal condition is vacuous. -/
 theorem isGRing_of_weaklyEtale {A : Type u} {B : Type v} [CommRing A] [CommRing B]
     [IsNoetherianRing A] [IsNoetherianRing B] (f : A →+* B) (hf : f.WeaklyEtale)
     (hA : IsGRing A) : IsGRing B := by
-  sorry
+  classical
+  let : Algebra A B := f.toAlgebra
+  have : Algebra.WeaklyEtale A B := hf
+  refine ⟨inferInstance, ?_⟩
+  intro q hq
+  let p := q.comap f
+  let R := Localization.AtPrime p
+  let S := Localization.AtPrime q
+  let g : R →+* S := Localization.localRingHom p q f rfl
+  let : Algebra R S := g.toAlgebra
+  have : IsLocalHom g := Localization.isLocalHom_localRingHom p q f rfl
+  have hgflat : g.Flat := RingHom.Flat.localRingHom
+    (show f.Flat from (RingHom.flat_algebraMap_iff.mpr inferInstance)) q p rfl
+  have hweak : Algebra.WeaklyEtale R S := by
+    have : IsScalarTower A B S := inferInstance
+    have : IsScalarTower A R S := IsScalarTower.of_algebraMap_eq fun a ↦
+      (Localization.localRingHom_to_map p q f rfl a).symm
+    have : Algebra.WeaklyEtale B S :=
+      Algebra.WeaklyEtale.of_isLocalization B q.primeCompl S
+    have : Algebra.WeaklyEtale A S := Algebra.WeaklyEtale.trans A B S
+    refine ⟨(Module.flat_iff_of_isLocalization R p.primeCompl S).mpr inferInstance, ?_⟩
+    have : TensorProduct.CompatibleSMul A R S S :=
+      IsLocalization.tensorProduct_compatibleSMul p.primeCompl R S S
+    let e : TensorProduct R S S ≃ₐ[R] TensorProduct A S S :=
+      Algebra.TensorProduct.equivOfCompatibleSMul A R R S S
+    have heq : (Algebra.TensorProduct.lmul' R (S := S)).toRingHom =
+        (Algebra.TensorProduct.lmul' A (S := S)).toRingHom.comp e.toRingHom := by
+      apply RingHom.ext
+      intro x
+      induction x using TensorProduct.induction_on with
+      | zero => simp
+      | add x y hx hy => simp only [map_add, hx, hy]
+      | tmul x y =>
+        change x * y = (Algebra.TensorProduct.lmul' A) (TensorProduct.tmul A x y)
+        rw [Algebra.TensorProduct.lmul'_apply_tmul]
+    rw [heq]
+    exact RingHom.Flat.comp (RingHom.Flat.of_bijective e.bijective)
+      (Algebra.WeaklyEtale.flat_lmul' A S)
+  have : Algebra.WeaklyEtale R S := hweak
+  have : IsLocalHom (algebraMap R S) := ‹IsLocalHom g›
+  have hfs : Algebra.FormallySmoothAdic R S (IsLocalRing.maximalIdeal S) :=
+    formallySmoothAdic_of_flat_closedFiber R S (algebraMap R S) hgflat
+      (by simpa only [toAlgebra_algebraMap] using closed_fiber_fs R S)
+  obtain ⟨ψ, hcomm, hψreg⟩ := completion_regular R S g hfs
+  let Rh := AdicCompletion (IsLocalRing.maximalIdeal R) R
+  let Sh := AdicCompletion (IsLocalRing.maximalIdeal S) S
+  have : IsNoetherianRing Sh := AdicCompletion.isNoetherianRing _
+  let : Algebra Rh Sh := ψ.toAlgebra
+  let : Algebra R Sh := ((algebraMap S Sh).comp g).toAlgebra
+  have : IsScalarTower R Rh Sh := IsScalarTower.of_algebraMap_eq' hcomm.symm
+  have hcomp : (algebraMap R Sh).IsRegular :=
+    (hA.2 p).comp_of_fiber_noetherian hψreg (fun t _ ↦ Ideal.isNoetherianRing_fiber t)
+  have : IsScalarTower R S Sh := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+  change (algebraMap S Sh).IsRegular
+  rw [IsRegular, toAlgebra_algebraMap]
+  exact ⟨flat_algebraMap_iff.mpr inferInstance, cancel_weaklyEtale_fibres R S Sh hcomp⟩
 
 end RingHom
