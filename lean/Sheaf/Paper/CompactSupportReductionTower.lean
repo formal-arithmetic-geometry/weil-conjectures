@@ -90,6 +90,28 @@ def compactSupportLevelSheafQuotient (W : Scheme.{u}) (m n : ℕ) (h : n ≤ m) 
   (constantSheaf (ProEt.topology W) CommRingCat.{u + 1}).map
     (CommRingCat.ofHom (compactSupportLevelQuotient l E m n h).ulift)
 
+private theorem compactSupportLevelSheafQuotient_self (W : Scheme.{u}) (n : ℕ) :
+    compactSupportLevelSheafQuotient l E W n n le_rfl = 𝟙 _ := by
+  unfold compactSupportLevelSheafQuotient
+  have hq : compactSupportLevelQuotient l E n n le_rfl = RingHom.id _ :=
+    Ideal.Quotient.factor_eq
+  rw [hq]
+  exact (constantSheaf (ProEt.topology W) CommRingCat.{u + 1}).map_id _
+
+private theorem compactSupportLevelSheafQuotient_step
+    (W : Scheme.{u}) (m n : ℕ) (h : n ≤ m) :
+    compactSupportLevelSheafQuotient l E W (m + 1) m (Nat.le_succ m) ≫
+        compactSupportLevelSheafQuotient l E W m n h =
+      compactSupportLevelSheafQuotient l E W (m + 1) n (h.trans (Nat.le_succ m)) := by
+  unfold compactSupportLevelSheafQuotient
+  rw [← Functor.map_comp]
+  congr 1
+  ext x
+  change (compactSupportLevelQuotient l E m n h)
+      ((compactSupportLevelQuotient l E (m + 1) m (Nat.le_succ m)) x.down) =
+    (compactSupportLevelQuotient l E (m + 1) n (h.trans (Nat.le_succ m))) x.down
+  exact Ideal.Quotient.factor_comp_apply _ _ x.down
+
 /-- Limit projections commute with all coefficient quotients, including m=n.
 Source: Stacks Tag 03CO; blueprint proof, steps 1--2
 (blueprint: lem-weil-compact-support-reduction-tower-functor).
@@ -101,7 +123,26 @@ theorem compactSupportProjection_comp (W : Scheme.{u}) (m n : ℕ) (h : n ≤ m)
     completedIntegralCommRingProjectionUnrestricted l E W m ≫
         compactSupportLevelSheafQuotient l E W m n h =
       completedIntegralCommRingProjectionUnrestricted l E W n := by
-  sorry
+  induction m, h using Nat.le_induction with
+  | base => simp only [compactSupportLevelSheafQuotient_self, Category.comp_id]
+  | succ m h ih =>
+    rw [← compactSupportLevelSheafQuotient_step l E W m n h, ← Category.assoc]
+    have hs : completedIntegralCommRingProjectionUnrestricted l E W (m + 1) ≫
+        compactSupportLevelSheafQuotient l E W (m + 1) m (Nat.le_succ m) =
+        completedIntegralCommRingProjectionUnrestricted l E W m := by
+      apply Sheaf.hom_ext
+      apply NatTrans.ext
+      funext U
+      apply (forget₂ CommRingCat RingCat).map_injective
+      ext x
+      have hw := congrArg (fun v ↦ (v.hom.app U).hom x)
+        (limit.w (integralCoefficientSheafSystem l E W)
+          (homOfLE (Nat.le_succ m)).op)
+      simp only [integralCoefficientSheafSystem,
+        Functor.ofOpSequence_map_homOfLE_succ] at hw
+      convert hw using 1 <;> rfl
+    rw [hs]
+    exact ih
 
 /-- The canonical composition of exact restrictions along a limit projection and
 its quotient, induced by the identity on underlying sections.
