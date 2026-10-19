@@ -17728,3 +17728,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:13 L: merged deliver/P6/Sheaf.Paper.AmplificationProper (stage 3; reviewer PASS; first push; landing 20261019T231301-L-569415 (interface); batch 20261019T231019; modules 6; new nodes 5)
 - 23:13 L: merged deliver/P8/Sheaf.Paper.DirectImageCtfOpenTor (stage 3; reviewer PASS; first push; landing 20261019T231303-L-569735 (proof); batch 20261019T231019; modules 1; new nodes 1)
 - 23:13 L: merged deliver/P8/Sheaf.Paper.FieldShriekCompositionQcqs (stage 3; reviewer PASS; first push; landing 20261019T231304-L-570020 (proof); batch 20261019T231019; modules 1; new nodes 0)
+- 23:13 L: merged deliver/P9/Sheaf.Paper.ProperCompactCoincidence (stage 3; reviewer PASS; first push; landing 20261019T231306-L-570278 (interface); batch 20261019T231019; modules 1; new nodes 0; change records: coord/changes/P9-proper-compact-proof-context.md)
