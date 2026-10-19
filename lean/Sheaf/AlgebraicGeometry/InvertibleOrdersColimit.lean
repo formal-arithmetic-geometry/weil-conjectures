@@ -13,13 +13,11 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.CategoryTheory.Sites.Abelian
-import WeilConjectures.AlgebraicGeometry.GeometricStalkColimits
 import Mathlib.Algebra.Homology.Additive
+import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.TorsionFilteredUnion
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
-import Sheaf.AlgebraicGeometry.PointedEtaleStalk
 
 /-!
 # The colimit description of invertible orders
@@ -79,6 +77,97 @@ noncomputable def fieldInvertibleTorsionComparison (K : Type u) [Field K] {T : S
     colimit (fieldInvertibleTorsionDiagram K F) ⟶ F :=
   colimit.desc (fieldInvertibleTorsionDiagram K F) (fieldInvertibleTorsionCocone K F)
 
+private theorem invertibleTorsionIndex_filtered (K : Type u) [Field K] :
+    IsFiltered (ObjectProperty.FullSubcategory
+      (fun n : PositiveNat ↦ n.val ∈ Etale.invertibleTorsionOrders K)) where
+  nonempty := ⟨⟨⟨1, Nat.one_pos⟩, by
+    refine ⟨Nat.one_pos, ?_⟩
+    norm_num [PNat.DvdOrder.val, PNat.DvdOrder.toPNat]⟩⟩
+  cocone_objs n m := by
+    let k : ObjectProperty.FullSubcategory
+        (fun n : PositiveNat ↦ n.val ∈ Etale.invertibleTorsionOrders K) :=
+      ⟨⟨n.obj.val * m.obj.val, Nat.mul_pos n.obj.pos m.obj.pos⟩,
+        Nat.mul_pos n.obj.pos m.obj.pos, by
+          change ((n.obj.val * m.obj.val : ℕ) : K) ≠ 0
+          rw [Nat.cast_mul]
+          exact mul_ne_zero n.property.2 m.property.2⟩
+    exact ⟨k, ObjectProperty.homMk (homOfLE (dvd_mul_right _ _)),
+      ObjectProperty.homMk (homOfLE (dvd_mul_left _ _)), trivial⟩
+  cocone_maps _ _ f g := ⟨_, 𝟙 _, by subsingleton⟩
+
+private theorem invertibleTorsion_map_iff (K : Type u) [Field K] {T : Scheme.{u}}
+    (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (E : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1} ⥤ AddCommGrpCat.{u + 1})
+    [E.Additive] [PreservesFiniteLimits E] [PreservesColimitsOfSize.{u, u} E] :
+    IsIso (E.map (fieldInvertibleTorsionComparison K F)) ↔
+      ∀ x : E.obj F, ∃ n : ℕ, n ∈ Etale.invertibleTorsionOrders K ∧ n • x = 0 := by
+  classical
+  have := invertibleTorsionIndex_filtered K
+  have := preservesSmallestColimits_of_preservesColimits E
+  have := preservesSmallestFilteredColimits_of_preservesFilteredColimits
+    (CategoryTheory.forget AddCommGrpCat.{u + 1})
+  let D := fieldInvertibleTorsionDiagram K F
+  let φ := fieldInvertibleTorsionComparison K F
+  have hc := isColimitOfPreserves E (colimit.isColimit D)
+  have hcomp (n : ObjectProperty.FullSubcategory
+      (fun n : PositiveNat ↦ n.val ∈ Etale.invertibleTorsionOrders K)) :
+      E.map (colimit.ι D n) ≫ E.map φ = E.map (kernel.ι (n.obj.val • 𝟙 F)) := by
+    rw [← E.map_comp]
+    congr 1
+    exact colimit.ι_desc (fieldInvertibleTorsionCocone K F) n
+  have hmono : Mono (E.map φ) := by
+    apply (AddCommGrpCat.mono_iff_injective _).mpr
+    apply (injective_iff_map_eq_zero _).mpr
+    intro x hx
+    obtain ⟨n, y, rfl⟩ := Concrete.isColimit_exists_rep (D ⋙ E) hc x
+    have hy : E.map (kernel.ι (n.obj.val • 𝟙 F)) y = 0 := by
+      rw [← hcomp n]
+      exact hx
+    have hinj := (AddCommGrpCat.mono_iff_injective
+      (E.map (kernel.ι (n.obj.val • 𝟙 F)))).mp (inferInstance)
+    have : y = 0 := hinj (by simpa using hy)
+    rw [this]
+    exact map_zero (E.map (colimit.ι D n)).hom
+  constructor
+  · intro h
+    have := h
+    intro x
+    obtain ⟨y, hy⟩ := (AddCommGrpCat.epi_iff_surjective (E.map φ)).mp inferInstance x
+    obtain ⟨n, z, hz⟩ := Concrete.isColimit_exists_rep (D ⋙ E) hc y
+    refine ⟨n.obj.val, n.property, ?_⟩
+    have hx : E.map (kernel.ι (n.obj.val • 𝟙 F)) z = x := by
+      rw [← hcomp n]
+      change E.map φ (E.map (colimit.ι D n) z) = x
+      change E.map (colimit.ι D n) z = y at hz
+      rw [hz, hy]
+    rw [← hx]
+    have hzero := E.congr_map (kernel.condition (n.obj.val • 𝟙 F))
+    rw [E.map_comp, E.map_nsmul, E.map_id, E.map_zero] at hzero
+    exact congrArg (fun f ↦ f z) hzero
+  · intro h
+    have hepi : Epi (E.map φ) := by
+      apply (AddCommGrpCat.epi_iff_surjective _).mpr
+      intro x
+      obtain ⟨n, hn, hx⟩ := h x
+      let e := PreservesKernel.iso E (n • 𝟙 F) ≪≫
+        AddCommGrpCat.kernelIsoKer (E.map (n • 𝟙 F))
+      have hx' : E.map (n • 𝟙 F) x = 0 := by
+        simpa [E.map_nsmul, E.map_id] using hx
+      let y := e.inv ⟨x, hx'⟩
+      have hy : E.map (kernel.ι (n • 𝟙 F)) y = x := by
+        change (e.inv ≫ E.map (kernel.ι (n • 𝟙 F))) ⟨x, hx'⟩ = x
+        rw [Iso.trans_inv, Category.assoc, PreservesKernel.iso_inv_ι,
+          AddCommGrpCat.kernelIsoKer_inv_comp_ι]
+        rfl
+      let i : ObjectProperty.FullSubcategory
+          (fun n : PositiveNat ↦ n.val ∈ Etale.invertibleTorsionOrders K) :=
+        ⟨⟨n, hn.1⟩, hn⟩
+      refine ⟨E.map (colimit.ι D i) y, ?_⟩
+      change (E.map (colimit.ι D i) ≫ E.map φ) y = x
+      rw [hcomp]
+      exact hy
+    exact isIso_of_mono_of_epi (E.map φ)
+
 /-- A torsion abelian etale sheaf has orders invertible in `K` if and only if the canonical
 map from the colimit of its invertible-order torsion subsheaves is an isomorphism.
 Source: blueprint `sec-smooth-purity/sk-prop-sf-kunneth-ordinary/`
@@ -107,6 +196,24 @@ theorem isTorsionEtaleSheafOfFieldInvertibleOrder_iff_isIso_comparison
     (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) :
     Etale.IsTorsionOfInvertibleOrder K (Over.mk (T ↘ Spec (.of K))) F ↔
       IsIso (fieldInvertibleTorsionComparison K F) := by
-  sorry
+  have : AB5OfSize.{u, u} AddCommGrpCat.{u + 1} :=
+    AB5OfSize_shrink.{u, u, u + 1, u + 1} _
+  have _ := hF
+  constructor
+  · intro h
+    apply isIso_of_isIso_sheafFiber_map
+    intro t
+    let E := (pointSmallEtale (T.algClosurePoint t)).sheafFiber
+      (A := AddCommGrpCat.{u + 1})
+    have : E.Additive := Functor.additive_of_preserves_binary_products E
+    have hE : IsIso (E.map (fieldInvertibleTorsionComparison K F)) :=
+      (invertibleTorsion_map_iff K F E).mpr (h _ (T.algClosurePoint t))
+    let e := GrothendieckTopology.Point.uliftSheafFiberIso.{u + 1}
+      (pointSmallEtale (T.algClosurePoint t)) AddCommGrpCat.{u + 1}
+    exact (NatIso.isIso_map_iff e (fieldInvertibleTorsionComparison K F)).mpr hE
+  · intro h Ω _ _ s
+    let E := (pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})
+    have : E.Additive := Functor.additive_of_preserves_binary_products E
+    exact (invertibleTorsion_map_iff K F E).mp (by infer_instance)
 
 end AlgebraicGeometry.Scheme
