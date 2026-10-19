@@ -1,0 +1,128 @@
+{
+ "id": "lem-pe-ind-etale-small-index",
+ "kind": "lemma",
+ "title": "Shrinking the index of an ind-étale presentation",
+ "statement": "Let $R$ and $B$ be commutative rings with underlying types in universe $u$, and let $f:R\\to B$ be a ring homomorphism. Suppose that $f$ has a filtered presentation by finitely presented étale $R$-algebras indexed by a category whose objects and morphisms lie in universe $u+1$. Then $f$ has such a presentation indexed by a category whose objects and morphisms lie in universe $u$. A presentation means a categorical ring colimit equipped with compatible structure maps from $R$, as in [def-weil-pbc-ind-etale-algebra].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-classical-definition/sk-def-pe-classical-definition-continuity-map.md",
+  "place": "Final paragraph: affine presentation equivalence; finite-presentation universe reduction in the Lean proof docstring of det-pe-classical-definition-continuity-map"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ind-etale-algebra"
+ ],
+ "proof": [
+  {
+   "text": "For R → B, let E be the category of finitely presented étale R-algebras mapping to B. Finite presentations and small hom sets make E essentially universe-u small. It is filtered: R is initial, tensor products give coproducts, and coequalizers are étale quotients. Indeed equalizers of two maps of affine étale R-schemes are pullbacks of an affine étale diagonal, which is open and closed; they are affine étale. The small colimit C of E is ind-étale with a map p:C→B.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The given larger diagram maps compatibly into E and hence into C. Its colimit property gives s:B→C with p s=id, checked on every stage. Nonemptiness ensures s is an R-algebra map. Thus B is a retract of C. For e=s p, the sequential diagram C --e--> C --e--> ... has colimit B: cocone maps satisfy a_n=a_(n+1)e, and idempotence forces a_n e=a_n and all components equal; their unique factorization through p is a_0 s. Flatten the countable diagram of small étale presentations using finite presentability of étale algebras (ObjectProperty.ind_ind). Hence B has a small filtered étale presentation.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ind-etale-algebra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-classical-definition/sk-def-pe-classical-definition-continuity-map.md",
+  "place": "Universe reduction in the final paragraph, expanded by a small étale-algebra category and a retract argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "ind etale ring filtered colimit universe small index shrinking",
+   "results": "RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit; Algebra.Etale.exists_subalgebra_fg; Algebra.Etale.finitePresentation; no direct index-shrinking result.",
+   "date": "2026-10-19",
+   "verdict": "The small canonical category and retract argument are needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.of_essentiallySmall_index",
+   "results": "CategoryTheory.ObjectProperty.of_essentiallySmall_index in Mathlib.CategoryTheory.ObjectProperty.Ind.",
+   "date": "2026-10-19",
+   "verdict": "Used to shrink the canonical essentially small index and the countable retract presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "ind_of_univLE|ind_ind",
+   "results": "CategoryTheory.ObjectProperty.ind_ind and CategoryTheory.MorphismProperty.ind_ind in Mathlib; source-library ind_of_univLE only enlarges indices.",
+   "date": "2026-10-19",
+   "verdict": "ObjectProperty.ind_ind flattens the sequential ind-etale presentation after the retract construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A filtered colimit of etale algebras whose rings lie in universe u admits a filtered presentation indexed by a category small in universe u",
+   "results": "8 hits: CommRingCat.FilteredColimits.colimit; Algebra.Etale.finitePresentation; RingCat.FilteredColimits.colimit; CommRingCat.FilteredColimits.colimitCoconeIsColimit; CommSemiRingCat.FilteredColimits.colimit; CategoryTheory.Limits.ColimitPresentation.bind; RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit; CategoryTheory.Limits.IndObjectPresentation.ofCocone.",
+   "date": "2026-10-19",
+   "verdict": "No index-shrinking theorem. The finite-presentation and flattening results support the canonical small category and retract proof already written."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClassicalContinuityMap",
+  "date": "2026-10-19",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-pe-classical-definition-continuity-map",
+   "place": "proof steps 7–9 and affine universe reduction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-pe-classical-definition",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.IndEtaleSmallIndex",
+  "file": "lean/Sheaf/RingTheory/IndEtaleSmallIndex.lean",
+  "declaration": "CommRingCat.ind_etale_small_index",
+  "statement": "theorem CommRingCat.ind_etale_small_index :\n    MorphismProperty.ind.{u + 1} CommRingCat.etale.{u} ≤\n      MorphismProperty.ind.{u} CommRingCat.etale.{u}",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261019T002607-L-2157656",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261019T002607-L-2157656",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

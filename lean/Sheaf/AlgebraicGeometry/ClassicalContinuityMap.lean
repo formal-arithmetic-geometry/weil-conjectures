@@ -13,9 +13,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
-import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
-import Sheaf.RingTheory.IndEtaleUniverseTransport
-import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
+import Sheaf.RingTheory.IndEtaleSmallIndex
 
 /-! # Continuity maps and classical pro-étale sheaves
 
@@ -290,6 +288,23 @@ theorem isClassicalComplex_iso_iff {X : Scheme.{u}} (Λ : Type u) [CommRing Λ]
   exact isClassicalModule_iso_iff Λ _ _
     ((@DerivedCategory.homologyFunctor _ _ _ (HasDerivedCategory.standard _) q).mapIso e)
 
+set_option backward.defeqAttrib.useBackward true in
+private noncomputable def affineGlobalSectionsIsColimit
+    {J : Type*} [Category J] (D : J ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)
+    [∀ j, IsAffine (D.obj j)] [IsAffine c.pt] :
+    IsColimit (Scheme.Γ.mapCocone c.op) := by
+  let α : D ≅ (D.op ⋙ Scheme.Γ).rightOp ⋙ Scheme.Spec :=
+    NatIso.ofComponents (fun j ↦ (D.obj j).isoSpec)
+      (fun f ↦ (Scheme.isoSpec_hom_naturality (D.map f)).symm)
+  have hs : IsLimit (Scheme.Spec.mapCone (coneRightOpOfCocone (Scheme.Γ.mapCocone c.op))) := by
+    refine IsLimit.equivOfNatIsoOfIso α c _ ?_ hc
+    refine Cone.ext c.pt.isoSpec ?_
+    intro j
+    exact (Scheme.isoSpec_hom_naturality (X := c.pt) (Y := D.obj j) (c.π.app j)).symm
+  exact isColimitOfConeRightOpOfCocone (D.op ⋙ Scheme.Γ)
+    (isLimitOfReflects Scheme.Spec hs)
+
+set_option backward.defeqAttrib.useBackward true in
 /-- Presentable affine site objects are exactly the affine ind-étale subsite objects.
 Source: current blueprint, continuity-map detail, final paragraph; recorded
 `proAffineEtale_Spec_iff` and `Scheme.AffineProEt`
@@ -299,23 +314,91 @@ Proof, following steps 7--9 of the node:
    `def-weil-affine-spectrum`. The structure and transition maps give a filtered
    diagram of `R`-algebras. By `lem-weil-pbc-etale-ring-map-iff-etale-affine`, its
    terms are finitely presented étale algebras.
-2. Form the ring colimit B by `lem-weil-pbc-commutative-algebras-colimits-exist`.
-   Filteredness and nonemptiness make the maps `R → B_i → B` equal, defining `R → B`.
-   The universal ring-colimit map to any algebra cocone respects this structure map,
-   so B is also the algebra colimit. By `lem-weil-pbc-spec-small-colimit-limit`,
-   `Spec B` is the scheme limit. Its factorization maps are over X, as can be checked
-   after any projection. Uniqueness of the limit over X identifies its vertex with U.
-3. Thus B is ind-étale by `def-weil-pbc-ind-etale-algebra`. To use the recorded
-   universe-u presentation, replace the larger diagram by the small category of
-   finitely presented étale R-algebras mapping to B: finite presentations and maps
-   into the universe-u ring B give a universe-u skeleton, and the original filtered
-   presentation makes this category filtered with colimit B. Conversely the recorded
-   ind-étale presentation gives affine étale stages and a limit by the same Spec
-   argument; lift its index category into `u + 1`. The definition of
-   `Scheme.AffineProEt` is precisely `proAffineEtale` of its structure map. -/
+2. Forget the relative limit to schemes. Identify every affine stage and the vertex
+   naturally with the spectrum of its global sections. Reflect the transported limit
+   through the fully faithful Spec functor and take opposites. This proves that the
+   global-sections cocone is a ring colimit, without choosing another ring colimit.
+   The structure maps commute by the equations for morphisms over X, so they exhibit
+   the vertex structure map as ind-étale with index in universe `u + 1`.
+3. Apply `lem-pe-ind-etale-small-index` to obtain a universe-u presentation. The
+   recorded `RingHom.IndEtale.iff_ind_etale` and `proAffineEtale_iff_appTop` give
+   `proAffineEtale` of the vertex; cancel its isomorphism to U. Conversely, unfold
+   the recorded `proAffineEtale` presentation and enlarge its index to `u + 1`.
+   Its affine étale stages lift to objects of the site. The forgetful functor from
+   schemes over X reflects this limit because a cofiltered index is connected.
+   The resulting presentation has vertex U itself. -/
 theorem affinePresentation_iff {X : Scheme.{u}} [IsAffine X] (U : X.ProEt) :
     (∃ (I : Type (u + 1)) (_ : SmallCategory I) (_ : IsCofiltered I)
       (P : AffinePresentation X I), Nonempty (P.cone.pt ≅ U)) ↔ proAffineEtale U.hom := by
-  sorry
+  constructor
+  · rintro ⟨I, _, _, P, ⟨e⟩⟩
+    have : IsAffine P.cone.pt.left := P.affineVertex
+    have (i : I) : IsAffine (P.diagram.obj i).left := P.affine i
+    let V := Scheme.ProEt.forget X ⋙ Over.forget X
+    let D := P.diagram ⋙ V
+    let c := V.mapCone P.cone
+    let F := D.op ⋙ Scheme.Γ
+    let t : (Functor.const Iᵒᵖ).obj Γ(X, ⊤) ⟶ F :=
+      { app i := (P.diagram.obj i.unop).hom.appTop
+        naturality {i j} a := by
+          dsimp [F, D, V]
+          rw [Category.id_comp, ← Scheme.Hom.comp_appTop]
+          congr 1
+          exact (MorphismProperty.Over.w (P.diagram.map a.unop)).symm }
+    have (i : I) : IsAffine (D.obj i) := P.affine i
+    have : IsAffine c.pt := P.affineVertex
+    have hc : IsLimit c := isLimitOfPreserves (Over.forget X) P.isLimit
+    have hring : MorphismProperty.ind.{u + 1} CommRingCat.etale.{u}
+        P.cone.pt.hom.appTop := by
+      refine ⟨Iᵒᵖ, inferInstance, inferInstance, F, t,
+        (Scheme.Γ.mapCocone c.op).ι, affineGlobalSectionsIsColimit D c hc, ?_⟩
+      intro i
+      refine ⟨?_, ?_⟩
+      · have := P.etale i.unop
+        change RingHom.Etale (P.diagram.obj i.unop).hom.appTop.hom
+        exact (HasRingHomProperty.iff_of_isAffine (P := @Etale)
+          (X := (P.diagram.obj i.unop).left) (Y := X)
+          (f := (P.diagram.obj i.unop).hom)).mp (P.etale i.unop)
+      · change (P.diagram.obj i.unop).hom.appTop ≫
+            (P.cone.π.app i.unop).left.appTop = P.cone.pt.hom.appTop
+        rw [← Scheme.Hom.comp_appTop, MorphismProperty.Over.w]
+        rfl
+    have hp : proAffineEtale P.cone.pt.hom := by
+      apply (proAffineEtale_iff_appTop (X := P.cone.pt.left) (Y := X)).mpr
+      rw [RingHom.IndEtale.iff_ind_etale]
+      exact CommRingCat.ind_etale_small_index _ hring
+    have he : e.hom.left ≫ U.hom = P.cone.pt.hom := MorphismProperty.Over.w e.hom
+    rw [← he] at hp
+    exact (MorphismProperty.cancel_left_of_respectsIso (P := proAffineEtale)
+      e.hom.left U.hom).mp hp
+  · intro h
+    have hU := h.isAffine
+    change MorphismProperty.pro.{u}
+      (@Etale ⊓ MorphismProperty.ofObjectProperty (IsAffine ·) ⊤) U.hom at h
+    have hlarge : MorphismProperty.pro.{u + 1}
+        (@Etale ⊓ MorphismProperty.ofObjectProperty (IsAffine ·) ⊤) U.hom :=
+      MorphismProperty.pro_of_univLE.{u, u + 1} _ h
+    obtain ⟨I, _, _, D, t, s, hs, hts⟩ := hlarge
+    have haff (i : I) : IsAffine (D.obj i) := (hts i).1.2.1
+    have het (i : I) : Etale (t.app i) := (hts i).1.1
+    let E : I ⥤ X.ProEt := MorphismProperty.Over.lift' D t
+      (fun i ↦ inferInstanceAs (WeaklyEtale (t.app i))) (fun _ ↦ trivial)
+    let c : Cone E :=
+      { pt := U
+        π :=
+          { app i := MorphismProperty.Over.homMk (s.app i) (hts i).2
+            naturality {i j} a := by
+              apply MorphismProperty.Over.Hom.ext
+              change s.app j = s.app i ≫ D.map a
+              simpa using s.naturality a } }
+    refine ⟨I, inferInstance, inferInstance,
+      { diagram := E
+        affine := haff
+        etale := het
+        cone := c
+        affineVertex := hU
+        isLimit := ?_ }, ⟨Iso.refl _⟩⟩
+    have : IsConnected I := IsCofiltered.isConnected I
+    exact isLimitOfReflects (Over.forget X) hs
 
 end AlgebraicGeometry.ProEtale

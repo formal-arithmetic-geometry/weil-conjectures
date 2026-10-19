@@ -98,11 +98,21 @@
    }
   },
   {
-   "text": "For affine $X=\\operatorname{Spec}R$, an affine ind-étale object has a presentation $B=\\varinjlim B_i$ by finitely presented étale $R$-algebras. The inverse-limit assertion of [def-weil-pbc-ind-etale-algebra] and the presentation clause of [sk-def-pe-morphisms] give a pro-étale affine presentation of $\\operatorname{Spec}B$. Conversely, write each affine stage as $U_i=\\operatorname{Spec}B_i$. The morphism correspondence and functoriality in [def-weil-affine-spectrum] give structural maps $\\sigma_i:R\\to B_i$ and a diagram of $R$-algebras indexed by $I^{\\mathrm{op}}$. By [lem-weil-pbc-etale-ring-map-iff-etale-affine], each $B_i$ is a finitely presented étale $R$-algebra.",
+   "text": "For the reverse implication, unfold the recorded proAffineEtale presentation, enlarge its index from u to u+1 using MorphismProperty.pro_of_univLE, and lift the affine étale stages and structure maps to X.ProEt. The cone has vertex U. Over.forget reflects its limit since a cofiltered index is connected. For the forward implication, apply global sections to the given affine stages and cone; étaleness of the resulting ring maps follows from the affine ring-map characterization.",
    "uses": [
-    "def-weil-pbc-ind-etale-algebra",
     "sk-def-pe-morphisms",
-    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "det-pe-morphisms-etale-comparison",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-classical-definition/sk-def-pe-classical-definition-continuity-map.md",
+    "place": "Last sentence, with affine-base scope made explicit; Stacks Morphisms Tag 02GJ (lemma-etale-characterize), Algebra Tag 00U1 (definition-etale), and Limits Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit); ring/algebra colimit comparison and limit-over-X check by the displayed universal properties"
+   }
+  },
+  {
+   "text": "Identify each affine scheme naturally with the spectrum of its global sections. Transport the given scheme limit along these identifications and reflect it through the fully faithful Spec functor. Taking opposites gives the colimit property of the global-sections cocone. Its structure maps commute by the Over equations, so it exhibits the vertex structure map as ind-etale with index in u+1. No separately chosen ring colimit is needed.",
+   "uses": [
     "def-weil-affine-spectrum"
    ],
    "elementary": true,
@@ -112,25 +122,11 @@
    }
   },
   {
-   "text": "Take the colimit $B$ of the underlying ring diagram, indexed by $J=I^{\\mathrm{op}}$, using the $R=\\mathbf Z$ clause of [lem-weil-pbc-commutative-algebras-colimits-exist], and write $\\kappa_i:B_i\\to B$. The composites $\\kappa_i\\sigma_i$ all agree: for $i,j$, choose arrows $i\\to k$, $j\\to k$ in the filtered category $J$ and use compatibility of the structural maps and the colimit cocone. Nonemptiness supplies an index, so their common value defines $\\sigma:R\\to B$. For any $R$-algebra cocone $h_i:B_i\\to C$, its unique ring-colimit map $h:B\\to C$ satisfies $h\\sigma=h\\kappa_i\\sigma_i=h_i\\sigma_i=\\sigma_C$; thus $B$ with this structure is also the colimit in $R$-algebras.",
+   "text": "Apply [lem-pe-ind-etale-small-index] to shrink this filtered étale ring presentation to universe u. The recorded RingHom.IndEtale.iff_ind_etale and proAffineEtale_iff_appTop identify the affine vertex morphism as proAffineEtale. Transport this property across the supplied isomorphism of site objects by cancellation of the isomorphism. This proves exactly the claimed equivalence, with the original affine-base scope.",
    "uses": [
-    "lem-weil-pbc-commutative-algebras-colimits-exist",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-classical-definition/sk-def-pe-classical-definition-continuity-map.md",
-    "place": "Last sentence, with affine-base scope made explicit; Stacks Morphisms Tag 02GJ (lemma-etale-characterize), Algebra Tag 00U1 (definition-etale), and Limits Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit); ring/algebra colimit comparison and limit-over-X check by the displayed universal properties"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-spec-small-colimit-limit], $\\operatorname{Spec}B$ with these projections is a limit of the $U_i$ as schemes. The scheme maps associated to $\\sigma=\\kappa_i\\sigma_i$ compose as prescribed by [def-weil-affine-spectrum]. It is also a limit over $X$: for any compatible $X$-cone the unique scheme factorization $t:T\\to\\operatorname{Spec}B$ is over $X$, since $\\sigma=\\kappa_i\\sigma_i$ and composition with any projection gives the prescribed structural map $T\\to X$. Uniqueness of the limit over $X$ gives $U\\cong\\operatorname{Spec}B$ over $X$. Its displayed filtered $R$-algebra colimit makes $B$ ind-étale. These are exactly the objects of [def-weil-pbc-ind-etale-basis]. This identification is asserted only for affine $X$; for general $X$ the presentation itself is the definition.",
-   "uses": [
-    "lem-weil-pbc-spec-small-colimit-limit",
+    "lem-pe-ind-etale-small-index",
     "def-weil-pbc-ind-etale-algebra",
-    "def-weil-pbc-ind-etale-basis",
-    "sk-def-pe-morphisms",
-    "def-weil-affine-spectrum"
+    "def-weil-pbc-ind-etale-basis"
    ],
    "elementary": true,
    "source": {
@@ -149,17 +145,16 @@
   "lem-weil-pbc-filtered-colimit-modules-elementwise",
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
-  "def-weil-pbc-ind-etale-algebra",
   "lem-weil-pbc-etale-ring-map-iff-etale-affine",
   "def-weil-affine-spectrum",
-  "lem-weil-pbc-commutative-algebras-colimits-exist",
-  "lem-weil-pbc-spec-small-colimit-limit",
+  "lem-pe-ind-etale-small-index",
+  "def-weil-pbc-ind-etale-algebra",
   "def-weil-pbc-ind-etale-basis"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-classical-definition/sk-def-pe-classical-definition-continuity-map.proof.md",
-  "place": "three well-definedness paragraphs, expanded using Stacks Tags 002U, 00D6, 00D7 and 05RT"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-classical-definition/sk-def-pe-classical-definition-continuity-map.md",
+  "place": "Original continuity arguments retained; affine equivalence via global sections, Spec reflection, and the separate small-index lemma."
  },
  "mathlib_searches": [
   {
@@ -307,25 +302,13 @@
   "note": "The same module supplies the affine presentation, canonical restriction diagrams and colimit maps, set and intrinsic constant-ring module classicality, cochain and derived predicates, and the explicitly stated naturality, underlying-set comparison, isomorphism invariance and affine-basis identification clauses. All postponed clauses are named theorems with source and proof docstrings; all definition data is constructed. The common larger universe u+1 contains the index categories and section values, with the canonical ULift coefficient convention of proEtaleDerivedCategory."
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-19",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "P7",
+  "reviewer": "COMPILER",
+  "group": "G4",
   "result": "pass",
-  "landing": "20261018T150149-L-3800207",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.ProEtale.affinePresentation_iff",
-   "AlgebraicGeometry.ProEtale.continuityMap_natural",
-   "AlgebraicGeometry.ProEtale.continuityMap_ι",
-   "AlgebraicGeometry.ProEtale.isClassicalComplex_Q_iff",
-   "AlgebraicGeometry.ProEtale.isClassicalComplex_iso_iff",
-   "AlgebraicGeometry.ProEtale.isClassicalModule_iff",
-   "AlgebraicGeometry.ProEtale.isClassical_iso_iff"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.ProEtale.affinePresentation_iff"
-  ]
+  "landing": "20261019T002607-L-2157656",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
