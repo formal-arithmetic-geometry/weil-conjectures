@@ -15,9 +15,152 @@
   "def-weil-pbc-projective-module",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Induct on the length $n$ of the given complete dévissage. The inductive claim at length $n$ is the statement of this lemma for every commutative ring $R$, every prime $\\mathfrak r\\subset R$, every finitely presented $R$-algebra $S$ and every finitely presented $S$-module $N$ flat over $R$ admitting a complete dévissage over $\\mathfrak r$ of length $n$; the base ring is quantified because step 5 replaces $R$ by a localization $R_{f_1}$ before the hypothesis is applied in step 7. At length zero the definition requires $N=0$; take $f=1$, since the zero module has the lifting property for projectivity. At positive length write the data as $(A_i,B_i,M_i,\\alpha_i)_{1\\leq i\\leq n}$, with $\\alpha_i:B_i^{\\oplus r_i}\\to M_i$. The isomorphism $N\\cong M_1$ is $R$-linear, so $M_1$ is $R$-flat, and it suffices to establish projectivity for a localization of $M_1$.",
+   "uses": [
+    "def-trf-complete-algebra-devissage",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IB, lemma-complete-devissage-flat-finitely-presented-module, proof"
+   }
+  },
+  {
+   "text": "For each $i$, the affine morphism $\\operatorname{Spec}B_i\\to\\operatorname{Spec}R$ is smooth. The affine smoothness equivalence gives a smooth ring map $R\\to B_i$, hence a finitely presented algebra by the definition of smooth ring map, and a flat module by smooth-flatness. Smoothness also gives geometrically reduced fibres. Together with the geometrically irreducible fibres in the dévissage this gives geometrically integral fibres: after any residue-field extension the fibre is nonempty, reduced and irreducible, hence integral. Thus each $R\\to B_i$ satisfies the ring hypotheses of the generic-basis shrinking lemma and the projectivity theorem for geometrically integral fibres.",
+   "uses": [
+    "def-trf-complete-algebra-devissage",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "def-weil-pbc-smooth-ring-map",
+    "lem-weil-pbc-smooth-ring-map-flat",
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IB, lemma-complete-devissage-flat-finitely-presented-module, proof"
+   }
+  },
+  {
+   "text": "The surjective finitely presented map $S\\to A_1$ is finite (the element $1$ generates $A_1$ as an $S$-module). The finite-extension presentation theorem therefore makes $M_1$ finitely presented over $A_1$. Composition makes $A_1$ finitely presented over $R$. Also $B_1\\to A_1$ is finitely presented: choose finite presentations $A_1=R[x]/(F)$ and $B_1=R[y]/(G)$ and polynomials $P_j(x)$ representing the images of $y_j$. Then $A_1=B_1[x]/(F,y_j-P_j(x))$, since eliminating the $y_j$ leaves exactly $R[x]/(F)$; the relations $G(P(x))$ already vanish there. This is a finite presentation over $B_1$. As $B_1\\to A_1$ is finite by the dévissage, the same finite-extension theorem now makes $M_1$ finitely presented over $B_1$.",
+   "uses": [
+    "def-trf-complete-algebra-devissage",
+    "lem-trf-finite-extension-module-finite-presentation",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "def-weil-pbc-finitely-presented-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IB, proof, reference to Tag 05HY remark-finite-presentation; Algebra Tag 0564 lemma-finite-finitely-presented-extension"
+   }
+  },
+  {
+   "text": "Apply the generic-basis shrinking lemma to $R\\to B_1$, $M_1$, and the given $\\alpha_1$. Its generic-fibre isomorphism is one of the dévissage conditions. The ideal $\\mathfrak p_1=\\mathfrak rB_1$ is prime by that definition, and contracts to $\\mathfrak r$: the nonzero fibre algebra has an injective structure map from the field $\\kappa(\\mathfrak r)$, so a scalar outside $\\mathfrak r$ cannot belong to $\\mathfrak rB_1$. All finite-presentation and flatness hypotheses were verified in the preceding steps. Obtain $f_1\\notin\\mathfrak r$ for which $(\\alpha_1)_{f_1}$ is universally injective over $R_{f_1}$.",
+   "uses": [
+    "lem-trf-generic-basis-base-open-universal-injectivity",
+    "def-trf-complete-algebra-devissage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IB, lemma-complete-devissage-flat-finitely-presented-module, proof"
+   }
+  },
+  {
+   "text": "Localize the entire diagram at $f_1$ and write $R\\leftarrow R_{f_1}$, with the analogous replacements of its algebras and modules, and $\\mathfrak r\\leftarrow\\mathfrak rR_{f_1}$. The dévissage conditions persist. Smoothness persists by base change; the fibres over primes of $R_{f_1}$ are the original fibres at the corresponding primes of $R$, so their geometric irreducibility persists. Finite spanning sets still span finite algebras, and algebra presentations remain finite by base change. Localization preserves exactness: a fraction in a kernel is represented by an element whose image is killed by a power of $f_1$, which can be multiplied into its numerator. Hence cokernels, surjections and the specified isomorphisms localize. The residue-field condition is unchanged because $f_1\\notin\\mathfrak r$. A finite presentation matrix localizes to a finite presentation matrix; flatness of $M_1$ over the localized base follows from $L\\otimes_{R_{f_1}}(M_1)_{f_1}\\cong L\\otimes_R M_1$ for an $R_{f_1}$-module $L$. We may therefore continue with $\\alpha_1$ universally injective over the current base.",
+   "uses": [
+    "def-trf-complete-algebra-devissage",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IB, lemma-complete-devissage-flat-finitely-presented-module, proof"
+   }
+  },
+  {
+   "text": "Set $C=\\operatorname{coker}(\\alpha_1)$ over the current rings. Universal injectivity and the quotient description of $C$ give a universally exact sequence $0\\to B_1^{\\oplus r_1}\\xrightarrow{\\alpha_1}M_1\\to C\\to0$. Indeed tensoring a cokernel is again the cokernel, and the initial map is injective by the meaning of universal injectivity. The flat-cokernel theorem now gives that $C$ is $R$-flat. Moreover $C$ is finitely presented over $B_1$: choose a presentation $B_1^u\\to B_1^v\\to M_1\\to0$ and lift the images of the $r_1$ standard basis vectors under $\\alpha_1$ to $B_1^v$; append those $r_1$ columns to the presentation matrix. The resulting matrix $B_1^{u+r_1}\\to B_1^v$ presents $C$. If $n=1$, then $C=0$. If $n>1$, the identifications $C\\cong M_2$ and $\\operatorname{coker}\\alpha_i\\cong M_{i+1}$ exhibit the tail $(A_i,B_i,M_i,\\alpha_i)_{2\\leq i\\leq n}$ as a complete dévissage of $C/B_1/R$ of length $n-1$.",
+   "uses": [
+    "lem-trf-local-ui-flat-cokernel",
+    "def-sc-finitely-presented-module",
+    "def-trf-complete-algebra-devissage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IB, lemma-complete-devissage-flat-finitely-presented-module, proof"
+   }
+  },
+  {
+   "text": "When $n>1$, apply the induction hypothesis to $C/B_1/R$. The base algebra $B_1$ is finitely presented over $R$ by step 2; $C$ is finitely presented over $B_1$ and flat over $R$ by step 6, and the required tail dévissage has just been specified. It gives $h\\in R\\setminus\\mathfrak r$ such that $C_h$ is projective over $R_h$. When $n=1$, take $h=1$ and $C_h=0$, which is projective. The universal-injective sequence of step 6 stays exact after this further localization by the fraction argument of step 5.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IB, lemma-complete-devissage-flat-finitely-presented-module, proof"
+   }
+  },
+  {
+   "text": "The algebra $(B_1)_h$ over the current $R_h$ is flat and finitely presented and has geometrically integral fibres, by step 2 and the localization checks of step 5. The projectivity theorem for flat finitely presented algebras with geometrically integral fibres gives that $(B_1)_h$ is a projective $R_h$-module. A finite direct sum of projective modules is projective: lift a map from each summand along a surjection and add the finitely many lifts. Thus $(B_1)_h^{\\oplus r_1}$ is projective, also when $r_1=0$.",
+   "uses": [
+    "lem-trf-local-fibres-integral-projective",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IB, lemma-complete-devissage-flat-finitely-presented-module, proof"
+   }
+  },
+  {
+   "text": "Projectivity of $C_h$ lifts $\\mathrm{id}_{C_h}$ along the quotient $q:(M_1)_h\\twoheadrightarrow C_h$, giving a section $s$. The map $(b,c)\\mapsto(\\alpha_1)_h(b)+s(c)$ identifies $(B_1)_h^{\\oplus r_1}\\oplus C_h$ with $(M_1)_h$: subtract $s(q(m))$ from $m$ to obtain the unique element of the kernel. Hence $(M_1)_h$, and therefore the corresponding localization of $N$, is projective by the same finite-sum lifting argument. To express the successive restrictions by one element of the original $R$, write $h=a/f_1^k$ in $R_{f_1}$. Since $h\\notin\\mathfrak rR_{f_1}$, $a\\notin\\mathfrak r$. Set $f=f_1a\\notin\\mathfrak r$. The rings $(R_{f_1})_h$ and $R_f$ are canonically isomorphic: in either ring both $f_1$ and $a$ are units, and these are exactly the required inverses. The fraction maps $m/(f_1^i h^j)\\mapsto f_1^{kj}m/(f_1^i a^j)$ identify the corresponding module localizations. This gives the asserted projective $R_f$-module $N_f$.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IB, lemma-complete-devissage-flat-finitely-presented-module, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-complete-algebra-devissage",
+  "def-weil-pbc-projective-module",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-smooth-ring-map-flat",
+  "sbc-lem-smooth-geometrically-reduced",
+  "def-pc-integral-scheme",
+  "lem-trf-finite-extension-module-finite-presentation",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-trf-generic-basis-base-open-universal-injectivity",
+  "lem-pc-proper-base-change",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-flat-ring-map",
+  "lem-trf-local-ui-flat-cokernel",
+  "def-sc-finitely-presented-module",
+  "lem-trf-local-fibres-integral-projective",
+  "lem-weil-pbc-ring-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05IB, lemma-complete-devissage-flat-finitely-presented-module, proof; Tag 05HY remark-finite-presentation for the presentation bookkeeping."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -74,10 +217,45 @@
    "results": "{\"t\": \"2026-10-18T23:15:39Z\", \"tool\": \"leanfinder\", \"query\": \"Raynaud Gruson complete devissage of an R flat finitely presented S module gives a finite direct sum of smooth R algebras after localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Algebra.IsStandardSmooth\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.Smooth.flat\", \"Algebra.Smooth.exists_subalgebra_fg\", \"Algebra.Smooth.exists_subalgebra_finiteType\"], \"digest\": \"9c7424d5f6e71286\"}; Read the actual hits. Smooth-presentation/descent and etale-locus results do not state complete devissage or its projectivity consequence.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete devissage of a finitely presented module flat over the base gives projectivity after localization at one base element outside a prime",
+   "results": "{\"t\": \"2026-10-19T00:15:21Z\", \"tool\": \"leanfinder\", \"query\": \"A complete devissage of a finitely presented module flat over the base gives projectivity after localization at one base element outside a prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.projective_of_localization_maximal\", \"Module.basicOpen_subset_freeLocus_iff\", \"Module.projective_of_localization_maximal'\", \"Module.Flat.projective_of_finitePresentation\", \"Module.FinitePresentation.exists_notMem_bijective\", \"Module.freeLocus_eq_univ_iff\", \"Module.freeLocus_eq_univ\", \"Module.flat_of_isLocalized_maximal\"], \"digest\": \"a79d77e5ac5e13fd\"}; No complete-devissage theorem. Module.Flat.projective_of_finitePresentation (Mathlib/RingTheory/Flat/EquationalCriterion.lean:287-289) needs finite presentation over R, which is absent here. Module.FinitePresentation.exists_notMem_bijective (Mathlib/Algebra/Module/FinitePresentation.lean:510-518) spreads an isomorphism in the same coefficient ring, not the base-open universal-injectivity assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complete Raynaud Gruson devissage implies projectivity of a flat module on a principal open neighborhood of the base prime",
+   "results": "{\"t\": \"2026-10-19T00:26:02Z\", \"tool\": \"leansearch\", \"query\": \"Complete Raynaud Gruson devissage implies projectivity of a flat module on a principal open neighborhood of the base prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.basicOpen_subset_freeLocus_iff\", \"Module.Flat.of_flat_tensorProduct\", \"Module.Flat.of_isLocalizedModule\", \"Module.flat_iff_of_isLocalization\", \"Module.free_of_flat_of_isLocalRing\", \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\", \"Module.flat_of_isLocalized_span\", \"Module.FaithfullyFlat.toFlat\"], \"digest\": \"e009eec78962dca8\"}; No complete-devissage theorem. Module.Flat.projective_of_finitePresentation (Mathlib/RingTheory/Flat/EquationalCriterion.lean:287-289) needs finite presentation over R, which is absent here. Module.FinitePresentation.exists_notMem_bijective (Mathlib/Algebra/Module/FinitePresentation.lean:510-518) spreads an isomorphism in the same coefficient ring, not the base-open universal-injectivity assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, Algebra.Smooth",
+   "results": "{\"t\": \"2026-10-19T00:18:01Z\", \"tool\": \"loogle\", \"query\": \"Module.Projective, Algebra.Smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No complete-devissage theorem. Module.Flat.projective_of_finitePresentation (Mathlib/RingTheory/Flat/EquationalCriterion.lean:287-289) needs finite presentation over R, which is absent here. Module.FinitePresentation.exists_notMem_bijective (Mathlib/Algebra/Module/FinitePresentation.lean:510-518) spreads an isomorphism in the same coefficient ring, not the base-open universal-injectivity assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "devissage|dévissage|completeDevissage",
+   "results": "{\"t\": \"2026-10-19T00:18:01Z\", \"tool\": \"grep\", \"query\": \"devissage|dévissage|completeDevissage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No complete-devissage theorem. Module.Flat.projective_of_finitePresentation (Mathlib/RingTheory/Flat/EquationalCriterion.lean:287-289) needs finite presentation over R, which is absent here. Module.FinitePresentation.exists_notMem_bijective (Mathlib/Algebra/Module/FinitePresentation.lean:510-518) spreads an isomorphism in the same coefficient ring, not the base-open universal-injectivity assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projective_of_finitePresentation|exists_notMem_bijective|Pure",
+   "results": "{\"t\": \"2026-10-19T00:26:02Z\", \"tool\": \"grep\", \"query\": \"projective_of_finitePresentation|exists_notMem_bijective|Pure\", \"sub\": \"Algebra/Module\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Module/FinitePresentation.lean\"], \"digest\": \"90942eb412959e7e\"}; No complete-devissage theorem. Module.Flat.projective_of_finitePresentation (Mathlib/RingTheory/Flat/EquationalCriterion.lean:287-289) needs finite presentation over R, which is absent here. Module.FinitePresentation.exists_notMem_bijective (Mathlib/Algebra/Module/FinitePresentation.lean:510-518) spreads an isomorphism in the same coefficient ring, not the base-open universal-injectivity assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-flat-algebra-etale-projective-neighborhood",
@@ -111,5 +289,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-complete-algebra-devissage-projective-localization",
+  "worker": "stage1",
+  "summary": "Followed the induction of Stacks Tag 05IB, reused the existing 0564, 058P and 05FT nodes, and isolated only the base-open generic-basis universal-injectivity consequence of 05IA. Wrote the finite-presentation transfers, cokernel presentation, localization stability, tail induction, splitting, and final one-element localization explicitly. No finite presentation over R is assumed or used.",
+  "blueprint": "The inherited historical algebra branch beneath lem-trf-local-term-locality, clauses (1)--(2), uses the etale projective neighborhood for the flat-tensor weak-assassin argument; this item realizes its complete-devissage-to-projectivity step through Tag 05IB. No change to the current contracting-correspondence route of sk-i-curve-zero is made.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic affine comparison for the smooth morphisms occurring in the algebraic devissage; the unit contains no substitute for this definition bridge."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-flat",
+    "why": "Generic smooth-algebra flatness used to check the hypotheses of the commutative-algebra tools."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic reducedness of smooth fibres, needed to turn the given geometric irreducibility into geometric integrality."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-base-change-composition",
+    "why": "Generic algebra presentation permanence for the finite maps and localizations in the induction."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only its smooth base-change clause is used to localize the devissage; its properness clause is not used."
+   },
+   {
+    "node": "lem-weil-pbc-ring-localization-universal-property",
+    "why": "Generic uniqueness of the fraction-ring isomorphism identifying two successive localizations with one principal localization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-ring-map-flat",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-ring-localization-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-025ea8c2e",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-025ea8c2e (reviewer sub-agent of L); spot-checked: I read Stacks 05HX, 05HY, 05IA (statement and the full (1)⇒(2) proof), 05IB and 05FT in flat.tex, and every cited node statement. The item matches the projectivity half of 05IB exactly; no hypothesis was added and none was weakened. All nine steps check. Step 3: I verified the fp transfer B1→A1 by hand (B1[x]/(F, y−P(x)) = R[x]/(F, G(P(x))) = R[x]/(F)), and 0564 is applied twice with both hypotheses (finite and fp). Step 4: every hypothesis of the new node holds; rB1 is prime by the definition, and it contracts to r because the fibre is nonempty. Steps 5–7: localization, the universally exact sequence, the 058P cokernel flatness, the cokernel presentation with r1 appended columns, and the tail dévissage over B1→A2 are all correct. Step 8: 05FT applies with geometrically integral fibres. Step 9: the splitting is correct, and the localization identification f=f1·a holds with the explicit fraction map m/(f1^i h^j) ↦ f1^{kj} m/(f1^i a^j). The new node lem-trf-generic-basis-base-open-universal-injectivity is 05IA (1)⇒(2), first half, with q=p=rB. It is true, has a statement only, and is self-contained; its stated hypothesis that p is prime over r is implied by flatness and is harmless. It is not a duplicate of the 05I3 local node, of free-subtraction-flatness (which needs the hypothesis at all primes), or of the 05CL/05CM nodes, and it does not restate a clause of the item. I accept the declared tool uses as generic black boxes; no SGA source is cited. FIX (D4/E5): Step 1 stated the inductive claim without quantifying the base ring and prime, although Step 5 replaces R by R_{f1} before Step 7 applies the induction hypothesis. I rewrote Step 1's first sentence to quantify over every ring R, prime r, fp algebra S and module N; nothing else changed.; 1 file(s) fixed by the reviewer"
  }
 }
