@@ -11,9 +11,106 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-finitely-generated-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "In this proof a module is Noetherian if every submodule is finitely generated, with finite generation as in [def-weil-finitely-generated-module]. We will use the following elementary quotient observation. If $V$ is a Noetherian $R$-module and $U\\subseteq V$, any submodule $L\\subseteq V/U$ is the image of its inverse image in $V$; images of a finite generating family generate $L$. Thus $V/U$ is Noetherian. Submodules of $V$ are Noetherian because their submodules are also submodules of $V$. Finally, if an ideal $J$ annihilates $V$, the $R$-submodules and $R/J$-submodules coincide, and an $R$-linear combination depends only on coefficient classes in $R/J$; hence finite generation and Noetherianity over these two scalar rings coincide.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "P. M. Eakin, Jr., The converse to a well known theorem on Noetherian rings, Math. Ann. 177 (1968), 278–282 (WANTED; not in literature/)",
+    "place": "Agent-written finite-module proof of the main theorem, using the Formanek maximal-faithful-quotient argument (Matsumura, Commutative Ring Theory, §3, Theorems 3.6–3.7; WANTED, not in literature/)."
+   }
+  },
+  {
+   "text": "Here is the finite evaluation observation used below. For a commutative ring $R$ and a finite faithful Noetherian $R$-module $V$, choose generators $v_1,\\ldots,v_s$. Faithful means that $rv=0$ for every $v\\in V$ implies $r=0$. The $R$-linear map $e:R\\to V^s$, $r\\mapsto(rv_1,\\ldots,rv_s)$, is injective: if all coordinates vanish, $r$ kills every linear combination of the generators. By [lem-per-noetherian-module-finite-product], $V^s$ is Noetherian. For any ideal $H\\subseteq R$, choose generators of the submodule $e(H)$ and lift them to $H$; injectivity shows that these lifts generate $H$. Therefore every ideal of $R$ is finitely generated, so $R$ is Noetherian [def-weil-pbc-noetherian-ring]. This also covers $s=0$, when faithfulness forces $R=0$.",
+   "uses": [
+    "lem-per-noetherian-module-finite-product",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "P. M. Eakin, Jr., The converse to a well known theorem on Noetherian rings, Math. Ann. 177 (1968), 278–282 (WANTED; not in literature/)",
+    "place": "Agent-written finite-module proof of the main theorem, using the Formanek maximal-faithful-quotient argument (Matsumura, Commutative Ring Theory, §3, Theorems 3.6–3.7; WANTED, not in literature/)."
+   }
+  },
+  {
+   "text": "Regard $A$ as a finite $B$-module through $i$. We prove it is Noetherian as a $B$-module. Suppose it is not. For a $B$-ideal $I$ write $IA$ for the ideal generated in $A$ by $i(I)$. The set of ideals $IA$ for which $A/IA$ is not Noetherian as a $B$-module is nonempty, since $I=0$ belongs to it. Since $A$ is a Noetherian ring, [lem-weil-pbc-noetherian-ideal-set-maximal] gives a maximal member $I_0A$ of this set. Set $M=A/I_0A$. Its generators are the images of a fixed finite $B$-generating family of $A$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-ideal-set-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "P. M. Eakin, Jr., The converse to a well known theorem on Noetherian rings, Math. Ann. 177 (1968), 278–282 (WANTED; not in literature/)",
+    "place": "Agent-written finite-module proof of the main theorem, using the Formanek maximal-faithful-quotient argument (Matsumura, Commutative Ring Theory, §3, Theorems 3.6–3.7; WANTED, not in literature/)."
+   }
+  },
+  {
+   "text": "Put $J=\\{b\\in B:i(b)A\\subseteq I_0A\\}$, the annihilator of $M$, and $R=B/J$. We have $I_0\\subseteq J$ and $JA=I_0A$: one inclusion follows from $I_0\\subseteq J$, the other from the defining condition on $J$. Thus $M$ is a finite faithful $R$-module and is not Noetherian, by Step 1. If $H\\ne0$ is an ideal of $R$, its inverse image $L\\subseteq B$ strictly contains $J$. Then $LA$ strictly contains $JA$: equality would imply $L\\subseteq J$ by the definition of $J$. Maximality in Step 3 says that $A/LA$ is Noetherian over $B$. The quotient of $A$ by the inverse image of $HM$ is $A/LA$, since that inverse image is $LA+I_0A=LA$. Hence $M/HM$ is Noetherian over $R$ by Step 1, for every nonzero ideal $H$ of $R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "P. M. Eakin, Jr., The converse to a well known theorem on Noetherian rings, Math. Ann. 177 (1968), 278–282 (WANTED; not in literature/)",
+    "place": "Agent-written finite-module proof of the main theorem, using the Formanek maximal-faithful-quotient argument (Matsumura, Commutative Ring Theory, §3, Theorems 3.6–3.7; WANTED, not in literature/)."
+   }
+  },
+  {
+   "text": "Consider the set $\\mathcal S$ of $R$-submodules $N\\subseteq M$ for which $M/N$ is faithful. It contains $0$. A nonempty chain has union $N_\\infty$, an $R$-submodule. If $rM\\subseteq N_\\infty$, finitely many generators $m_1,\\ldots,m_s$ of $M$ give finitely many elements $rm_j$ in that union. Choose one chain member containing all of them; when the family is empty choose any member of the nonempty chain. This member contains $rM$, so faithfulness of its quotient gives $r=0$. Thus $M/N_\\infty$ is faithful. The empty chain has upper bound $0$. Apply [lem-weil-pbc-zorn-lemma] to these underlying subsets of $M$, with the indicated chain upper bounds, to obtain a maximal $N_0\\in\\mathcal S$. Set $Q=M/N_0$. It is finite and faithful. By maximality, $Q/U$ is not faithful for every nonzero submodule $U\\subseteq Q$: its inverse image in $M$ strictly contains $N_0$.",
+   "uses": [
+    "lem-weil-pbc-zorn-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "P. M. Eakin, Jr., The converse to a well known theorem on Noetherian rings, Math. Ann. 177 (1968), 278–282 (WANTED; not in literature/)",
+    "place": "Agent-written finite-module proof of the main theorem, using the Formanek maximal-faithful-quotient argument (Matsumura, Commutative Ring Theory, §3, Theorems 3.6–3.7; WANTED, not in literature/)."
+   }
+  },
+  {
+   "text": "If $Q$ were Noetherian, Step 2 would make $R$ Noetherian. Since $M$ is finite over $R$, [lem-weil-pbc-noetherian-submodule-finite] would then make every submodule of $M$ finite, contrary to the choice of $M$. Thus $Q$ is not Noetherian. On the other hand, for every nonzero ideal $H\\subseteq R$, the map $M\\to Q$ induces a surjection $M/HM\\to Q/HQ$; the image of $HM$ is exactly $HQ$, by writing elements as finite sums of scalar multiples. Step 4 and the quotient observation of Step 1 imply that $Q/HQ$ is Noetherian.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "P. M. Eakin, Jr., The converse to a well known theorem on Noetherian rings, Math. Ann. 177 (1968), 278–282 (WANTED; not in literature/)",
+    "place": "Agent-written finite-module proof of the main theorem, using the Formanek maximal-faithful-quotient argument (Matsumura, Commutative Ring Theory, §3, Theorems 3.6–3.7; WANTED, not in literature/)."
+   }
+  },
+  {
+   "text": "Let $U\\subseteq Q$ be a nonzero $R$-submodule. Since $Q/U$ is not faithful by Step 5, there is $0\\ne a\\in R$ with $aQ\\subseteq U$. The module $aQ$ is finite: multiply a finite generating family of $Q$ by $a$. By Step 6, $Q/aQ$ is Noetherian (apply it to the nonzero principal ideal $(a)$), so its submodule $U/aQ$ has a finite generating family. Lift that family to $u_1,\\ldots,u_t\\in U$. Every $u\\in U$ differs from an $R$-linear combination of the $u_j$ by an element of $aQ$; adjoining generators of $aQ$ therefore generates $U$. The zero submodule has the empty generating family. Every submodule of $Q$ is consequently finite, contradicting Step 6. This contradiction proves that the original $B$-module $A$ is Noetherian.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "P. M. Eakin, Jr., The converse to a well known theorem on Noetherian rings, Math. Ann. 177 (1968), 278–282 (WANTED; not in literature/)",
+    "place": "Agent-written finite-module proof of the main theorem, using the Formanek maximal-faithful-quotient argument (Matsumura, Commutative Ring Theory, §3, Theorems 3.6–3.7; WANTED, not in literature/)."
+   }
+  },
+  {
+   "text": "For a $B$-ideal $H$, the subset $i(H)\\subseteq A$ is a $B$-submodule, hence has finitely many $B$-module generators by the preceding conclusion. Lift these generators to $H$. Since $i$ is injective, they generate $H$: apply $i$ to any proposed linear combination and use injectivity on the difference. Thus every ideal of $B$ is finitely generated, which is exactly that $B$ is Noetherian [def-weil-pbc-noetherian-ring]. If $A=0$, injectivity forces $B=0$, and the same conclusion holds.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "P. M. Eakin, Jr., The converse to a well known theorem on Noetherian rings, Math. Ann. 177 (1968), 278–282 (WANTED; not in literature/)",
+    "place": "Agent-written finite-module proof of the main theorem, using the Formanek maximal-faithful-quotient argument (Matsumura, Commutative Ring Theory, §3, Theorems 3.6–3.7; WANTED, not in literature/)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-noetherian-ring",
+  "lem-per-noetherian-module-finite-product",
+  "lem-weil-pbc-noetherian-ideal-set-maximal",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-zorn-lemma"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "P. M. Eakin, Jr., The converse to a well known theorem on Noetherian rings, Math. Ann. 177 (1968), 278–282 (WANTED; not in literature/)",
+  "place": "Complete argument written by Q04; Formanek maximal-faithful-quotient proof. The Eakin paper and Matsumura §3 are WANTED locally; the Stacks examples.tex reference does not contain a proof."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,10 +163,75 @@
    "date": "2026-10-19",
    "verdict": "no match",
    "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "grep",
+   "query": "Eakin|Nagata|of_finite|of_injective",
+   "results": "{\"t\": \"2026-10-18T23:16:17Z\", \"tool\": \"grep\", \"query\": \"Eakin|Nagata|of_finite|of_injective\", \"sub\": \"RingTheory/Noetherian\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Noetherian/Basic.lean\", \"Mathlib/RingTheory/Noetherian/Basic.lean\", \"Mathlib/RingTheory/Noetherian/Basic.lean\", \"Mathlib/RingTheory/Noetherian/Basic.lean\", \"Mathlib/RingTheory/Noetherian/Basic.lean\", \"Mathlib/RingTheory/Noetherian/Orzech.lean\", \"Mathlib/RingTheory/Noetherian/Orzech.lean\", \"Mathlib/RingTheory/Noetherian/Orzech.lean\"], \"digest\": \"5da7dec61163e561\"}; Read the returned signatures. Finite-type/ascent results assume the scalar ring is Noetherian, and isNoetherian_of_injective is over identical or isomorphic scalar rings; these do not give finite injective ring descent. Faithful Noetherian module detection is written out in Step 2, not assumed.",
+   "date": "2026-10-19",
+   "verdict": "no match",
+   "subdirectory": "RingTheory/Noetherian"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite faithful algebra that is a Noetherian ring has a Noetherian scalar ring",
+   "results": "{\"t\": \"2026-10-18T23:16:17Z\", \"tool\": \"leansearch\", \"query\": \"A finite faithful algebra that is a Noetherian ring has a Noetherian scalar ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FiniteType.isNoetherianRing\", \"Algebra.EssFiniteType.isNoetherianRing\", \"IsNoetherianRing.of_finite\", \"isNoetherian_of_isNoetherianRing_of_finite\", \"MonoidAlgebra.faithfulSMul\", \"isNoetherianRing_of_fg\", \"faithfulSMul_iff_algebraMap_injective\", \"Module.instFiniteSubtypeMemIdealOfIsNoetherian\"], \"digest\": \"829644e26390aaae\"}; Read the returned signatures. Finite-type/ascent results assume the scalar ring is Noetherian, and isNoetherian_of_injective is over identical or isomorphic scalar rings; these do not give finite injective ring descent. Faithful Noetherian module detection is written out in Step 2, not assumed.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNoetherianRing, Module.Finite",
+   "results": "{\"t\": \"2026-10-18T23:16:22Z\", \"tool\": \"loogle\", \"query\": \"IsNoetherianRing, Module.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"isNoetherian_of_isNoetherianRing_of_finite\", \"IsNoetherianRing.of_finite\", \"FGModuleCat.instFiniteCarrierLimitModuleCatCompForget₂LinearMapIdObjIsFG\", \"Ideal.Filtration.Stable.inter_left\", \"Ideal.Filtration.Stable.inter_right\", \"Ideal.Filtration.Stable.of_le\", \"Ideal.iInf_pow_smul_eq_bot_of_isLocalRing\", \"Ideal.iInf_pow_smul_eq_bot_of_isTorsionFree\"], \"digest\": \"9ee2fb74a0d3c05d\"}; Read the returned signatures. Finite-type/ascent results assume the scalar ring is Noetherian, and isNoetherian_of_injective is over identical or isomorphic scalar rings; these do not give finite injective ring descent. Faithful Noetherian module detection is written out in Step 2, not assumed.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherianity descends along a finite injective ring homomorphism Eakin Nagata",
+   "results": "{\"t\": \"2026-10-18T23:16:27Z\", \"tool\": \"leanfinder\", \"query\": \"Noetherianity descends along a finite injective ring homomorphism Eakin Nagata\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"fg_of_fg_of_fg\", \"Algebra.EssFiniteType.isNoetherianRing\", \"Algebra.FiniteType.isNoetherianRing\", \"IsNoetherianRing.of_finite\", \"AlgHom.isNoetherianRing_range\", \"isNoetherianRing_range\", \"isNoetherianRing_rangeS\", \"Module.Finite.of_injective\"], \"digest\": \"6b41ed25c5173d14\"}; Read the returned signatures. Finite-type/ascent results assume the scalar ring is Noetherian, and isNoetherian_of_injective is over identical or isomorphic scalar rings; these do not give finite injective ring descent. Faithful Noetherian module detection is written out in Step 2, not assumed.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative ring with a faithful Noetherian module is Noetherian",
+   "results": "{\"t\": \"2026-10-18T23:22:22Z\", \"tool\": \"leanfinder\", \"query\": \"A commutative ring with a faithful Noetherian module is Noetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isNoetherianRing_iff\", \"isNoetherian_of_isNoetherianRing_of_finite\", \"IsNoetherianRing.of_finite\", \"IsNoetherianRing.orzechProperty\", \"Algebra.EssFiniteType.isNoetherianRing\", \"Algebra.FiniteType.isNoetherianRing\", \"IsNoetherianRing\", \"isNoetherian_of_finite\"], \"digest\": \"45da82156343db03\"}; Read the returned signatures. Finite-type/ascent results assume the scalar ring is Noetherian, and isNoetherian_of_injective is over identical or isomorphic scalar rings; these do not give finite injective ring descent. Faithful Noetherian module detection is written out in Step 2, not assumed.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If M is a faithful Noetherian R module then R is a Noetherian ring",
+   "results": "{\"t\": \"2026-10-18T23:22:24Z\", \"tool\": \"leansearch\", \"query\": \"If M is a faithful Noetherian R module then R is a Noetherian ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsNoetherian\", \"IsNoetherian.casesOn\", \"IsNoetherian.mk\", \"isNoetherian_of_isNoetherianRing_of_finite\", \"isNoetherian_of_submodule_of_noetherian\", \"IsNoetherian.recOn\", \"isNoetherian_def\", \"isNoetherian_submodule'\"], \"digest\": \"c856f7fe7b01567a\"}; Read the returned signatures. Finite-type/ascent results assume the scalar ring is Noetherian, and isNoetherian_of_injective is over identical or isomorphic scalar rings; these do not give finite injective ring descent. Faithful Noetherian module detection is written out in Step 2, not assumed.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNoetherian\", \"FaithfulSMul\"",
+   "results": "{\"t\": \"2026-10-18T23:22:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsNoetherian\\\", \\\"FaithfulSMul\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures. Finite-type/ascent results assume the scalar ring is Noetherian, and isNoetherian_of_injective is over identical or isomorphic scalar rings; these do not give finite injective ring descent. Faithful Noetherian module detection is written out in Step 2, not assumed.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "faithful|annihilator",
+   "results": "{\"t\": \"2026-10-18T23:22:33Z\", \"tool\": \"grep\", \"query\": \"faithful|annihilator\", \"sub\": \"RingTheory/Noetherian\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures. Finite-type/ascent results assume the scalar ring is Noetherian, and isNoetherian_of_injective is over identical or isomorphic scalar rings; these do not give finite injective ring descent. Faithful Noetherian module detection is written out in Step 2, not assumed.",
+   "date": "2026-10-19",
+   "verdict": "no match",
+   "subdirectory": "RingTheory/Noetherian"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A subring of a Noetherian ring which is module finite over that subring is Noetherian",
+   "results": "{\"t\": \"2026-10-18T23:29:34Z\", \"tool\": \"leanfinder\", \"query\": \"A subring of a Noetherian ring which is module finite over that subring is Noetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isNoetherianRing_of_fg\", \"IsNoetherianRing.of_finite\", \"Algebra.FiniteType.isNoetherianRing\", \"Algebra.EssFiniteType.isNoetherianRing\", \"isNoetherian_of_isNoetherianRing_of_finite\", \"Subalgebra.fg_of_noetherian\", \"isNoetherian_of_fg_of_noetherian\", \"Module.instFiniteSubtypeMemIdealOfIsNoetherian\"], \"digest\": \"02e561410823f2dd\"}; Read the returned signatures. Finite-type/ascent results assume the scalar ring is Noetherian, and isNoetherian_of_injective is over identical or isomorphic scalar rings; these do not give finite injective ring descent. Faithful Noetherian module detection is written out in Step 2, not assumed.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-finite-quotient-strict-local-invariants",
@@ -97,5 +259,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-finite-quotient-noetherian-descent",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Wrote the full finite-module argument, including maximal extended ideal, annihilator quotient, finite-generator chain-union check, maximal faithful quotient and explicit lifting of generators. Reused existing maximal-ideal-set, Zorn and Noetherian-submodule leaves; added only the exact Mathlib finite-product leaf. No flatness, ring retraction, domain or nonzero-ring hypothesis is introduced.",
+  "blueprint": "Supports the recorded local-uniformization/finite-quotient Noetherian-base subargument of lem-per-artin-gabber-affine-curve through the existing ancestry, specifically Step 1 of lem-per-finite-quotient-strict-local-invariants. The ancestor current main-20261015 text and unit route are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-9e83a6b1a",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-9e83a6b1a (reviewer sub-agent of L); spot-checked: I read the whole item and the new node. The item states Eakin–Nagata: if i:B→A is injective, A is Noetherian and A is a finite B-module, then B is Noetherian. It is true, and the delivery leaves the statement unchanged. The parent lem-per-finite-quotient-strict-local-invariants Step 1 applies it with exactly these hypotheses (D=R^G inside R). The proof is Formanek's argument, written by the agent and marked as such; the Eakin paper and Matsumura §3 are WANTED. I checked all 8 steps. Step 3 takes a maximal extended ideal I_0A inside the Noetherian ring A, so it does not assume the conclusion. Step 4 proves J=Ann(M), JA=I_0A, and that LA strictly contains I_0A for every nonzero H. Step 5 applies Zorn to faithful quotients; a chain union stays faithful because M has finitely many generators, and the cited Zorn node includes the empty chain. Step 6 shows Q is not Noetherian (through Step 2 and the submodule-finite leaf), and Step 7 shows every submodule of Q is finite, which gives the contradiction. Step 2 uses an injective evaluation map into V^s, and Step 8 lifts generators back along the injective i. Every cited node is a Mathlib leaf or a definition and says what its step uses, so there is no cycle, no route departure and no tool_uses entry. No SGA source is cited. The new node lem-per-noetherian-module-finite-product is an exact Mathlib leaf for isNoetherian_pi at Mathlib/RingTheory/Noetherian/Basic.lean:177, where the section assumes Ring R and AddCommGroup and line 175 assumes Finite ι; IsNoetherian is defined in Defs.lean:62 as every submodule being finitely generated. The node allows any scalar ring, which Step 2 needs: the existing Noetherian-module nodes assume a Noetherian scalar ring and would make Step 2 circular. Searching dag/nodes for Eakin, isNoetherian_pi and isNoetherian_prod finds no duplicate; the only other hits are recorded search logs. The new node is not a restated clause of the item. Small cases: A=0 forces B=0; nilpotent extensions work because no domain assumption is used; dropping injectivity fails for k[x_1,x_2,...]→k; dropping finiteness fails for k[x,xy,xy^2,...] inside k[x,y]. The stacks examples.tex lines 1505–1512 only invoke Eakin's theorem and are correctly not used as a proof source. I made no fixes."
  }
 }
