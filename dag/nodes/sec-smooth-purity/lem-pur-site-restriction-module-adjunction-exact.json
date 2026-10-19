@@ -25,7 +25,7 @@
  ],
  "proof": [
   {
-   "text": "The restriction $j_U^*$ is a functor on module sheaves by the definition of the localized ringed site: it keeps the section groups and restriction maps on objects $V\\to U$, and the action of $\\mathcal O|_U(V\\to U)=\\mathcal O(V)$ is the restricted action. The extension-by-zero presheaf $P_F$ is a presheaf of $\\mathcal O$-modules by [def-weil-extension-by-zero-presheaf], and its module sheafification $P_F^\\#$ is the stated $j_{U!}F$ by [def-weil-presheaf-modules-sheafification]. Thus both assignments are functors on the displayed module categories.",
+   "text": "Restriction is the sectionwise functor overFunctor of the localized ringed site. Extension is the direct-sum presheaf extension followed by the module sheafification. Both functors retain independent object and morphism universes; coefficients and modules live in max c v r.",
    "uses": [
     "def-pur-localized-ringed-site",
     "def-weil-extension-by-zero-presheaf",
@@ -34,11 +34,11 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Section 03DH and Lemma 03DI, construction of the module extension by zero"
+    "place": "Lemmas 03DI and 03DJ (lemma-extension-by-zero and lemma-extension-by-zero-exact)"
    }
   },
   {
-   "text": "Construct the module Hom equivalence directly, following the sectionwise formula of Stacks 03DI. From a map from the extension-by-zero presheaf to G, compose each section map with the direct-sum injection indexed by the slice arrow. Conversely, from F to the restriction of G, use DirectSum.toModule on the component linear maps. Naturality follows from the restriction formula of [def-weil-extension-by-zero-presheaf] and naturality in the slice. The direct-sum universal property proves both inverse laws; checking the same generators proves naturality in F and G. Compose this presheaf Hom equivalence with the module sheafification Hom equivalence of [def-weil-presheaf-modules-sheafification] (the interface in [lem-pc-sites-module-sheafification-interface]) and use Adjunction.mkOfHomEquiv. This produces the module adjunction without requiring a sectionwise formula from the abelian adjunction statement.",
+   "text": "For a map from the extension presheaf to G, precompose its section at V with the linear injection of the summand indexed by V → U. In the reverse direction apply DirectSum.toModule to the slice components of a map F → G|U. The restriction formula on each summand proves naturality, DirectSum.toModule.unique proves the first inverse law, and DirectSum.toModule_lof proves the second. Verify naturality in both module sheaves on summand generators. Compose with sheafificationHomEquiv and apply Adjunction.mkOfHomEquiv. Its unit is definitionally the prescribed summand injection followed by the sheafification unit. Any other adjunction with that formula has equal units componentwise, hence is equal by Adjunction.ext.",
    "uses": [
     "def-weil-extension-by-zero-presheaf",
     "def-weil-presheaf-modules-sheafification",
@@ -47,35 +47,32 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03DI, adjunction construction, with the module linearity in the paragraph after the presheaf formula"
+    "place": "Lemmas 03DI and 03DJ (lemma-extension-by-zero and lemma-extension-by-zero-exact)"
    }
   },
   {
-   "text": "The module restriction is additive by its sectionwise formula in [def-pur-localized-ringed-site]. Forget the short complex to abelian sheaves; exactness of the forgetful functor follows from [lem-weil-pbc-module-sheaves-colimits-forgetful]. Restriction commutes with forgetting by the identity natural isomorphism. Apply [lem-weil-pbc-site-restriction-exact], transport the mapped short complex along this isomorphism, and use ShortExact.reflects_shortExact_of_faithful. The Mathlib characterizations of finite-limit and finite-colimit preservation for additive functors between abelian categories give both preservation clauses.",
+   "text": "Restriction is additive componentwise, so its constructed left adjoint is additive by Adjunction.left_adjoint_additive. The adjunction supplies colimit preservation by extension and limit preservation by restriction. A monomorphism of slice module sheaves is injective on sections because evaluation preserves finite limits. DirectSum.lmap_injective makes its extension-presheaf map injective on every section; PresheafOfModules.mono_of_injective makes this map mono. Module sheafification preserves finite limits and therefore monomorphisms. Thus the extension preserves monomorphisms and cokernels. Mathlib Functor.preservesHomology_of_preservesMonos_and_cokernels and Functor.preservesFiniteLimits_of_preservesHomology give its finite-limit preservation.",
    "uses": [
     "def-pur-localized-ringed-site",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-site-restriction-exact"
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03DJ, restriction exactness assertion and the module forgetful-functor lemma 03DA"
+    "place": "Lemmas 03DI and 03DJ (lemma-extension-by-zero and lemma-extension-by-zero-exact)"
    }
   },
   {
-   "text": "Compare extension-by-zero followed by forgetting with forgetting followed by the abelian direct-sum extension. The section objects are identical; equality of the maps follows by direct-sum induction, since DirectSum.lmap and DirectSum.toAddMonoid agree on every summand. Whisker this comparison with abelian sheafification and use the sheafification/forgetful isomorphism of [lem-pc-sites-module-sheafification-interface]. The abelian adjunction of [lem-weil-pbc-site-extension-by-zero-presheaf-adjoint] and Mathlib's constructed sheafAdjunctionContinuous identify the abelian extension with the sheaf pullback by uniqueness of left adjoints. This pullback is additive because it preserves coproducts and zero morphisms; transfer additivity along the comparison and reflect it through the faithful additive module forgetful functor. Apply [lem-weil-pbc-site-extension-by-zero-exact] to the forgotten short complex, using [lem-weil-pbc-module-sheaves-colimits-forgetful] to preserve its short exactness. Transport along the comparison of functors, reflect short exactness through the faithful forgetful functor, and apply the Mathlib finite-limit and finite-colimit characterizations as in Step 3.",
+   "text": "The forgetful functor from module sheaves preserves finite colimits by moduleSheaves_colimits_forgetful. Underlying abelian sheaves commute definitionally with restriction to the slice. The forgetful site functor Over.forget U is continuous and cocontinuous; Mathlib sheafAdjunctionCocontinuous makes its abelian-sheaf restriction a left adjoint and hence colimit preserving. Therefore module restriction followed by forgetting preserves finite colimits. Since the faithful module forgetful functor reflects isomorphisms and preserves finite colimits, it reflects finite colimits. Apply preservesFiniteColimits_of_reflects_of_preserves to conclude right exactness of module restriction.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-site-extension-by-zero-exact",
-    "lem-pc-sites-module-sheafification-interface",
-    "def-weil-extension-by-zero-presheaf",
-    "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint"
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03DJ, exactness of extension by zero, with Lemmas 03DA and 03CY for modules"
+    "place": "Lemmas 03DI and 03DJ (lemma-extension-by-zero and lemma-extension-by-zero-exact)"
    }
   }
  ],
@@ -84,15 +81,12 @@
   "def-weil-extension-by-zero-presheaf",
   "def-weil-presheaf-modules-sheafification",
   "lem-pc-sites-module-sheafification-interface",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-site-restriction-exact",
-  "lem-weil-pbc-site-extension-by-zero-exact",
-  "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint"
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Stacks 03DI direct module Hom construction; 03DJ exactness, transported from the existing abelian exactness statement; formalized by H2 on 2026-10-12"
+  "place": "Lemmas 03DI and 03DJ (lemma-extension-by-zero and lemma-extension-by-zero-exact); J2 generalizes the proved source-library Hom construction to independent universes and follows the direct monomorphism/right-exactness argument of 03DJ (2026-10-19)."
  },
  "mathlib_searches": [
   {
@@ -159,14 +153,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
-  "lem-weil-pbc-site-restriction-exact",
-  "lem-weil-pbc-site-extension-by-zero-exact",
   "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-site-restriction-adjunction",
-  "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
-  "lem-weil-pbc-site-restriction-exact",
-  "lem-weil-pbc-site-extension-by-zero-exact",
   "lem-weil-pbc-module-sheaves-colimits-forgetful"
  ],
  "reviewed": {
@@ -234,12 +221,12 @@
   "note": "Re-delivery after the RETURN of fae3d3347b17. Both H3 findings are repaired. (1) Data.tensorEvaluation is now pinned by tensorEvaluationModel (TensorComparisonModel for evaluation n) with tensorEvaluationModel_ordinary = ordinaryEvaluationTensor, the unique identity-on-pure-tensors map; the summand and derived equations on flat-term K-flat representatives fix it on every object, so homEvaluation and target.tensorEvaluation become canonical. (2) Data.scalarTensor is pinned by scalarTensorModel (ScalarTensorComparisonModel: pure-tensor rule (x⊗y)⊗1↦(x⊗1)⊗(y⊗1) through the model's E, summand rule, kflat preservation, localized square via scalarEpsilonIso and tensorModelIso); orientation checked against homReductionTranspose. All other modules are byte-identical to the previously reviewed version; clause table, edge cases (empty site, zero rings, equal indices, nonflat maps, constant Z tower sign test), universes (c, v independent, coefficients at max c v r) and one-definition checks pass; lean.statement is verbatim. Mechanical H8 defect: scalarExtensionSection, ScalarTensorPure, scalarEpsilonIso and ScalarTensorComparisonModel lacked Source/(blueprint: def-coef-semilinear-system-models) docstrings. fixes/SemilinearSystemModels.lean is a complete replacement with docstring-only changes. nt_compile of all seven modules is clean both as delivered and with the fix (max 27.6 s per file). Maintainer note: the item's top-level source.place still mentions enhanced sections; a stage-2 FIX cannot change it."
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-19",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261012T144117-L-2098197",
+  "landing": "20261019T122551-L-467940",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
