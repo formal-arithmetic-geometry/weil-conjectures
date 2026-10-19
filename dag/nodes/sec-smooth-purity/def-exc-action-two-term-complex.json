@@ -1,0 +1,103 @@
+{
+ "id": "def-exc-action-two-term-complex",
+ "kind": "definition",
+ "title": "The explicit two-term action complex",
+ "statement": "Let A be a ring and G a topological group. On discrete continuous A-linear G-representations [def-exc-discrete-modules-category], fix tau in G. Define K(M) to have M in degrees 0 and 1, the zero module in every degree at least 2, and differential rho_M(tau)-id in degree 0 and zero elsewhere. A coefficient morphism acts by its underlying linear map in degrees 0 and 1 and by zero elsewhere. This is a functor to nonnegative cochain complexes of A-modules, with identity linear equivalences in the two nonzero degrees.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-procyclic-two-term.proof.md",
+  "place": "First paragraph, definition of the two-term complexes and their functoriality"
+ },
+ "stmt_deps": [
+  "def-exc-discrete-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Construct the graded objects using M,M,PUnit,PUnit,... and use CochainComplex.of with the only potentially nonzero differential rho(tau)-id. Consecutive differentials compose to zero because one is zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Define coefficient maps by the original linear map in degrees 0 and 1. Equivariance gives commutation with rho(tau)-id, and the other chain-map equations are zero equations. Identities and composition hold degreewise. Identity linear equivalences identify degrees 0 and 1 with M; PUnit is a zero module in all higher degrees.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-procyclic-two-term.proof.md",
+  "place": "First paragraph, definition of the two-term complexes and their functoriality; Lean implementation of the displayed construction and universal properties"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "continuous cohomology of l-adic integers computed by a two term action complex and a locally constant primitive for translation",
+   "results": "8 hits: ContinuousCohomology.MultiInd.complex, continuousCohomology, MultiInd.d, homogeneousCochains, LocallyConstant.coe_vadd and related topological cochain infrastructure.",
+   "date": "2026-10-19",
+   "verdict": "No match for the two-term action construction, its delta-functor, procyclic invariant kernel, periodic primitive, effacement or derived comparison. These topological cochains do not implement this discrete procyclic calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "two term complex of an endomorphism action minus identity with natural degree zero invariant kernel and effaceable cohomology",
+   "results": "8 hits: Rep.FiniteCyclicGroup.groupCohomologyIso₀, groupCohomology.shortComplexH0, shortComplexH1, ContinuousCohomology.kerHomogeneousCochainsZeroEquiv, groupCohomology, Rep.barComplex and kernel-map equations.",
+   "date": "2026-10-19",
+   "verdict": "No exact match. Finite cyclic discrete group cohomology does not compute continuous cohomology of Z_l. The generic kernel and homology APIs are used in the proofs instead."
+  },
+  {
+   "tool": "grep",
+   "query": "procyclic|actionTwoTerm|exists_procyclic_primitive",
+   "results": "Recorded msearch query: 0 Mathlib hits. Current library rg search finds only the assigned theorem and its consumer DvrGalois; no existing actionTwoTerm or exists_procyclic_primitive declaration. PadicInt.toZModPow, ker_toZModPow and denseRange_natCast supply the topology and density primitives.",
+   "date": "2026-10-19",
+   "verdict": "No existing declaration of these results found. Use Mathlib cochain construction, kernel, homology long exact sequence, and p-adic reduction APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RepresentationTheory.ProcyclicTwoTerm",
+  "date": "2026-10-19",
+  "group": "E6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-procyclic-two-term",
+   "place": "First paragraph, definition of the two-term complexes and their functoriality",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RepresentationTheory.ProcyclicComplex",
+  "file": "lean/Sheaf/RepresentationTheory/ProcyclicComplex.lean",
+  "declaration": "Rep.actionTwoTerm",
+  "statement": "def actionTwoTerm (τ : G) : DiscreteContinuousRep.{u, v, w} A G ⥤ CochainComplex (ModuleCat.{w} A) ℕ",
+  "branch": "sheaf-dag",
+  "by": "E6",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261019T112444-L-3941692",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261019T112444-L-3941692",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

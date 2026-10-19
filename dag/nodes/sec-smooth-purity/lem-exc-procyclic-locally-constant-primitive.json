@@ -1,0 +1,112 @@
+{
+ "id": "lem-exc-procyclic-locally-constant-primitive",
+ "kind": "statement",
+ "title": "A locally constant primitive for l-adic translation",
+ "statement": "Let l be prime, s a nonnegative integer and M an additive commutative group killed by l^s. For every locally constant f:Z_l -> M [def-weil-l-adic-numbers] there is a locally constant h:Z_l -> M with h(x+1)-h(x)=f(x) for every x.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-procyclic-two-term.proof.md",
+  "place": "Second and third paragraphs, finite-quotient factorization and the periodic partial sums"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers"
+ ],
+ "proof": [
+  {
+   "text": "Give M the discrete topology. The open-normal-stabilizer theorem supplies an open subgroup U fixing f under right translation. Choose r with the ball of norm at most l^(-r) contained in U. Then f(n+l^r)=f(n) on integers. For reduction q modulo l^(r+s), x minus the canonical lift of q(x) has norm at most l^(-(r+s)), hence belongs to U; consequently f(q(x).val)=f(x).",
+   "uses": [
+    "lem-exc-coinduced-functions-open-stabilizer"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write L=l^r and N=l^(r+s)=L*l^s. Induction on the number of periods, splitting finite sums into consecutive blocks, gives sum_{n<N} f(n)=l^s times sum_{n<L} f(n)=0. For a in Z/NZ let H(a)=sum_{n<a.val} f(n). Away from the last residue the difference H(a+1)-H(a) is f(a.val). At the last residue the zero total sum gives the same equation across wraparound. This also applies when N=1.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Reduction modulo N is locally constant: the norm bound characterizing its kernel gives an open ball on which reduction is constant. Pull H back along reduction to obtain locally constant h. The cyclic difference equation and the preceding factorization give h(x+1)-h(x)=f(x).",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-coinduced-functions-open-stabilizer"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-procyclic-two-term.proof.md",
+  "place": "Second and third paragraphs, finite-quotient factorization and the periodic partial sums; Lean implementation of the displayed construction and universal properties"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "continuous cohomology of l-adic integers computed by a two term action complex and a locally constant primitive for translation",
+   "results": "8 hits: ContinuousCohomology.MultiInd.complex, continuousCohomology, MultiInd.d, homogeneousCochains, LocallyConstant.coe_vadd and related topological cochain infrastructure.",
+   "date": "2026-10-19",
+   "verdict": "No match for the two-term action construction, its delta-functor, procyclic invariant kernel, periodic primitive, effacement or derived comparison. These topological cochains do not implement this discrete procyclic calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "two term complex of an endomorphism action minus identity with natural degree zero invariant kernel and effaceable cohomology",
+   "results": "8 hits: Rep.FiniteCyclicGroup.groupCohomologyIso₀, groupCohomology.shortComplexH0, shortComplexH1, ContinuousCohomology.kerHomogeneousCochainsZeroEquiv, groupCohomology, Rep.barComplex and kernel-map equations.",
+   "date": "2026-10-19",
+   "verdict": "No exact match. Finite cyclic discrete group cohomology does not compute continuous cohomology of Z_l. The generic kernel and homology APIs are used in the proofs instead."
+  },
+  {
+   "tool": "grep",
+   "query": "procyclic|actionTwoTerm|exists_procyclic_primitive",
+   "results": "Recorded msearch query: 0 Mathlib hits. Current library rg search finds only the assigned theorem and its consumer DvrGalois; no existing actionTwoTerm or exists_procyclic_primitive declaration. PadicInt.toZModPow, ker_toZModPow and denseRange_natCast supply the topology and density primitives.",
+   "date": "2026-10-19",
+   "verdict": "No existing declaration of these results found. Use Mathlib cochain construction, kernel, homology long exact sequence, and p-adic reduction APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RepresentationTheory.ProcyclicTwoTerm",
+  "date": "2026-10-19",
+  "group": "E6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-procyclic-two-term",
+   "place": "Second and third paragraphs, finite-quotient factorization and the periodic partial sums",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RepresentationTheory.ProcyclicPrimitive",
+  "file": "lean/Sheaf/RepresentationTheory/ProcyclicPrimitive.lean",
+  "declaration": "Rep.exists_procyclic_primitive",
+  "statement": "theorem exists_procyclic_primitive (l : ℕ) [Fact l.Prime] (s : ℕ) (M : Type w) [AddCommGroup M] (hM : ∀ m : M, (l ^ s) • m = 0) (f : LocallyConstant ℤ_[l] M) : ∃ h : LocallyConstant ℤ_[l] M, ∀ x : ℤ_[l], h (x + 1) - h x = f x",
+  "branch": "sheaf-dag",
+  "by": "E6",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261019T112444-L-3941692",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261019T112444-L-3941692",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

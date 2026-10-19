@@ -18,130 +18,28 @@
  ],
  "proof": [
   {
-   "text": "Fix $A$ and $G$. The inverse-limit description in the statement makes $G$ profinite, with the kernels $\\ell^rG$ of reduction modulo $\\ell^r$ a neighbourhood basis at zero. Work in the abelian category $\\mathcal C$ of discrete continuous $A[G]$-modules from [lem-exc-discrete-modules-abelian]. Define the functor $K:\\mathcal C\\to\\operatorname{CochainComplex}(A\\text{-Mod},\\mathbf N)$ by $K(M)^0=K(M)^1=M$, $d^0=\\tau-1$, and zero in all other degrees; an equivariant coefficient map induces that same map in degrees zero and one. It commutes with $\\tau-1$. Its cohomology is $T^0(M)=\\ker(\\tau-1)$, $T^1(M)=M/(\\tau-1)M$, and $T^q(M)=0$ for $q\\geq2$. The first is $M^G$: a vector fixed by $\\tau$ is fixed by every integer multiple of $\\tau$, and its stabilizer is closed as well as open (the complement of an open subgroup is a union of open cosets), hence contains the closure of that dense cyclic subgroup. This identification is natural in coefficient maps.",
+   "text": "Take the explicitly constructed action complex K for the additive generator tau=1. Its terms in degrees 0 and 1 identify with the coefficient module by identity linear equivalences; its coefficient maps use the original linear map in those degrees. Its differential is rho(tau)-id and its terms in every degree at least 2 are zero.",
    "uses": [
-    "lem-exc-discrete-modules-abelian"
+    "def-exc-action-two-term-complex"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-procyclic-two-term.md",
-    "place": "Proof, first paragraph; explicit construction of the two-term functor"
-   }
+   "elementary": false
   },
   {
-   "text": "A short exact sequence in $\\mathcal C$ is short exact on underlying $A$-modules by [lem-exc-discrete-modules-abelian], so applying $K$ gives a degreewise short exact sequence of complexes (the original sequence in degrees zero and one and the zero sequence elsewhere). Apply [lem-weil-pbc-complex-ses-homology-long-exact] to obtain its connecting maps, and [lem-weil-pbc-complex-ses-long-exact-naturality] to obtain their naturality. There is an initial zero because these complexes have no negative terms: the map on their degree-zero kernels is the restriction of the original injection and is injective. The maps on $T^0$ and $T^1$ are induced by the coefficient maps on a kernel and a quotient, so they preserve addition of maps; the higher functors are zero. Thus these functors and connecting maps satisfy precisely [def-weil-pbc-delta-functor].",
+   "text": "The derived-invariants comparison identifies the recorded continuous cohomology with the homology functors of this particular K, naturally in coefficients and in every degree. Supply these isomorphisms and the explicit term identifications as the witnesses in the unchanged statement.",
    "uses": [
-    "lem-exc-discrete-modules-abelian",
-    "lem-weil-pbc-complex-ses-homology-long-exact",
-    "lem-weil-pbc-complex-ses-long-exact-naturality",
-    "def-weil-pbc-delta-functor"
+    "lem-exc-procyclic-two-term-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0117, lemma-long-exact-sequence-cochain, including functoriality; Tags 010Q--010S"
-   }
-  },
-  {
-   "text": "Apply [lem-exc-coinduced-discrete-embedding] to obtain the discrete continuous $A[G]$-module $D(M)=\\operatorname{Cont}(G,M)$ with action $(g\\cdot f)(x)=f(x+g)$ and the equivariant $A$-linear injection $\\iota_M(m)(x)=x\\cdot m$. For any $f\\in D(M)$, [lem-exc-coinduced-functions-open-stabilizer] gives an open subgroup $U$ with $f(x+u)=f(x)$ for $u\\in U$. By the neighbourhood basis in Step 1 choose $r\\geq1$ with $\\ell^rG\\subseteq U$. Consequently $f$ factors through reduction $G\\to\\mathbf Z/\\ell^r\\mathbf Z$: two lifts of the same residue differ by an element of $\\ell^rG$.",
-   "uses": [
-    "lem-exc-coinduced-discrete-embedding",
-    "lem-exc-coinduced-functions-open-stabilizer"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-procyclic-two-term.md",
-    "place": "Proof, second paragraph; open-stabilizer factorization supplied by the existing generic nodes"
-   }
-  },
-  {
-   "text": "Write $L=\\ell^r$ for the modulus obtained in Step 3 and $N=\\ell^{r+s}=L\\ell^s$. Pull $f$ back to $\\mathbf Z/N\\mathbf Z$. Each residue modulo $L$ occurs $\\ell^s$ times, so $\\sum_{a=0}^{N-1}f(a)=\\ell^s\\sum_{a=0}^{L-1}f(a)=0$, since $\\ell^sM=0$. On representatives $0\\leq a<N$ set $h(a)=\\sum_{b=0}^{a-1}f(b)$, with empty sum zero. For $a<N-1$ subtraction gives $h(a+1)-h(a)=f(a)$; for $a=N-1$ the zero total sum gives $h(0)-h(N-1)=f(N-1)$. Thus $h$ is well defined on the cyclic quotient, and its pullback is continuous because that quotient is finite discrete. With the translation action it satisfies $(\\tau-1)h(x)=h(x+1)-h(x)=f(x)$. Therefore $\\tau-1:D(M)\\to D(M)$ is surjective.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-procyclic-two-term.md",
-    "place": "Proof, third paragraph, explicit periodic partial-sum construction including the wraparound equation"
-   }
-  },
-  {
-   "text": "Step 4 gives $T^1(D(M))=0$, and $T^q(D(M))=0$ for $q\\geq2$ already follows from the definition of $K$. The injection $\\iota_M$ of Step 3 therefore induces zero in every positive degree. The category $\\mathcal C$ is abelian by Step 1 and $A\\text{-Mod}$ is abelian; Step 2 supplies a cohomological delta-functor. All hypotheses of [lem-weil-pbc-effaceable-delta-functor-universal] now hold, and hence $T$ is universal.",
-   "uses": [
-    "lem-weil-pbc-effaceable-delta-functor-universal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 010T, lemma-efface-implies-universal; applied to the effacement constructed in the blueprint third paragraph"
-   }
-  },
-  {
-   "text": "Let $C(M)^n=\\operatorname{Cont}(G^n,M)$ with the inhomogeneous differential of [lem-exc-continuous-cochains-delta-functor]. This node supplies its complex functor and its cohomological delta-functor $S^q=H^q(C(-))$. For $q>0$, [lem-exc-coinduced-continuous-acyclic] gives $S^q(D(M))=0$ for exactly the translation action used in Step 3. The natural monomorphism in [lem-exc-coinduced-discrete-embedding] therefore effaces every positive $S^q$. Apply [lem-weil-pbc-effaceable-delta-functor-universal] again to conclude that $S$ is universal. In degree zero the given differential is $d^0m(g)=g\\cdot m-m$, so its kernel is $M^G$, with no incoming boundaries. Thus $S^0$ and $T^0$ have the same natural identification with invariants.",
-   "uses": [
-    "lem-exc-continuous-cochains-delta-functor",
-    "lem-exc-coinduced-continuous-acyclic",
-    "lem-exc-coinduced-discrete-embedding",
-    "lem-weil-pbc-effaceable-delta-functor-universal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed differential and discrete-module delta-functor; coinduced effacement from the cited existing nodes"
-   }
-  },
-  {
-   "text": "Define a natural map of complexes $e_M:C(M)\\to K(M)$ by $e_M^0=\\operatorname{id}_M$ under $C(M)^0=M$, $e_M^1(f)=f(\\tau)$, and $e_M^n=0$ for $n\\geq2$. Its only nontrivial differential equation is $e_M^1(d^0m)=\\tau\\cdot m-m=d_K^0(e_M^0m)$; in positive degrees both sides of the remaining equations are zero. Evaluation is $A$-linear and commutes with postcomposition by every coefficient map, so this is a natural chain map. The induced map in degree-zero cohomology is the identity on $M^G$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-procyclic-two-term.md",
-    "place": "Proof, final identification clause; explicit comparison chain map supplied by the agent"
-   }
-  },
-  {
-   "text": "For every short exact coefficient sequence, [lem-exc-continuous-cochains-short-exact] gives the degreewise short exact sequence of $C$-complexes, and Step 2 gives that of $K$-complexes. Naturality of $e$ makes its three components a morphism between these two sequences. Apply [lem-weil-pbc-complex-ses-long-exact-naturality] to obtain $H^{q+1}(e_{M'})\\circ\\delta_S^q=\\delta_T^q\\circ H^q(e_{M''})$. Hence $H^\\bullet(e):S\\to T$ is a morphism of delta-functors with degree-zero component the identity.",
-   "uses": [
-    "lem-exc-continuous-cochains-short-exact",
-    "lem-weil-pbc-complex-ses-long-exact-naturality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0117, lemma-long-exact-sequence-cochain, functoriality applied to the explicit comparison map"
-   }
-  },
-  {
-   "text": "By universality of $T$ there is a morphism $u:T\\to S$ extending the inverse degree-zero identification. The two composites $u\\circ H^\\bullet(e)$ and $H^\\bullet(e)\\circ u$ extend the identities in degree zero. By uniqueness for the universal delta-functors $S$ and $T$, respectively, each composite is the identity. This uses exactly the universal property in [def-weil-pbc-delta-functor], furnished in Steps 5 and 6 by [lem-weil-pbc-effaceable-delta-functor-universal]. Thus every $H^q(e_M)$ is an isomorphism, so $e_M$ is a quasi-isomorphism and becomes an isomorphism in the ordinary derived category by [def-weil-abstract-derived-category]. The continuous-cochain description of [def-exc-continuous-cohomology] identifies $C(M)$ as the complex computing the continuous cohomology in the statement. Consequently $K(M)=[M\\xrightarrow{\\tau-1}M]$ computes it as well, naturally in $M$; in particular $H^0(G,M)=\\ker(\\tau-1)$, $H^1(G,M)=\\operatorname{coker}(\\tau-1)$, and $H^q(G,M)=0$ for $q\\geq2$.",
-   "uses": [
-    "def-weil-pbc-delta-functor",
-    "lem-weil-pbc-effaceable-delta-functor-universal",
-    "def-weil-abstract-derived-category",
-    "def-exc-continuous-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-procyclic-two-term.md",
-    "place": "Proof, third paragraph, final identification; universal-property argument and comparison quasi-isomorphism made explicit"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-exc-discrete-modules-abelian",
-  "lem-weil-pbc-complex-ses-homology-long-exact",
-  "lem-weil-pbc-complex-ses-long-exact-naturality",
-  "def-weil-pbc-delta-functor",
-  "lem-exc-coinduced-discrete-embedding",
-  "lem-exc-coinduced-functions-open-stabilizer",
-  "lem-weil-pbc-effaceable-delta-functor-universal",
-  "lem-exc-continuous-cochains-delta-functor",
-  "lem-exc-coinduced-continuous-acyclic",
-  "lem-exc-continuous-cochains-short-exact",
-  "def-weil-abstract-derived-category",
-  "def-exc-continuous-cohomology"
+  "def-exc-action-two-term-complex",
+  "lem-exc-procyclic-two-term-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-procyclic-two-term.md",
-  "place": "Proof, all three paragraphs; Stacks 0117 and 010T and the existing coinduction nodes supply the generic facts, with an explicit comparison chain map"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-procyclic-two-term.proof.md",
+  "place": "All three paragraphs; explicit two-term construction and periodic primitive, effacement, then uniqueness of universal delta-functors compared directly with right derived invariants. Mathlib supplies the homology long exact sequence and its naturality."
  },
  "mathlib_searches": [
   {
@@ -308,9 +206,6 @@
   "lem-exc-discrete-modules-abelian",
   "lem-exc-coinduced-discrete-embedding",
   "lem-exc-coinduced-functions-open-stabilizer",
-  "lem-exc-continuous-cochains-delta-functor",
-  "lem-exc-coinduced-continuous-acyclic",
-  "lem-exc-continuous-cochains-short-exact",
   "lem-weil-pbc-effaceable-delta-functor-universal"
  ],
  "reviewed": {
@@ -338,5 +233,15 @@
   "group": "Q33",
   "result": "pass",
   "note": "Statement, dependencies, docstrings, edge cases, source/report sections, and universe details checked; scompile.py local/server compilation passed cleanly."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261019T112444-L-3941692",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

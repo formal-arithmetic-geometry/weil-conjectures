@@ -1,0 +1,118 @@
+{
+ "id": "lem-exc-procyclic-two-term-effacement",
+ "kind": "statement",
+ "title": "Effacement of positive two-term cohomology",
+ "statement": "Let l be prime, s nonnegative, and A a finite ring killed by l^s. In the abelian discrete continuous A-linear representation category of the additive l-adic integers [lem-exc-discrete-modules-abelian], let T be any cohomological delta-functor whose degree-q functor equals H^q(K(-)), where K is the action complex for tau=1 [def-exc-action-two-term-complex]. For every q>0 and coefficient M there exist N and a monomorphism i:M -> N with T^q(i)=0.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-procyclic-two-term.proof.md",
+  "place": "Second paragraph, coinduced embedding; third paragraph, surjectivity and effacement"
+ },
+ "stmt_deps": [
+  "lem-exc-discrete-modules-abelian",
+  "def-exc-action-two-term-complex",
+  "def-weil-l-adic-numbers",
+  "def-weil-pbc-delta-functor"
+ ],
+ "proof": [
+  {
+   "text": "Choose the natural orbit-map embedding i:M -> D(M) into the translation module of locally constant functions. Injectivity of i makes it monic, as cancellation can be checked on underlying linear maps.",
+   "uses": [
+    "lem-exc-coinduced-discrete-embedding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The relation l^s*1_A=0 implies l^s*m=0 for every coefficient m. The locally constant primitive theorem shows rho_D(tau)-id surjective. Its cokernel, hence degree-one homology of K(D(M)), is zero.",
+   "uses": [
+    "lem-exc-procyclic-locally-constant-primitive"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For q>=2 the degree-q term is zero, so Mathlib HomologicalComplex.ExactAt.of_isZero makes degree-q homology zero. Every positive-degree map induced by i has zero target and hence is zero.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-coinduced-discrete-embedding",
+  "lem-exc-procyclic-locally-constant-primitive"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-procyclic-two-term.proof.md",
+  "place": "Second paragraph, coinduced embedding; third paragraph, surjectivity and effacement; Lean implementation of the displayed construction and universal properties"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "continuous cohomology of l-adic integers computed by a two term action complex and a locally constant primitive for translation",
+   "results": "8 hits: ContinuousCohomology.MultiInd.complex, continuousCohomology, MultiInd.d, homogeneousCochains, LocallyConstant.coe_vadd and related topological cochain infrastructure.",
+   "date": "2026-10-19",
+   "verdict": "No match for the two-term action construction, its delta-functor, procyclic invariant kernel, periodic primitive, effacement or derived comparison. These topological cochains do not implement this discrete procyclic calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "two term complex of an endomorphism action minus identity with natural degree zero invariant kernel and effaceable cohomology",
+   "results": "8 hits: Rep.FiniteCyclicGroup.groupCohomologyIso₀, groupCohomology.shortComplexH0, shortComplexH1, ContinuousCohomology.kerHomogeneousCochainsZeroEquiv, groupCohomology, Rep.barComplex and kernel-map equations.",
+   "date": "2026-10-19",
+   "verdict": "No exact match. Finite cyclic discrete group cohomology does not compute continuous cohomology of Z_l. The generic kernel and homology APIs are used in the proofs instead."
+  },
+  {
+   "tool": "grep",
+   "query": "procyclic|actionTwoTerm|exists_procyclic_primitive",
+   "results": "Recorded msearch query: 0 Mathlib hits. Current library rg search finds only the assigned theorem and its consumer DvrGalois; no existing actionTwoTerm or exists_procyclic_primitive declaration. PadicInt.toZModPow, ker_toZModPow and denseRange_natCast supply the topology and density primitives.",
+   "date": "2026-10-19",
+   "verdict": "No existing declaration of these results found. Use Mathlib cochain construction, kernel, homology long exact sequence, and p-adic reduction APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RepresentationTheory.ProcyclicTwoTerm",
+  "date": "2026-10-19",
+  "group": "E6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-procyclic-two-term",
+   "place": "Second paragraph, coinduced embedding; third paragraph, surjectivity and effacement",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RepresentationTheory.ProcyclicEffacement",
+  "file": "lean/Sheaf/RepresentationTheory/ProcyclicEffacement.lean",
+  "declaration": "Rep.actionTwoTerm_effaceable",
+  "statement": "theorem actionTwoTerm_effaceable (l : ℕ) [Fact l.Prime] (s : ℕ) (A : Type u) [Ring A] [Finite A] (hA : (l ^ s : ℕ) • (1 : A) = 0) : let h := Classical.choose (discreteModules_abelian.{0, u, w} (Multiplicative ℤ_[l]) A) letI := h letI : Preadditive (DiscreteContinuousRep.{u, 0, w} A (Multiplicative ℤ_[l])) := h.toPreadditive ∀ T : CohomologicalDeltaFunctor (DiscreteContinuousRep.{u, 0, w} A (Multiplicative ℤ_[l])) (ModuleCat.{w} A), T.F = (fun q ↦ actionTwoTerm A (Multiplicative ℤ_[l]) (Multiplicative.ofAdd (1 : ℤ_[l])) ⋙ HomologicalComplex.homologyFunctor (ModuleCat.{w} A) (ComplexShape.up ℕ) q) → ∀ q : ℕ, 0 < q → ∀ M : DiscreteContinuousRep.{u, 0, w} A (Multiplicative ℤ_[l]), ∃ (N : DiscreteContinuousRep.{u, 0, w} A (Multiplicative ℤ_[l])) (f : M ⟶ N), Mono f ∧ (T.F q).map f = 0",
+  "branch": "sheaf-dag",
+  "by": "E6",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261019T112444-L-3941692",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261019T112444-L-3941692",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
