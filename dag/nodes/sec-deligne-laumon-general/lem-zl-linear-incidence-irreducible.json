@@ -16,7 +16,7 @@
  ],
  "proof": [
   {
-   "text": "Put $B=A[x_1,\\ldots,x_r]$ and $L=\\sum_i f_ix_i$. Reindex so that $f_1\\ne0$. The coefficient of $x_1$ shows $L\\ne0$. Adjoining $x_1,\\ldots,x_r$ to a finite set of algebra generators of $A$ exhibits $B$ as a finite type $k$-algebra. Thus $B$ is Noetherian by [lem-wf-affine-noetherian-components], and it is a domain by [lem-weil-pbc-polynomial-ring-domain].",
+   "text": "Put B=A[x_i], L=∑ f_i x_i and I=(L). Finite type over the field makes A Noetherian, hence B is Noetherian. Polynomial rings over domains are domains.",
    "uses": [
     "def-weil-pbc-finite-type-algebra",
     "def-weil-pbc-mv-polynomial-ring",
@@ -26,80 +26,60 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0G4F, lemma-bertini-irreducible, affine incidence paragraph, lines 9089–9132; algebraic expansion of the elimination and codimension argument"
+    "place": "Tag 0G4F, lemma-bertini-irreducible, middle proof paragraph (affine incidence hypersurface and codimension-two base locus), lines 9089--9132"
    }
   },
   {
-   "text": "For each $j$ with $f_j\\ne0$, write $A_j=A[1/f_j]$ [def-weil-ring-localization-away], $D_j=A_j[x_i:i\\ne j]$, and $c_j=-f_j^{-1}\\sum_{i\\ne j}f_ix_i\\in D_j$. The fraction definition shows that $A\\to A_j$ is injective and that $A_j$ is a domain: a fraction is zero exactly when its numerator is zero, since every power of $f_j$ is nonzero. By [lem-weil-pbc-polynomial-ring-domain], $D_j$ is a domain and its coefficient map $A_j\\to D_j$ is injective. Evaluation $\\psi_j:B\\to D_j$, fixing $A$ and $x_i$ for $i\\ne j$ and sending $x_j$ to $c_j$, is the homomorphism furnished by [def-weil-pbc-mv-polynomial-ring]. Its kernel $K_j$ is prime, since $\\psi_j(1)=1\\ne0$ and a product mapping to zero in a domain has a factor mapping to zero. Moreover $L\\in K_j$ and $K_j\\cap A=(0)$.",
+   "text": "For any domain R and coefficients with f_j a unit, the linear form L is prime in R[x_i]. Write t=∑_{i≠j} f_i x_i. The substitutions x_j↦f_j x_j+t and x_j↦f_j⁻¹(x_j−t), fixing all other variables, are inverse R-algebra automorphisms: both fix t and the two composites send x_j to itself. The first sends the prime element x_j to L, so L is prime and (L) is a prime ideal. This is the proved private helper linear_prime_of_unit, using Mathlib MvPolynomial.X_prime and MulEquiv.prime_iff.",
    "uses": [
-    "def-weil-ring-localization-away",
     "def-weil-pbc-mv-polynomial-ring",
     "lem-weil-pbc-polynomial-ring-domain"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0G4F, lemma-bertini-irreducible, affine incidence paragraph, lines 9089–9132; algebraic expansion of the elimination and codimension argument"
+    "place": "Tag 0G4F, lemma-bertini-irreducible, middle proof paragraph (affine incidence hypersurface and codimension-two base locus), lines 9089--9132"
    }
   },
   {
-   "text": "For $h\\in K_j$, regard $h$ as a polynomial in $x_j$ over $D_j$. Substitution at $c_j$ gives $h(c_j)=0$, so $h=(x_j-c_j)g=f_j^{-1}Lg$ for some polynomial $g$ over $D_j$. This divisibility is an explicit calculation: apply $y^m-c^m=(y-c)\\sum_{t=0}^{m-1}y^{m-1-t}c^t$ to each positive-degree monomial of $h$, and subtract $h(c_j)$. There are only finitely many coefficients of $f_j^{-1}g$, each with a power of $f_j$ as denominator. Multiplying by one sufficiently large power $f_j^N$ puts them all in $A[x_i:i\\ne j]$, giving $f_j^Nh=Lv$ with $v\\in B$. The identity holds in $B$ because its map into $A_j[x_1,\\ldots,x_r]$ is injective coefficient by coefficient. Consequently every $h\\in K_j$ has $f_j^Nh\\in(L)$ for some $N\\geq0$.",
+   "text": "Let Q be minimal over I. Krull’s principal ideal theorem, the direct Mathlib corollary of the height-of-a-principal-quotient bound, gives ht(Q)≤1. The polynomial algebra is free and hence flat over A. The flat height formula gives ht(Q)≥ht(Q∩A). If every coefficient belonged to Q, then J⊆Q∩A; a prime p₀ minimal over J below Q∩A would have height at least two by hypothesis, contradicting ht(Q)≤1. Hence some f_j is outside Q. This includes J=A, since no proper contracted prime contains A.",
    "uses": [
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-ring-localization-away"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0G4F, lemma-bertini-irreducible, affine incidence paragraph, lines 9089–9132; algebraic expansion of the elimination and codimension argument"
-   }
-  },
-  {
-   "text": "Let $Q$ be any prime of $B$ minimal over $(L)$. Its image $\\overline Q=Q/(L)$ in $B/(L)$ is a minimal prime: a smaller prime would have a smaller prime inverse image containing $(L)$, contradicting minimality of $Q$. Conversely primes below $\\overline Q$ lift to primes below $Q$ by taking inverse images, and passing back to the quotient recovers each ideal. Thus there is no strict chain of primes below $\\overline Q$, so $\\operatorname{ht}(\\overline Q)=0$. Apply [lem-weil-pbc-noetherian-height-quotient-bound] with $R=B$, $t=1$, $f_1=L$, $J=(L)$, $\\mathfrak P=Q$. Noetherianity was proved in step 1, and $(L)\\subseteq Q$. It gives $\\operatorname{ht}(Q)\\leq\\operatorname{ht}(\\overline Q)+1=1$.",
-   "uses": [
-    "lem-weil-pbc-noetherian-height-quotient-bound"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0G4F, lemma-bertini-irreducible, affine incidence paragraph, lines 9089–9132; algebraic expansion of the elimination and codimension argument"
-   }
-  },
-  {
-   "text": "Suppose every $f_i$ belongs to $Q$. Its contraction $p=Q\\cap A$ is prime and contains $J$. By [lem-weil-pbc-prime-contains-minimal-prime] there is a prime $p_0\\subseteq p$ minimal over $J$. The hypothesis gives $\\operatorname{ht}(p_0)\\geq2$, hence there are primes $p_a\\subsetneq p_b\\subsetneq p_0$ (truncate a chain ending at $p_0$ if necessary). For any prime $u$ of $A$, the coefficient reduction map $B\\to(A/u)[x_1,\\ldots,x_r]$ has kernel $uB$: a polynomial maps to zero exactly when all its coefficients lie in $u$, which is exactly membership in the ideal generated by $u$. Its target is a domain by [lem-weil-pbc-polynomial-ring-domain]; thus $uB$ is prime and $uB\\cap A=u$. We obtain $p_aB\\subsetneq p_bB\\subsetneq p_0B\\subseteq Q$, where strictness follows by contracting coefficients. This is a chain of length at least two ending at $Q$ (append $Q$ if the last inclusion is strict), contrary to step 4. Therefore some $f_j\\notin Q$; this argument also covers $J=A$, since then no prime $p$ could contain $J$.",
-   "uses": [
+    "lem-weil-pbc-noetherian-height-quotient-bound",
+    "lem-weil-pbc-flat-height-formula",
     "lem-weil-pbc-prime-contains-minimal-prime",
-    "lem-weil-pbc-polynomial-ring-domain",
-    "def-weil-pbc-mv-polynomial-ring",
     "def-weil-pbc-krull-dimension-ring"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0G4F, lemma-bertini-irreducible, affine incidence paragraph, lines 9089–9132; algebraic expansion of the elimination and codimension argument"
+    "place": "Tag 0G4F, lemma-bertini-irreducible, middle proof paragraph (affine incidence hypersurface and codimension-two base locus), lines 9089--9132"
    }
   },
   {
-   "text": "Choose $j$ with $f_j\\notin Q$. This coefficient is nonzero, so steps 2–3 apply. If $h\\in K_j$, then $f_j^Nh\\in(L)\\subseteq Q$; primality and $f_j\\notin Q$ imply $h\\in Q$. Hence $(L)\\subseteq K_j\\subseteq Q$. Since $K_j$ is prime and $Q$ is minimal over $(L)$, $Q=K_j$. In particular $Q\\cap A=(0)$, so $f_1\\notin Q$. Applying the same argument at $j=1$ gives $Q=K_1$. At least one such minimal prime exists: $K_1$ is a proper prime containing $(L)$, and [lem-weil-pbc-prime-contains-minimal-prime] supplies a prime minimal over $(L)$ inside $K_1$. Thus $K_1$ is the unique prime minimal over $(L)$.",
+   "text": "Localize A at f_j for a coefficient outside Q. This coefficient is nonzero, so S=A[1/f_j] is a domain and A→S is injective. The ring S[x_i] is the localization of B at the powers of C(f_j). By step 2 the extended ideal IS[x_i] is prime. Since Q avoids the denominators, contraction of its extension is Q. Thus I⊆(IS[x_i]∩B)⊆Q, and minimality of Q identifies Q with this prime contraction. If C(a) belongs to Q, its image is a multiple of L over S[x_i]. Taking constant coefficients gives a/1=0; injectivity gives a=0. Hence Q∩A=0. The localization contraction theorem implements clearing denominators, without constructing a separate evaluation kernel.",
    "uses": [
-    "lem-weil-pbc-prime-contains-minimal-prime"
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-polynomial-ring-domain"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0G4F, lemma-bertini-irreducible, affine incidence paragraph, lines 9089–9132; algebraic expansion of the elimination and codimension argument"
+    "place": "Tag 0G4F, lemma-bertini-irreducible, middle proof paragraph (affine incidence hypersurface and codimension-two base locus), lines 9089--9132"
    }
   },
   {
-   "text": "Put $R=B/(L)$ and $\\overline K=K_1/(L)$. This is a prime ideal: $R/\\overline K=B/K_1$ injects into the domain $D_1$. Every prime $P$ of $R$ has prime inverse image $\\widetilde P$ in $B$ containing $(L)$; [lem-weil-pbc-prime-contains-minimal-prime] puts a prime minimal over $(L)$ inside $\\widetilde P$. Step 6 identifies it with $K_1$, so $\\overline K\\subseteq P$. Thus $\\operatorname{Spec}R=V(\\overline K)$. This set is nonempty (it contains $\\overline K$) and irreducible by clause (2) of [lem-weil-pbc-spec-irreducible-closed-subsets-primes]. This proves exactly the asserted irreducibility, without claiming $R$ is reduced.",
+   "text": "Let K=Frac(A). Fix an index j with f_j≠0. In K[x_i] the ideal generated by L is prime by step 2; call its contraction P. Every minimal prime Q over I avoids every nonzero constant by step 4. Apply the same localization contraction and minimality argument, now at all nonzero elements of A, to get Q=P. There is at least one such Q by existence of a minimal prime inside P. Therefore the minimal-prime set of I is the singleton {P}, and √I=P. Its image in B/I is the nilradical, which is prime. The Mathlib irreducible-spectrum/nilradical criterion proves Spec(B/I) irreducible, without asserting reducedness.",
    "uses": [
     "lem-weil-pbc-prime-contains-minimal-prime",
-    "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-mv-polynomial-ring"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0G4F, lemma-bertini-irreducible, affine incidence paragraph, lines 9089–9132; algebraic expansion of the elimination and codimension argument"
+    "place": "Tag 0G4F, lemma-bertini-irreducible, middle proof paragraph (affine incidence hypersurface and codimension-two base locus), lines 9089--9132"
    }
   }
  ],
@@ -108,16 +88,17 @@
   "def-weil-pbc-mv-polynomial-ring",
   "lem-wf-affine-noetherian-components",
   "lem-weil-pbc-polynomial-ring-domain",
-  "def-weil-ring-localization-away",
   "lem-weil-pbc-noetherian-height-quotient-bound",
+  "lem-weil-pbc-flat-height-formula",
   "lem-weil-pbc-prime-contains-minimal-prime",
   "def-weil-pbc-krull-dimension-ring",
+  "def-weil-ring-localization-away",
   "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tag 0G4F, lemma-bertini-irreducible, middle proof paragraph, lines 9089–9132; explicit prime-chain form of the codimension argument, using the existing Krull height-quotient bound (Tag 00KW)"
+  "place": "Tag 0G4F, lemma-bertini-irreducible, middle proof paragraph (affine incidence hypersurface and codimension-two base locus), lines 9089--9132; W4 formalization: invertible-coefficient change of variables, principal ideal height bound and flat height formula, localization contraction, then unique minimal prime and prime nilradical."
  },
  "mathlib_searches": [
   {
@@ -230,5 +211,15 @@
   "group": "Q110",
   "result": "pass",
   "note": "Read node, 5 stmt deps, Stacks 0G4F lines 9040-9132, module, report (Worker report + Second reading by Q110 present). Lean matches node clause by clause: Field k; FiniteType k-algebra domain A (no extra instances, independent universes u v); 0<r; f : Fin r → A with ∃ i, f i ≠ 0; J = span (range f); ∀ p ∈ J.minimalPrimes, 2 ≤ p.height (Mathlib Ideal.height = chain height for primes; vacuous for J = ⊤); conclusion IrreducibleSpace (Spec (CommRingCat.of (MvPolynomial (Fin r) A ⧸ span {∑ C (f i) * X i}))), no reducedness. lean.statement equals signature verbatim; node copy differs from side clone only in lean field; no statement_change, no new nodes. Edge cases r=1, J=A, f≡0 and the height counterexample checked. Docstrings carry source place, blueprint tag and proof steps; sorry only; Mathlib-only imports; no name clash. nt_compile.py --json (path form rejects snapshot path): exit 0, 11.5 s and 6.3 s, no errors or warnings (tool does not print the sorry warning, confirmed by a probe). No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261019T132238-L-1206703",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
