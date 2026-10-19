@@ -22,9 +22,9 @@ import WeilConjectures.DeligneLaumon.Reduction.Weights
 import WeilConjectures.RepresentationTheory.Clifford
 import WeilConjectures.RepresentationTheory.FiniteMatrixWitness
 import WeilConjectures.WeilSheaf.Stalk
-import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 import Sheaf.AlgebraicGeometry.ClosedPointField
-import Sheaf.RingTheory.SmoothPushoutFilteredColimitStage
+import WeilConjectures.RingTheory.SmoothPushoutFilteredColimitStage
 import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Purity
 import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Triangularizable
 import Sheaf.AlgebraicGeometry.FiniteFieldClosedSubschemeDescent

@@ -35,7 +35,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
 public import WeilConjectures.PointCount
 public import WeilConjectures.AlgebraicGeometry.FieldExtensionLimit
 public import WeilConjectures.Mathlib.CategoryTheory.Types.Basic
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 import WeilConjectures.AlgebraicGeometry.AbelianVariety.Projective
 import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum

@@ -17,7 +17,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
 import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructibleExtensionByZero
-import Sheaf.Algebra.Homology.KFlat
+import WeilConjectures.Algebra.Homology.KFlat
 import Sheaf.AlgebraicGeometry.ComparisonDirectImage
 import Sheaf.AlgebraicGeometry.FiniteTypeDirectImageConstructibility
 import Sheaf.AlgebraicGeometry.NoetherianStratumDetection

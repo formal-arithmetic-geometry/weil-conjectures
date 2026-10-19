@@ -4,7 +4,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleFiniteDataDescent
 import Sheaf.Paper.TruncatedFiniteSplitEtaleDiagram
 import WeilConjectures.AlgebraicGeometry.DescendSurjective
 import Mathlib.CategoryTheory.Presentable.Directed
-import Sheaf.AlgebraicGeometry.FiniteCoproductLfpQcqs
+import WeilConjectures.AlgebraicGeometry.FiniteCoproductLfpQcqs
 import Mathlib.AlgebraicGeometry.LimitsOver
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 @[expose] public section

@@ -13,7 +13,7 @@ import WeilConjectures.WeilSheaf.LowerStarId
 import WeilConjectures.WeilSheaf.UpperStarComp
 import Sheaf.AlgebraicGeometry.BoundedBelowDerivedSmoothBaseChange
 import Sheaf.AlgebraicGeometry.CompactSupportFiniteTorsion
-import Sheaf.AlgebraicGeometry.DimensionPreservedFieldExtension
+import WeilConjectures.AlgebraicGeometry.DimensionPreservedFieldExtension
 import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
 import WeilConjectures.Compactification.NagataCompactification
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType

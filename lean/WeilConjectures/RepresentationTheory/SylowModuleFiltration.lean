@@ -10,7 +10,7 @@ public import Mathlib.GroupTheory.PGroup
 public import Mathlib.GroupTheory.Index
 public import Mathlib.Topology.Algebra.OpenSubgroup
 public import Mathlib.Topology.Connected.TotallyDisconnected
-import Sheaf.RepresentationTheory.PrimaryPGroupFiltration
+import WeilConjectures.RepresentationTheory.PrimaryPGroupFiltration
 import Mathlib.GroupTheory.Sylow
 
 /-!
