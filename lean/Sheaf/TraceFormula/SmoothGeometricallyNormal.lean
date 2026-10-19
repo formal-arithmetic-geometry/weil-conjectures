@@ -12,13 +12,6 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Sheaf.AlgebraicGeometry.IsRegularScheme
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.RingTheory.Noetherian.Defs
-import Sheaf.AlgebraicGeometry.GeometricRegularitySmoothFieldCriterion
-import Sheaf.AlgebraicGeometry.RegularNormalDecomposition
 
 /-!
 # Smooth schemes over fields are geometrically normal
@@ -96,6 +89,18 @@ theorem smooth_geometrically_normal
         IsReduced
           (Limits.pullback (C := Scheme.{u}) f
             (Spec.map (CommRingCat.ofHom (algebraMap k K))))) := by
-  sorry
+  -- Apply the existing smooth-regular and regular-normal theorems after base change.
+  have hregular (K : Type u) [Field K] [Algebra k K] :
+      IsRegularScheme (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) := by
+    let g := Spec.map (CommRingCat.ofHom (algebraMap k K))
+    exact ⟨LocallyOfFiniteType.isLocallyNoetherian (pullback.snd f g),
+      IsRegular.of_smooth (pullback.snd f g)⟩
+  refine ⟨fun K' _ _ _ _ ↦ hregular K', ?_⟩
+  intro K _ _
+  have : IsRegular (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) :=
+    (hregular K).2
+  exact ⟨fun x ↦ ⟨inferInstance, IsRegular.isIntegrallyClosed_stalk x⟩,
+    isReduced_of_isReduced_stalk _⟩
 
 end AlgebraicGeometry
+

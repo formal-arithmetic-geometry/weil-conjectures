@@ -18,76 +18,46 @@
  ],
  "proof": [
   {
-   "text": "Fix an arbitrary field extension $K/k$ and put $Y=X_K$ with structure map $f_K:Y\\to\\operatorname{Spec}K$. Clause (2) of [lem-pc-proper-base-change] applies to the smooth map $X\\to\\operatorname{Spec}k$ and the field-extension map $\\operatorname{Spec}K\\to\\operatorname{Spec}k$, so $f_K$ is smooth. This requires neither a fixed relative dimension nor quasi-compactness of $X$.",
+   "text": "Fix any field extension $K/k$ and let $g:\\operatorname{Spec}K\\to\\operatorname{Spec}k$ be its spectrum map. The second projection $p:X_K\\to\\operatorname{Spec}K$ is smooth by clause (2) of [lem-pc-proper-base-change], implemented by the smooth base-change instance. Smoothness implies locally finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation], hence locally finite type [def-weil-finite-type-morphism].",
    "uses": [
-    "lem-pc-proper-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01VB, lemma-base-change-smooth; applied as in varieties.tex, Tag 056T"
-   }
-  },
-  {
-   "text": "By [def-sbc-smooth-morphisms], $f_K$ is locally of finite presentation. Its affine neighbourhoods in [def-sbc-locally-finite-presentation] can have target $\\operatorname{Spec}K$, since this field spectrum has only one nonempty open. They give an affine open cover $Y=\\bigcup_i U_i$ with $U_i=\\operatorname{Spec}B_i$ and $B_i\\cong K[t_1,\\ldots,t_{n_i}]/(g_1,\\ldots,g_{m_i})$. The images of the $t_j$ generate $B_i$ as a $K$-algebra. Thus $f_K$ is locally of finite type, and each $U_i\\to\\operatorname{Spec}K$ is of finite type: its single affine chart is a finite affine covering as required in [def-weil-finite-type-morphism].",
-   "uses": [
+    "lem-pc-proper-base-change",
     "def-sbc-smooth-morphisms",
     "def-sbc-locally-finite-presentation",
     "def-weil-finite-type-morphism"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01TP, definition-finite-presentation; Tag 01T1, definition-finite-type; the local-finite-type input of varieties.tex, Tag 056S, lemma-smooth-regular"
-   }
+   "elementary": false
   },
   {
-   "text": "Every ideal of the field $K$ is either zero or the unit ideal, so $K$ is Noetherian by [def-weil-pbc-noetherian-ring]. Its one-point spectrum is locally Noetherian by [pqf-def-locnoeth] and quasi-compact, hence Noetherian. Apply [lem-weil-pbc-finite-type-over-noetherian] separately to each finite-type map $U_i\\to\\operatorname{Spec}K$ from Step 2. Each $U_i$ is Noetherian. Its affine open neighbourhoods with Noetherian coordinate rings, furnished by local Noetherianity, are also affine open neighbourhoods in $Y$. They cover $Y$, so [pqf-def-locnoeth] makes $Y$ locally Noetherian. No finite cover of all of $Y$ is asserted or needed.",
+   "text": "The field $K$ is Noetherian [def-weil-pbc-noetherian-ring], so its spectrum is locally Noetherian. Apply LocallyOfFiniteType.isLocallyNoetherian, the local-Noetherian permanence recorded by [pqf-def-locnoeth], to $p$. This gives local Noetherianity of $X_K$ without quasi-compactness. Apply the already proved source-library theorem AlgebraicGeometry.IsRegular.of_smooth (the declaration attached to [lem-sc-smooth-regular], whose Lean statement works for every smooth scheme over a field). Its stalkwise regularity together with local Noetherianity is exactly IsRegularScheme [def-weil-regular-scheme]. Specialize this construction to any finite purely inseparable extension to obtain the first conjunct.",
    "uses": [
     "def-weil-pbc-noetherian-ring",
     "pqf-def-locnoeth",
-    "lem-weil-pbc-finite-type-over-noetherian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01T6, lemma-finite-type-noetherian, applied to the finite-type affine charts; Properties Tag 01OV, definition-noetherian"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-geometric-regularity-smooth-field-criterion] over the field $K$ to $f_K$, smooth by Step 1 and locally of finite type by Step 2. Take its finitely generated extension $L/K$ to be the identity extension $K/K$. The identity base change $Y\\times_{\\operatorname{Spec}K}\\operatorname{Spec}K\\cong Y$ is given by the projection, with inverse $(\\operatorname{id}_Y,f_K)$, by [def-pc-base-change]. The criterion therefore says that every local ring of $Y$ is regular. Together with Step 3, the equivalence in [def-weil-regular-scheme] says that $Y$ is regular. This holds for every $K/k$, in particular for every finite purely inseparable $K'/k$, as required for the geometrically regular clause.",
-   "uses": [
-    "lem-weil-pbc-geometric-regularity-smooth-field-criterion",
-    "def-pc-base-change",
+    "lem-sc-smooth-regular",
     "def-weil-regular-scheme"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 038X, lemma-geometrically-regular-smooth; Tag 056S, lemma-smooth-regular; Properties Tag 02IT, lemma-characterize-regular; Tag 056T, regularity conclusion"
+    "place": "Tag 056S, lemma-smooth-regular; Tag 056T, lemma-smooth-geometrically-normal"
    }
   },
   {
-   "text": "For the same arbitrary field extension $K/k$, apply clause (1) of [rem-pc-regular-normal] to the regular scheme $Y$ of Step 4. It gives that $Y$ is normal, which that node defines explicitly as every local ring $\\mathcal O_{Y,y}$ being an integral domain integrally closed in its field of fractions. This is exactly the normal-domain conclusion for every local ring of $X_K$; since $K/k$ was arbitrary, $X$ is geometrically normal.",
+   "text": "For every field extension $K/k$, retain the stalkwise IsRegular instance from Step 2. Every stalk is a domain by the regular-local-ring instance. Apply the proved source-library theorem IsRegular.isIntegrallyClosed_stalk, which realizes precisely clause (1) of [rem-pc-regular-normal] (Stacks 0569), to each stalk. This gives the required domain and integrally-closed conjunction. No normal-component decomposition, connectedness, dimension bound or quasi-compactness is used.",
    "uses": [
     "rem-pc-regular-normal"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/properties.tex",
-    "place": "Tag 0569, lemma-regular-normal; this is the last cited lemma of the proof of varieties.tex, Tag 056T"
+    "place": "Tag 0569, lemma-regular-normal"
    }
   },
   {
-   "text": "For every field extension $K/k$, Step 5 makes each local ring of $X_K$ a domain. In a domain, $a^n=0$ with $n\\geq1$ implies $a=0$, by induction on $n$ using the absence of zero divisors. Hence all these local rings are reduced, so $X_K$ is reduced by [def-pc-reduced-scheme]. This proves the geometrically reduced clause, including when $X_K$ is empty, where there are no stalks to check.",
+   "text": "Domains are reduced, so the stalks in Step 3 are reduced. The theorem isReduced_of_isReduced_stalk, realizing [def-pc-reduced-scheme], gives reducedness of $X_K$. Combine this with Step 3 for the second conjunct. All stalk assertions are universally quantified and so also cover empty base changes.",
    "uses": [
     "def-pc-reduced-scheme"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 056T, reducedness conclusion; Schemes Tag 01J0, definition-reduced"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -97,9 +67,7 @@
   "def-weil-finite-type-morphism",
   "def-weil-pbc-noetherian-ring",
   "pqf-def-locnoeth",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-geometric-regularity-smooth-field-criterion",
-  "def-pc-base-change",
+  "lem-sc-smooth-regular",
   "def-weil-regular-scheme",
   "rem-pc-regular-normal",
   "def-pc-reduced-scheme"
@@ -107,7 +75,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 056T, lemma-smooth-geometrically-normal and its proof, expanding regularity through Tag 056S and the geometric-regularity criterion Tag 038X; arbitrary field base change proves the explicit normality and reducedness clauses directly"
+  "place": "Tag 056T, lemma-smooth-geometrically-normal, using the proved source-library smooth-regular theorem (Tag 056S) and IsRegular.isIntegrallyClosed_stalk (Properties Tag 0569), plus Mathlib local-Noetherian permanence and stalkwise reducedness; formalized by D7, 2026-10-19."
  },
  "mathlib_searches": [
   {
@@ -236,7 +204,6 @@
  },
  "tool_uses": [
   "lem-pc-proper-base-change",
-  "lem-weil-pbc-geometric-regularity-smooth-field-criterion",
   "rem-pc-regular-normal"
  ],
  "reviewed": {
@@ -264,5 +231,15 @@
   "file": "lean/Sheaf/TraceFormula/SmoothGeometricallyNormal.lean",
   "branch": "newtargets-dag",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261019T093335-L-2297241",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
