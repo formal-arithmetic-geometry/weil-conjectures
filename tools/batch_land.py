@@ -1347,9 +1347,9 @@ def conflict_fallback(b, active, suspects, chosen, per, messages, repair_jobs, c
     stuck = [e for e in suspects if key(e) in bad]
     movable = [e for e in suspects if key(e) not in bad]
     # the dependents and deferred closures chosen for the take-out go too, unless their own take-out conflicts
-    deps = [e for e in chosen if e not in suspects and key(e) not in bad] if movable else []
+    deps = [e for e in chosen if e not in suspects and key(e) not in bad]
     taken = []
-    if movable:
+    if movable or deps:
         jobs = {key(e): repair_jobs[key(e)] for e in movable if key(e) in repair_jobs}
         try:
             undo_entries(movable + deps, f"batch {b['id']} dependency take-out", returned={key(e): messages[key(e)] for e in movable},
