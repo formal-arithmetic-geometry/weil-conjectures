@@ -24,67 +24,57 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-pbc-ring-sheaves-grothendieck], the category of left module sheaves over the arbitrary ring sheaf $\\mathcal R$ on our small site has all small colimits. Form $K^b=\\varinjlim_i K_i^b$ in sheaves of $\\mathcal R$-modules, with cocone maps $\\iota_i^b$. The chain-map identities for the transition maps make the maps $\\iota_i^{b+1}d_i^b$ a cocone, hence define $d^b:K^b\\to K^{b+1}$ uniquely by $d^b\\iota_i^b=\\iota_i^{b+1}d_i^b$. The composites $d^{b+1}d^b$ vanish after all $\\iota_i^b$, so vanish by the colimit universal property [def-weil-pbc-category-colimit]. Thus these data give the termwise colimit complex. For $b<a$ the diagram is zero and its colimit is zero: maps from its zero cocone to any object are unique. Consequently $K^b=0$ below the same $a$.",
+   "text": "Choose one affine weakly contractible hypercover W of U using exists_proetale_hypercover_single_affine. Each term is the spectrum of a w-contractible ring; isWeaklyContractible_of_iso supplies weak contractibility in the coefficient universe. The zero and matching covering data are exactly those required by hypercover_complex_natural_iso.",
    "uses": [
-    "lem-weil-pbc-ring-sheaves-grothendieck",
-    "def-weil-pbc-category-colimit"
+    "det-pe-hypercover-existence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-sections.proof.md",
-    "place": "Opening sentence: termwise colimit and its common lower bound"
+    "place": "Whole proof: fixed hypercover, total colimits, exact filtered colimits, and naturality"
    }
   },
   {
-   "text": "By clause 3 of [det-pe-hypercover-existence], choose one hypercover $W_\\bullet\\to U$ whose terms are affine and weakly contractible; it is fixed throughout the diagram. Apply [det-pe-hypercover-complex] to every $K_i^\\bullet$ and to $K^\\bullet$, using their common lower bound. Put $T_i=\\operatorname{Tot}(K_i^b(W_r))$ and $T=\\operatorname{Tot}(K^b(W_r))$. This gives natural isomorphisms $\\eta_i:H^q(U,K_i^\\bullet)\\xrightarrow{\\sim}H^q(T_i)$ and $\\eta:H^q(U,K^\\bullet)\\xrightarrow{\\sim}H^q(T)$. For every integer $n$, $T_i^n=\\bigoplus_{0\\le r\\le n-a}K_i^{n-r}(W_r)$ and $T^n=\\bigoplus_{0\\le r\\le n-a}K^{n-r}(W_r)$. These sums are finite and are zero when $n<a$.",
+   "text": "Identify the published small-model K-injective definition of ringHypercohomology with homology of the right derived abelian evaluation functor. Construct the equivalence of module-sheaf categories by continuous pushforwards along AsSmall. Transport the functorial K-injective resolution back through this equivalence; the unit is a quasi-isomorphism and its target is K-injective. The right-derived unit on K-injectives and functorial quasi-isomorphism of the resolution give a natural isomorphism. Compose it, on Plus, with hypercover_complex_natural_iso and homologyFunctorFactors to identify hypercohomology naturally with homology of the explicit hypercover total.",
    "uses": [
-    "det-pe-hypercover-existence",
-    "det-pe-hypercover-complex"
+    "det-pe-hypercover-complex",
+    "def-sfb-right-derived-functor",
+    "lem-sfb-grothendieck-k-injective"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-sections.proof.md",
-    "place": "Fix one hypercover; natural hypercover calculation and formula for the finite total degrees"
+    "place": "Whole proof: fixed hypercover, total colimits, exact filtered colimits, and naturality"
    }
   },
   {
-   "text": "For each $r,b$, apply [det-pe-sections-limits-colimits] with $W=W_r$ to the diagram of sheaves $K_i^b$. It gives the canonical isomorphism $\\alpha_{r,b}:\\varinjlim_i K_i^b(W_r)\\xrightarrow{\\sim}K^b(W_r)$ induced by the maps $\\iota_i^b(W_r)$. To justify passage to underlying abelian groups, put $A=\\varinjlim_i K_i^b(W_r)$ in abelian groups with legs $j_i$. For each $s\\in\\mathcal R(W_r)$, the compatible additive maps $x\\mapsto j_i(sx)$ induce an additive endomorphism $\\mu_s$ of $A$ by [def-weil-pbc-category-colimit]. Precomposing with all $j_i$ proves $\\mu_{s+t}=\\mu_s+\\mu_t$, $\\mu_{st}=\\mu_s\\mu_t$, and $\\mu_1=1$, so $s\\cdot x=\\mu_s(x)$ makes $A$ a left module; the additive map induced by any compatible linear cocone is linear, again by testing on all $j_i$. Thus $A$ is also the module colimit, and the underlying abelian-group comparison $\\alpha_{r,b}$ is an isomorphism. Each $\\iota_i$ is a morphism of module sheaves, hence commutes with restriction along every face map $W_{r+1}\\to W_r$; and step 1 gives $d^b\\iota_i^b=\\iota_i^{b+1}d_i^b$. Therefore the $\\alpha_{r,b}$ commute with the horizontal alternating face sums and the vertical differentials $(-1)^rd^b$.",
+   "text": "The forgetful functor from module sheaves to abelian sheaves preserves colimits by moduleSheaves_colimits_forgetful. The module-coefficient hypercover rows are definitionally its composite with abelianHypercoverRows. Apply mapHomologicalComplexCompIso and whisker with flip and total to identify their total functors. The existing abelianHypercoverTotal_preservesColimits theorem now proves colimit preservation of the module-coefficient total. This reuses the sectionwise, alternating-face, extension, and coproduct-total calculations rather than reproving them.",
    "uses": [
-    "det-pe-sections-limits-colimits",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-category-colimit"
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-proetale-abelian-hypercover-total-colimits"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-sections.proof.md",
-    "place": "Sectionwise colimit comparison on every hypercover term; compatibility with faces and complex differentials"
+    "place": "Whole proof: fixed hypercover, total colimits, exact filtered colimits, and naturality"
    }
   },
   {
-   "text": "For fixed $n$ let $S_n=\\{r\\in\\mathbf Z:0\\le r\\le n-a\\}$. The universal property [def-weil-pbc-category-colimit] and the coproduct property give $\\varinjlim_i\\bigoplus_{r\\in S_n}K_i^{n-r}(W_r)\\cong\\bigoplus_{r\\in S_n}\\varinjlim_iK_i^{n-r}(W_r)$: a map from either side to an abelian group $B$ is precisely a family of maps $K_i^{n-r}(W_r)\\to B$ compatible in $i$, one for each $r$. Composing with $\\bigoplus_r\\alpha_{r,n-r}$ gives an isomorphism $\\beta^n:\\varinjlim_iT_i^n\\to T^n$ whose composite with each cocone map is the total map induced by $\\iota_i$. These maps commute with differentials: on the $(i,r)$ summand both composites are the sum of $\\sum_j(-1)^j d_j^*\\iota_i^{n-r}$ and $(-1)^r d_K^{n-r}\\iota_i^{n-r}$, equal respectively to $\\sum_j(-1)^j\\iota_i^{n-r}d_j^*$ and $(-1)^r\\iota_i^{n-r+1}d_i^{n-r}$ by step 3. Hence $\\beta:\\varinjlim_iT_i\\xrightarrow{\\sim}T$ is an isomorphism of complexes, where the colimit differential is induced degreewise as in step 1. The argument includes $S_n=\\varnothing$.",
+   "text": "Module sheaves have small colimits by the Grothendieck module-sheaf instance. Colimits of complexes are computed degreewise. Below the common bound a, the degreewise colimit has zero identity: test the identity and zero on every colimit leg, whose source is zero. Thus the entire diagram and its colimit cocone lift to Plus. Filtered colimits of abelian groups are exact, so the homology functor preserves these colimits, using HomologicalComplex homology colimit preservation in DegreewiseLimits.",
    "uses": [
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-sections.proof.md",
-    "place": "Finite direct sums commute with colimits; differentials are induced by the same face maps and differentials"
-   }
-  },
-  {
-   "text": "For every $n$ write $Z_i^n=\\ker(d_{T_i}^n)$, $B_i^n=\\operatorname{im}(d_{T_i}^{n-1})$, and $H_i^n=Z_i^n/B_i^n$ [def-weil-abstract-derived-category]. Chain maps preserve cycles and boundaries, so the sequences $0\\to Z_i^n\\to T_i^n\\to B_i^{n+1}\\to0$ and $0\\to B_i^n\\to Z_i^n\\to H_i^n\\to0$ are compatible diagrams of short exact sequences. By [lem-weil-pbc-filtered-colimit-abelian-groups-exact], their colimits are short exact. Thus $\\varinjlim B_i^n\\to\\varinjlim Z_i^n\\to\\varinjlim T_i^n$ consists of injections, and the differential of $\\varinjlim T_i$ factors as the surjection $\\varinjlim T_i^n\\to\\varinjlim B_i^{n+1}$ followed by its injection into $\\varinjlim T_i^{n+1}$. Its kernel is therefore $\\varinjlim Z_i^n$ and its image in degree $n$ is $\\varinjlim B_i^n$. The second short exact sequence then identifies $\\varinjlim H_i^n$ with $H^n(\\varinjlim T_i)$. This identification sends a cocone image of a cycle class to the class of the cocone image of that cycle, so it is the canonical comparison $\\gamma:\\varinjlim_iH^q(T_i)\\xrightarrow{\\sim}H^q(\\varinjlim_iT_i)$. Compose with $H^q(\\beta)$ from step 4. No boundedness hypothesis is needed for this algebraic step.",
-   "uses": [
+    "def-weil-pbc-category-colimit",
     "def-weil-abstract-derived-category",
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "lem-weil-pbc-ring-sheaves-grothendieck"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-sections.proof.md",
-    "place": "Filtered colimits of abelian groups are exact, so cohomology commutes with them"
+    "place": "Whole proof: fixed hypercover, total colimits, exact filtered colimits, and naturality"
    }
   },
   {
-   "text": "Let $\\lambda_i:T_i\\to\\varinjlim_jT_j$ be the colimit legs. Naturality in [det-pe-hypercover-complex], applied to $\\iota_i:K_i\\to K$, gives $\\eta\\circ H^q(U,\\iota_i)=H^q(\\beta\\lambda_i)\\circ\\eta_i$. By step 5 the composite $\\eta^{-1}\\circ H^q(\\beta)\\circ\\gamma\\circ(\\varinjlim_i\\eta_i)$ is an isomorphism, and precomposing it with the $i$-th colimit leg gives exactly $H^q(U,\\iota_i)$. The uniqueness clause of [def-weil-pbc-category-colimit] therefore identifies this composite with the canonical map in the statement. This proves the assertion for all $q\\in\\mathbf Z$, including $q<a$.",
+   "text": "Map the lifted cocone by the hypercover total and homology; it is a colimit by the two preservation results. Transfer its colimit property along the inverse of the natural isomorphism of step 2 using IsColimit.mapCoconeEquiv. Its underlying cocone is exactly the ringHypercohomology image of colimit.cocone K. Hence that functor preserves this colimit, and the canonical colimit.post is an isomorphism. Naturality is incorporated in the cocone transfer, with no separately chosen comparison map. All integer degrees, the zero complexes, and the empty effective diagonals are included.",
    "uses": [
     "det-pe-hypercover-complex",
     "def-weil-pbc-category-colimit"
@@ -92,24 +82,26 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-sections.proof.md",
-    "place": "Final sentence: naturality identifies the constructed isomorphism with the canonical map"
+    "place": "Whole proof: fixed hypercover, total colimits, exact filtered colimits, and naturality"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "def-weil-pbc-category-colimit",
   "det-pe-hypercover-existence",
   "det-pe-hypercover-complex",
-  "det-pe-sections-limits-colimits",
-  "def-weil-sheaf-of-modules-category",
+  "def-sfb-right-derived-functor",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-proetale-abelian-hypercover-total-colimits",
+  "def-weil-pbc-category-colimit",
   "def-weil-abstract-derived-category",
-  "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-ring-sheaves-grothendieck"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-sections.proof.md",
-  "place": "Whole proof, with the cycle/boundary argument for its exact-colimit sentence supplied using Stacks Tag 00DB (algebra-lemma-directed-colimit-exact)"
+  "place": "Whole proof, assembled from the existing natural hypercover comparison, abelian hypercover total colimit preservation, and exact filtered homology colimits; Lean proof by T5, 2026-10-19"
  },
  "mathlib_searches": [
   {
@@ -273,5 +265,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T5",
+  "result": "pass",
+  "landing": "20261019T005428-L-2769294",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
