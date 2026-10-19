@@ -451,9 +451,9 @@ theorem exists_isLift {f : ∀ n, T.obj n ⟶ T.obj n} (hf : T.IsCompatible f) :
 section Trace
 
 /-! The braiding of the derived categories is the Koszul braiding
-`DerivedCategory.braidedCategory` of the derived tensor product. -/
+`DerivedCategory.braidedCategory'` of the derived tensor product. -/
 
-attribute [local instance] DerivedCategory.braidedCategory
+attribute [local instance] DerivedCategory.braidedCategory'
 
 variable [Abelian.HasFunctorialFlatResolution (ModuleCat.{u} R)]
   [∀ n, Abelian.HasFunctorialFlatResolution (ModuleCat.{u} (A n))]

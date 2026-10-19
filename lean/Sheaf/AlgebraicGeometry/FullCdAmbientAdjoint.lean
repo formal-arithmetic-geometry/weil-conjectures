@@ -6,6 +6,7 @@ Authors: SHEAF group Q35
 module
 
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import Sheaf.AlgebraicGeometry.SfFullCohomologicalDimension
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.Paper.SfDerivedDirectImage

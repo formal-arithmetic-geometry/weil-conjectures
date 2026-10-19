@@ -18,7 +18,7 @@ public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.AlgebraicGeometry.CompactifiableOverField
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
-public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.CategoryTheory.RingedDerivedRestriction
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure

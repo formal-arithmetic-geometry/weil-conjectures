@@ -26,7 +26,7 @@ public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs

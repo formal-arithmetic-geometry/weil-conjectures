@@ -121,6 +121,11 @@ theorem trace_eq_mul_of_bijective (p : V →ₗ[R] M →ₗ[R] N) (hp : Function
     simp [LinearEquiv.conj_apply, e, this]
   rw [← trace_compLeft_compRight, ← hc, trace_conj']
 
+/-- The trace of the operator `φ ↦ g ∘ φ ∘ h` on `M →ₗ[R] N` is `tr g * tr h`. -/
+theorem trace_llcomp_comp_lcomp (g : N →ₗ[R] N) (h : M →ₗ[R] M) :
+    trace R (M →ₗ[R] N) (llcomp R M N N g ∘ₗ lcomp R N h) = trace R N g * trace R M h :=
+  trace_compLeft_compRight g h
+
 end Pairing
 
 end LinearMap

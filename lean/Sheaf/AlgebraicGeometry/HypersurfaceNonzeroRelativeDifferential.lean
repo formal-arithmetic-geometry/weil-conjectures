@@ -1,8 +1,12 @@
-import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
-import WeilConjectures.AlgebraicGeometry.Modules.Differentials
-import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import WeilConjectures.AlgebraicGeometry.Picard.ZeroScheme
+module
+
+public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
+public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
+public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.AlgebraicGeometry.Picard.ZeroScheme
+
+@[expose] public section
 
 /-!
 # Nonzero relative differential gives a smooth hypersurface point

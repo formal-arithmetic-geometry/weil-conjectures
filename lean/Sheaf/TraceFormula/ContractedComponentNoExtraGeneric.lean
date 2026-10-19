@@ -6,7 +6,7 @@ Authors: SHEAF group Q45
 module
 
 public import Sheaf.Paper.OrgogozoInductionData
-public import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.CategoryTheory.Comma.Over.Pullback

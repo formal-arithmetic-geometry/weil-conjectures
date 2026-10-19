@@ -31,7 +31,7 @@ import Mathlib.CategoryTheory.Limits.MorphismProperty
 import Sheaf.AlgebraicGeometry.Morphisms.GenericFiniteOpenNeighborhood
 import Sheaf.AlgebraicGeometry.HasUniversallyBoundedFibersOfIsLocallyQuasiFinite
 import WeilConjectures.SixFunctors.OpenClosed.Exact
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.UnramifiedQuasiFinite
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver

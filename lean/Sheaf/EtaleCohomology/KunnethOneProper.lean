@@ -17,7 +17,7 @@ public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
 public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 public import Mathlib.CategoryTheory.Abelian.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
-import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
 import Sheaf.AlgebraicGeometry.ProperStability

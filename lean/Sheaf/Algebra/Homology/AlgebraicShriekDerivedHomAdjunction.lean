@@ -109,7 +109,7 @@ def coinductionHomScalarFormula
       (restrictScalars f).mapDerivedCategory.map ((ihom K).map s.inv) ≫
       θ.hom.app (op K, Y) =
     MonoidalClosed.curry (C := DerivedCategory (ModuleCat.{u} P))
-      (((DerivedMonoidal.braidedCategory DerivedCategory.Qh
+      (((DerivedMonoidal.braidedCategory' DerivedCategory.Qh
         (HomotopyCategory.quasiIso (ModuleCat.{u} P) (.up ℤ))).braiding
           ((ihom ((restrictScalars f).mapDerivedCategory.obj
             ((DerivedCategory.singleFunctor (ModuleCat.{u} A) 0).obj

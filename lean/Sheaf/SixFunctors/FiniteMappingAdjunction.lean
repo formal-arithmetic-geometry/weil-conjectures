@@ -344,7 +344,7 @@ def finiteMappingTransposeArrows (A : Type (u + 1)) [CommRing A]
     {H C : DerivedCategory (ModuleCat.{u + 1} A)}
     (f : H ⟶ (coefficientDerivedDual A).obj (op C)) :
     List (Arrow (DerivedCategory (ModuleCat.{u + 1} A))) :=
-  [Arrow.mk ((DerivedMonoidal.braiding (DerivedCategory.Qh (C := ModuleCat.{u + 1} A))
+  [Arrow.mk ((DerivedMonoidal.braiding' (DerivedCategory.Qh (C := ModuleCat.{u + 1} A))
       (HomotopyCategory.quasiIso (ModuleCat.{u + 1} A) (ComplexShape.up ℤ)) H C).hom),
     Arrow.mk (MonoidalClosed.uncurry f)]
 
@@ -373,7 +373,7 @@ def finiteMappingPairing (A : Type u) [CommRing A] [Finite A]
   letI := (ProEtale.upperStarLowerStarAdjunction B a).preservesKInjectiveComplexes
   let leray := Functor.rightDerivedFunctorCompIso' (ProEtale.lowerStar B a)
     (Sheaf.Γ (Scheme.ProEt.topology S) B) (ProEtale.globalSectionsLowerStarIso B a)
-  [Arrow.mk (T := DerivedCategory B) ((DerivedMonoidal.braiding (DerivedCategory.Qh (C := B))
+  [Arrow.mk (T := DerivedCategory B) ((DerivedMonoidal.braiding' (DerivedCategory.Qh (C := B))
       (HomotopyCategory.quasiIso B (ComplexShape.up ℤ))
       ((ProEtale.rightDerivedGlobalSections B T).obj H) (G.obj (F.obj M))).hom),
     Arrow.mk (𝟙 (G.obj (F.obj M)) ⊗ₘ leray.inv.app H)] ++

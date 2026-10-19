@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.ExcellentRing
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs

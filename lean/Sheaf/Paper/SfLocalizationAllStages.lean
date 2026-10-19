@@ -90,8 +90,8 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerS
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Defs
-import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 import WeilConjectures.ConstructibleSheaf.Pullback
 import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
 import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence

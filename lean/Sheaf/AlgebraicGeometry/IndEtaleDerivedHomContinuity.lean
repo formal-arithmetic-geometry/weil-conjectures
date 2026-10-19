@@ -18,7 +18,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.ConstructibleSheaf.Defs
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification

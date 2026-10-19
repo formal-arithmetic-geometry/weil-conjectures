@@ -307,6 +307,43 @@ noncomputable def derivedLowerShriekObjIsoDerivedLowerStar (K : WeilComplex k₀
     (Functor.rightDerivedFunctorNatIso (ProEtaleWeilSheaf.lowerStarCongr k₀ l c.comm.symm)).app
       K.obj
 
+
+/-- **For a proper morphism, the direct image with compact support is the direct image**, as an
+isomorphism of functors on Weil complexes; its components are
+`AlgebraicGeometry.WeilComplex.derivedLowerShriekObjIsoDerivedLowerStar` (blueprint:
+`prop-functor-package`, clause 3, "for proper `f`, `Rf_! ≃ Rf_*`"). -/
+noncomputable def derivedLowerShriekIsoDerivedLowerStar :
+    derivedLowerShriek k₀ l f ≅ derivedLowerStar f := by
+  let c := HasCompactification.compactification f (hf := hasCompactification_of_over (k₀ := k₀) f)
+  have : IsProper c.i := c.isProper_openImmersion inferInstance
+  have : IsOpenImmersion c.i := c.isOpenImmersion
+  have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
+  have := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
+  have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (ProEtale.AdicSheaf l (c.Z ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
+  have := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (ProEtale.AdicSheaf l (c.Z ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
+  let Φ : (ProEtaleWeilSheaf.extensionByZero k₀ l c.i).mapDerivedCategory ⋙
+      (ProEtaleWeilSheaf.lowerStar k₀ l c.g).rightDerivedFunctor ≅
+      (ProEtaleWeilSheaf.lowerStar k₀ l f).rightDerivedFunctor :=
+    Functor.isoWhiskerRight
+        (ProEtaleWeilSheaf.extensionByZero k₀ l c.i).rightDerivedFunctorIsoMapDerivedCategory.symm
+        _ ≪≫
+      (IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompIso
+        (ProEtale.adicOpenImmersionLowerShriekGeometricFiberMapCompFrobeniusIso l c.i
+          (comp_over c.i _))
+        (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l c.g (comp_over c.g _))).symm ≪≫
+      Functor.rightDerivedFunctorNatIso (Functor.isoWhiskerRight
+        (asIso (ProEtaleWeilSheaf.extensionByZeroToLowerStar k₀ l c.i))
+        (ProEtaleWeilSheaf.lowerStar k₀ l c.g)) ≪≫
+      Functor.rightDerivedFunctorNatIso (ProEtaleWeilSheaf.lowerStarCompIso k₀ l c.i c.g) ≪≫
+      Functor.rightDerivedFunctorNatIso (ProEtaleWeilSheaf.lowerStarCongr k₀ l c.comm.symm)
+  exact ((objectProperty k₀ l Y).fullyFaithfulι.whiskeringRight _).preimageIso
+    (ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ Φ ≪≫ (ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _).symm)
+
 end Proper
 
 section Package

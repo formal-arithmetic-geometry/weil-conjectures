@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence

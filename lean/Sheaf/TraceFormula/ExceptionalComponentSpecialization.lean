@@ -6,7 +6,7 @@ Authors: SHEAF group Q20
 module
 
 public import Sheaf.AlgebraicGeometry.MultipointedCurveModification
-public import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.RingTheory.Valuation.ValuationSubring
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed

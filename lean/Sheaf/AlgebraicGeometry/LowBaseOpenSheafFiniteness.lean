@@ -10,7 +10,7 @@ public import Mathlib.Topology.KrullDimension
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.OpenImmersion
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs

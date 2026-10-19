@@ -5,7 +5,7 @@ Authors: SHEAF group Q20
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor

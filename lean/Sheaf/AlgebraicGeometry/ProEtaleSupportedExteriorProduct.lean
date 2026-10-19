@@ -18,7 +18,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
@@ -38,7 +38,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Defs
-public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 public import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
 public import Mathlib.CategoryTheory.Sites.GlobalSections

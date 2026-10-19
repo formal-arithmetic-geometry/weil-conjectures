@@ -114,6 +114,8 @@ lemma restrictedRegular_rightAction :
   change (β_ S R).hom ≫ φ ▷ S ≫ μ[S] = _
   rw [← BraidedCategory.braiding_naturality_right_assoc, IsCommMonObj.mul_comm]
 
+/-- The underlying object of `S ⊗_R M` (extension of scalars along `φ`) is the underlying object
+of the tensor product of `M` with `S` regarded as an `R`-module. -/
 noncomputable def extendForgetTensorObjIso (M : Mod C R) :
     (extendScalarsObj φ M).X ≅ (((comap φ).obj (regular S)) ⊗ M).X where
   hom := extendDescHom φ (tensorObjπ ((comap φ).obj (regular S)) M) (by
@@ -135,6 +137,17 @@ noncomputable def extendForgetTensorObjIso (M : Mod C R) :
     erw [coequalizer.π_desc, Category.comp_id]
     rfl
 
+/-- Extension of scalars followed by the forgetful functor is tensoring with `S` regarded as an
+`R`-module followed by the forgetful functor: the square
+
+```
+Mod_R ──extendScalars φ──▶ Mod_S
+  │ φ^*S ⊗ -                 │ forget
+  ▼                          ▼
+Mod_R ───────forget──────▶   C
+```
+
+commutes up to this natural isomorphism. -/
 noncomputable def extendForgetTensorIso :
     extendScalars φ ⋙ forget S ≅
       tensorLeft ((comap φ).obj (regular S)) ⋙ forget R :=

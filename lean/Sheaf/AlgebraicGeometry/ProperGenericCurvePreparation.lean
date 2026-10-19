@@ -52,7 +52,7 @@ import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 import Sheaf.AlgebraicGeometry.NormalizationGeonormalInsep
 import Sheaf.RingTheory.PurelyInseparableBaseChangeLocalRing
 import WeilConjectures.FieldTheory.PurelyInseparablePthRootTower
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions
 import WeilConjectures.Blowup.Proper
 import WeilConjectures.Blowup.FiniteDegree.Algebra

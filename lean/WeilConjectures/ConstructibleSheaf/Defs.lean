@@ -204,11 +204,15 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
-/-- A sheaf `F` on the small étale site of `X` with values in a concrete category is
+/-- Blueprint `pur9-def-finite-locally-constant`: Finite locally constant sheaves.
+
+A sheaf `F` on the small étale site of `X` with values in a concrete category is
 *finite locally constant* if it is locally constant and finite, that is, with finitely
 generated stalks (`IsFiniteSheaf`). For sheaves of sets,
 equivalently (not proved here), `F` is representable by a scheme finite étale over
-`X`. -/
+`X`. For sheaves of `Λ`-modules, the blueprint's rank one condition (the local constant values
+can be chosen free of rank one) is, for a locally constant sheaf, the condition that every
+geometric stalk is isomorphic to `Λ` (`AlgebraicGeometry.Scheme.HasRankOneStalks`). -/
 class IsFiniteLocallyConstantSheaf (F : Sheaf X.smallEtaleTopology A) : Prop
     extends IsLocallyConstantSheaf F, IsFiniteSheaf F
 

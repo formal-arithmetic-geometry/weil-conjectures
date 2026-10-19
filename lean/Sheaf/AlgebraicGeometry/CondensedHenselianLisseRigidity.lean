@@ -32,7 +32,7 @@ Source: Hemo--Richarz--Scholbach, Constructible sheaves on schemes, Corollary 4.
 * `henselian_lisse_rigidity` states the component homeomorphism, invariance of
   w-contractibility, and the exact symmetric monoidal lisse equivalence. Symmetric
   monoidality is `Functor.Braided` for the published Koszul braiding
-  `DerivedCategory.braidedCategory` of the derived tensor, passed explicitly in source
+  `DerivedCategory.braidedCategory'` of the derived tensor, passed explicitly in source
   and target.
 -/
 
@@ -149,8 +149,8 @@ Source: HRS, Corollary 4.4(1)--(2)
 The exact symmetric monoidal clause is `Functor.IsTriangulated` together with a
 `Functor.Braided` structure: a strong monoidal structure (invertible unit and tensor
 comparisons with their coherence laws) whose tensor comparison commutes with the derived
-Koszul braidings `DerivedCategory.braidedCategory` of source and target. These braidings
-are `DerivedMonoidal.braiding` for `DerivedCategory.Qh` and quasi-isomorphisms, over the
+Koszul braidings `DerivedCategory.braidedCategory'` of source and target. These braidings
+are `DerivedMonoidal.braiding'` for `DerivedCategory.Qh` and quasi-isomorphisms, over the
 same derived tensor `Mod.derivedMonoidalCategory` as the dualizable subcategories.
 
 Proof:
@@ -208,8 +208,8 @@ theorem henselian_lisse_rigidity
       (IsWContractibleRing A →
         (upperStar Λ (Spec.map
           (CommRingCat.ofHom (Ideal.Quotient.mk I)))).mapDerivedCategory.IsTriangulated ∧
-        Nonempty (@Functor.Braided _ _ _ (DerivedCategory.braidedCategory _) _ _ _
-          (DerivedCategory.braidedCategory _)
+        Nonempty (@Functor.Braided _ _ _ (DerivedCategory.braidedCategory' _) _ _ _
+          (DerivedCategory.braidedCategory' _)
           (upperStar Λ (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))).mapDerivedCategory) ∧
         ∃ e :
           (ObjectProperty.FullSubcategory

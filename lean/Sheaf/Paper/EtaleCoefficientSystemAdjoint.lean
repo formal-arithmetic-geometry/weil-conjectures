@@ -11,7 +11,8 @@ public import Sheaf.Paper.CoefficientSystemDerivedComparison
 public import Sheaf.Paper.FiniteFieldFiber
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.Compactification.Refinement
-public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+public import WeilConjectures.Compactification.RefinementCategory
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import Sheaf.NumberTheory.Padics.PadicIntegersIntegralClosure
 import Mathlib.RingTheory.DedekindDomain.IntegralClosure
 import Mathlib.RingTheory.TensorProduct.Quotient

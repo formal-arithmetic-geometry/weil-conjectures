@@ -24,7 +24,7 @@ import Sheaf.Topology.NoetherianGoodStratificationRefinement
 import WeilConjectures.ConstructibleSheaf.Refinement
 import Sheaf.AlgebraicGeometry.EtaleInverseImageColimits
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
 
 /-!

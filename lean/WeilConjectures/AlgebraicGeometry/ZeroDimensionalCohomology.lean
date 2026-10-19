@@ -5,12 +5,11 @@ Authors: Bin Wu
 -/
 module
 
-public import Mathlib.Topology.KrullDimension
 
-public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+
+import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 
 public import Mathlib.AlgebraicGeometry.Artinian
-public import WeilConjectures.AlgebraicGeometry.ClosedPointResidueField
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
 public import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
@@ -323,7 +322,8 @@ lemma Etale.subsingleton_cohomology_of_topologicalKrullDim_le_zero {k : Type u} 
   have : IsEmpty ((⊥ : C.Opens) : Scheme.{u}) := ⟨fun ⟨y, hy⟩ ↦ by simp at hy⟩
   have hH : Subsingleton (Sheaf.H F (n + 1)) :=
     Etale.subsingleton_H_of_isZero_upperStar ⊥ (Set.toFinite _) (fun x _ ↦ isClosed_discrete _)
-      (fun x _ ↦ have := Scheme.isAlgClosed_residueField_of_isClosed f x (isClosed_discrete _)
+      (fun x _ ↦ have := (IsAlgClosed.of_ringEquiv k _
+        (residueFieldIsoBase f x (isClosed_discrete _)).commRingCatIsoToRingEquiv.symm)
         inferInstance) F (Scheme.Etale.isZero_sheaf_of_isEmpty _) n
   -- compare `Hⁿ⁺¹(C, F)` with the right derived functors of the global sections
   rw [Etale.subsingleton_H_iff_isZero_rightDerived_Γ] at hH
@@ -359,7 +359,8 @@ lemma Etale.isIso_toPresheafFiber_of_topologicalKrullDim_le_zero {k : Type u} [F
     (F.isLimitConeΓ.conePointUniqueUpToIso
       (limitOfDiagramInitial (Scheme.Etale.isTerminalMkId C).op F.obj)).isIso_hom
   have := Etale.isIso_piLift_toPresheafFiber (fun x ↦
-    have := Scheme.isAlgClosed_residueField_of_isClosed f x (isClosed_discrete _)
+    have := (IsAlgClosed.of_ringEquiv k _
+        (residueFieldIsoBase f x (isClosed_discrete _)).commRingCatIsoToRingEquiv.symm)
     inferInstance) Ω s hs F
   infer_instance
 
@@ -395,14 +396,5 @@ theorem zero_dimensional_etale_cohomology
   ⟨Scheme.finite_of_topologicalKrullDim_le_zero f hdim,
     Etale.subsingleton_cohomology_of_topologicalKrullDim_le_zero f hdim F,
     Etale.isIso_toPresheafFiber_of_topologicalKrullDim_le_zero f hdim F Ω s hs⟩
-
-theorem zero_dimensional_etale_finite
-    (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u})
-    (f : C ⟶ Spec (.of k)) [IsSeparated f] [LocallyOfFiniteType f]
-    [QuasiCompact f] (hdim : topologicalKrullDim C ≤ 0) : Finite C := by
-  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
-  have : CompactSpace C := QuasiCompact.compactSpace_of_compactSpace f
-  have : IsLocallyArtinian C := IsLocallyArtinian.of_topologicalKrullDim_le_zero hdim
-  exact finite_of_compact_of_discrete
 
 end AlgebraicGeometry

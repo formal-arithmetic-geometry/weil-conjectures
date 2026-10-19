@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleSupportedExteriorProduct
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 public import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType

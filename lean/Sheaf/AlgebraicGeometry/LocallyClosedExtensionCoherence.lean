@@ -26,7 +26,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 import Sheaf.AlgebraicGeometry.ProEtaleOpenRestrictionCounit
 import Sheaf.AlgebraicGeometry.ProEtaleSupportedReconstruction
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Sheaf.CategoryTheory.SiteMorphismComposition
+import WeilConjectures.CategoryTheory.SiteMorphismComposition
 
 /-!
 # Normalized locally closed extensions with arbitrary pro-etale coefficients

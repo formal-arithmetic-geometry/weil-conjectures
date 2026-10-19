@@ -12,7 +12,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Sheaf.AlgebraicGeometry.PureDimension
-public import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 public import WeilConjectures.ConstructibleSheaf.OpenClosedStratification
 import Sheaf.AlgebraicGeometry.ConstantLocalDimensionComponents
 import Sheaf.AlgebraicGeometry.EquidimensionalOpenLocalDimension

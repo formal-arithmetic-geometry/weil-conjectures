@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleStalkConservative
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
 import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.CategoryTheory.SiteMorphismComposition
+import WeilConjectures.CategoryTheory.SiteMorphismComposition
 import Sheaf.Paper.LocalizeRingedSiteMorphismGeneral
 import Sheaf.Paper.ProEtaleLocallyConstantSheafOfUniverses
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses

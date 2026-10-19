@@ -20,6 +20,7 @@ public import Sheaf.Paper.ConstantCompletionEquivalence
 import Sheaf.Paper.CompleteProetale
 public import Sheaf.Paper.CompletedExchangeCoherence
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import Mathlib.CategoryTheory.Adjunction.Mates
 
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization

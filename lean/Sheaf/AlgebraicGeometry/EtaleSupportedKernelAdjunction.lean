@@ -14,9 +14,9 @@ public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import WeilConjectures.SixFunctors.Finite.Exact
-import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 import Sheaf.AlgebraicGeometry.OpenImmersionRestriction
-import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage
 import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion

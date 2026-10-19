@@ -238,7 +238,7 @@ def coprojectionProEtaleTensorMateRepresentative (C : Type v) [Category.{u + 1} 
     (eps : (rightDerivedLowerShriek C h).obj L ⟶ K) :
     (rightDerivedLowerShriek C h).obj (L ⊗ (coprojectionDerivedPullback C h).obj N) ⟶
       K ⊗ N :=
-  coprojectionTensorMate (b := DerivedCategory.braidedCategory _)
+  coprojectionTensorMate (b := DerivedCategory.braidedCategory' _)
     (rightDerivedLowerShriek C h) (coprojectionDerivedPullback C h) d L K
     (coprojectionTensorComparison C h N d.inverse ≪≫
       (coprojectionDerivedPullback C h).mapIso d.iso ≪≫ coprojectionUnitComparison C h)

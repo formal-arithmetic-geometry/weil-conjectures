@@ -9,8 +9,8 @@ public import Mathlib
 public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.IntegralBaseChange
-import Sheaf.AlgebraicGeometry.SmoothBaseChange.PrimeCyclicDetection
-import Sheaf.AlgebraicGeometry.SmoothBaseChange.PrimeQuotientDetection
+import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.PrimeCyclicDetection
+import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.PrimeQuotientDetection
 
 /-!
 # The universal curve-test datum attached to a failure of base change
@@ -124,7 +124,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ] {X S : Scheme.{u}} (p : X ⟶ S)
 `K` over it: the spectrum `S''` of the integral closure of `Γ(S', ⊤)` in `K`. It is affine,
 integral and normal, its function field is algebraically closed
 (`IsFractionRing.isAlgClosed_integralClosure`), the morphism `S'' ⟶ S'` is integral, and the
-given point `Spec K ⟶ S'` lifts to a geometric generic point of `S''`. -/
+given point `Spec K ⟶ S'` lifts to a geometric generic point of `S''`. 
+(blueprint: lem-sbc-normalization-algclosed-field)
+-/
 theorem Etale.exists_normalization_of_isAlgClosed {S' : Scheme.{u}} [IsAffine S'] {K : Type u}
     [Field K] [IsAlgClosed K] (g : Spec (.of K) ⟶ S') :
     ∃ (S'' : Scheme.{u}) (_ : IsAffine S'') (_ : IsIntegral S'')

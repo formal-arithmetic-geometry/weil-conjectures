@@ -22,6 +22,7 @@ import Sheaf.Paper.CompactificationCoherence
 import Sheaf.Paper.DerivedPullbackTensorIso
 import Sheaf.Paper.ExchangeProjectionSuppliedDomains
 import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 import WeilConjectures.SixFunctors.Etale.Derived.Adjunctions
 
 /-!

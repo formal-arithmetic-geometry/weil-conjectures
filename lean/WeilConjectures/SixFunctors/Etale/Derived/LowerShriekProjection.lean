@@ -146,7 +146,10 @@ lemma projectionMapOfCompactification_app_app
           ((leftDerivedUpperStarCompactificationIso A c).hom.app L))) :=
   rfl
 
-/-- The **projection map** `PF : Rf_!K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^*L)` for a morphism
+/-- Blueprint `sk-def-sf-exchanges`: Exchange and projection transformations, typed (the
+projection transformation `PF_{f,K,L}`; also the projection transformation of `def-sf-pf`).
+
+The **projection map** `PF : Rf_!K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^*L)` for a morphism
 `f : X ⟶ Y` admitting a compactification: the projection map
 `AlgebraicGeometry.Etale.projectionMapOfCompactification` for the chosen compactification
 `HasCompactification.compactification f`. -/

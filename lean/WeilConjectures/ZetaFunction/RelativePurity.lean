@@ -11,6 +11,12 @@ public import WeilConjectures.DeligneLaumon.Reduction.DirectImage
 public import WeilConjectures.DeligneLaumon.Reduction.MixedStalk
 public import WeilConjectures.WeilSheaf.ProperCohomology.LowerShriek
 public import WeilConjectures.WeilSheaf.TateTwist
+public import WeilConjectures.AlgebraicGeometry.ResidueFieldFiniteEtale
+public import WeilConjectures.WeilSheaf.FiniteLeray
+public import WeilConjectures.WeilSheaf.FinitePointCohomology
+public import WeilConjectures.WeilSheaf.ProperBaseChange
+public import WeilConjectures.WeilSheaf.UpperStarPointwise
+public import WeilConjectures.ZetaFunction.LissePurity
 public import WeilConjectures.ZetaFunction.Weights
 
 /-!
@@ -25,9 +31,14 @@ clauses of `sk-prop-smooth-proper-purity`):
 - **(b)** it is punctually `ι`-pure of weight `w + i`.
 
 The upper bound on the weights is the Deligne–Laumon direct-image theorem
-(`AlgebraicGeometry.hasDirectImageWeightBound_over_finiteField`); the lower bound comes from
-relative duality `(Rⁱf₀*F)^∨ ≅ R^{2d-i}f₀*(F^∨(d))`: the right-hand side has weights at most
-`-w - 2d + (2d - i) = -(w + i)` by the upper bound, and dualizing inverts the local eigenvalues.
+(`AlgebraicGeometry.hasDirectImageWeightBound_over_finiteField`).
+The lower bound in (b) is proved fibrewise rather than by the relative Verdier duality of the
+blueprint proof (Step 3), which needs `RHom`, `Rf^!` and the smooth orientation for Weil
+complexes (not available, see `WeilConjectures.WeilSheaf.Operations`). For a closed point `y`,
+proper base change to `Spec κ(y)` (`thm-weil-pbc-qbar`), the Leray isomorphism over the finite
+étale `Spec κ(y)` and purity of `Hⁱ(X_y ⊗ k̄, F)` for lisse coefficients (Deligne–Laumon and
+degreewise Poincaré duality `thm-pod-degreewise-perfectness-over-a-field` on the smooth proper
+fibre `X_y`) give purity of the stalk of `Rⁱf₀*F` at `y`.
 
 ## Main statements
 
@@ -43,78 +54,26 @@ relative duality `(Rⁱf₀*F)^∨ ≅ R^{2d-i}f₀*(F^∨(d))`: the right-hand 
 
 ## Implementation notes
 
-Two geometric inputs are stated separately, with `sorry`. Their blueprint proofs use nodes of
-other sections that cannot yet be stated for Weil sheaves, because the repository has no
-functor from finite-level étale sheaves, or from the lattice categories `D^b_c(X, ℚ̄_ℓ)` of the
-blueprint, to the pro-étale `ℓ`-adic sheaves `AlgebraicGeometry.ProEtale.AdicSheaf` underlying
-Weil sheaves:
-
-- `ProEtale.isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isProper`
-  (Step 1, local constancy, for the `ℓ`-adic sheaves on the geometric fibres; the Weil-level
-  `AlgebraicGeometry.WeilSheaf.isLisse_higherLowerStar_of_smooth_of_isProper` is derived from it)
-  uses the finite-level nodes `prop-weil-proet-finite-proper-base-change`,
-  `sbc-thm-smooth-base-change` (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_smooth`)
-  and `thm-fin-proper-constructibility-complete` on a lattice of `F`, and
-  `cor-weil-pbc-geometric-fiber-qbar` to pass to the limit; neither lattices of lisse
-  `ℓ`-adic sheaves nor the limit comparison exist yet;
-- `AlgebraicGeometry.WeilSheaf.nonempty_dual_higherLowerStar_iso` (Step 3, relative duality)
-  uses `lem-sf-tensor-hom`, `thm-pur-rational-and-qbar-purity`, `lem-sf-twist-interchange`
-  and `lem-sf-hom-finite-projective` at the `ℚ̄_ℓ`-stage, as morphisms of Weil complexes. These
-  are stated in the repository for étale sheaves of `Λ`-modules only
-  (`WeilConjectures.SixFunctors.Etale.Derived.TensorHom`,
-  `WeilConjectures.SixFunctors.Etale.Derived.Perfect.TateTwist`); `RHom` from a non-lisse
-  source, `Rf^!` and the smooth orientation do not exist for Weil complexes
-  (see `WeilConjectures.WeilSheaf.Operations`).
-
-The Tate twist `(d)` of a Weil sheaf is the constant twist by `χ_ℓ(σ)ᵈ = q⁻ᵈ`
-(`AlgebraicGeometry.WeilSheaf.cyclotomicUnit`), which multiplies the local Frobenius at a closed
-point `x` by `q_x⁻ᵈ`.
+The local constancy of Step 1 is stated separately, with `sorry`:
+`ProEtale.isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isProper`, for the
+`ℓ`-adic sheaves on the geometric fibres (the Weil-level
+`AlgebraicGeometry.WeilSheaf.isLisse_higherLowerStar_of_smooth_of_isProper` is derived from it).
+Its blueprint proof uses the finite-level nodes `prop-weil-proet-finite-proper-base-change`,
+`sbc-thm-smooth-base-change` (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_smooth`)
+and `thm-fin-proper-constructibility-complete` on a lattice of `F`, and
+`cor-weil-pbc-geometric-fiber-qbar` to pass to the limit. The repository has no functor from
+finite-level étale sheaves, or from the lattice categories `D^b_c(X, ℚ̄_ℓ)` of the blueprint, to
+the pro-étale `ℓ`-adic sheaves `AlgebraicGeometry.ProEtale.AdicSheaf` underlying Weil sheaves, so
+neither lattices of lisse `ℓ`-adic sheaves nor the limit comparison exist yet.
 -/
 
 @[expose] public section
 
-universe u v
+universe u
 
 open CategoryTheory Limits Endofunctor
 
 open scoped AlgebraicGeometry.ProEtale
-
-namespace FrobeniusModule
-
-variable {K : Type v} [Field K]
-
-/-- If `α` is an eigenvalue of the Frobenius of `M`, then `α⁻¹` is an eigenvalue of the
-Frobenius `(F⁻¹)^∨` of the dual `M^∨`. -/
-theorem hasEigenvalue_dual_inv {M : FrobeniusModule.{u, v} K} {α : K}
-    (hα : M.frobeniusEnd.HasEigenvalue α) : M.dual.frobeniusEnd.HasEigenvalue α⁻¹ := by
-  have hα0 := ne_zero_of_hasEigenvalue hα
-  have hF : M.dual.frobeniusEnd.charpoly = M.frobenius.symm.toLinearMap.charpoly :=
-    LinearMap.charpoly_dualMap _
-  rw [Module.End.hasEigenvalue_iff_isRoot_charpoly, hF,
-    ← Module.End.hasEigenvalue_iff_isRoot_charpoly]
-  obtain ⟨x, hx⟩ := hα.exists_hasEigenvector
-  rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff] at hx
-  refine Module.End.hasEigenvalue_of_hasEigenvector (x := x)
-    (Module.End.hasEigenvector_iff.2 ⟨Module.End.mem_eigenspace_iff.2 ?_, hx.2⟩)
-  change M.frobenius.symm x = α⁻¹ • x
-  rw [LinearEquiv.symm_apply_eq, map_smul]
-  change x = α⁻¹ • M.frobeniusEnd x
-  rw [hx.1, inv_smul_smul₀ hα0]
-
-/-- A Frobenius module with weights at most `w` whose dual has weights at most `-w` is pure of
-weight `w`: for an eigenvalue `α`, the bound on the eigenvalue `α⁻¹` of the dual gives
-`|ι α| ≥ q ^ (w / 2)`. -/
-theorem IsPureOfWeight.of_hasWeightsAtMost_dual {ι : K →+* ℂ} {q : ℕ} (hq : 0 < q)
-    {M : FrobeniusModule.{u, v} K} {w : ℝ} (h : M.HasWeightsAtMost ι q w)
-    (h' : M.dual.HasWeightsAtMost ι q (-w)) : M.IsPureOfWeight ι q w := by
-  intro α hα
-  refine le_antisymm (h α hα) ?_
-  have h2 := h' _ (hasEigenvalue_dual_inv hα)
-  rw [map_inv₀, norm_inv, neg_div, Real.rpow_neg (Nat.cast_nonneg q)] at h2
-  have hpos : 0 < ‖ι α‖ := norm_pos_iff.2 ((map_ne_zero ι).2 (ne_zero_of_hasEigenvalue hα))
-  exact (inv_le_inv₀ hpos (Real.rpow_pos_of_pos (by exact_mod_cast hq) _)).1 h2
-
-end FrobeniusModule
 
 namespace AlgebraicGeometry
 
@@ -218,17 +177,6 @@ namespace WeilSheaf
 
 variable {ι : PadicAlgCl l →+* ℂ}
 
-/-- The Tate twist `(d)` multiplies the local Frobenius at a closed point `x` by `q_x⁻ᵈ`, so it
-lowers the weights by `2d`: the constant twist by `χ_ℓ(σ)ᵈ = q⁻ᵈ` has
-`2 log_q |ι (q⁻ᵈ)| = -2d` (blueprint `lem-wf-tate-twist-frobenius`). -/
-theorem two_mul_logb_norm_cyclotomicUnit_pow (d : ℕ) :
-    2 * Real.logb (Nat.card k₀) ‖ι ((cyclotomicUnit k₀ l ^ d : (PadicAlgCl l)ˣ) : PadicAlgCl l)‖ =
-      -(2 * d) := by
-  have hq : (1 : ℝ) < Nat.card k₀ := by exact_mod_cast Finite.one_lt_card
-  rw [Units.val_pow_eq_pow_val, cyclotomicUnit_eq, map_pow, map_inv₀, map_natCast, norm_pow,
-    norm_inv, Complex.norm_natCast, Real.logb_pow, Real.logb_inv, Real.logb_self_eq_one hq]
-  ring
-
 section Relative
 
 variable (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] [IsProper f]
@@ -282,81 +230,90 @@ theorem isLisse_higherLowerStar_of_smooth_of_isProper [hs : Smooth f] {F : WeilS
 
 variable (d : ℕ) [SmoothOfRelativeDimension d f]
 
-/-- **Relative duality** (Step 3 of `prop-zl-smooth-proper-relative-purity`): for a smooth
-proper morphism `f` of pure relative dimension `d` and a lisse Weil sheaf `F`, there is an
-isomorphism of Weil sheaves `(Rⁱf₀*F)^∨ ≅ R^{2d-i}f₀*(F^∨(d))`, where the Tate twist `(d)` is the
-constant twist by `χ_ℓ(σ)ᵈ = q⁻ᵈ`. For `i > 2d` the right-hand side, a cohomology sheaf in
-negative degree of the derived direct image of a sheaf, vanishes.
-
-It is `𝓗^{-i}` of the isomorphism of Weil complexes
-`RHom(Rf_*F, ℚ̄_ℓ) ≅ Rf_*RHom(F, Rf^!ℚ̄_ℓ) ≅ Rf_*(F^∨(d))[2d]` assembled from the tensor–Hom form
-of Verdier duality, the smooth orientation `Rf^!ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` and the perfect duality of the
-lisse sheaf `F`, using that the `Rʲf_*F` are lisse
-(`AlgebraicGeometry.WeilSheaf.isLisse_higherLowerStar_of_smooth_of_isProper`). The repository has
-no `RHom` or `Rf^!` of Weil complexes yet (`WeilConjectures.WeilSheaf.Operations`). -/
-theorem nonempty_dual_higherLowerStar_iso {F : WeilSheaf k₀ l X} (hF : F.IsLisse) (i : ℕ) :
-    Nonempty (((higherLowerStar f i).obj F).dual
-        (isLisse_higherLowerStar_of_smooth_of_isProper f
-          (hs := SmoothOfRelativeDimension.smooth d f) hF i) ≅
-      (WeilComplex.homologySheaf (2 * (d : ℤ) - i)).obj ((WeilComplex.derivedLowerStar f).obj
-        (toComplex.obj ((F.dual hF).constantTwist (cyclotomicUnit k₀ l ^ d))))) :=
-  sorry
-
 omit [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
-/-- The cohomology sheaves in negative degrees of the derived direct image of a Weil sheaf
-vanish: it is computed by an injective resolution. -/
-theorem isZero_homologySheaf_derivedLowerStar_toComplex (G : WeilSheaf k₀ l X) {n : ℤ}
-    (hn : n < 0) :
-    IsZero ((WeilComplex.homologySheaf n).obj
-      ((WeilComplex.derivedLowerStar f).obj (toComplex.obj G))) := by
-  rw [WeilComplex.isZero_homologySheaf_obj_iff]
-  have : ((WeilComplex.derivedLowerStar f).obj (toComplex.obj G)).obj.IsGE 0 :=
-    (ProEtaleWeilSheaf.lowerStar k₀ l f).isGE_rightDerivedFunctor_obj_singleFunctor G.obj
-  exact _root_.DerivedCategory.isZero_of_isGE _ 0 n hn
-
 include d in
 /-- **Clause (b) of `prop-zl-smooth-proper-relative-purity`**: for a smooth proper morphism `f`
 of pure relative dimension `d` between separated `k₀`-schemes of finite type and a lisse Weil
 sheaf `F` punctually `ι`-pure of weight `w`, the sheaf `Rⁱf₀*F` is punctually `ι`-pure of weight
 `w + i`.
 
-The Deligne–Laumon bound gives weights at most `w + i`. The dual `F^∨(d)` is lisse and
-punctually pure of weight `-w - 2d`, so by the same bound `R^{2d-i}f₀*(F^∨(d)) ≅ (Rⁱf₀*F)^∨` has
-weights at most `-(w + i)`; as the stalks of the dual of a lisse sheaf are the duals of the
-stalks, every eigenvalue `α` of a local Frobenius of `Rⁱf₀*F` has `|ι α⁻¹| ≤ q_y^{-(w+i)/2}`. -/
+The proof is fibrewise. For a closed point `y` of `Y₀`, let `P = Spec κ(y)`, a finite étale
+`k₀`-scheme, and `X_y = X₀ ×_{Y₀} P`, smooth and proper of pure dimension `d` over `k₀`. By proper
+base change (`AlgebraicGeometry.WeilSheaf.nonempty_upperStar_higherLowerStar_iso_of_isProper`) the
+pullback of `Rⁱf₀*F` to `P` is `Rⁱf_{y*}(F|_{X_y})`. Over the finite étale `P` the Leray
+isomorphism gives `Hⁱ(X_y ⊗ k̄, F) ≅ Γ(P̄, Rⁱf_{y*}F)`, which is pure of weight `w + i` by purity
+for lisse coefficients (`AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_cohomology_of_isLisse`,
+Deligne–Laumon and Poincaré duality on `X_y`); the stalk eigenvalues at the closed point of `P` are
+powers of those of `Γ(P̄, -)`, and the stalk at `y` has the same local Frobenius. -/
 theorem isPunctuallyPureOfWeight_higherLowerStar {F : WeilSheaf k₀ l X} (hF : F.IsLisse)
     {w : ℝ} (hw : F.IsPunctuallyPureOfWeight ι w) (i : ℕ) :
     ((higherLowerStar f i).obj F).IsPunctuallyPureOfWeight ι (w + i) := by
-  have hG := isLisse_higherLowerStar_of_smooth_of_isProper f
-    (hs := SmoothOfRelativeDimension.smooth d f) hF i
-  have hup := (isMixedOfWeightsAtMost_higherLowerStar_of_isProper f
-    hw.isMixedOfWeightsAtMost i).hasWeightsAtMost
-  -- The twisted dual `F^∨(d)` is punctually pure of weight `-w - 2d`.
-  have hFd : ((F.dual hF).constantTwist (cyclotomicUnit k₀ l ^ d)).IsPunctuallyPureOfWeight ι
-      (-w + -(2 * d)) :=
-    IsPunctuallyPureOfWeight.constantTwist (fun x ↦ by
-      obtain ⟨e⟩ := nonempty_equiv_stalk_dual hF x
-      exact (hw x).dual.of_equiv e) (two_mul_logb_norm_cyclotomicUnit_pow d)
-  obtain ⟨e⟩ := nonempty_dual_higherLowerStar_iso f d hF i
-  have hdual : (((higherLowerStar f i).obj F).dual hG).IsMixedOfWeightsAtMost ι (-(w + i)) := by
-    rcases le_or_gt i (2 * d) with hi | hi
-    · have hidx : 2 * (d : ℤ) - i = ((2 * d - i : ℕ) : ℤ) := by omega
-      rw [hidx] at e
-      refine IsMixedOfWeightsAtMost.of_iso e.symm
-        ((isMixedOfWeightsAtMost_higherLowerStar_of_isProper f hFd.isMixedOfWeightsAtMost
-          (2 * d - i)).mono_weight (le_of_eq ?_))
-      rw [Nat.cast_sub hi]
-      push_cast
-      ring
-    · exact isMixedOfWeightsAtMost_of_isZero
-        ((isZero_homologySheaf_derivedLowerStar_toComplex f _ (by omega)).of_iso e) _
-  intro x
-  obtain ⟨e'⟩ := nonempty_equiv_stalk_dual hG x
-  exact FrobeniusModule.IsPureOfWeight.of_hasWeightsAtMost_dual
-    (pow_pos Nat.card_pos _) (hup x)
-    (FrobeniusModule.HasWeightsAtMost.of_equiv e'.symm (hdual.hasWeightsAtMost x))
+  intro y
+  -- the closed point `y` as the finite étale `k₀`-scheme `P = Spec κ(y)`
+  let P := Spec (Y.residueField y.1)
+  let iy : P ⟶ Y := Y.fromSpecResidueField y.1
+  let : P.Over (Spec (CommRingCat.of k₀)) :=
+    ⟨Spec.map (CommRingCat.ofHom ((Y ↘ Spec (CommRingCat.of k₀)).residueFieldAlgebraMap y.1))⟩
+  have hiy : iy ≫ (Y ↘ Spec (CommRingCat.of k₀)) = P ↘ Spec (CommRingCat.of k₀) :=
+    ((Y ↘ Spec (CommRingCat.of k₀)).specMap_residueFieldAlgebraMap y.1).symm
+  have : iy.IsOver (Spec (CommRingCat.of k₀)) := ⟨hiy⟩
+  obtain ⟨hPf, hPe⟩ := isFinite_and_etale_specMap_residueFieldAlgebraMap
+    (Y ↘ Spec (CommRingCat.of k₀)) y.2
+  have : IsFinite (P ↘ Spec (CommRingCat.of k₀)) := hPf
+  have : Etale (P ↘ Spec (CommRingCat.of k₀)) := hPe
+  have : LocallyOfFiniteType (P ↘ Spec (CommRingCat.of k₀)) := inferInstance
+  have : QuasiCompact (P ↘ Spec (CommRingCat.of k₀)) := inferInstance
+  -- the fibre `X_y = X ×_Y P`
+  let Xy := pullback f iy
+  let fy : Xy ⟶ P := pullback.snd f iy
+  let g : Xy ⟶ X := pullback.fst f iy
+  let : Xy.Over (Spec (CommRingCat.of k₀)) := ⟨fy ≫ (P ↘ Spec (CommRingCat.of k₀))⟩
+  have : fy.IsOver (Spec (CommRingCat.of k₀)) := ⟨rfl⟩
+  have : g.IsOver (Spec (CommRingCat.of k₀)) := ⟨by
+    change g ≫ (X ↘ Spec (CommRingCat.of k₀)) = fy ≫ (P ↘ Spec (CommRingCat.of k₀))
+    rw [← comp_over f (Spec (CommRingCat.of k₀)), ← hiy, ← Category.assoc, pullback.condition,
+      Category.assoc]⟩
+  have hfyP : IsProper fy := inferInstance
+  have : QuasiCompact fy := inferInstance
+  have : QuasiSeparated fy := inferInstance
+  have : LocallyOfFiniteType fy := inferInstance
+  have : SmoothOfRelativeDimension d fy := inferInstance
+  have : SmoothOfRelativeDimension d (Xy ↘ Spec (CommRingCat.of k₀)) := by
+    have := smoothOfRelativeDimension_comp (n := d) (m := 0) fy (P ↘ Spec (CommRingCat.of k₀))
+    simpa using this
+  have : IsProper (Xy ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (IsProper (fy ≫ (P ↘ Spec (CommRingCat.of k₀))))
+  have : IsSeparated (Xy ↘ Spec (CommRingCat.of k₀)) := inferInstance
+  have : QuasiCompact (Xy ↘ Spec (CommRingCat.of k₀)) := inferInstance
+  have : QuasiSeparated (Xy ↘ Spec (CommRingCat.of k₀)) := inferInstance
+  have : LocallyOfFiniteType (Xy ↘ Spec (CommRingCat.of k₀)) := inferInstance
+  -- purity of the cohomology of the fibre, of `Rⁱf_{y*}`, and of the base change
+  have hF' := hF.upperStar g
+  have hw' := hw.upperStar g
+  obtain ⟨e⟩ := nonempty_equiv_cohomology_globalSections_higherLowerStar fy ((upperStar g).obj F) i
+  have h1 := isPureOfWeightOver_cohomology_of_isLisse d hF' hw' i
+  have h2 := h1.of_equiv e.symm
+  have hG : ((higherLowerStar fy i).obj ((upperStar g).obj F)).IsPunctuallyPureOfWeight ι
+      (w + ((i : ℤ) : ℝ)) := isPunctuallyPureOfWeight_of_isPureOfWeightOver_globalSections h2
+  obtain ⟨e'⟩ := nonempty_upperStar_higherLowerStar_iso_of_isProper (X' := Xy) (f' := fy)
+    (g' := g) ‹IsProper f›
+    (IsPullback.of_hasPullback f iy) F i
+  -- the closed point of `P` over `y`
+  have hK : Finite (Y.residueField y.1) := y.2
+  let p : P.finitePoints := ⟨_, closedPoint_mem_finitePoints
+    (K := Y.residueField y.1)⟩
+  have hp : iy.base p.1 = y.1 := Y.fromSpecResidueField_apply y.1 _
+  obtain ⟨E⟩ := nonempty_equiv_stalk_of_iso e' p
+  have h3 := (hG p).of_equiv E
+  have h4 := (isPureOfWeight_stalk_upperStar_iff iy ((higherLowerStar f i).obj F) p).1 h3
+  have hy : (⟨iy.base p.1, Scheme.Hom.map_mem_finitePoints iy p.2⟩ : Y.finitePoints) = y :=
+    Subtype.ext hp
+  rw [hy, hp, Int.cast_natCast] at h4
+  exact h4
 
+
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 include d in
 /-- **Relative smooth-proper purity** (blueprint `prop-zl-smooth-proper-relative-purity`, and the
 relative clauses (a), (b) of `sk-prop-smooth-proper-purity`): let `f : X₀ ⟶ Y₀` be a smooth
@@ -375,6 +332,8 @@ theorem smooth_proper_relative_purity {F : WeilSheaf k₀ l X} (hF : F.IsLisse) 
     (hs := SmoothOfRelativeDimension.smooth d f) hF i,
     isPunctuallyPureOfWeight_higherLowerStar f d hF hw i⟩
 
+omit [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 include d in
 /-- The case of the constant sheaf (relative form of `cor-zl-purity-smooth-proper`): for a
 smooth proper morphism `f` of separated `k₀`-schemes of finite type, `Rⁱf₀*ℚ̄_ℓ` is punctually

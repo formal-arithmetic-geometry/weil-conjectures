@@ -14,12 +14,12 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
 public import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
-import Sheaf.AlgebraicGeometry.Curve.BrauerReductionInjection
-import Sheaf.AlgebraicGeometry.Curve.BrauerFiniteModificationInjection
+import WeilConjectures.AlgebraicGeometry.Curve.BrauerReductionInjection
+import WeilConjectures.AlgebraicGeometry.Curve.BrauerFiniteModificationInjection
 import WeilConjectures.AlgebraicGeometry.ReducedCurveNormalization
-import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
-import Sheaf.AlgebraicGeometry.EtaleAffineQcoherent
-import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+import WeilConjectures.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
+import WeilConjectures.AlgebraicGeometry.EtaleAffineQcoherent
+import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 import WeilConjectures.AlgebraicGeometry.Regular
 import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
@@ -132,7 +132,9 @@ theorem subsingleton_cohomologicalBrauerGroup_functionField (f : C ⟶ Spec (.of
 integral, noetherian and regular, so `Br(C)` injects into `Br(k(C))`
 (`AlgebraicGeometry.Scheme.injective_cohomologyMap_gmSheaf_two`), and `Br(k(C)) = 0` by Tsen's
 theorem. Properness is not needed, so no compactification is used.
-(blueprint: `lem-sc-brauer-zero`) -/
+(blueprint: `lem-sc-brauer-zero`) 
+(blueprint: lem-sc-brauer-zero)
+-/
 theorem subsingleton_cohomologicalBrauerGroup_of_connectedSpace (f : C ⟶ Spec (.of k))
     [IsCurve f] [Smooth f] [ConnectedSpace C] : Subsingleton C.CohomologicalBrauerGroup := by
   have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
@@ -192,7 +194,9 @@ theorem subsingleton_cohomologicalBrauerGroup_of_smooth (f : C ⟶ Spec (.of k))
 
 /-- **The Brauer group of a curve vanishes.** For a curve `C` over an algebraically closed
 field `k`, `Br(C) = H²(C_ét, 𝔾ₘ) = 0`. Neither smoothness nor properness is assumed.
-(blueprint: `lem-sc-brauer-zero-all-curves`) -/
+(blueprint: `lem-sc-brauer-zero-all-curves`) 
+(blueprint: lem-sc-brauer-zero-all-curves)
+-/
 theorem subsingleton_cohomologicalBrauerGroup (f : C ⟶ Spec (.of k)) [IsCurve f] :
     Subsingleton C.CohomologicalBrauerGroup := by
   let C₀ := C.nilradical.subscheme

@@ -6,7 +6,7 @@ Authors: SHEAF group Q84
 module
 
 public import Sheaf.AlgebraicGeometry.MultipointedCurveModification
-public import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.AlgebraicGeometry.Properties

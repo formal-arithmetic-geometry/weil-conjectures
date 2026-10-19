@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.DerivedNormalizationArrows
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension

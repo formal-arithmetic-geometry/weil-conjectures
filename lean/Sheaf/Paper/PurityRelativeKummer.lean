@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tor
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
@@ -30,8 +30,8 @@ import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
 import Sheaf.AlgebraicGeometry.ExchangeForgetCoefficients
 import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 import Sheaf.CategoryTheory.SiteCohomologyPullback
-import Sheaf.CategoryTheory.SiteMorphismComposition
-import Sheaf.CategoryTheory.SiteContinuousPushforwardSheaf
+import WeilConjectures.CategoryTheory.SiteMorphismComposition
+import WeilConjectures.CategoryTheory.SiteContinuousPushforwardSheaf
 import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
 import Mathlib.Algebra.Homology.HomologySequence
 import Mathlib.CategoryTheory.Abelian.RightDerived
@@ -50,7 +50,7 @@ import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.CohomologyPullbackCanonicalArrows
-import Sheaf.AlgebraicGeometry.CohomologyPullbackDerivedUnit
+import WeilConjectures.AlgebraicGeometry.CohomologyPullbackDerivedUnit
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
@@ -87,7 +87,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunc
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Defs
-import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 import Sheaf.AlgebraicGeometry.AbelianEtaleProEtaleCohomologyComparison
 import Sheaf.AlgebraicGeometry.AffinePuncturedLineAlgebra
 import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit

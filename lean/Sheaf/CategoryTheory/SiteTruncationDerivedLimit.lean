@@ -17,7 +17,7 @@ import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 import Sheaf.Algebra.Homology.KInjectiveProductsTermwise
 import Sheaf.Algebra.Homology.KInjectiveProducts
-import Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import Sheaf.CategoryTheory.Triangulated.MilnorSequence

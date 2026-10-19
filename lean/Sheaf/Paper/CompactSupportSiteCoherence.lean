@@ -28,6 +28,7 @@ import Sheaf.CategoryTheory.Adjunction.CoefficientExchange
 import Sheaf.Paper.ComparisonPullbackExact
 import WeilConjectures.Compactification.BaseChange
 import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare

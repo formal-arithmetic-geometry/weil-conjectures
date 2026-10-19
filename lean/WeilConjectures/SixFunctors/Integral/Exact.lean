@@ -8,7 +8,7 @@ module
 public import Mathlib
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.DisjointCover
 public import WeilConjectures.SixFunctors.Finite.Exact
-import Sheaf.AlgebraicGeometry.IntegralPointedClopenRefinement
+import WeilConjectures.AlgebraicGeometry.IntegralPointedClopenRefinement
 
 /-!
 # Exactness of the direct image along an integral morphism
@@ -236,7 +236,9 @@ private lemma surjective_stalkRestrict_of_isIntegralHom {Ω : Type u} [Field Ω]
 `G = 0`. This is the conservativity step of the proof of blueprint `sbc-lem-bc-integral-base`.
 For a geometric point `x` of `X` over the geometric point `y` of `Y`, the stalk `G_x` is a
 colimit of factors of the sections of `G` over the integral base change of the strict
-henselisation at `y`, which is the stalk `(f_* G)_y`; so `G_x` is a quotient of `(f_* G)_y`. -/
+henselisation at `y`, which is the stalk `(f_* G)_y`; so `G_x` is a quotient of `(f_* G)_y`. 
+(blueprint: lem-sbc-integral-direct-image-detects-zero)
+-/
 theorem Etale.isZero_of_isZero_lowerStar_obj
     {G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
     (hG : IsZero ((f)_*[ModuleCat.{u + 1} Λ].obj G)) : IsZero G := by

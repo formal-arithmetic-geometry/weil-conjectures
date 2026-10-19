@@ -6,44 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.FourierInversion.Defs
+public import WeilConjectures.WeilSheaf.Localization
 public import WeilConjectures.WeilSheaf.LowerShriekOperations
 public import WeilConjectures.WeilSheaf.TateTwist
-import Sheaf.AlgebraicGeometry.CompactSupportFiniteTorsion
-import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
-import Sheaf.AlgebraicGeometry.GeometricPointCohomology
-import Sheaf.AlgebraicGeometry.OpenClosedRecollement
-import Sheaf.CategoryTheory.MateIsoAlongEquivalences
-import WeilConjectures.AlgebraicGeometry.EffectiveCartier
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
-import Sheaf.AlgebraicGeometry.CartierKummerMap
-import Sheaf.AlgebraicGeometry.FiniteCompactProjectionFormula
-import Sheaf.AlgebraicGeometry.FrobeniusDetailed
-import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Adjunction
-import Sheaf.AlgebraicGeometry.OrdinarySupportedCartierKummer
-import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
-import Sheaf.AlgebraicGeometry.ProEtaleStalkConservative
-import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
-import Sheaf.CategoryTheory.Triangulated.TExactTruncationComparison
-import Sheaf.Paper.CanonicalFiniteLevelCompactSupportBaseChange
-import Sheaf.Paper.CanonicalOriginCompactSupportComposition
-import Sheaf.Paper.CompactFiberStalk
-import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
-import Sheaf.Paper.ConstructibleTruncations
-import Sheaf.Paper.DerivedPullbackTensorHom
-import Sheaf.Paper.ExchangeProjectionSuppliedDomains
-import Sheaf.Paper.FrobeniusCompactSupportExchange
-import Sheaf.Paper.IsomorphismDerivedPullback
-import Sheaf.Paper.PurityDivisorClass
-import Sheaf.Paper.PurityFiniteSetting
-import Sheaf.Paper.PurityFrameClass
-import Sheaf.Paper.PurityVectorBundleZeroSection
-import Sheaf.Paper.SfWeilSheafComplex
-import Sheaf.SixFunctors.FrobeniusPointTransportNatural
 
 /-!
 # Fourier inversion: inputs from other sections
@@ -98,7 +63,23 @@ theorem WeilComplex.exists_isIso_app_of_isZero_upperStar {X Z U : Scheme.{u}}
     ∃ η : 𝟭 (WeilComplex k₀ l X) ⟶
         WeilComplex.upperStar i ⋙ WeilComplex.derivedLowerStar (k₀ := k₀) (l := l) i,
       ∀ K : WeilComplex k₀ l X, IsZero ((WeilComplex.upperStar j).obj K) → IsIso (η.app K) :=
-  sorry
+  by
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (CommRingCat.of k₀))
+  have : CompactSpace X :=
+    QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (CommRingCat.of k₀))
+  have : IsNoetherian X := ⟨⟩
+  have : TopologicalSpace.NoetherianSpace U := j.isOpenEmbedding.isInducing.noetherianSpace
+  have hc : IsCompl (Set.range i.base) (Set.range j.base) := by
+    rw [show Set.range j.base = (Set.range i.base)ᶜ from hij]
+    exact isCompl_compl
+  have hR := WeilComplex.fullyFaithfulDerivedLowerStar (k₀ := k₀) (l := l) i
+  have := hR.full
+  have := hR.faithful
+  refine ⟨(WeilComplex.upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) i).unit,
+    fun K hK ↦ ?_⟩
+  obtain ⟨M, ⟨e⟩⟩ := WeilComplex.derivedLowerStar_essImage_of_isZero i j hc K hK
+  exact (WeilComplex.upperStarDerivedLowerStarAdjunction i).isIso_unit_app_of_iso e.symm
 
 /-- Blueprint `thm-pur-rank-one-thom` (and its vector-bundle form `thm-pur-vector-bundle-thom`),
 combined with the projection formula of `prop-weil-operations` for the constant sheaf: for the

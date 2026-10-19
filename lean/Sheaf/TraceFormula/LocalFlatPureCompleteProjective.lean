@@ -6,7 +6,7 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.Noetherian.Defs
-public import Sheaf.RingTheory.AnnihilatorAssociatedPrimes
+public import WeilConjectures.RingTheory.AnnihilatorAssociatedPrimes
 import Sheaf.RingTheory.CompletionFlatMittagLeffler
 import Sheaf.RingTheory.FlatCompletionUniversallyInjective
 import Sheaf.RingTheory.IsMittagLeffler

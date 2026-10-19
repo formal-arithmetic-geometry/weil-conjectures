@@ -5,7 +5,10 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.DeligneLaumon.AffineLine.Constituent
 public import WeilConjectures.DeligneLaumon.AffineLine.Perverse
+public import WeilConjectures.DeligneLaumon.AffineLine.RamifiedAtInfinity
+public import WeilConjectures.DeligneLaumon.AffineLine.PunctualTransform
 
 /-!
 # Irreducible middle extensions under the Fourier transform
@@ -95,18 +98,6 @@ namespace LisseOnDenseOpen
 
 variable (ψ : AddChar k₀ (PadicAlgCl l)) (D : LisseOnDenseOpen k₀ l)
 
--- TODO(adic): needs the geometric fundamental representation of a lisse Weil sheaf
--- (`def-wf-fundamental-representation`) and the Jordan–Hölder constituents of its restriction.
-/-- A nonzero geometrically constant lisse sheaf has the trivial rank-one sheaf
-`ℒ_{ψ(0 · x)} = ℚ̄_ℓ` as a geometric constituent: the geometric fundamental group acts trivially
-on its nonzero geometric generic stalk. The lisse subsheaf is the whole underlying sheaf
-`B = F̄`, a nonzero finite sum of copies of `ℚ̄_ℓ` on the connected `Ū`, which therefore
-surjects onto `ℒ_{ψ(0 · x)}|_U = ℚ̄_ℓ`. -/
-theorem hasLinearArtinSchreierConstituent_zero_of_isGeometricallyConstant
-    (hne : ¬ IsZero D.sheaf) (hc : D.IsGeometricallyConstant) :
-    D.sheaf.HasLinearArtinSchreierConstituent ψ 0 D.j := by
-  sorry
-
 /-- **Constituent-nonexceptional implies Fourier-nonexceptional.** If no geometric constituent
 of the irreducible lisse sheaf `M` is a linear character `ℒ_{ψ(a x)}|_U`, then `M_k̄` is neither
 constant, since a nonzero constant sheaf has the trivial constituent `ℒ_{ψ(0 · x)}`, nor
@@ -125,45 +116,32 @@ theorem isNonexceptional_iff_isFourierNonexceptional (hD : D.sheaf.IsIrreducible
     D.sheaf.IsNonexceptional ψ D.j ↔ D.IsFourierNonexceptional ψ :=
   ⟨D.isFourierNonexceptional_of_isNonexceptional ψ hD, fun h a ha ↦ h.2 a ⟨hirr, ha⟩⟩
 
--- TODO(adic): needs the geometric fundamental representation `ρ : W(U₀) → GL(V)`
--- (`def-wf-fundamental-representation`); the group theory is
--- `Representation.IsIrreducible.eq_one_of_isConstituent_trivial`.
-/-- If the trivial rank-one sheaf `ℒ_{ψ(0 · x)}` is a geometric constituent of an irreducible
-lisse sheaf `M`, then `M` is geometrically constant. The Weil group `W` acts irreducibly on
-`V = M_η̄`, the geometric fundamental group `G` is normal in `W`, and the trivial representation
-is a constituent of `V|_G`; by `Representation.IsIrreducible.eq_one_of_isConstituent_trivial`,
-`G` acts trivially on `V`. (blueprint: `lem-a1-unramified-nonexceptional`, case `a = 0`) -/
-theorem isGeometricallyConstant_of_hasLinearArtinSchreierConstituent_zero
-    (hD : D.sheaf.IsIrreducibleLisse) (h : D.sheaf.HasLinearArtinSchreierConstituent ψ 0 D.j) :
-    D.IsGeometricallyConstant := by
-  sorry
-
--- TODO(adic): needs the geometric fundamental representation and the inertia group at `∞`;
--- the local input is `AlgebraicGeometry.not_isUnramifiedAtInfinity_artinSchreier`.
 /-- A lisse sheaf unramified at infinity has no geometric constituent `ℒ_{ψ(a x)}|_U` with
-`a ≠ 0`: the restriction of `M_η̄` to the geometric fundamental group is semisimple
-(`Representation.isSemisimpleRepresentation_comp_subtype`), so such a constituent is a direct
-summand, on which the inertia group at `∞` acts trivially; but it acts on `ℒ_{ψ(a x)}` through
-the nontrivial character `ψ`. (blueprint: `lem-a1-unramified-nonexceptional`, case `a ≠ 0`) -/
+`a ≠ 0`: on the punctured disc at `∞` the sheaf becomes constant, so such a constituent would be
+a subquotient of a constant sheaf there, while the inertia group at `∞` acts on `ℒ_{ψ(a x)}`
+through the nontrivial character `ψ`
+(the primed variant, `not_hasLinearArtinSchreierConstituent_of_isUnramifiedAtInfinity'`,
+which needs no irreducibility). (blueprint: `lem-a1-unramified-nonexceptional`, case `a ≠ 0`) -/
 theorem not_hasLinearArtinSchreierConstituent_of_isUnramifiedAtInfinity (hψ : ψ ≠ 1)
-    (hD : D.sheaf.IsIrreducibleLisse) (hinf : D.IsUnramifiedAtInfinity)
+    (_hD : D.sheaf.IsIrreducibleLisse) (hinf : D.IsUnramifiedAtInfinity)
     {a : AlgebraicClosure k₀} (ha : a ≠ 0) :
-    ¬ D.sheaf.HasLinearArtinSchreierConstituent ψ a D.j := by
-  sorry
+    ¬ D.sheaf.HasLinearArtinSchreierConstituent ψ a D.j :=
+  D.not_hasLinearArtinSchreierConstituent_of_isUnramifiedAtInfinity' ψ hψ hinf ha
 
--- TODO(adic): needs the transforms of skyscraper sheaves (`lem-fd-first-formula`), the base
--- change of the transform to `k̄` (`lem-fd-base-change`), Fourier inversion
--- (`lem-fd-inversion`) and `j^* j_* M = M`.
 /-- **The punctual case is excluded.** For `M` irreducible lisse and nonexceptional, the
 transform of `(j_*M)[1]` is not a sheaf of finite support in degree `0`: otherwise inverting the
-transform and passing to `k̄` would give `M_k̄ ≅ ⊕_ξ (ℒ_{ψ(-ξ x)}|_U)^{n_ξ}`, so that `M` would
-have a linear character as a geometric constituent.
+transform gives `(j_*M)[1](-1) ≅ FT_{ψ⁻¹}(G)`, whose underlying geometric sheaf is a sum of
+linear characters `ℒ_{ψ(a x)}` over the geometric points of the support of `G`, so that `M_k̄`
+would surject onto some `ℒ_{ψ(a x)}|_U`
+(`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.exists_hasLinearArtinSchreierConstituent_of_iso`).
 (blueprint: `prop-a1-fourier-middle-extension`, Steps 2 and 3) -/
 theorem isEmpty_iso_fourierTransform_middleExtension_toComplex (hψ : ψ ≠ 1)
     (hD : D.sheaf.IsIrreducibleLisse) (hne : D.sheaf.IsNonexceptional ψ D.j)
     (G : WeilSheaf k₀ l (affineLine k₀)) (hG : (WeilSheaf.support G).Finite) :
     IsEmpty ((fourierTransform ψ).obj D.middleExtension ≅ WeilSheaf.toComplex.obj G) := by
-  sorry
+  refine ⟨fun e ↦ ?_⟩
+  obtain ⟨a, ha⟩ := D.exists_hasLinearArtinSchreierConstituent_of_iso ψ hψ hD.2.1 G hG e
+  exact hne a ha
 
 end LisseOnDenseOpen
 

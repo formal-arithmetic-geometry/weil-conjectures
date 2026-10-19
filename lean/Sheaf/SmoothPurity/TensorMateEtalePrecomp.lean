@@ -36,7 +36,7 @@ import Mathlib.Topology.Defs.Filter
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.EtaleSupportMapCompatibility
 import WeilConjectures.Compactification.NagataCompactification
-import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
 

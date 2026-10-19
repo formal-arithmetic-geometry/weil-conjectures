@@ -20,7 +20,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Sheaf.CategoryTheory.KInjectiveTotalDerived
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import WeilConjectures.SixFunctors.OpenClosed.Vanishing
-import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 

@@ -16,7 +16,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryB
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekProjection
 
-public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import Sheaf.Paper.LocalizingExceptionalAdjoint
 public import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
@@ -377,8 +377,8 @@ Source: blueprint proof step 11 (blueprint: lem-pur-finite-ring-site-tensor-tran
       (upperStar A f).mapDerivedCategory ≅
         (Etale.upperStar A f).mapDerivedCategory ⋙ (comparisonUpperStar A X).mapDerivedCategory) :=
   finiteRingSiteTensorTransposeCanonicalTensor A c PX PY beta square
-    (DerivedCategory.braidedCategory (Sheaf X.smallEtaleTopology A))
-    (DerivedCategory.braidedCategory (Sheaf (Scheme.ProEt.topology X) A))
+    (DerivedCategory.braidedCategory' (Sheaf X.smallEtaleTopology A))
+    (DerivedCategory.braidedCategory' (Sheaf (Scheme.ProEt.topology X) A))
 
 /-- The specified site transport assertion with its coefficient category abstract.
 Every tensor, pullback, unit and symmetry argument is its canonical construction;

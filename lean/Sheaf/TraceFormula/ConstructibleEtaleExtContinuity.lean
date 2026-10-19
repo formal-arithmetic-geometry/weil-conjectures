@@ -5,7 +5,7 @@ Authors: SHEAF group Q58
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor

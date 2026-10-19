@@ -22,7 +22,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Sheaf.AlgebraicGeometry.ComparisonDerivedPullbackFixed
 import Sheaf.Paper.ProjectionCompactification
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
-import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
 import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
 import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence

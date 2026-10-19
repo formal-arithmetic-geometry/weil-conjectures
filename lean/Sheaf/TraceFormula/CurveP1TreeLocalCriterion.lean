@@ -19,7 +19,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import Sheaf.TraceFormula.GenusZeroSmoothProperLine
 import WeilConjectures.AlgebraicGeometry.Regular
 import Mathlib.RingTheory.Etale.Field
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.AlgebraicGeometry.SemistableMultipointedPair
 import Sheaf.TraceFormula.MultipointedCurve
 import Sheaf.TraceFormula.NodalContractionNormalizationBranches

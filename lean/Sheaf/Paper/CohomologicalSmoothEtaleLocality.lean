@@ -60,7 +60,7 @@ import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
 import Sheaf.Paper.FiniteConstructibleHom
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility

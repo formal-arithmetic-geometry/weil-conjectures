@@ -22,7 +22,7 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 import Mathlib.LinearAlgebra.FreeModule.PID
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Sheaf.CategoryTheory.Triangulated.DerivedCountableProductsCore
+import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsCore
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 import Sheaf.Paper.CompletedConstantSheafReduction
 import Sheaf.Paper.ConstantCompletionEquivalence

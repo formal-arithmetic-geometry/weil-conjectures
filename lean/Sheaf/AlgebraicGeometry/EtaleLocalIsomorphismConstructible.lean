@@ -5,7 +5,8 @@ Authors: SHEAF group Q142
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact

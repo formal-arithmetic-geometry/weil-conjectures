@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
 
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Mathlib.AlgebraicGeometry.FunctionField
 import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 import Mathlib.RingTheory.Spectrum.Prime.Topology

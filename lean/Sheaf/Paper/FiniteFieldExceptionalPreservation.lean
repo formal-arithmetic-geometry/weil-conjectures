@@ -8,13 +8,14 @@ module
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import Sheaf.RingTheory.ExcellentRing
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import Sheaf.Paper.ExceptionalCoefficientComparison
 public import Sheaf.Paper.OrgogozoInductionData
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import Sheaf.CategoryTheory.RightDerivedFunctorUpperBound
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact

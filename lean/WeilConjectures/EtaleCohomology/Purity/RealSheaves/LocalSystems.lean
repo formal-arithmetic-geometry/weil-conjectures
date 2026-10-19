@@ -56,8 +56,13 @@ following.
   The target category is the full subcategory of `Rep Λ G` cut out by
   `Rep.IsFiniteContinuous`. Compatibility with the geometric stalk is the requested clause; it
   is an isomorphism of underlying `Λ`-modules only, not tied to the action of `G` on geometric
-  fibres. Exactness and the tensor structure are automatic for an equivalence of abelian
-  categories and are not restated. The compatibility with base change along a map `Λ → Λ'` of
+  fibres. Exactness is `AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_shortExact_iff`
+  (in `WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystemsExact`). Compatibility
+  with `⊗_Λ` is *not* a formal consequence of the equivalence (an equivalence of abelian
+  categories need not be monoidal); it is proved in
+  `WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystemsTensor`, see
+  `AlgebraicGeometry.Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_tensor`. The
+  compatibility with base change along a map `Λ → Λ'` of
   finite rings is not restated either; with `G` fixed as in the `_of_isFundamentalGroup`
   version it could now be written down, but it is not part of the statement here.
 
@@ -65,8 +70,9 @@ following.
   content of the lisse sheaf–representation equivalence used by the rest of the block is
   recorded by the closure properties
   `AlgebraicGeometry.WeilGroup.isLisseRep.isClosedUnderKernels` and its companions together
-  with `AlgebraicGeometry.WeilGroup.isLisseRep_shortExact_iff`, since the source category of
-  that equivalence — lisse `ℚ̄_ℓ`-Weil sheaves — cannot be written down here.
+  with `AlgebraicGeometry.WeilGroup.isLisseRep_shortExact_iff`. The equivalence itself, from lisse
+  Weil sheaves, is `AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse`; its exactness is
+  `AlgebraicGeometry.WeilGroup.isLisse_shortExact_iff`.
   Closure under extensions is *not* recorded: inside `Rep ℚ̄_ℓ W(C₀)` it fails, since a
   discontinuous additive character `c` of `π₁(C)` (for instance of a quotient `ℤ_ℓ`) gives the
   non-lisse extension `g ↦ !![1, c g; 0, 1]` of the trivial line by itself. An extension of
@@ -79,11 +85,11 @@ following.
   `𝒪_E`-module structure on `V` is the restriction of scalars along
   `𝒪_E → E → ℚ̄_ℓ`, introduced by `letI` inside the statement.
 
-- In `AlgebraicGeometry.WeilGroup.globalSections_eq_invariants` the global sections
-  `H⁰(U, F|_U)` are rendered, following the proof sketch, as the `π₁(U)`-equivariant maps
-  from the constant rank-one sheaf, i.e. as
-  `AlgebraicGeometry.WeilGroup.globalSections`. Mathlib's `CategoryTheory.Sheaf.H` is not
-  applicable, as the lisse `ℚ̄_ℓ`-sheaf `F` itself is unavailable.
+- `AlgebraicGeometry.WeilGroup.globalSections_eq_invariants` is the representation-theoretic
+  step of the proof sketch: the `π₁(U)`-equivariant maps from the trivial line
+  (`AlgebraicGeometry.WeilGroup.globalSections`) are the invariants. The statement about the
+  étale global sections `H⁰(Ū, F|_U)` of a lisse Weil sheaf is
+  `AlgebraicGeometry.WeilGroup.exists_globalSections_upperStar_linearEquiv_invariants`.
 
 The open subcurve `U₀ ⊆ C₀`, its Weil group `W(U₀)` and the restriction homomorphism
 `W(U₀) → W(C₀)` enter through `AlgebraicGeometry.WeilGroup.Restriction`, which is also what
@@ -276,13 +282,13 @@ theorem Scheme.IsFiniteLocallyConstantSheaf.isFiniteLocallyConstantSheafOfTypes
 section BiprodAux
 
 variable {C : Type*} [Category C] [Preadditive C] [Limits.HasBinaryBiproducts C]
-  {R : Type*} [Ring R] (H : C ⥤ ModuleCat R) [H.Additive] {X : C}
+  {R : Type*} [Ring R] (H : C ⥤ ModuleCat R) [H.Additive] {X X' : C}
 
-lemma _root_.CategoryTheory.Functor.map_biprod_fst_inl_add_inr (a b : H.obj X) :
+lemma _root_.CategoryTheory.Functor.map_biprod_fst_inl_add_inr (a : H.obj X) (b : H.obj X') :
     H.map Limits.biprod.fst (H.map Limits.biprod.inl a + H.map Limits.biprod.inr b) = a := by
   simp [← ConcreteCategory.comp_apply, ← H.map_comp]
 
-lemma _root_.CategoryTheory.Functor.map_biprod_snd_inl_add_inr (a b : H.obj X) :
+lemma _root_.CategoryTheory.Functor.map_biprod_snd_inl_add_inr (a : H.obj X) (b : H.obj X') :
     H.map Limits.biprod.snd (H.map Limits.biprod.inl a + H.map Limits.biprod.inr b) = b := by
   simp [← ConcreteCategory.comp_apply, ← H.map_comp]
 
@@ -1242,6 +1248,44 @@ end EssSurj
 
 end EssSurjAux
 
+section GaloisRepEquivalence
+
+variable {Y : Scheme.{u}} [ConnectedSpace Y] {Ω : Type u} [Field Ω] [IsSepClosed Ω]
+  (s : Spec (.of Ω) ⟶ Y) {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] (G : ProfiniteGrp.{u})
+  [∀ P, MulAction G ((Scheme.FiniteEtale.fiber s).obj P)]
+  [PreGaloisCategory.IsFundamentalGroup (Scheme.FiniteEtale.fiber s) G]
+
+/-- The geometric stalk at `s` with its action of the fundamental group `G`, as a functor from
+finite locally constant sheaves of `Λ`-modules to finite continuous representations of `G`
+(`AlgebraicGeometry.Scheme.galoisRepFunctor`, corestricted). -/
+noncomputable def Scheme.galoisRepFunctorFiniteContinuous :
+    ObjectProperty.FullSubcategory
+        (fun F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) ↦
+          Scheme.IsFiniteLocallyConstantSheaf F) ⥤
+      ObjectProperty.FullSubcategory (Rep.IsFiniteContinuous (Λ := Λ) (G := G)) :=
+  ObjectProperty.lift (Rep.IsFiniteContinuous (Λ := Λ) (G := G))
+    (Scheme.galoisRepFunctor (s := s) (G := G) (Λ := Λ))
+    (fun F ↦ Scheme.galoisRepFunctor_obj_isFiniteContinuous s G F)
+
+/-- `AlgebraicGeometry.Scheme.galoisRepFunctorFiniteContinuous` is an equivalence: it is fully
+faithful, and every finite continuous representation is the stalk of a finite locally constant
+sheaf (`AlgebraicGeometry.Scheme.exists_galoisRepFunctor_obj_iso`). -/
+instance : (Scheme.galoisRepFunctorFiniteContinuous s (Λ := Λ) G).IsEquivalence := by
+  let Φ := Scheme.galoisRepFunctor (s := s) (G := G) (Λ := Λ)
+  let Φ' := Scheme.galoisRepFunctorFiniteContinuous s (Λ := Λ) G
+  have hΦ' : Φ'.FullyFaithful :=
+    (Functor.FullyFaithful.ofFullyFaithful Φ).ofCompFaithful (G := ObjectProperty.ι _)
+  have : Φ'.Full := hΦ'.full
+  have : Φ'.Faithful := hΦ'.faithful
+  -- essential surjectivity: a finite continuous `Λ[G]`-module is the stalk of a finite locally
+  -- constant sheaf of `Λ`-modules
+  have : Φ'.EssSurj := ⟨fun M ↦ by
+    obtain ⟨F, hF, ⟨i⟩⟩ := Scheme.exists_galoisRepFunctor_obj_iso s G M.obj M.property
+    exact ⟨⟨F, hF⟩, ⟨(ObjectProperty.fullyFaithfulι _).preimageIso i⟩⟩⟩
+  exact { }
+
+end GaloisRepEquivalence
+
 /-- Blueprint `sk-i-real-galois`: Galois correspondence for finite local systems. Also
 blueprint `cor-galois-lisse-representations`: Lisse sheaves and continuous representations.
 
@@ -1269,20 +1313,8 @@ theorem Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_of_isFundamentalG
       Nonempty (e.functor ⋙ ObjectProperty.ι _ ⋙
           forget₂ (Rep.{u + 1} Λ G) (ModuleCat.{u + 1} Λ) ≅
         ObjectProperty.ι _ ⋙ (Scheme.pointSmallEtale s).sheafFiber) := by
-  let Φ := Scheme.galoisRepFunctor (s := s) (G := G) (Λ := Λ)
-  let Φ' := ObjectProperty.lift (Rep.IsFiniteContinuous (Λ := Λ) (G := G)) Φ
-    (fun F ↦ Scheme.galoisRepFunctor_obj_isFiniteContinuous s G F)
-  have hΦ' : Φ'.FullyFaithful :=
-    (Functor.FullyFaithful.ofFullyFaithful Φ).ofCompFaithful (G := ObjectProperty.ι _)
-  have : Φ'.Full := hΦ'.full
-  have : Φ'.Faithful := hΦ'.faithful
-  -- essential surjectivity: a finite continuous `Λ[G]`-module is the stalk of a finite locally
-  -- constant sheaf of `Λ`-modules
-  have : Φ'.EssSurj := ⟨fun M ↦ by
-    obtain ⟨F, hF, ⟨i⟩⟩ := Scheme.exists_galoisRepFunctor_obj_iso s G M.obj M.property
-    exact ⟨⟨F, hF⟩, ⟨(ObjectProperty.fullyFaithfulι _).preimageIso i⟩⟩⟩
-  have : Φ'.IsEquivalence := { }
-  exact ⟨Φ'.asEquivalence, ⟨Scheme.galoisRepFunctorCompForget₂Iso s G⟩⟩
+  exact ⟨(Scheme.galoisRepFunctorFiniteContinuous s (Λ := Λ) G).asEquivalence,
+    ⟨Scheme.galoisRepFunctorCompForget₂Iso s G⟩⟩
 
 /-- Blueprint `sk-i-real-galois`: Galois correspondence for finite local systems.
 
@@ -1303,8 +1335,12 @@ continuous `G`-action, compatible with the geometric stalk at `s`: the triangle
 
 commutes up to isomorphism.
 
-Exactness and compatibility with `⊗_Λ` are automatic consequences of the equivalence being
-an equivalence of abelian (monoidal) categories; the compatibility with base change along a
+Exactness is `AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_shortExact_iff`.
+Compatibility with `⊗_Λ` is not automatic for an equivalence of abelian categories; it is
+`AlgebraicGeometry.Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_tensor`, which
+strengthens this statement by a natural isomorphism `(F ⊗ F')_s ≅ F_s ⊗ F'_s` of
+representations and the identification of the stalk of `Λ_Y` with the trivial representation.
+The compatibility with base change along a
 map `Λ → Λ'` of finite rings is not restated here, see the module implementation notes and
 `AlgebraicGeometry.Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_of_isFundamentalGroup`
 for the version with `π₁(Y, s)` named. -/
@@ -1399,7 +1435,8 @@ This is the form in which the exactness of the geometric-generic-stalk equivalen
 
 The forgetful functor is faithful and exact, since kernels and cokernels of representations
 are computed on the underlying vector spaces, so it preserves and reflects short exactness;
-the lisse hypotheses are not needed. -/
+the lisse hypotheses are not needed. The exactness of the equivalence with lisse Weil sheaves
+itself is `AlgebraicGeometry.WeilGroup.isLisse_shortExact_iff`. -/
 theorem isLisseRep_shortExact_iff (S : ShortComplex (Rep.{u} (PadicAlgCl l) W.carrier))
     (_h₁ : W.isLisseRep l S.X₁) (_h₂ : W.isLisseRep l S.X₂) (_h₃ : W.isLisseRep l S.X₃) :
     S.ShortExact ↔ (S.map (forget₂ (Rep.{u} (PadicAlgCl l) W.carrier)
@@ -1528,7 +1565,9 @@ For a lisse Weil representation `(V, ρ)` and a restriction `R` of Weil groups a
 open `U₀ ⊆ C₀`, the global sections `H⁰(U, F|_U) = Hom_{π₁(U)}(𝟙, V)` are the invariants
 `V ^ (π₁(U))`, by evaluation at `1`: an equivariant map `ℚ̄_ℓ → V` is determined by the
 image of `1`, which is fixed by `π₁(U)`, and every fixed vector arises this way. The finiteness
-and lisse hypotheses are not needed for this.
+and lisse hypotheses are not needed for this. The corresponding statement for the étale global
+sections of a lisse Weil sheaf is
+`AlgebraicGeometry.WeilGroup.exists_globalSections_upperStar_linearEquiv_invariants`.
 
 Both sides carry a residual action of the geometric Frobenius `F = ρ (res γ)`
 (`AlgebraicGeometry.WeilGroup.comp_mem_globalSections` and

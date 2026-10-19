@@ -81,7 +81,7 @@ Source: the canonical braided structure on the derived tensor product.
 (blueprint: new-integral-residue-tensor-presentation) -/
 @[instance_reducible] noncomputable def derivedTensorPresentationBraiding :
     BraidedCategory (DerivedCategory C) :=
-  DerivedMonoidal.braidedCategory (DerivedCategory.Qh (C := C))
+  DerivedMonoidal.braidedCategory' (DerivedCategory.Qh (C := C))
     (HomotopyCategory.quasiIso C (.up ℤ))
 
 @[irreducible] noncomputable def derivedTensorPresentationIso (B : C)

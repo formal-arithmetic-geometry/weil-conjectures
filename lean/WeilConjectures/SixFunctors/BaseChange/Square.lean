@@ -71,9 +71,16 @@ section Square
 
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
 
-/-- The square isomorphism `g^* ⋙ f'^* ≅ f^* ⋙ g'^*` attached to a commutative square
+/-- Blueprint `def-weil-pbc-cartesian-square`: Cartesian square and chosen pullback
+identification, the square isomorphism.
+
+The square isomorphism `g^* ⋙ f'^* ≅ f^* ⋙ g'^*` attached to a commutative square
 `g' ≫ f = f' ≫ g`: both sides are identified with the pullback along the diagonal
-`g' ≫ f = f' ≫ g` by `AlgebraicGeometry.Etale.upperStarComp`. -/
+`g' ≫ f = f' ≫ g` by `AlgebraicGeometry.Etale.upperStarComp`. A cartesian square is a
+`CategoryTheory.IsPullback` square; the compatibilities with identities and with pasting are
+`AlgebraicGeometry.Etale.squareUpperStarIso_id`,
+`AlgebraicGeometry.Etale.squareUpperStarIso_paste_horiz_hom` and
+`AlgebraicGeometry.Etale.squareUpperStarIso_paste_vert_hom`. -/
 noncomputable def Etale.squareUpperStarIso (sq : CommSq g' f' f g) :
     (g)^*[A] ⋙ (f')^*[A] ≅ (f)^*[A] ⋙ (g')^*[A] :=
   (Etale.upperStarComp A f' g (g' ≫ f) sq.w).symm ≪≫ Etale.upperStarComp A g' f

@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Sheaf.AlgebraicGeometry.FiniteEtaleTateTwist
 public import Sheaf.AlgebraicGeometry.FiniteEtaleTateSheaf
-public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import Sheaf.AlgebraicGeometry.IsRegularScheme
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar

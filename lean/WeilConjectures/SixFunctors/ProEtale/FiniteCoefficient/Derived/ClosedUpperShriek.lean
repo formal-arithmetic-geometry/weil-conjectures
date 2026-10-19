@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Clo
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriekComposition
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Proper
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBoundedBelow
 
 /-!
 # The constructible exceptional unit along a closed immersion

@@ -16,7 +16,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 import Mathlib.AlgebraicGeometry.Noetherian
@@ -27,13 +27,13 @@ import Sheaf.AlgebraicGeometry.FieldDiscreteModules
 import Sheaf.AlgebraicGeometry.ClosedPointField
 import Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
 import Sheaf.RingTheory.StrictHenselizationDimension
-import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
-import Sheaf.AlgebraicGeometry.EtaleResidueTriples
+import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
+import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
 import Sheaf.Paper.FiniteCoproductCohomologyAssembly
 import WeilConjectures.Mathlib.RingTheory.Etale.Field
-import Sheaf.Paper.InverseImageStalkGerm
-import Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiberBackward
 import Sheaf.RingTheory.StrictHenselizationTriples
 import Sheaf.RingTheory.StrictlyHenselianQuotient

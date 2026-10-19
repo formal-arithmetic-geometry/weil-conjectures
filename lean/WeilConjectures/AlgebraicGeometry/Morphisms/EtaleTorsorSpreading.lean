@@ -11,8 +11,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 
-import Sheaf.AlgebraicGeometry.Morphisms.UnderlyingFiniteEtaleExtension
-import Sheaf.AlgebraicGeometry.Morphisms.GenericFibreActionExtension
+import WeilConjectures.AlgebraicGeometry.Morphisms.UnderlyingFiniteEtaleExtension
+import WeilConjectures.AlgebraicGeometry.Morphisms.GenericFibreActionExtension
 
 /-!
 # Spreading a finite étale Galois cover out from the generic fibre
@@ -93,7 +93,9 @@ cartesian.
 
 This is [Stacks 0EZJ], recorded as a classical input. Galois covers are taken in the sense
 of `AlgebraicGeometry.Scheme.GaloisCover`, following the blueprint definition
-`def-sbc-normal-dominant-galois`: their total space need not be connected. -/
+`def-sbc-normal-dominant-galois`: their total space need not be connected. 
+(blueprint: sbc-thm-spreading-finite-etale-galois)
+-/
 @[stacks 0EZJ]
 theorem GaloisCover.exists_isPullback_of_genericFibre {S C : Scheme.{u}} [CompactSpace S]
     [QuasiSeparatedSpace S] [IsIntegral S]

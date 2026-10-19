@@ -10,7 +10,7 @@ public import Sheaf.SixFunctors.SemilinearProperOpenMatePasting
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMonoidal
-import Sheaf.CategoryTheory.SiteMorphismComposition
+import WeilConjectures.CategoryTheory.SiteMorphismComposition
 import Sheaf.AlgebraicGeometry.ProEtaleTensorCompositionUnit
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingComposition
 import Sheaf.CategoryTheory.DerivedCategory.CompositionAdjunctionNormalization

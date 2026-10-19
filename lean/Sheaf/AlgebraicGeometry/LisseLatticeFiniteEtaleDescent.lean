@@ -17,7 +17,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 
-import Sheaf.Paper.FiniteEtaleEtaleLocalSplit
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.CategoryTheory.SiteCoveringAxioms

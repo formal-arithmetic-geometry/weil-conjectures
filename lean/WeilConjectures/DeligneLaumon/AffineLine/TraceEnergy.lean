@@ -20,31 +20,21 @@ public import WeilConjectures.DeligneLaumon.AffineLine.Defs
 public import WeilConjectures.WeilSheaf.CurveEndpoints
 public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.WeilSheaf.StalkConstantTwist
+public import WeilConjectures.WeilSheaf.EulerProduct
+public import WeilConjectures.WeilSheaf.LowerStarId
+public import WeilConjectures.WeilSheaf.LSeries
+public import WeilConjectures.WeilSheaf.TateTwistCohomology
+public import WeilConjectures.WeilSheaf.StalkTensorTrace
 public import WeilConjectures.WeilSheaf.Tensor
-import Sheaf.Paper.GaloisLisseRepresentations
-import WeilConjectures.DeligneLaumon.Reduction.Weights
-import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
-import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Triangularizable
-import WeilConjectures.PointCount
-import WeilConjectures.PointCountBound
-import WeilConjectures.WeilSheaf.Stalk
-import WeilConjectures.ZetaLinearAlgebra.DetTrace
-import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
-import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Chebotarev
-import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LinearAlgebra
-import Sheaf.DeligneLaumon.RationalSeriesPoleRadius
-import Sheaf.LinearAlgebra.FrobeniusModuleWeights
-import Sheaf.LinearAlgebra.SpectrumExactSequence
-import Sheaf.Paper.AdicPunctualWeights
-import Sheaf.Paper.CommonStageCalculus
-import Sheaf.Paper.CommonStageCurveWeilMiddleExtension
-import Sheaf.Paper.EvenTensorPositivity
-import Sheaf.Paper.IntrinsicQbarCategory
-import Sheaf.Paper.LocalFrobeniusTrace
-import Sheaf.Paper.LocalFrobeniusTransportNormalization
-import Sheaf.Paper.PointFibreEquivalence
-import Sheaf.Paper.RationalStalkExact
-import Sheaf.Paper.SfWeilSheafComplex
+public import WeilConjectures.WeilSheaf.TraceFunction
+public import WeilConjectures.WeilSheaf.TraceFunctionOps
+public import WeilConjectures.WeilSheaf.UpperStarLowerStar
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafSemicontinuity
+public import WeilConjectures.AlgebraicGeometry.AffineSpace.GeometricallyConnected
+public import WeilConjectures.PointCountFiber
+public import WeilConjectures.Mathlib.Topology.KrullDimension
+public import WeilConjectures.PointCountBound
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 /-!
 # Detecting a weight from the growth of the squared trace sums
@@ -85,12 +75,11 @@ passing to the normalized real envelope `N⁰ ⊕ (N⁰)^∨` of the constant tw
 The analytic part (the `L²`-weight, its radius characterisation and the energy bound) is proved
 in general.
 
-## TODO
-
-Prove the inputs about Weil sheaves, stated with `sorry`: the traces of twists, envelopes and
-tensor products, the trace energy bound from an upper
-weight bound, the decomposition of the trace energy of `j_*M` and the bound on its boundary
-part, and the `L²`-rigidity for real sheaves.
+The `L²`-rigidity for real sheaves uses the Euler product of the `L`-series of `G ⊗ G` on the
+curve (`AlgebraicGeometry.WeilSheaf.lSeries_mul_localPolynomial_compactlySupportedCohomology_two`,
+the Grothendieck–Lefschetz trace formula) and the purity of `H_c²`
+(`AlgebraicGeometry.isPureOfWeightOver_compactlySupportedCohomology_directImage_two` for the
+identity of the curve).
 -/
 
 @[expose] public section
@@ -371,40 +360,6 @@ theorem IsLisse.realEnvelope {F : WeilSheaf k₀ l X} (hF : F.IsLisse) (b : (Pad
     (F.realEnvelope hF b).IsLisse :=
   (hF.constantTwist (b := b)).biprod (hF.constantTwist (b := b)).dual
 
-/-- If `F` is lisse and punctually `ι`-pure of weight `w` and `2 log_q |ι b| = c`, then the
-constant twist `F ⊗ 𝓑_b` is punctually `ι`-pure of weight `w + c`: at a closed point of degree
-`m` every eigenvalue `α` of the local Frobenius becomes `bᵐ α`, of absolute value
-`q^{mc/2} q^{mw/2}`. (blueprint: `lem-wf-constant-twist-weight`) -/
-theorem IsPunctuallyPureOfWeight.constantTwist {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l X}
-    {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w) {b : (PadicAlgCl l)ˣ} {c : ℝ}
-    (hb : 2 * Real.logb (Nat.card k₀) ‖ι b‖ = c) :
-    (F.constantTwist b).IsPunctuallyPureOfWeight ι (w + c) := by
-  intro x
-  obtain ⟨e⟩ := F.nonempty_equiv_stalk_constantTwist b x
-  have hq : (1 : ℝ) < Nat.card k₀ := by exact_mod_cast Finite.one_lt_card
-  have hb0 : (b : PadicAlgCl l) ≠ 0 := b.ne_zero
-  have hnorm : ‖ι b‖ = (Nat.card k₀ : ℝ) ^ (c / 2) := by
-    rw [← hb, mul_div_cancel_left₀ _ two_ne_zero, Real.rpow_logb (by positivity) hq.ne'
-      (norm_pos_iff.2 ((map_ne_zero ι).2 hb0))]
-  refine FrobeniusModule.IsPureOfWeight.of_equiv e ((h x).rescale (pow_pos Nat.card_pos _)
-    (pow_ne_zero _ hb0) ?_)
-  rw [map_pow, norm_pow, hnorm, Nat.cast_pow, ← Real.rpow_natCast,
-    ← Real.rpow_mul (by positivity), ← Real.rpow_natCast (Nat.card k₀ : ℝ),
-    ← Real.rpow_mul (by positivity)]
-  ring_nf
-
-/-- The constant twist `F ⊗ 𝓑_b` with `|ι b| = q^{-w/2}` of a sheaf punctually `ι`-pure of
-weight `w` is punctually `ι`-pure of weight `0`. -/
-theorem IsPunctuallyPureOfWeight.constantTwist_zero {ι : PadicAlgCl l →+* ℂ}
-    {F : WeilSheaf k₀ l X} {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w) {b : (PadicAlgCl l)ˣ}
-    (hb : ‖ι b‖ = (Nat.card k₀ : ℝ) ^ (-w / 2)) :
-    (F.constantTwist b).IsPunctuallyPureOfWeight ι 0 := by
-  have hq : (1 : ℝ) < Nat.card k₀ := by exact_mod_cast Finite.one_lt_card
-  have h' := h.constantTwist (b := b) (c := -w) (by
-    rw [hb, Real.logb_rpow (by positivity) hq.ne']
-    ring)
-  rwa [add_neg_cancel] at h'
-
 /-- The envelope `Env_ι(F; b)` of a lisse sheaf `F` punctually `ι`-pure of weight `w`, with
 `|ι b| = q^{-w/2}`, is `ι`-real: at a closed point the eigenvalues `β_j` of `F⁰` have
 `|ι β_j| = 1`, so those of the dual summand are `ι(β_j⁻¹) = conj (ι β_j)`, and the local
@@ -448,16 +403,39 @@ theorem traceEnergy_constantTwist (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k
     {b : (PadicAlgCl l)ˣ} {w : ℝ} (hb : ‖ι b‖ = (Nat.card k₀ : ℝ) ^ (-w / 2)) (m : ℕ) :
     (F.constantTwist b).traceEnergy ι m =
       F.traceEnergy ι m / (Nat.card k₀ : ℝ) ^ ((m : ℝ) * w) := by
-  sorry
+  have hq : (0 : ℝ) < Nat.card k₀ := by exact_mod_cast Nat.card_pos
+  rw [traceEnergy, traceEnergy, div_eq_mul_inv, finsum_mul]
+  refine finsum_congr fun y ↦ ?_
+  rw [traceFunction_constantTwist, map_mul, norm_mul, mul_pow, map_pow, norm_pow, hb,
+    mul_comm, ← pow_mul, ← Real.rpow_natCast _ (m * 2), ← Real.rpow_mul hq.le,
+    ← Real.rpow_neg hq.le]
+  congr 2
+  push_cast
+  ring
 
 /-- The trace energies of the envelope are at most four times those of `F⁰ = F ⊗ 𝓑_b`, for `F`
 punctually pure of weight `w` and `|ι b| = q^{-w/2}`: the trace of the envelope is
-`t_{F⁰} + conj t_{F⁰} = 2 Re t_{F⁰}`, and `|Re z|² ≤ |z|²`. -/
-theorem traceEnergy_realEnvelope_le (ι : PadicAlgCl l →+* ℂ) {F : WeilSheaf k₀ l X}
+`t_{F⁰} + conj t_{F⁰} = 2 Re t_{F⁰}`, and `|Re z|² ≤ |z|²`. The finiteness hypotheses make the
+sums finite. -/
+theorem traceEnergy_realEnvelope_le (ι : PadicAlgCl l →+* ℂ)
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] {F : WeilSheaf k₀ l X}
     (hF : F.IsLisse) {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w) {b : (PadicAlgCl l)ˣ}
     (hb : ‖ι b‖ = (Nat.card k₀ : ℝ) ^ (-w / 2)) (m : ℕ) :
     (F.realEnvelope hF b).traceEnergy ι m ≤ 4 * (F.constantTwist b).traceEnergy ι m := by
-  sorry
+  have : Finite (FiniteField.galoisExtension k₀ m) := Module.finite_of_finite k₀
+  have := (X ↘ Spec (CommRingCat.of k₀)).finite_fieldPoints (FiniteField.galoisExtension k₀ m)
+  have : Fintype ((X ↘ Spec (CommRingCat.of k₀)).fieldPoints
+    (FiniteField.galoisExtension k₀ m)) := Fintype.ofFinite _
+  have h0 := h.constantTwist_zero hb
+  rw [traceEnergy, traceEnergy, finsum_eq_sum_of_fintype, finsum_eq_sum_of_fintype,
+    Finset.mul_sum]
+  refine Finset.sum_le_sum fun y _ ↦ ?_
+  rw [realEnvelope, traceFunction_biprod, map_add, map_traceFunction_dual _ h0, Complex.add_conj,
+    Complex.norm_real, Real.norm_eq_abs, sq_abs]
+  have := Complex.abs_re_le_norm (ι ((F.constantTwist b).traceFunction m y))
+  nlinarith [abs_nonneg (ι ((F.constantTwist b).traceFunction m y)).re, sq_abs
+    (ι ((F.constantTwist b).traceFunction m y)).re]
 
 /-- A nonzero Weil sheaf on a `k₀`-scheme locally of finite type, punctually `ι`-pure of weight
 `w`, admits a unit `b` with `|ι b| = q^{-w/2}`: if `α` is an eigenvalue of the local Frobenius
@@ -497,19 +475,51 @@ theorem exists_norm_eq_of_isPunctuallyPureOfWeight (ι : PadicAlgCl l →+* ℂ)
 
 end Envelope
 
-/-- If `F` is a lisse Weil sheaf on a quasi-compact smooth curve `V` over `k₀`, punctually
-`ι`-mixed of weights at most `w`, then `S_m(F) ≤ C q^{m(w + 1)}` for some `C` and all `m ≥ 1`.
-(blueprint: `lem-wf-l2-upper`) -/
+/-- If `F` is a lisse Weil sheaf on a smooth affine curve `V` over `k₀`, punctually `ι`-mixed of
+weights at most `w`, then `S_m(F) ≤ C q^{m(w + 1)}` for some `C` and all `m ≥ 1`: at
+`y ∈ V(𝔽_{qᵐ})` the eigenvalues of the Frobenius have absolute value at most `q^{mw/2}`, so
+`|ι t_F(y)|² ≤ r² q^{mw}` for a bound `r` of the rank of `F`, and
+`S_m ≤ r² · #V(𝔽_{qᵐ}) · q^{mw} ≤ C q^{m(w + 1)}` by the linear growth of the point counts of an
+affine curve. (blueprint: `lem-wf-l2-upper`) -/
 theorem exists_traceEnergy_le_of_hasWeightsAtMost (ι : PadicAlgCl l →+* ℂ) {V : Scheme.{u}}
-    [V.Over (Spec (CommRingCat.of k₀))] [QuasiCompact (V ↘ Spec (CommRingCat.of k₀))]
+    [V.Over (Spec (CommRingCat.of k₀))] [IsAffine V]
     [SmoothOfRelativeDimension 1 (V ↘ Spec (CommRingCat.of k₀))]
     (F : WeilSheaf k₀ l V) (hlisse : F.IsLisse) {w : ℝ} (h : F.HasWeightsAtMost ι w) :
     ∃ C : ℝ, ∀ n : ℕ, 1 ≤ n →
-      F.traceEnergy ι n ≤ C * (Nat.card k₀ : ℝ) ^ ((n : ℝ) * (w + 1)) :=
-  -- TODO: at `y ∈ V(𝔽_{qᵐ})` the eigenvalues of the Frobenius have absolute value at most
-  -- `q^{mw/2}`, so `|ι t_F(y)|² ≤ r² q^{mw}` for the rank `r` of `F`, and
-  -- `S_m ≤ r² · #V(𝔽_{qᵐ}) · q^{mw} ≤ C q^{m(w + 1)}`.
-  sorry
+      F.traceEnergy ι n ≤ C * (Nat.card k₀ : ℝ) ^ ((n : ℝ) * (w + 1)) := by
+  have : LocallyOfFiniteType (V ↘ Spec (CommRingCat.of k₀)) := by
+    have := SmoothOfRelativeDimension.smooth 1 (V ↘ Spec (CommRingCat.of k₀))
+    infer_instance
+  obtain ⟨N, hN⟩ := hlisse.exists_forall_finrank_stalk_le
+  obtain ⟨d, hd⟩ := (V ↘ Spec (CommRingCat.of k₀)).exists_pointCount_le_mul_pow
+    (topologicalKrullDim_le_of_smoothOfRelativeDimension (V ↘ Spec (CommRingCat.of k₀)) 1)
+  have hq : (0 : ℝ) < Nat.card k₀ := by exact_mod_cast Nat.card_pos
+  refine ⟨d * N ^ 2, fun n hn ↦ ?_⟩
+  have : Finite (FiniteField.galoisExtension k₀ n) := Module.finite_of_finite k₀
+  have := (V ↘ Spec (CommRingCat.of k₀)).finite_fieldPoints (FiniteField.galoisExtension k₀ n)
+  let := Fintype.ofFinite ((V ↘ Spec (CommRingCat.of k₀)).fieldPoints
+    (FiniteField.galoisExtension k₀ n))
+  have hcard : (Fintype.card ((V ↘ Spec (CommRingCat.of k₀)).fieldPoints
+      (FiniteField.galoisExtension k₀ n)) : ℝ) ≤ d * (Nat.card k₀ : ℝ) ^ n := by
+    have := hd n (by omega)
+    rw [Scheme.Hom.pointCount, Nat.card_eq_fintype_card] at this
+    exact_mod_cast this
+  rw [traceEnergy, finsum_eq_sum_of_fintype]
+  calc ∑ y, ‖ι (F.traceFunction n y)‖ ^ 2
+      ≤ ∑ _y : (V ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n),
+          ((N : ℝ) * ((Nat.card k₀ : ℝ) ^ (w / 2)) ^ n) ^ 2 :=
+        Finset.sum_le_sum fun y _ ↦ pow_le_pow_left₀ (norm_nonneg _)
+          ((norm_map_traceFunction_le h n y).trans (by gcongr; exact_mod_cast hN _)) 2
+    _ = Fintype.card ((V ↘ Spec (CommRingCat.of k₀)).fieldPoints
+          (FiniteField.galoisExtension k₀ n)) * ((N : ℝ) * ((Nat.card k₀ : ℝ) ^ (w / 2)) ^ n) ^ 2 :=
+        by rw [Finset.sum_const, Finset.card_univ, nsmul_eq_mul]
+    _ ≤ (d * (Nat.card k₀ : ℝ) ^ n) * ((N : ℝ) * ((Nat.card k₀ : ℝ) ^ (w / 2)) ^ n) ^ 2 := by
+        gcongr
+    _ = ((d : ℝ) * (N : ℝ) ^ 2) * (Nat.card k₀ : ℝ) ^ ((n : ℝ) * (w + 1)) := by
+        rw [mul_pow, ← pow_mul, ← Real.rpow_natCast _ (n * 2), ← Real.rpow_mul hq.le,
+          ← Real.rpow_natCast (Nat.card k₀ : ℝ) n, show (n : ℝ) * (w + 1) = n + (w / 2 * ↑(n * 2))
+            by push_cast; ring, Real.rpow_add hq]
+        ring
 
 /-- The `L²`-weight is at most the weight: if `F` is a lisse Weil sheaf on the smooth
 geometrically connected affine curve `V`, punctually `ι`-mixed of weights at most `w`, then
@@ -524,16 +534,6 @@ theorem l2Weight_le_of_hasWeightsAtMost (ι : PadicAlgCl l →+* ℂ) {V : Schem
     F.l2Weight ι ≤ w := by
   obtain ⟨C, hC⟩ := exists_traceEnergy_le_of_hasWeightsAtMost ι F hlisse h
   simpa using F.l2Weight_le_of_traceEnergy_le ι hC
-
-/-- The `L`-series `L(X₀, F, t) = ∏_{x ∈ |X₀|} det(1 - Fₓ t^{d(x)} | F_x̄)⁻¹ ∈ ℂ⟦t⟧` of a Weil
-sheaf, the product over the closed points of `X₀` of the inverses of the local polynomials
-`FrobeniusModule.localPolynomial` of the stalks, transported to `ℂ` along `ι` and substituted
-into `t^{d(x)}` for the degree `d(x) = [κ(x) : k₀]`. It is taken in the product topology on
-`ℂ⟦t⟧`, in which it converges for `X₀` of finite type over `k₀`. -/
-noncomputable def lSeries (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) : PowerSeries ℂ :=
-  ∏' x : X.finitePoints, ((((F.stalk x).localPolynomial.map ι).comp
-    (Polynomial.X ^ (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1) : Polynomial ℂ) :
-      PowerSeries ℂ)⁻¹
 
 /-- Let `F` be a lisse Weil sheaf on the smooth geometrically connected affine curve `X₀` and
 `F'` a Weil sheaf whose local eigenvalues are the complex conjugates of those of `F` (the sheaf
@@ -559,7 +559,38 @@ theorem traceFunction_tensorObj_and_l2Series_mul_lSeries (ι : PadicAlgCl l →+
       ι ((F.tensorObj F' hlisse).traceFunction n y) = ((‖ι (F.traceFunction n y)‖ ^ 2 : ℝ) : ℂ)) ∧
     PowerSeries.mk (fun m ↦ (F.traceEnergy ι (m + 1) : ℂ)) * (F.tensorObj F' hlisse).lSeries ι =
       PowerSeries.derivative ℂ ((F.tensorObj F' hlisse).lSeries ι) := by
-  sorry
+  have : QuasiCompact (V ↘ Spec (CommRingCat.of k₀)) := inferInstance
+  have hy (n : ℕ) (y : (V ↘ Spec (CommRingCat.of k₀)).fieldPoints
+      (FiniteField.galoisExtension k₀ n)) :
+      ι ((F.tensorObj F' hlisse).traceFunction n y) =
+        ((‖ι (F.traceFunction n y)‖ ^ 2 : ℝ) : ℂ) := by
+    rw [traceFunction_tensorObj, map_mul, traceFunction_eq_trace F', traceFunction_eq_trace F,
+      FrobeniusModule.map_trace_frobeniusEnd_pow_eq_of_map_localPolynomial_eq
+        (F.stalk (finitePointOfFieldPoint y)) (F'.stalk (finitePointOfFieldPoint y)) ι
+        ((starRingEnd ℂ).comp ι) (by rw [hconj, Polynomial.map_map]), RingHom.comp_apply,
+      Complex.conj_mul']
+    push_cast
+    rfl
+  refine ⟨hy, ?_⟩
+  set L := (F.tensorObj F' hlisse).lSeries ι
+  have h := (F.tensorObj F' hlisse).X_mul_derivative_lSeries ι
+  have hA : PowerSeries.mk (fun n ↦ if n = 0 then 0 else
+      ∑ᶠ y, ι ((F.tensorObj F' hlisse).traceFunction n y)) =
+      PowerSeries.X * PowerSeries.mk (fun m ↦ (F.traceEnergy ι (m + 1) : ℂ)) := by
+    ext n
+    rcases n with _ | n
+    · simp
+    rw [PowerSeries.coeff_mk, if_neg n.succ_ne_zero, PowerSeries.coeff_succ_X_mul,
+      PowerSeries.coeff_mk, traceEnergy]
+    have : Finite (FiniteField.galoisExtension k₀ (n + 1)) := Module.finite_of_finite k₀
+    have := (V ↘ Spec (CommRingCat.of k₀)).finite_fieldPoints
+      (FiniteField.galoisExtension k₀ (n + 1))
+    let : Fintype ((V ↘ Spec (CommRingCat.of k₀)).fieldPoints
+      (FiniteField.galoisExtension k₀ (n + 1))) := Fintype.ofFinite _
+    rw [finsum_eq_sum_of_fintype, finsum_eq_sum_of_fintype, Complex.ofReal_sum]
+    exact Finset.sum_congr rfl fun y _ ↦ hy _ y
+  rw [hA, mul_assoc] at h
+  exact (mul_left_cancel₀ PowerSeries.X_ne_zero h).symm
 
 /-- The *`L²`-rigidity* for real sheaves: let `G` be a nonzero lisse `ι`-real Weil sheaf on the
 smooth geometrically connected affine curve `X₀`, punctually `ι`-pure of weight `w`. Then
@@ -577,8 +608,82 @@ theorem l2Weight_eq_of_isReal (ι : PadicAlgCl l →+* ℂ) {V : Scheme.{u}}
     [GeometricallyConnected (V ↘ Spec (CommRingCat.of k₀))]
     (G : WeilSheaf k₀ l V) (hG : ¬ Limits.IsZero G) (hlisse : G.IsLisse) (hreal : G.IsReal ι)
     {w : ℝ} (hpure : G.IsPunctuallyPureOfWeight ι w) :
-    G.l2Weight ι = w :=
-  sorry
+    G.l2Weight ι = w := by
+  have : QuasiCompact (V ↘ Spec (CommRingCat.of k₀)) := inferInstance
+  have hq : (1 : ℝ) < Nat.card k₀ := by exact_mod_cast Finite.one_lt_card
+  set T := G.tensorObj G hlisse
+  have hTl : T.IsLisse := hlisse.tensorObj hlisse
+  have hTp : T.IsPunctuallyPureOfWeight ι (w + w) := hpure.tensorObj hlisse hpure
+  -- `φ_G = L'/L` for the `L`-series of `G ⊗ G`
+  have hconj : ∀ x : V.finitePoints, (G.stalk x).localPolynomial.map ι =
+      ((G.stalk x).localPolynomial.map ι).map (starRingEnd ℂ) := fun x ↦ by
+    ext n
+    rw [Polynomial.coeff_map, Polynomial.coeff_map, Polynomial.coeff_map, hreal x n]
+  have hφL := (traceFunction_tensorObj_and_l2Series_mul_lSeries ι G G hlisse hconj).2
+  have hrad1 : (G.l2Series ι).radius ≤ (T.lSeries ι).radius := by
+    rw [l2Series, FormalMultilinearSeries.radius_ofScalars_real_eq]
+    exact PowerSeries.radius_le_radius_of_derivative_eq_mul hφL.symm
+  -- the `L`-series is not a polynomial: it dominates a local factor of positive degree
+  have hLtop : (T.lSeries ι).radius ≠ ⊤ := by
+    obtain ⟨x, hx⟩ := G.exists_nontrivial_stalk_of_not_isZero hG
+    have hle := PowerSeries.radius_tprod_le_radius
+      (hreal.hasNonnegCoeffs_lFactor_tensorObj hlisse) (constantCoeff_lFactor ι T)
+      (multipliable_lFactor ι T) x
+    set d := (V ↘ Spec (CommRingCat.of k₀)).degreeOver x.1
+    set Q : Polynomial ℂ := ((T.stalk x).localPolynomial.map ι).comp (Polynomial.X ^ d)
+    have hd : d ≠ 0 := (V ↘ Spec (CommRingCat.of k₀)).degreeOver_ne_zero x.2
+    have hrank : Module.finrank (PadicAlgCl l) (T.stalk x).carrier ≠ 0 := by
+      have e₁ : (T.stalk x).carrier ≃ₗ[PadicAlgCl l]
+          (((G.dual hlisse).stalk x).carrier →ₗ[PadicAlgCl l] (G.stalk x).carrier) :=
+        stalkAtTensorObjLinearEquiv _ _ _ hlisse G
+      have e₂ : ((G.dual hlisse).stalk x).carrier ≃ₗ[PadicAlgCl l]
+          Module.Dual (PadicAlgCl l) (G.stalk x).carrier :=
+        (stalkAtDualEquiv _ _ _ G hlisse).toLinearEquiv
+      rw [e₁.finrank_eq, Module.finrank_linearMap, e₂.finrank_eq, Subspace.dual_finrank_eq]
+      exact mul_ne_zero Module.finrank_pos.ne' Module.finrank_pos.ne'
+    have hQdeg : Q.degree ≠ 0 := by
+      refine fun h0 ↦ mul_ne_zero ?_ (by simpa using hd)
+        (Polynomial.natDegree_eq_zero_iff_degree_le_zero.2 h0.le |>
+          (Polynomial.natDegree_comp.symm.trans ·))
+      rw [Polynomial.natDegree_map, FrobeniusModule.natDegree_localPolynomial]
+      exact hrank
+    obtain ⟨z, hz⟩ := IsAlgClosed.exists_root Q hQdeg
+    have hQ0 : Q.coeff 0 ≠ 0 := by
+      rw [Polynomial.coeff_zero_eq_eval_zero, Polynomial.eval_comp, Polynomial.eval_pow,
+        Polynomial.eval_X, zero_pow hd, ← Polynomial.coeff_zero_eq_eval_zero,
+        Polynomial.coeff_map, FrobeniusModule.coeff_zero_localPolynomial, map_one]
+      exact one_ne_zero
+    have hzr : (T.lFactor ι x).radius ≤ ‖z‖₊ := by
+      by_contra h
+      exact PowerSeries.eval_ne_zero_of_lt_radius_inv hQ0 (not_le.1 h) hz.eq_zero
+    exact ne_top_of_le_ne_top ENNReal.coe_ne_top (hle.trans hzr)
+  -- the denominator `det(1 - Ft | H_c²)` has its zeros on `|t| = q^{-w-1}`
+  set R : ℝ := (Nat.card k₀ : ℝ) ^ (-(w + 1))
+  have h2 : (T.compactlySupportedCohomology 2).IsPureOfWeight ι (Nat.card k₀) (w + w + 2) :=
+    FrobeniusModule.IsPureOfWeight.of_equiv
+      (compactlySupportedCohomologyEquivOfIso ((lowerStarIdIso k₀ l V).app T).symm 2)
+      (isPureOfWeightOver_compactlySupportedCohomology_directImage_two (𝟙 V) T ι hTl hTp)
+  have hD : ((T.compactlySupportedCohomology 2).localPolynomial.map ι) ≠ 0 := fun h0 ↦ by
+    have := congrArg (Polynomial.coeff · 0) h0
+    simp [FrobeniusModule.coeff_zero_localPolynomial] at this
+  have hroots : ∀ z : ℂ, ((T.compactlySupportedCohomology 2).localPolynomial.map ι).eval z = 0 →
+      ‖z‖₊ ≤ R.toNNReal := fun z hz ↦ by
+    rw [← NNReal.coe_le_coe, coe_nnnorm, h2.norm_eq_of_eval_map_localPolynomial_eq_zero hz,
+      Real.coe_toNNReal _ (by positivity)]
+    exact le_of_eq (by congr 1; ring)
+  have hLR : (T.lSeries ι).radius ≤ ENNReal.ofReal R :=
+    PowerSeries.radius_le_of_mul_coe_eq
+      (lSeries_mul_localPolynomial_compactlySupportedCohomology_two ι T hTl) hD hroots hLtop
+  -- conclusion
+  refine le_antisymm (l2Weight_le_of_hasWeightsAtMost ι G hlisse hpure.hasWeightsAtMost) ?_
+  by_contra hlt
+  rw [not_le] at hlt
+  obtain ⟨β, hβ1, hβ2⟩ := EReal.lt_iff_exists_real_btwn.1 hlt
+  have hβw : β < w := EReal.coe_lt_coe_iff.1 hβ2
+  have hβ := (lt_l2Weight_iff ι G β).2 ((hrad1.trans hLR).trans_lt
+    ((ENNReal.ofReal_lt_ofReal_iff (by positivity)).2
+      (Real.rpow_lt_rpow_of_exponent_lt hq (by linarith))))
+  exact hβ1.not_gt hβ
 
 /-- The *`L²`-weight of a punctually pure lisse sheaf equals its weight*: let `G` be a nonzero
 lisse Weil sheaf on the smooth geometrically connected affine curve `X₀`, punctually `ι`-pure
@@ -662,23 +767,139 @@ theorem boundaryEnergy_nonneg (ι : PadicAlgCl l →+* ℂ) (D : LisseOnDenseOpe
     0 ≤ D.boundaryEnergy ι m :=
   finsum_nonneg fun _ ↦ finsum_nonneg fun _ ↦ sq_nonneg _
 
+/-- The trace function of the direct image `j_*M` at a rational point of `U₀` is that of `M`:
+`j^* j_* M ≅ M`. -/
+theorem traceFunction_directImage_mapFieldPoints (D : LisseOnDenseOpen k₀ l) (m : ℕ)
+    (y : (D.U ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ m)) :
+    D.directImage.traceFunction m (D.j.mapFieldPoints _ y) = D.sheaf.traceFunction m y := by
+  have h : D.directImage = (WeilSheaf.lowerStar D.j).obj D.sheaf := rfl
+  rw [h, ← traceFunction_upperStar]
+  exact traceFunction_eq_of_iso (upperStarDirectImageIso D.j D.sheaf) m y
+
+/-- The rational points of the affine line whose closed point lies in `U₀` are the images of the
+rational points of `U₀`. -/
+theorem mem_range_mapFieldPoints_iff (D : LisseOnDenseOpen k₀ l) (m : ℕ)
+    (y : (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).fieldPoints
+      (FiniteField.galoisExtension k₀ m)) :
+    y ∈ Set.range (D.j.mapFieldPoints (k₀ := k₀) (K := FiniteField.galoisExtension k₀ m)) ↔
+      y.1.base (IsLocalRing.closedPoint _) ∈ Set.range D.j.base := by
+  constructor
+  · rintro ⟨y', rfl⟩
+    exact ⟨_, rfl⟩
+  · rintro ⟨u, hu⟩
+    have hr : Set.range y.1.base ⊆ Set.range D.j.base := by
+      rintro _ ⟨z, rfl⟩
+      rw [Subsingleton.elim z (IsLocalRing.closedPoint _)]
+      exact ⟨u, hu⟩
+    refine ⟨⟨IsOpenImmersion.lift D.j y.1 hr, ?_⟩, Subtype.ext (IsOpenImmersion.lift_fac _ _ _)⟩
+    rw [← comp_over D.j (Spec (CommRingCat.of k₀)), ← Category.assoc,
+      IsOpenImmersion.lift_fac]
+    exact y.2
+
+lemma injective_mapFieldPoints (D : LisseOnDenseOpen k₀ l) (m : ℕ) :
+    Function.Injective (D.j.mapFieldPoints (k₀ := k₀) (K := FiniteField.galoisExtension k₀ m)) :=
+  fun _ _ h ↦ Subtype.ext ((cancel_mono D.j).1 (congrArg Subtype.val h))
+
 /-- The trace energy of the direct image `j_*M` is that of `M` plus the boundary contribution
 `E_m`: since `j^*j_*M ≅ M`, the trace functions of `j_*M` and `M` agree at the points of `U₀`.
 (blueprint: `lem-fd-l2-middle-extension`) -/
 theorem traceEnergy_directImage_eq_add (ι : PadicAlgCl l →+* ℂ) (D : LisseOnDenseOpen k₀ l)
     (m : ℕ) :
-    D.directImage.traceEnergy ι m = D.sheaf.traceEnergy ι m + D.boundaryEnergy ι m :=
-  sorry
+    D.directImage.traceEnergy ι m = D.sheaf.traceEnergy ι m + D.boundaryEnergy ι m := by
+  have : Finite (FiniteField.galoisExtension k₀ m) := Module.finite_of_finite k₀
+  have := (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).finite_fieldPoints
+    (FiniteField.galoisExtension k₀ m)
+  set s := Set.range (D.j.mapFieldPoints (k₀ := k₀) (K := FiniteField.galoisExtension k₀ m))
+  rw [traceEnergy, ← finsum_mem_univ, ← Set.union_compl_self s,
+    finsum_mem_union disjoint_compl_right.symm.symm (Set.toFinite _) (Set.toFinite _),
+    finsum_mem_range (injective_mapFieldPoints D m)]
+  congr 1
+  · exact finsum_congr fun y ↦ by rw [traceFunction_directImage_mapFieldPoints]
+  · rw [boundaryEnergy]
+    refine finsum_congr fun y ↦ ?_
+    rw [Set.mem_compl_iff, mem_range_mapFieldPoints_iff]
 
 /-- The boundary contribution `E_m` is at most `C q^{mw}` when `M` has weights at most `w`.
 (blueprint: `lem-fd-l2-middle-extension`) -/
 theorem exists_boundaryEnergy_le (ι : PadicAlgCl l →+* ℂ) (D : LisseOnDenseOpen k₀ l) {w : ℝ}
     (h : D.sheaf.HasWeightsAtMost ι w) :
-    ∃ C : ℝ, ∀ m : ℕ, D.boundaryEnergy ι m ≤ C * (Nat.card k₀ : ℝ) ^ ((m : ℝ) * w) :=
-  -- TODO: by the boundary semicontinuity
-  -- `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage`, `E_m` is at most
-  -- `D r² q^{mw}`, with `D = ∑_{s ∈ S₀} d(s)` and `r` the rank of `M`.
-  sorry
+    ∃ C : ℝ, ∀ m : ℕ, D.boundaryEnergy ι m ≤ C * (Nat.card k₀ : ℝ) ^ ((m : ℝ) * w) := by
+  classical
+  have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
+    simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k₀))
+  have : GeometricallyConnected (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) :=
+    GeometricallyConnected.of_geometricallyIrreducible _
+  -- boundary semicontinuity: `j_*M` has weights at most `w` everywhere
+  have hJ : D.directImage.HasWeightsAtMost ι w :=
+    WeilSheaf.hasWeightsAtMost_directImage D.j ι D.lisse h
+  -- the boundary is a finite set of closed points
+  have : Nonempty (affineLine k₀) :=
+    ⟨(AffineSpace.homOfVector (𝟙 (Spec (CommRingCat.of k₀))) 0).base (IsLocalRing.closedPoint k₀)⟩
+  have hU : (Set.range D.j.base).Nonempty := by
+    have : Nonempty D.U := D.j.denseRange.nonempty_iff.2 ‹_›
+    exact Set.range_nonempty _
+  have := LocallyOfFiniteType.isLocallyNoetherian (affineLine k₀ ↘ Spec (CommRingCat.of k₀))
+  have : IsNoetherian (affineLine k₀) := ⟨⟩
+  have hfin : (Set.range D.j.base)ᶜ.Finite :=
+    D.j.isOpenEmbedding.isOpen_range.finite_compl_of_topologicalKrullDim_le_one
+      (topologicalKrullDim_le_of_smoothOfRelativeDimension
+        (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) 1) hU
+  let B : Finset (affineLine k₀).finitePoints :=
+    (hfin.preimage Subtype.val_injective.injOn).toFinset
+  have hB (x : (affineLine k₀).finitePoints) : x ∈ B ↔ x.1 ∉ Set.range D.j.base := by
+    simp [B]
+  let N : ℕ := B.sup fun x ↦ Module.finrank (PadicAlgCl l) (D.directImage.stalk x).carrier
+  let d : ℕ := ∑ x ∈ B, (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).degreeOver x.1
+  refine ⟨d * N ^ 2, fun m ↦ ?_⟩
+  have : Finite (FiniteField.galoisExtension k₀ m) := Module.finite_of_finite k₀
+  have := (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).finite_fieldPoints
+    (FiniteField.galoisExtension k₀ m)
+  set s := {y : (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).fieldPoints
+    (FiniteField.galoisExtension k₀ m) | y.1.base (IsLocalRing.closedPoint _) ∉ Set.range D.j.base}
+  have hs : s.Finite := Set.toFinite s
+  have hq : (0 : ℝ) ≤ Nat.card k₀ := Nat.cast_nonneg _
+  -- each boundary term is at most `N² q^{mw}`
+  have hterm (y) (hy : y ∈ s) : ‖ι (D.directImage.traceFunction m y)‖ ^ 2 ≤
+      (N : ℝ) ^ 2 * (Nat.card k₀ : ℝ) ^ ((m : ℝ) * w) := by
+    have hb := norm_map_traceFunction_le hJ m y
+    have hN : Module.finrank (PadicAlgCl l)
+        (D.directImage.stalk (finitePointOfFieldPoint y)).carrier
+        ≤ N := Finset.le_sup (f := fun x ↦ Module.finrank (PadicAlgCl l)
+          (D.directImage.stalk x).carrier) ((hB _).2 hy)
+    have hpow : ((Nat.card k₀ : ℝ) ^ (w / 2)) ^ m * ((Nat.card k₀ : ℝ) ^ (w / 2)) ^ m =
+        (Nat.card k₀ : ℝ) ^ ((m : ℝ) * w) := by
+      rw [← pow_add, ← Real.rpow_natCast, ← Real.rpow_mul hq]
+      congr 1
+      push_cast
+      ring
+    have h0 : (0 : ℝ) ≤ ((Nat.card k₀ : ℝ) ^ (w / 2)) ^ m := by positivity
+    calc ‖ι (D.directImage.traceFunction m y)‖ ^ 2
+        ≤ ((N : ℝ) * ((Nat.card k₀ : ℝ) ^ (w / 2)) ^ m) ^ 2 :=
+          pow_le_pow_left₀ (norm_nonneg _) (hb.trans (by gcongr)) 2
+      _ = _ := by rw [mul_pow, sq (((Nat.card k₀ : ℝ) ^ (w / 2)) ^ m), hpow]
+  -- there are at most `d` boundary points
+  have hcard : hs.toFinset.card ≤ d := by
+    rw [Finset.card_eq_sum_card_fiberwise (f := finitePointOfFieldPoint) (t := B)
+      (fun y hy ↦ (hB _).2 (hs.mem_toFinset.1 hy))]
+    refine Finset.sum_le_sum fun x hx ↦ ?_
+    calc _ ≤ Nat.card {p : (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).fieldPoints
+          (FiniteField.galoisExtension k₀ m) // p.1.base (IsLocalRing.closedPoint _) = x.1} := by
+          rw [← Nat.card_eq_finsetCard]
+          refine Nat.card_le_card_of_injective (fun p ↦ ⟨p.1, congrArg Subtype.val
+            (Finset.mem_filter.1 p.2).2⟩) fun p p' h ↦
+              Subtype.ext (by simpa using congrArg Subtype.val h)
+      _ ≤ _ := (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).card_fieldPoints_base_eq_le _ x.2
+  rw [boundaryEnergy]
+  change ∑ᶠ y ∈ s, _ ≤ _
+  rw [finsum_mem_eq_finite_toFinset_sum _ hs]
+  calc ∑ y ∈ hs.toFinset, ‖ι (D.directImage.traceFunction m y)‖ ^ 2
+      ≤ ∑ _y ∈ hs.toFinset, (N : ℝ) ^ 2 * (Nat.card k₀ : ℝ) ^ ((m : ℝ) * w) :=
+        Finset.sum_le_sum fun y hy ↦ hterm y (hs.mem_toFinset.1 hy)
+    _ = hs.toFinset.card * ((N : ℝ) ^ 2 * (Nat.card k₀ : ℝ) ^ ((m : ℝ) * w)) := by
+        rw [Finset.sum_const, nsmul_eq_mul]
+    _ ≤ d * ((N : ℝ) ^ 2 * (Nat.card k₀ : ℝ) ^ ((m : ℝ) * w)) := by
+        gcongr
+    _ = _ := by ring
 
 /-- The trace energies of the lisse sheaf `M` on the dense open `U₀` are at most those of its
 direct image `j_*M` on the affine line, the boundary contribution being nonnegative. -/

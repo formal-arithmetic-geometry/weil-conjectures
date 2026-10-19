@@ -29,7 +29,7 @@ import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.SplitPerfectTensorKInjective
 import Sheaf.Algebra.Homology.HomComplex
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 import Mathlib.CategoryTheory.Yoneda
 import Mathlib.CategoryTheory.Adjunction.Limits
 import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses

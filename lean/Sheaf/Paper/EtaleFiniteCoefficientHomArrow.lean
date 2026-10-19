@@ -101,7 +101,7 @@ def finiteHomKoszulIso (C : Type a)
     PreservesColimitsOfSize.preservesColimitsOfShape
   letI : ∀ T : C, PreservesColimitsOfShape ℤ (tensorRight T) := fun T ↦
     preservesColimitsOfShape_of_natIso (BraidedCategory.tensorLeftIsoTensorRight T)
-  DerivedMonoidal.braiding DerivedCategory.Qh
+  DerivedMonoidal.braiding' DerivedCategory.Qh
     (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)) P Q
 
 /-- The braid structure is fixed componentwise by the actual Koszul isomorphism.

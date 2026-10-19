@@ -16,7 +16,7 @@ import Sheaf.RingTheory.AdicCompletionNoetherian
 import Mathlib.RingTheory.AdicCompletion.Algebra
 import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.RingTheory.IsN1OfIsAnalyticallyUnramified
-import Sheaf.RingTheory.AnalyticallyUnramified
+import WeilConjectures.RingTheory.AnalyticallyUnramified
 import Sheaf.RingTheory.IsN1OfLocalCharacterization
 import Sheaf.AlgebraicGeometry.IsRegularScheme
 import Sheaf.RingTheory.GRing

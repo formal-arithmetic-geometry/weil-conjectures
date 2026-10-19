@@ -12,7 +12,7 @@ import Sheaf.CategoryTheory.Sites.SliceSubtoposSitePresentation
 import Sheaf.CategoryTheory.SpecialCocontinuousSheafEquivalence
 import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
 import Sheaf.CategoryTheory.SiteInverseImageTensor
-import Sheaf.CategoryTheory.SiteMorphismComposition
+import WeilConjectures.CategoryTheory.SiteMorphismComposition
 import Sheaf.CategoryTheory.RingedToposMorphism
 import Sheaf.AlgebraicGeometry.AlgebraicSpace
 import Sheaf.CategoryTheory.RingedSiteModules

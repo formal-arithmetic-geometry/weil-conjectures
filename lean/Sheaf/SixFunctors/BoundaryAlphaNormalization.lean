@@ -10,7 +10,7 @@ public import Sheaf.Paper.FiniteTorAmplitudeSites
 public import Sheaf.Paper.DualityPairing
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.AlgebraicGeometry.DerivedCategories
-public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
 public import WeilConjectures.Compactification.NagataCompactification

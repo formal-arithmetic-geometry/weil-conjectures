@@ -13,6 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
 import WeilConjectures.SixFunctors.OpenClosed.Supported
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+import Sheaf.AlgebraicGeometry.Sites.SupportDimensionFiniteUnion
 
 /-! # Cohomology of torsion sheaves with bounded-dimensional support
 

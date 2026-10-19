@@ -20,6 +20,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact

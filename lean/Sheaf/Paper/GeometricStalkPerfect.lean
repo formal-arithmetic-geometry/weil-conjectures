@@ -28,7 +28,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
+import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 import Sheaf.Paper.ProEtaleCanonicalTensorPullback
 import Sheaf.RingTheory.RlimPerfectComplete
 

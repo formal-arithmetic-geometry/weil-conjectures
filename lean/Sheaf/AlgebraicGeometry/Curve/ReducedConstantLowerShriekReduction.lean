@@ -54,7 +54,7 @@ Source: Stacks 0A3Q, proof, finite pushforward and dense-open comparison paragra
 (blueprint: k1-reduced-constant-lower-shriek-assertions-of-reduction-data)
 Unpack the finite, surjective, smooth, dense-open-isomorphism and pullback hypotheses,
 install their typeclass instances, and apply
-`Assertions.lowerShriek_constantModSheaf_of_finite` to the smooth assertion package. -/
+`Assertions.lowerShriek_constantModSheaf_of_finite_coefficients` to the smooth assertion package. -/
 theorem reducedConstantLowerShriekAssertions_of_reduction_data
     {k : Type u} [Field k] [IsAlgClosed k] {X U : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X] (j : U ⟶ X)
@@ -71,7 +71,7 @@ theorem reducedConstantLowerShriekAssertions_of_reduction_data
   let := hsmooth
   let := hiso
   let := hopen
-  exact Assertions.lowerShriek_constantModSheaf_of_finite
+  exact Assertions.lowerShriek_constantModSheaf_of_finite_coefficients
     (ULift.{u + 1} (ZMod r)) f ν V hV j hpullback r H
 
 /-- Existence of normalization data with smooth lower-shriek assertions.

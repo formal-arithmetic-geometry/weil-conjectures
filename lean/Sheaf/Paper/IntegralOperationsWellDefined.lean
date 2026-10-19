@@ -18,7 +18,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import Mathlib.CategoryTheory.Localization.Predicate
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescent

@@ -15,7 +15,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.AlgebraicGeometry.ValuativeCriterion
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 import Mathlib.Topology.Spectral.Basic
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.Topology.SpectralDirectedLimit
 import Sheaf.Compactification.BoundaryRefinement
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace

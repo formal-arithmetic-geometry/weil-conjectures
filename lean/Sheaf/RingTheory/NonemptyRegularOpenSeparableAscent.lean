@@ -7,7 +7,7 @@ module
 
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.FiniteType
-public import Sheaf.FieldTheory.SeparableExtension
+public import WeilConjectures.FieldTheory.SeparableExtension
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.RegularLocalRing.Defs

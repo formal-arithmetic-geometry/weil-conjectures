@@ -46,7 +46,7 @@ def traceDerivedBraiding {A : Type uA} [Category.{vA} A] [Abelian A]
     [MonoidalCategory A] [MonoidalClosed A] [MonoidalPreadditive A] [BraidedCategory A]
     [HasColimitsOfSize.{0, 0} A] [Abelian.HasFunctorialFlatResolution A]
     (K L : DerivedCategory A) : K ⊗ L ≅ L ⊗ K :=
-  DerivedMonoidal.braiding (DerivedCategory.Qh (C := A))
+  DerivedMonoidal.braiding' (DerivedCategory.Qh (C := A))
     (HomotopyCategory.quasiIso A (.up ℤ)) K L
 
 end CategoryTheory

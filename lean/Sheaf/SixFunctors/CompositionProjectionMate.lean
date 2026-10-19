@@ -8,6 +8,7 @@ module
 public import Sheaf.SixFunctors.AmbientProperOpenPasting
 public import Sheaf.Paper.ExchangeProjectionSuppliedDomains
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.CompactifiableCompatibleTower
 import WeilConjectures.Compactification.CategoryBaseChange

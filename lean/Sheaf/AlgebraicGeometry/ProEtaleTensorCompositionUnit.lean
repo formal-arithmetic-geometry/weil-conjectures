@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 public import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
 public import Mathlib.CategoryTheory.Adjunction.Mates
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Sheaf.CategoryTheory.SiteMorphismComposition
+import WeilConjectures.CategoryTheory.SiteMorphismComposition
 import Sheaf.CategoryTheory.SiteInverseImageTensor
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses

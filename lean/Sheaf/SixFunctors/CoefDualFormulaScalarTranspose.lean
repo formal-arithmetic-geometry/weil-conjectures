@@ -47,7 +47,7 @@ import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
 import Sheaf.Paper.DualityPairing
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 import Sheaf.AlgebraicGeometry.DerivedCategories
-import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
 import WeilConjectures.Compactification.NagataCompactification

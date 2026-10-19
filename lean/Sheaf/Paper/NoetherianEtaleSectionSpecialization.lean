@@ -19,7 +19,7 @@ public import Mathlib.Data.Nat.Prime.Defs
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Sheaf.AlgebraicGeometry.CompactifiableOverField
-public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 
 public import Mathlib.AlgebraicGeometry.AffineSpace
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth

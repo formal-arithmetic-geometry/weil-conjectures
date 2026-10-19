@@ -21,6 +21,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Sheaf.AlgebraicGeometry.ProperSupportSheafComposition
 public import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 import Sheaf.AlgebraicGeometry.EtaleSumStalks

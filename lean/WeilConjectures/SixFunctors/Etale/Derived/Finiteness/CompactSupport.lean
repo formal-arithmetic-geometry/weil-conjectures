@@ -10,25 +10,32 @@ public import WeilConjectures.AlgebraicGeometry.BaseChangeDimension
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.SepClosedPoint
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Point
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
+
 /-!
 # Compactly supported cohomology is perfect
 
 Compactly supported cohomology of a bounded constructible complex of finite Tor amplitude over
-a separably closed field is a perfect complex of `Λ`-modules (`sk-prop-sf-trace-perfectness`).
+a separably closed field is a perfect complex of `Λ`-modules, and so are the derived geometric
+stalks of such a complex (`sk-prop-sf-trace-perfectness`, `prop-trf-compact-support-perfectness`).
 
 ## Implementation notes
 
 `sk-prop-sf-trace-perfectness` concludes that `RΓ_c(X, K)` is *perfect*: bounded, with finite
-cohomology modules, and of finite Tor amplitude. The three are stated separately below, finite
+cohomology modules, and of finite Tor amplitude. The three are proved separately below, finite
 Tor amplitude in the sense of `DerivedCategory.finiteTorAmplitude` for `D(ModuleCat Λ)`; they
-are assembled into perfectness in `WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect`.
-The geometric-stalk half of the same subsection is omitted.
+are assembled into perfectness in `WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect`
+(`AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections`). The geometric
+stalk `RΓ(Spec Ω, Lx̄^* K)` is perfect because `Lx̄^*` preserves `Dctf` and `RΓ` on a separably
+closed point carries `Dctf` into perfect complexes.
 
 ## Main statements
 
+- `AlgebraicGeometry.Etale.isPerfect_geometricStalk`
 - `AlgebraicGeometry.Etale.isZero_compactlySupportedCohomology_of_lt`
 - `AlgebraicGeometry.Etale.finite_compactlySupportedCohomology`
 - `AlgebraicGeometry.Etale.finiteTorAmplitude_compactlySupportedGlobalSections`
@@ -211,6 +218,30 @@ theorem finiteTorAmplitude_compactlySupportedGlobalSections
     _root_.DerivedCategory.TStructure.t.isLE_of_iso e.symm (b + 2 * d)⟩
 
 end Perfectness
+
+section Stalk
+
+variable [Finite Λ] {Ω : Type u} [Field Ω] [IsSepClosed Ω]
+
+/-- Blueprint `prop-trf-compact-support-perfectness`: Compact-support perfectness (geometric
+stalks).
+
+Also blueprint `sk-prop-sf-trace-perfectness`: Perfectness of compact cohomology and of
+geometric stalks.
+
+For a finite coefficient ring `Λ`, `K ∈ D^b_{ctf}(X, Λ)` and a geometric point
+`x̄ : Spec Ω ⟶ X` (`Ω` separably closed), the derived geometric stalk
+`K_x̄ = RΓ(Spec Ω, Lx̄^* K)` is a perfect complex of `Λ`-modules: `Lx̄^*` preserves `Dctf`, and
+`RΓ(Spec Ω, -)` carries `Dctf(Spec Ω, Λ)` into perfect complexes. -/
+theorem isPerfect_geometricStalk (x : Spec (.of Ω) ⟶ X)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) :
+    ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of Ω))).obj
+      ((L((x)^*[ModuleCat.{u + 1} Λ])).obj K)).IsPerfect :=
+  isPerfect_rightDerivedGlobalSections_of_isSepClosed _
+    (constructibleFiniteTor_leftDerivedUpperStar _ x hK)
+
+end Stalk
 
 end Etale
 

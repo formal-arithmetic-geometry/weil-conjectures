@@ -14,7 +14,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
@@ -35,7 +35,7 @@ public import WeilConjectures.SixFunctors.Finite.Exact
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import WeilConjectures.ConstructibleSheaf.Pullback
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.SixFunctors.OpenClosed.Exact
 import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.ConstructibleSheaf.GenericConstancy
@@ -46,13 +46,13 @@ import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Sheaf.AlgebraicGeometry.GeometricStalkAsPullback
 import Sheaf.Paper.ProEtaleCanonicalTensorPullback
-import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
+import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
 import Sheaf.AlgebraicGeometry.FiniteRingDerivedLocalConstancy
 import Sheaf.CategoryTheory.DerivedCategory.BoundedFiniteTorPerfect
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import Mathlib.Algebra.Homology.HomotopyCategory.KProjective
-import Sheaf.AlgebraicGeometry.ConstantEtaleSheafShortExact
+import WeilConjectures.AlgebraicGeometry.ConstantEtaleSheafShortExact
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import Mathlib.Algebra.Module.Projective
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor

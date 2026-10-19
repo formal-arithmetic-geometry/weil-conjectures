@@ -9,7 +9,7 @@ public import WeilConjectures.FourierTransform.ArtinSchreier
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.Data.ZMod.Basic
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves

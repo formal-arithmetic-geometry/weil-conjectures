@@ -12,7 +12,8 @@ public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
 public import Mathlib.Topology.Connected.TotallyDisconnected
 public import Mathlib.Topology.ContinuousMap.Algebra
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification

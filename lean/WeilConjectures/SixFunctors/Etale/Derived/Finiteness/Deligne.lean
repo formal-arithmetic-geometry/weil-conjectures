@@ -9,18 +9,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
-public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.Induction
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.RadicialDescent
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
-import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
-import Sheaf.CategoryTheory.MateIsoAlongEquivalences
-import WeilConjectures.AlgebraicGeometry.GeometricStalkComparisonConstant
-import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
-import WeilConjectures.ConstructibleSheaf.Refinement
-import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.ModuleExchangeCompositeBaseChange
 
 /-!
 # Deligne's generic constructibility for an open immersion
@@ -73,47 +64,23 @@ open Scheme
 
 namespace Etale
 
-variable (Λ : Type (u + 1)) [CommRing Λ]
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Over a subset `U` of `S`, the derived direct image of the sheaf `F` along `j : X ⟶ Y`, for
-`Y` over `S` via `fY`, is bounded constructible and its formation commutes with every base
-change from a noetherian scheme: for every noetherian `T`, every `t : T ⟶ S` with image in `U`
-and all cartesian squares
+/-- Blueprint `lem-asd-smooth-generic-direct-image`: A smooth source with locally constant
+coefficients.
 
-```
-  X_T --g'--> X
-   |          |
-  j_T         j
-   ↓          ↓
-  Y_T --g---> Y
-   |          |
-  f_T         fY
-   ↓          ↓
-   T ---t---> S
-```
+For a separated smooth morphism of finite type `a : X ⟶ S` to an integral scheme of finite type
+over a field on which the exponent of `Λ` is invertible, and a finite locally constant sheaf `F`
+on `X`, there is a nonempty open `U ⊆ S` over which `Ra_* F` is bounded constructible and
+commutes with every base change from a noetherian scheme
+(`AlgebraicGeometry.Etale.SmoothGenericDirectImage`).
 
-the direct image `Rj_{T,*}(g'^* F)` is bounded constructible and the derived base change map
-`g^* Rj_* F ⟶ Rj_{T,*} g'^* F` is an isomorphism. -/
-def HasConstructibleDirectImageBaseChangeOn {S X Y : Scheme.{u}} (fY : Y ⟶ S) (j : X ⟶ Y)
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (U : Set S) : Prop :=
-  ∀ (T : Scheme.{u}) [IsNoetherian T] (t : T ⟶ S), Set.range t ⊆ U →
-    ∀ (YT XT : Scheme.{u}) (g : YT ⟶ Y) (fT : YT ⟶ T) (g' : XT ⟶ X) (jT : XT ⟶ YT),
-      IsPullback g fT fY t → ∀ sq : IsPullback g' jT j g,
-        DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) YT
-          ((R((jT)_*[ModuleCat.{u + 1} Λ])).obj ((L((g')^*[ModuleCat.{u + 1} Λ])).obj
-            ((_root_.DerivedCategory.singleFunctor _ 0).obj F))) ∧
-        IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app
-          ((_root_.DerivedCategory.singleFunctor _ 0).obj F))
-
-variable {Λ}
-
-lemma HasConstructibleDirectImageBaseChangeOn.mono {S X Y : Scheme.{u}} {fY : Y ⟶ S}
-    {j : X ⟶ Y} {F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} {U V : Set S}
-    (h : HasConstructibleDirectImageBaseChangeOn Λ fY j F U) (hVU : V ⊆ U) :
-    HasConstructibleDirectImageBaseChangeOn Λ fY j F V :=
-  fun T _ t ht ↦ h T t (ht.trans hVU)
-
-variable (Λ) [Finite Λ]
+This records the form of the node used by the induction for `thm-fin-deligne-generic-open`: the
+blueprint asks for `𝔽_ℓ`-coefficients and finite locally constant cohomology sheaves of
+`Rf_{U,*} L`, whereas this states bounded constructibility (with base change) over any finite
+ring `Λ` whose exponent is invertible on `S`. -/
+theorem smoothGenericDirectImage : SmoothGenericDirectImage Λ :=
+  sorry
 
 /-- Blueprint `thm-fin-deligne-generic-open`: Generic bounded constructibility for an open
 immersion.
@@ -132,8 +99,10 @@ theorem exists_hasConstructibleDirectImageBaseChangeOn {k : Type u} [Field k]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F] :
     ∃ U : S.Opens, (U : Set S).Nonempty ∧
       HasConstructibleDirectImageBaseChangeOn Λ fY j F U :=
-  sorry
+  exists_hasConstructibleDirectImageBaseChangeOn_of_smoothGenericDirectImage
+    (Λ := Λ) (smoothGenericDirectImage Λ) aS fY j F
 
+omit [Finite Λ] in
 /-- Blueprint `lem-fin-radicial-exchange-descent`: Descending the exchange property through a
 universal homeomorphism.
 
@@ -150,7 +119,7 @@ theorem HasConstructibleDirectImageBaseChangeOn.of_isFinite_of_surjective
     (h : HasConstructibleDirectImageBaseChangeOn Λ fY' j'
       ((Etale.upperStar (ModuleCat.{u + 1} Λ) g').obj F) Set.univ) :
     HasConstructibleDirectImageBaseChangeOn Λ fY j F Set.univ :=
-  sorry
+  .of_isFinite_of_surjective' π fY j g fY' hY g' j' hX F h
 
 /-- Blueprint `cor-fin-deligne-open-over-field`: Higher open direct images over a field.
 

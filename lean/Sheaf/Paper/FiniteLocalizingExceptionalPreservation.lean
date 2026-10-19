@@ -38,7 +38,7 @@ import Sheaf.AlgebraicGeometry.EtaleClosedSupportAmplitude
 import Sheaf.AlgebraicGeometry.EtaleClosedSupportTorBound
 import Sheaf.AlgebraicGeometry.EtaleClosedSupportTriangle
 import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
-import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import Sheaf.AlgebraicGeometry.EtaleProEtaleExceptionalTransport
 import Sheaf.AlgebraicGeometry.FiniteConstantProjectionFormula
 import Sheaf.AlgebraicGeometry.FiniteEtaleTwistLine

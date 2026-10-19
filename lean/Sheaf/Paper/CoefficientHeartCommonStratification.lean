@@ -12,7 +12,7 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.Abelian.Exact
 import WeilConjectures.ConstructibleSheaf.Refinement
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated

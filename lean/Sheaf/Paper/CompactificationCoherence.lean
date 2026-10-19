@@ -31,6 +31,7 @@ import Sheaf.Paper.EtaleOriginDerivedCategory
 import Sheaf.Paper.FiniteDirectImageComposition
 import Sheaf.Paper.ProEtaleProperOpenComparison
 import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 
 /-!
 # Compactification coherence on the witnessed etale-origin domain

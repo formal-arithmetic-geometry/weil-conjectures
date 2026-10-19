@@ -10,6 +10,7 @@ public import Sheaf.Paper.CompactSupportCoefficientAction
 public import Sheaf.Paper.FiniteFieldFiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import Sheaf.Paper.DirectImagesConstructible
 public import WeilConjectures.ZetaSeries
 import Sheaf.Paper.SfRationalizationKaroubi

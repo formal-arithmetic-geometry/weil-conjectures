@@ -37,9 +37,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
 import Sheaf.AlgebraicGeometry.SupportRestrictionTriangle
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
+import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-import Sheaf.AlgebraicGeometry.GlobalSectionsStalkComparison
+import WeilConjectures.AlgebraicGeometry.GlobalSectionsStalkComparison
 import WeilConjectures.SixFunctors.OpenClosed.Exact
 import WeilConjectures.SixFunctors.Finite.Stalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.MultipointedCurveModification
 public import Sheaf.TraceFormula.StrictSemistableCurve
-public import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.RingTheory.Valuation.ValuationSubring
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale

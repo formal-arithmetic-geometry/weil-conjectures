@@ -252,7 +252,7 @@ Source: Stacks 0A90 (blueprint: lem-pur-external-rhom-cone-pairing). -/
 @[instance_reducible]
 noncomputable def derivedBraiding (X : Scheme.{u}) :
     BraidedCategory (DerivedCategoryModule A X) :=
-  DerivedCategory.braidedCategory (Modules A X)
+  DerivedCategory.braidedCategory' (Modules A X)
 
 attribute [local instance] derivedBraiding
 

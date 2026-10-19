@@ -105,18 +105,9 @@ noncomputable def pulledHom ⦃Y : Scheme.{u}⦄ (q : Y ⟶ T) ⦃a b : ι⦄
         ((modulesPseudofunctor.map (ρ ∣_ U a).op.toLoc).toFunctor.obj (D.obj a)) ⟶
       (modulesPseudofunctor.map f₂.op.toLoc).toFunctor.obj
         ((modulesPseudofunctor.map (ρ ∣_ U b).op.toLoc).toFunctor.obj (D.obj b)) :=
-  (modulesPseudofunctor.mapComp' (ρ ∣_ U a).op.toLoc f₁.op.toLoc (f₁ ≫ ρ ∣_ U a).op.toLoc
-      (by rw [← Quiver.Hom.comp_toLoc, ← op_comp])).inv.toNatTrans.app
-      (D.obj a) ≫
-    pullHom (D.hom a b) (lift ρ f₁ f₂ (hf₁.trans hf₂.symm)) (f₁ ≫ ρ ∣_ U a) (f₂ ≫ ρ ∣_ U b)
-      (lift_fst ρ _ _ _) (lift_snd ρ _ _ _) ≫
-    (modulesPseudofunctor.mapComp' (ρ ∣_ U b).op.toLoc f₂.op.toLoc (f₂ ≫ ρ ∣_ U b).op.toLoc
-      (by rw [← Quiver.Hom.comp_toLoc, ← op_comp])).hom.toNatTrans.app
-      (D.obj b)
+  pullHomMapComp' (D.hom a b) (ρ ∣_ U a) (ρ ∣_ U b) (lift ρ f₁ f₂ (hf₁.trans hf₂.symm)) f₁ f₂
+    (lift_fst ρ _ _ _) (lift_snd ρ _ _ _)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 1000000 in
--- the kernel check of the final `rw` unfolds the pseudofunctor coherence isomorphisms
 /-- The pulled back gluing morphisms are compatible with further pullbacks. -/
 lemma pullHom_pulledHom ⦃Y' Y : Scheme.{u}⦄ (g : Y' ⟶ Y) (q : Y ⟶ T) (q' : Y' ⟶ T)
     (hq : g ≫ q = q') ⦃a b : ι⦄ (f₁ : Y ⟶ (ρ ⁻¹ᵁ U a).toScheme)
@@ -125,19 +116,9 @@ lemma pullHom_pulledHom ⦃Y' Y : Scheme.{u}⦄ (g : Y' ⟶ Y) (q : Y ⟶ T) (q'
     (gf₂ : Y' ⟶ (ρ ⁻¹ᵁ U b).toScheme) (hgf₁ : g ≫ f₁ = gf₁) (hgf₂ : g ≫ f₂ = gf₂) :
     pullHom (D.pulledHom ρ q f₁ f₂ hf₁ hf₂) g gf₁ gf₂ hgf₁ hgf₂ =
       D.pulledHom ρ q' gf₁ gf₂ (by rw [← hgf₁, Category.assoc, hf₁, hq])
-        (by rw [← hgf₂, Category.assoc, hf₂, hq]) := by
-  subst hgf₁ hgf₂ hq
-  have e := comp_lift ρ g f₁ f₂ (hf₁.trans hf₂.symm)
-  dsimp only [pulledHom]
-  rw [pullHom_congr (D.hom a b) e.symm _ _ (lift_fst ρ _ _ _) (lift_snd ρ _ _ _),
-    ← pullHom_pullHom (D.hom a b) (lift ρ f₁ f₂ (hf₁.trans hf₂.symm)) (f₁ ≫ ρ ∣_ U a)
-      (f₂ ≫ ρ ∣_ U b) g ((g ≫ f₁) ≫ ρ ∣_ U a) ((g ≫ f₂) ≫ ρ ∣_ U b) (lift_fst ρ _ _ _)
-      (lift_snd ρ _ _ _) (by simp) (by simp)]
-  dsimp [pullHom]
-  simp only [Functor.map_comp, Category.assoc]
-  rw [modulesPseudofunctor.mapComp'₀₁₃_inv_comp_mapComp'₀₂₃_hom_app_assoc _ _ _ _ _ _ _ _
-      (by cat_disch),
-    mapComp'₀₂₃_inv_comp_mapComp'₀₁₃_hom_app _ _ _ _ _ _ _ _ _ (by cat_disch)]
+        (by rw [← hgf₂, Category.assoc, hf₂, hq]) :=
+  pullHom_pullHomMapComp' (D.hom a b) _ _ _ f₁ f₂ _ _ g gf₁ gf₂ hgf₁ hgf₂ _
+    (by subst hgf₁ hgf₂; exact comp_lift ρ g f₁ f₂ _) _ _
 
 end PreDescentData
 

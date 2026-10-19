@@ -24,6 +24,7 @@ public import Sheaf.Paper.ExchangeProjectionSuppliedDomains
 public import Sheaf.Paper.PbcCoefficientTwists
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Adjunction.Mates
 

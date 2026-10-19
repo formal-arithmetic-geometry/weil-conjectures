@@ -6,7 +6,7 @@ Authors: SHEAF groups NX and E5
 module
 
 public import Sheaf.AlgebraicGeometry.ClassicalContinuityMap
-public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesImage
 import Sheaf.AlgebraicGeometry.ProEtaleLocallyClassicalEtaleCover
 

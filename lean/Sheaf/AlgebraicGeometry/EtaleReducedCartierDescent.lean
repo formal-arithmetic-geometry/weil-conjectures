@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
-public import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.AlgebraicGeometry.FpqcFinerThanEtale
 import WeilConjectures.AlgebraicGeometry.Descent
 import WeilConjectures.AlgebraicGeometry.Modules.VeryAmple

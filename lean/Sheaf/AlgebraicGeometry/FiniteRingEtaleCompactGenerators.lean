@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
 public import Sheaf.CategoryTheory.CompactObject
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType

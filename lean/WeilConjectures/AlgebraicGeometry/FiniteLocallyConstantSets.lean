@@ -1,8 +1,9 @@
 /-
-Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Copyright (c) 2026 Bin Wu. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF contributors
+Authors: Bin Wu
 -/
+
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite

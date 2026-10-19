@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
 public import Sheaf.CategoryTheory.RingedSiteModules
-public import Sheaf.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
+public import WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf

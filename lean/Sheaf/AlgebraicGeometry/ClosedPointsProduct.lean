@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.Topology.JacobsonSpace
 import Sheaf.AlgebraicGeometry.ClosedPointField
-import Sheaf.AlgebraicGeometry.FibreProductPointResidueField
+import WeilConjectures.AlgebraicGeometry.FibreProductPointResidueField
 import WeilConjectures.AlgebraicGeometry.FibreProductPointResidueField
 
 /-!

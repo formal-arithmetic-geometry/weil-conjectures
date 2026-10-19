@@ -1,25 +1,29 @@
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.MvPowerSeries.Basic
-import Sheaf.AlgebraicGeometry.PureDimension
-import Sheaf.AlgebraicGeometry.DimensionLocallyAlgebraic
-import Sheaf.AlgebraicGeometry.DthFittingSmoothLocus
-import Sheaf.AlgebraicGeometry.EquidimensionalOpenLocalDimension
-import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
-import Sheaf.AlgebraicGeometry.FirstFittingSingularSubscheme
-import Sheaf.AlgebraicGeometry.NodalCurveLCICriterion
-import Sheaf.RingTheory.PresentationFittingIdeal
-import Sheaf.SixFunctors.TraceFormula.NodalFamilyFittingSingular
-import Sheaf.TraceFormula.CompleteIntersectionFibresLimitDescent
-import Sheaf.TraceFormula.PureRelativeDimensionFiniteStage
-import Sheaf.TraceFormula.UnramifiedLimitDescent
-import WeilConjectures.AlgebraicGeometry.Morphisms.UnramifiedBaseChangeOpen
-import WeilConjectures.AlgebraicGeometry.UnramifiedOverFieldDiscrete
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.MvPowerSeries.Basic
+public import Sheaf.AlgebraicGeometry.PureDimension
+public import Sheaf.AlgebraicGeometry.DimensionLocallyAlgebraic
+public import Sheaf.AlgebraicGeometry.DthFittingSmoothLocus
+public import Sheaf.AlgebraicGeometry.EquidimensionalOpenLocalDimension
+public import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
+public import Sheaf.AlgebraicGeometry.FirstFittingSingularSubscheme
+public import Sheaf.AlgebraicGeometry.NodalCurveLCICriterion
+public import Sheaf.RingTheory.PresentationFittingIdeal
+public import Sheaf.SixFunctors.TraceFormula.NodalFamilyFittingSingular
+public import Sheaf.TraceFormula.CompleteIntersectionFibresLimitDescent
+public import Sheaf.TraceFormula.PureRelativeDimensionFiniteStage
+public import Sheaf.TraceFormula.UnramifiedLimitDescent
+public import WeilConjectures.AlgebraicGeometry.Morphisms.UnramifiedBaseChangeOpen
+public import WeilConjectures.AlgebraicGeometry.UnramifiedOverFieldDiscrete
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+
+@[expose] public section
 
 /-! # Finite-type approximation of an affine nodal family
 

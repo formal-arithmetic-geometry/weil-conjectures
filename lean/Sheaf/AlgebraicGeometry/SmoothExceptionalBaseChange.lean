@@ -20,7 +20,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionExchange
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided

@@ -131,7 +131,7 @@ theorem module_extensionByZero_stalk_maps (X : RingedSpace.{u}) :
           (∀ (W W' : Opens X) (h : W ≤ W') (x : X) (hx : x ∈ W),
             (e W x hx).hom ≫ (RingedSpace.moduleStalkFunctor X x).map (iota W W' h) =
               (e W' x (h hx)).hom)) := by
-  exact ⟨ModuleExtensionByZeroStalkOutside X,
+  exact ⟨moduleExtensionByZero_stalk_outside X,
     ⟨ModuleExtensionByZeroStalkInside X, ModuleExtensionByZeroStalkTransitions X⟩⟩
 
 end AlgebraicGeometry

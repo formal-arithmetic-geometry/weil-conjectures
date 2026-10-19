@@ -17,7 +17,7 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.RingTheory.Noetherian.Defs
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import Sheaf.AlgebraicGeometry.CompactifiableOverField
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.AffineSpace
 import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons

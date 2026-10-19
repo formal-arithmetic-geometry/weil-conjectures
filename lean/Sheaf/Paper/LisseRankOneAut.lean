@@ -16,7 +16,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.Topology.LocallyConstant.Algebra
 import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
-import Sheaf.ConstructibleSheaf.ConstantModuleLocallyConstant
+import WeilConjectures.ConstructibleSheaf.ConstantModuleLocallyConstant
 import Sheaf.CategoryTheory.SiteConstantModuleFunctorGeneral
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Mathlib.CategoryTheory.Sites.LocallyBijective

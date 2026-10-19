@@ -10,6 +10,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 import Sheaf.AlgebraicGeometry.EtaleModuleSectionClosedSupport
 import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
 import WeilConjectures.AlgebraicGeometry.FiniteOverField
+import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
 
 /-!
 # Compact sections of a quasi-compact étale geometric fibre

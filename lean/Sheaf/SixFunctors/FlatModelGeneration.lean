@@ -5,7 +5,7 @@ Authors: SHEAF group Q64
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.Paper.ProEtaleConstructibleCoefficientSheaf
 public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
 public import WeilConjectures.Topology.Stratification

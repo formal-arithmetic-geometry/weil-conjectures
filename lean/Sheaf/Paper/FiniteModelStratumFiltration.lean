@@ -15,7 +15,7 @@ public import Mathlib.Topology.NoetherianSpace
 import Sheaf.Paper.OpenFiltrationSuccessor
 import all Sheaf.Paper.ContinuousConstructibleIntegralGluing
 import WeilConjectures.ConstructibleSheaf.Devissage
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.Paper.ReducedSourceFactors
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 

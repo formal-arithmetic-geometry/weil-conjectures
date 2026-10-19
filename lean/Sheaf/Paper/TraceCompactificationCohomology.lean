@@ -28,6 +28,7 @@ import Sheaf.Paper.FiniteCoefficientPoint
 import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 import Sheaf.Paper.SfCommonStageDirectImage
 import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
 
 /-!

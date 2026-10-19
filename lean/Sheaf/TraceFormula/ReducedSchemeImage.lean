@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.Paper.ReducedSourceFactors
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 

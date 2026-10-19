@@ -17,6 +17,7 @@ import Sheaf.Paper.DerivedPullbackTensorHom
 import Sheaf.Paper.QcqsCompactSupportRealization
 import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
 import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 import Sheaf.Paper.SmoothPurityMap
 /-! # Rational purity and the geometric-Frobenius adjunction mate
 

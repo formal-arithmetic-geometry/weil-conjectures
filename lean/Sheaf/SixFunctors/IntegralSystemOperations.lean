@@ -19,6 +19,7 @@ public import Sheaf.Paper.SfIntegralReductionTower
 public import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import Sheaf.Paper.IntegralCompactSupportCoefficientData
 public import Sheaf.Paper.CompletedPullbackTensorComparison
 public import Sheaf.Paper.SfCompactSupportRestrictionOfScalars

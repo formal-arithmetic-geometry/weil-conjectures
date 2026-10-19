@@ -15,11 +15,11 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism
+import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
 import WeilConjectures.ConstructibleSheaf.OpenClosed
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
@@ -34,9 +34,9 @@ import Sheaf.AlgebraicGeometry.ConstructibleSubsheafNoetherian
 import WeilConjectures.SixFunctors.Finite.Stalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.ConstructibleSheaf.Pullback
-import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.OpenImmersionRestriction
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.SecSmoothPurity.FinReductionOpenDirectImage
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm

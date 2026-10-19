@@ -6,7 +6,7 @@ Authors: SHEAF group NY
 module
 
 public import Sheaf.AlgebraicGeometry.ResolutionInvariantCalculusData
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Sheaf.TraceFormula.SmoothGeometricallyNormal
 import Sheaf.RingTheory.FlatUnderRegular

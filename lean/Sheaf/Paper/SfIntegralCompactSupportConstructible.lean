@@ -15,7 +15,7 @@ import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 import Sheaf.CategoryTheory.RingedSliceExtensionTensor
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Paper.IntegralReductionTowerWellDefined
@@ -23,6 +23,7 @@ import Sheaf.CategoryTheory.Triangulated.DerivedLimitMorphism
 
 import Sheaf.CategoryTheory.Limits.TowerTransitionEndomorphism
 import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Noetherian

@@ -10,6 +10,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.SixFunctors.Etale.Derived.DerivedComplete
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
@@ -102,6 +103,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [I
   [HasCompactification aX]
 
 /-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
+
+Also blueprint `prop-trf-compact-support-perfectness`: Compact-support perfectness (compactly
+supported cohomology).
 
 **`RΓ_c(X, K)` is perfect.** Let `Λ` be a finite ring whose exponent is invertible in the
 separably closed field `k`, `X` separated of finite type over `k` and `K ∈ Dctf(X, Λ)`. Then
@@ -269,7 +273,8 @@ theorem isPerfect_rightDerivedGlobalSections_integral [QuasiCompact aX] (hI : I.
     exact ⟨(DerivedCategory.boundedConstructible _ _).prop_of_iso (e.app K).symm
         (boundedConstructible_rightDerivedLowerStar _ aX c.g c.i c.comm.symm _ hN hNY hbc),
       (DerivedCategory.torAmplitudeIn _ _ _ _).prop_of_iso (e.app K).symm
-        (torAmplitudeIn_rightDerivedLowerStar _ aX c.g c.i c.comm.symm d hd a b _ hN hNY hbc hta)⟩
+        (torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing _ aX c.g c.i c.comm.symm d hd a b
+          _ hN hNY hbc hta)⟩
   exact (isPerfect_compactlySupportedGlobalSections_integral I c.g hI _ hK').of_iso
     ((compactlySupportedGlobalSectionsIsoOfIsProper _ c.g).app _ ≪≫
       (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ c.i).app K)

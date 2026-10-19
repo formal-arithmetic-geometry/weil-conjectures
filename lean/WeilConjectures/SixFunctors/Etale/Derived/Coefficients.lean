@@ -48,7 +48,14 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
 
-/-- The derived category `D(X_ét, Λ)` of étale sheaves of `Λ`-modules on `X`. -/
+/-- Blueprint `def-weil-pbc-derived-categories`: Derived categories of etale sheaves
+
+The derived category `D(X_ét, Λ)` of étale sheaves of `Λ`-modules on `X`: the localization of
+the cochain complexes of sheaves of `Λ`-modules on the small étale site at the quasi-isomorphisms
+(`DerivedCategory`). Its subcategories `D⁺(X_ét, Λ)` and `Dᵇ(X_ét, Λ)` are
+`DerivedCategory.Plus` and `DerivedCategory.Bounded`, the objects whose cohomology sheaves
+`DerivedCategory.homologyFunctor _ i` vanish below some degree, resp. outside a finite range
+(`DerivedCategory.isGE_iff`, `DerivedCategory.isLE_iff`). -/
 abbrev DerivedCategoryModule : Type (u + 2) :=
   DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
 

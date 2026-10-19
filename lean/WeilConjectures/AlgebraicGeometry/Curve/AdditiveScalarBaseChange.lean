@@ -1,15 +1,18 @@
 /-
-Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Copyright (c) 2026 Bin Wu. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group J1
+Authors: Bin Wu
 -/
 module
+
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
+
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.Curve.AdditiveCohomologyComparison
-import Sheaf.AlgebraicGeometry.Curve.AdditiveCohomologyLinearBaseChange
+import WeilConjectures.AlgebraicGeometry.Curve.AdditiveCohomologyComparison
+import WeilConjectures.AlgebraicGeometry.Curve.AdditiveCohomologyLinearBaseChange
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 
@@ -213,6 +216,10 @@ theorem exists_additive_scalar_base_change
   have : IsProper (C ↘ Spec (.of k)) := inferInstanceAs (IsProper f)
   have : (SheafOfModules.unit C.ringCatSheaf).IsQuasicoherent :=
     SheafOfModules.isQuasicoherent_unit (R := C.ringCatSheaf)
+  have : (SheafOfModules.unit C.ringCatSheaf).IsInvertible :=
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
+  have : (SheafOfModules.unit C.ringCatSheaf).IsFiniteLocallyFree :=
+    SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _
   have : (SheafOfModules.unit C.ringCatSheaf).IsFinitePresentation :=
     SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
   have := Scheme.Modules.finiteDimensional_H_of_isProper (k := k)

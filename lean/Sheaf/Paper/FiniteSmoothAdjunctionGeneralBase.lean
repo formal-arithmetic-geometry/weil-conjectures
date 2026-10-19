@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.FiniteSmoothAdjunctionData
 import WeilConjectures.Compactification.NagataCompactification
-import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
 import Sheaf.Paper.FiniteReductionConstructibility
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison

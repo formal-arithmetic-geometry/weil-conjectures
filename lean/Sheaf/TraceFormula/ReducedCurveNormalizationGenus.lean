@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.Irreducible
 public import Sheaf.AlgebraicGeometry.PureDimension
-public import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Curve

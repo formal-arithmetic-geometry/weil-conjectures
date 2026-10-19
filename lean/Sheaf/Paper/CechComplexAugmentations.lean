@@ -5,6 +5,7 @@ Authors: SHEAF group G3
 -/
 module
 
+import Sheaf.AlgebraicGeometry.ModuleCechZeroLemmas
 public import Sheaf.AlgebraicGeometry.ModuleCechComparison
 import all Sheaf.AlgebraicGeometry.ModuleCechComparison
 

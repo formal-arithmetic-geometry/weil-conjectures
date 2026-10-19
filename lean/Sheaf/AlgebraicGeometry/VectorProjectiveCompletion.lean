@@ -11,6 +11,7 @@ public import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
 public import WeilConjectures.AlgebraicGeometry.RelativeProj.Basic
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import WeilConjectures.AlgebraicGeometry.RelativeProj.Functoriality

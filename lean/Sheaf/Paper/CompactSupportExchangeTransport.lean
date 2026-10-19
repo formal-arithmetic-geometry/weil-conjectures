@@ -15,6 +15,7 @@ public import Sheaf.Paper.RingedEtaleOriginWitness
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 import Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChange
 import Sheaf.AlgebraicGeometry.FiniteOpenBaseChangeNormalized
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor

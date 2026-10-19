@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.AlgebraicGeometry.Sites.DerivedStalk
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.RingTheory.Noetherian.Defs

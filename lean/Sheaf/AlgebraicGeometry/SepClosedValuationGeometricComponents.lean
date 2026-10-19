@@ -9,7 +9,7 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.ResidueField
-public import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.RingTheory.ValuationRingNormal
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Sheaf.AlgebraicGeometry.SubsetGeometricIrreducibility

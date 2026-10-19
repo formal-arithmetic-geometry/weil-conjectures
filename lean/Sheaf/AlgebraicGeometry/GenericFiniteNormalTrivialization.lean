@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.ExcellentRing
 public import Mathlib.AlgebraicGeometry.Properties
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed

@@ -20,7 +20,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
@@ -41,7 +41,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
 import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom

@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Products
 public import Mathlib.Algebra.Category.ModuleCat.Colimits
 import Mathlib.Algebra.DirectSum.Module
 public import Sheaf.AlgebraicGeometry.EtaleSectionProperSupport
-public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 
 /-!
 # Compactly supported sections on an étale scheme

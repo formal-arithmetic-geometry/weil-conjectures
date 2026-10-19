@@ -8,13 +8,14 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry
-public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence

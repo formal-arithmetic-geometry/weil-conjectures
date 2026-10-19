@@ -1,5 +1,6 @@
 module
 
+import Sheaf.AlgebraicGeometry.ModuleCechZeroLemmas
 public import Sheaf.Paper.CechCupResolutionComparisonData
 import all Sheaf.AlgebraicGeometry.ModuleCechComparison
 

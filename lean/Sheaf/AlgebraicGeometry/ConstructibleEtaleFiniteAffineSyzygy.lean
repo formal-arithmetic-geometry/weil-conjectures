@@ -5,7 +5,7 @@ Authors: SHEAF group Q119
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteZeroCokernel
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap

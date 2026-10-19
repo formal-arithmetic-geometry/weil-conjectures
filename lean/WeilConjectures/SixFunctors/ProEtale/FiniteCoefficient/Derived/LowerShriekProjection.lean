@@ -102,7 +102,10 @@ noncomputable def leftDerivedUpperStarCompactificationIso :
 
 variable [ProEtale.UpperStarPreservesFlat A]
 
-/-- The **projection map** `PF_c : Rf_!(c)K ⊗ᴸ L ⟶ Rf_!(c)(K ⊗ᴸ Lf^*L)` for a
+/-- Blueprint `def-exchange-projection`: Exchange and projection transformations, the
+projection transformation `PF`.
+
+The **projection map** `PF_c : Rf_!(c)K ⊗ᴸ L ⟶ Rf_!(c)(K ⊗ᴸ Lf^*L)` for a
 compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f`, as a natural transformation of bifunctors
 `D(X_proét) ⥤ D(Y_proét) ⥤ D(Y_proét)`. It is the composite
 ```
@@ -139,7 +142,10 @@ lemma projectionMapOfCompactification_app_app
           ((leftDerivedUpperStarCompactificationIso A c).hom.app L))) :=
   rfl
 
-/-- The **projection map** `PF : Rf_!K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^*L)` for a morphism
+/-- Blueprint `sk-def-sf-exchanges`: Exchange and projection transformations, typed (the
+projection transformation `PF_{f,K,L}` on the pro-étale sites).
+
+The **projection map** `PF : Rf_!K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^*L)` for a morphism
 `f : X ⟶ Y` admitting a compactification: the projection map
 `AlgebraicGeometry.ProEtale.projectionMapOfCompactification` for the chosen compactification
 `HasCompactification.compactification f`. -/

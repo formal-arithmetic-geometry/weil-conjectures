@@ -8,8 +8,8 @@ module
 public import Sheaf.Paper.CompletedConstantFiniteComplexRealization
 public import Sheaf.Paper.AdicCoefficientDatumCompleted
 public import Sheaf.Paper.SequentialDerivedInverseLimitCompleted
-public import Sheaf.Paper.KoszulComplex
-public import Sheaf.Paper.KoszulDifferential
+public import WeilConjectures.AlgebraicGeometry.KoszulComplex
+public import WeilConjectures.AlgebraicGeometry.KoszulDifferential
 public import Mathlib.Algebra.Homology.Embedding.Extend
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCocone
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits

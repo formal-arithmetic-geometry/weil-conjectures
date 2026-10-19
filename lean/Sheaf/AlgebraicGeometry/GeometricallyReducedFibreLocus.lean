@@ -20,7 +20,7 @@ import Mathlib.Algebra.MvPolynomial.Basic
 import Mathlib.RingTheory.Ideal.Quotient.Operations
 import WeilConjectures.Mathlib.Algebra.Category.Ring.FilteredColimits
 import Sheaf.TraceFormula.GeometricReducedFibreLocusBaseChange
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.AlgebraicGeometry.NoetherianConstructibleSubsetCriterion
 import Sheaf.AlgebraicGeometry.GeometricallyReducedAlgebraicClosureTest
 

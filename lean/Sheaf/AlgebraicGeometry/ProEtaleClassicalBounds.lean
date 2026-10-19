@@ -13,7 +13,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback

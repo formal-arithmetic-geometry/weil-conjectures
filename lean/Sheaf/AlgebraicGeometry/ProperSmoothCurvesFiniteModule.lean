@@ -35,7 +35,7 @@ import Sheaf.AlgebraicGeometry.ProperSmoothConnectedFibreDimensionLoci
 import Sheaf.AlgebraicGeometry.ProperSmoothCurvesPrimeCoefficients
 import Sheaf.AlgebraicGeometry.QuasiFiniteShriekConstructible
 import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 
 /-!
 # Constructibility for proper smooth families of curves with finite coefficients

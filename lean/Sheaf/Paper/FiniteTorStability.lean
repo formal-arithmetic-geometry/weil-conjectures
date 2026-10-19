@@ -38,6 +38,7 @@ public import Sheaf.AlgebraicGeometry.AmbientExceptionalRightAdjoint
 public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroExact
 public import Sheaf.AlgebraicGeometry.SfFullCohomologicalDimension
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 import Sheaf.Paper.PullbackTorAmplitude
 import Sheaf.Paper.FiniteCoefficientTensorCtf
 import Sheaf.Algebra.Homology.DerivedTensor
@@ -62,7 +63,7 @@ import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.Paper.FiniteConstructibleHom
 import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 import Sheaf.AlgebraicGeometry.DerivedCategories
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic

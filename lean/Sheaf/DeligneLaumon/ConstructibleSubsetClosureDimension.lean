@@ -16,7 +16,7 @@ import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.Topology.Irreducible
 import Mathlib.Topology.NoetherianSpace
 import Sheaf.AlgebraicGeometry.DimensionLocallyAlgebraic
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-! # Dimension of a constructible subset and its closure over a field
 

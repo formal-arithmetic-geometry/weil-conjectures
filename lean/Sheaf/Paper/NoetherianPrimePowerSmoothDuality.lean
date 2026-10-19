@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Sheaf.AlgebraicGeometry.CompactifiableOverField
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import Sheaf.AlgebraicGeometry.FiniteEtaleTateTwist
 
 import Sheaf.AlgebraicGeometry.VectorBundleIntegration

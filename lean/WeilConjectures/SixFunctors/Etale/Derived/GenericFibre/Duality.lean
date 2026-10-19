@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.DoubleDual
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.ClosedSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.InternalHomGeneric
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.VerdierPreservation
 public import WeilConjectures.SixFunctors.Etale.Derived.InvertiblePullback
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicallySmooth
@@ -85,9 +86,12 @@ possible Zariski locally on `X`), and let `X' = X_T ⟶ P' = P_T ⟶ T` be the b
 
 for an invertible `L`, namely `L = Lg^* L(i ≫ p)^* ω_S` (for `S = 𝔸¹_k`, `ω_S ≅ Λ(1)[2]`).
 For `S` smooth over `k`, the hypothesis `hS` is
-`AlgebraicGeometry.Etale.isInvertible_dualizingComplex`. -/
+`AlgebraicGeometry.Etale.isInvertible_dualizingComplex`. The hypothesis that `S` be
+quasi-separated, automatic for `S` of finite type over `k`, is that of smooth base change for
+`p`. -/
 theorem exists_iso_leftDerivedUpperStar_dualizingComplex_of_generic {k : Type u} [Field k]
-    {S : Scheme.{u}} [IsIntegral S] (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS]
+    {S : Scheme.{u}} [IsIntegral S] [QuasiSeparatedSpace S] (aS : S ⟶ Spec (.of k))
+    [LocallyOfFiniteType aS]
     [QuasiCompact aS] [HasCompactification aS] [HasInvertibleExponent Λ S]
     (hS : DerivedCategory.isInvertible Λ S (dualizingComplex (ModuleCat.{u + 1} Λ) aS))
     {T : Scheme.{u}} [IsNoetherian T] (t : T ⟶ S) (ht : ∀ x, t.base x = genericPoint S)
@@ -112,6 +116,7 @@ theorem exists_iso_leftDerivedUpperStar_dualizingComplex_of_generic {k : Type u}
   obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_dualizingComplex Λ i p
   -- `ω_{X'/T} ≅ Ri'^! ω_{p'}`
   obtain ⟨e₃⟩ := nonempty_iso_rightDerivedUpperShriek_dualizingComplex Λ i' p'
+  have : QuasiCompact p' := MorphismProperty.of_isPullback sqP inferInstance
   -- `g_P^* ω_p ≅ ω_{p'}`, smooth base change
   obtain ⟨e₄⟩ := nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar Λ p r sqP
   -- the closed-support generic exchange `g^* Ri^! ω_p ≅ Ri'^! g_P^* ω_p`
@@ -167,7 +172,8 @@ The hypothesis `hbr`, that `Lg^*` is braided for the derived braidings, is
 `AlgebraicGeometry.Etale.leftDerivedUpperStarBraided`. -/
 theorem isIso_leftDerivedUpperStar_map_verdierDualDoubleDual_app_iff_of_generic {k : Type u}
     [Field k] [PerfectField k] [HasInvertibleExponent Λ (Spec (.of k))]
-    {S : Scheme.{u}} [IsIntegral S] (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS]
+    {S : Scheme.{u}} [IsIntegral S] [QuasiSeparatedSpace S] (aS : S ⟶ Spec (.of k))
+    [LocallyOfFiniteType aS]
     [QuasiCompact aS] [HasCompactification aS] [HasInvertibleExponent Λ S]
     (hS : DerivedCategory.isInvertible Λ S (dualizingComplex (ModuleCat.{u + 1} Λ) aS))
     {T : Scheme.{u}} [IsNoetherian T] (t : T ⟶ S) (ht : ∀ x, t.base x = genericPoint S)

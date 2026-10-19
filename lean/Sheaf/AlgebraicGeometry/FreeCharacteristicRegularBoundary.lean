@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
 public import Sheaf.AlgebraicGeometry.IsRegularScheme
 public import Sheaf.AlgebraicGeometry.NormalCrossingsDivisor
-public import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.RingTheory.StrictHenselizationNoetherian
 import Sheaf.RingTheory.RegularLocalQuotientKernelParameters
 import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence

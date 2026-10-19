@@ -13,7 +13,7 @@ public import Mathlib.Topology.KrullDimension
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
 import Sheaf.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 
 /-!

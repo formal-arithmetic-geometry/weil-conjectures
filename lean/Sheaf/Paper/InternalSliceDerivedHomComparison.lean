@@ -407,7 +407,7 @@ Source: Stacks 06YL (blueprint: def-sfb-internal-slice-derived-hom-comparison). 
 instance sliceBraiding : BraidedCategory (DerivedCategory (SliceInternal Λ X U)) :=
   Eq.mp (congrArg (fun m ↦ @BraidedCategory (DerivedCategory (SliceInternal Λ X U)) _ m)
     (sliceMonoidal_eq_localization Λ X U).symm)
-    (DerivedMonoidal.braidedCategory DerivedCategory.Qh
+    (DerivedMonoidal.braidedCategory' DerivedCategory.Qh
       (HomotopyCategory.quasiIso (SliceInternal Λ X U) (.up ℤ)))
 
 /-- The native closed-structure counit, written with Hom as the first tensor factor.

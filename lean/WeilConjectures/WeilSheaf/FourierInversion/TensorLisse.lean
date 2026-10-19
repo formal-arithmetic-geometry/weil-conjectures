@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.WeilSheaf.FourierInversion.Defs
 public import WeilConjectures.WeilSheaf.FourierTateTwist.ConstantTwist
+public import WeilConjectures.WeilSheaf.IhomLisse.CompWeil
 public import WeilConjectures.WeilSheaf.LowerStarId
 public import WeilConjectures.WeilSheaf.ProperCohomology.LowerShriek
 public import WeilConjectures.WeilSheaf.TateTwist
@@ -84,13 +85,43 @@ theorem WeilComplex.nonempty_iso_tensorLisse_of_iso {G G' : WeilSheaf k₀ l X} 
     Nonempty (WeilComplex.tensorLisse G hG ≅ WeilComplex.tensorLisse G' hG') :=
   ⟨WeilComplex.ihomLisseIsoOfIso (WeilSheaf.dualIsoOfIso e hG hG') _ _⟩
 
+/-- Internal homs out of the duals of two lisse Weil sheaves compose to the internal hom out of
+the dual of their tensor product: `[G^∨, [H^∨, -]] ≅ [(G ⊗ H)^∨, -]`. -/
+noncomputable def ProEtaleWeilSheaf.ihomFunctorDualCompIhomFunctorDualIso (G H : WeilSheaf k₀ l X)
+    (hG : G.IsLisse) (hH : H.IsLisse) :
+    ProEtaleWeilSheaf.ihomFunctor k₀ l X (H.dual hH).obj ⋙
+        ProEtaleWeilSheaf.ihomFunctor k₀ l X (G.dual hG).obj ≅
+      ProEtaleWeilSheaf.ihomFunctor k₀ l X
+        ((G.tensorObj H hG).dual (ProEtale.IsAdicLisseSheaf.ihom hG.dual hH)).obj :=
+  (ProEtaleWeilSheaf.ihomFunctorIsoIhomFunctorCompIhomFunctor (G.dual hG).obj H.obj
+    (ProEtaleWeilSheaf.adicConstant k₀ l X) hG.dual).symm
+
 /-- Tensoring successively with two lisse Weil sheaves is tensoring with their tensor
 product: `G ⊗ (H ⊗ K) ≅ (G ⊗ H) ⊗ K`. -/
 theorem WeilComplex.nonempty_iso_tensorLisse_comp (G H : WeilSheaf k₀ l X) (hG : G.IsLisse)
     (hH : H.IsLisse) :
     Nonempty (WeilComplex.tensorLisse H hH ⋙ WeilComplex.tensorLisse G hG ≅
-      WeilComplex.tensorLisse (G.tensorObj H hG) (ProEtale.IsAdicLisseSheaf.ihom hG.dual hH)) :=
-  sorry
+      WeilComplex.tensorLisse (G.tensorObj H hG) (ProEtale.IsAdicLisseSheaf.ihom hG.dual hH)) := by
+  unfold WeilComplex.tensorLisse
+  have := ProEtaleWeilSheaf.preservesFiniteColimits_ihomFunctor (G.dual hG).obj hG.dual
+  have := ProEtaleWeilSheaf.preservesFiniteColimits_ihomFunctor (H.dual hH).obj hH.dual
+  have := ProEtaleWeilSheaf.preservesFiniteColimits_ihomFunctor
+    ((G.tensorObj H hG).dual (ProEtale.IsAdicLisseSheaf.ihom hG.dual hH)).obj
+    (WeilSheaf.IsLisse.dual (F := G.tensorObj H hG) (ProEtale.IsAdicLisseSheaf.ihom hG.dual hH))
+  exact ⟨((WeilComplex.objectProperty k₀ l X).fullyFaithfulι.whiskeringRight _).preimageIso
+    (Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (WeilComplex.ihomLisseCompιIso _ hG.dual) ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (WeilComplex.ihomLisseCompιIso _ hH.dual) _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _
+        (Functor.isoWhiskerRight (Functor.rightDerivedFunctorIsoMapDerivedCategory _) _ ≪≫
+          Functor.isoWhiskerLeft _ (Functor.rightDerivedFunctorIsoMapDerivedCategory _) ≪≫
+          (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+          Functor.mapDerivedCategoryNatIso
+            (ProEtaleWeilSheaf.ihomFunctorDualCompIhomFunctorDualIso G H hG hH) ≪≫
+          (Functor.rightDerivedFunctorIsoMapDerivedCategory _).symm) ≪≫
+      (WeilComplex.ihomLisseCompιIso _ _).symm)⟩
 
 /-- Tensoring with the constant Weil sheaf `ℚ̄_ℓ` is the identity. -/
 theorem WeilComplex.nonempty_iso_tensorLisse_adicConstant :

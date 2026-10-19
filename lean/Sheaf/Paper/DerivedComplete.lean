@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.IntegralReductionTower
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 
 /-!
 # Derived complete objects for completed integral pro-etale coefficients

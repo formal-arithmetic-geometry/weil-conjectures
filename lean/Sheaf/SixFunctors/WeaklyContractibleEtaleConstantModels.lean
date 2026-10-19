@@ -5,7 +5,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Sites.WeaklyContractible
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients

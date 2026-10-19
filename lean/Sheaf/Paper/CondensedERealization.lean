@@ -47,7 +47,7 @@ import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import Mathlib.Topology.NoetherianSpace
 import Mathlib.AlgebraicGeometry.Properties
 import Mathlib.Topology.KrullDimension
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.Paper.PbcActualStrictPullback
 import Sheaf.Paper.ConstantCompletionEquivalence

@@ -116,7 +116,7 @@ Source: blueprint main-20261015, derived projection formula and its symmetric ve
 def condensedDerivedBraiding (X : Scheme.{u}) :
     BraidedCategory (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) :=
-  DerivedCategory.braidedCategory _
+  DerivedCategory.braidedCategory' _
 
 /-- The derived open adjunction, transported to the total derived module pullback using
 its canonical identification with levelwise restriction.

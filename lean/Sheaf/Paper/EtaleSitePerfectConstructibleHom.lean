@@ -19,12 +19,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 import WeilConjectures.ConstructibleSheaf.Defs
 import Sheaf.Algebra.Homology.HomComplex
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Mathlib.Algebra.Homology.HomologySequence
 import WeilConjectures.ConstructibleSheaf.Refinement
 import Mathlib.AlgebraicGeometry.Sites.MorphismProperty
-import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
-import Sheaf.AlgebraicGeometry.IsFiniteTypeEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import WeilConjectures.AlgebraicGeometry.IsFiniteTypeEtaleModuleSheaf
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
 import WeilConjectures.ConstructibleSheaf.Biproduct
 import WeilConjectures.ConstructibleSheaf.KernelCokernel

@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.AlgebraicGeometry.EtaleShriekOpenExchangeAdjoint

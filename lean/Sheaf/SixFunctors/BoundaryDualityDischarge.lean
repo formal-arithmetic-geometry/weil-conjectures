@@ -19,7 +19,7 @@ import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
 import Sheaf.Algebra.Homology.HomTensorTotal
 import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
-import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import Sheaf.Paper.DualityPairing
 import Sheaf.AlgebraicGeometry.DerivedCategories
 import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory

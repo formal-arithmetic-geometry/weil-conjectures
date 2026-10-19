@@ -1,0 +1,136 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarCoproducts
+
+/-!
+# The proper direct image for the `ℓ`-adic coefficient rings: the inputs
+
+Let `ℓ` be a prime, `k` a field in which `ℓ` is invertible, and `p : Z ⟶ Y` a proper morphism to
+a noetherian `k`-scheme. For the `ℓ`-adic condensed coefficient rings `Λ = E, 𝒪_E, ℚ̄_ℓ`, the
+properties of the derived direct image `Rp_*` on module objects over `Λ` used for the
+compact-support direct image on `Loc(Dᵇc)` (blueprint `det-sf-comp-coherence-single`) are:
+
+* `Rp_*` maps `Dᵇc(Z)⟦Λ⟧` into `Dᵇc(Y)⟦Λ⟧` (blueprint `sk-thm-sfb-proper-base-change`):
+  `boundedConstructible_rightDerivedLowerStar_obj_of_isProper_continuousMapRingObj`,
+  `boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicIntegersRingObj`,
+  `boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicAlgClRingObj`;
+* `Rp_*` has finite amplitude on the ind-constructible heart and commutes with direct sums there
+  (`AlgebraicGeometry.ProEtale.CondensedRing.ProperLowerStarHeartHypotheses`, blueprints
+  `sk-lem-proper-heart-bound` for `E` and `ℚ̄_ℓ`, `det-prop-int-compactness-direct-sums` (1) for
+  `𝒪_E`): `properLowerStarHeartHypotheses_continuousMapRingObj`,
+  `properLowerStarHeartHypotheses_padicIntegersRingObj`,
+  `properLowerStarHeartHypotheses_padicAlgClRingObj`.
+
+From the latter, the restriction of `Rp_*` to `Loc(Dᵇc(Z)⟦Λ⟧)` preserves direct sums
+(`AlgebraicGeometry.ProEtale.CondensedRing.ProperLowerStarHeartHypotheses.preservesColimitsOfShape`,
+blueprint `det-prop-int-compactness-direct-sums` (2), (3), proved by dévissage and left
+completeness).
+
+## Sorried input
+
+All six statements above are `sorry`ed: they are the ℓ-adic finiteness theorems for proper
+morphisms (Bhatt–Scholze, Section 6.8), which rest on the reduction to torsion coefficients via
+derived completeness, the étale finiteness and cohomological dimension theorems for proper
+morphisms, and the Milnor sequence.
+-/
+
+@[expose] public section
+
+universe u
+
+open scoped CategoryTheory.Obj
+
+open CategoryTheory Abelian Limits
+
+open scoped CategoryTheory.Functor
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)]
+
+/-! ### The coefficient ring `E` -/
+
+include ℓ in
+/-- Blueprint `sk-thm-sfb-proper-base-change` (`det-thm-sfb-proper-base-change-rational` (1)):
+for the coefficient ring `E` of a finite extension `E` of `ℚ_ℓ` and a proper morphism
+`p : Z ⟶ Y` to a noetherian `k`-scheme, `Rp_*` maps `Dᵇc(Z)⟦E⟧` into `Dᵇc(Y)⟦E⟧`. -/
+theorem boundedConstructible_rightDerivedLowerStar_obj_of_isProper_continuousMapRingObj
+    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+    {Z Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [IsNoetherian Y] (p : Z ⟶ Y) [IsProper p]
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj.{u} E) Z)))
+    (hK : boundedConstructible _ K) :
+    boundedConstructible _ (R((p)_*⟦Profinite.continuousMapRingObj.{u} E⟧).obj K) :=
+  sorry
+
+include ℓ in
+/-- Blueprint `sk-lem-proper-heart-bound` (`det-proper-heart-bound-indcons`): for the coefficient
+ring `E` of a finite extension `E` of `ℚ_ℓ` and a proper morphism `p : Z ⟶ Y` to a noetherian
+`k`-scheme, `Rp_*` sends ind-constructible sheaves into degrees `≤ 2d + 1` (`d` bounding the
+dimensions of the fibres) and commutes with direct sums of them. -/
+theorem properLowerStarHeartHypotheses_continuousMapRingObj (E : Type) [NormedField E]
+    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] {Z Y : Scheme.{u}}
+    (aY : Y ⟶ Spec (.of k)) [IsNoetherian Y] (p : Z ⟶ Y) [IsProper p] :
+    ProperLowerStarHeartHypotheses (Profinite.continuousMapRingObj.{u} E) p :=
+  sorry
+
+/-! ### The coefficient ring `𝒪_E` -/
+
+include ℓ in
+/-- Blueprint `sk-thm-sfb-proper-base-change` (`det-thm-sfb-proper-base-change-integral` (1)):
+for the coefficient ring `𝒪_E` of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a proper morphism
+`p : Z ⟶ Y` to a noetherian `k`-scheme, `Rp_*` maps `Dᵇc(Z)⟦𝒪_E⟧` into `Dᵇc(Y)⟦𝒪_E⟧`. -/
+theorem boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicIntegersRingObj
+    (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+    [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] {Z Y : Scheme.{u}}
+    (aY : Y ⟶ Spec (.of k)) [IsNoetherian Y] (p : Z ⟶ Y) [IsProper p]
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) Z)))
+    (hK : boundedConstructible _ K) :
+    boundedConstructible _ (R((p)_*⟦Profinite.padicIntegersRingObj.{u} ℓ E⟧).obj K) :=
+  sorry
+
+/-- Blueprint `det-prop-int-compactness-direct-sums` (1): for the coefficient ring `𝒪_E` of a
+finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a proper morphism `p : Z ⟶ Y` to a noetherian
+`k`-scheme, `Rp_*` sends ind-constructible sheaves into degrees `≤ 2d + 1` (`d` bounding the
+dimensions of the fibres) and commutes with direct sums of them. -/
+theorem properLowerStarHeartHypotheses_padicIntegersRingObj (E : Type) [Field E]
+    [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
+    [FiniteDimensional ℚ_[ℓ] E] {Z Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [IsNoetherian Y]
+    (p : Z ⟶ Y) [IsProper p] :
+    ProperLowerStarHeartHypotheses (Profinite.padicIntegersRingObj.{u} ℓ E) p :=
+  sorry
+
+/-! ### The coefficient ring `ℚ̄_ℓ` -/
+
+/-- Blueprint `sk-thm-sfb-proper-base-change`: for the coefficient ring `ℚ̄_ℓ` and a proper
+morphism `p : Z ⟶ Y` to a noetherian `k`-scheme, `Rp_*` maps `Dᵇc(Z)⟦ℚ̄_ℓ⟧` into
+`Dᵇc(Y)⟦ℚ̄_ℓ⟧`. -/
+theorem boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicAlgClRingObj
+    {Z Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [IsNoetherian Y] (p : Z ⟶ Y) [IsProper p]
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) Z)))
+    (hK : boundedConstructible _ K) :
+    boundedConstructible _ (R((p)_*⟦Profinite.padicAlgClRingObj.{u} ℓ⟧).obj K) :=
+  sorry
+
+/-- Blueprint `sk-lem-proper-heart-bound` (`det-proper-heart-bound-indcons`): for the coefficient
+ring `ℚ̄_ℓ` and a proper morphism `p : Z ⟶ Y` to a noetherian `k`-scheme, `Rp_*` sends
+ind-constructible sheaves into degrees `≤ 2d + 1` (`d` bounding the dimensions of the fibres)
+and commutes with direct sums of them. -/
+theorem properLowerStarHeartHypotheses_padicAlgClRingObj {Z Y : Scheme.{u}}
+    (aY : Y ⟶ Spec (.of k)) [IsNoetherian Y] (p : Z ⟶ Y) [IsProper p] :
+    ProperLowerStarHeartHypotheses (Profinite.padicAlgClRingObj.{u} ℓ) p :=
+  sorry
+
+end AlgebraicGeometry.ProEtale.CondensedRing

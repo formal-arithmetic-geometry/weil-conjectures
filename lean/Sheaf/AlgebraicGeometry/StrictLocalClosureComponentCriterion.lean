@@ -5,7 +5,7 @@ Authors: SHEAF group Q11
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 public import Sheaf.AlgebraicGeometry.StrictHenselizationCanonicalMap
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Topology.KrullDimension

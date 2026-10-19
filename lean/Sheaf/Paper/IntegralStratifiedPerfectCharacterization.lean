@@ -17,7 +17,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.Paper.ConstantCompletionEquivalence
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.CategoryTheory.Triangulated.DerivedCountableProductsCore
+import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsCore
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
 import Sheaf.AlgebraicGeometry.NoetherianStratumDetection
 import Sheaf.Paper.ConstantModuleSectionProperties
@@ -28,7 +28,7 @@ import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
 import Sheaf.AlgebraicGeometry.FiniteRingDerivedLocalConstancy
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 public import Sheaf.Paper.ResidueLissePerfectLift
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonDerived
 import Sheaf.Paper.AdicCoefficientDatum
 import Sheaf.Paper.ProEtaleCanonicalTensorPullback

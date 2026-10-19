@@ -12,6 +12,7 @@ public import Sheaf.Paper.SfCompactSupportRestrictionOfScalars
 public import Sheaf.Paper.IntegralScalarExtensionWellDefined
 public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import Mathlib.CategoryTheory.Adjunction.Mates
 public import Mathlib.Algebra.Algebra.Shrink
 public import Mathlib.Algebra.Field.Shrink

@@ -75,7 +75,7 @@ Source: Stacks Tags 03EK, 0F0F (blueprint: lem-kun-geometric-point-derived-const
 This specializes the existing derived braiding; it chooses no additional structure. -/
 noncomputable def geometricPointIntegerDerivedSymmetry
     (K L : DerivedCategory (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))) : K ⊗ L ≅ L ⊗ K :=
-  DerivedMonoidal.braiding
+  DerivedMonoidal.braiding'
     (DerivedCategory.Qh (C := ModuleCat.{u + 1} (ULift.{u + 1} ℤ)))
     (HomotopyCategory.quasiIso (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) (.up ℤ)) K L
 

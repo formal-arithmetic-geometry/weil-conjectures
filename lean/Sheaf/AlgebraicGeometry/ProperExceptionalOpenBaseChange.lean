@@ -15,6 +15,7 @@ public import Sheaf.Paper.SfIntegralReductionTower
 public import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import Sheaf.AlgebraicGeometry.ProEtaleProperOpenSheafComparison
 public import Sheaf.AlgebraicGeometry.IntrinsicDerivedOpenAdjunction
 public import Sheaf.AlgebraicGeometry.SfFiniteExceptionalInverseImage

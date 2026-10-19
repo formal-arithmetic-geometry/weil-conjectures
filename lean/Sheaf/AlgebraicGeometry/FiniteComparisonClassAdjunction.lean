@@ -15,6 +15,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekIndependence
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekComparison

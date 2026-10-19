@@ -5,7 +5,7 @@ Authors: SHEAF group NP
 -/
 module
 
-public import Sheaf.RingTheory.AssociatedGradedRing
+public import WeilConjectures.RingTheory.AssociatedGradedRing
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.LinearAlgebra.FreeModule.Basic

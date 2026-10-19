@@ -6,7 +6,7 @@ Authors: SHEAF group Q32
 module
 public import Sheaf.Paper.SfIntegralCompactSupportConstructible
 public import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
-public import Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 public import Sheaf.Paper.IntegralOperationsWellDefined
 
 /-!

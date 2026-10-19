@@ -15,6 +15,9 @@ import WeilConjectures.SixFunctors.BaseChange.DerivedForget
 public import WeilConjectures.CategoryTheory.RingObjects.Ab
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
+import WeilConjectures.SixFunctors.BaseChange.Derived
+import WeilConjectures.SixFunctors.BaseChange.DerivedForget
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 
 /-!
 

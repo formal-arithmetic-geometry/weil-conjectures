@@ -5,38 +5,46 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimit
+
+
+public import WeilConjectures.AlgebraicGeometry.EtaleDirectedCohomologyColimit
+public import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
+
+
+public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 
 import WeilConjectures.AlgebraicGeometry.Curve.ConstructiblePrimeDevissage
-import Sheaf.AlgebraicGeometry.Curve.FinitePushforwardModuleAssertions
-import Sheaf.AlgebraicGeometry.Curve.NormalizationAssertionsTransfer
-import Sheaf.AlgebraicGeometry.Curve.FinitePushforwardOpenQuotientConstant
-import Sheaf.AlgebraicGeometry.Curve.ConstructibleApproximationAssertions
+import WeilConjectures.AlgebraicGeometry.Curve.FinitePushforwardModuleAssertions
+import WeilConjectures.AlgebraicGeometry.Curve.NormalizationAssertionsTransfer
+import WeilConjectures.AlgebraicGeometry.Curve.FinitePushforwardOpenQuotientConstant
+import WeilConjectures.AlgebraicGeometry.Curve.ConstructibleApproximationAssertions
 import WeilConjectures.AlgebraicGeometry.Curve.ReductionModuleAssertions
 import WeilConjectures.ConstructibleSheaf.GenericConstancy
 import WeilConjectures.AlgebraicGeometry.Curve.DenseIrreducibleOpens
-import Sheaf.AlgebraicGeometry.Curve.DenseOpenPrimeAssertions
+import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenPrimeAssertions
 import WeilConjectures.AlgebraicGeometry.Curve.DisjointOpenPrimeAssertions
-import Sheaf.AlgebraicGeometry.Curve.PrimeConstructiblePullback
-import Sheaf.AlgebraicGeometry.PullbackIsoPrimeTorsionDevissage
-import Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations
+import WeilConjectures.AlgebraicGeometry.Curve.PrimeConstructiblePullback
+import WeilConjectures.AlgebraicGeometry.PullbackIsoPrimeTorsionDevissage
+import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyFilteredColimit
+import WeilConjectures.AlgebraicGeometry.EtaleDirectedCohomologyColimitExtension
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
-import Sheaf.AlgebraicGeometry.ZeroDimensionalPullbackGlobalSections
-import Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePoints
+import WeilConjectures.AlgebraicGeometry.ZeroDimensionalPullbackGlobalSections
+import WeilConjectures.AlgebraicGeometry.ZeroDimensionalBaseChangePoints
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
-import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
+import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomologyExtension
 import WeilConjectures.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian
 import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import WeilConjectures.SixFunctors.Etale.Gabber
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
-import Sheaf.AlgebraicGeometry.Curve.NormalizationMonoProperties
+import WeilConjectures.AlgebraicGeometry.Curve.NormalizationMonoProperties
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
@@ -75,7 +83,7 @@ the hypotheses of the reduction statements) a sheaf of modules over `ULift (ZMod
   along the irreducible components of the dense open.
 - `AlgebraicGeometry.exists_mono_lowerShriek_constantModSheaf_lowerStar`: the normalisation
   exact sequence `0 → j_! 𝐅_ℓ → ν_* j'_! 𝐅_ℓ → Q → 0`.
-- `AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite`: the
+- `AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite_coefficients`: the
   assertions for `j_! 𝐅_ℓ` on a reduced curve follow from those on its normalisation.
 
 ## References
@@ -108,10 +116,11 @@ already dies on some `D_μ`, `λ ⟶ μ`. The compatibility with the pullback al
 extension is the naturality `AlgebraicGeometry.Etale.cohomologyMap_map` of the pullback maps.
 The statement holds for arbitrary (not only torsion) abelian sheaves and small filtered
 categories.
-(blueprint: `lemma-weil-pbc-curve-filtered-cohomology`) -/
+(blueprint: lemma-weil-pbc-curve-filtered-cohomology)
+-/
 @[stacks 03Q6]
 theorem Scheme.H_map_isColimit_of_isFiltered (X : Scheme.{u}) [CompactSpace X]
-    [QuasiSeparatedSpace X] {J : Type u} [SmallCategory J] [IsFiltered J]
+    [QuasiSeparatedSpace X] {J : Type w} [Category.{w'} J] [IsFiltered J]
     {D : J ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone D}
     (hc : IsColimit c) (q : ℕ) :
     (∀ x : Sheaf.H c.pt q, ∃ (j : J) (y : Sheaf.H (D.obj j) q),
@@ -281,7 +290,8 @@ cohomology sequences (and their pullbacks along a field extension) pass vanishin
 and bijectivity to the middle term, the hypotheses of the assertions being inherited by
 subsheaves and quotients, constructibility for subsheaves since `Λ` is noetherian; for `C₈` one uses
 `H³(X, F₁) = 0`, i.e. `C₁(X, F₁)`.
-(blueprint: `lemma-weil-pbc-eight-curve-devissage`) -/
+(blueprint: lemma-weil-pbc-eight-curve-devissage)
+-/
 theorem IsCurve.Assertions.of_shortExact [IsNoetherianRing Λ] {k : Type u} [Field k]
     {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f]
@@ -364,7 +374,9 @@ Spec k' -ι-> Spec k
 
 the pullback map `Hᵠ(C, F) ⟶ Hᵠ(C', ι'^* F)` is bijective for every `q`: both sides vanish for
 `q > 0`, and in degree zero both are the finite product of the stalks of `F` at the points of
-`C`. (blueprint: `lem-weil-pbc-zero-dimensional-field-extension`) -/
+`C`. (blueprint: `lem-weil-pbc-zero-dimensional-field-extension`) 
+(blueprint: lem-weil-pbc-zero-dimensional-field-extension)
+-/
 theorem IsCurve.bijective_cohomologyMap_of_topologicalKrullDim_le_zero {k k' : Type u}
     [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] {C C' : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsCurve f] (hC : topologicalKrullDim C ≤ 0)
@@ -444,7 +456,8 @@ sheaf of `F` as the filtered colimit of its constructible subsheaves
 (`AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered`), splits a constructible sheaf into
 its primary parts and dévisses an `r`-primary one along `0 → F[r] → F → F/F[r] → 0`
 (`AlgebraicGeometry.IsCurve.Assertions.of_shortExact`).
-(blueprint: `lem-weil-pbc-curve-constructible-reduction`) -/
+(blueprint: lem-weil-pbc-curve-constructible-reduction)
+-/
 theorem IsCurve.bijective_cohomologyMap_of_forall_isReduced {k : Type u} [Field k]
     [IsAlgClosed k]
     (H : ∀ {X X' : Scheme.{u}} (g : X ⟶ Spec (.of k)) [IsCurve g] [IsProper g] [IsReduced X]
@@ -545,7 +558,8 @@ The proof is that of `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_foral
 run for all eight assertions simultaneously: reduction to `C_red`, constructible approximation
 and continuity of cohomology, primary decomposition, and induction on the exponent along
 `0 → F[ℓ] → F → F/F[ℓ] → 0` using `AlgebraicGeometry.IsCurve.Assertions.of_shortExact`.
-(blueprint: `lemma-weil-pbc-curve-constructible-primary-reduction`) -/
+(blueprint: lemma-weil-pbc-curve-constructible-primary-reduction)
+-/
 theorem IsCurve.Assertions.of_forall_isReduced [Finite Λ] {k : Type u} [Field k]
     [IsAlgClosed k]
     (H : ∀ {X : Scheme.{u}} (g : X ⟶ Spec (.of k)) [IsCurve g] [IsReduced X] (ℓ : ℕ)
@@ -591,7 +605,8 @@ equivalent to those for `j_! j^* F`: the open–closed sequence `0 → j_! j^* F
 has third term
 supported on the zero-dimensional complement `Z` of `U`, whose cohomology is concentrated in
 degree zero and invariant under field extension.
-(blueprint: `lemma-weil-pbc-curve-dense-open-reduction`) -/
+(blueprint: lemma-weil-pbc-curve-dense-open-reduction)
+-/
 theorem IsCurve.exists_dense_assertions_iff_lowerShriek [Finite Λ] {k : Type u} [Field k]
     [IsAlgClosed k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
     (r : ℕ) [Fact r.Prime] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -626,7 +641,8 @@ algebraically closed field `k` and `F` a constructible sheaf of `Λ`-modules kil
 `C(C, F) ↔ ∀ a, C(C, j_{a,!}(F|_{U_a}))`. This combines the open–closed sequence
 `0 → j_! j^* F → F → i_* i^* F → 0`, the assertions on the zero-dimensional `Z`, the
 decomposition `j_! j^* F = ⨁_a j_{a,!}(F|_{U_a})` and dévissage.
-(blueprint: `lem-weil-pbc-curve-dense-open-localization`) -/
+(blueprint: lem-weil-pbc-curve-dense-open-localization)
+-/
 theorem IsCurve.exists_dense_assertions_iff_forall_lowerShriek [Finite Λ] {k : Type u}
     [Field k]
     [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsReduced C]
@@ -672,7 +688,9 @@ directly provide the normalisation of a reduced curve together with its finitene
 state the lemma for an arbitrary finite surjective `ν` which is an isomorphism over a dense open,
 the properties of the normalisation that are used. The compatibility of the sequence with field
 extension and restriction to opens, also part of the blueprint statement, is not recorded in
-this existential form. (blueprint: `lemma-weil-pbc-normalization-exact-sequence`) -/
+this existential form. (blueprint: `lemma-weil-pbc-normalization-exact-sequence`) 
+(blueprint: lemma-weil-pbc-normalization-exact-sequence)
+-/
 theorem exists_mono_lowerShriek_constantModSheaf_lowerStar {k : Type u} [Field k]
     [IsAlgClosed k] {X X' U U' : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
     (ν : X' ⟶ X) [IsFinite ν] [Surjective ν] (V : X.Opens) (hV : Dense (V : Set X))
@@ -730,8 +748,10 @@ assertions for `j_! 𝐅_ℓ` on `X` follow from those for `j'_! 𝐅_ℓ` on th
 preserves cohomology, and the normalisation exact sequence
 `AlgebraicGeometry.exists_mono_lowerShriek_constantModSheaf_lowerStar` has a third term whose
 cohomology is concentrated in degree zero and invariant under field extension.
-(blueprint: `lemma-weil-pbc-curve-normalization-constant`) -/
-theorem IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite {k : Type u} [Field k]
+(blueprint: lemma-weil-pbc-curve-normalization-constant)
+-/
+theorem IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite_coefficients {k : Type u}
+  [Field k]
     [IsAlgClosed k] {X X' U U' : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
     (ν : X' ⟶ X) [IsFinite ν] [Surjective ν] [Smooth (ν ≫ f)] (V : X.Opens)
     (hV : Dense (V : Set X)) [IsIso (ν ∣_ V)] (j : U ⟶ X) [IsOpenImmersion j]

@@ -83,6 +83,8 @@ noncomputable def fourierTransformIso (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullbac
       R(pullback.snd π π')_![ModuleCat.{u + 1} Λ] ⋙ shiftFunctor _ (1 : ℤ) :=
   Functor.isoWhiskerRight (leftDerivedUpperStarIsoMapDerivedCategory _ (pullback.fst π π')).symm _
 
+omit [IsSeparated π] [QuasiCompact π] [HasCompactification π] [IsSeparated π']
+  [HasCompactification π'] in
 /-- **Perverse amplitude of the Fourier transform**, support side: `FT_ψ` carries
 `ᵖD^{≤0}(V) ∩ Dctf(V)` into `ᵖD^{≤1}(V')`. (blueprint: `thm-fd-fourier-perverse`) -/
 theorem isPerverseLE_fourierTransform
@@ -104,7 +106,8 @@ theorem isPerverseLE_fourierTransform
 
 /-- **Perverse amplitude of the Fourier transform**, cosupport side: `FT_ψ` carries
 `ᵖD^{≥0}(V) ∩ Dctf(V)` into `ᵖD^{≥-1}(V')`. (blueprint: `thm-fd-fourier-perverse`) -/
-theorem isPerverseGE_fourierTransform [HasCompactification (pullback.fst π π' ≫ π)]
+theorem isPerverseGE_fourierTransform [PerfectField k]
+    [HasCompactification (pullback.fst π π' ≫ π)]
     [HasCompactification (pullback.snd π π' ≫ π')]
     (hfib : ∀ y, topologicalKrullDim ((pullback.snd π π').fiber y) ≤ ((1 : ℕ) : ℕ∞))
     (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤))
@@ -112,7 +115,7 @@ theorem isPerverseGE_fourierTransform [HasCompactification (pullback.fst π π' 
     (hK : IsPerverseGE π 0 K) (hK' : constructibleFiniteTor (ModuleCat.{u + 1} Λ) V K) :
     IsPerverseGE π' (-1) ((fourierTransform Λ π π' Ψ b 1).obj K) := by
   have hL := isLisse_fourierKernel π π' Ψ b
-  have h₁ := isPerverseGE_tensor (isPerverseGE_upperStar π 1 (pullback.fst π π') hK hK') hL
+  have h₁ := isPerverseGE_tensor (isPerverseGE_upperStar π 1 (pullback.fst π π') hK) hL
   have h₂ := isPerverseGE_lowerShriek π' 1 (pullback.snd π π') hfib
     (h₁.of_eq pullback.condition)
     (constructibleFiniteTor_tensor _ _

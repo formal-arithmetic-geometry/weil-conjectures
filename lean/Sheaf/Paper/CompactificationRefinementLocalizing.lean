@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType

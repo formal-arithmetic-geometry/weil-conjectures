@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.DerivedNakayamaResolution
 public import Sheaf.Paper.ModuleObjects
 public import Sheaf.Paper.CoefficientHeartCommonStratification
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import WeilConjectures.CategoryTheory.Sites.WeaklyContractible

@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Mod
 public import Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
 import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicFiniteOperations
 import Sheaf.RingTheory.WContractibleClosedLocalization

@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.SmoothPurity.InternalAdjunctionEvaluation
-public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import Sheaf.AlgebraicGeometry.UnboundedCompactSupportProperComposition
 public import WeilConjectures.SixFunctors.Finite.Exact
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded

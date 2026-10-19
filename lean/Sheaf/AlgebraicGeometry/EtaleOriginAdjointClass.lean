@@ -16,6 +16,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekIndependence
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekComparison
@@ -25,7 +26,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.CategoryTheory.RingedSiteModules
 import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
-import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
 
 import Sheaf.AlgebraicGeometry.CompactifiableOverField

@@ -444,7 +444,8 @@ theorem boundedConstructibleIntegral_rightDerivedLowerStar (f : X ⟶ Y) (hf : f
     exact ⟨(DerivedCategory.boundedConstructible _ Y).prop_of_iso e
         (boundedConstructible_rightDerivedLowerStar _ aX aY f hf N hN' hNY hbc),
       (DerivedCategory.torAmplitudeIn _ Y _ _).prop_of_iso e
-        (torAmplitudeIn_rightDerivedLowerStar _ aX aY f hf d hd a b N hN' hNY hbc hta)⟩
+        (torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing _ aX aY f hf d hd a b N hN' hNY
+          hbc hta)⟩
   refine ⟨⟨derivedComplete_rightDerivedLowerStar_obj hϖ hI f hc, a₀, b₀ + 2 * (d : ℤ),
     fun n ↦ key n a₀ b₀ (h₀ n).1 (h₀ n).2⟩, fun a b hab n ↦ (key n a b (h₀ n).1 (hab n)).2⟩
 
@@ -461,8 +462,10 @@ section Recollement
 variable {U Z X : Scheme.{u}}
 
 variable (Λ) in
-/-- For an open immersion `j`, the counit `Lj^* Rj_* ⟶ 𝟭` is an isomorphism: `Rj_*` is fully
-faithful. -/
+/-- Blueprint `lem-exc-open-fully-faithful`, first half: for an open immersion `j`, the counit
+`Lj^* Rj_* ⟶ 𝟭` is an isomorphism: `Rj_*` is fully faithful. In the adjoint triple
+`D(j_!) ⊣ D(j^*) ⊣ Rj_*` the unit of the first adjunction is invertible, hence so is the counit
+of the second. -/
 instance isIso_derivedUpperStarLowerStarAdjunction_counit (j : U ⟶ X) [IsOpenImmersion j] :
     IsIso (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).counit := by
   let adj := mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j
@@ -485,8 +488,9 @@ noncomputable def rightDerivedLowerStarUpperShriekAdjunction (i : Z ⟶ X) [IsCl
   (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).ofNatIsoLeft
     (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) i)
 
-/-- `j^* i_* = 0` for an open immersion `j` whose range is disjoint from that of the closed
-immersion `i` (`AlgebraicGeometry.Etale.isZero_upperStar_rightDerivedLowerShriek`). -/
+/-- Blueprint `lem-exc-open-fully-faithful`, second half: `j^* i_* = 0` for an open immersion `j`
+whose range is disjoint from that of the closed immersion `i`
+(`AlgebraicGeometry.Etale.isZero_upperStar_rightDerivedLowerShriek`). -/
 lemma isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj (i : Z ⟶ X)
     [IsClosedImmersion i] [HasCompactification i] (j : U ⟶ X) [IsOpenImmersion j]
     (hij : Disjoint (Set.range i.base) (Set.range j.base)) (M : 𝐃(Z, Λ)) :

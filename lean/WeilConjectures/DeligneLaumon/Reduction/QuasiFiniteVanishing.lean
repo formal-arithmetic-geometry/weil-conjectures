@@ -6,9 +6,11 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.WeilSheaf.FiniteLowerStar
+public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 public import WeilConjectures.WeilSheaf.LowerShriek
-import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
-import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 import Sheaf.RingTheory.FiniteWContractible
 
@@ -194,41 +196,31 @@ end LowerShriek
 /-- **Finite direct images are exact** (blueprint: `lemma-weil-pbc-finite-direct-image-exact`,
 with the passage to `ℚ̄_ℓ`-coefficients of `def-weil-pbc-qbar-category`): for a finite morphism
 `p : T ⟶ Y` of `k₀`-schemes, the higher direct images `Rʳp₀*G` of a Weil sheaf vanish for
-`r > 0`. -/
+`r > 0`: the pushforward `p₀*` is exact
+(`AlgebraicGeometry.ProEtaleWeilSheaf.preservesFiniteColimits_lowerStar_of_isFinite`), hence is
+its own right derived functor. -/
 theorem WeilSheaf.isZero_higherLowerStar_of_isFinite {T Y : Scheme.{u}}
     [T.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (p : T ⟶ Y)
     [IsFinite p] [p.IsOver (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l T) (r : ℕ) (hr : 0 < r) :
     IsZero ((WeilSheaf.higherLowerStar p r).obj G) := by
+  -- `Y` is locally noetherian, so the finite morphism `p` is of finite presentation and `p₀*`
+  -- is exact (`ProEtaleWeilSheaf.preservesFiniteColimits_lowerStar_of_isFinite`).
   have : IsLocallyNoetherian Y :=
     LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (CommRingCat.of k₀))
-  have : LocallyOfFinitePresentation p :=
-    LocallyOfFinitePresentation.iff_locallyOfFiniteType.mpr inferInstance
-  let q := Scheme.Hom.geometricFiberMap p (comp_over p (Spec (CommRingCat.of k₀)))
-  have : IsFinite q :=
-    Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsFinite) p _ inferInstance
-  have : LocallyOfFinitePresentation q :=
-    Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange
-      (P := @LocallyOfFinitePresentation) p _ inferInstance
-  have := preservesFiniteColimits_proEtaleLowerStar_of_isFinite q
-    (ULift.{u + 1} (PadicAlgCl l))
-  have : PreservesFiniteColimits (ProEtale.adicLowerStar l q ⋙ ProEtale.AdicSheaf.forget _) :=
-    inferInstanceAs (PreservesFiniteColimits
-      (ProEtale.AdicSheaf.forget _ ⋙ ProEtale.lowerStar (WeilCoefficients.{u} l) q))
-  have : PreservesFiniteColimits (ProEtale.adicLowerStar l q) :=
-    preservesFiniteColimits_of_reflects_of_preserves _ (ProEtale.AdicSheaf.forget _)
-  have : PreservesFiniteColimits (ProEtaleWeilSheaf.lowerStar k₀ l p) :=
-    Endofunctor.IsoAlgebra.preservesFiniteColimits_mapOfNatIso _
-  change IsZero ((WeilComplex.homologySheaf (r : ℤ)).obj
+  have := ProEtaleWeilSheaf.preservesFiniteColimits_lowerStar_of_isFinite k₀ l p
+  change IsZero ((WeilComplex.homologySheaf r).obj
     ((WeilComplex.derivedLowerStar p).obj (WeilSheaf.toComplex.obj G)))
   rw [WeilComplex.isZero_homologySheaf_obj_iff]
-  let e := (ProEtaleWeilSheaf.lowerStar k₀ l p).singleFunctorCompRightDerivedFunctorIso.app G.obj
-  have h : IsZero ((_root_.DerivedCategory.homologyFunctor _ (r : ℤ)).obj
-      ((_root_.DerivedCategory.singleFunctor _ 0).obj
-        ((ProEtaleWeilSheaf.lowerStar k₀ l p).obj G.obj))) :=
-    _root_.DerivedCategory.isZero_of_isLE _ 0 (r : ℤ) (by exact_mod_cast hr)
-  exact h.of_iso ((_root_.DerivedCategory.homologyFunctor _ (r : ℤ)).mapIso e)
+  -- An exact functor is its own right derived functor, so `Rp₀*G` is `p₀*G` in degree `0`.
+  let F := ProEtaleWeilSheaf.lowerStar k₀ l p
+  let e : F.rightDerivedFunctor.obj ((_root_.DerivedCategory.singleFunctor _ 0).obj G.obj) ≅
+      (_root_.DerivedCategory.singleFunctor _ 0).obj (F.obj G.obj) :=
+    F.rightDerivedFunctorIsoMapDerivedCategory.app _ ≪≫
+      (F.mapDerivedCategorySingleFunctor 0).app G.obj
+  exact (_root_.DerivedCategory.isZero_of_isLE _ 0 r (by omega)).of_iso
+    ((_root_.DerivedCategory.homologyFunctor _ r).mapIso e)
 
 section QuasiFinite
 

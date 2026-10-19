@@ -31,7 +31,7 @@ import Sheaf.Compactification.BoundaryRefinement
 import Sheaf.Paper.LocalizeRingedSiteMorphismGeneral
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 
 /-!
 # Composition of finite and integral lower shriek on localizing constructible categories

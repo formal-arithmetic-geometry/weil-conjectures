@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.RingTheory.KrullDimension.Basic
-import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
+import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 import Sheaf.RingTheory.SmoothColimitRegular
 import Sheaf.RingTheory.EtaleResidueTriplesLocalizedStrictHenselization
 import Sheaf.RingTheory.StrictHenselizationPresentationIn

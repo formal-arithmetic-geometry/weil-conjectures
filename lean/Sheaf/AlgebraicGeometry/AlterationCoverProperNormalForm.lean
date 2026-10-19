@@ -18,7 +18,7 @@ import Sheaf.AlgebraicGeometry.IntegralEtaleChartFlatification
 import Sheaf.AlgebraicGeometry.QuasiExcellentFiniteTypeStability
 import Sheaf.AlgebraicGeometry.FiniteBirationalNormalIso
 import WeilConjectures.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import Mathlib.RingTheory.Unramified.LocalRing

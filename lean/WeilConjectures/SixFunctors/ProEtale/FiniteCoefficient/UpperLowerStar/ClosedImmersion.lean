@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Detection
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Complement
 
-import Sheaf.AlgebraicGeometry.ProEtale.ClosedSiteAdjunction
+import WeilConjectures.AlgebraicGeometry.ProEtale.ClosedSiteAdjunction
 import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
 

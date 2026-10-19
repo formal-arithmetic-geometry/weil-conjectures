@@ -89,7 +89,9 @@ namespace DerivedCategory
 
 variable {R : Type u} [CommRing R] [HasDerivedCategory.{u} (ModuleCat.{u} R)]
 
-/-- Blueprint `sk-def-perfect` (also `def-pod-perfect-point-complex`): perfect point complexes.
+/-- Blueprint `pur9-def-perfect-complex`: Perfect complex of finite modules.
+
+Also blueprint `sk-def-perfect` (also `def-pod-perfect-point-complex`): perfect point complexes.
 
 An object `C` of `D(R)` is *perfect* if it is isomorphic to the image of a bounded complex of
 finitely generated projective `R`-modules. -/

@@ -19,7 +19,7 @@ import Mathlib.AlgebraicGeometry.Scheme
 import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.Cohomology.EulerCharProper
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.AlgebraicGeometry.CoherentFiltrationIntegralSubschemes
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks

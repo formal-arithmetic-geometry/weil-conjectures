@@ -5,9 +5,10 @@ Authors: Claude
 -/
 module
 
-import Sheaf.AlgebraicGeometry.HigherDirectImageSectionDenominators
-import Sheaf.AlgebraicGeometry.HigherDirectImageSectionTorsion
-import Sheaf.AlgebraicGeometry.LocalUniformHigherDirectImageBound
+public import WeilConjectures.AlgebraicGeometry.HigherDirectImageSectionDenominators
+public import WeilConjectures.AlgebraicGeometry.HigherDirectImageSectionTorsion
+public import WeilConjectures.AlgebraicGeometry.LocalUniformHigherDirectImageBound
+
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.MayerVietoris
@@ -641,13 +642,34 @@ end Vanishing
 
 end AlgebraicGeometry.Scheme.Modules
 
+section
+
+/-!
+# Sections of higher direct images over an affine base
+
+Over an affine base, the sections of `R^q f_* ℱ` are the cohomology `H^q(X, ℱ)` for a
+quasi-compact separated morphism and a quasi-coherent `ℱ`. Also the compatibility of higher
+direct images with flat base change and with restriction to opens, their quasi-coherence, and
+their vanishing in high degrees.
+-/
+
+@[expose] public section
+
+
+
+open CategoryTheory Limits
+
 namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X T : Scheme.{u}}
 variable (f : X ⟶ T) (ℱ : X.Modules)
+
+section QuasiCoherence
+
 variable [QuasiCompact f] [QuasiSeparated f] [HasInjectiveResolutions X.Modules]
   [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
 
+set_option backward.isDefEq.respectTransparency.types true in
 /-- **Quasi-coherence of the higher direct images.** For `f : X ⟶ T` quasi-compact and
 quasi-separated and `ℱ` a quasi-coherent `𝒪_X`-module, the higher direct image `R^q f_* ℱ` is a
 quasi-coherent `𝒪_T`-module for every `q` [Stacks, Tag 01XJ].
@@ -673,4 +695,83 @@ theorem higherDirectImage_isQuasicoherent_on_affines (q : ℕ) :
   exact SheafOfModules.isQuasicoherent_over _ U.1
 
 
+
+end QuasiCoherence
+section Comparison
+
+
+
+
+
+variable [IsAffine T] [QuasiCompact f] [IsSeparated f] [HasInjectiveResolutions X.Modules]
+  [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+end Comparison
+
+section RightDerivedGlobalSections
+
+
+
+
+variable [HasInjectiveResolutions X.Modules]
+
+
+
+
+
+
+
+
+
+
+
+end RightDerivedGlobalSections
+
+
+
+
+
+
+
+
+
+
+
+section BaseChange
+
+variable [HasInjectiveResolutions X.Modules]
+
+
+
+
+
+end BaseChange
+
+
+section Vanishing
+
+variable [QuasiCompact f] [IsSeparated f] [HasInjectiveResolutions X.Modules]
+  [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
+
+
+
+
+
+end Vanishing
+
 end AlgebraicGeometry.Scheme.Modules
+
+end

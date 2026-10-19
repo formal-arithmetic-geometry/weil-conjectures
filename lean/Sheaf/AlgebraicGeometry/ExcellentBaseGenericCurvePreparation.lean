@@ -29,7 +29,7 @@ import Sheaf.AlgebraicGeometry.NormalizationGeonormalInsep
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions
 import Sheaf.AlgebraicGeometry.NormalizationInseparableBaseChange
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.AlgebraicGeometry.SteinSmoothGenericCurve
 
 /-!

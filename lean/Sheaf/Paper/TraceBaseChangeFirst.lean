@@ -135,7 +135,7 @@ def condensedDerivedSymmetry (Z : Scheme.{u})
     (K M : DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :
     K ⊗ M ≅ M ⊗ K :=
-  DerivedMonoidal.braiding DerivedCategory.Qh
+  DerivedMonoidal.braiding' DerivedCategory.Qh
     (HomotopyCategory.quasiIso
       (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) (.up ℤ)) K M
 

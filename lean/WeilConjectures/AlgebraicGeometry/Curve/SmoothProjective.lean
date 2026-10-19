@@ -5,6 +5,10 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
+
+
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import WeilConjectures.AlgebraicGeometry.BaseChangeField
@@ -12,7 +16,6 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMor
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
@@ -92,6 +95,18 @@ theorem Scheme.Hom.isOfRelativeDimension_of_smoothOfRelativeDimension (f : X ⟶
 
 end RelativeDimension
 
+section Projective
+
+variable {X S : Scheme.{u}}
+
+
+
+
+
+
+
+end Projective
+
 section Curve
 
 variable {K : Type u} [Field K] {X : Scheme.{u}}
@@ -170,6 +185,10 @@ projective curve `C` over `k`, its genus `g(C) = dim_k H¹(C, 𝒪_C)`
 theorem IsSmoothProjectiveCurve.finiteDimensional_H_one :
     FiniteDimensional k (Scheme.Modules.H (X := C) (SheafOfModules.unit C.ringCatSheaf) 1) :=
   have := SheafOfModules.isQuasicoherent_unit (R := C.ringCatSheaf)
+  have : (SheafOfModules.unit C.ringCatSheaf).IsInvertible :=
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
+  have : (SheafOfModules.unit C.ringCatSheaf).IsFiniteLocallyFree :=
+    SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _
   have : (SheafOfModules.unit C.ringCatSheaf).IsFinitePresentation :=
     SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
   Scheme.Modules.finiteDimensional_H_of_isProper _ 1

@@ -74,7 +74,7 @@ theorem Etale.isFinitelyPresentable_constantSheaf (V : Scheme.{u}) [CompactSpace
   have hT : IsTerminal T := MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale _
   have : CompactSpace T.left := ‹CompactSpace V›
   have : QuasiSeparatedSpace T.left := ‹QuasiSeparatedSpace V›
-  have : Functor.IsCardinalAccessible
+  have : Functor.IsCardinalAccessible.{u}
       ((sheafSections V.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (op T))
       Cardinal.aleph0 :=
     Functor.IsFinitelyAccessible_iff_preservesFilteredColimitsOfSize.2 inferInstance

@@ -14,7 +14,7 @@ import Mathlib.Algebra.Homology.HomologySequenceLemmas
 import WeilConjectures.CategoryTheory.DeltaFunctor
 import Sheaf.RepresentationTheory.CoinducedDiscreteEmbedding
 import Sheaf.Topology.ContinuousOpenNormalStabilizer
-import Sheaf.CategoryTheory.EffaceableDeltaFunctorUniversal
+import WeilConjectures.CategoryTheory.EffaceableDeltaFunctorUniversal
 import Sheaf.RepresentationTheory.ContinuousCochainsDeltaFunctor
 import Sheaf.RepresentationTheory.CoinducedContinuousAcyclic
 import Sheaf.RepresentationTheory.ContinuousCochainsShortExact

@@ -21,7 +21,7 @@ import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 import Sheaf.CategoryTheory.RingedSliceExtensionTensor

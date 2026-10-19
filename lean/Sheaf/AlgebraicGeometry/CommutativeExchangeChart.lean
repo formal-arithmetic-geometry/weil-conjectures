@@ -14,7 +14,7 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import Sheaf.AlgebraicGeometry.DerivedInverseImageComposition
 import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 import Mathlib.CategoryTheory.Limits.MorphismProperty
@@ -24,7 +24,7 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
-import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact

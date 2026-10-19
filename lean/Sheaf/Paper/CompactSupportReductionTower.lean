@@ -17,6 +17,7 @@ public import Mathlib.AlgebraicGeometry.Over
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Functor.OfSequence
 public import Mathlib.CategoryTheory.Abelian.FunctorCategory

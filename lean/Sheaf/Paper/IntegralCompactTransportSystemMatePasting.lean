@@ -6,6 +6,7 @@ module
 
 public import Sheaf.Paper.TraceFormulaCoefficientConventions
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import Sheaf.SixFunctors.SchemeFrobenius
 public import Sheaf.Paper.SemilinearDerivedSections
 public import Sheaf.Paper.IntegralFinitePullbackComposition

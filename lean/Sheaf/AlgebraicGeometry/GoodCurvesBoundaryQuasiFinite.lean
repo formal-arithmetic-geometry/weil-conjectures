@@ -22,7 +22,7 @@ import Sheaf.AlgebraicGeometry.GeometricRegularitySmoothFieldCriterion
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.FiniteOfIsClosedOfClosedPoints
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.AlgebraicGeometry.RegularNormalDecomposition
 
 /-!

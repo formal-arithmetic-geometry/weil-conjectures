@@ -10,6 +10,7 @@ public import Sheaf.Paper.SystemTensorMateArrows
 public import Sheaf.Paper.ProEtaleConstructibleCoefficientSheaf
 public import Sheaf.Paper.SystemClopenTensorCompatibility
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import WeilConjectures.Compactification.Over
 
 import Sheaf.Paper.SystemNormalizedTensorClosure

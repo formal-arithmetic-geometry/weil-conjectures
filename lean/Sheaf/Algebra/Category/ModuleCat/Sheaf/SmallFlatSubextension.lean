@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterion
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.CategoryTheory.Sites.PreservesSheafification
-import Sheaf.Paper.SiteSheafificationSectionsLocal
+import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 
 /-!

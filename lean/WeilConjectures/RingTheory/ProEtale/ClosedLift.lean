@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import WeilConjectures.RingTheory.ProEtale.IndEtale
-import Sheaf.RingTheory.EtaleAlgebraLift
+import WeilConjectures.RingTheory.EtaleAlgebraLift
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
 
 /-!
@@ -225,7 +225,8 @@ instance indEtale : Algebra.IndEtale A (ClosedLift A C) :=
   ⟨⟨Index A C, inferInstance, inferInstance, colimitPresentation A C,
     fun X ↦ inferInstanceAs (Algebra.Etale A X.alg)⟩⟩
 
-private theorem toAlgHom_ι (X : Index A C) (x : X.alg) :
+/-- The map to the input algebra agrees with the index map on each colimit structure map. -/
+theorem toAlgHom_ι (X : Index A C) (x : X.alg) :
     toAlgHom A C ((colimit.ι (diagram A C) X).hom x) = X.toC x := by
   change ((colimit.ι (diagram A C) X ≫ colimit.desc _ (coconeC A C)).hom) x = _
   rw [colimit.ι_desc]
@@ -236,7 +237,9 @@ private theorem exists_rep (x : ClosedLift A C) :
   exact Types.jointly_surjective_of_isColimit
     (isColimitOfPreserves (forget (CommAlgCat A)) (colimit.isColimit (diagram A C))) x
 
-private theorem isUnit_of_isUnit_image (x : ClosedLift A C)
+/-- An element of `H_A(C̄)` whose image in `C̄` is a unit is a unit: lift the inverse along a
+localization of a representing étale stage. -/
+theorem isUnit_of_isUnit_image (x : ClosedLift A C)
     (hx : IsUnit (toAlgHom A C x)) : IsUnit x := by
   obtain ⟨X, b, rfl⟩ := exists_rep A C x
   rw [toAlgHom_ι] at hx
@@ -269,7 +272,8 @@ noncomputable def reduction :
     ClosedLift A C ⧸ I.map (algebraMap A (ClosedLift A C)) →+* C :=
   Ideal.Quotient.lift _ (toAlgHom A C : ClosedLift A C →+* C) (map_le_ker_toAlgHom A C I)
 
-private theorem surjective_toAlgHom [Algebra.IndEtale (A ⧸ I) C] :
+/-- The map `H_A(C̄) ⟶ C̄` is surjective when `C̄` is ind-étale over `A ⧸ I`. -/
+theorem surjective_toAlgHom [Algebra.IndEtale (A ⧸ I) C] :
     Function.Surjective (toAlgHom A C) := by
   intro c
   obtain ⟨ι, _, _, P, hP⟩ :=
@@ -344,7 +348,8 @@ theorem bijective_reduction [Algebra.IndEtale (A ⧸ I) C] :
   refine ⟨?_, hr⟩
   apply (injective_iff_map_eq_zero (r.toRingHom)).mpr
   intro x hx
-  obtain ⟨e, he, hxe⟩ := Ideal.exists_eq_mul_of_pure (show x ∈ RingHom.ker r.toRingHom from hx)
+  obtain ⟨e, he, hxe⟩ :=
+    Ideal.exists_eq_mul_of_pure (show x ∈ RingHom.ker r.toRingHom from hx)
   obtain ⟨y, rfl⟩ := Ideal.Quotient.mk_surjective e
   have hy : toAlgHom A C y = 0 := he
   have hu : IsUnit (1 - y) := isUnit_of_isUnit_image A C _ (by simp [hy])

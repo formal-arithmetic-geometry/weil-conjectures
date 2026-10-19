@@ -1,13 +1,14 @@
 /-
-Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Copyright (c) 2026 Bin Wu. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
 -/
 module
 
 public import WeilConjectures.AlgebraicGeometry.FiniteEtaleDescentData
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
-import Sheaf.AlgebraicGeometry.FiniteEtaleDescentFullyFaithful
-import Sheaf.AlgebraicGeometry.FiniteEtaleDescentEssentiallySurjective
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleDescentFullyFaithful
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleDescentEssentiallySurjective
 
 /-!
 # Effective etale descent for finite etale schemes
@@ -17,8 +18,6 @@ blueprint's `lem-galois-descent` (blueprint: lem-galois-descent).
 -/
 
 @[expose] public section
-
-set_option autoImplicit false
 
 universe v
 

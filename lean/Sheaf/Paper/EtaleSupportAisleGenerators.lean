@@ -18,7 +18,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.ConstructibleSheaf.Defs
 import WeilConjectures.SixFunctors.OpenClosed.Exact
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact

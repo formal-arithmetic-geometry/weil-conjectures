@@ -12,7 +12,7 @@ public import Sheaf.Paper.AdicHeartPullbackFibres
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Sheaf.DeligneLaumon.ConstructibleSubsetClosureDimension
 import Sheaf.AlgebraicGeometry.SmoothLocalDimension
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
 import Mathlib.AlgebraicGeometry.Morphisms.Etale

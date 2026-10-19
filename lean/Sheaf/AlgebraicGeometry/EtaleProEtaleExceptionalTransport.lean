@@ -11,7 +11,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tor
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekComparison
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
-public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Sheaf.AlgebraicGeometry.EtaleProEtaleExceptionalObjectComparison
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison

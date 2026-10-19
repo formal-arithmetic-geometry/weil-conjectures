@@ -14,7 +14,7 @@ public import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
 public import Sheaf.AlgebraicGeometry.FixedFiniteExceptionalAt
 import Sheaf.AlgebraicGeometry.FiniteComparisonClassAdjunction
 import Mathlib.CategoryTheory.Adjunction.Mates
-import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
 import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
 import Sheaf.Paper.CanonicalFiniteLevelCompactSupportBaseChange

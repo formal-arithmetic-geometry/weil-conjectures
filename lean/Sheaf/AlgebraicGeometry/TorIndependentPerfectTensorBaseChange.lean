@@ -249,7 +249,7 @@ theorem torIndependent_perfect_tensor_baseChange
   have := DerivedCategory.hasDerivedMonoidalCategory
     (SheafOfModules.{uPT} (moduleRings X.toRingedSpace))
   let e : P ⊗ K ≅ K ⊗ P :=
-    DerivedMonoidal.braiding
+    DerivedMonoidal.braiding'
       (DerivedCategory.Qh (C := SheafOfModules.{uPT} (moduleRings X.toRingedSpace)))
       (HomotopyCategory.quasiIso
         (SheafOfModules.{uPT} (moduleRings X.toRingedSpace)) (.up ℤ)) P K

@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.ComparisonPullbackCoherence
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.CategoryTheory.RingedSiteModules
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology

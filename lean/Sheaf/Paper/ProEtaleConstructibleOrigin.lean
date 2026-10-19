@@ -19,7 +19,7 @@ import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
 import Sheaf.Paper.ProEtaleConstantModuleEncoding
 import Sheaf.Paper.ProEtaleConstantModuleConstructibility
 import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 
 /-!
 # Constructible pro-etale coefficients are of etale origin

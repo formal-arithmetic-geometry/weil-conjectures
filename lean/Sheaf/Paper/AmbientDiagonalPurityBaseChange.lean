@@ -17,7 +17,7 @@ public import Sheaf.Paper.TraceFormulaCoefficientConventions
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 import Sheaf.AlgebraicGeometry.AffineSpaceTopTrace
 import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality

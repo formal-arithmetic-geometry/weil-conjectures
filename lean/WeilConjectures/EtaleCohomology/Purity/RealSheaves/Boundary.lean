@@ -6,23 +6,14 @@ Authors: Christian Merten
 module
 
 public import Mathlib.RepresentationTheory.Invariants
+public import WeilConjectures.AlgebraicGeometry.CurveRegularCover
+public import WeilConjectures.ConstructibleSheaf.LowerStarOpenStalkFinite
 public import WeilConjectures.ConstructibleSheaf.OnePoint
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights
 public import WeilConjectures.Mathlib.Topology.JacobsonSpace
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
 public import WeilConjectures.SixFunctors.OpenClosed.Conservative
-import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
-import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
-import Sheaf.AlgebraicGeometry.PureDimension
-import Sheaf.AlgebraicGeometry.StrictHenselizationDVR
-import Sheaf.AlgebraicGeometry.StrictHenselizationStalkFormula
-import WeilConjectures.AlgebraicGeometry.Regular
-import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
-import Sheaf.AlgebraicGeometry.PointedEtaleStalk
-import Sheaf.FieldTheory.StrictHenselianFractionInertia
-import Sheaf.Paper.CommonStageCurveWeilMiddleExtension
-import Sheaf.Paper.LisseIntegralSmallCoefficients
 
 /-!
 # Boundary extension of a lisse Weil sheaf on a curve
@@ -74,10 +65,12 @@ These finite-level statements are proved without henselizations, from the regula
 curve: étale schemes over it are regular, so their points have irreducible neighbourhoods, and
 the sections of a locally constant sheaf over an étale scheme with connected underlying space
 are determined near one point (`WeilConjectures.ConstructibleSheaf.DenseOpenUnit`,
-`WeilConjectures.ConstructibleSheaf.LowerStarOpenStalk`). The identification
+`WeilConjectures.ConstructibleSheaf.LowerStarOpenStalk`). An arbitrary curve is reduced to this
+case through the finite cover by the normalizations of its irreducible components
+(`WeilConjectures.ConstructibleSheaf.LowerStarOpenStalkFinite`). The identification
 `lem-wf-boundary-stalk-invariants` of the boundary stalk of a lisse Weil sheaf with the inertia
-invariants `V^{I_s}` is not formalised: the inertia groups are data here, and the monodromy
-action of the fundamental group on the stalks of a Weil sheaf is not available.
+invariants `V^{I_s}` is
+`WeilGroup.exists_equivalence_isLisse_stalk_directImage_boundaryStalk_eq_invariants`.
 -/
 
 @[expose] public section
@@ -343,6 +336,7 @@ namespace Scheme
 
 variable {j : U ⟶ C} [IsOpenImmersion j] {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
 
+omit [Finite K] in
 /-- Let `j : U₀ ↪ C₀` be an open immersion into a curve, `ℱ` a finite locally constant sheaf of
 `Λ`-modules on `U₀` and `s` a closed point of `C₀` outside `U₀`. Then the restriction of the
 middle extension `j_* ℱ` to the point `Spec k(s)` is finite locally constant.
@@ -352,15 +346,35 @@ This is an auxiliary finiteness input, weaker than the blueprint lemma
 `s̄` over `s`, Frobenius-equivariantly, with the inertia invariants `ℱ_η̄ ^ I_s`. That
 identification implies this statement, since a sheaf on `Spec k(s)` is the continuous Galois
 module of its geometric stalk, and `ℱ_η̄ ^ I_s` is finite. For a smooth curve this is
-`AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_upperStar_middleExtension_of_smooth`. -/
+`AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_upperStar_middleExtension_of_smooth`.
+
+The proof does not use henselizations: the curve is covered by finitely many finite morphisms
+from regular schemes, the normalizations of its irreducible components
+(`AlgebraicGeometry.Scheme.exists_isFinite_isRegular_cover`), and the geometric stalks of
+`j_* ℱ` inject into finite products of stalks of direct images along open immersions into
+these regular schemes, which are finite
+(`AlgebraicGeometry.Etale.finite_sheafFiber_lowerStar_of_isFinite`). The hypotheses on `s`
+are not needed for this. -/
 theorem isFiniteLocallyConstantSheaf_upperStar_middleExtension
     (p : C ⟶ Spec (.of K)) [IsCurve p] (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [Scheme.IsFiniteLocallyConstantSheaf F] (s : C) (hs : IsClosed {s})
-    (hsj : s ∉ Set.range j.base) :
+    [Scheme.IsFiniteLocallyConstantSheaf F] (s : C) (_hs : IsClosed {s})
+    (_hsj : s ∉ Set.range j.base) :
     Scheme.IsFiniteLocallyConstantSheaf
       ((C.fromSpecResidueField s)^*[ModuleCat.{u + 1} Λ].obj
         ((Etale.middleExtension (ModuleCat.{u + 1} Λ) j).obj F)) := by
-  sorry
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian p
+  have : CompactSpace C := QuasiCompact.compactSpace_of_compactSpace p
+  have : IsNoetherian C := ⟨⟩
+  have : TopologicalSpace.NoetherianSpace U := j.isOpenEmbedding.isInducing.noetherianSpace
+  obtain ⟨ι, _, Y, ν, hν, hreg, _, hcov⟩ :=
+    exists_isFinite_isRegular_cover p (IsCurve.krullDim_le_one p)
+  have : Subsingleton (Spec (.of (C.residueField s))) :=
+    inferInstanceAs (Subsingleton (PrimeSpectrum (C.residueField s)))
+  refine Etale.isFiniteLocallyConstantSheaf_of_subsingleton _ fun Ω _ _ t ↦ ?_
+  have := Etale.finite_sheafFiber_lowerStar_of_isFinite j ν hcov
+    (fun i ↦ Etale.isDomain_stalk_left_of_isRegular (X := Y i)) F (t ≫ C.fromSpecResidueField s)
+  exact Finite.of_equiv _ ((Etale.upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ)
+    (C.fromSpecResidueField s) t).app _).toLinearEquiv.toEquiv.symm
 
 omit [Finite K] in
 /-- Let `j : U₀ ↪ C₀` be an open immersion into a smooth curve, `ℱ` a finite locally constant
@@ -424,6 +438,7 @@ private theorem isConstructibleSheaf_lowerStar_of_upperStar (p : C ⟶ Spec (.of
     have hx := ((Finite.equivFin ↥(Set.range j.base)ᶜ).symm i).2
     exact h _ (hcl _ hx) hx
 
+omit [Finite K] in
 /-- Blueprint `sk-i-real-boundary`: Boundary stalks and restriction to an open.
 Also `lem-wf-dense-open-pi1-surjective`, part (5).
 

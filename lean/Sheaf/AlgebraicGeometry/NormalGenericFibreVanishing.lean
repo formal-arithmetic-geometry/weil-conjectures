@@ -3,38 +3,41 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q06
 -/
-import Sheaf.AlgebraicGeometry.NormalScheme
-import Sheaf.AlgebraicGeometry.FunctionField
-import Sheaf.AlgebraicGeometry.InvertibleTorsionOrders
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.Algebra.Homology.Additive
-import Mathlib.Algebra.Homology.DerivedCategory.Plus
-import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+module
 
-import WeilConjectures.Mathlib.RingTheory.Adjoin.FG
-import Sheaf.RingTheory.ColimOfLocalizations
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.RingTheory.FiniteType
-import Mathlib.CategoryTheory.Limits.HasLimits
-import Sheaf.AlgebraicGeometry.ZModSheafInvertibleOrders
-import Sheaf.AlgebraicGeometry.PullbackConstantModule
-import Sheaf.Paper.KunBcMapOnCohomology
-import Sheaf.AlgebraicGeometry.HigherDirectImagesLimits
-import Mathlib.FieldTheory.IsSepClosed
-import Sheaf.EtaleCohomology.SepClosedFieldVanishing
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
-import Sheaf.AlgebraicGeometry.OpenProductExchange
-import WeilConjectures.SixFunctors.BaseChange.Derived
+public import Sheaf.AlgebraicGeometry.NormalScheme
+public import Sheaf.AlgebraicGeometry.FunctionField
+public import Sheaf.AlgebraicGeometry.InvertibleTorsionOrders
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.Algebra.Homology.Additive
+public import Mathlib.Algebra.Homology.DerivedCategory.Plus
+public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import WeilConjectures.Mathlib.RingTheory.Adjoin.FG
+public import Sheaf.RingTheory.ColimOfLocalizations
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Sheaf.AlgebraicGeometry.ZModSheafInvertibleOrders
+public import Sheaf.AlgebraicGeometry.PullbackConstantModule
+public import Sheaf.Paper.KunBcMapOnCohomology
+public import Sheaf.AlgebraicGeometry.HigherDirectImagesLimits
+public import Mathlib.FieldTheory.IsSepClosed
+public import Sheaf.EtaleCohomology.SepClosedFieldVanishing
+public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
+public import Sheaf.AlgebraicGeometry.OpenProductExchange
+public import WeilConjectures.SixFunctors.BaseChange.Derived
+
+@[expose] public section
 
 /-!
 # Vanishing on the generic fibre over a normal integral base

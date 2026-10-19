@@ -28,6 +28,9 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry
 
+-- The upstream sync to e9ba49ac4 made elaborating this statement exceed the default budget
+-- (about 250000 heartbeats); a follow-up should find the changed definition.
+set_option maxHeartbeats 400000 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The augmentation comparisons defining the affine derived-Tor charts commute

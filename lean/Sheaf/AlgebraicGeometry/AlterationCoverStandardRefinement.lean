@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import Mathlib.AlgebraicGeometry.Restrict
 import Mathlib.AlgebraicGeometry.Sites.MorphismProperty
 import Sheaf.AlgebraicGeometry.EtaleNormalComponents
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.AlgebraicGeometry.QuasiExcellentFiniteTypeStability
 
 /-!

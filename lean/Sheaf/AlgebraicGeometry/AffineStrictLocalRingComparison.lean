@@ -10,7 +10,7 @@ public import Sheaf.Paper.StrictHenselizationPointEvaluation
 public import Sheaf.RingTheory.StrictHenselizationPresentation
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import WeilConjectures.Mathlib.RingTheory.Henselian
-import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
+import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 import Sheaf.RingTheory.StrictHenselizationTriples
 import Sheaf.RingTheory.EtaleHenselianRingLift
 import Sheaf.AlgebraicGeometry.StrictHenselization

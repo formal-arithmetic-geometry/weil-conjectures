@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.TotalSimplicialEtaleSite
 public import Sheaf.CategoryTheory.SliceSiteSimplicialAugmentation
 public import Mathlib.CategoryTheory.Adjunction.Whiskering
 public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageExact
-import Sheaf.CategoryTheory.SiteMorphismComposition
+import WeilConjectures.CategoryTheory.SiteMorphismComposition
 import Sheaf.AlgebraicGeometry.PhSchemeSite
 import Sheaf.CategoryTheory.Sites.GeometricMorphism
 import Sheaf.TraceFormula.TotalSiteDerivedComponents

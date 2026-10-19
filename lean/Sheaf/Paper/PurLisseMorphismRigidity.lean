@@ -13,8 +13,8 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.Topology.Connected.Basic
 
 import Sheaf.Paper.ProEtaleLisseOrigin
-import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
-import Sheaf.AlgebraicGeometry.IsFiniteTypeEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import WeilConjectures.AlgebraicGeometry.IsFiniteTypeEtaleModuleSheaf
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Mathlib.AlgebraicGeometry.Sites.Etale
 import Mathlib.CategoryTheory.Sites.CoverLifting
@@ -31,7 +31,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
 import Sheaf.AlgebraicGeometry.ProEtaleComparisonStalk
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
-import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
+import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import Sheaf.AlgebraicGeometry.ProEtaleModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence

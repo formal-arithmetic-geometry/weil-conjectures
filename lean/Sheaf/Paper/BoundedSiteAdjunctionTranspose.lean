@@ -10,9 +10,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
 public import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB

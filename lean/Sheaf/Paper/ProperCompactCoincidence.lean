@@ -13,6 +13,7 @@ public import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
 import Sheaf.Paper.ProEtaleConstructibleOrigin
 import Sheaf.AlgebraicGeometry.CompactSupportRestrictionOfScalars

@@ -6,7 +6,7 @@ Authors: SHEAF group N9
 module
 
 public import Sheaf.AlgebraicGeometry.FiniteEtaleTateTwist
-public import Sheaf.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
+public import WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
 public import Mathlib.CategoryTheory.Monoidal.FunctorCategory
 
 /-!

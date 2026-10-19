@@ -11,6 +11,7 @@ public import Sheaf.Paper.FiniteDirectImageComposition
 public import Sheaf.Paper.EtaleOriginDerivedCategory
 public import Sheaf.Paper.RefinementCoefficientRealization
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs

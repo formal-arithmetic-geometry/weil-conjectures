@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.Paper.ProEtaleConstructibleSheaf
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison

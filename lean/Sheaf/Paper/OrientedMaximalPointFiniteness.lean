@@ -1,10 +1,14 @@
-import Sheaf.Paper.OrientedNearbyCycles
-import Sheaf.CategoryTheory.Sites.GeometricMorphism
-import Sheaf.AlgebraicGeometry.EtaleToposPointsGeometric
-import Sheaf.AlgebraicGeometry.GeometricSpecializationStrictLocalLift
-import Sheaf.AlgebraicGeometry.NormalizedBaseChangeNoetherianTopology
-import Sheaf.CategoryTheory.Sites.OrientedProductLargeSites
-import Sheaf.TraceFormula.OrientedPointNormalizedStratum
+module
+
+public import Sheaf.Paper.OrientedNearbyCycles
+public import Sheaf.CategoryTheory.Sites.GeometricMorphism
+public import Sheaf.AlgebraicGeometry.EtaleToposPointsGeometric
+public import Sheaf.AlgebraicGeometry.GeometricSpecializationStrictLocalLift
+public import Sheaf.AlgebraicGeometry.NormalizedBaseChangeNoetherianTopology
+public import Sheaf.CategoryTheory.Sites.OrientedProductLargeSites
+public import Sheaf.TraceFormula.OrientedPointNormalizedStratum
+
+@[expose] public section
 
 universe u v w
 

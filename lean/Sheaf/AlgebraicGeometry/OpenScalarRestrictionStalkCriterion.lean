@@ -88,7 +88,7 @@ private theorem flat_open (X : RingedSpace.{u}) (F : Modules X) (U : Opens X)
           exact Module.Flat.rTensor_shortComplex_exact (S.obj F) _ he
         · apply ShortComplex.exact_of_isZero_X₂
           exact (MonoidalCategory.tensorRight (S.obj F)).map_isZero
-            (ModuleExtensionByZeroStalkOutside X U C.X₂ x hx)
+            (moduleExtensionByZero_stalk_outside X U C.X₂ x hx)
       exact ShortComplex.exact_of_iso ((C.map E).mapNatIso e.symm) hs
     have hv := ht.map V
     have hd : ((C.map E).map (V ⋙ T')).Exact :=

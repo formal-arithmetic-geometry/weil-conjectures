@@ -1,4 +1,8 @@
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+module
+
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+
+@[expose] public section
 
 /-!
 # Short alias for the bounded-constructible open-immersion adjunction

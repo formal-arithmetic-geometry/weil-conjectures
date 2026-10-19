@@ -17,7 +17,7 @@ import Sheaf.Paper.PurTwistSheafLocallyFree
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import Sheaf.Paper.CondensedConstantConstructibility
 import WeilConjectures.CategoryTheory.ModuleObjects.Free
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 
 /-!
 # Bounded constructibility of shifted condensed Tate twists

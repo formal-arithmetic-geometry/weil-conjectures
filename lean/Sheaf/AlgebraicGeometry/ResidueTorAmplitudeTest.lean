@@ -8,7 +8,7 @@ module
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
 
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf

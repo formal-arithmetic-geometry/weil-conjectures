@@ -10,14 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriek
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriek
-import WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimension
-import Sheaf.CategoryTheory.FiniteCohomologicalDimensionInjectiveCoproducts
-import Sheaf.AlgebraicGeometry.ProEtaleGrothendieckSectionCoproducts
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-import Sheaf.CategoryTheory.GrothendieckDerivedBrownRightAdjoint
-import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
 
 /-!
 # The ambient exceptional right adjoint datum and exceptional-adjoint admissibility
@@ -27,8 +19,8 @@ finite-type `f : X ⟶ Y` with a compactification `X → X̄ → Y` whose proper
 
 * clause (1), the *ambient exceptional right adjoint datum*
   `AlgebraicGeometry.ProEtale.HasAmbientExceptionalRightAdjoint`: a uniform
-  cohomological-dimension bound `FullCD(p, A; c)` for some `c`. By Brown representability it
-  makes `Rf_!` a left adjoint on the unbounded derived categories of the small pro-étale sites
+  cohomological-dimension bound `FullCD(p, A; c)` for some `c`, together with a right adjoint
+  of `Rf_!` on the unbounded derived categories of the small pro-étale sites
   (`AlgebraicGeometry.ProEtale.HasAmbientExceptionalRightAdjoint.isLeftAdjoint`);
 * clauses (1)–(3), *exceptional-adjoint admissibility*
   `AlgebraicGeometry.ProEtale.IsExceptionalAdjointAdmissible`: clause (1) together with the
@@ -111,7 +103,10 @@ namespace ProEtale
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   {X Y : Scheme.{u}}
 
-/-- Blueprint `sk-def-sf-admissible`: the bound `FullCD(p, A; c)`.
+/-- Blueprint `sk-def-sf-admissible`: the bound `FullCD(p, A; c)`. This is blueprint
+`def-weil-full-cohomological-dimension` (Full cohomological dimension).
+
+Blueprint `def-weil-full-cohomological-dimension`: Full cohomological dimension
 
 `p : X ⟶ Y` *has uniform cohomological dimension at most `c` at `A`* if the higher direct
 images of `p`, and of all its base changes along objects of `Y_proét`, vanish above `c` on
@@ -141,56 +136,30 @@ def HasUniformCohomologicalDimensionLE (p : X ⟶ Y) (c : ℕ) : Prop :=
           ((R((p')_*[A])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)))
 
 /-- Blueprint `sk-def-sf-admissible`, clause (1): the ambient exceptional right adjoint datum.
+This is blueprint `def-weil-ambient-exceptional-adjoint` (Ambient exceptional right adjoint
+datum).
 
 For a morphism `f : X ⟶ Y` with a chosen compactification: a uniform cohomological-dimension
-bound `FullCD(p, A; c)` for the proper part `p` of the compactification, for some `c`. The
-existence of a right adjoint `Rf^×` of `Rf_!`, which the blueprint lists next to the bound, is
-its consequence `HasAmbientExceptionalRightAdjoint.isLeftAdjoint`.
+bound `FullCD(p, A; c)` for the proper part `p` of the compactification, for some `c`, and the
+existence of a right adjoint `Rf^×` of `Rf_!` on the unbounded derived categories of the small
+pro-étale sites. The blueprint also asks that units, counits and comparison maps agree for
+every refinement of the compactification; here `Rf_!` is formed with the one chosen
+compactification, so this clause is empty.
 
 Not satisfied in general; see `sk-rem-sf-fullcd-scope` and the module docstring. -/
 structure HasAmbientExceptionalRightAdjoint (f : X ⟶ Y) [HasCompactification f] : Prop where
   /-- A uniform cohomological-dimension bound for the proper part of the compactification. -/
   exists_hasUniformCohomologicalDimensionLE :
     ∃ c : ℕ, HasUniformCohomologicalDimensionLE A (HasCompactification.compactification f).g c
+  /-- The derived lower shriek `Rf_!` has a right adjoint `Rf^×`. -/
+  isLeftAdjoint_rightDerivedLowerShriek : (R(f)_![A]).IsLeftAdjoint
 
-/-- Blueprint `sk-prop-sf-existence`(b): under the ambient exceptional right adjoint datum, the
-derived lower shriek `Rf_!` is a left adjoint on the unbounded derived categories of the small
-pro-étale sites.
-
-The bound `FullCD` makes `Rp_*` preserve coproducts, hence `Rf_! = Rp_* j_!` preserves
-coproducts, and Brown representability gives the right adjoint.
-(blueprint: stage3-proetale-ambient-adjoint). -/
+/-- Blueprint `def-weil-ambient-exceptional-adjoint`: under the ambient exceptional right adjoint
+datum, the derived lower shriek `Rf_!` is a left adjoint on the unbounded derived categories of
+the small pro-étale sites. This is part of the datum. -/
 theorem HasAmbientExceptionalRightAdjoint.isLeftAdjoint {f : X ⟶ Y} [HasCompactification f]
-    (_h : HasAmbientExceptionalRightAdjoint A f) : (R(f)_![A]).IsLeftAdjoint := by
-  let d := HasCompactification.compactification f
-  obtain ⟨c, hc⟩ := _h.exists_hasUniformCohomologicalDimensionLE
-  have hcd (F : Sheaf (Scheme.ProEt.topology d.Z) A) (q : ℕ) (hq : c < q) :
-      IsZero ((((d.g)_*[A]).rightDerived q).obj F) := by
-    apply Functor.isZero_rightDerived_of_isZero_homology
-    exact hc (Scheme.ProEt.mk (𝟙 _)) (𝟙 _) d.g (IsPullback.id_horiz d.g) F q
-      (by exact_mod_cast hq)
-  let : HasColimitsOfSize.{u + 1, u + 1}
-      (Sheaf (Scheme.ProEt.topology d.Z) A) := IsGrothendieckAbelian.hasColimits _
-  let : HasColimitsOfSize.{u + 1, u + 1}
-      (Sheaf (Scheme.ProEt.topology Y) A) := IsGrothendieckAbelian.hasColimits _
-  let : HasCoproducts.{u + 1}
-      (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology d.Z) A)) :=
-    derived_hasCoproducts
-  let : HasCoproducts.{u + 1}
-      (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :=
-    derived_hasCoproducts
-  let : (R((d.g)_*[A])).IsLeftAdjoint := by
-    apply grothendieckDerived_hasRightAdjoint
-    intro I
-    obtain ⟨hcop, hinj⟩ := Scheme.ProEt.lowerStar_coproducts_and_injectiveSum_acyclic
-      A d.g I
-    let := hcop
-    exact Functor.preservesColimitsOfShape_rightDerivedFunctor_of_injectiveCoproducts
-      _ I c hcd hinj
-  let := (Adjunction.mapDerivedCategoryRightDerivedAdjunction
-    (openImmersionLowerShriekAdjunction A d.i)).isLeftAdjoint
-  change (D((d.i)_!open[A]) ⋙ R((d.g)_*[A])).IsLeftAdjoint
-  infer_instance
+    (h : HasAmbientExceptionalRightAdjoint A f) : (R(f)_![A]).IsLeftAdjoint :=
+  h.isLeftAdjoint_rightDerivedLowerShriek
 
 section Admissibility
 
@@ -200,6 +169,10 @@ variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [Abelian.HasFunctorialFlatResolution A]
 
 /-- Blueprint `sk-def-sf-admissible`: exceptional-adjoint admissibility, clauses (1)–(3).
+This is blueprint `def-weil-exceptional-adjoint-admissibility` (Exceptional-adjoint
+admissibility), at a finite coefficient stage.
+
+Blueprint `def-weil-exceptional-adjoint-admissibility`: Exceptional-adjoint admissibility
 
 The ambient exceptional right adjoint datum (1), together with the preservation clauses for
 every right adjoint `G` of `Rf_!`: `G` preserves bounded constructibility and carries each

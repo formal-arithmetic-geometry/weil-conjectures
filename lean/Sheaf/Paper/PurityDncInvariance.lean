@@ -23,7 +23,7 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Mathlib.CategoryTheory.Adjunction.Additive
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension

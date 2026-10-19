@@ -27,7 +27,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.AlgebraicGeometry.GeometricStalkAsPullback
-import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor

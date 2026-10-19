@@ -9,7 +9,7 @@ public import Sheaf.Paper.FiniteFieldFiber
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude
 public import Sheaf.Paper.ProEtaleConstructibleCoefficientSheaf
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence

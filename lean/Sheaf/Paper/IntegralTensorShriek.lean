@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImme
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.AlgebraicGeometry.ProEtaleOpenExtensionProducts
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact

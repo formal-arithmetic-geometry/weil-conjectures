@@ -20,7 +20,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-import Sheaf.CategoryTheory.RightDerivedFunctorTruncationIso
+import WeilConjectures.CategoryTheory.RightDerivedFunctorTruncationIso
 import Mathlib.RingTheory.Flat.TorsionFree
 import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 import Mathlib.CategoryTheory.Sites.GlobalSections

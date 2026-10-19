@@ -1,6 +1,10 @@
-import WeilConjectures.DeligneLaumon.Reduction.FiniteMap
-import WeilConjectures.SixFunctors.Finite.Exact
-import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
+module
+
+public import WeilConjectures.DeligneLaumon.Reduction.FiniteMap
+public import WeilConjectures.SixFunctors.Finite.Exact
+public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
+
+@[expose] public section
 
 /-!
 # Cohomology transport under finite-map reduction

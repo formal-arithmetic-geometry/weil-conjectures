@@ -8,6 +8,7 @@ module
 public import Sheaf.CategoryTheory.AdjunctionSquareExchange
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.SquareTransport
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
 
 /-!
 
@@ -237,6 +238,19 @@ theorem boundedConstructibleBaseChange_adjunct (sq : CommSq g' f' f g)
     (boundedConstructiblePullbackSquareComparison Λ ℓ sq) N
 
 
+variable {f g f' g'} in
+/-- The base-change morphism `BC_sq` is the exchange morphism
+`CategoryTheory.Adjunction.exchangeRight` of the pullback comparison `θ_sq` under the
+adjunctions `Lf^* ⊣ Rf_*` and `Lf'^* ⊣ Rf'_*`. -/
+lemma boundedConstructibleBaseChange_eq_exchangeRight (sq : CommSq g' f' f g) :
+    boundedConstructibleBaseChange Λ ℓ sq =
+      Adjunction.exchangeRight (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f)
+        (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f')
+        (boundedConstructiblePullbackSquareComparison Λ ℓ sq) := by
+  unfold boundedConstructibleBaseChange boundedConstructibleBaseChangeUnitStep
+    boundedConstructibleBaseChangeSquareStep boundedConstructibleBaseChangeCounitStep
+    Adjunction.exchangeRight
+  rfl
 end BaseChange
 
 end AlgebraicGeometry.ProEtale.CondensedRing

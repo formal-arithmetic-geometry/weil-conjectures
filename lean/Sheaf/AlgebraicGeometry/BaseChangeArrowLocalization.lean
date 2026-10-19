@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
 public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
-import Sheaf.CategoryTheory.SiteMorphismComposition
+import WeilConjectures.CategoryTheory.SiteMorphismComposition
 import Sheaf.Paper.SliceSiteLocalization
 import Mathlib.CategoryTheory.Sites.Sheafification
 import Sheaf.AlgebraicGeometry.BaseChangeInverseImageIso

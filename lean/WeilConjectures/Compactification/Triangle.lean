@@ -8,7 +8,7 @@ module
 public import WeilConjectures.Compactification.Comp
 public import WeilConjectures.Compactification.CommonRefinement
 public import WeilConjectures.Compactification.Constructions
-public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import WeilConjectures.Compactification.RefinementPullback
 
 /-!

@@ -10,7 +10,7 @@ public import Sheaf.TraceFormula.OrientedPointCohomology
 public import Sheaf.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
 public import Sheaf.CategoryTheory.ConstantRingModuleSheaves
 public import Sheaf.CategoryTheory.Sites.OrientedProductLargeSites
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation

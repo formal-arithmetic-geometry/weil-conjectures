@@ -19,7 +19,7 @@ import Sheaf.AlgebraicGeometry.ProjectiveLineGenusZero
 import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import Sheaf.AlgebraicGeometry.NodalNormalizationAdjunction
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.TraceFormula.ContractedComponentGenericData
 import Sheaf.TraceFormula.NodalOpenLocus
 /-! # Constructibility of semistable and stable geometric fibres

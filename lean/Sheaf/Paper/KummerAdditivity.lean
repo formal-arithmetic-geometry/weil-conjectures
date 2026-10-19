@@ -22,7 +22,7 @@ import Sheaf.CategoryTheory.SiteCohomologyPullback
 import WeilConjectures.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
 import Sheaf.Paper.ComparisonPullbackExact
-import Sheaf.CategoryTheory.SiteMorphismComposition
+import WeilConjectures.CategoryTheory.SiteMorphismComposition
 import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
 import Sheaf.Paper.CartesianCoefficientTwists
 import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted

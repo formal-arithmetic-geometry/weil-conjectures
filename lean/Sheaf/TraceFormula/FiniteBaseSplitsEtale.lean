@@ -19,7 +19,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
 import Sheaf.Compactification.NagataSketchClosure
 import Sheaf.AlgebraicGeometry.FlatQuasiFiniteStratification
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.AlgebraicGeometry.UnramifiedMorphism
 
 /-! # A finite surjection splits finitely many separated etale maps into opens

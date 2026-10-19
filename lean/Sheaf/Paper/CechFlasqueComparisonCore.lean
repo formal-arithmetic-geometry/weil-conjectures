@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M2
 -/
 module
+import Sheaf.AlgebraicGeometry.ModuleCechZeroLemmas
 public import Sheaf.Paper.CechCupResolutionComparisonData
 public import Mathlib.Topology.Sheaves.Flasque
 import Sheaf.Paper.CupCechTotalComplex

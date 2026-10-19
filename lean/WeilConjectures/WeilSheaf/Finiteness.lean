@@ -8,6 +8,9 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantGlobalSections
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
+public import WeilConjectures.WeilSheaf.LowerStar
+public import WeilConjectures.WeilSheaf.LowerStarPairing
+public import WeilConjectures.WeilSheaf.PoincareDuality
 public import WeilConjectures.WeilSheaf.ProperCohomology
 import WeilConjectures.WeilSheaf.LowerStarPairing
 import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
@@ -148,7 +151,21 @@ lemma WeilSheaf.IsUnitCompatible.lowerStar {Z : Scheme.{u}} [Z.Over (Spec (CommR
       (ε (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))_*[
           WeilCoefficients.{u} l] ≫
         (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))_*[_].map η) := by
-  exact lowerStar_unit_str φ F η hη
+  -- Stay with the named exchange isomorphism `τ`: unfolding the Weil structure of the
+  -- pushforward to module objects produces compositions whose implicit objects differ
+  -- syntactically from those of the naturality squares, which is very slow for the kernel.
+  set τ := lowerStarGeometricFiberMapCompFrobeniusIso (WeilCoefficients.{u} l) φ
+    (comp_over φ (Spec (CommRingCat.of k₀)))
+  rw [IsUnitCompatible, lowerStar_obj_obj_str_hom_hom]
+  have hu := NatTrans.IsMonoidal.unit (τ := τ.hom)
+  have nat := τ.hom.naturality η
+  simp only [Functor.LaxMonoidal.comp_ε, Functor.comp_map, Category.assoc] at hu nat
+  rw [Functor.map_comp, Category.assoc, reassoc_of% nat, reassoc_of% hu, ← Functor.map_comp,
+    ← Functor.map_comp]
+  exact congrArg (fun m ↦
+    ε (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))_*[
+        WeilCoefficients.{u} l] ≫
+      (Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*[_].map m) hη
 
 end UnitSection
 

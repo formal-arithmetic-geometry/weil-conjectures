@@ -40,7 +40,7 @@ import Sheaf.Paper.FiniteDiscreteCoefficientSections
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 import Mathlib.CategoryTheory.Sites.Sheafification
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp

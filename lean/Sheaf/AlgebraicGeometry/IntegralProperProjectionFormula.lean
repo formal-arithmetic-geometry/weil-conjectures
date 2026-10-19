@@ -27,7 +27,7 @@ import WeilConjectures.SixFunctors.BaseChange.Derived
 import Sheaf.AlgebraicGeometry.GeometricStalkAsPullback
 import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
 import Mathlib.Algebra.Homology.Additive
-import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
+import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 import Mathlib.CategoryTheory.Sites.Sheafification
 import Sheaf.AlgebraicGeometry.PullbackConstantModule
 import Sheaf.AlgebraicGeometry.EtaleConstantProjectionMap

@@ -21,7 +21,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.Hom
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
@@ -59,7 +59,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.Paper.ExchangeIdentityPasting
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
-import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction

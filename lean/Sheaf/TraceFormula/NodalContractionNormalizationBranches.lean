@@ -19,7 +19,7 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Sheaf.AlgebraicGeometry.PureDimension
 public import Sheaf.Paper.OrgogozoInductionData
-public import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 import Sheaf.AlgebraicGeometry.Morphisms.NormalizationDominantLift
 import WeilConjectures.AlgebraicGeometry.Regular

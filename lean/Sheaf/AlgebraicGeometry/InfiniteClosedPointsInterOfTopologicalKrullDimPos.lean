@@ -12,7 +12,7 @@ import Sheaf.AlgebraicGeometry.ClosedPointOfAffineOpen
 import Sheaf.AlgebraicGeometry.DimensionLocallyAlgebraic
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.RingTheory.InfiniteSetOfIsMaximalOfRingKrullDimPos
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-!
 # Infinitely many closed points in a positive-dimensional irreducible closed subset

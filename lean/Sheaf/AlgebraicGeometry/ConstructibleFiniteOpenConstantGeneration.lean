@@ -16,7 +16,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.Extensions
 public import Mathlib.CategoryTheory.ObjectProperty.FiniteProducts
 public import Mathlib.CategoryTheory.ObjectProperty.Retract
 
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleTrace
 import Sheaf.AlgebraicGeometry.OpenClosedRecollement
 import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
@@ -24,7 +24,7 @@ import Sheaf.AlgebraicGeometry.ConstructibleEtaleSetPullback
 import Sheaf.AlgebraicGeometry.LisseFiniteEtaleFiltration
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceDegree
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 import WeilConjectures.SixFunctors.Finite.Exact
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance

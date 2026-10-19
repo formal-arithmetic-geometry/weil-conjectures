@@ -15,6 +15,7 @@ public import Sheaf.SixFunctors.FrobeniusPointTransport
 public import Sheaf.Paper.FrobeniusGeometricExchange
 public import Sheaf.Paper.IntegralFinitePullbackComposition
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import Sheaf.AlgebraicGeometry.FrobeniusOpenSquare
 import Sheaf.SixFunctors.FrobeniusSquareCartesian
 import Sheaf.Paper.IsomorphismDerivedPullback

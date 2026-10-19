@@ -10,7 +10,7 @@ public import Sheaf.Paper.DualityPairing
 
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.AlgebraicGeometry.DerivedCategories
-public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
 public import WeilConjectures.Compactification.NagataCompactification
@@ -49,7 +49,7 @@ structure EtaleSignedSymmetry (X : Scheme.{u}) where
   iso : Etale.derivedTensor C X ≅ (Etale.derivedTensor C X).flip
   hom_eq : ∀ K L : DerivedCategory (Sheaf X.smallEtaleTopology C),
     HEq ((iso.hom.app K).app L)
-      (DerivedMonoidal.braiding (DerivedCategory.Qh (C := Sheaf X.smallEtaleTopology C))
+      (DerivedMonoidal.braiding' (DerivedCategory.Qh (C := Sheaf X.smallEtaleTopology C))
         (HomotopyCategory.quasiIso (Sheaf X.smallEtaleTopology C) (ComplexShape.up ℤ)) K L).hom
 
 /-- The identical normalized signed symmetry on the pro-etale site.
@@ -58,7 +58,7 @@ structure ProSignedSymmetry (X : Scheme.{u}) where
   iso : ProEtale.derivedTensor C X ≅ (ProEtale.derivedTensor C X).flip
   hom_eq : ∀ K L : DerivedCategory (Sheaf (Scheme.ProEt.topology X) C),
     HEq ((iso.hom.app K).app L)
-      (DerivedMonoidal.braiding
+      (DerivedMonoidal.braiding'
         (DerivedCategory.Qh (C := Sheaf (Scheme.ProEt.topology X) C))
         (HomotopyCategory.quasiIso (Sheaf (Scheme.ProEt.topology X) C)
           (ComplexShape.up ℤ)) K L).hom

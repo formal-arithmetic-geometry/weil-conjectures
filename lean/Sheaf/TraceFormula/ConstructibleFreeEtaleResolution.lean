@@ -6,7 +6,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 import Sheaf.AlgebraicGeometry.ConstructibleGeneratorEpimorphism
 import Sheaf.AlgebraicGeometry.EtaleLowerShriekConstantConstructible

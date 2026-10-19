@@ -15,7 +15,7 @@ public import Mathlib.CategoryTheory.Sites.Equivalence
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 import Sheaf.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover
-import Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification

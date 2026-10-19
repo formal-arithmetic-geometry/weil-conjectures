@@ -16,7 +16,7 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Sheaf.AlgebraicGeometry.DerivedInverseImageComposition
 import Sheaf.AlgebraicGeometry.EtaleInverseImageColimits
 import Sheaf.Paper.KunBcMapOnCohomology
-import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 
 /-!
 # Higher direct images along limits of cartesian squares

@@ -6,7 +6,7 @@ Authors: SHEAF group Q43
 module
 
 public import Sheaf.AlgebraicGeometry.SfFiniteExceptionalInverseImage
-public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 
 /-! # Finite exceptional inverse image in fixed coefficient coordinates

@@ -5,7 +5,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.TensorProduct.Basic
-public import Sheaf.RingTheory.AnnihilatorAssociatedPrimes
+public import WeilConjectures.RingTheory.AnnihilatorAssociatedPrimes
 
 /-!
 # Associated primes of a flat tensor lie in the corresponding residue-field fibre

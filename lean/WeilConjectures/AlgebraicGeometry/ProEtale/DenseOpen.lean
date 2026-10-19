@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.WeaklyEtale
+public import WeilConjectures.AlgebraicGeometry.NormalEtale
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.RingTheory.ProEtale.RegularLocalization
 
@@ -26,6 +27,8 @@ uniquely from, the preimage of a dense open of `C`.
   generizations of a point with integral local ring have a common generization.
 - `AlgebraicGeometry.isDomain_stalk_of_weaklyEtale`: a scheme weakly étale over a scheme with
   regular local rings has integral local rings.
+- `AlgebraicGeometry.isDomain_stalk_of_weaklyEtale_of_isIntegrallyClosed`: a scheme weakly étale
+  over a scheme whose local rings are integrally closed domains has integral local rings.
 -/
 
 @[expose] public section
@@ -145,6 +148,28 @@ theorem isDomain_stalk_of_weaklyEtale {W C : Scheme.{u}} (f : W ⟶ C) [WeaklyEt
   set P := (hV.primeIdealOf ⟨w, hwV⟩).asIdeal
   have := Algebra.WeaklyEtale.isDomain_localization_of_isRegularLocalRing (R := Γ(C, U))
     (fun p _ ↦ hU.isRegularLocalRing_localization (fun c _ ↦ hC c) p) P
+  exact (IsLocalization.algEquiv P.primeCompl (Localization.AtPrime P)
+    (W.presheaf.stalk w)).toMulEquiv.symm.isDomain
+
+/-- **Weakly étale schemes over normal schemes have integral local rings.** If the local rings of
+`C` are integrally closed domains and `f : W ⟶ C` is weakly étale, then the local rings of `W`
+are domains (`Algebra.WeaklyEtale.isDomain_localization_of_isIntegrallyClosed`). -/
+theorem isDomain_stalk_of_weaklyEtale_of_isIntegrallyClosed {W C : Scheme.{u}} (f : W ⟶ C)
+    [WeaklyEtale f]
+    (hC : ∀ c : C, IsDomain (C.presheaf.stalk c) ∧ IsIntegrallyClosed (C.presheaf.stalk c))
+    (w : W) : IsDomain (W.presheaf.stalk w) := by
+  obtain ⟨_, ⟨U, hU, rfl⟩, hwU, -⟩ :=
+    C.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ (f w)) isOpen_univ
+  obtain ⟨_, ⟨V, hV, rfl⟩, hwV, hVU⟩ :=
+    W.isBasis_affineOpens.exists_subset_of_mem_open (show w ∈ f ⁻¹ᵁ U from hwU)
+      (f ⁻¹ᵁ U).isOpen
+  have hφ := HasRingHomProperty.appLE @WeaklyEtale f ‹_› ⟨U, hU⟩ ⟨V, hV⟩ hVU
+  algebraize [(f.appLE U V hVU).hom]
+  let := W.presheaf.algebra_section_stalk ⟨w, hwV⟩
+  have := hV.isLocalization_stalk ⟨w, hwV⟩
+  set P := (hV.primeIdealOf ⟨w, hwV⟩).asIdeal
+  have := Algebra.WeaklyEtale.isDomain_localization_of_isIntegrallyClosed (R := Γ(C, U))
+    (fun p _ ↦ hU.isDomain_and_isIntegrallyClosed_localization (fun c _ ↦ hC c) p) P
   exact (IsLocalization.algEquiv P.primeCompl (Localization.AtPrime P)
     (W.presheaf.stalk w)).toMulEquiv.symm.isDomain
 

@@ -17,7 +17,7 @@ public import Mathlib.CategoryTheory.Triangulated.Subcategory
 
 import Sheaf.AlgebraicGeometry.AffineSpaceAmbientAdjunction
 import Sheaf.AlgebraicGeometry.OpenDirectImageFiniteCoefficients
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.OpenDirectImageClassicalAmplitude
 import Sheaf.AlgebraicGeometry.AffineSpaceTopTrace
 import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
@@ -54,7 +54,7 @@ import WeilConjectures.SixFunctors.Finite.Stalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.EtaleClosedSupportTorAmplitude
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 
 /-! # Finite exceptional adjunction on normalized systems

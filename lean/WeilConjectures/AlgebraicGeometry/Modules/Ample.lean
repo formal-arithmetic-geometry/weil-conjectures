@@ -127,7 +127,7 @@ characteristics involved may be junk values.
 
 This is also blueprint `def-sc-hilbert-degree`. -/
 noncomputable def Scheme.Hom.degree (f : X ⟶ Spec (.of K)) (M : X.Modules) : ℤ :=
-  Δ_[1]^[((topologicalKrullDim X).unbotD 0).toNat] (f.hilbertFunction M) 0
+  Δ_[1] ^[((topologicalKrullDim X).unbotD 0).toNat] (f.hilbertFunction M) 0
 
 /-- The degree as an explicit alternating sum of Euler characteristics:
 `∑_{i=0}^{g} (-1)^(g-i) (g choose i) χ(X, M^{⊗ i})`. -/
@@ -188,7 +188,7 @@ theorem Scheme.Hom.degree_eq_factorial_mul_coeff (f : X ⟶ Spec (.of K)) (M : X
       P.coeff ((topologicalKrullDim X).unbotD 0).toNat := by
   rw [degree]
   generalize ((topologicalKrullDim X).unbotD 0).toNat = g at hP ⊢
-  have h : ((Δ_[1]^[g] (f.hilbertFunction M) 0 : ℤ) : ℚ) = Δ_[1]^[g] P.eval 0 := by
+  have h : ((Δ_[1] ^[g] (f.hilbertFunction M) 0 : ℤ) : ℚ) = Δ_[1] ^[g] P.eval 0 := by
     rw [fwdDiff_iter_eq_sum_shift, fwdDiff_iter_eq_sum_shift]
     push_cast
     refine Finset.sum_congr rfl fun i _ ↦ ?_
@@ -688,7 +688,7 @@ theorem Scheme.Hom.fwdDiff_iter_eulerChar_tensorObj_tensorPow [IsIntegral Y]
     (E : Y.Modules) [E.IsFinitePresentation] {U : Y.Opens} (hU : (U : Set Y).Nonempty) {r : ℕ}
     (e : (Scheme.Modules.pullback U.ι).obj E ≅ SheafOfModules.free (ULift.{u} (Fin r))) :
     letI : Y.Over (Spec (.of K)) := ⟨f⟩
-    Δ_[1]^[((topologicalKrullDim Y).unbotD 0).toNat]
+    Δ_[1] ^[((topologicalKrullDim Y).unbotD 0).toNat]
       (fun m ↦ Scheme.Modules.eulerChar K (E ⊗ M.tensorPow m)) 0 = r * f.degree M := by
   let : Y.Over (Spec (.of K)) := ⟨f⟩
   have : IsProper (Y ↘ Spec (.of K)) := ‹IsProper f›
@@ -791,14 +791,14 @@ theorem Scheme.Hom.fwdDiff_iter_eulerChar_tensorObj_tensorPow [IsIntegral Y]
       Polynomial.coeff_eq_zero_of_degree_lt hPC, Polynomial.coeff_eq_zero_of_degree_lt hPK]
     simp [g]
   have hdeg := f.degree_eq_factorial_mul_coeff M hPO hPO'
-  have hE : ((Δ_[1]^[g] (fun m ↦ Scheme.Modules.eulerChar K (E ⊗ M.tensorPow m)) 0 : ℤ) : ℚ) =
-      Δ_[1]^[g] (fun n : ℕ ↦ PE.eval (n : ℚ)) 0 := by
+  have hE : ((Δ_[1] ^[g] (fun m ↦ Scheme.Modules.eulerChar K (E ⊗ M.tensorPow m)) 0 : ℤ) : ℚ) =
+      Δ_[1] ^[g] (fun n : ℕ ↦ PE.eval (n : ℚ)) 0 := by
     rw [fwdDiff_iter_eq_sum_shift, fwdDiff_iter_eq_sum_shift]
     push_cast
     refine Finset.sum_congr rfl fun i _ ↦ ?_
     simp [hPE']
   rw [Polynomial.fwdDiff_iter_eval_natCast_zero hPE, hcoeff] at hE
-  have : ((Δ_[1]^[g] (fun m ↦ Scheme.Modules.eulerChar K (E ⊗ M.tensorPow m)) 0 : ℤ) : ℚ) =
+  have : ((Δ_[1] ^[g] (fun m ↦ Scheme.Modules.eulerChar K (E ⊗ M.tensorPow m)) 0 : ℤ) : ℚ) =
       ((r * f.degree M : ℤ) : ℚ) := by
     rw [hE]
     push_cast

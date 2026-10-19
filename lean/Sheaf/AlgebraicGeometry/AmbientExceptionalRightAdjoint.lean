@@ -10,6 +10,7 @@ public import Sheaf.AlgebraicGeometry.SfFullCohomologicalDimension
 public import Sheaf.Paper.SfDerivedDirectImage
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.CategoryTheory.Adjunction.Basic
 

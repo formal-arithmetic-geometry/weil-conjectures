@@ -34,6 +34,7 @@ import Sheaf.Paper.FiniteDirectImageComposition
 import Sheaf.Paper.RefinementComparisonIsomorphism
 import WeilConjectures.Compactification.NagataCompactification
 import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 /-!
 # Canonical compact-support composition on the etale-origin class
 

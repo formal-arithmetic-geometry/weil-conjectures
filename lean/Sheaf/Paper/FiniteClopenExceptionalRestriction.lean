@@ -9,6 +9,7 @@ public import Sheaf.Paper.CompactSupportCoefficientAction
 
 import WeilConjectures.Compactification.NagataCompactification
 import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Sheaf.Paper.FiniteClopenDerivedDecomposition
 import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroAdjunction

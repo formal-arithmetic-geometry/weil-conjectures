@@ -29,6 +29,7 @@ import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 import Sheaf.CategoryTheory.MateIsoAlongEquivalences
 import Sheaf.AlgebraicGeometry.IsomorphismDerivedPullbackEquivalence
 import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 import WeilConjectures.Compactification.CategoryBaseChange
 import Sheaf.Paper.CompactificationCoherence
 import Sheaf.AlgebraicGeometry.ProEtaleConstantOpenSquareExchange

@@ -36,7 +36,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.CategoryTheory.RingedSliceExtensionTensor
 import Mathlib.CategoryTheory.Adjunction.Limits
-import Sheaf.CategoryTheory.SiteMorphismComposition
+import WeilConjectures.CategoryTheory.SiteMorphismComposition
 import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
 import Sheaf.AlgebraicGeometry.IntegralConstantCompletion
 import Sheaf.Paper.CartesianCoefficients

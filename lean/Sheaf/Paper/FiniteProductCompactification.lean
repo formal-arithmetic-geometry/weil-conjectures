@@ -18,6 +18,7 @@ import Sheaf.Paper.DerivedPullbackTensorHom
 import Sheaf.Paper.ExchangeProjectionSuppliedDomains
 import Sheaf.Paper.PurityFiniteSetting
 import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 
 /-! # The finite forward product in compactification coordinates
 

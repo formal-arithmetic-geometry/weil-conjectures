@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Algebra.Category.Grp.Abelian
-import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.OpenImmersionRestriction
 import Sheaf.AlgebraicGeometry.PointedEtaleStalk

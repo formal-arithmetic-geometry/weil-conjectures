@@ -8,8 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.AlgebraicGeometry.Curve.TorsionCohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Sites.FieldCohomologicalDimension
+public import WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.Reduction
 
-import Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimensionBound
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 
 /-!
@@ -42,21 +42,7 @@ theorem hasTorsionCohomologicalDimensionLE_of_isAffine {K : Type u} [Field K] {c
     (hK : (Spec (.of K)).HasTorsionCohomologicalDimensionLE c) {X : Scheme.{u}}
     (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [IsAffine X]
     (hX : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) :
-    X.HasTorsionCohomologicalDimensionLE (d + c) := by
-  let : X.Over (Spec (.of K)) := ⟨a⟩
-  have hK' : HasTorsionEtaleCohomologicalDimensionLE (Spec (.of K)) c := by
-    intro F hF q hq
-    have : Subsingleton ((Sheaf.functorH _ q).obj F) := hK F hF q hq
-    obtain ⟨e⟩ := nonempty_sheafH_extDerivedIso (Spec (.of K)) q
-    exact (e.app F).addCommGroupIsoToAddEquiv.symm.injective.subsingleton
-  have : LocallyOfFiniteType (X ↘ Spec (.of K)) := ‹LocallyOfFiniteType a›
-  have hX' := hasTorsionEtaleCohomologicalDimensionLE_of_isAffine_of_dimension_le
-    K c d hK' X hX
-  intro F hF q hq
-  have hz := hX' F hF q hq
-  have : Subsingleton ((DerivedCategory.singleFunctor _ 0 ⋙
-      Etale.cohomology AddCommGrpCat.{u + 1} X q).obj F) := hz
-  obtain ⟨e⟩ := nonempty_sheafH_extDerivedIso X q
-  exact (e.app F).addCommGroupIsoToAddEquiv.injective.subsingleton
+    X.HasTorsionCohomologicalDimensionLE (d + c) :=
+  artinBound d K c hK X a inferInstance inferInstance hX
 
 end AlgebraicGeometry.Scheme

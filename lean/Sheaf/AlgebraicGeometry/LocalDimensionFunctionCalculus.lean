@@ -22,7 +22,7 @@ import Sheaf.AlgebraicGeometry.IndEtaleStrictLocalInvariance
 import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Mathlib.RingTheory.Spectrum.Prime.Topology
 import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
 import Sheaf.Paper.StrictHenselizationFunctoriality

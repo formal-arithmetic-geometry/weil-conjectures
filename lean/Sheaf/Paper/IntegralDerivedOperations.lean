@@ -16,7 +16,7 @@ public import Sheaf.Paper.IntegralDerivedReduction
 public import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-public import Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
 public import Sheaf.Algebra.Homology.DerivedTensor

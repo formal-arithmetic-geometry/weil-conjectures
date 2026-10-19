@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 public import Sheaf.AlgebraicGeometry.ProperSupportSheafComposition
-public import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 public import Sheaf.AlgebraicGeometry.EtaleSectionProperSupport
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
@@ -35,19 +35,19 @@ import Mathlib.Algebra.Homology.Additive
 import Sheaf.AlgebraicGeometry.EtaleStalkTensorScalar
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
+import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 import Mathlib.CategoryTheory.Limits.MorphismProperty
 import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.AlgebraicGeometry.EtaleLocalFiniteMultiplePoints
+import WeilConjectures.AlgebraicGeometry.EtaleLocalFiniteMultiplePoints
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import Sheaf.AlgebraicGeometry.EtaleSetSectionsGeometricGermExt
+import WeilConjectures.AlgebraicGeometry.EtaleSetSectionsGeometricGermExt
 import Sheaf.AlgebraicGeometry.ZeroDimensionalSectionsStalks
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.QuasiFiniteIffFiniteFibres

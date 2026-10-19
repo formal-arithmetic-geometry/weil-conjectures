@@ -7,8 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.BaseChange
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocus
-import Sheaf.AlgebraicGeometry.HigherDirectImageDerivedModel
-import Sheaf.AlgebraicGeometry.DerivedPullbackSingleCohomology
+import WeilConjectures.AlgebraicGeometry.HigherDirectImageDerivedModel
+import WeilConjectures.AlgebraicGeometry.DerivedPullbackSingleCohomology
 
 /-!
 # Local freeness of the higher direct images on the perfect locus
@@ -207,7 +207,9 @@ pullback of `ℱ` to `X'`. The set `U_{i,r}` is open by
 `AlgebraicGeometry.Scheme.Modules.isOpen_perfectLocusOfRank`, and the factorisation criterion is
 `AlgebraicGeometry.Scheme.Modules.range_subset_perfectLocusOfRank_iff`.
 
-(blueprint: `lem-pc-flat-rf-open`) -/
+(blueprint: `lem-pc-flat-rf-open`) 
+(blueprint: lem-pc-flat-rf-open)
+-/
 theorem exists_opens_range_subset_iff_isFiniteLocallyFreeInDegree (hℱ : ℱ.IsFlatOver f)
     (i r : ℕ) :
     ∃ U : T.Opens, (U : Set T) = ℱ.perfectLocusOfRank f i r ∧

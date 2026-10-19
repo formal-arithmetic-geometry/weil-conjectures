@@ -12,7 +12,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModuleIntrinsicComparison
 public import Sheaf.Paper.FiniteTorAmplitude
 public import Sheaf.Paper.DualityPairing
 public import Sheaf.AlgebraicGeometry.DerivedCategories
-public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
 public import WeilConjectures.Compactification.NagataCompactification

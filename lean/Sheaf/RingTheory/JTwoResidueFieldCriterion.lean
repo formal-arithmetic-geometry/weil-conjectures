@@ -15,8 +15,8 @@ public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.FiniteType
 public import Sheaf.RingTheory.ExcellentRing
 import Mathlib.RingTheory.Noetherian.Basic
-import Sheaf.FieldTheory.SeparableExtension
-import Sheaf.FieldTheory.MakeSeparable
+import WeilConjectures.FieldTheory.SeparableExtension
+import WeilConjectures.FieldTheory.MakeSeparable
 import Sheaf.RingTheory.JZeroFiniteTypeDomainDescent
 import Sheaf.RingTheory.NonemptyRegularOpenSeparableAscent
 import Sheaf.RingTheory.RegularLocusOpenFromPrimeQuotients

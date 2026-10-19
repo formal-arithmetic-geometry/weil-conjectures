@@ -34,7 +34,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
 import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction

@@ -5,16 +5,20 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.HenselianClosedFiberNonempty
+
+
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
+
+
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.Spectrum.Prime.RingHom
 public import Mathlib.Topology.Spectral.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
-public import Sheaf.AlgebraicGeometry.SteinFactorizationAffine
-public import Sheaf.RingTheory.HenselianIntegralIdempotentLifting
-public import Sheaf.RingTheory.IntegralOverHenselianPair
+public import WeilConjectures.AlgebraicGeometry.SteinFactorizationAffine
+public import WeilConjectures.RingTheory.HenselianIntegralIdempotentLifting
+public import WeilConjectures.RingTheory.IntegralOverHenselianPair
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
@@ -61,7 +65,9 @@ namespace AlgebraicGeometry
 Stein connectedness): for a proper morphism `p : Y ⟶ Spec A` with `A` noetherian, the ring
 `Γ(Y, 𝒪_Y)` is a finite `A`-algebra, i.e. the second map `Spec Γ(Y, 𝒪_Y) ⟶ Spec A` of the Stein
 factorization is finite. For a general affine base this is not proved in the blueprint.
-(blueprint: `thm-weil-pbc-stein-inputs`) -/
+(blueprint: `thm-weil-pbc-stein-inputs`) 
+(blueprint: thm-weil-pbc-stein-inputs)
+-/
 @[stacks 02O5]
 theorem Scheme.Hom.isFinite_steinFactorizationBase {A : Type u} [CommRing A]
     [IsNoetherianRing A] {Y : Scheme.{u}} (p : Y ⟶ Spec (.of A)) [IsProper p] :
@@ -70,6 +76,10 @@ theorem Scheme.Hom.isFinite_steinFactorizationBase {A : Type u} [CommRing A]
   have : IsNoetherianRing Γ(Spec (.of A), ⊤) :=
     isNoetherianRing_of_ringEquiv _ (Scheme.ΓSpecIso (.of A)).commRingCatIsoToRingEquiv.symm
   let O : Y.Modules := SheafOfModules.unit Y.ringCatSheaf
+  have : (SheafOfModules.unit Y.ringCatSheaf).IsInvertible :=
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
+  have : (SheafOfModules.unit Y.ringCatSheaf).IsFiniteLocallyFree :=
+    SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _
   have : (SheafOfModules.unit Y.ringCatSheaf).IsFinitePresentation :=
     SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
   obtain ⟨e, he⟩ := Modules.exists_bijective_semilinearMap_sections_higherDirectImage_H p O 0
@@ -87,6 +97,22 @@ theorem Scheme.Hom.isFinite_steinFactorizationBase {A : Type u} [CommRing A]
   exact hp.comp (RingHom.Finite.of_surjective _
     (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso (.of A)).inv).2)
 
+/-- Every nonempty closed subset `C` of a scheme proper over `Spec A` meets the
+closed fibre over `V(I)` when `I` lies in the Jacobson radical: the image of `C` is closed, so
+it contains a closed point of `Spec A`, i.e. a maximal ideal, which contains `I`. This is the
+nonemptiness half of `AlgebraicGeometry.Scheme.Hom.isConnected_inter_preimage_zeroLocus`. -/
+theorem Scheme.Hom.nonempty_inter_preimage_zeroLocus {A : Type u} [CommRing A]
+    (I : Ideal A) (hI : I ≤ Ideal.jacobson ⊥) {Y : Scheme.{u}} (p : Y ⟶ Spec (.of A))
+    [IsProper p] {C : Set Y} (hC : IsClosed C) (hne : C.Nonempty) :
+    (C ∩ p ⁻¹' PrimeSpectrum.zeroLocus (I : Set A)).Nonempty := by
+  obtain ⟨x, ⟨y, hy, rfl⟩, hx⟩ :=
+    (p.isClosedMap C hC).exists_closed_singleton (hne.image p)
+  have hmax : (p y : PrimeSpectrum A).asIdeal.IsMaximal :=
+    (PrimeSpectrum.isClosed_singleton_iff_isMaximal _).1 hx
+  refine ⟨y, hy, ?_⟩
+  change (I : Set A) ⊆ (p y : PrimeSpectrum A).asIdeal
+  exact fun a ha ↦ Ideal.mem_sInf.mp (hI ha) ⟨bot_le, hmax⟩
+
 /-- **Connectedness of the closed fibre** (input (ii) of the two classical inputs of Stein
 connectedness): let `(A, I)` be a henselian pair and `p : Y ⟶ Spec A` proper. Every
 irreducible closed subset `C ⊆ Y` meets the closed fibre `Y₀ = p⁻¹(V(I))` in a nonempty
@@ -99,7 +125,9 @@ It is deduced from the idempotent lifting for proper schemes over a henselian pa
 structure `Z`: the space `Z ≅ C` is irreducible, hence connected, so `Γ(Z, 𝒪_Z)` has no
 idempotents but `0` and `1`; hence neither has `Γ(Z₀, 𝒪_{Z₀})`, and the nonempty closed fibre
 `Z₀`, whose image in `Y` is `C ∩ Y₀`, is connected.
-(blueprint: `thm-weil-pbc-stein-inputs`) -/
+(blueprint: `thm-weil-pbc-stein-inputs`) 
+(blueprint: thm-weil-pbc-stein-inputs)
+-/
 @[stacks 0A0B]
 theorem Scheme.Hom.isConnected_inter_preimage_zeroLocus {A : Type u} [CommRing A]
     (I : Ideal A) [HenselianRing A I] {Y : Scheme.{u}} (p : Y ⟶ Spec (.of A)) [IsProper p]
@@ -200,7 +228,9 @@ hypotheses of the Zariski restriction criterion
 spectrality holds because `Y` is quasi-compact and quasi-separated, the closedness because
 `V(I)` is closed, and the connectedness is the classical input
 `AlgebraicGeometry.Scheme.Hom.isConnected_inter_preimage_zeroLocus`.
-(blueprint: `lemma-weil-pbc-stein-connectedness`) -/
+(blueprint: `lemma-weil-pbc-stein-connectedness`) 
+(blueprint: lemma-weil-pbc-stein-connectedness)
+-/
 theorem Scheme.Hom.spectralSpace_and_isClosed_and_isConnected_inter {A : Type u} [CommRing A]
     (I : Ideal A) [HenselianRing A I] {Y : Scheme.{u}} (p : Y ⟶ Spec (.of A)) [IsProper p] :
     SpectralSpace Y ∧ IsClosed (p ⁻¹' PrimeSpectrum.zeroLocus (I : Set A)) ∧

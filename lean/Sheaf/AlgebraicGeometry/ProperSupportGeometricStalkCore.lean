@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.ClosedProperSupportLocality
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.Compactification.NagataCompactification
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
 import WeilConjectures.SixFunctors.OpenClosed.Complex

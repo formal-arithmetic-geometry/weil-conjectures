@@ -6,7 +6,7 @@ public import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry
 import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 import Sheaf.AlgebraicGeometry.CompactifiableOverField
-import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import Sheaf.AlgebraicGeometry.ProperProjectionFormula
 import Sheaf.CategoryTheory.KInjectiveTotalDerived
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses

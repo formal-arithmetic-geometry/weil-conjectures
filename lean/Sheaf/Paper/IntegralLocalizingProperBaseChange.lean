@@ -17,7 +17,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
 import Sheaf.Paper.IntegralFinitePullbackComposition
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 import Sheaf.Paper.CartesianCoefficients
 import Sheaf.Paper.CondensedModuleDerivedPushpull
 import Sheaf.Paper.IntegralProperBaseChange

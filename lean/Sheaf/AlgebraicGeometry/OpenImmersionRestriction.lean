@@ -23,7 +23,7 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
 import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 import Mathlib.CategoryTheory.Sites.GlobalSections
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact

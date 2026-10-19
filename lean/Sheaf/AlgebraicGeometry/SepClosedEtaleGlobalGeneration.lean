@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleGloballyGenerated
 public import Mathlib.FieldTheory.IsSepClosed
-import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
+import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 import Sheaf.AlgebraicGeometry.GlobalGeneratedStalkwise
 import Sheaf.AlgebraicGeometry.PointedEtaleStalk
 import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk

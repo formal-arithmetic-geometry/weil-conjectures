@@ -45,7 +45,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 import Sheaf.AlgebraicGeometry.LisseSplitHomFlatConstructible
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.Paper.DirectImageCtfOpenTor
 
 /-!

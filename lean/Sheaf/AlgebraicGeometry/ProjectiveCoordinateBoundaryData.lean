@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveBaseChange
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 @[expose] public section
 set_option autoImplicit false

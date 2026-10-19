@@ -20,7 +20,7 @@ import Mathlib.AlgebraicGeometry.Pullbacks
 import Mathlib.AlgebraicGeometry.Stalk
 import Mathlib.AlgebraicGeometry.ValuativeCriterion
 import Mathlib.RingTheory.Valuation.LocalSubring
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-!

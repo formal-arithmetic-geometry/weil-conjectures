@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 import Sheaf.AlgebraicGeometry.NormalGeometricCoverComponents
 import Sheaf.AlgebraicGeometry.ProEtaleLocalSystemRepresentability
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison

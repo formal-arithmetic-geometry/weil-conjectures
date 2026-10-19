@@ -49,7 +49,7 @@ import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Sheaf.RingTheory.NoetherianKoszulAugmentationProZero
 
-import Sheaf.Paper.KoszulComplex
+import WeilConjectures.AlgebraicGeometry.KoszulComplex
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients

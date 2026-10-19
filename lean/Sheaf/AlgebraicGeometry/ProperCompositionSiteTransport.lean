@@ -11,6 +11,7 @@ public import Sheaf.AlgebraicGeometry.UnboundedCompactSupportProperComposition
 public import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Sheaf.AlgebraicGeometry.ProperCoincidenceNormalized
 public import Sheaf.Paper.RefinementComparisonIsomorphism

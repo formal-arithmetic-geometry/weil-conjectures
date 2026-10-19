@@ -18,7 +18,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 public import Sheaf.AlgebraicGeometry.FiniteEtaleTateTwist
-public import Sheaf.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
+public import WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
@@ -33,7 +33,7 @@ import Sheaf.AlgebraicGeometry.CompactifiableOverField
 import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
-import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
 import Sheaf.Paper.RingedTopoiDerivedTensorPullback

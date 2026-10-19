@@ -60,7 +60,7 @@ noncomputable def coefficientDerivedEvaluation {R : Type u} [CommRing R]
     K ⟶ (ihom ((ihom K).obj (𝟙_ (DerivedCategory (ModuleCat.{u} R))))).obj
       (𝟙_ (DerivedCategory (ModuleCat.{u} R))) :=
   MonoidalClosed.curry
-    ((DerivedMonoidal.braiding (DerivedCategory.Qh (C := ModuleCat.{u} R))
+    ((DerivedMonoidal.braiding' (DerivedCategory.Qh (C := ModuleCat.{u} R))
       (HomotopyCategory.quasiIso (ModuleCat.{u} R) (ComplexShape.up ℤ))
       ((ihom K).obj (𝟙_ (DerivedCategory (ModuleCat.{u} R)))) K).hom ≫
         (ihom.ev K).app (𝟙_ (DerivedCategory (ModuleCat.{u} R))))

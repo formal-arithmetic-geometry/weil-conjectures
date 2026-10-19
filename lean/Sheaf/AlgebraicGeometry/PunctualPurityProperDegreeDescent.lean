@@ -14,7 +14,7 @@ public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import Sheaf.AlgebraicGeometry.ProperProjectionFormula
 import Sheaf.AlgebraicGeometry.EtaleShriekOpenExchangeAdjoint

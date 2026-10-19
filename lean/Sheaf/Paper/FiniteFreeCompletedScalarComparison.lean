@@ -21,7 +21,7 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 import Sheaf.Paper.DerivedComplete
-import Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
 import Sheaf.CategoryTheory.RingedKoszulCompletionReflector
 import Sheaf.Algebra.Homology.KFlat

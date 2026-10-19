@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLow
 import Sheaf.Paper.CoefficientHeart
 import Sheaf.Paper.CartesianCoefficients
 import Sheaf.Paper.CoefficientHeartCommonStratification
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.Paper.CompactificationLocalizing
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Mathlib.AlgebraicGeometry.Morphisms.Immersion

@@ -12,14 +12,10 @@ public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Injective
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompExact
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunctionAcyclic
-import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Injective
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Injective
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompExact
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunctionAcyclic
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 import Sheaf.AlgebraicGeometry.AffineComparisonInjectiveDerivedVanishing
 
 /-!
@@ -209,13 +205,12 @@ theorem rightAcyclic_comparisonUpperStar_obj_of_injective (X : Scheme.{u})
     (ShortComplex.mapNatIso (S.map Φ) (sheafificationNatIso _ _)).symm).1 hS'
 
 /-- **Comparison of global cohomology.** The derived global sections of the comparison pullback
-`ν^* M` of an étale sheaf vanish in degree `q` if those of `M` do: `RΓ(X_proét, ν^* M) ≅
-RΓ(X_ét, M)`, by the invertibility of the derived unit `M ⟶ Rν_* ν^* M`. -/
-lemma isZero_rightDerived_globalSectionsFunctor_comparisonUpperStar_obj (X : Scheme.{u})
-    (M : Sheaf X.smallEtaleTopology A) (q : ℕ)
-    (h : IsZero (((Etale.sectionsFunctor A X).rightDerived q).obj M)) :
-    IsZero (((globalSectionsFunctor A X).rightDerived q).obj
-      ((comparisonUpperStar A X).obj M)) := by
+`ν^* M` of an étale sheaf are those of `M`: `RΓ(X_proét, ν^* M) ≅ RΓ(X_ét, M)`, by the
+invertibility of the derived unit `M ⟶ Rν_* ν^* M`. -/
+noncomputable def rightDerivedGlobalSectionsFunctorComparisonUpperStarObjIso (X : Scheme.{u})
+    (M : Sheaf X.smallEtaleTopology A) (q : ℕ) :
+    ((globalSectionsFunctor A X).rightDerived q).obj ((comparisonUpperStar A X).obj M) ≅
+      ((Etale.sectionsFunctor A X).rightDerived q).obj M := by
   have := isIso_comparisonAdjunction_unit A X
   have : (comparisonLowerStar A X).PreservesInjectiveObjects :=
     Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
@@ -245,12 +240,21 @@ lemma isZero_rightDerived_globalSectionsFunctor_comparisonUpperStar_obj (X : Sch
           ((comparisonLowerStar A X).rightDerivedFunctorPlus.mapIso
             (((comparisonUpperStar A X).mapDerivedCategoryPlusSingleFunctor 0).app M).symm ≪≫
           (asIso ((comparisonAdjunction A X).derivedPlus.unit.app _)).symm))
-  refine IsZero.of_iso ?_ (eR.symm.app _ ≪≫
+  exact eR.symm.app _ ≪≫
     ((comparisonLowerStar A X ⋙ Etale.sectionsFunctor A X)
       |>.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso q).symm.app _ ≪≫ e ≪≫
     ((Etale.sectionsFunctor A X).singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso
-      q).app M)
-  exact h
+      q).app M
+
+/-- **Comparison of global cohomology.** The derived global sections of the comparison pullback
+`ν^* M` of an étale sheaf vanish in degree `q` if those of `M` do
+(`rightDerivedGlobalSectionsFunctorComparisonUpperStarObjIso`). -/
+lemma isZero_rightDerived_globalSectionsFunctor_comparisonUpperStar_obj (X : Scheme.{u})
+    (M : Sheaf X.smallEtaleTopology A) (q : ℕ)
+    (h : IsZero (((Etale.sectionsFunctor A X).rightDerived q).obj M)) :
+    IsZero (((globalSectionsFunctor A X).rightDerived q).obj
+      ((comparisonUpperStar A X).obj M)) :=
+  h.of_iso (rightDerivedGlobalSectionsFunctorComparisonUpperStarObjIso A X M q)
 
 end Acyclicity
 

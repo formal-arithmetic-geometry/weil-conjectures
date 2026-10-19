@@ -8,7 +8,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.Topology.Constructible
 import Sheaf.AlgebraicGeometry.ClosedImmersionResidueFieldIso
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.Topology.ConstructibleIsRetrocompact
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
 

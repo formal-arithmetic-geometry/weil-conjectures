@@ -397,7 +397,9 @@ triangle of compactifications `Compactification.Triangle.ofHasCompactification f
 `g` as `Y ⟶[v] Ȳ ⟶[ḡ] S` and `f ≫ v` as `X ⟶[a] X̄ ⟶[p] Ȳ`; with `V = X̄ ×_Ȳ Y`, the exchange
 isomorphism `v_! Rp_{Y*} ≅ Rp_* b_!` (proper base change) gives
 `Rf_! ⋙ Rg_! = c_! Rp_{Y*} v_! Rḡ_* ≅ a_! R(p ≫ ḡ)_* = R(f ≫ g)_!`, compared with the chosen
-compactifications of `f` and `f ≫ g`. -/
+compactifications of `f` and `f ≫ g`. Together with the coherent comparison isomorphisms
+`CompactSupportFormalism.shriekIso` of `derivedPlusFormalism`, this is blueprint
+`lem-amb-etale-compact-comparisons`. -/
 noncomputable def rightDerivedLowerShriekPlusCompIso (f : X ⟶ Y) (g : Y ⟶ S)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
     [QuasiCompact (f ≫ g)] :

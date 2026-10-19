@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.FormalKernelGradedPieces
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Sheaf.AlgebraicGeometry.SymmetricAlgebraSheafConstruction
 import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebraCore
-public import Sheaf.RingTheory.AssociatedGradedRing
+public import WeilConjectures.RingTheory.AssociatedGradedRing
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
@@ -23,7 +23,7 @@ import Mathlib.CategoryTheory.Abelian.Images
 import Mathlib.LinearAlgebra.Quotient.Basic
 import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.RingTheory.AssociatedGradedRingStructure
-import Sheaf.AlgebraicGeometry.GradedSheafStructures
+import WeilConjectures.AlgebraicGeometry.GradedSheafStructures
 import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.AlgebraicGeometry.TensorPullback
 import Mathlib.AlgebraicGeometry.Modules.Sheaf

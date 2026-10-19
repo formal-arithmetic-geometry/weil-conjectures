@@ -21,7 +21,7 @@ import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.CategoryTheory.SiteMorphismComposition
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.CategoryTheory.SiteMorphismComposition
+import WeilConjectures.CategoryTheory.SiteMorphismComposition
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 

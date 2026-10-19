@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.PurityNormalBundle
 public import WeilConjectures.AlgebraicGeometry.DeformationToNormalCone
-public import Sheaf.RingTheory.AssociatedGradedRing
+public import WeilConjectures.RingTheory.AssociatedGradedRing
 import Sheaf.AlgebraicGeometry.ConormalGradedAlgebra
 import Sheaf.AlgebraicGeometry.IsFiniteLocallyFreeOfCoherentFreeStalks
 import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebraCore

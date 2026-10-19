@@ -15,7 +15,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Sheaf.AlgebraicGeometry.EtaleCompactSupportAmplitude
 public import Mathlib.Topology.KrullDimension

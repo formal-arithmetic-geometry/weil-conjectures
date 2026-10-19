@@ -153,7 +153,12 @@ end Rationalization
 variable [HasZeroObject C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive]
   [∀ n : ℤ, (shiftFunctor C n).Linear R] [Pretriangulated C] [IsTriangulated C]
 
-/-- The *rationalization* of an `R`-linear triangulated category `C` at a submonoid `M` of
+/-- Blueprint `def-weil-rationalization-karoubi`: Rationalization (scalar localization),
+`C[1/ϖ]`: the same objects as `C` (`CategoryTheory.Rationalization.essSurj_Q`) and morphisms
+`Hom_C(K, L) ⊗_{𝒪_E} E` (`CategoryTheory.Rationalization.isLocalizedModule_mapLinearMap`); no
+Karoubi completion is taken.
+
+The *rationalization* of an `R`-linear triangulated category `C` at a submonoid `M` of
 `R`: the Verdier quotient of `C` by the triangulated subcategory of `M`-torsion objects,
 i.e. the localization of `C` at the morphisms whose mapping cone is annihilated by some
 element of `M`. -/

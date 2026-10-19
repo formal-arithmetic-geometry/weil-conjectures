@@ -15,7 +15,7 @@ public import Mathlib.Topology.KrullDimension
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.FiniteCoproductLfpQcqs
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.AlgebraicGeometry.ProperCoproduct
 import Sheaf.AlgebraicGeometry.GoodCurvesBoundaryQuasiFinite
 

@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.NoetherianComponents
+public import WeilConjectures.ConstructibleSheaf.DenseOpenUnit
+public import WeilConjectures.ConstructibleSheaf.GenericConstancy
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.ConstructibleSheaf.StalkCardinality
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.Presentation
@@ -24,6 +26,9 @@ stalkwise criteria for constructible étale sheaves of `Λ`-modules on `X`:
 - `AlgebraicGeometry.Etale.mono_of_mono_sheafFiber_of_isLocallyConstantSheaf` (blueprint
   `lem-weil-pbc-lisse-generic-kernel`): on an irreducible scheme, a morphism out of a locally
   constant sheaf which is injective on the stalk at a geometric generic point is a monomorphism.
+- `AlgebraicGeometry.Etale.exists_isConstructible_sheafFiber_map_eq_zero`: a morphism into a
+  constructible sheaf whose stalk at a point vanishes has vanishing stalks on a constructible
+  neighbourhood of that point.
 - `AlgebraicGeometry.Scheme.IsConstructibleSheaf.exists_stratification_isIrreducible`
   (blueprint `lem-weil-pbc-irreducible-lisse-strata`): a constructible sheaf is finite locally
   constant on the strata of a stratification by irreducible strata.
@@ -50,7 +55,7 @@ field of `x`.
 
 universe u
 
-open CategoryTheory Limits Topology
+open CategoryTheory Limits Topology Opposite
 open AlgebraicGeometry.Etale
 
 noncomputable section
@@ -71,51 +76,134 @@ theorem Etale.mono_of_mono_sheafFiber_of_isLocallyConstantSheaf {S : Scheme.{u}}
     [IrreducibleSpace S] {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (hs : ∀ x, s.base x = genericPoint S)
     {F G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)} [IsLocallyConstantSheaf F]
-    (φ : F ⟶ G) (hφ : Mono ((pointSmallEtale s).sheafFiber.map φ)) : Mono φ :=
-  by
-    classical
-    have : LocallySmall.{u} S.Etale := locallySmall_self _
-    have : AB5OfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
-      AB5OfSize_of_univLE.{u, u, u + 1, u + 1} _
-    let := hφ
-    have hz : (pointSmallEtale s).sheafFiber.map (kernel.ι φ) = 0 := by
-      apply (cancel_mono ((pointSmallEtale s).sheafFiber.map φ)).1
-      simp only [← Functor.map_comp, kernel.condition, Functor.map_zero, zero_comp]
-    apply Abelian.mono_of_kernel_ι_eq_zero
-    have : PreservesFilteredColimitsOfSize.{u, u}
-        (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
-      preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
-    refine Sheaf.hom_ext (NatTrans.ext (funext fun V ↦ ModuleCat.hom_ext
-      (LinearMap.ext fun a ↦ ?_)))
-    induction V using Opposite.rec with | op V => ?_
-    change (kernel.ι φ).hom.app (Opposite.op V) a = 0
-    let b := (kernel.ι φ).hom.app (Opposite.op V) a
-    apply eq_zero_of_moduleVanishingLocus_eq_univ
-    apply Set.eq_univ_of_forall
-    intro v
-    obtain ⟨W, g, w, N, n, hw, hn⟩ := exists_isZero_iff_of_isLocallyConstantSheaf b v
-    have hopen : IsOpen (Set.range W.hom) := W.hom.isOpenMap.isOpen_range
-    have hη : genericPoint S ∈ Set.range W.hom :=
-      ((genericPoint_spec S).mem_open_set_iff hopen).2
-        ⟨W.hom w, Set.mem_univ _, Set.mem_range_self _⟩
-    obtain ⟨y, hy⟩ := hη
-    obtain ⟨t, ht⟩ := pointSmallEtaleFiberObjToPreimage_surjective s (hs default) W
-      ⟨y, hy⟩
-    have hb : (pointSmallEtale s).toPresheafFiber W t F.obj (F.obj.map g.op b) = 0 := by
-      have hnat := ConcreteCategory.congr_hom
-        ((pointSmallEtale s).toPresheafFiber_naturality (kernel.ι φ).hom W t)
-        ((kernel φ).obj.map g.op a)
-      have hg := ConcreteCategory.congr_hom ((kernel.ι φ).hom.naturality g.op) a
-      simp only [ConcreteCategory.comp_apply] at hnat hg
-      rw [← hg, ← hnat]
-      exact ConcreteCategory.congr_hom hz _
-    obtain ⟨P, k, p, _, hp⟩ := ((pointSmallEtale s).toPresheafFiber_eq_iff' W t
-      (F.obj.map g.op b) 0).1 (hb.trans (map_zero _).symm)
-    have hP : Nonempty P.left := ⟨p.left (IsLocalRing.closedPoint Ω)⟩
-    have hn0 : n = 0 := (hn P k hP).1 (by
-      simpa only [op_comp, Functor.map_comp, ConcreteCategory.comp_apply,
-        map_zero] using hp)
-    exact ⟨W, g, w, hw, by simpa using (hn W (𝟙 _) ⟨w⟩).2 hn0⟩
+    (φ : F ⟶ G) (hφ : Mono ((pointSmallEtale s).sheafFiber.map φ)) : Mono φ := by
+  have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  set Φ := pointSmallEtale s
+  have hinj : Function.Injective (Φ.sheafFiber.map φ) := (ModuleCat.mono_iff_injective _).1 hφ
+  -- a section of `F` killed by `φ` vanishes near the points over the generic point, which are
+  -- dense, hence everywhere since its vanishing locus is closed
+  have key (W : S.Etale) (b : ToType (F.obj.obj (op W))) (hb : φ.hom.app (op W) b = 0) :
+      b = 0 := by
+    have hW : Etale W.hom := W.prop
+    have hgen : {w : W.left | W.hom w = genericPoint S} ⊆ moduleVanishingLocus F b := by
+      intro w hw
+      obtain ⟨t, ht⟩ := pointSmallEtaleFiberObjToPreimage_surjective s (hs default) W ⟨w, hw⟩
+      have htw : t.left (default : Spec (.of Ω)) = w := congrArg Subtype.val ht
+      have h0 : Φ.toPresheafFiber W t F.obj b = Φ.toPresheafFiber W t F.obj 0 := by
+        rw [map_zero]
+        apply hinj
+        rw [map_zero]
+        have hnat := ConcreteCategory.congr_hom (Φ.toPresheafFiber_naturality φ.hom W t) b
+        rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply] at hnat
+        refine hnat.trans ?_
+        rw [hb, map_zero]
+      obtain ⟨W', g, y, rfl, hy⟩ := (Φ.toPresheafFiber_eq_iff' W _ _ _).1 h0
+      exact ⟨W', g, y.left (default : Spec (.of Ω)), htw, by simpa using hy⟩
+    have hdense : Dense {w : W.left | W.hom w = genericPoint S} := by
+      refine dense_iff_inter_open.2 fun N hN ⟨w, hw⟩ ↦ ?_
+      obtain ⟨v, hvN, hv⟩ := ((genericPoint_spec S).mem_open_set_iff (W.hom.isOpenMap _ hN)).2
+        ⟨_, Set.mem_univ _, w, hw, rfl⟩
+      exact ⟨v, hvN, hv⟩
+    refine eq_zero_of_moduleVanishingLocus_eq_univ (Set.eq_univ_of_univ_subset ?_)
+    rw [← hdense.closure_eq]
+    exact (isClopen_moduleVanishingLocus b).isClosed.closure_subset_iff.2 hgen
+  refine (Preadditive.mono_iff_cancel_zero φ).2 fun P g hg ↦ ?_
+  refine Sheaf.hom_ext (NatTrans.ext (funext fun V ↦ ModuleCat.hom_ext
+    (LinearMap.ext fun a ↦ ?_)))
+  induction V using Opposite.rec with | op V => ?_
+  change g.hom.app (op V) a = 0
+  refine key V _ ?_
+  have := congrArg (fun f ↦ f.hom.app (op V) a) hg
+  simpa using this
+
+/-- **Vanishing of a stalk map spreads to a constructible neighbourhood.** Let `T` be Noetherian,
+`Q` a constructible sheaf of `Λ`-modules on `T_ét` and `χ : G ⟶ Q` a morphism of sheaves whose
+stalk at the geometric point over `x` vanishes. Then the stalks of `χ` vanish on a constructible
+subset containing `x`: on a dense open `U` of the closure of `x` the pullback of `Q` is locally
+constant, and the pullback of `χ` to `U` vanishes since its image is a locally constant subsheaf
+with vanishing generic stalk
+(`AlgebraicGeometry.Etale.mono_of_mono_sheafFiber_of_isLocallyConstantSheaf`). -/
+theorem Etale.exists_isConstructible_sheafFiber_map_eq_zero {T : Scheme.{u}} [IsNoetherian T]
+    {G Q : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)} [IsConstructibleSheaf Q]
+    (χ : G ⟶ Q) (x : T) (hx : (pointSmallEtale (T.algClosurePoint x)).sheafFiber.map χ = 0) :
+    ∃ E : Set T, IsConstructible E ∧ x ∈ E ∧
+      ∀ y ∈ E, (pointSmallEtale (T.algClosurePoint y)).sheafFiber.map χ = 0 := by
+  -- the closure of `x`, as a closed subscheme `i : Z ⟶ T`
+  let I := IdealSheafData.vanishingIdeal
+    (⟨closure {x}, isClosed_closure⟩ : TopologicalSpace.Closeds T)
+  let i := I.subschemeι
+  have hi : Set.range i.base = closure {x} := by simp [i, I, IdealSheafData.range_subschemeι]
+  have := IsConstructibleSheaf.upperStar i Q
+  -- `Q` is finite locally constant on a dense open `U` of `Z`
+  obtain ⟨U, hU, hQU⟩ := IsConstructibleSheaf.exists_dense_open
+    (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N) (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
+    ((i)^*[ModuleCat.{u + 1} Λ].obj Q)
+  let k := U.ι ≫ i
+  have hk : Set.range k.base ⊆ closure {x} := by
+    rw [← hi, Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp]
+    exact Set.image_subset_range _ _
+  obtain ⟨z, hz⟩ : x ∈ Set.range i.base := hi ▸ subset_closure rfl
+  have : Nonempty I.subscheme := ⟨z⟩
+  have hxk : x ∈ Set.range k.base := by
+    obtain ⟨v, hv⟩ := hU.nonempty
+    have hzv : z ⤳ v := by
+      rw [← i.isEmbedding.isInducing.specializes_iff, hz, specializes_iff_mem_closure, ← hi]
+      exact ⟨v, rfl⟩
+    exact ⟨⟨z, hzv.mem_open U.isOpen hv⟩, by simpa [k] using hz⟩
+  -- `U` is irreducible, with generic point over `x`
+  have hirr : IsIrreducible (Set.range k.base) := by
+    refine isIrreducible_iff_closure.1 ?_
+    rw [subset_antisymm (closure_minimal hk isClosed_closure)
+      (closure_mono (Set.singleton_subset_iff.2 hxk))]
+    exact isIrreducible_singleton.closure
+  have : IrreducibleSpace (Set.range k.base) := Subtype.irreducibleSpace hirr
+  have : IrreducibleSpace U := k.isEmbedding.toHomeomorph.irreducibleSpace_iff.2 this
+  obtain ⟨t, ht⟩ := IsImmersion.exists_comp_eq_of_field k (T.algClosurePoint x)
+    (by rw [algClosurePoint_base]; exact hxk)
+  have htgen (p : Spec (.of (AlgebraicClosure (T.residueField x)))) :
+      t.base p = genericPoint U := by
+    apply k.isEmbedding.injective
+    have h₁ : k.base (t.base p) = x := by
+      rw [← Scheme.Hom.comp_apply, ht, algClosurePoint_base]
+    rw [h₁]
+    exact (Specializes.antisymm (specializes_iff_mem_closure.2 (hk ⟨_, rfl⟩))
+      (h₁ ▸ (genericPoint_specializes (t.base p)).map k.continuous)).eq
+  -- the pullback of `χ` to `U` vanishes
+  have hx' : ((pointSmallEtale (t ≫ k)).sheafFiber (A := ModuleCat.{u + 1} Λ)).map χ = 0 := by
+    rw [ht]
+    exact hx
+  have hχt : ((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} Λ)).map
+      ((k)^*[ModuleCat.{u + 1} Λ].map χ) = 0 := by
+    have h := (upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) k t).hom.naturality χ
+    rw [Functor.comp_map, hx', comp_zero] at h
+    exact (Iso.cancel_iso_hom_right _ _
+      ((upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) k t).app Q)).1
+      (h.trans zero_comp.symm)
+  have : IsLocallyConstantSheaf ((k)^*[ModuleCat.{u + 1} Λ].obj Q) :=
+    have := hQU.toIsLocallyConstantSheaf
+    IsLocallyConstantSheaf.of_iso
+      (F := (U.ι)^*[ModuleCat.{u + 1} Λ].obj ((i)^*[ModuleCat.{u + 1} Λ].obj Q))
+      ((upperStarComp (ModuleCat.{u + 1} Λ) U.ι i).app Q).symm
+  have hmono : Mono (cokernel.π ((k)^*[ModuleCat.{u + 1} Λ].map χ)) := by
+    refine mono_of_mono_sheafFiber_of_isLocallyConstantSheaf t htgen _ ?_
+    set P := (pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} Λ)
+    have h₁ := PreservesCokernel.π_iso_hom P ((k)^*[ModuleCat.{u + 1} Λ].map χ)
+    have : IsIso (cokernel.π (P.map ((k)^*[ModuleCat.{u + 1} Λ].map χ))) :=
+      cokernel.π_of_zero hχt
+    rw [← h₁] at this
+    have := IsIso.of_isIso_comp_right
+      (P.map (cokernel.π ((k)^*[ModuleCat.{u + 1} Λ].map χ))) (PreservesCokernel.iso P _).hom
+    infer_instance
+  have hk0 : (k)^*[ModuleCat.{u + 1} Λ].map χ = 0 :=
+    (cancel_mono (cokernel.π _)).1 (by rw [cokernel.condition, zero_comp])
+  -- hence the stalks of `χ` vanish on the range of `U`
+  refine ⟨Set.range k.base, k.isLocallyClosed_range.isConstructible_of_noetherianSpace, hxk, ?_⟩
+  intro y hy
+  obtain ⟨t', ht'⟩ := IsImmersion.exists_comp_eq_of_field k (T.algClosurePoint y)
+    (by rw [algClosurePoint_base]; exact hy)
+  rw [← ht']
+  exact sheafFiber_map_comp_eq_zero k hk0 t'
 
 variable [Finite Λ]
 
@@ -249,9 +337,110 @@ Let `T` be Noetherian. Every subsheaf of a constructible sheaf of `Λ`-modules o
 constructible. -/
 theorem Scheme.IsConstructibleSheaf.of_mono {T : Scheme.{u}} [IsNoetherian T]
     {G F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (ι : G ⟶ F) [Mono ι]
-    [IsConstructibleSheaf F] : IsConstructibleSheaf G :=
-  by
-    exact constructible_of_mono_noetherian ι
+    [IsConstructibleSheaf F] : IsConstructibleSheaf G := by
+  classical
+  -- `G` is a quotient of a sum of constructible sheaves `v_! Λ`
+  let H : Etale.SectionIndex G → Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
+    fun i ↦ Etale.lowerShriekUnit (Λ := Λ) i.1.1.hom i.1.1.prop
+  have hH (i : Etale.SectionIndex G) : IsConstructibleSheaf (H i) :=
+    have : IsAffine ((𝟭 Scheme).obj i.1.1.left) := i.1.2
+    have : Etale i.1.1.hom := i.1.1.prop
+    isConstructibleSheaf_lowerShriekUnit_of_isAffine_source (X := T) i.1.1.hom
+  have := Etale.epi_sigmaDesc_sectionHom G
+  let φ := fun i : Etale.SectionIndex G ↦ Etale.sectionHom G i.1.1.hom i.1.1.prop i.2
+  let d (S : Finset (Etale.SectionIndex G)) := finsetSigmaDesc H φ S
+  have hSig (S : Finset (Etale.SectionIndex G)) : IsConstructibleSheaf (∐ fun i : S ↦ H i.1) :=
+    isConstructibleSheaf_finsetSigma H S
+  have hQ (S : Finset (Etale.SectionIndex G)) :
+      IsConstructibleSheaf (Limits.cokernel (d S ≫ ι)) :=
+    have := hSig S
+    IsConstructibleSheaf.cokernel _
+  -- the subsum indexed by `S` is surjective on a stalk iff `χ S : G ⟶ coker (d S ≫ ι)`
+  -- vanishes there
+  let χ (S : Finset (Etale.SectionIndex G)) := ι ≫ Limits.cokernel.π (d S ≫ ι)
+  have hχ (S : Finset (Etale.SectionIndex G)) (x : T) :
+      (pointSmallEtale (T.algClosurePoint x)).sheafFiber.map (χ S) = 0 ↔
+        Function.Surjective ((pointSmallEtale (T.algClosurePoint x)).sheafFiber.map (d S)) := by
+    set P := (pointSmallEtale (T.algClosurePoint x)).sheafFiber (A := ModuleCat.{u + 1} Λ)
+    have : P.Additive := (pointSmallEtale (T.algClosurePoint x)).sheafFiber_additive
+    constructor
+    · intro h v
+      have hinj : Function.Injective (P.map ι) := (ModuleCat.mono_iff_injective _).1 inferInstance
+      have h' : P.map ι ≫
+          ModuleCat.ofHom (LinearMap.range (P.map (d S ≫ ι)).hom).mkQ = 0 := by
+        rw [← ModuleCat.cokernel_π_cokernelIsoRangeQuotient_hom,
+          ← PreservesCokernel.π_iso_hom P]
+        simp only [Category.assoc]
+        rw [← P.map_comp_assoc]
+        change P.map (χ S) ≫ _ = 0
+        rw [h, zero_comp]
+      have hv := ConcreteCategory.congr_hom h' v
+      simp only [ConcreteCategory.comp_apply, ModuleCat.hom_ofHom, Submodule.mkQ_apply,
+        ModuleCat.hom_zero, LinearMap.zero_apply, Submodule.Quotient.mk_eq_zero] at hv
+      obtain ⟨w, hw⟩ := hv
+      refine ⟨w, hinj ?_⟩
+      rw [← ConcreteCategory.comp_apply, ← P.map_comp]
+      exact hw
+    · intro hs
+      have : Epi (P.map (d S)) := (ModuleCat.epi_iff_surjective _).2 hs
+      rw [← cancel_epi (P.map (d S)), ← P.map_comp, comp_zero]
+      change P.map (d S ≫ ι ≫ Limits.cokernel.π (d S ≫ ι)) = 0
+      rw [← Category.assoc, Limits.cokernel.condition, P.map_zero]
+  -- the stalks of `G` are finite
+  have hfin (x : T) : Module.Finite Λ
+      (((pointSmallEtale (T.algClosurePoint x)).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj G) := by
+    have := (ModuleCat.isFinitelyGenerated_iff _).1
+      ((inferInstance : IsConstructibleSheaf F).isFiniteSheaf.isFinitelyGenerated_sheafFiber _
+        (T.algClosurePoint x))
+    exact Module.Finite.of_injective
+      ((pointSmallEtale (T.algClosurePoint x)).sheafFiber.map ι).hom
+      ((ModuleCat.mono_iff_injective _).1 inferInstance)
+  -- near every point some finite subsum is surjective on stalks
+  have hpt (x : T) : ∃ S : Finset (Etale.SectionIndex G), ∃ E : Set T, IsConstructible E ∧
+      x ∈ E ∧ ∀ y ∈ E,
+        Function.Surjective ((pointSmallEtale (T.algClosurePoint y)).sheafFiber.map (d S)) := by
+    obtain ⟨S, hS⟩ :=
+      exists_finset_surjective_sheafFiber_map H φ (T.algClosurePoint x) (hfin x)
+    have := hQ S
+    obtain ⟨E, hE, hxE, hEχ⟩ :=
+      Etale.exists_isConstructible_sheafFiber_map_eq_zero (χ S) x ((hχ S x).2 hS)
+    exact ⟨S, E, hE, hxE, fun y hy ↦ (hχ S y).1 (hEχ y hy)⟩
+  choose S E hE hxE hES using hpt
+  have hcov : (Set.univ : Set T) ⊆ ⋃ x, E x := fun x _ ↦ Set.mem_iUnion.2 ⟨x, hxE x⟩
+  obtain ⟨T₀, hT₀⟩ :=
+    (isCompact_univ (X := WithConstructibleTopology T)).elim_finite_subcover
+    (fun x ↦ WithTopology.ofTopology ⁻¹' E x)
+    (fun x ↦ by
+      rw [WithConstructibleTopology.isOpen_iff]
+      exact (hE x).isClopen_constructibleTopology.2)
+    (fun w _ ↦ by simpa using hcov (Set.mem_univ (WithTopology.ofTopology w)))
+  have hT (y : T) : y ∈ ⋃ x ∈ T₀, E x := by
+    simpa using hT₀ (Set.mem_univ (WithTopology.toTopology _ y))
+  -- the subsum indexed by `T₀.sup S` is an epimorphism
+  have hall (y : T) : IsZero ((pointSmallEtale (T.algClosurePoint y)).sheafFiber.obj
+      (Limits.cokernel (d (T₀.sup S)))) := by
+    obtain ⟨x, hx, hy⟩ := Set.mem_iUnion₂.mp (hT y)
+    rw [isZero_sheafFiber_cokernel_iff]
+    intro m
+    obtain ⟨w, hw⟩ := hES x y hy m
+    exact range_sheafFiber_map_finsetSigmaDesc_mono H φ _ (Finset.le_sup (f := S) hx) ⟨w, hw⟩
+  have : IsIso (0 : Limits.cokernel (d (T₀.sup S)) ⟶ _) :=
+    isIso_of_isIso_sheafFiber_map _ fun x ↦ by
+      have hx : IsZero ((T.uliftPointSmallEtale x).sheafFiber.obj
+          (Limits.cokernel (d (T₀.sup S)))) :=
+        (hall x).of_iso (((pointSmallEtale (T.algClosurePoint x)).uliftSheafFiberIso _).app _)
+      exact ⟨0, hx.eq_of_src _ _, hx.eq_of_src _ _⟩
+  have : Epi (d (T₀.sup S)) := Preadditive.epi_of_isZero_cokernel _ (by
+    rw [IsZero.iff_id_eq_zero, ← IsIso.hom_inv_id (0 : Limits.cokernel (d (T₀.sup S)) ⟶
+      Limits.cokernel (d (T₀.sup S))), zero_comp])
+  -- its coimage is constructible
+  have := hSig (T₀.sup S)
+  have := IsConstructibleSheaf.kernel (d (T₀.sup S) ≫ ι)
+  have : IsConstructibleSheaf (Limits.kernel (d (T₀.sup S))) :=
+    IsConstructibleSheaf.of_iso (kernelCompMono (d (T₀.sup S)) ι)
+  have : IsConstructibleSheaf (Abelian.coimage (d (T₀.sup S))) :=
+    IsConstructibleSheaf.cokernel (Limits.kernel.ι (d (T₀.sup S)))
+  exact IsConstructibleSheaf.of_iso (asIso (Abelian.factorThruCoimage (d (T₀.sup S))))
 
 /-- Blueprint `fin4-lem-stalk-constructibility-criterion`: Constructibility from the
 cardinalities of finite stalks.

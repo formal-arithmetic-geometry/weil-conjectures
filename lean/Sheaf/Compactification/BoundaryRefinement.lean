@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.Widesubcategory
 public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 
 /-!
 # Boundary-preserving refinements of compactifications

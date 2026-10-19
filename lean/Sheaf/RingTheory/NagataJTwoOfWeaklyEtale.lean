@@ -15,7 +15,7 @@ import Mathlib.RingTheory.KrullDimension.Zero
 import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import Mathlib.RingTheory.RegularLocalRing.Defs
 import Mathlib.CategoryTheory.MorphismProperty.Composition
-import Sheaf.AlgebraicGeometry.AffineChartBaseChangeIso
+import WeilConjectures.AlgebraicGeometry.AffineChartBaseChangeIso
 import Mathlib.RingTheory.Noetherian.Basic
 import Mathlib.RingTheory.Localization.Submodule
 import Sheaf.RingTheory.JapaneseDomain

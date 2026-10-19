@@ -15,7 +15,7 @@ import Sheaf.AlgebraicGeometry.EtaleToposPointsGeometric
 import Sheaf.TraceFormula.NormalGenericArrowTransitivity
 import Sheaf.Paper.SitePointReconstructionSets
 import Sheaf.AlgebraicGeometry.GeometricSpecializationStrictLocalLift
-import Sheaf.Paper.WeilPbcNormalizationInResidueFieldExtension
+import WeilConjectures.AlgebraicGeometry.WeilPbcNormalizationInResidueFieldExtension
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import Mathlib.Topology.Sober
 import Sheaf.CategoryTheory.Sites.OrientedProductLargeSites

@@ -12,7 +12,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResol
 public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexCohomology
 public import Mathlib.Algebra.Homology.HomotopyCategory.DegreewiseSplit
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
-import Sheaf.CategoryTheory.PushoutShortExactSequence
+import WeilConjectures.CategoryTheory.PushoutShortExactSequence
 import Mathlib.Algebra.Homology.ShortComplex.SnakeLemma
 import Mathlib.CategoryTheory.Abelian.Refinements
 import Mathlib.Algebra.Homology.ShortComplex.Exact

@@ -17,7 +17,7 @@ import Sheaf.TraceFormula.GenericFibreComponentLowerBound
 import Sheaf.AlgebraicGeometry.GenericComponentsSplit
 import Sheaf.AlgebraicGeometry.GeometricGenericCoverSpread
 import Sheaf.AlgebraicGeometry.EtaleGenericResidueFieldModel
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-!
 # Generic constancy of geometric fibre component counts

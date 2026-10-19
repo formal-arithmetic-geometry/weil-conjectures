@@ -5,17 +5,26 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapDevissage
+
+
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
+public import WeilConjectures.SixFunctors.BaseChange.DerivedForget
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.EdgeMapBaseChange
+
+
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.AlgebraicGeometry.Curve
+import WeilConjectures.AlgebraicGeometry.Curve.Reductions
+import WeilConjectures.AlgebraicGeometry.Curve.AlgebraicallyClosedCohomologyInvariant
+import WeilConjectures.AlgebraicGeometry.Curve.SepClosedComparison
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
 public import WeilConjectures.SixFunctors.BaseChange.DerivedForget
-import WeilConjectures.AlgebraicGeometry.Curve.Reductions
-import Sheaf.AlgebraicGeometry.Curve.AlgebraicallyClosedCohomologyInvariant
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapDevissage
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.EdgeMapBaseChange
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
@@ -29,7 +38,7 @@ geometric point is such a pullback map, between the projective lines over the re
 of two strict henselisations.
 
 The case of algebraically closed fields is the real content; it is reached from the curve
-calculations by dévissage and is stated here without proof. The separably closed case is
+calculations by dévissage. The separably closed case is
 deduced from it, the extensions `k̄/k` and `k̄'/k'` being purely inseparable, so that the
 corresponding base changes are universal homeomorphisms, which do not change étale cohomology.
 
@@ -70,6 +79,180 @@ is that of the underlying sheaf of abelian groups.
 universe u
 
 open CategoryTheory
+
+namespace AlgebraicGeometry.IsCurve
+
+variable (Λ : Type (u + 1)) [CommRing Λ]
+
+/-- **Invariance of the cohomology of a proper curve under extension of algebraically closed
+fields.** Let `k ⊆ k'` be algebraically closed fields, `C` a proper curve over `k` and `F` a
+torsion étale sheaf of `Λ`-modules on `C`. For every cartesian square
+
+```
+C' --ι'--> C
+|          |
+f'         f
+v          v
+Spec k' -ι-> Spec k
+```
+
+the pullback map `Hᵠ(C, F) ⟶ Hᵠ(C', ι'^* F)` on the cohomology of the underlying abelian
+sheaves is bijective for every `q`. This is the assertion `C₇(C, F)` of the eight curve
+calculations; it is proved by reducing to reduced curves and constructible `𝐅_r`-coefficients,
+splitting off the zero-dimensional components, localising to a dense open, passing to the
+normalisation and to the smooth constant case of the curve calculations.
+(blueprint: prop-weil-pbc-algebraically-closed-extension)
+-/
+@[stacks 0A5E]
+theorem bijective_cohomologyMap_of_isAlgClosed {k k' : Type u} [Field k] [IsAlgClosed k]
+    [Field k'] [IsAlgClosed k'] {C C' : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
+    [IsProper f] {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C}
+    (h : IsPullback ι' f' f ι) (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [Scheme.IsTorsionModuleSheaf F] (q : ℕ) :
+    Function.Bijective (Etale.cohomologyMap ι'
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) := by
+  refine bijective_cohomologyMap_of_forall_isReduced Λ ?_ f k' h F q
+  intro X X' g _ _ _ K _ _ ι g' ι' h r _ G _ q
+  exact algebraicallyClosedCohomologyInvariant g K h G q
+
+/-- **Passage between separably closed fields.** Let `k ⊆ k'` be separably closed fields, `C`
+a proper curve over `k` and `F` a torsion étale sheaf of `Λ`-modules on `C`. If the cohomology
+of proper curves is invariant under extensions of algebraically closed fields (the hypothesis
+`H`, which is `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isAlgClosed`), then for
+every cartesian square
+
+```
+C' --ι'--> C
+|          |
+f'         f
+v          v
+Spec k' -ι-> Spec k
+```
+
+the pullback map `Hᵠ(C, F) ⟶ Hᵠ(C', ι'^* F)` is bijective for every `q`.
+
+Choose compatible algebraic closures `k̄ ⊆ k̄'`. As `k` and `k'` are separably closed, `k̄/k`
+and `k̄'/k'` are purely inseparable, so the base changes `C_{k̄} ⟶ C` and `C_{k̄'} ⟶ C'` are
+universal homeomorphisms and are bijective on étale cohomology
+(`AlgebraicGeometry.Etale.cohomologyMap_bijective`). The square of pullback maps between the
+four cohomology groups commutes, and its bottom row `Hᵠ(C_{k̄}) ⟶ Hᵠ(C_{k̄'})` is bijective by
+`H`.
+(blueprint: lemma-weil-pbc-curve-separably-closed-passage)
+-/
+theorem bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed
+    (H : ∀ {k k' : Type u} [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k']
+      {C C' : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsProper f]
+      {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C}
+      (_ : IsPullback ι' f' f ι) (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+      [Scheme.IsTorsionModuleSheaf F] (q : ℕ),
+      Function.Bijective (Etale.cohomologyMap ι'
+        ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q))
+    {k k' : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k'] {C C' : Scheme.{u}}
+    (f : C ⟶ Spec (.of k)) [IsCurve f] [IsProper f] {ι : Spec (.of k') ⟶ Spec (.of k)}
+    {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C} (h : IsPullback ι' f' f ι)
+    (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionModuleSheaf F] (q : ℕ) :
+    Function.Bijective (Etale.cohomologyMap ι'
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) := by
+  obtain ⟨K, hK, hKa, K', hK', hK'a, D, D', b, b', j, a, p, p',
+    hb, hbp, hs, hp, hp', hcomm⟩ := sepClosed_geometric_comparison f h
+  let A := (sheafCompose C.smallEtaleTopology
+    (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F
+  let G := (Etale.upperStar (ModuleCat.{u + 1} Λ) p).obj F
+  obtain ⟨e⟩ := Etale.pullback_forget_modules_iso Λ p F
+  let eH := (Sheaf.functorH D.smallEtaleTopology q).mapIso e
+  let eaH := (Sheaf.functorH D'.smallEtaleTopology q).mapIso
+    ((Etale.upperStar AddCommGrpCat.{u + 1} a).mapIso e)
+  have hbottom : Function.Bijective
+      (Etale.cohomologyMap a ((Etale.upperStar AddCommGrpCat.{u + 1} p).obj A) q) := by
+    apply (Function.Bijective.of_comp_iff _
+      (ConcreteCategory.bijective_of_isIso eH.hom)).mp
+    have heq : Etale.cohomologyMap a
+        ((Etale.upperStar AddCommGrpCat.{u + 1} p).obj A) q ∘ eH.hom =
+        eaH.hom ∘ Etale.cohomologyMap a
+          ((sheafCompose D.smallEtaleTopology
+            (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G) q := by
+      funext x
+      exact Etale.cohomologyMap_map a q e.hom x
+    rw [heq]
+    exact (ConcreteCategory.bijective_of_isIso eaH.hom).comp (H b hs G q)
+  let e₁ := (Etale.upperStarComp AddCommGrpCat.{u + 1} p' ι').app A
+  let e₂ := (Etale.upperStarComp AddCommGrpCat.{u + 1} a p (p' ≫ ι') hcomm).app A
+  let e₁H := (Sheaf.functorH D'.smallEtaleTopology q).mapIso e₁
+  let e₂H := (Sheaf.functorH D'.smallEtaleTopology q).mapIso e₂
+  let g := e₁H.inv ∘ Etale.cohomologyMap p'
+    ((Etale.upperStar AddCommGrpCat.{u + 1} ι').obj A) q
+  have hg : Function.Bijective g :=
+    (ConcreteCategory.bijective_of_isIso e₁H.inv).comp
+      (Etale.cohomologyMap_bijective p' _ q)
+  have hcomp : Function.Bijective (g ∘ Etale.cohomologyMap ι' A q) := by
+    have heq : g ∘ Etale.cohomologyMap ι' A q =
+        e₂H.inv ∘ Etale.cohomologyMap a
+          ((Etale.upperStar AddCommGrpCat.{u + 1} p).obj A) q ∘
+            Etale.cohomologyMap p A q := by
+      funext x
+      have ht : Etale.cohomologyMap p'
+          ((Etale.upperStar AddCommGrpCat.{u + 1} ι').obj A) q
+            (Etale.cohomologyMap ι' A q x) =
+          Sheaf.H.map e₁.hom q (Etale.cohomologyMap (p' ≫ ι') A q x) :=
+        (Etale.cohomologyPullbackFunctorial p' ι' A q).2.1 x
+      have hb : Etale.cohomologyMap a
+          ((Etale.upperStar AddCommGrpCat.{u + 1} p).obj A) q
+            (Etale.cohomologyMap p A q x) =
+          Sheaf.H.map e₂.hom q (Etale.cohomologyMap (p' ≫ ι') A q x) := by
+        have hfun (m : D' ⟶ C) (hm : m = a ≫ p) :
+            Etale.cohomologyMap a ((Etale.upperStar AddCommGrpCat.{u + 1} p).obj A) q
+                (Etale.cohomologyMap p A q x) =
+              Sheaf.H.map ((Etale.upperStarComp AddCommGrpCat.{u + 1} a p m hm).hom.app A)
+                q (Etale.cohomologyMap m A q x) := by
+          subst m
+          exact (Etale.cohomologyPullbackFunctorial a p A q).2.1 x
+        exact hfun _ hcomm
+      change Sheaf.H.map e₁.inv q
+          (Etale.cohomologyMap p'
+            ((Etale.upperStar AddCommGrpCat.{u + 1} ι').obj A) q
+              (Etale.cohomologyMap ι' A q x)) =
+        Sheaf.H.map e₂.inv q
+          (Etale.cohomologyMap a ((Etale.upperStar AddCommGrpCat.{u + 1} p).obj A) q
+            (Etale.cohomologyMap p A q x))
+      rw [ht, hb]
+      simp only [← Sheaf.H.map_comp_apply, Iso.hom_inv_id, Sheaf.H.map_id_apply]
+    rw [heq]
+    exact (ConcreteCategory.bijective_of_isIso e₂H.inv).comp
+      (hbottom.comp (Etale.cohomologyMap_bijective p A q))
+  exact (Function.Bijective.of_comp_iff' hg _).mp hcomp
+
+/-- **Invariance of the cohomology of a proper curve under extension of separably closed
+fields.** Let `k ⊆ k'` be separably closed fields, `C` a proper curve over `k` (a proper
+`k`-scheme of dimension at most one) and `F` a torsion étale sheaf of `Λ`-modules on `C`. For
+every cartesian square
+
+```
+C' --ι'--> C
+|          |
+f'         f
+v          v
+Spec k' -ι-> Spec k
+```
+
+the pullback map `Hᵠ(C, F) ⟶ Hᵠ(C', ι'^* F)` on the cohomology of the underlying abelian
+sheaves is bijective for every `q`: the algebraically closed case
+`AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isAlgClosed`, transported to separably
+closed fields by
+`AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed`.
+(blueprint: prop-weil-pbc-proper-curve-sepclosed-invariance)
+-/
+@[stacks 0A5E]
+theorem bijective_cohomologyMap_of_isSepClosed {k k' : Type u} [Field k] [IsSepClosed k]
+    [Field k'] [IsSepClosed k'] {C C' : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
+    [IsProper f] {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C}
+    (h : IsPullback ι' f' f ι) (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [Scheme.IsTorsionModuleSheaf F] (q : ℕ) :
+    Function.Bijective (Etale.cohomologyMap ι'
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) :=
+  bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed Λ
+    (fun f _ _ _ _ _ h F _ q ↦ bijective_cohomologyMap_of_isAlgClosed Λ f h F q) f h F q
+
+end AlgebraicGeometry.IsCurve
 
 namespace AlgebraicGeometry.Etale
 
@@ -117,142 +300,10 @@ namespace AlgebraicGeometry.IsCurve
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- **Invariance of the cohomology of a proper curve under extension of algebraically closed
-fields.** Let `k ⊆ k'` be algebraically closed fields, `C` a proper curve over `k` and `F` a
-torsion étale sheaf of `Λ`-modules on `C`. For every cartesian square
 
-```
-C' --ι'--> C
-|          |
-f'         f
-v          v
-Spec k' -ι-> Spec k
-```
 
-the pullback map `Hᵠ(C, F) ⟶ Hᵠ(C', ι'^* F)` on the cohomology of the underlying abelian
-sheaves is bijective for every `q`. This is the assertion `C₇(C, F)` of the eight curve
-calculations; it is proved by reducing to reduced curves and constructible `𝐅_r`-coefficients,
-splitting off the zero-dimensional components, localising to a dense open, passing to the
-normalisation and to the smooth constant case of the curve calculations.
-(blueprint: `prop-weil-pbc-algebraically-closed-extension`) -/
-@[stacks 0A5E]
-theorem bijective_cohomologyMap_of_isAlgClosed {k k' : Type u} [Field k] [IsAlgClosed k]
-    [Field k'] [IsAlgClosed k'] {C C' : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
-    [IsProper f] {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C}
-    (h : IsPullback ι' f' f ι) (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [Scheme.IsTorsionModuleSheaf F] (q : ℕ) :
-    Function.Bijective (Etale.cohomologyMap ι'
-      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) := by
-  refine bijective_cohomologyMap_of_forall_isReduced Λ ?_ f k' h F q
-  intro X X' g _ _ _ K _ _ ι g' ι' h r _ G _ q
-  exact algebraicallyClosedCohomologyInvariant g K h G q
 
-open Limits Etale in
-/-- **Passage between separably closed fields.** Let `k ⊆ k'` be separably closed fields, `C`
-a proper curve over `k` and `F` a torsion étale sheaf of `Λ`-modules on `C`. If the cohomology
-of proper curves is invariant under extensions of algebraically closed fields (the hypothesis
-`H`, which is `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isAlgClosed`), then for
-every cartesian square
 
-```
-C' --ι'--> C
-|          |
-f'         f
-v          v
-Spec k' -ι-> Spec k
-```
 
-the pullback map `Hᵠ(C, F) ⟶ Hᵠ(C', ι'^* F)` is bijective for every `q`.
-
-Choose compatible algebraic closures `k̄ ⊆ k̄'`. As `k` and `k'` are separably closed, `k̄/k`
-and `k̄'/k'` are purely inseparable, so the base changes `C_{k̄} ⟶ C` and `C_{k̄'} ⟶ C'` are
-universal homeomorphisms and are bijective on étale cohomology
-(`AlgebraicGeometry.Etale.cohomologyMap_bijective`). The square of pullback maps between the
-four cohomology groups commutes, and its bottom row `Hᵠ(C_{k̄}) ⟶ Hᵠ(C_{k̄'})` is bijective by
-`H`.
-(blueprint: `lemma-weil-pbc-curve-separably-closed-passage`) -/
-theorem bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed
-    (H : ∀ {k k' : Type u} [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k']
-      {C C' : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsProper f]
-      {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C}
-      (_ : IsPullback ι' f' f ι) (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-      [Scheme.IsTorsionModuleSheaf F] (q : ℕ),
-      Function.Bijective (Etale.cohomologyMap ι'
-        ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q))
-    {k k' : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k'] {C C' : Scheme.{u}}
-    (f : C ⟶ Spec (.of k)) [IsCurve f] [IsProper f] {ι : Spec (.of k') ⟶ Spec (.of k)}
-    {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C} (h : IsPullback ι' f' f ι)
-    (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionModuleSheaf F] (q : ℕ) :
-    Function.Bijective (Etale.cohomologyMap ι'
-      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) := by
-  obtain ⟨φ, rfl⟩ : ∃ φ : CommRingCat.of k ⟶ CommRingCat.of k', Spec.map φ = ι :=
-    ⟨Spec.preimage ι, Spec.map_preimage ι⟩
-  -- compatible algebraic closures `k̄ ⟶ k̄'`
-  let : Algebra k (AlgebraicClosure k') :=
-    ((algebraMap k' (AlgebraicClosure k')).comp φ.hom).toAlgebra
-  let ψ : AlgebraicClosure k →ₐ[k] AlgebraicClosure k' := IsAlgClosed.lift
-  let s := Spec.map (CommRingCat.ofHom (algebraMap k (AlgebraicClosure k)))
-  let s' := Spec.map (CommRingCat.ofHom (algebraMap k' (AlgebraicClosure k')))
-  let κ : Spec (.of (AlgebraicClosure k')) ⟶ Spec (.of (AlgebraicClosure k)) :=
-    Spec.map (CommRingCat.ofHom ψ.toRingHom)
-  have hκ : κ ≫ s = s' ≫ Spec.map φ := by
-    simp only [κ, s, s', ← Spec.map_comp]
-    congr 1
-    ext x
-    exact ψ.commutes x
-  -- the base changes `C_{k̄} ⟶ C` and `C'_{k̄'} ⟶ C'`, and the comparison `C'_{k̄'} ⟶ C_{k̄}`
-  let p := pullback.fst f s
-  let p' := pullback.fst f' s'
-  let j : pullback f' s' ⟶ pullback f s := pullback.lift (p' ≫ ι') (pullback.snd f' s' ≫ κ)
-    (by rw [Category.assoc, h.w, pullback.condition_assoc, Category.assoc, hκ])
-  have hj : j ≫ p = p' ≫ ι' := pullback.lift_fst _ _ _
-  have hsq : IsPullback j (pullback.snd f' s') (pullback.snd f s) κ := by
-    refine IsPullback.of_right ?_ (pullback.lift_snd _ _ _) (IsPullback.of_hasPullback f s)
-    rw [hj, hκ]
-    exact (IsPullback.of_hasPullback f' s').paste_horiz h
-  have : IsCurve (pullback.snd f s) :=
-    { krullDim_le_one := by
-        rw [IsHomeomorph.topologicalKrullDim_eq _ (pullback.fst f s).isHomeomorph]
-        exact IsCurve.krullDim_le_one (f := f) }
-  -- the bottom row is bijective by the algebraically closed case
-  have hb := H (pullback.snd f s) hsq ((p)^*[ModuleCat.{u + 1} Λ].obj F) q
-  let G := (sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F
-  replace hb : Function.Bijective (Etale.cohomologyMap j ((p)^*[AddCommGrpCat.{u + 1}].obj G) q) :=
-    Etale.bijective_cohomologyMap_of_iso j
-      ((asIso (Etale.upperStarForget₂ Λ p).natTrans).app F).symm q hb
-  have h₁ := (Etale.bijective_cohomologyMap_comp_iff j p _ hj G q).1
-    (hb.comp (Etale.cohomologyMap_bijective p G q))
-  rw [← Etale.bijective_cohomologyMap_comp_iff p' ι' _ rfl G q] at h₁
-  exact (Function.Bijective.of_comp_iff' (Etale.cohomologyMap_bijective p' _ q) _).1 h₁
-
-/-- **Invariance of the cohomology of a proper curve under extension of separably closed
-fields.** Let `k ⊆ k'` be separably closed fields, `C` a proper curve over `k` (a proper
-`k`-scheme of dimension at most one) and `F` a torsion étale sheaf of `Λ`-modules on `C`. For
-every cartesian square
-
-```
-C' --ι'--> C
-|          |
-f'         f
-v          v
-Spec k' -ι-> Spec k
-```
-
-the pullback map `Hᵠ(C, F) ⟶ Hᵠ(C', ι'^* F)` on the cohomology of the underlying abelian
-sheaves is bijective for every `q`: the algebraically closed case
-`AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isAlgClosed`, transported to separably
-closed fields by
-`AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed`.
-(blueprint: `prop-weil-pbc-proper-curve-sepclosed-invariance`) -/
-@[stacks 0A5E]
-theorem bijective_cohomologyMap_of_isSepClosed {k k' : Type u} [Field k] [IsSepClosed k]
-    [Field k'] [IsSepClosed k'] {C C' : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
-    [IsProper f] {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C}
-    (h : IsPullback ι' f' f ι) (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [Scheme.IsTorsionModuleSheaf F] (q : ℕ) :
-    Function.Bijective (Etale.cohomologyMap ι'
-      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) :=
-  bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed Λ
-    (fun f _ _ _ _ _ h F _ q ↦ bijective_cohomologyMap_of_isAlgClosed Λ f h F q) f h F q
 
 end AlgebraicGeometry.IsCurve

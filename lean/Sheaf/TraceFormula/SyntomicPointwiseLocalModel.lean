@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Sheaf.TraceFormula.LciPointwiseCriterion
-public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
+public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersectionPresentation
 import Sheaf.TraceFormula.CILocalRingPrincipalNeighbourhood
 import Sheaf.RingTheory.SyntomicAtPrimeRelativeGlobalCompleteIntersection
 

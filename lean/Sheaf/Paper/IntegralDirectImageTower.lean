@@ -13,6 +13,7 @@ public import Sheaf.Paper.ModuleObjectProjectionMap
 public import Sheaf.Paper.CompletedCondensedCoefficients
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import Sheaf.Paper.CondensedModuleDerivedPushpull
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek

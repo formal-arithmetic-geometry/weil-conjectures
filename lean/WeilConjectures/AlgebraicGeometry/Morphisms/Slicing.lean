@@ -17,7 +17,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField
 public import WeilConjectures.Mathlib.RingTheory.Etale.ResidueField
 public import WeilConjectures.Mathlib.RingTheory.Etale.Field
 
-import Sheaf.AlgebraicGeometry.SmoothSectionComponentOpen
+import WeilConjectures.AlgebraicGeometry.SmoothSectionComponentOpen
 
 /-!
 # Slicing a smooth morphism
@@ -179,7 +179,9 @@ By the normal form `AlgebraicGeometry.Scheme.Hom.exists_etale_to_affineSpace_of_
 `X` is near `x` étale over an affine space `𝔸ⁿ_U`, and the image of `x` there still has finite
 separable residue field over `U`. For affine space the slice is
 `AlgebraicGeometry.AffineSpace.exists_etale_comp_of_etale_residueFieldMap`, and it pulls back to
-`X`. -/
+`X`. 
+(blueprint: lem-sbc-smooth-separable-point-etale-slice)
+-/
 @[stacks 057G]
 theorem Smooth.exists_etale_comp_of_etale_residueFieldMap {X S : Scheme.{u}} (f : X ⟶ S)
     [Smooth f] {x : X} (hx : (f.residueFieldMap x).hom.Etale) :
@@ -216,7 +218,9 @@ quasi-compact and quasi-separated, hence of finite presentation, with a section 
 `p` lying in the connected component of `σ (g p)` in their fibre form an open `P⁰` of `P`, here
 an open `U` containing them. Its fibres over `T` are the connected components through the
 rational points `σ t` of the smooth fibres, hence geometrically connected (Stacks `04KV`) and,
-being smooth, geometrically irreducible. -/
+being smooth, geometrically irreducible. 
+(blueprint: lem-sbc-smooth-section-component-geometrically-irreducible)
+-/
 @[stacks 055R]
 theorem Smooth.exists_geometricallyIrreducible_of_section {P T : Scheme.{u}} (g : P ⟶ T)
     [Smooth g] [QuasiCompact g] [QuasiSeparated g] (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) :
@@ -402,7 +406,9 @@ p i          r i
 ```
 
 This is Stacks `0EY4`, assembled pointwise from
-`AlgebraicGeometry.Smooth.exists_etale_factorization_of_mem`. -/
+`AlgebraicGeometry.Smooth.exists_etale_factorization_of_mem`. 
+(blueprint: sbc-lem-slicing)
+-/
 @[stacks 0EY4]
 theorem Smooth.exists_etaleCover_factorization {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] :
     ∃ (ι : Type u) (U : ι → Scheme.{u}) (p : ∀ i, U i ⟶ X) (V : ι → Scheme.{u})

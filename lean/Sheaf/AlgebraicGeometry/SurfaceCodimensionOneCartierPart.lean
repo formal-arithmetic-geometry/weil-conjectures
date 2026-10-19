@@ -13,7 +13,7 @@ public import Mathlib.Topology.KrullDimension
 import Mathlib.RingTheory.DiscreteValuationRing.Basic
 import Mathlib.Topology.NoetherianSpace
 import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-!
 # The codimension-one Cartier part on a regular surface

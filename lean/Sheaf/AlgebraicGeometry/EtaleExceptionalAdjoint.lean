@@ -3,5 +3,6 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Mathlib.AlgebraicGeometry.Noetherian

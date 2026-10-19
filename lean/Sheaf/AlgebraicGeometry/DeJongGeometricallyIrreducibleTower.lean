@@ -47,7 +47,7 @@ public import Sheaf.RingTheory.ExcellentRing
 import Sheaf.AlgebraicGeometry.ClosedDominantDimension
 import Sheaf.AlgebraicGeometry.ExcellentBaseMarkedSemistableCurve
 import Sheaf.AlgebraicGeometry.GeometricallyIntegralCurveFactorization
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-!
 # de Jong geometrically irreducible alteration tower

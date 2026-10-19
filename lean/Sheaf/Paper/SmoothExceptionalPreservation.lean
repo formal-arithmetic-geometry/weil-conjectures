@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Sheaf.AlgebraicGeometry.AmbientExceptionalRightAdjoint
 import Sheaf.Paper.ExceptionalAdjointAdmissibility
 import Sheaf.AlgebraicGeometry.SmoothTensorDuality
-import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import WeilConjectures.Compactification.NagataCompactification
 import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
@@ -38,7 +38,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.ConstructibleModuleUnderlyingSets
 import Sheaf.AlgebraicGeometry.EtaleLocalIsomorphismConstructible
 import Sheaf.Paper.ComparisonTorAmplitude

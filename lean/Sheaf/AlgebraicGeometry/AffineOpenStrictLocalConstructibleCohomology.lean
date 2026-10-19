@@ -11,7 +11,7 @@ public import Mathlib.Data.ZMod.Basic
 public import Sheaf.RingTheory.ExcellentRing
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
@@ -35,7 +35,7 @@ import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct
 import Mathlib.FieldTheory.PurelyInseparable.Basic
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import Sheaf.RingTheory.IntegralExtensionDimension
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.RingTheory.StrictlyHenselianQuotient
 import Sheaf.AlgebraicGeometry.OpenClosedRecollement
 import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage

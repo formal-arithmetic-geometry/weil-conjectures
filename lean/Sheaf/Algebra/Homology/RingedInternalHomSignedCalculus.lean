@@ -139,7 +139,7 @@ Source: Stacks 06YL (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restricti
 noncomputable instance derivedBraiding : BraidedCategory (D J R) :=
   Eq.mp (congrArg (fun m ↦ @BraidedCategory (D J R) _ m)
     (derivedMonoidal_eq_localization J R).symm)
-    (DerivedMonoidal.braidedCategory DerivedCategory.Qh
+    (DerivedMonoidal.braidedCategory' DerivedCategory.Qh
       (HomotopyCategory.quasiIso (Modules J R) (ComplexShape.up ℤ)))
 
 set_option backward.isDefEq.respectTransparency false

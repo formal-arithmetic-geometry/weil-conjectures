@@ -17,8 +17,8 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDeri
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Defs
-public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
@@ -26,6 +26,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ModuleDerivedCategory
 public import Mathlib.Algebra.Category.ModuleCat.AB

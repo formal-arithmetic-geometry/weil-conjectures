@@ -43,7 +43,7 @@ noncomputable def canonicalBraidingNatIso
     [F.IsLocalization W] [W.ContainsIdentities] [F.HasDerivedMonoidalCategory W] :
     bifunctor F W ≅ (bifunctor F W).flip :=
   NatIso.ofComponents (fun K ↦
-    NatIso.ofComponents (fun L ↦ braiding F W K L)
+    NatIso.ofComponents (fun L ↦ braiding' F W K L)
       (fun f ↦ braiding_naturality_right F W K f))
     (fun f ↦ NatTrans.ext (funext (fun L ↦ braiding_naturality_left F W f L)))
 
@@ -56,7 +56,7 @@ Source: Stacks Project, Tag 06YU (blueprint: lem-kun-tensor-sym).
 
 Construction: the homotopy-category braiding is the signed swap in bidegree `(p,q)`, with
 sign `(-1)^(p*q)`. Descend that braiding through the K-flat localization using
-`DerivedMonoidal.braiding`, and assemble its natural isomorphism of curried bifunctors.
+`DerivedMonoidal.braiding'`, and assemble its natural isomorphism of curried bifunctors.
 The characterization `DerivedMonoidal.braiding_hom_μ` identifies the descended map on K-flat
 representatives with precisely that signed swap. -/
 noncomputable def derivedTensorSymmetry

@@ -5,7 +5,7 @@ Authors: SHEAF group Q96
 -/
 module
 
-public import Sheaf.RingTheory.AnnihilatorAssociatedPrimes
+public import WeilConjectures.RingTheory.AnnihilatorAssociatedPrimes
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 import WeilConjectures.RingTheory.AnnihilatorAssociatedPrimes
 

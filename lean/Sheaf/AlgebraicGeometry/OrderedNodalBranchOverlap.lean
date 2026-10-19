@@ -6,7 +6,7 @@ Authors: SHEAF group Q159
 module
 
 public import Sheaf.TraceFormula.StrictSemistableCurve
-public import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.RingTheory.Valuation.ValuationSubring

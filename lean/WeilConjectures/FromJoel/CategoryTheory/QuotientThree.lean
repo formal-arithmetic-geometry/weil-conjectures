@@ -37,7 +37,7 @@ lemma functor_obj_surjective (X : Quotient r₁) :
 
 /-- A natural transformation between bifunctors from quotient categories, obtained from
 a natural transformation after precomposition with the quotient functors. -/
-def natTransLift₂ {F G : Quotient r₁ ⥤ Quotient r₂ ⥤ C}
+def natTransLift₂' {F G : Quotient r₁ ⥤ Quotient r₂ ⥤ C}
     (τ : (((whiskeringLeft₂ _).obj (functor r₁)).obj (functor r₂)).obj F ⟶
       (((whiskeringLeft₂ _).obj (functor r₁)).obj (functor r₂)).obj G) :
     F ⟶ G where
@@ -52,32 +52,32 @@ def natTransLift₂ {F G : Quotient r₁ ⥤ Quotient r₂ ⥤ C}
     exact congr_app (τ.naturality f₁) X₂
 
 @[simp]
-lemma natTransLift₂_app_app {F G : Quotient r₁ ⥤ Quotient r₂ ⥤ C}
+lemma natTransLift₂'_app_app {F G : Quotient r₁ ⥤ Quotient r₂ ⥤ C}
     (τ : (((whiskeringLeft₂ _).obj (functor r₁)).obj (functor r₂)).obj F ⟶
       (((whiskeringLeft₂ _).obj (functor r₁)).obj (functor r₂)).obj G)
     (X₁ : C₁) (X₂ : C₂) :
-    ((natTransLift₂ r₁ r₂ τ).app ((functor r₁).obj X₁)).app ((functor r₂).obj X₂) =
+    ((natTransLift₂' r₁ r₂ τ).app ((functor r₁).obj X₁)).app ((functor r₂).obj X₂) =
       (τ.app X₁).app X₂ := rfl
 
 instance {F G : Quotient r₁ ⥤ Quotient r₂ ⥤ C}
     (τ : (((whiskeringLeft₂ _).obj (functor r₁)).obj (functor r₂)).obj F ⟶
       (((whiskeringLeft₂ _).obj (functor r₁)).obj (functor r₂)).obj G)
     [∀ X₁ X₂, IsIso ((τ.app X₁).app X₂)] (X₁ : Quotient r₁) (X₂ : Quotient r₂) :
-    IsIso (((natTransLift₂ r₁ r₂ τ).app X₁).app X₂) :=
+    IsIso (((natTransLift₂' r₁ r₂ τ).app X₁).app X₂) :=
   inferInstanceAs (IsIso ((τ.app X₁.as).app X₂.as))
 
 instance {F G : Quotient r₁ ⥤ Quotient r₂ ⥤ C}
     (τ : (((whiskeringLeft₂ _).obj (functor r₁)).obj (functor r₂)).obj F ⟶
       (((whiskeringLeft₂ _).obj (functor r₁)).obj (functor r₂)).obj G)
     [∀ X₁ X₂, IsIso ((τ.app X₁).app X₂)] (X₁ : Quotient r₁) :
-    IsIso ((natTransLift₂ r₁ r₂ τ).app X₁) :=
+    IsIso ((natTransLift₂' r₁ r₂ τ).app X₁) :=
   NatIso.isIso_of_isIso_app _
 
 instance isIso_natTransLift₂ {F G : Quotient r₁ ⥤ Quotient r₂ ⥤ C}
     (τ : (((whiskeringLeft₂ _).obj (functor r₁)).obj (functor r₂)).obj F ⟶
       (((whiskeringLeft₂ _).obj (functor r₁)).obj (functor r₂)).obj G)
     [∀ X₁ X₂, IsIso ((τ.app X₁).app X₂)] :
-    IsIso (natTransLift₂ r₁ r₂ τ) :=
+    IsIso (natTransLift₂' r₁ r₂ τ) :=
   NatIso.isIso_of_isIso_app _
 
 def natTransLift₃ {F G : Quotient r₁ ⥤ Quotient r₂ ⥤ Quotient r₃ ⥤ C}

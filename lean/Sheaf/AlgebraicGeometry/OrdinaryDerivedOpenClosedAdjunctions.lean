@@ -28,8 +28,8 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDeri
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Defs
-public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension

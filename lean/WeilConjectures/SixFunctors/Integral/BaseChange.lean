@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.Integral.Exact
 
-import Sheaf.AlgebraicGeometry.IntegralGeometricPointExchange
+import WeilConjectures.AlgebraicGeometry.IntegralGeometricPointExchange
 import WeilConjectures.SixFunctors.BaseChange.Pasting
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 

@@ -41,7 +41,7 @@ theorem instBraidedCategoryDerivedCategory_sheaf._proof_1 : IsRightCancelAdd ℤ
 -- Keep the existing local instance name for already compiled consumers.
 local instance instBraidedCategoryDerivedCategory_sheaf :
     BraidedCategory (DerivedCategory D) :=
-  DerivedMonoidal.braidedCategory (DerivedCategory.Qh (C := D))
+  DerivedMonoidal.braidedCategory' (DerivedCategory.Qh (C := D))
     (HomotopyCategory.quasiIso D (.up ℤ))
 
 attribute [local instance] CategoryTheory.derivedTensorPresentationBraiding

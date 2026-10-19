@@ -14,7 +14,7 @@ public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import Sheaf.AlgebraicGeometry.EtaleClosedAmbientAdjoint
 import Sheaf.AlgebraicGeometry.SmoothTensorDuality
 import WeilConjectures.Compactification.NagataCompactification
@@ -49,14 +49,14 @@ import Sheaf.Algebra.Homology.KFlatTelescopeClosure
 import Sheaf.Paper.KFlatRingedToposPullback
 import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
 import Sheaf.Paper.RingedTopoiDerivedTensorPullback
-import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSupport
 import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 import Sheaf.AlgebraicGeometry.OpenClosedRecollement
-import Sheaf.Paper.ZeroDimensionalCohomology
+import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
 import Sheaf.CategoryTheory.RingedSiteModules
 import WeilConjectures.Compactification.Defs
 import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
@@ -67,7 +67,7 @@ import Sheaf.AlgebraicGeometry.DerivedCategories
 import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.EtaleDirectImageVanishing
 import Sheaf.AlgebraicGeometry.DimensionExtension
 import Sheaf.Paper.FiniteDirectImageComposition

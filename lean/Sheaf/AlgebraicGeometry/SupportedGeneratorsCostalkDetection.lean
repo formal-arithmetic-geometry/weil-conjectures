@@ -36,7 +36,7 @@ import Sheaf.AlgebraicGeometry.IndEtaleClosedSupportBaseChange
 import Sheaf.AlgebraicGeometry.IndEtaleStrictLocalInvariance
 import Sheaf.EtaleCohomology.EtaleSectionZeroOpen
 import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 
 /-! # Detection of supported bounds by geometric costalks

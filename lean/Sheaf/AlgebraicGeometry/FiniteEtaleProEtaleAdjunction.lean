@@ -6,7 +6,7 @@ Authors: SHEAF group N5
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
@@ -21,7 +21,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Sheaf.Paper.SfDerivedDirectImage
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
-import Sheaf.Paper.FiniteEtaleEtaleLocalSplit
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous

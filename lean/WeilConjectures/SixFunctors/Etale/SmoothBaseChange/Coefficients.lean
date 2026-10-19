@@ -8,7 +8,7 @@ module
 public import Mathlib
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Sheaf.AlgebraicGeometry.EtaleBaseChangeRestrictScalars
+import WeilConjectures.AlgebraicGeometry.EtaleBaseChangeRestrictScalars
 
 /-!
 # The coefficients of the smooth base change theorem
@@ -155,7 +155,9 @@ Let `F` be a sheaf of `Λ`-modules on `T_ét` killed by `n`. Then `F` is a sheaf
 `Λ/nΛ`-modules, restriction of scalars along `Λ ⟶ Λ/nΛ` commutes with `p^*`, `e^*` and with the
 derived pushforwards (the cohomology of a sheaf of modules does not depend on the coefficient
 ring), and identifies the base-change map of `F` over `Λ` with the one over `Λ/nΛ`. Hence the
-base-change property `BC(p, Λ/nΛ, q)` makes the base-change map of `F` an isomorphism. -/
+base-change property `BC(p, Λ/nΛ, q)` makes the base-change map of `F` an isomorphism. 
+(blueprint: lem-sbc-quotient-coefficients-base-change)
+-/
 theorem Etale.isIso_baseChangeHomologyMap_of_nsmul_eq_zero (sq : IsPullback e h g p)
     [QuasiCompact g] [QuasiSeparated g] (q : ℤ) (n : ℕ)
     (hp : Etale.BaseChangeProperty (Λ ⧸ Ideal.span {(n : Λ)}) p q)

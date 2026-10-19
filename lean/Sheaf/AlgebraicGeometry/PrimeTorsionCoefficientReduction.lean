@@ -18,7 +18,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageExact
 import WeilConjectures.CategoryTheory.SiteMorphismComposition
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.CategoryTheory.SiteMorphismComposition
+import WeilConjectures.CategoryTheory.SiteMorphismComposition
 import WeilConjectures.AlgebraicGeometry.DerivedCategories
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.SixFunctors.Etale.Derived.Tensor

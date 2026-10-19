@@ -152,7 +152,7 @@ theorem supported_open_extension
             (⟨x, hxV⟩ : Y))) := hsB n ⟨x, hxV⟩ hx
         exact j.addCommGroupIsoToAddEquiv.toEquiv.subsingleton_congr.mp hs
       · exact ModuleCat.isZero_iff_subsingleton.mp
-          (ModuleExtensionByZeroStalkOutside X.toRingedSpace O (e.inverse.obj M) x hxV)
+          (moduleExtensionByZero_stalk_outside X.toRingedSpace O (e.inverse.obj M) x hxV)
     exact ih.addCommGroupIsoToAddEquiv.toEquiv.subsingleton_congr.mpr hz
   · intro C n
     exact ⟨(Iso.homCongr ((L.mapDerivedCategory.commShiftIso n).app B.obj).symm

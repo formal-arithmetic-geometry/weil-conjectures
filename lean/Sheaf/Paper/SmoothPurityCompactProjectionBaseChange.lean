@@ -15,6 +15,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 import Sheaf.Paper.RingedExchangeTensorCoherence
 import Sheaf.Paper.ProjectionMateExact
 import Sheaf.CategoryTheory.DiagramSiteRealization

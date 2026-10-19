@@ -23,7 +23,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Sheaf.AlgebraicGeometry.Morphisms.GenericFibreCoverDensity
 import Sheaf.TraceFormula.ReducedSchemeImage
 import WeilConjectures.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
 import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization

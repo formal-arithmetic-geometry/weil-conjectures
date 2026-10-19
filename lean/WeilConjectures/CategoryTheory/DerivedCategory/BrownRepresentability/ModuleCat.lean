@@ -66,24 +66,6 @@ end ModuleCat
 
 namespace DerivedCategory
 
-section Coproducts
-
-variable {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
-  [Abelian.HasKInjectiveResolutions C]
-
-/-- If `C` has K-injective resolutions and coproducts of shape `J`, then so does its derived
-category: coproducts are computed by coproducts of cochain complexes. -/
-instance hasColimitsOfShape_discrete (J : Type*) [HasColimitsOfShape (Discrete J) C] :
-    HasColimitsOfShape (Discrete J) (DerivedCategory C) where
-  has_colimit F := by
-    let K : J → CochainComplex C ℤ := fun j ↦ Q.objPreimage (F.obj ⟨j⟩)
-    have : HasColimit (Discrete.functor fun j ↦ Q.obj (K j)) :=
-      ⟨⟨⟨_, isColimitCofanMkQObj (coproductIsCoproduct K)⟩⟩⟩
-    exact hasColimit_of_iso (Discrete.natIso fun j ↦ Q.objObjPreimageIso (F.obj ⟨j.as⟩) :
-      Discrete.functor (fun j ↦ Q.obj (K j)) ≅ F).symm
-
-end Coproducts
-
 variable {R : Type v} [Ring R] [HasDerivedCategory.{v} (ModuleCat.{v} R)]
 
 /-- The object `R[0]` of the derived category of `R`-modules is compact. -/

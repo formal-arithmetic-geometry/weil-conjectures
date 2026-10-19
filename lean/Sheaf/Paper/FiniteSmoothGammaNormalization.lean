@@ -18,7 +18,7 @@ import Sheaf.AlgebraicGeometry.ShriekTensorComposition
 import WeilConjectures.Compactification.NagataCompactification
 import Mathlib.CategoryTheory.Adjunction.Unique
 import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
-import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import Sheaf.AlgebraicGeometry.QuasiFiniteCompactSupportExact
 import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
 import WeilConjectures.SixFunctors.BaseChange.Etale

@@ -41,8 +41,9 @@ isomorphism `mono τ` from the stalk functor at `y` to the stalk functor at `z`,
   stalks of `f^* G` (`mono_upperStar`, the compatibility of `cor-galois-lisse-representations`
   with base change);
 * global sections restrict to flat sections (`mono_globalSections`);
-* it preserves the evaluation pairing `(G^∨)_y × G_y → ℚ̄_ℓ` (`mono_evaluationPairing`, the
-  tensor compatibility of `cor-galois-lisse-representations` applied to `G^∨ ⊗ G → ℚ̄_ℓ`).
+* it preserves the evaluation pairing `[G, H]_y × G_y → H_y` of internal homs of lisse sheaves
+  (`mono_evaluationPairing`, the tensor compatibility of `cor-galois-lisse-representations`
+  applied to `[G, H] ⊗ G → H`; for `H = ℚ̄_ℓ` this is the pairing of the dual).
 
 At a base point `t`, the automorphisms of `F_t` act on the stalk `G_t`
 (`AlgebraicGeometry.ProEtale.LisseMonodromy.rep`), and
@@ -50,7 +51,8 @@ At a base point `t`, the automorphisms of `F_t` act on the stalk `G_t`
 faithful and essentially surjective functor to continuous finite-dimensional representations.
 
 The existence of a monodromy which is an equivalence at every base point, for a connected
-regular locally Noetherian `Y`, is `AlgebraicGeometry.ProEtale.exists_lisseMonodromy`.
+regular Noetherian `Y`, is `AlgebraicGeometry.ProEtale.exists_lisseMonodromy`
+(`WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyExists`).
 -/
 
 @[expose] public section
@@ -144,16 +146,15 @@ structure LisseMonodromy where
     (G : LisseSheaf l Y) :
     (globalSectionsToUpperStar _ y).app G.obj.X ≫ (mono τ).hom.app G =
       (globalSectionsToUpperStar _ z).app G.obj.X
-  /-- Transport preserves the evaluation pairing `(G^∨)_y × G_y → ℚ̄_ℓ` of the dual. -/
+  /-- Transport preserves the evaluation pairing `[G, H]_y × G_y → H_y` of an internal hom of
+  lisse sheaves; for `H = ℚ̄_ℓ` this is the pairing `(G^∨)_y × G_y → ℚ̄_ℓ` of the dual. -/
   mono_evaluationPairing {y z : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (τ : fiber y ≅ fiber z)
-    (G : LisseSheaf l Y)
-    (hG : IsAdicLisseSheaf ((AdicSheaf.ihom G.obj).obj (AdicSheaf.unit l Y)))
-    (d : (stalkFunctor l y).obj ((AdicSheaf.ihom G.obj).obj (AdicSheaf.unit l Y)).X)
+    (G H : LisseSheaf l Y) (hGH : IsAdicLisseSheaf ((AdicSheaf.ihom G.obj).obj H.obj))
+    (d : (stalkFunctor l y).obj ((AdicSheaf.ihom G.obj).obj H.obj).X)
     (v : (stalkFunctor l y).obj G.obj.X) :
-    Mod.evaluationPairing (stalkFunctor l z) G.obj (AdicSheaf.unit l Y)
-        (((mono τ).hom.app ⟨_, hG⟩).hom d) (((mono τ).hom.app G).hom v) =
-      ((mono τ).hom.app (LisseSheaf.unit l)).hom
-        (Mod.evaluationPairing (stalkFunctor l y) G.obj (AdicSheaf.unit l Y) d v)
+    Mod.evaluationPairing (stalkFunctor l z) G.obj H.obj
+        (((mono τ).hom.app ⟨_, hGH⟩).hom d) (((mono τ).hom.app G).hom v) =
+      ((mono τ).hom.app H).hom (Mod.evaluationPairing (stalkFunctor l y) G.obj H.obj d v)
 
 namespace LisseMonodromy
 
@@ -373,21 +374,5 @@ theorem mono_comp_upperStar_comp_apply (f : Y ⟶ Y) {y t : Spec (.of (Algebraic
   rfl
 
 end LisseMonodromy
-
-/-- **Lisse `ℚ̄_ℓ`-sheaves and continuous representations** (blueprint:
-`cor-galois-lisse-representations`, the case `Λ = ℚ̄_ℓ`). On a connected regular locally
-Noetherian scheme `Y` (hence geometrically unibranch), the stalks of lisse `ℓ`-adic sheaves carry
-a monodromy along paths of fibre functors, compatible with reparametrisation, pullback, global
-sections and duals, which at every base point `t` identifies lisse sheaves with continuous
-finite-dimensional `ℚ̄_ℓ`-representations of `π₁(Y, t)`.
-
-The blueprint deduces the case `Λ = ℚ̄_ℓ` from finite coefficient rings `𝒪_E / 𝔪ⁿ` by passing to
-adic limits, inverting `ϖ_E` and taking the colimit over the finite extensions `E ⊆ ℚ̄_ℓ`. In the
-Bhatt–Scholze model of lisse sheaves used here (pro-étale locally free `ℚ̄_ℓ,Y`-modules) this
-needs in addition the comparison with adic systems: lisse `𝒪_E`-lattices, whose reductions are
-finite locally constant étale sheaves. -/
-theorem exists_lisseMonodromy [IsLocallyNoetherian Y] [IsRegular Y] [ConnectedSpace Y] :
-    ∃ M : LisseMonodromy l Y Ω, ∀ t, M.IsEquivalenceAt t := by
-  sorry
 
 end AlgebraicGeometry.ProEtale

@@ -11,12 +11,12 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 
 import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimitStatement
-import Sheaf.AlgebraicGeometry.FullAffineEtaleSite
-import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
+import WeilConjectures.AlgebraicGeometry.FullAffineEtaleSite
+import WeilConjectures.AlgebraicGeometry.FullAffineEtaleTopos
 import Sheaf.CategoryTheory.SiteCoveringAxioms
-import Sheaf.CategoryTheory.ColimitSiteSections
+import WeilConjectures.CategoryTheory.ColimitSiteSections
 
-import Sheaf.CategoryTheory.SiteFilteredColimitSections
+import WeilConjectures.CategoryTheory.SiteFilteredColimitSections
 import WeilConjectures.AlgebraicGeometry.FullAffineEtaleTopos
 import WeilConjectures.CategoryTheory.ColimitSiteSections
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs

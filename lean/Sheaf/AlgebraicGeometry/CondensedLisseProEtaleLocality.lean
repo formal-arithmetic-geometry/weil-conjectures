@@ -65,7 +65,7 @@ noncomputable instance condensedDerivedBraiding
     (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (X : Scheme.{u}) :
     BraidedCategory (DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X))) :=
-  DerivedCategory.braidedCategory _
+  DerivedCategory.braidedCategory' _
 
 /-- Inverse image along any scheme morphism, using the canonical coefficient identification,
 is exact and strong symmetric monoidal. Between symmetric categories, `Functor.Braided`

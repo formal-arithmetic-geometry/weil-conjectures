@@ -15,7 +15,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Def
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 
 /-!
 # Exactness of pullback of condensed-coefficient module objects

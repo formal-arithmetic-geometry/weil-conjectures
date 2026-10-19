@@ -28,12 +28,12 @@ import Sheaf.RingTheory.GRing
 import Sheaf.AlgebraicGeometry.RegularEtaleDirectImageBaseChange
 import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
 import Sheaf.AlgebraicGeometry.StrictLocalTotalCohomologyExchange
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.RingTheory.CompleteLocalQuotient
 import Sheaf.RingTheory.StrictlyHenselianQuotient
 import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 
 /-!
 # Constant-coefficient affine Lefschetz bound over a strictly local base

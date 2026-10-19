@@ -85,7 +85,7 @@ variable [HasDerivedCategory.{max c v r} (RingedTensorModules.{c, v, r} J R)]
 Source: Stacks 0FPT (blueprint: lem-zl-contractible-derived-sections-tensor). -/
 abbrev contractibleSectionsBraiding :
     BraidedCategory (DerivedCategory (ModuleCat.{max c v r} (R.obj.obj U))) :=
-  DerivedMonoidal.braidedCategory DerivedCategory.Qh
+  DerivedMonoidal.braidedCategory' DerivedCategory.Qh
     (HomotopyCategory.quasiIso (ModuleCat.{max c v r} (R.obj.obj U)) (ComplexShape.up ℤ))
 
 variable

@@ -22,7 +22,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 import Sheaf.Paper.ProEtaleSurjectiveClosedCoverRefinement
 import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 import Sheaf.Paper.CondensedSurjectiveClosedEquivalence
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.Paper.CartesianCoefficients
 import Sheaf.Paper.CoefficientHeartClosure

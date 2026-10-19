@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.ComponentwiseNormalizationAffineCharts
 import Sheaf.AlgebraicGeometry.ReducedAlgebraicNormalizationFieldChange
 import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions
 import Sheaf.RingTheory.PowerGeneratedSpectrumHomeomorphism
-import Sheaf.FieldTheory.SeparablyGeneratedSeparable
+import WeilConjectures.FieldTheory.SeparablyGeneratedSeparable
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.RingTheory.Localization.Integral
 import Mathlib.RingTheory.Flat.Basic

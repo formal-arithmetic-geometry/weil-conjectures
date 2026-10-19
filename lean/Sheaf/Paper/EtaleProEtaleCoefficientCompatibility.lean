@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.Paper.ProEtaleConstructibleSheaf
 public import Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude
 public import Sheaf.SecSmoothPurity.ScalarExtensionFunctor

@@ -70,7 +70,7 @@ Source: Stacks 06YL (blueprint: lem-sfb-module-object-ringed-site-derived-compar
 instance internalBraiding : BraidedCategory (DerivedCategory (Internal Λ X)) :=
   Eq.mp (congrArg (fun m ↦ @BraidedCategory (DerivedCategory (Internal Λ X)) _ m)
     (internalMonoidal_eq_localization Λ X).symm)
-    (DerivedMonoidal.braidedCategory DerivedCategory.Qh
+    (DerivedMonoidal.braidedCategory' DerivedCategory.Qh
       (HomotopyCategory.quasiIso (Internal Λ X) (.up ℤ)))
 
 /-- Comparison of the module-object right adjoint with the K-injective sheaf-Hom

@@ -18,7 +18,7 @@ import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 import Sheaf.AlgebraicGeometry.LisseLatticeFiniteEtaleDescent
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.CategoryTheory.ExtOneExtensionClassification
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 import Sheaf.AlgebraicGeometry.EtaleStratifiedFinite

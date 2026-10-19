@@ -25,7 +25,7 @@ private theorem naturalDerivedSymmetry {C D : Type*} [Category C] [Category D]
     ∃ s : ∀ K L : DerivedMonoidal F W, K ⊗ L ≅ L ⊗ K,
       ∀ (K K' L L' : DerivedMonoidal F W) (a : K ⟶ K') (b : L ⟶ L'),
         (a ⊗ₘ b) ≫ (s K' L').hom = (s K L).hom ≫ (b ⊗ₘ a) := by
-  refine ⟨DerivedMonoidal.braiding F W, ?_⟩
+  refine ⟨DerivedMonoidal.braiding' F W, ?_⟩
   intro K K' L L' a b
   rw [tensorHom_def, Category.assoc,
     DerivedMonoidal.braiding_naturality_right,
@@ -49,7 +49,7 @@ quasi-isomorphism: its cone is the tensor of the acyclic cone and is acyclic
 by K-flatness. Common K-flat resolutions thus identify the symmetries for different
 representatives. Represent derived morphisms by roofs and use this independence
 to descend the termwise naturality square to all derived morphisms. Equivalently,
-use DerivedMonoidal.braiding of the shared localization Qh and its two naturality
+use DerivedMonoidal.braiding' of the shared localization Qh and its two naturality
 lemmas; this is exactly the Koszul braiding just described. -/
 theorem exists_schemeDerivedTensorSymmetry (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :

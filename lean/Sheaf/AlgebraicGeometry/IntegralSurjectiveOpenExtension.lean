@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import Sheaf.AlgebraicGeometry.Morphisms.OpenRelativeNormalizationGluing
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-!
 # Extension of a surjective integral morphism from an open

@@ -12,7 +12,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 public import Mathlib.CategoryTheory.Adjunction.Unique
 public import Mathlib.Data.ZMod.Basic
 import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.ComparisonTorInterval
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlat

@@ -20,7 +20,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectiv
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Mathlib.CategoryTheory.Adjunction.Additive
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
@@ -40,7 +40,7 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 import Sheaf.CategoryTheory.ModuleAbelianEvaluationComparison
 import Sheaf.Paper.SiteHigherDirectImageSheafifiedPresheaf
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import Sheaf.Paper.SiteSheafificationSectionsLocal
+import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal

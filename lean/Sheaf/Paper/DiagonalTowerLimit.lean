@@ -20,7 +20,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleMilnorEpimorphic
 public import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 import Sheaf.Paper.ConstantCompletionEquivalence
 import Sheaf.Paper.AdicCompletionReduction
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.ClosedImmersion
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
 
 /-!
 # The completed diagonal class

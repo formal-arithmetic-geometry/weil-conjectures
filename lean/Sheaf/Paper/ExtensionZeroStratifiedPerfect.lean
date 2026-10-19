@@ -29,7 +29,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 import Sheaf.CategoryTheory.SiteInverseImageTensor
-import Sheaf.CategoryTheory.SiteMorphismComposition
+import WeilConjectures.CategoryTheory.SiteMorphismComposition
 
 /-!
 # Extension by zero preserves stratified perfect local models

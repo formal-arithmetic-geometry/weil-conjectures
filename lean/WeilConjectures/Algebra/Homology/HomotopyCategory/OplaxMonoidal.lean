@@ -56,7 +56,7 @@ noncomputable def mapHomotopyCategoryδNatTrans :
         (curriedTensor (HomotopyCategory C c)) ⟶
       (((whiskeringLeft₂ _).obj (G.mapHomotopyCategory c)).obj
         (G.mapHomotopyCategory c)).obj (curriedTensor (HomotopyCategory D c)) :=
-  Quotient.natTransLift₂ _ _
+  Quotient.natTransLift₂' _ _
     ((Functor.postcompose₂.obj (HomotopyCategory.quotient D c)).map
       (mapHomologicalComplexδNatTrans c G))
 

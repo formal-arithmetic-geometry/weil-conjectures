@@ -7,8 +7,8 @@ module
 
 public import Sheaf.Paper.CompletedAdicCoefficientDatum
 public import Sheaf.Paper.IntrinsicKoszulCompletion
-public import Sheaf.Paper.KoszulComplex
-public import Sheaf.Paper.KoszulDifferential
+public import WeilConjectures.AlgebraicGeometry.KoszulComplex
+public import WeilConjectures.AlgebraicGeometry.KoszulDifferential
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 

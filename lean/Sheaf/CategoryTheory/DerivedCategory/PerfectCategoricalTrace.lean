@@ -58,7 +58,7 @@ noncomputable def perfectTraceCanonicalBraiding
     [MonoidalCategory C] [MonoidalPreadditive C] [BraidedCategory C] [MonoidalClosed C]
     [Abelian.HasFunctorialFlatResolution C] [HasDerivedCategory.{u} C] :
     BraidedCategory (DerivedCategory C) :=
-  DerivedMonoidal.braidedCategory (Qh (C := C))
+  DerivedMonoidal.braidedCategory' (Qh (C := C))
     (HomotopyCategory.quasiIso C (.up ℤ))
 
 variable {R : Type u} [CommRing R] [HasDerivedCategory.{u} (ModuleCat.{u} R)]

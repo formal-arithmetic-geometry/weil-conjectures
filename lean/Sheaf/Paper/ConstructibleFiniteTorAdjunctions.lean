@@ -109,7 +109,7 @@ theorem constructibleFiniteTor_adjunctions
     (∀ K : ConstantModelConstructibleFiniteTor Λ X,
       ((derivedTensorHomAdjunction Λ K.obj).ofNatIsoLeft
         (@BraidedCategory.tensorLeftIsoTensorRight _ _ _
-          (DerivedCategory.braidedCategory _) K.obj)).HasCompatibleRestriction
+          (DerivedCategory.braidedCategory' _) K.obj)).HasCompatibleRestriction
         (constantModelBoundedConstructible Λ X ⊓ fun M ↦
           DerivedCategory.finiteTorAmplitude _ M).ι
         (constantModelBoundedConstructible Λ X ⊓ fun M ↦

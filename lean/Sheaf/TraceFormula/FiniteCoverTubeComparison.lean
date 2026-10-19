@@ -13,7 +13,7 @@ public import Sheaf.TraceFormula.FiniteBaseStrictLocalization
 public import Sheaf.TraceFormula.OrientedPointCohomology
 public import Sheaf.Paper.OrientedNearbyStrictLocalDescription
 public import Sheaf.Paper.OrientedHypercoverDescentDatum
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 import Sheaf.AlgebraicGeometry.FiniteBaseCechComponents
 import Sheaf.AlgebraicGeometry.IndEtaleStrictLocalInvariance

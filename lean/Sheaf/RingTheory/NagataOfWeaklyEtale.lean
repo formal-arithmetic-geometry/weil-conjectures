@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Sheaf.RingTheory.IndPrincipalZariski
 import Sheaf.RingTheory.JapaneseDomain
 import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Sheaf.AlgebraicGeometry.AffineChartBaseChangeIso
+import WeilConjectures.AlgebraicGeometry.AffineChartBaseChangeIso
 import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 import Mathlib.RingTheory.Noetherian.Basic
 import Sheaf.RingTheory.NormalOfFlatNormalFibers

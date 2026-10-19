@@ -399,7 +399,7 @@ theorem nativeBraiding_existsUnique (C : Type w) [Category.{v} C] [Abelian C]
     [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
     [Abelian.HasFunctorialFlatResolution C] :
     ∃! B : BraidedCategory (_root_.DerivedCategory C),
-      HEq B (DerivedMonoidal.braidedCategory (_root_.DerivedCategory.Qh (C := C))
+      HEq B (DerivedMonoidal.braidedCategory' (_root_.DerivedCategory.Qh (C := C))
         (HomotopyCategory.quasiIso C (.up ℤ))) := by
   sorry
 

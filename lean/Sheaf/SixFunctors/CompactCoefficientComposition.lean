@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
 
 import Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChange
 import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
-import Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
+import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
 import Sheaf.AlgebraicGeometry.ProperOpenComparison
 import Sheaf.AlgebraicGeometry.OpenSectionClopen
 import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
@@ -21,7 +21,7 @@ import Sheaf.AlgebraicGeometry.CompactifiableOverField
 import Sheaf.AlgebraicGeometry.DerivedCategories
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
-import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 import Sheaf.Paper.UnboundedProperOpenInterchange
 import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
@@ -36,7 +36,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShrie
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 import Sheaf.AlgebraicGeometry.ProperOpenComparisonSiteNormalization

@@ -138,8 +138,8 @@ def perfect (U : C) : ObjectProperty (DerivedCategory (ModuleCat.{u + 1} (A J O 
 /-- Preservation of the ordinary Koszul braiding by the strong monoidal realization.
 Source: HRS (3.1) (blueprint: lem-zl-condensed-wcontractible-lisse-evaluation). -/
 def strongSymmetric (U : C) (hU : IsTerminal U) : Prop :=
-  letI := DerivedCategory.braidedCategory (ModuleCat.{u + 1} (A J O U))
-  letI := DerivedCategory.braidedCategory (Mod (Sheaf J Ab.{u + 1}) O)
+  letI := DerivedCategory.braidedCategory' (ModuleCat.{u + 1} (A J O U))
+  letI := DerivedCategory.braidedCategory' (Mod (Sheaf J Ab.{u + 1}) O)
   Nonempty (F J O U hU).Braided
 
 /-- The complete evaluation claim on the fixed canonical functors. Exact means
@@ -295,10 +295,10 @@ def componentSymmetric
     (α : (componentInverse T).mapMon.obj
       (Mon.mk (profiniteCoefficient Λ (affineComponentSpace T))) ≅
       Mon.mk (condensedRingObj Λ T)) : Prop :=
-  letI := DerivedCategory.braidedCategory
+  letI := DerivedCategory.braidedCategory'
     (Mod (Sheaf ((coherentTopology Profinite.{u}).over (affineComponentSpace T)) Ab.{u + 1})
       (profiniteCoefficient Λ (affineComponentSpace T)))
-  letI := DerivedCategory.braidedCategory
+  letI := DerivedCategory.braidedCategory'
     (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
   Nonempty (componentDerived Λ T α).Braided
 

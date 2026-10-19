@@ -6,7 +6,7 @@ Authors: SHEAF group Q113
 module
 
 public import Sheaf.Paper.OrientedNearbyCycles
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType

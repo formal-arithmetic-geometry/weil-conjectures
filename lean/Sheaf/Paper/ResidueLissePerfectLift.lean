@@ -15,8 +15,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Ulift
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
-import Sheaf.AlgebraicGeometry.ConstantEtaleSheafShortExact
-import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
+import WeilConjectures.AlgebraicGeometry.ConstantEtaleSheafShortExact
+import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 import Sheaf.AlgebraicGeometry.FiniteRingDerivedLocalConstancy
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
@@ -24,7 +24,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 import Sheaf.CategoryTheory.FiniteTypeLocallyConstantSerre
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
-import Sheaf.CategoryTheory.Triangulated.DerivedCountableProductsCore
+import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsCore
 import Sheaf.Paper.CompatibleFiniteDerivedTrivializations
 import Sheaf.Paper.ConstantModuleSectionProperties
 import Sheaf.Paper.NilpotentReductionLissity

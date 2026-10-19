@@ -13,7 +13,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.FiniteTypeDirectImageConstructibility
 import Sheaf.AlgebraicGeometry.Sites.CohomologicalDimension
 import Sheaf.AlgebraicGeometry.Sites.SeparablyClosedTorsionCohomologicalDimension

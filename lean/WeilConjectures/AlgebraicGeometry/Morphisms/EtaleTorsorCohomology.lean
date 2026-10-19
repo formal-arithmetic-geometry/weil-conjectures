@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorDescent
-import Sheaf.CategoryTheory.Sites.EtaleTorsorH1Functoriality
+import WeilConjectures.CategoryTheory.Sites.EtaleTorsorH1Functoriality
 
 /-!
 # Naturality of the torsor attached to an étale `H¹`-class

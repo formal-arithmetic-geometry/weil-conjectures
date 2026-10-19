@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseCh
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 public import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
 public import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories

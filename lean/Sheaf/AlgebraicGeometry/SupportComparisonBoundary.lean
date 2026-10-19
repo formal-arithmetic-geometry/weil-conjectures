@@ -12,7 +12,7 @@ public import Sheaf.AlgebraicGeometry.SupportSiteComparison
 public import Sheaf.AlgebraicGeometry.ComparisonGlobalCohomologyFiniteNormalized
 public import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion

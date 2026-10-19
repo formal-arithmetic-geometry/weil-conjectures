@@ -288,8 +288,13 @@ instance Etale.openImmersionRestriction_linear (Λ : Type*) [Semiring Λ] [Linea
 
 namespace Etale
 
-/-- The lower shriek `j_!` along an open immersion `j : U ⟶ X` on sheaves for the small
-étale sites. -/
+/-- Blueprint `def-weil-pbc-extension-by-zero`: Extension by zero for open immersions
+
+The lower shriek `j_!` along an open immersion `j : U ⟶ X` on sheaves for the small
+étale sites: the left adjoint of the restriction `j^*`
+(`AlgebraicGeometry.Etale.localizationLowerShriek`). Its geometric stalks are those of `F` at
+points of `U` (`AlgebraicGeometry.Etale.openImmersionLowerShriekCompUliftSheafFiberIso`) and
+zero elsewhere (`AlgebraicGeometry.Etale.isZero_uliftSheafFiber_openImmersionLowerShriek_obj`). -/
 noncomputable def openImmersionLowerShriek :
     Sheaf U.smallEtaleTopology A ⥤ Sheaf X.smallEtaleTopology A :=
   Etale.localizationLowerShriek A j inferInstance

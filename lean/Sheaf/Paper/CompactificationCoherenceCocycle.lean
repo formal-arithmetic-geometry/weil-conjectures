@@ -15,7 +15,7 @@ import Sheaf.Paper.CartesianCoefficients
 import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 import Sheaf.Compactification.BoundaryRefinement
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs

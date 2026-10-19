@@ -14,7 +14,6 @@ public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Kunneth
@@ -43,9 +42,12 @@ This module only imports its parts, so that `import`s of
 
 - `WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage`: finiteness of `Rf_*` and
   `Rf_!`;
-- `WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupport`: perfectness of
-  compactly supported cohomology;
 - `WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel`: bounded flat models;
 - `WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Kunneth`: Künneth and the projection
   formula.
+
+The perfectness of compactly supported cohomology is proved in
+`WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupport`, which is *not* imported
+here: it rests on the stability of `Dctf` under `Rf_!`
+(`WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage`), which imports this module.
 -/

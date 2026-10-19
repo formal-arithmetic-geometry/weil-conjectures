@@ -23,7 +23,7 @@ import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 import Sheaf.AlgebraicGeometry.FiniteSurjectiveAmpleReflection
 import Sheaf.AlgebraicGeometry.ProperIntegralCurveAmpleDegree
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-!
 # Ampleness and degrees on normalized components of a proper curve

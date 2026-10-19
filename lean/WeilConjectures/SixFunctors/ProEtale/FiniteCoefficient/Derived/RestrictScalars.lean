@@ -5,6 +5,9 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CoherenceLegacy
+
+
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
@@ -91,6 +94,58 @@ end Conjugate
 namespace Functor
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+section Factors
+
+variable {C D E : Type*} [Category C] [Category D] [Category E]
+  [Abelian C] [Abelian D] [Abelian E]
+  (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
+
+
+
+variable [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+  [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+  [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+
+
+
+
+
+end Factors
+
+section Coherence
+
+variable {C D E E' : Type*} [Category C] [Category D] [Category E] [Category E']
+  [Abelian C] [Abelian D] [Abelian E] [Abelian E']
+  [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E] [HasDerivedCategory E']
+
+
+
+variable (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+
+
+
+
+
+variable (G : D ⥤ E) (H : E ⥤ E') [G.Additive] [H.Additive]
+  [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+  [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+
+
+
+end Coherence
+
+section Whisker
+
+variable {C D E : Type*} [Category C] [Category D] [Category E]
+  [Abelian C] [Abelian D] [Abelian E]
+  [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+
+
+
+
+
+end Whisker
 
 section Pasting
 

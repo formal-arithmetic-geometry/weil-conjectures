@@ -12,7 +12,7 @@ public import Mathlib.Topology.Irreducible
 
 import Sheaf.AlgebraicGeometry.ProEtale.WeaklyContractibleBasis
 import WeilConjectures.RingTheory.ProEtale.WContractible
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.RingTheory.ProEtale.ClosedLiftMap
 import WeilConjectures.RingTheory.ProEtale.ClosedLift
 import Sheaf.RingTheory.IndEtaleUniverseTransport

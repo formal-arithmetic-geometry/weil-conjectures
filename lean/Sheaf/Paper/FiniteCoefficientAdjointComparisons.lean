@@ -32,7 +32,7 @@ import Sheaf.AlgebraicGeometry.ResidueTorAmplitudeTest
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import WeilConjectures.Compactification.NagataCompactification
 import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality

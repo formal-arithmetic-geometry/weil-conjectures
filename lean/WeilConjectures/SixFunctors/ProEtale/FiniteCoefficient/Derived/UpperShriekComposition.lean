@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBoundedBelow
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriek
@@ -183,6 +184,8 @@ theorem nonempty_iso_ι_comp_rightDerivedLowerShriek_comp :
 
 variable {Λ}
 
+variable [CompactSpace Y] [CompactSpace Z]
+
 variable (PX : ObjectProperty (_root_.DerivedCategory
     (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))))
   (PY : ObjectProperty (_root_.DerivedCategory
@@ -198,6 +201,7 @@ variable (PX : ObjectProperty (_root_.DerivedCategory
   (hfg₁ : ∀ K, PX K → PZ ((R(f ≫ g)_![ModuleCat.{u + 1} Λ]).obj K))
   (hfg₂ : ∀ L, PZ L → PX ((R(f ≫ g)^![ModuleCat.{u + 1} Λ]).obj L))
 
+omit [CompactSpace Y] [CompactSpace Z] in
 include hPX in
 /-- The composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of
 `AlgebraicGeometry.ProEtale.nonempty_iso_ι_comp_rightDerivedLowerShriek_comp`, restricted to full
@@ -220,7 +224,7 @@ isomorphism `e : R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of left adjoints whose mate
 `Rg^! ⋙ Rf^! ≅ R(f ≫ g)^!` carries the adjunction `R(f ≫ g)_! ⊣ R(f ≫ g)^!` to the composite
 adjunction `Rf_! ⋙ Rg_! ⊣ Rg^! ⋙ Rf^!`: the unit and counit of the composite adjunction are the
 pasted ones. -/
-theorem exists_rightDerivedUpperShriekAdjunction_comp_eq [CompactSpace Y] [CompactSpace Z] :
+theorem exists_rightDerivedUpperShriekAdjunction_comp_eq :
     ∃ e : PZ.lift (PX.ι ⋙ R(f ≫ g)_![ModuleCat.{u + 1} Λ]) (fun K ↦ hfg₁ _ K.property) ≅
         PY.lift (PX.ι ⋙ R(f)_![ModuleCat.{u + 1} Λ]) (fun K ↦ hf₁ _ K.property) ⋙
           PZ.lift (PY.ι ⋙ R(g)_![ModuleCat.{u + 1} Λ]) (fun K ↦ hg₁ _ K.property),
@@ -266,6 +270,7 @@ section BoundedBelow
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
   {X Y Z : Scheme.{u}} (f : X ⟶ Y)
   (g : Y ⟶ Z) [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+  [CompactSpace Y] [CompactSpace Z]
 
 /-- Blueprint `sk-lem-sf-mate`, clause (b), constructible form: the mate of the composition
 isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` on the bounded below objects of étale origin, under the
@@ -274,7 +279,7 @@ exceptional adjunctions of blueprint `sk-prop-sf-existence` (c), is an isomorphi
 That it is the mate, with the pasted unit and counit, is
 `AlgebraicGeometry.ProEtale.exists_rightDerivedUpperShriekAdjunction_comp_eq` for the objects of
 étale origin over `X` and `Y` and the bounded below objects over `Z`. -/
-theorem nonempty_iso_rightDerivedUpperShriekPlus_comp [CompactSpace Y] [CompactSpace Z] :
+theorem nonempty_iso_rightDerivedUpperShriekPlus_comp :
     Nonempty (R(f ≫ g)^![ModuleCat.{u + 1} Λ]+ ≅
       R(g)^![ModuleCat.{u + 1} Λ]+ ⋙ R(f)^![ModuleCat.{u + 1} Λ]+) := by
   have hle := DerivedCategory.plusEtaleOrigin_le_plus (ModuleCat.{u + 1} Λ)
@@ -304,7 +309,6 @@ isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of the restricted functors is an is
 `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` of functors `Dctf(Z) ⥤ Dctf(X)` carrying the adjunction of `f ≫ g` to
 the composite adjunction. -/
 theorem exists_rightDerivedUpperShriekAdjunction_comp_eq_of_finiteTor
-    [CompactSpace Y] [CompactSpace Z]
     (hf₁ : ∀ K, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
       DerivedCategory.constructibleFiniteTor _ Y ((R(f)_![ModuleCat.{u + 1} Λ]).obj K))
     (hf₂ : ∀ L, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L →

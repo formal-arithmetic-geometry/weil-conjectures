@@ -21,13 +21,13 @@ public import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
 public import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
-public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
-public import Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
 public import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
 public import Sheaf.AlgebraicGeometry.CompactSupportFiniteTorsion
-public import Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
+public import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
 public import Mathlib.AlgebraicGeometry.Noetherian

@@ -17,7 +17,7 @@ import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 import Sheaf.Algebra.Homology.RingedSiteZerothHypercohomologyOfUniverses
 import Sheaf.Algebra.Homology.LowerTruncationStepTriangle
 import Sheaf.Paper.CoefficientHeartCommonStratification
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.AlgebraicGeometry.ImmersionFiberDegreeOne
 import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 import Sheaf.Paper.CartesianCoefficients

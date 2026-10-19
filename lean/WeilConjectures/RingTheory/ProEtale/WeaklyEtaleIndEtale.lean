@@ -30,6 +30,11 @@ The proof follows the Stacks project:
    the weakly étale map `C → D` is bijective on stalks, hence ind-Zariski by
    Stacks 097F (`Algebra.BijectiveOnStalks.indZariski_of_isWLocal`).
 5. Thus `T = D` works: `S → D` is faithfully flat ind-étale and `R → C → D` is ind-étale.
+
+The ring `D` is `Algebra.WeaklyEtale.refinement R S` (blueprint
+`def-weil-pbc-weak-etale-refinement`), and its properties are
+`Algebra.WeaklyEtale.indEtale_faithfullyFlat_refinement`
+(blueprint `thm-weil-pbc-weak-etale-refinement`).
 -/
 
 @[expose] public section
@@ -184,6 +189,78 @@ lemma WStrictLocalization.exists_mem_zeroLocus_comap_eq (p : PrimeSpectrum R) :
 
 end ClosedPointsSurjective
 
+section Refinement
+
+variable (R S : Type u) [CommRing R] [CommRing S] [Algebra R S]
+
+namespace Algebra.WeaklyEtale
+
+open WStrictLocalization
+
+/-- The ideal `J · (C ⊗[R] S)` of the base change `C ⊗[R] S`, where
+`C = WStrictLocalization R` and `J ⊆ C` is the ideal cutting out the closed points of
+`Spec C`. -/
+noncomputable def refinementIdeal : Ideal (WStrictLocalization R ⊗[R] S) :=
+  ((closedIdeal R).map (algebraMap (WLocalization R) (WStrictLocalization R))).map
+    (algebraMap (WStrictLocalization R) (WStrictLocalization R ⊗[R] S))
+
+/-- The canonical refinement of an `R`-algebra `S` (blueprint
+`def-weil-pbc-weak-etale-refinement`): the w-localization of `C ⊗[R] S` along
+`J · (C ⊗[R] S)`, where `C = WStrictLocalization R` and `J ⊆ C` cuts out the closed points of
+`Spec C`. If `S` is weakly étale over `R`, it is faithfully flat and ind-étale over `S`, and
+ind-étale over `R` (`Algebra.WeaklyEtale.indEtale_faithfullyFlat_refinement`). -/
+noncomputable def refinement : Type u :=
+  (refinementIdeal R S).WLocalization
+
+noncomputable instance : CommRing (refinement R S) :=
+  inferInstanceAs <| CommRing (refinementIdeal R S).WLocalization
+
+noncomputable instance algebraTensorProduct :
+    Algebra (WStrictLocalization R ⊗[R] S) (refinement R S) :=
+  inferInstanceAs <| Algebra _ (refinementIdeal R S).WLocalization
+
+noncomputable instance algebraWStrictLocalization :
+    Algebra (WStrictLocalization R) (refinement R S) :=
+  inferInstanceAs <| Algebra (WStrictLocalization R)
+    (((closedIdeal R).map (algebraMap (WLocalization R) (WStrictLocalization R))).map
+      (algebraMap (WStrictLocalization R) (WStrictLocalization R ⊗[R] S))).WLocalization
+
+instance : IsScalarTower (WStrictLocalization R) (WStrictLocalization R ⊗[R] S)
+    (refinement R S) :=
+  inferInstanceAs <| IsScalarTower (WStrictLocalization R) _
+    (((closedIdeal R).map (algebraMap (WLocalization R) (WStrictLocalization R))).map
+      (algebraMap (WStrictLocalization R) (WStrictLocalization R ⊗[R] S))).WLocalization
+
+instance isWLocalRing : IsWLocalRing (refinement R S) :=
+  inferInstanceAs <| IsWLocalRing (refinementIdeal R S).WLocalization
+
+instance indZariski : Algebra.IndZariski (WStrictLocalization R ⊗[R] S) (refinement R S) :=
+  inferInstanceAs <| Algebra.IndZariski _ (refinementIdeal R S).WLocalization
+
+noncomputable instance algebraRight : Algebra S (refinement R S) :=
+  Algebra.compHom _ (Algebra.TensorProduct.includeRight.toRingHom :
+    S →+* WStrictLocalization R ⊗[R] S)
+
+noncomputable instance : Algebra R (refinement R S) :=
+  Algebra.compHom _ (algebraMap R (WStrictLocalization R))
+
+instance : IsScalarTower R (WStrictLocalization R) (refinement R S) :=
+  .of_algebraMap_eq' rfl
+
+instance : IsScalarTower R S (refinement R S) := IsScalarTower.of_algebraMap_eq fun r ↦ by
+  change algebraMap (WStrictLocalization R ⊗[R] S) (refinement R S)
+      (algebraMap R (WStrictLocalization R) r ⊗ₜ[R] 1) =
+    algebraMap (WStrictLocalization R ⊗[R] S) (refinement R S) (1 ⊗ₜ[R] algebraMap R S r)
+  rw [Algebra.TensorProduct.tmul_one_eq_one_tmul]
+
+attribute [local instance] Algebra.TensorProduct.rightAlgebra in
+instance : IsScalarTower S (WStrictLocalization R ⊗[R] S) (refinement R S) :=
+  .of_algebraMap_eq' rfl
+
+end Algebra.WeaklyEtale
+
+end Refinement
+
 section Main
 
 attribute [local instance] Algebra.TensorProduct.rightAlgebra
@@ -191,12 +268,12 @@ attribute [local instance] Algebra.TensorProduct.rightAlgebra
 variable (R S : Type u) [CommRing R] [CommRing S] [Algebra R S]
 
 open WStrictLocalization in
-/-- **Stacks 097Z** (blueprint `thm:weakly-etale-ind-etale`): if `S` is a weakly étale
-`R`-algebra, there exists a faithfully flat, ind-étale `S`-algebra `T` such that `T` is an
-ind-étale `R`-algebra. -/
-theorem Algebra.WeaklyEtale.exists_indEtale [Algebra.WeaklyEtale R S] :
-    ∃ (T : Type u) (_ : CommRing T) (_ : Algebra R T) (_ : Algebra S T) (_ : IsScalarTower R S T),
-      Algebra.IndEtale S T ∧ Module.FaithfullyFlat S T ∧ Algebra.IndEtale R T := by
+/-- **Stacks 097Z** (blueprint `thm-weil-pbc-weak-etale-refinement`): if `S` is a weakly étale
+`R`-algebra, its canonical refinement `Algebra.WeaklyEtale.refinement R S` is ind-étale and
+faithfully flat over `S`, and ind-étale over `R`. -/
+theorem Algebra.WeaklyEtale.indEtale_faithfullyFlat_refinement [Algebra.WeaklyEtale R S] :
+    Algebra.IndEtale S (refinement R S) ∧ Module.FaithfullyFlat S (refinement R S) ∧
+      Algebra.IndEtale R (refinement R S) := by
   classical
   -- Step 1: the w-strictly local cover `C` of `R` and the ideal `J` of closed points.
   set C := WStrictLocalization R with hC
@@ -207,7 +284,7 @@ theorem Algebra.WeaklyEtale.exists_indEtale [Algebra.WeaklyEtale R S] :
   set D' := C ⊗[R] S with hD'
   -- Step 3: the w-localization `D` of `D'` along `J`.
   set K : Ideal D' := J.map (algebraMap C D') with hKdef
-  set D := K.WLocalization with hDdef
+  set D := refinement R S with hDdef
   -- `C → D'` is weakly étale (base change) and induces algebraic residue field extensions.
   have : Algebra.WeaklyEtale C D' := inferInstance
   have hres : ∀ (m : Ideal C) (q' : Ideal D') [q'.LiesOver m] [m.IsMaximal] [q'.IsPrime]
@@ -255,8 +332,6 @@ theorem Algebra.WeaklyEtale.exists_indEtale [Algebra.WeaklyEtale R S] :
     exact hmaxC n
   -- Stacks 097F: `C → D` is ind-Zariski, hence `R → D` is ind-étale.
   have : Algebra.IndZariski C D := Algebra.BijectiveOnStalks.indZariski_of_isWLocal C D hwloc
-  let : Algebra R D := Algebra.compHom D (algebraMap R C)
-  have : IsScalarTower R C D := IsScalarTower.of_algebraMap_eq' rfl
   have : Algebra.IndEtale R D := Algebra.IndEtale.trans R (S := C) D
   -- `S → D'` is faithfully flat and ind-étale (base change of `R → C`).
   have hSD'_ind : (algebraMap S D').IndEtale :=
@@ -268,14 +343,7 @@ theorem Algebra.WeaklyEtale.exists_indEtale [Algebra.WeaklyEtale R S] :
   have : Algebra.IndEtale S D' := (RingHom.IndEtale.algebraMap_iff S D').mp hSD'_ind
   have : Module.FaithfullyFlat S D' := RingHom.faithfullyFlat_algebraMap_iff.mp hSD'_ff
   -- The `S`-algebra structure on `D`.
-  let : Algebra S D := Algebra.compHom D (algebraMap S D')
-  have : IsScalarTower S D' D := IsScalarTower.of_algebraMap_eq' rfl
   have : Algebra.IndEtale S D := Algebra.IndEtale.trans S (S := D') D
-  have : IsScalarTower R S D := IsScalarTower.of_algebraMap_eq fun r ↦ by
-    change algebraMap C D (algebraMap R C r) = algebraMap D' D (algebraMap S D' (algebraMap R S r))
-    rw [show algebraMap C D (algebraMap R C r) =
-        algebraMap D' D (algebraMap C D' (algebraMap R C r)) from rfl,
-      ← IsScalarTower.algebraMap_apply R C D', ← IsScalarTower.algebraMap_apply R S D']
   -- `S → D` is faithfully flat: flatness is clear, surjectivity on spectra is the content.
   have : Module.Flat S D := Module.Flat.trans S D' D
   have hsurj : Function.Surjective (PrimeSpectrum.comap (algebraMap S D)) := by
@@ -329,10 +397,20 @@ theorem Algebra.WeaklyEtale.exists_indEtale [Algebra.WeaklyEtale R S] :
       exact zeroLocus_map_algebraMap_subset_closedPoints hres hJ.le
     obtain ⟨P, hP_mem, hP⟩ := (Ideal.WLocalization.bijOn_zeroLocus_map K hK_sub).surjOn hQK
     refine ⟨P, ?_⟩
-    rw [IsScalarTower.algebraMap_eq S D' D, PrimeSpectrum.comap_comp_apply, hP, hQq]
+    have hP' : PrimeSpectrum.comap (algebraMap D' D) P = Q := hP
+    rw [IsScalarTower.algebraMap_eq S D' D, PrimeSpectrum.comap_comp_apply, hP', hQq]
   have : Module.FaithfullyFlat S D := Module.FaithfullyFlat.of_comap_surjective hsurj
-  exact ⟨D, inferInstance, inferInstance, inferInstance, inferInstance,
-    inferInstance, inferInstance, inferInstance⟩
+  exact ⟨inferInstance, inferInstance, inferInstance⟩
+
+open WStrictLocalization in
+/-- **Stacks 097Z** (blueprint `thm:weakly-etale-ind-etale`): if `S` is a weakly étale
+`R`-algebra, there exists a faithfully flat, ind-étale `S`-algebra `T` such that `T` is an
+ind-étale `R`-algebra. -/
+theorem Algebra.WeaklyEtale.exists_indEtale [Algebra.WeaklyEtale R S] :
+    ∃ (T : Type u) (_ : CommRing T) (_ : Algebra R T) (_ : Algebra S T) (_ : IsScalarTower R S T),
+      Algebra.IndEtale S T ∧ Module.FaithfullyFlat S T ∧ Algebra.IndEtale R T :=
+  ⟨refinement R S, inferInstance, inferInstance, inferInstance, inferInstance,
+    indEtale_faithfullyFlat_refinement R S⟩
 
 end Main
 

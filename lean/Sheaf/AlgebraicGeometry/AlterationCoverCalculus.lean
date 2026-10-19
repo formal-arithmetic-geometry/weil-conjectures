@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.AlgebraicGeometry.Sites.MorphismProperty
 import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-!
 # Cover calculus for prime-to-ell alterations

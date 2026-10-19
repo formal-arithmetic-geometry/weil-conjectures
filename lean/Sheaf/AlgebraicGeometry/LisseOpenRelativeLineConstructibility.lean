@@ -31,7 +31,7 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleModuleTraceDegree
 import WeilConjectures.AlgebraicGeometry.Curve.DisjointOpenExtensionBiproduct
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.Paper.EtaleLisseFiltrationDevissage
 import Sheaf.Paper.ProjectionCompactification
 

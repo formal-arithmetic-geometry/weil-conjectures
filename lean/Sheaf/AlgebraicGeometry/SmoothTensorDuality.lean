@@ -53,7 +53,7 @@ noncomputable def smoothTensorCanonicalDerivedBraiding
     [MonoidalCategory C] [MonoidalPreadditive C] [BraidedCategory C] [MonoidalClosed C]
     [Abelian.HasFunctorialFlatResolution C] [HasDerivedCategory.{u + 1} C] :
     BraidedCategory (_root_.DerivedCategory C) :=
-  DerivedMonoidal.braidedCategory (_root_.DerivedCategory.Qh (C := C))
+  DerivedMonoidal.braidedCategory' (_root_.DerivedCategory.Qh (C := C))
     (HomotopyCategory.quasiIso C (.up ℤ))
 
 /-- The canonical tensor morphism for the ordinary exceptional adjoint. Source: blueprint

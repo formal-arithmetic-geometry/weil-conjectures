@@ -10,8 +10,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.CompactificationUpperShr
 public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBoundedBelow
 import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
-import Sheaf.CategoryTheory.RightDerivedFunctorUpperBound
 
 /-!
 
@@ -269,18 +269,8 @@ unbounded derived category. Extension by zero is exact, hence preserves the inpu
 bound. Apply `hasBoundedBelowUpperShriek_of_amplitude` to the composite. -/
 instance hasBoundedBelowUpperShriek [CompactSpace Y] (Λ : Type (u + 1)) [CommRing Λ]
     [Finite Λ] : HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f where
-  plus_rightDerivedUpperShriek_obj := by
-    intro K hK
-    let c := HasCompactification.compactification f
-    obtain ⟨d, hd⟩ := exists_uniform_proper_dimension_bound c.g Λ
-    have h : HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f := by
-      apply hasBoundedBelowUpperShriek_of_amplitude f Λ d
-      intro L n hL
-      have hLE : DerivedCategory.TStructure.t.IsLE
-          ((((c.i)_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategory).obj L) n :=
-        Functor.isLE_mapDerivedCategory_obj _ L n
-      exact Functor.isLE_rightDerivedFunctor_obj_of_dimension _ d hd _ n hLE
-    exact h.plus_rightDerivedUpperShriek_obj K hK
+  plus_rightDerivedUpperShriek_obj :=
+    plus_obj_of_rightDerivedLowerShriek_adjunction Λ f (Adjunction.ofIsLeftAdjoint _)
 
 /-- The coefficients have exceptional inverse images along every morphism admitting a
 compactification, preserving bounded below objects when the target is quasi-compact:

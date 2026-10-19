@@ -5,7 +5,7 @@ Authors: SHEAF group NG
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion

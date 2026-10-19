@@ -32,7 +32,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.Algebra.Module.FinitePresentation
 import Sheaf.Paper.FiniteRingConstructibleSheafOrigin
 import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison

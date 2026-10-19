@@ -13,6 +13,7 @@ import Sheaf.Paper.NormalizedDVRTower
 import Sheaf.Paper.ExchangeProjectionSuppliedDomains
 import Sheaf.Paper.IntegralDerivedOperationsOnSlices
 import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 import Sheaf.Paper.DerivedCompleteOnSlices
 import Sheaf.Paper.SfIntegralConstructible
 import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport

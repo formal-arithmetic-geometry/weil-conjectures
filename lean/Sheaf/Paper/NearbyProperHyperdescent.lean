@@ -6,7 +6,7 @@ Authors: SHEAF group Q27
 module
 
 public import Sheaf.Paper.OrgogozoInductionData
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.CategoryTheory.ProperFaceMatchingObject
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import Sheaf.AlgebraicGeometry.ProperHypercoverEtaleDescent

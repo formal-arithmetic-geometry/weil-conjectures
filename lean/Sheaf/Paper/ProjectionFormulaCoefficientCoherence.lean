@@ -59,7 +59,7 @@ def projectionCoherenceSymmetry
     (C : Type v) [Category.{w} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
     [MonoidalCategory C] [MonoidalClosed C] [MonoidalPreadditive C] [BraidedCategory C]
     [Abelian.HasFunctorialFlatResolution C] (K L : DerivedCategory C) : K ⊗ L ≅ L ⊗ K :=
-  DerivedMonoidal.braiding DerivedCategory.Qh
+  DerivedMonoidal.braiding' DerivedCategory.Qh
     (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)) K L
 /-- The existing finite-ring Noetherian instance exposed at the positive quotient.
 This makes the fixed-ring flat-pullback interface available without a long general search.

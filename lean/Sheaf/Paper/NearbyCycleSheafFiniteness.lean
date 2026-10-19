@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
 import Sheaf.AlgebraicGeometry.GabberStrictLocalTorsionBound
 import Sheaf.AlgebraicGeometry.StrictHenselization

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.OrgogozoInductionData
 public import Sheaf.Paper.OrientedNearbyCycles
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType

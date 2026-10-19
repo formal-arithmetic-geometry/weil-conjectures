@@ -25,7 +25,7 @@ import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 import Sheaf.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover
 import Sheaf.AlgebraicGeometry.ProEtaleConstantSheafStalk
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.Paper.SiteSheafificationSectionsLocal
+import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 import Mathlib.CategoryTheory.Limits.HasLimits
 import Sheaf.Paper.ConstantCompletionEquivalence
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr

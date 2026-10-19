@@ -85,11 +85,19 @@ lemma lowerStarComp_exchange {T₁ T₂ T₃ : Scheme.{u}} (p : T₁ ⟶ T₂) (
               (lowerStarComp A a₁ p).inv.app G) ≫
               (lowerStarComp A p q).hom.app ((a₁)_*[A].obj G) := by
   ext V : 3
-  simp only [Functor.map_comp, ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
-    lowerStar_map_hom_app', lowerStarComp_hom_app_lowerStar_obj_hom_app,
-    lowerStarComp_inv_app_lowerStar_obj_hom_app, lowerStarCongr_hom_app_lowerStar_obj_hom_app]
-  simp only [lowerStarComp_hom_app_hom_app, lowerStarComp_inv_app_hom_app,
-    lowerStarCongr_hom_app_hom_app]
+  -- `rw` rather than `simp only`: `simp only` would close the goal through a single kernel
+  -- conversion between the composite and its sectionwise form, which is very slow.
+  repeat' first
+    | rw [Functor.map_comp]
+    | rw [ObjectProperty.FullSubcategory.comp_hom]
+    | rw [NatTrans.comp_app]
+    | rw [lowerStar_map_hom_app']
+    | rw [lowerStarComp_hom_app_lowerStar_obj_hom_app]
+    | rw [lowerStarComp_inv_app_lowerStar_obj_hom_app]
+    | rw [lowerStarCongr_hom_app_lowerStar_obj_hom_app]
+    | rw [lowerStarComp_hom_app_hom_app]
+    | rw [lowerStarComp_inv_app_hom_app]
+    | rw [lowerStarCongr_hom_app_hom_app]
   simp only [← Functor.map_comp, ← op_comp]
   congr 2
   ext : 1
@@ -128,8 +136,46 @@ lemma lowerStarComp_exchange' {T₁ T₂ T₃ : Scheme.{u}} (p : T₁ ⟶ T₂) 
 
 variable {l : ℕ} [Fact l.Prime]
 
+/-- The restriction maps of the underlying sheaf of `g_* M` are those of the underlying sheaf of
+`M` along base change. -/
+lemma adicLowerStar_obj_X_obj_map {Z W : Scheme.{u}} (g : Z ⟶ W) (M : AdicSheaf l Z)
+    {V V' : W.ProEtᵒᵖ} (φ : V ⟶ V') :
+    ((g)_*ᵃ[l].obj M).X.obj.map φ =
+      M.X.obj.map ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).map φ.unop).op :=
+  rfl
+
+lemma adicLowerStar_map_hom_hom_app {Z W : Scheme.{u}} (g : Z ⟶ W) {M N : AdicSheaf l Z}
+    (φ : M ⟶ N) (V : W.ProEtᵒᵖ) :
+    ((g)_*ᵃ[l].map φ).hom.hom.app V =
+      φ.hom.hom.app (op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).obj V.unop)) :=
+  rfl
+
+lemma adicLowerStarComp_hom_app_hom_hom_app {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
+    (M : AdicSheaf l T) (V : R.ProEtᵒᵖ) :
+    ((adicLowerStarComp l h₁ h₂).hom.app M).hom.hom.app V =
+      M.X.obj.map ((MorphismProperty.Over.pullbackComp h₁ h₂).hom.app V.unop).op :=
+  lowerStarComp_hom_app_hom_app _ h₁ h₂ M.X V
+
+lemma adicLowerStarComp_inv_app_hom_hom_app {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
+    (M : AdicSheaf l T) (V : R.ProEtᵒᵖ) :
+    ((adicLowerStarComp l h₁ h₂).inv.app M).hom.hom.app V =
+      M.X.obj.map ((MorphismProperty.Over.pullbackComp h₁ h₂).inv.app V.unop).op :=
+  lowerStarComp_inv_app_hom_app _ h₁ h₂ M.X V
+
+lemma adicLowerStarCongr_hom_app_hom_hom_app {Z Y : Scheme.{u}} {g g' : Z ⟶ Y} (h : g = g')
+    (M : AdicSheaf l Z) (V : Y.ProEtᵒᵖ) :
+    ((adicLowerStarCongr l h).hom.app M).hom.hom.app V =
+      M.X.obj.map ((MorphismProperty.Over.pullbackCongr h).inv.app V.unop).op :=
+  lowerStarCongr_hom_app_hom_app _ h M.X V
+
+lemma adicLowerStarCongr_inv_app_hom_hom_app {Z Y : Scheme.{u}} {g g' : Z ⟶ Y} (h : g = g')
+    (M : AdicSheaf l Z) (V : Y.ProEtᵒᵖ) :
+    ((adicLowerStarCongr l h).inv.app M).hom.hom.app V =
+      M.X.obj.map ((MorphismProperty.Over.pullbackCongr h.symm).inv.app V.unop).op :=
+  lowerStarCongr_hom_app_hom_app _ h.symm M.X V
+
 set_option maxHeartbeats 1600000 in
--- the `Mod`-level composites unfold to the underlying sheaf-level ones
+-- Rewriting both sides down to sections takes many elaboration steps.
 /-- `AlgebraicGeometry.ProEtale.lowerStarComp_exchange'` for sheaves of `ℚ̄_ℓ,X`-modules. -/
 lemma adicLowerStarComp_exchange {T₁ T₂ T₃ : Scheme.{u}} (p : T₁ ⟶ T₂) (q : T₂ ⟶ T₃)
     (r : T₁ ⟶ T₃) (hr : p ≫ q = r)
@@ -145,10 +191,36 @@ lemma adicLowerStarComp_exchange {T₁ T₂ T₃ : Scheme.{u}} (p : T₁ ⟶ T�
               (adicLowerStarCongr l h₁).hom.app M ≫ (adicLowerStarComp l a₁ p).inv.app M) ≫
               (adicLowerStarComp l p q).hom.app ((a₁)_*ᵃ[l].obj M) ≫
                 (adicLowerStarCongr l hr).hom.app ((a₁)_*ᵃ[l].obj M) := by
+  -- Both sides are compared on sections: there they are restriction maps of `M.X` along
+  -- morphisms of the site. Comparing the `Mod`-level composites with the sheaf-level ones
+  -- directly makes the kernel unfold every composition.
   apply Mod.hom_ext
-  simp only [Mod.comp_hom', adicLowerStar_map_hom, adicLowerStarComp_hom_app_hom,
-    adicLowerStarCongr_hom_app_hom, adicLowerStarComp_inv_app_hom]
-  exact lowerStarComp_exchange' (WeilCoefficients.{u} l) p q r hr a₁ a₂ a₃ h₁ h₂ h₁₃ M.X
+  refine ObjectProperty.hom_ext _ (NatTrans.ext (funext fun V ↦ ?_))
+  have key := congrArg (fun φ ↦ φ.hom.app V)
+    (lowerStarComp_exchange' (WeilCoefficients.{u} l) p q r hr a₁ a₂ a₃ h₁ h₂ h₁₃ M.X)
+  repeat' first
+    | rw [Functor.map_comp]
+    | rw [Mod.comp_hom']
+    | rw [ObjectProperty.FullSubcategory.comp_hom]
+    | rw [NatTrans.comp_app]
+    | rw [adicLowerStar_map_hom_hom_app]
+    | rw [adicLowerStarComp_hom_app_hom_hom_app]
+    | rw [adicLowerStarComp_inv_app_hom_hom_app]
+    | rw [adicLowerStarCongr_hom_app_hom_hom_app]
+    | rw [adicLowerStar_obj_X_obj_map]
+  repeat' first
+    | rw [Functor.map_comp] at key
+    | rw [ObjectProperty.FullSubcategory.comp_hom] at key
+    | rw [NatTrans.comp_app] at key
+    | rw [lowerStar_map_hom_app'] at key
+    | rw [lowerStarComp_hom_app_lowerStar_obj_hom_app] at key
+    | rw [lowerStarComp_inv_app_lowerStar_obj_hom_app] at key
+    | rw [lowerStarCongr_hom_app_lowerStar_obj_hom_app] at key
+    | rw [lowerStarComp_hom_app_hom_app] at key
+    | rw [lowerStarComp_inv_app_hom_app] at key
+    | rw [lowerStarCongr_hom_app_hom_app] at key
+  simp only [← Functor.map_comp, ← op_comp, Quiver.Hom.unop_op, Category.assoc] at key ⊢
+  exact key
 
 end ProEtale
 

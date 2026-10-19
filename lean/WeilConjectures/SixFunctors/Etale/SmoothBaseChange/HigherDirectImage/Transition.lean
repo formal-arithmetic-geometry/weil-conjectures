@@ -5,10 +5,15 @@ Authors: Nailin Guan
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
-import Sheaf.AlgebraicGeometry.HigherDirectImageOverCoherence
-import Sheaf.AlgebraicGeometry.HigherDirectImageAffineContinuity
-import Sheaf.AlgebraicGeometry.SmallEtaleAffineColimitDetection
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+
+
+public import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitions
+import WeilConjectures.AlgebraicGeometry.HigherDirectImageOverCoherence
+import WeilConjectures.AlgebraicGeometry.HigherDirectImageAffineContinuity
+import WeilConjectures.AlgebraicGeometry.SmallEtaleAffineColimitDetection
 
 /-!
 # Transition maps of higher direct images
@@ -57,7 +62,9 @@ R^q g_* (G|_T)`, where `g_i : T_i ⟶ S` and `g : T ⟶ S` are the structure mor
 statement is recorded on every geometric stalk, in the form of the two defining properties of
 a filtered colimit of modules: every element at the limit comes from some stage, and an element
 of a stage dying at the limit already dies at a later stage. This is the case of the blueprint
-statement for a system of sheaves pulled back from a fixed scheme. -/
+statement for a system of sheaves pulled back from a fixed scheme. 
+(blueprint: sbc-lem-higher-image-pulledback-stalk-continuity)
+-/
 @[stacks 09Z1]
 theorem Etale.higherDirectImage_limit {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {I : Type u} [Category.{u} I]

@@ -22,6 +22,7 @@ import Sheaf.Paper.FiniteTorAmplitudeSites
 import Sheaf.Paper.SfCommonStageDirectImage
 import Sheaf.Paper.SfCommonStageWeilCohomology
 import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
 
 /-!

@@ -5,6 +5,9 @@ Authors: Nailin Guan
 -/
 module
 
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.HasLimits
+
+
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import Mathlib.CategoryTheory.Limits.HasLimits
 

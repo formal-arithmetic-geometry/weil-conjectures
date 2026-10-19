@@ -20,7 +20,7 @@ import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
 import Sheaf.AlgebraicGeometry.CompactifiableOverField
 import Sheaf.AlgebraicGeometry.DerivedCategories
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
 import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
 import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients

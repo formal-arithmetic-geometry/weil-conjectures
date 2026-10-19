@@ -5,7 +5,7 @@ Authors: SHEAF group Q29
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
@@ -130,7 +130,7 @@ def AmbientDualityPairing
   ∃ b : derivedTensor A X ≅ (derivedTensor A X).flip,
     (∀ K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A),
       HEq ((b.hom.app K).app L)
-        (DerivedMonoidal.braiding
+        (DerivedMonoidal.braiding'
           (_root_.DerivedCategory.Qh (C := Sheaf X.smallEtaleTopology A))
           (HomotopyCategory.quasiIso (Sheaf X.smallEtaleTopology A) (ComplexShape.up ℤ)) K L).hom) ∧
     ∃ e : ∀ K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A),
@@ -169,7 +169,7 @@ def AmbientDualityPairing
   ∃ b : T ≅ (T).flip,
     (∀ K L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A),
       HEq ((b.hom.app K).app L)
-        (DerivedMonoidal.braiding
+        (DerivedMonoidal.braiding'
           (_root_.DerivedCategory.Qh (C := Sheaf (Scheme.ProEt.topology X) A))
           (HomotopyCategory.quasiIso (Sheaf (Scheme.ProEt.topology X) A)
             (ComplexShape.up ℤ)) K L).hom) ∧
@@ -289,7 +289,7 @@ def IsEtaleKoszulSymmetry (A : Type (u + 1)) [CommRing A] (X : Scheme.{u})
         ((derivedTensor (ModuleCat.{u + 1} A) X).obj N).obj M) : Prop :=
   ∀ M N : DerivedCategoryModule A X,
     HEq (b M N).hom
-      (DerivedMonoidal.braiding
+      (DerivedMonoidal.braiding'
         (_root_.DerivedCategory.Qh (C := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))
         (HomotopyCategory.quasiIso (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))
           (ComplexShape.up ℤ)) M N).hom

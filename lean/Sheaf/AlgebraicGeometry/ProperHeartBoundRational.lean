@@ -18,7 +18,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 import Mathlib.AlgebraicGeometry.PullbackCarrier
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 import Sheaf.AlgebraicGeometry.ProEtaleWContractibleSectionsExact
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic

@@ -18,7 +18,7 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Limits.HasLimits
 import Sheaf.RepresentationTheory.DiscreteIntegerInvariantsInfrastructure
 import Sheaf.RepresentationTheory.LocallyConstantCochainsEffaceable
-import Sheaf.CategoryTheory.EffaceableDeltaFunctorUniversal
+import WeilConjectures.CategoryTheory.EffaceableDeltaFunctorUniversal
 import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
 import Mathlib.Algebra.Category.Grp.AB
 import Mathlib.Algebra.Category.Grp.Ulift

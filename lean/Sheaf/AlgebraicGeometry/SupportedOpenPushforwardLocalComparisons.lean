@@ -279,7 +279,7 @@ private theorem left_adjoint_support
         (Modules.restrictStalkNatIso U.ι ⟨x, hxU⟩).app (L.obj M)
       exact j.addCommGroupIsoToAddEquiv.toEquiv.subsingleton_congr.mp (hF n ⟨x, hxU⟩ hx)
     · exact ModuleCat.isZero_iff_subsingleton.mp
-        (ModuleExtensionByZeroStalkOutside X.toRingedSpace U (e.inverse.obj M) x hxU)
+        (moduleExtensionByZero_stalk_outside X.toRingedSpace U (e.inverse.obj M) x hxU)
   have hs := ih.addCommGroupIsoToAddEquiv.toEquiv.subsingleton_congr.mpr hz
   let i := H.mapIso ((DerivedCategory.homologyFunctor
     (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).mapIso (α.app F))

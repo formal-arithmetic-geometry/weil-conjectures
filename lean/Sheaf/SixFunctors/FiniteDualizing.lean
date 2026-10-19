@@ -16,7 +16,7 @@ public import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 
 import WeilConjectures.Compactification.NagataCompactification
-import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import Sheaf.Paper.WeilVerdierPreservationStrata
 import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
 import Sheaf.CategoryTheory.AdjointMate

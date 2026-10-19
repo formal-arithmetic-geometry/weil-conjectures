@@ -12,9 +12,9 @@ public import WeilConjectures.SixFunctors.BaseChange.Square
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingleZero
-import Sheaf.AlgebraicGeometry.EtaleSetSectionsFlatConnectedFibres
+import WeilConjectures.AlgebraicGeometry.EtaleSetSectionsFlatConnectedFibres
 import WeilConjectures.AlgebraicGeometry.ModuleAbelianInverseImageComparison
-import Sheaf.AlgebraicGeometry.EtaleChartSectionsArrowComparison
+import WeilConjectures.AlgebraicGeometry.EtaleChartSectionsArrowComparison
 
 /-!
 # Degree-zero flat base change
@@ -302,7 +302,9 @@ Writing `j : W ⟶ X` and `r : V ⟶ S` for the structure morphisms, `j ≫ p = 
 connected fibres the global sections of an inverse image agree with the global sections
 downstairs [Stacks 0A3H]: a section of `q^* G'` is constant on the connected geometric fibres,
 hence descends along the fpqc covering `q`. This is Step 2 of the blueprint proof of
-`sk-prop-deg0`. -/
+`sk-prop-deg0`. 
+(blueprint: lem-sbc-module-chart-sections-flat-connected)
+-/
 @[stacks 0A3H]
 theorem Etale.isIso_upperStarSectionsMap (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     {V : S.Etale} {W : X.Etale} (φ : W ⟶ (MorphismProperty.Over.pullback @Etale ⊤ p).obj V)
@@ -397,7 +399,9 @@ derived base-change morphism is, up to isomorphism of arrows, the underived base
 `AlgebraicGeometry.Etale.baseChangeMap`: the degree-zero homology of
 `p^*(R g_* F[0])` is `p^* g_* F` and that of `R h_*(e^*(F[0]))` is `h_* e^* F`, the pullbacks
 being exact and `g_*`, `h_*` left exact, and under these identifications the units and counits
-of the derived adjunctions restrict in degree zero to those of the underived adjunctions. -/
+of the derived adjunctions restrict in degree zero to those of the underived adjunctions. 
+(blueprint: lem-sbc-base-change-homology-zero-underived)
+-/
 theorem Etale.nonempty_arrowIso_baseChangeHomologyMap_zero (sq : IsPullback e h g p)
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     Nonempty (Arrow.mk (Etale.baseChangeHomologyMap Λ sq 0 F) ≅
