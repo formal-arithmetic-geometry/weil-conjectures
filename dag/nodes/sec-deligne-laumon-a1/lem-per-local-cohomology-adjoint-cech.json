@@ -13,9 +13,127 @@
   "def-sbc-ideal-power-torsion-functor",
   "def-weil-pbc-module-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $C=C_A^\\bullet(f)$. The displayed differential squares to zero: deleting two different indices in the two possible orders gives the same localization map with opposite signs. For any integer-indexed complex $K$, set $F(K)=\\operatorname{Tot}(C\\otimes_A K)$, with $F(K)^n=\\bigoplus_{q=0}^r C^q\\otimes_A K^{n-q}$ and total differential $d_C\\otimes1+(-1)^q1\\otimes d_K$ on horizontal degree $q$. The finite products in $C^q$ are finite direct sums. For a nonempty subset $S\\subseteq\\{1,\\ldots,r\\}$ put $g_S=\\prod_{i\\in S}f_i$. Applying [lem-weil-pbc-localization-tensor-over-base] with base $A$, module $A$ and the powers of $g_S$ identifies $A_{g_S}\\otimes_A K^m$ with $(K^m)_{g_S}$, naturally in $K^m$; the map sends $(a/g_S^t)\\otimes x$ to $ax/g_S^t$. For the empty subset the identification is $A\\otimes_A K^m=K^m$. Identity on horizontal degree zero and zero on positive horizontal degrees defines a natural cochain map $\\epsilon_K:F(K)\\to K$: projecting the total differential to horizontal degree zero leaves exactly $d_K$.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A6R (lemma-local-cohomology-adjoint), construction of the total complex and its map to K; explicit signs as in more-algebra.tex, section-extended-alternating-cech-complex."
+   }
+  },
+  {
+   "text": "Each $A_{g_S}$ is flat over $A$ by [lem-weil-pbc-localization-flat]. The degree-zero term $A$ is flat because $A\\otimes_A-$ is the identity. Finite direct sums of flat modules are flat: tensoring a finite sum is the sum of the tensor functors, and the kernel and image of a finite direct sum of module maps are the sums of their kernels and images. Thus every term of $C$ is flat, and $C^q=0$ for $q>r$. Apply [lem-pc-module-bounded-flat-kflat] to $C$. By the equivalent quasi-isomorphism criterion in [def-pc-module-kflat-complex], $K\\mapsto F(K)$ preserves quasi-isomorphisms, without a boundedness assumption on $K$. Consequently the localization defining $D(A)$ in [def-weil-abstract-derived-category] gives an endofunctor, still denoted $F$, and the natural transformation $\\epsilon:F\\to\\mathrm{id}$ descends with it.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "lem-pc-module-bounded-flat-kflat",
+    "def-pc-module-kflat-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064K (lemma-derived-tor-quasi-isomorphism), applied to the bounded flat complex in dualizing.tex Tag 0A6R; algebra.tex Tag 00HT (lemma-flat-localization)."
+   }
+  },
+  {
+   "text": "Suppose $r>0$ and fix $a\\in\\{1,\\ldots,r\\}$. Localize the total complex at $f_a$. For a subset $S$ not containing $a$, the localization map from the $S$-column to the $(S\\cup\\{a\\})$-column is now invertible: $f_a$ already acts invertibly, and its inverse on fractions is multiplication by the corresponding negative power, using [def-weil-pbc-module-localization]. On this localized total define a degree $-1$ map by $(hx)_S=0$ if $a\\in S$, and $(hx)_S=(-1)^{|\\{s\\in S:s<a\\}|}x_{S\\cup\\{a\\}}$ otherwise, using the inverse localization map to interpret the latter entry in the $S$-column and keeping the vertical degree fixed. In $d_Ch+hd_C$, the term inserting/deleting $a$ is $x_S$; each term involving another index occurs twice, with signs differing by one transposition, and cancels. Hence $d_Ch+hd_C=1$. The vertical terms cancel because $h$ changes the horizontal degree by $-1$, so their coefficients are $(-1)^{q-1}$ and $(-1)^q$. Therefore $Dh+hD=1$ for the total differential $D$, proving $(F(K))_{f_a}$ contractible. This computation also covers the empty subset and the top horizontal degree.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0G6J (lemma-extended-alternating-homotopy-zero), insertion homotopy, written with the positive-identity sign for the differential in this item and extended to the total with arbitrary K."
+   }
+  },
+  {
+   "text": "Localization is exact by [lem-weil-pbc-localization-module-exact], so [lem-weil-pbc-exact-functor-complex-cohomology] gives $H^n(F(K))_{f_a}\\cong H^n((F(K))_{f_a})=0$ for every $n$ and $a$. Fix $x\\in H^n(F(K))$. The zero-fraction criterion in [def-weil-pbc-module-localization] gives integers $n_a\\geq1$ with $f_a^{n_a}x=0$. Let $N=\\max_a n_a$. Every generating monomial of $I^{r(N-1)+1}$ contains some $f_a^N$, so every such monomial kills $x$; its $A$-linear combinations kill $x$ as well. Thus $I^{r(N-1)+1}x=0$. By [def-sbc-ideal-power-torsion-functor], all cohomology modules of $F(K)$ are $I$-power torsion. If $r=0$, then $I=(0)$ and $I^1$ kills every element, so the same conclusion holds directly. Thus $F$ takes values in the required full subcategory.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-pbc-module-localization",
+    "def-sbc-ideal-power-torsion-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0G6K (lemma-extended-alternating-torsion), localization argument; applied to total complexes using the explicit homotopy in Step 3."
+   }
+  },
+  {
+   "text": "Let $L\\in D(A)$ have $I$-power torsion cohomology, and let $S$ be a nonempty subset of the generators. If $I^t x=0$, then $g_S^t x=0$, because $g_S\\in I$. The fraction criterion and exactness of localization therefore give $H^n(L_{g_S})=H^n(L)_{g_S}=0$, using [def-sbc-ideal-power-torsion-functor], [def-weil-pbc-module-localization], [lem-weil-pbc-localization-module-exact] and [lem-weil-pbc-exact-functor-complex-cohomology]. In particular $L_{g_S}=0$ in $D(A_{g_S})$. Localization $V\\mapsto V_{g_S}$ is left adjoint to restriction $U$ from $A_{g_S}$-modules: the inverse to restriction of a map is $v/g_S^t\\mapsto g_S^{-t}\\phi(v)$, which is well defined by the fraction equality criterion and is the unique extension. Restriction is exact, since its kernels and images are the same underlying modules; localization is exact by the cited lemma. The exact-derived adjunction of [def-weil-exact-derived-adjunction] consequently gives $\\operatorname{Hom}_{D(A)}(L,U(N))\\cong\\operatorname{Hom}_{D(A_{g_S})}(L_{g_S},N)=0$ for every $N\\in D(A_{g_S})$. This applies to every shift of the localized complex $K_{g_S}$.",
+   "uses": [
+    "def-sbc-ideal-power-torsion-functor",
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-exact-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5 (lemma-derived-adjoint-functors) and Tag 015F (lemma-right-derived-exact-functor), for exact localization and restriction; this spells out the Hom-vanishing needed in the final paragraph of dualizing.tex Tag 0A6R."
+   }
+  },
+  {
+   "text": "Let $T_{\\geq q}(K)$ be the subcomplex of $F(K)$ formed from horizontal columns of degree at least $q$, for $1\\leq q\\leq r+1$. It is a subcomplex since the horizontal differential raises $q$ and the vertical differential preserves it. We have $T_{\\geq r+1}(K)=0$. The quotient $B_q=T_{\\geq q}(K)/T_{\\geq q+1}(K)$ is the finite direct sum of the complexes $U(K_{g_S})[-q]$ with $|S|=q$: its differential is $(-1)^q d_K$, exactly the differential of that shift. The degreewise split short exact sequence $0\\to T_{\\geq q+1}(K)\\to T_{\\geq q}(K)\\to B_q\\to0$ gives a distinguished triangle by [lem-weil-pbc-complex-ses-triangle]. For every integer $m$, Step 5 gives $\\operatorname{Hom}(L,B_q[m])=0$, since a map to a finite direct sum is determined by its components. Descend from $q=r+1$ to $q=1$: exactness of $\\operatorname{Hom}(L,T_{\\geq q+1}(K)[m])\\to\\operatorname{Hom}(L,T_{\\geq q}(K)[m])\\to\\operatorname{Hom}(L,B_q[m])$ from [lem-weil-pbc-hom-into-triangle-exact] makes the middle group zero whenever the first is zero. Thus $\\operatorname{Hom}(L,T_{\\geq1}(K)[m])=0$ for all $m$. This is a finite induction even for unbounded $K$.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152 (lemma-derived-canonical-delta-functor) and Tag 0149 (lemma-representable-homological), finite column filtration spelling out the adjunction assertion at the end of dualizing.tex Tag 0A6R."
+   }
+  },
+  {
+   "text": "Projection to horizontal degree zero gives a degreewise split short exact sequence $0\\to T_{\\geq1}(K)\\to F(K)\\xrightarrow{\\epsilon_K}K\\to0$. Its distinguished triangle is supplied by [lem-weil-pbc-complex-ses-triangle]. The vanishing from Step 6 and [lem-weil-pbc-hom-into-triangle-exact], applied also to the rotated triangle, show that composition with $\\epsilon_K$ is a bijection $\\operatorname{Hom}_{D(A)}(L,F(K))\\xrightarrow{\\sim}\\operatorname{Hom}_{D(A)}(L,K)$: its kernel is the image of the zero group $\\operatorname{Hom}(L,T_{\\geq1}(K))$, and every map $L\\to K$ lifts because its composite to $T_{\\geq1}(K)[1]$ is zero. These bijections are natural in $L$ and $K$, since they are composition with the natural map $\\epsilon_K$; their inverses are natural by uniqueness of lifts. Step 4 places $F(K)$ in the torsion subcategory, whose Hom sets are the same as those of $D(A)$ by fullness. Therefore these are precisely the adjunction bijections for the inclusion as left adjoint and $F$ as right adjoint. Set $R\\Gamma_Z=F$.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A6R (lemma-local-cohomology-adjoint), final paragraph, with the explicit orthogonality and finite-filtration argument of Steps 5–6."
+   }
+  },
+  {
+   "text": "For $K=M[0]$, the total complex defining $F(K)$ has exactly one summand in each total degree, namely $C^q\\otimes_A M$ in degree $q$. Its differential is $d_C\\otimes1_M$, because the differential of $M[0]$ is zero. Hence it is literally the ordinary termwise tensor complex in the statement. Taking the cohomology functors of [def-weil-abstract-derived-category] yields the required natural $A$-linear isomorphisms $H^j(C\\otimes_A M)\\cong H^j(R\\Gamma_Z(M))$ for every $j\\geq0$. If $r=0$, the total functor and its projection are the identity, and every cohomology module is $(0)$-power torsion as checked in Step 4; thus the inclusion and its right adjoint are the identity and $Z=\\operatorname{Spec}(A)$, including the zero ring. This also supplies the adjunction directly in that case.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A6R (lemma-local-cohomology-adjoint), module specialization and empty generating list."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-localization-flat",
+  "lem-pc-module-bounded-flat-kflat",
+  "def-pc-module-kflat-complex",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-sbc-ideal-power-torsion-functor",
+  "def-weil-exact-derived-adjunction",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-hom-into-triangle-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0A6R (lemma-local-cohomology-adjoint), same explicit total functor and counit. The image-torsion verification uses the written insertion contraction of more-algebra.tex Tags 0G6J/0G6K in place of the Koszul-colimit check, and the final adjunction is expanded by exact-localization orthogonality and a finite column filtration."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +162,45 @@
    "results": "{\"t\": \"2026-10-18T23:55:46Z\", \"tool\": \"leansearch\", \"query\": \"Derived local cohomology right adjoint computed by an extended Cech complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.ofSelfLERadical\", \"CategoryTheory.Functor.IsRightDerivedFunctor.recOn\", \"localCohomology.diagram\", \"HomologicalComplex.extend.homologyData'_right_p\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived'\", \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ\", \"localCohomology\"], \"digest\": \"2f9d55ebf1bcd436\"}",
    "date": "2026-10-18",
    "verdict": "no match: The returned declarations do not identify derived closed support with the extended localization complex or derived ideal torsion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extended Cech complex is right adjoint to the inclusion of complexes with ideal power torsion cohomology",
+   "results": "{\"t\": \"2026-10-19T00:15:35Z\", \"tool\": \"leanfinder\", \"query\": \"Extended Cech complex is right adjoint to the inclusion of complexes with ideal power torsion cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.diagram\", \"LightCondMod.LocallyConstant.adjunction\", \"localCohomology\", \"localCohomology.ofDiagram\", \"localCohomology.ofSelfLERadical\", \"CondensedMod.LocallyConstant.adjunction\", \"Condensed.setAbAdjunction\", \"LightCondensed.freeForgetAdjunction\"], \"digest\": \"a4b9e1e05f098942\"}",
+   "date": "2026-10-19",
+   "verdict": "No match: Mathlib LocalCohomology.lean:42–46 explicitly lists derived-functor, Koszul and Cech comparisons as future work; this is an Ext-colimit construction, not the derived torsion coreflection."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived ideal torsion subcategory has a right adjoint given by tensoring with augmented localization complex",
+   "results": "{\"t\": \"2026-10-19T00:19:43Z\", \"tool\": \"leansearch\", \"query\": \"Derived ideal torsion subcategory has a right adjoint given by tensoring with augmented localization complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Tor'\", \"CategoryTheory.Functor.IsRightDerivedFunctor\", \"HasDerivedCategory.standard\"], \"digest\": \"a81c7c5d0a7385cc\"}",
+   "date": "2026-10-19",
+   "verdict": "No match: The returned general derived-adjunction, affine-localization and derived-category declarations do not give the extended Cech torsion coreflection."
+  },
+  {
+   "tool": "loogle",
+   "query": "localCohomology",
+   "results": "{\"t\": \"2026-10-19T00:19:48Z\", \"tool\": \"loogle\", \"query\": \"localCohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"localCohomology\", \"localCohomology.isoSelfLERadical\", \"localCohomology.isoOfSameRadical\"], \"digest\": \"2281aba51a833720\"}",
+   "date": "2026-10-19",
+   "verdict": "No match: Mathlib LocalCohomology.lean:42–46 explicitly lists derived-functor, Koszul and Cech comparisons as future work; this is an Ext-colimit construction, not the derived torsion coreflection."
+  },
+  {
+   "tool": "grep",
+   "query": "Cech|localCohomology|Koszul",
+   "results": "{\"t\": \"2026-10-19T00:19:48Z\", \"tool\": \"grep\", \"query\": \"Cech|localCohomology|Koszul\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\"], \"digest\": \"9777fa99c626f8b8\"}",
+   "date": "2026-10-19",
+   "verdict": "No match: Mathlib LocalCohomology.lean:42–46 explicitly lists derived-functor, Koszul and Cech comparisons as future work; this is an Ext-colimit construction, not the derived torsion coreflection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring with the complex of principal localizations computes the coreflection onto complexes supported on a finitely generated closed subset of an affine spectrum",
+   "results": "{\"t\": \"2026-10-19T00:22:35Z\", \"tool\": \"leanfinder\", \"query\": \"Tensoring with the complex of principal localizations computes the coreflection onto complexes supported on a finitely generated closed subset of an affine spectrum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.Localizations\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"ModuleCat.Tilde.const\", \"AlgebraicGeometry.Γ_restrict_isLocalization\", \"AlgebraicGeometry.isLocalization_away_of_isAffine\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization\", \"ModuleCat.Tilde.openToLocalization\", \"Module.mem_freeLocus_iff_tensor\"], \"digest\": \"518b5a01cc880055\"}",
+   "date": "2026-10-19",
+   "verdict": "No match: The returned general derived-adjunction, affine-localization and derived-category declarations do not give the extended Cech torsion coreflection."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-local-cohomology-cech-bound",
@@ -75,5 +228,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-local-cohomology-adjoint-cech",
+  "worker": "stage1",
+  "summary": "Proved the extended localization total functor is the right adjoint using its K-flatness, an explicit localized insertion contraction, and a finite-filtration Hom-vanishing argument from the exact localization/restriction adjunction. Specialized to modules, including r=0. Statement unchanged; all inputs reuse existing DAG nodes; no new nodes or Lean work.",
+  "blueprint": "Proof Step 1: the extended Čech computation of the derived closed-support functor, used as the technical local-cohomology input.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "General bounded-above flat module-complex theorem used solely to descend tensor with the bounded localization complex to D(A); no node in this unit supplies this generic K-flatness input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-2534daa99",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-2534daa99 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement agrees with Stacks 0A6R (dualizing.tex l.1248-1320), hypothesis by hypothesis: any commutative ring, I=(f_1..f_r), r=0 allowed, specialized to modules, where ⊗^L is the termwise tensor because C is bounded and termwise flat. Nothing is weakened. No new nodes; review_split.py gives PASS. Steps 1-2: the localization-tensor identification, flatness of A_g plus finite sums, and the generic K-flatness lemma, so F descends to D(A) with no boundedness on K. I accept the declared tool use of lem-pc-module-bounded-flat-kflat as generic K-flatness. Step 3: I recomputed the insertion contraction with sign (-1)^{#{s<a}}. It gives dh+hd=+1, against 0G6J's -1 with its (-1)^j; the vertical terms cancel, and the empty and top columns are covered. Step 4: localization is exact; the pigeonhole bound I^{r(N-1)+1}x=0 is correct; r=0 is handled separately. Step 5: g_S is in I, so L_{g_S}=0, and the localization/restriction exact adjunction via def-weil-exact-derived-adjunction gives Hom(L,U N)=0. Step 6: the column filtration is by subcomplexes, the quotients are U(K_{g_S})[-q] with the correct shift sign, and a finite descending induction uses the ses-triangle lemma and Hom-exactness with W=L[-m]. Step 7: composition with ε_K is injective (by (ii)) and surjective (by the rotated triangle and Step 6 with m=1); it is natural, the inclusion is the left adjoint and F the right adjoint. Step 8: for M[0] the total complex is literally C⊗M, and H∘Q≅H. Edge cases checked: r=0, the zero ring, a unit generator (RΓ_Z=0), a nilpotent generator (RΓ_Z=id), k[x] with M=A (H^1=k[x,x^{-1}]/k[x]), repeated generators, unbounded K. I grepped the DAG for 0A6R, extended Čech and torsion right adjoints and found no duplicate; the citers cech-bound and noetherian-comparison use the item consistently. No SGA. No faults from points B-E."
  }
 }
