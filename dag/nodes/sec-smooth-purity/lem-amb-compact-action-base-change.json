@@ -64,13 +64,12 @@
    }
   },
   {
-   "text": "Put $F=Rf_!$ and $F_T=Rf_{T!}$. Form the pullback compactification as in [def-cbc-compact-support-square]; its open immersion is quasi-compact because quasi-compact morphisms are stable under base change [lem-pc-quasi-compact-base-change], so it is an allowed compactification of $f_T$. The base-changed morphism $f_T$ is separated of finite type by [lem-pod-separated-finite-type-base-change], and $X_T$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian] since $T$ is Noetherian. The fibre-product universal property [def-pc-fibre-product] gives $u'a_T=au'$ and the inverse $a^{-1}\\times_Y1_T$ to $a_T$. Write $\\delta:u'^*a^*K\\xrightarrow{\\sim}a_T^*K_T$ for the inverse-image composition comparison. Define\n$$D=F_T(\\delta)\\circ C_u(a^*K):u^*F(a^*K)\\longrightarrow F_T(a_T^*K_T).$$\nThe two horizontally pasted squares (first the $a$-square then the $u$-square, or first the $u$-square then the $a_T$-square) have the same top composite $au'=u'a_T$ and the same bottom map $u$. The horizontal pasting clause of [thm-cbc-finite-torsion] therefore gives\n$$D\\circ u^*E_a(K)=E_{a_T}(K_T)\\circ C_u(K).$$\nIts naturality in the coefficient morphism $\\theta:a^*K\\to K$, with $\\theta_T\\circ\\delta=u'^*\\theta$, gives\n$$C_u(K)\\circ u^*F(\\theta)=F_T(\\theta_T)\\circ D.$$\nUsing functoriality [def-amb-etale-compact-support] and associativity, the required equality is the explicit calculation\n$$C_u(K)\\circ u^*\\rho_{a,\\theta}=F_T(\\theta_T)\\circ D\\circ u^*E_a(K)=F_T(\\theta_T)\\circ E_{a_T}(K_T)\\circ C_u(K)=\\rho_{a_T,\\theta_T}\\circ C_u(K).$$",
+   "text": "Use the supplied compactifications directly and the canonical comparison from the twice-pulled-back compactification to any supplied target [def-cbc-compact-support-square] and [lem-amb-etale-compact-comparisons]. Separatedness, locally finite type and quasi-compactness of the base-changed morphism follow from [lem-pod-separated-finite-type-base-change] and [lem-pc-quasi-compact-base-change]. No Noetherianity assertion about its source is needed for the formal coherence. The universal property [def-pc-fibre-product] gives u' a_T = a u'. Apply the horizontal-pasting law of [thm-cbc-finite-torsion] twice, first to the automorphism square followed by the base-change square, and then in the opposite order. Both outer rectangles coincide. The identity-pullback laws and sqIso, expressed as the quotient of the two pullback composition comparisons, identify these equations. Naturality of exchange at theta and functoriality of the compact-support direct image [def-amb-etale-compact-support] then give the required action equation. All comparison, pasting and naturality manipulations are proved for an abstract CompactSupportFormalism and then specialized to the ordinary etale derived formalism.",
    "uses": [
     "def-cbc-compact-support-square",
     "thm-cbc-finite-torsion",
     "def-amb-etale-compact-support",
     "lem-pod-separated-finite-type-base-change",
-    "lem-weil-pbc-finite-type-over-noetherian",
     "def-pc-fibre-product",
     "lem-pc-quasi-compact-base-change"
    ],
@@ -100,13 +99,12 @@
   "lem-amb-etale-compact-comparisons",
   "lem-pc-quasi-compact-base-change",
   "lem-pod-separated-finite-type-base-change",
-  "lem-weil-pbc-finite-type-over-noetherian",
   "thm-cbc-finite-torsion"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.proof.md",
-  "place": "Proof paragraphs 1 and 2, auxiliary coherence statement for compact-support actions and pullback"
+  "place": "Proof paragraphs 1 and 2; Lean uses the existing finite-torsion identity, horizontal-pasting and canonical comparison API, proved generically before specialization to ordinary etale D+."
  },
  "mathlib_searches": [
   {
@@ -236,8 +234,7 @@
  },
  "tool_uses": [
   "thm-cbc-finite-torsion",
-  "lem-pod-separated-finite-type-base-change",
-  "lem-weil-pbc-finite-type-over-noetherian"
+  "lem-pod-separated-finite-type-base-change"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -265,7 +262,10 @@
    "AlgebraicGeometry.Etale.compactSupportActionPullback",
    "AlgebraicGeometry.Etale.compactSupportActionPullbackCoefficient",
    "AlgebraicGeometry.Etale.compactSupportAction_id",
-   "AlgebraicGeometry.Etale.compactSupportActionBaseChange"
+   "AlgebraicGeometry.Etale.compactSupportActionBaseChange",
+   "AlgebraicGeometry.Etale.compactSupportFormalExchange",
+   "AlgebraicGeometry.Etale.compactSupportFormalAction",
+   "AlgebraicGeometry.Etale.compactSupportFormalCoefficientIso"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/CompactSupportActionBaseChange.lean",
   "statement": "theorem compactSupportActionBaseChange (A : Type (u + 1)) [CommRing A] [Finite A] {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) [QuasiCompact c.i] (a : X ≅ X) (ha : a.hom ≫ f = f) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) (theta : ((derivedPlusFormalism (ModuleCat.{u + 1} A)).pb a.hom).obj K ≅ K) : IsIso (compactSupportAction A c (compactSupportActionSquare f a ha) K theta) ∧ (∀ (d : Compactification f) [QuasiCompact d.i], compactSupportAction A c (compactSupportActionSquare f a ha) K theta ≫ ((derivedPlusFormalism (ModuleCat.{u + 1} A)).shriekIso c d).hom.app K = ((derivedPlusFormalism (ModuleCat.{u + 1} A)).shriekIso c d).hom.app K ≫ compactSupportAction A d (compactSupportActionSquare f a ha) K theta) ∧ (∀ (T : Scheme.{u}) [IsNoetherian T] (u : T ⟶ Y) (d : Compactification (pullback.snd f u)) [QuasiCompact d.i], ((derivedPlusFormalism (ModuleCat.{u + 1} A)).pb u).map (compactSupportAction A c (compactSupportActionSquare f a ha) K theta) ≫ (compactSupportActionExchange A (IsPullback.of_hasPullback f u) c d).app K = (compactSupportActionExchange A (IsPullback.of_hasPullback f u) c d).app K ≫ compactSupportAction A d (compactSupportActionSquare (pullback.snd f u) (compactSupportActionPullback f a ha u) (by simp [compactSupportActionPullback, pullback.map])) (((derivedPlusFormalism (ModuleCat.{u + 1} A)).pb (pullback.fst f u)).obj K) (compactSupportActionPullbackCoefficient A f a ha u K theta))",
@@ -273,5 +273,15 @@
   "by": "Q100",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261019T034253-L-415887",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
