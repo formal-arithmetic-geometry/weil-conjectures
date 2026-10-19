@@ -1,304 +1,233 @@
 {
-  "id": "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-weil-pbc-direct-image-finiteness-proper",
-      "place": "Classical constructibility input in the proof of thm-weil-pbc-direct-image-finiteness-proper, expanded by Tag 0GKX: last paragraph, proper smooth family cohomology (0GKW), with the dimension-zero case included to match 0GK7.",
-      "via": [
-        "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
-        "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
-        "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
-        "lem-weil-pbc-etale-compactification-constructibility",
-        "lem-weil-pbc-etale-proper-direct-image-finiteness"
-      ]
-    },
-    "same_as": []
+ "id": "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical constructibility input in the proof of thm-weil-pbc-direct-image-finiteness-proper, expanded by Tag 0GKX: last paragraph, proper smooth family cohomology (0GKW), with the dimension-zero case included to match 0GK7.",
+   "via": [
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
   },
-  "kind": "statement",
-  "title": "Finite constant coefficients in proper smooth curve families",
-  "statement": "Let $S$ be a Noetherian scheme (locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-scheme-conventions]) and $f:C\\to S$ a proper smooth morphism [def-weil-proper-morphism] [def-sbc-smooth-morphisms] with nonempty geometrically connected fibres [def-pc-geometrically-irreducible] of dimension at most one [def-kun-topological-krull-dimension]. Let $\\Lambda$ be a finite commutative ring and $M$ a finite $\\Lambda$-module. For every integer $q$, $R^qf_*\\underline M$ is a constructible sheaf of $\\Lambda$-modules on $S_{\\Et}$ [def-weil-pbc-constant-sheaf] [def-weil-pbc-direct-image] [def-weil-pbc-derived-categories] [def-weil-pbc-etale-constructible-sheaf]. No invertibility of the additive exponent of $M$ on $S$ is assumed.",
-  "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKW, label lemma-proper-smooth-family-curves-modules (dimension one); dimension-zero part by 0GK3, lemma-qf-f-shriek-constructible; locally constant smooth fibre dimension: Tag 02G1, morphisms.tex, label lemma-smooth-omega-finite-locally-free"
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite constant coefficients in proper smooth curve families",
+ "statement": "Let $S$ be a Noetherian scheme (locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-scheme-conventions]) and $f:C\\to S$ a proper smooth morphism [def-weil-proper-morphism] [def-sbc-smooth-morphisms] with nonempty geometrically connected fibres [def-pc-geometrically-irreducible] of dimension at most one [def-kun-topological-krull-dimension]. Let $\\Lambda$ be a finite commutative ring and $M$ a finite $\\Lambda$-module. For every integer $q$, $R^qf_*\\underline M$ is a constructible sheaf of $\\Lambda$-modules on $S_{\\Et}$ [def-weil-pbc-constant-sheaf] [def-weil-pbc-direct-image] [def-weil-pbc-derived-categories] [def-weil-pbc-etale-constructible-sheaf]. No invertibility of the additive exponent of $M$ on $S$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKW, label lemma-proper-smooth-family-curves-modules (dimension one); dimension-zero part by 0GK3, lemma-qf-f-shriek-constructible; locally constant smooth fibre dimension: Tag 02G1, morphisms.tex, label lemma-smooth-omega-finite-locally-free"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-proper-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-pc-geometrically-irreducible",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-constructible-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Use Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf from the proved source module ConstructibleEtaleModuleSheafComparison to translate the finite-value predicate to source constructibility. Apply homology to rightDerivedFunctorPlusCompatibility to compare bounded-below and total derived direct images. These comparisons change neither coefficients nor degree.",
+   "uses": [
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true
   },
-  "stmt_deps": [
-    "pqf-def-locnoeth",
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-proper-morphism",
-    "def-sbc-smooth-morphisms",
-    "def-pc-geometrically-irreducible",
-    "def-kun-topological-krull-dimension",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-derived-categories",
-    "def-weil-pbc-etale-constructible-sheaf"
-  ],
-  "proof": [
-    {
-      "text": "We first record explicitly the coefficient upgrade used below. For a finite ring $A$ and an $A$-module sheaf $G$, constructibility of its underlying abelian sheaf is equivalent to module constructibility with the same strata. On an abelian constant chart $G=\\underline B$ with $B$ finite, every $a\\in A$ acts by an abelian endomorphism of $\\underline B$. Apply the constant-sheaf morphism lemma with coefficient ring $\\mathbf Z$ to each of the finitely many $a$. Refine these finitely many covers by fibre products. On each nonempty member all actions are constant group homomorphisms $B\\to B$, and the ring-action identities hold for these maps because they hold for the sheaf actions: on a nonempty chart choose a geometric point, whose stalk of the constant sheaf is canonically $B$ by [lem-weil-pbc-constant-sheaf-geometric-stalk], and read each identity on that stalk; hence $B$ acquires an $A$-module structure and the chart is $A$-linear. Its values are finite. The converse forgets the action on each module chart. Restrictions commute with forgetting by the coefficient comparison. Thus both global-partition definitions agree in this finite-ring case.",
-      "uses": [
-        "lemma-constructible-hom-constant-locally",
-        "def-weil-pbc-constructible-abelian-sheaf",
-        "def-weil-pbc-etale-constructible-sheaf",
-        "lem-weil-pbc-exchange-forget-coefficients",
-        "lem-weil-pbc-constant-sheaf-geometric-stalk"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/more-etale.tex",
-        "place": "0GKW coefficient comparison paragraph; Etale Cohomology definitions 03RU/03RW, finite-action argument"
-      }
-    },
-    {
-      "text": "Apply the dimension-loci lemma with $d=1$ and write $S=S_0\\amalg S_1$, allowing either locus to be empty. Restrictions of $R^qf_*\\underline M$ to these open and closed loci are $R^qf_{i,*}\\underline M$: inverse image along their open immersions is exact by site-pullback-abelian-exact (also for modules, by the exact forgetful functor and coefficient comparison), and preserves injectives by the etale-restriction lemma, so restricting an injective resolution and the sectionwise direct-image formula gives this canonical isomorphism; [lemma-constructible-pullback-constant] identifies the restricted input with the constant sheaf on $C_i$. The two loci are Noetherian and quasi-compact; their finite constructible stratifications can be concatenated to a finite constructible stratification of $S$. It therefore suffices to work on each locus.",
-      "uses": [
-        "lem-weil-pbc-proper-smooth-connected-fibre-dimension-loci",
-        "lem-weil-pbc-etale-restriction-injectives",
-        "def-weil-pbc-direct-image",
-        "def-weil-pbc-etale-constructible-sheaf",
-        "lem-weil-pbc-site-pullback-abelian-exact",
-        "lem-weil-pbc-exchange-forget-coefficients",
-        "lemma-constructible-pullback-constant"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-etale.tex",
-        "place": "Dimension-zero extension of 0GKW; 02G1/01TH"
-      }
-    },
-    {
-      "text": "On $S_0$, the map $f_0$ is quasi-finite, proper and of finite presentation (smooth is locally of finite presentation; proper is of finite type, hence quasi-compact, and separated, hence quasi-separated: its diagonal is a closed immersion, whose inverse image of an affine open is a closed affine subscheme and thus quasi-compact). The schemes $S_0$ and $C_0$ are quasi-compact and quasi-separated: $S_0$ is Noetherian and hence quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]; it is quasi-compact since it is closed in the quasi-compact base. By [lem-weil-pbc-qcqs-morphism-permanence] (2), a quasi-compact quasi-separated morphism over this quasi-compact quasi-separated base has quasi-compact quasi-separated source. Use the compactification $(\\mathrm{id}_{C_0},f_0)$. The constant sheaf $\\underline M[0]$ has constructible cohomology: the one-piece stratum has finite constant value $M$, and all other cohomology sheaves are zero. The quasi-finite shriek constructibility theorem therefore applies. For this compactification $Rf_{0,!}=Rf_{0,*}(\\mathrm{id}_! -)=Rf_{0,*}$, since extension by zero along the identity is the identity. Its conclusion gives every required cohomology sheaf on $S_0$.",
-      "uses": [
-        "lem-weil-pbc-proper-smooth-connected-fibre-dimension-loci",
-        "lem-weil-pbc-etale-quasifinite-shriek-constructible",
-        "def-weil-pbc-extension-by-zero",
-        "def-weil-pbc-etale-constructible-sheaf",
-        "def-sbc-smooth-morphisms",
-        "def-weil-pbc-scheme-conventions",
-        "def-weil-proper-morphism",
-        "def-sbc-locally-finite-presentation",
-        "lem-weil-pbc-locally-noetherian-quasi-separated",
-        "lem-weil-pbc-qcqs-morphism-permanence"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-etale.tex",
-        "place": "Tag 0GK3, label lemma-qf-f-shriek-constructible, identity compactification"
-      }
-    },
-    {
-      "text": "On $S_1$ prove the assertion first for the underlying finite abelian coefficient group $B$. If $\\ell B=0$ for a prime $\\ell$, the formula $(a\\bmod\\ell)b=ab$ gives $B$ an $\\mathbf F_\\ell$-vector-space structure. The vector-space freeness theorem supplies a basis. Its basis vectors form a subset of the finite set $B$, so the basis index set is finite. Enumerating it gives $B\\cong\\mathbf F_\\ell^r$, including $r=0$. Constant sheaves preserve finite direct sums by exact sheafification, and the additive right-derived functors preserve these finite biproducts. Thus $R^qf_{1,*}\\underline B$ is a finite direct sum of the prime-coefficient higher direct images. The prime-coefficient theorem and closure under extensions (split exact sequences) make this constructible as an $\\mathbf F_\\ell$-module sheaf, hence as an abelian sheaf by Step 1. The forgotten derived direct images are the abelian derived direct images by the coefficient comparison applied to the identity base-change square.",
-      "uses": [
-        "lem-weil-pbc-vector-space-free",
-        "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
-        "lem-weil-pbc-sheafification-exact",
-        "lem-weil-pbc-right-derived-universal-delta-functor",
-        "thm-constructible-serre",
-        "lem-weil-pbc-exchange-forget-coefficients",
-        "lem-weil-pbc-module-direct-image-left-exact",
-        "lem-weil-pbc-module-sheaves-enough-injectives"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-etale.tex",
-        "place": "0GKW final reduction to 0GKV; finite-underlying-set specialization"
-      }
-    },
-    {
-      "text": "Induct strongly on a positive integer $n$ killing $B$, simultaneously for all finite abelian $B$ and all $q\\ge0$. For $n=1$, $B=0$ and the conclusion is the constant zero sheaf. For $n>1$, take a prime divisor $\\ell$ and put $n=\\ell n\\prime$, $B\\prime=\\ell B$. Then $B[\\ell]$ is killed by $\\ell$, $B\\prime$ is killed by $n\\prime<n$, and both are finite. Regard all three groups as $\\mathbf Z/n$-modules. The exact sequence $0\\to B[\\ell]\\to B\\xrightarrow{\\ell}B\\prime\\to0$ gives an exact sequence of constant sheaves by exact sheafification. The derived delta-functor theorem applies to $f_{1,*}$: its module direct image is additive left exact and its module-sheaf domain has enough injectives. Consequently there is an exact segment $R^{q-1}f_{1,*}\\underline {B\\prime}\\to R^qf_{1,*}\\underline{B[\\ell]}\\to R^qf_{1,*}\\underline B\\to R^qf_{1,*}\\underline {B\\prime}\\to R^{q+1}f_{1,*}\\underline{B[\\ell]}$. For $q=0$ the leftmost term is zero. By Step 4 and induction the four outer terms are constructible abelian sheaves; coefficient comparison and Step 1 make them constructible $\\mathbf Z/n$-module sheaves. The middle term is an extension of the cokernel of the first arrow by the kernel of the last arrow, both constructible by the weak-Serre theorem. This proves the induction without any invertibility assumption.",
-      "uses": [
-        "lem-weil-pbc-sheafification-exact",
-        "lem-weil-pbc-right-derived-universal-delta-functor",
-        "lem-weil-pbc-module-direct-image-left-exact",
-        "lem-weil-pbc-module-sheaves-enough-injectives",
-        "thm-constructible-serre",
-        "lem-weil-pbc-exchange-forget-coefficients"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-etale.tex",
-        "place": "Tag 0GKW first paragraph; replace erroneous M[n] by M[l]"
-      }
-    },
-    {
-      "text": "The finite additive group of $M$ is killed by a positive integer: each element has finite additive order (two of its nonnegative multiples coincide), and the product of these orders kills every element. Apply Step 5 to this group. The coefficient comparison identifies the underlying abelian sheaf of $R^qf_{1,*}\\underline M$ with that abelian higher direct image. Step 1 upgrades its constructibility to the given $\\Lambda$-module structure. For $q<0$, an injective resolution of a sheaf starts in degree zero; the sectionwise direct image therefore has zero terms in negative degrees, so its negative cohomology is the zero sheaf and constructible. Combine the results on the two loci as in Step 2. This proves all integer degrees, including $M=0$ and the zero ring.",
-      "uses": [
-        "lem-weil-pbc-exchange-forget-coefficients",
-        "def-weil-pbc-direct-image",
-        "def-weil-pbc-etale-constructible-sheaf"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/more-etale.tex",
-        "place": "0GKW finite torsion conclusion; dimension-zero gluing and negative degrees"
-      }
-    }
-  ],
-  "proof_deps": [
-    "lemma-constructible-hom-constant-locally",
-    "def-weil-pbc-constructible-abelian-sheaf",
-    "def-weil-pbc-etale-constructible-sheaf",
-    "lem-weil-pbc-exchange-forget-coefficients",
-    "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "lem-weil-pbc-proper-smooth-connected-fibre-dimension-loci",
-    "lem-weil-pbc-etale-restriction-injectives",
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-site-pullback-abelian-exact",
+  {
+   "text": "For a nonempty smooth connected scheme over a field, regularity makes it integral. A smooth chart has some relative dimension n, and a nonempty open of an integral scheme has the same dimension as the scheme. Thus the scheme is smooth of relative dimension n everywhere. Apply this to each residue-field fibre and its algebraic-closure base change: smooth relative dimension is stable under base change and equals topological Krull dimension. The geometric and ordinary fibre dimensions therefore agree. Apply the stated dimension-loci theorem with d=1 to obtain the open and closed zero- and one-dimensional loci, including empty loci.",
+   "uses": [
+    "lem-weil-pbc-proper-smooth-connected-fibre-dimension-loci"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the zero-dimensional locus, the open singleton property from the dimension-loci theorem gives discrete fibres, hence a locally quasi-finite morphism. Properness makes it finite. In degree zero use higherDirectImage_zero_constant_constructible. In every nonzero integer degree use the proved source theorem isZero_homology_rightDerivedLowerStar_singleFunctor_of_isFinite from ConstructibleSheaf.FiniteDerived, which follows from exactness of finite direct image. Zero sheaves are constructible.",
+   "uses": [
+    "lem-weil-pbc-connected-fibres-constant-degree-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the one-dimensional locus use the already proved, invertibility-free source APIs isConstructibleSheaf_homology_constantSheaf_restrictScalars_iff and constructibleHomology_rightDerivedLowerStar_constantSheaf_zmod in Finiteness.CoefficientDevissage. The characteristic N of a finite ring R is nonzero. The canonical map ULift(ZMod N) to R restricts M to a finite ZMod N module and preserves and reflects constructibility of its constant higher direct images. The source devissage theorem inducts on the cardinality of that finite module, using a cyclic prime-order submodule and the strictly smaller quotient. Its inputs are constructibility for every prime p dividing N and every integer degree. For nonnegative degrees supply properSmoothCurves_prime_higherDirectImage_constructible and the bounded-below/total comparison. For negative degrees the right-derived image of a degree-zero sheaf lies in degrees at least zero, so homology vanishes. N=1 and the zero module are included in the source cardinality induction. No invertibility hypothesis is used.",
+   "uses": [
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction to either open locus commutes with higher direct images by the proved source upperStarHomologyRightDerivedLowerStarIso from Finiteness.TargetLocal. Scheme.upperStarConstantSheafIso identifies the restricted input with the constant sheaf. Transfer the constructibility just proved along this isomorphism and glue with the proved source Scheme.IsConstructibleSheaf.of_iSup_eq_top from ConstructibleSheaf.OpenCover. Convert back to the unchanged finite-value module-sheaf predicate. All source APIs named here are existing proved declarations; no additional statement is introduced.",
+   "uses": [
     "lemma-constructible-pullback-constant",
-    "lem-weil-pbc-etale-quasifinite-shriek-constructible",
-    "def-weil-pbc-extension-by-zero",
-    "def-sbc-smooth-morphisms",
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-proper-morphism",
-    "def-sbc-locally-finite-presentation",
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-vector-space-free",
-    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
-    "lem-weil-pbc-sheafification-exact",
-    "lem-weil-pbc-right-derived-universal-delta-functor",
-    "thm-constructible-serre",
-    "lem-weil-pbc-module-direct-image-left-exact",
-    "lem-weil-pbc-module-sheaves-enough-injectives"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKW first paragraph and final prime-coefficient input; finite abelian coefficient route replaces the general Noetherian coefficient free-resolution argument; 0GK3 for dimension zero"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "proper smooth family geometrically connected curves constant finite module higher etale direct images constructible even in residue characteristic",
-      "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "constructibility proper smooth relative curves torsion module coefficients without invertible order",
-      "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"ℕ → (R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"Given a natural number $ n $, a commutative ring $ R $, and a commutative ring $ S $ equipped with an $ R $-algebra structure, the proposition that $ S $ is a standard smooth algebra of relative dimen\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"ℕ → {R : Type u} → {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, this proposition asserts that $ S $ is a standard smooth algebra over $ R $ of relative dimension $ n $, where the a\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S),\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → f.IsStandardSmooth\", \"doc\": \"If a ring homomorphism $ f : R \\to S $ is standard smooth of relative dimension $ n $, then $ f $ is standard smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ (n : ℕ) {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [H : Algebra.IsStandardSmoothOfRelativeDimension n R S], Algebra.IsStandardSmooth R S\", \"doc\": \"If $ S $ is a standard smooth algebra over $ R $ of relative dimension $ n $, then $ S $ is a standard smooth algebra over $ R $. This follows from the fact that the localized polynomial ring structur\"}",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"constructible\", \"sheaf\"",
-      "results": "[loogle] OK 0 hit(s)",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "shriek|constructible.*sheaf|makeGoodCurves|good_curves",
-      "results": "[grep] OK 0 hit(s)",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "proper smooth family geometrically connected curves constant finite module higher etale direct images constructible even in residue characteristic",
-      "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "constructibility of higher direct images constant torsion sheaves on smooth proper curves and descent under surjective scheme morphisms",
-      "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] [CompactSpace ↥Y] [QuasiSeparatedSpace ↥Y] {s : Set ↥X},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that $f$ is locally of finite presentation and quasi-compact, and the underlying topological space of $Y$ is compact and quasi-separated. Then for an\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] {s : Set ↥X},\\n  Topology.IsLocallyConstructible s →\\n    Topology.IsLocallyConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a quasi-compact and locally of finite presentation morphism of schemes. If $s$ is a locally constructible subset of $X$, then its image $f(s)$ is a locally constructible subset of \"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {s : Set ↥Y},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' s)\", \"doc\": \"For any morphism $ f : X \\\\to Y $ of schemes and any constructible subset $ s \\\\subseteq Y $, the preimage $ f^{-1}(s) $ is a constructible subset of $ X $.\"}\n  {\"name\": \"PrimeSpectrum.isConstructible_comap_image\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.FinitePresentation →\\n    ∀ {s : Set (PrimeSpectrum S)}, Topology.IsConstructible s → Topology.IsConstructible (PrimeSpectrum.comap f '' s)\", \"doc\": \"If $ f: R \\\\to S $ is a finitely presented ring homomorphism and $ s \\\\subseteq \\\\operatorname{Spec}(S) $ is a constructible set in the Zariski topology, then the image of $ s $ under the induced map $ \\\\\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "proper smooth families finite module coefficients etale higher direct images constructible",
-      "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.isOpen_etaleLocus, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, Algebra.Etale.exists_subalgebra_fg",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "constant finite torsion sheaf cohomology constructible proper family of curves",
-      "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "proper.*smooth.*constructible|constructible.*smooth.*proper",
-      "results": "[grep] OK 0 hit(s); ",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"constructible\", \"sheaf\"",
-      "results": "[loogle] OK 0 hit(s); ",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "proper smooth geometrically connected curves prime torsion etale cohomology constructible",
-      "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error; ",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
-    "by": "worker",
-    "date": "2026-10-14"
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "merged_into": null,
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
-    "worker": "stage1",
-    "summary": "Kept statement; separated fibre dimensions, used 0GK3 in dimension zero, and supplied finite abelian prime-coefficient devissage with an explicit finite-action coefficient upgrade. Corrected the source proof typo M[n] to M[l]. Two new unsplit nodes; reused the existing Mathlib vector-space freeness leaf and made its finite-index specialization elementary.",
-    "blueprint": "Realizes the classical constructibility input of thm-weil-pbc-direct-image-finiteness-proper through its 0GKX/0GKW expansion; 0GKV is the strictly smaller prime-coefficient input."
-  },
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NP-9ed9815be",
-    "group": "NP",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-9ed9815be (reviewer sub-agent of L); spot-checked: Read all mathematics and checked Stacks 0GKW, 0GKV, 0GK3, 0GKM, 02G1 and 01TH. Finite-coefficient induction and dimension reduction are sound, including characteristic-p coefficients. Added existing stalk, restriction and qcqs citations and completed new-node metadata in three corrected JSON files. Statements unchanged; no duplicate nodes found. Full checks and inherited DAG defects are recorded in review.md.; 3 file(s) fixed by the reviewer"
-  },
-  "reviewed_lean": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-559ce68bc",
-    "group": "NC",
-    "result": "pass",
-    "note": "Checked all statement dependencies, source passages, exact Lean declarations, hypotheses, edge cases, docstrings, and verbatim signature. Server-only compilation passed in 1.8 seconds. No delivery defects found; branch head unchanged."
-  },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.ProperSmoothCurvesFiniteModule",
-    "declaration": "AlgebraicGeometry.Etale.properSmoothCurves_finiteModule_higherDirectImage_constructible",
-    "file": "lean/Sheaf/AlgebraicGeometry/ProperSmoothCurvesFiniteModule.lean",
-    "statement": "theorem properSmoothCurves_finiteModule_higherDirectImage_constructible {C S : Scheme.{u}} [IsLocallyNoetherian S] [CompactSpace S] (f : C ⟶ S) [IsProper f] [Smooth f] [GeometricallyConnected f] (h_dim : ∀ s : S, topologicalKrullDim (f.fiber s) ≤ 1) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (M : ModuleCat.{u + 1} Λ) [Finite M] (q : ℤ) : Scheme.IsConstructibleEtaleModuleSheaf ((DerivedCategory.Plus.homologyFunctor (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) q).obj ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) f).obj ((DerivedCategory.Plus.singleFunctor (Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj ((constantSheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M))))",
-    "branch": "newtargets-dag",
-    "by": "NC",
-    "date": "2026-10-15",
-    "existing": false
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-proper-smooth-connected-fibre-dimension-loci",
+  "lem-weil-pbc-connected-fibres-constant-degree-zero",
+  "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+  "lemma-constructible-pullback-constant"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKW finite-coefficient devissage, implemented using the existing proved source coefficient API; Tag 0GKV/0A3H degree zero and exact finite direct image in dimension zero; Tag 02G1 dimension-locus reduction. Lean proof by M3, 2026-10-19."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "proper smooth family geometrically connected curves constant finite module higher etale direct images constructible even in residue characteristic",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constructibility proper smooth relative curves torsion module coefficients without invertible order",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"ℕ → (R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"Given a natural number $ n $, a commutative ring $ R $, and a commutative ring $ S $ equipped with an $ R $-algebra structure, the proposition that $ S $ is a standard smooth algebra of relative dimen\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"ℕ → {R : Type u} → {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, this proposition asserts that $ S $ is a standard smooth algebra over $ R $ of relative dimension $ n $, where the a\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S),\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → f.IsStandardSmooth\", \"doc\": \"If a ring homomorphism $ f : R \\to S $ is standard smooth of relative dimension $ n $, then $ f $ is standard smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ (n : ℕ) {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [H : Algebra.IsStandardSmoothOfRelativeDimension n R S], Algebra.IsStandardSmooth R S\", \"doc\": \"If $ S $ is a standard smooth algebra over $ R $ of relative dimension $ n $, then $ S $ is a standard smooth algebra over $ R $. This follows from the fact that the localized polynomial ring structur\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"sheaf\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|constructible.*sheaf|makeGoodCurves|good_curves",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper smooth family geometrically connected curves constant finite module higher etale direct images constructible even in residue characteristic",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constructibility of higher direct images constant torsion sheaves on smooth proper curves and descent under surjective scheme morphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] [CompactSpace ↥Y] [QuasiSeparatedSpace ↥Y] {s : Set ↥X},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that $f$ is locally of finite presentation and quasi-compact, and the underlying topological space of $Y$ is compact and quasi-separated. Then for an\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] {s : Set ↥X},\\n  Topology.IsLocallyConstructible s →\\n    Topology.IsLocallyConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a quasi-compact and locally of finite presentation morphism of schemes. If $s$ is a locally constructible subset of $X$, then its image $f(s)$ is a locally constructible subset of \"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {s : Set ↥Y},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' s)\", \"doc\": \"For any morphism $ f : X \\\\to Y $ of schemes and any constructible subset $ s \\\\subseteq Y $, the preimage $ f^{-1}(s) $ is a constructible subset of $ X $.\"}\n  {\"name\": \"PrimeSpectrum.isConstructible_comap_image\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.FinitePresentation →\\n    ∀ {s : Set (PrimeSpectrum S)}, Topology.IsConstructible s → Topology.IsConstructible (PrimeSpectrum.comap f '' s)\", \"doc\": \"If $ f: R \\\\to S $ is a finitely presented ring homomorphism and $ s \\\\subseteq \\\\operatorname{Spec}(S) $ is a constructible set in the Zariski topology, then the image of $ s $ under the induced map $ \\\\\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper smooth families finite module coefficients etale higher direct images constructible",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.isOpen_etaleLocus, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, Algebra.Etale.exists_subalgebra_fg",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constant finite torsion sheaf cohomology constructible proper family of curves",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*smooth.*constructible|constructible.*smooth.*proper",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"sheaf\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper smooth geometrically connected curves prime torsion etale cohomology constructible",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error; ",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+  "worker": "stage1",
+  "summary": "Kept statement; separated fibre dimensions, used 0GK3 in dimension zero, and supplied finite abelian prime-coefficient devissage with an explicit finite-action coefficient upgrade. Corrected the source proof typo M[n] to M[l]. Two new unsplit nodes; reused the existing Mathlib vector-space freeness leaf and made its finite-index specialization elementary.",
+  "blueprint": "Realizes the classical constructibility input of thm-weil-pbc-direct-image-finiteness-proper through its 0GKX/0GKW expansion; 0GKV is the strictly smaller prime-coefficient input."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NP-9ed9815be",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-9ed9815be (reviewer sub-agent of L); spot-checked: Read all mathematics and checked Stacks 0GKW, 0GKV, 0GK3, 0GKM, 02G1 and 01TH. Finite-coefficient induction and dimension reduction are sound, including characteristic-p coefficients. Added existing stalk, restriction and qcqs citations and completed new-node metadata in three corrected JSON files. Statements unchanged; no duplicate nodes found. Full checks and inherited DAG defects are recorded in review.md.; 3 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-559ce68bc",
+  "group": "NC",
+  "result": "pass",
+  "note": "Checked all statement dependencies, source passages, exact Lean declarations, hypotheses, edge cases, docstrings, and verbatim signature. Server-only compilation passed in 1.8 seconds. No delivery defects found; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperSmoothCurvesFiniteModule",
+  "declaration": "AlgebraicGeometry.Etale.properSmoothCurves_finiteModule_higherDirectImage_constructible",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperSmoothCurvesFiniteModule.lean",
+  "statement": "theorem properSmoothCurves_finiteModule_higherDirectImage_constructible {C S : Scheme.{u}} [IsLocallyNoetherian S] [CompactSpace S] (f : C ⟶ S) [IsProper f] [Smooth f] [GeometricallyConnected f] (h_dim : ∀ s : S, topologicalKrullDim (f.fiber s) ≤ 1) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (M : ModuleCat.{u + 1} Λ) [Finite M] (q : ℤ) : Scheme.IsConstructibleEtaleModuleSheaf ((DerivedCategory.Plus.homologyFunctor (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) q).obj ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) f).obj ((DerivedCategory.Plus.singleFunctor (Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj ((constantSheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M))))",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261019T154017-L-3027457",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
