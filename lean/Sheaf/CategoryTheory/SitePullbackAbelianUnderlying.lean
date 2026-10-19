@@ -21,7 +21,7 @@ Modules on Sites, proof of Lemma 04JC
 
 @[expose] public section
 
-universe u
+universe u v w
 
 open CategoryTheory CategoryTheory.Limits
 open CategoryTheory.Functor.sheafPullbackConstruction
@@ -32,9 +32,12 @@ namespace CategoryTheory
 Modules on Sites, first paragraph of the proof of Lemma 04JC
 (blueprint: lem-weil-pbc-site-pullback-abelian-underlying).
 
+The site object and morphism universes may differ. Sheafification and left Kan
+extension existence are explicit hypotheses; coefficients live in `max u v w`.
+
 Proof: Identify abelian sheaves on both sites with commutative group objects in
 sheaves of sets, using `sheavesAlgebraicStructuresAbelian`. Lift the set-valued
-pullback-pushforward adjunction using `Adjunction.liftedCommGrpBranch`: finite
+pullback-pushforward adjunction using `Adjunction.mapCommGrp`: finite
 limit preservation implies finite product preservation, so the left lift has
 underlying functor equal to set-valued pullback. The right lift is naturally
 isomorphic to abelian pushforward: precomposition computes products sectionwise,
@@ -44,28 +47,33 @@ identifications. Both its left adjoint and the constructed abelian pullback are
 left adjoint to abelian pushforward. Uniqueness of left adjoints gives a natural
 isomorphism between them. Composing with the forgetful identifications gives the
 asserted isomorphism of underlying sheaves, on objects and morphisms. -/
-theorem sitePullback_abelian_underlying
-    {C D : Type u} [SmallCategory C] [SmallCategory D]
+theorem sitePullback_abelian_underlying_of_hasSheafify
+    {C D : Type u} [Category.{v} C] [Category.{v} D]
     (J : GrothendieckTopology C) (K : GrothendieckTopology D) (U : C ⥤ D)
     [U.IsContinuous J K]
-    [PreservesFiniteLimits (sheafPullback U (Type u) J K)] :
-    Nonempty (sheafPullback U AddCommGrpCat.{u} J K ⋙
-        sheafCompose K (forget AddCommGrpCat.{u}) ≅
-      sheafCompose J (forget AddCommGrpCat.{u}) ⋙ sheafPullback U (Type u) J K) := by
+    [HasWeakSheafify K (Type (max u v w))]
+    [HasWeakSheafify K AddCommGrpCat.{max u v w}]
+    [∀ F : Cᵒᵖ ⥤ Type (max u v w), U.op.HasLeftKanExtension F]
+    [∀ F : Cᵒᵖ ⥤ AddCommGrpCat.{max u v w}, U.op.HasLeftKanExtension F]
+    [PreservesFiniteLimits (sheafPullback U (Type (max u v w)) J K)] :
+    Nonempty (sheafPullback U AddCommGrpCat.{max u v w} J K ⋙
+        sheafCompose K (forget AddCommGrpCat.{max u v w}) ≅
+      sheafCompose J (forget AddCommGrpCat.{max u v w}) ⋙
+        sheafPullback U (Type (max u v w)) J K) := by
   set_option backward.isDefEq.respectTransparency false in
   set_option backward.defeqAttrib.useBackward true in
   exact (by
-    let : BraidedCategory (Sheaf J (Type u)) :=
+    let : BraidedCategory (Sheaf J (Type (max u v w))) :=
       BraidedCategory.ofCartesianMonoidalCategory
-    let : BraidedCategory (Sheaf K (Type u)) :=
+    let : BraidedCategory (Sheaf K (Type (max u v w))) :=
       BraidedCategory.ofCartesianMonoidalCategory
-    let R := U.sheafPushforwardContinuous (Type u) J K
+    let R := U.sheafPushforwardContinuous (Type (max u v w)) J K
     let : R.Braided := Functor.Braided.ofChosenFiniteProducts R
-    let Rab := U.sheafPushforwardContinuous AddCommGrpCat.{u} J K
+    let Rab := U.sheafPushforwardContinuous AddCommGrpCat.{max u v w} J K
     obtain ⟨FJ, GJ, hFJ, hGJ, hFJGJ, hGJFJ, opJ, _⟩ :=
-      sheavesAlgebraicStructuresAbelian.{u, u, u} J
+      sheavesAlgebraicStructuresAbelian.{u, v, w} J
     obtain ⟨FK, GK, hFK, hGK, hFKGK, hGKFK, opK, _⟩ :=
-      sheavesAlgebraicStructuresAbelian.{u, u, u} K
+      sheavesAlgebraicStructuresAbelian.{u, v, w} K
     let EJ := Equivalence.mk FJ GJ (eqToIso hFJGJ.symm) (eqToIso hGJFJ)
     let EK := Equivalence.mk FK GK (eqToIso hFKGK.symm) (eqToIso hGKFK)
     let e : (FK ⋙ R.mapCommGrp) ⋙ CommGrp.forget _ ≅
@@ -74,7 +82,7 @@ theorem sitePullback_abelian_underlying
         Functor.isoWhiskerRight (eqToIso hFK) R ≪≫
         Iso.refl _ ≪≫
         Functor.isoWhiskerLeft Rab (eqToIso hFJ).symm
-    have hprod (X Y : Sheaf K (Type u)) :
+    have hprod (X Y : Sheaf K (Type (max u v w))) :
         (CartesianMonoidalCategory.prodComparisonIso R X Y).inv = 𝟙 _ := by
       have h : (CartesianMonoidalCategory.prodComparisonIso R X Y).hom = 𝟙 _ := by
         rfl
@@ -84,7 +92,7 @@ theorem sitePullback_abelian_underlying
       (CartesianMonoidalCategory.prodComparisonIso R X Y).hom_inv_id
     have hone : (CartesianMonoidalCategory.preservesTerminalIso R).inv = 𝟙 _ := by
       rfl
-    have he (A : Sheaf K AddCommGrpCat.{u}) :
+    have he (A : Sheaf K AddCommGrpCat.{max u v w}) :
         (e.app A).hom ≫ (eqToIso hFJ).hom.app (Rab.obj A) =
           R.map ((eqToIso hFK).hom.app A) := by
       simp [e]
@@ -125,13 +133,13 @@ theorem sitePullback_abelian_underlying
       Functor.associator Rab FJ GJ ≪≫
       Functor.isoWhiskerLeft Rab (eqToIso hFJGJ) ≪≫ Rab.rightUnitor
     -- Lift and transport the adjunction using Mathlib's canonical commutative-group lift.
-    let L := sheafPullback U (Type u) J K
+    let L := sheafPullback U (Type (max u v w)) J K
     let : L.Braided := Functor.Braided.ofChosenFiniteProducts L
-    let adj := sheafAdjunctionContinuous U (Type u) J K
+    let adj := sheafAdjunctionContinuous U (Type (max u v w)) J K
     let lifted := (EJ.toAdjunction.comp adj.mapCommGrp).comp EK.symm.toAdjunction
     let transported := lifted.ofNatIsoRight eR
     let comparison :=
-      (sheafAdjunctionContinuous U AddCommGrpCat.{u} J K).leftAdjointUniq transported
+      (sheafAdjunctionContinuous U AddCommGrpCat.{max u v w} J K).leftAdjointUniq transported
     refine ⟨Functor.isoWhiskerRight comparison _ ≪≫ ?_⟩
     exact Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft _ (eqToIso hGK) ≪≫
@@ -139,5 +147,31 @@ theorem sitePullback_abelian_underlying
       Functor.isoWhiskerRight (Iso.refl _) _ ≪≫
       Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerRight (eqToIso hFJ) L)
+
+/-- Source: Stacks Project, Sites, Section 00YR and Proposition 00YV (2), and
+Modules on Sites, first paragraph of the proof of Lemma 04JC
+(blueprint: lem-weil-pbc-site-pullback-abelian-underlying).
+
+Proof: Identify abelian sheaves on both sites with commutative group objects in
+sheaves of sets, using `sheavesAlgebraicStructuresAbelian`. Lift the set-valued
+pullback-pushforward adjunction using `Adjunction.liftedCommGrpBranch`: finite
+limit preservation implies finite product preservation, so the left lift has
+underlying functor equal to set-valued pullback. The right lift is naturally
+isomorphic to abelian pushforward: precomposition computes products sectionwise,
+so its transported multiplication, unit and inverse are the original sectionwise
+addition, zero and negation. Transport the lifted adjunction across the two
+identifications. Both its left adjoint and the constructed abelian pullback are
+left adjoint to abelian pushforward. Uniqueness of left adjoints gives a natural
+isomorphism between them. Composing with the forgetful identifications gives the
+asserted isomorphism of underlying sheaves, on objects and morphisms. -/
+theorem sitePullback_abelian_underlying
+    {C D : Type u} [SmallCategory C] [SmallCategory D]
+    (J : GrothendieckTopology C) (K : GrothendieckTopology D) (U : C ⥤ D)
+    [U.IsContinuous J K]
+    [PreservesFiniteLimits (sheafPullback U (Type u) J K)] :
+    Nonempty (sheafPullback U AddCommGrpCat.{u} J K ⋙
+        sheafCompose K (forget AddCommGrpCat.{u}) ≅
+      sheafCompose J (forget AddCommGrpCat.{u}) ⋙ sheafPullback U (Type u) J K) := by
+  exact sitePullback_abelian_underlying_of_hasSheafify.{u, u, u} J K U
 
 end CategoryTheory

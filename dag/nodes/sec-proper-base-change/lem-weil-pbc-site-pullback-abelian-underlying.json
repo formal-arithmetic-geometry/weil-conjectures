@@ -12,7 +12,7 @@
  ],
  "proof": [
   {
-   "text": "Apply sheavesAlgebraicStructuresAbelian on J and K, at universes u,u,u. Form equivalences EJ and EK from the two strict inverse identities, and retain their strict underlying-functor equalities and their sectionwise addition and zero equations.",
+   "text": "Apply sheavesAlgebraicStructuresAbelian on J and K, at independent site object/morphism universes u,v and coefficient universe max u v w. Form equivalences EJ and EK from the two strict inverse identities, and retain their strict underlying-functor equalities and their sectionwise addition and zero equations.",
    "uses": [
     "lem-weil-pbc-sheaf-algebraic-structures-abelian-component"
    ],
@@ -34,7 +34,7 @@
    "elementary": false
   },
   {
-   "text": "Use the constructed set-valued pullback adjunction from Mathlib and lift it with Adjunction.mapCommGrp. Finite-limit preservation supplies the required finite products on the left, and the right adjoint preserves limits. Compose with EJ.toAdjunction and EK.symm.toAdjunction, and transport the right functor by the proved pushforward comparison. The constructed abelian pullback is also left adjoint to that same abelian pushforward; Adjunction.leftAdjointUniq gives the comparison of left functors. Whisker by the abelian forgetful functor and compose associators with the strict underlying equalities of GK and FJ. The underlying left group lift is definitionally the set-valued pullback followed after forgetting, yielding the stated natural isomorphism.",
+   "text": "Use the constructed set-valued pullback adjunction from Mathlib and lift it with Adjunction.mapCommGrp. Finite-limit preservation supplies the required finite products on the left, and the right adjoint preserves limits. Compose with EJ.toAdjunction and EK.symm.toAdjunction, and transport the right functor by the proved pushforward comparison. The constructed abelian pullback is also left adjoint to that same abelian pushforward; Adjunction.leftAdjointUniq gives the comparison of left functors. Whisker by the abelian forgetful functor and compose associators with the strict underlying equalities of GK and FJ. The underlying left group lift is definitionally the set-valued pullback followed after forgetting, yielding the stated natural isomorphism. The generalized theorem assumes only the existence of the two constructed pullbacks (weak sheafification and left Kan extensions), with no small-category restriction. The original small-site declaration is its specialization at u,u,u, retaining its exact signature.",
    "uses": [
     "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
     "lem-weil-pbc-adjunction-lifts-abelian-group-objects",
@@ -51,9 +51,9 @@
   "lem-weil-pbc-sheaf-algebraic-structures-abelian-component"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Section 00YR and Proposition 00YV (2); also sites-modules.tex, first paragraph of Lemma 04JC"
+  "place": "Section 00YR and Proposition 00YV (2); also sites-modules.tex, first paragraph of Lemma 04JC; Lean realization W7, 2026-10-18"
  },
  "mathlib_searches": [
   {
@@ -122,7 +122,11 @@
   "statement": "theorem sitePullback_abelian_underlying\n    {C D : Type u} [SmallCategory C] [SmallCategory D]\n    (J : GrothendieckTopology C) (K : GrothendieckTopology D) (U : C ⥤ D)\n    [U.IsContinuous J K]\n    [PreservesFiniteLimits (sheafPullback U (Type u) J K)] :\n    Nonempty (sheafPullback U AddCommGrpCat.{u} J K ⋙\n        sheafCompose K (forget AddCommGrpCat.{u}) ≅\n      sheafCompose J (forget AddCommGrpCat.{u}) ⋙ sheafPullback U (Type u) J K)",
   "branch": "sheaf-dag",
   "by": "K2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "declarations": [
+   "CategoryTheory.sitePullback_abelian_underlying",
+   "CategoryTheory.sitePullback_abelian_underlying_of_hasSheafify"
+  ]
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -135,13 +139,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-19",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "W7",
   "result": "pass",
-  "landing": "20261012T085316-L-30429",
-  "kind": "proof",
+  "landing": "20261019T034342-L-424276",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

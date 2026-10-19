@@ -24,7 +24,7 @@
  ],
  "proof": [
   {
-   "text": "*1.* Base change is a continuous functor of the small pro-étale sites by [def-sfb-finite-lower-star]; this assertion about the sites is independent of its abelian coefficient category. In particular it sends coverings to coverings. The sites also have terminal objects and all fibre products: their morphisms are weakly étale by [def-weil-pbc-small-proetale-site], so for $V_1\\to V\\leftarrow V_2$ the projection $V_1\\times_VV_2\\to V_2$ is weakly étale by base change, and its composite to the base scheme is weakly étale by composition. Thus the scheme fibre product lies in the small site. The fibre-product universal property gives $u(Y)\\cong X$ and $u(V_1\\times_VV_2)\\cong u(V_1)\\times_{u(V)}u(V_2)$, with the same projections. Terminal objects and fibre products generate finite limits, proving clause 1. Use the small sites and larger sheaf universe of [def-weil-pbc-small-proetale-site].",
+   "text": "*1.* Base change is a continuous functor of the small pro-étale sites by [def-sfb-finite-lower-star]; this assertion about the sites is independent of its abelian coefficient category. In particular it sends coverings to coverings. The sites also have terminal objects and all fibre products: their morphisms are weakly étale by [def-weil-pbc-small-proetale-site], so for $V_1\\to V\\leftarrow V_2$ the projection $V_1\\times_VV_2\\to V_2$ is weakly étale by base change, and its composite to the base scheme is weakly étale by composition. Thus the scheme fibre product lies in the small site. The fibre-product universal property gives $u(Y)\\cong X$ and $u(V_1\\times_VV_2)\\cong u(V_1)\\times_{u(V)}u(V_2)$, with the same projections. Terminal objects and fibre products generate finite limits, proving clause 1. Use the small sites and larger sheaf universe of [def-weil-pbc-small-proetale-site]. In Lean, use the existing finite-limit-preserving base-change instance and prove preservation of actual covering presieves by presenting them as ofArrows, applying Scheme.ProEt.mem_precoverage_iff, and using Precoverage.mem_coverings_of_isPullback with MorphismProperty.Over.isPullback_map_left.",
    "uses": [
     "def-sfb-finite-lower-star",
     "def-weil-pbc-small-proetale-site",
@@ -49,7 +49,7 @@
    }
   },
   {
-   "text": "*3.* The adjunction of step 2 and [lem-weil-pbc-left-adjoint-preserves-colimits] show that $f^{-1}$ preserves all colimits. For finite limits use [lem-weil-pbc-presheaf-pullback-sets-left-exact](2): its hypotheses hold by step 1, so $\\operatorname{Lan}_{u^{\\mathrm{op}}}$ preserves finite limits of set-valued presheaves. Concretely its index at $T$ is the opposite of the category of pairs $(V,T\\to u(V))$; it is filtered by the cited statement. Inclusion of set-valued sheaves into presheaves preserves limits by [lem-weil-pbc-site-sheaf-sets-limits-sectionwise], and set-valued sheafification preserves finite limits by [lem-weil-pbc-sheafification-sets-exact]. Their composite $f^{-1}$ therefore preserves finite limits. This is exactly the left-exact adjunction required for the asserted geometric morphism.",
+   "text": "*3.* The adjunction of step 2 and [lem-weil-pbc-left-adjoint-preserves-colimits] show that $f^{-1}$ preserves all colimits. For finite limits use [lem-weil-pbc-presheaf-pullback-sets-left-exact](2): its hypotheses hold by step 1, so $\\operatorname{Lan}_{u^{\\mathrm{op}}}$ preserves finite limits of set-valued presheaves. Concretely its index at $T$ is the opposite of the category of pairs $(V,T\\to u(V))$; it is filtered by the cited statement. Inclusion of set-valued sheaves into presheaves preserves limits by [lem-weil-pbc-site-sheaf-sets-limits-sectionwise], and set-valued sheafification preserves finite limits by [lem-weil-pbc-sheafification-sets-exact]. Their composite $f^{-1}$ therefore preserves finite limits. This is exactly the left-exact adjunction required for the asserted geometric morphism. For the actual site universes, apply the existing non-small-site variant CategoryTheory.preservesFiniteLimits_op_lan_of_flat; AB5OfSize_shrink specializes exactness of filtered colimits of Type (u+1) to the comma-category size. No replacement small-site presentation is needed.",
    "uses": [
     "lem-weil-pbc-left-adjoint-preserves-colimits",
     "lem-weil-pbc-presheaf-pullback-sets-left-exact",
@@ -63,7 +63,7 @@
    }
   },
   {
-   "text": "*4.* On abelian sheaves, the construction of step 2 is the pullback of [def-sfb-finite-upper-star] with coefficient category abelian groups. Apply [lem-weil-pbc-site-pullback-abelian-underlying] to $u$: continuity is step 1, and finite-limit preservation of the constructed set pullback is step 3. It identifies the underlying set sheaf of this abelian pullback with $f^{-1}$ applied to the underlying set sheaf. Thus this is precisely the operation specified in clause 4, including its group operations. The lemma [lem-sfb-finite-upper-star-exact], specialized to abelian groups, states that this abelian pullback preserves finite limits and is exact (its right exactness comes from the abelian adjunction of step 2). In particular it preserves kernels and cokernels, proving clause 4.",
+   "text": "*4.* On abelian sheaves, the construction of step 2 is the pullback of [def-sfb-finite-upper-star] with coefficient category abelian groups. Apply [lem-weil-pbc-site-pullback-abelian-underlying] to $u$: continuity is step 1, and finite-limit preservation of the constructed set pullback is step 3. It identifies the underlying set sheaf of this abelian pullback with $f^{-1}$ applied to the underlying set sheaf. Thus this is precisely the operation specified in clause 4, including its group operations. The lemma [lem-sfb-finite-upper-star-exact], specialized to abelian groups, states that this abelian pullback preserves finite limits and is exact (its right exactness comes from the abelian adjunction of step 2). In particular it preserves kernels and cokernels, proving clause 4. Use the universe-general theorem sitePullback_abelian_underlying_of_hasSheafify at site object universe u+1, morphism universe u, coefficient universe u+1. Existing sheafification and pointwise Kan-extension instances supply its explicit existence hypotheses. Existing preservesFiniteLimits_upperStar and the abelian adjunction supply finite-limit and finite-colimit preservation.",
    "uses": [
     "def-sfb-finite-upper-star",
     "lem-weil-pbc-site-pullback-abelian-underlying",
@@ -76,7 +76,7 @@
    }
   },
   {
-   "text": "*5.* For $g:Y\\to Z$, the fibre-product universal property gives a natural isomorphism $a_W:(W\\times_ZY)\\times_YX\\xrightarrow{\\sim}W\\times_ZX$, characterized by its projections to $W$ and $X$. For a sheaf $G$ on $X_{\\mathrm{proét}}$, restriction $G(a_W)$ is an isomorphism $(g\\circ f)_*G(W)\\to g_*f_*G(W)$. It is natural in both $W$ and $G$, since the defining projections commute with their morphisms. Write this pushforward isomorphism as $\\alpha:(g\\circ f)_*\\xrightarrow{\\sim}g_*f_*$. By the adjunctions of step 2 and [def-weil-pbc-composite-adjunction], $f^{-1}g^{-1}$ is left adjoint to $g_*f_*$. Apply [lem-weil-pbc-conjugate-iso-unit-equation] with $L_1=(g\\circ f)^{-1}$, $R_1=(g\\circ f)_*$, $L_2=f^{-1}g^{-1}$, $R_2=g_*f_*$ and $\\delta=\\alpha^{-1}$. It gives a canonical isomorphism $c:(g\\circ f)^{-1}\\xrightarrow{\\sim}f^{-1}g^{-1}$ satisfying $R_1(c_F)\\eta_{1,F}=\\delta_{L_2F}\\eta_{2,F}$. This explicit unit equation proves compatibility with the adjunctions and hence the asserted composition of geometric morphisms.",
+   "text": "*5.* For $g:Y\\to Z$, the fibre-product universal property gives a natural isomorphism $a_W:(W\\times_ZY)\\times_YX\\xrightarrow{\\sim}W\\times_ZX$, characterized by its projections to $W$ and $X$. For a sheaf $G$ on $X_{\\mathrm{proét}}$, restriction $G(a_W)$ is an isomorphism $(g\\circ f)_*G(W)\\to g_*f_*G(W)$. It is natural in both $W$ and $G$, since the defining projections commute with their morphisms. Write this pushforward isomorphism as $\\alpha:(g\\circ f)_*\\xrightarrow{\\sim}g_*f_*$. By the adjunctions of step 2 and [def-weil-pbc-composite-adjunction], $f^{-1}g^{-1}$ is left adjoint to $g_*f_*$. Apply [lem-weil-pbc-conjugate-iso-unit-equation] with $L_1=(g\\circ f)^{-1}$, $R_1=(g\\circ f)_*$, $L_2=f^{-1}g^{-1}$, $R_2=g_*f_*$ and $\\delta=\\alpha^{-1}$. It gives a canonical isomorphism $c:(g\\circ f)^{-1}\\xrightarrow{\\sim}f^{-1}g^{-1}$ satisfying $R_1(c_F)\\eta_{1,F}=\\delta_{L_2F}\\eta_{2,F}$. This explicit unit equation proves compatibility with the adjunctions and hence the asserted composition of geometric morphisms. The final Lean equality is the symmetric unit_conjugateEquiv_symm equation for the existing conjugateIsoEquiv used to define setPullbackComp.",
    "uses": [
     "def-pc-fibre-product",
     "def-weil-pbc-composite-adjunction",
@@ -107,8 +107,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/det-pe-topos-functoriality-inverse-image.proof.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/det-pe-topos-functoriality-inverse-image.md",
+  "place": "node det-pe-topos-functoriality-inverse-image, order None; Lean realization W7, 2026-10-18"
  },
  "mathlib_searches": [
   {
@@ -212,5 +212,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W7",
+  "result": "pass",
+  "landing": "20261019T034342-L-424276",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

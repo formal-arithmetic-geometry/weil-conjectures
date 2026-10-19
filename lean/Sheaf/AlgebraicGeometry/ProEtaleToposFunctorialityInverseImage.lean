@@ -15,16 +15,8 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExten
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.CategoryTheory.Adjunction.Basic
-import Mathlib.CategoryTheory.Adjunction.Mates
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Functor.Flat
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Mathlib.CategoryTheory.Sites.Limits
-import Mathlib.CategoryTheory.MorphismProperty.Composition
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
 import Sheaf.CategoryTheory.SitePullbackAbelianUnderlying
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 
 /-!
 # Functoriality of the inverse image on small pro-étale topoi
@@ -144,6 +136,38 @@ theorem toposFunctorialityInverseImage {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y
         ((setPullbackAdjunction g).comp (setPullbackAdjunction f)).unit.app F ≫
           (lowerStarComp (Type (u + 1)) f g).hom.app
             ((setPullback g ⋙ setPullback f).obj F) := by
-  sorry
+  have hlimits : PreservesFiniteLimits (setPullback f) := by
+    have : PreservesFiniteLimits
+        ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).op.lan :
+          (Y.ProEtᵒᵖ ⥤ Type (u + 1)) ⥤ X.ProEtᵒᵖ ⥤ Type (u + 1)) := by
+      let : AB5OfSize.{u, u + 1} (Type (u + 1)) :=
+        AB5OfSize_shrink.{u, u + 1, u + 1, u + 1} (Type (u + 1))
+      apply preservesFiniteLimits_op_lan_of_flat
+    unfold setPullback Functor.sheafPullbackConstruction.sheafPullback
+    infer_instance
+  refine ⟨⟨inferInstance, ?_⟩, ⟨setPullbackAdjunction f⟩,
+    (setPullbackAdjunction f).leftAdjoint_preservesColimits, hlimits, ⟨?_,
+    inferInstance, inferInstance⟩, ?_⟩
+  · intro V R hR
+    obtain ⟨ι, V, a, rfl⟩ := R.exists_eq_ofArrows
+    rw [Presieve.map_ofArrows]
+    rw [Scheme.ProEt.mem_precoverage_iff] at hR ⊢
+    rw [Presieve.map_ofArrows] at hR ⊢
+    exact Precoverage.mem_coverings_of_isPullback (fun i ↦ (a i).left) hR
+      (pullback.fst _ f) _ (fun i ↦ pullback.fst (V i).hom f)
+      fun i ↦ (MorphismProperty.Over.isPullback_map_left f (a i)).flip
+  · let := Scheme.ProEt.isContinuous_overPullback f
+    let : PreservesFiniteLimits
+        (Functor.sheafPullbackConstruction.sheafPullback
+          (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f) (Type (u + 1))
+          (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)) := hlimits
+    exact sitePullback_abelian_underlying_of_hasSheafify.{u + 1, u, 0}
+      (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)
+      (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f)
+  · intro F
+    exact (unit_conjugateEquiv_symm
+      ((setPullbackAdjunction g).comp (setPullbackAdjunction f))
+      (setPullbackAdjunction (f ≫ g))
+      (lowerStarComp (Type (u + 1)) f g).hom F).symm
 
 end AlgebraicGeometry.ProEtale
