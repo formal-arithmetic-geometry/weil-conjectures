@@ -22,77 +22,46 @@
  ],
  "proof": [
   {
-   "text": "Work on the chosen small skeleton of $X_{\\mathrm{proet}}$. Its coefficient sheaf $R_X$ is commutative, so $\\mathcal A=\\operatorname{Mod}(R_X)$ is Grothendieck abelian by [lem-pur-ringed-site-grothendieck-abelian] and has enough injectives by [lem-sp-grothendieck-enough-injectives]. Apply [lem-weil-pbc-dplus-injective-representative] to $K$ and $L$ to obtain bounded-below complexes of injectives $I^\\bullet,J^\\bullet$ and isomorphisms $QI\\simeq K$, $QJ\\simeq L$. Both complexes are K-injective. By [lem-weil-pbc-kinjective-hom-derived], the conjugate of $u$ is represented by a homotopy class, hence by a chain map $a:I^\\bullet\\to J^\\bullet$.",
+   "text": "Use the Grothendieck abelian structure on module sheaves [lem-pur-ringed-site-grothendieck-abelian] and enough injectives [lem-sp-grothendieck-enough-injectives]. Apply [lem-weil-pbc-dplus-injective-representative] to both bounded-below objects. By K-injectivity and [lem-weil-pbc-kinjective-hom-derived], represent the conjugate of the given morphism by a homotopy class and lift that class to a chain map a between the injective representatives.",
    "uses": [
     "lem-pur-ringed-site-grothendieck-abelian",
     "lem-sp-grothendieck-enough-injectives",
     "lem-weil-pbc-dplus-injective-representative",
     "lem-weil-pbc-kinjective-hom-derived"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 013K (lemma-injective-resolutions-exist), 070I (lemma-K-injective), 070J; ringed-site input: sites-cohomology.tex, Section 07A5"
-   }
+   "elementary": false
   },
   {
-   "text": "For each $W\\in\\mathcal B_X$, [lem-weil-pbc-proetale-restriction-injectives] identifies derived evaluation with derived global sections on the localized site. Since restriction preserves injectives, $\\Gamma(W,I^\\bullet)$ and $\\Gamma(W,J^\\bullet)$ compute these objects and $\\Gamma(W,a)$ computes their morphism. By hypothesis its localized image is an isomorphism. Applying [lem-weil-pbc-derived-plus-iso-on-cohomology] in the abelian category of $R_X(W)$-modules shows that $H^n\\Gamma(W,a)$ is an isomorphism for every integer $n$. Thus $\\Gamma(W,a)$ is a quasi-isomorphism.",
+   "text": "For each affine basis object, use the units of Mathlib rightDerivedFunctorPlus. These units are invertible on bounded-below complexes of injectives, so their naturality identifies the localized evaluation of a with the derived evaluation of its localized image. The hypothesis makes the latter invertible. The localization of [def-weil-abstract-derived-category] reflects quasi-isomorphisms, so every evaluated a is a quasi-isomorphism. This uses the definition of derived evaluation itself and does not pass through restriction to a slice site.",
    "uses": [
-    "lem-weil-pbc-proetale-restriction-injectives",
-    "lem-weil-pbc-derived-plus-iso-on-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-basis-derived-detection.md",
-    "place": "Proof: restriction-injectives sentence; derived.tex Tag 05RT, cohomology detects derived isomorphisms"
-   }
-  },
-  {
-   "text": "Let $C^\\bullet=C(a)$ be the ordinary mapping cone, so $C^n=J^n\\oplus I^{n+1}$ and $d_C=\\left(\\begin{smallmatrix}d_J&a\\\\0&-d_I\\end{smallmatrix}\\right)$ as in [def-weil-abstract-derived-category]. Evaluation preserves this finite direct sum and each displayed map, so $\\Gamma(W,C)=C(\\Gamma(W,a))$ as complexes. Apply [lem-pur-quasi-iso-cone-acyclic] to $\\Gamma(W,a)$ in the abelian category of $R_X(W)$-modules. Step 2 gives $H^n\\Gamma(W,C)=0$ for every $W\\in\\mathcal B_X$ and every $n$. No exactness of evaluation on sheaves is asserted here.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "lem-pur-quasi-iso-cone-acyclic"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05RT (lemma-acyclic), mapping cone construction; blueprint Proof: take the cone"
-   }
-  },
-  {
-   "text": "Regard $C^\\bullet$ as a complex of presheaves of $R_X$-modules and set $P_n(U)=H^n(C^\\bullet(U))$. Presheaf kernels and cokernels are objectwise, so $P_n=\\ker d^n/\\operatorname{im}d^{n-1}$ in presheaves. By exact module sheafification [lem-weil-pbc-ringed-site-module-sheafification-exact], sheafifying this quotient gives the quotient of the sheafified kernel by the sheafified image. Since every $C^i$ is already a sheaf, this is exactly $\\mathcal H^n(C)$, hence $P_n^\\#\\simeq\\mathcal H^n(C)$. This is the explicit kernel-image calculation of Stacks 0BKV, applied to this complex; it does not claim $\\mathcal H^n(C)(U)=P_n(U)$.",
-   "uses": [
-    "lem-weil-pbc-ringed-site-module-sheafification-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0BKV (lemma-sheafification-cohomology), kernel-image calculation; sites-modules.tex Tag 03EI (lemma-sheafification-exact)"
-   }
-  },
-  {
-   "text": "Fix $n$. Step 3 gives $P_n(W)=0$ for every basis object. For any sheaf of $R_X$-modules $F$ and presheaf morphism $b:P_n\\to F$, any $U$ and $x\\in P_n(U)$, cover $U$ by basis objects using [lem-weil-pbc-ind-etale-basis]. On every member $W$ of that cover, $b_U(x)|_W=b_W(x|_W)=0$. The uniqueness part of the sheaf axiom gives $b_U(x)=0$. Thus every $b$ is zero. By the sheafification adjunction of [def-weil-presheaf-modules-sheafification], applied with $F=P_n^\\#$, both the identity and zero endomorphisms of $P_n^\\#$ correspond to its zero unit map. They are equal, so $P_n^\\#=0$. Step 4 implies $\\mathcal H^n(C)=0$ for all $n$.",
-   "uses": [
-    "lem-weil-pbc-ind-etale-basis",
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-basis-derived-detection.md",
-    "place": "Proof: all these groups are zero on the basis, so every cohomology sheaf is zero; adjunction and sheaf separation supply the details"
-   }
-  },
-  {
-   "text": "Now $C(a)$ is acyclic as a complex in $\\mathcal A$. Apply [lem-pur-quasi-iso-cone-acyclic] in $\\mathcal A$ to conclude that $a$ is a quasi-isomorphism. The localization $Q$ inverts quasi-isomorphisms by [def-weil-abstract-derived-category], hence $Q(a)$ is an isomorphism. Conjugating back by $QI\\simeq K$ and $QJ\\simeq L$ proves that $u$ is an isomorphism.",
-   "uses": [
-    "lem-pur-quasi-iso-cone-acyclic",
+    "lem-weil-pbc-dplus-injective-representative",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05RT (lemma-acyclic) and Definition 05RU (definition-unbounded-derived-category); blueprint Proof, final sentence"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Let T be the forgetful functor from module sheaves to abelian sheaves of [def-weil-sheaf-of-modules-category], U the inclusion into abelian presheaves, and S abelian sheafification. The functor T is exact and reflects isomorphisms. Exactness of S [lem-weil-pbc-sheafification-exact] gives a natural isomorphism between sheafified presheaf homology of (T followed by U) applied to a complex and homology of its S-image. The sheafification counit identifies (T followed by U) followed by S with T. Exactness of T then identifies this homology with T applied to module-sheaf homology. This is the kernel-image calculation of Stacks Tag 0BKV and is formalized as sheafifiedHomologyIso; no exactness of U or sheaf evaluation is required.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every degree n let g be the presheaf homology map of the underlying presheaf-complex map. Presheaf evaluation and forgetting from modules to abelian groups are exact. Step 2 therefore implies that g restricted to the affine basis is objectwise invertible. The dense-subsite comparison [lem-weil-pbc-ind-etale-basis], expressed by GrothendieckTopology.W_whiskerLeft_iff, makes g invertible after sheafification. Apply the same comparison to the AsSmall equivalence to transport between the original pro-etale site and the chosen small model. Step 3 makes the module-sheaf homology maps invertible, since T reflects isomorphisms. Thus a is a quasi-isomorphism. This is formalized as quasiIso_of_basis_evaluation.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-basis",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By [def-weil-abstract-derived-category] the localization sends a to an isomorphism. The inclusion of the bounded-below derived category into the derived category reflects isomorphisms. Conjugate back by the two chosen isomorphisms of step 1 to conclude that the original morphism is invertible.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -100,18 +69,15 @@
   "lem-sp-grothendieck-enough-injectives",
   "lem-weil-pbc-dplus-injective-representative",
   "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-proetale-restriction-injectives",
-  "lem-weil-pbc-derived-plus-iso-on-cohomology",
   "def-weil-abstract-derived-category",
-  "lem-pur-quasi-iso-cone-acyclic",
-  "lem-weil-pbc-ringed-site-module-sheafification-exact",
-  "lem-weil-pbc-ind-etale-basis",
-  "def-weil-presheaf-modules-sheafification"
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-ind-etale-basis"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-basis-derived-detection.md",
-  "place": "Proof, expanded using Stacks Tags 013K, 070I, 070J, 05RT, 03EI and the kernel-image calculation in 0BKV"
+  "place": "Proof, direct homology-map version of the kernel-image/sheafification argument of Stacks Tag 0BKV; Mathlib injective representatives, right-derived-functor units and dense-subsite comparison. Formalized by T3 on 2026-10-19."
  },
  "mathlib_searches": [
   {
@@ -206,8 +172,7 @@
   ]
  },
  "tool_uses": [
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "lem-pur-quasi-iso-cone-acyclic"
+  "lem-pur-ringed-site-grothendieck-abelian"
  ],
  "reviewed": {
   "date": "2026-10-13",
@@ -243,5 +208,15 @@
   "group": "NI",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable statement, all dependencies, source, canonical constructions, universes, edge cases, report sections and docstrings. Per-file scompile.py checks passed in 6.1 s and 5.4 s without diagnostics. No correction required; documented the stage-3 presentation comparison."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261019T005425-L-2768280",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
