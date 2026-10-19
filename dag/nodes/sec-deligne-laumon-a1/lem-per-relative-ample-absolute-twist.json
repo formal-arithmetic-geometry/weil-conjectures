@@ -15,9 +15,114 @@
   "def-pc-module-pullback",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P_a=N\\otimes f^*(M^{\\otimes a})$ for $a\\geq0$. The tensor and pullback assertions of [lem-weil-pbc-invertible-pullback-tensor] show that these are invertible and identify their powers by $P_a^{\\otimes n}\\cong N^{\\otimes n}\\otimes f^*(M^{\\otimes an})$, compatibly with sections and their fibre values. By [def-weil-pbc-ample-invertible-module], $T$ is quasi-compact; hence $Z$ is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](2). The ample module $M$ makes $T$ separated by [lem-weil-pbc-ample-scheme-separated], so $V\\cap V'$ is affine for affine opens $V,V'\\subseteq T$ by [lem-weil-pbc-separated-affine-open-intersection] with $A=\\mathbf Z$. For affine $V\\subseteq T$, $Z_V=f^{-1}(V)$ carries the ample module $N|_{Z_V}$, so it is separated by [lem-weil-pbc-ample-scheme-separated] and quasi-separated by [lem-pc-separated-quasi-separated]. Cover $Z$ by the affine opens $U$ lying in some $Z_V$ with $V$ affine. Take $U\\subseteq Z_V$, $U'\\subseteq Z_{V'}$ and put $V''=V\\cap V'$, so $U\\cap U'\\subseteq Z_{V''}$. As $U$ is quasi-compact and $V$ quasi-separated [lem-weil-pbc-affine-scheme-qcqs], $U\\to V$ is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](1); so $U\\cap Z_{V''}$, the inverse image of the affine $V''$, is quasi-compact, and likewise $U'\\cap Z_{V''}$. Cover both by finitely many affine opens of $Z_{V''}$; by [lem-weil-pbc-quasi-separated-affine-cover-criterion](1) on $Z_{V''}$ their pairwise intersections are quasi-compact, so $U\\cap U'$ is quasi-compact. Part (2) of that lemma makes $Z$ quasi-separated, and part (1) makes intersections of affine opens of $Z$ quasi-compact. These are exactly the hypotheses needed for clearing denominators below.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-ample-scheme-separated",
+    "lem-weil-pbc-separated-affine-open-intersection",
+    "lem-pc-separated-quasi-separated",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0892, lemma-pullback-ample-tensor-relatively-ample, proof of (1)"
+   }
+  },
+  {
+   "text": "Fix $z\\in Z$. The definition [def-weil-pbc-ample-invertible-module] applied to $M$ supplies $m\\geq1$ and $t\\in\\Gamma(T,M^{\\otimes m})$ with $f(z)\\in T_t$ and $T_t$ affine. By [lem-weil-pbc-tensor-power-section-nonvanishing-pullback] there is a section $q$ of $(f^*M)^{\\otimes m}\\cong f^*(M^{\\otimes m})$ with $Z_q=f^{-1}(T_t)$. This last module identification is given by [lem-weil-pbc-invertible-pullback-tensor]. The assumption on $N$ applies to the affine open $T_t$. Applying the same ampleness definition on $U=Z_q$ gives $n\\geq1$ and $s\\in\\Gamma(U,N^{\\otimes n}|_U)$ such that $W=U_s$ is affine and contains $z$. Thus $W$ has been chosen independently of the eventual twisting exponent.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "lem-weil-pbc-tensor-power-section-nonvanishing-pullback",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0892, lemma-pullback-ample-tensor-relatively-ample, proof of (1)"
+   }
+  },
+  {
+   "text": "The module $N^{\\otimes n}$ is invertible by induction using [lem-weil-pbc-invertible-pullback-tensor](1); it is therefore quasi-coherent by [def-sc-invertible-module]. Apply [lem-sc-p1-section-clearing-denominators-qcqs] on the quasi-compact quasi-separated scheme $Z$ to the invertible module $f^*(M^{\\otimes m})$, its section $q$, and the quasi-coherent module $N^{\\otimes n}$. There exist $e\\geq0$ and $s'\\in\\Gamma(Z,N^{\\otimes n}\\otimes f^*(M^{\\otimes em}))$ whose restriction to $U=Z_q$ is $s q^e$. For every $b>0$, multiplication gives $s'q^b$ in $\\Gamma(Z,N^{\\otimes n}\\otimes f^*(M^{\\otimes(e+b)m}))$. Its nonvanishing locus is exactly $W$: outside $U$, the factor $q^b$ has zero fibre value; inside $U$, $q$ is a nonzero vector in a one-dimensional fibre, so $s'q^b=sq^{e+b}$ is nonzero exactly where $s$ is nonzero. The tensor fibre-value formula used here is [lem-weil-pbc-invertible-pullback-tensor](3).",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-sc-invertible-module",
+    "lem-sc-p1-section-clearing-denominators-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0892, lemma-pullback-ample-tensor-relatively-ample, proof of (1)"
+   }
+  },
+  {
+   "text": "For every integer $a$ divisible by $m$ with $a\\geq m(e+1)$, put $b=na/m-e$. Then $b\\geq1$ and $(e+b)m=na$. The section just constructed is consequently a section of $P_a^{\\otimes n}$ whose affine nonvanishing locus is the fixed $W$. Do this for every $z$. Quasi-compactness of $Z$ allows finitely many of these $W_i$ to cover it. Let $D$ be a positive common multiple of their $m_i$ and choose a nonnegative multiple $A$ of $D$ with $A\\geq m_i(e_i+1)$ for every $i$. Every $W_i$ is an affine nonvanishing locus of a section of a positive power of $P_A$; by [def-weil-pbc-ample-invertible-module], $P_A$ is ample. If $Z$ is empty, its quasi-compactness and the vacuous point condition already show every $P_a$ ample, so take $a_0=0$ and finish. Thus the finite cover in the nonempty case has at least one member.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0892, lemma-pullback-ample-tensor-relatively-ample, proof of (1)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-coherent-twist-global-generation] on $T$ with the ample module $M$ and the finite type quasi-coherent module $\\mathcal O_T$. The latter hypotheses follow directly from [pqf-def-coherent]: on an affine chart it is the associated module of the ring itself, and the identity is a rank-one local finite generating map. It follows that there is $K\\geq0$ such that $M^{\\otimes c}$ is generated by finitely many global sections for all $c\\geq K$. The identification $\\mathcal O_T\\otimes M^{\\otimes c}\\cong M^{\\otimes c}$ is the tensor-unit identification. By [lem-sc-global-generation-nonvanishing-cover], for each such $c$ the nonvanishing loci $T_v$ of global sections $v$ of $M^{\\otimes c}$ cover $T$. Apply [lem-weil-pbc-tensor-power-section-nonvanishing-pullback] to the invertible module $M^{\\otimes c}$ and tensor degree $1$. Their pulled-back sections $w$ of $Q_c=f^*(M^{\\otimes c})$ have loci $Z_w=f^{-1}(T_v)$, which cover $Z$.",
+   "uses": [
+    "lem-weil-pbc-coherent-twist-global-generation",
+    "pqf-def-coherent",
+    "lem-sc-global-generation-nonvanishing-cover",
+    "lem-weil-pbc-tensor-power-section-nonvanishing-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0892, lemma-pullback-ample-tensor-relatively-ample, proof of (1)"
+   }
+  },
+  {
+   "text": "Set $a_0=A+K$ and fix $a\\geq a_0$, so $c=a-A\\geq K$. For $z\\in Z$, ampleness of $P_A$ gives $r\\geq1$ and $u\\in\\Gamma(Z,P_A^{\\otimes r})$ with $z\\in Z_u$ and $Z_u$ affine, by [def-weil-pbc-ample-invertible-module]. Choose a section $w$ of $Q_c$ nonvanishing at $z$ from the preceding cover. Then $u\\otimes w^{\\otimes r}$ is a section of $(P_A\\otimes Q_c)^{\\otimes r}$ with locus $Z_u\\cap Z_w$, by the fibre-value formula of [lem-weil-pbc-invertible-pullback-tensor](3). This intersection is affine by [lem-sc-affine-cap-section-open], applied to the affine open $Z_u$ and the invertible module $Q_c$. It contains $z$. The ampleness definition now proves $P_A\\otimes Q_c$ ample. The pullback tensor isomorphism in [lem-weil-pbc-invertible-pullback-tensor](2), with the tensor-power regrouping, identifies this module with $P_{A+c}=P_a$. Apply [lem-sc-ample-iso] to conclude that $P_a$ is ample. Since $a$ was arbitrary, this proves the stated uniform tail.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-sc-affine-cap-section-open",
+    "lem-sc-ample-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0892, lemma-pullback-ample-tensor-relatively-ample, proof of (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-ample-scheme-separated",
+  "lem-weil-pbc-separated-affine-open-intersection",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-weil-pbc-tensor-power-section-nonvanishing-pullback",
+  "def-sc-invertible-module",
+  "lem-sc-p1-section-clearing-denominators-qcqs",
+  "lem-weil-pbc-coherent-twist-global-generation",
+  "pqf-def-coherent",
+  "lem-sc-global-generation-nonvanishing-cover",
+  "lem-sc-affine-cap-section-open",
+  "lem-sc-ample-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0892, lemma-pullback-ample-tensor-relatively-ample, proof of (1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +158,31 @@
    "results": "8 hits; AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AmpleSet.preimage, AmpleSet.preimage_iff, AlgebraicGeometry.of_targetAffineLocally_of_isPullback, AmpleSet.image_iff, AmpleSet.image, AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange",
    "date": "2026-10-19",
    "verdict": "no match: returned declarations do not state relative or absolute ampleness of invertible sheaves on schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "relatively.?ample|IsAmple|ample.*pullback|pullback.*ample",
+   "results": "0 hits; ; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-19",
+   "verdict": "no match: no relative-to-absolute ampleness statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative ampleness and ampleness on the base imply absolute ampleness after twisting by all sufficiently large pullback powers",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, CategoryTheory.MorphismProperty.relative, RingHom.IsStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk, AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange; note=; digest=f43e3fbf42c5cfe6",
+   "date": "2026-10-19",
+   "verdict": "no match: no relative-to-absolute ampleness statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relatively ample invertible sheaf tensored with a sufficiently large power of the pullback of an ample invertible sheaf is ample",
+   "results": "8 hits; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine, AlgebraicGeometry.Proj.pow_apply; note=; digest=35bbba1a4e055ea9",
+   "date": "2026-10-19",
+   "verdict": "no match: no relative-to-absolute ampleness statement"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-surface-point-blowup-geometry",
@@ -83,5 +209,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-relative-ample-absolute-twist",
+  "worker": "stage1",
+  "summary": "Split Stacks 0892(1) along its denominator-clearing, finite exponent synchronization, and eventual global-generation proof. The statement is unchanged. All non-elementary inputs are existing nodes; no new nodes. Explicitly checked qcqs hypotheses, fibre nonvanishing, the empty-source case, divisibility arithmetic, and the passage from one ample twist to every sufficiently large twist. Maintainer review (2026-10-19): step 1 no longer cites the sec-trace-formula node lem-trf-scheme-ample-canonical-proj-criterion (batch-5 closure); quasi-separatedness of Z is proved directly from separatedness of T and of each f^{-1}(V) with V affine.",
+  "blueprint": "This auxiliary node realizes the ample-preservation input in the point-blowup induction below lem-per-artin-gabber-affine-curve, through the existing surface-resolution and finite-coefficient dualizing chain recorded in blueprint.from. Its own source is Stacks 0892(1); no unit route is replaced. Whole-blueprint searches for 0892 and relative/absolute ample twists found no same-statement node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic monoidal pullback and fibre-value identities for invertible modules; the unit has no separate module-tensor comparison."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic composition/permanence of quasi-compact and quasi-separated morphisms supplies the hypotheses of denominator clearing."
+   },
+   {
+    "node": "lem-weil-pbc-ample-scheme-separated",
+    "why": "Generic absolute ampleness implies separatedness, applied to the base T; no separate result of this unit states it."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Generic separated-implies-quasi-separated implication, needed for the clearing-denominators hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "why": "Generic equivalence of scheme quasi-separatedness with quasi-compact affine intersections."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-power-section-nonvanishing-pullback",
+    "why": "Generic inverse-image formula for the nonvanishing locus of a pulled-back section."
+   },
+   {
+    "node": "lem-sc-p1-section-clearing-denominators-qcqs",
+    "why": "Generic denominator-clearing theorem 01PW on an arbitrary qcqs scheme, applied to N^n and a pulled-back section."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-twist-global-generation",
+    "why": "Generic eventual global generation 01Q3(7) for an ample module, applied only to the structure sheaf of T."
+   },
+   {
+    "node": "lem-sc-global-generation-nonvanishing-cover",
+    "why": "Generic rank-one global-generation criterion provides nonvanishing sections at every point."
+   },
+   {
+    "node": "lem-sc-affine-cap-section-open",
+    "why": "Generic affineness theorem 01PV for the intersection of an affine open with an invertible-section nonvanishing locus."
+   },
+   {
+    "node": "lem-sc-ample-iso",
+    "why": "Generic invariance of absolute ampleness under invertible-module isomorphism."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-ample-scheme-separated",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-weil-pbc-tensor-power-section-nonvanishing-pullback",
+  "lem-sc-p1-section-clearing-denominators-qcqs",
+  "lem-weil-pbc-coherent-twist-global-generation",
+  "lem-sc-global-generation-nonvanishing-cover",
+  "lem-sc-affine-cap-section-open",
+  "lem-sc-ample-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-N9-e9141c65a",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-e9141c65a (reviewer sub-agent of L); spot-checked: Read in full: the item, every cited statement, and Stacks morphisms.tex Tag 0892 (lemma-pullback-ample-tensor-relatively-ample) part (1) with its proof (01VH/01VI, 09MP, 01PW(2), 01Q3, 0890). Statement agrees with 0892(1); relative ampleness is unfolded per 01VH, nothing is weakened, and no new nodes are added. Checked steps 2-6: the pullback section q with Z_q=f^{-1}(T_t); denominator clearing on qcqs Z, with the locus of s'q^b equal to W (also for e=0); the arithmetic b=nj-e>=1 with (e+b)m=na; the lcm choice of A; 01Q3(7) with F=O_T, including c=0; and 0890 inline through lem-sc-affine-cap-section-open and lem-sc-ample-iso. Small cases tested: Z empty, f=id, trivial M on affine T, e=0, c=0, unequal m_i. No duplicate of 0892(1) exists in the DAG. Batch-5 flag: lem-trf-scheme-ample-canonical-proj-criterion was cited only for 'f separated' (01VI). It is a helper created inside the trace-formula proof chain (via lem-trf-algebraic-space-ample-local ... lem-trf-trace-specialization) and pulls 9 sec-trace-formula nodes into the closure, so I did not accept it. FIX: step 1 rewritten to prove Z quasi-separated directly, from T separated (09MP plus lem-weil-pbc-separated-affine-open-intersection), each f^{-1}V separated and hence qs (ample-scheme-separated, pc-separated-quasi-separated), U->V quasi-compact (qcqs-permanence(1), affine-scheme-qcqs), and 01KO(1)(2). proof_deps and tool_uses updated (trf entry removed; the two added citations are Mathlib leaves). The fixed closure (155 nodes) has no trf or poincare node and no cycle. Other tool_uses are accepted as generic scheme and module tools. No SGA source is used.; 1 file(s) fixed by the reviewer"
  }
 }
