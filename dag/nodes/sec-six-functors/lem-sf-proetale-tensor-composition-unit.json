@@ -19,75 +19,63 @@
  ],
  "proof": [
   {
-   "text": "For every object $U$ of $V_{\\mathrm{proet}}$, the universal property of fibre products gives $q_U:Z\\times_W(W\\times_VU)\\cong Z\\times_VU$: its components are the projection to $Z$ and the composite projection to $U$. The inverse has components the projection to $Z$ and the pair of projections to $W,U$. Both composites have the original projections, hence are identities by uniqueness. The same uniqueness proves naturality in $U$. The inverse-image definition supplies covering-preserving, finite-limit-preserving site functors, so the site-composition lemma applies. Transporting its comparison along $q$ yields $a_{h,k}$ and the right comparison $d^0$ on underlying sheaves. Write $j^f_F:F\\to f_*f^{-1}F$ for the sheaf unit. The cited unit compatibility says, sectionwise, $a_{h,k,F}(j^h_{k^{-1}F}(j^k_F(m)))=d^0_{(kh)^{-1}F}(j^{kh}_F(m))$, with the left side evaluated on $B_hB_kU$ and $m\\in F(U)$. This is the underlying sheaf-unit identity used below.",
+   "text": "Use the existing real-data proEtaleRingInverseImageComp, which is the inverse mate of the fibre-product pushforward comparison. Apply unit_conjugateEquiv_symm to the sheaf adjunctions. Substitute the prescribed composite coefficient identification, commute the pushforward comparison through the coefficient maps by naturality, and cancel its inverse. Naturality of the h-unit with c_k identifies the result with rho_k followed by k_*(rho_h). This proves coefficient_comp.",
    "uses": [
     "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-site-morphism-composition",
-    "def-pc-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 03CB, lemma-composition-morphisms-sites, and Definition 03CC"
-   }
-  },
-  {
-   "text": "Put $A=h^{-1}k^{-1}R_V$, $B=h^{-1}R_W$, $C=R_Z$, $N=h^{-1}k^{-1}M$, $\\alpha=h^{-1}c_k$ and $\\beta=c_h$. The tensor and colimit assertions of the inverse-image lemma identify $h^*k^*M$ with $(N\\otimes_{A,\\alpha}B)\\otimes_{B,\\beta}C$. Indeed, the relative tensor is the coequalizer of the two action maps on $F\\otimes_{\\mathbf Z}R\\otimes_{\\mathbf Z}G$, and both tensor factors and this coequalizer are preserved. The same lemma says that $a_{h,k}$ is monoidal, so, using $c_{kh}a_{h,k,R_V}=\\beta\\alpha$, the target identifies with $N\\otimes_{A,\\beta\\alpha}C$. Define $T((m\\otimes a)\\otimes b)=m\\otimes\\beta(a)b$. For $r\\in A$, the relation $(rm\\otimes a)=(m\\otimes\\alpha(r)a)$ is preserved because $rm\\otimes\\beta(a)b=m\\otimes\\beta\\alpha(r)\\beta(a)b$. The outer $B$-balancing is preserved by multiplicativity of $\\beta$. Conversely $S(m\\otimes b)=(m\\otimes1)\\otimes b$ is $A$-balanced since $(rm\\otimes1)\\otimes b=(m\\otimes\\alpha(r))\\otimes b=(m\\otimes1)\\otimes\\beta\\alpha(r)b$. Thus $TS=1$, and $ST=1$ by the outer balancing relation. The formulas are additive and $C$-linear, and commute with restriction maps and morphisms in $M$. By the definition of sheaf tensor product as sheafification of the sectionwise tensor, these maps give inverse natural sheaf maps; reinsert $a_{h,k}$ in $T$ and its inverse in $S$. This is exactly $t_{h,k}$.",
-   "uses": [
     "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "def-weil-proetale-inverse-image",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D3, lemma-adjoint-push-pull-modules, together with Tag 03EL tensor-product-pullback"
-   }
-  },
-  {
-   "text": "For a coefficient ring sheaf write $\\rho_f=f_*c_f\\circ j^f_{R_{\\mathrm{target}}}$. The module-operation definition makes $f_*$ act through $\\rho_f$, and its module unit sends $m$ to $j^f_M(m)\\otimes1$: under its stated identification $f^*M\\cong f^{-1}M$ by $x\\otimes r\\mapsto c_f^{-1}(r)x$, this is exactly $j^f_M$. Apply the sheaf-unit identity of Step 1 to $R_V$. Naturality with respect to $c_k$, followed by $c_h$ and the equality $c_{kh}a_{h,k,R_V}=c_hh^{-1}c_k$, gives $d^0_{R_Z}\\rho_{kh}=k_*\\rho_h\\circ\\rho_k$. Hence restriction along $q_U$ respects the $R_V$-actions on $(kh)_*P$ and $k_*h_*P$ for every $R_Z$-module $P$; restriction along $q_U^{-1}$ gives its inverse. This is the specified natural module isomorphism $d_{h,k}$. Finally the composite-adjunction definition gives its left adjoint $h^*k^*$ the unit $k_*(\\eta^h_{k^*M})\\circ\\eta^k_M$.",
-   "uses": [
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-site-morphism-composition",
-    "def-pc-fibre-product",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
     "def-weil-pbc-composite-adjunction"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D3, lemma-adjoint-push-pull-modules"
+    "document": "literature/stacks-project/categories.tex",
+    "place": "lemma-transformation-between-functors-and-adjoints (Tag 0B65), applied to the specified coefficient adjunctions"
    }
   },
   {
-   "text": "Evaluate both sides of the claimed unit equation at $U\\in V_{\\mathrm{proet}}$ and $m\\in M(U)$. By Step 3 the successive units send $m$ first to $j^k_M(m)\\otimes1$, then to $(w\\otimes1)\\otimes1$, where $w=j^h_{k^{-1}M}(j^k_M(m))$ on $B_hB_kU$. Step 2 sends this to $a_{h,k,M}(w)\\otimes1$, since $c_h(1)=1$. The right side sends $m$ to the restriction along $q_U$ of $j^{kh}_M(m)\\otimes1$. Naturality of the tensor restriction maps makes this $d^0_{(kh)^{-1}M}(j^{kh}_M(m))\\otimes1$, equal to the left side by Step 1. This checks every section of $M$, hence proves the equality of sheaf maps and therefore the displayed natural-transformation equality. Apply the conjugate-iso/unit-equation lemma with $L_1=h^*k^*$, $R_1=k_*h_*$, $L_2=(kh)^*$, $R_2=(kh)_*$ and $\\delta=d_{h,k}$. The unit of the first adjunction is exactly the composite unit just calculated, so the lemma proves the asserted uniqueness of this explicit comparison.",
+   "text": "Forget the coefficient compatibility to RingCat. SheafOfModules.pushforwardCongr₂ applied to the inverse of the canonical pullbackComp isomorphism, followed by pushforwardComp, gives d from composite direct image to successive direct image. Its component on every section is definitionally restriction along pullbackComp.inv. Let t be the inverse conjugateIsoEquiv image of d for the composite and iterated module adjunctions. unit_conjugateEquiv_symm supplies the required composite-unit equation.",
    "uses": [
-    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-pc-fibre-product",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-proetale-operations",
     "def-weil-pbc-composite-adjunction",
-    "lem-weil-pbc-site-morphism-composition",
-    "def-weil-pbc-proetale-operations"
+    "lem-weil-pbc-conjugate-iso-unit-equation"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; composite-adjunction calculation"
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "lemma-adjoint-push-pull-modules (Tag 03D3), together with the explicit direct-image restriction maps"
+   }
+  },
+  {
+   "text": "Evaluate the unit equation at every U and m. Expand the two tensor generators as scalar multiples of restrictions of module units. The h-unit is linear through rho_h, commutes with restrictions, and t is linear and commutes with restrictions. Move both scalars outside t, commute t through the q and B_h(p) restrictions, and apply the evaluated unit equation. Composing the three restrictions and multiplying the two scalars proves the forward formula. Specialize this formula to T=B_k(U), p=id, the outer index p followed by pullbackComp.hom, and intermediate scalar 1. Ring maps preserve 1 and pullbackComp.hom followed by its inverse is the identity, so applying t.inv and cancelling t.hom proves the inverse formula. Finally equality of the transposes under the iterated adjunction homEquiv proves uniqueness of every component and hence of the natural transformation.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-weil-proetale-inverse-image",
+    "def-pc-fibre-product",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "lemma-adjoint-push-pull-modules (Tag 03D3); the local generator identities are the agent deduction from linearity, naturality, and the composite unit"
    }
   }
  ],
  "proof_deps": [
   "def-pc-fibre-product",
-  "def-pur-sheaf-tensor-product",
   "def-weil-pbc-composite-adjunction",
   "def-weil-pbc-proetale-operations",
   "def-weil-proetale-inverse-image",
   "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "lem-weil-pbc-site-morphism-composition"
+  "lem-weil-pbc-profinite-coefficient-inverse-image"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-scheme-geometric-frobenius.md",
-  "place": "Final displayed compatibility equation and preceding sentence on pullback-composition identifications"
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D3 and Categories Tag 0B65; K4, 2026-10-19: construct the mate and prove both generator formulas from linearity and naturality of the specified module units."
  },
  "mathlib_searches": [
   {
@@ -224,13 +212,10 @@
  },
  "tool_uses": [
   "def-pc-fibre-product",
-  "def-pur-sheaf-tensor-product",
   "def-weil-pbc-composite-adjunction",
   "def-weil-pbc-proetale-operations",
   "def-weil-proetale-inverse-image",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "lem-weil-pbc-site-morphism-composition"
+  "lem-weil-pbc-conjugate-iso-unit-equation"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -263,5 +248,15 @@
   "group": "Q137",
   "result": "fix",
   "note": "Mathematics, dependencies, tensor formulas, universes, and verbatim item signature verified; snapshot compilation passed without warnings. Replaced the H11 placeholder second reading with a complete report in fixes/lem-sf-proetale-tensor-composition-unit.report.md. Review recorded in review.md; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261019T160420-L-3355581",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

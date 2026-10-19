@@ -9,11 +9,6 @@ public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 public import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
 public import Mathlib.CategoryTheory.Adjunction.Mates
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import WeilConjectures.CategoryTheory.SiteMorphismComposition
-import Sheaf.CategoryTheory.SiteInverseImageTensor
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 
 /-!
 # The explicit pro-etale tensor comparison and its adjunction units
@@ -69,6 +64,122 @@ def proEtalePullbackTensorScalar {X Y : Scheme.{u}} (f : X ⟶ Y)
   (S.obj.map p.op).hom
     (((proEtaleRingDirectImageMap f R S c).hom.app (op U)).hom a)
 
+attribute [local irreducible] proEtaleRingModulePullbackObj
+  proEtaleRingModulePullbackMap proEtaleRingModuleAdjunction
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem unit_smul {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
+    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
+    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)
+    (M : proEtaleRingModules Y R) (U : Y.ProEt)
+    (a : R.obj.obj (op U)) (m : M.val.obj (op U)) :
+    ((proEtaleRingModuleAdjunction f R S c).unit.app M).val.app (op U) (a • m) =
+      @SMul.smul (S.obj.obj (op ((proEtaleBaseChange f).obj U)))
+        (((proEtaleRingModulePullback f R S c).obj M).val.obj
+          (op ((proEtaleBaseChange f).obj U))) inferInstance
+        (((proEtaleRingDirectImageMap f R S c).hom.app (op U)).hom a)
+        (((proEtaleRingModuleAdjunction f R S c).unit.app M).val.app (op U) m) :=
+  (((proEtaleRingModuleAdjunction f R S c).unit.app M).val.app (op U)).hom.map_smul a m
+
+private theorem unit_restrict {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
+    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
+    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)
+    (M : proEtaleRingModules Y R) {U T : Y.ProEt} (p : T ⟶ U)
+    (m : M.val.obj (op U)) :
+    ((proEtaleRingModuleAdjunction f R S c).unit.app M).val.app (op T)
+        (M.val.map p.op m) =
+      ((proEtaleRingModulePullback f R S c).obj M).val.map
+        ((proEtaleBaseChange f).map p).op
+          (((proEtaleRingModuleAdjunction f R S c).unit.app M).val.app (op U) m) :=
+  PresheafOfModules.naturality_apply
+    ((proEtaleRingModuleAdjunction f R S c).unit.app M).val p.op m
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem coefficient_comp
+    {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
+    (R_V : Sheaf (ProEt.topology V) CommRingCat.{u + 1})
+    (R_W : Sheaf (ProEt.topology W) CommRingCat.{u + 1})
+    (R_Z : Sheaf (ProEt.topology Z) CommRingCat.{u + 1})
+    (c_k : (proEtaleSheafInverseImage k CommRingCat.{u + 1}).obj R_V ≅ R_W)
+    (c_h : (proEtaleSheafInverseImage h CommRingCat.{u + 1}).obj R_W ≅ R_Z)
+    (c_hk : (proEtaleSheafInverseImage (h ≫ k) CommRingCat.{u + 1}).obj R_V ≅ R_Z)
+    (hc_hk : c_hk = (proEtaleRingInverseImageComp h k).app R_V ≪≫
+      (proEtaleSheafInverseImage h CommRingCat.{u + 1}).mapIso c_k ≪≫ c_h) :
+    proEtaleRingDirectImageMap (h ≫ k) R_V R_Z c_hk ≫
+      (Functor.sheafPushforwardContinuousComp'
+        (eFG := (MorphismProperty.Over.pullbackComp h k).symm) CommRingCat.{u + 1}
+        (ProEt.topology V) (ProEt.topology W) (ProEt.topology Z)).inv.app R_Z =
+      proEtaleRingDirectImageMap k R_V R_W c_k ≫
+        (proEtaleSheafDirectImage k CommRingCat.{u + 1}).map
+          (proEtaleRingDirectImageMap h R_W R_Z c_h) := by
+  let adj := proEtaleSheafAdjunction (h ≫ k) CommRingCat.{u + 1}
+  let adjk := proEtaleSheafAdjunction k CommRingCat.{u + 1}
+  let adjh := proEtaleSheafAdjunction h CommRingCat.{u + 1}
+  let e := Functor.sheafPushforwardContinuousComp'
+    (eFG := (MorphismProperty.Over.pullbackComp h k).symm) CommRingCat.{u + 1}
+    (ProEt.topology V) (ProEt.topology W) (ProEt.topology Z)
+  have hu := unit_conjugateEquiv_symm (adjk.comp adjh) adj e.hom R_V
+  change (adjk.comp adjh).unit.app R_V ≫ e.hom.app _ =
+    adj.unit.app R_V ≫ _ at hu
+  change (adjk.comp adjh).unit.app R_V ≫ e.hom.app _ =
+    adj.unit.app R_V ≫ (proEtaleSheafDirectImage (h ≫ k) CommRingCat.{u + 1}).map
+      ((proEtaleRingInverseImageComp h k).hom.app R_V) at hu
+  subst c_hk
+  unfold proEtaleRingDirectImageMap
+  simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp,
+    ← Category.assoc]
+  rw [← hu]
+  simp only [Category.assoc]
+  dsimp only [proEtaleSheafDirectImage, ProEtale.lowerStar] at *
+  rw [← e.hom.naturality_assoc, ← e.hom.naturality_assoc]
+  dsimp only [e] at *
+  simp only [Iso.hom_inv_id_app, Category.comp_id]
+  rw [Adjunction.comp_unit_app]
+  have hn := adjh.unit.naturality c_k.hom
+  have hn' := congrArg (fun z ↦ adjk.unit.app R_V ≫
+    (proEtaleSheafDirectImage k CommRingCat.{u + 1}).map
+      (z ≫ (proEtaleSheafDirectImage h CommRingCat.{u + 1}).map c_h.hom)) hn.symm
+  dsimp only [adjk, adjh, proEtaleSheafDirectImage, ProEtale.lowerStar] at hn' ⊢
+  simpa only [Functor.map_comp, Functor.comp_map, Functor.id_map, Category.assoc] using hn'
+
+private theorem adjunction_map_injective {C D : Type*} [Category C] [Category D]
+    {F : C ⥤ D} {G : D ⥤ C} (a : F ⊣ G) {M : C} {N : D}
+    {f g : F.obj M ⟶ N}
+    (h : a.unit.app M ≫ G.map f = a.unit.app M ≫ G.map g) : f = g :=
+  (a.homEquiv M N).injective h
+
+private theorem composite_unit_map {C D E : Type*}
+    [Category C] [Category D] [Category E]
+    {F : C ⥤ D} {G : D ⥤ C} {H : D ⥤ E} {I : E ⥤ D}
+    (a : F ⊣ G) (b : H ⊣ I) (M : C) {N : E} (f : (F ⋙ H).obj M ⟶ N) :
+    (a.comp b).unit.app M ≫ (I ⋙ G).map f =
+      a.unit.app M ≫ G.map (b.unit.app (F.obj M)) ≫ (I ⋙ G).map f := by
+  rw [Adjunction.comp_unit_app, Category.assoc]
+
+private theorem comp_iso_map_id {C D : Type*} [Category C] [Category D]
+    (F : C ⥤ D) {X : C} {Y Z : D} (e : Y ≅ F.obj X) (p : Z ⟶ Y) :
+    (p ≫ e.hom) ≫ F.map (𝟙 X) ≫ e.inv = p := by
+  rw [F.map_id, Category.id_comp, Category.assoc, e.hom_inv_id, Category.comp_id]
+
+private theorem iso_inv_hom_apply {C : Type*} [Category C]
+    {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u + 1}}
+    {M N : SheafOfModules.{u + 1} R} (e : M ≅ N) (U : Cᵒᵖ) (m : M.val.obj U) :
+    e.inv.val.app U (e.hom.val.app U m) = m :=
+  congrArg (fun z : M ⟶ M ↦ z.val.app U m) e.hom_inv_id
+
+private theorem mate_iso {C D : Type*} [Category C] [Category D]
+    {L₁ L₂ : C ⥤ D} {R₁ R₂ : D ⥤ C} (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂)
+    (d : R₁ ≅ R₂) : ∃ t : L₂ ≅ L₁, ∀ M : C,
+      b.unit.app M ≫ R₂.map (t.hom.app M) = a.unit.app M ≫ d.hom.app _ := by
+  refine ⟨(conjugateIsoEquiv a b).symm d, ?_⟩
+  intro M
+  exact (unit_conjugateEquiv_symm a b d.hom M).symm
+
+attribute [local irreducible] proEtaleRingModulePullback
+
 /-- The tensor formulas define inverse natural module maps, preserving the specified
 composite adjunction unit, and uniquely characterized by that unit equation.
 Source: Stacks, Tags 03D3, 03CB and 0B65; the explicit tensor calculation is the agent
@@ -83,26 +194,22 @@ those formulas for arbitrary local inverse-image sections: one can check maps on
 indexing coprojection, and pure tensors generate the sectionwise tensor products.
 
 Proof:
-1. Fibre-product universality gives `q` and its inverse, with naturality by uniqueness.
-Apply siteMorphism_composition on the compatible small models and transport along `q`.
-Its adjunction-compatible inverse-image comparison gives the sheaf-unit identity.
-2. By siteInverseImage_tensor and its coherence, inverse image preserves tensors and
-colimits, hence their relative-tensor coequalizers. With A = h⁻¹k⁻¹R_V, B = h⁻¹R_W,
-C = R_Z, alpha = h⁻¹c_k and beta = c_h, the iterated pullback is
-(N tensor_A B) tensor_B C. Send (m tensor a) tensor b to m tensor beta(a)b.
-A-balancing follows from beta(alpha(r)a) = beta(alpha(r))beta(a); B-balancing follows
-from multiplicativity of beta. The inverse inserts 1 in B. Its A-balancing follows
-by moving alpha(r) across the outer tensor. Both composites are identities by balancing.
-The formulas commute with restrictions and maps of M, so sheafification gives t and
-its inverse with the two stated generator formulas.
-3. The module-operation definition fixes rho_f and the tensor-normalized adjunction.
-Apply the sheaf-unit identity to R_V and use naturality with c_k, then c_h, and hc_hk.
-It gives d rho_hk = k_*(rho_h) rho_k, so restriction along q and q⁻¹ is linear and
-natural, giving d. Adjunction.comp gives the successive-unit composite displayed below.
-4. On every test section m, the successive units insert 1 twice. The forward tensor
-formula multiplies c_h(1) by 1, so the sheaf-unit identity proves the displayed equation.
-Finally unit_conjugateEquiv_symm and the bijective adjunction Hom correspondence give
-uniqueness among all natural transformations, not just among isomorphisms. -/
+1. The ring inverse-image comparison is the mate of the fibre-product pushforward
+comparison. Its unit equation and naturality with the coefficient identifications give
+compatibility of the direct-image coefficient maps with composition.
+2. Apply the module pushforward comparison along the fibre-product isomorphism, followed
+by the comparison with successive pushforwards, to obtain d. Its section maps are exactly
+restriction along the specified inverse fibre-product comparison. Let t be its adjunction
+mate. The mate unit equation is the asserted composite-unit equation.
+3. Evaluate that equation on a section m. Expand the generators as scalar multiples of
+restrictions of units. The units are linear through their coefficient maps, and units and
+t commute with restrictions. Move the two scalars outside t and apply the evaluated unit
+equation. Functoriality of restrictions and multiplication of scalars give the forward
+formula for every pair of indexing arrows.
+4. Specialize the forward formula to the identity first indexing arrow and intermediate
+scalar 1. Ring maps preserve 1 and the fibre-product comparisons cancel. Apply t.inv to
+obtain the inverse formula. Finally the injectivity of the composite adjunction Hom
+correspondence proves uniqueness among all natural transformations. -/
 theorem proEtale_tensor_composition_unit
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
     (R_V : Sheaf (ProEt.topology V) CommRingCat.{u + 1})
@@ -167,6 +274,145 @@ theorem proEtale_tensor_composition_unit
           (proEtaleRingModuleAdjunction (h ≫ k) R_V R_Z c_hk).unit.app M ≫
             d.hom.app ((proEtaleRingModulePullback (h ≫ k) R_V R_Z c_hk).obj M)) →
         t' = t.hom) := by
-  sorry
+  let : HasWeakSheafify (ProEt.topology Z) CommRingCat.{u + 1} := inferInstance
+  let : HasWeakSheafify (ProEt.topology W) CommRingCat.{u + 1} := inferInstance
+  let : HasWeakSheafify (ProEt.topology V) CommRingCat.{u + 1} := inferInstance
+  let ρk := (show (sheafCompose (ProEt.topology V)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R_V ⟶
+      ((proEtaleBaseChange k).sheafPushforwardContinuous RingCat.{u + 1}
+        (ProEt.topology V) (ProEt.topology W)).obj
+          ((sheafCompose (ProEt.topology W)
+            (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R_W) from
+    ⟨Functor.whiskerRight (proEtaleRingDirectImageMap k R_V R_W c_k).hom
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩)
+  let ρh := (show (sheafCompose (ProEt.topology W)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R_W ⟶
+      ((proEtaleBaseChange h).sheafPushforwardContinuous RingCat.{u + 1}
+        (ProEt.topology W) (ProEt.topology Z)).obj
+          ((sheafCompose (ProEt.topology Z)
+            (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R_Z) from
+    ⟨Functor.whiskerRight (proEtaleRingDirectImageMap h R_W R_Z c_h).hom
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩)
+  let ρhk := (show (sheafCompose (ProEt.topology V)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R_V ⟶
+      ((proEtaleBaseChange (h ≫ k)).sheafPushforwardContinuous RingCat.{u + 1}
+        (ProEt.topology V) (ProEt.topology Z)).obj
+          ((sheafCompose (ProEt.topology Z)
+            (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R_Z) from
+    ⟨Functor.whiskerRight (proEtaleRingDirectImageMap (h ≫ k) R_V R_Z c_hk).hom
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩)
+  let : (proEtaleBaseChange k ⋙ proEtaleBaseChange h).IsContinuous
+      (ProEt.topology V) (ProEt.topology Z) :=
+    Functor.isContinuous_comp _ _ (ProEt.topology V) (ProEt.topology W)
+      (ProEt.topology Z)
+  let ρiter := ρk ≫ ((proEtaleBaseChange k).sheafPushforwardContinuous
+    RingCat.{u + 1} (ProEt.topology V) (ProEt.topology W)).map ρh
+  have he : ρhk ≫ (Functor.sheafPushforwardContinuousNatTrans
+      (MorphismProperty.Over.pullbackComp h k).inv RingCat.{u + 1}
+      (ProEt.topology V) (ProEt.topology Z)).app
+        ((sheafCompose (ProEt.topology Z)
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R_Z) = ρiter := by
+    ext U r
+    exact congrArg (fun z ↦ (z.hom.app U).hom r)
+      (coefficient_comp h k R_V R_W R_Z c_k c_h c_hk hc_hk)
+  let d : proEtaleRingModuleDirectImage (h ≫ k) R_V R_Z c_hk ≅
+      proEtaleRingModuleDirectImage h R_W R_Z c_h ⋙
+        proEtaleRingModuleDirectImage k R_V R_W c_k :=
+    SheafOfModules.pushforwardCongr₂
+      (F := proEtaleBaseChange k ⋙ proEtaleBaseChange h)
+      (G := proEtaleBaseChange (h ≫ k))
+      (J := ProEt.topology V) (K := ProEt.topology Z) (φ := ρhk) (ψ := ρiter)
+      (MorphismProperty.Over.pullbackComp h k).symm he ≪≫
+        (SheafOfModules.pushforwardComp ρk ρh).symm
+  let adj := proEtaleRingModuleAdjunction (h ≫ k) R_V R_Z c_hk
+  let adjiter := (proEtaleRingModuleAdjunction k R_V R_W c_k).comp
+    (proEtaleRingModuleAdjunction h R_W R_Z c_h)
+  obtain ⟨t, ht⟩ := mate_iso adj adjiter d
+  have hforward : ∀ (M : proEtaleRingModules V R_V)
+        (U : V.ProEt) (T : W.ProEt) (P : Z.ProEt)
+        (p : T ⟶ (proEtaleBaseChange k).obj U)
+        (q : P ⟶ (proEtaleBaseChange h).obj T)
+        (m : M.val.obj (op U)) (a : R_W.obj.obj (op T)) (b : R_Z.obj.obj (op P)),
+        (t.hom.app M).val.app (op P)
+          (proEtalePullbackTensorGenerator h R_W R_Z c_h
+            ((proEtaleRingModulePullback k R_V R_W c_k).obj M) T P q
+            (proEtalePullbackTensorGenerator k R_V R_W c_k M U T p m a) b) =
+          proEtalePullbackTensorGenerator (h ≫ k) R_V R_Z c_hk M U P
+            (q ≫ (proEtaleBaseChange h).map p ≫
+              (MorphismProperty.Over.pullbackComp h k).inv.app U) m
+            (proEtalePullbackTensorScalar h R_W R_Z c_h T P q a * b) := by
+    intro M U T P p q m a b
+    have hu := congrArg (fun z ↦ z.val.app (op U) m) (ht M)
+    change (t.hom.app M).val.app (op ((proEtaleBaseChange h).obj
+        ((proEtaleBaseChange k).obj U)))
+        (((proEtaleRingModuleAdjunction h R_W R_Z c_h).unit.app
+          ((proEtaleRingModulePullback k R_V R_W c_k).obj M)).val.app
+            (op ((proEtaleBaseChange k).obj U))
+              (((proEtaleRingModuleAdjunction k R_V R_W c_k).unit.app M).val.app
+                (op U) m)) =
+      ((proEtaleRingModulePullback (h ≫ k) R_V R_Z c_hk).obj M).val.map
+        ((MorphismProperty.Over.pullbackComp h k).inv.app U).op
+          (((proEtaleRingModuleAdjunction (h ≫ k) R_V R_Z c_hk).unit.app M).val.app
+            (op U) m) at hu
+    unfold proEtalePullbackTensorGenerator
+    rw [unit_smul]
+    erw [PresheafOfModules.map_smul]
+    rw [map_smul, map_smul, unit_restrict]
+    have hnq := PresheafOfModules.naturality_apply (t.hom.app M).val q.op
+      (((proEtaleRingModulePullback h R_W R_Z c_h).obj
+        ((proEtaleRingModulePullback k R_V R_W c_k).obj M)).val.map
+          ((proEtaleBaseChange h).map p).op
+        (((proEtaleRingModuleAdjunction h R_W R_Z c_h).unit.app
+          ((proEtaleRingModulePullback k R_V R_W c_k).obj M)).val.app
+            (op ((proEtaleBaseChange k).obj U))
+          (((proEtaleRingModuleAdjunction k R_V R_W c_k).unit.app M).val.app
+            (op U) m)))
+    dsimp only [Functor.comp_obj] at hnq
+    have hnp := PresheafOfModules.naturality_apply (t.hom.app M).val
+      ((proEtaleBaseChange h).map p).op
+      (((proEtaleRingModuleAdjunction h R_W R_Z c_h).unit.app
+        ((proEtaleRingModulePullback k R_V R_W c_k).obj M)).val.app
+          (op ((proEtaleBaseChange k).obj U))
+        (((proEtaleRingModuleAdjunction k R_V R_W c_k).unit.app M).val.app
+          (op U) m))
+    have heq := hnq.trans (congrArg (fun z ↦
+      ((proEtaleRingModulePullback (h ≫ k) R_V R_Z c_hk).obj M).val.map q.op z)
+        (hnp.trans (congrArg (fun z ↦
+          ((proEtaleRingModulePullback (h ≫ k) R_V R_Z c_hk).obj M).val.map
+            ((proEtaleBaseChange h).map p).op z) hu)))
+    have hs := congrArg (fun z ↦
+      b • (proEtalePullbackTensorScalar h R_W R_Z c_h T P q a • z)) heq
+    have hscalar :
+        (((sheafCompose (ProEt.topology Z)
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R_Z).obj.map q.op)
+            (((proEtaleRingDirectImageMap h R_W R_Z c_h).hom.app (op T)).hom a) =
+          proEtalePullbackTensorScalar h R_W R_Z c_h T P q a := rfl
+    simp only [hscalar, op_comp,
+      PresheafOfModules.map_comp_apply, ← mul_smul, mul_comm] at hs ⊢
+    convert hs using 1 <;> rfl
+  refine ⟨d, t, ?_, hforward, ?_, ?_, ?_⟩
+  · intro N U m
+    rfl
+  · intro M U P p m b
+    have hf := hforward M U ((proEtaleBaseChange k).obj U) P (𝟙 _)
+      (p ≫ (MorphismProperty.Over.pullbackComp h k).hom.app U) m 1 b
+    simp only [proEtalePullbackTensorScalar, map_one, one_mul] at hf
+    have hp : (p ≫ (MorphismProperty.Over.pullbackComp h k).hom.app U) ≫
+        (proEtaleBaseChange h).map (𝟙 ((proEtaleBaseChange k).obj U)) ≫
+          (MorphismProperty.Over.pullbackComp h k).inv.app U = p :=
+      comp_iso_map_id (proEtaleBaseChange h)
+        ((MorphismProperty.Over.pullbackComp h k).app U) p
+    rw [hp] at hf
+    let ti := (t.inv.app M).val.app (op P)
+    change ti _ = _
+    exact (congrArg ti hf).symm.trans
+      (iso_inv_hom_apply (t.app M) (op P) _)
+  · intro M
+    exact (composite_unit_map (proEtaleRingModuleAdjunction k R_V R_W c_k)
+      (proEtaleRingModuleAdjunction h R_W R_Z c_h) M (t.hom.app M)).symm.trans (ht M)
+  · intro t' ht'
+    apply NatTrans.ext
+    funext M
+    exact adjunction_map_injective adjiter ((ht' M).trans (ht M).symm)
 
 end AlgebraicGeometry.Scheme
