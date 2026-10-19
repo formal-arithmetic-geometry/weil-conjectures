@@ -7,10 +7,10 @@ module
 public import Sheaf.CategoryTheory.SheafTensorStructure
 public import Sheaf.CategoryTheory.PresheafTensorInternalHom
 
+import Mathlib.CategoryTheory.Monoidal.Braided.Reflection
+import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 import Mathlib.CategoryTheory.Adjunction.Limits
 import Mathlib.CategoryTheory.Sites.Sheafification
-import Mathlib.CategoryTheory.Sites.Abelian
-import Mathlib.CategoryTheory.Limits.Shapes.Biproducts
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-!
@@ -136,6 +136,84 @@ theorem sfbSheafTensorClosed
     [MonoidalPreadditive A]
     (J : GrothendieckTopology C) [HasWeakSheafify J A] :
     Nonempty (SfbSheafTensorClosedData (sfbSheafTensorStructure (A := A) J)) := by
-  sorry
+  let h := presheaf_enrichedHoms_exist (C := C) (A := A)
+  let : ∀ (F G : Cᵒᵖ ⥤ A), Enriched.FunctorCategory.HasEnrichedHom A F G := h.1
+  let : ∀ (F G : Cᵒᵖ ⥤ A), Enriched.FunctorCategory.HasFunctorEnrichedHom A F G := h.2
+  let : MonoidalClosed (Cᵒᵖ ⥤ A) := MonoidalClosed.FunctorCategory.monoidalClosed
+  let S := sfbSheafTensorStructure (A := A) J
+  let := S.monoidal
+  let := S.symmetric
+  let := S.sheafificationMonoidal
+  let a := presheafToSheaf J A
+  let adj := sheafificationAdjunction J A
+  let e (F G : Sheaf J A) : a.obj (F.obj ⊗ G.obj) ≅ F ⊗ G :=
+    (Functor.Monoidal.μIso a F.obj G.obj).symm ≪≫
+      tensorIso (asIso (adj.counit.app F)) (asIso (adj.counit.app G))
+  have enat {F F' G G' : Sheaf J A} (f : F' ⟶ F) (g : G' ⟶ G) :
+      (e F' G').hom ≫ (f ⊗ₘ g) = a.map (f.hom ⊗ₘ g.hom) ≫ (e F G).hom := by
+    dsimp only [e, Iso.trans_hom, Iso.symm_hom, tensorIso, asIso_hom]
+    rw [Category.assoc, tensorHom_comp_tensorHom,
+      ← adj.counit_naturality f, ← adj.counit_naturality g,
+      ← tensorHom_comp_tensorHom]
+    simp only [← Category.assoc]
+    congr 1
+    exact Functor.OplaxMonoidal.δ_natural a f.hom g.hom
+  let E (F G H : Sheaf J A) : (F ⊗ G ⟶ H) ≃ (G ⟶ sfbSheafInternalHom J F H) :=
+    (Iso.homCongr (e F G).symm (Iso.refl H)).trans
+      ((adj.homEquiv _ H).trans
+        (((ihom.adjunction F.obj).homEquiv G.obj H.obj).trans
+          (Sheaf.homEquiv (X := G) (Y := sfbSheafInternalHom J F H)).symm))
+  have eb (F G H : Sheaf J A) (t : F ⊗ G ⟶ H) :
+      ((E F G H) t).hom = MonoidalClosed.curry (adj.homEquiv _ H ((e F G).hom ≫ t)) := by
+    change (sheafToPresheaf J A).map ((E F G H) t) = _
+    simp [E, Iso.homCongr, Sheaf.homEquiv, Functor.FullyFaithful.homEquiv,
+      MonoidalClosed.curry]
+    rfl
+  have nat : ∀ (F F' G G' H H' : Sheaf J A) (f : F' ⟶ F) (g : G' ⟶ G)
+      (h : H ⟶ H') (t : F ⊗ G ⟶ H),
+      E F' G' H' ((f ⊗ₘ g) ≫ t ≫ h) =
+        g ≫ E F G H t ≫ sfbSheafInternalHomMap f h := by
+    intro F F' G G' H H' f g h t
+    apply (fullyFaithfulSheafToPresheaf J A).map_injective
+    change ((E F' G' H') ((f ⊗ₘ g) ≫ t ≫ h)).hom =
+      g.hom ≫ ((E F G H) t).hom ≫ (sfbSheafInternalHomMap f h).hom
+    rw [eb, eb]
+    rw [← Category.assoc (e F' G').hom, enat]
+    rw [Category.assoc, adj.homEquiv_naturality_left]
+    rw [← Category.assoc (e F G).hom t h, adj.homEquiv_naturality_right]
+    change MonoidalClosed.curry ((f.hom ⊗ₘ g.hom) ≫
+      adj.homEquiv _ H ((e F G).hom ≫ t) ≫ h.hom) =
+      g.hom ≫ MonoidalClosed.curry (adj.homEquiv _ H ((e F G).hom ≫ t)) ≫
+        ((MonoidalClosed.pre f.hom).app H.obj ≫ (ihom F'.obj).map h.hom)
+    rw [← Category.assoc, MonoidalClosed.curry_natural_right, tensorHom_def', Category.assoc,
+      MonoidalClosed.curry_natural_left, ← MonoidalClosed.curry_pre_app]
+    simp only [Category.assoc]
+    rfl
+  let hc : MonoidalClosed (Sheaf J A) :=
+    Monoidal.Reflective.monoidalClosed adj
+  let := hc
+  have hl (F : Sheaf J A) : PreservesColimitsOfSize.{w, w} (tensorLeft F) :=
+    (ihom.adjunction F).leftAdjoint_preservesColimits
+  have hr (F : Sheaf J A) : PreservesColimitsOfSize.{w, w} (tensorRight F) :=
+    inferInstance
+  have : HasBinaryBiproducts (Sheaf J A) := HasBinaryBiproducts.of_hasBinaryProducts
+  have hal (F : Sheaf J A) : Functor.Additive (tensorLeft F) := by
+    have := preservesBinaryBiproducts_of_preservesBinaryCoproducts (tensorLeft F)
+    exact Functor.additive_of_preservesBinaryBiproducts _
+  have har (F : Sheaf J A) : Functor.Additive (tensorRight F) := by
+    have : PreservesColimitsOfSize.{0, 0} (tensorRight F) :=
+      inferInstance
+    have := preservesBinaryBiproducts_of_preservesBinaryCoproducts (tensorRight F)
+    exact Functor.additive_of_preservesBinaryBiproducts _
+  refine ⟨{
+    closed := hc
+    homEquiv := E
+    natural := nat
+    leftPreservesColimits := hl
+    rightPreservesColimits := hr
+    leftAdditive := hal
+    rightAdditive := har
+    leftRightExact := fun F ↦ (hl F).preservesFiniteColimits
+    rightRightExact := fun F ↦ (hr F).preservesFiniteColimits }⟩
 
 end CategoryTheory

@@ -19,19 +19,19 @@
  ],
  "proof": [
   {
-   "text": "Write $\\iota$ for the inclusion of sheaves into presheaves and $a$ for sheafification. For fixed $\\mathcal F$, the presheaf functor $[\\iota\\mathcal F,-]$ takes $\\iota\\mathcal H$ to a sheaf by [det-def-sfb-sheaf-tensor-hom-sheaf]. Its maps are the internal-hom maps of [det-def-sfb-sheaf-tensor-presheaf]; since the sheaf category is full, these maps are also sheaf morphisms. Thus $Q_{\\mathcal F}(\\mathcal H)=[\\iota\\mathcal F,\\iota\\mathcal H]$ defines a sheaf-valued functor. The same construction is contravariantly functorial in $\\mathcal F$.",
+   "text": "Install the global and slice enriched-Hom existence instances of [det-def-sfb-sheaf-tensor-presheaf]. The specified internal Hom and its maps are the existing presheaf internal Hom bundled as a sheaf, using [det-def-sfb-sheaf-tensor-hom-sheaf] and fullness of the inclusion.",
    "uses": [
     "det-def-sfb-sheaf-tensor-presheaf",
     "det-def-sfb-sheaf-tensor-hom-sheaf"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-hom-sheaf.md",
-    "place": "Statement: internal hom into a sheaf is a sheaf"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-closed.md",
+    "place": "node det-def-sfb-sheaf-tensor-closed, order None"
    }
   },
   {
-   "text": "For sheaves $\\mathcal F,\\mathcal G,\\mathcal H$, the definition of the tensor product in [det-def-sfb-sheaf-tensor-structure], the universal property of [def-weil-pbc-sheafification], and the adjunction stated in [det-def-sfb-sheaf-tensor-presheaf] give\n$$\\operatorname{Hom}_{\\mathrm{Sh}}(\\mathcal F\\otimes\\mathcal G,\\mathcal H)\n=\\operatorname{Hom}_{\\mathrm{Sh}}(a(\\iota\\mathcal F\\otimes_p \\iota\\mathcal G),\\mathcal H)\n\\cong\\operatorname{Hom}_{\\mathrm{PSh}}(\\iota\\mathcal F\\otimes_p \\iota\\mathcal G,\\iota\\mathcal H)\n\\cong\\operatorname{Hom}_{\\mathrm{PSh}}(\\iota\\mathcal G,[\\iota\\mathcal F,\\iota\\mathcal H])\n=\\operatorname{Hom}_{\\mathrm{Sh}}(\\mathcal G,Q_{\\mathcal F}\\mathcal H).$$\nThe last equality uses fullness and [det-def-sfb-sheaf-tensor-hom-sheaf]. The two adjunction bijections are natural, and the first and last identifications simply retain the same underlying morphisms. Their composite is therefore natural in all three variables, including the contravariant variable $\\mathcal F$. This is the required adjunction $\\mathcal F\\otimes-\\dashv Q_{\\mathcal F}$. Together with the symmetric monoidal structure already given in [det-def-sfb-sheaf-tensor-structure], it proves closed symmetric monoidality with the specified internal hom.",
+   "text": "For sheaves F,G define e : a(iF tensor iG) ≅ F tensor G by the inverse tensorator of the strong monoidal sheafification from [det-def-sfb-sheaf-tensor-structure], followed by the tensor of the counit isomorphisms of [def-weil-pbc-sheafification]. Counit and tensorator naturality prove naturality of e. Compose precomposition by e, the sheafification adjunction, the presheaf tensor-Hom adjunction of [det-def-sfb-sheaf-tensor-presheaf], and fullness to obtain E : Hom(F tensor G,H) ≃ Hom(G,Hom(F,H)). After applying the faithful sheaf inclusion, naturality in F,G,H follows from naturality of e, both naturality identities for the sheafification adjunction, curry_natural_right, curry_natural_left and curry_pre_app. This proves the stated bijection and its precise three-variable naturality formula.",
    "uses": [
     "det-def-sfb-sheaf-tensor-structure",
     "def-weil-pbc-sheafification",
@@ -41,57 +41,56 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-closed.md",
-    "place": "Statement: displayed tensor-hom bijection and closedness clause; explicit adjunction argument"
+    "place": "node det-def-sfb-sheaf-tensor-closed, order None"
    }
   },
   {
-   "text": "All colimits here are small in the coefficient universe, with the size convention on $C$ of [det-def-sfb-sheaf-tensor-presheaf]. The hypothesis that $\\mathcal A$ is Grothendieck abelian supplies small colimits by [def-sp-grothendieck-abelian]. For a small sheaf diagram $D:I\\to\\mathrm{Sh}(C,\\mathcal A)$, form the presheaf $P$ with $P(U)=\\operatorname{colim}_{i\\in I}(\\iota D_i)(U)$; its restriction maps are induced uniquely by the restriction maps of the diagram. For each presheaf $T$, a map $P\\to T$ is exactly a compatible family $\\iota D_i\\to T$: the objectwise colimit property gives the components, and their naturality follows by uniqueness after precomposition with every colimit map. By [def-weil-pbc-sheafification], maps $aP\\to\\mathcal H$ are therefore exactly compatible sheaf maps $D_i\\to\\mathcal H$. This is the universal property of [def-weil-pbc-category-colimit], so $aP$ is the colimit of $D$. This also applies to the empty diagram and to every finite diagram.",
+   "text": "Apply Mathlib CategoryTheory.Monoidal.Reflective.monoidalClosed to the sheafification adjunction of [def-weil-pbc-sheafification], with the strong monoidal reflector of [det-def-sfb-sheaf-tensor-structure] and the presheaf closed structure of [det-def-sfb-sheaf-tensor-presheaf]. This is precisely Day reflection in the unit route and supplies the closed structure field; the specified internal Hom identification and naturality were established explicitly in the preceding step.",
    "uses": [
-    "det-def-sfb-sheaf-tensor-presheaf",
-    "def-sp-grothendieck-abelian",
     "def-weil-pbc-sheafification",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Definition 002F (definition-colimit), universal property; elementary application of sheafification"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-left-adjoint-preserves-colimits] to the adjunction of step 2. It proves that $\\mathcal F\\otimes-$ preserves every small colimit constructed in step 3. The symmetry from [det-def-sfb-sheaf-tensor-structure] also gives a natural bijection\n$$\\operatorname{Hom}_{\\mathrm{Sh}}(\\mathcal G\\otimes\\mathcal F,\\mathcal H)\\cong\\operatorname{Hom}_{\\mathrm{Sh}}(\\mathcal F\\otimes\\mathcal G,\\mathcal H)\\cong\\operatorname{Hom}_{\\mathrm{Sh}}(\\mathcal G,Q_{\\mathcal F}\\mathcal H),$$\nwhere the first map is precomposition with the symmetry $\\mathcal F\\otimes\\mathcal G\\to\\mathcal G\\otimes\\mathcal F$. Hence $-\\otimes\\mathcal F$ is also left adjoint to $Q_{\\mathcal F}$ and the same cited theorem proves preservation of every small colimit for it.",
-   "uses": [
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "det-def-sfb-sheaf-tensor-structure"
+    "det-def-sfb-sheaf-tensor-structure",
+    "det-def-sfb-sheaf-tensor-presheaf"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0038, lemma-adjoint-exact, part (1) and its proof"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-closed.md",
+    "place": "node det-def-sfb-sheaf-tensor-closed, order None"
    }
   },
   {
-   "text": "The sheaf category is additive, as needed for the last clause. Indeed, the abelian-category hypothesis on $\\mathcal A$ in [det-def-sfb-sheaf-tensor-presheaf] supplies the structures listed in [def-sp-abelian]. Sums and negatives of sheaf morphisms are taken componentwise and remain natural because composition in $\\mathcal A$ is bilinear. The zero presheaf is a sheaf. The pointwise biproduct $B(U)=\\mathcal G(U)\\oplus\\mathcal H(U)$ is also a sheaf: for any test object $A\\in\\mathcal A$, maps $A\\to B(U)$ are pairs of maps to the two factors; matching pairs glue uniquely coordinate by coordinate because $\\mathcal G$ and $\\mathcal H$ are sheaves. The pointwise inclusions and projections are natural and satisfy $p_ri_s=\\delta_{rs}$ and $i_1p_1+i_2p_2=1$. They are thus a biproduct in the sense of [def-weil-additive-category].",
+   "text": "The tensorLeft adjunction of the reflected closed structure preserves colimits in universe w by [lem-weil-pbc-left-adjoint-preserves-colimits]. The braided closed-category instance in Mathlib.CategoryTheory.Monoidal.Closed.Braided gives the analogous preservation for tensorRight using the symmetry of [det-def-sfb-sheaf-tensor-structure]. No construction of chosen sheaf colimits is necessary: preservation is obtained directly from the adjunctions. The coefficient size hypothesis is exactly [def-sp-grothendieck-abelian], as used to obtain the presheaf enriched Homs.",
    "uses": [
-    "det-def-sfb-sheaf-tensor-presheaf",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "det-def-sfb-sheaf-tensor-structure",
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-closed.md",
+    "place": "node det-def-sfb-sheaf-tensor-closed, order None"
+   }
+  },
+  {
+   "text": "The coefficient preadditivity from [def-sp-abelian] induces preadditivity of sheaves. Sheaves have binary products by the existing sheaf limit instances, so HasBinaryBiproducts.of_hasBinaryProducts supplies the binary biproducts of [def-weil-additive-category].",
+   "uses": [
     "def-sp-abelian",
     "def-weil-additive-category"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Section Additive categories: pointwise verification of zero object, preadditivity and biproduct identities"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-closed.md",
+    "place": "node det-def-sfb-sheaf-tensor-closed, order None"
    }
   },
   {
-   "text": "Let $T$ be either tensor functor. Step 4 says that $T$ preserves zero objects and binary coproducts. Under the canonical coproduct identification $T(X\\oplus Y)\\cong T(X)\\oplus T(Y)$, it carries inclusions to inclusions. A zero morphism factors through the zero object, so $T(0)=0$ on morphisms; consequently it carries the projections to projections as well, by their compositions with the two inclusions. It then carries diagonals to diagonals, codiagonals to codiagonals, and $f\\oplus g$ to $T(f)\\oplus T(g)$, by these same component identities. Applying $T$ to\n$$f+g=\\nabla_Y\\circ(f\\oplus g)\\circ\\Delta_X$$\ntherefore gives $T(f+g)=T(f)+T(g)$, exactly additivity as defined in [def-weil-pbc-additive-functor]. Finally every finite diagram is a small diagram, so step 4 says that $T$ preserves all finite colimits. This is right exactness (Stacks Tag 0034, definition-exact), including preservation of cokernels. Thus both tensor functors are additive and right exact.",
+   "text": "For each tensor functor, use preservesBinaryBiproducts_of_preservesBinaryCoproducts and Functor.additive_of_preservesBinaryBiproducts to obtain the Additive property of [def-weil-pbc-additive-functor]. For tensorRight explicitly instantiate preservation in universe zero before this inference. For each tensor functor, PreservesColimitsOfSize.preservesFiniteColimits gives right exactness, with no change to the universe-w preservation fields. Package the nine fields into the required Nonempty structure.",
    "uses": [
     "def-weil-pbc-additive-functor"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0DLP, lemma-additive-functor, proof of (2) implies (1); categories.tex Tag 0034, definition-exact"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-closed.md",
+    "place": "node det-def-sfb-sheaf-tensor-closed, order None"
    }
   }
  ],
@@ -100,9 +99,8 @@
   "det-def-sfb-sheaf-tensor-hom-sheaf",
   "det-def-sfb-sheaf-tensor-structure",
   "def-weil-pbc-sheafification",
-  "def-sp-grothendieck-abelian",
-  "def-weil-pbc-category-colimit",
   "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-sp-grothendieck-abelian",
   "def-sp-abelian",
   "def-weil-additive-category",
   "def-weil-pbc-additive-functor"
@@ -110,7 +108,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-closed.md",
-  "place": "Closedness and exactness clauses; the imported adjunction argument expanded, with Stacks 0038 and the explicit biproduct calculation of 0DLP"
+  "place": "B2 Lean proof: explicit tensor-Hom equivalence and three-variable naturality; Day reflection, adjoint colimit preservation and additive-functor biproduct API. Unit route unchanged."
  },
  "mathlib_searches": [
   {
@@ -232,5 +230,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261019T002503-L-2140591",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

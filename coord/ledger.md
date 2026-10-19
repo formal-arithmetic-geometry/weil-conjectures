@@ -16606,3 +16606,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:25 L: merged deliver/A9/Sheaf.Paper.DerivedNormalizationArrows (stage 3; reviewer PASS; first push; landing 20261019T002502-L-2140193 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:25 L: merged deliver/A9/Sheaf.SixFunctors.ProEtale.SmallCoefficientDerivedCompletion (stage 3; reviewer PASS; first push; landing 20261019T002502-L-2140297 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:25 L: merged deliver/B2/Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients (stage 3; reviewer PASS; first push; landing 20261019T002503-L-2140489 (proof); batch 20261019T002449; modules 1; new nodes 0)
+- 00:25 L: merged deliver/B2/Sheaf.CategoryTheory.SheafTensorClosed (stage 3; reviewer PASS; first push; landing 20261019T002503-L-2140591 (proof); batch 20261019T002449; modules 1; new nodes 0)
