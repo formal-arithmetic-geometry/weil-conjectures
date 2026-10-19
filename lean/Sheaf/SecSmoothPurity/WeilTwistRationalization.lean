@@ -7,7 +7,6 @@ module
 public import Sheaf.Paper.SfRationalizationKaroubi
 public import Sheaf.Paper.IntrinsicCoefficientTwists
 import Sheaf.CategoryTheory.SemilinearScalarLocalization
-import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
 
 /-! # Rationalization of inverse integral twists
 
@@ -50,6 +49,7 @@ noncomputable def localizedIntegralFunctor
     (sfIntegralConstructibleCategory l E S)
     (Padic.coefficientExtensionUniformizer l E) F
 
+set_option linter.unusedVariables false in
 /-- An exact linear inverse pair on the intrinsic integral category descends to
 an exact inverse pair on its intrinsic raw rationalization.
 Source: `prop-weil-twist-preserves.md`, proof, final sentence
@@ -133,6 +133,67 @@ theorem integral_twist_rationalization
       Nonempty (localizedIntegralFunctor l E S V ⋙
         localizedIntegralFunctor l E S U ≅
         𝟭 (sfRationalConstructibleCategory l E S))) := by
-  sorry
+  let R := Padic.coefficientExtensionIntegers l E
+  let C := sfIntegralConstructibleCategory l E S
+  let p : R := Padic.coefficientExtensionUniformizer l E
+  have hp : IsUnit (algebraMap R (Localization.Away p) ((RingHom.id R) p)) :=
+    IsLocalization.Away.algebraMap_isUnit p
+  have hlinear (F : C ⥤ C) [F.Additive] [F.Linear R] :
+      ScalarLocalization.extension p p (RingHom.id R) hp F
+        (ScalarLocalization.isSemilinear_of_linear F) =
+      ScalarLocalization.map R C p F :=
+    (ScalarLocalization.extension_id_and_linear (C := C) p).2 F
+  have hshift : shiftFunctor (sfRationalConstructibleCategory l E S) (1 : ℤ) =
+      ScalarLocalization.map R C p (shiftFunctor C (1 : ℤ)) :=
+    (sfRationalTriangulationDatum l E S).choose_spec.choose_spec.1
+  let : (ScalarLocalization.localization R C p).CommShift ℤ :=
+    sfRationalLocalizationCommShift l E S
+  have hQ : ∀ K : C,
+      HEq (((ScalarLocalization.localization R C p).commShiftIso (1 : ℤ)).hom.app K)
+        (𝟙 ((ScalarLocalization.localization R C p).obj
+          ((shiftFunctor C (1 : ℤ)).obj K))) :=
+    (sfRationalTriangulationDatum l E S).choose_spec.choose_spec.2
+      |>.choose_spec.choose_spec.1
+  have hdist : ∀ Δ : Pretriangulated.Triangle (sfRationalConstructibleCategory l E S),
+      Δ ∈ distTriang (sfRationalConstructibleCategory l E S) ↔
+        ∃ Δ₀ : Pretriangulated.Triangle C, Δ₀ ∈ distTriang C ∧
+          Nonempty (Δ ≅ (ScalarLocalization.localization R C p).mapTriangle.obj Δ₀) :=
+    (sfRationalTriangulationDatum l E S).choose_spec.choose_spec.2
+      |>.choose_spec.choose_spec.2.choose_spec.2.2
+  have hexact (F : C ⥤ C) [F.Additive] [F.Linear R]
+      [F.CommShift ℤ] [F.IsTriangulated] :
+      ∃ cs : (ScalarLocalization.map R C p F).CommShift ℤ,
+        (fun [commInst : (ScalarLocalization.map R C p F).CommShift ℤ] ↦
+          (ScalarLocalization.map R C p F).IsTriangulated) (commInst := cs) := by
+    have he := ScalarLocalization.extension_exact p p (RingHom.id R) hp
+      hshift hshift hQ hQ hdist hdist F (ScalarLocalization.isSemilinear_of_linear F)
+    rw [hlinear F] at he
+    obtain ⟨cs, hcs⟩ := he
+    exact ⟨cs, hcs.1⟩
+  have hpair (F G : C ⥤ C) [F.Additive] [G.Additive] [F.Linear R] [G.Linear R]
+      (e : F ⋙ G ≅ 𝟭 C) :
+      Nonempty (ScalarLocalization.map R C p F ⋙ ScalarLocalization.map R C p G ≅
+        𝟭 (ScalarLocalization R C p)) := by
+    have hcomp := (ScalarLocalization.extension_comp p p (RingHom.id R) hp
+      p (RingHom.id R) hp F G (ScalarLocalization.isSemilinear_of_linear F)
+      (ScalarLocalization.isSemilinear_of_linear G)).2
+    change ScalarLocalization.extension p p (RingHom.id R) hp (F ⋙ G)
+      (ScalarLocalization.isSemilinear_of_linear (F ⋙ G)) = _ at hcomp
+    rw [hlinear (F ⋙ G), hlinear F, hlinear G] at hcomp
+    have ei := ScalarLocalization.extensionNatIso p p (RingHom.id R) hp
+      (ScalarLocalization.isSemilinear_of_linear (F ⋙ G))
+      (ScalarLocalization.isSemilinear_of_linear (𝟭 C)) e
+    rw [hlinear (F ⋙ G),
+      (ScalarLocalization.extension_id_and_linear (C := C) p).1] at ei
+    exact ⟨eqToIso hcomp.symm ≪≫ ei⟩
+  have hUV := hpair U V η
+  have hVU := hpair V U ε
+  refine ⟨?_, ?_, hexact U, hexact V, hUV, hVU, ?_⟩
+  · intro K L a f
+    exact heq_of_eq (LinearMap.baseChange_tmul (U.mapLinearMap R) a f)
+  · intro K L a f
+    exact heq_of_eq (LinearMap.baseChange_tmul (V.mapLinearMap R) a f)
+  · intro D hl m _ _
+    exact ⟨hUV, hVU⟩
 
 end WeilConjectures

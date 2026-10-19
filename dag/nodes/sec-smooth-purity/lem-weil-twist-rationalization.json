@@ -16,7 +16,18 @@
  ],
  "proof": [
   {
-   "text": "Instantiate [lem-pur-semilinear-scalar-localization] with R=S=\\mathcal O_E, t=u=\\varpi_E and the identity coefficient map. The hypotheses that \\mathcal C is an \\mathcal O_E-linear category and that U and V are additive linear functors are part of the stated exact-functor hypotheses; the scalar localization is exactly the raw category \\mathcal C[1/\\varpi_E] of [def-weil-rationalization-karoubi]. The lemma therefore gives induced functors \\bar U and \\bar V, on the same objects, whose arrows satisfy \\bar U(f\\otimes a)=U(f)\\otimes a and \\bar V(f\\otimes a)=V(f)\\otimes a.",
+   "text": "The canonical localizedIntegralFunctor is ScalarLocalization.map on the recorded raw rational category [def-weil-rationalization-karoubi]. Its Hom map is the base change of the integral linear Hom map. Apply Mathlib LinearMap.baseChange_tmul to obtain both displayed pure-tensor HEq formulas.",
+   "uses": [
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
+    "place": "Proof, final sentence: integral twists and passage to rational coefficients; rationalization of the integral inverse pair in returned item step 9."
+   }
+  },
+  {
+   "text": "Specialize [lem-pur-semilinear-scalar-localization] to the identity homomorphism of O_E and the same uniformizer on both sides. Its extension_id_and_linear identifies the semilinear extension with ScalarLocalization.map. Extract the shift equality, canonical comparison normalization, and image-triangle characterization from the chosen sfRationalTriangulationDatum of [def-weil-rationalization-karoubi]. Apply extension_exact separately to U and V and retain the resulting shift structure and triangulated-functor property.",
    "uses": [
     "lem-pur-semilinear-scalar-localization",
     "def-weil-rationalization-karoubi"
@@ -24,54 +35,40 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
-    "place": "Proof, final sentence: integral twists and passage to rational coefficients; rationalization of the integral inverse pair"
+    "place": "Proof, final sentence: integral twists and passage to rational coefficients; rationalization of the integral inverse pair in returned item step 9."
    }
   },
   {
-   "text": "The same lemma says that exact integral functors induce exact localized functors under the linear triangulated hypotheses. Applying its natural-transformation clause to the given inverse isomorphisms \\eta:VU\\Rightarrow\\operatorname{id}_{\\mathcal C} and \\epsilon:UV\\Rightarrow\\operatorname{id}_{\\mathcal C} gives localized natural isomorphisms \\bar\\eta:\\bar V\\bar U\\Rightarrow\\operatorname{id}_{\\mathcal C[1/\\varpi_E]} and \\bar\\epsilon:\\bar U\\bar V\\Rightarrow\\operatorname{id}_{\\mathcal C[1/\\varpi_E]}. The localized composites are the extensions of VU and UV: \\bar V\\bar U is additive, has the object map of VU, agrees with Q\\,VU on integral arrows (since \\bar V(Q(Uf))=Q(VUf)) and is semilinear for the identity of E, so the uniqueness clause of that lemma gives \\bar V\\bar U=\\overline{VU}; likewise \\bar U\\bar V=\\overline{UV} and \\overline{\\operatorname{id}_{\\mathcal C}}=\\operatorname{id}_{\\mathcal C[1/\\varpi_E]}. Hence these components have exactly the displayed endpoints, as also recorded in the lemma's composition and whiskering compatibility.",
+   "text": "For each given integral inverse isomorphism e:F followed by G isomorphic to the identity, apply extensionNatIso of [lem-pur-semilinear-scalar-localization]. Use extension_comp, extension_id_and_linear and proof irrelevance to identify its source with the composite of the two ScalarLocalization.map functors and its target with the rational identity. Compose with eqToIso of the composite equality. Apply this construction to eta and epsilon, giving both requested Nonempty inverse-isomorphism assertions.",
    "uses": [
     "lem-pur-semilinear-scalar-localization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
-    "place": "Proof, final sentence: rationalization of the integral inverse pair"
+    "place": "Proof, final sentence: integral twists and passage to rational coefficients; rationalization of the integral inverse pair in returned item step 9."
    }
   },
   {
-   "text": "The localized functors are exact by Step 2 and satisfy both inverse identities by the two localized natural isomorphisms. Hence \\bar U and \\bar V are exact inverse equivalences of the rationalized category.",
-   "uses": [
-    "lem-pur-semilinear-scalar-localization"
-   ],
+   "text": "Assemble the two pure-tensor formulas, two exactness assertions and two inverse-isomorphism assertions. In the twist specialization, the desired conclusion is precisely the conjunction of those same two inverse-isomorphism assertions, so reuse them for every D, hl and m. The twist-identification hypotheses remain in the statement and no additional coefficient-twist property is required.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
-    "place": "Proof, final sentence: passage from the integral inverse pair to rational coefficients"
-   }
-  },
-  {
-   "text": "For U(C)=C(m) and V(C)=C(-m), [def-coefficient-twists-detailed] defines these object assignments and their actions by derived tensor with the corresponding integral twist objects. Under the assumed inverse-isomorphism hypothesis, Steps 1--3 apply verbatim, and the resulting \\bar U and \\bar V are precisely the induced twists on D^b_c(S,E) because [def-weil-rationalization-karoubi] keeps the integral representatives as objects and tensors every integral morphism with the scalar a\\in E.",
-   "uses": [
-    "def-coefficient-twists-detailed",
-    "def-weil-rationalization-karoubi",
-    "lem-pur-semilinear-scalar-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
-    "place": "Proof, final sentence: integral twists and passage to rational coefficients"
+    "place": "Proof, final sentence: integral twists and passage to rational coefficients; rationalization of the integral inverse pair in returned item step 9."
    }
   }
  ],
  "proof_deps": [
-  "lem-pur-semilinear-scalar-localization",
   "def-weil-rationalization-karoubi",
-  "def-coefficient-twists-detailed"
+  "lem-pur-semilinear-scalar-localization"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "R3",
+  "date": "2026-10-19",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
-  "place": "Proof, final sentence: integral twists and passage to rational coefficients; expanded using the generic semilinear scalar-localization lemma"
+  "place": "Final sentence, implemented through the existing semilinear extension, composition, natural-isomorphism and exactness API."
  },
  "mathlib_searches": [
   {
@@ -175,5 +172,15 @@
   "group": "Q131",
   "result": "pass",
   "note": "Reviewed packet, node, dependencies, source, Lean declarations, docstrings, report sections, edge cases, route-pivot constraints, and DAG consistency. Reproduced scompile.py sandbox and library compilation successfully; no substantive defects found."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-ba675",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261019T005412-L-2764727",
+  "kind": "proof",
+  "note": "independent cc review: delivered WeilTwistRationalization.lean (statement unchanged, sorry-free proof via ScalarLocalization extension API) and node proof/proof_deps vs live clone; compiled the module and its importer TwistPreservesFiniteness; empty unit realized list vs the removed import"
  }
 }
