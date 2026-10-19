@@ -9,16 +9,10 @@ public import Sheaf.AlgebraicGeometry.SmoothBaseChangeCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Sheaf.AlgebraicGeometry.OpenDirectImageFiniteCoefficients
-import Sheaf.AlgebraicGeometry.OpenImmersionRestriction
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
 
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
-import Sheaf.Paper.SfCommonStageWeilCohomology
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 /-!
 # Higher direct images along an open immersion
 
@@ -81,6 +75,20 @@ theorem openImmersion_higherDirectImages_constructible_vanishing
         ((_root_.DerivedCategory.homologyFunctor _ q).obj
           ((rightDerivedLowerStar (ModuleCat.{u + 1} Λ) j).obj
             ((_root_.DerivedCategory.singleFunctor _ 0).obj F))))) := by
-  sorry
+  have : Scheme.IsConstructibleSheaf F :=
+    (Scheme.isConstructibleEtaleModuleSheaf_iff F).1 hF
+  have hsingle : DerivedCategory.isBoundedConstructible Λ U
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj F) := by
+    refine ⟨fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff _).2
+      ((DerivedCategory.boundedConstructible_singleFunctor_obj F 0).2 q),
+      0, 0, le_rfl, fun q hq ↦ ?_⟩
+    rcases hq with hq | hq
+    · exact _root_.DerivedCategory.isZero_of_isGE _ 0 q hq
+    · exact _root_.DerivedCategory.isZero_of_isLE _ 0 q hq
+  obtain ⟨hc, a, b, hab, hv⟩ :=
+    isBoundedConstructible_rightDerivedLowerStar_of_isOpenImmersion k Λ N hΛ
+      (X ↘ Spec (.of k)) j _ hsingle
+  refine ⟨hc, ⟨b, fun q hq ↦ hv q (Or.inr hq)⟩, fun q hq ↦ ?_⟩
+  exact isZero_upperStar_homology_rightDerivedLowerStar_singleFunctor Λ j F q (ne_of_gt hq)
 
 end AlgebraicGeometry.Etale

@@ -21,67 +21,43 @@
  ],
  "proof": [
   {
-   "text": "Place $F$ in degree zero. Its only nonzero cohomology sheaf is $F$, so $F[0]\\in D^b_c(U,\\Lambda)$ by [def-weil-pbc-constructible-complexes]. The coefficient convention supplies a positive integer $N$ annihilating the finite commutative ring $\\Lambda$, invertible in $k$, and $j$ is an open immersion of finite-type $k$-schemes. Thus [cor-fin-deligne-open-finite-coefficients] applies with $A=\\Lambda$ and $K=F[0]$. It gives $Rj_*F[0]\\in D^b_c(X,\\Lambda)$. Unpacking bounded constructibility gives constructibility of every $R^qj_*F$ and an integer $b$ such that $R^qj_*F=0$ for $q>b$.",
+   "text": "Convert the given finite-constant-value constructibility of F to the source-library finite-stalk predicate using [lem-weil-pbc-constructible-etale-module-sheaf-comparison]. The proved DerivedCategory.boundedConstructible_singleFunctor_obj gives constructible cohomology of F[0]. Its standard t-structure bounds are both zero, so its cohomology vanishes outside [0,0]. Converting constructibility back gives the exact bounded-constructible predicate of [def-weil-pbc-constructible-complexes].",
    "uses": [
-    "def-weil-pbc-constructible-complexes",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [cor-fin-deligne-open-finite-coefficients] to F[0], with aY the given structure morphism of X and the unchanged coefficient hypothesis [sbc-def-coefficient-conventions]. Unpack its conclusion: the first component proves constructibility in every degree, and the upper endpoint b of the finite cohomology interval proves vanishing for q>b.",
+   "uses": [
+    "cor-fin-deligne-open-finite-coefficients",
     "sbc-def-coefficient-conventions",
-    "cor-fin-deligne-open-finite-coefficients"
+    "def-weil-pbc-constructible-complexes"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-finiteness/thm-fin-open-immersion.md",
-    "place": "Proof, first sentence (finite-coefficient corollary applied in degree zero)"
-   }
+   "elementary": true
   },
   {
-   "text": "Use the module-sheaf version of [def-weil-pbc-direct-image]: for the constant coefficient ring $\\Lambda$, choose a bounded-below K-injective complex $I^\\bullet$ representing $F[0]$, with injective terms. The statement of that node supplies this representative and computes $Rj_*F[0]\\cong Q(j_*I^\\bullet)$. This is a resolution in $\\operatorname{Mod}(U_{\\mathrm{et}},\\Lambda)$; no change of coefficient category or passage to derived abelian direct images is made.",
+   "text": "For the restriction assertion use the already proved source-library support clause of this same blueprint theorem, AlgebraicGeometry.Etale.isZero_upperStar_homology_rightDerivedLowerStar_singleFunctor in WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage. It applies to every module sheaf and q unequal to zero. Its proof computes the derived direct image [def-weil-pbc-direct-image] on a K-injective representative; the module-valued fully faithful pushforward [lem-sc-open-immersion-pushforward-fully-faithful] gives the invertible counit termwise. The exact upperStar functor commutes with homology through mapDerivedCategoryHomologyFunctorIso, identifying the restriction with the cohomology of F[0]. The latter is zero away from degree zero by the standard t-structure. Apply this proved clause with q>0, hence q unequal to zero. No comparison with the separate SheafOfModules encoding is needed.",
    "uses": [
-    "def-weil-pbc-direct-image"
+    "def-weil-pbc-direct-image",
+    "lem-sc-open-immersion-pushforward-fully-faithful"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-finiteness/thm-fin-open-immersion.md",
-    "place": "Proof, sentence choosing an injective resolution; module version of the derived-direct-image definition"
-   }
-  },
-  {
-   "text": "The first assertion of [lem-kun-open-immersion-restriction] says that the abelian-sheaf counit $j^{-1}j_*G\\to G$ is a natural isomorphism. By [prop-weil-pbc-inverse-image-modules-exact], the module inverse image and direct image have these same underlying abelian functors and the same counit. Hence for every module sheaf $M$ its counit $j^*j_*M\\to M$ is an isomorphism of module sheaves: the inverse of an invertible $\\Lambda$-linear map is $\\Lambda$-linear, since applying the original map to the scalar-linearity equation proves it. Apply this to each $I^r$. Naturality with respect to $d_I^r$ makes these counits an isomorphism of complexes $j^*j_*I^\\bullet\\cong I^\\bullet$. Only the underived counit assertion of the cited node is used, not its derived-global-sections clause.",
-   "uses": [
-    "lem-kun-open-immersion-restriction",
-    "prop-weil-pbc-inverse-image-modules-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-finiteness/thm-fin-open-immersion.md",
-    "place": "Proof, identification j^*j_*I = I; explicit counit argument"
-   }
-  },
-  {
-   "text": "The module inverse image $j^*$ is exact by [prop-weil-pbc-inverse-image-modules-exact]. In the formula $\\mathcal H^q(C)=\\ker(d_C^q)/\\operatorname{im}(d_C^{q-1})$ of [def-weil-derived-cohomology-sheaves], exactness preserves the kernel, the image (a kernel of a cokernel), and the quotient. Consequently $j^*\\mathcal H^q(j_*I^\\bullet)\\cong\\mathcal H^q(j^*j_*I^\\bullet)$. By Step 3 the latter is $\\mathcal H^q(I^\\bullet)=\\mathcal H^q(F[0])$, which is zero for $q>0$. Step 2 identifies the left side with the restriction $j^*R^qj_*F$. This proves the remaining assertion.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "def-weil-derived-cohomology-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-finiteness/thm-fin-open-immersion.md",
-    "place": "Proof, final sentence; exactness is Stacks Tag 04JC (lemma-flat-pullback-exact, sites-modules.tex) and the kernel/image computation is written out"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
   "def-weil-pbc-constructible-complexes",
-  "sbc-def-coefficient-conventions",
   "cor-fin-deligne-open-finite-coefficients",
+  "sbc-def-coefficient-conventions",
   "def-weil-pbc-direct-image",
-  "lem-kun-open-immersion-restriction",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "def-weil-derived-cohomology-sheaves"
+  "lem-sc-open-immersion-pushforward-fully-faithful"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-finiteness/thm-fin-open-immersion.md",
-  "place": "Proof, expanded with the existing counit and module exactness nodes; read in the launcher literature cache"
+  "place": "Original finite-coefficient degree-zero argument, using the proved source-library support clause of the same node for the K-injective counit and exact-homology calculation; Lean proof by C6, 2026-10-19."
  },
  "mathlib_searches": [
   {
@@ -227,9 +203,7 @@
   ]
  },
  "tool_uses": [
-  "cor-fin-deligne-open-finite-coefficients",
-  "lem-kun-open-immersion-restriction",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "cor-fin-deligne-open-finite-coefficients"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -256,5 +230,15 @@
   "by": "NV",
   "date": "2026-10-16",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261019T093314-L-2293030",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
