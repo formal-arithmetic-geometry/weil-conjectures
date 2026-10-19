@@ -6,6 +6,7 @@ Authors: SHEAF groups NE, Q24 and NY
 module
 
 public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
+public import Sheaf.AlgebraicGeometry.ComparisonPullbackCoherence
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.CategoryTheory.RingedSiteModules
@@ -18,8 +19,6 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExten
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 /-!
 # Coherent comparison of etale and pro-etale inverse images
 
@@ -229,44 +228,15 @@ noncomputable def supportSiteComparisonCoefficientPullbackIso {X Y : Scheme.{u}}
       (supportSiteComparisonCoefficientDirectImageIso D f).symm).symm
 
 /-- The identity, composition and chosen Cartesian-square equations for the
-canonical comparison. Equations are componentwise on every sheaf, equivalently
+canonical comparison. This reuses `ComparisonPullbackCoherent`: the support-site
+comparison maps above are definitionally the same canonical maps. Equations are
+componentwise on every sheaf, equivalently
 equalities of natural transformations. The square is the specified one, including
 its commutativity transport; it is not replaced by an arbitrary isomorphism.
 Source: blueprint, lem-weil-pbc-comparison-pullback, proof steps 1--4;
 Stacks, Tags 00WX and 0B65 (blueprint: lem-weil-pbc-comparison-pullback). -/
-def supportSiteComparisonPullbackCoherent : Prop :=
-  (∀ (X : Scheme.{u}) (F : Sheaf X.smallEtaleTopology D),
-    (supportSiteComparisonCoefficientPullbackIso D (𝟙 X)).hom.app F ≫
-        (supportSiteProEtaleComparisonId D X).hom.app ((supportSiteComparisonCoefficientPullback
-          D X).obj F) =
-      (supportSiteComparisonCoefficientPullback D X).map ((supportSiteEtaleComparisonId D
-        X).hom.app F)) ∧
-  (∀ (X Y Z : Scheme.{u}) (f : X ⟶ Y) (g : Y ⟶ Z)
-      (F : Sheaf Z.smallEtaleTopology D),
-    (supportSiteComparisonCoefficientPullback D X).map ((supportSiteEtaleComparisonComp D f
-      g).hom.app F) ≫
-        (supportSiteComparisonCoefficientPullbackIso D f).hom.app
-          ((supportSiteEtaleComparisonPullback D g).obj F) ≫
-        (supportSiteProEtaleComparisonPullback D f).map
-          ((supportSiteComparisonCoefficientPullbackIso D g).hom.app F) =
-      (supportSiteComparisonCoefficientPullbackIso D (f ≫ g)).hom.app F ≫
-        (supportSiteProEtaleComparisonComp D f g).hom.app
-          ((supportSiteComparisonCoefficientPullback D Z).obj F)) ∧
-  (∀ (X' X Y' Y : Scheme.{u}) (g' : X' ⟶ X) (f' : X' ⟶ Y')
-      (f : X ⟶ Y) (g : Y' ⟶ Y) (sq : ChosenCartesianSquare g' f' f g)
-      (F : Sheaf Y.smallEtaleTopology D),
-    (supportSiteComparisonCoefficientPullbackIso D f').hom.app
-      ((supportSiteEtaleComparisonPullback D g).obj F) ≫
-        (supportSiteProEtaleComparisonPullback D f').map
-          ((supportSiteComparisonCoefficientPullbackIso D g).hom.app F) ≫
-        (supportSiteProEtaleComparisonSquare D sq).hom.app
-          ((supportSiteComparisonCoefficientPullback D Y).obj F) =
-      (supportSiteComparisonCoefficientPullback D X').map ((supportSiteEtaleComparisonSquare D
-        sq).hom.app F) ≫
-        (supportSiteComparisonCoefficientPullbackIso D g').hom.app
-          ((supportSiteEtaleComparisonPullback D f).obj F) ≫
-        (supportSiteProEtaleComparisonPullback D g').map
-          ((supportSiteComparisonCoefficientPullbackIso D f).hom.app F))
+abbrev supportSiteComparisonPullbackCoherent : Prop :=
+  ComparisonPullbackCoherent D
 
 /-- The canonical isomorphism `ν_U^* u⁻¹ ≅ u⁻¹ ν_V^*` is coherent for sets, abelian
 sheaves and sheaves of modules over every finite discrete ring.
@@ -290,13 +260,18 @@ composition comparisons and the supplied commutativity equation. Both paths on s
 identify the iterated products with `W ×[Y] X'` preserving both projections. Thus the
 right-image maps agree, and injectivity of the adjunction Hom bijections proves the
 specified square equation. These arguments are the node's four proof steps and retain
-all identity, arbitrary-composite and chosen-square cases. -/
+all identity, arbitrary-composite and chosen-square cases.
+
+The existing `comparison_pullback_coherent` proves this argument for the same
+Kan-extension constructions. The support-site comparison, identity, composition
+and square isomorphisms are definitionally equal to its counterparts, so the
+coherence predicate reuses the existing one and the theorem specializes directly. -/
 theorem supportSiteComparison_pullback_coherent :
     supportSiteComparisonPullbackCoherent (Type (u + 1)) ∧
       supportSiteComparisonPullbackCoherent AddCommGrpCat.{u + 1} ∧
       ∀ (Λ : Type (u + 1)) [Ring Λ] [Finite Λ],
         supportSiteComparisonPullbackCoherent (ModuleCat.{u + 1} Λ) := by
-  sorry
+  exact comparison_pullback_coherent
 
 end ProEtale
 end AlgebraicGeometry

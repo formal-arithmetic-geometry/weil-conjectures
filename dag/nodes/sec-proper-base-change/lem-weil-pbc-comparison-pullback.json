@@ -66,7 +66,7 @@
    }
   },
   {
-   "text": "For the specified Cartesian square, expand each square identification as the inverse composition comparison for (f',g), followed by eqToIso along the supplied commutativity equality, followed by the composition comparison for (g',f). The comparison is compatible with transport along equality of scheme morphisms: prove this by substituting equal morphisms, after which both transports are identities. Apply the two composition equations established in step 3 and this transport equation. Cancel the composition isomorphisms to obtain the square equation as an equality of natural isomorphisms, retaining precisely the supplied equality sq.w. This cancellation and whiskering calculation is proved in arbitrary categories before specialization to the etale and pro-etale inverse-image functors. Evaluating hom components gives exactly the componentwise square clause. The generic proof applies to sets, abelian groups, and modules over each finite discrete ring; conjoin these three specializations to obtain the stated theorem.",
+   "text": "For the specified Cartesian square, expand each square identification as the inverse composition comparison for (f',g), followed by eqToIso along the supplied commutativity equality, followed by the composition comparison for (g',f). The comparison is compatible with transport along equality of scheme morphisms: prove this by substituting equal morphisms, after which both transports are identities. Apply the two composition equations established in step 3 and this transport equation. Cancel the composition isomorphisms to obtain the square equation as an equality of natural isomorphisms, retaining precisely the supplied equality sq.w. This cancellation and whiskering calculation is proved in arbitrary categories before specialization to the etale and pro-etale inverse-image functors. Evaluating hom components gives exactly the componentwise square clause. The generic proof applies to sets, abelian groups, and modules over each finite discrete ring; conjoin these three specializations to obtain the stated theorem. The support-prefixed realization reuses the already proved comparison_pullback_coherent in Sheaf.AlgebraicGeometry.ComparisonPullbackCoherence: all the support-prefixed canonical maps are definitionally the same, and ComparisonSquareComponent specialized to comparisonSquareData unfolds to the same square equation. Thus the existing proof of these four steps specializes without a second mate calculation.",
    "uses": [
     "def-weil-pbc-cartesian-square"
    ],
@@ -91,8 +91,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-comparison-pullback.md",
-  "place": "Stage 3 U2: canonical restriction comparisons, injectivity and functoriality of adjoint conjugation, and square pasting from composition and equality transport; the unit route and all public constructions are unchanged"
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tags 0DV0 and 0B65; H2 stage-3 reuse of the existing proof comparison_pullback_coherent in Sheaf.AlgebraicGeometry.ComparisonPullbackCoherence, with identical canonical maps and the same four mathematical steps"
  },
  "mathlib_searches": [
   {
@@ -227,17 +227,17 @@
   "by": "NY",
   "date": "2026-10-16",
   "existing": false,
-  "note": "Section 1(B): the current recorded ComparisonPullbackCoherence imports FiniteCoefficient.UpperLowerStar.Defs, which cannot coexist with the original UpperLowerStar.Defs required by the published supported products (duplicate term(_)_*[_] declaration). This module gives the same canonical restriction/adjunction-mate comparison and its full identity, arbitrary-composite and chosen-Cartesian-square coherence using the original upstream inverse-image API. The previous worker report named the superseded CompactSupportComparisonPullbackCoherence interface; the current recorded interface has the same import incompatibility. All definitions retain the same Kan-extension and unit normalization; only the import family and exported prefix differ.",
+  "note": "H2 stage-3 reuse: the earlier import-family conflict no longer occurs in the published module API. The support-prefixed constructions and all identity, composition and chosen-square maps are definitionally the unprefixed canonical constructions. The support coherence predicate abbreviates ComparisonPullbackCoherent, whose square clause unfolds through ComparisonSquareComponent and comparisonSquareData to the original support-site equation. The proved comparison_pullback_coherent specializes directly; the declaration signature text is unchanged.",
   "fixed_by": "NT-stage2-Codex-712728d22"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-19",
   "by": "L",
-  "reviewer": "X-aca74",
-  "group": "U2",
+  "reviewer": "C-cad3d",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261015T224822-L-2950778",
+  "landing": "20261019T005301-L-2748184",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean, square API expansion, proof and DAG against the original statement and dependencies; compilation and axioms verified, including all four direct importers."
+  "note": "independent cc review: old 3-clause supportSiteComparisonPullbackCoherent vs ComparisonPullbackCoherent D: textually identical bodies under renaming plus rfl for the direct-image, coefficient-pullback and both square isos; clause 3 unfolded field by field; 86/86 direct importers compile; axioms clean"
  }
 }
