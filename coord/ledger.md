@@ -17620,3 +17620,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:42 L: returned deliver/M7/Sheaf.Paper.NormalizedConstructibleTowerLocalEffectivity (reviewer RETURN: (reviewer C-2e50e, head 2e50e3069) H9 / brief point 5 (unused imports in a proved module): in lean/Sheaf/Paper/FiniteCoe)
 - 22:47 L: returned deliver/NP/lem-pur-finite-adjoint-mate-compatibility (reviewer RETURN: L: independent stage-2 immutable head 281b10d770e1: H2/theorem stmt_dep: lem-pur-exceptional-coefficient-comparison is c)
 - 22:49 L: merged deliver/NG/det-sp-tower-p1-adjunction (stage 2; reviewer PASS; parallel immutable checks)
+- 23:03 L: returned deliver/Q03/lem-sf-integral-compactification-comparison-bridge (reviewer RETURN: L: independent stage-2 immutable head 494c4ff8bd68: file-only compilation failed: private overlay Sheaf.SixFunctors.Inte)
