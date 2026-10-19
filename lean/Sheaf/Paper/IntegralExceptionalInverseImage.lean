@@ -11,6 +11,8 @@ public import Sheaf.Paper.EtaleCoefficientSystemAdjoint
 public import Sheaf.Paper.CompletedPullbackTensorComparison
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
+import Mathlib.CategoryTheory.Adjunction.Unique
+import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Integral exceptional inverse image from actual coefficient systems
 
@@ -33,6 +35,85 @@ set_option backward.isDefEq.respectTransparency.types false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry SheafOfModules
 namespace WeilConjectures
+
+private theorem leftAdjointUniqueWithTranspose
+    {C D : Type*} [Category* C] [Category* D]
+    {F F' : C ⥤ D} {G : D ⥤ C} (a : F ⊣ G) (b : F' ⊣ G) :
+    ∃! e : F ≅ F', ∀ X Y (h : F'.obj X ⟶ Y),
+      a.homEquiv X Y (e.hom.app X ≫ h) = b.homEquiv X Y h := by
+  have he : ∀ X Y (h : F'.obj X ⟶ Y),
+      a.homEquiv X Y ((a.leftAdjointUniq b).hom.app X ≫ h) =
+        b.homEquiv X Y h := by
+    intro X Y h
+    rw [a.homEquiv_naturality_right, Adjunction.homEquiv_leftAdjointUniq_hom_app,
+      b.homEquiv_unit]
+  refine ⟨a.leftAdjointUniq b, he, ?_⟩
+  intro e h
+  ext X
+  apply (a.homEquiv X (F'.obj X)).injective
+  simpa only [Category.comp_id] using (h X (F'.obj X) (𝟙 _)).trans
+    (he X (F'.obj X) (𝟙 _)).symm
+
+private theorem rightAdjointUniqueWithTranspose
+    {C D : Type*} [Category* C] [Category* D]
+    {F : C ⥤ D} {G G' : D ⥤ C} (a : F ⊣ G) (b : F ⊣ G') :
+    ∃! e : G ≅ G', ∀ X Y (h : F.obj X ⟶ Y),
+      a.homEquiv X Y h ≫ e.hom.app Y = b.homEquiv X Y h := by
+  have he : ∀ X Y (h : F.obj X ⟶ Y),
+      a.homEquiv X Y h ≫ (a.rightAdjointUniq b).hom.app Y =
+        b.homEquiv X Y h := by
+    intro X Y h
+    rw [a.homEquiv_unit, b.homEquiv_unit, Category.assoc,
+      (a.rightAdjointUniq b).hom.naturality, ← Category.assoc,
+      Adjunction.unit_rightAdjointUniq_hom_app]
+  refine ⟨a.rightAdjointUniq b, he, ?_⟩
+  intro e h
+  ext Y
+  have h₁ := h (G.obj Y) Y (a.counit.app Y)
+  have h₂ := he (G.obj Y) Y (a.counit.app Y)
+  simpa only [Adjunction.homEquiv_unit, Adjunction.right_triangle_components,
+    Category.id_comp] using h₁.trans h₂.symm
+
+private theorem localizationUniqueWithFactors
+    {C D B : Type*} [Category* C] [Category* D] [Category* B]
+    (L : C ⥤ D) (W : MorphismProperty C) [L.IsLocalization W]
+    {F : C ⥤ B} {G H : D ⥤ B} (e : L ⋙ G ≅ F) (f : L ⋙ H ≅ F) :
+    ∃! a : G ≅ H, ∀ X,
+      a.hom.app (L.obj X) ≫ f.hom.app X = e.hom.app X := by
+  let : Localization.Lifting L W F G := ⟨e⟩
+  let : Localization.Lifting L W F H := ⟨f⟩
+  let a := Localization.liftNatIso L W F F G H (Iso.refl F)
+  have ha : ∀ X, a.hom.app (L.obj X) ≫ f.hom.app X = e.hom.app X := by
+    intro X
+    dsimp only [a]
+    rw [Localization.liftNatIso_hom, Localization.liftNatTrans_app]
+    change (e.hom.app X ≫ (𝟙 (F.obj X)) ≫ f.inv.app X) ≫ f.hom.app X = _
+    simp
+  refine ⟨a, ha, ?_⟩
+  intro b hb
+  apply Iso.ext
+  apply Localization.natTrans_ext L W
+  intro X
+  apply (cancel_mono (f.hom.app X)).mp
+  exact (hb X).trans (ha X).symm
+
+private theorem rightDerivedUniqueWithUnit
+    {C D B : Type*} [Category* C] [Category* D] [Category* B]
+    (L : C ⥤ D) (W : MorphismProperty C) [L.IsLocalization W]
+    {F : C ⥤ B} {G H : D ⥤ B} (e : F ⟶ L ⋙ G) (f : F ⟶ L ⋙ H)
+    [G.IsRightDerivedFunctor e W] [H.IsRightDerivedFunctor f W] :
+    ∃! a : G ≅ H, ∀ X,
+      e.app X ≫ a.hom.app (L.obj X) = f.app X := by
+  let a := CategoryTheory.Functor.rightDerivedUnique G H e f W
+  have ha : ∀ X, e.app X ≫ a.hom.app (L.obj X) = f.app X := by
+    intro X
+    simp [a, CategoryTheory.Functor.rightDerivedUnique]
+  refine ⟨a, ha, ?_⟩
+  intro b hb
+  apply Iso.ext
+  apply CategoryTheory.Functor.rightDerived_ext G e W
+  ext X
+  exact (hb X).trans (ha X).symm
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -59,7 +140,12 @@ theorem integralExceptionalIdeal (n : ℕ) :
         Set (integralExceptionalIntegers l E))) ^ (n + 1)).map
           (ULift.ringEquiv : integralExceptionalIntegers l E ≃+*
             Padic.coefficientExtensionIntegers l E).toRingHom := by
-  sorry
+  rw [show Padic.coefficientExtensionIdeal l E (n + 1) =
+      Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
+        Set (Padic.coefficientExtensionIntegers l E)) ^ (n + 1) by rfl]
+  rw [Ideal.map_pow, Ideal.map_span]
+  simp only [Set.image_singleton]
+  congr 1
 
 /-- The explicit quotient equivalence, induced by the identity on integer coefficients.
 Source: blueprint integral construction, coefficient identifications
@@ -107,7 +193,64 @@ theorem integralExceptionalRingMap_comp {m n : ℕ} (h : n ≤ m) :
         (coefficientQuotientMap (J := Scheme.ProEt.topology W)
           (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) h) ≫
             integralExceptionalRingMap l E W n := by
-  sorry
+  have hs (n : ℕ) : integralExceptionalRingMap l E W (n + 1) ≫
+      integralCoefficientSheafTransition l E W n =
+        (sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+          (coefficientQuotientMap (J := Scheme.ProEt.topology W)
+            (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E)
+            (Nat.le_succ n)) ≫ integralExceptionalRingMap l E W n := by
+    unfold integralExceptionalRingMap integralCoefficientSheafTransition coefficientQuotientMap
+    simp only [← CategoryTheory.Functor.map_comp]
+    apply congrArg ((sheafCompose (Scheme.ProEt.topology W)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map)
+    apply congrArg ((constantSheaf (Scheme.ProEt.topology W) CommRingCat.{u + 1}).map)
+    apply CommRingCat.hom_ext
+    apply RingHom.ext
+    intro x
+    obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
+    rfl
+  induction m, h using Nat.le_induction with
+  | base =>
+    have hid : coefficientQuotientMap (J := Scheme.ProEt.topology W)
+        (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E)
+        (Nat.le_refl n) = 𝟙 _ := by
+      unfold coefficientQuotientMap coefficientQuotientSheaf
+      rw [← CategoryTheory.Functor.map_id]
+      apply congrArg ((constantSheaf (Scheme.ProEt.topology W) CommRingCat.{u + 1}).map)
+      apply CommRingCat.hom_ext
+      apply RingHom.ext
+      intro x
+      obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
+      rfl
+    rw [hid, CategoryTheory.Functor.map_id]
+    change _ ≫ (integralCoefficientSheafSystem l E W).map (𝟙 (op n)) = _
+    rw [CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp]
+  | succ m h ih =>
+    have hc : coefficientQuotientMap (J := Scheme.ProEt.topology W)
+        (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E)
+        (h.trans (Nat.le_succ m)) =
+      coefficientQuotientMap (J := Scheme.ProEt.topology W)
+        (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E)
+        (Nat.le_succ m) ≫
+      coefficientQuotientMap (J := Scheme.ProEt.topology W)
+        (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) h := by
+      unfold coefficientQuotientMap
+      rw [← CategoryTheory.Functor.map_comp]
+      congr 1
+      apply CommRingCat.hom_ext
+      apply RingHom.ext
+      intro x
+      obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
+      rfl
+    have ht : normalizedDVRQuotient l E W (h.trans (Nat.le_succ m)) =
+        integralCoefficientSheafTransition l E W m ≫ normalizedDVRQuotient l E W h := by
+      change (integralCoefficientSheafSystem l E W).map
+          ((homOfLE h) ≫ (homOfLE (Nat.le_succ m))).op = _
+      rw [op_comp, CategoryTheory.Functor.map_comp]
+      congr 1
+      exact Functor.ofOpSequence_map_homOfLE_succ _ m
+    rw [ht, ← Category.assoc, hs, Category.assoc, ih, hc, CategoryTheory.Functor.map_comp,
+      Category.assoc]
 
 /-- Scalar-restriction associativity, with no change to underlying sections.
 Source: blueprint integral construction, quotient cocycle
@@ -152,7 +295,13 @@ theorem integralExceptionalCoordinates_comm
           (Nat.le_succ n)).map
             ((integralExceptionalLevel l E W n).map
               ((coefficientSequenceEvaluation l E W n).map f)) := by
-  sorry
+  dsimp only [integralExceptionalCoordinatesObj]
+  rw [← Functor.map_comp_assoc]
+  rw [(coefficientSequenceTransition l E W (Nat.le_succ n)).naturality f]
+  rw [Functor.map_comp_assoc, Category.assoc]
+  congr 1
+  exact (integralExceptionalLevelComp l E W (Nat.le_succ n)).hom.naturality
+    ((coefficientSequenceEvaluation l E W n).map f)
 
 /-- Componentwise coordinate change on a system morphism.
 Source: blueprint integral systems (blueprint: def-pur-adic-exceptional-system-realization). -/
@@ -172,7 +321,31 @@ theorem integralExceptionalCoordinates_laws :
     (∀ {M N P : coefficientSequenceModules l E W} (f : M ⟶ N) (g : N ⟶ P),
       integralExceptionalCoordinatesMap l E W (f ≫ g) =
         integralExceptionalCoordinatesMap l E W f ≫ integralExceptionalCoordinatesMap l E W g) := by
-  sorry
+  have ext {M N : CoefficientSystem (J := Scheme.ProEt.topology W)
+      (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E)}
+      (f g : M.Hom N) (h : f.app = g.app) : f = g := by
+    cases f
+    cases g
+    cases h
+    rfl
+  constructor
+  · intro M
+    apply ext _ _
+    funext n
+    dsimp only [integralExceptionalCoordinatesMap]
+    rw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
+    exact ((coefficientEvaluation (J := Scheme.ProEt.topology W)
+      (O := integralExceptionalIntegers l E) (ell := integralExceptionalUniformizer l E) n).map_id
+        (integralExceptionalCoordinatesObj l E W M)).symm
+  · intro M N P f g
+    apply ext _ _
+    funext n
+    dsimp only [integralExceptionalCoordinatesMap]
+    rw [CategoryTheory.Functor.map_comp, CategoryTheory.Functor.map_comp]
+    exact ((coefficientEvaluation (J := Scheme.ProEt.topology W)
+      (O := integralExceptionalIntegers l E) (ell := integralExceptionalUniformizer l E) n).map_comp
+      (integralExceptionalCoordinatesMap l E W f)
+      (integralExceptionalCoordinatesMap l E W g)).symm
 
 /-- The coordinate change on actual strict systems, retaining all horizontal restrictions.
 Source: blueprint integral systems (blueprint: def-pur-adic-exceptional-system-realization). -/
@@ -232,7 +405,11 @@ Proof: apply the faithful additive coordinate functor. Its unit/counit identify 
 image of each sum with the sum of the images, proving the original equality. -/
 theorem integralExceptionalCoordinatesInv_additive :
     (integralExceptionalCoordinates l E W).asEquivalence.inverse.Additive := by
-  sorry
+  let e := (integralExceptionalCoordinates l E W).asEquivalence
+  let : e.functor.Additive := by
+    dsimp [e]
+    exact integralExceptionalCoordinates_additive l E W
+  exact Equivalence.inverse_additive e
 
 attribute [instance] integralExceptionalCoordinatesInv_additive
 
@@ -316,7 +493,14 @@ theorem integralExceptionalComparison_characterization
     (∃! a : (integralExceptionalComparison l E W P).derived.system.direct ≅ B.direct,
       ∀ H, (integralExceptionalComparison l E W P).derived.system.directUnit.app H ≫
         a.hom.app (DerivedCategory.Q.obj H) = B.directUnit.app H) := by
-  sorry
+  let A := (integralExceptionalComparison l E W P).derived.system
+  let := A.isRightDerived
+  let := B.isRightDerived
+  constructor
+  · exact localizationUniqueWithFactors DerivedCategory.Q
+      (HomologicalComplex.quasiIso _ (.up ℤ)) A.inverseFactors B.inverseFactors
+  · exact rightDerivedUniqueWithUnit DerivedCategory.Q
+      (HomologicalComplex.quasiIso _ (.up ℤ)) A.directUnit B.directUnit
 
 variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   {X Y : Scheme.{u}}
@@ -379,7 +563,8 @@ theorem integralExceptionalSupport_characterization
       ∀ M N (h : F.obj M ⟶ N),
         (integralExceptionalSupport l E D hl f).val.openAdjunction.homEquiv M N
           (b.hom.app M ≫ h) = a.homEquiv M N h := by
-  sorry
+  exact leftAdjointUniqueWithTranspose
+    (integralExceptionalSupport l E D hl f).val.openAdjunction a
 
 /-- The chosen exceptional system right adjoint is unique with its Hom transpose.
 Source: blueprint integral exceptional construction, Brown right adjoint
@@ -397,7 +582,8 @@ theorem integralExceptionalAdjoint_characterization
       ∀ M N (h : (integralExceptionalSupport l E D hl f).functor.obj M ⟶ N),
         (integralExceptionalAdjoint l E D hl f).adjunction.homEquiv M N h ≫
           b.hom.app N = a.homEquiv M N h := by
-  sorry
+  exact rightAdjointUniqueWithTranspose
+    (integralExceptionalAdjoint l E D hl f).adjunction a
 
 /-- Its adjoint-existence witness; no exceptional admissibility is assumed.
 Source: blueprint integral construction (blueprint: def-pur-adic-exceptional-system-realization). -/

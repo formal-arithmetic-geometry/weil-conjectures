@@ -17710,3 +17710,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:12 L: merged deliver/K3/Sheaf.Paper.ECoefficientSmoothBaseChange (stage 3; reviewer PASS; first push; landing 20261019T231228-L-563531 (interface); batch 20261019T231019; modules 3; new nodes 2; change records: coord/changes/ECoefficientSmoothBaseChange-imports.md)
 - 23:12 L: merged deliver/K7/Sheaf.AlgebraicGeometry.ProEtale.ClosedInverseImageFormula (stage 3; reviewer PASS; first push; landing 20261019T231230-L-563932 (proof); batch 20261019T231019; modules 1; new nodes 0)
 - 23:12 L: merged deliver/M3/Sheaf.AlgebraicGeometry.CompactProductRealizationArrows (stage 3; reviewer PASS; first push; landing 20261019T231232-L-564396 (proof); batch 20261019T231019; modules 1; new nodes 0)
+- 23:12 L: merged deliver/M3/Sheaf.Paper.IntegralExceptionalInverseImage (stage 3; reviewer PASS; first push; landing 20261019T231234-L-564747 (proof); batch 20261019T231019; modules 1; new nodes 0)
