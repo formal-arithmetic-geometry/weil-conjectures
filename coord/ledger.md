@@ -16623,3 +16623,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:25 L: merged deliver/B9/Sheaf.GroupTheory.CyclicInflation (stage 3; reviewer PASS; first push; landing 20261019T002511-L-2142607 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:25 L: merged deliver/C1/Sheaf.CategoryTheory.LocalizationInverseImageCoherence (stage 3; reviewer PASS; first push; landing 20261019T002511-L-2142719 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:25 L: merged deliver/C1/Sheaf.SixFunctors.EtaleLocallyClosedExtensionComparison (stage 3; reviewer PASS; first push; landing 20261019T002512-L-2142834 (proof); batch 20261019T002449; modules 1; new nodes 0)
+- 00:25 L: merged deliver/C2/Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients (stage 3; reviewer PASS; first push; landing 20261019T002512-L-2143023 (proof); batch 20261019T002449; modules 1; new nodes 0)

@@ -110,7 +110,9 @@ theorem scalarExtension_parameter_independent
         sfConstructibleIntegralScalarExtension q l hq E L ι Y ∧
       sfRationalScalarExtension l E Y p hp L ι =
         sfRationalScalarExtension l E Y q hq L ι := by
-  sorry
+  set_option backward.isDefEq.respectTransparency false in
+    set_option backward.isDefEq.respectTransparency.types false in
+      exact ⟨rfl, rfl⟩
 
 /-- The actual completed rational scalar transition, with both coefficient identifications.
 Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
@@ -219,7 +221,12 @@ additivity instance gives precisely the two equations for the recorded stage Hom
 @[instance]
 theorem transitionAdditive (E L : Index l Ω) (h : E ≤ L) :
     (transition l Ω Y E L h).Additive := by
-  sorry
+  set_option backward.isDefEq.respectTransparency false in
+    set_option backward.isDefEq.respectTransparency.types false in
+      have hΩ := Padic.finiteCoefficientFields_properties l Ω
+      exact hΩ.rec (fun _ _ ↦ sfRationalScalarExtension_additive l (Coefficient.{u} l Ω E) Y 0
+        (Nat.Prime.ne_zero (Fact.out : l.Prime)) (Coefficient.{u} l Ω L)
+        (coefficientInclusion l Ω E L h))
 
 /-- Balanced tensor composition followed by the specified coefficient-map equality.
 This helper keeps the ordinary field structures explicit during size transport.
@@ -252,7 +259,9 @@ theorem associator_existsUnique (E L M : Index l Ω) (h : E ≤ L) (k : L ≤ M)
         (Coefficient.{u} l Ω M) (coefficientInclusion l Ω E L h)
         (coefficientInclusion l Ω L M k) (coefficientInclusion l Ω E M (h.trans k))
         ((coefficientInclusion_laws l Ω).2 E L M h k) Y) := by
-  sorry
+  refine ⟨_, HEq.rfl, ?_⟩
+  intro a ha
+  exact eq_of_heq ha
 
 /-- The canonical scalar associator, with its tensor-generator normalization.
 Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
@@ -305,7 +314,21 @@ theorem stageSystem_existsUnique
           GeneralAlgebraicallyClosedCoefficients.transition l Ω Y E L h) ∧
       (∀ (E L M : Padic.FiniteCoefficientFields l Ω) (h : E ≤ L) (k : L ≤ M),
         HEq (S.assoc h k) (GeneralAlgebraicallyClosedCoefficients.associator l Ω Y E L M h k)) := by
-  sorry
+  let S : StageSystem (Stage l Ω Y) :=
+    { T := fun {E L} h ↦ transition l Ω Y E L h
+      assoc := fun {E L M} h k ↦ associator l Ω Y E L M h k
+      cocycle := fun h k m K ↦ associator_cocycle l Ω Y _ _ _ _ h k m K }
+  refine ⟨S, ⟨fun _ _ _ ↦ rfl, fun _ _ _ _ _ ↦ HEq.rfl⟩, ?_⟩
+  rintro ⟨T, a, c⟩ ⟨hT, ha⟩
+  have ht : @T = @S.T := by
+    funext E L h
+    exact hT E L h
+  cases ht
+  have he : @a = @S.assoc := by
+    funext E L M h k
+    exact eq_of_heq (ha E L M h k)
+  cases he
+  rfl
 
 /-- The stage system with exactly the specified tensor functors and associators.
 The uniqueness specification fixes every data field, retaining a small opaque interface
@@ -350,7 +373,9 @@ theorem stageTransition_additive
     (Y : AlgebraicGeometry.Scheme.{u})
     (E L : Padic.FiniteCoefficientFields l Ω) (h : E ≤ L) :
     (GeneralAlgebraicallyClosedCoefficients.stageTransition l Ω Y E L h).Additive := by
-  sorry
+  unfold stageTransition
+  rw [(stageSystem_existsUnique l Ω Y).exists.choose_spec.1 E L h]
+  exact transitionAdditive l Ω Y E L h
 
 
 /-- The upstream common-stage pair category, specialized to the specified rational stages.
@@ -422,7 +447,13 @@ theorem transport_additive
       ∀ f g, GeneralAlgebraicallyClosedCoefficients.transport A B L M h (f + g) =
         GeneralAlgebraicallyClosedCoefficients.transport A B L M h f +
             GeneralAlgebraicallyClosedCoefficients.transport A B L M h g := by
-  sorry
+  set_option backward.isDefEq.respectTransparency false in
+    set_option backward.isDefEq.respectTransparency.types false in
+      constructor
+      · simp only [transport, Functor.map_zero, Limits.comp_zero, Limits.zero_comp]
+      · intro f g
+        dsimp only [transport, stageHomAddCommGroup]
+        rw [Functor.map_add, Preadditive.add_comp, Preadditive.comp_add]
 
 /-- The transition homomorphism of the directed Hom system.
 Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
@@ -566,7 +597,19 @@ theorem representatives
         ∃ (N : GeneralAlgebraicallyClosedCoefficients.Common A B) (hL : L ≤ N) (hM : M ≤ N),
           GeneralAlgebraicallyClosedCoefficients.transport A B L N hL f =
               GeneralAlgebraicallyClosedCoefficients.transport A B M N hM g) := by
-  sorry
+  constructor
+  · intro f
+    induction f using StageSystem.PairCategory.hom_induction with
+    | h L hA hB f => exact ⟨L, hA, hB, f, rfl⟩
+  · intro L M f g
+    constructor
+    · intro e
+      obtain ⟨N, hL, hM, he⟩ :=
+        (StageSystem.PairCategory.mkHom_eq_mkHom_iff' f g).mp e
+      exact ⟨⟨N, L.property.1.trans hL, L.property.2.trans hL⟩, hL, hM, he⟩
+    · rintro ⟨N, hL, hM, he⟩
+      exact (StageSystem.PairCategory.mkHom_eq_mkHom_iff' f g).mpr
+        ⟨N.val, hL, hM, he⟩
 
 /-- Stagewise object shift, with the coefficient field unchanged.
 Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
@@ -687,7 +730,8 @@ theorem distinguished_iff
     (T : Triangle (GeneralAlgebraicallyClosedCoefficients.Pair l Ω Y)) :
     T ∈ distTriang (GeneralAlgebraicallyClosedCoefficients.Pair l Ω Y) ↔
         GeneralAlgebraicallyClosedCoefficients.Distinguished T := by
-  sorry
+  exact (StageSystem.commonStage_verdier_existsUnique
+    (stageSystem l Ω Y)).exists.choose_spec.1 T
 
 /-- A specified cone over L gives exactly the recorded common-stage cone, including
 its second and connecting arrows and the literal cone pair (L,C).
@@ -739,7 +783,8 @@ these functors on objects and all pure tensors, hence on every morphism. -/
 theorem specialization_transition (E L : AlgebraicallyClosedCoefficients.Index l Ω)
     (h : E ≤ L) :
     transition l Ω Y E L h = SfAlgebraicallyClosedCoefficients.transition D l hl Ω Y E L h := by
-  sorry
+  have hΩ := Padic.finiteCoefficientFields_properties l Ω
+  exact hΩ.rec (fun _ _ ↦ rfl)
 
 /-- The normalized associator and identity comparison specialize canonically.
 Source: blueprint order 1821, canonical composition clause
@@ -782,7 +827,18 @@ Its remaining cocycle field is a proof. Alternatively apply the uniqueness
 clause of stageSystem_existsUnique to the old system. -/
 theorem specialization_stageSystem :
     stageSystem l Ω Y = SfAlgebraicallyClosedCoefficients.stageSystem D l hl Ω Y := by
-  sorry
+  set_option backward.isDefEq.respectTransparency false in
+    set_option backward.isDefEq.respectTransparency.types false in
+      have hOld :=
+        (SfAlgebraicallyClosedCoefficients.stageSystem_existsUnique D l hl Ω Y).exists.choose_spec
+      apply (stageSystem_existsUnique l Ω Y).unique
+      · exact (stageSystem_existsUnique l Ω Y).exists.choose_spec
+      · constructor
+        · intro E L h
+          exact (hOld.1 E L h).trans (specialization_transition D l hl Ω Y E L h).symm
+        · intro E L M h k
+          exact (hOld.2 E L M h k).trans
+            ((specialization_comparisons D l hl Ω Y).1 E L M h k).symm
 
 
 /-- The canonical identification is equality transport of the normalized systems.
@@ -908,7 +964,9 @@ Proof: apply the forward implication of specialization_distinguished to each
 triangle. This is the IsTriangulated condition for specialization_commShift. -/
 @[instance]
 theorem specialization_exact : (specialization D l hl Ω Y).functor.IsTriangulated := by
-  sorry
+  constructor
+  intro T hT
+  exact (specialization_distinguished D l hl Ω Y T).mp hT
 
 end GeneralAlgebraicallyClosedCoefficients
 end WeilConjectures
