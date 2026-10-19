@@ -18,128 +18,37 @@
  ],
  "proof": [
   {
-   "text": "Apply [lemma-constructible-common-refinement] successively to the input scheme stratifications: start with the first and refine with the next. Induction on the finite number of inputs gives a common scheme stratification $P_a\\to X$: containment of each new image in an earlier image is transitive. For zero input stratifications start with the single stratum $X\\to X$; if $X$ is empty use the empty family. Discard empty pieces. Each $P_a\\to X$ is an immersion and its image is locally closed by [def-constructible-stratification]. This uses common refinement in its stated sense of containment of images; no factorization morphisms to input strata are asserted.",
+   "text": "Apply the connected ordered refinement theorem for finite locally closed stratifications.",
    "uses": [
-    "lemma-constructible-common-refinement",
-    "def-constructible-stratification"
+    "new-det-lem-coefficient-heart-common-stratification-refinement"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-common-stratification.proof.md",
-    "place": "(1), finite intersection refinement; finite induction including zero inputs"
-   }
+   "elementary": false
   },
   {
-   "text": "Write every image $|P_a|=F_a\\cap O_a$ with $F_a$ closed and $O_a$ open, and list the finitely many closed sets $F_a$ and $X\\setminus O_a$ as $Z_1,\\ldots,Z_r$ [def-weil-locally-closed-subset]. For $I\\subseteq\\{1,\\ldots,r\\}$ put $A_I=(\\bigcap_{i\\in I}Z_i)\\setminus\\bigcup_{j\\notin I}Z_j$. The nonempty $A_I$ partition $X$, are locally closed, and membership in every $|P_a|$ is constant on each $A_I$; hence each lies in one $|P_a|$. Order the subsets $I$ by increasing cardinality, breaking ties arbitrarily. For a prefix $D$ of this order, $D$ is downward closed under inclusion. Its complement union of atoms is $\\bigcup_{I\\notin D}\\bigcap_{i\\in I}Z_i$: a point with membership set $J$ belongs to this union iff some $I\\notin D$ satisfies $I\\subseteq J$, iff $J\\notin D$. This is a finite union of closed sets, so every prefix union of atoms is open. Empty atoms do not affect this calculation.",
+   "text": "Apply the lisse restriction theorem for the two coefficient cases.",
    "uses": [
-    "def-weil-locally-closed-subset"
+    "new-det-lem-coefficient-heart-common-stratification-lisse"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 09Y3, lemma-partition-refined-by-stratification: finite closed-set construction; explicit membership-set version and open-prefix calculation"
-   }
+   "elementary": false
   },
   {
-   "text": "Realize each atom as a scheme stratum without inferring any scheme factorization from image containment. Choose $a$ with $A_I\\subseteq|P_a|$. Put $F_I=\\bigcap_{i\\in I}Z_i$ (with $F_\\varnothing=X$) and $O_I=X\\setminus\\bigcup_{j\\notin I}Z_j$. Let $W_I$ be the open subscheme of $P_a$ over $O_I$. The preimage of $F_I$ in $W_I$ is closed; give it the reduced induced closed subscheme structure $Q_I\\hookrightarrow W_I$ using [lem-weil-pbc-reduced-induced-closed-subscheme]. The immersion $P_a\\to X$ is a homeomorphism onto its image by [def-weil-closed-immersion, def-weil-open-immersion], so $Q_I$ has precisely image $|P_a|\\cap F_I\\cap O_I=A_I$. Its composite $Q_I\\hookrightarrow W_I\\hookrightarrow P_a\\to X$ is an immersion by [lem-weil-pbc-proper-fp-permanence] (e). Thus the $Q_I$ are genuine scheme strata refining every input partition, even if its original strata were nonreduced.",
+   "text": "Apply exactness and mono/epi detection on the refined strata.",
    "uses": [
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "def-weil-closed-immersion",
-    "def-weil-open-immersion",
-    "lem-weil-pbc-proper-fp-permanence"
+    "new-det-lem-coefficient-heart-common-stratification-exactness"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tag 01J3 (lemma-reduced-closed-subscheme), Tags 01IO/01HE (immersion definitions), and Tag 02V0 (lemma-composition-immersion); reduced closed subschemes inside open subschemes of P_a"
-   }
-  },
-  {
-   "text": "For each $A_I=F_I\\cap O_I$, the open subscheme $O_I$ of the Noetherian scheme $X$ is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Apply [lem-sc-noetherian-closed-subset-finite-components] to its closed subset $A_I$: write $A_I=\\bigcup_{h=1}^t C_h$ with $C_h$ irreducible and closed in $A_I$. Form the finite graph whose vertices are these $C_h$ and whose edges mean nonempty intersection. Each graph-component union $B$ is connected: irreducibility implies connectedness, and adjoining connected sets meeting the previous union preserves connectedness, since a separation would separate one of the sets. Distinct such unions are disjoint and closed, so each is also open in $A_I$. They cover $A_I$ and are its connected components [def-weil-irreducible-components, def-weil-connected-scheme]. Their inverse images in $Q_I$ are open subschemes, so restricting its immersion gives connected locally closed scheme strata that still refine all original partitions. List these components consecutively in place of each ordered atom. If $V$ is the union of earlier atoms, both $V$ and $V\\cup A_I$ are open by step 2. For any union $B$ of components of $A_I$, the complement of $V\\cup B$ in $V\\cup A_I$ is $A_I\\setminus B$, closed there because $A_I$ is closed there and its components are clopen. Therefore $V\\cup B$ is open in $X$. This proves all of clause (1), including connectedness and every intermediate prefix.",
-   "uses": [
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-sc-noetherian-closed-subset-finite-components",
-    "def-weil-irreducible-components",
-    "def-weil-connected-scheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-common-stratification.proof.md",
-    "place": "(1), connected-component refinement; finite graph argument and preservation of the open-prefix order"
-   }
-  },
-  {
-   "text": "Let $f:T\\to S$ be the actual locally closed inclusion in (2). Lisse means pro-etale locally finite free. Choose a trivializing pro-etale covering $U_i\\to S$. Base change gives a covering $T\\times_SU_i\\to T$ by the covering-preservation assertion of [def-weil-proetale-inverse-image]. By [sk-prop-sfb-cartesian-coefficients], module pullback is the exact inverse image, takes $\\Lambda_S$ to $\\Lambda_T$, and preserves finite direct sums: the images of the biproduct inclusions and projections satisfy the same identities. Consequently pulling back $M|_{U_i}\\simeq\\Lambda_{U_i}^{n_i}$ gives $(M|_T)|_{T\\times_SU_i}\\simeq\\Lambda_{T\\times_SU_i}^{n_i}$. This proves the first assertion of (2), and the same calculation proves lisse preservation under any scheme morphism. The finite constant models of a constructible sheaf in [sk-def-sfb-constructible] are finite free for the present coefficients: $\\Lambda(*)=E$ or $\\overline{\\mathbf Q}_\\ell$ is a field, so a finitely presented scalar module $P_i$ has a finite basis and $\\Lambda_{U_i}\\otimes_{\\Lambda(*)}P_i\\simeq\\Lambda_{U_i}^{n_i}$. These are the pulled-back condensed coefficient sheaves, throughout.",
-   "uses": [
-    "def-weil-proetale-inverse-image",
-    "sk-prop-sfb-cartesian-coefficients",
-    "sk-def-sfb-constructible"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-common-stratification.proof.md",
-    "place": "(2), pullback of a trivializing covering and finite free local models"
-   }
-  },
-  {
-   "text": "For the final assertion of (2), let $i:S\\to X$ be an adapted stratum and $j:T\\to X$ any refined stratum with $|T|\\subseteq|S|$ [def-constructible-refines]. There need not be a morphism $T\\to S$. Instead put $W=T\\times_XS$ with projections $p:W\\to T$ and $q:W\\to S$. The map $p$ is an immersion by [lem-weil-pbc-immersion-base-change-lft] and is surjective by [lem-weil-pbc-fibre-product-points]: an immersion induces isomorphic residue fields, since an open immersion preserves local rings and on a closed immersion $A\\to A/J$ the residue field at $\\mathfrak p/J$ is that at $\\mathfrak p$ [def-weil-open-immersion, def-weil-closed-immersion]; thus over each $t$ the residue-field tensor product is $\\kappa(t)\\otimes_{\\kappa(j(t))}\\kappa(j(t))=\\kappa(t)$, with prime $(0)$. A surjective immersion is closed: in its factorization as closed into an open, surjectivity forces that open to be all of $T$ [def-weil-closed-immersion]. By step 5, $p^*j^*M=q^*i^*M$ is lisse. Choose a trivializing covering $C$ of $W$. Apply [new-lem-weil-pbc-proetale-surjective-closed-cover-refinement] to obtain a pro-etale covering $B_b\\to T$ such that $W_b=B_b\\times_TW$ maps to one member $C_{a(b)}$ of $C$ over $W$. The map $p_b:W_b\\to B_b$ is again a surjective closed immersion by [lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism]. On $W_b$ the pullback of $(j^*M)|_{B_b}$ is therefore $\\Lambda_{W_b}^{n_{a(b)}}$, also the pullback of $\\Lambda_{B_b}^{n_{a(b)}}$ by [sk-prop-sfb-cartesian-coefficients]. The module inverse image along $p_b$ is an equivalence for every commutative condensed coefficient ring by [new-lem-weil-pbc-condensed-surjective-closed-equivalence]. Fullness lifts this isomorphism and its inverse to $B_b$, and faithfulness makes their composites identities. Hence $(j^*M)|_{B_b}\\simeq\\Lambda_{B_b}^{n_{a(b)}}$. The covering $B$ proves $j^*M$ lisse. This applies to every refined stratum with its given scheme structure, proving the assertion for any refinement.",
-   "uses": [
-    "def-constructible-refines",
-    "lem-weil-pbc-immersion-base-change-lft",
-    "lem-weil-pbc-fibre-product-points",
-    "def-weil-open-immersion",
-    "def-weil-closed-immersion",
-    "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
-    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
-    "sk-prop-sfb-cartesian-coefficients",
-    "new-lem-weil-pbc-condensed-surjective-closed-equivalence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09AB (lemma-thickening) and 09BK (lemma-closed-immersion-affines), via the cited module-equivalence and cover-refinement nodes; blueprint proof (2), arbitrary scheme structures in a topological refinement"
-   }
-  },
-  {
-   "text": "For every stratum $g:S\\to X$, [sk-prop-sfb-cartesian-coefficients] gives $g^*=g^{-1}$ exact on coefficient modules. Use the sheaf clause of [lem-weil-pbc-noetherian-stratum-detection] with the identity covering of each stratum and the underlying abelian sheaf: a module with zero restrictions is zero. Exactness identifies restrictions of a kernel or cokernel with the corresponding kernel or cokernel of the restricted morphism, so injectivity and surjectivity are detected; the converses follow by exactness. More explicitly for a sequence $A\\xrightarrow a B\\xrightarrow b C$, if its restrictions are exact, then every restriction of $\\operatorname{im}(ba)$ is zero. Images are kernels of cokernels, so exact pullback preserves them, and detection gives $ba=0$. Now form $H=\\ker b/\\operatorname{im}a$. Exact pullback identifies its restrictions with the zero homology modules of the restricted sequences, hence detection gives $H=0$, which is exactness at $B$. Apply this argument at each term for a longer sequence. Conversely exact pullback preserves every exact sequence. This proves (3) for any finite stratification, without requiring it to have the order constructed in (1).",
-   "uses": [
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-weil-pbc-noetherian-stratum-detection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-common-stratification.proof.md",
-    "place": "(3), exact inverse image and finite-stratum detection; explicit image and homology calculation"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lemma-constructible-common-refinement",
-  "def-constructible-stratification",
-  "def-weil-locally-closed-subset",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "def-weil-closed-immersion",
-  "def-weil-open-immersion",
-  "lem-weil-pbc-proper-fp-permanence",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-sc-noetherian-closed-subset-finite-components",
-  "def-weil-irreducible-components",
-  "def-weil-connected-scheme",
-  "def-weil-proetale-inverse-image",
-  "sk-prop-sfb-cartesian-coefficients",
-  "sk-def-sfb-constructible",
-  "def-constructible-refines",
-  "lem-weil-pbc-immersion-base-change-lft",
-  "lem-weil-pbc-fibre-product-points",
-  "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
-  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
-  "new-lem-weil-pbc-condensed-surjective-closed-equivalence",
-  "lem-weil-pbc-noetherian-stratum-detection"
+  "new-det-lem-coefficient-heart-common-stratification-refinement",
+  "new-det-lem-coefficient-heart-common-stratification-lisse",
+  "new-det-lem-coefficient-heart-common-stratification-exactness"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-common-stratification.proof.md",
-  "place": "Clauses (1)-(3), with ordering by Stacks 09Y3 finite closed-set refinement and arbitrary refined scheme structures handled using Stacks 09AB/09BK through existing nodes"
+  "by": "worker",
+  "document": "Blueprint proof steps (1)--(7), split into three independently provable clauses",
+  "place": "Clauses (1), (2), and (3)",
+  "group": "F2"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -202,9 +111,6 @@
   "module": "Sheaf.Paper.CoefficientHeartCommonStratification",
   "declaration": "AlgebraicGeometry.ProEtale.coefficientHeart_commonStratification",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.IsLisseCoefficientModule",
-   "AlgebraicGeometry.ProEtale.coefficientHeartRingObj",
-   "AlgebraicGeometry.ProEtale.CoefficientHeartStratificationAssertions",
    "AlgebraicGeometry.ProEtale.coefficientHeart_commonStratification"
   ],
   "file": "lean/Sheaf/Paper/CoefficientHeartCommonStratification.lean",
@@ -214,5 +120,15 @@
   "date": "2026-10-18",
   "existing": false,
   "fixed_by": "NT-stage2-cc-76eaeb5a7"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-35cf8",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261019T093352-L-2301987",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 3 new modules vs live CoefficientHeartCommonStratification (verbatim def move, identical signature), 3 new node statements vs Lean, 23 direct importers compiled against the delivery, #print axioms clean"
  }
 }

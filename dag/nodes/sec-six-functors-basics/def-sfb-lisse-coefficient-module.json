@@ -75,14 +75,20 @@
  "chapter": "sec-six-functors-basics",
  "unit": "sk-thm-sfb-qlbar-two-colimit",
  "lean": {
-  "module": "Sheaf.Paper.CoefficientHeartCommonStratification",
+  "module": "Sheaf.Paper.CoefficientHeartStratificationDefs",
   "declaration": "AlgebraicGeometry.ProEtale.IsLisseCoefficientModule",
   "statement": "def IsLisseCoefficientModule\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}}\n    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) : Prop",
   "branch": "newtargets-dag",
   "by": "Q77",
   "date": "2026-10-18",
   "existing": true,
-  "note": "Exact existing predicate at lean/Sheaf/Paper/CoefficientHeartCommonStratification.lean:53. This definition-node binding supplies the notion formerly present only among a theorem node's supporting declarations; the dry run disallows a theorem node in stmt_deps. Its cover members use the canonically coefficient-identified weakly-etale inverse image, equivalent to slice restriction. Mod.IsFree means a finite direct sum, including zero; no restriction on local rank or the base scheme. No new Lean construction is made."
+  "note": "The same three definitions were moved verbatim to this shared module by F2, to avoid an import cycle between independent clause modules and their assembly. The original module publicly imports this module, preserving its full public interface.",
+  "file": "lean/Sheaf/Paper/CoefficientHeartStratificationDefs.lean",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IsLisseCoefficientModule",
+   "AlgebraicGeometry.ProEtale.coefficientHeartRingObj",
+   "AlgebraicGeometry.ProEtale.CoefficientHeartStratificationAssertions"
+  ]
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -99,5 +105,15 @@
   "group": "Q77",
   "result": "fix",
   "note": "Mathematics, canonical helpers, dependencies, universes, edge cases and verbatim signature checked; per-file scompile passed. Complete replacement report under fixes repairs the H11/H1 second-reading placeholder. Review recorded in review.md; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-35cf8",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261019T093352-L-2301987",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 3 new modules vs live CoefficientHeartCommonStratification (verbatim def move, identical signature), 3 new node statements vs Lean, 23 direct importers compiled against the delivery, #print axioms clean"
  }
 }

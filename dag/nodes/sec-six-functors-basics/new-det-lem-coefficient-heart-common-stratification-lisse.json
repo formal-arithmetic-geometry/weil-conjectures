@@ -1,0 +1,155 @@
+{
+ "id": "new-det-lem-coefficient-heart-common-stratification-lisse",
+ "kind": "statement",
+ "title": "coefficientHeart_commonStratification_lisse",
+ "statement": "Let $\\ell$ be prime and $X$ a Noetherian scheme. Let $\\Lambda$ be either the condensed ring associated to a finite intermediate field $\\mathbf Q_\\ell\\subset E\\subset\\overline{\\mathbf Q}_\\ell$ or the condensed algebraic closure $\\overline{\\mathbf Q}_\\ell$. Write $\\Lambda_Y$ for the pulled-back coefficient ring on the pro-etale site of a scheme $Y$. Lisse means locally finite free on a pro-etale cover [def-sfb-lisse-coefficient-module]. (1) If $i:S\\to X$ and $j:T\\to S$ are immersions and $M$ is a lisse $\\Lambda_S$-module, then $j^*M$ is lisse. (2) Let $P$ and $R$ be finite locally closed scheme stratifications of $X$ [def-constructible-stratification], and let $M$ be a $\\Lambda_X$-module with a finite constant local model on every scheme stratum of $P$ [sk-def-sfb-constructible]. If every stratum image of $R$ is contained in a stratum image of $P$, then the restriction of $M$ to every scheme stratum of $R$ is lisse. No morphism from a refined stratum to an original stratum is assumed; their given scheme structures are retained.",
+ "stmt_deps": [
+  "sk-def-sfb-constructible",
+  "def-constructible-stratification",
+  "def-sfb-lisse-coefficient-module"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-common-stratification.md",
+  "place": "(2), restriction of lisse modules and lisse restrictions on every refinement"
+ },
+ "proof": [
+  {
+   "text": "Pullback preserves lisse coefficient modules: apply the existing locFree_pullback lemma, which base changes a trivializing cover and transports the finite-free isomorphisms through the pullback-composition comparison.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-locally-free-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A finite constant local model is locally finitely presented. Apply the exact inverse image from the point to a finite presentation: it preserves the regular module, finite biproducts and cokernels. Transport the resulting finite presentation across the local-model isomorphism and the normalized-pullback comparison.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "lem-weil-pbc-condensed-constructible-serre"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Undo the normalized coefficient comparison on the adapted stratum to obtain local finite presentation of the raw inverse image of M over the inverse-image ring. Apply localFinitePresentation_upperStar_of_range_subset to the immersion of the adapted stratum and the immersion of the refined stratum, using exactly the containment of their images. Normalize the coefficient comparison on the refined stratum again. The existing transfer theorem forms the fibre product, pulls presentations back, and reflects them through its surjective closed projection; no scheme-theoretic factorization is assumed.",
+   "uses": [
+    "lem-weil-pbc-proetale-module-lfp-immersion-transport",
+    "def-constructible-stratification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An immersion into a Noetherian scheme has a Noetherian underlying space. In the finite-subfield and algebraic-closure coefficient cases apply respectively finite_lf and algcl_lf from the existing constructible-Serre module. These turn local finite presentation into a finite-free pro-etale cover. Transport raw pullbacks to normalized coefficient pullbacks with free_standardPullback. This proves lisse restriction on every refined stratum.",
+   "uses": [
+    "lem-weil-pbc-condensed-constructible-serre",
+    "lem-weil-pbc-finite-etale-locally-free-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-etale-locally-free-models",
+  "sk-def-sfb-constructible",
+  "lem-weil-pbc-condensed-constructible-serre",
+  "lem-weil-pbc-proetale-module-lfp-immersion-transport",
+  "def-constructible-stratification"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F2",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-common-stratification.proof.md",
+  "place": "Clause (2), using existing local-finite-presentation immersion-range transfer and normalized coefficient comparison for steps (5)--(6)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally closed stratification of a Noetherian scheme has a refinement with connected strata whose successive unions are open",
+   "date": "2026-10-18",
+   "results": "8 hits: AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.IsNoetherian.noetherianSpace, AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace, AlgebraicGeometry.instIsLocallyNoetherianXScheme, AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top, TopologicalSpace.NoetherianSpace.exists_finset_irreducible, AlgebraicGeometry.isLocallyNoetherian_iff_openCover",
+   "verdict": "No exact complete theorem for this clause. Reuse the applicable categorical and Noetherian ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFree.*upperStar|upperStar.*IsFree|finiteFree.*[Ii]so|[Ii]so.*finiteFree",
+   "date": "2026-10-18",
+   "results": "0 hits: ",
+   "verdict": "No exact complete theorem for this clause. Reuse the applicable categorical and Noetherian ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNoetherian, IsLocallyClosed",
+   "date": "2026-10-18",
+   "results": "0 hits: ",
+   "verdict": "No exact complete theorem for this clause. Reuse the applicable categorical and Noetherian ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact inverse image functors reflect exactness when a finite stratification detects zero sheaves",
+   "date": "2026-10-18",
+   "results": "8 hits: CategoryTheory.Functor.reflects_exact_of_faithful, CategoryTheory.exactFunctor, CategoryTheory.ShortComplex.exact_map_iff_of_faithful, CategoryTheory.ShortComplex.Exact.map_of_preservesRightHomologyOf, CategoryTheory.ShortComplex.LeftHomologyData.exact_map_iff, CategoryTheory.ShortComplex.ShortExact.map_of_exact, CategoryTheory.ShortComplex.RightHomologyData.exact_map_iff, CategoryTheory.exactFunctor_le_leftExactFunctor",
+   "verdict": "No exact complete theorem for this clause. Reuse the applicable categorical and Noetherian ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite family of locally closed stratifications of a Noetherian scheme admits a common refinement with connected strata and open initial unions",
+   "date": "2026-10-18",
+   "results": "8 hits: TopologicalSpace.NoetherianSpace.exists_finite_set_closeds_irreducible, AlgebraicGeometry.IsNoetherian.noetherianSpace, AlgebraicGeometry.Scheme.OpenCover.compactSpace, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, ParacompactSpace.locallyFinite_refinement, AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens, AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top",
+   "verdict": "No exact complete theorem for this clause. Reuse the applicable categorical and Noetherian ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a locally finite free module sheaf is locally finite free and finite constant field models are locally finite free",
+   "date": "2026-10-18",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.pullback, SheafOfModules.pullbackObjFreeIso_hom_naturality, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackPushforwardAdjunction",
+   "verdict": "No exact complete theorem for this clause. Reuse the applicable categorical and Noetherian ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientHeartCommonStratification",
+  "date": "2026-10-18",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-coefficient-heart-common-stratification",
+   "place": "(2), restriction of lisse modules and lisse restrictions on every refinement",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-coefficient-heart",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientHeartLisseRestriction",
+  "file": "lean/Sheaf/Paper/CoefficientHeartLisseRestriction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientHeart_commonStratification_lisse",
+  "statement": "theorem coefficientHeart_commonStratification_lisse\n    (ℓ : ℕ) [Fact ℓ.Prime]\n    (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})\n    [IsCommMonObj (coefficientHeartRingObj Λ)] (X : Scheme.{u}) [IsNoetherian X]\n    (hΛ : (∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ),\n      FiniteDimensional ℚ_[ℓ] E ∧ Λ = Profinite.padicSubfieldCondensedRing ℓ E) ∨\n      Λ = Profinite.padicAlgClCondensedRing ℓ) :\n    (∀ (S T : Scheme.{u}) (i : S ⟶ X), IsImmersion i →\n      ∀ j : T ⟶ S, IsImmersion j →\n      ∀ M : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj\n        (coefficientHeartRingObj Λ) S),\n        IsLisseCoefficientModule (coefficientHeartRingObj Λ) M →\n          IsLisseCoefficientModule (coefficientHeartRingObj Λ) ((CondensedRing.upperStar\n            (coefficientHeartRingObj Λ) j).obj M)) ∧\n    (∀ (P R : X.FiniteLocallyClosedStratification)\n      (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj\n        (coefficientHeartRingObj Λ) X)),\n      (∀ a : Fin P.n,\n        HasFiniteConstantLocalModel (coefficientHeartRingObj Λ) (P.domain a)\n          ((CondensedRing.upperStar (coefficientHeartRingObj Λ) (P.immersion a)).obj M)) →\n      (∀ a : Fin R.n, ∃ b : Fin P.n, R.stratum a ⊆ P.stratum b) →\n        ∀ a : Fin R.n,\n          IsLisseCoefficientModule (coefficientHeartRingObj Λ) ((CondensedRing.upperStar\n            (coefficientHeartRingObj Λ) (R.immersion a)).obj M))",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-35cf8",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261019T093352-L-2301987",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-35cf8",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261019T093352-L-2301987",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 3 new modules vs live CoefficientHeartCommonStratification (verbatim def move, identical signature), 3 new node statements vs Lean, 23 direct importers compiled against the delivery, #print axioms clean"
+ }
+}

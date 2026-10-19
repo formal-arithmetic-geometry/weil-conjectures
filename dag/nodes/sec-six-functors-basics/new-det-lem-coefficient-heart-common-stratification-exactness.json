@@ -1,0 +1,137 @@
+{
+ "id": "new-det-lem-coefficient-heart-common-stratification-exactness",
+ "kind": "statement",
+ "title": "coefficientHeart_commonStratification_exactness",
+ "statement": "Let $X$ be a Noetherian scheme, $\\Lambda$ a commutative condensed ring [sk-def-sfb-condensed-ring], and $R$ any finite locally closed scheme stratification of $X$ [def-constructible-stratification], with immersions $g_a:S_a\\to X$. On internal coefficient-module objects [sk-def-sfb-module-objects], every $g_a^*$ preserves finite limits and finite colimits, and its composite with the forgetful functor to abelian sheaves is naturally isomorphic to abelian-sheaf inverse image composed with the forgetful functor. For every coefficient-module morphism $f$, $f$ is monic (respectively epic) if and only if every $g_a^*f$ is monic (respectively epic). For every pair of composable coefficient-module arrows $A\\xrightarrow f B\\xrightarrow g C$, without assuming $fg=0$, the image subobject of $f$ equals the kernel subobject of $g$ if and only if this equality holds after every $g_a^*$. Empty schemes and empty stratifications are allowed.",
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-constructible-stratification",
+  "sk-def-sfb-module-objects"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-common-stratification.proof.md",
+  "place": "(3), exact inverse image and detection of injectivity, surjectivity and exactness"
+ },
+ "proof": [
+  {
+   "text": "Use the proved exactness instances for CondensedRing.upperStar and Mod.extendScalarsIsoComapInv to identify its underlying abelian-sheaf functor with upperStar. Convert R to Scheme.Stratification.ofNoetherianSpace and apply Noetherian stratum detection with the identity cover on each stratum. The faithful forgetful functor detects zero module objects.",
+   "uses": [
+    "lem-weil-pbc-noetherian-stratum-detection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact pullback preserves Abelian.image, so a map restricting to zero has zero image and is zero. Use cancellation against zero morphisms to reflect monomorphisms and epimorphisms; exactness gives the forward directions.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For arbitrary f and g, equality of local image and kernel subobjects forces the restrictions of f followed by g to vanish, hence f followed by g vanishes. Use ShortComplex.exact_iff_kernel_ι_comp_cokernel_π_zero. After pullback, factor the image of the kernel inclusion through the local kernel and the image of the cokernel projection through the local cokernel. Their composite factors through the local zero kernel-to-cokernel map. Zero-map detection therefore proves global exactness. The forward implication follows from ShortComplex.Exact.map.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-stratum-detection"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-common-stratification.md",
+  "place": "proof step (7), clause (3); implemented using the kernel-to-cokernel criterion",
+  "group": "F2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally closed stratification of a Noetherian scheme has a refinement with connected strata whose successive unions are open",
+   "date": "2026-10-18",
+   "results": "8 hits: AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.IsNoetherian.noetherianSpace, AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace, AlgebraicGeometry.instIsLocallyNoetherianXScheme, AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top, TopologicalSpace.NoetherianSpace.exists_finset_irreducible, AlgebraicGeometry.isLocallyNoetherian_iff_openCover",
+   "verdict": "No exact complete theorem for this clause. Reuse the applicable categorical and Noetherian ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFree.*upperStar|upperStar.*IsFree|finiteFree.*[Ii]so|[Ii]so.*finiteFree",
+   "date": "2026-10-18",
+   "results": "0 hits: ",
+   "verdict": "No exact complete theorem for this clause. Reuse the applicable categorical and Noetherian ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNoetherian, IsLocallyClosed",
+   "date": "2026-10-18",
+   "results": "0 hits: ",
+   "verdict": "No exact complete theorem for this clause. Reuse the applicable categorical and Noetherian ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact inverse image functors reflect exactness when a finite stratification detects zero sheaves",
+   "date": "2026-10-18",
+   "results": "8 hits: CategoryTheory.Functor.reflects_exact_of_faithful, CategoryTheory.exactFunctor, CategoryTheory.ShortComplex.exact_map_iff_of_faithful, CategoryTheory.ShortComplex.Exact.map_of_preservesRightHomologyOf, CategoryTheory.ShortComplex.LeftHomologyData.exact_map_iff, CategoryTheory.ShortComplex.ShortExact.map_of_exact, CategoryTheory.ShortComplex.RightHomologyData.exact_map_iff, CategoryTheory.exactFunctor_le_leftExactFunctor",
+   "verdict": "No exact complete theorem for this clause. Reuse the applicable categorical and Noetherian ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite family of locally closed stratifications of a Noetherian scheme admits a common refinement with connected strata and open initial unions",
+   "date": "2026-10-18",
+   "results": "8 hits: TopologicalSpace.NoetherianSpace.exists_finite_set_closeds_irreducible, AlgebraicGeometry.IsNoetherian.noetherianSpace, AlgebraicGeometry.Scheme.OpenCover.compactSpace, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, ParacompactSpace.locallyFinite_refinement, AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens, AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top",
+   "verdict": "No exact complete theorem for this clause. Reuse the applicable categorical and Noetherian ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a locally finite free module sheaf is locally finite free and finite constant field models are locally finite free",
+   "date": "2026-10-18",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.pullback, SheafOfModules.pullbackObjFreeIso_hom_naturality, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackPushforwardAdjunction",
+   "verdict": "No exact complete theorem for this clause. Reuse the applicable categorical and Noetherian ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientHeartCommonStratification",
+  "date": "2026-10-18",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-coefficient-heart-common-stratification",
+   "place": "(3), exact inverse image and detection of injectivity, surjectivity and exactness",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-coefficient-heart",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientHeartCommonStratification",
+  "file": "lean/Sheaf/Paper/CoefficientHeartCommonStratification.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientHeart_commonStratification_exactness",
+  "statement": "theorem coefficientHeart_commonStratification_exactness\n    (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})\n    [IsCommMonObj (coefficientHeartRingObj Λ)] (X : Scheme.{u}) [IsNoetherian X] :\n  ∀ R : X.FiniteLocallyClosedStratification,\n    (∀ a : Fin R.n,\n      PreservesFiniteLimits (CondensedRing.upperStar (coefficientHeartRingObj Λ) (R.immersion a)) ∧\n      PreservesFiniteColimits (CondensedRing.upperStar (coefficientHeartRingObj Λ) (R.immersion a))\n        ∧\n      Nonempty (CondensedRing.upperStar (coefficientHeartRingObj Λ) (R.immersion a) ⋙\n          Mod.forget (condensedRingObj (coefficientHeartRingObj Λ) (R.domain a)) ≅\n        Mod.forget (condensedRingObj (coefficientHeartRingObj Λ) X) ⋙ upperStar Ab.{u + 1}\n          (R.immersion a))) ∧\n    (∀ (A B : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj\n      (coefficientHeartRingObj Λ) X))\n      (f : A ⟶ B),\n      (Mono f ↔ ∀ a : Fin R.n, Mono ((CondensedRing.upperStar (coefficientHeartRingObj Λ)\n        (R.immersion a)).map f)) ∧\n      (Epi f ↔ ∀ a : Fin R.n, Epi ((CondensedRing.upperStar (coefficientHeartRingObj Λ) (R.immersion\n        a)).map f))) ∧\n    ∀ (A B C : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj\n      (coefficientHeartRingObj Λ) X))\n      (f : A ⟶ B) (g : B ⟶ C),\n      imageSubobject f = kernelSubobject g ↔\n        ∀ a : Fin R.n,\n          imageSubobject ((CondensedRing.upperStar (coefficientHeartRingObj Λ) (R.immersion a)).map\n            f) =\n            kernelSubobject ((CondensedRing.upperStar (coefficientHeartRingObj Λ) (R.immersion\n              a)).map g)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-35cf8",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261019T093352-L-2301987",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-35cf8",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261019T093352-L-2301987",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 3 new modules vs live CoefficientHeartCommonStratification (verbatim def move, identical signature), 3 new node statements vs Lean, 23 direct importers compiled against the delivery, #print axioms clean"
+ }
+}

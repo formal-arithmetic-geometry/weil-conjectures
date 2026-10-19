@@ -1,0 +1,157 @@
+{
+ "id": "new-det-lem-coefficient-heart-common-stratification-refinement",
+ "kind": "statement",
+ "title": "coefficientHeart_commonStratification_refinement",
+ "statement": "Let $X$ be a Noetherian scheme. Let $\\Lambda$ be a commutative condensed ring (the coefficient is an unused parameter of the Lean statement). For every $n\\in\\mathbf N$ and every family $(P_j)_{j\\in\\{0,\\ldots,n-1\\}}$ of finite locally closed scheme stratifications of $X$ [def-constructible-stratification], there is a finite locally closed scheme stratification $R$ of $X$ such that every stratum image of $R$ is contained in a stratum image of every $P_j$, every scheme stratum of $R$ is connected [def-weil-connected-scheme], and, for every $0\\leq k\\leq |R|$, the union of the first $k$ stratum images is open in $X$. Refinement asserts containment of images only, with no factorization through the input scheme strata. The family of input stratifications may be empty and $X$ may be empty.",
+ "stmt_deps": [
+  "sk-def-sfb-constructible",
+  "def-constructible-stratification"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-common-stratification.md",
+  "place": "(1), finite common refinement and Noetherian induction for the open-prefix order"
+ },
+ "proof": [
+  {
+   "text": "Intersect the finite family of partitions using the finite product of their index types. The intersection for every tuple is locally closed, and choice of the stratum containing a point proves that these intersections cover X. For zero input partitions the empty product has one tuple and its intersection is X.",
+   "uses": [
+    "def-constructible-stratification",
+    "def-weil-locally-closed-subset"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Induct on closed subsets S of the Noetherian space, uniformly for every finite locally closed cover of S. For nonempty S choose an irreducible component Z and a nonempty ambient open O contained in Z. Irreducibility puts Z inside the closure of one of the finitely many covering parts. Write this part as V intersect D with V open and D closed. Then U = O intersect V is nonempty, irreducible, open in S, and contained in that part. Apply induction to the proper closed complement S minus U, intersecting each covering part with the complement. Prepend U to its ordered irreducible refinement. Distinct pieces are disjoint. The complement of each initial union is a closed tail from the induction, so initial unions are open. The empty closed subset uses zero strata.",
+   "uses": [
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "def-weil-irreducible-components",
+    "def-weil-locally-closed-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 09Y5 and 0052; Noetherian closed-subset induction, with irreducible open pieces"
+   }
+  },
+  {
+   "text": "Realize every resulting locally closed Q as the vanishing-ideal closed subscheme of the open coborder of Q. Its inclusion followed by the open immersion has range Q. The immersion is a homeomorphism onto its range. Irreducibility of Q therefore gives an irreducible, hence connected, domain. Assemble the finite scheme stratification and the containment and open-prefix proofs.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-stratification",
+  "def-weil-locally-closed-subset",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "def-weil-irreducible-components",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-connected-scheme"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tags 09Y5 and 0052; stronger irreducible ordered refinement by closed-subset induction, implemented by F2",
+  "group": "F2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally closed stratification of a Noetherian scheme has a refinement with connected strata whose successive unions are open",
+   "date": "2026-10-18",
+   "results": "8 hits: AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.IsNoetherian.noetherianSpace, AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace, AlgebraicGeometry.instIsLocallyNoetherianXScheme, AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top, TopologicalSpace.NoetherianSpace.exists_finset_irreducible, AlgebraicGeometry.isLocallyNoetherian_iff_openCover",
+   "verdict": "No exact complete theorem for this clause. Reuse the applicable categorical and Noetherian ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFree.*upperStar|upperStar.*IsFree|finiteFree.*[Ii]so|[Ii]so.*finiteFree",
+   "date": "2026-10-18",
+   "results": "0 hits: ",
+   "verdict": "No exact complete theorem for this clause. Reuse the applicable categorical and Noetherian ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNoetherian, IsLocallyClosed",
+   "date": "2026-10-18",
+   "results": "0 hits: ",
+   "verdict": "No exact complete theorem for this clause. Reuse the applicable categorical and Noetherian ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact inverse image functors reflect exactness when a finite stratification detects zero sheaves",
+   "date": "2026-10-18",
+   "results": "8 hits: CategoryTheory.Functor.reflects_exact_of_faithful, CategoryTheory.exactFunctor, CategoryTheory.ShortComplex.exact_map_iff_of_faithful, CategoryTheory.ShortComplex.Exact.map_of_preservesRightHomologyOf, CategoryTheory.ShortComplex.LeftHomologyData.exact_map_iff, CategoryTheory.ShortComplex.ShortExact.map_of_exact, CategoryTheory.ShortComplex.RightHomologyData.exact_map_iff, CategoryTheory.exactFunctor_le_leftExactFunctor",
+   "verdict": "No exact complete theorem for this clause. Reuse the applicable categorical and Noetherian ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite family of locally closed stratifications of a Noetherian scheme admits a common refinement with connected strata and open initial unions",
+   "date": "2026-10-18",
+   "results": "8 hits: TopologicalSpace.NoetherianSpace.exists_finite_set_closeds_irreducible, AlgebraicGeometry.IsNoetherian.noetherianSpace, AlgebraicGeometry.Scheme.OpenCover.compactSpace, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, ParacompactSpace.locallyFinite_refinement, AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens, AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top",
+   "verdict": "No exact complete theorem for this clause. Reuse the applicable categorical and Noetherian ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a locally finite free module sheaf is locally finite free and finite constant field models are locally finite free",
+   "date": "2026-10-18",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.pullback, SheafOfModules.pullbackObjFreeIso_hom_naturality, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackPushforwardAdjunction",
+   "verdict": "No exact complete theorem for this clause. Reuse the applicable categorical and Noetherian ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientHeartCommonStratification",
+  "date": "2026-10-18",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-coefficient-heart-common-stratification",
+   "place": "(1), finite common refinement and Noetherian induction for the open-prefix order",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-coefficient-heart",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientHeartOrderedRefinement",
+  "file": "lean/Sheaf/Paper/CoefficientHeartOrderedRefinement.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientHeart_commonStratification_refinement",
+  "statement": "theorem coefficientHeart_commonStratification_refinement\n    (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})\n    [IsCommMonObj (coefficientHeartRingObj Λ)] (X : Scheme.{u}) [IsNoetherian X] :\n    ∀ (n : ℕ) (P : Fin n → X.FiniteLocallyClosedStratification),\n      ∃ R : X.FiniteLocallyClosedStratification,\n        (∀ (j : Fin n) (a : Fin R.n), ∃ b : Fin (P j).n,\n          R.stratum a ⊆ (P j).stratum b) ∧\n        (∀ a : Fin R.n, ConnectedSpace (R.domain a)) ∧\n        ∀ k : Fin (R.n + 1),\n          IsOpen (⋃ a : Fin R.n, ⋃ (_ : a.val < k.val), R.stratum a)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-35cf8",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261019T093352-L-2301987",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-35cf8",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261019T093352-L-2301987",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 3 new modules vs live CoefficientHeartCommonStratification (verbatim def move, identical signature), 3 new node statements vs Lean, 23 direct importers compiled against the delivery, #print axioms clean"
+ }
+}
