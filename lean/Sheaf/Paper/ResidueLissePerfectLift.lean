@@ -94,7 +94,19 @@ abelian sheafification preserves addition. Composition gives the asserted struct
 @[instance]
 theorem residueLisseConstant_additive (X : Scheme.{t}) (A : Type t) [CommRing A] :
     (koszulConstantFunctor X A).Additive := by
-  sorry
+  constructor
+  intro M N f g
+  apply (SheafOfModules.toSheaf.{t + 1} (adicModuleRing X A)).map_injective
+  change (presheafToSheaf (ProEt.topology X) AddCommGrpCat.{t + 1}).map
+    ((PresheafOfModules.toPresheaf _).map
+      ((siteConstantModulePresheafGeneral (C := X.ProEt) (ULift.{t + 1} A)).map
+        (f + g))) = _
+  change (presheafToSheaf (ProEt.topology X) AddCommGrpCat.{t + 1}).map
+    (((PresheafOfModules.toPresheaf _).map
+      ((siteConstantModulePresheafGeneral (C := X.ProEt) (ULift.{t + 1} A)).map f)) +
+    ((PresheafOfModules.toPresheaf _).map
+      ((siteConstantModulePresheafGeneral (C := X.ProEt) (ULift.{t + 1} A)).map g))) = _
+  exact Functor.map_add _
 
 /-- Constant module sheafification preserves finite limits.
 Source: Stacks Tags 03CY and 09C6
@@ -105,7 +117,14 @@ constant modules. Associated sheafification is left exact, so preserves these li
 theorem residueLisseConstant_preservesFiniteLimits
     (X : Scheme.{t}) (A : Type t) [CommRing A] :
     PreservesFiniteLimits (koszulConstantFunctor X A) := by
-  sorry
+  have : PreservesFiniteLimits (koszulConstantFunctor X A ⋙
+      SheafOfModules.toSheaf.{t + 1} (adicModuleRing X A)) := by
+    change PreservesFiniteLimits
+      (forget₂ (ModuleCat.{t + 1} (ULift.{t + 1} A)) AddCommGrpCat.{t + 1} ⋙
+        constantSheaf (ProEt.topology X) AddCommGrpCat.{t + 1})
+    infer_instance
+  exact preservesFiniteLimits_of_reflects_of_preserves _
+    (SheafOfModules.toSheaf.{t + 1} (adicModuleRing X A))
 
 /-- Constant module sheafification preserves finite colimits.
 Source: Stacks Tags 03CY and 09C6
@@ -116,7 +135,19 @@ Sheafification is a left adjoint and preserves them. Thus their composite is exa
 theorem residueLisseConstant_preservesFiniteColimits
     (X : Scheme.{t}) (A : Type t) [CommRing A] :
     PreservesFiniteColimits (koszulConstantFunctor X A) := by
-  sorry
+  have := (koszulConstantUnit_local X A).1
+  have := (koszulConstantUnit_local X A).2
+  have : PreservesFiniteColimits
+      (siteConstantModulePresheafGeneral (C := X.ProEt) (ULift.{t + 1} A)) := by
+    constructor
+    intro J _ _
+    constructor
+    intro F
+    constructor
+    intro c hc
+    refine ⟨PresheafOfModules.evaluationJointlyReflectsColimits _ _ (fun U ↦ ?_)⟩
+    exact hc
+  exact comp_preservesFiniteColimits _ _
 
 /-- The standard algebraic localization, with no equality imposed on site universes.
 Source: Stacks Tags 05RU and 09C6
