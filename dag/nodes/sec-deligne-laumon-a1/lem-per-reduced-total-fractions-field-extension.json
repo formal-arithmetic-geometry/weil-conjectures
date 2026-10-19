@@ -13,9 +13,82 @@
   "def-pc-field-extension",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each field extension $L/k$ write $B_L=A\\otimes_kL$ and $R_L=B_L/\\sqrt{(0)}$.  For a tower $L\\subseteq M$, the map $B_L\\to B_M$ is the scalar-extension map.  It is injective: choose an $L$-basis of the nonzero $L$-vector space $M$ containing $1$, and the coefficient functional sending $1$ to $1$ gives a retraction of $b\\mapsto b\\otimes1$.  It is flat: $M$ is a flat $L$-module [lem-weil-pbc-module-over-field-flat], and under the associativity identification $B_M=A\\otimes_kM\\cong B_L\\otimes_LM$ the map $B_L\\to B_M$ is $b\\mapsto b\\otimes1$, so $B_M$ is a flat $B_L$-module by base change of flat modules [lem-weil-pbc-flat-module-base-change].  If the image of $b\\in B_L$ is nilpotent, injectivity makes $b$ nilpotent, so the scalar map descends to an injective $R_L\\to R_M$.  If a minimal prime of $B_M$ contracts to $\\mathfrak p\\subset B_L$, then $\\mathfrak p$ is minimal: a strictly smaller prime would lift by going down to a strictly smaller prime inside the chosen minimal prime.  Minimal primes are unchanged by passage to the nilradical quotients.  Hence a nonzerodivisor of $R_L$, which lies in no minimal prime by the reduced-ring zerodivisor theorem, maps to an element lying in no minimal prime of $R_M$, and is therefore a nonzerodivisor there.",
+   "uses": [
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-sc-flat-going-down",
+    "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes",
+    "lem-weil-pbc-flat-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3N, second proof paragraph: scalar extension, the canonical map of reduced rings, and the nonzerodivisor/minimal-prime argument"
+   }
+  },
+  {
+   "text": "The injective map $R_L\\to R_M$ sends the multiplicative set $S_L$ of nonzerodivisors into $S_M$.  The universal property of localization therefore gives $Q_L=S_L^{-1}R_L\\to Q_M=S_M^{-1}R_M$, with $c/d\\mapsto\\bar c/\\bar d$.  If a fraction maps to zero, some nonzerodivisor of $R_M$ annihilates the image of its numerator; that nonzerodivisor forces the image numerator to be zero, and injectivity of $R_L\\to R_M$ forces the numerator itself to be zero.  Thus the induced map $Q_L\\to Q_M$ is injective.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3N, second proof paragraph: canonical map between total rings of fractions"
+   }
+  },
+  {
+   "text": "For $s\\in A\\setminus\\{0\\}$, multiplication by $s$ on the domain $A$ is injective.  After tensoring with the field $L$ it remains injective (the same basis argument as above), so $s\\otimes1$ is a nonzerodivisor in $B_L$.  Its image is still a nonzerodivisor in $R_L$: if $(s\\otimes1)b$ is nilpotent, then a power of $s\\otimes1$ kills a power of $b$, and injectivity of multiplication by that power gives that $b$ is nilpotent.  Define $\\beta:F\\times L\\to Q_L$ by $\\beta(a/s,\\lambda)=(a\\otimes\\lambda)/(s\\otimes1)$. It is well defined: if $a/s=a'/s'$ in $F$ then $as'=a's$ in the domain $A$, so $(a\\otimes\\lambda)(s'\\otimes1)=(a'\\otimes\\lambda)(s\\otimes1)$ and the two fractions agree in $Q_L$. It is $k$-bilinear (bring two fractions to the common denominator $ss'$). The universal property of the tensor product gives the $k$-linear map $\\theta_L:F\\otimes_kL\\to Q_L$ with\n$$\\theta_L((a/s)\\otimes\\lambda)=(a\\otimes\\lambda)/(s\\otimes1),$$\nand checking on pure tensors shows that $\\theta_L$ is a ring homomorphism, that it restricts on the image of $B_L$ to $B_L\\to R_L\\to Q_L$, and that $\\theta_L((1/s)z)=(s\\otimes1)^{-1}\\theta_L(z)$ for the $F$-module structure of $F\\otimes_kL$.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-module-over-field-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3N, second proof paragraph: canonical fraction map from $Q(A_{red})\\otimes_kL$ to $Q((A\\otimes_kL)_{red})$"
+   }
+  },
+  {
+   "text": "Every element of $F\\otimes_kL$ can be written, after bringing finitely many pure tensors $(a_i/s_i)\\otimes\\lambda_i$ to a common denominator $s=\\prod s_i$, as $b/s:=(1/s)\\cdot\\iota(b)$ with $b\\in B_L$, $s\\in A\\setminus\\{0\\}$ and $\\iota:B_L\\to F\\otimes_kL$ the map $a\\otimes\\lambda\\mapsto(a/1)\\otimes\\lambda$. By step 3, $\\theta_L(b/s)=(s\\otimes1)^{-1}\\bar b/1$.  If $\\theta_L(b/s)=0$, the localization zero criterion gives a nonzerodivisor $t\\in R_L$ with $t\\bar b=0$.  Since $t$ is a nonzerodivisor, $\\bar b=0$, so $b$ is nilpotent in $B_L$ and $b/s$ is nilpotent in $F\\otimes_kL$.  Conversely, $Q_L$ is a localization of the reduced ring $R_L$, hence is reduced; a nilpotent element of $F\\otimes_kL$ therefore maps to zero.  Thus $\\ker\\theta_L$ is exactly the nilpotent ideal.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3N, second proof paragraph: the kernel consists of nilpotent elements"
+   }
+  },
+  {
+   "text": "All constructions above are induced by the structural tensor maps, quotient-to-the-reduction maps, and localization maps.  On pure tensors and represented fractions they send an element to the fraction of its image.  Associativity of tensor products gives equality for a tower $k\\subseteq L\\subseteq M$, and the localization universal property gives equality after replacing $A$ by $A[1/a]$ for any nonzero $a\\in A$.  These equalities agree on overlaps and hence are the asserted canonical tower and principal-localization compatibilities.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3N, second proof paragraph: tower maps and principal-localization compatibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-module-tensor-product",
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C3N, label lemma-normalization-and-change-of-fields, second proof paragraph; expanded for the reduced total-fraction map and its functorialities"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -61,7 +134,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-normalization-field-extension-homeomorphism",
@@ -73,20 +146,46 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof Step 1 of lem-per-artin-gabber-affine-curve: dimension-normalized Verdier duality and the middle t-structure, via the finite-coefficient potential-dualizing construction and the regular surface calculation in ILO XVII 3.4.1.3 (printed p.272); supplies the regular proper exceptional-curve trace used in that calculation. Normalization of the geometric curve, before applying the algebraically closed smooth-curve calculation. Affine ambient fraction rings in Stacks 0C3N, proof paragraph beginning To prove this morphism has the properties stated in the lemma.",
+   "place": "Proof Step 1 of lem-per-artin-gabber-affine-curve: the affine ambient fraction-ring calculation in Stacks Tag 0C3N, specifically the second proof paragraph beginning “To prove this morphism has the properties stated in the lemma we may assume X = Spec(A)” and its canonical map from Q(A_red) tensor K to Q((A tensor K)_red).",
    "via": [
-    "lem-per-normalization-field-extension-homeomorphism",
-    "lem-per-sepclosed-regular-proper-curve-trace",
-    "lem-per-surface-resolution-supported-presentation",
-    "lem-per-normal-top-residue-class",
-    "lem-per-normal-pinned-extension",
-    "lem-per-potential-dualizing-uniqueness",
-    "lem-per-finite-regular-reduction-dualizing",
-    "lem-per-qbar-generic-duality-model",
-    "lem-per-qbar-middle-tstructure"
+    "lem-per-normalization-field-extension-homeomorphism"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-reduced-total-fractions-field-extension",
+  "worker": "stage1",
+  "summary": "No project declaration states this item. I retained the imported statement and split its proof into the scalar-extension/minimal-prime argument, the induced total-fraction injection, construction of the canonical fraction map, identification of its nilpotent kernel, and tower/principal-localization compatibilities. All required algebraic ingredients are existing nodes or elementary consequences of their statements; no new node is needed.",
+  "blueprint": "Realizes the affine ambient fraction-ring calculation in Step 1 of lem-per-artin-gabber-affine-curve, namely the Tag 0C3N second proof paragraph describing the canonical total-fraction map and nilpotent kernel.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-flat-going-down",
+    "why": "Generic flat-ring going-down is used to show contractions of minimal primes under scalar extension remain minimal; no node in sk-p-dl-a1-perverse supplies this commutative-algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes",
+    "why": "The reduced-ring characterization of nonzerodivisors by minimal primes is used in the scalar-extension argument; it is a generic ring tool outside this unit."
+   },
+   {
+    "node": "lem-weil-pbc-module-over-field-flat",
+    "why": "Flatness of a vector space over its field is used to establish flat scalar extension and the associated injection; this generic module fact is outside the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes",
+  "lem-weil-pbc-module-over-field-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-2cd47b518",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-2cd47b518 (reviewer sub-agent of L); spot-checked: Read the item in full, Stacks varieties.tex Tag 0C3N (second and fourth proof paragraphs), the parent lem-per-normalization-field-extension-homeomorphism (steps 1, 2, 4 and 6 use θ_K, its nilpotent kernel, the injectivity of R_H→R_K and Q_E→Q_H, and tower compatibility), and every cited node. The statement matches the source specialized to an integral A (A_red = A, Q = F). Small cases hold: L = k; A = k[x]; the inseparable case k = F_p(t), A = k[x]/(x^p − t), L = k(t^{1/p}), where ker θ = (x − t^{1/p}) is the nilradical; M of infinite degree over L; and principal localization, since a⊗1 is a nonzerodivisor so Q(R_L[1/a]) = Q_L. Step 1: going down (HasGoingDown.of_flat) shows minimal primes contract to minimal primes, and the zerodivisor = union-of-minimal-primes node holds for any reduced ring, so no Noetherian hypothesis is needed. C1 fault: 'flatness is preserved by base change' had no citation. Fixed by citing the Mathlib leaf lem-weil-pbc-flat-module-base-change, with B_M ≅ B_L⊗_L M written out, and adding it to proof_deps. Step 3 built θ_L through an identification F⊗L ≅ (A∖0)^{-1}B_L that no cited node states. It now builds θ_L from the bilinear map (a/s, λ) ↦ (a⊗λ)/(s⊗1), checking well-definedness (as' = a's in the domain A) and using the tensor universal property; step 4 now writes elements as (1/s)ι(b). Steps 2, 4 and 5 were checked against the localization zero criterion. No duplicates: the total-fraction nodes lem-weil-pbc-reduced-noetherian-total-ring-fractions, lem-weil-pbc-reduced-algebraic-normalization-field-change and lem-trf-normalization-inseparable-base-change state other things. The declared tool_uses (lem-sc-flat-going-down, lem-weil-pbc-reduced-zerodivisors-union-minimal-primes, lem-weil-pbc-module-over-field-flat) are all Mathlib leaves and are accepted. No SGA citation, no cycle, statement unchanged. Corrected file: fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-reduced-total-fractions-field-extension.json.; 1 file(s) fixed by the reviewer"
  }
 }
