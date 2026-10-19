@@ -57,6 +57,12 @@ theorem isIso_constantSheaf_to_open_lowerStar
           ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) ≫
         (lowerStar (ModuleCat.{u + 1} Λ) v).map
           ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} Λ) v).app M).hom) := by
-  sorry
+  have hY' : ∀ y : Y, IsIntegrallyClosed (Y.presheaf.stalk y) := by
+    intro y
+    exact (hY.2 y).2
+  have : IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) v).unit.app
+      ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) :=
+    isIso_unit_constantSheaf_open_unit Λ hY' M v
+  infer_instance
 
 end AlgebraicGeometry.Etale
