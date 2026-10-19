@@ -1,0 +1,217 @@
+{
+ "id": "lem-sp-strict-tower-arithmetic-restriction-cochain-model",
+ "kind": "lemma",
+ "title": "Finite-block arithmetic cochain Roos comparison",
+ "statement": "Let $A$ be an abelian category [def-sp-abelian] with countable products [def-weil-category-product] and inverse limits of towers. Use the arithmetic restriction $r_e$, termwise limit $L$, limit restriction $\\alpha_e$, boundary $\\delta$, selection $a_e$, block map $b_e$, and actual mapping cocone $M$ from [def-sp-strict-tower-arithmetic-restriction-data]. For $e\\geq1$ and a cochain complex $I$ of towers such that each tower $I^i$ is injective [def-sp-injective-resolutions], the strict square $\\delta_I b_e=a_e\\delta_{r_eI}$ holds. There exist quasi-isomorphisms $\\kappa:LI\\to M(I)$, $\\kappa_e:Lr_eI\\to M(r_eI)$, and $c:M(I)\\to M(r_eI)$ [def-weil-abstract-derived-category]. In every cochain degree, composing the first coordinate of $\\kappa$ with product projection $n$ is the ordinary limit projection at $n$; the analogous coordinate of $\\kappa_e$ is the restricted limit projection. Both second coordinates vanish. The first coordinate of $c$ is the first coordinate of $M(I)$ followed by $a_e$, and its second coordinate in degree $i$ is the second coordinate of $M(I)$ followed by $b_e$ in degree $i-1$. Finally $\\kappa c=\\alpha_e\\kappa_e$.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-sp-strict-tower-arithmetic-restriction-data",
+  "def-weil-abstract-derived-category",
+  "def-weil-category-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0H9K, lemma-pro-isomorphism-iso-Rlim, proof and its two product maps; Tag 0H9L, lemma-pro-isomorphism-Rlim, supplies only a noncanonical triangulated isomorphism. The canonical strict-tower restriction and cone-unit assertion is an agent-extracted ringed-site refinement using the functorial Roos model."
+ },
+ "proof": [
+  {
+   "text": "Embed an injective tower J into its functorial finite-product split envelope E(J). The pointwise monic embedding is a tower mono, so injectivity retracts it. Compose the embedding at n, a section of the envelope transition, and the retraction at n+1 to split the original transition. Compose sections for arbitrary blocks. The recursion x_0=0, x_(n+1)=sigma_n(x_n-y_n) splits one minus shift degreewise; evaluation preserves the chosen products, transporting this splitting to the evaluated complex boundary.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-weil-tower-split-envelope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H9K, lemma-pro-isomorphism-iso-Rlim, proof and its two product maps; Tag 0H9L, lemma-pro-isomorphism-Rlim, supplies only a noncanonical triangulated isomorphism. The canonical strict-tower restriction and cone-unit assertion is an agent-extracted ringed-site refinement using the functorial Roos model."
+   }
+  },
+  {
+   "text": "Identify compatible-family ordinary limits with kernels of one minus shift and apply the degreewise-epimorphism kernel-to-shifted-cone comparison, normalized against mappingCocone.fst and snd.",
+   "uses": [
+    "lem-weil-degreewise-epi-kernel-cocone-qis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H9K, lemma-pro-isomorphism-iso-Rlim, proof and its two product maps; Tag 0H9L, lemma-pro-isomorphism-Rlim, supplies only a noncanonical triangulated isomorphism. The canonical strict-tower restriction and cone-unit assertion is an agent-extracted ringed-site refinement using the functorial Roos model."
+   }
+  },
+  {
+   "text": "The product universal property constructs selection and finite-block sums. Telescope each coordinate to prove the strict square and use the actual shifted cone map. Its two coordinates prove the kernel square, and two-out-of-three with the initial-index ordinary-limit isomorphism proves it is a quasi-isomorphism.",
+   "uses": [
+    "def-weil-category-product",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H9K, lemma-pro-isomorphism-iso-Rlim, proof and its two product maps; Tag 0H9L, lemma-pro-isomorphism-Rlim, supplies only a noncanonical triangulated isomorphism. The canonical strict-tower restriction and cone-unit assertion is an agent-extracted ringed-site refinement using the functorial Roos model."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "def-weil-category-product",
+  "lem-weil-degreewise-epi-kernel-cocone-qis",
+  "lem-weil-tower-split-envelope"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0H9K, 0941 and 070M; the finite-product split envelope replaces the free-prefix diagram argument in step 1; all cochain coordinates and assembly are proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(homotopyLimit|homotopy_limit|derivedLimit|derived_limit|roos|Roos)",
+   "results": "{\"t\": \"2026-10-17T08:05:32Z\", \"tool\": \"grep\", \"query\": \"(homotopyLimit|homotopy_limit|derivedLimit|derived_limit|roos|Roos)\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary initial-functor limitIso and cochain restriction/mapping-cone infrastructure do not identify the canonical total derived tower comparison or its cone units in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homotopy inverse limit of a tower of complexes is invariant under restriction to a cofinal subsequence",
+   "results": "{\"t\": \"2026-10-17T08:05:33Z\", \"tool\": \"leansearch\", \"query\": \"The homotopy inverse limit of a tower of complexes is invariant under restriction to a cofinal subsequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.instHasLimit\", \"HomologicalComplex.instHasLimitsOfShape\", \"InverseSystem.invLimEquiv.congr_simp\", \"CochainComplex.HomComplex.Cochain.InductionUp.limitSequence_eqUpTo\", \"CochainComplex.ConnectData.restrictionGEIso_inv_f\", \"HomologicalComplex.isColimitOfEval\", \"CochainComplex.ConnectData.restrictionLEIso_inv_f\", \"InverseSystem.invLimEquiv\"], \"digest\": \"c8bc50a7d7f26ef7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary initial-functor limitIso and cochain restriction/mapping-cone infrastructure do not identify the canonical total derived tower comparison or its cone units in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Initial, CategoryTheory.Limits.limit",
+   "results": "{\"t\": \"2026-10-17T08:05:33Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.Initial, CategoryTheory.Limits.limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Initial.limitIso\", \"CategoryTheory.Functor.Initial.limit_pre_isIso\", \"CategoryTheory.Functor.Initial.limitIso_inv\", \"CategoryTheory.Functor.Initial.limitIso_hom\"], \"digest\": \"1fcfcbbe5d9640c5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary initial-functor limitIso and cochain restriction/mapping-cone infrastructure do not identify the canonical total derived tower comparison or its cone units in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a strict inverse tower of complexes to indices e n induces a natural isomorphism on right derived inverse limits preserving the quotient cone",
+   "results": "{\"t\": \"2026-10-17T08:05:44Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of a strict inverse tower of complexes to indices e n induces a natural isomorphism on right derived inverse limits preserving the quotient cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.diagramComp\", \"HomologicalComplex.restriction.sc'Iso_inv_τ₁\", \"CochainComplex.ConnectData.restrictionGEIso_inv_f\", \"HomologicalComplex.restrictionOpcyclesIso\", \"HomologicalComplex.pOpcycles_restrictionOpcyclesIso_inv\", \"HomologicalComplex.restriction.sc'Iso_inv_τ₂\", \"HomologicalComplex.homologyπ_restrictionHomologyIso_inv\", \"HomologicalComplex.instIsIsoFRestrictionToTruncGE'OfIsStrictlySupported\"], \"digest\": \"07fe01a666c93ae8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary initial-functor limitIso and cochain restriction/mapping-cone infrastructure do not identify the canonical total derived tower comparison or its cone units in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "Initial.*(derived|rightDerived)|rightDerived.*Initial|subsequence.*limit",
+   "results": "{\"t\": \"2026-10-17T08:08:24Z\", \"tool\": \"grep\", \"query\": \"Initial.*(derived|rightDerived)|rightDerived.*Initial|subsequence.*limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Calculus/TangentCone/ProperSpace.lean\"], \"digest\": \"565e8e955714de71\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary initial-functor limitIso and cochain restriction/mapping-cone infrastructure do not identify the canonical total derived tower comparison or its cone units in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Roos mapping cone for an inverse sequence in a Grothendieck abelian category is invariant under arithmetic subsequences, naturally and compatibly with cone maps",
+   "results": "{\"t\": \"2026-10-17T08:08:35Z\", \"tool\": \"leanfinder\", \"query\": \"Roos mapping cone for an inverse sequence in a Grothendieck abelian category is invariant under arithmetic subsequences, naturally and compatibly with cone maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.mapHomologicalComplexXIso_eq\", \"CochainComplex.HomComplex.Cochain.InductionUp.limitSequence_eqUpTo\", \"CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv\", \"CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom\", \"CochainComplex.cm5b.i_f_comp\", \"HomotopyCategory.spectralObjectMappingCone_ω₁\", \"HomotopyCategory.composableArrowsFunctor_obj\", \"CochainComplex.mappingCone.decomp_from\"], \"digest\": \"03677bd138d5e8c1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary initial-functor limitIso and cochain restriction/mapping-cone infrastructure do not identify the canonical total derived tower comparison or its cone units in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "def limitIso|instance limit_pre_isIso",
+   "results": "{\"t\": \"2026-10-17T08:10:13Z\", \"tool\": \"grep\", \"query\": \"def limitIso|instance limit_pre_isIso\", \"sub\": \"CategoryTheory/Limits/Final.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"699\", \"712\"], \"digest\": \"12b9e3afc874a493\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary initial-functor limitIso and cochain restriction/mapping-cone infrastructure do not identify the canonical total derived tower comparison or its cone units in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|derivedLimit|derived_limit|homotopyLimit|homotopy_limit",
+   "results": "{\"t\": \"2026-10-17T13:37:57Z\", \"tool\": \"grep\", \"query\": \"Roos|derivedLimit|derived_limit|homotopyLimit|homotopy_limit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary initial-functor limit comparison (Final.lean:699,712), restriction of homological-complex shapes, Kan extension cones, sequential products, and shift sequences do not state this total derived strict-tower comparison, its finite-block cone map, or its specified cone-unit identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right derived inverse limit of a tower is unchanged by a cofinal subsequence and its canonical comparison preserves cone maps",
+   "results": "{\"t\": \"2026-10-17T13:37:58Z\", \"tool\": \"leansearch\", \"query\": \"The right derived inverse limit of a tower is unchanged by a cofinal subsequence and its canonical comparison preserves cone maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isLimitConeOfIsRightKanExtension\", \"Profinite.isIso_asLimitCone_lift\", \"CategoryTheory.Limits.IsLimit.ofRightAdjoint\", \"CategoryTheory.Limits.isLimitOfCoconeRightOpOfCone\", \"Profinite.asLimitindexConeIso\", \"Profinite.asLimitConeIso\", \"InverseSystem.invLimEquiv\", \"CategoryTheory.Limits.isColimitOfConeRightOpOfCocone\"], \"digest\": \"c8828bf9e37ced12\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary initial-functor limit comparison (Final.lean:699,712), restriction of homological-complex shapes, Kan extension cones, sequential products, and shift sequences do not state this total derived strict-tower comparison, its finite-block cone map, or its specified cone-unit identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a strict inverse tower of sheaf complexes to arithmetic subsequences induces the canonical natural isomorphism on total right derived inverse limits",
+   "results": "{\"t\": \"2026-10-17T13:37:59Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of a strict inverse tower of sheaf complexes to arithmetic subsequences induces the canonical natural isomorphism on total right derived inverse limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.restriction.sc'Iso_inv_τ₁\", \"HomologicalComplex.restriction.sc'Iso\", \"HomologicalComplex.restriction.sc'Iso_inv_τ₂\", \"HomologicalComplex.restriction.sc'Iso_inv_τ₃\", \"HomologicalComplex.restriction.sc'Iso_hom_τ₁\", \"HomologicalComplex.restriction.sc'Iso_hom_τ₂\", \"HomologicalComplex.restrictionOpcyclesIso\", \"HomologicalComplex.restrictionCyclesIso\"], \"digest\": \"7da70fa6a7bcc003\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary initial-functor limit comparison (Final.lean:699,712), restriction of homological-complex shapes, Kan extension cones, sequential products, and shift sequences do not state this total derived strict-tower comparison, its finite-block cone map, or its specified cone-unit identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Roos mapping fiber of one minus the shift for an inverse sequence is functorially unchanged by selecting every e-th coordinate, with finite block sums on the other product",
+   "results": "{\"t\": \"2026-10-17T13:38:06Z\", \"tool\": \"leanfinder\", \"query\": \"The Roos mapping fiber of one minus the shift for an inverse sequence is functorially unchanged by selecting every e-th coordinate, with finite block sums on the other product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.SequentialProduct.functorObj_eq_neg\", \"CategoryTheory.Functor.ShiftSequence.induced\", \"CategoryTheory.Limits.SequentialProduct.functorObjProj_neg\", \"CategoryTheory.Limits.SequentialProduct.functorObj_eq_pos\", \"CategoryTheory.Functor.ShiftSequence.sequence\", \"CategoryTheory.Functor.ShiftSequence.tautological\", \"AlgebraicTopology.DoldKan.Q_is_eventually_constant\", \"CategoryTheory.Functor.ShiftSequence\"], \"digest\": \"2b437a1da651e25e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary initial-functor limit comparison (Final.lean:699,712), restriction of homological-complex shapes, Kan extension cones, sequential products, and shift sequences do not state this total derived strict-tower comparison, its finite-block cone map, or its specified cone-unit identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Arithmetic restriction along a cofinal subsequence preserves derived inverse limits of strict towers and its mapping fiber comparison",
+   "results": "8 matches: InverseSystem equivalences and LightProfinite.transitionMapLE, none states the cochain Roos comparison.",
+   "date": "2026-10-19",
+   "verdict": "No complete match; ordinary initial-functor limit invariance and right-derived descent suffice for Comparison, but not for the explicit cochain map."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedDesc",
+   "results": "rightDerivedDesc, rightDerived_fac, rightDerived_fac_app, rightDerived_ext in Mathlib.CategoryTheory.Functor.Derived.RightDerived",
+   "date": "2026-10-19",
+   "verdict": "Used to construct and normalize the canonical comparison; does not supply the degreewise explicit cochain maps."
+  },
+  {
+   "tool": "grep",
+   "query": "tower.*(injective|Injective)|IsGrothendieckAbelian.*[Ff]unctor",
+   "results": "Search service returned only unrelated scalar-tower matches. Local rg found SmallModuleDiagramsGrothendieck, KInjectiveResolutionInjective, RingedSiteModulesGrothendieckOfUniverses, and RoosSplitComparison.",
+   "date": "2026-10-19",
+   "verdict": "Use the Grothendieck resolution API and exact-adjoint criterion for Resolution. RoosSplitComparison constructs an abstract termwise product cone, but does not state the canonical arithmetic map with the chosen mappingCocone projections."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.StrictTowerArithmeticRestriction",
+  "date": "2026-10-19",
+  "group": "R7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-qbar",
+   "place": "Opening scalar-compatibility paragraph: arithmetic subsequence preserves completed quotient-cone normalization; explicit arithmetic comparison steps of lem-sp-strict-tower-arithmetic-restriction",
+   "via": [
+    "lem-sp-strict-tower-arithmetic-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.StrictTowerArithmeticRestrictionCochainModel",
+  "file": "lean/Sheaf/CategoryTheory/StrictTowerArithmeticRestrictionCochainModel.lean",
+  "declaration": "CategoryTheory.StrictTowerArithmetic.strictTowerArithmeticRestrictionCochainModel",
+  "statement": "theorem strictTowerArithmeticRestrictionCochainModel\n    (A : Type a) [Category.{b} A] [Abelian A]\n    [HasCountableProducts A] [HasLimitsOfShape ℕᵒᵖ A]\n    (e : ℕ) (he : 1 ≤ e) (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ)\n    (hI : ∀ i : ℤ, Injective (I.X i)) :\n        boundary I ≫ block e I.asFunctor =\n          selection e I.asFunctor ≫ boundary ((complexRestriction _ e).obj I) ∧\n        ∃ (κ : (limitComplex _).obj I ⟶ model I)\n          (κe : (limitComplex _).obj ((complexRestriction _ e).obj I) ⟶\n            model ((complexRestriction _ e).obj I))\n          (c : model I ⟶ model ((complexRestriction _ e).obj I)),\n          QuasiIso κ ∧ QuasiIso κe ∧ QuasiIso c ∧\n          (∀ (i : ℤ) (n : ℕ),\n            κ.f i ≫ (CochainComplex.mappingCocone.fst (boundary I)).f i ≫\n                (Pi.π (fun n : ℕ ↦ I.asFunctor.obj (op n)) n).f i =\n              limit.π (I.X i) (op n)) ∧\n          (∀ (i j : ℤ) (h : i + -1 = j),\n            κ.f i ≫ (CochainComplex.mappingCocone.snd (boundary I)).v i j h = 0) ∧\n          (∀ (i : ℤ) (n : ℕ),\n            κe.f i ≫ (CochainComplex.mappingCocone.fst\n                (boundary ((complexRestriction _ e).obj I))).f i ≫\n                (Pi.π (fun n : ℕ ↦ I.asFunctor.obj ((index e).obj (op n))) n).f i =\n              limit.π (((complexRestriction _ e).obj I).X i) (op n)) ∧\n          (∀ (i j : ℤ) (h : i + -1 = j),\n            κe.f i ≫ (CochainComplex.mappingCocone.snd\n              (boundary ((complexRestriction _ e).obj I))).v i j h = 0) ∧\n          c ≫ CochainComplex.mappingCocone.fst (boundary ((complexRestriction _ e).obj I)) =\n            CochainComplex.mappingCocone.fst (boundary I) ≫ selection e I.asFunctor ∧\n          (∀ (i j : ℤ) (h : i + -1 = j),\n            c.f i ≫ (CochainComplex.mappingCocone.snd\n                (boundary ((complexRestriction _ e).obj I))).v i j h =\n              (CochainComplex.mappingCocone.snd (boundary I)).v i j h ≫\n                (block e I.asFunctor).f j) ∧\n          κ ≫ c = limitMap e I ≫ κe",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-aaaaa",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261019T005415-L-2765462",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-aaaaa",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261019T005415-L-2765462",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 5 new modules vs live clone: theorem signature identical, 10 defs moved verbatim into Defs (public re-export, same 5 public imports), Lean/DAG byte-identical to the earlier PASSed c470a2b99 apart from the Users row; all compile, axioms clean, 3 direct importers compile against the delivered modules"
+ }
+}

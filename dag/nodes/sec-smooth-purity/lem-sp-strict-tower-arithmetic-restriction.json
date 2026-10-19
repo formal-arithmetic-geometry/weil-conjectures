@@ -14,143 +14,36 @@
  ],
  "proof": [
   {
-   "text": "Write $c(i)=\\lceil i/e\\rceil$ for the least positive integer with $i\\leq ec(i)$. For a tower $T$, set $(L_eT)_i=T_{c(i)}$, with transitions those of $T$ (identities when $c(i)=c(i+1)$). This is additive and exact by levelwise exactness [lem-weil-tower-category-levelwise-abelian]. It is left adjoint to $r_e$: a map $f:T\\to r_eX$ gives $(L_eT)_i\\to X_i$ equal to $s^X_{i,ec(i)}f_{c(i)}$, and the inverse sends $g:L_eT\\to X$ to $g_{en}:T_n\\to X_{en}$. The inverse identities follow from $c(en)=n$ and naturality of $g$ along $ec(i)\\to i$; the same formulas show naturality in $T,X$. Thus this exact adjunction is established directly, including the initial block $1\\leq i<e$.",
+   "text": "Apply the normalized derived comparison and its identity and strict-cone laws.",
    "uses": [
-    "lem-weil-tower-category-levelwise-abelian"
+    "lem-sp-strict-tower-arithmetic-restriction-comparison"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941 (lemma-derived-limit-is-ok), exact-left-adjoint method; explicit arithmetic-index adjunction by the agent"
-   }
+   "elementary": false
   },
   {
-   "text": "Realize towers as module sheaves on the small site $\\mathcal C\\times\\mathbf N_{\\geq1}$, whose arrows $(U,i)\\to(V,j)$ are arrows $U\\to V$ for $i\\leq j$ and whose coverings have fixed index. Its coefficient sheaf is $\\mathcal O(U,i)=\\mathcal O(U)$. The sheaf and module axioms at each index give exactly the objects and morphisms of $\\operatorname{Tow}(\\mathcal A)$. By [prop-pur-kinjective-resolutions-exist] choose a functorial resolution $X\\to I$ that is K-injective as a tower complex and has injective tower objects in every cochain degree. Step 1 and [lem-weil-pbc-right-adjoint-preserves-kinjective] imply that $r_eI$ is K-injective. Restriction is exact, so $r_eX\\to r_eI$ is a quasi-isomorphism. By [lem-weil-pbc-ringed-strict-tower-homotopy-limit], $L=\\lim_i I_i$ and $L_e=\\lim_n I_{en}$ compute respectively $R\\lim X$ and $R\\lim r_eX$. We have therefore obtained simultaneous resolutions; no acyclicity of arbitrary products is being asserted.",
+   "text": "Apply simultaneous degreewise injective K-injective tower resolutions.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+    "lem-sp-strict-tower-arithmetic-restriction-resolution"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0940 (section-derived-limits), 0941 (lemma-derived-limit-is-ok); Tag 079P (injectives-theorem-K-injective-embedding-grothendieck); derived.tex Tag 08BJ (lemma-adjoint-preserve-K-injectives)"
-   }
+   "elementary": false
   },
   {
-   "text": "The ordinary restriction map $\\alpha:L\\to L_e$ selects coordinates $en$. Its inverse $\\beta$ sends a compatible family $(z_n)$ to $x_i=s_{i,ec(i)}z_{c(i)}$. To check compatibility, for $i\\leq j$ put $a=c(i)\\leq b=c(j)$; then $s_{i,j}x_j=s_{i,eb}z_b=s_{i,ea}s_{ea,eb}z_b=s_{i,ea}z_a=x_i$. Also $(\\alpha\\beta z)_n=z_n$, since $c(en)=n$, while $(\\beta\\alpha x)_i=s_{i,ec(i)}x_{ec(i)}=x_i$. These formulas define sheaf morphisms and commute with the cochain differential because every $s_{i,j}$ is a chain map. Hence $\\alpha$ is a chain isomorphism, natural in strict maps of tower complexes. This is the ordinary limit restriction comparison whose total derived comparison we will identify in the Roos models.",
+   "text": "Apply the localized cochain model with the normalization equation of the selected comparison, and assemble all conjunctions.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-abstract-derived-category"
+    "lem-sp-strict-tower-arithmetic-restriction-model"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0H9K (lemma-pro-isomorphism-iso-Rlim), restriction on compatible families; explicit inverse for the arithmetic subsequence"
-   }
-  },
-  {
-   "text": "Evaluation gives K-injective complexes $I_i$ by [lem-weil-tower-evaluation-kinjective]. Module-sheaf products exist sectionwise: coordinatewise restrictions and module actions give a sheaf because each coordinate of a matching family glues uniquely. Thus form the termwise product complexes $P=\\prod_i I_i$ and $P_e=\\prod_n I_{en}$. By [lem-pc-ringed-space-product-kinjective] they represent the products $\\prod_i^D X_i$ and $\\prod_n^D X_{en}$ in the derived category. Define $\\delta=1-s$ and $\\delta_e=1-s_e$, so $(\\delta x)_i=x_i-s_{i,i+1}x_{i+1}$ and $(\\delta_e z)_n=z_n-s_{en,e(n+1)}z_{n+1}$. Their termwise kernels are exactly $L$ and $L_e$.",
-   "uses": [
-    "lem-weil-tower-evaluation-kinjective",
-    "lem-pc-ringed-space-product-kinjective",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941 (lemma-derived-limit-is-ok), evaluated K-injectives and derived products; derived.tex Tag 0BK6 (lemma-product-K-injective)"
-   }
-  },
-  {
-   "text": "For an injective tower object $J$, let $T_n(F)$ equal $F$ at indices $i\\leq n$ and zero otherwise, with identity nonzero transitions. Tower maps $T_n(F)\\to J$ correspond to maps $F\\to J_n$, by propagating along the transitions. The inclusion $T_n(F)\\hookrightarrow T_{n+1}(F)$ is monic by [lem-weil-tower-category-levelwise-abelian]. Take $F=J_n$ and extend the map corresponding to $1_{J_n}$ across that inclusion using injectivity [def-sp-injective-resolutions]. Its component at $n+1$ is a section $\\sigma_n:J_n\\to J_{n+1}$ of the transition $q_n:J_{n+1}\\to J_n$. For $J=I^r$, this gives such sections in every cochain degree $r$. The composite $\\sigma_{e(n+1)-1}\\cdots\\sigma_{en}$ is a section of $J_{e(n+1)}\\to J_{en}$ as well. These sections are only degreewise; they need not commute with differentials.",
-   "uses": [
-    "lem-weil-tower-category-levelwise-abelian",
-    "def-sp-injective-resolutions"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941 (lemma-derived-limit-is-ok), injective transitions; module-linear splitting proved from the definition of injectivity"
-   }
-  },
-  {
-   "text": "In each degree, $\\delta:P^r\\to P^r$ is surjective on sections: for any $(y_i)$ put $x_1=0$ and $x_{i+1}=\\sigma_i(x_i-y_i)$, giving $x_i-q_ix_{i+1}=y_i$. The same recursion with the block sections of Step 5 proves that $\\delta_e$ is degreewise epimorphic. Apply [lem-weil-degreewise-epi-kernel-cocone-qis] to these two epimorphisms. It supplies the specified quasi-isomorphisms $\\kappa:L\\to H=\\operatorname{Cone}(\\delta)[-1]$ and $\\kappa_e:L_e\\to H_e=\\operatorname{Cone}(\\delta_e)[-1]$, each given by $x\\mapsto(0,x)$ with the kernel inclusion in the second component. In particular these are the cochain Roos models for the two derived limits of Step 2, with differential $d_H(y,x)=(-dy-\\delta x,dx)$ and the analogous formula for $H_e$. This identifies their first vertices canonically at the complex level.",
-   "uses": [
-    "lem-weil-degreewise-epi-kernel-cocone-qis"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Kernel-to-shifted-cone comparison in the proof of Tag 070M (lemma-difficulty-K-injectives), in its explicit signed form stated by the cited node; sites-cohomology.tex Tag 0941"
-   }
-  },
-  {
-   "text": "Define chain maps $a,b:P\\to P_e$ by $a(x)_n=x_{en}$ and $b(y)_n=\\sum_{i=en}^{e(n+1)-1}s_{en,i}y_i$. They are morphisms by the product universal property [def-weil-category-product], since each component uses finitely many summands. The square is strictly commutative: in coordinate $n$,\n$$ (b\\delta x)_n=\\sum_{i=en}^{e(n+1)-1}(s_{en,i}x_i-s_{en,i+1}x_{i+1})=x_{en}-s_{en,e(n+1)}x_{e(n+1)}=(\\delta_e ax)_n.$$\nConsequently the induced shifted-cone map is the specified chain map $c:H\\to H_e$, $c(y,x)=(by,ax)$: the differentials satisfy $d_{H_e}c(y,x)=(-bdy-\\delta_e ax,adx)=c(-dy-\\delta x,dx)$. This uses the actual cone differential [def-weil-abstract-derived-category], rather than any completion of a triangulated square. By Step 4 these are precisely the asserted maps on the derived products.",
-   "uses": [
-    "def-weil-category-product",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0H9K (lemma-pro-isomorphism-iso-Rlim), proof, the maps varphi-prime and varphi-double-prime with m_n=en and varphi_n=identity"
-   }
-  },
-  {
-   "text": "The kernel inclusions and the two cone maps satisfy $c\\kappa=\\kappa_e\\alpha$ strictly, since both send $x\\in L$ to $(0,(x_{en})_n)$. In the derived category the quasi-isomorphisms $\\kappa,\\kappa_e$ are invertible [def-weil-abstract-derived-category], so $Q(c)=Q(\\kappa_e)Q(\\alpha)Q(\\kappa)^{-1}$. It follows from the explicit inverse $\\beta$ in Step 3 that $Q(c)$ is an isomorphism. Under the simultaneous-resolution identifications this is exactly the total derived restriction comparison $\\rho_{e,X}$. The projection $H\\to I_i$ is $(y,x)\\mapsto x_i$, so the equation for the selected coordinate gives $p_n\\rho_{e,X}=p_{en}$ in $D(\\mathcal A)$.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Localization at quasi-isomorphisms and the signed cone model; sites-cohomology.tex Tags 0940 and 0941, with the explicit comparison of Steps 3 and 7"
-   }
-  },
-  {
-   "text": "For a chain map of resolved towers $f:I\\to I'$, write $F=\\prod_i f_i$ and $F_e=\\prod_n f_{en}$. Strict transition compatibility gives $a'F=F_ea$ and $b'F=F_eb$, since each term satisfies $s'_{en,i}f_i=f_{en}s_{en,i}$. Thus $c$ is natural for these chain maps. By [lem-weil-pbc-kinjective-hom-derived], every morphism in $D(\\operatorname{Tow}(\\mathcal A))$ is represented by a unique homotopy class of chain maps between the K-injective tower representatives. Termwise inverse limit and restriction carry a tower homotopy to a homotopy, by applying them to $f-g=dh+hd$. Hence $\\alpha$ descends to those homotopy classes, and Step 8 identifies its descended map with $Q(c)$. A change of K-injective representative is a homotopy equivalence by the same cited node, so the construction is independent of the resolutions under their canonical derived identifications. This proves naturality for every derived morphism. For $e=1$, both $a$ and $b$ are identities (each block has one summand), and so are $\\alpha$ and $c$.",
-   "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070I (lemma-K-injective), Hom in the homotopy and derived categories and homotopy equivalences; strict product calculations of more-algebra.tex Tag 0H9K"
-   }
-  },
-  {
-   "text": "Let $h:\\Delta K\\to X$ be the specified strict cone. After $X\\to I$ write its components as $h_i:K\\to I_i$. The compatible family $t=(h_i)_i:K\\to P$ satisfies $\\delta t=0$. Its specified Roos map is $U:K\\to H$, $U=(0,t)$; equivalently it is $\\kappa$ composed with the unique map $K\\to L$ given by that compatible family. For the restricted cone it is $U_e=(0,(h_{en})_n)$. The cochain formula gives $cU=(0,at)=U_e$, and localization gives $\\rho_{e,X}u=u_e$. For any strict square of tower maps, the two composites commute before localization; applying termwise limits gives its total-limit square. Step 9 says each edge commutes with $\\rho_e$, and the displayed equality says each specified cone unit does too. Thus the strict-square and unit assertions follow as equalities of the specified maps. Only products of evaluated K-injectives and the degreewise splitting in Step 5 have been used, never exactness of arbitrary countable products.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "def-weil-category-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Signed mapping cone and its kernel map; agent extraction of the strict-cone-unit refinement of sites-cohomology.tex Tag 0941 and more-algebra.tex Tag 0H9K"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sp-injective-resolutions",
-  "def-weil-abstract-derived-category",
-  "def-weil-category-product",
-  "def-weil-sheaf-of-modules-category",
-  "lem-pc-ringed-space-product-kinjective",
-  "lem-weil-degreewise-epi-kernel-cocone-qis",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-tower-category-levelwise-abelian",
-  "lem-weil-tower-evaluation-kinjective",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-sp-strict-tower-arithmetic-restriction-comparison",
+  "lem-sp-strict-tower-arithmetic-restriction-model",
+  "lem-sp-strict-tower-arithmetic-restriction-resolution"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0H9K (lemma-pro-isomorphism-iso-Rlim), finite-block product formulas, upgraded to the canonical ringed-site strict cochain cone by sites-cohomology.tex Tags 0940/0941; no use of the noncanonical completion in Tag 0H9L."
+  "place": "Tag 0H9K; derived universal-property comparison, simultaneous resolutions, and explicit cochain model"
  },
  "mathlib_searches": [
   {
@@ -293,16 +186,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-tower-category-levelwise-abelian",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-tower-evaluation-kinjective",
-  "lem-pc-ringed-space-product-kinjective",
-  "lem-weil-degreewise-epi-kernel-cocone-qis",
-  "lem-weil-pbc-kinjective-hom-derived"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -315,16 +199,6 @@
   "module": "Sheaf.CategoryTheory.StrictTowerArithmeticRestriction",
   "declaration": "CategoryTheory.StrictTowerArithmetic.strictTowerArithmeticRestriction",
   "declarations": [
-   "CategoryTheory.StrictTowerArithmetic.index",
-   "CategoryTheory.StrictTowerArithmetic.restriction",
-   "CategoryTheory.StrictTowerArithmetic.complexRestriction",
-   "CategoryTheory.StrictTowerArithmetic.derivedRestriction",
-   "CategoryTheory.StrictTowerArithmetic.selection",
-   "CategoryTheory.StrictTowerArithmetic.block",
-   "CategoryTheory.StrictTowerArithmetic.limitComplex",
-   "CategoryTheory.StrictTowerArithmetic.limitMap",
-   "CategoryTheory.StrictTowerArithmetic.boundary",
-   "CategoryTheory.StrictTowerArithmetic.model",
    "CategoryTheory.StrictTowerArithmetic.strictTowerArithmeticRestriction"
   ],
   "file": "lean/Sheaf/CategoryTheory/StrictTowerArithmeticRestriction.lean",
@@ -333,7 +207,7 @@
   "by": "NE",
   "date": "2026-10-17",
   "existing": false,
-  "note": "The comparison is normalized against the total right derived inverse-limit unit from ringedStrictTowerHomotopyLimitOfUniverses. All helpers construct the owning canonical restriction and its two product maps, or transparently abbreviate existing Mathlib constructions. The representative clause uses every K-injective tower with injective terms, records both derived product cones and both actual cochain cocone coordinates, and therefore gives the projection and strict-cone laws under the canonical derived identifications."
+  "note": "Definitions moved unchanged to StrictTowerArithmeticRestrictionDefs and publicly re-exported. Main statement unchanged; proof assembles comparison, resolution and model clauses."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -342,5 +216,15 @@
   "group": "NE",
   "result": "pass",
   "note": "Wrote review.md. Checked source passages, dependencies, every statement clause, universes, edge cases, canonical cone maps, and verbatim signature. Prescribed per-file compilation passed cleanly. No delivery errors found; snapshot and branch head unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-aaaaa",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261019T005415-L-2765462",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 5 new modules vs live clone: theorem signature identical, 10 defs moved verbatim into Defs (public re-export, same 5 public imports), Lean/DAG byte-identical to the earlier PASSed c470a2b99 apart from the Users row; all compile, axioms clean, 3 direct importers compile against the delivered modules"
  }
 }
