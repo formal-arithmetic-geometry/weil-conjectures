@@ -16877,3 +16877,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:54 L: merged deliver/T8/Sheaf.Paper.SectionDerivedRealization (stage 3; reviewer PASS; first push; landing 20261019T005431-L-2770861 (proof); batch 20261019T005255; modules 1; new nodes 0)
 - 00:54 L: merged deliver/T9/Sheaf.AlgebraicGeometry.ProEtaleClosedSupportTriangle (stage 3; reviewer PASS; first push; landing 20261019T005432-L-2771059 (interface); batch 20261019T005255; modules 1; new nodes 0; change records: coord/changes/T9-proEtaleClosedSupportTriangle-local-helpers.md)
 - 00:54 L: merged deliver/T9/Sheaf.Paper.CompactificationRefinementLocalizing (stage 3; reviewer PASS; first push; landing 20261019T005432-L-2771241 (proof); batch 20261019T005255; modules 1; new nodes 0)
+- 00:54 L: merged deliver/U1/Sheaf.Paper.ProperOpenTowerDerivedUnit (stage 3; reviewer PASS; first push; landing 20261019T005433-L-2771346 (interface); batch 20261019T005255; modules 3; new nodes 2)

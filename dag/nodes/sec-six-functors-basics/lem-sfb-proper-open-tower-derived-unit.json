@@ -71,11 +71,8 @@
    }
   },
   {
-   "text": "Use the total-right-derived unit convention of [def-sfb-right-derived-functor], with the unbounded direct images interpreted as in [def-amb-etale-compact-support]. Write $\\eta^t_K:Q(t_*K)\\to Rt_*(QK)$. For any of the chosen K-injective resolutions $r:K\\to T$, its canonical resolution identification is $c_r=(\\eta^t_T)^{-1}\\circ Rt_*(Qr)$. Naturality of $\\eta^t$ reads $Rt_*(Qr)\\eta^t_K=\\eta^t_TQ(t_*r)$; cancelling the invertible $\\eta^t_T$ yields $c_r\\eta^t_K=Q(t_*r)$. Thus the unit on an unresolved termwise complex is represented by the direct image of its resolution map. This calculation uses the unit as a natural transformation and does not assert that $t_*$ preserves quasi-isomorphisms.",
-   "uses": [
-    "def-sfb-right-derived-functor",
-    "def-amb-etale-compact-support"
-   ],
+   "text": "Use the existing Functor.rightDerivedFunctorUnit and rightDerivedFunctorObjQIso. For any map h:K→M with K-injective M, naturality of the unit, followed by its inverse at M, proves η_K;R(Qh);η_M⁻¹=Q(t_*h). This is proved explicitly in each of the two formula modules, without any exactness assumption on direct image.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
@@ -83,10 +80,11 @@
    }
   },
   {
-   "text": "Apply step 5 first to $q_*$ and $u$, then to $s_*$ and $w$. After termwise $i_!$ and $s_*$, the two resolution maps are $s_*i_!q_*u$ and $s_*w$, respectively. The representative formula in [lem-amb-unbounded-proper-open-interchange], applied to the square with top edge $b$, bottom edge $i$, and K-injective input $I$, says that $\\Gamma_{Q,QI}$ is represented by $c=(p_*v)\\chi_I$. Under the resolution $w:B\\to L$ this is represented by $\\ell$, because $\\ell w\\simeq c$. Both $L$ and $p_*M$ are K-injective, so the action of $Rs_*$ on that morphism is represented by $s_*\\ell$ by [def-amb-etale-compact-support]. Consequently the successive units followed by $Rs_*\\Gamma_Q$ are represented by the first displayed path. The square here need not be cartesian; the cited comparison explicitly allows a commutative proper/open square.",
+   "text": "Apply step 5 first to $q_*$ and $u$, then to $s_*$ and $w$. After termwise $i_!$ and $s_*$, the two resolution maps are $s_*i_!q_*u$ and $s_*w$, respectively. The representative formula in [lem-amb-unbounded-proper-open-interchange], applied to the square with top edge $b$, bottom edge $i$, and K-injective input $I$, says that $\\Gamma_{Q,QI}$ is represented by $c=(p_*v)\\chi_I$. Under the resolution $w:B\\to L$ this is represented by $\\ell$, because $\\ell w\\simeq c$. Both $L$ and $p_*M$ are K-injective, so the action of $Rs_*$ on that morphism is represented by $s_*\\ell$ by [def-amb-etale-compact-support]. Consequently the successive units followed by $Rs_*\\Gamma_Q$ are represented by the first displayed path. The square here need not be cartesian; the cited comparison explicitly allows a commutative proper/open square. In Lean this calculation is proved as [lem-sfb-proper-open-tower-successive-unit-formula]; its proof uses the generic unit and canonical composition API directly.",
    "uses": [
     "lem-amb-unbounded-proper-open-interchange",
-    "def-amb-etale-compact-support"
+    "def-amb-etale-compact-support",
+    "lem-sfb-proper-open-tower-successive-unit-formula"
    ],
    "elementary": false,
    "source": {
@@ -95,11 +93,11 @@
    }
   },
   {
-   "text": "Apply step 5 to $(sp)_*$ and the resolution $t$ of step 2. The single unit is represented by $(sp)_*t=s_*p_*t$. Precomposing with the section-preserving identification $s_*\\chi_{j_!J}$ of [lem-cbc-proper-support-sheaf-composition] gives precisely the second displayed path. The canonical direct-image composition identification [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] at $M$ can be computed with the identity resolution of the K-injective complex $p_*M$ (step 1). Its stated normalization is then the class of $s_*\\mathrm{id}_{p_*M}$, so $\\kappa_{QM}$ is the identity in these representatives. Naturality gives $\\kappa_{Q(a_!J)}=(Rs_*Rp_*(Qt))^{-1}\\kappa_{QM}R(sp)_*(Qt)$; under the resolution identifications this introduces no further map. The open comparison is the one of [lem-cbc-extension-zero-composition] used in step 2. This checks the specified canonical identifications, rather than choosing an arbitrary isomorphism between the two derived outputs.",
+   "text": "Apply the unit naturality identity of step 5 to (p then s)_* and the total augmentation of step 2. Expand the canonical open-composition comparison and cancel its inverse. Naturality of the underived direct-image composition moves the augmentation to M, where the forward and inverse comparison cancel. This is exactly [lem-sfb-proper-open-tower-single-unit-formula], proved using the existing total-right-derived unit API and the open-composition isomorphism [lem-cbc-extension-zero-composition]. The section-preserving comparison from [lem-cbc-proper-support-sheaf-composition] is precomposed unchanged. The successive formula uses the generic canonical composition API, as proved in [lem-sfb-proper-open-tower-successive-unit-formula], so no ringed-topos composition theorem is needed.",
    "uses": [
     "lem-cbc-proper-support-sheaf-composition",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-cbc-extension-zero-composition"
+    "lem-cbc-extension-zero-composition",
+    "lem-sfb-proper-open-tower-single-unit-formula"
    ],
    "elementary": false,
    "source": {
@@ -145,22 +143,22 @@
  ],
  "proof_deps": [
   "def-amb-etale-compact-support",
-  "def-sfb-right-derived-functor",
   "def-weil-pbc-derived-categories",
   "def-weil-pbc-kinjective-resolutions",
   "lem-amb-unbounded-proper-open-interchange",
   "lem-cbc-extension-zero-composition",
   "lem-cbc-proper-support-sheaf-composition",
+  "lem-sfb-proper-open-tower-single-unit-formula",
+  "lem-sfb-proper-open-tower-successive-unit-formula",
   "lem-weil-pbc-extension-by-zero-exact",
   "lem-weil-pbc-kinjective-hom-derived",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "prop-weil-pbc-inverse-image-modules-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tags 0F7B and 0F7J, with derived.tex Tags 070I, 070K, 070Y, 08BJ and sites-cohomology.tex Tag 0D6E; explicit augmentation, homotopy, and choice-comparison calculations by Q100"
+  "place": "Tags 0F7B and 0F7J and sites-cohomology.tex Tag 0D6E. U1 implements the ten-step resolution, homotopy and unit calculation using the proved upstream KInjectiveResolution lift and generic composition API; the two extracted formula lemmas are proved completely."
  },
  "mathlib_searches": [
   {
@@ -300,8 +298,7 @@
   "lem-weil-pbc-extension-by-zero-exact",
   "lem-cbc-extension-zero-composition",
   "lem-cbc-proper-support-sheaf-composition",
-  "lem-amb-unbounded-proper-open-interchange",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+  "lem-amb-unbounded-proper-open-interchange"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -341,5 +338,15 @@
   "group": "N9",
   "result": "pass",
   "note": "Wrote review.md. Checked all statement clauses, eleven dependencies, sources, canonical maps, universes, edge cases, docstrings, report sections, and verbatim signature. Immutable module compiled cleanly through scompile.py. No corrections needed; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261019T005433-L-2771346",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -16,12 +16,13 @@ public import Sheaf.AlgebraicGeometry.ProperSupportSheafComposition
 public import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
 public import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 public import Sheaf.Paper.UnboundedProperOpenInterchange
-import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
+import Sheaf.Paper.ProperOpenTowerSuccessiveUnitFormula
+import Sheaf.Paper.ProperOpenTowerSingleUnitFormula
+import WeilConjectures.Algebra.Homology.KInjectiveResolution
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Derived-unit resolution calculation in a proper/open tower
@@ -237,6 +238,45 @@ end AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
+private theorem tower_lift
+    {C : Type*} [Category C] [Abelian C]
+    {K L T : CochainComplex C ℤ} [L.IsKInjective] [T.IsKInjective]
+    (w : K ⟶ L) [QuasiIso w] (c : K ⟶ T) :
+    ∃ ell : L ⟶ T, Nonempty (Homotopy (w ≫ ell) c) ∧
+      ∀ ell' : L ⟶ T, Nonempty (Homotopy (w ≫ ell') c) →
+        Nonempty (Homotopy ell ell') := by
+  let R : K.KInjectiveResolution := ⟨L, w, inferInstance, inferInstance⟩
+  refine ⟨R.lift c, ⟨R.liftHomotopy c⟩, ?_⟩
+  intro ell' h
+  exact ⟨R.homotopyOfComp _ _ ((R.liftHomotopy c).trans h.some.symm)⟩
+
+private theorem tower_cancel
+    {C : Type*} [Category C] [Abelian C]
+    {K L T : CochainComplex C ℤ} [T.IsKInjective]
+    (w : K ⟶ L) [QuasiIso w] (f g : L ⟶ T)
+    (h : Nonempty (Homotopy (w ≫ f) (w ≫ g))) : Nonempty (Homotopy f g) := by
+  apply Nonempty.intro
+  apply HomotopyCategory.homotopyOfEq
+  apply (CochainComplex.IsKInjective.bijective_quotient_map_comp (J := T) w).1
+  simpa only [← Functor.map_comp] using HomotopyCategory.eq_of_homotopy _ _ h.some
+
+private theorem tower_map_quasiIso
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    (F : C ⥤ D) [F.Additive] {K L : CochainComplex C ℤ}
+    [K.IsKInjective] [L.IsKInjective] (f : K ⟶ L) [QuasiIso f] :
+    QuasiIso ((F.mapHomologicalComplex (.up ℤ)).map f) := by
+  obtain ⟨e, rfl⟩ := (CochainComplex.IsKInjective.quasiIso_iff f).mp inferInstance
+  exact homotopyEquivalences_le_quasiIso _ _ _
+    (F.mapHomotopyEquiv e).homotopyEquivalences_hom
+
+private theorem tower_quasiIso_of_homotopy
+    {C : Type*} [Category C] [Abelian C] {K L : CochainComplex C ℤ}
+    (f g : K ⟶ L) (h : Nonempty (Homotopy f g)) [QuasiIso g] : QuasiIso f := by
+  let := HasDerivedCategory.standard C
+  apply (DerivedCategory.isIso_Q_map_iff_quasiIso C f).mp
+  rw [DerivedCategory.Q_map_eq_of_homotopy C h.some]
+  infer_instance
+
 /-- The two resolution paths in a proper/open tower agree up to chain homotopy.
 Source: Stacks Project, More on Étale Cohomology, Tags 0F7B and 0F7J, and
 Sites and Cohomology, Tag 0D6E (blueprint: lem-sfb-proper-open-tower-derived-unit).
@@ -385,6 +425,215 @@ theorem properOpenTowerDerivedUnit (A : Type (u + 1)) [CommRing A] [Finite A]
               + 1} A]).mapHomologicalComplex (.up ℤ)).map ((((p)_*[ModuleCat.{u + 1}
               A]).mapHomologicalComplex (.up ℤ)).map (c.β))) =
             DerivedCategory.Q.map (r'.secondPath p s χ)) := by
-  sorry
+  obtain ⟨θ, Γ, hsec, hrep, -⟩ := unboundedProperOpenInterchange A
+  let χ := θ b q p i sq
+  let G := Γ b q p i sq
+  specialize hsec b q p i sq
+  specialize hrep b q p i sq
+  let jf := ((j)_!open[ModuleCat.{u + 1} A])
+  let bf := ((b)_!open[ModuleCat.{u + 1} A])
+  let iqf := ((q)_*[ModuleCat.{u + 1} A]) ⋙ ((i)_!open[ModuleCat.{u + 1} A])
+  let pf := ((p)_*[ModuleCat.{u + 1} A])
+  let sf := ((s)_*[ModuleCat.{u + 1} A])
+  let jc := jf.mapHomologicalComplex (.up ℤ)
+  let bc := bf.mapHomologicalComplex (.up ℤ)
+  let iqc := ((q)_*[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ) ⋙
+    ((i)_!open[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)
+  let pc := pf.mapHomologicalComplex (.up ℤ)
+  let sc := sf.mapHomologicalComplex (.up ℤ)
+  have hcomp : ∀ (J J' : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ)
+          [J.IsKInjective] [J'.IsKInjective]
+          (r : ProperOpenTowerResolution A j b i q J)
+          (r' : ProperOpenTowerResolution A j b i q J') (f : J ⟶ J'),
+        Nonempty (r.Comparison r' f) ∧
+        (∀ (c d : r.Comparison r' f),
+          Nonempty (Homotopy c.α d.α) ∧ Nonempty (Homotopy c.β d.β) ∧
+          Nonempty (Homotopy c.γ d.γ)) ∧
+        (∀ (c : r.Comparison r' f), QuasiIso f →
+          QuasiIso c.α ∧ QuasiIso c.β ∧ QuasiIso c.γ ∧
+          QuasiIso ((((s)_*[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)).map
+              ((((i)_!open[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)).map
+              ((((q)_*[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)).map
+              ((((j)_!open[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)).map (f))))) ∧
+          QuasiIso ((((s)_*[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)).map
+              ((((p)_*[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)).map (c.β)))) := by
+    intro J J' hJ hJ' r r' f
+    obtain ⟨α, hα, _⟩ := tower_lift r.u (jc.map f ≫ r'.u)
+    obtain ⟨β, hβ, _⟩ := tower_lift r.v (bc.map α ≫ r'.v)
+    obtain ⟨γ, hγ, _⟩ := tower_lift r.w (iqc.map α ≫ r'.w)
+    refine ⟨⟨⟨α, β, γ, hα, hβ, hγ⟩⟩, ?_, ?_⟩
+    · intro c d
+      have ha : Nonempty (Homotopy c.α d.α) :=
+        tower_cancel r.u _ _ ⟨c.u_comm.some.trans d.u_comm.some.symm⟩
+      have hb : Nonempty (Homotopy c.β d.β) := tower_cancel r.v _ _
+        ⟨c.v_comm.some.trans (((bf.mapHomotopy ha.some).compRight r'.v).trans
+          d.v_comm.some.symm)⟩
+      have hg : Nonempty (Homotopy c.γ d.γ) := tower_cancel r.w _ _
+        ⟨c.w_comm.some.trans (((iqf.mapHomotopy ha.some).compRight r'.w).trans
+          d.w_comm.some.symm)⟩
+      exact ⟨ha, hb, hg⟩
+    · intro c hf
+      have :=  hf
+      have hα : QuasiIso c.α := by
+        have :=  tower_map_quasiIso jf f
+        have :=  tower_quasiIso_of_homotopy _ _ c.u_comm
+        exact quasiIso_of_comp_left r.u c.α
+      have :=  hα
+      have hβ : QuasiIso c.β := by
+        have :=  tower_map_quasiIso bf c.α
+        have :=  tower_quasiIso_of_homotopy _ _ c.v_comm
+        exact quasiIso_of_comp_left r.v c.β
+      have hγ : QuasiIso c.γ := by
+        have : QuasiIso ((((i)_!open[ModuleCat.{u + 1} A]).mapHomologicalComplex
+            (.up ℤ)).map ((((q)_*[ModuleCat.{u + 1} A]).mapHomologicalComplex
+            (.up ℤ)).map c.α)) := tower_map_quasiIso iqf c.α
+        have :=  tower_quasiIso_of_homotopy _ _ c.w_comm
+        exact quasiIso_of_comp_left r.w c.γ
+      have :=  hβ
+      exact ⟨hα, hβ, hγ, tower_map_quasiIso (jf ⋙ iqf ⋙ sf) f,
+        tower_map_quasiIso (pf ⋙ sf) c.β⟩
+  have hnatural : ∀ (J J' : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ)
+          [J.IsKInjective] [J'.IsKInjective]
+          (r : ProperOpenTowerResolution A j b i q J)
+          (r' : ProperOpenTowerResolution A j b i q J')
+          (ell : r.L ⟶ (((p)_*[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)).obj (r.M))
+          (ell' : r'.L ⟶ (((p)_*[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)).obj (r'.M))
+          (f : J ⟶ J') (c : r.Comparison r' f),
+        r.IsLift p χ ell → r'.IsLift p χ ell' →
+        Nonempty (Homotopy (ell ≫ (((p)_*[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)).map
+            (c.β)) (c.γ ≫ ell')) ∧
+        Nonempty (Homotopy (r.firstPath p s ell ≫ (((s)_*[ModuleCat.{u + 1}
+            A]).mapHomologicalComplex (.up ℤ)).map ((((p)_*[ModuleCat.{u + 1}
+            A]).mapHomologicalComplex (.up ℤ)).map (c.β)))
+          ((((s)_*[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)).map
+              ((((i)_!open[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)).map
+              ((((q)_*[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)).map
+              ((((j)_!open[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)).map (f)))) ≫
+              r'.firstPath p s ell')) ∧
+        Nonempty (Homotopy (r.secondPath p s χ ≫ (((s)_*[ModuleCat.{u + 1}
+            A]).mapHomologicalComplex (.up ℤ)).map ((((p)_*[ModuleCat.{u + 1}
+            A]).mapHomologicalComplex (.up ℤ)).map (c.β)))
+          ((((s)_*[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)).map
+              ((((i)_!open[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)).map
+              ((((q)_*[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)).map
+              ((((j)_!open[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)).map (f)))) ≫
+              r'.secondPath p s χ)) := by
+    intro J J' hJ hJ' r r' ell ell' f c hell hell'
+    let H := HomotopyCategory.quotient
+      (Sheaf Ybar.smallEtaleTopology (ModuleCat.{u + 1} A)) (.up ℤ)
+    let τ := NatTrans.mapHomologicalComplex χ.hom (.up ℤ)
+    have hn : iqc.map c.α ≫ τ.app r'.I = τ.app r.I ≫ pc.map (bc.map c.α) := by
+      ext n : 1
+      exact χ.hom.naturality (c.α.f n)
+    have hl := HomotopyCategory.eq_of_homotopy _ _ hell.some
+    have hl' := HomotopyCategory.eq_of_homotopy _ _ hell'.some
+    have hv := HomotopyCategory.eq_of_homotopy _ _ (pf.mapHomotopy c.v_comm.some)
+    have hw := HomotopyCategory.eq_of_homotopy _ _ c.w_comm.some
+    have hn' := congrArg H.map hn
+    change H.map (r.w ≫ ell) = H.map (τ.app r.I ≫ pc.map r.v) at hl
+    change H.map (r'.w ≫ ell') = H.map (τ.app r'.I ≫ pc.map r'.v) at hl'
+    change H.map (pc.map (r.v ≫ c.β)) =
+      H.map (pc.map (bc.map c.α ≫ r'.v)) at hv
+    change H.map (r.w ≫ c.γ) = H.map (iqc.map c.α ≫ r'.w) at hw
+    simp only [Functor.map_comp] at hl hl' hv hw hn'
+    have he : Nonempty (Homotopy (ell ≫ pc.map c.β) (c.γ ≫ ell')) := by
+      apply Nonempty.intro
+      apply HomotopyCategory.homotopyOfEq
+      apply (CochainComplex.IsKInjective.bijective_quotient_map_comp
+        (J := pc.obj r'.M) r.w).1
+      change H.map r.w ≫ H.map (ell ≫ pc.map c.β) =
+        H.map r.w ≫ H.map (c.γ ≫ ell')
+      simp only [Functor.map_comp, ← Category.assoc]
+      rw [hl, Category.assoc, hv, ← Category.assoc, ← hn', Category.assoc,
+        ← hl', ← Category.assoc, ← hw]
+    have hu := HomotopyCategory.eq_of_homotopy _ _
+      ((iqf ⋙ sf).mapHomotopy c.u_comm.some)
+    have hwS := HomotopyCategory.eq_of_homotopy _ _ (sf.mapHomotopy c.w_comm.some)
+    have heS := HomotopyCategory.eq_of_homotopy _ _ (sf.mapHomotopy he.some)
+    let HS := HomotopyCategory.quotient
+      (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A)) (.up ℤ)
+    have hp : Nonempty (Homotopy (r.firstPath p s ell ≫ sc.map (pc.map c.β))
+        (sc.map (iqc.map (jc.map f)) ≫ r'.firstPath p s ell')) := by
+      apply Nonempty.intro
+      apply HomotopyCategory.homotopyOfEq
+      change HS.map (sc.map (iqc.map r.u) ≫ sc.map r.w ≫ sc.map ell ≫
+        sc.map (pc.map c.β)) = HS.map (sc.map (iqc.map (jc.map f)) ≫
+        sc.map (iqc.map r'.u) ≫ sc.map r'.w ≫ sc.map ell')
+      change HS.map (sc.map (iqc.map (r.u ≫ c.α))) =
+        HS.map (sc.map (iqc.map (jc.map f ≫ r'.u))) at hu
+      change HS.map (sc.map (r.w ≫ c.γ)) =
+        HS.map (sc.map (iqc.map c.α ≫ r'.w)) at hwS
+      change HS.map (sc.map (ell ≫ pc.map c.β)) =
+        HS.map (sc.map (c.γ ≫ ell')) at heS
+      simp only [Functor.map_comp] at hu hwS heS ⊢
+      rw [heS, ← Category.assoc (HS.map (sc.map r.w)), hwS,
+        Category.assoc, ← Category.assoc (HS.map (sc.map (iqc.map r.u))), hu]
+      rw [Category.assoc]
+    refine ⟨he, hp, ?_⟩
+    have path (K : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ)
+        (t : ProperOpenTowerResolution A j b i q K)
+        (e : t.L ⟶ pc.obj t.M) (h : t.IsLift p χ e) :
+        Nonempty (Homotopy (t.firstPath p s e) (t.secondPath p s χ)) := by
+      refine ⟨((sf.mapHomotopy h.some).compLeft (sc.map (iqc.map t.u))).trans ?_⟩
+      apply Homotopy.ofEq
+      change sc.map (iqc.map t.u) ≫ sc.map _ = sc.map _ ≫ sc.map _
+      rw [← sc.map_comp, ← sc.map_comp]
+      congr 1
+      have hn : iqc.map t.u ≫ τ.app t.I = τ.app (jc.obj K) ≫ pc.map (bc.map t.u) := by
+        ext n : 1
+        exact χ.hom.naturality (t.u.f n)
+      dsimp only [ProperOpenTowerResolution.augmentation]
+      simp only [Functor.map_comp, ← Category.assoc]
+      rw [hn]
+    exact ⟨(((path J r ell hell).some.symm.compRight _).trans hp.some).trans
+      ((path J' r' ell' hell').some.compLeft _)⟩
+  refine ⟨χ, G, hsec, hrep, ?_, ?_, ?_, ?_⟩
+  · intro J hJ r
+    refine ⟨inferInstance, inferInstance, ⟨?_, inferInstance⟩, ?_⟩
+    · have : IsIso ((NatTrans.mapHomologicalComplex
+          (openImmersionLowerShriekComp (ModuleCat.{u + 1} A) j b).hom (.up ℤ)).app J) :=
+        ((NatIso.mapHomologicalComplex
+          (openImmersionLowerShriekComp (ModuleCat.{u + 1} A) j b) (.up ℤ)).app J).isIso_hom
+      have : QuasiIso (bc.map r.u) := inferInstance
+      dsimp only [ProperOpenTowerResolution.totalAugmentation,
+        ProperOpenTowerResolution.augmentation]
+      infer_instance
+    · obtain ⟨ell, hell, huniq⟩ := tower_lift r.w
+        ((NatTrans.mapHomologicalComplex χ.hom (.up ℤ)).app r.I ≫ pc.map r.v)
+      refine ⟨ell, hell, huniq, ?_, ?_, ?_⟩
+      · apply Nonempty.intro
+        refine ((sf.mapHomotopy hell.some).compLeft (sc.map (iqc.map r.u))).trans ?_
+        apply Homotopy.ofEq
+        dsimp [ProperOpenTowerResolution.secondPath, ProperOpenTowerResolution.augmentation]
+        change sc.map (iqc.map r.u) ≫ sc.map _ = sc.map _ ≫ sc.map _
+        rw [← sc.map_comp, ← sc.map_comp]
+        congr 1
+        have hn : iqc.map r.u ≫
+            (NatTrans.mapHomologicalComplex χ.hom (.up ℤ)).app r.I =
+            (NatTrans.mapHomologicalComplex χ.hom (.up ℤ)).app (jc.obj J) ≫
+              pc.map (bc.map r.u) := by
+          ext n : 1
+          exact χ.hom.naturality (r.u.f n)
+        simp only [Functor.map_comp, ← Category.assoc]
+        rw [hn]
+      · exact properOpenTowerSuccessiveUnitFormula j b i q p s J r.I r.M r.u r.v χ
+          r.L r.w ell G hell (hrep r.I r.M r.v)
+      · exact properOpenTowerSingleUnitFormula j b i q p s J r.I r.M r.u r.v χ
+  · exact hcomp
+  · exact hnatural
+  · intro J hJ r r' ell ell' hell hell'
+    obtain ⟨⟨c⟩, _, hc⟩ := hcomp J J r r' (𝟙 J)
+    obtain ⟨ha, hb, hg, _, ht⟩ := hc c inferInstance
+    have := ht
+    obtain ⟨_, hp, hq⟩ := hnatural J J r r' ell ell' (𝟙 J) c hell hell'
+    have hid : sc.map (iqc.map (jc.map (𝟙 J))) = 𝟙 _ := by
+      simp only [CategoryTheory.Functor.map_id]
+    change Nonempty (Homotopy (_ ≫ _) (sc.map (iqc.map (jc.map (𝟙 J))) ≫ _)) at hp hq
+    rw [hid, Category.id_comp] at hp hq
+    refine ⟨c, ha, hb, hg, inferInstance, ?_, ?_⟩
+    · simpa only [← Functor.map_comp] using
+        DerivedCategory.Q_map_eq_of_homotopy _ hp.some
+    · simpa only [← Functor.map_comp] using
+        DerivedCategory.Q_map_eq_of_homotopy _ hq.some
 
 end AlgebraicGeometry.Etale

@@ -1,0 +1,116 @@
+{
+ "id": "lem-sfb-proper-open-tower-single-unit-formula",
+ "kind": "statement",
+ "title": "Single derived-unit formula in a proper/open tower",
+ "statement": "Let A be a commutative ring, j:X→U, b:U→Xbar and i:Y→Ybar open immersions of schemes, q:U→Y, p:Xbar→Ybar and s:Ybar→Z any morphisms. Let J,I,M be complexes on X,U,Xbar, with I,M K-injective, u:j_!J→I and v:b_!I→M quasi-isomorphisms. Let χ:i_!q_*≅p_*b_! be any natural isomorphism. Put t=v∘b_!u and a=j then b. The class of s_*p_*t∘s_*χ at j_!J equals the following single-unit expression: apply s_*χ; use s_*p_*≅(p then s)_* and b_!j_!≅a_!; apply the total derived unit for (p then s)_*; apply its derived image of the total augmentation a_!J→M; identify the value at M by the inverse unit on M; finally undo the direct-image composition at M. These are precisely the canonical natural isomorphisms, not arbitrary choices. Complexes and localization are as in [def-weil-pbc-derived-categories], open composition as in [lem-cbc-extension-zero-composition]. The attached Lean statement spells out the complete equality.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B and 0F7J, resolution comparison; sites-cohomology.tex Tag 0D6E, canonical composition by adjoint uniqueness. Extracted step 7 of lem-sfb-proper-open-tower-derived-unit."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-kinjective-resolutions",
+  "lem-cbc-extension-zero-composition"
+ ],
+ "proof": [
+  {
+   "text": "For any chain map h:K→M with M K-injective, naturality of the total-right-derived unit gives η_K;R(Qh);η_M⁻¹=Q(t_*h). This follows by postcomposing naturality with the invertible unit at M. No assumption that direct image preserves quasi-isomorphisms is used.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the preceding identity to the total augmentation a_!J→M. Expand the augmentation using the canonical open-composition isomorphism [lem-cbc-extension-zero-composition]. Its forward and inverse maps cancel. Naturality of the underived direct-image composition transports b_!u;v across the comparison, and its forward and inverse components at M cancel. Functoriality of Q gives exactly the stated equality.",
+   "uses": [
+    "lem-cbc-extension-zero-composition"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-extension-zero-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B and 0F7J, resolution comparison; sites-cohomology.tex Tag 0D6E, canonical composition by adjoint uniqueness. Extracted step 7 of lem-sfb-proper-open-tower-derived-unit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorCompUnit|rightDerivedFunctorObjQIso|properOpenTower",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "No exact Mathlib formula; reuse the proved generic unit, composition and conjugacy API in WeilConjectures."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorUnit\"",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "No exact Mathlib formula; reuse the proved generic unit, composition and conjugacy API in WeilConjectures."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the total right derived functor unit on a K injective complex computes the image of a resolution and is compatible with composition",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+   "date": "2026-10-19",
+   "verdict": "No exact Mathlib formula; reuse the proved generic unit, composition and conjugacy API in WeilConjectures."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of a total right derived functor unit and its inverse at a K-injective resolution computes the localized image of a chain map",
+   "results": "CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc; CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality; CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality_assoc; CategoryTheory.Functor.totalRightDerivedUnit",
+   "date": "2026-10-19",
+   "verdict": "Mathlib supplies generic totalRightDerivedUnit and ordinary injective-resolution naturality. The exact unbounded proper/open formulas are not stated; use the proved upstream K-injective unit and composition API."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProperOpenTowerDerivedUnit",
+  "date": "2026-10-19",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-proper-open-tower-derived-unit",
+   "place": "Proof step 7",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-affine-local",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProperOpenTowerSingleUnitFormula",
+  "file": "lean/Sheaf/Paper/ProperOpenTowerSingleUnitFormula.lean",
+  "declaration": "AlgebraicGeometry.Etale.properOpenTowerSingleUnitFormula",
+  "statement": "theorem properOpenTowerSingleUnitFormula\n    (J : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ)\n    (I : CochainComplex (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ)\n    (M : CochainComplex (Sheaf Xbar.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ)\n    [I.IsKInjective] [M.IsKInjective]\n    (u : (((j)_!open[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)).obj J ⟶ I)\n    (v : (((b)_!open[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)).obj I ⟶ M)\n    [QuasiIso u] [QuasiIso v]\n    (χ : ((q)_*[ModuleCat.{u + 1} A]) ⋙ ((i)_!open[ModuleCat.{u + 1} A]) ≅\n      ((b)_!open[ModuleCat.{u + 1} A]) ⋙ ((p)_*[ModuleCat.{u + 1} A]))\n    : let jc := ((j)_!open[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)\n      let bc := ((b)_!open[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)\n      let pc := ((p)_*[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)\n      let sc := ((s)_*[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)\n      let tc := ((p ≫ s)_*[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)\n      let e := NatIso.mapHomologicalComplex\n        (openImmersionLowerShriekComp (ModuleCat.{u + 1} A) j b) (.up ℤ)\n      let d := NatIso.mapHomologicalComplex\n        (lowerStarComp (ModuleCat.{u + 1} A) p s) (.up ℤ)\n      DerivedCategory.Q.map (sc.map ((NatTrans.mapHomologicalComplex χ.hom (.up ℤ)).app\n        (jc.obj J)) ≫ sc.map (pc.map (bc.map u ≫ v))) =\n      DerivedCategory.Q.map (sc.map ((NatTrans.mapHomologicalComplex χ.hom (.up ℤ)).app\n        (jc.obj J))) ≫\n      DerivedCategory.Q.map (d.hom.app (bc.obj (jc.obj J))) ≫\n      DerivedCategory.Q.map (tc.map (e.inv.app J)) ≫\n      ((p ≫ s)_*[ModuleCat.{u + 1} A]).rightDerivedFunctorUnit.app\n        ((HomotopyCategory.quotient _ _).obj\n          ((((j ≫ b)_!open[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)).obj J)) ≫\n      R((p ≫ s)_*[ModuleCat.{u + 1} A]).map\n        (DerivedCategory.Q.map (e.hom.app J ≫ bc.map u ≫ v)) ≫\n      (((p ≫ s)_*[ModuleCat.{u + 1} A]).rightDerivedFunctorObjQIso M).hom ≫\n      DerivedCategory.Q.map (d.inv.app M)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261019T005433-L-2771346",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261019T005433-L-2771346",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
