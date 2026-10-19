@@ -16,9 +16,234 @@
   "def-pc-field-extension",
   "def-weil-pbc-separable-algebraic-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $k=A/\\mathfrak m$ and $k_*=\\bigcap_{n\\ge0}k^{p^n}$. This intersection is a field, and is perfect: the unique $p$th root of an element in all $k^{p^n}$ again lies in all $k^{p^n}$. Choose a Cohen ring $W_0$ with residue field $k_*$ by [lem-weil-pbc-cohen-rings-exist], and use [def-weil-pbc-cohen-ring] for completeness, the DVR property, and uniformizer $p$. Construct compatible maps $g_n:W_0/p^n\\to A/\\mathfrak m^n$ starting with the given inclusion $k_*\\to k$. Given $g_n$, apply [lem-weil-pbc-cohen-ring-mod-pn-formally-smooth] with exponent $n+1$, target $A/\\mathfrak m^{n+1}$ and square-zero ideal $\\mathfrak m^n/\\mathfrak m^{n+1}$ to lift the composite from $W_0/p^{n+1}$. Here $p^{n+1}=0$ in the target since $p\\in\\mathfrak m$. Completeness [def-weil-pbc-adically-complete-ring] gives a ring map $W_0\\to A$ from these compatible maps. It is local because its residue map is injective. It is injective: every nonzero element of $W_0$ is $up^a$ by [lem-weil-pbc-dvr-unit-times-uniformizer-power], with $u$ a unit, and $p^a\\ne0$ in the characteristic-zero domain $A$.",
+   "uses": [
+    "lem-weil-pbc-cohen-rings-exist",
+    "def-weil-pbc-cohen-ring",
+    "lem-weil-pbc-cohen-ring-mod-pn-formally-smooth",
+    "def-weil-pbc-adically-complete-ring",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.2.3, coefficient map from 4.1.8; lifting construction also Stacks Tags 0328, 0329"
+   }
+  },
+  {
+   "text": "Let $P_1,\\ldots,P_r$ be the minimal primes over $pA$; they are finite by [lem-sc-finite-minimal-primes-over-ideal]. Each $P_i$ is a minimal support prime of the cyclic module $A/pA$, hence associated by [lem-weil-pbc-minimal-support-prime-associated], and has height one by [lem-weil-pbc-normal-domain-principal-quotient-associated-height]. The localization $T_i=A_{P_i}$ is Noetherian and normal by [lem-weil-pbc-localization-noetherian, lem-weil-pbc-localization-normal-domain], of dimension one, so is a DVR by [lem-sc-normal-dim1-dvr]. The map $W_0\\to T_i$ is injective and local since its uniformizer $p$ belongs to $P_i$. The ring $A$ is excellent by [lem-per-complete-local-excellence], and each $T_i$ is excellent by [lem-exc-finite-type-localization-excellent].",
+   "uses": [
+    "lem-sc-finite-minimal-primes-over-ideal",
+    "lem-weil-pbc-minimal-support-prime-associated",
+    "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-sc-normal-dim1-dvr",
+    "lem-per-complete-local-excellence",
+    "lem-exc-finite-type-localization-excellent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.2.3, finitely many generic points of the special fibre"
+   }
+  },
+  {
+   "text": "The residue field of $T_i$ is $\\operatorname{Frac}(A/P_i)$. By [lem-weil-pbc-complete-local-quotient], $R_i=A/P_i$ is a complete Noetherian local domain of characteristic $p$ with residue field $k$. The map $k_*=W_0/pW_0\\to R_i$ is injective because it is a unital map from a field to a nonzero ring. Its composite with $R_i\\to k$ is the original inclusion. Since $k_{\\mathrm{perf}}=k_*$, [lem-per-epp-perfect-core-complete-local] proves that every element of the maximal perfect subfield of $\\operatorname{Frac}(A/P_i)$ is algebraic over $k_*$. Apply [lem-per-epp-finite-family-traits] to all the $T_i$ at once, obtaining a finite extension $W_0\\hookrightarrow W_1$ of complete DVRs, with perfect residue field. Put $K_*=\\operatorname{Frac}(W_0)$ and $K_1=\\operatorname{Frac}(W_1)$. The extension $W_1$ is good for every $T_i$, in the explicit sense of [lem-per-epp-single-trait-base-change]: every normalized field factor of the base change has reduced special fibre.",
+   "uses": [
+    "lem-weil-pbc-complete-local-quotient",
+    "lem-per-epp-perfect-core-complete-local",
+    "lem-per-epp-finite-family-traits",
+    "lem-per-epp-single-trait-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.2.3, use of 3.2.3(i),(iv) and simultaneous Epp theorem"
+   }
+  },
+  {
+   "text": "The extension $K_1/K_*$ is finite. Indeed, localizing a finite $W_0$-module generating set for $W_1$ gives a finite-dimensional domain over $K_*$. Multiplication by any nonzero element is an injective endomorphism of this vector space, hence surjective; this localization is a field and therefore equals $K_1$. By [lem-weil-pbc-finite-extension-in-finite-normal-extension], embed $K_1$ in an extension $K$ finite and normal over $K_*$. It is separable: in characteristic zero an irreducible polynomial of positive degree has nonzero derivative of smaller degree, so it is relatively prime to its derivative. Thus $K/K_*$ is finite Galois.",
+   "uses": [
+    "lem-weil-pbc-finite-extension-in-finite-normal-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.3.5, making the finite constant extension generically Galois; Stacks Tag 09DT (fields-lemma-normal-closure)."
+   }
+  },
+  {
+   "text": "Let $W$ be the integral closure of $W_0$ in $K$. By [lem-per-complete-dvr-finite-normalization], $W$ is a finite complete DVR over $W_0$, with fraction field $K$, and $W_0\\to W$ is local. Moreover $W_1\\subseteq W$: the elements of $W_1$ satisfy monic equations over $W_0$ by [lem-weil-pbc-finite-algebra-is-integral]. The map $W_1\\to W$ is local. If $\\pi_1$ is a uniformizer of $W_1$, write $p=u\\pi_1^a$ with $a>0$ by [lem-weil-pbc-dvr-unit-times-uniformizer-power]; since $p$ lies in the maximal ideal of $W$ and $u$ is a unit, so does $\\pi_1$, whereas every element outside $(\\pi_1)$ remains a unit. The residue field $k_0=W/\\mathfrak m_W$ is finite over $k_*$: a finite $W_0$-module generating set descends to a spanning set. It is perfect by [lem-per-algebraic-extension-perfect]. For each $i$, apply clause (3) of [lem-per-epp-single-trait-base-change] to $W_1\\to W$; all normalized field factors over $W$ still have reduced special fibre. Choose a uniformizer $\\pi$ of $W$.",
+   "uses": [
+    "lem-per-complete-dvr-finite-normalization",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "lem-per-algebraic-extension-perfect",
+    "lem-per-epp-single-trait-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.3.5 together with IV 4.2.3, stability of Epp preparation under finite constant extension; Stacks Tags 09EM, 09F8 (remark-construction, lemma-special-case)."
+   }
+  },
+  {
+   "text": "Let $F=\\operatorname{Frac}(A)$. The algebra $F\\otimes_{K_*}K$ is nonzero and finite dimensional over $F$: tensor a $K_*$-basis of $K$. Choose a maximal ideal and let $L$ be its quotient field. Then $L/F$ is finite and the unital map $K\\to L$ is injective. Let $C\\subset L$ be the integral closure of $A$ in $L$. It is a normal domain with fraction field $L$ by [lem-weil-pbc-integral-closure-finite-extension-normal]. It is finite over $A$: [lem-weil-pbc-complete-local-nagata] and [def-weil-pbc-nagata-ring, def-weil-pbc-japanese-domain] give precisely this for the finite extension $L/F$. The map $A\\to C$ is injective, and $W\\subset C$, because $W$ is finite over $W_0$ and hence integral by [lem-weil-pbc-finite-algebra-is-integral]; its monic equations over $W_0$ are also monic equations over $A$.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-weil-pbc-complete-local-nagata",
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.2.3 and first sentence of 4.2.5, choosing a component of the normalized base change"
+   }
+  },
+  {
+   "text": "The images of $F$ and $K$ generate $L$ as a field: the surjection $F\\otimes_{K_*}K\\to L$ expresses every element of $L$ as a finite sum of products from these two images. Apply [lem-per-galois-compositum-restriction] to these subfields of $L$. The extension $L/F$ is Galois, and each $F$-automorphism of $L$ preserves $K$. It is already finite by the preceding step. Hence [lem-weil-pbc-finite-galois-fixed-field] shows that $G=\\operatorname{Aut}_F(L)$ is finite. This is the full group required in the statement, and restriction gives its action on $K$. We do not identify $G$ with all of $\\operatorname{Aut}_{K_*}(K)$; it may be a proper subgroup.",
+   "uses": [
+    "lem-per-galois-compositum-restriction",
+    "lem-weil-pbc-finite-galois-fixed-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.3.7, generic Galois group a subgroup of the constant-extension group; compositum calculation in Mathlib/FieldTheory/Galois/Basic.lean:557,608,623."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-over-complete-local-product], the finite $A$-domain $C$ is Noetherian complete local, with unique maximal ideal $\\mathfrak n$ over $\\mathfrak m$. Thus $A\\hookrightarrow C$ is local. The field $k'=C/\\mathfrak n$ is finite over $k$: the images of any finite $A$-module generating set of $C$ span $k'$ over $k$. By [lem-weil-pbc-finite-algebra-is-integral] and [lem-weil-pbc-integral-injective-dimension-equal], $\\dim C=d$. Also $W\\hookrightarrow C$ is local: in $W$ the nonzero element $p$ is $u\\pi^e$ by [lem-weil-pbc-dvr-unit-times-uniformizer-power]; its residue is zero, so $e>0$. Since $p\\in\\mathfrak n$ and $u$ stays a unit, $\\pi\\in\\mathfrak n$. Every element outside $\\pi W$ is a unit, giving the asserted inverse image of $\\mathfrak n$. Reduction supplies the specified inclusion $k_0\\hookrightarrow k'$.",
+   "uses": [
+    "lem-weil-pbc-finite-over-complete-local-product",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-injective-dimension-equal",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.2.5, first sentence and residue fields"
+   }
+  },
+  {
+   "text": "For $g\\in G$, applying $g$ to a monic equation over $A$ leaves its coefficients fixed, so $g(C)\\subseteq C$; applying $g^{-1}$ gives equality. Likewise, restriction to $K$ fixes $K_*$, hence $W_0$, so monic equations over $W_0$ show $g(W)=W$. The restrictions are ring automorphisms and form compatible actions because they are restrictions of the same action on $L$. A ring automorphism preserves the unique maximal ideal of a local ring, so these automorphisms of $C$ and $W$ are local. The action fixes $A$ pointwise by the definition of $G$. Under $\\operatorname{Frac}(C)=L$, it is exactly the full Galois action. The map $W\\to C$ is the inclusion already constructed, so it is equivariant.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.3.5–4.3.7, action on the normalization and the coefficient DVR; applying automorphisms to the defining monic equations."
+   }
+  },
+  {
+   "text": "Let $Q$ be a height-one prime of $C$ containing $\\pi$ and put $P=Q\\cap A$. It contains $p$ because $p=u\\pi^e$. Going down for the normal domain $A$ in its integral domain extension $C$ [lem-weil-pbc-going-down-normal-integral] shows that $P$ cannot have a strict chain of length two below it: such a chain would lift to one below $Q$. Since $p\\ne0$, $P$ has height one. Hence $P$ is minimal over $pA$ (a strictly smaller prime containing $p$ would give a chain of length two), and equals some $P_i$.",
+   "uses": [
+    "lem-weil-pbc-going-down-normal-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.2.3, parenthesis about generic points above generic points; Stacks Tag 00H8"
+   }
+  },
+  {
+   "text": "Fix this $P_i$ and localize $C$ at $A\\setminus P_i$, obtaining $C_i$. By [lem-weil-pbc-integral-closure-commutes-localization], $C_i$ is the integral closure of $T_i=A_{P_i}$ in $L$ (localizing the field $L$ changes nothing). Let $D_i$ be the image of $T_i\\otimes_{W_0}W$ in $L$. It is integral over $T_i$ by the finite-algebra criterion [lem-weil-pbc-finite-algebra-is-integral]: a finite $W_0$-module generating set of $W$ gives one for this image over $T_i$. If $x\\in L$ is integral over $D_i$, the extension $D_i\\subset D_i[x]$ is integral: the powers below the degree of a monic equation span $D_i[x]$, so [lem-weil-pbc-finite-algebra-is-integral] applies. Thus [lem-weil-pbc-integral-transitive] for $T_i\\subset D_i\\subset D_i[x]$ makes $x$ integral over $T_i$. Conversely a monic equation over $T_i$ is one over $D_i$. Thus $C_i$ is exactly the integral closure of $D_i$ in $L$. Since $\\operatorname{Frac}(T_i)=F$, the field $L$ is a field factor of $F\\otimes_{K_*}K$. The goodness of $W$ for $T_i$ proved in step 5, namely clause (3) of [lem-per-epp-single-trait-base-change], therefore says that $C_i/\\pi C_i$ is reduced.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-transitive",
+    "lem-per-epp-single-trait-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.2.3, normalized base change localized at a generic point"
+   }
+  },
+  {
+   "text": "The ring $C_Q/\\pi C_Q$ is reduced. Indeed, it is a localization of the reduced ring $C_i/\\pi C_i$: the maps identify fractions $c/s$ and impose the same relation $\\pi=0$. To check reducedness directly, if $(x/s)^n=0$, some inverted $t$ has $tx^n=0$, so $(tx)^n=t^{n-1}(tx^n)=0$; reducedness gives $tx=0$, hence $x/s=0$. This proves the generic reducedness assertion for every height-one $Q$ containing $\\pi$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.2.3, passage to the local special fibre"
+   }
+  },
+  {
+   "text": "Set $M=C/\\pi C$. Every associated prime $Q$ of this cyclic $C$-module has height one by [lem-weil-pbc-normal-domain-principal-quotient-associated-height], because $C$ is a Noetherian normal domain and $\\pi\\ne0$. Such a prime contains $\\pi$. If $z\\in M$ is nilpotent, its image in $M_Q=C_Q/\\pi C_Q$ is zero by the preceding step; the identification is [lem-weil-pbc-localization-at-prime-of-quotient]. Injectivity into the product of these module localizations [lem-weil-pbc-module-injects-localizations-associated-primes] forces $z=0$. Thus $C/\\pi C$ is reduced. This is the argument of IV 4.2.4, expressed through the already available associated-prime form of Stacks 031T and 0311.",
+   "uses": [
+    "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "lem-weil-pbc-module-injects-localizations-associated-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.2.4; Stacks Tags 031T, 0311"
+   }
+  },
+  {
+   "text": "The complete Noetherian local domain $C$ is excellent by [lem-per-complete-local-excellence], hence catenary by [def-exc-excellent-ring]. Every prime $Q$ minimal over $\\pi C$ is a minimal support prime of $C/\\pi C$, so [lem-weil-pbc-minimal-support-prime-associated] and [lem-weil-pbc-normal-domain-principal-quotient-associated-height] give $\\operatorname{ht}(Q)=1$. In the catenary local domain $C$ of dimension $d$, all saturated chains from $(0)$ to $\\mathfrak n$ have length $d$. A saturated chain from $Q$ to $\\mathfrak n$, preceded by $(0)\\subsetneq Q$, is such a chain, so has length $d-1$ above $Q$. Chains in $C/Q$ are exactly chains above $Q$; therefore $\\dim(C/Q)=d-1$ for every minimal $Q$ of $C/\\pi C$. This proves equidimensionality of the required dimension. The construction of $C,W,\\pi$ and the residue inclusions in the preceding steps supplies every remaining clause.",
+   "uses": [
+    "lem-per-complete-local-excellence",
+    "def-exc-excellent-ring",
+    "lem-weil-pbc-minimal-support-prime-associated",
+    "lem-weil-pbc-normal-domain-principal-quotient-associated-height"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.2.5, assertion that the reduced special fibre is equidimensional of dimension d-1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohen-rings-exist",
+  "def-weil-pbc-cohen-ring",
+  "lem-weil-pbc-cohen-ring-mod-pn-formally-smooth",
+  "def-weil-pbc-adically-complete-ring",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-sc-finite-minimal-primes-over-ideal",
+  "lem-weil-pbc-minimal-support-prime-associated",
+  "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-sc-normal-dim1-dvr",
+  "lem-per-complete-local-excellence",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-complete-local-quotient",
+  "lem-per-epp-perfect-core-complete-local",
+  "lem-per-epp-finite-family-traits",
+  "lem-per-epp-single-trait-base-change",
+  "lem-weil-pbc-finite-extension-in-finite-normal-extension",
+  "lem-per-complete-dvr-finite-normalization",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-per-algebraic-extension-perfect",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-complete-local-nagata",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-japanese-domain",
+  "lem-per-galois-compositum-restriction",
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "lem-weil-pbc-going-down-normal-integral",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-integral-transitive",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-module-injects-localizations-associated-primes",
+  "def-exc-excellent-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé IV 4.3.3–4.3.5 and 4.3.7, with the expanded reduced-fibre preparation IV 4.2.3–4.2.5. We use a component and its actual Galois group, avoiding any linear-disjointness assumption; generic compositum input is a Mathlib leaf."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,7 +275,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-prime-to-ell-equivariant-cohen-presentation",
@@ -78,5 +303,164 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-galois-epp-reduced-fibre-cover",
+  "worker": "stage1",
+  "summary": "Expanded coefficient embedding, height-one traits and Epp preparation using existing nodes. Made the constant extension Galois before normalizing, explicitly invoked stability under further finite extension, chose a field component, and restricted its full Galois group to the constants and normalization. Reused the reducedness and dimension argument of the existing non-equivariant preparation, citing its inputs directly rather than its proof. Added one two-clause Mathlib leaf for the Galois compositum and restriction. Statement unchanged.",
+  "blueprint": "Proof Step 3, Gabber finiteness input: the formal Cohen presentation used by ILO V 3.2.1, expanded through IV 4.3.5. Exposé IV 4.3.3–4.3.5, p.60: finite constant extension made Galois before normalized base change, together with the reduced-fibre argument 4.2.3–4.2.4 and the generic Galois observation in 4.3.7, p.61. Equivalently one can take a component and its decomposition group.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cohen-rings-exist",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: Cohen rings exist. No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   },
+   {
+    "node": "def-weil-pbc-cohen-ring",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: Cohen ring. No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-cohen-ring-mod-pn-formally-smooth",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: A Cohen ring modulo p^n is formally smooth over Z/p^n. No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   },
+   {
+    "node": "def-weil-pbc-adically-complete-ring",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: I-adically complete ring. No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: In a DVR every nonzero element is a unit times a power of a uniformizer. No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   },
+   {
+    "node": "lem-sc-finite-minimal-primes-over-ideal",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: Finitely many minimal primes over an ideal in a Noetherian ring. No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-minimal-support-prime-associated",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: A minimal prime of the support of a finite module over a Noetherian ring is associated. No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: Associated primes of a nonzero principal quotient of a normal Noetherian domain. No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: Localizations of Noetherian rings are Noetherian. No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-normal-domain",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: A localization of a normal domain is a normal domain with the same fraction field (Stacks 00GY). No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   },
+   {
+    "node": "lem-sc-normal-dim1-dvr",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: One-dimensional normal local rings. No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: Excellence is preserved by finite type algebras and localization. No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-complete-local-quotient",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: A quotient of a Noetherian complete local ring is a Noetherian complete local ring. No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-extension-in-finite-normal-extension",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: A finite field extension lies in a finite normal extension (Stacks 09DT). No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-algebra-is-integral",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: A finite algebra is integral. No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: The integral closure of a domain in a finite extension of its fraction field is a normal domain with that fraction field. No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-complete-local-nagata",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: A Noetherian complete local ring is a Nagata ring. No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   },
+   {
+    "node": "def-weil-pbc-nagata-ring",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: Universally Japanese rings and Nagata rings. No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   },
+   {
+    "node": "def-weil-pbc-japanese-domain",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: N-1 and N-2 (Japanese) domains. No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-galois-fixed-field",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: A finite Galois extension has finitely many automorphisms and fixed field the base. No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-complete-local-product",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: Finite algebras over a complete Noetherian local ring are products of complete local rings. No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-integral-injective-dimension-equal",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: An injective integral extension preserves Krull dimension. No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-going-down-normal-integral",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: Going down for an integral extension of a normal domain. No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-integral-closure-commutes-localization",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: Integral closure commutes with localization (Stacks 0307). No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-integral-transitive",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: A composition of integral ring maps is integral. No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-at-prime-of-quotient",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: Localizing a quotient at a prime is the quotient of the localization. No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-module-injects-localizations-associated-primes",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: A module over a Noetherian ring embeds in the product of its localizations at its associated primes. No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   },
+   {
+    "node": "def-exc-excellent-ring",
+    "why": "Generic commutative-algebra or field-theory input in the ILO IV 4.2.3–4.3.7 construction: Excellent and quasi-excellent commutative rings. No theorem of the perverse unit replaces this foundational input; this does not change the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cohen-rings-exist",
+  "def-weil-pbc-cohen-ring",
+  "lem-weil-pbc-cohen-ring-mod-pn-formally-smooth",
+  "def-weil-pbc-adically-complete-ring",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-sc-finite-minimal-primes-over-ideal",
+  "lem-weil-pbc-minimal-support-prime-associated",
+  "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-sc-normal-dim1-dvr",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-complete-local-quotient",
+  "lem-weil-pbc-finite-extension-in-finite-normal-extension",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-complete-local-nagata",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-japanese-domain",
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "lem-weil-pbc-going-down-normal-integral",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-integral-transitive",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-module-injects-localizations-associated-primes",
+  "def-exc-excellent-ring"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-782be3b9f",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-782be3b9f (reviewer sub-agent of L); spot-checked: Read the item, the new leaf and every cited node statement in full, plus ILO IV 4.2.2-4.2.5 and 4.3.3-4.3.7 (pdf p.58-61). The statement is unchanged against the live unsplit node; only proof, proof_deps, proof_origin, split_report and status changed. The steps follow the source: k_* and its Cohen ring W0; the height-one traits A_{P_i}, which are excellent DVRs; the perfect-core lemma, whose hypothesis holds trivially since k_perf=k_*; finite-family Epp, whose conclusion is exactly 'W_1 good'; a Galois K; W = normalization of W0 in K, local over W_1; single-trait clause (3), which needs only a local W0-map W_1->W; L = field factor of F⊗K and C = integral closure of A in L, finite because A is Nagata; the new compositum leaf and the fixed-field node give G=Aut_F(L) finite and full. Steps 9 and 12 are genuinely elementary. Going down gives contractions to the P_i. Localization of the integral closure, plus integral transitivity, identifies C_i with B_E. Associated primes plus the quotient-localization node give reducedness (ILO 4.2.4). Catenarity of the excellent C gives dim C/Q = d-1. The field-factor choice is the source's component alternative, and G is a subgroup of Gal(K/K_*) as in 4.3.7. Nothing is weakened. New leaf lem-per-galois-compositum-restriction: Mathlib Galois/Basic.lean lines 54-58, 557-569 (IsGalois.sup_right), 608-629 (restrictRestrictAlgEquivMapHom, its apply formula and injectivity). One declaration per clause. Tested on K⊆F, F=k and Q(∛2)⊂Q(ω,∛2). No duplicate found by greps for sup_right/restrictRestrict/compositum; it is not a restated clause of the item. All off-unit statement tools are declared and generic; accepted. Batch-5 flag lem-per-complete-local-excellence -> lem-trf-regular-ring-universally-catenary: its trf closure is only regular⇒CM⇒universally catenary, polynomial-CM and fraction-degree commutative algebra. No trace-transport, Poincaré or batch-4 node is reached; this is outside both assumptions, so accepted. No fixes."
  }
 }
