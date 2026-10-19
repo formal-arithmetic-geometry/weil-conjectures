@@ -10,11 +10,160 @@
  "stmt_deps": [
   "def-trf-fs-log-blowup",
   "def-per-fs-log-smooth-etale",
-  "lem-per-very-tame-log-quotient"
+  "lem-per-very-tame-log-quotient",
+  "def-per-kummer-log-morphism",
+  "def-per-fs-log-group-action"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $C_E=C\\times_D^{\\rm fs}E$. Every ordinary fibre product below is finite over a locally Noetherian scheme, since $q$ is finite and finiteness is stable under base change [lem-trf-finite-radicial-basechange], hence locally Noetherian, so these fs products exist. The fs-product universal property in [lem-per-fs-product-finite-comparison] defines $g_E$ by the pair $(g,1_E)$ for every $g\\in G$. The identity and multiplication rules hold because their two projections agree, so these maps give an action over $E$. Associating iterated fs products identifies $C_E\\times_E^{\\rm fs}C_E$ with $(C\\times_D^{\\rm fs}C)\\times_D^{\\rm fs}E$: both represent pairs of maps to $C$ with equal composite to $D$, together with a compatible map to $E$. A finite disjoint union of fs log schemes is their scheme disjoint union with the component log structures; pulling it back simply pulls back each open-and-closed component. Thus base change of the assumed diagonal isomorphism is exactly $\\coprod_{g\\in G}C_E\\xrightarrow{(1,g_E)}C_E\\times_E^{\\rm fs}C_E$.",
+   "uses": [
+    "lem-per-fs-product-finite-comparison",
+    "lem-trf-finite-radicial-basechange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 1.8, pp.146--147, fs-cartesian diagram (1.a); universal-property argument"
+   }
+  },
+  {
+   "text": "Apply [lem-per-kummer-etale-fs-base-change-stability] to $q$ and $E\\to D$. Both schemes are locally Noetherian by hypothesis, and the ordinary product $C\\times_DE$ is locally Noetherian by Step 1. It gives log etaleness and the Kummer condition for $q_E:C_E\\to E$.",
+   "uses": [
+    "lem-per-kummer-etale-fs-base-change-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 1.8, p.147, stability under any fs base change"
+   }
+  },
+  {
+   "text": "By [lem-per-fs-product-finite-comparison], the comparison $C_E\\to C\\times_DE$ is finite and surjective, since $q$ is Kummer. The ordinary projection $C\\times_DE\\to E$ is finite by [lem-trf-finite-radicial-basechange]; finiteness of their composite follows from the same statement. Its surjectivity can be checked at an algebraically closed field $\\Omega$ over a point of $E$: the nonempty finite fibre of $C\\to D$ remains nonempty over $\\Omega$, since its residue fields embed into $\\Omega$ over the prescribed residue field. Surjectivity of the comparison then gives a point of $C_E$ above that point. Thus $q_E$ is finite surjective. Here neither projection is assumed to be flat.",
+   "uses": [
+    "lem-per-fs-product-finite-comparison",
+    "lem-trf-finite-radicial-basechange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 1.8, p.147; finite fs comparison and ordinary finite base change"
+   }
+  },
+  {
+   "text": "Fix a geometric point $\\bar e$ of $E$, and pull back strictly to $T=\\operatorname{Spec}\\mathcal O^{\\rm sh}_{E,\\bar e}$. The strict local ring is Noetherian by [lem-sc-strict-henselization-noetherian]. Ordinary products over $T$ of schemes finite over $T$ are finite over $T$, hence Noetherian. By [lem-per-fs-product-finite-comparison], strict pullback is the ordinary scheme pullback; it is finite by [lem-trf-finite-radicial-basechange] and Kummer etale by [lem-per-kummer-etale-fs-base-change-stability]. Apply [lem-per-kummer-strict-local-standard-model] to $C_E\\times_ET\\to T$, obtaining connected strictly local components $V_i$ with standard groups $\\Gamma_i$. For any $i,j$, $V_i\\times_T^{\\rm fs}V_j$ is nonempty: the ordinary product is nonempty (both have a point over the closed point), and its fs comparison is surjective by [lem-per-fs-product-finite-comparison]. Step 1's diagonal isomorphism therefore forces some $g\\in G$ to carry $V_i$ to $V_j$. If $H$ stabilizes $V_i$, restrict that isomorphism to $V_i\\times_T^{\\rm fs}V_i$. It becomes $\\coprod_{h\\in H}V_i\\simeq V_i\\times_T^{\\rm fs}V_i$. Every $h$ is a unique character automorphism by the standard-model node. Comparing with its canonical decomposition into $\\Gamma_i$ copies of the connected $V_i$ shows that $H\\to\\Gamma_i$ is bijective, and it is a homomorphism because it is the action map.",
+   "uses": [
+    "lem-per-fs-product-finite-comparison",
+    "lem-per-kummer-strict-local-standard-model",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-trf-finite-radicial-basechange",
+    "lem-per-kummer-etale-fs-base-change-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.2, p.72, standard local charts and Galois fs diagonal"
+   }
+  },
+  {
+   "text": "For a transitive $G$-permutation of components, evaluation on component $i$ identifies invariant tuples with $H$-invariant sections there: the inverse sends $s$ to its translates, independently of representatives of $G/H$ because $s$ is $H$-fixed. Step 4 identifies $H$ with $\\Gamma_i$, so both invariant-sheaf equalities of [lem-per-kummer-strict-local-standard-model] identify these local invariants with $\\mathcal O_T$ and $M_T$. To read this at the original stalk $\\bar e$, use [lem-weil-pbc-sets-finite-pushforward-stalk] for the underlying sheaves of sets of $\\mathcal O_{C_E}$ and $M_{C_E}$: their pushforward stalks are precisely the products of the geometric stalks of these components. Invariants commute with taking such stalks: represent a fixed germ on a neighbourhood, then shrink for each of the finitely many equations $g(s)=s$ to a common neighbourhood; equality of two germs is handled by the same shrinking. This proves the canonical ring and monoid maps are bijective at every $\\bar e$. By [lemma-openclosed-point-ulift] they are isomorphisms of sheaves, respecting structure maps and units since all maps are the original log pullbacks.",
+   "uses": [
+    "lem-per-kummer-strict-local-standard-model",
+    "lem-weil-pbc-sets-finite-pushforward-stalk",
+    "lemma-openclosed-point-ulift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.3, p.73, the two invariant-sheaf identities; geometric stalk descent"
+   }
+  },
+  {
+   "text": "Each strictly local component in Step 4 has just one closed geometric point over $\\bar e$. The transitivity proved there says exactly that the geometric fibres of $q_E$ are $G$-orbits. The invariant ring formula of Step 5 also proves the scheme quotient assertion locally: for an affine open $U=\\operatorname{Spec}A\\subset E$, finiteness makes $q_E^{-1}U=\\operatorname{Spec}B$ affine, and the formula gives $A=B^G$. Apply [lem-per-tame-admissible-scheme-quotient] to this Noetherian affine source: it is Noetherian because $U$ is Noetherian and the map finite, and all stabilizer orders divide the invertible $|G|$. Its quotient is exactly $\\operatorname{Spec}B^G=U$. These local categorical quotients agree on overlaps by their uniqueness and hence give the quotient $E$ globally. The log quotient is the invariant log structure already identified in Step 5.",
+   "uses": [
+    "lem-per-tame-admissible-scheme-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.3, p.73, standard quotients; VI 3.2, p.74, admissible scheme quotient"
+   }
+  },
+  {
+   "text": "For the final application take the quotient $C\\to D$ of [lem-per-very-tame-log-quotient], retaining the standing invertibility assumption on $|G|$. It gives a finite surjective Kummer etale map between log regular schemes. Over the strict localization $T$ at $\\bar d$, [lem-per-kummer-strict-local-standard-model] gives strictly local standard components $V_i$. Geometric orbit fibres of the quotient imply that $G$ permutes these components transitively. Fix one, with inertia group $H$ and standard sharp chart $P\\to Q$. By [lem-per-finite-quotient-strict-local-invariants], its strict local log stalk $M$ satisfies $M_{D,\\bar d}=M^H$. Write $K=Q^{\\rm gp}/P^{\\rm gp}$, choose $n>0$ invertible in the base annihilating $K$, and put $\\Gamma=\\operatorname{Hom}(K,\\mu_n)$. The standard-model node identifies every log automorphism over $T$ with a unique member of $\\Gamma$. Consequently the actual action gives a homomorphism $H\\to\\Gamma$; no equivariance of an independently chosen standard chart has been assumed.",
+   "uses": [
+    "lem-per-very-tame-log-quotient",
+    "lem-per-kummer-strict-local-standard-model",
+    "lem-per-finite-quotient-strict-local-invariants"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 3.5(a)--(c), pp.74--76, equivariant standard strict-local quotient chart"
+   }
+  },
+  {
+   "text": "The strict-local components in Step 7 are log regular: their map to $C$ is the ordinary base change of a strict localization, and [lem-trf-ind-etale-strict-local-invariance] identifies their strict local rings and pulled-back log stalks with those of $C$. Thus the stratum and dimension conditions persist. By [lem-trf-log-regular-divisorial-structure], their triviality loci are nonempty. The kernel of $H\\to\\Gamma$ acts identically on a component; freeness on its triviality locus forces this kernel to be trivial. Let $J$ be the image in $\\Gamma$. To show its annihilator in $K$ is zero, represent a class by $q_1-q_2$ with $q_1,q_2\\in Q$. Since $nq_2\\in P$, the same class is represented by $q=q_1+(n-1)q_2\\in Q$. If $J$ annihilates it, the chart section $z^q$ in the log stalk is $H$-fixed. The equality $M_{D,\\bar d}=M^H$ of Step 7 says it descends to a base log germ. On sharp characteristics this says $q\\in P$, so the class is zero. By [lem-per-finite-character-annihilator-duality], $J=\\Gamma$, hence $H\\simeq\\Gamma$. The standard diagonal of [lem-per-kummer-strict-local-standard-model] is therefore the actual $H$-diagonal. Transitivity of the components then shows, as in Step 4, that the $G$-diagonal of $C\\times_DT\\to T$ is an isomorphism.",
+   "uses": [
+    "lem-trf-ind-etale-strict-local-invariance",
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-per-finite-character-annihilator-duality",
+    "lem-per-kummer-strict-local-standard-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.2--2.3 and 3.5(c), pp.72--74; VIII 5.3.8, p.125"
+   }
+  },
+  {
+   "text": "It remains to globalize Step 8. Let $\\delta:\\coprod_{g\\in G}C\\to C\\times_D^{\\rm fs}C$ be the $G$-diagonal. Its source is finite over $D$, and so is its target by [lem-per-fs-product-finite-comparison] and [lem-trf-finite-radicial-basechange]. Its base change along the strict map $T\\to D$ at any geometric point $\\bar d$ is the $G$-diagonal of $C\\times_DT\\to T$, by the strict clause of [lem-per-fs-product-finite-comparison] and the iterated-product identification of Step 1; Step 8 shows this is an isomorphism of log schemes. By [lem-weil-pbc-sets-finite-pushforward-stalk], applied to the structure sheaves, the stalks at $\\bar d$ of their pushforwards to $D$ are the products of the strict local rings over the geometric points above $\\bar d$, i.e. the coordinate rings of these base changes to $T$, so $\\delta$ induces bijections on them. By [lemma-openclosed-point-ulift] the map of pushforward algebras is an isomorphism, and since both sides are affine over $D$, $\\delta$ is an isomorphism of schemes. The log structure map $\\delta^{-1}M\\to M$ is bijective on the log stalk at every geometric point, which is a log stalk of a component over the corresponding $T$; by [lemma-openclosed-point-ulift] it is an isomorphism. This proves the final application.",
+   "uses": [
+    "lem-per-fs-product-finite-comparison",
+    "lem-trf-finite-radicial-basechange",
+    "lem-weil-pbc-sets-finite-pushforward-stalk",
+    "lemma-openclosed-point-ulift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.2, p.72, Galois fs diagonal of the strict-local standard cover; local-to-global by geometric stalks"
+   }
+  },
+  {
+   "text": "For successive fs base changes $F\\to E\\to D$, both $(C\\times_D^{\\rm fs}E)\\times_E^{\\rm fs}F$ and $C\\times_D^{\\rm fs}F$ represent the same compatible pairs of maps, so their unique comparison is an isomorphism and respects the $G$-actions. On three successive base changes the two associativity composites have identical projections, hence agree. The invariant ring and log identifications in Step 5 are the canonical pullback maps: composing them sends a section to its successive pullbacks, which equals its direct pullback by functoriality of a log morphism [def-trf-fs-log-blowup]. Thus the quotient identifications commute with composition. This assertion concerns the resulting fs quotients; it does not identify their underlying schemes with ordinary scheme base changes.",
+   "uses": [
+    "lem-per-fs-product-finite-comparison",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 1.8, pp.146--147, functorial fs diagrams; universal property"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-fs-product-finite-comparison",
+  "lem-per-kummer-etale-fs-base-change-stability",
+  "lem-trf-finite-radicial-basechange",
+  "lem-per-kummer-strict-local-standard-model",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-weil-pbc-sets-finite-pushforward-stalk",
+  "lemma-openclosed-point-ulift",
+  "lem-per-tame-admissible-scheme-quotient",
+  "lem-per-very-tame-log-quotient",
+  "lem-per-finite-quotient-strict-local-invariants",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-trf-log-regular-divisorial-structure",
+  "lem-per-finite-character-annihilator-duality",
+  "def-trf-fs-log-blowup"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 2.2--2.3 and 3.5(c), VIII 5.3.8, X 1.8; expanded fs-product, character and stalk arguments"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +192,17 @@
    "results": "{\"t\": \"2026-10-18T21:42:18Z\", \"tool\": \"grep\", \"query\": \"KummerEtale|Kummer.*[Ll]og|[Ll]ogScheme|fs[Pp]ullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Hits concern ordinary etale base change, field Galois groups, and KummerDedekind polynomial quotients. None treats log schemes, fs products, or Kummer etale covers. A second phrasing in the retained log (Kummer etale Galois covering logarithmic schemes stable under saturated fibre product invariant quotient) gives only ordinary etale stability.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kummer etale Galois covering logarithmic schemes stable under saturated fibre product invariant quotient",
+   "results": "{\"t\": \"2026-10-19T00:10:04Z\", \"tool\": \"leanfinder\", \"query\": \"Kummer etale Galois covering logarithmic schemes stable under saturated fibre product invariant quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"72cf53b5c321d2c2\"}; Read the returned types: ordinary scheme pullbacks, ordinary etale algebras, Kummer field extensions, manifold charts, or number-field logarithms do not state the logarithmic claim. No fs-log match.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-abelian-stage-toric-chart",
@@ -73,5 +229,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-kummer-g-cover-fs-base-change",
+  "worker": "stage1",
+  "summary": "Q155 retained the earlier searched stability helper, repaired its search records and ancestry, and expanded the proof into the fs torsor base-change argument, finite comparison, standard strict-local quotient calculation, very-tame application and composition coherence. Added two smaller statement-only geometric tools. No Lean writing or compilation.",
+  "blueprint": "Realizes the regular-pair purity geometry beneath ancestor lem-per-artin-gabber-affine-curve Step 3: the abelian-inertia toric fourth-stage quotient, exactly ILO X 1.8 diagram (1.a) and VIII 5.3.8. The ancestor blueprint does not state this local logarithmic fact separately.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-finite-radicial-basechange",
+    "why": "Generic finite-morphism, stalk, log-regularity or character-duality tool for the fs Kummer local computation; it does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic finite-morphism, stalk, log-regularity or character-duality tool for the fs Kummer local computation; it does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-sets-finite-pushforward-stalk",
+    "why": "Generic finite-morphism, stalk, log-regularity or character-duality tool for the fs Kummer local computation; it does not replace any step of the unit route."
+   },
+   {
+    "node": "lemma-openclosed-point-ulift",
+    "why": "Generic finite-morphism, stalk, log-regularity or character-duality tool for the fs Kummer local computation; it does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-trf-ind-etale-strict-local-invariance",
+    "why": "Generic finite-morphism, stalk, log-regularity or character-duality tool for the fs Kummer local computation; it does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-trf-log-regular-divisorial-structure",
+    "why": "Generic finite-morphism, stalk, log-regularity or character-duality tool for the fs Kummer local computation; it does not replace any step of the unit route."
+   },
+   {
+    "node": "def-trf-fs-log-blowup",
+    "why": "Generic finite-morphism, stalk, log-regularity or character-duality tool for the fs Kummer local computation; it does not replace any step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-finite-radicial-basechange",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-weil-pbc-sets-finite-pushforward-stalk",
+  "lemma-openclosed-point-ulift",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-trf-log-regular-divisorial-structure",
+  "def-trf-fs-log-blowup"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q155-a6988b5bc",
+  "group": "Q155",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-a6988b5bc (reviewer sub-agent of L); spot-checked: FIX with 3 small repairs in fixes/dag/nodes/sec-deligne-laumon-a1/ (3 new-node statements and the item proof; the item statement is unchanged and byte-identical to the live base). The rest of the item is correct. Sources read: ILO VI 2.1–2.3 (pp.71–73): Kummer cover definition, strict-local standard cartesian square, fs Galois diagonal, (2.a), P=Q∩P^gp, O_Y=(f_*O_X)^G and M_Y=(f_*M_X)^G with no log regularity assumed; ILO X 1.8 (pp.146–147): Kummer étale G-cover stable under fs base change. Steps checked: Step 1 universal property and diagonal; Step 3 finite surjective with no flatness; Step 4 transitivity and H≅Γ_i via the automorphism clause and connected components; Step 5 invariants by grading (Q∩P^gp=P, ζ−1 a unit) with the sets finite-pushforward stalk lemma and conservativity; Step 6 tame quotient on Noetherian affines; Steps 7–8 inertia kernel trivial by freeness on the triviality locus, annihilator argument q=q1+(n−1)q2, duality using μ_e cyclic in a strictly henselian ring. Repairs: (1) E2/E1: def-trf-fs-log-blowup defines log structures only on locally Noetherian schemes, so the fs product need not exist there (Spec C×_Q Spec C); the comparison and stability nodes now assume the ordinary fibre product is locally Noetherian, and item Steps 1/2/4 note that the products are finite over locally Noetherian bases. (2) C4: Step 8 reads the standard charts as characteristic monoids, but the node said only 'sharp charts' (N→k, 1↦1 is sharp and not characteristic); the standard-model node now pins P≅M̄_{T,t} and Q_i≅M̄_{V_i,v_i}, as ILO VI 2.3 allows. (3) C1/E5: the global G-diagonal claim had no cited local-to-global step; new Step 9 uses the strict clause of the comparison node, the finite pushforward stalk lemma and conservativity, and the old Step 9 is now Step 10. New nodes are true and not duplicates (grep over the DAG found no fs-product or standard-cover node); none restates a clause of the item; no cycle. Batch-5 flags are all generic, checked by closure (no thm-trf, Poincaré-duality, sk-thm or nt- node): the fs definitions; noetherian-submodule; strict-henselization algebra; 05WR ind-étale invariance; Nizioł 2.6 divisorial structure (monoid and toric algebra); the character-duality Mathlib leaf. I accepted the 7 generic tool_uses. Maintainer note: the existing unsplit lem-per-kummer-boundary-restriction (Q91) has a sentence stating the item's base-change stability; when it is split, it should cite this item.; 4 file(s) fixed by the reviewer"
  }
 }
