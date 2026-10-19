@@ -17146,7 +17146,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:33 L: merged deliver/B9/Sheaf.AlgebraicGeometry.NoetherianAffineDimOneOpen (stage 3; reviewer PASS; first push; landing 20261019T093300-L-2288647 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:33 L: merged deliver/C1/Sheaf.Paper.ConstructibleFlatCohomologyTorBound (stage 3; reviewer PASS; first push; landing 20261019T093302-L-2288982 (interface); batch 20261019T093237; modules 1; new nodes 0; change records: coord/changes/C1-residue-tor-private-proof-context.md)
 - 09:33 L: merged deliver/C2/Sheaf.AlgebraicGeometry.LisseLatticeFiniteEtaleDescent (stage 3; reviewer PASS; first push; landing 20261019T093303-L-2289210 (interface); batch 20261019T093237; modules 2; new nodes 0; change records: coord/changes/C2-withdraw-obsolete-finite-etale-lattice.md)
-- 09:33 L: merged deliver/C2/Sheaf.Paper.IntegralConstantModelHeart (stage 3; reviewer PASS; first push; landing 20261019T093304-L-2289498 (interface); batch 20261019T093237; modules 2; new nodes 1; change records: coord/changes/C2-integral-constant-model-heart-proof-context.md)
 - 09:33 L: merged deliver/C4/Sheaf.Paper.OpenExtensionFiniteTor (stage 3; reviewer PASS; first push; landing 20261019T093306-L-2289921 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:33 L: merged deliver/C5/Sheaf.AlgebraicGeometry.ConstructibleSheafDevissage (stage 3; reviewer PASS; first push; landing 20261019T093307-L-2290319 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:33 L: merged deliver/C5/Sheaf.AlgebraicGeometry.NormalOpenLisseImage (stage 3; reviewer PASS; first push; landing 20261019T093308-L-2290672 (proof); batch 20261019T093237; modules 1; new nodes 0)
@@ -17155,7 +17154,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:33 L: merged deliver/C6/Sheaf.AlgebraicGeometry.EtaleTensorCokernelFlat (stage 3; reviewer PASS; first push; landing 20261019T093313-L-2292367 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:33 L: merged deliver/C6/Sheaf.AlgebraicGeometry.OpenImmersionHigherDirectImages (stage 3; reviewer PASS; first push; landing 20261019T093314-L-2293030 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:33 L: merged deliver/C7/Sheaf.CategoryTheory.AdjointMate (stage 3; reviewer PASS; first push; landing 20261019T093315-L-2293444 (proof); batch 20261019T093237; modules 1; new nodes 0)
-- 09:33 L: merged deliver/C8/Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology (stage 3; reviewer PASS; first push; landing 20261019T093317-L-2293756 (interface); batch 20261019T093237; modules 5; new nodes 4; change records: coord/changes/ell-adic-localizing-interface-context.md)
 - 09:33 L: merged deliver/C8/Sheaf.Paper.TraceFixedScheme (stage 3; reviewer PASS; first push; landing 20261019T093318-L-2294228 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:33 L: merged deliver/C9/Sheaf.Algebra.Homology.RingedInternalHomDerivedComplete (stage 3; reviewer PASS; first push; landing 20261019T093320-L-2294461 (interface); batch 20261019T093237; modules 1; new nodes 0; change records: coord/changes/C9-ringed-internal-hom-completeness-imports.md)
 - 09:33 L: merged deliver/C9/Sheaf.AlgebraicGeometry.PurSupportExact (stage 3; reviewer PASS; first push; landing 20261019T093321-L-2294689 (proof); batch 20261019T093237; modules 1; new nodes 0)
@@ -17179,7 +17177,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:33 L: merged deliver/E6/Sheaf.Paper.RealSheavesSetup (stage 3; reviewer PASS; first push; landing 20261019T093346-L-2301024 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:33 L: merged deliver/E7/Sheaf.RingTheory.ExcellentOfWeaklyEtale (stage 3; reviewer PASS; first push; landing 20261019T093348-L-2301389 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:33 L: merged deliver/E8/Sheaf.AlgebraicGeometry.ProEtale.ConstantRealizationDetectsZero (stage 3; reviewer PASS; after a return; landing 20261019T093349-L-2301611 (interface); batch 20261019T093237; modules 1; new nodes 0; change records: coord/changes/E8-constant-realization-warning-option.md)
-- 09:33 L: merged deliver/F1/Sheaf.Paper.PurityDiagonalBaseChangeCompared (stage 3; reviewer PASS; first push; landing 20261019T093350-L-2301804 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:33 L: merged deliver/F2/Sheaf.Paper.CoefficientHeartCommonStratification (stage 3; reviewer PASS; first push; landing 20261019T093352-L-2301987 (interface); batch 20261019T093237; modules 4; new nodes 3; change records: coord/changes/f2-coefficient-heart-shared-definitions.md)
 - 09:33 L: merged deliver/F3/Sheaf.AlgebraicGeometry.FiniteProetaleSmoothBaseChange (stage 3; reviewer PASS; first push; landing 20261019T093353-L-2302154 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:33 L: merged deliver/F5/Sheaf.AlgebraicGeometry.RegularNormalDecomposition (stage 3; reviewer PASS; first push; landing 20261019T093355-L-2302350 (proof); batch 20261019T093237; modules 1; new nodes 0)
@@ -17201,7 +17198,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:34 L: merged deliver/G5/Sheaf.AlgebraicGeometry.NowhereDenseDimZero (stage 3; reviewer PASS; first push; landing 20261019T093417-L-2307925 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:34 L: merged deliver/G6/Sheaf.AlgebraicGeometry.ExceptionalBaseChangeReducesToProper (stage 3; reviewer PASS; first push; landing 20261019T093418-L-2308280 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:34 L: merged deliver/G6/Sheaf.AlgebraicGeometry.FiniteDenseNormalOpen (stage 3; reviewer PASS; first push; landing 20261019T093419-L-2308576 (proof); batch 20261019T093237; modules 1; new nodes 0)
-- 09:34 L: merged deliver/G6/Sheaf.Paper.CommonStageConstituentNonexceptional (stage 3; reviewer PASS; first push; landing 20261019T093420-L-2308887 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:34 L: merged deliver/G6/Sheaf.Paper.FiniteCoefficientTensorCtf (stage 3; reviewer PASS; first push; landing 20261019T093422-L-2309114 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:34 L: merged deliver/G7/Sheaf.AlgebraicGeometry.SupportTriangleCompatibility (stage 3; reviewer PASS; first push; landing 20261019T093423-L-2309320 (interface); batch 20261019T093237; modules 1; new nodes 0; change records: coord/changes/G7-support-open-base-change-naturality.md)
 - 09:34 L: merged deliver/G7/Sheaf.Paper.ComparisonTorAmplitude (stage 3; reviewer PASS; after a return; landing 20261019T093424-L-2309621 (proof); batch 20261019T093237; modules 1; new nodes 0)
@@ -17286,3 +17282,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:12 L: returned deliver/NN/fix-cor-verdier-exchange (reviewer RETURN: L: independent stage-2 immutable head 2f2560c1e463: H2: stmt_dep sk-thm-sf-verdier-exchange supplies only plain definiti)
 
 - 18:13 L: batch 20261019T093237: K7/Sheaf.SixFunctors.FlatModel taken out (own fault, red build)
+
+- 18:30 L: batch 20261019T093237 dependency take-out

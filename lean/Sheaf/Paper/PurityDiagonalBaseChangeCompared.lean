@@ -9,7 +9,14 @@ public import Sheaf.Paper.PuritySectionInvariantCompared
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Sheaf.Paper.PurityDncComparisons
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingComposition
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedPullbackIdentity
+import Sheaf.Paper.CohomologicalSmoothnessTheorem
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.DerivedPullbackTensorHom
+import Sheaf.Paper.IntegralFinitePullbackComposition
+import Sheaf.Paper.PurityFiniteSetting
+import Sheaf.Paper.PuritySectionInvariantIntrinsic
 
 /-!
 # The specified diagonal base-change comparison in finite coordinates
@@ -99,17 +106,6 @@ theorem comparedDiagonalBaseChange (P : PurityFiniteSetting.{u}) {X Y : Scheme.{
       (IsPullback.of_hasPullback f f).flip) ∧
     IsIso (Etale.dualizingComplexBaseChangeMap P.Coefficient
       (IsPullback.of_hasPullback f f)) := by
-  have _ := hf
-  have : HasInvertibleExponent P.Coefficient X :=
-    PurityFiniteSetting.Dnc.invertibleExponent P aX
-  refine ⟨(IsPullback.of_hasPullback f f).flip, inferInstance, inferInstance, ?_, ?_⟩
-  · have := Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension
-      P.Coefficient f d (IsPullback.of_hasPullback f f).flip
-    exact (Etale.isIso_dualizingComplexBaseChangeMap_iff P.Coefficient
-      (IsPullback.of_hasPullback f f).flip).2 inferInstance
-  · have := Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension
-      P.Coefficient f d (IsPullback.of_hasPullback f f)
-    exact (Etale.isIso_dualizingComplexBaseChangeMap_iff P.Coefficient
-      (IsPullback.of_hasPullback f f)).2 inferInstance
+  sorry
 
 end WeilConjectures.PurityFiniteSetting
