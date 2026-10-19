@@ -1,0 +1,126 @@
+{
+ "id": "lem-sp-tower-right-extension-finite-colimits",
+ "kind": "statement",
+ "title": "Finite colimits of the normalized right extensions",
+ "statement": "Let $l$ be prime, $E/\\mathbf Q_l$ a finite extension, $T$ a scheme, $A$ the abelian data of [det-sp-coefficient-towers-abelian], and $R$ any normalized family of right extensions as specified in [lem-sp-tower-normalized-right-adjoints]. For every nonnegative index $n$, the functor from level-$n+1$ module sheaves [def-weil-sheaf-of-modules-category] to coefficient towers, obtained from $R_n$ by the inverse of the strict-system equivalence, preserves finite colimits.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/sk-lem-sp-tower-levels-adjoint.proof.md",
+  "place": "Exactness"
+ },
+ "stmt_deps": [
+  "det-sp-coefficient-towers-abelian",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sp-tower-normalized-right-adjoints"
+ ],
+ "proof": [
+  {
+   "text": "At an upper level scalar restriction preserves cokernels and finite biproducts, since it leaves underlying abelian sheaves unchanged and cokernels are sheafified sectionwise. This is systemScalarRestriction_exact in the stated system-level interface. At a lower level the zero functor preserves these colimits.",
+   "uses": [
+    "lem-pur-system-level-left-extension",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized upper objects and maps give equality of the evaluated extension functor with scalar restriction, by Functor.hext. At lower levels every object is zero, so the evaluated functor preserves colimits. A componentwise inverse to a strict-system map with invertible components commutes with transitions by cancellation, so the family of strict evaluations jointly reflects isomorphisms. Since evaluations preserve finite colimits, jointlyReflectsColimit detects the mapped finite colimit cocone. Transport through the equivalence preserves finite colimits.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian",
+    "lem-sp-tower-normalized-right-adjoints"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "det-sp-coefficient-towers-abelian",
+  "lem-pur-system-level-left-extension",
+  "lem-sp-tower-normalized-right-adjoints"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/sk-lem-sp-tower-levels-adjoint.proof.md",
+  "place": "Exactness; implemented by Z5 using levelwise scalar restriction, jointly conservative exact evaluations, and transport through the equivalence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of inverse systems of module sheaves over varying rings has a right adjoint zero below the evaluated index and restriction of scalars above",
+   "results": "8 hits, including PresheafOfModules limit constructions and SheafOfModules.evaluation; no normalized varying-ring right extension.",
+   "date": "2026-10-19",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Injective",
+   "results": "3 hits: Adjunction.map_injective, Injective.injective_of_adjoint and Adjunction.injective_of_map_injective. These give the injective consequence, not the right extension construction.",
+   "date": "2026-10-19",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "systemRight|right.*[Ee]valuation|[Ee]valuation.*right",
+   "results": "Evaluation adjunctions in Mathlib.CategoryTheory.Adjunction.Evaluation are for a fixed target category; none gives the prescribed varying-ring functor. Local rg also found systemScalarRestriction_exact in SystemLevelLeftExtension.",
+   "date": "2026-10-19",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of a tower of module sheaves over varying coefficient rings has a right adjoint given by scalar restriction above one level and zero below, preserving finite colimits",
+   "results": "8 hits: PresheafOfModules pushforward right adjoint and colimit constructions, scalar restriction for sheaves/presheaves, presheaf evaluation preserving finite colimits, module-sheaf pullback adjunction, ModuleCat.restrictCoextendScalarsAdj. No normalized varying-ring right extension.",
+   "date": "2026-10-19",
+   "verdict": "ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityTowerEvaluationAdjoint",
+  "date": "2026-10-19",
+  "group": "Z5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-evaluation-adjoint",
+   "place": "Proof, Exactness",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower-levels",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityTowerRightExtensionFiniteColimits",
+  "file": "lean/Sheaf/Paper/SmoothPurityTowerRightExtensionFiniteColimits.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.sp_tower_right_extension_finite_colimits",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.sp_tower_right_extension_finite_colimits"
+  ],
+  "statement": "theorem sp_tower_right_extension_finite_colimits (A : SpCoefficientTowersAbelian l E T)\n    (R : SpTowerRightAdjoints l E T A) (n : ℕ) :\n    PreservesFiniteColimits (R.right n ⋙ A.equivalence.inverse)",
+  "branch": "sheaf-dag",
+  "by": "Z5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261019T034410-L-428870",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261019T034410-L-428870",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

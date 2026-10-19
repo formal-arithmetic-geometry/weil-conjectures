@@ -9,7 +9,8 @@ public import Sheaf.Paper.SmoothPurityCoefficientTowersAbelian
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
-import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
+import Sheaf.Paper.SmoothPurityTowerRightExtensionFiniteColimits
+import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
@@ -104,6 +105,65 @@ structure SpTowerEvaluationAdjoint (A : SpCoefficientTowersAbelian l E T) where
         Nonempty (IsLimit P) ∧ ∃ f : C ⟶ P.pt, Mono f ∧
           ∀ n : ℕ, f ≫ P.proj n = ((adjunction n).homEquiv C (J n)) (i n)
 
+private theorem sp_strict_hom_ext
+    {M N : StrictRingSystem.{t + 1, t, max u (t + 1)}
+      (spCoefficientCommRings l E T)} (f g : M ⟶ N)
+    (h : ∀ n : ℕ, f.app n = g.app n) : f = g := by
+  cases f with
+  | mk f hf =>
+    cases g with
+    | mk g hg =>
+      have he : f = g := funext h
+      subst g
+      rfl
+
+private theorem sp_evaluation_jointly_faithful (A : SpCoefficientTowersAbelian l E T)
+    {M N : spCoefficientTowers l E T} (f g : M ⟶ N)
+    (h : ∀ n : ℕ, (spCoefficientEvaluation l E T A.equivalence n).map f =
+      (spCoefficientEvaluation l E T A.equivalence n).map g) : f = g := by
+  apply A.equivalence.functor.map_injective
+  exact sp_strict_hom_ext l E T _ _ h
+
+private theorem sp_embedding_from_adjunctions (A : SpCoefficientTowersAbelian l E T)
+    (R : ∀ n : ℕ,
+      systemLevel.{t + 1, t, max u (t + 1)} (spCoefficientCommRings l E T) n ⥤
+        spCoefficientTowers l E T)
+    (adj : ∀ n : ℕ, spCoefficientEvaluation l E T A.equivalence n ⊣ R n)
+    (C : spCoefficientTowers l E T) :
+    ∃ (J : ∀ n : ℕ,
+        systemLevel.{t + 1, t, max u (t + 1)} (spCoefficientCommRings l E T) n)
+      (i : ∀ n : ℕ, (spCoefficientEvaluation l E T A.equivalence n).obj C ⟶ J n),
+      (∀ n : ℕ, Injective (J n)) ∧ (∀ n : ℕ, Mono (i n)) ∧
+      ∃ P : Fan (fun n : ℕ ↦ (R n).obj (J n)),
+        Nonempty (IsLimit P) ∧ ∃ f : C ⟶ P.pt, Mono f ∧
+          ∀ n : ℕ, f ≫ P.proj n = ((adj n).homEquiv C (J n)) (i n) := by
+  classical
+  let := A.grothendieck
+  have levelGroth (n : ℕ) : IsGrothendieckAbelian.{max u (t + 1)}
+      (systemLevel.{t + 1, t, max u (t + 1)} (spCoefficientCommRings l E T) n) := by
+    exact SheafOfModules.isGrothendieckAbelianOfUniverses _ _
+  let (n : ℕ) := levelGroth n
+  let J := fun n : ℕ ↦ Injective.under
+    ((spCoefficientEvaluation l E T A.equivalence n).obj C)
+  let i := fun n : ℕ ↦ Injective.ι
+    ((spCoefficientEvaluation l E T A.equivalence n).obj C)
+  let d := fun n : ℕ ↦ (adj n).homEquiv C (J n) (i n)
+  refine ⟨J, i, fun _ ↦ inferInstance, fun _ ↦ inferInstance,
+    limit.cone (Discrete.functor (fun n : ℕ ↦ (R n).obj (J n))),
+    ⟨limit.isLimit _⟩, Pi.lift d, ?_, ?_⟩
+  · constructor
+    intro X a b hab
+    apply sp_evaluation_jointly_faithful l E T A
+    intro n
+    apply (cancel_mono (i n)).mp
+    apply (adj n).homEquiv X (J n) |>.injective
+    rw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_left]
+    change a ≫ d n = b ≫ d n
+    have hh := congrArg (fun k ↦ k ≫ Pi.π (fun n : ℕ ↦ (R n).obj (J n)) n) hab
+    simpa only [Category.assoc, Pi.lift_π] using hh
+  · intro n
+    exact Pi.lift_π d n
+
 /-- Evaluation of coefficient towers has the stated exact right adjoints, preserving
 injectives, and every tower embeds into a product of their injective values.
 Source: blueprint main-20261015, `sk-lem-sp-tower-levels-adjoint.md`
@@ -136,7 +196,27 @@ kernel vanishes. Levelwise kernels therefore make it a monomorphism of towers.
 The first index is zero, hence exponent one; no boundary at exponent zero is used. -/
 theorem sp_tower_evaluation_adjoint (A : SpCoefficientTowersAbelian l E T) :
     Nonempty (SpTowerEvaluationAdjoint l E T A) := by
-  sorry
+  obtain ⟨R⟩ := sp_tower_normalized_right_adjoints l E T A
+  refine ⟨{ right := R.right
+            above := R.above
+            below := R.below
+            transitionAbove := R.transitionAbove
+            transitionBelow := R.transitionBelow
+            mapAbove := R.mapAbove
+            mapBelow := R.mapBelow
+            adjunction := R.adjunction
+            exact := ?_
+            injectives := ?_
+            embedding := ?_ }⟩
+  · intro n
+    let : PreservesLimits (R.right n ⋙ A.equivalence.inverse) :=
+      (R.adjunction n).rightAdjoint_preservesLimits
+    exact ⟨inferInstance, sp_tower_right_extension_finite_colimits l E T A R n⟩
+  · intro n
+    let := A.evaluationLimits n
+    exact (R.adjunction n).preservesInjectiveObjects_of_preservesFiniteLimits
+  · exact sp_embedding_from_adjunctions l E T A
+      (fun n ↦ R.right n ⋙ A.equivalence.inverse) R.adjunction
 
 end AlgebraicGeometry.ProEtale
 
