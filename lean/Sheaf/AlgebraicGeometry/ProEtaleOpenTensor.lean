@@ -12,26 +12,10 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatRe
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenComparison
-import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
-import Sheaf.CategoryTheory.RingedSliceExtensionTensor
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.Paper.KFlatRingedToposPullback
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
-import Mathlib.Algebra.Homology.BifunctorShift
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.Paper.DerivedPullbackTensorHom
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-!
 # Tensoring an extension by zero
@@ -49,6 +33,28 @@ universe u
 open CategoryTheory CategoryTheory.MonoidalCategory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
+
+-- Normalize composition without unfolding the derived tensor construction.
+private theorem sfTensor_precomp
+    {C D E F G H : Type*} [Category* C] [Category* D] [Category* E]
+    [Category* F] [Category* G] [Category* H]
+    (f : C ⥤ D) (l : D ⥤ E) (g : F ⥤ G)
+    (T : E ⥤ G ⥤ H) :
+    (((Functor.whiskeringLeft₂ H).obj (f ⋙ l)).obj g).obj T =
+      (((Functor.whiskeringLeft₂ H).obj f).obj g).obj
+        ((((Functor.whiskeringLeft₂ H).obj l).obj (𝟭 G)).obj T) := rfl
+private theorem sfTensor_postcomp
+    {C D E F G H : Type*} [Category* C] [Category* D] [Category* E]
+    [Category* F] [Category* G] [Category* H]
+    (f : C ⥤ D) (g : E ⥤ F) (r : F ⥤ G)
+    (l : D ⥤ G ⥤ H) {I J : Type*} [Category* I] [Category* J]
+    (a : H ⥤ I) (b : I ⥤ J) :
+    (Functor.postcompose₂.obj (a ⋙ b)).obj
+      ((((Functor.whiskeringLeft₂ H).obj f).obj (g ⋙ r)).obj l) =
+    (Functor.postcompose₂.obj b).obj
+      ((((Functor.whiskeringLeft₂ I).obj f).obj g).obj
+        ((Functor.postcompose₂.obj a).obj
+          ((((Functor.whiskeringLeft₂ H).obj (𝟭 D)).obj r).obj l))) := rfl
 
 /-- Open restriction is additive by the published extension/restriction adjunction.
 Source: Stacks, Tags 03DI and 03DJ (blueprint: lem-trf-open-tensor). -/
@@ -154,6 +160,65 @@ Proof plan:
 theorem sfOpenTensor {U Y : Scheme.{u}} (j : U ⟶ Y) [IsOpenImmersion j]
     (A : Type u) [CommRing A] [Finite A] :
     Nonempty (sfOpenTensorLeft j A ≅ sfOpenTensorRight j A) := by
-  sorry
+  -- The existing fixed-scalar projection formula performs the complex and localization
+  -- steps above. Transport it through the canonical coefficient realizations.
+  let B := ModuleCat.{u + 1} (ULift.{u + 1, u} A)
+  let EU := sfIntrinsicModuleEquivalence U A
+  let EY := sfIntrinsicModuleEquivalence Y A
+  let L := ProEtale.openImmersionLowerShriek B j
+  let R := ProEtale.openImmersionRestriction B j
+  let fU := EU.functor.mapDerivedCategory
+  let iU := EU.inverse.mapDerivedCategory
+  let fY := EY.functor.mapDerivedCategory
+  let iY := EY.inverse.mapDerivedCategory
+  let dL := L.mapDerivedCategory
+  let : PreservesColimitsOfSize.{0, 0} R :=
+    (ProEtale.openImmersionRestrictionLowerStarAdjunction B j).leftAdjoint_preservesColimits
+  let dR := R.mapDerivedCategory
+  let eL₀ : sfIntrinsicExtensionByZero j A ⋙ EY.inverse ≅ EU.inverse ⋙ L :=
+    Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (Functor.associator _ _ _ ≪≫
+        Functor.isoWhiskerLeft _ EY.unitIso.symm ≪≫ Functor.rightUnitor _)
+  let eL : (sfIntrinsicExtensionByZero j A).mapDerivedCategory ⋙ iY ≅ iU ⋙ dL :=
+    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      Functor.mapDerivedCategoryNatIso eL₀ ≪≫ Functor.mapDerivedCategoryCompIso _ _
+  let eR₀ : sfIntrinsicOpenRestriction j A ⋙ EU.inverse ≅ EY.inverse ⋙ R :=
+    Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (Functor.associator _ _ _ ≪≫
+        Functor.isoWhiskerLeft _ EU.unitIso.symm ≪≫ Functor.rightUnitor _)
+  let eR : (sfIntrinsicOpenRestriction j A).mapDerivedCategory ⋙ iU ≅ iY ⋙ dR :=
+    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      Functor.mapDerivedCategoryNatIso eR₀ ≪≫ Functor.mapDerivedCategoryCompIso _ _
+  let eF₀ : EU.functor ⋙ sfIntrinsicExtensionByZero j A ≅ L ⋙ EY.functor :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight EU.unitIso.symm _ ≪≫ Functor.leftUnitor _
+  let eF : fU ⋙ (sfIntrinsicExtensionByZero j A).mapDerivedCategory ≅ dL ⋙ fY :=
+    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      Functor.mapDerivedCategoryNatIso eF₀ ≪≫ Functor.mapDerivedCategoryCompIso _ _
+  let e := ProEtale.derivedOpenImmersionLowerShriekProjectionIso B j
+  let ePull := ProEtale.leftDerivedUpperStarIsoMapDerivedCategory B j ≪≫
+    Functor.mapDerivedCategoryNatIso (ProEtale.upperStarIsoOpenImmersionRestriction B j)
+  let eBase := e.symm ≪≫
+    (Functor.postcompose₂.obj dL).mapIso
+      (((Functor.whiskeringLeft₂ _).obj (𝟭 _)).mapIso ePull |>.app (curriedTensor _))
+  let DU := DerivedCategory (Sheaf (ProEt.topology U) B)
+  let DY := DerivedCategory (Sheaf (ProEt.topology Y) B)
+  let pre : (DU ⥤ DY ⥤ DY) ⥤
+      (proEtaleDerivedCategory U A ⥤ proEtaleDerivedCategory Y A ⥤ DY) :=
+    ((Functor.whiskeringLeft₂ _).obj iU).obj iY
+  let post : (proEtaleDerivedCategory U A ⥤ proEtaleDerivedCategory Y A ⥤ DY) ⥤
+      (proEtaleDerivedCategory U A ⥤ proEtaleDerivedCategory Y A ⥤
+        proEtaleDerivedCategory Y A) := Functor.postcompose₂.obj fY
+  let middle := post.mapIso (pre.mapIso eBase)
+  let left := post.mapIso
+    ((((Functor.whiskeringLeft₂ _).mapIso eL).app iY).app (curriedTensor _))
+  let right₁ := (Functor.postcompose₂.mapIso eF).app
+    ((((Functor.whiskeringLeft₂ _).obj iU).obj
+      ((sfIntrinsicOpenRestriction j A).mapDerivedCategory ⋙ iU)).obj (curriedTensor _))
+  let right₂ := (Functor.postcompose₂.obj (dL ⋙ fY)).mapIso
+    ((((Functor.whiskeringLeft₂ _).obj iU).mapIso eR).app (curriedTensor _))
+  rw [sfTensor_precomp iU dL iY (curriedTensor _)] at left
+  rw [sfTensor_postcomp iU iY dR (curriedTensor _) dL fY] at right₂
+  exact ⟨left ≪≫ middle ≪≫ (right₁ ≪≫ right₂).symm⟩
 
 end AlgebraicGeometry.Scheme

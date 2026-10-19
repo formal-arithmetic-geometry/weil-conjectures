@@ -25,117 +25,37 @@
  ],
  "proof": [
   {
-   "text": "Work throughout with modules over the constant ring sheaves on the small pro-etale sites, in the small site models of def-weil-pbc-proetale-site. By lem-weil-proetale-weakly-etale-localization, identify $U_{\\mathrm{proet}}$ with $Y_{\\mathrm{proet}}/U$ and $A_U$ with $A_Y|_U$. The comparison lem-weil-pbc-proetale-ringed-open-comparison identifies the actual module inverse image with slice restriction, so this is the $j^*$ in the assertion. The presheaf defining def-weil-extension-by-zero agrees with the slice extension presheaf: an object has at most one map to the open $U$, hence its indexing direct sum is either the specified value or zero. Thus lem-pur-site-restriction-module-adjunction-exact applies to these very functors: $j_!\\dashv j^*$ and both are exact. Exactness identifies $H^n(j_!C)$ with $j_!H^n(C)$ and $H^n(j^*D)$ with $j^*H^n(D)$, since kernels and images in $\\ker d^n/\\operatorname{im}d^{n-1}$ are preserved. In particular acyclic complexes and quasi-isomorphisms are preserved. By lem-sf-exact-functor-derived-triangulated these degreewise functors induce functors on the unbounded derived categories. The finite-level definition def-weil-derived-pullback-tensor-hom identifies derived pullback with this exact degreewise $j^*$.",
+   "text": "Use the inverse of the already proved fixed-scalar pro-etale derived projection isomorphism lem-cbc-extension-zero-projection-formula, at ModuleCat(ULift A). A finite commutative ring is Noetherian, so the published flat-pullback instance applies. Its derived inverse image is canonically isomorphic to termwise upperStar, and the published upperStarIsoOpenImmersionRestriction identifies the latter with termwise open restriction. This realizes the underived projection, total-complex construction and derived descent of the blueprint without reproving them.",
    "uses": [
-    "def-weil-pbc-proetale-site",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-proetale-ringed-open-comparison",
-    "def-weil-extension-by-zero",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-sf-exact-functor-derived-triangulated",
-    "def-weil-derived-pullback-tensor-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0E8I (lemma-j-shriek-and-tensor), with Section 03DH (section-localize), Tag 03DI (lemma-extension-by-zero) for adjunction and Tag 03DJ (lemma-extension-by-zero-exact) for exactness"
-   }
-  },
-  {
-   "text": "Apply lem-weil-pbc-ringed-slice-extension-tensor with $(\\mathcal C,\\mathcal O)=(Y_{\\mathrm{proet}},A_Y)$ and its object $U$. For every sheaf $P$ on $U$ and $N$ on $Y$, its inverse gives a sheaf isomorphism $\\theta_{P,N}:(j_!P)\\otimes_A N\\xrightarrow{\\sim}j_!(P\\otimes_Aj^*N)$ natural simultaneously in $P,N$. The ring restriction and extension functors are precisely those identified in step 1, so no comparison between etale and pro-etale coefficient categories is involved.",
-   "uses": [
-    "lem-weil-pbc-ringed-slice-extension-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0E8I (lemma-j-shriek-and-tensor)"
-   }
-  },
-  {
-   "text": "Because $j_!$ is a left adjoint, lem-weil-pbc-left-adjoint-preserves-colimits makes it commute with the small coproduct indexed by $\\{(p,q)\\in\\mathbf Z^2:p+q=n\\}$, for each integer $n$. Apply $\\theta_{P^p,N^q}$ to every summand of the tensor complex of def-pc-tensor-complex-sheaves and then this coproduct isomorphism. This gives, for arbitrary unbounded complexes, $\\Theta_{P,N}:\\operatorname{Tot}(j_!P\\otimes_A N)\\xrightarrow{\\sim}j_!\\operatorname{Tot}(P\\otimes_Aj^*N)$. Naturality of $\\theta$ with respect to $d_P^p$ and $d_N^q$ identifies the two summand differentials $d_P^p\\otimes1$ and $1\\otimes d_N^q$; additivity of $j_!$ also preserves the factor $(-1)^p$. The maps therefore commute with the total differential $d_P\\otimes1+(-1)^p1\\otimes d_N$, and their termwise inverses do too. The same summand naturality proves that $\\Theta$ commutes with every pair of chain maps.",
-   "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "def-pc-tensor-complex-sheaves",
-    "lem-weil-pbc-ringed-slice-extension-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), details of the passage to unbounded complexes"
-   }
-  },
-  {
-   "text": "Extension by zero preserves K-flat complexes. Indeed, if $P$ is K-flat on $U$ and $N$ acyclic on $Y$, exactness makes $j^*N$ acyclic; hence $\\operatorname{Tot}(P\\otimes_Aj^*N)$ is acyclic by def-pc-kflat-complex (using the symmetry of the tensor complex), and exactness of $j_!$ and step 3 show $\\operatorname{Tot}(j_!P\\otimes_A N)$ is acyclic. The symmetry here is the summand exchange $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ for degrees $p,q$; it commutes with the displayed total differentials. The underlying sheaf symmetry is part of lem-pc-sheaf-modules-tensor-closed. Moreover $j_!$ preserves flat sheaves: for a flat sheaf $F$ on $U$, step 2 identifies $j_!F\\otimes_A-$ with $j_!\\circ(F\\otimes_A-)\\circ j^*$; each factor is exact, so their composite is exact. The sheaf symmetry in lem-pc-sheaf-modules-tensor-closed identifies this functor with $-\\otimes_Aj_!F$, which is the tensor order in def-pc-flat-sheaf-modules. Consequently a K-flat complex with flat terms remains such after $j_!$.",
-   "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-pc-kflat-complex",
-    "def-pc-flat-sheaf-modules",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), details of the passage to unbounded complexes"
-   }
-  },
-  {
-   "text": "Choose representatives of $K$ and $M$ and K-flat resolutions $P\\to K$ and $Q\\to M$ with flat terms using lem-pc-kflat-resolution on the two ringed sites. By step 1, $j_!P$ represents $j_!K$ and $j^*Q$ represents $j^*M$; by step 4 the first is K-flat with flat terms. The construction def-weil-proetale-inverse-image supplies the actual morphism of pro-etale sites for the scheme morphism $j$, hence a morphism of topoi, with its specified constant-ring structure map. Step 1 identifies its module pullback with restriction to the localized ringed site of def-pur-localized-ringed-site and identifies its inverse-image ring with $A_U$. Apply lem-weil-pbc-ringed-pullback-preserves-kflat to this morphism, with ring map $j^{-1}A_Y\\cong A_U$: it shows that $j^*Q$ is also K-flat with flat terms. The computation isomorphisms of lem-weil-pbc-site-derived-tensor-descent, for the derived tensor of def-weil-derived-tensor, now identify the two sides of $\\Theta_{P,Q}$ in step 3 with $(j_!K)\\otimes_A^LM$ and $j_!(K\\otimes_A^Lj^*M)$ respectively. Localizing $\\Theta_{P,Q}$ gives the required isomorphism.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "def-weil-proetale-inverse-image",
-    "def-pur-localized-ringed-site",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-weil-derived-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), using Tag 0G7E (lemma-pullback-K-flat) and Tag 06YS (lemma-K-flat-resolution); the actual site morphism is proetale.tex Section 09A5 (section-morphism)"
-   }
-  },
-  {
-   "text": "The isomorphism is natural in derived objects, not just in chosen complexes. Apply the equivalence $W_R^{-1}\\mathcal P_R\\simeq D(R)$ in lem-weil-pbc-site-derived-tensor-descent separately to $R=A_U$ and $R=A_Y$. Here $\\mathcal P_R$ consists of K-flat complexes with flat terms in the homotopy category. The construction $\\Theta$ of step 3 respects homotopies explicitly: if $f-g=d h+h d$ in the first variable, use $h\\otimes1$ on each total summand; if $f-g=d t+t d$ in the second variable, use $(-1)^p1\\otimes t$ on the summand of first degree $p$. In each case $dH+Hd$ is the difference of the induced tensor maps. Summand naturality of $\\theta$ for $h$ or $t$, and additivity of $j_!$, identify these homotopies on both sides of $\\Theta$. It is therefore natural on $\\mathcal P_{A_U}\\times\\mathcal P_{A_Y}$. On quasi-isomorphisms both sides become invertible after localization, by the exact functors of step 1 and the tensor computation isomorphisms of lem-weil-pbc-site-derived-tensor-descent. A naturality square for an invertible map also commutes for its inverse, by composing the square with those inverses. Every morphism of the two localizations is a composite of maps and inverted quasi-isomorphisms. Hence these squares extend to all pairs of localized morphisms, proving simultaneous naturality in $K,M$ and independence of the resolutions under their canonical derived identifications. The inverse family descends in the same way, so this is a natural isomorphism.",
-   "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-pc-tensor-complex-sheaves",
+    "lem-cbc-extension-zero-projection-formula",
+    "def-weil-derived-tensor",
     "lem-sf-exact-functor-derived-triangulated"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), details of the passage to unbounded complexes"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Let E_U and E_Y be the canonical fixed-scalar/intrinsic module equivalences from def-weil-extension-by-zero. Their unit isomorphisms, associators and unitors identify j_! followed by E_Y inverse with E_U inverse followed by fixed-scalar extension; restriction followed by E_U inverse with E_Y inverse followed by fixed-scalar restriction; and E_U followed by intrinsic extension with fixed-scalar extension followed by E_Y. Derive these three natural isomorphisms using mapDerivedCategoryNatIso and mapDerivedCategoryCompIso. Whisker the fixed-scalar derived projection isomorphism with E_U inverse and E_Y inverse in the two input variables, then postcompose with E_Y. Compose with the three comparisons just constructed. The resulting isomorphism has precisely sfOpenTensorLeft and sfOpenTensorRight as endpoints. All factors are natural isomorphisms of bifunctors, so simultaneous derived naturality is retained.",
+   "uses": [
+    "def-weil-extension-by-zero",
+    "lem-weil-extension-by-zero-adjunction",
+    "lem-weil-extension-by-zero-exact",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-proetale-site",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-weil-pbc-proetale-ringed-open-comparison",
-  "def-weil-extension-by-zero",
-  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-cbc-extension-zero-projection-formula",
+  "def-weil-derived-tensor",
   "lem-sf-exact-functor-derived-triangulated",
-  "def-weil-derived-pullback-tensor-hom",
-  "lem-weil-pbc-ringed-slice-extension-tensor",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "def-pc-tensor-complex-sheaves",
-  "def-pc-kflat-complex",
-  "def-pc-flat-sheaf-modules",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-pc-kflat-resolution",
-  "def-weil-proetale-inverse-image",
-  "def-pur-localized-ringed-site",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "def-weil-derived-tensor"
+  "def-weil-extension-by-zero",
+  "lem-weil-extension-by-zero-adjunction",
+  "lem-weil-extension-by-zero-exact"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), details of the passage to unbounded complexes"
+  "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), reusing the proved fixed-scalar implementation and transporting through canonical coefficient realization"
  },
  "mathlib_searches": [
   {
@@ -291,16 +211,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-weil-pbc-proetale-ringed-open-comparison",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-ringed-slice-extension-tensor",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "lem-sf-exact-functor-derived-triangulated"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -336,5 +247,15 @@
   "group": "Q20",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable statements, dependencies, sources, canonical constructions, universes, edge cases, docstrings, report sections, and verbatim signature. The sole module passed scompile.py in sandbox and library form with no diagnostics. No delivery defects found; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261019T002609-L-2158118",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
