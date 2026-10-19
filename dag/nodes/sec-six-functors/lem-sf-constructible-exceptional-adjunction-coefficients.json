@@ -165,13 +165,15 @@
    }
   },
   {
-   "text": "The common bounds required for the equivalence are uniform: Step 1 gives ([a,b+2d]) at every finite level for compact supports, and the admissibility theorem gives coefficient-independent bounds for the right adjoints. The integral compact-support comparison identifies the total limit and each finite reduction with (Rf_!K), while normalized effectivity identifies the right-adjoint tower with the completed (G_R). The integral finite-Tor category is triangulated, so the adjunction, units, counits and exactness descend from the tower category.",
+   "text": "The common bounds required for the equivalence are uniform: Step 1 gives ([a,b+2d]) at every finite level for compact supports, and the admissibility theorem gives coefficient-independent bounds for the right adjoints. The integral compact-support comparison identifies the total limit and each finite reduction with (Rf_!K), while normalized effectivity identifies the right-adjoint tower with the completed (G_R). The integral finite-Tor category is triangulated, so the adjunction, units, counits and exactness descend from the tower category. For the exact integral finite-Tor predicate used by the coefficient system, prove triangulation directly: each scalarReductionDerivedExtension has its recorded triangulated and shift structures; the finite-stage tensor functor sends zero to zero, giving the common interval [0,0]; Tor amplitude transports along isomorphisms; the finite-stage shift clause gives [a-m,b-m] at every level; and the finite-stage extension clause gives [min(a,c),max(b,d)] uniformly. Intersect this uniform Tor property with the isomorphism-closed triangulated sfIntegralConstructible predicate. This is the Lean theorem ConstructibleExceptionalCoefficients.integralTriangulated and requires no finite-field datum or residue-field invertibility hypothesis.",
    "uses": [
     "lem-coef-integral-compact-support",
     "cor-pur-general-admissibility-datum",
     "lem-coef-normalized-dvr-effectivity",
-    "lem-weil-integral-ctf-triangulated",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-integral-constructible-triangulated",
+    "lem-weil-finite-ctf-triangulated",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
    ],
    "elementary": false,
    "source": {
@@ -258,9 +260,10 @@
   "lem-sf-proetale-constructible-origin",
   "lem-sf-triangulated-right-adjoint",
   "lem-trf-open-ctf",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
   "lem-weil-finite-ctf-triangulated",
   "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-weil-integral-ctf-triangulated",
+  "lem-weil-integral-constructible-triangulated",
   "lem-weil-integral-scalar-extension-constructible",
   "lem-weil-linear-scalar-localization-triangulated",
   "lem-weil-pbc-adjunction-of-natural-bijection",
@@ -282,7 +285,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
-  "place": "Ordinary derived constructible etale-comparison adjunction, coefficient towers, reduction/limit reconstruction, scalar localization, and refinement compatibility."
+  "place": "Ordinary derived constructible etale-comparison adjunction, coefficient towers, reduction/limit reconstruction, scalar localization, and refinement compatibility.; Z7 implements the integral triangulation part of Step 10 directly on finiteTorConstructibleIntegral, using the quantitative finite-stage bounds and the recorded scalar-reduction exactness."
  },
  "mathlib_searches": [
   {
@@ -642,7 +645,6 @@
   "lem-coef-normalized-dvr-effectivity",
   "lem-coef-integral-compact-support",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-integral-ctf-triangulated",
   "lem-weil-integral-scalar-extension-constructible",
   "lem-coef-integral-residue-tor",
   "lem-weil-linear-scalar-localization-triangulated",
@@ -734,5 +736,15 @@
   "group": "N6",
   "result": "fix",
   "note": "Statement matches node clause by clause: hypotheses no stronger, recorded ctf categories at all four stages, F pinned at every stage, finite G identified with the intrinsic sfFiniteExceptional (universe forced by the categories), adjunction/exactness/shifts, canonical q and b determined by the counit, unit/counit displays, all coefficient changes including ramified e*n, cocycles, common-stage descent, refinements. Edge cases covered; no hollow defs; only 2 sorry theorems; statement verbatim; declarations match; no cycle. nt_compile of snapshot and fixed module: exit 0, clean, 21.7 s. Fixes: (1) H11, the second reading was a self-check, so the report keeps all delivered sections and adds an independent clause-by-clause reading; (2) H8 minor, integralTriangulated docstring now cites lem-weil-integral-ctf-triangulated and Stacks 08G2. Noted, no change: statement reuses landed helper declarations not in stmt_deps; two parallel integral finite-Tor predicates exist upstream."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261019T034414-L-429738",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

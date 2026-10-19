@@ -41,10 +41,10 @@ import Sheaf.Paper.ComparisonTorAmplitude
 import Sheaf.Paper.FiniteCoefficientFlatModel
 import Sheaf.Paper.ProEtaleConstructibleOrigin
 import Sheaf.Paper.OpenExtensionFiniteTor
-import Sheaf.Paper.FiniteCtfTriangulated
+import all Sheaf.Paper.FiniteCtfTriangulated
 import Mathlib.CategoryTheory.Triangulated.Subcategory
 import Sheaf.Paper.FiniteFreeCompletedScalarComparison
-import Sheaf.Paper.IntegralCtfTriangulated
+import Sheaf.Paper.SfIntegralConstructibleTriangulated
 import Sheaf.Paper.IntegralScalarExtensionConstructibleIntrinsic
 import Sheaf.CategoryTheory.ScalarLocalizationTriangulated
 import Mathlib.CategoryTheory.Triangulated.Triangulated
@@ -149,7 +149,57 @@ The finite triangle argument then gives the third vertex at every level. Complet
 and bounded constructibility are closed under triangles and shifts. -/
 theorem integralTriangulated (E : FieldStage.{u} l) (T : Scheme.{u}) :
     (finiteTorConstructibleIntegral l E.carrier T).IsTriangulated := by
-  sorry
+  let Q : ObjectProperty (DerivedCategory (scalarReductionSource.{u, u} l E.carrier T)) :=
+    fun K ↦ ∃ a b : ℤ, a ≤ b ∧ ∀ n : ℕ,
+      HasProEtaleTorAmplitude T (Padic.coefficientExtensionRing l E.carrier (n + 1))
+        ((scalarReductionDerivedExtension.{u, u} l E.carrier T n).obj K) a b
+  have hred (n : ℕ) :
+      ∃ (_ : (scalarReductionDerivedExtension.{u, u} l E.carrier T n).CommShift ℤ),
+        (scalarReductionDerivedExtension.{u, u} l E.carrier T n).IsTriangulated :=
+    (scalarReductionDerivedExistence l E.carrier T n).choose_spec.choose_spec.2.1
+  have : Q.IsClosedUnderIsomorphisms := ⟨by
+    intro K L e hK
+    obtain ⟨a, b, hab, h⟩ := hK
+    exact ⟨a, b, hab, fun n ↦ amplitude_iso T _
+      ((scalarReductionDerivedExtension l E.carrier T n).mapIso e) a b (h n)⟩⟩
+  have : Q.ContainsZero := by
+    refine ⟨HasZeroObject.zero.choose, HasZeroObject.zero.choose_spec, 0, 0, le_rfl, ?_⟩
+    intro n
+    obtain ⟨s, ht⟩ := hred n
+    let R := scalarReductionDerivedExtension.{u, u} l E.carrier T n
+    have hz := R.map_isZero (isZero_zero _)
+    refine ⟨le_rfl, ?_⟩
+    intro L P hL f hf hP M i _hi
+    obtain ⟨F, c, htri, hcomp⟩ := tensor_functor T _ M
+    obtain ⟨e⟩ := hL
+    obtain ⟨q⟩ := hcomp L P f hf hP
+    have hF := F.map_isZero (hz.of_iso e)
+    exact ((DerivedCategory.homologyFunctor _ i).map_isZero hF).of_iso
+      ((DerivedCategory.homologyFunctor _ i).mapIso q.symm)
+  have : Q.IsStableUnderShift ℤ := ⟨fun m ↦ ⟨by
+    intro K hK
+    obtain ⟨a, b, hab, h⟩ := hK
+    refine ⟨a - m, b - m, sub_le_sub_right hab m, ?_⟩
+    intro n
+    obtain ⟨s, ht⟩ := hred n
+    exact amplitude_iso T _
+      (((scalarReductionDerivedExtension l E.carrier T n).commShiftIso m).app K).symm
+      _ _ ((finite_ctf_isTriangulated l E.carrier (n + 1) (Nat.succ_pos n) T).2.2.1
+        _ a b m (h n))⟩⟩
+  have : Q.IsTriangulatedClosed₂ := ObjectProperty.IsTriangulatedClosed₂.mk' (by
+    intro V hV h₁ h₃
+    obtain ⟨a, b, hab, h₁⟩ := h₁
+    obtain ⟨c, d, hcd, h₃⟩ := h₃
+    refine ⟨min a c, max b d, (min_le_left a c).trans (hab.trans (le_max_left b d)), ?_⟩
+    intro n
+    obtain ⟨s, ht⟩ := hred n
+    let R := scalarReductionDerivedExtension.{u, u} l E.carrier T n
+    exact (finite_ctf_isTriangulated l E.carrier (n + 1) (Nat.succ_pos n) T).2.2.2
+      (R.mapTriangle.obj V) _ _ (R.map_distinguished V hV)
+      (amplitude_mono T _ (h₁ n) (min_le_left _ _) (le_max_left _ _))
+      (amplitude_mono T _ (h₃ n) (min_le_right _ _) (le_max_right _ _)))
+  have : Q.IsTriangulated := { }
+  exact inferInstanceAs (sfIntegralConstructible l E.carrier T ⊓ Q).IsTriangulated
 
 attribute [instance] integralTriangulated
 
