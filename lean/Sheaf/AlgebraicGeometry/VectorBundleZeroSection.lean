@@ -17,7 +17,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.LinearAlgebra.SymmetricAlgebra.Basis
+import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-!
 # The vector bundle Spec Sym(F), its augmentation and zero section
@@ -153,7 +153,26 @@ theorem augmentation_spec (S : Scheme.{u}) (F : S.Modules) :
     (∀ (U : S.Opens) (a : SymmetricAlgebraSheaf.sections F (op U)),
       (augmentation S F).right.hom.app (op U) (SymmetricAlgebraSheaf.sectionMap F (op U) a) =
         SymmetricAlgebra.algebraMapInv a) := by
-  sorry
+  have h := (exists_quasiCoherentSymmetricAlgebra_core S F (Under.mk (𝟙 S.sheaf))
+    0).exists.choose_spec
+  have hz : ∀ (U : S.Opens) (x : F.val.obj (op U)),
+      (augmentation S F).right.hom.app (op U)
+        ((SymmetricAlgebraSheaf.inclusion F).val.app (op U) x) = 0 := by
+    intro U x
+    exact h U x
+  refine ⟨hz, ?_, ?_⟩
+  · intro t ht
+    exact ExistsUnique.unique
+      (exists_quasiCoherentSymmetricAlgebra_core S F (Under.mk (𝟙 S.sheaf)) 0) ht hz
+  · intro U a
+    induction a using SymmetricAlgebra.induction with
+    | algebraMap r =>
+        rw [AlgHom.commutes]
+        exact congrArg (fun q ↦ q.hom.app (op U) r) (Under.w (augmentation S F))
+    | ι x =>
+        exact (hz U x).trans (SymmetricAlgebra.algebraMapInv_ι x).symm
+    | mul a b ha hb => simp only [map_mul, ha, hb]
+    | add a b ha hb => simp only [map_add, ha, hb]
 
 /-- The zero section is a section and a closed immersion.
 Source: Stacks Tag 01M2 (blueprint: def-asd-vector-bundle-zero-section).
@@ -165,7 +184,14 @@ criterion. These charts cover the total space, so the morphism is a closed immer
 theorem zero_spec (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     [F.IsFiniteLocallyFreeOfRank d] :
     zero S d F ≫ π S d F = 𝟙 S ∧ IsClosedImmersion (zero S d F) := by
-  sorry
+  have hs : zero S d F ≫ π S d F = 𝟙 S := by
+    exact Over.w
+      (((antiEquivalence S).functor.preimage
+        (((antiEquivalence S).counitIso.app (algebraObject S d F)).hom ≫
+          ObjectProperty.homMk (augmentationToBase S F))).unop.hom)
+  have : IsAffineHom (π S d F) := (over S d F).property
+  have : IsClosedImmersion (zero S d F ≫ π S d F) := hs ▸ inferInstance
+  exact ⟨hs, IsClosedImmersion.of_comp (zero S d F) (π S d F)⟩
 
 /-- Restriction of the zero section to an open of the base.
 Source: Stacks Tag 01M2 (blueprint: def-asd-vector-bundle-zero-section). -/
@@ -209,7 +235,21 @@ theorem affineChart_naturality (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : 
         ((π S d F).preimage_mono h) ≫ affineChart S d F V =
       affineChart S d F U ≫
         Spec.map (CommRingCat.ofHom (SymmetricAlgebraSheaf.restriction F (homOfLE h).op)) := by
-  sorry
+  simp only [Scheme.Hom.resLE_id, affineChart, Category.assoc]
+  rw [← Scheme.Opens.toSpecΓ_SpecMap_presheaf_map_assoc]
+  simp only [← Spec.map_comp]
+  congr 1
+  congr 1
+  apply CommRingCat.hom_ext
+  apply RingHom.ext
+  intro a
+  have hA := (algebraIso S d F).hom.right.hom.naturality (homOfLE h).op
+  have hθ := (toSheafify (Opens.grothendieckTopology S)
+    (SymmetricAlgebraSheaf.presheaf F)).naturality (homOfLE h).op
+  exact (CategoryTheory.congr_fun hA
+    (SymmetricAlgebraSheaf.sectionMap F (op V.1) a)).symm.trans
+      (congrArg ((algebraIso S d F).hom.right.hom.app (op U.1))
+        (CategoryTheory.congr_fun hθ a).symm)
 
 /-- A Zariski trivialization is a frame of the given module, not an arbitrary isomorphism
 of schemes. Source: blueprint order 1968 (blueprint: def-asd-vector-bundle-zero-section). -/
