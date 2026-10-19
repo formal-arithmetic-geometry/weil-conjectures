@@ -17508,3 +17508,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:53 L: returned deliver/Q01/lem-pur-condensed-exceptional-reconstruction (reviewer RETURN: L: independent stage-2 immutable head 5b36ccb0e139: H3 F1 unrepaired: Comparison.canonicalScalarComparison is still a fr)
 - 18:03 L: returned deliver/NJ/fix-lem-exchanges (reviewer RETURN: L: independent stage-2 immutable head 9ba353837cf4: Compile clean (nt_compile --json: item 43.1 s of 60 s, lifted dep mo)
 - 18:05 L: returned deliver/NK/fix-prop-projection-formula (reviewer RETURN: L: independent stage-2 immutable head c5b7cea9fac0: H3: the Weil clause links the six-functor tensor to def-wf-tensor-pr)
+- 18:06 L: merged deliver/NA/lem-trf-regular-hilbert-coefficient-data (reviewer PASS; after a return; new nodes: 4)

@@ -16,9 +16,160 @@
   "def-weil-pbc-multivariate-power-series",
   "def-trf-formal-power-series-partial-derivative"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work at $a\\in X$. By [lem-trf-generic-monotone-diagram] choose a monotone Taylor diagram $D$ and regular vertex generators $F_i$ with first coefficient $1$. Put $d_i=|\\alpha_i|$ and order blocks by degree. Their essential sets are already nested final segments $Z^\\ell$; write $s_\\ell$ for the last index. Fix $Q\\ge\\max d_i-1$. Initially $N_0=M$, $f_i^0=F_i$. Maintain regular coefficients on smooth $N_\\ell$, first exponents $\\alpha_i$ at $a$, membership in the Taylor ideal at every point, preservation of the generated ideal, and the earlier block equations and Jacobians. For every earlier $k\\le\\ell$, later generators have exactly zero coefficient of $(Z^k)^\\beta$ whenever $\\beta$ is in the restricted prefix diagram and $|\\beta|\\le Q$, as a series in all other variables. Additionally retain a linear projection $P_\\ell$ onto the simultaneous kernel of these coefficient tests. It fixes that kernel, its difference from the identity takes values in the ideal of $f_1,\\ldots,f_{s_\\ell}$, and it preserves the first exponent of any series whose first monomial passes the tests at $a$. The coefficients of this operator are regular on the same chart. For $\\ell=0$ all tests are empty and $P_0=1$.",
+   "uses": [
+    "lem-trf-generic-monotone-diagram"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "BM 1997, Theorem 9.6, (9.7)--(9.14); ILO VIII 2.3.11--2.3.13. Agent refinement: retain the exact earlier-block normalization operators, rather than truncate their corrections."
+   }
+  },
+  {
+   "text": "Assume the induction through block $\\ell-1$. Write the regular variables on $N_{\\ell-1}$ as $(w^\\ell,y^\\ell)$, with $y^\\ell$ the newly essential variables. For each newly essential $j$ choose a vertex $\\alpha_{i(j)}=\\beta_j+e_j$ in the first $\\ell$ blocks with $\\beta_j$ supported in $Z^\\ell$, and put $h_j=(\\partial^{\\beta_j}f_{i(j)}^{\\ell-1})|_{Z^{\\ell-1}=0}$. These are regular functions by [lem-trf-implicit-taylor-coordinate-calculus]. Their $y^\\ell$-Jacobian at $a$ is triangular with nonzero diagonal: its diagonal entries are the nonzero vertex coefficients times factorials, and an entry on the forbidden side is the coefficient of a degree-lexicographically earlier monomial. Earlier-block equations give the corresponding already invertible block. Shrink where the new determinant is nonzero and define $N_\\ell\\subset N_{\\ell-1}$ by $h_j=0$. The same calculus lemma makes $N_\\ell$ smooth with regular coordinates $w^\\ell$ and formal new variables $Y^\\ell=y^\\ell-\\phi_b(w^\\ell)$ at each $b\\in N_\\ell$.",
+   "uses": [
+    "lem-trf-implicit-taylor-coordinate-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Bierstone--Milman, Invent. Math. 128 (1997), 207--302, (9.8)(b), Remark 9.9 and the induction preceding Remark 9.11.; ILO VIII 2.3.11--2.3.13 for the route."
+   }
+  },
+  {
+   "text": "Apply the substitution $y^\\ell=\\phi_b(w^\\ell)+Y^\\ell$ to all current series. Formula [lem-trf-implicit-taylor-coordinate-calculus] says that every new coefficient is a derivative of an old regular coefficient, restricted to $N_\\ell$, divided by its multi-index factorial. Thus all infinitely many coefficients are regular on this same neighbourhood; there is no intersection of infinitely many open sets. At $a$ the first exponents stay $\\alpha_i$: by the previously imposed derivative conditions and the ascending degree-lex ordering, the implicit shift contributes only terms later than the first monomial. The coordinate substitution preserves ideal membership. For the new derivatives $g_j$, their restrictions to $Z^\\ell=0$ are the equations $h_j|_{N_\\ell}=0$; the old ones also restrict to zero. Their joint Jacobian is block triangular with the old invertible block and the just inverted $y^\\ell$ block. Hence condition (4) is retained at every point of $N_\\ell$.",
+   "uses": [
+    "lem-trf-implicit-taylor-coordinate-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Bierstone--Milman, Invent. Math. 128 (1997), 207--302, Remarks 9.9--9.11 and (9.8)(a)--(c).; ILO VIII 2.3.11--2.3.13 for the route."
+   }
+  },
+  {
+   "text": "Carry the previously stored projection through the coordinate substitution. It was linear over the regular functions on $N_{\\ell-1}$: its tests use only the old transverse variables, and all its matrices have coefficients in that ring. Thus, after Taylor expansion in the newly formal variables $Y=Z^\\ell\\setminus Z^{\\ell-1}$, it extends coefficientwise to an $R[[Y]]$-linear operator $P^-$ on $R[[Y,Z^{\\ell-1}]]$, where $R$ is the ring of regular functions on a shrunk affine chart of $N_\\ell$. By [lem-trf-implicit-taylor-coordinate-calculus], the substituted matrix coefficients and all their series coefficients belong to $R$. Inverses also do: for a matrix series $A(Y)=A_0+E(Y)$ with $E\\in(Y)$ and $\\det A_0$ inverted, its inverse is $\\sum_{m\\ge0}(-A_0^{-1}E)^mA_0^{-1}$, coefficientwise a finite sum. Only the finitely many old constant determinants must remain units. The image of $P^-$ has every earlier forbidden coefficient identically zero, including arbitrary $Y$ degree. It fixes the current later generators, because the inductive zero coefficients are identities of regular functions and survive this substitution. At $a$, the shift $y=Y+\\phi(W)$ and its inverse preserve every first exponent: $\\phi$ has positive order and uses only variables preceding $Y$, so each substituted monomial has its original monomial first. Hence the inherited first-exponent invariant for $P^-$ also survives this change of coordinates.",
+   "uses": [
+    "lem-trf-implicit-taylor-coordinate-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "BM 1997, Theorem 9.6, (9.7)--(9.14); ILO VIII 2.3.11--2.3.13. Agent refinement: retain the exact earlier-block normalization operators, rather than truncate their corrections."
+   }
+  },
+  {
+   "text": "Let $D_\\ell$ be the diagram of the first $\\ell$ blocks in the variables $Z^\\ell$. Write $E_\\ell$ for the finite set of $\\gamma\\in D_\\ell\\setminus(D_{\\ell-1}\\times\\mathbf N^{|Y|})$ with $|\\gamma|\\le Q$, interpreting the product in the actual variable order. There is one pair $(j,\\beta)$ per such exponent, where $s_{\\ell-1}<j\\le s_\\ell$, $\\beta\\in\\Delta_j^\\ell$ and $\\gamma=\\alpha_j+\\beta$. Form the full series\n$$C_\\gamma=P^-((Z^\\ell)^\\beta f_j).$$\nEach $C_\\gamma$ satisfies all earlier zero-coefficient tests. The difference $C_\\gamma-(Z^\\ell)^\\beta f_j$ is a combination of earlier generators, by the operator invariant. At $a$, its first exponent is $\\gamma$: before projection the first exponent is $\\alpha_j+\\beta$, outside every earlier orthant, and the projection preserves such exponents. No coefficient of $C_\\gamma$, including those above degree $Q$, is discarded. If $E_\\ell$ is empty the following correction is zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "BM 1997, Theorem 9.6, (9.7)--(9.14); ILO VIII 2.3.11--2.3.13. Agent refinement: retain the exact earlier-block normalization operators, rather than truncate their corrections."
+   }
+  },
+  {
+   "text": "Index the square matrix $B$ by $E_\\ell$, with entry $B_{\\eta\\gamma}=[(Z^\\ell)^\\eta]C_\\gamma\\in R$. Its specialization at $a$ is triangular with diagonal $1$, because the first exponents of its columns are the distinct ordered $\\gamma$. Invert $\\det B$ on $N_\\ell$. For any series $H$, put $H^-=P^-H$, $v(H^-)=( [(Z^\\ell)^\\eta]H^-)_{\\eta\\in E_\\ell}$ and define\n$$P_\\ell H=H^- -\\sum_{\\gamma\\in E_\\ell}(B^{-1}v(H^-))_\\gamma C_\\gamma.$$\nThis formula has coefficients regular on the single determinant open. The matrix identity $BB^{-1}=1$ kills the new rows exactly. Both terms satisfy all earlier tests, so their difference does too, as full series in every remaining formal variable. Conversely, if $H$ passes all tests, $P^-H=H$ and $v(H)=0$, so $P_\\ell H=H$. Hence $P_\\ell$ is a projection onto their common kernel. Its difference from $1$ is a combination of the first $s_\\ell$ generators. These assertions follow from the displayed identities, with no convergence or degree-truncation assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "BM 1997, Theorem 9.6, (9.7)--(9.14); ILO VIII 2.3.11--2.3.13. Agent refinement: retain the exact earlier-block normalization operators, rather than truncate their corrections."
+   }
+  },
+  {
+   "text": "Check the remaining first-exponent invariant. At $a$, a nonzero correction $\\sum_\\gamma u_\\gamma(W)C_\\gamma$ has first exponent $\\min_\\gamma(\\exp u_\\gamma+\\gamma)$: the $\\gamma$ are distinct transverse exponents and the first exponents of the $u_\\gamma$ use only the complementary variables, so the least terms cannot cancel. Its transverse exponent therefore lies in $E_\\ell$. Suppose the first monomial of $H^-$ passes the new tests. If the correction had a smaller first exponent than $H^-$, that same forbidden monomial would be the first term of $P_\\ell H$, contradicting the exactly zero new rows. Equal first exponents are impossible because the first monomial of $H^-$ passes those rows. Thus its first exponent is preserved. Together with the induction for $P^-$ this proves the operator invariant. Replace $f_i$ by $P_\\ell f_i$ only for $i>s_\\ell$. Their vertex exponents are outside $D_\\ell$, so they stay $\\alpha_i$. Each replacement subtracts a combination of the unchanged first $s_\\ell$ generators, hence preserves the ideal at every point. The earlier $g_j$ are unchanged, so their equations and Jacobians persist. All five induction invariants now hold; only finitely many matrix determinants and blocks required shrinking.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "BM 1997, Theorem 9.6, (9.7)--(9.14); ILO VIII 2.3.11--2.3.13. Agent refinement: retain the exact earlier-block normalization operators, rather than truncate their corrections."
+   }
+  },
+  {
+   "text": "At the last stage put $N=N_p$, $f_i=f_i^p$. Conditions (4) and (5) are now exact identities at every point of $N$. At $a$, the first exponents are still $\\alpha_i$ and the generated ideal is $K_a$. Here is the formal division argument for these possibly nonregular formal generators. For each degree prefix and each total degree, the supported monomial multiples of their initial forms and the complementary monomials form a triangular square matrix with nonzero diagonal: each column has its prescribed first monomial, and these monomials partition that degree. Consequently homogeneous division is unique. Apply it degree by degree, subtracting the supported homogeneous quotients times the full $f_i$. Orders increase strictly, so every coefficient of the quotients and remainder stabilizes. The resulting remainder is supported outside $D$. For an input in $K_a$ it also lies in $K_a$, since the $f_i$ generate that ideal; a nonzero such remainder would have its first exponent both outside $D$ and in the diagram of $K_a$. Thus it vanishes. This proves (1)--(3) at $a$ directly for the transformed $f_i$, without applying the regular-lift assertion to them.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "BM 1997, Lemmas 7.3 and 7.5 and completion of Theorem 9.6; elementary triangular matrices and coefficientwise formal recursion."
+   }
+  },
+  {
+   "text": "Set $S=\\{b\\in N:\\operatorname{ord}_bc_{i\\gamma}\\ge d_i-|\\gamma|,\\ |\\gamma|<d_i\\}$. At $b\\in S$, every term $c_{i\\gamma}(W)Z^\\gamma$ has total order at least $d_i$. At $a$, a nonzero coefficient of degree $d_i$ is obtained as a derivative of one regular $c_{i\\gamma}$ of order $d_i-|\\gamma|$, evaluated at $a$. Invert this regular derivative near $a$ to make the order at most $d_i$. Coordinate differentiation and its agreement with Taylor coefficients are supplied by [lem-trf-implicit-taylor-coordinate-calculus]. The finitely many $i$ require only one common shrinking. Thus (1) holds throughout $S$.",
+   "uses": [
+    "lem-trf-implicit-taylor-coordinate-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Bierstone--Milman, Invent. Math. 128 (1997), 207--302, Completion of Theorem 9.6, first paragraph on p.282.; ILO VIII 2.3.11--2.3.13 for the route."
+   }
+  },
+  {
+   "text": "For each degree prefix, restrict to its essential variables. In any fixed homogeneous degree $t$, the supported columns and complementary monomials form a square matrix. Its determinant is nonzero at $a$, by the initial exponents. Each entry is the value of a regular derivative of a coefficient, by [lem-trf-implicit-taylor-coordinate-calculus]. For that restricted monotone diagram take $b(D)$ from [lem-trf-initial-diagram-stabilization] and invert these determinants only for $t\\le b(D)$. The stabilization theorem supplies every higher degree. To pass back to all variables, write a homogeneous polynomial by powers of the remaining variables: divide its coefficient in lowest remaining-variable degree using the restricted forms, subtract the full forms, and repeat. The error has larger remaining-variable degree, so the finite degree bounds terminate this procedure; uniqueness follows by the same lowest-degree comparison. Thus condition (2) holds on $S$ for every degree prefix, after only finitely many determinant inversions.",
+   "uses": [
+    "lem-trf-implicit-taylor-coordinate-calculus",
+    "lem-trf-initial-diagram-stabilization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Bierstone--Milman, Invent. Math. 128 (1997), 207--302, Lemma 7.7 and the last paragraph of Theorem 9.6 using Theorem 8.1.; ILO VIII 2.3.11--2.3.13 for the route."
+   }
+  },
+  {
+   "text": "It remains to justify condition (3) away from $a$. At $a$ all five hypotheses of [lem-trf-formal-hilbert-stratum-minors] are now satisfied. Choose $q$ at least $\\max d_i-1$ and large enough that its cumulative minors define the equality germ; this is possible by the finite local values in [lem-trf-jet-diagram-hilbert-control]. The formal minors theorem identifies that ideal with $(\\partial^\\nu f_i:|\\nu|<d_i)$. The block Jacobians generate $(Z)$, so this last ideal is also generated by $(Z)$ and $\\partial_W^\\delta c_{i\\gamma}$ with $|\\delta|<d_i-|\\gamma|$: differentiate the displayed expansion and then set $Z=0$; conversely its other terms are in $(Z)$. These are finitely many regular functions, and the minors can be formed from the original regular generators $F_i$. Faithful-flat descent and spreading in [lem-trf-implicit-taylor-coordinate-calculus] turn equality of their Taylor ideals at $a$ into equality on a neighbourhood. Their zero set is precisely $S$. Hence $H_{K_b}=H_D$ on $S$, with the extended Taylor-module convention at nonclosed points.",
+   "uses": [
+    "lem-trf-formal-hilbert-stratum-minors",
+    "lem-trf-jet-diagram-hilbert-control",
+    "lem-trf-implicit-taylor-coordinate-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Bierstone--Milman, Invent. Math. 128 (1997), 207--302, Theorem 7.14, Remarks 9.1 and 9.5, final paragraph of Theorem 9.6.; ILO VIII 2.3.11--2.3.13 for the route."
+   }
+  },
+  {
+   "text": "For completeness, the equality just obtained gives the required supported expansion, rather than merely generation by unrestricted quotients. At $b\\in S$, apply homogeneous division to the lowest degree of any series, subtract its supported quotients times the $f_i$, and repeat in the next degree. The orders of the errors increase strictly; each coefficient is changed only finitely often, so the quotients and remainder converge as formal series. The remainder has support outside $D$, and uniqueness follows by taking the first degree of a difference of two such divisions. In every finite degree this makes the complementary monomials span $L[[W,Z]]/(K_b+(W,Z)^{t+1})$. Their number is $H_D(t)$, which equals its dimension by the preceding step, so they are linearly independent there. If the divided series lies in $K_b$, its remainder is zero modulo every power of $(W,Z)$, hence is zero coefficientwise. This is condition (3).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Bierstone--Milman, Invent. Math. 128 (1997), 207--302, Lemmas 7.3 and 7.5, written as the degree induction and finite-dimensional argument.; ILO VIII 2.3.11--2.3.13 for the route."
+   }
+  },
+  {
+   "text": "Finally [lem-trf-jet-diagram-hilbert-control] gives finite local values of the extended function and identifies each coordinate with a finite Taylor-module fibre dimension. The affine chart ring is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian], since a field has just the zero and unit ideals. A finite Taylor module has a finite presentation: choose finite generators and apply [lem-trf-noetherian-submodule-finitely-presented] to the relation submodule of the finite free module. Its finite presentation matrix makes a lower bound on that dimension the vanishing of minors (row reduction over the residue field). For the finite list of local sequence values, choose a degree beyond the first differing coordinate of every pair and intersect the finitely many open conditions that those fibre dimensions are at most their values at $a$. At every point of this intersection, the first differing coordinate of its function is smaller, so the function is lexicographically at most its value at $a$. The empty-diagram case is $K_a=0$: after restriction $X=M$, take $N=M$ and no generators or transverse variables. All conditions are empty. Thus the same construction covers the zero-elimination case. The coefficients are $c_{i\\gamma}=(\\partial_Z^\\gamma f_i)|_{Z=0}/\\gamma!$; characteristic zero ensures the factorials are units. The induction was for an arbitrary fixed finite $Q$, so the data may depend on $Q$.",
+   "uses": [
+    "lem-trf-jet-diagram-hilbert-control",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-trf-noetherian-submodule-finitely-presented"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Bierstone--Milman, Invent. Math. 128 (1997), 207--302, Remarks 9.1, Lemma 9.3 and Theorem 9.6.; ILO VIII 2.3.11--2.3.13 for the route."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-formal-hilbert-stratum-minors",
+  "lem-trf-generic-monotone-diagram",
+  "lem-trf-implicit-taylor-coordinate-calculus",
+  "lem-trf-initial-diagram-stabilization",
+  "lem-trf-jet-diagram-hilbert-control",
+  "lem-trf-noetherian-submodule-finitely-presented",
+  "lem-weil-pbc-finite-type-algebra-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.3.11--2.3.13; BM 1997 Theorem 9.6, pp.278--282, read online. Agent repair retains earlier full normalization operators before forming each new finite coefficient matrix; original-lift division is replaced by the explicit formal triangular division argument."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -54,10 +205,38 @@
    "results": "{\"t\": \"2026-10-19T13:47:53Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-regular-hilbert-coefficient-data: Characteristic zero algebraization of division adapted standard basis data by regular Taylor coefficients and derivative Jacobians\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AnalyticAt.hasFPowerSeriesAt\", \"Polynomial.taylor_coeff\", \"RatFunc.taylor_mem_nonZeroDivisors\", \"PowerSeries.IsWeierstrassDivisionAt.coeff_f_sub_r_mem\", \"PowerSeries.IsWeierstrassDivisorAt\", \"PowerSeries.IsWeierstrassDivisorAt.div_coe_eq_zero\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_div_sub_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.div\"], \"digest\": \"94f7698316cb7e4b\"}",
    "date": "2026-10-19",
    "verdict": "no match: read the returned signatures; adic filtrations, univariate Weierstrass division, smooth algebra presentations and etale loci do not state this multivariate Taylor/diagram or embedding comparison theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "standardBasis|coefficientIdeal|semicoherent|initialExponent",
+   "results": "{\"t\": \"2026-10-19T15:10:33Z\", \"tool\": \"grep\", \"query\": \"standardBasis|coefficientIdeal|semicoherent|initialExponent\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected the recorded hits and the relevant polynomial division, formal-series order/inverse and smooth-presentation sources; none gives this formal diagram or regular Taylor-family theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPowerSeries\", \"order\"",
+   "results": "{\"t\": \"2026-10-19T15:10:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPowerSeries\\\", \\\"order\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPowerSeries.order\", \"MvPowerSeries.weightedOrder\", \"MvPowerSeries.order_zero\", \"MvPowerSeries.weightedOrder_zero\", \"MvPowerSeries.weightedOrder_one\", \"MvPowerSeries.order_eq_top_iff\", \"MvPowerSeries.weightedOrder_eq_top_iff\", \"MvPowerSeries.ne_zero_iff_order_finite\"], \"digest\": \"e50feda20422d594\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected the recorded hits and the relevant polynomial division, formal-series order/inverse and smooth-presentation sources; none gives this formal diagram or regular Taylor-family theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-regular-hilbert-coefficient-data: regular functions as coefficient models for multivariate formal generators adapted to Hilbert Samuel strata",
+   "results": "{\"t\": \"2026-10-19T15:48:19Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-regular-hilbert-coefficient-data: regular functions as coefficient models for multivariate formal generators adapted to Hilbert Samuel strata\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsRegular.monomial\", \"Polynomial.hilbertPoly\", \"MvPowerSeries.coeff\", \"MonomialOrder.leadingCoeff_mul_of_isRegular_right\", \"MvPolynomial.isRegular_X_pow\", \"MvPolynomial.coe_def\", \"MvPolynomial.coeffs\", \"MvPowerSeries\"], \"digest\": \"f94ab0a3ac299658\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected the recorded hits and the relevant polynomial division, formal-series order/inverse and smooth-presentation sources; none gives this formal diagram or regular Taylor-family theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-regular-hilbert-coefficient-data: existence of semicoherent coefficient presentations for Hilbert Samuel functions in smooth characteristic zero schemes",
+   "results": "{\"t\": \"2026-10-19T15:48:19Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-regular-hilbert-coefficient-data: existence of semicoherent coefficient presentations for Hilbert Samuel functions in smooth characteristic zero schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth\", \"Algebra.IsSmoothAt\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.smoothLocus\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"PowerSeries.IsWeierstrassDivisorAt.divCoeff\"], \"digest\": \"90096dc009cd3106\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected the recorded hits and the relevant polynomial division, formal-series order/inverse and smooth-presentation sources; none gives this formal diagram or regular Taylor-family theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-hilbert-samuel-local-presentations",
@@ -69,7 +248,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Local Hilbert--Samuel presentations and their admissible transforms. Lower input in this split: Regular coefficient data with division and Jacobian conditions; Bierstone--Milman, Invent. Math. 128 (1997), 207--302, conditions (7.1)--(7.2), Theorem 9.6 and its block induction (9.7)--(9.14); Bierstone--Milman--Temkin, arXiv:0905.3580, section 6.2. No Stacks tag states this algebraization theorem.",
+   "place": "ILO VIII 2.3.11--2.3.13, pp.93--94: local Hilbert--Samuel presentation input; refined by BM 1997 Chapter III, Theorem 9.6 and its block induction (9.7)--(9.14), with the five formal conditions (7.2).",
    "via": [
     "lem-trf-hilbert-samuel-local-presentations",
     "lem-trf-hilbert-samuel-resolution-invariant-calculus",
@@ -88,5 +267,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-20",
+  "item": "lem-trf-regular-hilbert-coefficient-data",
+  "worker": "stage1",
+  "summary": "Repair of the returned split: preserve every earlier exact block condition by storing and extending the full finite-jet projection, applying it to new correction columns before the new finite matrix solve, and retaining all correction tails. The induction now states and proves the projection invariants. Formal division at a is proved directly for the transformed generators. The item statement and all four previously searched lower nodes remain unchanged.",
+  "blueprint": "Preserves the recorded local-term-locality ancestry and the ILO VIII 2.3.11--2.3.13 local invariant input; expands the regular coefficient subclaim of the Hilbert--Samuel local presentations route."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-NA-e7d17c146",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-e7d17c146 (reviewer sub-agent of L); spot-checked: This re-delivers the split I returned as 697f992e. The item statement and the four new nodes are byte-identical to that delivery; the proof is rewritten in 13 steps, each under 1450 characters. The return's E3/D4 point is repaired. Steps 1 and 4-7 now carry a projection P_l onto the joint kernel of all earlier exact coefficient tests. Each correction column C_γ=P^-((Z^l)^β f_j) is used in full, and only the finite E_l matrix B is extracted. B(a) is unitriangular, the identity v(P_l H)=v-BB^{-1}v holds exactly, the earlier tests are R-linear, and the first-exponent argument through distinct transverse parts is sound. I reran my counterexample (x<y<z, f1=z², f2=y³+y³z+y⁶z, f3=x⁴+xy³z, Q=5) by hand and by exact rational arithmetic: P1(z f2)=y³z, and f3 becomes exactly x⁴. A perturbed three-block example (non-identity B1, mixed terms, several values of x) also shows zero violations at levels 1 and 2. The C4 point is repaired: Step 8 proves formal division at a directly for the transformed generators, using that N(K_a)=D is preserved because each shift is triangular. The generic-monotone node is now used only for the original lifts. The vacuous permutation is gone (essential sets are final segments by vertex minimality), and the invariant is stated for every earlier k≤l. Steps 2-3: the implicit-node hypotheses hold (h_j(a)=0 since |β_j|<ord, triangular Jacobian), and ∂_Y=∂_y. Step 10 uses the stabilization node only at q=b(D), its testing form. Steps 11-13 use the minors, jet-diagram, implicit (faithful-flat spreading), 00FN and 00FP statements exactly as stated. Sources: ILO VIII 2.3.11-2.3.13 pp.93-94 pointing to BM 1997 Thm 9.6, which is not in the repository; WANTED and by:agent are correct. No SGA; the item is not on the 2026-10-19 drop list; no tool_uses; no cycle. Advisory for whoever splits lem-trf-initial-diagram-stabilization: verify its single-degree clause (BM Thm 8.1). No fixes."
  }
 }
