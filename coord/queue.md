@@ -1,6 +1,6 @@
 # Work queue
 
-1243 items; claim with `tools/claim.py next <group> [--stage N]`.
+1245 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (1)
 
@@ -40,7 +40,7 @@
 
 Not open yet: 304 nodes that below a finished node, not needed, 131 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (1217)
+## Stage 3: modules to prove (1219)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -57,6 +57,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.AffineSpaceTopTrace` | 3 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalBounded` | 3 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology` | 3 | 1 | proof | route |
+| `Sheaf.AlgebraicGeometry.SmoothExceptionalBaseChange` | 3 | 1 | proof | route |
 | `Sheaf.Paper.FiniteReductionConstructibility` | 3 | 1 | proof | route |
 | `Sheaf.Paper.FiniteSmoothGammaNormalization` | 3 | 1 | proof | route |
 | `Sheaf.Paper.IntegralStratifiedPerfectCharacterization` | 3 | 4 | proof | route |
@@ -216,6 +217,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.EtaleFiniteCoefficientHomArrow` | 9 | 7 | proof | route |
 | `Sheaf.Paper.IntegralStratumHomFormula` | 9 | 2 | proof | route |
 | `Sheaf.Paper.ProperHeartBoundTorsion` | 9 | 1 | proof | route |
+| `Sheaf.Paper.PurEtaleLisseStratumCompact` | 9 | 1 | proof | route |
 | `Sheaf.RepresentationTheory.ProcyclicTwoTerm` | 9 | 1 | proof | route |
 | `Sheaf.RingTheory.QuasiExcellentNagata` | 9 | 1 | proof | route |
 | `Sheaf.SixFunctors.FlatModel` | 9 | 4 | proof | route |
