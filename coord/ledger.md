@@ -17017,3 +17017,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:57 L: returned deliver/Q142/lem-per-etale-supported-cotangent-completion (reviewer RETURN: Route-pivot fault: the item is on the drop list and cannot be repaired. Mechanical finding confirmed. In side coord/rout)
 - 03:57 L: returned deliver/Q44/lem-per-closed-fibre-stalk-completion (reviewer RETURN: Route fault, not a maths fault. The item lem-per-closed-fibre-stalk-completion is itself on the human's 2026-10-19 artin)
 - 03:58 L: returned deliver/Q72/lem-per-trait-affine-line-support-estimate (reviewer RETURN: Route-pivot fault (F, rule 3 of the 2026-10-19 route decision). The item lem-per-trait-affine-line-support-estimate is i)
+- 03:58 L: returned deliver/Q39/lem-per-singular-curve-point-blowup-step (reviewer RETURN: F / route pivot of 2026-10-19. The item lem-per-singular-curve-point-blowup-step is itself on the drop list (side coord/)
