@@ -140,5 +140,45 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-19509a4e8 (reviewer sub-agent of L); spot-checked: Read the item, cited statements, sources, and route in full. Added existing proper exchange/projection comparison citations, expanded the typed counit calculations and signed-symmetry cancellation, repaired malformed TeX, and corrected proof provenance. Statement unchanged; no new nodes or cycles. Corrected JSON and concrete source/edge-case checks are in fixes/ and review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProperProductCounitTranspose",
+  "declaration": "WeilConjectures.properProductCounitTranspose",
+  "declarations": [
+   "WeilConjectures.ProperProductCalculus",
+   "WeilConjectures.ProperProductCalculus.exchange",
+   "WeilConjectures.ProperProductCalculus.projectionQ",
+   "WeilConjectures.ProperProductCalculus.projectionG",
+   "WeilConjectures.ProperProductCalculus.psi",
+   "WeilConjectures.ProperProductCalculus.intermediate",
+   "WeilConjectures.ProperProductCalculus.product",
+   "WeilConjectures.ProperProductCalculus.lambda",
+   "WeilConjectures.ProperProductCalculus.twoCounit",
+   "WeilConjectures.ProperProductCalculus.CounitIdentities",
+   "WeilConjectures.properProductResidueInvertible",
+   "WeilConjectures.properProductFiniteWithInverses",
+   "WeilConjectures.properProductFinite",
+   "WeilConjectures.properProductTransportTensor",
+   "WeilConjectures.properProductOfStage",
+   "WeilConjectures.properProductIntegral",
+   "WeilConjectures.properProductRational",
+   "WeilConjectures.properProductCommon",
+   "WeilConjectures.properProductCounitTranspose"
+  ],
+  "file": "lean/Sheaf/Paper/ProperProductCounitTranspose.lean",
+  "statement": "theorem properProductCounitTranspose {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum} {E : Type u} [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] (m : ℕ) (S : SixFunctorDatum D C E (m + 1) (Nat.succ_pos m)) {X Y Z T : SixFunctorSpace D} [IsSeparated X.obj.hom] [IsSeparated Y.obj.hom] [IsSeparated Z.obj.hom] [IsSeparated T.obj.hom] (f : X ⟶ Z) (g : Y ⟶ Z) (p : T ⟶ X) (q : T ⟶ Y) [IsProper f.hom.left] [IsProper g.hom.left] [IsSeparated p.hom.left] [IsSeparated q.hom.left] [LocallyOfFiniteType p.hom.left] [LocallyOfFiniteType q.hom.left] [QuasiCompact p.hom.left] [QuasiCompact q.hom.left] (comm : p ≫ f = q ≫ g) (_cartesian : IsPullback p.hom.left q.hom.left f.hom.left g.hom.left) : (∀ (K : finiteTorConstructibleCategory C.l E (m + 1) (Nat.succ_pos m) X.obj.left) (L : finiteTorConstructibleCategory C.l E (m + 1) (Nat.succ_pos m) Y.obj.left), (properProductFinite C E m f g p q comm).CounitIdentities K.obj L.obj) ∧ (∀ (K : sfIntegralConstructibleCategory C.l E X.obj.left) (L : sfIntegralConstructibleCategory C.l E Y.obj.left), S.toSixFunctorOperationDatum.integralFiniteTorDomain X K → S.toSixFunctorOperationDatum.integralFiniteTorDomain Y L → (properProductIntegral f g p q comm S.toSixFunctorOperationDatum).CounitIdentities K L) ∧ (∀ (K : sfRationalConstructibleCategory C.l E X.obj.left) (L : sfRationalConstructibleCategory C.l E Y.obj.left), (properProductRational f g p q comm S.toSixFunctorOperationDatum).CounitIdentities K L) ∧ (∀ (K : generalAlgebraicallyClosedConstructibleCategory C.l C.Qbar X.obj.left) (L : generalAlgebraicallyClosedConstructibleCategory C.l C.Qbar Y.obj.left), (properProductCommon f g p q comm S.toSixFunctorOperationDatum).CounitIdentities K L)",
+  "branch": "sheaf-dag",
+  "by": "Q06",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "The two equations are stated at all four actual coefficient stages in canonical proper coordinates. Helpers give the explicit Psi, exchange/projection components, lambda with its adjunction-compatible direct-image compositor, and the two-counit map. Finite coefficients use the prescribed intrinsic ambient realization on the finite-Tor inputs; higher stages retain the datum adjunctions and the completed, rationalized and common-stage tensor comparisons. No extra geometric or coefficient datum is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7169c6d7a",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Node vs Lean checked clause by clause; ordinary proper coordinates are what the node prescribes. exchange = mateEquiv over the datum's pullComposition square, the formula the datum fixes its stage.exchange to; projection maps use the rightAdjointProjectionMap formula; alpha = sixFunctorDirectComposition (rightAdjointUniq). Higher-stage tensors and pullback-tensor comparisons match integral/rational*TensorPullbackNormalization; finite stage is the intrinsic realization fixed by finiteDirectAdjunctionNormalization, finitePullCompositionNormalization and finiteTensorNormalization, at level m+1. p,q separated/LFT/QC follow from base change, not stronger. Node record changed only in lean, statement verbatim; dependency nodes identical to side-live; docstrings and proof steps present; only the theorem is sorry; no name collisions. nt_compile --json clean in 5.1 s, broken control fails. Maintainer notes: identifying the datum's compact-support Ex/PF with the ordinary maps is proof content (fix-lem-exchanges, fix-prop-projection-formula) and the kunneth-coherence citer should cite them; projectionQ/G could call rightAdjointProjectionMap directly."
  }
 }
