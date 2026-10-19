@@ -24,73 +24,61 @@
  ],
  "proof": [
   {
-   "text": "Work on $X_{\\mathrm{proet}}$ with the constant ring sheaf $A_X$. Since $X$ is a $k$-scheme of characteristic $p$ and $\\ell\\ne p$, $\\ell$ is invertible on $X$. By [lem-sf-flat-model], choose a complex $P$ of flat $A_X$-module sheaves concentrated in $[a,b]$ and an isomorphism $K\\cong P$ in the derived category. Apply [lem-pc-bounded-above-flat-kflat-site] to the ringed site $(X_{\\mathrm{proet}},A_X)$: $P$ is bounded above by $b$, so it is K-flat. The computation of [def-weil-derived-tensor], together with invariance under derived isomorphisms from [lem-weil-derived-tensor-functorial], therefore computes $K\\otimes_A^L M$ by $\\operatorname{Tot}(P\\otimes_A M_0)$ for any representative complex $M_0$ of $M$.",
+   "text": "Install the proved closed symmetric monoidal, Grothendieck abelian and functorial flat-resolution structures on the constant-ring module sheaf category. Acyclic-tensor K-flatness implies categorical K-flatness: pass to the homotopy category and use the braiding to exchange the two tensor factors. The generic K-flat comparison DerivedCategory.QObjTensorQObjIsoOfKFlatLeft and the inverse of Q(f) identify the categorical tensor Q(K) tensor Q(M) with the given derivedTensor. For any derived object Z and ordered interval [a,b], compare the recorded HasProEtaleTorAmplitude with categorical torAmplitudeIn. In the forward direction choose a representative of Z and a K-flat resolution, using lem-pc-kflat-resolution; transport cohomology vanishing through the comparison and the single-complex comparison. In the reverse direction use the same comparison for every representative and resolution. All these comparisons are proved locally in the Lean proof.",
    "uses": [
-    "lem-sf-flat-model",
-    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-pc-kflat-resolution",
+    "lem-pc-source-kflat-module-tensor-model",
     "def-weil-derived-tensor",
-    "lem-weil-derived-tensor-functorial"
+    "def-weil-proetale-tor-amplitude"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-sf-tensor-ctf.md",
-    "place": "## Proof, first paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "For (i), [def-weil-finite-torsion-constructibility] gives integers $c'<d'$ such that $\\mathcal H^i(M)=0$ outside $[c',d']$. From any representative $M_0$ form its good upper truncation $B=\\tau_{\\le d'}M_0$, with $B^{d'}=\\ker(d_{M_0}^{d'})$, unchanged terms below $d'$, and zero terms above. Form $C=\\tau_{\\ge c'}B$, with $C^{c'}=\\operatorname{coker}(d_B^{c'-1})$, unchanged terms above $c'$, and zero terms below. The inclusion $B\\to M_0$ preserves cohomology in degrees at most $d'$ and removes only the zero cohomology in degrees above $d'$. Since $c'<d'$, the projection $B\\to C$ preserves cohomology in degrees at least $c'$ (at $c'$ it identifies both cohomology sheaves with $\\ker(d_B^{c'})/\\operatorname{im}(d_B^{c'-1})$) and removes only the zero cohomology below $c'$. Thus both maps are quasi-isomorphisms. Hence $C$ represents $M$ and is concentrated in $[c',d']$. By step 1 the tensor is represented by $\\operatorname{Tot}(P\\otimes_A C)$. Its degree-$t$ term is $\\bigoplus_{q+r=t}P^q\\otimes_A C^r$ [def-pc-tensor-complex-sheaves], which is zero outside $[a+c',b+d']$. Thus the tensor has bounded cohomology.",
+   "text": "Finite cohomological support of M supplies integer lower and upper bounds c and d, including when that support is empty. The categorical lower and upper tensor bounds give cohomology vanishing for K tensor M outside [a+c,b+d]. These existing source bounds use a bounded flat model of K and bounded representatives of M, so implement the flat-model and truncation argument of the source. Transport through the tensor comparison. The nonzero cohomology support is a subset of the finite integer interval, proving boundedness.",
    "uses": [
-    "def-weil-finite-torsion-constructibility",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-sf-tensor-ctf.md",
-    "place": "## Proof, (i), boundedness"
-   }
-  },
-  {
-   "text": "For constructibility in (i), apply [lem-pur-finite-tensor-constructible-cohomology] with $T=X$, $L=M$ and the given $A=\\mathcal O_E/\\varpi_E^n$. Its hypotheses hold: $n\\ge1$, $\\ell$ is invertible on $X$ by step 1, and $K$ and $M$ are bounded constructible in the intrinsic finite-torsion category (membership in $D^b_{ctf}$ includes membership in $D^b_c$). It states that every cohomology sheaf of $K\\otimes_A^L M$ is constructible on the pro-etale site. With boundedness from step 2, the defining condition [def-weil-finite-torsion-constructibility] proves $K\\otimes_A^L M\\in D^b_c(X,A)$.",
-   "uses": [
-    "lem-pur-finite-tensor-constructible-cohomology",
+    "lem-sc-source-tor-amplitude-lower-tensor-bound",
+    "lem-sc-source-tor-amplitude-upper-tensor-bound",
     "def-weil-finite-torsion-constructibility"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-sf-tensor-ctf.md",
-    "place": "## Proof, (i), constructibility"
-   }
+   "elementary": false
   },
   {
-   "text": "For (ii), [lem-sf-flat-model] applied to $M$ supplies a flat complex $Q$ concentrated in $[c,d]$ and isomorphic to $M$ in the derived category. The computation of [def-weil-derived-tensor] and functoriality [lem-weil-derived-tensor-functorial] represent $K\\otimes_A^L M$ by $R=\\operatorname{Tot}(P\\otimes_A Q)$. By [def-pc-tensor-complex-sheaves], $R^t=\\bigoplus_{q+r=t}P^q\\otimes_A Q^r$. Each summand is flat [def-pc-flat-sheaf-modules]: its tensor functor is, by tensor associativity, the composite of the two exact tensor functors for $P^q$ and $Q^r$. There are only finitely many nonzero summands in each total degree. Tensoring a finite direct sum is the finite direct sum of those tensor functors. Applied to a short exact sequence, its kernel and cokernel are the direct sums of the summand kernels and cokernels, so the result remains short exact. Thus $R^t$ is flat. A nonzero summand requires $a\\le q\\le b$ and $c\\le r\\le d$, hence $a+c\\le t\\le b+d$. Thus $R$ is a bounded flat model in $[a+c,b+d]$. The tensor is already bounded constructible by (i), so the reverse implication of [lem-sf-flat-model] gives its Tor amplitude in this interval. Together these prove membership in $D^b_{ctf}(X,A)$.",
+   "text": "The cardinality of the finite base field gives characteristic p there and hence in its algebraic closure k. Since l and p are distinct primes, l is a unit in k. Map this unit into every residue field of X via the structure morphism and residue evaluation. Apply finiteTensor_constructible_cohomology to K and M, using the bounded-constructible component of finiteTorConstructible for K. This proves constructibility in every degree; together with boundedness this proves clause (i).",
    "uses": [
-    "lem-sf-flat-model",
-    "def-weil-derived-tensor",
-    "lem-weil-derived-tensor-functorial",
-    "def-pc-tensor-complex-sheaves",
-    "def-pc-flat-sheaf-modules"
+    "lem-pur-finite-tensor-constructible-cohomology",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-finite-tor-amplitude"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-sf-tensor-ctf.md",
-    "place": "## Proof, (ii)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For clause (ii), let F be any module sheaf in degree zero. Tor amplitude of M makes M tensor F[0] cohomologically concentrated in [c,d]. Apply the same categorical lower and upper tensor bounds for K to this object and transport along tensor associativity. This proves categorical Tor amplitude of K tensor M in [a+c,b+d]. This uses the same bounded-flat-model tensor calculation as the source, encapsulated by the proved generic bounds, and avoids a second flat-model construction. Transport along the comparison to derivedTensor, apply the local amplitude equivalence in reverse, and use a+c <= b+d. Pair this amplitude with clause (i) and its own interval as a witness for finiteTorConstructible.",
+   "uses": [
+    "lem-sc-source-tor-amplitude-lower-tensor-bound",
+    "lem-sc-source-tor-amplitude-upper-tensor-bound",
+    "def-weil-proetale-tor-amplitude",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sf-flat-model",
-  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-kflat-resolution",
+  "lem-pc-source-kflat-module-tensor-model",
   "def-weil-derived-tensor",
-  "lem-weil-derived-tensor-functorial",
+  "def-weil-proetale-tor-amplitude",
+  "lem-sc-source-tor-amplitude-lower-tensor-bound",
+  "lem-sc-source-tor-amplitude-upper-tensor-bound",
   "def-weil-finite-torsion-constructibility",
-  "def-pc-tensor-complex-sheaves",
   "lem-pur-finite-tensor-constructible-cohomology",
-  "def-pc-flat-sheaf-modules"
+  "def-weil-finite-tor-amplitude"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-sf-tensor-ctf.md",
-  "place": "## Proof"
+  "by": "worker",
+  "group": "G6",
+  "date": "2026-10-19",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-sf-tensor-ctf.proof.md; lean/WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean",
+  "place": "All clauses: generic bounded-flat tensor bounds replace the repeated model constructions; local comparisons identify the recorded tensor and Tor amplitude. Constructibility uses the already reviewed pro-etale cohomology lemma."
  },
  "mathlib_searches": [
   {
@@ -217,9 +205,7 @@
   ]
  },
  "tool_uses": [
-  "lem-pur-finite-tensor-constructible-cohomology",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-sf-flat-model"
+  "lem-pur-finite-tensor-constructible-cohomology"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -247,5 +233,15 @@
   "group": "Q22",
   "result": "pass",
   "note": "Reviewed the immutable statement, all eight dependencies, source, Lean declarations, docstrings, report, universes and edge cases. Signature matches verbatim; snapshot per-file compilation passed through scompile.py without diagnostics. No delivery errors found. Review written to review.md; branch head unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-c9d77",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261019T093422-L-2309114",
+  "kind": "proof",
+  "note": "independent cc review: finiteCoefficient_tensor_ctf proof (sorry-free; sorryAx only via still-sorry finiteTensor_constructible_cohomology) vs lem-sf-tensor-ctf node proof/proof_deps (KFlatResolutionGeneral, QObjTensorQObjIsoOfKFlatLeft, isGE/isLE_tensor_of_torAmplitudeIn); IntrinsicFiniteTorsionConstructibility still reached via public FiniteTorAmplitude, unit realized empty; 7/11 importers compile, 4 fail identically against published build"
  }
 }
