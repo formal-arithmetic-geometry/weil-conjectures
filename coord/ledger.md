@@ -17283,3 +17283,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:00 L: returned deliver/NL/lem-coef-completed-tensor-hom-transpose (reviewer RETURN: L: independent stage-2 immutable head e14dc47dccd7: H2/theorem-stmt_dep rule: thm-coef-rational-verdier is cited only fo)
 - 10:03 L: returned deliver/NA/lem-trf-hilbert-samuel-local-presentations (reviewer RETURN: I read the item (statement and Steps 1-7), all 4 new nodes, the citers resolution-invariant-calculus (Steps 2/3/5/6/7) a)
 - 10:04 L: returned deliver/NA/lem-trf-hilbert-samuel-local-presentations (reviewer RETURN: I read the item (statement and Steps 1-7), all 4 new nodes, the citers resolution-invariant-calculus (Steps 2/3/5/6/7) a)
+- 10:11 L: returned deliver/J9/Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian (reviewer RETURN: (reviewer C-68423, head 684239cf4) B9 (blueprint references): dag/nodes/sec-proetale-coefficients/lem-pe-constructible-c)
