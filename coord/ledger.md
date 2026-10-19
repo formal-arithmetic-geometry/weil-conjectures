@@ -17665,3 +17665,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:11 L: merged deliver/D2/Sheaf.AlgebraicGeometry.EtaleAtPrimeFlatUnramifiedCriterion (stage 3; reviewer PASS; first push; landing 20261019T231059-L-546216 (proof); batch 20261019T231019; modules 1; new nodes 0)
 - 23:11 L: merged deliver/D3/Sheaf.AlgebraicGeometry.SupportedProductLocalization (stage 3; reviewer PASS; first push; landing 20261019T231101-L-546563 (proof); batch 20261019T231019; modules 1; new nodes 0)
 - 23:11 L: merged deliver/D4/Sheaf.AlgebraicGeometry.EtaleBaseChangeOpenClosed (stage 3; reviewer PASS; first push; landing 20261019T231102-L-546799 (proof); batch 20261019T231019; modules 1; new nodes 0)
+- 23:11 L: merged deliver/D4/Sheaf.Paper.IntegralModels (stage 3; reviewer PASS; first push; landing 20261019T231105-L-547149 (interface); batch 20261019T231019; modules 10; new nodes 9; change records: coord/changes/integral-models-definition-extraction.md)
