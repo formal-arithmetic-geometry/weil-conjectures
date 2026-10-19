@@ -134,7 +134,9 @@ theorem etaleUnitPlus (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) :
     _root_.DerivedCategory.TStructure.t.plus
       (𝟙_ (_root_.DerivedCategory
         (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient)))) := by
-  sorry
+  refine ⟨0, ?_⟩
+  exact _root_.DerivedCategory.TStructure.t.isGE_of_iso
+    (_root_.DerivedCategory.singleFunctorObjUnitIso _) 0
 
 /-- The canonical comparison inverse Rν* Λ_proet ≅ Λ_et: apply Rν* to
 ν*Λ_et ≅ Λ_proet and then invert the comparison adjunction unit. The latter is
