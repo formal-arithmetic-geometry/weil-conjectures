@@ -16,11 +16,6 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.AlgebraicGeometry.OpenImmersion
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
 /-!
 # Unbounded pro-etale direct image and open restriction
@@ -124,6 +119,32 @@ theorem proEtaleDerivedOpenRestriction
     IsIso (proEtaleOpenRestrictionComparison p i A) ∧
       (∀ L, IsIso ((proEtaleOpenRestrictionComparison p i A).app L)) ∧
       IsIso (proEtaleOpenRestrictionLambdaInverse p i A) := by
-  sorry
+  -- The sheaf-level open unit makes extension by zero fully faithful.
+  have : ∀ M, IsIso
+      ((sfIntrinsicExtensionByZeroAdjunction (pullback.fst p i) A).unit.app M) :=
+    fun M ↦ sfIntrinsicOpenUnit_isIso (pullback.fst p i) A M
+  have : IsIso (sfIntrinsicExtensionByZeroAdjunction (pullback.fst p i) A).unit :=
+    NatIso.isIso_of_isIso_app _
+  let h :=
+    (sfIntrinsicExtensionByZeroAdjunction (pullback.fst p i) A).fullyFaithfulLOfIsIsoUnit
+  have := h.full
+  have := h.faithful
+  have : IsIso (sfIntrinsicOpenAdjunction A (pullback.fst p i)).unit := inferInstance
+  -- Exact termwise derivation transports the unit isomorphism to the derived category.
+  have : IsIso (exceptionalOpenAdjunction (pullback.fst p i) A).unit :=
+    (exceptionalOpenAdjunction (pullback.fst p i) A).isIso_unit_of_iso
+    ((mapDerivedCategoryCompIso (sfIntrinsicExtensionByZero (pullback.fst p i) A)
+        (sfIntrinsicPullback A (pullback.fst p i))).symm ≪≫
+      mapDerivedCategoryNatIso
+        (asIso (sfIntrinsicOpenAdjunction A (pullback.fst p i)).unit).symm ≪≫
+      mapDerivedCategoryIdIso _)
+  refine ⟨?_, ?_, ?_⟩
+  · dsimp only [proEtaleOpenRestrictionComparison]
+    infer_instance
+  · intro L
+    dsimp only [proEtaleOpenRestrictionComparison]
+    infer_instance
+  · dsimp only [proEtaleOpenRestrictionLambdaInverse]
+    infer_instance
 
 end AlgebraicGeometry.Scheme
