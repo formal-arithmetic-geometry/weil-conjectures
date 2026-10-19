@@ -16653,3 +16653,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:25 L: merged deliver/D7/Sheaf.RepresentationTheory.BaseFieldContinuousCochains (stage 3; reviewer PASS; first push; landing 20261019T002527-L-2148132 (interface); batch 20261019T002449; modules 1; new nodes 0; change records: coord/changes/base-field-continuous-cochains.md)
 - 00:25 L: merged deliver/D8/Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage (stage 3; reviewer PASS; first push; landing 20261019T002527-L-2148271 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:25 L: merged deliver/D8/Sheaf.Paper.WeilCompactSupportCohomology (stage 3; reviewer PASS; first push; landing 20261019T002528-L-2148370 (proof); batch 20261019T002449; modules 1; new nodes 0)
+- 00:25 L: merged deliver/D9/Sheaf.Paper.CompletedPullbackReduction (stage 3; reviewer PASS; first push; landing 20261019T002528-L-2148467 (proof); batch 20261019T002449; modules 1; new nodes 0)

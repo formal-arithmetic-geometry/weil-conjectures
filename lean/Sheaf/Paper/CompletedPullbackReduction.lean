@@ -73,7 +73,7 @@ theorem completedReductionModelPushforward_isRightAdjoint
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :
     (@SheafOfModules.pushforward.{u + 1} _ _ _ _ _ _ _ _ _
       (proEtaleModelBaseChange_isContinuous g) (proEtaleModelRingUnit g R)).IsRightAdjoint := by
-  sorry
+  infer_instance
 
 /-- An inverse-image generator from an object V and a base-change arrow U→g*V.
 It is the small-model module-adjunction unit followed by restriction along that arrow.
@@ -455,7 +455,29 @@ theorem completedReductionOrdinaryRestrictionUnit_exists (T : Scheme.{u}) (a : �
         ((adicLisseForget T).map (reductionCoefficientMap T d a a (le_refl a))) ≅ 𝟭 _,
       ∀ (M : pbcModules T (reductionCoefficient T d a))
         (U : T.ProEtᵒᵖ) (x : M.val.obj U), (e.hom.app M).val.app U x = x := by
-  sorry
+  classical
+  have hφ : (adicLisseForget T).map
+      (reductionCoefficientMap T d a a (le_refl a)) = 𝟙 _ := by
+    rw [reductionCoefficientMap_id, CategoryTheory.Functor.map_id]
+  let e : SheafOfModules.restrictScalars.{u + 1}
+      ((adicLisseForget T).map (reductionCoefficientMap T d a a (le_refl a))) ≅ 𝟭 _ :=
+    NatIso.ofComponents (fun M ↦
+      (SheafOfModules.fullyFaithfulForget _).preimageIso
+        (PresheafOfModules.isoMk
+          (fun U ↦ ModuleCat.restrictScalarsId'App _ (by rw [hφ]; rfl) (M.val.obj U))
+          (by intros; rfl))) (by intros; rfl)
+  refine ⟨e, ?_, ?_⟩
+  · intro M U x
+    rfl
+  · intro e' he'
+    apply Iso.ext
+    apply NatTrans.ext
+    funext M
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro U
+    ext x
+    exact he' M U x
 
 /-- The sectionwise identity comparison for equal-index restriction.
 Source: blueprint unit clause (blueprint: lemma-weil-pbc-completed-pullback-reduction). -/
