@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.DescendedQCNeighborhood
-public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-public import WeilConjectures.AlgebraicGeometry.PicardFunctor

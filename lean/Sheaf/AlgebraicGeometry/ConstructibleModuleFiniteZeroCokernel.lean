@@ -10,7 +10,7 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleModuleFiniteStalks
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.AlgebraicGeometry.FreeEtaleModuleShriekComparison
 import Sheaf.AlgebraicGeometry.EtaleLowerShriekConstantConstructible
-import Sheaf.Topology.SpectralConstructibleFiniteIntersection
+import WeilConjectures.Topology.SpectralConstructibleFiniteIntersection
 import WeilConjectures.ConstructibleSheaf.Monoidal
 
 /-!

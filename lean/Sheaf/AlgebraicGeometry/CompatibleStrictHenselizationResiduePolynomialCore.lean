@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.CompatibleStrictHenselizationResiduePolynomialCore
-public import Mathlib.FieldTheory.Separable

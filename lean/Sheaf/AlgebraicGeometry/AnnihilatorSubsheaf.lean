@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.AnnihilatorSubsheaf
-public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module

@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.CyclicModuleConstantReflection
-public import WeilConjectures.ConstructibleSheaf.Defs
-public import Mathlib.Data.ZMod.Basic

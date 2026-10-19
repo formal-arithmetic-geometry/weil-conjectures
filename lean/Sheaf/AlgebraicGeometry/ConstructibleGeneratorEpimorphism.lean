@@ -20,10 +20,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.AlgebraicGeometry.ConstructibleModuleFiniteStalks
 import Sheaf.AlgebraicGeometry.ConstructibleModuleSurjectivityLocus
 import Sheaf.AlgebraicGeometry.EtaleLowerShriekConstantConstructible
-import Sheaf.Topology.SpectralConstructibleFiniteIntersection
+import WeilConjectures.Topology.SpectralConstructibleFiniteIntersection
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.AlgebraicGeometry.ConstructibleModuleFiniteStalks
 
 /-!
 # Finite free etale generators lifting an epimorphism

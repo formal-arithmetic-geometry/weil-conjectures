@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.CategoryTheory.Sites.Whiskering
 public import Mathlib.Algebra.Category.Grp.Ulift
 
-import Sheaf.AlgebraicGeometry.EtaleULiftInjectiveExtension
+import WeilConjectures.AlgebraicGeometry.EtaleULiftInjectiveExtension
 import Sheaf.AlgebraicGeometry.EtaleSmallInjectiveCriterion
 
 /-! Coefficient universe lift on the small étale site. -/

@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
-import Sheaf.AlgebraicGeometry.AmpleFiniteAffineCover
+import WeilConjectures.AlgebraicGeometry.AmpleFiniteAffineCover
 import Sheaf.AlgebraicGeometry.AmpleProjLocalChart
 
 /-!

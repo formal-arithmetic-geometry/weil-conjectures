@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ChangeOfRingsTensorActionMapsActions
-public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
-public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection

@@ -6,7 +6,7 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.CategoryTheory.CompactObject
-public import Sheaf.CategoryTheory.WeakTriangulatedGenerator
+public import WeilConjectures.CategoryTheory.WeakTriangulatedGenerator
 import Sheaf.CategoryTheory.CompactGeneratorTelescopeIso
 
 /-!

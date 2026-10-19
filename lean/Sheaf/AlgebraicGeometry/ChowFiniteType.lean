@@ -1,7 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ChowFiniteType
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated

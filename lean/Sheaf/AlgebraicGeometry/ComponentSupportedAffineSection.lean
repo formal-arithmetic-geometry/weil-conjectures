@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.AmplePullbackIdealAffineSection
-import Sheaf.AlgebraicGeometry.AffineImageAwayClosedCover
+import WeilConjectures.AlgebraicGeometry.AffineImageAwayClosedCover
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import Sheaf.AlgebraicGeometry.ConductorSections
 

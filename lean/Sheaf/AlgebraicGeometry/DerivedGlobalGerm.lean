@@ -1,8 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.DerivedGlobalGerm
-public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk

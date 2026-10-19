@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.CoherentKernelConditionRestriction
-public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
-public import Mathlib.AlgebraicGeometry.Restrict

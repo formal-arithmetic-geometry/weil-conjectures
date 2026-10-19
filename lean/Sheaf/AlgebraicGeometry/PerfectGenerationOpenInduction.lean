@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 import Sheaf.AlgebraicGeometry.KoszulOpenOrthogonality
 import Sheaf.AlgebraicGeometry.PerfectSupportedMapLift
 import Sheaf.AlgebraicGeometry.SupportedOpenPushforward
-import Sheaf.CategoryTheory.WeakTriangulatedGenerator
+import WeilConjectures.CategoryTheory.WeakTriangulatedGenerator
 
 /-! # Extending perfect generators across an affine open
 

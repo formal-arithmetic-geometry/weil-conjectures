@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.DescendAffine
-public import Mathlib.AlgebraicGeometry.AffineTransitionLimit

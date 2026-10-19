@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ConstantRingModuleSheafEquivalence
-public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf

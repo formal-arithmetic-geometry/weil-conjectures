@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ConstantModuleSectionCoefficients
-public import WeilConjectures.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
-public import Mathlib.CategoryTheory.Sites.Adjunction

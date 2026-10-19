@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
-import Sheaf.CategoryTheory.CechZeroCocycleCompatibility
+import WeilConjectures.CategoryTheory.CechZeroCocycleCompatibility
 
 /-!
 # The canonical augmented Čech row of an injective sheaf

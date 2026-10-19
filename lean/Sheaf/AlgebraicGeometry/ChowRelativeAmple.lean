@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.ChowRelativeAmpleGeometric
+import WeilConjectures.AlgebraicGeometry.ChowRelativeAmpleGeometric
 import Sheaf.AlgebraicGeometry.ChowRelativeAmpleTwist
 
 /-!

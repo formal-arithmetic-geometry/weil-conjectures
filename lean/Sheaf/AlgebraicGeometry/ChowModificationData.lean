@@ -1,8 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ChowModificationData
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-public import Mathlib.AlgebraicGeometry.Noetherian
-public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace

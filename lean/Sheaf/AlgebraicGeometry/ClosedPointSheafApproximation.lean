@@ -14,7 +14,7 @@ import Sheaf.AlgebraicGeometry.ClosedPointField
 import Sheaf.AlgebraicGeometry.EtaleLfpAndFiniteType
 import Sheaf.AlgebraicGeometry.EtaleSupport
 import Sheaf.AlgebraicGeometry.FiniteClosedPoints
-import Sheaf.AlgebraicGeometry.GeometricStalkSupport
+import WeilConjectures.AlgebraicGeometry.GeometricStalkSupport
 
 /-!
 # Approximation of sheaves supported at closed points

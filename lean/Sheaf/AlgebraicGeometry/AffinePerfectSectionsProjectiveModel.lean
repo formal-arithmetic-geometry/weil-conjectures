@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
-import Sheaf.AlgebraicGeometry.AffineSectionsComplexCounit
+import WeilConjectures.AlgebraicGeometry.AffineSectionsComplexCounit
 import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Sheaf.AlgebraicGeometry.SchemeIsoDerivedEquivalence

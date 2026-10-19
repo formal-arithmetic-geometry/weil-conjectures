@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
 
 import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
-import Sheaf.AlgebraicGeometry.AlgClosedExtensionModuleSections
+import WeilConjectures.AlgebraicGeometry.AlgClosedExtensionModuleSections
 import WeilConjectures.AlgebraicGeometry.ModuleAcyclicCohomologyComparisonZero
 import WeilConjectures.AlgebraicGeometry.KilledSheafModuleLift
 import Sheaf.AlgebraicGeometry.IsProperOrIsAffine
