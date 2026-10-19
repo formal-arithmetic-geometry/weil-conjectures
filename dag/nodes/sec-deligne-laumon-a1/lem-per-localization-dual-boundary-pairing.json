@@ -21,48 +21,227 @@
   "def-weil-pbc-inverse-image",
   "def-weil-pbc-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a K-flat complex $P$ with flat terms representing $K$, and a bounded-below injective resolution $A_X\\to I$. Constant-coefficient inverse images are exact, and $i^*P,j^*P$ are K-flat with flat terms. Set $T=i^!_0I$, $S=i_*T$, and $J=j_*j^*I$, where $i^!_0F=i^*\\ker(F\\to j_*j^*F)$. The closed support adjunction makes each $T^q$ injective. Exactness of $i^*$ and its adjunction with $i_*$ make each $S^q$ injective. Similarly $j^*I^q$ is injective because $j^*$ is right adjoint to exact $j_!$, and $J^q$ is injective because $j_*$ is right adjoint to exact $j^*$. Thus $I,T,S,J$ are bounded below and K-injective. The right-derived computation gives $J\\simeq Rj_*A_U$, and $T$ computes the right derived functor of $i^!_0$ at $A_X$ used in the internal-Hom localization lemma. It is also the value at $A_X$ of the support right adjoint of the statement, with matching counit: for every complex $G$ on $Z$, naturally in $G$, $\\operatorname{Hom}_D(i_*G,I)=\\operatorname{Hom}_K(i_*G,I)=\\operatorname{Hom}_K(G,T)=\\operatorname{Hom}_D(G,T)$, by the K-injective Hom lemma for $I$ and for $T$ and the termwise adjunction $i_*\\dashv i^!_0$ on homotopy categories. So $T$ with the support inclusion $i_*T\\to I$ represents $\\operatorname{Hom}_D(i_*-,A_X)$, and Yoneda gives $T\\simeq E$ carrying this inclusion to the counit of $i_*\\dashv Ri^!$. These choices require neither finite Tor dimension of $K$ nor boundedness of $Rj_*L^\\vee$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-dplus-injective-representative",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-per-etale-closed-sheaf-internal-adjunction",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-per-etale-internal-hom-localization",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-exc-closed-ambient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "08JC setup; 09XQ (etale-cohomology-lemma-sections-with-support-acyclic); K-flat and injective models of section-internal-hom"
+   }
+  },
+  {
+   "text": "For each etale $V\\to X$, the map $I^q(V)\\to I^q(V\\times_XU)$ is surjective: $V\\times_XU\\to V$ is a monomorphism in the small etale site, so apply the ringed-site injective restriction lemma. The inverse-image/restriction identification says that this is exactly the component of $I^q\\to j_*j^*I^q$. Its kernel $F^q$ restricts to zero on $U$, since restriction of the open unit to $U$ is the identity. The open/closed exact sequence applied to $F^q$ therefore identifies $F^q\\to i_*i^*F^q$ with an isomorphism. This identifies the kernel inclusion with $S^q\\to I^q$, naturally and $A$-linearly. We obtain a short exact sequence of complexes $0\\to S\\xrightarrow{a}I\\to J\\to0$. Each degree splits because $S^q$ is injective (extend $1_{S^q}$ across $S^q\\hookrightarrow I^q$); no splitting is claimed to be a chain map. Its cone-to-quotient roof $d:J\\leftarrow\\operatorname{Cone}(a)\\to S[1]$, with the sign $-p$ of the cone triangle, makes $S\\to I\\to J\\xrightarrow{d}S[1]$ distinguished. The cited support triangle fixes only its first two arrows, but its boundary is still determined: $J$ is K-injective, so $\\operatorname{Hom}_D(S[1],J)=\\operatorname{Hom}_K(S[1],j_*j^*I)=\\operatorname{Hom}_K(j^*S[1],j^*I)=0$, as $j^*S=j^*i_*T=0$ ($(i_*T)(V\\times_XU)=T(\\emptyset)=0$). By part (2) of the triangle-morphism lemma, the identity of $A_X\\simeq I$ with $i_*E\\simeq S$ (Step 1) and $Rj_*A_U\\simeq J$ is a morphism from the support triangle to this one, so its boundary corresponds to $d$.",
+   "uses": [
+    "lem-pur-ringed-site-injective-mono-restriction",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-open-closed-short-exact",
+    "lem-pc-cone-short-exact-quasi-iso",
+    "lem-exc-closed-support-triangle",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-triangle-morphism-extension",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "093X (lemma-restriction-along-monomorphism-surjective); 0A45 (etale-cohomology-lemma-cohomology-with-support-triangle), proof, with 09XQ"
+   }
+  },
+  {
+   "text": "Write $H_S=\\mathcal Hom^\\bullet(P,S)$, $H=\\mathcal Hom^\\bullet(P,I)$, and $Q=\\mathcal Hom^\\bullet(P,J)$. Applying Hom to the degreewise splittings of Step 2 gives a degreewise split exact sequence $0\\to H_S\\xrightarrow{a_H}H\\to Q\\to0$: a degree-$n$ lift is the product of the lifts into $I^{p+n}$, for all $p$. Products are sectionwise, so this is a splitting of module sheaves in each degree, even when $P$ is unbounded. Its boundary is the roof $\\delta:Q\\leftarrow\\operatorname{Cone}(a_H)\\to H_S[1]$, with the same sign $-p$ as $d$, so $H_S\\to H\\to Q\\xrightarrow{\\delta}H_S[1]$ is distinguished. The Hom differential is $d(f)=d_I f-(-1)^{|f|}f d_P$. Hence these complexes compute the derived Homs into $S,I,J$, respectively; in particular $H$ represents $R\\mathcal Hom(K,A_X)$.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-derived-internal-hom",
+    "lem-pc-cone-short-exact-quasi-iso",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "08JC (lemma-RHom-triangulated), degreewise split sequence argument; section-hom-complexes"
+   }
+  },
+  {
+   "text": "Compare this exact sequence with the Hom of $0\\to j_!j^*P\\to P\\to i_*i^*P\\to0$. On each etale slice, open adjunction and inverse-image/direct-image adjunction give\n$\\mathcal Hom(j_!j^*P^p,I^q)=j_*\\mathcal Hom(j^*P^p,j^*I^q)=\\mathcal Hom(P^p,j_*j^*I^q)$.\nBoth maps from $\\mathcal Hom(P^p,I^q)$ are restriction of a map to the open. Their common kernel consists precisely of maps factoring through $P^p\\to i_*i^*P^p$, and also of maps with image in $S^q=\\ker(I^q\\to J^q)$. This gives $\\mathcal Hom(i_*i^*P^p,I^q)=\\mathcal Hom(P^p,S^q)$, compatibly with the inclusions into $\\mathcal Hom(P^p,I^q)$. Taking products over $p$ gives an isomorphism of short exact sequences of Hom complexes, with middle map the identity; naturality of these adjunctions commutes with the displayed Hom differential. Thus their cone roofs agree, including their last maps, up to the fixed contravariant-Hom rotation sign. This compares the actual connecting maps, not merely the first two arrows of abstract distinguished triangles.",
+   "uses": [
+    "lem-weil-pbc-open-closed-short-exact",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-pur-sheaf-hom",
+    "def-pur-hom-complex",
+    "lem-pc-cone-short-exact-quasi-iso",
+    "lem-sf-hom-triangulated",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "08JC (lemma-RHom-triangulated), termwise split Hom argument, expanded on the open/closed sequence; section-internal-hom"
+   }
+  },
+  {
+   "text": "The closed sheaf internal adjunction identifies $\\mathcal Hom^\\bullet(i_*i^*P,I)$ with $i_*\\mathcal Hom^\\bullet(i^*P,T)$: $i_*$ preserves the products by its section formula, and the adjunction commutes with the differential. Therefore $H_S$ represents $i_*R\\mathcal Hom(C,E)$. On the open, $j^*P$ is K-flat and $j^*I$ K-injective, so $\\mathcal Hom^\\bullet(j^*P,j^*I)$ is K-injective and its $j_*$ computes its derived direct image. Here $j^*P\\simeq j^*Rj_*L\\simeq L$, since $j^*j_*F=F$ termwise for an injective resolution $F$ of $L$ (inverse image along $j$ is restriction to $U$, and $(j_*F)(V)=F(V\\times_XU)=F(V)$ for $V$ over $U$). Locally where $L=A_U^r$, finite direct-sum Hom identifies $R\\mathcal Hom(L,A_U)$ with $L^\\vee$ in degree zero; this identification glues since it sends a functional to that same functional. Thus $Q$ represents $Rj_*L^\\vee$. By Step 4 these identifications carry the first two arrows of the internal-Hom localization triangle to $H_S\\to H\\to Q$. Its third arrow is then determined: $Q\\cong j_*\\mathcal Hom^\\bullet(j^*P,j^*I)$ is K-injective and $j^*H_S=\\mathcal Hom^\\bullet(j^*P,j^*S)=0$, so $\\operatorname{Hom}_D(H_S[1],Q)=\\operatorname{Hom}_K(j^*H_S[1],\\mathcal Hom^\\bullet(j^*P,j^*I))=0$. Part (2) of the triangle-morphism lemma makes these identifications a morphism of triangles, so the boundary $u$ of the question is $\\epsilon\\delta$, with $\\epsilon$ depending only on the cone/rotation conventions.",
+   "uses": [
+    "lem-per-etale-closed-sheaf-internal-adjunction",
+    "def-weil-pbc-direct-image",
+    "def-pur-derived-internal-hom",
+    "lem-pur-hom-kflat-into-kinjective",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-per-etale-internal-hom-localization",
+    "def-pur-hom-complex",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-triangle-morphism-extension",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "08JC and section-internal-hom; 0A96 (lemma-RHom-from-K-flat-into-K-injective); closed endpoint of ILO XVII 7.6.10"
+   }
+  },
+  {
+   "text": "For $M=S,I,J$ use the chain evaluation $e_M:\\mathcal Hom^\\bullet(P,M)\\otimes P\\to M$, $f\\otimes x\\mapsto f(x)$. It is a chain map: for $|f|=n$ the two terms $-(-1)^nf(d_Px)$ from $d(f)(x)$ and $(-1)^nf(d_Px)$ from the tensor differential cancel, leaving $d_M(f(x))$. The evaluations commute with $a$ and $I\\to J$. They extend to a map $\\operatorname{Cone}(a_H)\\otimes P\\to\\operatorname{Cone}(a)$ by $(h,s)\\otimes x\\mapsto(h(x),s(x))$. With $\\operatorname{Cone}(a_H)^n=H^n\\oplus H_S^{n+1}$, the second component has differential $-d(s)$; its tensor differential is $-d(s)\\otimes1+(-1)^n s\\otimes d_P$, which evaluates to $-d_S(s(x))$. This verifies the cone map including the shifted summand. It commutes with both cone projections and both cone-to-quotient maps. Since $P$ is K-flat, tensoring the quasi-isomorphism $\\operatorname{Cone}(a_H)\\to Q$ with $P$ is a quasi-isomorphism. The two roofs therefore give the equality of derived morphisms\n$$e_S[1]\\circ(\\delta\\otimes1_P)=d\\circ e_J:Q\\otimes_A^LP\\longrightarrow S[1],$$\nwith the right-tensor shift comparison $(H_S[1])\\otimes P=(H_S\\otimes P)[1]$.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category",
+    "def-pc-kflat-complex",
+    "lem-pc-cone-short-exact-quasi-iso",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "08JC, section-hom-complexes and section-internal-hom; explicit evaluation calculation on the two cone summands"
+   }
+  },
+  {
+   "text": "Under the closed endpoint comparison, $e_S$ is evaluation on $Z$ followed by the support inclusion. To check the normalization, a local map $f:P\\to i_*T$ corresponds under $i^*\\dashv i_*$ to $\\widetilde f:i^*P\\to T$; its value on a local section $x$ is the image of $\\widetilde f(i^*x)$ in $i_*T$. After applying $i^*$, this is exactly $\\widetilde f(i^*x)$. The closed internal adjunction sends a map $i_*i^*P\\to I$ to the same supported map, since its inverse is the support inclusion. Hence $i^*e_S$ is the evaluation-normalized derived tensor-Hom counit for $(C,E)$. Apply exact monoidal $i^*$ to Step 6, use $i^*S=E$, and substitute $u=\\epsilon\\delta$. The transpose of $i^*u$ is consequently $\\epsilon\\,b\\circ i^*e_J$, with $b=i^*d$ as specified in the question.",
+   "uses": [
+    "lem-per-etale-closed-sheaf-internal-adjunction",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-exc-closed-support-triangle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "08J9 (lemma-internal-hom), evaluation adjunction; 09XQ support inclusion and 0A45 support triangle"
+   }
+  },
+  {
+   "text": "It remains to identify $e_J$ as the specified open cup/evaluation map. Under the slice adjunction in Step 4, a map into $J=j_*j^*I$ is its restriction into $j^*I$; thus the adjoint of $e_J:Q\\otimes P\\to J$ under $j^*\\dashv Rj_*$ is the evaluation on $U$ after the two counits $j^*Q\\to L^\\vee$ and $j^*P\\to L$. In a local free basis it sends $(f,x)$ to $f(x)$; these formulas commute with change of basis. By the definition of cup as the mate of the tensor of these counits, $e_J$ is exactly\n$$Rj_*L^\\vee\\otimes_A^LRj_*L\\xrightarrow{\\mathrm{cup}}Rj_*(L^\\vee\\otimes_A^LL)\\xrightarrow{Rj_*\\mathrm{ev}}Rj_*A_U.$$\nApply $i^*$ and use Step 7 to obtain the asserted formula. All comparisons are adjunction maps or evaluation maps. Precomposition by a map $L\\to M$ in the Hom factor and its action in the tensor factor satisfy $f(gx)=(f\\circ g)(x)$; hence the identity is natural in $L$ in the usual contravariant/covariant pairing sense. The single sign comes from Step 4 and is independent of $L$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "def-pur-hom-complex",
+    "lem-per-etale-internal-hom-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "08J9 (lemma-internal-hom), section-internal-hom: evaluation and adjunction counits; agent calculation of the stated mate"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-dplus-injective-representative",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-per-etale-closed-sheaf-internal-adjunction",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-per-etale-internal-hom-localization",
+  "lem-pur-ringed-site-injective-mono-restriction",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-pc-cone-short-exact-quasi-iso",
+  "lem-exc-closed-support-triangle",
+  "def-weil-abstract-derived-category",
+  "def-pur-hom-complex",
+  "def-pur-derived-internal-hom",
+  "def-pur-sheaf-hom",
+  "lem-sf-hom-triangulated",
+  "def-weil-pbc-direct-image",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-weil-pbc-kinjective-total-derived",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-exc-closed-ambient",
+  "lem-weil-pbc-triangle-morphism-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JC, 08J9 and 093X, together with etale-cohomology.tex Tag 0A45: explicit comparison of Hom short exact sequences and evaluation on their cone roofs. This boundary-mate formula is agent-supplied, not a quoted Stacks theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
-   "query": "\"RHom\", \"triangle\"",
-   "results": "9 hits; CategoryTheory.Pretriangulated.Triangle.functorHomMk', CategoryTheory.Pretriangulated.Triangle.functorHomMk'_app_hom₁, CategoryTheory.Pretriangulated.Triangle.functorHomMk'_app_hom₂, CategoryTheory.Pretriangulated.Triangle.functorHomMk'_app_hom₃, CategoryTheory.Pretriangulated.Triangle.functorHomMk, CategoryTheory.Pretriangulated.Triangle.functorHomMk_app_hom₁, CategoryTheory.Pretriangulated.Triangle.functorHomMk_app_hom₂, CategoryTheory.Pretriangulated.Triangle.functorHomMk_app_hom₃; digest 5fd79a6bde970402. ",
+   "query": "\"internalHom\", \"triangle\"",
+   "results": "2 hits; CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.right_triangle_components, CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.left_triangle_components; digest aefa358f849b3851. ",
    "date": "2026-10-19",
-   "verdict": "no match: inspected signatures concern abstract Ext boundaries, triangle morphism constructors, ordinary derived adjunctions or algebraic localization; none identifies this sheaf internal-Hom boundary with the displayed cup/evaluation/support-boundary map"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "In a ringed topos the boundary for dualizing the open closed extension triangle transposes to evaluation and the support boundary",
-   "results": "8 hits; AlgebraicGeometry.LocallyRingedSpace.evaluation_eq_zero_iff_notMem_basicOpen, AlgebraicGeometry.RingedSpace.zeroLocus, AlgebraicGeometry.LocallyRingedSpace.Γevaluation_eq_zero_iff_notMem_basicOpen, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.TStructure.t, DerivedCategory.instIsLEObjSingleFunctor, DerivedCategory.isGE_Q_obj_iff; digest 233d9c9c7216430c. ",
-   "date": "2026-10-19",
-   "verdict": "no match: inspected signatures concern abstract Ext boundaries, triangle morphism constructors, ordinary derived adjunctions or algebraic localization; none identifies this sheaf internal-Hom boundary with the displayed cup/evaluation/support-boundary map"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Derived sheaf Hom open closed localization connecting morphism is adjoint to cup product followed by localization boundary",
-   "results": "8 hits; CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived', ModuleCat.Tilde.openToLocalization, CategoryTheory.constantSheafΓAdj, SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp, AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_hom_c_app; digest f170264628f7acd1. ",
-   "date": "2026-10-19",
-   "verdict": "no match: inspected signatures concern abstract Ext boundaries, triangle morphism constructors, ordinary derived adjunctions or algebraic localization; none identifies this sheaf internal-Hom boundary with the displayed cup/evaluation/support-boundary map"
+   "verdict": "no match: inspected search signatures describe ordinary categorical evaluation, Day convolution triangles, or unrelated restriction maps, not the etale localization boundary comparison"
   },
   {
    "tool": "grep",
-   "query": "localization.*evaluat|evaluat.*localization|boundary.*[Cc]up|[Cc]up.*boundary",
-   "results": "12 hits; Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/RingTheory/Unramified/Dedekind.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/DedekindDomain/Dvr.lean, Mathlib/RingTheory/DedekindDomain/Dvr.lean, Mathlib/RingTheory/DedekindDomain/Dvr.lean, Mathlib/RingTheory/DedekindDomain/Dvr.lean, Mathlib/RingTheory/DedekindDomain/Dvr.lean; digest 5d75ed3ab198b1ae. ",
+   "query": "localization.*(boundary|pairing)|evaluation.*(boundary|triangle)|support.*triangle",
+   "results": "1 hits; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; digest ad8e5c48f2517fd6. ",
    "date": "2026-10-19",
-   "verdict": "no match: inspected signatures concern abstract Ext boundaries, triangle morphism constructors, ordinary derived adjunctions or algebraic localization; none identifies this sheaf internal-Hom boundary with the displayed cup/evaluation/support-boundary map"
+   "verdict": "no match: inspected search signatures describe ordinary categorical evaluation, Day convolution triangles, or unrelated restriction maps, not the etale localization boundary comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tensor Hom adjoint of the dual open closed localization boundary is the cup product evaluation composed with the support connecting morphism",
+   "results": "8 hits; TensorProduct.adjoint_map, dualTensorHom, CategoryTheory.ihom.ev_coev_assoc, CategoryTheory.ihom.ihom_adjunction_counit, transpose_dualTensorHom, ModuleCat.monoidalClosedHomEquiv, CategoryTheory.exp.coev_ev, CategoryTheory.exp.coev; digest 7019bd809067c302. ",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected search signatures describe ordinary categorical evaluation, Day convolution triangles, or unrelated restriction maps, not the etale localization boundary comparison"
   },
   {
    "tool": "leanfinder",
-   "query": "The transpose of the boundary in derived internal Hom localization is cup product followed by the support localization boundary",
-   "results": "8 hits; CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, CategoryTheory.ShortComplex.ShortExact.singleδ, CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, DerivedCategory.right_fac_of_isStrictlyLE; digest 4c614740b720128f. ",
+   "query": "For open and closed immersions the internal Hom localization connecting map transposes to cup evaluation followed by the support boundary",
+   "results": "8 hits; AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom_apply, AlgebraicGeometry.IsOpenImmersion.map_ΓIso_hom, AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.IsOpenImmersion.lift_app, AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv; digest e8c3604c79ad62b4. ",
    "date": "2026-10-19",
-   "verdict": "no match: inspected signatures concern abstract Ext boundaries, triangle morphism constructors, ordinary derived adjunctions or algebraic localization; none identifies this sheaf internal-Hom boundary with the displayed cup/evaluation/support-boundary map"
+   "verdict": "no match: inspected search signatures describe ordinary categorical evaluation, Day convolution triangles, or unrelated restriction maps, not the etale localization boundary comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of sheaf Hom complexes commutes with connecting morphisms for a short exact sequence of injective complexes and the derived support sequence",
+   "results": "8 hits; CochainComplex.isKInjective_of_injective_aux, CategoryTheory.ShortComplex.ShortExact.δ_apply, CategoryTheory.ShortComplex.ShortExact.δ_apply', CochainComplex.cm5b.i_f_comp_assoc, CochainComplex.cm5b.fac_assoc, CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply, CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply, CochainComplex.cm5b.i_f_comp; digest 2ffce7e112dd9020. ",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected search signatures describe ordinary categorical evaluation, Day convolution triangles, or unrelated restriction maps, not the etale localization boundary comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-trait-constant-duality",
@@ -90,5 +269,124 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-localization-dual-boundary-pairing",
+  "worker": "stage1",
+  "summary": "Eight steps identify the first-variable localization Hom sequence with the Hom of the injective support sequence, then calculate evaluation on both cone summands. All inputs already exist in the DAG; no new node and no Mathlib leaf is introduced. The finite-free dual identification is proved locally, and all products, unbounded K-flat models, endpoint maps and signs are checked. Reviewer FIX (Q55 maintainer reader): Steps 1, 2, 3, 5 now identify T with the adjoint value E with matching counit, and match the boundaries b and u through the vanishing Hom(X[1],Z')=0 and part (2) of lem-weil-pbc-triangle-morphism-extension, since the cited triangles fix only their first two arrows; Step 5 cites the restriction identification j^*Rj_*L=L.",
+  "blueprint": "Realizes the formal dual-boundary comparison needed in the dimension-one local duality base case of lem-per-artin-gabber-affine-curve through the recorded ancestry; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic resolution, exact-adjunction, tensor-Hom, or support/cone tool on ordinary ringed sites; used only for the explicit boundary calculation, not as a replacement for a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Generic resolution, exact-adjunction, tensor-Hom, or support/cone tool on ordinary ringed sites; used only for the explicit boundary calculation, not as a replacement for a unit step."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic resolution, exact-adjunction, tensor-Hom, or support/cone tool on ordinary ringed sites; used only for the explicit boundary calculation, not as a replacement for a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic resolution, exact-adjunction, tensor-Hom, or support/cone tool on ordinary ringed sites; used only for the explicit boundary calculation, not as a replacement for a unit step."
+   },
+   {
+    "node": "lem-sp-right-adjoint-preserves-injectives",
+    "why": "Generic resolution, exact-adjunction, tensor-Hom, or support/cone tool on ordinary ringed sites; used only for the explicit boundary calculation, not as a replacement for a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Generic resolution, exact-adjunction, tensor-Hom, or support/cone tool on ordinary ringed sites; used only for the explicit boundary calculation, not as a replacement for a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic resolution, exact-adjunction, tensor-Hom, or support/cone tool on ordinary ringed sites; used only for the explicit boundary calculation, not as a replacement for a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Generic resolution, exact-adjunction, tensor-Hom, or support/cone tool on ordinary ringed sites; used only for the explicit boundary calculation, not as a replacement for a unit step."
+   },
+   {
+    "node": "lem-pur-ringed-site-injective-mono-restriction",
+    "why": "Generic resolution, exact-adjunction, tensor-Hom, or support/cone tool on ordinary ringed sites; used only for the explicit boundary calculation, not as a replacement for a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic resolution, exact-adjunction, tensor-Hom, or support/cone tool on ordinary ringed sites; used only for the explicit boundary calculation, not as a replacement for a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-open-closed-short-exact",
+    "why": "Generic resolution, exact-adjunction, tensor-Hom, or support/cone tool on ordinary ringed sites; used only for the explicit boundary calculation, not as a replacement for a unit step."
+   },
+   {
+    "node": "lem-pc-cone-short-exact-quasi-iso",
+    "why": "Generic resolution, exact-adjunction, tensor-Hom, or support/cone tool on ordinary ringed sites; used only for the explicit boundary calculation, not as a replacement for a unit step."
+   },
+   {
+    "node": "lem-exc-closed-support-triangle",
+    "why": "Generic resolution, exact-adjunction, tensor-Hom, or support/cone tool on ordinary ringed sites; used only for the explicit boundary calculation, not as a replacement for a unit step."
+   },
+   {
+    "node": "lem-sf-hom-triangulated",
+    "why": "Generic resolution, exact-adjunction, tensor-Hom, or support/cone tool on ordinary ringed sites; used only for the explicit boundary calculation, not as a replacement for a unit step."
+   },
+   {
+    "node": "lem-pur-hom-kflat-into-kinjective",
+    "why": "Generic resolution, exact-adjunction, tensor-Hom, or support/cone tool on ordinary ringed sites; used only for the explicit boundary calculation, not as a replacement for a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic resolution, exact-adjunction, tensor-Hom, or support/cone tool on ordinary ringed sites; used only for the explicit boundary calculation, not as a replacement for a unit step."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic resolution, exact-adjunction, tensor-Hom, or support/cone tool on ordinary ringed sites; used only for the explicit boundary calculation, not as a replacement for a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic: Hom in the derived category into a K-injective complex equals Hom in the homotopy category; used to identify T with the adjoint value and to show uniqueness of the boundaries."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic: termwise adjunctions pass to homotopy categories; used for i_* -| i^!_0 and j^* -| j_* on complexes."
+   },
+   {
+    "node": "lem-weil-pbc-triangle-morphism-extension",
+    "why": "Generic triangulated-category lemma: third arrow and morphism of triangles are unique when Hom(X[1],Z')=0; used to match the specified boundaries b and u with the injective-model roofs."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-dplus-injective-representative",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-pur-ringed-site-injective-mono-restriction",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-pc-cone-short-exact-quasi-iso",
+  "lem-exc-closed-support-triangle",
+  "lem-sf-hom-triangulated",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-triangle-morphism-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-30257ac85",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-30257ac85 (reviewer sub-agent of L); spot-checked: Verdict FIX: the statement is true and unchanged, and the proof is correct apart from three repairable gaps, all repaired in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-localization-dual-boundary-pairing.json. Read: the item in full (8 steps), all 12 stmt_deps and 26 proof_deps statements, Stacks 08JC with its proof, 0A45 with its proof, and the tag map for 093X, 08J9, 0A96, 0A97, 09XQ. No SGA is used; no new nodes; no duplicate found in the DAG. The statement's hypotheses match lem-per-etale-internal-hom-localization (K in D^b, A_X in D^+, A finite commutative). Edge cases checked: Z empty, U empty, rank 0, char 2, finite non-field A. Hand checks: the step-6 evaluation chain-map and shifted-cone-summand signs are correct; the step-4 identification of the Hom short exact sequences is correct. Fault 1 (E5): lem-exc-closed-support-triangle and the localization lemma fix only the first two arrows of their triangles, yet steps 2 and 5 equated their boundaries b and u with the injective-model roofs. Fix: Hom_D(S[1],J)=0 and Hom_D(H_S[1],Q)=0 (K-injective targets, j^*S=0, j^*H_S=0), then part (2) of lem-weil-pbc-triangle-morphism-extension. Fault 2 (C4): step 1 identified T=i^!_0 I with E, the adjoint Ri^!A_X of lem-exc-closed-ambient, citing only the right-derived lemma, which computes R(i^!_0) and not the adjoint. Fix: a Yoneda argument via lem-weil-pbc-kinjective-hom-derived and lem-weil-pbc-termwise-adjunction-homotopy, with the support inclusion going to the counit. Fault 3 (C1): step 5 used j^*Rj_*L=L with no citation; fix cites lem-weil-pbc-etale-inverse-image-restriction. Step 3 now takes the roof with sign -p so the triangle is distinguished; the sign is absorbed in epsilon. The 17 declared tool_uses are accepted, plus 3 new generic ones (kinjective-hom-derived, termwise-adjunction-homotopy, triangle-morphism-extension). Every step is under 2000 characters, proof_deps is the union of uses, and there is no cycle.; 1 file(s) fixed by the reviewer"
  }
 }
