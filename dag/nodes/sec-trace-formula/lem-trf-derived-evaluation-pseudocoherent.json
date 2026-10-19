@@ -14,9 +14,125 @@
   "lem-trf-derived-evaluation-canonical-map",
   "def-weil-pbc-bounded-derived-subcategories"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a bounded-above complex $P$ of finite free $R$-modules representing $K$, by [def-pc-ring-pseudo-coherent-complex], and an integer $u$ with $P^s=0$ for $s>u$. The finite-injective-dimension hypothesis, in the explicit meaning given in the statement, supplies a bounded complex of injective modules $I$ representing $M$; fix $a\\le b$ with $I^p=0$ outside $[a,b]$. By [lem-weil-pbc-ring-modules-enough-injectives] the abelian category of $R$-modules has enough injectives. Apply [lem-weil-pbc-dplus-injective-representative] to $L\\in D^+(R)$ to obtain a bounded-below complex of injectives $J$ representing $L$, with $J^j=0$ for $j<\\ell$. Both $I$ and $J$ are K-injective by the bounded-below-injective assertion of that same node. All bounds are bounds on terms of these chosen complexes, not just on their cohomology.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-weil-pbc-ring-modules-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A68, proof, choices of representatives; derived.tex Tags 013K and 070J"
+   }
+  },
+  {
+   "text": "Each $P^s$ is flat: after choosing a finite basis, tensoring with $P^s$ is a finite direct sum of the identity functor on modules, and hence preserves exact sequences componentwise. Consequently [lem-pc-module-bounded-flat-kflat] makes $P$ K-flat. Use the equivalent quasi-isomorphism criterion of [def-pc-module-kflat-complex] to express this in the categorical K-flat convention. Then [lem-pc-source-kflat-module-tensor-model], together with the symmetry $x\\otimes y\\mapsto(-1)^{|x||y|}y\\otimes x$, computes $R\\operatorname{Hom}(L,M)\\otimes_R^{\\mathbf L}K$ by $T=\\operatorname{Tot}(H\\otimes_R P)$, where $H=\\operatorname{Hom}_R^\\bullet(J,I)$. No K-flatness of $H$ is required.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "def-pc-module-kflat-complex",
+    "lem-pc-source-kflat-module-tensor-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064K, lemma-derived-tor-quasi-isomorphism; Tag 0A68, displayed total tensor model"
+   }
+  },
+  {
+   "text": "Specialize [def-pur-derived-internal-hom] to the one-object ringed site with ring $R$. Because $I,J$ are K-injective, it identifies $H=\\operatorname{Hom}_R^\\bullet(J,I)$ with a representative of $R\\operatorname{Hom}_R(L,M)$, $A=\\operatorname{Hom}_R^\\bullet(P,J)$ with a representative of $R\\operatorname{Hom}_R(K,L)$, and $B=\\operatorname{Hom}_R^\\bullet(A,I)$ with a representative of the target. These are the product total Hom complexes of [def-sc-module-total-hom-complex], with differential $d(f)=d_{\\rm target}f-(-1)^{|f|}fd_{\\rm source}$.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A68, first displayed map of complexes; Tag 0A5W, section-RHom; sites-cohomology.tex Tag 08J7"
+   }
+  },
+  {
+   "text": "Fix a degree $n$. A potentially nonzero triple component is indexed by $p+r+s=n$ and has source $\\operatorname{Hom}_R(J^{-r},I^p)\\otimes_R P^s$. Necessarily $a\\le p\\le b$, $r\\le-\\ell$, and $s\\le u$, whence $n-b+\\ell\\le s\\le u$ and $n-b-u\\le r\\le-\\ell$. Thus there are finitely many such triples. Moreover $A^k=\\prod_s\\operatorname{Hom}_R(P^s,J^{s+k})$ has only $\\ell-k\\le s\\le u$ potentially nonzero factors. Hence every product that occurs here is a finite product after zero factors are removed, and so equals the finite direct sum. Using the component projections and inclusions gives the identifications\n$$T^n\\cong\\bigoplus_{p+r+s=n}\\operatorname{Hom}_R(J^{-r},I^p)\\otimes_R P^s,$$\n$$B^n\\cong\\bigoplus_{p+r+s=n}\\operatorname{Hom}_R(\\operatorname{Hom}_R(P^s,J^{-r}),I^p),$$\nwith the finite ranges just proved. The identifications use only finite distributivity of tensor over sums and the fact that a linear map from a finite direct sum is the tuple of its restrictions.",
+   "uses": [
+    "def-sc-module-total-hom-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A68, proof, component description and final finite-support argument"
+   }
+  },
+  {
+   "text": "Define $E:T\\to B$ on the triple summand $(p,r,s)$ to be\n$$g\\otimes x\\longmapsto\\bigl(f\\longmapsto\\epsilon_{p,r,s}\\,g(f(x))\\bigr),\\qquad\\epsilon_{p,r,s}=(-1)^{s(r+1)},$$\nwhere $g:J^{-r}\\to I^p$, $x\\in P^s$, and $f:P^s\\to J^{-r}$. Extend by the finite sum in Step 4 and by precomposing with the corresponding projection of $A^{p-n}$. This is a chain map. Indeed, substituting the Hom differential and total tensor differential of [def-sc-module-total-hom-complex, def-pc-tensor-complex-sheaves], equality for the terms involving $d_I,d_J,d_P$, respectively, reduces to\n$$\\epsilon_{p,r,s}=\\epsilon_{p+1,r,s},\\qquad\\epsilon_{p,r,s}=(-1)^s\\epsilon_{p,r-1,s},\\qquad\\epsilon_{p,r,s+1}=(-1)^{r+1}\\epsilon_{p,r,s}.$$\nAll three follow immediately from the displayed exponent. Thus there is no unverified assertion about compatibility with differentials.",
+   "uses": [
+    "def-sc-module-total-hom-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A60, lemma-evaluate-and-more, equations alpha and beta and the three sign recurrences"
+   }
+  },
+  {
+   "text": "The localized $E$ is the specified canonical evaluation, rather than an arbitrary map between the two objects. To check this, transpose as in [lem-trf-derived-evaluation-canonical-map]. Write $h=p+r$, $k=-r-s$, so $g$ has Hom degree $h$ and $f$ has Hom degree $k$. In the composite $A\\otimes H\\otimes P\\to I$, moving $f$ past $g$ contributes $(-1)^{kh}$; the two evaluations then give $g(f(x))$. The ordinary Hom transposition from $A\\otimes T$ to $\\operatorname{Hom}(A,I)$ contributes $(-1)^{kn}$, where $n=h+s$. Thus the adjoint sends $g\\otimes x$ to $f\\mapsto(-1)^{k(h+n)}g(f(x))=(-1)^{ks}g(f(x))$. Since $ks=(-r-s)s\\equiv s(r+1)\\pmod2$, this is exactly Step 5. Here evaluation with the Hom factor first is $f\\otimes x\\mapsto f(x)$, as follows directly from the Hom differential. Choose a K-flat resolution of $A$ using [lem-pc-kflat-resolution] on the one-object site. These computations also hold after precomposing $A$ with that resolution: both sides simply replace $f$ by its image in $A$. Since $P$ is K-flat and $I,J$ are K-injective, the tensor and Hom models in Steps 2 and 3 compute precisely these derived composites and their transpose. This verifies the canonical normalization, including its sign, on the chosen models.",
+   "uses": [
+    "lem-trf-derived-evaluation-canonical-map",
+    "def-pur-derived-internal-hom",
+    "lem-pc-source-kflat-module-tensor-model",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0A67 and 0A61, lemma-internal-hom-evaluate and remark-sign-explanation, direct transposition computation"
+   }
+  },
+  {
+   "text": "For each triple, put $V=J^{-r}$ and $W=I^p$. The unsigned map $c:\\operatorname{Hom}_R(V,W)\\otimes_R P^s\\to\\operatorname{Hom}_R(\\operatorname{Hom}_R(P^s,V),W)$, $c(g\\otimes x)(f)=g(f(x))$, is an isomorphism by the following explicit finite-basis argument. Choose a finite basis $(e_i)$ of $P^s$ and let $\\iota_i:V\\to\\operatorname{Hom}_R(P^s,V)$ send $v$ to the map taking $e_j$ to $\\delta_{ij}v$. The inverse sends $\\beta$ to $\\sum_i(\\beta\\circ\\iota_i)\\otimes e_i$. Composing with $c$ gives $f\\mapsto\\sum_i\\beta(\\iota_i(f(e_i)))=\\beta(f)$. Conversely, on $g\\otimes x$, writing $x=\\sum_i x_i e_i$ gives $\\sum_i x_i g\\otimes e_i=g\\otimes x$. Thus both composites are identities. Multiplying $c$ by the unit $\\epsilon_{p,r,s}\\in\\{1,-1\\}$ preserves invertibility. Step 4 identifies $E^n$ with a finite direct sum of these invertible maps, so $E^n$ is invertible for every integer $n$.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A68, proof, maps c_{p,r,s}; finite-free specialization with the inverse written explicitly"
+   }
+  },
+  {
+   "text": "The componentwise inverses of $E$ form a chain map: from $d_BE=Ed_T$, multiply in consecutive degrees by the two component inverses to obtain $E^{-1}d_B=d_TE^{-1}$. Hence $E$ is an isomorphism of complexes. Localization into $D(R)$ preserves its inverse by functoriality [def-weil-abstract-derived-category]. With the identifications of Steps 2 and 3 and the normalization of Step 6, its localization is exactly the canonical morphism in the statement. It is therefore an isomorphism.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A68, conclusion after the finite-support argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-weil-pbc-ring-modules-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-pc-module-bounded-flat-kflat",
+  "def-pc-module-kflat-complex",
+  "lem-pc-source-kflat-module-tensor-model",
+  "def-pur-derived-internal-hom",
+  "def-sc-module-total-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-trf-derived-evaluation-canonical-map",
+  "lem-pc-kflat-resolution",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A68 (lemma-internal-hom-evaluate-isomorphism), case (2), with the explicit signs of Tags 0A60 and 0A61"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +175,45 @@
    "results": "0 hits; top=[]; subdirectory=; note=; digest=4f53cda18c2baa0c",
    "date": "2026-10-18",
    "verdict": "no match: these hits give general functor, support or ordinary module infrastructure, not this derived evaluation comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"internalHom\"",
+   "results": "0 hits; top=[]; subdirectory=; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern ordinary tensor-Hom equivalences, tensor totalization, Ext, Tor or support; none states this derived double-Hom evaluation isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|finite.*injective.*dimension|internalHom.*evaluation",
+   "results": "0 hits; top=[]; subdirectory=Algebra/Homology; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern ordinary tensor-Hom equivalences, tensor totalization, Ext, Tor or support; none states this derived double-Hom evaluation isomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived double Hom tensor evaluation isomorphism for bounded above finite free complex and bounded injective target",
+   "results": "8 hits; top=['dualTensorHomEquivOfBasis', 'lTensorHomEquivHomLTensor', 'dualTensorHomEquiv', 'CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc', 'CategoryTheory.InjectiveResolution.isoRightDerivedObj', 'transpose_dualTensorHom', 'HomologicalComplex.doubleXIso₀', 'HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_symm_apply']; subdirectory=; note=; digest=ad0a94650aa1a82d",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern ordinary tensor-Hom equivalences, tensor totalization, Ext, Tor or support; none states this derived double-Hom evaluation isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudo coherent complex K, bounded below L and finite injective dimension M imply RHom(L,M) tensor K is isomorphic to RHom(RHom(K,L),M)",
+   "results": "8 hits; top=['DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective', \"CategoryTheory.Tor'_obj_obj\", 'CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE', 'CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat', 'DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE', \"CategoryTheory.Tor'_map_app\", 'DerivedCategory.left_fac_of_isStrictlyGE', 'CategoryTheory.Tor_obj']; subdirectory=; note=; digest=698ad4dd2232fd9a",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern ordinary tensor-Hom equivalences, tensor totalization, Ext, Tor or support; none states this derived double-Hom evaluation isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded above finite free complex P, bounded below J, and bounded injective I make the canonical total tensor to double Hom map a chain isomorphism",
+   "results": "8 hits; top=['HomologicalComplex.HasGoodTensor₁₂', 'HomologicalComplex.HasGoodTensor₂₃', 'HomologicalComplex₂.totalFlipIsoX', 'HomologicalComplex₂.ιTotal_totalFlipIso_f_hom', 'HomologicalComplex₂.XXIsoOfEq_hom_ιTotal', 'HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX', 'HomologicalComplex.ι_mapBifunctorFlipIso_hom', 'HomologicalComplex.ιTensorObj']; subdirectory=; note=; digest=d293eecc5057c02f",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern ordinary tensor-Hom equivalences, tensor totalization, Ext, Tor or support; none states this derived double-Hom evaluation isomorphism"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-derived-evaluation-finite-injective",
@@ -96,5 +247,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-derived-evaluation-pseudocoherent",
+  "worker": "stage1",
+  "summary": "Checked Tag 0A68(2) and the actual statements of all cited nodes; retained the statement and supplied the bounded representative choices, finite index bounds, signed canonical evaluation chain map, and explicit finite-basis inverse. No new nodes are necessary.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: Canonical unbounded biduality in the second paragraph of the proof of dualizing.tex Tag 0A7C, lemma-dualizing. Supporting bounded case: Tag 0A68 (2), applied to each pseudo-coherent truncation in the proof of Tag 0A69. This split supplies the bounded pseudo-coherent case by the representative and finite-support proof of Tag 0A68(2).",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Applies the generic bounded-above flat-complex K-flat criterion to the finite-free model P; no node in this unit supplies this algebraic tool."
+   },
+   {
+    "node": "lem-pc-source-kflat-module-tensor-model",
+    "why": "Computes the ordinary-module derived tensor using P K-flat and an arbitrary other factor; no node in this unit supplies this generic comparison."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Provides a K-flat replacement of the inner Hom complex to check the adjoint formula after deriving tensor; no node in this unit supplies this generic resolution theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-aa7c929be",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-aa7c929be (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks more-algebra 0A68(2) (l.28562), 0A60, 0A61 and 0A67, and read the statement of every cited node. There are no new nodes. The statement is unchanged and faithful: commutative R, K pseudo-coherent (bounded-above finite free), L in D^+, M a bounded complex of injectives. The coefficient category is ordinary R-modules throughout. I re-derived the step-4 index bounds (n-b+l<=s<=u, n-b-u<=r<=-l, and A^k with factors only for l-k<=s<=u), so every product in T^n and B^n is finite. I checked the step-5 chain-map property independently, term by term for the d_I, d_J and d_P terms. eps=(-1)^{s(r+1)} meets the three recurrences and equals Stacks' (-1)^{r+qr} after renaming. I checked the step-6 transpose sign, (-1)^{kh+kn}=(-1)^{ks}, which agrees with 0A61; the K-flat replacement of A is handled because I is K-injective. I checked both composites of the step-7 finite-basis inverse. Small case R=Z, K=L=Z, M=Q/Z works, as do the zero-ring and empty-range cases. Duplicate search (0A68, 0A60, evaluation and pseudo-coherent) found only the parent 0A69 node, which cites the item, and the canonical-map node. There is no cycle. I accept the tool_uses lem-pc-module-bounded-flat-kflat, lem-pc-source-kflat-module-tensor-model and lem-pc-kflat-resolution as generic module tools. No SGA is cited and no fixes are needed."
  }
 }
