@@ -84,6 +84,51 @@ noncomputable def coefficientRightMate
     TX.obj (J.obj K) ⟶ G'.obj (TY.obj K) :=
   adj.homEquiv _ _ (b.inv.app (J.obj K) ≫ TY.map (adjJ.counit.app K))
 
+private theorem coefficientRightMate_conjugation
+    {C : Type uC} [Category.{vC} C] {D : Type uD} [Category.{vD} D]
+    {C' : Type uC'} [Category.{vC'} C'] {D' : Type uD'} [Category.{vD'} D']
+    (F : C ⥤ D) (F' : C' ⥤ D') (TX : C ⥤ C') (TY : D ⥤ D')
+    (G J : D ⥤ C) (G' J' : D' ⥤ C')
+    (adjG : F ⊣ G) (adjJ : F ⊣ J) (adjG' : F' ⊣ G') (adjJ' : F' ⊣ J')
+    (b : F ⋙ TY ≅ TX ⋙ F') (K : D) :
+    coefficientRightMate F F' TX TY b J' J adjJ' adjJ K =
+      TX.map ((adjG.rightAdjointUniq adjJ).inv.app K) ≫
+        coefficientRightMate F F' TX TY b G' G adjG' adjG K ≫
+        (adjG'.rightAdjointUniq adjJ').hom.app (TY.obj K) := by
+  apply (adjJ'.homEquiv _ _).symm.injective
+  change _ = F'.map _ ≫ adjJ'.counit.app _
+  rw [coefficientRightMate, Equiv.symm_apply_apply]
+  simp only [Functor.map_comp, Category.assoc,
+    Adjunction.rightAdjointUniq_hom_app_counit]
+  have hm := (adjG'.homEquiv _ _).symm_apply_apply
+    (b.inv.app (G.obj K) ≫ TY.map (adjG.counit.app K))
+  change F'.map (coefficientRightMate F F' TX TY b G' G adjG' adjG K) ≫
+    adjG'.counit.app (TY.obj K) = _ at hm
+  rw [hm, ← Category.assoc]
+  have hn := b.inv.naturality ((adjG.rightAdjointUniq adjJ).inv.app K)
+  simp only [Functor.comp_map] at hn
+  rw [hn]
+  simp only [Category.assoc]
+  rw [← TY.map_comp, Adjunction.rightAdjointUniq_inv_app,
+    Adjunction.rightAdjointUniq_hom_app_counit]
+
+private theorem coefficientRightMate_naturality
+    {C : Type uC} [Category.{vC} C] {D : Type uD} [Category.{vD} D]
+    {C' : Type uC'} [Category.{vC'} C'] {D' : Type uD'} [Category.{vD'} D']
+    (F : C ⥤ D) (F' : C' ⥤ D') (TX : C ⥤ C') (TY : D ⥤ D')
+    (G : D ⥤ C) (G' : D' ⥤ C') (adjG : F ⊣ G) (adjG' : F' ⊣ G')
+    (b : F ⋙ TY ≅ TX ⋙ F') (K L : D) (k : K ⟶ L) :
+    TX.map (G.map k) ≫ coefficientRightMate F F' TX TY b G' G adjG' adjG L =
+      coefficientRightMate F F' TX TY b G' G adjG' adjG K ≫ G'.map (TY.map k) := by
+  unfold coefficientRightMate
+  rw [← adjG'.homEquiv_naturality_left, ← adjG'.homEquiv_naturality_right]
+  congr 1
+  have hn := b.inv.naturality (G.map k)
+  simp only [Functor.comp_map] at hn
+  rw [← Category.assoc, hn]
+  simp only [Category.assoc]
+  rw [← TY.map_comp, ← TY.map_comp, adjG.counit_naturality k]
+
 /-- Coefficient comparison for the given compact-support functors on the actual
 admissible coefficient categories. The source explicitly assumes that scalar extension
 supplies TX and TY on Dctf, and gives F, F' and their right adjoints; these are data here.
@@ -192,7 +237,14 @@ theorem det_sp_unique_adjoint_coefficients
       TX.map (G.map k) ≫ coefficientRightMate F F' TX TY b G' G adjG' adjG L =
         coefficientRightMate F F' TX TY b G' G adjG' adjG K ≫
           G'.map (TY.map k)) := by
-  sorry
+  have hc := coefficientRightMate_conjugation F F' TX TY G J G' J'
+    adjG adjJ adjG' adjJ' b
+  refine ⟨hc, ?_, ?_, ?_⟩
+  · intro K h
+    rw [hc K]
+    infer_instance
+  · exact coefficientRightMate_naturality F F' TX TY J J' adjJ adjJ' b
+  · exact coefficientRightMate_naturality F F' TX TY G G' adjG adjG' b
 
 /-- The coefficient-chain clause of the same node, for the same geometric morphism
 and three admissible coefficient categories. The two associators are supplied by
@@ -247,6 +299,28 @@ theorem det_sp_unique_adjoint_coefficients_chain
           J2.map (aY.hom.app K) =
         aX.hom.app (J0.obj K) ≫
           coefficientRightMate F0 F2 TX02 TY02 b02 J2 J0 adjJ2 adjJ0 K := by
-  sorry
+  intro h K
+  have h01 := coefficientRightMate_conjugation F0 F1 TX01 TY01 G0 J0 G1 J1
+    adjG0 adjJ0 adjG1 adjJ1 b01 K
+  have h12 := coefficientRightMate_conjugation F1 F2 TX12 TY12 G1 J1 G2 J2
+    adjG1 adjJ1 adjG2 adjJ2 b12 (TY01.obj K)
+  have h02 := coefficientRightMate_conjugation F0 F2 TX02 TY02 G0 J0 G2 J2
+    adjG0 adjJ0 adjG2 adjJ2 b02 K
+  rw [h01, h12, h02]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← TX12.map_comp_assoc ((adjG1.rightAdjointUniq adjJ1).hom.app _)
+    ((adjG1.rightAdjointUniq adjJ1).inv.app _)]
+  simp only [Iso.hom_inv_id_app, Functor.map_id, Category.id_comp]
+  have hy := (adjG2.rightAdjointUniq adjJ2).hom.naturality (aY.hom.app K)
+  simp only [Functor.comp_obj] at hy
+  rw [← hy]
+  have hh := congrArg
+    (fun t ↦ t ≫ (adjG2.rightAdjointUniq adjJ2).hom.app (TY02.obj K)) (h K)
+  simp only [Category.assoc] at hh
+  rw [hh]
+  have hn := aX.hom.naturality ((adjG0.rightAdjointUniq adjJ0).inv.app K)
+  simp only [Functor.comp_map] at hn
+  rw [← Category.assoc, hn]
+  simp only [Category.assoc]
 
 end CategoryTheory
