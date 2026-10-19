@@ -17129,3 +17129,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:32 L: merged deliver/A2/Sheaf.Paper.ExceptionalSiteRealization (stage 3; reviewer PASS; first push; landing 20261019T093237-L-2283752 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:32 L: merged deliver/A3/Sheaf.Paper.PurityFiniteSetting (stage 3; reviewer PASS; first push; landing 20261019T093239-L-2284168 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:32 L: merged deliver/A3/Sheaf.Paper.TraceGraphCorrespondence (stage 3; reviewer PASS; first push; landing 20261019T093240-L-2284547 (proof); batch 20261019T093237; modules 1; new nodes 0)
+- 09:32 L: merged deliver/A5/Sheaf.AlgebraicGeometry.AbsoluteFrobeniusCoefficientNaturality (stage 3; reviewer PASS; first push; landing 20261019T093241-L-2284933 (proof); batch 20261019T093237; modules 1; new nodes 0)

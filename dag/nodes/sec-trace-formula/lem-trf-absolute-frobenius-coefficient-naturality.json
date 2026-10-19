@@ -21,59 +21,70 @@
  ],
  "proof": [
   {
-   "text": "For $b=0$, both absolute-Frobenius pullbacks are the identity and the canonical coefficient comparison for the identity map is the identity. Since $\\tau_R^{(0)}=\\operatorname{id}$ by definition, both sides of the required equation are the identity of $TK$.",
+   "text": "For each exponent b, compare the relative-Frobenius site isomorphisms selected by absoluteFrobenius_proEtale_trivialization_pullback for the two coefficient rings. Their first projections are both the b-fold Frobenius on the site object, and their second projections are its structure map. The fibre-product universal property therefore identifies the two site isomorphisms, including at b=0. This is the private helper frobeniusSiteIso_eq.",
    "uses": [
-    "det-prop-scalar-six-pullback"
+    "lem-pur-frobenius-trivialization-pullback",
+    "def-pc-fibre-product"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-trf-absolute-frobenius-site.proof.md",
-    "place": "Final proof paragraph, convention $b=0$ and identity comparison"
+    "place": "Final proof paragraph (paragraph 4), relative-Frobenius section maps, passage to exact inverse image, and iterates. Agent-formulated scalar-extension coherence, not a verbatim Stacks theorem. Geometric input: Stacks Tag 0F6W, lemma-relative-frobenius-weakly-etale, in literature/stacks-project/more-morphisms.tex."
    }
   },
   {
-   "text": "Consider $b=1$. For every weakly etale object $v:V\\to X$, the relative Frobenius $r_V=(F_V,v):V\\to V\\times_{X,F_X}X$ is the canonical isomorphism used to define the site trivialization in [lem-trf-absolute-frobenius-site]. The module version of that construction is exact and is induced termwise on complexes, as recorded in [lem-pur-frobenius-trivialization-pullback]. Choose a K-flat resolution $P\\to K$ using [lem-pur-derived-change-of-rings]. The comparison $c_{F_X,P}$ is represented by the coefficient-change pullback comparison of [det-prop-scalar-six-pullback] (1), after the finite discrete coefficient identifications of [lem-weil-pbc-finite-discrete-condensed-ring-constant] and [lem-weil-pbc-finite-discrete-scheme-ring-constant]. On each site object and each pure tensor $x\\otimes b$ its two composites to $P(V)\\otimes_A B$ are both restriction along $r_V$ followed by $x\\otimes b\\mapsto r_V^*(x)\\otimes b$: the first applies $c_{F_X,P}$ and then the $A$-trivialization, while the second applies the $B$-trivialization to the same relative-Frobenius restriction. The equality extends from pure tensors to the tensor complex and is preserved by differentials; exactness and localization at quasi-isomorphisms then give $T(\\tau_A^{(1)}{}_K)\\circ c_{F_X,K}=\\tau_B^{(1)}{}_{TK}$.",
+   "text": "Write R for ordinary restriction along the constant-ring map and P_A,P_B for the ordinary Frobenius pullbacks. The canonical comparison beta:P_A R -> R P_B is the adjoint transpose of the identity-on-sections direct-image comparison d. Under the A-pullback adjunction the adjunct of beta followed by R(tau_B) is R(eta_B) followed by d and by the direct image of R(tau_B). Naturality of d rewrites this as R(eta_B followed by push_B(tau_B)) followed by d. The section normalization for d is identity; the section-unit normalizations for tau_A and tau_B then give the same restriction along the inverse site isomorphism of Step 1. Faithfulness of sections and the adjunction hom bijection prove beta followed by R(tau_B) = tau_A R. This is moduleRestriction_trivialization.",
    "uses": [
-    "lem-trf-absolute-frobenius-site",
     "lem-pur-frobenius-trivialization-pullback",
-    "lem-pur-derived-change-of-rings",
-    "det-prop-scalar-six-pullback",
-    "lem-weil-pbc-finite-discrete-condensed-ring-constant",
-    "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-trf-absolute-frobenius-site.proof.md",
-    "place": "Final proof paragraph, relative-Frobenius section maps and passage to exact inverse image"
+    "place": "Final proof paragraph (paragraph 4), relative-Frobenius section maps, passage to exact inverse image, and iterates. Agent-formulated scalar-extension coherence, not a verbatim Stacks theorem. Geometric input: Stacks Tag 0F6W, lemma-relative-frobenius-weakly-etale, in literature/stacks-project/more-morphisms.tex."
    }
   },
   {
-   "text": "For arbitrary $b$, use the multiplicative-iterate clause of [lem-trf-absolute-frobenius-site] and the same clause in [lem-pur-frobenius-trivialization-pullback]: under the canonical composition identification, $\\tau_R^{(b+1)}$ is the composite of $\\tau_R^{(1)}$ with the pullback of $\\tau_R^{(b)}$ (equivalently, the $(b+1)$-fold iterate of the one-step trivialization). The coefficient comparison in [det-prop-scalar-six-pullback] (1) is compatible with composition of scheme maps, so $c_{F_X^{b+1},K}$ is the composite of the one-step comparison and the comparison for the $b$-fold pullback, with the coefficient-change comparison inserted at each stage. In the square expressing the $b$-case, whisker the already proved one-step square by the relevant pullback functors; paste the two commuting squares and use naturality of the one-step trivialization. The outer rectangle has top edge $c_{F_X^{b+1},K}$ and vertical edges the two iterated trivializations, hence is exactly the desired equation for $b+1$ after cancelling the canonical composition isomorphisms. Induction proves the displayed equality for every $b\\geq0$. The argument only used K-flat resolutions to compute derived change of rings and never imposed flatness or Tor-amplitude on $B$ or $K$.",
+   "text": "All functors in the restriction square are exact. Apply the already proved CategoryTheory.Functor.mapDerivedCategorySquareIso_hom_app_id (WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars) to Step 2. Its descended square is by definition the inverse of proEtaleRingRestrictionDerivedPullback, and its identity comparisons give exactly the two proEtaleFrobeniusDerivedIso trivializations used by coefficientFrobeniusTrivialization. Thus the same restriction square commutes on the ordinary unbounded derived categories. This uses the exact localization API and needs no K-flat representative.",
    "uses": [
     "lem-trf-absolute-frobenius-site",
-    "lem-pur-frobenius-trivialization-pullback",
-    "det-prop-scalar-six-pullback",
-    "lem-pur-derived-change-of-rings"
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-localization-universal-property"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-trf-absolute-frobenius-site.proof.md",
-    "place": "Final proof paragraph, multiplicative iterates"
+    "place": "Final proof paragraph (paragraph 4), relative-Frobenius section maps, passage to exact inverse image, and iterates. Agent-formulated scalar-extension coherence, not a verbatim Stacks theorem. Geometric input: Stacks Tag 0F6W, lemma-relative-frobenius-weakly-etale, in literature/stacks-project/more-morphisms.tex."
+   }
+  },
+  {
+   "text": "Let T be derived scalar extension, left adjoint to exact derived restriction R. By definition the inverse of directImageScalarPullbackIso is the scalar-adjunction mate of the restriction comparison of Step 3. Expanding that mate gives T(P_A(eta)) followed by T(beta) and the counit at P_B(TK). Compose with tau_B. Counit naturality moves tau_B inside T R; Step 3 replaces beta followed by R(tau_B) by tau_A R. Naturality of tau_A moves eta past it, and the triangle identity reduces T(eta) followed by the counit to identity. Hence inverse(c) followed by tau_B equals T(tau_A). Cancel inverse(c) to obtain c followed by T(tau_A) = tau_B. The private helper scalarMate_trivialization proves this generic mate calculation. It applies directly to every b, without an induction or a flatness hypothesis.",
+   "uses": [
+    "def-sp-constant-scalar-pullback-comparison",
+    "def-weil-pbc-four-corners",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-trf-absolute-frobenius-site.proof.md",
+    "place": "Final proof paragraph (paragraph 4), relative-Frobenius section maps, passage to exact inverse image, and iterates. Agent-formulated scalar-extension coherence, not a verbatim Stacks theorem. Geometric input: Stacks Tag 0F6W, lemma-relative-frobenius-weakly-etale, in literature/stacks-project/more-morphisms.tex."
    }
   }
  ],
  "proof_deps": [
-  "det-prop-scalar-six-pullback",
-  "lem-trf-absolute-frobenius-site",
   "lem-pur-frobenius-trivialization-pullback",
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
-  "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+  "def-pc-fibre-product",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-trf-absolute-frobenius-site",
+  "lem-weil-pbc-localization-universal-property",
+  "def-sp-constant-scalar-pullback-comparison",
+  "def-weil-pbc-four-corners",
+  "def-weil-pbc-adjunction-mate"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-trf-absolute-frobenius-site.proof.md",
-  "place": "Final proof paragraph, expanded coefficient calculation and induction on the iterates"
+  "place": "Final proof paragraph: projection uniqueness, the section-unit normalized restriction square, exact derived descent, and scalar-adjunction mates; fully written in Lean by A5."
  },
  "mathlib_searches": [
   {
@@ -161,11 +172,7 @@
  },
  "tool_uses": [
   "lem-trf-absolute-frobenius-site",
-  "lem-pur-frobenius-trivialization-pullback",
-  "lem-pur-derived-change-of-rings",
-  "det-prop-scalar-six-pullback",
-  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
-  "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+  "lem-pur-frobenius-trivialization-pullback"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -197,5 +204,15 @@
   "group": "Q60",
   "result": "pass",
   "note": "Re-delivery after H4 RETURN 16329fe8. Diff vs prior snapshot: def-sp-constant-scalar-pullback-comparison added to stmt_deps (no cycle; closure of 417 nodes excludes the item), DirectImageScalarExchange imported, all 7 duplicate decls (frobeniusCoefficientChange/Pull/Square/... incl. 3 unowned sorries) deleted, theorem now (directImageScalarPullbackIso φ F^b).hom.app K ≫ (directImageScalarExtension φ X).map (τ_A b).hom.app K = (τ_B b).hom.app (T K), exactly as prescribed; statement/proof/source/blueprint unchanged; dep record byte-identical to live. Clauses, direction of c (λ_f: S⋙f_B^* ≅ f_A^*⋙S) and quantifiers match; no flatness/Tor binders; edge cases b=0, empty X, A=0⇒B=0, φ=id, non-flat Z/p²→Z/p covered. τ = proEtaleFrobeniusDerivedIso of the uniquely pinned tau (.choose; unit/section equation + r projection). Docstrings carry source place, blueprint tag and 3 steps; lean.statement verbatim. Only citer lem-trf-scheme-galois-coefficient-change uses the same declarations. nt_compile --json clean (5.8 s, rc 0)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261019T093241-L-2284933",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
