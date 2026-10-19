@@ -47,6 +47,8 @@ def _load(root, families):
         return None
     data = read()
     if data is None:
+        data = _recent(root, directory, signature, suffix, commit, families)
+    if data is None:
         # One builder for all commits/configurations, avoiding a cold-cache herd.
         with (directory / 'library-builder.lock').open('a') as lock:
             fcntl.flock(lock, fcntl.LOCK_EX)
@@ -62,10 +64,32 @@ def _load(root, families):
                     os.replace(tmp, filename)
                 finally:
                     pathlib.Path(tmp).unlink(missing_ok=True)
-    if git(root, 'rev-parse', '--verify', 'origin/sheaf-dag').decode().strip() != commit:
+    if data['commit'] == commit and git(root, 'rev-parse', '--verify', 'origin/sheaf-dag').decode().strip() != commit:
         return load(root, families)
     _MEM[key] = data
     return data
+
+# 2026-10-19 (launcher): live gets hundreds of commits an hour; one 140 MB index per commit (plus the locked rebuild
+# every reader waited on) saturated the Codex machine's disk. A reader now takes the newest index of an ancestor
+# commit at most RECENT_S old: working_modules() overlays every difference from that index's own commit, so the
+# answers are the same as from a fresh index.
+RECENT_S = int(os.environ.get('WEIL_DELIVERY_CACHE_RECENT_S', '900'))
+
+def _recent(root, directory, signature, suffix, commit, families):
+    import time
+    for f in sorted(directory.glob(f'library-{signature}-{suffix}-*.json'), key=lambda q: q.stat().st_mtime, reverse=True)[:6]:
+        if time.time() - f.stat().st_mtime > RECENT_S:
+            break
+        base = f.name.rsplit('-', 1)[1][:-5]
+        if subprocess.run(['git', 'merge-base', '--is-ancestor', base, commit], cwd=root, capture_output=True).returncode:
+            continue
+        try:
+            data = json.loads(f.read_text())
+        except (OSError, ValueError):
+            continue
+        if data.get('version') == VERSION and data.get('families') == families and data.get('signature') == signature and data.get('commit') == base:
+            return data
+    return None
 
 def load(root, families):
     import leanindex as li
