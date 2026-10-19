@@ -23,12 +23,12 @@
  ],
  "proof": [
   {
-   "text": "(1) Work with discrete coefficients $\\Lambda=\\mathbf Z$. Put $L=\\nu_S^*$ and $R=\\nu_{S,*}$ in the module adjunction of [det-pe-classical-sheaves-modules]; $L$ is exact and fully faithful. For each $r\\geq0$ let $A_r=F_0[\\ell^r]$. By the sectionwise kernel definition [def-pur-abelian-sheaf-kernel], exactness and additivity identify $L A_r$ with $(L F_0)[\\ell^r]$: $L(\\ell^r\\operatorname{id}_{F_0})=\\ell^r\\operatorname{id}_{L F_0}$. These identifications respect the inclusions, because both maps compose with the kernel inclusions to the inclusion into $L F_0$. The required sheaf colimits exist by [lem-weil-pbc-module-sheaves-colimits-forgetful]. The adjunction proves that $L$ preserves them: a map $L(\\varinjlim A_r)\\to G$ is a map $\\varinjlim A_r\\to RG$, hence a compatible family of maps $A_r\\to RG$, hence a compatible family $L A_r\\to G$. Consequently applying $L$ to $a:\\varinjlim A_r\\to F_0$ gives precisely the torsion map $\\varinjlim (L F_0)[\\ell^r]\\to L F_0$. A functor preserves isomorphisms, and full faithfulness reflects them: lift an inverse of $L a$ by fullness and use faithfulness to verify both inverse equations. The local torsion definition [sk-def-cd] therefore holds for $F_0$ exactly when it holds for $L F_0$, hence for the isomorphic $F$. This argument applies to every scheme and can also be used with $S$ replaced by $X$.",
+   "text": "Use the existing comparison adjunction on AddCommGrpCat directly. Its inverse image is additive, preserves finite limits and all colimits, and is fully faithful by the generic Grothendieck-abelian unit theorem. The private torsion_transport lemma constructs the natural isomorphism between the images of the annihilator kernels and the annihilator kernels of an isomorphic target. Kernel uniqueness proves compatibility with the transition maps and the canonical cocones. The canonical colimit map is invertible exactly when its cocone is colimiting. Transport along the cocone isomorphism and preservation/reflection of colimits proves the torsion equivalence.",
    "uses": [
-    "det-pe-classical-sheaves-modules",
+    "sk-def-cd",
     "def-pur-abelian-sheaf-kernel",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "sk-def-cd"
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-comparison-grothendieck-unit"
    ],
    "elementary": false,
    "source": {
@@ -37,42 +37,37 @@
    }
   },
   {
-   "text": "(2) By (1) and [det-pe-classical-sheaves-modules] with $\\Lambda=\\mathbf Z$, the classical $\\ell$-power torsion sheaves on $S_{\\Proet}$ are, up to isomorphism, exactly the $\\nu_S^*F_0$ with $F_0$ an $\\ell$-power torsion étale sheaf. The global-sections clause of [sk-prop-sf-comparison], applied to the bounded-below complex $F_0[0]$, gives $R\\Gamma(S_{\\Proet},\\nu_S^*F_0)\\simeq R\\Gamma(S_{\\Et},F_0)$. Both sides are right derived functors of a left exact additive functor applied to a complex in degree zero, so by the uniqueness of $(RF,\\eta)$ in [def-sfb-right-derived-functor] and its computation by any K-injective resolution, this is the $R\\Gamma$ whose cohomology defines $H^q(S_{\\Proet},-)$ in [sk-def-cd] and $H^q(S_{\\Et},-)$ in [def-weil-pbc-etale-cohomology]. Taking degree $q$ cohomology gives $H^q(S_{\\Proet},\\nu_S^*F_0)\\cong H^q(S_{\\Et},F_0)$. Thus the sets of nonvanishing degrees coincide with the set defining $\\operatorname{cd}_\\ell(S)$ in [sk-def-cd], so their suprema agree, also when the set is empty.",
+   "text": "Apply cohomologicalDimension_eq_etaleCohomologicalDimension from the already stated sk-def-cd module. It has exactly clause (2), with the same prime and qcqs scheme hypotheses.",
    "uses": [
-    "det-pe-classical-sheaves-modules",
-    "sk-prop-sf-comparison",
-    "sk-def-cd",
-    "def-sfb-right-derived-functor",
-    "def-weil-pbc-etale-cohomology"
+    "sk-def-cd"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-cd/sk-def-cd-etale-comparison.proof.md",
     "place": "paragraph (2)"
    }
   },
   {
-   "text": "(3) Regard an $\\ell$-power torsion étale sheaf $F_0$ on $X$ as $F_0[0]\\in D^+(X_{\\Et},\\mathbf Z)$. The current arbitrary-discrete-commutative-ring comparison [sk-thm-pe-direct-image-comparison] applies to the given qcqs $g$, and gives $\\nu_Y^* Rg_{\\Et,*}F_0\\cong Rg_{\\Proet,*}\\nu_X^*F_0$. Here $Rg_{\\Proet,*}$ is the right derived functor of the direct image used in [sk-def-cd], unique up to unique isomorphism and computed by K-injective resolutions [def-sfb-right-derived-functor]. Exactness of $\\nu_Y^*$ from [det-pe-classical-sheaves-modules] identifies the kernels, images and quotients defining cohomology, hence $\\nu_Y^* R^qg_{\\Et,*}F_0\\cong R^qg_{\\Proet,*}\\nu_X^*F_0$. The same functor preserves zero objects by additivity and reflects them by faithfulness: if $\\nu_Y^*G=0$, then $\\nu_Y^*(\\operatorname{id}_G)=0=\\nu_Y^*(0)$, so $\\operatorname{id}_G=0$ and $G=0$. Applying (1) on $X$ and the classical-sheaf equivalence identifies all permitted inputs in the relative definition [sk-def-cd]. The two sets of nonvanishing degrees therefore coincide and have equal suprema. Neither $X$ nor $Y$ is assumed qcqs as a scheme; (1) and both comparison statements hold for arbitrary schemes. Only $g$ is required qcqs here.",
+   "text": "Apply relativeCohomologicalDimension_eq_etale from the already stated sk-def-cd module. Its right side is exactly the supremum in clause (3), and it requires only that the morphism is qcqs.",
    "uses": [
-    "sk-thm-pe-direct-image-comparison",
-    "det-pe-classical-sheaves-modules",
-    "sk-def-cd",
-    "def-sfb-right-derived-functor"
+    "sk-def-cd"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-cd/sk-def-cd-etale-comparison.proof.md",
     "place": "paragraph (3)"
    }
   },
   {
-   "text": "(4) Let $F_0$ be an $\\ell$-power torsion étale sheaf in the sense of [sk-def-cd]. By [lem-weil-pbc-module-sheaves-colimits-forgetful] (with $\\mathcal O=\\mathbf Z$), $\\varinjlim_rF_0[\\ell^r]$ is the sheafification of the sectionwise union $V\\mapsto\\bigcup_rF_0[\\ell^r](V)\\subseteq F_0(V)$, a separated subpresheaf of $F_0$; its sections are exactly the sections of $F_0$ that lie locally in this union. The canonical map to $F_0$ being an isomorphism, every $s\\in F_0(U)$ has an étale covering $\\{U_i\\to U\\}$ and exponents $r_i$ with $\\ell^{r_i}(s|_{U_i})=0$. Each $\\ell^{r_i}$ is a positive integer since $\\ell$ is prime. Hence such a sheaf satisfies the local torsion condition of [def-sc-etale-torsion-cd]. Its cohomology consequently vanishes for $q>c$ if $\\operatorname{cd}_{\\rm tor}(S)\\leq c$. By (2) every nonvanishing degree in the supremum defining $\\operatorname{cd}_\\ell(S)$ is at most $c$, so the supremum is at most $c$; the empty case also satisfies this because its supremum is $0$ and $c\\geq0$.",
+   "text": "For an ell-power torsion etale sheaf, its annihilator cocone is colimiting. Apply a geometric stalk, which preserves colimits. Concrete.isColimit_exists_rep gives a representative of each germ in one annihilator kernel. Applying the additive stalk functor to kernel.condition shows that the germ is killed by ell^r, a positive integer. The already proved local-torsion/geometric-stalk characterization Scheme.isTorsion_iff_isAddTorsion_sheafFiber therefore gives F.IsTorsion. Apply HasTorsionEtaleCohomologicalDimensionLE in each degree n>c and convert Subsingleton to IsZero. Thus every nonvanishing degree n is at most c. Rewrite by clause (2) and apply sSup_le; the empty case is included.",
    "uses": [
     "sk-def-cd",
     "def-sc-etale-torsion-cd",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+    "def-pur-abelian-sheaf-kernel",
+    "lem-kun-stalks-commute-colimits",
+    "lem-weil-pbc-torsion-sheaf-characterizations"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-cd/sk-def-cd-etale-comparison.proof.md",
     "place": "paragraph (4)"
@@ -82,18 +77,16 @@
  "proof_deps": [
   "def-pur-abelian-sheaf-kernel",
   "def-sc-etale-torsion-cd",
-  "def-sfb-right-derived-functor",
-  "def-weil-pbc-etale-cohomology",
-  "det-pe-classical-sheaves-modules",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "sk-def-cd",
-  "sk-prop-sf-comparison",
-  "sk-thm-pe-direct-image-comparison"
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-kun-stalks-commute-colimits",
+  "lem-weil-pbc-comparison-grothendieck-unit",
+  "lem-weil-pbc-torsion-sheaf-characterizations",
+  "sk-def-cd"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-cd/sk-def-cd-etale-comparison.proof.md",
-  "place": "paragraphs (1)–(4); paragraph (1) made precise by preservation of annihilator kernels and sheaf colimits, and paragraph (3) uses the current arbitrary-discrete-ring comparison statement"
+  "place": "paragraphs (1)-(4); Y7 reuses the two comparison theorems of sk-def-cd and proves the local torsion implication by the equivalent geometric-stalk criterion"
  },
  "mathlib_searches": [
   {
@@ -165,9 +158,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-module-sheaves-colimits-forgetful"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -205,5 +196,15 @@
   "by": "Q121",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261019T034400-L-427381",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
