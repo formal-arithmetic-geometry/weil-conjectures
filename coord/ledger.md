@@ -16958,3 +16958,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:43 L: merged deliver/X8/Sheaf.Paper.SmoothPurityTowerInjectiveComponents (stage 3; reviewer PASS; first push; landing 20261019T034351-L-425863 (proof); batch 20261019T034248; modules 1; new nodes 0)
 - 03:43 L: merged deliver/X9/Sheaf.Paper.UniformConstructibleExt (stage 3; reviewer PASS; first push; landing 20261019T034351-L-425989 (proof); batch 20261019T034248; modules 1; new nodes 0; change records: coord/changes/X9-uniform-constructible-ext-partial.md)
 - 03:43 L: merged deliver/Y2/Sheaf.Paper.IntegralDerivedOperationsOnSlices (stage 3; reviewer PASS; first push; landing 20261019T034352-L-426160 (proof); batch 20261019T034248; modules 1; new nodes 0)
+- 03:43 L: merged deliver/Y2/Sheaf.SixFunctors.UnboundedClassicalTruncation (stage 3; reviewer PASS; first push; landing 20261019T034353-L-426261 (proof); batch 20261019T034248; modules 1; new nodes 0)

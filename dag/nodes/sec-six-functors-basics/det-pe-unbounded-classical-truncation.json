@@ -24,135 +24,113 @@
  ],
  "proof": [
   {
-   "text": "Evaluation $\\Gamma_W$ is additive and left exact, and preserves countable products: addition is sectionwise, and [lem-weil-pbc-module-sheaves-limits-sectionwise] identifies kernels and products of module sheaves, including their underlying abelian groups, with their evaluations. The source category is Grothendieck by [lem-weil-pbc-ring-sheaves-grothendieck], which allows noncommutative coefficient sheaves. The target $\\operatorname{Ab}$ is $\\operatorname{Mod}(\\mathbf Z)$ and is Grothendieck by [lem-weil-pbc-ring-modules-grothendieck-abelian]. Thus [lem-weil-pbc-kinjective-functorial-existence] supplies K-injective resolutions in both categories. Apply [lem-weil-pbc-kinjective-total-derived] to the termwise evaluation functor on homotopy categories followed by localization: it is exact there because evaluation commutes with finite direct sums, the cone differential and shifts. Consequently every K-injective $J$ computes $R\\Gamma(W,J)$ as the complex $J(W)$. By [lem-pc-right-derived-functor-triangulated], $R\\Gamma(W,-)$ commutes with integer shifts and preserves distinguished triangles. These facts concern evaluation on the site of $X$, so no identification of $X_{\\mathrm{proét}}/W$ with another site's underlying category is needed. For a module sheaf $H$ in degree zero, [lem-sc-bounded-below-injective-resolution] supplies a bounded-below injective resolution which is also K-injective. Evaluating that resolution therefore computes this total derived functor and also the ordinary right derived evaluation groups by [def-sp-left-exact-additive]. Thus the notation $H^q(W,H)$ agrees with ordinary module-sheaf cohomology over $W$.",
+   "text": "Transport classicality of module sheaves along the underlying-set sheaf isomorphism, using isClassical_iso_iff. This is the fully proved private helper classicalModule_of_iso.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-limits-sectionwise",
-    "lem-weil-pbc-ring-sheaves-grothendieck",
-    "lem-weil-pbc-ring-modules-grothendieck-abelian",
-    "lem-weil-pbc-kinjective-functorial-existence",
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-pc-right-derived-functor-triangulated",
-    "lem-sc-bounded-below-injective-resolution",
-    "def-sp-left-exact-additive"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-truncation.proof.md",
-    "place": "Part (1), the derived-sections functor used throughout; Stacks Tags 079Q (remark-existence-D), 079P (theorem-K-injective-embedding-grothendieck), 070K (lemma-enough-K-injectives-implies); triangulated structure also in the project RightDerivedFunctor/Triangulated.lean:94-99"
-   }
-  },
-  {
-   "text": "For clause (1), choose a representative of $L$ and put $C_n=\\tau_{\\ge -n}L$ for $n\\ge0$, with the canonical transition maps $C_{n+1}\\to C_n$. By the formulas of [def-kun-truncations], $H^q(C_n)$ is $H^q(L)$ for $q\\ge -n$ and zero otherwise. Hence it vanishes outside $[-n,b]$ and is classical wherever it is nonzero. The zero sheaf is also classical: every section group and its filtered colimit are zero. This checks the definition [sk-def-pe-classical-definition] directly and shows that all cohomology sheaves of each $C_n$ are classical. If $b<-n$, all its cohomology is zero, so the map from $C_n$ to the zero complex is a quasi-isomorphism and $C_n=0$ in the derived category [def-weil-abstract-derived-category].",
-   "uses": [
-    "def-kun-truncations",
     "sk-def-pe-classical-definition",
-    "def-weil-abstract-derived-category"
+    "det-pe-classical-definition-continuity-map"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-truncation.proof.md",
-    "place": "Part (1), first sentence: bounded truncations and their classical cohomology"
+    "place": "Parts (1) and (2); same Postnikov/Roos argument, with the zero-endpoint Milnor case read directly from the Roos long exact sequence"
    }
   },
   {
-   "text": "Fix $n$ with $a=-n\\le b$ and fix $m>b+e$. We prove by induction on $r=a-1,a,\\ldots,b$ that $H^mR\\Gamma(W,\\tau_{\\le r}C_n)=0$. At $r=a-1$ the truncated complex is acyclic by [def-kun-truncations], so it is zero in the derived category [def-weil-abstract-derived-category], proving the base case. For $a\\le r\\le b$, [lem-weil-pbc-truncation-triangle] gives\n$$\\tau_{\\le r-1}C_n\\longrightarrow\\tau_{\\le r}C_n\\longrightarrow H^r(C_n)[-r]\\longrightarrow.$$\nApply the triangulated functor of Step 1 [lem-pc-right-derived-functor-triangulated]. Its shift isomorphism and the shift convention of [def-weil-abstract-derived-category] identify the last term's degree-$m$ cohomology with $H^{m-r}(W,H^r(C_n))$. This is zero by the hypothesis since $m-r\\ge m-b>e$ and Step 2 made $H^r(C_n)$ classical. The exact segment from [lem-sf-derived-homology-long-exact], with zero left group by induction and zero right group by this calculation, forces $H^mR\\Gamma(W,\\tau_{\\le r}C_n)=0$. Finally $\\tau_{\\le b}C_n\\to C_n$ is a quasi-isomorphism by [def-kun-truncations], because $C_n$ has no cohomology above $b$. Including the zero case of Step 2, we obtain $H^mR\\Gamma(W,C_n)=0$ for all $n\\ge0$ and all $m>b+e$.",
+   "text": "Prove finite_range_upper_bound for a triangulated functor and an isomorphism-invariant property P of the relevant cohomology objects. Induct on the natural bound for b-a. If b<a the object is zero by t-structure orthogonality. If a=b, identify it with H^b placed in degree b; the single-functor shift isomorphism and the functor shift isomorphism reduce H^r of its image to H^(r-b) of the degree-zero single object. Otherwise split with the canonical triangle tau_<b K -> K -> tau_>=b K. Its first object is in [a,b-1], its third in [b,b]. Homology isomorphisms transport P only on these retained intervals. The homology exact sequence with zero endpoints proves the inductive step. This helper is proved in Lean.",
    "uses": [
     "def-kun-truncations",
+    "def-sbc-standard-tstructure-derived-category",
     "def-weil-abstract-derived-category",
-    "lem-weil-pbc-truncation-triangle",
-    "lem-pc-right-derived-functor-triangulated",
-    "lem-sf-derived-homology-long-exact"
+    "lem-sf-derived-homology-long-exact",
+    "lem-pc-right-derived-functor-triangulated"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-truncation.proof.md",
-    "place": "Part (1), first paragraph: expand the finite induction; Stacks Tag 08J5 (remark-truncation-distinguished-triangle)"
+    "place": "Parts (1) and (2); same Postnikov/Roos argument, with the zero-endpoint Milnor case read directly from the Roos long exact sequence"
    }
   },
   {
-   "text": "Here is the countable-product calculation for derived evaluation, including projections. For any family $(E_n)$ choose K-injective resolutions $E_n\\to J_n$ by [lem-weil-pbc-kinjective-functorial-existence]. All termwise products exist by [lem-weil-pbc-module-sheaves-limits-sectionwise]. The complex $J=\\prod_nJ_n$ is K-injective and represents $\\prod_n E_n$ in $D(\\mathcal C)$ by [lem-pc-ringed-space-product-kinjective]. Evaluation preserves these products with their coordinate maps, so\n$$\\Gamma_W(J)=\\prod_n\\Gamma_W(J_n)$$\nas complexes of abelian groups. By [lem-weil-pbc-kinjective-total-derived] these complexes compute $R\\Gamma(W,\\prod_n E_n)$ and the individual $R\\Gamma(W,E_n)$. Products of abelian groups are exact [lem-pc-abelian-groups-exact-products]; hence [lem-weil-derived-limit-products-core] applied to $\\operatorname{Ab}$ identifies the last termwise product with the product in $D(\\operatorname{Ab})$. Since each projection is the evaluated projection of $J$, this proves product preservation with the prescribed projections, rather than just an abstract isomorphism of objects.",
+   "text": "Prove countable-product preservation of rightDerivedFunctor for an additive countable-product-preserving F from an abelian category with K-injective resolutions to one with exact countable products. Choose K-injective representatives using the existing derived-category K-injective representative theorem (the source-resolution assumption is already in the interface). Apply termwise_product_isKInjective_and_isLimit to their termwise product cone. The actual right-derived unit is invertible on each representative and the product. Naturality on the product projections identifies the image cone with the localized termwise F-image cone. F preserves the termwise product; derivedCategory_countableProducts_core makes its localization a limiting cone in the target. Transport this limit property along the unit and representing isomorphisms and use preservesLimitsOfShape_of_discrete. This is the fully proved private helper rightDerived_preserves_countable_products, generalized locally because the existing scheme-module statement does not apply to this ringed-site module category.",
    "uses": [
-    "lem-weil-pbc-kinjective-functorial-existence",
+    "def-sp-kinjective-bridge",
     "lem-weil-pbc-module-sheaves-limits-sectionwise",
     "lem-pc-ringed-space-product-kinjective",
-    "lem-weil-pbc-kinjective-total-derived",
     "lem-pc-abelian-groups-exact-products",
     "lem-weil-derived-limit-products-core"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-truncation.proof.md",
-    "place": "Part (1), second paragraph: derived sections preserve products; Stacks Tags 0BK6 (lemma-product-K-injective) and 07KC (lemma-products)"
+    "place": "Parts (1) and (2); same Postnikov/Roos argument, with the zero-endpoint Milnor case read directly from the Roos long exact sequence"
    }
   },
   {
-   "text": "Left completeness [det-pe-left-complete-iso] identifies $L$ with $\\operatorname{Cone}(1-T:\\prod_n C_n\\to\\prod_n C_n)[-1]$, where the $n$th component of $T$ is $C_{n+1}\\to C_n$ after the $(n+1)$st projection. The products here are products in $D(\\mathcal C)$ by [det-pe-products-derived], so this is a Roos triangle [def-weil-derived-limit]. Apply $R\\Gamma(W,-)$ using [lem-pc-right-derived-functor-triangulated] and identify both products by Step 4. Put $B_n=R\\Gamma(W,C_n)$. For each $n$, the $n$th component of the image of $T$ is $R\\Gamma(W,C_{n+1}\\to C_n)$ after the $(n+1)$st projection; functoriality gives this equality and Step 4 identifies those projections. Additivity therefore identifies the middle map with $1-T_B$. We have proved that $R\\Gamma(W,L)$, with the image triangle, is a derived limit $R\\varprojlim_n B_n$ in $D(\\operatorname{Ab})$ in the precise sense of [def-weil-derived-limit]. No canonical choice of cones or comparison between arbitrary cones is asserted.",
+   "text": "Represent L by K and form the existing strict postnikovTower K, whose nth term is K.truncGE(-n). The homology formulas give its derived object lower bound -n and upper bound b. Inside [-n,b], the homology isomorphism induced by the quotient, together with homologyFunctorFactors and the representative isomorphism, transports classicality from L. Apply finite_range_upper_bound to derived evaluation, P = IsClassicalModuleSheaf, and hbound. Thus H^r of the derived evaluation of every tower term vanishes for r>b+e. No assertion of classicality for zero cohomology outside the retained interval is needed.",
    "uses": [
-    "det-pe-left-complete-iso",
-    "det-pe-products-derived",
-    "def-weil-derived-limit",
+    "def-kun-truncations",
+    "sk-def-pe-classical-definition",
+    "def-sbc-standard-tstructure-derived-category",
     "lem-pc-right-derived-functor-triangulated"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-truncation.proof.md",
-    "place": "Part (1), second paragraph: left completeness and applying derived sections to the Roos triangle; Stacks Tag 0947 (proposition-enough-weakly-contractibles), clauses (2) and (5), and Tag 08TC (definition-derived-limit)"
+    "place": "Parts (1) and (2); same Postnikov/Roos argument, with the zero-endpoint Milnor case read directly from the Roos long exact sequence"
    }
   },
   {
-   "text": "Apply the abelian-group Milnor sequence [lem-pc-derived-limit-milnor-sequence] to the derived limit of Step 5:\n$$0\\longrightarrow R^1\\varprojlim_n H^{m-1}(B_n)\\longrightarrow H^mR\\Gamma(W,L)\\longrightarrow\\varprojlim_nH^m(B_n)\\longrightarrow0.$$\nIf $m>b+e+1$, both $m-1$ and $m$ exceed $b+e$, so Step 3 says that both towers in the outside terms are identically zero. Their inverse limit is zero, and their first derived inverse limit is zero, computed by the zero resolution of the zero tower. Thus the middle group vanishes. This proves clause (1) with exactly its asserted bound.",
+   "text": "Use products_derived to obtain a limiting localized termwise product cone of the strict Postnikov tower. Apply product preservation of derived evaluation from the proved helper, then product preservation of abelian-group derived homology from derivedCategory_countableProducts_core. The resulting limiting cone has all vertices zero in each degree r>b+e, so its point is zero. Apply derived evaluation to the distinguished mappingCocone triangle of the tower transition endomorphism. In the homology exact sequence, H^(m-1) of the product and H^m of the product are zero for m>b+e+1; exactness forces H^m of the evaluated Roos complex to be zero. This is exactly the zero-endpoint consequence of the Milnor sequence, obtained without constructing its auxiliary limit maps. Finally left_complete_quasiIso makes the canonical postnikovComparison invertible under Q; transport vanishing through that map and the representative isomorphism to L.",
    "uses": [
-    "lem-pc-derived-limit-milnor-sequence"
+    "det-pe-products-derived",
+    "det-pe-left-complete-iso",
+    "lem-weil-derived-limit-products-core",
+    "lem-pc-abelian-groups-exact-products",
+    "lem-sf-derived-homology-long-exact",
+    "lem-pc-right-derived-functor-triangulated"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-truncation.proof.md",
-    "place": "Part (1), displayed Milnor sequence and final sentence; Stacks Tag 07KY (lemma-break-long-exact-sequence), also displayed in Tag 08D4 (lemma-application-nice-K-injective)"
+    "place": "Parts (1) and (2); same Postnikov/Roos argument, with the zero-endpoint Milnor case read directly from the Roos long exact sequence"
    }
   },
   {
-   "text": "For clause (2), set $L=\\tau_{<N}K=\\tau_{\\le N-1}K$. The cohomology formulas [def-kun-truncations] say that its cohomology is classical and vanishes above $b=N-1$, so clause (1) gives $H^jR\\Gamma(W,L)=0$ for $j>N+e$. The standard t-structure [def-sbc-standard-tstructure-derived-category], shifted to degree $N-1$, gives a distinguished triangle with first terms $L\\to K\\to K/L$. The natural quotient map $K/L\\to\\tau_{\\ge N}K$ is a quasi-isomorphism: in degree $N-1$ it kills $K^{N-1}/\\ker d^{N-1}$, in degree $N$ it is $K^N\\to\\operatorname{coker}d^{N-1}$, and in other degrees it is the identity or the unique map between zero objects. The truncation cohomology formulas show an isomorphism in degrees $\\ge N$ and zero groups on both sides below $N$. By [def-weil-abstract-derived-category] it is invertible in the derived category. Consequently this is the canonical truncation triangle $L\\to K\\to\\tau_{\\ge N}K\\to$, with the map specified in the statement. Apply $R\\Gamma(W,-)$ [lem-pc-right-derived-functor-triangulated] and [lem-sf-derived-homology-long-exact]. The inequality $N<m-e-1$ implies $m>N+e+1$, so the groups $H^mR\\Gamma(W,L)$ and $H^{m+1}R\\Gamma(W,L)$ both vanish. Exactness of\n$$H^mR\\Gamma(W,L)\\longrightarrow H^mR\\Gamma(W,K)\\longrightarrow H^mR\\Gamma(W,\\tau_{\\ge N}K)\\longrightarrow H^{m+1}R\\Gamma(W,L)$$\ntherefore makes the canonical middle map an isomorphism. The entire construction retains the $A$-actions on evaluated module complexes, so the canonical map is $A$-linear. Its inverse as an abelian-group map is $A$-linear as well: if $f$ is this map and $u$ its inverse, then $f(u(ay))=ay=f(a\\,u(y))$, and injectivity of $f$ gives $u(ay)=a\\,u(y)$. Thus the isomorphism holds with the coefficient module structure too.",
+   "text": "For the second clause put L=tau_<N K. Only classicality in degrees at most N-1 is needed by the proved upper-bound helper, and the homology of truncLTι transports it from K in those degrees. The standard t-structure gives vanishing above N-1. Apply the upper-bound helper in degrees m and m+1. The inequality N<m-e-1 implies both required bounds. Derived evaluation sends the canonical triangleLTGE N K to a distinguished triangle; isIso_homologyMap_mor₂ gives the isomorphism of H^m of its second arrow, definitionally the canonical map displayed in the theorem.",
    "uses": [
     "def-kun-truncations",
+    "sk-def-pe-classical-definition",
     "def-sbc-standard-tstructure-derived-category",
-    "def-weil-abstract-derived-category",
-    "lem-pc-right-derived-functor-triangulated",
-    "lem-sf-derived-homology-long-exact"
+    "lem-sf-derived-homology-long-exact",
+    "lem-pc-right-derived-functor-triangulated"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-truncation.proof.md",
-    "place": "Part (2), entire paragraph; Stacks Tag 08J5 (remark-truncation-distinguished-triangle), including its quotient-to-truncation quasi-isomorphism"
+    "place": "Parts (1) and (2); same Postnikov/Roos argument, with the zero-endpoint Milnor case read directly from the Roos long exact sequence"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-sheaves-limits-sectionwise",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-weil-pbc-ring-modules-grothendieck-abelian",
-  "lem-weil-pbc-kinjective-functorial-existence",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-pc-right-derived-functor-triangulated",
-  "lem-sc-bounded-below-injective-resolution",
-  "def-sp-left-exact-additive",
-  "def-kun-truncations",
   "sk-def-pe-classical-definition",
+  "det-pe-classical-definition-continuity-map",
+  "def-kun-truncations",
+  "def-sbc-standard-tstructure-derived-category",
   "def-weil-abstract-derived-category",
-  "lem-weil-pbc-truncation-triangle",
   "lem-sf-derived-homology-long-exact",
+  "lem-pc-right-derived-functor-triangulated",
+  "def-sp-kinjective-bridge",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
   "lem-pc-ringed-space-product-kinjective",
   "lem-pc-abelian-groups-exact-products",
   "lem-weil-derived-limit-products-core",
-  "det-pe-left-complete-iso",
   "det-pe-products-derived",
-  "def-weil-derived-limit",
-  "lem-pc-derived-limit-milnor-sequence",
-  "def-sbc-standard-tstructure-derived-category"
+  "det-pe-left-complete-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-truncation.proof.md",
-  "place": "Parts (1) and (2), expanded with the cited Stacks lemmas and existing DAG statements"
+  "place": "Parts (1) and (2); same Postnikov/Roos argument, with the zero-endpoint Milnor case read directly from the Roos long exact sequence"
  },
  "mathlib_searches": [
   {
@@ -304,16 +282,10 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-weil-pbc-kinjective-functorial-existence",
-  "lem-weil-pbc-kinjective-total-derived",
   "lem-pc-right-derived-functor-triangulated",
-  "lem-weil-pbc-truncation-triangle",
   "lem-pc-ringed-space-product-kinjective",
   "lem-weil-derived-limit-products-core",
-  "lem-pc-derived-limit-milnor-sequence",
-  "det-pe-products-derived",
-  "lem-sc-bounded-below-injective-resolution"
+  "det-pe-products-derived"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -360,5 +332,15 @@
    "AlgebraicGeometry.ProEtale.sectionCohomology",
    "AlgebraicGeometry.ProEtale.unbounded_classical_truncation"
   ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261019T034353-L-426261",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
