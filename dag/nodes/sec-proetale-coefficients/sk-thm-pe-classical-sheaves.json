@@ -20,7 +20,7 @@
  ],
  "proof": [
   {
-   "text": "Apply [det-pe-classical-sheaves-unit] to the arbitrary scheme $X$. Its statement gives both the invertible unit $F\\to\\nu_{X,*}\\nu_X^*F$ for every étale sheaf of sets and the bijection $\\operatorname{Hom}(F,F')\\to\\operatorname{Hom}(\\nu_X^*F,\\nu_X^*F')$ induced by $\\nu_X^*$. The latter is exactly full faithfulness of the set-valued inverse image in the first clause.",
+   "text": "Apply [det-pe-classical-sheaves-unit] at X. Its Hom-set bijectivity is exactly the criterion Functor.FullyFaithful.nonempty_iff_map_bijective, giving the first clause.",
    "uses": [
     "det-pe-classical-sheaves-unit"
    ],
@@ -31,7 +31,7 @@
    }
   },
   {
-   "text": "For any sheaf of sets $G$ on $X_{\\Proet}$, [det-pe-classical-sheaves-image] identifies membership in the essential image, namely existence of $F$ and an isomorphism $G\\cong\\nu_X^*F$, with bijectivity of every specified continuity map, and with invertibility of the actual counit $\\nu_X^*\\nu_{X,*}G\\to G$. The definition [sk-def-pe-classical-definition] uses precisely these continuity maps, via [det-pe-classical-definition-continuity-map]: for each pro-étale affine presentation $U\\cong\\varprojlim_{i\\in I}U_i$ with its small cofiltered index and affine étale stages, the map $c_{G,(U_i)}$ is induced by restriction, not an arbitrary bijection $\\varinjlim_{i\\in I^{\\mathrm{op}}}G(U_i)\\cong G(U)$. Thus (1) and (2) of the cited equivalence give exactly the asserted essential image. In the classical case its condition (3) supplies the canonical representative $F=\\nu_{X,*}G$ with counit isomorphism.",
+   "text": "Apply the first equivalence of [det-pe-classical-sheaves-image]. Functor.essImage uses an isomorphism from the inverse image to G, whereas the cited theorem uses the reverse isomorphism; taking inverses identifies the two existential statements. The predicates are the continuity-map definitions of [sk-def-pe-classical-definition] and [det-pe-classical-definition-continuity-map].",
    "uses": [
     "det-pe-classical-sheaves-image",
     "sk-def-pe-classical-definition",
@@ -44,16 +44,16 @@
    }
   },
   {
-   "text": "Apply [det-pe-classical-sheaves-modules] to the given discrete commutative ring $\\Lambda$, its constant étale sheaf $\\Lambda_{X,\\Et}$ and its pullback $\\Lambda_X$. These are exactly the coefficients in that statement; no finiteness, torsion, invertibility or noetherian assumption is needed. It supplies the module adjunction and the equivalence onto the full subcategory of classical module sheaves, with quasi-inverse $\\nu_{X,*}$. For exactness, if $\\Lambda$ is finite, apply the exactness clause of [prop-weil-pbc-site-comparison-finite-level] to $T=X$ and this $\\Lambda$; its comparison inverse image is the same functor on these module sheaves. If $\\Lambda$ is infinite, use the exactness clause of [det-pe-classical-sheaves-modules], whose statement allows every discrete commutative ring. This proves exactness in both cases without extending a finite-ring theorem to infinite rings. The module notion of classicality in [sk-def-pe-classical-definition] is the one used there: the same restriction-induced continuity maps are isomorphisms in $\\Lambda$-modules. Consequently the asserted equivalence is exact.",
+   "text": "Apply [det-pe-classical-sheaves-modules] for the arbitrary discrete commutative ring Λ. Identify its underlying-set classicality predicate with IsClassicalModuleFor of [sk-def-pe-classical-definition]: the forgetful functor preserves filtered colimits and reflects isomorphisms, and preservesColimitIso_inv_comp_desc identifies the two restriction-induced continuity maps of [det-pe-classical-definition-continuity-map]. The module theorem now identifies classical modules with the essential image of comparisonUpperStar and gives bijectivity on Hom sets. Lift comparisonUpperStar into the full subcategory of classical modules using ObjectProperty.lift. The lift is fully faithful because comparisonUpperStar is. Every classical module is isomorphic to an image object, and ObjectProperty.isoMk lifts this isomorphism to the full subcategory, proving essential surjectivity. Hence the lift is an equivalence. Equivalences preserve all existing limits and colimits, in particular finite ones. The lift composed with the inclusion is definitionally comparisonUpperStar. No finiteness assumption on Λ or finite-coefficient theorem is needed.",
    "uses": [
     "det-pe-classical-sheaves-modules",
-    "prop-weil-pbc-site-comparison-finite-level",
-    "sk-def-pe-classical-definition"
+    "sk-def-pe-classical-definition",
+    "det-pe-classical-definition-continuity-map"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves.proof.md",
-    "place": "Last sentence; detailed sk-thm-pe-classical-sheaves-modules.proof.md, all four paragraphs (module structures, exactness, full faithfulness, essential image). The finite-coefficient exactness specialization also realizes the comparison proposition proof, final paragraph, explicitly citing prop-weil-pbc-site-comparison-finite-level."
+    "place": "Last sentence; detailed sk-thm-pe-classical-sheaves-modules.proof.md, all four paragraphs (module structures, exactness, full faithfulness, essential image). The arbitrary-coefficient module theorem suffices; the finite-coefficient specialization is pruned."
    }
   }
  ],
@@ -62,13 +62,12 @@
   "det-pe-classical-sheaves-image",
   "sk-def-pe-classical-definition",
   "det-pe-classical-definition-continuity-map",
-  "det-pe-classical-sheaves-modules",
-  "prop-weil-pbc-site-comparison-finite-level"
+  "det-pe-classical-sheaves-modules"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves.proof.md",
-  "place": "The complete unit proof, separated into its three assertions and citing the existing detailed nodes; checked against Bhatt–Scholze Lemmas 5.1.1–5.1.2, Definition 5.1.3, and Stacks Tag 099T."
+  "place": "The three clauses of the unit proof; J2 Lean implementation from the existing unit, essential-image, and arbitrary-coefficient module theorems. The full-subcategory equivalence and finite-limit/colimit preservation are generic categorical consequences."
  },
  "mathlib_searches": [
   {
@@ -149,9 +148,7 @@
    }
   ]
  },
- "tool_uses": [
-  "prop-weil-pbc-site-comparison-finite-level"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -190,5 +187,15 @@
   "existing": false,
   "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClassicalSheaves.lean",
   "fixed_by": "NT-stage2-cc-27c6c6c86"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-45929",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261019T005304-L-2748777",
+  "kind": "interface",
+  "note": "independent cc review: delivered ProEtaleClassicalSheaves.lean vs live clone (identical theorem signature, imports re-exported by ClassicalDerivedDefinitions) + node vs live node (proof/proof_deps/proof_origin/tool_uses only) + unit realized (empty) + 6 direct importers compiled against the delivery"
  }
 }

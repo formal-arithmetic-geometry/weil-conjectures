@@ -6,15 +6,12 @@ module
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Sheaf.AlgebraicGeometry.ClassicalContinuityMap
 public import Sheaf.AlgebraicGeometry.ClassicalDerivedDefinitions
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 
 import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesUnit
 import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesImage
 import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesModules
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
-import Sheaf.SixFunctors.ClassicalDefinition
+import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 
 /-! # Recognizing the classical part
 
@@ -32,6 +29,32 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
+
+private theorem classicalModuleFor_iff (X : Scheme.{u})
+    (Λ : Type (u + 1)) [CommRing Λ]
+    (G : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) :
+    ProEtale.IsClassicalModuleFor X Λ G ↔
+      ProEtale.IsClassical ((sheafCompose (Scheme.ProEt.topology X)
+        (forget (ModuleCat.{u + 1} Λ))).obj G) := by
+  let V := forget (ModuleCat.{u + 1} Λ)
+  have h (I : Type (u + 1)) [SmallCategory I] [IsCofiltered I]
+      (P : ProEtale.AffinePresentation X I) :
+      IsIso (ProEtale.continuityMap P G.obj) ↔
+        Function.Bijective (ProEtale.continuityMap P (G.obj ⋙ V)) := by
+    rw [← CategoryTheory.isIso_iff_bijective]
+    have heq :
+        (preservesColimitIso V (ProEtale.sectionDiagram P G.obj)).inv ≫
+          V.map (ProEtale.continuityMap P G.obj) =
+            ProEtale.continuityMap P (G.obj ⋙ V) := by
+      exact preservesColimitIso_inv_comp_desc V
+        (ProEtale.sectionDiagram P G.obj) (ProEtale.sectionCocone P G.obj)
+    rw [← heq, isIso_comp_left_iff]
+    exact (isIso_iff_of_reflects_iso _ V).symm
+  constructor
+  · intro hG I _ _ P
+    exact (h I P).mp (hG P)
+  · intro hG I _ _ P
+    exact (h I P).mpr (hG P)
 
 /-- The comparison inverse image is fully faithful and its essential image is the
 classical sheaves; the same comparison is an exact equivalence onto classical module
@@ -66,6 +89,34 @@ theorem proEtaleClassicalSheaves (X : Scheme.{u}) :
         F ⋙ ObjectProperty.ι _ =
             ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) X ∧
           F.IsEquivalence ∧ PreservesFiniteLimits F ∧ PreservesFiniteColimits F := by
-  sorry
+  classical
+  refine ⟨(Functor.FullyFaithful.nonempty_iff_map_bijective _).2
+    (Scheme.proEtaleClassicalSheavesUnit X).2, ?_, ?_⟩
+  · intro G
+    refine Iff.trans ?_ (Scheme.proEtaleClassicalSheavesImage X G).1
+    constructor
+    · rintro ⟨F, ⟨e⟩⟩
+      exact ⟨F, ⟨e.symm⟩⟩
+    · rintro ⟨F, ⟨e⟩⟩
+      exact ⟨F, ⟨e.symm⟩⟩
+  · intro Λ _
+    obtain ⟨adj, hlim, hcolim, hbij, _, himage⟩ :=
+      ProEtale.proEtaleClassicalSheavesModules X Λ
+    let L := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) X
+    let P : ObjectProperty (Sheaf (Scheme.ProEt.topology X)
+      (ModuleCat.{u + 1} Λ)) := ProEtale.IsClassicalModuleFor X Λ
+    have hc (G : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) :
+        P G ↔ L.essImage G := (classicalModuleFor_iff X Λ G).trans (himage G)
+    have hL : Nonempty L.FullyFaithful :=
+      (Functor.FullyFaithful.nonempty_iff_map_bijective L).2 hbij
+    let ff := Classical.choice hL
+    let : L.Full := ff.full
+    let : L.Faithful := ff.faithful
+    let F := P.lift L (fun A ↦ (hc _).2 (L.obj_mem_essImage A))
+    let : F.EssSurj := ⟨fun G ↦ by
+      obtain ⟨A, ⟨e⟩⟩ := (hc G.obj).1 G.property
+      exact ⟨A, ⟨P.isoMk e⟩⟩⟩
+    let : F.IsEquivalence := { }
+    exact ⟨F, rfl, inferInstance, inferInstance, inferInstance⟩
 
 end AlgebraicGeometry
