@@ -16,7 +16,7 @@ import Sheaf.RingTheory.DepthQuotSMulTop
 import Sheaf.RingTheory.FormalJacobianMinorInvariance
 import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
 import Sheaf.RingTheory.PowerSeriesFullCoordinatesField
-import Sheaf.RingTheory.PowerSeriesQuotientVariables
+import WeilConjectures.RingTheory.PowerSeriesQuotientVariables
 import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.TraceFormula.FormalBinaryMorse
 import Sheaf.TraceFormula.RegularSurfaceDepthOnePrincipal

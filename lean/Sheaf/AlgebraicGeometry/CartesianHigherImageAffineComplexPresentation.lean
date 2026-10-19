@@ -5,12 +5,12 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CartesianHigherImageTransitions
-public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
-public import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyPresentationData
+public import WeilConjectures.AlgebraicGeometry.CartesianHigherImageTransitions
+public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
+public import WeilConjectures.AlgebraicGeometry.EtaleComplexCohomologyPresentationData
 import Sheaf.AlgebraicGeometry.CofilteredAffineEtaleModel
 import Sheaf.AlgebraicGeometry.CartesianHigherImageChartComparison
-import Sheaf.AlgebraicGeometry.RestrictedOverAbelianCohomologyPresentation
+import WeilConjectures.AlgebraicGeometry.RestrictedOverAbelianCohomologyPresentation
 
 /-! # Affine derived classes for cartesian higher images
 

@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.RingHom.Flat
 import Sheaf.RingTheory.PowerSeriesCombinedIdealCoefficients
-import Sheaf.RingTheory.PowerSeriesQuotientVariables
+import WeilConjectures.RingTheory.PowerSeriesQuotientVariables
 
 /-! # Flatness of truncated power-series algebras
 

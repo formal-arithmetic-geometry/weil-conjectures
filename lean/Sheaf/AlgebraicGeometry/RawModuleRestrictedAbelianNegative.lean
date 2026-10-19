@@ -1,6 +1,6 @@
 module
 public import Sheaf.AlgebraicGeometry.HigherDirectImageRawDiagram
-public import Sheaf.AlgebraicGeometry.RestrictedOverAbelianComplexData
+public import WeilConjectures.AlgebraicGeometry.RestrictedOverAbelianComplexData
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 @[expose] public section
 universe u

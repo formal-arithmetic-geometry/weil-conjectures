@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.UnboundedExchangeAgrees
 import Sheaf.Paper.KunBcMapOnCohomology
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
-import Sheaf.AlgebraicGeometry.EtaleInverseImageColimits
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageColimits
 import Sheaf.AlgebraicGeometry.DerivedSquareIsoPasting
 import Sheaf.AlgebraicGeometry.DerivedInverseImageComposition
 import Sheaf.AlgebraicGeometry.StalkFaithfulDerived

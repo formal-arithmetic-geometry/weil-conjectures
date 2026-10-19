@@ -12,7 +12,7 @@ public import Mathlib.Algebra.MonoidAlgebra.Basic
 import Sheaf.AlgebraicGeometry.FsChartFreeFactorization
 import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
 import Sheaf.TraceFormula.SmoothGeometricStalkAlgebra
-import Sheaf.RingTheory.RegularLocalOfFlatWithRegularClosedFiber
+import WeilConjectures.RingTheory.RegularLocalOfFlatWithRegularClosedFiber
 import Sheaf.RingTheory.StrictHenselizationNoetherian
 import Sheaf.AlgebraicGeometry.LogRegularSharpChart
 import Sheaf.AlgebraicGeometry.LogRegularCompletedChart

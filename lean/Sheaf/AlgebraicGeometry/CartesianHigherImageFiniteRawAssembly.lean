@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CartesianHigherImageTransitions
-public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
+public import WeilConjectures.AlgebraicGeometry.CartesianHigherImageTransitions
+public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
 import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc
 

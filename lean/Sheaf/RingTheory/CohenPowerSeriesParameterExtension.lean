@@ -6,7 +6,7 @@ Authors: SHEAF group U3
 module
 
 public import WeilConjectures.RingTheory.CohenRing
-public import Sheaf.RingTheory.IsRegularSystemOfParameters
+public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.Algebra.CharP.Defs
 import Mathlib.Algebra.CharP.Algebra
@@ -17,7 +17,7 @@ import Sheaf.RingTheory.PowerSeriesParameterPerturbation
 import Sheaf.RingTheory.CohenPowerSeriesPresentation
 import Sheaf.RingTheory.FieldCohenPowerSeriesFormallySmooth
 import Sheaf.RingTheory.FormallySmoothAdicLiftIntoComplete
-import Sheaf.RingTheory.PowerSeriesQuotientVariables
+import WeilConjectures.RingTheory.PowerSeriesQuotientVariables
 
 /-!
 # Extending a Cohen power series parameter list along a local map

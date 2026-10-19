@@ -8,8 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import WeilConjectures.SixFunctors.BaseChange.Pasting
-import all Sheaf.AlgebraicGeometry.AbelianDerivedDirectImageTransitionShift
-import all Sheaf.AlgebraicGeometry.EtalePullbackSingleComp
+import all WeilConjectures.AlgebraicGeometry.AbelianDerivedDirectImageTransitionShift
+import all WeilConjectures.AlgebraicGeometry.EtalePullbackSingleComp
 
 /-! # Coherence of varying-coefficient raw pullbacks
 

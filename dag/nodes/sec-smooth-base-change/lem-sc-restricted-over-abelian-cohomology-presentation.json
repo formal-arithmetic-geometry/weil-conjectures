@@ -94,13 +94,14 @@
  "unit": "sk-thm-vanishing",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.RestrictedOverAbelianCohomologyPresentation",
-  "file": "lean/Sheaf/AlgebraicGeometry/RestrictedOverAbelianCohomologyPresentation.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.RestrictedOverAbelianCohomologyPresentation",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RestrictedOverAbelianCohomologyPresentation.lean",
   "declaration": "AlgebraicGeometry.Etale.exists_restrictedOverAbelian_cohomology_presentation",
   "statement": "theorem exists_restrictedOverAbelian_cohomology_presentation\n    {W S : Scheme.{u}} (k : W ⟶ S)\n    (F : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)\n    {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Over W)\n    [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f).left]\n    [∀ i, QuasiCompact ((D.obj i).hom ≫ k)]\n    [∀ i, QuasiSeparated ((D.obj i).hom ≫ k)]\n    (c : Cone D) (hc : IsLimit ((Over.forget W).mapCone c))\n    [QuasiCompact (c.pt.hom ≫ k)] [QuasiSeparated (c.pt.hom ≫ k)]\n    (U : S.Etale) [IsAffine U.left] :\n    ∃ (H : Iᵒᵖ ⥤ AddCommGrpCat.{u + 1}) (B : Cocone H)\n      (e : ∀ i : I, H.obj (op i) ≅ restrictedOverCohomology k F q (D.obj i) U)\n      (e₀ : B.pt ≅ restrictedOverCohomology k F q c.pt U),\n      EtaleComplexCohomologyPresentationData H B ∧\n      (∀ (i j : I) (f : j ⟶ i), H.map f.op ≫ (e j).hom =\n        (e i).hom ≫ restrictedOverCohomologyMap k F q (D.map f) U) ∧\n      (∀ i : I, B.ι.app (op i) ≫ e₀.hom =\n        (e i).hom ≫ restrictedOverCohomologyMap k F q (c.π.app i) U)",
   "branch": "sheaf-dag",
   "by": "E1",
-  "date": "2026-10-15"
+  "date": "2026-10-15",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.RestrictedOverAbelianCohomologyPresentation; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-14",

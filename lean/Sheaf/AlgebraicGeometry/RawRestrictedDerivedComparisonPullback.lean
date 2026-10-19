@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.RawRestrictedDerivedComparison
-public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
+public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
 import Sheaf.AlgebraicGeometry.RestrictedComparisonGeneratorPullback
 import Sheaf.AlgebraicGeometry.RestrictedDerivedSectionPullbackCommShift
 public import Sheaf.AlgebraicGeometry.RestrictedDerivedSectionZeroComparison

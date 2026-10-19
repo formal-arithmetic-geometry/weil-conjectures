@@ -7,11 +7,11 @@ module
 
 public import Sheaf.RingTheory.FormallySmoothAdic
 public import WeilConjectures.RingTheory.CohenRing
-public import Sheaf.RingTheory.IsRegularSystemOfParameters
+public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.RingTheory.RingHom.Flat
 import Sheaf.RingTheory.ClosedFiberEquationRemoval
-import Sheaf.RingTheory.FlatClosedFiberKernelRigidity
+import WeilConjectures.RingTheory.FlatClosedFiberKernelRigidity
 
 /-! # Removing the equations of a regular closed fibre
 

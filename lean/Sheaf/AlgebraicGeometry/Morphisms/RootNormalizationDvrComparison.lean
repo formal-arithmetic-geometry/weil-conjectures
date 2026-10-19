@@ -15,7 +15,7 @@ public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
 
 import Sheaf.AlgebraicGeometry.Morphisms.GaloisCoverBaseChange
-import Sheaf.RingTheory.RegularPrincipalPrimeLocalizationDvr
+import WeilConjectures.RingTheory.RegularPrincipalPrimeLocalizationDvr
 import Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationLocalizationComparison
 
 /-! # Localization of the root normalization to a DVR model -/

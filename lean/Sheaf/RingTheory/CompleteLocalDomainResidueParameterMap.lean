@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
 import Sheaf.RingTheory.ExistsCoefficientSubring
 import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
 import Sheaf.RingTheory.PowerSeriesUniversalPropertyComplete
-import Sheaf.RingTheory.PowerSeriesQuotientVariables
+import WeilConjectures.RingTheory.PowerSeriesQuotientVariables
 import Mathlib.RingTheory.LocalRing.Quotient
 import Mathlib.RingTheory.KrullDimension.Regular
 import Mathlib.RingTheory.MvPowerSeries.Inverse

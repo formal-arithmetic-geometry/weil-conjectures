@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import Mathlib.CategoryTheory.Filtered.Basic
 import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyLimit
-import Sheaf.AlgebraicGeometry.EtaleComplexPullbackPresentation
+import WeilConjectures.AlgebraicGeometry.EtaleComplexPullbackPresentation
 import Mathlib.CategoryTheory.Filtered.Connected
 
 /-! # Derived étale cohomology over an inverse limit

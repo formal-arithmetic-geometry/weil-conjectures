@@ -4,10 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CartesianHigherImageTransitions
-public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
+public import WeilConjectures.AlgebraicGeometry.CartesianHigherImageTransitions
+public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
 import Sheaf.AlgebraicGeometry.CartesianRawClassChartRepresentative
-import Sheaf.AlgebraicGeometry.RestrictedOverAbelianCohomologyPresentation
+import WeilConjectures.AlgebraicGeometry.RestrictedOverAbelianCohomologyPresentation
 import Sheaf.AlgebraicGeometry.HigherDirectImageRawComplexPresentation
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 

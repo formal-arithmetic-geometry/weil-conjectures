@@ -31,7 +31,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
-import Sheaf.AlgebraicGeometry.EtaleInverseImageColimits
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageColimits
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses

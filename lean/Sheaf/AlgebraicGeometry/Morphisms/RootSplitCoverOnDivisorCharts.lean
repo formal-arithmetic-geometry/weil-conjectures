@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.Algebra.Regular.SMul
 
 import Sheaf.AlgebraicGeometry.Morphisms.RootSplitCoverIndEtaleCharts
-import Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootChartsIndEtaleDescent
+import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedRootChartsIndEtaleDescent
 
 @[expose] public section
 

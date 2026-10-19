@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
 import Sheaf.RingTheory.FormallySmoothAdicClosedFiber
-import Sheaf.RingTheory.RegularLocalOfFlatWithRegularClosedFiber
+import WeilConjectures.RingTheory.RegularLocalOfFlatWithRegularClosedFiber
 import Sheaf.RingTheory.RegularLocalLocalization
 import Sheaf.RingTheory.GeometricallyRegularFieldExtension
 import Sheaf.RingTheory.FormallySmoothRegularCompletePurelyInseparableRegular

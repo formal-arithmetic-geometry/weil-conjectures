@@ -3,7 +3,7 @@ module
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Regular.RegularSequence
-public import Sheaf.RingTheory.IsRegularSystemOfParameters
+public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!

@@ -1,8 +1,8 @@
 module
 
-public import Sheaf.AlgebraicGeometry.CartesianChartExchangeMapBridge
-public import Sheaf.AlgebraicGeometry.CartesianHigherImageChartSystem
-import all Sheaf.AlgebraicGeometry.CartesianChartExchangeObjects
+public import WeilConjectures.AlgebraicGeometry.CartesianChartExchangeMapBridge
+public import WeilConjectures.AlgebraicGeometry.CartesianHigherImageChartSystem
+import all WeilConjectures.AlgebraicGeometry.CartesianChartExchangeObjects
 
 @[expose] public section
 

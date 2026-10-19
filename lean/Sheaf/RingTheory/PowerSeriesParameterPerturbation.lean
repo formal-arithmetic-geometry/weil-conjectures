@@ -6,12 +6,12 @@ Authors: SHEAF group U3
 module
 
 public import WeilConjectures.RingTheory.CohenRing
-public import Sheaf.RingTheory.IsRegularSystemOfParameters
+public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.Algebra.CharP.Defs
 import Sheaf.RingTheory.PowerSeriesAdicEvaluation
 import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
-import Sheaf.RingTheory.PowerSeriesQuotientVariables
+import WeilConjectures.RingTheory.PowerSeriesQuotientVariables
 import Mathlib.RingTheory.MvPowerSeries.Inverse
 
 /-!

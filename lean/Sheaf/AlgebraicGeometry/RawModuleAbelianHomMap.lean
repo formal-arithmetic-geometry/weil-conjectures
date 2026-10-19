@@ -6,7 +6,7 @@ Authors: SHEAF group M4
 module
 
 public import Sheaf.AlgebraicGeometry.RawModuleScalarPullbackComparison
-public import Sheaf.AlgebraicGeometry.RestrictedOverAbelianComplexData
+public import WeilConjectures.AlgebraicGeometry.RestrictedOverAbelianComplexData
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
 
 /-! # The fixed scalar-forgetting map on raw derived Hom

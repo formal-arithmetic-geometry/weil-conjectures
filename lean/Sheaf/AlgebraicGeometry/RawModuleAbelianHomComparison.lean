@@ -6,7 +6,7 @@ Authors: SHEAF group V3
 module
 
 public import Sheaf.AlgebraicGeometry.HigherDirectImageRawDiagram
-public import Sheaf.AlgebraicGeometry.RestrictedOverAbelianComplexData
+public import WeilConjectures.AlgebraicGeometry.RestrictedOverAbelianComplexData
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
 import Sheaf.AlgebraicGeometry.RawModuleAbelianHomMapIsIso
 import Sheaf.AlgebraicGeometry.RawModuleAbelianHomMapNaturality

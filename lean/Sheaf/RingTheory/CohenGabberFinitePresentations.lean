@@ -23,12 +23,12 @@ import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 import Mathlib.RingTheory.Algebraic.Integral
 import Mathlib.FieldTheory.SeparablyGenerated
 import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Sheaf.RingTheory.PowerSeriesQuotientVariables
+import WeilConjectures.RingTheory.PowerSeriesQuotientVariables
 import Sheaf.RingTheory.PowerSeriesCompleteOverCompleteBase
 import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegular
 import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 import Sheaf.RingTheory.PowerSeriesUniversalPropertyComplete
-import Sheaf.RingTheory.RegularPrincipalPrimeLocalizationDvr
+import WeilConjectures.RingTheory.RegularPrincipalPrimeLocalizationDvr
 import Sheaf.Paper.CoefficientFieldGenericDifferentialBasis
 import Sheaf.RingTheory.FiniteAlgebraEtaleNearFieldOrDvr
 import Sheaf.RingTheory.FiniteFormalMapDifferentialCokernel

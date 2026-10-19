@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyNaturalIso
-import Sheaf.AlgebraicGeometry.RestrictedAffineComplexSystem
+import WeilConjectures.AlgebraicGeometry.RestrictedAffineComplexSystem
 
 /-! # Complex presentation of raw restricted cohomology
 

@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.IsRegularScheme
 public import Sheaf.AlgebraicGeometry.StrictNormalCrossingsBoundary
 public import Sheaf.AlgebraicGeometry.NormalScheme
-public import Sheaf.RingTheory.IsRegularSystemOfParameters
+public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
@@ -24,7 +24,7 @@ import Mathlib.FieldTheory.Galois.Infinite
 import Mathlib.RingTheory.Noetherian.Basic
 import Sheaf.AlgebraicGeometry.EtaleNormalComponents
 import Sheaf.AlgebraicGeometry.RegularBoundaryDivisorialChart
-import Sheaf.AlgebraicGeometry.Morphisms.AffineFpIsoIndEtaleDescent
+import WeilConjectures.AlgebraicGeometry.Morphisms.AffineFpIsoIndEtaleDescent
 import Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootsOfUnity
 import Sheaf.RingTheory.StrictHenselizationCotangentDimension
 import Sheaf.RingTheory.StrictHenselizationRegular

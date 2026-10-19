@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.CartesianChartExchangeMapBridge
+public import WeilConjectures.AlgebraicGeometry.CartesianChartExchangeMapBridge
 import all Sheaf.AlgebraicGeometry.CartesianChartExchangeRawNaturality
 import all Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonIsIso
 public import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonMap

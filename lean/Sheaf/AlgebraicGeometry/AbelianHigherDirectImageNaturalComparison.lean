@@ -7,9 +7,9 @@ module
 
 public import Mathlib.Algebra.Category.Grp.Adjunctions
 
-public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageMap
+public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageMap
 import all Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
-import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
+import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
 
 /-! # Natural comparison for abelian higher direct images
 

@@ -14,7 +14,7 @@ public import Mathlib.Topology.KrullDimension
 public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
 public import Sheaf.AlgebraicGeometry.CanonicalCoherentEtaleComparison
 public import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonMap
-public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
+public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap

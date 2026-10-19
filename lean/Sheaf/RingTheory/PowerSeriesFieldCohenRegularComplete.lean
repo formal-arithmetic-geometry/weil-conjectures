@@ -17,7 +17,7 @@ import Mathlib.RingTheory.MvPowerSeries.NoZeroDivisors
 import Mathlib.RingTheory.AdicCompletion.Completeness
 import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 import Sheaf.RingTheory.PowerSeriesCompleteOverCompleteBase
-import Sheaf.RingTheory.PowerSeriesQuotientVariables
+import WeilConjectures.RingTheory.PowerSeriesQuotientVariables
 
 /-!
 # Power series over a field or Cohen ring

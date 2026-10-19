@@ -1,6 +1,6 @@
 module
 public import Sheaf.AlgebraicGeometry.HigherDirectImageRawDiagram
-public import Sheaf.AlgebraicGeometry.RestrictedOverAbelianComplexData
+public import WeilConjectures.AlgebraicGeometry.RestrictedOverAbelianComplexData
 import Sheaf.AlgebraicGeometry.RawModuleAbelianHomComparison
 import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyNaturalIso
 @[expose] public section

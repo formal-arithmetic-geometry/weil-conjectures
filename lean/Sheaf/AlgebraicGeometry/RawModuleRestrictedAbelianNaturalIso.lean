@@ -6,7 +6,7 @@ Authors: SHEAF group W2
 module
 
 public import Sheaf.AlgebraicGeometry.HigherDirectImageRawDiagram
-public import Sheaf.AlgebraicGeometry.RestrictedOverAbelianComplexData
+public import WeilConjectures.AlgebraicGeometry.RestrictedOverAbelianComplexData
 import Sheaf.AlgebraicGeometry.RawModuleRestrictedAbelianNonnegative
 import Sheaf.AlgebraicGeometry.RawModuleRestrictedAbelianNegative
 

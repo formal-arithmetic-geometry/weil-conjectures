@@ -19,10 +19,10 @@ public import Mathlib.Topology.GDelta.Basic
 import Sheaf.CategoryTheory.Sites.GrothendieckTopos
 import Sheaf.RingTheory.RegularBaseChange
 import Sheaf.RingTheory.RegularLocalMaximal
-import Sheaf.RingTheory.RegularLocalOfFlatWithRegularClosedFiber
+import WeilConjectures.RingTheory.RegularLocalOfFlatWithRegularClosedFiber
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-import Sheaf.RingTheory.IsRegularSystemOfParameters
+import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Mathlib.RingTheory.Flat.Localization

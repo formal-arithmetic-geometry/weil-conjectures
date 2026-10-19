@@ -2,7 +2,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
 
-import all Sheaf.AlgebraicGeometry.AbelianDerivedDirectImageTransitionShift
+import all WeilConjectures.AlgebraicGeometry.AbelianDerivedDirectImageTransitionShift
 import all WeilConjectures.AlgebraicGeometry.DerivedAdjunctionCommShift
 import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 

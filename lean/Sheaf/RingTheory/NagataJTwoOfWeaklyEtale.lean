@@ -10,7 +10,7 @@ public import Sheaf.RingTheory.NagataRing
 public import Sheaf.RingTheory.ExcellentRing
 public import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.RingTheory.WeaklyEtaleFiniteResidueModel
-import Sheaf.RingTheory.RegularLocalOfFlatWithRegularClosedFiber
+import WeilConjectures.RingTheory.RegularLocalOfFlatWithRegularClosedFiber
 import Sheaf.RingTheory.JTwoResidueFieldCriterion
 import Mathlib.RingTheory.Localization.LocalizationLocalization
 import Mathlib.RingTheory.KrullDimension.Zero

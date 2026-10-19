@@ -6,7 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.AlgebraicGeometry.HigherDirectImageRawDiagram
-public import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyPresentationData
+public import WeilConjectures.AlgebraicGeometry.EtaleComplexCohomologyPresentationData
 import Sheaf.AlgebraicGeometry.RawModuleRestrictedAbelianNaturalIso
 import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyLimit
 

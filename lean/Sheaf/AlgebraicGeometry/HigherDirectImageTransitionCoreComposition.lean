@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
-import Sheaf.AlgebraicGeometry.EtalePullbackSingleComp
+import WeilConjectures.AlgebraicGeometry.EtalePullbackSingleComp
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc
 import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 

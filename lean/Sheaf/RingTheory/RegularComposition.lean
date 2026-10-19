@@ -9,7 +9,7 @@ public import Sheaf.RingTheory.GRing
 import Sheaf.RingTheory.GeometricallyRegularFieldExtension
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
 import Sheaf.RingTheory.RegularCompositionExtendedFiber
-import Sheaf.RingTheory.RegularMapAscent
+import WeilConjectures.RingTheory.RegularMapAscent
 import Mathlib.RingTheory.TensorProduct.Finite
 
 /-!

@@ -8,7 +8,7 @@ public import Sheaf.RingTheory.SerreConditions
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-import Sheaf.RingTheory.RegularLocalOfFlatWithRegularClosedFiber
+import WeilConjectures.RingTheory.RegularLocalOfFlatWithRegularClosedFiber
 
 /-!
 # Ascent of Serre regularity in codimension

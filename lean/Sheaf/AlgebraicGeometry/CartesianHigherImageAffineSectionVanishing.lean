@@ -5,7 +5,7 @@ Authors: SHEAF group S4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CartesianHigherImageTransitions
+public import WeilConjectures.AlgebraicGeometry.CartesianHigherImageTransitions
 import Sheaf.AlgebraicGeometry.CartesianHigherImageAffineSectionLocalVanishing
 
 /-! # Eventual vanishing of affine relative higher-image sections

@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.MvPowerSeries.Equiv
 public import Mathlib.RingTheory.MvPowerSeries.Derivative
 public import Mathlib.Data.Matrix.Mul
-public import Sheaf.RingTheory.IsRegularSystemOfParameters
+public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 
 /-! # Formal Jacobian coordinate chain rule
 

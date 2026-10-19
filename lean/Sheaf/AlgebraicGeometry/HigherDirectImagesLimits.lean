@@ -14,7 +14,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.CategoryTheory.Adjunction.Mates
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Sheaf.AlgebraicGeometry.DerivedInverseImageComposition
-import Sheaf.AlgebraicGeometry.EtaleInverseImageColimits
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageColimits
 import Sheaf.Paper.KunBcMapOnCohomology
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 

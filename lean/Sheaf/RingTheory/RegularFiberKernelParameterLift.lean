@@ -5,7 +5,7 @@ Authors: SHEAF group N1
 -/
 module
 
-public import Sheaf.RingTheory.IsRegularSystemOfParameters
+public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.RingTheory.Ideal.Quotient.Basic
 import Sheaf.RingTheory.RegularLocalQuotientKernelParameters

@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.HigherDirectImageRawOverNaturality
 import Sheaf.AlgebraicGeometry.HigherDirectImageRawTrianglePullbackComposition
-import Sheaf.AlgebraicGeometry.HigherDirectImageRestrictedCoefficientComposition
+import WeilConjectures.AlgebraicGeometry.HigherDirectImageRestrictedCoefficientComposition
 
 /-! # Bundled formula for composition of raw cohomology pullbacks
 

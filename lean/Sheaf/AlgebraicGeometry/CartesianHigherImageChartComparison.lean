@@ -5,10 +5,10 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CartesianHigherImageTransitions
-public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
-public import Sheaf.AlgebraicGeometry.CartesianHigherImageChartSystem
-public import Sheaf.AlgebraicGeometry.RestrictedOverAbelianComplexData
+public import WeilConjectures.AlgebraicGeometry.CartesianHigherImageTransitions
+public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
+public import WeilConjectures.AlgebraicGeometry.CartesianHigherImageChartSystem
+public import WeilConjectures.AlgebraicGeometry.RestrictedOverAbelianComplexData
 import Sheaf.AlgebraicGeometry.CartesianChartExchangeNaturality
 
 /-! # Chart cohomology and cartesian exchange

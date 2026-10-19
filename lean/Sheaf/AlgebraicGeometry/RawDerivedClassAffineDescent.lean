@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.CartesianChartClassPullback
 import Sheaf.AlgebraicGeometry.CofilteredAffineEtaleModel
 import Sheaf.AlgebraicGeometry.DerivedEtaleCohomologyLimit
-import Sheaf.AlgebraicGeometry.FixedDerivedCohomologyDiagram
+import WeilConjectures.AlgebraicGeometry.FixedDerivedCohomologyDiagram
 import Sheaf.AlgebraicGeometry.RawFixedDerivedComparisonIsIso
 import Sheaf.AlgebraicGeometry.RawFixedDerivedComparisonNaturality
 import Mathlib.AlgebraicGeometry.Morphisms.Affine

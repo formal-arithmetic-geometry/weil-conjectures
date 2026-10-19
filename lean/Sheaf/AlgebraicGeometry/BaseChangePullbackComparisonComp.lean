@@ -6,7 +6,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc
-import Sheaf.AlgebraicGeometry.EtalePullbackSingleComp
+import WeilConjectures.AlgebraicGeometry.EtalePullbackSingleComp
 
 /-! # Composition of the coefficient comparisons in target transitions
 
