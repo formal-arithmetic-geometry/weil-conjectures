@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-projective-pair-chart-relation",
+ "kind": "statement",
+ "title": "Coordinate-ratio equation for a section-preserving projective pair",
+ "statement": "Let $X,S$ be schemes [def-pc-scheme], $I$ a coordinate type, $M$ an $\\mathcal O_X$-module, $s_i\\in\\Gamma(X,M)$, and $\\varphi:X\\to\\mathbf P(I;S)$ [def-nagata-projective-space-base-change]. Suppose an isomorphism $\\varepsilon:\\varphi^*\\mathcal O(1)\\to M$ [def-pc-projective-space-twist, def-pc-module-pullback] sends every pulled-back coordinate $T_i$ to $s_i$. Then on $\\varphi^{-1}D_+(T_i)$ one has $s_j=\\varphi^*(T_j/T_i)s_i$ for every $i,j\\in I$. In fact this equation only needs a module morphism $\\varepsilon$ with the displayed section equations.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Lemma 01N8 (lemma-converse-construction), chart construction and uniqueness, specialized to degree-one polynomial coordinates"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-nagata-projective-space-base-change",
+  "def-sc-section-generating-locus",
+  "def-pc-projective-space-twist",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Pull the coordinate identity T_j=(T_j/T_i)T_i back to the chart and apply ε. O-linearity preserves the pulled-back scalar, and naturality moves ε through restriction. Substitute the section equations for ε. This is source map_eq_coordRatio_smul_of_twistRestrict_iso (OfInvertible.lean:317-324), proved by applying ε to pullbackSection_twistOneSection_map_eq_smul.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-projective-space-twist",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Lemma 01N8; already realized by WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible.map_eq_coordRatio_smul_of_twistRestrict_iso"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "preimage standard open projective space invertible generating sections coordinate ratio",
+   "results": "Eight Mathlib hits, including Proj.fromOfGlobalSections_preimage_basicOpen and Proj.awayι_preimage_basicOpen; these do not cover an arbitrary invertible module. Direct source inspection finds generatingLocus_eq_preimage_standardOpen, isFreeGenerator_of_twistRestrict_iso and map_eq_coordRatio_smul_of_twistRestrict_iso.",
+   "verdict": "Use the already proved source-library lemmas.",
+   "date": "2026-10-19"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.ProjectiveSpace.standardOpen",
+   "results": "0 hits; unknown identifier 'AlgebraicGeometry.ProjectiveSpace.standardOpen' in Mathlib.",
+   "verdict": "No Mathlib result; the projective-space construction is in the source library.",
+   "date": "2026-10-19"
+  },
+  {
+   "tool": "grep",
+   "query": "homOfGeneratingSections|isFreeGenerator_of_twistRestrict_iso|map_eq_coordRatio_smul_of_twistRestrict_iso",
+   "results": "msearch: 0 Mathlib hits. Direct rg finds the source frame and ratio lemmas in ProjectiveSpace/OfInvertible.lean:305,317 and preimage lemma in ProjectiveSpace/LinearCombination.lean:59.",
+   "verdict": "Reuse the existing source declarations, without adding Lean statements or holes.",
+   "date": "2026-10-19"
+  },
+  {
+   "tool": "leansearch",
+   "query": "morphism projective space pullback twisting sheaf isomorphism section chart ratio",
+   "results": "Eight Mathlib hits: Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left, Scheme.Pullback.pullbackP1Iso_hom_snd, arrowResLEAppIso, Proj.pullbackAwayιIso_inv_snd, Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right, Proj.pullbackAwayιIso, Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom, Proj.pullbackAwayιIso_inv_fst.",
+   "verdict": "No exact Mathlib match for arbitrary invertible modules; use the already proved source-library declaration recorded in lean.",
+   "date": "2026-10-19"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveMorphismChartPreimage",
+  "date": "2026-10-19",
+  "group": "B9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-symmetric-product-finite",
+   "place": "Steps 2 and 9 of its split: chart preimages and coordinate ratios for the morphism given by generating sections",
+   "via": [
+    "lem-weil-pbc-projective-morphism-chart-preimage"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.map_eq_coordRatio_smul_of_twistRestrict_iso",
+  "statement": "lemma map_eq_coordRatio_smul_of_twistRestrict_iso (i j : n) : M.presheaf.map (homOfLE (le_top : φ ⁻¹ᵁ standardOpen n S i ≤ ⊤)).op (s j) = φ.app (standardOpen n S i) (coordRatio n S i j) • M.presheaf.map (homOfLE (le_top : φ ⁻¹ᵁ standardOpen n S i ≤ ⊤)).op (s i)",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-19",
+  "note": "Existing proved declaration; its section parameters are X, S, n, M, s, φ, ε and hε as in section Sections. No new Lean declaration or proof obligation."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261019T132224-L-1202871",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261019T132224-L-1202871",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

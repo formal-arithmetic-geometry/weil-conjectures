@@ -8,16 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible
 public import WeilConjectures.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
-import Sheaf.AlgebraicGeometry.ProjectiveSpaceFunctorOfPoints
-import Sheaf.AlgebraicGeometry.ProjectiveSpaceTwistingSheafCharts
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.Paper.NonvanishingSectionTrivializes
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
-import WeilConjectures.AlgebraicGeometry.NonvanishingSectionTrivializes
-import WeilConjectures.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearCombination
+import WeilConjectures.AlgebraicGeometry.NonvanishingGeneratingLocus
 
 /-!
 # Chart preimages and coordinate ratios for generating sections
@@ -36,6 +28,30 @@ open AlgebraicGeometry.Scheme.Modules
 
 namespace AlgebraicGeometry.ProjectiveSpace
 
+private lemma appLE_eq_of_eq {X Z : Scheme.{u}} {f g : X ⟶ Z} (h : f = g)
+    (U V e) : f.appLE U V e = g.appLE U V (h ▸ e) := by
+  subst h
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private lemma appLE_coordRatio_eq {I : Type u} {Y S S' : Scheme.{u}}
+    (φ : Y ⟶ ℙ(I; S)) (ψ : Y ⟶ ℙ(I; S'))
+    (h : φ ≫ toProjInt I S = ψ ≫ toProjInt I S')
+    (j l : I) (U : Y.Opens)
+    (hφ : U ≤ φ ⁻¹ᵁ standardOpen I S j)
+    (hψ : U ≤ ψ ⁻¹ᵁ standardOpen I S' j) :
+    φ.appLE (standardOpen I S j) U hφ (coordRatio I S j l) =
+      ψ.appLE (standardOpen I S' j) U hψ (coordRatio I S' j l) := by
+  unfold coordRatio
+  simp only [Scheme.Hom.app_eq_appLE]
+  erw [← CommRingCat.comp_apply, Scheme.Hom.appLE_comp_appLE,
+    appLE_eq_of_eq h, ← Scheme.Hom.appLE_comp_appLE, CommRingCat.comp_apply]
+  · exact le_rfl
+  · exact hψ
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The morphism defined by generating sections of an invertible module pulls each
 standard chart back to the nonvanishing locus of its coordinate section. On that open,
 the pullback of the coordinate ratio is the unique scalar multiplying the denominator
@@ -83,6 +99,63 @@ theorem homOfGeneratingSections_chart_preimage (n : ℕ) {Y S : Scheme.{u}}
                 ((s j).val (op ⊤)) →
             a = (homOfGeneratingSections _ g L s hs).app (standardOpen _ S j)
               (coordRatio _ S j l) := by
-  sorry
+  classical
+  let I := ULift.{u} (Fin (n + 1))
+  let Z := Spec (CommRingCat.of (ULift.{u} ℤ))
+  let ψ := integralHomOfGeneratingSections I L s hs
+  let φ := homOfGeneratingSections I g L s hs
+  let t : I → Γ(L, ⊤) := fun i ↦ (s i).val (op ⊤)
+  obtain ⟨e, he⟩ := integralHomOfGeneratingSections_spec I L s hs
+  let adj := Classical.choose (exists_tensorPullbackAdjunction ψ)
+  let c := (adj.leftAdjointUniq (pullbackPushforwardAdjunction ψ)).app (twist I Z 1)
+  let ε : twistRestrict ψ 1 ≅ L := c.symm ≪≫ e
+  have hc (i : I) : c.hom.app ⊤ ((adj.unit.app (twist I Z 1)).val.app
+      (op ⊤) (twistOneSection I Z i)) =
+        pullbackSection ψ (twistOneSection I Z i) := by
+    exact congrArg (fun a ↦ a.val.app (op ⊤) (twistOneSection I Z i))
+      (adj.unit_leftAdjointUniq_hom_app (pullbackPushforwardAdjunction ψ) (twist I Z 1))
+  have hε (i : I) : ε.hom.app _ (pullbackSection ψ (twistOneSection I Z i)) =
+      L.presheaf.map (homOfLE (le_top : ψ ⁻¹ᵁ ⊤ ≤ ⊤)).op (t i) := by
+    simp only [Scheme.Hom.preimage_top]
+    simp only [ε, Iso.trans_hom, Iso.symm_hom, Hom.comp_app,
+      ConcreteCategory.comp_apply]
+    rw [← hc]
+    have hi : c.inv.app ⊤ (c.hom.app ⊤ ((adj.unit.app (twist I Z 1)).val.app
+        (op ⊤) (twistOneSection I Z i))) =
+        (adj.unit.app (twist I Z 1)).val.app (op ⊤) (twistOneSection I Z i) := by
+      rw [← ConcreteCategory.comp_apply, ← Hom.comp_app, Iso.hom_inv_id, Hom.id_app]
+      rfl
+    rw [hi]
+    simpa only [Scheme.Hom.preimage_top, presheaf_map_id_apply] using he i
+  have hproj : φ ≫ toProjInt I S = ψ ≫ toProjInt I Z :=
+    (homOfGeneratingSections_spec I g L s hs).2.1
+  intro j
+  have hU : φ ⁻¹ᵁ standardOpen I S j = ψ ⁻¹ᵁ standardOpen I Z j := by
+    change φ ⁻¹ᵁ (toProjInt I S ⁻¹ᵁ _) = ψ ⁻¹ᵁ (toProjInt I Z ⁻¹ᵁ _)
+    rw [← Scheme.Hom.comp_preimage, hproj, Scheme.Hom.comp_preimage]
+  have hgen : IsFreeGenerator
+      (L.presheaf.map (homOfLE (le_top : φ ⁻¹ᵁ standardOpen I S j ≤ ⊤)).op (t j)) := by
+    rw [hU]
+    exact isFreeGenerator_of_twistRestrict_iso ε.hom hε j
+  constructor
+  · change (φ ⁻¹ᵁ standardOpen I S j : Set Y) = nonvanishingLocus L (t j)
+    rw [hU, ← generatingLocus_eq_preimage_standardOpen ε.hom hε j]
+    ext y
+    exact (mem_nonvanishingLocus_iff_generatesAt L (t j) y).symm
+  · intro l
+    have hrel := congrArg (L.presheaf.map (homOfLE hU.le).op)
+      (map_eq_coordRatio_smul_of_twistRestrict_iso ε.hom hε j l)
+    erw [Scheme.Modules.map_smul, presheaf_map_homOfLE_map_homOfLE,
+      presheaf_map_homOfLE_map_homOfLE] at hrel
+    have hr := appLE_coordRatio_eq φ ψ hproj j l
+      (φ ⁻¹ᵁ standardOpen I S j) le_rfl hU.le
+    have hid (a : Γ(Y, φ ⁻¹ᵁ standardOpen I S j)) :
+        Y.presheaf.map (homOfLE le_rfl).op a = a :=
+      Scheme.presheaf_map_id_apply (homOfLE le_rfl) a
+    simp only [Scheme.Hom.appLE, CommRingCat.comp_apply, hid] at hr
+    rw [← hr] at hrel
+    refine ⟨hrel, ?_⟩
+    intro a ha
+    exact hgen.smul_left_injective (ha.symm.trans hrel)
 
 end AlgebraicGeometry.ProjectiveSpace
