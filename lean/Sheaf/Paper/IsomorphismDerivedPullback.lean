@@ -12,6 +12,7 @@ public import Sheaf.Paper.CompletedIntegralCoefficientGerm
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Paper.IntegralReductionTowerWellDefined
 import Sheaf.Paper.FiniteFreeCompletedScalarComparison
+import Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageComparison
 public import Sheaf.Paper.ConstantCoefficientObjectsConstructible
 import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
@@ -116,7 +117,32 @@ theorem isomorphismTermwiseModuleInverseImage_exact {X Y : Scheme.{u}}
     (isomorphismTermwiseModuleInverseImage g R S c).Additive ∧
       PreservesFiniteLimits (isomorphismTermwiseModuleInverseImage g R S c) ∧
       PreservesFiniteColimits (isomorphismTermwiseModuleInverseImage g R S c) := by
-  sorry
+  set_option backward.defeqAttrib.useBackward false in
+    set_option backward.isDefEq.respectTransparency false in
+      let : HasSheafify (ProEt.topology Y) AddCommGrpCat.{u + 1} :=
+        integralCoefficientAbSheafify.{u, u} Y
+      let : HasSheafify (ProEt.topology X) AddCommGrpCat.{u + 1} :=
+        integralCoefficientAbSheafify.{u, u} X
+      let : (ProEt.topology Y).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+        integralCoefficientAbLocallyBijective.{u, u} Y
+      let : (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+        integralCoefficientAbLocallyBijective.{u, u} X
+      let A := (sheafCompose (ProEt.topology Y)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R
+      let B := (sheafCompose (ProEt.topology X)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S
+      let T := isomorphismTermwiseModuleInverseImage g R S c
+      let V := SheafOfModules.toSheaf B
+      obtain ⟨e⟩ := (proEtale_moduleInverseImage_comparison g R).1
+      let d : T ⋙ V ≅ SheafOfModules.toSheaf A ⋙
+          proEtaleSheafInverseImage g AddCommGrpCat.{u + 1} := e
+      let := (proEtaleIsoInverseImage_equivalence.{u, u + 2, 0, 0} g AddCommGrpCat.{u + 1}).1
+      let : PreservesFiniteLimits (T ⋙ V) := preservesFiniteLimits_of_natIso d.symm
+      let : PreservesFiniteColimits (T ⋙ V) := preservesFiniteColimits_of_natIso d.symm
+      let : (T ⋙ V).Additive := Functor.additive_of_preserves_binary_products _
+      let : T.Additive := Functor.additive_of_comp_faithful T V
+      exact ⟨inferInstance, preservesFiniteLimits_of_reflects_of_preserves T V,
+        preservesFiniteColimits_of_reflects_of_preserves T V⟩
 
 /-- Additivity for termwise inverse image. Source: Stacks Tag 015F
 (blueprint: lem-weil-isomorphism-derived-pullback). -/
