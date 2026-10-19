@@ -1,0 +1,174 @@
+{
+ "id": "lem-sf-complete-constant-residue-free-model",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof: local projective models below the tensor-evaluation comparison; Tag 09C3 top-degree cone induction",
+   "via": [
+    "lem-fix-residue-lisse-projective-models",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Bounded finite free models from constant finite free residue cohomology",
+ "statement": "Fix a prime l, a finite extension E of Q_l with its valuation ring and uniformizer [def-weil-l-adic-coefficient-extension], and an affine scheme S [def-pc-scheme] categorically weakly contractible for its small pro-etale site [def-weil-pbc-proetale-site]. Let K be a derived-complete complex [def-weil-derived-complete] over the inverse limit of the constant finite quotient coefficient sheaves [def-weil-completed-integral-coefficients]. Assume its residue has finite Tor amplitude [def-weil-proetale-tor-amplitude] and every residue cohomology sheaf is isomorphic to a finite power of the residue unit. Then there are integers a<=b and a cochain complex P with zero terms outside [a,b], every term isomorphic to a finite power of the completed regular module, and an isomorphism K to Q(P) [def-weil-abstract-derived-category]. There is no covering or locally constant trivialization conclusion.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3 (lemma-local-structure-constructible-complex) top-degree cone induction"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-derived-tensor",
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-derived-limit",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-derived-complete",
+  "def-weil-integral-reduction-tower",
+  "def-weil-integral-derived-reduction",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-completed-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Finite powers of the unit are projective by [lem-sf-weakly-contractible-unit-projective]. Transport projectivity along the finite-free cohomology isomorphisms of a representative of the residue, and apply [lem-sf-projective-homology-zero-differential-model]. This constructs an actual zero-differential residue representative and an isomorphism in the derived category. Test the recorded Tor predicate against the regular module in degree zero, using a K-flat resolution. The ordinary complex right unitor, followed by the augmentation quasi-isomorphism, identifies this tensor with the original residue. Thus its cohomology vanishes outside [a,b]. The cycle-lifting model has these cohomology objects as its actual terms, so the termwise finite-free isomorphisms and both explicit bounds follow.",
+   "uses": [
+    "lem-sf-weakly-contractible-unit-projective",
+    "lem-sf-projective-homology-zero-differential-model",
+    "def-weil-abstract-derived-category",
+    "lem-pc-kflat-resolution",
+    "def-weil-derived-tensor",
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3 (lemma-local-structure-constructible-complex) cycle lifts"
+   }
+  },
+  {
+   "text": "Write the chosen Tor interval as [a,a+d] where d=toNat(b-a), using the ordering in the Tor-amplitude definition. Induct on d. Apply [lem-sf-complete-residue-top-cell] to the split residue model: its first object has a single-degree finite-free model; its third object is zero when d=0, or has a bounded zero-differential finite-free residue model at d-1. Its zero differentials identify its cohomology with its terms, giving the finite-free cohomology hypothesis for induction. Finite powers of the unit are flat, by finite-product closure of flat objects. Thus the supplied bounded model has monoidal Tor amplitude by the bounded-flat-model lemma, and the K-flat tensor comparison transports this to the recorded resolution-tested Tor predicate. This proves the smaller Tor interval required by induction, for all test sheaves and all K-flat resolution choices.",
+   "uses": [
+    "lem-sf-complete-residue-top-cell",
+    "def-weil-derived-tensor",
+    "lem-pc-kflat-resolution",
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3 (lemma-local-structure-constructible-complex) induction"
+   }
+  },
+  {
+   "text": "The zero object has the zero-complex model, whose terms are the empty power of the unit. For the induction step use [lem-sf-bounded-projective-models-extensions] and the model of the smaller cone. Finite-free term classes are invariant under isomorphism and closed under biproducts: concatenate the two finite index sets using finSumFinEquiv and the universal property of products. Their terms are projective by [lem-sf-weakly-contractible-unit-projective]. Transport the resulting middle-object model through its isomorphism with K. Finally replace the lower bound c by min(c,e) to order the bounds without changing the complex.",
+   "uses": [
+    "lem-sf-bounded-projective-models-extensions",
+    "lem-sf-weakly-contractible-unit-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3 (lemma-local-structure-constructible-complex) final mapping-cone paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-weakly-contractible-unit-projective",
+  "lem-sf-projective-homology-zero-differential-model",
+  "def-weil-abstract-derived-category",
+  "lem-pc-kflat-resolution",
+  "def-weil-derived-tensor",
+  "def-weil-proetale-tor-amplitude",
+  "lem-sf-complete-residue-top-cell",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-sf-bounded-projective-models-extensions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3 (lemma-local-structure-constructible-complex) top-degree cone induction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived complete complexes with finite free residue cohomology have bounded finite free models",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.right_fac_of_isStrictlyLE, HasDerivedCategory.standard, HomologicalComplex.instHasLimit, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, HomologicalComplexUpToQuasiIso, HomologicalComplexUpToQuasiIso.Q, DerivedCategory",
+   "date": "2026-10-19",
+   "verdict": "no exact match; related infrastructure is used where applicable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a weakly contractible affine scheme a complete complex with constant finite free residue cohomology has a bounded finite free sheaf model",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+   "date": "2026-10-19",
+   "verdict": "no exact match; related infrastructure is used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "complete_constant_residue_free_model|residue_clopen_preparation",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "no exact match; related infrastructure is used where applicable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ResidueLisseProjectiveModels",
+  "date": "2026-10-19",
+  "group": "G2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompleteConstantResidueFreeModel",
+  "file": "lean/Sheaf/Paper/CompleteConstantResidueFreeModel.lean",
+  "declaration": "WeilConjectures.complete_constant_residue_free_model",
+  "statement": "theorem complete_constant_residue_free_model\n    (S : Scheme.{u}) (hS : IsAffine S)\n    (hweak : (Scheme.ProEt.topology S).IsWeaklyContractible.{u + 1}\n      (Scheme.ProEt.mk (𝟙 S)))\n    (K : DerivedCategory (integralTowerModules.{u, u} l E S))\n    (hcomplete : IsDerivedCompleteUnrestricted.{u, u} l E S K)\n    (hTor : HasFiniteProEtaleTorAmplitude S\n      (Padic.coefficientExtensionRing l E 1)\n      ((scalarReductionDerivedExtension.{u, u} l E S 0).obj K))\n    (hfree : ∀ q : ℤ, ∃ N : ℕ, Nonempty\n      (((DerivedCategory.homologyFunctor\n        (proEtaleRingModules S (proEtaleConstantRing S\n          (Padic.coefficientExtensionRing l E 1))) q).obj\n        ((scalarReductionDerivedExtension.{u, u} l E S 0).obj K)) ≅\n        ∏ᶜ fun _ : Fin N ↦ SheafOfModules.unit (integralCoefficientSheaf.{u, u} l E S 0))) :\n    ∃ (P : CochainComplex (integralTowerModules.{u, u} l E S) ℤ) (a b : ℤ),\n      a ≤ b ∧ P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧\n      (∀ r : ℤ, ∃ N : ℕ, Nonempty\n        (P.X r ≅ ∏ᶜ fun _ : Fin N ↦ SheafOfModules.unit\n          (completedIntegralCoefficientSheafUnrestricted.{u, u} l E S))) ∧\n      Nonempty (K ≅ DerivedCategory.Q.obj P)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-995fd",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261019T231200-L-558480",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-995fd",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261019T231200-L-558480",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof and 7 new modules (compiled, axioms probed) and their nodes vs live item signature and node, unit sk-rem-sf-pf-done realized (empty), direct importer ConstructibleTensorCompletion compiled against the delivery"
+ }
+}

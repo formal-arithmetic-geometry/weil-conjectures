@@ -1,0 +1,118 @@
+{
+ "id": "lem-sf-projective-homology-zero-differential-model",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof: local projective models below the tensor-evaluation comparison; Tag 09C3 cycle-lifting argument",
+   "via": [
+    "lem-fix-residue-lisse-projective-models",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A complex with projective cohomology has a zero-differential model",
+ "statement": "Let C be an abelian category, K an integer-indexed cochain complex in C, and assume every homology object H^q(K) is projective [def-weil-abstract-derived-category]. There are a cochain complex P with P^q=H^q(K), all differentials zero, and a quasi-isomorphism P to K. No boundedness, freeness of terms, or enough-projectives assumption on C is imposed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3 (lemma-local-structure-constructible-complex) cycle-lifting argument"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "For each q split the epimorphism K.cycles(q) to K.homology(q) by projectivity. Define P^q=H^q(K), with zero differential, and define f^q by the section followed by cycles inclusion. The latter is killed by the differential, so f is a chain map. The cycle map of f is the cycles inclusion of P followed by the section. Naturality of homology projections and the section equation show that the composite of homologyMap(f) with the homology projection of P is its cycles inclusion. Both that projection and inclusion are isomorphisms since P has zero differentials, so homologyMap(f) is invertible in each degree. Thus f is a quasi-isomorphism.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3 (lemma-local-structure-constructible-complex) cycle-lifting argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3 (lemma-local-structure-constructible-complex) cycle-lifting argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A cochain complex with projective cohomology has a quasi-isomorphism from a complex with zero differentials",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.quasiIso, CategoryTheory.ShortComplex.quasiIso_iff_isIso_descOpcycles, CategoryTheory.ProjectiveResolution.noConfusion, CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ', CategoryTheory.ProjectiveResolution.self, CategoryTheory.ProjectiveResolution.mk, CategoryTheory.ProjectiveResolution.π, CochainComplex.cm5b.I",
+   "date": "2026-10-19",
+   "verdict": "no exact match; related infrastructure is used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homology\", \"Projective\"",
+   "results": "12 hits: CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective, CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective_apply, CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective_symm_apply, CategoryTheory.ProjectiveResolution.hasHomology, CategoryTheory.preservesHomology_preadditiveCoyonedaObj_of_projective, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extLinearEquivCohomologyClass",
+   "date": "2026-10-19",
+   "verdict": "no exact match; related infrastructure is used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*projective|projective.*homology|zero.differential|IsStrictlyGE_mappingCone",
+   "results": "25 hits: Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Shapiro.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean, Mathlib/Algebra/Category/ModuleCat/Ext/HasExt.lean, Mathlib/CategoryTheory/Preadditive/Projective/Resolution.lean, Mathlib/CategoryTheory/Preadditive/Projective/Resolution.lean, Mathlib/CategoryTheory/Preadditive/Projective/Resolution.lean",
+   "date": "2026-10-19",
+   "verdict": "no exact match; related infrastructure is used where applicable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ResidueLisseProjectiveModels",
+  "date": "2026-10-19",
+  "group": "G2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProjectiveHomologyZeroDifferentialModel",
+  "file": "lean/Sheaf/Paper/ProjectiveHomologyZeroDifferentialModel.lean",
+  "declaration": "CochainComplex.exists_zero_differential_model_of_projective_homology",
+  "statement": "theorem exists_zero_differential_model_of_projective_homology\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (K : CochainComplex C ℤ) (hK : ∀ q : ℤ, Projective (K.homology q)) :\n    ∃ (P : CochainComplex C ℤ) (f : P ⟶ K),\n      (∀ q : ℤ, P.X q = K.homology q) ∧\n      (∀ i j : ℤ, P.d i j = 0) ∧ QuasiIso f",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-995fd",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261019T231200-L-558480",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-995fd",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261019T231200-L-558480",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof and 7 new modules (compiled, axioms probed) and their nodes vs live item signature and node, unit sk-rem-sf-pf-done realized (empty), direct importer ConstructibleTensorCompletion compiled against the delivery"
+ }
+}

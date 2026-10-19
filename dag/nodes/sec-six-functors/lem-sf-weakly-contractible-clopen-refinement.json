@@ -1,0 +1,140 @@
+{
+ "id": "lem-sf-weakly-contractible-clopen-refinement",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof: local projective models below the tensor-evaluation comparison; Tag 098F covering implication",
+   "via": [
+    "lem-fix-residue-lisse-projective-models",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite clopen refinement of a pro-etale cover of a weakly contractible affine",
+ "statement": "Let S be affine [def-pc-scheme] and categorically weakly contractible for its small pro-etale topology [sk-def-pe-weak-contractible]. Let (V_i to S) be any pro-etale covering family [def-weil-pbc-proetale-covering]. There are finitely many nonempty, pairwise disjoint clopen opens W_k of S whose supremum is top, with for each k a selected i(k) and a scheme map W_k to V_i(k) over S. For empty S the index set is empty.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 098F (lemma-w-contractible-proetale-cover) covering implication"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "sk-def-pe-weak-contractible",
+  "def-weil-pbc-proetale-covering",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Quasi-compactness of S and the quasi-compact-cover axiom select finitely many affine opens in covering members whose images cover S. Their coproduct V exists by [lem-weil-pbc-scheme-coproduct-family]. The induced V to S is weakly etale, using open-immersion etaleness and Mathlib weakly-etale stability instances, and is a covering because its finitely many components cover the target.",
+   "uses": [
+    "def-weil-pbc-proetale-covering",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-open-immersion-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098F (lemma-w-contractible-proetale-cover) covering implication"
+   }
+  },
+  {
+   "text": "The map of representable sheaves h_V to h_S is epic: the sheaf separatedness condition on the covering sieve detects equality of morphisms out of h_S. Subcanonicity identifies sections with scheme maps. Weak contractibility lifts the identity section to s:S to V with s followed by V to S equal to the identity. Inverse images under s of the finitely many coproduct components are clopen, pairwise disjoint, and cover S. Restrict s to give the maps W_k to the selected affine opens, then their inclusions into the original covering members. Reindex by the finite subtype of nonempty opens; the covering equality is unchanged.",
+   "uses": [
+    "lem-weil-pbc-proetale-subcanonical",
+    "sk-def-pe-weak-contractible",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098F (lemma-w-contractible-proetale-cover) categorical covering argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-covering",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-proetale-subcanonical",
+  "sk-def-pe-weak-contractible"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 098F (lemma-w-contractible-proetale-cover) covering implication"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A cover of a weakly contractible affine scheme admits a finite disjoint clopen refinement",
+   "results": "8 hits: TopologicalSpace.IsOpenCover.exists_finite_nonempty_disjoint_clopen_cover, TopologicalSpace.IsOpenCover.exists_finite_clopen_cover, AlgebraicGeometry.Scheme.affineOpenCover, AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact, AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen, AlgebraicGeometry.Scheme.affineCover, AlgebraicGeometry.Scheme.instInhabitedOpenCover, AlgebraicGeometry.Scheme.OpenCover.finiteSubcover",
+   "date": "2026-10-19",
+   "verdict": "no exact match; related infrastructure is used where applicable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proetale covering of a weakly contractible affine scheme admits a finite disjoint clopen refinement with maps to the covering members",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.OpenCover.affineRefinement, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X, AlgebraicGeometry.Scheme.OpenCover.fromAffineRefinement, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'",
+   "date": "2026-10-19",
+   "verdict": "no exact match; related infrastructure is used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "weaklyContractible|IsWeaklyContractible|residue.*top.*cell|complete.*residue",
+   "results": "15 hits: Mathlib/NumberTheory/LocalField/Basic.lean, Mathlib/NumberTheory/LocalField/Basic.lean, Mathlib/NumberTheory/LocalField/Basic.lean, Mathlib/NumberTheory/LSeries/RiemannZeta.lean, Mathlib/NumberTheory/LSeries/RiemannZeta.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean",
+   "date": "2026-10-19",
+   "verdict": "no exact match; related infrastructure is used where applicable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ResidueLisseProjectiveModels",
+  "date": "2026-10-19",
+  "group": "G2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.WeaklyContractibleClopenRefinement",
+  "file": "lean/Sheaf/Paper/WeaklyContractibleClopenRefinement.lean",
+  "declaration": "AlgebraicGeometry.Scheme.weakly_contractible_clopen_refinement",
+  "statement": "theorem weakly_contractible_clopen_refinement\n    (S : Scheme.{u}) [IsAffine S]\n    (hweak : (ProEt.topology S).IsWeaklyContractible.{u + 1} (ProEt.mk (𝟙 S)))\n    (I : Type v) (V : I → S.ProEt) (a : ∀ i : I, V i ⟶ ProEt.mk (𝟙 S))\n    (hcover : Presieve.ofArrows V a ∈ ProEt.precoverage S (ProEt.mk (𝟙 S))) :\n    ∃ (m : ℕ) (W : Fin m → S.Opens),\n      (∀ k : Fin m, IsClosed (W k : Set S)) ∧\n      (∀ k : Fin m, (W k : Set S).Nonempty) ∧\n      Pairwise (fun j k : Fin m ↦ Disjoint (W j) (W k)) ∧\n      iSup W = ⊤ ∧\n      ∃ (i : Fin m → I) (g : ∀ k : Fin m, (W k).toScheme ⟶ (V (i k)).left),\n        ∀ k : Fin m, g k ≫ (a (i k)).left = (W k).ι",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-995fd",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261019T231200-L-558480",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-995fd",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261019T231200-L-558480",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof and 7 new modules (compiled, axioms probed) and their nodes vs live item signature and node, unit sk-rem-sf-pf-done realized (empty), direct importer ConstructibleTensorCompletion compiled against the delivery"
+ }
+}

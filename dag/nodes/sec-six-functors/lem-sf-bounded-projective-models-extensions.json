@@ -1,0 +1,133 @@
+{
+ "id": "lem-sf-bounded-projective-models-extensions",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof: local projective models below the tensor-evaluation comparison; Tag 09C3 final paragraph; derived.tex Tag 064B",
+   "via": [
+    "lem-fix-residue-lisse-projective-models",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Bounded models with projective terms are closed under extensions",
+ "statement": "Let C be an abelian category with a derived category [def-weil-abstract-derived-category]. Let F be a class of objects of C invariant under isomorphisms, closed under binary biproducts, and consisting of projectives. In a distinguished triangle X to Y to Z to X[1], if X and Z have bounded cochain models all of whose terms satisfy F, then Y has such a bounded cochain model. No enough-projectives assumption on C is made.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3 (lemma-local-structure-constructible-complex) final paragraph; derived.tex Tag 064B (lemma-morphisms-from-projective-complex)"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Choose bounded models P1 and P3 of the end objects. P3 is bounded above and termwise projective, hence K-projective. The connecting morphism Z to X[1], conjugated by the model isomorphisms and Q shift comparison, has a chain-map representative psi from P3 to P1[1] by [lem-pc-ring-derived-map-representative].",
+   "uses": [
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3 (lemma-local-structure-constructible-complex) final cone construction; derived.tex Tag 064B (lemma-morphisms-from-projective-complex)"
+   }
+  },
+  {
+   "text": "The mapping cone of psi is bounded: its terms are P3^(q+1) biproduct P1^(q+1), and both lower and upper bounds follow from those of P1 and P3. Its terms satisfy F by biproduct closure and invariance under the displayed term isomorphisms. Two rotations of the original triangle and the isomorphism-of-arrow criterion identify the cone with Y[1]. Shift the cone by -1, using the Q shift comparison and shift composition isomorphism, to obtain the required model of Y.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3 (lemma-local-structure-constructible-complex) final cone construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ring-derived-map-representative",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3 (lemma-local-structure-constructible-complex) final paragraph; derived.tex Tag 064B (lemma-morphisms-from-projective-complex)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Bounded complexes of projective objects with terms in a class closed under direct sums are closed under distinguished triangle extensions",
+   "results": "8 hits: CategoryTheory.ObjectProperty.IsClosedUnderExtensions.mk, CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₁, CategoryTheory.ObjectProperty.IsTriangulatedClosed₁.mk, CategoryTheory.ObjectProperty.IsTriangulatedClosed₃.mk, CategoryTheory.ObjectProperty.IsTriangulatedClosed₂.mk, HomotopyCategory.Pretriangulated.distinguishedTriangles, CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₃, CategoryTheory.Triangulated.Subcategory.ext₃'",
+   "date": "2026-10-19",
+   "verdict": "no exact match; related infrastructure is used where applicable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded complexes of projective objects closed under extensions in the derived category and maps from bounded projective complexes",
+   "results": "8 hits: CochainComplex.isKProjective_of_projective, CochainComplex.IsKProjective, CategoryTheory.hasExt_of_enoughProjectives, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, CochainComplex.IsKProjective.leftOrthogonal, CochainComplex.IsKProjective.Qh_map_bijective, CochainComplex.isKProjective_iff_leftOrthogonal",
+   "date": "2026-10-19",
+   "verdict": "no exact match; related infrastructure is used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*projective|projective.*homology|zero.differential|IsStrictlyGE_mappingCone",
+   "results": "25 hits: Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Shapiro.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean, Mathlib/Algebra/Category/ModuleCat/Ext/HasExt.lean, Mathlib/CategoryTheory/Preadditive/Projective/Resolution.lean, Mathlib/CategoryTheory/Preadditive/Projective/Resolution.lean, Mathlib/CategoryTheory/Preadditive/Projective/Resolution.lean",
+   "date": "2026-10-19",
+   "verdict": "no exact match; related infrastructure is used where applicable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ResidueLisseProjectiveModels",
+  "date": "2026-10-19",
+  "group": "G2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.BoundedProjectiveModelsExtensions",
+  "file": "lean/Sheaf/Paper/BoundedProjectiveModelsExtensions.lean",
+  "declaration": "DerivedCategory.bounded_projective_models_extensions",
+  "statement": "theorem bounded_projective_models_extensions\n    {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]\n    (F : C → Prop)\n    (hiso : ∀ {X Y : C}, (X ≅ Y) → F X → F Y)\n    (hbiprod : ∀ X Y : C, F X → F Y → F (X ⊞ Y))\n    (hprojective : ∀ X : C, F X → Projective X)\n    (T : Triangle (DerivedCategory C)) (hT : T ∈ distTriang _)\n    (h₁ : ∃ (P : CochainComplex C ℤ) (a b : ℤ),\n      P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧ (∀ i, F (P.X i)) ∧\n      Nonempty (T.obj₁ ≅ Q.obj P))\n    (h₃ : ∃ (P : CochainComplex C ℤ) (a b : ℤ),\n      P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧ (∀ i, F (P.X i)) ∧\n      Nonempty (T.obj₃ ≅ Q.obj P)) :\n    ∃ (P : CochainComplex C ℤ) (a b : ℤ),\n      P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧ (∀ i, F (P.X i)) ∧\n      Nonempty (T.obj₂ ≅ Q.obj P)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-995fd",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261019T231200-L-558480",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-995fd",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261019T231200-L-558480",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof and 7 new modules (compiled, axioms probed) and their nodes vs live item signature and node, unit sk-rem-sf-pf-done realized (empty), direct importer ConstructibleTensorCompletion compiled against the delivery"
+ }
+}
