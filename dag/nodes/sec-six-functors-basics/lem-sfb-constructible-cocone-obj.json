@@ -263,5 +263,26 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-8ad00920c (reviewer sub-agent of L); spot-checked: FIX for one citation fault; the mathematics is sound and I read all of it. Not dropped, not superseded (live and side-live still have the item and hom-surj as imported), no cycle in the 1052-node closure. The statement is word for word the main-20261015 node 1772, with the topologically Noetherian X kept. The six steps follow the item's blueprint Modules/Complexes proof and match the live Lean proof of constructibleCocone_essSurjObj (TwoColimit.lean:560-640): ambientCocone, isTriangulated_exists_essImage from ambientHomSurj, single_model via finite-presentation descent, then prop_of_bounded and fullyFaithfulι.preimageIso. Hypotheses checked: finite-model-proof-api and flat-calculus need a Noetherian space; the generic triangulated-image lemma needs a nonempty preorder and triangulated Φ_E = ι∘T_{E,Q̄ℓ}, and its arrow-lifting hypothesis is exactly hom-surj, since the targets lie in the full subcategory D_cons(X,Q̄ℓ). Descent: same rings (padicSubfieldRingObj = condensedRingObj C(-,E) = E_X) and the same stratified local coker presentation. Stacks 08J5 = derived.tex:4076; the truncation-triangle node states τ≤q−1→τ≤q→H^q[−q]. Induction: acyclic base, finite [a,b], τ≤b K→K a quasi-isomorphism. The 4 sk-thm-properbasechange tool uses are accepted: the unit's own object route (det-lem-coefficient-finite-descent-objects, sk-lem-coefficient-heart) needs a standing scheme, which the item does not assume. Edge cases checked: X empty, K=0, a single shifted sheaf, two degrees with nonzero δ. The fault (C3/B3): step 1 identifies D_cons(X,E) and D_cons(X,Q̄ℓ) with the pbc categories without citing the nodes that define them. Fixed by adding def-sfb-dcons-subfield and def-sfb-dcons-qlbar to step 1's text, uses and proof_deps; both are same-unit and already in the closure.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit",
+  "declaration": "AlgebraicGeometry.ProEtale.constructibleCocone_essSurjObj",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.constructibleCocone_essSurjObj"
+  ],
+  "statement": "theorem constructibleCocone_essSurjObj : (constructibleCocone X ℓ).EssSurjObj",
+  "branch": "slopmaster2",
+  "by": "NQ",
+  "date": "2026-10-19",
+  "existing": true,
+  "note": "Exact existing declaration in the current server source, read with scompile.py --source. Context: universe u; (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] [TopologicalSpace.NoetherianSpace X]. EssSurjObj expands to every bounded constructible object being isomorphic to the scalar extension of an object over one finite intermediate field. No new module."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fc8859b68",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Only the item's lean field changes: an existing:true binding to AlgebraicGeometry.ProEtale.constructibleCocone_essSurjObj (TwoColimit.lean:622). It matches the node and main-20261015 source order 1772 clause by clause: Fact ℓ.Prime, X : Scheme.{u}, NoetherianSpace X, EssSurjObj = ∀ K ∃ E (finite intermediate field) ∃ K_E bounded-constructible, Nonempty(Φ_E K_E ≅ K), with the cocone recorded for def-sfb-constructible-cocone. No stronger hypotheses, the statement field is verbatim, the blueprint lean frontmatter names this declaration, the item is not dropped, and edge cases (empty X, ℓ=2, universes) are covered. Compile: a probe importing TwoColimit fails at import on both nt_compile --json (side) and lcompile (live) because etaleModuleCohomology_isColimit_of_isFiltered is declared in both Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit and WeilConjectures.AlgebraicGeometry.EtaleCohomologyFilteredColimit (line 154), both in TwoColimit's own import closure. This is a project environment fault the delivery cannot repair (it has no Lean file). Maintainer note: make the Sheaf copy a re-export of the WeilConjectures copy; land this binding as is or once the collision is cleared."
  }
 }
