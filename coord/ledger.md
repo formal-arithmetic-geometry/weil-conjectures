@@ -17609,3 +17609,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:02 L: returned deliver/NC/lem-coef-finite-adjunction-diagram-realization (reviewer RETURN: L: independent stage-2 immutable head a7fdec736324: H3 RETURN. (1) Duality.iso is pinned only by a pairing with structur)
 - 22:03 L: returned deliver/Q05/lem-pur-weil-semilinear-exchange-reindexing (reviewer RETURN: L: independent stage-2 immutable head 4a85740b16ad: Unchanged re-push of the returned 4634cad76: snapshot diff -rq is em)
 - 22:05 L: returned deliver/O3/thm-sf-dual-base-change (reviewer RETURN: L: independent stage-2 immutable head aee460c2a7a2: H3 (1): finite-stage Ex_! is built from ProEtale.sfFixedCompactSuppo)
+- 22:07 L: returned deliver/NG/det-sp-tower-p1-adjunction (reviewer RETURN: L: independent stage-2 immutable head 20e016916001: Compile clean (nt_compile --json 34.6 s, exit 0). Statement content )
