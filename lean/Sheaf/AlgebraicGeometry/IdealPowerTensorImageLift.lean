@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.CoherentKernelIdealIntersectionBound
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.IdealTensorMultiplicationKernelControl
 import Sheaf.AlgebraicGeometry.IdealTensorRestrictedMultiplicationImage
 

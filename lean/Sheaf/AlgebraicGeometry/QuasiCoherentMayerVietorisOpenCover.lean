@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.Topology.OpenModuleCohomology
 public import Mathlib.Algebra.Exact.Basic
-import Sheaf.Topology.ModuleMayerVietoris
+import WeilConjectures.Topology.ModuleMayerVietoris
 
 /-! # Mayer--Vietoris for quasi-coherent modules on an open subscheme
 

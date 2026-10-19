@@ -5,9 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
+import WeilConjectures.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
 import Sheaf.AlgebraicGeometry.TorsionControlledFormalRestriction
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Normalized completion on an open over-site
 

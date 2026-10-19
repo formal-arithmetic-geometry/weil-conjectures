@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.AlgebraicGeometry.LocalUniformHigherDirectImageBound
+import WeilConjectures.AlgebraicGeometry.LocalUniformHigherDirectImageBound
 import Sheaf.AlgebraicGeometry.AffineOpenHigherDirectImageSectionsIso
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 

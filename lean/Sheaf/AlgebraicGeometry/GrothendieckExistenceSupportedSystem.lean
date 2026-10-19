@@ -15,7 +15,7 @@ import Sheaf.AlgebraicGeometry.SupportedThickeningDictionary
 import Sheaf.AlgebraicGeometry.ClosedSupportedFormalAlgebraization
 import Sheaf.AlgebraicGeometry.GrothendieckExistenceProper
 import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
 
 /-! # Algebraization of a system on a fixed proper closed subscheme

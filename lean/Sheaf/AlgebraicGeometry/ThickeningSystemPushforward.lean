@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentThickeningSystem
 public import Mathlib.CategoryTheory.Functor.OfSequence
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 
 /-! # The explicit inverse system obtained by termwise pushforward
 

@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Sheaf.AlgebraicGeometry.AffineSectionZeroAtStage
+import WeilConjectures.AlgebraicGeometry.AffineSectionZeroAtStage
 import WeilConjectures.AlgebraicGeometry.SectionBaseChangeZeroPersists
 
 /-!

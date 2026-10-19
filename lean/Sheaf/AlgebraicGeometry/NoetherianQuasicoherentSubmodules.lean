@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import Mathlib.CategoryTheory.Subobject.Basic
-import Sheaf.AlgebraicGeometry.CoherentAffineSectionsFinite
+import WeilConjectures.AlgebraicGeometry.CoherentAffineSectionsFinite
 import WeilConjectures.AlgebraicGeometry.QuasicoherentSubobjectAffineCoverExt
 import Mathlib.Order.OrderIsoNat
 import Mathlib.Order.Minimal

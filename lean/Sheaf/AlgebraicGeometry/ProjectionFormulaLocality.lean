@@ -7,7 +7,7 @@ public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import WeilConjectures.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 import Sheaf.AlgebraicGeometry.ProjectionFormulaLocalityLocalToGlobal
 import Sheaf.AlgebraicGeometry.ProjectionFormulaLocalityGlobalToLocal
 

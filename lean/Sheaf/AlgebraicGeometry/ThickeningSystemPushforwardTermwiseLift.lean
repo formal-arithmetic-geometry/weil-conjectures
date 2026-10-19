@@ -5,9 +5,9 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import Sheaf.AlgebraicGeometry.ClosedImmersionPowerQuotient
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardIdealPowers
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 
 @[expose] public section
 universe v

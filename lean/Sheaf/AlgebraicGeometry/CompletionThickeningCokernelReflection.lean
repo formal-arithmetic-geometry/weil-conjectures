@@ -6,11 +6,11 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import all Sheaf.AlgebraicGeometry.CoherentMapReductionTorsionCoker
 import Sheaf.AlgebraicGeometry.IdealModuleProductExactCalculus
 import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.ClosedImmersionPowerQuotient
-import Sheaf.AlgebraicGeometry.ClosedImmersionUnitKernel
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitKernel
 
 /-! # Reflection of cokernel torsion on a closed thickening
 

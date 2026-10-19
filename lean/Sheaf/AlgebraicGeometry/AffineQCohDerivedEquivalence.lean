@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.CategoryTheory.Triangulated.Functor
 import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceShift
+import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalenceShift
 import Sheaf.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel

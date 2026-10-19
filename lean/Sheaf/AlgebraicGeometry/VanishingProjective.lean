@@ -11,7 +11,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import WeilConjectures.Topology.RingedSpaceModuleCohomology
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FormalKernelPolynomialAction
 import Sheaf.AlgebraicGeometry.GradedSerreVanishing
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel

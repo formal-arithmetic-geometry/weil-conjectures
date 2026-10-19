@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.Topology.QuasiSeparated
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import WeilConjectures.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 import Sheaf.AlgebraicGeometry.KoszulOpenOrthogonality
 import Sheaf.AlgebraicGeometry.PerfectSupportedMapLift
 import Sheaf.AlgebraicGeometry.SupportedOpenPushforward

@@ -19,7 +19,7 @@ public import Sheaf.AlgebraicGeometry.TensorPullbackKFlatQuasiIso
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import Mathlib.RingTheory.Flat.Stability
-public import Sheaf.AlgebraicGeometry.AffineSheafResolutionOfRingModel
+public import WeilConjectures.AlgebraicGeometry.AffineSheafResolutionOfRingModel
 public import Sheaf.AlgebraicGeometry.NoetherianProperBoundedCoherentImage
 public import Sheaf.AlgebraicGeometry.ProperFlatCohomologyData
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackFinitePresentation

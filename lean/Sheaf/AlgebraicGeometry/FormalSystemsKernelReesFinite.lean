@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.FormalKernelGradedPieces
 public import WeilConjectures.AlgebraicGeometry.GradedSheafStructures
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import Sheaf.AlgebraicGeometry.FormalSystemsKernelReesFiniteExistence
 

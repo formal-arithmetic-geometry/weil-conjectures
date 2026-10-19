@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.Localization.Away.Basic
 import Sheaf.AlgebraicGeometry.AffineModuleComplexRepresentative
 import Sheaf.AlgebraicGeometry.AffineOpenPseudoCoherentLocalizationPoint
-import Sheaf.AlgebraicGeometry.AffinePrincipalCoverQuasiIsoDetection
+import WeilConjectures.AlgebraicGeometry.AffinePrincipalCoverQuasiIsoDetection
 
 /-! # Affine module models on a quasi-compact open
 

@@ -6,7 +6,7 @@ Authors: SHEAF group H1
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.DerivedOpenGluingObjects
+import WeilConjectures.AlgebraicGeometry.DerivedOpenGluingObjects
 import Sheaf.AlgebraicGeometry.SchemeDerivedHomGluing
 
 /-! # Gluing derived complexes and compatible morphisms on two opens

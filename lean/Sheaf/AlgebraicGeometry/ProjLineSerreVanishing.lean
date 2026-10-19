@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 
-import all Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import all WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.ProjShiftedFreeTwist
 import Sheaf.AlgebraicGeometry.ProjectiveSpace.ProjTwistInverseTransport
 import WeilConjectures.AlgebraicGeometry.Cohomology.Serre

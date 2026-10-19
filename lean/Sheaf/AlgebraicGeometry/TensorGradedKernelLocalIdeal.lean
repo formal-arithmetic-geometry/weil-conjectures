@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.TensorGradedAlgebraData
 import Sheaf.AlgebraicGeometry.TensorGradedDegreeData
-import Sheaf.AlgebraicGeometry.ClosedImmersionUnitKernel
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitKernel
 import Mathlib.Algebra.Category.Grp.EpiMono
 import Mathlib.Algebra.Category.Grp.Abelian
 import Mathlib.CategoryTheory.Sites.Abelian

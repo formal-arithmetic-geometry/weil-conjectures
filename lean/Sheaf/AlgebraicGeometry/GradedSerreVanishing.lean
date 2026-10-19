@@ -17,7 +17,7 @@ import Mathlib.Algebra.Category.Grp.Zero
 import Sheaf.AlgebraicGeometry.GradedModuleAffineBaseChange
 import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
 import WeilConjectures.AlgebraicGeometry.AmplePullback
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.CoherentSerreVanishing
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 

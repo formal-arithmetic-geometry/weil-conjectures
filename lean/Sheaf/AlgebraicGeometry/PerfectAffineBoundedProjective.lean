@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.AlgebraicGeometry.PerfectAffineModulePreimage
-import Sheaf.AlgebraicGeometry.AffineProjectiveLocalStrictModel
+import WeilConjectures.AlgebraicGeometry.AffineProjectiveLocalStrictModel
 import WeilConjectures.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect
 
 /-! # Perfect objects on affine schemes

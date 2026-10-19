@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.AlgebraicGeometry.AmpleIso
 import Sheaf.AlgebraicGeometry.AmpleFinitePrincipalAffine
 import Sheaf.AlgebraicGeometry.GlueComponentLineBundles
-import Sheaf.AlgebraicGeometry.AmplePositiveTensorPower
+import WeilConjectures.AlgebraicGeometry.AmplePositiveTensorPower
 import Sheaf.AlgebraicGeometry.AffineLocusOfCompatibleComponentSections
 
 /-! # An affine section around component intersections

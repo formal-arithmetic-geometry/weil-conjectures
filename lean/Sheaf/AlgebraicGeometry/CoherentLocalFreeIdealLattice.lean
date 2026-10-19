@@ -10,10 +10,10 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
-import Sheaf.AlgebraicGeometry.ClosedFreeIdealProductIso
+import WeilConjectures.AlgebraicGeometry.ClosedFreeIdealProductIso
 import Sheaf.AlgebraicGeometry.CoherentOpenMapTensorExtension
 import Sheaf.AlgebraicGeometry.IdealPowerTensorImageLift
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FinitePushforwardFiniteType
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.AlgebraicGeometry.Modules.SectionAvoidance

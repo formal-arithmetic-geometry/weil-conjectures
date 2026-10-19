@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase
 import Sheaf.AlgebraicGeometry.AffineDerivedCohomology
 import all Sheaf.AlgebraicGeometry.AffineDerivedPushforwardTExact

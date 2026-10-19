@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FinitePushforwardFiniteType

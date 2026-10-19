@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
 import Mathlib.Algebra.Category.ModuleCat.AB
-import all Sheaf.AlgebraicGeometry.DerivedAmbientDirectSumsHomology
+import all WeilConjectures.AlgebraicGeometry.DerivedAmbientDirectSumsHomology
 
 /-! # Homology of a coproduct in the derived module category. -/
 

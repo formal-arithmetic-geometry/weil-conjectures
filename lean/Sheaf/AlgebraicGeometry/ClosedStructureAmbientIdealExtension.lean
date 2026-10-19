@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FinitePushforwardFiniteType
 import Sheaf.AlgebraicGeometry.CoherentOpenMapTensorExtension
 import Sheaf.AlgebraicGeometry.IdealPowerTensorImageLift

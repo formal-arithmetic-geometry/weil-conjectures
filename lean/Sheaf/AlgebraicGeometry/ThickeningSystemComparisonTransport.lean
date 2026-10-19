@@ -1,6 +1,6 @@
 module
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 
 @[expose] public section

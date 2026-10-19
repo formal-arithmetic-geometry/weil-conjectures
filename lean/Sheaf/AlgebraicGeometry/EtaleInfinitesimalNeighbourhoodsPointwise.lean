@@ -5,7 +5,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Pullbacks
 import WeilConjectures.AlgebraicGeometry.EtaleOpenOfSmoothZeroFibreDimension
-import Sheaf.AlgebraicGeometry.ArtinianLiftingFromEtaleInfinitesimal
+import WeilConjectures.AlgebraicGeometry.ArtinianLiftingFromEtaleInfinitesimal
 import WeilConjectures.AlgebraicGeometry.SmoothArtinianLiftingAtPoint
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale

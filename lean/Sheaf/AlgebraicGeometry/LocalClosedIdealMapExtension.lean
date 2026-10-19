@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import Sheaf.AlgebraicGeometry.ClosedStructureAmbientIdealExtension
-import Sheaf.AlgebraicGeometry.ClosedStructureIdealProductIso
+import WeilConjectures.AlgebraicGeometry.ClosedStructureIdealProductIso
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 
 /-! # Clearing denominators for a local map from a closed structure module

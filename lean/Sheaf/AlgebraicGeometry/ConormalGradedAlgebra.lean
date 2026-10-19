@@ -32,7 +32,7 @@ import WeilConjectures.Topology.InverseImageModule
 import Mathlib.Algebra.Category.Ring.Colimits
 import Mathlib.Topology.Sheaves.Functors
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 import Mathlib.LinearAlgebra.TensorProduct.Map
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
@@ -51,13 +51,12 @@ import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.RingTheory.Noetherian.Basic
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Mathlib.Algebra.Module.FinitePresentation
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 import WeilConjectures.AlgebraicGeometry.Coherent
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 /-!
 # The conormal graded algebra of a closed immersion
 

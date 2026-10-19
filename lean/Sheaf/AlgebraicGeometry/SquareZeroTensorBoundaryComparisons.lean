@@ -11,7 +11,7 @@ public import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitQuotient
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
 import WeilConjectures.AlgebraicGeometry.Modules.Dual

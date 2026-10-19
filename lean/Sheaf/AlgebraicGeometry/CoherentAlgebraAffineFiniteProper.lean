@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase
 

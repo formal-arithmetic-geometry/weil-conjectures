@@ -19,7 +19,7 @@ import Sheaf.AlgebraicGeometry.CartesianFlatSingleTermwiseComparison
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Mathlib.CategoryTheory.Adjunction.Additive
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-! # A Noetherian comparison before choosing a finite-free resolution

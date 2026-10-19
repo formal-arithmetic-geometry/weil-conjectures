@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
-import Sheaf.AlgebraicGeometry.BoundedFreeStalkComplexLift
+import WeilConjectures.AlgebraicGeometry.BoundedFreeStalkComplexLift
 import Sheaf.AlgebraicGeometry.PerfectStalkDerivedIsoSpread
 
 /-! # Spreading a prescribed bounded free stalk model

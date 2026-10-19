@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import all WeilConjectures.AlgebraicGeometry.TorsionControlledFormalRestriction
 import all WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # The affine restriction dictionary for formal functions
 

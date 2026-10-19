@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.Algebra.Homology.QuasiIso
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.RingTheory.FiniteFreeResolution
 import Sheaf.AlgebraicGeometry.FiniteFreeResolutionSheafification
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel

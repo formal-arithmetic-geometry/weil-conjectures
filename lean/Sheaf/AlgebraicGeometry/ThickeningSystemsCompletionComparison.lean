@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.CategoryTheory.Adjunction.Unique
 import Sheaf.AlgebraicGeometry.CompletionFromRestriction
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.ModulePullbackFiniteType
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.TensorPullback

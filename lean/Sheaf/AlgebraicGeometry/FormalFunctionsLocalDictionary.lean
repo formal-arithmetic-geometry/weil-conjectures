@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import Sheaf.AlgebraicGeometry.FormalFunctionsLocalStalkComparison
 import Sheaf.AlgebraicGeometry.FormalFunctionsFiniteQuotientComparison
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.ModulePullbackFiniteType
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 

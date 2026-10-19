@@ -13,7 +13,7 @@ import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import WeilConjectures.AlgebraicGeometry.AnnihilatorSubsheaf
 import WeilConjectures.AlgebraicGeometry.AnnihilatorAffineCriterion
 import WeilConjectures.AlgebraicGeometry.AnnihilatorQuasicoherent
-import Sheaf.AlgebraicGeometry.AnnihilatorStalkLocalLift
+import WeilConjectures.AlgebraicGeometry.AnnihilatorStalkLocalLift
 
 /-! # The subsheaf of sections annihilated by an ideal
 

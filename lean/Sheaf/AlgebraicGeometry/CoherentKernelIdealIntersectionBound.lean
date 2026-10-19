@@ -10,8 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.AlgebraicGeometry.AffineIdealIntersectionInclusion
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.CoherentAffineSectionsFinite
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentAffineSectionsFinite
 import Mathlib.RingTheory.Filtration
 import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 

@@ -18,7 +18,7 @@ import Sheaf.AlgebraicGeometry.GrothendieckExistenceChowComparison
 import Sheaf.AlgebraicGeometry.IdealPowerProductZeroAffineCover
 import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Proper closed support for a coherent thickening system
 

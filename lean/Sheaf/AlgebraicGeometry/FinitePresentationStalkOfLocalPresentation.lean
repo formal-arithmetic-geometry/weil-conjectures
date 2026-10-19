@@ -9,11 +9,12 @@ public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.Algebra.Module.FinitePresentation
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Sheaf.AlgebraicGeometry.ModuleRestrictionStalkIso
+import WeilConjectures.AlgebraicGeometry.ModuleRestrictionStalkIso
 import Mathlib.Topology.Sheaves.Abelian
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import Mathlib.Algebra.DirectSum.Module
 import Mathlib.Algebra.Category.ModuleCat.Products
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Finite presentation of a stalk from a supplied local presentation
 

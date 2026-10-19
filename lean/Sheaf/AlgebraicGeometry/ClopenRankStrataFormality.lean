@@ -8,11 +8,12 @@ module
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
+public import WeilConjectures.AlgebraicGeometry.LocallyRankedExteriorComplex
 import Sheaf.AlgebraicGeometry.ClopenRankStrataHomologyLift
 import WeilConjectures.AlgebraicGeometry.FiniteZeroDifferentialAssembly
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 
 /-! # Formality of modules on disjoint clopen rank strata
 

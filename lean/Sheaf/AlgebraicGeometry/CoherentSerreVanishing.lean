@@ -12,8 +12,8 @@ public import WeilConjectures.AlgebraicGeometry.Ample
 public import Sheaf.Paper.PQFCohomology
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import WeilConjectures.AlgebraicGeometry.AmpleImmersionAffineBase
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.CoherentAffineSectionsFinite
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentAffineSectionsFinite
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Sheaf.AlgebraicGeometry.ClosedImmersionSerreVanishing
 

@@ -6,9 +6,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
 import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalenceCompletion
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 import Sheaf.AlgebraicGeometry.IdealPowerProductZeroAffineCover
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Reflection of zero for supported coherent submodules
 

@@ -16,7 +16,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 import Sheaf.Paper.FiniteStructureTensorPowersSupported
 import Sheaf.AlgebraicGeometry.GrothendieckExistence
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Faithful elementary tensor tests for finite structure adjoints

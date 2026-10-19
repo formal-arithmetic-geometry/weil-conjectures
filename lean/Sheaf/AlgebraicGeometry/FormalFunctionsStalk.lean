@@ -16,7 +16,7 @@ import Sheaf.AlgebraicGeometry.FormalFunctionsDegreeZeroDictionary
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # The theorem on formal functions at a point of the base
 

@@ -16,7 +16,7 @@ public import Sheaf.Paper.PQFCohomology
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 import Sheaf.AlgebraicGeometry.ModuleCohomologyScalarEndomorphism
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Sheaf.AlgebraicGeometry.TheoremFormalFunctions

@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import Sheaf.AlgebraicGeometry.ArtinReesAffineComparison
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.CoherentAffineSectionsFinite
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentAffineSectionsFinite
 import Mathlib.RingTheory.Filtration
 import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 

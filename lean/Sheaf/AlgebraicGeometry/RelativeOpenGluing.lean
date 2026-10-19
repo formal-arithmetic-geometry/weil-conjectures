@@ -6,7 +6,7 @@ Authors: SHEAF group A3
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
-import Sheaf.AlgebraicGeometry.AmbientOpenGluingObject
+import WeilConjectures.AlgebraicGeometry.AmbientOpenGluingObject
 import Sheaf.AlgebraicGeometry.OpenUnionHomGluing
 
 /-! # Relative two-open gluing without local finiteness conditions

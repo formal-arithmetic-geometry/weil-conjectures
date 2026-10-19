@@ -5,7 +5,7 @@ Authors: SHEAF group T2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
+public import WeilConjectures.AlgebraicGeometry.LocallyRankedExteriorComplex
 public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
@@ -18,7 +18,8 @@ public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 import Sheaf.AlgebraicGeometry.ClosedImmersionExtIdealAction
 import Sheaf.AlgebraicGeometry.KoszulRegularImmersionExtPullback
-import Sheaf.AlgebraicGeometry.ClosedImmersionUnitKernel
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitKernel
+public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 
 @[expose] public section
 

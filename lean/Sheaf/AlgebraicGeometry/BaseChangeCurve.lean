@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Basic
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.BaseChangeDimension
+import WeilConjectures.AlgebraicGeometry.BaseChangeDimension
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 

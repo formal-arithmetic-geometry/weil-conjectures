@@ -10,14 +10,13 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Sheaf.Paper.EulerCharacteristicWellDefined
 import Sheaf.Paper.PQFCohomology
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Sheaf.CategoryTheory.RingedSiteModules
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.Cohomology.EulerCharProper
 import WeilConjectures.AlgebraicGeometry.PQFCohomology
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses

@@ -9,7 +9,8 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.Topology.Sheaves.Flasque
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import WeilConjectures.Mathlib.Topology.Sheaves.Flasque
-import Sheaf.AlgebraicGeometry.InjectiveRestrictionSurjective
+import WeilConjectures.AlgebraicGeometry.InjectiveRestrictionSurjective
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-!
 # Flasque sheaves are acyclic

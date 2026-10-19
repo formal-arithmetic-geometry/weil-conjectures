@@ -3,7 +3,7 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardIdealPowers
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 

@@ -14,7 +14,7 @@ import Sheaf.Algebra.Homology.KFlatResolution
 import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
 import Sheaf.AlgebraicGeometry.SelfExtPushforwardHomology
 import Sheaf.AlgebraicGeometry.SelfTorPushforwardHomology
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 
 /-! # Resolutions and global self-Ext/self-Tor identifications
 

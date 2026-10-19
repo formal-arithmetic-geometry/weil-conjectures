@@ -5,9 +5,9 @@ public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.CategoryTheory.Triangulated.Functor
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedAdjunctionConstruction
+import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedAdjunctionConstruction
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedAdjunctionUnitCounit
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedTildeTriangulated
+import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedTildeTriangulated
 
 @[expose] public section
 

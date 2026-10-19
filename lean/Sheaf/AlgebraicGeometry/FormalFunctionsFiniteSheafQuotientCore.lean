@@ -5,7 +5,7 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.QuotientBaseChangeIdeal
-import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitQuotient
 import Sheaf.AlgebraicGeometry.IdealDataRecursivePowerComparison
 
 @[expose] public section

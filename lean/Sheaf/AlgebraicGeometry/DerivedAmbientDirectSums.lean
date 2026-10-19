@@ -8,8 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSumsCofan
-import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSumsHomology
+import WeilConjectures.AlgebraicGeometry.DerivedAmbientDirectSumsCofan
+import WeilConjectures.AlgebraicGeometry.DerivedAmbientDirectSumsHomology
 
 /-! # Direct sums in the derived category of module sheaves
 

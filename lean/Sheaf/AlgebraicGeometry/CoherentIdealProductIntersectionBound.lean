@@ -11,8 +11,8 @@ public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Noetherian
 
 import WeilConjectures.AlgebraicGeometry.AffineIdealIntersectionInclusion
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.CoherentAffineSectionsFinite
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentAffineSectionsFinite
 import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 import Mathlib.RingTheory.Filtration
 

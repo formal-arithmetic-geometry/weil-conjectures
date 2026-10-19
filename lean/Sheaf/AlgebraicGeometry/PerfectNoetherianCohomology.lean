@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 
 /-! # Bounded coherent cohomology of perfect complexes

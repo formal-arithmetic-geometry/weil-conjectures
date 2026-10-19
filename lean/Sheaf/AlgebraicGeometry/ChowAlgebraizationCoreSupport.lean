@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
 import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportPullback
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-! # Proper support of the compactification algebraization candidate

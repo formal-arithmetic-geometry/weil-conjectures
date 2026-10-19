@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.Subobject.Limits
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
 import Sheaf.AlgebraicGeometry.CoherentReducibleSupportExactSequence
 import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
