@@ -1,0 +1,29 @@
+## What changed
+
+Proved `WeilConjectures.brownHypothesesGeneration` from the finite, rational and integral compactness declarations. The proof compares the actual canonical Hom maps for full subcategories and fully faithful additive functors, transports localizing closures, specializes the integral Ext bounds to nonnegative integers, and constructs explicit continuous condensed ring isomorphisms for Q_l and Z_l. Generation follows from Mathlib's triangulated orthogonals and the coproduct universal property. The existing theorem signature and public imports are unchanged.
+
+Also proved the new auxiliary theorem `AlgebraicGeometry.ProEtale.constantModelCtf_coefficientIso` in `Sheaf.Paper.CondensedCoefficientIsoConstructible`. Restriction along a ring-object isomorphism preserves finite free presentations and the same finite constant local models, covers, strata and affine-local conditions. Exactness preserves boundedness and identifies derived cohomology. The monoidal equivalence preserves flat objects; the existing finite flat-model characterization transports the given Tor interval. All its private helpers are proved. Explicit coefficient morphism types and local irreducibility of the existing pullback functors prevent expensive elaboration; no existing definition was changed.
+
+## Proved and sorry left
+
+Closed the original hole in `WeilConjectures.brownHypothesesGeneration` (det-brown-hypotheses-generation): 1 of 1 original holes closed. Added 0 holes and split off 0 unfinished statements. The auxiliary theorem `AlgebraicGeometry.ProEtale.constantModelCtf_coefficientIso` (lem-sfb-condensed-coefficient-iso-constructible), retained as a hole by the earlier attempt, is now proved too. There are no `sorry`s in either delivered Lean module. The proof uses the existing compactness and integral Ext declarations, whose own remaining proofs are separate items.
+
+Validation on resumption (2026-10-19): both modules compiled together with `lcompile.py --all` against the current published library (latest check at 09:09: 0.1 s for the coefficient helper, 23.3 s for the item; exit code 0, no warnings). The existing public theorem signature was checked textually against the current repository and is identical. The delivery dry run supplies the preflight and axiom checks. Edge cases of the coefficient transport include empty schemes, zero rings, rank-zero presentations and either constructibility convention. Generation works for an empty representative type as well, by minimality of the localizing closure.
+
+## No longer needed
+
+Removed all five unused original proof imports: `Sheaf.Paper.FiniteCoefficientDescentTwoColimit`, `Sheaf.Paper.AmbientIndDerivedSums`, `Sheaf.Paper.LocalizingClosureCtfEqualsBc`, `Mathlib.AlgebraicGeometry.Morphisms.Affine`, and `Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated`. The retained attempt's extra direct import of `WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeMapDerivedCategory` is unnecessary in the main module; that API is used only in the new auxiliary module.
+
+Removed direct proof dependencies det-def-localizing-closure-ctf-equals-bc / Sheaf.Paper.LocalizingClosureCtfEqualsBc, sk-thm-sfb-qlbar-two-colimit / Sheaf.Paper.FiniteCoefficientDescentTwoColimit, det-ambient-ind-derived-sums / Sheaf.Paper.AmbientIndDerivedSums, def-weil-finite-type-morphism, lem-weil-pbc-separated-affine-open-intersection, and lem-weil-pbc-quasi-separated-affine-cover-criterion. Dctf is contained in Dbc by definition; restricting internal compactness from Loc(Dbc) to its smaller closure needs neither equality nor a qcqs detour nor containment in Dic. These are direct dependency removals, without claiming those modules are globally unreachable from every other item. Withdrawn the three obsolete `tool_uses` entries for det-def-localizing-closure-ctf-equals-bc, sk-thm-sfb-qlbar-two-colimit and det-ambient-ind-derived-sums, preserving the order of the remaining approvals. The unit's finite/rational/integral compactness route is retained. Mathlib's orthogonal instances implement the triangle-rotation argument for generation.
+
+## Where the brief, the DAG or earlier work was wrong
+
+The old proof plan unnecessarily required Dctf=Dbc and containment in Dic, although the rational and integral statements already assert internal compactness in Loc(Dbc). The integral interface also requires chosen natural-number Ext bounds; `integralConstructibleExt` supplies integer bounds, which are enlarged using `Int.toNat`. Ring-object isomorphism invariance of finite constant constructibility was missing from the original dependencies; the new proved node supplies it. The earlier attempt's remaining transport hole is fully closed. No statement is disputed or changed, and no consumer adaptations are needed. The preflight also requires a change record for the added helper universe names; `coord/changes/E1-brown-generation-helper-universes.md` records their scope and the downstream-use check. A LeanSearch query was added to complete the new node’s three required search kinds; it found only ordinary algebra/module infrastructure.
+
+## New nodes
+
+`lem-sfb-condensed-coefficient-iso-constructible`, module `Sheaf.Paper.CondensedCoefficientIsoConstructible`, proves preservation of Dctf by explicit derived restriction along the inverse pulled-back coefficient isomorphism, for arbitrary schemes and coefficient rings. Its node and docstring record finite-presentation transport, the existing `comapUpperStarIso` comparison, derived cohomology and the flat-model proof of finite Tor amplitude. This is a proved supporting lemma, with no remaining obligation. Change record: `coord/changes/E1-brown-generation-helper-universes.md`.
+
+## Second reading by E1
+
+No second reading by a worker: since 2026-10-17 the worker delivers directly and the maintainer's independent review is the only review.

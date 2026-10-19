@@ -32,104 +32,40 @@
  ],
  "proof": [
   {
-   "text": "For a finite admissible coefficient ring $\\Lambda=A$, [det-ctf-finite-compact-proetale] states that every $C\\in\\Dctf(X,A)$ is compact in $\\Loc(\\Dctf(X,A))$. Every object of the given skeleton $G$ belongs to this category, so this proves compactness in the finite case.",
+   "text": "For a finite discrete canonical ring use finiteCompactProEtale and ambient coproduct closure. Pull the given ring-object isomorphism to X. The new coefficient-isomorphism lemma carries Dctf into the canonical Dctf. Minimality carries its localizing closure into the canonical closure. The exact fully faithful derived restriction preserves coproducts, and the square of canonical direct-sum Hom maps commutes on every summand; all other edges are bijective. This reflects compactness to the original coefficients.",
    "uses": [
-    "det-ctf-finite-compact-proetale"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-generation.proof.md",
-    "place": "Proof: Compactness, finite coefficients"
-   }
-  },
-  {
-   "text": "Finite type over $\\operatorname{Spec}k$ gives a finite affine cover by [def-weil-finite-type-morphism]. Its pairwise intersections are affine by [lem-weil-pbc-separated-affine-open-intersection], since $X/k$ is separated. They are quasi-compact, so [lem-weil-pbc-quasi-separated-affine-cover-criterion](2) makes $X$ qcqs. For $\\Lambda=E$ or $\\underline{\\Qlb}$, [sk-thm-sfb-qlbar-two-colimit](4) gives $\\Dctf=\\Dbc$. Their localizing closures are therefore equal by the intersection definition in [det-def-localizing-closure-existence](2). By [det-ambient-ind-derived-sums](3), this closure is contained in $\\Dic$, defined by cohomology sheaves that are filtered colimits of constructible sheaves. Both nodes use the same condensed $E$ and finite-subextension-valued $\\Qlb$ rings as the statement. For $C\\in G$ and a small family $(K_i)$ in the closure, apply the explicit canonical-map assertion of [sk-thm-constructible-compactness]. Its hypotheses hold: $k=\\overline{\\mathbf F}_q$ with the fixed finite-field datum, $\\ell\\ne p$, $X/k$ separated of finite type, $C\\in\\Dbc$, and $K_i\\in\\Dic$. Its finite constant local-model constructibility and ordinary ambient category $D(\\Mod_{\\Lambda_X})$ also agree. Thus $\\bigoplus_i\\Hom(C,K_i)\\to\\Hom(C,\\bigoplus_iK_i)$ is an isomorphism in this ambient category. Fullness identifies the Hom groups with those of the closure, and [det-def-localizing-closure-existence](1)-(2) identifies its coproducts with the ambient ones. This proves compactness. Taking $E=\\mathbf Q_\\ell$ includes that case.",
-   "uses": [
-    "def-weil-finite-type-morphism",
-    "lem-weil-pbc-separated-affine-open-intersection",
-    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
-    "sk-thm-sfb-qlbar-two-colimit",
+    "det-ctf-finite-compact-proetale",
     "det-def-localizing-closure-existence",
-    "det-ambient-ind-derived-sums",
-    "sk-thm-constructible-compactness"
+    "lem-sfb-condensed-coefficient-iso-constructible"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-generation.proof.md",
-    "place": "Proof: Compactness, rational coefficients"
-   }
+   "elementary": false
   },
   {
-   "text": "For $\\Lambda=\\mathcal O_E$, clause (2) of [det-def-localizing-closure-ctf-equals-bc], with $X$ qcqs by step 2, gives $\\Dctf=\\Dbc$ and equality of their localizing closures for this fixed coefficient ring. The current statement of [det-prop-int-compactness-compact] uses $R_X=p_X^*\\underline{\\mathcal O_E}$ and the ordinary unbounded category $D(\\Mod_{R_X})$, exactly the coefficient object and ambient category fixed here. The preamble identifies $\\underline{\\mathcal O_E}$ with its valuation-topology condensation, so the identification fixes the ring object before taking its module category. Its standing hypotheses are our prime $\\ell$, field $k$ of characteristic $p\\ne\\ell$, separated finite-type $X/k$, and finite subextension $E/\\mathbf Q_\\ell$. Its abbreviations $\\Dbc$ and $\\Loc(\\Dbc)$ therefore mean $\\Dbc(X,\\mathcal O_E)$ and the same full localizing closure. Clause (3) asserts that for every small family $(K_\\alpha)$ in this closure, the canonical map $\\bigoplus_\\alpha\\Hom(C,K_\\alpha)\\to\\Hom(C,\\bigoplus_\\alpha K_\\alpha)$ is an isomorphism for every $C\\in\\Dbc$. Apply this to each $C\\in G$: by the preceding equality $C\\in\\Dbc$, and the canonical map is exactly its compactness map in the required closure. No derived-completeness condition or completed coproduct is introduced. Ambient coproducts and the localizing closure are supplied by [det-def-localizing-closure-existence](1)-(2). Taking $E=\\mathbf Q_\\ell$ gives $\\mathcal O_E=\\mathbf Z_\\ell$. Together with steps 1-2, these exhaust the admissible coefficients.",
+   "text": "For rational canonical coefficients use the internal compactness clause of constructible_compactness in Loc(Dbc). The inclusion Dctf subset Dbc induces an inclusion of localizing closures by minimality; all small coproducts of the latter closure are ambient. An explicit full-subcategory coproduct comparison identifies the two Hom maps. For integral canonical coefficients choose the nonnegative Ext bounds from integralConstructibleExt, establish CharP for the fixed algebraic closure using the cardinality of its finite base, and apply integralConstructibleCompactness. Use the same full-subcategory comparison and coefficient-isomorphism reflection as in step 1. The bottom finite subextension is isometrically isomorphic to Q_l, and its integer ring to Z_l, giving explicit continuous-function condensed-ring isomorphisms for both base cases.",
    "uses": [
-    "det-def-localizing-closure-ctf-equals-bc",
+    "sk-thm-constructible-compactness",
+    "sk-lem-int-ext",
     "det-prop-int-compactness-compact",
-    "det-def-localizing-closure-existence"
+    "det-def-localizing-closure-existence",
+    "lem-sfb-condensed-coefficient-iso-constructible"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-generation.proof.md",
-    "place": "Proof: Compactness, integral coefficients"
-   }
+   "elementary": false
   },
   {
-   "text": "Put $\\mathcal L=\\Loc(\\Dctf(X,\\Lambda))$, and fix $K\\in\\mathcal L$ with the stated vanishing. For exactly the condensed ring $\\Lambda$ in the statement, clauses (1)-(2) of [det-def-localizing-closure-existence] supply the ambient coproducts and the full replete localizing subcategory $\\mathcal L$ inside $D(\\Mod_{\\Lambda_X})$. Let $\\mathcal S\\subseteq\\mathcal L$ be the full subcategory on objects $M$ such that every map $M[n]\\to K$ is zero for every integer $n$. It contains zero, is closed under isomorphisms and under positive and negative shifts ($M[r]\\in\\mathcal L$ as $\\mathcal L$ is triangulated, and replace $n$ by $n+r$), and contains $\\Dctf(X,\\Lambda)$: for each such $M$, choose an isomorphism $M\\cong C$ with $C\\in G$ and precompose with its shifted inverse.",
-   "uses": [
-    "det-def-localizing-closure-existence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-generation.proof.md",
-    "place": "Proof: Generation"
-   }
-  },
-  {
-   "text": "Let $U\\xrightarrow{u}V\\xrightarrow{v}W\\xrightarrow{w}U[1]$ be a distinguished triangle with $U,V\\in\\mathcal S$, fix $n\\in\\mathbf Z$, and let $a:W[n]\\to K$. If $n\\ge0$, apply TR2 of [def-weil-triangulated-category] $3n$ times; if $n<0$, use its reverse implication $-3n$ times. This gives the distinguished triangle with vertices $U[n],V[n],W[n]$ and arrows $\\varepsilon u[n],\\varepsilon v[n],\\varepsilon w[n]$, where $\\varepsilon=(-1)^n$. Since $V\\in\\mathcal S$, the composite $a\\circ(\\varepsilon v[n])$ is zero. Clause (ii) of [lem-weil-pbc-hom-out-of-triangle-exact] supplies $b:U[n+1]\\to K$ with $a=b\\circ(\\varepsilon w[n])$. But $U\\in\\mathcal S$ gives $b=0$, so $a=0$. Moreover $W\\in\\mathcal L$: by TR2 the rotation $V\\to W\\to U[1]\\to V[1]$ is distinguished, $V,U[1]\\in\\mathcal L$, and $\\mathcal L$ is a full replete triangulated subcategory [det-def-localizing-closure-existence](2), so $W$ is isomorphic to an object of $\\mathcal L$ and lies in $\\mathcal L$. Thus $W\\in\\mathcal S$. To check the middle-object closure in the definition of a triangulated subcategory, if $U,W\\in\\mathcal S$, reverse rotation gives the distinguished triangle $W[-1]\\to U\\to V\\to W$. Its first two objects lie in $\\mathcal S$ by shift closure, so the cone closure just proved gives $V\\in\\mathcal S$ (here $V\\in\\mathcal L$ directly by the middle-object clause for $\\mathcal L$).",
+   "text": "For generation take the left orthogonal of the shift closure of the singleton K. Mathlib makes it replete and triangulated. The coproduct universal property makes it closed under every existing ambient coproduct. The shift adjunction and the supplied representative isomorphisms put every Dctf object in this orthogonal. By the defining intersection, K belongs too, so its identity is zero. IsZero.isoZero gives the required isomorphism.",
    "uses": [
     "def-weil-triangulated-category",
-    "lem-weil-pbc-hom-out-of-triangle-exact",
-    "det-def-localizing-closure-existence"
+    "lem-weil-pbc-hom-out-of-triangle-exact"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0149, lemma-representable-homological (contravariant assertion); rotations from Tag 0145, definition-triangulated-category (TR2). Expands Generation in sk-lem-brown-hypotheses-generation.proof.md."
-   }
-  },
-  {
-   "text": "Let $(M_i)_{i\\in I}$ be any small family in $\\mathcal S$. Its ambient coproduct $M=\\bigoplus_i M_i$ exists and belongs to $\\mathcal L$ by [det-def-localizing-closure-existence](1)-(2). For any integer $n$, the inverse shift equivalence of [def-weil-triangulated-category] identifies maps $M[n]\\to K$ with maps $M\\to K[-n]$. The universal property of the coproduct identifies these with families of maps $M_i\\to K[-n]$, equivalently maps $M_i[n]\\to K$. Each component is zero, so the original map is zero. This includes the empty coproduct. Therefore $\\mathcal S$ is closed under arbitrary small direct sums.",
-   "uses": [
-    "det-def-localizing-closure-existence",
-    "def-weil-triangulated-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-generation.proof.md",
-    "place": "Proof: Generation"
-   }
-  },
-  {
-   "text": "By steps 4-6, $\\mathcal S$, viewed as a full subcategory of $D(\\Mod_{\\Lambda_X})$, is closed under isomorphisms, shifts, cones and arbitrary small direct sums and contains $\\Dctf(X,\\Lambda)$. Clause (2) of [det-def-localizing-closure-existence], applied to this fixed ring and this class of generators, gives $\\mathcal L\\subseteq\\mathcal S$. In particular $K\\in\\mathcal S$, so at $n=0$ one has $1_K=0$. The zero maps $K\\to0$ and $0\\to K$ are then inverse: their composite on $K$ is $0=1_K$, and their composite on the zero object is its unique endomorphism. Thus $K$ is isomorphic to the zero object.",
-   "uses": [
-    "det-def-localizing-closure-existence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-generation.proof.md",
-    "place": "Proof: Generation"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "det-ctf-finite-compact-proetale",
-  "def-weil-finite-type-morphism",
-  "lem-weil-pbc-separated-affine-open-intersection",
-  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
-  "sk-thm-sfb-qlbar-two-colimit",
   "det-def-localizing-closure-existence",
-  "det-ambient-ind-derived-sums",
+  "lem-sfb-condensed-coefficient-iso-constructible",
   "sk-thm-constructible-compactness",
-  "det-def-localizing-closure-ctf-equals-bc",
+  "sk-lem-int-ext",
   "det-prop-int-compactness-compact",
   "def-weil-triangulated-category",
   "lem-weil-pbc-hom-out-of-triangle-exact"
@@ -137,7 +73,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-generation.proof.md",
-  "place": "Compactness and Generation, expanded using existing DAG statements"
+  "place": "Compactness; scalar isomorphism invariance made explicit"
  },
  "mathlib_searches": [
   {
@@ -370,10 +306,7 @@
  "tool_uses": [
   "det-def-localizing-closure-existence",
   "def-pc-compact-object",
-  "def-weil-triangulated-category",
-  "det-def-localizing-closure-ctf-equals-bc",
-  "sk-thm-sfb-qlbar-two-colimit",
-  "det-ambient-ind-derived-sums"
+  "def-weil-triangulated-category"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -413,5 +346,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "Compactness is the explicit canonical map of def-pc-compact-object in the ambient ordinary derived category, equivalent to compactness in the full localizing closure by det-def-localizing-closure-existence(1)-(2). The six coefficient alternatives use the actual ring objects, including finite-subextension-valued Qbar sections."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261019T034256-L-416395",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
