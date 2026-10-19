@@ -1,6 +1,6 @@
 # Work queue
 
-750 items; claim with `tools/claim.py next <group> [--stage N]`.
+740 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (1)
 
@@ -8,7 +8,7 @@
 |---|---|---|
 | `lem-sf-constructible-exceptional-coefficient-coherence` | - | none |
 
-## Stage 2: nodes to state (45)
+## Stage 2: nodes to state (39)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -23,7 +23,6 @@
 | `lem-pur-adic-purity-scalar-naturality` | 1 | state | 33 |
 | `thm-sf-dual-base-change` | 1 | state | 18 |
 | `det-sp-tower-gluing` | 1 | state | 15 |
-| `sk-thm-sf-global-duality` | 1 | state | 4 |
 | `sk-thm-sf-tensor-hom` | 1 | state | 4 |
 | `lem-tw-lisse-rational-realization` | 1 | state | 3 |
 | `det-prop-diagonal-tower-coefficients` | 1 | state | 2 |
@@ -35,13 +34,10 @@
 | `fix-lem-tensor-adjunction` | 1 | state | 1 |
 | `lem-coef-cartesian-section-adjoint-mates` | 1 | state | 1 |
 | `lem-sf-identification-coefficient-transport` | 1 | state | 1 |
-| `lem-sf-identification-fibre-adjunction` | 1 | state | 1 |
 | `lem-sf-integral-compactification-comparison-bridge` | 1 | state | 1 |
-| `cor-coef-verdier-weil-equivariance` | 1 | state | 0 |
 | `det-sp-p1-trace` | 1 | state | 0 |
 | `det-sp-tower-p1-adjunction` | 1 | state | 0 |
 | `lem-a1-lisse-sections-stalk-evaluation` | 1 | state | 0 |
-| `lem-fix-projection-compactification-comparison` | 1 | state | 0 |
 | `lem-pur-condensed-exceptional-reconstruction` | 1 | state | 0 |
 | `lem-pur-finite-adjoint-mate-compatibility` | 1 | state | 0 |
 | `lem-pur-finite-dnc-normalization-reduction` | 1 | state | 0 |
@@ -52,15 +48,13 @@
 | `lem-trf-finite-horizontal-shriek-mate` | 1 | state | 0 |
 | `lem-wf-constant-twist-coefficient-comparison` | 1 | state | 0 |
 | `lem-zl-proper-unit-condensed-realization` | 1 | state | 0 |
-| `prop-sf-dualizable-hom` | 1 | state | 0 |
 | `thm-pur-vector-bundle-thom` | 1 | state | 0 |
 | `lem-coef-frobenius-exchange-equivalence` | 2 | state | 0 |
-| `lem-sf-pf-compactification-pasting` | 2 | state | 0 |
 | `nt-target-poincare-isiso` | 2 | state | 0 |
 
 Not open yet: 304 nodes that below a finished node, not needed, 92 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (704)
+## Stage 3: modules to prove (700)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -68,12 +62,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 |---|---|---|---|---|
 | `Sheaf.AlgebraicGeometry.RelativeProjExists` | 6 | 1 | repair | route |
 | `Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange` | 7 | 1 | repair | route |
-| `Sheaf.Paper.IntegralConstantModelHeart` | 8 | 0 | repair | route |
-| `Sheaf.Paper.PurityDiagonalBaseChangeCompared` | 6 | 0 | repair | route |
 | `Sheaf.Paper.SfHomTriangulated` | 7 | 1 | repair | route |
-| `Sheaf.AlgebraicGeometry.SurjectiveClosedModuleInvariance` | 7 | 0 | repair | route |
-| `Sheaf.RepresentationTheory.ProcyclicTwoTerm` | 11 | 0 | repair | route |
-| `Sheaf.Paper.CompactSupportComparisonPullbackCoherence` | 8 | 0 | repair | route |
 | `Sheaf.SixFunctorsBasics.BrownHypotheses` | 5 | 1 | repair | route |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 2 | proof | route |
 | `Sheaf.AlgebraicGeometry.VectorBundleIntegration` | 3 | 1 | proof | route |
@@ -677,6 +666,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.RationalTermHomComparison` | - | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.ArbitraryBaseFiniteP1Integrals` | - | 1 | proof | 5 |
 | `Sheaf.FieldTheory.AlgebraicSeparableSmooth` | - | 1 | proof | 5 |
+| `Sheaf.Paper.CompactificationProjectionPasting` | - | 1 | proof | 5 |
 | `Sheaf.Paper.EtaleIsoDescent` | - | 1 | proof | 5 |
 | `Sheaf.Paper.FiniteForwardProductSymmetry` | - | 1 | proof | 5 |
 | `Sheaf.Paper.FrobeniusPullbackComparisonCoherence` | - | 1 | proof | 5 |
@@ -771,7 +761,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.SplitCellComplexKFlat` | - | 1 | proof | 20 |
 | `Sheaf.CategoryTheory.BoundedFilteredPageFunctorNormalized` | - | 1 | proof | 20 |
 
-## Stage 3: waiting for statements of dependencies (23)
+## Stage 3: waiting for statements of dependencies (24)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -799,6 +789,7 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.VerdierExchange` | - | 1 | `sk-thm-sf-tensor-hom` |
 | `Sheaf.SecSmoothPurity.RationalPurityTraceCoherence` | - | 8 | `lem-pur-adic-purity-scalar-naturality` |
 | `Sheaf.SecSmoothPurity.SmoothPurityNaturality` | - | 1 | `fix-prop-projection-formula` |
+| `Sheaf.SixFunctors.CoefVerdierWeilEquivariance` | - | 1 | `lem-coef-frobenius-exchange-equivalence` |
 | `Sheaf.SixFunctors.FiniteExceptional` | - | 9 | `fix-prop-projection-formula` |
 
 ## Stage 3: held for an open upstream PR (11)
