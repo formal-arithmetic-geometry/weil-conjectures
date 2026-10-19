@@ -14,31 +14,8 @@ public import Sheaf.Paper.FiniteFieldFiber
 public import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
 public import Sheaf.Paper.SfRationalizationKaroubi
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-import WeilConjectures.Compactification.NagataCompactification
-import Sheaf.AlgebraicGeometry.CompatibleCompactificationTriangle
-import Sheaf.Paper.CoefDerivedSystemEvaluationCalculus
-import Sheaf.Paper.ProEtaleConstructibleOrigin
-import Sheaf.Paper.IntegralResidueTor
-import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
-import Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude
-import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
-import Sheaf.Paper.FiniteTorAmplitude
-import Sheaf.Paper.SfIntegralConstructible
+import Mathlib.LinearAlgebra.TensorProduct.Tower
 import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
-import Sheaf.Paper.SfDerivedComplete
-import Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus
-import WeilConjectures.Compactification.CategoryBaseChange
-import Sheaf.AlgebraicGeometry.CompactifiableCompatibleTower
-import Sheaf.Paper.PbcRationalTransport
-import Sheaf.Paper.SfScalarExtensionComposition
-import Sheaf.CategoryTheory.StageSystemFunctorDescent
-import Sheaf.AlgebraicGeometry.CompactSupportRestrictionOfScalars
-import Sheaf.AlgebraicGeometry.ProEtaleFixedScalarRestrictionDirectImage
-import Sheaf.AlgebraicGeometry.CompactificationRefinementCoherence
-import Sheaf.Paper.BasicOperationsCoefficientReduction
-import Sheaf.Paper.SfIntegralCompactSupportConstructible
-import Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction
-import Sheaf.SixFunctors.IntegralCompactificationSystemRealization
 
 /-! # Canonical compact-support composition with field coefficients on qcqs schemes
 
@@ -285,6 +262,24 @@ def sfFieldShriekCompositionIntegral
       sfCompactSupportFiniteIntegralFunctor l D.k (coefficientPrimeUnit l D hl) cfg E :=
   (sfFieldShriekCompositionIntegral_existsUnique D l hl cf cg cfg E).exists.choose
 
+private theorem rationalSupport_map_tmul
+    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (K M : sfRationalConstructibleCategory l E X)
+    (a : Localization.Away (Padic.coefficientExtensionUniformizer l E))
+    (t : K.obj ⟶ M.obj) :
+    (sfCompactSupportFiniteFunctor l D.k (coefficientPrimeUnit l D hl) cf E).map
+        (a ⊗ₜ[Padic.coefficientExtensionIntegers l E] t) =
+      a ⊗ₜ[Padic.coefficientExtensionIntegers l E]
+        (sfCompactSupportFiniteIntegralFunctor l D.k
+          (coefficientPrimeUnit l D hl) cf E).map t := by
+  let F := sfCompactSupportFiniteIntegralFunctor l D.k (coefficientPrimeUnit l D hl) cf E
+  let _ := (sfCompactSupportFiniteIntegralFunctor_linear l D.k
+    (coefficientPrimeUnit l D hl) cf E).1
+  let _ := (sfCompactSupportFiniteIntegralFunctor_linear l D.k
+    (coefficientPrimeUnit l D hl) cf E).2
+  exact LinearMap.baseChange_tmul (F.mapLinearMap (Padic.coefficientExtensionIntegers l E))
+    a t
+
 /-- Raw rationalization gives exactly the field-coefficient composition comparison.
 Its component is the localization of the actual integral component, so the
 proper/open and common-refinement normalization is retained.
@@ -306,7 +301,49 @@ theorem sfFieldShriekCompositionRational_existsUnique
         HEq (β.hom.app K)
           ((sfRationalConstructibleLocalization l E Z).map
             ((sfFieldShriekCompositionIntegral D l hl cf cg cfg E).hom.app K.obj)) := by
-  sorry
+  let α := sfFieldShriekCompositionIntegral D l hl cf cg cfg E
+  let L := sfRationalConstructibleLocalization l E Z
+  let β : sfCompactSupportFiniteFunctor l D.k (coefficientPrimeUnit l D hl) cf E ⋙
+      sfCompactSupportFiniteFunctor l D.k (coefficientPrimeUnit l D hl) cg E ≅
+      sfCompactSupportFiniteFunctor l D.k (coefficientPrimeUnit l D hl) cfg E :=
+    NatIso.ofComponents (fun K ↦ L.mapIso (α.app K.obj)) (by
+      intro K M t
+      change _ ≫ L.map (α.hom.app M.obj) = L.map (α.hom.app K.obj) ≫ _
+      induction t using TensorProduct.induction_on with
+      | zero =>
+        change (sfCompactSupportFiniteHomMap l D.k (coefficientPrimeUnit l D hl) cg E _ _)
+            ((sfCompactSupportFiniteHomMap l D.k
+              (coefficientPrimeUnit l D hl) cf E K M) 0) ≫ _ =
+          _ ≫ (sfCompactSupportFiniteHomMap l D.k
+            (coefficientPrimeUnit l D hl) cfg E K M) 0
+        simp only [map_zero, zero_comp, comp_zero]
+      | tmul a t =>
+        rw [Functor.comp_map, rationalSupport_map_tmul D l hl,
+          rationalSupport_map_tmul D l hl, rationalSupport_map_tmul D l hl]
+        change ScalarLocalization.composition _ _ _ _ _ _
+            ((1 : Localization.Away (Padic.coefficientExtensionUniformizer l E)) ⊗ₜ[_]
+              α.hom.app M.obj) _ =
+          ScalarLocalization.composition _ _ _ _ _ _ _
+            ((1 : Localization.Away (Padic.coefficientExtensionUniformizer l E)) ⊗ₜ[_]
+              α.hom.app K.obj)
+        rw [ScalarLocalization.composition_tmul, ScalarLocalization.composition_tmul]
+        simp only [one_mul, mul_one]
+        exact congrArg (fun z ↦ a ⊗ₜ[Padic.coefficientExtensionIntegers l E] z)
+          (α.hom.naturality t)
+      | add t t' ht ht' =>
+        change (sfCompactSupportFiniteHomMap l D.k (coefficientPrimeUnit l D hl) cg E _ _)
+            ((sfCompactSupportFiniteHomMap l D.k
+              (coefficientPrimeUnit l D hl) cf E K M) (t + t')) ≫ _ =
+          _ ≫ (sfCompactSupportFiniteHomMap l D.k
+            (coefficientPrimeUnit l D hl) cfg E K M) (t + t')
+        rw [map_add, map_add, map_add, Preadditive.add_comp, Preadditive.comp_add]
+        exact congrArg₂ HAdd.hAdd ht ht')
+  refine ⟨β, fun K ↦ HEq.rfl, ?_⟩
+  intro β' hβ'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext K
+  exact eq_of_heq (hβ' K)
 
 /-- The canonical composition isomorphism at a finite coefficient field.
 Source: Stacks 0F7J and raw rational passage

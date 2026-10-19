@@ -17727,3 +17727,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:13 L: merged deliver/P5/Sheaf.SixFunctors.IntegralExpressionOccurrences (stage 3; reviewer PASS; first push; landing 20261019T231259-L-569064 (proof); batch 20261019T231019; modules 1; new nodes 0)
 - 23:13 L: merged deliver/P6/Sheaf.Paper.AmplificationProper (stage 3; reviewer PASS; first push; landing 20261019T231301-L-569415 (interface); batch 20261019T231019; modules 6; new nodes 5)
 - 23:13 L: merged deliver/P8/Sheaf.Paper.DirectImageCtfOpenTor (stage 3; reviewer PASS; first push; landing 20261019T231303-L-569735 (proof); batch 20261019T231019; modules 1; new nodes 1)
+- 23:13 L: merged deliver/P8/Sheaf.Paper.FieldShriekCompositionQcqs (stage 3; reviewer PASS; first push; landing 20261019T231304-L-570020 (proof); batch 20261019T231019; modules 1; new nodes 0)
