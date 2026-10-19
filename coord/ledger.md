@@ -16821,3 +16821,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:54 L: merged deliver/Q3/Sheaf.Paper.ProperIndConstructibleBoundedBelow (stage 3; reviewer PASS; first push; landing 20261019T005403-L-2762437 (proof); batch 20261019T005255; modules 1; new nodes 0)
 - 00:54 L: merged deliver/Q4/Sheaf.EtaleCohomology.Purity.Smooth.EtaleSheafProjectionMap (stage 3; reviewer PASS; first push; landing 20261019T005403-L-2762538 (interface); batch 20261019T005255; modules 4; new nodes 4; change records: coord/changes/etale-projection-helper-relocation.md)
 - 00:54 L: merged deliver/Q4/Sheaf.Paper.CartesianCoefficientTwists (stage 3; reviewer PASS; first push; landing 20261019T005404-L-2762652 (proof); batch 20261019T005255; modules 1; new nodes 0)
+- 00:54 L: merged deliver/Q4/Sheaf.Paper.PbcRoosTriangle (stage 3; reviewer PASS; first push; landing 20261019T005404-L-2762752 (interface); batch 20261019T005255; modules 3; new nodes 2)

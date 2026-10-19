@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-roos-cohomology-boundary",
+ "kind": "statement",
+ "title": "Exact presheaf realization of the Roos boundary factorization",
+ "statement": "Let $\\mathcal C$ be an abelian category with derived category $D(\\mathcal C)$ [def-weil-abstract-derived-category] admitting countable products, and let $D,S$ be categories. Let $G:\\mathcal C\\to\\operatorname{Fun}(S,\\mathrm{Ab})$ be additive and exact, with all $G\\circ H^j(-)$ preserving countable products. Let $K:D\\to\\operatorname{Fun}(\\mathbf N^{op},D(\\mathcal C))$ be a tower-valued functor, $P$ its product functor, and $L:D\\to D(\\mathcal C)$. Suppose natural maps $p:L\\to P$ and $\\delta:P\\to L[1]$ give distinguished Roos triangles [def-weil-derived-limit] for every object of $D$. For every integer $i$, the connecting map, after applying $G$ and evaluation at each $U\\in S$, factors through the canonical cokernel of $1-s$ on $\\prod_n G(H^{i-1}(K_n))(U)$. Under the natural identification with $R^1\\lim$ [lem-pc-derived-limit-roos-abelian-groups], these factorizations form a transformation $a:R^1\\lim G(H^{i-1}(K_n))\\to G(H^i(L))$ natural both in $D$ and $S$. At each $(M,U)$ this map is mono, and its image equals the kernel of $G(H^i(p))$ followed by the product/cohomology comparison. The displayed factorization uses the actual connecting map from $\\delta$, not an arbitrary arrow.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07KY, label lemma-break-long-exact-sequence, boundary extraction in its proof"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-limit",
+  "lem-sf-derived-homology-long-exact",
+  "lem-pc-derived-limit-roos-abelian-groups",
+  "lem-weil-pbc-derived-cohomology-ladder"
+ ],
+ "proof": [
+  {
+   "text": "Apply the long exact homology sequence and the exact functor G followed by evaluation. Product preservation identifies the outer map with 1-s after checking each coordinate.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend the connecting map through the cokernel of 1-s. Exactness at its source makes this descent mono; exactness at the middle group identifies its image with the kernel of the outgoing projection. Compose with the natural Roos isomorphism from R^1 lim to the cokernel.",
+   "uses": [
+    "lem-pc-derived-limit-roos-abelian-groups"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the long exact sequence and the Roos isomorphism gives commuting squares. The cokernel projection is epi, so these factorizations are unique and commute both with tower morphisms and with the maps in S.",
+   "uses": [
+    "lem-weil-pbc-derived-cohomology-ladder",
+    "lem-pc-derived-limit-roos-abelian-groups"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-derived-homology-long-exact",
+  "lem-pc-derived-limit-roos-abelian-groups",
+  "lem-weil-pbc-derived-cohomology-ladder"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07KY, proof, with natural cokernel/kernel extraction written out"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mono_cokernelDesc|epi_kernelLift",
+   "results": "2 hits: Mathlib/Algebra/Homology/ShortComplex/Exact.lean, Mathlib/Algebra/Homology/ShortComplex/Exact.lean",
+   "date": "2026-10-18",
+   "verdict": "no exact match; generic homology-sequence and exactness lemmas only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural cokernel factorization of the connecting map of a Roos triangle after an exact functor to abelian groups",
+   "results": "8 hits: CategoryTheory.Functor.homologySequenceδ_comp, CategoryTheory.Functor.comp_homologySequenceδ, CategoryTheory.Functor.homologySequence_exact₃, CategoryTheory.Functor.homologySequence_exact₂, CategoryTheory.Functor.homologySequence_exact₁, CategoryTheory.Functor.homologySequence_comp, CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₁, DerivedCategory.triangleOfSESδ",
+   "date": "2026-10-18",
+   "verdict": "no exact match; generic homology-sequence and exactness lemmas only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Roos triangle gives a natural monomorphism from the first derived inverse limit and an epimorphism to the inverse limit of cohomology",
+   "results": "8 hits: CategoryTheory.Abelian.mono_of_epi_of_mono_of_mono, CategoryTheory.ShortComplex.mono_of_epi_of_epi_of_mono, CategoryTheory.ShortComplex.epi_of_mono_of_epi_of_mono, DerivedCategory.triangleOfSES_mor₁, DerivedCategory.triangleOfSESδ.congr_simp, ModuleCat.directLimitIsColimit, DerivedCategory.HomologySequence.epi_homologyMap_mor₁_iff, CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_inv_hom₁",
+   "date": "2026-10-18",
+   "verdict": "no exact match; generic homology-sequence and exactness lemmas only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PbcRoosTriangle",
+  "date": "2026-10-19",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-roos-triangle",
+   "place": "Proof: long exact cohomology sequence; boundary extraction in the Milnor sequence",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Triangulated.RoosCohomologyBoundary",
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/RoosCohomologyBoundary.lean",
+  "declaration": "CategoryTheory.roosCohomology_boundary",
+  "statement": "theorem roosCohomology_boundary (K : D ⥤ (ℕᵒᵖ ⥤ DerivedCategory C)) (G : C ⥤ (S ⥤ AddCommGrpCat.{r})) [G.Additive] [G.PreservesHomology] (hH : ∀ j : ℤ, PreservesLimitsOfShape (Discrete ℕ) (DerivedCategory.homologyFunctor C j ⋙ G)) (RF : D ⥤ DerivedCategory C) (p : RF ⟶ roosCohomologyProduct K) (δ : roosCohomologyProduct K ⟶ RF ⋙ shiftFunctor (DerivedCategory C) (1 : ℤ)) (hT : ∀ M : D, IsDerivedLimitTriangle (fun n : ℕ ↦ (K.obj M).map (homOfLE (Nat.le_succ n)).op) (RF.obj M) (p.app M) (δ.app M)) (i : ℤ) : ∃ a : roosCohomologyLeft K G i ⟶ RF ⋙ DerivedCategory.homologyFunctor C i ⋙ G, ∀ (M : D) (U : S), Mono ((a.app M).app U) ∧ (∃ hz : (a.app M).app U ≫ (((DerivedCategory.homologyFunctor C i ⋙ G).map (p.app M)).app U ≫ roosCohomologyComparison K G i M U) = 0, (ShortComplex.mk ((a.app M).app U) (((DerivedCategory.homologyFunctor C i ⋙ G).map (p.app M)).app U ≫ roosCohomologyComparison K G i M U) hz).Exact) ∧ (∃ e : roosCohomologyFirstLimit.obj (((roosCohomologyTowers K G (i - 1)).obj M).obj U) ≅ cokernel (roosMap (((roosCohomologyTowers K G (i - 1)).obj M).obj U)), roosCohomologyComparison K G (i - 1) M U ≫ cokernel.π (roosMap (((roosCohomologyTowers K G (i - 1)).obj M).obj U)) ≫ e.inv ≫ (a.app M).app U = roosCohomologyConnecting G i (δ.app M) U)",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-19",
+  "declarations": [
+   "CategoryTheory.roosCohomologyProduct",
+   "CategoryTheory.roosCohomologyTowers",
+   "CategoryTheory.roosCohomologyFirstLimit",
+   "CategoryTheory.roosCohomologyLeft",
+   "CategoryTheory.roosCohomologyRight",
+   "CategoryTheory.roosCohomologyComparison",
+   "CategoryTheory.roosCohomologyConnecting",
+   "CategoryTheory.roosCohomology_boundary"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261019T005404-L-2762752",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261019T005404-L-2762752",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

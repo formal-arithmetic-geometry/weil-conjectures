@@ -1,0 +1,112 @@
+{
+ "id": "lem-weil-pbc-roos-cohomology-projection",
+ "kind": "statement",
+ "title": "Exact presheaf realization of the Roos projection factorization",
+ "statement": "Let $\\mathcal C$ be an abelian category with derived category $D(\\mathcal C)$ [def-weil-abstract-derived-category] admitting countable products, and let $D,S$ be categories. Let $G:\\mathcal C\\to\\operatorname{Fun}(S,\\mathrm{Ab})$ be additive and exact, with all $G\\circ H^j(-)$ preserving countable products. Let $K:D\\to\\operatorname{Fun}(\\mathbf N^{op},D(\\mathcal C))$ be a tower-valued functor, $P$ its product functor, and $L:D\\to D(\\mathcal C)$. Suppose natural maps $p:L\\to P$ and $\\delta:P\\to L[1]$ give distinguished Roos triangles [def-weil-derived-limit] for every object of $D$. For every integer $i$, the cohomology projections form a cone over $G(H^i(K_n))(U)$. The induced map $b:G(H^i(L))\\to\\lim_n G(H^i(K_n))$ is natural both in $D$ and $S$, is epi at every pair $(M,U)$, and its composite with every limit projection is $G(H^i(\\mathrm{pr}_n\\circ p))$ evaluated at $U$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07KY, label lemma-break-long-exact-sequence, projection extraction in its proof"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-limit",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "proof": [
+  {
+   "text": "The zero composite p(1-s) implies successor compatibility after every product projection. Apply cohomology, G and evaluation to obtain a cone. Its universal map b to the inverse limit has the required projection equations. Uniqueness after limit projections proves both naturalities.",
+   "uses": [
+    "def-weil-derived-limit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Given an element y of the inverse limit, use the inverse product/cohomology comparison to lift its coordinate tuple to x in cohomology of P. The limit compatibility equations imply that H^i(1-s)(x)=0, as seen after each product projection. Exactness of the long exact sequence after G and evaluation supplies a lift z in cohomology of L. Its image under b has the same limit coordinates as y and equals y. Thus b is surjective, hence epi in abelian groups.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-limit",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07KY, proof, with natural cokernel/kernel extraction written out"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mono_cokernelDesc|epi_kernelLift",
+   "results": "2 hits: Mathlib/Algebra/Homology/ShortComplex/Exact.lean, Mathlib/Algebra/Homology/ShortComplex/Exact.lean",
+   "date": "2026-10-18",
+   "verdict": "no exact match; generic homology-sequence and exactness lemmas only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural cokernel factorization of the connecting map of a Roos triangle after an exact functor to abelian groups",
+   "results": "8 hits: CategoryTheory.Functor.homologySequenceδ_comp, CategoryTheory.Functor.comp_homologySequenceδ, CategoryTheory.Functor.homologySequence_exact₃, CategoryTheory.Functor.homologySequence_exact₂, CategoryTheory.Functor.homologySequence_exact₁, CategoryTheory.Functor.homologySequence_comp, CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₁, DerivedCategory.triangleOfSESδ",
+   "date": "2026-10-18",
+   "verdict": "no exact match; generic homology-sequence and exactness lemmas only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Roos triangle gives a natural monomorphism from the first derived inverse limit and an epimorphism to the inverse limit of cohomology",
+   "results": "8 hits: CategoryTheory.Abelian.mono_of_epi_of_mono_of_mono, CategoryTheory.ShortComplex.mono_of_epi_of_epi_of_mono, CategoryTheory.ShortComplex.epi_of_mono_of_epi_of_mono, DerivedCategory.triangleOfSES_mor₁, DerivedCategory.triangleOfSESδ.congr_simp, ModuleCat.directLimitIsColimit, DerivedCategory.HomologySequence.epi_homologyMap_mor₁_iff, CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_inv_hom₁",
+   "date": "2026-10-18",
+   "verdict": "no exact match; generic homology-sequence and exactness lemmas only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PbcRoosTriangle",
+  "date": "2026-10-19",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-roos-triangle",
+   "place": "Proof: long exact cohomology sequence; projection extraction in the Milnor sequence",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Triangulated.RoosCohomologyProjection",
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/RoosCohomologyProjection.lean",
+  "declaration": "CategoryTheory.roosCohomology_projection",
+  "statement": "theorem roosCohomology_projection (K : D ⥤ (ℕᵒᵖ ⥤ DerivedCategory C)) (G : C ⥤ (S ⥤ AddCommGrpCat.{r})) [G.Additive] [G.PreservesHomology] (hH : ∀ j : ℤ, PreservesLimitsOfShape (Discrete ℕ) (DerivedCategory.homologyFunctor C j ⋙ G)) (RF : D ⥤ DerivedCategory C) (p : RF ⟶ roosCohomologyProduct K) (δ : roosCohomologyProduct K ⟶ RF ⋙ shiftFunctor (DerivedCategory C) (1 : ℤ)) (hT : ∀ M : D, IsDerivedLimitTriangle (fun n : ℕ ↦ (K.obj M).map (homOfLE (Nat.le_succ n)).op) (RF.obj M) (p.app M) (δ.app M)) (i : ℤ) : ∃ b : RF ⋙ DerivedCategory.homologyFunctor C i ⋙ G ⟶ roosCohomologyRight K G i, ∀ (M : D) (U : S), Epi ((b.app M).app U) ∧ ∀ n : ℕ, (b.app M).app U ≫ limit.π (((roosCohomologyTowers K G i).obj M).obj U) (op n) = ((DerivedCategory.homologyFunctor C i ⋙ G).map (p.app M ≫ Pi.π (fun n : ℕ ↦ (K.obj M).obj (op n)) n)).app U",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261019T005404-L-2762752",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261019T005404-L-2762752",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
