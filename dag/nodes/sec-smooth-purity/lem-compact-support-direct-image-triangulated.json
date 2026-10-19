@@ -22,74 +22,48 @@
  ],
  "proof": [
   {
-   "text": "Fix an arbitrary compactification $c=(j,p)$, with $j:X\\hookrightarrow\\overline X$ open and $p:\\overline X\\to Y$ proper. By [def-weil-compact-support-candidate], the candidate is the composite $Rf_{!,n}^c=Rp_{*,n}\\circ j_!$. For $T=X,\\overline X,Y$, write $\\mathcal A_T=\\Sh(T_{\\mathrm{proet}},A)$ for modules over the constant sheaf of rings $A_T$, and $D_T=D(\\mathcal A_T)$. These are precisely the abelian categories and their unbounded derived categories specified by [def-weil-pbc-proetale-site]; take the small skeleton there inside its larger universe. In particular, the source category of the ringed-site resolution theorem used below is small in the working universe.",
+   "text": "Unfold the compactification candidate of [def-weil-compact-support-candidate] in the fixed-coefficient ModuleCat presentation of [def-weil-pbc-proetale-site]. It is definitionally the composite (openImmersionLowerShriek A c.i).mapDerivedCategory followed by (lowerStar A c.g).rightDerivedFunctor, where A = ModuleCat (Padic.coefficientExtensionRing l E n). The source-library exactness instances [lem-sfb-finite-extension-by-zero-exact] supply additivity and preservation of finite limits and colimits for the first underived factor. Its termwise derived functor is triangulated by [lem-sf-exact-functor-derived-triangulated].",
    "uses": [
     "def-weil-compact-support-candidate",
-    "def-weil-pbc-proetale-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-compact-support-direct-image-triangulated.md",
-    "place": "Proof, first sentence: write the compactification and the composite; size convention made explicit from def-weil-pbc-proetale-site"
-   }
-  },
-  {
-   "text": "The coefficient ring $A=A_{E,n}$ is a finite commutative ring by clause 4 of [def-weil-l-adic-coefficient-extension]. The sheaf functor $j_!:\\mathcal A_X\\to\\mathcal A_{\\overline X}$ is exact by [lem-weil-extension-by-zero-exact], whose statement explicitly includes $A_{E,n}$. Apply [lem-sf-exact-functor-derived-triangulated] to this exact functor between the abelian categories of step 1. The termwise functor $J=j_!:D_X\\to D_{\\overline X}$ is therefore triangulated, with natural shift isomorphisms $\\varphi_K:J(K[1])\\xrightarrow{\\sim}J(K)[1]$. This is exactly the termwise factor used in the candidate, rather than a right derived functor of the underived composite.",
-   "uses": [
-    "def-weil-l-adic-coefficient-extension",
-    "lem-weil-extension-by-zero-exact",
+    "def-weil-pbc-proetale-site",
+    "lem-sfb-finite-extension-by-zero-exact",
     "lem-sf-exact-functor-derived-triangulated"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-compact-support-direct-image-triangulated.md",
-    "place": "Proof, assertion that j_! is exact; expanded using Stacks Tag 015F, derived-lemma-right-derived-exact-functor (Mathlib ExactFunctor.lean:36,80,104)"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [prop-pur-kinjective-resolutions-exist] to each of the small sites from step 1 with its constant ring sheaf $A_T$. The categories $\\mathcal A_T$ are Grothendieck abelian and have K-injective resolutions for all cochain complexes, with no boundedness assumption. The functor $p_*:\\mathcal A_{\\overline X}\\to\\mathcal A_Y$ is additive and left exact by [lem-weil-proetale-module-direct-image-left-exact], applied to the scheme morphism $p$ and the commutative ring $A$. The schemes $Y$ and $\\overline X$ both map to $\\operatorname{Spec}K_0$ (for $\\overline X$, compose $p$ with the structure morphism of $Y$). The element $\\ell\\in K_0^\\times$ has inverse $\\ell^{-1}$, and their images in every structure sheaf still multiply to $1$; hence $\\ell$ is invertible on both schemes, as [def-weil-derived-direct-image] requires. By that definition, $P=Rp_{*,n}$ is the finite-level unbounded right derived functor of $p_*$ computed from those K-injectives; its separate integral tower construction is not used here. Now apply [lem-pc-right-derived-functor-triangulated] to $\\mathcal A_{\\overline X},\\mathcal A_Y$ and $p_*$. All of its hypotheses hold: abelian categories, their derived categories, K-injective resolutions, and an additive functor. Thus $P:D_{\\overline X}\\to D_Y$ is triangulated and has natural isomorphisms $\\psi_L:P(L[1])\\xrightarrow{\\sim}P(L)[1]$. No cohomological-dimension bound and no restriction to etale-origin objects is used.",
+   "text": "ModuleCat of any ring is Grothendieck abelian. The sheaf categories on the small pro-etale sites are Grothendieck abelian by [lem-sfb-proetale-sheaves-grothendieck], and therefore have K-injective resolutions by [lem-sfb-grothendieck-k-injective]. The fixed-coefficient lowerStar of [def-sfb-finite-lower-star] is additive by its source-library lowerStar_additive instance. Consequently its unbounded right derived functor is triangulated by [lem-pc-right-derived-functor-triangulated]. No finite-coefficient finiteness theorem, left-exactness theorem in the intrinsic presentation, integral tower, or common-stage construction is required.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-proetale-module-direct-image-left-exact",
-    "def-weil-derived-direct-image",
+    "lem-sfb-proetale-sheaves-grothendieck",
+    "lem-sfb-grothendieck-k-injective",
+    "def-sfb-finite-lower-star",
     "lem-pc-right-derived-functor-triangulated"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-compact-support-direct-image-triangulated.md",
-    "place": "Proof, assertion that K-injective derived direct image preserves distinguished triangles; expanded using Stacks Tags 079P (injectives-theorem-K-injective-embedding-grothendieck) and 070K (derived-lemma-enough-K-injectives-implies), and the project RightDerivedFunctor/Triangulated.lean:94-99"
-   }
+   "elementary": false
   },
   {
-   "text": "For the composite $H=P\\circ J=Rf_{!,n}^c$, equip shifts with $\\chi_K=\\psi_{JK}\\circ P(\\varphi_K):H(K[1])\\xrightarrow{\\sim}H(K)[1]$. This is natural as a composite of natural isomorphisms. More generally, the integer-shift commutations of $J$ and $P$ from steps 2 and 3 give $H(K[m])\\cong H(K)[m]$ for every $m\\in\\mathbf Z$, by first applying $P$ to $J(K[m])\\cong J(K)[m]$ and then using $P(J(K)[m])\\cong P(J(K))[m]$. By [lem-weil-pbc-triangulated-functor-composite], for every distinguished triangle $K\\xrightarrow{u}L\\xrightarrow{v}M\\xrightarrow{w}K[1]$ in $D_X$, the triangle $HK\\xrightarrow{Hu}HL\\xrightarrow{Hv}HM\\xrightarrow{\\chi_K\\circ H(w)}(HK)[1]$ is distinguished in $D_Y$. Concretely, the last arrow after applying $J$ is $\\varphi_K\\circ J(w)$. Applying $P$ and its shift map gives $\\psi_{JK}\\circ P(\\varphi_K\\circ J(w))$. Functoriality of $P$ rewrites this as $\\psi_{JK}\\circ P(\\varphi_K)\\circ PJ(w)=\\chi_K\\circ H(w)$, the last arrow displayed above. Hence $H$ preserves shifts and distinguished triangles. The notation $Rf_{!,n}=Rf_{!,n}^c$ in [def-compact-support-direct-image-detailed] denotes this very composite. Since the compactification in step 1 was arbitrary, this proves the assertion for every $c$, without invoking a comparison between two compactifications.",
+   "text": "Apply [lem-weil-pbc-triangulated-functor-composite] to these two factors. Both integer-shift structures are the existing canonical ones, and their composite is exactly the shift structure in the original theorem signature. Thus the compact-support candidate for the arbitrary chosen c is triangulated. Lean synthesizes these instances with infer_instance.",
    "uses": [
-    "lem-weil-pbc-triangulated-functor-composite",
-    "def-compact-support-direct-image-detailed"
+    "lem-weil-pbc-triangulated-functor-composite"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-compact-support-direct-image-triangulated.md",
-    "place": "Proof, final conclusion for the composite; Stacks Tag 014Y, derived-lemma-composition-exact, with its composite shift isomorphism written out"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-compact-support-candidate",
   "def-weil-pbc-proetale-site",
-  "def-weil-l-adic-coefficient-extension",
-  "lem-weil-extension-by-zero-exact",
+  "lem-sfb-finite-extension-by-zero-exact",
   "lem-sf-exact-functor-derived-triangulated",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-proetale-module-direct-image-left-exact",
-  "def-weil-derived-direct-image",
+  "lem-sfb-proetale-sheaves-grothendieck",
+  "lem-sfb-grothendieck-k-injective",
+  "def-sfb-finite-lower-star",
   "lem-pc-right-derived-functor-triangulated",
-  "lem-weil-pbc-triangulated-functor-composite",
-  "def-compact-support-direct-image-detailed"
+  "lem-weil-pbc-triangulated-functor-composite"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-compact-support-direct-image-triangulated.md",
-  "place": "Expansion of the imported Proof paragraph by Q19, using existing DAG statements, project source and online Stacks Tags 015F, 079P, 070K, 014Y; archived literature files unavailable on this machine (WANTED in report)"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/lem-compact-support-direct-image-triangulated.proof.md",
+  "place": "Proof: exact extension by zero, K-injective derived direct image, then composition. V1 uses the existing fixed-coefficient source-library instances directly."
  },
  "mathlib_searches": [
   {
@@ -247,7 +221,6 @@
   ]
  },
  "tool_uses": [
-  "prop-pur-kinjective-resolutions-exist",
   "lem-pc-right-derived-functor-triangulated"
  ],
  "reviewed": {
@@ -275,5 +248,15 @@
   "by": "Q27",
   "date": "2026-10-16",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261019T144023-L-2350769",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
