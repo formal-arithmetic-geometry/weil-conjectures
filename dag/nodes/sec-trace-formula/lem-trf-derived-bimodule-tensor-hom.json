@@ -2,18 +2,128 @@
  "id": "lem-trf-derived-bimodule-tensor-hom",
  "kind": "statement",
  "title": "Derived tensor-Hom adjunction with a bimodule and retained scalars",
- "statement": "Let $S\\to B$ be a homomorphism of commutative rings. Use the ordinary module derived categories $D(S),D(B)$ [def-weil-abstract-derived-category], with derived tensor and Hom [def-pur-derived-internal-hom]. Let $E\\in D(B)$, $X\\in D(B)$, and $V\\in D(S)$. Regard $E$ as a $B$-$S$ bimodule by restriction along $S\\to B$. Write $J_E(V)\\in D(B)$ for derived $S$-linear Hom from $E$ to $V$ with $B$ acting by precomposition: it is represented by $\\operatorname{Hom}_S^\\bullet(E^\\bullet,I^\\bullet)$ for a representative $E^\\bullet$ of $E$ and a K-injective representative $I^\\bullet$ of $V$, and $(b h)(e)=h(be)$. This is independent of representatives. With $U:D(B)\\to D(S)$ the restriction functor, there is a natural isomorphism in $D(S)$\n$$U R\\operatorname{Hom}_B(X,J_E(V))\\ \\cong\\ R\\operatorname{Hom}_S\\bigl(U(X\\otimes_B^{\\mathbf L}E),V\\bigr).$$\nIt induces the tensor-Hom adjunction on morphism sets by taking $H^0$, with evaluation as counit. In particular all these comparisons remain compatible with restriction to any ring $K\\to S$. No flatness of $B$ over $S$, perfectness of $E$, or boundedness of $V$ is assumed.",
+ "statement": "Let $S\\to B$ be a homomorphism of commutative rings. Use the ordinary module derived categories $D(S),D(B)$ [def-weil-abstract-derived-category], with derived tensor [lem-pc-derived-tensor-second-factor-functor] and Hom [def-pur-derived-internal-hom]. Let $E\\in D(B)$, $X\\in D(B)$, and $V\\in D(S)$. Regard $E$ as a $B$-$S$ bimodule by restriction along $S\\to B$. Write $J_E(V)\\in D(B)$ for derived $S$-linear Hom from $E$ to $V$ with $B$ acting by precomposition: it is represented by $\\operatorname{Hom}_S^\\bullet(E^\\bullet,I^\\bullet)$ for a representative $E^\\bullet$ of $E$ and a K-injective representative $I^\\bullet$ of $V$, and $(b h)(e)=h(be)$. This is independent of representatives. With $U:D(B)\\to D(S)$ the restriction functor, there is a natural isomorphism in $D(S)$\n$$U R\\operatorname{Hom}_B(X,J_E(V))\\ \\cong\\ R\\operatorname{Hom}_S\\bigl(U(X\\otimes_B^{\\mathbf L}E),V\\bigr).$$\nIt induces the tensor-Hom adjunction on morphism sets by taking $H^0$, with evaluation as counit. In particular all these comparisons remain compatible with restriction to any ring $K\\to S$. No flatness of $B$ over $S$, perfectness of $E$, or boundedness of $V$ is assumed.",
  "source": {
   "document": "literature/stacks-project/dga.tex",
   "place": "Tags 09LN (lemma-tensor-hom-adjunction, differential graded clause) and 09LT (lemma-tensor-hom-adjoint); ordinary commutative rings in degree zero, with the S-linear internal-Hom enhancement. The displayed enhancement follows from their chain adjunction using a K-projective B-model of X and a K-injective S-model of V."
  },
  "stmt_deps": [
   "def-weil-abstract-derived-category",
-  "def-pur-derived-internal-hom"
+  "lem-pc-derived-tensor-second-factor-functor",
+  "def-pur-derived-internal-hom",
+  "def-sc-module-total-hom-complex",
+  "def-pur-kinjective-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on the one-object site with only the identity and the trivial topology: sheaves of modules over its constant ring $R$ are exactly $R$-modules. Choose complexes $C,E_0,V_0$ representing $X,E,V$. By [prop-pur-kinjective-resolutions-exist] choose $V_0\\to I$ K-injective over $S$, and by [lem-pc-kflat-resolution] choose $q:Q\\to E_0$ K-flat over $B$. Put $J=\\operatorname{Hom}_S^\\bullet(Q,I)$, with $(bh)(e)=h(be)$. This action commutes with the Hom differential since $b$ has degree zero. The map $\\operatorname{Hom}_S^\\bullet(E_0,I)\\to J$ induced by $q$ is $B$-linear and is a quasi-isomorphism by [lem-pur-rhom-well-defined] on the one-point $S$-site. The same cited statement applies to quasi-isomorphisms of representatives of $E$ and of K-injective representatives of $V$. Thus $J$ represents precisely the $J_E(V)$ specified in the item, including its $B$-action.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-kflat-resolution",
+    "def-sc-module-total-hom-complex",
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A5 (section-unbounded), 06YS (lemma-K-flat-resolution), 0A95 (lemma-RHom-well-defined); one-point sites"
+   }
+  },
+  {
+   "text": "For any $B$-complexes $A,T$ and $S$-complex $N$, use the total tensor of [def-pc-tensor-complex-sheaves] and the total Hom of [def-sc-module-total-hom-complex]. Define currying, in degree $n$, by\n$$\\theta(f)(a\\otimes t)=f(a)(t):\\quad U\\operatorname{Hom}_B^\\bullet(A,\\operatorname{Hom}_S^\\bullet(T,N))\\longrightarrow\\operatorname{Hom}_S^\\bullet(U\\operatorname{Tot}(A\\otimes_B T),N).$$\nIt is balanced because $f(ba)(t)=f(a)(bt)$; conversely a balanced map gives $a\\mapsto(t\\mapsto g(a\\otimes t))$. Products on both sides are indexed by all $(p,q)$, so these mutually inverse formulas also work for unbounded complexes. For $a\\in A^p$, both differentials evaluate to\n$$d_N f(a)(t)-(-1)^{p+n}f(a)(d_Tt)-(-1)^n f(d_Aa)(t).$$\nThus $\\theta$ is an isomorphism of $S$-complexes, natural in all variables. This is the explicit elementary verification of the differential graded clause of Tag 09LN, with the source's two algebra names specialized to $B,S$ respectively; no derived assertion is used here.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LN, lemma-tensor-hom-adjunction, differential graded clause and proof hint"
+   }
+  },
+  {
+   "text": "The chosen $J$ is K-injective as a $B$-complex. Indeed, for an acyclic $B$-complex $A$, $A\\otimes_B Q$ is acyclic by K-flatness [def-pc-kflat-complex]. Restriction $U$ leaves its abelian groups and differential unchanged, so it is still acyclic over $S$. By Step 2 and the Hom/homotopy identification [lem-sc-module-hom-complex-quotient],\n$$\\operatorname{Hom}_{K(B)}(A,J)=H^0\\operatorname{Hom}_S^\\bullet(U(A\\otimes_B Q),I)=\\operatorname{Hom}_{K(S)}(U(A\\otimes_B Q),I)=0.$$\nThe last equality is exactly the definition of K-injectivity of $I$ [def-pur-kinjective-complex]. This proves the required K-injectivity of $J$ by that same definition, without asserting that restriction preserves K-injectives.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-sc-module-hom-complex-quotient",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A96, lemma-RHom-from-K-flat-into-K-injective, proof with the two coefficient rings distinguished"
+   }
+  },
+  {
+   "text": "The complex $C\\otimes_B Q$ represents $X\\otimes_B^{\\mathbf L}E$. To check this using the first-variable convention in [lem-pc-derived-tensor-second-factor-functor], take a K-flat resolution $P\\to C$ [lem-pc-kflat-resolution]. That cited functor statement identifies $P\\otimes_B E_0$ with the derived tensor and says that $P\\otimes_B Q\\to P\\otimes_B E_0$ is a quasi-isomorphism. Also $P\\otimes_B Q\\to C\\otimes_B Q$ is a quasi-isomorphism by the K-flatness of $Q$ [def-pc-module-kflat-complex]. Hence the resulting zigzag identifies $C\\otimes_B Q$ with the required tensor. Step 3 and [def-pur-derived-internal-hom] identify $\\operatorname{Hom}_B^\\bullet(C,J)$ with $R\\operatorname{Hom}_B(X,J_E(V))$. The same definition over $S$ identifies $\\operatorname{Hom}_S^\\bullet(U(C\\otimes_B Q),I)$ with $R\\operatorname{Hom}_S(U(X\\otimes_B^{\\mathbf L}E),V)$. Localizing $\\theta$ of Step 2 now gives the displayed isomorphism in $D(S)$.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-pc-kflat-resolution",
+    "def-pc-module-kflat-complex",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9, lemma-internal-hom, proof; mixed-ring analogue using dga.tex Tag 09LN and more-algebra.tex Tag 06Y6"
+   }
+  },
+  {
+   "text": "The isomorphism is canonical and natural. On complexes its component is the formula of Step 2; precomposition in $C$ or $Q$ and postcomposition in $I$ commute with this formula on every $a\\otimes t$. Quasi-isomorphisms between K-flat $Q$'s induce tensor quasi-isomorphisms by [lem-pc-derived-tensor-second-factor-functor] (compare through a K-flat $P$ as in Step 4). They induce Hom quasi-isomorphisms into $I$ by [lem-pur-rhom-well-defined]; the resulting $J$'s are K-injective over $B$ by Step 3. Quasi-isomorphisms of $C$ and of K-injective $I$'s likewise induce the required Hom quasi-isomorphisms by that lemma. Consequently the commuting chain-level squares remain commuting after inverting those maps. Every morphism of a derived category is a composite of images of complex maps and inverses of quasi-isomorphisms, by the localization description [def-weil-abstract-derived-category]; hence these squares give independence of resolutions and naturality on the derived categories.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-pur-rhom-well-defined",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09LN (lemma-tensor-hom-adjunction), 09LT (lemma-tensor-hom-adjoint); sites-cohomology.tex Tag 0A95"
+   }
+  },
+  {
+   "text": "Taking $H^0$ and applying [lem-pur-rhom-into-kinjective-local] on the one-point sites over $B$ and $S$ gives\n$$\\operatorname{Hom}_{D(B)}(X,J_E(V))\\cong\\operatorname{Hom}_{D(S)}(U(X\\otimes_B^{\\mathbf L}E),V).$$\nThus $F_E(X)=U(X\\otimes_B^{\\mathbf L}E)$ is left adjoint to $J_E$. The identity of $J_E(V)$ is sent under this bijection to evaluation: its representative is $\\operatorname{Hom}_S^\\bullet(Q,I)\\otimes_B Q\\to I$, $h\\otimes e\\mapsto h(e)$. This complex computes $F_E(J_E(V))$ by the argument in Step 4, since $Q$ is K-flat. Therefore the counit is precisely derived evaluation. The inverse currying formula sends the identity of $F_E(X)$ to the unit $x\\mapsto(e\\mapsto x\\otimes e)$ (followed by a K-injective resolution in the target). The two triangular identities reduce on these representatives to evaluating these two formulas, giving $x\\otimes e$ and $h(e)$ respectively.",
+   "uses": [
+    "lem-pur-rhom-into-kinjective-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LT, lemma-tensor-hom-adjoint, with unit and counit from the chain formulas of Tag 09LN"
+   }
+  },
+  {
+   "text": "For any ring map $K\\to S$, the $K$-action is obtained by restricting the displayed $S$-actions. The equality $\\theta(sf)(a\\otimes e)=s f(a)(e)=s\\theta(f)(a\\otimes e)$ proves scalar compatibility. The balancing, differential, unit, and evaluation formulas above remain the very same formulas after restriction. Restriction is exact since kernels, images, and cohomology have the same underlying abelian groups, so it takes every comparison quasi-isomorphism used above to a quasi-isomorphism. It therefore takes the isomorphism and its unit/counit compatibilities to the corresponding equalities in $D(K)$, by [def-weil-abstract-derived-category]. This means restriction of the resulting objects and maps, not replacement of $R\\operatorname{Hom}_S$ by $R\\operatorname{Hom}_K$. Only $Q$ was required to be K-flat over $B$, and only $I$ K-injective over $S$; no boundedness, perfectness, or flatness of $B$ over $S$ entered.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LN, lemma-tensor-hom-adjunction, isomorphism of complexes of base-ring modules"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-kflat-resolution",
+  "def-sc-module-total-hom-complex",
+  "lem-pur-rhom-well-defined",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "lem-sc-module-hom-complex-quotient",
+  "def-pur-kinjective-complex",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "def-pc-module-kflat-complex",
+  "def-pur-derived-internal-hom",
+  "def-weil-abstract-derived-category",
+  "lem-pur-rhom-into-kinjective-local"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Explicit mixed-ring adaptation of Tag 09LN and the K-flat/K-injective proof of sites-cohomology.tex Tags 0A96 and 08J9; the chain formula and scalar compatibility are written out."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,10 +166,45 @@
    "results": "{\"t\": \"2026-10-17T23:53:25Z\", \"tool\": \"loogle\", \"query\": \"ModuleCat.restrictCoextendScalarsAdj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"ModuleCat.restrictCoextendScalarsAdj\"], \"digest\": \"4b167a90eb1d92c5\"}",
    "date": "2026-10-18",
    "verdict": "no match: ordinary module tensor/Hom and extension/coextension adjunctions, or generic categorical adjunctions, do not supply the mixed-ring derived internal-Hom isomorphism with its retained scalar structure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived mixed ring tensor Hom adjunction for unbounded module complexes with scalar action by precomposition",
+   "results": "{\"t\": \"2026-10-18T23:04:04Z\", \"tool\": \"leanfinder\", \"query\": \"Derived mixed ring tensor Hom adjunction for unbounded module complexes with scalar action by precomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.tensorHom\", \"HomologicalComplex.ιTensorObj\", \"HomologicalComplex.HasTensor\", \"ModuleCat.ihom_ev_app\", \"HomologicalComplex.tensorObj\", \"ModuleCat.monoidalClosedHomEquiv\", \"HomologicalComplex.HasGoodTensor₁₂\", \"ModuleCat.ihom_coev_app\"], \"digest\": \"3ab6258cb7c27bc5\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits are ordinary-module adjunctions, tensor complexes, finite-free contraction formulas or generic categorical adjunctions; none supplies this unbounded mixed-ring derived internal-Hom comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Tt]ensor|tensorHomAdjunction|[Bb]imodule",
+   "results": "{\"t\": \"2026-10-18T23:05:11Z\", \"tool\": \"grep\", \"query\": \"derived.*[Tt]ensor|tensorHomAdjunction|[Bb]imodule\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits are ordinary-module adjunctions, tensor complexes, finite-free contraction formulas or generic categorical adjunctions; none supplies this unbounded mixed-ring derived internal-Hom comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "RHom over B of X and RHom over S of E V is RHom over S of derived tensor X E and V",
+   "results": "{\"t\": \"2026-10-18T23:05:12Z\", \"tool\": \"leansearch\", \"query\": \"RHom over B of X and RHom over S of E V is RHom over S of derived tensor X E and V\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"rTensorHomEquivHomRTensor\", \"lTensorHomEquivHomLTensor\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"ModuleCat.monoidalClosedHomEquiv\", \"IsBaseChange.linearMapRightBaseChangeHom\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars\", \"dualTensorHomEquiv\"], \"digest\": \"662a460b86b06694\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits are ordinary-module adjunctions, tensor complexes, finite-free contraction formulas or generic categorical adjunctions; none supplies this unbounded mixed-ring derived internal-Hom comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.restrictCoextendScalarsAdj",
+   "results": "{\"t\": \"2026-10-18T23:05:12Z\", \"tool\": \"loogle\", \"query\": \"ModuleCat.restrictCoextendScalarsAdj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"ModuleCat.restrictCoextendScalarsAdj\"], \"digest\": \"4b167a90eb1d92c5\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits are ordinary-module adjunctions, tensor complexes, finite-free contraction formulas or generic categorical adjunctions; none supplies this unbounded mixed-ring derived internal-Hom comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived tensor and derived internal Hom adjunction over a homomorphism of commutative rings",
+   "results": "{\"t\": \"2026-10-18T23:06:00Z\", \"tool\": \"leanfinder\", \"query\": \"Unbounded derived tensor and derived internal Hom adjunction over a homomorphism of commutative rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj\", \"LightCondensed.instMonoidalClosedLightCondMod\", \"CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction\", \"CategoryTheory.Tor'_obj_map\", \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.exp.adjunction\", \"ModuleCat.instMonoidalClosed\", \"ModuleCat.monoidalClosedHomEquiv\"], \"digest\": \"1768fdae587eb334\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits are ordinary-module adjunctions, tensor complexes, finite-free contraction formulas or generic categorical adjunctions; none supplies this unbounded mixed-ring derived internal-Hom comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-polynomial-diagonal-rhom-reduction",
@@ -91,5 +236,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-derived-bimodule-tensor-hom",
+  "worker": "stage1",
+  "summary": "Split by taking a B-K-flat model of E and an S-K-injective model of V; write the balanced chain currying and its differential, deduce B-K-injectivity, identify both derived sides, and check naturality, H0, evaluation and restriction of scalars. Reuse existing resolution, Hom and tensor nodes; create no new node. Correct only the missing derived-tensor definition citation.",
+  "blueprint": "Nearest ancestor lem-trf-local-term-locality, proof (1)--(2), auxiliary nearby-cycle/coherent-duality branch recorded in blueprint.from.place; this item supplies the mixed-ring tensor-Hom input of lem-trf-polynomial-diagonal-rhom-reduction, without replacing the curve-zero unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ordinary-module specialization on the one-point ringed site: Existence of K-flat resolutions on a ringed site. This is a homological-algebra tool for the existing auxiliary polynomial-diagonal route, not a replacement of a geometric step of sk-i-curve-zero."
+   },
+   {
+    "node": "def-sc-module-total-hom-complex",
+    "why": "Generic ordinary-module specialization on the one-point ringed site: A-module-valued total Hom complex. This is a homological-algebra tool for the existing auxiliary polynomial-diagonal route, not a replacement of a geometric step of sk-i-curve-zero."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Generic ordinary-module specialization on the one-point ringed site: The Hom complex into K-injective complexes respects quasi-isomorphisms. This is a homological-algebra tool for the existing auxiliary polynomial-diagonal route, not a replacement of a geometric step of sk-i-curve-zero."
+   },
+   {
+    "node": "def-pc-kflat-complex",
+    "why": "Generic ordinary-module specialization on the one-point ringed site: K-flat complex of modules on a ringed site. This is a homological-algebra tool for the existing auxiliary polynomial-diagonal route, not a replacement of a geometric step of sk-i-curve-zero."
+   },
+   {
+    "node": "lem-sc-module-hom-complex-quotient",
+    "why": "Generic ordinary-module specialization on the one-point ringed site: Module Hom homology as homotopy classes. This is a homological-algebra tool for the existing auxiliary polynomial-diagonal route, not a replacement of a geometric step of sk-i-curve-zero."
+   },
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Generic ordinary-module specialization on the one-point ringed site: Derived tensor over R with a complex of A-modules. This is a homological-algebra tool for the existing auxiliary polynomial-diagonal route, not a replacement of a geometric step of sk-i-curve-zero."
+   },
+   {
+    "node": "def-pur-derived-internal-hom",
+    "why": "Generic ordinary-module specialization on the one-point ringed site: Derived internal Hom on a ringed site. This is a homological-algebra tool for the existing auxiliary polynomial-diagonal route, not a replacement of a geometric step of sk-i-curve-zero."
+   },
+   {
+    "node": "lem-pur-rhom-into-kinjective-local",
+    "why": "Generic ordinary-module specialization on the one-point ringed site: Hom into a K-injective complex computes localized derived morphisms. This is a homological-algebra tool for the existing auxiliary polynomial-diagonal route, not a replacement of a geometric step of sk-i-curve-zero."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "def-sc-module-total-hom-complex",
+  "lem-pur-rhom-well-defined",
+  "def-pc-kflat-complex",
+  "lem-sc-module-hom-complex-quotient",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-into-kinjective-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-a2af43398",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-a2af43398 (reviewer sub-agent of L); spot-checked: PASS, no fixes: I read the whole item and its 13 cited statements. The only statement change splits one citation: derived tensor now cites lem-pc-derived-tensor-second-factor-functor, derived Hom still cites def-pur-derived-internal-hom. Two stmt_deps used by the statement were added; the mathematics is unchanged and not weakened. No new nodes. Source: dga.tex 09LN (l.4954, dg clause, proof omitted) and 09LT (l.5416), with A,B renamed B,S and E a (B,S)-bimodule. Step 1: lem-pur-rhom-well-defined with s=id, t=q needs only I K-injective. Step 2: I recomputed both differentials under the cited sign conventions; both give d_N f(a)(t) − (−1)^{p+n} f(a)(dt) − (−1)^n f(da)(t), with no extra currying sign. The product indexing is valid for unbounded complexes, and elementary is justified because it writes out 09LN's omitted proof. Step 3: J=Hom_S(Q,I) is K-injective over B: H0 Hom of an acyclic complex into J equals H0 Hom_S(U(A⊗Q),I), which is 0; it never claims restriction preserves K-injectives. Step 4: the tensor zigzag uses clauses (2) and (3) of the second-factor-functor node plus the either-side K-flat criterion, and the derived-Hom node's last sentence allows any K-injective representative. Steps 5–7: naturality via localization, the H0 bijection via lem-pur-rhom-into-kinjective-local, counit is evaluation, and restriction to K→S is exact; all correct. Edge cases: E, X or V zero; B=0; S=B with E=B[0]; Z→F_p with E=X=F_p and V=Z, where both sides are RHom_Z(F_p,Z) with Ext^1=Z/p. Duplicate candidates are not duplicates: lem-weil-pbc-derived-module-scalar-adjunction (only existence of an adjoint), lem-sbc-restrict-scalars-derived-adjunction-identities (étale), lem-trf-pseudocoherent-rhom-flat-base-change (flat base change). The parent lem-trf-polynomial-diagonal-rhom-reduction uses the item as stated. Every cited statement node is in the route of sk-i-curve-zero (sk-def-sf-operations, sk-thm-picard-semicon, sk-thm-picard-duality), so the declared tool_uses are unnecessary but accurate; accepted. No SGA; Stacks tags match their labels; steps are at most 993 characters; proof_deps equals the union of uses."
  }
 }
