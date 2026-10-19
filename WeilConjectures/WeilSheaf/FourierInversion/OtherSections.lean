@@ -6,14 +6,18 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.FourierInversion.Defs
+public import WeilConjectures.WeilSheaf.Localization
 public import WeilConjectures.WeilSheaf.LowerShriekOperations
 public import WeilConjectures.WeilSheaf.TateTwist
+import WeilConjectures.WeilSheaf.ProjectionFormulaLisse.LowerShriek
 
 /-!
 # Fourier inversion: inputs from other sections
 
 Statements of blueprint nodes of other sections (the projection formula, the open–closed
-recollement and the Thom isomorphism for Weil complexes) used in the proof of Fourier inversion,
+recollement and the Thom isomorphism for Weil complexes) used in the proof of Fourier inversion.
+The projection formula is
+`AlgebraicGeometry.WeilComplex.derivedLowerShriekCompTensorLisseIso`; the Thom isomorphism is
 recorded here with `sorry`.
 -/
 
@@ -44,7 +48,7 @@ theorem WeilComplex.nonempty_iso_derivedLowerShriek_tensorLisse {X Y : Scheme.{u
       WeilComplex.tensorLisse ((WeilSheaf.upperStar f).obj G)
           (ProEtale.IsAdicLisseSheaf.upperStar _ hG) ⋙
         WeilComplex.derivedLowerShriek k₀ l f) :=
-  sorry
+  ⟨WeilComplex.derivedLowerShriekCompTensorLisseIso f G hG⟩
 
 /-- Blueprint `def-weil-open-closed-recollement` and
 `prop-weil-open-closed-recollement-adjunctions` (open–closed recollement), for Weil complexes.
@@ -62,7 +66,23 @@ theorem WeilComplex.exists_isIso_app_of_isZero_upperStar {X Z U : Scheme.{u}}
     ∃ η : 𝟭 (WeilComplex k₀ l X) ⟶
         WeilComplex.upperStar i ⋙ WeilComplex.derivedLowerStar (k₀ := k₀) (l := l) i,
       ∀ K : WeilComplex k₀ l X, IsZero ((WeilComplex.upperStar j).obj K) → IsIso (η.app K) :=
-  sorry
+  by
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (CommRingCat.of k₀))
+  have : CompactSpace X :=
+    QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (CommRingCat.of k₀))
+  have : IsNoetherian X := ⟨⟩
+  have : TopologicalSpace.NoetherianSpace U := j.isOpenEmbedding.isInducing.noetherianSpace
+  have hc : IsCompl (Set.range i.base) (Set.range j.base) := by
+    rw [show Set.range j.base = (Set.range i.base)ᶜ from hij]
+    exact isCompl_compl
+  have hR := WeilComplex.fullyFaithfulDerivedLowerStar (k₀ := k₀) (l := l) i
+  have := hR.full
+  have := hR.faithful
+  refine ⟨(WeilComplex.upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) i).unit,
+    fun K hK ↦ ?_⟩
+  obtain ⟨M, ⟨e⟩⟩ := WeilComplex.derivedLowerStar_essImage_of_isZero i j hc K hK
+  exact (WeilComplex.upperStarDerivedLowerStarAdjunction i).isIso_unit_app_of_iso e.symm
 
 /-- Blueprint `thm-pur-rank-one-thom` (and its vector-bundle form `thm-pur-vector-bundle-thom`),
 combined with the projection formula of `prop-weil-operations` for the constant sheaf: for the

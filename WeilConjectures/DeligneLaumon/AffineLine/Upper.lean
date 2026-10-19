@@ -60,22 +60,6 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-namespace WeilSheaf
-
-variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
-  {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
-
-/-- Pullbacks of Weil sheaves along equal morphisms are isomorphic. Stating this for an equation
-of morphisms keeps the kernel from unfolding `WeilSheaf.upperStar` when two instances of
-`Scheme.Hom.IsOver` differ; the instances are implicit arguments, so that they are found by
-unification. -/
-noncomputable def upperStarCongr {φ ψ : X ⟶ Y} {_ : φ.IsOver (Spec (CommRingCat.of k₀))}
-    {_ : ψ.IsOver (Spec (CommRingCat.of k₀))} (h : φ = ψ) :
-    upperStar (k₀ := k₀) (l := l) φ ≅ upperStar ψ :=
-  eqToIso (by subst h; rfl)
-
-end WeilSheaf
-
 namespace WeilSheaf.LisseOnDenseOpen
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
@@ -122,6 +106,12 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_one_of_iso_upperStar
     rw [← Scheme.Opens.ι_comp_over, ← zero_add (1 : ℕ)]
     infer_instance
   have := SmoothOfRelativeDimension.smooth 1 (W.toScheme ↘ Spec (CommRingCat.of k₀))
+  -- `W` is quasi-compact, as an open of the noetherian scheme `ℙ¹`
+  have : IsLocallyNoetherian (ProjectiveLine (Spec (CommRingCat.of k₀))) :=
+    LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine (Spec (.of k₀)) ↘ Spec (.of k₀))
+  have : QuasiCompact (W.toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← Scheme.Opens.ι_comp_over]
+    infer_instance
   have : IrreducibleSpace W := GeometricallyIrreducible.irreducibleSpace_of_subsingleton
     (f := W.toScheme ↘ Spec (CommRingCat.of k₀))
   have : IsDominant j' := ⟨j'.isOpenEmbedding.isOpenMap.denseRange_of_isPreirreducibleSpace⟩

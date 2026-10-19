@@ -47,6 +47,33 @@ noncomputable def artinSchreierOf (ψ : AddChar k₀ (PadicAlgCl l)) (a : Γ(X, 
     WeilSheaf k₀ l X :=
   (WeilSheaf.upperStar (affineLine.homOfSection k₀ a)).obj (artinSchreier ψ 1)
 
+omit [Finite k₀] in
+/-- The function `x` defines the identity of the affine line. -/
+theorem affineLine.homOfSection_coord :
+    affineLine.homOfSection k₀ (AffineSpace.coord (Spec (CommRingCat.of k₀)) PUnit.unit) =
+      𝟙 (affineLine k₀) := by
+  refine AffineSpace.hom_ext ?_ fun _ ↦ ?_
+  · rw [affineLine.homOfSection, AffineSpace.homOfVector_over, Category.id_comp]
+  · rw [affineLine.homOfSection, AffineSpace.homOfVector_appTop_coord]
+    rfl
+
+omit [Finite k₀] in
+/-- The multiplication `μ : 𝔸² ⟶ 𝔸¹` is the morphism defined by the function `x y`. -/
+theorem affinePlane.mul_eq_homOfSection :
+    affinePlane.mul k₀ = affineLine.homOfSection k₀
+      ((affinePlane.fst k₀).appTop (AffineSpace.coord _ PUnit.unit) *
+        (affinePlane.snd k₀).appTop (AffineSpace.coord _ PUnit.unit)) := by
+  refine AffineSpace.hom_ext ?_ fun _ ↦ ?_
+  · rw [affinePlane.mul, affineLine.homOfSection, AffineSpace.homOfVector_over]
+  · rw [affinePlane.mul, affineLine.homOfSection, AffineSpace.homOfVector_appTop_coord]
+
+/-- Unfolding `AlgebraicGeometry.artinSchreierOf`. Rewriting with this equation (rather than
+unfolding the definition) keeps the kernel from unfolding the pullback functor. -/
+theorem artinSchreierOf_eq (ψ : AddChar k₀ (PadicAlgCl l)) (a : Γ(X, ⊤)) :
+    artinSchreierOf ψ a =
+      (WeilSheaf.upperStar (affineLine.homOfSection k₀ a)).obj (artinSchreier ψ 1) :=
+  rfl
+
 /-- The Artin–Schreier sheaf of a function is lisse, as a pullback of a lisse sheaf. -/
 theorem isLisse_artinSchreierOf (ψ : AddChar k₀ (PadicAlgCl l)) (a : Γ(X, ⊤)) :
     (artinSchreierOf ψ a).IsLisse :=

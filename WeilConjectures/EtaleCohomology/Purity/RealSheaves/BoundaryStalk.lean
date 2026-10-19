@@ -60,10 +60,6 @@ variable {C U : Scheme.{u}} (j : U ⟶ C) [IsOpenImmersion j] [IsIntegral C]
   [IsScalarTower Γ(C, W) C.functionField Ω] [IsGalois C.functionField Ω] [IsSepClosed Ω]
   (Q : Ideal (integralClosure Γ(C, W) Ω)) [Q.IsMaximal] {Λ : Type (u + 1)} [Ring Λ]
 
-/-- The generic geometric point `η : Spec Ω ⟶ U`. -/
-noncomputable abbrev genericGeometricPoint : Spec (.of Ω) ⟶ U :=
-  pointOfAlgebra Ω (genericPointLift j)
-
 /-- The geometric point `x̄ : Spec κ(B_Q) ⟶ Spec B_Q ⟶ C` over the boundary point. -/
 noncomputable abbrev boundaryGeometricPoint :
     Spec (.of (IsLocalRing.ResidueField (Localization.AtPrime Q))) ⟶ C :=

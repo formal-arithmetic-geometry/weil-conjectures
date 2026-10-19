@@ -49,6 +49,8 @@ the open disc of radius `R`.
   convergence of its inverse.
 - `PowerSeries.radius_tprod_le_radius` : a factor of a convergent product of nonnegative series
   with constant term `1` has at least the radius of the product.
+- `PowerSeries.eval_ne_zero_of_lt_radius_tprod_inv` : if the inverses of polynomials `P_j` with
+  `P_j(0) = 1` form such a product, no `P_j` vanishes inside its disc of convergence.
 -/
 
 @[expose] public section
@@ -274,6 +276,23 @@ theorem radius_tprod_le_radius {J : Type*} {f : J → ℂ⟦X⟧} (hf : ∀ j, (
   rw [← hfa, ← hfb] at hab ⊢
   rw [RCLike.norm_ofReal, RCLike.norm_ofReal, abs_of_nonneg ha, abs_of_nonneg hb]
   exact_mod_cast hab
+
+/-- Blueprint `lem-rp-positive-product-radius` (the "in particular" clause): Positive products
+and radii of convergence.
+
+Let `(P_j)` be polynomials with `P_j(0) = 1` whose inverses `f_j = P_j⁻¹` lie in
+`1 + T ℝ≥0⟦T⟧` and have a convergent product `F = ∏ f_j`. Then no `P_j` vanishes in the open
+disc of radius `R(F)`: each `P_j⁻¹` has radius at least `R(F)` by `radius_tprod_le_radius`, and
+a polynomial has no zero inside the disc of convergence of its inverse
+(`eval_ne_zero_of_lt_radius_inv`). -/
+theorem eval_ne_zero_of_lt_radius_tprod_inv {J : Type*} {P : J → Polynomial ℂ}
+    (hP : ∀ j, (P j).coeff 0 = 1) (hf : ∀ j, ((P j : ℂ⟦X⟧)⁻¹).HasNonnegCoeffs)
+    (hmul : Multipliable fun j ↦ (P j : ℂ⟦X⟧)⁻¹) (j : J) {z : ℂ}
+    (hz : (‖z‖₊ : ℝ≥0∞) < (∏' i, (P i : ℂ⟦X⟧)⁻¹).radius) : (P j).eval z ≠ 0 :=
+  eval_ne_zero_of_lt_radius_inv (by simp [hP]) <| hz.trans_le <|
+    radius_tprod_le_radius hf (fun i ↦ by
+      rw [constantCoeff_inv, ← coeff_zero_eq_constantCoeff_apply, Polynomial.coeff_coe, hP,
+        inv_one]) hmul j
 
 end Nonneg
 

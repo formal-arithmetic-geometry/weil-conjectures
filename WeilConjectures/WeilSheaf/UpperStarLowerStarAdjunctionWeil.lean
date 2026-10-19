@@ -9,17 +9,18 @@ public import WeilConjectures.WeilSheaf.LowerStarComp
 public import WeilConjectures.WeilSheaf.Triangle
 public import WeilConjectures.WeilSheaf.UpperStarLowerStar
 public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
+public import WeilConjectures.WeilSheaf.UpperStarId
 
 /-!
 # Composition of pullbacks and pushforwards of Weil sheaves
 
-The pushforward of Weil sheaves is left exact, and pushforwards compose. Composing adjunctions,
-the pullback along a composite is the composite of the pullbacks.
+The pushforward of Weil sheaves is left exact, and pushforwards compose. (The composition of
+pullbacks, `AlgebraicGeometry.WeilSheaf.upperStarCompIso`, is in
+`WeilConjectures.WeilSheaf.UpperStarId`.)
 
 ## Main definitions
 
 - `AlgebraicGeometry.WeilSheaf.lowerStarCompIso`: `φ_* ⋙ ψ_* ≅ (φ ≫ ψ)_*`.
-- `AlgebraicGeometry.WeilSheaf.upperStarCompIso`: `(φ ≫ ψ)^* ≅ ψ^* ⋙ φ^*`.
 -/
 
 @[expose] public section
@@ -136,15 +137,6 @@ noncomputable def lowerStarCompIso :
       Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft _ (ProEtaleWeilSheaf.lowerStarCompIso k₀ l φ ψ) ≪≫
       (lowerStarCompιIso (φ ≫ ψ)).symm)
-
-/-- The pullback along a composite is the composite of the pullbacks: both are left adjoint to
-the pushforward along the composite. -/
-noncomputable def upperStarCompIso :
-    WeilSheaf.upperStar (φ ≫ ψ) ≅
-      WeilSheaf.upperStar ψ ⋙ WeilSheaf.upperStar (k₀ := k₀) (l := l) φ :=
-  (upperStarLowerStarAdjunction (φ ≫ ψ)).leftAdjointUniq
-    (((upperStarLowerStarAdjunction ψ).comp (upperStarLowerStarAdjunction φ)).ofNatIsoRight
-      (lowerStarCompIso φ ψ))
 
 end WeilSheaf
 

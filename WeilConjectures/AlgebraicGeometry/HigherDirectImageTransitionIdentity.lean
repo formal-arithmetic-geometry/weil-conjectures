@@ -6,7 +6,9 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition
+public import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitions
+
+
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Identity
 import WeilConjectures.SixFunctors.BaseChange.DerivedComparison

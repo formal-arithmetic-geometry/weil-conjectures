@@ -147,7 +147,8 @@ namespace ProEtale
 /-- The derived lower shriek `Rf_! : D(X_proét) ⥤ D(Y_proét)` along a morphism `f : X ⟶ Y`
 admitting a compactification, on the unbounded derived categories of pro-étale sheaves: the
 functor `rightDerivedLowerShriekOfCompactification` attached to the chosen compactification
-`HasCompactification.compactification f`. -/
+`HasCompactification.compactification f`. This is blueprint
+`def-compact-support-direct-image-detailed`. -/
 noncomputable def rightDerivedLowerShriek :
     DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤
       DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A) :=
@@ -231,6 +232,8 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
 /-- Blueprint `pur9-def-compact-cohomology`: Compact-support cohomology (for `f = a_X` the
 structure morphism of `X` over `Spec k`, and `A` the category of `A_{E,n}`-modules).
+Also blueprint `def-trf-coefficient-conventions` (on the small pro-étale site; the étale model
+is `AlgebraicGeometry.Etale.compactlySupportedGlobalSections`).
 
 The compactly supported derived global sections along a morphism `f : X ⟶ Y`
 admitting a compactification, *defined* as the composite

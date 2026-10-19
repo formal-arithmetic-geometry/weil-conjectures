@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.FiberMapCongr
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs
 public import WeilConjectures.DeligneLaumon.AffineLine.LaurentPoints
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStrictlyHenselian
@@ -68,15 +69,6 @@ noncomputable def ProEtale.adicUpperStarCompObjIso {X Y Z : Scheme.{u}} {f : X �
     {h : X ⟶ Z} (e : f ≫ g = h) (F : ProEtale.AdicSheaf l Z) :
     (f)^*ᵃ[l].obj ((g)^*ᵃ[l].obj F) ≅ (h)^*ᵃ[l].obj F :=
   ((ProEtale.adicUpperStarComp l f g).app F).symm ≪≫ (ProEtale.adicUpperStarCongr l e).app F
-
-/-- The base change to `k̄` only depends on the morphism, not on the proof that it lies over
-`k₀`. -/
-lemma Scheme.Hom.geometricFiberMap_congr {k : Type u} [Field k] {X₀ Y₀ : Scheme.{u}}
-    {f : X₀ ⟶ Spec (.of k)} {g : Y₀ ⟶ Spec (.of k)} {φ φ' : X₀ ⟶ Y₀} (e : φ = φ')
-    (h : φ ≫ g = f) (h' : φ' ≫ g = f) :
-    Scheme.Hom.geometricFiberMap φ h = Scheme.Hom.geometricFiberMap φ' h' := by
-  subst e
-  rfl
 
 namespace affineLine
 

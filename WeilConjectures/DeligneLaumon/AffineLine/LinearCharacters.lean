@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.DeligneLaumon.AffineLine.ArtinSchreierDual
 public import WeilConjectures.DeligneLaumon.AffineLine.RamifiedAtInfinity
+public import WeilConjectures.WeilSheaf.ArtinSchreierMulGeometric
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IrreducibleLisseQuotients
 
 /-!
@@ -24,7 +25,7 @@ For `a ∈ k̄` let `ℒ_{ψ(a x)} = (a ·)^* ℒ_ψ` be the geometric linear Ar
   (`AlgebraicGeometry.affineLine.not_epi_upperStar_laurentPoint_artinSchreierImage`).
 
 The second statement uses the multiplicativity `ℒ_{ψ,f} ⊗ ℒ_{ψ,g} ≅ ℒ_{ψ,f+g}` of the
-Artin–Schreier sheaves (blueprint `lem-fd-as-characters`), stated here with `sorry` for the two
+Artin–Schreier sheaves (blueprint `lem-fd-as-characters`), proved here for the two
 coordinates of the plane `𝔸²` after base change to `k̄`
 (`AlgebraicGeometry.nonempty_iso_tensorLeft_upperStar_artinSchreier_add`) and pulled back along
 `x ↦ (a x, b x)`.
@@ -184,8 +185,21 @@ theorem nonempty_iso_tensorLeft_upperStar_artinSchreier_add (ψ : AddChar k₀ (
         ((Scheme.Hom.geometricFiberMap (affinePlane.fst k₀) (comp_over _ _))^*ᵃ[l].obj
           (artinSchreier ψ 1).obj.carrier) ≅
       (Scheme.Hom.geometricFiberMap (affinePlane.add k₀) (comp_over _ _))^*ᵃ[l].obj
-        (artinSchreier ψ 1).obj.carrier) :=
-  sorry
+        (artinSchreier ψ 1).obj.carrier) := by
+  have hadd : affinePlane.add k₀ = affineLine.homOfSection k₀
+      ((affinePlane.fst k₀).appTop (AffineSpace.coord _ PUnit.unit) +
+        (affinePlane.snd k₀).appTop (AffineSpace.coord _ PUnit.unit)) := by
+    refine AffineSpace.hom_ext ?_ fun _ ↦ ?_
+    · rw [affinePlane.add, affineLine.homOfSection, AffineSpace.homOfVector_over]
+    · rw [affinePlane.add, affineLine.homOfSection, AffineSpace.homOfVector_appTop_coord]
+  obtain ⟨e⟩ := nonempty_iso_ihom_upperStar_artinSchreier_of_eq (l := l) ψ _ _
+    (affinePlane.fst k₀) (affinePlane.snd k₀) (affinePlane.add k₀)
+    (affineLine.eq_homOfSection _) (affineLine.eq_homOfSection _) hadd
+  obtain ⟨t⟩ := nonempty_tensorLeft_ihom_upperStar_artinSchreier (l := l) ψ
+    (Scheme.Hom.geometricFiberMap (affinePlane.snd k₀) (comp_over _ _))
+    ((Scheme.Hom.geometricFiberMap (affinePlane.add k₀) (comp_over _ _))^*ᵃ[l].obj
+      (artinSchreier ψ 1).obj.carrier)
+  exact ⟨(Mod.tensorLeft _).mapIso e ≪≫ t⟩
 
 /-- **Multiplicativity of the geometric linear characters**:
 `ℒ_{ψ(a x)} ⊗ ℒ_{ψ(b x)} ≅ ℒ_{ψ((a + b) x)}` on `𝔸¹_{k̄}`, for `a, b ∈ k̄`: the pullback of

@@ -6,10 +6,13 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
+public import
+  WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import WeilConjectures.AlgebraicGeometry.CyclicHigherDirectImageLocalVanishing
+import WeilConjectures.AlgebraicGeometry.ConstantModuleHigherDirectImageCyclicReduction
 
 /-!
 # Higher direct images as sheafified cohomology presheaves
@@ -56,7 +59,6 @@ namespace AlgebraicGeometry
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-section CohomologyPresheaf
 
 /-- The free sheaf `Λ[W]` of `Λ`-modules on an étale `X`-scheme `W`: the sheafification of the
 presheaf `V ↦ Λ^{(Hom_X(V, W))}`. It corepresents sections over `W`, and
@@ -65,17 +67,6 @@ noncomputable def Etale.freeSheaf (X : Scheme.{u}) :
     X.Etale ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
   uliftYoneda.{u + 1} ⋙ (Functor.whiskeringRight _ _ _).obj (ModuleCat.free Λ) ⋙
     presheafToSheaf _ _
-
-/-- The hypercohomology presheaf of an object `K` of `D⁺(Y_ét, Λ)` relative to `h : Y ⟶ X`:
-the presheaf on the small étale site of `X` sending `W` to
-`Hom(h^* Λ[W], K[q]) = H^q(W ×_X Y, K|)`, the degree-`q` (hyper)cohomology of the restriction
-of `K` to `W ×_X Y`; indeed `h^* Λ[W] = Λ[W ×_X Y]`. For a sheaf `K = F[0]` this is the
-presheaf `W ↦ H^q(W ×_X Y, F|)`. -/
-noncomputable def Etale.higherDirectImagePresheaf {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
-    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    X.Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1} :=
-  (Etale.freeSheaf Λ X ⋙ (h)^*[ModuleCat.{u + 1} Λ] ⋙
-    DerivedCategory.Plus.singleFunctor _ 0).op ⋙ preadditiveYoneda.obj (K⟦q⟧)
 
 /-- Evaluation at the generator: for a sheaf `G` of `Λ`-modules on `X_ét`, the natural map
 `Hom(Λ[W], G) ⟶ G(W)` sending `f` to the image under `f` of the section of `Λ[W]` given by
@@ -114,7 +105,7 @@ noncomputable def Etale.freeSheafSections {X : Scheme.{u}}
           (uliftYoneda.{u + 1}.obj W.unop ⋙ ModuleCat.free Λ)).app W').hom x)) h₀).trans
         ((congr_arg (f.hom.app W').hom h₂).trans h₃))
 
-section DerivedSections
+section RawFreeSheaf
 
 open Opposite
 
@@ -150,6 +141,156 @@ lemma Etale.freeSheafHomEquiv_map {W W' : X.Etale} (v : W' ⟶ W)
   simp only [Etale.freeSheafHomEquiv_apply]
   exact congrArg (fun k ↦ k f) ((Etale.freeSheafSections Λ G).naturality v.op)
 
+
+end RawFreeSheaf
+
+/-- Morphisms out of `h^* Λ[W]` are morphisms out of `Λ[W ×_X Y]`. -/
+noncomputable def Etale.upperStarFreeSheafHomEquiv {X Y : Scheme.{u}} (h : Y ⟶ X) (W : X.Etale)
+    (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    ((h)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ X).obj W) ⟶ G) ≃
+      ((Etale.freeSheaf Λ Y).obj ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W) ⟶ G) :=
+  ((Etale.upperStarLowerStarAdjunction _ h).homEquiv _ _).trans
+    ((Etale.freeSheafHomEquiv Λ W _).trans (Etale.freeSheafHomEquiv Λ _ G).symm)
+
+lemma Etale.upperStarFreeSheafHomEquiv_comp {X Y : Scheme.{u}} (h : Y ⟶ X) (W : X.Etale)
+    {G G' : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (a : (h)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ X).obj W) ⟶ G) (g : G ⟶ G') :
+    Etale.upperStarFreeSheafHomEquiv Λ h W G' (a ≫ g) =
+      Etale.upperStarFreeSheafHomEquiv Λ h W G a ≫ g := by
+  apply (Etale.freeSheafHomEquiv Λ _ G').injective
+  simp only [Etale.upperStarFreeSheafHomEquiv, Equiv.trans_apply, Etale.freeSheafHomEquiv_comp,
+    Adjunction.homEquiv_naturality_right]
+  erw [Equiv.apply_symm_apply, Equiv.apply_symm_apply]
+  rfl
+
+/-- The pullback of the free sheaf `Λ[W]` along `h : Y ⟶ X` is the free sheaf on `W ×_X Y`:
+both corepresent the sections over `W ×_X Y`. -/
+noncomputable def Etale.upperStarFreeSheafIso {X Y : Scheme.{u}} (h : Y ⟶ X) (W : X.Etale) :
+    (h)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ X).obj W) ≅
+      (Etale.freeSheaf Λ Y).obj ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W) :=
+  Coyoneda.ext _ _ (fun f ↦ Etale.upperStarFreeSheafHomEquiv Λ h W _ f)
+    (fun g ↦ (Etale.upperStarFreeSheafHomEquiv Λ h W _).symm g) (by simp) (by simp) (by
+      intro Z Z' f g
+      apply (Etale.upperStarFreeSheafHomEquiv Λ h W _).injective
+      rw [Etale.upperStarFreeSheafHomEquiv_comp]
+      simp)
+
+/-- The existing category of étale module sheaves, named to share its instances in
+kernel checks of derived constructions. -/
+abbrev Etale.ModuleSheaf (X : Scheme.{u}) : Type (u + 2) :=
+  Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)
+
+@[reducible]
+noncomputable local instance Etale.moduleSheafCategory (X : Scheme.{u}) :
+    Category.{u + 1} (Etale.ModuleSheaf Λ X) :=
+  inferInstanceAs (Category.{u + 1} (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+
+@[reducible]
+noncomputable local instance Etale.moduleSheafPreadditive (X : Scheme.{u}) :
+    Preadditive (Etale.ModuleSheaf Λ X) :=
+  inferInstanceAs (Preadditive (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+
+@[reducible]
+noncomputable local instance Etale.moduleSheafAbelian (X : Scheme.{u}) :
+    Abelian (Etale.ModuleSheaf Λ X) :=
+  inferInstanceAs (Abelian (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+
+@[reducible]
+noncomputable local instance Etale.moduleSheafHasDerivedCategory (X : Scheme.{u}) :
+    HasDerivedCategory (Etale.ModuleSheaf Λ X) :=
+  inferInstanceAs (HasDerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+
+noncomputable local instance Etale.moduleSheafEnoughInjectives (X : Scheme.{u}) :
+    EnoughInjectives (Etale.ModuleSheaf Λ X) :=
+  inferInstanceAs (EnoughInjectives (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+
+noncomputable abbrev Etale.moduleUpperStar {X Y : Scheme.{u}} (h : Y ⟶ X) :
+    Etale.ModuleSheaf Λ X ⥤ Etale.ModuleSheaf Λ Y :=
+  (h)^*[ModuleCat.{u + 1} Λ]
+
+noncomputable abbrev Etale.moduleLowerStar {X Y : Scheme.{u}} (h : Y ⟶ X) :
+    Etale.ModuleSheaf Λ Y ⥤ Etale.ModuleSheaf Λ X :=
+  (h)_*[ModuleCat.{u + 1} Λ]
+
+local instance Etale.moduleUpperStarAdditive {X Y : Scheme.{u}} (h : Y ⟶ X) :
+    (Etale.moduleUpperStar Λ h).Additive :=
+  inferInstanceAs ((h)^*[ModuleCat.{u + 1} Λ]).Additive
+
+local instance Etale.moduleLowerStarAdditive {X Y : Scheme.{u}} (h : Y ⟶ X) :
+    (Etale.moduleLowerStar Λ h).Additive :=
+  inferInstanceAs ((h)_*[ModuleCat.{u + 1} Λ]).Additive
+
+local instance Etale.moduleUpperStarPreservesFiniteLimits {X Y : Scheme.{u}} (h : Y ⟶ X) :
+    PreservesFiniteLimits (Etale.moduleUpperStar Λ h) :=
+  inferInstanceAs (PreservesFiniteLimits ((h)^*[ModuleCat.{u + 1} Λ]))
+
+local instance Etale.moduleUpperStarPreservesFiniteColimits {X Y : Scheme.{u}} (h : Y ⟶ X) :
+    PreservesFiniteColimits (Etale.moduleUpperStar Λ h) :=
+  inferInstanceAs (PreservesFiniteColimits ((h)^*[ModuleCat.{u + 1} Λ]))
+
+noncomputable abbrev Etale.moduleDerivedAdjunction {X Y : Scheme.{u}} (h : Y ⟶ X) :
+    D+(Etale.moduleUpperStar Λ h) ⊣ R+(Etale.moduleLowerStar Λ h) :=
+  Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) h
+
+section CohomologyPresheaf
+
+/-- The free sheaf `Λ[W]` of `Λ`-modules on an étale `X`-scheme `W`: the sheafification of the
+presheaf `V ↦ Λ^{(Hom_X(V, W))}`. It corepresents sections over `W`, and
+`Ext^q(Λ[W], F)` is the étale cohomology `H^q(W, F|_W)`. -/
+noncomputable abbrev Etale.moduleFreeSheaf (X : Scheme.{u}) :
+    X.Etale ⥤ Etale.ModuleSheaf Λ X := Etale.freeSheaf Λ X
+
+/-- The hypercohomology presheaf of an object `K` of `D⁺(Y_ét, Λ)` relative to `h : Y ⟶ X`:
+the presheaf on the small étale site of `X` sending `W` to
+`Hom(h^* Λ[W], K[q]) = H^q(W ×_X Y, K|)`, the degree-`q` (hyper)cohomology of the restriction
+of `K` to `W ×_X Y`; indeed `h^* Λ[W] = Λ[W ×_X Y]`. For a sheaf `K = F[0]` this is the
+presheaf `W ↦ H^q(W ×_X Y, F|)`. -/
+noncomputable def Etale.higherDirectImagePresheaf {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
+    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    X.Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1} :=
+  (Etale.freeSheaf Λ X ⋙ (h)^*[ModuleCat.{u + 1} Λ] ⋙
+    DerivedCategory.Plus.singleFunctor _ 0).op ⋙ preadditiveYoneda.obj (K⟦q⟧)
+
+/-- Evaluation at the generator: for a sheaf `G` of `Λ`-modules on `X_ét`, the natural map
+`Hom(Λ[W], G) ⟶ G(W)` sending `f` to the image under `f` of the section of `Λ[W]` given by
+the identity of `W`. -/
+noncomputable abbrev Etale.moduleFreeSheafSections {X : Scheme.{u}}
+    (G : Etale.ModuleSheaf Λ X) :
+    (Etale.moduleFreeSheaf Λ X).op ⋙ preadditiveYoneda.obj G ⟶
+      ((sheafCompose X.smallEtaleTopology
+        (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G).obj :=
+  Etale.freeSheafSections Λ G
+
+section DerivedSections
+
+open Opposite
+
+variable {X : Scheme.{u}}
+
+/-- The free sheaf `Λ[W]` corepresents sections over `W`. -/
+noncomputable abbrev Etale.moduleFreeSheafHomEquiv (W : X.Etale)
+    (G : Etale.ModuleSheaf Λ X) :
+    ((Etale.moduleFreeSheaf Λ X).obj W ⟶ G) ≃ G.obj.obj (op W) := Etale.freeSheafHomEquiv Λ W G
+
+lemma Etale.moduleFreeSheafHomEquiv_apply (W : X.Etale)
+    (G : Etale.ModuleSheaf Λ X)
+    (f : (Etale.moduleFreeSheaf Λ X).obj W ⟶ G) :
+    Etale.moduleFreeSheafHomEquiv Λ W G f = (Etale.moduleFreeSheafSections Λ G).app (op W) f := by
+  exact Etale.freeSheafHomEquiv_apply Λ W G f
+
+lemma Etale.moduleFreeSheafHomEquiv_comp (W : X.Etale)
+    {G G' : Etale.ModuleSheaf Λ X}
+    (f : (Etale.moduleFreeSheaf Λ X).obj W ⟶ G) (g : G ⟶ G') :
+    Etale.moduleFreeSheafHomEquiv Λ W G' (f ≫ g) =
+      g.hom.app (op W) (Etale.moduleFreeSheafHomEquiv Λ W G f) := by
+  exact Etale.freeSheafHomEquiv_comp Λ W f g
+
+lemma Etale.moduleFreeSheafHomEquiv_map {W W' : X.Etale} (v : W' ⟶ W)
+    (G : Etale.ModuleSheaf Λ X)
+    (f : (Etale.moduleFreeSheaf Λ X).obj W ⟶ G) :
+    Etale.moduleFreeSheafHomEquiv Λ W' G ((Etale.moduleFreeSheaf Λ X).map v ≫ f) =
+      G.obj.map v.op (Etale.moduleFreeSheafHomEquiv Λ W G f) := by
+  exact Etale.freeSheafHomEquiv_map Λ v G f
 
 variable {Λ}
 
@@ -204,6 +345,18 @@ noncomputable abbrev Etale.sectionsMap {G G' : Sheaf X.smallEtaleTopology (Modul
   ((sheafCompose X.smallEtaleTopology
     (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map g).hom
 
+lemma Etale.moduleFreeSheafSections_naturality
+    {G G' : Etale.ModuleSheaf Λ X} (g : G ⟶ G') :
+    Etale.moduleFreeSheafSections Λ G ≫ Etale.sectionsMap g =
+      Functor.whiskerLeft (Etale.moduleFreeSheaf Λ X).op (preadditiveYoneda.map g) ≫
+        Etale.moduleFreeSheafSections Λ G' := by
+  ext W f
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app]
+  rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply,
+    ← Etale.moduleFreeSheafHomEquiv_apply, ← Etale.moduleFreeSheafHomEquiv_apply]
+  exact (Etale.moduleFreeSheafHomEquiv_comp Λ W.unop f g).symm
+
+
 lemma Etale.freeSheafSections_naturality
     {G G' : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (g : G ⟶ G') :
     Etale.freeSheafSections Λ G ≫ Etale.sectionsMap g =
@@ -218,7 +371,7 @@ lemma Etale.freeSheafSections_naturality
 
 section Key
 
-variable (M : CochainComplex.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+variable (M : CochainComplex.Plus (Etale.ModuleSheaf Λ X))
 
 /-- The comparison `H⁰(M) ⟶ H⁰(Q M)` between the homology sheaf of a complex and the homology of
 its image in `D⁺`. -/
@@ -255,8 +408,8 @@ theorem Etale.isLocallySurjective_derivedHomToHomology [M.obj.IsKInjective] :
   refine GrothendieckTopology.superset_covering _ ?_
     (Presheaf.imageSieve_mem X.smallEtaleTopology (M.obj.homologyπ 0).hom σ')
   rintro V g ⟨c, hc⟩
-  let A := (Etale.freeSheaf Λ X).obj V
-  let c' := (Etale.freeSheafHomEquiv Λ V (M.obj.cycles 0)).symm c
+  let A := (Etale.moduleFreeSheaf Λ X).obj V
+  let c' := (Etale.moduleFreeSheafHomEquiv Λ V (M.obj.cycles 0)).symm c
   let τ := DerivedCategory.singleCyclesHom A ≫
     (HomologicalComplex.singleObjCyclesSelfIso (.up ℤ) 0 A).hom
   let fM : (HomologicalComplex.single _ (.up ℤ) 0).obj A ⟶ M.obj :=
@@ -278,7 +431,8 @@ theorem Etale.isLocallySurjective_derivedHomToHomology [M.obj.IsKInjective] :
   refine ⟨β, ?_⟩
   rw [NatTrans.comp_app, ConcreteCategory.comp_apply,
     Etale.derivedHomToHomology_app_eq M (W := op V) β fM hβ, reassoc_of% hfM,
-    ← Etale.freeSheafHomEquiv_apply, Etale.freeSheafHomEquiv_comp, Equiv.apply_symm_apply]
+    ← Etale.moduleFreeSheafHomEquiv_apply, Etale.moduleFreeSheafHomEquiv_comp,
+    Equiv.apply_symm_apply]
   rw [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, ConcreteCategory.comp_apply,
     hc]
   erw [NatTrans.naturality_apply (Etale.homologyComparison M).hom g.op σ']
@@ -289,6 +443,44 @@ theorem Etale.isLocallySurjective_derivedHomToHomology [M.obj.IsKInjective] :
     rfl
   rw [hσ]
   rfl
+
+/-- A boundary map from a single complex is null-homotopic, in any abelian category.
+This is the existing `homotopyOfSingle` construction with the category abstracted;
+`Homotopy.nullHomotopicMap'` and `Homotopy.nullHomotopy'` supply the homotopy. -/
+noncomputable def Etale.singleBoundaryHomotopy
+    {C : Type*} [Category* C] [Abelian C] (N : CochainComplex C ℤ) {A : C}
+    (f : (HomologicalComplex.single _ (.up ℤ) 0).obj A ⟶ N) (b : A ⟶ N.X (-1))
+    (hb : f.f 0 = (HomologicalComplex.singleObjXSelf (.up ℤ) 0 A).hom ≫ b ≫ N.d (-1) 0) :
+    Homotopy f 0 :=
+  (Homotopy.ofEq (HomologicalComplex.from_single_hom_ext (j := 0) (by
+    rw [hb, Homotopy.nullHomotopicMap'_f (k₂ := -1) (k₀ := 1) (by simp) (by simp)]
+    simp
+    rfl)) :
+      Homotopy f (Homotopy.nullHomotopicMap' (fun i j (_ : j + 1 = i) ↦
+        if hi : i = 0 then
+          (HomologicalComplex.singleObjXIsoOfEq (.up ℤ) 0 A i hi).hom ≫ b ≫
+            eqToHom (by congr 1; lia)
+        else 0))).trans (Homotopy.nullHomotopy' _)
+
+private noncomputable def homotopyOfSingleCycles
+    {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
+    (N : CochainComplex C ℤ) {A : C}
+    (f : (HomologicalComplex.single C (.up ℤ) 0).obj A ⟶ N) (b : A ⟶ N.X (-1))
+    (hb : DerivedCategory.singleCyclesHom A ≫ HomologicalComplex.cyclesMap f 0 =
+      b ≫ N.toCycles (-1) 0) : Homotopy f 0 := by
+  let τ := DerivedCategory.singleCyclesHom A ≫
+    (HomologicalComplex.singleObjCyclesSelfIso (.up ℤ) 0 A).hom
+  have hτ : DerivedCategory.singleCyclesHom A ≫
+      ((HomologicalComplex.single C (.up ℤ) 0).obj A).iCycles 0 =
+        τ ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 A).inv := by
+    simp [τ, HomologicalComplex.singleObjCyclesSelfIso_hom]
+  apply Etale.singleBoundaryHomotopy N f (inv τ ≫ b)
+  have h := hb =≫ N.iCycles 0
+  rw [Category.assoc, HomologicalComplex.cyclesMap_i, Category.assoc,
+    HomologicalComplex.toCycles_i, ← Category.assoc, hτ, Category.assoc] at h
+  simp only [Category.assoc]
+  rw [← h]
+  simp
 
 /-- A map from a single complex whose degree-`0` component factors through the differential
 `M⁻¹ ⟶ M⁰` is null-homotopic. -/
@@ -313,10 +505,10 @@ theorem Etale.isLocallyInjective_derivedHomToHomology [M.obj.IsKInjective] :
           ((DerivedCategory.Plus.homologyFunctor _ 0).obj (DerivedCategory.Plus.Q.obj M))) := by
   constructor
   intro W x y hxy
-  let β : (DerivedCategory.Plus.singleFunctor _ 0).obj ((Etale.freeSheaf Λ X).obj W.unop) ⟶
+  let β : (DerivedCategory.Plus.singleFunctor _ 0).obj ((Etale.moduleFreeSheaf Λ X).obj W.unop) ⟶
       DerivedCategory.Plus.Q.obj M := x - y
   have hβ : (Etale.derivedHomToHomology (DerivedCategory.Plus.Q.obj M) ≫
-      Etale.freeSheafSections Λ
+      Etale.moduleFreeSheafSections Λ
         ((DerivedCategory.Plus.homologyFunctor _ 0).obj (DerivedCategory.Plus.Q.obj M))).app W β =
       0 := by
     simp only [β, map_sub]
@@ -326,7 +518,7 @@ theorem Etale.isLocallyInjective_derivedHomToHomology [M.obj.IsKInjective] :
     simp only [Presheaf.equalizerSieve_apply, map_sub, map_zero]
     exact sub_eq_zero.symm
   rw [hsieve]
-  let A := (Etale.freeSheaf Λ X).obj W.unop
+  let A := (Etale.moduleFreeSheaf Λ X).obj W.unop
   obtain ⟨f, hf⟩ := DerivedCategory.Plus.exists_ι_map_eq M β
   let z := DerivedCategory.singleCyclesHom A ≫ HomologicalComplex.cyclesMap f 0
   have hz : z ≫ M.obj.homologyπ 0 = (0 : A ⟶ M.obj.homology 0) := by
@@ -334,9 +526,9 @@ theorem Etale.isLocallyInjective_derivedHomToHomology [M.obj.IsKInjective] :
       dsimp only [Etale.homologyComparison]
       infer_instance
     have h2 : z ≫ M.obj.homologyπ 0 ≫ Etale.homologyComparison M = 0 := by
-      apply (Etale.freeSheafHomEquiv Λ W.unop
+      apply (Etale.moduleFreeSheafHomEquiv Λ W.unop
         ((DerivedCategory.Plus.homologyFunctor _ 0).obj (DerivedCategory.Plus.Q.obj M))).injective
-      rw [Etale.freeSheafHomEquiv_apply, Etale.freeSheafHomEquiv_apply, map_zero]
+      rw [Etale.moduleFreeSheafHomEquiv_apply, Etale.moduleFreeSheafHomEquiv_apply, map_zero]
       have := Etale.derivedHomToHomology_app_eq M β f hf
       simp only [z, Category.assoc]
       rw [← this]
@@ -353,18 +545,18 @@ theorem Etale.isLocallyInjective_derivedHomToHomology [M.obj.IsKInjective] :
   have : Sheaf.IsLocallySurjective S.toCycles :=
     (Sheaf.isLocallySurjective_iff_epi' _ _).2 inferInstance
   let k' := S.liftCycles z hz
-  let k := Etale.freeSheafHomEquiv Λ W.unop S.cycles k'
+  let k := Etale.moduleFreeSheafHomEquiv Λ W.unop S.cycles k'
   refine GrothendieckTopology.superset_covering _ ?_
     (Presheaf.imageSieve_mem X.smallEtaleTopology S.toCycles.hom k)
   rintro V g ⟨b, hb⟩
-  let φ := (Etale.freeSheaf Λ X).map g
-  let A' := (Etale.freeSheaf Λ X).obj V
-  let b' := (Etale.freeSheafHomEquiv Λ V (M.obj.X (-1))).symm b
+  let φ := (Etale.moduleFreeSheaf Λ X).map g
+  let A' := (Etale.moduleFreeSheaf Λ X).obj V
+  let b' := (Etale.moduleFreeSheafHomEquiv Λ V (M.obj.X (-1))).symm b
   have hφz : φ ≫ z = b' ≫ M.obj.toCycles (-1) 0 := by
-    apply (Etale.freeSheafHomEquiv Λ V _).injective
+    apply (Etale.moduleFreeSheafHomEquiv Λ V _).injective
     have hz' : z = k' ≫ S.iCycles := (S.liftCycles_i z hz).symm
-    rw [hz', Etale.freeSheafHomEquiv_map, Etale.freeSheafHomEquiv_comp,
-      Etale.freeSheafHomEquiv_comp, Equiv.apply_symm_apply]
+    rw [hz', Etale.moduleFreeSheafHomEquiv_map, Etale.moduleFreeSheafHomEquiv_comp,
+      Etale.moduleFreeSheafHomEquiv_comp, Equiv.apply_symm_apply]
     erw [← NatTrans.naturality_apply S.iCycles.hom g.op k, ← hb,
       ← ConcreteCategory.comp_apply, ← NatTrans.comp_app,
       ← ObjectProperty.FullSubcategory.comp_hom, S.toCycles_i]
@@ -374,29 +566,15 @@ theorem Etale.isLocallyInjective_derivedHomToHomology [M.obj.IsKInjective] :
     rw [HomologicalComplex.cyclesMap_comp, ← Category.assoc,
       DerivedCategory.singleCyclesHom_naturality, Category.assoc]
     exact hφz
-  let τ' := DerivedCategory.singleCyclesHom A' ≫
-    (HomologicalComplex.singleObjCyclesSelfIso (.up ℤ) 0 A').hom
-  have hτ' : DerivedCategory.singleCyclesHom A' ≫
-      ((HomologicalComplex.single _ (.up ℤ) 0).obj A').iCycles 0 =
-        τ' ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 A').inv := by
-    simp [τ', HomologicalComplex.singleObjCyclesSelfIso_hom]
-  have hf'0 : f'.f 0 = (HomologicalComplex.singleObjXSelf (.up ℤ) 0 A').hom ≫
-      (inv τ' ≫ b') ≫ M.obj.d (-1) 0 := by
-    have h := hf'z =≫ M.obj.iCycles 0
-    rw [Category.assoc, HomologicalComplex.cyclesMap_i, Category.assoc,
-      HomologicalComplex.toCycles_i, ← Category.assoc, hτ', Category.assoc] at h
-    simp only [Category.assoc]
-    rw [← h]
-    simp
   have hβ' : DerivedCategory.Plus.ι.map
       ((DerivedCategory.Plus.singleFunctor _ 0).map φ ≫ β) =
         DerivedCategory.Q.map f' ≫ (DerivedCategory.quotientCompQhIso _).inv.app M.obj := by
     rw [Functor.map_comp, hf, Functor.map_comp, Category.assoc]
     rfl
   have h0 := DerivedCategory.Plus.eq_zero_of_homotopy _ f' hβ'
-    (Etale.homotopyOfSingle M f' (inv τ' ≫ b') hf'0)
+    (homotopyOfSingleCycles M.obj f' b' hf'z)
   simp only [Presheaf.equalizerSieve_apply, map_zero, map_sub]
-  have h0' : (ConcreteCategory.hom (((Etale.freeSheaf Λ X ⋙
+  have h0' : (ConcreteCategory.hom (((Etale.moduleFreeSheaf Λ X ⋙
       DerivedCategory.Plus.singleFunctor _ 0).op ⋙
         preadditiveYoneda.obj (DerivedCategory.Plus.Q.obj M)).map g.op)) (x - y) = 0 := h0
   rw [map_sub] at h0'
@@ -424,19 +602,19 @@ theorem Etale.isLocallyBijective_derivedHomToHomology
   have := Etale.isLocallyInjective_derivedHomToHomology M
   have := Etale.isLocallySurjective_derivedHomToHomology M
   have hfac : Etale.derivedHomToHomology L ≫
-      Etale.freeSheafSections Λ ((DerivedCategory.Plus.homologyFunctor _ 0).obj L) =
-    (Functor.isoWhiskerLeft (Etale.freeSheaf Λ X ⋙ DerivedCategory.Plus.singleFunctor _ 0).op
+      Etale.moduleFreeSheafSections Λ ((DerivedCategory.Plus.homologyFunctor _ 0).obj L) =
+    (Functor.isoWhiskerLeft (Etale.moduleFreeSheaf Λ X ⋙ DerivedCategory.Plus.singleFunctor _ 0).op
       (preadditiveYoneda.mapIso e.symm)).hom ≫
       (Etale.derivedHomToHomology (DerivedCategory.Plus.Q.obj M) ≫
-        Etale.freeSheafSections Λ
+        Etale.moduleFreeSheafSections Λ
           ((DerivedCategory.Plus.homologyFunctor _ 0).obj (DerivedCategory.Plus.Q.obj M))) ≫
       ((sheafToPresheaf _ _).mapIso ((sheafCompose X.smallEtaleTopology
         (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).mapIso
           ((DerivedCategory.Plus.homologyFunctor _ 0).mapIso e))).hom := by
     simp only [Category.assoc]
-    have hnat := Etale.freeSheafSections_naturality
+    have hnat := Etale.moduleFreeSheafSections_naturality
       ((DerivedCategory.Plus.homologyFunctor _ 0).map e.hom)
-    change _ = _ ≫ _ ≫ Etale.freeSheafSections Λ _ ≫
+    change _ = _ ≫ _ ≫ Etale.moduleFreeSheafSections Λ _ ≫
       Etale.sectionsMap ((DerivedCategory.Plus.homologyFunctor _ 0).map e.hom)
     rw [hnat]
     ext W β
@@ -510,7 +688,9 @@ noncomputable abbrev Etale.homologyShiftComparison {X Y : Scheme.{u}} (h : Y ⟶
       ((DerivedCategory.Plus.homologyFunctor _ 0).shiftIso q 0 q (add_zero q)).hom.app _
 
 /-- The canonical map from `W ↦ Hᵠ(W ×_X Y, K|)` to `Hᵠ(Rh_* K)` is locally injective and
-locally surjective, for every morphism `h`. -/
+locally surjective, for every morphism `h`. 
+(blueprint: sbc-lem-module-higher-image-raw-comparison-locally-bijective)
+-/
 theorem Etale.isLocallyBijective_higherDirectImagePresheafToSheaf {X Y : Scheme.{u}}
     (h : Y ⟶ X) (q : ℤ)
     (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -523,14 +703,14 @@ theorem Etale.isLocallyBijective_higherDirectImagePresheafToSheaf {X Y : Scheme.
       (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map _)
   have hφ : Etale.higherDirectImagePresheafToSheaf Λ h q K =
       (Etale.higherDirectImagePresheafIso Λ h q K).hom ≫
-        (Etale.derivedHomToHomology (R+((h)_*[ModuleCat.{u + 1} Λ]).obj (K⟦q⟧)) ≫
-          Etale.freeSheafSections Λ _) ≫
+        (Etale.derivedHomToHomology (R+((Etale.moduleLowerStar Λ h)).obj (K⟦q⟧)) ≫
+          Etale.moduleFreeSheafSections Λ _) ≫
         Etale.sectionsMap (Etale.homologyShiftComparison Λ h q K) := by
     simp only [Etale.higherDirectImagePresheafToSheaf, Etale.higherDirectImagePresheafToHom,
       Category.assoc]
-    rw [Etale.freeSheafSections_naturality]
+    rw [Etale.moduleFreeSheafSections_naturality]
   obtain ⟨_, _⟩ := Etale.isLocallyBijective_derivedHomToHomology
-    (R+((h)_*[ModuleCat.{u + 1} Λ]).obj (K⟦q⟧))
+    (R+((Etale.moduleLowerStar Λ h)).obj (K⟦q⟧))
   rw [hφ]
   constructor <;> infer_instance
 
@@ -595,38 +775,7 @@ section FilteredColimits
 
 open Opposite
 
-/-- Morphisms out of `h^* Λ[W]` are morphisms out of `Λ[W ×_X Y]`. -/
-noncomputable def Etale.upperStarFreeSheafHomEquiv {X Y : Scheme.{u}} (h : Y ⟶ X) (W : X.Etale)
-    (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    ((h)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ X).obj W) ⟶ G) ≃
-      ((Etale.freeSheaf Λ Y).obj ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W) ⟶ G) :=
-  ((Etale.upperStarLowerStarAdjunction _ h).homEquiv _ _).trans
-    ((Etale.freeSheafHomEquiv Λ W _).trans (Etale.freeSheafHomEquiv Λ _ G).symm)
-
-lemma Etale.upperStarFreeSheafHomEquiv_comp {X Y : Scheme.{u}} (h : Y ⟶ X) (W : X.Etale)
-    {G G' : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
-    (a : (h)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ X).obj W) ⟶ G) (g : G ⟶ G') :
-    Etale.upperStarFreeSheafHomEquiv Λ h W G' (a ≫ g) =
-      Etale.upperStarFreeSheafHomEquiv Λ h W G a ≫ g := by
-  apply (Etale.freeSheafHomEquiv Λ _ G').injective
-  simp only [Etale.upperStarFreeSheafHomEquiv, Equiv.trans_apply, Etale.freeSheafHomEquiv_comp,
-    Adjunction.homEquiv_naturality_right]
-  erw [Equiv.apply_symm_apply, Equiv.apply_symm_apply]
-  rfl
-
-/-- The pullback of the free sheaf `Λ[W]` along `h : Y ⟶ X` is the free sheaf on `W ×_X Y`:
-both corepresent the sections over `W ×_X Y`. -/
-noncomputable def Etale.upperStarFreeSheafIso {X Y : Scheme.{u}} (h : Y ⟶ X) (W : X.Etale) :
-    (h)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ X).obj W) ≅
-      (Etale.freeSheaf Λ Y).obj ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W) :=
-  Coyoneda.ext _ _ (fun f ↦ Etale.upperStarFreeSheafHomEquiv Λ h W _ f)
-    (fun g ↦ (Etale.upperStarFreeSheafHomEquiv Λ h W _).symm g) (by simp) (by simp) (by
-      intro Z Z' f g
-      apply (Etale.upperStarFreeSheafHomEquiv Λ h W _).injective
-      rw [Etale.upperStarFreeSheafHomEquiv_comp]
-      simp)
-
-/-- The map of hypercohomology presheaves `W ↦ Hᵠ(W ×_X Y, K|)` induced by `φ : K ⟶ K'`. -/
+/-- The map of higher direct image presheaves induced by a morphism of complexes. -/
 noncomputable def Etale.higherDirectImagePresheafMap {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
     {K K' : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (φ : K ⟶ K') :
@@ -671,9 +820,9 @@ lemma Etale.homologyShiftComparison_naturality {X Y : Scheme.{u}} (h : Y ⟶ X) 
   simp only [Category.assoc]
   congr 1
   have n₁ := ((DerivedCategory.Plus.homologyFunctor _ 0).isoShiftZero ℤ).inv.naturality
-    ((shiftFunctor _ q).map (R+((h)_*[ModuleCat.{u + 1} Λ]).map φ))
+    ((shiftFunctor _ q).map (R+((Etale.moduleLowerStar Λ h)).map φ))
   have n₂ := ((DerivedCategory.Plus.homologyFunctor _ 0).shiftIso q 0 q (add_zero q)).hom.naturality
-    (R+((h)_*[ModuleCat.{u + 1} Λ]).map φ)
+    (R+((Etale.moduleLowerStar Λ h)).map φ)
   erw [reassoc_of% n₁, n₂]
   rfl
 
@@ -694,12 +843,14 @@ lemma Etale.higherDirectImagePresheafToSheaf_naturality {X Y : Scheme.{u}} (h : 
         ((DerivedCategory.Plus.homologyFunctor _ q).map
           (R+((h)_*[ModuleCat.{u + 1} Λ]).map φ)) := by
   have h₁ : ∀ L, Etale.higherDirectImagePresheafToSheaf Λ h q L =
-      Etale.higherDirectImagePresheafToHom Λ h q L ≫ Etale.freeSheafSections Λ _ := fun _ ↦ rfl
+      Etale.higherDirectImagePresheafToHom Λ h q L ≫ Etale.moduleFreeSheafSections Λ _ := fun _ ↦
+    rfl
   have h₂ : Etale.higherDirectImagePresheafMap Λ h q φ ≫
       Etale.higherDirectImagePresheafToHom Λ h q K' =
-      Etale.higherDirectImagePresheafToHom Λ h q K ≫ Functor.whiskerLeft (Etale.freeSheaf Λ X).op
+      Etale.higherDirectImagePresheafToHom Λ h q K ≫ Functor.whiskerLeft (Etale.moduleFreeSheaf Λ
+    X).op
         (preadditiveYoneda.map ((DerivedCategory.Plus.homologyFunctor _ q).map
-          (R+((h)_*[ModuleCat.{u + 1} Λ]).map φ))) := by
+          (R+((Etale.moduleLowerStar Λ h)).map φ))) := by
     ext W β
     have e₁ : (Etale.higherDirectImagePresheafMap Λ h q φ).app W β =
         β ≫ (shiftFunctor _ q).map φ := rfl
@@ -711,7 +862,7 @@ lemma Etale.higherDirectImagePresheafToSheaf_naturality {X Y : Scheme.{u}} (h : 
     simp only [Category.assoc]
     congr 2
     exact Etale.homologyShiftComparison_naturality Λ h q φ
-  rw [h₁, h₁, Category.assoc, Etale.freeSheafSections_naturality, ← Category.assoc,
+  rw [h₁, h₁, Category.assoc, Etale.moduleFreeSheafSections_naturality, ← Category.assoc,
     ← Category.assoc, h₂]
 
 /-- The hypercohomology presheaves `W ↦ Hᵠ(W ×_X Y, K|)` as a functor of `K`. -/
@@ -750,7 +901,9 @@ filtered colimit of its finitely generated subgroups, which are finite direct su
 groups `ℤ/e` with `e ∣ d` (and of copies of `ℤ` when `d = 0`); as `h` is quasi-compact and
 quasi-separated, `R^q h_*` commutes with filtered colimits, so the underlying abelian sheaf of
 `R^q h_* (Λ/dΛ)` vanishes, and the higher direct images of a sheaf of `Λ`-modules are computed
-on its underlying abelian sheaf. -/
+on its underlying abelian sheaf. 
+(blueprint: lem-sbc-constant-module-higher-direct-image-local-vanishing)
+-/
 @[stacks 03Q8]
 theorem Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists {X Y : Scheme.{u}}
     (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h] (d q : ℕ)
@@ -760,7 +913,10 @@ theorem Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists {X Y : 
         (∀ x : U, ∃ i y, (v i).base y = x) ∧
         ∀ i, Etale.cohomologyMap (pullback.map h (v i ≫ u) h u (𝟙 Y) (v i) (𝟙 X) (by simp)
           (by simp)) _ q ξ = 0) :
-    IsZero (Etale.higherDirectImage Λ h q (Etale.constantModSheaf Λ Y d)) :=
-  sorry
+    IsZero (Etale.higherDirectImage Λ h q (Etale.constantModSheaf Λ Y d)) := by
+  apply Etale.isZero_constantModHigherDirectImage_of_cyclic Λ h d q
+  intro e he
+  exact Etale.isZero_cyclicHigherDirectImage_of_locally_zero h e q (H e he)
+
 
 end AlgebraicGeometry

@@ -11,6 +11,7 @@ public import WeilConjectures.DeligneLaumon.AffineLine.GeometricSMul
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHom
 public import WeilConjectures.WeilSheaf.LisseFiltration
 public import WeilConjectures.WeilSheaf.ArtinSchreierDual
+public import WeilConjectures.WeilSheaf.ArtinSchreierNeg
 public import WeilConjectures.WeilSheaf.FourierInversion.TensorLisse
 public import WeilConjectures.WeilSheaf.TateTwistCohomology
 
@@ -18,7 +19,7 @@ public import WeilConjectures.WeilSheaf.TateTwistCohomology
 # Duals of the linear Artin–Schreier sheaves
 
 The linear Artin–Schreier sheaves satisfy `(ℒ_{ψ(a x)})^∨ ≅ ℒ_{ψ(-a x)}` and
-`ℒ_{ψ⁻¹(a x)} ≅ ℒ_{ψ(-a x)}` (blueprint `lem-fd-as-characters`, stated here with `sorry`). On the
+`ℒ_{ψ⁻¹(a x)} ≅ ℒ_{ψ(-a x)}` (blueprint `lem-fd-as-characters`). On the
 geometric line, the double dual of the geometric linear character `ℒ_{ψ⁻¹(b x)}` is the geometric
 linear character `ℒ_{ψ(-b x)}`
 (`AlgebraicGeometry.exists_iso_ihom_ihom_upperStar_geometricSMul_artinSchreier_inv`).
@@ -40,7 +41,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 (blueprint: `lem-fd-as-characters`, the clause `ℒ_{ψ^{-1},f} ≅ ℒ_{ψ,-f}` for `f = a x`) -/
 theorem nonempty_iso_artinSchreier_inv (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) :
     Nonempty (artinSchreier ψ⁻¹ a ≅ artinSchreier ψ (-a)) :=
-  sorry
+  nonempty_artinSchreier_inv_iso ψ a
 
 /-- **The inverse of a linear Artin–Schreier sheaf**: `(ℒ_{ψ(a x)})^∨ ≅ ℒ_{ψ⁻¹(a x)} ≅
 ℒ_{ψ(-a x)}`. (blueprint: `lem-fd-as-characters`, the clause `(ℒ_{ψ,f})^{-1} ≅ ℒ_{ψ,-f}` for

@@ -219,7 +219,11 @@ lemma refinementComparison_trans_eq_of_refinement {c d e e' : Compactification f
 variable [QuasiCompact f]
 
 /-- **The comparison of two compactifications**: the isomorphism `F.shriek c ≅ F.shriek d`
-obtained through the common refinement `Compactification.inf c d`. -/
+obtained through the common refinement `Compactification.inf c d`. It does not depend on the
+common refinement (`shriekIso_eq`) and satisfies the cocycle condition (`shriekIso_trans`); the
+comparisons along refinements are the identity for identity refinements
+(`refinementComparison_eq_id`) and transitive (`refinementComparison_comp`). This is the abstract
+form of blueprint `prop-compactification-coherence-detailed`. -/
 noncomputable def shriekIso (c d : Compactification f) : F.shriek c ≅ F.shriek d :=
   asIso (F.refinementComparison (Compactification.infFst c d)
       (Compactification.isPullback_infFst c d)) ≪≫

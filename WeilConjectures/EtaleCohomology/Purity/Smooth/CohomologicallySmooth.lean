@@ -103,8 +103,11 @@ A morphism `f : X ⟶ Y` admitting a compactification is *cohomologically smooth
    isomorphism.
 
 The blueprint asks for clause 3 for every cartesian square; the base change map, the mate of the
-compact-support base change `Ex_!`, is only constructed for quasi-compact `f'`. The blueprint
-writes the tensor factors of clause 2 in the other order. -/
+compact-support base change `Ex_!`, is only constructed for quasi-compact `f'`; in the blueprint's
+setting `f` is of finite type, so every base change `f'` of it is quasi-compact and this is no
+restriction. The blueprint writes the tensor factors of clause 2 in the other order. As for all
+purity conventions (`AlgebraicGeometry.Etale.tateTwist`), the categories are those of the small
+étale site, identified with the pro-étale ones of the blueprint by the pro-étale comparison. -/
 structure IsCohomologicallySmooth {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
     Prop where
   isInvertible_dualizingComplex :
@@ -255,11 +258,13 @@ and admits a compactification, and every `K ∈ D^b_{ctf}(Y, Λ)`, the canonical
 `Lu^* Rf^! K ⟶ Rf'^! Lv^* K` (`AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap`)
 is an isomorphism. This is the component at `K` of smooth base change for `R^!`
 (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`),
-which holds for every `K`. -/
+which holds for every `K`. The base `Y` is assumed quasi-separated, as there (it is of finite
+type over a field in the blueprint). -/
 theorem isIso_rightDerivedUpperShriekBaseChangeMap_app
     {X Y X' Y' : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] (d : ℕ)
-    [SmoothOfRelativeDimension d f] [HasInvertibleExponent Λ X] {v : Y' ⟶ Y} {f' : X' ⟶ Y'}
-    {u : X' ⟶ X} (sq : IsPullback u f' f v) [HasCompactification f'] [QuasiCompact f']
+    [SmoothOfRelativeDimension d f] [HasInvertibleExponent Λ X] [QuasiSeparatedSpace Y]
+    {v : Y' ⟶ Y} {f' : X' ⟶ Y'} {u : X' ⟶ X} (sq : IsPullback u f' f v)
+    [HasCompactification f'] [QuasiCompact f']
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (_hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
     IsIso ((rightDerivedUpperShriekBaseChangeMap Λ sq).app K) :=
@@ -269,13 +274,13 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_app
 /-- Blueprint `lem-pur-smb-extraordinary`: Smooth base change for the exceptional inverse image.
 
 The form of `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_app`
-for a base change `f'` that need not be quasi-compact, for which the canonical comparison is not
-constructed: `Lu^* Rf^! K ≅ Rf'^! Lv^* K`. This is the component at `K` of
+as an abstract isomorphism `Lu^* Rf^! K ≅ Rf'^! Lv^* K`, under the same hypotheses (`Y`
+quasi-separated, `f'` quasi-compact). This is the component at `K` of
 `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek`. -/
 theorem nonempty_iso_leftDerivedUpperStar_obj_rightDerivedUpperShriek_obj {X Y X' Y' : Scheme.{u}}
     (f : X ⟶ Y) [HasCompactification f] (d : ℕ) [SmoothOfRelativeDimension d f]
-    [HasInvertibleExponent Λ X] {v : Y' ⟶ Y} {f' : X' ⟶ Y'} {u : X' ⟶ X}
-    (sq : IsPullback u f' f v) [HasCompactification f']
+    [HasInvertibleExponent Λ X] [QuasiSeparatedSpace Y] {v : Y' ⟶ Y} {f' : X' ⟶ Y'}
+    {u : X' ⟶ X} (sq : IsPullback u f' f v) [HasCompactification f'] [QuasiCompact f']
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (_hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
     Nonempty ((L((u)^*[ModuleCat.{u + 1} Λ])).obj ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) ≅
@@ -286,9 +291,9 @@ theorem nonempty_iso_leftDerivedUpperStar_obj_rightDerivedUpperShriek_obj {X Y X
 /-- Blueprint `thm-pur-cohomological-smoothness`: Cohomological smoothness of smooth morphisms.
 
 A smooth morphism `f : X ⟶ Y` of pure relative dimension `d` admitting a compactification, with
-the exponent of `Λ` invertible on `X`, is cohomologically smooth: `ω_f` is invertible
-(`AlgebraicGeometry.Etale.isInvertible_dualizingComplex`), the canonical tensor map is an
-isomorphism
+the exponent of `Λ` invertible on `X` and `Y` quasi-separated, is cohomologically smooth:
+`ω_f` is invertible (`AlgebraicGeometry.Etale.isInvertible_dualizingComplex`), the canonical
+tensor map is an isomorphism
 (`AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension`) and the
 canonical base change map is an isomorphism, by smooth base change for `R^!`
 (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`).
@@ -296,7 +301,7 @@ The compatibility with composition is
 `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_comp_of_smoothOfRelativeDimension`. -/
 theorem isCohomologicallySmooth_of_smoothOfRelativeDimension {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasCompactification f] (d : ℕ) [SmoothOfRelativeDimension d f]
-    [HasInvertibleExponent Λ X] : IsCohomologicallySmooth Λ f where
+    [HasInvertibleExponent Λ X] [QuasiSeparatedSpace Y] : IsCohomologicallySmooth Λ f where
   isInvertible_dualizingComplex := isInvertible_dualizingComplex Λ (d := d) f
   isIso_dualizingComplexTensorMap K _ :=
     isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension Λ (d := d) f K
@@ -336,11 +341,11 @@ theorem nonempty_iso_rightDerivedUpperShriek_of_etale {U X : Scheme.{u}} (u : U 
 /-- Blueprint `lem-pur-co-smooth-etale-locality`: Source-étale locality.
 
 Every étale morphism `u` admitting a compactification, with the exponent of `Λ` invertible on
-`U`, is cohomologically smooth: it is smooth of relative dimension `0`
+`U` and `X` quasi-separated, is cohomologically smooth: it is smooth of relative dimension `0`
 (`AlgebraicGeometry.Etale.isCohomologicallySmooth_of_smoothOfRelativeDimension`). Moreover
 `ω_u ≅ Λ` (`AlgebraicGeometry.Etale.nonempty_dualizingComplex_iso_constantComplex_of_etale`). -/
 theorem isCohomologicallySmooth_of_etale {U X : Scheme.{u}} (u : U ⟶ X) [Etale u]
-    [HasCompactification u] [HasInvertibleExponent Λ U] :
+    [HasCompactification u] [HasInvertibleExponent Λ U] [QuasiSeparatedSpace X] :
     IsCohomologicallySmooth Λ u :=
   isCohomologicallySmooth_of_smoothOfRelativeDimension Λ u 0
 
@@ -360,7 +365,7 @@ isomorphisms after pullback along `u`, and isomorphisms descend along `u`
 3. for a cartesian square of `f`, the base change map of `u ≫ f` along the pulled back square is
    that of `u` followed by `Ru'^!` of that of `f`
    (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_comp_iff`), and the base
-   change map of `u` is an isomorphism (`prop-asd-smooth-base-change`).
+   change map of `u` is an isomorphism (`AlgebraicGeometry.Etale.etaleBaseChange`).
 
 The blueprint takes `u` separated of finite type between schemes over a field on which the
 exponent of `Λ` is invertible; here `u` is assumed quasi-compact and to admit a
@@ -386,7 +391,7 @@ theorem IsCohomologicallySmooth.of_comp_of_surjective {U X Y : Scheme.{u}} (u : 
     have sqh := squ.paste_vert sq
     have : HasCompactification (pullback.snd u g' ≫ f') := .of_isPullback sqh
     have : HasInvertibleExponent Λ (pullback u g') := .of_hom (pullback.fst u g')
-    have := isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension Λ u 0 squ
+    have := etaleBaseChange Λ u squ
     have hh := (isIso_dualizingComplexBaseChangeMap_iff Λ sqh).1
       (h.isIso_dualizingComplexBaseChangeMap sqh)
     exact isIso_of_isIso_rightDerivedUpperShriek_map (pullback.snd u g')

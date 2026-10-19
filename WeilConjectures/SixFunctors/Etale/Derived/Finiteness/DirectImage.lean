@@ -57,6 +57,12 @@ the vanishing of `Rᵠf_!` above twice the fibre dimension is read off the sheaf
 `AlgebraicGeometry.Etale.boundedConstructible_obj_of_forall_singleFunctor`. The vanishing clause
 of `sbc-thm-finiteness-finite-type` is `lem-dg-compact-support-amplitude`.
 
+The sources of these inputs (blueprint `rem-exc-direct-image-input-sources`): the finiteness
+clause is the classical finiteness theorem (SGA 4, XIV, 1.1; Stacks, Tag 0GL0), proved here by
+Deligne's finite-boundary induction, with the proper case the comparison `obl-fin-comparison`;
+the cohomological-dimension clause is the bound for finite-type schemes over a separably closed
+field (Stacks, Tags 0F0V and 0F0P), proved from the affine bound `thm-sc-affine-torsion-cd`.
+
 ## Main statements
 
 - `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent`

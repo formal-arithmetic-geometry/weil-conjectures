@@ -5,9 +5,12 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Compactification.RefinementOfIsPullback
+public import WeilConjectures.Compactification.TriangleOfIsPullback
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Canonical
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Identity
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Pasting
+public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Cube
 
 /-!
 # Compact-support base change in a compact support formalism
@@ -72,6 +75,12 @@ composition isomorphisms.
 - `AlgebraicGeometry.CompactSupportFormalism.shriekBaseChange_paste_horiz`: horizontal pasting.
 - `AlgebraicGeometry.CompactSupportFormalism.shriekBaseChange_refinementComparison`:
   compatibility with the comparisons along refinements.
+- `AlgebraicGeometry.CompactSupportFormalism.exchange_pfBaseChange_cube`: the exchange maps and
+  the base change maps on a commutative cube.
+- `AlgebraicGeometry.CompactSupportFormalism.shriekBaseChangeOfIsPullback_shriekIso`:
+  compatibility with the comparison isomorphisms.
+- `AlgebraicGeometry.CompactSupportFormalism.compIso_shriekBaseChange`: compatibility with the
+  composition isomorphisms of triangles of compactifications.
 - `AlgebraicGeometry.CompactSupportFormalism.lowerShriekBaseChange_eq`: independence of the
   compactification.
 - `AlgebraicGeometry.CompactSupportFormalism.lowerShriekBaseChange_paste_vert`: vertical pasting.
@@ -237,6 +246,95 @@ class HasProperBaseChange : Prop where
     IsIso (F.pfBaseChange t l r b h.w).natTrans
 
 end PushforwardBaseChange
+
+section Cube
+
+variable {U' U Z' Z V' V W' W : Scheme.{u}}
+
+/-- The base change map of the pushforwards, transposed along `l^* ⊣ l_*`: it is the inverse of
+the square isomorphism followed by the counit of `r^* ⊣ r_*`. -/
+@[reassoc]
+lemma pfBaseChange_counit (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b : Z' ⟶ Z)
+    (w : t ≫ r = l ≫ b) (M : F.obj U) :
+    (F.pb l).map ((F.pfBaseChange t l r b w).natTrans.app M) ≫
+        (F.adj l).counit.app ((F.pb t).obj M) =
+      (F.sqIso t l r b w).inv.app ((F.pf r).obj M) ≫ (F.pb t).map ((F.adj r).counit.app M) :=
+  mateEquiv_counit (F.adj r) (F.adj l) _ M
+
+/-- The exchange map, transposed along `b^* ⊣ b_*`: it is the inverse of the base change map
+followed by the counit of `t^* ⊣ t_*`. -/
+@[reassoc]
+lemma exchange_counit (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b : Z' ⟶ Z) [IsOpenImmersion l]
+    [IsOpenImmersion r] (w : t ≫ r = l ≫ b) [IsIso (F.baseChange t l r b w).natTrans]
+    (N : F.obj U') :
+    (F.pb b).map ((F.exchange t l r b w).natTrans.app N) ≫
+        (F.adj b).counit.app ((F.sh l).obj N) =
+      inv ((F.baseChange t l r b w).natTrans.app ((F.pf t).obj N)) ≫
+        (F.sh l).map ((F.adj t).counit.app N) := by
+  have h := mateEquiv_counit (F.adj t) (F.adj b)
+    (TwoSquare.mk _ _ _ _ (inv (F.baseChange t l r b w).natTrans)) N
+  simpa [exchange] using h
+
+/-- **The exchange maps and the base change maps of the pushforwards on a cube.** For a
+commutative cube with top face `t ≫ r = l ≫ b`, bottom face `t' ≫ r' = l' ≫ b'` (with `l`, `r`,
+`l'`, `r'` open immersions) and connecting maps `x`, `y`, `z`, `v`
+```
+V' --t'--> V           U' --t--> U
+|l'        |r'   ⟶     |l        |r
+W' --b'--> W           Z' --b--> Z
+```
+the exchange maps of the top and bottom faces are intertwined by the base change maps of the
+pushforwards of the faces `x ≫ t = t' ≫ y` and `z ≫ b = b' ≫ v` and the base change maps of the
+extension by zero of the faces `x ≫ l = l' ≫ z` and `y ≫ r = r' ≫ v`. -/
+lemma exchange_pfBaseChange_cube (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b : Z' ⟶ Z)
+    (t' : V' ⟶ V) (l' : V' ⟶ W') (r' : V ⟶ W) (b' : W' ⟶ W) (x : V' ⟶ U') (y : V ⟶ U)
+    (z : W' ⟶ Z') (v : W ⟶ Z) [IsOpenImmersion l] [IsOpenImmersion r] [IsOpenImmersion l']
+    [IsOpenImmersion r'] (w : t ≫ r = l ≫ b) (w' : t' ≫ r' = l' ≫ b') (sx : x ≫ t = t' ≫ y)
+    (sl : x ≫ l = l' ≫ z) (sr : y ≫ r = r' ≫ v) (sb : z ≫ b = b' ≫ v)
+    [IsIso (F.baseChange t l r b w).natTrans] [IsIso (F.baseChange t' l' r' b' w').natTrans]
+    [IsIso (F.baseChange y r' r v sr).natTrans] (N : F.obj U') :
+    inv ((F.baseChange y r' r v sr).natTrans.app ((F.pf t).obj N)) ≫
+        (F.sh r').map ((F.pfBaseChange x t' t y sx).natTrans.app N) ≫
+        (F.exchange t' l' r' b' w').natTrans.app ((F.pb x).obj N) ≫
+        (F.pf b').map ((F.baseChange x l' l z sl).natTrans.app N) =
+      (F.pb v).map ((F.exchange t l r b w).natTrans.app N) ≫
+        (F.pfBaseChange z b' b v sb).natTrans.app ((F.sh l).obj N) := by
+  -- the cube relation for the base change maps of the extension by zero, with inverses
+  have hc := F.baseChange_cube t l r b t' l' r' b' x y z v w w' sx sl sr sb ((F.pf t).obj N)
+  have hc' : (F.sh l').map ((F.sqIso x t' t y sx).inv.app ((F.pf t).obj N)) ≫
+      (F.baseChange x l' l z sl).natTrans.app ((F.pb t).obj ((F.pf t).obj N)) =
+      (F.baseChange t' l' r' b' w').natTrans.app ((F.pb y).obj ((F.pf t).obj N)) ≫
+        (F.pb b').map ((F.baseChange y r' r v sr).natTrans.app ((F.pf t).obj N)) ≫
+        (F.sqIso z b' b v sb).inv.app ((F.sh r).obj ((F.pf t).obj N)) ≫
+        (F.pb z).map (inv ((F.baseChange t l r b w).natTrans.app ((F.pf t).obj N))) := by
+    rw [← reassoc_of% hc]
+    simp
+  have hΞ : (F.pb b').map (inv ((F.baseChange y r' r v sr).natTrans.app ((F.pf t).obj N))) ≫
+      inv ((F.baseChange t' l' r' b' w').natTrans.app ((F.pb y).obj ((F.pf t).obj N))) ≫
+      (F.sh l').map ((F.sqIso x t' t y sx).inv.app ((F.pf t).obj N)) ≫
+      (F.baseChange x l' l z sl).natTrans.app ((F.pb t).obj ((F.pf t).obj N)) =
+      (F.sqIso z b' b v sb).inv.app ((F.sh r).obj ((F.pf t).obj N)) ≫
+        (F.pb z).map (inv ((F.baseChange t l r b w).natTrans.app ((F.pf t).obj N))) := by
+    rw [hc']
+    simp
+  -- transpose along `b'^* ⊣ b'_*`
+  apply ((F.adj b').homEquiv _ _).symm.injective
+  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+  have hβ' := (inv (F.baseChange t' l' r' b' w').natTrans).naturality
+    ((F.pfBaseChange x t' t y sx).natTrans.app N)
+  have hγ := (F.baseChange x l' l z sl).natTrans.naturality ((F.adj t).counit.app N)
+  have hs := (F.sqIso z b' b v sb).inv.naturality ((F.exchange t l r b w).natTrans.app N)
+  simp only [Functor.comp_map, Functor.comp_obj, Functor.id_obj, NatIso.isIso_inv_app]
+    at hβ' hγ hs
+  erw [(F.adj b').counit_naturality]
+  rw [F.exchange_counit_assoc t' l' r' b' w', reassoc_of% hβ',
+    ← Functor.map_comp_assoc (F.sh l'), F.pfBaseChange_counit x t' t y sx, Functor.map_comp,
+    Category.assoc, hγ]
+  erw [F.pfBaseChange_counit z b' b v sb]
+  rw [reassoc_of% hs, ← Functor.map_comp (F.pb z), F.exchange_counit t l r b w,
+    Functor.map_comp, reassoc_of% hΞ]
+
+end Cube
 
 section ShriekBaseChange
 
@@ -453,9 +551,137 @@ lemma shriekBaseChange_refinementComparison {c d : Compactification f}
     congr 1
     erw [(F.adj r'.hom).counit_naturality_assoc,
       (F.adj r'.hom).left_triangle_components_assoc]
-  sorry
+  ext K
+  have hv := congr_app (F.pfBaseChange_paste_vert hc hd g r'.hom r.hom d'.g d.g c'.g c.g hcomm
+    hdp.w r'.hom_g r.hom_g hcp.w) ((F.sh c.i).obj K)
+  simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.comp_obj] at hv
+  have hn := (F.pfBaseChange hd d'.g d.g g hdp.w).natTrans.naturality
+    ((F.adj r.hom).unit.app ((F.sh d.i).obj K) ≫
+      (F.pf r.hom).map (inv ((F.baseChange (𝟙 X) c.i d.i r.hom hr.flip.w).natTrans.app K) ≫
+        (F.sh c.i).map ((F.pbId X).hom.app K)))
+  have hn₂ := (F.pfComp' r'.hom d'.g c'.g r'.hom_g).inv.naturality
+    (inv ((F.baseChange g' c'.i c.i hc hci.w).natTrans.app K))
+  have hcore' := congrArg (F.pf d'.g).map (hcore K)
+  have hcancel : (F.pb g).map ((F.pfComp' r.hom d.g c.g r.hom_g).inv.app ((F.sh c.i).obj K)) ≫
+      (F.pb g).map ((F.pfComp' r.hom d.g c.g r.hom_g).hom.app ((F.sh c.i).obj K)) = 𝟙 _ := by
+    rw [← Functor.map_comp, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id]
+  simp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.map_comp,
+    Category.assoc] at hn hn₂ hcore' hv
+  rw [NatTrans.comp_app, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    refinementComparison_app_eq, refinementComparison_app_eq]
+  simp only [shriekBaseChange, TwoSquare.hComp, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Functor.comp_obj, NatIso.isIso_inv_app, Functor.map_comp,
+    Category.assoc, Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp]
+  dsimp only [shriek, Functor.comp_obj, Functor.id_obj]
+  erw [hv]
+  simp only [Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
+    Category.comp_id, Category.assoc]
+  dsimp only [Functor.comp_obj]
+  simp only [Category.id_comp]
+  rw [reassoc_of% hcancel, reassoc_of% hn, ← hn₂, reassoc_of% hcore']
 
 end ShriekBaseChange
+
+section Composition
+
+variable [F.HasProperExchange]
+
+/-- **The compact-support exchange maps and the composition isomorphisms.** Let `T` be a
+triangle of compactifications of `(f, g)` and `T'` a triangle of compactifications of
+`(f', g')` lying over it along `a : T'.cf.Z ⟶ T.cf.Z`, `c : T'.cg.Z ⟶ T.cg.Z` and
+`b : T'.cfg.Z ⟶ T.cfg.Z`, with all the relevant squares cartesian. Then the exchange map of the
+composite is the horizontal composite of the exchange maps, through the composition
+isomorphisms `F.compIso T` and `F.compIso T'`. (blueprint: `thm-cbc-finite-torsion`,
+`fix-lem-exchanges`) -/
+theorem compIso_shriekBaseChange {X Y S X' Y' S' : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ S}
+    {f' : X' ⟶ Y'} {g' : Y' ⟶ S'} {gX : X' ⟶ X} {gY : Y' ⟶ Y} {gS : S' ⟶ S}
+    (T : Compactification.Triangle f g) (T' : Compactification.Triangle f' g')
+    (a : T'.cf.Z ⟶ T.cf.Z) (c : T'.cg.Z ⟶ T.cg.Z) (b : T'.cfg.Z ⟶ T.cfg.Z)
+    (hfi : IsPullback gX T'.cf.i T.cf.i a) (hfp : IsPullback a T'.cf.g T.cf.g gY)
+    (hgi : IsPullback gY T'.cg.i T.cg.i c) (hgp : IsPullback c T'.cg.g T.cg.g gS)
+    (hfgi : IsPullback gX T'.cfg.i T.cfg.i b) (hfgp : IsPullback b T'.cfg.g T.cfg.g gS)
+    (hq : IsPullback a T'.q T.q b) (hp : b ≫ T.p = T'.p ≫ c) :
+    Functor.whiskerRight (F.compIso T).hom (F.pb gS) ≫
+        (F.shriekBaseChange T.cfg T'.cfg b hfgi hfgp).natTrans =
+      (F.shriekBaseChange T.cf T'.cf a hfi hfp ≫ₕ
+          F.shriekBaseChange T.cg T'.cg c hgi hgp).natTrans ≫
+        Functor.whiskerLeft (F.pb gX) (F.compIso T').hom := by
+  have := HasBaseChange.isIso_baseChange (F := F) T.isPullback
+  have := HasBaseChange.isIso_baseChange (F := F) T'.isPullback
+  have := HasBaseChange.isIso_baseChange (F := F) hfi
+  have := HasBaseChange.isIso_baseChange (F := F) hgi
+  have := HasBaseChange.isIso_baseChange (F := F) hfgi
+  have := HasBaseChange.isIso_baseChange (F := F) hq
+  ext K
+  -- the base change map of the extension by zero along `cfg.i = cf.i ≫ q`
+  have hbc := congr_app (F.baseChange_paste_vert gX a b T'.cf.i T.cf.i T'.q T.q T'.cfg.i
+    T.cfg.i hfi.w hq.w T'.i_q T.i_q hfgi.w) K
+  simp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.vComp,
+    NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
+    Functor.comp_obj, Category.assoc] at hbc
+  have hA : (F.pb b).map ((F.shComp' T.cf.i T.q T.cfg.i T.i_q).inv.app K) ≫
+      inv ((F.baseChange gX T'.cfg.i T.cfg.i b hfgi.w).natTrans.app K) =
+      inv ((F.baseChange a T'.q T.q b hq.w).natTrans.app ((F.sh T.cf.i).obj K)) ≫
+        (F.sh T'.q).map (inv ((F.baseChange gX T'.cf.i T.cf.i a hfi.w).natTrans.app K)) ≫
+        (F.shComp' T'.cf.i T'.q T'.cfg.i T'.i_q).inv.app ((F.pb gX).obj K) := by
+    rw [IsIso.comp_inv_eq, hbc]
+    simp
+  -- the cube relating the exchange maps of `T` and `T'`
+  have hC := F.exchange_pfBaseChange_cube T.cf.g T.q T.cg.i T.p T'.cf.g T'.q T'.cg.i T'.p a gY b
+    c T.isPullback.w T'.isPullback.w hfp.w hq.w hgi.w hp ((F.sh T.cf.i).obj K)
+  have hC' : inv ((F.baseChange gY T'.cg.i T.cg.i c hgi.w).natTrans.app
+        ((F.pf T.cf.g).obj ((F.sh T.cf.i).obj K))) ≫
+      (F.sh T'.cg.i).map ((F.pfBaseChange a T'.cf.g T.cf.g gY hfp.w).natTrans.app
+        ((F.sh T.cf.i).obj K)) ≫
+      (F.exchange T'.cf.g T'.q T'.cg.i T'.p T'.isPullback.w).natTrans.app
+        ((F.pb a).obj ((F.sh T.cf.i).obj K)) =
+      (F.pb c).map ((F.exchange T.cf.g T.q T.cg.i T.p T.isPullback.w).natTrans.app
+        ((F.sh T.cf.i).obj K)) ≫
+      (F.pfBaseChange b T'.p T.p c hp).natTrans.app ((F.sh T.q).obj ((F.sh T.cf.i).obj K)) ≫
+      (F.pf T'.p).map (inv ((F.baseChange a T'.q T.q b hq.w).natTrans.app
+        ((F.sh T.cf.i).obj K))) := by
+    rw [← reassoc_of% hC]
+    simp
+  -- the base change map of the pushforwards along `cfg.g = p ≫ cg.g`
+  have hv := congr_app (F.pfBaseChange_paste_vert b c gS T'.p T.p T'.cg.g T.cg.g T'.cfg.g
+    T.cfg.g hp hgp.w T'.p_g T.p_g hfgp.w) ((F.sh T.cfg.i).obj K)
+  simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.comp_obj] at hv
+  rw [NatTrans.comp_app, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    compIso_hom_app, compIso_hom_app]
+  simp only [shriekBaseChange, TwoSquare.hComp, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Functor.comp_obj, NatIso.isIso_inv_app, Functor.map_comp,
+    Category.assoc, Functor.associator_hom_app, Functor.associator_inv_app]
+  dsimp only [shriek, Functor.comp_obj, Functor.id_obj, Functor.comp_map]
+  erw [hv]
+  simp only [Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
+    Category.comp_id, Category.assoc, CategoryTheory.Functor.map_id]
+  dsimp only [Functor.comp_obj]
+  simp only [Category.id_comp]
+  have hcancel : (F.pb gS).map ((F.pfComp' T.p T.cg.g T.cfg.g T.p_g).inv.app
+      ((F.sh T.cfg.i).obj K)) ≫ (F.pb gS).map ((F.pfComp' T.p T.cg.g T.cfg.g T.p_g).hom.app
+      ((F.sh T.cfg.i).obj K)) = 𝟙 _ := by
+    rw [← Functor.map_comp, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id]
+  have hn₁ := (F.pfBaseChange c T'.cg.g T.cg.g gS hgp.w).natTrans.naturality
+    ((F.exchange T.cf.g T.q T.cg.i T.p T.isPullback.w).natTrans.app ((F.sh T.cf.i).obj K) ≫
+      (F.pf T.p).map ((F.shComp' T.cf.i T.q T.cfg.i T.i_q).inv.app K))
+  have hn₂ := (F.pfComp' T'.p T'.cg.g T'.cfg.g T'.p_g).inv.naturality
+    (inv ((F.baseChange gX T'.cfg.i T.cfg.i b hfgi.w).natTrans.app K))
+  have hn₃ := congrArg (F.pf T'.cg.g).map ((F.pfBaseChange b T'.p T.p c hp).natTrans.naturality
+    ((F.shComp' T.cf.i T.q T.cfg.i T.i_q).inv.app K))
+  have hn₄ := congrArg (F.pf T'.cg.g).map
+    ((F.exchange T'.cf.g T'.q T'.cg.i T'.p T'.isPullback.w).natTrans.naturality
+      (inv ((F.baseChange gX T'.cf.i T.cf.i a hfi.w).natTrans.app K)))
+  have hA' := congrArg (fun φ ↦ (F.pf T'.cg.g).map ((F.pf T'.p).map φ)) hA
+  have hC'' := congrArg (F.pf T'.cg.g).map hC'
+  simp only [Functor.comp_obj, Functor.comp_map, Functor.map_comp, Category.assoc]
+    at hn₁ hn₂ hn₃ hn₄ hA' hC''
+  rw [reassoc_of% hcancel, reassoc_of% hn₁, ← hn₂, reassoc_of% hn₃, reassoc_of% hA',
+    reassoc_of% hn₄, reassoc_of% hC'']
+
+end Composition
 
 section Canonical
 
@@ -486,6 +712,44 @@ instance isIso_lowerShriekBaseChange [F.HasProperBaseChange] [HasCompactificatio
   dsimp only [lowerShriekBaseChange, TwoSquare.whiskerBottom]
   infer_instance
 
+/-- **Compatibility with the comparison isomorphisms**: the compact-support exchange maps along
+two compactifications `c` and `d` of `f` and their base changes are intertwined by the comparison
+isomorphisms `F.shriekIso c d` and `F.shriekIso (c.ofIsPullback sq) (d.ofIsPullback sq)`.
+(blueprint: `thm-cbc-finite-torsion`, independence of the compactification) -/
+lemma shriekBaseChangeOfIsPullback_shriekIso [QuasiCompact f] [QuasiCompact f']
+    (sq : IsPullback g' f' f g) (c d : Compactification f) :
+    Functor.whiskerRight (F.shriekIso c d).hom (F.pb g) ≫
+        (F.shriekBaseChangeOfIsPullback sq d).natTrans =
+      (F.shriekBaseChangeOfIsPullback sq c).natTrans ≫
+        Functor.whiskerLeft (F.pb g')
+          (F.shriekIso (c.ofIsPullback sq) (d.ofIsPullback sq)).hom := by
+  have hr₀ := Compactification.isPullback_infFst c d
+  have hr := Compactification.isPullback_infSnd c d
+  have hr₀' := (Compactification.infFst c d).isPullback_ofIsPullback sq hr₀
+  have hr' := (Compactification.infSnd c d).isPullback_ofIsPullback sq hr
+  have h₀ := F.shriekBaseChange_refinementComparison (Compactification.infFst c d) hr₀
+    ((Compactification.infFst c d).ofIsPullback sq) hr₀' (pullback.fst (c.inf d).g g)
+    ((c.inf d).isPullback_i_ofIsPullback sq) ((c.inf d).isPullback_g_ofIsPullback sq).flip
+    (pullback.fst c.g g) (c.isPullback_i_ofIsPullback sq) (c.isPullback_g_ofIsPullback sq).flip
+    (Compactification.Refinement.ofIsPullback_hom_fst sq _).symm
+  have h₁ := F.shriekBaseChange_refinementComparison (Compactification.infSnd c d) hr
+    ((Compactification.infSnd c d).ofIsPullback sq) hr' (pullback.fst (c.inf d).g g)
+    ((c.inf d).isPullback_i_ofIsPullback sq) ((c.inf d).isPullback_g_ofIsPullback sq).flip
+    (pullback.fst d.g g) (d.isPullback_i_ofIsPullback sq) (d.isPullback_g_ofIsPullback sq).flip
+    (Compactification.Refinement.ofIsPullback_hom_fst sq _).symm
+  rw [F.shriekIso_eq _ _ hr₀' hr', F.shriekIso_eq _ _ hr₀ hr]
+  ext K
+  have h₀' := congr_app h₀ K
+  have h₁' := congr_app h₁ K
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] at h₀' h₁'
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Iso.trans_hom, asIso_hom, Iso.symm_hom, asIso_inv, NatIso.isIso_inv_app]
+  dsimp only [shriekBaseChangeOfIsPullback]
+  rw [← cancel_mono ((F.refinementComparison _ hr').app ((F.pb g').obj K))]
+  simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+  rw [← h₀', ← h₁', ← Functor.map_comp_assoc, Category.assoc, IsIso.inv_hom_id,
+    Category.comp_id]
+
 /-- **Independence of the compactification**: the exchange map of the canonical compactly
 supported direct images is computed by any compactification `c` of `f` and its base change, up
 to the comparison isomorphisms `F.shriekIso`. (blueprint: `thm-cbc-finite-torsion`,
@@ -496,7 +760,18 @@ theorem lowerShriekBaseChange_eq [HasCompactification f] [HasCompactification f'
       ((F.shriekBaseChangeOfIsPullback sq c).whiskerTop
         (F.shriekIso (HasCompactification.compactification f) c).hom).whiskerBottom
         (F.shriekIso _ (HasCompactification.compactification f')).hom := by
-  sorry
+  have h := F.shriekBaseChangeOfIsPullback_shriekIso sq
+    (HasCompactification.compactification f) c
+  rw [← F.shriekIso_trans _ ((HasCompactification.compactification f).ofIsPullback sq)
+    (HasCompactification.compactification f'),
+    ← F.shriekIso_symm ((HasCompactification.compactification f).ofIsPullback sq)]
+  ext K
+  have h' := congr_app h K
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] at h'
+  simp only [lowerShriekBaseChange, TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
+    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app, Iso.trans_hom,
+    Iso.symm_hom, Category.assoc]
+  rw [reassoc_of% h', Iso.hom_inv_id_app_assoc]
 
 /-- **Vertical pasting** of compact-support exchange maps: for two cartesian squares placed one
 above the other
@@ -520,7 +795,79 @@ theorem lowerShriekBaseChange_paste_vert {S S' : Scheme.{u}} {f₁ : X ⟶ Y} {f
     F.lowerShriekBaseChange sq =
       ((F.lowerShriekBaseChange sq₁ ≫ₕ F.lowerShriekBaseChange sq₂).whiskerTop
         (F.lowerShriekCompIso f₁ f₂).inv).whiskerBottom (F.lowerShriekCompIso f₁' f₂').hom := by
-  sorry
+  have : QuasiCompact f₁ := .of_comp f₁ f₂
+  let T := Compactification.Triangle.ofHasCompactification f₁ f₂
+  have hKey : Functor.whiskerRight (F.compIso T).hom (F.pb gS) ≫
+      (F.shriekBaseChangeOfIsPullback sq T.cfg).natTrans =
+      (F.shriekBaseChangeOfIsPullback sq₁ T.cf ≫ₕ
+        F.shriekBaseChangeOfIsPullback sq₂ T.cg).natTrans ≫
+        Functor.whiskerLeft (F.pb gX) (F.compIso (T.ofIsPullback sq₁ sq₂ sq)).hom :=
+    F.compIso_shriekBaseChange T (T.ofIsPullback sq₁ sq₂ sq)
+      (pullback.fst T.cf.g gY) (pullback.fst T.cg.g gS) (pullback.fst T.cfg.g gS)
+      (T.cf.isPullback_i_ofIsPullback sq₁) (T.cf.isPullback_g_ofIsPullback sq₁).flip
+      (T.cg.isPullback_i_ofIsPullback sq₂) (T.cg.isPullback_g_ofIsPullback sq₂).flip
+      (T.cfg.isPullback_i_ofIsPullback sq) (T.cfg.isPullback_g_ofIsPullback sq).flip
+      (T.isPullback_baseChangeQ sq₂) T.baseChangeP_fst.symm
+  have hE₂ : F.lowerShriekBaseChange sq₂ =
+      (F.shriekBaseChangeOfIsPullback sq₂ T.cg).whiskerBottom
+        (F.shriekIso (T.cg.ofIsPullback sq₂) (HasCompactification.compactification f₂')).hom :=
+    rfl
+  have hCI : (F.lowerShriekCompIso f₁ f₂).hom =
+      Functor.whiskerRight (F.shriekIso (HasCompactification.compactification f₁) T.cf).hom _ ≫
+        (F.compIso T).hom ≫
+        (F.shriekIso T.cfg (HasCompactification.compactification (f₁ ≫ f₂))).hom :=
+    rfl
+  have hCI' : (F.lowerShriekCompIso f₁' f₂').hom =
+      NatTrans.hcomp
+        (F.shriekIso (T.cf.ofIsPullback sq₁) (HasCompactification.compactification f₁')).inv
+        (F.shriekIso (T.cg.ofIsPullback sq₂) (HasCompactification.compactification f₂')).inv ≫
+      (F.compIso (T.ofIsPullback sq₁ sq₂ sq)).hom ≫
+      (F.shriekIso (T.cfg.ofIsPullback sq)
+        (HasCompactification.compactification (f₁' ≫ f₂'))).hom := by
+    rw [← Iso.symm_hom, ← Iso.symm_hom, F.shriekIso_symm, F.shriekIso_symm]
+    exact F.lowerShriekCompIso_hom_eq (T.ofIsPullback sq₁ sq₂ sq)
+  rw [F.lowerShriekBaseChange_eq sq₁ T.cf, F.lowerShriekBaseChange_eq sq T.cfg, hE₂,
+    ← F.shriekIso_symm T.cfg]
+  ext K
+  have hK := congr_app hKey K
+  rw [← cancel_epi ((F.pb gS).map ((F.lowerShriekCompIso f₁ f₂).hom.app K))]
+  simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, Category.id_comp, Category.assoc, Functor.comp_obj] at hK ⊢
+  have hcancel : (F.pb gS).map ((F.lowerShriekCompIso f₁ f₂).hom.app K) ≫
+      (F.pb gS).map ((F.lowerShriekCompIso f₁ f₂).inv.app K) = 𝟙 _ := by
+    rw [← Functor.map_comp, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id]
+  rw [reassoc_of% hcancel, hCI, hCI']
+  simp only [NatTrans.comp_app, NatTrans.hcomp_app, Functor.whiskerRight_app, Iso.symm_hom,
+    Functor.map_comp, Category.assoc]
+  have hB := (F.shriekBaseChangeOfIsPullback sq₂ T.cg).natTrans.naturality
+    ((F.shriekIso (HasCompactification.compactification f₁) T.cf).hom.app K)
+  simp only [Functor.comp_map] at hB
+  have hI : (F.shriekIso (T.cg.ofIsPullback sq₂) (HasCompactification.compactification f₂')).hom.app
+        ((F.pb gY).obj ((F.lowerShriek f₁).obj K)) ≫
+      (F.lowerShriek f₂').map
+        ((F.pb gY).map ((F.shriekIso (HasCompactification.compactification f₁) T.cf).hom.app K)) ≫
+      (F.lowerShriek f₂').map ((F.shriekBaseChangeOfIsPullback sq₁ T.cf).natTrans.app K) ≫
+      (F.lowerShriek f₂').map ((F.shriekIso (T.cf.ofIsPullback sq₁)
+        (HasCompactification.compactification f₁')).hom.app ((F.pb gX).obj K)) ≫
+      (F.shriekIso (T.cg.ofIsPullback sq₂) (HasCompactification.compactification f₂')).inv.app
+        ((F.shriek (HasCompactification.compactification f₁')).obj ((F.pb gX).obj K)) =
+      (F.shriek (T.cg.ofIsPullback sq₂)).map
+        ((F.pb gY).map ((F.shriekIso (HasCompactification.compactification f₁) T.cf).hom.app K)) ≫
+      (F.shriek (T.cg.ofIsPullback sq₂)).map
+        ((F.shriekBaseChangeOfIsPullback sq₁ T.cf).natTrans.app K) ≫
+      (F.shriek (T.cg.ofIsPullback sq₂)).map ((F.shriekIso (T.cf.ofIsPullback sq₁)
+        (HasCompactification.compactification f₁')).hom.app ((F.pb gX).obj K)) := by
+    simp only [← Functor.map_comp, ← Functor.map_comp_assoc]
+    rw [← NatTrans.naturality_assoc, Iso.hom_inv_id_app, Category.comp_id]
+  rw [← Functor.map_comp_assoc (F.pb gS)
+      ((F.shriekIso T.cfg (HasCompactification.compactification (f₁ ≫ f₂))).hom.app K),
+    Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp, reassoc_of% hK,
+    reassoc_of% hB, reassoc_of% hI,
+    ← Functor.map_comp_assoc (F.shriek (T.cg.ofIsPullback sq₂))
+      ((F.shriekIso (T.cf.ofIsPullback sq₁)
+        (HasCompactification.compactification f₁')).hom.app ((F.pb gX).obj K)),
+    Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp]
 
 end Canonical
 

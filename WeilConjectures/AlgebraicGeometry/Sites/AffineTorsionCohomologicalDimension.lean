@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.AlgebraicGeometry.Curve.TorsionCohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Sites.FieldCohomologicalDimension
+public import WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.Reduction
 
 /-!
 # The affine Artin vanishing bound
@@ -40,6 +41,6 @@ theorem hasTorsionCohomologicalDimensionLE_of_isAffine {K : Type u} [Field K] {c
     (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [IsAffine X]
     (hX : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) :
     X.HasTorsionCohomologicalDimensionLE (d + c) :=
-  sorry
+  artinBound d K c hK X a inferInstance inferInstance hX
 
 end AlgebraicGeometry.Scheme

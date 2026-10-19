@@ -5,7 +5,6 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
 
 
 import Mathlib.AlgebraicGeometry.AlgClosed.Basic

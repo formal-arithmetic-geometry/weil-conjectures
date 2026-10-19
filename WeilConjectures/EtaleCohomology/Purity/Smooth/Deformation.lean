@@ -158,12 +158,13 @@ omit [HasTateTwist Λ] in
 `i₁^* F ≅ 𝒞(g, s)` and `i₀^* F ≅ 𝒞(π_N, 0_N)` of clause (1). In a cartesian square with
 `f : X ⟶ Y` smooth and separated and sections `s` of `f` and `s'` of its base change `f'`
 compatible with `g' : X' ⟶ X`, base change for the cohomologically smooth `f`
-(`sk-prop-cohsm` (c)) gives `Lg^* 𝒞(f, s) ≅ 𝒞(f', s')`. -/
+(`sk-prop-cohsm` (c)) gives `Lg^* 𝒞(f, s) ≅ 𝒞(f', s')`. Smooth base change needs the base `Y`
+to be quasi-separated and `f'` to be quasi-compact. -/
 theorem nonempty_iso_leftDerivedUpperStar_sectionInvariant {X Y X' Y' : Scheme.{u}} {d : ℕ}
     (f : X ⟶ Y) [IsSeparated f] [SmoothOfRelativeDimension d f] [HasCompactification f]
     [HasInvertibleExponent Λ X] {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
-    (sq : IsPullback g' f' f g) [HasCompactification f'] (s : Y ⟶ X) (s' : Y' ⟶ X')
-    (hs : s' ≫ g' = g ≫ s) :
+    (sq : IsPullback g' f' f g) [HasCompactification f'] [QuasiSeparatedSpace Y]
+    [QuasiCompact f'] (s : Y ⟶ X) (s' : Y' ⟶ X') (hs : s' ≫ g' = g ≫ s) :
     Nonempty ((L((g)^*[ModuleCat.{u + 1} Λ])).obj (sectionInvariant Λ f s) ≅
       sectionInvariant Λ f' s') := by
   obtain ⟨e⟩ := nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek Λ (d := d) f sq
@@ -254,10 +255,13 @@ omit [HasTateTwist Λ] in
 /-- The fibre of the family at `t = 1` is the section invariant of `(g, s)`
 (`lem-pur-dnc-section-geometry` (1)): `Li₁^* F ≅ 𝒞(g, s)`, by base change for `g̃` along the
 unit section. -/
-theorem nonempty_iso_leftDerivedUpperStar_oneSection_familyObject :
+theorem nonempty_iso_leftDerivedUpperStar_oneSection_familyObject [QuasiSeparatedSpace B]
+    [QuasiCompact g] :
     Nonempty ((L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
       (D.familyObject Λ) ≅ sectionInvariant Λ g s) :=
   have := D.hasInvertibleExponent_scheme Λ
+  have : QuasiSeparatedSpace 𝔸(ULift.{u} (Fin 1); B) :=
+    quasiSeparatedSpace_of_quasiSeparated (𝔸(ULift.{u} (Fin 1); B) ↘ B)
   nonempty_iso_leftDerivedUpperStar_sectionInvariant Λ (d := d) D.proj D.isPullback_oneFibre
     D.sect s D.comp_oneFibre
 
@@ -282,7 +286,8 @@ by base change for `g̃` (`sk-prop-cohsm` (c)), `Rj^! ≅ j^*` for the open imme
 composition of exceptional inverse images along `j ≫ g' = c ≫ π`, and `Rc^! ≅ c^*` for the étale
 `c` (`lem-pur-co-smooth-etale-locality`). Both `L0^* ω_π` and `a'^* 𝒞(𝔸^d_{B'} → B', 0)` are
 `Λ(d)[2d]` by affine-space purity (`sk-prop-an`). -/
-theorem exists_etale_nonempty_iso_familyObject [HasTateTwist.IsNormalized Λ] :
+theorem exists_etale_nonempty_iso_familyObject [HasTateTwist.IsNormalized Λ]
+    [QuasiCompact D.proj] :
     ∃ (B' : Scheme.{u}) (u : B' ⟶ B), _root_.AlgebraicGeometry.Etale u ∧ Surjective u ∧
       IsSeparated (u ≫ aB) ∧
       Nonempty ((L((AffineSpace.map (ULift.{u} (Fin 1)) u)^*[ModuleCat.{u + 1} Λ])).obj
@@ -294,6 +299,9 @@ theorem exists_etale_nonempty_iso_familyObject [HasTateTwist.IsNormalized Λ] :
     D.exists_etale_coordinates
   let T := 𝔸(ULift.{u} (Fin 1); B')
   let v₁ := AffineSpace.map (ULift.{u} (Fin 1)) v
+  have : QuasiSeparatedSpace B := quasiSeparatedSpace_of_quasiSeparated aB
+  have : QuasiSeparatedSpace 𝔸(ULift.{u} (Fin 1); B) :=
+    quasiSeparatedSpace_of_quasiSeparated (𝔸(ULift.{u} (Fin 1); B) ↘ B)
   have := D.hasInvertibleExponent_scheme Λ
   have : HasInvertibleExponent Λ B' := .of_hom v
   have : HasInvertibleExponent Λ T := .of_hom (T ↘ B')
@@ -325,7 +333,7 @@ change, the family is `Lv₁^* F ≅ La'^* 𝒞₀` for the standard section inv
 `𝒞₀ = 𝒞(𝔸^d_{B'} → B', 0) ≅ Λ_{B'}(d)[2d]` (`sk-prop-an`), and restricting at `t = 1` gives
 `φ : Lu^* 𝒞(g, s) ≅ 𝒞₀`, related to the base change `θ : Li₁^* F ≅ 𝒞(g, s)` by
 `Li₁'^* e = (Li₁'^* Lv₁^* F ≅ Lu^* Li₁^* F) ≫ Lu^* θ ≫ φ` up to `Li₁'^* La'^* ≅ 𝟭`. -/
-theorem exists_etale_familyObject_data
+theorem exists_etale_familyObject_data [QuasiCompact D.proj]
     (θ : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
       (D.familyObject Λ) ≅ sectionInvariant Λ g s) :
     ∃ (B' : Scheme.{u}) (u : B' ⟶ B), _root_.AlgebraicGeometry.Etale u ∧ Surjective u ∧
@@ -372,12 +380,14 @@ affine line
 free of rank one at every geometric point, with `𝒞(g, s) ≅ L₁(d)[2d]`: over the étale cover of
 `lem-pur-dnc-section-geometry` (2) it is the standard section invariant `Λ(d)[2d]`
 (`sk-prop-an`), and `lem-pur-concentrated-complex-shift` applies. -/
-theorem exists_nonempty_iso_sectionInvariant_twistShift :
+theorem exists_nonempty_iso_sectionInvariant_twistShift [QuasiCompact D.proj] :
     ∃ L : Sheaf B.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsFiniteLocallyConstantSheaf L ∧
       (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (x : Spec (.of Ω) ⟶ B),
         Nonempty ((pointSmallEtale x).sheafFiber.obj L ≅ ModuleCat.of Λ Λ)) ∧
       Nonempty (sectionInvariant Λ g s ≅
         (twistShift Λ B d).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj L)) := by
+  have : QuasiSeparatedSpace B := quasiSeparatedSpace_of_quasiSeparated aB
+  have : QuasiCompact g := MorphismProperty.of_isPullback D.isPullback_oneFibre inferInstance
   obtain ⟨θ⟩ := D.nonempty_iso_leftDerivedUpperStar_oneSection_familyObject Λ
   obtain ⟨B', u, hu, hsurj, -, ⟨c⟩, -, φ, -⟩ := D.exists_etale_familyObject_data Λ aB θ
   exact exists_nonempty_iso_twistShift_of_leftDerivedUpperStar_iso Λ u d _ (φ ≪≫ c)
@@ -392,13 +402,15 @@ affine line
 section invariant `Λ(d)[2d]` (`sk-prop-an`), and `lem-pur-concentrated-complex-shift`
 applies. The same statement for `𝒞(g, s)` is
 `exists_nonempty_iso_sectionInvariant_twistShift`. -/
-theorem exists_nonempty_iso_familyObject_twistShift :
+theorem exists_nonempty_iso_familyObject_twistShift [QuasiCompact D.proj] :
     ∃ L : Sheaf 𝔸(ULift.{u} (Fin 1); B).smallEtaleTopology (ModuleCat.{u + 1} Λ),
       IsFiniteLocallyConstantSheaf L ∧
       (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (x : Spec (.of Ω) ⟶ 𝔸(ULift.{u} (Fin 1); B)),
         Nonempty ((pointSmallEtale x).sheafFiber.obj L ≅ ModuleCat.of Λ Λ)) ∧
       Nonempty (D.familyObject Λ ≅ (twistShift Λ 𝔸(ULift.{u} (Fin 1); B) d).obj
         ((_root_.DerivedCategory.singleFunctor _ 0).obj L)) := by
+  have : QuasiSeparatedSpace B := quasiSeparatedSpace_of_quasiSeparated aB
+  have : QuasiCompact g := MorphismProperty.of_isPullback D.isPullback_oneFibre inferInstance
   obtain ⟨θ⟩ := D.nonempty_iso_leftDerivedUpperStar_oneSection_familyObject Λ
   obtain ⟨B', u, hu, hsurj, -, ⟨c⟩, e, -⟩ := D.exists_etale_familyObject_data Λ aB θ
   have : HasInvertibleExponent Λ B' := .of_hom u
@@ -432,9 +444,11 @@ Over the étale cover `u : B' ⟶ B` of `lem-pur-dnc-section-geometry` (2) the f
 and, through the fibre `φ : Lu^* 𝒞(g, s) ≅ 𝒞₀` at `t = 1`, a comparison
 `κ' : Lv₁^* F ≅ La'^* Lu^* 𝒞(g, s)` normalized at `t = 1`. These glue by `𝔸¹`-invariance
 (`prop-pur-a1-invariance`). -/
-theorem nonempty_iso_familyObject_leftDerivedUpperStar :
+theorem nonempty_iso_familyObject_leftDerivedUpperStar [QuasiCompact D.proj] :
     Nonempty (D.familyObject Λ ≅
       (L((𝔸(ULift.{u} (Fin 1); B) ↘ B)^*[ModuleCat.{u + 1} Λ])).obj (sectionInvariant Λ g s)) := by
+  have : QuasiSeparatedSpace B := quasiSeparatedSpace_of_quasiSeparated aB
+  have : QuasiCompact g := MorphismProperty.of_isPullback D.isPullback_oneFibre inferInstance
   obtain ⟨θ⟩ := D.nonempty_iso_leftDerivedUpperStar_oneSection_familyObject Λ
   obtain ⟨B', u, hu, hsurj, hsep, ⟨c⟩, e, φ, h⟩ := D.exists_etale_familyObject_data Λ aB θ
   have : HasInvertibleExponent Λ B' := .of_hom u
@@ -485,7 +499,7 @@ Existence: twist any comparison of clause (2) by the automorphism of `𝒞(g, s)
 failure to restrict to `θ`. Uniqueness: `F` is invertible, and a comparison between an
 invertible complex on `𝔸¹_B` and a pullback from `B` is determined at `t = 1`
 (`sk-prop-a1-inv`). -/
-theorem existsUnique_familyObject_iso
+theorem existsUnique_familyObject_iso [QuasiCompact D.proj]
     (θ : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
       (D.familyObject Λ) ≅ sectionInvariant Λ g s) :
     ∃! κ : D.familyObject Λ ≅
@@ -612,10 +626,14 @@ theorem nonempty_iso_sectionInvariant_normalCone [HasTateTwist.IsNormalized Λ] 
     (N : Scheme.Hom.NormalConeData d s) [HasCompactification N.proj]
     (D : Scheme.Hom.DeformationToNormalConeData d g s N) {k : Type u} [Field k]
     (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
-    [HasInvertibleExponent Λ B] :
+    [HasInvertibleExponent Λ B] [QuasiCompact D.proj] :
     Nonempty (sectionInvariant Λ g s ≅ sectionInvariant Λ N.proj N.zeroSection) := by
   have := D.hasInvertibleExponent_scheme Λ
   obtain ⟨κ⟩ := D.nonempty_iso_familyObject_leftDerivedUpperStar Λ aB
+  have : QuasiSeparatedSpace B := quasiSeparatedSpace_of_quasiSeparated aB
+  have : QuasiSeparatedSpace 𝔸(ULift.{u} (Fin 1); B) :=
+    quasiSeparatedSpace_of_quasiSeparated (𝔸(ULift.{u} (Fin 1); B) ↘ B)
+  have : QuasiCompact N.proj := MorphismProperty.of_isPullback D.isPullback_zeroFibre inferInstance
   obtain ⟨e₀⟩ := nonempty_iso_leftDerivedUpperStar_sectionInvariant Λ (d := d) D.proj
     D.isPullback_zeroFibre D.sect N.zeroSection D.comp_zeroFibre
   exact ⟨((leftDerivedUpperStarCompSectionIso _ _ _
@@ -639,7 +657,7 @@ theorem exists_iso_sectionInvariant_normalCone [HasTateTwist.IsNormalized Λ] (d
     (N : Scheme.Hom.NormalConeData d s) [HasCompactification N.proj]
     (D : Scheme.Hom.DeformationToNormalConeData d g s N) {k : Type u} [Field k]
     (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
-    [HasInvertibleExponent Λ B]
+    [HasInvertibleExponent Λ B] [QuasiCompact D.proj]
     (θ₁ : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
       (D.familyObject Λ) ≅ sectionInvariant Λ g s)
     (θ₀ : (L((AffineSpace.zeroSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
@@ -724,7 +742,7 @@ theorem existsUnique_iso_sectionInvariant_normalCone [HasTateTwist.IsNormalized 
     (N : Scheme.Hom.NormalConeData d s) [HasCompactification N.proj]
     (D : Scheme.Hom.DeformationToNormalConeData d g s N) {k : Type u} [Field k]
     (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
-    [HasInvertibleExponent Λ B]
+    [HasInvertibleExponent Λ B] [QuasiCompact D.proj]
     (θ₁ : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
       (D.familyObject Λ) ≅ sectionInvariant Λ g s)
     (θ₀ : (L((AffineSpace.zeroSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
@@ -773,7 +791,7 @@ theorem leftDerivedUpperStar_mapIso_iso_sectionInvariant_normalCone
     (N : Scheme.Hom.NormalConeData d s) [HasCompactification N.proj]
     (D : Scheme.Hom.DeformationToNormalConeData d g s N) {k : Type u} [Field k]
     (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
-    [HasInvertibleExponent Λ B]
+    [HasInvertibleExponent Λ B] [QuasiCompact D.proj]
     (θ₁ : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
       (D.familyObject Λ) ≅ sectionInvariant Λ g s)
     (θ₀ : (L((AffineSpace.zeroSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj

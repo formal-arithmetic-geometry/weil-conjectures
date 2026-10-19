@@ -127,7 +127,10 @@ instance : ObjectProperty.IsClosedUnderIsomorphisms
   of_iso {K K'} e h := by
     refine ⟨⟨fun a ha ↦ (h.1.1 a ha).of_iso ((homologySheaf a).mapIso e).symm, ?_⟩,
       ⟨fun a ha ↦ (h.2.1 a ha).of_iso ((homologySheaf a).mapIso e).symm,
-        fun G i _ hG ↦ h.2.2 G (i ≫ (homologySheaf (-1 : ℤ)).map e.inv) inferInstance hG⟩⟩
+        fun G i _ hG ↦ h.2.2 G (i ≫ (homologySheaf (-1 : ℤ)).map e.inv)
+          (have : Mono ((homologySheaf (-1 : ℤ)).map e.inv) :=
+            @IsIso.mono_of_iso _ _ _ _ _ (Functor.map_isIso _ _)
+          mono_comp _ _) hG⟩⟩
     rw [← WeilSheaf.support_congr ((homologySheaf (0 : ℤ)).mapIso e)]
     exact h.1.2
 

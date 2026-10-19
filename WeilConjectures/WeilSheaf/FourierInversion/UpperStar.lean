@@ -6,6 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.FourierInversion.Defs
+public import WeilConjectures.WeilSheaf.UpperStarId
+public import WeilConjectures.WeilSheaf.FourierInversion.TensorLisse
+public import WeilConjectures.WeilSheaf.IhomLisse.UpperStarDual
 
 /-!
 # Fourier inversion: pullback of Weil complexes
@@ -31,13 +34,13 @@ theorem WeilComplex.nonempty_iso_upperStar_comp {X Y Z : Scheme.{u}}
     [f.IsOver (Spec (CommRingCat.of k₀))] [g.IsOver (Spec (CommRingCat.of k₀))] :
     Nonempty (WeilComplex.upperStar (k₀ := k₀) (l := l) (f ≫ g) ≅
       WeilComplex.upperStar g ⋙ WeilComplex.upperStar f) :=
-  sorry
+  ⟨WeilComplex.upperStarCompIso f g⟩
 
 /-- Pullback of Weil complexes along the identity is the identity. -/
 theorem WeilComplex.nonempty_iso_upperStar_id {X : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] :
     Nonempty (WeilComplex.upperStar (k₀ := k₀) (l := l) (𝟙 X) ≅ 𝟭 _) :=
-  sorry
+  ⟨WeilComplex.upperStarIdIso X⟩
 
 
 /-- Pullback commutes with the tensor product with a lisse Weil sheaf:
@@ -49,8 +52,30 @@ theorem WeilComplex.nonempty_iso_tensorLisse_comp_upperStar {X Y : Scheme.{u}}
     [φ.IsOver (Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l Y) (hG : G.IsLisse) :
     Nonempty (WeilComplex.tensorLisse G hG ⋙ WeilComplex.upperStar φ ≅
       WeilComplex.upperStar φ ⋙ WeilComplex.tensorLisse ((WeilSheaf.upperStar φ).obj G)
-        (ProEtale.IsAdicLisseSheaf.upperStar _ hG)) :=
-  sorry
+        (ProEtale.IsAdicLisseSheaf.upperStar _ hG)) := by
+  have := ProEtaleWeilSheaf.preservesFiniteColimits_ihomFunctor (G.dual hG).obj hG.dual
+  have := ProEtaleWeilSheaf.preservesFiniteColimits_ihomFunctor
+    (((WeilSheaf.upperStar φ).obj G).dual (ProEtale.IsAdicLisseSheaf.upperStar _ hG)).obj
+    (WeilSheaf.IsLisse.dual (F := (WeilSheaf.upperStar φ).obj G)
+      (ProEtale.IsAdicLisseSheaf.upperStar _ hG))
+  exact ⟨((WeilComplex.objectProperty k₀ l X).fullyFaithfulι.whiskeringRight _).preimageIso
+    (Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _) ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (WeilComplex.ihomLisseCompιIso _ hG.dual) _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _
+        (Functor.isoWhiskerRight (Functor.rightDerivedFunctorIsoMapDerivedCategory _) _ ≪≫
+          (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+          Functor.mapDerivedCategoryNatIso
+            (ProEtaleWeilSheaf.ihomFunctorDualCompUpperStarIso φ G hG) ≪≫
+          Functor.mapDerivedCategoryCompIso _ _ ≪≫
+          Functor.isoWhiskerLeft _ (Functor.rightDerivedFunctorIsoMapDerivedCategory _).symm) ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _).symm _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (WeilComplex.ihomLisseCompιIso _ _).symm ≪≫
+      (Functor.associator _ _ _).symm)⟩
 
 
 end AlgebraicGeometry

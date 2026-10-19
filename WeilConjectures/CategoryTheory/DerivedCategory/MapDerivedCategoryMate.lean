@@ -558,3 +558,342 @@ end Triangle
 end Adjunction
 
 end CategoryTheory
+
+section
+
+/-!
+# Mates and the functors induced on derived categories
+
+Let `adj₁ : f₁ ⊣ g₁` and `adj₂ : f₂ ⊣ g₂` be adjunctions of exact functors, and let
+`β : u ⋙ f₂ ≅ f₁ ⋙ v` be the mate of `τ : g₁ ⋙ u ≅ v ⋙ g₂` for exact `u` and `v`. Then the
+isomorphism induced by `β` on derived categories is the mate of the one induced by `τ`, for the
+levelwise derived adjunctions `D(f₁) ⊣ D(g₁)` and `D(f₂) ⊣ D(g₂)`
+(`CategoryTheory.Adjunction.mapDerivedCategoryAdjunction_mate`).
+-/
+
+@[expose] public section
+
+open CategoryTheory Limits MonoidalCategory Abelian
+
+namespace CategoryTheory
+
+namespace Functor
+
+section NatIso
+
+variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D] [HasDerivedCategory C]
+  [HasDerivedCategory D] {F G H : C ⥤ D} [F.Additive] [PreservesFiniteLimits F]
+  [PreservesFiniteColimits F] [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+  [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+
+
+
+
+
+
+
+end NatIso
+
+section DerivedCoherence
+
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+section Factors
+
+variable {C D E : Type*} [Category C] [Category D] [Category E]
+  [Abelian C] [Abelian D] [Abelian E]
+  (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
+
+/-- The composition isomorphism `Functor.mapHomologicalComplexCompIso` of the identity
+isomorphism of `F ⋙ G` is the identity. -/
+lemma mapHomologicalComplexCompIso_refl_hom_app {ι : Type*} (c : ComplexShape ι)
+    (K : HomologicalComplex C c) :
+    (mapHomologicalComplexCompIso (Iso.refl (F ⋙ G)) c).hom.app K = 𝟙 _ := by
+  ext n
+  simp
+  rfl
+
+variable [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+  [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+  [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+
+/-- The form of `Functor.mapDerivedCategoryCompIso_fac` in which the comparison isomorphism
+`Functor.mapHomologicalComplexCompIso`, an identity, has been cancelled. -/
+@[reassoc]
+lemma mapDerivedCategoryCompIso_hom_app_factors (K : CochainComplex C ℤ) :
+    (mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj K) ≫
+      G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
+      G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K) =
+    (F ⋙ G).mapDerivedCategoryFactors.hom.app K := by
+  rw [← mapDerivedCategoryCompIso_fac, mapHomologicalComplexCompIso_refl_hom_app]
+  simp
+
+/-- The form of `Functor.mapDerivedCategoryCompIso_fach` in which the comparison isomorphism
+`Functor.mapHomotopyCategoryCompIso`, an identity, has been cancelled. -/
+@[reassoc]
+lemma mapDerivedCategoryCompIso_hom_app_factorsh
+    (K : HomotopyCategory C (ComplexShape.up ℤ)) :
+    (mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Qh.obj K) ≫
+      G.mapDerivedCategory.map (F.mapDerivedCategoryFactorsh.hom.app K) ≫
+      G.mapDerivedCategoryFactorsh.hom.app ((F.mapHomotopyCategory (ComplexShape.up ℤ)).obj K) =
+    (F ⋙ G).mapDerivedCategoryFactorsh.hom.app K := by
+  rw [← mapDerivedCategoryCompIso_fach, mapHomotopyCategoryCompIso_refl_hom_app (F := F) (G := G)]
+  simp
+
+end Factors
+
+section Coherence
+
+variable {C D E E' : Type*} [Category C] [Category D] [Category E] [Category E']
+  [Abelian C] [Abelian D] [Abelian E] [Abelian E']
+  [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E] [HasDerivedCategory E']
+
+variable (C) in
+/-- On the image of an object of the homotopy category, the isomorphism
+`Functor.mapDerivedCategoryIdIso` is the factorization `Functor.mapDerivedCategoryFactorsh` of
+the identity functor. -/
+lemma mapDerivedCategoryIdIso_hom_app_Qh_obj (K : HomotopyCategory C (ComplexShape.up ℤ)) :
+    (mapDerivedCategoryIdIso C).hom.app (DerivedCategory.Qh.obj K) =
+      (𝟭 C).mapDerivedCategoryFactorsh.hom.app K := by
+  have h := congr_app (congr_arg Iso.hom (mapDerivedCategoryIdIso_factorsh C)) K
+  simp only [Iso.trans_hom, NatTrans.comp_app, isoWhiskerLeft_hom, Functor.whiskerLeft_app,
+    Functor.rightUnitor_hom_app, isoWhiskerRight_hom, Functor.whiskerRight_app,
+    Functor.leftUnitor_hom_app] at h
+  have hq : DerivedCategory.Qh.map ((mapHomotopyCategoryIdIso C (ComplexShape.up ℤ)).hom.app K) =
+      𝟙 (((𝟭 C).mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh).obj K) := by
+    rw [mapHomotopyCategoryIdIso_hom_app_eq_id]
+    exact DerivedCategory.Qh.map_id _
+  refine (Category.comp_id _).symm.trans (h.trans ?_)
+  rw [hq]
+  -- the identities are those of objects which agree only up to unfolding `𝟭 C`
+  erw [Category.id_comp, Category.comp_id]
+
+variable (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+
+/-- The left unit law for `Functor.mapDerivedCategoryCompIso`. -/
+lemma mapDerivedCategoryCompIso_id_comp :
+    (mapDerivedCategoryCompIso (𝟭 C) F).hom ≫
+        Functor.whiskerRight (mapDerivedCategoryIdIso C).hom F.mapDerivedCategory =
+      𝟙 F.mapDerivedCategory := by
+  refine Localization.natTrans_ext DerivedCategory.Qh
+    (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)) (fun K => ?_)
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, NatTrans.id_app]
+  rw [← cancel_mono (F.mapDerivedCategoryFactorsh.hom.app K),
+    mapDerivedCategoryIdIso_hom_app_Qh_obj, Category.assoc]
+  exact (mapDerivedCategoryCompIso_hom_app_factorsh (𝟭 C) F K).trans
+    (Category.id_comp _).symm
+
+/-- The right unit law for `Functor.mapDerivedCategoryCompIso`. -/
+lemma mapDerivedCategoryCompIso_comp_id :
+    (mapDerivedCategoryCompIso F (𝟭 D)).hom ≫
+        Functor.whiskerLeft F.mapDerivedCategory (mapDerivedCategoryIdIso D).hom =
+      𝟙 F.mapDerivedCategory := by
+  refine Localization.natTrans_ext DerivedCategory.Qh
+    (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)) (fun K => ?_)
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, NatTrans.id_app]
+  have hnat : (mapDerivedCategoryIdIso D).hom.app
+        (F.mapDerivedCategory.obj (DerivedCategory.Qh.obj K)) ≫
+      F.mapDerivedCategoryFactorsh.hom.app K =
+      (𝟭 D).mapDerivedCategory.map (F.mapDerivedCategoryFactorsh.hom.app K) ≫
+        (mapDerivedCategoryIdIso D).hom.app
+          (DerivedCategory.Qh.obj ((F.mapHomotopyCategory (ComplexShape.up ℤ)).obj K)) :=
+    ((mapDerivedCategoryIdIso D).hom.naturality _).symm
+  rw [← cancel_mono (F.mapDerivedCategoryFactorsh.hom.app K), Category.assoc, hnat,
+    mapDerivedCategoryIdIso_hom_app_Qh_obj]
+  exact (mapDerivedCategoryCompIso_hom_app_factorsh F (𝟭 D) K).trans
+    (Category.id_comp _).symm
+
+variable (G : D ⥤ E) (H : E ⥤ E') [G.Additive] [H.Additive]
+  [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+  [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+
+/-- The associativity law for `Functor.mapDerivedCategoryCompIso`: the two ways of comparing
+`D(F ⋙ G ⋙ H)` with `D(F) ⋙ D(G) ⋙ D(H)` agree. -/
+lemma mapDerivedCategoryCompIso_assoc :
+    (mapDerivedCategoryCompIso F (G ⋙ H)).hom ≫
+        Functor.whiskerLeft F.mapDerivedCategory (mapDerivedCategoryCompIso G H).hom =
+      (mapDerivedCategoryCompIso (F ⋙ G) H).hom ≫
+        Functor.whiskerRight (mapDerivedCategoryCompIso F G).hom H.mapDerivedCategory := by
+  refine Localization.natTrans_ext DerivedCategory.Q
+    (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) (fun K => ?_)
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
+  have hnat : (mapDerivedCategoryCompIso G H).hom.app
+        (F.mapDerivedCategory.obj (DerivedCategory.Q.obj K)) ≫
+      H.mapDerivedCategory.map (G.mapDerivedCategory.map
+        (F.mapDerivedCategoryFactors.hom.app K)) =
+      (G ⋙ H).mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
+        (mapDerivedCategoryCompIso G H).hom.app
+          (DerivedCategory.Q.obj ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K)) :=
+    ((mapDerivedCategoryCompIso G H).hom.naturality _).symm
+  rw [← cancel_mono (H.mapDerivedCategory.map (G.mapDerivedCategory.map
+      (F.mapDerivedCategoryFactors.hom.app K)) ≫
+    H.mapDerivedCategory.map (G.mapDerivedCategoryFactors.hom.app
+      ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K)) ≫
+    H.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (ComplexShape.up ℤ)).obj
+      ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K)))]
+  trans (F ⋙ G ⋙ H).mapDerivedCategoryFactors.hom.app K
+  · rw [Category.assoc, reassoc_of% hnat,
+      mapDerivedCategoryCompIso_hom_app_factors G H
+        ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K)]
+    exact mapDerivedCategoryCompIso_hom_app_factors F (G ⋙ H) K
+  · symm
+    rw [Category.assoc]
+    simp only [← Functor.map_comp_assoc]
+    rw [mapDerivedCategoryCompIso_hom_app_factors F G K]
+    exact mapDerivedCategoryCompIso_hom_app_factors (F ⋙ G) H K
+
+end Coherence
+
+section Whisker
+
+variable {C D E : Type*} [Category C] [Category D] [Category E]
+  [Abelian C] [Abelian D] [Abelian E]
+  [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+
+/-- The composition isomorphism `Functor.mapDerivedCategoryCompIso` is natural in the first
+functor. -/
+lemma mapDerivedCategoryNatIso_isoWhiskerRight {F F' : C ⥤ D} [F.Additive] [F'.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits F'] [PreservesFiniteColimits F'] (e : F ≅ F') (G : D ⥤ E)
+    [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
+    (mapDerivedCategoryNatIso (isoWhiskerRight e G)).hom ≫ (mapDerivedCategoryCompIso F' G).hom =
+      (mapDerivedCategoryCompIso F G).hom ≫
+        Functor.whiskerRight (mapDerivedCategoryNatIso e).hom G.mapDerivedCategory := by
+  refine Localization.natTrans_ext DerivedCategory.Q
+    (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) (fun K => ?_)
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app]
+  rw [← cancel_mono (G.mapDerivedCategory.map (F'.mapDerivedCategoryFactors.hom.app K) ≫
+      G.mapDerivedCategoryFactors.hom.app ((F'.mapHomologicalComplex (ComplexShape.up ℤ)).obj K)),
+    Category.assoc, mapDerivedCategoryCompIso_hom_app_factors, mapDerivedCategoryNatIso_fac,
+    Category.assoc, ← Functor.map_comp_assoc, mapDerivedCategoryNatIso_fac, Functor.map_comp_assoc,
+    mapDerivedCategoryFactors_hom_naturality, mapDerivedCategoryCompIso_hom_app_factors_assoc]
+  congr 2
+
+/-- The composition isomorphism `Functor.mapDerivedCategoryCompIso` is natural in the second
+functor. -/
+lemma mapDerivedCategoryNatIso_isoWhiskerLeft (F : C ⥤ D) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F] {G G' : D ⥤ E} [G.Additive]
+    [G'.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits G'] [PreservesFiniteColimits G'] (e : G ≅ G') :
+    (mapDerivedCategoryNatIso (isoWhiskerLeft F e)).hom ≫ (mapDerivedCategoryCompIso F G').hom =
+      (mapDerivedCategoryCompIso F G).hom ≫
+        Functor.whiskerLeft F.mapDerivedCategory (mapDerivedCategoryNatIso e).hom := by
+  refine Localization.natTrans_ext DerivedCategory.Q
+    (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) (fun K => ?_)
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app]
+  rw [← cancel_mono (G'.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
+      G'.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K)),
+    Category.assoc, mapDerivedCategoryCompIso_hom_app_factors, mapDerivedCategoryNatIso_fac,
+    Category.assoc, ← reassoc_of% ((mapDerivedCategoryNatIso e).hom.naturality
+      (F.mapDerivedCategoryFactors.hom.app K)), mapDerivedCategoryNatIso_fac,
+    mapDerivedCategoryCompIso_hom_app_factors_assoc]
+  congr 2
+
+end Whisker
+
+end DerivedCoherence
+
+variable {A B B' E : Type*} [Category A] [Category B] [Category B'] [Category E] [Abelian A]
+  [Abelian B] [Abelian B'] [Abelian E] [HasDerivedCategory A] [HasDerivedCategory B]
+  [HasDerivedCategory B'] [HasDerivedCategory E]
+  {F₁ : A ⥤ B} {F₂ : B ⥤ E} {G₁ : A ⥤ B'} {G₂ : B' ⥤ E}
+  [F₁.Additive] [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
+  [F₂.Additive] [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
+  [G₁.Additive] [PreservesFiniteLimits G₁] [PreservesFiniteColimits G₁]
+  [G₂.Additive] [PreservesFiniteLimits G₂] [PreservesFiniteColimits G₂]
+
+
+
+
+
+
+section Triangle
+
+variable {A B E : Type*} [Category A] [Category B] [Category E] [Abelian A] [Abelian B]
+  [Abelian E] [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory E]
+  {F₁ : A ⥤ B} {G₁ : B ⥤ E} {F₂ : A ⥤ E}
+  [F₁.Additive] [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
+  [G₁.Additive] [PreservesFiniteLimits G₁] [PreservesFiniteColimits G₁]
+  [F₂.Additive] [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
+
+
+
+
+
+end Triangle
+end Functor
+
+namespace Adjunction
+
+variable {C₁ D₁ C₂ D₂ : Type*} [Category C₁] [Category D₁] [Category C₂] [Category D₂]
+  [Abelian C₁] [Abelian D₁] [Abelian C₂] [Abelian D₂]
+  [MonoidalCategory C₁] [MonoidalPreadditive C₁] [HasCountableCoproducts C₁]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C₁), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C₁), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C₁), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  [HasColimitsOfShape ℤ C₁] [HasExactColimitsOfShape ℤ C₁]
+  [∀ (X : C₁), PreservesColimitsOfShape ℤ ((curriedTensor C₁).obj X)]
+  [∀ (X : C₁), PreservesColimitsOfShape ℤ ((curriedTensor C₁).flip.obj X)]
+  [Abelian.HasFunctorialFlatResolution C₁]
+  [MonoidalCategory C₂] [MonoidalPreadditive C₂] [HasCountableCoproducts C₂]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C₂), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C₂), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C₂), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  [HasColimitsOfShape ℤ C₂] [HasExactColimitsOfShape ℤ C₂]
+  [∀ (X : C₂), PreservesColimitsOfShape ℤ ((curriedTensor C₂).obj X)]
+  [∀ (X : C₂), PreservesColimitsOfShape ℤ ((curriedTensor C₂).flip.obj X)]
+  [Abelian.HasFunctorialFlatResolution C₂]
+  [HasDerivedCategory C₁] [HasDerivedCategory D₁] [HasDerivedCategory C₂]
+  [HasDerivedCategory D₂] [HasKInjectiveResolutions D₁] [HasKInjectiveResolutions D₂]
+  {f₁ : C₁ ⥤ D₁} {g₁ : D₁ ⥤ C₁} (adj₁ : f₁ ⊣ g₁) {f₂ : C₂ ⥤ D₂} {g₂ : D₂ ⥤ C₂}
+  (adj₂ : f₂ ⊣ g₂) {u : C₁ ⥤ C₂} {v : D₁ ⥤ D₂}
+  [f₁.Additive] [PreservesFiniteLimits f₁] [PreservesFiniteColimits f₁]
+  [g₁.Additive] [PreservesFiniteLimits g₁] [PreservesFiniteColimits g₁]
+  [f₂.Additive] [PreservesFiniteLimits f₂] [PreservesFiniteColimits f₂]
+  [g₂.Additive] [PreservesFiniteLimits g₂] [PreservesFiniteColimits g₂]
+  [u.Additive] [PreservesFiniteLimits u] [PreservesFiniteColimits u]
+  [v.Additive] [PreservesFiniteLimits v] [PreservesFiniteColimits v]
+  (τ : g₁ ⋙ u ≅ v ⋙ g₂) (β : u ⋙ f₂ ≅ f₁ ⋙ v)
+
+
+
+
+
+
+end Adjunction
+
+namespace Adjunction
+
+section Triangle
+
+variable {C D₁ D₂ : Type*} [Category C] [Category D₁] [Category D₂]
+  [Abelian C] [Abelian D₁] [Abelian D₂]
+  [MonoidalCategory C] [MonoidalPreadditive C] [HasCountableCoproducts C]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  [HasColimitsOfShape ℤ C] [HasExactColimitsOfShape ℤ C]
+  [∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).obj X)]
+  [∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).flip.obj X)]
+  [Abelian.HasFunctorialFlatResolution C]
+  [HasDerivedCategory C] [HasDerivedCategory D₁] [HasDerivedCategory D₂]
+  [HasKInjectiveResolutions D₁] [HasKInjectiveResolutions D₂]
+  {f₁ : C ⥤ D₁} {g₁ : D₁ ⥤ C} (adj₁ : f₁ ⊣ g₁) {f₂ : C ⥤ D₂} {g₂ : D₂ ⥤ C}
+  (adj₂ : f₂ ⊣ g₂) {v : D₁ ⥤ D₂}
+  [f₁.Additive] [PreservesFiniteLimits f₁] [PreservesFiniteColimits f₁]
+  [g₁.Additive] [PreservesFiniteLimits g₁] [PreservesFiniteColimits g₁]
+  [f₂.Additive] [PreservesFiniteLimits f₂] [PreservesFiniteColimits f₂]
+  [g₂.Additive] [PreservesFiniteLimits g₂] [PreservesFiniteColimits g₂]
+  [v.Additive] [PreservesFiniteLimits v] [PreservesFiniteColimits v]
+  (τ : g₁ ≅ v ⋙ g₂) (β : f₂ ≅ f₁ ⋙ v)
+
+
+
+
+
+end Triangle
+end Adjunction
+
+end CategoryTheory
+
+end

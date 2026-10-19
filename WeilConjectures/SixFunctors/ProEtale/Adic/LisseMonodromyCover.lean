@@ -545,25 +545,26 @@ lemma monoIso_globalSections {y z : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (τ 
     ← Category.assoc, globalSectionsToUpperStar_app_comp_resOver_app, ptRes_app,
     globalSectionsToUpperStar_app_comp_resOver_app]
 
-/-- The transport preserves the evaluation pairing: all maps involved are monoidal. -/
+/-- The transport preserves the evaluation pairing `[G, H]_y × G_y → H_y`: all maps involved are
+monoidal. -/
 lemma monoIso_evaluationPairing {y z : Spec (.of (AlgebraicClosure Ω)) ⟶ Y}
-    (τ : fiber y ≅ fiber z) (G : LisseSheaf l Y)
-    (hG : IsAdicLisseSheaf ((AdicSheaf.ihom G.obj).obj (AdicSheaf.unit l Y)))
-    (d : (stalkFunctor l y).obj ((AdicSheaf.ihom G.obj).obj (AdicSheaf.unit l Y)).X)
+    (τ : fiber y ≅ fiber z) (G H : LisseSheaf l Y)
+    (hGH : IsAdicLisseSheaf ((AdicSheaf.ihom G.obj).obj H.obj))
+    (d : (stalkFunctor l y).obj ((AdicSheaf.ihom G.obj).obj H.obj).X)
     (v : (stalkFunctor l y).obj G.obj.X) :
-    Mod.evaluationPairing (stalkFunctor l z) G.obj (AdicSheaf.unit l Y)
-        (((monoIso hU τ).hom.app ⟨_, hG⟩).hom d) (((monoIso hU τ).hom.app G).hom v) =
-      ((monoIso hU τ).hom.app (LisseSheaf.unit l)).hom
-        (Mod.evaluationPairing (stalkFunctor l y) G.obj (AdicSheaf.unit l Y) d v) := by
-  have hd := isIso_ptRes_app hU y ⟨_, hG⟩
+    Mod.evaluationPairing (stalkFunctor l z) G.obj H.obj
+        (((monoIso hU τ).hom.app ⟨_, hGH⟩).hom d) (((monoIso hU τ).hom.app G).hom v) =
+      ((monoIso hU τ).hom.app H).hom
+        (Mod.evaluationPairing (stalkFunctor l y) G.obj H.obj d v) := by
+  have hd := isIso_ptRes_app hU y ⟨_, hGH⟩
   have hv := isIso_ptRes_app hU y G
   obtain ⟨d, rfl⟩ : ∃ d₀, ((U.ptRes l y).app _).hom d₀ = d :=
     ⟨(inv ((U.ptRes l y).app _)).hom d, by rw [← ModuleCat.comp_apply, IsIso.inv_hom_id]; rfl⟩
   obtain ⟨v, rfl⟩ : ∃ v₀, ((U.ptRes l y).app _).hom v₀ = v :=
     ⟨(inv ((U.ptRes l y).app _)).hom v, by rw [← ModuleCat.comp_apply, IsIso.inv_hom_id]; rfl⟩
-  rw [monoIso_hom_app_ptRes_apply hU τ ⟨_, hG⟩, monoIso_hom_app_ptRes_apply hU τ G,
+  rw [monoIso_hom_app_ptRes_apply hU τ ⟨_, hGH⟩, monoIso_hom_app_ptRes_apply hU τ G,
     evaluationPairing_natTrans, evaluationPairing_natTrans, evaluationPairing_natTrans]
-  exact (monoIso_hom_app_ptRes_apply hU τ (LisseSheaf.unit l) _).symm
+  exact (monoIso_hom_app_ptRes_apply hU τ H _).symm
 
 /-- **The monodromy of lisse sheaves from universal covers** on which lisse sheaves are free of
 finite rank: the transport `G_y ≅ Γ(Ỹ_y, p_y^* G) ≅ Γ(Ỹ_z, p_z^* G) ≅ G_z` of stalks along

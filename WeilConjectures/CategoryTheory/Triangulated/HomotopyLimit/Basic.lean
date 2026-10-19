@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Functor.OfSequence
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Pretriangulated
 
@@ -172,5 +173,34 @@ lemma IsHomotopyLimit.hom_ext_zero {F : ℕᵒᵖ ⥤ C} {c : Cone F} (hc : IsHo
   have : g = 0 := Fan.IsLimit.hom_ext hP _ _ fun n ↦ by simp [h₁ n (g ≫ P.proj n)]
   rw [this, zero_comp] at hg
   exact (shiftFunctor C (1 : ℤ)).map_eq_zero_iff.mp hg
+
+/-- Homotopy limits of towers exist as soon as a product `∏ₙ Fₙ` does: complete
+`1 - t : ∏ₙ Fₙ ⟶ ∏ₙ Fₙ` to a distinguished triangle `L ⟶ ∏ₙ Fₙ ⟶ ∏ₙ Fₙ ⟶ L⟦1⟧`; the first map
+is fixed by `t`, so its components form a cone over `F`, which is a homotopy limit cone by
+construction. -/
+lemma exists_isHomotopyLimit_of_isLimit {F : ℕᵒᵖ ⥤ C} {P : Fan fun n : ℕ ↦ F.obj (op n)}
+    (hP : IsLimit P) : ∃ c : Cone F, IsHomotopyLimit c := by
+  obtain ⟨L, f, δ, hT⟩ := distinguished_cocone_triangle₁ (𝟙 P.pt - towerShift hP)
+  have hf : f ≫ towerShift hP = f := by
+    have h0 : f ≫ (𝟙 P.pt - towerShift hP) = 0 := comp_distTriang_mor_zero₁₂ _ hT
+    rw [Preadditive.comp_sub, Category.comp_id, sub_eq_zero] at h0
+    exact h0.symm
+  let c : Cone F :=
+    { pt := L
+      π := NatTrans.ofOpSequence (fun n ↦ f ≫ P.proj n) (fun n ↦ by
+        dsimp
+        rw [Category.id_comp, Category.assoc, ← towerShift_proj hP n, ← Category.assoc, hf]) }
+  refine ⟨c, P, hP, δ, ?_⟩
+  have hlift : Fan.IsLimit.lift hP (fun n ↦ c.π.app (op n)) = f :=
+    Fan.IsLimit.hom_ext hP _ _ fun n ↦ by
+      rw [Fan.IsLimit.fac]
+      simp [c, NatTrans.ofOpSequence_app]
+  rw [hlift]
+  exact hT
+
+/-- Homotopy limits of towers exist in a pretriangulated category with countable products. -/
+lemma exists_isHomotopyLimit (F : ℕᵒᵖ ⥤ C) [HasProduct fun n : ℕ ↦ F.obj (op n)] :
+    ∃ c : Cone F, IsHomotopyLimit c :=
+  exists_isHomotopyLimit_of_isLimit (productIsProduct fun n : ℕ ↦ F.obj (op n))
 
 end CategoryTheory.Pretriangulated

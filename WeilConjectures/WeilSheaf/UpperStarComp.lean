@@ -26,7 +26,7 @@ composable morphisms paste to that of the composite
 - `AlgebraicGeometry.ProEtaleWeilSheaf.upperStarCompIso`: `(φ ≫ ψ)^* ≅ ψ^* ⋙ φ^*`.
 - `AlgebraicGeometry.ProEtaleWeilSheaf.upperStarCongrIso`: `φ^* ≅ φ'^*` for `φ = φ'`.
 - `AlgebraicGeometry.WeilSheaf.upperStarCompIso` and
-  `AlgebraicGeometry.WeilSheaf.upperStarCongrIso`: the same for Weil sheaves.
+  `AlgebraicGeometry.WeilSheaf.upperStarCongr`: the same for Weil sheaves.
 -/
 
 @[expose] public section
