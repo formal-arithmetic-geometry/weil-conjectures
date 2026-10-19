@@ -17068,3 +17068,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:00 L: returned deliver/NB/lem-trf-restricted-quotient-complete (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-restricted-quotient-complete: lem-trf-restrict)
 - 04:00 L: returned deliver/Q54/lem-per-pure-principal-divisor-kummer-residue (reviewer RETURN: Route pivot of 2026-10-19 (coord/repair-notes/lem-per-artin-gabber-affine-curve.json: the finite-coefficient plan with o)
 - 04:00 L: returned deliver/Q144/lem-per-rig-etale-compatible-model-tower (reviewer RETURN: Route pivot: the item is itself dropped. In side coord/route-pivot-dropped.txt, section '2026-10-19 artin-gabber' (the h)
+- 04:00 L: returned deliver/Q89/lem-per-gabber-graded-model-approximation (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-per-gabber-graded-model-approximation: lem-per-gab)
