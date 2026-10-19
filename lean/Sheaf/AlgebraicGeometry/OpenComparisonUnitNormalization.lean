@@ -11,14 +11,7 @@ public import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CoherenceLegacy
 public import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
 public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
-import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroAdjunction
-import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
-import Sheaf.AlgebraicGeometry.ProEtaleOpenUnitEvaluation
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 
 /-!
 # Unit normalization of the open etale/pro-etale comparison
@@ -42,7 +35,24 @@ set_option autoImplicit false
 
 universe u
 
-open CategoryTheory
+open CategoryTheory Opposite
+
+namespace CategoryTheory
+
+private lemma homEquiv_conjugate {C D : Type*} [Category* C] [Category* D]
+    {L₁ L₂ : C ⥤ D} {R₁ R₂ : D ⥤ C}
+    (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂) (e : R₁ ≅ R₂)
+    (F : C) (M : D) (h : L₁.obj F ⟶ M) :
+    (b.homEquiv F M).symm (a.homEquiv F M h ≫ e.hom.app M) =
+      ((conjugateIsoEquiv a b).symm e).hom.app F ≫ h := by
+  apply (b.homEquiv F M).injective
+  rw [Equiv.apply_symm_apply]
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp, Category.assoc]
+  change a.unit.app F ≫ R₁.map h ≫ e.hom.app M =
+    b.unit.app F ≫ R₂.map (((conjugateEquiv a b).symm e.hom).app F) ≫ R₂.map h
+  rw [← reassoc_of% (unit_conjugateEquiv_symm a b e.hom F), e.hom.naturality]
+
+end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -85,36 +95,105 @@ noncomputable def openComparisonHomEquiv (A : Type (u + 1)) [CommRing A]
         (((comparisonAdjunction (ModuleCat.{u + 1} A) U).homEquiv _ _).symm.trans
           ((openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} A) j).homEquiv _ _).symm))
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
+private lemma openComparisonRestrictionIso_conjugate
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    conjugateEquiv
+      ((comparisonAdjunction (ModuleCat.{u + 1} A) X).comp
+        (openImmersionRestrictionLowerStarAdjunction (ModuleCat.{u + 1} A) j))
+      ((Etale.openImmersionRestrictionLowerStarAdjunction (ModuleCat.{u + 1} A) j).comp
+        (comparisonAdjunction (ModuleCat.{u + 1} A) U))
+      (openComparisonRestrictionIso A j).hom =
+        (supportSiteComparisonCoefficientDirectImageIso (ModuleCat.{u + 1} A) j).hom := by
+  let B := ModuleCat.{u + 1} A
+  let r₀ := Etale.upperStarLowerStarAdjunction B j
+  let r := Etale.openImmersionRestrictionLowerStarAdjunction B j
+  let s₀ := upperStarLowerStarAdjunction B j
+  let s := openImmersionRestrictionLowerStarAdjunction B j
+  let cU := comparisonAdjunction B U
+  let cX := comparisonAdjunction B X
+  change conjugateEquiv (cX.comp s) (r.comp cU)
+    (Functor.whiskerRight (Etale.upperStarIsoOpenImmersionRestriction B j).inv _ ≫
+      (supportSiteComparisonCoefficientPullbackIso B j).hom ≫
+        Functor.whiskerLeft (comparisonUpperStar B X)
+          (upperStarIsoOpenImmersionRestriction B j).hom) = _
+  rw [← conjugateEquiv_comp (cX.comp s) (r₀.comp cU) (r.comp cU),
+    ← conjugateEquiv_comp (cX.comp s) (cX.comp s₀) (r₀.comp cU),
+    conjugateEquiv_whiskerLeft s s₀ cX
+      (upperStarIsoOpenImmersionRestriction B j).hom,
+    conjugateEquiv_whiskerRight r₀ r cU
+      (Etale.upperStarIsoOpenImmersionRestriction B j).inv]
+  have he : conjugateEquiv r₀ r
+      (Etale.upperStarIsoOpenImmersionRestriction B j).inv = 𝟙 _ :=
+    conjugateEquiv_leftAdjointUniq_inv _ _
+  have hp : conjugateEquiv s s₀
+      (upperStarIsoOpenImmersionRestriction B j).hom = 𝟙 _ :=
+    conjugateEquiv_leftAdjointUniq_hom _ _
+  rw [he, hp]
+  change (𝟙 _ ≫ (conjugateEquiv (cX.comp s₀) (r₀.comp cU))
+    (supportSiteComparisonCoefficientPullbackIso B j).hom) ≫ 𝟙 _ = _
+  rw [Category.id_comp, Category.comp_id]
+  exact congrArg Iso.inv
+    ((conjugateIsoEquiv (r₀.comp cU) (cX.comp s₀)).apply_symm_apply
+      (supportSiteComparisonCoefficientDirectImageIso B j).symm)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
+private lemma openComparisonRestriction_directImage_mate
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    (mateEquiv
+      (openImmersionRestrictionLowerStarAdjunction (ModuleCat.{u + 1} A) j)
+      (Etale.openImmersionRestrictionLowerStarAdjunction (ModuleCat.{u + 1} A) j)
+      (TwoSquare.mk _ _ _ _
+        (comparisonLowerStarOpenImmersionRestrictionIso (ModuleCat.{u + 1} A) j).hom)
+      ).natTrans =
+        (supportSiteComparisonCoefficientDirectImageIso (ModuleCat.{u + 1} A) j).hom := by
+  ext M : 2
+  apply Sheaf.hom_ext
+  refine NatTrans.ext (funext fun W ↦ ?_)
+  simp only [Functor.comp_obj, mateEquiv_apply, NatTrans.comp_app, Functor.id_obj,
+    Functor.rightUnitor_inv_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, Functor.whiskerRight_app, Functor.comp_map,
+    Functor.leftUnitor_hom_app, Category.comp_id, Category.id_comp,
+    ObjectProperty.FullSubcategory.comp_hom]
+  change M.obj.map _ ≫ (𝟙 _ ≫ (𝟙 _ ≫ M.obj.map _)) =
+    𝟙 _ ≫ M.obj.map _ ≫ 𝟙 _
+  simp only [Category.id_comp, Category.comp_id, ← Functor.map_comp]
+  congr 1
+  apply Quiver.Hom.unop_inj
+  apply MorphismProperty.Over.Hom.ext
+  apply Limits.pullback.hom_ext <;>
+    simp [MorphismProperty.Over.pullback, Scheme.toProEt,
+      supportSiteComparisonSiteBaseChangeIso]
+  rfl
+
 /-- The natural Hom chain sends `h` to `c_F⁻¹ ≫ h`, and the specified comparison `c`
 intertwines the two open units via the canonical restriction comparison `a`.
 Source: Stacks Project, Tag 09AF, common-right-adjoint proof
 (blueprint: lem-sf-open-comparison-unit-normalization).
 
-Proof plan:
-1. Etale restriction and pro-etale localization identify `r R_X` and `R_U s` on each
-   object and arrow, including scalar actions (lem-weil-pbc-etale-inverse-image-restriction,
-   lem-weil-proetale-weakly-etale-localization,
-   def-weil-pbc-site-comparison-morphism).
-2. Compose the comparison and open adjunctions. Their conjugate of this sectionwise
-   identity is the specified `c` (lem-weil-pbc-extension-by-zero-adjunction,
-   lem-weil-extension-by-zero-adjunction, def-weil-pbc-composite-adjunction,
-   lem-weil-pbc-conjugate-iso-unit-equation,
-   lem-cbc-proetale-extension-zero-comparison).
-3. The Hom chain sends `c` to the identity. Naturality in its target then sends an
-   arbitrary `h` to `c_F⁻¹ ≫ h`.
-4. The direct-image square is the identity on sections over the same fibre product.
-   The actual pro-etale inverse image is identified with restriction by the canonical
-   localization isomorphism; its unit restricts along the projection
-   (def-weil-pbc-direct-image, def-weil-proetale-inverse-image,
-   def-weil-pbc-inverse-image, lem-pur-proetale-open-unit-evaluation).
-5. Conjugate that square to obtain the specified pullback comparison `a`. The composite
-   unit formula, its conjugation equation and the restriction triangle identity give
-   `R_U(a_G) u_U = theta r(u_X)` (lem-weil-pbc-comparison-pullback).
-6. Expand the four Hom bijections on `h`, then use this equality and naturality of the
-   comparison unit: its open transpose is `C_U(eta^e_F) ≫ a_(eF) ≫ s(h)`.
-7. Set `h = c_F`. Its Hom image is the identity, whose open transpose is `eta^d`.
-   This proves the unit equation, naturally in `F`, also for the identity immersion,
-   empty open subscheme, zero sheaf and zero ring. -/
+Proof:
+1. The extension comparison is the conjugate of the sectionwise identity between
+   the composite right adjoints. The composite Hom equivalence therefore sends a
+   morphism to precomposition with the inverse comparison, by the conjugation unit
+   equation and naturality of the right-adjoint identification.
+2. Conjugate the specified restriction comparison. The two localization isomorphisms
+   are canonical left-adjoint uniqueness maps, whose conjugates are identities.
+   Thus its conjugate is the specified direct-image comparison.
+3. The mate of the sectionwise restriction identity under the two restriction/direct
+   image adjunctions is that same direct-image comparison: evaluate on sections and
+   cancel the pullback lift against its projection. Injectivity of the mates
+   correspondences, applied twice, identifies the restriction comparison with the
+   open-adjunction mate of the inverse extension comparison.
+4. Apply the unit equation for this mate and compose with the forward extension
+   comparison. The inverse and forward maps cancel, proving the unit equation.
+   The calculation uses no nonemptiness or nonzero hypotheses, so also covers the
+   identity immersion, empty open, zero sheaf and zero ring. -/
 theorem openComparison_unit_normalization (A : Type (u + 1)) [CommRing A]
     [Finite A] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (∀ (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))
@@ -134,6 +213,52 @@ theorem openComparison_unit_normalization (A : Type (u + 1)) [CommRing A]
             (ModuleCat.{u + 1} A) j).hom.app F) =
       (openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} A) j).unit.app
         ((comparisonUpperStar (ModuleCat.{u + 1} A) U).obj F)) := by
-  sorry
+  constructor
+  · intro F M h
+    simpa [openComparisonHomEquiv, Adjunction.comp_homEquiv, Iso.homToEquiv,
+      openImmersionLowerShriekComparisonUpperStarIso] using
+      homEquiv_conjugate
+        ((Etale.openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} A) j).comp
+          (comparisonAdjunction (ModuleCat.{u + 1} A) X))
+        ((comparisonAdjunction (ModuleCat.{u + 1} A) U).comp
+          (openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} A) j))
+        (comparisonLowerStarOpenImmersionRestrictionIso (ModuleCat.{u + 1} A) j) F M h
+  · intro F
+    let B := ModuleCat.{u + 1} A
+    let cU := comparisonAdjunction B U
+    let cX := comparisonAdjunction B X
+    let e := Etale.openImmersionLowerShriekAdjunction B j
+    let d := openImmersionLowerShriekAdjunction B j
+    let r := Etale.openImmersionRestrictionLowerStarAdjunction B j
+    let s := openImmersionRestrictionLowerStarAdjunction B j
+    let α := TwoSquare.mk _ _ _ _ (openComparisonRestrictionIso A j).hom
+    let β := TwoSquare.mk _ _ _ _
+      (openImmersionLowerShriekComparisonUpperStarIso B j).inv
+    let θ := TwoSquare.mk _ _ _ _ (comparisonLowerStarOpenImmersionRestrictionIso B j).hom
+    have ha : mateEquiv cX cU α = θ := by
+      apply (mateEquiv s r).injective
+      apply (TwoSquare.equivNatTrans _ _ _ _).injective
+      change (mateEquiv s r (mateEquiv cX cU α)).natTrans =
+        (mateEquiv s r θ).natTrans
+      rw [iterated_mateEquiv_conjugateEquiv]
+      exact (openComparisonRestrictionIso_conjugate A j).trans
+        (openComparisonRestriction_directImage_mate A j).symm
+    have hb : mateEquiv cX cU (mateEquiv e d β) = θ := by
+      apply (TwoSquare.equivNatTrans _ _ _ _).injective
+      change (mateEquiv cX cU (mateEquiv e d β)).natTrans = _
+      rw [iterated_mateEquiv_conjugateEquiv]
+      exact congrArg Iso.hom
+        ((conjugateIsoEquiv (e.comp cX) (cU.comp d)).apply_symm_apply
+          (comparisonLowerStarOpenImmersionRestrictionIso B j))
+    have h : mateEquiv e d β = α := (mateEquiv cX cU).injective (hb.trans ha.symm)
+    have hu := unit_mateEquiv e d β F
+    rw [h] at hu
+    change (comparisonUpperStar B U).map (e.unit.app F) ≫
+      (openComparisonRestrictionIso A j).hom.app _ =
+        d.unit.app _ ≫ (openImmersionRestriction B j).map
+          ((openImmersionLowerShriekComparisonUpperStarIso B j).inv.app F) at hu
+    rw [reassoc_of% hu, ← Functor.map_comp]
+    simp
+    rfl
 
 end AlgebraicGeometry.ProEtale

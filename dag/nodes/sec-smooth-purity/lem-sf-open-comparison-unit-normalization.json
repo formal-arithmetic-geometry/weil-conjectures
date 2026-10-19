@@ -20,114 +20,59 @@
  ],
  "proof": [
   {
-   "text": "Use the etale restriction identification and the pro-etale localization identification to regard $rG(W/U)$ as $G(W/X)$ and $sM(V/U)$ as $M(V/X)$. The etale identification for abelian sheaves is natural in $G$, hence commutes with every scalar endomorphism and holds for constant-$A$ modules. The pro-etale localization lemma supplies the constant-ring identification and the module restriction formula. The comparison definition gives $R_TM(W/T)=M(W/T)$ on etale objects and arrows. Thus both $(rR_XM)(W/U)$ and $(R_UsM)(W/U)$ are $M(W/X)$, with identical restrictions and scalar actions. Their identity maps define a natural $A$-linear isomorphism $\\theta_M:rR_XM\\to R_UsM$. These identifications use the canonical localization equivalences on chosen small skeleta; no geometric-stalk argument is used.",
+   "text": "Use the existing canonical fixed-scalar open adjunctions and comparison adjunctions. The specified extension comparison is definitionally the inverse of the conjugate of the sectionwise identity theta. For any two adjunctions, the conjugation unit equation and naturality of theta identify the Hom chain with precomposition by the conjugate. Apply this to the composite adjunctions to obtain the asserted formula for every h.",
    "uses": [
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-weil-pbc-site-comparison-morphism"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09AF (lemma-jshriek-comparison), 099R (section-comparison), and 09AE (definition-extension-zero); localization restriction on objects and arrows"
-   }
-  },
-  {
-   "text": "The two extension adjunctions and $C_T\\dashv R_T$ give the displayed Hom chain, with middle arrow postcomposition by $\\theta_M$; denote its composite by $\\Psi_{F,M}$. It is a bijection natural in $F,M$, since every factor is one. Put $L_1=C_Xe$, $L_2=dC_U$, $Q_1=rR_X$, $Q_2=R_Us$. The composite-adjunction definition gives $L_i\\dashv Q_i$. Apply the unit-normalized conjugation lemma with $\\delta=\\theta^{-1}:Q_2\\simeq Q_1$ to get $\\alpha:L_1\\simeq L_2$. This is the canonical common-right-adjoint comparison of Tag 09AF, namely the $c$ in the statement: its right-adjoint identification is exactly the sectionwise identity just constructed, not an arbitrary isomorphism. The cited comparison theorem supplies its interpretation as the specified comparison between the two extensions.",
-   "uses": [
+    "lem-cbc-proetale-extension-zero-comparison",
+    "def-weil-pbc-site-comparison-morphism",
     "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-weil-extension-by-zero-adjunction",
-    "def-weil-pbc-site-comparison-morphism",
     "def-weil-pbc-composite-adjunction",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "lem-cbc-proetale-extension-zero-comparison"
+    "lem-weil-pbc-conjugate-iso-unit-equation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AF, proof by the common right adjoint; categories.tex Tags 0DV0 and 0B65 for composite adjunctions and conjugation"
-   }
+   "elementary": false
   },
   {
-   "text": "The normalization in step 2 says that $\\Psi_{F,dC_UF}(c_F)=1_{dC_UF}$. Indeed the $L_1$ adjunct of $c_F$ is $Q_1(c_F)\\eta_{1,F}=\\theta^{-1}_{L_2F}\\eta_{2,F}$; applying $\\theta$ and the inverse $L_2$ adjunction gives the identity. Naturality of $\\Psi$ in its target, applied to $c_F^{-1}:dC_UF\\to C_XeF$, gives $\\Psi_{F,C_XeF}(1)=c_F^{-1}$. Applying the same naturality to $h:C_XeF\\to M$ gives $\\Psi_{F,M}(h)=h\\circ c_F^{-1}$. This proves the first normalization by evaluating the Hom bijections.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0B65 (lemma-transformation-between-functors-and-adjoints), naturality of the adjunction bijections"
-   }
-  },
-  {
-   "text": "Write $J=j_{et,*}$, $K=j_{pro,*}$, $\\iota:1\\to Jr$ for the etale restriction/direct-image unit and $\\lambda:rJ\\to1$ for its counit. On the pro-etale site the inverse image $j_{pro}^{-1}$ of [def-weil-proetale-inverse-image] is not literally restriction: the open-unit evaluation lemma [lem-pur-proetale-open-unit-evaluation] gives the natural isomorphism $\\rho:j_{pro}^{-1}\\xrightarrow{\\sim}s$ onto localization restriction and states that, under $\\rho$, the unit of $j_{pro}^{-1}\\dashv K$ at $V/X$ is restriction along $V\\times_XU\\to V$. Transport this adjunction along $\\rho$ to $s\\dashv K$ with unit $\\zeta:1\\to Ks$; thus $\\zeta_N(V)$ is that restriction map of $N$. The direct-image definitions give $\\delta:R_XK\\simeq JR_U$: at an etale $W/X$ both sides are the sections on $W\\times_XU$, with the same arrows and coefficient actions. Moreover\n$$\\theta_N=\\lambda_{R_UsN}\\circ r(\\delta_{sN})\\circ rR_X(\\zeta_N).$$\nEvaluate at an etale $W/U$. Since $j$ is an open immersion, $W\\times_XU\\to W$ is the canonical isomorphism. By the open-unit evaluation lemma, $\\zeta$ sends a section to its restriction along this projection. By the etale restriction lemma, $r(\\iota)$ is restriction along the same projection; the triangle identity $J(\\lambda)\\iota_J=1$ then shows that $\\lambda$ at $W/U$ is the inverse restriction, evaluating that section back on $W$. The map $\\delta$ is the identity on these sections. The composite is therefore the identity of $N(W/X)$, exactly $\\theta_N$ from step 1. Naturality on arrows and scalar endomorphisms gives the equality of module-sheaf maps.",
-   "uses": [
-    "def-weil-pbc-direct-image",
-    "def-weil-proetale-inverse-image",
-    "def-weil-pbc-site-comparison-morphism",
-    "def-weil-pbc-inverse-image",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-pur-proetale-open-unit-evaluation"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099R (section-comparison), morphism/base-change description, and Tag 09AF; etale-cohomology.tex restriction-unit formula"
-   }
-  },
-  {
-   "text": "The comparison of [lem-weil-pbc-comparison-pullback] is the conjugate $a^0:C_Ur\\simeq j_{pro}^{-1}C_X$ of $\\delta:R_XK\\simeq JR_U$ under $C_Ur\\dashv JR_U$ and $j_{pro}^{-1}C_X\\dashv R_XK$: $\\delta$ is induced by the identical base-change objects and arrows. With $s$ read as restriction, the $a$ of the statement is $\\rho_{C_X}\\circ a^0$, where $\\rho$ is the identification of [lem-pur-proetale-open-unit-evaluation] used in step 4. Transporting the adjunction along $\\rho$, $a$ is the conjugate of $\\delta$ under $C_Ur\\dashv JR_U$ and $sC_X\\dashv R_XK$, the latter composed from $C_X\\dashv R_X$ and the transported $s\\dashv K$ with unit $\\zeta$. Write $u_T:1\\to R_TC_T$ for the comparison units. The composite-unit formula and the conjugation leaf give\n$$JR_U(a_G)\\circ J(u_{U,rG})\\circ\\iota_G\n=\\delta_{sC_XG}\\circ R_X(\\zeta_{C_XG})\\circ u_{X,G}.$$\nApply $r$ and then $\\lambda_{R_UsC_XG}$. Naturality of $\\lambda$ and the triangle identity $\\lambda_{rG}\\circ r(\\iota_G)=1$ reduce the left side to $R_U(a_G)u_{U,rG}$. Step 4 reduces the right side to $\\theta_{C_XG}\\,r(u_{X,G})$. Thus\n$$R_U(a_G)\\circ u_{U,rG}=\\theta_{C_XG}\\circ r(u_{X,G}).$$\nThis computes the compatibility with the specified $a$, rather than inferring it from existence of some pullback isomorphism.",
+   "text": "Compute the conjugate of the specified restriction comparison a under C_X followed by s and r followed by C_U. Expand a into the inverse etale localization comparison, the specified inverse-image comparison, and the pro-etale localization comparison. Conjugation reverses composition and commutes with whiskering. Both localization comparisons are the canonical leftAdjointUniq maps and have identity conjugate. The remaining conjugate is exactly the canonical direct-image comparison delta by its definition.",
    "uses": [
     "lem-weil-pbc-comparison-pullback",
-    "def-weil-pbc-composite-adjunction",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-etale-inverse-image-restriction",
     "def-weil-pbc-inverse-image",
-    "lem-pur-proetale-open-unit-evaluation"
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tags 0DV0 (lemma-compose-counits) and 0B65; proetale.tex Tag 099R, inverse-image comparison from the identical direct-image square"
-   }
+   "elementary": false
   },
   {
-   "text": "For $h:C_XeF\\to M$ its comparison adjunct is $R_X(h)u_{X,eF}$; its next, open adjunct is $r(R_X(h)u_{X,eF})\\eta^e_F$. The middle member of the Hom chain is therefore\n$$\\theta_M\\circ rR_X(h)\\circ r(u_{X,eF})\\circ\\eta^e_F.$$\nNaturality of $\\theta$ and step 5 with $G=eF$ rewrite this as\n$$R_U(s(h))\\circ R_U(a_{eF})\\circ u_{U,reF}\\circ\\eta^e_F\n=R_U\\bigl(s(h)\\circ a_{eF}\\circ C_U(\\eta^e_F)\\bigr)\\circ u_{U,F}.$$\nThe equality is naturality of $u_U$ at $\\eta^e_F$. Applying the inverse comparison adjunction shows that the $d\\dashv s$ transpose of $\\Psi_{F,M}(h)$ is $s(h)\\circ a_{eF}\\circ C_U(\\eta^e_F)$. This directly calculates the four Hom bijections using their unit formulas.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0B65, Hom adjunct evaluated as unit followed by the right-adjoint image"
-   }
+   "text": "Compute the mate of theta under the two restriction/direct-image adjunctions. On an etale object W over X, its section map is induced by the composite of the pullback of the first projection with the canonical pullback lift. This composite is the identity: apply pullback.hom_ext and use the two projection equations. Consequently the mate is delta, whose component is the identity on sections over the same chosen fibre product. The calculation is in ModuleCat and therefore retains scalar linearity.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
   },
   {
-   "text": "Set $M=dC_UF$ and $h=c_F$. Step 3 gives $\\Psi(c_F)=1_{dC_UF}$, whose $d\\dashv s$ transpose is $\\eta^d_{C_UF}$. Step 6 computes that same transpose as $s(c_F)\\circ a_{eF}\\circ C_U(\\eta^e_F)$, proving the unit normalization. Every map is natural, so the Hom bijections and both formulas have the asserted naturality. Only open localization and finite constant coefficients were used, including when $j=1$, $U=\\varnothing$, $F=0$, or $A$ is the zero ring.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AF, common-right-adjoint comparison with the open unit equation expanded by its transpose"
-   }
+   "text": "Mathlib iterated_mateEquiv_conjugateEquiv identifies the twice-iterated mate with the conjugate. Steps 2 and 3 and injectivity of mateEquiv show that the comparison-adjunction mate of a is theta. Apply the same identity to the inverse extension comparison: its twice-iterated mate is theta by definition. Injectivity gives a as its open-adjunction mate. The unit_mateEquiv equation is C_U(eta_e) followed by a equals eta_d followed by s(c inverse). Compose with s(c) and cancel the inverse isomorphisms. This proves the second clause for every F, including the empty and zero cases.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-proetale-weakly-etale-localization",
+  "lem-cbc-proetale-extension-zero-comparison",
   "def-weil-pbc-site-comparison-morphism",
   "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-extension-by-zero-adjunction",
   "def-weil-pbc-composite-adjunction",
   "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "def-weil-pbc-direct-image",
-  "def-weil-proetale-inverse-image",
-  "def-weil-pbc-inverse-image",
   "lem-weil-pbc-comparison-pullback",
-  "lem-pur-proetale-open-unit-evaluation"
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09AF (lemma-jshriek-comparison): common-right-adjoint construction; expanded Hom and unit calculations using Tag 099R and categories.tex 0B65, 0DV0"
+  "place": "Tag 09AF, lemma-jshriek-comparison; common-right-adjoint proof implemented through Mathlib conjugateEquiv and iterated_mateEquiv_conjugateEquiv, with the specified canonical pullback comparison and an explicit sectionwise mate calculation (J7, 2026-10-19)"
  },
  "mathlib_searches": [
   {
@@ -250,12 +195,9 @@
  },
  "tool_uses": [
   "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-proetale-weakly-etale-localization",
   "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-extension-by-zero-adjunction",
   "lem-cbc-proetale-extension-zero-comparison",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-pur-proetale-open-unit-evaluation"
+  "lem-weil-pbc-comparison-pullback"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -287,5 +229,15 @@
   "group": "Q153",
   "result": "pass",
   "note": "Clause-by-clause match. C/R = comparisonUpperStar/comparisonAdjunction (= recorded proEtaleSiteComparisonModules). e/d = Etale.openImmersionLowerShriek and the fixed-scalar ProEtale.openImmersionLowerShriek (middle functor of recorded sfIntrinsicExtensionByZero, same as the landed c dependency). r/s and both units come from the open lower-shriek adjunctions. c = recorded openImmersionLowerShriekComparisonUpperStarIso, the conjugate of the Iso.refl sectionwise identity. a = canonical leftAdjointUniq transports around the recorded supportSiteComparisonCoefficientPullbackIso. Hom chain orientation verified by conjugation: Psi(h) = c.inv.app F ≫ h. The unit equation is in correct diagrammatic order. A : Type (u+1), forced by the c dependency, no scheme-universe restriction. Edge cases j=id, U/X empty, F=M=0, zero ring covered. Helpers non-hollow and listed in lean.declarations, docstrings carry source, blueprint and the 7 proof steps, only sorry, statement verbatim, both report sections present. nt_compile.py --json on the snapshot file: rc 0, no errors or warnings; #print axioms gives propext/sorryAx/Classical.choice/Quot.sound. No findings requiring repair."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-84d2c",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261019T005306-L-2749150",
+  "kind": "interface",
+  "note": "independent cc review: Delivered OpenComparisonUnitNormalization (theorem proved, axioms clean) against live module, node lem-sf-open-comparison-unit-normalization, unit sk-thm-sf-pf-finite (realized empty), and all 10 direct importers compiled against it"
  }
 }
