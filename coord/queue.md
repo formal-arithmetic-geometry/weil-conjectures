@@ -54,6 +54,10 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange` | 7 | 1 | repair | route |
 | `Sheaf.Paper.IntegralConstantModelHeart` | 8 | 1 | repair | route |
 | `Sheaf.Paper.PurityDiagonalBaseChangeCompared` | 6 | 1 | repair | route |
+| `Sheaf.Paper.SfHomTriangulated` | 7 | 1 | repair | route |
+| `Sheaf.AlgebraicGeometry.SurjectiveClosedModuleInvariance` | 7 | 1 | repair | route |
+| `Sheaf.RepresentationTheory.ProcyclicTwoTerm` | 10 | 1 | repair | route |
+| `Sheaf.Paper.CompactSupportComparisonPullbackCoherence` | 5 | 1 | repair | route |
 | `WeilConjectures.SixFunctors.Etale.Derived.Exchange` | 4 | 1 | disputed | route |
 | `Sheaf.Paper.ProjectionFormulaCompactified` | 5 | 3 | disputed | route |
 | `Sheaf.AlgebraicGeometry.CondensedClosedSupportAdjunction` | 8 | 1 | disputed | route |
@@ -107,7 +111,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.SupportedKummerScalarSource` | 5 | 1 | proof | route |
 | `Sheaf.DeligneLaumon.SmoothAffineFrontierStratification` | 5 | 1 | proof | route |
 | `Sheaf.Paper.CanonicalOriginCompactSupportComposition` | 5 | 4 | proof | route |
-| `Sheaf.Paper.CompactSupportComparisonPullbackCoherence` | 5 | 1 | proof | route |
 | `Sheaf.Paper.CompactSupportDirectImageTriangulated` | 5 | 1 | proof | route |
 | `Sheaf.Paper.CompactSupportReductionTower` | 5 | 1 | proof | route |
 | `Sheaf.Paper.CompactificationCoherence` | 5 | 1 | proof | route |
@@ -230,7 +233,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.StrictTowerProperOpenArrows` | 7 | 3 | proof | route |
 | `Sheaf.AlgebraicGeometry.SupportComparisonBoundary` | 7 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.SupportLongExact` | 7 | 1 | proof | route |
-| `Sheaf.AlgebraicGeometry.SurjectiveClosedModuleInvariance` | 7 | 1 | proof | route |
 | `Sheaf.CategoryTheory.RingedCechCompletionUnitIdempotence` | 7 | 1 | proof | route |
 | `Sheaf.CategoryTheory.RingedCechKoszulHomLimitComparison` | 7 | 1 | proof | route |
 | `Sheaf.Paper.AdicPullbackPresentationTransport` | 7 | 4 | proof | route |
@@ -270,7 +272,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.PurityRelativeKummer` | 7 | 1 | proof | route |
 | `Sheaf.Paper.RingComplexCechBaseChange` | 7 | 1 | proof | route |
 | `Sheaf.Paper.ScalarExtensionTowerCoherence` | 7 | 7 | proof | route |
-| `Sheaf.Paper.SfHomTriangulated` | 7 | 1 | proof | route |
 | `Sheaf.Paper.TraceBaseChangeFirst` | 7 | 3 | proof | route |
 | `Sheaf.SixFunctors.BaseChangeIdentityOpenRestriction` | 7 | 1 | proof | route |
 | `Sheaf.SixFunctors.CoefTowerNaturalCurrying` | 7 | 1 | proof | route |
@@ -340,7 +341,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.CondensedOpenClosedInternalHom` | 10 | 1 | proof | route |
 | `Sheaf.Paper.AdicConstructibleFiniteReductions` | 10 | 5 | proof | route |
 | `Sheaf.Paper.UniformConstructibleExtIntegral` | 10 | 1 | proof | route |
-| `Sheaf.RepresentationTheory.ProcyclicTwoTerm` | 10 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.AdicFiniteStratificationPullback` | 11 | 1 | proof | route |
 | `Sheaf.Paper.ConstantRealizationDerivedScalarExtension` | 11 | 4 | proof | route |
 | `Sheaf.Paper.GeoCartierExponentIndependence` | 11 | 1 | proof | route |
