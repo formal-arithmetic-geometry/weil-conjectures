@@ -14,6 +14,8 @@ public import Sheaf.AlgebraicGeometry.ClosedPointField
 public import Mathlib.LinearAlgebra.Trace
 public import Mathlib.Algebra.BigOperators.Finprod
 
+import WeilConjectures.PointCount
+
 /-!
 # Local Frobenius on the derived point fibre and its alternating trace
 
@@ -27,7 +29,8 @@ comparison. Object equalities only identify the unchanged objects of raw rationa
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option backward.isDefEq.respectTransparency false
+-- Avoid unfolding coefficient constructions while synthesizing their instances.
+set_option backward.isDefEq.respectTransparency true
 set_option synthInstance.maxSize 2048
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
@@ -70,8 +73,72 @@ def localPositivePower {X : Scheme.{u}} (g : X ⟶ X) : ℕ → (X ⟶ X)
   | 0 => g
   | n + 1 => localPositivePower g n ≫ g
 
+private theorem localPower_projections_aux {X Y Z : Scheme.{u}}
+    (g : X ⟶ X) (h : Y ⟶ Y) (p : X ⟶ Z) (q : X ⟶ Y)
+    (hp : g ≫ p = p) (hq : g ≫ q = q ≫ h) (n : ℕ) :
+    localPositivePower g n ≫ p = p ∧
+      localPositivePower g n ≫ q = q ≫ localPositivePower h n := by
+  induction n with
+  | zero => exact ⟨hp, hq⟩
+  | succ n ih =>
+    constructor
+    · rw [localPositivePower, Category.assoc, hp, ih.1]
+    · rw [localPositivePower, Category.assoc, hq, ← Category.assoc, ih.2,
+        Category.assoc, localPositivePower]
+
 variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   (Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
+
+set_option maxHeartbeats 5000 in
+-- The explicit Spec/Frobenius normal form needs a larger local budget; it is a finite induction.
+set_option backward.isDefEq.respectTransparency false in
+private theorem localPointPower_spec (n : ℕ) :
+    localPositivePower (frobeniusPointIso D).hom n =
+      Spec.map (CommRingCat.ofHom
+        ((@FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k _
+          (Fintype.ofFinite D.k₀) _ _ _ ^ (n + 1)).toRingHom)) := by
+  induction n with
+  | zero =>
+    simp only [localPositivePower, frobeniusPointIso, Functor.mapIso_hom, Iso.op_hom,
+      RingEquiv.toCommRingCatIso_hom]
+    rfl
+  | succ n ih =>
+    erw [localPositivePower, ih]
+    change Spec.map _ ≫ (frobeniusPointIso D).hom = _
+    simp only [frobeniusPointIso, Functor.mapIso_hom, Iso.op_hom,
+      RingEquiv.toCommRingCatIso_hom]
+    erw [← Spec.map_comp, ← CommRingCat.ofHom_comp]
+    congr 1
+
+set_option maxHeartbeats 5000 in
+-- Projection induction unfolds only the finite positive-power recursion.
+set_option backward.isDefEq.respectTransparency false in
+private theorem localPower_projections (n : ℕ) :
+    localPositivePower (D.geometricFrobenius Y₀).hom n ≫
+        pullback.fst Y₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) =
+      pullback.fst Y₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) ∧
+    localPositivePower (D.geometricFrobenius Y₀).hom n ≫
+        pullback.snd Y₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) =
+      pullback.snd Y₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) ≫
+        localPositivePower (frobeniusPointIso D).hom n := by
+  exact localPower_projections_aux _ _ _ _
+    (D.galoisMap_projections Y₀.hom _).1 (D.galoisMap_projections Y₀.hom _).2 n
+
+set_option maxHeartbeats 5000 in
+-- Pullback extensionality uses the preceding finite projection calculation.
+set_option backward.isDefEq.respectTransparency false in
+private theorem localLift_return (t : Spec (.of D.k) ⟶ Y₀.left)
+    (ht : t ≫ Y₀.hom = (𝟙 (Spec (.of D.k))) ≫
+      Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) (n : ℕ)
+    (hfix : localPositivePower (frobeniusPointIso D).hom n ≫ t = t) :
+    pullback.lift t (𝟙 _) ht ≫ localPositivePower (D.geometricFrobenius Y₀).hom n =
+      localPositivePower (frobeniusPointIso D).hom n ≫ pullback.lift t (𝟙 _) ht := by
+  apply pullback.hom_ext
+  · erw [Category.assoc, (localPower_projections D Y₀ n).1, pullback.lift_fst,
+      Category.assoc, pullback.lift_fst, hfix]
+  · erw [Category.assoc, (localPower_projections D Y₀ n).2, ← Category.assoc,
+      pullback.lift_snd, Category.id_comp, Category.assoc, pullback.lift_snd,
+      Category.comp_id]
 
 /-- Derived pullback of the underlying Weil complex at an arbitrary geometric point.
 Source: blueprint K_xbar (blueprint: def-weil-local-frobenius-trace). -/
@@ -198,7 +265,13 @@ theorem localExtensionPoint_compatible (n : ℕ) (hn : 1 ≤ n)
     (x : D.extensionPoints Y₀ n hn) :
     (Spec.map (CommRingCat.ofHom (D.extensionSubfield n hn).subtype) ≫ x.left) ≫ Y₀.hom =
       (𝟙 (Spec (.of D.k))) ≫ Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)) := by
-  sorry
+  rw [Category.assoc, Over.w x]
+  change Spec.map _ ≫ Spec.map _ = _
+  rw [Category.id_comp, ← Spec.map_comp,
+    ← CommRingCat.ofHom_comp]
+  exact congrArg (fun f ↦ Spec.map (CommRingCat.ofHom f))
+    (FiniteField.exists_unique_subfield_of_closure D.p D.a D.q D.prime D.exponent_pos
+      D.cardinality_eq D.k₀ D.card_base D.k n hn).choose_spec.2.2.2.2.2.2.choose_spec
 
 /-- The geometric point obtained from F_(q^n) ⊂ k by the universal fibre-product lift.
 Source: blueprint xbar (blueprint: def-weil-local-frobenius-trace). -/
@@ -221,7 +294,27 @@ theorem localExtensionPoint_return (n : ℕ) (hn : 1 ≤ n)
         localPositivePower (D.geometricFrobenius Y₀).hom (n - 1) =
       localPositivePower (frobeniusPointIso D).hom (n - 1) ≫
         localExtensionPoint D Y₀ n hn x := by
-  sorry
+  let _ : Fintype D.k₀ := Fintype.ofFinite D.k₀
+  have hcard : Nat.card (D.extensionSubfield n hn) = D.q ^ n :=
+    (FiniteField.exists_unique_subfield_of_closure D.p D.a D.q D.prime D.exponent_pos
+      D.cardinality_eq D.k₀ D.card_base D.k n hn).choose_spec.2.1
+  have : Finite (D.extensionSubfield n hn) :=
+    (Nat.card_pos_iff.mp (by rw [hcard]; exact pow_pos (by
+      rw [← D.card_base]; exact Nat.card_pos) n)).2
+  apply localLift_return
+  rw [← Category.assoc, localPointPower_spec, Nat.sub_add_cancel hn]
+  have hfix : Spec.map (CommRingCat.ofHom
+      ((@FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k _
+        (Fintype.ofFinite D.k₀) _ _ _ ^ n).toRingHom)) ≫
+      Spec.map (CommRingCat.ofHom (D.extensionSubfield n hn).subtype) =
+      Spec.map (CommRingCat.ofHom (D.extensionSubfield n hn).subtype) := by
+    rw [← Spec.map_comp, ← CommRingCat.ofHom_comp]
+    congr 1
+    ext a
+    exact FiniteField.geometricFrobeniusAlgEquivOfAlgebraic_pow_apply_of_card_eq
+      D.k₀ D.k n (by rw [← Nat.card_eq_fintype_card, D.card_base]; exact hcard)
+      (D.extensionSubfield n hn).subtype a
+  rw [hfix]
 
 /-- F_x^(n) for every positive finite-field extension point, with no return assumption.
 Source: blueprint finite-field operator (blueprint: def-weil-local-frobenius-trace). -/
@@ -251,8 +344,12 @@ A field is nonzero, so its finite vector-space dimension is positive. -/
 theorem localClosedPointDegree_pos
     (y : {y : Y₀.left // y ∈ closedPoints Y₀.left}) :
     1 ≤ localClosedPointDegree D Y₀ y := by
-  sorry
+  let := (Y₀.hom.residueFieldAlgebraMap y.val).toAlgebra
+  have := (closedPoint_iff_residueField_trdeg_zero_and_finite Y₀.hom y.val).2.1.mp
+    y.property
+  exact Module.finrank_pos
 
+set_option linter.unusedSectionVars false in
 /-- A k₀-embedding of κ(y) gives a model point compatible with the base field.
 Source: blueprint chosen residue-field embedding (blueprint: def-weil-local-frobenius-trace).
 Proof: the structural composite of fromSpecResidueField is Spec of the residue-field
@@ -263,7 +360,8 @@ theorem localClosedPoint_compatible
     (hι : ι.comp (Y₀.hom.residueFieldAlgebraMap y.val) = algebraMap D.k₀ D.k) :
     (Spec.map (CommRingCat.ofHom ι) ≫ Y₀.left.fromSpecResidueField y.val) ≫ Y₀.hom =
       (𝟙 (Spec (.of D.k))) ≫ Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)) := by
-  sorry
+  rw [Category.assoc, ← Y₀.hom.specMap_residueFieldAlgebraMap y.val,
+    Category.id_comp, ← Spec.map_comp, ← CommRingCat.ofHom_comp, hι]
 
 /-- The geometric point over a closed point for the chosen k₀-embedding of its residue field.
 Source: blueprint ybar (blueprint: def-weil-local-frobenius-trace). -/
@@ -290,7 +388,25 @@ theorem localClosedPoint_return
           (localClosedPointDegree D Y₀ y - 1) =
       localPositivePower (frobeniusPointIso D).hom (localClosedPointDegree D Y₀ y - 1) ≫
         localClosedPoint D Y₀ y ι hι := by
-  sorry
+  let := (Y₀.hom.residueFieldAlgebraMap y.val).toAlgebra
+  have := (closedPoint_iff_residueField_trdeg_zero_and_finite Y₀.hom y.val).2.1.mp
+    y.property
+  let _ : Fintype D.k₀ := Fintype.ofFinite D.k₀
+  have : Finite (Y₀.left.residueField y.val) := Module.finite_of_finite D.k₀
+  apply localLift_return
+  rw [← Category.assoc, localPointPower_spec,
+    Nat.sub_add_cancel (localClosedPointDegree_pos D Y₀ y)]
+  have hfix : Spec.map (CommRingCat.ofHom
+      ((@FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k _
+        (Fintype.ofFinite D.k₀) _ _ _ ^ localClosedPointDegree D Y₀ y).toRingHom)) ≫
+      Spec.map (CommRingCat.ofHom ι) = Spec.map (CommRingCat.ofHom ι) := by
+    rw [← Spec.map_comp, ← CommRingCat.ofHom_comp]
+    congr 1
+    ext a
+    apply FiniteField.geometricFrobeniusAlgEquivOfAlgebraic_pow_apply_of_card_eq
+    simpa only [Nat.card_eq_fintype_card, localClosedPointDegree] using
+      (Module.natCard_eq_pow_finrank (K := D.k₀) (V := Y₀.left.residueField y.val))
+  rw [hfix]
 
 /-- F_y on the derived point complex for a closed point and a chosen residue embedding.
 Source: blueprint closed-point operator (blueprint: def-weil-local-frobenius-trace). -/
