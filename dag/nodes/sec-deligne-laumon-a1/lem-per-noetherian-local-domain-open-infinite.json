@@ -12,9 +12,99 @@
   "def-weil-affine-spectrum",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Suppose, for a contradiction, that a nonempty open $O\\subseteq X=\\operatorname{Spec}R$ is finite. Since $R$ is a nonzero domain, $(0)$ is prime. By [lem-weil-pbc-spec-irreducible-closed-subsets-primes](1), its closure is $V(0)=X$, so $(0)\\in O$: otherwise the closed complement of $O$ would contain that closure. For each $\\mathfrak p\\in O\\setminus\\{(0)\\}$ its closure is $V(\\mathfrak p)$ and does not contain $(0)$, since $\\mathfrak p\\nsubseteq(0)$. The finite union $F=\\bigcup_{\\mathfrak p\\in O\\setminus\\{(0)\\}}V(\\mathfrak p)$ is closed, and $O\\setminus F=\\{(0)\\}$ is open in $X$. Thus the finite-open assumption makes the generic singleton open.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IG, lemma-Noetherian-local-domain-dim-2-infinite-opens, first three sentences of the proof; closures as in Tag 00ES, lemma-irreducible(1)."
+   }
+  },
+  {
+   "text": "Use [def-weil-pbc-krull-dimension-ring] to read $\\dim X$ as the supremum of lengths of prime-ideal chains in $R$. By [lem-weil-pbc-noetherian-local-system-of-parameters], $d=\\dim R$ is a finite integer. Thus $d\\geq2$. In particular $X$ is not a singleton, since a singleton has no chain of irreducible closed subsets of positive length.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring",
+    "lem-weil-pbc-noetherian-local-system-of-parameters"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IG, dimension hypothesis and the integer dim(R) in its proof; Tag 00KQ, proposition-dimension."
+   }
+  },
+  {
+   "text": "Apply the basis clause of [lem-weil-pbc-spec-localization-away-basic-open] to the open $\\{(0)\\}$ at $(0)$. It gives $x\\in R$ with $(0)\\in D(x)\\subseteq\\{(0)\\}$; hence $D(x)=\\{(0)\\}$ and $x\\ne0$. Also $x$ is not a unit, since no prime contains a unit and otherwise $D(x)=X$, contrary to Step 2. In a local ring the nonunits are precisely the unique maximal ideal, so $x\\in\\mathfrak n$. This is the $x$ chosen in the source.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IG, the choice of x and the equality D(x)={(0)}; basis supplied by Tag 00E0, lemma-Zariski-topology(14)."
+   }
+  },
+  {
+   "text": "The quotient $\\bar R=R/xR$ is a nonzero Noetherian local ring with maximal ideal $\\bar{\\mathfrak n}=\\mathfrak n/xR$. Indeed its ideals are the ideals of $R$ containing $xR$, modulo $xR$; finite generators descend, and maximal ideals correspond under inverse image, so the unique maximal ideal descends. The quotient is nonzero since $x\\in\\mathfrak n$. As $R$ is a domain and $x\\ne0$, $xr=0$ implies $r=0$, so $x$ is a nonzerodivisor. Now [lem-weil-pbc-dimension-quotient-nonzerodivisor] gives $\\dim\\bar R=d-1\\geq1$.",
+   "uses": [
+    "lem-weil-pbc-dimension-quotient-nonzerodivisor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IG, the application of Tag 00KW, lemma-one-equation, to the nonzero element x in the maximal ideal; elementary quotient-ideal description made explicit."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-noetherian-local-system-of-parameters] to $\\bar R$. Choose $\\bar y_2,\\ldots,\\bar y_d\\in\\bar{\\mathfrak n}$ whose generated ideal $\\bar J$ has radical $\\bar{\\mathfrak n}$, and choose the exponent $N\\geq1$ supplied there with $\\bar{\\mathfrak n}^{N}\\subseteq\\bar J$. Lift them to $y_2,\\ldots,y_d\\in\\mathfrak n$ and put $I=(x,y_2,\\ldots,y_d)$. The inverse image of $\\bar J$ is exactly $I$, since the quotient kernel is $xR$. For $a\\in\\mathfrak n$ the class of $a^N$ is in $\\bar J$, hence $a^N\\in I$. Conversely $I\\subseteq\\mathfrak n$, and primality of $\\mathfrak n$ implies that $a^r\\in I$ for $r\\geq1$ forces $a\\in\\mathfrak n$. Consequently $\\sqrt I=\\mathfrak n$: the $d$ elements $x,y_2,\\ldots,y_d$ generate an ideal of definition in $R$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-local-system-of-parameters"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IG, selection of an ideal of definition in R/xR using Tag 00KQ, proposition-dimension, and lifting it to R; the power clause of the cited node supplies the explicit radical calculation."
+   }
+  },
+  {
+   "text": "Permute these $d$ generators to the order $y_2,x,y_3,\\ldots,y_d$; their generated ideal is still $I$. All lie in $\\mathfrak n$, $\\sqrt I=\\mathfrak n$, and their number is $d=\\dim R$. Since $d\\geq2$, [lem-per-partial-parameters-quotient-dimension] applies with $i=1$ and $i=2$, giving $\\dim(R/(y_2))=d-1$ and $\\dim(R/(y_2,x))=d-2$. No regularity or Cohen–Macaulay hypothesis is used.",
+   "uses": [
+    "lem-per-partial-parameters-quotient-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IG, the two quotient dimension equalities, by Tag 02IE, lemma-elements-generate-ideal-definition, after reordering parameters."
+   }
+  },
+  {
+   "text": "The first equality in Step 6 implies $y_2\\ne0$: if $y_2=0$ then $R/(y_2)=R$ has dimension $d$, not $d-1$. Suppose every prime $\\mathfrak p$ containing $y_2$ also contained $x$. For any ideal $J$, inverse image along $R\\to R/J$ identifies primes of $R/J$ with primes of $R$ containing $J$: the inverse sends $\\mathfrak p$ to $\\mathfrak p/J$, prime because $(R/J)/(\\mathfrak p/J)=R/\\mathfrak p$ is a domain. These inverse operations preserve and reflect strict inclusion. Under the supposition, the prime chains for $R/(y_2)$ and $R/(y_2,x)$ are thus the same chains in $R$, so their suprema, hence their dimensions [def-weil-pbc-krull-dimension-ring], agree. This contradicts $d-1\\ne d-2$. Therefore there is a prime $\\mathfrak p$ containing $y_2$ but not $x$. It lies in $D(x)=\\{(0)\\}$, yet is nonzero since it contains $y_2\\ne0$. This final contradiction rules out finite $O$, as required.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IG, last two sentences of the proof; elementary quotient-prime and chain argument spells out the existence of the required prime."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-per-partial-parameters-quotient-dimension",
+  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+  "lem-weil-pbc-noetherian-local-system-of-parameters",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "lem-weil-pbc-spec-localization-away-basic-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02IG, lemma-Noetherian-local-domain-dim-2-infinite-opens, complete proof; uses 00KW, 00KQ and 02IE as in the source."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,10 +140,45 @@
    "results": "Logged actual response: 0 hits; ; subdirectory RingTheory",
    "date": "2026-10-19",
    "verdict": "no match: prime-chain insertion is a useful ingredient but does not itself assert infinitude of every nonempty open; Jacobson and finite-spectrum lemmas have different hypotheses or conclusions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonempty open subset of the prime spectrum of a Noetherian local integral domain of dimension at least two is infinite",
+   "results": "Actual logged response: 8 hits; PrimeSpectrum.exist_mem_one_of_mem_maximal_ideal; PrimeSpectrum.exist_mem_one_of_mem_two; PrimeSpectrum.nontrivial; PrimeSpectrum.finite_setOf_isMin; PrimeSpectrum.exists_primeSpectrum_prod_le_and_ne_bot_of_domain; instFiniteMaximalSpectrumOfIsFractionRing; instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing; FiniteRingKrullDim",
+   "date": "2026-10-19",
+   "verdict": "no match: prime-chain insertion and finite-dimensionality are ingredients, not the infinite-open conclusion. The Jacobson singleton theorem assumes Jacobson, which a local domain need not be; genericPoint_eq_bot_of_affine only identifies the generic point."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The generic point of a Noetherian local domain is not open if its Krull dimension is at least two",
+   "results": "Actual logged response: 8 hits; AlgebraicGeometry.genericPoint_eq_bot_of_affine; ringKrullDim_eq_one_iff_of_isLocalRing_isDomain; instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing; PrimeSpectrum.isOpen_singleton_tfae_of_isNoetherian_of_isJacobsonRing; IsLocalRing.closed_point_mem_iff; IsLocalRing.isOpen_maximalIdeal; genericPoint_spec; IsLocalRing.closedPoint_mem_iff",
+   "date": "2026-10-19",
+   "verdict": "no match: prime-chain insertion and finite-dimensionality are ingredients, not the infinite-open conclusion. The Jacobson singleton theorem assumes Jacobson, which a local domain need not be; genericPoint_eq_bot_of_affine only identifies the generic point."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNoetherianRing, IsLocalRing, PrimeSpectrum",
+   "results": "Actual logged response: 1 hits; PrimeSpectrum.exist_mem_one_of_mem_maximal_ideal",
+   "date": "2026-10-19",
+   "verdict": "no match: prime-chain insertion and finite-dimensionality are ingredients, not the infinite-open conclusion. The Jacobson singleton theorem assumes Jacobson, which a local domain need not be; genericPoint_eq_bot_of_affine only identifies the generic point."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Noetherian local domain of Krull dimension at least two has infinite nonempty open subsets of its spectrum",
+   "results": "Actual logged response: 8 hits; AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat; TopologicalSpace.NoetherianSpace.exists_open_ne_empty_le_irreducibleComponent; TopologicalSpace.NoetherianSpace.exists_isOpen_nonempty_subset_irreducibleComponent; AlgebraicGeometry.instNoetherianSpaceCarrierCarrierCommRingCatSpecOfIsNoetherianRingCarrier; PrimeSpectrum.discreteTopology_iff_finite_and_krullDimLE_zero; AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero; PrimeSpectrum.irreducibleSpace; Ring.KrullDimLE.subsingleton_primeSpectrum",
+   "date": "2026-10-19",
+   "verdict": "no match: prime-chain insertion and finite-dimensionality are ingredients, not the infinite-open conclusion. The Jacobson singleton theorem assumes Jacobson, which a local domain need not be; genericPoint_eq_bot_of_affine only identifies the generic point."
+  },
+  {
+   "tool": "grep",
+   "query": "(infinite.*open|open.*infinite|Infinite.*Open|Open.*Infinite)",
+   "results": "Actual logged response: 0 hits; ; Mathlib subdirectory RingTheory",
+   "date": "2026-10-19",
+   "verdict": "no match: prime-chain insertion and finite-dimensionality are ingredients, not the infinite-open conclusion. The Jacobson singleton theorem assumes Jacobson, which a local domain need not be; genericPoint_eq_bot_of_affine only identifies the generic point."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-punctured-local-closed-points",
@@ -81,5 +206,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-noetherian-local-domain-open-infinite",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Followed the complete Stacks 02IG proof, reusing the existing spectrum closure, basic-open basis, dimension convention, finite-dimensional parameter existence and nonzerodivisor dimension-drop nodes. Added only the genuinely general 02IE partial-parameter quotient statement after DAG, blueprint, project Lean and logged Mathlib searches. Wrote out finite-open reduction, quotient hypotheses, lifting parameters with a power bound, parameter reordering, and the final prime-chain contradiction.",
+  "blueprint": "Retains the existing lem-per-artin-gabber-affine-curve Step-1 ancestry through the finite-coefficient potential-dualizing/normal-local residue-class chain and lem-per-punctured-local-closed-points. This item is precisely the Algebra 02IG input in Properties 02IM(1), already named by its blueprint.from.place. Its seven steps realize that input without changing the perverse unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-a7a6d2a56",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-a7a6d2a56 (reviewer sub-agent of L); spot-checked: Read the item, the new node, every cited node's statement, the report, and Stacks algebra.tex at 02IG (lemma-Noetherian-local-domain-dim-2-infinite-opens), 02IE (lemma-elements-generate-ideal-definition) and 07DU (definition-ideal-definition); the tag/label pairs match the tags file. The item statement is unchanged and agrees with 02IG. Steps 1-7 check out against the cited statements. Step 1 uses the 00ES closure clause: (0) lies in O and {(0)} is open. Step 2 uses the dimension definition (ring dimension equals topological dimension) and the finite-dimension clause of the parameters node, so 2<=d<infinity. Step 3 uses the basis clause of the basic-open node to get D(x)={(0)} with x nonzero, not a unit, and in n. Step 4 uses the nonzerodivisor node (00KW) for dim R/xR=d-1. Step 5 uses the parameters node on R/xR; the lifts lie in n and the power bound gives sqrt(I)=n. Step 6 applies 02IE to the reordered sequence y_2,x,... for i=1 and i=2. Step 7 is genuinely elementary: y_2 is nonzero, the prime correspondence gives a prime containing y_2 but not x, and that contradicts D(x)={(0)}. No step uses another node's proof, there is no cycle and no SGA. The new node lem-per-partial-parameters-quotient-dimension is faithful to 02IE and true in general (the lower bound by iterating 00KW, the upper bound by 00KQ on the quotient). I tested it on k[[s,t]] and on the non-regular k[[u,v,w]]/(u^2,uv) with parameters v,w (dimensions 1 and 0). It passes B1-B5, B7 and B9. A scan of all DAG statements for 02IE/00KW/00KQ/'system of parameters'/'ideal of definition' found no duplicate: the nearest nodes are the existence-only parameters node, the nonzerodivisor drop, the height-quotient bound and the regular power-series quotient. The new node restates no clause of the item. Route and blueprint ancestry via lem-per-punctured-local-closed-points are correct; no tool_uses are needed. No changes."
  }
 }
