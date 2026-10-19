@@ -1,338 +1,359 @@
 {
-  "id": "lem-pod-finite-system-pullback-coherence",
-  "kind": "statement",
-  "title": "Coherent composition of finite-coefficient pullback on strict systems",
-  "statement": "Let $A_1\\leftarrow A_2\\leftarrow\\cdots$ be an inverse sequence of finite commutative rings and ring homomorphisms. Let $j:Y\\to Z$, $h:Z\\to W$ and $k:W\\to V$ be arbitrary morphisms of schemes [def-pc-scheme]. Use fixed small representatives of their small pro-etale sites [def-weil-pbc-proetale-site, def-weil-size-convention]. Write $B_{T,n}=(A_n)_T$ for the constant ring sheaf and use its canonical inverse-image identifications, compatible with maps of coefficient rings [def-weil-pbc-constant-sheaf, prop-weil-pbc-proetale-constant-ring-map]. For each scheme $T$ let $\\mathscr S_T$ be the abelian category of sequences of $B_{T,n}$-module sheaves $M_n$ with $B_{T,n+1}$-linear maps $M_{n+1}\\to\\operatorname{Res}_{B_{T,n+1}\\to B_{T,n}}M_n$; morphisms commute with these maps and exactness is componentwise [lem-coef-semilinear-derived-sections]. Use the ordinary unbounded derived categories $D(\\mathscr S_T)$ [def-weil-abstract-derived-category]. For each composite $f$ of the given scheme maps let $U_f:D(\\mathscr S_{\\mathrm{target}(f)})\\to D(\\mathscr S_{\\mathrm{source}(f)})$ be the functor obtained by applying the exact finite-coefficient module inverse image levelwise and then termwise to complexes [prop-weil-pbc-proetale-constant-exact, lem-coef-semilinear-derived-sections].\n\nThe canonical module-pullback composition maps determine natural isomorphisms of derived-system functors\n$$a_{h,k}:U_{k\\circ h}\\xrightarrow{\\sim}U_hU_k.$$\nFor every complex of strict systems, this is represented by the termwise module comparison at every degree and coefficient level; these module comparisons commute with the semilinear transitions. Evaluation at level $n$ identifies $a_{h,k}$ with the canonical finite-coefficient derived comparison $c_{h,k}$ of [lem-weil-pbc-proetale-derived-pullback-composition]. For every $S\\in D(\\mathscr S_V)$,\n$$U_j(a_{h,k}(S))\\circ a_{j,k\\circ h}(S)=a_{j,h}(U_kS)\\circ a_{h\\circ j,k}(S)$$\nas morphisms in $D(\\mathscr S_Y)$, under the canonical associator. This equality is induced by an equality of natural transformations on complexes of strict systems before localization. No normalization, boundedness, constructibility or flatness of $A_m\\to A_n$ is assumed.",
-  "source": {
+ "id": "lem-pod-finite-system-pullback-coherence",
+ "kind": "statement",
+ "title": "Coherent composition of finite-coefficient pullback on strict systems",
+ "statement": "Let $A_1\\leftarrow A_2\\leftarrow\\cdots$ be an inverse sequence of finite commutative rings and ring homomorphisms. Let $j:Y\\to Z$, $h:Z\\to W$ and $k:W\\to V$ be arbitrary morphisms of schemes [def-pc-scheme]. Use fixed small representatives of their small pro-etale sites [def-weil-pbc-proetale-site, def-weil-size-convention]. Write $B_{T,n}=(A_n)_T$ for the constant ring sheaf and use its canonical inverse-image identifications, compatible with maps of coefficient rings [def-weil-pbc-constant-sheaf, prop-weil-pbc-proetale-constant-ring-map]. For each scheme $T$ let $\\mathscr S_T$ be the abelian category of sequences of $B_{T,n}$-module sheaves $M_n$ with $B_{T,n+1}$-linear maps $M_{n+1}\\to\\operatorname{Res}_{B_{T,n+1}\\to B_{T,n}}M_n$; morphisms commute with these maps and exactness is componentwise [lem-coef-semilinear-derived-sections]. Use the ordinary unbounded derived categories $D(\\mathscr S_T)$ [def-weil-abstract-derived-category]. For each composite $f$ of the given scheme maps let $U_f:D(\\mathscr S_{\\mathrm{target}(f)})\\to D(\\mathscr S_{\\mathrm{source}(f)})$ be the functor obtained by applying the exact finite-coefficient module inverse image levelwise and then termwise to complexes [prop-weil-pbc-proetale-constant-exact, lem-coef-semilinear-derived-sections].\n\nThe canonical module-pullback composition maps determine natural isomorphisms of derived-system functors\n$$a_{h,k}:U_{k\\circ h}\\xrightarrow{\\sim}U_hU_k.$$\nFor every complex of strict systems, this is represented by the termwise module comparison at every degree and coefficient level; these module comparisons commute with the semilinear transitions. Evaluation at level $n$ identifies $a_{h,k}$ with the canonical finite-coefficient derived comparison $c_{h,k}$ of [lem-weil-pbc-proetale-derived-pullback-composition]. For every $S\\in D(\\mathscr S_V)$,\n$$U_j(a_{h,k}(S))\\circ a_{j,k\\circ h}(S)=a_{j,h}(U_kS)\\circ a_{h\\circ j,k}(S)$$\nas morphisms in $D(\\mathscr S_Y)$, under the canonical associator. This equality is induced by an equality of natural transformations on complexes of strict systems before localization. No normalization, boundedness, constructibility or flatness of $A_m\\to A_n$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, lemma-derived-pullback-composition, proof: termwise composition on flat-term K-flat representatives. The varying-coefficient strict-system comparison, transition compatibility and its associativity equation are the agent-formulated refinement extracted from the integral pullback composition argument; 0D6D alone does not assert them."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-pbc-constant-sheaf",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-coef-semilinear-derived-sections",
+  "def-weil-abstract-derived-category",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "proof": [
+  {
+   "text": "Specialize the existing varying-ring operations to R_n = ULift A_n and the lifted coefficient maps. Continuity and ring-map naturality are their sequence-site continuity and naturality statements, after faithful passage from commutative rings to rings. The actual sectionwise pushforward is definitionally their pushforward, so its right-adjoint witness and exact pullback apply. For composition, take the unique section-normalized direct-image comparison and transport its existence and uniqueness across the conjugation equivalence. The evaluation normalization and final coherence statements remain open, with their original arguments in the following steps.",
+   "uses": [
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tag 0D6D, lemma-derived-pullback-composition, proof: termwise composition on flat-term K-flat representatives. The varying-coefficient strict-system comparison, transition compatibility and its associativity equation are the agent-formulated refinement extracted from the integral pullback composition argument; 0D6D alone does not assert them."
+   }
   },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-weil-pbc-proetale-site",
-    "def-weil-size-convention",
+  {
+   "text": "Write $P_f$ for the underived levelwise pullback. For a coefficient homomorphism $r:A_{n+1}\\to A_n$, the square $c^f_{A_n}\\circ f^{-1}(r)=r\\circ c^f_{A_{n+1}}$ commutes: after adjunction both maps send a constant section $a$ to the constant section $r(a)$, and uniqueness of extension from the constant presheaf proves equality. Thus inverse image of an $r$-semilinear map is $r$-semilinear after the canonical ring identifications. For composites, [lem-trf-constant-coefficient-composition] identifies the canonical structure map with the composite structure map. This checks that all the single-level module adjunctions below use exactly the coefficient maps stipulated in the statement.",
+   "uses": [
     "def-weil-pbc-constant-sheaf",
+    "def-weil-proetale-inverse-image",
     "prop-weil-pbc-proetale-constant-ring-map",
-    "lem-coef-semilinear-derived-sections",
-    "def-weil-abstract-derived-category",
-    "prop-weil-pbc-proetale-constant-exact",
-    "lem-weil-pbc-proetale-derived-pullback-composition"
-  ],
-  "proof": [
-    {
-      "text": "Write $P_f$ for the underived levelwise pullback. For a coefficient homomorphism $r:A_{n+1}\\to A_n$, the square $c^f_{A_n}\\circ f^{-1}(r)=r\\circ c^f_{A_{n+1}}$ commutes: after adjunction both maps send a constant section $a$ to the constant section $r(a)$, and uniqueness of extension from the constant presheaf proves equality. Thus inverse image of an $r$-semilinear map is $r$-semilinear after the canonical ring identifications. For composites, [lem-trf-constant-coefficient-composition] identifies the canonical structure map with the composite structure map. This checks that all the single-level module adjunctions below use exactly the coefficient maps stipulated in the statement.",
-      "uses": [
-        "def-weil-pbc-constant-sheaf",
-        "def-weil-proetale-inverse-image",
-        "prop-weil-pbc-proetale-constant-ring-map",
-        "lem-trf-constant-coefficient-composition"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-modules.tex",
-        "place": "Tags 03D3 and 03D7, lemma-adjoint-push-pull-modules and lemma-adjoint-pullback-pushforward-modules; constant-section specialization using the defining sheafification"
-      }
-    },
-    {
-      "text": "On a strict system $M$, set $(P_fM)_n=f_n^*M_n$, with transition the inverse image of $\\tau^M_n:M_{n+1}\\to\\operatorname{Res}M_n$. Define $(R_fN)_n=f_{*,n}N_n$, its transition by applying the underlying sheaf direct image to $\\tau^N_n$, with scalar action through the canonical coefficient map. The coefficient square in Step 1, after taking its adjoint, is the direct-image identity\\n\\(f_*(r_X)\\circ\\rho^f_{A_{n+1}}=\\rho^f_{A_n}\\circ r_Y\\); hence applying \\(f_*\\) to \\(\\tau^N_n\\) is\\n\\(B_{T,n+1}\\)-linear into the restricted target, so these are valid system transitions. For a family $s_n:f_n^*M_n\\to N_n$, its componentwise adjoint is $t_n=f_*s_n\\circ\\eta_{f,M_n}$. The system equation $\\tau^N_n s_{n+1}=s_n f^{-1}(\\tau^M_n)$ is equivalent under the underlying sheaf adjunction to $f_*(\\tau^N_n)t_{n+1}=t_n\\tau^M_n$: substitute the formula for $t_n$ and use naturality of $\\eta_f$; the inverse implication uses the inverse adjunction bijection. The module adjunction and its underlying-sheaf formula are [lem-weil-pbc-ringed-topoi-module-adjunction] and [lem-weil-pbc-geometric-module-transport]. Hence they restrict to $P_f\\dashv R_f$ on strict systems, with componentwise units. By [prop-weil-pbc-proetale-constant-exact] and componentwise exactness in [lem-coef-semilinear-derived-sections], $P_f$ is exact.",
-      "uses": [
-        "lem-weil-pbc-ringed-topoi-module-adjunction",
-        "lem-weil-pbc-geometric-module-transport",
-        "prop-weil-pbc-proetale-constant-exact",
-        "lem-coef-semilinear-derived-sections"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-modules.tex",
-        "place": "Tags 03D3 and 03D7, lemma-adjoint-push-pull-modules and lemma-adjoint-pullback-pushforward-modules; restrict the componentwise Hom bijections to transition-compatible families"
-      }
-    },
-    {
-      "text": "For $f:T\\to T'$ and $g:T'\\to T''$, define $d_{f,g}:R_{g f}\\xrightarrow{\\sim}R_gR_f$ levelwise by the canonical identification of direct images. On an object $Q\\to T''$ it is induced by $(Q\\times_{T''}T')\\times_{T'}T\\cong Q\\times_{T''}T$. This is the direct-image formula of [def-weil-proetale-inverse-image]. Restriction of sections along this scheme isomorphism commutes with every sheaf morphism, in particular the semilinear transitions; it preserves scalar multiplication since the scalar maps send each constant to the same constant. Thus $d$ is an isomorphism of system functors. For three maps the two fibre-product identifications have identical projections to $Q$ and the final source scheme, hence are equal by [def-pc-fibre-product]. Applying sheaves and restriction gives the right-adjoint associativity equation, as an equality of maps of whole strict systems.",
-      "uses": [
-        "def-weil-proetale-inverse-image",
-        "def-pc-fibre-product"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/sites-modules.tex",
-        "place": "Tag 03D8, lemma-push-pull-composition-modules; expand the direct-image formula and fibre-product universal property"
-      }
-    },
-    {
-      "text": "Apply [lem-weil-pbc-conjugate-iso-unit-equation] to $P_fP_g\\dashv R_gR_f$, $P_{g f}\\dashv R_{g f}$ and $d_{f,g}$. Let $b_{f,g}:P_{g f}\\xrightarrow{\\sim}P_fP_g$ be the inverse of the resulting unit-compatible isomorphism. It is a map of systems by construction. Evaluate its unit equation at $n$: all units and $d$ evaluate to the ordinary level-$n$ units and direct-image comparison from Steps 2 and 3. Uniqueness in the same conjugate-isomorphism lemma identifies $(b_{f,g,M})_n$ with the canonical module comparison of [lem-pur-proetale-module-pullback-composition]. In particular those specified module comparisons, and their inverses, commute with the semilinear transitions; this is obtained before deriving, not by an equality test in the derived coefficient categories.",
-      "uses": [
-        "lem-weil-pbc-conjugate-iso-unit-equation",
-        "lem-pur-proetale-module-pullback-composition"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-modules.tex",
-        "place": "Tag 03D8, lemma-push-pull-composition-modules; categories.tex Tag 0B65, lemma-transformation-between-functors-and-adjoints, unit characterization"
-      }
-    },
-    {
-      "text": "Use [lem-trf-adjoint-composition-coherence] with categories $\\mathscr S_V,\\mathscr S_W,\\mathscr S_Z,\\mathscr S_Y$, the six adjunctions of Step 2 and the right-adjoint comparisons of Step 3. Its coherence hypothesis holds by the projection calculation in Step 3, with the canonical associators retained. Its conclusion is the equality for the unit-compatible maps $b^{-1}$. Invert that equality and use functoriality to obtain\n$$P_j(b_{h,k,M})\\circ b_{j,k h,M}=b_{j,h,P_kM}\\circ b_{h j,k,M}.$$\nThis is an equality of natural transformations between functors on the abelian categories of strict systems.",
-      "uses": [
-        "lem-trf-adjoint-composition-coherence"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/categories.tex",
-        "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; precise coherence: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, leftAdjointCompIso_assoc"
-      }
-    },
-    {
-      "text": "Apply $P_f$ degreewise to complexes. Naturality of $b$ with respect to each differential makes its components chain maps, and its inverse is degreewise a chain map too. Thus $b$ gives a natural isomorphism on complexes of strict systems. The equality in Step 5 holds at every degree as an equality of system maps, so it is an equality of natural transformations on these complex categories. Exactness of $P_f$ and [lem-weil-pbc-exact-functor-derived-factorization] give exactly $U_f$, computed termwise on every complex. Apply [lem-weil-pbc-localization-universal-property](2) to the natural isomorphism $Qb$ to obtain $a_{f,g}$. Its compatibility with composition and clause (3) transport the equality from complexes to the stated equality in $D(\\mathscr S_Y)$.",
-      "uses": [
-        "lem-weil-pbc-exact-functor-derived-factorization",
-        "lem-weil-pbc-localization-universal-property"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/derived.tex",
-        "place": "Tag 015F, lemma-right-derived-exact-functor; natural-transformation descent uses Mathlib CategoryTheory.Localization.liftNatTrans and natTrans_ext as recorded by the cited localization node"
-      }
-    },
-    {
-      "text": "Exact evaluation $e_n$ is termwise on complexes and derived categories by [lem-coef-semilinear-derived-sections]. It therefore carries $a_{h,k}$ to the localization of the canonical termwise module comparison of Step 4. To identify this with the specified $c_{h,k}$, choose a flat-term K-flat resolution using [lem-pc-kflat-resolution]. On that resolution [lem-weil-pbc-proetale-derived-pullback-composition] represents $c_{h,k}$ by precisely this termwise comparison. All three finite-coefficient pullbacks are exact by [prop-weil-pbc-proetale-constant-exact]; hence their termwise functors preserve the resolution quasi-isomorphism, and naturality carries the same identification to every complex. This identifies the natural comparisons under the canonical exact/derived functor identifications. The construction never tensors a transition along $A_{n+1}\\to A_n$, so it requires no coefficient-flatness; it applies to arbitrary complexes and arbitrary strict systems.",
-      "uses": [
-        "lem-coef-semilinear-derived-sections",
-        "lem-pc-kflat-resolution",
-        "lem-weil-pbc-proetale-derived-pullback-composition",
-        "prop-weil-pbc-proetale-constant-exact"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 0D6D, lemma-derived-pullback-composition, proof on flat-term K-flat representatives; exactness permits all representatives"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-pc-fibre-product",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-proetale-inverse-image",
-    "lem-coef-semilinear-derived-sections",
-    "lem-pc-kflat-resolution",
-    "lem-pur-proetale-module-pullback-composition",
-    "lem-trf-adjoint-composition-coherence",
-    "lem-trf-constant-coefficient-composition",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-geometric-module-transport",
-    "lem-weil-pbc-localization-universal-property",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "prop-weil-pbc-proetale-constant-exact",
-    "prop-weil-pbc-proetale-constant-ring-map"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "lem-trf-constant-coefficient-composition"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03D3, 03D7 and 03D8 with sites-cohomology.tex Tag 0D6D; agent extension to strict varying-coefficient systems using componentwise adjunctions and ordinary localization"
+    "place": "Tags 03D3 and 03D7, lemma-adjoint-push-pull-modules and lemma-adjoint-pullback-pushforward-modules; constant-section specialization using the defining sheafification"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Canonical inverse image composition on derived categories of inverse systems of sheaves with varying coefficient rings satisfies associativity as maps of whole systems",
-      "results": "Eight actual hits, including SheafOfModules.pullback_assoc, Scheme.Modules.pseudofunctor_associativity_assoc and sheafComposeIso identities. Read the sheaf pullback source: this supplies ordinary sheaf coherence, not the full derived semilinear-system statement.",
-      "date": "2026-10-18",
-      "verdict": "no match: the complete varying-coefficient system theorem is not an exact match or a one-line specialization of these hits"
-    },
-    {
-      "tool": "grep",
-      "query": "pullback_assoc|pullbackComp|semilinear.*system [Algebra/Category/ModuleCat/Sheaf]",
-      "results": "Five hits in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:167,177,180,193,194. Read lines 150-212: pullbackComp and pullback_assoc are underived module-sheaf statements.",
-      "date": "2026-10-18",
-      "verdict": "no match: the complete varying-coefficient system theorem is not an exact match or a one-line specialization of these hits"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"pullback_assoc\"",
-      "results": "Six hits: SheafOfModules.pullback_assoc, PresheafOfModules.pullback_assoc, overMapPullback_assoc, and categorical pullbacks. No derived varying-coefficient system theorem.",
-      "date": "2026-10-18",
-      "verdict": "no match: the complete varying-coefficient system theorem is not an exact match or a one-line specialization of these hits"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Associativity of inverse image composition for inverse sequences of module sheaves over varying finite coefficient rings in unbounded derived categories",
-      "results": "Eight actual hits including SheafOfModules.pullback_assoc, image and sheaf composition identities, and sheafPushforwardContinuousComp'_inv_app_val_app. No theorem states coherence on derived strict varying-coefficient systems.",
-      "date": "2026-10-18",
-      "verdict": "no match: the complete varying-coefficient system theorem is not an exact match or a one-line specialization of these hits"
-    },
-    {
-      "tool": "grep",
-      "query": "semilinear|mapDerivedCategory|pullback_assoc [Algebra/Homology/DerivedCategory]",
-      "results": "Ten hits in DerivedCategory/ExactFunctor.lean and Ext/Map.lean. Read ExactFunctor.lean:27-58: mapDerivedCategory is exact-functor descent, not construction and coherence of semilinear coefficient-system inverse images.",
-      "date": "2026-10-18",
-      "verdict": "no match: the complete varying-coefficient system theorem is not an exact match or a one-line specialization of these hits"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"mapDerivedCategory\"",
-      "results": "Twelve hits in ExactFunctor.lean, including Functor.mapDerivedCategoryCompIso and NatTrans.mapDerivedCategory. Generic exact-functor descent is relevant infrastructure but does not supply the module-system comparison or its coefficient-transition normalization.",
-      "date": "2026-10-18",
-      "verdict": "no match: the complete varying-coefficient system theorem is not an exact match or a one-line specialization of these hits"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Exact levelwise pullback of semilinear coefficient towers has coherent natural composition maps before derived localization, compatible with coefficient transition maps",
-      "results": "Eight hits, all ordinary ring/module localization exactness or cotangent-module identities, not coefficient systems.",
-      "date": "2026-10-18",
-      "verdict": "no match: the complete varying-coefficient system theorem is not an exact match or a one-line specialization of these hits"
-    }
-  ],
-  "mathlib_match": null,
-  "mathlib_candidate": {
-    "declarations": [
-      "SheafOfModules.pullback_assoc",
-      "CategoryTheory.Functor.mapDerivedCategoryCompIso",
-      "CategoryTheory.NatTrans.mapDerivedCategory"
-    ],
-    "note": "Underived sheaf composition coherence and generic exact-functor descent; the ring-system construction and compatibility are additional work, so this is not a Mathlib leaf."
+  {
+   "text": "On a strict system $M$, set $(P_fM)_n=f_n^*M_n$, with transition the inverse image of $\\tau^M_n:M_{n+1}\\to\\operatorname{Res}M_n$. Define $(R_fN)_n=f_{*,n}N_n$, its transition by applying the underlying sheaf direct image to $\\tau^N_n$, with scalar action through the canonical coefficient map. The coefficient square in Step 1, after taking its adjoint, is the direct-image identity\\n\\(f_*(r_X)\\circ\\rho^f_{A_{n+1}}=\\rho^f_{A_n}\\circ r_Y\\); hence applying \\(f_*\\) to \\(\\tau^N_n\\) is\\n\\(B_{T,n+1}\\)-linear into the restricted target, so these are valid system transitions. For a family $s_n:f_n^*M_n\\to N_n$, its componentwise adjoint is $t_n=f_*s_n\\circ\\eta_{f,M_n}$. The system equation $\\tau^N_n s_{n+1}=s_n f^{-1}(\\tau^M_n)$ is equivalent under the underlying sheaf adjunction to $f_*(\\tau^N_n)t_{n+1}=t_n\\tau^M_n$: substitute the formula for $t_n$ and use naturality of $\\eta_f$; the inverse implication uses the inverse adjunction bijection. The module adjunction and its underlying-sheaf formula are [lem-weil-pbc-ringed-topoi-module-adjunction] and [lem-weil-pbc-geometric-module-transport]. Hence they restrict to $P_f\\dashv R_f$ on strict systems, with componentwise units. By [prop-weil-pbc-proetale-constant-exact] and componentwise exactness in [lem-coef-semilinear-derived-sections], $P_f$ is exact.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-geometric-module-transport",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D3 and 03D7, lemma-adjoint-push-pull-modules and lemma-adjoint-pullback-pushforward-modules; restrict the componentwise Hom bijections to transition-compatible families"
+   }
   },
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "lem-pod-integral-pullback-composition",
-    "date": "2026-10-18",
-    "group": "NG"
-  },
-  "chapter": "sec-poincare-duality",
-  "unit": "sk-lem-finite",
-  "blueprint": {
-    "from": {
-      "node": "def-weil-local-frobenius-trace",
-      "place": "statement, second sentence of the first paragraph: 'Iterating the Weil isomorphism $r$ times and using the resulting return to $\\bar y$ defines ... the local operator $F_y$' (the canonical identifications $L(g_Y^{n})^*Lg_Y^*\\cong L(g_Y^{n+1})^*$ and $L(g_s^n)^*L\\bar x^*\\cong L\\bar x^*L(g_Y^n)^*$ at the integral level underlying the rational coefficients $E$); the finite-coefficient system reassociation used in the integral comparison proof, formerly Step 5",
-      "via": [
-        "lem-pod-integral-pullback-composition"
-      ]
-    },
-    "same_as": [],
-    "is": null
-  },
-  "split_report": {
-    "date": "2026-10-18",
-    "item": "lem-pod-finite-system-pullback-coherence",
-    "worker": "stage1",
-    "summary": "Constructed the canonical comparisons as conjugates on abelian strict systems, proved their coefficient-transition compatibility from componentwise units, applied existing adjunction coherence before complexes, and descended equality by ordinary localization. No statement change and no new nodes.",
-    "blueprint": "Realizes the canonical iterated-pullback identifications implicit in the first paragraph of def-weil-local-frobenius-trace (iterating the Weil isomorphism), through the finite-system reassociation step of lem-pod-integral-pullback-composition.",
-    "tool_uses": [
-      {
-        "node": "def-weil-proetale-inverse-image",
-        "why": "Generic coefficient-sheaf, adjunction, exactness or resolution interface used to construct ordinary strict-system pullback comparisons; does not replace the unit finiteness/Frobenius route."
-      },
-      {
-        "node": "lem-coef-semilinear-derived-sections",
-        "why": "Generic coefficient-sheaf, adjunction, exactness or resolution interface used to construct ordinary strict-system pullback comparisons; does not replace the unit finiteness/Frobenius route."
-      },
-      {
-        "node": "lem-pc-kflat-resolution",
-        "why": "Generic coefficient-sheaf, adjunction, exactness or resolution interface used to construct ordinary strict-system pullback comparisons; does not replace the unit finiteness/Frobenius route."
-      },
-      {
-        "node": "lem-pur-proetale-module-pullback-composition",
-        "why": "Generic coefficient-sheaf, adjunction, exactness or resolution interface used to construct ordinary strict-system pullback comparisons; does not replace the unit finiteness/Frobenius route."
-      },
-      {
-        "node": "lem-trf-constant-coefficient-composition",
-        "why": "Generic coefficient-sheaf, adjunction, exactness or resolution interface used to construct ordinary strict-system pullback comparisons; does not replace the unit finiteness/Frobenius route."
-      },
-      {
-        "node": "lem-weil-pbc-geometric-module-transport",
-        "why": "Generic coefficient-sheaf, adjunction, exactness or resolution interface used to construct ordinary strict-system pullback comparisons; does not replace the unit finiteness/Frobenius route."
-      },
-      {
-        "node": "lem-weil-pbc-proetale-derived-pullback-composition",
-        "why": "Generic coefficient-sheaf, adjunction, exactness or resolution interface used to construct ordinary strict-system pullback comparisons; does not replace the unit finiteness/Frobenius route."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
-        "why": "Generic coefficient-sheaf, adjunction, exactness or resolution interface used to construct ordinary strict-system pullback comparisons; does not replace the unit finiteness/Frobenius route."
-      },
-      {
-        "node": "prop-weil-pbc-proetale-constant-exact",
-        "why": "Generic coefficient-sheaf, adjunction, exactness or resolution interface used to construct ordinary strict-system pullback comparisons; does not replace the unit finiteness/Frobenius route."
-      },
-      {
-        "node": "prop-weil-pbc-proetale-constant-ring-map",
-        "why": "Generic coefficient-sheaf, adjunction, exactness or resolution interface used to construct ordinary strict-system pullback comparisons; does not replace the unit finiteness/Frobenius route."
-      }
-    ]
-  },
-  "tool_uses": [
+  {
+   "text": "For $f:T\\to T'$ and $g:T'\\to T''$, define $d_{f,g}:R_{g f}\\xrightarrow{\\sim}R_gR_f$ levelwise by the canonical identification of direct images. On an object $Q\\to T''$ it is induced by $(Q\\times_{T''}T')\\times_{T'}T\\cong Q\\times_{T''}T$. This is the direct-image formula of [def-weil-proetale-inverse-image]. Restriction of sections along this scheme isomorphism commutes with every sheaf morphism, in particular the semilinear transitions; it preserves scalar multiplication since the scalar maps send each constant to the same constant. Thus $d$ is an isomorphism of system functors. For three maps the two fibre-product identifications have identical projections to $Q$ and the final source scheme, hence are equal by [def-pc-fibre-product]. Applying sheaves and restriction gives the right-adjoint associativity equation, as an equality of maps of whole strict systems.",
+   "uses": [
     "def-weil-proetale-inverse-image",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8, lemma-push-pull-composition-modules; expand the direct-image formula and fibre-product universal property"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-conjugate-iso-unit-equation] to $P_fP_g\\dashv R_gR_f$, $P_{g f}\\dashv R_{g f}$ and $d_{f,g}$. Let $b_{f,g}:P_{g f}\\xrightarrow{\\sim}P_fP_g$ be the inverse of the resulting unit-compatible isomorphism. It is a map of systems by construction. Evaluate its unit equation at $n$: all units and $d$ evaluate to the ordinary level-$n$ units and direct-image comparison from Steps 2 and 3. Uniqueness in the same conjugate-isomorphism lemma identifies $(b_{f,g,M})_n$ with the canonical module comparison of [lem-pur-proetale-module-pullback-composition]. In particular those specified module comparisons, and their inverses, commute with the semilinear transitions; this is obtained before deriving, not by an equality test in the derived coefficient categories.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-pur-proetale-module-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8, lemma-push-pull-composition-modules; categories.tex Tag 0B65, lemma-transformation-between-functors-and-adjoints, unit characterization"
+   }
+  },
+  {
+   "text": "Use [lem-trf-adjoint-composition-coherence] with categories $\\mathscr S_V,\\mathscr S_W,\\mathscr S_Z,\\mathscr S_Y$, the six adjunctions of Step 2 and the right-adjoint comparisons of Step 3. Its coherence hypothesis holds by the projection calculation in Step 3, with the canonical associators retained. Its conclusion is the equality for the unit-compatible maps $b^{-1}$. Invert that equality and use functoriality to obtain\n$$P_j(b_{h,k,M})\\circ b_{j,k h,M}=b_{j,h,P_kM}\\circ b_{h j,k,M}.$$\nThis is an equality of natural transformations between functors on the abelian categories of strict systems.",
+   "uses": [
+    "lem-trf-adjoint-composition-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; precise coherence: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, leftAdjointCompIso_assoc"
+   }
+  },
+  {
+   "text": "Apply $P_f$ degreewise to complexes. Naturality of $b$ with respect to each differential makes its components chain maps, and its inverse is degreewise a chain map too. Thus $b$ gives a natural isomorphism on complexes of strict systems. The equality in Step 5 holds at every degree as an equality of system maps, so it is an equality of natural transformations on these complex categories. Exactness of $P_f$ and [lem-weil-pbc-exact-functor-derived-factorization] give exactly $U_f$, computed termwise on every complex. Apply [lem-weil-pbc-localization-universal-property](2) to the natural isomorphism $Qb$ to obtain $a_{f,g}$. Its compatibility with composition and clause (3) transport the equality from complexes to the stated equality in $D(\\mathscr S_Y)$.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; natural-transformation descent uses Mathlib CategoryTheory.Localization.liftNatTrans and natTrans_ext as recorded by the cited localization node"
+   }
+  },
+  {
+   "text": "Exact evaluation $e_n$ is termwise on complexes and derived categories by [lem-coef-semilinear-derived-sections]. It therefore carries $a_{h,k}$ to the localization of the canonical termwise module comparison of Step 4. To identify this with the specified $c_{h,k}$, choose a flat-term K-flat resolution using [lem-pc-kflat-resolution]. On that resolution [lem-weil-pbc-proetale-derived-pullback-composition] represents $c_{h,k}$ by precisely this termwise comparison. All three finite-coefficient pullbacks are exact by [prop-weil-pbc-proetale-constant-exact]; hence their termwise functors preserve the resolution quasi-isomorphism, and naturality carries the same identification to every complex. This identifies the natural comparisons under the canonical exact/derived functor identifications. The construction never tensors a transition along $A_{n+1}\\to A_n$, so it requires no coefficient-flatness; it applies to arbitrary complexes and arbitrary strict systems.",
+   "uses": [
     "lem-coef-semilinear-derived-sections",
     "lem-pc-kflat-resolution",
-    "lem-pur-proetale-module-pullback-composition",
-    "lem-trf-constant-coefficient-composition",
-    "lem-weil-pbc-geometric-module-transport",
     "lem-weil-pbc-proetale-derived-pullback-composition",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "prop-weil-pbc-proetale-constant-exact",
-    "prop-weil-pbc-proetale-constant-ring-map"
-  ],
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-Codex-Q93-1e12d87cc",
-    "group": "Q93",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q93-1e12d87cc (reviewer sub-agent of L); spot-checked: Reviewed the full item, cited nodes, unit/chapter route, and Stacks sources. Step 2 omitted the direct-image mate identity needed to prove strict-system transition semilinearity. Corrected DAG JSON is in fixes/dag/nodes/sec-poincare-duality/lem-pod-finite-system-pullback-coherence.json; review.md records all checks.; 1 file(s) fixed by the reviewer"
-  },
-  "lean": {
-    "module": "Sheaf.Paper.FiniteSystemPullbackCoherence",
-    "declaration": "WeilConjectures.finiteSystemPullbackCoherence",
-    "declarations": [
-      "WeilConjectures.finiteSystemRingSheafify",
-      "WeilConjectures.finiteSystemSiteSmall",
-      "WeilConjectures.finiteSystemSequenceSmall",
-      "WeilConjectures.finiteSystemRings",
-      "WeilConjectures.finiteSystemRingTransition",
-      "WeilConjectures.finiteSystems",
-      "WeilConjectures.finiteSystemDerived",
-      "WeilConjectures.finiteSystemEvaluation",
-      "WeilConjectures.finiteSystemBaseChange",
-      "WeilConjectures.finiteSystemBaseChange_continuous",
-      "WeilConjectures.finiteSystemRingComponent",
-      "WeilConjectures.finiteSystemRingComponent_naturality",
-      "WeilConjectures.finiteSystemRingMap",
-      "WeilConjectures.finiteSystemPushforward",
-      "WeilConjectures.finiteSystemPushforward_isRightAdjoint",
-      "WeilConjectures.finiteSystemPullback",
-      "WeilConjectures.finiteSystemAdjunction",
-      "WeilConjectures.finiteSystemPullback_exact",
-      "WeilConjectures.finiteSystemPullbackAdditive",
-      "WeilConjectures.finiteSystemPullbackLimits",
-      "WeilConjectures.finiteSystemPullbackColimits",
-      "WeilConjectures.finiteSystemDerivedPullback",
-      "WeilConjectures.finiteSystemComposition_existsUnique",
-      "WeilConjectures.finiteSystemComposition",
-      "WeilConjectures.finiteSystemComplexComposition",
-      "WeilConjectures.finiteSystemDerivedComposition",
-      "WeilConjectures.finiteSystemDerivedEvaluation",
-      "WeilConjectures.finiteSystemPullbackEvaluation_existsUnique",
-      "WeilConjectures.finiteSystemPullbackEvaluation",
-      "WeilConjectures.finiteSystemDerivedPullbackEvaluation",
-      "WeilConjectures.finiteSystemModuleComposition",
-      "WeilConjectures.finiteSystemComplexPullback",
-      "WeilConjectures.finiteSystemPullbackCoherence"
-    ],
-    "file": "lean/Sheaf/Paper/FiniteSystemPullbackCoherence.lean",
-    "statement": "theorem finiteSystemPullbackCoherence [∀ n, Finite (A n)] {Y Z W V : Scheme.{u}} (j : Y ⟶ Z) (h : Z ⟶ W) (k : W ⟶ V) : (∀ (M : finiteSystems.{u} A τ V) (n : ℕ), (finiteSystemEvaluation.{u} A τ Z n).map ((finiteSystemComposition.{u} A τ h k).hom.app M) ≫ (finiteSystemPullbackEvaluation.{u} A τ h n).hom.app ((finiteSystemPullback.{u} A τ k).obj M) ≫ (proEtaleConstantRingPullback (A n) h).map ((finiteSystemPullbackEvaluation.{u} A τ k n).hom.app M) = (finiteSystemPullbackEvaluation.{u} A τ (h ≫ k) n).hom.app M ≫ (finiteSystemModuleComposition.{u} A h k n).hom.app ((finiteSystemEvaluation.{u} A τ V n).obj M)) ∧ (∀ (S : finiteSystemDerived.{u} A τ V) (n : ℕ), (finiteSystemDerivedEvaluation.{u} A τ Z n).map ((finiteSystemDerivedComposition.{u} A τ h k).hom.app S) ≫ (finiteSystemDerivedPullbackEvaluation.{u} A τ h n).hom.app ((finiteSystemDerivedPullback.{u} A τ k).obj S) ≫ (proEtaleConstantRingDerivedPullback (A n) h).map ((finiteSystemDerivedPullbackEvaluation.{u} A τ k n).hom.app S) = (finiteSystemDerivedPullbackEvaluation.{u} A τ (h ≫ k) n).hom.app S ≫ (proEtaleConstantRingPullbackComposition h k (A n)).inv.app ((finiteSystemDerivedEvaluation.{u} A τ V n).obj S)) ∧ (eqToHom (congrArg (finiteSystemComplexPullback.{u} A τ) (Category.assoc j h k)) ≫ (finiteSystemComplexComposition.{u} A τ j (h ≫ k)).hom ≫ Functor.whiskerRight (finiteSystemComplexComposition.{u} A τ h k).hom (finiteSystemComplexPullback.{u} A τ j) = (finiteSystemComplexComposition.{u} A τ (j ≫ h) k).hom ≫ Functor.whiskerLeft (finiteSystemComplexPullback.{u} A τ k) (finiteSystemComplexComposition.{u} A τ j h).hom ≫ (Functor.associator (finiteSystemComplexPullback.{u} A τ k) (finiteSystemComplexPullback.{u} A τ h) (finiteSystemComplexPullback.{u} A τ j)).inv) ∧ (∀ S : finiteSystemDerived.{u} A τ V, (eqToHom (congrArg (finiteSystemDerivedPullback.{u} A τ) (Category.assoc j h k))).app S ≫ (finiteSystemDerivedComposition.{u} A τ j (h ≫ k)).hom.app S ≫ (finiteSystemDerivedPullback.{u} A τ j).map ((finiteSystemDerivedComposition.{u} A τ h k).hom.app S) = (finiteSystemDerivedComposition.{u} A τ (j ≫ h) k).hom.app S ≫ (finiteSystemDerivedComposition.{u} A τ j h).hom.app ((finiteSystemDerivedPullback.{u} A τ k).obj S))",
-    "branch": "newtargets-dag",
-    "by": "Q71",
-    "date": "2026-10-18",
-    "existing": false,
-    "note": "Repairs the saved packet: canonical system operations on actual scheme pro-etale sites replace arbitrary functor parameters. Includes ordinary and derived evaluation normalization and associativity on complexes before localization. Supporting constructions belong to this node and are listed in declarations; universal adjunctions and section-normalized conjugates determine the chosen data."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-6a05acdae",
-    "group": "Q71",
-    "result": "pass",
-    "note": "Read node, 9 stmt deps, module, report, node copy (only lean changed). Clause-by-clause match: finite ring tower A,τ with [Finite]; arbitrary j,h,k in Scheme.{u}; Mathlib Scheme.ProEt with site universes u+1/u not forced equal; proEtaleConstantRing + constantSheaf.map τ; dependency Systems/DS/evaluation/e (no private copy); U_f = universal left adjoint of explicit sectionwise system pushforward, level-n identified with proEtaleConstantRingPullback by unit-normalized ∃! comparison, derived = mapDerivedCategory; a = unique conjugate of fibre-product comparison d. Conjuncts: (1) levelwise = published module comparison (transition compatibility by type), (2) derived evaluation = (proEtaleConstantRingPullbackComposition h k).inv = dependency's c_{h,k}, (3) associativity on complexes before localization with assoc eqToHom and associator, (4) displayed equation in D(S_Y); directions verified by hand, auxiliary sorry'd existence/uniqueness statements true. Gates: no hollow defs (choose only from ∃!/uniquely determining properties), all theorems sorry, source+blueprint docstrings, Stacks tags verified, lines ≤100, statement verbatim, declarations list exact, no extra hypotheses, no pro-etale substitute. nt_compile.py --json compiled the snapshot file cleanly (20.8 s/19.3 s, no diagnostics; error probe confirms reporting). Observations only: normalization against proEtaleConstantRingPullback rather than finiteCoefficientModulePullback (required to type c_{h,k}); module-comparison node is a proof dep, not a stmt_dep (H2 forbids adding it)."
+    "prop-weil-pbc-proetale-constant-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition, proof on flat-term K-flat representatives; exactness permits all representatives"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sp-varying-ring-operations",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-proetale-inverse-image",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pc-kflat-resolution",
+  "lem-pur-proetale-module-pullback-composition",
+  "lem-trf-adjoint-composition-coherence",
+  "lem-trf-constant-coefficient-composition",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-geometric-module-transport",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "prop-weil-pbc-proetale-constant-exact",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D3, 03D7, 03D8; specialize the existing varying-ring operations to the lifted finite ring tower, then retain the planned coherence argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical inverse image composition on derived categories of inverse systems of sheaves with varying coefficient rings satisfies associativity as maps of whole systems",
+   "results": "Eight actual hits, including SheafOfModules.pullback_assoc, Scheme.Modules.pseudofunctor_associativity_assoc and sheafComposeIso identities. Read the sheaf pullback source: this supplies ordinary sheaf coherence, not the full derived semilinear-system statement.",
+   "date": "2026-10-18",
+   "verdict": "no match: the complete varying-coefficient system theorem is not an exact match or a one-line specialization of these hits"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback_assoc|pullbackComp|semilinear.*system [Algebra/Category/ModuleCat/Sheaf]",
+   "results": "Five hits in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:167,177,180,193,194. Read lines 150-212: pullbackComp and pullback_assoc are underived module-sheaf statements.",
+   "date": "2026-10-18",
+   "verdict": "no match: the complete varying-coefficient system theorem is not an exact match or a one-line specialization of these hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback_assoc\"",
+   "results": "Six hits: SheafOfModules.pullback_assoc, PresheafOfModules.pullback_assoc, overMapPullback_assoc, and categorical pullbacks. No derived varying-coefficient system theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match: the complete varying-coefficient system theorem is not an exact match or a one-line specialization of these hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associativity of inverse image composition for inverse sequences of module sheaves over varying finite coefficient rings in unbounded derived categories",
+   "results": "Eight actual hits including SheafOfModules.pullback_assoc, image and sheaf composition identities, and sheafPushforwardContinuousComp'_inv_app_val_app. No theorem states coherence on derived strict varying-coefficient systems.",
+   "date": "2026-10-18",
+   "verdict": "no match: the complete varying-coefficient system theorem is not an exact match or a one-line specialization of these hits"
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear|mapDerivedCategory|pullback_assoc [Algebra/Homology/DerivedCategory]",
+   "results": "Ten hits in DerivedCategory/ExactFunctor.lean and Ext/Map.lean. Read ExactFunctor.lean:27-58: mapDerivedCategory is exact-functor descent, not construction and coherence of semilinear coefficient-system inverse images.",
+   "date": "2026-10-18",
+   "verdict": "no match: the complete varying-coefficient system theorem is not an exact match or a one-line specialization of these hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\"",
+   "results": "Twelve hits in ExactFunctor.lean, including Functor.mapDerivedCategoryCompIso and NatTrans.mapDerivedCategory. Generic exact-functor descent is relevant infrastructure but does not supply the module-system comparison or its coefficient-transition normalization.",
+   "date": "2026-10-18",
+   "verdict": "no match: the complete varying-coefficient system theorem is not an exact match or a one-line specialization of these hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact levelwise pullback of semilinear coefficient towers has coherent natural composition maps before derived localization, compatible with coefficient transition maps",
+   "results": "Eight hits, all ordinary ring/module localization exactness or cotangent-module identities, not coefficient systems.",
+   "date": "2026-10-18",
+   "verdict": "no match: the complete varying-coefficient system theorem is not an exact match or a one-line specialization of these hits"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declarations": [
+   "SheafOfModules.pullback_assoc",
+   "CategoryTheory.Functor.mapDerivedCategoryCompIso",
+   "CategoryTheory.NatTrans.mapDerivedCategory"
+  ],
+  "note": "Underived sheaf composition coherence and generic exact-functor descent; the ring-system construction and compatibility are additional work, so this is not a Mathlib leaf."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-integral-pullback-composition",
+  "date": "2026-10-18",
+  "group": "NG"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-local-frobenius-trace",
+   "place": "statement, second sentence of the first paragraph: 'Iterating the Weil isomorphism $r$ times and using the resulting return to $\\bar y$ defines ... the local operator $F_y$' (the canonical identifications $L(g_Y^{n})^*Lg_Y^*\\cong L(g_Y^{n+1})^*$ and $L(g_s^n)^*L\\bar x^*\\cong L\\bar x^*L(g_Y^n)^*$ at the integral level underlying the rational coefficients $E$); the finite-coefficient system reassociation used in the integral comparison proof, formerly Step 5",
+   "via": [
+    "lem-pod-integral-pullback-composition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-pod-finite-system-pullback-coherence",
+  "worker": "stage1",
+  "summary": "Constructed the canonical comparisons as conjugates on abelian strict systems, proved their coefficient-transition compatibility from componentwise units, applied existing adjunction coherence before complexes, and descended equality by ordinary localization. No statement change and no new nodes.",
+  "blueprint": "Realizes the canonical iterated-pullback identifications implicit in the first paragraph of def-weil-local-frobenius-trace (iterating the Weil isomorphism), through the finite-system reassociation step of lem-pod-integral-pullback-composition.",
+  "tool_uses": [
+   {
+    "node": "def-weil-proetale-inverse-image",
+    "why": "Generic coefficient-sheaf, adjunction, exactness or resolution interface used to construct ordinary strict-system pullback comparisons; does not replace the unit finiteness/Frobenius route."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic coefficient-sheaf, adjunction, exactness or resolution interface used to construct ordinary strict-system pullback comparisons; does not replace the unit finiteness/Frobenius route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic coefficient-sheaf, adjunction, exactness or resolution interface used to construct ordinary strict-system pullback comparisons; does not replace the unit finiteness/Frobenius route."
+   },
+   {
+    "node": "lem-pur-proetale-module-pullback-composition",
+    "why": "Generic coefficient-sheaf, adjunction, exactness or resolution interface used to construct ordinary strict-system pullback comparisons; does not replace the unit finiteness/Frobenius route."
+   },
+   {
+    "node": "lem-trf-constant-coefficient-composition",
+    "why": "Generic coefficient-sheaf, adjunction, exactness or resolution interface used to construct ordinary strict-system pullback comparisons; does not replace the unit finiteness/Frobenius route."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-module-transport",
+    "why": "Generic coefficient-sheaf, adjunction, exactness or resolution interface used to construct ordinary strict-system pullback comparisons; does not replace the unit finiteness/Frobenius route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic coefficient-sheaf, adjunction, exactness or resolution interface used to construct ordinary strict-system pullback comparisons; does not replace the unit finiteness/Frobenius route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic coefficient-sheaf, adjunction, exactness or resolution interface used to construct ordinary strict-system pullback comparisons; does not replace the unit finiteness/Frobenius route."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Generic coefficient-sheaf, adjunction, exactness or resolution interface used to construct ordinary strict-system pullback comparisons; does not replace the unit finiteness/Frobenius route."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic coefficient-sheaf, adjunction, exactness or resolution interface used to construct ordinary strict-system pullback comparisons; does not replace the unit finiteness/Frobenius route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-proetale-inverse-image",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pc-kflat-resolution",
+  "lem-pur-proetale-module-pullback-composition",
+  "lem-trf-constant-coefficient-composition",
+  "lem-weil-pbc-geometric-module-transport",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "prop-weil-pbc-proetale-constant-exact",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q93-1e12d87cc",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q93-1e12d87cc (reviewer sub-agent of L); spot-checked: Reviewed the full item, cited nodes, unit/chapter route, and Stacks sources. Step 2 omitted the direct-image mate identity needed to prove strict-system transition semilinearity. Corrected DAG JSON is in fixes/dag/nodes/sec-poincare-duality/lem-pod-finite-system-pullback-coherence.json; review.md records all checks.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteSystemPullbackCoherence",
+  "declaration": "WeilConjectures.finiteSystemPullbackCoherence",
+  "declarations": [
+   "WeilConjectures.finiteSystemRingSheafify",
+   "WeilConjectures.finiteSystemSiteSmall",
+   "WeilConjectures.finiteSystemSequenceSmall",
+   "WeilConjectures.finiteSystemRings",
+   "WeilConjectures.finiteSystemRingTransition",
+   "WeilConjectures.finiteSystems",
+   "WeilConjectures.finiteSystemDerived",
+   "WeilConjectures.finiteSystemEvaluation",
+   "WeilConjectures.finiteSystemBaseChange",
+   "WeilConjectures.finiteSystemBaseChange_continuous",
+   "WeilConjectures.finiteSystemRingComponent",
+   "WeilConjectures.finiteSystemRingComponent_naturality",
+   "WeilConjectures.finiteSystemRingMap",
+   "WeilConjectures.finiteSystemPushforward",
+   "WeilConjectures.finiteSystemPushforward_isRightAdjoint",
+   "WeilConjectures.finiteSystemPullback",
+   "WeilConjectures.finiteSystemAdjunction",
+   "WeilConjectures.finiteSystemPullback_exact",
+   "WeilConjectures.finiteSystemPullbackAdditive",
+   "WeilConjectures.finiteSystemPullbackLimits",
+   "WeilConjectures.finiteSystemPullbackColimits",
+   "WeilConjectures.finiteSystemDerivedPullback",
+   "WeilConjectures.finiteSystemComposition_existsUnique",
+   "WeilConjectures.finiteSystemComposition",
+   "WeilConjectures.finiteSystemComplexComposition",
+   "WeilConjectures.finiteSystemDerivedComposition",
+   "WeilConjectures.finiteSystemDerivedEvaluation",
+   "WeilConjectures.finiteSystemPullbackEvaluation_existsUnique",
+   "WeilConjectures.finiteSystemPullbackEvaluation",
+   "WeilConjectures.finiteSystemDerivedPullbackEvaluation",
+   "WeilConjectures.finiteSystemModuleComposition",
+   "WeilConjectures.finiteSystemComplexPullback",
+   "WeilConjectures.finiteSystemPullbackCoherence"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteSystemPullbackCoherence.lean",
+  "statement": "theorem finiteSystemPullbackCoherence [∀ n, Finite (A n)] {Y Z W V : Scheme.{u}} (j : Y ⟶ Z) (h : Z ⟶ W) (k : W ⟶ V) : (∀ (M : finiteSystems.{u} A τ V) (n : ℕ), (finiteSystemEvaluation.{u} A τ Z n).map ((finiteSystemComposition.{u} A τ h k).hom.app M) ≫ (finiteSystemPullbackEvaluation.{u} A τ h n).hom.app ((finiteSystemPullback.{u} A τ k).obj M) ≫ (proEtaleConstantRingPullback (A n) h).map ((finiteSystemPullbackEvaluation.{u} A τ k n).hom.app M) = (finiteSystemPullbackEvaluation.{u} A τ (h ≫ k) n).hom.app M ≫ (finiteSystemModuleComposition.{u} A h k n).hom.app ((finiteSystemEvaluation.{u} A τ V n).obj M)) ∧ (∀ (S : finiteSystemDerived.{u} A τ V) (n : ℕ), (finiteSystemDerivedEvaluation.{u} A τ Z n).map ((finiteSystemDerivedComposition.{u} A τ h k).hom.app S) ≫ (finiteSystemDerivedPullbackEvaluation.{u} A τ h n).hom.app ((finiteSystemDerivedPullback.{u} A τ k).obj S) ≫ (proEtaleConstantRingDerivedPullback (A n) h).map ((finiteSystemDerivedPullbackEvaluation.{u} A τ k n).hom.app S) = (finiteSystemDerivedPullbackEvaluation.{u} A τ (h ≫ k) n).hom.app S ≫ (proEtaleConstantRingPullbackComposition h k (A n)).inv.app ((finiteSystemDerivedEvaluation.{u} A τ V n).obj S)) ∧ (eqToHom (congrArg (finiteSystemComplexPullback.{u} A τ) (Category.assoc j h k)) ≫ (finiteSystemComplexComposition.{u} A τ j (h ≫ k)).hom ≫ Functor.whiskerRight (finiteSystemComplexComposition.{u} A τ h k).hom (finiteSystemComplexPullback.{u} A τ j) = (finiteSystemComplexComposition.{u} A τ (j ≫ h) k).hom ≫ Functor.whiskerLeft (finiteSystemComplexPullback.{u} A τ k) (finiteSystemComplexComposition.{u} A τ j h).hom ≫ (Functor.associator (finiteSystemComplexPullback.{u} A τ k) (finiteSystemComplexPullback.{u} A τ h) (finiteSystemComplexPullback.{u} A τ j)).inv) ∧ (∀ S : finiteSystemDerived.{u} A τ V, (eqToHom (congrArg (finiteSystemDerivedPullback.{u} A τ) (Category.assoc j h k))).app S ≫ (finiteSystemDerivedComposition.{u} A τ j (h ≫ k)).hom.app S ≫ (finiteSystemDerivedPullback.{u} A τ j).map ((finiteSystemDerivedComposition.{u} A τ h k).hom.app S) = (finiteSystemDerivedComposition.{u} A τ (j ≫ h) k).hom.app S ≫ (finiteSystemDerivedComposition.{u} A τ j h).hom.app ((finiteSystemDerivedPullback.{u} A τ k).obj S))",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repairs the saved packet: canonical system operations on actual scheme pro-etale sites replace arbitrary functor parameters. Includes ordinary and derived evaluation normalization and associativity on complexes before localization. Supporting constructions belong to this node and are listed in declarations; universal adjunctions and section-normalized conjugates determine the chosen data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a05acdae",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Read node, 9 stmt deps, module, report, node copy (only lean changed). Clause-by-clause match: finite ring tower A,τ with [Finite]; arbitrary j,h,k in Scheme.{u}; Mathlib Scheme.ProEt with site universes u+1/u not forced equal; proEtaleConstantRing + constantSheaf.map τ; dependency Systems/DS/evaluation/e (no private copy); U_f = universal left adjoint of explicit sectionwise system pushforward, level-n identified with proEtaleConstantRingPullback by unit-normalized ∃! comparison, derived = mapDerivedCategory; a = unique conjugate of fibre-product comparison d. Conjuncts: (1) levelwise = published module comparison (transition compatibility by type), (2) derived evaluation = (proEtaleConstantRingPullbackComposition h k).inv = dependency's c_{h,k}, (3) associativity on complexes before localization with assoc eqToHom and associator, (4) displayed equation in D(S_Y); directions verified by hand, auxiliary sorry'd existence/uniqueness statements true. Gates: no hollow defs (choose only from ∃!/uniquely determining properties), all theorems sorry, source+blueprint docstrings, Stacks tags verified, lines ≤100, statement verbatim, declarations list exact, no extra hypotheses, no pro-etale substitute. nt_compile.py --json compiled the snapshot file cleanly (20.8 s/19.3 s, no diagnostics; error probe confirms reporting). Observations only: normalization against proEtaleConstantRingPullback rather than finiteCoefficientModulePullback (required to type c_{h,k}); module-comparison node is a proof dep, not a stmt_dep (H2 forbids adding it)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261019T122631-L-477619",
+  "kind": "proof"
+ }
 }

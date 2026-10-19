@@ -5,16 +5,8 @@ module
 
 public import Sheaf.Paper.SemilinearDerivedSections
 public import Sheaf.Paper.IntegralFinitePullbackComposition
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
-import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingComposition
 public import Sheaf.AlgebraicGeometry.ProEtaleModulePullbackComposition
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.CategoryTheory.GeometricModuleTransport
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Mathlib.CategoryTheory.Adjunction.CompositionIso
-import Mathlib.CategoryTheory.Localization.Predicate
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.VaryingRingOperations
 
 /-! # Coherent composition of finite-coefficient pullback on strict systems
 
@@ -105,7 +97,7 @@ theorem finiteSystemBaseChange_continuous {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (finiteSystemBaseChange.{u} f).IsContinuous
       (coefficientSequenceTopology (ProEt.topology Y))
       (coefficientSequenceTopology (ProEt.topology X)) := by
-  sorry
+  exact AlgebraicGeometry.ProEtale.VaryingRing.baseChange_continuous f
 
 attribute [instance] finiteSystemBaseChange_continuous
 
@@ -129,7 +121,29 @@ theorem finiteSystemRingComponent_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
         (ringPresheaf.{u + 1, u, u + 1} (ProEt.topology X) (finiteSystemRings.{u} A X)
           (finiteSystemRingTransition.{u} A τ X)).map
           ((finiteSystemBaseChange.{u} f).op.map g) := by
-  sorry
+  let R : ℕ → CommRingCat.{u + 1} := fun n ↦
+    CommRingCat.of (ULift.{u + 1, u} (A n))
+  let φ : ∀ n, R (n + 1) ⟶ R n := fun n ↦
+    CommRingCat.ofHom ((τ n).hom.ulift)
+  apply (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}).map_injective
+  change
+    (ring.{u + 1, u, u + 1} (coefficientSequenceTopology (ProEt.topology Y))
+      (systemRing.{u + 1, u, u + 1} (ProEt.topology Y)
+        (AlgebraicGeometry.ProEtale.VaryingRing.coefficients R Y)
+        (AlgebraicGeometry.ProEtale.VaryingRing.coefficientTransition R φ Y))).obj.map g ≫
+      (forget₂ CommRingCat RingCat).map
+        ((proEtaleConstantDirectImageMap f CommRingCat
+          (CommRingCat.of (ULift.{u + 1, u} (A V.unop.1)))).hom.app (op V.unop.2)) =
+    (forget₂ CommRingCat RingCat).map
+        ((proEtaleConstantDirectImageMap f CommRingCat
+          (CommRingCat.of (ULift.{u + 1, u} (A U.unop.1)))).hom.app (op U.unop.2)) ≫
+      (ring.{u + 1, u, u + 1} (coefficientSequenceTopology (ProEt.topology X))
+        (systemRing.{u + 1, u, u + 1} (ProEt.topology X)
+          (AlgebraicGeometry.ProEtale.VaryingRing.coefficients R X)
+          (AlgebraicGeometry.ProEtale.VaryingRing.coefficientTransition R φ X))).obj.map
+        ((AlgebraicGeometry.ProEtale.VaryingRing.baseChange f).map g.unop).op
+  exact AlgebraicGeometry.ProEtale.VaryingRing.ringMapApp_naturality R φ f g
+
 
 /-- The ring-sheaf map on the entire sequence site, including all coefficient maps.
 Source: Stacks 03D3, 0941 (blueprint: lem-pod-finite-system-pullback-coherence). -/
@@ -169,7 +183,12 @@ Naturality of the constant-section coefficient maps makes this correspondence
 restrict to transition-compatible families. Transport back along the site equivalences. -/
 theorem finiteSystemPushforward_isRightAdjoint {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (finiteSystemPushforward.{u} A τ f).IsRightAdjoint := by
-  sorry
+  let R : ℕ → CommRingCat.{u + 1} := fun n ↦
+    CommRingCat.of (ULift.{u + 1, u} (A n))
+  let φ : ∀ n, R (n + 1) ⟶ R n := fun n ↦
+    CommRingCat.ofHom ((τ n).hom.ulift)
+  change (AlgebraicGeometry.ProEtale.VaryingRing.push R φ f).IsRightAdjoint
+  infer_instance
 
 attribute [instance] finiteSystemPushforward_isRightAdjoint
 
@@ -195,7 +214,11 @@ theorem finiteSystemPullback_exact [∀ n, Finite (A n)]
     (finiteSystemPullback.{u} A τ f).Additive ∧
       PreservesFiniteLimits (finiteSystemPullback.{u} A τ f) ∧
       PreservesFiniteColimits (finiteSystemPullback.{u} A τ f) := by
-  sorry
+  let R : ℕ → CommRingCat.{u + 1} := fun n ↦
+    CommRingCat.of (ULift.{u + 1, u} (A n))
+  let φ : ∀ n, R (n + 1) ⟶ R n := fun n ↦
+    CommRingCat.ofHom ((τ n).hom.ulift)
+  exact AlgebraicGeometry.ProEtale.VaryingRing.pull_exact R φ f
 
 /-- Additivity of the actual finite-system inverse image.
 Source: Stacks 0941 (blueprint: lem-pod-finite-system-pullback-coherence). -/
@@ -244,7 +267,20 @@ theorem finiteSystemComposition_existsUnique
           (d.hom.app M).val.app (op (n, U)) x =
             M.val.map (CategoryTheory.Prod.mkHom (𝟙 n)
               ((MorphismProperty.Over.pullbackComp h k (h ≫ k) rfl).hom.app U)).op x := by
-  sorry
+  let R : ℕ → CommRingCat.{u + 1} := fun n ↦
+    CommRingCat.of (ULift.{u + 1, u} (A n))
+  let φ : ∀ n, R (n + 1) ⟶ R n := fun n ↦
+    CommRingCat.ofHom ((τ n).hom.ulift)
+  obtain ⟨d, hd, huniq⟩ :=
+    AlgebraicGeometry.ProEtale.VaryingRing.modulePComp_existsUnique R φ h k
+  let e := conjugateIsoEquiv ((finiteSystemAdjunction.{u} A τ k).comp
+    (finiteSystemAdjunction.{u} A τ h)) (finiteSystemAdjunction.{u} A τ (h ≫ k))
+  refine ⟨e.symm d, ⟨d, e.apply_symm_apply d, hd⟩, ?_⟩
+  intro a ha
+  obtain ⟨d', he, hd'⟩ := ha
+  apply e.injective
+  rw [e.apply_symm_apply]
+  exact he.trans (huniq d' hd')
 
 /-- Select the comparison determined uniquely by the full system adjunction.
 Source: Stacks 03D8 (blueprint: lem-pod-finite-system-pullback-coherence). -/
