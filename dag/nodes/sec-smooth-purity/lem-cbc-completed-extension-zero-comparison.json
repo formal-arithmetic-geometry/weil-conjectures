@@ -140,9 +140,12 @@
    }
   },
   {
-   "text": "When changing the presentation of the specified pullback, apply [lem-cbc-adic-pullback-presentation-transport] to $g$ and to $g_U$. The coefficient structure maps are the maps of [def-weil-pbc-completed-pullback]: their $n$-th components are the canonical constant-section maps after the finite projections. Hence the hypotheses on the components hold, and the cited lemma identifies the coefficient maps and the natural module pullbacks. Its universal counit equations then give the ordinary and actual strict-tower derived comparisons, respecting every quotient transition. This retains the inverse-adjoint-mate normalization of Step 8 in any of these presentations and imposes no invertibility hypothesis on the completed coefficient map.",
+   "text": "For the presentation transport, cbcDatumFiniteCoefficient_eq is definitional. Joint monicity of limit projections and the datum projection equation give cbcDatumCoefficient_eq. The object and map clauses of the ordinary tensor witness identify completedModulePullback with the datum module functor. Whiskering identifies the whole strict tower functor. Proof irrelevance transports their zero-preserving structures and gives equality on complexes. Each selected ordinary or tower pullback pair is universal by lem-cbc-adic-pullback-presentation-transport. The datum functors are exact by def-weil-pbc-four-corners and def-weil-pbc-completed-pullback. Uniqueness of left-derived functors gives a natural isomorphism. Its homotopy counit equation, naturality at the quotient comparison, and the exact functor factorization imply the displayed complex counit equation. Cancelling the exact factorization and representing every derived object proves uniqueness.",
    "uses": [
     "lem-cbc-adic-pullback-presentation-transport",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-four-corners",
+    "lem-pur-derived-change-of-rings",
     "def-weil-pbc-completed-pullback"
    ],
    "elementary": false,
@@ -164,11 +167,14 @@
    }
   },
   {
-   "text": "For the presentation transports of Step 9, [lem-cbc-adic-pullback-presentation-transport] gives $E_gu_g=u'_ge_g$ and the same identity for $g_U$, where $u_g,u'_g$ are the specified ordinary-to-completed units and $e_g$ is the counit-normalized ordinary comparison. These are the units of [def-weil-pbc-completed-pullback]. The strict quotient augmentation is $x\\mapsto x\\otimes1$ at every level. By [lem-cbc-exact-product-functor-strict-limit], $\\lambda_{j'}$ preserves the maps induced by these strict augmentations; in the signed fiber coordinates their value is $(x,0)$. Thus transporting Step 10 by $E_g^{-1}$ on the source and $j'_!E_{g_U}$ on the target preserves the finite inverse-adjoint-mate normalization. This is the original normalization assertion, now supplied by cited lemmas on the actual tower functors and their counits.",
+   "text": "For the presentation transports of Step 9, [lem-cbc-adic-pullback-presentation-transport] gives $E_gu_g=u'_ge_g$ and the same identity for $g_U$, where $u_g,u'_g$ are the specified ordinary-to-completed units and $e_g$ is the counit-normalized ordinary comparison. These are the units of [def-weil-pbc-completed-pullback]. The strict quotient augmentation is $x\\mapsto x\\otimes1$ at every level. By [lem-cbc-exact-product-functor-strict-limit], $\\lambda_{j'}$ preserves the maps induced by these strict augmentations; in the signed fiber coordinates their value is $(x,0)$. Thus transporting Step 10 by $E_g^{-1}$ on the source and $j'_!E_{g_U}$ on the target preserves the finite inverse-adjoint-mate normalization. This is the original normalization assertion, now supplied by cited lemmas on the actual tower functors and their counits. In Lean, cbcDatumActualStrictTransport_unit follows by expanding the strict unit and functoriality from cbcDatumCompletedTransport_unit, which remains the original named obligation. For cbcDatumCompletedExchange_unit, precompose with the ordinary transport isomorphism, substitute its unit equation, cancel the transport and its inverse, apply the old exchange unit equation, and combine the target functor maps. For completedOpenExchangeComparison, use the retained completedExtensionZeroComparison for the old exchange and preservation of completeness by the original open. The transported exchange is a composite of isomorphisms. For a completed pullback in the new presentation, choose its own canonical representative and realize that representative as the old completed pullback by the inverse transport. The arbitrary-representative completeness clause of lemma-weil-pbc-completed-pullback-reduction makes the same completion chain map invertible, hence gives completeness in the new presentation. Apply this to both horizontal arrows. The base-changed open is quasi-compact by base change; apply the retained completedExtensionZeroComparison to its identity horizontal square to obtain completeness of extension of the new upper pullback.",
    "uses": [
     "lem-cbc-adic-pullback-presentation-transport",
     "def-weil-pbc-completed-pullback",
-    "lem-cbc-exact-product-functor-strict-limit"
+    "lem-cbc-exact-product-functor-strict-limit",
+    "lemma-weil-pbc-completed-pullback-reduction",
+    "lem-pc-quasi-compact-base-change",
+    "def-cbc-open-immersion-square"
    ],
    "elementary": false,
    "source": {
@@ -210,12 +216,14 @@
   "lem-weil-pbc-constant-completion-equivalence",
   "def-weil-pbc-completed-pullback",
   "lem-cbc-adic-pullback-presentation-transport",
+  "def-weil-pbc-four-corners",
+  "lem-pur-derived-change-of-rings",
   "prop-weil-pbc-rlim-functoriality"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
-  "place": "Retained finite-reduction/strict-derived-limit route; returned Steps 5 and 7 extracted into three statement-only tool lemmas and the existing normalized strict Roos model. Eleven proof steps."
+  "place": "Retained sheaf-theoretic argument; R1 formalized the presentation transport and assembly on 2026-10-19 using universal left-derived uniqueness and arbitrary-representative completeness. The original cbcDatumCompletedTransport_unit remains open."
  },
  "mathlib_searches": [
   {
@@ -659,5 +667,15 @@
   "group": "Q34",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable statements, all statement dependencies, sources, canonical transports, docstrings, edge cases, universes, and verbatim signature. Per-file scompile.py compilation passed without diagnostics. No delivery defects found; branch head unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261019T005409-L-2763900",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
