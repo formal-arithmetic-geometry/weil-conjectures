@@ -17055,3 +17055,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:59 L: returned deliver/Q130/lem-per-rig-etale-principal-tower-limit (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-per-rig-etale-principal-tower-limit: lem-per-rig-e)
 - 03:59 L: returned deliver/Q113/lem-trf-sepclosed-rank-one-completion (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-sepclosed-rank-one-completion: lem-trf-sepclos)
 - 04:00 L: returned deliver/Q75/lem-per-cyclotomic-field-brauer-splitting (reviewer RETURN: Returned because the item was dropped from the route, not for its mathematics. The 2026-10-19 artin-gabber section of si)
+- 04:00 L: returned deliver/Q69/lem-per-associated-graded-local-dimension (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-per-associated-graded-local-dimension: lem-per-ass)
