@@ -17053,3 +17053,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:59 L: returned deliver/Q82/lem-per-coherent-normal-surface-trace-calculus (reviewer RETURN: Route-pivot fault (repair note lem-per-artin-gabber-affine-curve.json; side coord/route-pivot-dropped.txt, section 2026-)
 - 03:59 L: returned deliver/Q105/lem-trf-generic-basis-base-open-universal-injectivity (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-generic-basis-base-open-universal-injectivity:)
 - 03:59 L: returned deliver/Q130/lem-per-rig-etale-principal-tower-limit (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-per-rig-etale-principal-tower-limit: lem-per-rig-e)
+- 03:59 L: returned deliver/Q113/lem-trf-sepclosed-rank-one-completion (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-sepclosed-rank-one-completion: lem-trf-sepclos)
