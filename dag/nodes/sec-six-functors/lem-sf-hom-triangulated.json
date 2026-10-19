@@ -20,7 +20,7 @@
  ],
  "proof": [
   {
-   "text": "Use the small skeleton of the étale site of $X$ in the chosen larger universe [def-weil-pbc-etale-site, def-weil-size-convention]. Put $\\mathcal O=A_X$. By [def-weil-pbc-derived-categories], $A_X$ is a sheaf of commutative rings and $D(X_{\\Et},A)$ is precisely $D(\\mathcal O)$. The definition [def-pur-derived-internal-hom] identifies $H(L,N)=R\\mathcal Hom_{\\mathcal O}(L,N)$ with the internal Hom in the statement: on representatives it is $\\mathcal Hom^\\bullet(L,I(N))$, with $N\\to I(N)$ a K-injective resolution. Thus the objects and both given triangles have the types required for the ringed-site theorem.",
+   "text": "Work directly on the recorded small etale site, whose object universe is u+1 and morphism universe is u [def-weil-pbc-etale-site, def-weil-size-convention]. Set R to the constant commutative ring sheaf A_X. The category in the statement is exactly its full module derived category [def-weil-pbc-derived-categories]. Use the existing independent-universe derivedInternalHomOfUniverses [def-pur-derived-internal-hom], without a change of site or coefficient category.",
    "uses": [
     "def-weil-pbc-etale-site",
     "def-weil-size-convention",
@@ -34,7 +34,7 @@
    }
   },
   {
-   "text": "Apply the first-variable exactness clause of [lem-weil-pbc-ringed-internal-hom-exact-restriction] to $K'\\to K\\to K''\\to K'[1]$, keeping $M$ fixed. That clause is contravariant and includes the shift identification $H(L[1],M)\\cong H(L,M)[-1]$. It gives the reversed distinguished triangle $H(K'',M)\\to H(K,M)\\to H(K',M)\\to H(K'',M)[1]$, with its contravariant triangle signs. Substituting the identification of step 1 gives the first displayed triangle.",
+   "text": "Specialize the independent-universe ringedInternalHom_exactOfUniverses [lem-weil-pbc-ringed-internal-hom-exact-restriction] at object universe u+1, morphism universe u, coefficient universe u+1 and derived universe w, with R=A_X. Its second conjunct gives the contravariant triangulated functor for every fixed target M, including the opposite shift and cone signs. This is precisely the first conjunct of the statement.",
    "uses": [
     "lem-weil-pbc-ringed-internal-hom-exact-restriction"
    ],
@@ -45,7 +45,7 @@
    }
   },
   {
-   "text": "Apply the second-variable exactness clause of [lem-weil-pbc-ringed-internal-hom-exact-restriction] to $M'\\to M\\to M''\\to M'[1]$, keeping $K$ fixed. Its covariant shift identification $H(K,N[1])\\cong H(K,N)[1]$ gives $H(K,M')\\to H(K,M)\\to H(K,M'')\\to H(K,M')[1]$ as a distinguished triangle, hence the second displayed triangle by step 1. The cited theorem explicitly imposes no boundedness or finite-generation hypotheses, so both applications hold for all the complexes in the statement.",
+   "text": "The first conjunct of the same specialization [lem-weil-pbc-ringed-internal-hom-exact-restriction] gives the covariant triangulated functor for every fixed source K. This is precisely the second conjunct of the statement. Swap the two conjuncts using And.symm. No boundedness or finite-generation assumption or additional comparison is needed.",
    "uses": [
     "lem-weil-pbc-ringed-internal-hom-exact-restriction"
    ],
@@ -216,5 +216,15 @@
   "group": "N2",
   "result": "pass",
   "note": "Reviewed node, dependencies, source, Lean module, report sections, edge cases, universes, and declarations. scompile.py sandbox and library checks passed; no substantive findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261019T112618-L-3961782",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

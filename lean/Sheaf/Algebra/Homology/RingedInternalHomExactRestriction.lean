@@ -6,6 +6,7 @@ Authors: SHEAF group ND
 module
 
 public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Homology.BifunctorShift
@@ -41,7 +42,7 @@ set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 
-universe u w
+universe u v r w
 
 open CategoryTheory CategoryTheory.Limits Opposite
 open CategoryTheory.Pretriangulated.Opposite
@@ -463,6 +464,44 @@ Proof: For the first variable fix a K-injective I representing M. The graded spl
     lem-pur-derived-internal-hom-shift-right give H(P[m],Q)=H(P,Q)[-m] and H(P,Q[n])=H(P,Q)[n].
     The cone signs give the required triangulated structures. Only finite splittings occur, so no
     boundedness or finite-generation hypothesis is used. -/
+theorem ringedInternalHom_exactOfUniverses
+    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
+    [HasSheafify J AddCommGrpCat.{max u v r}]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{max u v r}]
+    (R : Sheaf J CommRingCat.{max u v r})
+    [HasDerivedCategory.{w} (SheafOfModules.{max u v r}
+      ((sheafCompose J (forget₂ CommRingCat.{max u v r} RingCat.{max u v r})).obj R))] :
+    (∀ L, ∃ _ : ((Functor.curry.obj
+      (derivedInternalHomOfUniverses.{u, v, r, w} J R)).obj (op L)).CommShift ℤ,
+      ((Functor.curry.obj
+        (derivedInternalHomOfUniverses.{u, v, r, w} J R)).obj (op L)).IsTriangulated) ∧
+    (∀ M, ∃ _ : ((Functor.curry.obj
+      (derivedInternalHomOfUniverses.{u, v, r, w} J R)).flip.obj M).CommShift ℤ,
+      ((Functor.curry.obj
+        (derivedInternalHomOfUniverses.{u, v, r, w} J R)).flip.obj M).IsTriangulated) := by
+  sorry
+
+/-- Internal derived Hom preserves distinguished triangles in each variable
+and commutes with shifts. The first variable is a functor from the opposite
+triangulated category, whose shift by m is the original shift by -m.
+
+Source: Stacks Project, Tag 08JC (lemma-RHom-triangulated).
+(blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction).
+
+Proof: For the first variable fix a K-injective I representing M. The graded splitting of the cone
+    gives Hom(C(f),I) as Hom(B,I) plus Hom(A[1],I). Put X=Hom(B,I), Y=Hom(A,I), h=f*. In degree n
+    its differential is (d_X x, d_Y y+(-1)^(n+1)h(x)); (x,y) maps to ((-1)^(n-1)y,x) in C(h)[-1].
+    Rotation gives the reversed distinguished triangle. For the second variable choose K-injective
+    representatives J,I; lem-weil-pbc-kinjective-hom-derived represents the morphism by a chain
+    map g. TR3 and lem-sf-triangle-morphism-iso identify its cone triangle with the given
+    triangle. Its cone is K-injective: Hom from any acyclic test complex is the cone of two
+    acyclic ordinary Hom complexes, hence acyclic. Then Hom(A,C(g)) is the cone of Hom(A,g), with
+    differential (dx+Hom(A,g)y,-dy). These cone calculations descend by
+    lem-pur-homotopy-category-triangulated and lem-pur-rhom-well-defined. The natural shift
+    identifications from lem-pur-derived-internal-hom-shift-left and
+    lem-pur-derived-internal-hom-shift-right give H(P[m],Q)=H(P,Q)[-m] and H(P,Q[n])=H(P,Q)[n].
+    The cone signs give the required triangulated structures. Only finite splittings occur, so no
+    boundedness or finite-generation hypothesis is used. -/
 theorem ringedInternalHom_exact
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})
     [HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u}
@@ -475,6 +514,6 @@ theorem ringedInternalHom_exact
     RingCat.{u})).obj R))), ∃ _ : ((Functor.curry.obj (derivedInternalHom.{u, w} J R)).flip.obj
     M).CommShift ℤ,
     ((Functor.curry.obj (derivedInternalHom.{u, w} J R)).flip.obj M).IsTriangulated) := by
-  sorry
+  exact ringedInternalHom_exactOfUniverses.{u, u, u, w} J R
 
 end CategoryTheory
