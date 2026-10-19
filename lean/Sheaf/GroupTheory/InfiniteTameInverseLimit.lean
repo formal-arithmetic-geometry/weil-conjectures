@@ -9,6 +9,7 @@ public import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
 public import Mathlib.Topology.Algebra.Group.Quotient
 import Mathlib.CategoryTheory.CofilteredSystem
 import Mathlib.Topology.Separation.Hausdorff
+import Mathlib.GroupTheory.PGroup
 
 /-!
 # Inverse limits of finite group extensions with p-group kernels
@@ -56,29 +57,24 @@ products, with their subspace topologies. The kernel helper imposes exactly the 
 coordinate conditions `x j ∈ P j`. The quotient uses Mathlib's quotient topology; the
 normality witness supplies its group structure explicitly.
 
-Proof, following the node's eight steps:
-1. Compatibility equations and the coordinate conditions defining the kernel are closed
-   in the products of finite discrete groups. They are preserved by group operations.
-   The kernel's subspace topology is also the one from the product of the `P j`.
-2. The limits are closed subgroups of products of finite groups, hence profinite.
-3. Naturality of `θ` gives the coordinatewise homomorphism; finite discrete coordinates
-   give continuity. Its kernel is precisely the coordinatewise subgroup, hence normal.
-4. For a compatible `c`, the finite nonempty fibres of `θ.app j` form an inverse system.
-   Their transitions are onto: adjust a chosen lift by an element of `P j`, lifted along
-   the surjective kernel transition. The finite inverse-system nonemptiness theorem
-   gives a compatible lift of `c`, proving surjectivity on limits.
-5. The induced quotient homomorphism is bijective by the kernel identity and
-   surjectivity. Compactness of the source and Hausdorffness of the target show that
-   it is a homeomorphism, with the displayed normalization on cosets.
-6. Apply finite inverse-system projection surjectivity to the `P j`. Thus every kernel
-   coordinate projection is onto.
-7. The kernel of any continuous map to a finite discrete group contains a basic
-   identity neighbourhood restricting finitely many coordinates. Choose an upper bound
-   of those indices (any index if none occur). The corresponding coordinate kernel is
-   contained in the map's kernel.
-8. Therefore a finite continuous quotient factors surjectively through one `P j`.
-   Counting cosets shows that its order divides `|P j| = p^n`; primality of `p` makes
-   that order a power of `p`, including the trivial quotient of order `p^0`.
+Proof, following the node's five steps:
+1. Mathlib's explicit limits provide compact Hausdorff topological groups and the
+   continuous coordinatewise homomorphism, with its displayed coordinate formula.
+2. For a compatible `c`, the finite nonempty fibres of `θ.app j` form an inverse system
+   by naturality. Mathlib's finite inverse-system nonemptiness theorem gives a compatible
+   lift, proving surjectivity on limits; no surjectivity of fibre transitions is needed.
+3. The kernel identity follows coordinatewise. The kernel is closed as the inverse image
+   of the identity singleton and normal as a homomorphism kernel. The induced quotient
+   homomorphism is bijective and continuous. Compactness of its source and Hausdorffness
+   of its target give continuity of the inverse, with the displayed coset normalization.
+4. The kernel of a continuous map to a finite discrete group is an identity neighbourhood,
+   so it contains a product cylinder restricting finitely many coordinates. Choose an
+   index above these coordinates, using any index if the finite set is empty. Compatibility
+   shows that the kernel of evaluation at this index lies in the given map's kernel.
+5. Descend the given surjective map through the image of this coordinate evaluation.
+   That image is a subgroup of the finite p-group `P j`, hence a p-group; its surjective
+   image is again a p-group. Finiteness and primality now give order `p^n`, including the
+   trivial quotient of order `p^0`. Surjectivity of kernel projections is unnecessary.
 -/
 theorem finiteExtension_inverseLimit_exact_pro_p
     {Λ : Type u} [PartialOrder Λ] [Nonempty Λ] [IsDirectedOrder Λ]
@@ -108,6 +104,126 @@ theorem finiteExtension_inverseLimit_exact_pro_p
     (∀ (Q : Type v) [Group Q] [Finite Q] [TopologicalSpace Q] [DiscreteTopology Q]
       (f : finiteExtensionLimitKernel I P →ₜ* Q),
       Function.Surjective f → ∃ n : ℕ, Nat.card Q = p ^ n) := by
-  sorry
+  classical
+  have _ := @hIsurj
+  have _ := @hCsurj
+  have _ := @hPsurj
+  clear hIsurj hCsurj hPsurj
+  have hcoord (x : limit I) (j : Λᵒᵖ) :
+      (finiteExtensionLimitMap θ x).val j = θ.app j (x.val j) := by
+    rfl
+  have hsurj : Function.Surjective (finiteExtensionLimitMap θ) := by
+    intro c
+    -- Finite fibres have a compatible family without surjectivity of their transitions.
+    let F : Λᵒᵖ ⥤ Type u :=
+      { obj := fun j ↦ {x : I.obj j // θ.app j x = c.val j}
+        map := fun {j k} f ↦ ↾fun x ↦ ⟨I.map f x.val, by
+          change (I.map f ≫ θ.app k) x.val = c.val k
+          rw [θ.naturality]
+          change C.map f (θ.app j x.val) = c.val k
+          rw [x.property]
+          exact c.property f⟩
+        map_id := by
+          intro j
+          ext x
+          exact congrArg (fun f ↦ f x.val) (I.map_id j)
+        map_comp := by
+          intro j k l f g
+          ext x
+          exact congrArg (fun f ↦ f x.val) (I.map_comp f g) }
+    have (j : Λᵒᵖ) : Nonempty (F.obj j) := by
+      obtain ⟨x, hx⟩ := hθsurj j (c.val j)
+      exact ⟨⟨x, hx⟩⟩
+    obtain ⟨x, hx⟩ := nonempty_sections_of_finite_inverse_system F
+    refine ⟨⟨fun j ↦ (x j).val, ?_⟩, ?_⟩
+    · intro j k f
+      exact congrArg Subtype.val (hx f)
+    · apply limit_ext
+      intro j
+      exact (x j).property
+  have hker : (finiteExtensionLimitMap θ).toMonoidHom.ker =
+      finiteExtensionLimitKernel I P := by
+    ext x
+    change finiteExtensionLimitMap θ x = 1 ↔ ∀ j ∈ Set.univ, x.val j ∈ P j
+    constructor
+    · intro hx j _
+      rw [← hθker j]
+      change θ.app j (x.val j) = 1
+      exact congrArg (fun y : limit C ↦ y.val j) hx
+    · intro hx
+      apply limit_ext
+      intro j
+      have hj := hx j (Set.mem_univ j)
+      rw [← hθker j] at hj
+      exact hj
+  have hclosed : IsClosed (finiteExtensionLimitKernel I P : Set (limit I)) := by
+    rw [← hker]
+    exact isClosed_singleton.preimage (finiteExtensionLimitMap θ).continuous
+  refine ⟨hcoord, hsurj, hker, hclosed, ?_, ?_⟩
+  · have hn : (finiteExtensionLimitKernel I P).Normal := by
+      rw [← hker]
+      infer_instance
+    let := hn
+    let e : (limit I ⧸ finiteExtensionLimitKernel I P) ≃* limit C :=
+      (QuotientGroup.quotientMulEquivOfEq hker.symm).trans
+        (QuotientGroup.quotientKerEquivOfSurjective _ hsurj)
+    have he : Continuous e := by
+      apply (QuotientGroup.isQuotientMap_mk _).continuous_iff.mpr
+      exact (finiteExtensionLimitMap θ).continuous
+    exact ⟨hn, { e with continuous_toFun := he
+                        continuous_invFun := he.continuous_symm_of_equiv_compact_to_t2 },
+      fun x ↦ rfl⟩
+  · intro Q _ _ _ _ f hf
+    have hnhds : {x | f x = 1} ∈ 𝓝 (1 : finiteExtensionLimitKernel I P) :=
+      ((isOpen_discrete ({1} : Set Q)).preimage f.continuous).mem_nhds (map_one f)
+    rw [nhds_subtype, nhds_subtype, Filter.comap_comap] at hnhds
+    obtain ⟨V, hV, hVK⟩ := Filter.mem_comap.mp hnhds
+    rw [nhds_pi] at hV
+    obtain ⟨S, U, hU, hUV⟩ := Filter.mem_pi'.mp hV
+    have hbound : ∃ j : Λᵒᵖ, ∀ k ∈ S, Nonempty (j ⟶ k) := by
+      clear hUV
+      induction S using Finset.induction_on with
+      | empty => exact ⟨Classical.arbitrary _, by simp⟩
+      | @insert a S ha ih =>
+        obtain ⟨j, hj⟩ := ih
+        obtain ⟨l, hal, hjl⟩ := exists_ge_ge a.unop j.unop
+        refine ⟨Opposite.op l, ?_⟩
+        intro k hk
+        rcases Finset.mem_insert.mp hk with rfl | hk
+        · exact ⟨(homOfLE hal).op⟩
+        · obtain ⟨g⟩ := hj k hk
+          exact ⟨(homOfLE hjl).op ≫ g⟩
+    obtain ⟨j, hj⟩ := hbound
+    let π : finiteExtensionLimitKernel I P →* P j :=
+      { toFun := fun x ↦ ⟨x.val.val j, x.property j (Set.mem_univ j)⟩
+        map_one' := rfl
+        map_mul' := fun _ _ ↦ rfl }
+    have hle : π.ker ≤ f.toMonoidHom.ker := by
+      intro x hx
+      apply hVK
+      apply hUV
+      intro k hk
+      obtain ⟨g⟩ := hj k hk
+      have heq : x.val.val j = 1 := congrArg Subtype.val hx
+      have hkone : x.val.val k = 1 := by
+        rw [← x.val.property g, heq]
+        exact map_one (I.map g).hom
+      change x.val.val k ∈ U k
+      rw [hkone]
+      exact mem_of_mem_nhds (hU k)
+    -- Descend through the coordinate image; evaluation itself need not be surjective.
+    let φ : π.range →* Q := π.rangeRestrict.liftOfSurjective π.rangeRestrict_surjective
+      ⟨f.toMonoidHom, by simpa only [MonoidHom.ker_rangeRestrict] using hle⟩
+    have hφ (x : finiteExtensionLimitKernel I P) : φ (π.rangeRestrict x) = f x := by
+      exact MonoidHom.liftOfRightInverse_comp_apply _ _ _ _ x
+    have hφsurj : Function.Surjective φ := by
+      intro q
+      obtain ⟨x, rfl⟩ := hf q
+      exact ⟨π.rangeRestrict x, hφ x⟩
+    have hpj : IsPGroup p (P j) := by
+      obtain ⟨n, hn⟩ := hPorder j
+      exact IsPGroup.of_card hn
+    have : Fact p.Prime := ⟨hp⟩
+    exact ((hpj.to_subgroup π.range).of_surjective φ hφsurj).exists_card_eq
 
 end ProfiniteGrp
