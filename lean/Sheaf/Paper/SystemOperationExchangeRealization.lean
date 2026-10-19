@@ -24,6 +24,9 @@ public import Sheaf.Paper.SfIntegralConstructible
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import Sheaf.SixFunctors.OpenTensorNormalization
+import Sheaf.AlgebraicGeometry.VaryingRingOperations
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 
 /-! # Simultaneous-system realization of operation exchanges
 
@@ -45,9 +48,61 @@ set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
+section
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective
 universe u v
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
 open CategoryTheory.Functor
+
+private theorem counit_realization {C D : Type*} [Category C] [Category D]
+    (R : C ⥤ D) (L : D ⥤ C) (ε : L ⋙ R ⟶ 𝟭 D) (G : D ⥤ D)
+    {B Q Q' : D} {P : C}
+    (t : P ⟶ L.obj (G.obj (R.obj (L.obj B))))
+    (e : G.obj B ⟶ Q') (b : Q ≅ Q') :
+    R.map ((t ≫ L.map (G.map (ε.app B))) ≫ L.map e ≫ L.map b.inv) ≫
+        ε.app Q ≫ b.hom =
+      (R.map t ≫ ε.app (G.obj (R.obj (L.obj B)))) ≫ G.map (ε.app B) ≫ e := by
+  have hb : R.map (L.map b.inv) ≫ ε.app Q = ε.app Q' ≫ b.inv :=
+    ε.naturality b.inv
+  have he : R.map (L.map e) ≫ ε.app Q' = ε.app (G.obj B) ≫ e :=
+    ε.naturality e
+  have hG : R.map (L.map (G.map (ε.app B))) ≫ ε.app (G.obj B) =
+      ε.app (G.obj (R.obj (L.obj B))) ≫ G.map (ε.app B) :=
+    ε.naturality (G.map (ε.app B))
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← Category.assoc (R.map (L.map b.inv)), hb, Category.assoc,
+    Iso.inv_hom_id, Category.comp_id, he,
+    ← Category.assoc (R.map (L.map (G.map (ε.app B)))), hG, Category.assoc]
+
+private theorem counit_realization_conjugate {C D : Type*} [Category C] [Category D]
+    (R : C ⥤ D) (L : D ⥤ C) (ε : L ⋙ R ⟶ 𝟭 D)
+    (F : C ⥤ C) (G : D ⥤ D) (β : F ⋙ R ⟶ R ⋙ G)
+    {A A' : C} {B Q Q' : D}
+    (t : F.obj (L.obj B) ⟶ L.obj (G.obj (R.obj (L.obj B))))
+    (ht : β.app (L.obj B) = R.map t ≫ ε.app (G.obj (R.obj (L.obj B))))
+    (e : G.obj B ⟶ Q') (b : Q ≅ Q') (a : A ≅ L.obj B) (d : A' ≅ L.obj Q) :
+    R.map ((F.map a.hom ≫ t ≫ L.map (G.map (ε.app B))) ≫
+        L.map e ≫ L.map b.inv ≫ d.inv) ≫
+        (R.map d.hom ≫ ε.app Q) ≫ b.hom =
+      β.app A ≫ G.map (R.map a.hom ≫ ε.app B) ≫ e := by
+  have h := counit_realization R L ε G (F.map a.hom ≫ t) e b
+  have hn := β.naturality a.hom
+  dsimp only [Functor.comp_map] at hn
+  rw [ht] at hn
+  calc
+    _ = R.map ((F.map a.hom ≫ t ≫ L.map (G.map (ε.app B))) ≫
+        L.map e ≫ L.map b.inv) ≫ ε.app Q ≫ b.hom := by
+      simp only [Functor.map_comp, Category.assoc]
+      rw [← Functor.map_comp_assoc R d.inv d.hom, d.inv_hom_id, R.map_id,
+        Category.id_comp]
+    _ = (R.map (F.map a.hom ≫ t) ≫ ε.app (G.obj (R.obj (L.obj B)))) ≫
+        G.map (ε.app B) ≫ e := by
+      simpa only [Category.assoc] using h
+    _ = β.app A ≫ G.map (R.map a.hom) ≫ G.map (ε.app B) ≫ e := by
+      simpa only [Functor.map_comp, Category.assoc] using
+        congrArg (fun z ↦ z ≫ G.map (ε.app B) ≫ e) hn
+    _ = _ := by rw [G.map_comp]; simp only [Category.assoc]
 
 namespace WeilConjectures.FrobeniusExchange
 variable (A : Type u) [CommRing A] [Finite A]
@@ -117,7 +172,7 @@ Proof: addition is sectionwise, and precomposition and scalar restriction leave
 addition unchanged, at every index and every vertical object. -/
 theorem systemDirect_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (integralComparisonSequenceDirectImage l E f).Additive := by
-  sorry
+  exact ⟨fun {_ _} {_ _} ↦ rfl⟩
 
 attribute [instance] systemDirect_additive
 
@@ -129,7 +184,12 @@ The Grothendieck module-sheaf theorem gives functorial K-injective resolutions
 in its ordinary unbounded derived category. -/
 theorem system_hasKInjectives (X : Scheme.{u}) :
     Abelian.HasKInjectiveResolutions (coefficientSequenceModules l E X) := by
-  sorry
+  open SheafOfModules in
+  let :=
+    (grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{u + 1, u, u + 1}
+      (coefficientSequenceTopology (ProEt.topology X))
+      (coefficientSequenceCommRingSheaf l E X)).1
+  exact Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian
 
 attribute [instance] system_hasKInjectives
 
@@ -268,6 +328,62 @@ def integralExchange {X Y : Scheme.{u}}
       (coefficientSequenceLimit l E Y) ≫
     whiskerRight (reductionPullbackIso l E gX).inv (H ⋙ coefficientSequenceLimit l E Y)
 
+private theorem integralExchange_reduction {X Y : Scheme.{u}}
+    [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)]
+    (H : coefficientSequenceDerived l E X ⥤ coefficientSequenceDerived l E Y)
+    (gX : X ⟶ X) (gY : Y ⟶ Y)
+    (e : H ⋙ integralComparisonDerivedSequencePullback l E gY ⟶
+      integralComparisonDerivedSequencePullback l E gX ⋙ H)
+    (K : sfIntegralConstructibleCategory l E X)
+    (hK : sfIntegralConstructible l E Y ((realize l E H).obj K.obj)) :
+    (reduction l E Y).map ((integralExchange l E H gX gY e).app K) ≫
+        (operationReduction l E H).app
+          ((constructibleIntegralPullback l E gX).obj K).obj ≫
+        H.map ((reductionPullbackIso l E gX).hom.app K) =
+      (reductionPullbackIso l E gY).hom.app ⟨(realize l E H).obj K.obj, hK⟩ ≫
+        (integralComparisonDerivedSequencePullback l E gY).map
+          ((operationReduction l E H).app K.obj) ≫
+        e.app ((reduction l E X).obj K.obj) := by
+  let R := reduction l E Y
+  let L := coefficientSequenceLimit l E Y
+  let G := integralComparisonDerivedSequencePullback l E gY
+  let ε := ((models l E).system Y).adjunction.counit
+  let b := H.mapIso ((reductionPullbackIso l E gX).app K)
+  let eK := e.app ((reduction l E X).obj K.obj)
+  let t := ((models l E).pullback gY).realization.hom.app ((realize l E H).obj K.obj)
+  have h := counit_realization R L ε G
+    (B := H.obj ((reduction l E X).obj K.obj))
+    (Q := H.obj ((reduction l E X).obj ((integralDerivedPullback l E gX).obj K.obj)))
+    (Q' := H.obj ((integralComparisonDerivedSequencePullback l E gX).obj
+      ((reduction l E X).obj K.obj)))
+    (P := (integralDerivedPullback l E gY).obj ((realize l E H).obj K.obj))
+    t eK b
+  change R.map ((t ≫ L.map (G.map (ε.app _))) ≫ L.map eK ≫ L.map b.inv) ≫
+      ε.app _ ≫ b.hom =
+    (R.map t ≫ ε.app (G.obj (R.obj (L.obj (H.obj ((reduction l E X).obj K.obj)))))) ≫
+      G.map (ε.app _) ≫ eK
+  exact h
+
+private abbrev rings : ℕ → CommRingCat.{u + 1} := fun n ↦
+  CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))
+private abbrev transitions (n : ℕ) : rings l E (n + 1) ⟶ rings l E n :=
+  CommRingCat.ofHom (Padic.coefficientExtensionTransition l E (n + 1)).ulift
+private theorem push_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    integralComparisonSequenceDirectImage l E f =
+      ProEtale.VaryingRing.push (rings l E) (transitions l E) f := by
+  rfl
+private theorem pull_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    integralComparisonSequencePullback l E f =
+      ProEtale.VaryingRing.pull (rings l E) (transitions l E) f := by
+  unfold integralComparisonSequencePullback ProEtale.VaryingRing.pull
+  congr 1
+private theorem chosen_rightAdjoint_congr {C D : Type*} [Category C] [Category D]
+    (F G : C ⥤ D) [F.IsRightAdjoint] [G.IsRightAdjoint] (h : F = G)
+    (hg : G.leftAdjoint.IsRightAdjoint) : F.leftAdjoint.IsRightAdjoint := by
+  subst G
+  exact hg
+
 /-- Exact open extension exists on whole strict coefficient systems.
 Source: Zheng 4.1, 4.10; blueprint `def:weil-compact-support-object`
 (blueprint: def-weil-system-operation-exchange-realization).
@@ -277,7 +393,10 @@ at every quotient index. Its sectionwise units are the actual open units.
 Both kernels and cokernels are computed componentwise, so extension is exact. -/
 theorem systemPullback_isRightAdjoint {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] : (integralComparisonSequencePullback l E j).IsRightAdjoint := by
-  sorry
+  let := ProEtale.VaryingRing.push_isRightAdjoint (rings l E) (transitions l E) j
+  change (integralComparisonSequenceDirectImage l E j).leftAdjoint.IsRightAdjoint
+  exact chosen_rightAdjoint_congr _ _ (push_eq l E j)
+    (ProEtale.VaryingRing.pull_isRightAdjoint (rings l E) (transitions l E) j)
 
 /-- The universal ordinary open extension, determined up to its adjunction comparison.
 Source: Zheng 4.1; blueprint `def:weil-compact-support-object`
@@ -294,6 +413,19 @@ def systemOpenAdjunction {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
   letI := systemPullback_isRightAdjoint l E j
   Adjunction.ofIsRightAdjoint (integralComparisonSequencePullback l E j)
 
+private theorem chosen_open_exact_congr {C D : Type*} [Category C] [Category D]
+    [Preadditive C] [Preadditive D]
+    (F G : C ⥤ D) [F.IsRightAdjoint] [G.IsRightAdjoint]
+    [F.leftAdjoint.IsRightAdjoint] [G.leftAdjoint.IsRightAdjoint] (h : F = G)
+    (hg : G.leftAdjoint.leftAdjoint.Additive ∧
+      PreservesFiniteLimits G.leftAdjoint.leftAdjoint ∧
+        PreservesFiniteColimits G.leftAdjoint.leftAdjoint) :
+    F.leftAdjoint.leftAdjoint.Additive ∧
+      PreservesFiniteLimits F.leftAdjoint.leftAdjoint ∧
+        PreservesFiniteColimits F.leftAdjoint.leftAdjoint := by
+  subst G
+  exact hg
+
 /-- Exactness of the specified open extension on strict coefficient systems.
 Source: Zheng 4.1, 4.10; Stacks 03DI, 0941
 (blueprint: def-weil-system-operation-exchange-realization).
@@ -303,7 +435,12 @@ extension is exact at every level, hence exact on the abelian system category. -
 theorem systemOpen_exact {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (systemOpen l E j).Additive ∧ PreservesFiniteLimits (systemOpen l E j) ∧
       PreservesFiniteColimits (systemOpen l E j) := by
-  sorry
+  have : (integralComparisonSequenceDirectImage l E j).leftAdjoint.IsRightAdjoint :=
+    systemPullback_isRightAdjoint l E j
+  let := ProEtale.VaryingRing.push_isRightAdjoint (rings l E) (transitions l E) j
+  let := ProEtale.VaryingRing.pull_isRightAdjoint (rings l E) (transitions l E) j
+  exact chosen_open_exact_congr _ _ (push_eq l E j)
+    (ProEtale.VaryingRing.extension_exact (rings l E) (transitions l E) j)
 
 /-- The additive structure from exact system open extension.
 Source: Zheng 4.1 (blueprint: def-weil-system-operation-exchange-realization). -/
@@ -331,6 +468,18 @@ def systemDerivedOpenAdjunction {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersio
     systemDerivedOpen l E j ⊣ integralComparisonDerivedSequencePullback l E j :=
   SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction (systemOpenAdjunction l E j)
 
+private theorem push_comp
+    {C D T : Type*} [Category C] [Category D] [Category T]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    {V : GrothendieckTopology T} {F : C ⥤ D} {G : D ⥤ T}
+    [F.IsContinuous J K] [G.IsContinuous K V] [(F ⋙ G).IsContinuous J V]
+    {R : Sheaf J RingCat} {S : Sheaf K RingCat} {P : Sheaf V RingCat}
+    (φ : R ⟶ (F.sheafPushforwardContinuous _ J K).obj S)
+    (ψ : S ⟶ (G.sheafPushforwardContinuous _ K V).obj P) :
+    SheafOfModules.pushforward ψ ⋙ SheafOfModules.pushforward φ =
+      SheafOfModules.pushforward (F := F ⋙ G)
+        (φ ≫ (F.sheafPushforwardContinuous _ J K).map ψ) := by rfl
+
 /-- Ordinary direct image commutes strictly with vertical evaluation. The coefficient
 maps are the same constant sections; both functors evaluate M at (n, X ×_Y U).
 Source: Zheng 4.1, 4.10 (blueprint: def-weil-system-operation-exchange-realization).
@@ -342,7 +491,35 @@ theorem systemDirectEvaluationOrdinary_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : 
     integralComparisonSequenceDirectImage l E f ⋙ coefficientSequenceEvaluation l E Y n =
       coefficientSequenceEvaluation l E X n ⋙
         proEtaleConstantModuleDirectImage f (Padic.coefficientExtensionRing l E (n + 1)) := by
-  sorry
+  let := Functor.isContinuous_comp (Prod.sectR n Y.ProEt)
+    (integralComparisonSequenceBaseChange f) (ProEt.topology Y)
+    (coefficientSequenceTopology (ProEt.topology Y))
+    (coefficientSequenceTopology (ProEt.topology X))
+  let := Functor.isContinuous_comp (proEtaleBaseChange f) (Prod.sectR n X.ProEt)
+    (ProEt.topology Y) (ProEt.topology X)
+    (coefficientSequenceTopology (ProEt.topology X))
+  unfold integralComparisonSequenceDirectImage coefficientSequenceEvaluation
+    proEtaleConstantModuleDirectImage
+  rw [push_comp, push_comp]
+  apply congrArg (fun φ ↦ SheafOfModules.pushforward
+    (F := proEtaleBaseChange f ⋙ Prod.sectR n X.ProEt) φ)
+  apply ObjectProperty.hom_ext
+  apply NatTrans.ext
+  funext U
+  have hy : (eqToHom (coefficientSequenceEvaluationRing_eq l E Y n).symm).hom.app U =
+      𝟙 _ := by
+    rw [ObjectProperty.eqToHom_hom, eqToHom_app]
+    rfl
+  have hn : (eqToHom (coefficientSequenceEvaluationRing_eq l E X n).symm).hom.app
+      ((proEtaleBaseChange f).op.obj U) = 𝟙 _ := by
+    rw [ObjectProperty.eqToHom_hom, eqToHom_app]
+    rfl
+  change _ = _ ≫ (eqToHom (coefficientSequenceEvaluationRing_eq l E X n).symm).hom.app
+    ((proEtaleBaseChange f).op.obj U)
+  rw [hn, Category.comp_id]
+  change (eqToHom (coefficientSequenceEvaluationRing_eq l E Y n).symm).hom.app U ≫ _ = _
+  rw [hy, Category.id_comp]
+  rfl
 
 /-- Inverse-image evaluation is the conjugate of the actual sectionwise equality.
 Source: Zheng 4.10 (blueprint: def-weil-system-operation-exchange-realization). -/
@@ -639,6 +816,8 @@ end ScalarSystems
 end Systems
 
 section ConstructibleOperations
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (K₀ : Type u) [Field K₀] (hl : IsUnit (l : K₀))
@@ -649,28 +828,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (f : X ⟶ Y) [fo : f.IsOver (Spec (.of K₀))]
 
 include hl xo yo xft xqc yft yqc fo
-
-/-- The simultaneous direct-image realization is bounded constructible.
-Source: blueprint integral direct-image paragraph; Bhatt--Scholze 6.5, 6.7
-(blueprint: def-weil-system-operation-exchange-realization).
-Proof: derive the actual system direct image on a single system resolution.
-Evaluation is its canonical finite direct image, including the scalar-transition
-mates, by the finite left adjoints to evaluation. Exact scalar restriction and
-the canonical total-limit projections identify the resulting object with the
-Roos triangle of SfIntegralDirectImage. Apply
-lem-sf-integral-direct-image-constructible, including its empty-scheme case. -/
-theorem directImage_constructible (K : sfIntegralConstructibleCategory l E X) :
-    sfIntegralConstructible l E Y ((integralDirectImage l E f).obj K.obj) := by
-  sorry
-
-/-- The actual direct-image action on the recorded full constructible categories.
-Source: blueprint integral direct-image paragraph
-(blueprint: def-weil-system-operation-exchange-realization). -/
-def directImageFunctor :
-    sfIntegralConstructibleCategory l E X ⥤ sfIntegralConstructibleCategory l E Y :=
-  (sfIntegralConstructible l E Y).lift
-    ((sfIntegralConstructible l E X).ι ⋙ integralDirectImage l E f)
-    (directImage_constructible l E K₀ hl f)
 
 /-- The integral direct-image construction is the recorded Roos object, not a
 replacement functor inferred from its reductions.
@@ -686,6 +843,31 @@ theorem directImage_roos (K : sfIntegralConstructibleCategory l E X) :
       ∃ M : @SfIntegralDirectImage l _ E _ _ _ X Y f K.obj hprod,
         M.obj = (integralDirectImage l E f).obj K.obj := by
   sorry
+
+/-- The simultaneous direct-image realization is bounded constructible.
+Source: blueprint integral direct-image paragraph; Bhatt--Scholze 6.5, 6.7
+(blueprint: def-weil-system-operation-exchange-realization).
+Proof: derive the actual system direct image on a single system resolution.
+Evaluation is its canonical finite direct image, including the scalar-transition
+mates, by the finite left adjoints to evaluation. Exact scalar restriction and
+the canonical total-limit projections identify the resulting object with the
+Roos triangle of SfIntegralDirectImage. Apply
+lem-sf-integral-direct-image-constructible, including its empty-scheme case. -/
+theorem directImage_constructible (K : sfIntegralConstructibleCategory l E X) :
+    sfIntegralConstructible l E Y ((integralDirectImage l E f).obj K.obj) := by
+  obtain ⟨hprod, M, hM⟩ := directImage_roos l E K₀ hl f K
+  let := hprod
+  rw [← hM]
+  exact (sfIntegralDirectImage_constructible K₀ l hl E f K.obj K.property).2.1 M |>.1
+
+/-- The actual direct-image action on the recorded full constructible categories.
+Source: blueprint integral direct-image paragraph
+(blueprint: def-weil-system-operation-exchange-realization). -/
+def directImageFunctor :
+    sfIntegralConstructibleCategory l E X ⥤ sfIntegralConstructibleCategory l E Y :=
+  (sfIntegralConstructible l E Y).lift
+    ((sfIntegralConstructible l E X).ι ⋙ integralDirectImage l E f)
+    (directImage_constructible l E K₀ hl f)
 
 /-- Additivity and constant-coefficient linearity of the actual direct-image action.
 Source: blueprint scalar-localization paragraph
@@ -741,19 +923,6 @@ Source: blueprint `def:weil-compact-support-object`
 def compactImage (c : Compactification f) :=
   realize l E (systemDerivedOpen l E c.i ⋙ systemDirect l E c.g)
 
-/-- Whole-system compact support has the bounded integral output of the recorded
-compact-support operation.
-Source: Bhatt--Scholze 6.7.6--6.7.7; blueprint compact-support paragraph
-(blueprint: def-weil-system-operation-exchange-realization).
-Proof: the exact system open extension evaluates to the normalized finite j_!.
-The derived proper image evaluates to Rp_*, with their quotient transition mates.
-Use the same c at every index. The restricted total limit is the compact-support
-Roos construction. Apply lem-sf-integral-compact-support-constructible. -/
-theorem compactImage_constructible (c : Compactification f)
-    (K : sfIntegralConstructibleCategory l E X) :
-    sfIntegralConstructible l E Y ((compactImage l E f c).obj K.obj) := by
-  sorry
-
 /-- Fix the comparison with the recorded integral Rf_! by its actual Roos projections.
 Both sides use this one compactification and the positive exponent n+1.
 Source: Bhatt--Scholze 6.7.6; sfQcqsCompactSupportRealization normalization
@@ -798,6 +967,21 @@ theorem compactRealization_existsUnique (c : Compactification f) :
 Source: Bhatt--Scholze 6.7.6 (blueprint: def-weil-system-operation-exchange-realization). -/
 def compactRealization (c : Compactification f) :=
   (compactRealization_existsUnique l E K₀ hl f c).exists.choose
+
+/-- Whole-system compact support has the bounded integral output of the recorded
+compact-support operation.
+Source: Bhatt--Scholze 6.7.6--6.7.7; blueprint compact-support paragraph
+(blueprint: def-weil-system-operation-exchange-realization).
+Proof: the exact system open extension evaluates to the normalized finite j_!.
+The derived proper image evaluates to Rp_*, with their quotient transition mates.
+Use the same c at every index. The restricted total limit is the compact-support
+Roos construction. Apply lem-sf-integral-compact-support-constructible. -/
+theorem compactImage_constructible (c : Compactification f)
+    (K : sfIntegralConstructibleCategory l E X) :
+    sfIntegralConstructible l E Y ((compactImage l E f c).obj K.obj) := by
+  exact (sfIntegralConstructible l E Y).prop_of_iso
+    ((compactRealization l E K₀ hl f c).app K)
+    ((sfCompactSupportFiniteIntegralFunctor l K₀ hl c E).obj K).property
 
 /-- Alpha-shriek starts at the recorded integral Rf_!, uses its uniquely normalized
 identification, then the actual system pullback realization and counit.
@@ -883,6 +1067,8 @@ def compactIntegral (c : Compactification f)
   naturality _K _L a := ObjectProperty.hom_ext _
     ((compactIntegralAmbient l E K₀ hl f c gX gB gY wp sj).naturality a)
 
+-- Retain the original ambient morphism hypotheses in the published signature.
+set_option linter.unusedSectionVars false in
 /-- Reduction of the constructed integral direct exchange is its specified
 whole-system exchange, through the actual operation and pullback counits.
 Source: blueprint integral direct-image paragraph
@@ -902,8 +1088,9 @@ theorem directIntegral_reduction (gX : X ⟶ X) (gY : Y ⟶ Y)
       (reductionPullbackIso l E gY).hom.app ((directImageFunctor l E K₀ hl f).obj K) ≫
         (integralComparisonDerivedSequencePullback l E gY).map
           ((operationReduction l E (systemDirect l E f)).app K.obj) ≫
-        (systemExchange l E f gX gY w).app ((reduction l E X).obj K.obj) := by
-  sorry
+      (systemExchange l E f gX gY w).app ((reduction l E X).obj K.obj) := by
+  exact integralExchange_reduction l E (systemDirect l E f) gX gY
+    (systemExchange l E f gX gY w) K (directImage_constructible l E K₀ hl f K)
 
 /-- Reduction of the constructed compact exchange is the specified proper/open
 system composite through the same operation and pullback counits.
@@ -927,9 +1114,11 @@ theorem compactIntegral_reduction (c : Compactification f)
           ((sfCompactSupportFiniteIntegralFunctor l K₀ hl c E).obj K) ≫
         (integralComparisonDerivedSequencePullback l E gY).map
           ((compactOperationReduction l E K₀ hl f c).app K) ≫
-        (systemCompactExchange l E c gX gB gY wp sj).app ((reduction l E X).obj K.obj) := by
+        (systemCompactExchange l E c gX gB gY wp sj).app ((reduction l E X).obj K.obj)  := by
   sorry
 
 end ConstructibleOperations
 
 end WeilConjectures.FrobeniusExchange
+
+end
