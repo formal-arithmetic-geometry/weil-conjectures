@@ -23,141 +23,123 @@
  ],
  "proof": [
   {
-   "text": "Put $U=T\\setminus Z$ and take $K\\in D^{[a,b]}(T_{\\mathrm{et}},A)$. The coefficient convention in the cited derived-category definition is a finite commutative ring $A$. For every scheme morphism $u$, constant-coefficient module inverse image $u^*$ is exact by [prop-weil-pbc-inverse-image-modules-exact]. Consequently [lem-weil-pbc-exact-functor-complex-cohomology] gives $\\mathcal H^n(u^*K)\\cong u^*\\mathcal H^n(K)$. In particular $j^*K$ has cohomology only in $[a,b]$.",
+   "text": "Let P=j^*, G=j_*, I=i_* and E=Ri^!. Exact pullback preserves the interval [a,b], using Functor.homologyConcentratedIn_mapDerivedCategory_obj. In particular P(K) is bounded. All functors here act on the ordinary derived categories of ModuleCat-valued etale sheaves.",
    "uses": [
     "prop-weil-pbc-inverse-image-modules-exact",
     "lem-weil-pbc-exact-functor-complex-cohomology"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-closed-amplitude.md",
-    "place": "Proof paragraph 1, the bounds on q; Stacks 04JC and 010N (their cited DAG statements)."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-closed-amplitude.proof.md",
+    "place": "Proof paragraphs 1–2; finite truncation induction replaces the hypercohomology spectral sequence."
    }
   },
   {
-   "text": "We will also use the following direct verification of constructibility under inverse image, both for $u=j$ and for $u=i$. Choose the finite constructible locally closed stratification and the etale trivializing covers with finite constant module values $M_{k,\\alpha}$ of [def-weil-pbc-etale-constructible-sheaf]. Base change gives a stratification by [lemma-constructible-pullback-stratification]; its strata remain constructible by [lem-pur-scheme-constructible-preimage]. Pull back each trivializing cover; [lem-weil-pbc-etale-covering-base-change] says that the resulting families are still etale and jointly surjective. Then [lemma-constructible-pullback-constant], applied with coefficient category $\\operatorname{Mod}(A)$, identifies each restricted pullback with the constant module sheaf of the same finite module $M_{k,\\alpha}$. Thus the displayed data satisfy precisely the same definition on the source of $u$. This proves that $u^*$ preserves module-constructible sheaves without a Noetherian, finite-type or quasi-compactness assumption on $u$.",
+   "text": "R(G) is triangulated and commutes with shifts. Its value on a sheaf in degree zero is nonnegative by Functor.isGE_rightDerivedFunctor_obj_singleFunctor, obtained from the bounded-below/unbounded comparison; hcd bounds it above by c. Apply the proved source-library DerivedCategory.isGE_obj_of_isGE and isLE_obj_of_isLE (WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure) to P(K), with d=0 and d=c. These are finite inductions on truncation triangles, whose pure-degree terms are the corresponding cohomology sheaves shifted into their degrees. They give L=R(G)(P(K)) in [a,b+c]. No spectral sequence or abutment filtration is used.",
    "uses": [
-    "def-weil-pbc-etale-constructible-sheaf",
-    "lemma-constructible-pullback-stratification",
-    "lem-pur-scheme-constructible-preimage",
-    "lem-weil-pbc-etale-covering-base-change",
-    "lemma-constructible-pullback-constant"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-closed-amplitude.md",
-    "place": "Proof paragraph 2, last sentence, expanded and also applied to j; Stacks 054I and the finite-stratification definition (095E). Base change of the trivializing covers: Stacks 02GO (lemma-base-change-etale) and 01S1 (lemma-base-change-surjective)."
-   }
-  },
-  {
-   "text": "The categories $\\operatorname{Mod}(U_{\\mathrm{et}},A)$ and $\\operatorname{Mod}(T_{\\mathrm{et}},A)$ are Grothendieck abelian by [lem-weil-pbc-module-sheaves-grothendieck-abelian], and $j_*$ is additive left exact by [lem-weil-pbc-module-direct-image-left-exact]. They have enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]. By [lem-weil-pbc-dplus-injective-representative], $j^*K$ has a bounded below representative by injectives, which is K-injective. The same representative therefore computes $Rj_*$ in the ordinary derived category and in its bounded below subcategory. Apply [thm-sp-truncation-e2] to $v=j_*$ and this bounded below object: it supplies the convergent spectral sequence $E_2^{p,q}=R^pj_*\\mathcal H^q(j^*K)\\Rightarrow\\mathcal H^{p+q}(L)$, where $L=Rj_*j^*K$, and a finite exhaustive separated filtration of every abutment with graded pieces $E_\\infty^{p,n-p}$. Its $E_2$ page vanishes unless $0\\leq p\\leq c$ and $a\\leq q\\leq b$, by the hypothesis and step 1. Every later page is obtained as kernels modulo images, so zero entries stay zero. For $n<a$ or $n>b+c$ every graded piece is zero. Starting at the zero end of the finite filtration, successive zero graded quotients force each filtration term, hence its abutment, to be zero. Thus $L\\in D^{[a,b+c]}(T_{\\mathrm{et}},A)$.",
-   "uses": [
-    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-    "lem-weil-pbc-module-direct-image-left-exact",
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "lem-weil-pbc-dplus-injective-representative",
-    "thm-sp-truncation-e2"
+    "lem-pc-right-derived-functor-triangulated",
+    "src-right-derived-functor-plus-compatibility",
+    "def-sbc-standard-tstructure-derived-category"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-closed-amplitude.md",
-    "place": "Proof paragraph 1, hypercohomology spectral sequence and its abutment bounds; generic convergence is the full statement of thm-sp-truncation-e2."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-closed-amplitude.proof.md",
+    "place": "Proof paragraphs 1–2; finite truncation induction replaces the hypercohomology spectral sequence."
    }
   },
   {
-   "text": "Assume now the extra direct-image constructibility condition and that every $\\mathcal H^q(K)$ is constructible. Step 2 makes $\\mathcal H^q(j^*K)$ constructible, so every $E_2^{p,q}$ is constructible by the extra hypothesis. The kernel and cokernel clauses of [thm-constructible-serre] imply that images of maps between constructible sheaves are constructible, since $\\operatorname{im}f=\\ker(\\operatorname{coker}f)$. They then show, by induction on the page, that every $E_r$ is constructible: $E_{r+1}$ is the cokernel of the incoming image in the outgoing kernel. The stabilization and finite filtration in step 3 identify the graded pieces of $\\mathcal H^n(L)$ with constructible $E_\\infty$ terms. Induction from the zero filtration term using the extension clause of the same cited theorem makes $\\mathcal H^n(L)$ constructible. Only finitely many pages and filtration terms are involved in each degree.",
-   "uses": [
-    "thm-constructible-serre"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-closed-amplitude.md",
-    "place": "Proof paragraph 2, finite spectral-sequence filtration and Serre closure; Stacks 03RZ, lemma-constructible-abelian, module clause."
-   }
-  },
-  {
-   "text": "The exactness and left inverse needed for closed pushforward are justified on module sheaves, not taken from the proof of the adjoint-existence node. A closed immersion is finite by [lem-weil-pbc-closed-immersion-finite], and [lemma-weil-pbc-finite-direct-image-exact] says that its direct image on abelian etale sheaves is exact. The forgetful module-to-abelian-sheaf functor is faithful exact by [lem-weil-pbc-module-sheaves-colimits-forgetful]; hence it reflects exactness (the underlying homology of a complex is its homology after forgetting, and a module sheaf with zero underlying sheaf is zero). It commutes with $i_*$ by [lem-weil-pbc-module-direct-image-left-exact]. Therefore $i_*$ is exact on $A$-module sheaves. Furthermore [prop-openclosed-lowerstar-fully-faithful], applied with coefficient category $\\operatorname{Mod}(A)$, gives the canonical counit isomorphism $i^*i_*M\\cong M$ for every module sheaf $M$. In particular $i_*$ detects zero objects. Since $i^*$ and $i_*$ are exact, this same counit applied termwise gives $i^*i_*Q\\cong Q$ on the ordinary derived categories as well.",
-   "uses": [
-    "lem-weil-pbc-closed-immersion-finite",
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-module-direct-image-left-exact",
-    "prop-openclosed-lowerstar-fully-faithful",
-    "prop-weil-pbc-inverse-image-modules-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-closed-amplitude.md",
-    "place": "Proof paragraph 1, exact and faithful i_*; Stacks 035C, plus the finite-direct-image exactness node and 03DA for the module transfer."
-   }
-  },
-  {
-   "text": "Let $F=i_*Ri^!K$, where $Ri^!$ is the ordinary-derived right adjoint of [lem-exc-closed-ambient]. The statement of [lem-exc-closed-support-triangle] supplies the distinguished triangle $F\\to K\\to L\\to F[1]$. By [lem-sf-derived-homology-long-exact] its cohomology sequence contains $\\mathcal H^{n-1}(L)\\to\\mathcal H^n(F)\\to\\mathcal H^n(K)$. If $n<a$, the two outer terms vanish by step 3 and the assumption on $K$. If $n>b+c+1$, then $n-1>b+c$ and $n>b$ (here $c\\geq0$), so the outer terms vanish again. Exactness forces $\\mathcal H^n(F)=0$ in both cases. Thus $F$ has cohomology in $[a,b+c+1]$; in particular the extra degree is at the upper end, with cohomological shift convention $\\mathcal H^n(L[-1])=\\mathcal H^{n-1}(L)$.",
+   "text": "Take the distinguished closed-support triangle F -> K -> L -> F[1], with F=R(I)(E(K)). Its cohomology sequence gives H^(n-1)(L) -> H^n(F) -> H^n(K). For n<a both outer terms vanish. For n>b+c+1 the first vanishes because n-1>b+c and the second because n>b, using c>=0. ShortComplex.Exact.isZero_X2 therefore gives H^n(F)=0 outside [a,b+c+1].",
    "uses": [
     "lem-exc-closed-ambient",
     "lem-exc-closed-support-triangle",
     "lem-sf-derived-homology-long-exact"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-closed-amplitude.md",
-    "place": "Proof paragraph 1, supported localization triangle and long exact sequence; Stacks 05RS and 0147 for the latter."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-closed-amplitude.proof.md",
+    "place": "Proof paragraphs 1–2; finite truncation induction replaces the hypercohomology spectral sequence."
    }
   },
   {
-   "text": "Exactness of $i_*$ from step 5 and [lem-weil-pbc-exact-functor-complex-cohomology] identify $\\mathcal H^n(F)\\cong i_*\\mathcal H^n(Ri^!K)$. Applying the left inverse $i^*$ of step 5 to the zero sheaves outside $[a,b+c+1]$ shows $\\mathcal H^n(Ri^!K)=0$ there. This proves the asserted amplitude in the ordinary derived categories, even though $Ri^!K$ was not assumed bounded below or constructible in advance.",
+   "text": "A closed immersion is finite, so I is exact on module-valued sheaves by the source finite-pushforward theorem. It is faithful by closed-pushforward full faithfulness. Functor.rightDerivedFunctorIsoMapDerivedCategory identifies R(I) with its exact termwise derived functor. Functor.homologyConcentratedIn_of_homologyConcentratedIn_mapDerivedCategory_obj reflects the interval bound from F to E(K).",
    "uses": [
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "prop-openclosed-lowerstar-fully-faithful"
+    "lem-weil-pbc-closed-immersion-finite",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "prop-openclosed-lowerstar-fully-faithful",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-closed-amplitude.md",
-    "place": "Proof paragraph 1, final sentence; cohomology under an exact functor is Stacks 010N."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-closed-amplitude.proof.md",
+    "place": "Proof paragraphs 1–2; finite truncation induction replaces the hypercohomology spectral sequence."
    }
   },
   {
-   "text": "In the constructible case, write $u_m:\\mathcal H^m(K)\\to\\mathcal H^m(L)$ for the map induced by the triangle. The long exact sequence of [lem-sf-derived-homology-long-exact] gives $0\\to\\operatorname{coker}(u_{n-1})\\to\\mathcal H^n(F)\\to\\ker(u_n)\\to0$. Both outside terms are constructible by step 4, the hypothesis on $K$, and the kernel/cokernel clauses of [thm-constructible-serre]; its extension clause therefore makes $\\mathcal H^n(F)$ constructible. By exactness of $i^*$, [lem-weil-pbc-exact-functor-complex-cohomology] and the derived counit from step 5 identify $\\mathcal H^n(Ri^!K)\\cong i^*\\mathcal H^n(F)$. Step 2 applied to $i$ makes this constructible. Together with step 7 this is exactly the second assertion, with the same interval and with the global finite-constructible-stratification notion of [def-weil-pbc-constructible-complexes].",
+   "text": "For the constructibility clause convert the global finite-constant-value predicate to the source IsConstructibleSheaf predicate by isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf. Both have the same finite global stratification convention over finite commutative A. The proved boundedConstructible.mapDerivedCategory_upperStar applies exact pullback and the constructible-pullback theorem to give bounded constructible P(K).",
    "uses": [
-    "lem-sf-derived-homology-long-exact",
-    "thm-constructible-serre",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "prop-constructible-pullback",
     "def-weil-pbc-constructible-complexes"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-closed-amplitude.md",
-    "place": "Proof paragraph 2, long exact sequence and exact inverse image to Z, with the kernel-extension calculation written out; Stacks 03RZ and 010N."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-closed-amplitude.proof.md",
+    "place": "Proof paragraphs 1–2; finite truncation induction replaces the hypercohomology spectral sequence."
+   }
+  },
+  {
+   "text": "Let CT be DerivedCategory.homologyProperty (constructibleSheaf (ModuleCat A) T). The finite-ring kernel, cokernel and extension instances make CT triangulated. Its inverse image under R(G) is triangulated as well. The extra hypothesis, converted through the comparison of predicates, puts every constructible sheaf in degree zero into this inverse image. The proved source-library DerivedCategory.prop_of_bounded (finite induction on truncation triangles) therefore yields CT(L). Applying CT.ext_of_isTriangulatedClosed1 to the closed-support triangle and the hypotheses CT(K), CT(L) yields CT(F). This replaces both the spectral-sequence-page argument and its finite abutment filtration.",
+   "uses": [
+    "thm-constructible-serre",
+    "prop-constructible-derived-subcategory",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-exc-closed-support-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-closed-amplitude.proof.md",
+    "place": "Proof paragraphs 1–2; finite truncation induction replaces the hypercohomology spectral sequence."
+   }
+  },
+  {
+   "text": "Functor.rightDerivedFunctorHomologyFunctorIso identifies H^q(F) with I(H^q(E(K))). Pull this constructible sheaf back by i^*. The isomorphism counit i^*I -> Id transports constructibility to H^q(E(K)); finally convert the source predicate back to IsConstructibleEtaleModuleSheaf. Combine with the already proved interval bound, with no restriction on a<=b and no advance boundedness assumption on E(K).",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "prop-constructible-pullback",
+    "prop-openclosed-lowerstar-fully-faithful",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-closed-amplitude.proof.md",
+    "place": "Proof paragraphs 1–2; finite truncation induction replaces the hypercohomology spectral sequence."
    }
   }
  ],
  "proof_deps": [
   "prop-weil-pbc-inverse-image-modules-exact",
   "lem-weil-pbc-exact-functor-complex-cohomology",
-  "def-weil-pbc-etale-constructible-sheaf",
-  "lemma-constructible-pullback-stratification",
-  "lem-pur-scheme-constructible-preimage",
-  "lem-weil-pbc-etale-covering-base-change",
-  "lemma-constructible-pullback-constant",
-  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-  "lem-weil-pbc-module-direct-image-left-exact",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-weil-pbc-dplus-injective-representative",
-  "thm-sp-truncation-e2",
-  "thm-constructible-serre",
-  "lem-weil-pbc-closed-immersion-finite",
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "prop-openclosed-lowerstar-fully-faithful",
+  "lem-pc-right-derived-functor-triangulated",
+  "src-right-derived-functor-plus-compatibility",
+  "def-sbc-standard-tstructure-derived-category",
   "lem-exc-closed-ambient",
   "lem-exc-closed-support-triangle",
   "lem-sf-derived-homology-long-exact",
-  "def-weil-pbc-constructible-complexes"
+  "lem-weil-pbc-closed-immersion-finite",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "prop-openclosed-lowerstar-fully-faithful",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "prop-constructible-pullback",
+  "def-weil-pbc-constructible-complexes",
+  "thm-constructible-serre",
+  "prop-constructible-derived-subcategory"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-closed-amplitude.md",
-  "place": "Proof paragraphs 1–2 as preserved in the imported node; expanded using existing DAG statements. Second reader checked the relevant Stacks TeX at the revision recorded in literature/LIST.md; the original blueprint file remains unavailable (HTTP 404), as recorded in report.md."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-closed-amplitude.proof.md",
+  "place": "Proof paragraphs 1–2; finite truncation induction replaces the hypercohomology spectral sequence."
  },
  "mathlib_searches": [
   {
@@ -350,18 +332,9 @@
  "tool_uses": [
   "prop-weil-pbc-inverse-image-modules-exact",
   "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lemma-constructible-pullback-stratification",
-  "lem-pur-scheme-constructible-preimage",
-  "lemma-constructible-pullback-constant",
-  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-  "lem-weil-pbc-module-direct-image-left-exact",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-weil-pbc-dplus-injective-representative",
-  "thm-sp-truncation-e2",
   "thm-constructible-serre",
   "lem-weil-pbc-closed-immersion-finite",
   "lemma-weil-pbc-finite-direct-image-exact",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "prop-openclosed-lowerstar-fully-faithful",
   "lem-exc-closed-ambient",
   "lem-exc-closed-support-triangle",
@@ -392,5 +365,15 @@
   "group": "NL",
   "result": "pass",
   "note": "Verified archived blueprint sources, all statement dependencies, exact declarations and signatures, hypotheses, conclusions, universes, edge cases, docstrings, and report sections. Both immutable modules compile separately through the local side overlay. No delivery errors found; branch and snapshot unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261019T005413-L-2764936",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

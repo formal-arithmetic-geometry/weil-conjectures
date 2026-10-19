@@ -14,37 +14,13 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import WeilConjectures.ConstructibleSheaf.Pullback
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Sites.MorphismProperty
-import WeilConjectures.ConstructibleSheaf.Defs
-import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
-import Sheaf.AlgebraicGeometry.EtaleConstantModuleDirectImageLeftExact
-import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
-import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
-import Sheaf.CategoryTheory.TruncationHypercohomology
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Sheaf.CategoryTheory.ExactCoupleConvergence
-import Sheaf.CategoryTheory.Filtration
-import Sheaf.CategoryTheory.TruncationCouple
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
-import WeilConjectures.ConstructibleSheaf.KernelCokernel
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import WeilConjectures.SixFunctors.Finite.Exact
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
-import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Sheaf.AlgebraicGeometry.EtaleClosedSupportTriangle
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import WeilConjectures.CategoryTheory.TruncationHypercohomology
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+import WeilConjectures.SixFunctors.Finite.Exact
+import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
 
 /-!
 # Closed-support amplitude
@@ -73,47 +49,26 @@ whose existence is lem-exc-closed-ambient, not an assumed exceptional functor.
 Source: blueprint smooth-purity, sk-prop-a1-kummer, node order 1911
 (blueprint: lem-exc-closed-amplitude).
 
-Proof (the eight steps of the node):
-1. Exact inverse image (prop-weil-pbc-inverse-image-modules-exact) commutes with
-   cohomology (lem-weil-pbc-exact-functor-complex-cohomology), so j^* K is in [a,b].
-2. Pull back the finite constructible stratification and its etale trivializing
-   covers (def-weil-pbc-etale-constructible-sheaf,
-   lemma-constructible-pullback-stratification, lem-pur-scheme-constructible-preimage,
-   lem-weil-pbc-etale-covering-base-change, lemma-constructible-pullback-constant).
-   The finite constant module values stay the same. Both i^* and j^* therefore
-   preserve the recorded global notion of constructibility.
-3. Module sheaves are Grothendieck abelian and have enough injectives
-   (lem-weil-pbc-module-sheaves-grothendieck-abelian,
-   lem-weil-pbc-module-sheaves-enough-injectives); j_* is additive left exact
-   (lem-weil-pbc-module-direct-image-left-exact). A bounded below injective
-   representative is K-injective (lem-weil-pbc-dplus-injective-representative).
-   Apply thm-sp-truncation-e2: E2^(p,q) = R^p j_* H^q(j^* K) converges to H^(p+q)(L),
-   L = Rj_* j^* K, with a finite exhaustive separated filtration. Entries vanish
-   outside 0 ≤ p ≤ c, a ≤ q ≤ b, and zero entries stay zero on later pages. Outside
-   [a,b+c] all graded terms vanish, hence the abutment vanishes.
-4. Under the extra hypothesis E2 is constructible. Kernels, cokernels and extensions
-   of constructible sheaves are constructible (thm-constructible-serre). Images are
-   kernels of cokernels. Induction through the pages and the finite abutment
-   filtration makes every H^n(L) constructible.
-5. A closed immersion is finite (lem-weil-pbc-closed-immersion-finite), so i_* is
-   exact on abelian sheaves (lemma-weil-pbc-finite-direct-image-exact). Faithful exact
-   forgetting (lem-weil-pbc-module-sheaves-colimits-forgetful) and its compatibility
-   with direct image (lem-weil-pbc-module-direct-image-left-exact) reflect exactness
-   to module sheaves. The counit i^* i_* ≅ Id
-   (prop-openclosed-lowerstar-fully-faithful) extends termwise to derived categories.
-6. For F = i_* Ri^! K the distinguished triangle F → K → L → F[1]
-   (lem-exc-closed-support-triangle, using lem-exc-closed-ambient) gives
-   H^(n-1)(L) → H^n(F) → H^n(K) (lem-sf-derived-homology-long-exact).
-   The outside terms vanish for n < a and n > b+c+1, using c ≥ 0. Hence F has
-   cohomology in [a,b+c+1].
-7. Exact i_* commutes with cohomology
-   (lem-weil-pbc-exact-functor-complex-cohomology). Its left inverse i^* from step 5
-   detects the zeroes, proving the asserted bound for Ri^! K on Z.
-8. Put u_n : H^n(K) → H^n(L). The same long exact sequence gives
-   0 → coker(u_(n-1)) → H^n(F) → ker(u_n) → 0. By thm-constructible-serre, H^n(F)
-   is constructible. Exact i^*, its cohomology comparison and the counit identify
-   H^n(Ri^! K) with i^* H^n(F), constructible by step 2. This proves the second
-   assertion with exactly the same interval and the same constructibility notion. -/
+Proof:
+1. Exact inverse image commutes with cohomology, so j^* preserves [a,b].
+2. The source-library amplitude-by-devissage lemmas apply to Rj_*: its value on
+   a sheaf in degree zero is nonnegative, and the dimension hypothesis bounds it
+   above by c. Finite truncation induction therefore puts Rj_* j^* K in [a,b+c].
+3. The closed-support triangle gives the exact segment
+   H^(n-1)(Rj_* j^* K) → H^n(i_* Ri^! K) → H^n(K).
+   The outside terms vanish when n<a or n>b+c+1; here c≥0 is used for H^n(K).
+4. Closed pushforward is faithful and exact, so its derived cohomology comparison
+   reflects these vanishings to Ri^! K.
+5. Compare the finite-constant-value constructibility predicate with the source
+   library's constructible-sheaf predicate. Exact pullback preserves it on cohomology.
+6. Complexes with constructible cohomology form a triangulated subcategory by the
+   kernel, cokernel and extension clauses of the constructible Serre theorem.
+   Its inverse image under Rj_* is triangulated. The hypothesis on degree-zero
+   sheaves and bounded devissage give constructible cohomology of Rj_* j^* K.
+   The closed-support triangle then gives constructible cohomology of i_* Ri^! K.
+7. The exact closed-pushforward cohomology comparison, constructibility under i^*,
+   and the counit i^* i_* ≅ Id give constructible cohomology of Ri^! K.
+This uses finite truncation induction instead of a hypercohomology spectral sequence. -/
 theorem closedImmersion_rightAdjoint_amplitude
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {Z T U : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i]
@@ -142,6 +97,93 @@ theorem closedImmersion_rightAdjoint_amplitude
           ((R(lowerStar (ModuleCat.{u + 1} A) i)).rightAdjoint.obj K) ∧
         ∀ q : ℤ, Scheme.IsConstructibleEtaleModuleSheaf
           ((_root_.DerivedCategory.homologyFunctor _ q).obj
-            ((R(lowerStar (ModuleCat.{u + 1} A) i)).rightAdjoint.obj K))) := sorry
+            ((R(lowerStar (ModuleCat.{u + 1} A) i)).rightAdjoint.obj K))) := by
+  classical
+  let : IsFinite i := ((IsClosedImmersion.iff_isFinite_and_mono i).1 inferInstance).1
+  let P := upperStar (ModuleCat.{u + 1} A) j
+  let G := lowerStar (ModuleCat.{u + 1} A) j
+  let I := lowerStar (ModuleCat.{u + 1} A) i
+  let E := (R(I)).rightAdjoint
+  obtain ⟨δ, hδ⟩ := exists_etale_closedSupportTriangle A i j hij
+  have hL (K : DerivedCategoryModule A T)
+      (hK : _root_.DerivedCategory.homologyConcentratedIn a b K) :
+      _root_.DerivedCategory.homologyConcentratedIn a (b + c)
+        ((R(G)).obj (P.mapDerivedCategory.obj K)) := by
+    have hP := P.homologyConcentratedIn_mapDerivedCategory_obj hK
+    have hb := (_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded _).1
+      ⟨a, b, hP⟩
+    have ha := hP.1
+    have hh := hP.2
+    constructor
+    · simpa using _root_.DerivedCategory.isGE_obj_of_isGE (R(G)) 0
+        (fun M ↦ G.isGE_rightDerivedFunctor_obj_singleFunctor M) _ hb a
+    · exact _root_.DerivedCategory.isLE_obj_of_isLE (R(G)) c
+        (fun M ↦ (_root_.DerivedCategory.isLE_iff _ c).2 (hcd M)) _ hb b
+  have hbound (K : DerivedCategoryModule A T)
+      (hK : _root_.DerivedCategory.homologyConcentratedIn a b K) :
+      _root_.DerivedCategory.homologyConcentratedIn a (b + c + 1) (E.obj K) := by
+    have hLK := hL K hK
+    have hF : _root_.DerivedCategory.homologyConcentratedIn a (b + c + 1)
+        ((R(I)).obj (E.obj K)) := by
+      have hz (n : ℤ) (hn : n < a ∨ b + c + 1 < n) :
+          IsZero ((_root_.DerivedCategory.homologyFunctor _ n).obj
+            ((R(I)).obj (E.obj K))) := by
+        have hzK : IsZero ((_root_.DerivedCategory.homologyFunctor _ n).obj K) := by
+          rcases hn with hn | hn
+          · exact (_root_.DerivedCategory.isGE_iff K a).1 hK.1 n hn
+          · exact (_root_.DerivedCategory.isLE_iff K b).1 hK.2 n (by omega)
+        have hzL : IsZero ((_root_.DerivedCategory.homologyFunctor _ (n - 1)).obj
+            ((R(G)).obj (P.mapDerivedCategory.obj K))) := by
+          rcases hn with hn | hn
+          · exact (_root_.DerivedCategory.isGE_iff _ a).1 hLK.1 _ (by omega)
+          · exact (_root_.DerivedCategory.isLE_iff _ (b + c)).1 hLK.2 _ (by omega)
+        exact (_root_.DerivedCategory.HomologySequence.exact₁ _ (hδ K) (n - 1) n
+          (by omega)).isZero_X₂ (hzL.eq_of_src _ _) (hzK.eq_of_tgt _ _)
+      exact ⟨(_root_.DerivedCategory.isGE_iff _ a).2 (fun n hn ↦ hz n (.inl hn)),
+        (_root_.DerivedCategory.isLE_iff _ (b + c + 1)).2
+          (fun n hn ↦ hz n (.inr hn))⟩
+    apply I.homologyConcentratedIn_of_homologyConcentratedIn_mapDerivedCategory_obj
+    exact (_root_.DerivedCategory.homologyConcentratedIn a (b + c + 1)).prop_of_iso
+      (I.rightDerivedFunctorIsoMapDerivedCategory.app (E.obj K)) hF
+  refine ⟨hbound, ?_⟩
+  intro hcons K hK hcK
+  refine ⟨hbound K hK, ?_⟩
+  let CT := _root_.DerivedCategory.homologyProperty
+    (constructibleSheaf (ModuleCat.{u + 1} A) T)
+  have hcK' : CT K := fun q ↦
+    (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).1 (hcK q)
+  have hbK := (_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded K).1
+    ⟨a, b, hK⟩
+  have hcPK := DerivedCategory.boundedConstructible.mapDerivedCategory_upperStar
+    j (K := K) ⟨hbK, hcK'⟩
+  have hcL : CT ((R(G)).obj (P.mapDerivedCategory.obj K)) := by
+    apply _root_.DerivedCategory.prop_of_bounded (CT.inverseImage (R(G)))
+      (constructibleSheaf (ModuleCat.{u + 1} A) U)
+      (fun M hM ↦ ?_) _ hcPK.1 hcPK.2
+    intro q
+    exact (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).1
+      (hcons M q
+        ((Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2 hM))
+  have hcF : CT ((R(I)).obj (E.obj K)) :=
+    CT.ext_of_isTriangulatedClosed₁ _ (hδ K) hcK' hcL
+  intro q
+  have hI : Scheme.IsConstructibleSheaf
+      (I.obj ((_root_.DerivedCategory.homologyFunctor _ q).obj (E.obj K))) := by
+    let : Scheme.IsConstructibleSheaf
+        ((R(I) ⋙ _root_.DerivedCategory.homologyFunctor _ q).obj (E.obj K)) := hcF q
+    exact Scheme.IsConstructibleSheaf.of_iso
+      ((I.rightDerivedFunctorHomologyFunctorIso q).app (E.obj K)).symm
+  have := hI
+  have hP : Scheme.IsConstructibleSheaf
+      ((upperStar (ModuleCat.{u + 1} A) i).obj
+        (I.obj ((_root_.DerivedCategory.homologyFunctor _ q).obj (E.obj K)))) :=
+    Scheme.IsConstructibleSheaf.upperStar i _
+  let : Scheme.IsConstructibleSheaf
+      ((I ⋙ upperStar (ModuleCat.{u + 1} A) i).obj
+        ((_root_.DerivedCategory.homologyFunctor _ q).obj (E.obj K))) := hP
+  apply (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2
+  exact Scheme.IsConstructibleSheaf.of_iso
+    (asIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) i).counit.app
+      ((_root_.DerivedCategory.homologyFunctor _ q).obj (E.obj K))))
 
 end AlgebraicGeometry.Etale
