@@ -17106,3 +17106,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:04 L: returned deliver/N7/lem-tw-lisse-rational-realization (reviewer RETURN: L: independent stage-2 immutable head accb94cbb18a: Module sha 787e4e0b is byte-identical to the module at 9 earlier RET)
 - 07:19 L: returned deliver/N7/lem-tw-lisse-rational-realization (reviewer RETURN: L: independent stage-2 immutable head 03618ff0184f: Byte-identical re-delivery: LisseRationalRealization.lean sha256 787)
 - 07:31 L: returned deliver/NA/lem-pur-finite-free-compact-composition (reviewer RETURN: L: independent stage-2 immutable head 0606f675dfda: H2: delivery added theorem stmt_deps that only supply plain defs. (1)
+- 07:34 L: returned deliver/N7/lem-tw-lisse-rational-realization (reviewer RETURN: L: independent stage-2 immutable head 27abf7fd2358: Identical re-delivery: LisseRationalRealization.lean sha256 787e4e0b)
