@@ -29,105 +29,116 @@
  ],
  "proof": [
   {
-   "text": "Geometric hypotheses and finiteness. The field $k$ is Noetherian (its only ideals are $(0)$ and $(1)$), so $X$ and $Y$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. By [lem-weil-pbc-noetherian-open-subscheme-noetherian], every open subset of either scheme is quasi-compact. Hence any morphism with source $X$ or $Y$ is quasi-compact: the inverse image of an affine open is an open subset of its source. Apply the same observation to their diagonals and to the diagonal of $j$, whose sources are $X$ or $Y$, to obtain quasi-separatedness. Thus $X,Y$ and $j$ satisfy the qcqs hypotheses of [def-kun-cd]. The compatible $k$-structure maps on $X,Y$ make $j$ a morphism of finite-type $k$-schemes, so clause (1) of [lem-kun-0f10] gives $d=\\operatorname{cd}(j)<\\infty$. The convention in [def-kun-cd] then makes $d$ a nonnegative integer, including when $X$ is empty.",
+   "text": "Finite type over k gives CompactSpace X and locally Noetherian X and Y by Mathlib. The resulting quasi-separated spaces give QuasiCompact j and QuasiSeparated j. Apply torsionEtaleCohomologicalDimension_finite_of_finiteType. Unfold the defining infimum. Its set of finite bounds is nonempty, since otherwise the dimension is top, contradicting finiteness. Well-ordering of ENat gives csInf_mem, hence a natural d equal to cd(j) and the abelian torsion bound at d.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "def-kun-cd",
-    "lem-kun-0f10"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F10, lemma-finite-cd (1); geometric hypotheses from Tags 01T6, 01OZ, 04ZA"
-   }
-  },
-  {
-   "text": "Resolution setup, without a commutativity restriction on $\\Lambda$. Use left modules and the etale and pro-etale coefficient categories of [def-weil-pbc-proetale-modules], in a common larger universe containing their small sites and all coefficient values. For either site and any ring sheaf, [lem-weil-pbc-ring-sheaves-grothendieck] gives a Grothendieck abelian module category. Apply [lem-weil-pbc-grothendieck-functorial-injective-embedding] and iterate embeddings of successive cokernels to obtain enough injectives, also for abelian sheaves by taking the integer ring sheaf. By [lem-weil-pbc-dplus-injective-representative], a sheaf $F[0]$ admits an injective representative $I^\\bullet$ with $I^m=0$ for $m<0$. The derived direct image is represented by $j_*I^\\bullet$; this is precisely the K-injective computation in [def-sfb-right-derived-functor]. Underived module direct image evaluates on $V\\times_YX$ with the induced scalar action. It is additive and left exact because limits and kernels are computed on sections. Forgetting the action is exact and preserves kernels and cokernels by [lem-weil-pbc-module-sheaves-colimits-forgetful]. In particular it commutes with cohomology of complexes and reflects zero: a module sheaf with zero underlying abelian sheaf has only its zero section everywhere.",
-   "uses": [
-    "def-weil-pbc-proetale-modules",
-    "lem-weil-pbc-ring-sheaves-grothendieck",
-    "lem-weil-pbc-grothendieck-functorial-injective-embedding",
-    "lem-weil-pbc-dplus-injective-representative",
-    "def-sfb-right-derived-functor",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03DA, 03DB, 03EW (Grothendieck module categories); injectives.tex Tag 079H; derived.tex Tags 013K, 070J"
-   }
-  },
-  {
-   "text": "Compare module and abelian higher direct images. For each injective etale $\\Lambda$-module sheaf $I$ and each object $U$ of $X_{\\mathrm{et}}$, [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] identifies $H^q(U,I_{ab})$ with the module-derived evaluation of $I$. It vanishes for $q>0$: an injective object is acyclic for any left exact additive functor by clause (1) of [lemma-weil-pbc-leray-acyclicity], applied to evaluation. For every etale $V\\to Y$, take $U=X\\times_YV$. The abelian higher direct image $R^qj_*I_{ab}$ is the sheafification of $V\\mapsto H^q(X\\times_YV,I_{ab})$ by [lem-weil-pbc-higher-direct-image-sheafified-presheaf]; hence $I_{ab}$ is $j_*$-acyclic. The resolution $F\\to I^\\bullet$ of step 2 remains an exact resolution after forgetting. Clause (2) of [lemma-weil-pbc-leray-acyclicity], now for abelian $j_*$, therefore computes $R^qj_*F_{ab}$ by $H^q(j_*I^\\bullet_{ab})$. This is the underlying abelian sheaf of the module $R^qj_{\\mathrm{et},*}F$, since forgetting is exact and commutes with underived direct image on sections. This proves the coefficient-forgetting comparison used here without asserting that forgetting preserves injectives. It also gives zero cohomology in degrees $q<0$, directly from $I^m=0$ for $m<0$.",
-   "uses": [
-    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
-    "lemma-weil-pbc-leray-acyclicity",
-    "lem-weil-pbc-higher-direct-image-sheafified-presheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 03FD, lemma-cohomology-modules-abelian-agree; Tag 072W, lemma-higher-direct-images; derived.tex Tag 015E, lemma-leray-acyclicity"
-   }
-  },
-  {
-   "text": "Etale sheaf bound, clause (1). Every local section of $F$ is killed by $\\ell^r$, so $F_{ab}$ is torsion. Independently, finiteness of $\\Lambda$ gives a positive additive exponent annihilating $1_\\Lambda$ and hence every section of every left $\\Lambda$-module; thus this assertion uses no invertibility condition on $k$. The definition [def-kun-cd] says that $R^qj_*F_{ab}=0$ for $q>d$. Step 3 identifies this with the underlying abelian sheaf of $R^qj_{\\mathrm{et},*}F$. Forgetting reflects zero by step 2, proving (1).",
-   "uses": [
+    "lem-kun-0f10",
     "def-kun-cd"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-geo-open-finiteness-ii/det-geo-open-finiteness-ii-amplitude.md",
-    "place": "Proof paragraph (1), after finiteness; Stacks 0F10 and the definition preceding lemma-finite-cd"
+    "place": "Finiteness paragraph and clause (1); Stacks 0F10."
    }
   },
   {
-   "text": "Comparison and the pro-etale sheaf bound, clause (2). For every $L\\in D^+(X_{\\mathrm{et}},\\Lambda)$, the qcqs property from step 1 allows [prop-weil-pbc-comparison-direct-image] to identify $Rj_{\\mathrm{proet},*}\\nu_X^*L$ with $\\nu_Y^*Rj_{\\mathrm{et},*}L$. Exactness of $\\nu_Y^*$ for finite $\\Lambda$ is [prop-weil-pbc-site-comparison-finite-level]. Applying it to the kernel, image and cokernel that define cohomology gives, for every complex $C$, $\\mathcal H^q(\\nu_Y^*C)\\cong\\nu_Y^*\\mathcal H^q(C)$; this calculation descends to the derived category since it also shows preservation of quasi-isomorphisms. Thus for $L=F[0]$,\n$$\\mathcal H^q(Rj_{\\mathrm{proet},*}\\nu_X^*F)\\cong\\nu_Y^*R^qj_{\\mathrm{et},*}F.$$\nIt vanishes for $q>d$ by step 4 and for $q<0$ by step 3. This proves (2) and the full interval $[0,d]$ on classical sheaves.",
+   "text": "Define coefficientForget as sheafCompose of the ModuleCat-to-AddCommGrpCat forgetful functor. It is additive and faithful. Sectionwise finite limits and reflection by sheafToPresheaf give preservation of finite limits. For finite colimits, restriction of scalars along Z -> Lambda has a right adjoint (coextension); its composite with the ModuleCat Z / abelian-group equivalence is a left adjoint. The sheafification adjunction and sheafificationNatIso identify the induced composeAndSheafify with coefficientForget, proving preservation of finite colimits. All constructions use associative left modules, with no commutativity assumption.",
    "uses": [
-    "prop-weil-pbc-comparison-direct-image",
-    "prop-weil-pbc-site-comparison-finite-level"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A6, lemma-morphism-comparison (2); blueprint proof paragraph (2), with exactness applied explicitly to cohomology"
-   }
-  },
-  {
-   "text": "Bounded complexes, clause (3). Apply [thm-sp-truncation-e2] to the additive left exact functor $v=j_{\\mathrm{et},*}$ between the Grothendieck module categories of step 2. A bounded-below representative exists by step 2. Its convergent truncation spectral sequence is\n$$E_2^{p,q}=R^pj_{\\mathrm{et},*}\\mathcal H^q(M)\\Longrightarrow\\mathcal H^{p+q}(Rj_{\\mathrm{et},*}M).$$\nBy step 4 and the hypothesis on $M$, its $E_2$ terms vanish unless $0\\le p\\le d$ and $a\\le q\\le b$. Hence for any total degree $n<a$ or $n>b+d$ all $E_2$ terms, and therefore all their later subquotients $E_\\infty^{p,n-p}$, vanish. Clauses (5) and (6) of the cited theorem give a finite exhaustive separated filtration of $\\mathcal H^n(Rj_{\\mathrm{et},*}M)$ with precisely these associated graded objects. Successively using $F^p/F^{p+1}=0$ shows that all filtration terms equal one another, so the zero end term equals the whole object. Thus the abutment is zero in those degrees. This is the finite canonical-truncation argument in the blueprint's paragraph (3), expressed through its exact couple, including the zero complex and missing cohomology degrees. Finally use the comparison for $L=M$ and the cohomology calculation in step 5 to get\n$$\\mathcal H^n(Rj_{\\mathrm{proet},*}\\nu_X^*M)\\cong\\nu_Y^*\\mathcal H^n(Rj_{\\mathrm{et},*}M)=0$$\noutside $[a,b+d]$. If $a>b$, all cohomology of $M$ is zero and the same finite-filtration argument gives zero in every degree. No constructibility, separatedness over $k$, or finite absolute cohomological dimension of $k$ is used.",
-   "uses": [
-    "thm-sp-truncation-e2"
+    "def-weil-pbc-proetale-modules"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-geo-open-finiteness-ii/det-geo-open-finiteness-ii-amplitude.md",
-    "place": "Proof paragraph (3), finite truncation devissage; generic truncation spectral sequence and its finite abutment filtration from thm-sp-truncation-e2"
+    "place": "Clause (1), forgetting coefficients; Mathlib ChangeOfRings, ZModuleEquivalence and Sites.Adjunction."
+   }
+  },
+  {
+   "text": "For an injective module-valued etale sheaf G, finiteCoefficientEtaleRealization is an equivalence onto modules over the constant ring sheaf O; its image I is injective. The sheafification counit identifies the underlying abelian sheaf of I with coefficientForget G. Injectivity passes to the module presheaf I.val. On every covering, injective_presheaf_module_cech_cocycle_lift_max in coefficient universe u+1 gives a primitive for each positive Cech cocycle. ShortComplex.ab_exact_iff gives exactness and zero homology. Transport through nonempty_etale_siteCech_complex_iso. Apply isZero_rightDerived_etale_of_cech_vanishing with every object and every cover; covers refine themselves by identities. Thus coefficientForget G is acyclic for abelian evaluation on every etale object.",
+   "uses": [
+    "def-weil-pbc-proetale-modules",
+    "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
+    "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift-max",
+    "lem-weil-pbc-etale-site-cech-complex-comparison",
+    "lem-weil-pbc-cech-vanishing-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-geo-open-finiteness-ii/det-geo-open-finiteness-ii-amplitude.md",
+    "place": "Clause (1), coefficient comparison; Stacks 03FD via 03FC and 03F9."
+   }
+  },
+  {
+   "text": "Underived direct image commutes definitionally with coefficientForget. The sheafified higher-direct-image description turns the preceding evaluation vanishing into direct-image acyclicity of forgotten module injectives: the section-cohomology presheaf is pointwise zero, hence so is its sheafification. The exact coefficient square therefore satisfies isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic, giving the plus-derived coefficient comparison. This uses acyclicity, without asserting that the abelian forgetful functor preserves injectives.",
+   "uses": [
+    "lem-weil-pbc-higher-direct-image-sheafified-presheaf",
+    "src-right-derived-functor-plus-base-change-of-right-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-geo-open-finiteness-ii/det-geo-open-finiteness-ii-amplitude.md",
+    "place": "Clause (1); Stacks 072W and 0D6J(3)."
+   }
+  },
+  {
+   "text": "Every module over the finite ring Lambda is additively torsion by IsAddTorsion.module_of_finite. Sheaf.IsTorsion.of_forall_isAddTorsion applies the abelian d-bound to coefficientForget F. The derived coefficient comparison, mapDerivedCategoryPlusHomologyFunctorIso and mapDerivedCategoryPlusSingleFunctor identify its zero cohomology with the forgotten module higher image. Faithfulness reflects zero by applying map_injective to its identity. This proves clause (1).",
+   "uses": [
+    "def-kun-cd"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-geo-open-finiteness-ii/det-geo-open-finiteness-ii-amplitude.md",
+    "place": "Clause (1), passage from torsion abelian sheaves to finite-ring modules."
+   }
+  },
+  {
+   "text": "For any bounded-below module complex M, the canonical qcqs comparisonDirectImagePlus identifies pro-etale direct image of comparison pullback with comparison pullback of etale direct image. Install both exactness instances for comparisonUpperStar from siteComparison_finiteLevel, so mapDerivedCategoryPlusHomologyFunctorIso transports zero cohomology. Apply this to F[0] for clause (2), and retain the same transport for clause (3).",
+   "uses": [
+    "prop-weil-pbc-comparison-direct-image",
+    "def-weil-pbc-site-comparison-morphism",
+    "prop-weil-pbc-site-comparison-finite-level"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-geo-open-finiteness-ii/det-geo-open-finiteness-ii-amplitude.md",
+    "place": "Clause (2); Stacks 09A6(2)."
+   }
+  },
+  {
+   "text": "For clause (3), convert the two cohomological vanishing hypotheses into IsGE a and IsLE b in the ordinary derived category. Below a use the bounded-below right-derived functor lower-bound theorem directly. For the upper bound, identify its value on each sheaf with the ordinary derived functor by rightDerivedFunctorPlusCompatibility, giving IsLE d from clause (1). Transport CommShift and IsTriangulated along rightDerivedFunctorIsoKInjectives. The proved source-library DerivedCategory.isLE_obj_of_isLE is finite induction on truncation triangles: its pure-degree terms are cohomology sheaves placed in their degrees. Apply it to the bounded input to get IsLE (b+d), then transport back by rightDerivedFunctorPlusCompatibility. Finally apply the comparison of the preceding step. No spectral sequence or convergence theorem is required. The argument also covers a>b, since the input is then zero.",
+   "uses": [
+    "lem-pc-right-derived-functor-triangulated",
+    "src-right-derived-functor-plus-compatibility",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-geo-open-finiteness-ii/det-geo-open-finiteness-ii-amplitude.md",
+    "place": "Proof paragraph (3), finite truncation devissage; source TStructure.lean, isLE_obj_of_isLE (lines 264-297). Stacks 08J5."
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "def-kun-cd",
   "lem-kun-0f10",
+  "def-kun-cd",
   "def-weil-pbc-proetale-modules",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-weil-pbc-grothendieck-functorial-injective-embedding",
-  "lem-weil-pbc-dplus-injective-representative",
-  "def-sfb-right-derived-functor",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
-  "lemma-weil-pbc-leray-acyclicity",
+  "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
+  "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift-max",
+  "lem-weil-pbc-etale-site-cech-complex-comparison",
+  "lem-weil-pbc-cech-vanishing-criterion",
   "lem-weil-pbc-higher-direct-image-sheafified-presheaf",
+  "src-right-derived-functor-plus-base-change-of-right-acyclic",
   "prop-weil-pbc-comparison-direct-image",
+  "def-weil-pbc-site-comparison-morphism",
   "prop-weil-pbc-site-comparison-finite-level",
-  "thm-sp-truncation-e2"
+  "lem-pc-right-derived-functor-triangulated",
+  "src-right-derived-functor-plus-compatibility",
+  "def-sbc-standard-tstructure-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-geo-open-finiteness-ii/det-geo-open-finiteness-ii-amplitude.md",
-  "place": "Proof paragraphs finiteness and (1)-(3), with coefficient-forgetting justified via Stacks 03FD/072W/015E and the final finite truncation argument written through the existing truncation exact couple."
+  "place": "Proof clauses (1)-(3); T6 Lean proof uses the finite-ring realization and universe-correct Cech acyclicity for coefficient forgetting, the canonical qcqs comparison, and the proved source-library finite truncation induction isLE_obj_of_isLE in place of the truncation spectral sequence. Public statement unchanged."
  },
  "mathlib_searches": [
   {
@@ -261,18 +272,10 @@
  },
  "tool_uses": [
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "lem-kun-0f10",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-weil-pbc-grothendieck-functorial-injective-embedding",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
-  "lemma-weil-pbc-leray-acyclicity",
   "lem-weil-pbc-higher-direct-image-sheafified-presheaf",
   "prop-weil-pbc-comparison-direct-image",
-  "prop-weil-pbc-site-comparison-finite-level",
-  "thm-sp-truncation-e2"
+  "prop-weil-pbc-site-comparison-finite-level"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -312,5 +315,15 @@
   "group": "Q102",
   "result": "pass",
   "note": "Read the node, the blueprint source and unit, all 7 stmt_dep records and the actual declarations (torsionEtaleCohomologicalDimension, ProEtaleFiniteModules, comparisonUpperStar, which is additive and preserves homology, so mapDerivedCategoryPlus is the derived ν^*), plus the module and report. Every hypothesis and clause (1)-(3) is exact. d is pinned to cd(j) by ENat equality. The qcqs arguments are derived terms, not binders. Λ:Type(u+1) matches the recorded coefficient interface (finite rings resize). ℓ:ℕ adds no primality. Edge cases covered: empty X, j=id, Λ=0, char k=ℓ, noncommutative Λ, a>b, strict q>d. Using the original comparisonUpperStar instead of Q17's small-model record is accepted: it is the canonical ν that the recorded finiteCoefficientComparison is built from, and the small-model module transports it. Node differs from base only in lean; statement verbatim; sorry only; docstrings with source and blueprint tag; lines ≤98 characters; worker and second-reading sections present. nt_compile.py --json on the snapshot module: rc 0, no errors or warnings, module 2.4 s. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261019T154025-L-3029090",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
