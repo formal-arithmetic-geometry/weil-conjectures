@@ -19,9 +19,214 @@
   "def-weil-residue-field",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an affine open $U=\\operatorname{Spec}R\\subseteq T$ containing $t$. Its open immersion into $T$ is quasi-compact because $T$ is Noetherian, so a separated etale finite-presentation neighborhood of $U$ is one of $T$ by [lem-weil-pbc-proper-fp-permanence]. Apply [lem-per-ordinary-henselian-pointed-neighbourhood-limit] on $U$. Denote its henselian limit ring temporarily by $H_0$. It is the specified $H$: for each pointed etale $R$-algebra $R_a$, base change to $H$ and [lem-weil-pbc-henselian-etale-retraction] give a unique compatible map $R_a\\to H$ carrying the selected point to the closed point. This gives $H_0\\to H$, local with the prescribed residue map. The universal property in [def-weil-pbc-henselization-at-prime] gives a local map $H\\to H_0$. Their composite on $H$ is the identity by that universal property; their composite on $H_0$ agrees with the identity on every $R_a$ by uniqueness of the same etale retraction over $H_0$, hence is the identity on the colimit. Thus $T_h=\\lim_a U_a$, with each $(U_a,t_a)\\to(U,t)$ separated etale of finite presentation and residue preserving. The open immersion is etale by [lem-weil-pbc-etale-composition-cancellation], hence locally of finite presentation; its quasi-compactness and separatedness give finite presentation by [def-weil-pbc-scheme-conventions]. Etale base change for the retraction argument is [lem-weil-pbc-etale-base-change-finite-limits]. Every transition between the affine $U$-etale neighborhoods is etale by the cancellation clause of [lem-weil-pbc-etale-composition-cancellation]; it is affine because both schemes are affine.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-per-ordinary-henselian-pointed-neighbourhood-limit",
+    "lem-weil-pbc-henselian-etale-retraction",
+    "def-weil-pbc-henselization-at-prime",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose III Proposition 6.2, first paragraph, printed pp.43--44, with II 3.2.1 and III 3.1.1 for its standard covering certificate"
+   }
+  },
+  {
+   "text": "The reduced quasi-excellent local ring $\\mathcal O_{T,t}$ has reduced excellent Noetherian henselization by [lem-per-henselian-normal-completion-preparation]. The reduced component family of $T_h$ is finite and covering, by [lem-per-alteration-cover-calculus]. Pull the given covering back categorically to each reduced irreducible component $B_c$ of $T_h$; the categorical pullback has projection maps into the original $X_i$. By [lem-per-alteration-site-localization] (with $S=T_h$ and the object $B_c\\to T_h$), this pulled-back family is a finite covering family of $B_c$ in $\\operatorname{alt}/B_c$, since its arrows to $B_c$ form a covering family in $\\operatorname{alt}/T_h$. Apply [lem-per-alteration-cover-proper-normal-form] over each integral $B_c$. We obtain $Y_c\\to B_c$ proper surjective of generic degree prime to $\\ell$, with a finite completely decomposed etale family $V_{cj}\\to Y_c$ whose composites have maps to the original $X_i$. Set $Y=\\coprod_cY_c$ and $V=\\coprod_{c,j}V_{cj}$. The map $p:Y\\to T_h$ is proper (each $B_c\\hookrightarrow T_h$ is closed), surjective and maximally $\\ell'$-finite; this uses [lem-weil-pbc-proper-fp-permanence]. The map $v:V\\to Y$ is completely decomposed etale, and each summand of $V$ has a specified map to some $X_i$. All these schemes are objects of $\\operatorname{alt}/T_h$. Each reduced component $B_c$ is quasi-excellent by [lem-per-quasi-excellent-finite-type-stability] applied to its closed immersion into the excellent $T_h$, so the normal-form lemma applies. The finite disjoint union is proper because its diagonal is the disjoint union of the component diagonals, it is of finite type, and after any base change its closed images are a finite union of closed subsets.",
+   "uses": [
+    "lem-per-henselian-normal-completion-preparation",
+    "lem-per-alteration-cover-calculus",
+    "lem-per-alteration-site-localization",
+    "lem-per-alteration-cover-proper-normal-form",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-per-quasi-excellent-finite-type-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose III Proposition 6.2, first paragraph, printed pp.43--44, with II 3.2.1 and III 3.1.1 for its standard covering certificate"
+   }
+  },
+  {
+   "text": "Record a finite closed filtration $Y=F_0\\supseteq F_1\\supseteq\\cdots\\supseteq F_N=\\varnothing$ and a section of $v$ over every stratum $F_k\\setminus F_{k+1}$. Here is the construction, rather than an assumed limit theorem for Nisnevich covers. For a nonempty reduced closed remainder $F$, take its finitely many generic points. At each such point complete decomposition gives a residue-field-preserving lift to $V$. By [lem-per-rational-lift-locally-closed-section], this lift extends over a locally closed subscheme of $F$ containing that generic point. Shrinking inside its reduced irreducible component gives a nonempty open of that component; remove the other components and shrink further to obtain disjoint opens of $F$, each with a section. Their union is an open of $F$ containing all its generic points; the complement is a strictly smaller closed subset. Give that complement its reduced closed structure and repeat. This process terminates by [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]. The disjoint sections glue on each removed stratum because their domains are disjoint. Retain the individual summands of $V$ and their leaf maps, not only $V\\to Y$. To pass from the locally closed subscheme at a generic point to an open of the reduced component, its defining ideal is zero at that generic point. On a Noetherian affine chart it has finitely many generators, each annihilated by an element outside the generic prime; their product gives an open on which the ideal is zero. This justifies the open restriction used above.",
+   "uses": [
+    "lem-per-rational-lift-locally-closed-section",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose III Proposition 6.2, first paragraph, printed pp.43--44, with II 3.2.1 and III 3.1.1 for its standard covering certificate"
+   }
+  },
+  {
+   "text": "Include the given $X_i$, $D_i$, all their specified reduced irreducible boundary components $C_{ij}$ and all their scheme-theoretic intersections in one finite diagram, together with $Y,V$, the individual summands of $V$, the leaf maps into the $X_i$, and the filtration from Step 3. All schemes are finite type over the Noetherian affine $T_h$ and hence of finite presentation: on finite affine charts use [lem-weil-pbc-finite-type-noetherian-finite-presentation]. Apply the object, morphism and equality clauses of [thm-pd-spreading-out] finitely many times, choosing common upper indices, to obtain models over one $U_a$. Make the component, boundary and filtration inclusions closed immersions by [lem-weil-pbc-descend-closed-immersion]. For intersections use the actual fibre products of the component models; descend the isomorphisms to the given intersection models and their inverse identities by the same morphism/equality clauses. Thus every marked intersection remains the actual scheme-theoretic intersection. The endpoint models of the filtration are $Y_a$ and the empty scheme. The affine charts of all finite-type sources, and of their models over the Noetherian quasi-excellent neighborhoods, are Noetherian by [lem-per-quasi-excellent-finite-type-stability]. Finite-type morphisms here are quasi-compact, and their sources and targets are Noetherian, hence quasi-separated; this checks the global finite-presentation convention used for diagram descent.",
+   "uses": [
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-descend-closed-immersion",
+    "lem-per-quasi-excellent-finite-type-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose III Proposition 6.2, first paragraph, printed pp.43--44, with II 3.2.1 and III 3.1.1 for its standard covering certificate"
+   }
+  },
+  {
+   "text": "For each $k$, form the open complement $F_{k,a}\\setminus F_{k+1,a}$ in the descended closed subscheme $F_{k,a}$. Its limit is the original stratum. The morphism clause of [thm-pd-spreading-out] descends the section on this stratum to a later index; the equality clause makes its composite with $v_a$ exactly the stratum inclusion. After one common enlargement all these finitely many sections exist and all $V_{cj,a}\\to Y_a$ are etale by [lem-weil-pbc-descend-etale]. Every point of $Y_a$ belongs to a stratum, hence has a lift to $V_a$ with the same residue field: a section gives a retraction on residue fields, and injectivity of field homomorphisms forces this residue extension to be an isomorphism. Thus $(V_{cj,a}\\to Y_a)_{c,j}$ is completely decomposed. This argument is unchanged at later stages, since the closed filtration and its sections pull back.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-descend-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose III Proposition 6.2, first paragraph, printed pp.43--44, with II 3.2.1 and III 3.1.1 for its standard covering certificate"
+   }
+  },
+  {
+   "text": "Apply [lem-per-ind-etale-alteration-object-degree-descent] to the finitely many models of $X_i,Y,V_{cj}$ and to $p_a:Y_a\\to U_a$. Its hypotheses hold: the $U_a$ are reduced affine quasi-excellent Noetherian schemes, since they are etale of finite type over the reduced quasi-excellent affine $U$, and $T_h$ is reduced Noetherian by Step 2. After increasing $a$, all displayed models are alteration objects, and $p_a$ is maximally $\\ell'$-finite. Independently make $p_a$ proper by [lem-weil-pbc-eventually-proper] and surjective by [lem-weil-pbc-descend-surjective]. All schemes and maps involved are finite presentation, so the qcqs and locally-finite-type hypotheses of these two limit statements hold. We now have a proper surjective maximally $\\ell'$-finite generator, followed by the completely decomposed etale generator of Step 5, with maps of each leaf into a prescribed $X_{i,a}$. More precisely, [lem-per-quasi-excellent-finite-type-stability] gives quasi-excellence and Noetherianness of the $U_a$, and [etale-proposition-etale-reduced] gives their reducedness. Include the base scheme itself among the $V_b$ when applying the degree lemma to $p_a$.",
+   "uses": [
+    "lem-per-ind-etale-alteration-object-degree-descent",
+    "lem-weil-pbc-eventually-proper",
+    "lem-weil-pbc-descend-surjective",
+    "lem-per-quasi-excellent-finite-type-stability",
+    "etale-proposition-etale-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose III Proposition 6.2, first paragraph, printed pp.43--44, with II 3.2.1 and III 3.1.1 for its standard covering certificate"
+   }
+  },
+  {
+   "text": "Apply [lem-per-ind-etale-regular-coordinate-locus] to each model $X_{i,a}$, its labelled $C_{ij,a}$ and $D_{i,a}$. The inverse image of its open coordinate locus is the whole $X_i$, because the limit is the specified strict normal crossings pair. The projection $X_i\\to X_{i,a}$ is locally ind-etale: [lem-trf-henselization-prime-ind-etale] and [lem-weil-pbc-ind-etale-stability] apply to the neighborhood rings and their base changes. The open locus is constructible, since $X_{i,a}$ is Noetherian. Apply [lem-weil-pbc-limit-contained-in-constructible] to the inverse system of the $X_{i,b}$ and this open subset of $X_{i,a}$. At a common later stage every $X_{i,b}$ lies in the inverse image of that locus; by the invariance clause of the coordinate-locus lemma the entire model has regular local coordinates for its labelled boundary. Thus it is regular and its marked components and intersections are regular of the required local codimensions. Properness and all sections established above persist under this base change.",
+   "uses": [
+    "lem-per-ind-etale-regular-coordinate-locus",
+    "lem-trf-henselization-prime-ind-etale",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-limit-contained-in-constructible",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose III Proposition 6.2, first paragraph, printed pp.43--44, with II 3.2.1 and III 3.1.1 for its standard covering certificate"
+   }
+  },
+  {
+   "text": "We also need the exact support assertion. At the current stage let $E_i$ be the symmetric difference of $|D_{i,a}|$ and the support of the inverse image of $Z$ in $X_{i,a}$. It is constructible, being a Boolean combination of closed subsets, and its inverse image in $X_i$ is empty by the given support equality. Apply [lem-weil-pbc-limit-contained-in-constructible] to the complement of $E_i$ in $X_{i,a}$. After a common later index the two supports agree everywhere. By the coordinate-locus invariance of [lem-per-ind-etale-regular-coordinate-locus], all the regularity and marked-coordinate conclusions of Step 7 still hold.",
+   "uses": [
+    "lem-weil-pbc-limit-contained-in-constructible",
+    "lem-per-ind-etale-regular-coordinate-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose III Proposition 6.2, first paragraph, printed pp.43--44, with II 3.2.1 and III 3.1.1 for its standard covering certificate"
+   }
+  },
+  {
+   "text": "Fix the stage now obtained. Every nonempty $C_{ij,a}$ is regular Noetherian (a closed subscheme of the Noetherian $X_{i,a}$), hence normal by clause (1) of [rem-pc-regular-normal]. By clause (2) of the same node it is a finite disjoint union of integral open and closed components. Exactly one of these meets its limit $C_{ij}$: their inverse images partition the nonempty integral scheme $C_{ij}$ into open and closed subsets. For every label retain that component and remove the supports of all the other components from $X_{i,a}$. This gives an open subscheme $X^o_{i,a}$ whose base change is still the whole specified $X_i$. On it each retained $C^o_{ij,a}$ is a nonempty open of one integral scheme, hence integral; it is closed in $X^o_{i,a}$. The coordinate equations restrict, so $D^o_{i,a}$ is a strict normal crossings boundary with precisely these labelled components, using [def-trf-strict-normal-crossings-boundary]. Distinct labels remain distinct wherever nonempty because distinct coordinate ideals cannot coincide on an open component. Empty boundary families require no removal.",
+   "uses": [
+    "rem-pc-regular-normal",
+    "def-trf-strict-normal-crossings-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose III Proposition 6.2, first paragraph, printed pp.43--44, with II 3.2.1 and III 3.1.1 for its standard covering certificate"
+   }
+  },
+  {
+   "text": "The removal in Step 9 must preserve the covering certificate. For each leaf $V_{cj,a}\\to X_{i,a}$, take the inverse image of $X_{i,a}\\setminus X^o_{i,a}$ and its image in $U_a$. These finitely many images are constructible by [lem-weil-pbc-chevalley-constructible-image]; their union $B$ has empty inverse image in $T_h$, because the leaf maps over $T_h$ land in $X_i=X^o_{i,a}\\times_{U_a}T_h$. Every generalization of $t_a$ lifts to $T_h$: the local ind-etale map $\\mathcal O_{U_a,t_a}\\to H$ is flat, by [lem-weil-pbc-ind-etale-stability] and [def-weil-pbc-ind-etale-algebra], and [lem-sc-flat-going-down] applied below its closed point supplies the required primes. Therefore $B$ contains no generalization of $t_a$. A constructible subset of a Noetherian scheme whose closure contains $t_a$ contains a point generalizing $t_a$: write it as a finite union of locally closed subsets, and take a generic point of a component of one closure containing $t_a$; that generic point belongs to the locally closed subset. Generic points exist by [lem-sc-scheme-sober]. Consequently $t_a\\notin\\overline B$. Restrict the base to an affine open neighborhood $W$ of $t_a$ disjoint from $\\overline B$. Now every leaf map factors through $X^o_{i,a}\\times_{U_a}W$. This last change is an open restriction, so it cannot split an integral marked component.",
+   "uses": [
+    "lem-weil-pbc-chevalley-constructible-image",
+    "lem-weil-pbc-ind-etale-stability",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-sc-flat-going-down",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose III Proposition 6.2, first paragraph, printed pp.43--44, with II 3.2.1 and III 3.1.1 for its standard covering certificate"
+   }
+  },
+  {
+   "text": "Put $T'=W$ and $X'_i=X^o_{i,a}\\times_{U_a}W$, with the restricted boundaries and markings. Open subschemes of alteration objects are alteration objects: their generic points are the generic points of the original components that they meet, with the same residue fields, so [def-per-prime-to-ell-alteration-topology] gives the claim directly. The proper generator $Y_a\\times_{U_a}W\\to W$ and the completely decomposed etale family above it are still generators. By [lem-per-alteration-cover-calculus] their composite is covering. Its leaf maps factor through the $X'_i$ by Step 10, so the sieve generated by the $X'_i$ contains this covering sieve and is covering. The regular-coordinate and support assertions restrict to the opens $X'_i$; thus the $D'_i$ are strict normal crossings boundaries supported exactly over $e^{-1}Z$. Their components remain integral, and all intersection isomorphisms are those retained in Step 4. The etale generator stays etale under the final restriction by [lem-weil-pbc-etale-base-change-finite-limits]; its completely decomposed property follows from the pulled-back stratum sections, rather than from surjectivity alone.",
+   "uses": [
+    "def-per-prime-to-ell-alteration-topology",
+    "lem-per-alteration-cover-calculus",
+    "lem-per-ind-etale-regular-coordinate-locus",
+    "lem-weil-pbc-etale-base-change-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose III Proposition 6.2, first paragraph, printed pp.43--44, with II 3.2.1 and III 3.1.1 for its standard covering certificate"
+   }
+  },
+  {
+   "text": "The composite $e:T'=W\\to U_a\\to U\\to T$ is separated etale of finite presentation. Separation and finite presentation compose by [lem-weil-pbc-proper-fp-permanence]; etaleness of the open restrictions and their composite follows from [lem-weil-pbc-etale-composition-cancellation]. The chosen point $t'=t_a$ lies in $W$ and has $\\kappa(t')=\\kappa(t)$ by Step 1. The map $T_h\\to U_a$ factors through $W$, since every point of the local scheme $T_h$ generalizes its closed point and every open containing the image of that closed point contains their images. It still takes the closed point to $t'$. Every removal and restriction had empty complement after pullback to $T_h$, so the final base-change isomorphisms are with the prescribed $X_i,D_i$, their components, their intersections and all inclusions. This supplies every asserted clause.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose III Proposition 6.2, first paragraph, printed pp.43--44, with II 3.2.1 and III 3.1.1 for its standard covering certificate"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-per-prime-to-ell-alteration-topology",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-weil-pbc-henselization-at-prime",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-scheme-conventions",
+  "etale-proposition-etale-reduced",
+  "lem-per-alteration-cover-calculus",
+  "lem-per-alteration-cover-proper-normal-form",
+  "lem-per-alteration-site-localization",
+  "lem-per-henselian-normal-completion-preparation",
+  "lem-per-ind-etale-alteration-object-degree-descent",
+  "lem-per-ind-etale-regular-coordinate-locus",
+  "lem-per-ordinary-henselian-pointed-neighbourhood-limit",
+  "lem-per-quasi-excellent-finite-type-stability",
+  "lem-per-rational-lift-locally-closed-section",
+  "lem-sc-flat-going-down",
+  "lem-sc-scheme-sober",
+  "lem-trf-henselization-prime-ind-etale",
+  "lem-weil-pbc-chevalley-constructible-image",
+  "lem-weil-pbc-descend-closed-immersion",
+  "lem-weil-pbc-descend-etale",
+  "lem-weil-pbc-descend-surjective",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-eventually-proper",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-henselian-etale-retraction",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-limit-contained-in-constructible",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-proper-fp-permanence",
+  "rem-pc-regular-normal",
+  "thm-pd-spreading-out"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expanded finite-presentation argument in III Proposition 6.2, first paragraph, pp.43--44; explicit Nisnevich splitting filtration and final marked-component trimming supplied here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +255,38 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-19",
    "verdict": "no match: the returned types concern henselian definitions, ordinary scheme limits, morphism properties, or unrelated approximation; none states this finite marked alteration assertion or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prescribed finite prime to ell alteration cover with regular strict normal crossings pairs descends from henselization to a Nisnevich neighborhood",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructs an open cover of the object $D(i')\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} → AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f → S\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, this definition constructs\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰X\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            (self : AlgebraicGeometry.ExistsHomHomCom\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this function construc\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.ulift\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n    AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.precoverage P) X →\\n      AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.precoverage P) X\", \"doc\": \"Given a scheme $X$ and a cover $\\\\mathcal{U}$ of $X$ defined by the precoverage generated by a morphism property $P$, this function lifts $\\\\mathcal{U}$ from universe level $v$ to universe level $u$ whi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.exists_of_f_eq_f\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Directed\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {X : AlgebraicGeometry.Scheme}\\n  (𝒰 : AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.precoverage P) X)\\n  [inst : CategoryTheory.Category.{v_1, u_1} 𝒰.I₀] [inst_1 : 𝒰.LocallyDirected] {i j : 𝒰.I₀} (xi : ↥(𝒰.X i))\\n  (xj : ↥(𝒰.X\", \"doc\": \"For any locally directed cover $\\\\mathcal{U}$ of a scheme $X$, if two elements $x_i \\\\in \\\\mathcal{U}.X(i)$ and $x_j \\\\in \\\\mathcal{U}.X(j)$ satisfy $\\\\mathcal{U}.f(i)(x_i) = \\\\mathcal{U}.f(j)(x_j)$ in $X$, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: hits give ordinary morphism loci, scheme-limit maps, flatness or etale algebra descent; no marked regular-coordinate assertion or alteration-object/generic-degree descent assertion is stated, nor does one specialize in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite marked regular scheme diagrams and alteration covers descend along henselian etale neighborhood limits",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] (s : Γ(c.pt, ⊤)) [∀ i, CompactSpace (D.obj i)]\\n  [∀ i, QuasiSeparatedSpace (D.obj i)] : ∃ (i : I) (t : Γ(D.obj i, ⊤)), s = (c.π.app i).appTop t\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ (i : I), CompactSpace (D.obj i)]\\n  [∀ (i : I), QuasiSeparatedSpace (D.obj i)] {J : Type*} (U : J → c.pt.Opens) (hU : IsOpenCover U)\\n  (hU' : ∀ i, IsAffineOpen (U i)) :\\n  ∃ (i : I) (s : Finset J) (V : s → (D.obj i).Opens),\\n    IsOpenCov\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) →\\n        (D ⟶ (CategoryTheory.Functor.const I).obj S) → (X ⟶ S) → Type (u + 1)\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, this inductive type encode\"}\n  {\"name\": \"AlgebraicGeometry.instHasFiniteLimitsScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"CategoryTheory.Limits.HasFiniteLimits AlgebraicGeometry.Scheme\", \"doc\": \"The category of schemes satisfies all finite limit conditions, including the existence of terminal objects, binary products, and pullbacks, as required by the inductive definition of having finite lim\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.mk\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            (c : CategoryTheory.Limits.Cone D) →\\n    \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructor provi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: hits give ordinary morphism loci, scheme-limit maps, flatness or etale algebra descent; no marked regular-coordinate assertion or alteration-object/generic-degree descent assertion is stated, nor does one specialize in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsRegular\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: hits give ordinary morphism loci, scheme-limit maps, flatness or etale algebra descent; no marked regular-coordinate assertion or alteration-object/generic-degree descent assertion is stated, nor does one specialize in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "henseli.*(descen|spread)|normal.?cross|alteration",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: hits give ordinary morphism loci, scheme-limit maps, flatness or etale algebra descent; no marked regular-coordinate assertion or alteration-object/generic-degree descent assertion is stated, nor does one specialize in one line."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-uniformization-complete-local-descent",
@@ -80,5 +313,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-henselian-regular-pair-spreading",
+  "worker": "stage1",
+  "summary": "Descends the prescribed marked family together with a standard covering certificate. Supplies its finite closed splitting filtration and descends sections and equations. Separates finite-stage alteration-object/generic-degree detection from the marked-coordinate open-locus lemma. Removes phantom marked components only after all etale refinements and makes the certificate factor through the trimmed opens by one final Zariski base shrink. Statement unchanged. Resumption checked current sources and supplied explicit cited etale composition/cancellation/base change, reduced etale ascent, and quasi-excellent finite-type permanence; clarified the generic-point section restriction. Maintainer reader FIX (2026-10-19): Step 2 cites lem-per-alteration-site-localization to pass from a covering of B_c in alt/T_h to one in alt/B_c; Step 9 takes the component decomposition from rem-pc-regular-normal (2) instead of the trace-formula node lem-trf-normal-topologically-noetherian-components.",
+  "blueprint": "Realizes the finiteness/duality branch of lem-per-artin-gabber-affine-curve Step 3 through III Proposition 6.2, pp.43--44. Ordinary henselian etale limit descent only; no completion approximation or new uniformization theorem is substituted.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-henselization-prime-ind-etale",
+    "why": "Generic scheme-limit, local-algebra or scheme-topology tool used in the III 6.2 etale-descent argument; the unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-descend-closed-immersion",
+    "why": "Generic scheme-limit, local-algebra or scheme-topology tool used in the III 6.2 etale-descent argument; the unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-descend-etale",
+    "why": "Generic scheme-limit, local-algebra or scheme-topology tool used in the III 6.2 etale-descent argument; the unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-descend-surjective",
+    "why": "Generic scheme-limit, local-algebra or scheme-topology tool used in the III 6.2 etale-descent argument; the unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-eventually-proper",
+    "why": "Generic scheme-limit, local-algebra or scheme-topology tool used in the III 6.2 etale-descent argument; the unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-etale-retraction",
+    "why": "Generic scheme-limit, local-algebra or scheme-topology tool used in the III 6.2 etale-descent argument; the unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic scheme-limit, local-algebra or scheme-topology tool used in the III 6.2 etale-descent argument; the unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-limit-contained-in-constructible",
+    "why": "Generic scheme-limit, local-algebra or scheme-topology tool used in the III 6.2 etale-descent argument; the unit has no replacement for this statement."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic scheme-limit, local-algebra or scheme-topology tool used in the III 6.2 etale-descent argument; the unit has no replacement for this statement."
+   },
+   {
+    "node": "thm-pd-spreading-out",
+    "why": "Generic scheme-limit, local-algebra or scheme-topology tool used in the III 6.2 etale-descent argument; the unit has no replacement for this statement."
+   },
+   {
+    "node": "etale-proposition-etale-reduced",
+    "why": "Generic etale or scheme permanence statement needed to verify finite-presentation neighborhood and base-change hypotheses in III 6.2; no unit-specific replacement supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-henselization-prime-ind-etale",
+  "lem-weil-pbc-descend-closed-immersion",
+  "lem-weil-pbc-descend-etale",
+  "lem-weil-pbc-descend-surjective",
+  "lem-weil-pbc-eventually-proper",
+  "lem-weil-pbc-henselian-etale-retraction",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-limit-contained-in-constructible",
+  "rem-pc-regular-normal",
+  "thm-pd-spreading-out",
+  "etale-proposition-etale-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q142-bb1ffcf10",
+  "group": "Q142",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-bb1ffcf10 (reviewer sub-agent of L); spot-checked: FIX with two citation repairs; no statement changed. Read ILO III Prop 6.2 (printed pp.43-44, pdf 49-50): the item follows its first paragraph. A standard covering Y->T'->T_(t) (proper and l'-maximal, then Nisnevich) is descended to a Nisnevich etale neighbourhood, and the limit properties conclude. The item statement is true and matches both uses in the parent lem-per-uniformization-complete-local-descent (Steps 4 and 6): ordinary henselization, pointed separated etale fp neighbourhood with residue field unchanged, regular SNC covering with support exactly over e^-1 Z. No SGA anywhere. Steps 1-12 checked against the statement of every cited node. Step 1 builds the identification H0=H itself (retraction plus universal property, prime unique since the residue fields agree). Step 3's filtration is sound. 01ZM/01ZP/07RP/07RR/05F4 are applied with their qcqs, affine and lfp hypotheses. In Step 10, flat going-down plus constructible closure keeps t_a out of the closure of B. Step 11's covering follows from the composite of generators and sieve inclusion. Repair 1 (C1/E1): Step 2 used a covering in alt/T_h as a covering in alt/B_c for lem-per-alteration-cover-proper-normal-form; it now cites lem-per-alteration-site-localization (same unit, no cycle). Repair 2: Step 9 cited lem-trf-normal-topologically-noetherian-components, which is exactly clause (2) of rem-pc-regular-normal; replaced, and its tool_use dropped. Both new nodes are true and not duplicates. In degree-descent, the l'-clause works through an 'exists a1' stage: factor degrees of L tensor K' sum to [L:K], and generic points of S_a outside Im(S) are removed. A cubic example shows the version taking the degree at a0 would fail; the node does not state that. In coordinate-locus, openness follows from Koszul exactness and openness of the regular locus. Ind-etale invariance holds because m_x O_y = m_y. The SNC clause follows from def-trf-snc. Partial overlaps with lem-per-snc-boundary-parameter-criterion and lem-trf-etale-component-coordinate-identification are noted as advisory. Batch-5 flags were checked through each cited node's own trf closure. cover-calculus (finite-residue-point closed in fibre), proper-normal-form (0AB1 and Raynaud-Gruson algebra), qe-finite-type-stability (G-ring/J-2 affine cover), henselization-prime-ind-etale and def-trf-strict-normal-crossings-boundary are all generic algebra or definitions, not steps of the proof of the trace formula or Poincare duality: accepted. trf-normal-components was removed by the FIX. Tool uses are accepted except the one removed.; 1 file(s) fixed by the reviewer"
  }
 }
