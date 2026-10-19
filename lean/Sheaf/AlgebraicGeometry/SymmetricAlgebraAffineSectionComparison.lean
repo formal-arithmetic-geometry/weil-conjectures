@@ -6,7 +6,7 @@ Authors: SHEAF group J1
 module
 
 public import Sheaf.AlgebraicGeometry.SymmetricAlgebraAffineComparisonMap
-import Sheaf.AlgebraicGeometry.QuasiCoherentAffineSectionBaseChange
+import WeilConjectures.AlgebraicGeometry.QuasiCoherentAffineSectionBaseChange
 import Sheaf.RingTheory.SymmetricAlgebraBaseChange
 
 /-! # Sectionwise comparison before sheafification

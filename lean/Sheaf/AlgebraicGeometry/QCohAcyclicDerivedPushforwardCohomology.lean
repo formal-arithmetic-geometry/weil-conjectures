@@ -9,7 +9,8 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.Paper.QCohAcyclicDerivedSectionsComparison
-import Sheaf.AlgebraicGeometry.ModuleSheafificationAffineRestriction
+import WeilConjectures.AlgebraicGeometry.ModuleSheafificationAffineRestriction
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Cohomology of acyclic quasi-coherent derived pushforward
 

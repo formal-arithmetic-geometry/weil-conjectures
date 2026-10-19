@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.GeometricPointMorphismSetStalk
-public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-public import Mathlib.FieldTheory.IsAlgClosed.Basic

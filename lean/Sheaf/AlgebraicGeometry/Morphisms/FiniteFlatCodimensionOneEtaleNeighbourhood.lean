@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Sheaf.AlgebraicGeometry.Morphisms.FiniteFlatSingletonFibreChart
 import Sheaf.AlgebraicGeometry.Morphisms.FiniteFlatDiscriminantBranchSupport
-import Sheaf.AlgebraicGeometry.Morphisms.LocallyPrincipalSupportDimensionOne
+import WeilConjectures.AlgebraicGeometry.Morphisms.LocallyPrincipalSupportDimensionOne
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 
 /-!

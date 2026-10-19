@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-import Sheaf.AlgebraicGeometry.IrreducibleStratificationRefinement
+import WeilConjectures.AlgebraicGeometry.IrreducibleStratificationRefinement
 import Sheaf.AlgebraicGeometry.RefinementPreservesFiniteLisse
 import Sheaf.AlgebraicGeometry.PullbackFiniteLocallyConstant
 

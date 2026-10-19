@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.MLSetsTowerLimitNonempty
-public import Mathlib.CategoryTheory.CofilteredSystem

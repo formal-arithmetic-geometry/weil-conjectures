@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.OverPullbackDiagonalClosedImmersion
-public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-public import Mathlib.CategoryTheory.Comma.Over.Pullback

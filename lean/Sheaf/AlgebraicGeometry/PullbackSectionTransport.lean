@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.PullbackSectionTransport
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections

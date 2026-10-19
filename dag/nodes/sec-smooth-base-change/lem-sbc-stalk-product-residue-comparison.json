@@ -90,13 +90,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.StalkProductResidueComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StalkProductResidueComparison.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.StalkProductResidueComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/StalkProductResidueComparison.lean",
   "declaration": "AlgebraicGeometry.Scheme.stalk_product_residue_comparison",
   "statement": "theorem stalk_product_residue_comparison\n    {N X : Scheme.{u}} (f : X ⟶ N) (s : N)\n    (I : Type) (S : I → CommRingCat.{u})\n    (alg : ∀ i, Algebra (N.presheaf.stalk s) (S i)) :\n    letI := alg\n    ∀ (c : pullback f (N.fromSpecStalk s) ≅ ∐ fun i : I ↦ Spec (S i)),\n      c.hom ≫ Sigma.desc (fun i : I ↦\n        Spec.map (CommRingCat.ofHom (algebraMap (N.presheaf.stalk s) (S i)))) =\n          pullback.snd f (N.fromSpecStalk s) →\n      ∀ (x : X), f x = s →\n        ∃ (i : I) (q : Ideal (S i)) (hq : q.IsPrime),\n          letI := hq\n          letI := Localization.AtPrime.algebraOfLiesOver\n            (q.under (N.presheaf.stalk s)) q\n          letI := (f.residueFieldMap x).hom.toAlgebra\n          ∃ (e : N.residueField (f x) ≃+*\n              (q.under (N.presheaf.stalk s)).ResidueField)\n            (g : X.residueField x ≃+* q.ResidueField),\n            (algebraMap (q.under (N.presheaf.stalk s)).ResidueField\n              q.ResidueField).comp e.toRingHom =\n              g.toRingHom.comp (algebraMap (N.residueField (f x))\n                (X.residueField x))",
   "branch": "sheaf-dag",
   "by": "V3",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.Morphisms.StalkProductResidueComparison; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-14",

@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpaceReindexIsIso
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible

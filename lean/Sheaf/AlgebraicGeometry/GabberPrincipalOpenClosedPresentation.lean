@@ -1,7 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.GabberPrincipalOpenClosedPresentation
-public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-public import Mathlib.FieldTheory.IsSepClosed
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Mathlib.AlgebraicGeometry.Restrict

@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.QcqsSchemeCofinalFiniteCoverings
-public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-public import Mathlib.Topology.Sets.OpenCover

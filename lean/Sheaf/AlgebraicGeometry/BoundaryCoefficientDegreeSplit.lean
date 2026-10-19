@@ -6,7 +6,7 @@ Authors: SHEAF group A4
 module
 
 public import Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryComparisons
-import Sheaf.AlgebraicGeometry.PullbackMonoidalUnitComparison
+import WeilConjectures.AlgebraicGeometry.PullbackMonoidalUnitComparison
 
 /-! # Splitting off the first coefficient block
 

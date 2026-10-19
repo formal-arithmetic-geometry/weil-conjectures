@@ -6,7 +6,7 @@ Authors: SHEAF group J1
 module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
-public import Sheaf.AlgebraicGeometry.GlobalCohomologyContinuityPresentation
+public import WeilConjectures.AlgebraicGeometry.GlobalCohomologyContinuityPresentation
 import Sheaf.AlgebraicGeometry.StrictLocalNeighbourhoodGeometryExistence
 import Sheaf.AlgebraicGeometry.StrictLocalCohomologySourceColimit
 import Sheaf.AlgebraicGeometry.StrictLocalMateProjectionFormulas

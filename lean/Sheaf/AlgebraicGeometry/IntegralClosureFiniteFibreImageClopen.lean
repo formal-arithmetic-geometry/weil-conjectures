@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.IntegralClosureFiniteFibreImageClopen
-public import Mathlib.AlgebraicGeometry.Restrict
-public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic

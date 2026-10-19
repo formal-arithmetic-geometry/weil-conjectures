@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpaceFiniteCoordinates
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace

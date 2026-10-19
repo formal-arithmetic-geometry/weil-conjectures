@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapSemilinear
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapSemilinear
 
 /-! # Scalar compatibility of resolution cohomology maps
 

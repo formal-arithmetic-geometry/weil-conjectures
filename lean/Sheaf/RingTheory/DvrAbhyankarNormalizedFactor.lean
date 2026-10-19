@@ -14,7 +14,7 @@ public import Mathlib.RingTheory.RamificationInertia.Ramification
 public import Mathlib.RingTheory.RamificationInertia.Inertia
 
 import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Sheaf.RingTheory.DvrNormalizedCompositumLocalDiagram
+import WeilConjectures.RingTheory.DvrNormalizedCompositumLocalDiagram
 import Sheaf.RingTheory.DvrAbhyankarLocalMaximalIdeal
 
 /-! # Abhyankar's index-one conclusion for normalized tensor factors

@@ -2,7 +2,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.RawModuleScalarPullbackComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
-import Sheaf.AlgebraicGeometry.RawModuleScalarSourceSquareCore
+import WeilConjectures.AlgebraicGeometry.RawModuleScalarSourceSquareCore
 import Sheaf.AlgebraicGeometry.RawModuleScalarSheafComposition
 
 /-! Unshifted coefficient identity used by the shifted scalar square.

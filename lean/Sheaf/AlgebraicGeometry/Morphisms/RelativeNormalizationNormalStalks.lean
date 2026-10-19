@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 
-import Sheaf.AlgebraicGeometry.NormalSectionsFiniteProduct
+import WeilConjectures.AlgebraicGeometry.NormalSectionsFiniteProduct
 import Sheaf.RingTheory.IntegralClosureFiniteNormalProduct
 
 /-!

@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.PopescuDelocalizeJacobianLocalization
-public import Mathlib.RingTheory.Smooth.StandardSmooth

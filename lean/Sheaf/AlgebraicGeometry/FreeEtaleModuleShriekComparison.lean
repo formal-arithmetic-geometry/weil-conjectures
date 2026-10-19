@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FreeEtaleModuleShriekComparison
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
-public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-public import Mathlib.Algebra.Category.ModuleCat.Adjunctions

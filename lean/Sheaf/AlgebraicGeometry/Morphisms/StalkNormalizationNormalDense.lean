@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import Mathlib.AlgebraicGeometry.Normalization
 
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationNormalPart
-import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDensePart
+import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationDensePart
 
 /-!
 # Normality and density of the localized relative normalization

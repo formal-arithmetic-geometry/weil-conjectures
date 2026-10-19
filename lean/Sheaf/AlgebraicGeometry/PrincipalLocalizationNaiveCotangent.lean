@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.PrincipalLocalizationNaiveCotangent
-public import Mathlib.RingTheory.Extension.Cotangent.LocalizationAway

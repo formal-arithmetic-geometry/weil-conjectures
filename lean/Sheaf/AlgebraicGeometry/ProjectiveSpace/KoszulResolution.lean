@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.Algebra.Exact.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Basic
-import Sheaf.RingTheory.MvPolynomial.TwoVariableSyzygy
+import WeilConjectures.RingTheory.MvPolynomial.TwoVariableSyzygy
 import Mathlib.RingTheory.MvPolynomial.Ideal
 
 /-!

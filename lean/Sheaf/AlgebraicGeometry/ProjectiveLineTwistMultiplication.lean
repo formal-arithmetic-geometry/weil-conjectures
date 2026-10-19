@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.ProjectiveLineTwistProductMorphism
-import Sheaf.AlgebraicGeometry.ProjectiveLineTwistCoherentPowers
+import WeilConjectures.AlgebraicGeometry.ProjectiveLineTwistCoherentPowers
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 import Sheaf.AlgebraicGeometry.ProjHomogeneousSectionTensorPowersLocus
 

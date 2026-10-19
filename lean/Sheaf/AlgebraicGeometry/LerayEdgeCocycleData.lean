@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.Paper.PQFCohomology
-import Sheaf.AlgebraicGeometry.LerayComplexCocycleComparison
+import WeilConjectures.AlgebraicGeometry.LerayComplexCocycleComparison
 
 @[expose] public section
 universe u

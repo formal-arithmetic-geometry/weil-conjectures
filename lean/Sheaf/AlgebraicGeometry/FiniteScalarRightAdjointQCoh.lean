@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Sheaf.AlgebraicGeometry.FinitePushforwardDerivedHomQCoherent
 import Sheaf.AlgebraicGeometry.SheafAlgebraDerivedHomAdjunction
-import Sheaf.AlgebraicGeometry.QuasiCoherenceScalarRestriction
+import WeilConjectures.AlgebraicGeometry.QuasiCoherenceScalarRestriction
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import Mathlib.CategoryTheory.Adjunction.Unique

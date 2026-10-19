@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.ModuleSubobjectGenericConstancy
-public import WeilConjectures.ConstructibleSheaf.Defs
-public import Mathlib.AlgebraicGeometry.Noetherian

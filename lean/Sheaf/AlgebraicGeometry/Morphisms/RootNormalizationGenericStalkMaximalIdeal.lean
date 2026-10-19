@@ -15,7 +15,7 @@ public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.Localization.Ideal
 
-import Sheaf.AlgebraicGeometry.Morphisms.RootDivisorGenericPrime
+import WeilConjectures.AlgebraicGeometry.Morphisms.RootDivisorGenericPrime
 import Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationCotangentRoot
 import Mathlib.RingTheory.Nakayama
 

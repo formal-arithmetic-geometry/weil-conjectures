@@ -1,9 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.QuasiCoherentAlgebra
-public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-public import Mathlib.AlgebraicGeometry.AffineScheme
-public import Mathlib.CategoryTheory.Subobject.Basic
-public import Mathlib.RingTheory.FinitePresentation
-public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs

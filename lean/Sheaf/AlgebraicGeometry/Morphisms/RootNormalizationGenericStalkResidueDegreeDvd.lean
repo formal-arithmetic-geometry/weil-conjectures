@@ -15,7 +15,7 @@ public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.Localization.Ideal
 
-import Sheaf.AlgebraicGeometry.Morphisms.NormalizationResidueDegreeDvdCore
+import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationResidueDegreeDvdCore
 import Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationGenericStalkGaloisModel
 
 /-! # Residue degrees of root normalization at the divisor generic point
