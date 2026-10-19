@@ -88,10 +88,9 @@
    }
   },
   {
-   "text": "For abelian sheaves, the presheaf colimit is still computed sectionwise, and the sheaf colimit is its abelian sheafification. The forgetful functor from abelian groups to sets preserves filtered colimits, and abelian sheafification has as underlying set sheafification that of the underlying presheaf. Hence the underlying comparison map is exactly the set comparison proved in steps 3--5, with all its hypotheses unchanged. A bijective group homomorphism is an isomorphism. For later use the same injective-transition argument applies to commutative ring sheaves: the sectionwise filtered union carries ring operations by moving finitely many operands to one stage; the ring laws and universal property follow at that stage. Its ring sheafification has the set sheafification as underlying set sheaf by the same underlying-sets theorem. The sheafification adjunction therefore makes it the colimit of ring sheaves as well.",
+   "text": "For abelian sheaves, forgetting to sets preserves filtered colimits and sheafification. The sheafification adjunction and its fully faithful right adjoint therefore show that the induced forgetful functor on sheaves preserves the given filtered colimit. Apply the set comparison of steps 3--5 to the underlying set diagram. The canonical comparison from the colimit of underlying groups to the underlying group colimit is an isomorphism. Its composite with the underlying abelian section comparison is the set section comparison, by colimit.post_desc. Bijectivity of this first comparison transfers injectivity and conditional bijectivity to the abelian comparison. Universe shrinking supplies filtered-colimit preservation at the site-cover and diagram sizes separately. This step is now proved in Lean from the set comparison, which remains open.",
    "uses": [
     "lem-weil-pbc-presheaf-colimits-sectionwise",
-    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
     "lem-weil-pbc-abelian-groups-forget-filtered-colimits",
     "lem-pc-sites-sheafification-underlying-sets",
     "def-weil-pbc-sheafification"
@@ -103,13 +102,11 @@
    }
   },
   {
-   "text": "For finite subextensions $E\\subseteq F$, the map $\\underline E\\to\\underline F$ is sectionwise injective on the point: it sends a continuous function $S\\to E$ to the same function followed by the field inclusion. The coefficient map $E_X\\to F_X$ is its image under $p_X^*$. To justify preservation of injectivity, use the finite-limit and covering-preservation assertions for the test-object functor in [sk-def-sfb-pullback-from-point]. The general left-exact site inverse-image theorem applied to $u$ gives exactness on abelian sheaves of $p^*$. The scheme pro-étale inverse-image theorem gives exactness of $\\pi_X^*$, hence of their composite $p_X^*$. This explicitly supplies the covering-preservation and finite-limit properties needed for scheme base change. Exactness sends the zero kernel of $\\underline E\\to\\underline F$ to the zero kernel of $E_X\\to F_X$. For each site object $U$, the section functor $\\Gamma(U,-)$ is left exact by [def-weil-pbc-sites-and-cohomology], so $E_X(U)\\to F_X(U)$ also has zero kernel and is injective. This replaces the imported argument by a basis containing $1$ and needs no unproved assertion about continuous coordinate projections.",
+   "text": "For each finite field E, the condensed inclusion into the algebraic closure is injective on every profinite test object: evaluate equality of continuous functions pointwise and use injectivity of the subfield inclusion. Hence this sheaf map is monic. The existing constructed point pullback preserves finite limits by Mathlib sheafPullbackConstruction, since the test-object functor is representably flat. Scheme inverse image also preserves finite limits, so their composite p_X^* preserves this monomorphism. Sheaf evaluation is left exact, so the coefficient inclusion E_X(U) to Qbar_X(U) is injective for every U. The transition E_X(U) to F_X(U) is injective because its composite with F_X(U) to Qbar_X(U) is this injective inclusion. This is proved in the private helper coefficient_section_injective and the local htrans proof; no separate exactness specification theorem is needed.",
    "uses": [
     "sk-def-sfb-condensed-ring",
     "def-sfb-subfield-coefficient-map",
     "sk-def-sfb-pullback-from-point",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "det-pe-topos-functoriality-inverse-image",
     "def-weil-pbc-sites-and-cohomology"
    ],
    "elementary": false,
@@ -119,7 +116,7 @@
    }
   },
   {
-   "text": "The coefficient proposition identifies $\\QbarX$ with the colimit $\\varinjlim_E E_X$ in sheaves of rings, indexed by the filtered poset of finite subextensions, with transition maps induced by $\\underline E\\to\\underline F$. Use this finite-subextension comparison only; the proposition's separate rationalization comparison is a module colimit equipped with a localization ring structure. Apply the ring-sheaf version of steps 5--6 to the finite-subextension diagram, whose transitions are injective by step 7. It follows for the original quasi-compact $V$, without quasi-separatedness, that $\\QbarX(V)=\\varinjlim_E E_X(V)$. The canonical maps from each $E_X(V)$ into this colimit are injective by the eventual-equality description in step 1 and step 7, so it is their union inside $\\QbarX(V)$. This proves the first assertion of clause (2).",
+   "text": "Use the finite-subextension abelian colimit already proved in the source library as AlgebraicGeometry.ProEtale.isColimitPadicAlgClRingObjCocone, the underlying abelian comparison in sk-prop-sfb-qlbar-colimit-x. Apply the abelian theorem of step 6 at the small finite-field index category, using step 7 to supply injective transitions. Its surjective section comparison and the jointly-surjective colimit legs of the section groups give a finite-field representative of every section of Qbar_X(V). The leg equations colimit.ι_desc identify these representatives with exactly the prescribed coefficient inclusions. Together with step 7 this proves the injectivity and union assertions. This uses the existing abelian colimit directly, with no completed integral, rationalization, or ring-sheaf comparison required.",
    "uses": [
     "sk-prop-sfb-qlbar-colimit-x"
    ],
@@ -130,7 +127,7 @@
    }
   },
   {
-   "text": "Choose a finite-stage representative for each member of the given finite set. The finite subextensions form a nonempty directed poset, so a common upper bound contains all these stages; all representatives then lie in its $E_X(V)$. For a finite family of finite matrices apply this to the union of their finitely many entries. The empty set, a matrix with an empty dimension, and the empty family are covered by choosing $E=\\mathbf Q_\\ell$.",
+   "text": "Prove finite-set descent by induction. The empty set uses any finite subextension, available because the base field is finite over itself. For insertion of s, choose a representing field E for s, a field F for the old finite set, and a common upper bound G. The identity padicSubfieldRingObjMap_comp_toPadicAlgCl proves range monotonicity, so both parts lie in G_X(V). For a finite family of finite matrices the dependent sum of all row-column positions is finite; apply finite-set descent to the range of its entry function. Empty families and empty dimensions are included. This argument is complete Lean.",
    "uses": [
     "sk-def-sfb-qlbar-condensed"
    ],
@@ -152,21 +149,18 @@
   "def-weil-quasi-separated-morphism",
   "lem-pc-quasi-compact-base-change",
   "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
   "lem-weil-pbc-abelian-groups-forget-filtered-colimits",
   "lem-pc-sites-sheafification-underlying-sets",
   "sk-def-sfb-condensed-ring",
   "def-sfb-subfield-coefficient-map",
   "sk-def-sfb-pullback-from-point",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "det-pe-topos-functoriality-inverse-image",
   "sk-prop-sfb-qlbar-colimit-x",
   "sk-def-sfb-qlbar-condensed"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 0738 (lemma-directed-colimits-sections), proofs of (1)--(4); apply to the blueprint coefficient colimit in clause (2)"
+  "place": "Tag 0738 (lemma-directed-colimits-sections), proofs of (1)--(4); steps 1--5 remain open. Steps 6--9 are implemented using Mathlib sheafification compatibility and the source-library abelian coefficient colimit."
  },
  "mathlib_searches": [
   {
@@ -272,9 +266,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-site-sheafification-sections-local",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "det-pe-topos-functoriality-inverse-image"
+  "lem-weil-pbc-site-sheafification-sections-local"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -319,5 +311,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "The three declarations jointly state clause (1) for sets and abelian groups and every assertion of clause (2). Uses the existing canonical colimit.desc of an evaluated sheaf-colimit cocone, with its IsColimit certificate, and the coefficient inclusion maps. No new definitions, extra quasi-separatedness, universe equality, or statement change."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261019T005430-L-2770176",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
