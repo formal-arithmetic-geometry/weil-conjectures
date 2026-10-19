@@ -29,7 +29,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.RingTheory.Unramified.Basic
 import Mathlib.RingTheory.Unramified.Finite
-import Sheaf.AlgebraicGeometry.AffineChartRelativeFlatCriterion
+import WeilConjectures.AlgebraicGeometry.AffineChartRelativeFlatCriterion
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.DimensionBaseChange
 import Mathlib.RingTheory.Spectrum.Prime.Chevalley

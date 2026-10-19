@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PicardScalarAffineSectionsExact
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import Mathlib.CategoryTheory.Adjunction.Additive
 import WeilConjectures.AlgebraicGeometry.Modules.Dual
 import Mathlib.CategoryTheory.Monoidal.Closed.Braided

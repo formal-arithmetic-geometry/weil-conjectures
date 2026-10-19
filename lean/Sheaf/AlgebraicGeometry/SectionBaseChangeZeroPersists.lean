@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-!
 # Persistence of zero sections under further base change

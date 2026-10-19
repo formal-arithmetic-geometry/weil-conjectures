@@ -6,7 +6,7 @@ Authors: SHEAF group U3
 module
 
 public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections

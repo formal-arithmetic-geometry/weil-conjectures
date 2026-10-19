@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.HilbertToPicardMorphism
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.CartierDivisorFinite
 import Sheaf.AlgebraicGeometry.NonzeroSectionIntegralCartier
 import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
@@ -24,7 +24,6 @@ import WeilConjectures.AlgebraicGeometry.Picard.Defs
 import WeilConjectures.AlgebraicGeometry.Picard.Degree
 import WeilConjectures.AlgebraicGeometry.Picard.RationalPoint
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import WeilConjectures.AlgebraicGeometry.Cohomology.EulerCharProper
 
 /-!

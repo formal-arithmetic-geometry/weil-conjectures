@@ -2,7 +2,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Sheaf.AlgebraicGeometry.PinnedSingleBaseChangeShift
 import Sheaf.AlgebraicGeometry.OpenPinnedSingleDegreeZeroTarget

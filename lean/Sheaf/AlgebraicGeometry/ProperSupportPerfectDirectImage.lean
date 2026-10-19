@@ -7,7 +7,7 @@ public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.NoetherianPerfectDirectImage
 
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition

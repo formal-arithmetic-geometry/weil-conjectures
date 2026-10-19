@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
-import Sheaf.AlgebraicGeometry.IntrinsicFlatModuleStalkTensorPresentation
+import WeilConjectures.AlgebraicGeometry.IntrinsicFlatModuleStalkTensorPresentation
 
 /-! # Flat affine module opcycles give flat sheaf opcycles
 

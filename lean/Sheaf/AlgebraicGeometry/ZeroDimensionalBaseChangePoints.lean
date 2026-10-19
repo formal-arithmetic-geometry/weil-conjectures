@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.Topology.Instances.Discrete
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePointsGeometry
 import Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePointsFibrePoint
 import Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePointsFibreTopology

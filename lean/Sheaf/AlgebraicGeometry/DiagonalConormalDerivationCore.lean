@@ -5,7 +5,7 @@ Authors: SHEAF group B4
 -/
 module
 public import Sheaf.AlgebraicGeometry.DiagonalConormal
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 

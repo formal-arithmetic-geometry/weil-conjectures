@@ -8,7 +8,7 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Pullback from a supplied local K-flat model

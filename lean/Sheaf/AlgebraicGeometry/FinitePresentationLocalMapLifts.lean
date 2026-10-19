@@ -5,7 +5,7 @@ Authors: SHEAF group P2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic

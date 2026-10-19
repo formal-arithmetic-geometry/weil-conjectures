@@ -6,7 +6,7 @@ Authors: SHEAF group E4
 module
 
 public import Sheaf.AlgebraicGeometry.PicardScalarAffineSectionsExact
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import Mathlib.CategoryTheory.Adjunction.Additive
 import WeilConjectures.AlgebraicGeometry.Modules.Dual
 import Sheaf.AlgebraicGeometry.PicardExternalRectangleSections

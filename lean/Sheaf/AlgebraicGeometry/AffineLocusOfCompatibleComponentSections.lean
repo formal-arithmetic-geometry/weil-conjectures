@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.Ample
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import all WeilConjectures.AlgebraicGeometry.AmpleIso
 import Sheaf.AlgebraicGeometry.IsAffineOfFiniteClosedCover
 import WeilConjectures.AlgebraicGeometry.NonvanishingSectionTrivializes

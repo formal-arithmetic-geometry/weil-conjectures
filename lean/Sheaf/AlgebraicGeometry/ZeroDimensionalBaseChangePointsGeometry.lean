@@ -6,7 +6,7 @@ import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.Topology.Instances.Discrete
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 
 /-! Intermediate geometric facts for zero-dimensional base change.

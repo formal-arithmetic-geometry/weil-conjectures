@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.EtalePicard
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass
 public import WeilConjectures.SixFunctors.BaseChange.Square
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 /-!

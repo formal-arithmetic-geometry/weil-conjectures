@@ -15,7 +15,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Mathlib.AlgebraicGeometry.Fiber
 import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Mathlib.AlgebraicGeometry.Modules.Sheaf
@@ -58,7 +58,6 @@ import Sheaf.AlgebraicGeometry.NormalizedSupportTriangle
 import Sheaf.AlgebraicGeometry.SupportedExteriorProduct
 import Sheaf.Paper.ExternalRHomConePairing
 import Sheaf.SixFunctors.OpenClosedFlatness
-import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!

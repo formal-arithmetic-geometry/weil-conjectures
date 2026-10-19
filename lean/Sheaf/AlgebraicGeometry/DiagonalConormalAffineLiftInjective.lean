@@ -10,7 +10,7 @@ import Sheaf.AlgebraicGeometry.DiagonalConormalAffineIdealClassCore
 import Sheaf.AlgebraicGeometry.DiagonalConormalAffineIdealClassQ
 import Sheaf.AlgebraicGeometry.AffineConormalSectionsExistence
 import Sheaf.AlgebraicGeometry.DiagonalConormal
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Injectivity of the affine diagonal conormal lift
 

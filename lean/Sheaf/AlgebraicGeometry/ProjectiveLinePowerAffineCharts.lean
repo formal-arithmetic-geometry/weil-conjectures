@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import WeilConjectures.AlgebraicGeometry.Ample
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts

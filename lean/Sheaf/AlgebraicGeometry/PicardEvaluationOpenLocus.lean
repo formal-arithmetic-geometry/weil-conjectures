@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PicardDirectImageRankLocus
 import Sheaf.AlgebraicGeometry.FiniteLocallyFreeMapIsoOpen
 import Sheaf.AlgebraicGeometry.PicardCupProductCriterion
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-! # The evaluation-isomorphism open inside the rank-matched locus

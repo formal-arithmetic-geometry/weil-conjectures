@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Mathlib.Data.Finset.Order

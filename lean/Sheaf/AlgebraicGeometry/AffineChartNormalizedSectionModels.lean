@@ -5,13 +5,13 @@ Authors: SHEAF group R2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.AlgebraicGeometry.AffineChartUpperTailLimitData
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Order.Antisymmetrization
-import Sheaf.AlgebraicGeometry.AffineChartSectionRingPresentations
+import WeilConjectures.AlgebraicGeometry.AffineChartSectionRingPresentations
 import WeilConjectures.AlgebraicGeometry.Modules.FaithfullyFlatDescent
 import Sheaf.AlgebraicGeometry.AffineIsomorphicSourceNormalizedModels
 

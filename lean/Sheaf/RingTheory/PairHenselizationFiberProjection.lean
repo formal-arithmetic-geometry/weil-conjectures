@@ -5,7 +5,7 @@ Authors: SHEAF groups K3 and Q1
 -/
 module
 
-public import Sheaf.RingTheory.PairHenselization
+public import WeilConjectures.RingTheory.PairHenselization
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.Algebra.Ring.Idempotent
 public import Mathlib.RingTheory.Noetherian.Defs

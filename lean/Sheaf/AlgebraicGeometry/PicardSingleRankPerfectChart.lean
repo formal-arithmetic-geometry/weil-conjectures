@@ -6,7 +6,7 @@ Authors: SHEAF group V2
 module
 
 public import Sheaf.AlgebraicGeometry.PicardUniversalSingleRankMatch
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes

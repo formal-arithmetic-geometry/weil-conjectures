@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 import WeilConjectures.AlgebraicGeometry.GeometricallyConnectedCheckAfterExtension
 

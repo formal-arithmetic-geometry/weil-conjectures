@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.RingTheory.PairHenselization
+public import WeilConjectures.RingTheory.PairHenselization
 public import Mathlib.RingTheory.RingHom.Flat
 import WeilConjectures.RingTheory.ProEtale.FaithfullyFlat
 import WeilConjectures.RingTheory.BijectiveQuotientMapPowOfFlat

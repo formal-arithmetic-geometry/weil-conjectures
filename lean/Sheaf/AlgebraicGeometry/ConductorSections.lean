@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.AlgebraicGeometry.Ample
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import Sheaf.AlgebraicGeometry.ConductorSectionsRestriction
 import Sheaf.AlgebraicGeometry.ClosedImmersionIdealTensorSections
 import Sheaf.AlgebraicGeometry.NonvanishingTensorPullback

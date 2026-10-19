@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.FinitePresentationModuleMapDescent
 import Sheaf.AlgebraicGeometry.FlatModuleDescentAffineCharts
 import Sheaf.AlgebraicGeometry.AffineFlatModuleDescent

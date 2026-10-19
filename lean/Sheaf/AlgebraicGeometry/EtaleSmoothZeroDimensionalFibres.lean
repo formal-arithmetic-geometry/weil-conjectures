@@ -5,7 +5,7 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import WeilConjectures.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
 
 /-!

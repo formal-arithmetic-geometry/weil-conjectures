@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PicardExternalRightCechModels
 public import Sheaf.Paper.CechCupProduct
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import Sheaf.AlgebraicGeometry.PicardExternalCechCupNaturality
 
 /-! # The right external Cech cup construction

@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.FlatModuleDescent
 import Sheaf.AlgebraicGeometry.PullbackModelFlatnessComparison
 

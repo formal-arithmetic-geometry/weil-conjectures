@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.RingTheory.Valuation.ValuationRing
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import WeilConjectures.AlgebraicGeometry.QuotientBaseChangeIdeal
 import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections

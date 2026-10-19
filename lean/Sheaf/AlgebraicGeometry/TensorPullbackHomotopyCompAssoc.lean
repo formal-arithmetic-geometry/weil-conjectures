@@ -5,7 +5,7 @@ Authors: SHEAF group R2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.Algebra.Homology.HomotopyCategory
 
 /-! Associativity of the pinned tensor pullback comparisons on homotopy categories. -/

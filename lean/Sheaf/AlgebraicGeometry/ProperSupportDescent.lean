@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
 import Sheaf.AlgebraicGeometry.EventuallyProper

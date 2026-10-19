@@ -50,7 +50,7 @@ import Sheaf.AlgebraicGeometry.ClosedPointField
 import Sheaf.AlgebraicGeometry.ClosedPointsProduct
 import Sheaf.AlgebraicGeometry.AffineProjectiveCompactification
 import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveBaseChange
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 import Sheaf.AlgebraicGeometry.UnboundedAbelianExchangeComparison
 import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveImpliesProper

@@ -5,7 +5,7 @@ Authors: SHEAF group T1
 -/
 module
 
-public import Sheaf.RingTheory.PairHenselization
+public import WeilConjectures.RingTheory.PairHenselization
 public import Mathlib.FieldTheory.Separable
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.Localization.Defs

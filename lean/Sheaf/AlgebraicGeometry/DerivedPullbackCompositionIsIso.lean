@@ -6,7 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import Sheaf.Algebra.Homology.KFlatPullback
 import Sheaf.Algebra.Homology.KFlatResolution
 

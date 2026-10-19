@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.RingTheory.PairHenselization
+public import WeilConjectures.RingTheory.PairHenselization
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.RingHom.FaithfullyFlat

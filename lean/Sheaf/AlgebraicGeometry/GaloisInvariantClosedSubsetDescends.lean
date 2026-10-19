@@ -6,7 +6,7 @@ Authors: SHEAF group H1
 module
 
 public import Mathlib.FieldTheory.Galois.Basic
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 import Mathlib.AlgebraicGeometry.Morphisms.Integral
 import Sheaf.AlgebraicGeometry.GaloisBaseChangeFiberTransitivity

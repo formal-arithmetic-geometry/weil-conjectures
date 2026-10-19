@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Sheaf.RingTheory.ConormalExteriorModule

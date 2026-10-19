@@ -19,7 +19,7 @@ import Mathlib.AlgebraicGeometry.Pullbacks
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Sheaf.AlgebraicGeometry.AffineLimitFibreDimensionBound
 import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 

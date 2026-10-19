@@ -12,7 +12,7 @@ public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.RingTheory.SelfTorConormalComparison
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 import Sheaf.AlgebraicGeometry.SelfTorConormalWedgeChart
 import Sheaf.AlgebraicGeometry.SelfTorTargetBasicLocalization

@@ -5,7 +5,7 @@ Authors: SHEAF group C4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
 public import Sheaf.AlgebraicGeometry.OpenCoverTensorPullbackComparison
 import Sheaf.AlgebraicGeometry.OpenCoverTensorComparisonCoherence

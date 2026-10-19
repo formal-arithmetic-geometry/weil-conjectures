@@ -31,7 +31,7 @@ import Mathlib.RingTheory.RingHom.Flat
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveBaseChange
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import Sheaf.AlgebraicGeometry.ClosedIrreducibleDimensionTrdeg

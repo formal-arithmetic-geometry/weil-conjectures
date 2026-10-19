@@ -5,7 +5,7 @@ Authors: SHEAF group U1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 import Sheaf.AlgebraicGeometry.AffineConormalSectionsExistence

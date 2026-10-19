@@ -7,8 +7,8 @@ public import Sheaf.Algebra.Homology.AffineTildeTensorSourceComparison
 public import Sheaf.Algebra.Homology.AffineBaseChangeTildeRepresentative
 import Sheaf.Algebra.Homology.AffineTildePushforwardCohomologyNormalization
 import Sheaf.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.AlgebraicGeometry.TensorPullbackTilde
+import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
+import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
 public import Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchangePreNormalizationChain
 
 /-! The derived equality before target-map expansion and direct-image reassociation. -/

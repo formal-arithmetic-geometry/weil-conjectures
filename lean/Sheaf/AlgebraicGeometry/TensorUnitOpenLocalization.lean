@@ -5,7 +5,7 @@ Authors: SHEAF groups M2, K2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Over

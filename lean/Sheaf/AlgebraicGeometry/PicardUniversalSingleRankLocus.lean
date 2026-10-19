@@ -6,7 +6,7 @@ Authors: SHEAF group Q4
 module
 
 public import Sheaf.AlgebraicGeometry.PicardUniversalSingleRankMatch
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation

@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.Algebra.Homology.HomologicalComplex
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.RingTheory.Noetherian.Basic
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.BoundedGradedModuleMapDescent
 import Sheaf.AlgebraicGeometry.TensorPullbackFinitePresentation
 import Mathlib.Data.Int.Interval

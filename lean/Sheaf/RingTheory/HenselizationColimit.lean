@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.RingTheory.PairHenselization
+public import WeilConjectures.RingTheory.PairHenselization
 public import Mathlib.CategoryTheory.Limits.HasLimits
 import Sheaf.RingTheory.FilteredColimitHenselianPair
 import Sheaf.RingTheory.HenselizationUniversalProperty

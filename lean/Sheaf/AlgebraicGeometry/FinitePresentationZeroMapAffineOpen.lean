@@ -6,7 +6,7 @@ Authors: SHEAF group U3
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.AffineFiniteTypePullbackZeroTest
 import Sheaf.AlgebraicGeometry.FinitePresentationSectionAffineOpenVanishing
 import Mathlib.AlgebraicGeometry.Morphisms.Affine

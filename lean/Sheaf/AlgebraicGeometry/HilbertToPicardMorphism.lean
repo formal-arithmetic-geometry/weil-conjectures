@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.FieldTheory.IsSepClosed
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.CurveBaseChangeRelativeDimensionOne
 import Sheaf.AlgebraicGeometry.DimensionBaseChange
 import WeilConjectures.AlgebraicGeometry.TensorPullback
@@ -22,7 +22,6 @@ import WeilConjectures.AlgebraicGeometry.Picard.Defs
 import WeilConjectures.AlgebraicGeometry.Picard.Degree
 import WeilConjectures.AlgebraicGeometry.PicardFunctor
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 
 /-!

@@ -5,7 +5,7 @@ Authors: SHEAF group P2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Restriction comparison for tensor pullback on an open cover
 

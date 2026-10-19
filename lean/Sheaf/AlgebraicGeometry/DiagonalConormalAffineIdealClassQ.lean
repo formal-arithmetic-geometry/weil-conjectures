@@ -5,7 +5,7 @@ Authors: SHEAF group U3
 -/
 module
 public import Sheaf.AlgebraicGeometry.DiagonalConormal
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.RingTheory.Kaehler.Basic
 import Sheaf.AlgebraicGeometry.AffineOpenKernelConormalSections
 import Mathlib.AlgebraicGeometry.PullbackCarrier

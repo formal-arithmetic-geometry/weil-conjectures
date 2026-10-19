@@ -8,7 +8,7 @@ import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import WeilConjectures.AlgebraicGeometry.QuotientBaseChangeIdeal
 import WeilConjectures.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 @[expose] public section
 universe u

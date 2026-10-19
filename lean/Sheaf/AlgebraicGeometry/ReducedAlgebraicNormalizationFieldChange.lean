@@ -6,7 +6,7 @@ Authors: SHEAF group NG
 module
 
 public import Sheaf.AlgebraicGeometry.ReducedNormalization
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.FieldTheory.SeparableExtension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Mathlib.FieldTheory.SeparablyGenerated

@@ -14,7 +14,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
 
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import Sheaf.AlgebraicGeometry.RelativelyFlatCanonicalModuleBaseChange
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine

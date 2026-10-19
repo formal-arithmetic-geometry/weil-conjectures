@@ -6,7 +6,7 @@ Authors: SHEAF groups C2, N3
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
 
 /-! Unit calculations on K-flat representatives for derived pullback. -/

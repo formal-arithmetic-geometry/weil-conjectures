@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullbackFunctorial
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Iso
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 import Sheaf.AlgebraicGeometry.Picard.FlatInvertibleCanonicalDerivedBaseChange
 import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison

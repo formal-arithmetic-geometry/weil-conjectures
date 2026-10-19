@@ -4,7 +4,7 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.KrullDimension
 import Mathlib.Topology.Instances.Discrete
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.Artinian
 import Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePointsGeometry

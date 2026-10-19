@@ -7,7 +7,7 @@ public import Mathlib.Topology.KrullDimension
 public import Mathlib.Algebra.Algebra.ZMod
 import Sheaf.AlgebraicGeometry.ProperTorsionDirectImageBound
 import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.IndEtaleStrictLocalInvariance
 import Sheaf.TraceFormula.OrientedPointCohomology
 import Sheaf.Paper.OrientedProductPointsConservative

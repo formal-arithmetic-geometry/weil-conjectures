@@ -5,7 +5,7 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.FinitePresentationAffineChartSectionsModel
 import Sheaf.AlgebraicGeometry.FinitePresentationAffineSectionsRealization
 import Mathlib.AlgebraicGeometry.Morphisms.Affine

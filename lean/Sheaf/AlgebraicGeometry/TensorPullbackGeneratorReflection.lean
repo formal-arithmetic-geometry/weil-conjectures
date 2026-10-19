@@ -5,7 +5,7 @@ Authors: SHEAF group J1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 import WeilConjectures.AlgebraicGeometry.Modules.FieldBaseChange

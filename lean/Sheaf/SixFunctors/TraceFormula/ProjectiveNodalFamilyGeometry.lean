@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 import Mathlib.AlgebraicGeometry.Fiber
 import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveBaseChange
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 import Sheaf.AlgebraicGeometry.ZeroDimensionalClosedSubschemeFinite
 import WeilConjectures.AlgebraicGeometry.Morphisms.UnramifiedBaseChangeOpen

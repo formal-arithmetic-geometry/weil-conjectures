@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleHom
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import WeilConjectures.AlgebraicGeometry.Modules.HomSection
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 

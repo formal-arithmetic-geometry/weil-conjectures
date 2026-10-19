@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.FieldTheory.Separable
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.GaloisFiniteInvariantClopenPartition
 import Sheaf.AlgebraicGeometry.GaloisInvariantClosedSubsetDescends
 import WeilConjectures.AlgebraicGeometry.GeometricallyConnectedCheckAfterExtension

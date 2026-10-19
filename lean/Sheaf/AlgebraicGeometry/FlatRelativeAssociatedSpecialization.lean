@@ -16,7 +16,7 @@ import Mathlib.Algebra.Module.LocalizedModule.Basic
 import Sheaf.AlgebraicGeometry.PullbackStalkRelativeFlatExtension
 import Sheaf.AlgebraicGeometry.DimensionLocallyAlgebraic
 import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.LocallyNoetherianComponentsLocallyFinite
 import WeilConjectures.AlgebraicGeometry.ModulePullbackFiniteType
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde

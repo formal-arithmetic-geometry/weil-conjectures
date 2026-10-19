@@ -5,7 +5,7 @@ Authors: SHEAF group W4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
 /-! # The degree-zero cup-product morphism

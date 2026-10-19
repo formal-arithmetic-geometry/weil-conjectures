@@ -6,7 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 
 /-! # Canonical base change for a module in degree zero
 

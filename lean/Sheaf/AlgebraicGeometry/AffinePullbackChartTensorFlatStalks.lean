@@ -12,8 +12,8 @@ public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.AffinePullbackChartTensorSections
-import Sheaf.AlgebraicGeometry.AffineChartRelativeFlatCriterion
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import WeilConjectures.AlgebraicGeometry.AffineChartRelativeFlatCriterion
+import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import Mathlib.RingTheory.Flat.Localization
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 

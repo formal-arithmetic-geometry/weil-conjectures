@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import WeilConjectures.CategoryTheory.CommAlgebraSheafModule
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import Sheaf.AlgebraicGeometry.SheafTensorPushoutCancellation
 import Sheaf.Topology.InverseImageRegularExtension
 import WeilConjectures.Topology.InverseImageOperationExt

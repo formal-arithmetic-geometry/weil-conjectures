@@ -5,7 +5,7 @@ Authors: SHEAF group P4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.AlgebraicGeometry.ChartOrdinaryMapRecovery
 public import WeilConjectures.AlgebraicGeometry.AffineChartUpperTailLimitData
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings

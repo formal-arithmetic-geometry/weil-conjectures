@@ -6,7 +6,7 @@ Authors: SHEAF group J3
 module
 
 public import Sheaf.AlgebraicGeometry.OverlapPairCanonicalComparisons
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import Sheaf.AlgebraicGeometry.OverlapSingleChartRestriction
 import WeilConjectures.AlgebraicGeometry.Modules.ZariskiDescent
 

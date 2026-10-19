@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.Picard.InvertibleDirectImageClasses
 public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.AbTorsionSheaf
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.CategoryTheory.Comma.Arrow
 import Sheaf.AlgebraicGeometry.RelativelyFlatDerivedBaseChange

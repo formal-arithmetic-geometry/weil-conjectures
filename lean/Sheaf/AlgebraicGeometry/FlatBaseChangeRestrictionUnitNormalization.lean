@@ -5,7 +5,7 @@ Authors: SHEAF group T2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Normalizing the restricted tensor unit through a chart
 

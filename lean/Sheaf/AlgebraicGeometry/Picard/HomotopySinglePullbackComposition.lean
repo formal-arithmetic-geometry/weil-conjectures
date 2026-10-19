@@ -5,7 +5,7 @@ Authors: SHEAF group K3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 
 /-! # Composition of the tensor-to-ordinary comparison on homotopy single complexes

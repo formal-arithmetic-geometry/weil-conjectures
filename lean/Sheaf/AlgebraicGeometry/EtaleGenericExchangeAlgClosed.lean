@@ -5,7 +5,7 @@ Authors: SHEAF group Q04
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf

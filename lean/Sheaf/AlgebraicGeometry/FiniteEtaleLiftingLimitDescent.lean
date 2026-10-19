@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.ProperLimitNoetherian
 import Sheaf.RingTheory.FiniteTypeIntGRing
 import Sheaf.RingTheory.HenselizationColimit
 import Sheaf.RingTheory.HenselizationPairGRing
-import Sheaf.RingTheory.PairHenselization
+import WeilConjectures.RingTheory.PairHenselization
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Sheaf.AlgebraicGeometry.FiniteEtaleLiftingLimitDescentCore
 

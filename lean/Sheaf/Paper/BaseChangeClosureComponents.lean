@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
@@ -10,7 +10,6 @@ import Sheaf.AlgebraicGeometry.ClopenSmoothProper
 import Sheaf.AlgebraicGeometry.DimensionBaseChange
 import Sheaf.AlgebraicGeometry.GlobalSectionsProperVariety
 import Sheaf.AlgebraicGeometry.GlobalSectionsSeparable
-import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 import Sheaf.FieldTheory.SeparableTensorAlgebraicClosure
 import Sheaf.Paper.EulerCharacteristicWellDefined
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace

@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 public import Sheaf.AlgebraicGeometry.PureDimension
 import Sheaf.AlgebraicGeometry.GeometricallyConnectedAlgebraicClosure

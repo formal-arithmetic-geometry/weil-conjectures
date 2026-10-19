@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.AffineOpenCohomologyLocalizationZero
 import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
-import Sheaf.AlgebraicGeometry.AffineCapSectionOpen
+import WeilConjectures.AlgebraicGeometry.AffineCapSectionOpen
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! # Localization of cohomology on an ambient affine open

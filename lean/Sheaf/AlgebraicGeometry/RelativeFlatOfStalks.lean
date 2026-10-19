@@ -8,7 +8,7 @@ module
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Mathlib.RingTheory.Flat.Basic
-import Sheaf.AlgebraicGeometry.IntrinsicFlatModuleStalkTensorPresentation
+import WeilConjectures.AlgebraicGeometry.IntrinsicFlatModuleStalkTensorPresentation
 import Mathlib.RingTheory.Flat.Localization
 
 /-! # Recovering relative flatness from stalks

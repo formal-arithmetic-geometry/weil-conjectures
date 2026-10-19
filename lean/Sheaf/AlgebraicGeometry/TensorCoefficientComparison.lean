@@ -5,7 +5,7 @@ Authors: SHEAF group A4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # The fixed ordinary-to-tensor coefficient identification -/
 

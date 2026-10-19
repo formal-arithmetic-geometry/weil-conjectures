@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 import Sheaf.AlgebraicGeometry.AffineCoverModuleTensorFlatCriterion
 import Sheaf.AlgebraicGeometry.LimitAffineTransition

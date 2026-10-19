@@ -6,7 +6,7 @@ Authors: SHEAF groups H1, M4
 module
 
 public import Mathlib.AlgebraicGeometry.Fiber
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine

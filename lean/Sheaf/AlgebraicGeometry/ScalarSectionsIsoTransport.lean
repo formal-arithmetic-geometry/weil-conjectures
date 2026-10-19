@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PicardScalarAffineSectionsExact
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 
 /-! # Scalar sections transported along a scheme isomorphism

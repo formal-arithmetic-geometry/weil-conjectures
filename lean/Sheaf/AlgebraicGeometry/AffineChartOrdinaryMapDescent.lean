@@ -5,7 +5,7 @@ Authors: SHEAF group F4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.AlgebraicGeometry.ChartOrdinaryMapRecovery
 import WeilConjectures.Algebra.FinitePresentationColimit
 import Sheaf.AlgebraicGeometry.AffineChartOrdinaryHomComparison

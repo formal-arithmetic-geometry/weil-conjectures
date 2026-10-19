@@ -5,7 +5,7 @@ Authors: SHEAF group Q04
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Sheaf.AlgebraicGeometry.FormalKernelGradedPieces
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Sheaf.AlgebraicGeometry.SymmetricAlgebraSheafConstruction

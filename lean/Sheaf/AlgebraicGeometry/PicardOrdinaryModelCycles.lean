@@ -6,7 +6,7 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Ordinary cycles of the pulled-back local model
 

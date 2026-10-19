@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
-import Sheaf.AlgebraicGeometry.TensorPullbackTilde
+import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
 import Sheaf.AlgebraicGeometry.AffineTildeTotalTensor
 import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
 import Sheaf.Algebra.Homology.KFlatPullback

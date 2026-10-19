@@ -5,7 +5,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 import Sheaf.AlgebraicGeometry.PicardH1LocalDescent
 import Sheaf.AlgebraicGeometry.ProductUniversalStructurePushforward

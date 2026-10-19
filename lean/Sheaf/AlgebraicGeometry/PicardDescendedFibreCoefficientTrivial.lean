@@ -6,7 +6,7 @@ Authors: SHEAF group A4
 module
 
 public import Mathlib.AlgebraicGeometry.Fiber
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 import Sheaf.AlgebraicGeometry.FieldPullbackRankOneTrivial
 

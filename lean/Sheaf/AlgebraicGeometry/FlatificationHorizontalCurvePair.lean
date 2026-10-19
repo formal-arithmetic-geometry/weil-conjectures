@@ -24,7 +24,7 @@ public import Mathlib.Topology.KrullDimension
 public import Mathlib.Topology.Sober
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveBaseChange
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 import Sheaf.AlgebraicGeometry.GenericFlatFinitePresentation
 import Sheaf.AlgebraicGeometry.FlatteningByAdmissibleBlowup

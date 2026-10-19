@@ -11,7 +11,7 @@ import Sheaf.AlgebraicGeometry.PicardPullbackLocalRanks
 import Sheaf.AlgebraicGeometry.PicardPullbackBaseChange
 import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
 import WeilConjectures.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-! # Rank and evaluation for a module pulled back from the base

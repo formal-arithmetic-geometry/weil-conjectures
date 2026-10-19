@@ -6,7 +6,7 @@ Authors: SHEAF group H3
 module
 
 public import Mathlib.AlgebraicGeometry.Fiber
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-!

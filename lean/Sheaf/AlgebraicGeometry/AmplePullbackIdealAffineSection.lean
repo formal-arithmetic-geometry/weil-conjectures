@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import all WeilConjectures.AlgebraicGeometry.AmpleIso
 import Sheaf.AlgebraicGeometry.AmpleIdealSection
-import Sheaf.AlgebraicGeometry.AffineCapSectionOpen
+import WeilConjectures.AlgebraicGeometry.AffineCapSectionOpen
 import WeilConjectures.AlgebraicGeometry.NonvanishingGeneratingLocus
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 

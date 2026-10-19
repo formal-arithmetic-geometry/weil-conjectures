@@ -10,7 +10,7 @@ import Sheaf.AlgebraicGeometry.EtaleAffineTensorSectionsEquiv
 import Sheaf.AlgebraicGeometry.EtaleSingletonTensorNormalizationEvaluation
 import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Zero kernel of the affine singleton tensor comparison

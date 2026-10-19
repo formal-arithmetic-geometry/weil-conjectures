@@ -11,7 +11,7 @@ public import Sheaf.Paper.ConstructibleTruncations
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
 import Sheaf.AlgebraicGeometry.ProEtaleFixedScalarRestrictionDirectImage
 import Sheaf.AlgebraicGeometry.ProEtaleMilnorSequence

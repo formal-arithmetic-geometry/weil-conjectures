@@ -9,7 +9,7 @@ import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorSectionsSpan
 import Sheaf.AlgebraicGeometry.EtaleSingletonTensorNormalizedRange
 import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Surjectivity of the affine singleton tensor comparison

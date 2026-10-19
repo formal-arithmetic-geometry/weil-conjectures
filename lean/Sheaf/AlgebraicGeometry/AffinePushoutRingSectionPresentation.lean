@@ -1,6 +1,6 @@
 module
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import Sheaf.AlgebraicGeometry.AffinePushoutRingAffineSections
 set_option linter.style.longLine false
 set_option linter.style.whitespace false

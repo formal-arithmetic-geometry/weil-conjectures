@@ -10,7 +10,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 import Mathlib.AlgebraicGeometry.PullbackCarrier
 import all Sheaf.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
 import all Sheaf.AlgebraicGeometry.PicardUniversalRankMatchConjunction
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
 import WeilConjectures.AlgebraicGeometry.TensorPullback
 

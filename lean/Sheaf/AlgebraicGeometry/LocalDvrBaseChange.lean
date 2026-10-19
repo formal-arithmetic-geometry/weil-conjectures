@@ -6,7 +6,7 @@ Authors: SHEAF group M1
 module
 
 public import Sheaf.AlgebraicGeometry.DivisorModule
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.RationalPointBaseChangeStalk
 import Sheaf.AlgebraicGeometry.BaseChangeCurve
 import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint

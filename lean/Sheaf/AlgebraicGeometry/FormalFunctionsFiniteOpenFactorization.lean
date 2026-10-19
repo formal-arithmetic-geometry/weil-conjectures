@@ -10,7 +10,7 @@ import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import Sheaf.AlgebraicGeometry.FormalFunctionsFiniteOpenUnitPasting
 import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Finite pullback on the inverse-image opens
 

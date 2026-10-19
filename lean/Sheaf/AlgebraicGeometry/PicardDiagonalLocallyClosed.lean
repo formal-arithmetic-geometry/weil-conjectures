@@ -6,7 +6,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import Sheaf.AlgebraicGeometry.PicardDirectImageRankLocus
 import Sheaf.AlgebraicGeometry.PicardEvaluationOpenLocus
 import Sheaf.AlgebraicGeometry.PicardPullbackEvaluation

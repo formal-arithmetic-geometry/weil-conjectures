@@ -9,15 +9,13 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.DimensionBaseChange
 import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveBaseChange
-import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
-import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Well-definedness of the genus

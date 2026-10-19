@@ -5,7 +5,7 @@ Authors: SHEAF group R3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat

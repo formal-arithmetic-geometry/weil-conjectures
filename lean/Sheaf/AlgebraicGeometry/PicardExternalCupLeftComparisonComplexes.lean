@@ -15,7 +15,7 @@ import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import Sheaf.AlgebraicGeometry.PicardKunnethResolutionModel
 import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import Sheaf.Paper.CechComparisonMapNaturality
 import Sheaf.Paper.CechCupProduct
 import Sheaf.Paper.CechCupPullbackCompat

@@ -8,8 +8,8 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
 import Sheaf.AlgebraicGeometry.FinitePresentationLocalDescentDatum
 import Sheaf.AlgebraicGeometry.FinitePresentationLocalMapDatum

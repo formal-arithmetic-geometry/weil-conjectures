@@ -6,7 +6,7 @@ Authors: SHEAF group V2
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import Sheaf.AlgebraicGeometry.DerivedPullbackCompositionIsIso
 
 /-! # Composition using the original derived-pullback presentation

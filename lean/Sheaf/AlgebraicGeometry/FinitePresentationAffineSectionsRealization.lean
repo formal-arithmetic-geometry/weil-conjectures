@@ -5,7 +5,7 @@ Authors: SHEAF group X3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Module.FinitePresentation
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde

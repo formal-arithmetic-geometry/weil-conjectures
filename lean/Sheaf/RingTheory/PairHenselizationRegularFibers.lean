@@ -5,7 +5,7 @@ Authors: SHEAF group K3
 -/
 module
 
-public import Sheaf.RingTheory.PairHenselization
+public import WeilConjectures.RingTheory.PairHenselization
 public import Sheaf.RingTheory.GRing
 import Sheaf.RingTheory.PairHenselizationFiberLocalization
 import Mathlib.RingTheory.Localization.Submodule

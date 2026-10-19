@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections

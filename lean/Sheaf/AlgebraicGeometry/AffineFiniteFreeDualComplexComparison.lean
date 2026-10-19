@@ -8,7 +8,7 @@ module
 public import Sheaf.Algebra.Homology.HomComplexToSingle
 public import WeilConjectures.Algebra.Homology.SignedModuleDualComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.AlgebraicGeometry.AffineFiniteFreeDualNaturality
+import WeilConjectures.AlgebraicGeometry.AffineFiniteFreeDualNaturality
 import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 
 /-! # Associated sheafification of finite free signed duals

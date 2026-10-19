@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Pointwise descent of local finite presentation along a field extension

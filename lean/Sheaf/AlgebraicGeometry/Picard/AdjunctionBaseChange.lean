@@ -6,8 +6,8 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.AlgebraicGeometry.Picard.InvertibleDirectImageClasses
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.FieldTheory.IsSepClosed
 import Sheaf.AlgebraicGeometry.Picard.ArrowIsoTensorPullbackCounit
 import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch

@@ -80,13 +80,14 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineChartSectionsColimitComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineChartSectionsColimitComparison.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineChartSectionsColimitComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineChartSectionsColimitComparison.lean",
   "declaration": "AlgebraicGeometry.exists_affine_chart_sections_colimit_comparison",
   "statement": "theorem exists_affine_chart_sections_colimit_comparison\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u})\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    (M : (pullback f (c.π.app (op i))).Modules)\n    (V : Xi.OpenCover.{u}) (a : V.I₀) (ha : IsAffine (V.X a)) :\n    let W := V.pullback₁ (pullback.fst f (c.π.app (op i)))\n    let Z := W.X a\n    let N := ModuleCat.of Γ(Z, ⊤) Γ((Scheme.Modules.pullback (W.f a)).obj M, ⊤)\n    ∃ F : {j : I // i ≤ j} ⥤ CommRingCat.{u},\n      ∃ q : colimit F ≅ Γ(Z, ⊤),\n      ∀ j : {j : I // i ≤ j},\n        let U : (pullback f (Spec.map (R.map (homOfLE j.property)))).OpenCover.{u} :=\n          V.pullback₁ (pullback.fst f (Spec.map (R.map (homOfLE j.property))))\n        let p := baseChangeMap f\n          (T := Over.mk (Spec.map (R.map (homOfLE j.property))))\n          (T' := Over.mk (c.π.app (op i)))\n          (Over.homMk (c.π.app (op j.val)) (c.w (homOfLE j.property).op))\n        let Y := (U.pullback₁ p).X a\n        let P := (Scheme.Modules.pullback ((U.pullback₁ p).f a)).obj M\n        ∃ (e : F.obj j ≅ Γ(U.X a, ⊤)) (s : Γ(Z, ⊤) ≅ Γ(Y, ⊤)),\n          colimit.ι F j ≫ q.hom ≫ s.hom = e.hom ≫ (U.pullbackHom p a).appTop ∧\n          Nonempty ((ModuleCat.extendScalars s.hom.hom).obj N ≅\n            ModuleCat.of Γ(Y, ⊤) Γ(P, ⊤))",
   "branch": "sheaf-dag",
   "by": "W2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.AffineChartSectionsColimitComparison; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

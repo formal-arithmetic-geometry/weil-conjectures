@@ -5,7 +5,7 @@ Authors: SHEAF group W4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 
 /-! # Natural overlap maps before imposing the cocycle

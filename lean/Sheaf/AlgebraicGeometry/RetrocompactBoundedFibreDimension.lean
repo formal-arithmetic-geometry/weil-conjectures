@@ -16,7 +16,7 @@ import Mathlib.AlgebraicGeometry.Pullbacks
 import Mathlib.RingTheory.FiniteType
 import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import WeilConjectures.Algebra.LimitFinitePresentation
 import Sheaf.AlgebraicGeometry.LocalFibreDimensionOpen
 

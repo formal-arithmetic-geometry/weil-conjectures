@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PicardExternalRightCechModels
 public import Sheaf.Paper.CechCupProduct
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Bilinear external Alexander--Whitney summands
 Source: Stacks Project, Tags 0BED and 07MB.

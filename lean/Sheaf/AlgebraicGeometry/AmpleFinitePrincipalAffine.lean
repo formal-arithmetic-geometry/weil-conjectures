@@ -6,7 +6,7 @@ Authors: SHEAF group K1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.AffineCapSectionOpen
+import WeilConjectures.AlgebraicGeometry.AffineCapSectionOpen
 import Sheaf.AlgebraicGeometry.AmpleFiniteSetAffine
 import Sheaf.AlgebraicGeometry.AmpleIdealSection
 import Sheaf.AlgebraicGeometry.ClosedSubsetQcIdeal

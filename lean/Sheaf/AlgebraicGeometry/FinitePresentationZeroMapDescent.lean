@@ -6,7 +6,7 @@ Authors: SHEAF group P2
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Mathlib.Data.Finset.Order
 import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 import Sheaf.AlgebraicGeometry.FinitePresentationZeroMapAffineOpen

@@ -6,7 +6,7 @@ Authors: SHEAF group A2
 module
 
 public import Mathlib.FieldTheory.Galois.Basic
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 import Sheaf.AlgebraicGeometry.AffineGaloisBaseChangeFiberTransitivity
 

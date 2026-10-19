@@ -10,7 +10,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 public import Sheaf.AlgebraicGeometry.SelfTorAffineSection
 

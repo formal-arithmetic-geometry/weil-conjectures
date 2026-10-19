@@ -6,7 +6,7 @@ Authors: SHEAF group F3
 module
 
 public import Sheaf.AlgebraicGeometry.DiagonalConormal
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 import Sheaf.AlgebraicGeometry.DiagonalConormalMorphism
 

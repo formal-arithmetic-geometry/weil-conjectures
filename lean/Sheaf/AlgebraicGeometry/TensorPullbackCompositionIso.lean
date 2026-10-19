@@ -5,7 +5,7 @@ Authors: SHEAF group H3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Canonical comparison for successive tensor pullbacks
 

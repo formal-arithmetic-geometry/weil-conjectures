@@ -5,7 +5,7 @@ Authors: SHEAF group N2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.RingTheory.Valuation.ValuationRing

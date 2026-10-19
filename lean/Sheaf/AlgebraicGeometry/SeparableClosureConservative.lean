@@ -10,7 +10,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.CategoryTheory.Sites.Sheaf
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
@@ -32,7 +32,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.AlgebraicGeometry.StalkFaithfulDerived
-import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Conservativity of base change to a separable closure

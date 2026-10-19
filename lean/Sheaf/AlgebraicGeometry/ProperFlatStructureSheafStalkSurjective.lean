@@ -8,7 +8,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Fiber
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 import Sheaf.AlgebraicGeometry.ProperFlatSingleDerivedDirectImagePerfect
 import Sheaf.AlgebraicGeometry.PerfectLocalDegreeZeroUnit

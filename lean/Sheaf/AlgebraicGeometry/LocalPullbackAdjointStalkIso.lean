@@ -5,7 +5,7 @@ Authors: SHEAF group H3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Stalk
 import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism

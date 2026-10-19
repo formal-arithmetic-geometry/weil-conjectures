@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PicardUniversalSingleRankMatch
 public import Sheaf.AlgebraicGeometry.PicardUniversalRankMatch
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 

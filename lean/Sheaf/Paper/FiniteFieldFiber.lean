@@ -6,7 +6,7 @@ Authors: SHEAF group NB
 module
 
 public import Sheaf.FieldTheory.UniqueSubfieldOfClosure
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import Sheaf.NumberTheory.Padics.CoefficientExtension
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Over

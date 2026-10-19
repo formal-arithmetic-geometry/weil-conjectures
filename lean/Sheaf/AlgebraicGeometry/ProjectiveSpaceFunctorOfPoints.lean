@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.Ample
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearCombination
 import WeilConjectures.AlgebraicGeometry.NonvanishingGeneratingLocus

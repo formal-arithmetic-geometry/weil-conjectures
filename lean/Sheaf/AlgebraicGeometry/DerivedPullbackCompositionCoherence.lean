@@ -6,7 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 import Sheaf.AlgebraicGeometry.DerivedPullbackCompositionUnitKFlat
 import Sheaf.AlgebraicGeometry.DerivedPullbackCompositionAssocKFlat

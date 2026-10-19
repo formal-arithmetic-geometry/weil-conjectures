@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.HomologicalComplex
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.TensorPullbackFinitePresentation
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
 import Mathlib.Algebra.Homology.Functor

@@ -6,7 +6,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.Mathlib.RingTheory.Henselian
-import Sheaf.AlgebraicGeometry.AffineClosedHenselianRingPresentation
+import WeilConjectures.AlgebraicGeometry.AffineClosedHenselianRingPresentation
 import WeilConjectures.AlgebraicGeometry.SpecRingCohomologyDiagram
 import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
 import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
