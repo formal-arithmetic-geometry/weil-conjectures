@@ -35,6 +35,8 @@ variable (D : FiniteFieldDatum.{u}) {X₀ Y₀ : Over (Spec (.of D.k₀))}
   [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
   (f₀ : X₀ ⟶ Y₀) (c₀ : Compactification f₀.left)
 
+-- Keep the existing finite-type parameters in the public signature.
+set_option linter.unusedSectionVars false in
 /-- Geometric base change preserves the chosen open/proper factorization.
 Source: blueprint `def:weil-compact-support-object`; Stacks 01W6
 (blueprint: def-weil-frobenius-square-exchange).
@@ -46,7 +48,18 @@ theorem geometricCompactification_properties :
       IsProper (fiberMap D (zlCompactificationProper D f₀ c₀)) ∧
       fiberMap D f₀ = fiberMap D (zlCompactificationOpen D f₀ c₀) ≫
         fiberMap D (zlCompactificationProper D f₀ c₀) := by
-  sorry
+  refine ⟨?_, ?_, ?_⟩
+  · exact MorphismProperty.overPullbackMap
+      (P := @IsOpenImmersion) _ (zlCompactificationOpen D f₀ c₀) c₀.isOpenImmersion
+  · exact MorphismProperty.overPullbackMap
+      (P := @IsProper) _ (zlCompactificationProper D f₀ c₀) c₀.isProper
+  · have h : f₀ = zlCompactificationOpen D f₀ c₀ ≫
+        zlCompactificationProper D f₀ c₀ := by
+      apply Over.OverMorphism.ext
+      exact c₀.comm
+    exact congrArg (fun g ↦
+      ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map g).left) h
+      |>.trans (congrArg Over.Hom.left (Functor.map_comp _ _ _))
 
 /-- Base change of this very compactification over k₀; its middle Frobenius is
 therefore the coefficient Frobenius of its retained k₀-model.
@@ -91,8 +104,12 @@ theorem fiber_finiteType (T₀ : Over (Spec (.of D.k₀)))
     [LocallyOfFiniteType T₀.hom] [QuasiCompact T₀.hom] :
     LocallyOfFiniteType (D.geometricFiber T₀).hom ∧
       QuasiCompact (D.geometricFiber T₀).hom := by
-  sorry
+  constructor
+  · exact MorphismProperty.baseChange_obj (P := @LocallyOfFiniteType) _ T₀ inferInstance
+  · exact MorphismProperty.baseChange_obj (P := @QuasiCompact) _ T₀ inferInstance
 
+-- Keep the existing finite-type parameters in the public signature.
+set_option linter.unusedSectionVars false in
 include fs fft fqc in
 /-- The relative geometric map has the source's separated finite-type properties.
 Source: blueprint Frobenius square; Stacks 01T0, 01KH
@@ -102,7 +119,10 @@ locally finite type and quasi-compact are preserved by that Cartesian base chang
 theorem fiberMap_properties :
     IsSeparated (fiberMap D f₀) ∧ LocallyOfFiniteType (fiberMap D f₀) ∧
       QuasiCompact (fiberMap D f₀) := by
-  sorry
+  refine ⟨?_, ?_, ?_⟩
+  · exact MorphismProperty.overPullbackMap (P := @IsSeparated) _ f₀ inferInstance
+  · exact MorphismProperty.overPullbackMap (P := @LocallyOfFiniteType) _ f₀ inferInstance
+  · exact MorphismProperty.overPullbackMap (P := @QuasiCompact) _ f₀ inferInstance
 
 /-- Install only the inherited proof instances used by the three integral stages.
 Source: blueprint geometric-fiber convention
