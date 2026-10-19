@@ -31,9 +31,91 @@
   "document": "literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex",
   "place": "slopmaster2 blueprint, def:weil-direct-image-object (lines 2405-2428, FrEx_{f,*}) and def:weil-compact-support-object (lines 2432-2471, FrEx_{f,!} 'literally the compactification composite' Ex_{*,p,g_Y} followed by Rp_*(Ex_{j,g_Xbar})); the notion is the action by transport of structure of Deligne, La conjecture de Weil II (literature/deligne-weil-II_PMIHES-1980-52.pdf), (1.1.10)-(1.1.11) and (1.1.14), pp. 151-152"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Keep the recorded origin, compactification, finite exchange, integral exchange, coefficient mate, and common-stage constructions. The intrinsic compactification coherence and refinement normalization, integral pullback linearity, operation coefficient invertibility, rational coefficient comparison, and two stage compatibility laws remain the existing named proof obligations with their original docstring arguments.",
+   "uses": [
+    "def-weil-scheme-morphism-properties",
+    "def-weil-compactifications-refinements",
+    "def-weil-pbc-cartesian-square",
+    "def-weil-system-operation-exchange-realization",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-rationalization-karoubi",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-algebraically-closed-coefficients",
+    "prop-weil-pbc-descent-functors",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "def-compact-support-direct-image-detailed",
+    "lem-trf-open-square-exchange",
+    "lem-weil-pbc-comparison-pullback",
+    "prop-compactification-coherence-detailed",
+    "def-weil-finite-field-fiber",
+    "def-zl-weil-ind-sheaf-category",
+    "def-weil-frobenius-detailed",
+    "lem-weil-frobenius-square-cartesian",
+    "lem-fix-operation-reduction",
+    "def-sf-refinement-comparison-isomorphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the intrinsic pairwise cocycle, choose a common refinement of three compactifications from intrinsicCompactificationCoherence, substitute its three normalized comparison formulas, and cancel the middle isomorphism and its inverse. Exact etale inverse image preserves the lower bound by Functor.isGE_mapDerivedCategory_obj.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Prove the raw localized Hom identity and composition laws by tensor induction, using ScalarLocalization.composition_tmul and the original integral functor laws. A second tensor induction transports integral naturality to every localized Hom. The private localizedFunctor_comp repeats tensor induction to prove literal compatibility with composition.",
+   "uses": [
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply uniqueness in rationalDerivedPullback_existsUnique to the localized pullback: its object map is unchanged, its Hom map is additive, and LinearMap.baseChange_tmul proves the required pure-tensor formula. Prove modelLinear by the directImage_linear and sfCompactSupportFiniteIntegralFunctor_linear declarations. Compose the two additive linear factors to prove modelSource_linear and modelTarget_linear. The private composition identity and localizedPullback_eq then prove modelRationalSource_eq and modelRationalTarget_eq; both support recipes have the prescribed literal tensor extension.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-system-operation-exchange-realization",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct pullScalar_existsUnique componentwise from integralPullbackScalarComparison. Restrict scalarCompletion to the constructible category, where it is an isomorphism. Whisker its inverse by integral pullback, compose the ordinary scalar/pullback natural isomorphism, and whisker scalarCompletion by target pullback. This composite proves naturality of the prescribed completed components. Componentwise extensionality proves uniqueness.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-system-operation-exchange-realization",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-rationalization-karoubi",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-algebraically-closed-coefficients",
+  "prop-weil-pbc-descent-functors",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-compact-support-direct-image-detailed",
+  "lem-trf-open-square-exchange",
+  "lem-weil-pbc-comparison-pullback",
+  "prop-compactification-coherence-detailed",
+  "def-weil-finite-field-fiber",
+  "def-zl-weil-ind-sheaf-category",
+  "def-weil-frobenius-detailed",
+  "lem-weil-frobenius-square-cartesian",
+  "lem-fix-operation-reduction",
+  "def-sf-refinement-comparison-isomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/FrobeniusSquareExchange.lean",
+  "place": "J3 stage-3 partial proof, 2026-10-19. Eleven original holes closed, following the existing declaration docstrings, with no new holes or statement changes. The private localizedFunctor_comp is elementary tensor-induction glue for the two rational composite equalities."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -228,5 +310,15 @@
   "group": "Q22",
   "result": "pass",
   "note": "Fifth delivery (after 661a RETURN, bf9d RETURN, 6bd5 FIX returned at landing, de4b RETURN). Both de4b findings repaired, checked by snapshot diff and against live records: (1) no prop-compactification-coherence-detailed record delivered (the snapshot copy is identical to Q116's live record); landed Sheaf.Paper.CompactificationCoherence imported; intrinsic-coordinate helpers moved unchanged into FrobeniusSquareExchange and owned by def-weil-operation-exchange-coefficient-descent; new refinementIntrinsicOrigin (keeps O.2.L, canonical alpha) and postponed theorem intrinsicCompactificationComparison_refinement equating the intrinsic comparison at a witness with the landed refinementComparisonIsomorphism conjugated by fixedCompactModel (factors match refinementComparisonAtWitness; new stmt_dep def-sf-refinement-comparison-isomorphism is landed). (2) SystemOperationExchangeRealization.lean is byte-identical (sha256) to the 6bd5 reviewer fix: canonical systemDirectEvaluation/systemPullEvaluation.inv. Mechanical theorem stmt_dep lem-trf-integral-pullback-comparison-realization: PASS on that point, models/scalarModels are .choose of the object its conclusion constructs. Ownership 13/68/74, each declaration owned once, all three statements verbatim, sorry only in theorems, docstrings/line lengths ok, no added hypotheses, edge cases covered. nt_compile --json clean: 14.0/28.7/4.1 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261019T002621-L-2162644",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

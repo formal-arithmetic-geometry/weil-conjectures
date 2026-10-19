@@ -16722,3 +16722,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:26 L: merged deliver/J1/Sheaf.Algebra.Homology.KFlatTotalTensorModel (stage 3; reviewer PASS; first push; landing 20261019T002619-L-2160948 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:26 L: merged deliver/J1/Sheaf.AlgebraicGeometry.ProEtale.Projective (stage 3; reviewer PASS; first push; landing 20261019T002619-L-2161210 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:26 L: merged deliver/J2/Sheaf.AlgebraicGeometry.ProEtale.WeakContractibleEquivalences (stage 3; reviewer PASS; first push; landing 20261019T002620-L-2161435 (proof); batch 20261019T002449; modules 1; new nodes 0)
+- 00:26 L: merged deliver/J3/Sheaf.Paper.FrobeniusSquareExchange (stage 3; reviewer PASS; first push; landing 20261019T002621-L-2162644 (proof); batch 20261019T002449; modules 1; new nodes 0)

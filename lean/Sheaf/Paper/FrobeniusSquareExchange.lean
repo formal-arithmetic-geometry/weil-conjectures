@@ -320,7 +320,20 @@ theorem intrinsicCompactificationComparison_cocycle (c d e : Compactification f)
     intrinsicCompactificationComparison K₀ l hl E n hn f c d ≪≫
       intrinsicCompactificationComparison K₀ l hl E n hn f d e =
         intrinsicCompactificationComparison K₀ l hl E n hn f c e := by
-  sorry
+  let A := Padic.coefficientExtensionRing l E n
+  let := Padic.finite_coefficientExtensionRing l E n hn
+  let h := intrinsicCompactificationCoherence K₀ l hl E n hn f
+  have hc := h.choose_spec.2.2.2.2.exists.choose_spec
+  obtain ⟨b, hb⟩ := h.choose_spec.2.2.2.1 3 ![c, d, e]
+  obtain ⟨r⟩ := hb 0
+  obtain ⟨s⟩ := hb 1
+  obtain ⟨t⟩ := hb 2
+  change h.choose_spec.2.2.2.2.exists.choose c d ≪≫
+      h.choose_spec.2.2.2.2.exists.choose d e =
+    h.choose_spec.2.2.2.2.exists.choose c e
+  rw [hc c d b r s, hc d e b s t, hc c e b r t]
+  ext O
+  simp
 
 /-- The intrinsic pairwise comparison along a refinement is the landed specified
 refinement comparison, transported by the canonical fixed-compact models. Thus the
@@ -447,6 +460,7 @@ def pulledOriginWitness {X : Scheme.{u}} (g : X ⟶ X)
       (origin A X).obj ((etalePull A g).obj L) :=
   (proEtaleConstantRingDerivedPullback A g).mapIso a.symm ≪≫ (originPullback A g).app L
 
+set_option linter.unusedSectionVars false in
 /-- Exact etale inverse image preserves the very same lower cohomological bound.
 Source: Stacks 03P2; blueprint compact-support etale-origin paragraph
 (blueprint: def-weil-operation-exchange-coefficient-descent).
@@ -457,7 +471,8 @@ theorem etalePull_lowerBound {X Y : Scheme.{u}} (g : X ⟶ Y)
     (L : DerivedCategory (Sheaf Y.smallEtaleTopology
       (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) (b : ℤ) [L.IsGE b] :
     ((etalePull A g).obj L).IsGE b := by
-  sorry
+  exact Functor.isGE_mapDerivedCategory_obj
+    (Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) g) L b
 
 /-- The actual pulled origin triple: keep the pulled pro-etale object and the
 exact inverse image of its retained bounded below etale antecedent.
@@ -547,7 +562,28 @@ theorem localizedHom_laws :
     (∀ (K L M : sfRationalConstructibleCategory l E X) (a : K ⟶ L) (b : L ⟶ M),
       localizedHom l E F K M (a ≫ b) =
         localizedHom l E F K L a ≫ localizedHom l E F L M b) := by
-  sorry
+  constructor
+  · intro K
+    change (1 : Localization.Away (Padic.coefficientExtensionUniformizer l E)) ⊗ₜ
+      F.map (𝟙 K.obj) = (1 : Localization.Away _) ⊗ₜ 𝟙 (F.obj K.obj)
+    rw [F.map_id]
+  · intro K L M a b
+    change localizedHom l E F K M
+      (ScalarLocalization.composition _ _ _ K.obj L.obj M.obj b a) =
+        ScalarLocalization.composition _ _ _ _ _ _
+          (localizedHom l E F L M b) (localizedHom l E F K L a)
+    induction b using TensorProduct.induction_on with
+    | zero => simp
+    | tmul d b =>
+      induction a using TensorProduct.induction_on with
+      | zero => simp
+      | tmul c a =>
+        rw [ScalarLocalization.composition_tmul]
+        change ((d * c) ⊗ₜ F.map (a ≫ b)) =
+          ScalarLocalization.composition _ _ _ _ _ _ (d ⊗ₜ F.map b) (c ⊗ₜ F.map a)
+        rw [ScalarLocalization.composition_tmul, F.map_comp]
+      | add a a' ha ha' => simp [_root_.map_add, ha, ha']
+    | add b b' hb hb' => simp [_root_.map_add, hb, hb']
 
 /-- Raw scalar localization of an actual operation, with unchanged objects and
 explicit tensor Hom maps. No idempotent completion or rational reduction occurs.
@@ -574,7 +610,19 @@ theorem localizedTransformation_naturality (K L : sfRationalConstructibleCategor
         (sfRationalConstructibleLocalization l E Y).map (τ.app L.obj) =
       (sfRationalConstructibleLocalization l E Y).map (τ.app K.obj) ≫
         (localizedFunctor l E G).map a := by
-  sorry
+  change ScalarLocalization.composition _ _ _ _ _ _
+      ((1 : Localization.Away (Padic.coefficientExtensionUniformizer l E)) ⊗ₜ τ.app L.obj)
+      (localizedHom l E F K L a) =
+    ScalarLocalization.composition _ _ _ _ _ _ (localizedHom l E G K L a)
+      ((1 : Localization.Away (Padic.coefficientExtensionUniformizer l E)) ⊗ₜ τ.app K.obj)
+  induction a using TensorProduct.induction_on with
+  | zero => simp
+  | tmul c a =>
+    change ScalarLocalization.composition _ _ _ _ _ _ (1 ⊗ₜ τ.app L.obj)
+        (c ⊗ₜ F.map a) =
+      ScalarLocalization.composition _ _ _ _ _ _ (c ⊗ₜ G.map a) (1 ⊗ₜ τ.app K.obj)
+    simp only [ScalarLocalization.composition_tmul, one_mul, mul_one, τ.naturality a]
+  | add a b ha hb => simp [_root_.map_add, ha, hb]
 
 /-- Localize precisely the integral exchange components, tensoring them with one.
 Source: blueprint rational-coefficient paragraphs
@@ -582,6 +630,23 @@ Source: blueprint rational-coefficient paragraphs
 def localizedTransformation : localizedFunctor l E F ⟶ localizedFunctor l E G where
   app K := (sfRationalConstructibleLocalization l E Y).map (τ.app K.obj)
   naturality K L a := localizedTransformation_naturality l E F G τ K L a
+
+private theorem localizedFunctor_comp {Z : Scheme.{u}}
+    (H : sfIntegralConstructibleCategory l E Y ⥤ sfIntegralConstructibleCategory l E Z)
+    [H.Additive] [H.Linear (Padic.coefficientExtensionIntegers l E)] :
+    localizedFunctor l E (F ⋙ H) = localizedFunctor l E F ⋙ localizedFunctor l E H := by
+  refine CategoryTheory.Functor.ext (fun _ ↦ rfl) ?_
+  intro K L a
+  simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+  change localizedHom l E (F ⋙ H) K L a =
+    localizedHom l E H _ _ (localizedHom l E F K L a)
+  dsimp only [localizedHom]
+  induction a using TensorProduct.induction_on with
+  | zero => simp only [map_zero]
+  | tmul c a =>
+    change c ⊗ₜ H.map (F.map a) = c ⊗ₜ H.map (F.map a)
+    rfl
+  | add a b ha hb => simp only [_root_.map_add, ha, hb]
 
 end RawLocalization
 
@@ -623,7 +688,15 @@ theorem localizedPullback_eq (T : Scheme.{u})
     letI := (pullback_linear l E T g).2
     localizedFunctor l E (constructibleIntegralPullback l E g) =
       rationalDerivedPullback l E g := by
-  sorry
+  let := (pullback_linear l E T g).1
+  let := (pullback_linear l E T g).2
+  apply (rationalDerivedPullback_existsUnique l E g).unique
+  · refine ⟨?_, fun K ↦ rfl, ?_⟩
+    · exact ⟨fun {K L} {a b} ↦ (localizedHom l E _ K L).map_add a b⟩
+    · intro K L a c
+      apply heq_of_eq
+      exact LinearMap.baseChange_tmul _ _ _
+  · exact (rationalDerivedPullback_existsUnique l E g).exists.choose_spec
 
 end CoefficientPassage
 
@@ -669,12 +742,15 @@ def modelExchange : modelFunctor l K₀ hl f gX gY M E ⋙
   | .direct w => directIntegral l E K₀ hl f gX gY w
   | .compact c gB wp sj => compactIntegral l E K₀ hl f c gX gB gY wp sj
 
+set_option linter.unusedSectionVars false in
 /-- The inherited linearity proofs for the selected actual operation.
 Source: blueprint scalar localization
 (blueprint: def-weil-operation-exchange-coefficient-descent). -/
 theorem modelLinear : (modelFunctor l K₀ hl f gX gY M E).Additive ∧
     (modelFunctor l K₀ hl f gX gY M E).Linear (Padic.coefficientExtensionIntegers l E) := by
-  sorry
+  cases M with
+  | direct w => exact directImage_linear l E K₀ hl f
+  | compact c gB wp sj => exact sfCompactSupportFiniteIntegralFunctor_linear l K₀ hl c E
 
 /-- The specified source composite on integral representatives.
 Source: blueprint FrEx source (blueprint: def-weil-operation-exchange-coefficient-descent). -/
@@ -692,7 +768,11 @@ composition preserves both structures and their specified constant actions. -/
 theorem modelSource_linear :
     (modelSource l K₀ hl f gX gY M E).Additive ∧
       (modelSource l K₀ hl f gX gY M E).Linear (Padic.coefficientExtensionIntegers l E) := by
-  sorry
+  let := (modelLinear l K₀ hl f gX gY M E).1
+  let := (modelLinear l K₀ hl f gX gY M E).2
+  let := (pullback_linear l E Y gY).1
+  let := (pullback_linear l E Y gY).2
+  exact ⟨inferInstanceAs (_ ⋙ _).Additive, inferInstanceAs ((_ ⋙ _).Linear _)⟩
 
 /-- Linearity of the complete target composite, in the prescribed opposite order.
 Source: blueprint scalar-localization paragraph
@@ -702,7 +782,11 @@ composition on the target, with exactly the same constant coefficient action. -/
 theorem modelTarget_linear :
     (modelTarget l K₀ hl f gX gY M E).Additive ∧
       (modelTarget l K₀ hl f gX gY M E).Linear (Padic.coefficientExtensionIntegers l E) := by
-  sorry
+  let := (modelLinear l K₀ hl f gX gY M E).1
+  let := (modelLinear l K₀ hl f gX gY M E).2
+  let := (pullback_linear l E X gX).1
+  let := (pullback_linear l E X gX).2
+  exact ⟨inferInstanceAs (_ ⋙ _).Additive, inferInstanceAs ((_ ⋙ _).Linear _)⟩
 
 /-- The rational operation uses the recorded compact-support functor at the retained c.
 The direct-image case is literal localization of its constructed integral action.
@@ -742,7 +826,15 @@ theorem modelRationalSource_eq :
     letI := (modelSource_linear l K₀ hl f gX gY M E).2
     localizedFunctor l E (modelSource l K₀ hl f gX gY M E) =
       modelRationalSource l K₀ hl f gX gY M E := by
-  sorry
+  let := (modelLinear l K₀ hl f gX gY M E).1
+  let := (modelLinear l K₀ hl f gX gY M E).2
+  let := (pullback_linear l E Y gY).1
+  let := (pullback_linear l E Y gY).2
+  dsimp only [modelSource, modelRationalSource]
+  rw [localizedFunctor_comp, localizedPullback_eq]
+  cases M with
+  | direct w => rfl
+  | compact c gB wp sj => rfl
 
 /-- The same literal localization identity for the target composite.
 Source: blueprint rational paragraph; def-weil-rationalization-karoubi
@@ -756,7 +848,15 @@ theorem modelRationalTarget_eq :
     letI := (modelTarget_linear l K₀ hl f gX gY M E).2
     localizedFunctor l E (modelTarget l K₀ hl f gX gY M E) =
       modelRationalTarget l K₀ hl f gX gY M E := by
-  sorry
+  let := (modelLinear l K₀ hl f gX gY M E).1
+  let := (modelLinear l K₀ hl f gX gY M E).2
+  let := (pullback_linear l E X gX).1
+  let := (pullback_linear l E X gX).2
+  dsimp only [modelTarget, modelRationalTarget]
+  rw [localizedFunctor_comp, localizedPullback_eq]
+  cases M with
+  | direct w => rfl
+  | compact c gB wp sj => rfl
 
 /-- Rational exchange is the literal image of the integral exchange, expressed
 on the recorded rational compact-support functor in its compact branch.
@@ -794,7 +894,21 @@ theorem pullScalar_existsUnique (T : Scheme.{u})
     ∃! b : constructibleIntegralPullback l E g ⋙ scalar l E L ι T ≅
       scalar l E L ι T ⋙ constructibleIntegralPullback l L g,
       ∀ K, b.app K = integralPullbackScalarComparison l E L ι g K := by
-  sorry
+  refine ⟨NatIso.ofComponents (fun K ↦ integralPullbackScalarComparison l E L ι g K)
+    ?_, fun K ↦ rfl, ?_⟩
+  · intro K N a
+    apply ObjectProperty.hom_ext
+    let b : (sfIntegralConstructible l E T).ι ⋙ integralOrdinaryDerivedScalar l E L ι T ≅
+        (sfIntegralConstructible l E T).ι ⋙ integralScalarExtension l E L ι T :=
+      NatIso.ofComponents (fun K ↦ scalarCompletionIso l E L ι T K.obj K.property.1)
+        (fun {K N} a ↦ (scalarCompletion l E L ι T).naturality a.hom)
+    let q := isoWhiskerLeft (constructibleIntegralPullback l E g) b.symm ≪≫
+      isoWhiskerLeft (sfIntegralConstructible l E T).ι (scalarPullbackOrdinary l E L ι g) ≪≫
+      isoWhiskerRight b (integralDerivedPullback l L g)
+    exact q.hom.naturality a
+  · intro b hb
+    ext K
+    exact congrArg (fun i ↦ i.hom.hom) (hb K)
 
 /-- The specified integral pullback scalar comparison.
 Source: blueprint coefficient passage
