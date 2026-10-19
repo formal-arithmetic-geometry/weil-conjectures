@@ -72,6 +72,92 @@ variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
 
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
+private theorem exchangeAdjunctCompComparison {C D E : Type*}
+    [Category C] [Category D] [Category E]
+    {Lg : C ⥤ D} {Rg : D ⥤ C} {Lf : D ⥤ E} {Rf : E ⥤ D}
+    {L : C ⥤ E} {R : E ⥤ C}
+    (adjg : Lg ⊣ Rg) (adjf : Lf ⊣ Rf) (adj : L ⊣ R)
+    (e : Rf ⋙ Rg ≅ R) {A : C} {B : D} {T : E}
+    (h : A ⟶ Rg.obj B) (k : B ⟶ Rf.obj T) :
+    (adj.homEquiv A T).symm (h ≫ Rg.map k ≫ e.hom.app T) =
+      ((conjugateEquiv (adjg.comp adjf) adj).symm e.hom).app A ≫
+        Lf.map ((adjg.homEquiv A B).symm h) ≫ (adjf.homEquiv B T).symm k := by
+  apply (adj.homEquiv A T).injective
+  rw [Equiv.apply_symm_apply, adj.homEquiv_naturality_right]
+  change _ = (adj.unit.app A ≫ R.map _) ≫ R.map _
+  rw [← unit_conjugateEquiv_symm (adjg.comp adjf) adj e.hom A,
+    Category.assoc, ← e.hom.naturality]
+  conv_rhs => rw [← Category.assoc]
+  change _ = ((adjg.comp adjf).homEquiv A T)
+    (Lf.map ((adjg.homEquiv A B).symm h) ≫ (adjf.homEquiv B T).symm k) ≫ _
+  rw [Adjunction.comp_homEquiv]
+  change _ = (adjg.homEquiv _ _) ((adjf.homEquiv _ _) _) ≫ _
+  rw [adjf.homEquiv_naturality_left, Equiv.apply_symm_apply,
+    adjg.homEquiv_naturality_right, Equiv.apply_symm_apply]
+  simp only [Category.assoc]
+
+private theorem exchangeConstantComparisonComp {X Y Z : Scheme.{t}}
+    (f : X ⟶ Y) (g : Y ⟶ Z) (A : CommRingCat.{t + 1}) :
+    (proEtaleConstantComparison (f ≫ g)).app A =
+      (proEtaleRingInverseImageComp f g).hom.app
+        ((constantSheaf (ProEt.topology Z) CommRingCat.{t + 1}).obj A) ≫
+          (proEtaleSheafInverseImage f CommRingCat.{t + 1}).map
+            ((proEtaleConstantComparison g).app A) ≫
+          (proEtaleConstantComparison f).app A := by
+  let e := Functor.sheafPushforwardContinuousComp'
+    (eFG := (MorphismProperty.Over.pullbackComp
+      (P := @WeaklyEtale) (Q := ⊤) f g).symm) CommRingCat.{t + 1}
+        (ProEt.topology Z) (ProEt.topology Y) (ProEt.topology X)
+  have hρ : proEtaleConstantDirectImageMap (f ≫ g) CommRingCat.{t + 1} A =
+      proEtaleConstantDirectImageMap g CommRingCat.{t + 1} A ≫
+        (proEtaleSheafDirectImage g CommRingCat.{t + 1}).map
+          (proEtaleConstantDirectImageMap f CommRingCat.{t + 1} A) ≫
+            e.hom.app ((constantSheaf (ProEt.topology X) CommRingCat.{t + 1}).obj A) := by
+    apply ((sheafificationAdjunction (ProEt.topology Z) CommRingCat.{t + 1}).homEquiv
+      ((Functor.const Z.ProEtᵒᵖ).obj A) _).injective
+    rw [proEtaleConstantDirectImageMap, Equiv.apply_symm_apply,
+      Adjunction.homEquiv_naturality_right]
+    rw [proEtaleConstantDirectImageMap, Equiv.apply_symm_apply]
+    apply NatTrans.ext
+    funext U
+    have hf := Equiv.apply_symm_apply
+      ((sheafificationAdjunction (ProEt.topology Y) CommRingCat.{t + 1}).homEquiv
+        ((Functor.const Y.ProEtᵒᵖ).obj A)
+          ((proEtaleSheafDirectImage f CommRingCat.{t + 1}).obj
+            ((constantSheaf (ProEt.topology X) CommRingCat.{t + 1}).obj A)))
+      (Functor.whiskerLeft (proEtaleBaseChange f).op
+        (toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj A)))
+    have hfU := congrArg (fun t ↦ t.app ((proEtaleBaseChange g).op.obj U)) hf
+    change (toSheafify (ProEt.topology Y) ((Functor.const Y.ProEtᵒᵖ).obj A)).app
+        ((proEtaleBaseChange g).op.obj U) ≫
+      (proEtaleConstantDirectImageMap f CommRingCat.{t + 1} A).hom.app
+        ((proEtaleBaseChange g).op.obj U) =
+          (toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj A)).app
+            ((proEtaleBaseChange f).op.obj ((proEtaleBaseChange g).op.obj U)) at hfU
+    change (toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj A)).app
+        ((proEtaleBaseChange (f ≫ g)).op.obj U) =
+      ((toSheafify (ProEt.topology Y) ((Functor.const Y.ProEtᵒᵖ).obj A)).app
+          ((proEtaleBaseChange g).op.obj U) ≫
+        (proEtaleConstantDirectImageMap f CommRingCat.{t + 1} A).hom.app
+          ((proEtaleBaseChange g).op.obj U)) ≫
+            ((constantSheaf (ProEt.topology X) CommRingCat.{t + 1}).obj A).obj.map
+              ((MorphismProperty.Over.pullbackComp
+                (P := @WeaklyEtale) (Q := ⊤) f g).hom.app U.unop).op
+    rw [hfU]
+    have h := (toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj A)).naturality
+      ((MorphismProperty.Over.pullbackComp
+        (P := @WeaklyEtale) (Q := ⊤) f g).hom.app U.unop).op
+    change 𝟙 A ≫ _ = _ at h
+    rw [Category.id_comp] at h
+    exact h
+  change ((proEtaleSheafAdjunction (f ≫ g) CommRingCat.{t + 1}).homEquiv _ _).symm _ = _
+  rw [hρ]
+  exact exchangeAdjunctCompComparison (proEtaleSheafAdjunction g CommRingCat.{t + 1})
+    (proEtaleSheafAdjunction f CommRingCat.{t + 1})
+    (proEtaleSheafAdjunction (f ≫ g) CommRingCat.{t + 1}) e
+    (proEtaleConstantDirectImageMap g CommRingCat.{t + 1} A)
+    (proEtaleConstantDirectImageMap f CommRingCat.{t + 1} A)
+
 /-- Constant coefficient identifications agree around the chosen scheme square.
 Source: strict normalization, proof steps 5--6; Stacks 07A7
 (blueprint: lem-weil-pbc-strict-tower-exchange-mate-normalization).
@@ -85,7 +171,16 @@ theorem exchangeConstant_coherent (sq : ChosenCartesianSquare g' f' f g) :
       (proEtaleRingCompositeCoefficients f' g
         (exchangeConstantRing Y A) (exchangeConstantRing Y' A) (exchangeConstantRing X' A)
         (exchangeConstantIso g A) (exchangeConstantIso f' A)) := by
-  sorry
+  have hc {V W Z : Scheme.{t}} (h : Z ⟶ W) (k : W ⟶ V) :
+      proEtaleRingCompositeCoefficients h k
+        (exchangeConstantRing V A) (exchangeConstantRing W A) (exchangeConstantRing Z A)
+        (exchangeConstantIso k A) (exchangeConstantIso h A) =
+      exchangeConstantIso (h ≫ k) A := by
+    apply Iso.ext
+    exact (exchangeConstantComparisonComp h k (CommRingCat.of A)).symm
+  have hw : HEq (exchangeConstantIso (g' ≫ f) A) (exchangeConstantIso (f' ≫ g) A) :=
+    congr_arg_heq (fun u ↦ exchangeConstantIso u A) sq.w
+  exact (heq_of_eq (hc g' f)).trans (hw.trans (heq_of_eq (hc f' g).symm))
 
 /-- The constant-coefficient ringed square uses the specific constant-section identifications.
 Source: strict normalization, paragraph 2; Stacks 07A7
@@ -121,7 +216,35 @@ theorem exchangeScalar_comm {U V : Scheme.{t}} (f : U ⟶ V) :
     (exchangeConstantIso f A).hom ≫ exchangeScalar d U =
       (proEtaleSheafInverseImage f CommRingCat.{t + 1}).map (exchangeScalar d V) ≫
         (d.integralRingIso f).hom := by
-  sorry
+  have hp (T : Scheme.{t}) (n : ℕ) :
+      exchangeScalar d T ≫ d.projection T n =
+        (constantSheaf (ProEt.topology T) CommRingCat.{t + 1}).map
+          (CommRingCat.ofHom (Ideal.Quotient.mk (d.ideal ^ (n + 1)))) ≫
+            (pbcLevelConstantComparison T d n).hom := by
+    dsimp only [exchangeScalar, AdicCoefficientDatum.projection,
+      completedReductionProjection, pbcCompletedComparison]
+    rw [Category.assoc]
+    erw [HasLimit.isoOfNatIso_hom_π]
+    rw [← Category.assoc]
+    erw [(adicDatumScalar_exists T
+      { toCompleteCoefficientDatum := d.toCompleteCoefficientDatum,
+        quotientFinite := d.quotientFinite }).exists.choose_spec n]
+    rfl
+  apply limit.hom_ext (F := reductionCoefficientSystem U d)
+  intro n
+  change _ ≫ d.projection U n.unop = _ ≫ d.projection U n.unop
+  rw [Category.assoc, hp, Category.assoc, d.projection_comm]
+  rw [← Functor.map_comp_assoc, hp]
+  simp only [AdicCoefficientDatum.finiteRingIso, Iso.trans_hom, Functor.mapIso_hom,
+    Iso.symm_hom, asIso_hom, exchangeConstantIso]
+  rw [← Functor.map_comp_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+  dsimp only [AdicCoefficientDatum.ringTower, Functor.ofOpSequence,
+    Functor.ofSequence, Functor.leftOp]
+  simpa only [Category.assoc, Functor.comp_map] using
+    congrArg (fun z ↦ z ≫ (pbcLevelConstantComparison U d n.unop).hom)
+    ((proEtaleConstantComparison f).naturality
+      (CommRingCat.ofHom (Ideal.Quotient.mk (d.ideal ^ (n.unop + 1))))).symm
 
 /-- Termwise restriction changes the scalar action but retains the whole strict diagram.
 Source: strict normalization, paragraph 2; Stacks 03D3
@@ -130,6 +253,7 @@ abbrev exchangeTowerModuleRes (T : Scheme.{t}) :
     exchangeTowers T (d.completedRing T) ⥤ exchangeTowers T (exchangeConstantRing T A) :=
   (Functor.whiskeringRight _ _ _).obj (proEtaleRingRestrictScalars (exchangeScalar d T))
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Exactness of restriction on strict diagrams, with all transition maps retained.
 Source: strict normalization, proof step 5; Stacks 03D3
 (blueprint: lem-weil-pbc-strict-tower-exchange-mate-normalization).
@@ -139,7 +263,25 @@ both finite-limit and finite-colimit preservation for the termwise functor. -/
 theorem exchangeTowerModuleRes_exact (T : Scheme.{t}) :
     PreservesFiniteLimits (exchangeTowerModuleRes d T) ∧
       PreservesFiniteColimits (exchangeTowerModuleRes d T) := by
-  sorry
+  have : PreservesFiniteLimits (proEtaleRingRestrictScalars (exchangeScalar d T)) :=
+    proEtaleRingRestrictScalars_preservesFiniteLimits (exchangeScalar d T)
+  have : PreservesFiniteColimits (proEtaleRingRestrictScalars (exchangeScalar d T)) :=
+    proEtaleRingRestrictScalars_preservesFiniteColimits (exchangeScalar d T)
+  constructor
+  · exact ⟨fun _ _ _ ↦ inferInstance⟩
+  · refine ⟨fun J _ _ ↦ ?_⟩
+    let R : Sheaf (ProEt.topology T) RingCat.{t + 1} :=
+      (sheafCompose (ProEt.topology T)
+        (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj (d.completedRing T)
+    have hS : HasWeakSheafify (ProEt.topology T) AddCommGrpCat.{t + 1} := inferInstance
+    have hW : (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{t + 1} :=
+      WeilConjectures.integralCoefficientAbLocallyBijective.{t, 0} T
+    have hP : HasColimitsOfShape J (_root_.PresheafOfModules.{t + 1} R.obj) := inferInstance
+    have :=
+      @SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf.{
+        0, 0, t + 1, t, t + 1, t + 1} _ _ _ R hS hW J _ hP
+    exact whiskeringRight_preservesColimitsOfShape.{0, 0, t + 1, t + 2, t + 1, t + 2, 0, 0}
+      (C := ℕᵒᵖ) (J := J) (proEtaleRingRestrictScalars (exchangeScalar d T))
 
 /-- Left exact restriction. Source: strict normalization, proof step 5
 (blueprint: lem-weil-pbc-strict-tower-exchange-mate-normalization). -/
@@ -342,7 +484,17 @@ theorem exchangeStrict_naturality (sq : ChosenCartesianSquare g' f' f g)
         d.towerV' sq L =
       d.towerV' sq K ≫
         (d.towerPush f').map ((d.towerPull g').map ((completedReductionTower X d).map a)) := by
-  sorry
+  let pi (U V : Scheme.{t}) (u : U ⟶ V) :
+      d.push u ⋙ completedReductionTower V d ≅
+        completedReductionTower U d ⋙ d.towerPush u :=
+    NatIso.ofComponents (fun K ↦ asIso (d.towerProjection u K))
+      (fun {K L} a ↦ (d.towerProjection_properties u K).2.1 L a)
+  let H := Functor.isoWhiskerRight (pi X Y f) (d.towerPull g)
+  let v := Functor.whiskerLeft (d.push f) (d.reductionTowerPullbackIso g).hom ≫
+    Functor.whiskerRight (d.integralExchange sq) (completedReductionTower Y' d)
+  let H' := Functor.isoWhiskerLeft (d.pull g') (pi X' Y' f') ≪≫
+    Functor.isoWhiskerRight (d.reductionTowerPullbackIso g').symm (d.towerPush f')
+  exact (H.inv ≫ v ≫ H'.hom).naturality a
 
 /-- The specified finite exchange is a natural transformation on strict derived towers.
 Its naturality is inherited from the already specified projection-formula tower maps.
