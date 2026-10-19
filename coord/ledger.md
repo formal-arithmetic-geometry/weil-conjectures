@@ -17383,3 +17383,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:26 L: merged deliver/Z8/Sheaf.CategoryTheory.FullyFaithfulCounitDescent (stage 3; reviewer PASS; first push; landing 20261019T112628-L-3964086 (proof); batch 20261019T112432; modules 1; new nodes 0)
 
 - 19:31 L: batch 20261019T112432 dependency take-out
+- 12:25 L: merged deliver/G5/Sheaf.SecSmoothPurity.ProEtaleFiniteConstantSections (stage 3; reviewer PASS; after a return; landing 20261019T122545-L-466311 (interface); batch 20261019T121044; modules 1; new nodes 0; change records: coord/changes/proetale-finite-constant-sections-warning-option.md)
