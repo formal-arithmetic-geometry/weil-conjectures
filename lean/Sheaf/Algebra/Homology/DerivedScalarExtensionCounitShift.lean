@@ -6,20 +6,15 @@ Authors: SHEAF group Q65
 module
 
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 public import Sheaf.CategoryTheory.RingedSiteModules
-public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import Mathlib.CategoryTheory.Triangulated.Functor
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Sheaf.CategoryTheory.RightKanExtensionCoherentShift
 import Sheaf.Algebra.Homology.QuasiIsoSaturatedTriangulated
 import Sheaf.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 import Sheaf.CategoryTheory.LeftDerivedKanSourceTriangles
 import Mathlib.CategoryTheory.Localization.Triangulated
-import Mathlib.Algebra.Homology.HomotopyCategory.Triangulated
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 
 /-! # The counit-compatible shift of derived scalar extension
 
@@ -148,6 +143,132 @@ theorem derivedScalarExtension_counitShift
         T ∈ distTriang _ →
           Triangle.mk (F.map T.mor₁) (F.map T.mor₂)
             (F.map T.mor₃ ≫ σ.hom.app T.obj₁) ∈ distTriang _ := by
-  sorry
+  classical
+  let A := ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J R)
+  let A' := ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J S)
+  let B := E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh
+  let W := HomotopyCategory.quasiIso A (.up ℤ)
+  have hkan : F.IsRightKanExtension ε :=
+    Functor.IsLeftDerivedFunctor.isRightKanExtension F ε W
+  let : F.IsRightKanExtension ε := hkan
+  obtain ⟨hshift, hcounit⟩ :=
+    Functor.rightKanExtension_coherentShift B DerivedCategory.Qh F ε hkan
+  let : F.CommShift ℤ := hshift
+  let : NatTrans.CommShift ε ℤ := hcounit
+  have hcompat (P : HomotopyCategory A (.up ℤ)) :
+      F.map ((DerivedCategory.Qh.commShiftIso (1 : ℤ)).hom.app P) ≫
+          (F.commShiftIso (1 : ℤ)).hom.app (DerivedCategory.Qh.obj P) ≫
+          (shiftFunctor _ (1 : ℤ)).map (ε.app P) =
+        ε.app ((shiftFunctor _ (1 : ℤ)).obj P) ≫
+          DerivedCategory.Qh.map
+            (((E.mapHomotopyCategory (.up ℤ)).commShiftIso (1 : ℤ)).hom.app P) ≫
+          (DerivedCategory.Qh.commShiftIso (1 : ℤ)).hom.app
+            ((E.mapHomotopyCategory (.up ℤ)).obj P) := by
+    simpa only [Functor.commShiftIso_comp_hom_app, Category.assoc] using
+      NatTrans.shift_app_comm ε (1 : ℤ) P
+  -- Identify the prescribed ordinary functor with the current change-of-rings model.
+  have hquasi : ∀ {P Q : CochainComplex A ℤ} (f : P ⟶ Q),
+      CochainComplex.IsKFlatIndependentCoefficients (R := R) P →
+      CochainComplex.IsKFlatIndependentCoefficients (R := R) Q → QuasiIso f →
+        QuasiIso ((E.mapHomologicalComplex (.up ℤ)).map f) := by
+    obtain ⟨m⟩ := nonempty_derivedChangeOfRingsCochainModel.{u, v, r, wR, wS} φ
+    have heq : E = m.E := by
+      refine CategoryTheory.Functor.ext (fun M ↦ (h M).trans (m.obj_eq M).symm) ?_
+      intro M N f
+      simp only [hmap, m.map_eq, Category.assoc, eqToHom_trans_assoc, eqToHom_trans]
+    subst E
+    intro P Q f hp hq hf
+    exact m.preserves f hp hq hf
+  -- Represent the resolving class in the homotopy category by K-flat complexes.
+  let P : Set (HomotopyCategory A (.up ℤ)) :=
+    { X | ∃ K : CochainComplex A ℤ,
+      CochainComplex.IsKFlatIndependentCoefficients (R := R) K ∧
+        (HomotopyCategory.quotient A (.up ℤ)).obj K = X }
+  have hres : ∀ X : HomotopyCategory A (.up ℤ),
+      ∃ (X' : HomotopyCategory A (.up ℤ)) (s : X' ⟶ X), X' ∈ P ∧ W s := by
+    intro X
+    obtain ⟨G, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
+    obtain ⟨K, s, hK, _, hs, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients (R := R) G
+    exact ⟨_, (HomotopyCategory.quotient A (.up ℤ)).map s, ⟨K, hK, rfl⟩,
+      (HomotopyCategory.quotient_map_mem_quasiIso_iff s).2 hs⟩
+  have hinv : ∀ X Y : HomotopyCategory A (.up ℤ), ∀ s : X ⟶ Y,
+      X ∈ P → Y ∈ P → W s → IsIso (B.map s) := by
+    intro X Y s hX hY hs
+    obtain ⟨K, hK, rfl⟩ := hX
+    obtain ⟨L, hL, rfl⟩ := hY
+    obtain ⟨a, rfl⟩ := (HomotopyCategory.quotient A (.up ℤ)).map_surjective s
+    have ha := (HomotopyCategory.quotient_map_mem_quasiIso_iff a).1 hs
+    have hEa := hquasi a hK hL ha
+    dsimp only [B, Functor.comp_map, Functor.mapHomotopyCategory_map]
+    apply Localization.inverts DerivedCategory.Qh (HomotopyCategory.quasiIso _ _)
+    exact (HomotopyCategory.quotient_map_mem_quasiIso_iff _).2 hEa
+  obtain ⟨hleft, hright, htri, hsat, htwo, _, _, _, _⟩ :=
+    HomotopyCategory.quasiIso_saturated_triangulated A
+  let : W.HasLeftCalculusOfFractions := hleft
+  let : W.HasRightCalculusOfFractions := hright
+  let : W.HasTwoOutOfThreeProperty := htwo
+  have hW : W.IsSaturatedTriangulatedMultiplicativeSystem :=
+    ⟨⟨⟨hleft, hright⟩, fun _ _ _ _ f g k ↦ hsat _ _ _ _ g f k⟩, htri⟩
+  have hdefined : ∀ X, B.IsTriangulatedLeftDerivedDefinedAt W hW X := by
+    intro X
+    obtain ⟨Y, _, hc, _, _⟩ :=
+      Functor.resolvingClass_essentialConstancy W B P hres hinv X
+    exact ⟨Y, hc⟩
+  -- Use the source-triangle theorem for the very shift constructed from epsilon.
+  have hsource : (DerivedCategory.Qh ⋙ F).IsTriangulated := by
+    constructor
+    intro T hT
+    exact Functor.leftDerived_kan_map_source_distinguished _ _ _ B W hW
+      DerivedCategory.Qh F ε hkan hdefined hcounit T hT
+  let : (DerivedCategory.Qh ⋙ F).IsTriangulated := hsource
+  have := Localization.essSurj_mapArrow (DerivedCategory.Qh (C := A)) W
+  have hFtri : F.IsTriangulated := by
+    constructor
+    intro T hT
+    obtain ⟨T₀, e, hT₀⟩ := (DerivedCategory.Qh.distTriang_iff T).1 hT
+    exact isomorphic_distinguished _
+      ((DerivedCategory.Qh ⋙ F).map_distinguished T₀ hT₀) _
+      (F.mapTriangle.mapIso e ≪≫
+        (Functor.mapTriangleCompIso DerivedCategory.Qh F).symm.app T₀)
+  let : F.IsTriangulated := hFtri
+  refine ⟨F.commShiftIso (1 : ℤ), hcompat, ?_, inferInstance, ?_⟩
+  · intro τ hτ
+    let H := shiftFunctor (DerivedCategory A') (1 : ℤ)
+    let γ := (Functor.associator DerivedCategory.Qh F H).inv ≫
+      Functor.whiskerRight ε H
+    -- Shifting the target carries the terminal right-extension object to a terminal one.
+    have hpost : (F ⋙ H).IsRightKanExtension γ := by
+      let Ψ := Functor.RightExtension.postcompose₂ DerivedCategory.Qh B H
+      let : IsIso (𝟙 (B ⋙ H)) := inferInstance
+      let : Ψ.IsEquivalence := by
+        dsimp [Ψ, Functor.RightExtension.postcompose₂]
+        let t : ((Functor.whiskeringRight (DerivedCategory A) (DerivedCategory A')
+              (DerivedCategory A')).obj H) ⋙
+              (Functor.whiskeringLeft (HomotopyCategory A (.up ℤ))
+                (DerivedCategory A) (DerivedCategory A')).obj DerivedCategory.Qh ⟶
+            (Functor.whiskeringLeft (HomotopyCategory A (.up ℤ))
+                (DerivedCategory A) (DerivedCategory A')).obj DerivedCategory.Qh ⋙
+              ((Functor.whiskeringRight (HomotopyCategory A (.up ℤ))
+                (DerivedCategory A') (DerivedCategory A')).obj H) :=
+          { app G := (Functor.associator DerivedCategory.Qh G H).inv }
+        let : IsIso t := by apply NatIso.isIso_of_isIso_app
+        exact CostructuredArrow.isEquivalenceMap₂ t (𝟙 _)
+      constructor
+      refine ⟨IsTerminal.ofIso
+        (IsTerminal.isTerminalObj Ψ _ (F.isUniversalOfIsRightKanExtension ε)) ?_⟩
+      exact Functor.RightExtension.postcompose₂ObjMkIso H ε
+    let : (F ⋙ H).IsRightKanExtension γ := hpost
+    apply Iso.ext
+    apply (F ⋙ H).hom_ext_of_isRightKanExtension γ
+    ext X
+    simp only [γ, NatTrans.comp_app, Functor.associator_inv_app,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.id_comp]
+    change τ.hom.app (DerivedCategory.Qh.obj X) ≫ H.map (ε.app X) =
+      (F.commShiftIso (1 : ℤ)).hom.app (DerivedCategory.Qh.obj X) ≫ H.map (ε.app X)
+    apply (cancel_epi (F.map ((DerivedCategory.Qh.commShiftIso (1 : ℤ)).hom.app X))).1
+    simpa only [Category.assoc] using (hτ X).trans (hcompat X).symm
+  · intro T hT
+    exact F.map_distinguished T hT
 
 end SheafOfModules

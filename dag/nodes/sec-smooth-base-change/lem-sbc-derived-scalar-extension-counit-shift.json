@@ -29,12 +29,11 @@
  ],
  "proof": [
   {
-   "text": "By [def-weil-sheaf-of-modules-category], the smallness hypothesis makes both sheaf-module categories abelian. Their homotopy categories and the localization functors have the cone triangulations of [lem-pur-homotopy-category-triangulated]. Termwise tensor is additive: on local tensor generators its map sends $m\\otimes s$ to $f(m)\\otimes s$, so it preserves sums of maps. It preserves the biproduct identities and hence the biproduct $L^r\\oplus P^{r+1}$ in the cone formula of [def-weil-abstract-derived-category]. Under this identification its cone differential is $\\begin{pmatrix}d_L\\otimes1&f\\otimes1\\\\0&-d_P\\otimes1\\end{pmatrix}$, exactly the cone differential of $E(f)$. If $f-g=dh+hd$, then $E(f)-E(g)=dE(h)+E(h)d$, so it descends to homotopy categories. The cone inclusion and negative projection are preserved as well. Thus $E$ carries cone triangles to cone triangles; since distinguished triangles are their isomorphic copies, $E$, and then $B:=Q_S\\circ E$, are exact.",
+   "text": "The hypothesis E.Additive gives the canonical coherent shift structure on E.mapHomotopyCategory, induced degreewise by identities, and Mathlib proves that this functor preserves the cone triangles. DerivedCategory.Qh is triangulated. Hence B := E.mapHomotopyCategory followed by Q_S is triangulated with its canonical composite shift. These are the cone triangulations of [def-weil-abstract-derived-category] and [lem-pur-homotopy-category-triangulated], on the module categories of [def-weil-sheaf-of-modules-category].",
    "uses": [
     "def-weil-sheaf-of-modules-category",
     "lem-pur-homotopy-category-triangulated",
-    "def-weil-abstract-derived-category",
-    "def-pur-sheaf-tensor-product"
+    "def-weil-abstract-derived-category"
    ],
    "elementary": true,
    "source": {
@@ -43,11 +42,10 @@
    }
   },
   {
-   "text": "Take the resolving class to be K-flat complexes with flat terms. Every complex has such a quasi-isomorphic resolution by [lem-pc-kflat-resolution]. Clause (1) of [lem-pur-derived-change-of-rings] says that termwise change of rings sends every quasi-isomorphism between these complexes to a quasi-isomorphism, so $B$ inverts these arrows. The two hypotheses of [lem-pur-left-derived-from-kflat-class] therefore hold for $B:K(R)\\to D(S)$. It supplies the everywhere-defined left derived functor $F$, the counit $\\varepsilon:F\\circ Q_R\\to B$ with its right Kan universal property, and invertibility of $\\varepsilon_P$ on the resolving class. This is the derived tensor functor of clause (2) of [lem-pur-derived-change-of-rings]. Neither resolution existence nor clause (1) requires flatness of $S$ over $R$ or boundedness.",
+   "text": "Obtain a DerivedChangeOfRingsCochainModel from [lem-pur-derived-change-of-rings], retaining the independent source and target localization universes. Its ordinary functor equals E by Functor.ext: h and the model object equalities identify their objects, and hmap and the model map equalities identify their maps after composing equality transports. Thus its K-flat quasi-isomorphism preservation clause applies to E. Let P be the homotopy objects represented by K-flat complexes. Resolve every representative using [lem-pc-kflat-resolution]; quotient_map_mem_quasiIso_iff gives the homotopy quasi-isomorphism. Lift arrows between such representatives through the full homotopy quotient, apply the K-flat preservation clause, and then localize. Thus B inverts W-arrows between objects of P. The supplied IsLeftDerivedFunctor instance already gives the right Kan universal property of F with counit epsilon; no auxiliary derived pair is chosen.",
    "uses": [
     "lem-pur-derived-change-of-rings",
-    "lem-pc-kflat-resolution",
-    "lem-pur-left-derived-from-kflat-class"
+    "lem-pc-kflat-resolution"
    ],
    "elementary": false,
    "source": {
@@ -68,10 +66,9 @@
    }
   },
   {
-   "text": "Apply [lem-pur-right-kan-extension-coherent-shift] with source $K(R)$, localization $Q_R:K(R)\\to D(R)$, original functor $B=Q_S\\circ E:K(R)\\to D(S)$, right Kan extension $F$, and counit $\\varepsilon$. Here the functor in that theorem with codomain $D(S)$ is $B$, rather than $E$ with codomain $K(S)$. The preceding steps provide the coherent shifts of $Q_R$ and $B$ and the required universal property. The theorem gives coherent natural isomorphisms $\\sigma_X:F(X[1])\\to F(X)[1]$ making $\\varepsilon$ commute with shifts. Expanding that assertion at $P$, using the component $b_P$ computed above, gives precisely $\\varepsilon_P[1]\\circ\\sigma_{Q_RP}\\circ F(s_P)=s'_{E(P)}\\circ Q_S(\\theta_P)\\circ\\varepsilon_{P[1]}$.",
+   "text": "Apply [lem-pur-right-kan-extension-coherent-shift] to B, Q_R, the supplied F and epsilon, using the right Kan property contained in the given IsLeftDerivedFunctor instance. It supplies a coherent CommShift structure on F and NatTrans.CommShift epsilon. Evaluate NatTrans.shift_app_comm at 1 and P, expand the two composite CommShift components, and reassociate. This is precisely the displayed counit equation.",
    "uses": [
-    "lem-pur-right-kan-extension-coherent-shift",
-    "lem-pur-left-derived-from-kflat-class"
+    "lem-pur-right-kan-extension-coherent-shift"
    ],
    "elementary": false,
    "source": {
@@ -80,10 +77,8 @@
    }
   },
   {
-   "text": "For uniqueness no coherence assumption on a competing family is needed. Put $H(X)=F(X[1])[-1]$. A natural family $\\sigma$ determines a transformation $a^\\sigma:H\\to F$ with component $\\sigma_X[-1]$, using the canonical inverse-shift identifications. If $\\sigma$ and $\\tau$ satisfy the displayed counit equation, shifting that equation by $[-1]$ and cancelling the common isomorphism $F(s_P)[-1]$ shows $\\varepsilon_P\\circ a^\\sigma_{Q_RP}=\\varepsilon_P\\circ a^\\tau_{Q_RP}$ for every $P$. Injectivity of the universal correspondence for the test functor $H$, stated in [lem-pur-left-derived-from-kflat-class], gives $a^\\sigma=a^\\tau$. Applying $[1]$ gives $\\sigma=\\tau$.",
-   "uses": [
-    "lem-pur-left-derived-from-kflat-class"
-   ],
+   "text": "Postcomposition with the target shift H = [1] preserves the right Kan property: the functor RightExtension.postcompose₂ Q_R B H is an equivalence, obtained from the equivalence given by whiskering with H and the associator natural isomorphism. Transport the terminal right-extension object along this equivalence. The resulting counit gamma for F followed by H is associator.inv followed by whiskerRight epsilon H. If tau and sigma satisfy the counit equation, cancel the common isomorphism F(s_P) to obtain equality after postcomposition with H(epsilon_P). These are the components of whiskerLeft Q_R tau.hom followed by gamma and of the same expression with sigma.hom. Right Kan hom_ext identifies tau.hom and sigma.hom, and Iso.ext identifies the isomorphisms. This argument imposes no coherence or triangle-preservation hypothesis on tau.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
@@ -91,13 +86,12 @@
    }
   },
   {
-   "text": "Let $\\Delta=(X\\xrightarrow{u}Y\\xrightarrow{v}Z\\xrightarrow{w}X[1])$ be distinguished in $D(R)$. By [lem-pur-quasi-isos-saturated-triangulated] the quasi-isomorphisms $W$ of $K(R)$ are a saturated triangulated multiplicative system (so right calculus of fractions and two-out-of-three hold) and $Q_R$ is the shift-compatible localization at $W$. By [lem-pur-resolving-class-essential-constancy] for $B$, $W$ and the K-flat flat-term class (its two hypotheses are those of step 2), the denominator diagram of $B$ is essentially constant at every complex. Apply [lem-pur-left-derived-kan-source-triangles] with $D=K(R)$, $D'=D(S)$, $L=D(R)$, exact $B$ (step 1), $Q=Q_R$, $LF=F$ with $\\sigma$ (step 4) and $\\alpha=\\varepsilon$, a right Kan extension (step 2) commuting with shifts (step 4): for every distinguished $T=(K\\xrightarrow{f}M\\xrightarrow{g}N\\xrightarrow{h}K[1])$ of $K(R)$, $F(Q_RK)\\to F(Q_RM)\\to F(Q_RN)\\xrightarrow{\\sigma_{Q_RK}F(s_KQ_Rh)}F(Q_RK)[1]$ is distinguished, i.e. $(F,\\sigma)$ maps $Q_R(T)$ to a distinguished triangle. By [lem-pur-localization-triangles-05r6] (its triangulation is that of $D(R)$, by uniqueness) there is a triangle isomorphism $(a,b,c):\\Delta\\to Q_R(T)$, with last arrow $w'$ of $Q_R(T)$. Then $(Fa,Fb,Fc)$ is a triangle isomorphism from $(FX,FY,FZ,Fu,Fv,\\sigma_XF(w))$ to the image of $Q_R(T)$: the first two squares are $F$ of those of $(a,b,c)$, and $F(a)[1]\\sigma_XF(w)=\\sigma F(a[1])F(w)=\\sigma F(w')F(c)$ by naturality of $\\sigma$. By (TR1) of [def-weil-triangulated-category] the first triangle is distinguished. $F$ is additive, being exact by [lem-pur-left-derived-from-kflat-class]. Hence $(F,\\sigma)$ is exact with the comparison of the statement, not merely some comparison.",
+   "text": "By [lem-pur-quasi-isos-saturated-triangulated], W has the two fraction calculi, two-out-of-three and the saturated triangulated multiplicative-system property. Apply [lem-pur-resolving-class-essential-constancy] to B and the class P from step 2 to obtain essential constancy at every homotopy object. Apply [lem-pur-left-derived-kan-source-triangles] with the coherent shift on F from step 4 and its compatible counit: Q_R followed by F preserves distinguished source triangles. The localization representation [lem-pur-localization-triangles-05r6] writes every distinguished derived triangle as an isomorphic image of a distinguished homotopy triangle. Map that representing isomorphism by F.mapTriangle and compose with mapTriangleCompIso to deduce F.IsTriangulated with this same shift comparison. Its standard Mathlib instance gives F.Additive. Finally F.map_distinguished is exactly the displayed Triangle.mk conclusion.",
    "uses": [
     "lem-pur-quasi-isos-saturated-triangulated",
     "lem-pur-resolving-class-essential-constancy",
     "lem-pur-left-derived-kan-source-triangles",
     "lem-pur-localization-triangles-05r6",
-    "lem-pur-left-derived-from-kflat-class",
     "def-weil-triangulated-category"
    ],
    "elementary": false,
@@ -108,14 +102,12 @@
   }
  ],
  "proof_deps": [
-  "def-pur-sheaf-tensor-product",
   "def-weil-abstract-derived-category",
   "def-weil-sheaf-of-modules-category",
   "def-weil-triangulated-category",
   "lem-pc-kflat-resolution",
   "lem-pur-derived-change-of-rings",
   "lem-pur-homotopy-category-triangulated",
-  "lem-pur-left-derived-from-kflat-class",
   "lem-pur-left-derived-kan-source-triangles",
   "lem-pur-localization-triangles-05r6",
   "lem-pur-quasi-isos-saturated-triangulated",
@@ -125,7 +117,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 05SU(2), 05SE (LF part), 06XN and 06YY, with the termwise cone calculation from sites-modules.tex Tag 03EK"
+  "place": "Tags 05SU(2), 05SE (LF part), 06XN; sites-cohomology.tex Tag 06YY. T1 formalized the resolving-class argument using the supplied Kan pair and the independent-universe cochain model; uniqueness is terminal-object uniqueness after the shift equivalence."
  },
  "mathlib_searches": [
   {
@@ -256,9 +248,7 @@
  },
  "tool_uses": [
   "def-weil-abstract-derived-category",
-  "def-pur-sheaf-tensor-product",
   "lem-pur-derived-change-of-rings",
-  "lem-pur-left-derived-from-kflat-class",
   "lem-pur-right-kan-extension-coherent-shift",
   "lem-pur-quasi-isos-saturated-triangulated",
   "lem-pc-kflat-resolution",
@@ -293,5 +283,15 @@
   "group": "NM",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable statement, dependencies, sources, universes, edge cases, canonical shifts, uniqueness, docstrings, and records. Compilation reproduced cleanly through scompile.py. No defects found; branch head unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261019T034306-L-418251",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
