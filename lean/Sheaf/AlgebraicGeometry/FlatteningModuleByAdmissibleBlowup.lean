@@ -17,7 +17,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
 import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportPullback
-import WeilConjectures.AlgebraicGeometry.FinitePushforwardFiniteType
+import Sheaf.AlgebraicGeometry.FinitePushforwardFiniteType
 import Mathlib.RingTheory.FiniteStability
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber
 import Mathlib.RingTheory.FinitePresentation
@@ -33,7 +33,7 @@ import WeilConjectures.AlgebraicGeometry.AffineChartRelativeFlatCriterion
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.DimensionBaseChange
 import Mathlib.RingTheory.Spectrum.Prime.Chevalley
-import WeilConjectures.AlgebraicGeometry.ModuleFinitePresentationCokernel
+import Sheaf.AlgebraicGeometry.ModuleFinitePresentationCokernel
 import Sheaf.AlgebraicGeometry.GenericFreeBlowup
 import Sheaf.AlgebraicGeometry.ModuleAdmissibleBlowupCalculus
 import Sheaf.AlgebraicGeometry.ModuleStrictTransformAffinePushforward
@@ -44,7 +44,6 @@ import Sheaf.RingTheory.FreeSubtractionFlatness
 import Sheaf.TraceFormula.ElementaryModuleDevissage
 import Sheaf.TraceFormula.EtaleFlatteningDescent
 import Sheaf.TraceFormula.FlatFiniteTypeDensePresentation
-import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-!
 # Flattening a module by an admissible blowup

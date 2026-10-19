@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
@@ -19,7 +19,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 import Sheaf.AlgebraicGeometry.KoszulSelfExtDualExteriorConormal
 import Sheaf.AlgebraicGeometry.DeterminantDualPairing
 import Sheaf.AlgebraicGeometry.DeterminantDualPairingLocal
-import WeilConjectures.AlgebraicGeometry.AffineConormalFrame
+import Sheaf.AlgebraicGeometry.AffineConormalFrame
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRestrictIso
 import WeilConjectures.RingTheory.KoszulConormalBasis
 

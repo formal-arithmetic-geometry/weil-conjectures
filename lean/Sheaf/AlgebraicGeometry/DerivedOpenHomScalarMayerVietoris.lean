@@ -5,11 +5,11 @@ Authors: SHEAF group T3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedGlobalScalar
+public import Sheaf.AlgebraicGeometry.DerivedGlobalScalar
 import Sheaf.AlgebraicGeometry.OpenDerivedLocalizationAdjunction
 import Sheaf.AlgebraicGeometry.DerivedOpenUnionAdjunctionTriangle
 import Mathlib.CategoryTheory.Adjunction.Additive
-import WeilConjectures.Algebra.Homology.OpenHomTriangleRealization
+import Sheaf.Algebra.Homology.OpenHomTriangleRealization
 import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Scalar compatible Mayer--Vietoris on an open union

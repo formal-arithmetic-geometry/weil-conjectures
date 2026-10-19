@@ -12,7 +12,7 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import Sheaf.AlgebraicGeometry.CoherentFormalModuleLimitAnnihilators
 import Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineProjections
 import Sheaf.AlgebraicGeometry.IdealPowerProductZeroAffineCover
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Annihilation of formal kernels and cokernels on an affine cover
 

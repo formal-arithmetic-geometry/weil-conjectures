@@ -6,10 +6,10 @@ Authors: SHEAF group G2
 module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.Algebra.Homology.KFlat
 
-import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelSum
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 import Mathlib.Data.Int.Interval
 

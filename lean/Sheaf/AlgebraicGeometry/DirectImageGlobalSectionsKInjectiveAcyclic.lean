@@ -6,8 +6,8 @@ Authors: SHEAF group H1
 module
 
 public import Mathlib.AlgebraicGeometry.Scheme
-public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-public import WeilConjectures.Topology.RingedSpaceModuleCohomology
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.Topology.RingedSpaceModuleCohomology
 import Sheaf.AlgebraicGeometry.GlobalDerivedHom
 import Sheaf.AlgebraicGeometry.RingedSpaceDirectImageKInjectiveAcyclic
 import Sheaf.AlgebraicGeometry.GlobalSectionsPointUnitTransport

@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
 import Sheaf.CategoryTheory.MateIsoAlongEquivalences
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne
 import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
-import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.AlgebraicGeometry.GeometricStalkComparisonConstant
 
 /-!
@@ -40,11 +40,11 @@ private theorem boundedConstructible_compare
   constructor
   · rintro ⟨hc, a, b, hab, hvan⟩
     refine ⟨⟨⟨a, ?_⟩, ⟨b, ?_⟩⟩, fun q ↦
-      (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).1 (hc q)⟩
+      (Scheme.isConstructibleEtaleModuleSheaf_iff _).1 (hc q)⟩
     · exact (_root_.DerivedCategory.isGE_iff K a).2 fun i hi ↦ hvan i (Or.inl hi)
     · exact (_root_.DerivedCategory.isLE_iff K b).2 fun i hi ↦ hvan i (Or.inr hi)
   · rintro ⟨⟨⟨a, ha⟩, ⟨b, hb⟩⟩, hc⟩
-    refine ⟨fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2 (hc q),
+    refine ⟨fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff _).2 (hc q),
       min a b, max a b, min_le_max, fun i hi ↦ ?_⟩
     rcases hi with hi | hi
     · exact (_root_.DerivedCategory.isGE_iff _ a).1 ha i
@@ -131,7 +131,7 @@ private theorem constructible_reflect_cover
       ((upperStar (ModuleCat.{u + 1} Λ) q).obj G)) :
     Scheme.IsConstructibleEtaleModuleSheaf G := by
   classical
-  have hG' := (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp hG
+  have hG' := (Scheme.isConstructibleEtaleModuleSheaf_iff _).mp hG
   obtain ⟨S, hS⟩ := hG'.exists_stratification
   let e := IsUniversalHomeomorphism.homeomorph q
   have hlc (i : Fin S.n) : IsLocallyClosed (q '' S.stratum i) := by
@@ -153,7 +153,7 @@ private theorem constructible_reflect_cover
       immersion := ι
       isImmersion := hι
       range_immersion := hr }
-  apply (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
+  apply (Scheme.isConstructibleEtaleModuleSheaf_iff _).mpr
   refine ⟨T, fun i ↦ ?_⟩
   have : IsImmersion (ι i) := hι i
   let P := pullback (ι i) q
@@ -192,8 +192,8 @@ private theorem bounded_reflect_cover
   let c (i : ℤ) := (leftDerivedUpperStarHomologyFunctorIso
     (ModuleCat.{u + 1} Λ) q i).app K
   refine ⟨fun i ↦ constructible_reflect_cover Λ q _ ?_, ?_⟩
-  · have hc := (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp (hK.1 i)
-    exact (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
+  · have hc := (Scheme.isConstructibleEtaleModuleSheaf_iff _).mp (hK.1 i)
+    exact (Scheme.isConstructibleEtaleModuleSheaf_iff _).mpr
       (Scheme.IsConstructibleSheaf.of_iso (c i).symm
         (F := (_root_.DerivedCategory.homologyFunctor _ i).obj
           ((L((q)^*[ModuleCat.{u + 1} Λ])).obj K)))

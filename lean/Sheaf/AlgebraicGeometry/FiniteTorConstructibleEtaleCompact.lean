@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.FiniteFieldFiber
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
-public import WeilConjectures.CategoryTheory.CompactObject
+public import Sheaf.CategoryTheory.CompactObject
 
 import Sheaf.AlgebraicGeometry.FiniteRingEtaleCompactGenerators
 import Mathlib.Algebra.CharP.CharAndCard

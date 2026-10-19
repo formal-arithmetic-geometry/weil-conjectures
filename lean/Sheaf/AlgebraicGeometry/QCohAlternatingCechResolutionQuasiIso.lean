@@ -6,13 +6,13 @@ Authors: SHEAF groups D3 and T1
 module
 
 public import Sheaf.AlgebraicGeometry.AlternatingCechTotalComplex
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 import Sheaf.AlgebraicGeometry.AffineOpenSectionsResolutionQuasiIso
 import Mathlib.Algebra.Category.ModuleCat.Products
-import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
+import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 import Sheaf.Paper.QCohAcyclicDerivedSectionsComparison
 
 /-! # Čech totalization of a quasi-coherent resolution

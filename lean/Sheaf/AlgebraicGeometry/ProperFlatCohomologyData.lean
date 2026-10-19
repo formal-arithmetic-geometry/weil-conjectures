@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 import Sheaf.AlgebraicGeometry.FiniteAffineCechModelFlatOver
 import Sheaf.AlgebraicGeometry.FiniteAffineCechModelComparison
-import WeilConjectures.AlgebraicGeometry.FlatOverAffineOpenRestriction
+import Sheaf.AlgebraicGeometry.FlatOverAffineOpenRestriction
 import Mathlib.RingTheory.Flat.Stability
 import Mathlib.RingTheory.RingHom.Flat
 

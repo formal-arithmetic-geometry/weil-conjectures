@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.StrictPerfectStalkFiberData
 import Sheaf.AlgebraicGeometry.BoundedFreeStalkModelSpread
 import WeilConjectures.RingTheory.MinimalFreeModel

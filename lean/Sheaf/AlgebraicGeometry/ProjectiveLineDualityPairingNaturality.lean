@@ -11,8 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
 import Sheaf.AlgebraicGeometry.BoundaryExtensionComposition
 import Sheaf.AlgebraicGeometry.Modules.ExtYonedaAssociativity
 import Sheaf.AlgebraicGeometry.Modules.ExtYonedaFunctoriality
-import WeilConjectures.Topology.RingedSpaceModuleCohomology
+import Sheaf.Topology.RingedSpaceModuleCohomology
 import WeilConjectures.AlgebraicGeometry.Modules.Ext
+import WeilConjectures.Topology.RingedSpaceModuleCohomology
 
 /-!
 # Naturality and connecting-square compatibility of projective-line duality

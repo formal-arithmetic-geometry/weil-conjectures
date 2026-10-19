@@ -17,7 +17,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 import Sheaf.Paper.PurTwistSheafLocallyFree
 import WeilConjectures.CategoryTheory.Abelian.HorseshoeDeltaFunctor
 import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
-import WeilConjectures.CategoryTheory.Sites.EtaleTorsorH1Functoriality
+import Sheaf.CategoryTheory.Sites.EtaleTorsorH1Functoriality
 import Sheaf.CategoryTheory.SiteCohomologyPullback
 import WeilConjectures.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence

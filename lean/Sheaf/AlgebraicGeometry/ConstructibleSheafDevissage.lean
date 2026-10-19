@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.CategoryTheory.Subobject.Limits
 import all WeilConjectures.CategoryTheory.FiniteFiltrationRefinement
-import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.ConstructibleSheaf.GenericConstancy
 import WeilConjectures.SixFunctors.Finite.Exact
 import Mathlib.AlgebraicGeometry.Noetherian
@@ -202,7 +202,7 @@ theorem exists_constructible_sheaf_devissage
           ((lowerStarComp A V.closedComplement i).app _).symm
           (ih _ hlt (V.closedComplement ≫ i) rfl _)
   have : Scheme.IsConstructibleSheaf F :=
-    (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).mp hF
+    (Scheme.isConstructibleEtaleModuleSheaf_iff F).mp hF
   have hcl : P.filtrationClosure F :=
     P.filtrationClosure.prop_of_iso ((lowerStarId A X).app F)
       (hclosed ⊤ (𝟙 X) (by simp) F)

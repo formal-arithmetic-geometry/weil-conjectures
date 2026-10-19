@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.SmoothBaseChangeCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Sheaf.AlgebraicGeometry.OpenDirectImageFiniteCoefficients
-import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
 
@@ -76,10 +76,10 @@ theorem openImmersion_higherDirectImages_constructible_vanishing
           ((rightDerivedLowerStar (ModuleCat.{u + 1} Λ) j).obj
             ((_root_.DerivedCategory.singleFunctor _ 0).obj F))))) := by
   have : Scheme.IsConstructibleSheaf F :=
-    (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).1 hF
+    (Scheme.isConstructibleEtaleModuleSheaf_iff F).1 hF
   have hsingle : DerivedCategory.isBoundedConstructible Λ U
       ((_root_.DerivedCategory.singleFunctor _ 0).obj F) := by
-    refine ⟨fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2
+    refine ⟨fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff _).2
       ((DerivedCategory.boundedConstructible_singleFunctor_obj F 0).2 q),
       0, 0, le_rfl, fun q hq ↦ ?_⟩
     rcases hq with hq | hq

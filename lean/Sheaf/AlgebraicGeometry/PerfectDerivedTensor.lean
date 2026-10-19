@@ -1,9 +1,9 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.DerivedPullbackTensorProduct
-import WeilConjectures.AlgebraicGeometry.PerfectCommonAffineModels
+import Sheaf.AlgebraicGeometry.PerfectCommonAffineModels
 import Sheaf.AlgebraicGeometry.StrictPerfectTensorLocalComparison
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 import Mathlib.Data.Int.Interval

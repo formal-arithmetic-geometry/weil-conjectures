@@ -1,13 +1,13 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-public import WeilConjectures.Topology.RingedSpaceModuleCohomology
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.CategoryTheory.Triangulated.Functor
-import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedAdjunctionConstruction
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedAdjunctionConstruction
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedAdjunctionUnitCounit
-import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedTildeTriangulated
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedTildeTriangulated
 
 @[expose] public section
 

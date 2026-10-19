@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
 import Sheaf.AlgebraicGeometry.EtaleQcqsCofinalFiniteCoverings
 import WeilConjectures.AlgebraicGeometry.DirectImageSplitCoverProduct
 import WeilConjectures.ConstructibleSheaf.Pullback
-import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import Sheaf.AlgebraicGeometry.ConstructibleSurjectivePullback
 
@@ -192,7 +192,7 @@ theorem isConstructibleEtaleModuleSheaf_lowerStar_of_finite_etale
     (hG : IsConstructibleEtaleModuleSheaf G) :
     IsConstructibleEtaleModuleSheaf ((Etale.lowerStar (ModuleCat.{u + 1} Λ) h).obj G) := by
   classical
-  let : IsConstructibleSheaf G := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf G).mp hG
+  let : IsConstructibleSheaf G := (isConstructibleEtaleModuleSheaf_iff G).mp hG
   let F := (Etale.lowerStar (ModuleCat.{u + 1} Λ) h).obj G
   choose W g a hg ha J C i hJ hc hi e he using
     fun x : U ↦ finite_etale_etale_local_split h x
@@ -273,6 +273,6 @@ theorem isConstructibleEtaleModuleSheaf_lowerStar_of_finite_etale
       exact IsConstructibleSheaf.of_iso
         ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) (Limits.Sigma.ι d j) q).app F)
   apply (isConstructibleEtaleModuleSheaf_iff_surjective_pullback q F).mpr
-  exact (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr hq
+  exact (isConstructibleEtaleModuleSheaf_iff _).mpr hq
 
 end AlgebraicGeometry.Scheme

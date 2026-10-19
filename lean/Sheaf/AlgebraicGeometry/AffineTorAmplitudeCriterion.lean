@@ -12,7 +12,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatRe
 public import Mathlib.RingTheory.Flat.CategoryTheory
 import WeilConjectures.Algebra.Homology.TorAmplitudeFlatModel
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
-import WeilConjectures.AlgebraicGeometry.AffineDerivedTildeHomologyComparison
+import Sheaf.AlgebraicGeometry.AffineDerivedTildeHomologyComparison
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde

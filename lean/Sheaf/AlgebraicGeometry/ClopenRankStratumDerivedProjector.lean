@@ -6,13 +6,12 @@ Authors: SHEAF group S4
 module
 
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
-public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import WeilConjectures.AlgebraicGeometry.LocallyRankedExteriorComplex
+public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
 import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 import Mathlib.CategoryTheory.Idempotents.Basic
 import Sheaf.AlgebraicGeometry.ClopenRankStratumModuleProjector
-public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 
 /-! # The derived summand cut out by a clopen rank stratum
 

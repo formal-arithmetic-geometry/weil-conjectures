@@ -5,7 +5,7 @@ Authors: SHEAF groups T1 and P3
 -/
 module
 
-public import WeilConjectures.Topology.RingedSpaceModuleCohomology
+public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 

@@ -8,7 +8,7 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import Sheaf.AlgebraicGeometry.AffineFormalMapPresentation
 import Sheaf.AlgebraicGeometry.AffineCompletionBaseChangeUnit
 import Sheaf.AlgebraicGeometry.AffineMapAnnihilationSheafification
-import WeilConjectures.RingTheory.FormalGlueingIsogeny
+import Sheaf.RingTheory.FormalGlueingIsogeny
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import Mathlib.RingTheory.AdicCompletion.Completeness

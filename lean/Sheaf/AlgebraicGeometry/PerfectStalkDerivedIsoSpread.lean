@@ -5,7 +5,7 @@ Authors: SHEAF group K2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.PerfectStalkDerivedHomLift
 import Sheaf.AlgebraicGeometry.PerfectStalkQuasiIsoDetection

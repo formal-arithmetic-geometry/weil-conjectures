@@ -5,14 +5,14 @@ Authors: SHEAF group N1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.DerivedInternalHom
-public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-public import WeilConjectures.Topology.RingedSpaceModuleCohomology
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
-import WeilConjectures.Topology.PointModuleEvaluationEquivalence
+import Sheaf.Topology.PointModuleEvaluationEquivalence
 
 /-!
 # Global derived Hom on a scheme

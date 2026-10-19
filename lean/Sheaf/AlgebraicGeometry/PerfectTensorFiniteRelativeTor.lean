@@ -5,10 +5,10 @@ Authors: SHEAF group M1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.FiniteTorDimensionOver
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.StrictPerfectTensorRelativeTorBound
 import Sheaf.Algebra.Homology.KFlatResolution
 

@@ -5,16 +5,15 @@ Authors: SHEAF group J1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 import Mathlib.Algebra.Category.Grp.Zero
-import WeilConjectures.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
+import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
 import Sheaf.AlgebraicGeometry.TruncationDerivedLimit
 import Sheaf.CategoryTheory.Triangulated.DerivedFunctorDerivedLimit
-import Sheaf.Paper.PQFCohomology
 
 /-! # Reconstruction of quasi-coherent complexes by lower truncations
 

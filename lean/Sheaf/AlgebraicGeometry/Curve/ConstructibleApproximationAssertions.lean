@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 import Sheaf.AlgebraicGeometry.ConstructibleSubobjectPresentation
 import WeilConjectures.AlgebraicGeometry.ConstantModuleSheavesForgetColimits
-import WeilConjectures.AlgebraicGeometry.EtaleDirectedCohomologyColimit
+import Sheaf.AlgebraicGeometry.EtaleDirectedCohomologyColimit
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import Mathlib.CategoryTheory.Presentable.Directed
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian

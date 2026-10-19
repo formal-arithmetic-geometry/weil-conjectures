@@ -6,16 +6,16 @@ Authors: SHEAF group G2
 module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.Coherent
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Sheaf.AlgebraicGeometry.FiniteRetractTensorComplexTerms
 import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
 import Sheaf.AlgebraicGeometry.DerivedTensorOpenRestrictionUniverses
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
-import WeilConjectures.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
-import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelSum
+import Sheaf.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 
 /-! # Local cohomology calculation for a strictly perfect tensor

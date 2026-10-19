@@ -4,13 +4,13 @@ Authors: SHEAF group U3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import Sheaf.AlgebraicGeometry.AffineSinglePushforwardUnitIso
-import WeilConjectures.AlgebraicGeometry.SingleRightDerivedExactComposition
+import Sheaf.AlgebraicGeometry.SingleRightDerivedExactComposition
 import WeilConjectures.AlgebraicGeometry.ExactDerivedAdjunctionSingleCounit
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 

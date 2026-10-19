@@ -6,7 +6,7 @@ Authors: SHEAF group G3
 module
 
 public import Sheaf.Paper.CechComplexAugmentations
-import WeilConjectures.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
+import Sheaf.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
 import Mathlib.Algebra.Category.ModuleCat.AB
 import Mathlib.Algebra.Homology.Functor
 

@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.AlgebraicGeometry.NoetherianQuasicoherentSubmodules
+import Sheaf.AlgebraicGeometry.NoetherianQuasicoherentSubmodules
 import Sheaf.AlgebraicGeometry.FormalCompletionFullyFaithfulProper
 import Sheaf.AlgebraicGeometry.GrothendieckExistenceProjective
 import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence

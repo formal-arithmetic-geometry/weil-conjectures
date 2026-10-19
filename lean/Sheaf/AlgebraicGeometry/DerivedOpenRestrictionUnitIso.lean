@@ -6,7 +6,7 @@ Authors: SHEAF group K3
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisMaps
-import WeilConjectures.Algebra.Homology.OpenExtensionRestrictionIso
+import Sheaf.Algebra.Homology.OpenExtensionRestrictionIso
 import Mathlib.CategoryTheory.Adjunction.Triple
 import Mathlib.CategoryTheory.Localization.Adjunction
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor

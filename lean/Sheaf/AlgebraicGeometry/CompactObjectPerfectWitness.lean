@@ -1,8 +1,8 @@
 module
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSums
-public import WeilConjectures.CategoryTheory.CompactObject
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
+public import Sheaf.CategoryTheory.CompactObject
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.DerivedQCohCompactRepresentatives
 @[expose] public section

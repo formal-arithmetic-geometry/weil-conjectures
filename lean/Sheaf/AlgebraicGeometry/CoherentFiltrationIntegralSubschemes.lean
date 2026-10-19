@@ -5,17 +5,17 @@ Authors: SHEAF group F1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Subobject.Limits
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelSum
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
 import Sheaf.AlgebraicGeometry.CoherentSupportUnionExactSequence
-import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
+import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 
-import WeilConjectures.AlgebraicGeometry.CoherentIntegralFiltrationExtension
+import Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationExtension
 import Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationAdicReduction
 import Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationGenericStep
 import Mathlib.Topology.Sheaves.Abelian

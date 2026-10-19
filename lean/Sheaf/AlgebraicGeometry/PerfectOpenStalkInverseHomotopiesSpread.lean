@@ -5,11 +5,10 @@ Authors: SHEAF group M3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.PerfectOpenStalkHomotopySpread
-import WeilConjectures.AlgebraicGeometry.StalkInternalHomFinitePresentation
-public import Sheaf.Paper.DerivedHomMayerVietoris
+import Sheaf.AlgebraicGeometry.StalkInternalHomFinitePresentation
 
 /-! # Spreading two inverse homotopies
 

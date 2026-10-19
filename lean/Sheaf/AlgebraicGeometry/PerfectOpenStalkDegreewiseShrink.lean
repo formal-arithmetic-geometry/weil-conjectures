@@ -5,13 +5,12 @@ Authors: SHEAF group V3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
-import WeilConjectures.AlgebraicGeometry.PerfectOpenStalkRetractHomEquality
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
+import Sheaf.AlgebraicGeometry.PerfectOpenStalkRetractHomEquality
 import Sheaf.AlgebraicGeometry.OpenModuleStalkRestrictionComparison
 import Mathlib.Data.Int.Interval
 import Mathlib.AlgebraicGeometry.AffineScheme
-public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Killing the differential defects of a degreewise family
 

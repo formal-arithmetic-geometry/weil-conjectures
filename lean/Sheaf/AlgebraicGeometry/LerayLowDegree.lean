@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.LeraySpectralSequence
-public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
+public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 public import Mathlib.Algebra.Homology.ExactSequence
 import Sheaf.CategoryTheory.LerayFiveTerm
 import Sheaf.Paper.PQFCohomology

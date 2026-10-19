@@ -6,11 +6,11 @@ Authors: SHEAF group NA
 module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
-public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
+public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Sheaf.AlgebraicGeometry.CanonicalCoherentEtaleComparison
 public import Mathlib.AlgebraicGeometry.Scheme
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.Paper.PQFCohomology
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek

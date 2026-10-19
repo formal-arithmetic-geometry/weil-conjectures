@@ -29,7 +29,7 @@ import Sheaf.SmoothPurity.TensorMateEtalePrecomp
 import Sheaf.AlgebraicGeometry.DiagonalRegularPureCodimension
 import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
 import Sheaf.AlgebraicGeometry.EtaleSupportMapCompatibility
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
 import Sheaf.AlgebraicGeometry.AmbientAffineTranslationTrace

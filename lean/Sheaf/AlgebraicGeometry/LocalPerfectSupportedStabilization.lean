@@ -5,12 +5,12 @@ Authors: SHEAF group P3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import all Sheaf.AlgebraicGeometry.PerfectTwoOutOfThree
-import all WeilConjectures.AlgebraicGeometry.PerfectCommonAffineModels
-import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
-import WeilConjectures.AlgebraicGeometry.SupportedQCohTriangulated
+import all Sheaf.AlgebraicGeometry.PerfectCommonAffineModels
+import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
+import Sheaf.AlgebraicGeometry.SupportedQCohTriangulated
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.Algebra.Category.Grp.Zero
 import Mathlib.Topology.Sheaves.Abelian

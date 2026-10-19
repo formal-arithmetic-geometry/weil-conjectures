@@ -5,13 +5,13 @@ Authors: SHEAF group C1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.AlgebraicGeometry.SupportedQCohTriangulated
+import Sheaf.AlgebraicGeometry.SupportedQCohTriangulated
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
-import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 
 /-! # Support and quasi-coherence of the derived open-unit cone
 Source: Stacks Project, Tag 09IR, proof of lemma-orthogonal-koszul-complex;

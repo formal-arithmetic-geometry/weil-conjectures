@@ -8,7 +8,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 public import Sheaf.AlgebraicGeometry.MixedGlobalExtension
 public import Sheaf.AlgebraicGeometry.MixedGlobalSectionsDirectImageIso
-import WeilConjectures.AlgebraicGeometry.MixedAffineSectionsUnderivedChartModel
+import Sheaf.AlgebraicGeometry.MixedAffineSectionsUnderivedChartModel
 import Sheaf.AlgebraicGeometry.MixedAffineSectionsChartModelFactorization
 
 /-! # Invertibility of the mixed affine comparison on K-flat models

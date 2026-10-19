@@ -8,14 +8,14 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 import Sheaf.AlgebraicGeometry.FiniteAffinePushforwardIdealDevissage
 import Sheaf.AlgebraicGeometry.CoherentPropertyDevissageIntegralSubschemes
 import Sheaf.Paper.FiniteSurjectiveCoherentGenericSupport
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
-import WeilConjectures.AlgebraicGeometry.SerreCriterionAffineness
+import Sheaf.AlgebraicGeometry.SerreCriterionAffineness
 import Sheaf.Paper.PQFCohomology
 
 /-!

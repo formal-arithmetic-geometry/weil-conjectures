@@ -8,8 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
-public import WeilConjectures.AlgebraicGeometry.PseudoCoherentComplex
+public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 import Sheaf.AlgebraicGeometry.ProperFlatSingleOpenNoetherianComparison
 import Sheaf.AlgebraicGeometry.NoetherianProperBoundedCoherentImage
 import Sheaf.AlgebraicGeometry.NoetherianBoundedCoherentPseudoCoherent
@@ -17,11 +17,11 @@ import Sheaf.AlgebraicGeometry.AffinePseudoCoherentLift
 import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import Sheaf.AlgebraicGeometry.BoundedComplexTensorProperSupportBound
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.DerivedDirectImageOpenRestriction
-import WeilConjectures.AlgebraicGeometry.PerfectComplex
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import Sheaf.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.PerfectTensorBoundedCoherent
-import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 
 /-! # Pseudo-coherence of open restrictions of a proper relatively flat direct image
 

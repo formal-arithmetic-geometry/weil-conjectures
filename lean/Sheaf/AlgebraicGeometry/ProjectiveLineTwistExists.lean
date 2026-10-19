@@ -7,9 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import WeilConjectures.Topology.GlueSheavesOfModules
+import Sheaf.Topology.GlueSheavesOfModules
 import Sheaf.AlgebraicGeometry.ProjectiveLineTwistGluing
-import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-!
 # Existence and uniqueness of twists on the projective line

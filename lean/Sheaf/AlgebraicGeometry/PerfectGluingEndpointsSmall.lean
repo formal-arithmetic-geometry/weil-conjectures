@@ -5,7 +5,7 @@ Authors: SHEAF group Q3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectGluingEndpointProperties
+public import Sheaf.AlgebraicGeometry.PerfectGluingEndpointProperties
 import Sheaf.AlgebraicGeometry.PerfectRestrictionClassesSmall
 
 /-! # Small endpoint families for perfect gluing

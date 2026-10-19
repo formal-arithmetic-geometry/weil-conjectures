@@ -5,7 +5,7 @@ Authors: SHEAF group U1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
@@ -15,9 +15,9 @@ import Sheaf.AlgebraicGeometry.DerivedQCohPerfectGeneration
 import Sheaf.AlgebraicGeometry.PerfectObjectCompact
 import Sheaf.AlgebraicGeometry.ProperFlatDerivedDirectImagePerfect
 import Sheaf.AlgebraicGeometry.PerfectComplexRepresentatives
-import WeilConjectures.AlgebraicGeometry.DerivedQCohCompactGenerationCore
+import Sheaf.AlgebraicGeometry.DerivedQCohCompactGenerationCore
 import Sheaf.AlgebraicGeometry.SupportedPerfectGenerator
-import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
+import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Mathlib.CategoryTheory.Adjunction.Limits
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products

@@ -5,13 +5,13 @@ Authors: SHEAF group U1
 -/
 module
 
-public import WeilConjectures.CategoryTheory.SiteExtensionByZeroPresheaf
+public import Sheaf.CategoryTheory.SiteExtensionByZeroPresheaf
 public import Sheaf.Topology.ClosedImmersionPushforwardCohomology
 public import Mathlib.Topology.NoetherianSpace
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import WeilConjectures.Topology.SliceOpenClosedShortExact
-import WeilConjectures.Topology.SliceOpenExtensionClosureUnit
-import WeilConjectures.Topology.AbelianOpenExtensionByZeroStalks
+import Sheaf.Topology.SliceOpenClosedShortExact
+import Sheaf.Topology.SliceOpenExtensionClosureUnit
+import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
 import WeilConjectures.Topology.AbelianSheafShortExactStalkwise
 import WeilConjectures.Topology.ClosedPushforwardAbelianStalks
 import WeilConjectures.Topology.InverseImageStalk

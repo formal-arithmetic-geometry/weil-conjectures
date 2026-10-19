@@ -6,7 +6,7 @@ Authors: SHEAF group P3
 module
 
 public import Sheaf.AlgebraicGeometry.FormalFunctionsFinitePullback
-import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoicesExist
+import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoicesExist
 import WeilConjectures.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
 import Sheaf.AlgebraicGeometry.FormalFunctionsFiniteOpenFactorization
 

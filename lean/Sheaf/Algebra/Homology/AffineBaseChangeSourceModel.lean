@@ -5,7 +5,7 @@ Authors: SHEAF group X2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.AffineDerivedCohomologyPresentation
+public import Sheaf.AlgebraicGeometry.AffineDerivedCohomologyPresentation
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Sheaf.Algebra.Homology.AffineBaseChangeIntoPullback
 import Sheaf.Algebra.Homology.AffineBaseChangeTildeSourceModel

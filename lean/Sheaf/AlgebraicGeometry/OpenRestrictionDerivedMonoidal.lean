@@ -5,7 +5,7 @@ Authors: SHEAF group H4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalModel
 import Sheaf.AlgebraicGeometry.SchemeDerivedStandardEquivalenceMonoidal
 import Sheaf.AlgebraicGeometry.DerivedPullbackAcrossUniversesLeftDerived

@@ -5,7 +5,7 @@ Authors: SHEAF group T1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
@@ -14,7 +14,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.AlgebraicGeometry.ProperFlatAffineCechPerfectModel
-import WeilConjectures.AlgebraicGeometry.AffineFlatModuleTensorFlat
+import Sheaf.AlgebraicGeometry.AffineFlatModuleTensorFlat
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import all Sheaf.AlgebraicGeometry.PerfectCohomologyFromGeometric
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle

@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Abelian.Basic
 public import Mathlib.CategoryTheory.Whiskering
 import Sheaf.AlgebraicGeometry.ClosedImmersionFormalKernelComparison
 import Sheaf.AlgebraicGeometry.ClosedImmersionIdealPowerAnnihilation
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Annihilation of a transported formal kernel
 

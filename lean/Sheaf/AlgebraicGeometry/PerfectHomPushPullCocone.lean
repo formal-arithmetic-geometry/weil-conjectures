@@ -6,12 +6,12 @@ Authors: SHEAF group A4
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectHomTransport
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
 import Sheaf.AlgebraicGeometry.DerivedAdjoint
 import Sheaf.AlgebraicGeometry.PerfectHomStageColimit
 import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
-import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
+import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
 
 /-! # Representing the stage pullback Hom functors on the original scheme
 

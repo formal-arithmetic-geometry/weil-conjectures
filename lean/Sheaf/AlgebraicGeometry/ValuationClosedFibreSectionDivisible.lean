@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.AlgebraicGeometry.ValuationClosedFibreSectionVanishing
-import WeilConjectures.AlgebraicGeometry.PrincipalQuotientUnitKernel
+import Sheaf.AlgebraicGeometry.PrincipalQuotientUnitKernel
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 

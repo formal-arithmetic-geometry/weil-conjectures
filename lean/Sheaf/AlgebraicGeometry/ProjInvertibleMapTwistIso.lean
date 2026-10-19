@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.UnitToTwist
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
-import WeilConjectures.AlgebraicGeometry.ProjGradedModuleSheafExists
+import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists
 import WeilConjectures.AlgebraicGeometry.NonvanishingSectionTrivializes
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction

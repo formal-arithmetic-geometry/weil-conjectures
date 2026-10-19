@@ -11,7 +11,7 @@ public import Sheaf.Paper.LocalFrobeniusTrace
 public import Mathlib.LinearAlgebra.Dual.Defs
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LinearAlgebra
 
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeDualPullback
 import Sheaf.Paper.PointFibreDerivedTensor
 import Sheaf.Paper.SfWeilSheafComplex

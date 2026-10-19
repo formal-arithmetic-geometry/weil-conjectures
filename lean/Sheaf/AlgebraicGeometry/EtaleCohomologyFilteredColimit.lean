@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleSectionsFilteredColimit
 import WeilConjectures.AlgebraicGeometry.EtaleFilteredInjectiveAcyclic
 import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.FilteredColimitSuccessor
-import WeilConjectures.AlgebraicGeometry.EtaleDirectedCohomologyColimit
+import Sheaf.AlgebraicGeometry.EtaleDirectedCohomologyColimit
 
 /-!
 # Filtered colimits of etale cohomology

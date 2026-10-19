@@ -5,13 +5,13 @@ Authors: SHEAF group R1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.AffinePerfectModuleModel
+public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
 public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatRestriction
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
-import WeilConjectures.AlgebraicGeometry.AffineLocalizedSiteDerivedTransport
+import Sheaf.AlgebraicGeometry.AffineLocalizedSiteDerivedTransport
 import Sheaf.AlgebraicGeometry.DerivedTensorOpenRestrictionUniverses
 import Sheaf.AlgebraicGeometry.OpenRestrictionKFlatModel
 import Sheaf.AlgebraicGeometry.OpenRestrictionTotalTensor

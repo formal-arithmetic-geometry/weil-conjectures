@@ -9,9 +9,9 @@ public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionDetectsIso
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionDetectsIso
 import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionComparison
-import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 
 /-! # Target locality of the single-complex criterion
 

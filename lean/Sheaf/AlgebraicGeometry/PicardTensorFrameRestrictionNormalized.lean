@@ -1,6 +1,6 @@
 module
-public import WeilConjectures.AlgebraicGeometry.PicardTensorFrameCoordinates
-public import WeilConjectures.AlgebraicGeometry.PicardOrdinaryModelCycles
+public import Sheaf.AlgebraicGeometry.PicardTensorFrameCoordinates
+public import Sheaf.AlgebraicGeometry.PicardOrdinaryModelCycles
 public import Sheaf.AlgebraicGeometry.PicardDerivedModelSections
 @[expose] public section
 set_option autoImplicit false
@@ -18,15 +18,15 @@ private lemma unit_comp {X Y Z : Scheme.{v}} (i : X ⟶ Y) (g : Y ⟶ Z)
         (Classical.choose (exists_tensorPullbackAdjunction i)))
       (Classical.choose (exists_tensorPullbackAdjunction g'))).symm
         (pushforwardComp i g ≪≫ pushforwardCongr h)).hom.app (Modules.unit Z) ≫
-      (tensorPullback i).map (picardTensorFrameUnitIso g).hom ≫
-        (picardTensorFrameUnitIso i).hom = (picardTensorFrameUnitIso g').hom := by
+      (tensorPullback i).map (picardTensorUnitIsoFrame g).hom ≫
+        (picardTensorUnitIsoFrame i).hom = (picardTensorUnitIsoFrame g').hom := by
   let ag := Classical.choose (exists_tensorPullbackAdjunction g)
   let ai := Classical.choose (exists_tensorPullbackAdjunction i)
   let ag' := Classical.choose (exists_tensorPullbackAdjunction g')
   let b := pushforwardComp i g ≪≫ pushforwardCongr h
   let A := (conjugateIsoEquiv (ag.comp ai) ag').symm b
-  let u := (tensorPullback i).map (picardTensorFrameUnitIso g).hom ≫
-    (picardTensorFrameUnitIso i).hom
+  let u := (tensorPullback i).map (picardTensorUnitIsoFrame g).hom ≫
+    (picardTensorUnitIsoFrame i).hom
   change A.hom.app _ ≫ u = _
   apply (ag'.homEquiv _ _).injective
   have ht : ag'.homEquiv _ _ (A.hom.app _ ≫ u) =
@@ -38,21 +38,21 @@ private lemma unit_comp {X Y Z : Scheme.{v}} (i : X ⟶ Y) (g : Y ⟶ Z)
       ← Category.assoc]
     rw [Adjunction.homEquiv_unit]
   rw [ht]
-  have hg : ag.homEquiv _ _ (picardTensorFrameUnitIso g).hom =
+  have hg : ag.homEquiv _ _ (picardTensorUnitIsoFrame g).hom =
       SheafOfModules.unitToPushforwardObjUnit g.toRingCatSheafHom :=
     (ag.homEquiv _ _).apply_symm_apply _
-  have hi : ai.homEquiv _ _ (picardTensorFrameUnitIso i).hom =
+  have hi : ai.homEquiv _ _ (picardTensorUnitIsoFrame i).hom =
       SheafOfModules.unitToPushforwardObjUnit i.toRingCatSheafHom :=
     (ai.homEquiv _ _).apply_symm_apply _
-  have hg' : ag'.homEquiv _ _ (picardTensorFrameUnitIso g').hom =
+  have hg' : ag'.homEquiv _ _ (picardTensorUnitIsoFrame g').hom =
       SheafOfModules.unitToPushforwardObjUnit g'.toRingCatSheafHom :=
     (ag'.homEquiv _ _).apply_symm_apply _
   rw [hg']
   dsimp only [u]
   rw [Adjunction.comp_homEquiv]
   change ag.homEquiv _ _ (ai.homEquiv _ _
-    ((tensorPullback i).map (picardTensorFrameUnitIso g).hom ≫
-      (picardTensorFrameUnitIso i).hom)) ≫ b.hom.app _ = _
+    ((tensorPullback i).map (picardTensorUnitIsoFrame g).hom ≫
+      (picardTensorUnitIsoFrame i).hom)) ≫ b.hom.app _ = _
   rw [Adjunction.homEquiv_naturality_left, hi,
     Adjunction.homEquiv_naturality_right, hg]
   subst g'
@@ -68,17 +68,17 @@ private lemma unit_comp {X Y Z : Scheme.{v}} (i : X ⟶ Y) (g : Y ⟶ Z)
 
 private lemma tensorUnit_conj_app_top {X Y : Scheme.{v}} (g : X ⟶ Y)
     (f : Modules.unit Y ⟶ Modules.unit Y) :
-    Hom.app ((picardTensorFrameUnitIso g).inv ≫ (tensorPullback g).map f ≫
-        (picardTensorFrameUnitIso g).hom) ⊤ (1 : Γ(X, ⊤)) =
+    Hom.app ((picardTensorUnitIsoFrame g).inv ≫ (tensorPullback g).map f ≫
+        (picardTensorUnitIsoFrame g).hom) ⊤ (1 : Γ(X, ⊤)) =
       g.appTop (Hom.app f ⊤ (1 : Γ(Y, ⊤))) := by
   let adj := Classical.choose (exists_tensorPullbackAdjunction g)
-  set F := (picardTensorFrameUnitIso g).inv ≫ (tensorPullback g).map f ≫
-    (picardTensorFrameUnitIso g).hom
-  have hF : (tensorPullback g).map f ≫ (picardTensorFrameUnitIso g).hom =
-      (picardTensorFrameUnitIso g).hom ≫ F := by simp [F]
+  set F := (picardTensorUnitIsoFrame g).inv ≫ (tensorPullback g).map f ≫
+    (picardTensorUnitIsoFrame g).hom
+  have hF : (tensorPullback g).map f ≫ (picardTensorUnitIsoFrame g).hom =
+      (picardTensorUnitIsoFrame g).hom ≫ F := by simp [F]
   have key := congrArg (adj.homEquiv _ _) hF
   rw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_right] at key
-  have h2 : adj.homEquiv _ _ (picardTensorFrameUnitIso g).hom =
+  have h2 : adj.homEquiv _ _ (picardTensorUnitIsoFrame g).hom =
       SheafOfModules.unitToPushforwardObjUnit g.toRingCatSheafHom :=
     (adj.homEquiv _ _).apply_symm_apply _
   rw [h2] at key
@@ -134,32 +134,32 @@ theorem picardTensorFrame_restriction_normalized (W : Scheme.{v}) (w : W) (U : W
     (Classical.choose (Modules.exists_tensorPullbackAdjunction s'))).symm
       (Modules.pushforwardComp i s ≪≫ Modules.pushforwardCongr hs)
   have ht0 : At.hom.app (Modules.unit W) ≫
-      (Modules.tensorPullback i).map (Modules.picardTensorFrameUnitIso t).hom ≫
-        (Modules.picardTensorFrameUnitIso i).hom =
-      (Modules.picardTensorFrameUnitIso t').hom :=
+      (Modules.tensorPullback i).map (Modules.picardTensorUnitIsoFrame t).hom ≫
+        (Modules.picardTensorUnitIsoFrame i).hom =
+      (Modules.picardTensorUnitIsoFrame t').hom :=
     Modules.unit_comp i t t' (picardResidueLift_comp W w V hwV)
   have hs0 : As.hom.app (Modules.unit U.toScheme) ≫
-      (Modules.tensorPullback i).map (Modules.picardTensorFrameUnitIso s).hom ≫
-        (Modules.picardTensorFrameUnitIso i).hom =
-      (Modules.picardTensorFrameUnitIso s').hom :=
+      (Modules.tensorPullback i).map (Modules.picardTensorUnitIsoFrame s).hom ≫
+        (Modules.picardTensorUnitIsoFrame i).hom =
+      (Modules.picardTensorUnitIsoFrame s').hom :=
     Modules.unit_comp i s s' hs
-  have ht1 : (Modules.picardTensorFrameUnitIso t').inv ≫ At.hom.app (Modules.unit W) =
-      (Modules.picardTensorFrameUnitIso i).inv ≫
-        (Modules.tensorPullback i).map (Modules.picardTensorFrameUnitIso t).inv := by
+  have ht1 : (Modules.picardTensorUnitIsoFrame t').inv ≫ At.hom.app (Modules.unit W) =
+      (Modules.picardTensorUnitIsoFrame i).inv ≫
+        (Modules.tensorPullback i).map (Modules.picardTensorUnitIsoFrame t).inv := by
     apply (cancel_mono ((Modules.tensorPullback i).map
-      (Modules.picardTensorFrameUnitIso t).hom ≫ (Modules.picardTensorFrameUnitIso i).hom)).mp
+      (Modules.picardTensorUnitIsoFrame t).hom ≫ (Modules.picardTensorUnitIsoFrame i).hom)).mp
     simp only [Category.assoc]
     rw [ht0]
     have hc := ((Modules.tensorPullback i).mapIso
-      (Modules.picardTensorFrameUnitIso t)).inv_hom_id
+      (Modules.picardTensorUnitIsoFrame t)).inv_hom_id
     dsimp only [Functor.mapIso_hom, Functor.mapIso_inv] at hc
     rw [reassoc_of% hc, Iso.inv_hom_id]
     simp only [Iso.inv_hom_id]
   have hs1 : As.inv.app ((Modules.overEquiv U).functor.obj (K.X 0)) ≫
-      (Modules.tensorPullback s').map q.hom ≫ (Modules.picardTensorFrameUnitIso s').hom =
+      (Modules.tensorPullback s').map q.hom ≫ (Modules.picardTensorUnitIsoFrame s').hom =
       (Modules.tensorPullback i).map ((Modules.tensorPullback s).map q.hom) ≫
-        (Modules.tensorPullback i).map (Modules.picardTensorFrameUnitIso s).hom ≫
-          (Modules.picardTensorFrameUnitIso i).hom := by
+        (Modules.tensorPullback i).map (Modules.picardTensorUnitIsoFrame s).hom ≫
+          (Modules.picardTensorUnitIsoFrame i).hom := by
     apply (cancel_epi (As.hom.app _)).mp
     simp only [Iso.hom_inv_id_app_assoc]
     have hnat := As.hom.naturality q.hom
@@ -167,22 +167,22 @@ theorem picardTensorFrame_restriction_normalized (W : Scheme.{v}) (w : W) (U : W
     rw [← reassoc_of% hnat]
     change _ = (Modules.tensorPullback s').map q.hom ≫
       (As.hom.app _ ≫ (Modules.tensorPullback i).map
-        (Modules.picardTensorFrameUnitIso s).hom ≫ (Modules.picardTensorFrameUnitIso i).hom)
+        (Modules.picardTensorUnitIsoFrame s).hom ≫ (Modules.picardTensorUnitIsoFrame i).hom)
     rw [hs0]
-  let n := (Modules.picardTensorFrameUnitIso t).inv ≫ f ≫
-    (Modules.tensorPullback s).map q.hom ≫ (Modules.picardTensorFrameUnitIso s).hom
-  have hn : (Modules.picardTensorFrameUnitIso t').inv ≫
+  let n := (Modules.picardTensorUnitIsoFrame t).inv ≫ f ≫
+    (Modules.tensorPullback s).map q.hom ≫ (Modules.picardTensorUnitIsoFrame s).hom
+  have hn : (Modules.picardTensorUnitIsoFrame t').inv ≫
       (At.hom.app _ ≫ (Modules.tensorPullback i).map f ≫ As.inv.app _) ≫
-        (Modules.tensorPullback s').map q.hom ≫ (Modules.picardTensorFrameUnitIso s').hom =
-      (Modules.picardTensorFrameUnitIso i).inv ≫ (Modules.tensorPullback i).map n ≫
-        (Modules.picardTensorFrameUnitIso i).hom := by
+        (Modules.tensorPullback s').map q.hom ≫ (Modules.picardTensorUnitIsoFrame s').hom =
+      (Modules.picardTensorUnitIsoFrame i).inv ≫ (Modules.tensorPullback i).map n ≫
+        (Modules.picardTensorUnitIsoFrame i).hom := by
     simp only [Category.assoc]
     rw [hs1, ← Category.assoc, ht1]
     simp only [n, Functor.map_comp, Category.assoc]
   change Modules.Hom.app
-    ((Modules.picardTensorFrameUnitIso t').inv ≫
+    ((Modules.picardTensorUnitIsoFrame t').inv ≫
       (At.hom.app _ ≫ (Modules.tensorPullback i).map f ≫ As.inv.app _) ≫
-        (Modules.tensorPullback s').map q.hom ≫ (Modules.picardTensorFrameUnitIso s').hom)
+        (Modules.tensorPullback s').map q.hom ≫ (Modules.picardTensorUnitIsoFrame s').hom)
     ⊤ (1 : Γ(Spec (W.residueField w), ⊤)) =
       i.appTop (Modules.Hom.app n ⊤ (1 : Γ(V.toScheme, ⊤)))
   rw [hn]

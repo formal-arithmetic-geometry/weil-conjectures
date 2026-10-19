@@ -5,9 +5,9 @@ Authors: SHEAF groups G1 and B2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PseudoCoherentComplex
+public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 public import Mathlib.AlgebraicGeometry.AffineScheme
-import WeilConjectures.AlgebraicGeometry.PseudoCoherentQCoh
+import Sheaf.AlgebraicGeometry.PseudoCoherentQCoh
 import Sheaf.AlgebraicGeometry.AffineOpenLocalizedModel
 import Sheaf.RingTheory.FiniteLocalizationFreeModel
 import Sheaf.AlgebraicGeometry.QcOpenDerivedLift

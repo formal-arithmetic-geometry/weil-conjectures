@@ -5,12 +5,12 @@ Authors: SHEAF group E3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PseudoCoherentComplex
+public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.Localization.Away.Basic
-import WeilConjectures.AlgebraicGeometry.AffinePseudoCoherentPrincipalSheafModel
+import Sheaf.AlgebraicGeometry.AffinePseudoCoherentPrincipalSheafModel
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 
 /-! # A module model on one principal open

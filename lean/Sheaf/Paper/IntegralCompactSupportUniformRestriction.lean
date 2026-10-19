@@ -19,7 +19,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
 import Sheaf.Paper.CompletedConstantSheafReduction
 import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
 import Sheaf.Paper.CompletedTowerDirectImage
-import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
+import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Mathlib.Algebra.Category.ModuleCat.Ulift
 import Mathlib.RingTheory.KrullDimension.Polynomial

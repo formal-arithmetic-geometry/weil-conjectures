@@ -11,7 +11,7 @@ import Sheaf.AlgebraicGeometry.FiniteTorConstructibleEtaleCompact
 import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian
 import Sheaf.AlgebraicGeometry.UnboundedSiteComparison
-import WeilConjectures.CategoryTheory.CompactObject
+import Sheaf.CategoryTheory.CompactObject
 import Sheaf.Paper.FiniteComparisonLocalizing
 import Sheaf.Paper.FiniteDiscreteCondensedRing
 import Sheaf.Paper.FiniteDiscreteSchemeRing

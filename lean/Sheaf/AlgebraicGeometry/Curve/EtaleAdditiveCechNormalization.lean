@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
-public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyCechBaseChange
+public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechBaseChange
 public import WeilConjectures.AlgebraicGeometry.EtaleOpenCechResolutionDoubleComplex
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex

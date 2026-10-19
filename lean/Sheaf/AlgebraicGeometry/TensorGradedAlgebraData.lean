@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Products
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.TensorPowerAlgebraCoproduct
 import Sheaf.AlgebraicGeometry.AlgebraTensorPullbackComparison
-import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitQuotient
+import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
 /-! # Graded algebra and quotient of tensor powers

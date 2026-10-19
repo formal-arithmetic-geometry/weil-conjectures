@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.MorphismProperty.Comma
 public import Mathlib.RingTheory.AdicCompletion.Basic
 import Sheaf.AlgebraicGeometry.FiniteEtaleInfinitesimalSystem
-import WeilConjectures.AlgebraicGeometry.EtaleOfInfinitesimalRestrictionsProper
+import Sheaf.AlgebraicGeometry.EtaleOfInfinitesimalRestrictionsProper
 import Sheaf.Paper.AlgebraizeFiniteOverProper
 
 /-!

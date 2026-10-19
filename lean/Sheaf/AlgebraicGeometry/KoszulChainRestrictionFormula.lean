@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.KoszulCechComparisonConstruction
 import Sheaf.AlgebraicGeometry.KoszulOpenHomChainEvaluation
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
-import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
+import Sheaf.AlgebraicGeometry.KoszulOpenSystem
 
 /-! # The restriction formula for a Koszul chain representative
 

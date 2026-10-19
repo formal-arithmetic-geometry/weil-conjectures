@@ -5,7 +5,7 @@ Authors: SHEAF group X3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 import Sheaf.AlgebraicGeometry.DerivedOpenUnionSESPresentation
 import Mathlib.CategoryTheory.Shift.Adjunction
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact

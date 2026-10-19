@@ -15,11 +15,11 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 public import WeilConjectures.Algebra.Homology.ExtensionKFlatQuasiIso
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
-public import WeilConjectures.AlgebraicGeometry.PseudoCoherentComplex
+public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
 public import Sheaf.AlgebraicGeometry.FiniteTorDimensionOver
-public import WeilConjectures.AlgebraicGeometry.DerivedGlobalScalar
+public import Sheaf.AlgebraicGeometry.DerivedGlobalScalar
 public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
@@ -33,7 +33,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
-import WeilConjectures.AlgebraicGeometry.PseudoCoherentQCoh
+import Sheaf.AlgebraicGeometry.PseudoCoherentQCoh
 import Sheaf.AlgebraicGeometry.AffinePseudoCoherentCriterion
 import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat

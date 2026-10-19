@@ -5,7 +5,7 @@ Authors: SHEAF group G1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.FunctionField
@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.CoherentGenericPointClosedDescent
 import Sheaf.AlgebraicGeometry.CoherentIntegralGenericIdealMap
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
-import WeilConjectures.AlgebraicGeometry.CoherentLocalIsomorphism
+import Sheaf.AlgebraicGeometry.CoherentLocalIsomorphism
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 

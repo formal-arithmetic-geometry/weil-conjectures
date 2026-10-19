@@ -5,14 +5,14 @@ Authors: SHEAF group R1
 -/
 module
 
-public import WeilConjectures.Topology.OpenModuleDerivedSections
+public import Sheaf.Topology.OpenModuleDerivedSections
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.CategoryTheory.DerivedLimitRoosAbelianGroups
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import WeilConjectures.AlgebraicGeometry.RingedSpaceSheafificationCohomology
-import WeilConjectures.Topology.CohomologyPresheafDerivedSectionsEvaluation
+import Sheaf.AlgebraicGeometry.RingedSpaceSheafificationCohomology
+import Sheaf.Topology.CohomologyPresheafDerivedSectionsEvaluation
 import Sheaf.Topology.RingedSpaceRGammaDerivedLimit
 
 /-!

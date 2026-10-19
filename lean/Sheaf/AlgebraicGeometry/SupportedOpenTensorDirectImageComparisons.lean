@@ -5,15 +5,15 @@ Authors: SHEAF group U3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 import Sheaf.AlgebraicGeometry.DerivedTensorOpenRestrictionUniverses
 import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
-import WeilConjectures.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 import Sheaf.AlgebraicGeometry.DerivedAdjoint
-import WeilConjectures.AlgebraicGeometry.DerivedTensorRightCoproducts
-import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
+import Sheaf.AlgebraicGeometry.DerivedTensorRightCoproducts
+import Sheaf.Topology.SheafIsomorphismLocalOpenCover
 import Mathlib.Algebra.Category.Grp.Zero
 import Mathlib.Topology.Sheaves.Abelian
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive

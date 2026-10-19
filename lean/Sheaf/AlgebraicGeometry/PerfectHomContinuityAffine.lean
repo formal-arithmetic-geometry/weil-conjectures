@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectHomContinuityOn
 import Sheaf.AlgebraicGeometry.AffinePerfectHomPresentation
-import WeilConjectures.AlgebraicGeometry.AffinePerfectHomColimit
+import Sheaf.AlgebraicGeometry.AffinePerfectHomColimit
 import Mathlib.CategoryTheory.Limits.Types.Filtered
 
 /-! # Affine-open base case for continuity of perfect Hom

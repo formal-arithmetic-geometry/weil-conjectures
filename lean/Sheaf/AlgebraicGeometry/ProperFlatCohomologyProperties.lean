@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 import Sheaf.AlgebraicGeometry.ProperFlatFinitePresentationModel
-import WeilConjectures.AlgebraicGeometry.AffineFinitePresentationFlatShortening
+import Sheaf.AlgebraicGeometry.AffineFinitePresentationFlatShortening
 
 /-! # Pseudo-coherent replacement of universal proper cohomology models -/
 

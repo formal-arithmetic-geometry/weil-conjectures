@@ -5,13 +5,12 @@ Authors: SHEAF group C9
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.AffinePerfectModuleModel
-public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
+public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
+public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
 public import Sheaf.Algebra.Homology.ModuleCohomologyBaseChange
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 import WeilConjectures.AlgebraicGeometry.AffineResidueScalarTransport
 import WeilConjectures.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
-public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Canonical base change through an affine stalk
 

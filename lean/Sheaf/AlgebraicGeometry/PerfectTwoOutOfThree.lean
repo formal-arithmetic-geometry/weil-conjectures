@@ -5,8 +5,8 @@ Authors: SHEAF group G1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-import WeilConjectures.AlgebraicGeometry.PerfectCommonAffineModels
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+import Sheaf.AlgebraicGeometry.PerfectCommonAffineModels
 import Sheaf.AlgebraicGeometry.PerfectAffineConeModel
 
 /-! # Two out of three for perfect complexes on a scheme

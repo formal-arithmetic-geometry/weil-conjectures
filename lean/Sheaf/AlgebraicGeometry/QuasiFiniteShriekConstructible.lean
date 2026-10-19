@@ -15,7 +15,7 @@ import Sheaf.AlgebraicGeometry.FiniteFinitePresentationPushforwardConstructible
 import Sheaf.AlgebraicGeometry.Morphisms.QuasiFiniteFpFiniteFactorization
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
 import WeilConjectures.ConstructibleSheaf.OpenClosed
-import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
 
 /-!
@@ -86,10 +86,10 @@ theorem constructibleCohomology_lowerShriek_of_quasiFinite
   intro q
   let F := (_root_.DerivedCategory.Plus.homologyFunctor _ q).obj K
   have : Scheme.IsConstructibleSheaf F :=
-    (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).mp (hK q)
+    (Scheme.isConstructibleEtaleModuleSheaf_iff F).mp (hK q)
   have hzero : Scheme.IsConstructibleEtaleModuleSheaf
       ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) a).obj F) :=
-    (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
+    (Scheme.isConstructibleEtaleModuleSheaf_iff _).mpr
       (Scheme.IsConstructibleSheaf.openImmersionLowerShriek
         a a.closedComplement a.range_closedComplement F)
   have hfinite :=
@@ -97,7 +97,7 @@ theorem constructibleCohomology_lowerShriek_of_quasiFinite
   have : Scheme.IsConstructibleSheaf
       ((lowerStar (ModuleCat.{u + 1} Λ) g).obj
         ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) a).obj F)) :=
-    (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp hfinite
+    (Scheme.isConstructibleEtaleModuleSheaf_iff _).mp hfinite
   let J := (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) a).mapDerivedCategoryPlus.obj K
   let e₁ := (_root_.DerivedCategory.Plus.homologyFunctor _ q).mapIso
       ((lowerStar (ModuleCat.{u + 1} Λ) g).rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.app J)
@@ -107,7 +107,7 @@ theorem constructibleCohomology_lowerShriek_of_quasiFinite
       (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) a) q).symm.app K)
   let e₃ := (_root_.DerivedCategory.Plus.homologyFunctor _ q).mapIso
     ((rightDerivedLowerShriekOfCompactificationPlusIso Λ c d).app K)
-  exact (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
+  exact (Scheme.isConstructibleEtaleModuleSheaf_iff _).mpr
     (Scheme.IsConstructibleSheaf.of_iso
       (F := (lowerStar (ModuleCat.{u + 1} Λ) g).obj
         ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) a).obj F))

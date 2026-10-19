@@ -24,7 +24,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 public import Sheaf.AlgebraicGeometry.IsIsoIffOfJointlySurjectiveEtaleFamily
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 public import Sheaf.CategoryTheory.TruncationDescends
 public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex

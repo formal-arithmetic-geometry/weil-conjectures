@@ -8,14 +8,14 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Sheaf.AlgebraicGeometry.FiniteTorDimension
 import Sheaf.AlgebraicGeometry.FiniteAffineCechModelDerivedComparison
 import Sheaf.AlgebraicGeometry.FiniteAffineCechModelFlatOver
 import Mathlib.RingTheory.Flat.Stability
 import Mathlib.RingTheory.RingHom.Flat
-import WeilConjectures.AlgebraicGeometry.AffineFlatModuleTensorFlat
-import WeilConjectures.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import Sheaf.AlgebraicGeometry.AffineFlatModuleTensorFlat
+import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 

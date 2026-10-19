@@ -5,7 +5,7 @@ Authors: SHEAF group E3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisOpenCounitModel
+public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisOpenCounitModel
 public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
 import Sheaf.AlgebraicGeometry.DerivedDirectImageSquareUnitNormalization
 

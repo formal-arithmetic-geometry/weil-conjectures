@@ -7,11 +7,11 @@ module
 
 public import Sheaf.Algebra.Homology.RhomIntoKInjectiveLocal
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.Algebra.Homology.KFlat
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 
 import Sheaf.AlgebraicGeometry.StrictPerfectRelativeTensorTermsFlat
 import Sheaf.AlgebraicGeometry.StrictPerfectRelativeTensorRoof

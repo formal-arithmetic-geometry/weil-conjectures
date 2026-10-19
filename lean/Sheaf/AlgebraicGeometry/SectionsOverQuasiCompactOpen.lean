@@ -5,18 +5,17 @@ Authors: SHEAF group F1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Coherent
-public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.Grp.Colimits
-import WeilConjectures.AlgebraicGeometry.IdealPowerComplement
+import Sheaf.AlgebraicGeometry.IdealPowerComplement
 import all Sheaf.AlgebraicGeometry.IdealPowerEvaluationAffineEventuallyZero
 import all WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import WeilConjectures.Topology.GlueSheavesOfModules
+import Sheaf.Topology.GlueSheavesOfModules
 import Sheaf.AlgebraicGeometry.IdealPowerAnnihilatorSystem
 import Sheaf.AlgebraicGeometry.IdealPowerQuotientLocalLifting
 import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Sections over the complement of a finite type ideal
 

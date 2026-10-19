@@ -5,9 +5,9 @@ Authors: SHEAF group R1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.KFlat
-import WeilConjectures.AlgebraicGeometry.LocalizedOpenTensorEquivalence
+import Sheaf.AlgebraicGeometry.LocalizedOpenTensorEquivalence
 import Sheaf.AlgebraicGeometry.OpenRestrictionKFlatModel
 import Sheaf.AlgebraicGeometry.OpenRestrictionTotalTensor
 import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap

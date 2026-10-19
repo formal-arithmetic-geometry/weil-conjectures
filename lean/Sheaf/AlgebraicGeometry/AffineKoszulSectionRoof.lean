@@ -5,14 +5,14 @@ Authors: SHEAF group D3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedTensorAugmentation
 public import Mathlib.AlgebraicGeometry.AffineScheme
 import Sheaf.AlgebraicGeometry.AffineKoszulSectionColimit
 import Sheaf.Algebra.Homology.KFlatResolution
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import Mathlib.CategoryTheory.Limits.Types.Colimits
-import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
+import Sheaf.AlgebraicGeometry.KoszulOpenSystem
 
 /-! # Koszul representatives of sections on an affine open
 

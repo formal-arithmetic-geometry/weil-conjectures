@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Products
 
 import Sheaf.Algebra.Homology.LocalizedComparisonCoproductSource
 import Mathlib.Algebra.Category.ModuleCat.AB
-import all WeilConjectures.AlgebraicGeometry.DerivedAmbientDirectSumsHomology
+import all Sheaf.AlgebraicGeometry.DerivedAmbientDirectSumsHomology
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorColimits
 
 /-! # Direct-sum square for localized tensor comparisons

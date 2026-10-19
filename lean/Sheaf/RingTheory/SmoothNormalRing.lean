@@ -12,8 +12,8 @@ import Mathlib.RingTheory.Smooth.Flat
 import Sheaf.RingTheory.SmoothNormalDomainApproximation
 import Mathlib.RingTheory.Localization.BaseChange
 import WeilConjectures.RingTheory.FilteredColimitNormalRing
-import WeilConjectures.RingTheory.NormalOfFlatNormalFibers
-import WeilConjectures.RingTheory.RegularRingNormal
+import Sheaf.RingTheory.NormalOfFlatNormalFibers
+import Sheaf.RingTheory.RegularRingNormal
 import WeilConjectures.RingTheory.RegularRingSmoothAscent
 
 /-!

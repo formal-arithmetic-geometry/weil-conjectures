@@ -12,13 +12,14 @@ public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import Sheaf.AlgebraicGeometry.ClosedFibreSingleton
 import Sheaf.AlgebraicGeometry.CotangentSurjectiveOfTangentInjective
-import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
+import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 import Sheaf.AlgebraicGeometry.InfiniteClosedPointsInterClosureSingleton
 import Sheaf.AlgebraicGeometry.ProperFiniteFibreFiniteNeighbourhood
 import Sheaf.RingTheory.SurjectiveOfFiniteOfCotangent
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 import WeilConjectures.AlgebraicGeometry.Modules.VeryAmple
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
+import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 
 /-!
 # Sections separating points and tangent vectors give a closed immersion

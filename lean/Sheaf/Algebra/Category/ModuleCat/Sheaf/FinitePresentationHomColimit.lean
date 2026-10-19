@@ -13,6 +13,7 @@ public import Mathlib.Algebra.Category.Grp.FilteredColimits
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomFinitePresentationKernel
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Sheaf.Topology.ModuleColimitRestriction
+import Sheaf.Topology.SheafIsomorphismLocalOpenCover
 import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
 
 /-!

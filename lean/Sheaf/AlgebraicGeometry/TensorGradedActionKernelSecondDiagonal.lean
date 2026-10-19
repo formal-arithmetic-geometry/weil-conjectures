@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.SquareZeroTensorGradedProductProjection
 public import Sheaf.AlgebraicGeometry.TensorBoundaryKernelMapNaturality
 import Sheaf.AlgebraicGeometry.TensorBoundaryKernelMapLocalMultiplication
-import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitQuotient
+import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
 import Mathlib.Topology.Sheaves.LocallySurjective
 
 /-! # The canonical tensor action on the surviving ideal summand

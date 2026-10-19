@@ -5,9 +5,9 @@ Authors: SHEAF group R1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.CoherentIntegralFiltration
+public import Sheaf.AlgebraicGeometry.CoherentIntegralFiltration
 public import Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.AlgebraicGeometry.CoherentIntegralFiltrationIdealSumZero
+import Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationIdealSumZero
 import Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationIdealSumStep
 
 /-! # Filtering a finite sum of an integral ideal pushforward

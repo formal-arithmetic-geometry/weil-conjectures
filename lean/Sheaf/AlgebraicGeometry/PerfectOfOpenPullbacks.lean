@@ -5,10 +5,10 @@ Authors: SHEAF group R1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
-import WeilConjectures.AlgebraicGeometry.OpenPerfectModelTransport
+import Sheaf.AlgebraicGeometry.OpenPerfectModelTransport
 
 /-! # Perfectness detected on open neighbourhoods
 

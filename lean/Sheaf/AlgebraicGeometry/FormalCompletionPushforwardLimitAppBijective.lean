@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 import Sheaf.AlgebraicGeometry.FormalCompletionAffineSections
 import Sheaf.AlgebraicGeometry.FormalFunctionsAffinePushforwardSections
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 @[expose] public section
 

@@ -5,7 +5,7 @@ Authors: SHEAF group V3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PrincipalOpenSectionTransport
+public import Sheaf.AlgebraicGeometry.PrincipalOpenSectionTransport
 public import Sheaf.AlgebraicGeometry.AlternatingCechTotalComplex
 public import Mathlib.Data.Finset.Sort
 

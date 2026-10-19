@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.SixFunctors.Finite.BaseChange
 import Sheaf.AlgebraicGeometry.QuasiFiniteAffineEtaleThickeningDecomposition
@@ -39,16 +39,16 @@ private theorem constructible_pullback
     (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (hF : IsConstructibleEtaleModuleSheaf F) :
     IsConstructibleEtaleModuleSheaf ((Etale.upperStar (ModuleCat.{u + 1} Λ) f).obj F) := by
-  have := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).mp hF
-  exact (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
+  have := (isConstructibleEtaleModuleSheaf_iff F).mp hF
+  exact (isConstructibleEtaleModuleSheaf_iff _).mpr
     (IsConstructibleSheaf.upperStar f F)
 
 private theorem constructible_of_iso
     {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (e : F ≅ G)
     (hF : IsConstructibleEtaleModuleSheaf F) : IsConstructibleEtaleModuleSheaf G := by
-  have := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).mp hF
-  exact (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr (IsConstructibleSheaf.of_iso e)
+  have := (isConstructibleEtaleModuleSheaf_iff F).mp hF
+  exact (isConstructibleEtaleModuleSheaf_iff _).mpr (IsConstructibleSheaf.of_iso e)
 
 private theorem constructible_finite_affine
     {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y] (f : X ⟶ Y) [IsFinite f]

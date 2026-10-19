@@ -12,7 +12,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import Mathlib.CategoryTheory.Adjunction.Unique
 import Sheaf.CategoryTheory.BrownRepresentabilityHomLocallySmall
 import Sheaf.SixFunctorsBasics.BrownHypotheses
-import WeilConjectures.CategoryTheory.CompactTestsRightAdjointCoproducts
+import Sheaf.CategoryTheory.CompactTestsRightAdjointCoproducts
 import Mathlib.CategoryTheory.Adjunction.PartialAdjoint
 import Mathlib.CategoryTheory.Limits.FullSubcategory
 import Sheaf.Paper.LocalizingClosureExistence

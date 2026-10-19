@@ -6,7 +6,7 @@ Authors: SHEAF group NB
 module
 
 public import Sheaf.Paper.LocalizingExceptionalAdjoint
-public import WeilConjectures.CategoryTheory.CompactObject
+public import Sheaf.CategoryTheory.CompactObject
 public import WeilConjectures.CategoryTheory.WeakTriangulatedGenerator
 import Sheaf.SixFunctorsBasics.BrownHypotheses
 import Sheaf.Paper.CompactificationLocalizing

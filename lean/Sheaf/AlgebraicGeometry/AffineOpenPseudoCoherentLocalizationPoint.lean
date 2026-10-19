@@ -5,7 +5,7 @@ Authors: SHEAF group Y2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PseudoCoherentComplex
+public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.Localization.Away.Basic
 
 import Sheaf.AlgebraicGeometry.AffinePseudoCoherentPrincipalModel
-import WeilConjectures.AlgebraicGeometry.SchemeIsoNestedOpenFiniteFreeModel
+import Sheaf.AlgebraicGeometry.SchemeIsoNestedOpenFiniteFreeModel
 
 /-! # Pointwise pseudo-coherent localization on an affine open
 

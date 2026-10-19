@@ -1,8 +1,8 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 import all Sheaf.AlgebraicGeometry.DerivedPullbackPerfect
-import all WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedRestrictionSquare
+import all Sheaf.AlgebraicGeometry.SchemeIsoDerivedRestrictionSquare
 
 @[expose] public section
 

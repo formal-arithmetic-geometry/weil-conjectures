@@ -8,11 +8,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
-import WeilConjectures.AlgebraicGeometry.ModuleFinitePresentationCokernel
+import Sheaf.AlgebraicGeometry.ModuleFinitePresentationCokernel
 import Sheaf.AlgebraicGeometry.AffineUniversallyExactOpcyclesFlat
 import WeilConjectures.Algebra.Homology.RightExactTruncGEIso
 import Sheaf.Algebra.Homology.FlatOpcyclesTorCriterion
-import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Lower truncation of universally connective affine flat complexes -/
 

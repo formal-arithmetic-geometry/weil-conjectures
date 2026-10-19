@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.Grp.AB
 
 import Sheaf.Topology.FiniteClosedCoverCohomologyVanishing
 import Sheaf.Topology.IrreducibleIntegerExtensionVanishing
-import WeilConjectures.Topology.NoetherianExtensionByZeroReduction
+import Sheaf.Topology.NoetherianExtensionByZeroReduction
 
 @[expose] public section
 

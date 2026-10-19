@@ -5,12 +5,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
-public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyCechBaseChange
+public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechBaseChange
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalizedExistence
 import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalizedScalar
 import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalizedInverseImage
-import WeilConjectures.AlgebraicGeometry.Cohomology.CechComparisonSystem
+import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystem
 import WeilConjectures.AlgebraicGeometry.Cohomology.CechInverseImageCochainMap
 
 /-! # Étale additive cohomology in ordinary Čech coordinates

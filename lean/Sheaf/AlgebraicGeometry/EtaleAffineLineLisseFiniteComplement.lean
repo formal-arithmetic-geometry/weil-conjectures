@@ -14,7 +14,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 import Sheaf.AlgebraicGeometry.AffineLineDenseOpenFiniteComplement
-import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.ConstructibleSheaf.GenericConstancy
 import WeilConjectures.ConstructibleSheaf.Refinement
 
@@ -60,7 +60,7 @@ theorem exists_dense_affine_open_lisse_finite_complement
           (_ : IsClosedImmersion i), Set.range i.base = (U : Set _)ᶜ ∧
           IsFinite (i ≫
             (AffineSpace (ULift.{u} (Fin 1)) (Spec (.of R)) ↘ Spec (.of R))) := by
-  have := (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp hF
+  have := (Scheme.isConstructibleEtaleModuleSheaf_iff _).mp hF
   obtain ⟨U, hUd, hU⟩ := Scheme.IsConstructibleSheaf.exists_dense_open F
   obtain ⟨R, hR, hft, g, hg, hgd, hZ⟩ :=
     AffineSpace.exists_dense_affine_open_isFinite_closedComplement Y U hUd

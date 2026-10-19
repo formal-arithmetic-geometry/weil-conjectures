@@ -5,7 +5,7 @@ Authors: SHEAF group Q4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.AffineScheme
 import Sheaf.AlgebraicGeometry.PerfectPseudoCoherentLocallyFiniteTor
@@ -15,7 +15,7 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import WeilConjectures.AlgebraicGeometry.RelativeFlatOfStalks
-import WeilConjectures.AlgebraicGeometry.FlatSheafStalk
+import Sheaf.AlgebraicGeometry.FlatSheafStalk
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 

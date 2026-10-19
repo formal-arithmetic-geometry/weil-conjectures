@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit
-import WeilConjectures.AlgebraicGeometry.ConstructibleRestrictionClassCore
+import Sheaf.AlgebraicGeometry.ConstructibleRestrictionClassCore
 
 /-!
 # Constructible representatives of restricted cohomology classes

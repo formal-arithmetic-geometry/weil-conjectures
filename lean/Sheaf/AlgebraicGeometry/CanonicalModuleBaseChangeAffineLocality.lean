@@ -9,10 +9,10 @@ public import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 
 import Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeAffineChartComparison
-import WeilConjectures.AlgebraicGeometry.FlatOverAffineOpenRestriction
+import Sheaf.AlgebraicGeometry.FlatOverAffineOpenRestriction
 
 /-! # Affine locality for relatively flat canonical module base change
 

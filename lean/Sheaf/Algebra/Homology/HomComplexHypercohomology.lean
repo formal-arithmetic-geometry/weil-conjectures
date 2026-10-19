@@ -5,7 +5,7 @@ Authors: SHEAF group V4
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.RingedSiteZerothHypercohomology
+public import Sheaf.Algebra.Homology.RingedSiteZerothHypercohomology
 public import Sheaf.Algebra.Homology.HomComplex
 public import Mathlib.CategoryTheory.Functor.Currying
 import Sheaf.Algebra.Homology.KFlatResolution

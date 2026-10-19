@@ -6,8 +6,8 @@ Authors: SHEAF group W4
 module
 
 public import Sheaf.AlgebraicGeometry.StrictPerfectRelativeTensorComplex
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.RelativeTensorRoofComparison
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 

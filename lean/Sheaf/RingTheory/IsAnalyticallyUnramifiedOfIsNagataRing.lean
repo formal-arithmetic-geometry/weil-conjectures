@@ -16,7 +16,7 @@ import WeilConjectures.RingTheory.FiniteOverNagata
 import Sheaf.RingTheory.IntegralExtensionDimension
 import WeilConjectures.RingTheory.NagataDomainN2
 import WeilConjectures.RingTheory.NagataLocalization
-import WeilConjectures.RingTheory.NormalDomainPrincipalQuotientAssociatedHeight
+import Sheaf.RingTheory.NormalDomainPrincipalQuotientAssociatedHeight
 import WeilConjectures.RingTheory.RegularLocalDimOneIffNormal
 
 /-!

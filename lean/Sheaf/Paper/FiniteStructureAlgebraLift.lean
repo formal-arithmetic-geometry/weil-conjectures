@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
@@ -19,7 +19,7 @@ public import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.Paper.FiniteStructureAlgebraOperationsLift
 import Sheaf.Paper.ClosedImmersionAlgebraSectionsExact
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.RingTheory.Ideal.Quotient.Operations
 

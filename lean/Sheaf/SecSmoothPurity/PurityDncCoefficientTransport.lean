@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.NoetherianEtaleSectionSpecialization
 public import Sheaf.SecSmoothPurity.ReductionExceptional
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
 import Sheaf.AlgebraicGeometry.PurityAffineLineComponents
 import Sheaf.Paper.IntegralFinitePullbackComposition

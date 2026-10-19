@@ -5,13 +5,13 @@ Authors: SHEAF group C9
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.AffinePerfectModuleModel
+public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
 public import Sheaf.AlgebraicGeometry.DegreeZeroFibreSurjective
 public import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 import WeilConjectures.Algebra.Homology.ExtensionKFlatQuasiIso
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
-import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
+import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
 import WeilConjectures.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful

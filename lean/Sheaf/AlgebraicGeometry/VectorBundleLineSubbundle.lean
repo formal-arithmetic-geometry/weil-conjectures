@@ -14,12 +14,13 @@ public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
 public import Mathlib.Topology.KrullDimension
-import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 import Sheaf.AlgebraicGeometry.DvrSaturationLine
 import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 import Sheaf.AlgebraicGeometry.RegularCurveTorsionfreeFree
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
+import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 
 @[expose] public section
 

@@ -5,12 +5,12 @@ Authors: SHEAF group F4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import Sheaf.AlgebraicGeometry.PerfectUniversalH0LocalChainModel
 import Sheaf.AlgebraicGeometry.BottomChainModelPullbackTransport
-import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
+import Sheaf.Topology.SheafIsomorphismLocalOpenCover
 
 /-! # Canonical truncation on a universally free lowest-cohomology locus
 

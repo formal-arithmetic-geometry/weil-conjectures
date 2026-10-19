@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Category.Grp.Colimits
 public import Sheaf.AlgebraicGeometry.PerfectHomPushPullCocone
 public import Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisDiagram
 public import Sheaf.AlgebraicGeometry.PerfectHomLocalComparison
-public import WeilConjectures.AlgebraicGeometry.PerfectHomTriangleRow
+public import Sheaf.AlgebraicGeometry.PerfectHomTriangleRow
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Sheaf.AlgebraicGeometry.PerfectHomOpenStagePresentation
 import all Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisGeometricColumnsOdd

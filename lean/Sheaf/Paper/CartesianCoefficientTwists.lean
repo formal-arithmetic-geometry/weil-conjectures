@@ -27,7 +27,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleCoefficientComparisonsPullback
 import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
 import Sheaf.Paper.PurInverseImageCompatibleFreeTower
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeDualPullback
-import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitAwayCoverEtale
+import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayCoverEtale
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 import Sheaf.RingTheory.IndEtaleStability
 import Sheaf.CategoryTheory.SiteInverseImageTensor

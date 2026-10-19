@@ -5,7 +5,7 @@ Authors: SHEAF group C3
 -/
 module
 
-public import WeilConjectures.CategoryTheory.ExactCouple
+public import Sheaf.CategoryTheory.ExactCouple
 public import Sheaf.CategoryTheory.FilteredHomologyCoupleData
 
 public import Sheaf.CategoryTheory.FilteredHomologyCoupleExactness

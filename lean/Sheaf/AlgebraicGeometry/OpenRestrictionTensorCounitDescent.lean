@@ -5,14 +5,14 @@ Authors: SHEAF group F2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
-public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.AlgebraicGeometry.Restrict
 import Sheaf.AlgebraicGeometry.DerivedTensorOpenRestrictionNatural
 import Mathlib.CategoryTheory.Localization.Prod
-import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionLocalization
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionLocalization
 
 /-! # Coherent descent through open restriction
 

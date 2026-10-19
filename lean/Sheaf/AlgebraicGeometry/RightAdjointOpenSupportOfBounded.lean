@@ -5,15 +5,15 @@ Authors: SHEAF group C1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 import Sheaf.AlgebraicGeometry.SupportedDerivedGeneratedPerfect
 import Sheaf.AlgebraicGeometry.RightAdjointOpenUnitConeTest
-import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
-import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSumsAux
-import WeilConjectures.AlgebraicGeometry.SupportedQCohTriangulated
+import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
+import Sheaf.AlgebraicGeometry.DerivedQCohDirectSumsAux
+import Sheaf.AlgebraicGeometry.SupportedQCohTriangulated
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor

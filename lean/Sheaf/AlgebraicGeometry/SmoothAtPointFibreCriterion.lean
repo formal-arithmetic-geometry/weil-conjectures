@@ -17,7 +17,7 @@ import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber
 import WeilConjectures.RingTheory.SingularIdeal
-import WeilConjectures.AlgebraicGeometry.FlatSmoothFibreSmoothAtPrime
+import Sheaf.AlgebraicGeometry.FlatSmoothFibreSmoothAtPrime
 import WeilConjectures.AlgebraicGeometry.Thickening
 import WeilConjectures.AlgebraicGeometry.FormallySmooth
 

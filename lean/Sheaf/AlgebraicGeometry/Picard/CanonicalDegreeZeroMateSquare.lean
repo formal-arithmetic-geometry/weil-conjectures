@@ -6,15 +6,15 @@ Authors: SHEAF group Q2
 module
 
 public import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
-public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSingleDirectImageComparison
+public import Sheaf.AlgebraicGeometry.Picard.CanonicalSingleDirectImageComparison
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Sheaf.AlgebraicGeometry.Picard.CanonicalSingleAdjunctionTranspose
 import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackSquare
-import WeilConjectures.AlgebraicGeometry.Picard.CanonicalDirectImageH0Unit
+import Sheaf.AlgebraicGeometry.Picard.CanonicalDirectImageH0Unit
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Degree-zero compatibility square for the canonical mate

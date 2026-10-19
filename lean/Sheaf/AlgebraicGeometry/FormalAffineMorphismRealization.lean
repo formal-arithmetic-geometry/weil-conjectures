@@ -14,7 +14,7 @@ import Mathlib.Algebra.Module.FinitePresentation
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineLimitModel
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Realization of affine formal morphisms over the completed base
 

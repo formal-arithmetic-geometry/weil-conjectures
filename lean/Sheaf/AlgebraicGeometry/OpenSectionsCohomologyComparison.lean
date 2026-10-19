@@ -5,9 +5,9 @@ Authors: SHEAF group A4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
+public import Sheaf.AlgebraicGeometry.KoszulOpenSystem
 public import Sheaf.AlgebraicGeometry.PrincipalOpenCechTotal
-public import WeilConjectures.AlgebraicGeometry.DerivedStructureEvaluationOne
+public import Sheaf.AlgebraicGeometry.DerivedStructureEvaluationOne
 public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 import Sheaf.AlgebraicGeometry.OpenSectionsCohomologyModel
 import Sheaf.AlgebraicGeometry.OpenSectionsStructureClass

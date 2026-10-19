@@ -5,12 +5,11 @@ Authors: SHEAF group V1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.Paper.QCohAcyclicDerivedSectionsComparison
-import WeilConjectures.AlgebraicGeometry.ModuleSheafificationAffineRestriction
-import Sheaf.Paper.DerivedHomMayerVietoris
+import Sheaf.AlgebraicGeometry.ModuleSheafificationAffineRestriction
 
 /-! # Cohomology of acyclic quasi-coherent derived pushforward
 

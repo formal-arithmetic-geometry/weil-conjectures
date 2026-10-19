@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
-import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian
 
 /-!
@@ -33,7 +33,7 @@ Source: Stacks Project, Proposition 59.74.1(3), Tag 03RY
 
 Proof:
 Compare finite constant-value constructibility with `IsConstructibleSheaf` using
-`isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf`. A finite commutative ring is Noetherian.
+`isConstructibleEtaleModuleSheaf_iff`. A finite commutative ring is Noetherian.
 Apply `constructible_of_mono_noetherian`, whose proof uses generic constancy of
 module subobjects followed by Noetherian induction on closed subsets, and convert
 back with the same comparison. -/
@@ -42,7 +42,7 @@ theorem isConstructibleEtaleModuleSheaf_of_mono_noetherian
     {G F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
     (i : G ⟶ F) [Mono i] (hF : IsConstructibleEtaleModuleSheaf F) :
     IsConstructibleEtaleModuleSheaf G := by
-  have : IsConstructibleSheaf F := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).mp hF
-  exact (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf G).mpr (constructible_of_mono_noetherian i)
+  have : IsConstructibleSheaf F := (isConstructibleEtaleModuleSheaf_iff F).mp hF
+  exact (isConstructibleEtaleModuleSheaf_iff G).mpr (constructible_of_mono_noetherian i)
 
 end AlgebraicGeometry.Scheme

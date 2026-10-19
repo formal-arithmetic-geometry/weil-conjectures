@@ -4,11 +4,11 @@ Released under the Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.AffinePerfectMapLift
 import Sheaf.AlgebraicGeometry.AffinePerfectPlusLocallyFree
 import Sheaf.AlgebraicGeometry.PerfectTwoOutOfThree
-import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
+import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
 import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Triangulated
 
 /-! # Affine perfect extension after adjoining a shift

@@ -6,7 +6,7 @@ Authors: SHEAF group NJ
 module
 
 public import Sheaf.CategoryTheory.RingedSiteModules
-public import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
+public import Sheaf.CategoryTheory.RingedSiteGrothendieckAbelian
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Triangulated.Functor
@@ -23,7 +23,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import Sheaf.CategoryTheory.KInjectiveTotalDerived
 import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
-import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 import Sheaf.Algebra.Homology.KInjectiveProductsTermwise
 
 /-!

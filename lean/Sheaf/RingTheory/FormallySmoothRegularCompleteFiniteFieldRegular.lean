@@ -15,7 +15,7 @@ import Sheaf.RingTheory.FormallySmoothAdicClosedFiber
 import WeilConjectures.RingTheory.RegularLocalOfFlatWithRegularClosedFiber
 import Sheaf.RingTheory.RegularLocalLocalization
 import WeilConjectures.RingTheory.GeometricallyRegularFieldExtension
-import WeilConjectures.RingTheory.FormallySmoothRegularCompletePurelyInseparableRegular
+import Sheaf.RingTheory.FormallySmoothRegularCompletePurelyInseparableRegular
 import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.RingTheory.Localization.Submodule
 

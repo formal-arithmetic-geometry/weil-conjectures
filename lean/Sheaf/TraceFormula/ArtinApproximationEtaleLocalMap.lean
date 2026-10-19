@@ -20,7 +20,7 @@ import Mathlib.Algebra.Category.Ring.FinitePresentation
 import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.AlgebraicGeometry.OpenImmersion
 import WeilConjectures.RingTheory.GRingCompletionRegular
-import WeilConjectures.RingTheory.PopescuSmoothing
+import Sheaf.RingTheory.PopescuSmoothing
 import Sheaf.Paper.SmoothSectionEtaleLift
 import WeilConjectures.RingTheory.PrimeLocalizationEtaleAlgebraModel
 

@@ -3,7 +3,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Module.ULift
-public import WeilConjectures.CategoryTheory.CompactObject
+public import Sheaf.CategoryTheory.CompactObject
 import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import Mathlib.Algebra.Category.ModuleCat.Projective

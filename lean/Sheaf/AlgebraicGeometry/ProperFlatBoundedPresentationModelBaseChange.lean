@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 public import Mathlib.Algebra.Homology.QuasiIso
 import Mathlib.Algebra.Homology.SingleHomology
-import WeilConjectures.AlgebraicGeometry.AffineFlatModuleTensorFlat
+import Sheaf.AlgebraicGeometry.AffineFlatModuleTensorFlat
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import Sheaf.AlgebraicGeometry.TensorPullbackKFlatQuasiIso
 

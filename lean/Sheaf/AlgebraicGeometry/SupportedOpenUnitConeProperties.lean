@@ -5,12 +5,12 @@ Authors: SHEAF group H3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Mathlib.Topology.QuasiSeparated
 
-import WeilConjectures.AlgebraicGeometry.SupportedQCohTriangulated
+import Sheaf.AlgebraicGeometry.SupportedQCohTriangulated
 import Sheaf.AlgebraicGeometry.SupportedOpenUnitImageProperties
-import WeilConjectures.AlgebraicGeometry.DerivedOpenUnitRestrictionIso
+import Sheaf.AlgebraicGeometry.DerivedOpenUnitRestrictionIso
 
 /-! # Support of the open unit cone
 

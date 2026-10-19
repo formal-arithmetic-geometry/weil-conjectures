@@ -5,11 +5,11 @@ Authors: SHEAF groups V1 and X2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.KoszulOpenOrthogonality
 import Sheaf.AlgebraicGeometry.AffineDerivedOpenTransport
-import WeilConjectures.AlgebraicGeometry.AffineKoszulGeometricProperties
+import Sheaf.AlgebraicGeometry.AffineKoszulGeometricProperties
 import Mathlib.Topology.Compactness.Bases
 import Mathlib.Data.Fintype.EquivFin
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel

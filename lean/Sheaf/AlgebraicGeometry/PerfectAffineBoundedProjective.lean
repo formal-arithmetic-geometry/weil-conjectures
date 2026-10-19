@@ -5,10 +5,10 @@ Authors: SHEAF group C1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.AlgebraicGeometry.PerfectAffineModulePreimage
-import WeilConjectures.AlgebraicGeometry.AffineProjectiveLocalStrictModel
+import Sheaf.AlgebraicGeometry.AffineProjectiveLocalStrictModel
 import WeilConjectures.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect
 
 /-! # Perfect objects on affine schemes

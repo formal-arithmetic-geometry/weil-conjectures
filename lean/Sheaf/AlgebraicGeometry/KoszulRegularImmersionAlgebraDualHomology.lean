@@ -6,8 +6,8 @@ Authors: SHEAF group V2
 module
 
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
-public import WeilConjectures.AlgebraicGeometry.LocallyRankedExteriorComplex
-public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.RingTheory.KoszulRegularSequence
@@ -22,7 +22,6 @@ import Mathlib.Algebra.Homology.ShortComplex.Homology
 import Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import Mathlib.Topology.Sheaves.LocallySurjective
-public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 
 /-! # Cohomology of the algebra-valued Koszul dual
 

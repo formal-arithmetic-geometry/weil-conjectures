@@ -5,11 +5,10 @@ Authors: SHEAF group M4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.PerfectOpenStalkReverseComponentsLift
-import WeilConjectures.AlgebraicGeometry.PerfectOpenStalkChainMapEquality
-public import Sheaf.Paper.DerivedHomMayerVietoris
+import Sheaf.AlgebraicGeometry.PerfectOpenStalkChainMapEquality
 
 /-! # Spreading a single stalk homotopy of a strictly perfect complex
 

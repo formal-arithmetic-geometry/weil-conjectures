@@ -25,7 +25,7 @@ import Sheaf.Paper.SupportedCup
 import Sheaf.Paper.SfOpenClosedTriangleAllStages
 import Sheaf.Paper.PbcQbarStandardCohomology
 import Sheaf.AlgebraicGeometry.ProEtaleStalkConservative
-import WeilConjectures.CategoryTheory.Sites.EtaleTorsorH1Functoriality
+import Sheaf.CategoryTheory.Sites.EtaleTorsorH1Functoriality
 import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 import Sheaf.CategoryTheory.SiteCohomologyPullback
 import Sheaf.AlgebraicGeometry.TorsionSheafProperBaseChange

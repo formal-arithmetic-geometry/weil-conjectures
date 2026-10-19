@@ -6,7 +6,7 @@ Authors: SHEAF group B4
 module
 
 public import Sheaf.Algebra.Homology.AffineBaseChangeTildeCoordinates
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
 public import Sheaf.Algebra.Homology.AffinePushforwardComparisonCoordinates
 import Sheaf.Algebra.Homology.AffinePushforwardCohomologyEdgeExists

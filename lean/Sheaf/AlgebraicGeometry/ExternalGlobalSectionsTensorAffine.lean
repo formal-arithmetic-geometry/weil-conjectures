@@ -6,11 +6,11 @@ Authors: SHEAF groups M1 and M2
 module
 
 public import Sheaf.AlgebraicGeometry.ScalarGlobalSectionsComparison
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 import Mathlib.RingTheory.IsTensorProduct
-import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # External global sections on two affine factors

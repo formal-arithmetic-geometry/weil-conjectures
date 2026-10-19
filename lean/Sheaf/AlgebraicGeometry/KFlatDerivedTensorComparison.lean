@@ -5,7 +5,7 @@ Authors: SHEAF group S2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.Algebra.Homology.KFlat
 
 /-! # Natural computation of derived tensor on K-flat first models

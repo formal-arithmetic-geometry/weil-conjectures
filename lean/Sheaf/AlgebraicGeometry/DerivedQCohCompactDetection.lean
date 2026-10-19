@@ -5,8 +5,8 @@ Authors: SHEAF group R1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSums
-public import WeilConjectures.CategoryTheory.CompactObject
+public import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
+public import Sheaf.CategoryTheory.CompactObject
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.DerivedQCohCompactGeneration
 import Mathlib.CategoryTheory.Adjunction.Additive

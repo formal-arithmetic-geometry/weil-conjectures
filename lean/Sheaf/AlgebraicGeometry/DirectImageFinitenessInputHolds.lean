@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DirectImageFinitenessInput
 public import Mathlib.FieldTheory.IsSepClosed
-import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
 import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
@@ -76,11 +76,11 @@ theorem hasDirectImageFinitenessInput_of_isSepClosed
     simpa using habs.2.map (ΓSpecIso (.of k)).inv.hom
   constructor
   · intro S T aS aT _ _ _ _ uST _ _ hu F hF q
-    have : IsConstructibleSheaf F := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).1 hF
+    have : IsConstructibleSheaf F := (isConstructibleEtaleModuleSheaf_iff F).1 hF
     have hs := Etale.DerivedCategory.boundedConstructible_singleFunctor_obj F 0
     have hsingle : Etale.DerivedCategory.isBoundedConstructible Λ S
         ((DerivedCategory.singleFunctor _ 0).obj F) := by
-      refine ⟨fun i ↦ (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2 (hs.2 i),
+      refine ⟨fun i ↦ (isConstructibleEtaleModuleSheaf_iff _).2 (hs.2 i),
         0, 0, le_rfl, fun i hi ↦ ?_⟩
       rcases hi with hi | hi
       · exact DerivedCategory.isZero_of_isGE _ 0 i hi

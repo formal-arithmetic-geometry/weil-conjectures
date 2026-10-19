@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Ample
 import WeilConjectures.AlgebraicGeometry.AffineCapSectionOpen
 import Sheaf.AlgebraicGeometry.AmpleFiniteSetAffine
-import WeilConjectures.AlgebraicGeometry.AmpleIdealSection
+import Sheaf.AlgebraicGeometry.AmpleIdealSection
 import Sheaf.AlgebraicGeometry.ClosedSubsetQcIdeal
 import WeilConjectures.RingTheory.GradedPrimeAvoidance
 import Sheaf.AlgebraicGeometry.AmpleProjCanonicalMap

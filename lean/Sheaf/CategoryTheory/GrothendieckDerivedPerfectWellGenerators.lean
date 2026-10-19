@@ -10,7 +10,7 @@ public import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
 public import Sheaf.CategoryTheory.AlphaCompactObject
 public import Mathlib.CategoryTheory.ObjectProperty.Small
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
-import WeilConjectures.CategoryTheory.CompactGeneratorsBuildObjects
+import Sheaf.CategoryTheory.CompactGeneratorsBuildObjects
 import Sheaf.CategoryTheory.GrothendieckDerivedPerfectWellGeneratorsSupport
 import Mathlib.CategoryTheory.Adjunction.Additive
 

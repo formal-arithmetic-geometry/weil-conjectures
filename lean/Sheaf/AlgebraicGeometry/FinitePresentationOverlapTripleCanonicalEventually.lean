@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Noetherian.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.ChosenPullback
 public import Mathlib.AlgebraicGeometry.Pullbacks
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
-import WeilConjectures.AlgebraicGeometry.FinitePresentationTestMapZeroEventually
+import Sheaf.AlgebraicGeometry.FinitePresentationTestMapZeroEventually
 
 /-! # Finite-stage canonical triple-overlap equation
 

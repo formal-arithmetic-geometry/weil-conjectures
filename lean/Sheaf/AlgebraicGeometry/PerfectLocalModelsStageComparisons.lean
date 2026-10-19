@@ -5,15 +5,15 @@ Authors: SHEAF group G2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
 import Sheaf.AlgebraicGeometry.DerivedPullbackPerfect
-import WeilConjectures.AlgebraicGeometry.DerivedOpenGluingObjects
-import WeilConjectures.AlgebraicGeometry.OpenPerfectModelTransport
+import Sheaf.AlgebraicGeometry.DerivedOpenGluingObjects
+import Sheaf.AlgebraicGeometry.OpenPerfectModelTransport
 import Sheaf.AlgebraicGeometry.PerfectLocalModelsDescendedTransition
 
 /-! # Stage object with compatible local limit comparisons

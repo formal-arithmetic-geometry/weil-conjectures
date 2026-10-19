@@ -13,7 +13,7 @@ import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.Algebra.Category.ModuleCat.Projective
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import WeilConjectures.Algebra.Homology.ModuleHomComplex
-import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
+import Sheaf.AlgebraicGeometry.KoszulOpenSystem
 
 /-! # Normalized chain representatives for Koszul derived Hom
 

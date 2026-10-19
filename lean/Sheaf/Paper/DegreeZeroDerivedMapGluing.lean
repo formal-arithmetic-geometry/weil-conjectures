@@ -23,7 +23,7 @@ import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.Paper.SfCommonStageWeilCohomology

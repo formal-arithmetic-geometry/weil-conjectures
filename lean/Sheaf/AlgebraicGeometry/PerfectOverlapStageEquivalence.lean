@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectHomTransport
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Sheaf.AlgebraicGeometry.TwoOpenComparisonDiagram
-public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionIsoDescent
+public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionIsoDescent
 public import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionData
 public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 

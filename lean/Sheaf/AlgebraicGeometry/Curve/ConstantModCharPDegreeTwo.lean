@@ -5,7 +5,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 import Sheaf.AlgebraicGeometry.Curve.ArtinSchreierDimension
-import WeilConjectures.AlgebraicGeometry.Curve.EtaleSheafHLargeFilteredColimit
+import Sheaf.AlgebraicGeometry.Curve.EtaleSheafHLargeFilteredColimit
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import Sheaf.Paper.ZeroDimensionalEtaleCohomologyRest
 import WeilConjectures.AlgebraicGeometry.Curve.ConstantModCharPFiniteSumColimit

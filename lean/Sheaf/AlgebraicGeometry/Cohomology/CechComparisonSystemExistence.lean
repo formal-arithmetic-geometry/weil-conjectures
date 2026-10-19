@@ -5,9 +5,9 @@ Authors: SHEAF group B3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Cohomology.CechComparisonSystem
+public import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystem
 import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechAlphaQuasiIso
-import WeilConjectures.AlgebraicGeometry.Cohomology.AbelianCechComparisonMaps
+import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechComparisonMaps
 import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechComparisonNaturality
 import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechComparisonBoundary
 

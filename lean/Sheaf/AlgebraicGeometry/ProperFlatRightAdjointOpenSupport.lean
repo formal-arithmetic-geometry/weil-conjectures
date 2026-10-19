@@ -5,7 +5,7 @@ Authors: SHEAF group M1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.PerfectOpenSupportDetection
 import Sheaf.AlgebraicGeometry.AdjointTensorAnnihilatorTransport
 import Sheaf.AlgebraicGeometry.ProperFlatDerivedDirectImagePerfect
 import Sheaf.AlgebraicGeometry.PseudoCoherentSupportAnnihilation
-import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
+import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
 
 /-!
 # Support preservation by the right adjoint of proper flat direct image

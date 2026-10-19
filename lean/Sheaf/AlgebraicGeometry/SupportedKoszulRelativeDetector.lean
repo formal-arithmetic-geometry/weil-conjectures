@@ -5,18 +5,18 @@ Authors: SHEAF group H3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Topology.QuasiSeparated
 
 import Sheaf.AlgebraicGeometry.SupportedPerfectDetectorAffine
 import Sheaf.AlgebraicGeometry.SupportedOpenExtension
-import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
-import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
+import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 import Mathlib.CategoryTheory.Localization.LocallySmall
 import Mathlib.Topology.Sheaves.Abelian
 import Mathlib.Algebra.Category.Grp.Zero
-import WeilConjectures.AlgebraicGeometry.SupportedDerivedRestrictionZero
-import WeilConjectures.AlgebraicGeometry.DerivedRestrictionIsIsoOpenCover
+import Sheaf.AlgebraicGeometry.SupportedDerivedRestrictionZero
+import Sheaf.AlgebraicGeometry.DerivedRestrictionIsIsoOpenCover
 
 /-! # A supported Koszul relative detector
 

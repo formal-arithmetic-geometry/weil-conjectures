@@ -8,7 +8,7 @@ public import Mathlib.Algebra.Regular.SMul
 
 import WeilConjectures.RingTheory.RootAlgebraRegularAtRoot
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
-import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitAwayCoverEtale
+import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayCoverEtale
 import Sheaf.RingTheory.RegularLocalLocalization
 import Mathlib.RingTheory.Ideal.GoingUp
 

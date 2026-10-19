@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.RelativeMVMaps
 public import Sheaf.AlgebraicGeometry.MayerVietorisImageChainMap
-public import WeilConjectures.AlgebraicGeometry.DirectImageSquareUnitTransport
+public import Sheaf.AlgebraicGeometry.DirectImageSquareUnitTransport
 import Sheaf.AlgebraicGeometry.RelativeMVNormalizedCoefficientRoof
 import Sheaf.AlgebraicGeometry.RelativeMVResolvedRoofOpenMateComparisons
 

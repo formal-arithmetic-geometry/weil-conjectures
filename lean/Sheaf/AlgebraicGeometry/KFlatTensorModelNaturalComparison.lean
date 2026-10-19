@@ -5,7 +5,7 @@ Authors: SHEAF group M3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.Algebra.Homology.KFlat
 import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
 

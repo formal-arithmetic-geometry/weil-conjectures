@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Algebra.Homology.ModuleHomComplex
 public import Sheaf.AlgebraicGeometry.PrincipalOpenCechTotal
-public import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
+public import Sheaf.AlgebraicGeometry.KoszulOpenSystem
 import WeilConjectures.RingTheory.KoszulGeneratorChainMap
 
 /-! # Increasing-wedge Koszul boundary evaluation

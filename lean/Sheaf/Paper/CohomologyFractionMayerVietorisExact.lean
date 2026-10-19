@@ -5,9 +5,9 @@ Authors: SHEAF group B2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.CohomologyFractionPresentation
+public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
 public import Mathlib.Algebra.Exact.Basic
-import WeilConjectures.AlgebraicGeometry.CohomologyFractionEventuallyZero
+import Sheaf.AlgebraicGeometry.CohomologyFractionEventuallyZero
 
 /-! # Exact Mayer--Vietoris row of fractions
 

@@ -1,8 +1,8 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
-public import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSums
-public import WeilConjectures.CategoryTheory.CompactObject
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
+public import Sheaf.CategoryTheory.CompactObject
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings

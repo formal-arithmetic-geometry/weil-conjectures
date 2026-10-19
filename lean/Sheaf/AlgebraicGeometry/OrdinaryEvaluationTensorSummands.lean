@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationFormula
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import WeilConjectures.AlgebraicGeometry.LocalizedOpenSheafification
+import Sheaf.AlgebraicGeometry.LocalizedOpenSheafification
 import Mathlib.CategoryTheory.Localization.Monoidal.Functor
 
 /-! # Normalized tensor summands under the open-site equivalence

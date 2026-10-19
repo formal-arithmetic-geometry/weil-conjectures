@@ -6,6 +6,7 @@ public import Mathlib.Topology.KrullDimension
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.Topology.TopDegreeAbelianOpenRestriction
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 
 @[expose] public section
 universe u

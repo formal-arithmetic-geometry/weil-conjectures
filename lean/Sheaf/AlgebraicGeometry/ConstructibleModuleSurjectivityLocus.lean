@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSupport
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
@@ -50,9 +50,9 @@ theorem isConstructible_module_stalk_nonsurjective
     Topology.IsConstructible {x : X | ¬ Function.Surjective
       (((pointSmallEtale (X.algClosurePoint x)).sheafFiber
         (A := ModuleCat.{u + 1} Λ)).map g)}  := by
-  have := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf G).mp hG
-  have := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).mp hF
-  have hC := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf (cokernel g)).mpr
+  have := (isConstructibleEtaleModuleSheaf_iff G).mp hG
+  have := (isConstructibleEtaleModuleSheaf_iff F).mp hF
+  have hC := (isConstructibleEtaleModuleSheaf_iff (cokernel g)).mpr
     (IsConstructibleSheaf.cokernel g)
   let C := (sheafCompose X.smallEtaleTopology
     (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj (cokernel g)

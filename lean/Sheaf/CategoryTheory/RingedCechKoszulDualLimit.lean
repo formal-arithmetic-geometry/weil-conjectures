@@ -7,7 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.RingedKoszulSystem
 public import Sheaf.Algebra.Homology.KFlat
-public import WeilConjectures.Algebra.Homology.TelescopeColimit
+public import Sheaf.Algebra.Homology.TelescopeColimit
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
 import Sheaf.CategoryTheory.RingedCechKoszulComparisonOnSite
 import Sheaf.CategoryTheory.RingedCechCompletionHomInjective
@@ -449,7 +449,7 @@ theorem ringed_cech_koszul_dual_limit :
       alpha.hom ≫ (ringedExtendedCech O r b).2 =
         colimit.desc _ (ringedKoszulAugmentationCocone O r b) ∧
       ∃ t : CochainComplex.mappingCone
-          (CochainComplex.telescopeColimitShift O (ringedKoszulDiagram O r b)) ⟶
+          (CochainComplex.telescopeShiftColimit O (ringedKoszulDiagram O r b)) ⟶
             (ringedExtendedCech O r b).1,
         CochainComplex.mappingCone.inr _ ≫ t =
           CochainComplex.telescopeToColimit O (ringedKoszulDiagram O r b) ≫ alpha.hom ∧

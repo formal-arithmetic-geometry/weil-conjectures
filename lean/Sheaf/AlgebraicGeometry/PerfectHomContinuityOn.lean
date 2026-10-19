@@ -6,7 +6,7 @@ Authors: SHEAF group C2
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectHomTransport
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
 /-! # Open-local continuity predicate for canonical perfect Hom transport

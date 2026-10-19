@@ -11,7 +11,7 @@ import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 import Mathlib.CategoryTheory.Sites.LeftExact
 import Mathlib.FieldTheory.Galois.Profinite
 import Sheaf.AlgebraicGeometry.GaloisStalkFiniteActionRealization
-import WeilConjectures.CategoryTheory.DiscreteContActionFiniteOrbitCoproduct
+import Sheaf.CategoryTheory.DiscreteContActionFiniteOrbitCoproduct
 
 /-!
 # Essential surjectivity of the canonical Galois stalk functor

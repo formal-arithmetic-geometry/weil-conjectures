@@ -14,7 +14,7 @@ import Sheaf.RingTheory.KoszulCoefficientExtension
 import WeilConjectures.RingTheory.KoszulRegularFlatBaseChange
 import Mathlib.RingTheory.Flat.Localization
 import WeilConjectures.RingTheory.KoszulExtRoofRepresentatives
-import WeilConjectures.RingTheory.KoszulRoofComparisonIndependence
+import Sheaf.RingTheory.KoszulRoofComparisonIndependence
 import WeilConjectures.RingTheory.KoszulConormalBasis
 import WeilConjectures.RingTheory.KoszulConormalComparisonExistence
 import Mathlib.LinearAlgebra.ExteriorPower.Basis

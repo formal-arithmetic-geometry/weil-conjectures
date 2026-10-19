@@ -11,11 +11,11 @@ public import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreCompari
 public import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreTransport
 public import Sheaf.AlgebraicGeometry.PerfectHomTransport
 public import Sheaf.AlgebraicGeometry.PerfectOverlapStageEquivalence
-public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionLocalization
+public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionLocalization
 public import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionData
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 import Sheaf.AlgebraicGeometry.TwoOpenComparisonDiagram
-import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionIsoDescent
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionIsoDescent
 
 /-! # Core object comparison data (without the final Hom pin).
 

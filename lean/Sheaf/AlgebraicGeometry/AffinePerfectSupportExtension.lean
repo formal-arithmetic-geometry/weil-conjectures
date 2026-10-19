@@ -5,15 +5,15 @@ Authors: SHEAF group J1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.AffinePerfectMapLift
 import Sheaf.AlgebraicGeometry.AffinePerfectPlusShift
 import Sheaf.AlgebraicGeometry.AffineSupportIteratedCones
 import Sheaf.AlgebraicGeometry.AffineSupportPoweredGenerators
-import WeilConjectures.AlgebraicGeometry.AffineBinomialProjectorCone
-import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
+import Sheaf.AlgebraicGeometry.AffineBinomialProjectorCone
+import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
 import Sheaf.AlgebraicGeometry.PerfectTwoOutOfThree
-import WeilConjectures.AlgebraicGeometry.SupportedQCohTriangulated
+import Sheaf.AlgebraicGeometry.SupportedQCohTriangulated
 
 /-! # Affine perfect support extension
 

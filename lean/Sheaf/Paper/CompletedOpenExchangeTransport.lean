@@ -11,7 +11,7 @@ public import Sheaf.Paper.AdicCoefficientDatum
 public import Sheaf.AlgebraicGeometry.OpenImmersionSquare
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-public import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
+public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Category.ModuleCat.Ulift
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification

@@ -6,10 +6,10 @@ Authors: SHEAF group X3
 module
 
 public import Sheaf.AlgebraicGeometry.FormalFunctionsFinitePullback
-import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import Sheaf.AlgebraicGeometry.FormalFunctionsFiniteOpenUnitPasting
-import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
-import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
+import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Finite pullback on the inverse-image opens

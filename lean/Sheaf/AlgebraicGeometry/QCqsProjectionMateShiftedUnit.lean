@@ -5,9 +5,9 @@ Authors: SHEAF group F1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 import Mathlib.CategoryTheory.Adjunction.Mates
 import Sheaf.AlgebraicGeometry.DerivedPullbackStructureSheaf
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel

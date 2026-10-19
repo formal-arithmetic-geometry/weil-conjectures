@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.RelativeMVMaps
 public import Sheaf.AlgebraicGeometry.MayerVietorisImageChainData
-public import WeilConjectures.AlgebraicGeometry.DirectImageSquareUnitTransport
+public import Sheaf.AlgebraicGeometry.DirectImageSquareUnitTransport
 import Sheaf.AlgebraicGeometry.RelativeMVDirectImageSquareLocalization
 
 /-! # Localization of a roof of normalized coefficient representatives -/

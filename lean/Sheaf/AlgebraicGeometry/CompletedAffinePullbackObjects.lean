@@ -13,9 +13,9 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 
 import Sheaf.AlgebraicGeometry.FormalSystemsPullback
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.CoherentAffineSectionsFinite
-import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentAffineSectionsFinite
+import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct

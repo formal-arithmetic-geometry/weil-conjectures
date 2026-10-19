@@ -5,11 +5,11 @@ Authors: SHEAF group D2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedInternalHomAdjunction
 
 import Sheaf.AlgebraicGeometry.StrictlyPerfectRHomEvaluationLocal
-import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
+import Sheaf.Topology.SheafIsomorphismLocalOpenCover
 import Mathlib.CategoryTheory.Yoneda
 
 /-! # Local computations for the perfect internal dual -/

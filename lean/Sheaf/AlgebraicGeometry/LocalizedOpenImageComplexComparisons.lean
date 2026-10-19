@@ -5,9 +5,9 @@ Authors: SHEAF group U3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.KInjectiveMayerVietorisData
+public import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisData
 import Sheaf.AlgebraicGeometry.OpenDerivedLocalizationAdjunction
-import WeilConjectures.AlgebraicGeometry.OpenImageComplexComparisonUnit
+import Sheaf.AlgebraicGeometry.OpenImageComplexComparisonUnit
 import Mathlib.CategoryTheory.Adjunction.Restrict
 
 /-! # Localized-site comparisons for the concrete open-image complexes

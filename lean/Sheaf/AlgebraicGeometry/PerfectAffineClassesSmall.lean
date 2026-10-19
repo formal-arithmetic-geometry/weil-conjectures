@@ -5,7 +5,7 @@ Authors: SHEAF group X2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.CategoryTheory.Skeletal
 public import Mathlib.Logic.Small.Basic
 public import Mathlib.AlgebraicGeometry.AffineScheme

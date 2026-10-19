@@ -7,9 +7,9 @@ module
 
 public import Sheaf.Paper.ModuleCupResolutionData
 public import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
-public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
+public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.Paper.ModuleCupPullbackAugmentedPairings
-import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 
 /-! # Pullback maps between computing cup resolutions
 

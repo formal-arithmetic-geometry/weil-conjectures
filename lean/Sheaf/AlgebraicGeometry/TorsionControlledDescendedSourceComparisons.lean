@@ -5,11 +5,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import WeilConjectures.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
-import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelSum
+import Sheaf.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
 import Sheaf.AlgebraicGeometry.CompatibleQuotientFormalComparisons
-import all WeilConjectures.Topology.GlueSheavesOfModules
-import Sheaf.Paper.DerivedHomMayerVietoris
+import all Sheaf.Topology.GlueSheavesOfModules
 
 /-! # Torsion-controlled local descent data
 

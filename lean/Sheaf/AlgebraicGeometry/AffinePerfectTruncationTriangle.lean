@@ -5,11 +5,11 @@ Authors: SHEAF group D2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.AffineScheme
 import Sheaf.AlgebraicGeometry.AffineLiftEventualFreeKernels
-import WeilConjectures.AlgebraicGeometry.FiniteFreeStupidTailPerfect
+import Sheaf.AlgebraicGeometry.FiniteFreeStupidTailPerfect
 import WeilConjectures.AlgebraicGeometry.ExactFunctorStupidTailTriangle
 
 /-! # Arbitrarily low perfect truncation triangles on affine schemes

@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.Algebra.Homology.ModuleStalkExact
+import Sheaf.Algebra.Homology.ModuleStalkExact
 import Mathlib.Topology.Sheaves.Abelian
 import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 

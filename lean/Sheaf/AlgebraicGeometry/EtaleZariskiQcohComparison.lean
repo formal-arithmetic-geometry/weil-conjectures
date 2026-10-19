@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
-public import WeilConjectures.Topology.RingedSpaceModuleCohomology
+public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import Sheaf.AlgebraicGeometry.EtaleZariskiAbelianPositiveComparison
 import Sheaf.Paper.ZariskiModuleAbelianCohomologyAgree

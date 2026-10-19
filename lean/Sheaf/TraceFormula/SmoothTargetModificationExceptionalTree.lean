@@ -16,7 +16,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.RingTheory.Valuation.ValuationSubring
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
-import WeilConjectures.AlgebraicGeometry.PerfectComplex
+import Sheaf.AlgebraicGeometry.PerfectComplex
 import WeilConjectures.AlgebraicGeometry.GlobalSectionsProper
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectBaseChange
 import WeilConjectures.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree

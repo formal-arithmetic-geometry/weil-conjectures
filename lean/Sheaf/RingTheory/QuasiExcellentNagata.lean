@@ -10,9 +10,9 @@ public import WeilConjectures.RingTheory.NagataRing
 import Sheaf.RingTheory.FiniteTypeGRing
 import Mathlib.RingTheory.Localization.LocalizationLocalization
 import Mathlib.RingTheory.Localization.Submodule
-import WeilConjectures.RingTheory.RegularRingNormal
+import Sheaf.RingTheory.RegularRingNormal
 import WeilConjectures.RingTheory.IsN1OfIsAnalyticallyUnramified
-import WeilConjectures.RingTheory.IsN1OfLocalCharacterization
+import Sheaf.RingTheory.IsN1OfLocalCharacterization
 import Sheaf.RingTheory.RegularMapReducedTarget
 import Sheaf.RingTheory.UniversallyJapaneseN1Criterion
 import WeilConjectures.RingTheory.AdicCompletionNoetherian

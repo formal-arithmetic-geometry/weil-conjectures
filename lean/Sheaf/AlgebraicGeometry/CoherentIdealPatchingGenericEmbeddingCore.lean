@@ -1,14 +1,14 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.Coherent
-public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.Preadditive.Biproducts
 import Sheaf.AlgebraicGeometry.CoherentGenericMonoIdealFactor
-import WeilConjectures.AlgebraicGeometry.IntegralIdealsCommonGenericLattice
+import Sheaf.AlgebraicGeometry.IntegralIdealsCommonGenericLattice
 import Sheaf.AlgebraicGeometry.CoherentGenericPointIdealInclusion
-import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelSum
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Topology.Sheaves.Abelian
 

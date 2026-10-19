@@ -4,8 +4,8 @@ public import Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisCanonicalDat
 import Sheaf.AlgebraicGeometry.DerivedBaseChangeOpenUnit
 import Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisCanonicalShift
 import Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisCanonicalPullback
-import WeilConjectures.AlgebraicGeometry.OpenImageComplexComparisonUnit
-import WeilConjectures.AlgebraicGeometry.OpenImageComplexComparisonRestriction
+import Sheaf.AlgebraicGeometry.OpenImageComplexComparisonUnit
+import Sheaf.AlgebraicGeometry.OpenImageComplexComparisonRestriction
 
 /-! Intermediate existence data for the relative Mayer--Vietoris boundary.
 Source: Stacks Project, Tags 08BV and 0DJ9.

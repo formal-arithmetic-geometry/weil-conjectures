@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
 import Sheaf.AlgebraicGeometry.PerfectRHomTensorComparison
-import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
+import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
 import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorMonoidalRealization
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 

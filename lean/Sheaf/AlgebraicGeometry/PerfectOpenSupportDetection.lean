@@ -5,13 +5,13 @@ Authors: SHEAF group T4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Topology.QuasiSeparated
 import Sheaf.AlgebraicGeometry.PerfectSupportedMapLift
 import Sheaf.AlgebraicGeometry.SupportedPerfectGenerator
-import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
-import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
-import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
+import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionQCoh
+import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Localization.LocallySmall
 import Mathlib.Algebra.Category.Grp.Zero

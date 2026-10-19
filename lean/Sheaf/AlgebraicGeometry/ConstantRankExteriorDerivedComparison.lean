@@ -5,11 +5,10 @@ Authors: SHEAF group C1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.LocallyRankedExteriorComplex
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 import Mathlib.Algebra.Category.ModuleCat.ExteriorPower
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafFullOpenIso
-public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 
 /-! # A constant-rank exterior complex in the derived category
 

@@ -9,7 +9,7 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
-import WeilConjectures.AlgebraicGeometry.EtaleAffineQcoherentULift
+import Sheaf.AlgebraicGeometry.EtaleAffineQcoherentULift
 import WeilConjectures.AlgebraicGeometry.EtaleULiftInjectiveResolution
 import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 

@@ -5,7 +5,7 @@ public import Sheaf.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounitIso
 import Sheaf.AlgebraicGeometry.OpenOrdinaryTensorStalkRingCoordinates
 import WeilConjectures.AlgebraicGeometry.SemilinearTensorComplexIso
 import Sheaf.AlgebraicGeometry.OpenOrdinaryTensorPureGermCoordinates
-import WeilConjectures.AlgebraicGeometry.OpenSemilinearInputComplexIso
+import Sheaf.AlgebraicGeometry.OpenSemilinearInputComplexIso
 
 @[expose] public section
 set_option autoImplicit false

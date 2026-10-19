@@ -2,7 +2,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.CompletedMatchingRingMap
 public import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
-import WeilConjectures.RingTheory.FormalGlueingH0PrimeSpan
+import Sheaf.RingTheory.FormalGlueingH0PrimeSpan
 import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionFormalGlueingData
 @[expose] public section
 noncomputable section

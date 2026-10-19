@@ -11,7 +11,7 @@ import Mathlib.CategoryTheory.Abelian.CommSq
 import Mathlib.CategoryTheory.Abelian.DiagramLemmas.KernelCokernelComp
 import Mathlib.Topology.Sheaves.Abelian
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
-import WeilConjectures.Algebra.Homology.ModuleStalkExact
+import Sheaf.Algebra.Homology.ModuleStalkExact
 
 /-! # Power annihilation of a kernel-pullback projection cokernel
 

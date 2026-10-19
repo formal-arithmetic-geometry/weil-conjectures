@@ -13,7 +13,7 @@ import WeilConjectures.SixFunctors.Finite.Counit
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import Sheaf.AlgebraicGeometry.ConstructibleSubsheafNoetherian
-import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-!
 # Finite direct image reflects constructibility
@@ -65,14 +65,14 @@ theorem isConstructibleEtaleModuleSheaf_of_finite_lowerStar
   let G := (Etale.lowerStar (ModuleCat.{u + 1} Λ) p).obj F
   let H := (Etale.upperStar (ModuleCat.{u + 1} Λ) p).obj G
   let ε : H ⟶ F := (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p).counit.app F
-  have : IsConstructibleSheaf G := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf G).mp hF
+  have : IsConstructibleSheaf G := (isConstructibleEtaleModuleSheaf_iff G).mp hF
   have : IsConstructibleSheaf H := IsConstructibleSheaf.upperStar p G
   have hH : IsConstructibleEtaleModuleSheaf H :=
-    (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf H).mpr inferInstance
+    (isConstructibleEtaleModuleSheaf_iff H).mpr inferInstance
   have hK : IsConstructibleEtaleModuleSheaf (Limits.kernel ε) :=
     isConstructibleEtaleModuleSheaf_of_mono_noetherian (Limits.kernel.ι ε) hH
   have : IsConstructibleSheaf (Limits.kernel ε) :=
-    (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp hK
+    (isConstructibleEtaleModuleSheaf_iff _).mp hK
   have : IsConstructibleSheaf (Limits.cokernel (Limits.kernel.ι ε)) :=
     IsConstructibleSheaf.cokernel (Limits.kernel.ι ε)
   -- The finite counit instance packages the stalk projection and conservativity steps.
@@ -81,6 +81,6 @@ theorem isConstructibleEtaleModuleSheaf_of_finite_lowerStar
   have : IsConstructibleSheaf F := IsConstructibleSheaf.of_iso
     (F := Limits.cokernel (Limits.kernel.ι ε))
     ((Limits.cokernelIsCokernel (Limits.kernel.ι ε)).coconePointUniqueUpToIso hε)
-  exact (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).mpr inferInstance
+  exact (isConstructibleEtaleModuleSheaf_iff F).mpr inferInstance
 
 end AlgebraicGeometry.Scheme

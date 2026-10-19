@@ -5,13 +5,13 @@ Authors: SHEAF group N1
 -/
 module
 
-public import WeilConjectures.CategoryTheory.CompactlyGenerated
+public import Sheaf.CategoryTheory.CompactlyGenerated
 public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.CategoryTheory.EssentiallySmall
 public import Mathlib.CategoryTheory.Yoneda
 import Sheaf.CategoryTheory.BrownRepresentabilityRightAdjoint
 import WeilConjectures.CategoryTheory.TriangulatedEquivalenceTransfer
-import WeilConjectures.CategoryTheory.CompactGenerationEquivalence
+import Sheaf.CategoryTheory.CompactGenerationEquivalence
 import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-!

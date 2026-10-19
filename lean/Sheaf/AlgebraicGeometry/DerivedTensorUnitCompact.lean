@@ -5,12 +5,12 @@ Authors: SHEAF group X2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
-public import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSums
-public import WeilConjectures.CategoryTheory.CompactObject
-import WeilConjectures.AlgebraicGeometry.DerivedStructureSheafHomHypercohomology
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
+public import Sheaf.CategoryTheory.CompactObject
+import Sheaf.AlgebraicGeometry.DerivedStructureSheafHomHypercohomology
 import Sheaf.AlgebraicGeometry.DerivedGlobalSectionsCohomologyCoproduct
-import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSumsAux
+import Sheaf.AlgebraicGeometry.DerivedQCohDirectSumsAux
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Compactness of the derived structure sheaf

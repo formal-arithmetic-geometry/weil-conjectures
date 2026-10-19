@@ -5,13 +5,12 @@ Authors: SHEAF group P2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
-import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFreeProjective
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
+import Sheaf.AlgebraicGeometry.OpenModuleStalkFreeProjective
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import Sheaf.AlgebraicGeometry.PerfectOpenStalkChainMapLift
 import Sheaf.AlgebraicGeometry.PerfectOpenStalkInverseHomotopiesSpread
-public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Detecting a quasi-isomorphism of strictly perfect complexes near a point
 

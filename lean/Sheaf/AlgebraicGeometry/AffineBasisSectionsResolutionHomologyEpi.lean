@@ -5,12 +5,11 @@ Authors: SHEAF group G2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 
-import WeilConjectures.AlgebraicGeometry.AffineBasisAcyclicSectionsPreservesHomology
+import Sheaf.AlgebraicGeometry.AffineBasisAcyclicSectionsPreservesHomology
 import Sheaf.AlgebraicGeometry.AffineBasisKInjectiveSectionsPreservesHomology
-import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Epi part of affine-basis section resolution comparison
 

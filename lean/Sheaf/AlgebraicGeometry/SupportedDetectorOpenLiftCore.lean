@@ -1,11 +1,11 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Topology.QuasiSeparated
 import Sheaf.AlgebraicGeometry.PerfectSupportedMapLift
 import Sheaf.AlgebraicGeometry.OpenDerivedRestrictionComparison
 import Sheaf.AlgebraicGeometry.PerfectPseudoCoherentLocallyFiniteTor
-import WeilConjectures.AlgebraicGeometry.PseudoCoherentQCoh
+import Sheaf.AlgebraicGeometry.PseudoCoherentQCoh
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 /-! # The detector on the localized smaller open
 

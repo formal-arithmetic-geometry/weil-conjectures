@@ -5,10 +5,10 @@ Authors: SHEAF group P1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
-import WeilConjectures.AlgebraicGeometry.DerivedTensorSymmetry
+import Sheaf.AlgebraicGeometry.DerivedTensorSymmetry
 
 /-! # Derived internal-Hom adjunction on a scheme
 

@@ -5,14 +5,14 @@ Authors: SHEAF group E1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import Mathlib.Topology.QuasiSeparated
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Sheaf.AlgebraicGeometry.SupportedPerfectDetectorAffine
 import Sheaf.AlgebraicGeometry.SupportedPerfectDetectorGluing
-import WeilConjectures.AlgebraicGeometry.SupportedQCohTriangulated
+import Sheaf.AlgebraicGeometry.SupportedQCohTriangulated
 
 /-! # Perfect generators with support
 

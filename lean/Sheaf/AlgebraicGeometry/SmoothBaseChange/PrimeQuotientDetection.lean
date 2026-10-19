@@ -6,7 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
-import WeilConjectures.AlgebraicGeometry.InjectiveModuleDirectImageAcyclic
+import Sheaf.AlgebraicGeometry.InjectiveModuleDirectImageAcyclic
 import Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
 import Mathlib.LinearAlgebra.Dual.Lemmas
 import Mathlib.CategoryTheory.Sites.Adjunction

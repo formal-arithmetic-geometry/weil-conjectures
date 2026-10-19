@@ -19,10 +19,11 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import all Sheaf.Algebra.Homology.KFlatResolutionGeneral
 import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
 import Sheaf.AlgebraicGeometry.EtaleFlatConstructibleModel
-import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 
 /-!
@@ -215,7 +216,7 @@ theorem finiteCoefficient_hasTorAmplitude_iff_flatModel
     refine ⟨⟨⟨c, ?_⟩, ⟨d, ?_⟩⟩, fun q ↦ ?_⟩
     · exact (_root_.DerivedCategory.isGE_iff _ c).2 fun q hq ↦ hcd q (.inl hq)
     · exact (_root_.DerivedCategory.isLE_iff _ d).2 fun q hq ↦ hcd q (.inr hq)
-    · exact (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).1 (_hK.1 q)
+    · exact (Scheme.isConstructibleEtaleModuleSheaf_iff _).1 (_hK.1 q)
   exact hasTorAmplitudeIn_iff_exists_flatModel _ a b _hab K hK'
 
 

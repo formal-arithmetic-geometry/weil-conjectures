@@ -1,8 +1,8 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.CoherentThickeningSystem
+public import Sheaf.AlgebraicGeometry.CoherentThickeningSystem
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
+import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 import Sheaf.AlgebraicGeometry.ThickeningSystemHomTransportCore
 import Sheaf.AlgebraicGeometry.ThickeningSystemComparisonTransport
 import WeilConjectures.AlgebraicGeometry.TensorPullback

@@ -6,7 +6,7 @@ Authors: SHEAF group Q3
 module
 
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
@@ -14,7 +14,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.KoszulRegularImmersionDualizing
 import WeilConjectures.AlgebraicGeometry.SmoothDiagonalRegularGenerators
 import WeilConjectures.RingTheory.RegularSequenceKoszulRegular
-import WeilConjectures.AlgebraicGeometry.SmoothDiagonalIdealConormalRank
+import Sheaf.AlgebraicGeometry.SmoothDiagonalIdealConormalRank
 import Sheaf.AlgebraicGeometry.ConstantRankExteriorDerivedComparison
 
 /-! # The dualizing object of a smooth diagonal in constant rank

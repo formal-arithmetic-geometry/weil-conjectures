@@ -12,8 +12,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.ColimitsOfShape
 public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.Topology.Separation.Profinite
-import WeilConjectures.CategoryTheory.DiscreteContActionFiniteOrbitCoproduct
-import Sheaf.AlgebraicGeometry.EtaleFieldGsets
+import Sheaf.CategoryTheory.DiscreteContActionFiniteOrbitCoproduct
 
 /-!
 # Ind-unipotence for a closed normal subgroup

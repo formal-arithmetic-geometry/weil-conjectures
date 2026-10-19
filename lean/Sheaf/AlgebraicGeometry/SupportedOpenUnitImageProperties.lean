@@ -5,13 +5,13 @@ Authors: SHEAF group M3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Mathlib.Topology.QuasiSeparated
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
-import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
-import WeilConjectures.AlgebraicGeometry.DerivedDirectImageOpenRestriction
-import WeilConjectures.AlgebraicGeometry.SupportedDerivedRestrictionZero
-import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionQCoh
+import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import Sheaf.AlgebraicGeometry.SupportedDerivedRestrictionZero
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import Mathlib.Topology.Sheaves.Abelian
 import Mathlib.Algebra.Category.Grp.Zero
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive

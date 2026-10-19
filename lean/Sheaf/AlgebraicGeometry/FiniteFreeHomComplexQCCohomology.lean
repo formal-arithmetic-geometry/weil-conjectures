@@ -5,18 +5,17 @@ Authors: SHEAF group D2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.HomComplex
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import Sheaf.AlgebraicGeometry.SingleSupportedFiniteFreeHomQC
-import WeilConjectures.AlgebraicGeometry.LocalizedComplexQCHomologyExtension
+import Sheaf.AlgebraicGeometry.LocalizedComplexQCHomologyExtension
 import Sheaf.Algebra.Homology.StupidTailHomShortExact
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 import WeilConjectures.AlgebraicGeometry.Cohomology.QuasicoherentExtension
-import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentExtension
+import Sheaf.AlgebraicGeometry.Modules.QuasicoherentExtension
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
-import WeilConjectures.AlgebraicGeometry.Coherent
 
 /-! # Quasi-coherent cohomology of Hom from a finite free complex
 

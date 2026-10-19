@@ -27,7 +27,7 @@ import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 import Sheaf.AlgebraicGeometry.EtaleLocalShiftPartition
 import Sheaf.AlgebraicGeometry.ProEtaleRestrictionInjectives
 import Sheaf.AlgebraicGeometry.ProEtaleStalkConservative

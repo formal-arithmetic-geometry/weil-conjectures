@@ -6,8 +6,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
 
-import WeilConjectures.AlgebraicGeometry.OpenUnionImageComplexExact
-import WeilConjectures.AlgebraicGeometry.OpenImageComplexComparisonIso
+import Sheaf.AlgebraicGeometry.OpenUnionImageComplexExact
+import Sheaf.AlgebraicGeometry.OpenImageComplexComparisonIso
 import Sheaf.AlgebraicGeometry.RelativeMVMaps
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated

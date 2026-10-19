@@ -6,7 +6,7 @@ Authors: SHEAF group Q2
 module
 
 public import Sheaf.AlgebraicGeometry.ScalarUnitCohomologyCoordinates
-import all WeilConjectures.AlgebraicGeometry.Cohomology.AbelianCechComparisonNormalization
+import all Sheaf.AlgebraicGeometry.Cohomology.AbelianCechComparisonNormalization
 
 /-! # ScalarUnitExtClass
 

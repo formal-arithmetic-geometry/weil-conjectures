@@ -16,7 +16,7 @@ import Sheaf.Algebra.Homology.BoundedFlatReplacement
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
-import WeilConjectures.CategoryTheory.LocalizedModuleAdjunctionExact
+import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits

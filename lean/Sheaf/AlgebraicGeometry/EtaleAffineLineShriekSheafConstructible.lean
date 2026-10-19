@@ -16,7 +16,7 @@ import Sheaf.AlgebraicGeometry.EtaleAffineLineShriekFiniteTypeDenseOpen
 import Mathlib.CategoryTheory.Filtered.Connected
 import WeilConjectures.AlgebraicGeometry.NoetherianApproximation
 import WeilConjectures.ConstructibleSheaf.OpenClosed
-import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleLimitDescent
 import WeilConjectures.ConstructibleSheaf.Pullback
 import Sheaf.AlgebraicGeometry.CompactificationCategory
@@ -134,7 +134,7 @@ private theorem constructible_of_generic_closed_restrictions
           ((Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).obj
             ((Etale.upperStar (ModuleCat.{u + 1} Λ) i).obj G))) :
     Scheme.IsConstructibleEtaleModuleSheaf G := by
-  apply (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf G).mpr
+  apply (Scheme.isConstructibleEtaleModuleSheaf_iff G).mpr
   suffices h : ∀ C : TopologicalSpace.Closeds Y, ∀ (Z : Scheme.{u}) (i : Z ⟶ Y)
       [IsClosedImmersion i], Set.range i.base ⊆ C →
       Scheme.IsConstructibleSheaf ((Etale.upperStar (ModuleCat.{u + 1} Λ) i).obj G) by
@@ -159,7 +159,7 @@ private theorem constructible_of_generic_closed_restrictions
   have : TopologicalSpace.NoetherianSpace U.toScheme :=
     inferInstanceAs (TopologicalSpace.NoetherianSpace (U : Set Z))
   rw [Scheme.isConstructibleSheaf_iff_upperStar U.ι i' hij]
-  refine ⟨(Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp hU, ?_⟩
+  refine ⟨(Scheme.isConstructibleEtaleModuleSheaf_iff _).mp hU, ?_⟩
   let C' : TopologicalSpace.Closeds Y :=
     ⟨Set.range (i' ≫ i).base, (i' ≫ i).isClosedEmbedding.isClosed_range⟩
   have hC' : C' < C := by
@@ -204,15 +204,15 @@ private theorem affineLine_shriek_constructible_of_finiteType
   let g' := AffineSpace.map (ULift.{u} (Fin 1)) i
   let F' := (Etale.upperStar (ModuleCat.{u + 1} Λ) g').obj F
   have hF' : Scheme.IsConstructibleEtaleModuleSheaf F' := by
-    have := (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).mp hF
-    exact (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F').mpr
+    have := (Scheme.isConstructibleEtaleModuleSheaf_iff F).mp hF
+    exact (Scheme.isConstructibleEtaleModuleSheaf_iff F').mpr
       (Scheme.IsConstructibleSheaf.upperStar g' F)
   let c' := c.ofIsPullback (AffineSpace.isPullback_map i)
   obtain ⟨U, hUd, hU⟩ := exists_dense_open_affineLine_shriek_constructible Λ Z F' hF' c' q
   obtain ⟨e⟩ := compactSupport_homology_baseChange_iso Λ (AffineSpace.isPullback_map i)
     c c' F q
-  have := (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp hU
-  exact ⟨U, hUd, (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
+  have := (Scheme.isConstructibleEtaleModuleSheaf_iff _).mp hU
+  exact ⟨U, hUd, (Scheme.isConstructibleEtaleModuleSheaf_iff _).mpr
     (Scheme.IsConstructibleSheaf.of_iso
       ((Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).mapIso e).symm)⟩
 
@@ -263,12 +263,12 @@ theorem isConstructibleEtaleModuleSheaf_affineLine_shriek
   have h₀ := affineLine_shriek_constructible_of_finiteType Λ (Spec (.of R)) F₀ hF₀ c₀ q
   obtain ⟨e⟩ := compactSupport_homology_baseChange_iso Λ (AffineSpace.isPullback_map g)
     c₀ c F₀ q
-  have := (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp h₀
+  have := (Scheme.isConstructibleEtaleModuleSheaf_iff _).mp h₀
   have := Scheme.IsConstructibleSheaf.upperStar g
     ((_root_.DerivedCategory.Plus.homologyFunctor _ q).obj
       ((Etale.rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ) c₀).obj
         ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj F₀)))
-  apply (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
+  apply (Scheme.isConstructibleEtaleModuleSheaf_iff _).mpr
   exact Scheme.IsConstructibleSheaf.of_iso
     (e ≪≫ (_root_.DerivedCategory.Plus.homologyFunctor _ q).mapIso
       ((Etale.rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ) c).mapIso

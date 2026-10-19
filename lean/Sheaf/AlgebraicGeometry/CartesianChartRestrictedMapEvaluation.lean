@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.CartesianChartClassPullback
 public import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyClass
 import all Sheaf.AlgebraicGeometry.CartesianChartExchangeEvaluation
-import WeilConjectures.AlgebraicGeometry.CartesianChartExchangeChartMap
+import Sheaf.AlgebraicGeometry.CartesianChartExchangeChartMap
 
 /-! # Evaluation of the restricted chart cone map
 

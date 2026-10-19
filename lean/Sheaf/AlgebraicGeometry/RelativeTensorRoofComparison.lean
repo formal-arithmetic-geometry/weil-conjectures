@@ -6,11 +6,11 @@ Authors: SHEAF group D4
 module
 
 public import Sheaf.AlgebraicGeometry.StrictPerfectRelativeTensorComplex
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.DerivedTensorOpenRestrictionUniverses
 import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
-import WeilConjectures.AlgebraicGeometry.LocalizedOpenTensorEquivalence
+import Sheaf.AlgebraicGeometry.LocalizedOpenTensorEquivalence
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic

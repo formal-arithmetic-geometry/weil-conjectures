@@ -18,9 +18,9 @@ import WeilConjectures.ConstructibleSheaf.DenseOpenUnit
 import Sheaf.AlgebraicGeometry.ProjectiveCurveFiniteGroup
 import Sheaf.AlgebraicGeometry.FiniteOverProjective
 import Sheaf.AlgebraicGeometry.FiniteLocalAbelianForget
-import WeilConjectures.AlgebraicGeometry.ConstructibleModuleOfFiniteCoefficientSets
+import Sheaf.AlgebraicGeometry.ConstructibleModuleOfFiniteCoefficientSets
 import Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
-import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Curve
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Integral
 import Mathlib.GroupTheory.Schreier
@@ -383,8 +383,8 @@ theorem isConstructibleEtaleModuleSheaf_higherDirectImage_projectiveLine
     exact @Scheme.IsConstructibleSheaf.of_iso _ _ _ _ _ _ _ _ _ _ _
       (upperStarHomologyRightDerivedLowerStarIso
         (ProjectiveSpace.isPullback_map (ULift.{u} (Fin 2)) U.1.ι) E n).symm (hl _ hE' n)
-  have hC := hall F ((Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).1 hF) q
-  apply (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2
+  have hC := hall F ((Scheme.isConstructibleEtaleModuleSheaf_iff F).1 hF) q
+  apply (Scheme.isConstructibleEtaleModuleSheaf_iff _).2
   let R := lowerStar (ModuleCat.{u + 1} Λ) (ProjectiveLine S ↘ S)
   exact @Scheme.IsConstructibleSheaf.of_iso _ _ _ _ _ _ _ _ _ _ _
     ((_root_.DerivedCategory.homologyFunctor _ q).mapIso

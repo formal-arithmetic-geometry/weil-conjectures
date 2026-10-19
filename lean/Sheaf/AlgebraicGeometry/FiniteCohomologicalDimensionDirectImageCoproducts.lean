@@ -13,7 +13,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimensi
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.LiftToFinset
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
-import all WeilConjectures.CategoryTheory.CompactTestsRightAdjointCoproducts
+import all Sheaf.CategoryTheory.CompactTestsRightAdjointCoproducts
 
 /-!
 # Finite cohomological dimension and coproducts of derived direct images

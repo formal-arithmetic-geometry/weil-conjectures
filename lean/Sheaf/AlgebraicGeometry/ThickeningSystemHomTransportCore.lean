@@ -1,5 +1,5 @@
 module
-public import WeilConjectures.AlgebraicGeometry.CoherentThickeningSystem
+public import Sheaf.AlgebraicGeometry.CoherentThickeningSystem
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 
 @[expose] public section

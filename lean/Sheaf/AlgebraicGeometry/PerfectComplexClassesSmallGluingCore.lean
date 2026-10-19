@@ -1,9 +1,9 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplexClassesSmallOnOpen
+public import Sheaf.AlgebraicGeometry.PerfectComplexClassesSmallOnOpen
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.PerfectGluingEndpointsSmall
-import WeilConjectures.AlgebraicGeometry.PerfectGluingTrianglePresentation
+import Sheaf.AlgebraicGeometry.PerfectGluingTrianglePresentation
 
 @[expose] public section
 

@@ -9,7 +9,7 @@ public import Mathlib.CategoryTheory.Sites.Sheaf
 public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
 public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresAbelian
-import WeilConjectures.CategoryTheory.DiscreteContinuousRepCommGrp
+import Sheaf.CategoryTheory.DiscreteContinuousRepCommGrp
 import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-!

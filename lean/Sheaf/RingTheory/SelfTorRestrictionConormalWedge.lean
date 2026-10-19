@@ -6,7 +6,7 @@ module
 
 public import WeilConjectures.RingTheory.SelfTorRestrictionCertificate
 public import Sheaf.RingTheory.SelfTorConormalComparison
-import WeilConjectures.RingTheory.KoszulRestrictionTestCycles
+import Sheaf.RingTheory.KoszulRestrictionTestCycles
 
 /-! # Normalized conormal wedges under resolution-induced Tor restriction
 

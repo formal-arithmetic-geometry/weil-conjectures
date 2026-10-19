@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 import Mathlib.RingTheory.TensorProduct.Quotient
 
 /-! # Exactness on affine sections for algebra reduction along a closed immersion

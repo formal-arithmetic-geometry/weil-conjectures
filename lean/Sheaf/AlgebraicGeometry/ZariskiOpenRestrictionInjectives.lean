@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 import Mathlib.Topology.Sheaves.Over
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
-import WeilConjectures.AlgebraicGeometry.ZariskiExtensionByZeroExact
+import Sheaf.AlgebraicGeometry.ZariskiExtensionByZeroExact
 import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-!

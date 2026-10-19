@@ -10,7 +10,7 @@ import Sheaf.AlgebraicGeometry.KoszulOpenHomIdentityEvaluation
 import Sheaf.AlgebraicGeometry.KoszulOpenHomChainClassNaturality
 import Sheaf.Paper.AffinePerfectKoszulPrincipalUnit
 import Sheaf.AlgebraicGeometry.KoszulCechComparisonConstruction
-import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
+import Sheaf.AlgebraicGeometry.KoszulOpenSystem
 
 /-! # Evaluation at one and the chain-level Koszul restriction comparison
 

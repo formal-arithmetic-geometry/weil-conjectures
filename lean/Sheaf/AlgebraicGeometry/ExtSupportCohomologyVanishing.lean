@@ -5,21 +5,23 @@ Authors: SHEAF group C1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.Dimension
 public import Sheaf.AlgebraicGeometry.SheafExt
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.Topology.KrullDimension
 public import Sheaf.Paper.PQFCohomology
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 import Sheaf.AlgebraicGeometry.SheafExtCoherent
 import Sheaf.AlgebraicGeometry.SheafExtStalkLocalization
 import Sheaf.Paper.SupportDimensionCohomologyVanishing
 import Sheaf.Paper.ZariskiModuleAbelianCohomologyAgree
 import Sheaf.RingTheory.RegularLocalExtVanishing
 import WeilConjectures.Topology.PresheafModuleStalkFunctor
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 import WeilConjectures.AlgebraicGeometry.PQFCohomology
 import WeilConjectures.AlgebraicGeometry.ZariskiModuleAbelianCohomologyAgree
 

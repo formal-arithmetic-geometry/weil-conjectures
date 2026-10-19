@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Algebra.DirectSum.Module
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Finiteness.Defs
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.Paper.PQFCohomology
 import Sheaf.Paper.GradedCohomologyModuleStructure
 import Sheaf.Paper.GradedCohomologyModuleFinite

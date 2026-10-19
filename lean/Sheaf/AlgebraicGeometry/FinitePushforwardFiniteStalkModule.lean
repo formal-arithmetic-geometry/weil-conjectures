@@ -14,7 +14,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.FinitePushforwardConstructibleNoetherian
 import WeilConjectures.AlgebraicGeometry.FiniteCoefficientOfFiniteStalks
 import WeilConjectures.AlgebraicGeometry.ConstructibleUnderlyingSetsOfFiniteStalks
-import WeilConjectures.AlgebraicGeometry.ConstructibleModuleOfFiniteCoefficientSets
+import Sheaf.AlgebraicGeometry.ConstructibleModuleOfFiniteCoefficientSets
 
 /-!
 # Finite direct image of constructible module sheaves with finite stalks

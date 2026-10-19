@@ -15,10 +15,10 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafi
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
+import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
 import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 import Sheaf.AlgebraicGeometry.RingedSpaceDirectImageKInjectiveAcyclic
-import WeilConjectures.AlgebraicGeometry.RingedSpaceSheafificationCohomology
+import Sheaf.AlgebraicGeometry.RingedSpaceSheafificationCohomology
 
 /-!
 # Unbounded direct images and the presheaf of local hypercohomology

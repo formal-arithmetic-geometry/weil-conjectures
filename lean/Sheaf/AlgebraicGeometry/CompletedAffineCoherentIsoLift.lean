@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 import Mathlib.RingTheory.AdicCompletion.Completeness
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import WeilConjectures.RingTheory.FiniteModuleComplete
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import all Sheaf.AlgebraicGeometry.CoherentAffineMapSupportRadical
 
 /-! # Lifting section isomorphisms over an adic completion

@@ -6,11 +6,11 @@ Authors: SHEAF group F1
 module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-public import WeilConjectures.Topology.RingedSpaceModuleCohomology
+public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import WeilConjectures.CategoryTheory.SiteCechComplex
 import WeilConjectures.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic
-import WeilConjectures.AlgebraicGeometry.ModuleOpenRestrictionInjectives
-import WeilConjectures.AlgebraicGeometry.ModuleSectionsSurjectiveOfCechH1
+import Sheaf.AlgebraicGeometry.ModuleOpenRestrictionInjectives
+import Sheaf.AlgebraicGeometry.ModuleSectionsSurjectiveOfCechH1
 import WeilConjectures.AlgebraicGeometry.Modules.Ext
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 

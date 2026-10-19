@@ -3,7 +3,7 @@ public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import Sheaf.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConstant
 import WeilConjectures.AlgebraicGeometry.WeilPbcNormalizationInResidueFieldExtension
 import WeilConjectures.ConstructibleSheaf.Pullback
@@ -103,11 +103,11 @@ theorem exists_constructible_module_normalized_generic_data_core
             ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) := by
   let G := (upperStar (ModuleCat.{u + 1} Λ) (X.fromSpecResidueField x)).obj F
   let : Scheme.IsConstructibleSheaf F :=
-    (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).mp hF
+    (Scheme.isConstructibleEtaleModuleSheaf_iff F).mp hF
   let : Scheme.IsConstructibleSheaf G :=
     Scheme.IsConstructibleSheaf.upperStar (X.fromSpecResidueField x) F
   have hG : Scheme.IsConstructibleEtaleModuleSheaf G :=
-    (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf G).mpr inferInstance
+    (Scheme.isConstructibleEtaleModuleSheaf_iff G).mpr inferInstance
   obtain ⟨K, hK, hAlg, hfin, _, M, hM, ⟨e⟩⟩ :=
     constructible_field_finite_separable_constant (X.residueField x) Λ G hG
   let := hK

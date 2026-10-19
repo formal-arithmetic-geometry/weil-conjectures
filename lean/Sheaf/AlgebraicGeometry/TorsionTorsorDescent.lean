@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.CategoryTheory.Sites.Torsor
 import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
 import WeilConjectures.CategoryTheory.Sites.EtaleContractedProductExists
-import WeilConjectures.CategoryTheory.Sites.EtaleTorsorH1Functoriality
+import Sheaf.CategoryTheory.Sites.EtaleTorsorH1Functoriality
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import Mathlib.AlgebraicGeometry.Morphisms.Finite

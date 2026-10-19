@@ -6,14 +6,14 @@ Authors: SHEAF group F3
 module
 
 public import Sheaf.AlgebraicGeometry.ScalarGlobalSectionsComparison
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.AlgebraicGeometry.ExternalGlobalSectionsTensorAffineRight
 import Sheaf.AlgebraicGeometry.ExternalGlobalSectionsTensorFiniteCover
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Mathlib.AlgebraicGeometry.Modules.Tilde
-import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
-import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 
 /-! # External tensor product on global sections
 

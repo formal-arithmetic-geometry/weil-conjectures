@@ -11,7 +11,7 @@ import Sheaf.AlgebraicGeometry.AffineDescentColimitModel
 import Sheaf.AlgebraicGeometry.AffineDescentStageRealization
 import WeilConjectures.Algebra.Homology.AffinePerfectColimitDescent
 import Sheaf.AlgebraicGeometry.DerivedPullback
-import WeilConjectures.AlgebraicGeometry.PerfectComplex
+import Sheaf.AlgebraicGeometry.PerfectComplex
 
 /-! # PerfectDescentAffineOpen
 

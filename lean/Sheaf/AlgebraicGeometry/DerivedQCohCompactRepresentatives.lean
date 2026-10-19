@@ -5,18 +5,18 @@ Authors: SHEAF group R1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSums
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.CategoryTheory.CompactObject
+public import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.CategoryTheory.CompactObject
 import Sheaf.AlgebraicGeometry.PerfectObjectCompact
 import Sheaf.AlgebraicGeometry.PerfectComplexRepresentatives
 public import Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
+import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
 import Sheaf.AlgebraicGeometry.SupportedDerivedGeneratedPerfect
-import WeilConjectures.AlgebraicGeometry.SupportedQCohTriangulated
-import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSumsAux
+import Sheaf.AlgebraicGeometry.SupportedQCohTriangulated
+import Sheaf.AlgebraicGeometry.DerivedQCohDirectSumsAux
 import Sheaf.AlgebraicGeometry.PerfectThickClosure
-import WeilConjectures.CategoryTheory.CompactGeneratorAmbientThick
+import Sheaf.CategoryTheory.CompactGeneratorAmbientThick
 
 /-! # Small representatives of compact quasi-coherent derived objects
 

@@ -5,7 +5,7 @@ Authors: SHEAF group X2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.OrdinaryEvaluationData
 public import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso

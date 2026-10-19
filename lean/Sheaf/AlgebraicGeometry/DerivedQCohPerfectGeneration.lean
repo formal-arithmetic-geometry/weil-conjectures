@@ -5,8 +5,8 @@ Authors: SHEAF group H1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectLocalizingClosure
-import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSumsAux
+public import Sheaf.AlgebraicGeometry.PerfectLocalizingClosure
+import Sheaf.AlgebraicGeometry.DerivedQCohDirectSumsAux
 import Sheaf.AlgebraicGeometry.SupportedDerivedGeneratedPerfect
 import Sheaf.AlgebraicGeometry.SupportedPerfectGenerator
 

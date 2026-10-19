@@ -5,11 +5,11 @@ Authors: SHEAF group T3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.CategoryTheory.Comma.Arrow
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
-import WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedEquivalence
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+import Sheaf.AlgebraicGeometry.SchemeIsoDerivedEquivalence
 import Sheaf.AlgebraicGeometry.SchemeIsoDerivedQCoh
 import Sheaf.AlgebraicGeometry.SchemeIsoDerivedFunctorComparisons
 

@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 import WeilConjectures.AlgebraicGeometry.DimensionAtPointFieldExtension
 import Sheaf.AlgebraicGeometry.SpecSurjectiveBaseChange
 import Sheaf.RingTheory.ConormalGeneratorsGlobalCompleteIntersection
-import WeilConjectures.RingTheory.LciConormalFreeRankCodimension
+import Sheaf.RingTheory.LciConormalFreeRankCodimension
 import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!

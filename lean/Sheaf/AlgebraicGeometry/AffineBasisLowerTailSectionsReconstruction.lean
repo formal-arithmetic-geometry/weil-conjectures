@@ -5,7 +5,7 @@ Authors: SHEAF group M1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
@@ -16,8 +16,8 @@ public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 
 import Sheaf.CategoryTheory.Triangulated.DerivedFunctorDerivedLimit
 import Sheaf.AlgebraicGeometry.TruncationDerivedLimit
-import WeilConjectures.AlgebraicGeometry.AffineBasisRestrictedLowerTailLocalBound
-import WeilConjectures.AlgebraicGeometry.OpenDerivedSectionsTruncationTowerComparison
+import Sheaf.AlgebraicGeometry.AffineBasisRestrictedLowerTailLocalBound
+import Sheaf.AlgebraicGeometry.OpenDerivedSectionsTruncationTowerComparison
 
 /-! # Affine-basis lower truncation tower inputs
 Source: Stacks Project, Tags 0BKT, 0D64, 071B and 08D4. -/

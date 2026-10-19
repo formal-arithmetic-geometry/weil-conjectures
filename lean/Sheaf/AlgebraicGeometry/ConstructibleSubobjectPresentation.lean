@@ -9,7 +9,7 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.Filtered.Basic
 import Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit
-import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import Mathlib.CategoryTheory.Abelian.Basic
@@ -84,7 +84,7 @@ theorem exists_filtered_colimit_constructible_subobjects
           (by simp [ι.naturality φ]))).symm }
   have hE (a : A) : IsConstructibleSheaf (E.obj a) := by
     have : IsConstructibleSheaf (D.obj a) :=
-      (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf (D.obj a)).mp (hD a)
+      (isConstructibleEtaleModuleSheaf_iff (D.obj a)).mp (hD a)
     have : IsNoetherianRing Λ := inferInstance
     have : IsConstructibleSheaf (kernel (ι.app a)) :=
       constructible_of_mono_noetherian (kernel.ι (ι.app a))

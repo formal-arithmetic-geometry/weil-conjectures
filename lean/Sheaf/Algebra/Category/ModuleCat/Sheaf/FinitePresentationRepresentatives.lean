@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import WeilConjectures.Topology.GlueSheavesOfModules
+import Sheaf.Topology.GlueSheavesOfModules
 import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!

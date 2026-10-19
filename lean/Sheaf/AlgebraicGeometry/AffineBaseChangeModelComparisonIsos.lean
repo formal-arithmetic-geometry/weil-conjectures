@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
-import WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedEquivalence
+import Sheaf.AlgebraicGeometry.SchemeIsoDerivedEquivalence
 import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import Mathlib.Algebra.Category.ModuleCat.AB

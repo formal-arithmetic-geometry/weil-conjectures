@@ -5,11 +5,11 @@ Authors: SHEAF group T1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 import Sheaf.AlgebraicGeometry.PrincipalOpenCechHomologySurjective
-import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechHomologyInjective
+import Sheaf.AlgebraicGeometry.PrincipalOpenCechHomologyInjective
 
 /-! # Alternating total Čech complexes on finite principal covers
 

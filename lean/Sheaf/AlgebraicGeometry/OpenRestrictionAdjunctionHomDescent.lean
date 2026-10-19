@@ -6,12 +6,12 @@ Authors: SHEAF group F2
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
-public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.AlgebraicGeometry.Restrict
-import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionLocalization
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionLocalization
 import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
-import WeilConjectures.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 
 /-! # Coherent descent through open restriction
 

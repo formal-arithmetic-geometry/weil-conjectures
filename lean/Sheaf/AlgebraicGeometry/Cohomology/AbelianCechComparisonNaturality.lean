@@ -5,12 +5,12 @@ Authors: SHEAF group K3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Cohomology.AbelianCechComparisonConstruction
+public import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechComparisonConstruction
 import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechAlphaQuasiIso
-import WeilConjectures.AlgebraicGeometry.Cohomology.AbelianCechAlphaNaturality
-import WeilConjectures.AlgebraicGeometry.Cohomology.AbelianCechBetaNaturality
-import WeilConjectures.AlgebraicGeometry.Cohomology.AbelianCechExtSectionCycle
-import WeilConjectures.AlgebraicGeometry.Cohomology.AbelianCechExtSectionInjective
+import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechAlphaNaturality
+import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechBetaNaturality
+import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechExtSectionCycle
+import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechExtSectionInjective
 import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 
 /-! # Naturality of the augmentation quotient

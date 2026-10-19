@@ -14,7 +14,7 @@ public import Mathlib.Algebra.Regular.SMul
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 
-import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescent
+import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescent
 import Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootTorsorProperties
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic

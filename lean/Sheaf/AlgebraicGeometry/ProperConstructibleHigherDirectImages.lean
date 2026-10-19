@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ConstructibleHigherDirectImages
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper
-import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-!
 # Proper direct-image constructibility
@@ -52,7 +52,7 @@ theorem hasConstructibleHigherDirectImages_of_proper
     HasConstructibleHigherDirectImages k N Λ hX hS f := by
   classical
   intro q F hF
-  apply (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2
+  apply (Scheme.isConstructibleEtaleModuleSheaf_iff _).2
   by_cases hS' : IsEmpty S
   · let := hS'
     exact Scheme.IsConstructibleSheaf.of_isZero (Scheme.Etale.isZero_sheaf_of_isEmpty _)
@@ -60,7 +60,7 @@ theorem hasConstructibleHigherDirectImages_of_proper
   have : HasInvertibleExponent Λ S := ⟨N, hS.1, hS.2.2.1, hS.2.2.2⟩
   have : HasInvertibleExponent Λ (Spec (.of k)) :=
     .of_hom_of_nonempty (S ↘ Spec (.of k))
-  have : Scheme.IsConstructibleSheaf F := (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).1 hF
+  have : Scheme.IsConstructibleSheaf F := (Scheme.isConstructibleEtaleModuleSheaf_iff F).1 hF
   let A := (_root_.DerivedCategory.Plus.singleFunctor _ 0).obj F
   have : Scheme.IsConstructibleSheaf
       ((_root_.DerivedCategory.homologyFunctor _ (q : ℤ)).obj

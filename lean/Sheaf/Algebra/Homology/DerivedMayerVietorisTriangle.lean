@@ -1,8 +1,9 @@
 module
 
-public import WeilConjectures.Algebra.Homology.DerivedOpenShriekAdjunction
+public import Sheaf.Algebra.Homology.DerivedOpenShriekAdjunction
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 import Sheaf.Algebra.Homology.OpenExtensionMayerVietorisShortExact
+import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
 import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 
 @[expose] public section

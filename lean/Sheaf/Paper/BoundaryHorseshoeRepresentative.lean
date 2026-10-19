@@ -5,7 +5,7 @@ Authors: SHEAF group W4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyBoundary
+public import Sheaf.AlgebraicGeometry.ModuleCohomologyBoundary
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Sheaf.Paper.BoundaryHorseshoeGlobalLift
 import Sheaf.Paper.BoundaryHorseshoeBoundaryIdentification

@@ -5,12 +5,12 @@ Authors: SHEAF group K1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.PerfectPseudoCoherentLocallyFiniteTor
 import Sheaf.AlgebraicGeometry.PseudoCoherentSummand
 import Sheaf.AlgebraicGeometry.DerivedTensorVanishingRetract
 import Sheaf.AlgebraicGeometry.PerfectOfPseudoCoherentLocallyFiniteTor
-import all WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedLocalizations
+import all Sheaf.AlgebraicGeometry.SchemeIsoDerivedLocalizations
 
 /-! # Direct summands of perfect complexes
 

@@ -5,12 +5,12 @@ Authors: SHEAF group S1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 public import Mathlib.Topology.QuasiSeparated
 import Sheaf.AlgebraicGeometry.SupportedPerfectGenerator
 import Sheaf.AlgebraicGeometry.PerfectObjectCompact
-import WeilConjectures.AlgebraicGeometry.SupportedDerivedGeneratedPerfectCore
+import Sheaf.AlgebraicGeometry.SupportedDerivedGeneratedPerfectCore
 
 /-! # Building supported derived objects from a perfect complex
 

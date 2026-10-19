@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstructible
 import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
-import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-!
 # Open direct images with finite allowable coefficients
@@ -56,7 +56,7 @@ theorem isBoundedConstructible_rightDerivedLowerStar_of_isOpenImmersion
   have hK' : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) X K := by
     obtain ⟨hc, a, b, _, hvan⟩ := hK
     refine ⟨⟨⟨a, ?_⟩, ⟨b, ?_⟩⟩, fun q ↦
-      (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).1 (hc q)⟩
+      (Scheme.isConstructibleEtaleModuleSheaf_iff _).1 (hc q)⟩
     · exact (_root_.DerivedCategory.isGE_iff K a).2 fun i hi ↦ hvan i (Or.inl hi)
     · exact (_root_.DerivedCategory.isLE_iff K b).2 fun i hi ↦ hvan i (Or.inr hi)
   have hpush := boundedConstructible_obj_of_forall_singleFunctor A
@@ -66,7 +66,7 @@ theorem isBoundedConstructible_rightDerivedLowerStar_of_isOpenImmersion
       exact boundedConstructible_rightDerivedLowerStar_of_isOpenImmersion_of_field A aY j F)
     hK'
   obtain ⟨⟨⟨a, ha⟩, ⟨b, hb⟩⟩, hc⟩ := hpush
-  refine ⟨fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2 (hc q),
+  refine ⟨fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff _).2 (hc q),
     min a b, max a b, min_le_max, fun i hi ↦ ?_⟩
   rcases hi with hi | hi
   · exact (_root_.DerivedCategory.isGE_iff _ a).1 ha i (lt_of_lt_of_le hi (min_le_left _ _))

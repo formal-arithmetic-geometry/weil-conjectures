@@ -5,11 +5,11 @@ Authors: SHEAF group P3
 -/
 module
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 import Sheaf.AlgebraicGeometry.SchemeCanonicalTensorShiftProperties
-import WeilConjectures.AlgebraicGeometry.SupportedQCohTriangulated
+import Sheaf.AlgebraicGeometry.SupportedQCohTriangulated
 import Mathlib.CategoryTheory.Triangulated.Adjunction
 
 /-! Exact structures required by the two generation arguments. Choose the

@@ -1,7 +1,7 @@
 module
 
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
-public import WeilConjectures.CategoryTheory.CompactlyGenerated
+public import Sheaf.CategoryTheory.CompactlyGenerated
 import Mathlib.Algebra.Group.PUnit
 
 @[expose] public section

@@ -1,8 +1,8 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSums
-public import WeilConjectures.CategoryTheory.CompactObject
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
+public import Sheaf.CategoryTheory.CompactObject
 import Sheaf.AlgebraicGeometry.DerivedTensorUnitCompact
 import Sheaf.AlgebraicGeometry.PerfectTensorHomDuality
 

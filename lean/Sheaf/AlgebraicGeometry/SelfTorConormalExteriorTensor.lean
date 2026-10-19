@@ -8,7 +8,7 @@ public import Sheaf.AlgebraicGeometry.SelfTorAffineSection
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
 import Mathlib.LinearAlgebra.TensorProduct.Tower
-import WeilConjectures.AlgebraicGeometry.AffineConormalSections
+import Sheaf.AlgebraicGeometry.AffineConormalSections
 
 /-! # Algebraic conormal wedges after extension of scalars
 

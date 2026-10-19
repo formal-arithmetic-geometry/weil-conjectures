@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.RingTheory.AdjoinRoot
 
 import Sheaf.AlgebraicGeometry.Morphisms.TraitGenericPuncturedRootChart
-import WeilConjectures.AlgebraicGeometry.Morphisms.RegularDivisorRootModelNormal
+import Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorRootModelNormal
 
 /-!
 # Normal root models containing a generic trait torsor as a dense open

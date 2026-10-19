@@ -1,11 +1,11 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.AffinePerfectModuleModel
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
 
 import Sheaf.AlgebraicGeometry.AffineOpenSupportedModelExists
-import WeilConjectures.AlgebraicGeometry.AffineOpenSupportedModelTorsion
+import Sheaf.AlgebraicGeometry.AffineOpenSupportedModelTorsion
 
 /-! # Supported target models on affine opens
 

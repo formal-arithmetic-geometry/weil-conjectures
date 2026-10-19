@@ -8,10 +8,10 @@ module
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import WeilConjectures.AlgebraicGeometry.AmpleTwistGlobalGeneration
+import Sheaf.AlgebraicGeometry.AmpleTwistGlobalGeneration
 import Sheaf.AlgebraicGeometry.CoherentFormalModuleEpi
 import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FormalModuleCoverFromLiftedSections
 import Sheaf.AlgebraicGeometry.FormalCompletionExact
 import Sheaf.AlgebraicGeometry.FormalCompletionFullyFaithfulProper

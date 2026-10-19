@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
@@ -16,8 +16,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
 import Sheaf.AlgebraicGeometry.KoszulSelfExtConormalCompatibleCover
-import WeilConjectures.Topology.GlueSheavesOfModules
-import Sheaf.Paper.DerivedHomMayerVietoris
+import Sheaf.Topology.GlueSheavesOfModules
 /-! # Alignment of local Koszul identifications
 
 Source: Stacks Project, Tag 0BQY, comparison of regular generators. -/
