@@ -26,7 +26,7 @@ import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Sheaf.AlgebraicGeometry.DescendFinite
 import WeilConjectures.AlgebraicGeometry.DescendSurjective
-import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
+import WeilConjectures.AlgebraicGeometry.EtaleInverseLimitDescent
 import Sheaf.AlgebraicGeometry.EventuallyProper
 import Sheaf.AlgebraicGeometry.DescendClosedImmersion
 import Sheaf.AlgebraicGeometry.Morphisms.SmoothConnectedGenericGeometryCore
@@ -37,7 +37,6 @@ import Sheaf.AlgebraicGeometry.OpenImmersionInverseLimitDescent
 import Sheaf.AlgebraicGeometry.ProperFibreDimensionUpperSemicontinuous
 import Sheaf.AlgebraicGeometry.ProperSmoothGeometricComponentsLocallyConstant
 import Sheaf.AlgebraicGeometry.ReducedAlgebraicNormalizationFieldChange
-import WeilConjectures.AlgebraicGeometry.EtaleInverseLimitDescent
 import WeilConjectures.AlgebraicGeometry.Thickening
 
 /-!

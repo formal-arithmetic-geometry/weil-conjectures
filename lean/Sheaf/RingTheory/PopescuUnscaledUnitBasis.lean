@@ -5,14 +5,14 @@ Authors: SHEAF group N4
 -/
 module
 
-public import Sheaf.RingTheory.PopescuAdmissibleSubalgebra
+public import WeilConjectures.RingTheory.PopescuAdmissibleSubalgebra
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.LinearAlgebra.Basis.Defs
 public import Mathlib.RingTheory.Nilpotent.Defs
 
 import Sheaf.RingTheory.PopescuUnitResidueExtension
-import Sheaf.RingTheory.SimpleTranscendentalDifferentialDecomposition
+import WeilConjectures.RingTheory.SimpleTranscendentalDifferentialDecomposition
 import Mathlib.RingTheory.Etale.Kaehler
 import Mathlib.LinearAlgebra.TensorProduct.Basis
 import Mathlib.LinearAlgebra.Basis.Prod

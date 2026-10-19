@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
+import WeilConjectures.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
 import Sheaf.AlgebraicGeometry.CoherentFormalModulesRestrictionObjects
 import Sheaf.AlgebraicGeometry.TorsionControlledFormalRestriction
 import Sheaf.AlgebraicGeometry.TorsionControlledAffineAlgebraization

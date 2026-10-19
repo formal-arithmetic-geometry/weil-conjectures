@@ -9,7 +9,7 @@ public import Sheaf.Paper.EtaleCETotalSections
 
 public import Sheaf.Paper.EtaleCEStationaryPageNaturality
 
-import Sheaf.CategoryTheory.CartanEilenbergAugmentedComparison
+import WeilConjectures.CategoryTheory.CartanEilenbergAugmentedComparison
 import Sheaf.Paper.EtaleCEQuotientPageDescent
 import Sheaf.Paper.EtaleCETotalizeAugmentedComparison
 

@@ -93,13 +93,14 @@
  "unit": "sk-thm-reduction",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ProjGradedModuleChartBasisComparisonFixedMaps",
-  "file": "lean/Sheaf/AlgebraicGeometry/ProjGradedModuleChartBasisComparisonFixedMaps.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ProjGradedModuleChartBasisComparisonFixedMaps",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ProjGradedModuleChartBasisComparisonFixedMaps.lean",
   "declaration": "AlgebraicGeometry.Proj.gradedModuleChart_basisComparison_fixed_core",
   "statement": "theorem gradedModuleChart_basisComparison_fixed_core\n    (Z : ∀ f : Fidx, Submodule R[f] N[f])\n    (rhoS : ∀ (f g : Fidx), D[g] ≤ D[f] → R[f] →+* R[g])\n    (rho : ∀ (f g : Fidx), D[g] ≤ D[f] → Z f →+ Z g)\n    (U : ∀ (f g : Fidx), R[f])\n    (hU : ∀ (f g : Fidx), (U f g).val = Localization.mk (g.val.1 ^ f.val.2)\n      (⟨f.val.1 ^ g.val.2, ⟨g.val.2, rfl⟩⟩ : Submonoid.powers f.val.1))\n    (theta : ∀ (f g : Fidx), D[g] ≤ D[f] →\n      LocalizedModule.Away (U f g) (Z f) ≃+ Z g)\n    (thetaS : ∀ (f g : Fidx), D[g] ≤ D[f] → Localization.Away (U f g) ≃+* R[g])\n    (htheta : ∀ (f g : Fidx) (i : D[g] ≤ D[f]),\n      (∀ r : R[f], thetaS f g i (algebraMap R[f] (Localization.Away (U f g)) r) =\n        rhoS f g i r) ∧\n      (∀ q : Z f, theta f g i (mk q 1) = rho f g i q) ∧\n      (∀ (r : Localization.Away (U f g)) (q : LocalizedModule.Away (U f g) (Z f)),\n        theta f g i (r • q) = thetaS f g i r • theta f g i q))\n    (hcanonical : ∀ (f g : Fidx) (i : D[g] ≤ D[f]),\n      ∃ l : Localization.Away f.val.1 →+* Localization.Away g.val.1,\n        (∀ a : S, l (algebraMap S (Localization.Away f.val.1) a) =\n          algebraMap S (Localization.Away g.val.1) a) ∧\n        ∀ r : R[f], (rhoS f g i r).val = l r.val)\n    (F : ModX) (alpha : ∀ f : Fidx, F.val.obj (op D[f]) ≃+ Z f)\n    (hscalar : ∀ (f : Fidx) (r : R[f]) (s : F.val.obj (op D[f])),\n      alpha f ((awayToSection 𝒜 f.val.1 r) • s) = r • alpha f s)\n    (hrestriction : ∀ (f g : Fidx) (i : D[g] ≤ D[f])\n      (s : F.val.obj (op D[f])),\n      alpha g (F.val.map (homOfLE i).op s) = rho f g i (alpha f s))\n    (f : Fidx) :\n      let e := basicOpenIsoSpec 𝒜 f.val.1 f.property.2 f.property.1\n      let E := Scheme.Modules.restrict F D[f].ι\n      let G := Scheme.Modules.restrict (tilde (ModuleCat.of R[f] (Z f))) e.hom\n      let B := Set.range (fun r : R[f] ↦ e.hom ⁻¹ᵁ PrimeSpectrum.basicOpen r)\n      ∃ a : E.val.obj (op ⊤) →+ G.val.obj (op ⊤),\n        ∀ V : B, ∃ l : E.val.obj (op V.val) →ₗ[\n          D[f].toScheme.ringCatSheaf.obj.obj (op V.val)] G.val.obj (op V.val),\n          Function.Bijective l ∧ ∀ s : E.val.obj (op ⊤),\n            l (E.val.map V.val.leTop.op s) =\n              G.val.map V.val.leTop.op (a s)",
   "branch": "sheaf-dag",
   "by": "M4",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.ProjGradedModuleChartBasisComparisonFixedMaps; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

@@ -11,7 +11,7 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Artinian.Defs
 public import Mathlib.RingTheory.LocalRing.Defs
 import Sheaf.RingTheory.PopescuFlatCoordinates
-import Sheaf.RingTheory.PopescuEtaleQuotientMap
+import WeilConjectures.RingTheory.PopescuEtaleQuotientMap
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 
 /-!

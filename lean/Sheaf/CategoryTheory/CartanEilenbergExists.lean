@@ -8,8 +8,8 @@ module
 public import Mathlib.Algebra.Homology.HomologicalBicomplex
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
-import Sheaf.CategoryTheory.CartanEilenbergRowsExists
-import Sheaf.CategoryTheory.CartanEilenbergRowsIdentifications
+import WeilConjectures.CategoryTheory.CartanEilenbergRowsExists
+import WeilConjectures.CategoryTheory.CartanEilenbergRowsIdentifications
 
 /-! # Existence of Cartan--Eilenberg injective resolutions
 

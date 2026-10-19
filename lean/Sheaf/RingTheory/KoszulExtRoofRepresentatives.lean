@@ -5,12 +5,12 @@ Authors: SHEAF group A4
 -/
 module
 
-public import Sheaf.RingTheory.KoszulDualComplex
+public import WeilConjectures.RingTheory.KoszulDualComplex
 public import Sheaf.RingTheory.KoszulRegularSequence
 public import Mathlib.LinearAlgebra.ExteriorPower.Basic
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
 public import Mathlib.Algebra.Category.ModuleCat.Ext.HasExt
-import Sheaf.RingTheory.KoszulDerivedDualEvaluation
+import WeilConjectures.RingTheory.KoszulDerivedDualEvaluation
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 

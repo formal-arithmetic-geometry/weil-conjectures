@@ -5,7 +5,7 @@ Authors: SHEAF group J3
 -/
 module
 
-public import Sheaf.RingTheory.KoszulDualComplex
+public import WeilConjectures.RingTheory.KoszulDualComplex
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 
 /-! # Reduction of coefficients in a dual Koszul complex

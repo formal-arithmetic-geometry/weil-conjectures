@@ -12,7 +12,7 @@ import Mathlib.AlgebraicGeometry.Gluing
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Sheaf.AlgebraicGeometry.FppfAffineRefinement
-import Sheaf.AlgebraicGeometry.FiniteCoproductLfpQcqs
+import WeilConjectures.AlgebraicGeometry.FiniteCoproductLfpQcqs
 import Sheaf.AlgebraicGeometry.FpqcCanonicalPullbackDatum
 import Sheaf.AlgebraicGeometry.FpqcRefinementReflectsEffectivity
 import Sheaf.AlgebraicGeometry.FpqcEffectivityOpenLocal

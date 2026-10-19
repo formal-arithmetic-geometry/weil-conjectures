@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
-import Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechStageData
+import WeilConjectures.AlgebraicGeometry.EtaleLimitFiniteCechStageData
 import Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechColimit
 
 set_option linter.unusedVariables false

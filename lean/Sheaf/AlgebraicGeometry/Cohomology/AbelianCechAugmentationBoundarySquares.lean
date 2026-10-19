@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechComparisonConstruction
 public import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechExtSectionIso
-import Sheaf.CategoryTheory.Abelian.HorseshoePrescribedResolutions
+import WeilConjectures.CategoryTheory.Abelian.HorseshoePrescribedResolutions
 import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechHorseshoeTotalBoundary
 import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechExtSectionBoundary
 

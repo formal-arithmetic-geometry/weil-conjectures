@@ -5,7 +5,7 @@ Authors: SHEAF group Q2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage

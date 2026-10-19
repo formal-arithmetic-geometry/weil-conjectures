@@ -15,9 +15,9 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 
 import Mathlib.RingTheory.DedekindDomain.Dvr
 import Mathlib.RingTheory.Unramified.LocalRing
-import Sheaf.AlgebraicGeometry.Morphisms.DvrUniformizerRootAlgebra
+import WeilConjectures.AlgebraicGeometry.Morphisms.DvrUniformizerRootAlgebra
 import Sheaf.RingTheory.DvrGaloisNormalizationRamificationDvd
-import Sheaf.RingTheory.DvrRootTensorFactorIntegralClosureFinite
+import WeilConjectures.RingTheory.DvrRootTensorFactorIntegralClosureFinite
 import Sheaf.RingTheory.DvrTameTensorFactorUnramified
 
 /-! # The algebraic tame root calculation in a generic tensor factor

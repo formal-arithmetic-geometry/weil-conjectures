@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 public import Sheaf.Algebra.Homology.HomComplex
-public import Sheaf.RingTheory.KoszulDualComplex
+public import WeilConjectures.RingTheory.KoszulDualComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.FromJoel.Algebra.Homology.PreservesQuasiIso
 import Sheaf.AlgebraicGeometry.AffineKoszulHomComplexIso

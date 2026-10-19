@@ -7,8 +7,8 @@ public import WeilConjectures.Compactification.FiniteTypeExtension
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import WeilConjectures.Compactification.FiniteTypeDirected
 import WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf
-import Sheaf.AlgebraicGeometry.DirectedIdealModuleColimit
-import Sheaf.AlgebraicGeometry.FiniteTypeIdealModule
+import WeilConjectures.AlgebraicGeometry.DirectedIdealModuleColimit
+import WeilConjectures.AlgebraicGeometry.FiniteTypeIdealModule
 
 @[expose] public section
 

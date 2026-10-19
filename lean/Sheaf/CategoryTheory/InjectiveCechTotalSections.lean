@@ -4,7 +4,7 @@ Released under Apache 2.0 license.
 -/
 module
 
-public import Sheaf.CategoryTheory.CechResolutionDoubleComplex
+public import WeilConjectures.CategoryTheory.CechResolutionDoubleComplex
 import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex

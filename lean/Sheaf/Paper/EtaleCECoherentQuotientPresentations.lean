@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.EtaleCEStationaryPageNaturality
 public import Sheaf.CategoryTheory.FilteredComplexQuotientCoherence
-import Sheaf.CategoryTheory.CartanEilenbergAllLowerBounds
+import WeilConjectures.CategoryTheory.CartanEilenbergAllLowerBounds
 import Sheaf.CategoryTheory.FilteredComplexSuccessorCyclesCover
 import Sheaf.Paper.EtaleCENormalizedRepresentativeCohomology
 import Sheaf.Paper.EtaleCECanonicalRowComparison

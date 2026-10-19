@@ -8,8 +8,8 @@ module
 public import Mathlib.Algebra.Homology.HomologicalComplex
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.Abelian.Basic
-import Sheaf.Algebra.Homology.CyclePullbackCore
-import Sheaf.Algebra.Homology.CyclePullbackLifting
+import WeilConjectures.Algebra.Homology.CyclePullbackCore
+import WeilConjectures.Algebra.Homology.CyclePullbackLifting
 
 /-!
 # Functorial cycle-pullback constructions

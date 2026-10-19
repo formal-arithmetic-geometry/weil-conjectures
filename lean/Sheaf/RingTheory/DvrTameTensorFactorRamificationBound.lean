@@ -16,8 +16,8 @@ public import Mathlib.RingTheory.RamificationInertia.Inertia
 
 import Mathlib.RingTheory.Flat.TorsionFree
 import Sheaf.RingTheory.DvrAbhyankarNormalizedFactor
-import Sheaf.RingTheory.DvrNormalizedTensorFactorLift
-import Sheaf.AlgebraicGeometry.Morphisms.DvrUniformizerRootAlgebra
+import WeilConjectures.RingTheory.DvrNormalizedTensorFactorLift
+import WeilConjectures.AlgebraicGeometry.Morphisms.DvrUniformizerRootAlgebra
 
 /-! # A numerical bound for tame DVR tensor factors
 

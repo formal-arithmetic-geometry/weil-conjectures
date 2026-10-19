@@ -17,8 +17,8 @@ public import Mathlib.Data.Finset.Union
 
 import Mathlib.RingTheory.MvPowerSeries.NoZeroDivisors
 import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
-import Sheaf.RingTheory.PowerSeriesSubringFiniteBasis
-import Sheaf.RingTheory.PowerSeriesSubringIntersection
+import WeilConjectures.RingTheory.PowerSeriesSubringFiniteBasis
+import WeilConjectures.RingTheory.PowerSeriesSubringIntersection
 
 /-!
 # Subfields of the fraction field of a power-series polynomial ring

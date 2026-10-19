@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.RingTheory.KoszulConormalComparison
+public import WeilConjectures.RingTheory.KoszulConormalComparison
 public import Sheaf.RingTheory.KoszulRegularSequence
 
 /-! Auxiliary linear independence and spanning result for conormal generators.

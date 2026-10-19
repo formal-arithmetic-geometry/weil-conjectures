@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.EtaleCEStationaryPageNaturality
 
-import Sheaf.CategoryTheory.CartanEilenbergAllLowerBounds
+import WeilConjectures.CategoryTheory.CartanEilenbergAllLowerBounds
 import Sheaf.Paper.EtaleCECoherentPrescribedResolutions
 import Sheaf.CategoryTheory.BoundedBelowSecondFiltration
 

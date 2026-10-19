@@ -12,7 +12,7 @@ import WeilConjectures.RingTheory.FormalGlueingInjectiveApproximation
 import WeilConjectures.RingTheory.FormalGlueingExtensionTransport
 import Mathlib.Algebra.Module.LocalizedModule.Exact
 import WeilConjectures.AlgebraicGeometry.TorsionModuleFlatBaseChangeIso
-import Sheaf.RingTheory.TorsionExtensionFlatDescent
+import WeilConjectures.RingTheory.TorsionExtensionFlatDescent
 
 /-!
 # Algebraizing formal glueing data

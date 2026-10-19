@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 
 /-! # Projectivity of the stalk of a finite free module sheaf
 

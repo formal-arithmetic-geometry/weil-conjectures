@@ -6,14 +6,14 @@ Authors: SHEAF group M1
 module
 
 public import Sheaf.AlgebraicGeometry.Coherent
-public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Category.Grp.Colimits
 import Sheaf.AlgebraicGeometry.CoherentHomIdealPowerExtension
 import Sheaf.AlgebraicGeometry.CoherentHomIdealPowerEventuallyZero
 import Mathlib.RingTheory.Ideal.Operations
-import Sheaf.AlgebraicGeometry.FiniteTypeIdealModule
+import WeilConjectures.AlgebraicGeometry.FiniteTypeIdealModule
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections

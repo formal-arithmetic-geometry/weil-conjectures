@@ -107,13 +107,14 @@
  "unit": "sk-prop-input-spreading",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.DvrNormalizedTensorFactorLift",
-  "file": "lean/Sheaf/RingTheory/DvrNormalizedTensorFactorLift.lean",
+  "module": "WeilConjectures.RingTheory.DvrNormalizedTensorFactorLift",
+  "file": "lean/WeilConjectures/RingTheory/DvrNormalizedTensorFactorLift.lean",
   "declaration": "RingTheory.dvr_normalized_tensor_factor_lift",
   "statement": "theorem dvr_normalized_tensor_factor_lift\n    (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]\n    (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]\n    [Algebra B A] [Module.Finite B A]\n    (E : Type u) [Field E] [Algebra (FractionRing B) E]\n    (hE : FiniteDimensional (FractionRing B) E ∧ Algebra.IsSeparable (FractionRing B) E) :\n    letI : Algebra B E :=\n      ((algebraMap (FractionRing B) E).comp (algebraMap B (FractionRing B))).toAlgebra\n    ∀ (P : Ideal (E ⊗[B] A)) (hP : P.IsMaximal),\n    letI := hP\n    let F := (E ⊗[B] A) ⧸ P\n    let alpha : A →+* F := (Ideal.Quotient.mk P).comp\n      (Algebra.TensorProduct.includeRight : A →ₐ[B] E ⊗[B] A).toRingHom\n    letI := alpha.toAlgebra\n    Function.Injective alpha →\n    let S := integralClosure A F\n    Module.Finite A S →\n    ∀ (Q : Ideal S) (hQ : Q.IsPrime),\n    Q.comap (algebraMap A S) = IsLocalRing.maximalIdeal A →\n    ∀ (A₁ : Type u) [CommRing A₁] [IsDomain A₁] [IsDiscreteValuationRing A₁]\n      [Algebra A A₁] [Algebra B A₁] [IsScalarTower B A A₁]\n      [Module.Finite A A₁] [FaithfulSMul A A₁],\n    ∃ (P₁ : Ideal (E ⊗[B] A₁)) (hP₁ : P₁.IsMaximal),\n    letI := hP₁\n    let F₁ := (E ⊗[B] A₁) ⧸ P₁\n    let alpha₁ : A₁ →+* F₁ := (Ideal.Quotient.mk P₁).comp\n      (Algebra.TensorProduct.includeRight : A₁ →ₐ[B] E ⊗[B] A₁).toRingHom\n    letI := alpha₁.toAlgebra\n    letI : Algebra A F₁ := (alpha₁.comp (algebraMap A A₁)).toAlgebra\n    letI : IsScalarTower A A₁ F₁ := .of_algebraMap_eq' rfl\n    let S₁ := integralClosure A₁ F₁\n    Function.Injective alpha₁ ∧ Module.Finite A₁ S₁ ∧\n    ∃ (i : S →ₐ[A] S₁) (Q₁ : Ideal S₁),\n      Q₁.IsPrime ∧ Q₁.comap i.toRingHom = Q ∧\n      Q₁.comap (algebraMap A₁ S₁) = IsLocalRing.maximalIdeal A₁ ∧\n      letI := i.toRingHom.toAlgebra\n      Module.Flat S S₁",
   "branch": "sheaf-dag",
   "by": "H2",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.DvrNormalizedTensorFactorLift; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-14",

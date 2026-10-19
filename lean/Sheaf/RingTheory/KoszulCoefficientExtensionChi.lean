@@ -5,7 +5,7 @@ Authors: SHEAF group V1
 -/
 module
 
-public import Sheaf.RingTheory.KoszulDualComplex
+public import WeilConjectures.RingTheory.KoszulDualComplex
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.LinearAlgebra.ExteriorPower.Basic
 public import Sheaf.RingTheory.KoszulRegularSequence

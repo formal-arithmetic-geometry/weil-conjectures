@@ -12,7 +12,7 @@ import Sheaf.AlgebraicGeometry.IdealDataRecursivePowerComparison
 import Sheaf.AlgebraicGeometry.IdealPowerComplement
 import Sheaf.AlgebraicGeometry.IdealPowerTorsionFreeSectionLifting
 import Sheaf.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
-import Sheaf.AlgebraicGeometry.FiniteTypeIdealModule
+import WeilConjectures.AlgebraicGeometry.FiniteTypeIdealModule
 
 /-! # Extending a quasi-coherent section from an ideal power
 

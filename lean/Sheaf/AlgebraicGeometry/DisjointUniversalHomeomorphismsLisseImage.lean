@@ -7,11 +7,11 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAbelianLift
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAbelianLift
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
-import Sheaf.AlgebraicGeometry.EtaleSetPullbackSheafEquivalence
+import WeilConjectures.AlgebraicGeometry.EtaleSetPullbackSheafEquivalence
 import WeilConjectures.ConstructibleSheaf.Pullback
-import Sheaf.AlgebraicGeometry.DisjointComponentsLocallyConstantImage
+import WeilConjectures.AlgebraicGeometry.DisjointComponentsLocallyConstantImage
 
 /-!
 # Locally constant direct image from finitely many universal-homeomorphism components

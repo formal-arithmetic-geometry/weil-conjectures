@@ -6,7 +6,7 @@ Authors: SHEAF group N0
 module
 
 public import Sheaf.AlgebraicGeometry.ModuleStrictTransform
-public import Sheaf.AlgebraicGeometry.FiniteTypeIdealModule
+public import WeilConjectures.AlgebraicGeometry.FiniteTypeIdealModule
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.AlgebraicGeometry.Fiber

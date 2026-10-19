@@ -7,7 +7,7 @@ public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.AlgebraicGeometry.Limits
 
-import Sheaf.AlgebraicGeometry.Morphisms.DvrUniformizerRootAlgebra
+import WeilConjectures.AlgebraicGeometry.Morphisms.DvrUniformizerRootAlgebra
 import Sheaf.AlgebraicGeometry.Morphisms.DvrGenericGaloisNormalization
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 import Mathlib.RingTheory.DedekindDomain.Dvr

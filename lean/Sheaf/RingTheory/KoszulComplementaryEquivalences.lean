@@ -5,7 +5,7 @@ Authors: SHEAF group H1
 -/
 module
 
-public import Sheaf.RingTheory.KoszulDualComplex
+public import WeilConjectures.RingTheory.KoszulDualComplex
 import Mathlib.LinearAlgebra.ExteriorAlgebra.Basis
 import Mathlib.LinearAlgebra.Dual.Basis
 

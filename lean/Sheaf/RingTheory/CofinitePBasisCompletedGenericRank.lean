@@ -17,7 +17,7 @@ public import Mathlib.Algebra.Field.Subfield.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
 import Sheaf.RingTheory.ParameterIdealFormalNormalization
 import Sheaf.RingTheory.PowerSeriesRingSubfields
-import Sheaf.RingTheory.PBasisComplementMonomialBasis
+import WeilConjectures.RingTheory.PBasisComplementMonomialBasis
 import WeilConjectures.FieldTheory.PBasisDifferentialsBasis
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.RingTheory.Etale.Kaehler

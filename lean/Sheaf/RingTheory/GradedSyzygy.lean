@@ -11,7 +11,7 @@ public import Mathlib.LinearAlgebra.Basis.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import Mathlib.LinearAlgebra.Dimension.Finite
-import Sheaf.RingTheory.GradedFreeCover
+import WeilConjectures.RingTheory.GradedFreeCover
 import Sheaf.RingTheory.GradedKernelInternal
 import Sheaf.RingTheory.GradedNakayamaFree
 import Sheaf.RingTheory.SecondSyzygyTorVanishes
