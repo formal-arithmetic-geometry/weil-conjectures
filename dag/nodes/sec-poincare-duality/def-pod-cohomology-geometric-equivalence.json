@@ -1,129 +1,120 @@
 {
-  "id": "def-pod-cohomology-geometric-equivalence",
-  "kind": "definition",
-  "title": "The constant-sheaf cohomology equivalence of an isomorphism of geometric fibers",
-  "statement": "Let $k_0,k'_0$ be finite fields and let $\\ell$ be prime and invertible in both.\nLet $X_0/k_0$ and $Y_0/k'_0$ be schemes with quasi-compact, quasi-separated, locally\nfinite-type structure morphisms, and let $e:\\overline Y\\xrightarrow{\\sim}\\overline X$\nbe an isomorphism of their geometric fibers [def-weil-finite-field-fiber]. Define\n$e_i:H^i(\\overline Y,\\overline{\\mathbf Q}_\\ell)\\xrightarrow{\\sim}\nH^i(\\overline X,\\overline{\\mathbf Q}_\\ell)$, with cohomology as in\n[def-weil-ordinary-compact-cohomology], by identifying both groups with homology of\nderived global sections of the constant adic sheaf [def-weil-constant-weil-structure],\nthen applying the exact pushforward equivalence $e_*$, its constant-unit isomorphism,\nand the canonical global-section composition isomorphism. These comparisons define\na specific linear equivalence and contain no unspecified choice of a cohomology map.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-thm-poincare-duality/thm-weil-poincare-duality.md",
-    "place": "Proof, item (6), canonical identification of geometric fibers and the induced cohomology identification"
-  },
-  "stmt_deps": [
-    "def-weil-finite-field-fiber",
-    "def-weil-ordinary-compact-cohomology",
-    "def-weil-constant-weil-structure"
-  ],
-  "proof": [
-    {
-      "text": "Identify the underlying Weil cohomology carrier with homology of derived global sections of the actual constant adic unit. Use the derived forgetful comparison and exactness of sections at the algebraically closed point, then the canonical derived-composition comparison.",
-      "uses": [
-        "def-weil-ordinary-compact-cohomology",
-        "lem-weil-point-proetale-sections-exact",
-        "def-weil-constant-weil-structure"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Pushforward along the given geometric isomorphism is an exact equivalence, with the specified constant-unit isomorphism. Compose its right-derived global-section comparison with the unit isomorphism, apply homology, and conjugate by the carrier identifications of the first step. This is the actual Lean construction; no arbitrary cohomology equivalence is selected.",
-      "uses": [
-        "def-weil-finite-field-fiber",
-        "def-weil-constant-weil-structure"
-      ],
-      "elementary": true
-    }
-  ],
-  "proof_deps": [
-    "def-weil-ordinary-compact-cohomology",
-    "lem-weil-point-proetale-sections-exact",
-    "def-weil-constant-weil-structure",
-    "def-weil-finite-field-fiber"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-thm-poincare-duality/thm-weil-poincare-duality.md",
-    "place": "Proof, item (6), isomorphism invariance implemented by the explicit derived-global-section construction; audited in the F3 second reading, 2026-10-16"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "An isomorphism of geometric fibers conjugating Frobenius induces a linear equivalence of constant sheaf cohomology intertwining Frobenius",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Derived global sections of the constant adic sheaf are invariant under an isomorphism of schemes",
-      "results": "No exact theorem: AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso, AlgebraicGeometry.structurePresheafCompForget, AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app, AlgebraicGeometry.Scheme.Spec_map_presheaf_map_eqToHom, AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen, AlgebraicGeometry.Scheme.SpecMap_presheaf_map_eqToHom, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafCompForget",
-      "date": "2026-10-16",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "grep",
-      "query": "Frobenius.*cohomology|cohomology.*Frobenius|adicConstant|globalSections.*Iso",
-      "results": "No exact theorem: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean",
-      "date": "2026-10-16",
-      "verdict": "no exact match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "WeilConjectures.WeilSheaf.PoincareDuality",
-    "date": "2026-10-16",
-    "group": "F3"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-weil-poincare-duality",
-      "place": "Proof, item (6), canonical identification of geometric fibers and the induced cohomology identification",
-      "via": []
-    },
-    "same_as": []
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-poincare-duality",
-  "unit": "sk-thm-poincare-duality",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.WeilSheaf.CohomologyGeometricEquivalence",
-    "file": "lean/Sheaf/WeilSheaf/CohomologyGeometricEquivalence.lean",
-    "declaration": "AlgebraicGeometry.WeilSheaf.cohomologyLinearEquivOfGeometricFiberIso",
-    "statement": "def cohomologyLinearEquivOfGeometricFiberIso\n    (k k' : Type u) [Field k] [Finite k] [Field k'] [Finite k']\n    (l : ℕ) [Fact l.Prime] [Fact (ringChar k ≠ l)] [Fact (ringChar k' ≠ l)]\n    (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k'))]\n    [QuasiCompact (X ↘ Spec (.of k))] [QuasiSeparated (X ↘ Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (Y ↘ Spec (.of k'))] [QuasiSeparated (Y ↘ Spec (.of k'))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k'))]\n    (e : (Y ↘ Spec (.of k')).geometricFiber ≅ (X ↘ Spec (.of k)).geometricFiber) (i : ℤ) :\n    ((WeilSheaf.adicConstant k' l Y).cohomology i).carrier ≃ₗ[PadicAlgCl l]\n      ((WeilSheaf.adicConstant k l X).cohomology i).carrier",
-    "branch": "sheaf-dag",
-    "by": "F3",
-    "date": "2026-10-16"
-  },
-  "reviewed": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "F3",
-    "result": "pass",
-    "landing": "20261015T194213-L-1175013",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "F3",
-    "result": "pass",
-    "landing": "20261015T194213-L-1175013",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ "id": "def-pod-cohomology-geometric-equivalence",
+ "kind": "definition",
+ "title": "The constant-sheaf cohomology equivalence of an isomorphism of geometric fibers",
+ "statement": "Let $k_0,k'_0$ be finite fields and let $\\ell$ be prime and invertible in both.\nLet $X_0/k_0$ and $Y_0/k'_0$ be schemes with quasi-compact, quasi-separated, locally\nfinite-type structure morphisms, and let $e:\\overline Y\\xrightarrow{\\sim}\\overline X$\nbe an isomorphism of their geometric fibers [def-weil-finite-field-fiber]. Define\n$e_i:H^i(\\overline Y,\\overline{\\mathbf Q}_\\ell)\\xrightarrow{\\sim}\nH^i(\\overline X,\\overline{\\mathbf Q}_\\ell)$, with cohomology as in\n[def-weil-ordinary-compact-cohomology], by identifying both groups with homology of\nderived global sections of the constant adic sheaf [def-weil-constant-weil-structure],\nthen applying the exact pushforward equivalence $e_*$, its constant-unit isomorphism,\nand the canonical global-section composition isomorphism. These comparisons define\na specific linear equivalence and contain no unspecified choice of a cohomology map.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-thm-poincare-duality/thm-weil-poincare-duality.md",
+  "place": "Proof, item (6), canonical identification of geometric fibers and the induced cohomology identification"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-constant-weil-structure"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing upstream construction, with the exact recorded signature: cohomologyCarrierIso identifies the underlying Weil cohomology with homology of derived global sections; derivedGlobalSectionsUnitIso is the transport along e built from the pushforward equivalence, its unit isomorphism and the global-section comparison. The linear equivalence is the homology of this transport conjugated by the two carrier comparisons. The Frobenius compatibility and composition of this construction are proved in the upstream modules. No Sheaf proof-dependency import is needed.",
+   "uses": [],
+   "elementary": true
   }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-thm-poincare-duality/thm-weil-poincare-duality.md",
+  "place": "Proof, item (6), canonical identification of geometric fibers and the induced cohomology identification; H1 reuses the complete existing upstream CohomologyGeometricEquivalence implementation and retires the duplicate Sheaf module (2026-10-19)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism of geometric fibers conjugating Frobenius induces a linear equivalence of constant sheaf cohomology intertwining Frobenius",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections of the constant adic sheaf are invariant under an isomorphism of schemes",
+   "results": "No exact theorem: AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso, AlgebraicGeometry.structurePresheafCompForget, AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app, AlgebraicGeometry.Scheme.Spec_map_presheaf_map_eqToHom, AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen, AlgebraicGeometry.Scheme.SpecMap_presheaf_map_eqToHom, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafCompForget",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius.*cohomology|cohomology.*Frobenius|adicConstant|globalSections.*Iso",
+   "results": "No exact theorem: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.WeilSheaf.PoincareDuality",
+  "date": "2026-10-16",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-poincare-duality",
+   "place": "Proof, item (6), canonical identification of geometric fibers and the induced cohomology identification",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-poincare-duality",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.WeilSheaf.CohomologyGeometricEquivalence",
+  "file": "lean/WeilConjectures/WeilSheaf/CohomologyGeometricEquivalence.lean",
+  "declaration": "AlgebraicGeometry.WeilSheaf.cohomologyLinearEquivOfGeometricFiberIso",
+  "statement": "def cohomologyLinearEquivOfGeometricFiberIso\n    (k k' : Type u) [Field k] [Finite k] [Field k'] [Finite k']\n    (l : ℕ) [Fact l.Prime] [Fact (ringChar k ≠ l)] [Fact (ringChar k' ≠ l)]\n    (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k'))]\n    [QuasiCompact (X ↘ Spec (.of k))] [QuasiSeparated (X ↘ Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (Y ↘ Spec (.of k'))] [QuasiSeparated (Y ↘ Spec (.of k'))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k'))]\n    (e : (Y ↘ Spec (.of k')).geometricFiber ≅ (X ↘ Spec (.of k)).geometricFiber) (i : ℤ) :\n    ((WeilSheaf.adicConstant k' l Y).cohomology i).carrier ≃ₗ[PadicAlgCl l]\n      ((WeilSheaf.adicConstant k l X).cohomology i).carrier",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-19",
+  "declarations": [
+   "AlgebraicGeometry.WeilSheaf.derivedLowerStarAdicConstant",
+   "AlgebraicGeometry.WeilSheaf.cohomologyCarrierIso",
+   "AlgebraicGeometry.WeilSheaf.cohomology_adicConstant_frobenius",
+   "AlgebraicGeometry.WeilSheaf.cohomologyCarrierIso_hom_frobenius",
+   "AlgebraicGeometry.WeilSheaf.cohomologyLinearEquivOfGeometricFiberIso"
+  ],
+  "note": "Use the upstream canonical derived-global-section construction of the same notion and exact signature, retiring the duplicate Sheaf definition. The carrier comparisons and transport are constructed from right-derived universal properties, not chosen arbitrary isomorphisms."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261015T194213-L-1175013",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-9efcf",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261019T231208-L-560105",
+  "kind": "interface",
+  "note": "independent cc review: withdrawn Sheaf conjugacy/equivalence duplicates and repointed nodes vs the byte-identical live upstream WeilConjectures.WeilSheaf.CohomologyGeometric{Conjugacy,Equivalence} (same names and signatures, node statements unchanged); --all compile clean; axioms: sorryAx only via WeilSheaf.cohomology in the statement"
+ }
 }
