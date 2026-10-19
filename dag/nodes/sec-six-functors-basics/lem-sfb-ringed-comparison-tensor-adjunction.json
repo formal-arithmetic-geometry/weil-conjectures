@@ -20,61 +20,69 @@
  ],
  "proof": [
   {
-   "text": "Put $h_i=g_i\\circ f_i$, $Q_i=Lh_i^*$ and $S_i=Rh_{i*}$. Apply [lem-sfb-ringed-derived-monoidal-comparisons] to each composable pair $(f_i,g_i)$ and to the specified ring-compatible 2-isomorphism between $h_1$ and $h_2$. This gives the canonical comparisons $a_i:Q_i\\xrightarrow{\\sim}P_i$, $\\kappa_i:S_i\\xrightarrow{\\sim}V_i$, and the induced comparisons $s:Q_2\\xrightarrow{\\sim}Q_1$, $r:S_1\\xrightarrow{\\sim}S_2$. They have exactly the K-flat pullback and normalized direct-image meanings used in the statement. Unwinding the two paths therefore gives $\\theta=a_1\\circ s\\circ a_2^{-1}$ and $c=\\kappa_2\\circ r\\circ\\kappa_1^{-1}$. Write $T_{i,K,H}:Q_i(K\\otimes^LH)\\to Q_iK\\otimes^LQ_iH$ for the tensor comparison for $h_i$. The lemma applies to arbitrary structural ring maps and unbounded complexes; no exactness of the module pullbacks is needed.",
+   "text": "Use the factorization equation of Functor.leftDerivedNatTrans for the canonical pullback comparison. Transport it from the homotopy localization Qh to the complex localization Q using quotientCompQhIso. Expand the composite left counit and cancel the intermediate quotient comparison. This proves on every complex P the equation theta_QP followed by the two path-1 complex comparisons equals the two path-2 complex comparisons followed by Q of the specified ordinary module square. No invertibility of these complex comparisons is used.",
    "uses": [
-    "lem-sfb-ringed-derived-monoidal-comparisons"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition); apply the existing general coherence lemma to the two paths and the specified 2-isomorphism"
-   }
-  },
-  {
-   "text": "The monoidality assertions of [lem-sfb-ringed-derived-monoidal-comparisons] say\n$$d_i\\circ a_{i,K\\otimes^LH}=(a_{i,K}\\otimes^La_{i,H})\\circ T_i,\\qquad T_1\\circ s_{K\\otimes^LH}=(s_K\\otimes^Ls_H)\\circ T_2.$$\nSuppressing the displayed $K,H$ subscripts on $d_i,T_i$, substitute these equalities into the expression for $\\theta$ from step 1:\n$$\\begin{aligned}\nd_1\\circ\\theta_{K\\otimes^LH}\n&=(a_{1,K}\\otimes^La_{1,H})\\circ T_1\\circ s_{K\\otimes^LH}\\circ a_{2,K\\otimes^LH}^{-1}\\\\\n&=((a_{1,K}\\circ s_K)\\otimes^L(a_{1,H}\\circ s_H))\\circ T_2\\circ a_{2,K\\otimes^LH}^{-1}\\\\\n&=((a_{1,K}\\circ s_K)\\otimes^L(a_{1,H}\\circ s_H))\\circ(a_{2,K}^{-1}\\otimes^La_{2,H}^{-1})\\circ d_2\\\\\n&=(\\theta_K\\otimes^L\\theta_H)\\circ d_2.\n\\end{aligned}$$\nThe third line follows by composing the first displayed equality for $i=2$ with the inverses of $a_2$ and $a_{2,K}\\otimes^La_{2,H}$. All other rearrangements are associativity and bifunctoriality of tensor. This proves the tensor identity with the given $d_i$.",
-   "uses": [
-    "lem-sfb-ringed-derived-monoidal-comparisons"
+    "lem-weil-pbc-localization-universal-property"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition); elementary substitution of the existing monoidal comparison identities"
+    "place": "Tags 0D6D, 07A4, 07A6, 0D6E and Remark 07A7; universal derived comparisons and the canonical Hom normalization"
    }
   },
   {
-   "text": "The adjunction compatibility in [lem-sfb-ringed-derived-monoidal-comparisons] is for the canonical adjunction $Q_i\\dashv S_i$ and the composite adjunction $P_i\\dashv V_i$ of the statement. With the conjugation convention of [def-weil-pbc-adjunction-conjugate], its composition assertion gives $a_i^c=\\kappa_i^{-1}:V_i\\to S_i$. Its 2-isomorphism assertion gives $s^c=r:S_1\\to S_2$. Conjugation reverses composition and takes inverses to inverses, by [def-weil-pbc-adjunction-conjugate]. Thus\n$$\\theta^c=(a_2^{-1})^c\\circ s^c\\circ a_1^c=\\kappa_2\\circ r\\circ\\kappa_1^{-1}=c.$$\nThe inverse on $\\kappa_1$ and absence of an inverse on $\\kappa_2$ follow from their actual types, so this identifies the specified direct-image comparison, including its normalization.",
+   "text": "Apply lem-weil-pbc-ringed-square-tensor-compatibility to this representative equation for every pair of flat-term K-flat complexes. Package both sides of the asserted tensor equation as natural transformations on D(Y) times D(Y). The injectivity of two-variable restriction from lem-weil-pbc-site-derived-tensor-descent proves their equality: quotientCompQhIso transports the representative calculation from Q to Qh. Evaluate at K,H and expand ringedPathTensorMap.",
    "uses": [
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "def-weil-pbc-adjunction-conjugate"
+    "lem-weil-pbc-ringed-square-tensor-compatibility",
+    "lem-weil-pbc-site-derived-tensor-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0D6E (lemma-derived-pushforward-composition), 07A6 (lemma-adjoint); adjunction normalization supplied by the existing general coherence lemma and contravariant composition of conjugates"
+    "place": "Tags 0D6D, 07A4, 07A6, 0D6E and Remark 07A7; universal derived comparisons and the canonical Hom normalization"
    }
   },
   {
-   "text": "Finally [def-weil-pbc-adjunction-conjugate] identifies conjugation with the mate for identity intervening functors, and [def-weil-pbc-adjunction-mate] characterizes that mate by its transpose. Apply this to $\\theta:P_2\\to P_1$ and the composite adjunctions. The transpose of $c_Z=(\\theta^c)_Z$ under $P_2\\dashv V_2$ is, by that characterization, $e_{1,Z}\\circ\\theta_{V_1Z}$. By the definition of the adjunction transpose of a map $V_1Z\\to V_2Z$, it is also $e_{2,Z}\\circ P_2(c_Z)$. Equating the two descriptions yields\n$$e_{2,Z}\\circ P_2(c_Z)=e_{1,Z}\\circ\\theta_{V_1Z}:P_2V_1Z\\longrightarrow Z,$$\nas required.",
+   "text": "View each edge complex counit as a TwoSquare from the termwise module adjunction to the specified derived adjunction. Its mate is exactly the edge right-derived unit: apply the canonicalAdjunction Hom normalization to the ordinary complex counit, whose transpose is identity, and use mateEquiv_counit. Paste two such squares. mateEquiv_hcomp identifies the mate of the path complex counit with ringedPathRightUnit. The ordinary complex-composition isomorphisms have identity components.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D, 07A4, 07A6, 0D6E and Remark 07A7; universal derived comparisons and the canonical Hom normalization"
+   }
+  },
+  {
+   "text": "The representative equation of step 1 is the equality between whiskering the second path square by the ordinary comparison and whiskering the first path square by theta. Apply conjugateEquiv_mateEquiv_vcomp and mateEquiv_conjugateEquiv_vcomp, then step 3. This gives the right-derived unit factorization for the conjugate of theta. Check degreewise that conjugating the termwise ordinary module square is the termwise conjugate of the composite module adjunctions. By rightDerived_ext and rightDerivedNatTrans_app, the independently defined canonical direct-image comparison equals that conjugate. Apply conjugateEquiv_counit to obtain the displayed counit identity.",
    "uses": [
     "def-weil-pbc-adjunction-conjugate",
-    "def-weil-pbc-adjunction-mate"
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-localization-universal-property"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Remark 07A7 (remark-base-change), transpose-of-counit convention; the displayed identity is the defining transpose characterization of the mate"
+    "place": "Tags 0D6D, 07A4, 07A6, 0D6E and Remark 07A7; universal derived comparisons and the canonical Hom normalization"
    }
   }
  ],
  "proof_deps": [
-  "lem-sfb-ringed-derived-monoidal-comparisons",
-  "def-weil-pbc-adjunction-conjugate",
-  "def-weil-pbc-adjunction-mate"
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-ringed-square-tensor-compatibility",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "def-weil-pbc-adjunction-conjugate"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0D6D, 07A4, 07A6, 0D6E; formal two-path deduction from the existing general coherence statement lem-sfb-ringed-derived-monoidal-comparisons and the mate definitions; not a claim that Stacks prints these equations verbatim"
+  "place": "Tags 0D6D, 07A4, 07A6, 0D6E and Remark 07A7; universal derived comparisons and the canonical Hom normalization",
+  "note": "F9: direct representative tensor descent and pasting of normalized mates; the general System coherence interface is unnecessary for the stated tensor-model hypotheses."
  },
  "mathlib_searches": [
   {
@@ -260,5 +268,15 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "Repair of returned d70256e128d3: use recorded ringed tensor corners/edges/models and the ring-compatible square insertion equation. The actual module-sheaf derived categories carry HasDerivedCategory.{w}; there are no arbitrary category slots, tensor maps or endpoint isomorphisms. Both comparisons are Mathlib universal derived lifts of the ordinary ringed path comparison with the actual composite counits/units and their derived-functor witnesses. Lh*/Rh* are modeled by the composite functors themselves; composition identifications are identities in this model. The right lift is constructed independently of the derived mate. Right-derived witnesses include the derived Hom normalization, and the two counits are Adjunction.comp. The canonical tensor maps come from RingedTensorEdge.tensorComparison."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261019T034256-L-416496",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
