@@ -16727,3 +16727,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:26 L: merged deliver/J4/Sheaf.AlgebraicGeometry.VectorBundleIntegration (stage 3; reviewer PASS; first push; landing 20261019T002625-L-2166668 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:26 L: merged deliver/J4/Sheaf.Paper.FieldDerivedScalarTower (stage 3; reviewer PASS; first push; landing 20261019T002627-L-2167457 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:26 L: merged deliver/J5/Sheaf.AlgebraicGeometry.ShriekTensorComposition (stage 3; reviewer PASS; first push; landing 20261019T002628-L-2168099 (proof); batch 20261019T002449; modules 1; new nodes 0)
+- 00:26 L: merged deliver/J5/Sheaf.Paper.LocalizingExceptionalAdjoint (stage 3; reviewer PASS; first push; landing 20261019T002629-L-2168711 (proof); batch 20261019T002449; modules 1; new nodes 0)
