@@ -1,0 +1,168 @@
+{
+ "id": "lem-pur-concentrated-edge-iso",
+ "kind": "statement",
+ "title": "The normalized edge is invertible in the lowest cohomology degree",
+ "statement": "In [def-pur-conventions], let $Y$ be a scheme, $q\\in\\mathbf Z$, and $e:H^qR\\Gamma(Y,-)\\to\\Gamma(Y,H^q(-))$ a natural map satisfying the explicit cocycle normalization `EdgeNormalization` of [lem-pur-retracted-support-localization-comparison]. For every derived pro-etale module sheaf $K$ with $H^i(K)=0$ for $i<q$, $e_K$ is an isomorphism.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+  "place": "second paragraph, canonical edge comparison, with first-paragraph good truncation"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "lem-pur-retracted-support-localization-comparison",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Good truncation followed by a bounded-below injective resolution gives a K-injective representative I of K that is zero below q. Both I and its global-section complex have no degree-q boundaries, so their cycles-to-homology projections are invertible.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "proof of lem-pur-gysin-structure"
+   }
+  },
+  {
+   "text": "Global sections preserve the kernel of the degree-q differential. The normalization equation therefore identifies the composite of the invertible global cycles-to-homology map and e with a composite of kernel-comparison and homology-factorization isomorphisms. Cancel the invertible first factor. Naturality along the representative isomorphism gives invertibility at K.",
+   "uses": [
+    "lem-pur-retracted-support-localization-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "proof of lem-pur-gysin-structure"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-dplus-injective-representative",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-pur-retracted-support-localization-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+  "place": "second paragraph, canonical edge comparison, with first-paragraph good truncation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized edge map from derived global sections to global sections of cohomology is an isomorphism for an object with cohomology in one degree",
+   "results": [
+    "CochainComplex.isIso_homologyπ₀",
+    "CochainComplex.ConnectData.homologyIsoPos",
+    "CategoryTheory.instIsIsoToRightDerivedZero'",
+    "CochainComplex.isoHomologyπ₀",
+    "CochainComplex.isIso_liftCycles_iff",
+    "CategoryTheory.ProjectiveResolution.cochainComplexXIso",
+    "groupCohomology.isoShortComplexH1",
+    "Rep.standardComplex.instQuasiIsoNatεToSingle₀"
+   ],
+   "date": "2026-10-19",
+   "verdict": "No matching theorem. Existing exact-functor, tensor-unit, homology and truncation APIs are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.homologyFunctor",
+   "results": [
+    "DerivedCategory.homologyFunctor",
+    "DerivedCategory.instShiftSequenceHomologyFunctorOfNatInt",
+    "DerivedCategory.instIsHomologicalHomologyFunctor",
+    "DerivedCategory.shift_homologyFunctor",
+    "DerivedCategory.HomologySequence.δ",
+    "DerivedCategory.isIso_iff",
+    "DerivedCategory.homologyFunctorFactors",
+    "DerivedCategory.HomologySequence.exact₁"
+   ],
+   "date": "2026-10-19",
+   "verdict": "No matching theorem. Existing exact-functor, tensor-unit, homology and truncation APIs are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "gysin|Gysin|concentrated_single",
+   "results": [
+    "Mathlib/CategoryTheory/Sites/Canonical.lean",
+    "Mathlib/CategoryTheory/Sites/Canonical.lean",
+    "Mathlib/CategoryTheory/Sites/Canonical.lean"
+   ],
+   "date": "2026-10-19",
+   "verdict": "No matching theorem. Existing exact-functor, tensor-unit, homology and truncation APIs are used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The lowest degree edge map from derived global sections to global sections of cohomology is an isomorphism",
+   "results": [
+    "groupCohomology.isIso_δ_of_isZero",
+    "groupCohomology.shortComplexH1_f",
+    "AlgebraicGeometry.StructureSheaf.globalSectionsIso",
+    "AlgebraicGeometry.StructureSheaf.globalSectionsIso_hom",
+    "groupCohomology.π_comp_H0IsoOfIsTrivial_hom",
+    "groupCohomology.dArrowIso₀₁_inv_left",
+    "groupCohomology.comp_d₀₁_eq",
+    "AlgebraicGeometry.StructureSheaf.globalSectionsIso_inv"
+   ],
+   "date": "2026-10-19",
+   "verdict": "No matching statement. Existing homology, shift, truncation and kernel APIs reused."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityGysinStructure",
+  "date": "2026-10-19",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-gysin-structure",
+   "place": "second paragraph, canonical edge comparison, with first-paragraph good truncation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurityConcentratedEdge",
+  "file": "lean/Sheaf/Paper/PurityConcentratedEdge.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RetractedSupport.edge_isIso_of_isGE",
+  "statement": "theorem edge_isIso_of_isGE (P : WeilConjectures.PurityFiniteSetting.{u})\n    (Y : Scheme.{u}) (q : ℤ) (e : hyper P Y q ⟶ localClasses P Y q)\n    (he : EdgeNormalization P Y q e) (K : DerivedCategory (ProSheaves P Y))\n    [K.IsGE q] : IsIso (e.app K)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-b2553",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261019T231136-L-552854",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-b2553",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261019T231136-L-552854",
+  "kind": "interface",
+  "note": "independent cc review: Delivered PurityGysinStructure + 3 new helper modules/nodes vs live sheaf-dag item module and node lem-pur-gysin-structure; 6 rewritten defs checked equal to the old bodies by hand; both direct importers (PurityAffineLineOrientation, PurityAffineLineOrientationUniqueness) compiled against the delivered oleans; axioms checked"
+ }
+}

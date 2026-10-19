@@ -1,0 +1,174 @@
+{
+ "id": "lem-pur-constant-finite-tor",
+ "kind": "statement",
+ "title": "The coefficient unit is finite Tor constructible",
+ "statement": "For the finite coefficient datum [def-pur-conventions], a scheme $Y$ with a structure morphism to $\\operatorname{Spec}k$, and $e\\mid n$, the intrinsic realization [def-weil-pbc-proetale-modules] of $A_Y[0]$ belongs to $D^b_{ctf}(Y,A)$ [def-weil-finite-tor-amplitude]. No finite-type or separatedness hypothesis on $Y$ is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+  "place": "first paragraph, tensor-unit argument proving constructibility and Tor amplitude"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "For an abstract finite commutative coefficient ring, identify the constant rank-one sheaf with the sheaf tensor unit by the monoidal sheafification unit. Its degree-zero single complex has constructible cohomology: the unit in degree zero and zero in all other degrees. The derived single-unit isomorphism and the derived tensor left unitor show that tensoring any degree-zero module with it remains in degree zero.",
+   "uses": [
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "proof of lem-pur-gysin-structure"
+   }
+  },
+  {
+   "text": "The coefficient prime is invertible on every residue field, by the structure map to the fixed field. Apply finiteCoefficient_comparison_preserves_torAmplitude with interval [0,0]. The exact-functor composition and single-complex comparisons identify this image with the stated intrinsic realization. Transport bounded constructibility and finite Tor amplitude through that isomorphism.",
+   "uses": [
+    "def-pur-conventions",
+    "lem-sf-comparison-tor-amplitude",
+    "lem-weil-finite-ctf-triangulated",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "proof of lem-pur-gysin-structure"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-derived-tensor",
+  "def-pur-conventions",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-weil-finite-ctf-triangulated",
+  "lem-sf-exact-functor-derived-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+  "place": "first paragraph, tensor-unit argument proving constructibility and Tor amplitude"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The constant rank one coefficient complex has constructible cohomology and Tor amplitude zero",
+   "results": [
+    "CochainComplex.IsKProjective",
+    "CochainComplex.IsKInjective",
+    "CochainComplex.isKProjective_of_projective",
+    "DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective",
+    "CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt",
+    "CochainComplex.IsKProjective.leftOrthogonal",
+    "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE",
+    "DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective"
+   ],
+   "date": "2026-10-19",
+   "verdict": "No matching theorem. Existing exact-functor, tensor-unit, homology and truncation APIs are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.homologyFunctor",
+   "results": [
+    "DerivedCategory.homologyFunctor",
+    "DerivedCategory.instShiftSequenceHomologyFunctorOfNatInt",
+    "DerivedCategory.instIsHomologicalHomologyFunctor",
+    "DerivedCategory.shift_homologyFunctor",
+    "DerivedCategory.HomologySequence.δ",
+    "DerivedCategory.isIso_iff",
+    "DerivedCategory.homologyFunctorFactors",
+    "DerivedCategory.HomologySequence.exact₁"
+   ],
+   "date": "2026-10-19",
+   "verdict": "No matching theorem. Existing exact-functor, tensor-unit, homology and truncation APIs are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "gysin|Gysin|concentrated_single",
+   "results": [
+    "Mathlib/CategoryTheory/Sites/Canonical.lean",
+    "Mathlib/CategoryTheory/Sites/Canonical.lean",
+    "Mathlib/CategoryTheory/Sites/Canonical.lean"
+   ],
+   "date": "2026-10-19",
+   "verdict": "No matching theorem. Existing exact-functor, tensor-unit, homology and truncation APIs are used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The constant sheaf placed in degree zero is constructible and has Tor amplitude zero",
+   "results": [
+    "CategoryTheory.Sheaf.isConstant_of_iso",
+    "LightCondensed.discrete",
+    "CategoryTheory.Sheaf.IsConstant.casesOn",
+    "CategoryTheory.constantSheaf",
+    "CategoryTheory.Sheaf.IsConstant.rec",
+    "CategoryTheory.Sheaf.isConstant_iff_mem_essImage",
+    "CategoryTheory.Sheaf.IsConstant.recOn",
+    "CategoryTheory.Sheaf.IsConstant.mk"
+   ],
+   "date": "2026-10-19",
+   "verdict": "No matching finite-Tor theorem; constant-sheaf API reused."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityGysinStructure",
+  "date": "2026-10-19",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-gysin-structure",
+   "place": "first paragraph, tensor-unit argument proving constructibility and Tor amplitude",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurityConstantFiniteTor",
+  "file": "lean/Sheaf/Paper/PurityConstantFiniteTor.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.constant_finiteTor",
+  "statement": "theorem constant_finiteTor (P : PurityFiniteSetting.{u})\n    (h : P.ramificationIndex ∣ P.level) (Y : Scheme.{u})\n    (a : Y ⟶ Spec (.of P.field.k)) :\n    finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Y\n      ((finiteCoefficientIntrinsicRealization Y P.Ring).mapDerivedCategory.obj\n        (P.derivedSheaf h Y false))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-b2553",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261019T231136-L-552854",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-b2553",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261019T231136-L-552854",
+  "kind": "interface",
+  "note": "independent cc review: Delivered PurityGysinStructure + 3 new helper modules/nodes vs live sheaf-dag item module and node lem-pur-gysin-structure; 6 rewritten defs checked equal to the old bodies by hand; both direct importers (PurityAffineLineOrientation, PurityAffineLineOrientationUniqueness) compiled against the delivered oleans; axioms checked"
+ }
+}
