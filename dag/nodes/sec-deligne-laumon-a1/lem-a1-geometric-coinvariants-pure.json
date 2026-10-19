@@ -1,125 +1,260 @@
 {
-  "id": "lem-a1-geometric-coinvariants-pure",
-  "blueprint": {
-    "is": "lem-a1-geometric-coinvariants-pure",
-    "from": null,
-    "same_as": null
+ "id": "lem-a1-geometric-coinvariants-pure",
+ "blueprint": {
+  "is": "lem-a1-geometric-coinvariants-pure",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Purity of the geometric coinvariants",
+ "statement": "Fix the finite-field and coefficient datum $k_0=\\mathbf F_q$, $k=\\overline{k_0}$, $\\ell\\ne\\operatorname{char}(k_0)$, $\\Omega=\\overline{\\mathbf Q}_\\ell$ of [def-weil-finite-field-fiber], and a field isomorphism $\\iota:\\Omega\\xrightarrow{\\sim}\\mathbf C$. Let $X_0$ be a separated finite-type $k_0$-scheme [def-weil-scheme-morphism-properties], put $X=X_0\\times_{k_0}k$, and let $\\mathcal F$ be a lisse $\\Omega$-Weil sheaf in [def-pod-lisse-l-adic-sheaves] and [def-weil-weil-sheaf-complex], punctually $\\iota$-pure of weight $w\\in\\mathbf R$ [def-weil-punctual-weights]. Put $\\mathcal F^\\vee=\\mathcal Hom_\\Omega(\\mathcal F,\\Omega_X)$ with its contragredient Weil structure, and define the geometric coinvariants by\n$$W=\\Gamma(X,\\mathcal F^\\vee)^\\vee,\\qquad F_W=(T^{-1})^*,$$\nwhere $T$ is geometric Frobenius on $\\Gamma(X,\\mathcal F^\\vee)$ [def-weil-global-geometric-frobenius] and the final dual is the ordinary $\\Omega$-linear dual. Then $W$ is finite-dimensional and $(W,F_W)$ is $\\iota$-pure of weight $w$ in [def-weil-frobenius-module-weights], allowing $W=0$. When $X$ is connected and $V$ is the geometric fundamental representation [def-wf-fundamental-representation], there are natural identifications\n$$\\Gamma(X,\\mathcal F^\\vee)=(V^\\vee)^{\\pi_1(X)}=(V_{\\pi_1(X)})^\\vee,$$\nso $W=V_{\\pi_1(X)}$ with its induced Frobenius, the maximal geometrically constant quotient. Here invariants, coinvariants and the contragredient action have the meanings of [def-real-weil-representation-operations]. For general $X$, global sections are the product over its finitely many connected components, with Frobenius allowed to permute them.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-geometric-coinvariants-pure.md",
+  "place": "node lem-a1-geometric-coinvariants-pure, order 2730"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-punctual-weights",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-frobenius-module-weights",
+  "def-wf-fundamental-representation",
+  "def-real-weil-representation-operations"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-tw-dual-negation] to $\\mathcal F$ on the finite-type scheme $X_0$. Thus $\\mathcal G=\\mathcal F^\\vee$ is lisse with the contragredient Weil structure and is punctually pure of weight $-w$. Apply [lem-a1-lisse-sections-stalk-evaluation] to $\\mathcal G$: $A=\\Gamma(X,\\mathcal G)$ is finite-dimensional, its geometric Frobenius $T$ is invertible, and evaluation into finitely many closed-point stalks is injective. These statements apply without connectedness or smoothness; the separated finite-type and coefficient hypotheses are precisely those in force.",
+   "uses": [
+    "lem-tw-dual-negation",
+    "lem-a1-lisse-sections-stalk-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-geometric-coinvariants-pure.proof.md",
+    "place": "Second paragraph, closed-point eigenvalue argument; generalized dual-section formulation, with the comparison and finiteness isolated explicitly"
+   }
   },
-  "kind": "statement",
-  "title": "Purity of the geometric coinvariants",
-  "statement": "Let $U_0$ be a nonempty smooth geometrically connected curve over\n$k_0=\\mathbf F_q$, and let $\\mathcal F$ be a lisse Weil sheaf on $U_0$\nwhich is punctually $\\iota$-pure of weight $w$. For its geometric\nfundamental representation $V$ ([def-wf-fundamental-representation]),\nthe coinvariant quotient $W=V_{\\pi_1(U)}$ — the maximal geometrically\nconstant quotient of $\\mathcal F$ — with its induced Frobenius $F_W$ is\n$\\iota$-pure of weight $w$ (possibly $W=0$).",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-geometric-coinvariants-pure.md",
-    "place": "node lem-a1-geometric-coinvariants-pure, order 2730"
-  },
-  "stmt_deps": [
-    "def-wf-fundamental-representation"
-  ],
-  "proof": [
-    {
-      "text": "The geometric subgroup $\\pi_1(U)$ of the Weil group of\n[def-wf-fundamental-representation] is normal, so the subspace of $V$\nspanned by the vectors $gv-v$, $g\\in\\pi_1(U)$, is stable under the Weil\ngroup and $V\\twoheadrightarrow W$ is a quotient Weil representation. On\n$W$ the geometric subgroup acts trivially, so the action of any element\nof degree one of the Weil group on $W$ is a single operator $F_W$,\nindependent of the chosen lift; an element of degree $d$ acts by\n$F_W^d$.",
-      "uses": [
-        "def-wf-fundamental-representation"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Choose a closed point $x\\in U_0$ (a maximal ideal of the coordinate\nring of a nonempty affine open; its residue field is finite over\n$\\mathbf F_q$) and put $d=[\\kappa(x):\\mathbf F_q]$. A local Frobenius\nat $x$ is an element of degree $d$ of the Weil group, and under the\nidentification of $V$ with the stalk $\\mathcal F_{\\bar x}$ it acts as\nthe operator $F_x$ of [def-weil-punctual-weights]. Hence\n$V\\twoheadrightarrow W$ is an $F_x$-equivariant quotient onto\n$(W,F_W^d)$. In a basis of $V$ extending a basis of the kernel, the\nmatrix of $F_x$ is block upper triangular ([p-linear-filtration]), so\nevery eigenvalue of $F_W^d$ is an eigenvalue of $F_x$ on\n$\\mathcal F_{\\bar x}$, and has $\\iota$-modulus\n$|\\kappa(x)|^{w/2}=q^{dw/2}$ by punctual purity\n([def-weil-punctual-weights]). If $\\lambda$ is an eigenvalue of $F_W$,\nthen $\\lambda^d$ is an eigenvalue of $F_W^d$, so\n$|\\iota(\\lambda)|^d=q^{dw/2}$ and $|\\iota(\\lambda)|=q^{w/2}$. Thus\n$(W,F_W)$ is $\\iota$-pure of weight $w$ in the sense of\n[def-weil-frobenius-module-weights].",
-      "uses": [
-        "def-weil-punctual-weights",
-        "p-linear-filtration",
-        "def-weil-frobenius-module-weights"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-wf-fundamental-representation",
+  {
+   "text": "Let $\\beta$ be any eigenvalue of $T$ and choose $a\\ne0$ with $Ta=\\beta a$. Finite stalk detection [lem-a1-lisse-sections-stalk-evaluation] gives a closed point $y_i$ at which $b=\\operatorname{ev}_{\\bar y_i}(a)\\ne0$. Write $d=[\\kappa(y_i):k_0]\\ge1$. Repeated application of $Ta=\\beta a$ gives $T^d a=\\beta^d a$, and the evaluation identity in that same lemma gives $F_{y_i}b=\\beta^d b$. Hence $\\beta^d$ is a local Frobenius eigenvalue of $\\mathcal G$. Its punctual purity from step 1 and [def-weil-punctual-weights] give $|\\iota(\\beta)|^d=(q^d)^{-w/2}=(q^{-w/2})^d$. Both sides are powers of nonnegative real numbers and $d>0$, so injectivity of the positive integer power on nonnegative reals yields $|\\iota(\\beta)|=q^{-w/2}$. Thus $(A,T)$ is pure of weight $-w$ in [def-weil-frobenius-module-weights].",
+   "uses": [
+    "lem-a1-lisse-sections-stalk-evaluation",
     "def-weil-punctual-weights",
-    "p-linear-filtration",
     "def-weil-frobenius-module-weights"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-geometric-coinvariants-pure.md",
-    "place": "## Proof"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-geometric-coinvariants-pure.proof.md",
+    "place": "Second paragraph, closed-point eigenvalue argument; generalized dual-section formulation, with the comparison and finiteness isolated explicitly"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 2730,
-  "blueprint_uses": [
-    "def-weil-frobenius-module-weights",
-    "def-weil-punctual-weights",
-    "def-wf-fundamental-representation",
-    "p-linear-filtration"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_geometricCoinvariants"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed_part",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_geometricCoinvariants",
-          "module": "WeilConjectures.WeilSheaf.GeometricCoinvariants",
-          "lines": [
-            260,
-            290
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [
-        "AlgebraicGeometry.LAdicWeilSheaf.isPureOfWeightOver_geometricCoinvariants"
-      ],
-      "open": []
-    }
+  {
+   "text": "By definition $W=A^\\vee$ and $F_W=(T^{-1})^*$. Since $A$ is finite-dimensional and $T$ invertible, the dual-spectrum formula of [p-linear-spectra] says that each eigenvalue $\\lambda$ of $F_W$ is $\\beta^{-1}$ for an eigenvalue $\\beta\\ne0$ of $T$. Step 2 gives $|\\iota(\\lambda)|=|\\iota(\\beta)|^{-1}=q^{w/2}$. This is purity of weight $w$ in [def-weil-frobenius-module-weights]. The linear dual of a finite-dimensional space is finite-dimensional, and the zero space has no eigenvalues, so the statement includes $W=0$.",
+   "uses": [
+    "p-linear-spectra",
+    "def-weil-frobenius-module-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-geometric-coinvariants-pure.proof.md",
+    "place": "Second paragraph, closed-point eigenvalue argument; generalized dual-section formulation, with the comparison and finiteness isolated explicitly"
+   }
   },
-  "chapter": "sec-deligne-laumon-a1",
-  "unit": "sk-l-dl-a1-endpoints",
-  "lean": {
-    "module": "WeilConjectures.WeilSheaf.GeometricCoinvariants",
-    "declaration": "AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_geometricCoinvariants",
-    "branch": "slopmaster2",
-    "line": 275,
-    "declarations": [
-      "AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_geometricCoinvariants"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here); Lean refresh 7d675a26 (L): moved from WeilConjectures.WeilSheaf.Dual:257"
+  {
+   "text": "For the connected-case description, the exact tensor fibre equivalence in [cor-galois-lisse-representations](2) identifies the dual sheaf with the dual representation. A global section is the same as a morphism from the unit sheaf (send $1$ to that section, and on each object send $c$ to $c$ times its restriction); full faithfulness identifies these maps with equivariant maps $\\Omega\\to V^\\vee$. Such a map is determined by its value at $1$, which must lie in $(V^\\vee)^{\\pi_1(X)}$. With the dual action in [def-real-weil-representation-operations], a functional is invariant exactly when it kills every $gv-v$, so it factors uniquely through $V_{\\pi_1(X)}$. This gives the two displayed identifications. The Frobenius compatibility follows by naturality with respect to the Weil isomorphism and its degree-one action from [def-wf-fundamental-representation]. Dualizing gives $W\\simeq V_{\\pi_1(X)}$ with its induced Frobenius. Every map from $V$ to a representation on which $\\pi_1(X)$ acts trivially kills $gv-v$, so factors uniquely through this quotient: it is maximal geometrically constant.",
+   "uses": [
+    "cor-galois-lisse-representations",
+    "def-real-weil-representation-operations",
+    "def-wf-fundamental-representation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-geometric-coinvariants-pure.proof.md",
+    "place": "First paragraph, coinvariant quotient and Weil action; section-to-representation interpretation of the generalized statement"
+   }
   },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $X_0$ be a scheme locally of finite type over $k_0=\\mathbf F_q$,\n$X=X_0\\otimes k$, and let $\\mathcal F$ be a lisse Weil sheaf on $X_0$\nwhich is punctually $\\iota$-pure of weight $w$. Its *geometric\ncoinvariants* are $W:=\\Gamma(X,\\mathcal F^\\vee)^\\vee$, the dual of the\nglobal sections of the dual sheaf, with the Frobenius $F_W$ dual to the\none induced by the Weil structure. When $X$ is connected, with geometric\nfundamental representation $V$ ([def-wf-fundamental-representation]),\n$\\Gamma(X,\\mathcal F^\\vee)=(V^\\vee)^{\\pi_1(X)}=(V_{\\pi_1(X)})^\\vee$, so $W$\nis the coinvariant quotient $V_{\\pi_1(X)}$ — the maximal geometrically\nconstant quotient of $\\mathcal F$ — with its induced Frobenius; in\ngeneral $\\Gamma(X,-)$ is a product over the connected components of $X$.\nThen $(W,F_W)$ is $\\iota$-pure of weight $w$ (possibly $W=0$).",
-    "proof": [
-      {
-        "text": "The geometric subgroup $\\pi_1(U)$ of the Weil group of\n[def-wf-fundamental-representation] is normal, so the subspace of $V$\nspanned by the vectors $gv-v$, $g\\in\\pi_1(U)$, is stable under the Weil\ngroup and $V\\twoheadrightarrow W$ is a quotient Weil representation. On\n$W$ the geometric subgroup acts trivially, so the action of any element\nof degree one of the Weil group on $W$ is a single operator $F_W$,\nindependent of the chosen lift; an element of degree $d$ acts by\n$F_W^d$.",
-        "uses": [
-          "def-wf-fundamental-representation"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Choose a closed point $x\\in U_0$ (a maximal ideal of the coordinate\nring of a nonempty affine open; its residue field is finite over\n$\\mathbf F_q$) and put $d=[\\kappa(x):\\mathbf F_q]$. A local Frobenius\nat $x$ is an element of degree $d$ of the Weil group, and under the\nidentification of $V$ with the stalk $\\mathcal F_{\\bar x}$ it acts as\nthe operator $F_x$ of [def-weil-punctual-weights]. Hence\n$V\\twoheadrightarrow W$ is an $F_x$-equivariant quotient onto\n$(W,F_W^d)$. In a basis of $V$ extending a basis of the kernel, the\nmatrix of $F_x$ is block upper triangular ([p-linear-filtration]), so\nevery eigenvalue of $F_W^d$ is an eigenvalue of $F_x$ on\n$\\mathcal F_{\\bar x}$, and has $\\iota$-modulus\n$|\\kappa(x)|^{w/2}=q^{dw/2}$ by punctual purity\n([def-weil-punctual-weights]). If $\\lambda$ is an eigenvalue of $F_W$,\nthen $\\lambda^d$ is an eigenvalue of $F_W^d$, so\n$|\\iota(\\lambda)|^d=q^{dw/2}$ and $|\\iota(\\lambda)|=q^{w/2}$. Thus\n$(W,F_W)$ is $\\iota$-pure of weight $w$ in the sense of\n[def-weil-frobenius-module-weights].",
-        "uses": [
-          "def-weil-punctual-weights",
-          "p-linear-filtration",
-          "def-weil-frobenius-module-weights"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "The base change $X$ is of finite type over $k$ by [lem-sfb-finite-type-composition-base-change], and is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. The locally finite family of irreducible components in [lem-sc-locnoeth-components-locally-finite] is finite here: choose neighbourhoods meeting finitely many components and take a finite subcover using quasi-compactness. Form the finite graph whose vertices are these irreducible components and whose edges mean nonempty intersection. The union belonging to each graph component is connected (each irreducible component is connected and successive unions meet); it is closed, as is its complement, both being finite unions of closed irreducible components. Thus these unions are the connected components of $X$ and form a finite disjoint open cover. Restrictions give $\\Gamma(X,\\mathcal F^\\vee)\\simeq\\prod_C\\Gamma(C,\\mathcal F^\\vee|_C)$: families glue uniquely because overlaps are empty. Frobenius acts through its permutation of these opens and the induced restriction maps. Steps 1–3 already allowed this permutation, since the evaluation identity used the degree of each chosen point separately.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-locnoeth-components-locally-finite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0052, lemma-Noetherian (finite irreducible decomposition); elementary intersection-graph grouping and the sheaf gluing axiom"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-tw-dual-negation",
+  "lem-a1-lisse-sections-stalk-evaluation",
+  "def-weil-punctual-weights",
+  "def-weil-frobenius-module-weights",
+  "p-linear-spectra",
+  "cor-galois-lisse-representations",
+  "def-real-weil-representation-operations",
+  "def-wf-fundamental-representation",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-locnoeth-components-locally-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-geometric-coinvariants-pure.proof.md",
+  "place": "Generalized dual-section version of the closed-point quotient argument, correcting the missing finite-type hypothesis and contragredient dual convention"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The geometric coinvariants of a punctually pure lisse Weil sheaf over a finite field are pure of the same weight",
+   "results": "CompHausLike.LocallyConstantModule.functor; CompHausLike.LocallyConstantModule.functor_obj_val; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf; LightCondMod.LocallyConstant.functor; CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule; Rep.quotientToInvariantsFunctor_obj_V; CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits do not state lisse adic global-section detection together with local Frobenius-power compatibility, or purity of Weil-sheaf coinvariants"
+  },
+  {
+   "tool": "loogle",
+   "query": "Representation.coinvariants",
+   "results": "loogle: unknown identifier 'Representation.coinvariants'",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits do not state lisse adic global-section detection together with local Frobenius-power compatibility, or purity of Weil-sheaf coinvariants"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|geometricCoinvariants|punctually.*pure",
+   "results": "No hits",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits do not state lisse adic global-section detection together with local Frobenius-power compatibility, or purity of Weil-sheaf coinvariants"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dual of the global sections of the dual of a pure Weil sheaf has the same Frobenius weight",
+   "results": "RootPairing.Hom.weight_coweight_transpose_apply; WittVector.isocrystal_classification; WittVector.instIsocrystalStandardOneDimIsocrystal; WittVector.instModuleFractionRingStandardOneDimIsocrystal; FGModuleCat.FGModuleCatDual_obj; FGModuleCat.exactPairing; FGModuleCat.FGModuleCatDual_coe; WittVector.Isocrystal.toModule",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits do not state lisse adic global-section detection together with local Frobenius-power compatibility, or purity of Weil-sheaf coinvariants"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2730,
+ "blueprint_uses": [
+  "def-weil-frobenius-module-weights",
+  "def-weil-punctual-weights",
+  "def-wf-fundamental-representation",
+  "p-linear-filtration"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_geometricCoinvariants"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed_part",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_geometricCoinvariants",
+     "module": "WeilConjectures.WeilSheaf.GeometricCoinvariants",
+     "lines": [
+      260,
+      290
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.LAdicWeilSheaf.isPureOfWeightOver_geometricCoinvariants"
+   ],
+   "open": []
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-l-dl-a1-endpoints",
+ "lean": {
+  "module": "WeilConjectures.WeilSheaf.GeometricCoinvariants",
+  "declaration": "AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_geometricCoinvariants",
+  "branch": "slopmaster2",
+  "line": 275,
+  "declarations": [
+   "AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_geometricCoinvariants"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here); Lean refresh 7d675a26 (L): moved from WeilConjectures.WeilSheaf.Dual:257"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $X_0$ be a scheme locally of finite type over $k_0=\\mathbf F_q$,\n$X=X_0\\otimes k$, and let $\\mathcal F$ be a lisse Weil sheaf on $X_0$\nwhich is punctually $\\iota$-pure of weight $w$. Its *geometric\ncoinvariants* are $W:=\\Gamma(X,\\mathcal F^\\vee)^\\vee$, the dual of the\nglobal sections of the dual sheaf, with the Frobenius $F_W$ dual to the\none induced by the Weil structure. When $X$ is connected, with geometric\nfundamental representation $V$ ([def-wf-fundamental-representation]),\n$\\Gamma(X,\\mathcal F^\\vee)=(V^\\vee)^{\\pi_1(X)}=(V_{\\pi_1(X)})^\\vee$, so $W$\nis the coinvariant quotient $V_{\\pi_1(X)}$ — the maximal geometrically\nconstant quotient of $\\mathcal F$ — with its induced Frobenius; in\ngeneral $\\Gamma(X,-)$ is a product over the connected components of $X$.\nThen $(W,F_W)$ is $\\iota$-pure of weight $w$ (possibly $W=0$).",
+  "proof": [
+   {
+    "text": "The geometric subgroup $\\pi_1(U)$ of the Weil group of\n[def-wf-fundamental-representation] is normal, so the subspace of $V$\nspanned by the vectors $gv-v$, $g\\in\\pi_1(U)$, is stable under the Weil\ngroup and $V\\twoheadrightarrow W$ is a quotient Weil representation. On\n$W$ the geometric subgroup acts trivially, so the action of any element\nof degree one of the Weil group on $W$ is a single operator $F_W$,\nindependent of the chosen lift; an element of degree $d$ acts by\n$F_W^d$.",
+    "uses": [
+     "def-wf-fundamental-representation"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Choose a closed point $x\\in U_0$ (a maximal ideal of the coordinate\nring of a nonempty affine open; its residue field is finite over\n$\\mathbf F_q$) and put $d=[\\kappa(x):\\mathbf F_q]$. A local Frobenius\nat $x$ is an element of degree $d$ of the Weil group, and under the\nidentification of $V$ with the stalk $\\mathcal F_{\\bar x}$ it acts as\nthe operator $F_x$ of [def-weil-punctual-weights]. Hence\n$V\\twoheadrightarrow W$ is an $F_x$-equivariant quotient onto\n$(W,F_W^d)$. In a basis of $V$ extending a basis of the kernel, the\nmatrix of $F_x$ is block upper triangular ([p-linear-filtration]), so\nevery eigenvalue of $F_W^d$ is an eigenvalue of $F_x$ on\n$\\mathcal F_{\\bar x}$, and has $\\iota$-modulus\n$|\\kappa(x)|^{w/2}=q^{dw/2}$ by punctual purity\n([def-weil-punctual-weights]). If $\\lambda$ is an eigenvalue of $F_W$,\nthen $\\lambda^d$ is an eigenvalue of $F_W^d$, so\n$|\\iota(\\lambda)|^d=q^{dw/2}$ and $|\\iota(\\lambda)|=q^{w/2}$. Thus\n$(W,F_W)$ is $\\iota$-pure of weight $w$ in the sense of\n[def-weil-frobenius-module-weights].",
+    "uses": [
+     "def-weil-punctual-weights",
+     "p-linear-filtration",
+     "def-weil-frobenius-module-weights"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-a1-geometric-coinvariants-pure",
+  "worker": "stage1",
+  "summary": "Checked the current snapshot and source Lean; corrected missing quasi-compactness (and typed the traditional lisse coefficient convention on separated finite-type schemes), made the dual Frobenius contragredient, and supplied a finite-stalk closed-point eigenvector argument valid for disconnected schemes. One weight-independent stalk-evaluation lemma is left unsplit.",
+  "blueprint": "The current statement uses dual global sections; steps 1–3 implement the source second paragraph via closed-point stalks, and steps 4–5 explain the coinvariant interpretation and disconnected case of its first paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-tw-dual-negation",
+    "why": "Contragredient lisse duality negates punctual weights; the endpoint unit supplies no dual-stalk weight comparison."
+   },
+   {
+    "node": "p-linear-spectra",
+    "why": "Generic finite-dimensional dual-spectrum formula; no endpoint node states it."
+   },
+   {
+    "node": "cor-galois-lisse-representations",
+    "why": "Generic exact tensor fibre equivalence used only to identify the geometric coinvariant quotient, not to replace the endpoint route."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic stability of finite type under field extension, used to discuss connected components of the geometric fibre."
+   },
+   {
+    "node": "lem-sc-locnoeth-components-locally-finite",
+    "why": "Generic local finiteness of irreducible components, used with quasi-compactness to justify the finite connected-component product; no endpoint node supplies this topological tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-tw-dual-negation",
+  "p-linear-spectra",
+  "cor-galois-lisse-representations",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sc-locnoeth-components-locally-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-NY-7fd2c980a",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-7fd2c980a (reviewer sub-agent of L); spot-checked: Read the item, the new node, the master and main-20261015 sources, every cited statement, Stacks 0052 and the citers. The statement corrections are right. (1) Locally finite type became finite type: on ⊔_N Spec F_q the sections ∏Ω have an infinite-dimensional dual, which is not a Frobenius module. (2) Separated was added, matching the chapter's lisse convention (def-pod), def-weil-global-geometric-frobenius and def-wf. The master smooth-curve statement and the three citers (sk-l-dl-a1-endpoints step 10, lem-a1-affine-hc2-pure, lem-a1-middle-extension-endpoints) all work on U_0 open in a smooth affine curve, so their hypotheses still hold. (3) F_W=(T^{-1})^*: on Spec F_q with Frobenius α this gives α, weight w; the plain transpose would give −w. Steps 1–5 check: in step 2, an eigenvector, a nonzero stalk and the d-th power give |β|=q^{−w/2}; step 3 uses the p-linear-spectra dual clause (BU: f^∨=(f^{-1})^*); step 4 uses cor-galois(2) with the hypotheses connected, Noetherian, separated, ℓ invertible, plus the coinvariant universal property; step 5 gets finitely many components from Noetherianity and quasi-compactness. The new node lem-a1-lisse-sections-stalk-evaluation is true: sections are determined by a stalk on each of the finitely many connected components, and the evaluation identity uses the same θ and g_Y. No duplicate found (checked p-real-sections, lem-weil-pbc-locally-constant-zero-locus-clopen, lem-a1-proper-sections-semilinear-germs and others). On Y_0=Spec F_{q^2}, injectivity needs the same closed point twice with different lifts. FIX: the new node's statement now says the closed points are not necessarily distinct. Batch-5: def-pod-lisse, def-real-weil-representation-operations and def-weil-local-frobenius-trace are definitions. lem-tw-dual-negation is a dual-weight fact; what it reaches is already in the closure via def-weil-punctual-weights. p-linear-spectra is linear algebra. cor-galois-lisse-representations is the foundational fibre equivalence. None of these is a step of the trace formula or Poincaré duality, so all are accepted. The five generic tool_uses are accepted. No SGA.; 1 file(s) fixed by the reviewer"
+ }
 }
