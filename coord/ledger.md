@@ -17733,3 +17733,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:13 L: merged deliver/Q4/Sheaf.Paper.EtaleIsoDescent (stage 3; reviewer PASS; first push; landing 20261019T231309-L-570888 (proof); batch 20261019T231019; modules 1; new nodes 0)
 - 23:13 L: merged deliver/Q8/Sheaf.Paper.ZlFrameworkOpenExchange (stage 3; reviewer PASS; first push; landing 20261019T231311-L-571416 (proof); batch 20261019T231019; modules 1; new nodes 0)
 - 23:13 L: merged deliver/Q9/Sheaf.Paper.IntegralCtfTriangulated (stage 3; reviewer PASS; first push; landing 20261019T231313-L-571745 (interface); batch 20261019T231019; modules 1; new nodes 0; change records: coord/changes/Q9-integral-ctf-proof-context.md)
+- 23:13 L: merged deliver/R1/Sheaf.SixFunctors.IntegralOperationShiftData (stage 3; reviewer PASS; first push; landing 20261019T231314-L-572359 (proof); batch 20261019T231019; modules 1; new nodes 0)
