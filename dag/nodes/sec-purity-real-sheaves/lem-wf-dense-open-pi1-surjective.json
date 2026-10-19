@@ -27,126 +27,70 @@
  ],
  "proof": [
   {
-   "text": "*Step 0 ($V$ is integral).* The geometric point $\\bar v$ of $V'$ makes $V'$ and $V$ nonempty. Apply clause (2) of [rem-pc-regular-normal] to the normal Noetherian $V$: its irreducible components are a finite disjoint family of open-and-closed normal integral subschemes covering $V$. Nonemptiness gives at least one component; if there were two or more, one component and the union of the others would disconnect $V$. Thus there is exactly one and $V$ is integral. Below we use the same argument only for nonempty connected normal Noetherian schemes. We do not use clause (3), whose nonemptiness hypothesis is now explicit.",
+   "text": "Curve preliminaries for (4) and (5). From d-real-setup extract smoothness, finite type, quasi-compactness, dimension one and connectedness after algebraic closure. Use lem-weil-geometrically-connected-algebraic-closure to obtain geometric connectedness and hence connectedness over the finite field. The source Regular module supplies IsRegular.of_smooth and integrality/irreducibility of a connected regular locally Noetherian scheme. Its dimension formula converts the component dimension condition to SmoothOfRelativeDimension 1. These are the private curve_regular_connected and curve_relativeDimension helpers.",
    "uses": [
-    "rem-pc-regular-normal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma \\ref{lemma-normal-Noetherian} (Stacks Tag `033M`); the zero-component case is excluded by the geometric point"
-   }
-  },
-  {
-   "text": "*(1a).* Let $W\\to V$ be a nonempty connected finite etale cover. Its image is open (etale) and closed (finite) and nonempty, so $W\\to V$ is surjective since $V$ is connected. The scheme $W$ is Noetherian, being finite over $V$, so [lem-fin-etale-normal-components] makes it a finite disjoint union of open-and-closed normal integral schemes; connectedness makes $W$ integral. Its open subscheme $W\\prime:=W\\times_VV\\prime$ is nonempty by surjectivity and $V\\prime\\ne\\varnothing$, and a nonempty open of an integral scheme is irreducible and therefore connected. This proves the connected-cover formulation.",
-   "uses": [
-    "lem-fin-etale-normal-components"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-i-real-boundary/lem-wf-dense-open-pi1-surjective.proof.md",
-    "place": "Proof, paragraph (1), first paragraph (the unit Step 4 argument)"
-   }
-  },
-  {
-   "text": "*(1b).* For the group formulation, note first that $V\\prime$ is connected: apply the first paragraph to the connected finite etale cover $W=V$ (or note that $V\\prime$ is a nonempty open of the integral $V$ of Step 0). Thus [thm-galois-fundamental] and [lem-fet-galois-category] apply to $V\\prime$. Pullback is compatible with the fibre functors at $\\bar v$, and [thm-galois-fundamental] gives the continuous homomorphism $\\pi_1(V\\prime,\\bar v)\\to\\pi_1(V,\\bar v)$ whose action on the fibre of $W$ is the action through this map. Its image $H$ is compact and hence closed in the profinite group $G:=\\pi_1(V,\\bar v)$. If $H\\ne G$, [lem-wf-profinite-closed-subgroup-intersection-open] gives a proper open subgroup $H\\subseteq U\\subsetneq G$. By the open-subgroup/connected-cover correspondence [cor-galois-open-subgroups], $U$ is the stabilizer of a point of the fibre of a connected finite etale cover $P\\to V$; equivalently, the fibre is the transitive $G$-set $G/U$. Since $H\\subseteq U$ and $[G:U]\\ge2$, the induced $\\pi_1(V\\prime)$-action fixes the coset $U$ and is not transitive. The base-change clause of [thm-galois-fundamental] identifies this with the fibre of $P\\times_VV\\prime$, while [lem-fet-galois-category] and [lem-galois-transitive] imply that a connected cover has transitive fibre; hence this pullback is disconnected, contradicting the first paragraph. Therefore $H=G$, proving surjectivity.",
-   "uses": [
-    "def-galois-fibre-functor",
-    "thm-galois-fundamental",
-    "lem-fet-galois-category",
-    "lem-galois-transitive",
-    "lem-wf-profinite-closed-subgroup-intersection-open",
-    "cor-galois-open-subgroups"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-i-real-boundary/lem-wf-dense-open-pi1-surjective.proof.md",
-    "place": "Proof, paragraph (1), fibre-functor and proper-open-subgroup argument; the separator is supplied by the cited Mathlib leaf"
-   }
-  },
-  {
-   "text": "*(2).* The projection $V=V_0\\times_{k_0}\\operatorname{Spec}k\\to V_0$ is open by [lem-sc-scheme-over-field-universally-open]. Hence the inverse image $V\\prime$ of the dense open $V\\prime_0$ is dense in $V$: a nonempty open $O\\subseteq V$ missing $V\\prime$ would have a nonempty open image missing $V\\prime_0$. Apply (1) to $V\\prime\\subseteq V$, and choose $\\bar v$ in $V\\prime$. By Step 0, $V$ is integral, so its nonempty open $V\\prime=V\\prime_0\\times_{k_0}k$ is irreducible and hence connected. Since $k$ is algebraically closed, [lem-weil-geometrically-connected-algebraic-closure] makes $V_0$ and $V\\prime_0$ geometrically connected. This is the hypothesis of [def-wf-weil-group] and [lem-wf-weil-group-exact-sequence] for both schemes. The morphism $V\\prime_0\\to V_0$ induces a map of arithmetic fundamental groups over $\\operatorname{Gal}(k/k_0)$, hence a map of the fibre products $W(-)=\\pi_1(-,\\bar v)\\times_{\\operatorname{Gal}(k/k_0)}\\langle\\Phi\\rangle$ in [def-wf-fundamental-representation] that is the identity on $\\langle\\Phi\\rangle$; this is compatibility with the degree maps in [def-wf-weil-group]. By [lem-wf-weil-group-exact-sequence], the kernels are the geometric groups and the induced map between them is the surjection from (1). For $w\\in W(V_0)$ of degree $n$, choose $w\\prime\\in W(V\\prime_0)$ of degree $n$ using the same exact sequence. Then $w\\bar w\\prime^{-1}$ lies in $\\pi_1(V)$, so lift it by (1) to $g\\in\\pi_1(V\\prime)$; the product $gw\\prime$ maps to $w$. Thus the Weil-group map is degree-compatible, restricts to the geometric surjection, and is surjective.",
-   "uses": [
-    "def-wf-fundamental-representation",
-    "def-wf-weil-group",
-    "lem-wf-weil-group-exact-sequence",
-    "lem-sc-scheme-over-field-universally-open",
+    "d-real-setup",
+    "lem-sc-smooth-normal",
     "lem-weil-geometrically-connected-algebraic-closure"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-i-real-boundary/lem-wf-dense-open-pi1-surjective.proof.md",
-    "place": "Proof, paragraph (2)"
-   }
+   "elementary": false
   },
   {
-   "text": "*(3).* Work first at a finite coefficient level; finite locally constant modules are as in [def-weil-pbc-constructible-complexes]. Evaluate the unit on an affine etale $T\\to V$. Such $T$ is Noetherian, so [lem-fin-etale-normal-components] decomposes it into finitely many open-and-closed normal integral components $T_i$. The inverse image $T\\prime_i:=T_i\\times_VV\\prime$ is a nonempty dense open because the image of $T_i$ is a nonempty open of the integral $V$. Choose a geometric point $\\bar t$ of $T\\prime_i$. By the finite-coefficient equivalence [cor-galois-lisse-representations], sections of a lisse sheaf over connected $T_i$ identify with the invariants $\\mathcal N_{\\bar t}^{\\pi_1(T_i,\\bar t)}$, while sections over $T\\prime_i$ identify with $\\mathcal N_{\\bar t}^{\\pi_1(T\\prime_i,\\bar t)}$; restriction is inclusion of invariants. Applying (1) to $T\\prime_i\\subseteq T_i$ makes the two group images in $\\operatorname{Aut}(\\mathcal N_{\\bar t})$ equal, so the invariants agree. The unit is therefore an isomorphism on every component and hence on $T$. For a lisse $\\mathcal O_E$-model, apply these natural unit isomorphisms at every finite level. Their inverses commute with transition maps because the units do, so they give inverse morphisms of the inverse systems. Inverting $\\ell$ and extending scalars to $\\Qlb$ preserves these inverse identities, giving the stated lisse $\\Qlb$ assertion.",
+   "text": "Clause (1a) reuses the already proved source declaration Scheme.FiniteEtale.isConnected_pullback_of_isIntegrallyClosed_stalk in WeilConjectures.AlgebraicGeometry.FundamentalGroup.DenseOpenNormal. A geometric point makes the open nonempty. The connected finite etale cover remains connected on any such open of a connected normal locally Noetherian scheme; the density hypothesis is redundant here. No decomposition theorem from Sheaf is needed.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Clause (1b) works directly on Aut of the finite-etale fibre functors. The normal stalks make V irreducible, and its nonempty open U is connected. Transport the natural action of Aut(fiber s) along pullbackFiberIso to fiber(s composed with j). Naturality is inherited from fibre automorphisms; continuity follows from the discrete finite fibres. For each connected cover, clause (1a) and the fibre-functor action give transitivity after this transport. Mathlib CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive now gives surjectivity of the canonical fiberAutBaseChange. This avoids the open-subgroup separation and the FLC equivalence detour.",
    "uses": [
-    "def-weil-pbc-constructible-complexes",
-    "lem-fin-etale-normal-components",
-    "cor-galois-lisse-representations"
+    "lem-fet-galois-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-i-real-boundary/lem-wf-dense-open-pi1-surjective.proof.md",
-    "place": "Proof, paragraph (3)"
-   }
+   "elementary": false
   },
   {
-   "text": "*(4).* By [d-real-setup], $U=U_0\\times_{k_0}k$ is nonempty, connected, smooth and of finite type over $k$. It is normal by [lem-sc-smooth-normal] and Noetherian, so Step 0 makes it integral. Hence $U\\prime=U\\prime_0\\times_{k_0}k$ is a nonempty open of $U$, so it is irreducible and connected. Since $U\\prime_0$ is open in $U_0$, it is smooth, separated, of finite type and of pure dimension one, so it is again a curve of [d-real-setup]. As a nonempty open of the irreducible $U_0$, it is dense. Moreover $U$ and $U\\prime$ share a geometric generic point. By [prop-wf-weil-sheaf-representation-equivalence] on $U_0$ and $U\\prime_0$, lisse Weil sheaves are representations of their Weil groups on the generic stalk and pullback corresponds to restriction along $W(U\\prime_0)\\to W(U_0)$, because the generic stalk and the pulled-back fundamental representation are unchanged. This map is surjective by (2), since [d-real-setup] gives nonempty connected smooth geometric curves and [lem-sc-smooth-normal] gives their normality. A surjective group map yields equality of equivariant Hom spaces and of stable subspaces, so restriction is fully faithful and preserves irreducibility under the representation equivalence. The geometric $\\Qlb$ version is the same argument using [cor-galois-lisse-representations] and (1).",
+   "text": "Clause (2). First descend normal stalks along the flat surjective algebraic-closure projection. For a faithfully flat map A to C of domains with C integrally closed, embed their fraction fields. An integral fraction a/b becomes an element s of C; then a=bs in C. Faithfully flat contraction of the principal ideal (b) implies a=br in A, so the fraction is r. Apply this to the local faithfully flat stalk maps. Connectedness descends through the surjective projection; finite type and quasi-compactness give Noetherianity. Clause (1b) therefore surjects on the arithmetic fibre automorphisms. Using the constantCoverFiberMap bijections and their Frobenius-power compatibility from the proved source RestrictionWeilGroup module, naturality identifies the two Weil-pair membership conditions. Map (g,n) to (r(g),n) and lift g through the arithmetic surjection. The degree is unchanged, so the same lift also proves surjectivity on degree-zero kernels. This is the private weilGroup_lift_surjective argument; no Weil exact sequence is used.",
    "uses": [
-    "prop-wf-weil-sheaf-representation-equivalence",
-    "def-wf-fundamental-representation",
-    "cor-galois-lisse-representations",
+    "def-wf-weil-group"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Clause (3) reuses the proved source normal-scheme unit results: Etale.isIso_unit_upperStarLowerStarAdjunction_of_isIntegrallyClosed_stalk in WeilConjectures.ConstructibleSheaf.DenseOpenUnitNormal at finite level, and ProEtale.IsAdicLisseSheaf.isIso_adicUpperStarLowerStarAdjunction_unit_app_of_isIntegrallyClosed in WeilConjectures.SixFunctors.ProEtale.Adic.DenseOpenUnit for algebraic adic coefficients. They apply to the given hV, j and density without replacing the category or the adjunction.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Clause (4) uses the curve preliminaries. The nonempty open is dense in the irreducible curve. Apply the already proved source WeilSheaf.IsLisse.upperStar, WeilSheaf.upperStar_map_bijective_of_isLisse and WeilSheaf.IsIrreducibleLisse.upperStar_of_isDominant in WeilConjectures.WeilSheaf.DenseOpen. For the geometric version, the displayed pullback.map is an open immersion by its cartesian square. Its domain is nonempty by surjectivity of algebraic-closure base change. Its target is connected, smooth, regular, locally Noetherian and quasi-compact, hence integral; thus the geometric open is dense. Apply the source ProEtale lisse pullback, Hom bijection and irreducible pullback results from LisseMonodromyPullback. No etale/adic representation equivalence is imported.",
+   "uses": [
     "d-real-setup",
-    "lem-sc-smooth-normal"
+    "lem-sc-smooth-normal",
+    "lem-weil-geometrically-connected-algebraic-closure"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-i-real-boundary/lem-wf-dense-open-pi1-surjective.proof.md",
-    "place": "Proof, paragraph (4)"
-   }
+   "elementary": false
   },
   {
-   "text": "*(5).* By [d-real-setup], $C_0$ is nonempty, smooth and of finite type over $k_0$, with connected geometric base change. The surjective projection from that connected base change shows that $C_0$ is connected. Its Noetherianity follows from finite type over a field, and [lem-sc-smooth-normal] gives normality. Clause (2) of [rem-pc-regular-normal], with nonemptiness and connectedness as in Step 0, now makes $C_0$ integral. The nonempty open $U_0$ is again a smooth curve and hence normal by [lem-sc-smooth-normal]. At each finite coefficient level $\\mathcal F$ is finite locally constant, so [lem-fin-normal-open-lisse-image] applies and gives constructibility of the ordinary direct image, which is the middle extension in the statement.",
+   "text": "Clause (5). The curve preliminaries give that C is connected and regular, hence integral. The nonempty open U is regular and connected, hence integral and normal. Finite type and quasi-compactness are supplied by d-real-setup. Apply lem-fin-normal-open-lisse-image to the finite locally constant sheaf F: its ordinary lowerStar is exactly the finite-level middle extension in this clause.",
    "uses": [
-    "lem-fin-normal-open-lisse-image",
-    "rem-pc-regular-normal",
     "d-real-setup",
-    "lem-sc-smooth-normal"
+    "lem-sc-smooth-normal",
+    "lem-weil-geometrically-connected-algebraic-closure",
+    "lem-fin-normal-open-lisse-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-i-real-boundary/lem-wf-dense-open-pi1-surjective.proof.md",
-    "place": "Proof, paragraph (5)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "cor-galois-lisse-representations",
-  "cor-galois-open-subgroups",
   "d-real-setup",
-  "def-galois-fibre-functor",
-  "def-weil-pbc-constructible-complexes",
-  "def-wf-fundamental-representation",
   "def-wf-weil-group",
   "lem-fet-galois-category",
-  "lem-fin-etale-normal-components",
   "lem-fin-normal-open-lisse-image",
-  "lem-galois-transitive",
-  "lem-sc-scheme-over-field-universally-open",
   "lem-sc-smooth-normal",
-  "lem-weil-geometrically-connected-algebraic-closure",
-  "lem-wf-profinite-closed-subgroup-intersection-open",
-  "lem-wf-weil-group-exact-sequence",
-  "prop-wf-weil-sheaf-representation-equivalence",
-  "rem-pc-regular-normal",
-  "thm-galois-fundamental"
+  "lem-weil-geometrically-connected-algebraic-closure"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-i-real-boundary/lem-wf-dense-open-pi1-surjective.proof.md",
-  "place": "Proof, Steps 0 and (1)–(5), with the existing normal-decomposition and Mathlib subgroup inputs made explicit"
+  "by": "E3",
+  "document": "Lean proof in lean/Sheaf/Paper/DenseOpenPiOneSurjective.lean",
+  "place": "Clauses (1)-(5), reusing the existing source normal dense-open and restriction APIs; faithfully flat normality descent and Weil-pair lifting proved explicitly; 2026-10-19"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -230,8 +174,6 @@
   "statement_change": "The five conclusions and their scheme hypotheses are retained. In clause (3), replaced the stale claim that def-weil-pbc-constructible-complexes defines adic coefficients by the explicit compatible-finite-level O_E-model convention; that cited definition now defines only finite coefficients. Added d-real-setup to statement dependencies, since clauses (4) and (5) already cite it."
  },
  "tool_uses": [
-  "cor-galois-open-subgroups",
-  "rem-pc-regular-normal",
   "lem-sc-smooth-normal",
   "lem-weil-geometrically-connected-algebraic-closure"
  ],
@@ -271,5 +213,15 @@
   "group": "Q14",
   "result": "pass",
   "note": "Read the node, all 5 stmt_deps with their recorded Lean, both delivered modules, the report and the exact upstream declarations (fiberAutBaseChange, weilGroup/weilGroupDeg bodies, geometricFiber, IsAdicLisseSheaf, adicUpperStarLowerStarAdjunction, WeilSheaf.IsLisse/IsIrreducibleLisse, IsConstructibleEtaleModuleSheaf). Clause (1): connected Noetherian stalkwise-normal V (no regularity), dense open immersion, surjectivity of the canonical fiberAutBaseChange on Aut(fiber s), the node's own pi1, plus the connected-cover form; the model API would need an unassumed connectedness. Clause (2): verbatim bodies of the weilGroup/weilGroupDeg abbrevs, avoiding derivable GeometricallyConnected binders; rho fixed by its pair formula; degree, geometric-kernel and full surjectivity. Clause (3): actual finite-level and adic units; pro-etale AdicSheaf is the chapter's recorded qbar framework (WeilSheaf, curveWeilMiddleExtension), not a substitute; regularity and QuasiCompact j correctly dropped. Clause (4): full D.IsCurve; lisse preserved, Hom bijection, irreducibility preserved, for Weil and geometric versions. Clause (5): constructibility of ordinary lowerStar for every finite Lambda and FLC F. The d-real-setup §1(B) repair only appends ringChar_eq (sorry) and a Fact instance; without it the item fails to compile. Node diffs are lean only; statement verbatim; 8 sorry proofs; docstrings, line lengths, names and report sections OK. nt_compile --json on both files: rc 0, clean (2.6 s / 3.6 s); diagnostics confirmed visible by an error probe. Edge cases: empty V, identity j, singular normal V, zero ring, zero sheaves, U=C. Non-blocking: plan imports of the upstream-only prop-wf-weil-sheaf-representation-equivalence and Mathlib leaves absent."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261019T231122-L-549663",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
