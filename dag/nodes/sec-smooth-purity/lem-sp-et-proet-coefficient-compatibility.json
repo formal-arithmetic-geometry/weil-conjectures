@@ -142,11 +142,9 @@
    }
   },
   {
-   "text": "Choose a compatible compactification tower for f and g [lem-cbc-compactifiable-compatible-tower]: Y\\to Ybar is open i, Ybar\\to Z is proper q, X\\to U is open j, U\\to Xbar is open k, and p:Xbar\\to Ybar is proper, with r:U\\to Y proper and pk=ir cartesian. For R=A,B the ordered composite is Rq_{*,R}i_{!,R}Rr_{*,R}j_{!,R}, while the composite-map model is R(qp)_{*,R}(kj)_{!,R}. Their composition identification is the paste of Rq_*(gamma_R)j_! and the proper/open compositors. Step 6 commutes T past gamma; Step 5 commutes it past the compositors. The outer boundary of this pasted diagram is exactly q_{gf}T(alpha_{g,f,A})=alpha_{g,f,B}F_{g,B}(q_f)q_g(F_{f,A}-). This identifies the actual coefficient map q_{gf}, since its proper/open definition is the upper-right boundary, rather than defining a replacement q_{gf} by the lower-left boundary. The canonical choice independence and associativity of alpha are supplied by [lem-amb-etale-compact-comparisons]; Step 7 passes the equation to the fixed compactifications. Pasting an identity adds only identities (Step 5), and the two three-map pastings have the same outer boundary, by the horizontal and vertical coherence laws in [lem-cbc-proper-open-interchange-coherence]. This proves the identity and associativity assertions.",
+   "text": "Apply etaleCompactScalarComposition from lem-pur-etale-compact-scalar-coherence to the chosen compactifications. Its refinement clauses conjugate this equality to the supplied c,d,e. Identify compactScalarMap with etaleCoefficientMap using compactScalarOpen_normalization and equality of inverse isomorphisms. The private categorical compositionTransport lemma cancels the three source and target compactification comparisons, giving the displayed etale composition equality. The main coefficient/site theorem supplies the lower bound for the actual scalar extension. This reuses the already stated scalar coherence rather than reconstructing its compatible tower.",
    "uses": [
-    "lem-cbc-compactifiable-compatible-tower",
-    "lem-amb-etale-compact-comparisons",
-    "lem-cbc-proper-open-interchange-coherence"
+    "lem-pur-etale-compact-scalar-coherence"
    ],
    "elementary": false,
    "source": {
@@ -155,9 +153,9 @@
    }
   },
   {
-   "text": "Apply the site version of Steps 5 and 6 to the same tower. It states that c_{gf,R}nu^*(alpha_R) equals alpha_R^pro F_g^pro(c_{f,R}) c_{g,R}(F_f^et-), with the source/target site identifications inserted. Together with the last sentence of Step 7 this proves that the specified c intertwines refinement and composition. On etale-origin objects the pro-etale counterparts in the statement are precisely these transported maps. Substitute the site/coefficient square of Step 4 into the etale refinement equation of Step 7 and cancel the invertible c and delta: the remaining equation is the pro-etale refinement equation with b. Doing the same on the tower equation of Step 8 cancels its intermediate c_f and c_g and yields b_{gf}T(alpha_A)=alpha_B F_{g,B}(b_f)b_g(F_{f,A}-). Naturalness ensures that each cancellation is at the same input complex. Hence the equations hold for the named pro-etale b, and the same cancellation proves common-refinement, identity and associativity compatibility.",
+   "text": "For the intermediate etale compact-support image, use constructibleFiniteTor_rightDerivedLowerShriek of det-thm-sf-ctf-stability-direct-images. Translate its bounded-constructible predicate to etaleProperty, and obtain the invertible torsion exponent from ell != p. Apply the main coefficient/site theorem to c,d,e. Naturality of the d site comparison moves the c coefficient arrow across it. The private siteCompositionTransport lemma pastes those three site squares and the proved etale composition equation. For compositionSiteBoundary, naturality at the bounded-below inclusion compatibility isomorphism cancels its inverse factors and identifies it with the site comparison at the actual intermediate object. Expanding siteCompositor then gives exactly the pro-etale equation.",
    "uses": [
-    "lem-weil-pbc-mate-pasting"
+    "det-thm-sf-ctf-stability-direct-images"
    ],
    "elementary": false,
    "source": {
@@ -192,39 +190,37 @@
   }
  ],
  "proof_deps": [
-  "det-sp-reduction-direct-image",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sf-etale-flat-constructible",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
   "det-sp-scalar-extension-functor",
-  "lem-amb-etale-adjoint-locality",
-  "lem-amb-etale-compact-comparisons",
-  "lem-amb-etale-sum-stalks",
-  "lem-asd-etale-compact-support-normalization",
-  "lem-cbc-compactifiable-compatible-tower",
-  "lem-cbc-extension-zero-composition",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-weil-pbc-extension-by-zero-exact",
   "lem-cbc-proetale-extension-zero",
   "lem-cbc-proetale-extension-zero-comparison",
-  "lem-cbc-proper-open-interchange-coherence",
-  "lem-pur-etale-compact-scalar-coherence",
+  "det-sp-reduction-direct-image",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-mate-pasting",
   "lem-sf-comparison-pullback-exact",
-  "lem-sf-etale-flat-constructible",
-  "lem-sp-acyclic-flat-proper-coefficient-model",
+  "thm-weil-pbc-site-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-cbc-extension-zero-composition",
   "lem-sp-proper-open-coefficient-mate",
   "lem-sp-refinement-coefficient-mate",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-finite-ring-constructible-derived-origin",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-ringed-slice-extension-tensor",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-etale-compact-scalar-coherence",
+  "det-thm-sf-ctf-stability-direct-images",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-amb-etale-adjoint-locality",
   "prop-weil-pbc-inverse-image-modules-exact",
-  "thm-weil-pbc-site-comparison"
+  "lem-sp-acyclic-flat-proper-coefficient-model",
+  "lem-amb-etale-sum-stalks"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-  "place": "Charts and Locality; expanded counit-mate, proper/open, compatible-tower and component calculations, following Stacks Tags 0F7I, 0F7J and 0GL6; Y8 stage 3: normalized scalar refinement and explicit categorical cancellation for refinement/counit, direct open-unit transpose for naturality"
+  "place": "Charts and Locality; expanded counit-mate, proper/open, compatible-tower and component calculations, following Stacks Tags 0F7I, 0F7J and 0GL6; Y8 stage 3: normalized scalar refinement and explicit categorical cancellation for refinement/counit, direct open-unit transpose for naturality; U4: composition proved by normalized etale scalar coherence and categorical pasting of the retained main site squares, with compact-support Dctf preservation from the source library"
  },
  "mathlib_searches": [
   {
@@ -630,10 +626,10 @@
   "date": "2026-10-19",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y8",
+  "group": "U4",
   "result": "pass",
-  "landing": "20261019T034406-L-428261",
-  "kind": "proof",
+  "landing": "20261019T231400-L-580645",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
