@@ -146,7 +146,9 @@ def inverse(root, commits, *, imports_only=False):
                     raise Conflict(f'{path}: {e}') from e
             elif path in ('coord/ledger.md', 'coord/deliveries.log'):
                 a, b, c = [(x or b'').decode().splitlines(keepends=True) for x in (before, landed, current)]
-                added = [x for x in b if x not in a]
+                # 2026-10-19 (launcher): sets, not lists: ledger.md has hundreds of thousands of lines and the list
+                # membership tests made every take-out quadratic (lander at 100% CPU for 25+ min, live red meanwhile)
+                aset = set(a); added = {x for x in b if x not in aset}
                 value = ''.join(x for x in c if x not in added).encode()
             else:
                 try:
