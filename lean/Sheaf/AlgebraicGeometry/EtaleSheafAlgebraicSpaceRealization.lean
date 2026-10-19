@@ -53,6 +53,32 @@ Source: Stacks, Tag 0GF6
 abbrev EtaleSpaces (X : Scheme.{u}) :=
   ObjectProperty.FullSubcategory (IsEtaleOver (X := X))
 
+private theorem isSheafFor_fpqc_family {X : Scheme.{u}} (E : AlgebraicSpace X)
+    (T : Over X) {I : Type (u + 1)} (Z : I → Over X) (f : ∀ i, Z i ⟶ T)
+    (hf : Presieve.ofArrows (fun i ↦ (Z i).left) (fun i ↦ (f i).left) ∈
+      Scheme.fpqcPrecoverage T.left) :
+    Presieve.IsSheafFor E.obj.obj (Presieve.ofArrows Z f) := by
+  let W (i : I) : Over X := Over.mk ((f i).left ≫ T.hom)
+  let e (i : I) : W i ≅ Z i := Over.isoMk (Iso.refl _) (by simp [W])
+  let g (i : I) : W i ⟶ T := Over.homMk (f i).left rfl
+  have he (i : I) : (e i).hom ≫ f i = g i := by
+    ext
+    simp [e, g]
+  rw [← Presieve.isSheafFor_ofArrows_comp_iff f e]
+  simp_rw [he]
+  rw [Presieve.isSheafFor_arrows_iff]
+  intro x hx
+  apply (existsUnique_section_and_eq_of_fpqc_cover E T
+    (fun i ↦ (Z i).left) (fun i ↦ (f i).left) hf).1 x
+  intro i j
+  let P : Over X :=
+    Over.mk (pullback.fst (f i).left (f j).left ≫ (f i).left ≫ T.hom)
+  let p : P ⟶ W i := Over.homMk (pullback.fst (f i).left (f j).left) rfl
+  let q : P ⟶ W j := Over.homMk (pullback.snd (f i).left (f j).left)
+    (pullback.condition_assoc (f := (f i).left) (g := (f j).left) T.hom).symm
+  exact hx i j P p q (by ext; exact pullback.condition)
+
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Both Hom presheaves are sheaves. Source: Stacks, Tag 04P2 and the coverings
 in Bhatt--Scholze, Section 4.1
 (blueprint: lem-a1-etale-sheaf-algebraic-space-realization).
@@ -66,7 +92,35 @@ theorem realizationPresheaves_isSheaf {X : Scheme.{u}} (E : AlgebraicSpace X) :
     Presheaf.IsSheaf X.smallEtaleTopology ((Scheme.Etale.forget X).op ⋙ E.obj.obj) ∧
     Presheaf.IsSheaf (Scheme.ProEt.topology X)
       ((Scheme.ProEt.forget X).op ⋙ E.obj.obj ⋙ uliftFunctor.{u + 1, u}) := by
-  sorry
+  have hfpqc : Presheaf.IsSheaf (Scheme.fpqcTopology.over X) E.obj.obj := by
+    rw [isSheaf_iff_isSheaf_of_type,
+      over_toGrothendieck_eq_toGrothendieck_comap_forget,
+      Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange]
+    intro T R hR
+    obtain ⟨I, Z, f, rfl⟩ := R.exists_eq_ofArrows
+    apply isSheafFor_fpqc_family E T Z f
+    simpa only [Precoverage.mem_comap_iff, Presieve.map_ofArrows,
+      Over.forget_obj, Over.forget_map] using hR
+  let : RepresentablyFlat (Scheme.Etale.forget X) := flat_of_preservesFiniteLimits _
+  let : (Scheme.Etale.forget X).LocallyCoverDense (Scheme.etaleTopology.over X) :=
+    Scheme.locallyCoverDense_of_le X le_rfl
+  have : (Scheme.Etale.forget X).IsContinuous X.smallEtaleTopology
+      (Scheme.etaleTopology.over X) := by
+    rw [Functor.isContinuous_iff_coverPreserving]
+    exact Functor.coverPreserving_restrictedTopology (Scheme.Etale.forget X)
+      (Scheme.etaleTopology.over X)
+  constructor
+  · apply (Scheme.Etale.forget X).op_comp_isSheaf_of_isSheaf
+      X.smallEtaleTopology (Scheme.etaleTopology.over X) E.obj.obj
+    apply hfpqc.of_le
+    intro T R hR
+    exact Scheme.proetaleTopology_le_fpqcTopology _
+      (Scheme.etaleTopology_le_proetaleTopology _ hR)
+  · apply Presheaf.isSheaf_comp_of_isSheaf (Scheme.ProEt.topology X)
+      ((Scheme.ProEt.forget X).op ⋙ E.obj.obj) uliftFunctor
+    apply (Scheme.ProEt.forget X).op_comp_isSheaf_of_isSheaf
+      (Scheme.ProEt.topology X) (Scheme.proetaleTopology.over X) E.obj.obj
+    exact hfpqc.of_le (fun _ _ hR ↦ Scheme.proetaleTopology_le_fpqcTopology _ hR)
 
 /-- The actual étale Hom sheaf, functorial by postcomposition in the algebraic space.
 Source: Stacks, Tag 0GF6
