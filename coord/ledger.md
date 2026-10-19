@@ -17390,3 +17390,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:26 L: merged deliver/J5/Sheaf.AlgebraicGeometry.FiniteTypeFibreImageDimensionBounds (stage 3; reviewer PASS; first push; landing 20261019T122559-L-470512 (proof); batch 20261019T121044; modules 1; new nodes 2)
 - 12:26 L: merged deliver/J9/Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian (stage 3; reviewer PASS; after a return; landing 20261019T122609-L-472865 (interface); batch 20261019T121044; modules 5; new nodes 4)
 - 12:26 L: merged deliver/K6/Sheaf.AlgebraicGeometry.NormalGeometricCoverComponents (stage 3; reviewer PASS; first push; landing 20261019T122618-L-474712 (proof); batch 20261019T121044; modules 1; new nodes 0)
+- 12:26 L: merged deliver/M9/Sheaf.AlgebraicGeometry.PurityAffineLineComponents (stage 3; reviewer PASS; first push; landing 20261019T122622-L-475538 (proof); batch 20261019T121044; modules 1; new nodes 0)

@@ -12,13 +12,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Topology.Connected.Basic
 
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.Algebra.Polynomial.Basic
-import Mathlib.Algebra.Field.Defs
 import Mathlib.Topology.Connected.Clopen
 
 /-!
@@ -46,49 +39,19 @@ zero section are pulled back from the base, and every component meets the unit s
 Source: blueprint sec-smooth-purity/sk-prop-a1-inv/lem-pur-a1-components.md;
 Stacks Project, Tags 01UA, 01M0, 01K1 and 0377 (blueprint: lem-pur-a1-components).
 
-Proof, following the ten steps of the node:
-1. Write X for the affine line, G for the open complement, p for the projection and q for
-   its restriction. By sbc-lem-affine-space-smooth, p is smooth of relative dimension one.
-   The forward implication of sbc-lem-smooth-criterion makes it flat and locally of finite
-   presentation, so lem-weil-pbc-flat-lfp-open (Stacks 01UA) makes p open.
-2. The zero section is a closed immersion, so G is open in X. An open subset of G is open
-   in X, and its q-image is its p-image; hence q is open. The unit section lies in G and
-   projects to the identity on B, so both p and q are surjective. Scheme maps are continuous.
-3. For y in B, let K be its residue field. By def-pc-scheme-fibre, the topological fibre
-   of p is the space of its scheme-theoretic fibre. The fibre-product construction of
-   def-sbc-affine-space and def-pc-fibre-product identifies that fibre with Spec K[t]:
-   compatible maps to B, Spec Z[t] and Spec K reduce to the pair of maps to Spec Z[t]
-   and Spec K, since the map to B is forced. The affine-base formula gives Spec K[t].
-4. K[t] is a domain: the leading coefficient of a product of two nonzero polynomials is
-   the product of their nonzero leading coefficients (def-weil-polynomial-ring,
-   def-weil-field). Its zero ideal is prime and is dense in its spectrum
-   (def-weil-affine-spectrum), since a closed V(I) containing it has I contained in zero.
-   Thus every nonempty open contains this prime, and the fibre is nonempty and connected
-   (def-weil-connected-scheme).
-5. The q-fibre is the open subspace G intersected with the p-fibre and contains the unit
-   point. Every nonempty relative open is nonempty open in the p-fibre and contains its
-   dense zero prime. A separation is impossible, so each q-fibre is connected too.
-6. For either f = p or f = q and any base component D, restrict to f_D : f⁻¹(D) → D.
-   A relative open is f⁻¹(D) intersected with an ambient open O, and its image is D
-   intersected with f(O); hence f_D is an open continuous surjection. If the preimage
-   of T is closed, the image of its open complement is D minus T, making T closed in D.
-   Conversely continuity preserves closed preimages. This proves the quotient topology,
-   with the connected fibres already established.
-7. Apply lem-weil-pbc-connected-fibres-quotient-preimage-connected (Stacks 0377) to f_D
-   and the whole space D, which is closed in itself, nonempty and connected. It follows
-   that f⁻¹(D) is connected; no openness or closedness of D in B is needed here.
-8. This inverse image E is maximal connected. Any connected C containing E has connected
-   image f(C), by pulling a separation back along f. Surjectivity gives D contained in
-   f(C); maximality of D gives f(C) = D and hence C contained in E.
-9. Every base point y lies in its component D_y: the union of all connected subsets
-   containing y is connected, since each lies on the side containing y in a separation,
-   and is maximal by construction. If C is a source component containing x, the inverse
-   image of D_(f(x)) is connected and contains x. Its union with C is connected because
-   they meet at x, so maximality on both sides gives equality. This proves both component
-   formulas, including that all base components occur.
-10. Choose y in any base component D. The unit point lies in G and projects to y, so
-    it belongs to the corresponding components of X and G. Thus each X-component meets
-    G and the unit-section image, and each G-component meets the image of its unit section. -/
+Proof:
+1. The affine-space projection is open by `AffineSpace.isOpenMap_over`. Its composite
+   with the open immersion `j` is open too. The unit section and its supplied lift give
+   sections of both projections, so both maps are continuous open surjections.
+2. The affine-space projection is geometrically irreducible. Its fibres are therefore
+   irreducible and connected. The fibres of the restricted projection are inverse images
+   under an open embedding, so are preirreducible; the lifted unit section makes them
+   nonempty, hence connected.
+3. A continuous open surjection is a quotient map. Apply the connected-fibre component
+   formula `Topology.IsCoinducing.preimage_connectedComponent` to both projections.
+4. For any point `x`, the unit point over its image lies in the same component by the
+   component formula. In the affine line use both the unit section and its factorization
+   through `j`; in the open subscheme use the lifted unit section. -/
 theorem affineLine_connectedComponents
     (P : WeilConjectures.PurityFiniteSetting.{u})
     {B : Scheme.{u}}
@@ -115,6 +78,53 @@ theorem affineLine_connectedComponents
         Set.range (AffineSpace.oneSection (ULift.{u} (Fin 1)) B).base).Nonempty) ∧
     (∀ x : G,
       (connectedComponent x ∩ Set.range i₁.base).Nonempty) := by
-  sorry
+  have _ := hj
+  let p := AffineSpace (ULift.{u} (Fin 1)) B ↘ B
+  let q := j ≫ p
+  have hpopen : IsOpenMap p := AffineSpace.isOpenMap_over B
+  have hqopen : IsOpenMap q := hpopen.comp j.isOpenEmbedding.isOpenMap
+  have hsection : i₁ ≫ q = 𝟙 B := by
+    dsimp [q, p]
+    rw [← Category.assoc, hi₁, AffineSpace.oneSection_comp_over]
+  have hsection_apply (y : B) : q (i₁ y) = y := by
+    change (i₁ ≫ q) y = y
+    rw [hsection]
+    rfl
+  have hunit (y : B) : p (AffineSpace.oneSection (ULift.{u} (Fin 1)) B y) = y := by
+    change (AffineSpace.oneSection (ULift.{u} (Fin 1)) B ≫ p) y = y
+    exact congrArg (fun f : B ⟶ B ↦ f y)
+      (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) B)
+  have hpirr (y : B) : IsIrreducible (p ⁻¹' {y}) :=
+    p.isIrreducible_preimage hpopen isIrreducible_singleton
+  have hqconn (y : B) : _root_.IsConnected (q ⁻¹' {y}) := by
+    refine ⟨⟨i₁ y, hsection_apply y⟩, ?_⟩
+    exact ((hpirr y).isPreirreducible.preimage j.isOpenEmbedding).isPreconnected
+  have hpcomp (x : AffineSpace (ULift.{u} (Fin 1)) B) :
+      connectedComponent x = p ⁻¹' connectedComponent (p x) :=
+    ((hpopen.isQuotientMap p.continuous p.surjective).isCoinducing.preimage_connectedComponent
+      (fun y ↦ (hpirr y).isConnected) x).symm
+  have hqcomp (x : G) : connectedComponent x = q ⁻¹' connectedComponent (q x) :=
+    (Topology.IsCoinducing.preimage_connectedComponent
+      (hqopen.isQuotientMap q.continuous (fun y ↦ ⟨i₁ y, hsection_apply y⟩)).isCoinducing
+      hqconn x).symm
+  refine ⟨hpcomp, hqcomp, ?_, ?_, ?_⟩
+  · intro x
+    refine ⟨j (i₁ (p x)), ?_, ⟨i₁ (p x), rfl⟩⟩
+    rw [hpcomp x]
+    change q (i₁ (p x)) ∈ connectedComponent (p x)
+    rw [hsection_apply]
+    exact mem_connectedComponent
+  · intro x
+    refine ⟨AffineSpace.oneSection (ULift.{u} (Fin 1)) B (p x), ?_, ⟨p x, rfl⟩⟩
+    rw [hpcomp x]
+    change p (AffineSpace.oneSection (ULift.{u} (Fin 1)) B (p x)) ∈ connectedComponent (p x)
+    rw [hunit]
+    exact mem_connectedComponent
+  · intro x
+    refine ⟨i₁ (q x), ?_, ⟨q x, rfl⟩⟩
+    rw [hqcomp x]
+    change q (i₁ (q x)) ∈ connectedComponent (q x)
+    rw [hsection_apply]
+    exact mem_connectedComponent
 
 end AlgebraicGeometry
