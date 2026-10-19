@@ -17,43 +17,31 @@
  ],
  "proof": [
   {
-   "text": "Construct a natural map β from ordinary zeroth global cohomology of any complex to its zeroth hypercohomology. Whisker the right-derived unit by the homotopy quotient; transport across mapHomotopyCategoryFactors, quotientCompQhIso and homologyFunctorFactors. This map is an isomorphism on K-injective complexes by the right-derived unit computation [def-pur-ringed-site-zeroth-hypercohomology].",
+   "text": "Lift the target functor I to the full subcategory of K-injective complexes using hI. The first two natural isomorphisms of [lem-sfb-derived-internal-hom-sections-model] identify represented derived internal Hom with localized sheaf Hom and its derived global sections with localized ordinary sections. Invert the first comparison, apply derived sections, and compose with the second. Whisker by the lifted product functor and zeroth derived homology. The homology factorization comparison turns localized ordinary sections into ordinary zeroth global cohomology. This uses only the natural representative and full-complex comparisons, not the final all-degree derived-morphism assertion of that node.",
    "uses": [
-    "def-pur-ringed-site-zeroth-hypercohomology"
+    "lem-sfb-derived-internal-hom-sections-model"
    ],
    "elementary": false
   },
   {
-   "text": "The ordinary global comparison [lem-pur-hom-complex-global-homotopy] is natural in both complexes. Precompose it by the product of the identity and I. For a quasi-isomorphism t:K→L, precomposition by q(t) on homotopy classes into I(M) is bijective: use [lem-weil-pbc-kinjective-hom-derived] on K and L, where it becomes precomposition by the invertible Qh(q(t)). The private helper bijective_precomp_quotient writes this argument explicitly.",
+   "text": "Whisker the proved ordinary global Hom comparison [lem-pur-hom-complex-global-homotopy] by identity.prod I. Compose with the preceding isomorphism and the functor associator to obtain the natural hypercohomology-to-homotopy-Hom comparison. It applies to every functor I with K-injective values, without a resolution transformation, boundedness, or K-flatness of its source.",
    "uses": [
-    "lem-pur-hom-complex-global-homotopy",
-    "lem-weil-pbc-kinjective-hom-derived"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Choose a K-flat quasi-isomorphism K→L using [lem-pc-kflat-resolution]. The Hom-complex map to the K-flat source is a quasi-isomorphism by [lem-pur-rhom-well-defined], hence hypercohomology inverts it. The ordinary global comparison and the preceding bijection show ordinary zeroth global cohomology also inverts this map. The Hom complex with K-flat source and target I(M) is K-injective by [lem-pur-hom-kflat-into-kinjective], so β is an isomorphism there. Its naturality square now forces β to be an isomorphism at (L,M). Assemble the componentwise isomorphisms, invert β, and compose with the ordinary global comparison. This proves the required natural isomorphism without choosing comparison data from an arbitrary witness.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-rhom-well-defined",
-    "lem-pur-hom-kflat-into-kinjective"
+    "lem-pur-hom-complex-global-homotopy"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pur-ringed-site-zeroth-hypercohomology",
-  "lem-pc-kflat-resolution",
-  "lem-pur-hom-complex-global-homotopy",
-  "lem-pur-hom-kflat-into-kinjective",
-  "lem-pur-rhom-well-defined",
-  "lem-weil-pbc-kinjective-hom-derived"
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-pur-hom-complex-global-homotopy"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "E3",
+  "date": "2026-10-19",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Equation 0A8Z (sites-cohomology-equation-global-cohomology-hom-complex), degree zero; global computation in Lemma 08JA. Read at https://stacks.math.columbia.edu/tag/0A8Z and https://stacks.math.columbia.edu/tag/08JA.",
-  "description": "T3: natural derived-unit comparison and two-out-of-three along a K-flat resolution; avoids common K-flat roofs and resolution-independence choices. The ordinary global computation is split into its own strictly simpler theorem."
+  "place": "Equation 0A8Z and Lemma 08JA, global assertion",
+  "description": "Compose the existing representative and full derived-global-sections natural comparisons, apply zeroth homology and its factorization, and use the proved independent-universe ordinary Hom comparison. No new hole or new node."
  },
  "mathlib_searches": [
   {
@@ -141,13 +129,16 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.HomComplexHypercohomology",
-  "file": "lean/Sheaf/Algebra/Homology/HomComplexHypercohomology.lean",
-  "declaration": "CategoryTheory.homComplex_hypercohomology",
-  "statement": "theorem homComplex_hypercohomology\n    {C : Type u} [SmallCategory C]\n    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))]\n    (I : CochainComplex (SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ ⥤\n      CochainComplex (SheafOfModules.{u}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)\n    (hI : ∀ M, (I.obj M).IsKInjective) :\n    Nonempty (((𝟭 _).prod I ⋙ Functor.uncurry.obj (homComplexFunctor (R := R)) ⋙\n        DerivedCategory.Q ⋙ ringedSiteZerothHypercohomology J R) ≅\n      ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).op).prod\n          (I ⋙ HomotopyCategory.quotient _ (ComplexShape.up ℤ)) ⋙\n        Functor.uncurry.obj preadditiveCoyoneda)",
+  "module": "Sheaf.Algebra.Homology.RhomHypercohomologyBridgeOfUniverses",
+  "file": "lean/Sheaf/Algebra/Homology/RhomHypercohomologyBridgeOfUniverses.lean",
+  "declaration": "CategoryTheory.rhom_hypercohomology_bridgeOfUniverses",
+  "declarations": [
+   "CategoryTheory.rhom_hypercohomology_bridgeOfUniverses"
+  ],
+  "statement": "theorem rhom_hypercohomology_bridgeOfUniverses\n    {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)\n    (R : Sheaf J CommRingCat.{max c v r})\n    [HasSheafify J AddCommGrpCat.{max c v r}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]\n    [HasDerivedCategory.{w} (SheafOfModules.{max c v r}\n      ((sheafCompose J\n        (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))]\n    (I : CochainComplex (SheafOfModules.{max c v r}\n      ((sheafCompose J\n        (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ ⥤\n      CochainComplex (SheafOfModules.{max c v r}\n      ((sheafCompose J\n        (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ)\n    (hI : ∀ M, (I.obj M).IsKInjective) :\n    Nonempty (((𝟭 _).prod I ⋙ Functor.uncurry.obj (homComplexFunctor (R := R)) ⋙\n        DerivedCategory.Q ⋙ ringedSiteZerothHypercohomologyOfUniverses.{c, v, r, w} J R) ≅\n      ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).op).prod\n          (I ⋙ HomotopyCategory.quotient _ (ComplexShape.up ℤ)) ⋙\n        Functor.uncurry.obj preadditiveCoyoneda)",
   "branch": "sheaf-dag",
-  "by": "V4",
-  "date": "2026-10-13"
+  "by": "E3",
+  "date": "2026-10-19"
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -160,12 +151,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-19",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T3",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261013T100135-L-2489693",
+  "landing": "20261019T002531-L-2149039",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

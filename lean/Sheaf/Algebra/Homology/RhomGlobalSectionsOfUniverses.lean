@@ -8,9 +8,8 @@ module
 public import Sheaf.Algebra.Homology.RhomGlobalSections
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.Algebra.Homology.RingedSiteZerothHypercohomologyOfUniverses
-import Sheaf.Algebra.Homology.HomComplexHypercohomology
+import Sheaf.Algebra.Homology.RhomHypercohomologyBridgeOfUniverses
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 
 /-!
 # Global sections of derived internal Hom with independent site universes
@@ -33,6 +32,10 @@ open CategoryTheory Opposite
 
 namespace CategoryTheory
 
+set_option backward.isDefEq.respectTransparency false in
+set_option maxHeartbeats 800000 in
+-- The comparison checks naturality through several large localization functors.
+set_option synthInstance.maxHeartbeats 100000 in
 /-- The natural additive identification of zeroth hypercohomology of derived internal Hom
 with derived morphisms, without identifying the site object and morphism universes.
 The sheafification instances are the canonical abelian-category infrastructure in a
@@ -92,6 +95,94 @@ theorem rhom_global_sectionsOfUniverses
         e P' ((ringedSiteZerothHypercohomologyOfUniverses.{c, v, r, w} J R).map
           ((derivedInternalHomOfUniverses.{c, v, r, w} J R).map f) x) =
             f.1.unop ≫ e P x ≫ f.2 := by
-  sorry
+  classical
+  let A := SheafOfModules.{max c v r}
+    ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)
+  let : IsGrothendieckAbelian.{max c v r} A :=
+    (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{c, v, r}
+      J R).1
+  let I := CochainComplex.kInjectiveResolutionFunctor.{max c v r} A
+  let η := CochainComplex.toKInjectiveResolution.{max c v r} A
+  have hI (M : CochainComplex A ℤ) : (I.obj M).IsKInjective :=
+    CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{max c v r} A M
+  have hη (M : CochainComplex A ℤ) : QuasiIso (η.app M) :=
+    (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{max c v r} A M).2
+  let q := HomotopyCategory.quotient A (ComplexShape.up ℤ)
+  let Q := DerivedCategory.Q (C := A)
+  let σ := DerivedCategory.quotientCompQhIso A
+  let H := Functor.uncurry.obj (preadditiveCoyoneda (C := DerivedCategory A))
+  let HK := Functor.uncurry.obj
+    (preadditiveCoyoneda (C := HomotopyCategory A (ComplexShape.up ℤ)))
+  let U := AddCommGrpCat.uliftFunctor.{w, max c v r}
+  let V := AddCommGrpCat.uliftFunctor.{max c v r, w}
+  let B := q.op.prod (I ⋙ q) ⋙ HK ⋙ U
+  let T := Q.op.prod Q ⋙ H ⋙ V
+  have hi (M : CochainComplex A ℤ) : IsIso (Q.map (η.app M)) := by
+    have := hη M
+    infer_instance
+  let t (P : (CochainComplex A ℤ)ᵒᵖ × CochainComplex A ℤ) :
+      (DerivedCategory.Qh.obj (q.obj P.1.unop) ⟶
+        DerivedCategory.Qh.obj (q.obj (I.obj P.2))) ≃+
+      (Q.obj P.1.unop ⟶ Q.obj P.2) := by
+    have := hi P.2
+    exact
+      { toEquiv := Iso.homCongr (σ.app P.1.unop)
+          (σ.app (I.obj P.2) ≪≫ (asIso (Q.map (η.app P.2))).symm)
+        map_add' := by intros; simp [Preadditive.comp_add, Preadditive.add_comp] }
+  let e (P : (CochainComplex A ℤ)ᵒᵖ × CochainComplex A ℤ) : B.obj P ≃+ T.obj P :=
+    AddEquiv.ulift.trans
+      ((AddEquiv.ofBijective (DerivedCategory.Qh.mapAddHom)
+        (by have := hI P.2; exact CochainComplex.IsKInjective.Qh_map_bijective _ _)).trans
+        ((t P).trans AddEquiv.ulift.symm))
+  let b : B ≅ T := NatIso.ofComponents (fun P ↦ (e P).toAddCommGrpIso) (by
+    intro P P' f
+    ext x
+    apply ULift.ext
+    dsimp [B, T, e, t, HK, H, U, V, Functor.uncurry,
+      preadditiveCoyoneda, preadditiveCoyonedaObj, AddCommGrpCat.uliftFunctor,
+      AddEquiv.toAddCommGrpIso, AddEquiv.ofBijective, Iso.homCongr,
+      AddEquiv.ulift, Equiv.ulift, Functor.mapAddHom]
+    have := hi P.2
+    have := hi P'.2
+    have hn : Q.map (I.map f.2) ≫ inv (Q.map (η.app P'.2)) =
+        inv (Q.map (η.app P.2)) ≫ Q.map f.2 := by
+      apply (cancel_epi (Q.map (η.app P.2))).mp
+      rw [← Category.assoc, ← Q.map_comp, ← η.naturality f.2, Q.map_comp]
+      simp only [Category.assoc, IsIso.hom_inv_id, Category.comp_id,
+        IsIso.hom_inv_id_assoc, Functor.id_map]
+    simp only [AddMonoidHom.mk'_apply, Functor.map_comp, Category.assoc]
+    dsimp only [σ]
+    rw [← DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
+    rw [DerivedCategory.quotientCompQhIso_hom_naturality_assoc]
+    rw [hn])
+  have hc : Nonempty (((𝟭 _).prod I ⋙
+      Functor.uncurry.obj (homComplexFunctor (R := R)) ⋙ Q ⋙
+        ringedSiteZerothHypercohomologyOfUniverses.{c, v, r, w} J R) ≅
+      q.op.prod (I ⋙ q) ⋙ HK) := by
+    exact rhom_hypercohomology_bridgeOfUniverses.{c, v, r, w} J R I hI
+  obtain ⟨a⟩ := hc
+  obtain ⟨c⟩ := derivedInternalHomOfUniverses_comparison.{c, v, r, w} J R I η (fun M ↦ ⟨hη M, hI M⟩)
+  let F := derivedInternalHomOfUniverses.{c, v, r, w} J R ⋙
+    ringedSiteZerothHypercohomologyOfUniverses.{c, v, r, w} J R ⋙ U
+  let G := H ⋙ V
+  let d : Q.op.prod Q ⋙ F ≅ Q.op.prod Q ⋙ G :=
+    Functor.isoWhiskerRight c (ringedSiteZerothHypercohomologyOfUniverses.{c, v, r, w} J R ⋙ U) ≪≫
+      Functor.isoWhiskerRight a U ≪≫ b
+  let W := (HomologicalComplex.quasiIso A (ComplexShape.up ℤ)).op.prod
+    (HomologicalComplex.quasiIso A (ComplexShape.up ℤ))
+  let z : F ≅ G :=
+    (Localization.fullyFaithfulWhiskeringLeft (Q.op.prod Q) W _).preimageIso d
+  let E (P : (DerivedCategory A)ᵒᵖ × DerivedCategory A) :
+      ((ringedSiteZerothHypercohomologyOfUniverses.{c, v, r, w} J R).obj
+        ((derivedInternalHomOfUniverses.{c, v, r, w} J R).obj P)) ≃+
+        (P.1.unop ⟶ P.2) := AddEquiv.ulift.symm.trans
+    ((z.app P).addCommGroupIsoToAddEquiv.trans AddEquiv.ulift)
+  refine ⟨E, ?_⟩
+  intro P P' f x
+  have hz := ConcreteCategory.congr_hom (z.hom.naturality f) (ULift.up x)
+  simpa [E, F, G, H, U, V, Functor.uncurry, preadditiveCoyoneda,
+    preadditiveCoyonedaObj, AddCommGrpCat.uliftFunctor, AddEquiv.ulift,
+    Equiv.ulift, Iso.addCommGroupIsoToAddEquiv, AddCommGrpCat.Hom.hom, Category.assoc]
+    using congrArg ULift.down hz
 
 end CategoryTheory
