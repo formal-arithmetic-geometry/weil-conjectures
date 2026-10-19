@@ -24,97 +24,85 @@
  ],
  "proof": [
   {
-   "text": "Apply the finite-open comparison with $(\\bar v,v,j_V,j_U)=(g,h,u,v)$. The hypothesis that $g$ is finite follows from [lem-weil-pbc-closed-immersion-finite]. Thus [lemma-weil-pbc-finite-pushforward-extension-zero] gives the natural isomorphism $\\beta_L:u_!h_*L\\longrightarrow g_*v_!L$ on underlying abelian sheaves. Its definition [def-weil-pbc-finite-open-comparison] is the adjoint of $h_*L\\xrightarrow{h_*\\eta_v}h_*v^*v_!L\\xrightarrow{\\mathrm{Ex}^{-1}}u^*g_*v_!L$. Since the open-extension unit is invertible [lem-weil-pbc-extension-by-zero-unit-iso], this is exactly the inverse of the composite $u^*g_*v_!L\\xrightarrow{\\mathrm{Ex}}h_*v^*v_!L\\xrightarrow{h_*\\eta_v^{-1}}h_*L$, so $\\beta_L$ is the transpose of its inverse under $u_!\\dashv u^*$.",
+   "text": "Closed immersions are finite [lem-weil-pbc-closed-immersion-finite]. Apply Etale.isIso_finiteOpenComparison [lemma-weil-pbc-finite-pushforward-extension-zero] with ModuleCat A and the canonical pullback square. This proves the first conjunct with exactly the specified comparison [def-weil-pbc-finite-open-comparison]. The existing theorem is generic in the coefficient category and applies directly to module sheaves, so no separate scalar-linearity argument is necessary.",
    "uses": [
     "lem-weil-pbc-closed-immersion-finite",
     "lemma-weil-pbc-finite-pushforward-extension-zero",
-    "def-weil-pbc-finite-open-comparison",
-    "lem-weil-pbc-extension-by-zero-unit-iso"
+    "def-weil-pbc-finite-open-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJ1, lemma-compatible-shriek-push-finite; Tag 0F70, lemma-jshriek-open; closed immersions finite: morphisms.tex, Tag 035C, lemma-closed-immersion-finite"
+    "place": "Tag 0GJ1, finite/open interchange"
    }
   },
   {
-   "text": "The preceding comparison is $A$-linear. Indeed the direct-image formula and the sheafified extension-by-zero construction [def-weil-pbc-direct-image, def-weil-pbc-extension-by-zero] give their usual underlying abelian sheaves. For each $a\\in A$, apply naturality of $\\beta$ to the abelian sheaf endomorphism $a:L\\to L$: this says $\\beta_L(a s)=a\\beta_L(s)$. A section of the constant ring sheaf is locally represented by constants [def-weil-pbc-constant-sheaf], so the same equality holds for every local scalar, by the sheaf axiom. This is precisely the module-morphism condition [def-weil-sheaf-of-modules-category]. The inverse of a bijective $A$-linear map is $A$-linear too. The units and counits of $u_!\\dashv u^*$ and $v_!\\dashv v^*$ on module sheaves are given by the same presheaf formulas as on abelian sheaves [lem-weil-pbc-extension-by-zero-adjunction], and the exchange map is built from direct-image formulas, so the maps in step 1 have the same underlying abelian maps; the module inverse image uses the identified constant coefficient ring [def-weil-pbc-inverse-image]. Hence step 1 gives the specified natural isomorphism of module sheaves, including its prescribed transpose.",
+   "text": "The embedding of an immersion a:S→X induces a Noetherian topology on S from the Noetherian X [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Every subset of S is compact, hence every scheme map out of S is quasi-compact. This also proves quasi-compactness for b:S→Y without needing to establish that Y is Noetherian. The open image factors and their scheme-theoretic density are supplied by [lemma-nagata-immersion-open-in-scheme-image].",
    "uses": [
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-extension-by-zero",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-inverse-image",
-    "lem-weil-pbc-extension-by-zero-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJ1, module enhancement by naturality in scalar endomorphisms; Tag 03S3, definition-extension-zero"
-   }
-  },
-  {
-   "text": "Check the finiteness hypotheses for scheme-theoretic images. Write a locally closed immersion as $S\\xrightarrow{h}W\\xrightarrow{u}X$, closed then open, as in [def-weil-closed-immersion]. By [lem-weil-pbc-noetherian-open-subscheme-noetherian], $W$ is Noetherian. Its closed subscheme $S$ is quasi-compact (a closed subspace of the quasi-compact space $W$), and is locally Noetherian: on affine charts its rings are quotients of Noetherian rings; ascending chains of ideals pull back to ascending chains upstairs. Every open of $S$ is therefore quasi-compact, by the same cited open-subscheme lemma. In particular $a^{-1}(V)$ is quasi-compact for every affine open $V\\subset X$, so $a$ is quasi-compact. Open immersions are monomorphisms by their definition [def-weil-open-immersion], and closed immersions are monomorphisms by their local surjective ring maps. Thus $a$ is a monomorphism; its diagonal is an isomorphism, so it is quasi-separated. This argument also applies with any closed subscheme of $X$ as ambient scheme.",
-   "uses": [
-    "def-weil-closed-immersion",
     "def-weil-open-immersion",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lemma-nagata-immersion-open-in-scheme-image"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01R8, lemma-quasi-compact-scheme-theoretic-image, hypotheses; elementary Noetherian and immersion checks"
+    "place": "Tags 01R6--01R8, hypotheses; Noetherian subspace compactness"
    }
   },
   {
-   "text": "For $C=\\operatorname{SIm}(a)$, [lemma-nagata-immersion-open-in-scheme-image] makes the factor map $j:S\\to C$ open. For the chosen $W$, the base change $S\\times_XW$ is canonically $S$: the inverse to its first projection sends $s$ to $(s,h(s))$. Thus the restricted morphism $a_W$ is $h$. Apply [lemma-nagata-scheme-image-restrict-open], whose quasi-compact and quasi-separated hypotheses were checked in step 3, and then [lemma-nagata-scheme-image-of-closed-immersion], to obtain $C\\times_XW\\cong\\operatorname{SIm}(h)\\cong S$ as closed subschemes of $W$. These identifications respect the factor maps: both give a map from $S$ to the same closed subscheme over $W$, and a closed immersion is a monomorphism. Consequently the square with edges $j:S\\to C$, $h:S\\to W$, $c:C\\to X$ and $u:W\\to X$ is cartesian. This proves the scheme-theoretic, rather than just set-theoretic, square needed below.",
+   "text": "For a=h≫j with h closed and j open, the square (id_S,h,a,j) is cartesian because j is a monomorphism. The arbitrary-pullback kernel API Scheme.Hom.ker_of_isPullback in [lemma-nagata-scheme-image-restrict-open] gives h.ker=a.ker.comap j. Since a.imageι.ker=a.ker, the closed-immersion pullback criterion gives the cartesian closure square (a.toImage,h,a.imageι,j). Invert the finite/open comparison of step 1 to get an initial natural isomorphism from the closure extension to h_* followed by j_!.",
    "uses": [
-    "lemma-nagata-immersion-open-in-scheme-image",
     "lemma-nagata-scheme-image-restrict-open",
-    "lemma-nagata-scheme-image-of-closed-immersion"
+    "lemma-weil-pbc-finite-pushforward-extension-zero",
+    "def-weil-pbc-finite-open-comparison",
+    "def-pc-fibre-product"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 01R6/01R7/01R8, scheme-theoretic image and restriction to an open; the cited DAG immersion and closed-image consequences"
+    "place": "Tags 01R6--01R8; kernel form of restriction of the image"
    }
   },
   {
-   "text": "Apply steps 1 and 2 to the cartesian square in step 4 and invert its comparison. This defines, naturally in $L$, $a_!L=c_*j_!L\\xrightarrow{\\beta_L^{-1}}u_!h_*L$. To check its normalization, write $t_L:h_*L\\xrightarrow{\\sim}u^*c_*j_!L$ for the adjoint used to define $\\beta_L$. The defining equation for an adjoint transpose is $u^*(\\beta_L)\\circ\\eta_{u,h_*L}=t_L$. Under the open-unit identification $u^*u_!h_*L\\cong h_*L$ [lem-weil-pbc-extension-by-zero-unit-iso] and the exchange/open-unit identification $u^*c_*j_!L\\cong h_*L$ of [def-weil-pbc-finite-open-comparison], this equation says that the restriction is the identity of $h_*L$. Restrict once more along $h$; the closed-immersion left-inverse property [lem-kun-04ca] identifies $h^*h_*L$ with $L$. Its abelian statement applies to modules by the scalar argument of step 2. The resulting map is therefore the identity of $L$, as required. No unspecified isomorphism between the two extension functors has been chosen.",
+   "text": "Normalize the initial comparison purely categorically. Write F for the closure extension, G for h_* followed by j_!, R=a^*, and α:FR≅Id, β:GR≅Id for the existing displayed restriction helpers. These helpers use the open unit [lem-weil-pbc-extension-by-zero-unit-iso], closed counit [prop-openclosed-lowerstar-fully-faithful], and inverse-image composition [def-weil-pbc-inverse-image]. Given e₀:F≅G, set γ=(e₀▷R)β and τ=γ⁻¹α:Id≅Id. Let θ:F≅F have components F(τ_s). Naturality of γ gives R(θ_s)γ_s=γ_sτ_s=α_s, so e=θe₀ has the required normalization. For uniqueness, if e and e′ have the same restriction, f=e′_s e_s⁻¹ has R(f)=id. The functor F is fully faithful: the open unit and its adjunction [lem-weil-pbc-extension-by-zero-adjunction] make open extension fully faithful, and closed pushforward is fully faithful by the cited closed-counit result. Lift f to F.preimage(f). Naturality of α shows this preimage is id, whence f=id and e′=e. These are proved private categorical lemmas, with no new assumptions or holes.",
    "uses": [
     "lem-weil-pbc-extension-by-zero-unit-iso",
-    "def-weil-pbc-finite-open-comparison",
-    "lem-kun-04ca"
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "prop-openclosed-lowerstar-fully-faithful",
+    "def-weil-pbc-inverse-image"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJ1, specified adjoint comparison; Tag 0F70, open units; Tag 04CA, proposition-closed-immersion-pushforward"
+    "place": "Tags 0F70 and 04CA; elementary normalization by naturality and full faithfulness"
    }
   },
   {
-   "text": "For the last clause put $D=\\operatorname{SIm}_Y(b)$, with $d:D\\hookrightarrow Y$ and $j_D:S\\hookrightarrow D$. The ambient $Y$ is Noetherian by the closed-subscheme calculation in step 3, so that step and [lemma-nagata-immersion-open-in-scheme-image] give the stated open $j_D$. Since $a$ factors through the closed subscheme $Y\\hookrightarrow X$, [lemma-nagata-scheme-image-universal] gives a closed map $q:C\\to Y$. Its composite with $j$ is $b$, because their composites with the monomorphism $i$ agree. Applying the same universal property to $b$ factoring through $q$ gives $r:D\\to C$ over $Y$. Conversely $id:D\\to X$ is closed: locally it is the composite of two surjective quotient maps [def-weil-closed-immersion]. As $a=idj_D$, the universal property for $a$ gives $s:C\\to D$ over $X$. Both $rs$ and $\\mathrm{id}_C$ have the same composite into $X$, and both $sr$ and $\\mathrm{id}_D$ have the same composite into $X$. The closed inclusions are monomorphisms, so $rs=\\mathrm{id}_C$ and $sr=\\mathrm{id}_D$. Hence $D\\cong C$ canonically over $X$, and the open factor maps from $S$ agree under this identification.",
+   "text": "For a=b≫i with i closed, let D=b.image and C=a.image. The density of b.toImage from [lemma-nagata-immersion-open-in-scheme-image] implies ker(b.toImage≫(b.imageι≫i))=ker(b.imageι≫i). Thus a.imageι.ker=(b.imageι≫i).ker. The closed lift [lemma-nagata-scheme-image-universal] from D to C for this ideal equality is an isomorphism by the closed-immersion equal-kernel criterion. Its composite with a.imageι is b.imageι≫i. Cancel the monomorphism a.imageι to obtain b.toImage≫q=a.toImage.",
    "uses": [
     "lemma-nagata-immersion-open-in-scheme-image",
     "lemma-nagata-scheme-image-universal",
     "def-weil-closed-immersion"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01R6, lemma-scheme-theoretic-image, minimal closed factorization applied twice; Tag 01R8 and the cited immersion consequence"
+    "place": "Tags 01R6--01R8; ideal-sheaf form of the minimal closed factorization"
    }
   },
   {
-   "text": "Identify $D$ with $C$ by step 6. Direct images compose by their defining formula [def-weil-pbc-direct-image]: on an etale test object $E\\to X$, both $i_*d_*F$ and $(id)_*F$ evaluate to $F((E\\times_XY)\\times_YD)=F(E\\times_XD)$, using the canonical associativity isomorphism of fibre products [def-pc-fibre-product]. The section identifications commute with restrictions, sheaf morphisms and the constant $A$-action, and their inverses are the reverse fibre-product identifications. Thus $i_*b_!=i_*d_*j_{D!}\\cong(id)_*j_{D!}\\cong c_*j_!=a_!$ is the desired natural identification. The equality of the open factor maps established in step 6 identifies their extension-by-zero functors, so this comparison involves no change of the chosen coefficient category.",
+   "text": "Associativity of direct image [def-weil-pbc-direct-image] identifies b_! followed by i_* with b.toImage_! followed by q_* and a.imageι_*. For the isomorphism q, direct image q_* is inverse pullback and hence equals open extension q_!, by uniqueness of left adjoints using [lem-weil-pbc-extension-by-zero-adjunction]. Apply composition of open extensions [lem-cbc-extension-zero-composition] and b.toImage≫q=a.toImage to get the initial closed-composition comparison. Normalize it by step 4 with F=b_! followed by i_*, G=a_!, and the existing helper etaleClosedCompositionRestrictionIso for α. Full faithfulness of this F follows by composition, giving the specified uniqueness too.",
    "uses": [
     "def-weil-pbc-direct-image",
-    "def-pc-fibre-product"
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-cbc-extension-zero-composition",
+    "prop-openclosed-lowerstar-fully-faithful"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Ordinary direct-image formula (base change on etale test objects); closure compatibility is the preceding elementary universal-property calculation"
+    "place": "Direct-image formula and extension-by-zero adjunction; Tags 0F70 and 04CA"
    }
   }
  ],
@@ -122,27 +110,24 @@
   "lem-weil-pbc-closed-immersion-finite",
   "lemma-weil-pbc-finite-pushforward-extension-zero",
   "def-weil-pbc-finite-open-comparison",
-  "lem-weil-pbc-extension-by-zero-unit-iso",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-extension-by-zero",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-inverse-image",
-  "def-weil-closed-immersion",
   "def-weil-open-immersion",
+  "def-weil-closed-immersion",
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "lemma-nagata-immersion-open-in-scheme-image",
   "lemma-nagata-scheme-image-restrict-open",
-  "lemma-nagata-scheme-image-of-closed-immersion",
-  "lem-kun-04ca",
-  "lemma-nagata-scheme-image-universal",
   "def-pc-fibre-product",
-  "lem-weil-pbc-extension-by-zero-adjunction"
+  "lem-weil-pbc-extension-by-zero-unit-iso",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "prop-openclosed-lowerstar-fully-faithful",
+  "def-weil-pbc-inverse-image",
+  "lemma-nagata-scheme-image-universal",
+  "def-weil-pbc-direct-image",
+  "lem-cbc-extension-zero-composition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0GJ1 plus morphisms.tex Tags 01R6–01R8; expanded closure consequences for current blueprint det-sf-flat-model-generation, proof clause (2)"
+  "place": "Tag 0GJ1 with morphisms.tex Tags 01R6--01R8; C1 Lean proof uses kernel base change for the closure square, equal kernels for closed composition, and explicit categorical normalization by naturality. Both closure comparisons and uniqueness are completely proved."
  },
  "mathlib_searches": [
   {
@@ -291,8 +276,6 @@
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "lemma-nagata-immersion-open-in-scheme-image",
   "lemma-nagata-scheme-image-restrict-open",
-  "lemma-nagata-scheme-image-of-closed-immersion",
-  "lem-kun-04ca",
   "lemma-nagata-scheme-image-universal",
   "lem-weil-pbc-extension-by-zero-adjunction"
  ],
@@ -329,5 +312,15 @@
   "by": "Q42",
   "date": "2026-10-17",
   "fixed_by": "NT-stage2-Codex-b6744492f"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261019T002512-L-2142834",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

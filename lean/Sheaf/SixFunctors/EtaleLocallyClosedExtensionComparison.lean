@@ -4,13 +4,9 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Finite
 public import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage
-import Sheaf.CategoryTheory.RingedSiteModules
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.SixFunctors.OpenClosed.Complex
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
 
 /-!
 # Étale extension by zero for locally closed immersions
@@ -154,6 +150,125 @@ noncomputable def etaleClosedCompositionRestrictionIso
           Functor.leftUnitor T) ≪≫
       etaleLocallyClosedExtensionRestrictionIso (A := A) b hqb
 
+/-- A fully faithful extension with a restriction left inverse detects equality of normalized
+comparisons. This is the elementary full-faithfulness argument in Stacks Tag 04CA. -/
+private theorem normalized_iso_unique
+    {C D : Type*} [Category* C] [Category* D]
+    (F G : C ⥤ D) (R : D ⥤ C) [F.Full] [F.Faithful]
+    (α : F ⋙ R ≅ 𝟭 C) (β : G ⋙ R ≅ 𝟭 C)
+    (e e' : F ≅ G)
+    (he : Functor.isoWhiskerRight e R ≪≫ β = α)
+    (he' : Functor.isoWhiskerRight e' R ≪≫ β = α) : e' = e := by
+  have hr : Functor.isoWhiskerRight e' R = Functor.isoWhiskerRight e R := by
+    apply Iso.ext
+    exact (cancel_mono β.hom).mp (congrArg Iso.hom (he'.trans he.symm))
+  apply Iso.ext
+  ext X
+  let f : F.obj X ⟶ F.obj X := e'.hom.app X ≫ e.inv.app X
+  have hf : R.map f = 𝟙 _ := by
+    simpa [f] using congrArg (fun t ↦ t ≫ R.map (e.inv.app X))
+      (congrArg (fun t ↦ t.hom.app X) hr)
+  have hp : F.preimage f = 𝟙 X := by
+    apply (cancel_epi (α.hom.app X)).mp
+    calc
+      α.hom.app X ≫ F.preimage f = R.map (F.map (F.preimage f)) ≫ α.hom.app X :=
+        (α.hom.naturality (F.preimage f)).symm
+      _ = α.hom.app X ≫ 𝟙 X := by rw [F.map_preimage, hf]; simp
+  have hfid : f = 𝟙 _ := by
+    simpa using congrArg F.map hp
+  exact (cancel_mono (e.inv.app X)).mp (by simpa [f] using hfid)
+
+/-- Normalize an existing comparison by the induced automorphism of the identity functor.
+Naturality of its restriction identification verifies the normalization equation. -/
+private theorem normalized_iso_exists
+    {C D : Type*} [Category* C] [Category* D]
+    (F G : C ⥤ D) (R : D ⥤ C)
+    (α : F ⋙ R ≅ 𝟭 C) (β : G ⋙ R ≅ 𝟭 C) (e₀ : F ≅ G) :
+    ∃ e : F ≅ G, Functor.isoWhiskerRight e R ≪≫ β = α := by
+  let γ := Functor.isoWhiskerRight e₀ R ≪≫ β
+  let τ := γ.symm ≪≫ α
+  let θ := (Functor.leftUnitor F).symm ≪≫
+    Functor.isoWhiskerRight τ F ≪≫ Functor.leftUnitor F
+  refine ⟨θ ≪≫ e₀, ?_⟩
+  apply Iso.ext
+  ext X
+  change R.map (θ.hom.app X ≫ e₀.hom.app X) ≫ β.hom.app X = α.hom.app X
+  rw [R.map_comp, Category.assoc]
+  have hθ : θ.hom.app X = F.map (τ.hom.app X) := by simp [θ]
+  rw [hθ]
+  change (F ⋙ R).map (τ.hom.app X) ≫ γ.hom.app X = α.hom.app X
+  calc
+    _ = γ.hom.app X ≫ τ.hom.app X := γ.hom.naturality (τ.hom.app X)
+    _ = _ := by simp [τ]
+
+/-- Restricting the scheme-theoretic image to a closed-then-open factorization recovers
+its closed factor, by the kernel form of image base change (Stacks Tags 01R6--01R8). -/
+private theorem closure_factorization_square
+    {S W X : Scheme.{u}} (a : S ⟶ X) [IsImmersion a] [QuasiCompact a]
+    (h : S ⟶ W) (j : W ⟶ X) [IsClosedImmersion h] [IsOpenImmersion j]
+    (ha : h ≫ j = a) : IsPullback a.toImage h a.imageι j := by
+  have sq : IsPullback (𝟙 S) h a j :=
+    IsPullback.of_horiz_isIso_mono ⟨by simpa using ha.symm⟩
+  apply (isPullback_of_isClosedImmersion h a.imageι a.toImage j
+    (by simpa using ha) ?_).flip
+  simpa only [Scheme.Hom.imageι, Scheme.IdealSheafData.ker_subschemeι] using
+    (Scheme.Hom.ker_of_isPullback a j sq).symm
+
+/-- Invert finite/open interchange for the cartesian closure square (Stacks Tag 0GJ1). -/
+private theorem closure_factorization_iso
+    {A : Type (u + 1)} [CommRing A]
+    {S W X : Scheme.{u}} (a : S ⟶ X) [IsImmersion a] (hqa : QuasiCompact a)
+    (h : S ⟶ W) (j : W ⟶ X) [IsClosedImmersion h] [IsOpenImmersion j]
+    (ha : h ≫ j = a) :
+    Nonempty (etaleLocallyClosedExtension (A := A) a hqa ≅
+      Etale.lowerStar (ModuleCat.{u + 1} A) h ⋙
+        Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j) := by
+  let : QuasiCompact a := hqa
+  have sq := closure_factorization_square a h j ha
+  have := Etale.isIso_finiteOpenComparison (ModuleCat.{u + 1} A) sq
+  exact ⟨(asIso (Etale.finiteOpenComparison (ModuleCat.{u + 1} A) sq)).symm⟩
+
+/-- The closures in two closed ambient schemes have equal ideals over the larger ambient
+scheme. Transport extension by zero along their unique isomorphism and compose direct images.
+Source: Stacks Tags 01R6--01R8 and the direct-image formula. -/
+private theorem closure_closed_composition_iso
+    {A : Type (u + 1)} [CommRing A]
+    {S Y X : Scheme.{u}} (a : S ⟶ X) [IsImmersion a] (hqa : QuasiCompact a)
+    (b : S ⟶ Y) [IsImmersion b] (hqb : QuasiCompact b)
+    (i : Y ⟶ X) [IsClosedImmersion i] (ha : b ≫ i = a) :
+    Nonempty (etaleLocallyClosedExtension (A := A) b hqb ⋙
+      Etale.lowerStar (ModuleCat.{u + 1} A) i ≅
+        etaleLocallyClosedExtension (A := A) a hqa) := by
+  let : QuasiCompact a := hqa
+  let : QuasiCompact b := hqb
+  have hk : a.imageι.ker = (b.imageι ≫ i).ker := by
+    calc
+      a.imageι.ker = a.ker := Scheme.IdealSheafData.ker_subschemeι _
+      _ = (b.toImage ≫ (b.imageι ≫ i)).ker := by rw [← Category.assoc,
+        Scheme.Hom.toImage_imageι, ha]
+      _ = (b.imageι ≫ i).ker :=
+        Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant _ _
+  let q := IsClosedImmersion.lift a.imageι (b.imageι ≫ i) hk.le
+  have hq : q ≫ a.imageι = b.imageι ≫ i := IsClosedImmersion.lift_fac _ _ _
+  have : IsIso q := IsClosedImmersion.isIso_lift _ _ hk
+  have hj : b.toImage ≫ q = a.toImage := by
+    rw [← cancel_mono a.imageι, Category.assoc, hq, ← Category.assoc,
+      Scheme.Hom.toImage_imageι, ha, Scheme.Hom.toImage_imageι]
+  let M := ModuleCat.{u + 1} A
+  let eq : Etale.lowerStar M q ≅ Etale.openImmersionLowerShriek M q :=
+    (Etale.upperStarInvIsoLowerStarHom M (asIso q)).symm ≪≫
+      Etale.upperStarIsoOpenImmersionLowerShriekInv M (asIso q).symm
+  refine ⟨?_⟩
+  exact Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft (Etale.openImmersionLowerShriek M b.toImage)
+      (Etale.lowerStarComp M b.imageι i _ hq ≪≫ (Etale.lowerStarComp M q a.imageι).symm) ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight (Functor.isoWhiskerLeft
+      (Etale.openImmersionLowerShriek M b.toImage) eq ≪≫
+      (Etale.openImmersionLowerShriekComp M b.toImage q).symm ≪≫
+      eqToIso (by congr 1))
+      (Etale.lowerStar M a.imageι)
+
 /-- Étale closed/open interchange and closure-defined extension by zero.
 
 Source: literature/stacks-project/etale-cohomology.tex, Tag 0GJ1,
@@ -176,32 +291,26 @@ closed factor `a.imageι`.
 (4) The restriction of the image square to an open factorization is the
 cartesian square obtained from `S ×_X W ≅ S`; the scheme-image restriction and
 closed-image lemmas identify its closed edge with `S`.
-(5) The inverse finite-open comparison gives the factorization comparison.
-The displayed helpers `etaleLocallyClosedExtensionRestrictionIso` and
-`etaleFactorizationRestrictionIso` are the explicit composites of the open
-unit, closed counit, and pullback composition isomorphism.  Thus the comparison
-restricts to the identity. Restriction is fully faithful on the essential image
-of the fully faithful closure extension, making this normalized comparison unique.
-(6) For `b : S ⟶ Y` and a closed `i : Y ⟶ X`, the universal property of
-scheme-theoretic images identifies the closure of `b` with that of `a` over
-`X`; this gives the canonical comparison after `i_*`.  The helper
-`etaleClosedCompositionRestrictionIso` records its identity restriction, and
-full faithfulness on the essential image of the closure extension gives uniqueness.
-(7) Direct images compose by their étale test-object formula, so the closure
-identification is natural in module sheaves and compatible with the constant
-coefficient action.  The cited inputs are
-`lem-weil-pbc-closed-immersion-finite`,
-`lemma-weil-pbc-finite-pushforward-extension-zero`,
-`def-weil-pbc-finite-open-comparison`,
-`lem-weil-pbc-extension-by-zero-unit-iso`,
-`def-weil-pbc-direct-image`, `def-weil-pbc-extension-by-zero`,
-`def-weil-pbc-constant-sheaf`, `def-weil-sheaf-of-modules-category`,
-`def-weil-pbc-inverse-image`, `def-weil-closed-immersion`,
-`def-weil-open-immersion`, `lem-weil-pbc-noetherian-open-subscheme-noetherian`,
-`lemma-nagata-immersion-open-in-scheme-image`,
-`lemma-nagata-scheme-image-restrict-open`,
-`lemma-nagata-scheme-image-of-closed-immersion`, `lem-kun-04ca`,
-`lemma-nagata-scheme-image-universal`, and `def-pc-fibre-product`.
+(5) The inverse finite-open comparison gives an initial factorization comparison.
+To normalize any comparison `e₀ : F ≅ G`, write `R = a^*` and let
+`α : F ⋙ R ≅ 𝟭` and `β : G ⋙ R ≅ 𝟭` be the displayed restriction helpers.
+Set `γ = (e₀ ▷ R) ≪≫ β` and `τ = γ.symm ≪≫ α`. Whiskering the automorphism
+`τ` of the identity with `F` gives `θ : F ≅ F`; then `θ ≪≫ e₀` is normalized,
+by naturality of `γ`. For uniqueness, if two comparisons agree after `R`, their
+quotient is an endomorphism of `F`. Fullness lifts it to the source, and the
+restriction identification `α` shows that lift is the identity. Faithfulness
+then identifies the two comparisons. The extension `F` is fully faithful since
+open extension and closed direct image are fully faithful.
+(6) For `b : S ⟶ Y` and closed `i : Y ⟶ X`, scheme-theoretic density of
+`b.toImage` gives `a.imageι.ker = (b.imageι ≫ i).ker`. The closed-immersion
+lift for this equality is an isomorphism `q : b.image ≅ a.image` over `X`.
+Its compatibility with the open factors follows by canceling `a.imageι`.
+(7) Direct images compose by `Etale.lowerStarComp`. For the isomorphism `q`,
+direct image equals open extension: both identify with inverse pullback.
+Composition of open extensions then identifies the two closure extensions.
+Apply the normalization and uniqueness argument of step (5), now using
+`etaleClosedCompositionRestrictionIso`. All constructions are already for
+`ModuleCat A`, so no separate passage from abelian sheaves is needed.
 -/
 theorem etale_locallyClosed_extension_comparison
     {A : Type (u + 1)} [CommRing A] [Finite A]
@@ -245,6 +354,40 @@ theorem etale_locallyClosed_extension_comparison
                         etaleLocallyClosedExtensionRestrictionIso (A := A) a hqa =
                       etaleClosedCompositionRestrictionIso (A := A) a b i hqb ha →
                     e' = e) := by
-  sorry
+  refine ⟨Etale.isIso_finiteOpenComparison (ModuleCat.{u + 1} A)
+    (IsPullback.of_hasPullback g u), ?_⟩
+  intro S a _
+  have : TopologicalSpace.NoetherianSpace S := a.isEmbedding.isInducing.noetherianSpace
+  have hqa : QuasiCompact a := inferInstance
+  refine ⟨hqa, ?_, ?_⟩
+  · intro W' h j _ _ ha
+    obtain ⟨e₀⟩ := closure_factorization_iso (A := A) a hqa h j ha
+    let : QuasiCompact a := hqa
+    have : (etaleLocallyClosedExtension (A := A) a hqa).Full := by
+      dsimp [etaleLocallyClosedExtension]
+      infer_instance
+    have : (etaleLocallyClosedExtension (A := A) a hqa).Faithful := by
+      dsimp [etaleLocallyClosedExtension]
+      infer_instance
+    obtain ⟨e, he⟩ := normalized_iso_exists _ _ _
+      (etaleLocallyClosedExtensionRestrictionIso (A := A) a hqa)
+      (etaleFactorizationRestrictionIso (A := A) a h j ha) e₀
+    exact ⟨e, he, fun e' he' ↦ normalized_iso_unique _ _ _ _ _ e e' he he'⟩
+  · intro Y i _ b _ ha
+    have hqb : QuasiCompact b := inferInstance
+    obtain ⟨e₀⟩ := closure_closed_composition_iso (A := A) a hqa b hqb i ha
+    let : QuasiCompact b := hqb
+    have : (etaleLocallyClosedExtension (A := A) b hqb ⋙
+        Etale.lowerStar (ModuleCat.{u + 1} A) i).Full := by
+      dsimp [etaleLocallyClosedExtension]
+      infer_instance
+    have : (etaleLocallyClosedExtension (A := A) b hqb ⋙
+        Etale.lowerStar (ModuleCat.{u + 1} A) i).Faithful := by
+      dsimp [etaleLocallyClosedExtension]
+      infer_instance
+    obtain ⟨e, he⟩ := normalized_iso_exists _ _ _
+      (etaleClosedCompositionRestrictionIso (A := A) a b i hqb ha)
+      (etaleLocallyClosedExtensionRestrictionIso (A := A) a hqa) e₀
+    exact ⟨hqb, e, he, fun e' he' ↦ normalized_iso_unique _ _ _ _ _ e e' he he'⟩
 
 end AlgebraicGeometry
