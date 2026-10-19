@@ -22,9 +22,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 import Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
-import Sheaf.AlgebraicGeometry.EtaleModuleInjectiveForgetAcyclic
+import WeilConjectures.AlgebraicGeometry.EtaleModuleInjectiveForgetAcyclic
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
-import Sheaf.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
 import Sheaf.AlgebraicGeometry.ExchangeForgetCoefficients
@@ -32,11 +32,11 @@ import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 import Sheaf.CategoryTheory.SiteCohomologyPullback
 import WeilConjectures.CategoryTheory.SiteMorphismComposition
 import WeilConjectures.CategoryTheory.SiteContinuousPushforwardSheaf
-import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
+import WeilConjectures.CategoryTheory.Abelian.HorseshoeDeltaFunctor
 import Mathlib.Algebra.Homology.HomologySequence
 import Mathlib.CategoryTheory.Abelian.RightDerived
 import WeilConjectures.CategoryTheory.DeltaFunctor
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 import WeilConjectures.AlgebraicGeometry.Sites.Gm
@@ -51,10 +51,10 @@ import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.CohomologyPullbackCanonicalArrows
 import WeilConjectures.AlgebraicGeometry.CohomologyPullbackDerivedUnit
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.Paper.KunBcMapOnCohomology
 import WeilConjectures.SixFunctors.BaseChange.Square
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
@@ -99,10 +99,6 @@ import Sheaf.Paper.FiniteDirectImageComposition
 import Sheaf.Paper.PurityFiniteKummerLevel
 import Sheaf.Paper.PurityFiniteSetting
 import Sheaf.Paper.SiteComparisonEdgeSection
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.CategoryTheory.Abelian.HorseshoeDeltaFunctor
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import WeilConjectures.SixFunctors.ProEtale.Comparison.CohomologicalDimension
 /-!
 # Relative affine-line acyclicity and the actual Kummer generator
