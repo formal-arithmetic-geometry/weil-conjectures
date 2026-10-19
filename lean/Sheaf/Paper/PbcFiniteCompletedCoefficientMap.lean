@@ -110,6 +110,8 @@ def pbcIntegerInclusion (h : E ≤ F) :
       (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω F)
       (pbcFiniteFieldInclusion.{u} l Ω h))
 
+-- Keep the existing algebraic-closure parameter in the public signature.
+set_option linter.unusedSectionVars false in
 /-- Integer inclusion preserves every power of the maximal ideal.
 Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-completed-coefficient-map).
 Proof: valuation preservation sends the source maximal ideal into the target one.
@@ -118,7 +120,31 @@ to products of n target-ideal elements, giving the asserted inclusion. -/
 theorem pbcIntegerInclusion_ideal (h : E ≤ F) (n : ℕ) :
     (pbcStageDatum.{u} l Ω E).ideal ^ (n + 1) ≤
       Ideal.comap (pbcIntegerInclusion l Ω h) ((pbcStageDatum.{u} l Ω F).ideal ^ (n + 1)) := by
-  sorry
+  intro x hx
+  have hx' : x.down ∈ Padic.coefficientExtensionIdeal l
+      (pbcFiniteField.{u} l Ω E) (n + 1) := by
+    change x ∈ Ideal.span {pbcStageUniformizer.{u} l Ω E} ^ (n + 1) at hx
+    rw [Ideal.span_singleton_pow, Ideal.mem_span_singleton] at hx
+    rw [Padic.coefficientExtensionIdeal, Ideal.span_singleton_pow,
+      Ideal.mem_span_singleton]
+    have hxd := map_dvd
+      (ULift.ringEquiv.toRingHom : PbcIntegralRing l (pbcFiniteField.{u} l Ω E) →+* _) hx
+    rw [map_pow] at hxd
+    exact hxd
+  have hy := Ideal.Quotient.eq_zero_iff_mem.mp
+    (WeilConjectures.integralScalar_quotient_kernel l
+      (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω F)
+      (pbcFiniteFieldInclusion l Ω h) n x.down hx')
+  rw [Padic.coefficientExtensionIdeal, Ideal.span_singleton_pow,
+    Ideal.mem_span_singleton] at hy
+  change pbcIntegerInclusion l Ω h x ∈
+    Ideal.span {pbcStageUniformizer.{u} l Ω F} ^ (n + 1)
+  rw [Ideal.span_singleton_pow, Ideal.mem_span_singleton]
+  have hy' := map_dvd
+    (ULift.ringEquiv.symm.toRingHom : _ →+*
+      PbcIntegralRing l (pbcFiniteField.{u} l Ω F)) hy
+  rw [map_pow] at hy'
+  exact hy'
 
 /-- The quotient-ring map induced by integer inclusion at positive level n+1.
 Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-completed-coefficient-map). -/
@@ -152,7 +178,27 @@ theorem pbcCompletedScalarMap_exists (h : E ≤ F) :
         pbcAdicCompletion T (pbcStageDatum.{u} l Ω F),
       ∀ n : ℕ, c ≫ pbcAdicProjection T (pbcStageDatum.{u} l Ω F) n =
         pbcAdicProjection T (pbcStageDatum.{u} l Ω E) n ≫ pbcFiniteScalarMap l Ω T h n := by
-  sorry
+  let t : adicLisseRingSystem T (pbcStageDatum.{u} l Ω E).ideal ⟶
+      adicLisseRingSystem T (pbcStageDatum.{u} l Ω F).ideal :=
+    NatTrans.ofOpSequence (fun n ↦
+      (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
+        (CommRingCat.ofHom (pbcQuotientInclusion l Ω h n))) (fun n ↦ by
+      simp only [adicLisseRingSystem, Functor.ofOpSequence_map_homOfLE_succ]
+      rw [← Functor.map_comp, ← Functor.map_comp]
+      congr 1
+      ext x
+      rfl)
+  let s : pbcAdicRings T (pbcStageDatum.{u} l Ω E) ⟶
+      pbcAdicRings T (pbcStageDatum.{u} l Ω F) :=
+    (pbcConstantSystemComparison T (pbcStageDatum.{u} l Ω E)).inv ≫ t ≫
+      (pbcConstantSystemComparison T (pbcStageDatum.{u} l Ω F)).hom
+  refine ⟨limMap s, ?_, ?_⟩
+  · intro n
+    exact limMap_π s (op n)
+  · intro c hc
+    apply limit.hom_ext
+    intro n
+    exact (hc n.unop).trans (limMap_π s n).symm
 
 /-- The unique map into the completed coefficient ring fixed at every finite level.
 Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-completed-coefficient-map). -/

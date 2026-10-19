@@ -15,9 +15,40 @@
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
   "place": "order 1307: completed integral coefficient scalar extension and its finite quotient normalization"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Transport membership in the source principal ideal power down through ULift.ringEquiv. Apply WeilConjectures.integralScalar_quotient_kernel from [lem-weil-integral-scalar-extension-well-defined] to the conjugated field inclusion. Ideal.Quotient.eq_zero_iff_mem recovers target ideal membership. Transport the resulting divisibility back through ULift.ringEquiv.symm. This proves pbcIntegerInclusion_ideal for every positive exponent.",
+   "uses": [
+    "lem-weil-integral-scalar-extension-well-defined"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the constant quotient sheaf systems of [def-weil-pbc-bounded-constructible-tower], construct a natural transformation with the quotient inclusions as components using NatTrans.ofOpSequence. Functoriality of constantSheaf reduces consecutive naturality to equality of quotient-ring homomorphisms; extensionality on representatives proves this by reflexivity.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Conjugate this natural transformation by the source and target pbcConstantSystemComparison isomorphisms of [def-weil-pbc-bounded-constructible-tower]. Its components are definitionally pbcFiniteScalarMap. Mathlib Limits.limMap gives the completed map, limMap_π proves all required projection equations, and limit.hom_ext proves uniqueness.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-integral-scalar-extension-well-defined",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "name": "W6 stage-3 worker",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
+  "place": "order 1307: completed integral coefficient scalar extension and its finite quotient normalization",
+  "note": "The existing docstring argument is implemented using the proved quotient-kernel lemma, the canonical comparison of coefficient systems, and Mathlib limit functoriality. No statement, definition, or unit route changes."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -129,5 +160,15 @@
   "group": "NS",
   "result": "pass",
   "note": "Full statement, dependencies, source, universes, edge cases, docstrings, declarations, report sections, and compiler evidence checked; delivery is correct."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261019T133959-L-1394019",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
