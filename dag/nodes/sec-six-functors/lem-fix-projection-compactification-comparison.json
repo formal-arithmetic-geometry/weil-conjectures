@@ -363,5 +363,29 @@
   "group": "N8",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-a297da22f (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-sf-proper-open-tensor-compatibility, the statements of all 21 cited nodes, the main-20261015 source sentence in prop-sf-pf-coherence.proof.md (word for word), the from-place in lem-fix-weil-operations.proof.md (lines 27-37) and Stacks 0GL1. No SGA is cited. The item statement is unchanged; its PF and rho agree with def-exchange-projection and prop-compactification-coherence-detailed. Step 1: the witness domain for K and for T = K⊗Lf^*L comes from pullback-tor-amplitude, tensor-ctf(i) and constructible-origin(ii). Step 2: theta_u = S(a^{-1})C, direction checked. a is alpha_u of def-weil-pbc-proper-open-comparison (the j2!-adjunct of the inverse open-restriction/clopen iso), reached through site-normalization, strict-tower and lem-cbc-proper-open-interchange-coherence, and this is exactly the new node's Gamma with r=1. Step 3: the composite projection formula was re-derived from fix-prop-adjunctions(3) and the mu composition clause. Step 4: the specialization U=W=X, r=1, p=u was type-checked; the non-Cartesian clopen component is allowed. Steps 5-6: the naturality and common-refinement algebra was redone and is correct. Steps 7-9: integral Tor bounds come from residue-tor; system identities are transported by c_V of the realization lemma, which intertwines maps, so nothing is inferred from finite evaluations; the rational and Qbar stages go through functoriality. New node: s=(k1,r) is clopen (b is an open immersion; q is separated and qs=r is proper), so lambda is well defined. Edge cases (identity verticals, identity horizontals, empty U, the refinement case) hold. I believe it is true via the fully faithful J_i adjunction. It is not a duplicate of the proper/open, projection-coherence or system-realization nodes, and not a relabelling (it has no f, no rho and no coefficient stages). B1/B2/B9 are fine and the searches are recorded. The 20 tool_uses are accepted: the unit is a remark with no steps or uses. No cycle. One note for the next splitter: the new node's sentence identifying Gamma with the normalized proper/open map is an assertion that its split must prove. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FixProjectionCompactificationComparison",
+  "declaration": "WeilConjectures.FixProjectionCompactification.comparison",
+  "declarations": [
+   "WeilConjectures.FixProjectionCompactification.identitySquare",
+   "WeilConjectures.FixProjectionCompactification.higherLaw",
+   "WeilConjectures.FixProjectionCompactification.finiteLaw",
+   "WeilConjectures.FixProjectionCompactification.comparison"
+  ],
+  "file": "lean/Sheaf/Paper/FixProjectionCompactificationComparison.lean",
+  "statement": "theorem comparison (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum) (E : Type u) [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n) (S : SixFunctorOperationDatum D C E n hn) (hl : IsUnit (C.l : D.k)) : finiteLaw D C E n hn hl ∧ higherLaw S.higher.integral S.higher.integralTensor S.higher.integralExchange (fun Y K ↦ finiteTorConstructibleIntegral C.l E Y.obj.left K.obj) ∧ higherLaw S.higher.rational S.higher.rationalTensor S.higher.rationalExchange (fun _ _ ↦ True) ∧ higherLaw S.closure.commonStage S.closure.commonStageTensor S.closure.commonStageExchange (fun _ _ ↦ True)",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c67dea983",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Statement faithful clause by clause: finite rho = theta(r1)^-1 theta(r2) for every common refinement via refinementComparisonIsomorphism (direction checked against t2 t1^-1); the forall OT,e transport at T is well-defined because EtaleOriginDerivedCategory is an InducedCategory (full) and compactification_coherence makes theta natural. Finite PF = ProEtale.projectionMapOfCompactification, the same map as the datum's finiteExchangeProjection. Higher stages use S.comparison and projectionComponent of identitySquare (c-side data only, mu_p and mu_i normalized by the datum). K has no finite-Tor condition, L is ctf, field stages take all of D^b_c. No invertibility asserted, no hollow defs, statement verbatim, dependency records identical to side-live, item not dropped, no duplicate found. nt_compile timed out at load 358 on the unpublished base dependency ExchangeFunctoriality; lcompile run_set with timeout 560 compiled it (144 s) and the item clean (42.6 s). Advisories: retry landing at lower load; base-era finiteTorConstructible/Integral from the def-weil-finite-tor-amplitude module are not in its record; two unused public stmt_dep imports."
  }
 }

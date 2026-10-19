@@ -17631,3 +17631,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:34 L: returned deliver/H3/Sheaf.Paper.CompactificationRefinementLocalizing (reviewer RETURN: (reviewer C-f6e8b, head f6e8b6dd7) H9 (point 5): lean/Sheaf/Paper/CompactificationRefinementLocalizing.lean line 22: del)
 - 19:45 L: returned deliver/O4/sk-thm-sf-global-duality (reviewer RETURN: L: independent stage-2 immutable head dbfc7b74a588: H13: delivered def-sf-pf.json replaces NA's landed lean record (Shea)
 - 19:50 L: merged deliver/NN/lem-sf-identification-fibre-adjunction (stage 2; reviewer FIX; parallel immutable checks)
+- 19:51 L: merged deliver/NJ/lem-fix-projection-compactification-comparison (stage 2; reviewer PASS; parallel immutable checks)
