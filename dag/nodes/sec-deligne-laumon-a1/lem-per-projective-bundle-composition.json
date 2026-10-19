@@ -193,5 +193,23 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-144e7e41f (reviewer sub-agent of L); spot-checked: I read the item, the three new nodes and every cited statement in full. The item statement is exactly Stacks 0C4P (morphisms.tex l.10806; only C is assumed qcqs; the 01W8(1) projective-bundle convention, matching def-trf-projective-bundle-morphism). The three steps follow the source proof. Step 1 uses 01WC (the existing lem-trf-projective-bundle-proper) and 07RL (the new relative-ample node, which has no base hypothesis, as in the source). Step 2 uses the IsProper composition leaf and 0C4M (the new node; S quasi-compact only, via 0C4K l.8888). Step 3 uses 0BCL(1) (the new node; proper plus an f-ample module over a qcqs base gives projective-bundle projectivity; proper includes finite type, so this is exactly quasi-projective and proper). Every hypothesis is present at each use. 01VH relative ampleness is written out verbatim in each node. I tested the small cases: E=0 and empty X, identity via P(O_S), a non-quasi-compact base for 07RL, and a non-proper open subset excluded from 0BCL. No new node restates the item. Duplicate search by tag and label with rg over the DAG: none found, including lem-trf-relative-ample-very-ample (01VU), which the report did not list; it needs a quasi-compact base and only gives an immersion with E quasi-coherent, so it covers neither 07RL nor 0BCL(1). Batch-5 flags: lem-trf-projective-bundle-proper (01WC) is a generic scheme fact; its 148-node closure reaches only generic Proj nodes, with no trace-transport, Poincaré or batch-4 nodes, so I accepted it, together with the declared tool_use. def-trf-projective-bundle-morphism is a general definition that the base item statement already cites, so I accepted it too. No SGA citations; the unit route is unchanged; no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveBundleComposition",
+  "declaration": "AlgebraicGeometry.projectiveBundle_comp",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveBundleComposition.lean",
+  "statement": "theorem projectiveBundle_comp {A B C : Scheme.{u}} [CompactSpace C] [QuasiSeparatedSpace C] (f : A ⟶ B) (g : B ⟶ C) (hf : IsProjectiveBundle f) (hg : IsProjectiveBundle g) : IsProjectiveBundle (f ≫ g)",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d6b5a6328",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Lean statement matches node and Stacks 0C4P (l.10806) clause for clause: only C is qcqs via [CompactSpace C][QuasiSeparatedSpace C] (recorded dep declarations); hf/hg/conclusion use the recorded side IsProjectiveBundle (01W8(1): quasi-coherent finite-type E, closed immersion into canonical relProj); f ≫ g = g∘f; no extra hypotheses or universe restriction. Edge cases empty A, identity, E=0, non-qc B covered. Node identical to live apart from the new complete lean record; statement verbatim. No duplicate in Mathlib or the project. Docstrings carry source, blueprint id and the 3 proof steps; proof is sorry. Report has Worker report and Second reading sections. nt_compile --json clean in 3.3 s. Advisory only: two proof-dependency imports unused by the statement, kept by convention."
  }
 }
