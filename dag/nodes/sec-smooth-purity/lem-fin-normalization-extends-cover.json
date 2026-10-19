@@ -24,129 +24,92 @@
  ],
  "proof": [
   {
-   "text": "Write $k$ for the base field and $f:P\\to V$ for the cover. The scheme $\\operatorname{Spec}k$ is Noetherian: its ring has just the ideals $(0)$ and $(1)$, and its underlying space is a singleton. Hence $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Its open subscheme $V$ is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. The finite morphism $f$ is proper by [lem-weil-pbc-finite-proper], and therefore of finite type by [def-weil-proper-morphism]. Applying [lem-weil-pbc-finite-type-over-noetherian] to $f$ shows that $P$ is Noetherian.",
+   "text": "Finite type over the field makes X Noetherian; the open V is Noetherian, and the finite morphism f:P→V makes P Noetherian. Use the finite morphism finite-type instance directly; properness is unnecessary.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-weil-pbc-finite-proper",
-    "def-weil-proper-morphism"
+    "def-weil-finite-integral-morphism"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 01T6 (lemma-finite-type-noetherian), 01WN (lemma-finite-proper); properties.tex, Tags 01OV and 01OW (Noetherian schemes and their open subschemes)"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-fin-normalization-extends-cover.proof.md",
+    "place": "Normality and normalization comparison; implemented through Mathlib relative-normalization universal property (035I) and smooth base change (03GV)."
    }
   },
   {
-   "text": "The open $V$ is normal integral in the sense of [def-sbc-normal-dominant-galois]. Apply [lem-fin-etale-normal-components] to the etale map $P\\to V$, using the Noetherian hypothesis proved in step 1. It writes $P$ as a finite disjoint union of open-and-closed normal integral schemes. Here connected means nonempty and connected. There is at least one component, and two nonempty components would partition $P$ into two nonempty open-and-closed subsets. Thus there is exactly one component: $P$ is integral and all its local rings are integrally closed domains.",
+   "text": "Apply the finite clopen normal-integral component theorem to P→V. Choose a point p of the connected nonempty P and a component containing p. Its clopen underlying set is all of P by connectedness. The component inclusion is therefore the top-open isomorphism, which transports integrality and integrally closed stalks to P.",
    "uses": [
+    "lem-fin-etale-normal-components",
     "def-sbc-normal-dominant-galois",
-    "lem-fin-etale-normal-components"
+    "def-weil-open-immersion"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normalization-extends-cover.md",
-    "place": "Proof, first sentence; compare properties.tex, Tag 033M (lemma-normal-Noetherian)"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-fin-normalization-extends-cover.proof.md",
+    "place": "Normality and normalization comparison; implemented through Mathlib relative-normalization universal property (035I) and smooth base change (03GV)."
    }
   },
   {
-   "text": "By [lem-weil-pbc-etale-morphism-open-map], the image of the nonempty scheme $P$ is a nonempty open of the integral scheme $V$, hence is dense. If $\\eta_P$ is the generic point of $P$, continuity gives $f(P)\\subseteq\\overline{\\{f(\\eta_P)\\}}$; consequently $f(\\eta_P)$ is the generic point of $V$. Let $U=\\operatorname{Spec}B$ be any nonempty affine open of $V$. Its inverse image $W=f^{-1}U$ is nonempty (it contains $\\eta_P$), affine, and of the form $\\operatorname{Spec}D$ with $D$ finite over $B$, by [def-weil-finite-integral-morphism]. The affine function-field theorem [lem-sc-integral-function-field-affine-fraction] identifies $\\operatorname{Frac}(B)=k(V)=k(X)$ and $\\operatorname{Frac}(D)=k(P)$ through germs at the generic points. The equality $k(V)=k(X)$ uses that a nonempty open of an integral scheme contains the same generic point and has the same stalk there, since an open subscheme has the restricted structure sheaf [def-weil-open-immersion]. Since $f(\\eta_P)=\\eta_V$, the ring map $B\\to D$ takes the zero prime of $D$ to the zero prime of $B$ and is injective. The restricted morphism $W\\to U$ is etale: [lem-weil-pbc-open-preimage-fibre-product] identifies it with base change of $f$, and [lem-weil-pbc-etale-scheme-base-change] applies. Now [lem-weil-pbc-etale-algebra-residue-field-separable], with $\\mathfrak q=(0)\\subset D$ and $\\mathfrak p=(0)\\subset B$, says exactly that $L=k(P)$ is a finite separable extension of $K=k(X)$, with the structural field inclusion induced by $f$.",
+   "text": "The composite t:P→V→X is open, so its nonempty image is dense in the integral X. The image of the generic point is consequently the generic point of X. Transport t's generic stalk map to m:k(X)→k(P); stalk-map naturality gives Spec(m);j_X=j_P;t. Take the algebra induced by m. This establishes exactly the asserted structural equality without needing a separate finite-dimensional or separability instance.",
    "uses": [
     "lem-weil-pbc-etale-morphism-open-map",
-    "def-weil-finite-integral-morphism",
-    "lem-sc-integral-function-field-affine-fraction",
+    "def-sc-function-field",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-fin-normalization-extends-cover.proof.md",
+    "place": "Normality and normalization comparison; implemented through Mathlib relative-normalization universal property (035I) and smooth base change (03GV)."
+   }
+  },
+  {
+   "text": "The absolute normalization of P is P: apply normalization over the normal locus at the top open and cancel the top-open inclusions. Put j=j_P and g=j;f. The universal property gives m:N(g)→P, with m;f=ν_g and i_g;m=j. Because m is integral, it also gives d:N(j)→N(g), with d;m=ν_j and i_j;d=i_g. Set n=ν_j^{-1};d. Then n;m=id_P. The uniqueness part of the relative-normalization universal property gives m;n=id_N(g), since both composites to V and both restrictions along i_g agree. Thus N(g)≅P over V. The same universal property transports relative normalization along any isomorphism of sources over V.",
+   "uses": [
+    "lem-sc-normalization-over-normal-locus",
+    "lem-sbc-relative-normalization-universal-property",
+    "lem-weil-pbc-relative-normalization",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-fin-normalization-extends-cover.proof.md",
+    "place": "Normality and normalization comparison; implemented through Mathlib relative-normalization universal property (035I) and smooth base change (03GV)."
+   }
+  },
+  {
+   "text": "Let φ=Spec(k(P))→X be the structural map from step 3. Its factorization through V identifies Spec(k(P)) with Spec(k(P))×_X V by the pullback universal property and monicity of V→X. Transport relative normalization along this source isomorphism. Normalization commutes with smooth base change along the open immersion V→X, so N(φ)×_X V≅N(g). Compose with the isomorphism N(g)≅P from step 4. The equations normalizationPullback_snd and normalizationDesc_comp give exactly e.hom;f=pullback.snd, completing the statement.",
+   "uses": [
+    "lem-sbc-relative-normalization-universal-property",
+    "lem-sbc-relative-normalization-smooth-base-change",
     "def-weil-open-immersion",
-    "lem-weil-pbc-open-preimage-fibre-product",
-    "lem-weil-pbc-etale-scheme-base-change",
-    "lem-weil-pbc-etale-algebra-residue-field-separable"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 03WT (lemma-etale-open), 02GO (lemma-base-change-etale), 02GL (lemma-etale-over-field), 01RV (lemma-integral-scheme-rational-functions); schemes.tex, Tag 01JR (lemma-open-fibre-product); blueprint proof, sentences 2-4"
-   }
-  },
-  {
-   "text": "The finite extension in step 3 allows the construction $\\nu:N\\to X$ of [def-fin-normalization-extension]. Over each $U=\\operatorname{Spec}B\\subset V$ as in step 3 it is $\\operatorname{Spec}C$, where $C$ is the integral closure of $B$ in $L=k(P)$. Regard $D=\\Gamma(W,\\mathcal O_P)$ as a subring of $L$ through its generic germ. Every $d\\in D$ is integral over $B$ by [lem-weil-pbc-finite-algebra-is-integral], since $D$ is a finite $B$-module, so $D\\subseteq C$. Conversely, let $a\\in C$. For every $w\\in W$, [lem-sc-integral-scheme-stalks-in-function-field] identifies $\\mathcal O_{P,w}$ with a subring of $L$ having fraction field $L$. The monic equation for $a$ over $B$ is also a monic equation over $\\mathcal O_{P,w}$: its coefficients map through $B\\to D\\to\\mathcal O_{P,w}$, compatibly with their generic germs. By step 2 and the meaning of normality in [def-sbc-normal-dominant-galois], integrally closedness of this local ring implies $a\\in\\mathcal O_{P,w}$. Thus $a$ lies in the image of every local ring on the nonempty open $W$. Applying [lem-sc-function-field-sections-glue] to the integral scheme $P$ and the open $W$ gives a section $d\\in D$ whose generic germ is $a$. Therefore $C=D$ inside $L$, as $B$-algebras.",
-   "uses": [
-    "def-fin-normalization-extension",
-    "lem-weil-pbc-finite-algebra-is-integral",
-    "lem-sc-integral-scheme-stalks-in-function-field",
-    "def-sbc-normal-dominant-galois",
-    "lem-sc-function-field-sections-glue"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normalization-extends-cover.md",
-    "place": "Proof, affine integral-closure comparison; expanded using algebra.tex, Tag 00GK (lemma-finite-is-integral), and properties.tex, Tag 0358 (lemma-normal-integral-sections)"
-   }
-  },
-  {
-   "text": "Choose a cover of $V$ by nonempty affine opens $U_i=\\operatorname{Spec}B_i$. Write $N_i=\\nu^{-1}U_i=\\operatorname{Spec}C_i$ and $W_i=f^{-1}U_i=\\operatorname{Spec}D_i$. Step 4 gives $C_i=D_i$ as $B_i$-subalgebras of $L$. The contravariant spectrum construction [def-weil-affine-spectrum] therefore gives inverse isomorphisms $\\phi_i:N_i\\to W_i$ over $U_i$. Both rings have fraction field $L$ by step 3, so the induced generic field map of $\\phi_i$ is the identity of $L$. The generic identifications for all $N_i$ are compatible: the construction [def-fin-normalization-extension] glues their integral-closure rings by localization inside the same $L$. In particular these identifications induce the same generic map on every nonempty overlap.",
-   "uses": [
-    "def-weil-affine-spectrum",
     "def-fin-normalization-extension"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normalization-extends-cover.md",
-    "place": "Proof, sentences beginning \"This identifies the restrictions\" and \"it glues\"; schemes.tex, Tag 01JA and Lemma 01JB (lemma-glue, mapping properties)"
-   }
-  },
-  {
-   "text": "Put $T_{ij}=\\nu^{-1}(U_i\\cap U_j)$. If nonempty, it is an open of the integral scheme $N_i\\cong W_i$, with function field $L$. The canonical generic-stalk morphism $a:\\operatorname{Spec}L\\to T_{ij}$ is scheme-theoretically dominant: on each nonempty open $H\\subset T_{ij}$ the structure-sheaf map to $a_*\\mathcal O_{\\operatorname{Spec}L}$ is the injective generic germ $\\mathcal O(H)\\to L$ of [lem-sc-integral-scheme-stalks-in-function-field]; on the empty open it is the identity of the zero ring. Both restrictions of $\\phi_i$ and $\\phi_j$ land in $W_j$ because they are over $V$, and have the same composite with $W_j\\to U_j$. Their composites with $a$ agree: by step 5 they both correspond to the inclusion $D_j\\hookrightarrow L$ under [def-weil-affine-spectrum]. The map $W_j\\to U_j$ is separated by [lem-weil-pbc-affine-source-morphism-separated], since $W_j$ is affine. Apply [lemma-nagata-ext-scheme-theoretically-dominant-separated] with $T=T_{ij}$, $W=\\operatorname{Spec}L$, $Y=W_j$, $Z=U_j$, and $\\iota=a$. Its conclusion is equality of the overlap restrictions. Empty overlaps have unique maps and need no comparison.",
-   "uses": [
-    "lem-sc-integral-scheme-stalks-in-function-field",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-affine-source-morphism-separated",
-    "lemma-nagata-ext-scheme-theoretically-dominant-separated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-thm-nagata-sketch-conrad/lemma-nagata-ext-scheme-theoretically-dominant-separated.md",
-    "place": "Statement and proof; applied to the overlap comparison in the item blueprint sentence \"it glues because the identifications are the identity inside the function field\". Affine separatedness: Stacks Tag 01KN (schemes-lemma-affine-separated)."
-   }
-  },
-  {
-   "text": "The equality in step 6 also gives equality of the inverse restrictions on $f^{-1}(U_i\\cap U_j)$, by the inverse identities of the restricted isomorphisms. Apply [lem-weil-pbc-scheme-morphism-gluing] to the maps $N_i\\xrightarrow{\\phi_i}W_i\\hookrightarrow P$ and to the inverse maps $W_i\\to N_i\\hookrightarrow\\nu^{-1}V$. This gives global maps in both directions. On each $N_i$ or $W_i$ their composites are identities, so the uniqueness clause of the same gluing theorem makes them inverse globally. The composites to $V$ agree locally, hence globally by that uniqueness clause. Thus $\\nu^{-1}V\\cong P$ over $V$. Finally [lem-weil-pbc-open-preimage-fibre-product] identifies $\\nu^{-1}V$ with $N\\times_XV$, giving the claimed restriction isomorphism.",
-   "uses": [
-    "lem-weil-pbc-scheme-morphism-gluing",
-    "lem-weil-pbc-open-preimage-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tag 01JB (lemma-glue), mapping properties for the maps and their inverses; Tag 01JR (lemma-open-fibre-product). Realizes the item blueprint sentences \"This identifies the restrictions\" and \"it glues\"."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-fin-normalization-extends-cover.proof.md",
+    "place": "Normality and normalization comparison; implemented through Mathlib relative-normalization universal property (035I) and smooth base change (03GV)."
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-finite-proper",
-  "def-weil-proper-morphism",
-  "def-sbc-normal-dominant-galois",
-  "lem-fin-etale-normal-components",
-  "lem-weil-pbc-etale-morphism-open-map",
   "def-weil-finite-integral-morphism",
-  "lem-sc-integral-function-field-affine-fraction",
+  "lem-fin-etale-normal-components",
+  "def-sbc-normal-dominant-galois",
   "def-weil-open-immersion",
-  "lem-weil-pbc-open-preimage-fibre-product",
-  "lem-weil-pbc-etale-scheme-base-change",
-  "lem-weil-pbc-etale-algebra-residue-field-separable",
-  "def-fin-normalization-extension",
-  "lem-weil-pbc-finite-algebra-is-integral",
-  "lem-sc-integral-scheme-stalks-in-function-field",
-  "lem-sc-function-field-sections-glue",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-affine-source-morphism-separated",
-  "lemma-nagata-ext-scheme-theoretically-dominant-separated",
-  "lem-weil-pbc-scheme-morphism-gluing"
+  "lem-weil-pbc-etale-morphism-open-map",
+  "def-sc-function-field",
+  "lem-sc-normalization-over-normal-locus",
+  "lem-sbc-relative-normalization-universal-property",
+  "lem-weil-pbc-relative-normalization",
+  "lem-sbc-relative-normalization-smooth-base-change",
+  "def-fin-normalization-extension"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normalization-extends-cover.md",
-  "place": "Proof, affine integral-closure argument, expanded with the cited Stacks results"
+  "by": "U5 stage 3",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-fin-normalization-extends-cover.proof.md",
+  "place": "Normality followed by identification of the finite normal cover with normalization; affine comparison and gluing supplied by the existing Mathlib universal-property and smooth-base-change API."
  },
  "mathlib_searches": [
   {
@@ -281,7 +244,16 @@
   "note": "Wrote review.md. Audited the immutable module, all eight statement dependencies, sources, report sections, edge cases, universes, and verbatim signature. Single-file scompile.py checks passed for sandbox and library module. No findings or fixes required."
  },
  "tool_uses": [
-  "lem-fin-etale-normal-components",
-  "lem-sc-function-field-sections-glue"
- ]
+  "lem-fin-etale-normal-components"
+ ],
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261019T112545-L-3955181",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
