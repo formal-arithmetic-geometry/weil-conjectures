@@ -94,7 +94,57 @@ theorem completedCoefficientMap_existsUnique :
         φ ≫ completedIntegralCommRingProjectionUnrestricted l L Y n =
           completedIntegralCommRingProjectionUnrestricted l E Y n ≫
             integralScalarQuotientSheafMap l E L ι Y n := by
-  sorry
+  let forgetComm := sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology Y)
+    (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})
+  let α : integralCoefficientSheafSystem l E Y ⟶
+      integralCoefficientSheafSystem l L Y :=
+    NatTrans.ofOpSequence
+      (fun n ↦ forgetComm.map (integralScalarQuotientSheafMap l E L ι Y n))
+      (by
+        intro n
+        simp only [integralCoefficientSheafSystem, Functor.ofOpSequence_map_homOfLE_succ]
+        change integralCoefficientSheafTransition l E Y n ≫ _ =
+          _ ≫ integralCoefficientSheafTransition l L Y n
+        unfold integralCoefficientSheafTransition integralScalarQuotientSheafMap
+        change forgetComm.map _ ≫ forgetComm.map _ =
+          forgetComm.map _ ≫ forgetComm.map _
+        rw [← Functor.map_comp, ← Functor.map_comp]
+        rw [← Functor.map_comp, ← Functor.map_comp]
+        congr 2
+        ext x
+        exact RingHom.congr_fun (integralScalarQuotientMap_transition l E L ι n).symm x.down)
+  let c : Cone (integralCoefficientSheafSystem l L Y) :=
+    { pt := completedIntegralCoefficientSheafUnrestricted l E Y
+      π := (limit.cone (integralCoefficientSheafSystem l E Y)).π ≫ α }
+  let φr := limit.lift (integralCoefficientSheafSystem l L Y) c
+  let φ : completedIntegralCommRingSheafUnrestricted l E Y ⟶
+      completedIntegralCommRingSheafUnrestricted l L Y :=
+    forgetComm.preimage
+      (X := completedIntegralCommRingSheafUnrestricted l E Y)
+      (Y := completedIntegralCommRingSheafUnrestricted l L Y) φr
+  have hproj (F : Type u) [Field F] [Algebra ℚ_[l] F]
+      [FiniteDimensional ℚ_[l] F] (n : ℕ) :
+      forgetComm.map (completedIntegralCommRingProjectionUnrestricted l F Y n) =
+        limit.π (integralCoefficientSheafSystem l F Y) (op n) := by
+    ext U x
+    rfl
+  have hφ (n : ℕ) :
+      φ ≫ completedIntegralCommRingProjectionUnrestricted l L Y n =
+        completedIntegralCommRingProjectionUnrestricted l E Y n ≫
+          integralScalarQuotientSheafMap l E L ι Y n := by
+    apply forgetComm.map_injective
+    rw [Functor.map_comp, Functor.map_comp, hproj, hproj]
+    change forgetComm.map φ ≫ _ = _
+    dsimp only [φ]
+    rw [Functor.map_preimage]
+    exact limit.lift_π c (op n)
+  refine ⟨φ, hφ, ?_⟩
+  intro ψ hψ
+  apply forgetComm.map_injective
+  apply limit.hom_ext
+  intro n
+  have h := congrArg forgetComm.map ((hψ n.unop).trans (hφ n.unop).symm)
+  simpa only [Functor.map_comp, hproj] using h
 
 /-- The canonical completed coefficient map, uniquely fixed by its residues.
 Source: Bhatt--Scholze, Lemma 6.8.2(1)
