@@ -11,14 +11,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.Topology.KrullDimension
 
-import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.AlgebraicGeometry.Modules.VeryAmple
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import WeilConjectures.Mathlib.Topology.KrullDimension
-import Sheaf.DeligneLaumon.IrreducibleFibreDimensionLowerBound
+import WeilConjectures.AlgebraicGeometry.ClosurePointDimension
+import WeilConjectures.AlgebraicGeometry.FiberDimension
+import WeilConjectures.Topology.KrullDimension.Specialization
 
 /-!
 # Fibre and image dimension bounds over a field
@@ -47,30 +43,22 @@ at most that of the source. If the target has dimension at most `d` and all sche
 fibres have dimension at most `n`, then the source has dimension at most `d + n`.
 All dimensions are topological Krull dimensions, with the empty space having dimension `⊥`.
 
-Proof (the four node steps).
-1. The empty source has empty image, so both bounds are immediate. Otherwise finite type
-   over the Noetherian field makes the source Noetherian
-   (`lem-weil-pbc-finite-type-over-noetherian`), with finitely many irreducible components
-   (`lem-sc-noetherian-finite-irreducible-components`). All relevant finite-type dimensions
-   are finite (`lem-kun-dimension-finite-type`).
-2. Give each component its reduced closed-subscheme structure
-   (`lem-weil-pbc-closed-subset-closed-subscheme`). Closed immersions are finite and locally
-   of finite type (`lem-weil-pbc-closed-immersion-finite`,
-   `lem-weil-pbc-immersion-base-change-lft`), so composition makes the component finite type
-   over the field (`lem-sfb-finite-type-composition-base-change`). For its restricted map,
-   put `Zᵢ` equal to its image closure and `rᵢ = dim Xᵢ - dim Zᵢ`. The dense open equality
-   locus of `lem-zl-irreducible-fibre-dimension-lower-bound` has a point; local fibre
-   dimension there is nonnegative (`def-kun-topological-dimension-at-point`), so `rᵢ ≥ 0`.
-3. The image closure is the finite union of the `Zᵢ`. Every irreducible closed subset of
-   that union lies in one member, so its dimension is at most the maximum of their
-   dimensions. Step 2 bounds this maximum by the maximum of the component dimensions,
-   which equals the dimension of the source.
-4. At the generic point of each component the same lower-bound lemma gives
-   `rᵢ ≤ dim_ηᵢ (Xᵢ)ᵧᵢ`. The component fibre is a closed subscheme of the whole fibre by
-   `lem-pc-closed-imm-base-change`; `def-pc-scheme-fibre` identifies the underlying spaces.
-   Intersecting open neighbourhoods with this closed subspace and comparing irreducible
-   chains gives local dimension at most that of the ambient fibre, hence at most `n`.
-   Also `dim Zᵢ ≤ dim Y ≤ d`. Thus `dim Xᵢ ≤ d + n`; taking the maximum proves the bound.
+Proof.
+Finite type over a field makes `X` Noetherian and `Y` locally Noetherian. Since `f` is
+an over-morphism, its composite with the structure map is locally of finite type, hence
+`f` itself is locally of finite type.
+
+Choose finitely many generic points whose specializations cover `X`. Continuity shows
+that the closure of the image lies in the finite union of the closures of their images.
+The existing theorem `Scheme.Hom.topologicalKrullDim_closure_singleton_apply_le` bounds
+each image-point closure by its source-point closure, hence by the dimension of `X`.
+The dimension bound for a closed subset covered by closures of points proves the first clause.
+
+For the second clause, `f.fiberHomeo` transfers the fibre hypothesis to topological fibres.
+Apply the existing theorem `Scheme.Hom.topologicalKrullDim_le_add`, whose affine argument
+is the height inequality of Stacks Tag 00OM (`algebra.tex`,
+`lemma-dimension-base-fibre-total`), then use the bound on the dimension of `Y`.
+Both arguments include empty schemes without a separate nonemptiness hypothesis.
 -/
 theorem Scheme.Hom.finiteType_fibre_image_dimension_bounds
     {k : Type u} [Field k] {X Y : Scheme.{u}}
@@ -82,6 +70,40 @@ theorem Scheme.Hom.finiteType_fibre_image_dimension_bounds
       ∀ (d n : ℕ), topologicalKrullDim Y ≤ (d : WithBot ℕ∞) →
         (∀ y : Y, topologicalKrullDim (f.fiber y) ≤ (n : WithBot ℕ∞)) →
         topologicalKrullDim X ≤ ((d + n : ℕ) : WithBot ℕ∞) := by
-  sorry
+  classical
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have : IsNoetherian X := ⟨⟩
+  have : IsLocallyNoetherian Y :=
+    LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (.of k))
+  have : LocallyOfFiniteType (f ≫ (Y ↘ Spec (.of k))) := by
+    rw [CategoryTheory.comp_over f (Spec (.of k))]
+    infer_instance
+  have : LocallyOfFiniteType f := locallyOfFiniteType_of_comp f (Y ↘ Spec (.of k))
+  constructor
+  · obtain ⟨G, hG, -, hcover⟩ :=
+      IsClosed.exists_finite_forall_exists_specializes (X := X) isClosed_univ
+    have hclosed : IsClosed (⋃ y ∈ f '' G, closure ({y} : Set Y)) :=
+      (hG.image f).isClosed_biUnion fun _ _ ↦ isClosed_closure
+    refine topologicalKrullDim_le_of_subset_iUnion_closure_singleton isClosed_closure
+      (closure_minimal ?_ hclosed) ?_
+    · rintro _ ⟨x, rfl⟩
+      obtain ⟨ξ, hξ, hξx⟩ := hcover x (Set.mem_univ x)
+      exact Set.mem_iUnion₂.mpr
+        ⟨f ξ, Set.mem_image_of_mem f hξ,
+          specializes_iff_mem_closure.mp (hξx.map f.continuous)⟩
+    · rintro _ ⟨x, -, rfl⟩
+      exact (Scheme.Hom.topologicalKrullDim_closure_singleton_apply_le
+        (Y ↘ Spec (.of k)) f x).trans
+        (topologicalKrullDim_subspace_le X _)
+  · intro d n hd hn
+    have hfib (y : Y) : topologicalKrullDim (f ⁻¹' {y}) ≤ (n : WithBot ℕ∞) := by
+      rw [← (f.fiberHomeo y).isHomeomorph.topologicalKrullDim_eq]
+      exact hn y
+    calc topologicalKrullDim X ≤ topologicalKrullDim Y + (n : WithBot ℕ∞) :=
+          f.topologicalKrullDim_le_add _ hfib
+      _ ≤ (d : WithBot ℕ∞) + (n : WithBot ℕ∞) := add_le_add hd le_rfl
+      _ = ((d + n : ℕ) : WithBot ℕ∞) := by norm_cast
 
 end AlgebraicGeometry

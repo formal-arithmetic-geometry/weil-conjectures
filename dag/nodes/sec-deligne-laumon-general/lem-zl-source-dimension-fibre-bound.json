@@ -1,0 +1,106 @@
+{
+ "id": "lem-zl-source-dimension-fibre-bound",
+ "kind": "statement",
+ "title": "Source dimension bound from dimensions of the target and fibres",
+ "statement": "Let $f:X\\to Y$ be a locally finite type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism], with $Y$ locally Noetherian [pqf-def-locnoeth]. For any $d\\in\\{ -\\infty,0,1,\\ldots,\\infty\\}$ such that every topological fibre $f^{-1}(y)$ has dimension at most $d$ [def-kun-topological-krull-dimension], one has $\\dim X\\leq\\dim Y+d$, with the standard addition on $\\operatorname{WithBot}(\\mathbb N\\cup\\{\\infty\\})$ (bottom is absorbing). No quasi-compactness or irreducibility hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00OM, lemma-dimension-base-fibre-total; existing Lean proof in WeilConjectures/AlgebraicGeometry/FiberDimension.lean, theorems Scheme.Hom.coheight_le_coheight_add_topologicalKrullDim and Scheme.Hom.topologicalKrullDim_le_add"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "pqf-def-locnoeth"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing proved source-library theorem attached to this node. At any x, choose affine neighbourhoods U of x and V of f(x) with U mapping into V. Local Noetherianity of Y and local finite type make both affine rings Noetherian. The height inequality for a prime lying over a prime bounds the codimension of x by the codimension of f(x) plus the dimension of the local fibre ring. Primes below the corresponding fibre prime give a chain of points in the topological fibre, so that local fibre ring dimension is bounded by dim f inverse of f(x), hence by d. The codimension of f(x) is at most dim Y. Since a scheme is sober, dim X is the supremum of its point codimensions; taking this supremum proves dim X at most dim Y plus d. The empty case is the supremum of the empty family, namely bottom. This attaches an existing fully proved declaration; it adds no Lean obligation.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OM, lemma-dimension-base-fibre-total; existing Lean proof in WeilConjectures/AlgebraicGeometry/FiberDimension.lean, theorems Scheme.Hom.coheight_le_coheight_add_topologicalKrullDim and Scheme.Hom.topologicalKrullDim_le_add"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00OM, lemma-dimension-base-fibre-total; existing Lean proof in WeilConjectures/AlgebraicGeometry/FiberDimension.lean, theorems Scheme.Hom.coheight_le_coheight_add_topologicalKrullDim and Scheme.Hom.topologicalKrullDim_le_add",
+  "note": "Existing fully proved source-library declaration; no new proof or postponed dependency."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Dimension of closure of an image point; source dimension bounded by base plus fibres for locally finite type schemes",
+   "results": "Searches returned LocallyOfFiniteType, locallyOfFiniteType_of_comp, LocallyOfFiniteType.isLocallyNoetherian, closed-points preservation, properness and smooth relative dimension; no scheme-level dimension inequality. Read the existing source-library declarations in ClosurePointDimension.lean and FiberDimension.lean: exact matches, with complete proofs.",
+   "date": "2026-10-19",
+   "verdict": "no Mathlib match; exact proved source-library match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dimension closure of f x bounded by dimension closure of x; dimension of source at most target plus fibre bound",
+   "results": "Returned finite_appTop_of_universallyClosed, finite-type stalk maps, LocallyOfFiniteType.isLocallyNoetherian, locallyOfFiniteType_of_comp, finite morphisms and finite fibres. None states these dimension inequalities.",
+   "date": "2026-10-19",
+   "verdict": "no Mathlib match; exact proved source-library match"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDim.*(closure|fiber)|fiber.*topologicalKrullDim; rg on Mathlib/AlgebraicGeometry and WeilConjectures",
+   "results": "Mathlib has fibre homeomorphisms and dimension monotonicity for inducing maps, but not these scheme-level inequalities. Source search found Scheme.Hom.topologicalKrullDim_closure_singleton_apply_le in ClosurePointDimension.lean and Scheme.Hom.topologicalKrullDim_le_add in FiberDimension.lean; both proof bodies were read in full.",
+   "date": "2026-10-19",
+   "verdict": "no Mathlib match; exact proved source-library match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteTypeFibreImageDimensionBounds",
+  "date": "2026-10-19",
+  "group": "J5"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-finite-type-fibre-image-dimension-bounds",
+   "place": "Shorter proof route: the source-versus-fibres dimension inequality.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.FiberDimension",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.topologicalKrullDim_le_add",
+  "statement": "theorem Scheme.Hom.topologicalKrullDim_le_add (g : X ⟶ Y) [LocallyOfFiniteType g] [IsLocallyNoetherian Y] (d : WithBot ℕ∞) (h : ∀ y, topologicalKrullDim (g ⁻¹' {y}) ≤ d) : topologicalKrullDim X ≤ topologicalKrullDim Y + d",
+  "branch": "slopmaster2",
+  "by": "J5",
+  "date": "2026-10-19",
+  "note": "Existing source theorem; compiled use has only propext, Classical.choice and Quot.sound."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261019T122559-L-470512",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261019T122559-L-470512",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

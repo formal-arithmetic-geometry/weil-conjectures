@@ -15,75 +15,66 @@
  ],
  "proof": [
   {
-   "text": "If $X=\\varnothing$, then $f(X)=\\varnothing$, its closure and $X$ both have dimension $-\\infty$, and both asserted inequalities are immediate. Assume henceforth that $X$ is nonempty. Since a field is Noetherian, the finite-type-over-Noetherian theorem [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian, and [lem-sc-noetherian-finite-irreducible-components] gives finitely many irreducible components $X_1,\\ldots,X_t$. Applying [lem-kun-dimension-finite-type] to $X$, to $Y$, and to each component shows that all global dimensions used below are finite.",
+   "text": "Finite type over the Noetherian field gives a Noetherian source X and a locally Noetherian target Y. The over-morphism identity identifies f followed by the structure map of Y with the structure map of X. The local finite-type cancellation theorem therefore makes f locally of finite type.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2L, image-point transcendence-degree argument; finite generic-point cover and specialization-chain dimension comparison"
+   }
+  },
+  {
+   "text": "There are finitely many irreducible components of X, each with a generic point because schemes are sober. Thus there is a finite set G of points whose specializations cover X (the existing theorem IsClosed.exists_finite_forall_exists_specializes). The finite union of the closures of f(G) is closed. Continuity sends every specialization of a point of G to a specialization of its image, so this closed union contains f(X), and therefore its closure.",
+   "uses": [
     "lem-sc-noetherian-finite-irreducible-components",
-    "lem-kun-dimension-finite-type"
+    "lem-weil-pbc-scheme-sober"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B2L, proof of (2), reduction to finitely many irreducible components; finite-type Noetherianity and finite-dimensionality"
+    "place": "Tag 0B2L, image-point transcendence-degree argument; finite generic-point cover and specialization-chain dimension comparison"
    }
   },
   {
-   "text": "For each component $X_i$, use [lem-weil-pbc-closed-subset-closed-subscheme] to give the closed subset its reduced closed-subscheme structure $j_i:X_i\\hookrightarrow X$. The immersion finite-type clause (2) of [lem-weil-pbc-immersion-base-change-lft] and the finite closed-immersion statement [lem-weil-pbc-closed-immersion-finite], composed with the finite-type structure morphism of $X$ by [lem-sfb-finite-type-composition-base-change](1), show that $X_i$ is finite type over $k$. Let $f_i:X_i\\to Y$ be the induced $k$-morphism and $Z_i=\\overline{f_i(X_i)}$. Apply [lem-zl-irreducible-fibre-dimension-lower-bound] to $f_i$, writing $r_i=\\dim X_i-\\dim Z_i$. Its dense-open equality locus is nonempty because $X_i$ is nonempty; at a point of that locus, the local fibre dimension equals $r_i$ and is nonnegative by [def-kun-topological-dimension-at-point]. Thus $r_i\\ge0$ and $\\dim Z_i\\le\\dim X_i$ for every $i.$",
+   "text": "For every point x of G, the proved image-point closure inequality bounds dim closure {f(x)} by dim closure {x}, and subspace monotonicity bounds the latter by dim X. A closed subset covered by closures of points whose dimensions are bounded by N has dimension at most N: order points by specialization, use the height bound at each point and then take the supremum of heights. Apply the existing theorem topologicalKrullDim_le_of_subset_iUnion_closure_singleton with N=dim X to the closed cover just obtained. This proves the first clause, including an empty source.",
    "uses": [
-    "lem-weil-pbc-closed-subset-closed-subscheme",
-    "lem-weil-pbc-immersion-base-change-lft",
-    "lem-weil-pbc-closed-immersion-finite",
-    "lem-sfb-finite-type-composition-base-change",
-    "lem-zl-irreducible-fibre-dimension-lower-bound",
-    "def-kun-topological-dimension-at-point"
+    "lem-zl-image-point-closure-dimension-bound"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B2L, lemma-dimension-fibres-locally-algebraic, (2)(a), applied to each irreducible component"
+    "place": "Tag 0B2L, image-point transcendence-degree argument; finite generic-point cover and specialization-chain dimension comparison"
    }
   },
   {
-   "text": "The closure of the finite union $f(X)=\\bigcup_i f(X_i)$ is the finite union $\\overline{f(X)}=\\bigcup_i Z_i$. Any irreducible closed subset of a finite union of closed subsets is contained in one member, so the Krull dimension of this union is at most the maximum of the dimensions of the $Z_i$. Combining this with Step 2 and the definition of the dimension of $X$ as the maximum of the dimensions of its finitely many irreducible components gives $\\dim\\overline{f(X)}\\le\\dim X$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B2L, proof of (2), finite-component reduction and the definition of dimension by irreducible chains"
-   }
-  },
-  {
-   "text": "Now assume $\\dim Y\\le d$ and every scheme-theoretic fibre $X_y$ has dimension at most $n$. For each $X_i$, choose its generic point $\\eta_i$ and put $y_i=f(\\eta_i)$. Apply the child node to $f_i:X_i\\to Y$: it gives $r_i\\le\\dim_{\\eta_i}((X_i)_{y_i})$. By [lem-pc-closed-imm-base-change], the fibre $(X_i)_{y_i}$ is a closed subscheme of $X_{y_i}$; under the homeomorphisms in [def-pc-scheme-fibre], its underlying space is the closed subspace $X_i\\cap f^{-1}(y_i)$ of $X_{y_i}$. Local dimension is monotone for a closed subspace by the following elementary argument from [def-kun-topological-dimension-at-point]: choose an ambient open neighbourhood attaining the ambient local dimension; its intersection with the closed subspace is a neighbourhood in that subspace, and every chain of irreducible closed subsets of this intersection is a chain in the ambient neighbourhood. Thus the minimum defining the subspace local dimension is no larger than the ambient local dimension. This gives $\\dim_{\\eta_i}((X_i)_{y_i})\\le\\dim_{\\eta_i}(X_{y_i})\\le\\dim X_{y_i}\\le n$, where the last inequality is the fibre hypothesis. Since $Z_i$ is a closed subset of $Y$, $\\dim Z_i\\le\\dim Y\\le d$, and hence $\\dim X_i=\\dim Z_i+r_i\\le d+n$. Taking the maximum over the finitely many components $X_i$ yields $\\dim X\\le d+n.$",
+   "text": "The fibre homeomorphism f.fiberHomeo y identifies the scheme-theoretic fibre with the topological fibre, so the given bound n bounds every topological fibre. Apply the existing source-dimension bound to f, giving dim X at most dim Y+n. Addition is monotone, so dim Y at most d implies dim X at most d+n. Naturals embed additively into WithBot ENat. This also includes empty schemes.",
    "uses": [
-    "lem-zl-irreducible-fibre-dimension-lower-bound",
-    "lem-pc-closed-imm-base-change",
     "def-pc-scheme-fibre",
-    "def-kun-topological-dimension-at-point"
+    "lem-zl-source-dimension-fibre-bound"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B2L, lemma-dimension-fibres-locally-algebraic, (2)(a), applied at each component generic point"
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OM, lemma-dimension-base-fibre-total, through the existing scheme-level source theorem"
    }
   }
  ],
  "proof_deps": [
-  "def-kun-topological-dimension-at-point",
   "def-pc-scheme-fibre",
-  "lem-kun-dimension-finite-type",
-  "lem-pc-closed-imm-base-change",
   "lem-sc-noetherian-finite-irreducible-components",
-  "lem-sfb-finite-type-composition-base-change",
-  "lem-weil-pbc-closed-immersion-finite",
-  "lem-weil-pbc-closed-subset-closed-subscheme",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-immersion-base-change-lft",
-  "lem-zl-irreducible-fibre-dimension-lower-bound"
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-scheme-sober",
+  "lem-zl-image-point-closure-dimension-bound",
+  "lem-zl-source-dimension-fibre-bound"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0B2L, lemma-dimension-fibres-locally-algebraic, (2)(a) and proof, applied componentwise"
+  "place": "Tag 0B2L, point-closure transcendence-degree comparison, and algebra.tex Tag 00OM, via existing proved ClosurePointDimension and FiberDimension theorems; finite generic-point cover replaces the irreducible-fibre lower-bound route."
  },
  "mathlib_searches": [
   {
@@ -198,5 +189,15 @@
   "group": "Q54",
   "result": "pass",
   "note": "Reviewed immutable packet, node, dependencies, Stacks Tag 0B2L source, Lean module, report, edge cases, route-pivot constraints, and docstrings. Recompiled via scompile.py in sandbox and library modes successfully; review.md records all checks."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261019T122559-L-470512",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

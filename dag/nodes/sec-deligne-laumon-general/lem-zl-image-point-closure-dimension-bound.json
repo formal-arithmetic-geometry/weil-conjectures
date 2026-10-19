@@ -1,0 +1,105 @@
+{
+ "id": "lem-zl-image-point-closure-dimension-bound",
+ "kind": "statement",
+ "title": "Dimension of the closure of an image point",
+ "statement": "Let $k$ be a field, let $a:Y\\to\\operatorname{Spec}k$ and $f:X\\to Y$ be locally finite type morphisms of schemes [def-pc-scheme, def-weil-finite-type-morphism]. For every $x\\in X$, their topological Krull dimensions [def-kun-topological-krull-dimension] satisfy $\\dim\\overline{\\{f(x)\\}}\\leq\\dim\\overline{\\{x\\}}$. Neither quasi-compactness nor irreducibility is required.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B2L, proof of (2), residue-field transcendence degrees; existing Lean proof in WeilConjectures/AlgebraicGeometry/ClosurePointDimension.lean, theorem Scheme.Hom.topologicalKrullDim_closure_singleton_apply_le"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing proved source-library theorem attached to this node. Its proof chooses, near each specialization z of f(x), an affine open V containing both z and f(x), and an affine neighbourhood U of x mapping into V. The affine ring map induces an injection from the quotient domain corresponding to f(x) into the quotient domain corresponding to x. Dimensions of finite type domains over k equal their transcendence degrees, so this injection gives the dimension inequality on these affine opens. An open embedding preserves the dimension of the trace of a point closure on its range. The source trace has dimension at most the full source-point closure by subspace monotonicity. The affine opens V cover the image-point closure, so the open-cover dimension bound proves the result. This attaches an existing fully proved declaration; it adds no Lean obligation.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2L, proof of (2), residue-field transcendence degrees; existing Lean proof in WeilConjectures/AlgebraicGeometry/ClosurePointDimension.lean, theorem Scheme.Hom.topologicalKrullDim_closure_singleton_apply_le"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B2L, proof of (2), residue-field transcendence degrees; existing Lean proof in WeilConjectures/AlgebraicGeometry/ClosurePointDimension.lean, theorem Scheme.Hom.topologicalKrullDim_closure_singleton_apply_le",
+  "note": "Existing fully proved source-library declaration; no new proof or postponed dependency."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Dimension of closure of an image point; source dimension bounded by base plus fibres for locally finite type schemes",
+   "results": "Searches returned LocallyOfFiniteType, locallyOfFiniteType_of_comp, LocallyOfFiniteType.isLocallyNoetherian, closed-points preservation, properness and smooth relative dimension; no scheme-level dimension inequality. Read the existing source-library declarations in ClosurePointDimension.lean and FiberDimension.lean: exact matches, with complete proofs.",
+   "date": "2026-10-19",
+   "verdict": "no Mathlib match; exact proved source-library match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dimension closure of f x bounded by dimension closure of x; dimension of source at most target plus fibre bound",
+   "results": "Returned finite_appTop_of_universallyClosed, finite-type stalk maps, LocallyOfFiniteType.isLocallyNoetherian, locallyOfFiniteType_of_comp, finite morphisms and finite fibres. None states these dimension inequalities.",
+   "date": "2026-10-19",
+   "verdict": "no Mathlib match; exact proved source-library match"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDim.*(closure|fiber)|fiber.*topologicalKrullDim; rg on Mathlib/AlgebraicGeometry and WeilConjectures",
+   "results": "Mathlib has fibre homeomorphisms and dimension monotonicity for inducing maps, but not these scheme-level inequalities. Source search found Scheme.Hom.topologicalKrullDim_closure_singleton_apply_le in ClosurePointDimension.lean and Scheme.Hom.topologicalKrullDim_le_add in FiberDimension.lean; both proof bodies were read in full.",
+   "date": "2026-10-19",
+   "verdict": "no Mathlib match; exact proved source-library match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteTypeFibreImageDimensionBounds",
+  "date": "2026-10-19",
+  "group": "J5"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-finite-type-fibre-image-dimension-bounds",
+   "place": "Shorter proof route: the image-closure dimension inequality.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.ClosurePointDimension",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.topologicalKrullDim_closure_singleton_apply_le",
+  "statement": "theorem Scheme.Hom.topologicalKrullDim_closure_singleton_apply_le {k : Type u} [Field k] (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] (f : X ⟶ Y) [LocallyOfFiniteType f] (x : X) : topologicalKrullDim (closure {f x} : Set Y) ≤ topologicalKrullDim (closure {x} : Set X)",
+  "branch": "slopmaster2",
+  "by": "J5",
+  "date": "2026-10-19",
+  "note": "Existing source theorem; compiled use has only propext, Classical.choice and Quot.sound."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261019T122559-L-470512",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261019T122559-L-470512",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
