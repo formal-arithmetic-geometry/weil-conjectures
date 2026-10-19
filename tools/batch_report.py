@@ -62,7 +62,7 @@ _spec = importlib.util.spec_from_file_location("below_route", LIVE / "tools" / "
 below_route = importlib.util.module_from_spec(_spec); _spec.loader.exec_module(below_route)
 B = ("batch2", "batch3", "batch4", "batch5")
 read = lambda f: [l.strip() for l in (R / f).read_text().splitlines() if l.strip() and not l.startswith("#")] if (R / f).exists() else []
-b3 = set(read("coord/batch3-targets.txt")); b4 = set(read("coord/batch4-targets.txt")); b5 = set(read("coord/batch5-targets.txt"))
+b3 = set(read("coord/nodes-batch3-targets.txt")); b4 = set(read("coord/nodes-batch4-targets.txt")); b5 = set(read("coord/nodes-batch5-targets.txt"))
 b2 = set(read("coord/new-targets.txt")) - b3 - b4 - b5
 g = dq.Dag(dq.load())
 import assumed
