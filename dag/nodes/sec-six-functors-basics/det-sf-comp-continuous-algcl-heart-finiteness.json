@@ -1,0 +1,123 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "det-def-sfb-constructible-local-model",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every higher proper direct image of a constructible sheaf of continuous algebraic closure of p-adic field modules is constructible",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, CompHausLike.LocallyConstantModule.functor, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, Condensed.lanSheafProfinite, CondensedMod.LocallyConstant.functor, LightCondMod.LocallyConstant.functorToPresheaves.",
+   "date": "2026-10-19",
+   "verdict": "No exact Mathlib theorem for constructible proper images with this topological coefficient."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.homologyFunctor, CategoryTheory.Functor",
+   "results": "12 hits: DerivedCategory.homologyFunctor, DerivedCategory.shift_homologyFunctor, DerivedCategory.homologyFunctorFactors, DerivedCategory.homologyFunctorFactorsh, DerivedCategory.homologyFunctorFactors_hom_naturality, DerivedCategory.homologyFunctorFactors_hom_naturality_assoc, DerivedCategory.shiftMap_homologyFunctor_map_Q, CochainComplex.homologyFunctorFactors_hom_app_homologyδOfTriangle.",
+   "date": "2026-10-19",
+   "verdict": "Generic pushforward or derived-category infrastructure only; no proper finiteness or uniform window for the full continuous-map coefficient."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(rightDerived|direct.image)|proper.*constructible",
+   "results": "0 hits.",
+   "date": "2026-10-19",
+   "verdict": "No exact Mathlib theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every higher proper direct image of a constructible sheaf with coefficients in the continuous algebraic closure of a p-adic field is constructible",
+   "results": "8 hits: Topology.IsConstructible, AlgebraicGeometry.Scheme.Hom.isConstructible_image, Topology.IsConstructible.preimage, PadicAlgCl, Topology.IsConstructible.image_of_isClosedEmbedding, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.Scheme.Modules.instFullPushforward, PadicAlgCl.isAlgebraic.",
+   "date": "2026-10-19",
+   "verdict": "No exact Mathlib theorem for the stated condensed coefficient result. The hits provide generic infrastructure only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactificationLocalizing",
+  "date": "2026-10-19",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-single",
+   "place": "Proper-image paragraph, separating proper generator finiteness from the cohomological window for ambient coproducts.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "det-sf-comp-continuous-algcl-heart-finiteness",
+ "title": "Constructibility of higher proper images of one full continuous algebraic-closure sheaf",
+ "statement": "Let ell be prime, k a field of positive prime characteristic different from ell, and p:X to Y a proper k-morphism of separated finite-type k-schemes. For the condensed coefficient ring of all continuous maps into the topological algebraic closure PadicAlgCl ell, let M be a sheaf of internal modules with finite constant local models on a finite constructible stratification of X. Then every cohomology object of Rp_*(M[0]) has finite constant local models on a finite constructible stratification of Y. No bounded-complex input, cohomological bound, Tor-amplitude, coproduct or compactification assertion is made.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/_section.md",
+  "place": "Assertion (1) applied to one constructible sheaf in degree zero; the sheaf-level proper finiteness input to bounded Postnikov devissage."
+ },
+ "proof": [
+  {
+   "text": "Choose a finite adapted stratification and its finite locally closed extension-by-zero filtration, refining to normal strata. Use continuousAlgCl_lf for local finite freeness. The lisse representations on these strata have compact profinite monodromy. The already proved source-library PadicAlgCl.exists_finiteDimensional_forall_mem (IntegralModel) gives finite coefficient fields. Descend each stratum representation to its finite field and extend it by zero. Apply properHeart_constructible_cohomology at that finite coefficient; its integral-lattice and torsion arguments are already in the library. The integral finiteness and uniform bound give a bounded finite-projective cochain model on each adapted target stratum. Compute the canonical coefficient comparison termwise on that finite model, using the same finite sums, differentials and actions. Invert ell and extend the finite model to the actual full continuous coefficient. The finite sheaf filtration and cohomology long exact sequence give the assertion for M. Negative cohomology vanishes by left t-exactness. All scalar comparisons concern the actual continuous coefficient, not only finite-subextension-valued sections. Empty strata and zero sheaves contribute zero.",
+   "uses": [
+    "det-def-sfb-constructible-local-model",
+    "det-sf-comp-continuous-algcl-local-free",
+    "lem-proper-heart-constructible-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-def-sfb-constructible-local-model",
+  "det-sf-comp-continuous-algcl-local-free",
+  "lem-proper-heart-constructible-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/_section.md",
+  "place": "Assertion (1), proper preservation of bounded constructible complexes, and the equality Dctf=Dbc used in det-sf-comp-coherence-single proper-image paragraph."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousAlgClProperHeartFiniteness",
+  "file": "lean/Sheaf/Paper/ContinuousAlgClProperHeartFiniteness.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousAlgCl_proper_heart_finiteness",
+  "statement": "theorem continuousAlgCl_proper_heart_finiteness\n    (ℓ : ℕ) [Fact ℓ.Prime]\n    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]\n    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    (p : X ⟶ Y) [p.IsOver (Spec (.of k))] [IsProper p]\n    (M : ConstantModelConstructible\n      (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) X) :\n    ∀ n : ℤ, IsConstantModelConstructible\n      (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) Y\n      ((DerivedCategory.homologyFunctor _ n).obj\n        ((lowerStar (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) p).rightDerivedFunctor.obj\n          ((DerivedCategory.singleFunctor _ 0).obj M.obj)))",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261019T192723-L-1859542",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261019T192723-L-1859542",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -37,9 +37,9 @@
    }
   },
   {
-   "text": "*Proper direct image.* Apply [det-proper-image-localizing-proper] to $p:\\overline X\\to Y$. Its concluding coefficient clauses assert both of its hypotheses: preservation of $\\Dctf$ and preservation of direct sums on $\\Loc(\\Dctf)$. For finite $\\Lambda=A$ use its finite clause; for $\\Lambda=\\mathcal O_E,E,\\Qlb$ use its corresponding clause. The stages $\\mathbf Z_\\ell$ and $\\mathbf Q_\\ell$, if listed separately, are the $\\mathcal O_E$ and $E$ cases with $E=\\mathbf Q_\\ell$. Hence its conclusion gives an exact, sum-preserving functor $Rp_*:\\Loc(\\Dctf(\\overline X,\\Lambda))\\to\\Loc(\\Dctf(Y,\\Lambda))$ carrying $\\Dctf(\\overline X,\\Lambda)$ into $\\Dctf(Y,\\Lambda)$. All coefficients and module-object derived categories are unchanged in this application.",
+   "text": "Apply det-sf-comp-proper-admissible-hypotheses to the proper map of the compactification. This supplies preservation of the Dctf generators and ambient sums of objects in the middle localizing closure for the exact recorded admissibility predicate, including ring-object isomorphisms and the continuous-map algebraic-closure coefficient.",
    "uses": [
-    "det-proper-image-localizing-proper"
+    "det-sf-comp-proper-admissible-hypotheses"
    ],
    "elementary": false,
    "source": {
@@ -48,9 +48,12 @@
    }
   },
   {
-   "text": "*Composite.* Apply the restriction of $j_!$ from step 1 and then that of $Rp_*$ from step 2; the intermediate category is $\\Loc(\\Dctf(\\overline X,\\Lambda))$ in both steps. A distinguished triangle first maps to a distinguished triangle under $j_!$, and then under $Rp_*$, with the composite shift isomorphism, so the composite is exact. For any small family $(K_s)$ in the source localizing category the comparison isomorphisms of those two steps give $Rp_*j_!(\\bigoplus_s K_s)\\simeq Rp_*(\\bigoplus_s j_!K_s)\\simeq\\bigoplus_s Rp_*j_!K_s$. Finally $K\\in\\Dctf(X,\\Lambda)$ implies $j_!K\\in\\Dctf(\\overline X,\\Lambda)$ by step 1, hence $Rp_*j_!K\\in\\Dctf(Y,\\Lambda)$ by step 2. These prove all clauses for the specified compactification.",
-   "uses": [],
-   "elementary": true,
+   "text": "The localizing-closure existence theorem gives replete triangulated localizing closures P and Q in the source and target. For the proper-image functor F, form R = P intersect inverseImage(F,Q). It is replete and triangulated. Lift a diagram in R into P; the given restricted-sum hypothesis and liftCompιIso imply F preserves this ambient colimit. Closure of Q under sums then puts its image in Q. Thus R is localizing and contains every Dctf generator, so the intersection definition of P gives P contained in R. This proves objectwise proper-image preservation without using the older conditional proper-image theorem. Compose with the open-image membership map. Ambient derived exactness supplies the distinguished-triangle clause. Lift the intermediate coproduct diagram into the middle closure, transport its preservation along liftCompιIso, and use comp_preservesColimit. Compose the two Dctf preservation maps.",
+   "uses": [
+    "det-def-localizing-closure-existence",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-single.proof.md",
     "place": "Third paragraph, Composite, with the triangle and coproduct arguments written out."
@@ -59,12 +62,14 @@
  ],
  "proof_deps": [
   "det-proper-image-localizing-open",
-  "det-proper-image-localizing-proper"
+  "det-sf-comp-proper-admissible-hypotheses",
+  "det-def-localizing-closure-existence",
+  "lem-pc-right-derived-functor-triangulated"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-single.proof.md",
-  "place": "Three paragraphs: Extension by zero; Proper direct image; Composite."
+  "place": "Three original factor/composite paragraphs, with the proper closure implication proved directly in Lean and only the coefficient hypotheses isolated."
  },
  "mathlib_searches": [
   {
@@ -204,5 +209,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "Use the recorded IsLocalizingAdmissibleCoefficient predicate, including all continuous maps into the algebraic closure with its indicated topology. The prior inline coefficient disjunction instead used the finite-subextension-valued algebraic-closure object. All four conclusions and geometric hypotheses are retained."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261019T192723-L-1859542",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

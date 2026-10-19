@@ -1,0 +1,140 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "sk-def-sfb-constructible",
+  "det-def-sfb-constructible-tor-amplitude"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex with flat cohomology has finite Tor amplitude",
+   "date": "2026-10-19",
+   "results": "8 hits: CochainComplex.IsKProjective, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.isGE_iff, DerivedCategory.isLE_iff, CategoryTheory.isZero_Tor'_succ_of_projective.",
+   "verdict": "No exact Mathlib result. Reused the library bounded Postnikov devissage and flat-model theorem; the field and stratification arguments are proved here."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteTorAmplitude|flat.*cohomology",
+   "date": "2026-10-19",
+   "results": "0 hits: .",
+   "verdict": "No exact Mathlib result. Reused the library bounded Postnikov devissage and flat-model theorem; the field and stratification arguments are proved here."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.singleFunctor, CategoryTheory.Limits.PreservesFiniteLimits",
+   "date": "2026-10-19",
+   "results": "12 hits: CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.NatTrans.mapDerivedCategory_app_singleFunctor_obj, CategoryTheory.NatTrans.mapDerivedCategory_app_singleFunctor_obj_assoc, CategoryTheory.Functor.mapDerivedCategoryCompIso_hom_app_comp_mapDerivedCategorySingleFunctor_hom_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor_inv_app_comp_mapDerivedCategoryCompIso_inv_app, CategoryTheory.Functor.mapDerivedCategoryCompIso_hom_app_comp_mapDerivedCategorySingleFunctor_hom_app_assoc, CategoryTheory.Functor.mapDerivedCategorySingleFunctor_inv_app_comp_mapDerivedCategoryCompIso_inv_app_assoc, CategoryTheory.Functor.mapDerivedCategorySingleFunctor_inv_app.",
+   "verdict": "No exact Mathlib result. Reused the library bounded Postnikov devissage and flat-model theorem; the field and stratification arguments are proved here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex with flat cohomology has finite Tor amplitude",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, Module.Flat.rTensor_shortComplex_exact, Module.Flat.tfae_equational_criterion, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_rTensor_exact, Module.Flat.iff_lTensor_exact', HomologicalComplex.instHasFiniteLimits.",
+   "date": "2026-10-19",
+   "verdict": "No exact Mathlib theorem for the stated condensed coefficient result. The hits provide generic infrastructure only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactificationLocalizing",
+  "date": "2026-10-19",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-single",
+   "place": "Proper-image paragraph; separate the rational finite Tor assertion from proper constructibility.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "det-sf-comp-continuous-algcl-constructible-tor",
+ "title": "Finite Tor amplitude of bounded constructible full continuous algebraic-closure complexes",
+ "statement": "Let ell be prime and X a noetherian scheme. With the condensed coefficient ring of all continuous maps into the topological algebraic closure PadicAlgCl ell, every bounded complex whose cohomology has finite constant local models on a finite constructible stratification has finite Tor amplitude. No finite-subextension-valued description of the coefficient ring is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/_section.md",
+  "place": "Statement, equality Dctf=Dbc for rational coefficients, specialized to the all-continuous algebraic closure."
+ },
+ "proof": [
+  {
+   "text": "Use the separate proved local finite-free theorem for the actual full continuous-map algebraic closure. It generalizes the rank/descent argument to totally disconnected normed fields and transports across the universe lift. No finite-dimensionality or bounded-field-valued interpretation of PadicAlgCl is used.",
+   "uses": [
+    "det-sf-comp-continuous-algcl-local-free"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "On every stratum, finite constant local models are locally finitely presented, by the proved constantModel_lfp helper of CoefficientHeartLisseRestriction (the sorried duplicate is not used). Use step 1 and exactness of tensor by locally finite free modules. Pullback commutes with tensor. The finite jointly surjective family of locally closed stratum immersions detects equality of maps, hence detects the cancellation condition for monomorphisms. The original tensor functor preserves monomorphisms and is right exact; it is therefore exact. Each constructible module is flat.",
+   "uses": [
+    "new-det-lem-coefficient-heart-common-stratification-lisse",
+    "lem-weil-pbc-condensed-finite-free-tensor-exact",
+    "lem-weil-pbc-proetale-abelian-closed-support"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved bounded Postnikov devissage (DerivedCategory.exists_iteratedExtensions_of_bounded and iteratedExtensions_le). A flat module in degree zero has Tor amplitude [0,0]. Finite Tor amplitude is closed under shifts, isomorphisms and extensions, so it contains the bounded complex. Empty strata and the zero complex are covered by the same argument.",
+   "uses": [
+    "lem-sc-source-tor-amplitude-flat-model",
+    "det-def-sfb-constructible-tor-amplitude"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-sf-comp-continuous-algcl-local-free",
+  "new-det-lem-coefficient-heart-common-stratification-lisse",
+  "lem-weil-pbc-condensed-finite-free-tensor-exact",
+  "lem-weil-pbc-proetale-abelian-closed-support",
+  "lem-sc-source-tor-amplitude-flat-model",
+  "det-def-sfb-constructible-tor-amplitude"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/_section.md",
+  "place": "Statement, equality Dctf=Dbc for rational coefficients, specialized to the all-continuous algebraic closure."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousAlgClConstructibleTor",
+  "file": "lean/Sheaf/Paper/ContinuousAlgClConstructibleTor.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.continuousAlgCl_bounded_finiteTor",
+  "statement": "theorem continuousAlgCl_bounded_finiteTor\n    (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [IsNoetherian X]\n    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) X)))\n    (hK : constantModelBoundedConstructible\n      (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) X K) :\n    DerivedCategory.finiteTorAmplitude _ K",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261019T192723-L-1859542",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261019T192723-L-1859542",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
