@@ -21,9 +21,213 @@
   "def-weil-geometric-fibre",
   "def-weil-pbc-separable-algebraic-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $E=k(V)$. Apply [lem-weil-pbc-chow-noetherian] to $V\\to S$. Its hypotheses hold because proper morphisms are separated of finite type and $S$ is Noetherian. Obtain $P'\\to V$, an immersion $P'\\to\\mathbf P^n_S$, and a dense open $V_0\\subset V$ on which $P'\\to V$ is an isomorphism. These data also satisfy the hypotheses of [det-chow-projective-closed-immersions], so the immersion into projective space is closed. Replace $P'$ by the reduced closed subscheme $P$ on the closure of $V_0$, using [lem-weil-pbc-reduced-induced-closed-subscheme]. The closure of the integral open $V_0$ is irreducible; its reduced structure is integral and still has function field $E$. The restricted map $P\\to V$ is proper and has dense image, hence is surjective by [lem-weil-pbc-closed-immersion-proper] and [lem-weil-pbc-proper-closed-image]. Thus $P$ has a closed embedding into $\\mathbf P^n_S$ and an $S$-map to $V$.",
+   "uses": [
+    "lem-weil-pbc-chow-noetherian",
+    "det-chow-projective-closed-immersions",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-proper-closed-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tags 0200 (lemma-chow-Noetherian), 0201 (remark-chow-Noetherian); morphisms.tex proper Chow immersion"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-galois-receiving-separable-extensions] to the single finite separable extension $E/K$. Fix the resulting embedding $E\\hookrightarrow L$, with $L/K$ finite Galois, and put $G=\\operatorname{Aut}_K(L)$. The tensor decomposition of [lem-exc-finite-galois-tensor-decomposition] in particular implies that $G$ is finite: $L\\otimes_KL$ is finite dimensional over $L$, whereas a product of infinitely many nonzero copies of $L$ cannot be. Also [lem-exc-etale-galois-fixed-field-subgroup], with intermediate field $K$, gives $L^G=K$.",
+   "uses": [
+    "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+    "lem-exc-finite-galois-tensor-decomposition",
+    "lem-exc-etale-galois-fixed-field-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09DT (lemma-normal-closure), 0EXM (lemma-normal-closure-galois); finite Galois theory"
+   }
+  },
+  {
+   "text": "Let $Y\\to P$ be the normalization in $\\operatorname{Spec}L$ at the generic point of $P$. The statement of [lem-weil-pbc-normalization-in-residue-field-extension] gives an integral normal $Y$ with generic field $L$, and [def-fin-normalization-extension] identifies its charts as the integral closures of affine coordinate domains of $P$ in $L$. These charts glue by [lem-weil-pbc-integral-closure-commutes-localization]. On every affine chart of $P$ above an affine of $S$, the coordinate ring is excellent by [lem-exc-finite-type-localization-excellent] and Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. It is Nagata by [lem-exc-quasi-excellent-nagata], hence N-2 by [lem-weil-pbc-nagata-domain-n2]. By the definition [def-weil-pbc-japanese-domain], its integral closure in the finite extension $L/E$ is a finite module. Thus $Y\\to P$ is finite by [def-weil-finite-integral-morphism].",
+   "uses": [
+    "lem-weil-pbc-normalization-in-residue-field-extension",
+    "def-fin-normalization-extension",
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-exc-quasi-excellent-nagata",
+    "lem-weil-pbc-nagata-domain-n2",
+    "def-weil-pbc-japanese-domain",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035H, 035L (normalization in a field); more-algebra.tex Tags 07QU, 07QV; algebra.tex Tag 0334"
+   }
+  },
+  {
+   "text": "Form the finite products $D=\\prod_{g\\in G,S}P$ and $B=\\prod_{g\\in G,S}Y$, using [def-pc-fibre-product]. There is a finite morphism $B\\to D$: over an affine product chart its algebra is the tensor product of the finite algebras for $Y\\to P$, and tensors of their finite module generators generate it. This also proves finiteness under the base changes and compositions involved, directly from [def-weil-finite-integral-morphism]. The product of the closed embeddings $P\\hookrightarrow\\mathbf P^n_S$ is closed: on product affine charts its ideal is the sum of the extended defining ideals. Iterating [lem-chow-segre] therefore embeds $D$ as a closed subscheme of a single $\\mathbf P^N_S$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-finite-integral-morphism",
+    "lem-chow-segre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Segre embedding; affine tensor descriptions of finite products"
+   }
+  },
+  {
+   "text": "The generic fibre $P_K$ is $\\operatorname{Spec}E$. Indeed $P$ is integral and birational to $V$; after base change to $K$ it is a proper integral scheme with algebraic function field $E/K$, hence has only its generic point: on an affine chart its coordinate domain is a finite type $K$-subalgebra of the finite dimensional field $E$, therefore is a field. Its field of fractions is $E$. Likewise $Y_K=\\operatorname{Spec}L$, by the integral-closure localization statement in step 3. Consequently $D_K=\\operatorname{Spec}(\\bigotimes_{g\\in G,K}E)$ and $B_K=\\operatorname{Spec}(\\bigotimes_{g\\in G,K}L)$. Define $j:\\operatorname{Spec}L\\to B$ by taking in coordinate $g$ the generic inclusion $\\operatorname{Spec}L\\to Y$ precomposed with $\\operatorname{Spec}g$. Its generic ring map is $\\bigotimes_g L\\to L$, $\\bigotimes_g x_g\\mapsto\\prod_g g(x_g)$; this is surjective since the identity factor already maps onto $L$. Thus its image is a closed point $b$ of $B_K$ with residue field exactly $L$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "def-sc-function-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Normalization localization and the affine generic-fibre calculation"
+   }
+  },
+  {
+   "text": "Let $Z$ be the reduced induced closed subscheme on $\\overline{\\{b\\}}\\subset B$, supplied by [lem-weil-pbc-reduced-induced-closed-subscheme]. It is integral. Moreover $Z_K=\\operatorname{Spec}L$: on an affine chart $\\operatorname{Spec}R$ of $B$ containing $b$, its ideal is the prime kernel of $R\\to L$; localization at the nonzero functions from the base commutes with this kernel and gives the kernel of the surjective generic ring map of step 5. The closure has no other points over $K$, because $b$ is closed in $B_K$. In particular $k(Z)=L$. Since $Z\\to B$ is a closed immersion it is finite: its affine algebra is a quotient generated as a module by $1$. Hence $Z\\to D$ is finite by the module-generator calculation of step 4. Projection to the identity factor gives an $S$-map $Z\\to Y\\to P\\to V$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-finite-integral-morphism",
+    "def-sc-function-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3 (lemma-reduced-closed-subscheme); affine prime-ideal closure calculation"
+   }
+  },
+  {
+   "text": "There is a left $G$-action on $B$ by permuting coordinates: $(a_hx)_g=x_{h^{-1}g}$. The universal property [def-pc-fibre-product] gives actual scheme automorphisms with $a_ha_k=a_{hk}$. On the generic point map, $a_hj=j\\operatorname{Spec}(h^{-1})$, as one checks after every projection: on coordinate rings both composites send $x$ in factor $g$ to $h^{-1}(g(x))$. Thus every $a_h$ fixes $b$ as a point and preserves its closure. Uniqueness of the reduced closed structure in [lem-weil-pbc-reduced-induced-closed-subscheme] restricts these automorphisms to $Z$, preserving the group laws. Under $k(Z)=L$ their pullbacks are $h^{-1}$; equivalently the usual left action on rational functions, $h\\cdot f=(a_{h^{-1}})^*f$, is the given action $h(f)$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Fibre-product universal property and Tag 01J3, uniqueness of reduced closed structure"
+   }
+  },
+  {
+   "text": "The schemes $D,B,Z$ are finite type over the excellent Noetherian scheme $S$: $D$ is closed in finite projective space, $B\\to D$ is finite, and $Z\\to B$ is closed. On affine charts [lem-exc-finite-type-localization-excellent] and [lem-weil-pbc-finite-type-algebra-noetherian] give excellence and local Noetherianity; all these schemes are quasi-compact since their displayed structural maps are quasi-compact and $S$ is quasi-compact. Let $\\nu:W=Z^\\nu\\to Z$ be the normalization [def-sc-normalization]. Apply [lem-per-excellent-normalization-preparation]: $\\nu$ is finite and surjective, and $W$ is excellent Noetherian and normal. As $Z$ is integral, its componentwise normalization has one integral component and agrees with this function-field normalization. Localization of the integral closure at the generic point gives $k(W)=k(Z)=L$. The composite $W\\to D$ is finite, and projection gives the required $t:W\\to V$.",
+   "uses": [
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-sc-normalization",
+    "lem-per-excellent-normalization-preparation",
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035S (lemma-nagata-normalization), Tag 035Q; more-algebra.tex Tag 07QU"
+   }
+  },
+  {
+   "text": "The finite map $W\\to D$ is projective in the projective-bundle sense by [lem-trf-finite-projective-bundle]. The closed embedding $D\\hookrightarrow\\mathbf P^N_S$ is also a projective-bundle embedding, taking the free module $\\mathcal O_S^{N+1}$ in [def-trf-projective-bundle-morphism]. Since the Noetherian scheme $S$ is qcqs, [lem-per-projective-bundle-composition] proves that $c:W\\to S$ is projective in precisely the required convention. It is proper by [lem-trf-projective-bundle-proper]. Its image is closed by [lem-weil-pbc-proper-closed-image] and contains the generic point of $S$, since its generic fibre is $\\operatorname{Spec}L$. As $S$ is integral, this image is all of $S$.",
+   "uses": [
+    "lem-trf-finite-projective-bundle",
+    "def-trf-projective-bundle-morphism",
+    "lem-per-projective-bundle-composition",
+    "lem-trf-projective-bundle-proper",
+    "lem-weil-pbc-proper-closed-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 0B3I (lemma-finite-projective), 0C4P (lemma-composition-projective), 01WC (properness)"
+   }
+  },
+  {
+   "text": "For $h\\in G$, apply [lem-sbc-normalization-dominant-lift] to the dominant map $a_h\\nu:W\\to Z$. It gives a unique dominant lift $\\widetilde a_h:W\\to W$ satisfying $\\nu\\widetilde a_h=a_h\\nu$. The identity lift is $1_W$. Both $\\widetilde a_h\\widetilde a_k$ and $\\widetilde a_{hk}$ lift $a_{hk}\\nu$, so uniqueness makes them equal. Taking $k=h^{-1}$ proves that the lifts are automorphisms. They are over $S$ and have the same generic pullbacks $h^{-1}$, hence the same given left function-field action, as in step 7.",
+   "uses": [
+    "lem-sbc-normalization-dominant-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035Q (lemma-normalization-normal), part (4)"
+   }
+  },
+  {
+   "text": "Choose a nonempty affine open $S_0=\\operatorname{Spec}A\\subset S$; it is dense because $S$ is integral. The scheme $D_{S_0}$ is H-projective and its generic fibre is the spectrum of the finite dimensional $K$-algebra $\\bigotimes_G E$, hence has dimension zero. Apply [lem-fin-projective-generically-finite] and shrink to a nonempty affine open $S_1\\subset S_0$ on which $D$ is finite. Because $W\\to D$ is finite, $W_{S_1}$ is finite over $S_1$, by multiplying finite module generators. Write $S_1=\\operatorname{Spec}A_1$ and $W_{S_1}=\\operatorname{Spec}C$, where $C$ is a finite domain algebra, embedded in $L$ with $K\\otimes_{A_1}C=L$. Apply [lem-weil-pbc-spread-finite-separable-extension] to obtain, after a principal shrinking, a finite etale domain algebra $C'$ inside $L$ with fraction field $L$. Both $C$ and $C'$ become $L$ on tensoring with $K$. Each of their finitely many module generators lies in the other algebra after inverting a nonzero element of $A_1$; invert the product of these denominators. The two localized algebras are then equal inside $L$. Thus $c$ is finite etale and still surjective over a dense affine open $S_2\\subset S$.",
+   "uses": [
+    "lem-fin-projective-generically-finite",
+    "lem-weil-pbc-spread-finite-separable-extension",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Generic finiteness; spreading a finite separable field extension and finite-generator comparison"
+   }
+  },
+  {
+   "text": "Write $S_2=\\operatorname{Spec}A_2$ and $W_{S_2}=\\operatorname{Spec}C_2$. The torsor map $\\coprod_{h\\in G}W_{S_2}\\to W_{S_2}\\times_{S_2}W_{S_2}$, whose components are $(1,\\widetilde a_h)$, corresponds to $\\Phi:C_2\\otimes_{A_2}C_2\\to\\prod_{h\\in G}C_2$, $a\\otimes b\\mapsto(a\\,h^{-1}(b))_h$. Over $K$, this is an isomorphism by [lem-exc-finite-galois-tensor-decomposition], reindexing $h$ by $h^{-1}$. The source and target of $\\Phi$ are finite $A_2$-modules; its kernel is finite by [lem-weil-pbc-noetherian-submodule-finite], and its cokernel is generated by the images of the finitely many target generators. By [lem-weil-pbc-localization-module-exact], both become zero after localizing to $K$. Kill the finitely many generators by inverting the product of their nonzero annihilators in $A_2$. On the resulting dense open $U$, the torsor map is an isomorphism. For any geometric point of $U$, its fibre is a nonempty finite etale scheme, and the displayed isomorphism says that every ordered pair of its points is uniquely $(x,hx)$. The action on that geometric fibre is therefore simply transitive. This proves every asserted clause, without imposing any restriction on $|G|$ in the residue characteristics.",
+   "uses": [
+    "lem-exc-finite-galois-tensor-decomposition",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 03SF, finite Galois tensor decomposition; clearing finitely many module annihilators"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-fin-normalization-extension",
+  "def-pc-fibre-product",
+  "def-sc-function-field",
+  "def-sc-normalization",
+  "def-trf-projective-bundle-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-japanese-domain",
+  "det-chow-projective-closed-immersions",
+  "lem-chow-segre",
+  "lem-exc-etale-galois-fixed-field-subgroup",
+  "lem-exc-finite-galois-tensor-decomposition",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-fin-projective-generically-finite",
+  "lem-per-excellent-normalization-preparation",
+  "lem-per-projective-bundle-composition",
+  "lem-sbc-normalization-dominant-lift",
+  "lem-trf-finite-projective-bundle",
+  "lem-trf-projective-bundle-proper",
+  "lem-weil-pbc-chow-noetherian",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-nagata-domain-n2",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lem-weil-pbc-proper-closed-image",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-spread-finite-separable-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé X, proof of Theorem 3.4, Step 4, printed pp.160–161. The source permits a dominating projective Galois alteration without constructing it; the conjugate-product construction and open torsor calculation here supply those details using the cited Stacks nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +256,31 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-19",
    "verdict": "no match: inspected the returned types; they concern base-change permanence, ordinary normalization, or separated morphisms, not this assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper separable generically finite morphism of excellent integral schemes is dominated by a normal projective Galois alteration",
+   "results": "Returned 8 hits: AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom",
+   "date": "2026-10-19",
+   "verdict": "no match: normalization and field Galois closure declarations do not construct a dominating projective Galois scheme model."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Galois closure of an alteration projective normal scheme dominating a proper generically finite map",
+   "results": "Returned 8 hits: IsGalois.to_normal, separableClosure.isGalois, isGalois_iff, IntermediateField.normalClosure, IsGalois.normalClosure, isNormalClosure_normalClosure, IntermediateField.normalClosure_def', normalClosure_def",
+   "date": "2026-10-19",
+   "verdict": "no match: normalization and field Galois closure declarations do not construct a dominating projective Galois scheme model."
+  },
+  {
+   "tool": "grep",
+   "query": "galois.*alteration|alteration.*galois|conjugate.*product",
+   "results": "Returned 0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "no match: normalization and field Galois closure declarations do not construct a dominating projective Galois scheme model."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-equivariant-marked-nodal-alteration",
@@ -82,5 +307,169 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-projective-galois-alteration-envelope",
+  "worker": "stage1",
+  "summary": "Expanded the projective Galois domination invoked in ILO X 3.4 Step 4 into a Chow refinement, finite field normalization, conjugate-product closure, finite normalization and explicit dense-open torsor construction. Reused existing nodes throughout; created no new node. Kept the statement and all inherited searches unchanged, adding the searches actually run by Q100.",
+  "blueprint": "Supports the finiteness/duality branch of lem-per-artin-gabber-affine-curve Step 3 through the recorded ancestry; realizes the projective Galois replacement in ILO X 3.4 Step 4, not any change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "def-fin-normalization-extension",
+    "why": "Steps 3 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "def-pc-fibre-product",
+    "why": "Steps 4, 5, 7 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "def-sc-function-field",
+    "why": "Steps 5, 6 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "def-sc-normalization",
+    "why": "Steps 8 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "def-trf-projective-bundle-morphism",
+    "why": "Steps 9 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "def-weil-finite-integral-morphism",
+    "why": "Steps 3, 4, 6, 8, 11, 12 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "def-weil-pbc-japanese-domain",
+    "why": "Steps 3 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "det-chow-projective-closed-immersions",
+    "why": "Steps 1 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-chow-segre",
+    "why": "Steps 4 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-exc-etale-galois-fixed-field-subgroup",
+    "why": "Steps 2 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-exc-finite-galois-tensor-decomposition",
+    "why": "Steps 2, 12 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Steps 3, 8 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-exc-quasi-excellent-nagata",
+    "why": "Steps 3 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-fin-projective-generically-finite",
+    "why": "Steps 11 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-sbc-normalization-dominant-lift",
+    "why": "Steps 10 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-trf-finite-projective-bundle",
+    "why": "Steps 9 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-trf-projective-bundle-proper",
+    "why": "Steps 9 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-chow-noetherian",
+    "why": "Steps 1 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Steps 1 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+    "why": "Steps 2 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Steps 3, 8 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-integral-closure-commutes-localization",
+    "why": "Steps 3, 5, 8 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-localization-module-exact",
+    "why": "Steps 12 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-nagata-domain-n2",
+    "why": "Steps 3 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-submodule-finite",
+    "why": "Steps 12 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-normalization-in-residue-field-extension",
+    "why": "Steps 3 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-proper-closed-image",
+    "why": "Steps 1, 9 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Steps 1, 6, 7 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-spread-finite-separable-extension",
+    "why": "Steps 11 use exactly the cited statement as a general scheme/field tool for the Chow, normalization, finite-product or generic-open construction; the perverse unit provides no replacement for this foundational fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-fin-normalization-extension",
+  "def-pc-fibre-product",
+  "def-sc-function-field",
+  "def-sc-normalization",
+  "def-trf-projective-bundle-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-japanese-domain",
+  "det-chow-projective-closed-immersions",
+  "lem-chow-segre",
+  "lem-exc-etale-galois-fixed-field-subgroup",
+  "lem-exc-finite-galois-tensor-decomposition",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-fin-projective-generically-finite",
+  "lem-sbc-normalization-dominant-lift",
+  "lem-trf-finite-projective-bundle",
+  "lem-trf-projective-bundle-proper",
+  "lem-weil-pbc-chow-noetherian",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-nagata-domain-n2",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lem-weil-pbc-proper-closed-image",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-spread-finite-separable-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-c7c168a55",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-c7c168a55 (reviewer sub-agent of L); spot-checked: I read all 12 steps against every cited statement and against ILO X 3.3.1 and 3.4 Step 4 (printed pp.158, 160–161). The source assumes a separable projective Galois alteration without constructing it; the item builds one. The statement is unchanged from the Q136 FIX version: c is projective in the projective-bundle sense. Key checks: Step 1 meets the conditions of det-chow-projective-closed-immersions, and the reduced closure P is integral with function field E and surjects onto V. Step 3 gets finiteness of Y→P from 07QU, 07QV, 0334 and the N-2 definition. Step 5 shows P_K = Spec E and that the conjugate point b has residue field L. Step 7 checks a_h a_k = a_{hk} and a_h j = j Spec(h^-1), so the left action on functions is h. Step 9 composes over the qcqs base S. Step 10 gets the group laws from uniqueness of dominant lifts. Step 11: D_{S_0} is H-projective with a finite generic fibre, and the finite étale model agrees with W after one principal localization (K⊗C = L is left implicit but elementary). Step 12 is 03SF with q = h^-1; the finite kernel and cokernel are killed by a nonzero annihilator, and the action on geometric fibres is simply transitive. I found no duplicates; the closest nodes are trait-semistable-galois-alteration and de-jong-tower. def-sc-function-field defines k(X) for all integral schemes, so there is no B3 fault. Batch 5: I computed the closures of lem-fin-projective-generically-finite (reaches trf proper-finite-fibre-finite-near and pod separated-finite-type base change), lem-per-excellent-normalization-preparation (trf excellent/G-ring/J2/catenary affine-cover nodes), lem-trf-finite-projective-bundle (0B3I) and lem-trf-projective-bundle-proper (01WC). All are generic scheme theory or commutative algebra, not steps of the trace-formula or Poincaré-duality proofs, so I accept them. The declared tool_uses are generic definitions and Stacks facts; accepted. No changes."
  }
 }
