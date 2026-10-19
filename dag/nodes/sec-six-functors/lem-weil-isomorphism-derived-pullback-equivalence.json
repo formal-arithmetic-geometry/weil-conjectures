@@ -29,122 +29,57 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal A=\\operatorname{Mod}(A_Y)$ and $\\mathcal B=\\operatorname{Mod}(A_X)$, the categories of module sheaves of [def-weil-sheaf-of-modules-category]. The small-skeleton and universe conventions in [def-weil-pbc-proetale-site] ensure that these categories are abelian. Write $F=g^{-1}:\\mathcal A\\to\\mathcal B$ and $G=g_*:\\mathcal B\\to\\mathcal A$. Parts (2) and (3) of [lem-weil-proetale-isomorphism-inverse-image] give an exact equivalence on these module categories, with coefficients identified through the specified isomorphism $c^g_A$. More explicitly, extension of scalars in the module pullback of [def-weil-proetale-inverse-image] along $c^g_A$ is naturally isomorphic to the identity after identifying the rings: $m\\otimes a\\mapsto am$, with inverse $m\\mapsto m\\otimes1$. Thus the module pullback is $F$. Choose adjoint-equivalence data for the equivalence in part (2), with unit $\\eta:\\mathrm{id}_{\\mathcal A}\\xrightarrow{\\sim}GF$ and counit $\\varepsilon:FG\\xrightarrow{\\sim}\\mathrm{id}_{\\mathcal B}$, satisfying the triangle identities. The functor $G$ is exact as well: an equivalence carries the universal diagrams for kernels and cokernels to the corresponding universal diagrams, and its inverse does the same. Both functors are additive because they act on the underlying sheaves of abelian groups and on module homomorphisms.",
+   "text": "Put A = O_E / varpi_E^n. Use the exact tensor module pullback F of [def-weil-pbc-proetale-operations] and its analogue H along the inverse scheme isomorphism. The actual coefficient comparisons are asIso of the same constant-section maps as the specified finiteTorsionDerivedPullback, so their termwise derived functors are definitionally the specified finite-level functors. The finite-coefficient realization gives the transported fixed-scalar inverse image sfIntrinsicPullback, its composition and identity comparisons. These are the published finite interface of the ordinary operations, not a new coefficient category.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "def-weil-proetale-inverse-image",
-    "def-weil-pbc-proetale-site"
+    "def-weil-pbc-proetale-operations",
+    "def-weil-proetale-inverse-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A5, section-morphism (Functoriality of the pro-etale site); specialization to an isomorphism via lem-weil-proetale-isomorphism-inverse-image(2)-(3), with coefficient-ring identification written out."
-   }
+   "elementary": false
   },
   {
-   "text": "Let $Q_Y,Q_X$ be the derived localizations of cochain complexes of $\\mathcal A,\\mathcal B$ [def-weil-abstract-derived-category]. Apply [lem-weil-pbc-exact-functor-derived-factorization] to both exact functors in step 1. This gives $F_D:D(\\mathcal A)\\to D(\\mathcal B)$ and $G_D:D(\\mathcal B)\\to D(\\mathcal A)$, with natural isomorphisms $F_DQ_Y\\cong Q_XC(F)$ and $G_DQ_X\\cong Q_YC(G)$; $C(F),C(G)$ denote termwise application. Both termwise functors preserve quasi-isomorphisms, with no boundedness assumption. The finite-level clause of [def-weil-derived-pullback-tensor-hom] identifies the specified $Lg^*$ with $F_D$: the derived pullback is inverse image applied termwise to every representative. On morphisms this is the same identification, since the factorization is a natural isomorphism of functors, and the uniqueness clause of [lem-weil-pbc-localization-universal-property] makes the identification independent of the factorization choices.",
+   "text": "Identify the right adjoint of F with the canonical constant-module direct image R of [def-weil-proetale-inverse-image]. Its coefficient map is the adjoint of the inverse-image coefficient map; homEquiv applied to homEquiv.symm rho is rho. Thus its scalar action is exactly the recorded constant-section action. Both F and the transported fixed-scalar inverse image are left adjoint to R. Adjunction.leftAdjointUniq gives their natural isomorphism. Apply this also to the inverse morphism.",
    "uses": [
-    "def-weil-abstract-derived-category",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Whisker these two identifications and then use sfIntrinsicPullbackComp, the equations inv g followed by g = identity and g followed by inv g = identity, and sfIntrinsicPullbackId. This gives a : F followed by H is isomorphic to the identity and b : H followed by F is isomorphic to the identity. Equivalence.mk F H a.symm b adjusts these quasi-inverse data to an adjoint equivalence e0. No assertion about sections of a fiber product is required separately.",
+   "uses": [
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the existing source-library construction CategoryTheory.Equivalence.mapDerivedCategory to e0. It is implemented by descending the additive exact functors termwise [lem-weil-pbc-exact-functor-derived-factorization], with unit and counit obtained from the derived identity, composition and natural-isomorphism comparisons of the source library. Those comparisons are obtained by the localization universal property [lem-weil-pbc-localization-universal-property]. Equivalence.mk provides the triangle identities. The resulting forward and inverse functors are definitionally F.mapDerivedCategory and H.mapDerivedCategory. The original ambient derived categories and specified forward functor are unchanged.",
+   "uses": [
     "lem-weil-pbc-exact-functor-derived-factorization",
-    "def-weil-derived-pullback-tensor-hom",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, Lemma lemma-right-derived-exact-functor; agent-written assembly using the existing localization universal-property node (Categories, Tag 04VG, lemma-properties-left-localization)."
-   }
-  },
-  {
-   "text": "The equivalence of module categories from [lem-weil-proetale-isomorphism-inverse-image] induces, by [lem-weil-equivalence-map-homological-complex], an equivalence of cochain-complex categories. Its unit and counit are obtained by applying $\\eta$ and $\\varepsilon$ in each degree; naturality with respect to differentials makes these chain isomorphisms, and their triangle identities hold degree by degree.",
-   "uses": [
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "lem-weil-equivalence-map-homological-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, termwise exact equivalence on complexes."
-   }
-  },
-  {
-   "text": "Write $p_K:F_DQ_YK\\xrightarrow{\\sim}Q_XC(F)K$ and $q_L:G_DQ_XL\\xrightarrow{\\sim}Q_YC(G)L$ for the factorization isomorphisms supplied by [lem-weil-pbc-exact-functor-derived-factorization]. Define $a_K=q_{C(F)K}\\circ G_D(p_K)$ and $b_L=p_{C(G)L}\\circ F_D(q_L)$. These are the natural comparison isomorphisms from $G_DF_DQ_YK$ and $F_DG_DQ_XL$ to the localized termwise composites.",
-   "uses": [
-    "lem-weil-pbc-exact-functor-derived-factorization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, factorization through derived localization."
-   }
-  },
-  {
-   "text": "By the localization universal property [lem-weil-pbc-localization-universal-property], the degreewise natural isomorphisms from step 3 lift uniquely to natural isomorphisms $\\eta^D:\\mathrm{id}\\xrightarrow{\\sim}G_DF_D$ and $\\varepsilon^D:F_DG_D\\xrightarrow{\\sim}\\mathrm{id}$. On localized representatives their components are $\\eta^D_{Q_YK}=a_K^{-1}\\circ Q_Y(\\eta^C_K)$ and $\\varepsilon^D_{Q_XL}=Q_X(\\varepsilon^C_L)\\circ b_L$.",
-   "uses": [
     "lem-weil-pbc-localization-universal-property",
-    "lem-weil-equivalence-map-homological-complex",
-    "lem-weil-pbc-exact-functor-derived-factorization"
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, lifting natural transformations through derived localization."
-   }
+   "elementary": false
   },
   {
-   "text": "The hypotheses of [lem-sfb-adjunction-localization] are exactly the factorization isomorphisms above, so it supplies the left and right triangle identities for these lifted unit and counit. Equivalently, after conjugating by $p_K$ and $q_L$, the two composites are the degreewise triangle identities $\\varepsilon^C_{C(F)K}\\circ C(F)(\\eta^C_K)=\\mathrm{id}$ and $C(G)(\\varepsilon^C_L)\\circ\\eta^C_{C(G)L}=\\mathrm{id}$. The localization detection clause in [lem-weil-pbc-localization-universal-property] then gives the identities on the derived categories.",
-   "uses": [
-    "lem-sfb-adjunction-localization",
-    "lem-weil-pbc-localization-universal-property",
-    "lem-weil-pbc-exact-functor-derived-factorization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, adjunction triangles after derived localization."
-   }
-  },
-  {
-   "text": "Here is the fully faithful and essentially surjective conclusion explicitly. For $K,L\\in D(\\mathcal A)$ and $v:F_DK\\to F_DL$, set $u=(\\eta^D_L)^{-1}\\circ G_D(v)\\circ\\eta^D_K$. Naturality of $\\varepsilon^D$ and the triangle identity $\\varepsilon^D_{F_DK}\\circ F_D(\\eta^D_K)=\\mathrm{id}$ give $F_D(u)=v$. Conversely, for $u:K\\to L$, naturality of $\\eta^D$ gives $(\\eta^D_L)^{-1}\\circ G_D(F_D(u))\\circ\\eta^D_K=u$, so this is a two-sided inverse to the map on Hom sets. For every $M\\in D(\\mathcal B)$, the component $\\varepsilon^D_M:F_DG_DM\\xrightarrow{\\sim}M$ supplies a preimage up to isomorphism. Consequently $Lg^*\\cong F_D$ is fully faithful and essentially surjective.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, Lemma lemma-right-derived-exact-functor; agent-written assembly using the existing localization universal-property node (Categories, Tag 04VG, lemma-properties-left-localization)."
-   }
-  },
-  {
-   "text": "Finally let $h:Y\\to X$ be the inverse scheme isomorphism. The direct-image formula of [def-weil-proetale-inverse-image] gives $(G\\mathcal M)(V\\xrightarrow{v}Y)=\\mathcal M(X\\times_YV\\to X)$. The fibre product here is canonically the object $(V\\xrightarrow{h\\circ v}X)$: its map to $X\\times_YV$ is $(h\\circ v,\\mathrm{id}_V)$ and its inverse is the projection to $V$; the two inverse identities follow from $gh=\\mathrm{id}_Y$ and $hg=\\mathrm{id}_X$. Part (1) of [lem-weil-proetale-isomorphism-inverse-image], applied to $h$, therefore identifies $G$ with $h^{-1}$, naturally in $V$ and $\\mathcal M$. Part (3), applied to $h$, identifies the constant coefficient rings. Under the fibre-product identification, the two coefficient maps from $A_Y$ to $GA_X$ agree: their composites with the constant presheaf send every $a\\in A$ to the same constant section $a$, so the defining uniqueness of $\\rho^g_A$ in [def-weil-proetale-inverse-image] makes them equal as sheaf maps. Thus for every object $V$ and every $s\\in A_Y(V)$, the two $A_Y(V)$-actions are restriction along this same coefficient map; the comparison on module sections commutes with that action because the fibre-product comparison acts by a module-sheaf restriction isomorphism. This proves an isomorphism of module functors, naturally on objects and morphisms. Apply it degreewise and descend the resulting natural isomorphism by [lem-weil-pbc-localization-universal-property](2). The finite-level clause of [def-weil-derived-pullback-tensor-hom], now applied to $h$, identifies the resulting termwise functor with $Lh^*$. Hence the quasi-inverse $G_D$ constructed above is termwise $g_*$ and is naturally isomorphic to $L(g^{-1})^*$, as asserted.",
+   "text": "The equivalence adjunction e0.toAdjunction and the canonical adjunction F to R have the same left adjoint. Adjunction.rightAdjointUniq gives q : H is isomorphic to R. Compose H.mapDerivedCategoryFactors with q applied degreewise and whiskered by DerivedCategory.Q. This is exactly the required factorization of the derived inverse through termwise canonical direct image. Its identification with the specified pullback along inv g is Iso.refl, since the inverse was constructed as H.mapDerivedCategory. These constructions work also for the empty scheme and the zero module and use neither invertibility-of-ell hypothesis.",
    "uses": [
     "def-weil-proetale-inverse-image",
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "lem-weil-pbc-localization-universal-property",
-    "def-weil-derived-pullback-tensor-hom"
+    "lem-weil-pbc-exact-functor-derived-factorization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A5, section-morphism (Functoriality of the pro-etale site); inverse-isomorphism specialization and explicit fibre-product comparison, followed by localization (Categories, Tag 04VG, lemma-properties-left-localization)."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-abstract-derived-category",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-proetale-operations",
   "def-weil-proetale-inverse-image",
-  "def-weil-sheaf-of-modules-category",
-  "lem-sfb-adjunction-localization",
-  "lem-weil-equivalence-map-homological-complex",
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-weil-proetale-isomorphism-inverse-image"
+  "lem-weil-pbc-localization-universal-property"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 015F (lemma-right-derived-exact-functor), combined with proetale.tex Tag 09A5 (section-morphism, Functoriality of the pro-etale site) and categories.tex Tag 04VG (lemma-properties-left-localization); explicit unit/counit descent written by the worker. Local Stacks sources are absent; official online tags, the corresponding upstream Stacks TeX labels, and the cited node statements were read."
+  "place": "Tag 015F, implemented using the published source-library Equivalence.mapDerivedCategory and exact-functor factorization API; canonical module adjunctions and finite-coefficient composition/identity comparisons give the shorter underived equivalence. S7, 2026-10-18."
  },
  "mathlib_searches": [
   {
@@ -463,9 +398,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-proetale-isomorphism-inverse-image"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -496,5 +429,15 @@
   "group": "NI",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable statements, all seven dependencies, canonical constructions, sources, universes, edge cases, docstrings, report sections, and verbatim signature. Snapshot module compiled cleanly through scompile.py in sandbox and library modes. No defects found; no branch changes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261019T005424-L-2767707",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

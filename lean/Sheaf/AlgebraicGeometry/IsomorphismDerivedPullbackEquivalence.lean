@@ -10,10 +10,9 @@ public import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteCoefficientDirectImage
-import Sheaf.CategoryTheory.RingedSiteModules
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
-import Sheaf.Paper.DerivedPullbackTensorHom
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-!
 # Derived pro-etale pullback along a scheme isomorphism
@@ -58,6 +57,51 @@ noncomputable abbrev finiteTorsionDerivedPullback
     (proEtaleConstantRing X (Padic.coefficientExtensionRing l E n))
     (asIso (proEtaleCoefficientInverseImageMap g (Padic.coefficientExtensionRing l E n)))
 
+-- The adjoint of the canonical inverse-image coefficient map is the original rho.
+private noncomputable def constantPullbackAdjunction
+    (A : Type u) [CommRing A] {X Y : Scheme.{u}} (g : X ⟶ Y) :
+    proEtaleConstantRingPullback A g ⊣ proEtaleConstantModuleDirectImage g A := by
+  have he : proEtaleRingDirectImageMap g (proEtaleConstantRing Y A)
+      (proEtaleConstantRing X A) (proEtaleConstantRingComparison g A) =
+        proEtaleCoefficientDirectImageMap g A := by
+    change (proEtaleSheafAdjunction g CommRingCat.{u + 1}).homEquiv _ _
+      (((proEtaleSheafAdjunction g CommRingCat.{u + 1}).homEquiv _ _).symm
+        (proEtaleCoefficientDirectImageMap g A)) = _
+    exact Equiv.apply_symm_apply _ _
+  have hd : proEtaleConstantRingPushforward A g = proEtaleConstantModuleDirectImage g A := by
+    unfold proEtaleConstantRingPushforward proEtaleRingModuleDirectImage
+    rw [he]
+    rfl
+  exact (proEtaleConstantRingAdjunction A g).ofNatIsoRight (eqToIso hd)
+
+-- Uniqueness of left adjoints identifies the two ordinary pullback constructions.
+private noncomputable def constantPullbackModel
+    (A : Type u) [CommRing A] [Finite A] {X Y : Scheme.{u}} (g : X ⟶ Y) :
+    proEtaleConstantRingPullback A g ≅ sfIntrinsicPullback A g :=
+  (constantPullbackAdjunction A g).leftAdjointUniq (sfIntrinsicConstantModuleAdjunction g A)
+
+-- Keep the categorical assembly abstract so kernel checking does not unfold sheaf data.
+private theorem derivedEquivalenceWithInverse
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) (H R : D ⥤ C) [F.Additive] [H.Additive] [R.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    (a : F ⋙ H ≅ 𝟭 C) (b : H ⋙ F ≅ 𝟭 D) (adj : F ⊣ R) :
+    ∃ e : DerivedCategory C ≌ DerivedCategory D,
+      e.functor = F.mapDerivedCategory ∧
+      Nonempty (DerivedCategory.Q ⋙ e.inverse ≅
+        R.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q) ∧
+      Nonempty (e.inverse ≅ H.mapDerivedCategory) := by
+  let e₀ : C ≌ D := CategoryTheory.Equivalence.mk F H a.symm b
+  have : e₀.functor.Additive := ‹F.Additive›
+  have : e₀.inverse.Additive := ‹H.Additive›
+  let q : H ≅ R := e₀.toAdjunction.rightAdjointUniq adj
+  refine ⟨e₀.mapDerivedCategory, rfl, ?_, ⟨Iso.refl _⟩⟩
+  exact ⟨H.mapDerivedCategoryFactors ≪≫
+    Functor.isoWhiskerRight (NatIso.mapHomologicalComplex q (ComplexShape.up ℤ))
+      DerivedCategory.Q⟩
+
 /-- Pullback along a scheme isomorphism is fully faithful and essentially surjective
 on the ambient unbounded derived categories of finite-torsion coefficient modules.
 The equivalence has the specified pullback as its functor and termwise canonical
@@ -101,6 +145,26 @@ theorem finiteTorsionDerivedPullback_isEquivalence_of_isIso
           (Padic.coefficientExtensionRing l E n)).mapHomologicalComplex (ComplexShape.up ℤ) ⋙
             DerivedCategory.Q) ∧
       Nonempty (e.inverse ≅ finiteTorsionDerivedPullback l E n hn (inv g)) := by
-  sorry
+  let A := Padic.coefficientExtensionRing l E n
+  let : Finite A := Padic.finite_coefficientExtensionRing l E n hn
+  let F : proEtaleRingModules Y (proEtaleConstantRing Y A) ⥤
+      proEtaleRingModules X (proEtaleConstantRing X A) := proEtaleConstantRingPullback A g
+  let H : proEtaleRingModules X (proEtaleConstantRing X A) ⥤
+      proEtaleRingModules Y (proEtaleConstantRing Y A) :=
+    proEtaleConstantRingPullback A (inv g)
+  let f : F ≅ sfIntrinsicPullback A g := constantPullbackModel A g
+  let h : H ≅ sfIntrinsicPullback A (inv g) := constantPullbackModel A (inv g)
+  let a : F ⋙ H ≅ 𝟭 _ :=
+    Functor.isoWhiskerRight f H ≪≫ Functor.isoWhiskerLeft (sfIntrinsicPullback A g) h ≪≫
+      (sfIntrinsicPullbackComp A (inv g) g).symm ≪≫
+      eqToIso (congrArg (sfIntrinsicPullback A) (IsIso.inv_hom_id g)) ≪≫
+      sfIntrinsicPullbackId A Y
+  let b : H ⋙ F ≅ 𝟭 _ :=
+    Functor.isoWhiskerRight h F ≪≫ Functor.isoWhiskerLeft (sfIntrinsicPullback A (inv g)) f ≪≫
+      (sfIntrinsicPullbackComp A g (inv g)).symm ≪≫
+      eqToIso (congrArg (sfIntrinsicPullback A) (IsIso.hom_inv_id g)) ≪≫
+      sfIntrinsicPullbackId A X
+  exact derivedEquivalenceWithInverse F H (proEtaleConstantModuleDirectImage g A) a b
+    (constantPullbackAdjunction A g)
 
 end AlgebraicGeometry.Scheme
