@@ -35,10 +35,11 @@ isomorphism.
 
 Source: the blueprint of the Weil conjectures, chapter `sec-deligne-laumon-a1`, unit
 `sk-l-dl-a1-endpoints`, node `lem-a1-spectrum-exact-sequence`, order 2732
-(blueprint: lem-a1-spectrum-exact-sequence).  The proof writes an adapted basis for the exact
-sequence, obtains a block upper-triangular Frobenius matrix, applies the determinant product for
-the invariant filtration, and factors roots of the resulting characteristic-polynomial product;
-root multiplicities therefore add, including the zero-dimensional cases.
+(blueprint: lem-a1-spectrum-exact-sequence). The proof identifies the submodule with the kernel
+of the quotient map and the quotient by this kernel with the final module. These equivariant
+linear equivalences identify their characteristic polynomials with the two factors supplied by
+`LinearMap.charpoly_eq_charpoly_restrict_mul_charpoly_mapQ`. Taking roots of the product and
+mapping along `iota` gives the result, including the zero-dimensional cases.
 -/
 theorem spectrum_exact_sequence
     (p a ell : ℕ) [Fact (Nat.Prime p)] (_ha : 1 ≤ a)
@@ -55,6 +56,32 @@ theorem spectrum_exact_sequence
     Multiset.map iota V.frobeniusEnd.charpoly.roots =
       Multiset.map iota V'.frobeniusEnd.charpoly.roots +
         Multiset.map iota V''.frobeniusEnd.charpoly.roots := by
-  sorry
+  classical
+  have hker : LinearMap.ker π = LinearMap.range ι := LinearMap.exact_iff.mp h_exact
+  have hstable : LinearMap.ker π ≤ (LinearMap.ker π).comap V.frobeniusEnd := by
+    intro x hx
+    change π (V.frobenius x) = 0
+    rw [hπF, show π x = 0 from hx, map_zero]
+  let eι : V'.carrier ≃ₗ[Qlb] LinearMap.ker π :=
+    (LinearEquiv.ofInjective ι hι).trans
+      (LinearEquiv.ofEq (LinearMap.range ι) (LinearMap.ker π) hker.symm)
+  have hsub : V'.frobeniusEnd.charpoly = (V.frobeniusEnd.restrict hstable).charpoly := by
+    apply LinearMap.charpoly_eq_of_comp_eq eι
+    ext x
+    exact hιF x
+  let eπ := π.quotKerEquivOfSurjective hπ
+  have hquot : ((LinearMap.ker π).mapQ (LinearMap.ker π) V.frobeniusEnd hstable).charpoly =
+      V''.frobeniusEnd.charpoly := by
+    apply LinearMap.charpoly_eq_of_comp_eq eπ
+    ext x
+    change π (V.frobenius x) = V''.frobenius (π x)
+    exact hπF x
+  have hchar : V.frobeniusEnd.charpoly =
+      V'.frobeniusEnd.charpoly * V''.frobeniusEnd.charpoly := by
+    rw [LinearMap.charpoly_eq_charpoly_restrict_mul_charpoly_mapQ
+      V.frobeniusEnd (LinearMap.ker π) hstable, ← hsub, hquot]
+  rw [hchar, Polynomial.roots_mul
+    (mul_ne_zero V'.frobeniusEnd.charpoly_monic.ne_zero
+      V''.frobeniusEnd.charpoly_monic.ne_zero), Multiset.map_add]
 
 end FrobeniusModule
