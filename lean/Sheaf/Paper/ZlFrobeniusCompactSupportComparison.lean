@@ -9,6 +9,12 @@ public import Sheaf.Paper.WeilCompactSupportCohomology
 public import Sheaf.Paper.QcqsCompactSupportRealization
 public import Sheaf.Paper.FieldShriekCompositionQcqs
 public import Sheaf.Paper.ImmersionWeilLocalBehavior
+import Sheaf.Paper.ZlFrameworkOpenExchange
+import Sheaf.Paper.SfIntegralConstructibleTriangulated
+import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
+import WeilConjectures.CategoryTheory.InverseMateEquivalence
+import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Frobenius comparison on completed compact-support representatives
 
@@ -36,6 +42,7 @@ variable (D : FiniteFieldDatum.{u})
   [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
   (f₀ : X₀ ⟶ Y₀) (c₀ : Compactification f₀.left)
 
+set_option linter.unusedSectionVars false in
 /-- The geometric-fibre factorization is the base change of the model factorization.
 Source: blueprint composition proof, geometric-fibre paragraph
 (blueprint: def-zl-frobenius-compact-support-comparison).
@@ -46,8 +53,17 @@ theorem zlGeometricCompactification_comm :
     zlFiberMap D f₀ =
       zlFiberMap D (zlCompactificationOpen D f₀ c₀) ≫
         zlFiberMap D (zlCompactificationProper D f₀ c₀) := by
-  sorry
+  let F := Over.pullback
+    (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))
+  have h : f₀ = zlCompactificationOpen D f₀ c₀ ≫
+      zlCompactificationProper D f₀ c₀ := by
+    apply Over.OverMorphism.ext
+    exact c₀.comm
+  exact (congrArg (fun h ↦ h.left) (congrArg F.map h)).trans
+    (congrArg (fun h ↦ h.left)
+      (F.map_comp (zlCompactificationOpen D f₀ c₀) (zlCompactificationProper D f₀ c₀)))
 
+set_option linter.unusedSectionVars false in
 /-- The geometric proper part is proper by stability under base change.
 Source: blueprint composition proof; Stacks 01W4
 (blueprint: def-zl-frobenius-compact-support-comparison).
@@ -55,8 +71,11 @@ Proof: the geometric-fibre square for the model proper map is Cartesian. Apply
 properness under base change to c₀.g; the resulting map is the displayed fibre map. -/
 theorem zlGeometricCompactification_isProper :
     IsProper (zlFiberMap D (zlCompactificationProper D f₀ c₀)) := by
-  sorry
+  exact MorphismProperty.overPullbackMap (P := @IsProper)
+    (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))
+    (zlCompactificationProper D f₀ c₀) c₀.isProper
 
+set_option linter.unusedSectionVars false in
 /-- The geometric open part is open by stability under base change.
 Source: blueprint composition proof; Stacks 01JU
 (blueprint: def-zl-frobenius-compact-support-comparison).
@@ -64,7 +83,9 @@ Proof: the geometric-fibre square for the model open map is Cartesian. Apply
 stability of open immersions under base change to c₀.i. -/
 theorem zlGeometricCompactification_isOpenImmersion :
     IsOpenImmersion (zlFiberMap D (zlCompactificationOpen D f₀ c₀)) := by
-  sorry
+  exact MorphismProperty.overPullbackMap (P := @IsOpenImmersion)
+    (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))
+    (zlCompactificationOpen D f₀ c₀) c₀.isOpenImmersion
 
 /-- Base change of the actual model compactification, retaining its middle model.
 Source: blueprint composition proof, geometric-fibre paragraph
@@ -131,6 +152,111 @@ def zlFrobeniusProperMate :
     (TwoSquare.mk _ _ _ _
       (zlAmbientFrobeniusSquare D (zlCompactificationProper D f₀ c₀) l E).inv)).natTrans
 
+open Opposite in
+private theorem pushforward_of_ringIso_isEquivalence
+    {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
+    (J : GrothendieckTopology C) (K : GrothendieckTopology D)
+    (e : C ≌ D) [e.functor.IsContinuous J K] [e.inverse.IsContinuous K J]
+    (R : Sheaf J RingCat.{u + 1}) (S : Sheaf K RingCat.{u + 1})
+    (c : S ≅ (e.inverse.sheafPushforwardContinuous RingCat.{u + 1} K J).obj R) :
+    (SheafOfModules.pushforward.{u + 1} (F := e.inverse) c.hom).IsEquivalence := by
+  let ψ : R ⟶ (e.functor.sheafPushforwardContinuous RingCat.{u + 1} J K).obj S :=
+    { hom := Functor.whiskerRight e.op.unitIso.hom R.obj ≫
+        Functor.whiskerLeft e.functor.op c.inv.hom }
+  have H₁ : Functor.whiskerRight (NatTrans.op e.symm.counit) R.obj =
+      ψ.hom ≫ e.functor.op.whiskerLeft c.hom.hom := by
+    apply NatTrans.ext
+    funext U
+    change R.obj.map _ =
+      (R.obj.map _ ≫ c.inv.hom.app _) ≫ c.hom.hom.app _
+    rw [Category.assoc]
+    have hc := congrArg (fun f ↦ f.hom.app (e.functor.op.obj U)) c.inv_hom_id
+    have hc' : c.inv.hom.app (e.functor.op.obj U) ≫
+        c.hom.hom.app (e.functor.op.obj U) = 𝟙 _ := hc
+    change R.obj.map (e.unitInv.app U.unop).op =
+      R.obj.map (e.unitInv.app U.unop).op ≫
+        (c.inv.hom.app (e.functor.op.obj U) ≫ c.hom.hom.app (e.functor.op.obj U))
+    exact (Category.comp_id _).symm.trans
+      (congrArg (fun f ↦ R.obj.map (e.unitInv.app U.unop).op ≫ f) hc'.symm)
+  have H₂ : c.hom.hom ≫ e.inverse.op.whiskerLeft ψ.hom ≫
+      Functor.whiskerRight (NatTrans.op e.symm.unit) S.obj = 𝟙 S.obj := by
+    apply NatTrans.ext
+    funext U
+    change c.hom.hom.app U ≫
+      (R.obj.map (e.unitInv.app (e.inverse.obj U.unop)).op ≫
+        c.inv.hom.app (e.functor.op.obj (e.inverse.op.obj U))) ≫
+        S.obj.map (e.counitInv.app U.unop).op = 𝟙 _
+    rw [Category.assoc]
+    have hn := c.inv.hom.naturality (e.counitInv.app U.unop).op
+    change R.obj.map (e.inverse.map (e.counitInv.app U.unop)).op ≫
+      c.inv.hom.app U =
+      c.inv.hom.app (e.functor.op.obj (e.inverse.op.obj U)) ≫
+        S.obj.map (e.counitInv.app U.unop).op at hn
+    rw [← hn]
+    have hm : R.obj.map (e.unitInv.app (e.inverse.obj U.unop)).op ≫
+        R.obj.map (e.inverse.map (e.counitInv.app U.unop)).op = 𝟙 _ := by
+      rw [← Functor.map_comp, ← op_comp]
+      simp
+    rw [← Category.assoc (R.obj.map _) (R.obj.map _) _, hm]
+    change c.hom.hom.app U ≫ 𝟙 _ ≫ c.inv.hom.app U = 𝟙 _
+    have hc : c.hom.hom.app U ≫ c.inv.hom.app U = 𝟙 _ :=
+      congrArg (fun f ↦ f.hom.app U) c.hom_inv_id
+    exact (congrArg (fun f ↦ c.hom.hom.app U ≫ f)
+      (Category.id_comp (c.inv.hom.app U))).trans hc
+  have : e.symm.functor.IsContinuous K J := inferInstanceAs (e.inverse.IsContinuous K J)
+  have : e.symm.inverse.IsContinuous J K := inferInstanceAs (e.functor.IsContinuous J K)
+  exact inferInstanceAs
+    (SheafOfModules.pushforwardPushforwardEquivalence e.symm c.hom ψ H₁ H₂).functor.IsEquivalence
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward false in
+private theorem geometricPull_isEquivalence {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
+    (R : Coefficients.{u}) : (pull R g).IsEquivalence := by
+  let adj := MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ g
+    (inferInstance : WeaklyEtale g) trivial
+  let : (MorphismProperty.Over.map (P := @WeaklyEtale) ⊤
+      (inferInstance : WeaklyEtale g)).IsEquivalence :=
+    (proEtaleIsoPostcompose_equivalence g).1
+  let : (proEtaleBaseChange g).IsEquivalence :=
+    adj.isEquivalence_right_of_isEquivalence_left
+  let e : X.ProEt ≌ Y.ProEt :=
+    { functor := proEtaleIsoPostcompose g
+      inverse := proEtaleBaseChange g
+      unitIso := asIso adj.unit
+      counitIso := asIso adj.counit
+      functor_unitIso_comp := adj.left_triangle_components }
+  let : e.functor.IsContinuous (ProEt.topology X) (ProEt.topology Y) :=
+    proEtaleIsoPostcompose_isContinuous g
+  let : e.inverse.IsContinuous (ProEt.topology Y) (ProEt.topology X) := by
+    change (proEtaleBaseChange g).IsContinuous _ _
+    infer_instance
+  let a := proEtaleSheafAdjunction g CommRingCat.{u + 1}
+  let : IsIso a.unit :=
+    (proEtaleIsoInverseImage_equivalence.{u, u + 2, 0, 0} g CommRingCat.{u + 1}).2.1
+  let : IsIso (proEtaleRingDirectImageMap g (R.ring Y) (R.ring X) (R.pull g)) := by
+    unfold proEtaleRingDirectImageMap
+    infer_instance
+  let d : R.ring Y ≅ (proEtaleSheafDirectImage g CommRingCat.{u + 1}).obj (R.ring X) :=
+    asIso (proEtaleRingDirectImageMap g (R.ring Y) (R.ring X) (R.pull g))
+  let RX := (sheafCompose (ProEt.topology X)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (R.ring X)
+  let RY := (sheafCompose (ProEt.topology Y)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (R.ring Y)
+  let c : RY ≅ (e.inverse.sheafPushforwardContinuous RingCat.{u + 1}
+      (ProEt.topology Y) (ProEt.topology X)).obj RX :=
+    (sheafCompose (ProEt.topology Y)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso d
+  let : (proEtaleRingModuleDirectImage g (R.ring Y) (R.ring X)
+      (R.pull g)).IsEquivalence :=
+    show (SheafOfModules.pushforward.{u + 1} (F := e.inverse) c.hom).IsEquivalence from
+      pushforward_of_ringIso_isEquivalence _ _ e RX RY c
+  let : (proEtaleRingModulePullback g (R.ring Y) (R.ring X)
+      (R.pull g)).IsEquivalence :=
+    (proEtaleRingModuleAdjunction g (R.ring Y) (R.ring X)
+      (R.pull g)).isEquivalence_left_of_isEquivalence_right
+  exact Functor.isEquivalence_mapDerivedCategory _
+
 /-- Both prescribed mates are invertible for geometric Frobenius.
 Source: blueprint lem-fix-weil-operations; Stacks 099N and 03DI
 (blueprint: def-zl-frobenius-compact-support-comparison).
@@ -143,7 +269,19 @@ ambient completed-ring module categories, before imposing constructibility. -/
 theorem zlFrobeniusMates_isIso :
     IsIso (zlFrobeniusOpenMate D f₀ c₀ l E) ∧
       IsIso (zlFrobeniusProperMate D f₀ c₀ l E) := by
-  sorry
+  let : (zlAmbientFrobenius D l E X₀).IsEquivalence :=
+    geometricPull_isEquivalence (D.geometricFrobenius X₀).hom (completed l E)
+  let : (zlAmbientFrobenius D l E Y₀).IsEquivalence :=
+    geometricPull_isEquivalence (D.geometricFrobenius Y₀).hom (completed l E)
+  let : (zlAmbientFrobenius D l E (zlCompactificationMiddle D f₀ c₀)).IsEquivalence :=
+    geometricPull_isEquivalence
+      (D.geometricFrobenius (zlCompactificationMiddle D f₀ c₀)).hom (completed l E)
+  constructor
+  · exact isIso_inverseMate_of_equivalences _ _
+      (zlAmbientFrobeniusSquare D (zlCompactificationOpen D f₀ c₀) l E)
+  · exact isIso_mateEquiv_of_isEquivalence _ _
+      (TwoSquare.mk _ _ _ _
+        (zlAmbientFrobeniusSquare D (zlCompactificationProper D f₀ c₀) l E).inv)
 
 /-- The canonical compact-support Frobenius comparison on completed representatives.
 It is proper exchange followed by the inverse open mate.
@@ -177,15 +315,24 @@ theorem zlAmbientFrobenius_constructible
     (K : sfIntegralConstructibleCategory l E (D.geometricFiber T₀).left) :
     sfIntegralConstructible l E (D.geometricFiber T₀).left
       ((zlAmbientFrobenius D l E T₀).obj K.obj) := by
-  sorry
+  let : ∀ x : (D.geometricFiber T₀).left,
+      Invertible (l : (D.geometricFiber T₀).left.residueField x) :=
+    fun x ↦ sfWeilPrimeInvertible D l hl T₀ x
+  let e := ZlFrameworkPbc.frameworkOpenPullRealization l E
+    (D.geometricFrobenius T₀).hom
+  exact (sfIntegralConstructible l E (D.geometricFiber T₀).left).prop_of_iso
+    (e.app K).symm ((constructibleIntegralPullback l E
+      (D.geometricFrobenius T₀).hom).obj K).property
 
+set_option linter.unusedSectionVars false in
 /-- The geometric-fibre functor respects composition.
 Source: blueprint composition proof, geometric-fibre paragraph
 (blueprint: def-zl-frobenius-compact-support-comparison).
 Proof: unfold zlFiberMap, apply Over.pullback.map_comp, and take underlying maps. -/
 theorem zlFiberMap_comp {Z₀ : Over (Spec (.of D.k₀))} (g₀ : Y₀ ⟶ Z₀) :
     zlFiberMap D (f₀ ≫ g₀) = zlFiberMap D f₀ ≫ zlFiberMap D g₀ := by
-  sorry
+  exact congrArg (fun h ↦ h.left) ((Over.pullback
+    (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map_comp f₀ g₀)
 
 /-- The composite's model compactification, with only its index equality transported.
 Its open map, proper map, and middle scheme are unchanged.

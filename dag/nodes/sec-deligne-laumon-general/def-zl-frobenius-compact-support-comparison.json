@@ -18,9 +18,72 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-composition/lem-zl-shriek-composition.proof.md",
   "place": "Composition constraint, item (3) of prop-functor-package; canonical Frobenius structures from lem-fix-weil-operations"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply Over.pullback to the compactification factorization and use map_comp, then take underlying scheme maps. MorphismProperty.overPullbackMap transports properness and the open-immersion property. The same map_comp proves zlFiberMap_comp. These arguments include empty schemes.",
+   "uses": [
+    "def-zl-weil-compact-support-cohomology",
+    "def-nagata-compactification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any scheme isomorphism g and coefficient system R, construct the pro-etale site equivalence from postcomposition and base change. The sheaf adjunction unit is invertible; its composite with the direct image of the coefficient isomorphism is therefore invertible. After forgetting commutativity this gives a ring-sheaf isomorphism. Apply SheafOfModules.pushforwardPushforwardEquivalence to it and its inverse, verifying the two compatibility equations componentwise by naturality, inverse equations and the triangle identity. This proves that the actual ringed module direct image is an equivalence, hence its left adjoint is an equivalence. Functor.isEquivalence_mapDerivedCategory gives equivalence of the specified ordinary derived pullback.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-pur-compact-support-integral-coefficient-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the preceding equivalence to geometric Frobenius on the source, middle model and target. The existing isIso_inverseMate_of_equivalences theorem proves invertibility of the prescribed open mate. The existing upstream isIso_mateEquiv_of_isEquivalence theorem, the equivalence/equivalence specialization of the general mate result, proves invertibility of the prescribed proper mate. Both use the original normalized square without changing its components.",
+   "uses": [
+    "lem-stage3-inverse-mate-equivalences",
+    "lem-weil-mate-iso-along-equivalences",
+    "def-zl-weil-ind-sheaf-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Geometric Frobenius is an isomorphism, hence a quasi-compact open immersion. Its geometric-fibre residue fields have invertible l by sfWeilPrimeInvertible. Specialize the existing frameworkOpenPullRealization to this automorphism. The constructible integral pullback lands in the defining full subcategory; transport its property across the inverse realization component using sfIntegralConstructible_isClosedUnderIsomorphisms. This proves zlAmbientFrobenius_constructible with its original hypotheses and the actual completed coefficient system.",
+   "uses": [
+    "def-zl-framework-open-exchange",
+    "lem-weil-integral-constructible-triangulated",
+    "def-weil-derived-complete-integral-detailed",
+    "def-zl-weil-ind-sheaf-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Retain the specified compact-support comparison, using the two invertible mates in proper-then-open order, and retain the completed compositor obtained by conjugating the integral compositor through the three projection-normalized support realizations. No comparison definition is changed.",
+   "uses": [
+    "lem-zl-field-shriek-composition-qcqs",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-compactification",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-zl-framework-open-exchange",
+  "def-zl-weil-compact-support-cohomology",
+  "def-zl-weil-ind-sheaf-category",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "lem-stage3-inverse-mate-equivalences",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-weil-mate-iso-along-equivalences",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-zl-field-shriek-composition-qcqs"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C1",
+  "date": "2026-10-19",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-composition/lem-zl-shriek-composition.proof.md",
+  "place": "Canonical Frobenius comparison: site and module equivalences, existing forward and inverse mate theorems, and the normalized framework open-pullback realization applied to Frobenius."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -126,5 +189,15 @@
   "group": "Q73",
   "result": "fix",
   "note": "Read node, blueprint source (order 2820 + proof), all 6 stmt_deps + new node def-zl-frobenius-compact-support-comparison, both modules, report, and the used declarations (SfCompactSupportCoefficientAction, sfFieldShriekComposition{Integral,Rational,Qbar_existsUnique}, PurCompactSupport image/pull/push/openDerivedAdjunction/geometricPullComposition/completedPull_comp, sfWeilFrobeniusPullback, zlFrobenius_naturality). Hypotheses exact; conjunct 1 is the normalized natural iso R(gf)!≅Rg!Rf! on C_Y; conjunct 2 is the Frobenius cocycle square of the canonical mate-defined comparisons with the realization-conjugated integral compositor, equivalent to the Weil-pair condition, not weaker. New node satisfies §5 fields, cites exactly its 8 landed deps, has no hollow data and no duplicate. Statements verbatim, universes bound, line width ok. nt_compile --json: rc=0 clean for delivered and fixed files. Single fix: the docstring of zlGeometricCompactification_isProper cites Stacks 01W6 (image of proper is closed); corrected to 01W4 (base change of proper) in fixes/ZlFrobeniusCompactSupportComparison.lean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261019T132225-L-1203258",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -17411,3 +17411,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:22 L: merged deliver/B2/Sheaf.AlgebraicGeometry.FullCdAmbientAdjoint (stage 3; reviewer PASS; first push; landing 20261019T132222-L-1202078 (proof); batch 20261019T132218; modules 1; new nodes 0)
 - 13:22 L: merged deliver/B3/Sheaf.Paper.NonrationalLocalizingLowerShriekComposition (stage 3; reviewer PASS; first push; landing 20261019T132223-L-1202502 (interface); batch 20261019T132218; modules 3; new nodes 2)
 - 13:22 L: merged deliver/B9/Sheaf.AlgebraicGeometry.ProjectiveMorphismChartPreimage (stage 3; reviewer PASS; first push; landing 20261019T132224-L-1202871 (proof); batch 20261019T132218; modules 1; new nodes 3)
+- 13:22 L: merged deliver/C1/Sheaf.Paper.ZlFrobeniusCompactSupportComparison (stage 3; reviewer PASS; first push; landing 20261019T132225-L-1203258 (proof); batch 20261019T132218; modules 1; new nodes 0)
