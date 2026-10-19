@@ -17179,3 +17179,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:33 L: merged deliver/E6/Sheaf.Paper.RealSheavesSetup (stage 3; reviewer PASS; first push; landing 20261019T093346-L-2301024 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:33 L: merged deliver/E7/Sheaf.RingTheory.ExcellentOfWeaklyEtale (stage 3; reviewer PASS; first push; landing 20261019T093348-L-2301389 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:33 L: merged deliver/E8/Sheaf.AlgebraicGeometry.ProEtale.ConstantRealizationDetectsZero (stage 3; reviewer PASS; after a return; landing 20261019T093349-L-2301611 (interface); batch 20261019T093237; modules 1; new nodes 0; change records: coord/changes/E8-constant-realization-warning-option.md)
+- 09:33 L: merged deliver/F1/Sheaf.Paper.PurityDiagonalBaseChangeCompared (stage 3; reviewer PASS; first push; landing 20261019T093350-L-2301804 (proof); batch 20261019T093237; modules 1; new nodes 0)
