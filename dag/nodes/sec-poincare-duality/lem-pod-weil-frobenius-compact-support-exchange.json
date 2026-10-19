@@ -31,10 +31,11 @@
    }
   },
   {
-   "text": "Fix $n\\geq1$ and work in the ambient unbounded derived categories of constant $A_{E,n}$-module sheaves. For the proper square $(p,p',g_Y,b)$, set $L=Lp^*$, $R=Rp_*$, $L'=Lp'^*$, $R'=Rp'_*$, $G=Lg_Y^*$ and $G'=Lb^*$. The adjunctions and natural square isomorphism $\\theta:L'G\\simeq G'L$ are precisely those specified in [def-exchange-projection]. Both $G$ and $G'$ are equivalences by [lem-weil-isomorphism-derived-pullback-equivalence], which applies to arbitrary scheme isomorphisms, without separatedness over a field. Thus [lem-weil-mate-iso-along-equivalences] applies, with $G$ an equivalence and $G'$ fully faithful. Its displayed unit--square--counit composite is exactly $\\operatorname{Ex}_{*,p}:Lg_Y^*Rp_*\\to Rp'_*Lb^*$ in the exchange definition. Therefore this specified direct-image exchange is a natural isomorphism, including when evaluated on $j_!K$. This is not an inference that an arbitrary mate of an isomorphism is invertible: the two horizontal equivalence hypotheses are essential here.",
+   "text": "For the exact intrinsic finite pullbacks appearing in sfExchangeShriek, construct an equivalence for every scheme isomorphism g using pullback along its inverse. The composition and identity comparisons sfIntrinsicDerivedPullbackComp and sfIntrinsicDerivedPullbackId give the two inverse-functor isomorphisms; Equivalence.mk supplies the equivalence. Apply this to g_Y and the base-changed compactifying horizontal projection. Apply isIso_mateEquiv_of_isEquivalence_of_fullyFaithful to the two actual proper adjunctions and the specified proper pullback comparison. This proves invertibility of exactly the proper mate used in finiteExchange, with no coefficient-presentation bridge or invertibility-of-l assertion needed.",
    "uses": [
     "def-exchange-projection",
-    "lem-weil-isomorphism-derived-pullback-equivalence",
+    "sk-def-sf-exchanges",
+    "lem-trf-open-square-exchange",
     "lem-weil-mate-iso-along-equivalences"
    ],
    "elementary": false,
@@ -44,11 +45,11 @@
    }
   },
   {
-   "text": "The upper open square in Step 1 satisfies [lem-cbc-proetale-extension-zero-base-change], so its canonical comparison $\\beta:Lb^*j_!\\simeq j'_!Lg_X^*$ is natural and invertible at $A_{E,n}$; finite pullback is the termwise inverse image in [def-exchange-projection]. That definition gives\n$$e_n^c=Rp'_*(\\beta)\\circ\\operatorname{Ex}_{*,p}(j_!-).$$\nThe first factor is invertible because a functor sends an inverse to an inverse, and the second is invertible by Step 2. Hence $e_n^c$ is a natural isomorphism. This finite-level assertion holds on the ambient categories; any constructibility, witness or finite-Tor restriction of the exchange inherits it. When compactification-independent finite functors are used, insert the natural comparison isomorphisms of [prop-compactification-coherence-detailed] on its stated etale-origin domain. Composing with those isomorphisms leaves the component invertible. Their hypotheses require only that $f$ be separated finite type between finite-type schemes over the field, not that the schemes be separated over that field.",
+   "text": "Unfold finiteExchange, sfExchangeShriek and compactificationExchangeFromData. The canonical open exchange is already the isomorphism proEtale_openSquareExchange in these intrinsic coordinates. Its proper image, the proper mate of Step 2, and the functor associators are invertible; composition gives the finite natural isomorphism. The statement fixes c and its base change, so no compactification-independence comparison is needed.",
    "uses": [
-    "lem-cbc-proetale-extension-zero-base-change",
     "def-exchange-projection",
-    "prop-compactification-coherence-detailed"
+    "sk-def-sf-exchanges",
+    "lem-trf-open-square-exchange"
    ],
    "elementary": false,
    "source": {
@@ -68,10 +69,11 @@
    }
   },
   {
-   "text": "Take a cone $C$ of $e$ in the ambient completed-coefficient derived category. By [lem-weil-integral-constructible-triangulated] it lies in $D^b_c(Y,\\mathcal O_E)$, since $M,N$ do (rotate the cone triangle to put $N,C,M[1]$ in that order). Derived reduction is the exact change-of-rings functor of [lem-pur-derived-change-of-rings], with $\\mathcal O=\\widehat{\\mathcal O}_{E,Y}$ and $\\mathcal O'=(A_{E,n})_Y$; hence $C\\otimes^L A_{E,n}$ is a cone of the isomorphism in Step 4 and is zero by [lem-kun-distinguished-cone-zero]. By [def-weil-derived-complete-integral-detailed] the object $C$ is derived complete. Its defining Roos triangle in [def-weil-derived-complete] therefore has the form $C\\to\\prod_n0\\to\\prod_n0\\to C[1]$. A product of zero objects is zero by the product universal property. Apply [lem-kun-distinguished-cone-zero] to this triangle: its third object is zero, so $C\\to0$ is an isomorphism. Thus $C=0$, and the same lemma applied to the cone triangle of $e$ gives that $e$ is an isomorphism. This proves detection here directly for the completed ring-sheaf coefficients; it does not identify them with condensed-module coefficients or infer equality of morphisms from their separate reductions.",
+   "text": "For an integral-domain component e, choose a distinguished cone triangle in the ambient completed-coefficient derived category. Triangulated closure places its cone C in sfIntegralConstructible. At each positive exponent, scalarReductionDerivedExistence supplies the shift structure and triangulatedness of the actual scalarReductionDerivedExtension, so the mapped cone triangle and invertibility of the reduction of e show its third object is zero. The completeness clause of sfIntegralConstructible is IsSfDerivedComplete. Unpack its canonical Roos triangle. Exact termwise scalar restriction preserves zero objects (sfRestrictionLimits and sfRestrictionColimits), so every restricted reduction of C is zero. Product extensionality makes the identity of their product zero. The first-object zero criterion in this Roos triangle gives IsZero C; the cone-zero criterion then makes e invertible. Reflect this through the two full-subcategory inclusions with ObjectProperty.isIso_hom_iff.",
    "uses": [
     "lem-weil-integral-constructible-triangulated",
-    "lem-pur-derived-change-of-rings",
+    "def-weil-integral-derived-reduction",
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
     "def-weil-derived-complete-integral-detailed",
     "def-weil-derived-complete",
     "lem-kun-distinguished-cone-zero"
@@ -101,20 +103,20 @@
   "def-weil-algebraically-closed-coefficients",
   "def-weil-derived-complete",
   "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-derived-reduction",
   "def-weil-rationalization-karoubi",
-  "lem-cbc-proetale-extension-zero-base-change",
   "lem-kun-distinguished-cone-zero",
-  "lem-pur-derived-change-of-rings",
+  "lem-trf-open-square-exchange",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
   "lem-weil-frobenius-square-cartesian",
   "lem-weil-integral-constructible-triangulated",
-  "lem-weil-isomorphism-derived-pullback-equivalence",
   "lem-weil-mate-iso-along-equivalences",
-  "prop-compactification-coherence-detailed"
+  "sk-def-sf-exchanges"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-  "place": "Sentence 1, expanded by the proper/open compactification formula, the existing abstract mate lemma, and a direct completed-coefficient reduction-cone argument"
+  "place": "Sentence 1, implemented by intrinsic pullback composition/identity, the specified proper mate and canonical open exchange, the exact scalar-reduction cone and canonical Roos triangle, and functorial images of inverses at the rational/common stages; F6, 2026-10-19"
  },
  "mathlib_searches": [
   {
@@ -253,12 +255,8 @@
  },
  "tool_uses": [
   "lem-weil-frobenius-square-cartesian",
-  "lem-weil-isomorphism-derived-pullback-equivalence",
   "lem-weil-mate-iso-along-equivalences",
-  "lem-cbc-proetale-extension-zero-base-change",
-  "prop-compactification-coherence-detailed",
-  "lem-weil-integral-constructible-triangulated",
-  "lem-pur-derived-change-of-rings"
+  "lem-weil-integral-constructible-triangulated"
  ],
  "reviewed": {
   "date": "2026-10-18",
@@ -308,5 +306,15 @@
   "existing": false,
   "note": "The rational and commonStage_isIso declarations give the two coefficient clauses. The supplied-domain helpers reuse ExchangeProjectionStage.compactExchange, actual completed-ring operations, scalar localization and literal common-stage inclusions. The finite reduction comparison is to the canonical sfExchangeShriek for the actual Cartesian Frobenius square; no exchange arrow is chosen from reduction data. The added landed sk-def-sf-exchanges dependency owns sfExchangeShriek. There is no separatedness hypothesis on either model.",
   "fixed_by": "NT-stage2-cc-aa500fa77"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-ad171",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261019T093400-L-2303510",
+  "kind": "proof",
+  "note": "independent cc review: delivered FrobeniusCompactSupportExchange.lean vs live (imports + 4 private helpers + 2 filled sorries, signatures identical); node diff vs live (proof fields only); removed unit-route imports vs dag/units realized and remaining importers; #print axioms (sorryAx inherited from upstream defs/finiteExchange)"
  }
 }

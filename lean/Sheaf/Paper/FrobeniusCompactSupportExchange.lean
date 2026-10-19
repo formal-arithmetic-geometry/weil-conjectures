@@ -10,19 +10,9 @@ public import Sheaf.Paper.QcqsCompactSupportRealization
 public import Sheaf.Paper.ExchangeProjectionSuppliedDomains
 public import Sheaf.AlgebraicGeometry.SfEtaleExchanges
 public import Sheaf.SixFunctors.FrobeniusSquareCartesian
-import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
-import Sheaf.Paper.DerivedCompleteOnSlices
-import Sheaf.Paper.SfIntegralConstructible
-import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
-import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 import Sheaf.Paper.SfDerivedComplete
-import Sheaf.Paper.SfRationalizationKaroubi
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.Paper.SfIntegralConstructibleTriangulated
-import Sheaf.AlgebraicGeometry.IsomorphismDerivedPullbackEquivalence
 import Sheaf.CategoryTheory.MateIsoAlongEquivalences
-import Sheaf.Paper.CompactificationCoherence
 
 /-! # Compact-support exchange for geometric Frobenius
 
@@ -248,6 +238,84 @@ structure RationalData where
       Arrow.mk ((sfRationalConstructibleLocalization l E (D.geometricFiber Y₀).left).map
         (I.base'.ι.map (I.stage.compactExchange.app (integralRepresentative l E K))))
 
+private theorem intrinsicPullback_isEquivalence (A : Type u) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
+    (sfIntrinsicDerivedPullback A g).IsEquivalence := by
+  let F := sfIntrinsicDerivedPullback A g
+  let H := sfIntrinsicDerivedPullback A (inv g)
+  let a : F ⋙ H ≅ 𝟭 _ :=
+    (sfIntrinsicDerivedPullbackComp A (inv g) g).symm ≪≫
+      eqToIso (congrArg (sfIntrinsicDerivedPullback A) (IsIso.inv_hom_id g)) ≪≫
+      sfIntrinsicDerivedPullbackId A Y
+  let b : H ⋙ F ≅ 𝟭 _ :=
+    (sfIntrinsicDerivedPullbackComp A g (inv g)).symm ≪≫
+      eqToIso (congrArg (sfIntrinsicDerivedPullback A) (IsIso.hom_inv_id g)) ≪≫
+      sfIntrinsicDerivedPullbackId A X
+  exact (CategoryTheory.Equivalence.mk F H a.symm b).isEquivalence_functor
+
+private theorem finiteExchange_isIso (n : ℕ) :
+    IsIso (finiteExchange D X₀ Y₀ f₀ c l E n) := by
+  let A := Padic.coefficientExtensionRing l E (n + 1)
+  let : Finite A := Padic.finite_coefficientExtensionRing l E (n + 1)
+    (Nat.le_add_left 1 n)
+  let g := (D.geometricFrobenius Y₀).hom
+  let b := pullback.fst c.g g
+  have : IsIso b := inferInstanceAs (IsIso (pullback.fst c.g g))
+  have := intrinsicPullback_isEquivalence A g
+  have := intrinsicPullback_isEquivalence A b
+  have := isIso_mateEquiv_of_isEquivalence_of_fullyFaithful
+    (sfIntrinsicConstantModuleAdjunction c.g A).mapDerivedCategoryRightDerivedAdjunction
+    (sfIntrinsicConstantModuleAdjunction
+      (c.ofIsPullback (square D X₀ Y₀ f₀)).g A).mapDerivedCategoryRightDerivedAdjunction
+    (sfIntrinsicDerivedPullback A g) (sfIntrinsicDerivedPullback A b)
+    (sfIntrinsicDerivedSquarePullback A b
+      (c.ofIsPullback (square D X₀ Y₀ f₀)).g c.g g
+      (IsPullback.of_hasPullback c.g g).w).symm
+  dsimp only [finiteExchange, sfExchangeShriek, compactificationExchangeFromData]
+  infer_instance
+
+private theorem integral_isIso_of_reductions (Y : Scheme.{u})
+    {M N : sfIntegralConstructibleCategory l E Y} (f : M ⟶ N)
+    (h : ∀ n, IsIso ((scalarReductionDerivedExtension l E Y n).map f.hom)) :
+    IsIso f := by
+  let P := sfIntegralConstructible l E Y
+  obtain ⟨C, g, δ, hT⟩ := Pretriangulated.distinguished_cocone_triangle f.hom
+  let T := Pretriangulated.Triangle.mk f.hom g δ
+  have hC : P C := P.ext_of_isTriangulatedClosed₃ T hT M.property N.property
+  have hz (n : ℕ) : IsZero ((sfDerivedReductionRestricted l E Y n).obj C) := by
+    let F := scalarReductionDerivedExtension l E Y n
+    obtain ⟨hs, ht⟩ :=
+      (scalarReductionDerivedExistence l E Y n).choose_spec.choose_spec.2.1
+    let : F.CommShift ℤ := hs
+    have : F.IsTriangulated := ht
+    have hz := (Pretriangulated.Triangle.isZero₃_iff_isIso₁
+      (F.mapTriangle.obj T) (F.map_distinguished T hT)).mpr (h n)
+    let := sfRestrictionLimits l E Y n
+    let := sfRestrictionColimits l E Y n
+    change IsZero (((scalarReductionRestriction l E Y n).mapDerivedCategory).obj _)
+    exact (scalarReductionRestriction l E Y n).mapDerivedCategory.map_isZero hz
+  obtain ⟨hp, δc, hc⟩ := hC.1
+  let := hp
+  have hprod : IsZero (∏ᶜ fun n ↦ (sfDerivedReductionRestricted l E Y n).obj C) := by
+    apply (IsZero.iff_id_eq_zero _).mpr
+    apply Pi.hom_ext
+    intro n
+    exact (hz n).eq_of_tgt _ _
+  have hzero : IsZero C :=
+    Pretriangulated.Triangle.isZero₁_of_isZero₂₃ _ hc hprod hprod
+  exact (ObjectProperty.isIso_hom_iff _).mp
+    ((Pretriangulated.Triangle.isZero₃_iff_isIso₁ T hT).mp hzero)
+
+private theorem integralExchange_isIso : IsIso I.stage.compactExchange := by
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro K
+  apply (ObjectProperty.isIso_hom_iff _).mp
+  apply integral_isIso_of_reductions l E
+  intro n
+  have := finiteExchange_isIso D X₀ Y₀ f₀ c l E n
+  obtain ⟨e⟩ := I.reduction n K
+  exact (Arrow.isIso_iff_isIso_of_isIso e.hom).mpr (by infer_instance)
+
 /-- The specified rational compact-support Frobenius exchange is a natural isomorphism
 on every supplied closed full operation domain. No separatedness of either model is
 assumed. The finite-Tor and coefficient requirements are those retained in the data.
@@ -283,7 +351,12 @@ def-weil-rationalization-karoubi and def-weil-algebraically-closed-coefficients.
 theorem rational_isIso (_hl : l ≠ D.p)
     [IsSeparated f₀.left] [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left]
     (R : RationalData D X₀ Y₀ f₀ c l E I) : IsIso R.stage.compactExchange := by
-  sorry
+  have := integralExchange_isIso D X₀ Y₀ f₀ c l E I
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro K
+  apply (ObjectProperty.isIso_hom_iff _).mp
+  exact (Arrow.isIso_iff_isIso_of_isIso (R.coefficientComparison K).hom).mpr
+    (by infer_instance)
 
 
 section CommonStage
@@ -431,7 +504,12 @@ def-weil-rationalization-karoubi and def-weil-algebraically-closed-coefficients.
 theorem commonStage_isIso (_hl : l ≠ D.p)
     [IsSeparated f₀.left] [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left]
     (Q : CommonData D X₀ Y₀ f₀ c l Ω Is Rs) : IsIso Q.1.compactExchange := by
-  sorry
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro K
+  have := rational_isIso D X₀ Y₀ f₀ c l (Coefficient.{u} l Ω K.obj.stage)
+    (Is K.obj.stage) _hl (Rs K.obj.stage)
+  apply (ObjectProperty.isIso_hom_iff _).mp
+  exact (Arrow.isIso_iff_isIso_of_isIso (Q.2.2 K).hom).mpr (by infer_instance)
 
 end CommonStage
 end PodFrobeniusExchange
