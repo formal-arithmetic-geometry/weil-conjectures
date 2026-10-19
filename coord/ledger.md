@@ -17093,3 +17093,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:39 L: returned deliver/Q49/lem-per-finite-coefficient-dual-constructible (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-per-finite-coefficient-dual-constructible: review_)
 - 05:48 L: returned deliver/N7/lem-tw-lisse-rational-realization (reviewer RETURN: L: independent stage-2 immutable head d7b42f7cdfbd: Byte-identical (sha256 787e4e0b) re-delivery of 07e0057e6c after a s)
 - 05:54 L: merged deliver/NA/lem-per-finite-compact-support-fibre-support-bound (stage 2; reviewer PASS; parallel immutable checks)
+- 05:57 L: merged deliver/Q107/lem-coef-finite-free-extension (stage 2; reviewer PASS; parallel immutable checks)
+- 05:57 L: merged deliver/Q14/lem-a1-qbar-curve-duality (stage 2; reviewer PASS; parallel immutable checks)
