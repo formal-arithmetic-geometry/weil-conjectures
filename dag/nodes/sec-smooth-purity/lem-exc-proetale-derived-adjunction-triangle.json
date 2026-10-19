@@ -3,124 +3,65 @@
  "status": "split",
  "proof": [
   {
-   "text": "Put $\\mathcal M_S=\\operatorname{Mod}(A_S)$ and write $r_N:N\\to j_*j^*N$ and $k_N:F(N)\\to N$. Kernels in these categories are sectionwise [def-weil-sheaf-of-modules-category]. If $V\\to U$ is a pro-etale object, then $V\\times_T U=V$ canonically, and the direct-image formula of [def-weil-proetale-inverse-image] identifies $r_N(V)$ with the identity of $N(V)$. Since $j^*$ is restriction by hypothesis, $j^*F(N)=0$. For $a:N\\to N'$, naturality of $r$ gives a unique map $F(a)$ with $k_{N'}F(a)=ak_N$; uniqueness proves the functor identities and $F(a+b)=F(a)+F(b)$. The exact transported inverse image $i^*$ of [prop-weil-pbc-proetale-constant-exact] is additive, hence so is $H=i^*F$. Denote by $\\theta_N:F(N)\\xrightarrow{\\sim}i_*H(N)$ the closed unit, an isomorphism by the supported-unit hypothesis. Naturality of that unit makes $\\theta$ natural. Thus $e_N=k_N\\theta_N^{-1}:i_*H(N)\\to N$ is natural.",
+   "text": "Evaluate the kernel inclusion k_N on an object v(W) over the open. The actual open-unit normalization in hRestriction and k_N followed by the unit equal to zero show that restriction of k_N(x) along p:v(u(v(W)))→v(W) is zero. The composition/base-change adjunction supplies b with b≫p=1 by its left triangle identity. Restricting once more along b gives k_N(x)=0. Evaluation preserves the monic kernel inclusion, so x=0. The additive equivalence rho then makes j*F(N) zero. Apply hSupported, and whisker the closed unit with F to obtain theta with precisely the required components.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
     "def-weil-proetale-inverse-image",
     "prop-weil-pbc-proetale-constant-exact"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-exc-proetale-support-triangle.proof.md",
-    "place": "First sentence: the sheaf-level supported functor; explicit sectionwise kernel calculation"
-   }
+   "elementary": true
   },
   {
-   "text": "For $h:i_*M\\to N$, naturality of $r$ gives $r_Nh=j_*j^*(h)r_{i_*M}=0$, because $j^*i_*M=0$ by hypothesis. The kernel property gives a unique $\\bar h:i_*M\\to F(N)$ with $k_N\\bar h=h$. Full faithfulness of $i_*$ gives a unique $g:M\\to H(N)$ with $i_*g=\\theta_N\\bar h$. Conversely send $g$ to $e_N i_*g$. Starting from $h$, this returns $k_N\\bar h=h$. Starting from $g$, the kernel factor of $e_N i_*g$ is $\\theta_N^{-1}i_*g$, so full faithfulness returns $g$. These inverse bijections are natural: precomposition is respected by the unique kernel factor and the unique fully faithful lift, and postcomposition is respected by naturality of $k$ and $\\theta$. This constructs $i_*\\dashv H$. The inverse bijection sends $1_{H(N)}$ to $e_N$, so its counit is precisely the claimed supported-unit inverse followed by the kernel inclusion. Every map is a morphism of left module sheaves; no multiplication of coefficients is interchanged.",
+   "text": "For f:i*M→N, naturality of the open unit and hVanishing give f≫r_N=0. Define the transpose by the fully faithful preimage of kernel.lift(r_N,f)≫theta_N. Its inverse sends g to i*(g)≫theta_N inverse≫k_N. The kernel lifting equation, theta inverse identities and faithfulness prove both inverse laws. Naturality follows by kernel cancellation and naturality of theta. Adjunction.mkOfHomEquiv constructs the adjunction and computes its counit as theta inverse followed by the kernel inclusion.",
    "uses": [
     "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-exc-proetale-support-triangle.proof.md",
-    "place": "First sentence, identification of the sheaf right adjoint: kernel factorization and the explicit counit"
-   }
+   "elementary": true
   },
   {
-   "text": "Both adjoints are additive: $H$ was checked above and $i_*$ is additive by its sectionwise direct-image formula. Apply [lem-weil-pbc-termwise-adjunction-homotopy] to $v=i_*$ and $u=H$. It gives an adjunction on homotopy categories whose counit at a complex $I$ is the class of the chain map $e_I=(e_{I^q})_q$. In particular this is a chain map, not merely a list of sheaf morphisms. Since the left adjoint $i_*$ is exact by hypothesis, [lem-weil-pbc-right-adjoint-preserves-kinjective] applies to this same sheaf adjunction and shows that $H(I)$ is K-injective whenever $I$ is K-injective. Its exact-left-adjoint hypothesis is satisfied on the whole abelian category, with no boundedness restriction.",
-   "uses": [
-    "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08BJ, lemma-adjoint-preserve-K-injectives, statement and Hom-adjunction display in its proof"
-   }
-  },
-  {
-   "text": "For each $S=T,Z$, the site and ring sheaf in the statement are small relative to the chosen module universe. The arbitrary-ring theorem [lem-weil-pbc-ring-sheaves-grothendieck] therefore makes $\\mathcal M_S$ Grothendieck abelian. Apply [lem-weil-pbc-kinjective-functorial-existence] to obtain a quasi-isomorphism from every complex of $\\mathcal M_S$ to a K-injective complex. This applies to the left $A_S$-module categories even when $A$ is noncommutative: the first cited statement expressly has no commutativity assumption, and the second is a theorem for any Grothendieck abelian category. Consequently every object of either ordinary unbounded derived category can be represented by a K-injective complex.",
+   "text": "The universe-polymorphic arbitrary-ring module-sheaf theorem gives IsGrothendieckAbelian for the actual finite-coefficient category on T, with coefficient/module universe u+1 and site object/morphism universes u+1,u. The Grothendieck K-injective-resolution instance applies. Exactness of closed pushforward and Adjunction.preservesKInjectiveComplexes show H sends every K-injective complex to a K-injective complex.",
    "uses": [
     "lem-weil-pbc-ring-sheaves-grothendieck",
-    "lem-weil-pbc-kinjective-functorial-existence"
+    "lem-weil-pbc-kinjective-functorial-existence",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Tag 079Q, remark-existence-D, last sentence; Tag 079P, theorem-K-injective-embedding-grothendieck"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $H_h:K(\\mathcal M_T)\\to K(\\mathcal M_Z)$ denote the termwise functor from step 3. To check the exactness hypothesis of [lem-weil-pbc-kinjective-total-derived], use the cone and shift formulas of [def-weil-abstract-derived-category]. Additivity identifies $H(\\operatorname{Cone}(f))^q$ with $H(L^q)\\oplus H(K^{q+1})$ and its differential with $\\left(\\begin{smallmatrix}H(d_L)&H(f)\\\\0&-H(d_K)\\end{smallmatrix}\\right)$, the differential of $\\operatorname{Cone}(H(f))$. It preserves the inclusion and minus-projection of the cone triangle, and $H(-d)=-H(d)$ identifies shifts. Thus $H_h$ carries cone triangles to cone triangles. By [lem-pur-homotopy-category-triangulated], these generate the distinguished triangles and $Q_Z$ is exact. Hence $Q_ZH_h$ is an exact functor of triangulated categories in the sense of [def-weil-triangulated-category]. Step 4 supplies enough K-injectives, so [lem-weil-pbc-kinjective-total-derived] gives $RH$ and its natural comparison $\\beta_C:Q_ZH(C)\\to RH(Q_TC)$, with $\\beta_I$ invertible for every K-injective $I$. This is the asserted computation $RH(Q_TI)=Q_ZH(I)$ under that comparison.",
+   "text": "Use the existing unbounded rightDerivedFunctor H and its homotopy-category unit. The canonical mapHomotopyCategoryFactors and quotientCompQhIso give the comparison beta on complexes. Precomposition with the homotopy quotient is fully faithful on functor categories: explicitly lift a transformation through its full whiskering functor and prove uniqueness by faithfulness. The proved private Kan-extension helper and isLeftKanExtension_iff_postcompose transport the right-derived universal property to complexes, also after postcomposition with exact closed pushforward. The comparison beta is invertible on each K-injective complex by the existing K-injective derivability structure.",
    "uses": [
-    "def-weil-abstract-derived-category",
-    "lem-pur-homotopy-category-triangulated",
-    "def-weil-triangulated-category",
-    "lem-weil-pbc-kinjective-total-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 014S (proposition-homotopy-category-triangulated), 070K (lemma-enough-K-injectives-implies), 070Y (lemma-K-injective-defined)"
-   }
-  },
-  {
-   "text": "By exactness of $i_*$ and [lem-sf-exact-functor-derived-triangulated], termwise pushforward descends to $i_*^D$, with the canonical comparison $a_M:i_*^D(Q_ZM)\\xrightarrow{\\sim}Q_T(i_*M)$. For an arbitrary complex $M$ on $Z$ and a K-injective $I$ on $T$, the K-injectivity of $I$ and $H(I)$ from step 3 permits two applications of [lem-weil-pbc-kinjective-hom-derived]. Together with [lem-weil-pbc-termwise-adjunction-homotopy] they give bijections\n$$\\operatorname{Hom}_{D(T)}(i_*^D Q_ZM,Q_TI)\\cong\\operatorname{Hom}_{K(T)}(i_*M,I)\\cong\\operatorname{Hom}_{K(Z)}(M,H(I))\\cong\\operatorname{Hom}_{D(Z)}(Q_ZM,Q_ZH(I)).$$\nHere the first bijection uses $a_M$; the middle one is exactly the sheaf adjunction lifted in step 3. Postcomposing the last Hom set by $\\beta_I$ gives the desired Hom set with target $RH(Q_TI)$. Explicitly, a homotopy class $[h]:i_*M\\to I$ is sent to $\\beta_I\\,Q_Z(\\operatorname{adj}(h))$.",
-   "uses": [
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-termwise-adjunction-homotopy"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 015F (lemma-right-derived-exact-functor), 070I (lemma-K-injective), 08BJ (lemma-adjoint-preserve-K-injectives, Hom display)"
-   }
-  },
-  {
-   "text": "The preceding bijections are natural on complexes by the termwise adjunction. For a chain map $f:I\\to I'$ between K-injectives, naturality of the derived comparison says $RH(Q_Tf)\\beta_I=\\beta_{I'}Q_ZH(f)$, so they are also natural in the resolved target. Every derived morphism between such targets comes from a unique homotopy class by [lem-weil-pbc-kinjective-hom-derived], hence this checks all target morphisms. In the source variable the same naturality equation holds for every chain map. Both sides send a quasi-isomorphism in that variable to a bijection: $Q_Z$ inverts it and the functor $i_*^D$ preserves isomorphisms. Naturality therefore holds for inverses of these maps as well, and hence for all morphisms of the localization [def-weil-abstract-derived-category]. Finally, step 4 gives a K-injective representative for every target object. Transport along such representatives is independent of the representative, since the induced isomorphism between any two representatives is already among the target morphisms just checked. We have a bifunctorial Hom bijection on the two full derived categories, which is the adjunction $i_*^D\\dashv RH$.",
-   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
     "lem-weil-pbc-kinjective-hom-derived",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 070I (lemma-K-injective) and 09T5 (lemma-derived-adjoint-functors); explicit descent of the K-injective Hom bijection"
-   }
+   "elementary": false
   },
   {
-   "text": "Set $M=H(I)$ in step 6. The termwise counit class $[e_I]:i_*H(I)\\to I$ is sent by the homotopy adjunction to $[1_{H(I)}]$. Therefore $Q_T(e_I)\\,a_{H(I)}$ is sent by our derived Hom bijection to $\\beta_I$. By naturality in its first argument, the morphism\n$$Q_T(e_I)\\,a_{H(I)}\\,i_*^D(\\beta_I^{-1}):i_*^D RH(Q_TI)\\longrightarrow Q_TI$$\nis sent to the identity of $RH(Q_TI)$, so it is the derived counit. Under $a$ and $\\beta$ this is exactly $Q_T(e_I)$, as claimed. Step 2 identified every component of $e_I$ as $k_{I^q}\\theta_{I^q}^{-1}$, so the map is the specified kernel inclusion after the supported-unit isomorphism. Moreover $i_*^D(\\beta_I)\\,a_{H(I)}^{-1}$ is the asserted canonical identification $Q_Ti_*H(I)\\xrightarrow{\\sim}i_*^D RH(Q_TI)$. Thus both the object and the arrow agree with the derived-functor comparisons, not just with an unspecified right adjoint.",
+   "text": "Exactness supplies mapDerivedCategory and its factorization isomorphism. An invertible factorization is an absolute left-derived comparison. Apply Mathlib Adjunction.derived to the termwise complex adjunction, this exact-left comparison, and beta; the preceding step supplies the required right-derived absoluteness. Define c as the inverse exact-pushforward factorization followed by pushforward of asIso(beta_I). Adjunction.derivedε_fac_app identifies pushforward(beta_I) followed by the derived counit with the exact factorization followed by Q of the termwise counit. Precompose with the inverse factorization and cancel to obtain the stated final equality.",
    "uses": [
-    "lem-weil-pbc-termwise-adjunction-homotopy"
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-exc-proetale-support-triangle.proof.md",
-    "place": "First sentence and final sentence: identify the ambient right adjoint and the first arrow of the associated triangle"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-sheaf-of-modules-category",
   "def-weil-proetale-inverse-image",
   "prop-weil-pbc-proetale-constant-exact",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
   "lem-weil-pbc-ring-sheaves-grothendieck",
   "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-kinjective-hom-derived",
   "def-weil-abstract-derived-category",
-  "lem-pur-homotopy-category-triangulated",
-  "def-weil-triangulated-category",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-kinjective-hom-derived"
+  "lem-sf-exact-functor-derived-triangulated"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-exc-proetale-support-triangle.proof.md",
-  "place": "First and last sentences; explicit sheaf kernel-factorization, K-injective Hom bijections and counit calculation, with Stacks Tags 08BJ, 070I, 070K, 070Y, 079P, 079Q and 015F"
+  "place": "First and last sentences, implemented by J8 using kernel Hom equivalences, the existing unbounded K-injective right-derived API, Mathlib derived adjunction and its counit factorization formula."
  },
  "mathlib_match": null,
  "created": {
@@ -262,8 +203,7 @@
   "lem-weil-pbc-termwise-adjunction-homotopy",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
   "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-weil-pbc-kinjective-functorial-existence",
-  "lem-weil-pbc-kinjective-total-derived"
+  "lem-weil-pbc-kinjective-functorial-existence"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -291,5 +231,15 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "Reuses the already landed finiteSupportedKernel, finiteSupportedH and canonical finiteModuleAdjunction. The two added landed statement dependencies supply these constructions and the coefficient-independent open-site composition/projection helpers; no theorem of either dependency is assumed beyond the original hypotheses. All derived equalities are expressed by the specified comparison maps and the counit equation."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261019T002633-L-2171409",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

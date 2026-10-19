@@ -16730,3 +16730,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:26 L: merged deliver/J5/Sheaf.Paper.LocalizingExceptionalAdjoint (stage 3; reviewer PASS; first push; landing 20261019T002629-L-2168711 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:26 L: merged deliver/J6/Sheaf.AlgebraicGeometry.OpenComparisonTensorNormalization (stage 3; reviewer PASS; first push; landing 20261019T002630-L-2169383 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:26 L: merged deliver/J6/Sheaf.AlgebraicGeometry.StalkFaithfulDerived (stage 3; reviewer PASS; first push; landing 20261019T002631-L-2170055 (proof); batch 20261019T002449; modules 1; new nodes 0)
+- 00:26 L: merged deliver/J8/Sheaf.AlgebraicGeometry.ProEtaleDerivedSupportAdjunction (stage 3; reviewer PASS; first push; landing 20261019T002633-L-2171409 (proof); batch 20261019T002449; modules 1; new nodes 0)

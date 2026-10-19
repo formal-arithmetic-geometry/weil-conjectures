@@ -13,12 +13,10 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # The supported-kernel adjunction and its unbounded derived counit
@@ -43,6 +41,31 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.ProEtale
+
+private theorem kan_of_full_whiskering
+    {C D E : Type*} [Category* C] [Category* D] [Category* E]
+    (L : C ⥤ D) (G : D ⥤ E)
+    [((Functor.whiskeringLeft C D E).obj L).Full]
+    [((Functor.whiskeringLeft C D E).obj L).Faithful]
+    {F : C ⥤ E} (e : F ≅ L ⋙ G) : G.IsLeftKanExtension e.hom := by
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
+  let W := (Functor.whiskeringLeft C D E).obj L
+  refine ⟨⟨IsInitial.ofUniqueHom
+    (fun Y ↦ StructuredArrow.homMk (W.preimage (e.inv ≫ Y.hom)) ?_) ?_⟩⟩
+  · change e.hom ≫ W.map (W.preimage (e.inv ≫ Y.hom)) = Y.hom
+    rw [W.map_preimage]
+    simp
+  · intro Y m
+    apply StructuredArrow.hom_ext
+    apply W.map_injective
+    change W.map m.right = W.map (W.preimage (e.inv ≫ Y.hom))
+    rw [W.map_preimage]
+    have h := m.w
+    change e.hom ≫ W.map m.right = Y.hom at h
+    rw [← h]
+    simp
+
 
 /-- Closed pushforward is left adjoint to H = i* ker(1 → j*j*), with the specified
 supported-kernel counit, and its termwise descent is left adjoint to the total right
@@ -163,6 +186,187 @@ theorem finiteSupportedH_derivedAdjunction
                   (finiteModulePushforward i A).mapDerivedCategory.map (beta.app I) ∧
                 c.hom ≫ derivedAdj.counit.app (DerivedCategory.Q.obj I) =
                   DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).counit.app I) := by
-  sorry
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
+  classical
+  have _hComplement := hU
+  let F := finiteSupportedKernel j A
+  let L := finiteModulePushforward i A
+  let H := finiteSupportedH i j A
+  let r := (finiteModuleAdjunction j A).unit
+  have hker (N : FiniteCoefficientModules T A) :
+      IsZero ((finiteCoefficientModulePullback j A).obj (F.obj N)) := by
+    obtain ⟨d, _, rho, _, _, _, hunit⟩ := hRestriction
+    have hsections (W : U.ProEt)
+        (x : (F.obj N).val.obj (op ((Scheme.proEtaleOpenComposition j).obj W))) : x = 0 := by
+      let V := (Scheme.proEtaleOpenComposition j).obj W
+      let k := kernel.ι (r.app N)
+      let a := MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ j
+        (inferInstance : WeaklyEtale j) trivial
+      let b := (Scheme.proEtaleOpenComposition j).map (a.unit.app W)
+      have hbp : b ≫ Scheme.proEtaleOpenSectionProjection j V = 𝟙 V :=
+        a.left_triangle_components W
+      have hx : k.val.app (op V) x = 0 := by
+        have hc := congrArg (fun f ↦ f.val.app (op V) x) (kernel.condition (r.app N))
+        change (r.app N).val.app (op V) (k.val.app (op V) x) = 0 at hc
+        have hp := hunit N V (k.val.app (op V) x)
+        rw [hc, map_zero] at hp
+        have hb := congrArg (fun y ↦ N.val.map b.op y) hp.symm
+        have hh := N.val.map_comp_apply
+          (Scheme.proEtaleOpenSectionProjection j V).op b.op (k.val.app (op V) x)
+        rw [← op_comp, hbp] at hh
+        change N.val.map (𝟙 (op V)) (k.val.app (op V) x) = _ at hh
+        have hh' : k.val.app (op V) x = N.val.map b.op
+            (N.val.map (Scheme.proEtaleOpenSectionProjection j V).op
+              (k.val.app (op V) x)) := by
+          simp only [N.val.map_id, ModuleCat.restrictScalarsId',
+            NatIso.ofComponents_inv_app, ModuleCat.restrictScalarsId'App_inv_apply] at hh
+          exact hh
+        exact hh'.trans (by simpa only [map_zero] using hb)
+      let E := SheafOfModules.evaluation (finiteCoefficientRingSheaf T A) (op V)
+      have : Mono (E.map k) := inferInstance
+      apply ((ModuleCat.mono_iff_injective (E.map k)).mp inferInstance)
+      exact hx.trans (map_zero _).symm
+    apply (IsZero.iff_id_eq_zero _).mpr
+    ext ⟨W⟩ m
+    change m = 0
+    apply (rho (F.obj N) W).injective
+    exact (hsections W _).trans (map_zero _).symm
+  have htheta (N : FiniteCoefficientModules T A) :
+      IsIso ((finiteModuleAdjunction i A).unit.app (F.obj N)) := hSupported _ (hker N)
+  let theta : F ≅ H ⋙ L :=
+    NatIso.ofComponents (fun N ↦ asIso ((finiteModuleAdjunction i A).unit.app (F.obj N)))
+      (fun {N N'} a ↦ (finiteModuleAdjunction i A).unit.naturality (F.map a))
+  have hz (M : FiniteCoefficientModules Z A) (N : FiniteCoefficientModules T A)
+      (f : L.obj M ⟶ N) : f ≫ r.app N = 0 := by
+    have hf : (finiteCoefficientModulePullback j A).map f = 0 :=
+      (hVanishing M).eq_of_src _ _
+    calc
+      f ≫ r.app N = r.app (L.obj M) ≫
+          (finiteModulePushforward j A).map
+            ((finiteCoefficientModulePullback j A).map f) := r.naturality f
+      _ = 0 := by rw [hf]; simp
+  let e (M : FiniteCoefficientModules Z A) (N : FiniteCoefficientModules T A) :
+      (L.obj M ⟶ N) ≃ (M ⟶ H.obj N) :=
+    { toFun := fun f ↦ L.preimage (kernel.lift (r.app N) f (hz M N f) ≫ theta.hom.app N)
+      invFun := fun g ↦ L.map g ≫ theta.inv.app N ≫ kernel.ι (r.app N)
+      left_inv := by
+        intro f
+        simp [Functor.map_preimage, Category.assoc]
+      right_inv := by
+        intro g
+        apply L.map_injective
+        simp only [Functor.map_preimage]
+        apply (cancel_mono (theta.inv.app N ≫ kernel.ι (r.app N))).mp
+        simp [Category.assoc] }
+  let adj : L ⊣ H := Adjunction.mkOfHomEquiv
+    { homEquiv := e
+      homEquiv_naturality_left_symm := by
+        intro M M' N a g
+        change L.map (a ≫ g) ≫ _ ≫ _ = L.map a ≫ (L.map g ≫ _ ≫ _)
+        simp [Functor.map_comp]
+      homEquiv_naturality_right := by
+        intro M N N' f b
+        apply L.map_injective
+        change L.map (L.preimage
+            (kernel.lift (r.app N') (f ≫ b) (hz M N' (f ≫ b)) ≫ theta.hom.app N')) =
+          L.map (L.preimage
+            (kernel.lift (r.app N) f (hz M N f) ≫ theta.hom.app N) ≫ H.map b)
+        rw [Functor.map_preimage, Functor.map_comp, Functor.map_preimage]
+        change _ = (kernel.lift (r.app N) f _ ≫ theta.hom.app N) ≫ (H ⋙ L).map b
+        rw [Category.assoc, ← theta.hom.naturality b, ← Category.assoc]
+        congr 1
+        apply (cancel_mono (kernel.ι (r.app N'))).mp
+        change _ = kernel.lift (r.app N) f _ ≫
+          (finiteSupportedKernel j A).map b ≫ kernel.ι (r.app N')
+        rw [finiteSupportedKernelInclusion_naturality, kernel.lift_ι_assoc,
+          kernel.lift_ι] }
+  refine ⟨theta, fun _ ↦ rfl, adj, ?_, ?_⟩
+  · intro N
+    change L.map (𝟙 (H.obj N)) ≫ _ ≫ _ = _
+    rw [L.map_id, Category.id_comp]
+    rfl
+  · have : IsGrothendieckAbelian.{u + 1} (FiniteCoefficientModules T A) :=
+      SheafOfModules.isGrothendieckAbelianOfUniverses.{u + 1, u, u + 1, 0}
+        (Scheme.ProEt.topology T) (finiteCoefficientRingSheaf T A)
+    have : Abelian.HasKInjectiveResolutions (FiniteCoefficientModules T A) := inferInstance
+    let q := HomotopyCategory.quotient (FiniteCoefficientModules T A) (.up ℤ)
+    let RH := H.rightDerivedFunctor
+    let eh : q ⋙ (H.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh) ≅
+        H.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
+      (Functor.associator _ _ _).symm ≪≫
+        Functor.isoWhiskerRight (H.mapHomotopyCategoryFactors (.up ℤ)) DerivedCategory.Qh ≪≫
+        Functor.associator _ _ _ ≪≫
+        Functor.isoWhiskerLeft _
+          (DerivedCategory.quotientCompQhIso (FiniteCoefficientModules Z A))
+    let beta := eh.inv ≫ Functor.whiskerLeft q H.rightDerivedFunctorUnit ≫
+      (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight
+        (DerivedCategory.quotientCompQhIso (FiniteCoefficientModules T A)).hom RH
+    have hkan : (H.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh).IsLeftKanExtension
+        eh.inv := kan_of_full_whiskering q _ eh.symm
+    have hright : RH.IsRightDerivedFunctor beta
+        (HomologicalComplex.quasiIso (FiniteCoefficientModules T A) (.up ℤ)) := by
+      constructor
+      exact (Functor.isLeftKanExtension_iff_postcompose eh.inv DerivedCategory.Q
+        (DerivedCategory.quotientCompQhIso _) H.rightDerivedFunctorUnit beta (by rfl)).mp
+          (Functor.IsRightDerivedFunctor.isLeftKanExtension _ _
+            (HomotopyCategory.quasiIso (FiniteCoefficientModules T A) (.up ℤ)))
+    have hrightcomp : (RH ⋙ L.mapDerivedCategory).IsRightDerivedFunctor
+        (Functor.whiskerRight beta L.mapDerivedCategory ≫
+          (Functor.associator _ _ _).hom)
+        (HomologicalComplex.quasiIso (FiniteCoefficientModules T A) (.up ℤ)) := by
+      let bh := Functor.whiskerRight H.rightDerivedFunctorUnit L.mapDerivedCategory ≫
+        (Functor.associator _ _ _).hom
+      have hb : (RH ⋙ L.mapDerivedCategory).IsLeftKanExtension bh :=
+        Functor.IsRightDerivedFunctor.isLeftKanExtension _ _
+          (HomotopyCategory.quasiIso (FiniteCoefficientModules T A) (.up ℤ))
+      let epost := (Functor.associator _ _ _).symm ≪≫
+        Functor.isoWhiskerRight eh L.mapDerivedCategory ≪≫
+        Functor.associator _ _ _
+      have hp : ((H.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh) ⋙
+          L.mapDerivedCategory).IsLeftKanExtension epost.inv :=
+        kan_of_full_whiskering q _ epost.symm
+      constructor
+      exact (Functor.isLeftKanExtension_iff_postcompose epost.inv DerivedCategory.Q
+        (DerivedCategory.quotientCompQhIso _) bh
+        (Functor.whiskerRight beta L.mapDerivedCategory ≫
+          (Functor.associator _ _ _).hom) (by
+            ext K
+            dsimp [beta, bh, epost]
+            simp only [Functor.map_comp, Category.id_comp, Category.comp_id]
+            rfl)).mp hb
+    have hleft : L.mapDerivedCategory.IsLeftDerivedFunctor L.mapDerivedCategoryFactors.hom
+        (HomologicalComplex.quasiIso (FiniteCoefficientModules Z A) (.up ℤ)) :=
+      Functor.isLeftDerivedFunctor_of_inverts _ _ L.mapDerivedCategoryFactors
+    have hleftcomp : (L.mapDerivedCategory ⋙ RH).IsLeftDerivedFunctor
+        ((Functor.associator _ _ _).inv ≫
+          Functor.whiskerRight L.mapDerivedCategoryFactors.hom RH)
+        (HomologicalComplex.quasiIso (FiniteCoefficientModules Z A) (.up ℤ)) :=
+      Functor.isLeftDerivedFunctor_of_inverts _ _
+        ((Functor.associator _ _ _).symm ≪≫
+          Functor.isoWhiskerRight L.mapDerivedCategoryFactors RH)
+    let da := (adj.mapHomologicalComplex (.up ℤ)).derived
+      (HomologicalComplex.quasiIso (FiniteCoefficientModules Z A) (.up ℤ))
+      (HomologicalComplex.quasiIso (FiniteCoefficientModules T A) (.up ℤ))
+      L.mapDerivedCategoryFactors.hom beta
+    refine ⟨RH, beta, hright, da, ?_⟩
+    intro I hI
+    have : H.PreservesKInjectiveComplexes := adj.preservesKInjectiveComplexes
+    have hbeta : IsIso (beta.app I) := by
+      dsimp [beta]
+      infer_instance
+    refine ⟨inferInstance, hbeta, ?_⟩
+    refine ⟨(L.mapDerivedCategoryFactors.app
+        ((H.mapHomologicalComplex (.up ℤ)).obj I)).symm ≪≫
+      L.mapDerivedCategory.mapIso (asIso (beta.app I)), rfl, ?_⟩
+    have he := (adj.mapHomologicalComplex (.up ℤ)).derivedε_fac_app
+      (HomologicalComplex.quasiIso (FiniteCoefficientModules T A) (.up ℤ))
+      L.mapDerivedCategoryFactors.hom beta I
+    change (L.mapDerivedCategoryFactors.inv.app _ ≫
+      L.mapDerivedCategory.map (beta.app I)) ≫ da.counit.app _ = _
+    change L.mapDerivedCategory.map (beta.app I) ≫ da.counit.app _ = _ at he
+    rw [Category.assoc, he]
+    simp
 
 end AlgebraicGeometry.ProEtale
