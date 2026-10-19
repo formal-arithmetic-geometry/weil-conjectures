@@ -17421,3 +17421,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:22 L: merged deliver/H1/Sheaf.Paper.AdicHeartIntrinsicFibres (stage 3; reviewer PASS; first push; landing 20261019T132231-L-1205560 (proof); batch 20261019T132218; modules 1; new nodes 0)
 - 13:22 L: merged deliver/K5/Sheaf.Paper.PurityAffineChartBounds (stage 3; reviewer PASS; first push; landing 20261019T132232-L-1205725 (proof); batch 20261019T132218; modules 1; new nodes 0)
 - 13:22 L: merged deliver/Q9/Sheaf.RingTheory.WeaklyEtaleLocalComponentDimension (stage 3; reviewer PASS; first push; landing 20261019T132233-L-1205963 (interface); batch 20261019T132218; modules 2; new nodes 1)
+- 13:22 L: merged deliver/R5/WeilConjectures.ZetaFunction.TraceFormula (stage 3; reviewer PASS; first push; landing 20261019T132234-L-1206123 (proof); batch 20261019T132218; modules 1; new nodes 0)
