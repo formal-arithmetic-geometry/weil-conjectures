@@ -15,39 +15,8 @@ public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 
-import Sheaf.AlgebraicGeometry.SfConstructibleExceptionalAdjointDischarge
-import Sheaf.AlgebraicGeometry.SmoothExceptionalBaseChange
-import Sheaf.AlgebraicGeometry.DerivedCategories
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
-import Sheaf.AlgebraicGeometry.CompactSupportFiniteTorsion
-import WeilConjectures.Compactification.NagataCompactification
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import WeilConjectures.Compactification.BaseChange
-import Sheaf.Paper.ProEtaleConstructibleOrigin
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.Paper.DerivedPullbackTensorHom
-import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonDerived
-import Sheaf.Paper.ComparisonPullbackExact
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
-import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
-import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
-import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
-import Sheaf.Paper.CanonicalFiniteLevelCompactSupportBaseChange
-import Sheaf.Paper.CompactSupportExchangeTransport
-import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
-import Sheaf.Paper.SmoothMateCounitCancellation
+import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
+import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothBaseChange
 
 /-! # Smooth base change for the finite-level exceptional inverse image
 
@@ -139,135 +108,149 @@ noncomputable def smoothExceptionalProEtaleBaseChangeMap
           ((Etale.leftDerivedUpperStarIsoMapDerivedCategory _ v).hom.app _ ≫
             smoothExceptionalComparisonMate A v K))
 
+private theorem smoothExceptional_invertibleExponent
+    (P : WeilConjectures.PurityFiniteSetting.{u}) {T : Scheme.{u}}
+    (a : T ⟶ Spec (.of P.field.k)) : HasInvertibleExponent P.Coefficient T := by
+  let l := P.coefficients.l
+  let E := P.extension
+  let O := Padic.coefficientExtensionIntegers l E
+  let m := Padic.coefficientExtensionMaximalIdeal l E
+  have hd := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have hl : (l : O) ∈ m := by
+    apply (hd.2.1 (l : O)).mpr
+    change Padic.coefficientExtensionAbsoluteValue l E (l : E) < 1
+    rw [← map_natCast (algebraMap ℚ_[l] E) l]
+    change spectralNorm ℚ_[l] E (algebraMap ℚ_[l] E (l : ℚ_[l])) < 1
+    rw [spectralNorm_extends (K := ℚ_[l]) (L := E)]
+    exact Padic.norm_p_lt_one
+  have hgen : Ideal.span ({Padic.coefficientExtensionUniformizer l E} : Set O) = m :=
+    hd.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+  refine ⟨l ^ P.level, pow_pos (Nat.Prime.pos Fact.out) _, ?_, ?_⟩
+  · apply ULift.ext
+    change ((l ^ P.level : ℕ) : Padic.coefficientExtensionRing l E P.level) = 0
+    rw [← map_natCast (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E P.level)),
+      Ideal.Quotient.eq_zero_iff_mem, Nat.cast_pow]
+    change (l : O) ^ P.level ∈
+      Ideal.span ({Padic.coefficientExtensionUniformizer l E} : Set O) ^ P.level
+    rw [hgen]
+    exact Ideal.pow_mem_pow hl _
+  · apply T.toRingedSpace.isUnit_of_isUnit_germ
+    intro x hx
+    change IsUnit ((T.presheaf.germ ⊤ x hx).hom _)
+    simpa only [map_pow, map_natCast, Nat.cast_pow] using
+      (P.coefficientPrime_isUnit_stalk T a x).pow P.level
+
+private theorem smoothExceptional_origin
+    (P : WeilConjectures.PurityFiniteSetting.{u}) (Y : Scheme.{u})
+    (K : DerivedCategory
+      (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1, u} P.Ring))))
+    (hK : WeilConjectures.finiteTorConstructibleProEtaleModule
+      P.coefficients.l P.extension P.level P.level_pos Y K) :
+    DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} P.Coefficient) Y K := by
+  classical
+  let R := finiteCoefficientIntrinsicRealization Y P.Ring
+  have : R.IsEquivalence := (finiteCoefficientIntrinsicRealization_exact Y P.Ring).1
+  have : R.Additive := finiteCoefficientIntrinsicRealization_additive Y P.Ring
+  have hi := hK.1
+  obtain ⟨a, ha⟩ := hi.1.bddBelow
+  obtain ⟨b, hb⟩ := hi.1.bddAbove
+  have hv (i : ℤ) (h : i < min a b ∨ max a b < i) :
+      IsZero ((DerivedCategory.homologyFunctor _ i).obj (R.mapDerivedCategory.obj K)) := by
+    by_contra hn
+    rcases h with h | h
+    · exact (not_lt_of_ge (ha hn)) (lt_of_lt_of_le h (min_le_left _ _))
+    · exact (not_lt_of_ge (hb hn)) (lt_of_le_of_lt (le_max_right _ _) h)
+  obtain ⟨L, ⟨e⟩⟩ := ((Scheme.finiteRing_constructibleDerived_origin Y P.Ring).2.2.1
+    (R.mapDerivedCategory.obj K)).mpr ⟨hi.2, min a b, max a b, min_le_max, hv⟩
+  let C := comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Y
+  let e' : C.mapDerivedCategory.obj L.obj ≅ K := R.mapDerivedCategory.preimageIso
+    ((Functor.mapDerivedCategoryCompIso C R).symm.app L.obj ≪≫ e)
+  obtain ⟨c, d, _, hz⟩ := L.property.2
+  exact ⟨L.obj, ⟨c, (DerivedCategory.isGE_iff L.obj c).mpr
+    (fun i hi ↦ hz i (Or.inl hi))⟩, ⟨e'⟩⟩
+
+private theorem smoothExceptional_counit_isIso
+    (A : Type u) [CommRing A] {Y : Scheme.{u}}
+    (K : DerivedCategory
+      (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))))
+    (hK : DerivedCategory.plusEtaleOrigin
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) Y K) :
+    IsIso ((derivedComparisonAdjunction
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) Y).counit.app K) := by
+  obtain ⟨G, hG, ⟨e⟩⟩ := hK
+  let adj := derivedComparisonAdjunction (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) Y
+  have := isIso_derivedComparisonAdjunction_unit_app
+    (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) Y G hG
+  have : IsIso (adj.counit.app
+      ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A))
+        Y).mapDerivedCategory.obj G)) := by
+    exact isIso_of_hom_comp_eq_id
+      ((comparisonUpperStar
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) Y).mapDerivedCategory.map
+          (adj.unit.app G)) (adj.left_triangle_components G)
+  have he := adj.counit.naturality e.inv
+  dsimp at he
+  have : IsIso (adj.counit.app K ≫ e.inv) := by
+    rw [← he]
+    infer_instance
+  exact IsIso.of_isIso_comp_right _ e.inv
+
+private theorem smoothExceptional_mate_isIso
+    (A : Type u) [CommRing A] {U V : Scheme.{u}} (v : U ⟶ V)
+    (K : DerivedCategory
+      (Sheaf (ProEt.topology V) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))))
+    (hK : DerivedCategory.plusEtaleOrigin
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) V K) :
+    IsIso (smoothExceptionalComparisonMate A v K) := by
+  let B := ModuleCat.{u + 1} (ULift.{u + 1, u} A)
+  have hR : DerivedCategory.TStructure.t.plus
+      ((comparisonLowerStar B V).rightDerivedFunctor.obj K) :=
+    DerivedCategory.TStructure.t.plus.prop_of_iso
+      ((comparisonLowerStar B V).rightDerivedFunctorPlusCompatibility.app ⟨K, hK.plus⟩)
+      ((comparisonLowerStar B V).rightDerivedFunctorPlus.obj ⟨K, hK.plus⟩).property
+  obtain ⟨n, hn⟩ := hR
+  have := hn
+  have hu : DerivedCategory.TStructure.t.plus
+      ((Etale.upperStar B v).mapDerivedCategory.obj
+        ((comparisonLowerStar B V).rightDerivedFunctor.obj K)) :=
+    ⟨n, (Etale.upperStar B v).isGE_mapDerivedCategory_obj _ n⟩
+  have := isIso_derivedComparisonAdjunction_unit_app B U _ hu
+  have := smoothExceptional_counit_isIso A K hK
+  unfold smoothExceptionalComparisonMate
+  infer_instance
+
 /-- Smooth arbitrary base change for the canonical finite-level exceptional comparison.
 Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-cohsm,
 lem-pur-smb-extraordinary.md and its proof (blueprint: lem-pur-smb-extraordinary).
 
-Proof, following the unchanged DAG steps:
+Proof: use the displayed factorization of the specified canonical comparison.
 
-1. Work at the finite stage $\Lambda=A=A_{E,n}=\mathcal O_E/\varpi_E^n$, with $n\geq1$ and
-$\ell\ne p$, as stipulated in the current [def-pur-conventions]. Its finite-coefficient clause
-makes the constructions here finite-level ones; the integral, rational and algebraically closed
-versions are separate coefficient transports. Its functor clause specifies separated finite-type
-$k$-morphisms between finite-type $k$-schemes and refers to [def-weil-exceptional-inverse-image]
-for the actual functor and adjunction domains. The latter definition has precisely this standing
-domain, with $k$ the fixed algebraic closure of the finite field. We use those domains, without
-taking any preservation or invertibility assertion from the conventions definition. Thus all four
-schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since a field is Noetherian.
-Choose a compactification $c=(j,p)$ used in that construction for $f$, and use its base change
-$c'=(j',p')$ for $f'$, as in [def-cbc-compact-support-square]. This definition states that $c'$ is
-a compactification. The compactification comparisons and their compatibility with the Hom
-bijections in [thm-sf-ambient-adjoint-class], clause (3), identify these choices with those in the
-exceptional functors. Their total spaces are finite type over $k$: the proper part is of finite
-type, and finite generating sets for two successive algebra extensions generate the composite.
-Their dimensions therefore have finite bounds by [lem-kun-dimension-finite-type], as required by
-[thm-sf-ambient-adjoint-class]. Clause (1) of [lem-sbc-smooth-relative-dimension-permanence] gives
-that $f'$ is smooth of pure relative dimension $d$. The class-restricted adjunctions in [cor-sf-
-ambient-adjoint-discharge] consequently apply to the coefficients here; no unrestricted pro-etale
-adjoint datum is being used.
-Uses: def-pur-conventions, def-weil-exceptional-inverse-image, lem-weil-pbc-finite-type-over-
-noetherian, lem-kun-dimension-finite-type, lem-sbc-smooth-relative-dimension-permanence, thm-sf-
-ambient-adjoint-class, cor-sf-ambient-adjoint-discharge, def-cbc-compact-support-square.
+1. The coefficient prime ell belongs to the maximal ideal (varpi_E) of the DVR O_E.
+Thus ell^n annihilates O_E/(varpi_E^n). It is invertible on every scheme over the
+fixed field, giving the ordinary etale theorem's invertible-exponent hypothesis.
+2. Intrinsic bounded constructibility gives a bounded constructible etale complex G
+whose comparison inverse image is isomorphic to K, by finite-ring derived origin.
+The intrinsic realization is an exact equivalence, so the isomorphism lifts back
+to the fixed coefficient presentation. In particular G is bounded below.
+3. Site comparison makes the unit at G invertible. The left triangle identity then
+makes the counit at its comparison inverse image invertible; naturality transports
+this to K. The right derived comparison restriction of K is bounded below, and
+exact etale inverse image preserves that bound. The unit at this latter object is
+therefore also invertible. These facts make every factor of the specified
+comparison-site mate invertible.
+4. Base change preserves smoothness of pure relative dimension and quasi-compactness.
+The compactifications c and its base change supply the ordinary exceptional
+functors. Local finite type over the field makes the base locally Noetherian,
+hence quasi-separated. Apply ordinary canonical smooth exceptional base change.
+5. In the defining factorization of the pro-etale comparison, the comparison-pullback
+maps and the exact/derived pullback identifications are isomorphisms. The ordinary
+exceptional comparison and the comparison-site mate are invertible by steps 3–4.
+Functoriality and composition preserve their invertibility, proving the assertion.
 
-2. Write $C_T=\nu_T^*$. Since $K$ is bounded constructible, clause (ii) of [lem-sf-proetale-
-constructible-origin] supplies $G\in D^b_c(Y_{\mathrm{et}},A)$ and
-$\alpha:C_YG\xrightarrow{\sim}K$. Ordinary etale inverse images $v_e^*$ and $u_e^*$ are exact by
-[prop-weil-pbc-inverse-image-modules-exact], so they preserve every cohomological lower bound; in
-particular $v_e^*G$ is bounded below. At finite constant coefficients, [def-weil-derived-pullback-
-tensor-hom] computes pro-etale derived pullback termwise by inverse image. Apply [lem-weil-pbc-
-comparison-pullback] termwise: it gives $C_{Y'}v_e^*G\cong Lv^*C_YG\cong Lv^*K$, naturally in $G$,
-and gives $Lu^*C_XM\cong C_{X'}u_e^*M$ for every bounded-below etale complex $M$. These
-comparisons respect the chosen Cartesian square, as stated in that lemma.
-Uses: lem-sf-proetale-constructible-origin, prop-weil-pbc-inverse-image-modules-exact, def-weil-
-derived-pullback-tensor-hom, lem-weil-pbc-comparison-pullback.
-
-3. The natural unit isomorphism $G\xrightarrow{\sim}R\nu_{Y,*}C_YG$ of [thm-weil-pbc-site-
-comparison], together with $\alpha$, identifies $R\nu_{Y,*}K$ with $G$. Put $M=f^\times G$. The
-finite formula in [def-weil-exceptional-inverse-image] therefore gives $Rf^!K\cong C_XM$. Put
-$M'=f'^\times v_e^*G$. Applying the same defining finite formula to the representative $v_e^*G$
-and its unit $v_e^*G\xrightarrow{\sim}R\nu_{Y',*}C_{Y'}v_e^*G$ gives $Rf'^!Lv^*K\cong C_{X'}M'$.
-Clause (2) of [thm-sf-ambient-adjoint-class] says that the transported composite $R_c$ preserves
-bounded-below objects. Hence $C_XM\cong R_cK$ is bounded below. To infer the same for $M$, use
-[lem-sf-comparison-pullback-exact]: $\mathcal H^i(C_XM)=C_X\mathcal H^i(M)$. Below a lower bound
-the left side is zero. For the degree-zero sheaf $H=\mathcal H^i(M)$, faithfulness of $C_X$ on
-$D^+$ implies $1_H=0$, since its image is the identity of the zero object. Thus $H=0$, and $M$ is
-bounded below. For $M'$, clause (2) applied to $Lv^*K\cong C_{Y'}v_e^*G$ gives a lower bound for
-$C_{X'}M'$. Exactness gives $\mathcal H^i(C_{X'}M')=C_{X'}\mathcal H^i(M')$; in degrees below that
-bound, faithfulness on the degree-zero sheaf again gives $1_{\mathcal H^i(M')}=0$. Hence $M'$ is
-bounded below as well. This verifies the $D^+$ domains rather than attributing preservation by
-$f^\times$ itself directly to the statement of the class theorem. Combining these identifications
-with step 2 gives
-$$Lu^*Rf^!K\cong C_{X'}u_e^*f^\times G,\qquad Rf'^!Lv^*K\cong C_{X'}f'^\times
-v_e^*G.$$
-Uses: thm-weil-pbc-site-comparison, def-weil-exceptional-inverse-image, thm-sf-ambient-adjoint-
-class, lem-sf-comparison-pullback-exact.
-
-4. Apply [prop-asd-smooth-base-change] to the ordinary etale complex $G$ and the given square. Its
-hypotheses are met: $A$ is finite and killed by a power of $\ell$ invertible on all the schemes,
-$f$ is smooth separated of pure relative dimension $d$ and has the compactification used above,
-and $v$ is a morphism of Noetherian schemes. It supplies the specific isomorphism
-$\beta^e:u_e^*f^\times G\xrightarrow{\sim}f'^\times v_e^*G$, defined as the transpose of
-$v_e^*\varepsilon^e_G\circ(\operatorname{Ex}_!^e(M))^{-1}$. Denote by $\gamma$ the conjugate of
-$C_{X'}\beta^e$ under the two identifications of step 3. We next identify $\gamma$ with the
-canonical comparison in the statement.
-Uses: prop-asd-smooth-base-change.
-
-5. Let $F_f^e=Rf_!^{\mathrm{et}}$ and $F_f^p=Rf_!^{\mathrm{proet}}$. Denote the natural comparison
-of [lem-sf-class-compact-support-comparison] by $a_f:F_f^pC_X\xrightarrow{\sim}C_YF_f^e$,
-evaluated on bounded-below etale complexes, and denote the comparison for the base-changed
-compactification by $a_{f'}:F_{f'}^pC_{X'}\xrightarrow{\sim}C_{Y'}F_{f'}^e$. With the
-identifications of step 3 understood, the pro-etale counit on $K=C_YG$ is
-$$\varepsilon^p_K=C_Y(\varepsilon^e_G)\circ a_f(M).$$
-Indeed the bounded-class Hom bijection of
-[thm-sf-ambient-adjoint-class] is the etale adjunction transported through the compact-support
-comparison and the fully faithful $C_T$, as specified in [def-weil-exceptional-inverse-image]. The
-identity of $C_Xf^\times G$ corresponds to the identity of $f^\times G$, whose etale transpose is
-$\varepsilon^e_G$; substituting the comparison $a_f$ gives exactly this formula. For $f'$, the
-identity of $C_{X'}M'$ corresponds to $1_{M'}$ and then to the etale counit
-$\varepsilon^{e,f'}_{v_e^*G}$, so
-$\varepsilon^{p,f'}_{Lv^*K}=C_{Y'}(\varepsilon^{e,f'}_{v_e^*G})\circ a_{f'}(M')$. This is a
-calculation with the defining adjunction bijections, not an assertion of an adjunction on all pro-
-etale objects.
-Uses: lem-sf-class-compact-support-comparison, thm-sf-ambient-adjoint-class, def-weil-exceptional-
-inverse-image.
-
-6. Let $t=\operatorname{Ex}_!^p(C_XM):Lv^*F_f^pC_XM\xrightarrow{\sim}F_{f'}^pLu^*C_XM$. The
-theorem [thm-cbc-finite-level-proetale] says that this is the transported finite compact-support
-exchange of [def-cbc-exchange-map], and is invertible on the etale-origin bounded-below input
-$C_XM$. For the proper parts $p,p'$ of the chosen compactifications, [lem-weil-pbc-transport-
-identifies-exchange] identifies the direct-image unit--square--counit exchange with its etale
-counterpart. Its quasi-compact and quasi-separated hypotheses hold because these maps are proper.
-The compactification formula of [def-cbc-exchange-map] composes that exchange with the specified
-extension-by-zero identification; [thm-cbc-finite-level-proetale] states that this whole composite
-is transported to the pro-etale exchange. Consequently its comparison with the etale compact-
-support exchange is, after the pullback identifications of [lem-weil-pbc-comparison-pullback],
-$$a_{f'}(u_e^*M)\circ t=C_{Y'}(\operatorname{Ex}_!^e(M))\circ Lv^*a_f(M).$$
-Substitute this
-equation and the counit formula of step 5 into the defining transpose of the exceptional
-comparison:
-$$F_{f'}^pLu^*Rf^!K\xrightarrow{t^{-1}}Lv^*F_f^pRf^!K\xrightarrow{Lv^*\varepsilon^p_K}Lv^*K.$$
-Under $a_{f'}$ this composite is exactly
-$C_{Y'}\bigl(v_e^*\varepsilon^e_G\circ(\operatorname{Ex}_!^e(M))^{-1}\bigr)$: explicitly, invert
-the displayed exchange equation to obtain $Lv^*a_f(M)\circ
-t^{-1}=(C_{Y'}\operatorname{Ex}_!^e(M))^{-1}\circ a_{f'}(u_e^*M)$, and cancel the adjacent
-comparison isomorphisms. By [prop-asd-smooth-base-change] the resulting etale arrow is the
-transpose of $\beta^e$. Here its source input $Lu^*Rf^!K\cong C_{X'}u_e^*M$ is bounded below and
-of etale origin by steps 2-3, and its target $Lv^*K$ is bounded below. The transported adjunction
-bijection of [thm-sf-ambient-adjoint-class] therefore applies and sends both the canonical
-comparison and $\gamma$ to the very same arrow. Injectivity of that bijection proves equality of
-the two morphisms. The witness $\alpha$ can be reinserted on both sides by naturality;
-independence of isomorphic witnesses is part of the cited compact-support and adjunction
-comparisons.
-Uses: thm-cbc-finite-level-proetale, def-cbc-exchange-map, lem-weil-pbc-comparison-pullback, lem-
-weil-pbc-transport-identifies-exchange, prop-asd-smooth-base-change, thm-sf-ambient-adjoint-class.
-
-7. A functor carries an inverse pair of arrows to an inverse pair. Thus $C_{X'}\beta^e$ is
-invertible, and so is its conjugate $\gamma$. Step 6 identifies this conjugate with the canonical
-comparison, proving the assertion. None of the steps imposes smoothness or properness on $v$; its
-only restrictions are the standing schemes and coefficient domain. The same computation covers
-$d=0$, $K=0$, $v$ an identity, and empty source or base, since it uses functors, their natural
-isomorphisms, and adjunction bijections without choosing a point or a nonempty cover.
-Uses: .
+This follows the ordinary smooth-base-change input of the unit, through affine-space
+adjunctions and etale charts. It imposes no condition on the horizontal base change
+beyond the stated domain, and applies to empty schemes, K = 0, and relative dimension zero.
 -/
 theorem smoothExceptionalBaseChangeStatement
     (P : WeilConjectures.PurityFiniteSetting.{u})
@@ -299,6 +282,29 @@ theorem smoothExceptionalBaseChangeStatement
     SmoothOfRelativeDimension d f' ∧
       IsIso (smoothExceptionalProEtaleBaseChangeMap P.Ring
         (IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd) c K) := by
-  sorry
+  -- Use the displayed factorization of the canonical map to shorten the DAG plan above.
+  let hsq := IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd
+  have : QuasiCompact f' :=
+    MorphismProperty.of_isPullback (P := @QuasiCompact) hsq inferInstance
+  have := c.hasCompactification
+  have := (c.ofIsPullback hsq).hasCompactification
+  have : Finite P.Coefficient :=
+    inferInstanceAs (Finite (ULift.{u + 1, u} P.Ring))
+  have : HasInvertibleExponent P.Coefficient X :=
+    smoothExceptional_invertibleExponent P
+      (X ↘ Spec (.of P.field.k))
+  have := smoothOfRelativeDimension_isStableUnderBaseChange d
+  have hs : SmoothOfRelativeDimension d f' :=
+    MorphismProperty.of_isPullback (P := @SmoothOfRelativeDimension d) hsq inferInstance
+  have : IsLocallyNoetherian Y :=
+    LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (.of P.field.k))
+  refine ⟨hs, ?_⟩
+  have hBC : IsIso (Etale.rightDerivedUpperShriekBaseChangeMap
+      (ULift.{u + 1, u} P.Ring) hsq) :=
+    Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension
+      P.Coefficient f d hsq
+  have := smoothExceptional_mate_isIso P.Ring v K (smoothExceptional_origin P Y K _hK)
+  dsimp only [smoothExceptionalProEtaleBaseChangeMap]
+  infer_instance
 
 end AlgebraicGeometry.ProEtale
