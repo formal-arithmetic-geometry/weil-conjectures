@@ -18,12 +18,10 @@ public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber
-import Sheaf.AlgebraicGeometry.GeometricRegularitySmoothFieldCriterion
 import WeilConjectures.Mathlib.Topology.KrullDimension
-import Sheaf.AlgebraicGeometry.FiniteOfIsClosedOfClosedPoints
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
-import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
-import Sheaf.AlgebraicGeometry.RegularNormalDecomposition
+import WeilConjectures.AlgebraicGeometry.Regular
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 /-!
 # The boundary of fibrewise nonempty opens in good curves
@@ -56,6 +54,43 @@ noncomputable def goodCurvesBoundaryMap
   (Scheme.IdealSheafData.vanishingIdeal
     (⨆ i, (u i ≫ Sigma.ι C i).opensRange).compl).subschemeι ≫
       Sigma.desc (fun i ↦ b i ≫ t i)
+
+set_option backward.isDefEq.respectTransparency false in
+/-- Coproducts of proper maps remain proper over the coproduct of their bases. -/
+private theorem proper_sigmaMap
+    {I : Type u} (C T : I → Scheme.{u}) (b : ∀ i, C i ⟶ T i)
+    [∀ i, IsProper (b i)] : IsProper (Sigma.desc (fun j ↦ b j ≫ Sigma.ι T j)) := by
+  have hpb (i : I) : IsPullback (Sigma.ι C i) (b i)
+      (Sigma.desc (fun j ↦ b j ≫ Sigma.ι T j)) (Sigma.ι T i) := by
+    apply IsPullback.flip
+    apply IsOpenImmersion.isPullback
+    · simp
+    · ext x
+      obtain ⟨k, z, rfl⟩ := (sigmaOpenCover C).exists_eq x
+      change (∃ w, Sigma.ι T i w =
+        Sigma.desc (fun j ↦ b j ≫ Sigma.ι T j) (Sigma.ι C k z)) ↔
+        ∃ w, Sigma.ι C i w = Sigma.ι C k z
+      have heq : Sigma.desc (fun j ↦ b j ≫ Sigma.ι T j) (Sigma.ι C k z) =
+          Sigma.ι T k (b k z) := by
+        rw [← Scheme.Hom.comp_apply, Sigma.ι_desc]
+        rfl
+      rw [heq]
+      constructor
+      · rintro ⟨w, hw⟩
+        have hik : i = k := congrArg Sigma.fst ((sigmaι_eq_iff T i k w (b k z)).mp hw)
+        subst k
+        exact ⟨z, rfl⟩
+      · rintro ⟨w, hw⟩
+        have hik : i = k := congrArg Sigma.fst ((sigmaι_eq_iff C i k w z).mp hw)
+        subst k
+        exact ⟨b i z, rfl⟩
+  apply IsZariskiLocalAtTarget.of_openCover (P := @IsProper) (sigmaOpenCover T)
+  intro i
+  change IsProper (pullback.snd (Sigma.desc (fun j ↦ b j ≫ Sigma.ι T j)) (Sigma.ι T i))
+  rw [← MorphismProperty.cancel_left_of_respectsIso (P := @IsProper)
+    (hpb i).isoPullback.hom, (hpb i).isoPullback_hom_snd]
+  infer_instance
+
 
 /-- Source: Stacks Project, Tag 0GKX, the assertion that the second boundary Zprime
 is quasi-finite, with the good-curves hypotheses of Tag 0GK7 made explicit
@@ -111,6 +146,92 @@ theorem good_curves_boundary_quasiFinite
     LocallyOfFinitePresentation (goodCurvesBoundaryMap B T C O t b u) ∧
     QuasiCompact (goodCurvesBoundaryMap B T C O t b u) ∧
     QuasiSeparated (goodCurvesBoundaryMap B T C O t b u) := by
-  sorry
+  classical
+  let v := Sigma.desc (fun i ↦ b i ≫ Sigma.ι T i)
+  have hv : IsProper v := proper_sigmaMap C T b
+  have heq : Sigma.desc (fun i ↦ b i ≫ t i) = v ≫ Sigma.desc t := by
+    ext i
+    simp [v]
+  have hp : IsProper (Sigma.desc (fun i ↦ b i ≫ t i)) := by
+    rw [heq]
+    infer_instance
+  have hpZ : IsProper (goodCurvesBoundaryMap B T C O t b u) := by
+    unfold goodCurvesBoundaryMap
+    infer_instance
+  have hfin (i : I) (s : T i) :
+      {x : C i | b i x = s ∧ x ∉ Set.range (u i)}.Finite := by
+    have hg : GeometricallyConnected ((b i).fiberToSpecResidueField s) := (hC i s).2.1
+    have hc : ConnectedSpace ((b i).fiber s) :=
+      GeometricallyConnected.connectedSpace_of_subsingleton
+        ((b i).fiberToSpecResidueField s)
+    have hs : Smooth ((b i).fiberToSpecResidueField s) :=
+      (smooth_iff_flat_locallyOfFinitePresentation_smooth_fiberToSpecResidueField
+        (b i)).mp inferInstance |>.2.2 s
+    have hl : IsLocallyNoetherian ((b i).fiber s) :=
+      LocallyOfFiniteType.isLocallyNoetherian ((b i).fiberToSpecResidueField s)
+    have hr : IsRegular ((b i).fiber s) :=
+      IsRegular.of_smooth ((b i).fiberToSpecResidueField s)
+    have hi : IsIntegral ((b i).fiber s) := IsRegular.isIntegral _
+    have hn : IsNoetherian ((b i).fiber s) := ⟨⟩
+    let U : Set ((b i).fiber s) := (b i).fiberι s ⁻¹' Set.range (u i)
+    have hU : IsOpen U := (u i).isOpenEmbedding.isOpen_range.preimage
+      ((b i).fiberι s).continuous
+    have hne : U.Nonempty := by
+      obtain ⟨o⟩ := hO i s
+      have ho : (u i ≫ b i) ((u i ≫ b i).fiberι s o) = s :=
+        ((u i ≫ b i).fiberHomeo s o).2
+      let x := ((b i).fiberHomeo s).symm
+        ⟨u i ((u i ≫ b i).fiberι s o), ho⟩
+      refine ⟨x, ?_⟩
+      change (b i).fiberι s x ∈ Set.range (u i)
+      rw [Scheme.Hom.fiberι_fiberHomeo_symm]
+      exact Set.mem_range_self _
+    have hE := hU.finite_compl_of_topologicalKrullDim_le_one (hC i s).2.2 hne
+    refine (hE.image ((b i).fiberι s)).subset ?_
+    intro x (hx : b i x = s ∧ x ∉ Set.range (u i))
+    refine ⟨((b i).fiberHomeo s).symm ⟨x, hx.1⟩, ?_, ?_⟩
+    · change (b i).fiberι s (((b i).fiberHomeo s).symm ⟨x, hx.1⟩) ∉ Set.range (u i)
+      simpa using hx.2
+    · exact (b i).fiberι_fiberHomeo_symm s ⟨x, hx.1⟩
+  have hfib : ∀ y : B, ((goodCurvesBoundaryMap B T C O t b u) ⁻¹' {y}).Finite := by
+    intro y
+    let E : Set (∐ C : Scheme.{u}) := ⋃ i, ⋃ s ∈ (t i) ⁻¹' {y},
+      (fun x : C i ↦ Sigma.ι C i x) '' {x : C i | b i x = s ∧ x ∉ Set.range (u i)}
+    have hE : E.Finite := Set.finite_iUnion fun i ↦
+      ((t i).finite_preimage_singleton y).biUnion fun s _ ↦ (hfin i s).image _
+    let j := (Scheme.IdealSheafData.vanishingIdeal
+      (⨆ i, (u i ≫ Sigma.ι C i).opensRange).compl).subschemeι
+    refine (hE.preimage j.isClosedEmbedding.injective.injOn).subset ?_
+    intro z hz
+    obtain ⟨i, x, hx⟩ := (sigmaOpenCover C).exists_eq (j z)
+    refine Set.mem_iUnion.mpr ⟨i, Set.mem_iUnion.mpr ⟨b i x,
+      Set.mem_iUnion.mpr ⟨?_, x, ⟨rfl, ?_⟩, hx⟩⟩⟩
+    · have hy : goodCurvesBoundaryMap B T C O t b u z = y := hz
+      change Sigma.desc (fun i ↦ b i ≫ t i) (j z) = y at hy
+      rw [← hx] at hy
+      change Sigma.desc (fun i ↦ b i ≫ t i) (Sigma.ι C i x) = y at hy
+      rw [← Scheme.Hom.comp_apply, Sigma.ι_desc] at hy
+      exact hy
+    · intro hxU
+      obtain ⟨o, rfl⟩ := hxU
+      have hzU : j z ∉ (⨆ i, (u i ≫ Sigma.ι C i).opensRange :
+          (∐ C).Opens) := by
+        have hj : Set.range j =
+            ((⨆ i, (u i ≫ Sigma.ι C i).opensRange).compl : Set (∐ C : Scheme.{u})) := by
+          simp [j]
+        have := hj ▸ Set.mem_range_self z
+        exact this
+      apply hzU
+      apply (le_iSup (fun i ↦ (u i ≫ Sigma.ι C i).opensRange) i)
+      change j z ∈ Set.range (u i ≫ Sigma.ι C i)
+      exact ⟨o, (Scheme.Hom.comp_apply _ _ _).trans hx⟩
+  refine ⟨inferInstance, ⟨inferInstance, inferInstance, ?_⟩,
+    inferInstance, inferInstance, inferInstance⟩
+  intro x
+  have hd := (goodCurvesBoundaryMap B T C O t b u).discreteTopology_fiber_and_quasiFiniteAt
+    (goodCurvesBoundaryMap B T C O t b u x) (hfib _)
+  have : DiscreteTopology ((goodCurvesBoundaryMap B T C O t b u).fiber
+      (goodCurvesBoundaryMap B T C O t b u x)) := hd.2.1
+  exact isOpen_discrete _
 
 end AlgebraicGeometry

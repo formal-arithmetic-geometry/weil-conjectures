@@ -24,11 +24,11 @@
  ],
  "proof": [
   {
-   "text": "For each $i$, the finite morphism $t_i$ is proper by [lem-weil-pbc-finite-proper]. Therefore $f_i=t_i\\circ b_i:C_i\\to B$ is proper by [lem-weil-pbc-proper-composition]. In particular each $f_i$ is separated, of finite type and universally closed, by [def-weil-proper-morphism].",
+   "text": "Factor the structure map from the coproduct of C_i through the coproduct of T_i. The private proved helper proper_sigmaMap identifies the pullback over each open component T_i with C_i: the images of distinct coprojections are disjoint, and the coprojections cover. Properness is local on the target, so the componentwise proper maps b_i give properness of this coproduct map. The existing proved source-library instance AlgebraicGeometry.IsFinite.sigmaDesc makes the map from the finite coproduct of T_i to B finite, hence proper. Their composite is proper. Empty families are included.",
    "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
     "lem-weil-pbc-finite-proper",
-    "lem-weil-pbc-proper-composition",
-    "def-weil-proper-morphism"
+    "lem-weil-pbc-proper-composition"
    ],
    "elementary": false,
    "source": {
@@ -37,21 +37,7 @@
    }
   },
   {
-   "text": "The clopen components of $C=\\coprod_i C_i$ supplied by [lem-weil-pbc-scheme-coproduct-family] let us check properness directly from [def-weil-proper-morphism]. For an affine open $V\\subset B$, each $f_i^{-1}(V)$ has a finite affine cover by finite-type $\\mathcal O_B(V)$-algebras; their union over the finite set $I$ gives the same kind of cover of $f^{-1}(V)$, so $f:C\\to B$ is of finite type [def-weil-finite-type-morphism]. The target $C\\times_B C$ of its diagonal is covered by the open pieces $C_i\\times_B C_j$: pulling back the two open component decompositions gives this cover. On a piece with $i\\ne j$ the inverse image of the diagonal is empty; on a piece with $i=j$ it is the closed immersion $\\Delta_{f_i}$. Thus its inverse image on every affine chart of such a piece is a quotient by an ideal, so $\\Delta_f$ is a closed immersion by the affine-local criterion in [def-weil-closed-immersion]. Finally, after any $B'\\to B$, the pullbacks of the clopen components are again disjoint and cover. A closed subset restricts to a closed subset in each component; its image in $B'$ is the finite union of their closed images, hence closed. Thus $f$ is universally closed and therefore proper. All three checks also hold for $I=\\varnothing$.",
-   "uses": [
-    "lem-weil-pbc-scheme-coproduct-family",
-    "def-weil-proper-morphism",
-    "def-weil-finite-type-morphism",
-    "def-weil-closed-immersion"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01W1 (definition-proper); direct verification for a finite disjoint union using Schemes Tags 01JB/01JC"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-reduced-induced-closed-subscheme], $Z\\to C$ is a closed immersion with underlying image $C\\setminus O$. Apply [lem-weil-pbc-closed-immersion-proper] to the proper morphism $C\\to B$ from step 2: $h:Z\\to B$ is proper. Hence $h$ is separated and of finite type [def-weil-proper-morphism]. Since $B$ is locally Noetherian, [pqf-lem-lft-fp-locnoeth] gives local finite presentation of $h$. It is quasi-compact because it is of finite type. Its diagonal is a closed immersion by separatedness, hence proper by [lem-weil-pbc-closed-immersion-proper], and therefore of finite type and quasi-compact. Thus $h$ is also quasi-separated, and the finite-presentation convention in [def-weil-pbc-scheme-conventions] shows that $h$ is of finite presentation.",
+   "text": "By [lem-weil-pbc-reduced-induced-closed-subscheme], $Z\\to C$ is a closed immersion with underlying image $C\\setminus O$. Apply [lem-weil-pbc-closed-immersion-proper] to the proper morphism $C\\to B$ from step 1: $h:Z\\to B$ is proper. Hence $h$ is separated and of finite type [def-weil-proper-morphism]. Since $B$ is locally Noetherian, [pqf-lem-lft-fp-locnoeth] gives local finite presentation of $h$. It is quasi-compact because it is of finite type. Its diagonal is a closed immersion by separatedness, hence proper by [lem-weil-pbc-closed-immersion-proper], and therefore of finite type and quasi-compact. Thus $h$ is also quasi-separated, and the finite-presentation convention in [def-weil-pbc-scheme-conventions] shows that $h$ is of finite presentation.",
    "uses": [
     "lem-weil-pbc-reduced-induced-closed-subscheme",
     "lem-weil-pbc-closed-immersion-proper",
@@ -66,15 +52,13 @@
    }
   },
   {
-   "text": "Fix $i\\in I$ and $s\\in T_i$, and put $X=(C_i)_s$. Properness survives this base change by [lem-weil-pbc-proper-base-change], so $X$ is separated and of finite type over $\\kappa(s)$ [def-weil-proper-morphism]. A field is Noetherian (its only ideals are zero and the whole ring), so [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian. The fibre-smoothness clause of [sbc-lem-smooth-criterion] makes $X$ smooth over $\\kappa(s)$. Since $X$ is locally of finite type over $\\kappa(s)$ and smooth, the forward implication of [lem-weil-pbc-geometric-regularity-smooth-field-criterion], applied with the finitely generated (by no elements) extension $L=\\kappa(s)$, for which $X_L=X\\times_{\\operatorname{Spec}\\kappa(s)}\\operatorname{Spec}\\kappa(s)\\cong X$ by its first projection, shows that every local ring $\\mathcal O_{X,x}$ is a regular local ring; as $X$ is Noetherian, $X$ is regular. This criterion holds over any field, with no perfectness, dimension or algebraic-closedness hypothesis. Geometric connectedness includes connectedness over the identity field extension [def-pc-geometrically-irreducible]; $X$ is nonempty by hypothesis. The final assertion of [rem-pc-regular-normal] therefore gives that $X$ is irreducible. This argument uses neither a perfect residue field nor dimension exactly one.",
+   "text": "For each i and s, the existing smooth-fibre criterion makes the scheme fibre smooth over its residue field. The proved source theorem IsRegular.of_smooth (recorded by lem-weil-pbc-smooth-scheme-over-field-regular) gives regularity over this arbitrary field. Local finite type over the residue field gives local Noetherianity; properness of b_i gives compactness of its fibre and thus Noetherianity. The geometric connectedness hypothesis gives ConnectedSpace. The proved IsRegular.isIntegral (lem-sc-regular-connected-integral) gives integrality, hence irreducibility. No perfectness or algebraic closedness is used.",
    "uses": [
-    "lem-weil-pbc-proper-base-change",
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-finite-type-over-noetherian",
     "sbc-lem-smooth-criterion",
-    "lem-weil-pbc-geometric-regularity-smooth-field-criterion",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-weil-pbc-finite-type-over-noetherian",
     "def-pc-geometrically-irreducible",
-    "rem-pc-regular-normal"
+    "lem-sc-regular-connected-integral"
    ],
    "elementary": false,
    "source": {
@@ -83,13 +67,11 @@
    }
   },
   {
-   "text": "Let $U=(O_i)_s\\subset X$. The homeomorphisms from scheme fibres to the topological point-inverse-images in [def-pc-scheme-fibre], together with the open-subscheme identification [def-weil-open-immersion], identify $U$ with an open subset of $X$; it is nonempty by hypothesis. Schemes are Kolmogorov: if two points had the same closure, that irreducible closed subset would have two generic points, contradicting [lem-sc-scheme-sober]. Thus [lem-sc-dim-one-point-outside-open-closed] applies to the irreducible space $X$ of dimension at most one and to $U$. It makes every point of the closed subset $E_{i,s}=X\\setminus U$ closed in $X$. Since $X$ is Noetherian, [lem-sc-noetherian-closed-points-finite] gives that $E_{i,s}$ is finite. In dimension zero the conclusion is stronger: $U=X$, because any point of its complement would give a proper nonempty irreducible closed subset of the irreducible zero-dimensional space $X$.",
+   "text": "Take the inverse image of the open range of u_i under the fibre inclusion. It is open by continuity, and a point in the nonempty fibre of O_i supplies a point in it using fiberHomeo. Apply the existing proved topological theorem IsOpen.finite_compl_of_topologicalKrullDim_le_one, recorded by lem-sc-nonempty-open-complement-finite-dim-le-one. Its image under the fibre inclusion contains exactly the points of C_i over s outside the range of u_i, so this set is finite.",
    "uses": [
     "def-pc-scheme-fibre",
     "def-weil-open-immersion",
-    "lem-sc-scheme-sober",
-    "lem-sc-dim-one-point-outside-open-closed",
-    "lem-sc-noetherian-closed-points-finite"
+    "lem-sc-nonempty-open-complement-finite-dim-le-one"
    ],
    "elementary": false,
    "source": {
@@ -98,7 +80,7 @@
    }
   },
   {
-   "text": "Fix $b\\in B$. For each $i$, the finite morphism $t_i$ is quasi-finite by [pqf-lem-finite-qf], so [pqf-lem-qf-finitefibres] says that $S_{i,b}=t_i^{-1}(\\{b\\})$ is a finite set. The component description [lem-weil-pbc-scheme-coproduct-family] and the image statement [lem-weil-pbc-reduced-induced-closed-subscheme] identify the underlying set $h^{-1}(\\{b\\})$ with the disjoint union, over $i\\in I$ and $s\\in S_{i,b}$, of the sets $E_{i,s}$ of step 5: a point of $Z$ lies in a unique $C_i$, its image under $b_i$ is a unique $s$, and it is outside $O_i$. Here [def-pc-scheme-fibre] identifies points of $(C_i)_s$ with points of $C_i$ mapping to $s$; no base-change invariance of the reduced subscheme structure is asserted or needed. There are finitely many indices and each $E_{i,s}$ is finite. Hence $h$ has finite fibres.",
+   "text": "Fix $b\\in B$. For each $i$, the finite morphism $t_i$ is quasi-finite by [pqf-lem-finite-qf], so [pqf-lem-qf-finitefibres] says that $S_{i,b}=t_i^{-1}(\\{b\\})$ is a finite set. The component description [lem-weil-pbc-scheme-coproduct-family] and the image statement [lem-weil-pbc-reduced-induced-closed-subscheme] identify the underlying set $h^{-1}(\\{b\\})$ with the disjoint union, over $i\\in I$ and $s\\in S_{i,b}$, of the sets $E_{i,s}$ of step 4: a point of $Z$ lies in a unique $C_i$, its image under $b_i$ is a unique $s$, and it is outside $O_i$. Here [def-pc-scheme-fibre] identifies points of $(C_i)_s$ with points of $C_i$ mapping to $s$; no base-change invariance of the reduced subscheme structure is asserted or needed. There are finitely many indices and each $E_{i,s}$ is finite. Hence $h$ has finite fibres.",
    "uses": [
     "pqf-lem-finite-qf",
     "pqf-lem-qf-finitefibres",
@@ -113,9 +95,11 @@
    }
   },
   {
-   "text": "We proved in step 3 that $h$ is of finite type, hence locally of finite type and quasi-compact, and in step 6 that all its fibres are finite. Apply the reverse implication of [pqf-lem-qf-finitefibres]: $h$ is quasi-finite. Its separatedness and finite presentation were already established in step 3. If $B$, $I$, or a particular $T_i$ is empty, the corresponding point or component arguments are vacuous; an empty component contributes no points and all conclusions remain valid.",
+   "text": "The boundary morphism is proper, so it is separated, locally of finite type, quasi-compact and quasi-separated; the locally Noetherian base supplies local finite presentation. Each fibre is finite by the previous step. Apply the existing proved Scheme.Hom.discreteTopology_fiber_and_quasiFiniteAt to give the scheme fibre its discrete topology, so every asFiber singleton is open. This is exactly the finite-type and isolated-fibre-point definition of Scheme.Hom.IsQuasiFinite. Assemble the five asserted properties.",
    "uses": [
-    "pqf-lem-qf-finitefibres"
+    "pqf-lem-qf-finitefibres",
+    "pqf-lem-locqf-fibre-discrete",
+    "pqf-lem-lft-fp-locnoeth"
    ],
    "elementary": false,
    "source": {
@@ -125,34 +109,30 @@
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-scheme-coproduct-family",
   "lem-weil-pbc-finite-proper",
   "lem-weil-pbc-proper-composition",
-  "def-weil-proper-morphism",
-  "lem-weil-pbc-scheme-coproduct-family",
-  "def-weil-finite-type-morphism",
-  "def-weil-closed-immersion",
   "lem-weil-pbc-reduced-induced-closed-subscheme",
   "lem-weil-pbc-closed-immersion-proper",
+  "def-weil-proper-morphism",
   "pqf-lem-lft-fp-locnoeth",
   "def-weil-pbc-scheme-conventions",
-  "lem-weil-pbc-proper-base-change",
-  "lem-weil-pbc-finite-type-over-noetherian",
   "sbc-lem-smooth-criterion",
-  "lem-weil-pbc-geometric-regularity-smooth-field-criterion",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-weil-pbc-finite-type-over-noetherian",
   "def-pc-geometrically-irreducible",
-  "rem-pc-regular-normal",
+  "lem-sc-regular-connected-integral",
   "def-pc-scheme-fibre",
   "def-weil-open-immersion",
-  "lem-sc-scheme-sober",
-  "lem-sc-dim-one-point-outside-open-closed",
-  "lem-sc-noetherian-closed-points-finite",
+  "lem-sc-nonempty-open-complement-finite-dim-le-one",
   "pqf-lem-finite-qf",
-  "pqf-lem-qf-finitefibres"
+  "pqf-lem-qf-finitefibres",
+  "pqf-lem-locqf-fibre-discrete"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "G8 stage-3 worker",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tag 0GKX, label lemma-constant-shriek-rel-dim-1, expanding the sentence \"Again Zprime to V is quasi-finite\" using the geometry of Tag 0GK7 (lemma-make-good-curves)"
+  "place": "Tag 0GKX, second boundary Zprime; implemented by the existing proved regularity, curve-complement and finite-fibre results, with a direct coproduct pullback argument."
  },
  "mathlib_searches": [
   {
@@ -266,9 +246,7 @@
   ]
  },
  "tool_uses": [
-  "sbc-lem-smooth-criterion",
-  "rem-pc-regular-normal",
-  "lem-sc-noetherian-closed-points-finite"
+  "sbc-lem-smooth-criterion"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -300,5 +278,15 @@
   "group": "Q157",
   "result": "pass",
   "note": "Every clause matches the node through the recorded dependency declarations: Noetherian base as IsLocallyNoetherian + CompactSpace; finite étale as IsFinite + Etale; Smooth and IsProper for b_i; fibre conditions via Scheme.Hom.fiber, GeometricallyConnected over the residue field and topologicalKrullDim ≤ 1; hO is the fibre of O_i → T_i; the open is the supremum of the images of u_i in the coproduct; Z is the recorded vanishing-ideal reduced subscheme; the conclusion is IsSeparated, the project's Scheme.Hom.IsQuasiFinite and the Stacks 01TP finite-presentation triple. I in the scheme universe is harmless because I is finite. The helper goodCurvesBoundaryMap is the canonical map, not hollow. Node diff against the live DAG: only the lean record is added, and lean.statement appears verbatim in the file. Docstrings carry the source place, blueprint tag and 7-step plan; the proof is only sorry; no pro-étale content; the report has both sections. Edge cases (empty I, B or T_i; O_i = C_i; 0-dimensional fibres) are covered. nt_compile --json compiled with rc 0 and no errors or warnings in 12.7 s and 24.8 s; a probe confirmed the types, coercions and axioms. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261019T093426-L-2309865",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
