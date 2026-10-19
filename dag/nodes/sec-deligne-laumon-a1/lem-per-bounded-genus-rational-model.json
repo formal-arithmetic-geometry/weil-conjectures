@@ -20,9 +20,123 @@
   "def-weil-proper-morphism",
   "def-sc-function-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-per-rational-surface-singularity], the lengths $\\ell_R H^1(M,\\mathcal O_M)$ for normal modifications $M\\to S=\\operatorname{Spec}R$ belong to a bounded subset of $\\mathbb N$. This subset is nonempty, since the identity of $S$ is a normal modification. A nonempty bounded subset of $\\mathbb N$ has a largest element $L$; choose a normal modification $M$ attaining it. Here and below length has the meaning in [def-weil-pbc-module-length].",
+   "uses": [
+    "def-per-rational-surface-singularity",
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0B4P, resolve-lemma-reduce-to-rational, first paragraph (maximal length)."
+   }
+  },
+  {
+   "text": "Apply [lem-per-nagata-surface-normalized-domination] to $M\\to S$. Obtain its tower and write $T=T_n$ and $q:T\\to M$. The exact sequence in [lem-per-surface-modification-h1-exact] for $T\\to M\\to S$, and length additivity [lem-weil-pbc-length-additive-short-exact], give $L\\leq\\ell_RH^1(T,\\mathcal O_T)$. The reverse inequality holds because $T\\to S$ is a normal modification and $L$ was maximal. Thus $T$ also attains $L$. This selects the same domination tower as the last paragraph of the source, before testing its local rings.",
+   "uses": [
+    "lem-per-nagata-surface-normalized-domination",
+    "lem-per-surface-modification-h1-exact",
+    "lem-weil-pbc-length-additive-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0B4P, first and third paragraphs; domination is taken before the local test."
+   }
+  },
+  {
+   "text": "Let $g:Z\\to T$ be any proper modification with $Z$ normal. The composite $Z\\to S$ is proper by [lem-weil-pbc-proper-composition], is integral and induces the composite isomorphism of function fields. Applying [lem-per-surface-modification-h1-exact] and [lem-weil-pbc-length-additive-short-exact] gives $$\\ell_RH^1(Z,\\mathcal O_Z)=L+\\ell_RH^0(T,R^1g_*\\mathcal O_Z).$$ The left side is at most $L$, so the last module has length zero. A nonzero module has the strict chain $0\\subsetneq N$ and therefore positive length by [def-weil-pbc-module-length]; hence $H^0(T,R^1g_*\\mathcal O_Z)=0$. The global generation assertion of [lem-per-surface-modification-h1-exact] now forces every stalk, and thus $R^1g_*\\mathcal O_Z$, to vanish.",
+   "uses": [
+    "lem-per-surface-modification-h1-exact",
+    "lem-weil-pbc-length-additive-short-exact",
+    "lem-weil-pbc-proper-composition",
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0B4P, first paragraph (maximality kills further first direct images)."
+   }
+  },
+  {
+   "text": "Fix a closed point $x\\in T$ with $\\dim B=2$, where $B=\\mathcal O_{T,x}$. Normality of $T$ makes $B$ a normal local domain. By [lem-per-nagata-surface-normalized-domination], an affine neighbourhood of $x$ has a Nagata coordinate ring; its localization $B$ is Nagata by [lem-weil-pbc-nagata-localization], hence Noetherian. Let $h:Y\\to\\operatorname{Spec}B$ be any normal modification, as in [def-per-rational-surface-singularity]. Each nonclosed point of the two-dimensional local spectrum has height zero or one. At height one the local ring is a DVR by [lem-sc-normal-dim1-dvr]. Thus [lem-per-normal-modification-codimension-one], clauses (1) and (2), shows that $h$ is an isomorphism on the punctured spectrum.",
+   "uses": [
+    "lem-per-nagata-surface-normalized-domination",
+    "lem-weil-pbc-nagata-localization",
+    "def-per-rational-surface-singularity",
+    "lem-sc-normal-dim1-dvr",
+    "lem-per-normal-modification-codimension-one"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0B4P, second paragraph; resolve-situation-vanishing and its punctured-spectrum observation."
+   }
+  },
+  {
+   "text": "Apply [lem-per-local-normal-modification-extension] to the normal Noetherian integral scheme $T$, its closed point $x$, and $h$. It gives a proper normal modification $g:Z\\to T$ whose base change to $\\operatorname{Spec}B$ is $h:Y\\to\\operatorname{Spec}B$. Its composite to $S$ is proper by [lem-weil-pbc-proper-composition] and induces an isomorphism of function fields, so Step 3 applies and gives $R^1g_*\\mathcal O_Z=0$.",
+   "uses": [
+    "lem-per-local-normal-modification-extension",
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0B4P, second paragraph, extension from the local spectrum via Tags 0B3X and 0BFN."
+   }
+  },
+  {
+   "text": "The canonical map $a:\\operatorname{Spec}B\\to T$ is flat: on an affine neighbourhood $\\operatorname{Spec}C$ of $x$ it is $C\\to C_{\\mathfrak p}$, and its local ring maps are localizations, which are flat by [lem-weil-pbc-localization-flat] and the stalkwise definition [def-weil-flat-morphism]. The proper map $g$ is quasi-compact and quasi-separated, and its structure sheaf is quasi-coherent. Hence the sheaf form of [lem-pc-flat-base-change-cohom] gives $$R^1h_*\\mathcal O_Y\\cong a^*R^1g_*\\mathcal O_Z=0.$$ For $h$ over the affine scheme $\\operatorname{Spec}B$, [lem-pc-affine-higher-direct-image-cohomology-vanishing] with $p=1,q=0$ gives $H^1(\\operatorname{Spec}B,h_*\\mathcal O_Y)=0$. The low degree exact sequence [pqf-lem-leray-lowdegree], with both this term and $H^0(\\operatorname{Spec}B,R^1h_*\\mathcal O_Y)$ zero, gives $H^1(Y,\\mathcal O_Y)=0$. This writes out the source's final local-cohomology inference.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "def-weil-flat-morphism",
+    "lem-pc-flat-base-change-cohom",
+    "lem-pc-affine-higher-direct-image-cohomology-vanishing",
+    "pqf-lem-leray-lowdegree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0B4P, second paragraph, last sentence, expanded using coherent.tex Tag 02KH and the affine-base Leray sequence."
+   }
+  },
+  {
+   "text": "Since $h$ was arbitrary, [def-per-rational-surface-singularity] says that $B$ defines a rational singularity. This holds for every closed $x\\in T$ of local dimension two. The tower chosen in Step 2 already has all the required normality, integrality, finite-normalization, properness, function-field and center properties by [lem-per-nagata-surface-normalized-domination]. Its length may be zero. Thus it is the asserted tower.",
+   "uses": [
+    "def-per-rational-surface-singularity",
+    "lem-per-nagata-surface-normalized-domination"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0B4P, conclusion, with the maximality argument on the dominating tower."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-per-rational-surface-singularity",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-module-length",
+  "lem-pc-affine-higher-direct-image-cohomology-vanishing",
+  "lem-pc-flat-base-change-cohom",
+  "lem-per-local-normal-modification-extension",
+  "lem-per-nagata-surface-normalized-domination",
+  "lem-per-normal-modification-codimension-one",
+  "lem-per-surface-modification-h1-exact",
+  "lem-sc-normal-dim1-dvr",
+  "lem-weil-pbc-length-additive-short-exact",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-nagata-localization",
+  "lem-weil-pbc-proper-composition",
+  "pqf-lem-leray-lowdegree"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0B4P, resolve-lemma-reduce-to-rational; take the dominating normalized tower before applying the same maximality/localization argument to its closed points."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +172,24 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiCompact (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\\\to Y $ is quasi-compact. This morphism is constructed by gluing local normalization maps defined via integral closure\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization\\n    ((AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor Y).op.comp\\n      (AlgebraicGeometry.Scheme.Hom.no\", \"doc\": \"For a scheme morphism $ f $, the normalization diagram functor $ F $ equipped with a natural transformation $ \\\\alpha: \\\\mathcal{O}_Y \\\\Rightarrow F $ satisfies the localization condition: for every affi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the canonical morphism from $ X $ to its normalization is dominant, meaning its image is dense in the normalization scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}",
    "date": "2026-10-19",
    "verdict": "no match: read the returned signatures; normalization, smoothness, cotangent cohomology, number-field completions and birational-map definitions do not state this surface-singularity assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded geometric genus of a normal Nagata local surface gives a model with rational singularities",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": X ⟶ f.normalization\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"Algebra.isReduced_of_isGeometricallyReduced\", \"module\": \"Mathlib.RingTheory.Nilpotent.GeometricallyReduced\", \"type\": \"[IsGeometricallyReduced k A] : IsReduced A\", \"doc\": \"If $ A $ is a $ k $-algebra that is geometrically reduced over a field $ k $, then $ A $ is a reduced ring, meaning it contains no nonzero nilpotent elements.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": IsDominant f.toNormalization\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the canonical morphism from $ X $ to its normalization is dominant, meaning its image is dense in the normalization scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_Spec\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{R : CommRingCat} : IsLocallyNoetherian (Spec R) ↔ IsNoetherianRing R\", \"doc\": \"The scheme $\\\\operatorname{Spec}(R)$ is locally Noetherian if and only if the commutative ring $R$ is Noetherian (i.e., every ideal of $R$ is finitely generated).\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsReduced X] : IsReduced f.normalization\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \"[IsLocallyNoetherian X] : X.IsGermInjective\", \"doc\": \"Every locally Noetherian scheme is germ-injective, meaning that for every point in the scheme, the natural map from the local ring to the stalk of the structure sheaf at that point is injective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegral X] : IsIntegral f.normalization\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegralHom f] : IsIso f.toNormalization\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform bounds for first coherent cohomology on birational surface models yield rational singularities after point blowups",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y), ∃ g, g.toRationalMap = f\", \"doc\": \"For any rational map $ f \\\\colon X \\\\dashrightarrow Y $ between schemes $ X $ and $ Y $, there exists a partial map $ g \\\\colon X \\\\to Y $ such that the equivalence class of $ g $ under the rational map i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type u\", \"doc\": \"The quotient of partial maps between schemes $X$ and $Y$ by the equivalence relation where two partial maps are considered equivalent if they agree on an open subset of the source scheme $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  (sX : X ⟶ S) →\\n    (sY : Y ⟶ S) →\\n      [inst : AlgebraicGeometry.IsIntegral X] →\\n        [AlgebraicGeometry.LocallyOfFiniteType sY] →\\n          (f : AlgebraicGeometry.Spec X.functionField ⟶ Y) →\\n            CategoryTheory.CategoryStruct.comp f sY =\\n           \", \"doc\": \"Given an integral scheme $X$, a scheme $Y$ with a morphism $s_Y:Y\\\\to S$ locally of finite type, and a morphism $f:\\\\operatorname{Spec}(K(X))\\\\to Y$ from the spectrum of $X$'s function field $K(X)$ satis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.RationalMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"For irreducible schemes $X$ and $Y$, this function constructs a morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ from a rational map $X \\\\dashrightarrow Y$, where $K(X)$ is the function field of $X$. It is d\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : AlgebraicGeometry.IsIntegral X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] (f : AlgebraicGeometry.Spec X.functionField ⟶ Y)\\n  (h :\\n    CategoryTheory.CategoryStruct.comp f sY =\\n      CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given an integral scheme $X$ and a scheme $Y$ with a morphism $s_Y: Y \\\\to S$ locally of finite type, if a morphism $f: \\\\operatorname{Spec}(K(X)) \\\\to Y$ satisfies the compatibility condition $f \\\\circ s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : IrreducibleSpace ↥X] (f : X.PartialMap Y),\\n  f.toRationalMap.fromFunctionField = f.fromFunctionField\", \"doc\": \"For irreducible schemes $X$ and $Y$, the morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ constructed from a rational map $X \\\\dashrightarrow Y$ via the function field $K(X)$ is compatible with the conversio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.isOver_toRationalMap_iff_of_isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} [inst : X.Over S] [inst_1 : Y.Over S] [AlgebraicGeometry.IsReduced X]\\n  [S.IsSeparated] {f : X.PartialMap Y},\\n  AlgebraicGeometry.Scheme.RationalMap.IsOver S f.toRationalMap ↔ AlgebraicGeometry.Scheme.PartialMap.IsOver S f\", \"doc\": \"Let $X$ and $Y$ be schemes over a base scheme $S$, with $X$ being reduced and $S$ being separated. For any partial map $f$ from $X$ to $Y$, the rational map obtained from $f$ is over $S$ if and only i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-complete-normal-surface-resolution",
@@ -88,5 +216,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-bounded-genus-rational-model",
+  "worker": "stage1",
+  "summary": "Retained the existing statement and prior searches; fixed doubled TeX escapes. Followed 0B4P by a maximal H1-length normal modification and a dominating Nagata normalized point-blowup tower. The same exact sequence makes the tower maximal; globalization of arbitrary local modifications and explicit flat base change then prove its local rationality. Three statement-only subsidiary nodes; no excellence assumption added.",
+  "blueprint": "Technical surface-resolution input to lem-per-artin-gabber-affine-curve proof Step 1 through ILO XVII 3.4.1 and the recorded ancestry: realizes the bounded-genus reduction Tag 0B4P used by Tag 0BGN.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-higher-direct-image-cohomology-vanishing",
+    "why": "Affine-base vanishing at p=1,q=0 to finish local H1 vanishing."
+   },
+   {
+    "node": "lem-pc-flat-base-change-cohom",
+    "why": "The sheaf form of coherent flat base change in degree one, to localize the vanishing higher image."
+   },
+   {
+    "node": "lem-sc-normal-dim1-dvr",
+    "why": "Normal height-one local rings are DVRs for the punctured-spectrum test."
+   },
+   {
+    "node": "lem-weil-pbc-length-additive-short-exact",
+    "why": "Length additivity for the maximality argument; the surface unit supplies no module-length theorem."
+   },
+   {
+    "node": "lem-weil-pbc-localization-flat",
+    "why": "Flatness of the local-spectrum map used for coherent base change."
+   },
+   {
+    "node": "lem-weil-pbc-nagata-localization",
+    "why": "Nagata local rings on the tower; a generic localization tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Properness of the composite modification; a generic permanence tool."
+   },
+   {
+    "node": "pqf-lem-leray-lowdegree",
+    "why": "The ordinary coherent low-degree Leray exact sequence; not an etale comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-higher-direct-image-cohomology-vanishing",
+  "lem-pc-flat-base-change-cohom",
+  "lem-sc-normal-dim1-dvr",
+  "lem-weil-pbc-length-additive-short-exact",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-nagata-localization",
+  "lem-weil-pbc-proper-composition",
+  "pqf-lem-leray-lowdegree"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-6fc988a11",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-6fc988a11 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and every cited statement in full, and checked them against the source: Stacks resolve.tex 0B4N, 0B4P, 0BG0, 0AXF, situation-vanishing, 0BBS, 0BFT and 0BBT, and limits.tex 0B3X and 0BFN. The item statement is the same as the live unsplit node; only the TeX escapes changed. The dim-2 restriction on closed points was already there, so nothing is weakened. All 7 steps are sound. Steps 1-3: maximal H1 length, domination, and the 0AXF exact sequence plus length additivity, which show that the dominating tower T also attains the maximum L. Step 3 then gives R1g_*=0 for every normal modification of T, through the global-generation clause. Step 4: B is Nagata via the domination node and Nagata localization; primes below the maximal ideal have height at most 1; height-one rings are DVRs; codimension-one clauses (1),(2) make h an isomorphism on the punctured spectrum. Step 5: the 0B3X/0BFN extension Z->T. Step 6: flat base change, affine vanishing and low-degree Leray give H1(Y,O_Y)=0. Step 7 concludes. Dominating first avoids citing 0BG0 (unsplit), and this rearrangement is valid. New nodes are all true and match their sources. h1-exact is 0AXF; X' need not be normal, as in the source. local-normal-modification-extension is 0B3X+0BFN; normality comes from the local rings, integrality from the generic point; the Spec(field) edge case holds. nagata-surface-normalized-domination is 0BBT+0BFT with normal local base: X0=S, closed centers lie over the closed point, the normalizations are finite. Duplicate search: no existing 0AXF or 0B3X node. The excellent domination node needs a global excellent base and does not apply to a Nagata local ring, so it is not a duplicate. 0BG0 is neither cited nor restated. Batch-5 flag: lem-per-normal-modification-codimension-one reaches lem-trf-proper-finite-fibre-finite-near (Stacks 02UP: proper with finite fibre is finite near the point). That is a general morphism lemma that neither assumption provides and that is not specific to their proofs, so I accept the citation. No SGA citations. Tool_uses (all generic) are accepted. No fixes."
  }
 }
