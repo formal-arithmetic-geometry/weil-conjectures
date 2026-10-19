@@ -24,63 +24,91 @@
  ],
  "proof": [
   {
-   "text": "Choose the given bounded representative E^\\bullet and complex representatives I_n of C_n. A bounded complex whose terms are direct summands of finite free A_T-modules is K-flat: tensoring an acyclic complex with a finite free complex is acyclic degreewise, and the property is preserved by finite direct sums, bounded totalization, and retracts. Hence E^\\bullet\\otimes_{A_T}I_n computes C_n\\otimes^L_{A_T}E. By the termwise product description in [def-weil-pbc-derived-inverse-limit], which applies because countable products are exact, the product complex \\prod_n I_n represents R\\!\\prod_n C_n. The canonical comparison is therefore represented by the chain map (\\prod_n I_n)\\otimes E^\\bullet\\to\\prod_n(I_n\\otimes E^\\bullet), with all objects in D(\\operatorname{Mod}(T_{\\Proet},A_T)).",
+   "text": "Finite powers of the tensor unit are dualizable by induction using zero objects and binary biproducts. Dualizability passes to the given finite-free retracts. The tensor adjunction and independent-coefficient tensor colimit preservation make tensor by each term exact. Apply the independent-universe bounded-above flat criterion to obtain K-flatness. Tensoring mapping cones and the acyclic-cone criterion show that total tensor with P preserves quasi-isomorphisms. This proves finiteProjectiveTensorComplexRight_inverts and gives its canonical localization lift.",
    "uses": [
-    "def-weil-derived-tensor",
     "def-weil-pbc-adic-coefficient-datum",
-    "def-weil-pbc-derived-inverse-limit"
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-pur-quasi-iso-cone-acyclic"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-finite-reduction-reconstruction.md",
-    "place": "proof, final sentence: tensor with the bounded finite-projective representative in the A_T-module sheaf category"
+    "place": "proof, final sentence on tensor and the two Roos products; global bounded finite-projective mechanism, interpreted in the A_T-module sheaf category"
    }
   },
   {
-   "text": "For a finite free term A_T^r, tensoring a product of complexes with that term is the canonical finite distributivity map (\\prod_n C_n)^r\\cong\\prod_n C_n^r. The same map is an isomorphism for a direct summand, because the idempotent defining the summand acts on both sides and the product comparison intertwines these idempotents. Thus the comparison is an isomorphism degreewise for every term E^j, and it is natural in the term maps and in the family maps.",
+   "text": "Use the already proved source-library theorem CochainComplex.isDualizable_of_isStrictlyGE_of_isStrictlyLE on the bounded representative with its dualizable terms. Its explicit signed dual-complex construction packages the finite-free, retract and finite-totalization argument. The tensor-right adjunction then proves preservation of products of complexes. Tensor colimit preservation supplies the coproduct hypotheses of the total-complex monoidal structure.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-finite-reduction-reconstruction.md",
+    "place": "proof, final sentence on tensor and the two Roos products; global bounded finite-projective mechanism, interpreted in the A_T-module sheaf category"
+   }
+  },
+  {
+   "text": "Exact countable products over the completed coefficient ring supply adicDatumCountableAB4Star. Apply derivedCategory_countableProducts_core to identify the localized product cones with derived product cones. The localization comparison transfers product preservation of the complex tensor functor to the composite of Q and its localization lift. Essential surjectivity of Q supplies complex representatives of every countable family; transfer limitingness along the family isomorphism to prove that the lift preserves countable products. The canonical piComparison is consequently invertible.",
+   "uses": [
+    "def-weil-pbc-derived-inverse-limit",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-products-core",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-finite-reduction-reconstruction.md",
+    "place": "proof, final sentence on tensor and the two Roos products; global bounded finite-projective mechanism, interpreted in the A_T-module sheaf category"
+   }
+  },
+  {
+   "text": "For coefficient functoriality, use the normalized one-K-flat representative comparison in ringedDerived_closed_symmetric_monoidal. Since P and P′ are K-flat, this comparison is natural on every complex in the other variable. Fully faithful precomposition with Q lifts it to an isomorphism between each localization lift and the corresponding fixed-coefficient derived tensor functor. Conjugate the derived tensor action of e by these isomorphisms. For any K-flat test C and any roof P ← S → P′ representing e, naturality of the one-K-flat comparison gives its required roof formula. For uniqueness choose a roof for e; its denominator tensored with C is invertible by the same comparison, so the formula determines each K-flat component. Resolve an arbitrary complex by a K-flat one. Naturality across its inverted augmentation determines every component, and localization extensionality proves equality.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-pc-kflat-resolution",
+    "lem-pc-right-fraction-representation",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-finite-reduction-reconstruction.md",
+    "place": "proof, final sentence on tensor and the two Roos products; global bounded finite-projective mechanism, interpreted in the A_T-module sheaf category"
+   }
+  },
+  {
+   "text": "For the final displayed naturality equation, compose both sides with each product projection. The piComparison projection equation, naturality of finiteProjectiveTensorRightMap and functoriality give identical components. Product extensionality proves the equation.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-finite-reduction-reconstruction.md",
-    "place": "proof, bounded finite-projective mechanism: finite free terms and direct summands"
-   }
-  },
-  {
-   "text": "Since E^\\bullet is bounded, each degree of its total tensor with a product is a finite direct sum of the degreewise comparisons from step 2. These finite direct sums are isomorphisms, and the displayed sign differential is respected because every component comparison is induced by the same product projections. Hence the chain map is a quasi-isomorphism before passing to the derived category. The exactness of countable products of A_T-module sheaves ensures that the product complex represents the derived product and that this quasi-isomorphism remains an isomorphism after localization.",
-   "uses": [
-    "lem-weil-proetale-countable-products-exact",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-finite-reduction-reconstruction.md",
-    "place": "proof, Roos product computation: finite totalization and exact countable products"
-   }
-  },
-  {
-   "text": "By the definition of the derived inverse-limit construction, each occurrence R\\!\\prod_{n\\geq1}C_n is the product in D(\\operatorname{Mod}(T_{\\Proet},A_T)) computed termwise by the exact-product model. Applying the chain-level isomorphism of step 3 and then localizing gives the canonical comparison in the statement. Because every map used is induced by the projections and the tensor bifunctor, the construction is functorial in E and in all maps of the family (C_n).",
-   "uses": [
-    "def-weil-pbc-derived-inverse-limit",
-    "def-weil-derived-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-finite-reduction-reconstruction.md",
-    "place": "proof, final sentence on tensor and the two derived Roos products"
+    "place": "proof, final sentence on tensor and the two Roos products; global bounded finite-projective mechanism, interpreted in the A_T-module sheaf category"
    }
   }
  ],
  "proof_deps": [
-  "def-pc-tensor-complex-sheaves",
-  "def-weil-derived-tensor",
   "def-weil-pbc-adic-coefficient-datum",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-pur-quasi-iso-cone-acyclic",
   "def-weil-pbc-derived-inverse-limit",
-  "lem-weil-proetale-countable-products-exact"
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-products-core",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-pc-kflat-resolution",
+  "lem-pc-right-fraction-representation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-finite-reduction-reconstruction.md",
-  "place": "Proof, final sentence on tensor and the two derived Roos products"
+  "place": "Finite-projective tensor/Roos sentence: K-flatness via finite dualizability and bounded-flatness; product preservation via the proved bounded dual-complex theorem and exact-product localization; coefficient transformations via the recorded normalized derived tensor comparison and K-flat resolutions; projectionwise naturality. All three local theorem proofs are complete."
  },
  "mathlib_searches": [
   {
@@ -191,5 +219,15 @@
   "date": "2026-10-16",
   "existing": false,
   "note": "Representative formulation: P is the given globally bounded finite-free retract representative of E. The localization lift, with its explicit comparison on every complex, is the canonical functor (-) tensor-derived E in D(Mod(A_T)). piComparison is induced by actual product projections. For every derived coefficient map e, finiteProjectiveTensorRightMap is uniquely fixed by its formula on all representing roofs and K-flat test complexes; the final equation is naturality in e and the family. Positive family level n+1 is encoded by n : ℕ. Adds the landed independent-universe splitting-package node; no statement correction."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261019T034340-L-424058",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
