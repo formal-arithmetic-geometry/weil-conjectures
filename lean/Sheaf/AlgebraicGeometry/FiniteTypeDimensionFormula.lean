@@ -14,7 +14,7 @@ public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.SetTheory.Cardinal.ENat
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import WeilConjectures.ZetaSeries
-import Sheaf.RingTheory.DimensionAtPointLocalRingTrdeg
+import WeilConjectures.RingTheory.DimensionAtPointLocalRingTrdeg
 
 /-!
 # Dimension formula for finite type schemes over a field

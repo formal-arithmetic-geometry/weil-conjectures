@@ -7,8 +7,8 @@ module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-public import Sheaf.RingTheory.Depth
-import Sheaf.RingTheory.DepthLeSupportDimension
+public import WeilConjectures.RingTheory.Depth
+import WeilConjectures.RingTheory.DepthLeSupportDimension
 import Sheaf.AlgebraicGeometry.Morphisms.QuasiFiniteFlatCodimensionOneEtaleNeighbourhood
 
 /-!

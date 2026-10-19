@@ -13,11 +13,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.Kaehler.Basic
 
 import WeilConjectures.AlgebraicGeometry.FunctionField
-import Sheaf.RingTheory.FiniteTypeDomainDimensionTrdeg
+import WeilConjectures.RingTheory.FiniteTypeDomainDimensionTrdeg
 import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
 import Mathlib.RingTheory.Etale.Kaehler
 import Mathlib.Algebra.Module.LocalizedModule.Exact
-import Sheaf.RingTheory.DimensionAtPointLocalRingTrdeg
+import WeilConjectures.RingTheory.DimensionAtPointLocalRingTrdeg
 import Sheaf.AlgebraicGeometry.UnramifiedAlgebraOverFieldProduct
 import WeilConjectures.AlgebraicGeometry.Regular
 import Sheaf.AlgebraicGeometry.Curve.NonconstantNormalCurveMapFlat

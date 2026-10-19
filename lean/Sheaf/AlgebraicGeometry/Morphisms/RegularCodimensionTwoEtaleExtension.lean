@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 import Sheaf.AlgebraicGeometry.Morphisms.RegularCodimensionTwoFiniteFlatStalk
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtension
 import Sheaf.AlgebraicGeometry.Morphisms.FlatDepthTwoFiniteFormallyUnramified
 

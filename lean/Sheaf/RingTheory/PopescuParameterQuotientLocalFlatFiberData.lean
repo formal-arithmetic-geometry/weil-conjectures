@@ -19,7 +19,7 @@ import WeilConjectures.RingTheory.FlatLocalizedQuotient
 import WeilConjectures.RingTheory.PopescuParameterQuotientResidueEquivs
 import Sheaf.RingTheory.FlatOverRegular
 import Sheaf.RingTheory.PolynomialOriginRegularLocal
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 
 /-! # Flatness and the closed fiber of the local parameter quotient
 

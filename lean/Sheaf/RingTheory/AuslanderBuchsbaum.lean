@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Sheaf.RingTheory.GlobalDimension
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 import Mathlib.RingTheory.Nakayama
 import Mathlib.RingTheory.Regular.RegularSequence
 import Sheaf.RingTheory.MinimalFiniteFreeResolutionLocal

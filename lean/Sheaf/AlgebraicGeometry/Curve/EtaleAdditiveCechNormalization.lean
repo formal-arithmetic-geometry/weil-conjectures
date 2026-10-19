@@ -6,7 +6,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechBaseChange
-public import Sheaf.AlgebraicGeometry.EtaleOpenCechResolutionDoubleComplex
+public import WeilConjectures.AlgebraicGeometry.EtaleOpenCechResolutionDoubleComplex
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 

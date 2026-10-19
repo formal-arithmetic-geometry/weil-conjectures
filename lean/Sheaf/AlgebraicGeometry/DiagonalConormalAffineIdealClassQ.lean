@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U3
 -/
 module
-public import Sheaf.AlgebraicGeometry.DiagonalConormal
+public import WeilConjectures.AlgebraicGeometry.DiagonalConormal
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.RingTheory.Kaehler.Basic
 import Sheaf.AlgebraicGeometry.AffineOpenKernelConormalSections

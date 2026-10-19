@@ -7,14 +7,14 @@ module
 
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.LinearAlgebra.FreeModule.Basic
-public import Sheaf.RingTheory.Depth
-import Sheaf.RingTheory.CmModuleGoodElementNonzerodivisor
-import Sheaf.RingTheory.DepthLeSupportDimension
-import Sheaf.RingTheory.DepthOverQuotientRing
+public import WeilConjectures.RingTheory.Depth
+import WeilConjectures.RingTheory.CmModuleGoodElementNonzerodivisor
+import WeilConjectures.RingTheory.DepthLeSupportDimension
+import WeilConjectures.RingTheory.DepthOverQuotientRing
 import Mathlib.RingTheory.Regular.Free
 import Mathlib.RingTheory.KrullDimension.Regular
 import Mathlib.LinearAlgebra.Dimension.Free
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 
 /-!
 # Maximal Cohen–Macaulay modules over regular local rings

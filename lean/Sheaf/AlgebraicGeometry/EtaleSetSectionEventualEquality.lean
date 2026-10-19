@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparison
 import Sheaf.AlgebraicGeometry.EtaleSetSectionAffineEventualEquality
 import WeilConjectures.AlgebraicGeometry.EtaleFiniteAffineRestrictionDetection
 import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonNaturality
-import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonLaws
+import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonLaws
 import Mathlib.CategoryTheory.Filtered.Final
 
 /-! # An intermediate step in continuity of étale sections

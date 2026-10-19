@@ -8,9 +8,9 @@ module
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.Regular.RegularSequence
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 import Mathlib.RingTheory.KrullDimension.Regular
-import Sheaf.RingTheory.IsRegularOfDimensionDrop
+import WeilConjectures.RingTheory.IsRegularOfDimensionDrop
 
 /-!
 # Regular sequences and dimension drop in Cohen–Macaulay local rings

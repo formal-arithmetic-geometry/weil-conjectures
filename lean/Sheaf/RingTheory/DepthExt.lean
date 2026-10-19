@@ -5,12 +5,12 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.Algebra.Category.ModuleCat.Ext.HasExt
 public import Mathlib.Algebra.Module.ULift
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Sheaf.RingTheory.DepthLeSupportDimension
+import WeilConjectures.RingTheory.DepthLeSupportDimension
 import Mathlib.RingTheory.Depth.Rees
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 

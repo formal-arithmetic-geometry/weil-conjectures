@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import WeilConjectures.RingTheory.SingularIdeal
-import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
+import WeilConjectures.AlgebraicGeometry.DimensionAtPointFieldExtension
 import WeilConjectures.RingTheory.AlgClosedDifferentialFiberAtClosedPoint
 import WeilConjectures.AlgebraicGeometry.SmoothAtMaximalIdeal
 import Sheaf.RingTheory.ClosedPointDimensionLocalRing

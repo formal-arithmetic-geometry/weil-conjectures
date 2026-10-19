@@ -11,7 +11,7 @@ import Sheaf.GroupTheory.FineMonoidFiniteSaturation
 import Sheaf.TraceFormula.SmoothGeometricallyNormal
 import Sheaf.AlgebraicGeometry.FiniteBirationalNormalIso
 import Sheaf.TraceFormula.FsFaceSharpening
-import Sheaf.RingTheory.FiniteTypeDomainDimensionTrdeg
+import WeilConjectures.RingTheory.FiniteTypeDomainDimensionTrdeg
 import WeilConjectures.AlgebraicGeometry.Regular
 import Mathlib.RingTheory.RegularLocalRing.Defs
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem

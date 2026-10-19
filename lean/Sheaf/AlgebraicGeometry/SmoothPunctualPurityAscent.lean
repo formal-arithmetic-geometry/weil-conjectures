@@ -25,7 +25,7 @@ import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
 import Sheaf.AlgebraicGeometry.RegularLCIGeometricCalculus
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Sheaf.AlgebraicGeometry.PrimeFieldPunctualPurity
 import Sheaf.AlgebraicGeometry.PunctualPurityTwoOfThree

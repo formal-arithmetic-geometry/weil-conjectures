@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 public import Mathlib.RingTheory.TensorProduct.Basic
-import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
+import WeilConjectures.AlgebraicGeometry.DimensionAtPointFieldExtension
 import Sheaf.AlgebraicGeometry.SpecSurjectiveBaseChange
 import Sheaf.RingTheory.ConormalGeneratorsGlobalCompleteIntersection
 import Sheaf.RingTheory.LciConormalFreeRankCodimension

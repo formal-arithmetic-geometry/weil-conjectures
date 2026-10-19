@@ -14,7 +14,7 @@ public import Mathlib.CategoryTheory.Functor.OfSequence
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.Topology.KrullDimension
 import WeilConjectures.RingTheory.CompleteLocalSubideal
-import Sheaf.RingTheory.Depth
+import WeilConjectures.RingTheory.Depth
 import Sheaf.RingTheory.SerreCriterionReduced
 import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.Algebra.Homology.LocalCohomologyGeneratorBound

@@ -7,14 +7,14 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.MvPowerSeries.Basic
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 import Sheaf.RingTheory.MvPowerSeriesFlat
 import Sheaf.RingTheory.QuotientAssociatedPrimesFlatBaseChange
 import WeilConjectures.RingTheory.MvPowerSeriesPrimeExtension
 import WeilConjectures.AlgebraicGeometry.Morphisms.AssociatedGermDetection
 import Mathlib.RingTheory.KrullDimension.Field
 import Mathlib.RingTheory.MvPowerSeries.Equiv
-import Sheaf.RingTheory.DepthLeDimAssociatedPrime
+import WeilConjectures.RingTheory.DepthLeDimAssociatedPrime
 
 /-!
 # Detecting sections at the punctured zero section

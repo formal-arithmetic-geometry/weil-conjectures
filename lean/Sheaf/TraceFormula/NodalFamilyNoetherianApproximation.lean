@@ -8,9 +8,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Sheaf.AlgebraicGeometry.PureDimension
-public import Sheaf.AlgebraicGeometry.DimensionLocallyAlgebraic
+public import WeilConjectures.AlgebraicGeometry.DimensionLocallyAlgebraic
 public import Sheaf.AlgebraicGeometry.DthFittingSmoothLocus
-public import Sheaf.AlgebraicGeometry.EquidimensionalOpenLocalDimension
+public import WeilConjectures.AlgebraicGeometry.EquidimensionalOpenLocalDimension
 public import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
 public import Sheaf.AlgebraicGeometry.FirstFittingSingularSubscheme
 public import Sheaf.AlgebraicGeometry.NodalCurveLCICriterion

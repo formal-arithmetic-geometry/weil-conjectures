@@ -17,7 +17,7 @@ import Mathlib.RingTheory.Smooth.Flat
 import Mathlib.RingTheory.FinitePresentation
 import Sheaf.RingTheory.SmoothFibreRegularLocal
 import Sheaf.RingTheory.RegularLocalQuotientKernelParameters
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Mathlib.RingTheory.Flat.Equalizer
 import Mathlib.Algebra.Module.LocalizedModule.Exact
 import Mathlib.RingTheory.LocalRing.Module

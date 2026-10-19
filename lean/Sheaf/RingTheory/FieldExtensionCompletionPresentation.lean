@@ -16,7 +16,7 @@ import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.RingTheory.AdicCompletion.Functoriality
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Sheaf.FieldTheory.FiniteSeparableTensorFieldReduced
-import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
+import WeilConjectures.AlgebraicGeometry.DimensionAtPointFieldExtension
 import Sheaf.RingTheory.FlatCompletion
 import Sheaf.RingTheory.PowerSeriesUniversalPropertyComplete
 import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete

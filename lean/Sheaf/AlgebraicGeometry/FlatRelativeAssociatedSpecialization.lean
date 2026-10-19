@@ -14,7 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Mathlib.Algebra.Module.LocalizedModule.Basic
 import Sheaf.AlgebraicGeometry.PullbackStalkRelativeFlatExtension
-import Sheaf.AlgebraicGeometry.DimensionLocallyAlgebraic
+import WeilConjectures.AlgebraicGeometry.DimensionLocallyAlgebraic
 import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
 import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.LocallyNoetherianComponentsLocallyFinite

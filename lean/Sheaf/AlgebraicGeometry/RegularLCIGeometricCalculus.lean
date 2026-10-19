@@ -28,7 +28,7 @@ import Mathlib.RingTheory.KrullDimension.Regular
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.RingTheory.Flat.Basic
 import WeilConjectures.AlgebraicGeometry.FiniteDimensionalResidueFieldOfIsolatedFiberPoint
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.RingTheory.RegularLocalQuotientKernelParameters
 import Sheaf.RingTheory.RegularRingSmoothAscent
 import Sheaf.RingTheory.RegularSequenceConormal

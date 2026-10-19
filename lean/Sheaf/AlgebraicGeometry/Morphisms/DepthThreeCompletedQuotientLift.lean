@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.AdicCompletion.Algebra
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 
 import Sheaf.AlgebraicGeometry.Morphisms.CompletedQuotientCoverLift
 import Sheaf.AlgebraicGeometry.Morphisms.CompletedPuncturedQuotientFullyFaithful

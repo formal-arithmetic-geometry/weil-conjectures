@@ -6,7 +6,7 @@ Authors: SHEAF group B3
 module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparison
-import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonLaws
+import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonLaws
 import Sheaf.AlgebraicGeometry.EtaleSetSectionEventualEquality
 import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonNaturality
 import WeilConjectures.AlgebraicGeometry.EtalePairRestrictionDetection

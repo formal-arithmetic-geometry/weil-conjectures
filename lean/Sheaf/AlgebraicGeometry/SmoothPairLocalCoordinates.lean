@@ -20,7 +20,7 @@ import Mathlib.RingTheory.LocalRing.Module
 import Sheaf.AlgebraicGeometry.EtaleLocalNormalForm
 import Sheaf.RingTheory.SmoothFibreRegularLocal
 import Sheaf.RingTheory.SmoothOverFieldRegularLocal
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.RingTheory.Etale.LocalDimension
 import WeilConjectures.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
 import Sheaf.RingTheory.MiracleFlatness

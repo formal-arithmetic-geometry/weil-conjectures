@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import WeilConjectures.RingTheory.CompleteIntersectionOverField
-import Sheaf.RingTheory.PolynomialQuotientDimensionAtPointHeightDifference
+import WeilConjectures.RingTheory.PolynomialQuotientDimensionAtPointHeightDifference
 
 /-!
 # Conormal generators and global complete intersections

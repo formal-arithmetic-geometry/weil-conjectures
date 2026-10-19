@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 import WeilConjectures.AlgebraicGeometry.Modules.HomTensor.LocallyFree
-import Sheaf.AlgebraicGeometry.DualTensorHomComparison
+import WeilConjectures.AlgebraicGeometry.DualTensorHomComparison
 
 /-! # Dual pairings for finite locally free modules
 

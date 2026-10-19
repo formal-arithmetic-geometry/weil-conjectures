@@ -6,7 +6,7 @@ Authors: SHEAF group D2
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
-public import Sheaf.AlgebraicGeometry.EtaleSetTerminalTransport
+public import WeilConjectures.AlgebraicGeometry.EtaleSetTerminalTransport
 import Sheaf.AlgebraicGeometry.ProEtaleComparisonDiagonalSection
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageKanRepresentative
 

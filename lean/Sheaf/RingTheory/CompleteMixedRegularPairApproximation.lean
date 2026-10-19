@@ -23,7 +23,7 @@ import Mathlib.RingTheory.Henselian
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
 import Sheaf.RingTheory.RegularLocalQuotientKernelParameters
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.RingTheory.PowerSeriesCombinedIdealCoefficients
 import Sheaf.RingTheory.CompleteLocalExcellent
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization

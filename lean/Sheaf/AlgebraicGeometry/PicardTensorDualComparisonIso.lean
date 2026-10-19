@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PicardCanonicalBaseChange
 
 import WeilConjectures.AlgebraicGeometry.Modules.HomTensor.LocallyFree
-import Sheaf.AlgebraicGeometry.DualTensorHomComparison
+import WeilConjectures.AlgebraicGeometry.DualTensorHomComparison
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 
 /-! # Invertibility of the canonical tensor-pullback dual comparison

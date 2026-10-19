@@ -19,7 +19,7 @@ import Mathlib.RingTheory.Localization.Basic
 import Mathlib.RingTheory.Localization.Submodule
 import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Noetherian
 import Sheaf.RingTheory.RegularLocalLocalization
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.RingTheory.RegularLocalLiftRegularSequenceQuotient
 import Sheaf.RingTheory.RegularSequencePrincipalNeighbourhood
 

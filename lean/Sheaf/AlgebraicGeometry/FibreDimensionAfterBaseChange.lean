@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.Mathlib.Topology.KrullDimension
-import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
+import WeilConjectures.AlgebraicGeometry.DimensionAtPointFieldExtension
 import Sheaf.AlgebraicGeometry.RationalPointStalkTopologicalLocalDimension
 
 /-!

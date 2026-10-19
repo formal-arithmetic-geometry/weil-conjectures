@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import Sheaf.AlgebraicGeometry.PureDimension
 import WeilConjectures.AlgebraicGeometry.ConstantLocalDimensionComponents
-import Sheaf.AlgebraicGeometry.EquidimensionalOpenLocalDimension
+import WeilConjectures.AlgebraicGeometry.EquidimensionalOpenLocalDimension
 import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
 
 /-! # Pure relative dimension is preserved by base change

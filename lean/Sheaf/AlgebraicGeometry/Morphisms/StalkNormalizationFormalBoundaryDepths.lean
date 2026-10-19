@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import Mathlib.AlgebraicGeometry.Normalization
 
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 

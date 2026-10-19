@@ -6,7 +6,7 @@ Authors: SHEAF group U4
 module
 
 public import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicSectionsTransfer
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 import Sheaf.AlgebraicGeometry.Morphisms.PuncturedPrincipalEventualScalarImage
 
 /-! # Finite-level scalar lifts of compatible punctured principal sections

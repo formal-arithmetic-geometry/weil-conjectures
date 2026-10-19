@@ -12,7 +12,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.JacobsonSpace
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 public import WeilConjectures.Topology.PresheafModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem

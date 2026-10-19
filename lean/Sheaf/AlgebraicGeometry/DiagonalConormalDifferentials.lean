@@ -5,7 +5,7 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DiagonalConormal
+public import WeilConjectures.AlgebraicGeometry.DiagonalConormal
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 import Sheaf.AlgebraicGeometry.DiagonalConormalAffineComparison
 

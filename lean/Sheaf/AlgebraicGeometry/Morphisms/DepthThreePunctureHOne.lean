@@ -6,7 +6,7 @@ Authors: SHEAF group V4
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 import Sheaf.AlgebraicGeometry.Morphisms.DepthThreeLocalCohomologyVanishing
 import Sheaf.AlgebraicGeometry.Morphisms.PuncturedHOneLocalCohomologyComparison
 

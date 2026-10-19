@@ -9,10 +9,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.ClosedPointOfAffineOpen
-import Sheaf.AlgebraicGeometry.DimensionLocallyAlgebraic
+import WeilConjectures.AlgebraicGeometry.DimensionLocallyAlgebraic
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.RingTheory.InfiniteSetOfIsMaximalOfRingKrullDimPos
-import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-!
 # Infinitely many closed points in a positive-dimensional irreducible closed subset

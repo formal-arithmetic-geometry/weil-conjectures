@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.MvPowerSeries.Basic
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 import Mathlib.RingTheory.MvPowerSeries.Equiv
 import Sheaf.RingTheory.FlatLocalDepthFormula
 import Sheaf.RingTheory.MvPowerSeriesFlat

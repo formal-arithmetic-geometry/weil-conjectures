@@ -4,9 +4,9 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.AlgebraicGeometry.Morphisms.RegularLocalPuncturedEtalePurity
 import Sheaf.AlgebraicGeometry.Morphisms.LocalPurityDepthTwoFiniteFlatStalk
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtension

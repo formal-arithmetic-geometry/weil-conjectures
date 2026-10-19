@@ -6,7 +6,7 @@ Authors: SHEAF group T4
 module
 
 public import Mathlib.AlgebraicGeometry.AffineScheme
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 import WeilConjectures.RingTheory.InjectivePiLocalizationAssociatedPrimes
 import Mathlib.RingTheory.Regular.IsSMulRegular
 

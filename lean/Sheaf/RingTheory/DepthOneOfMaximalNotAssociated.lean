@@ -5,7 +5,7 @@ Authors: SHEAF group T4
 -/
 module
 
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 import WeilConjectures.RingTheory.NonzerodivisorIfMaximalNotAssociated

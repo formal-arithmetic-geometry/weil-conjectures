@@ -1,7 +1,7 @@
 module
 
-public import Sheaf.AlgebraicGeometry.DiagonalConormalDerivation
-import Sheaf.AlgebraicGeometry.DiagonalConormalAffineSectionsUnique
+public import WeilConjectures.AlgebraicGeometry.DiagonalConormalDerivation
+import WeilConjectures.AlgebraicGeometry.DiagonalConormalAffineSectionsUnique
 import Sheaf.AlgebraicGeometry.DiagonalConormalAffineLiftInjective
 import Sheaf.AlgebraicGeometry.DiagonalConormalAffineDerivationSpan
 

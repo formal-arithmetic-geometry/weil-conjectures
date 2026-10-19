@@ -12,12 +12,12 @@ public import Mathlib.RingTheory.Spectrum.Prime.Basic
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.Topology.Irreducible
-import Sheaf.RingTheory.FiniteTypeDomainDimensionTrdeg
+import WeilConjectures.RingTheory.FiniteTypeDomainDimensionTrdeg
 import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Mathlib.RingTheory.Localization.BaseChange
-import Sheaf.RingTheory.DimensionAtPointLocalRingTrdeg
-import Sheaf.RingTheory.DimensionAtPointComponents
+import WeilConjectures.RingTheory.DimensionAtPointLocalRingTrdeg
+import WeilConjectures.RingTheory.DimensionAtPointComponents
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs
 

@@ -22,7 +22,7 @@ import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Sheaf.RingTheory.PresentationFittingIdeal
 import Sheaf.TraceFormula.FormalJacobianQuadraticCriterion
 import Sheaf.RingTheory.FlatLocalDepthFormula
-import Sheaf.RingTheory.Depth
+import WeilConjectures.RingTheory.Depth
 import Sheaf.RingTheory.SeparableClosedPointFormalPresentation
 
 /-!

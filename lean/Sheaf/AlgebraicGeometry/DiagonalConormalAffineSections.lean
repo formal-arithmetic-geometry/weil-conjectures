@@ -5,9 +5,9 @@ Authors: SHEAF group S1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DiagonalConormalDerivation
+public import WeilConjectures.AlgebraicGeometry.DiagonalConormalDerivation
 import Sheaf.AlgebraicGeometry.DiagonalConormalAffineSectionsBase
-import Sheaf.AlgebraicGeometry.DiagonalConormalAffineSectionsUnique
+import WeilConjectures.AlgebraicGeometry.DiagonalConormalAffineSectionsUnique
 
 /-!
 # Normalized diagonal conormal sections on an affine chart

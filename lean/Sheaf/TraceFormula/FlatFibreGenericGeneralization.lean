@@ -14,7 +14,7 @@ public import Mathlib.Topology.Sober
 import WeilConjectures.AlgebraicGeometry.AffineChartBaseChangeIso
 import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
 import Sheaf.RingTheory.ValuationDomainFibreDimensions
-import Sheaf.RingTheory.FiniteTypeDomainDimensionTrdeg
+import WeilConjectures.RingTheory.FiniteTypeDomainDimensionTrdeg
 
 /-!
 # Fibre-generic locus of a flat finitely presented morphism

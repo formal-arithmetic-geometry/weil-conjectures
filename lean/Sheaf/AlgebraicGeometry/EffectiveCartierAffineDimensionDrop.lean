@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.Dimension
-import Sheaf.RingTheory.FiniteTypeDomainDimensionLocalRing
+import WeilConjectures.RingTheory.FiniteTypeDomainDimensionLocalRing
 
 /-! # Dimension drop for a principal Cartier subscheme of an affine variety
 

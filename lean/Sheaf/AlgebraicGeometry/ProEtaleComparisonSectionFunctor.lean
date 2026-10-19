@@ -6,8 +6,8 @@ Authors: SHEAF group V4
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
-public import Sheaf.AlgebraicGeometry.EtaleSetTerminalTransport
-import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonIdentity
+public import WeilConjectures.AlgebraicGeometry.EtaleSetTerminalTransport
+import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonIdentity
 import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonComposition
 import Sheaf.AlgebraicGeometry.ProEtaleComparisonSectionDescent
 

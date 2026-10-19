@@ -5,7 +5,7 @@ Authors: SHEAF group V4
 -/
 module
 
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 public import Mathlib.Algebra.Homology.LocalCohomology
 import Mathlib.RingTheory.Depth.Rees
 import Mathlib.CategoryTheory.Abelian.Projective.Ext

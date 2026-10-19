@@ -12,7 +12,7 @@ public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.ZetaSeries
 public import Mathlib.FieldTheory.Separable
-import Sheaf.AlgebraicGeometry.EquidimensionalOpenLocalDimension
+import WeilConjectures.AlgebraicGeometry.EquidimensionalOpenLocalDimension
 import Sheaf.RingTheory.ClosedPointDimensionLocalRing
 import Sheaf.RingTheory.FlatLocalDepthFormula
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra

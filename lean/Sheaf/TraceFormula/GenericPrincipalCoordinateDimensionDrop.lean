@@ -14,7 +14,7 @@ public import Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.ClosedIrreducibleDimensionTrdeg
 import WeilConjectures.AlgebraicGeometry.GenericFibreClosedAvoidance
 import Sheaf.AlgebraicGeometry.LocalFibreDimensionOpen
-import Sheaf.RingTheory.DimensionAtPointLocalRingTrdeg
+import WeilConjectures.RingTheory.DimensionAtPointLocalRingTrdeg
 import Sheaf.RingTheory.FinitePrimeTranscendentalCoordinate
 import Sheaf.TraceFormula.GenericFibreDimensionNeighborhood
 

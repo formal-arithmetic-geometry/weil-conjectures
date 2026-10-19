@@ -15,7 +15,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Sheaf.AlgebraicGeometry.DimensionPreservedFieldExtension
+import WeilConjectures.AlgebraicGeometry.DimensionPreservedFieldExtension
 import Mathlib.AlgebraicGeometry.Properties
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.AlgebraicGeometry.Curve

@@ -13,8 +13,8 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Valuation.ValuationRing
 public import Mathlib.Topology.Irreducible
 public import Mathlib.Topology.KrullDimension
-import Sheaf.RingTheory.FiniteTypeDomainDimensionTrdeg
-import Sheaf.RingTheory.DimensionAtPointComponents
+import WeilConjectures.RingTheory.FiniteTypeDomainDimensionTrdeg
+import WeilConjectures.RingTheory.DimensionAtPointComponents
 import Sheaf.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs
 import Sheaf.Paper.QuasiFiniteOverPolynomialAlgebra
 import WeilConjectures.RingTheory.QuasiFiniteFourRings

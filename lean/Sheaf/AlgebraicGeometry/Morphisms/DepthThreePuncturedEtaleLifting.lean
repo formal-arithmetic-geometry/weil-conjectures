@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 import Sheaf.AlgebraicGeometry.Morphisms.DepthThreePuncturedFiniteFlatModel
 import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteUnramifiedPrincipalQuotient
 

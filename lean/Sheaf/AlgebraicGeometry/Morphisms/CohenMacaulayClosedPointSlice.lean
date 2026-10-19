@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.Topology.JacobsonSpace
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.KrullDimension.Basic
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.AlgebraicGeometry.Pullbacks
@@ -25,7 +25,7 @@ import Sheaf.AlgebraicGeometry.IsLocallyQuasiFiniteResLE
 import Sheaf.AlgebraicGeometry.FibreStalkQuotient
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.RingTheory.Regular.RegularSequence
-import Sheaf.RingTheory.DepthQuotientNonzerodivisor
+import WeilConjectures.RingTheory.DepthQuotientNonzerodivisor
 import Sheaf.AlgebraicGeometry.Morphisms.FibreRegularElementFlatHypersurface
 
 /-!

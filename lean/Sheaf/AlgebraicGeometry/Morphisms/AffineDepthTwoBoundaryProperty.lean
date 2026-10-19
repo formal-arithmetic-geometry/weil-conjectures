@@ -6,7 +6,7 @@ module
 public import Mathlib.RingTheory.Noetherian.Basic
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.LinearAlgebra.Dual.Defs
 

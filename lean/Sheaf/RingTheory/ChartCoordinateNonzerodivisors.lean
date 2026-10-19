@@ -4,7 +4,7 @@ import Mathlib.RingTheory.Ideal.Quotient.Index
 import Mathlib.RingTheory.MvPolynomial.Basic
 import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 import Sheaf.AlgebraicGeometry.BlowupChartRegularSequencePresentation
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import WeilConjectures.Blowup.Affine.Principalization
 
 /-!

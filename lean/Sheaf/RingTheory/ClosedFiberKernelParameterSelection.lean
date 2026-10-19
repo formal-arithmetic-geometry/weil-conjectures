@@ -10,7 +10,7 @@ public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 public import Mathlib.RingTheory.Regular.RegularSequence
 import Sheaf.RingTheory.RegularLocalOfFormallySmoothAdic
 import Sheaf.RingTheory.RegularLocalQuotientKernelParameters
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-! # Removing the equations of a regular closed fibre

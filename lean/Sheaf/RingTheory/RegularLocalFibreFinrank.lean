@@ -6,7 +6,7 @@ public import Mathlib.RingTheory.Kaehler.Basic
 public import WeilConjectures.FieldTheory.SeparableExtension
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.RingTheory.RegularLocalFibreFinrankComparison
-import Sheaf.RingTheory.DimensionAtPointLocalRingTrdeg
+import WeilConjectures.RingTheory.DimensionAtPointLocalRingTrdeg
 
 @[expose] public section
 

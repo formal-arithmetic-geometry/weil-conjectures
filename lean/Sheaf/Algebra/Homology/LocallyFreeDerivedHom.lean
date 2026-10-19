@@ -15,7 +15,7 @@ public import Mathlib.Algebra.Homology.SingleHomology
 import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle
 import Mathlib.Algebra.Homology.ConcreteCategory
 import Mathlib.CategoryTheory.Adjunction.Additive
-import all Sheaf.AlgebraicGeometry.DualTensorHomComparison
+import all WeilConjectures.AlgebraicGeometry.DualTensorHomComparison
 import WeilConjectures.AlgebraicGeometry.Modules.HomTensor.Free
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective

@@ -5,7 +5,7 @@ public import Sheaf.RingTheory.GlobalDimension
 import Mathlib.CategoryTheory.Abelian.Projective.Dimension
 import Sheaf.RingTheory.CohenMacaulayFreeResolution
 import Sheaf.RingTheory.ProjectiveResolutionExtCharacterization
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.RingTheory.RegularLocalMaximalCohenMacaulayFree
 
 /-!

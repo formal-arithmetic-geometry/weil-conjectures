@@ -13,12 +13,12 @@ public import Mathlib.Topology.JacobsonSpace
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Sheaf.AlgebraicGeometry.PureDimension
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 import Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness
 import Mathlib.RingTheory.Ideal.Operations
-import Sheaf.RingTheory.IsRegularOfDimensionDrop
-import Sheaf.RingTheory.DepthQuotientNonzerodivisor
+import WeilConjectures.RingTheory.IsRegularOfDimensionDrop
+import WeilConjectures.RingTheory.DepthQuotientNonzerodivisor
 import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
 import Mathlib.Algebra.Category.ModuleCat.Stalk

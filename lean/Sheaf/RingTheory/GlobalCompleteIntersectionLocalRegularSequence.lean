@@ -12,9 +12,9 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Regular.RegularSequence
 import Mathlib.RingTheory.RegularLocalRing.Polynomial
 import Mathlib.RingTheory.Regular.Flat
-import Sheaf.RingTheory.IsRegularOfDimensionDrop
+import WeilConjectures.RingTheory.IsRegularOfDimensionDrop
 import WeilConjectures.RingTheory.PolynomialRingMaximalLocalizationDimension
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 
 /-!
 # Equations of a global complete intersection at a prime

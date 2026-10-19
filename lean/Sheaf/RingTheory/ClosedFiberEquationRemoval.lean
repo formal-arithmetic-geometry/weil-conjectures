@@ -11,7 +11,7 @@ public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 import Sheaf.RingTheory.ClosedFiberKernelParameterSelection
 import Sheaf.RingTheory.PowerSeriesParameterQuotient
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.RingTheory.FormallySmoothAdicUniverseLift
 import Sheaf.RingTheory.FormallySmoothAdicRingEquiv
 import Mathlib.RingTheory.LocalRing.ResidueField.Basic

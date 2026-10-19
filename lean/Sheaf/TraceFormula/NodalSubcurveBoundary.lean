@@ -15,7 +15,7 @@ public import Sheaf.AlgebraicGeometry.PureDimension
 public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 public import WeilConjectures.ConstructibleSheaf.OpenClosedStratification
 import WeilConjectures.AlgebraicGeometry.ConstantLocalDimensionComponents
-import Sheaf.AlgebraicGeometry.EquidimensionalOpenLocalDimension
+import WeilConjectures.AlgebraicGeometry.EquidimensionalOpenLocalDimension
 import Sheaf.TraceFormula.ReducedSchemeImage
 import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 import Mathlib.AlgebraicGeometry.Noetherian

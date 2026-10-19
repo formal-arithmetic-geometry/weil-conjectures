@@ -13,7 +13,7 @@ public import Mathlib.LinearAlgebra.Basis.Defs
 import Sheaf.RingTheory.FlatOverRegular
 import Sheaf.RingTheory.DifferentialCoordinatesCotangentIndependent
 import Sheaf.RingTheory.GeometricallyRegularH1Injective
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Mathlib.RingTheory.RegularLocalRing.Polynomial
 import WeilConjectures.Mathlib.Algebra.Module.SpanRankOperations
 

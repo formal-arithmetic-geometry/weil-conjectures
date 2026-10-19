@@ -10,7 +10,7 @@ public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 import Sheaf.AlgebraicGeometry.IsRegularScheme
 import Sheaf.AlgebraicGeometry.StrictHenselizationLocalPresentation
 import Sheaf.RingTheory.Etale.LocalDimension
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
 import Sheaf.RingTheory.StrictHenselizationRegular
 import Sheaf.RingTheory.StrictHenselizationSurjectiveQuotient

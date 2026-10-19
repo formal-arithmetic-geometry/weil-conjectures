@@ -11,8 +11,8 @@ public import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
 import Mathlib.Algebra.Module.LocalizedModule.Submodule
 import Mathlib.RingTheory.Ideal.AssociatedPrime.Localization
 import Mathlib.RingTheory.KrullDimension.Field
-import Sheaf.RingTheory.DepthQuotSMulTop
-import Sheaf.RingTheory.DepthLeDimAssociatedPrime
+import WeilConjectures.RingTheory.DepthQuotSMulTop
+import WeilConjectures.RingTheory.DepthLeDimAssociatedPrime
 
 /-!
 # Associated primes of a regular principal quotient in an S2 ring

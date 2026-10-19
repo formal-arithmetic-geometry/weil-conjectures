@@ -9,7 +9,7 @@ public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.RingTheory.Ideal.Quotient.Basic
 import Sheaf.RingTheory.RegularLocalQuotientKernelParameters
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 
 /-!
 # Lifting the equations of a regular closed fibre

@@ -16,7 +16,7 @@ public import Mathlib.Topology.KrullDimension
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSupport
-import Sheaf.AlgebraicGeometry.DimensionLocallyAlgebraic
+import WeilConjectures.AlgebraicGeometry.DimensionLocallyAlgebraic
 import Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage
 import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
 import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange

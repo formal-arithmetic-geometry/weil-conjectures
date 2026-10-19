@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparison
 import Sheaf.AlgebraicGeometry.EtaleSetStageSheafColimit
 import WeilConjectures.AlgebraicGeometry.AffineSectionsColimit
 import Mathlib.CategoryTheory.Filtered.Final
-import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonLaws
+import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonLaws
 import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonNaturality
 
 /-! # Affine stage lifting of étale inverse-image sections

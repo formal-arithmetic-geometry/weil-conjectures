@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 public import Mathlib.CategoryTheory.Sites.Sheaf
 
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
-import Sheaf.AlgebraicGeometry.EtaleSectionColimitEventualZero
+import WeilConjectures.AlgebraicGeometry.EtaleSectionColimitEventualZero
 import Sheaf.AlgebraicGeometry.EtaleSectionColimitRepresentative
 
 /-!

@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.RingTheory.Polynomial.Basic
 import Mathlib.RingTheory.RegularLocalRing.Polynomial
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.RingTheory.RegularLocalLocalization
 import Sheaf.RingTheory.RegularLocalLiftRegularSequenceQuotient
 import WeilConjectures.Blowup.Affine.Principalization

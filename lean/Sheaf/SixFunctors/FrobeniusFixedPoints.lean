@@ -28,7 +28,7 @@ import Sheaf.RingTheory.SmoothOverFieldRegularLocal
 import Sheaf.AlgebraicGeometry.RationalTangentCotangentDuality
 import Mathlib.RingTheory.RegularLocalRing.Defs
 import Sheaf.RingTheory.RegularLocalQuotientKernelParameters
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.RingTheory.RegularSequenceKoszulRegular
 import WeilConjectures.AlgebraicGeometry.KoszulComplex
 

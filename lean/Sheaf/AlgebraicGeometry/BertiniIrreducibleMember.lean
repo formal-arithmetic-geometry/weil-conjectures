@@ -18,7 +18,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 
 import Sheaf.AlgebraicGeometry.GenericGeometricIrreducibilityShrink
 import WeilConjectures.AlgebraicGeometry.Curve.ReductionNilradicalNilpotence
-import Sheaf.RingTheory.FiniteTypeDomainDimensionLocalRing
+import WeilConjectures.RingTheory.FiniteTypeDomainDimensionLocalRing
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.BertiniIndependentFunctions

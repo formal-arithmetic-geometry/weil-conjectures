@@ -1,9 +1,9 @@
 module
 
-public import Sheaf.AlgebraicGeometry.DiagonalConormalDerivation
+public import WeilConjectures.AlgebraicGeometry.DiagonalConormalDerivation
 import Sheaf.AlgebraicGeometry.AffineConormalSections
 import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.DiagonalConormal
+import WeilConjectures.AlgebraicGeometry.DiagonalConormal
 import Sheaf.AlgebraicGeometry.DiagonalConormalAffineSectionsChosen
 
 @[expose] public section

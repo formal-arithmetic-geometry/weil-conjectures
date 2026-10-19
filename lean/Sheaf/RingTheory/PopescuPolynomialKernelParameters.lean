@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Regular.RegularSequence
 import Mathlib.RingTheory.RegularLocalRing.Polynomial
 import Mathlib.Algebra.Field.ULift
 import Sheaf.RingTheory.PolynomialCoefficientKernelRescaling
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 
 /-!
 # Polynomial parameters with stable multiplication kernels

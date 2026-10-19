@@ -6,7 +6,7 @@ Authors: SHEAF group V4
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
-public import Sheaf.AlgebraicGeometry.EtaleSetTerminalTransport
+public import WeilConjectures.AlgebraicGeometry.EtaleSetTerminalTransport
 
 /-! # Transport of matching families to fpqc descent data
 

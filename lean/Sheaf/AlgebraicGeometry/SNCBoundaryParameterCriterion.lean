@@ -11,7 +11,7 @@ public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.RingTheory.RegularLocalQuotientKernelParameters
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.RingTheory.RegularLocalUFDBoundaryFactorization
 import Mathlib.RingTheory.LocalRing.Module
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs

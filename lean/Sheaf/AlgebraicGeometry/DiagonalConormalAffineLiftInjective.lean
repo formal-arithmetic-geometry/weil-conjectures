@@ -5,11 +5,11 @@ Authors: SHEAF group N3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DiagonalConormalDerivation
-import Sheaf.AlgebraicGeometry.DiagonalConormalAffineIdealClassCore
+public import WeilConjectures.AlgebraicGeometry.DiagonalConormalDerivation
+import WeilConjectures.AlgebraicGeometry.DiagonalConormalAffineIdealClassCore
 import Sheaf.AlgebraicGeometry.DiagonalConormalAffineIdealClassQ
 import Sheaf.AlgebraicGeometry.AffineConormalSectionsExistence
-import Sheaf.AlgebraicGeometry.DiagonalConormal
+import WeilConjectures.AlgebraicGeometry.DiagonalConormal
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Injectivity of the affine diagonal conormal lift

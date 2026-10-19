@@ -12,7 +12,7 @@ public import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.AlgebraicGeometry.RestrictedFibreLocallyNoetherian
 import Sheaf.AlgebraicGeometry.RestrictedFibreCohenMacaulayLocus
 import Sheaf.AlgebraicGeometry.CohenMacaulayFibreDimensionDecomposition
-import Sheaf.RingTheory.DepthLeSupportDimension
+import WeilConjectures.RingTheory.DepthLeSupportDimension
 
 /-! # Constant fibre dimension near a zero-dimensional fibre stalk
 

@@ -20,7 +20,7 @@ import Sheaf.RingTheory.StrictHenselizationRegular
 import Sheaf.RingTheory.RegularLocalUFDBoundaryFactorization
 import Mathlib.RingTheory.LocalRing.Module
 import Mathlib.RingTheory.RegularLocalRing.Defs
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.RingTheory.RegularLocalQuotientKernelParameters
 
 /-!

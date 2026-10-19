@@ -6,11 +6,11 @@ Authors: SHEAF group Q31
 module
 
 public import Sheaf.RingTheory.ExcellentRing
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
-import Sheaf.RingTheory.MaximalChainLengthOfDepth
+import WeilConjectures.RingTheory.MaximalChainLengthOfDepth
 import Sheaf.RingTheory.PolynomialAlgebraCohenMacaulay
 
 /-!

@@ -17,7 +17,7 @@ import Mathlib.RingTheory.AdicCompletion.Topology
 import Mathlib.Algebra.Ring.ULift
 import Mathlib.Algebra.CharP.Algebra
 import Sheaf.RingTheory.FlatOverRegular
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 
 /-!
 # Compatible Cohen presentations of complete local homomorphisms

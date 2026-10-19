@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicSectionsTransfer
 public import Mathlib.RingTheory.MvPowerSeries.Basic
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedThickeningRestriction
 import Mathlib.RingTheory.AdicCompletion.Completeness
 import Sheaf.RingTheory.PowerSeriesCombinedIdealCoefficients

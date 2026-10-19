@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
 import Sheaf.TraceFormula.EssentiallyFiniteTypeCIKernelInvariance
-import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
+import WeilConjectures.AlgebraicGeometry.DimensionAtPointFieldExtension
 import Sheaf.RingTheory.LciConormalFreeRankCodimension
 import Sheaf.RingTheory.ConormalGeneratorsGlobalCompleteIntersection
 import Sheaf.RingTheory.LCIRegularSequenceGlobalCompleteIntersection

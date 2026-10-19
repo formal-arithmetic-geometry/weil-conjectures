@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.Topology.JacobsonSpace
 public import WeilConjectures.ZetaSeries
 import Sheaf.AlgebraicGeometry.ClosedPointField
-import Sheaf.RingTheory.FiniteTypeDomainDimensionTrdeg
+import WeilConjectures.RingTheory.FiniteTypeDomainDimensionTrdeg
 import WeilConjectures.Topology.PresheafModuleStalkFunctor
 import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
 

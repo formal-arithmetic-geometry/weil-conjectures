@@ -12,13 +12,13 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.Topology.KrullDimension
 import WeilConjectures.AlgebraicGeometry.NoetherianPrincipalCoverModel
-import Sheaf.AlgebraicGeometry.DimensionPreservedFieldExtension
+import WeilConjectures.AlgebraicGeometry.DimensionPreservedFieldExtension
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.RingTheory.Extension.Presentation.Basic
 import Mathlib.RingTheory.FiniteStability
 import Mathlib.RingTheory.Localization.Away.AdjoinRoot
-import Sheaf.Topology.DimensionSupremumLocalDimensions
+import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 
 /-! # Descending a bounded principal-open cover to a finite coefficient ring
 

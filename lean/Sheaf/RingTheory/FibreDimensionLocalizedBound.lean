@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.Topology.LocalAtTarget
-import Sheaf.Topology.DimensionSupremumLocalDimensions
+import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 
 /-!
 # A localized fibre comparison used by the principal-neighbourhood theorem

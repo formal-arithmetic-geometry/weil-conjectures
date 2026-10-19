@@ -29,7 +29,7 @@ import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import WeilConjectures.Blowup.Affine.ChartAlgebra
 import WeilConjectures.Blowup.Affine.Defs
 import WeilConjectures.Blowup.FlatBaseChange
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.AlgebraicGeometry.BlowupChartRegularSequencePresentation
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts
 import Sheaf.RingTheory.RegularLocalLiftRegularSequenceQuotient

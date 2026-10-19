@@ -4,7 +4,7 @@ public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersectionPresentation
 import Mathlib.RingTheory.Extension.Presentation.Basic
-import Sheaf.AlgebraicGeometry.DimensionPreservedFieldExtension
+import WeilConjectures.AlgebraicGeometry.DimensionPreservedFieldExtension
 
 /-!
 # Base change of a relative global complete intersection

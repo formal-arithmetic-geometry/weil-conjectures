@@ -5,7 +5,7 @@ Authors: SHEAF group N3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DiagonalConormalDerivation
+public import WeilConjectures.AlgebraicGeometry.DiagonalConormalDerivation
 import Sheaf.AlgebraicGeometry.DiagonalConormalAffineIdealClass
 
 /-! # Generation of affine conormal sections by the difference derivation

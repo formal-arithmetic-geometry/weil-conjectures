@@ -5,10 +5,10 @@ Authors: SHEAF group W4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DiagonalConormal
+public import WeilConjectures.AlgebraicGeometry.DiagonalConormal
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.RingTheory.Kaehler.Basic
-import Sheaf.AlgebraicGeometry.DiagonalConormalAffineIdealClassCore
+import WeilConjectures.AlgebraicGeometry.DiagonalConormalAffineIdealClassCore
 import Sheaf.AlgebraicGeometry.DiagonalConormalAffineIdealClassQ
 
 /-! # The affine diagonal ideal class map

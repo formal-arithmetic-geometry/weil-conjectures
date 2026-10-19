@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Sheaf.AlgebraicGeometry.Dimension
 public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 import Sheaf.AlgebraicGeometry.DimensionAffineOpenCover
-import Sheaf.AlgebraicGeometry.DimensionPreservedFieldExtension
+import WeilConjectures.AlgebraicGeometry.DimensionPreservedFieldExtension
 import WeilConjectures.AlgebraicGeometry.FieldBaseChangeAffineCovers
 
 /-!

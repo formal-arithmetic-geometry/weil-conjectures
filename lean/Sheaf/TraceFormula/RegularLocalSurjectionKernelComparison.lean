@@ -8,10 +8,10 @@ module
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Regular.RegularSequence
 import Sheaf.AlgebraicGeometry.IsRegularScheme
-import Sheaf.RingTheory.Depth
-import Sheaf.RingTheory.DepthLeSupportDimension
+import WeilConjectures.RingTheory.Depth
+import WeilConjectures.RingTheory.DepthLeSupportDimension
 import Sheaf.RingTheory.IsRegularIffDimensionDrop
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.RingTheory.RegularLocalQuotientKernelParameters
 import Sheaf.RingTheory.RegularSequenceConormal
 

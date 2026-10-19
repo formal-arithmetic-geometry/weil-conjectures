@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 public import Mathlib.LinearAlgebra.Dual.Defs
 public import Mathlib.RingTheory.Noetherian.Basic
 

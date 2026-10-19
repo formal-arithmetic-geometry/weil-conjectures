@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Sites.Sheaf
 
 import WeilConjectures.AlgebraicGeometry.EtaleSectionColimitLocalLifts
-import Sheaf.AlgebraicGeometry.EtaleSectionColimitEventualZero
+import WeilConjectures.AlgebraicGeometry.EtaleSectionColimitEventualZero
 
 /-! # Stage representatives in filtered etale sheaf colimits
 

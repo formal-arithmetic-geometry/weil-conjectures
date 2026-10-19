@@ -6,7 +6,7 @@ Authors: SHEAF group S1
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.EtaleAbelianUnitEqualOpen
+import WeilConjectures.AlgebraicGeometry.EtaleAbelianUnitEqualOpen
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! # Eventual equality for a single inverse-image unit

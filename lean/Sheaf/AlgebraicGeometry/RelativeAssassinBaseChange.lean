@@ -26,7 +26,7 @@ import Sheaf.RingTheory.FibrePrimesResidueFields
 import Mathlib.AlgebraicGeometry.Pullbacks
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
 import Mathlib.AlgebraicGeometry.AffineScheme
-import Sheaf.RingTheory.AssociatedPrimeMinimalOfDepth
+import WeilConjectures.RingTheory.AssociatedPrimeMinimalOfDepth
 import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Mathlib.RingTheory.Ideal.AssociatedPrime.Localization
 import Mathlib.RingTheory.KrullDimension.Basic

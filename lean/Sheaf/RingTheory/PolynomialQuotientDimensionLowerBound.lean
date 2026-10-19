@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.Topology.KrullDimension
 import Sheaf.RingTheory.ClosedPointDimensionLocalRing
 import WeilConjectures.RingTheory.PolynomialRingMaximalLocalizationDimension
-import Sheaf.Topology.DimensionSupremumLocalDimensions
+import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 
 /-!

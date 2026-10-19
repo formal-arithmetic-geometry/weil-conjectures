@@ -8,7 +8,7 @@ public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Mathlib.Topology.LocalAtTarget
-import Sheaf.RingTheory.PolynomialQuotientDimensionAtPointHeightDifference
+import WeilConjectures.RingTheory.PolynomialQuotientDimensionAtPointHeightDifference
 
 /-!
 # Local fibre dimension under a comparison localization

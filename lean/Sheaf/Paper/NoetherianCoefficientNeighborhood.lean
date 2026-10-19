@@ -8,12 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersectionPresentation
 public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.RingTheory.Localization.Away.Basic
-import Sheaf.Topology.DimensionSupremumLocalDimensions
+import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 import Sheaf.RingTheory.FibreDimensionNeighborhood
 import Mathlib.RingTheory.TensorProduct.Maps
 import Mathlib.RingTheory.Spectrum.Prime.RingHom
 import Mathlib.RingTheory.Extension.Presentation.Basic
-import Sheaf.AlgebraicGeometry.DimensionPreservedFieldExtension
+import WeilConjectures.AlgebraicGeometry.DimensionPreservedFieldExtension
 
 /-! # Bounded principal neighbourhoods in a coefficient model
 

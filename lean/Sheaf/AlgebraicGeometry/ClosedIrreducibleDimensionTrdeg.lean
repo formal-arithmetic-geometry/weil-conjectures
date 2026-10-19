@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.FunctionField
 import WeilConjectures.PointCount
-import Sheaf.RingTheory.FiniteTypeDomainDimensionTrdeg
+import WeilConjectures.RingTheory.FiniteTypeDomainDimensionTrdeg
 import Sheaf.AlgebraicGeometry.ClosedImmersionResidueFieldIso
 
 /-!

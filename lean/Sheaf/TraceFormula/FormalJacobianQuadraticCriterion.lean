@@ -8,16 +8,16 @@ module
 public import Mathlib.RingTheory.MvPowerSeries.Derivative
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 public import Sheaf.LinearAlgebra.Matrix.MinorIdeal
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 import Sheaf.LinearAlgebra.Matrix.MinorIdealInclusions
-import Sheaf.RingTheory.DepthLeSupportDimension
-import Sheaf.RingTheory.DepthOverQuotientRing
-import Sheaf.RingTheory.DepthQuotSMulTop
+import WeilConjectures.RingTheory.DepthLeSupportDimension
+import WeilConjectures.RingTheory.DepthOverQuotientRing
+import WeilConjectures.RingTheory.DepthQuotSMulTop
 import Sheaf.RingTheory.FormalJacobianMinorInvariance
 import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
 import Sheaf.RingTheory.PowerSeriesFullCoordinatesField
 import WeilConjectures.RingTheory.PowerSeriesQuotientVariables
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.TraceFormula.FormalBinaryMorse
 import Sheaf.TraceFormula.RegularSurfaceDepthOnePrincipal
 

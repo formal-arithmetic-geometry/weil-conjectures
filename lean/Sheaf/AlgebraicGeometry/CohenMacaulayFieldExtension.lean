@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 
 import Mathlib.RingTheory.FinitePresentation
 import Mathlib.RingTheory.Flat.Basic
@@ -28,7 +28,7 @@ import WeilConjectures.Topology.PresheafModuleStalkFunctor
 import Mathlib.Algebra.Category.ModuleCat.Stalk
 import WeilConjectures.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
 import Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange
-import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
+import WeilConjectures.AlgebraicGeometry.DimensionAtPointFieldExtension
 import Sheaf.AlgebraicGeometry.PolynomialChartFibreFlatCriterion
 import WeilConjectures.RingTheory.FlatLocalizedModuleBaseChange
 

@@ -19,7 +19,7 @@ import Sheaf.RingTheory.FieldsExcellent
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
-import Sheaf.AlgebraicGeometry.DimensionLocallyAlgebraic
+import WeilConjectures.AlgebraicGeometry.DimensionLocallyAlgebraic
 import Sheaf.AlgebraicGeometry.FiniteTypeDimensionFormula
 import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek

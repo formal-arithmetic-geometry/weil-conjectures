@@ -5,12 +5,12 @@ Authors: SHEAF group Q99
 -/
 module
 
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.LocalRing.Quotient
 import Sheaf.AlgebraicGeometry.IsRegularScheme
-import Sheaf.RingTheory.DepthLeSupportDimension
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.RingTheory.DepthLeSupportDimension
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.RingTheory.RegularLocalUFDBoundaryFactorization
 import Sheaf.TraceFormula.CoprimeGeneratorsMprimaryOrUnit
 import WeilConjectures.RingTheory.AnnihilatorAssociatedPrimesExactSequence

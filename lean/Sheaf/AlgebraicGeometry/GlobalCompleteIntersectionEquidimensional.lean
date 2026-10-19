@@ -9,7 +9,7 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.Mathlib.Topology.KrullDimension
-import Sheaf.RingTheory.PolynomialQuotientDimensionAtPointHeightDifference
+import WeilConjectures.RingTheory.PolynomialQuotientDimensionAtPointHeightDifference
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 
 /-!

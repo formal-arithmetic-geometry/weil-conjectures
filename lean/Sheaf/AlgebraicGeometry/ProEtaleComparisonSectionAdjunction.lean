@@ -6,7 +6,7 @@ Authors: SHEAF group V4
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
-public import Sheaf.AlgebraicGeometry.EtaleSetTerminalTransport
+public import WeilConjectures.AlgebraicGeometry.EtaleSetTerminalTransport
 import Sheaf.AlgebraicGeometry.ProEtaleComparisonSectionUnitUniversal
 
 /-! # The adjunction for the section-valued comparison sheaf

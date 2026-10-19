@@ -5,7 +5,7 @@ Authors: SHEAF group F3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DiagonalConormalDerivation
+public import WeilConjectures.AlgebraicGeometry.DiagonalConormalDerivation
 import WeilConjectures.AlgebraicGeometry.RelativeDifferentialsAffineSections
 import Sheaf.AlgebraicGeometry.DiagonalConormalAffineSections
 

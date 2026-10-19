@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Basic

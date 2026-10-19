@@ -9,8 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
-public import Sheaf.RingTheory.Depth
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+public import WeilConjectures.RingTheory.Depth
+import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtension
 import Sheaf.AlgebraicGeometry.Morphisms.RegularLocalSurfaceDepthTwoFlat
 

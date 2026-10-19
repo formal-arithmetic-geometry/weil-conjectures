@@ -13,7 +13,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.Topology.Sober
 import WeilConjectures.AlgebraicGeometry.ConstantLocalDimensionComponents
-import Sheaf.AlgebraicGeometry.EquidimensionalOpenLocalDimension
+import WeilConjectures.AlgebraicGeometry.EquidimensionalOpenLocalDimension
 import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
 import Sheaf.TraceFormula.FlatFibreComponentClosureDimension
 

@@ -3,7 +3,7 @@ module
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.Mathlib.Topology.KrullDimension
-import Sheaf.RingTheory.PolynomialQuotientDimensionAtPointHeightDifference
+import WeilConjectures.RingTheory.PolynomialQuotientDimensionAtPointHeightDifference
 public import Mathlib.RingTheory.Regular.RegularSequence
 import Mathlib.RingTheory.KrullDimension.Regular
 import Mathlib.RingTheory.Localization.Ideal

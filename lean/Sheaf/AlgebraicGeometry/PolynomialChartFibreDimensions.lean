@@ -7,7 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.PolynomialChartFibreStalk
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Sheaf.RingTheory.DimensionAtPointLocalRingTrdeg
+import WeilConjectures.RingTheory.DimensionAtPointLocalRingTrdeg
 import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 
 /-! # Dimension formulas for the canonical polynomial fibre chart

@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-public import Sheaf.RingTheory.Depth
+public import WeilConjectures.RingTheory.Depth
 
 import Sheaf.AlgebraicGeometry.Morphisms.DepthOneRestrictionInjective
 import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec

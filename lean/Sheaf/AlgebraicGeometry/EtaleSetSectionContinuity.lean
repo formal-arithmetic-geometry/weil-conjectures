@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionU
 public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparison
 public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
-import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonLaws
+import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonLaws
 import Sheaf.AlgebraicGeometry.EtaleSetSectionLift
 import Sheaf.AlgebraicGeometry.EtaleSetSectionEventualEquality
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction

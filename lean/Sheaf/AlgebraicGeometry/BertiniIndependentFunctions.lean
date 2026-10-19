@@ -22,7 +22,7 @@ import Mathlib.Tactic.Convert
 import Mathlib.Tactic.NormNum
 import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 import Mathlib.RingTheory.KrullDimension.Polynomial
-import Sheaf.RingTheory.FiniteTypeDomainDimensionTrdeg
+import WeilConjectures.RingTheory.FiniteTypeDomainDimensionTrdeg
 import Sheaf.RingTheory.FiniteTypeFibreComponentLowerBound
 
 /-!
