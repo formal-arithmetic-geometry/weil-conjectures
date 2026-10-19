@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.EtalePointedMapRigidity
-public import Mathlib.AlgebraicGeometry.Morphisms.Etale

@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.AffineBaseChangeSectionsInduction
-public import Mathlib.AlgebraicGeometry.Pullbacks

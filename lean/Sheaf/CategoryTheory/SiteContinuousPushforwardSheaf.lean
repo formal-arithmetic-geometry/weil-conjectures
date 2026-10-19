@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.CategoryTheory.SiteContinuousPushforwardSheaf
-public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-public import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects

@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.BalancedActionAffineSections
-public import Mathlib.AlgebraicGeometry.Pullbacks
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs

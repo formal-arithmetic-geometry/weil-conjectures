@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.AffineOpenSectionsCanonicalTransformation
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
-public import Mathlib.Algebra.Category.Grp.Basic
-public import Mathlib.AlgebraicGeometry.Morphisms.Affine

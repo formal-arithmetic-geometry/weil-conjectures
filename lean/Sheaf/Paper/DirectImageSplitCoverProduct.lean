@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.DirectImageSplitCoverProduct
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
-public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs

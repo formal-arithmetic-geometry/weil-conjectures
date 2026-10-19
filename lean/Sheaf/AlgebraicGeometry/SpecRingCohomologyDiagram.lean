@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.SpecRingCohomologyDiagram
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-public import Mathlib.AlgebraicGeometry.AffineTransitionLimit

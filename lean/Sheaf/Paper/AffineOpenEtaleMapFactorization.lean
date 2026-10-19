@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.AffineOpenEtaleMapFactorization
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
-public import Mathlib.AlgebraicGeometry.Morphisms.Affine

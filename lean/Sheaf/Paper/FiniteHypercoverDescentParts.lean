@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.FiniteHypercoverDescentParts
-public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover

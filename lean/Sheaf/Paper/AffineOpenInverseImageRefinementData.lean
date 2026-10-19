@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.AffineOpenInverseImageRefinementData
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale

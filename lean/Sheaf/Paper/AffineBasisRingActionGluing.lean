@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.AffineBasisRingActionGluing
-public import Mathlib.AlgebraicGeometry.AffineScheme
