@@ -32,102 +32,42 @@
  ],
  "proof": [
   {
-   "text": "Write $C=C_b$ and $\\epsilon:C\\to\\mathcal O$ as in the Cech/Koszul comparison. Put $F(N)=R\\mathcal Hom(C,N)$ and $\\eta^C_N=\\epsilon^*:N\\cong R\\mathcal Hom(\\mathcal O,N)\\to F(N)$. Let $T(N)$ denote the strict derived limit in the item. The comparison gives a natural isomorphism $\\theta_N:F(N)\\to T(N)$ and the equality $\\theta_N\\eta^C_N=\\eta_N$. Its forward maps $(1,b_j)$ dualize to $(b_j,1)$, so they are exactly the specified inverse maps, not a different Koszul system. The strict-tower theorem fixes the total derived inverse-limit interpretation, without assuming exact sheaf products.",
+   "text": "For the attached actual-universe pro-etale specialization, apply the published-fiber/Cech comparison to all complexes. For a derived M, use its actual localization preimage C and compose e_C with L(F(QC ≅ M)). Naturality of the Cech unit and the identity e.inv followed by e.hom = id show that F(wfCompletionUnit M) followed by this comparison is exactly eta_(F M). No replacement of the published object or map occurs.",
    "uses": [
-    "lem-weil-pbc-ringed-cech-koszul-dual-limit",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+    "lem-weil-pbc-completed-fiber-cech-comparison",
+    "lem-weil-pbc-ringed-completion-unit-naturality"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 0A0E (lemma-derived-completion-koszul); sites-cohomology.tex Tags 0A0A and 0941."
-   }
+   "elementary": true
   },
   {
-   "text": "Fix an object $U$ and an index $i$. Apply the localization/internal-Hom calculation to $P=C$ on the slice. It gives\n$$R\\mathcal Hom_{\\mathcal O_U}(\\mathcal O_U[1/b_i],F(N)|_U)\\cong R\\mathcal Hom_{\\mathcal O_U}(\\mathcal O_U[1/b_i]\\otimes^L C|_U,N|_U).$$\nThe first argument on the right is the ordinary Cech complex with coefficients $\\mathcal O_U[1/b_i]$. It is explicitly contractible. Index a degree-$q$ component by a sorted subset $S$ of size $q$. Define $(hx)_S=0$ when $i\\in S$, and $(hx)_S=(-1)^t x_{S\\cup\\{i\\}}$ otherwise, where $t$ is the number of elements of $S$ less than $i$; identify the two localizations using invertibility of $b_i$. If $i\\in S$, only the term deleting $i$ survives in $dh$, with sign $(-1)^t(-1)^t=1$. If $i\\notin S$, the term deleting $i$ in $hd$ is $x_S$, and every other deletion term cancels the corresponding term of $dh$ with opposite sign. Thus $dh+hd=1$, including the empty-subset degree-zero component. Therefore the displayed derived internal Hom is zero for every generator on every slice. This argument is about $F(N)$ for arbitrary $N$; it assumes no completeness of $N$.",
+   "text": "Let L be Cech completion and eta its unit on the comparison site. Both L(eta_E) and eta_(LE) are invertible by the existing two-unit idempotence theorem. Naturality along the object comparison F(T M) ≅ L(F M) transports invertibility of eta_(L(F M)) to eta_(F(T M)); unit normalization and full faithfulness of F then give invertibility of the actual unit of T M. This is precisely WfIsComplete(T M).",
    "uses": [
-    "lem-weil-pbc-ringed-localization-rhom-calculus",
-    "lem-weil-pbc-ringed-cech-koszul-dual-limit"
+    "lem-weil-pbc-ringed-cech-completion-unit-idempotence",
+    "lem-weil-pbc-ringed-completion-unit-naturality",
+    "lem-weil-pbc-completed-fiber-cech-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 099B (lemma-derived-completion), generator-localization paragraph; contraction calculated as in more-algebra.tex Tag 0G6J (lemma-extended-alternating-homotopy-zero)."
-   }
+   "elementary": true
   },
   {
-   "text": "Apply the vanishing-elements ideal lemma with $K=F(N)$. Step 2 places all restricted $b_i$ in the ideal sheaf $S_K$. Since $\\mathcal J$ is the smallest ideal subsheaf containing those sections, $\\mathcal J\\subset S_K$. More explicitly, a section $f\\in\\mathcal J(U)$ is a finite sum of multiples of the $b_i$ on a covering of $U$; ideal closure gives vanishing there and the sheaf clause gives it on $U$. Consequently $F(N)$ is locally derived $\\mathcal J$-complete. By $\\theta_N$ and its slice compatibility, so is $T(N)$. For $r=0$, $\\mathcal J=0$, and the same ideal lemma contains the zero section, whose localization is the zero sheaf.",
+   "text": "For a fixed-unit target N, eta_(F N) is invertible. If unit_M followed by f equals unit_M followed by g, apply LF. The invertibility of L(eta_(F M)) and the comparison cancel L(F unit_M), giving L(F f)=L(F g). Naturality and invertibility of eta_(F N) imply F f=F g; faithfulness implies f=g. For h:M -> N extend by the full-functor preimage of e_M followed by L(F h) followed by inverse eta_(F N). Unit normalization and naturality show its composite with unit_M is h. This proves the required bijection with the specified unit, using real categorical cancellation rather than assuming the reflector conclusion.",
    "uses": [
-    "lem-weil-pbc-ringed-derived-complete-elements-ideal",
-    "lem-weil-pbc-ringed-cech-koszul-dual-limit"
+    "lem-weil-pbc-ringed-cech-completion-unit-idempotence",
+    "lem-weil-pbc-ringed-completion-unit-naturality",
+    "lem-weil-pbc-completed-fiber-cech-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tags 0998 (lemma-ideal-of-elements-complete-wrt) and 099B (lemma-derived-completion)."
-   }
-  },
-  {
-   "text": "Verify the local-description hypothesis of the existing general augmented-Cech completion theorem for the explicit $C$. The ideal sheaf $\\mathcal J$ is finite type because the global list is finite. On each slice, $C|_U$ is exactly the alternating localization complex of the restricted $b_i$, with its augmentation. For any other generating list $c_1,\\ldots,c_s$ on that slice, apply the existence clause of the same theorem to the small ringed site $\\mathcal C/U$ and its ideal $\\mathcal J|_U$. This site has terminal object $(U,\\mathrm{id})$. At that object the theorem supplies a single augmented complex $K_U$ and augmentation-compatible isomorphisms $\\alpha_b:C_b|_U\\to K_U$ and $\\alpha_c:C_c\\to K_U$. Their composite $\\alpha_b^{-1}\\alpha_c:C_c\\to C|_U$ respects augmentations. Thus $C$ has every local description required by the theorem, even if the two lists generate the same ideal only as sheaves. Apply its reflection clause to $C\\to\\mathcal O$ to obtain the correctly typed bijection\n$$\\Phi_{N,L}:\\operatorname{Hom}(F(N),L)\\longrightarrow\\operatorname{Hom}(N,L),\\qquad u\\longmapsto u\\eta^C_N$$\nfor every locally complete $L$. It also states that $\\eta^C_L$ is an isomorphism for such $L$. This uses both explicit clauses of an existing general theorem; it asserts no tensor-Hom adjunction with $F(N)$ in its first slot.",
-   "uses": [
-    "lem-weil-pbc-extended-cech-completion-model"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tags 099D (lemma-all-rings), 099E (lemma-global-extended-cech-complex), and 099F (proposition-derived-completion), applied to the globally generated ideal."
-   }
-  },
-  {
-   "text": "Define the inverse for the claimed mapping bijection as follows. Given $a:N\\to L$, let $u=\\Phi_{N,L}^{-1}(a):F(N)\\to L$, the unique map whose composition with $\\eta^C_N$ is $a$, whose existence and uniqueness are supplied in Step 4. Set $v=u\\theta_N^{-1}:T(N)\\to L$. Then $v\\eta_N=u\\theta_N^{-1}\\theta_N\\eta^C_N=a$. Conversely, for $v:T(N)\\to L$, the morphism $v\\theta_N$ composes with $\\eta^C_N$ to $v\\eta_N$, so uniqueness in Step 4 gives $\\Phi_{N,L}^{-1}(v\\eta_N)=v\\theta_N$. Multiplying by $\\theta_N^{-1}$ recovers $v$. These two equations prove both inverse identities and retain the prescribed tower unit.",
-   "uses": [
-    "lem-weil-pbc-extended-cech-completion-model",
-    "lem-weil-pbc-ringed-cech-koszul-dual-limit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tags 099F (proposition-derived-completion) and 0A0E (lemma-derived-completion-koszul), with the augmentation-compatible unit comparison."
-   }
-  },
-  {
-   "text": "If $N$ is locally complete, Step 4 gives that $\\eta^C_N$ is an isomorphism, and hence so is $\\eta_N=\\theta_N\\eta^C_N$. If $\\eta_N$ is an isomorphism, the already proved completeness of $T(N)$ in Step 3 is carried to $N$ on every slice by this isomorphism and derived internal-Hom functoriality. This proves both implications without confusing a retraction with a two-sided inverse.",
-   "uses": [
-    "lem-weil-pbc-extended-cech-completion-model",
-    "lem-weil-pbc-ringed-cech-koszul-dual-limit",
-    "def-pur-derived-internal-hom"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tags 099B and 099F, isomorphism on complete objects; completeness of the output proved in Steps 2–3."
-   }
-  },
-  {
-   "text": "For $a:N\\to N'$, functoriality gives $F(a)\\eta^C_N=\\eta^C_{N'}a$. Naturality of $\\theta$ gives $T(a)\\theta_N=\\theta_{N'}F(a)$. Therefore $T(a)\\eta_N=T(a)\\theta_N\\eta^C_N=\\theta_{N'}F(a)\\eta^C_N=\\eta_{N'}a$. The comparison lemma also makes the strict tower independent of the complex representative. This proves naturality of both the construction and its unit, including on slices.",
-   "uses": [
-    "lem-weil-pbc-ringed-cech-koszul-dual-limit",
-    "def-pur-derived-internal-hom"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tags 099B and 0A0E, functorial construction and augmentation-compatible Koszul identification."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pur-derived-internal-hom",
-  "lem-weil-pbc-extended-cech-completion-model",
-  "lem-weil-pbc-ringed-cech-koszul-dual-limit",
-  "lem-weil-pbc-ringed-derived-complete-elements-ideal",
-  "lem-weil-pbc-ringed-localization-rhom-calculus",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+  "lem-weil-pbc-completed-fiber-cech-comparison",
+  "lem-weil-pbc-ringed-cech-completion-unit-idempotence",
+  "lem-weil-pbc-ringed-completion-unit-naturality"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebraization.tex",
-  "place": "Tags 099B and 0A0E, with the existing general augmented-Cech theorem 099E/099F; the contraction, local-description verification and inverse identities are written out."
+  "place": "Tag 099B, unit idempotence and universal mapping property; Tag 0A0E, unit-compatible Koszul/Cech comparison.",
+  "note": "This is the proof of the attached wfCompletionReflector specialization with completeness defined by invertibility of its actual intrinsic unit. Its categorical assembly is fully proved. The general ringed-site companion remains publicly reexported and is not claimed to have been proved by this delivery."
  },
  "mathlib_searches": [
   {
@@ -222,7 +162,7 @@
   "module": "Sheaf.Paper.WeilCompletedTensorReflector",
   "declaration": "AlgebraicGeometry.Scheme.wfCompletionReflector",
   "file": "lean/Sheaf/Paper/WeilCompletedTensorReflector.lean",
-  "statement": "theorem wfCompletionReflector : (∀ M : PbcCompletedDerived X d, WfIsComplete X d r a ha (wfCompletionObj X d r a ha M)) ∧ ∀ (M L : PbcCompletedDerived X d), WfIsComplete X d r a ha L → Function.Bijective (fun f : wfCompletionObj X d r a ha M ⟶ L ↦ wfCompletionUnit X d r a ha M ≫ f)",
+  "statement": "theorem wfCompletionReflector :\n    (∀ M : PbcCompletedDerived X d,\n      WfIsComplete X d r a ha (wfCompletionObj X d r a ha M)) ∧\n    ∀ (M L : PbcCompletedDerived X d), WfIsComplete X d r a ha L →\n      Function.Bijective (fun f : wfCompletionObj X d r a ha M ⟶ L ↦\n        wfCompletionUnit X d r a ha M ≫ f)",
   "branch": "newtargets-dag",
   "by": "NJ",
   "date": "2026-10-16",
@@ -244,18 +184,11 @@
  "reviewed_proof": {
   "date": "2026-10-19",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "R5",
+  "reviewer": "COMPILER",
+  "group": "D8",
   "result": "pass",
-  "landing": "20261019T005414-L-2765081",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.wfCompletionMap_laws",
-   "AlgebraicGeometry.Scheme.wfCompletionReflector"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.wfCompletionReflector"
-  ]
+  "landing": "20261019T192713-L-1857039",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

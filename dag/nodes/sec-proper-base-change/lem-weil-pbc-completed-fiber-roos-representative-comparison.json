@@ -1,0 +1,158 @@
+{
+ "id": "lem-weil-pbc-completed-fiber-roos-representative-comparison",
+ "kind": "statement",
+ "title": "The explicit Koszul comparison is compatible with every derived representative",
+ "statement": "Let X, A, d, r, a, C, the explicit small ringed site O, derived equivalence F and scalar sections b be as in [def-weil-pbc-intrinsic-completion, def-weil-pbc-bounded-constructible-complete, def-weil-pbc-adic-coefficient-datum]. For every complex P of O-modules and a specified isomorphism realization : Q P ≅ F(Q C), put T = ringedKoszulTensorTowerComplex O r b P [def-weil-pbc-ringed-koszul-system]. There is an isomorphism e : F(Q intrinsicCompletionComplex(C)) ≅ Q(roosF(T)) [def-weil-strict-roos-model] carrying F(Q intrinsicCompletionComplexUnit(C)) to realization.inv followed by Q(ringedKoszulLimitUnit(P) followed by the inverse canonical termwise-limit comparison followed by roosι(T)). This compares two explicitly specified product fibers and their zero-homotopy units. It concludes no total-derived inverse-limit, Cech, idempotence, completeness or reflection assertion. The finite list may be empty; no generation assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul, proof; sites-cohomology.tex Tags 0A0A and 0941; the exact-product specialization is Bhatt--Scholze Proposition 3.1.9."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-koszul-system",
+  "def-weil-strict-roos-model"
+ ],
+ "proof": [
+  {
+   "text": "The naturality of the total-tensor right unitor and whisker exchange prove naturality in the input of the maps into the Koszul levels. Compose with ordinary-limit projections to prove the limit-unit naturality. The inverse canonical termwise-limit natural isomorphism and roosInclusion make the actual zero-homotopy Roos unit a natural transformation.",
+   "uses": [
+    "def-weil-pbc-ringed-koszul-system",
+    "def-weil-strict-roos-model",
+    "lem-weil-pbc-completed-fiber-roos-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transfer exact countable products along the actual module equivalence and apply strictRoosDerivation to get RF and kappa. Use only the tensorTower and tensorFactors fields of the presentation D supplied by the existing single-site Cech--Koszul theorem. These factor the actual tensor/Roos functor through localization. Localization.liftNatTrans descends its actual unit; its component formula identifies the unit on every localized complex. Naturality of this lifted transformation under any supplied representative isomorphism gives a unit-compatible isomorphism between the corresponding localized Roos fibers.",
+   "uses": [
+    "det-pe-products-exact",
+    "lem-weil-strict-roos-derivation",
+    "lem-weil-pbc-ringed-cech-koszul-comparison-on-site",
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the source explicit chain isomorphism at the actual termwise transported complex N. Compose its localization with the exact module functor localization factorization and with the representative isomorphism from the preceding step. Naturality of the same factorization carries the source completion unit to the actual Roos unit. Cancel its inverse and hom at the input C; exactly realization.inv remains. This also applies to empty lists, zero rings and zero complexes.",
+   "uses": [
+    "lem-weil-pbc-completed-fiber-roos-comparison",
+    "lem-weil-pbc-completed-koszul-product-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-koszul-system",
+  "def-weil-strict-roos-model",
+  "det-pe-products-exact",
+  "lem-weil-pbc-completed-fiber-roos-comparison",
+  "lem-weil-pbc-completed-koszul-product-comparison",
+  "lem-weil-pbc-ringed-cech-koszul-comparison-on-site",
+  "lem-weil-strict-roos-derivation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul, proof; sites-cohomology.tex Tags 0A0A and 0941; the exact-product specialization is Bhatt--Scholze Proposition 3.1.9.",
+  "note": "Completely proved representative normalization using Mathlib localization of natural transformations, naturality of the actual tensor and limit units, and the existing tensorTower and strict Roos factorizations. Only the separate explicit chain comparison is imported."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Localization.liftNatTrans\"",
+   "results": "5 hits including Localization.liftNatTrans and Localization.liftNatTrans_app in Mathlib.CategoryTheory.Localization.Predicate.",
+   "date": "2026-10-20",
+   "verdict": "Used directly to descend the actual unit, eliminating the roof argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between functors descends along a localization and is natural under isomorphisms of representatives",
+   "results": "8 hits including Localization.liftNatTrans, Localization.liftNatTrans_app, Construction.natTransExtension and Localization.natTrans_ext. The exact implementation uses the first two.",
+   "date": "2026-10-20",
+   "verdict": "Use the general localization API; prove the Koszul-unit naturality by projections."
+  },
+  {
+   "tool": "grep",
+   "query": "liftNatTrans_app|roos.*natural|rightUnitor_inv_naturality",
+   "results": "25 Mathlib hits, including the localization component formula and MonoidalCategory.rightUnitor_inv_naturality. The source library additionally has roosInclusion and roosι_natural.",
+   "date": "2026-10-20",
+   "verdict": "The actual representative normalization is proved from these APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation descends along a localization and its components commute with a chosen isomorphism between localized representatives",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.Localization.η\", \"module\": \"Mathlib.CategoryTheory.Localization.Adjunction\", \"type\": \": F' ⋙ G' ⟶ 𝟭 D₂\", \"doc\": \"The natural transformation $\\\\eta: F' \\\\circ G' \\\\Rightarrow \\\\text{id}_{D_2}$ constructed from the counit of the adjunction $\\\\epsilon: F \\\\circ G \\\\Rightarrow \\\\text{id}_{D_1}$ via whiskering with the local\"}\n  {\"name\": \"CategoryTheory.Localization.liftNatTrans_app\", \"module\": \"Mathlib.CategoryTheory.Localization.Predicate\", \"type\": \"(F₁ F₂ : C ⥤ E) (F₁' F₂' : D ⥤ E) [Lifting L W F₁ F₁'] [Lifting L W F₂ F₂'] (τ : F₁ ⟶ F₂) (X : C) :\\n  (liftNatTrans L W F₁ F₂ F₁' F₂' τ).app (L.obj X) =\\n    (Lifting.iso L W F₁ F₁').hom.app X ≫ τ.app X ≫ (Lifting.iso L W F₂ F₂').inv.app X\", \"doc\": \"For categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$, a localization functor $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ with respect to a morphism property $W$, and functors $F₁, F₂ : \\\\mathcal{C} \\\\to \\\\mathca\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedNatTrans_fac\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \"(τ : F ⟶ F') : α ≫ whiskerLeft L (rightDerivedNatTrans RF RF' α α' W τ) = τ ≫ α'\", \"doc\": \"Given natural transformations $\\\\tau: F \\\\to F'$ between functors $F,F': \\\\mathcal{C} \\\\to \\\\mathcal{H}$, this constructs the induced natural transformation $RF \\\\to RF'$ between their right derived functor\"}\n  {\"name\": \"CategoryTheory.Localization.lift₂NatTrans_app_app\", \"module\": \"Mathlib.CategoryTheory.Localization.Bifunctor\", \"type\": \"(τ : F₁ ⟶ F₂) (X₁ : C₁) (X₂ : C₂) :\\n  ((lift₂NatTrans L₁ L₂ W₁ W₂ F₁ F₂ F₁' F₂' τ).app (L₁.obj X₁)).app (L₂.obj X₂) =\\n    ((Lifting₂.iso L₁ L₂ W₁ W₂ F₁ F₁').hom.app X₁).app X₂ ≫\\n      (τ.app X₁).app X₂ ≫ ((Lifting₂.iso L₁ L₂ W₁ W₂ F₂ F₂').inv.app X₁).app X₂\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2, \\\\mathcal{E}$, localization functors $L_1: \\\\mathcal{C}_1 \\\\to \\\\mathcal{D}_1$ and $L_2: \\\\mathcal{C}_2 \\\\to \\\\mathcal{D}_2$ with\"}\n  {\"name\": \"CategoryTheory.Localization.natTrans₂_ext\", \"module\": \"Mathlib.CategoryTheory.Localization.Bifunctor\", \"type\": \"{τ τ' : F₁' ⟶ F₂'}\\n  (h : ∀ (X₁ : C₁) (X₂ : C₂), (τ.app (L₁.obj X₁)).app (L₂.obj X₂) = (τ'.app (L₁.obj X₁)).app (L₂.obj X₂)) : τ = τ'\", \"doc\": \"If two natural transformations between functors agree on all pairs of localized objects obtained via functors $ L_1 $ and $ L_2 $, then the natural transformations are equal. Specifically, for any nat\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedNatTrans\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \"(τ : F ⟶ F') : RF ⟶ RF'\", \"doc\": \"Given natural transformations $\\\\tau: F \\\\to F'$ between functors $F,F': \\\\mathcal{C} \\\\to \\\\mathcal{H}$, this constructs the induced natural transformation $RF \\\\to RF'$ between their right derived functor\"}\n  {\"name\": \"CategoryTheory.Localization.Construction.natTransExtension\", \"module\": \"Mathlib.CategoryTheory.Localization.Construction\", \"type\": \"{F₁ F₂ : W.Localization ⥤ D} (τ : W.Q ⋙ F₁ ⟶ W.Q ⋙ F₂) : F₁ ⟶ F₂\", \"doc\": \"Given functors $F_1, F_2: \\\\mathcal{C}[W^{-1}] \\\\to \\\\mathcal{D}$ and a natural transformation $\\\\tau: Q \\\\circ F_1 \\\\Rightarrow Q \\\\circ F_2$ (where $Q: \\\\mathcal{C} \\\\to \\\\mathcal{C}[W^{-1}]$ is the localizat\"}\n  {\"name\": \"TopCat.Presheaf.SubmonoidPresheaf.toLocalizationPresheaf\", \"module\": \"Mathlib.Topology.Sheaves.CommRingCat\", \"type\": \": F ⟶ G.localizationPresheaf\", \"doc\": \"The natural transformation from a presheaf $ F $ of commutative rings on a topological space $ X $ to its localization presheaf with respect to a submonoid presheaf $ \\\\mathcal{G} $. For each open set \"}",
+   "date": "2026-10-20",
+   "verdict": "Localization.liftNatTrans_app is an exact component formula and is already used in representativeUnitTransport. No further statement is needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilCompletedTensorReflector",
+  "date": "2026-10-20",
+  "group": "D8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Current main-20261015 def-weil-pbc-completed-pullback: the displayed derived-inverse-limit formula and final sentence identifying its comparison with the completion map. Tag 0A0E compares the supporting finite Koszul model with augmented Cech internal Hom, including the prescribed unit.",
+   "via": [
+    "lem-weil-pbc-completed-fiber-strict-limit-comparison",
+    "lem-weil-pbc-completed-fiber-cech-comparison",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.WeilCompletedKoszulRepresentativeComparison",
+  "file": "lean/Sheaf/Paper/WeilCompletedKoszulRepresentativeComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completed_fiber_roos_comparison",
+  "statement": "theorem completed_fiber_roos_comparison\n    (X : Scheme.{v}) {A : Type (v + 1)} [CommRing A] (d : AdicCoefficientDatum A)\n    (r : ℕ) (a : Fin r → A)\n    (C : CochainComplex (pbcModules X (pbcAdicCompletion X d)) ℤ) :\n    let O := completedCechRing X d\n    let F := completedCechDerivedEquiv X d\n    let b := fun i ↦ completedCechScalar X d (a i)\n    ∀ (P : ringedSiteComplex O)\n      (realization : DerivedCategory.Q.obj P ≅ F.functor.obj (DerivedCategory.Q.obj C)),\n      let T := ringedKoszulTensorTowerComplex O r b P\n      ∃ e : F.functor.obj (DerivedCategory.Q.obj (intrinsicCompletionComplex X d r a C)) ≅\n          DerivedCategory.Q.obj (roosF.obj T),\n        F.functor.map (DerivedCategory.Q.map (intrinsicCompletionComplexUnit X d r a C)) ≫\n            e.hom = realization.inv ≫\n          DerivedCategory.Q.map (ringedKoszulLimitUnit O r b P ≫\n            (completedKoszulTermwiseLimitIso.app T).inv ≫ roosι T)",
+  "branch": "sheaf-dag",
+  "by": "D8",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261019T192713-L-1857039",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261019T192713-L-1857039",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

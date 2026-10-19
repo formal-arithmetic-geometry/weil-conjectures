@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-completed-fiber-cech-comparison",
+ "kind": "statement",
+ "title": "Published completed Koszul fiber compared with Cech internal Hom",
+ "statement": "Let X be a scheme in universe u, A a commutative ring in universe u+1, d an adic coefficient datum [def-weil-pbc-adic-coefficient-datum], r a natural number, and a : Fin r -> A any finite list, including the empty list. Let S be AsSmall X.ProEt, let J be the topology induced by its canonical inverse equivalence, and let O be the pullback of the actual completed coefficient ring. Let F : D_X ≌ D(O) be the explicitly constructed derived equivalence of module sheaves [def-weil-pbc-bounded-constructible-complete, def-weil-sheaf-of-modules-category]. Let b_i be the global section obtained by sheafifying a_i, applying the compatible-residue scalar map and the canonical pbcCompletedComparison. For every complex C of actual completed-coefficient module sheaves, let Gamma(C), gamma_C be the explicit transported signed Koszul fiber and its (u,0) chain map [def-weil-pbc-intrinsic-completion]. There is an isomorphism e_C : F(Q Gamma(C)) ≅ RHom(C_b,F(Q C)) satisfying F(Q gamma_C) followed by e_C = eta^C_(F(Q C)), where C_b and eta^C are the actual extended Cech complex and augmentation unit [def-weil-pbc-ringed-koszul-system]. No site, ring, equivalence or scalar sections are chosen from this theorem. No generation hypothesis on a, completeness condition, or mapping universal property occurs in this comparison.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul, proof; sites-cohomology.tex Tags 0A0A and 0941; the exact-product specialization is Bhatt--Scholze Proposition 3.1.9."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof": [
+  {
+   "text": "Apply the published-fiber/strict-limit comparison to the presentation D supplied by the existing single-site Cech--Koszul comparison. This gives e from F(Q Gamma(C)) to D.completion(F(Q C)), carrying F(Q gamma_C) to D.unit.",
+   "uses": [
+    "lem-weil-pbc-completed-fiber-strict-limit-comparison",
+    "lem-weil-pbc-ringed-cech-koszul-comparison-on-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose e with the inverse of theta at F(Q C). The existing unit equation eta followed by theta equals D.unit rewrites the new composite as eta followed by theta and theta inverse. Associativity and the hom/inv identity cancel these two arrows, proving precisely the displayed unit equation.",
+   "uses": [
+    "lem-weil-pbc-ringed-cech-koszul-comparison-on-site"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-completed-fiber-strict-limit-comparison",
+  "lem-weil-pbc-ringed-cech-koszul-comparison-on-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul, proof; sites-cohomology.tex Tags 0A0A and 0941; the exact-product specialization is Bhatt--Scholze Proposition 3.1.9.",
+  "note": "Fully proved in Lean from the separate explicit-fiber/strict-limit construction comparison and the existing single-site Cech--Koszul comparison. The proof composes their isomorphisms and cancels theta against its inverse in the unit equation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Koszul|koszul",
+   "results": "3 hits: Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/RingTheory/Regular/RegularSequence.lean, Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean",
+   "date": "2026-10-19",
+   "verdict": "No match for the published completed-coefficient exterior Koszul fiber, with its normalized unit, after small-site universe transport."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom from an extended Cech complex agrees with the inverse limit of the tensor Koszul tower",
+   "results": "8 hits: HomologicalComplex.instHasLimit, CochainComplex.HomComplex.Cochain.InductionUp.limitSequence, HomologicalComplex.extend.leftHomologyData.isLimitKernelFork, HomologicalComplex.extend.rightHomologyData.isLimitKernelFork, HomologicalComplex.extend.leftHomologyData.lift_d_comp_eq_zero_iff, CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi_inv_comp_pi_assoc, HomologicalComplex.extend.leftHomologyData.cokernelCofork, CochainComplex.ConnectData.restrictionGEIso_inv_f",
+   "date": "2026-10-19",
+   "verdict": "No match for the published completed-coefficient exterior Koszul fiber, with its normalized unit, after small-site universe transport."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\"",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "No match for the published completed-coefficient exterior Koszul fiber, with its normalized unit, after small-site universe transport."
+  },
+  {
+   "tool": "rg",
+   "query": "completedKoszulFiber|intrinsicCompletionComplex; blueprint_refs.py search Koszul; fiber.*cech|Koszul.*comparison",
+   "results": "Read IntrinsicCompletionCompleted, IntrinsicCompletion, RingedCechKoszulDualLimit, RingedCechKoszulHomLimitComparison and RingedKoszulSystem. The first two define the explicit exterior Koszul fiber; the comparison results apply to ordered tensor-dual factors on equal-universe small sites. No existing declaration connects these actual constructions. Blueprint search found the intrinsic-completion definitions and Koszul/quotient comparison, not this presentation comparison.",
+   "date": "2026-10-19",
+   "verdict": "A separate construction comparison is needed; the general Cech--Koszul theorem is used as a dependency, not duplicated."
+  },
+  {
+   "tool": "loogle, leanfinder, grep",
+   "query": "pushforwardPushforwardEquivalence; equivalence of sites induces module-sheaf and derived equivalences",
+   "results": "Mathlib SheafOfModules.pushforwardPushforwardEquivalence constructs the equivalence. The source-library CategoryTheory.Equivalence.mapDerivedCategory constructs its derived equivalence. Both are used. The query records are in searches.jsonl.",
+   "date": "2026-10-19",
+   "verdict": "Use the existing constructions, not an existential small-model assumption."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilCompletedTensorReflector",
+  "date": "2026-10-19",
+  "group": "D8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Current main-20261015 def-weil-pbc-completed-pullback: the displayed derived-inverse-limit formula and final sentence identifying its comparison with the completion map. Tag 0A0E compares the supporting finite Koszul model with augmented Cech internal Hom, including the prescribed unit.",
+   "via": [
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.WeilCompletedCechComparison",
+  "file": "lean/Sheaf/Paper/WeilCompletedCechComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completed_fiber_cech_comparison",
+  "statement": "theorem completed_fiber_cech_comparison\n    (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)\n    (r : ℕ) (a : Fin r → A)\n    (C : CochainComplex (pbcModules X (pbcAdicCompletion X d)) ℤ) :\n    let O := completedCechRing X d\n    let F := completedCechDerivedEquiv X d\n    let b := fun i ↦ completedCechScalar X d (a i)\n    ∃ e : F.functor.obj (DerivedCategory.Q.obj (intrinsicCompletionComplex X d r a C)) ≅\n        (ringedCechCompletionFunctor O (ringedExtendedCech O r b).1).obj\n          (F.functor.obj (DerivedCategory.Q.obj C)),\n      F.functor.map (DerivedCategory.Q.map (intrinsicCompletionComplexUnit X d r a C)) ≫\n          e.hom =\n        ringedCechCompletionUnit O (ringedExtendedCech O r b).1\n          (ringedExtendedCech O r b).2 (F.functor.obj (DerivedCategory.Q.obj C))",
+  "branch": "sheaf-dag",
+  "by": "D8",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261019T192713-L-1857039",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261019T192713-L-1857039",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,158 @@
+{
+ "id": "lem-weil-pbc-completed-koszul-product-comparison",
+ "kind": "statement",
+ "title": "Finite Koszul comparison induces the normalized product-fiber comparison",
+ "statement": "Let X be a scheme in universe u, A a commutative ring in universe u+1, d an adic coefficient datum [def-weil-pbc-adic-coefficient-datum], and a : Fin r -> A any finite list, allowing r=0. On the canonical small model of the pro-etale site pull back the actual completed ring O [def-weil-pbc-bounded-constructible-complete]. Let G be the explicitly constructed module-sheaf equivalence, applied termwise to complexes; b is the image of the scalar list. For each complex C let N=G(C), T the strict tensor-dual Koszul tower of N [def-weil-pbc-ringed-koszul-system], and Gamma(C) the transported published exterior Koszul product fiber [def-weil-pbc-intrinsic-completion]. There is an isomorphism of chain complexes e:G(Gamma(C)) ≅ roosF(T) [def-weil-strict-roos-model] carrying G of the actual (u,0) completion unit to the ordinary-limit unit of N followed by the inverse canonical termwise-limit comparison and roosι(T). This is an isomorphism of specified explicit complexes, before localization. No derived representative, derived-limit universal property, completeness or reflection appears in the statement.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul, proof; sites-cohomology.tex Tags 0A0A and 0941; the exact-product specialization is Bhatt--Scholze Proposition 3.1.9."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-ringed-koszul-system",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-strict-roos-model",
+  "lem-weil-pbc-completed-fiber-roos-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use moduleSheaves_colimits_forgetful: the module-to-sheaf functor preserves and reflects limits, and restriction of scalars has the same underlying sheaf. Thus backward coefficient restriction preserves countable products. Compose with the site equivalence and use the finite level isomorphisms. Pi comparisons and projection extensionality prove that the product comparison intertwines 1-shift.",
+   "uses": [
+    "lem-weil-pbc-completed-fiber-roos-comparison",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-pbc-intrinsic-completion",
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The additive mapping-cone comparison and its shift comparison transport the source mapping cocone. A commuting square with isomorphisms on both objects induces a mapping-cocone isomorphism. Identity on the source and minus identity on the target identify the negative and positive tower endomorphism fibers. Projection coordinates show that these comparisons carry each zero-homotopy lift to the specified zero-homotopy lift. All these general helper lemmas are proved in Lean.",
+   "uses": [
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the actual intrinsic round trip and the explicit natural isomorphism for applying composed functors to complexes. The finite augmentation equation identifies every product projection of the transported input map with the tensor-dual augmentation. The Roos augmentation factors through the ordinary limit. The canonical termwise-limit comparison and limit projection extensionality identify the resulting ordinary-limit map with ringedKoszulLimitUnit. This proves precisely the displayed unit equation, before localization.",
+   "uses": [
+    "lem-weil-pbc-completed-fiber-roos-comparison",
+    "def-weil-pbc-intrinsic-completion",
+    "def-weil-pbc-ringed-koszul-system",
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-ringed-koszul-system",
+  "def-weil-strict-roos-model",
+  "lem-weil-pbc-completed-fiber-roos-comparison",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul, proof; sites-cohomology.tex Tags 0A0A and 0941; the exact-product specialization is Bhatt--Scholze Proposition 3.1.9.",
+  "note": "Complete Lean proof of products, mapping cones, signs and the precise unit from the genuinely finite source comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive product-preserving functor transports the signed mapping cocone of one minus tower shift, preserving the zero homotopy augmentation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CochainComplex.mappingCone.map_δ\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Preadditive C]\\n  [inst_3 : CategoryTheory.Limits.HasBinaryBiproducts C] [inst_4 : CategoryTheory.Preadditive D]\\n  [inst_5 : CategoryTheory.Limits.H\", \"doc\": \"For an additive functor $ G $ between preadditive categories and a morphism $ \\\\phi: F \\\\to G $ of integer-indexed cochain complexes, the mapping cone construction commutes with $ G $ up to natural isom\"}\n  {\"name\": \"CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/MappingCone\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v', u_2} D] [inst_2 : CategoryTheory.Preadditive C]\\n  [inst_3 : CategoryTheory.Preadditive D] {F G : CochainComplex C ℤ} (φ : F ⟶ G)\\n  [inst_4 : HomologicalComplex.HasHomotopyCofiber φ] (\", \"doc\": \"For an additive functor $ H $ between preadditive categories and a morphism $ \\\\phi: F \\\\to G $ of cochain complexes, the mapping cone construction commutes with $ H $ up to isomorphism. Specifically, a\"}\n  {\"name\": \"CochainComplex.mappingCone.mapHomologicalComplexXIso_eq\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/MappingCone\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v', u_2} D] [inst_2 : CategoryTheory.Preadditive C]\\n  [inst_3 : CategoryTheory.Preadditive D] {F G : CochainComplex C ℤ} (φ : F ⟶ G)\\n  [inst_4 : HomologicalComplex.HasHomotopyCofiber φ] (\", \"doc\": \"For an additive functor $ H $ between preadditive categories and a morphism $ \\\\phi: F \\\\to G $ of cochain complexes, the isomorphism $ H(\\text{Cone}(\\\\phi))_n \\\\cong \\text{Cone}(H(\\\\phi))_n $ at index $ n $\"}\n  {\"name\": \"CochainComplex.mappingCone.map_inr\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/MappingCone\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v', u_2} D] [inst_2 : CategoryTheory.Preadditive C]\\n  [inst_3 : CategoryTheory.Preadditive D] {F G : CochainComplex C ℤ} (φ : F ⟶ G)\\n  [inst_4 : HomologicalComplex.HasHomotopyCofiber φ] (\", \"doc\": \"For an additive functor $ H $ between preadditive categories and a morphism $ \\\\phi: F \\\\to G $ of cochain complexes, the composition of $ H $ applied to the right injection morphism $ \\\\text{inr}(\\\\phi) \"}\n  {\"name\": \"CochainComplex.mappingCone.mapHomologicalComplexXIso\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/MappingCone\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v', u_2} D] →\\n        [inst_2 : CategoryTheory.Preadditive C] →\\n          [inst_3 : CategoryTheory.Preadditive D] →\\n            {F G : CochainComplex C ℤ} →\\n              (φ\", \"doc\": \"For an additive functor $ H $ between preadditive categories and a morphism $ \\\\phi: F \\\\to G $ of cochain complexes, the mapping cone construction commutes with $ H $ up to isomorphism. Specifically, a\"}\n  {\"name\": \"CochainComplex.mappingCone.mapHomologicalComplexXIso'\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/MappingCone\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v', u_2} D] →\\n        [inst_2 : CategoryTheory.Preadditive C] →\\n          [inst_3 : CategoryTheory.Preadditive D] →\\n            {F G : CochainComplex C ℤ} →\\n              (φ\", \"doc\": \"For an additive functor $ H $ between preadditive categories and a morphism $ \\\\phi: F \\\\to G $ of cochain complexes, the mapping cone construction commutes with $ H $ up to isomorphism. Specifically, a\"}\n  {\"name\": \"CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/MappingCone\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v', u_2} D] [inst_2 : CategoryTheory.Preadditive C]\\n  [inst_3 : CategoryTheory.Preadditive D] {F G : CochainComplex C ℤ} (φ : F ⟶ G)\\n  [inst_4 : HomologicalComplex.HasHomotopyCofiber φ] (\", \"doc\": \"For an additive functor $ H $ between preadditive categories and a morphism $ \\\\phi: F \\\\to G $ of cochain complexes, the inverse of the isomorphism $ H(\\\\text{Cone}(\\\\phi)) \\\\cong \\\\text{Cone}(H(\\\\phi)) $ a\"}\n  {\"name\": \"CochainComplex.mappingCone.mapHomologicalComplexIso\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/MappingCone\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v', u_2} D] →\\n        [inst_2 : CategoryTheory.Preadditive C] →\\n          [inst_3 : CategoryTheory.Preadditive D] →\\n            {F G : CochainComplex C ℤ} →\\n              (φ\", \"doc\": \"For an additive functor $ H $ between preadditive categories and a morphism $ \\\\phi: F \\\\to G $ of cochain complexes, the mapping cone construction commutes with $ H $ up to isomorphism. Specifically, t\"}",
+   "date": "2026-10-20",
+   "verdict": "Use Mathlib piComparison, the additive mapping-cone comparison and shift comparison. The signed cocone lift compatibility and transition conjugation are proved locally."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone.mapHomologicalComplexIso\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"CochainComplex.mappingCone.mapHomologicalComplexIso\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.MappingCone\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v, u_1} C] [CategoryTheory.Category.{v', u_2} D] [CategoryTheory.Preadditive C] [CategoryTheory.Preadditive D] {F G : CochainComplex C ℤ} (φ : F ⟶ G) [HomologicalComplex.HasHomotopyCofiber φ] (H : CategoryTheory.Functor C D) [H.Additive] [Homo\", \"doc\": \"If `H : C ⥤ D` is an additive functor and `φ` is a morphism of cochain complexes\\nin `C`, this is the comparison isomorphism between the image by `H`\\nof `mappingCone φ` and the mapping cone of the imag\"}\n  {\"name\": \"CochainComplex.mappingCone.mapHomologicalComplexIso_hom_descShortComplex\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.ShortExact\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] {D : Type u_2} [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [F.Additive] (S : CategoryTheory.ShortComplex (CochainComplex C ℤ)) : CategoryTheory.CategoryStruct.comp\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.mappingCone.mapHomologicalComplexIso_hom_descShortComplex_assoc\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.ShortExact\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] {D : Type u_2} [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [F.Additive] (S : CategoryTheory.ShortComplex (CochainComplex C ℤ)) {Z : HomologicalComplex D (ComplexSh\", \"doc\": \"\"}",
+   "date": "2026-10-20",
+   "verdict": "Use Mathlib piComparison, the additive mapping-cone comparison and shift comparison. The signed cocone lift compatibility and transition conjugation are proved locally."
+  },
+  {
+   "tool": "grep",
+   "query": "piComparison|mappingCocone",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Products.lean\", \"line\": \"17\", \"text\": \"In particular, we show that `piComparison G f` is an isomorphism iff `G` preserves\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Products.lean\", \"line\": \"77\", \"text\": \"lemma PreservesProduct.of_iso_comparison [i : IsIso (piComparison G f)] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Products.lean\", \"line\": \"85\", \"text\": \"lemma inv_piComparison_comp_map_π [IsIso (piComparison G f)] (j : J) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Products.lean\", \"line\": \"86\", \"text\": \"     inv (piComparison G f) ≫ G.map (Pi.π _ j) =\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Products.lean\", \"line\": \"88\", \"text\": \"  simp only [IsIso.inv_comp_eq, piComparison_comp_π]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Basic.lean\", \"line\": \"357\", \"text\": \"    (Limits.Pi.map (fun j => (T j).mor₃) ≫ inv (piComparison _ _))\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Basic.lean\", \"line\": \"383\", \"text\": \"    rw [← cancel_mono (piComparison _ _), assoc, assoc, assoc, IsIso.inv_hom_id, comp_id]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Basic.lean\", \"line\": \"406\", \"text\": \"  rw [assoc, ← cancel_mono (piComparison _ _), zero_comp, assoc, assoc]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/ConcreteCategory.lean\", \"line\": \"66\", \"text\": \"  congr_hom (piComparison_comp_π (forget C) F j) x\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/ConcreteCategory.lean\", \"line\": \"89\", \"text\": \"  apply Concrete.limit_ext _ (piComparison F _ x) (piComparison F _ y)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/ConcreteCategory.lean\", \"line\": \"91\", \"text\": \"  rw [← ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply, piComparison_comp_π]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Biproducts.lean\", \"line\": \"928\", \"text\": \"  have that : piComparison F f =\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Biproducts.lean\", \"line\": \"932\", \"text\": \"    convert! piComparison_comp_π F f j; simp [← Function.comp_def, ← Functor.map_comp]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Biproducts.lean\", \"line\": \"934\", \"text\": \"  have : IsIso (piComparison F f) := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Products.lean\", \"line\": \"650\", \"text\": \"def piComparison [HasProduct f] [HasProduct fun b => G.obj (f b)] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Products.lean\", \"line\": \"655\", \"text\": \"theorem piComparison_comp_π [HasProduct f] [HasProduct fun b => G.obj (f b)] (b : β) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Products.lean\", \"line\": \"656\", \"text\": \"    piComparison G f ≫ Pi.π _ b = G.map (Pi.π f b) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Products.lean\", \"line\": \"660\", \"text\": \"theorem map_lift_piComparison [HasProduct f] [HasProduct fun b => G.obj (f b)] (P : C)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Products.lean\", \"line\": \"661\", \"text\": \"    (g : ∀ j, P ⟶ f j) : G.map (Pi.lift g) ≫ piComparison G f = Pi.lift fun j => G.map (g j) := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/Decomposition.lean\", \"line\": \"207\", \"text\": \"  rw [← piComparison_comp_π]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean\", \"line\": \"163\", \"text\": \"    simp only [px, is₁, is₂, ← piComparison_comp_π, ← PreservesProduct.iso_hom,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/FintypeCat.lean\", \"line\": \"89\", \"text\": \"    piComparison_comp_π_apply FintypeCat.incl X i x\"}\n  {\"file\": \"Mathlib/Topology/Category/CompHausLike/SigmaComparison.lean\", \"line\": \"57\", \"text\": \"  have := ConcreteCategory.congr_hom (piComparison_comp_π X (fun a ↦ ⟨of P (σ a)⟩) a)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Preserves.lean\", \"line\": \"85\", \"text\": \"theorem piComparison_fac :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Preserves.lean\", \"line\": \"87\", \"text\": \"    piComparison F (fun x ↦ op (X x)) = F.map (opCoproductIsoProduct' hc (productIsProduct _)).inv ≫\"}",
+   "date": "2026-10-20",
+   "verdict": "Use Mathlib piComparison, the additive mapping-cone comparison and shift comparison. The signed cocone lift compatibility and transition conjugation are proved locally."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive functor preserving countable products identifies the mapping fiber of one minus tower shift and preserves the zero homotopy augmentation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.preservesFiniteProductsOfAdditive\", \"module\": \"Mathlib.CategoryTheory.Preadditive.AdditiveFunctor\", \"type\": \"[Additive F] : PreservesFiniteProducts F\", \"doc\": \"Every additive functor between preadditive categories preserves finite products. That is, if $ F : C \\to D $ is an additive functor (preserving addition of morphisms) between preadditive categories, th\"}\n  {\"name\": \"CategoryTheory.Functor.additive_of_preserves_binary_products\", \"module\": \"Mathlib.CategoryTheory.Preadditive.AdditiveFunctor\", \"type\": \"[HasBinaryProducts C] [PreservesLimitsOfShape (Discrete WalkingPair) F] [F.PreservesZeroMorphisms] : F.Additive\", \"doc\": \"For any preadditive categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, if a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ preserves binary products and zero morphisms, then $F$ is additive.\"}\n  {\"name\": \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated\", \"type\": \"(G : C ⥤ D) [G.Additive] : (G.mapHomotopyCategory (ComplexShape.up ℤ)).IsTriangulated\", \"doc\": \"Given an additive functor $ G : C \\to D $ between preadditive categories $ C $ and $ D $, the induced functor between their homotopy categories of integer-indexed cochain complexes is triangulated. Thi\"}\n  {\"name\": \"CategoryTheory.Functor.preservesFiniteBiproductsOfAdditive\", \"module\": \"Mathlib.CategoryTheory.Preadditive.AdditiveFunctor\", \"type\": \"[Additive F] : PreservesFiniteBiproducts F\", \"doc\": \"Every additive functor between preadditive categories preserves finite biproducts. Specifically, if $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is an additive functor, then $ F $ preserves zero morphisms and \"}\n  {\"name\": \"CategoryTheory.Functor.instAdditiveOfIsHomological\", \"module\": \"Mathlib.CategoryTheory.Triangulated.HomologicalFunctor\", \"type\": \"[F.IsHomological] : F.Additive\", \"doc\": \"A homological functor from a pretriangulated category to an abelian category is additive.\"}\n  {\"name\": \"CategoryTheory.Functor.IsTriangulated.instAdditive\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Functor\", \"type\": \"[F.IsTriangulated] : F.Additive\", \"doc\": \"Any triangulated functor between pretriangulated categories is additive, meaning it preserves the addition of morphisms. Specifically, if $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is a triangulated functor \"}\n  {\"name\": \"CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive\", \"module\": \"Mathlib.CategoryTheory.Preadditive.AdditiveFunctor\", \"type\": \"[Additive F] : PreservesFiniteCoproducts F\", \"doc\": \"An additive functor between preadditive categories preserves finite coproducts. That is, if $ F : C \\to D $ is an additive functor (preserving addition of morphisms), then $ F $ preserves all finite co\"}\n  {\"name\": \"CategoryTheory.ShiftedHom.map_zero\", \"module\": \"Mathlib.CategoryTheory.Shift.ShiftedHom\", \"type\": \"{a : M} (F : C ⥤ D) [F.CommShift M] [F.Additive] : (0 : ShiftedHom X Y a).map F = 0\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ that commutes with the shift operation parameterized by an additive monoid $ M $, the image of the zero morphism $ 0 : X \\\\to Y⟦a⟧ $ under $ \"}",
+   "date": "2026-10-20",
+   "verdict": "No exact signed-fiber/unit theorem: finite biproduct preservation and triangulated functor instances are returned. Use the already proved projection, mapping-cone and zero-lift calculations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilCompletedTensorReflector",
+  "date": "2026-10-20",
+  "group": "D8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Current main-20261015 def-weil-pbc-completed-pullback: the displayed derived-inverse-limit formula and final sentence identifying its comparison with the completion map. Tag 0A0E compares the supporting finite Koszul model with augmented Cech internal Hom, including the prescribed unit.",
+   "via": [
+    "lem-weil-pbc-completed-fiber-roos-representative-comparison",
+    "lem-weil-pbc-completed-fiber-strict-limit-comparison",
+    "lem-weil-pbc-completed-fiber-cech-comparison",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.WeilCompletedKoszulProductComparison",
+  "file": "lean/Sheaf/Paper/WeilCompletedKoszulProductComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completed_fiber_roos_comparison_on_complex",
+  "statement": "theorem completed_fiber_roos_comparison_on_complex\n    (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)\n    (r : ℕ) (a : Fin r → A)\n    (C : CochainComplex (pbcModules X (pbcAdicCompletion X d)) ℤ) :\n    let O := completedCechRing X d\n    let G := (completedCechModulesEquiv X d).functor.mapHomologicalComplex (.up ℤ)\n    let b := fun i ↦ completedCechScalar X d (a i)\n    let N := G.obj C\n    let T := ringedKoszulTensorTowerComplex O r b N\n    ∃ e : G.obj (intrinsicCompletionComplex X d r a C) ≅ roosF.obj T,\n      G.map (intrinsicCompletionComplexUnit X d r a C) ≫ e.hom =\n        ringedKoszulLimitUnit O r b N ≫\n          (completedKoszulTermwiseLimitIso.app T).inv ≫ roosι T",
+  "branch": "sheaf-dag",
+  "by": "D8",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261019T192713-L-1857039",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261019T192713-L-1857039",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

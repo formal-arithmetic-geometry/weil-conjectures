@@ -1,0 +1,207 @@
+{
+ "id": "lem-weil-pbc-completed-fiber-roos-comparison",
+ "kind": "statement",
+ "title": "Finite exterior Koszul and ordered tensor-dual towers agree",
+ "statement": "Let X, A, d, r, a, C and the explicitly constructed small completed ringed site be as in [def-weil-pbc-intrinsic-completion, def-weil-pbc-bounded-constructible-complete]. Let G be the actual module equivalence, H the composite of backward coefficient restriction with G, applied termwise, P the coefficient-presentation complex of C, N=G(C), and b the transported scalar list. For each natural m the complex H(completedKoszulTensor(P,m)) is isomorphic to the m-th level of the strict ordered tensor-dual tower of N [def-weil-pbc-ringed-koszul-system]. These isomorphisms commute with every consecutive power transition and carry the transported finite exterior augmentation, including the identity-on-sections round trip, to the specified tensor-dual augmentation in every degree. The finite list may be empty; no regularity or generation assumption is imposed. This statement contains no countable product, mapping cone, localization or inverse-limit comparison.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "more-algebra.tex Tag 0664, Lemma 15.29.12, tensor decomposition of the exterior Koszul complex; algebraization.tex Tag 0A0E, proof of lemma-derived-completion-koszul: dual of the finite ordered positive tensor complex."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof": [
+  {
+   "text": "Construct the actual small ringed site, coefficient and site equivalences and transported scalars as in the Lean definitions. For the finite comparison, their tensor and finite-sum comparisons transport finite free coordinates. The input comparison uses the identity-on-sections round trip, rather than any arbitrary representative. The definitions and the natural termwise-limit comparison are fully proved; the source finite calculation is the remaining theorem. The degree-two contraction check follows from CliffordAlgebra.contractLeft_ι_mul and contractLeft_ι, and has been compiled over arbitrary commutative rings, including repeated indices.",
+   "uses": [
+    "def-weil-pbc-intrinsic-completion",
+    "def-weil-pbc-bounded-constructible-complete",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Proof: on the free module with ordered basis Fin r, use the sorted subset basis of\nits exterior powers. A k-subset indexes degree -k. Identify its basis vector with the\ndual tensor coordinate, multiplied by (-1)^(k*(k-1)/2). The ratio in adjacent degrees\nis the sign in the Hom-complex differential, so the exterior contraction differential\nagrees with the dual of the ordered positive tensor differential. This gives inverse\nchain maps, identity in degree zero. The same calculation can be organized by induction\non r, splitting off the last exterior generator and the last two-term tensor factor.\nApply the actual constant-module construction and its completed coefficient extension.\nThe coefficient comparison is an isomorphism and the site change is an equivalence;\ntheir tensor and finite-sum comparisons therefore carry this finite chain isomorphism\nthrough the displayed functor H. Tensor with the arbitrary complex C: in each total\ndegree the Koszul coordinate has finite support, so the same coordinates give an\nisomorphism on the total complexes. Use the identity-on-sections round trip to identify\nthe transported input with N. For a transition, both subset coordinates are multiplied\nby the product of the corresponding generators, hence the chain isomorphisms commute\nwith the power transitions. In degree zero the empty subset has sign +1, giving exactly\nthe displayed augmentation equation. No products, inverse limits or cones occur here. Mathlib exteriorPower.zeroEquiv_naturality identifies every exterior degree-zero transition with the identity; the empty-list generator map is the identity by extensionality. These two coordinate edge cases have also been checked separately in Lean.",
+   "uses": [
+    "def-weil-pbc-intrinsic-completion",
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-ringed-koszul-system",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "more-algebra.tex Tag 0664, Lemma 15.29.12, tensor decomposition of the exterior Koszul complex; algebraization.tex Tag 0A0E, proof of lemma-derived-completion-koszul: dual of the finite ordered positive tensor complex.",
+  "note": "Only the finite tower comparison and its transition/augmentation equations remain. Products, signed cones and the exact fiber unit are proved in the next node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Koszul|koszul",
+   "results": "3 hits: Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/RingTheory/Regular/RegularSequence.lean, Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean",
+   "date": "2026-10-19",
+   "verdict": "No match for the published completed-coefficient exterior Koszul fiber, with its normalized unit, after small-site universe transport."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom from an extended Cech complex agrees with the inverse limit of the tensor Koszul tower",
+   "results": "8 hits: HomologicalComplex.instHasLimit, CochainComplex.HomComplex.Cochain.InductionUp.limitSequence, HomologicalComplex.extend.leftHomologyData.isLimitKernelFork, HomologicalComplex.extend.rightHomologyData.isLimitKernelFork, HomologicalComplex.extend.leftHomologyData.lift_d_comp_eq_zero_iff, CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi_inv_comp_pi_assoc, HomologicalComplex.extend.leftHomologyData.cokernelCofork, CochainComplex.ConnectData.restrictionGEIso_inv_f",
+   "date": "2026-10-19",
+   "verdict": "No match for the published completed-coefficient exterior Koszul fiber, with its normalized unit, after small-site universe transport."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\"",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "No match for the published completed-coefficient exterior Koszul fiber, with its normalized unit, after small-site universe transport."
+  },
+  {
+   "tool": "rg",
+   "query": "completedKoszulFiber|intrinsicCompletionComplex; blueprint_refs.py search Koszul; fiber.*cech|Koszul.*comparison",
+   "results": "Read IntrinsicCompletionCompleted, IntrinsicCompletion, RingedCechKoszulDualLimit, RingedCechKoszulHomLimitComparison and RingedKoszulSystem. The first two define the explicit exterior Koszul fiber; the comparison results apply to ordered tensor-dual factors on equal-universe small sites. No existing declaration connects these actual constructions. Blueprint search found the intrinsic-completion definitions and Koszul/quotient comparison, not this presentation comparison.",
+   "date": "2026-10-19",
+   "verdict": "A separate construction comparison is needed; the general Cech--Koszul theorem is used as a dependency, not duplicated."
+  },
+  {
+   "tool": "loogle, leanfinder, grep",
+   "query": "pushforwardPushforwardEquivalence; equivalence of sites induces module-sheaf and derived equivalences",
+   "results": "Mathlib SheafOfModules.pushforwardPushforwardEquivalence constructs the equivalence. The source-library CategoryTheory.Equivalence.mapDerivedCategory constructs its derived equivalence. Both are used. The query records are in searches.jsonl.",
+   "date": "2026-10-19",
+   "verdict": "Use the existing constructions, not an existential small-model assumption."
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*(dual|tensor)|Koszul.*(dual|tensor)",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "Only general exterior-power and complex APIs, no exterior-Koszul/tensor-dual identification compatible with power transitions and unit."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exteriorPower\", \"Iso\"",
+   "results": "10 hits: ModuleCat.exteriorPower.iso₁, ModuleCat.exteriorPower.iso₀, ModuleCat.exteriorPower.natIso₁, ModuleCat.exteriorPower.natIso₀, ModuleCat.exteriorPower.iso₁_hom_naturality, ModuleCat.exteriorPower.iso₀_hom_naturality, ModuleCat.exteriorPower.iso₁_hom_naturality_assoc, ModuleCat.exteriorPower.iso₀_hom_naturality_assoc",
+   "date": "2026-10-19",
+   "verdict": "Only general exterior-power and complex APIs, no exterior-Koszul/tensor-dual identification compatible with power transitions and unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite exterior Koszul cochain complex is the dual of the ordered tensor product of positive two term complexes, compatible with power transitions",
+   "results": "8 hits: ModuleCat.exteriorPower, HomologicalComplex.alternatingConst, AlgebraicTopology.AlternatingCofaceMapComplex.obj, ModuleCat.exteriorPower.functor, ExteriorAlgebra, AlgebraicTopology.alternatingCofaceMapComplex, CochainComplex.ConnectData.X, inhomogeneousCochains.d",
+   "date": "2026-10-19",
+   "verdict": "Only general exterior-power and complex APIs, no exterior-Koszul/tensor-dual identification compatible with power transitions and unit."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*[Dd]ual|koszul.*[Dd]ual",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "No comparison of the exterior Koszul differential with the ordered tensor-dual differential, transitions and normalized fiber unit. The exterior-map API does prove the transition formula on decomposable wedges; this was compiled in scratchpad/KoszulTransitionBasis.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exteriorPower\", \"map\"",
+   "results": "12 hits: exteriorPower.map, exteriorPower.map_id, exteriorPower.alternatingMapLinearEquiv, exteriorPower.map_comp_ιMulti, exteriorPower.linearMap_ext, exteriorPower.linearMap_ext_iff, exteriorPower.map_comp, exteriorPower.subtype_comp_map_eq",
+   "date": "2026-10-19",
+   "verdict": "No comparison of the exterior Koszul differential with the ordered tensor-dual differential, transitions and normalized fiber unit. The exterior-map API does prove the transition formula on decomposable wedges; this was compiled in scratchpad/KoszulTransitionBasis.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exterior Koszul complex is isomorphic to the dual of the tensor product of two term Koszul factors",
+   "results": "8 hits: exteriorPower.toTensorPower, KaehlerDifferential.tensorKaehlerEquivBase, ModuleCat.exteriorPower.iso₁, ModuleCat.exteriorPower.iso₀, exteriorPower.toTensorPower_apply_ιMulti, tensorKaehlerQuotKerSqEquiv_tmul_D, ModuleCat.exteriorPower, exteriorPower.presentation.relationsSolutionEquiv",
+   "date": "2026-10-19",
+   "verdict": "No comparison of the exterior Koszul differential with the ordered tensor-dual differential, transitions and normalized fiber unit. The exterior-map API does prove the transition formula on decomposable wedges; this was compiled in scratchpad/KoszulTransitionBasis.lean."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilCompletedTensorReflector",
+  "date": "2026-10-19",
+  "group": "D8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Current main-20261015 def-weil-pbc-completed-pullback: the displayed derived-inverse-limit formula and final sentence identifying its comparison with the completion map. Tag 0A0E compares the supporting finite Koszul model with augmented Cech internal Hom, including the prescribed unit.",
+   "via": [
+    "lem-weil-pbc-completed-koszul-product-comparison",
+    "lem-weil-pbc-completed-fiber-roos-representative-comparison",
+    "lem-weil-pbc-completed-fiber-strict-limit-comparison",
+    "lem-weil-pbc-completed-fiber-cech-comparison",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.WeilCompletedKoszulRoosComparison",
+  "file": "lean/Sheaf/Paper/WeilCompletedKoszulRoosComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedKoszulFiniteComparison",
+  "statement": "theorem completedKoszulFiniteComparison\n    (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)\n    (r : ℕ) (a : Fin r → A)\n    (C : CochainComplex (pbcModules X (pbcAdicCompletion X d)) ℤ) :\n    let G := (completedCechModulesEquiv X d).functor\n    let H := (intrinsicPresentationModulesBack X d ⋙ G).mapHomologicalComplex (.up ℤ)\n    let P := (intrinsicPresentationComplex X d).obj C\n    let O := completedCechRing X d\n    let b := fun i ↦ completedCechScalar X d (a i)\n    let N := (G.mapHomologicalComplex (.up ℤ)).obj C\n    let T := ringedKoszulTensorTowerComplex O r b N\n    ∃ e : ∀ m : ℕ, H.obj\n        (completedKoszulTensor X (intrinsicPresentationDatum d) r a P m) ≅\n          T.asFunctor.obj (op m),\n      (∀ m, H.map\n          (completedKoszulTensorTransition X (intrinsicPresentationDatum d) r a P m) ≫\n            (e m).hom = (e (m + 1)).hom ≫\n              T.asFunctor.map (homOfLE (Nat.le_succ m)).op) ∧\n      (∀ (m : ℕ) (q : ℤ),\n        G.map ((intrinsicPresentationRoundTrip X d).hom.app (C.X q) ≫\n          (intrinsicPresentationModulesBack X d).map\n            ((completedKoszulTensorUnit X (intrinsicPresentationDatum d) r a P m).f q)) ≫\n              (e m).hom.f q = (ringedKoszulTensorUnitComponent O r b N (op m)).f q)",
+  "branch": "sheaf-dag",
+  "by": "D8",
+  "date": "2026-10-19",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.completedCechSite",
+   "AlgebraicGeometry.Scheme.completedCechSiteEquiv",
+   "AlgebraicGeometry.Scheme.completedCechTopology",
+   "AlgebraicGeometry.Scheme.completedCechRing",
+   "AlgebraicGeometry.Scheme.completedCechModulesEquiv",
+   "AlgebraicGeometry.Scheme.completedCechDerivedEquiv",
+   "AlgebraicGeometry.Scheme.completedCechScalarMap",
+   "AlgebraicGeometry.Scheme.completedCechScalar",
+   "AlgebraicGeometry.Scheme.completedKoszulFiniteComparison",
+   "AlgebraicGeometry.Scheme.completedKoszulTermwiseLimitIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261019T192713-L-1857039",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261019T192713-L-1857039",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

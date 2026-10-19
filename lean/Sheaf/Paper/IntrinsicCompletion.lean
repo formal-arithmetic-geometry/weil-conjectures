@@ -49,6 +49,7 @@ abbrev intrinsicPresentationModulesBack : adicDatumModules T (intrinsicPresentat
     pbcModules T (pbcAdicCompletion T d) :=
   pbcRestrict (pbcCompletedComparison T d).inv
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The round trip is uniquely fixed by identity on underlying sections.
 Source: blueprint order 1247; Stacks Tag 03DA
 (blueprint: def-weil-pbc-intrinsic-completion).
@@ -61,7 +62,32 @@ theorem intrinsicPresentationRoundTrip_exists :
         intrinsicPresentationModules T d ⋙ intrinsicPresentationModulesBack T d,
       ∀ (M : pbcModules T (pbcAdicCompletion T d)) (U : T.ProEtᵒᵖ)
         (x : M.val.obj U), (e.hom.app M).val.app U x = x := by
-  sorry
+  let R := (sheafCompose (ProEt.topology T)
+    (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj (pbcAdicCompletion T d)
+  let φ := (sheafCompose (ProEt.topology T)
+    (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).map (pbcCompletedComparison T d).inv
+  let ψ := (sheafCompose (ProEt.topology T)
+    (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).map (pbcCompletedComparison T d).hom
+  have hU (U : T.ProEtᵒᵖ) : (ψ.hom.app U).hom.comp (φ.hom.app U).hom =
+      RingHom.id (R.obj.obj U) :=
+    congrArg (fun k ↦ (k.hom.app U).hom) (pbcCompletedComparison T d).inv_hom_id
+  let eM (M : pbcModules T (pbcAdicCompletion T d)) :
+      (intrinsicPresentationModulesBack T d).obj
+        ((intrinsicPresentationModules T d).obj M) ≅ M :=
+    (SheafOfModules.fullyFaithfulForget R).preimageIso
+      (PresheafOfModules.isoMk (fun U ↦
+        (ModuleCat.restrictScalarsComp'App (φ.hom.app U).hom (ψ.hom.app U).hom
+          (RingHom.id (R.obj.obj U)) (hU U).symm (M.val.obj U)).symm ≪≫
+            (ModuleCat.restrictScalarsId (R.obj.obj U)).app (M.val.obj U))
+        (fun {U V} f ↦ by ext x; rfl))
+  let e : 𝟭 (pbcModules T (pbcAdicCompletion T d)) ≅
+      intrinsicPresentationModules T d ⋙ intrinsicPresentationModulesBack T d :=
+    NatIso.ofComponents (fun M ↦ (eM M).symm) (fun f ↦ by ext U x; rfl)
+  refine ⟨e, fun M U x ↦ rfl, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  ext M U x
+  exact he' M U x
 
 /-- The actual identity-on-sections coefficient round trip.
 Source: blueprint order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/
@@ -92,6 +118,7 @@ def intrinsicCompletionUnitComponent (r : ℕ) (a : Fin r → A)
       ((completedKoszulUnitComplex T (intrinsicPresentationDatum d) r a
         ((intrinsicPresentationComplex T d).obj C)).f q)
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The transported completion unit commutes with differentials.
 Source: blueprint order 1247 (blueprint: def-weil-pbc-intrinsic-completion).
 Proof: naturality of the identity-on-sections round trip commutes with C's
@@ -103,7 +130,20 @@ theorem intrinsicCompletionUnitComponent_comm (r : ℕ) (a : Fin r → A)
     intrinsicCompletionUnitComponent T d r a C q ≫
         (intrinsicCompletionComplex T d r a C).d q k =
       C.d q k ≫ intrinsicCompletionUnitComponent T d r a C k := by
-  sorry
+  let B := intrinsicPresentationModulesBack T d
+  let η := intrinsicPresentationRoundTrip T d
+  let u := completedKoszulUnitComplex T (intrinsicPresentationDatum d) r a
+    ((intrinsicPresentationComplex T d).obj C)
+  change (η.hom.app (C.X q) ≫ B.map (u.f q)) ≫ B.map
+    ((completedKoszulFiber T (intrinsicPresentationDatum d) r a
+      ((intrinsicPresentationComplex T d).obj C)).d q k) =
+    C.d q k ≫ η.hom.app (C.X k) ≫ B.map (u.f k)
+  rw [Category.assoc, ← B.map_comp, u.comm, B.map_comp]
+  have hη := η.hom.naturality (C.d q k)
+  dsimp only [Functor.id_map, Functor.comp_map] at hη
+  change (η.hom.app (C.X q) ≫ B.map
+    ((intrinsicPresentationModules T d).map (C.d q k))) ≫ B.map (u.f k) = _
+  rw [← hη, Category.assoc]
 
 /-- The published completion chain map, transported with its fixed section normalization.
 Source: blueprint order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/

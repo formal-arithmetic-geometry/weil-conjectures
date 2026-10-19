@@ -8,12 +8,9 @@ module
 public import Sheaf.Paper.IntrinsicCompletion
 public import Sheaf.Paper.BoundedConstructibleComplete
 public import Sheaf.CategoryTheory.RingedKoszulCompletionReflector
-import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import Sheaf.CategoryTheory.RingedCechKoszulDualLimit
-import Sheaf.CategoryTheory.RingedSiteCompleteElementsIdeal
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.Paper.WeilCompletedCechComparison
+import Sheaf.CategoryTheory.RingedCechCompletionUnitIdempotence
 import Sheaf.Paper.ExtendedCechCompletionModel
-import Sheaf.Paper.RingedLocalizationRHomCalculus
 
 /-!
 # The Koszul reflector at the actual small pro-etale universes
@@ -65,6 +62,67 @@ def WfIsComplete (M : PbcCompletedDerived X d) : Prop :=
 Source: Stacks 0999 (blueprint: lem-weil-pbc-ringed-koszul-completion-reflector). -/
 abbrev WfCompleteCategory := ObjectProperty.FullSubcategory (WfIsComplete X d r a ha)
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem transportIdempotentUnit {C D : Type*} [Category* C] [Category* D]
+    (E : C ≌ D) (F : D ⥤ D) (η : 𝟭 D ⟶ F)
+    (h₁ : ∀ M, IsIso (F.map (η.app M)))
+    (h₂ : ∀ M, IsIso (η.app (F.obj M)))
+    (G : C → C) (ι : ∀ M, M ⟶ G M)
+    (e : ∀ M, E.functor.obj (G M) ≅ F.obj (E.functor.obj M))
+    (he : ∀ M, E.functor.map (ι M) ≫ (e M).hom = η.app (E.functor.obj M)) :
+    (∀ M, IsIso (ι (G M))) ∧
+    ∀ M L, IsIso (ι L) → Function.Bijective (fun f : G M ⟶ L ↦ ι M ≫ f) := by
+  have hη (M : C) [IsIso (ι M)] : IsIso (η.app (E.functor.obj M)) := by
+    rw [← he M]
+    infer_instance
+  have hmap (M : C) : IsIso (F.map (E.functor.map (ι M))) := by
+    have := h₁ (E.functor.obj M)
+    have h : IsIso (F.map (E.functor.map (ι M)) ≫ F.map (e M).hom) := by
+      rw [← F.map_comp, he M]
+      infer_instance
+    exact IsIso.of_isIso_comp_right
+      (F.map (E.functor.map (ι M))) (F.map (e M).hom)
+  constructor
+  · intro M
+    have := h₂ (E.functor.obj M)
+    have hn := η.naturality (e M).hom
+    dsimp only [Functor.id_map, Functor.comp_map] at hn
+    have : IsIso (η.app (E.functor.obj (G M)) ≫ F.map (e M).hom) := by
+      rw [← hn]
+      infer_instance
+    have : IsIso (η.app (E.functor.obj (G M))) :=
+      IsIso.of_isIso_comp_right (η.app (E.functor.obj (G M))) (F.map (e M).hom)
+    have : IsIso (E.functor.map (ι (G M)) ≫ (e (G M)).hom) := by
+      rw [he]
+      infer_instance
+    have : IsIso (E.functor.map (ι (G M))) :=
+      IsIso.of_isIso_comp_right (E.functor.map (ι (G M))) (e (G M)).hom
+    exact isIso_of_reflects_iso _ E.functor
+  · intro M L hL
+    have := hη L
+    constructor
+    · intro f g hfg
+      have hm := hmap M
+      have hfg' : F.map (E.functor.map f) = F.map (E.functor.map g) := by
+        apply (cancel_epi (F.map (E.functor.map (ι M)))).mp
+        simpa only [← F.map_comp, ← E.functor.map_comp] using
+          congrArg (fun h ↦ F.map (E.functor.map h)) hfg
+      apply E.functor.map_injective
+      apply (cancel_mono (η.app (E.functor.obj L))).mp
+      have hn (h : G M ⟶ L) := η.naturality (E.functor.map h)
+      dsimp only [Functor.id_map] at hn
+      rw [hn f, hn g]
+      exact congrArg (fun h ↦ η.app (E.functor.obj (G M)) ≫ h) hfg'
+    · intro f
+      refine ⟨E.functor.preimage
+        ((e M).hom ≫ F.map (E.functor.map f) ≫ inv (η.app (E.functor.obj L))), ?_⟩
+      apply E.functor.map_injective
+      rw [E.functor.map_comp, E.functor.map_preimage, ← Category.assoc, he]
+      have hn := η.naturality (E.functor.map f)
+      dsimp only [Functor.id_map] at hn
+      rw [← Category.assoc, ← hn]
+      simp only [Category.assoc, IsIso.hom_inv_id, Category.comp_id]
+
 /-- The published Koszul fiber is the reflector, also with distinct site object/Hom sizes.
 Source: Stacks 099B and 0A0E
 (blueprint: lem-weil-pbc-ringed-koszul-completion-reflector).
@@ -80,7 +138,39 @@ theorem wfCompletionReflector :
     ∀ (M L : PbcCompletedDerived X d), WfIsComplete X d r a ha L →
       Function.Bijective (fun f : wfCompletionObj X d r a ha M ⟶ L ↦
         wfCompletionUnit X d r a ha M ≫ f) := by
-  sorry
+  classical
+  let O := completedCechRing X d
+  let E := completedCechDerivedEquiv X d
+  let b := fun i ↦ completedCechScalar X d (a i)
+  let F := ringedCechCompletionFunctor O (ringedExtendedCech O r b).1
+  let η : 𝟭 _ ⟶ F :=
+    { app := ringedCechCompletionUnit O (ringedExtendedCech O r b).1
+        (ringedExtendedCech O r b).2
+      naturality := by
+        intro M N f
+        exact (completion_unit_natural O _ _ M N f).symm }
+  have hc (M : PbcCompletedDerived X d) :
+      ∃ e : E.functor.obj (wfCompletionObj X d r a ha M) ≅ F.obj (E.functor.obj M),
+        E.functor.map (wfCompletionUnit X d r a ha M) ≫ e.hom =
+          η.app (E.functor.obj M) := by
+    let C := wfCompletionRepresentative X d M
+    let real := DerivedCategory.Q.objObjPreimageIso M
+    obtain ⟨e, he⟩ := completed_fiber_cech_comparison X d r a C
+    refine ⟨e ≪≫ F.mapIso (E.functor.mapIso real), ?_⟩
+    change E.functor.map (real.inv ≫ _) ≫ _ = _
+    rw [E.functor.map_comp]
+    dsimp only [Iso.trans_hom, Functor.mapIso_hom]
+    rw [Category.assoc, ← Category.assoc _ e.hom, he]
+    have hn := η.naturality (E.functor.map real.hom)
+    dsimp only [Functor.id_map, Functor.comp_map] at hn
+    change E.functor.map real.inv ≫ (η.app _ ≫ F.map (E.functor.map real.hom)) = _
+    rw [← hn, ← Category.assoc, ← E.functor.map_comp, real.inv_hom_id]
+    simp only [E.functor.map_id, Category.id_comp]
+  choose e he using hc
+  exact transportIdempotentUnit E F η
+    (fun M ↦ (ringed_cech_completion_unit_idempotence O r b M).1)
+    (fun M ↦ (ringed_cech_completion_unit_idempotence O r b M).2)
+    (wfCompletionObj X d r a ha) (wfCompletionUnit X d r a ha) e he
 
 /-- The complete object defined by the explicit Koszul fiber.
 Source: Stacks 0A0E (blueprint: lem-weil-pbc-ringed-koszul-completion-reflector). -/
