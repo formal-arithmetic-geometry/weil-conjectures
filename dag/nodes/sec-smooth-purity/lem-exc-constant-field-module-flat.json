@@ -1,0 +1,130 @@
+{
+ "id": "lem-exc-constant-field-module-flat",
+ "kind": "statement",
+ "title": "All modules over a constant field sheaf are flat",
+ "statement": "Let J be a Grothendieck topology on C, essentially small in an independent universe m, with weak commutative-ring sheafification, abelian sheafification in universe m, and the local-bijectivity property there. For any field kappa [def-weil-field], every module sheaf N [def-weil-sheaf-of-modules-category] over its associated constant field sheaf [def-weil-pbc-constant-sheaf] is flat [def-pc-flat-sheaf-modules] for siteSheafTensorRight.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "definition-flat (03ER), lemma-flat-eq (08FC); Fields, lemma-vector-space-is-free (09FN)"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "For a finite relation, intersect the image sieves of its finitely many coefficients. Local surjectivity of the constant-field unit makes this a covering sieve. On each arrow all coefficients lift to field elements.",
+   "uses": [
+    "lem-exc-constant-field-local-sections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restrict the action on N(V) along the unit ring homomorphism from kappa. This is a vector space and is free, hence projective and flat. The field lifts satisfy the original relation after restriction. Apply Module.Flat.isTrivialRelation_of_sum_smul_eq_zero to obtain a finite factorization.",
+   "uses": [
+    "lem-weil-pbc-vector-space-projective",
+    "lem-weil-pbc-projective-module-flat"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Map the factorization coefficients back along the unit. The expressions for module entries and the zero coefficient sums remain valid by the ring-hom identities. The independent-universe local relation criterion gives sheaf flatness.",
+   "uses": [
+    "lem-exc-site-local-relations-imply-flat"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-constant-field-local-sections",
+  "lem-weil-pbc-vector-space-projective",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-exc-site-local-relations-imply-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "definition-flat (03ER), lemma-flat-eq (08FC); Fields, lemma-vector-space-is-free (09FN)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The sheafification unit for commutative ring presheaves is locally surjective without a universe restriction",
+   "results": "{\"t\": \"2026-10-18T16:54:59Z\", \"tool\": \"leanfinder\", \"query\": \"The sheafification unit for commutative ring presheaves is locally surjective without a universe restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.instIsLocallySurjectiveToSheafify\", \"CategoryTheory.Presheaf.isLocallySurjective_toSheafify\", \"CategoryTheory.GrothendieckTopology.instIsLocallySurjectiveToSheafify\", \"CategoryTheory.Presheaf.isLocallySurjective_toSheafify'\", \"CategoryTheory.Presheaf.instIsLocallySurjectiveHomObjForgetTypeToRangeSheafify\", \"CategoryTheory.Presheaf.isLocallySurjective_toPlus\", \"CategoryTheory.Presheaf.isLocallySurjective_presheafToSheaf_map_iff\", \"CategoryTheory.Presheaf.isLocallySurjective_iff_range_sheafify_eq_top\"], \"digest\": \"ba5440c4f357b927\"}",
+   "date": "2026-10-19",
+   "verdict": "Relevant constituent Mathlib API is reused; no exact independent-universe site result."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Subfunctor.sheafify_isSheaf",
+   "results": "{\"t\": \"2026-10-18T16:55:10Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Subfunctor.sheafify_isSheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Subfunctor.sheafify_isSheaf\"], \"digest\": \"521a1f4846ba69d2\"}",
+   "date": "2026-10-19",
+   "verdict": "Relevant constituent Mathlib API is reused; no exact independent-universe site result."
+  },
+  {
+   "tool": "grep",
+   "query": "isFlatOnSite_of_local_equationalCriterion|reflectsLimit_of_reflectsIsomorphisms",
+   "results": "{\"t\": \"2026-10-18T16:55:11Z\", \"tool\": \"grep\", \"query\": \"isFlatOnSite_of_local_equationalCriterion|reflectsLimit_of_reflectsIsomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Limits.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Basic.lean\", \"Mathlib/CategoryTheory/Functor/ReflectsIso/Limits.lean\", \"Mathlib/CategoryTheory/Monad/Comonadicity.lean\", \"Mathlib/CategoryTheory/Monad/Comonadicity.lean\", \"Mathlib/Geometry/RingedSpace/OpenImmersion.lean\", \"Mathlib/Geometry/RingedSpace/OpenImmersion.lean\"], \"digest\": \"317d663adc68e1dc\"}",
+   "date": "2026-10-19",
+   "verdict": "Relevant constituent Mathlib API is reused; no exact independent-universe site result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every sheaf of modules over a constant sheaf of fields is flat: tensoring with it preserves finite limits",
+   "results": "Found Module.Flat.iff_preservesFiniteLimits_tensorLeft and Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier for ordinary modules, but no exact sheaf theorem.",
+   "date": "2026-10-19",
+   "verdict": "Ordinary flatness API supports the sectionwise argument; sheaf flatness is proved by the local relation criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Category.ModuleCat.Sheaf.ConstantFieldTensorCohomology",
+  "date": "2026-10-19",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-residue-tor-test",
+   "place": "Proof, second paragraph, uniform sheafwise converse: arbitrary coefficient modules over the residue field; Tags 03ER and 08FC; Fields Tag 09FN; finite relations over the field",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.ConstantFieldFlat",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/ConstantFieldFlat.lean",
+  "declaration": "SheafOfModules.isFlat_constantFieldModule",
+  "statement": "theorem isFlat_constantFieldModule\n    {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)\n    [EssentiallySmall.{m} C] [HasWeakSheafify J CommRingCat.{r}]\n    [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{m}] [HasSheafify J AddCommGrpCat.{m}]\n    (κ : Type r) [Field κ]\n    (N : ringedSiteModules.{m} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj\n      ((constantSheaf J CommRingCat.{r}).obj (CommRingCat.of κ)))) :\n    IsFlatOnSite N",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261019T034309-L-418700",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261019T034309-L-418700",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

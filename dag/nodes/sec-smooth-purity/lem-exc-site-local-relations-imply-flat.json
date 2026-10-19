@@ -1,0 +1,128 @@
+{
+ "id": "lem-exc-site-local-relations-imply-flat",
+ "kind": "statement",
+ "title": "Local relation criterion implies flatness with arbitrary module universe",
+ "statement": "Let C be a category with a topology J and let R be a sheaf of commutative rings. Assume weak abelian sheafification and equivalence between local bijections and sheafification equivalences in the module universe m. All universes are independent. If every finite relation sum_i a_i s_i=0 in an R-module sheaf M [def-weil-sheaf-of-modules-category] locally factors as s_i=sum_j b_ij t_j with sum_i a_i b_ij=0 on a covering sieve, then M is flat [def-pc-flat-sheaf-modules]. Unlike the converse, this implication requires no universe bound r <= m.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-flat-eq (08FC), implication (2) to (1); Algebra, lemma-relations (04VX)"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "Generalize the existing private finite-matrix proof to an unrestricted module universe m. Induct on matrix rows and compose local relation factorizations using covering transitivity. A finite coefficient witness for a vanishing tensor, from TensorProduct.exists_relations_with_coefficients, and this matrix factorization show that tensoring a sectionwise injection is locally injective.",
+   "uses": [
+    "lem-weil-pbc-flat-local-relations-universes"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Module sheafification sends the locally injective tensor map to a monomorphism. The sectionwise tensor-linear Hom adjunction proves finite-colimit preservation before sheafification, and the tensor/sheafification comparison transports it to sheaves.",
+   "uses": [
+    "lem-weil-pbc-tensor-local-bijection-universes"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Weak abelian sheafification is left exact, so module sheaves are abelian. Finite-colimit preservation gives additivity and right exactness; preservation of monomorphisms gives preservation of short exact sequences, hence finite limits. This proves flatness.",
+   "uses": [
+    "lem-sc-weak-sheafify-addcommgrp-left-exact",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-local-relations-universes",
+  "lem-weil-pbc-tensor-local-bijection-universes",
+  "lem-sc-weak-sheafify-addcommgrp-left-exact",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-flat-eq (08FC), implication (2) to (1); Algebra, lemma-relations (04VX)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The sheafification unit for commutative ring presheaves is locally surjective without a universe restriction",
+   "results": "{\"t\": \"2026-10-18T16:54:59Z\", \"tool\": \"leanfinder\", \"query\": \"The sheafification unit for commutative ring presheaves is locally surjective without a universe restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.instIsLocallySurjectiveToSheafify\", \"CategoryTheory.Presheaf.isLocallySurjective_toSheafify\", \"CategoryTheory.GrothendieckTopology.instIsLocallySurjectiveToSheafify\", \"CategoryTheory.Presheaf.isLocallySurjective_toSheafify'\", \"CategoryTheory.Presheaf.instIsLocallySurjectiveHomObjForgetTypeToRangeSheafify\", \"CategoryTheory.Presheaf.isLocallySurjective_toPlus\", \"CategoryTheory.Presheaf.isLocallySurjective_presheafToSheaf_map_iff\", \"CategoryTheory.Presheaf.isLocallySurjective_iff_range_sheafify_eq_top\"], \"digest\": \"ba5440c4f357b927\"}",
+   "date": "2026-10-19",
+   "verdict": "Relevant constituent Mathlib API is reused; no exact independent-universe site result."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Subfunctor.sheafify_isSheaf",
+   "results": "{\"t\": \"2026-10-18T16:55:10Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Subfunctor.sheafify_isSheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Subfunctor.sheafify_isSheaf\"], \"digest\": \"521a1f4846ba69d2\"}",
+   "date": "2026-10-19",
+   "verdict": "Relevant constituent Mathlib API is reused; no exact independent-universe site result."
+  },
+  {
+   "tool": "grep",
+   "query": "isFlatOnSite_of_local_equationalCriterion|reflectsLimit_of_reflectsIsomorphisms",
+   "results": "{\"t\": \"2026-10-18T16:55:11Z\", \"tool\": \"grep\", \"query\": \"isFlatOnSite_of_local_equationalCriterion|reflectsLimit_of_reflectsIsomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Limits.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Basic.lean\", \"Mathlib/CategoryTheory/Functor/ReflectsIso/Limits.lean\", \"Mathlib/CategoryTheory/Monad/Comonadicity.lean\", \"Mathlib/CategoryTheory/Monad/Comonadicity.lean\", \"Mathlib/Geometry/RingedSpace/OpenImmersion.lean\", \"Mathlib/Geometry/RingedSpace/OpenImmersion.lean\"], \"digest\": \"317d663adc68e1dc\"}",
+   "date": "2026-10-19",
+   "verdict": "Relevant constituent Mathlib API is reused; no exact independent-universe site result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local finite relation factorizations imply flatness of a sheaf of modules on a ringed site",
+   "results": "Found Module.Flat.iff_forall_exists_factorization and ordinary equational-criterion declarations; no exact site theorem.",
+   "date": "2026-10-19",
+   "verdict": "Ordinary criterion is the algebraic ingredient; the delivered theorem generalizes the project private matrix proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Category.ModuleCat.Sheaf.ConstantFieldTensorCohomology",
+  "date": "2026-10-19",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-residue-tor-test",
+   "place": "Proof, second paragraph, uniform sheafwise converse: arbitrary coefficient modules over the residue field; Tag 08FC, implication (2) to (1); finite tensor witnesses from Algebra Tag 04VX",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterionOfUniverses",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/FlatEquationalCriterionOfUniverses.lean",
+  "declaration": "SheafOfModules.isFlatOnSite_of_local_equationalCriterion",
+  "statement": "theorem isFlatOnSite_of_local_equationalCriterion\n    {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}\n    [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{m}] [HasWeakSheafify J AddCommGrpCat.{m}]\n    (R : Sheaf J CommRingCat.{r})\n    (M : ringedSiteModules.{m}\n      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))\n    (hM : ∀ (U : C) (n : ℕ) (a : Fin n → R.obj.obj (op U))\n        (s : Fin n → M.val.obj (op U)),\n        (∑ p : Fin n, a p • s p) = 0 →\n        ∃ S : Sieve U, S ∈ J U ∧\n          ∀ (V : C) (f : V ⟶ U), S f →\n            ∃ (l : ℕ) (b : Fin n → Fin l → R.obj.obj (op V))\n              (t : Fin l → M.val.obj (op V)),\n              (∀ p : Fin n, M.val.map f.op (s p) = ∑ q : Fin l, b p q • t q) ∧\n              (∀ q : Fin l, (∑ p : Fin n, R.obj.map f.op (a p) * b p q) = 0)) :\n    IsFlatOnSite M",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261019T034309-L-418700",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261019T034309-L-418700",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

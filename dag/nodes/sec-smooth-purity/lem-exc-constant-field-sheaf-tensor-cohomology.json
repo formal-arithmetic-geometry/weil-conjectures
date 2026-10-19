@@ -154,83 +154,39 @@
  },
  "proof": [
   {
-   "text": "Let $P$ be the constant presheaf of rings with value $\\kappa$, so $P^\\#=\\kappa_{\\mathcal C}$ [def-weil-pbc-constant-sheaf]. Restrict the action on $N$ along $P\\to P^\\#$ and call the resulting presheaf of $P$-modules $F$. Its underlying abelian presheaf is already a sheaf. The sheafification interface [lem-pc-sites-module-sheafification-interface] therefore gives $F^\\#\\cong N$ as $P^\\#$-modules: the underlying sheafification of an already sheaf object is itself, and the compatible extended action is unique. On each object $U$, $F(U)=N(U)$ is a vector space over $\\kappa$; no claim that $\\kappa_{\\mathcal C}(U)=\\kappa$ is needed.",
+   "text": "All module sheaves over the constant field sheaf are flat, by local coefficient lifting and the independent-universe local equational criterion.",
    "uses": [
-    "def-weil-pbc-constant-sheaf",
-    "lem-pc-sites-module-sheafification-interface"
+    "lem-exc-constant-field-module-flat"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; sites.tex Tag 0H7J, example-constant-sheaf"
-   }
+   "elementary": true
   },
   {
-   "text": "For every $U$, [lem-weil-pbc-vector-space-projective] makes $F(U)$ projective over the field $\\kappa$, and [lem-weil-pbc-projective-module-flat] makes it flat. By [lem-weil-pbc-flat-tensor-exact], tensoring with $F(U)$ preserves the exact sequence $0\\to\\ker f\\to V\\xrightarrow{f}W$, so it preserves kernels. It preserves finite products: for two factors the inverse to the comparison sends $(v\\otimes y,w\\otimes z)$ to $(v,0)\\otimes y+(0,w)\\otimes z$, extended additively; the tensor relations show that both composites are identities. The empty product is zero and $0\\otimes F(U)=0$. Equalizers are kernels of differences, so these comparisons give every finite limit. Limits of presheaves of $P$-modules are computed objectwise: compatible tuples and their scalar action and restriction maps give the limiting presheaf directly. Consequently the presheaf functor $-\\otimes_{p,P}F$ preserves finite limits.",
+   "text": "Flatness means that the tensor functor preserves finite limits and colimits. Apply Mathlib ShortComplex.mapHomologyIso to the three-term short complex at i and invert it. Its inverse naturality proves naturality in complex maps; homologyMap_mapNatTrans proves naturality in the second tensor factor.",
    "uses": [
-    "lem-weil-pbc-vector-space-projective",
-    "lem-weil-pbc-projective-module-flat",
-    "lem-weil-pbc-flat-tensor-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00HB/00HD, definition-flat and lemma-flat; Tag 051G proof, lemma-local-artinian-characterize-flat; fields.tex Tag 09FN, lemma-vector-space-is-free"
-   }
-  },
-  {
-   "text": "Apply [lem-pc-sites-modules-sheafification-flat] to the presheaf ring $P$ and presheaf module $F$ of Step 1, using the finite-limit preservation proved in Step 2. It says that $F^\\#$ is a flat $P^\\#$-module. With $P^\\#=\\kappa_{\\mathcal C}$ and $F^\\#\\cong N$, this is exactly flatness of $N$. By the definition [def-pc-flat-sheaf-modules], flatness here means that $T_N:G\\mapsto G\\otimes_{\\kappa_{\\mathcal C}}N$ is an exact functor on the category of sheaves of $\\kappa_{\\mathcal C}$-modules. This category is abelian under the smallness hypothesis [def-weil-sheaf-of-modules-category].",
-   "uses": [
-    "lem-pc-sites-modules-sheafification-flat",
     "def-pc-flat-sheaf-modules",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03ET, lemma-flatness-sheafification; Tag 03ER, definition-flat; Tag 03DA, lemma-abelian"
-   }
-  },
-  {
-   "text": "Fix $i\\in\\mathbf Z$ and apply clause (c) of [lem-sp-exact-functor-preserves-homology] to $C^{i-1}\\xrightarrow{d^{i-1}}C^i\\xrightarrow{d^i}C^{i+1}$ and the exact functor $T_N$ of Step 3. Its canonical comparison identifies the kernel of $d^i\\otimes1$ with $T_N(\\ker d^i)$ and the image of $d^{i-1}\\otimes1$ with $T_N(\\operatorname{im}d^{i-1})$, compatibly with the cycle inclusions and quotient projections. Invert the resulting isomorphism $\\mathcal H^i(T_NC^\\bullet)\\cong T_N(\\mathcal H^i(C^\\bullet))$ to obtain the displayed isomorphism. The cited clause also gives naturality for chain maps $C^\\bullet\\to D^\\bullet$. There is no boundedness restriction: this application uses only the indicated three consecutive terms.",
-   "uses": [
     "lem-sp-exact-functor-preserves-homology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 010N, lemma-exact-functor; homology as kernel modulo image"
-   }
+   "elementary": true
   },
   {
-   "text": "For a cycle section $z$ and a section $y$ of $N$ over the same object, the cycle inclusion after tensoring sends $z\\otimes y$ to the same pure tensor in $C^i\\otimes N$. Compatibility with the quotient projection in Step 4 therefore gives $[z]\\otimes y\\mapsto[z\\otimes y]$. If $z$ changes by a boundary $d^{i-1}w$, its image changes by $(d^{i-1}\\otimes1)(w\\otimes y)$, also a boundary. For a morphism $u:N\\to N'$, both composites of the naturality square send this generator to $[z\\otimes u(y)]$. These equalities hold on sums of pure tensors and then on their sheafifications [def-pur-sheaf-tensor-product]. Cycle classes locally generate cohomology because the quotient by the image is a sheafified cokernel [def-weil-sheaf-of-modules-category]. Thus the equalities determine the morphisms of sheaves and prove naturality in $N$, completing joint naturality with Step 4.",
+   "text": "Let t be the tensor of the cycle z with y in tensor(cycles K,N), and take w to be its image under mapCyclesIso.inv. Compatibility with the cycle inclusion proves the first local equality. Compatibility with the quotient projection, proved using LeftHomologyData.mapHomologyIso_eq and mapCyclesIso_eq, proves the class formula. Naturality of the module-sheafification unit gives tensorMap_tmul.",
    "uses": [
     "def-pur-sheaf-tensor-product",
-    "def-weil-sheaf-of-modules-category"
+    "lem-sp-exact-functor-preserves-homology"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, section-tensor-product; Tag 03DA, lemma-abelian"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-constant-sheaf",
-  "lem-pc-sites-module-sheafification-interface",
-  "lem-weil-pbc-vector-space-projective",
-  "lem-weil-pbc-projective-module-flat",
-  "lem-weil-pbc-flat-tensor-exact",
-  "lem-pc-sites-modules-sheafification-flat",
+  "lem-exc-constant-field-module-flat",
   "def-pc-flat-sheaf-modules",
-  "def-weil-sheaf-of-modules-category",
   "lem-sp-exact-functor-preserves-homology",
   "def-pur-sheaf-tensor-product"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-residue-tor-test.proof.md",
-  "place": "Second paragraph, uniform sheafwise converse; expanded using Stacks Tags 03CY, 03ET, 09FN, 00HD and 010N. The sitewise tensor argument is supplied here, not claimed verbatim in the blueprint."
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03ER and 08FC, local relation proof; homology Tag 010N via Mathlib comparison API; U4"
  },
  "split_report": {
   "date": "2026-10-17",
@@ -245,9 +201,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pc-sites-modules-sheafification-flat"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -273,5 +227,15 @@
   "group": "Q74",
   "result": "pass",
   "note": "Item statement matches the node clause by clause: constant sheaf via Mathlib constantSheaf; ringedSiteModules with only the instances its dependencies need; unbounded ℤ cochain complex; T_N termwise complex; homology as Ker/Im; iso oriented H^i(C)⊗N→H^i(C⊗N); naturality in K and in N; local formula [z]⊗y↦[z⊗y] via an existential cycle w. §1(B) module SiteTensorFunctoriality has real data (sectionwise id⊗g, its sheafification, NatTrans, unit-based tmul) and 3 needed sorry theorems with docstrings; only lean changed on def-pur-sheaf-tensor-product. Both files compile clean with nt_compile.py in dependency order (2.2 s, 2.4 s, no warnings). Test instantiation compiles for a small site with equal universes; the extra sheafify instances are inherited from the dependencies. Statements verbatim, Stacks tags verified, edge cases (N=0, any i, unbounded, empty covers, kappa_C(U)≠kappa) fine. Observations only: the record repointing orphans TensorProductOfUniverses.lean from lean.file and leaves stale reviewed_proof on def-pur-sheaf-tensor-product; second reading is brief but real."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261019T034309-L-418700",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

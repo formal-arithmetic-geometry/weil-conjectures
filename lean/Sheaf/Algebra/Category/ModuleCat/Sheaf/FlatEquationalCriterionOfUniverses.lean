@@ -201,7 +201,7 @@ set_option backward.isDefEq.respectTransparency false
 variable {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
   [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
   {R : Sheaf J CommRingCat.{r}}
-  (M : SheafOfModules.{max r m}
+  (M : SheafOfModules.{m}
     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))
 
 private def RowCriterion : Prop :=
@@ -289,7 +289,7 @@ private theorem matrixSieve_mem (hM : RowCriterion M) {q : ℕ} (U : C) (n : ℕ
           _ = 0 := hc k z
 
 private theorem tensor_equalizerSieve_mem (hM : RowCriterion M)
-    {P N : PresheafOfModules.{max r m} (R.obj ⋙ forget₂ CommRingCat RingCat)}
+    {P N : PresheafOfModules.{m} (R.obj ⋙ forget₂ CommRingCat RingCat)}
     (g : P ⟶ N) (hg : ∀ U, Function.Injective (g.app U))
     (U : C) (t : (siteTensorPresheaf P M.val).obj (op U))
     (ht : (siteTensorHom g M.val).app (op U) t = 0) :
@@ -364,7 +364,7 @@ private theorem tensor_equalizerSieve_mem (hM : RowCriterion M)
     (TensorProduct.zero_tmul _ _)
 
 private theorem tensor_locallyInjective (hM : RowCriterion M)
-    {P N : PresheafOfModules.{max r m} (R.obj ⋙ forget₂ CommRingCat RingCat)}
+    {P N : PresheafOfModules.{m} (R.obj ⋙ forget₂ CommRingCat RingCat)}
     (g : P ⟶ N) (hg : ∀ U, Function.Injective (g.app U)) :
     Presheaf.IsLocallyInjective J
       ((PresheafOfModules.toPresheaf _).map (siteTensorHom g M.val)) where
@@ -381,10 +381,10 @@ private theorem tensor_locallyInjective (hM : RowCriterion M)
     simpa only [map_sub, map_zero, sub_eq_zero] using hf
 
 private theorem tensorSheaf_mono
-    [J.WEqualsLocallyBijective AddCommGrpCat.{max r m}]
-    [HasWeakSheafify J AddCommGrpCat.{max r m}]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{m}]
+    [HasWeakSheafify J AddCommGrpCat.{m}]
     (hM : RowCriterion M)
-    {P N : SheafOfModules.{max r m}
+    {P N : SheafOfModules.{m}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)}
     (g : P ⟶ N) [Mono g] : Mono ((siteSheafTensorRight M).map g) := by
   have : Mono g.val := (SheafOfModules.forget _).map_mono g
@@ -401,6 +401,45 @@ private theorem tensorSheaf_mono
 end SheafOfModules
 
 namespace SheafOfModules
+
+/-- The local relation criterion implies flatness with an independent module universe.
+Source: Stacks Project, Modules on Sites, Tag 08FC, (2) implies (1)
+(blueprint: lem-exc-site-local-relations-imply-flat).
+Proof: the finite-matrix argument below factors the coefficients of any tensor
+killed by a monomorphism. It makes this tensor locally zero, so tensoring
+preserves monomorphisms. The tensor functor preserves finite colimits by its
+sectionwise adjunction and module sheafification. In the abelian category of
+module sheaves, these two properties imply exactness. No free module on the
+coefficient ring is needed for this direction. -/
+theorem isFlatOnSite_of_local_equationalCriterion
+    {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
+    [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{m}] [HasWeakSheafify J AddCommGrpCat.{m}]
+    (R : Sheaf J CommRingCat.{r})
+    (M : ringedSiteModules.{m}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))
+    (hM : ∀ (U : C) (n : ℕ) (a : Fin n → R.obj.obj (op U))
+        (s : Fin n → M.val.obj (op U)),
+        (∑ p : Fin n, a p • s p) = 0 →
+        ∃ S : Sieve U, S ∈ J U ∧
+          ∀ (V : C) (f : V ⟶ U), S f →
+            ∃ (l : ℕ) (b : Fin n → Fin l → R.obj.obj (op V))
+              (t : Fin l → M.val.obj (op V)),
+              (∀ p : Fin n, M.val.map f.op (s p) = ∑ q : Fin l, b p q • t q) ∧
+              (∀ q : Fin l, (∑ p : Fin n, R.obj.map f.op (a p) * b p q) = 0)) :
+    IsFlatOnSite M := by
+  have := CategoryTheory.hasSheafify_addCommGrp_of_weak.{uC, vC, m} J
+  have hright := siteSheafTensorRight_preservesFiniteColimits R M
+  have : (siteSheafTensorRight M).Additive :=
+    (CategoryTheory.rightExactFunctor_le_additiveFunctor _ _) _ hright
+  have : (siteSheafTensorRight M).PreservesMonomorphisms :=
+    ⟨fun g _ ↦ tensorSheaf_mono M hM g⟩
+  refine ⟨?_, hright⟩
+  apply (Functor.preservesFiniteLimits_iff_forall_exact_map_and_mono
+    (siteSheafTensorRight M)).mpr
+  intro S hS
+  have := hS.mono_f
+  exact ⟨hS.exact.map_of_epi_of_preservesCokernel _ hS.epi_g inferInstance, inferInstance⟩
 
 /-- Flatness is equivalent to local finite relation factorization on a ringed site.
 Source: Stacks Project, Modules on Sites, Tag 08FC, (1) iff (2)

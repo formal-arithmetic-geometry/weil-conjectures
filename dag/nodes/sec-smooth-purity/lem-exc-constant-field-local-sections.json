@@ -1,0 +1,125 @@
+{
+ "id": "lem-exc-constant-field-local-sections",
+ "kind": "statement",
+ "title": "Local representatives of constant field sheaf sections",
+ "statement": "Let C be a category with Grothendieck topology J and weak sheafification of commutative rings. Assume C is essentially small in an independent universe m. For a field kappa [def-weil-field], the unit from its constant ring presheaf to its associated constant sheaf [def-weil-pbc-constant-sheaf] is locally surjective: each section is represented by field elements on a covering sieve. The site-object, morphism, field and smallness universes are independent; no enough-points assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Sites, example-constant-sheaf (0H7J), associated-sheaf construction (00W1); Modules on Sites, lemma-sheafification-presheaf-modules (03CY); local-image subsheaf argument"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "The forgetful functor from commutative rings preserves limits by its free-ring adjunction. It also reflects limits of arbitrary size: a limiting cone of underlying types makes the type of compatible sections small, hence the corresponding ring limit exists. Preservation and reflection of isomorphisms now reflect this particular limit.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Inside the underlying sheaf Q of the associated constant ring, take the sheaf closure G of the range of the unit (Mathlib Subfunctor.sheafify). Its sections form subrings: zero and one are in the image, addition and multiplication follow on intersected covers, and negation follows on the original cover. Restrictions preserve this subring.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Equip G with these sectionwise subrings to obtain a commutative-ring presheaf F. Its underlying type presheaf is G, a sheaf by Subfunctor.sheafify_isSheaf. Limit reflection for the forgetful functor proves that F is a ring-valued sheaf.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The unit factors through F. Extend this factorization from the constant presheaf to Q using the sheafification universal property. Composing the extension with the inclusion F to Q is the identity, by uniqueness of sheafification lifts. Every section of Q thus belongs to G, which is exactly local surjectivity of the unit.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Sites, example-constant-sheaf (0H7J), associated-sheaf construction (00W1); Modules on Sites, lemma-sheafification-presheaf-modules (03CY); local-image subsheaf argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The sheafification unit for commutative ring presheaves is locally surjective without a universe restriction",
+   "results": "{\"t\": \"2026-10-18T16:54:59Z\", \"tool\": \"leanfinder\", \"query\": \"The sheafification unit for commutative ring presheaves is locally surjective without a universe restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.instIsLocallySurjectiveToSheafify\", \"CategoryTheory.Presheaf.isLocallySurjective_toSheafify\", \"CategoryTheory.GrothendieckTopology.instIsLocallySurjectiveToSheafify\", \"CategoryTheory.Presheaf.isLocallySurjective_toSheafify'\", \"CategoryTheory.Presheaf.instIsLocallySurjectiveHomObjForgetTypeToRangeSheafify\", \"CategoryTheory.Presheaf.isLocallySurjective_toPlus\", \"CategoryTheory.Presheaf.isLocallySurjective_presheafToSheaf_map_iff\", \"CategoryTheory.Presheaf.isLocallySurjective_iff_range_sheafify_eq_top\"], \"digest\": \"ba5440c4f357b927\"}",
+   "date": "2026-10-19",
+   "verdict": "Relevant constituent Mathlib API is reused; no exact independent-universe site result."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Subfunctor.sheafify_isSheaf",
+   "results": "{\"t\": \"2026-10-18T16:55:10Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Subfunctor.sheafify_isSheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Subfunctor.sheafify_isSheaf\"], \"digest\": \"521a1f4846ba69d2\"}",
+   "date": "2026-10-19",
+   "verdict": "Relevant constituent Mathlib API is reused; no exact independent-universe site result."
+  },
+  {
+   "tool": "grep",
+   "query": "isFlatOnSite_of_local_equationalCriterion|reflectsLimit_of_reflectsIsomorphisms",
+   "results": "{\"t\": \"2026-10-18T16:55:11Z\", \"tool\": \"grep\", \"query\": \"isFlatOnSite_of_local_equationalCriterion|reflectsLimit_of_reflectsIsomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Limits.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Basic.lean\", \"Mathlib/CategoryTheory/Functor/ReflectsIso/Limits.lean\", \"Mathlib/CategoryTheory/Monad/Comonadicity.lean\", \"Mathlib/CategoryTheory/Monad/Comonadicity.lean\", \"Mathlib/Geometry/RingedSpace/OpenImmersion.lean\", \"Mathlib/Geometry/RingedSpace/OpenImmersion.lean\"], \"digest\": \"317d663adc68e1dc\"}",
+   "date": "2026-10-19",
+   "verdict": "Relevant constituent Mathlib API is reused; no exact independent-universe site result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheafification unit of a constant presheaf of commutative rings is locally surjective at independent universe levels",
+   "results": "Mathlib search found CategoryTheory.Presheaf.isLocallySurjective_toSheafify and related locally-surjective sheafification APIs; no exact independent-universe theorem.",
+   "date": "2026-10-19",
+   "verdict": "Constituent API found; the theorem is proved directly for commutative rings because the generic concrete-category instance has universe restrictions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Category.ModuleCat.Sheaf.ConstantFieldTensorCohomology",
+  "date": "2026-10-19",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-residue-tor-test",
+   "place": "Proof, second paragraph, uniform sheafwise converse: arbitrary coefficient modules over the residue field; Tags 03CY and 00W1; Sites Tag 0H7J; local-image subsheaf proof of the unit property",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.ConstantFieldLocalSections",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/ConstantFieldLocalSections.lean",
+  "declaration": "SheafOfModules.constantFieldUnit_locallySurjective",
+  "statement": "theorem constantFieldUnit_locallySurjective\n    {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)\n    [EssentiallySmall.{m} C] [HasWeakSheafify J CommRingCat.{r}]\n    (κ : Type r) [Field κ] :\n    Presheaf.IsLocallySurjective J\n      (toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of κ)))",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261019T034309-L-418700",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261019T034309-L-418700",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
