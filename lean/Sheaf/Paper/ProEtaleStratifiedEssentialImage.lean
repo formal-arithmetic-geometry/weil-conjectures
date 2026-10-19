@@ -59,7 +59,7 @@ private theorem comparison_essImage_of_openCover
     (DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app F
 
 private theorem comparison_essImage_openClosed
-    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    (Λ : Type (u + 1)) [CommRing Λ]
     {X Z U : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X)
     [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]
     (hU : Set.range j = (Set.range i)ᶜ)
@@ -150,11 +150,12 @@ is closed under extensions because exact comparison is fully faithful on bounded
 derived categories, so the extension boundary lifts. Thus the middle sheaf is classical
 on the affine neighborhood, and Zariski locality finishes. For zero strata the base is
 empty and its sheaf category is zero. A full-image stratum need not be an isomorphism:
-use the same closed-immersion argument in that case. Finite coefficients match the
-interface of the open-closed sequence; no finite stalk condition is used in this step.
+use the same closed-immersion argument in that case. The open-closed sequence and
+all the comparison and extension arguments work over an arbitrary commutative ring;
+no finite coefficient or finite stalk condition is used.
 -/
 theorem comparison_essImage_of_stratification
-    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X : Scheme.{u}}
+    (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}
     (S : Scheme.Stratification X)
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))
     (hS : ∀ k : Fin S.n, (ν^*(S.domain k)[ModuleCat.{u + 1} Λ]).essImage

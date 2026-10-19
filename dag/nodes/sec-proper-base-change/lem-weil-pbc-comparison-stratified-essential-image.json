@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-comparison-stratified-essential-image",
  "kind": "statement",
  "title": "Gluing classicality through a finite stratification",
- "statement": "Let $\\Lambda$ be a finite commutative ring, S a finite constructible locally closed scheme stratification of X, and F a pro-etale sheaf of $\\Lambda$-modules. Suppose for every stratum immersion i_k:S_k$\\to$X the sheaf i_k^*F belongs to the essential image of $\\nu$_{S_k}^*. Then F belongs to the essential image of $\\nu$_X^*. No finite stalk hypothesis is imposed. Stratifications are as in [def-weil-pbc-etale-constructible-sheaf] and comparison is [def-weil-pbc-site-comparison-morphism].",
+ "statement": "Let $\\Lambda$ be an arbitrary commutative ring, S a finite constructible locally closed scheme stratification of X, and F a pro-etale sheaf of $\\Lambda$-modules. Suppose for every stratum immersion i_k:S_k$\\to$X the sheaf i_k^*F belongs to the essential image of $\\nu$_{S_k}^*. Then F belongs to the essential image of $\\nu$_X^*. No finite stalk hypothesis is imposed. Stratifications are as in [def-weil-pbc-etale-constructible-sheaf] and comparison is [def-weil-pbc-site-comparison-morphism].",
  "source": {
   "document": "literature/stacks-project/proetale.tex",
   "place": "Tags 099Y and 09AK; fixed-module coefficients and finite global stratifications"
@@ -48,8 +48,10 @@
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "Q6",
+  "date": "2026-10-18",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 099Y and 09AK; fixed-module coefficients and finite global stratifications; completed Lean proof by E2, 2026-10-16"
+  "place": "Generalization of the existing compiled argument to arbitrary commutative rings; no new holes. The proof does not require a finite coefficient ring."
  },
  "mathlib_searches": [
   {
@@ -147,7 +149,7 @@
   "module": "Sheaf.Paper.ProEtaleStratifiedEssentialImage",
   "file": "lean/Sheaf/Paper/ProEtaleStratifiedEssentialImage.lean",
   "declaration": "AlgebraicGeometry.ProEtale.comparison_essImage_of_stratification",
-  "statement": "theorem comparison_essImage_of_stratification\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X : Scheme.{u}}\n    (S : Scheme.Stratification X)\n    (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))\n    (hS : ∀ k : Fin S.n, (ν^*(S.domain k)[ModuleCat.{u + 1} Λ]).essImage\n      (((S.immersion k)^*[ModuleCat.{u + 1} Λ]).obj F)) :\n    (ν^*(X)[ModuleCat.{u + 1} Λ]).essImage F",
+  "statement": "theorem comparison_essImage_of_stratification\n    (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}\n    (S : Scheme.Stratification X)\n    (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))\n    (hS : ∀ k : Fin S.n, (ν^*(S.domain k)[ModuleCat.{u + 1} Λ]).essImage\n      (((S.immersion k)^*[ModuleCat.{u + 1} Λ]).obj F)) :\n    (ν^*(X)[ModuleCat.{u + 1} Λ]).essImage F",
   "branch": "sheaf-dag",
   "by": "E2",
   "date": "2026-10-16"
@@ -163,14 +165,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-19",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E2",
+  "reviewer": "C-335f8",
+  "group": "Q6",
   "result": "pass",
-  "landing": "20261016T115357-L-2682075",
+  "landing": "20261019T005405-L-2762980",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item proofs (stratified_classical via finiteLocalSystemsTwist + comparison_essImage_of_stratification; Zariski-local via proEtaleConstantModulePullback_comp + proEtaleClassical_zariskiLocal) against node det-pe-constructible-comparison-classical; 3 support-module generalizations against their change records, statement_change entries and 10 compiled importers/consumers; axiom probes confirm C-68837 repair (finite pullback theorem sorry-free)"
  },
  "lean_audit": {
   "master": {
@@ -183,5 +185,22 @@
    "decls": [],
    "missing": []
   }
+ },
+ "statement_change": {
+  "date": "2026-10-18",
+  "by": "Q6 stage 2",
+  "old_statement": "Let $\\Lambda$ be a finite commutative ring, S a finite constructible locally closed scheme stratification of X, and F a pro-etale sheaf of $\\Lambda$-modules. Suppose for every stratum immersion i_k:S_k$\\to$X the sheaf i_k^*F belongs to the essential image of $\\nu$_{S_k}^*. Then F belongs to the essential image of $\\nu$_X^*. No finite stalk hypothesis is imposed. Stratifications are as in [def-weil-pbc-etale-constructible-sheaf] and comparison is [def-weil-pbc-site-comparison-morphism].",
+  "what": "Remove the unnecessary finite-ring hypothesis. The existing proof and its underlying exactness/comparison APIs work over arbitrary commutative rings; this is required for the Noetherian coefficient ring in constructible classicality.",
+  "source": {
+   "document": "literature/stacks-project/proetale.tex",
+   "place": "Tags 09AH, 09AK; inverse image of constant rings in Modules on Sites, Tags 03D3 and 093I."
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-comparison-stratified-counit",
+    "holds": true,
+    "note": "The generalized theorem retains every finite-ring case, so this use remains valid."
+   }
+  ]
  }
 }

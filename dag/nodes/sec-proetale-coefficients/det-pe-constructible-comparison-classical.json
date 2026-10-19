@@ -31,185 +31,55 @@
  ],
  "proof": [
   {
-   "text": "First establish the one-stratum case, on any scheme. By [lem-sc-noetherian-finite-module-finite-presentation], each finite constant model of a locally constant finite-type $\\Lambda$-module sheaf is finitely presented. Apply [det-pe-finite-local-systems-type] to decompose the scheme into open and closed subschemes $X_M$ on each of which the sheaf is pro-étale locally isomorphic to one fixed $\\underline M$, with $M$ finitely presented. It suffices to prove classicality on each $X_M$, by [det-pe-constructible-comparison-local].",
+   "text": "Restrict scalars along the canonical constant-ring unit using the proved encoding. On each slice its constantComparisonHom identifies the intrinsic constant model with the ordinary constant module sheaf, preserving the actual module M. A finite module over the lifted Noetherian ring is finitely presented. Apply finiteLocalSystemsTwist to deduce classicality of each stratum. Scalar restriction preserves the underlying set sheaf, so isClassicalModule_iff identifies the two classicality predicates.",
    "uses": [
+    "lem-weil-pbc-proetale-constant-module-constructibility",
     "lem-sc-noetherian-finite-module-finite-presentation",
-    "det-pe-finite-local-systems-type",
-    "det-pe-constructible-comparison-local"
+    "det-pe-finite-local-systems-twist",
+    "det-pe-classical-definition-continuity-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099Y, lemma-compare-locally-constant, first paragraph of proof; finite-presentation reduction in the paragraph preceding that lemma"
-   }
+   "elementary": false
   },
   {
-   "text": "Work on one $X_M$ and write $E=F|_{X_M}$. The sheaf $T=\\mathcal Isom_{\\Lambda}(\\underline M,E)$ has sections on a pro-étale cover. It is a sheaf: compatible local isomorphisms and their inverses glue sectionwise, with the linearity and inverse identities checked after restriction, by the sheaf equalizer condition in [def-weil-pbc-sites-and-cohomology] and the module structures of [def-weil-sheaf-of-modules-category]. The group $H=\\mathcal Aut_{\\Lambda}(\\underline M)$ acts by $h\\cdot\\varphi=\\varphi\\circ h^{-1}$; if $\\varphi,\\psi$ are two sections of $T$, the unique element taking $\\varphi$ to $\\psi$ is $h=\\psi^{-1}\\varphi$. Thus $T$ is an $H$-torsor. By clause (3) of [det-pe-finite-local-systems-hom], $H=\\nu_{X_M}^*\\operatorname{Aut}_{\\Lambda}(M)_{X_M,\\Et}$. Apply [det-pe-torsor-comparison-glue]: there is an étale covering $\\{V_a\\to X_M\\}$ on which $T$ has sections, hence there are module isomorphisms $e_a:\\underline M|_{V_a}\\xrightarrow{\\sim}E|_{V_a}$.",
+   "text": "Use proEtaleModuleRestriction_pullback_of_isIso to identify the encoded intrinsic stratum restriction with fixed-module inverse image. The classical essential-image criterion turns stratum classicality into essential-image membership. Apply the proved comparison_essImage_of_stratification: its strong induction uses affine shrinking, the open-closed exact sequence, comparison for extension by zero and closed direct image, extension closure, and Zariski locality. This preserves the unit route and works for every commutative coefficient ring. Supply the canonical coefficient-map IsIso instance from [def-weil-pbc-proetale-operations], imported only by this item.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-sheaf-of-modules-category",
-    "det-pe-finite-local-systems-hom",
-    "det-pe-torsor-comparison-glue"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099Y, lemma-compare-locally-constant, Isom torsor argument"
-   }
-  },
-  {
-   "text": "Here are the descent details in the last sentence of that argument. On $V_a\\times_{X_M}V_b$ the transition $e_b^{-1}e_a$ is an isomorphism between pullbacks of the constant étale module sheaf $M$. By [sk-thm-pe-direct-image-comparison], comparison inverse image commutes with these scheme pullbacks. Its full faithfulness on module sheaves, [det-pe-classical-sheaves-modules], therefore gives a unique étale transition map; its inverse descends too, and faithfulness gives the cocycle identity from $(e_c^{-1}e_b)(e_b^{-1}e_a)=e_c^{-1}e_a$. Identify the étale slice sites with the small sites of the $V_a$ and their intersections using [lem-weil-pbc-etale-site-localization-open]; the equivalence acts on the module operations sectionwise. On pro-étale slices use [lem-weil-proetale-weakly-etale-localization], and use [lem-weil-pbc-site-constant-restriction] on both sites to identify the restrictions of the constant models on every overlap. The covering and all its overlap objects form sets in the site universe. Apply [lem-weil-pbc-site-module-sheaf-gluing] to obtain an étale module sheaf $E_0$ with those constant local models. The local isomorphisms $\\nu^*E_0|_{V_a}\\cong E|_{V_a}$ agree on overlaps; their maps and inverse maps glue by the sheaf equalizer condition [def-weil-pbc-sites-and-cohomology], giving $\\nu^*E_0\\cong E$. Thus $E$ is classical by [det-pe-classical-sheaves-modules]. Together with step 1 this proves the one-stratum case on every scheme.",
-   "uses": [
-    "sk-thm-pe-direct-image-comparison",
+    "lem-weil-pbc-proetale-constant-module-pullback-encoding",
     "det-pe-classical-sheaves-modules",
-    "lem-weil-pbc-etale-site-localization-open",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-site-constant-restriction",
-    "lem-weil-pbc-site-module-sheaf-gluing",
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-comparison-stratified-essential-image",
+    "def-weil-pbc-proetale-operations"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099Y, lemma-compare-locally-constant, final sentence; explicit gluing of the étale trivializations"
-   }
+   "elementary": false
   },
   {
-   "text": "For a global partition prove the assertion by strong induction on its number $n$ of nonempty strata, simultaneously for all qcqs schemes. If $n=0$, the scheme is empty and its only module sheaf is zero, which is classical by [det-pe-classical-derived-weak-serre]. For $n>0$ and $x\\in Z_k$, apply [lem-sf-constructible-partition-local-closed-stratum] to obtain an affine open $W\\ni x$ with $Z=Z_k\\cap W$ closed and constructible in $W$ and $U=W\\setminus Z$ quasi-compact. Put on $Z$ its reduced induced closed subscheme structure [lem-weil-pbc-reduced-induced-closed-subscheme], with inclusions $i:Z\\hookrightarrow W$ and $j:U\\hookrightarrow W$. This includes $n=1$: the hypothesis then concerns $F|_{X_{\\mathrm{red}}}$, so one must not identify that sheaf with $F$ on a nonreduced scheme. The same open–closed argument below handles this case with $U=\\varnothing$. The affine $W$ is qcqs by [lem-weil-pbc-affine-scheme-qcqs]. To check that $U$ is quasi-separated, let $A,B\\subseteq U$ be quasi-compact opens. Since $U$ is quasi-compact, their images are quasi-compact opens of the affine scheme $W$, so $A\\cap B$ is quasi-compact by the quasi-compact-intersection characterization in [lem-weil-pbc-affine-scheme-qcqs]. The same argument, with an affine open $A\\subseteq W$, shows that $U\\cap A$ is quasi-compact; hence the open immersion $j$ is quasi-compact.",
+   "text": "For locally given stratifications the same proved argument applies on each given open scheme, without ambient qcqs hypotheses. The canonical pullback composition isomorphism identifies its iterated stratum restriction with the displayed composite immersion. Restrict this isomorphism to each slice and compose it with the supplied constant-model isomorphism. Encode the resulting local classicality, identify open inverse image with openImmersionRestriction, and apply proEtaleClassical_zariskiLocal. Finally return to intrinsic classicality. Supply the canonical coefficient-map IsIso instance from [def-weil-pbc-proetale-operations], imported only by this item.",
    "uses": [
-    "det-pe-classical-derived-weak-serre",
-    "lem-sf-constructible-partition-local-closed-stratum",
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "lem-weil-pbc-affine-scheme-qcqs"
+    "lem-pur-proetale-constant-module-pullback-composition",
+    "lem-weil-pbc-proetale-constant-module-pullback-encoding",
+    "det-pe-constructible-comparison-local",
+    "det-pe-classical-definition-continuity-map",
+    "def-weil-pbc-proetale-operations"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AK, lemma-compare-constructible, induction and shrinking about x"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-proetale-ringed-open-closed] with coefficient ring sheaf $\\Lambda_W$ and with $E=F|_W$. This theorem permits an arbitrary sheaf of commutative rings and requires only that the complementary open immersion be quasi-compact, which step 4 proves. Its exact sequence is\n$$0\\longrightarrow j_!j^*E\\longrightarrow E\\longrightarrow i_*i^*E\\longrightarrow0.$$\nThe coefficient rings on $U$ and $Z$ are the inverse images of $\\Lambda_W$. On the étale sites, [lem-weil-pbc-constant-ring-inverse-image-comparison] gives the corresponding constant-ring isomorphisms for both $j$ and $i$; [sk-thm-pe-direct-image-comparison] transports these isomorphisms to the pro-étale pullbacks, using the identification of the pro-étale constant ring with $\\nu^*$ of the étale constant ring in [det-pe-classical-sheaves-modules]. The comparison is by ring maps and therefore preserves multiplication and unit. Thus the exact sequence is over precisely the restricted coefficient rings in the statement.",
-   "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-weil-pbc-constant-ring-inverse-image-comparison",
-    "sk-thm-pe-direct-image-comparison",
-    "det-pe-classical-sheaves-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AK, lemma-compare-constructible, short exact sequence; Tag 09AH, lemma-ses-associated-to-open"
-   }
-  },
-  {
-   "text": "The sets $Z_m\\cap U$ for $m\\ne k$, after omitting empty ones, partition $U$ into at most $n-1$ constructible locally closed strata. Their constructibility follows from [lem-weil-pbc-constructible-open-restriction]; locally closedness is preserved by taking an open intersection. Each restriction of $F$ is still locally constant with finite models: pull the trivializing cover back to this open subset, retaining the same constant modules, as in [def-weil-proetale-locally-constant-sheaf]. Thus the induction hypothesis on the qcqs scheme $U$ gives classicality of $j^*E$. By [det-pe-classical-sheaves-modules] choose an étale module sheaf $G$ on $U$ and $j^*E\\cong\\nu_U^*G$.",
-   "uses": [
-    "lem-weil-pbc-constructible-open-restriction",
-    "def-weil-proetale-locally-constant-sheaf",
-    "det-pe-classical-sheaves-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AK, lemma-compare-constructible, induction for the open part"
-   }
-  },
-  {
-   "text": "For this general discrete ring, the extension-by-zero comparison follows directly from adjunction. Restriction to $U$ on the pro-étale site is the slice restriction by [lem-weil-proetale-weakly-etale-localization], and its left adjoint $j_!^{\\Proet}$ exists for arbitrary coefficient ring sheaves by [lem-pur-site-restriction-module-adjunction-exact]. On the étale side use [lem-weil-pbc-extension-by-zero-adjunction]. For an étale $V\\to U$ and a pro-étale module sheaf $N$ on $W$, the two sheaves $\\nu_{U,*}j_{\\Proet}^*N$ and $j_{\\Et}^*\\nu_{W,*}N$ both evaluate to $N(V\\to W)$, with the same maps and scalar actions: this is the direct-image formula of [def-weil-pbc-site-comparison-morphism] and the restriction formula of [lem-weil-pbc-etale-inverse-image-restriction]. The comparison module adjunction is available for every discrete ring by [det-pe-classical-sheaves-modules]. Hence\n$$\\operatorname{Hom}(\\nu_W^*j_!^{\\Et}G,N)\\cong\\operatorname{Hom}(G,j_{\\Et}^*\\nu_{W,*}N)=\\operatorname{Hom}(G,\\nu_{U,*}j_{\\Proet}^*N)\\cong\\operatorname{Hom}(j_!^{\\Proet}\\nu_U^*G,N).$$\nUniqueness of left adjoints, [lem-weil-pbc-conjugate-iso-unit-equation], gives $\\nu_W^*j_!^{\\Et}G\\cong j_!^{\\Proet}\\nu_U^*G$. Consequently $j_!j^*E$ is classical by [det-pe-classical-sheaves-modules].",
-   "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "det-pe-classical-sheaves-modules",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AF, lemma-jshriek-comparison, proof by the common right adjoint; Tag 09AK, lemma-compare-constructible, open term"
-   }
-  },
-  {
-   "text": "The closed-stratum sheaf $i^*E=F|_Z$ is locally constant of finite type; the one-stratum argument, which was proved for every scheme, gives $i^*E\\cong\\nu_Z^*H$ for an étale module sheaf $H$. The immersion $i$ is qcqs: on an affine open $\\operatorname{Spec}A\\subset W$ its inverse image is the affine $\\operatorname{Spec}(A/I)$ by [lem-weil-pbc-reduced-induced-closed-subscheme], hence quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]; For quasi-separatedness, clause (a) of [lem-weil-pbc-closed-immersion-integral-separated-uc] says that $i$ is separated, so its diagonal is a closed immersion. Clause (b) of the same node says that this diagonal is affine. Its inverse image over an affine open is therefore affine and hence quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]; thus the diagonal is quasi-compact and $i$ is quasi-separated. Apply [sk-thm-pe-direct-image-comparison] to $H$ placed in degree zero to get $\\nu_W^*Ri_{\\Et,*}H\\cong Ri_{\\Proet,*}\\nu_Z^*H$. Taking degree-zero cohomology gives $\\nu_W^*i_{\\Et,*}H\\cong i_{\\Proet,*}\\nu_Z^*H$: comparison inverse image is exact by [det-pe-classical-sheaves-modules], and for any left exact direct image $i_*$ and an injective resolution $0\\to H\\to I^0\\to I^1\\to\\cdots$, the kernel of $i_*I^0\\to i_*I^1$ is $i_*H$. Thus $i_*i^*E$ is classical. This degree-zero argument does not require exactness of the étale closed direct image.",
-   "uses": [
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "lem-weil-pbc-affine-scheme-qcqs",
-    "def-weil-closed-immersion",
-    "sk-thm-pe-direct-image-comparison",
-    "det-pe-classical-sheaves-modules",
-    "lem-weil-pbc-closed-immersion-integral-separated-uc"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AK, lemma-compare-constructible, closed term; Tag 09A6, lemma-morphism-comparison"
-   }
-  },
-  {
-   "text": "Both ends of the short exact sequence of step 5 are classical by steps 7 and 8. Apply the extension clause of [det-pe-classical-derived-weak-serre] to conclude that $F|_W$ is classical. Such $W$ exist about every $x\\in X$ by step 4. Apply [det-pe-constructible-comparison-local] to this open covering to conclude that $F$ is classical. This completes the induction for global finite partitions.",
-   "uses": [
-    "det-pe-classical-derived-weak-serre",
-    "det-pe-constructible-comparison-local"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AK, lemma-compare-constructible, completion of induction"
-   }
-  },
-  {
-   "text": "Finally suppose the finite partition is given only locally on $X$. On each open carrying a partition and about each of its points, choose an affine open $V$. Such opens form a basis [lem-weil-pbc-affine-opens-basis]. The partition restricts to a finite constructible locally closed partition of $V$ by [lem-weil-pbc-constructible-open-restriction] and the definition of locally closedness; the local constant models restrict unchanged. The affine $V$ is qcqs by [lem-weil-pbc-affine-scheme-qcqs], so the global-partition result applies to $F|_V$. These $V$ cover $X$, and [det-pe-constructible-comparison-local] proves the final assertion.",
-   "uses": [
-    "lem-weil-pbc-affine-opens-basis",
-    "lem-weil-pbc-constructible-open-restriction",
-    "lem-weil-pbc-affine-scheme-qcqs",
-    "det-pe-constructible-comparison-local"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AK, lemma-compare-constructible, Zariski-local reduction; Tag 09AJ, definition-constructible"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-proetale-constant-module-constructibility",
   "lem-sc-noetherian-finite-module-finite-presentation",
-  "det-pe-finite-local-systems-type",
-  "det-pe-constructible-comparison-local",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-sheaf-of-modules-category",
-  "det-pe-finite-local-systems-hom",
-  "det-pe-torsor-comparison-glue",
-  "sk-thm-pe-direct-image-comparison",
+  "det-pe-finite-local-systems-twist",
+  "det-pe-classical-definition-continuity-map",
+  "lem-weil-pbc-proetale-constant-module-pullback-encoding",
   "det-pe-classical-sheaves-modules",
-  "lem-weil-pbc-etale-site-localization-open",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-weil-pbc-site-constant-restriction",
-  "lem-weil-pbc-site-module-sheaf-gluing",
-  "det-pe-classical-derived-weak-serre",
-  "lem-sf-constructible-partition-local-closed-stratum",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lem-weil-pbc-affine-scheme-qcqs",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-constant-ring-inverse-image-comparison",
-  "lem-weil-pbc-constructible-open-restriction",
-  "def-weil-proetale-locally-constant-sheaf",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "def-weil-pbc-site-comparison-morphism",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "def-weil-closed-immersion",
-  "lem-weil-pbc-closed-immersion-integral-separated-uc",
-  "lem-weil-pbc-affine-opens-basis"
+  "lem-weil-pbc-comparison-stratified-essential-image",
+  "lem-pur-proetale-constant-module-pullback-composition",
+  "det-pe-constructible-comparison-local",
+  "def-weil-pbc-proetale-operations"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "Q6",
+  "date": "2026-10-18",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09AK (lemma-compare-constructible), induction on strata; Tag 099Y (lemma-compare-locally-constant), one-stratum torsor argument; Tag 09AF (lemma-jshriek-comparison), adjunction proof. The expanded finite-presentation and gluing details are written out in steps 1–3."
+  "place": "Tags 099Y and 09AK. Reuse the declared finite-local-system comparison and the proved stratified induction; explicit intrinsic/fixed coefficient glue and Zariski-local composition argument. Both original statements unchanged."
  },
  "mathlib_searches": [
   {
@@ -317,14 +187,7 @@
   ]
  },
  "tool_uses": [
-  "lem-sc-noetherian-finite-module-finite-presentation",
-  "lem-weil-pbc-site-module-sheaf-gluing",
-  "lem-weil-pbc-etale-site-localization-open",
-  "lem-sf-constructible-partition-local-closed-stratum",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-pbc-conjugate-iso-unit-equation"
+  "lem-sc-noetherian-finite-module-finite-presentation"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -368,5 +231,15 @@
   "group": "Q122",
   "result": "pass",
   "note": "Clause-by-clause match: Λ any commutative Noetherian ring (no [Finite]); X qcqs; F an intrinsic constant-ring module sheaf on the recorded pro-étale site; the finite stratification's strata are locally closed, disjoint, covering and constructible (isConstructible_stratum confirmed by #check); reduced domains realize the reduced induced structure; restriction is the canonical proEtaleConstantModulePullback; finite-type local constancy is the recorded predicate's body plus Module.Finite; conclusion IsClassicalModule; the Zariski-local variant is correct. Edge cases n=0, empty strata, nonreduced X, zero ring, infinite Λ and universes are fine. Two sorry-only theorems, no definitions, docstrings carry source, blueprint tag and proof steps. lean.statement is verbatim; dependency records are unchanged; added stmt_dep def-constructible-stratification creates no cycle. nt_compile.py --json: clean, 2.1 s. Non-blocking: the landed def-constructible-stratification text and docstring still say 'no constructibility'."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-335f8",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261019T005405-L-2762980",
+  "kind": "interface",
+  "note": "independent cc review: item proofs (stratified_classical via finiteLocalSystemsTwist + comparison_essImage_of_stratification; Zariski-local via proEtaleConstantModulePullback_comp + proEtaleClassical_zariskiLocal) against node det-pe-constructible-comparison-classical; 3 support-module generalizations against their change records, statement_change entries and 10 compiled importers/consumers; axiom probes confirm C-68837 repair (finite pullback theorem sorry-free)"
  }
 }

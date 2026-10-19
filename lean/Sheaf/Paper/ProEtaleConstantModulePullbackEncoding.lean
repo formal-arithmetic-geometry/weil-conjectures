@@ -23,20 +23,13 @@ universe u
 open CategoryTheory CategoryTheory.Functor
 namespace AlgebraicGeometry.Scheme
 
-variable {X Y : Scheme.{u}} (f : X ⟶ Y) (B : Type u) [CommRing B] [Finite B]
+variable {X Y : Scheme.{u}} (f : X ⟶ Y) (B : Type u) [CommRing B]
 
-private theorem coefficient_isIso : IsIso (proEtaleCoefficientInverseImageMap f B) := by
-  let Q := (Functor.const ℕᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} B))
-  have : ∀ n, Finite (Q.obj n) := fun _ ↦ inferInstanceAs (Finite (ULift.{u + 1, u} B))
-  exact (proEtale_profinite_coefficient_inverse_image
-    ((Functor.const ℕᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} B)))).1 X Y f
-      (Opposite.op 0)
-
-private noncomputable def coefficientIso :=
-  haveI := coefficient_isIso f B
+private noncomputable def coefficientIso
+    [IsIso (proEtaleCoefficientInverseImageMap f B)] :=
   asIso (proEtaleCoefficientInverseImageMap f B)
 
-private theorem coefficient_adjunct :
+private theorem coefficient_adjunct [IsIso (proEtaleCoefficientInverseImageMap f B)] :
     proEtaleRingDirectImageMap f (proEtaleConstantRing Y B) (proEtaleConstantRing X B)
       (coefficientIso f B) = proEtaleCoefficientDirectImageMap f B := by
   let adj := proEtaleSheafAdjunction f CommRingCat.{u + 1}
@@ -45,7 +38,6 @@ private theorem coefficient_adjunct :
       (proEtaleCoefficientDirectImageMap f B) ≫ adj.counit.app _) = _
   exact (adj.homEquiv _ _).apply_symm_apply (proEtaleCoefficientDirectImageMap f B)
 
-omit [Finite B] in
 private theorem constant_sections :
     toSheafify (ProEt.topology Y)
         ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} B))) ≫
@@ -56,7 +48,8 @@ private theorem constant_sections :
   exact ((sheafificationAdjunction (ProEt.topology Y) CommRingCat.{u + 1}).homEquiv
     _ _).apply_symm_apply _
 
-private noncomputable def directImageComparison :
+private noncomputable def directImageComparison
+    [IsIso (proEtaleCoefficientInverseImageMap f B)] :
     proEtaleRingModuleDirectImage f (proEtaleConstantRing Y B) (proEtaleConstantRing X B)
         (coefficientIso f B) ⋙ proEtaleModuleRestriction Y B ≅
       proEtaleModuleRestriction X B ⋙
@@ -93,18 +86,20 @@ private noncomputable def directImageComparison :
     ext U m
     rfl
 
-/-- Restriction to constant scalars commutes with canonical module pullback.
+/-- Restriction to constant scalars commutes with canonical module pullback when the
+canonical coefficient inverse-image map is invertible.
 Source: Stacks Project, Tags 093I and 03D3
 (blueprint: lem-weil-pbc-proetale-constant-module-pullback-encoding).
 
-Proof: the canonical coefficient map is invertible. Its adjunct extends the
+Proof: use the assumed invertibility of the canonical coefficient map. Its adjunct extends the
 constant-section map. Hence direct image followed by restriction to constant
 scalars is exactly precomposition of fixed-module sheaves, with identity on all
 sections and maps. Conjugate the fixed-module pullback adjunction by the two
 coefficient-encoding equivalences. Its right adjoint is the intrinsic direct image
 by this identity. Uniqueness of left adjoints identifies its left adjoint with the
 specified intrinsic tensor pullback. Evaluate the resulting comparison at F. -/
-theorem proEtaleModuleRestriction_pullback
+theorem proEtaleModuleRestriction_pullback_of_isIso
+    [IsIso (proEtaleCoefficientInverseImageMap f B)]
     (F : proEtaleRingModules Y (proEtaleConstantRing Y B)) :
     Nonempty ((proEtaleModuleRestriction X B).obj (proEtaleConstantModulePullback f B F) ≅
       (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) f).obj
@@ -125,5 +120,24 @@ theorem proEtaleModuleRestriction_pullback
   let e := (proEtaleRingModuleAdjunction f (proEtaleConstantRing Y B)
     (proEtaleConstantRing X B) (coefficientIso f B)).leftAdjointUniq adj'
   exact ⟨EX.functor.mapIso (e.app F) ≪≫ EX.counitIso.app (L.obj (EY.functor.obj F))⟩
+
+/-- Restriction to constant scalars commutes with canonical pullback for finite rings.
+Source: Stacks Project, Tags 093I, 03D3 and 098T(2)
+(blueprint: lem-weil-pbc-proetale-constant-module-pullback-encoding).
+
+Proof: specialize the finite-level profinite coefficient comparison to the constant
+tower with value ULift B, then apply the comparison with an invertible coefficient map. -/
+theorem proEtaleModuleRestriction_pullback [Finite B]
+    (F : proEtaleRingModules Y (proEtaleConstantRing Y B)) :
+    Nonempty ((proEtaleModuleRestriction X B).obj (proEtaleConstantModulePullback f B F) ≅
+      (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) f).obj
+        ((proEtaleModuleRestriction Y B).obj F)) := by
+  have : IsIso (proEtaleCoefficientInverseImageMap f B) := by
+    let Q := (Functor.const ℕᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} B))
+    have : ∀ n, Finite (Q.obj n) := fun _ ↦ inferInstanceAs (Finite (ULift.{u + 1, u} B))
+    exact (proEtale_profinite_coefficient_inverse_image
+      ((Functor.const ℕᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} B)))).1 X Y f
+        (Opposite.op 0)
+  exact proEtaleModuleRestriction_pullback_of_isIso f B F
 
 end AlgebraicGeometry.Scheme

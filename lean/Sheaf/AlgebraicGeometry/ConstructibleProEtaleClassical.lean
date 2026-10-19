@@ -8,45 +8,23 @@ module
 public import Sheaf.AlgebraicGeometry.ClassicalContinuityMap
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
-public import Sheaf.Paper.ProEtaleFixedModuleLocalConstancy
-public import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
+public import Sheaf.Paper.ProEtaleLocallyConstantSheaf
+public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 
-import Sheaf.CategoryTheory.SiteCoveringAxioms
-import Sheaf.AlgebraicGeometry.TorsorComparisonGlue
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.CategoryTheory.SiteModuleSheafGluing
-import Sheaf.AlgebraicGeometry.ConstructiblePartitionLocalClosedStratum
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import WeilConjectures.AlgebraicGeometry.EtaleConstantRingInverseImageComparison
-import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.AlgebraicGeometry.ProEtaleSmallModelComparison
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-
-import Mathlib.Algebra.Module.FinitePresentation
-import Mathlib.CategoryTheory.Sites.CoverLifting
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.Topology.Constructible
-import Mathlib.CategoryTheory.Adjunction.Mates
-import Mathlib.CategoryTheory.Adjunction.Unique
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.Integral
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
-import Sheaf.AlgebraicGeometry.ClassicalModuleWeakSerre
-import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesModules
+import all Sheaf.Paper.ProEtaleConstantModuleConstructibility
+import Sheaf.Paper.ProEtaleConstantModulePullbackEncoding
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.Paper.ProEtaleConstantModulePullbackComposition
 import Sheaf.AlgebraicGeometry.ProEtaleClassicalZariskiLocal
-import Sheaf.AlgebraicGeometry.ProEtaleDirectImageComparison
-import Sheaf.AlgebraicGeometry.ProEtaleFiniteConstantHom
-import Sheaf.AlgebraicGeometry.ProEtaleFiniteLocalSystemsType
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.Paper.ProEtaleLocallyConstantSheafOfUniverses
+import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesModules
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteLocalSystemsTwist
+import Sheaf.Paper.ProEtaleStratifiedEssentialImage
+import Mathlib.RingTheory.Noetherian.Basic
+import Mathlib.Algebra.Module.FinitePresentation
 
 /-! # Constructible pro-etale module sheaves are classical
 
@@ -69,6 +47,121 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale
 
+private theorem intrinsicClassical_iff_fixed {X : Scheme.{u}}
+    (Λ : Type u) [CommRing Λ]
+    (F : Scheme.proEtaleRingModules X (Scheme.proEtaleConstantRing X Λ)) :
+    IsClassicalModule Λ F ↔ IsClassical
+      ((sheafCompose (Scheme.ProEt.topology X)
+        (forget (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)))).obj
+          ((Scheme.proEtaleModuleRestriction X Λ).obj F)) := by
+  exact isClassicalModule_iff Λ F
+
+private theorem finiteModels_classical {X : Scheme.{u}}
+    (Λ : Type u) [CommRing Λ] [IsNoetherianRing Λ]
+    (F : Scheme.proEtaleRingModules X (Scheme.proEtaleConstantRing X Λ))
+    (hmodels : ∃ (I : Type (u + 1)) (V : I → X.ProEt)
+      (f : ∀ a : I, V a ⟶ Scheme.ProEt.mk (𝟙 X)),
+      Presieve.ofArrows V f ∈ (Scheme.ProEt.precoverage X).coverings _ ∧
+      ∀ a : I, ∃ M : ModuleCat.{u + 1} (ULift.{u + 1, u} Λ),
+        Module.Finite (ULift.{u + 1, u} Λ) M ∧
+        Nonempty (F.over (V a) ≅ Scheme.proEtaleConstantModuleSheafOver X Λ (V a) M)) :
+    IsClassicalModule Λ F := by
+  classical
+  let A := ULift.{u + 1, u} Λ
+  have : IsNoetherianRing A := isNoetherianRing_of_ringEquiv Λ ULift.ringEquiv.symm
+  let E := (Scheme.proEtaleModuleRestriction X Λ).obj F
+  obtain ⟨I, V, f, hf, h⟩ := hmodels
+  have hfp : ∀ i : I, ∃ M : ModuleCat.{u + 1} A,
+      Module.FinitePresentation A M ∧
+      Nonempty (E.over (V i) ≅
+        (constantSheaf ((Scheme.ProEt.topology X).over (V i)) (ModuleCat.{u + 1} A)).obj M) := by
+    intro i
+    obtain ⟨M, hM, ⟨e⟩⟩ := h i
+    have := hM
+    have hpres : Module.FinitePresentation A M := Module.finitePresentation_of_finite A M
+    let R := (sheafCompose (Scheme.ProEt.topology X)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (Scheme.proEtaleConstantRing X Λ)
+    let a := Functor.whiskerLeft (Over.forget (V i)).op (Scheme.proEtaleModuleScalarUnit X Λ)
+    have hi : Presheaf.IsLocallyInjective ((Scheme.ProEt.topology X).over (V i)) a :=
+      (Scheme.proEtaleConstantRingUnit_over_locallyBijective X Λ (V i)).1
+    have hs : Presheaf.IsLocallySurjective ((Scheme.ProEt.topology X).over (V i)) a :=
+      (Scheme.proEtaleConstantRingUnit_over_locallyBijective X Λ (V i)).2
+    let L := Scheme.ConstantScalarComparison.restriction
+      ((Scheme.ProEt.topology X).over (V i)) A (R.over (V i)) a
+    have hc := Scheme.ConstantScalarComparison.constantComparisonHom_isIso
+      ((Scheme.ProEt.topology X).over (V i)) A (R.over (V i)) a M
+    exact ⟨M, hpres, ⟨L.mapIso e ≪≫
+      (asIso (Scheme.ConstantScalarComparison.constantComparisonHom
+        ((Scheme.ProEt.topology X).over (V i)) A (R.over (V i)) a M)).symm⟩⟩
+  have hloc : IsFinitePresentationProEtaleLocalSystem X Λ E := by
+    refine ⟨⟨I, V, f, hf, ?_⟩, I, V, f, hf, hfp⟩
+    intro i
+    obtain ⟨M, _, e⟩ := hfp i
+    exact ⟨M, e⟩
+  apply (intrinsicClassical_iff_fixed Λ F).mpr
+  exact (finiteLocalSystemsTwist X Λ E hloc).2.1
+
+private theorem fixedClassical_iff_essImage {X : Scheme.{u}}
+    (A : Type (u + 1)) [CommRing A]
+    (E : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) :
+    IsClassical ((sheafCompose (Scheme.ProEt.topology X)
+      (forget (ModuleCat.{u + 1} A))).obj E) ↔
+      (comparisonUpperStar (ModuleCat.{u + 1} A) X).essImage E := by
+  obtain ⟨adj, _, _, _, _, h⟩ := proEtaleClassicalSheavesModules X A
+  exact h E
+
+private theorem intrinsicClassical_zariskiLocal {X : Scheme.{u}}
+    (Λ : Type u) [CommRing Λ]
+    (F : Scheme.proEtaleRingModules X (Scheme.proEtaleConstantRing X Λ))
+    (h : ∀ x : X, ∃ U : X.Opens, x ∈ U ∧
+      IsClassicalModule Λ (Scheme.proEtaleConstantModulePullback U.ι Λ F)) :
+    IsClassicalModule Λ F := by
+  classical
+  choose U hx hU using h
+  let A := ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)
+  let E := (Scheme.proEtaleModuleRestriction X Λ).obj F
+  apply (intrinsicClassical_iff_fixed Λ F).mpr
+  apply (proEtaleClassical_zariskiLocal X (ULift.{u + 1, u} Λ) E).1 X U
+  · apply le_antisymm le_top
+    intro x _
+    exact (TopologicalSpace.Opens.mem_iSup.mpr ⟨x, hx x⟩)
+  · intro x
+    obtain ⟨e⟩ := Scheme.proEtaleModuleRestriction_pullback_of_isIso (U x).ι Λ F
+    let t := e ≪≫ (upperStarIsoOpenImmersionRestriction A (U x).ι).app E
+    apply (isClassical_iso_iff
+      ((sheafCompose (Scheme.ProEt.topology (U x).toScheme) (forget A)).mapIso t)).mp
+    exact (intrinsicClassical_iff_fixed Λ _).mp (hU x)
+
+private theorem stratified_classical {X : Scheme.{u}}
+    (Λ : Type u) [CommRing Λ] [IsNoetherianRing Λ]
+    (F : Scheme.proEtaleRingModules X (Scheme.proEtaleConstantRing X Λ))
+    (S : Scheme.LocallyClosedStratification X)
+    (hm : ∀ k : Fin S.n,
+      ∃ (I : Type (u + 1)) (V : I → (S.domain k).ProEt)
+        (f : ∀ a : I, V a ⟶ Scheme.ProEt.mk (𝟙 (S.domain k))),
+        Presieve.ofArrows V f ∈ (Scheme.ProEt.precoverage (S.domain k)).coverings _ ∧
+        ∀ a : I, ∃ M : ModuleCat.{u + 1} (ULift.{u + 1, u} Λ),
+          Module.Finite (ULift.{u + 1, u} Λ) M ∧
+          Nonempty ((Scheme.proEtaleConstantModulePullback (S.immersion k) Λ F).over (V a) ≅
+            Scheme.proEtaleConstantModuleSheafOver (S.domain k) Λ (V a) M)) :
+    IsClassicalModule Λ F := by
+  let A := ULift.{u + 1, u} Λ
+  let E := (Scheme.proEtaleModuleRestriction X Λ).obj F
+  apply (intrinsicClassical_iff_fixed Λ F).mpr
+  apply (fixedClassical_iff_essImage A E).mpr
+  apply comparison_essImage_of_stratification A S E
+  intro k
+  have h : IsClassicalModule Λ
+      (Scheme.proEtaleConstantModulePullback (S.immersion k) Λ F) :=
+    finiteModels_classical Λ _ (hm k)
+  obtain ⟨e⟩ := Scheme.proEtaleModuleRestriction_pullback_of_isIso (S.immersion k) Λ F
+  apply (fixedClassical_iff_essImage A _).mp
+  apply (isClassical_iso_iff
+    ((sheafCompose (Scheme.ProEt.topology (S.domain k))
+      (forget (ModuleCat.{u + 1} A))).mapIso e)).mp
+  exact (intrinsicClassical_iff_fixed Λ _).mp h
+
+
 /-- A finite constructible locally closed partition with finite constant local module models
 makes a pro-etale module sheaf classical. Reduced immersed representatives realize the
 reduced induced structure on each stratum. Constructibility, local closedness, disjointness
@@ -77,39 +170,14 @@ and covering are fields of `S.toStratification`; empty strata and zero strata ar
 Source: current blueprint, constructible-comparison-classical; Stacks, Tags 099Y and 09AK
 (blueprint: det-pe-constructible-comparison-classical).
 
-Proof, following the node's steps 1--9:
-1. Over a Noetherian ring a finite module is finitely presented
-   (lem-sc-noetherian-finite-module-finite-presentation). The local-system type decomposition
-   (det-pe-finite-local-systems-type) reduces locally constant sheaves to one fixed model.
-2. The sheaf Isom(M,F) is an Aut(M)-torsor: maps, inverses and linearity glue by the sheaf
-   equalizer condition. Its automorphism group is the inverse image of the etale constant
-   group (det-pe-finite-local-systems-hom). Torsor comparison
-   (det-pe-torsor-comparison-glue) therefore supplies etale local trivializations.
-3. Full faithfulness on modules (det-pe-classical-sheaves-modules), compatibility with
-   scheme pullbacks (sk-thm-pe-direct-image-comparison), slice-site localization and constant
-   restriction descend their transition isomorphisms and cocycle. Module-sheaf gluing
-   (lem-weil-pbc-site-module-sheaf-gluing) gives an etale sheaf whose inverse image is F.
-   This proves the locally constant case on every scheme.
-4. Induct strongly on the number of nonempty strata. With none, X is empty and the zero
-   sheaf is classical (det-pe-classical-derived-weak-serre). Around a point, choose an affine
-   W on which its stratum Z is closed and constructible, with quasi-compact complement U
-   (lem-sf-constructible-partition-local-closed-stratum). Affineness makes W and U qcqs and
-   makes the open immersion j quasi-compact. Retain the reduced structure on Z, also for
-   one stratum on a nonreduced scheme.
-5. Use lem-weil-pbc-proetale-ringed-open-closed to form the short exact sequence
-   0 -> j_!j^*F -> F -> i_*i^*F -> 0 over the restricted constant coefficient rings.
-   The constant-ring comparison and scheme-pullback comparison identify those rings.
-6. The other strata restrict to a constructible locally closed partition of U with fewer
-   nonempty parts. Restrict the same constant models and apply induction to j^*F.
-7. Adjunction identifies comparison inverse image of etale j_! with pro-etale j_!: their
-   right adjoints agree sectionwise. Use localized restriction, extension-by-zero adjunction
-   and uniqueness of left adjoints (lem-weil-pbc-conjugate-iso-unit-equation).
-8. The sheaf i^*F on Z is classical by steps 1--3. The reduced closed immersion is qcqs.
-   Direct-image comparison in degree zero identifies i_*i^*F with an etale inverse image;
-   exact comparison inverse image and left exact i_* justify degree-zero cohomology.
-9. Both ends of the short exact sequence are classical, so the extension clause of
-   det-pe-classical-derived-weak-serre makes F|W classical. Zariski locality
-   (det-pe-constructible-comparison-local) gives classicality on X. -/
+Proof: restrict scalars along the constant-ring sheafification unit. On each slice,
+the constant-model comparison identifies the same finitely generated model with the
+usual constant module sheaf. Its finite presentation follows from Noetherianity.
+The finite local-system comparison makes each stratum classical. The essential-image
+criterion and stratified essential-image induction then make the entire sheaf classical.
+The latter induction uses affine shrinking, the open-closed exact sequence, extension
+by zero and closed direct-image comparison; it works for arbitrary coefficient rings.
+Finally scalar restriction preserves the underlying set sheaf, hence classicality. -/
 theorem constructible_isClassicalModule (X : Scheme.{u}) [CompactSpace X]
     [QuasiSeparatedSpace X] (Λ : Type u) [CommRing Λ] [IsNoetherianRing Λ]
     (F : ringedSiteModules.{u + 1}
@@ -127,7 +195,7 @@ theorem constructible_isClassicalModule (X : Scheme.{u}) [CompactSpace X]
           Nonempty ((Scheme.proEtaleConstantModulePullback (S.immersion k) Λ F).over (V a) ≅
             Scheme.proEtaleConstantModuleSheafOver (S.domain k) Λ (V a) M)) :
     IsClassicalModule Λ F := by
-  sorry
+  exact stratified_classical Λ F S _hmodels
 
 /-- The finite constructible partition may exist only on Zariski neighborhoods of points.
 Restriction to a stratum of an open is pullback along its composite immersion into X,
@@ -136,13 +204,11 @@ with the canonical constant-ring structure map.
 Source: current blueprint, constructible-comparison-classical, last sentence;
 Stacks, Tags 09AJ and 09AK (blueprint: det-pe-constructible-comparison-classical).
 
-Proof, step 10 of the node: around each point choose a neighborhood with such a partition,
-then refine it by affine opens (lem-weil-pbc-affine-opens-basis). Constructible locally
-closed partitions restrict to these opens (lem-weil-pbc-constructible-open-restriction),
-and the trivializing covers and their finite constant models pull back unchanged.
-Every affine open is qcqs (lem-weil-pbc-affine-scheme-qcqs), so apply
-constructible_isClassicalModule, proved by steps 1--9 above, on each affine open.
-The resulting opens cover X, and det-pe-constructible-comparison-local gives the result. -/
+Proof: the preceding stratified argument works on any scheme, so it applies directly
+on each given neighborhood. The canonical composition isomorphism of intrinsic module
+pullbacks identifies the stratum restrictions with the displayed composite pullbacks.
+The fixed-module encoding commutes with pullback and with open restriction. Zariski
+locality of classicality therefore gives classicality of the original sheaf. -/
 theorem locallyConstructible_isClassicalModule (X : Scheme.{u}) [CompactSpace X]
     [QuasiSeparatedSpace X] (Λ : Type u) [CommRing Λ] [IsNoetherianRing Λ]
     (F : ringedSiteModules.{u + 1}
@@ -162,6 +228,17 @@ theorem locallyConstructible_isClassicalModule (X : Scheme.{u}) [CompactSpace X]
                 (S.immersion k ≫ U.ι) Λ F).over (V a) ≅
                   Scheme.proEtaleConstantModuleSheafOver (S.domain k) Λ (V a) M)) :
     IsClassicalModule Λ F := by
-  sorry
+  apply intrinsicClassical_zariskiLocal Λ F
+  intro x
+  obtain ⟨U, hx, S, hred, hm⟩ := _hlocal x
+  refine ⟨U, hx, ?_⟩
+  apply stratified_classical Λ _ S
+  intro k
+  obtain ⟨I, V, f, hf, he⟩ := hm k
+  refine ⟨I, V, f, hf, ?_⟩
+  intro a
+  obtain ⟨M, hM, ⟨e⟩⟩ := he a
+  obtain ⟨c⟩ := Scheme.proEtaleConstantModulePullback_comp U.ι (S.immersion k) Λ
+  exact ⟨M, hM, ⟨(SheafOfModules.overFunctor _ (V a)).mapIso (c.app F).symm ≪≫ e⟩⟩
 
 end AlgebraicGeometry.ProEtale

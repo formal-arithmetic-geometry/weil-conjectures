@@ -40,7 +40,7 @@ Both inverse images are exact and together detect zero objects: an object vanish
 on the open is supported on the closed and is the direct image of its closed
 restriction. They therefore detect monomorphisms, epimorphisms and exactness.
 -/
-theorem exact_openClosedSequence (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+theorem exact_openClosedSequence (Λ : Type (u + 1)) [CommRing Λ]
     {X Z U : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X)
     [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]
     (hU : Set.range j = (Set.range i)ᶜ)
