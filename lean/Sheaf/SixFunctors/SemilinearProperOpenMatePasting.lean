@@ -13,6 +13,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
 public import Mathlib.CategoryTheory.Adjunction.CompositionIso
 import Mathlib.CategoryTheory.Adjunction.Mates
 import Sheaf.AlgebraicGeometry.VaryingRingProperOpenPasting
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 
 /-! # Intrinsic proper/open mates for semilinear coefficient systems
 
@@ -39,6 +40,22 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme WeilConjectures
 open WeilConjectures.SemilinearSections
+
+private theorem map_iso_transport
+    {A B : Type*} [Category A] [Category B] (F : A ⥤ B)
+    {X Y Z W : A} (a : X ≅ Y) (b : Z ≅ W) (f : X ⟶ Z) (g : Y ⟶ W)
+    (h : f ≫ b.hom = a.hom ≫ g) {V : B} (c : V ⟶ F.obj Y) :
+    c ≫ F.map a.inv ≫ F.map f ≫ F.map b.hom = c ≫ F.map g := by
+  rw [← F.map_comp, h, F.map_comp, ← Category.assoc (F.map a.inv),
+    ← F.map_comp, a.inv_hom_id, F.map_id, Category.id_comp]
+
+private theorem chosen_unit_isIso_congr
+    {A B : Type*} [Category A] [Category B] (F G : A ⥤ B)
+    [F.IsRightAdjoint] [G.IsRightAdjoint] (h : F = G)
+    (hi : IsIso (Adjunction.ofIsRightAdjoint G).unit) :
+    IsIso (Adjunction.ofIsRightAdjoint F).unit := by
+  subst G
+  exact hi
 
 namespace AlgebraicGeometry.ProEtale.SemilinearProperOpen
 
@@ -111,7 +128,7 @@ by continuity of pro-etale base change. The index functor is the identity. -/
 theorem siteMap_continuous {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (siteMap f).IsContinuous (coefficientSequenceTopology (ProEt.topology Y))
       (coefficientSequenceTopology (ProEt.topology X)) := by
-  sorry
+  exact VaryingRing.baseChange_continuous f
 
 attribute [instance] siteMap_continuous
 
@@ -127,13 +144,36 @@ theorem coefficientMap_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
         (coefficientSequenceTopology (ProEt.topology X))).obj (ringSystem C τ X),
       ∀ (n : ℕ) (U : Y.ProEt), HEq (a.hom.app (op (n, U)))
         ((proEtaleConstantDirectImageMap f CommRingCat.{u + 1} (C n)).hom.app (op U)) := by
-  sorry
+  let a : ringSystem C τ Y ⟶ ((siteMap f).sheafPushforwardContinuous
+      CommRingCat.{u + 1} (coefficientSequenceTopology (ProEt.topology Y))
+        (coefficientSequenceTopology (ProEt.topology X))).obj (ringSystem C τ X) :=
+    ⟨{ app := fun U ↦
+        (proEtaleConstantDirectImageMap f CommRingCat.{u + 1} (C U.unop.1)).hom.app
+          (op U.unop.2)
+       naturality := fun U V h ↦ by
+        apply (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}).map_injective
+        exact VaryingRing.ringMapApp_naturality C τ f h }⟩
+  refine ⟨a, fun n U ↦ HEq.rfl, ?_⟩
+  intro b hb
+  apply Sheaf.hom_ext
+  apply NatTrans.ext
+  funext U
+  exact eq_of_heq (hb U.unop.1 U.unop.2)
 
 /-- The unique componentwise constant-section structural ring map.
 Source: Stacks 09A5 and 0F7B
 (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
 def coefficientMap {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (coefficientMap_existsUnique C τ f).choose
+
+private theorem coefficientMap_forget_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+      (coefficientMap C τ f) = VaryingRing.ringMap C τ f := by
+  apply Sheaf.hom_ext
+  apply NatTrans.ext
+  funext U
+  exact congrArg (fun a ↦ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}).map a)
+    (eq_of_heq ((coefficientMap_existsUnique C τ f).choose_spec.1 U.unop.1 U.unop.2))
 
 /-- Actual module direct image on the ringed sequence site, including transitions.
 Source: Stacks 03D7 and 0F7B
@@ -143,12 +183,20 @@ def push {X Y : Scheme.{u}} (f : X ⟶ Y) : Modules C τ X ⥤ Modules C τ Y :=
     ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
       (coefficientMap C τ f))
 
+private theorem push_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    push C τ f = VaryingRing.push C τ f := by
+  unfold push VaryingRing.push
+  rw [coefficientMap_forget_eq]
+
 /-- Sectionwise direct image is additive.
 Source: Stacks 03D7 (blueprint: lem-sf-semilinear-proper-open-mate-pasting).
 Proof: direct image keeps the additive maps of sections and restricts their scalar
 actions. Addition of system morphisms is componentwise. -/
 theorem push_additive {X Y : Scheme.{u}} (f : X ⟶ Y) : (push C τ f).Additive := by
-  sorry
+  constructor
+  intros M N f g
+  ext U x
+  rfl
 
 attribute [instance] push_additive
 
@@ -160,7 +208,8 @@ constant-section comparisons gives the semilinear transitions. The componentwise
 Hom bijections assemble into an adjunction on strict systems. -/
 theorem push_isRightAdjoint {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (push C τ f).IsRightAdjoint := by
-  sorry
+  rw [push_eq]
+  exact VaryingRing.push_isRightAdjoint C τ f
 
 attribute [instance] push_isRightAdjoint
 
@@ -175,6 +224,12 @@ Source: Stacks 03D7; Zheng 4.10
 def ordinaryAdj {X Y : Scheme.{u}} (f : X ⟶ Y) : pull C τ f ⊣ push C τ f :=
   Adjunction.ofIsRightAdjoint _
 
+private theorem pull_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    pull C τ f = VaryingRing.pull C τ f := by
+  unfold pull VaryingRing.pull
+  congr 1
+  exact push_eq C τ f
+
 /-- Inverse image is exact, since its coefficients are identified constant sheaves.
 Source: Stacks 03EK; Zheng 4.10
 (blueprint: lem-sf-semilinear-proper-open-mate-pasting).
@@ -184,7 +239,8 @@ no scalar extension along the transition C_(n+1) -> C_n is being assumed exact. 
 theorem pull_exact {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (pull C τ f).Additive ∧ PreservesFiniteLimits (pull C τ f) ∧
       PreservesFiniteColimits (pull C τ f) := by
-  sorry
+  rw [pull_eq]
+  exact VaryingRing.pull_exact C τ f
 
 
 /-- Exact inverse-image additivity. Source: Stacks 03EK
@@ -209,7 +265,9 @@ Proof: apply Grothendieck abelianness and K-injective resolutions to module shea
 on the small ringed sequence site, not separately to its evaluated components. -/
 theorem systems_kInjective (X : Scheme.{u}) :
     Abelian.HasKInjectiveResolutions (Modules C τ X) := by
-  sorry
+  have := (Classical.choice (semilinearDerivedSections.{u + 1, u, u + 1}
+    (ProEt.topology X) (coefficients C X) (transition C τ X))).systems.grothendieck
+  exact Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian
 
 attribute [instance] systems_kInjective
 
@@ -244,7 +302,9 @@ theorem pushComp_existsUnique {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
           N.val.map (Prod.mkHom (𝟙 n)
             ((MorphismProperty.Over.pullbackComp
               (P := @WeaklyEtale.{u}) (Q := ⊤) f g).hom.app U)).op x := by
-  sorry
+  unfold push
+  rw [coefficientMap_forget_eq, coefficientMap_forget_eq, coefficientMap_forget_eq]
+  exact VaryingRing.modulePComp_existsUnique C τ f g
 
 /-- The uniquely section-normalized ordinary direct-image compositor.
 Source: Stacks 03D8, 0D6D (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
@@ -282,7 +342,9 @@ theorem pushId_existsUnique (X : Scheme.{u}) :
         (e.hom.app M).val.app (op (n, U)) x =
           M.val.map (Prod.mkHom (𝟙 n)
             ((MorphismProperty.Over.pullbackId @WeaklyEtale.{u} ⊤ X).inv.app U)).op x := by
-  sorry
+  unfold push
+  rw [coefficientMap_forget_eq]
+  exact VaryingRing.modulePId_existsUnique C τ X
 
 /-- The unit-normalized inverse-image identity, localized from ordinary modules.
 Source: Stacks 07A7 (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
@@ -303,7 +365,8 @@ then sheafify. The summand Hom correspondence is the extension/restriction adjun
 The identified constant-ring inverse image is restriction on that localization. -/
 theorem openPull_isRightAdjoint {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (pull C τ j).IsRightAdjoint := by
-  sorry
+  rw [pull_eq]
+  exact VaryingRing.pull_isRightAdjoint C τ j
 
 attribute [instance] openPull_isRightAdjoint
 
@@ -317,6 +380,12 @@ Source: Stacks 03DI (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
 def ordinaryOpenAdj {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     extension C τ j ⊣ pull C τ j := Adjunction.ofIsRightAdjoint _
 
+private theorem extension_eq {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    extension C τ j = VaryingRing.extension C τ j := by
+  unfold extension VaryingRing.extension
+  congr 1
+  exact pull_eq C τ j
+
 /-- Open extension is exact, also for the empty open.
 Source: Stacks 03DI, 03DJ (blueprint: lem-sf-semilinear-proper-open-mate-pasting).
 Proof: after localization its stalks are the original module on the open and zero
@@ -325,7 +394,8 @@ Sheafification is exact. This argument works at every index simultaneously. -/
 theorem extension_exact {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (extension C τ j).Additive ∧ PreservesFiniteLimits (extension C τ j) ∧
       PreservesFiniteColimits (extension C τ j) := by
-  sorry
+  rw [extension_eq]
+  exact VaryingRing.extension_exact C τ j
 
 /-- Additivity of open extension. Source: Stacks 03DI (blueprint:
 lem-sf-semilinear-proper-open-mate-pasting). -/
@@ -365,7 +435,8 @@ Source: Stacks 0F7D (blueprint: lem-sf-semilinear-proper-open-mate-pasting).
 Proof: substitute the equality of the underlying arrows and use proof irrelevance. -/
 theorem J_congr {U X : Scheme.{u}} {f g : U ⟶ X}
     [IsOpenImmersion f] [IsOpenImmersion g] (h : f = g) : J C τ f = J C τ g := by
-  sorry
+  subst g
+  rfl
 
 /-- Open-extension transport along an equality of arrows.
 Source: Stacks 0F7D (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
@@ -447,7 +518,18 @@ of the extension presheaf is the original module. This survives sheafification,
 termwise extension to strict towers, and exact localization. -/
 theorem jAdj_unit_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     IsIso (jAdj C τ j).unit := by
-  sorry
+  have : (VaryingRing.pull C τ j).IsRightAdjoint :=
+    VaryingRing.pull_isRightAdjoint C τ j
+  have hu : IsIso (ordinaryOpenAdj C τ j).unit :=
+    chosen_unit_isIso_congr (pull C τ j) (VaryingRing.pull C τ j)
+      (pull_eq C τ j) (VaryingRing.moduleJAdj_unit_isIso C τ j)
+  have hf := (jAdj C τ j).fullyFaithfulLOfCompIsoId
+    ((Functor.mapDerivedCategoryCompIso (extension C τ j) (pull C τ j)).symm ≪≫
+      Functor.mapDerivedCategoryNatIso (asIso (ordinaryOpenAdj C τ j).unit).symm ≪≫
+        Functor.mapDerivedCategoryIdIso _)
+  have := hf.full
+  have := hf.faithful
+  infer_instance
 
 /-- The canonical map from open extension to direct image is the counit mate of the
 inverse open unit. Source: Stacks, Tags 03DI and 09AE
@@ -1040,7 +1122,22 @@ theorem gamma_finite {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (StrictTower.HD (C n) T w.Λ w.φ).map
       ((StrictTower.finiteGamma w.Λ k r p i h).hom.app w.origin.L) ≫
       (StrictTower.finiteTarget (C n) k p ((E C τ n V).obj M) 0 w).hom := by
-  sorry
+  have _hC := hC
+  have _hscalar := hscalar
+  have he := gamma_evaluation C τ n k r p i h M
+  have ht : (E C τ n T).map ((gamma C τ k r p i h).app M) ≫
+      (evalTarget C τ n k p M).hom =
+      (evalSource C τ n r i M).hom ≫
+        (StrictTower.gamma (C n) k r p i h).app ((E C τ n V).obj M) := by
+    simpa only [evalSource, evalTarget, Iso.trans_hom, Functor.mapIso_hom,
+      Functor.comp_obj,
+      Iso.app_hom, asIso_hom, Category.assoc] using he
+  exact (map_iso_transport (StrictTower.ev (C n) T 0)
+    (evalSource C τ n r i M) (evalTarget C τ n k p M)
+    ((E C τ n T).map ((gamma C τ k r p i h).app M))
+    ((StrictTower.gamma (C n) k r p i h).app ((E C τ n V).obj M)) ht
+    (StrictTower.finiteSource (C n) r i ((E C τ n V).obj M) 0 w).hom).trans
+      (StrictTower.gamma_evaluation (C n) k r p i h ((E C τ n V).obj M) 0 w)
 
 end FiniteEvaluation
 
