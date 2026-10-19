@@ -28,124 +28,82 @@
  ],
  "proof": [
   {
-   "text": "Choose an affine open $U=\\operatorname{Spec}A\\subseteq X$ containing $x$. The affine closed-immersion criterion gives $V=i^{-1}U=\\operatorname{Spec}B$, with a surjective $k$-algebra map $A\\twoheadrightarrow B$; write $J$ for its kernel and identify $B=A/J$. Put $N=J/J^2$, $M=B\\otimes_A\\Omega_{A/k}$ and $P=\\Omega_{B/k}$. The $B$-action on $N$ is $\\bar a[j]=[aj]$: changing a lift $a$ adds an element of $J^2$.",
+   "text": "Work with the actual stalk rings R = O_X,i(z), S = O_Z,z and K = kappa(z). Give R and S their k-algebra structures via global constants and the germ map. IsOver and the germ/stalk-map identity give the scalar tower k -> R -> S. A closed immersion gives a surjection R -> S. Smoothness gives formal smoothness of the stalk map from O_Spec(k),f(z); the latter stalk is canonically k, so S is formally smooth over k. No finite-presentation claim about the stalk algebra is needed.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
-    "def-weil-affine-spectrum",
+    "def-weil-closed-immersion",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 06AA, conormal exact sequence for an immersion smooth over the base; implemented directly on stalks using formal smoothness and the universal property of relative differentials."
+   }
+  },
+  {
+   "text": "Identify the stalk of relative differentials over k with the Kahler differentials of the stalk ring. Taking stalks of the universal sheaf derivation gives a k-derivation of R. Conversely, every k-derivation R -> N defines a sheaf derivation into the skyscraper module at the point: on each neighborhood apply the derivation to the germ. The stalk-skyscraper adjunction and the universal property of relative differentials yield the inverse linear map. The two universal properties show that the composites are identities. The identification sends every differential germ da to D(germ(a)). Extend these linear equivalences to K.",
+   "uses": [
+    "def-sc-relative-differential-sheaf",
+    "def-weil-pbc-kahler-differentials",
+    "def-pc-module-stalk-functor",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 06AA, conormal exact sequence for an immersion smooth over the base; implemented directly on stalks using formal smoothness and the universal property of relative differentials."
+   }
+  },
+  {
+   "text": "Apply the algebraic conormal right exact sequence to k -> R -> S. Lift id_S along the square-zero surjection R/I^2 -> S by formal smoothness of S. The Mathlib equivalence retractionKerCotangentToTensorEquivSection turns this section into a retraction of I/I^2 -> S tensor_R Omega_R/k. This is the derivation construction from Algebra Tag 02HP and does not require smoothness of R. Regard the retraction as S-linear by surjectivity of R -> S.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-jacobi-zariski-differential-maps",
     "def-weil-pbc-kahler-differentials"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01QO, lemma-closed-immersion; Tag 06AA, lemma-differentials-relative-immersion-smooth, reduction to affines"
+    "place": "Tag 06AA, conormal exact sequence for an immersion smooth over the base; implemented directly on stalks using formal smoothness and the universal property of relative differentials."
    }
   },
   {
-   "text": "Set $C=A/J^2$ and $K=J/J^2\\subset C$. The kernel of $C\\twoheadrightarrow B$ is $K$ and $K^2=0$, so $T=\\operatorname{Spec}B\\subset T'=\\operatorname{Spec}C$ is a first order thickening of affine $k$-schemes. Smoothness of $Z\\to\\operatorname{Spec}k$, in its infinitesimal lifting definition, lifts the inclusion $T=V\\to Z$ to a $k$-morphism $h:T'\\to Z$. Every point of $T'$ lies in $T$ topologically, since every prime contains $K$ (if $u^2=0$ then $u$ belongs to every prime). Thus $h^{-1}(V)=T'$. Restricting its continuous map and structure-sheaf map to the open subspace $V$ factors $h$ through $V$. Under the affine spectrum correspondence this factorization is a $k$-algebra map $\\sigma:B\\to C$ such that $\\pi\\sigma=\\mathrm{id}_B$, where $\\pi:C\\to B$ is the quotient. This applies the lifting property to the affine test schemes $T,T'$, and does not assume that a localized smooth algebra is finitely presented.",
+   "text": "Tensor the conormal maps and their retraction with K over S. The retraction identity survives base change, proving injectivity of the first map; right exactness of tensor products gives middle exactness and surjectivity of the last map. Surjectivity of R -> S gives compatible scalar multiplication on I/I^2, identifying K tensor_R I/I^2 with K tensor_S I/I^2. Cancel iterated base change in the middle term. The algebraic generator formulas give alpha(1 tensor [a]) = 1 tensor Da and beta(1 tensor Da) = 1 tensor D(a mod I).",
    "uses": [
-    "def-sbc-first-order-thickening",
-    "def-sbc-smooth-morphisms",
-    "def-weil-open-immersion",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tags 04EX (definition-thickening) and 02H0 (definition-formally-smooth); the square-zero lifting used in the proof of Algebra Tag 02HP"
-   }
-  },
-  {
-   "text": "Apply the quotient differential sequence to $k\\to A\\to A/J=B$. It supplies well-defined $B$-linear maps $\\delta:N\\to M$, $[j]\\mapsto1\\otimes\\mathrm dj$, and $w:M\\to P$, $b\\otimes\\mathrm da\\mapsto b\\,\\mathrm d\\bar a$, with $w$ surjective and $\\ker w=\\operatorname{im}\\delta$. The cited statement gives precisely this right exactness; injectivity of $\\delta$ is proved next.",
-   "uses": [
-    "lem-weil-pbc-jacobi-zariski-differential-maps"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00RU, lemma-differential-seq, including the formulas for both maps"
-   }
-  },
-  {
-   "text": "For $a\\in A$ define $D(a)=(a\\bmod J^2)-\\sigma(\\bar a)\\in K=N$. It is additive and zero on $k$. In $C$ write $a\\bmod J^2=\\sigma(\\bar a)+D(a)$. Since $K^2=0$, multiplication gives $D(ab)=\\sigma(\\bar a)D(b)+\\sigma(\\bar b)D(a)=\\bar aD(b)+\\bar bD(a)$, where $C$ acts on $K$ through $B$. Thus $D$ is a $k$-derivation into the $A$-module $N$. The universal property of differentials gives a map $\\Omega_{A/k}\\to N$, and because $JN=0$ it extends to the $B$-linear map $\\tau:M\\to N$, $b\\otimes\\mathrm da\\mapsto bD(a)$. For $j\\in J$, $D(j)=[j]$, hence $\\tau\\delta=\\mathrm{id}_N$.",
-   "uses": [
-    "def-weil-pbc-kahler-differentials",
-    "def-weil-module-base-change"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02HP, lemma-differential-seq-split, derivation in the proof, applied after the square-zero lift; computation expanded"
-   }
-  },
-  {
-   "text": "The previous two steps give an explicit splitting. For $p\\in P$, choose $m\\in M$ with $w(m)=p$ and set $s(p)=m-\\delta\\tau(m)$. If $m'$ is another lift, $m-m'=\\delta(n)$ for some $n\\in N$, so the two values differ by $\\delta(n)-\\delta\\tau\\delta(n)=0$. This also proves that $s$ is $B$-linear. We have $ws=\\mathrm{id}_P$, $\\tau s=0$ and $\\delta\\tau+sw=\\mathrm{id}_M$. Consequently $M\\cong N\\oplus P$, by $m\\mapsto(\\tau m,wm)$ with inverse $(n,p)\\mapsto\\delta n+sp$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 06A8, lemma-differential-seq-smooth: split exactness, expanded by the retraction and the quotient sequence rather than used as a black box"
-   }
-  },
-  {
-   "text": "Give $\\kappa=\\kappa(z)$ its $B$-algebra structure through the germ map $B\\to S$ and the residue map $S\\to\\kappa$. Tensor the four splitting identities of the preceding step with $\\kappa$ over $B$. Functoriality of module base change preserves sums, composites and identities, so $\\delta\\otimes1$ still has left inverse $\\tau\\otimes1$, $w\\otimes1$ still has right inverse $s\\otimes1$, and $(\\delta\\otimes1)(\\tau\\otimes1)+(s\\otimes1)(w\\otimes1)=\\mathrm{id}$. For $v\\in\\ker(w\\otimes1)$ this last identity gives $v=(\\delta\\otimes1)(\\tau\\otimes1)(v)$. Thus $0\\to N\\otimes_B\\kappa\\to M\\otimes_B\\kappa\\to P\\otimes_B\\kappa\\to0$ is exact. No flatness of $\\kappa$ over $B$ is needed.",
-   "uses": [
-    "def-weil-module-base-change"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 06A8, lemma-differential-seq-smooth, split exactness; passage to an arbitrary module base change by the displayed splitting identities"
-   }
-  },
-  {
-   "text": "Let $\\mathfrak q\\subset B$ correspond to $z$ and let $\\mathfrak p\\subset A$ be its inverse image. The affine stalk and Spec-map stalk formulas identify $R=A_{\\mathfrak p}$, $S=B_{\\mathfrak q}$ and $R\\to S$ with $a/t\\mapsto\\bar a/\\bar t$. The quotient-localization lemma gives $I=JR$ and $S=R/I$. Products of fractions show $I^2=J^2R$. Hence $(J/J^2)_{\\mathfrak q}\\cong I/I^2$ by $[j]/\\bar t\\mapsto[j/t]$. To check the inverse, every element of $I$ is $j/t$ after taking a common denominator; if $j/t\\in J^2R$, clearing the finitely many denominators gives $u j\\in J^2$ for some $u\\notin\\mathfrak p$, exactly the condition $[j]/\\bar t=0$ in the localized quotient. Balancing gives $N\\otimes_B\\kappa\\cong(I/I^2)\\otimes_S\\kappa$: denominators $\\bar t\\notin\\mathfrak q$ act by units on $\\kappa$, so the inverse to inserting the localization sends $([j]/\\bar t)\\otimes c$ to $[j]\\otimes\\bar t^{-1}c$.",
-   "uses": [
-    "lem-weil-pbc-affine-open-stalk-localization",
-    "lem-weil-pbc-spec-map-stalk-localization",
-    "lem-weil-pbc-localization-at-prime-of-quotient",
-    "def-weil-module-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00CT, proposition-localize-quotient; Schemes Tag 01HV, lemma-spec-sheaves (6); conormal localization and tensor identification checked on fractions"
-   }
-  },
-  {
-   "text": "The affine description of the relative differential sheaf and the tilde-stalk localization formula identify $\\Omega_{X/k,x}=(\\Omega_{A/k})_{\\mathfrak p}$ and $\\Omega_{Z/k,z}=(\\Omega_{B/k})_{\\mathfrak q}$, with $\\mathrm da$ corresponding to the germ of $\\mathrm da$. Thus $M\\otimes_B\\kappa\\cong\\Omega_{X/k,x}\\otimes_R\\kappa$ by $(b\\otimes\\eta)\\otimes c\\mapsto\\eta_x\\otimes\\bar b c$, and $P\\otimes_B\\kappa\\cong\\Omega_{Z/k,z}\\otimes_S\\kappa$ by $\\eta\\otimes c\\mapsto\\eta_z\\otimes c$. Their inverses clear denominators as in the preceding step, e.g. $(\\eta/t)\\otimes c\\mapsto(1\\otimes\\eta)\\otimes\\bar t^{-1}c$. Under these identifications the arrows of the exact sequence in step 6 are the asserted canonical arrows. In particular, write $f\\in I$ as $j/t$ with $j\\in J$, $t\\notin\\mathfrak p$. The Leibniz rule gives $\\mathrm d(j/t)=t^{-1}\\mathrm dj-jt^{-2}\\mathrm dt$; the second term vanishes after tensoring with $\\kappa$ because $j$ has zero residue. The first arrow therefore sends $[f]\\otimes1$ to $\\mathrm df\\otimes1$. The second arrow sends the germ of $\\mathrm da$ to the germ of $\\mathrm d\\bar a$, and respects the same denominator rule, so it is exactly the map induced by $R\\to S$. This proves every clause.",
-   "uses": [
-    "def-sc-relative-differential-sheaf",
-    "lem-weil-pbc-spec-tilde-stalk-localization",
-    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-jacobi-zariski-differential-maps",
     "def-weil-module-base-change"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 06AA, lemma-differentials-relative-immersion-smooth; lemma-differentials-affine; Schemes Tag 01HV (7), lemma-spec-sheaves; arrow formulas checked on fractions"
+    "place": "Tag 06AA, conormal exact sequence for an immersion smooth over the base; implemented directly on stalks using formal smoothness and the universal property of relative differentials."
+   }
+  },
+  {
+   "text": "Transport the two algebraic maps through the differential-stalk fibre equivalences. Linear equivalences preserve injectivity, exactness and surjectivity. Their germ formulas identify the first arrow on kernel elements. The identity germ_X(a) mapped by i.stalkMap = germ_Z(i.app(a)) proves exactly the stated formula for the second arrow. These are the actual stalk kernel, residue field, relative differential sheaves and section germs in the unchanged statement.",
+   "uses": [
+    "def-sc-relative-differential-sheaf",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 06AA, conormal exact sequence for an immersion smooth over the base; implemented directly on stalks using formal smoothness and the universal property of relative differentials."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
-  "def-weil-affine-spectrum",
-  "def-weil-pbc-kahler-differentials",
-  "def-sbc-first-order-thickening",
+  "def-weil-closed-immersion",
   "def-sbc-smooth-morphisms",
-  "def-weil-open-immersion",
-  "lem-weil-pbc-jacobi-zariski-differential-maps",
-  "def-weil-module-base-change",
-  "lem-weil-pbc-affine-open-stalk-localization",
-  "lem-weil-pbc-spec-map-stalk-localization",
-  "lem-weil-pbc-localization-at-prime-of-quotient",
   "def-sc-relative-differential-sheaf",
-  "lem-weil-pbc-spec-tilde-stalk-localization"
+  "def-weil-pbc-kahler-differentials",
+  "def-pc-module-stalk-functor",
+  "def-weil-module-base-change",
+  "lem-weil-pbc-jacobi-zariski-differential-maps"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 06AA (lemma-differentials-relative-immersion-smooth), with affine proof expanded using Algebra Tags 00RU, 02HP, 06A8 and the infinitesimal lifting definition in More on Morphisms Tag 02H0; residue-field base change proved by the splitting identities."
+  "place": "Tag 06AA, with Algebra Tags 00RU and 02HP and More on Morphisms Tag 02H0. Direct-stalk Lean implementation by C9, 2026-10-19: the stalk-skyscraper adjunction identifies differential stalks with algebraic Kahler differentials; Mathlib supplies the square-zero lift, the corresponding conormal retraction and right exactness after tensoring."
  },
  "mathlib_searches": [
   {
@@ -344,5 +302,15 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "The canonical arrows are specified by their values on generating differential germs. Helpers package existing tensor products, the stalk functor, ideal cotangent classes, and the existing universal derivation. Since the stalk map is surjective and its kernel annihilates its cotangent quotient, tensoring this quotient over R is canonically tensoring over S = R/I. The landed stalk-functor node is added to stmt_deps."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261019T160418-L-3355149",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
