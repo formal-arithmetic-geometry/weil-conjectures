@@ -20,7 +20,10 @@
   "det-sp-tower-classes",
   "sk-def-sp-normalized-towers",
   "def-nagata-projective-space-base-change",
-  "sk-def-sfb-dc-setting"
+  "sk-def-sfb-dc-setting",
+  "def-zl-ringed-site-duality-model",
+  "lem-trf-proetale-pullback-stalk-coherence",
+  "def-sp-tower-shriek-realization"
  ],
  "proof": [
   {
@@ -524,5 +527,57 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityTowerP1Adjunction",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerP1.exists_towerP1Adjunction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerP1.domain",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.C",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.TensorData",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.TensorData.symmetry",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.TensorData.rightUnit",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.TensorData.leftUnit",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.projection",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.Presentation",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.Presentation.F",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.Presentation.G",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.Presentation.trace",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.Presentation.delta",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.Presentation.line2Iso",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.Presentation.diagonalPull",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.Presentation.sourceUnit",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.Presentation.exchange",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.Presentation.diagonalProjection",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.Maps",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.left",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.rightRestricted",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.epsilon",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.eta",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.finiteDomain",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.finiteF",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.finiteG",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.evaluation",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.FiniteMaps",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.finiteLeft",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.finiteRight",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.uniform",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.AdjunctionData",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.exists_towerP1Adjunction"
+  ],
+  "file": "lean/Sheaf/Paper/SmoothPurityTowerP1Adjunction.lean",
+  "statement": "theorem exists_towerP1Adjunction (S : Scheme.{u}) (hS : IsUnit (l : Γ(S, ⊤))) : ∀ p : Presentation l E S hS, ∃ d : Maps l E p, Nonempty (AdjunctionData l E d)",
+  "branch": "sheaf-dag",
+  "by": "NG",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b3f933847",
+  "group": "NG",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed 20e016916001. R1 (H2) resolved: sk-lem-sp-tower-bound replaced in stmt_deps by new existing:true def node def-sp-tower-shriek-realization; statement verbatim with live SmoothPurityTowerBound, real data def (b.realization T).mapDerivedCategory, no other owner node. R2 (H3) resolved: theorem now ∀ p : Presentation, ∃ d : Maps p, Nonempty (AdjunctionData d); only line changed in the module. Under ∀ re-checked every Presentation field is pinned: Operations/Geometry HEq to generic; comp via comp_termwise/comp_evaluation; TensorData model normalizations; unitIso HEq types agree (with_unfolding_all rfl probe compiled); identity via identity_normalization; line2 via LinePullback.normalization. Maps and AdjunctionData carry no free data. Mechanical finding: proEtaleStalkIdentityPullback is .choose of the ∃! theorem in lem-trf-proetale-pullback-stalk-coherence, an object the theorem constructs → PASS on that point. Compile: nt_compile --json exit 0, no diagnostics, 22.9 s. Report has Worker report, Second reading by NG and Returned-delivery repairs. Advisory only: SpTowerShriek.* plain defs are owned by theorem node det-sp-tower-shriek-levels."
  }
 }
