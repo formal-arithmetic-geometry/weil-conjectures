@@ -9,43 +9,8 @@ public import Sheaf.AlgebraicGeometry.FiniteConstantCoefficientTransport
 public import Sheaf.AlgebraicGeometry.StrictTowerProperOpenArrows
 public import Sheaf.AlgebraicGeometry.ProperOpenInterchangeCoherence
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.CategoryTheory.DiagramSiteRealization
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
-import Mathlib.CategoryTheory.Sites.Limits
-import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Sheaf.Algebra.Homology.TowerEvaluationKInjective
-import Mathlib.Algebra.Homology.Functor
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
-import Sheaf.Paper.LocalizeRingedSiteMorphism
-import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
-import Sheaf.AlgebraicGeometry.DerivedOpenRestriction
-import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Sheaf.AlgebraicGeometry.ComparisonDirectImage
-import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.AlgebraicGeometry.ProperSupportSheafComposition
-import Sheaf.AlgebraicGeometry.StrictConstantTowerOperations
-import Sheaf.AlgebraicGeometry.StrictTowerOpenExtension
-import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-import Sheaf.CategoryTheory.Adjunction.CoefficientExchange
-import Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.Paper.IntegralFinitePullbackComposition
-import Sheaf.Paper.LocalizeRingedSiteMorphismGeneral
-import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 
 /-!
 # Normalized proper/open calculus on strict pro-etale towers
@@ -328,8 +293,28 @@ theorem gamma_isIso {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (h : k ≫ p = r ≫ i) (M : Derived B V)
     (hM : ∀ n : ℕ, Nonempty (ScalarEtaleOrigin B V ((ev B V n).obj M))) :
     IsIso ((gamma B k r p i h).app M) := by
-  sorry
+  have heval (n : ℕ) : IsIso ((ev B T n).map ((gamma B k r p i h).app M)) := by
+    let w := Classical.choice (hM n)
+    have heq := gamma_evaluation B k r p i h M n w
+    have : IsIso ((finiteSource B r i M n w).hom ≫
+        (ev B T n).map ((gamma B k r p i h).app M)) := by
+      rw [heq]
+      infer_instance
+    exact IsIso.of_isIso_comp_left (finiteSource B r i M n w).hom _
+  apply (DerivedCategory.isIso_iff _ _).2
+  intro q
+  apply (NatTrans.isIso_iff_isIso_app _).2
+  intro n
+  have := heval n.unop
+  exact (NatIso.isIso_map_iff
+    (((evaluation ℕᵒᵖ (Modules B T)).obj n).mapDerivedCategoryHomologyFunctorIso q)
+    ((gamma B k r p i h).app M)).2 (by
+      change IsIso ((DerivedCategory.homologyFunctor (Modules B T) q).map
+        ((ev B T n.unop).map ((gamma B k r p i h).app M)))
+      infer_instance)
 
+set_option backward.isDefEq.respectTransparency false in
+set_option linter.unusedVariables false in
 /-- Vertical, horizontal and base-change coherence for every commutative proper/open
 square, as equalities in derived strict-tower categories, without assuming evaluation
 faithful. Source: Stacks, Tags 0F7C, 0F7D and 0F7F, and blueprint, steps 5, 6, 10, 11
@@ -389,7 +374,88 @@ theorem normalizedProperOpenCalculus :
         (beta B c i₁ i b wi si).hom.app ((R B r).obj M) ≫
           (J B i₁).map ((exchange B d r₁ r c wr).app M) ≫
           (gamma B k₁ r₁ p₁ i₁ h₁).app ((G B d).obj M)) := by
-  sorry
+  refine ⟨?_, ?_, ?_⟩
+  · intro A C E B₀ D F k i j r₁ r₂ p₁ p₂ _ _ _ _ _ _ _ _ _ _ h₁ h₂ h M
+    have hs : alpha B k (r₁ ≫ r₂) (p₁ ≫ p₂) j h =
+        (((TwoSquare.mk _ _ _ _ (alpha B i r₂ p₂ j h₂)).vComp
+          (TwoSquare.mk _ _ _ _ (alpha B k r₁ p₁ i h₁))).whiskerRight
+            (gComp B p₁ p₂).hom).whiskerLeft (gComp B r₁ r₂).inv := by
+      ext N
+      simp only [TwoSquare.whiskerLeft_app, TwoSquare.whiskerRight_app,
+        TwoSquare.vComp_app]
+      apply (cancel_mono ((J B k).map ((gComp B r₁ r₂).hom.app N))).1
+      simpa [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app,
+        Iso.hom_inv_id_app, Functor.map_id, Category.comp_id,
+        TwoSquare.mk, TwoSquare.natTrans] using
+        (alpha_vertical B k i j r₁ r₂ p₁ p₂ h₁ h₂ h N).symm
+    have hm := congrArg (fun α ↦ (mateEquiv (adj B (r₁ ≫ r₂))
+      (adj B (p₁ ≫ p₂)) α).app M) hs
+    rw [conjugateEquiv_mateEquiv_vcomp _ ((adj B r₂).comp (adj B r₁)),
+      mateEquiv_conjugateEquiv_vcomp _ ((adj B p₂).comp (adj B p₁)),
+      mateEquiv_hcomp] at hm
+    simp only [TwoSquare.whiskerTop_app, TwoSquare.whiskerBottom_app,
+      TwoSquare.hComp_app] at hm
+    change (gamma B k (r₁ ≫ r₂) (p₁ ≫ p₂) j h).app M =
+      (J B j).map ((rComp B r₁ r₂).inv.app M) ≫
+        ((gamma B i r₂ p₂ j h₂).app ((R B r₁).obj M) ≫
+          (R B p₂).map ((gamma B k r₁ p₁ i h₁).app M)) ≫
+            (rComp B p₁ p₂).hom.app ((J B k).obj M) at hm
+    rw [hm]
+    simp [Category.assoc, Iso.hom_inv_id_app, Category.comp_id,
+      ← Functor.map_comp_assoc, Iso.hom_inv_id_app, Category.id_comp]
+  · intro A C E B₀ D F k l i j r p q _ _ _ _ _ _ _ _ _ _ _ h₁ h₂ h M
+    have hs : alpha B (k ≫ l) r q (i ≫ j) h =
+        (((TwoSquare.mk _ _ _ _ (alpha B k r p i h₁)).hComp
+          (TwoSquare.mk _ _ _ _ (alpha B l p q j h₂))).whiskerTop
+            (jComp B i j).inv).whiskerBottom (jComp B k l).hom := by
+      ext N
+      simp only [TwoSquare.whiskerTop_app, TwoSquare.whiskerBottom_app,
+        TwoSquare.hComp_app]
+      apply (cancel_epi ((G B q).map ((jComp B i j).hom.app N))).1
+      simpa [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app,
+        Functor.map_id, Category.id_comp, TwoSquare.mk, TwoSquare.natTrans] using
+        alpha_horizontal B k l i j r p q h₁ h₂ h N
+    have hm := congrArg (fun α ↦ (mateEquiv (adj B r) (adj B q) α).app M) hs
+    rw [mateEquiv_whiskerTop_whiskerBottom,
+      mateEquiv_vcomp (adj B r) (adj B p) (adj B q)] at hm
+    simp only [TwoSquare.whiskerLeft_app, TwoSquare.whiskerRight_app,
+      TwoSquare.vComp_app] at hm
+    simp only [Category.assoc] at hm
+    change (gamma B (k ≫ l) r q (i ≫ j) h).app M =
+      (jComp B i j).inv.app ((R B r).obj M) ≫
+        (J B j).map ((gamma B k r p i h₁).app M) ≫
+        (gamma B l p q j h₂).app ((J B k).obj M) ≫
+        (R B q).map ((jComp B k l).hom.app M) at hm
+    rw [hm]
+    simp [Category.assoc, ← Functor.map_comp]
+  · intro V W S T V₁ W₁ S₁ T₁ k i r p k₁ i₁ r₁ p₁ a b c d
+      _ _ _ _ _ _ _ _ _ _ _ _ h h₁ wk wi wp wr sk si sp sr M
+    let α := TwoSquare.mk _ _ _ _ (alpha B k r p i h)
+    let α₁ := TwoSquare.mk _ _ _ _ (alpha B k₁ r₁ p₁ i₁ h₁)
+    let δp := TwoSquare.mk _ _ _ _ (squareG B a p₁ p b wp).hom
+    let δr := TwoSquare.mk _ _ _ _ (squareG B d r₁ r c wr).hom
+    have hs : (α.hComp δp).whiskerBottom (beta B d k₁ k a wk sk).hom =
+        (δr.hComp α₁).whiskerTop (beta B c i₁ i b wi si).hom := by
+      ext N
+      simp only [TwoSquare.whiskerBottom_app, TwoSquare.whiskerTop_app,
+        TwoSquare.hComp_app, α, α₁, δp, δr, TwoSquare.mk, TwoSquare.natTrans]
+      apply (cancel_mono
+        ((J B k₁).map ((squareG B d r₁ r c wr).inv.app N))).1
+      simpa [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app,
+        Functor.map_id, Category.comp_id] using
+        alpha_baseChange B k i r p k₁ i₁ r₁ p₁ a b c d h h₁ wk wi wp wr sk si sp sr N
+    have hm := congrArg (fun σ ↦ (mateEquiv (adj B r) (adj B p₁) σ).app M) hs
+    rw [mateEquiv_whiskerBottom, mateEquiv_vcomp (adj B r) (adj B p) (adj B p₁)] at hm
+    have ht : mateEquiv (adj B r) (adj B p₁)
+        ((δr.hComp α₁).whiskerTop (beta B c i₁ i b wi si).hom) =
+        (mateEquiv (adj B r) (adj B p₁) (δr.hComp α₁)).whiskerRight
+          (beta B c i₁ i b wi si).hom := by
+      ext N
+      simp [mateEquiv, TwoSquare.whiskerTop, TwoSquare.whiskerRight]
+    rw [ht, mateEquiv_vcomp (adj B r) (adj B r₁) (adj B p₁)] at hm
+    simpa [TwoSquare.whiskerLeft_app, TwoSquare.whiskerRight_app,
+      TwoSquare.vComp_app, α, α₁, δp, δr, gamma, exchange,
+      TwoSquare.mk, TwoSquare.natTrans, Category.assoc] using hm
 
 /-- Identity normalizations of gamma in both directions.
 Source: Stacks, Tags 0F7B and 07A7, blueprint, steps 6 and 10
