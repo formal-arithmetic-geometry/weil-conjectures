@@ -1,0 +1,164 @@
+{
+ "id": "lem-zl-punctual-spectrum-exact-fibre",
+ "kind": "statement",
+ "title": "Exact Frobenius fibre realizing the finite-presentation punctual spectrum",
+ "statement": "Fix a finite-field datum $D=(k_0,k)$ of characteristic $p$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and an algebraic closure $\\overline{\\mathbf Q}_\\ell$ in a universe independent of the scheme universe. Let $Y_0$ be a finite-type $k_0$-scheme, not necessarily separated, and let $y\\in |Y_0|$ be a closed point. Write $\\mathcal C$ for its actual common-stage constructible Weil heart [def-weil-constructible-heart, def-weil-weil-sheaf-complex]. There exist a functor $V:\\mathcal C\\to\\operatorname{Mod}_{\\overline{\\mathbf Q}_\\ell}$ and a natural automorphism $\\phi:V\\xrightarrow{\\sim}V$ such that $V$ preserves finite limits and finite colimits, every $V(F)$ is finite-dimensional, and for every $F\\in\\mathcal C$ and $\\alpha\\in\\overline{\\mathbf Q}_\\ell$ the finite-presentation predicate $\\operatorname{SfPunctualEigenvalue}(F,y,\\alpha)$ of [def-weil-punctual-weights] holds if and only if $\\alpha$ is an eigenvalue of $\\phi_F$. The carrier universe of the vector spaces is $\\max(u+1,v)$, where $u$ and $v$ are respectively the scheme and coefficient universes.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Corollary 6.8.5, Lemma 6.8.7, Proposition 6.8.14 and Remark 6.8.15; normalized local Frobenius as in def-weil-local-frobenius-trace"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-constructible-heart",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-punctual-weights"
+ ],
+ "proof": [
+  {
+   "text": "Fix a closed point y. Its residue field is a finite extension of k0; choose a compatible embedding into k and its geometric lift x. Take completed geometric pullback to x, degree-zero cohomology and point sections, then rationalize and extend the finite coefficient field to Qbar. Use the constant-section-normalized intrinsic coefficient equivalences and scalar comparison maps of [lem-per-adic-heart-pullback-fibres]. The scalar unit and tower identities descend this functor to the common-stage category. Restrict along the Weil forgetful functor to obtain V. Every object is represented at a finite coefficient stage, where the constructible heart has finite-dimensional fibres, so V has finite-dimensional values.",
+   "uses": [
+    "def-weil-finite-field-fiber",
+    "def-weil-constructible-heart",
+    "def-weil-weil-sheaf-complex",
+    "lem-per-adic-heart-pullback-fibres",
+    "prop-weil-pbc-common-stage-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The fibre functor is exact. On any common finite lisse stratification, kernels and cokernels are computed in finite-dimensional continuous representations; fibre evaluation is exact (BS 6.8.5 and 6.8.7). Inversion of the uniformizer and field extension are exact, and the normalized coefficient equivalences preserve these kernels and cokernels. The exact heart restriction of completed pullback in [lem-a1-constructible-pullback-t-exact] gives the same intrinsic fibre. Finite diagrams and their equations descend to one coefficient field by [prop-weil-pbc-common-stage-calculus]. Forgetting a Weil isomorphism creates kernels and cokernels because Frobenius pullback is an exact autoequivalence. Thus V preserves finite limits and finite colimits. These computations are local around y: choose an affine open neighbourhood in Y0 and base change it to k. This neighbourhood is Frobenius-stable and separated, so the separated finite-type fibre assertions apply there even when Y0 is not globally separated. Pullback to this open and then to x agrees with pullback to x by [lem-pod-integral-pullback-composition].",
+   "uses": [
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-a1-constructible-pullback-t-exact",
+    "prop-weil-pbc-common-stage-calculus",
+    "lem-pod-integral-pullback-composition",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At a finite Weil presentation define the local operator by the specified iterate of point transport, the closed-point return comparison and the image of the iterated Weil isomorphism, exactly as [def-weil-local-frobenius-trace]. Pullback compositors and the Weil structure are isomorphisms. The point transport is invertible by the point-transport clause of [lem-weil-frobenius-cohomology-transport-iso], applied on the auxiliary separated model Spec(k0); this imposes no separatedness hypothesis on Y0. Iteration, cohomology and extension of scalars preserve these isomorphisms. A Weil morphism commutes with the iterated Weil isomorphisms by induction. Compose this square with naturality of point transport [lem-weil-frobenius-point-transport-natural] and of the pullback compositor [lem-pod-integral-pullback-composition]. The resulting local operators are natural. The composition/scalar equations of [lem-trf-integral-pullback-comparison-realization] and the point-transport/scalar equations of [lem-trf-local-frobenius-transport-normalization] identify these operators under coefficient enlargement, including the unit and tower identities. They therefore descend with V to a natural automorphism phi.",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "def-weil-weil-sheaf-complex",
+    "lem-weil-frobenius-point-transport-natural",
+    "lem-pod-integral-pullback-composition",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-trf-local-frobenius-transport-normalization",
+    "lem-weil-frobenius-cohomology-transport-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every Weil object, its structure isomorphism and inverse, and every finite list of morphism equations descend to a finite coefficient field, by the finite-diagram and equality clauses of [prop-weil-pbc-common-stage-calculus]. On such a presentation the normalized fibre comparisons conjugate phi to extension of scalars of localClosedFrobeniusCohomology in degree zero. Different embeddings of the residue field give conjugate local operators by [lem-weil-local-frobenius-conjugacy-class]. Consequently any witness in [def-weil-punctual-weights] has the same eigenvalues as phi on V(F). Conversely choose a finite Weil presentation of F and the fixed embedding at y: every eigenvalue of phi yields an eigenvalue at that presentation and hence a witness for SfPunctualEigenvalue. This proves the equivalence for every F and alpha. The zero fibre has no eigenvalues; an empty scheme has no closed point to instantiate the assertion.",
+   "uses": [
+    "prop-weil-pbc-common-stage-calculus",
+    "def-weil-local-frobenius-trace",
+    "lem-weil-local-frobenius-conjugacy-class",
+    "def-weil-punctual-weights"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-constructible-heart",
+  "def-weil-finite-field-fiber",
+  "def-weil-local-frobenius-trace",
+  "def-weil-punctual-weights",
+  "def-weil-weil-sheaf-complex",
+  "lem-a1-constructible-pullback-t-exact",
+  "lem-per-adic-heart-pullback-fibres",
+  "lem-pod-integral-pullback-composition",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-trf-local-frobenius-transport-normalization",
+  "lem-weil-frobenius-cohomology-transport-iso",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-weil-local-frobenius-conjugacy-class",
+  "prop-weil-pbc-common-stage-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Corollary 6.8.5, Lemma 6.8.7, Proposition 6.8.14 and Remark 6.8.15; normalized local Frobenius as in def-weil-local-frobenius-trace"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact finite dimensional geometric stalk functor with natural local Frobenius whose eigenvalues agree with all finite coefficient presentations",
+   "results": "AlgebraicGeometry.LocallyOfFiniteType.stalkMap; AlgebraicGeometry.exists_lift_of_germInjective_aux; AlgHom.IsArithFrobAt.isArithFrobAt_localize; AlgebraicGeometry.isReduced_stalk_of_isReduced; AlgebraicGeometry.exists_lift_of_germInjective; Algebra.IsSmoothAt; AlgebraicGeometry.Scheme.Hom.instIsLocalHomCarrierStalkCommRingCatPresheafCoeContinuousMapCarrierCarrierHomTopCatBaseRingHomHomStalkMap; AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo'",
+   "date": "2026-10-19",
+   "verdict": "no match: Mathlib does not identify the normalized intrinsic adic Weil fibre with finite-presentation punctual eigenvalues"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.End.HasEigenvalue",
+   "results": "Module.End.HasEigenvalue; Module.End.hasEigenvalue_of_hasEigenvector; Module.End.hasEigenvalue_of_hasGenEigenvalue; Module.End.HasEigenvalue.exists_hasEigenvector; Module.End.hasGenEigenvalue_of_hasEigenvalue; Module.End.hasGenEigenvalue_iff_hasEigenvalue; Module.End.Eigenvalues.val_mk; Module.End.hasEigenvalue_iff",
+   "date": "2026-10-19",
+   "verdict": "no match: Mathlib does not identify the normalized intrinsic adic Weil fibre with finite-presentation punctual eigenvalues"
+  },
+  {
+   "tool": "grep",
+   "query": "hasEigenvalue_of_hasEigenvector_mem_range|wfRationalStalkExact|SfPunctualEigenvalue",
+   "results": "0 hits",
+   "date": "2026-10-19",
+   "verdict": "no match: Mathlib does not identify the normalized intrinsic adic Weil fibre with finite-presentation punctual eigenvalues"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact geometric coefficient fibre of constructible rational Weil sheaves with natural Frobenius and eigenvalues independent of finite presentation",
+   "results": "WittVector.coeff_frobenius_charP; Perfection.coeff_frobenius; SheafOfModules.quasicoherentDataOfIsFinitePresentation; WittVector.frobeniusFun; WittVector.instIsocrystalStandardOneDimIsocrystal; WittVector.iterate_frobenius_coeff; WittVector.coeff_frobeniusFun; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+   "date": "2026-10-19",
+   "verdict": "no match: Mathlib does not identify the normalized intrinsic adic Weil fibre with finite-presentation punctual eigenvalues"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilMixedUpperBounds",
+  "date": "2026-10-19",
+  "group": "R3"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-d-dl-general-weights",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-d-dl-general-weights",
+   "place": "Final closure sentence: subobjects and quotients preserve the mixed upper bound, specifically the exact Frobenius-stable fibre argument for successive pure quotients",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PunctualSpectrumExactFibre",
+  "file": "lean/Sheaf/Paper/PunctualSpectrumExactFibre.lean",
+  "declaration": "WeilConjectures.sfPunctualSpectrumExactFibre",
+  "statement": "theorem sfPunctualSpectrumExactFibre\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (Qbar : Type v) [Field Qbar] [Algebra (Padic l) Qbar]\n    [IsAlgClosure (Padic l) Qbar]\n    (Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]\n    (y : {y : Y₀.left // y ∈ closedPoints Y₀.left}) :\n    ∃ V : sfCommonStageWeilSheaf D l hl Y₀ Qbar ⥤ ModuleCat.{max (u + 1) v} Qbar,\n      ∃ φ : V ≅ V, PreservesFiniteLimits V ∧ PreservesFiniteColimits V ∧\n        (∀ F, FiniteDimensional Qbar (V.obj F)) ∧\n        ∀ F α, SfPunctualEigenvalue D l hl Qbar Y₀ F y α ↔\n          Module.End.HasEigenvalue (φ.hom.app F).hom α",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261019T093550-L-2327897",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261019T093550-L-2327897",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

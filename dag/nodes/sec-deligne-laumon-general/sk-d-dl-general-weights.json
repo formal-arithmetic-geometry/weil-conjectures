@@ -25,9 +25,51 @@
   "lem-a1-constructible-pullback-t-exact",
   "def-zl-field-weil-shriek-shift-data"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For geometric Frobenius extract ConstructibleTruncationCompatibility from constructibleTruncations_exists [prop-constructible-truncations]. The uniqueness theorem for the common-stage standard t-structure [def-weil-constructible-heart] identifies its chosen t-structure with sfWeilStandardTStructure. Invertible structures are subsingletons, so transport the residue-field inverses to sfWeilPrimeInvertible. The two components of this package give the unique counit-normalized upper and unit-normalized lower truncation comparisons.",
+   "uses": [
+    "prop-constructible-truncations",
+    "def-weil-constructible-heart"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The existing Frobenius/cohomology definition composes those comparisons with the recorded shift comparison. For any integer b, tau-ge-b tau-le-b K is both LE b and GE b; the standard shift lemmas put its shift by b in both degree-zero classes. The common-stage heart criterion [def-weil-constructible-heart] proves sfWeilCohomology_mem. All definitions and public signatures remain unchanged.",
+   "uses": [
+    "def-weil-constructible-heart",
+    "def-zl-field-weil-shriek-shift-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let P be the property of being punctually pure of some weight v at most w. It is closed under isomorphisms by composing a finite Weil presentation with the given isomorphism. By [lem-zl-punctual-spectrum-exact-fibre], at every closed point the spectrum is realized by a natural Frobenius automorphism of an exact finite-dimensional fibre. A mono induces an injective intertwiner and an epi a surjective intertwiner. The already proved source lemmas FrobeniusModule.hasEigenvalue_of_injective and hasEigenvalue_of_surjective transfer eigenvalues in the required direction. Thus P is closed under subobjects and quotients.",
+   "uses": [
+    "def-weil-punctual-weights",
+    "lem-zl-punctual-spectrum-exact-fibre"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "SfIsMixedOfWeightsAtMost is definitionally the finite mono-chain presentation of P.filtrationClosure. Rewrite with the already proved ObjectProperty.filtrationClosure_iff in WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions. Its proved subobject and quotient closure instances give of_mono and of_epi from the preceding step. Its extension closure gives of_mono_cokernel by applying prop_X2_of_shortExact to the canonical short exact sequence of a mono and its cokernel. This is precisely intersection, image and splicing of filtrations, without constructing them again in the Weil category.",
+   "uses": [
+    "def-weil-punctual-weights"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-constructible-heart",
+  "def-weil-punctual-weights",
+  "def-zl-field-weil-shriek-shift-data",
+  "lem-zl-punctual-spectrum-exact-fibre",
+  "prop-constructible-truncations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-d-dl-general-weights/_section.md",
+  "place": "Cohomology definition and final subobject/quotient/extension closure sentence; reuse of proved source filtration-closure and eigenvalue-transfer APIs"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -305,5 +347,15 @@
   "group": "Q52",
   "result": "pass",
   "note": "Clause-by-clause match: sheaf bound = recorded SfIsMixedOfWeightsAtMost (mono chain from zero, last term ≅ F, cokernels punctually pure of weight v≤w with ‖ι α‖=#κ(y)^(v/2)); SfIsMixed = ∃ w : ℝ; complex bound ∀ b : ℤ at w+b on sfCommonStageWeilComplex; H^b = (τ≥b τ≤b K)[b] as in prop-constructible-truncations, Weil structure from comparisons fixed by stated unit/counit equations plus the standard shift fieldCommonPullShift; closure theorems of_mono/of_epi/of_mono_cokernel correct, proofs sorry. Field embedding Qbar →+* ℂ, finite type = LocallyOfFiniteType + QuasiCompact, independent universes u, v. Edge cases m=0, empty scheme, negative b, zero cohomology covered. AdicPunctualWeights change only widens iota to an embedding; all 5 importers compile clean. Theorem stmt_deps: the definition needs the Frobenius/H^b comparison and t-exactness these theorems construct, so they stay. Compiles: both delivered files clean twice with no messages; 3 importers within the normal 60 s limit; the last 2 with a /tmp copy of the tool at a 400 s limit after the normal run timed out on the unchanged LocalFrobeniusTransportNormalization (201 s) under load. No hollow definitions, docstrings present, 6 sorrys all in theorem proofs, statement verbatim, report sections present."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261019T093550-L-2327897",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

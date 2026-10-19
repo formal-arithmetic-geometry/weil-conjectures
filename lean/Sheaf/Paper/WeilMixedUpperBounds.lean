@@ -9,6 +9,10 @@ public import Sheaf.Paper.AdicPunctualWeights
 public import Sheaf.Paper.ConstructiblePullbackTExact
 public import Sheaf.Paper.FieldWeilShriekShiftData
 
+import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions
+import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Map
+import Sheaf.Paper.PunctualSpectrumExactFibre
+
 /-! # Mixed upper bounds on the common-stage Weil categories
 
 Source: blueprint main-20261015, sec-deligne-laumon-general,
@@ -52,6 +56,28 @@ def sfWeilCohomologyUnderlying (b : ℤ) :
       generalAlgebraicallyClosedConstructibleCategory l Qbar (D.geometricFiber Y₀).left :=
   constructibleTruncationCohomology (sfWeilStandardTStructure D l hl Qbar Y₀) b
 
+private theorem sfWeilFrobeniusTruncationCompatibility :
+    ConstructibleTruncationCompatibility (sfWeilStandardTStructure D l hl Qbar Y₀)
+      (sfWeilStandardTStructure D l hl Qbar Y₀)
+      (sfCommonStageWeilFrobeniusPullback D l hl Y₀ Qbar) := by
+  let : LocallyOfFiniteType ((D.geometricFiber Y₀).left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (LocallyOfFiniteType
+      (pullback.snd Y₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
+  let : QuasiCompact ((D.geometricFiber Y₀).left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (QuasiCompact
+      (pullback.snd Y₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
+  obtain ⟨t, s, units, h⟩ :=
+    constructibleTruncations_exists D l hl (D.geometricFiber Y₀).left Qbar
+  have hs : s = sfWeilStandardTStructure D l hl Qbar Y₀ :=
+    (sfCommonStageStandardTStructure_existsUnique l (D.geometricFiber Y₀).left
+      Qbar D hl).unique ⟨h.2.1, h.2.2.2.1⟩
+      (sfCommonStageStandardTStructure_existsUnique l (D.geometricFiber Y₀).left
+        Qbar D hl).exists.choose_spec
+  have hc := h.2.2.2.2.2.2.2 (D.geometricFrobenius Y₀)
+  have hu : units = fun x ↦ sfWeilPrimeInvertible D l hl Y₀ x := Subsingleton.elim _ _
+  rw [hs, hu] at hc
+  exact hc
+
 /-- Upper truncation commutes with the actual fixed-pair Frobenius pullback,
 uniquely normalized by its counit. Source: blueprint cohomology clause;
 Bhatt--Scholze 6.8.11(3), 6.8.15 (blueprint: sk-d-dl-general-weights).
@@ -70,7 +96,7 @@ theorem sfWeilFrobeniusTruncLE_existsUnique (b : ℤ) :
           ((sfCommonStageWeilFrobeniusPullback D l hl Y₀ Qbar).obj K) =
         (sfCommonStageWeilFrobeniusPullback D l hl Y₀ Qbar).map
           (((sfWeilStandardTStructure D l hl Qbar Y₀).truncLEι b).app K) := by
-  sorry
+  exact ((sfWeilFrobeniusTruncationCompatibility D l hl Qbar Y₀).1 b).1
 
 /-- The uniquely counit-normalized upper comparison, on the actual pullback.
 Source: blueprint cohomology clause (blueprint: sk-d-dl-general-weights). -/
@@ -93,7 +119,7 @@ theorem sfWeilFrobeniusTruncGE_existsUnique (b : ℤ) :
           (((sfWeilStandardTStructure D l hl Qbar Y₀).truncGEπ b).app K) ≫ e.hom.app K =
         ((sfWeilStandardTStructure D l hl Qbar Y₀).truncGEπ b).app
           ((sfCommonStageWeilFrobeniusPullback D l hl Y₀ Qbar).obj K) := by
-  sorry
+  exact ((sfWeilFrobeniusTruncationCompatibility D l hl Qbar Y₀).1 b).2
 
 /-- The uniquely unit-normalized lower comparison, on the actual pullback.
 Source: blueprint cohomology clause (blueprint: sk-d-dl-general-weights). -/
@@ -143,7 +169,19 @@ theorem sfWeilCohomology_mem (b : ℤ) (K : sfCommonStageWeilComplex D l hl Y₀
     sfCommonStageHeartProperty l (D.geometricFiber Y₀).left Qbar
       (((IsoAlgebra.mapOfNatIso
         (sfWeilCohomologyFrobenius D l hl Qbar Y₀ b)).obj K).carrier) := by
-  sorry
+  let : LocallyOfFiniteType ((D.geometricFiber Y₀).left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (LocallyOfFiniteType
+      (pullback.snd Y₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
+  let : QuasiCompact ((D.geometricFiber Y₀).left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (QuasiCompact
+      (pullback.snd Y₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
+  rw [← (sfCommonStageHeart_properties l (D.geometricFiber Y₀).left Qbar D hl).1]
+  let t := sfWeilStandardTStructure D l hl Qbar Y₀
+  change t.heart (((t.truncGE b).obj ((t.truncLE b).obj K.carrier))⟦b⟧)
+  rw [t.mem_heart_iff]
+  constructor
+  · exact t.isLE_shift _ b b 0
+  · exact t.isGE_shift _ b b 0
 
 /-- The canonical cohomology functor on fixed pairs: its structure is the canonical
 Frobenius/cohomology comparison followed by H^b of the given Weil isomorphism.
@@ -169,6 +207,65 @@ def SfComplexIsMixedOfWeightsAtMost (iota : Qbar →+* ℂ)
   ∀ b : ℤ, SfIsMixedOfWeightsAtMost D l hl Qbar Y₀ iota
     ((sfWeilCohomology D l hl Qbar Y₀ b).obj K) (w + (b : ℝ))
 
+private def sfPureWeightLE (iota : Qbar →+* ℂ) (w : ℝ) :
+    ObjectProperty (sfCommonStageWeilSheaf D l hl Y₀ Qbar) :=
+  fun F ↦ ∃ v : ℝ, v ≤ w ∧ SfIsPunctuallyPureOfWeight D l hl Qbar Y₀ iota F v
+
+private instance sfPureWeightLE_iso (iota : Qbar →+* ℂ) (w : ℝ) :
+    (sfPureWeightLE D l hl Qbar Y₀ iota w).IsClosedUnderIsomorphisms where
+  of_iso {F G} e h := by
+    obtain ⟨v, hv, hp⟩ := h
+    refine ⟨v, hv, fun y α hα ↦ hp y α ?_⟩
+    obtain ⟨L, K, ⟨a⟩, hK⟩ := hα
+    exact ⟨L, K, ⟨((ObjectProperty.ι _).mapIso e) ≪≫ a⟩, hK⟩
+
+private instance sfPureWeightLE_subobjects (iota : Qbar →+* ℂ) (w : ℝ) :
+    (sfPureWeightLE D l hl Qbar Y₀ iota w).IsClosedUnderSubobjects where
+  prop_of_mono {F G} f _ h := by
+    obtain ⟨v, hv, hp⟩ := h
+    refine ⟨v, hv, fun y α hα ↦ hp y α ?_⟩
+    obtain ⟨V, φ, hlim, hcolim, hfd, hs⟩ :=
+      sfPunctualSpectrumExactFibre D l hl Qbar Y₀ y
+    let := hlim
+    let := hcolim
+    let := hfd F
+    let := hfd G
+    let M : FrobeniusModule Qbar :=
+      ⟨V.obj F, (φ.app F).toLinearEquiv⟩
+    let N : FrobeniusModule Qbar :=
+      ⟨V.obj G, (φ.app G).toLinearEquiv⟩
+    apply (hs G α).2
+    exact FrobeniusModule.hasEigenvalue_of_injective (M := M) (N := N)
+      (V.map f).hom (fun x ↦ congrArg (fun g ↦ g x) (φ.hom.naturality f).symm)
+      ((ModuleCat.mono_iff_injective _).1 inferInstance) ((hs F α).1 hα)
+
+private instance sfPureWeightLE_quotients (iota : Qbar →+* ℂ) (w : ℝ) :
+    (sfPureWeightLE D l hl Qbar Y₀ iota w).IsClosedUnderQuotients where
+  prop_of_epi {F G} f _ h := by
+    obtain ⟨v, hv, hp⟩ := h
+    refine ⟨v, hv, fun y α hα ↦ hp y α ?_⟩
+    obtain ⟨V, φ, hlim, hcolim, hfd, hs⟩ :=
+      sfPunctualSpectrumExactFibre D l hl Qbar Y₀ y
+    let := hlim
+    let := hcolim
+    let := hfd F
+    let := hfd G
+    let M : FrobeniusModule Qbar :=
+      ⟨V.obj F, (φ.app F).toLinearEquiv⟩
+    let N : FrobeniusModule Qbar :=
+      ⟨V.obj G, (φ.app G).toLinearEquiv⟩
+    apply (hs F α).2
+    exact FrobeniusModule.hasEigenvalue_of_surjective (M := M) (N := N)
+      (V.map f).hom (fun x ↦ congrArg (fun g ↦ g x) (φ.hom.naturality f).symm)
+      ((ModuleCat.epi_iff_surjective _).1 inferInstance) ((hs G α).1 hα)
+
+private theorem sfMixed_iff_filtrationClosure (iota : Qbar →+* ℂ) (w : ℝ)
+    (F : sfCommonStageWeilSheaf D l hl Y₀ Qbar) :
+    SfIsMixedOfWeightsAtMost D l hl Qbar Y₀ iota F w ↔
+      (sfPureWeightLE D l hl Qbar Y₀ iota w).filtrationClosure F := by
+  rw [ObjectProperty.filtrationClosure_iff]
+  rfl
+
 /-- Subobjects preserve the mixed upper bound.
 Source: blueprint closure sentence (blueprint: sk-d-dl-general-weights).
 Proof: intersect the finite filtration with the subobject. The new successive
@@ -178,7 +275,8 @@ theorem SfIsMixedOfWeightsAtMost.of_mono (iota : Qbar →+* ℂ) (w : ℝ)
     {F G : sfCommonStageWeilSheaf D l hl Y₀ Qbar} (i : G ⟶ F) [Mono i]
     (h : SfIsMixedOfWeightsAtMost D l hl Qbar Y₀ iota F w) :
     SfIsMixedOfWeightsAtMost D l hl Qbar Y₀ iota G w := by
-  sorry
+  rw [sfMixed_iff_filtrationClosure] at h ⊢
+  exact ObjectProperty.prop_of_mono _ i h
 
 /-- Quotients preserve the mixed upper bound.
 Source: blueprint closure sentence (blueprint: sk-d-dl-general-weights).
@@ -189,7 +287,8 @@ theorem SfIsMixedOfWeightsAtMost.of_epi (iota : Qbar →+* ℂ) (w : ℝ)
     {F G : sfCommonStageWeilSheaf D l hl Y₀ Qbar} (p : F ⟶ G) [Epi p]
     (h : SfIsMixedOfWeightsAtMost D l hl Qbar Y₀ iota F w) :
     SfIsMixedOfWeightsAtMost D l hl Qbar Y₀ iota G w := by
-  sorry
+  rw [sfMixed_iff_filtrationClosure] at h ⊢
+  exact ObjectProperty.prop_of_epi _ p h
 
 /-- Extensions preserve the mixed upper bound.
 Source: blueprint closure sentence (blueprint: sk-d-dl-general-weights).
@@ -201,6 +300,9 @@ theorem SfIsMixedOfWeightsAtMost.of_mono_cokernel (iota : Qbar →+* ℂ) (w : �
     (hG : SfIsMixedOfWeightsAtMost D l hl Qbar Y₀ iota G w)
     (hQ : SfIsMixedOfWeightsAtMost D l hl Qbar Y₀ iota (cokernel i) w) :
     SfIsMixedOfWeightsAtMost D l hl Qbar Y₀ iota F w := by
-  sorry
+  rw [sfMixed_iff_filtrationClosure] at hG hQ ⊢
+  exact ObjectProperty.prop_X₂_of_shortExact _
+    (ShortComplex.ShortExact.mk' (ShortComplex.exact_cokernel i) inferInstance inferInstance)
+    hG hQ
 
 end WeilConjectures
