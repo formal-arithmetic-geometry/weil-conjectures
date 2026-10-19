@@ -14,6 +14,7 @@ import Sheaf.AlgebraicGeometry.LfpTensorSingle
 import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 import all Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
 import all Sheaf.AlgebraicGeometry.ProEtaleAbelianClosedSupport
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 
 
 /-! # BoundedConstructibleTensorSingle
