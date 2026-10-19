@@ -8,8 +8,6 @@ module
 public import Sheaf.Paper.PurityAffineLineDatum
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!
 # Finite-type and Noetherian geometry of the affine-line support pair
@@ -67,6 +65,38 @@ theorem affineLine_support_geometry (k : Type u) [Field k] (Y : Scheme.{u})
       QuasiCompact (puncturedProjection Y ≫ Y ↘ Spec (.of k))) ∧
     IsNoetherian Y ∧ IsNoetherian (Line Y) ∧ IsNoetherian (Punctured Y) ∧
     QuasiCompact (openImmersion Y) := by
-  sorry
+  have : IsLocallyNoetherian Y :=
+    LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (.of k))
+  have : CompactSpace Y :=
+    QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (.of k))
+  have : IsNoetherian Y := ⟨⟩
+  have : LocallyOfFiniteType (lineProjection Y) := by
+    dsimp only [lineProjection]
+    infer_instance
+  have : QuasiCompact (lineProjection Y) := by
+    dsimp only [lineProjection]
+    infer_instance
+  have : IsLocallyNoetherian (Line Y) :=
+    LocallyOfFiniteType.isLocallyNoetherian (lineProjection Y)
+  have : CompactSpace (Line Y) :=
+    QuasiCompact.compactSpace_of_compactSpace (lineProjection Y)
+  have : IsNoetherian (Line Y) := ⟨⟩
+  have : IsOpenImmersion (openImmersion Y) := by
+    dsimp only [openImmersion]
+    infer_instance
+  have : QuasiCompact (openImmersion Y) := inferInstance
+  have : LocallyOfFiniteType (puncturedProjection Y) := by
+    dsimp only [puncturedProjection]
+    infer_instance
+  have : QuasiCompact (puncturedProjection Y) := by
+    dsimp only [puncturedProjection]
+    infer_instance
+  have : IsLocallyNoetherian (Punctured Y) :=
+    LocallyOfFiniteType.isLocallyNoetherian (puncturedProjection Y)
+  have : CompactSpace (Punctured Y) :=
+    QuasiCompact.compactSpace_of_compactSpace (puncturedProjection Y)
+  have : IsNoetherian (Punctured Y) := ⟨⟩
+  exact ⟨⟨inferInstance, inferInstance⟩, ⟨inferInstance, inferInstance⟩,
+    inferInstance, inferInstance, inferInstance, inferInstance⟩
 
 end WeilConjectures.PurityFiniteSetting

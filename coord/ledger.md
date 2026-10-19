@@ -17141,3 +17141,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:32 L: merged deliver/B3/Sheaf.Paper.SfRationalBoundedConeTorsion (stage 3; reviewer PASS; first push; landing 20261019T093254-L-2287490 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:32 L: merged deliver/B5/Sheaf.AlgebraicGeometry.EtaleClosedCoprojection (stage 3; reviewer PASS; first push; landing 20261019T093255-L-2287644 (interface); batch 20261019T093237; modules 1; new nodes 0; change records: coord/changes/etale-closed-coprojection-private-setup.md)
 - 09:32 L: merged deliver/B6/Sheaf.AlgebraicGeometry.FrobeniusFactorization (stage 3; reviewer PASS; first push; landing 20261019T093256-L-2287842 (proof); batch 20261019T093237; modules 1; new nodes 0)
+- 09:32 L: merged deliver/B6/Sheaf.Paper.AffineLineSupportGeometry (stage 3; reviewer PASS; first push; landing 20261019T093258-L-2288094 (proof); batch 20261019T093237; modules 1; new nodes 0)
