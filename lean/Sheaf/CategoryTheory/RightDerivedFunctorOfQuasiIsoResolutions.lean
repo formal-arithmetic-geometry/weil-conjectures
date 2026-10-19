@@ -68,7 +68,9 @@ theorem rightDerivedFunctorOfQuasiIsoResolutions_universal
       (fun β : F.rightDerivedFunctorOfQuasiIsoResolutions h ⟶ G ↦
         F.rightDerivedFunctorOfQuasiIsoResolutionsUnit h ≫
           Functor.whiskerLeft DerivedCategory.Qh β) := by
-  sorry
+  exact (Classical.choose_spec (Classical.choose_spec
+    (exists_rightDerived_of_enough_isKInjective h
+      (F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)))).1 G
 
 /-- Uniqueness of the universal pair, including compatibility with its unit.
 Source: blueprint order 1609, Stacks Tag 070K
@@ -87,7 +89,25 @@ theorem rightDerivedFunctorOfQuasiIsoResolutions_unique
     ∃! e : F.rightDerivedFunctorOfQuasiIsoResolutions h ≅ G,
       F.rightDerivedFunctorOfQuasiIsoResolutionsUnit h ≫
         Functor.whiskerLeft DerivedCategory.Qh e.hom = θ := by
-  sorry
+  obtain ⟨a, ha⟩ := (F.rightDerivedFunctorOfQuasiIsoResolutions_universal h G).surjective θ
+  obtain ⟨b, hb⟩ := (hθ (F.rightDerivedFunctorOfQuasiIsoResolutions h)).surjective
+    (F.rightDerivedFunctorOfQuasiIsoResolutionsUnit h)
+  dsimp only at ha hb
+  have hab : a ≫ b = 𝟙 _ := by
+    apply (F.rightDerivedFunctorOfQuasiIsoResolutions_universal h _).injective
+    dsimp only
+    rw [Functor.whiskerLeft_comp, ← Category.assoc, ha, hb]
+    simp
+  have hba : b ≫ a = 𝟙 _ := by
+    apply (hθ G).injective
+    dsimp only
+    rw [Functor.whiskerLeft_comp, ← Category.assoc, hb, ha]
+    simp
+  refine ⟨⟨a, b, hab, hba⟩, ha, ?_⟩
+  intro e he
+  apply Iso.ext
+  exact (F.rightDerivedFunctorOfQuasiIsoResolutions_universal h G).injective
+    (he.trans ha.symm)
 
 /-- The unit is invertible on every K-injective complex. Source: blueprint order 1609,
 Stacks Tags 070K and 070Y (blueprint: def-sfb-right-derived-functor).
@@ -100,7 +120,9 @@ theorem rightDerivedFunctorOfQuasiIsoResolutionsUnit_isIso
     (I : CochainComplex C ℤ) [I.IsKInjective] :
     IsIso ((F.rightDerivedFunctorOfQuasiIsoResolutionsUnit h).app
       ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj I)) := by
-  sorry
+  exact (Classical.choose_spec (Classical.choose_spec
+    (exists_rightDerived_of_enough_isKInjective h
+      (F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)))).2 I inferInstance
 
 /-- The canonical comparison for any resolution s, without a monomorphism assumption.
 Source: blueprint order 1609, Stacks Tags 070K and 070Y
