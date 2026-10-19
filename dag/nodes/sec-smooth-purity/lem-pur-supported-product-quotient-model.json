@@ -29,37 +29,22 @@
  ],
  "proof": [
   {
-   "text": "We check the hypotheses of the open–closed sequences. The field $k$ is Noetherian since its only ideals are $0,(1)$, so [lem-weil-pbc-finite-type-over-noetherian] makes $X,Y$ Noetherian. The scheme $P$ is finite type over $k$: finite affine covers of $X,Y$ give a finite cover of $P$ by spectra of $B\\otimes_kD$, generated over $k$ by generators of $B$ and $D$ [def-weil-finite-type-morphism]. Thus $P$ too is Noetherian. The open complement of each closed pair is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Moreover every intersection of this complement with an affine open of its ambient scheme is Noetherian and hence quasi-compact, so the open immersion is quasi-compact. The ambient schemes are quasi-separated: $X,Y$ have closed diagonals by separatedness [def-weil-proper-morphism]; the diagonal of $P$ is the product of their diagonals, hence closed (on product affine charts its defining equations are the two sets of diagonal equations). A closed immersion is quasi-compact since its inverse image of an affine open is a closed affine subscheme. Consequently the pro-etale open–closed sequence below has its required qcqs ambient scheme and quasi-compact open immersion.",
+   "text": "Finite type over the field makes X, Y and their fibre product locally Noetherian. Apply the source finite-type instance to f, g and pullback.fst f g composed with f; this supplies the pro-etale hypotheses for all three closed pairs. Open subschemes inherit local Noetherianity through the existing open-lower-shriek instances.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
-    "def-weil-finite-type-morphism",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "def-weil-proper-morphism"
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
-    "place": "Paragraph 4: checking the geometric hypotheses of the quotient identification."
+    "place": "Proof paragraph 4: identify the quotient support model with the normalized closed-pushforward support model and its counit."
    }
   },
   {
-   "text": "For each pair $a:C\\hookrightarrow T$, apply [lem-weil-pbc-open-closed-short-exact] to $A_T$ in the etale topology, and [det-sf-open-closed-sequence-ring-sheaf](3) to $B=M=A_T$ in the pro-etale topology. The latter hypotheses were verified in step 1. Both sequences identify the cokernel of $v_!A_{T\\setminus C}\\to A_T$ with $a_*A_C$, under the unit of inverse image/direct image and the constant inverse-image identification. These are exactly the normalized maps $e_a$ and $q_a$ in [def-pur-supported-exterior-product] and [def-pur-proetale-supported-exterior-product]. The cokernel universal property therefore gives a unique isomorphism $b_{a,A}:Q^\\tau_{T,C}\\xrightarrow{\\sim}C_a(A)$ with $b_{a,A}r_a=e_a$ or $q_a$. Indeed factor the two cokernel maps through one another; both composites are identities since their precompositions with the respective epimorphisms are identities.",
+   "text": "Let O -> U be the open-extension arrow defining Q, and let M be any coefficient module. Tensoring by the constant sheaf M preserves its cokernel because tensor is a left adjoint. Closed restriction of O is zero: in the etale case use disjoint-support vanishing for open extension; in the pro-etale case apply the open-extension adjunction and vanishing of the open restriction of closed direct image. Consequently the normalized map U tensor M -> a_* constant M annihilates O tensor M, and the preserved cokernel universal property constructs b_M : Q tensor M -> a_* constant M with the prescribed generator identity.",
    "uses": [
-    "lem-weil-pbc-open-closed-short-exact",
-    "det-sf-open-closed-sequence-ring-sheaf",
-    "def-pur-supported-exterior-product",
-    "def-pur-proetale-supported-exterior-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
-    "place": "Paragraph 4: the normalized rank-one quotient."
-   }
-  },
-  {
-   "text": "Put $B_a(M)=Q^\\tau_{T,C}\\otimes_{A_T}\\underline M_T$. Both $B_a$ and $C_a$ preserve small coproducts and cokernels. For $B_a$, the constant-sheaf functor is left adjoint to sections as stated in [def-pur-supported-exterior-product]; the same sheafification universal property applies in either topology [def-weil-pbc-constant-sheaf]. Tensoring with $Q^\\tau_{T,C}$ is left adjoint by [lem-pc-sheaf-modules-tensor-closed]. For $C_a$, its normalized adjunction is stated by the two support-product definitions. Apply [lem-weil-pbc-left-adjoint-preserves-colimits] to these adjoints. Thus $b_{a,A}$ and the tensor unit induce $B_a(A^{(I)})\\cong C_a(A^{(I)})$ for every set $I$. These maps commute with every map between free modules: on each basis element a free-module map is a finite linear combination of basis elements, and both functors and $b_{a,A}$ respect addition and multiplication by $A$.",
-   "uses": [
-    "def-weil-pbc-constant-sheaf",
+    "lemma-openclosed-vanishing-lowershriek",
+    "lem-sfb-proetale-open-disjoint-direct-image",
     "lem-pc-sheaf-modules-tensor-closed",
     "lem-weil-pbc-left-adjoint-preserves-colimits",
     "def-pur-supported-exterior-product",
@@ -68,63 +53,77 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
-    "place": "Paragraph 4: extending the normalized rank-one comparison to free coefficients."
+    "place": "Proof paragraph 4: identify the quotient support model with the normalized closed-pushforward support model and its counit."
    }
   },
   {
-   "text": "Present an arbitrary $A$-module $M$ by $A^{(R)}\\to A^{(|M|)}\\to M\\to0$: the second map sends $[m]$ to $m$, and $R$ consists of the relations $[m]+[n]-[m+n]$, $a[m]-[am]$, and $[0]$. Every formal sum reduces modulo these relations to the symbol for its value, so they generate exactly the kernel. A module map sends each generator and relation to the corresponding generator and relation, making this presentation functorial. Apply $B_a,C_a$ and the free-module comparisons of step 3. Taking cokernels gives an isomorphism $b_{a,M}:B_a(M)\\cong C_a(M)$, natural in $M$. The equality $b_{a,M}(r_a\\otimes1)=e_a$ or $q_a$ follows on each generator $[m]$ from step 2, then descends to the cokernel. Conversely such equality determines $b_{a,M}$, since $r_a\\otimes1$ is an epimorphism: tensor preserves cokernels by its left adjoint in [lem-pc-sheaf-modules-tensor-closed]. No flatness of $M$ is needed.",
+   "text": "Closed inverse image is strong monoidal and sends the quotient map U -> Q to an isomorphism, since it sends O to zero and preserves cokernels. It also sends the normalized constant-to-closed-pushforward map to an isomorphism by the fully faithful closed direct-image counit and the adjunction triangle identity. The generator identity therefore makes the closed restriction of b_M invertible. Open inverse image sends the defining open-extension arrow to an isomorphism by the fully faithful open-extension unit and the triangle identity; hence it sends Q to zero. It also sends a_* constant M to zero by disjoint-support vanishing. Thus the open restriction of b_M is invertible. Joint conservativity of the open and closed restrictions proves that b_M is an isomorphism. The generator is epic, so cancellation gives naturality and uniqueness of b for arbitrary M, including nonflat modules.",
    "uses": [
-    "lem-pc-sheaf-modules-tensor-closed"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
-    "place": "Paragraph 4: the functorial cokernel calculation for arbitrary coefficients."
-   }
-  },
-  {
-   "text": "The functor $C_a$ is exact in each topology, as stated in the two support-product definitions; hence $B_a\\cong C_a$ is exact. For a complex $V$, choose a flat-term K-flat module resolution $P\\to V$ using [lem-pc-kflat-resolution] on the one-point ringed site $(\\{*\\},A)$. The termwise constant-sheaf functor is exact: constant presheaves are exact since evaluation on every object is exact, and module sheafification is exact [lem-weil-pbc-site-module-presheaf-sheafification-exact]; so $\\underline P_T\\to\\underline V_T$ is a quasi-isomorphism. The constant sheaf complex $\\underline P_T$ is K-flat with flat terms by [lem-weil-pbc-ringed-pullback-preserves-kflat], applied to the morphism of ringed topoi to the point with constant coefficient ring $A_T$. Its module pullback is the constant sheaf functor: sheafifying the constant presheaf is the inverse image from sets to sheaves, with ring structure map the identity [def-weil-pbc-constant-sheaf]. Therefore, using symmetry and the K-flat definition of derived tensor [def-kun-derived-tensor, def-weil-derived-tensor], $E_a^\\tau(V)$ is represented by $B_a(P)$. The degreewise maps $b_{a,P^n}$ commute with differentials by their naturality, giving $B_a(P)\\cong C_a(P)$. Exactness of $C_a$ makes $C_a(P)\\to C_a(V)$ a quasi-isomorphism by [lem-weil-pbc-exact-functor-derived-factorization]. This constructs $\\beta_a$. These comparisons commute with chain maps and inverses of quasi-isomorphisms, so they are independent of the resolution and natural on the derived category. The degreewise generator equality in step 4 gives the derived generator equality as well.",
-   "uses": [
-    "def-pur-supported-exterior-product",
-    "def-pur-proetale-supported-exterior-product",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "def-weil-pbc-constant-sheaf",
-    "def-kun-derived-tensor",
-    "def-weil-derived-tensor",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+    "lemma-openclosed-vanishing-lowerstar",
+    "lem-etale-sheaf-jointly-surjective-conservative",
+    "lem-sfb-proetale-open-disjoint-direct-image",
+    "lem-sfb-proetale-fixed-scalar-zero-detection",
+    "lem-exc-proetale-closed-fully-faithful",
+    "def-sfb-finite-upper-star-monoidal",
+    "lem-sfb-finite-upper-star-tensor",
+    "lem-sfb-finite-upper-star-unit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
-    "place": "Paragraph 4: deriving the normalized comparison on unbounded coefficient complexes."
+    "place": "Proof paragraph 4: identify the quotient support model with the normalized closed-pushforward support model and its counit."
    }
   },
   {
-   "text": "For an ordinary sheaf $F$ and module $M$, precompose $f:C_a(M)\\to F$ with $b_{a,M}$ and then with $r_a\\otimes1$. Step 4 identifies the resulting map with $f e_a$ or $f q_a$. The normalization clauses of the two support-product definitions say precisely that its constant-sheaf adjoint is the supported-section map $M\\to\\Gamma_C(T,F)$ followed by the kernel inclusion in $\\Gamma(T,F)$. Thus the two ordinary adjunction bijections agree under $b_a$. For a complex $V$ and a K-injective sheaf representative $I$ of $F$, which exists on the small site by [prop-pur-kinjective-resolutions-exist], use [lem-weil-pbc-termwise-adjunction-homotopy] to apply this equality on the homotopy categories. Since $C_a\\cong B_a$ is exact, [lem-weil-pbc-right-adjoint-preserves-kinjective] makes $\\Gamma_C(I)$ K-injective. Apply [lem-weil-pbc-kinjective-hom-derived] on both sides of the homotopy adjunction: its Hom sets become $\\operatorname{Hom}_{D(T)}(C_a(V),F)$ and $\\operatorname{Hom}_{D(A)}(V,H_a^\\tau F)$. The equality of the two Hom bijections persists. K-injective computation and the derived adjunctions are the ones specified by the two support-product definitions. Their counits are the inverse images of $1_{H_a^\\tau F}$ under these bijections [lem-weil-pbc-adjunction-of-natural-bijection], so $\\epsilon_E=\\epsilon_C\\circ\\beta_{H_a^\\tau F}$; likewise their units agree after the comparison.",
+   "text": "Transport exactness from the existing normalized closed-pushforward coefficient functor along b. Construct the comparison on complexes as the constant exact-localization factor, the lax monoidal map of the complex-to-derived quotient, the canonical signed total-complex collapse for a degree-zero first factor, the composition isomorphism for termwise functors, and the inverse exact-localization factor. Naturality is the naturality of this composite natural transformation. This is the prescribed tensor localization comparison, with the first factor kept on the left.",
+   "uses": [
+    "def-pur-supported-exterior-product",
+    "def-pur-proetale-supported-exterior-product",
+    "def-kun-derived-tensor",
+    "def-weil-derived-tensor",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+    "place": "Proof paragraph 4: identify the quotient support model with the normalized closed-pushforward support model and its counit."
+   }
+  },
+  {
+   "text": "Use the existing functorial flat resolution in the coefficient module category. Constant sheaves preserve flat objects by the flat-presheaf sheafification theorem. The existing flat-preserving functor theorem says that the constant image of this resolution is K-flat. The lax monoidal localization comparison is invertible when its second factor is K-flat. All the remaining factors of the comparison are isomorphisms. Its naturality square for the resolution quasi-isomorphism transports invertibility to every complex, using exactness of both coefficient functors. The universal property of localization lifts this natural isomorphism to the derived categories. No ringed-site K-flat pullback theorem or independently chosen ringed-topos resolution is needed.",
+   "uses": [
+    "lem-sfb-sheaf-functorial-flat-resolution",
+    "def-kun-derived-tensor",
+    "def-weil-derived-tensor",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+    "place": "Proof paragraph 4: identify the quotient support model with the normalized closed-pushforward support model and its counit."
+   }
+  },
+  {
+   "text": "The quotient generator identity and the existing normalization of the supported-coefficient adjunction give the required ordinary Hom identity. For adjunctions transported along the ordinary natural isomorphism b, compare their homotopy counits after precomposing with the homotopy quotient: both reduce to the ordinary counit and b. Compare their derived counits after precomposing with Qh: the right-derived counit factorization reduces the equality to the homotopy equality. Localization extensionality proves the equality on derived categories. This uses the existing right-derived adjunction API, rather than a separate computation of Hom sets on K-injective representatives. Combining this counit transport with the tensor localization comparison gives the displayed evaluation-counit formula.",
    "uses": [
     "def-pur-supported-exterior-product",
     "def-pur-proetale-supported-exterior-product",
     "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-adjunction-of-natural-bijection",
     "prop-pur-kinjective-resolutions-exist"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
-    "place": "Paragraph 4: the equality of normalized ordinary and derived adjunction bijections."
+    "place": "Proof paragraph 4: identify the quotient support model with the normalized closed-pushforward support model and its counit."
    }
   },
   {
-   "text": "Finally any adjunction-preserving comparison $b:E_a^\\tau\\to C_a$ must satisfy, for every $V$, that the adjunct of $b_V$ under $E_a^\\tau\\dashv H_a^\\tau$ is the adjunct of $1_{C_a(V)}$ under $C_a\\dashv H_a^\\tau$. The adjunction bijection is injective, so $b_V$ is uniquely determined and equals $\\beta_{a,V}$. The ordinary uniqueness and quotient-generator equality were verified in step 4, and step 5 derives that equality on every complex. This proves uniqueness with the specified adjunction normalization, as well as naturality and the evaluation-counit assertion.",
+   "text": "For any comparison preserving the specified Hom equivalences, apply the injective adjunction Hom bijection to its component followed by the identity map. The counit identity just proved shows that this component equals the constructed comparison. Conversely that identity implies the required Hom equality by naturality of the counit. The exact-functor localization factorization and the defining component formula supply the equality on every complex. Assemble the five clauses for each topology and each of i, j and the product immersion.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
-    "place": "Paragraph 4: uniqueness of the comparison with identity on the common right adjoint."
+    "place": "Proof paragraph 4: identify the quotient support model with the normalized closed-pushforward support model and its counit."
    }
   }
  ],
@@ -132,30 +131,29 @@
   "def-kun-derived-tensor",
   "def-pur-proetale-supported-exterior-product",
   "def-pur-supported-exterior-product",
+  "def-sfb-finite-upper-star-monoidal",
   "def-weil-derived-tensor",
-  "def-weil-finite-type-morphism",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-proper-morphism",
-  "det-sf-open-closed-sequence-ring-sheaf",
-  "lem-pc-kflat-resolution",
+  "lem-etale-sheaf-jointly-surjective-conservative",
+  "lem-exc-proetale-closed-fully-faithful",
   "lem-pc-sheaf-modules-tensor-closed",
-  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-sfb-finite-upper-star-tensor",
+  "lem-sfb-finite-upper-star-unit",
+  "lem-sfb-proetale-fixed-scalar-zero-detection",
+  "lem-sfb-proetale-open-disjoint-direct-image",
+  "lem-sfb-sheaf-functorial-flat-resolution",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-kinjective-hom-derived",
   "lem-weil-pbc-left-adjoint-preserves-colimits",
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-open-closed-short-exact",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
   "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lemma-openclosed-vanishing-lowershriek",
+  "lemma-openclosed-vanishing-lowerstar",
   "prop-pur-kinjective-resolutions-exist"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "D9",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
-  "place": "The imported paragraph 4 is supplemented by the open–closed quotient argument and the explicit etale/pro-etale support-model definitions."
+  "place": "Paragraph 4; shorter source-library proof using tensor cokernels, open/closed conservativity, flat-preserving coefficient resolutions and localization counit transport. Lean APIs: cokernelTensorFactor (local), Functor.kFlat_mapHomologicalComplex_obj_resolutionFunctor_obj, DerivedMonoidal.isIso_counit_app_app_of_kFlat_right, Adjunction.mapDerivedCategoryRightDerivedAdjunction, Adjunction.derivedε_fac_app and localization extensionality. No blueprint UNIT realization is bypassed."
  },
  "mathlib_searches": [
   {
@@ -320,15 +318,9 @@
  "tool_uses": [
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "det-sf-open-closed-sequence-ring-sheaf",
   "lem-pc-sheaf-modules-tensor-closed",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-adjunction-of-natural-bijection"
+  "lem-weil-pbc-termwise-adjunction-homotopy"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -342,6 +334,8 @@
   "module": "Sheaf.AlgebraicGeometry.SupportedProductQuotientModel",
   "declaration": "AlgebraicGeometry.supported_product_quotient_model",
   "declarations": [
+   "supportSingleTensorLocalization",
+   "supportCoefficientTensorLocalization",
    "AlgebraicGeometry.Etale.supportQuotientWeakSheafify",
    "AlgebraicGeometry.Etale.supportQuotientOpenArrow",
    "AlgebraicGeometry.Etale.supportQuotient",
@@ -396,5 +390,15 @@
   "group": "Q106",
   "result": "pass",
   "note": "Read the item node (7 steps, Q57's corrected adjunction-preserving uniqueness), the source place (blueprint lem-pur-kunneth-supported.proof.md para 4), all 18 stmt_dep lean records, and the reused declarations in SupportedExteriorProduct / ProEtaleSupportedExteriorProduct. Clause by clause: finite A in Type (u+1) ModuleCat (dependency convention, no restriction); smallEtaleTopology / ProEt.topology; unbounded DerivedCategory; separated finite-type X,Y over an algebraically closed k via LocallyOfFiniteType+QuasiCompact+IsSeparated; the recorded supportedProductImmersion; Q = actual cokernel of the j_! adjunct of the constant-pullback iso; E = Q[0] tensor-derived constant V with the recorded derivedTensor; conjuncts give the generator normalization, the sigma -> sigma(1 tensor v) ordinary bijection, compatibility iff b = comparison (identity on supportedSectionsDerived), the representative formula on every complex, and counit equality; i, j and h in both topologies; IsLocallyNoetherian derived from f, g and the product structure map. Edge cases A=0, C empty, C=T, T empty, non-flat, unbounded: ok. No hollow defs; sorry only in theorems; source and blueprint docstrings; statement verbatim; declarations complete. The 2-import dependency repair (duplicate upperStarIsoLowerStarInv) is a valid lean-only interface repair. Compile: the dependency compiled clean twice (54.2 s, 45.9 s); the item hit the hard 60 s cap in both attempts that reached it, under load 156-218 (CPU-starved, no errors output), so I relied on the delivery's clean 53.2 s / 45.1 s evidence."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261019T231115-L-548773",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
