@@ -44,7 +44,7 @@
    }
   },
   {
-   "text": "Fix $W$ and test $t:H\\otimes J\\to[X,Y\\otimes J]$ on maps from $W\\otimes J$. By full faithfulness of $T_J$, every $k:W\\otimes J\\to H\\otimes J$ is uniquely $h\\otimes1_J$ for $h:W\\to H$. Put $d=U_X(h):W\\otimes X\\to Y$. The defining equation for $t$, tensor functoriality and naturality of $\\sigma$ give $U_X(t\\circ k)=(d\\otimes1_J)\\circ\\chi_{W,J,X}$, where $\\chi_{W,J,X}:(W\\otimes J)\\otimes X\\xrightarrow{\\alpha}W\\otimes(J\\otimes X)\\xrightarrow{1\\otimes\\sigma_{J,X}}W\\otimes(X\\otimes J)\\xrightarrow{\\alpha^{-1}}(W\\otimes X)\\otimes J$. Every operation in the chain $k\\leftrightarrow h\\leftrightarrow d\\leftrightarrow d\\otimes1_J\\leftrightarrow(d\\otimes1_J)\\circ\\chi\\leftrightarrow t\\circ k$ is bijective: the first and third use [lem-sf-quasi-inverse-hom-bijection] for $T_J$, the second and last are the assumed closed adjunctions, and the fourth is composition with a specified isomorphism. Thus postcomposition with this particular evaluation-normalized $t$ is bijective on these test objects, not just a comparison between abstract representing objects.",
+   "text": "For the first map use the existing library theorem CategoryTheory.MonoidalClosed.isIso_ihomTensorToIhom with the invertibility witness (I,a,b). This theorem proves the specified evaluation transpose is invertible by exactly the test-object argument of this step: tensorRightEquivalenceOfTensorIso gives full faithfulness on Hom sets, and uncurrying identifies postcomposition with tensoring a morphism followed by an associator.",
    "uses": [
     "lem-sf-quasi-inverse-hom-bijection",
     "def-sfb-monoidal-category"
@@ -56,7 +56,7 @@
    }
   },
   {
-   "text": "For arbitrary $Z$, precompose with the isomorphism $(Z\\otimes I)\\otimes J\\cong Z$ of step 2 on both Hom sets. This conjugates postcomposition with $t$ to the bijection of step 4, so $\\operatorname{Hom}(Z,t)$ is bijective. Here is the elementary isomorphism test, which will also be used for $s$: if $f:A\\to B$ has every $\\operatorname{Hom}(Z,f)$ bijective, take $Z=B$ to obtain $r:B\\to A$ with $f\\circ r=1_B$. Then injectivity at $Z=A$, applied to $f\\circ(r\\circ f)=f\\circ1_A$, gives $r\\circ f=1_A$. Hence $t$ is an isomorphism.",
+   "text": "The library theorem isIso_ihomTensorToIhom already transports the test-object bijections to every object using the counit of tensorRightEquivalenceOfTensorIso, then applies isIso_of_yoneda_map_bijective. Thus no duplicate construction of the inverse of the first map is needed. Take its canonical asIso.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -65,7 +65,7 @@
    }
   },
   {
-   "text": "For $s:H\\to[X\\otimes J,Y\\otimes J]$ and arbitrary $Z$, the defining equation and naturality in the test object give $U_{X\\otimes J}(s\\circ h)=(U_X(h)\\otimes1_J)\\circ\\alpha^{-1}_{Z,X,J}$ for $h:Z\\to H$. Consequently postcomposition with $s$ is the composite of the bijections $\\operatorname{Hom}(Z,H)\\cong\\operatorname{Hom}(Z\\otimes X,Y)\\cong\\operatorname{Hom}((Z\\otimes X)\\otimes J,Y\\otimes J)\\cong\\operatorname{Hom}(Z\\otimes(X\\otimes J),Y\\otimes J)\\cong\\operatorname{Hom}(Z,[X\\otimes J,Y\\otimes J])$. The middle tensoring bijection is [lem-sf-quasi-inverse-hom-bijection] for $T_J$; the others are the given adjunctions and the associator. The elementary isomorphism test of step 5 now proves that this specified $s$ is invertible.",
+   "text": "For the second map define rightUncurry(f) as the braiding followed by Mathlib uncurrying. It is a bijection, since both operations are bijections. The evaluation equation gives rightUncurry(f followed by s) = inverse-associator followed by (rightUncurry(f) tensor identity_J), using associator and braiding naturality. Tensoring with J is fully faithful by [lem-sf-quasi-inverse-hom-bijection], implemented by tensorRightEquivalenceOfTensorIso(a,b). Hence postcomposition with s is injective. For surjectivity, a map g into its target gives a map (Z tensor X) tensor J to Y tensor J after rightUncurry and the associator. Take its preimage under that fully faithful functor and then its unique transpose. The evaluation equation proves this transpose maps to g. Apply isIso_of_yoneda_map_bijective and take asIso.",
    "uses": [
     "lem-sf-quasi-inverse-hom-bijection",
     "def-sfb-monoidal-category"
@@ -77,7 +77,7 @@
    }
   },
   {
-   "text": "For $f:X\\prime\\to X$ and $g:Y\\to Y\\prime$, the naturality identities are $t_{X\\prime,Y\\prime,J}\\circ([f,g]\\otimes1_J)=[f,g\\otimes1_J]\\circ t_{X,Y,J}$ and $s_{X\\prime,Y\\prime,J}\\circ[f,g]=[f\\otimes1_J,g\\otimes1_J]\\circ s_{X,Y,J}$. Apply the injective uncurrying bijection to each identity. For the first, both sides become $(g\\circ e_{X,Y}\\circ(1_H\\otimes f))\\otimes1_J$ after precomposition by the permutation $(H\\otimes J)\\otimes X\\prime\\to(H\\otimes X\\prime)\\otimes J$ defined as $\\chi$ in step 4. This follows from $\\sigma_{J,X}\\circ(1_J\\otimes f)=(f\\otimes1_J)\\circ\\sigma_{J,X\\prime}$. For the second, both sides become $(g\\circ e_{X,Y}\\circ(1_H\\otimes f))\\otimes1_J$ on $H\\otimes(X\\prime\\otimes J)$, with the inverse associator understood. This proves the two asserted variable naturalities.",
+   "text": "For $f:X\\prime\\to X$ and $g:Y\\to Y\\prime$, the naturality identities are $t_{X\\prime,Y\\prime,J}\\circ([f,g]\\otimes1_J)=[f,g\\otimes1_J]\\circ t_{X,Y,J}$ and $s_{X\\prime,Y\\prime,J}\\circ[f,g]=[f\\otimes1_J,g\\otimes1_J]\\circ s_{X,Y,J}$. Apply the injective uncurrying bijection to each identity. For the first, both sides become $(g\\circ e_{X,Y}\\circ(1_H\\otimes f))\\otimes1_J$ after precomposition by the permutation $(H\\otimes J)\\otimes X\\prime\\to(H\\otimes X\\prime)\\otimes J$ given by the associator, the braiding of $J$ past $X\\prime$, and the inverse associator. This follows from $\\sigma_{J,X}\\circ(1_J\\otimes f)=(f\\otimes1_J)\\circ\\sigma_{J,X\\prime}$. For the second, both sides become $(g\\circ e_{X,Y}\\circ(1_H\\otimes f))\\otimes1_J$ on $H\\otimes(X\\prime\\otimes J)$, with the inverse associator understood. This proves the two asserted variable naturalities.",
    "uses": [
     "def-sfb-monoidal-category"
    ],
@@ -117,7 +117,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/categories.tex",
-  "place": "Agent consequence of Tags 0FFM and 0GWJ; the Hom-set proof also follows the categorical-core explanation in WeilConjectures/Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean:302–345, extending it to simultaneous cancellation and explicit naturality."
+  "place": "Tags 0FFM (lemma-invertible) and 0GWJ (remark-internal-hom-monoidal), the evaluation-normalized consequence in the existing node proof. X5 formalization reuses WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic.isIso_ihomTensorToIhom for the first comparison and directly formalizes the planned Hom-set argument for simultaneous cancellation. All compatibility equations follow by transposition, tensor and braiding naturality, and inverse cancellation."
  },
  "mathlib_searches": [
   {
@@ -231,5 +231,15 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "Reuses the upstream ihomTensorToIhom for t. The helper ihomTensorBoth is the explicit evaluation transpose s. The theorem supplies families of isomorphisms with these hom maps, the two right-evaluation equations and their inverse forms, naturality in X and Y, and compatibility with factor isomorphisms. Right evaluation is the existing Mathlib evaluation precomposed with the symmetry."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261019T112619-L-3961893",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
