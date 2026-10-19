@@ -17478,3 +17478,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:40 L: merged deliver/P7/Sheaf.Paper.CoefficientHeartGeneration (stage 3; reviewer PASS; first push; landing 20261019T154021-L-3028121 (interface); batch 20261019T153958; modules 4; new nodes 3)
 - 15:40 L: merged deliver/R5/Sheaf.Paper.AdicPurityObjects (stage 3; reviewer PASS; first push; landing 20261019T154022-L-3028474 (proof); batch 20261019T153958; modules 1; new nodes 0)
 - 15:40 L: merged deliver/R5/Sheaf.Paper.ZlFrameworkPbcOpenExchangeComparison (stage 3; reviewer PASS; first push; landing 20261019T154023-L-3028622 (proof); batch 20261019T153958; modules 1; new nodes 0)
+- 15:40 L: merged deliver/S6/Sheaf.Paper.PbcFiniteStageKaroubian (stage 3; reviewer PASS; first push; landing 20261019T154024-L-3028896 (proof); batch 20261019T153958; modules 1; new nodes 0)
