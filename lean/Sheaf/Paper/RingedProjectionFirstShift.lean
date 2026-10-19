@@ -8,11 +8,7 @@ module
 public import Sheaf.Paper.ProjectionMateExact
 public import Mathlib.CategoryTheory.Shift.Adjunction
 public import Mathlib.CategoryTheory.Triangulated.Functor
-import Mathlib.CategoryTheory.Triangulated.Adjunction
-import Mathlib.CategoryTheory.Adjunction.Basic
-import Mathlib.CategoryTheory.Shift.CommShift
-import Mathlib.CategoryTheory.Triangulated.Basic
-import Sheaf.Paper.RingedTopoiDerivedPullback
+import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapShift
 
 /-!
 # The ringed projection mate and shifts of the direct-image input
@@ -33,6 +29,25 @@ open CategoryTheory CategoryTheory.Pretriangulated
 
 namespace SheafOfModules
 
+set_option backward.isDefEq.respectTransparency false in
+private def projectionTriangleMorphism
+    {C D : Type*} [Category C] [Category D] [HasShift C ℤ] [HasShift D ℤ]
+    {F G : C ⥤ D} [F.CommShift ℤ] [G.CommShift ℤ]
+    (pi : F ⟶ G) [NatTrans.CommShift pi ℤ] (T : Triangle C) :
+    F.mapTriangle.obj T ⟶ G.mapTriangle.obj T where
+  hom₁ := pi.app T.obj₁
+  hom₂ := pi.app T.obj₂
+  hom₃ := pi.app T.obj₃
+  comm₁ := pi.naturality T.mor₁
+  comm₂ := pi.naturality T.mor₂
+  comm₃ := by
+    change (F.map T.mor₃ ≫ (F.commShiftIso (1 : ℤ)).hom.app T.obj₁) ≫
+      (shiftFunctor D (1 : ℤ)).map (pi.app T.obj₁) =
+      pi.app T.obj₃ ≫ (G.map T.mor₃ ≫ (G.commShiftIso (1 : ℤ)).hom.app T.obj₁)
+    rw [Category.assoc, NatTrans.shift_app_comm pi (1 : ℤ) T.obj₁,
+      pi.naturality_assoc]
+
+set_option backward.isDefEq.respectTransparency false in
 /-- The canonical projection mate is a transformation of exact functors in its
 first variable, including the connecting square on distinguished triangles.
 Source: Stacks Project, Tags 0B56, 07A4 and 0A8D
@@ -108,6 +123,55 @@ theorem ringedProjectionFirstShift
                   ((Functor.curryObj X.tensor).flip.obj (e.left.obj P) ⋙ e.right)).obj T,
               m.hom₁ = pi.app T.obj₁ ∧ m.hom₂ = pi.app T.obj₂ ∧
                 m.hom₃ = pi.app T.obj₃) := by
-  sorry
+  obtain ⟨hY, hX, hL, hR, ha, hb, heps, hleft, hright, hadj, hYtri, hXtri, hrest⟩ :=
+    ringedProjectionMateExact e a b
+  let _ := hY
+  let _ := hX
+  let _ := hL
+  let _ := hR
+  let _ := hadj
+  refine ⟨hY, hX, hL, hR, ha, hb, heps, hadj, ?_⟩
+  intro P
+  have hYP := hYtri P
+  have hXP := hXtri (e.left.obj P)
+  let _ := hYP.2
+  let _ := hXP.2
+  have hF : (e.right ⋙ (Functor.curryObj Y.tensor).flip.obj P).IsTriangulated := by
+    infer_instance
+  have hG : ((Functor.curryObj X.tensor).flip.obj (e.left.obj P) ⋙ e.right).IsTriangulated := by
+    infer_instance
+  let φ : (Functor.postcompose₂.obj e.left).obj (Functor.curryObj Y.tensor) ⟶
+      (((Functor.whiskeringLeft₂ X.mateDerived).obj e.left).obj e.left).obj
+        (Functor.curryObj X.tensor) :=
+    Functor.curry.map (e.tensorComparison a b).hom ≫
+      (Functor.curryObjProdComp e.left e.left X.tensor).hom
+  let pi := e.derivedAdjunction.rightAdjointProjectionMapFlipApp
+      (T_C := Functor.curryObj X.tensor) (T_D := Functor.curryObj Y.tensor) φ P
+  have hpi : ∀ K : X.mateDerived, pi.app K =
+      derivedProjectionFormulaMate e.left e.right e.derivedAdjunction Y.tensor X.tensor
+        (e.tensorComparison a b) K P := by
+    intro K
+    dsimp [pi, φ, CategoryTheory.Adjunction.rightAdjointProjectionMapFlipApp,
+      derivedProjectionFormulaMate]
+  have hφapp (U : Y.mateDerived) :
+      (CategoryTheory.Adjunction.comparisonFlipApp φ P).app U =
+        (e.tensorComparison a b).hom.app (U, P) := by
+    change (e.tensorComparison a b).hom.app (U, P) ≫ 𝟙 _ = _
+    exact Category.comp_id _
+  have hφ : NatTrans.CommShift (CategoryTheory.Adjunction.comparisonFlipApp φ P) ℤ := by
+    apply NatTrans.CommShift.of_core
+    intro n
+    constructor
+    ext K
+    simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      hφapp, Functor.commShiftIso_comp_hom_app, Category.assoc]
+    exact (hrest.2.1 n K P).symm
+  have hcomm : NatTrans.CommShift pi ℤ := by
+    apply CategoryTheory.Adjunction.commShift_rightAdjointProjectionMapFlipApp
+  refine ⟨hF, hG, pi, hpi, hcomm, ?_, ?_⟩
+  · intro K
+    exact (NatTrans.shift_app_comm pi (1 : ℤ) K).symm
+  · intro T _
+    exact ⟨projectionTriangleMorphism pi T, rfl, rfl, rfl⟩
 
 end SheafOfModules
