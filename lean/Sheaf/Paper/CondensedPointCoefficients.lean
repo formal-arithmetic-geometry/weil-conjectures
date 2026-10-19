@@ -14,16 +14,10 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Monoidal
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import Mathlib.Topology.Category.Profinite.AsLimit
-import Mathlib.Condensed.Discrete.Colimit
-import Mathlib.CategoryTheory.Sites.DenseSubsite.SheafEquiv
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ModuleDerivedCategory
-import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
-import Sheaf.RingTheory.IndEtaleStability
-import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
-import Sheaf.AlgebraicGeometry.ConstantSheafSetsRepresentable
-import Sheaf.AlgebraicGeometry.ProEtaleComparisonSections
-import Sheaf.Topology.ProfiniteCondensedRing
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import Mathlib.Algebra.Category.Ring.FilteredColimits
+import all Sheaf.Paper.GeometricFieldProfiniteDenseSubsite
+import Sheaf.Paper.GeometricFieldProEtaleEvaluation
+import Sheaf.Paper.CondensedPointDiscreteConstantComparison
 
 /-!
 # Coefficients on the pro-etale geometric point
@@ -110,6 +104,111 @@ noncomputable def condensedPointFiniteFunctionCocone (A : Type u) [Ring A]
         ext a
         rfl }
 
+private theorem condensedPointDense (Ω : Type u) [Field Ω] [IsSepClosed Ω] :
+    (profiniteToProEtOf (Spec (.of Ω))).IsDenseSubsite
+      (coherentTopology Profinite.{u}) (Scheme.ProEt.topology (Spec (.of Ω))) := by
+  have := (testFullyFaithful Ω).1
+  have := (testFullyFaithful Ω).2
+  have : (profiniteToProEtOf (Spec (.of Ω))).IsCoverDense
+      (Scheme.ProEt.topology (Spec (.of Ω))) := by
+    constructor
+    intro U
+    apply (Scheme.ProEt.topology (Spec (.of Ω))).superset_covering _
+      ((Scheme.AffineProEt.toProEt (Spec (.of Ω))).is_cover_of_isCoverDense _ U)
+    rintro V f ⟨⟨A, g, h, w⟩⟩
+    obtain ⟨E, ⟨e⟩⟩ := (condensed_point_basis Ω).2.2.2.2.1
+    have hs := (condensed_point_basis Ω).2.2.2.2.2
+    obtain ⟨a⟩ := hs
+    let Y : ObjectProperty.FullSubcategory
+        (fun Y : Over (Spec (.of Ω)) ↦ IsAffine Y.left ∧ proAffineEtale Y.hom) :=
+      ⟨(Scheme.ProEt.forget _).obj ((Scheme.AffineProEt.toProEt _).obj A),
+        ⟨inferInstanceAs (IsAffine A.left), A.prop⟩⟩
+    let S := E.inverse.obj Y
+    let z : E.functor.obj S ≅ Y := E.counitIso.app Y
+    let z' := (ObjectProperty.ι _).mapIso z
+    let hi : (Scheme.ProEt.forget _).obj ((Scheme.AffineProEt.toProEt _).obj A) ≅
+        (Scheme.ProEt.forget _).obj ((profiniteToProEtOf (Spec (.of Ω))).obj S) :=
+      z'.symm ≪≫ e.app S ≪≫ a.app S
+    let h' : (Scheme.AffineProEt.toProEt _).obj A ≅
+        (profiniteToProEtOf (Spec (.of Ω))).obj S :=
+      (Functor.FullyFaithful.ofFullyFaithful (Scheme.ProEt.forget _)).preimageIso hi
+    exact ⟨⟨S, g ≫ h'.hom, h'.inv ≫ h, by simp [Category.assoc, w]⟩⟩
+  exact { functorPushforward_mem_iff := fun {_ _} ↦
+    ⟨testTopologyReflect Ω, (testCoverPreserving Ω).cover_preserve⟩ }
+
+private theorem condensedPointRingEvaluation (Ω : Type u) [Field Ω] [IsSepClosed Ω]
+    (F : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})) :
+    Nonempty ((condensedPointRingRestriction (Spec (.of Ω))).obj
+        (coefficientRing (Spec (.of Ω)) F) ≅
+          (sheafToPresheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).mapMon.obj F) := by
+  let X := Spec (.of Ω)
+  let J := coherentTopology Profinite.{u}
+  let K := Scheme.ProEt.topology X
+  have : (profiniteToProEt ⋙ MorphismProperty.Over.pullback @WeaklyEtale ⊤
+      (toSpecZ X)).IsContinuous J K := geometricFieldTest_isContinuous X
+  let R := lowerStar Ab.{u + 1} (toSpecZ X) ⋙ pointLowerStar
+  let adj : upperStarFromPoint X ⊣ R :=
+    pointUpperStarLowerStarAdjunction.comp (upperStarLowerStarAdjunction _ (toSpecZ X))
+  have := condensedPointDense Ω
+  have : (geometricFieldRestriction X Ab.{u + 1}).IsEquivalence := inferInstance
+  have : R.IsEquivalence := inferInstanceAs
+    (geometricFieldRestriction X Ab.{u + 1}).IsEquivalence
+  have : adj.IsMonoidal := by
+    dsimp only [adj]
+    have : pointUpperStarLowerStarAdjunction.{u}.IsMonoidal := by
+      unfold pointUpperStarLowerStarAdjunction pointUpperStar pointLowerStar
+      exact Functor.sheafPullbackConstruction.isMonoidal_sheafAdjunctionContinuous _ _ _ _
+    have := isMonoidal_upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X)
+    exact Adjunction.isMonoidal_comp pointUpperStarLowerStarAdjunction
+      (upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))
+  have : IsIso adj.unit := inferInstance
+  have : NatTrans.IsMonoidal (asIso adj.unit).hom :=
+    inferInstanceAs (NatTrans.IsMonoidal adj.unit)
+  let e : F ≅ R.mapMon.obj
+      (coefficientRing X F) :=
+    (Functor.mapMonIdIso (C := Sheaf J Ab.{u + 1})).symm.app F ≪≫
+      (Functor.mapMonNatIso (asIso adj.unit)).app F ≪≫
+      Functor.mapMonCompIso.app F
+  let t : R ≅ geometricFieldRestriction X Ab.{u + 1} :=
+    Functor.sheafPushforwardContinuousComp' (eFG := Iso.refl _) _
+      J (Scheme.ProEt.topology specZ) K
+  have : NatTrans.IsMonoidal t.hom := by
+    dsimp only [t]
+    infer_instance
+  have : NatTrans.IsMonoidal t.symm.hom := inferInstanceAs (NatTrans.IsMonoidal t.inv)
+  let r : condensedPointRingRestriction X ≅
+      R.mapMon ⋙
+        (sheafToPresheaf J Ab.{u + 1}).mapMon :=
+    Functor.mapMonCompIso.symm ≪≫
+      Functor.mapMonNatIso
+        (Functor.sheafPullbackConstruction.sheafToPresheafCompWhiskeringLeftIsoPushforward
+          (profiniteToProEtOf X) Ab.{u + 1} J K) ≪≫
+      Functor.mapMonCompIso ≪≫
+      Functor.isoWhiskerRight (Functor.mapMonNatIso t.symm) _
+  exact ⟨r.app (coefficientRing X F) ≪≫
+    (sheafToPresheaf J Ab.{u + 1}).mapMon.mapIso e.symm⟩
+
+private theorem condensedPointFiniteColimit (A : Type u) [Ring A] (S : Profinite.{u}) :
+    Nonempty (IsColimit (condensedPointFiniteFunctionCocone A S)) := by
+  classical
+  apply Nonempty.intro
+  have : PreservesFilteredColimitsOfSize.{u, u} (forget RingCat.{u + 1}) :=
+    preservesFilteredColimitsOfSize_of_univLE.{u + 1, u + 1} _
+  have : ReflectsColimit (condensedPointFiniteFunctionDiagram A S) (forget RingCat.{u + 1}) :=
+    reflectsColimit_of_reflectsIsomorphisms _ _
+  apply isColimitOfReflects (forget RingCat.{u + 1})
+  apply Types.FilteredColimit.isColimitOf'
+  · intro f
+    refine ⟨op f.down.discreteQuotient, ULift.up f.down.lift, ?_⟩
+    rfl
+  · intro q x y h
+    refine ⟨q, 𝟙 q, ?_⟩
+    suffices x = y by subst y; rfl
+    apply ULift.ext
+    funext a
+    obtain ⟨s, rfl⟩ := q.unop.proj_surjective a
+    exact congrArg (fun z : ULift.{u + 1} (LocallyConstant S A) ↦ z.down s) h
+
 /-- On a separably closed geometric point, the inverse image of a condensed set or ring
 has its original sections on every profinite test object. Continuous ring coefficients give
 continuous functions; discrete coefficients give locally constant functions, their canonical
@@ -119,34 +218,26 @@ pro-etale constant ring.
 Source: main-20261015 blueprint, coefficient lemma, both paragraphs and clauses (1)--(2)
 (blueprint: det-pe-condensed-point-coefficients).
 
-Proof plan, following the node's six steps:
-1. `det-pe-condensed-point-basis` identifies affine ind-etale objects with profinite sets.
-   `lem-weil-pbc-locally-constant-prime-spectrum` identifies their spaces and arrows by
-   evaluation kernels. `lem-weil-pbc-ind-etale-stability` gives weak etaleness. The covering
-   definition `def-weil-pbc-proetale-site` then gives exactly finite joint surjectivity.
-2. `lem-weil-pbc-ind-etale-basis` gives the dense affine basis. Apply
-   `lem-pc-fppf-dense-sheaf-equivalence` to restriction to that basis, with sets and abelian
-   groups, using the larger coefficient universe of `def-weil-size-convention`.
-3. The adjunction in `sk-def-sfb-pullback-from-point`, and its set version in
-   `lem-weil-pbc-profinite-point-pullback`, have this restriction as right adjoint. Since
-   restriction is an equivalence, the unit is invertible. Its inverse gives the natural
-   evaluation comparison. Naturality at each operation identifies the internal ring
-   structure of `sk-def-sfb-pulled-back-coefficients`, including noncommutative rings.
-4. `sk-def-sfb-condensed-ring` gives C(S,T). For discrete A, continuity is local constancy.
-   Compactness makes the image finite, giving a finite clopen quotient through which every
-   function factors. Common refinements identify equal representatives. These are exactly
-   the legs of `condensedPointFiniteFunctionCocone`, and they preserve ring operations.
-   At the empty space use the empty quotient and the one-element zero ring.
-5. The test object is the limit of finite disjoint unions of Spec Ω. The finite-stage
-   constant etale ring has sections A^{S_i}, by
-   `lem-galois-constant-sheaf-sets-representable`, with pointwise operations from
-   `def-weil-pbc-constant-sheaf`; restrictions are precomposition.
-6. `lem-weil-pbc-comparison-sections` identifies its comparison inverse image with this
-   same colimit. The basis uniqueness in `lem-weil-pbc-ind-etale-basis` extends the ring
-   isomorphism to the full site. Finally LC(-,A) has the constant-sheaf universal property:
-   pull each constant to its clopen fibre and glue over the finite partition. Refinement
-   gives naturality and uniqueness. Transport across the basis equivalence gives exactly
-   the classical constant ring sheaf, preserving its specified constant coefficients. -/
+Proof: The field-independent spectrum and covering calculations in
+`GeometricFieldProfiniteDenseSubsite` give full faithfulness and identify the induced
+topology with the coherent topology. The affine ind-etale equivalence of
+`condensed_point_basis` and the affine pro-etale basis theorem give cover density.
+Dense restriction is therefore an equivalence on sets and abelian groups. The specified
+point adjunction has invertible unit, giving set evaluation. Its monoidal unit and the
+monoidal pushforward-composition comparison give evaluation as internal rings.
+
+Apply ring evaluation to continuous coefficients. The monoidal sheafification comparison
+identifies their underlying presheaf with the specified continuous-function ring.
+For discrete coefficients, continuity is local constancy. Every locally constant function
+factors through its finite discrete quotient, and surjectivity of quotient projections
+makes the cocone legs injective. The filtered-colimit criterion in types, reflected by
+the ring forgetful functor, proves the finite-quotient formula, including the empty space.
+
+Finally `condensed_point_discrete_constant_comparisons` identifies the discrete condensed
+ring with the constant ring by locally bijective sheafification: the finite clopen fibres
+of each function give local surjectivity, and the empty covering handles local injectivity
+on the empty space. The canonical monoidal constant-sheaf pullback comparisons give both
+the etale comparison inverse image and the classical pro-etale constant ring. -/
 theorem condensed_point_coefficients (Ω : Type u) [Field Ω] [IsSepClosed Ω] :
     (∀ F : Sheaf (coherentTopology Profinite.{u}) (Type (u + 1)),
       Nonempty ((profiniteToProEtOf (Spec (.of Ω))).op ⋙
@@ -171,6 +262,48 @@ theorem condensed_point_coefficients (Ω : Type u) [Field Ω] [IsSepClosed Ω] :
       Nonempty (coefficientRing (Spec (.of Ω))
         (Mon.mk (Profinite.continuousCoefficientRingObj A)) ≅
           condensedPointConstantRing (Scheme.ProEt.topology (Spec (.of Ω))) A)) := by
-  sorry
+  have hring := condensedPointRingEvaluation Ω
+  refine ⟨?_, hring, ?_, ?_⟩
+  · intro F
+    have := condensedPointDense Ω
+    have : (geometricFieldRestriction (Spec (.of Ω)) (Type (u + 1))).IsEquivalence :=
+      inferInstance
+    exact ⟨(sheafToPresheaf _ _).mapIso
+      (asIso ((geometricFieldPointAdjunction (Spec (.of Ω))).unit.app F)).symm⟩
+  · intro T _ _ _
+    obtain ⟨e⟩ := hring (Mon.mk (Profinite.continuousCoefficientRingObj T))
+    let J := coherentTopology Profinite.{u}
+    let P := (Profinite.continuousCoefficientRingPresheaf T).toMonAb
+    let S := Profinite.continuousCoefficientRingSheaf T
+    let c : (presheafToSheaf J Ab.{u + 1}).mapMon.obj P ≅
+        Mon.mk (Profinite.continuousCoefficientRingObj T) :=
+      Mon.mkIso' (Sheaf.sheafifyRingPresheafIso J S)
+    let adj := sheafificationAdjunction J Ab.{u + 1}
+    have : adj.IsMonoidal := inferInstance
+    have : IsIso (adj.unit.app P.X) := by
+      change IsIso ((sheafificationAdjunction J Ab.{u + 1}).unit.app
+        (Profinite.continuousCoefficientRingObj T).obj)
+      exact isIso_toSheafify J (Profinite.continuousCoefficientRingObj T).property
+    let a := ((Functor.mapMonIdIso (C := Profiniteᵒᵖ ⥤ Ab.{u + 1})).inv ≫
+      Functor.mapMonNatTrans adj.unit).app P
+    have : IsIso ((Mon.forget _).map a) := by
+      change IsIso (adj.unit.app P.X)
+      infer_instance
+    have : IsIso a := isIso_of_reflects_iso a (Mon.forget _)
+    exact ⟨e ≪≫ (sheafToPresheaf J Ab.{u + 1}).mapMon.mapIso c.symm ≪≫
+      (Functor.mapMonCompIso.app P).symm ≪≫ (asIso a).symm⟩
+  · intro A _ _ _
+    refine ⟨?_, ?_⟩
+    · intro S
+      refine ⟨?_, condensedPointFiniteColimit A S⟩
+      let e : LocallyConstant S A ≃+* C(S, A) :=
+        { toFun := fun f ↦ f.toContinuousMap
+          invFun := fun f ↦ ⟨f, (IsLocallyConstant.iff_continuous f).2 f.continuous⟩
+          left_inv := fun _ ↦ rfl
+          right_inv := fun _ ↦ rfl
+          map_mul' := fun _ _ ↦ rfl
+          map_add' := fun _ _ ↦ rfl }
+      exact ⟨e, fun _ ↦ rfl⟩
+    · exact condensed_point_discrete_constant_comparisons Ω A
 
 end AlgebraicGeometry.ProEtale

@@ -24,108 +24,49 @@
  ],
  "proof": [
   {
-   "text": "Put $u(S)=\\Omega[S]$. By [det-pe-condensed-point-basis], $u$ identifies profinite sets with the affine ind-étale objects over $X$. The homeomorphism of [lem-weil-pbc-locally-constant-prime-spectrum], specialized to the field $\\Omega$, identifies $|u(S)|$ with $S$: the point $s$ is $\\ker(\\operatorname{ev}_s)$. Precomposition with $f:T\\to S$ sends the prime at $t$ to the prime at $f(t)$, so $|u(f)|=f$. Every arrow between these objects is weakly étale by [lem-weil-pbc-ind-etale-stability]. By the covering definition [def-weil-pbc-proetale-site], a covering of the affine $u(S)$ has finitely many affine opens in its sources whose images cover $u(S)$; their finitely many source objects are therefore jointly surjective. Conversely finitely many jointly surjective affine sources are a covering: for any affine open $V\\subset u(S)$, its inverse images in these affine sources are affine (they are fibre products of affine schemes over the affine $u(S)$), and cover $V$. Thus the induced covering families are exactly those containing a finite jointly surjective subfamily, as in [sk-def-sfb-condensed-ring].",
+   "text": "Use the existing field-independent testFullyFaithful, testTopologyReflect and testCoverPreserving helpers in GeometricFieldProfiniteDenseSubsite, whose spectrum calculations use [lem-weil-pbc-locally-constant-prime-spectrum]. The affine ind-etale equivalence in [det-pe-condensed-point-basis] identifies every affine basis object with a profinite test object. Cover density follows from [lem-weil-pbc-ind-etale-basis]. Apply [lem-pc-fppf-dense-sheaf-equivalence] to obtain equivalence of restriction on sets and abelian groups. The specified set adjunction [lem-weil-pbc-profinite-point-pullback] has invertible unit, giving set evaluation. For rings lift the monoidal adjunction unit of [sk-def-sfb-pullback-from-point] to monoid objects, using the canonical monoidal pushforward-composition comparison. This identifies the specified [sk-def-sfb-pulled-back-coefficients] with the original ring after restriction.",
    "uses": [
     "det-pe-condensed-point-basis",
-    "lem-weil-pbc-locally-constant-prime-spectrum",
-    "lem-weil-pbc-ind-etale-stability",
-    "def-weil-pbc-proetale-site",
-    "sk-def-sfb-condensed-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/sk-prop-pe-condensed-point-coefficients.proof.md",
-    "place": "First paragraph, topology input expanded using the Points and Coverings paragraphs of sk-prop-pe-condensed-point-topology.proof.md"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-ind-etale-basis], every object of $X_{\\mathrm{proét}}$ is covered by affine ind-étale objects, and their fibre products remain in the basis. The functor $u$ is fully faithful by [det-pe-condensed-point-basis], and Step 1 identifies its induced topology with the coherent topology. Apply [lem-pc-fppf-dense-sheaf-equivalence] to $u$, first with sets and then with abelian groups: restriction $R(G)(S)=G(\\Omega[S])$ is an equivalence in both cases. The stated small-site universe convention is used, so the required right Kan extension limits exist in sets and abelian groups in the larger universe.",
-   "uses": [
     "lem-weil-pbc-ind-etale-basis",
-    "det-pe-condensed-point-basis",
-    "lem-pc-fppf-dense-sheaf-equivalence",
-    "def-weil-size-convention"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/sk-prop-pe-condensed-point-coefficients.proof.md",
-    "place": "First paragraph, equivalence-of-topoi input; Topoi paragraph of sk-prop-pe-condensed-point-topology.proof.md"
-   }
-  },
-  {
-   "text": "For abelian sheaves, [sk-def-sfb-pullback-from-point] identifies $p_X^*$ as left adjoint to $R$, since $X[S]=\\Omega[S]$ by [det-pe-condensed-point-basis]. For sets use the geometric inverse image of [lem-weil-pbc-profinite-point-pullback]: its right adjoint is the composite restriction, which on $S$ evaluates $G$ at $\\operatorname{Spec}LC(S,\\mathbf Z)\\times_{\\operatorname{Spec}\\mathbf Z}X=X[S]$, hence is again $R$. A left adjoint of the equivalence $R$ is its inverse: if $Q$ is an inverse, the natural bijections $\\operatorname{Hom}(QF,G)=\\operatorname{Hom}(F,RG)$ identify $Q$ with $p_X^*$ by the adjunction universal property. Its unit $\\eta_F:F\\to Rp_X^*F$ is therefore invertible, giving the asserted evaluation naturally in $F$ and $S$. For a ring $F$, apply the set inverse image to its finite-arity operations. Naturality of $\\eta$ at addition and multiplication, together with its product projections, gives $\\eta_F(a+b)=\\eta_F(a)+\\eta_F(b)$ and $\\eta_F(ab)=\\eta_F(a)\\eta_F(b)$; its zero-arity operation gives $\\eta_F(1)=1$. This is the ring inverse image, equivalently the strong monoidal ring-object construction of [sk-def-sfb-pulled-back-coefficients]. Thus the evaluation is a ring isomorphism as well.",
-   "uses": [
     "sk-def-sfb-pullback-from-point",
-    "det-pe-condensed-point-basis",
     "lem-weil-pbc-profinite-point-pullback",
-    "sk-def-sfb-pulled-back-coefficients"
+    "sk-def-sfb-pulled-back-coefficients",
+    "lem-pc-fppf-dense-sheaf-equivalence",
+    "lem-weil-pbc-locally-constant-prime-spectrum"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/sk-prop-pe-condensed-point-coefficients.proof.md",
-    "place": "First paragraph, adjunction and ring-structure argument"
-   }
+   "elementary": false
   },
   {
-   "text": "By [sk-def-sfb-condensed-ring] and [sk-def-sfb-pulled-back-coefficients], the evaluation just proved gives $\\underline T_X(\\Omega[S])=C(S,T)$ with pointwise ring operations. For discrete $A$, continuity means exactly local constancy. Index $S_i$ by the finite continuous quotient sets of $S$ ordered by refinement. A continuous $a:S\\to A$ has finite image because its open fibres cover the compact $S$; those fibres give a finite clopen quotient, so $a$ is the pullback of an element of $A^{S_i}$. If two finite-stage functions have equal pullbacks, their pullbacks to the common quotient given by nonempty intersections of their fibres agree, because $S$ surjects onto that quotient. Thus $C(S,A)=LC(S,A)=\\varinjlim_i A^{S_i}$ as rings. This construction commutes with a continuous map $T\\to S$ by precomposition and the induced refinements. For $S=\\varnothing$ the empty quotient gives the one-element zero ring on both sides.",
+   "text": "Specialize ring evaluation to the continuous coefficient sheaf. The sheafification counit transporting its ring structure recovers the original pointwise presheaf ring. For discrete A the identity on functions is a ring equivalence from locally constant to continuous functions. A locally constant function factors through its discrete quotient. Surjectivity of every quotient projection makes each cocone leg injective. The filtered-colimit criterion in types, and reflection by the ring forgetful functor, prove the asserted ring colimit, including the empty space.",
    "uses": [
     "sk-def-sfb-condensed-ring",
     "sk-def-sfb-pulled-back-coefficients"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/sk-prop-pe-condensed-point-coefficients.proof.md",
-    "place": "Second paragraph, continuous and locally constant sections"
-   }
+   "elementary": false
   },
   {
-   "text": "The test-object formula of [sk-def-sfb-pullback-from-point] and [det-pe-condensed-point-basis] gives $\\Omega[S]=\\varprojlim_i U_i$, where $U_i=\\coprod_{s\\in S_i}X=\\operatorname{Spec}\\Omega^{S_i}$ and the transitions are induced by the quotient maps. Each $U_i$ is affine étale of finite presentation over $X$: $\\Omega^{S_i}=\\prod_{s\\in S_i}\\Omega$ is finitely presented, and each factor is the localization $\\Omega^{S_i}[e_s^{-1}]$ at the idempotent $e_s$, so $U_i$ is a finite disjoint union of open subschemes each mapping isomorphically to $X$ (this is the converse of clause (1) of the basis node, not that clause itself). By [lem-galois-constant-sheaf-sets-representable], the constant étale sheaf with underlying set $A$ is represented by $\\coprod_{a\\in A}X$. An $X$-map from $U_i$ to this coproduct chooses one component for each $s\\in S_i$, since each $\\operatorname{Spec}\\Omega$ has one point. Hence $A_{X,\\mathrm{Et}}(U_i)=A^{S_i}$. The constant sheaf definition [def-weil-pbc-constant-sheaf] equips these sections with the original constants on each component; gluing the components gives pointwise addition, multiplication and unit, also for a noncommutative ring. For a map of finite sets the scheme map sends each component to its specified component, so restriction is exactly precomposition. This proves the finite-stage evaluation with its ring operations and transition maps, including $S_i=\\varnothing$.",
+   "text": "Apply the proved discrete constant-ring comparison theorem for the final two clauses and combine the four conjuncts. Its proof uses the canonical monoidal constant-sheaf pullback comparison and locally bijective sheafification, with no residual holes.",
    "uses": [
-    "sk-def-sfb-pullback-from-point",
-    "det-pe-condensed-point-basis",
-    "lem-galois-constant-sheaf-sets-representable",
-    "def-weil-pbc-constant-sheaf"
+    "lem-pe-condensed-point-discrete-constant-comparisons"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/sk-prop-pe-condensed-point-coefficients.proof.md",
-    "place": "Second paragraph, finite affine presentation and finite-stage constant-sheaf evaluations"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-comparison-sections] with affine $X=\\operatorname{Spec}\\Omega$, the presentation of Step 5, and the underlying abelian étale sheaf of $A_{X,\\mathrm{Et}}$ (a sheaf of $\\mathbf Z$-modules). It gives $(\\nu_X^*A_{X,\\mathrm{Et}})(\\Omega[S])=\\varinjlim_i A^{S_i}$ naturally in the basis object. The formula sends a finite-stage section to its restriction; Step 5 shows that restrictions preserve multiplication and unit, so the formula is a ring isomorphism. Together with Steps 3–4 this gives an isomorphism of the two restricted ring sheaves. The basis detection and uniqueness statement of [lem-weil-pbc-ind-etale-basis] extends it uniquely to an isomorphism on the full site, with its inverse and operation identities extending by the same uniqueness. To verify the last constant-sheaf assertion directly, $LC(S,A)$ is the constant sheaf of rings on the profinite site: a ring homomorphism $A\\to H(*)$ to the sections of any ring sheaf $H$ defines a map $LC(S,A)\\to H(S)$ by pulling its value $a$ back to each clopen fibre of a locally constant function and gluing over this finite covering; refinement of partitions makes this natural and unique. Conversely such a sheaf map is determined by its component at $*$ and has that construction, so it satisfies the sheafification universal property in [def-weil-pbc-constant-sheaf]. Under the equivalence of Step 2, final-object sections are preserved, since $u(*)=X$. The same universal property therefore identifies $\\underline A_X$ with the constant ring sheaf on $X_{\\mathrm{proét}}$.",
-   "uses": [
-    "lem-weil-pbc-comparison-sections",
-    "lem-weil-pbc-ind-etale-basis",
-    "def-weil-pbc-constant-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/sk-prop-pe-condensed-point-coefficients.proof.md",
-    "place": "Second paragraph, comparison formula, agreement on the basis and classical constant-sheaf conclusion"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "det-pe-condensed-point-basis",
-  "lem-weil-pbc-locally-constant-prime-spectrum",
-  "lem-weil-pbc-ind-etale-stability",
-  "def-weil-pbc-proetale-site",
-  "sk-def-sfb-condensed-ring",
   "lem-weil-pbc-ind-etale-basis",
-  "lem-pc-fppf-dense-sheaf-equivalence",
-  "def-weil-size-convention",
   "sk-def-sfb-pullback-from-point",
   "lem-weil-pbc-profinite-point-pullback",
   "sk-def-sfb-pulled-back-coefficients",
-  "lem-galois-constant-sheaf-sets-representable",
-  "def-weil-pbc-constant-sheaf",
-  "lem-weil-pbc-comparison-sections"
+  "lem-pc-fppf-dense-sheaf-equivalence",
+  "lem-weil-pbc-locally-constant-prime-spectrum",
+  "sk-def-sfb-condensed-ring",
+  "lem-pe-condensed-point-discrete-constant-comparisons"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/sk-prop-pe-condensed-point-coefficients.proof.md",
-  "place": "Both paragraphs"
+  "place": "Both paragraphs formalized: dense restriction, monoidal adjunction unit, filtered colimits, and the fully proved discrete constant-ring comparison."
  },
  "mathlib_searches": [
   {
@@ -259,11 +200,8 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-ind-etale-stability",
   "lem-weil-pbc-ind-etale-basis",
-  "lem-weil-pbc-profinite-point-pullback",
-  "lem-weil-pbc-comparison-sections",
-  "lem-galois-constant-sheaf-sets-representable"
+  "lem-weil-pbc-profinite-point-pullback"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -309,5 +247,15 @@
   "group": "Q68",
   "result": "pass",
   "note": "Read the node, all 8 stmt_deps and the Lean module. Clause by clause: IsSepClosed Ω only; conjunct 1 is the set inverse image profinitePointSetSchemeInverseImage restricted along profiniteToProEtOf (=X[S]=Ω[S] via condensed_point_basis), naturally iso to F.obj; conjunct 2 is a Mon-object (ring-preserving) iso of the restricted coefficientRing (upperStarFromPoint.mapMon) with F; clause (1) compares with continuousCoefficientRingPresheaf T (C(S,T), precomposition, pointwise operations); clause (2) gives LC≃+*C with identity underlying map, IsColimit of the real A^{S_i} precomposition cocone over all DiscreteQuotients, a full-site ring iso with comparisonUpperStar Ab (same sheafPullback construction as the recorded proEtaleSiteComparison, real Monoidal instance) of the constant étale ring, and with the constant pro-étale ring (Mathlib constantSheaf). Edge cases: S empty, zero/noncommutative/infinite A, positive characteristic, single universe u, no stronger assumptions. Helpers carry real data, are not rival notions, and have source/blueprint docstrings; the theorem docstring has all six proof steps; proof is sorry only; lean.statement is verbatim; node diff is the lean field only. nt_compile.py (side overlay) compiles the file clean in 3.9 s, axioms propext/sorryAx/choice/Quot.sound. No fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-a2aad",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261019T002607-L-2157538",
+  "kind": "interface",
+  "note": "independent cc review: delivered CondensedPointCoefficients + new CondensedPointDiscreteConstantComparison vs live module, node and unit sk-prop-pe-condensed-point / sk-prop-pe-comparison-morphism realized lists; compile + importer FiniteConstantLocalModel + #print axioms"
  }
 }

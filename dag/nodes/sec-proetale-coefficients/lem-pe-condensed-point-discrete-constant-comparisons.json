@@ -1,0 +1,132 @@
+{
+ "id": "lem-pe-condensed-point-discrete-constant-comparisons",
+ "kind": "lemma",
+ "title": "Discrete constant-ring comparisons on the geometric point",
+ "statement": "Let Ω be a separably closed field and A a discrete ring. The inverse image of the condensed continuous-function ring is isomorphic both to the comparison inverse image of the constant etale ring and to the constant pro-etale ring. All isomorphisms are of internal rings, retaining multiplication and unit. Use the specified inverse image [sk-def-sfb-pullback-from-point], coefficient ring [sk-def-sfb-pulled-back-coefficients], and constant sheaves [def-weil-pbc-constant-sheaf].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/sk-prop-pe-condensed-point-coefficients.md",
+  "place": "Coefficient lemma, clause (2), and its proof, second paragraph: the constant etale and pro-etale ring identifications"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-pullback-from-point",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-constant-sheaf",
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The natural map from the constant ring presheaf A to the continuous-function ring presheaf sends a to the constant function. For a continuous map from a profinite space to discrete A, compactness makes its image finite. Its clopen fibres form a finite jointly surjective family of profinite subspaces, on each of which the map is constant. Thus the map is locally surjective. Two constants that become equal are equal on a nonempty space; on the empty space the empty family covers. Thus it is locally injective. Mathlib locally-bijective sheafification and the existing continuous coefficient sheaf give an abelian-sheaf isomorphism. The natural map is a ring map, and the monoidal sheafification structure agrees with sheafification of the ring presheaf, so this lifts to an isomorphism of internal rings.",
+   "uses": [
+    "sk-def-sfb-condensed-ring",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing canonical monoidal constantSchemeIso of [def-sfb-constant-sheaf-scheme-pullback-comparison] to the internal ring ULift A and transport the preceding isomorphism along upperStarFromPoint. For the etale comparison apply the same generic constantPullbackMonoidalIso to the inclusion Scheme.toProEt. It preserves the terminal object because it preserves finite limits. Mapping both monoidal natural isomorphisms to monoid objects gives the two constant abelian ring comparisons. Finally forgetting rings to abelian groups preserves sheafification, so the constant abelian internal ring is isomorphic to the specified ring-valued constant sheaf with its underlying abelian sheaf. Compose these ring isomorphisms for both conclusions. This argument works for arbitrary discrete rings, including noncommutative and zero rings, and treats the empty covering explicitly.",
+   "uses": [
+    "def-sfb-constant-sheaf-scheme-pullback-comparison",
+    "sk-def-sfb-pullback-from-point",
+    "sk-def-sfb-pulled-back-coefficients",
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-constant-sheaf",
+  "def-sfb-constant-sheaf-scheme-pullback-comparison",
+  "sk-def-sfb-pullback-from-point",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/sk-prop-pe-condensed-point-coefficients.proof.md",
+  "place": "Second paragraph, constant-sheaf identifications; shorter proof by locally bijective sheafification and the canonical monoidal constant-sheaf pullback comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constantSheaf|locallyConstantPresheaf",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Module.lean, Mathlib/Condensed/Discrete/Module.lean",
+   "date": "2026-10-19",
+   "verdict": "Related generic interfaces; use existing project monoidal constant-sheaf pullback comparisons and prove the discrete ring identification."
+  },
+  {
+   "tool": "loogle",
+   "query": "LocallyConstant, ContinuousMap",
+   "results": "12 hits: LocallyConstant.toContinuousMap, LocallyConstant.instCoeContinuousMap, LocallyConstant.comap, LocallyConstant.toContinuousMap_injective, LocallyConstant.comap_injective, LocallyConstant.coe_continuousMap, LocallyConstant.comap_comap, LocallyConstant.coe_comap_apply",
+   "date": "2026-10-19",
+   "verdict": "Related generic interfaces; use existing project monoidal constant-sheaf pullback comparisons and prove the discrete ring identification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constant sheaf of rings on profinite sets is locally constant functions, inverse image preserves constant sheaves",
+   "results": "8 hits: Condensed.locallyConstantPresheaf, LightCondensed.locallyConstantPresheaf, CompHausLike.LocallyConstantModule.functor, LightCondSet.LocallyConstant.functor, CompHausLike.LocallyConstant.functor, CondensedSet.LocallyConstant.functor, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_carrier, Condensed.locallyConstantIsoFinYoneda",
+   "date": "2026-10-19",
+   "verdict": "Related generic interfaces; use existing project monoidal constant-sheaf pullback comparisons and prove the discrete ring identification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of the constant sheaf of rings is the constant sheaf, and discrete condensed rings are locally constant functions",
+   "results": "8 hits: CategoryTheory.Sheaf.IsConstant.mk, CondensedMod.isDiscrete_tfae, LightCondensed.IsDiscrete, CondensedMod.LocallyConstant.functorIsoDiscrete, LightCondSet.LocallyConstant.iso, CondensedSet.isDiscrete_tfae, CondensedSet.LocallyConstant.iso, LightCondSet.discrete",
+   "date": "2026-10-19",
+   "verdict": "Related generic interfaces; use existing project monoidal constant-sheaf pullback comparisons and prove the discrete ring identification."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedPointCoefficients",
+  "date": "2026-10-18",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-pe-condensed-point-coefficients",
+   "place": "Second paragraph, Steps 5--6, discrete constant-sheaf identifications",
+   "via": [
+    "det-pe-condensed-point-coefficients"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-pe-condensed-point",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedPointDiscreteConstantComparison",
+  "file": "lean/Sheaf/Paper/CondensedPointDiscreteConstantComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensed_point_discrete_constant_comparisons",
+  "statement": "theorem condensed_point_discrete_constant_comparisons\n    (Ω : Type u) [Field Ω] [IsSepClosed Ω]\n    (A : Type u) [Ring A] [TopologicalSpace A] [DiscreteTopology A] :\n    Nonempty (coefficientRing (Spec (.of Ω))\n        (Mon.mk (Profinite.continuousCoefficientRingObj A)) ≅\n          (comparisonUpperStar Ab.{u + 1} (Spec (.of Ω))).mapMon.obj\n            ((Mon.mk ((sheafCompose (Spec (.of Ω)).smallEtaleTopology\n              (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj\n                ((constantSheaf (Spec (.of Ω)).smallEtaleTopology RingCat.{u + 1}).obj\n                  (RingCat.of (ULift.{u + 1} A))))))) ∧\n      Nonempty (coefficientRing (Spec (.of Ω))\n        (Mon.mk (Profinite.continuousCoefficientRingObj A)) ≅\n          (Mon.mk ((sheafCompose (Scheme.ProEt.topology (Spec (.of Ω)))\n              (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj\n                ((constantSheaf (Scheme.ProEt.topology (Spec (.of Ω))) RingCat.{u + 1}).obj\n                  (RingCat.of (ULift.{u + 1} A))))))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-a2aad",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261019T002607-L-2157538",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-a2aad",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261019T002607-L-2157538",
+  "kind": "interface",
+  "note": "independent cc review: delivered CondensedPointCoefficients + new CondensedPointDiscreteConstantComparison vs live module, node and unit sk-prop-pe-condensed-point / sk-prop-pe-comparison-morphism realized lists; compile + importer FiniteConstantLocalModel + #print axioms"
+ }
+}
