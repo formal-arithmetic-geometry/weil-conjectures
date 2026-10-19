@@ -30,99 +30,52 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-finite-length-module-simple-filtration] with $R=B$ to obtain a finite filtration $0=M_0\\subsetneq\\cdots\\subsetneq M_r=M$ with simple factors $Q_j=M_j/M_{j-1}$ for $1\\le j\\le r$. If $r=0$, every sum over factors below is empty. We will compute both sides of the desired equality from this one filtration; no decomposition of $B$ or Noetherian hypothesis is needed.",
+   "text": "Induct on Mathlib IsFiniteLength, whose constructors give either a zero module or an extension of a previously handled finite-length submodule N by a simple quotient. This is the simple-factor induction of Stacks Tag 02M0 without separately choosing a composition series. In the zero case every localization is zero, so the assertion holds.",
    "uses": [
-    "lem-weil-pbc-finite-length-module-simple-filtration"
+    "def-weil-pbc-module-length"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02M0 (lemma-pushdown-module), first sentence of proof; Tag 00J3 (lemma-simple-pieces), part (2)."
-   }
+   "elementary": true
   },
   {
-   "text": "For each simple $Q_j$ [def-weil-pbc-simple-module], choose $0\\ne x_j\\in Q_j$. The nonzero submodule $Bx_j$ is all of $Q_j$, so with $\\mathfrak q_j=\\{b\\in B:bx_j=0\\}$ the map $B/\\mathfrak q_j\\to Q_j$, $\\bar b\\mapsto bx_j$, is a well-defined bijective $B$-linear map. The ideal $\\mathfrak q_j$ is proper; if $b\\notin\\mathfrak q_j$, simplicity gives $B(bx_j)=Q_j$, hence some $c\\in B$ satisfies $cbx_j=x_j$ and $cb-1\\in\\mathfrak q_j$. Thus every nonzero class in $B/\\mathfrak q_j$ is invertible, so this quotient is a field and $\\mathfrak q_j$ is maximal, belonging to $X$. This proves directly the simple-factor identification used in the source.",
+   "text": "Identify the simple quotient Q with B/q for a maximal ideal q using isSimpleModule_iff_quot_maximal, then with q.ResidueField using the bijective canonical algebra map. Give this field the k=(maximalIdeal A).ResidueField action induced by Ideal.ResidueField.map. Its compatibility with the A-action is map_algebraMap. Surjectivity of A to k identifies A-length with k-length, and Module.length_eq_finrank gives the assumed finite residue degree.",
    "uses": [
-    "def-weil-pbc-simple-module"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00J2 (lemma-characterize-length-1), proof of (1) implies (3); Tag 02M0, second sentence of proof."
-   }
-  },
-  {
-   "text": "For $\\mathfrak q\\in X$ put $L_{\\mathfrak q}=B/\\mathfrak q$. Since $\\mathfrak q$ contracts to $\\mathfrak m$, its $A$-action factors through $k=A/\\mathfrak m$. Choose a $k$-basis $e_1,\\ldots,e_{f_{\\mathfrak q}}$ of $L_{\\mathfrak q}$, using its assumed finite dimension [def-weil-vector-space-dimension], and set $V_i=\\operatorname{span}_k(e_1,\\ldots,e_i)$. These are $A$-submodules, and the coefficient of $e_i$ gives an $A$-linear isomorphism $V_i/V_{i-1}\\cong k$. The $A$-module $k$ has length one: if an $A$-submodule contains $0\\ne u\\in k$, then for any $v\\in k$ a lift in $A$ of $v/u$ multiplies $u$ to $v$, so that submodule is all of $k$. Thus its submodule lattice has exactly $0$ and $k$, and the definition of length [def-weil-pbc-module-length] gives length one. The zero module has length zero by the same definition.",
-   "uses": [
+    "def-weil-pbc-simple-module",
     "def-weil-vector-space-dimension",
     "def-weil-pbc-module-length"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00IY (lemma-dimension-is-length), finite-dimensional case, with Tag 00IX (lemma-length-independent), proof; basis-flag expansion of the residue-field calculation in Tag 02M0."
-   }
+   "elementary": true
   },
   {
-   "text": "Apply [lem-weil-pbc-length-additive-short-exact] to $0\\to V_{i-1}\\to V_i\\to k\\to0$ in the flag of step 3. Starting from $V_0=0$, induction gives $\\mathrm{length}_A(V_i)=i$, and hence $\\mathrm{length}_A(L_{\\mathfrak q})=f_{\\mathfrak q}<\\infty$. The $B$-linear isomorphism in step 2 is also $A$-linear and carries submodule chains bijectively, so $\\mathrm{length}_A(Q_j)=f_{\\mathfrak q_j}$. Each sequence $0\\to M_{j-1}\\to M_j\\to Q_j\\to0$ remains short exact after restricting to $A$, since the underlying maps, their kernels and their images are unchanged. Repeated application of the cited additivity theorem, starting from $M_0=0$, gives $\\mathrm{length}_A(M)=\\sum_{j=1}^{r}f_{\\mathfrak q_j}<\\infty$. This proves the finiteness clause without presupposing finite $A$-length.",
-   "uses": [
-    "lem-weil-pbc-length-additive-short-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02M0 (lemma-pushdown-module), final two sentences of proof; Tag 00IV (lemma-length-additive)."
-   }
-  },
-  {
-   "text": "Fix $\\mathfrak q\\in X$. Compute the localization of a simple factor using the fractions in [def-weil-pbc-module-localization] and the ring fractions in [def-weil-pbc-localization-at-prime]. If $\\mathfrak q_j\\ne\\mathfrak q$, choose $a\\in\\mathfrak q_j\\setminus\\mathfrak q$ (distinct maximal ideals cannot contain one another). This $a$ annihilates $Q_j$ but is inverted at $\\mathfrak q$, so every fraction in $(Q_j)_{\\mathfrak q}$ is zero by the fraction equality criterion. If $\\mathfrak q_j=\\mathfrak q$, step 2 identifies $Q_j$ with $L_{\\mathfrak q}$; the maps $z/s\\mapsto\\bar s^{-1}z$ and $z\\mapsto z/1$ are inverse $B_{\\mathfrak q}$-linear maps $(L_{\\mathfrak q})_{\\mathfrak q}\\cong L_{\\mathfrak q}$. They are well-defined by the fraction equality criterion, since every denominator has nonzero, hence invertible, image in the field $L_{\\mathfrak q}$. The action map $B_{\\mathfrak q}\\to L_{\\mathfrak q}$ is surjective, already on fractions $b/1$. Consequently any nonzero $B_{\\mathfrak q}$-submodule of $L_{\\mathfrak q}$ contains every element (multiply a nonzero element $u$ by a lift of $v/u$). Its length is therefore one, while the zero factor has length zero, by [def-weil-pbc-module-length]. Thus $\\mathrm{length}_{B_{\\mathfrak q}}((Q_j)_{\\mathfrak q})$ is $1$ if $\\mathfrak q_j=\\mathfrak q$ and $0$ otherwise.",
+   "text": "At p=q, the identity map on q.ResidueField is a module localization map, since every denominator is a unit. IsLocalizedModule.iso identifies its localization with that field over B_q. The surjective local residue map shows its length is one. At p distinct from q, maximality gives an element a in q outside p. It annihilates the residue field and belongs to the denominator set, so LocalizedModule.subsingleton_iff makes its localization zero. Transport both calculations along the localized simple-quotient isomorphism.",
    "uses": [
     "def-weil-pbc-module-localization",
     "def-weil-pbc-localization-at-prime",
     "def-weil-pbc-module-length"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00J3 (lemma-simple-pieces), part (4), last displayed formula and omitted reader calculation in its proof, expanded here."
-   }
+   "elementary": true
   },
   {
-   "text": "Localize each short exact sequence $0\\to M_{j-1}\\to M_j\\to Q_j\\to0$ at the multiplicative subset $B\\setminus\\mathfrak q$. Apply [lem-weil-pbc-localization-module-exact] to its three consecutive pairs (including the zero endpoints); localization of zero is zero by fractions. This yields $0\\to(M_{j-1})_{\\mathfrak q}\\to(M_j)_{\\mathfrak q}\\to(Q_j)_{\\mathfrak q}\\to0$. The maps are $B_{\\mathfrak q}$-linear by their fraction formulas, so [lem-weil-pbc-length-additive-short-exact] applies over $B_{\\mathfrak q}$. Using step 5 and induction on $j$ gives $\\mathrm{length}_{B_{\\mathfrak q}}(M_{\\mathfrak q})=\\sum_{j=1}^{r}\\mathbf 1_{\\mathfrak q_j=\\mathfrak q}=\\#\\{j:1\\le j\\le r,\\ \\mathfrak q_j=\\mathfrak q\\}$. In particular these local lengths are finite. The localized filtration need not be strict; length additivity applies to these short exact sequences even when a factor is zero.",
+   "text": "Apply length additivity to 0 -> N -> M -> Q -> 0 after restriction to A. The induction hypothesis and finite residue degree show finite A-length. Localize the same exact sequence at each maximal p: localization preserves exactness, injectivity and surjectivity. Length additivity over B_p gives length(M_p)=length(N_p)+1 if p=q and length(N_p) otherwise. Distribute multiplication and the finite sum. Since q belongs to X, its one nonzero new summand is the residue degree. This proves the equality and completes the induction, including the zero-ring case.",
    "uses": [
-    "lem-weil-pbc-localization-module-exact",
-    "lem-weil-pbc-length-additive-short-exact"
+    "lem-weil-pbc-length-additive-short-exact",
+    "lem-weil-pbc-localization-module-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00J3 (lemma-simple-pieces), proof of part (4); Tag 00CS (proposition-localization-exact); Tag 00IV (lemma-length-additive)."
-   }
-  },
-  {
-   "text": "Every $\\mathfrak q_j$ lies in the finite set $X$, so partitioning the finite set of indices $1,\\ldots,r$ by $\\mathfrak q_j$ gives $\\sum_{j=1}^{r}f_{\\mathfrak q_j}=\\sum_{\\mathfrak q\\in X}f_{\\mathfrak q}\\#\\{j:\\mathfrak q_j=\\mathfrak q\\}$. Substitute the expressions from steps 4 and 6 to obtain the asserted weighted localization formula. For $M=0$ the empty filtration gives zero on both sides. If $B$ is the zero ring, any unital $B$-module is zero and $X$ is empty, giving the same equality; the argument therefore does not require an unstated nonzero-ring hypothesis.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02M0 (lemma-pushdown-module), conclusion from additivity and Tag 00J3 (4); finite regrouping and zero cases written out."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-length-module-simple-filtration",
+  "def-weil-pbc-module-length",
   "def-weil-pbc-simple-module",
   "def-weil-vector-space-dimension",
-  "def-weil-pbc-module-length",
-  "lem-weil-pbc-length-additive-short-exact",
   "def-weil-pbc-module-localization",
   "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-length-additive-short-exact",
   "lem-weil-pbc-localization-module-exact"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 02M0 (lemma-pushdown-module), proof, with its cited Tags 00J3, 00J2, 00IY, 00IX and 00IV; explicit basis flags and localized simple-factor calculations fill out the source."
+  "place": "Tag 02M0 (lemma-pushdown-module), simple-factor proof, with Tags 00J3 (4), 00IY and 00IV. T5 implements its filtration induction using Mathlib IsFiniteLength constructors and fully proves both residue-field calculations."
  },
  "mathlib_searches": [
   {
@@ -337,9 +290,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-finite-length-module-simple-filtration"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -380,5 +331,15 @@
   "group": "Q128",
   "result": "pass",
   "note": "Clause-by-clause match against node and Stacks 02M0 (algebra.tex lemma-pushdown-module): local A via IsLocalRing; k and B/q as Ideal.ResidueField (recorded in def-weil-pbc-localization-at-prime, canonically the quotient fields at maximal ideals); X : Finset (MaximalSpectrum B) with hX covering all maximal ideals; hcon is the comap condition; hdeg/finrank use Module.compHom along the canonical Ideal.ResidueField.map (compatibility with A and B checked by a compiled example); M : Type w with IsFiniteLength B M; Localization.AtPrime/LocalizedModule from the recorded deps; both conclusions (finite A-length and the weighted sum in ℕ∞) with the A-action forced by compHom. No extra hypotheses; universes u v w all bound; edge cases M=0, B=0/X empty and finite degrees covered. No helpers or definitions, one theorem with a single sorry; docstrings carry source, blueprint id and 7 proof steps; lean.statement verbatim; commit touches only node, module and report; report has Worker report and Second reading by Q128. nt_compile.py --json: clean, exit 0; #print axioms shows sorryAx; a deliberately broken copy errors as expected. No Mathlib match (IsLocalRing.length_restrictScalars needs B local). Only nit: the Worker report narrative is stale but explicitly superseded."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T5",
+  "result": "pass",
+  "landing": "20261019T112536-L-3952903",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
