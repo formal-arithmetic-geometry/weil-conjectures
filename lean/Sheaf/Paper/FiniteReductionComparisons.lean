@@ -14,6 +14,8 @@ public import Sheaf.Paper.StratumScalarExtension
 public import Sheaf.Paper.SfCompactSupportRestrictionOfScalars
 public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
 
+import Sheaf.Paper.FiniteCompactSupportConstructibility
+
 /-! # Reduction of the canonical finite-coefficient purity maps
 
 Source: main-20261015, sec-smooth-purity/sk-thm-purity-transport,
@@ -65,7 +67,10 @@ theorem finiteReductionPullbackPresentation (P : PurityFiniteSetting.{u})
     ∃! e : Scheme.sfIntrinsicDerivedPullback P.Ring f ≅ P.finiteReductionPullback f,
       HEq e
         (P.finiteReductionPullbackPresentationNative f) := by
-  sorry
+  refine ⟨P.finiteReductionPullbackPresentationNative f, HEq.rfl, ?_⟩
+  intro e he
+  cases he
+  rfl
 
 /-- Canonical comparison from tensor-pullback to gamma's untwisted coordinates.
 Source: blueprint Step 1 (blueprint: def-pur-finite-reduction-comparisons). -/
@@ -90,7 +95,10 @@ theorem finiteReductionCoefficientSquare (P : PurityFiniteSetting.{u})
         (Scheme.proEtaleConstantRingMap (T := Y) (P.finiteReductionRingHom m hm hmn)) ≫
           (Scheme.proEtaleConstantRingComparison f
             (P.finiteReductionSetting m hm).Ring).hom := by
-  sorry
+  simpa [Scheme.proEtaleConstantRingComparison, Scheme.proEtaleConstantRingMap] using
+    (Scheme.proEtaleConstantInverseImageMap_naturality f
+      (a := CommRingCat.ofHom
+        (RingHom.ulift (P.finiteReductionRingHom m hm hmn)))).symm
 
 /-- Actual tensor/pullback coefficient comparison, conjugated into gamma's coordinates.
 Source: blueprint Step 1 (blueprint: def-pur-finite-reduction-comparisons). -/
@@ -203,7 +211,32 @@ theorem existsUnique_finiteReductionUnitSectionMap (P : PurityFiniteSetting.{u})
         a.val.app W x =
           (Scheme.proEtaleConstantRingMap (T := T)
             (P.finiteReductionRingHom m hm hmn)).hom.app W x := by
-  sorry
+  let φ := Scheme.proEtaleConstantRingMap (T := T)
+    (P.finiteReductionRingHom m hm hmn)
+  let a : Scheme.proEtaleConstantModule T P.Ring ⟶
+      (Scheme.proEtaleCoefficientRestrictScalars T
+        (P.finiteReductionRingHom m hm hmn)).obj
+          (Scheme.proEtaleConstantModule T (P.finiteReductionSetting m hm).Ring) :=
+    (SheafOfModules.unitHomEquiv _).symm
+      ⟨fun W ↦ (1 : (Scheme.proEtaleConstantRing T
+        (P.finiteReductionSetting m hm).Ring).obj.obj W), by
+          intro W W' g
+          change (Scheme.proEtaleConstantRing T
+            (P.finiteReductionSetting m hm).Ring).obj.map g 1 = 1
+          exact map_one _⟩
+  refine ⟨a, ?_, ?_⟩
+  · intro W x
+    change (φ.hom.app W x) * 1 = φ.hom.app W x
+    exact mul_one _
+  · intro b hb
+    apply (SheafOfModules.unitHomEquiv _).injective
+    apply Subtype.ext
+    funext W
+    change b.val.app W (1 : (Scheme.proEtaleConstantRing T P.Ring).obj.obj W) =
+      a.val.app W (1 : (Scheme.proEtaleConstantRing T P.Ring).obj.obj W)
+    rw [hb]
+    change φ.hom.app W 1 = φ.hom.app W 1 * 1
+    exact (mul_one _).symm
 
 /-- The degree-zero comparison is the adjoint of its specified ordinary map,
 through the exact-derived single-object comparison. Construct this generically
@@ -292,7 +325,25 @@ theorem finiteReductionCompactSupportComparison_isIso
     (K : Scheme.proEtaleDerivedCategory X P.Ring)
     (hK : finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos X K) :
     IsIso (P.finiteReductionCompactSupportComparison m hm hmn f K) := by
-  sorry
+  have : IsSeparated (X ↘ Spec (.of P.field.k)) := inferInstance
+  have : IsSeparated (Y ↘ Spec (.of P.field.k)) := inferInstance
+  have := hasCompactification_of_finiteType_over_field P.field.k X Y f
+  have hl : IsUnit (P.coefficients.l : P.field.k) := by
+    have h := (P.diagonalExponent_isUnit (𝟙 (Spec (.of P.field.k)))).map
+      (Scheme.ΓSpecIso (.of P.field.k)).hom.hom
+    have hp : IsUnit ((P.coefficients.l : P.field.k) ^ P.level) := by
+      simpa only [diagonalExponent, Nat.cast_pow, map_pow, map_natCast] using h
+    exact (isUnit_pow_iff (Nat.ne_of_gt (lt_of_lt_of_le Nat.zero_lt_one P.level_pos))).mp hp
+  have h := ((Scheme.finiteCompactSupportConstructibility P.coefficients.l P.extension
+    P.field.k hl P.level P.level_pos f).2.2 m hm hmn
+      (HasCompactification.compactification f) K hK.1
+      (P.finiteReduction_preserves_ctf m hm hmn X K hK).1).1
+  have heq : P.finiteReductionCompactSupportComparison m hm hmn f K =
+      Scheme.finiteLevelCompactSupportReductionComparison P.coefficients.l P.extension
+        m P.level hm hmn (HasCompactification.compactification f) K := by
+    rfl
+  rw [heq]
+  exact h
 
 /-- The exceptional coefficient comparison is uniquely determined by the counit
 and the already specified compact-support coefficient comparison.
