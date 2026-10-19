@@ -26,51 +26,40 @@
  ],
  "proof": [
   {
-   "text": "For a small filtered diagram (M_i) of A-module sheaves put K_i=M_i[0]. Every K_i vanishes below the common degree a=0. Colimits of module sheaves exist and agree with colimits of the underlying abelian sheaves by [lem-weil-pbc-module-sheaves-colimits-forgetful]; their termwise colimit is (colim_i M_i)[0], since every other degree is the zero diagram. Apply [det-pe-bounded-continuity-direct-image] with f=p and its arbitrary ring sheaf mathcal R=A. Its hypotheses are exactly the given quasi-compactness and quasi-separatedness and the common bound 0. By the degree-zero-complex meaning of R^q in the statement, it gives colim_i R^q p_*M_i ≅ R^q p_*(colim_i M_i). The comparison is the canonical one: its i-th leg is R^q p_* applied to M_i→colim_j M_j. This proves filtered continuity. The map is p_*A-linear; an isomorphism of underlying abelian sheaves has a p_*A-linear inverse, since applying the map to both sides of a·f^(-1)(n)=f^(-1)(a·n) gives the same section.",
+   "text": "For a filtered diagram M, form D = M composed with the degree-zero single-complex functor. For n < 0 its degree n object is zero by HomologicalComplex.isZero_single_obj_X. Apply boundedContinuityDirectImage from [det-pe-bounded-continuity-direct-image] at the common lower bound 0. The single-complex functor preserves colimits (Mathlib HomologicalComplexLimits), and colimit.post_post identifies the required comparison with the composite of this comparison and the derived-continuity comparison. Both factors are isomorphisms. The derived category and the comparisons are those of [def-weil-abstract-derived-category] and [def-weil-pbc-category-colimit].",
    "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "det-pe-bounded-continuity-direct-image"
+    "det-pe-bounded-continuity-direct-image",
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-category-colimit"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/_section.md",
-    "place": "Proof step 1 and Complement; degree-zero specialization of det-pe-bounded-continuity-direct-image"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/sk-lem-proper-heart-continuity-direct-image.md",
+    "place": "node det-proper-heart-continuity-direct-image, order None"
    }
   },
   {
-   "text": "Fix a small family (M_j) indexed by J, and choose once, for each j∈J, bounded-below, termwise injective, K-injective resolutions M_j[0]→I_j using [lem-sc-bounded-below-injective-resolution] on the small ringed site (X_proét,A). For each finite subset F⊆J their finite direct sum I_F is K-injective: for an acyclic complex C a chain map C→I_F has finitely many component maps C→I_j, each null-homotopic; the finite tuple of their homotopies is a null-homotopy of the original map. The map (⊕_{j∈F} M_j)[0]→I_F is a quasi-isomorphism: kernels and images of the block-diagonal differential are respectively the finite direct sums of the component kernels and images, so H^r(I_F)=⊕_{j∈F}H^r(I_j). This is also valid for F empty, when I_F=0. By [det-pe-topos-functoriality-inverse-image], p_* is sectionwise restriction; it preserves finite biproducts because those are finite products of abelian sheaves, computed sectionwise by [lem-weil-pbc-module-sheaves-colimits-forgetful](2). Consequently p_*I_F=⊕_{j∈F}p_*I_j. Compute Rp_* on these K-injective resolutions by [def-sfb-right-derived-functor] and compute cohomology by the kernel/image formula of [def-weil-abstract-derived-category]. This gives the isomorphism ⊕_{j∈F}R^q p_*M_j→R^q p_*(⊕_{j∈F}M_j). It is the canonical map, since the inclusion of I_j into I_F lifts the inclusion of M_j, and naturality of the derived-functor unit identifies its derived image with that inclusion on cohomology. For F⊆G the inclusions of resolutions induce the inclusions of finite subsums on both sides, so these isomorphisms commute with the transition maps.",
+   "text": "Prove additivity of ringDerivedDirectImage in a private helper. The localization Qh restricted to HomotopyCategory.KInjectives is full and faithful by the Mathlib Hom bijection into K-injectives. It is essentially surjective: resolve a representative of each derived object using ringModuleDirectImage_hasKInjectiveResolutions of [det-pe-bounded-continuity-direct-image]; the quasi-isomorphism gives the required derived isomorphism. The unit of [def-sfb-right-derived-functor] is invertible on K-injectives, identifying the composite of this localization with the chosen right derived functor with the restriction of the additive functor mapHomotopyCategory followed by Qh. Transport additivity across this natural isomorphism, then descend it through the full essentially surjective additive localization using Functor.additive_of_full_essSurj_comp. Composition with the additive single-complex, localization, and cohomology functors proves that the higher direct image on sheaves is additive. Thus it preserves finite coproducts, including the empty one, canonically and naturally.",
    "uses": [
-    "lem-sc-bounded-below-injective-resolution",
-    "det-pe-topos-functoriality-inverse-image",
+    "det-pe-bounded-continuity-direct-image",
     "def-sfb-right-derived-functor",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+    "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 015A (higher derived functors), 05TH (bounded-below injectives compute the derived functor), 013P (comparison by lifts); explicit finite-biproduct calculation"
+    "place": "Tags 015A, 05TH and 013P: finite sums and computation on K-injectives; additivity is transported through the unit on K-injectives"
    }
   },
   {
-   "text": "Let (M_j) now be indexed by any small set J, and let P be the poset of finite subsets F⊆J, including ∅. It is small, nonempty, and filtered: F∪G is a common upper bound, and there are no distinct parallel arrows in a poset. Put M_F=⊕_{j∈F}M_j with the canonical inclusion maps for F⊆G. Then colim_{F∈P}M_F=⊕_{j∈J}M_j. Indeed, a cocone M_F→N is precisely a family M_j→N: restriction to singleton subsets extracts the family, and the finite coproduct universal property reconstructs each cocone leg, including the unique leg on M_∅=0. The two operations are inverse and respect all inclusions. This proves the asserted colimit by [def-weil-pbc-category-colimit]. The same argument applies to the family R^q p_*M_j. Both categories have the required colimits by [lem-weil-pbc-module-sheaves-colimits-forgetful].",
+   "text": "For any coefficient-universe set J, Finset (Discrete J) is a small filtered category, including the empty finite subset. Step 1 and preservesColimit_of_isIso_post give preservation of colimits of this shape by the additive functor of Step 2. Apply the source-library theorem CategoryTheory.Limits.preservesColimitsOfShape_discrete_of_preservesColimitsOfShape_finset, which proves canonically by the coproduct universal property that an additive functor preserving these filtered finite subsums preserves coproducts indexed by J. Its finite-subsum argument includes the empty family. Colimits and coproducts use [def-weil-pbc-category-colimit]; their existence is supplied by Mathlib module-sheaf colimit instances, with no separate module-sheaf comparison theorem.",
    "uses": [
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+    "def-weil-pbc-category-colimit"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/_section.md",
-    "place": "Statement: direct sums are filtered colimits of finite subsums; explicit universal-property argument"
-   }
-  },
-  {
-   "text": "Apply Step 1 to the filtered diagram F↦M_F of Step 3. Step 2 supplies isomorphisms ⊕_{j∈F}R^q p_*M_j ≅ R^q p_*M_F compatible with every F⊆G. Therefore, using Step 3 in the source and target module categories, ⊕_{j∈J}R^q p_*M_j ≅ colim_F R^q p_*M_F ≅ R^q p_*(colim_F M_F) ≅ R^q p_*(⊕_{j∈J}M_j). The composite on the j-th coproduct summand is R^q p_* of the original j-th inclusion, by Step 1 and the finite-sum compatibility in Step 2. The coproduct universal property therefore identifies this composite with the canonical direct-sum comparison. This proves the direct-sum clause, including the empty family.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/_section.md",
-    "place": "Statement, direct-sum clause; Proof step 3, final sentence"
+    "place": "Statement and Proof step 3: direct sums as filtered colimits of finite subsums"
    }
   }
  ],
@@ -78,15 +67,12 @@
   "def-sfb-right-derived-functor",
   "def-weil-abstract-derived-category",
   "def-weil-pbc-category-colimit",
-  "det-pe-bounded-continuity-direct-image",
-  "det-pe-topos-functoriality-inverse-image",
-  "lem-sc-bounded-below-injective-resolution",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+  "det-pe-bounded-continuity-direct-image"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/_section.md",
-  "place": "Same-unit bounded continuity specialized to degree zero, then the explicitly stated filtered-finite-subsum reduction; finite-biproduct resolution calculation as in Stacks Tags 015A, 05TH and 013P"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/sk-lem-proper-heart-continuity-direct-image.md",
+  "place": "W9 Lean proof: degree-zero bounded continuity; additivity via the existing derived unit on K-injectives; existing source-library finite-subsum theorem. Same unit route; no new statements."
  },
  "mathlib_searches": [
   {
@@ -177,11 +163,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-sc-bounded-below-injective-resolution",
-  "det-pe-topos-functoriality-inverse-image"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -221,5 +203,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261019T034344-L-424791",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

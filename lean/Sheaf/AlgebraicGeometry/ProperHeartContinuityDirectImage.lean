@@ -6,11 +6,10 @@ Authors: SHEAF group Q21
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleBoundedContinuityDirectImage
-import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
+import Mathlib.Algebra.Homology.HomologicalComplexLimits
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.LiftToFinset
 
 /-!
 # Higher direct images commute with filtered colimits and direct sums
@@ -30,6 +29,51 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.ProEtale
+
+private theorem ringDerivedDirectImage_additive {X Y : Scheme.{u}} (p : X ⟶ Y)
+    (A : Sheaf (Scheme.ProEt.topology X) RingCat.{u + 1}) :
+    (Scheme.ProEt.ringDerivedDirectImage p A).Additive := by
+  -- The localization restricted to K-injectives is full and essentially surjective.
+  let C := SheafOfModules.{u + 1} A
+  let F := Scheme.ProEt.ringModuleDirectImage p A
+  let h := Scheme.ProEt.ringModuleDirectImage_hasKInjectiveResolutions A
+  let R := Scheme.ProEt.ringDerivedDirectImage p A
+  let K := HomotopyCategory.KInjectives.Qh (C := C)
+  have : K.EssSurj := by
+    constructor
+    intro Z
+    obtain ⟨L, ⟨e⟩⟩ := Functor.EssSurj.mem_essImage (F := DerivedCategory.Qh) Z
+    obtain ⟨L, rfl⟩ := HomotopyCategory.quotient_obj_surjective L
+    obtain ⟨I, s, hI, hs⟩ := h L
+    have := hI
+    have := hs
+    have : IsIso (DerivedCategory.Qh.map
+        ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).map s)) := by
+      exact Localization.inverts DerivedCategory.Qh
+        (HomotopyCategory.quasiIso C (.up ℤ))
+        ((HomotopyCategory.quotient C (.up ℤ)).map s)
+        (by simpa [HomotopyCategory.quotient_map_mem_quasiIso_iff])
+    exact ⟨HomotopyCategory.KInjectives.mk I,
+      ⟨(asIso (DerivedCategory.Qh.map
+        ((HomotopyCategory.quotient C (.up ℤ)).map s))).symm ≪≫ e⟩⟩
+  -- On this subcategory the derived unit identifies R with an additive functor.
+  let α := F.rightDerivedFunctorOfQuasiIsoResolutionsUnit h
+  have : IsIso (Functor.whiskerLeft (HomotopyCategory.KInjectives.ι (C := C)) α) := by
+    exact @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ (fun I ↦ by
+      obtain ⟨I, hI, rfl⟩ := HomotopyCategory.KInjectives.mk_surjective I
+      exact F.rightDerivedFunctorOfQuasiIsoResolutionsUnit_isIso h I)
+  have : (HomotopyCategory.KInjectives.ι (C := C) ⋙
+      F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh).Additive := by
+    dsimp [HomotopyCategory.KInjectives.ι]
+    infer_instance
+  have : (K ⋙ R).Additive :=
+    Functor.additive_of_iso
+      (asIso (Functor.whiskerLeft (HomotopyCategory.KInjectives.ι (C := C)) α) ≪≫
+        (Functor.associator _ _ _).symm)
+  have : K.Additive := by
+    dsimp [K, HomotopyCategory.KInjectives.Qh, HomotopyCategory.KInjectives.ι]
+    infer_instance
+  exact Functor.additive_of_full_essSurj_comp K R
 
 /-- For a quasi-compact, quasi-separated morphism, every integer-degree higher direct
 image on pro-étale module sheaves preserves filtered colimits and direct sums. The target
@@ -82,6 +126,45 @@ theorem properHeartContinuityDirectImage {X Y : Scheme.{u}} (p : X ⟶ Y)
         PreservesColimitsOfShape (Discrete J)
           (CochainComplex.singleFunctor (SheafOfModules.{u + 1} A) 0 ⋙
             DerivedCategory.Q ⋙ Scheme.ProEt.ringHigherDirectImage p A q) := by
-  sorry
+  intro q
+  have hfiltered {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]
+      (M : I ⥤ SheafOfModules.{u + 1} A) :
+      IsIso (colimit.post M
+        (CochainComplex.singleFunctor (SheafOfModules.{u + 1} A) 0 ⋙
+          DerivedCategory.Q ⋙ Scheme.ProEt.ringHigherDirectImage p A q)) := by
+    let D : I ⥤ CochainComplex (SheafOfModules.{u + 1} A) ℤ :=
+      M ⋙ CochainComplex.singleFunctor (SheafOfModules.{u + 1} A) 0
+    have hD : ∀ i : I, ∀ n : ℤ, n < 0 → IsZero ((D.obj i).X n) := by
+      intro i n hn
+      have hne : n ≠ 0 := by omega
+      exact HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ) _ _ _ hne
+    have : IsIso (colimit.post D
+        (DerivedCategory.Q ⋙ Scheme.ProEt.ringHigherDirectImage p A q)) :=
+      AlgebraicGeometry.Scheme.ProEt.boundedContinuityDirectImage p A D 0 hD q
+    have hsingleP : PreservesColimitsOfShape I
+        (CochainComplex.singleFunctor (SheafOfModules.{u + 1} A) 0) := by
+      change PreservesColimitsOfShape I
+        (HomologicalComplex.single (SheafOfModules.{u + 1} A) (ComplexShape.up ℤ) 0)
+      infer_instance
+    let := hsingleP
+    have hsingle : IsIso (colimit.post M
+        (CochainComplex.singleFunctor (SheafOfModules.{u + 1} A) 0)) := by
+      infer_instance
+    rw [← colimit.post_post]
+    infer_instance
+  constructor
+  · exact hfiltered
+  · intro J
+    let F := CochainComplex.singleFunctor (SheafOfModules.{u + 1} A) 0 ⋙
+      DerivedCategory.Q ⋙ Scheme.ProEt.ringHigherDirectImage p A q
+    have : (Scheme.ProEt.ringDerivedDirectImage p A).Additive :=
+      ringDerivedDirectImage_additive p A
+    have : F.Additive := by dsimp [F, Scheme.ProEt.ringHigherDirectImage]; infer_instance
+    have : PreservesColimitsOfShape (Finset (Discrete J)) F := by
+      constructor
+      intro M
+      have := hfiltered M
+      exact preservesColimit_of_isIso_post F M
+    exact preservesColimitsOfShape_discrete_of_preservesColimitsOfShape_finset J F
 
 end AlgebraicGeometry.ProEtale
