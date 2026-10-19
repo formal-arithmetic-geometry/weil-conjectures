@@ -132,6 +132,62 @@ def ringPresheaf : (ℕ × C)ᵒᵖ ⥤ CommRingCat.{r} :=
   (prodOpEquiv (C := ℕ) (D := C)).functor ⋙ Functor.uncurry.obj
     (rings.{c, v, r} J B τ ⋙ sheafToPresheaf J CommRingCat.{r})
 
+private theorem sequence_isSheaf_of_slices {C : Type c} [Category.{v} C]
+    (J : GrothendieckTopology C) (P : (ℕ × C)ᵒᵖ ⥤ Type k)
+    (hP : ∀ n : ℕ, Presieve.IsSheaf J ((Prod.sectR n C).op ⋙ P)) :
+    Presieve.IsSheaf (coefficientSequenceTopology J) P := by
+  intro X S hS x hx
+  let xv : Presieve.FamilyOfElements ((Prod.sectR X.1 C).op ⋙ P)
+      (S.functorPullback (Prod.sectR X.1 C)).arrows :=
+    fun Y f hf ↦ x ((Prod.sectR X.1 C).map f) hf
+  have hxv : xv.Compatible := by
+    intro Y₁ Y₂ Z g₁ g₂ f₁ f₂ hf₁ hf₂ he
+    exact hx ((Prod.sectR X.1 C).map g₁) ((Prod.sectR X.1 C).map g₂)
+      hf₁ hf₂ (by simpa only [← Functor.map_comp] using
+        (congrArg (fun f ↦ (Prod.sectR X.1 C).map f) he))
+  obtain ⟨a, ha, hua⟩ := hP X.1 _ hS xv hxv
+  refine ⟨a, ?_, ?_⟩
+  · intro Y f hf
+    apply ((hP Y.1).isSeparated _ (J.pullback_stable f.2 hS)).ext
+    intro Z g hg
+    let v : (X.1, Z) ⟶ X := (Prod.sectR X.1 C).map (g ≫ f.2)
+    let k : (Y.1, Z) ⟶ (X.1, Z) := Prod.mkHom f.1 (𝟙 Z)
+    have hv : S v := hg
+    have he : k ≫ v = (Prod.sectR Y.1 C).map g ≫ f := by
+      ext <;> simp [k, v]
+    have hc := hx k ((Prod.sectR Y.1 C).map g) hv hf he
+    have hag := congrArg (P.map k.op) (ha (g ≫ f.2) hv)
+    change P.map ((Prod.sectR Y.1 C).map g).op (P.map f.op a) = _
+    erw [← P.map_comp_apply, ← op_comp, ← he]
+    have hp : P.map (k ≫ v).op a = P.map k.op (P.map v.op a) := by
+      rw [op_comp, P.map_comp]
+      rfl
+    exact hp.trans (hag.trans hc)
+  · intro b hb
+    apply hua b
+    intro Y f hf
+    exact hb ((Prod.sectR X.1 C).map f) hf
+
+private theorem uncurry_slice_eq' {C : Type c} [Category.{v} C]
+    (F : ℕᵒᵖ ⥤ Cᵒᵖ ⥤ CommRingCat.{r}) (n : ℕ) :
+    (Prod.sectR n C).op ⋙ (prodOpEquiv (C := ℕ) (D := C)).functor ⋙
+      Functor.uncurry.obj F = F.obj (op n) := by
+  apply CategoryTheory.Functor.ext
+    (F := (Prod.sectR n C).op ⋙ (prodOpEquiv (C := ℕ) (D := C)).functor ⋙
+      Functor.uncurry.obj F) (G := F.obj (op n)) (fun _ ↦ rfl) ?_
+  intro X Y f
+  change (F.map (𝟙 (op n))).app X ≫ (F.obj (op n)).map f = _
+  rw [F.map_id]
+  simp
+
+private theorem horizontal_map' {C : Type c} [Category.{v} C]
+    (F : ℕᵒᵖ ⥤ Cᵒᵖ ⥤ CommRingCat.{r}) {m n : ℕ} (h : n ≤ m) (U : Cᵒᵖ) :
+    ((prodOpEquiv (C := ℕ) (D := C)).functor ⋙ Functor.uncurry.obj F).map
+      (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op = (F.map (homOfLE h).op).app U := by
+  dsimp
+  rw [CategoryTheory.Functor.map_id, Category.comp_id]
+
+set_option linter.unusedSectionVars false in
 /-- The actual ring presheaf is a sheaf for the vertical sequence topology.
 Source: Zheng 4.1 (blueprint: def-coef-semilinear-system-models).
 Proof: glue in B_n on the vertical covering slice. Separatedness on the pullbacks of
@@ -139,7 +195,12 @@ that cover verifies compatibility with horizontal restrictions. The algebra oper
 commute with gluing since each B_n is a ring sheaf. -/
 theorem ringPresheaf_isSheaf :
     Presheaf.IsSheaf (coefficientSequenceTopology J) (ringPresheaf.{c, v, r} J B τ) := by
-  sorry
+  intro A
+  apply sequence_isSheaf_of_slices
+  intro n
+  dsimp only [ringPresheaf]
+  rw [← Functor.assoc, uncurry_slice_eq']
+  exact ((rings.{c, v, r} J B τ).obj (op n)).property A
 
 /-- The ring object B_bullet, with real presheaf data.
 Source: Zheng 4.1 (blueprint: def-coef-semilinear-system-models). -/
@@ -213,6 +274,47 @@ def evaluation (n : ℕ) : Systems.{c, v, r} J B τ ⥤ Mod.{c, v, r} J (B n) :=
   SheafOfModules.pushforward (F := Prod.sectR n C)
     (eqToHom (evaluation_ring.{c, v, r} J B τ n).symm)
 
+private theorem sequenceEvaluation_exact
+    {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C] (J : GrothendieckTopology C)
+    [HasSheafify J AddCommGrpCat.{r}]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
+    [HasSheafify (coefficientSequenceTopology J) AddCommGrpCat.{r}]
+    [(coefficientSequenceTopology J).WEqualsLocallyBijective AddCommGrpCat.{r}]
+    (n : ℕ) {S : Sheaf J RingCat.{r}}
+    {R : Sheaf (coefficientSequenceTopology J) RingCat.{r}}
+    [Functor.IsContinuous (Prod.sectR n C) J (coefficientSequenceTopology J)]
+    (φ : S ⟶ ((Prod.sectR n C).sheafPushforwardContinuous
+      RingCat.{r} J (coefficientSequenceTopology J)).obj R) :
+    PreservesFiniteLimits (SheafOfModules.pushforward.{r} φ) ∧
+      PreservesFiniteColimits (SheafOfModules.pushforward.{r} φ) := by
+  constructor
+  · let T := SheafOfModules.forget.{r} S ⋙ PresheafOfModules.toPresheaf S.obj
+    have : PreservesFiniteLimits (SheafOfModules.pushforward.{r} φ ⋙ T) := by
+      change PreservesFiniteLimits
+        ((SheafOfModules.forget.{r} R ⋙ PresheafOfModules.toPresheaf R.obj) ⋙
+          (Functor.whiskeringLeft _ _ _).obj (Prod.sectR n C).op)
+      infer_instance
+    exact preservesFiniteLimits_of_reflects_of_preserves _ T
+  · let : (Prod.sectR n C).IsCocontinuous J (coefficientSequenceTopology J) :=
+      ⟨fun hS ↦ hS⟩
+    let : ∀ (F : Cᵒᵖ ⥤ AddCommGrpCat.{r}),
+        (Prod.sectR n C).op.HasPointwiseRightKanExtension F := fun F X ↦ by
+      let : HasLimitsOfShape (StructuredArrow X (Prod.sectR n C).op)
+          AddCommGrpCat.{r} := HasLimitsOfShape.of_essentiallySmall _ _
+      infer_instance
+    let H := (Prod.sectR n C).sheafPushforwardContinuous
+      AddCommGrpCat.{r} J (coefficientSequenceTopology J)
+    have : PreservesColimitsOfSize.{0, 0} H :=
+      ((Prod.sectR n C).sheafAdjunctionCocontinuous AddCommGrpCat.{r}
+        J (coefficientSequenceTopology J)).leftAdjoint_preservesColimits
+    let T := SheafOfModules.toSheaf.{r} S
+    have : PreservesFiniteColimits (SheafOfModules.pushforward.{r} φ ⋙ T) := by
+      change PreservesFiniteColimits (SheafOfModules.toSheaf.{r} R ⋙ H)
+      infer_instance
+    have : ReflectsFiniteColimits T :=
+      { reflects := fun _ _ _ ↦ reflectsColimitsOfShape_of_reflectsIsomorphisms }
+    exact preservesFiniteColimits_of_reflects_of_preserves _ T
+
 /-- Evaluation is additive and exact; kernels and cokernels are componentwise.
 Source: Zheng 4.1 (blueprint: def-coef-semilinear-system-models).
 Proof: kernels are sectionwise and cokernels are sheafifications of sectionwise
@@ -221,7 +323,9 @@ Addition of maps is sectionwise as well. -/
 theorem evaluation_exact (n : ℕ) :
     (evaluation.{c, v, r} J B τ n).Additive ∧ PreservesFiniteLimits (evaluation.{c, v, r} J B τ n) ∧
       PreservesFiniteColimits (evaluation.{c, v, r} J B τ n) := by
-  sorry
+  refine ⟨⟨by intros; ext U x; rfl⟩, ?_⟩
+  exact sequenceEvaluation_exact J n
+    (eqToHom (evaluation_ring.{c, v, r} J B τ n).symm)
 
 /-- Additivity of the actual evaluation.
 Source: Zheng 4.1 (blueprint: def-coef-semilinear-system-models). -/
@@ -390,6 +494,35 @@ def restrictionComposition {l m n : ℕ} (h : n ≤ m) (k : m ≤ l) :
     Functor.mapDerivedCategoryNatIso
       (restrictionComposition_existsUnique.{c, v, r} J B τ h k).exists.choose
 
+private theorem transition_generic
+    {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
+    (R : Sheaf (coefficientSequenceTopology J) RingCat.{r})
+    {m n : ℕ} (S T : Sheaf J RingCat.{r})
+    [Functor.IsContinuous (Prod.sectR m C) J (coefficientSequenceTopology J)]
+    [Functor.IsContinuous (Prod.sectR n C) J (coefficientSequenceTopology J)]
+    (φ : S ⟶ ((Prod.sectR m C).sheafPushforwardContinuous RingCat.{r} J
+      (coefficientSequenceTopology J)).obj R)
+    (ψ : T ⟶ ((Prod.sectR n C).sheafPushforwardContinuous RingCat.{r} J
+      (coefficientSequenceTopology J)).obj R)
+    (κ : S ⟶ T) (α : Prod.sectR n C ⟶ Prod.sectR m C)
+    (he : φ ≫ (Functor.sheafPushforwardContinuousNatTrans α RingCat.{r} J
+      (coefficientSequenceTopology J)).app R = κ ≫ ψ) :
+    ∃! δ : SheafOfModules.pushforward.{r} φ ⟶
+        SheafOfModules.pushforward.{r} ψ ⋙ SheafOfModules.restrictScalars κ,
+      ∀ (M : SheafOfModules.{r} R) (U : Cᵒᵖ),
+        HEq (fun x ↦ ((δ.app M).val.app U) x)
+          (fun x : M.val.obj (op (m, U.unop)) ↦ M.val.map (α.app U.unop).op x) := by
+  let δ : SheafOfModules.pushforward.{r} φ ⟶
+      SheafOfModules.pushforward.{r} ψ ⋙ SheafOfModules.restrictScalars κ :=
+    SheafOfModules.pushforwardNatTrans φ α ≫
+      (SheafOfModules.pushforwardCongr he).hom
+  refine ⟨δ, fun _ _ ↦ HEq.rfl, ?_⟩
+  intro δ' hδ'
+  apply NatTrans.ext
+  funext M
+  ext U x
+  exact congrFun (eq_of_heq (hδ' M U)) x
+
 /-- The actual semilinear transition of module systems, specified on every section.
 Source: Zheng 4.1 (blueprint: def-coef-semilinear-system-models).
 Proof: the horizontal presheaf restriction is linear over B_m after scalar
@@ -402,7 +535,41 @@ theorem transition_exists {m n : ℕ} (h : n ≤ m) :
         HEq (fun x ↦ ((δ.app M).val.app U) x)
           (fun x : M.val.obj (op (m, U.unop)) ↦
             M.val.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op x) := by
-  sorry
+  let α : Prod.sectR n C ⟶ Prod.sectR m C :=
+    { app := fun U ↦ Prod.mkHom (homOfLE h) (𝟙 U)
+      naturality := fun {_ _} f ↦ by ext <;> simp }
+  let φm := eqToHom (evaluation_ring.{c, v, r} J B τ m).symm
+  let φn := eqToHom (evaluation_ring.{c, v, r} J B τ n).symm
+  let κ := (sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map
+    (coefficientMap.{c, v, r} J B τ h)
+  have he : φm ≫ (Functor.sheafPushforwardContinuousNatTrans α RingCat.{r} J
+      (coefficientSequenceTopology J)).app
+        (ring.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, r} J B τ)) =
+      κ ≫ φn := by
+    apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext U
+    have hm : φm.hom.app U = 𝟙 _ := by
+      dsimp only [φm]
+      rw [ObjectProperty.eqToHom_hom, eqToHom_app]
+      rfl
+    have hn : φn.hom.app U = 𝟙 _ := by
+      dsimp only [φn]
+      rw [ObjectProperty.eqToHom_hom, eqToHom_app]
+      rfl
+    change φm.hom.app U ≫ _ = _ ≫ φn.hom.app U
+    rw [hm, hn, Category.id_comp, Category.comp_id]
+    change (forget₂ CommRingCat.{r} RingCat.{r}).map
+      ((ringPresheaf.{c, v, r} J B τ).map
+        (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op) = _
+    rw [show (ringPresheaf.{c, v, r} J B τ).map
+        (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op =
+        ((coefficientMap.{c, v, r} J B τ h).hom.app U) from
+      horizontal_map' (rings.{c, v, r} J B τ ⋙ sheafToPresheaf J CommRingCat.{r}) h U]
+    rfl
+  exact transition_generic J
+    (ring.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, r} J B τ))
+    (ring.{c, v, r} J (B m)) (ring.{c, v, r} J (B n)) φm φn κ α he
 
 /-- The strict transition selected by its unique presheaf-restriction formula.
 Source: Zheng 4.1 (blueprint: def-coef-semilinear-system-models). -/
@@ -491,7 +658,48 @@ theorem restrictionEvaluation_existsUnique (n : ℕ) :
       ∀ (M : Systems.{c, v, r} J F σ) (U : Cᵒᵖ),
         HEq (fun x ↦ ((δ.hom.app M).val.app U) x)
           (fun x : M.val.obj (op (n, U.unop)) ↦ x) := by
-  sorry
+  let φB := eqToHom (evaluation_ring.{c, v, r} J B τ n).symm
+  let φF := eqToHom (evaluation_ring.{c, v, r} J F σ n).symm
+  let a := (sheafCompose (coefficientSequenceTopology J)
+    (forget₂ CommRingCat.{r} RingCat.{r})).map (systemMap.{c, v, r} J B τ F σ α hα)
+  let b := (sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map (α n)
+  have he : φB ≫ ((Prod.sectR n C).sheafPushforwardContinuous RingCat.{r}
+      J (coefficientSequenceTopology J)).map a = b ≫ φF := by
+    apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext U
+    have hB : φB.hom.app U = 𝟙 _ := by
+      dsimp only [φB]
+      rw [ObjectProperty.eqToHom_hom, eqToHom_app]
+      rfl
+    have hF : φF.hom.app U = 𝟙 _ := by
+      dsimp only [φF]
+      rw [ObjectProperty.eqToHom_hom, eqToHom_app]
+      rfl
+    change φB.hom.app U ≫ _ = _ ≫ φF.hom.app U
+    rw [hB, hF, Category.id_comp, Category.comp_id]
+    exact congrArg (fun f ↦ (forget₂ CommRingCat.{r} RingCat.{r}).map f)
+      ((systemMap_existsUnique.{c, v, r} J B τ F σ α hα).exists.choose_spec n U)
+  let δ : res.{c, v, r} (systemMap.{c, v, r} J B τ F σ α hα) ⋙
+      evaluation.{c, v, r} J B τ n ≅
+        evaluation.{c, v, r} J F σ n ⋙ res.{c, v, r} (α n) :=
+    SheafOfModules.pushforwardComp (F := Prod.sectR n C) (G := 𝟭 (ℕ × C))
+      (K' := coefficientSequenceTopology J)
+      (R' := ring.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, r} J F σ))
+      φB a ≪≫
+      SheafOfModules.pushforwardCongr he ≪≫
+      (SheafOfModules.pushforwardComp (F := 𝟭 C) (G := Prod.sectR n C)
+        (K := J) (K' := coefficientSequenceTopology J)
+        (R := ring.{c, v, r} J (F n))
+        (R' := ring.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, r} J F σ))
+        b φF).symm
+  refine ⟨δ, fun _ _ ↦ HEq.rfl, ?_⟩
+  intro δ' hδ'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  ext U x
+  exact congrFun (eq_of_heq (hδ' M U)) x
 
 /-- The derived restriction comparison is the localization of the identity on sections.
 Source: Stacks 03CZ (blueprint: def-coef-semilinear-system-models). -/
