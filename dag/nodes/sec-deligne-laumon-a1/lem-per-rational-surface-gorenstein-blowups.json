@@ -23,9 +23,219 @@
   "def-weil-proper-morphism",
   "def-sc-function-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The complete-local excellence theorem makes $C$ excellent. The finite-type/localization stability theorem therefore makes $R$ excellent. Dualizing existence over a complete-local base supplies an algebraic dualizing complex for $R$, and the existing normalization lemma shifts it to a normalized one; the canonical-module theorem identifies it with $\\omega_R[2]$, with $\\omega_R$ finite, torsion-free and of rank one. We shall apply the canonical-module theorem again to the normal proper surface modifications constructed below.",
+   "uses": [
+    "lem-per-complete-local-excellence",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-per-complete-base-algebraic-dualizing-existence",
+    "lem-per-normal-surface-canonical-module",
+    "lem-per-algebraic-local-dualizing-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBV, opening paragraph; dualizing existence is Tag 0BFR (2),(5)."
+   }
+  },
+  {
+   "text": "Put $S=\\operatorname{Spec}R$. There is a nonzero $a\\in R$ on whose principal open $U=D(a)$ the finite module $\\omega_R$ is free of rank one. Explicitly choose an element giving a basis over $\\operatorname{Frac}R$; its map $R\\to\\omega_R$ is injective by torsion-freeness, and its finite cokernel is annihilated by one nonzero denominator after choosing finitely many generators. Localizing at that denominator gives the claimed isomorphism. Apply module flattening with $X=S$, $f=\\operatorname{id}_S$, $\\mathcal F=\\widetilde\\omega_R$ and this quasi-compact $U$. The base is affine, hence quasi-compact and quasi-separated, and the identity is locally finitely presented. The module is finitely presented because $R$ is Noetherian: the kernel of a finite free presentation is finite by the Noetherian-submodule theorem. We obtain a $U$-admissible blowup $b:Y\\to S$ whose module strict transform $L$ is flat and finitely presented over $Y$. The strict-transform definition gives a surjection $b^*\\widetilde\\omega_R\\twoheadrightarrow L$ which is an isomorphism over $U$.",
+   "uses": [
+    "lem-per-normal-surface-canonical-module",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "def-trf-module-strict-transform",
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBV, opening principalization step. The existing module-flattening theorem supplies the more general form of the Tag 0ESN input."
+   }
+  },
+  {
+   "text": "The blowup $Y$ is integral. On an affine blowup chart the ring is $R[I/t]\\subset R_t\\subset\\operatorname{Frac}R$ for a nonzero generator $t$ of the center ideal $I$; charts with zero generator are empty, and the other charts have the common unchanged generic point. Admissibility makes $I$ the unit ideal over $U$, so it is nonzero. These charts cover by the chart-cover theorem. The blowup-proper theorem gives properness, and the complement isomorphism gives birationality. The finite-presentation/flatness theorem makes $L$ finite projective on each affine chart; at a local ring, choose lifts of a residue-field basis, use the local-generators form of Nakayama to get a surjection, and split it from a finite free module. Its finite projective kernel has zero residue fibre and is zero by Nakayama, so its stalk is free. A finite-presentation matrix spreads each such basis and its inverse to a neighbourhood by clearing their finitely many denominators, so $L$ is locally free. Its rank is one: every such free neighbourhood meets the generic point of the integral scheme $Y$, where the rank is one. Hence $L$ is invertible. The kernel of $b^*\\widetilde\\omega_R\\to L$ is torsion, since it vanishes at the generic point. Conversely every torsion section maps to zero because a line bundle on an integral scheme is torsion-free. Thus $L$ is precisely the quotient by torsion.",
+   "uses": [
+    "prop-nagata-affine-blowup-chart-cover",
+    "def-nagata-blowup-chart-ring",
+    "def-nagata-admissible-blowup",
+    "lemma-nagata-blowup-proper",
+    "thm-nagata-global-blowup-complement",
+    "lem-weil-pbc-finitely-presented-flat-module-projective",
+    "def-trf-module-strict-transform",
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-weil-pbc-nakayama-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBV, first paragraph; the invertible strict transform and its torsion kernel are expanded."
+   }
+  },
+  {
+   "text": "Apply normalized domination to the proper birational map $Y\\to S$. Its base $S$ is normal, integral, excellent, Noetherian and two-dimensional by Step 1 and the hypotheses. It yields a finite tower $T_N\\to\\cdots\\to T_0=S$ of normalized blowups at closed points and a map $q:T_N\\to Y$ over $S$. The normalized-tower geometry theorem makes every $T_i$ integral, normal, excellent, Noetherian and two-dimensional, and makes all normalization morphisms finite. Each arrow and each composite to $S$ is proper by the domination theorem and proper composition. Each center maps to the unique closed point of $S$: proper maps are closed, so they send its closed singleton to a closed singleton. At a singular center its local ring has dimension two by the normal-surface local-data theorem. For a regular center, its local dimension is either one or two: dimension zero would make it the generic point of the integral surface and so not closed. A center of local dimension one has DVR local ring; its ideal is locally principal near it, so on a neighbourhood its blowup has the single chart $D[(t)/t]=D$ for a nonzerodivisor $t$, and is also an isomorphism away from the center. Such an identity stage can be deleted. We henceforth keep only local-dimension-two centers.",
+   "uses": [
+    "lem-per-excellent-surface-normalized-domination",
+    "lem-per-excellent-normalized-blowup-tower",
+    "lem-weil-pbc-proper-composition",
+    "def-weil-proper-morphism",
+    "lem-per-excellent-normal-surface-local-data",
+    "lem-sc-normal-dim1-dvr",
+    "thm-nagata-global-blowup-complement",
+    "prop-nagata-affine-blowup-chart-cover",
+    "def-nagata-blowup-chart-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBV, normalized-domination paragraph; Tags 0BBT and 0BFT; support and center-dimension checks are explicit."
+   }
+  },
+  {
+   "text": "Every normalized blowup in this tower is already ordinary. Indeed at a singular center $p\\in T_i$, the local-data theorem gives an excellent normal Noetherian local domain $A=\\mathcal O_{T_i,p}$ of dimension two. The birational local map $R\\subset A$ has the same fraction field and is essentially of finite type: take an affine finite-type chart of the proper $R$-scheme $T_i$ and localize at $p$. Rationality propagation therefore makes $A$ rational. Its ordinary maximal-ideal blowup is normal by the rational point-blowup normality theorem. Flat base change of blowups to $\\operatorname{Spec}A$ identifies the local model; localization at a point of its closed fibre gives exactly the local ring upstairs over $p$. Away from $p$ the ordinary blowup is an isomorphism. Thus it is normal everywhere. At a regular center use the local regular-surface blowup theorem on $\\operatorname{Spec}A$; it also gives normality there. A normal integral blowup has identity normalization, because its affine rings equal their integral closures in the common fraction field. This proves the assertion for all arrows, without assuming that arbitrary blowups preserve normality.",
+   "uses": [
+    "lem-per-excellent-normal-surface-local-data",
+    "lem-per-rational-singularity-birational-propagation",
+    "lem-per-rational-point-blowup-normality",
+    "thm-nagata-blowup-flat-base-change",
+    "thm-nagata-global-blowup-complement",
+    "lem-per-local-surface-maximal-blowup-geometry",
+    "def-sc-normalization",
+    "def-weil-pbc-normal-ring",
+    "def-nagata-blowup-flat-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBV, first paragraph, ordinary versus normalized blowups; Tag 0B4Z with rationality propagation Tag 0BG0."
+   }
+  },
+  {
+   "text": "Write $f_i:T_i\\to S$ for the composite. The quotient $b^*\\widetilde\\omega_R\\twoheadrightarrow L$ from Step 3 is locally split because its target is a line bundle: locally lift its generator to get a splitting. Pull it back along $q$ to obtain a surjection $f_N^*\\widetilde\\omega_R\\twoheadrightarrow q^*L$ onto an invertible module. The pulled-back kernel is torsion: on an affine neighbourhood finitely many generators of the old kernel are killed by a common nonzero element of its domain, whose image is nonzero under the dominant birational map $q$. Right exactness of tensor gives the stated kernel description after pullback; no flatness of $q$ is used. The new line bundle is torsion-free, so the new kernel is exactly the torsion submodule. Consequently $f_N^*\\widetilde\\omega_R$ modulo torsion is the line bundle $q^*L$.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBV, final paragraph: justify the invertible torsion-free quotient on the dominating model."
+   }
+  },
+  {
+   "text": "Fix a singular point $x\\in T_N$ and let $x_i=f_{N,i}(x)\\in T_i$. The local-data theorem makes $x$ closed; properness then makes all its images $x_i$ closed. Every $x_i$ is singular. Otherwise consider the first arrow after a regular ancestor. If its center differs from that ancestor, the arrow is an isomorphism there. If it is the center, that center has local dimension two by Step 4, and flat base change to its regular local scheme followed by the local regular-surface blowup theorem shows that every point above it is regular. Repeating proves that $x$ is regular, a contradiction. The local-data theorem now makes each $x_i$ have two-dimensional excellent normal local ring. Each such ring is essentially of finite type over $R$ with the same fraction field, by an affine finite-type chart of $T_i$; rationality propagation applies as in Step 5.",
+   "uses": [
+    "lem-per-excellent-normal-surface-local-data",
+    "lem-per-local-surface-maximal-blowup-geometry",
+    "thm-nagata-global-blowup-complement",
+    "lem-per-rational-singularity-birational-propagation",
+    "thm-nagata-blowup-flat-base-change",
+    "def-nagata-blowup-flat-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBV, second paragraph: the ancestors of a singular endpoint are singular; Tag 0AGR."
+   }
+  },
+  {
+   "text": "Apply the canonical-module theorem to every $f_i:T_i\\to S$: it gives coherent torsion-free canonical modules $\\omega_{T_i}$ with finite injective dimension at every stalk, and, as $x_i$ is closed with $\\dim\\mathcal O_{T_i,x_i}=2$ (Step 7), $\\omega_{T_i,x_i}[2]$ is a normalized algebraic dualizing complex of $B_i=\\mathcal O_{T_i,x_i}$. By Step 7, $B_i$ is a nonregular rational excellent local ring, and the rationality conclusion includes the Nagata property. Let $\\alpha_{f_i}:f_i^*\\widetilde\\omega_R\\to\\omega_{T_i}$ be the maps of the trace/generation theorem. We prove by induction on $i$ that $\\alpha_{f_i}$ is surjective at $x_i$. For $i=0$, $f_0$ is the identity and $\\alpha_{f_0}$ is an isomorphism by clause (ii). For the inductive step let $g:T_{i+1}\\to T_i$ be the arrow, so $f_{i+1}=f_i\\circ g$, and let $g_B:T'\\to\\operatorname{Spec}B_i$ be its base change; $T'$ contains $x_{i+1}$. Clause (b) of the canonical-module theorem identifies $\\omega_{T_{i+1}}|_{T'}$ with the canonical module of $g_B$, and clause (iii) of the trace theorem identifies $\\alpha_{f_{i+1}}|_{T'}$ with $\\alpha_{g_B}\\circ g_B^*(\\alpha_{f_i}|_{\\operatorname{Spec}B_i})$. If the center of $g$ is not $x_i$, then $g_B$ is an isomorphism by the complement theorem and $\\alpha_{g_B}$ is an isomorphism by clause (ii). If the center is $x_i$, flat base change of blowups identifies $g_B$ with the maximal-ideal blowup of the nonregular rational ring $B_i$, and $\\alpha_{g_B}$ is surjective by clause (i). The restriction of $\\alpha_{f_i}$ to $\\operatorname{Spec}B_i$ is surjective, since its stalks localize the stalk at $x_i$; so is its pullback, by right exactness of tensor. Hence $\\alpha_{f_{i+1}}$ is surjective at $x_{i+1}$. This closes the induction and gives $(f_N^*\\widetilde\\omega_R)_x\\twoheadrightarrow\\omega_{T_N,x}$.",
+   "uses": [
+    "lem-per-normal-surface-canonical-module",
+    "lem-per-rational-canonical-trace-generation",
+    "thm-nagata-blowup-flat-base-change",
+    "thm-nagata-global-blowup-complement",
+    "def-pc-module-pullback",
+    "def-nagata-blowup-flat-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBV, canonical-surjectivity induction, using Tags 0BBU and 0B64(3); compatibility follows explicitly from the generic normalization and torsion-free target."
+   }
+  },
+  {
+   "text": "Torsion in $(f_N^*\\widetilde\\omega_R)_x$ maps to zero in the torsion-free module $\\omega_{T_N,x}$. Step 6 therefore factors the surjection through $(q^*L)_x$, which is free of rank one over the domain $B_x=\\mathcal O_{T_N,x}$. Its kernel is zero: after tensoring with the common fraction field, this is a surjection of one-dimensional vector spaces and hence injective; an element of a kernel which vanishes after that localization is torsion, and the rank-one free source has no nonzero torsion. Hence $\\omega_{T_N,x}\\cong B_x$. The canonical-module theorem says this module has finite injective dimension, so $B_x$ has finite injective dimension over itself. At any regular point the regular-local bounded-injective-resolution theorem gives the same conclusion. Thus every local ring of $T_N$ is Gorenstein in the meaning of the item.",
+   "uses": [
+    "lem-per-normal-surface-canonical-module",
+    "lem-trf-regular-local-bounded-injective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBV, final torsion-free rank-one argument; Tag 0AWX at regular points."
+   }
+  },
+  {
+   "text": "The auxiliary tower so far may include regular centers. Apply the regular-center-discarding lemma to the ordinary normal tower of Steps 4--5. It gives a finite tower $Z_M\\to\\cdots\\to Z_0=S$ at singular closed points and an $S$-isomorphism between open neighbourhoods of the singular loci of $Z_M$ and $T_N$. A singular local ring of $Z_M$ is therefore isomorphic to a singular local ring of $T_N$, which is Gorenstein by Step 9. Its other local rings are regular and have finite self-injective dimension by the regular-local theorem. Thus the new endpoint also satisfies the required Gorenstein conclusion. Notice that no domination of $Y$ by $Z_M$ is needed: principalization was used on $T_N$, and only the resulting local-ring property is transferred.",
+   "uses": [
+    "lem-per-surface-tower-discard-regular-centers",
+    "lem-trf-regular-local-bounded-injective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBV, singular-closed-point condition; the regular-branch omission implicit in the source is separated as its own supporting lemma."
+   }
+  },
+  {
+   "text": "The retained intermediate schemes are normal by the discarding lemma and integral by the blowup charts: for a nonzero point ideal on an integral surface, the nonempty rings $D[I/t]\\subset\\operatorname{Frac}D$ are domains with the unchanged common generic point. This also proves that every retained arrow induces an isomorphism of function fields. Their centers have finite-type quasi-coherent ideals because all these schemes are Noetherian (a finite tower of finite-type blowups over the Noetherian base); hence the blowup-proper theorem and proper composition make the composite proper. The image in $S$ of each retained center is the image of an original center by the discarding lemma, so Step 4 places it above the closed point of $S$. Taking $X_j=Z_j$ proves every clause, including $M=0$ when no center remains.",
+   "uses": [
+    "lem-per-surface-tower-discard-regular-centers",
+    "prop-nagata-affine-blowup-chart-cover",
+    "def-nagata-blowup-chart-ring",
+    "lemma-nagata-blowup-proper",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Conclusion of Tag 0BBV; integral charts, properness and the local-base support condition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-admissible-blowup",
+  "def-nagata-blowup-chart-ring",
+  "def-nagata-blowup-flat-base-change-map",
+  "def-pc-module-pullback",
+  "def-sc-normalization",
+  "def-trf-module-strict-transform",
+  "def-weil-pbc-normal-ring",
+  "def-weil-proper-morphism",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-per-algebraic-local-dualizing-normalization",
+  "lem-per-complete-base-algebraic-dualizing-existence",
+  "lem-per-complete-local-excellence",
+  "lem-per-excellent-normal-surface-local-data",
+  "lem-per-excellent-normalized-blowup-tower",
+  "lem-per-excellent-surface-normalized-domination",
+  "lem-per-local-surface-maximal-blowup-geometry",
+  "lem-per-normal-surface-canonical-module",
+  "lem-per-rational-canonical-trace-generation",
+  "lem-per-rational-point-blowup-normality",
+  "lem-per-rational-singularity-birational-propagation",
+  "lem-per-surface-tower-discard-regular-centers",
+  "lem-sc-normal-dim1-dvr",
+  "lem-trf-flattening-module-by-admissible-blowup",
+  "lem-trf-regular-local-bounded-injective-resolution",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-finitely-presented-flat-module-projective",
+  "lem-weil-pbc-nakayama-jacobson",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-proper-composition",
+  "lemma-nagata-blowup-proper",
+  "prop-nagata-affine-blowup-chart-cover",
+  "thm-nagata-blowup-flat-base-change",
+  "thm-nagata-global-blowup-complement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0BBV (lemma-rational-to-gorenstein), proof, expanded with existing module flattening instead of its Fitting-ideal specialization, explicit trace composition and regular-center discarding."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +271,31 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{F : Type u} →\\n  [inst : Field F] →\\n    {W : WeierstrassCurve.Affine F} →\\n      {x y : F} → W.Nonsingular x y → (FractionalIdeal (nonZeroDivisors W.CoordinateRing) W.FunctionField)ˣ\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, this constructs the unit in the group of invertible fractional ideals of the coordinate ring $W.\\text{CoordinateRin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.RationalMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"For irreducible schemes $X$ and $Y$, this function constructs a morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ from a rational map $X \\\\dashrightarrow Y$, where $K(X)$ is the function field of $X$. It is d\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : AlgebraicGeometry.IsIntegral X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] (f : AlgebraicGeometry.Spec X.functionField ⟶ Y)\\n  (h :\\n    CategoryTheory.CategoryStruct.comp f sY =\\n      CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given an integral scheme $X$ and a scheme $Y$ with a morphism $s_Y: Y \\\\to S$ locally of finite type, if a morphism $f: \\\\operatorname{Spec}(K(X)) \\\\to Y$ satisfies the compatibility condition $f \\\\circ s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  (sX : X ⟶ S) →\\n    (sY : Y ⟶ S) →\\n      [inst : AlgebraicGeometry.IsIntegral X] →\\n        [AlgebraicGeometry.LocallyOfFiniteType sY] →\\n          (f : AlgebraicGeometry.Spec X.functionField ⟶ Y) →\\n            CategoryTheory.CategoryStruct.comp f sY =\\n           \", \"doc\": \"Given an integral scheme $X$, a scheme $Y$ with a morphism $s_Y:Y\\\\to S$ locally of finite type, and a morphism $f:\\\\operatorname{Spec}(K(X))\\\\to Y$ from the spectrum of $X$'s function field $K(X)$ satis\"}\n  {\"name\": \"WeierstrassCurve.Affine.FunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Affine R → Type r\", \"doc\": \"The function field of an affine Weierstrass curve over a base ring $ R $ is the fraction ring of its coordinate ring. The coordinate ring is defined as the quotient ring $ R[X, Y] $ modulo the ideal g\"}\n  {\"name\": \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [inst : AlgebraicGeometry.IsIntegral X] → Field ↑X.functionField\", \"doc\": \"For any integral scheme $X$, its function field (defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$) is a field. This follows from the fact that every nonzero elem\"}\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  ∃ C, WeierstrassCurve.IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.PartialMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"Given an irreducible scheme $X$ and a partial map $f : X \\to Y$ to a scheme $Y$, this constructs the morphism $\\\\operatorname{Spec}(K(X)) \\to Y$ where $K(X)$ is the function field of $X$. The constructio\"}",
    "date": "2026-10-19",
    "verdict": "no match: read the returned signatures; normalization, smoothness, cotangent cohomology, number-field completions and birational-map definitions do not state this surface-singularity assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational normal Nagata local surface essentially of finite type over a complete local ring has a finite sequence of point blowups with Gorenstein endpoint and proper birational composite",
+   "results": "{\"t\": \"2026-10-18T23:44:59Z\", \"tool\": \"leanfinder\", \"query\": \"A rational normal Nagata local surface essentially of finite type over a complete local ring has a finite sequence of point blowups with Gorenstein endpoint and proper birational composite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\"], \"digest\": \"e5aa53a98e2000aa\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: recorded hits concern smoothness, normalization, cotangent dimension and fraction fields, not rational-surface canonical-module principalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "Gorenstein blowup proper birational",
+   "results": "{\"t\": \"2026-10-18T23:45:54Z\", \"tool\": \"loogle\", \"query\": \"Gorenstein blowup proper birational\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `Gorenstein`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: recorded hits concern smoothness, normalization, cotangent dimension and fraction fields, not rational-surface canonical-module principalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "regular local rings have finite injective dimension and compositions of proper birational blowups preserve the function field",
+   "results": "{\"t\": \"2026-10-18T23:47:21Z\", \"tool\": \"leansearch\", \"query\": \"regular local rings have finite injective dimension and compositions of proper birational blowups preserve the function field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"IsLocalRing.ResidueField.map_comp\", \"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"AlgebraicGeometry.functionField_isFractionRing_of_affine\", \"IsLocalRing.ResidueField.map\"], \"digest\": \"bfb728f4dba2402e\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: recorded hits concern smoothness, normalization, cotangent dimension and fraction fields, not rational-surface canonical-module principalization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-complete-normal-surface-resolution",
@@ -91,5 +322,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-rational-surface-gorenstein-blowups",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0BBV by principalizing the canonical module, dominating by normalized point blowups, proving they are ordinary through rationality, and checking canonical-map surjectivity along every singular endpoint chain. Five strictly smaller statement-only inputs are added; existing flattening is reused. The rank-one torsion argument, regular branches, properness and support of centers are explicit. Statement unchanged.",
+  "blueprint": "Technical surface-resolution input beneath lem-per-artin-gabber-affine-curve Step 1 (dimension-normalized duality), via the listed potential-dualizing and complete-normal-surface-resolution ancestry; realizes 0BBV in the rational branch of 0BGN.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic algebraic-geometric tool in the explicit canonical-module proof of Stacks 0BBV; the curve-perverse unit has no replacement statement for this supporting operation."
+   },
+   {
+    "node": "lem-sc-normal-dim1-dvr",
+    "why": "Generic algebraic-geometric tool in the explicit canonical-module proof of Stacks 0BBV; the curve-perverse unit has no replacement statement for this supporting operation."
+   },
+   {
+    "node": "lem-trf-flattening-module-by-admissible-blowup",
+    "why": "Generic algebraic-geometric tool in the explicit canonical-module proof of Stacks 0BBV; the curve-perverse unit has no replacement statement for this supporting operation."
+   },
+   {
+    "node": "lem-trf-regular-local-bounded-injective-resolution",
+    "why": "Generic algebraic-geometric tool in the explicit canonical-module proof of Stacks 0BBV; the curve-perverse unit has no replacement statement for this supporting operation."
+   },
+   {
+    "node": "lemma-nagata-blowup-proper",
+    "why": "Generic algebraic-geometric tool in the explicit canonical-module proof of Stacks 0BBV; the curve-perverse unit has no replacement statement for this supporting operation."
+   },
+   {
+    "node": "prop-nagata-affine-blowup-chart-cover",
+    "why": "Generic algebraic-geometric tool in the explicit canonical-module proof of Stacks 0BBV; the curve-perverse unit has no replacement statement for this supporting operation."
+   },
+   {
+    "node": "thm-nagata-blowup-flat-base-change",
+    "why": "Generic algebraic-geometric tool in the explicit canonical-module proof of Stacks 0BBV; the curve-perverse unit has no replacement statement for this supporting operation."
+   },
+   {
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "Generic algebraic-geometric tool in the explicit canonical-module proof of Stacks 0BBV; the curve-perverse unit has no replacement statement for this supporting operation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-finite-type-localization-excellent",
+  "lem-sc-normal-dim1-dvr",
+  "lem-trf-flattening-module-by-admissible-blowup",
+  "lem-trf-regular-local-bounded-injective-resolution",
+  "lemma-nagata-blowup-proper",
+  "prop-nagata-affine-blowup-chart-cover",
+  "thm-nagata-blowup-flat-base-change",
+  "thm-nagata-global-blowup-complement"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-35966b844",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-35966b844 (reviewer sub-agent of L); spot-checked: Read Stacks 0BBV/0BBU/0B64(3)/0B4Z/0B4R, dualizing 0BFR(2),(5), 0AWX, 0A5S, and duality 0A9P/0AA8(3)/0ATX/0B6J. The item statement is unchanged; the delivery is one commit with five statement-only new nodes and no cycle. Steps 1-7 and 9-11 check out against the cited statements: the flattening hypotheses hold (affine base, id finitely presented, free on D(a)); Y is integral via the charts; propagation 0BG0 plus the new 0B4Z node make every normalized blowup ordinary; singular ancestry is preserved; and the rank-one free quotient argument works. Regular-center pruning was checked by an independent induction on singular-neighbourhood opens (closedness via finite residue fields over a closed point of S); this covers a real gap in the source proof (0BBV states singular centers, but its dominating tower can blow up regular points). The existence node is exactly 0BFR. The canonical-module node is true: normal dim 2 is CM, a dualizing complex implies universally catenary, f^!Omega=omega_X[2]. No duplicates were found by tag or keyword search; lem-trf-complete-local-coherent-duality and the local-support nodes do not state existence, and the pruning node is distinct from lem-per-local-ordinary-point-blowups-globalize. One fault (C4/E5): Step 8 needed (a) that omega_{T_{i+1}} over Spec O_{T_i,x_i} is the canonical module of the local blowup relative to omega_{T_i,x_i}[2], and (b) that the canonical maps compose. The new nodes only said the identifications 'commute with restriction/localization' and that maps are 'identity at the generic point', which does not pin a K-scalar. Fixed: lem-per-normal-surface-canonical-module gets explicit clauses (a) omega_{X'}[2]=g^!(omega_X[2]) (0ATX) and (b) flat base change to Spec O_{X,x} (0AA8(3)). lem-per-rational-canonical-trace-generation gets intrinsic omega=H^{-2}, an isomorphism clause, and a composition clause (iii) (trace of a composite plus 0B6J). Step 8 is rewritten to run the induction through these clauses. Batch-5 flags were each checked: strict-transform definition, 0815 flattening, 0AWX regular-Gorenstein, 0AX0 finite dualizing transfer, the universally-catenary lemma, the projective-bundle definition and its properness are all generic algebra or geometry, not steps of the trace formula or Poincare duality, so accepted. The worker's tool_uses (generic blowup, excellence and DVR nodes) are accepted.; 3 file(s) fixed by the reviewer"
  }
 }
