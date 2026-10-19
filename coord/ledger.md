@@ -17526,3 +17526,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:18 L: merged deliver/NW/prop-sf-dualizable (stage 2; reviewer PASS; parallel immutable checks)
 - 19:19 L: returned deliver/NX/prop-sf-dualizable-hom (reviewer RETURN: L: independent stage-2 immutable head 6569357a8101: file-only compilation failed: sandbox Sheaf.Stage2.Sandbox0 /dev/shm)
 - 19:22 L: returned deliver/NO/fix-lem-tensor-adjunction (reviewer RETURN: L: independent stage-2 immutable head 75b285a280b1: H3 (F1′): the projection is now pinned only at integral stages (Core)
+- 19:26 L: returned deliver/A4/Sheaf.Paper.FiniteSmoothAdjunctionGeneralBase (reviewer RETURN: (the landing tools, head 54da2eda9) the delivery did not land: lean/Sheaf/Paper/FiniteSmoothAdjunctionGeneralBase.lean: )
