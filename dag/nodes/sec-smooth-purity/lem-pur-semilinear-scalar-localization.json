@@ -28,11 +28,9 @@
    }
   },
   {
-   "text": "For objects $K,L$ put $M=\\operatorname{Hom}_{\\mathcal C}(K,L)$ and $N=\\operatorname{Hom}_{\\mathcal D[1/u]}(FK,FL)$. Regard $N$ as an $R$-module by $r\\cdot z=\\lambda(\\phi(r))z$. Semilinearity of $F$ and linearity of $Q_S$ in [def-weil-linear-scalar-localization] say that $h:M\\to N$, $f\\mapsto Q_S(F(f))$, is $R$-linear. Multiplication by $t$ on $N$ is multiplication by the unit $c$, hence bijective. The universal property stated in [def-weil-pbc-module-localization-away] therefore extends $h$ uniquely to an $R$-linear map $M_t\\to N$. By [lem-weil-pbc-localization-module-tensor], the domain is canonically $M\\otimes_R A$, the Hom module of $\\mathcal C[1/t]$, and $f/t^n$ corresponds to $f\\otimes t^{-n}$. Since $t^n(f/t^n)=f/1$, the extended map is $f/t^n\\mapsto c^{-n}Q_S(F(f))$. This constructs the proposed arrow maps and proves their additivity.",
+   "text": "For objects $K,L$ use the scalar-first tensor Hom modules in [def-weil-linear-scalar-localization]. Define the pairing $(a,f)\\mapsto\\bar\\phi(a)\\otimes F(f)$. It is additive in each argument. For $r\\in R$, the coefficient-map equation on integral scalars and semilinearity of $F$ give $\\bar\\phi(ra)\\otimes F(f)=\\bar\\phi(a)\\otimes F(rf)$ by the tensor balancing relation over $S$. The balanced additive universal property, Mathlib TensorProduct.liftAddHom, produces an additive Hom map with this pure-tensor formula. Tensor induction proves that the formula determines the map uniquely: it fixes zero, pure tensors and sums.",
    "uses": [
-    "def-weil-linear-scalar-localization",
-    "def-weil-pbc-module-localization-away",
-    "lem-weil-pbc-localization-module-tensor"
+    "def-weil-linear-scalar-localization"
    ],
    "elementary": false,
    "source": {
@@ -41,10 +39,10 @@
    }
   },
   {
-   "text": "The arrow maps of Step 2 are $\\bar\\phi$-semilinear. Indeed for $a=r/t^m$ and $z=f/t^n$, the fraction scalar-action formula in [def-weil-pbc-module-localization-away] gives $az=rf/t^{m+n}$, so\n$$\\overline F(az)=c^{-m-n}Q_S(F(rf))=\\lambda(\\phi(r))c^{-m-n}Q_S(F(f))=\\bar\\phi(a)\\overline F(z).$$\nAll scalars and arrows admit these fraction presentations by [def-weil-ring-localization-away] and Step 2. Conversely any semilinear extension agreeing on integral arrows must send $t^{-n}(f/1)$ to $c^{-n}Q_S(F(f))$. Thus its arrow maps are precisely those constructed in Step 2; its prescribed object map gives uniqueness of the functor once the functor laws are verified.",
+   "text": "The Hom maps of Step 2 are $\\bar\\phi$-semilinear: on pure tensors $(aa\\prime)\\otimes f$, the equality is exactly multiplicativity of $\\bar\\phi$, and tensor induction extends it to sums. Integral arrows have coefficient $1$, so their images agree with $Q_SF$. The coefficient map sends the inverse of $t$ to the inverse of its unit image, giving the stated fraction formula. For uniqueness, $a\\otimes f=a(1\\otimes f)$ forces every candidate image by semilinearity and integral agreement. Transport its prescribed object equalities, then apply tensor induction and functor extensionality.",
    "uses": [
-    "def-weil-pbc-module-localization-away",
-    "def-weil-ring-localization-away"
+    "def-weil-ring-localization-away",
+    "def-weil-linear-scalar-localization"
    ],
    "elementary": true,
    "source": {
@@ -76,8 +74,11 @@
    }
   },
   {
-   "text": "Consider also a $T$-linear category $\\mathcal E$, an element $v\\in T$, a homomorphism $\\psi:S\\to T$ whose image of $u$ is invertible in $T[1/v]$, and a $\\psi$-semilinear functor $H:\\mathcal D\\to\\mathcal E$. Step 1 supplies $\\bar\\psi:B\\to T[1/v]$; it sends the unit $c$ to a unit. Thus $HF$ satisfies the inversion hypothesis for $\\psi\\phi$ and $t,v$. The composite $\\bar H\\bar F$ is semilinear for $\\bar\\psi\\bar\\phi$, agrees on integral arrows with $Q_T HF$, and has the object map of $HF$. The uniqueness in Step 3 identifies it with $\\overline{HF}$ (the induced coefficient maps agree by Step 1). The identity functor likewise extends to the identity. This verifies the functor identifications needed to type the whiskered comparisons, including when $\\phi(t)$ is not a power of $u$.",
-   "uses": [],
+   "text": "For composable semilinear functors $F$ and $H$, the induced coefficient map for the second functor sends the unit image of $t$ to a unit, verifying the composite inversion hypothesis. Applying the two semilinearity equations in succession gives semilinearity of $HF$. The coefficient maps agree on $R$ and hence on $R[1/t]$ by Step 1. Both extended composite functors send $a\\otimes f$ to $\\bar\\psi(\\bar\\phi(a))\\otimes H(F(f))$. Tensor induction proves equality of their arrow maps, and the object maps are definitionally equal. For identity and linear endofunctors the same argument identifies the extension with the identity and the existing tensor map.",
+   "uses": [
+    "def-weil-linear-scalar-localization",
+    "def-weil-ring-localization-away"
+   ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/prop-pur-rational-purity-transitivity-summands.proof.md",
@@ -96,7 +97,7 @@
    }
   },
   {
-   "text": "Assume now the stated linear triangulated hypotheses and write $\\sigma_K:F(K[1])\\xrightarrow{\\sim}F(K)[1]$ for the given shift comparison. The induced shifts and exact localization functors exist by [lem-weil-linear-scalar-localization-triangulated]. Apply Step 5 to $\\sigma$ and its inverse, using the linear shifts of [def-weil-linear-scalar-localization]; this gives $\\bar\\sigma_K=Q_S(\\sigma_K)$. A distinguished triangle $\\Delta$ of $\\mathcal C[1/t]$ is isomorphic to $Q_R\\Delta_0$ for an integral distinguished triangle $\\Delta_0$, by the cited triangulated-localization statement. The triangle obtained by applying $(\\bar F,\\bar\\sigma)$ to $Q_R\\Delta_0$ is $Q_S$ of the triangle obtained by applying $(F,\\sigma)$ to $\\Delta_0$: its first two arrows are the images of $F$ of the original arrows, and its last arrow is $Q_S(\\sigma_K F(w))$. This is distinguished since $F$ and $Q_S$ are exact. The image of $\\Delta$ is isomorphic to it (apply the functor to the triangle isomorphism and use naturality of $\\bar\\sigma$ for the last square). Closure under triangle isomorphisms in [def-weil-triangulated-category] proves exactness of $\\bar F$.",
+   "text": "Use the tensor Hom equivalence of the existing rationalization to compare the raw scalar localization with the categorical rationalization. This comparison is fully faithful and essentially surjective, so Q_R is a localization functor. Linearity of the shift by one implies linearity of every integer shift by induction and the shift equivalence. Apply Mathlib Functor.commShiftOfLocalization to Q_R, the composite F followed by Q_S, and the integral equality extension_spec. This supplies coherent comparisons for every integer shift. Its component formula is the image of the inverse comparison for Q_R, followed by the integral F comparison and the Q_S comparison. At one, the hypotheses hQC and hQD identify the outer comparisons with identity arrows; the lifting equality has identity components, giving precisely Q_S of the specified F comparison. The target image-triangle description makes Q_S exact. The lifting comparison commutes with shifts, hence Q_R followed by the extension is exact. Every distinguished source-localized triangle is isomorphic to Q_R of an integral distinguished triangle by hdistC. Apply the extension to this isomorphism and use the comparison for mapTriangle of a composite; closure under isomorphisms proves exactness of the extension.",
    "uses": [
     "lem-weil-linear-scalar-localization-triangulated",
     "def-weil-linear-scalar-localization",
@@ -124,8 +125,6 @@
  "proof_deps": [
   "def-weil-ring-localization-away",
   "def-weil-linear-scalar-localization",
-  "def-weil-pbc-module-localization-away",
-  "lem-weil-pbc-localization-module-tensor",
   "def-weil-linear-category",
   "lem-weil-linear-scalar-localization-triangulated",
   "def-weil-triangulated-category",
@@ -134,7 +133,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/prop-pur-rational-purity-transitivity-summands.proof.md",
-  "place": "Finite-extension sentence, made explicit by the module universal property (Stacks 07K0), tensor identification (00DK), and localized distinguished-triangle description (05R6)"
+  "place": "Finite-extension sentence, realized by balanced tensor Hom maps, tensor induction, and coherent shift descent via categorical localization; exactness follows from the localized distinguished-triangle descriptions (Stacks 05R6)."
  },
  "mathlib_searches": [
   {
@@ -319,5 +318,15 @@
   "by": "N0",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261019T002453-L-2137720",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
