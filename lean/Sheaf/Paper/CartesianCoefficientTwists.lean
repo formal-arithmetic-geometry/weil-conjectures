@@ -35,7 +35,6 @@ import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.CategoryTheory.ModulePullbackTensorIso
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
-import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 
 /-! # Cartesian coefficients and Tate twists
 
@@ -54,6 +53,26 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open scoped CategoryTheory.Obj CategoryTheory.MonObj
+
+private theorem comparisonIntoPreservedLimit
+    {A B C D J : Type*} [Category A] [Category B] [Category C] [Category D]
+    [Category J]
+    (U : A ⥤ C) (V : B ⥤ D) (F : C ⥤ D)
+    (a : J ⥤ A) (b : J ⥤ B) [HasLimit a] [HasLimit b]
+    [PreservesLimit b V] (α : a ⋙ U ⋙ F ⟶ b ⋙ V) :
+    ∃! c : F.obj (U.obj (limit a)) ⟶ V.obj (limit b),
+      ∀ j, c ≫ V.map (limit.π b j) = F.map (U.map (limit.π a j)) ≫ α.app j := by
+  let s : Cone (b ⋙ V) :=
+    { pt := F.obj (U.obj (limit a))
+      π :=
+        { app := fun j ↦ F.map (U.map (limit.π a j)) ≫ α.app j
+          naturality := by
+            intro i j g
+            dsimp only [Functor.const_obj_obj, Functor.const_obj_map]
+            rw [Category.id_comp, Category.assoc, ← α.naturality g, ← Category.assoc]
+            simp only [Functor.comp_map]
+            rw [← F.map_comp, ← U.map_comp, limit.w] } }
+  exact (isLimitOfPreserves V (limit.isLimit b)).existsUnique s
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -102,6 +121,42 @@ def spCoefficientIso
     [MonObj Λ] [IsCommMonObj Λ] :=
   Classical.choose (spCoefficientIso_existsUnique f Λ)
 
+private def integralLevelComparison (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) :
+    (upperStar AddCommGrpCat.{u + 1} f).obj (spIntegralTwistLevel Y ℓ E n).X ⟶
+      (spIntegralTwistLevel X ℓ E n).X :=
+  Functor.OplaxMonoidal.δ (upperStar AddCommGrpCat.{u + 1} f) _ _ ≫
+    (condensedPullbackHom (spEllPointRingObj.{u} ℓ E n) f ⊗ₘ
+      Scheme.proEtaleRootsOfUnityInverseImageMap f (ℓ ^ (n + 1)))
+
+private def integralComparisonSystem (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : PadicAlgCl.FiniteIntermediateField ℓ) :
+    spIntegralTwistSystem Y ℓ E ⋙ Mod.forget _ ⋙ upperStar AddCommGrpCat.{u + 1} f ⟶
+      spIntegralTwistSystem X ℓ E ⋙ Mod.forget _ :=
+    NatTrans.ofOpSequence (integralLevelComparison f ℓ E) (by
+      intro n
+      simp only [Functor.comp_map, spIntegralTwistSystem,
+        Functor.ofOpSequence_map_homOfLE_succ]
+      change (upperStar AddCommGrpCat.{u + 1} f).map (spIntegralLevelTransition Y ℓ E n).hom ≫ _ =
+        _ ≫ (spIntegralLevelTransition X ℓ E n).hom
+      have hY := (spIntegralLevelTransition_existsUnique Y ℓ E n).exists.choose_spec
+      have hX := (spIntegralLevelTransition_existsUnique X ℓ E n).exists.choose_spec
+      change (spIntegralLevelTransition Y ℓ E n).hom = _ at hY
+      change (spIntegralLevelTransition X ℓ E n).hom = _ at hX
+      rw [hY, hX]
+      unfold integralLevelComparison
+      rw [← Functor.OplaxMonoidal.δ_natural_assoc (upperStar AddCommGrpCat.{u + 1} f)]
+      simp only [Category.assoc]
+      apply congrArg (fun k ↦ Functor.OplaxMonoidal.δ (upperStar AddCommGrpCat.{u + 1} f) _ _ ≫ k)
+      simp only [MonoidalCategory.tensorHom_comp_tensorHom]
+      apply congrArg₂ (fun a b ↦ a ⊗ₘ b)
+      · exact map_coefficientMap_comp_condensedPullbackHom _ _
+      · exact (Scheme.proEtaleRootsOfUnityInverseImageIso f).1 _ _ _ _ _)
+
+private theorem integralComparisonSystem_app (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) :
+    (integralComparisonSystem f ℓ E).app (op n) = integralLevelComparison f ℓ E n := rfl
+
 /-- The integral comparison is uniquely determined by every finite root projection.
 Source: blueprint Integral twist paragraph
 (blueprint: det-prop-sfb-cartesian-coefficients-twists).
@@ -123,7 +178,28 @@ theorem spIntegralComparison_existsUnique (ℓ : ℕ) [Fact ℓ.Prime]
             (Scheme.proEtaleRootsOfUnitySheaf Y (ℓ ^ (n + 1)))) ≫
           (condensedPullbackHom (spEllPointRingObj.{u} ℓ E n) f ⊗ₘ
             Scheme.proEtaleRootsOfUnityInverseImageMap f (ℓ ^ (n + 1))) := by
-  sorry
+  let F := upperStar AddCommGrpCat.{u + 1} f
+  let UY := Mod.forget (C := Sheaf (Scheme.ProEt.topology Y) AddCommGrpCat.{u + 1})
+    (D := Sheaf (Scheme.ProEt.topology Y) AddCommGrpCat.{u + 1})
+    (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E.1) Y)
+  let UX := Mod.forget (C := Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})
+    (D := Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})
+    (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E.1) X)
+  obtain ⟨c, hc, hu⟩ :=
+    comparisonIntoPreservedLimit UY UX F (spIntegralTwistSystem Y ℓ E)
+      (spIntegralTwistSystem X ℓ E) (integralComparisonSystem f ℓ E)
+  refine ⟨c, ?_, ?_⟩
+  · intro n
+    change c ≫ UX.map (limit.π (spIntegralTwistSystem X ℓ E) (op n)) =
+      F.map (UY.map (limit.π (spIntegralTwistSystem Y ℓ E) (op n))) ≫
+        integralLevelComparison f ℓ E n
+    rw [← integralComparisonSystem_app]
+    exact hc (op n)
+  · intro c' hc'
+    apply hu c'
+    rintro ⟨n⟩
+    rw [integralComparisonSystem_app]
+    exact hc' n
 
 /-- The integral comparison, with all finite-level projections specified.
 Source: blueprint Integral twist paragraph
