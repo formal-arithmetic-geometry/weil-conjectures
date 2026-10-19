@@ -47,7 +47,7 @@
    }
   },
   {
-   "text": "Apply [lem-exc-quasi-excellent-nagata] to $R$. By the statement of [def-weil-pbc-nagata-ring], every $A_a=R/\\mathfrak p_a$ is N-2. Taking the degree-one field extension $K_a/K_a$ in [def-weil-pbc-japanese-domain] says exactly that $N_a$ is a finite $A_a$-module. It is also a finite $R$-module: lift the coefficients of a finite $A_a$-generating set along the surjection $R\\to A_a$. As the index set is finite, $B(R)$ is finite over $R$ as well: place each chosen generator in its own coordinate, with zeros in all other coordinates, to obtain a finite spanning family of the product.",
+   "text": "Apply [lem-exc-quasi-excellent-nagata] to R. The Nagata condition [def-weil-pbc-nagata-ring] makes each minimal-prime quotient A_a N-2. Taking its own fraction field in [def-weil-pbc-japanese-domain] gives Module.Finite A_a N_a; transitivity of finite modules makes N_a finite over R. This is the finiteness needed for the henselian decomposition.",
    "uses": [
     "lem-exc-quasi-excellent-nagata",
     "def-weil-pbc-nagata-ring",
@@ -85,11 +85,9 @@
    }
   },
   {
-   "text": "By steps 3 and 4, $N_a$ is a one-dimensional Noetherian normal local domain. Therefore [lem-sc-normal-dim1-dvr] makes it a discrete valuation ring. The dimension is exactly one, so the forbidden field case of the DVR definition does not arise.",
-   "uses": [
-    "lem-sc-normal-dim1-dvr"
-   ],
-   "elementary": false,
+   "text": "By steps 3 and 4, N_a is a local Dedekind domain of Krull dimension exactly one. It is not a field, since a field has dimension zero. Mathlib IsDiscreteValuationRing.TFAE, implication from IsDedekindDomain to IsDiscreteValuationRing in a nonfield local domain, therefore gives the required DVR structure directly. This replaces the regular-local-ring declaration attached to lem-sc-normal-dim1-dvr.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
     "place": "Tag 00PD, lemma-characterize-dvr, condition (5) implies (1)"
@@ -108,11 +106,11 @@
    }
   },
   {
-   "text": "Choose $f$ as in [lem-exc-local-curve-principal-total-fractions]. Then $\\sqrt{fR}=\\mathfrak m$, so $V(f)=\\{\\mathfrak m\\}$ and $D(f)$ is the punctured spectrum. The same node identifies $R_f$ with the total ring of fractions. By [lem-weil-pbc-reduced-noetherian-total-ring-fractions], this total ring is canonically $\\prod_a R_{\\mathfrak p_a}$. Each field $R_{\\mathfrak p_a}$ is $K_a$: the map $R/\\mathfrak p_a\\to R_{\\mathfrak p_a}$ is injective because its kernel in $R$ is $\\mathfrak p_a$ (if $r/1=0$, some $s\\notin\\mathfrak p_a$ has $sr=0$, forcing $r\\in\\mathfrak p_a$); the reverse containment follows from $\\mathfrak p_aR_{\\mathfrak p_a}=0$ in the cited node. Every nonzero element of the quotient is inverted and every element is a fraction of such images. By step 3, $K_a=\\operatorname{Frac}(N_a)$. Explicitly, the map $R_f\\to\\prod_aK_a$ sends $r/f^n$ to $((r\\bmod\\mathfrak p_a)/(f\\bmod\\mathfrak p_a)^n)_a$. The denominator is nonzero since $f\\notin\\mathfrak p_a$. The localization equality criterion in [def-weil-pbc-module-localization] therefore verifies this formula, which on $r/1$ is precisely the product of the quotient inclusions from the branch-algebra definition. For $x/y\\in\\operatorname{Frac}(N_a)$, the identification with $K_a$ sends it to the quotient of the given elements $x,y\\in K_a$, and so restricts on $N_a$ to its original inclusion in $K_a$. Thus the branch algebra has the prescribed component maps into the same fields.",
+   "text": "Choose f from [lem-exc-local-curve-principal-total-fractions]. Its radical is the maximal ideal, so D(f) is exactly the punctured spectrum, and its localization is the total ring of fractions Q(R). Apply [lem-weil-pbc-reduced-noetherian-total-ring-fractions] to obtain an R-algebra equivalence Q(R) with the product of the minimal-prime localizations. The canonical maps from those localizations to their residue fields are bijective by that theorem. Each residue field is a fraction field of R/p_a, so the unique fraction-field algebra equivalence identifies it with K_a. Compose these algebra equivalences and reindex by the canonical equivalence between minimal prime spectra and branch ideals. The resulting equivalence R_f with the product of K_a commutes with the R-algebra maps. Step 3 identifies K_a as a fraction field of N_a.",
    "uses": [
     "lem-exc-local-curve-principal-total-fractions",
     "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
-    "def-weil-pbc-module-localization"
+    "def-exc-local-curve-branches"
    ],
    "elementary": false,
    "source": {
@@ -121,7 +119,7 @@
    }
   },
   {
-   "text": "The open immersion of [lem-weil-pbc-principal-localization-open-immersion] identifies the open subscheme $D(f)$ with $\\operatorname{Spec}R_f$, as schemes, not merely as topological spaces. Apply $\\operatorname{Spec}$ to the $R$-algebra isomorphism in step 7 and then use [lem-weil-pbc-finite-affine-coproduct-spectrum] to get an isomorphism over $\\operatorname{Spec}R$,\n$$\\operatorname{Spec}R\\setminus\\{\\mathfrak m\\}\\simeq\\operatorname{Spec}R_f\\simeq\\coprod_a\\operatorname{Spec}\\operatorname{Frac}(N_a).$$\nThe coprojections are induced by the projections to these fraction fields. Hence these are precisely the fields furnished by the factors of the branch algebra, and steps 4--6 give their excellent strictly henselian DVR models with residue field $k$.",
+   "text": "Use Mathlib sigmaSpec and its finite-index isomorphism [lem-weil-pbc-finite-affine-coproduct-spectrum], followed by Spec of the R-algebra equivalence in step 7. The resulting map from the coproduct to Spec R_f is an isomorphism. Its composite with Spec R_f to Spec R is an open immersion [lem-weil-pbc-principal-localization-open-immersion] whose range is D(f). The open immersion D(f) to Spec R has the same range, so isoOfRangeEq gives the required scheme isomorphism. Check the equality over Spec R on every coprojection, using the projection formula for sigmaSpec and commutation of the algebra equivalence with the structure maps.",
    "uses": [
     "lem-weil-pbc-principal-localization-open-immersion",
     "lem-weil-pbc-finite-affine-coproduct-spectrum",
@@ -147,12 +145,10 @@
   "def-weil-pbc-henselian-terminology",
   "lem-weil-pbc-finite-over-henselian-local-product",
   "def-weil-algebraic-closure",
-  "lem-sc-normal-dim1-dvr",
   "def-weil-pbc-finite-type-algebra",
   "lem-exc-finite-type-localization-excellent",
   "lem-exc-local-curve-principal-total-fractions",
   "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
-  "def-weil-pbc-module-localization",
   "lem-weil-pbc-principal-localization-open-immersion",
   "lem-weil-pbc-finite-affine-coproduct-spectrum",
   "def-weil-affine-spectrum"
@@ -160,7 +156,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-punctured-curve-branches.md",
-  "place": "Imported proof paragraphs 1--3, checked online against Stacks 0C3R, 0C3S, 07QT, 07QU, 07QV, 09N2, 04GH and 00PD; local literature files unavailable (see report)."
+  "place": "A5 stage-3 Lean proof, 2026-10-19, following the existing eight-step normalization and principal-localization argument. Private proved helpers: branch_dimension, finite_henselian_domain, branch_properties, total_fraction_branches. The DVR criterion is Mathlib IsDiscreteValuationRing.TFAE; the canonical field comparison uses residue-field and fraction-field algebra equivalences."
  },
  "mathlib_searches": [
   {
@@ -263,7 +259,6 @@
  "tool_uses": [
   "lem-sc-semilocal-dim-one-normalization",
   "lem-weil-pbc-finite-over-henselian-local-product",
-  "lem-sc-normal-dim1-dvr",
   "lem-weil-pbc-reduced-noetherian-total-ring-fractions"
  ],
  "reviewed": {
@@ -295,5 +290,15 @@
   "group": "NJ",
   "result": "pass",
   "note": "Statement, dependencies, source alignment, edge cases, docstrings, reports, and compiler evidence all checked; delivery is correct."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261019T093244-L-2285813",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
