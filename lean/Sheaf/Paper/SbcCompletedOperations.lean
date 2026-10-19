@@ -119,7 +119,9 @@ by every constant section. These are the additive and linear functor equations. 
 theorem pbcConstructibleInclusion_linear (T : Scheme.{u}) :
     (pbcConstructibleInclusion l E T).Additive ∧
       (pbcConstructibleInclusion l E T).Linear (PbcIntegralRing l E) := by
-  sorry
+  constructor
+  · exact ⟨fun {_ _} {_ _} ↦ rfl⟩
+  · exact ⟨fun {_ _} _ _ ↦ rfl⟩
 
 /-- Additivity of the full inclusion. Source: blueprint order 1442
 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
@@ -158,7 +160,18 @@ theorem between_laws :
       betweenHom R p F K M (composition R C p K L M g f) =
         composition R D p (F.obj K) (F.obj L) (F.obj M)
           (betweenHom R p F L M g) (betweenHom R p F K L f)) := by
-  sorry
+  constructor
+  · intro K
+    simp [betweenHom]
+  · intro K L M f g
+    induction g using TensorProduct.induction_on with
+    | zero => simp
+    | tmul b g =>
+      induction f using TensorProduct.induction_on with
+      | zero => simp
+      | tmul a f => simp [betweenHom, composition_tmul]
+      | add f f' hf hf' => simp [map_add, hf, hf']
+    | add g g' hg hg' => simp [map_add, hg, hg']
 
 /-- Scalar localization of a linear functor between two possibly different categories.
 Source: blueprint order 1442
@@ -179,7 +192,12 @@ theorem betweenNat_naturality (α : F ⟶ G) (K L : ScalarLocalization R C p)
     (f : K ⟶ L) :
     (between R p F).map f ≫ ((1 : Localization.Away p) ⊗ₜ[R] α.app L.obj) =
       ((1 : Localization.Away p) ⊗ₜ[R] α.app K.obj) ≫ (between R p G).map f := by
-  sorry
+  change composition R D p _ _ _ _ (betweenHom R p F _ _ f) =
+    composition R D p _ _ _ (betweenHom R p G _ _ f) _
+  induction f using TensorProduct.induction_on with
+  | zero => simp
+  | tmul a f => simp [betweenHom, composition_tmul, α.naturality f]
+  | add f g hf hg => simp [map_add, hf, hg]
 
 /-- Localize the specified natural transformation componentwise by tensoring with one.
 Source: blueprint order 1442
@@ -213,7 +231,58 @@ to this system. Its map agrees with completedCoefficientMap by every finite proj
 so the uniqueness of that limit-cone map identifies it with the given isomorphism. -/
 theorem sbcCompletedCoefficientMap_isIso :
     IsIso (completedCoefficientMap q (pbcIntegralDatum l E)) := by
-  sorry
+  let d := pbcIntegralDatum l E
+  let Q : ℕᵒᵖ ⥤ CommRingCat.{u + 1} := Functor.ofOpSequence
+    (X := fun n ↦ CommRingCat.of (PbcIntegralRing l E ⧸ d.ideal ^ (n + 1)))
+    (fun n ↦ CommRingCat.ofHom (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))
+  let : ∀ n : ℕᵒᵖ, Finite (Q.obj n) := fun n ↦ d.quotientFinite n.unop
+  let e (W : Scheme.{u}) : proEtaleCoefficientTower W Q ≅ adicLisseRingSystem W d.ideal :=
+    NatIso.ofComponents (fun _ ↦ Iso.refl _)
+      (fun f ↦ (NatTrans.ofOpSequence
+        (F := proEtaleCoefficientTower W Q) (G := adicLisseRingSystem W d.ideal)
+        (fun _ ↦ 𝟙 _) (fun n ↦ by
+          simp [proEtaleCoefficientTower, Q, adicLisseRingSystem])).naturality f)
+  let b (W : Scheme.{u}) := e W ≪≫ pbcConstantSystemComparison W d
+  let c (W : Scheme.{u}) := HasLimit.isoOfNatIso (b W)
+  let L := proEtaleSheafInverseImage q CommRingCat.{u + 1}
+  let := (proEtale_profinite_coefficient_inverse_image Q).2.1 U V q
+  let t := L.mapIso (c V).symm ≪≫ asIso (proEtaleProfiniteComparison q Q) ≪≫ c U
+  suffices h : completedCoefficientMap q d = t.hom by
+    rw [h]
+    infer_instance
+  apply limit.hom_ext
+  rintro ⟨n⟩
+  dsimp only [completedCoefficientMap, t, Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom]
+  simp only [limit.lift_π, Category.assoc]
+  dsimp only [c]
+  rw [HasLimit.isoOfNatIso_hom_π]
+  simp only [asIso_hom]
+  rw [reassoc_of% (proEtale_profinite_coefficient_inverse_image Q).2.2.1 U V q (op n)]
+  rw [← Category.assoc, ← Category.assoc, ← L.map_comp]
+  rw [HasLimit.isoOfNatIso_inv_π]
+  simp only [L.map_comp, Category.assoc]
+  dsimp only [b, e, Iso.trans_hom, NatIso.ofComponents_hom_app, Iso.refl_hom,
+    Category.id_comp, proEtaleConstantComparison]
+  simp only [completedCoefficientComponent, completedFiniteCoefficientMap, Category.assoc,
+    L, pbcConstantSystemComparison, pbcAdicProjection, Q, Iso.trans_inv,
+    NatTrans.comp_app, NatIso.ofComponents_inv_app, NatIso.ofComponents_hom_app,
+    Iso.refl_inv, Functor.map_comp]
+  dsimp only [proEtaleCoefficientTower, Functor.comp_obj, Functor.ofOpSequence_obj]
+  simp only [Iso.refl_hom, Category.id_comp]
+  change L.map (pbcAdicProjection V d n) ≫
+      L.map (pbcLevelConstantComparison V d n).inv ≫
+      proEtaleConstantInverseImageMap q CommRingCat.{u + 1}
+        (CommRingCat.of (PbcIntegralRing l E ⧸ d.ideal ^ (n + 1))) ≫
+      (pbcLevelConstantComparison U d n).hom =
+    L.map (pbcAdicProjection V d n) ≫
+      L.map (pbcLevelConstantComparison V d n).inv ≫
+      L.map (𝟙 (adicLisseConstantRing V
+        (PbcIntegralRing l E ⧸ d.ideal ^ (n + 1)))) ≫
+      proEtaleConstantInverseImageMap q CommRingCat.{u + 1}
+        (CommRingCat.of (PbcIntegralRing l E ⧸ d.ideal ^ (n + 1))) ≫
+      (pbcLevelConstantComparison U d n).hom
+  rw [L.map_id, Category.id_comp]
+
 
 /-- The actual finite-projection-normalized coefficient isomorphism.
 Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
@@ -262,7 +331,18 @@ theorem sbcOrdinaryModuleIso_naturality
         (pbcAdicCompletion V (pbcIntegralDatum l E))
         (pbcAdicCompletion U (pbcIntegralDatum l E))
         (sbcCoefficientIso l E q)).map a := by
-  sorry
+  let h := (completedAdicChangeData U
+    (completedCoefficientMap q (pbcIntegralDatum l E))).choose_spec.choose
+  change (completedAdicChangeData U
+    (completedCoefficientMap q (pbcIntegralDatum l E))).choose.map
+      ((proEtaleModuleInverseImage q _).map a) ≫ eqToHom (h _) =
+    eqToHom (h _) ≫ SheafOfModules.changeOfRingsHom
+      (completedCoefficientMap q (pbcIntegralDatum l E)) _
+      ((proEtaleModuleInverseImage q _).map a)
+  rw [(completedAdicChangeData U
+    (completedCoefficientMap q (pbcIntegralDatum l E))).choose_spec.choose_spec.choose
+      ((proEtaleModuleInverseImage q _).map a)]
+  simp only [Category.assoc, eqToHom_trans, eqToHom_refl, Category.comp_id]
 
 /-- The ordinary module comparison is identity on the specified sheafified tensors.
 Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
@@ -505,7 +585,9 @@ theorem sbcProjectionSquare (n : ℕ) :
       (proEtaleSheafInverseImage q CommRingCat.{u + 1}).map
         (pbcAdicProjection V (pbcIntegralDatum l E) n) ≫
           (sbcFiniteCoefficientIso l E q n).hom := by
-  sorry
+  change completedCoefficientMap q (pbcIntegralDatum l E) ≫
+    pbcAdicProjection U (pbcIntegralDatum l E) n = _
+  exact limit.lift_π _ (op n)
 
 /-- Restriction comparison is the recorded identity-on-sections coefficient square.
 Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
@@ -613,7 +695,13 @@ theorem sbcCoefficientSquare (_square : ChosenCartesianSquare h e f g) : HEq
       (pbcAdicCompletion T (pbcIntegralDatum l E))
       (pbcAdicCompletion Y (pbcIntegralDatum l E))
       (sbcCoefficientIso l E g) (sbcCoefficientIso l E e)) := by
-  sorry
+  rw [sbcCoefficientComp, sbcCoefficientComp]
+  have aux : ∀ (a b : Y ⟶ S), a = b →
+      HEq (sbcCoefficientIso l E a) (sbcCoefficientIso l E b) := by
+    intro a b hab
+    subst b
+    rfl
+  exact aux _ _ _square.w
 
 /-- The ordinary tensor-normalized comparison, in the orientation used by exchange.
 Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
@@ -670,7 +758,12 @@ completed mate. Thus the construction agrees with finite-level completed exchang
 theorem sbcExchange_naturality {K K' : PbcComplete l E T} (a : K ⟶ K') :
     (sbcPush l E g ⋙ sbcPull l E f).map a ≫ sbcExchangeApp l E sq K' =
       sbcExchangeApp l E sq K ≫ (sbcPull l E e ⋙ sbcPush l E h).map a := by
-  sorry
+  let η := Functor.whiskerLeft (sbcPush l E g ⋙ sbcPull l E f) (sbcAdjunction l E h).unit
+  let θ := Functor.whiskerRight (Functor.whiskerLeft (sbcPush l E g) (sbcTheta l E sq).hom)
+    (sbcPush l E h)
+  let ε := Functor.whiskerRight (Functor.whiskerRight (sbcAdjunction l E g).counit (sbcPull l E e))
+    (sbcPush l E h)
+  exact (η ≫ θ ≫ ε).naturality a
 
 /-- The integral natural exchange is the specified adjunction mate.
 Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
