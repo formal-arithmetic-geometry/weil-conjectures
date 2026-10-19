@@ -1,0 +1,119 @@
+{
+ "id": "def-per-dominant-part",
+ "kind": "definition",
+ "title": "Reduced dominant part over a general Noetherian base",
+ "status": "split",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme]. The closed subset $C_f\\subseteq X$ is the closure of the inverse image of the set of generic points of $S$ [def-sc-generic-point]. The reduced dominant part of $X$ over $S$ is the reduced induced closed subscheme on $C_f$ [lem-weil-pbc-reduced-induced-closed-subscheme] [def-pc-reduced-scheme], equipped with its canonical closed immersion into $X$ [def-weil-closed-immersion].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-generic-point",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-pc-reduced-scheme",
+  "def-weil-closed-immersion"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose II 1.2.5, printed p. 25: reduced union of components whose generic points map to generic points of the base."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "reduced induced closed subscheme on closure of inverse image of generic points of base scheme",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.subscheme; no exact dominant-part construction.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "genericPoints, vanishingIdeal, IdealSheafData.subscheme",
+   "results": "0 hits; vanishingIdeal query identifier unavailable.",
+   "date": "2026-10-19",
+   "verdict": "unavailable/no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "dominantPart|dominantPartClosed|genericPoints",
+   "results": "Mathlib has genericPoints and vanishingIdeal ingredients but no dominant-part declaration; source has only generic-point utilities. Existing DAG def-per-dominant-reduced-part is integral-base specialization, not this general-base notion.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduced induced closed subscheme on the closure of inverse images of generic points of a base scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"genericPoints\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \": Set α\", \"doc\": \"The set of points $ x $ in a topological space $ \\\\alpha $ such that the closure of the singleton set $ \\\\{x\\\\} $ is an irreducible component of $ \\\\alpha $, i.e., a maximal irreducible closed subset of $\"}\n  {\"name\": \"genericPoints.ofComponent\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"[QuasiSober α] (x : irreducibleComponents α) : genericPoints α\", \"doc\": \"In a quasi-sober topological space, this function maps each irreducible component to its unique generic point, whose closure is the component itself.\"}\n  {\"name\": \"genericPoints.component\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"(x : genericPoints α) : irreducibleComponents α\", \"doc\": \"For a generic point $ x $ in a topological space $ \\\\alpha $, this function returns the irreducible component of $ \\\\alpha $ given by the closure of the singleton set $ \\\\{x\\\\} $. Specifically, it maps $ \"}\n  {\"name\": \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.FunctionField\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsOpenImmersion f] [hX : IrreducibleSpace X] [IrreducibleSpace Y] :\\n  f (genericPoint X) = genericPoint Y\", \"doc\": \"If $ f: X \\to Y $ is an open immersion between irreducible schemes $ X $ and $ Y $, then the image of the generic point of $ X $ under $ f $ coincides with the generic point of $ Y $. This follows from\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  autoParam (∀ (U : X.Opens), IsReduced ↑(X.presheaf.obj (Opposite.op U)))\\n      AlgebraicGeometry.IsReduced.component_reduced._autoParam →\\n    AlgebraicGeometry.IsReduced X\", \"doc\": \"A scheme $ X $ is reduced if for every open subset $ U $ of $ X $, the ring of sections $ \\\\mathcal{O}_X(U) $ is reduced (i.e., contains no nonzero nilpotent elements).\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[∀ x : X, _root_.IsReduced (X.presheaf.stalk x)] : IsReduced X\", \"doc\": \"If for every point $ x $ in a scheme $ X $, the stalk of the structure sheaf at $ x $ is a reduced ring (i.e., contains no nonzero nilpotent elements), then the scheme $ X $ is reduced.\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced.of_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"(𝒰 : X.OpenCover) [∀ i, IsReduced (𝒰.X i)] : IsReduced X\", \"doc\": \"If a scheme $X$ admits an open cover $\\\\{U_i\\\\}$ such that each open subscheme $U_i$ is reduced (i.e., has no nonzero nilpotent elements in its local rings), then $X$ itself is a reduced scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \"(f : X ⟶ Y) [IsClosedImmersion f] : IsImmersion f\", \"doc\": \"Any closed immersion between schemes is an immersion. Specifically, if $ f: X \\to Y $ is a closed immersion of schemes (i.e., it induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with a su\"}\n",
+   "date": "2026-10-19",
+   "verdict": "No exact match: generic-point utilities and reducedness predicates do not construct the reduced dominant part."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-dominant-part-coreflection",
+  "date": "2026-10-19",
+  "group": "NU"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3: ILO II 1.2.5--1.2.8 dominant-component coreflection and proper-surjection calculus.",
+   "via": [
+    "lem-per-dominant-part-coreflection",
+    "lem-per-alteration-cover-calculus",
+    "lem-per-uniformization-nodal-quotient-reduction",
+    "lem-per-gabber-prime-to-ell-regular-cover",
+    "lem-per-prime-to-ell-uniformization-standard-form",
+    "lem-per-gabber-open-immersion-sheaf-finiteness",
+    "lem-per-quasi-excellent-etale-direct-image-finiteness",
+    "lem-per-finite-exceptional-preservation",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DominantPart",
+  "declaration": "AlgebraicGeometry.dominantPart",
+  "declarations": [
+   "AlgebraicGeometry.dominantPartClosed",
+   "AlgebraicGeometry.dominantPart",
+   "AlgebraicGeometry.dominantPartι"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DominantPart.lean",
+  "statement": "def dominantPart (X S : Scheme.{u}) (p : X ⟶ S) : Scheme",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7b0521fb4",
+  "group": "NU",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7b0521fb4",
+  "group": "NU",
+  "result": "fix",
+  "note": "Statement matches node and ILO II 1.2.5-1.2.8 clause by clause: IsNoetherian S, LocallyOfFiniteType+QuasiCompact, closure of p⁻¹ genericPoints S with real vanishingIdeal subscheme, support = dominant components, ∃! induced map + id/comp laws, Hom bijection for reduced T with generic points over generic points, canonical generic-fibre iso to (X_s)_red with both projection compatibilities, IsIso of pullback.lift for étale S-maps, proper+surjective preserved. Item node changes only lean and stmt_deps (adds the new def node); records verbatim; new node def-per-dominant-part fields correct, not a duplicate of the integral-base def-per-dominant-reduced-part. Delivered and fixed files compile clean with nt_compile (2.4/5.1 s; 5.0/6.2 s). FIX: H8 added source place to the 3 DominantPart docstrings; H9 dropped unused ReducedInducedClosedSubscheme import (DominantPart) and the WeilConjectures Etale and ReductionGenericFibre imports (item), making Mathlib.AlgebraicGeometry.Fiber a public import, which the public statement needs. Statements unchanged; fixes/DominantPart.lean and fixes/DominantPartCoreflection.lean."
+ }
+}

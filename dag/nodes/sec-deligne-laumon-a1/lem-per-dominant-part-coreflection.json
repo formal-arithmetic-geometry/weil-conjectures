@@ -19,7 +19,8 @@
   "def-weil-proper-morphism",
   "def-weil-surjective-morphism",
   "def-sc-generic-point",
-  "def-pc-scheme-fibre"
+  "def-pc-scheme-fibre",
+  "def-per-dominant-part"
  ],
  "proof": [
   {
@@ -368,5 +369,24 @@
   "group": "Q147",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-4421add93 (reviewer sub-agent of L); spot-checked: I read the source at ILO Exposé II: 1.2.1 (S Noetherian), 1.2.5 (X_md and the coreflection), the proof of 1.2.6 (the generic-fibre formula) and 1.2.8 (open immersions and proper surjections), printed pp. 23-26. The item statement is the base statement unchanged. Its étale comparison is stronger than ILO's open-immersion case and is proved by the same open-map closure argument. Steps 1-2 are correct: the closure of p^{-1}(G) equals the finite union C_X of the components over generic points, using Stacks 01T6, 0BA8, 004W and 01IS, and the reduced induced structure comes from 01J3. Step 3 is correct: a reduced T whose generic points lie over G maps into C_X, and the map factors through it by Stacks 0356 (schemes.tex l.2269, checked); uniqueness follows from the surjective ring maps of a closed immersion. Step 4 is genuinely elementary. Step 5 is correct: base change of the closed immersion has full support, (X_md)_s is reduced by the 054Z node (more-morphisms l.6690, which needs no hypotheses), and the uniqueness clause gives (X_s)_red; S may be nonreduced. Steps 6-7 are correct: an étale map is open, so f^{-1}(C_Y)=C_X; P = X x_Y Y_md is reduced because it is étale over a reduced scheme, its projection to X is a closed immersion with support C_X, and uniqueness gives P = X_md with the canonical map. Step 8 matches ILO's proof: f_md is proper (01W3/01W5 and proper-to-separated), its image is closed, and it contains the dense set A_Y. I tested an empty dominant part, S=Spec k[e]/e^2 (X_md=X_red), several base components with vertical components of X, and open-immersion and disjoint-union étale maps. A walk over all 92 dependency nodes finds no cycle and no missing node. A search for duplicates finds none: the citer lem-per-alteration-cover-calculus uses the clauses exactly as stated, and generic-fibre-finiteness-criterion has different content. The delivery cites no SGA source. I accept the 20 tool_uses: all are generic Stacks scheme and topology tools. Advisory only: the statement keeps ILO's phrase 'morphism between finite-type S-schemes'. It means an S-morphism, so stage 3 should formalize f as an S-morphism."
+ },
+ "lean": {
+  "module": "Sheaf.DeligneLaumon.DominantPartCoreflection",
+  "declaration": "AlgebraicGeometry.dominantPart_coreflection",
+  "file": "lean/Sheaf/DeligneLaumon/DominantPartCoreflection.lean",
+  "statement": "theorem dominantPart_coreflection {S X : Scheme.{u}} (p : X ⟶ S) [AlgebraicGeometry.IsNoetherian S] [LocallyOfFiniteType p] [QuasiCompact p] : IsReduced (dominantPart X S p) ∧ IsClosedImmersion (dominantPartι X S p) ∧ ((dominantPartClosed X S p : Set X) = {x | ∃ ξ ∈ genericPoints X, p ξ ∈ genericPoints S ∧ x ∈ closure ({ξ} : Set X)}) ∧ (∀ {T : Scheme.{u}} (q : T ⟶ S) [IsReduced T] [LocallyOfFiniteType q] [QuasiCompact q], (∀ t ∈ genericPoints T, q t ∈ genericPoints S) → Function.Bijective (fun g : {g : T ⟶ dominantPart X S p // g ≫ (dominantPartι X S p ≫ p) = q} => (⟨g.1 ≫ dominantPartι X S p, by simp only [Category.assoc, g.2]⟩ : {g : T ⟶ X // g ≫ p = q}))) ∧ (∀ {Y : Scheme.{u}} (r : Y ⟶ S) [LocallyOfFiniteType r] [QuasiCompact r] (f : X ⟶ Y), f ≫ r = p → ∃! fmd : dominantPart X S p ⟶ dominantPart Y S r, fmd ≫ dominantPartι Y S r = dominantPartι X S p ≫ f) ∧ (∀ {Y Z : Scheme.{u}} (r : Y ⟶ S) (s : Z ⟶ S) [LocallyOfFiniteType r] [QuasiCompact r] [LocallyOfFiniteType s] [QuasiCompact s] (f : X ⟶ Y) (g : Y ⟶ Z), f ≫ r = p → g ≫ s = r → ∀ (fmd : dominantPart X S p ⟶ dominantPart Y S r) (gmd : dominantPart Y S r ⟶ dominantPart Z S s) (hmd : dominantPart X S p ⟶ dominantPart Z S s), fmd ≫ dominantPartι Y S r = dominantPartι X S p ≫ f → gmd ≫ dominantPartι Z S s = dominantPartι Y S r ≫ g → hmd ≫ dominantPartι Z S s = dominantPartι X S p ≫ (f ≫ g) → hmd = fmd ≫ gmd) ∧ (∀ (fmd : dominantPart X S p ⟶ dominantPart X S p), fmd ≫ dominantPartι X S p = dominantPartι X S p → fmd = 𝟙 _) ∧ (∀ (s : S), s ∈ genericPoints S → ∃ e : (dominantPartι X S p ≫ p).fiber s ≅ (p.fiber s).nilradical.subscheme, e.hom ≫ (p.fiber s).nilradical.subschemeι ≫ p.fiberι s = (dominantPartι X S p ≫ p).fiberι s ≫ dominantPartι X S p ∧ e.hom ≫ (p.fiber s).nilradical.subschemeι ≫ p.fiberToSpecResidueField s = (dominantPartι X S p ≫ p).fiberToSpecResidueField s) ∧ (∀ {Y : Scheme.{u}} (r : Y ⟶ S) [LocallyOfFiniteType r] [QuasiCompact r] (f : X ⟶ Y) [Etale f], f ≫ r = p → ∀ (fmd : dominantPart X S p ⟶ dominantPart Y S r) (hcomp : dominantPartι X S p ≫ f = fmd ≫ dominantPartι Y S r), IsIso (pullback.lift (dominantPartι X S p) fmd hcomp)) ∧ (∀ {Y : Scheme.{u}} (r : Y ⟶ S) [LocallyOfFiniteType r] [QuasiCompact r] (f : X ⟶ Y), f ≫ r = p → IsProper f → Surjective f → ∀ (fmd : dominantPart X S p ⟶ dominantPart Y S r), fmd ≫ dominantPartι Y S r = dominantPartι X S p ≫ f → IsProper fmd ∧ Surjective fmd)",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-19",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-7b0521fb4"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7b0521fb4",
+  "group": "NU",
+  "result": "fix",
+  "note": "Statement matches node and ILO II 1.2.5-1.2.8 clause by clause: IsNoetherian S, LocallyOfFiniteType+QuasiCompact, closure of p⁻¹ genericPoints S with real vanishingIdeal subscheme, support = dominant components, ∃! induced map + id/comp laws, Hom bijection for reduced T with generic points over generic points, canonical generic-fibre iso to (X_s)_red with both projection compatibilities, IsIso of pullback.lift for étale S-maps, proper+surjective preserved. Item node changes only lean and stmt_deps (adds the new def node); records verbatim; new node def-per-dominant-part fields correct, not a duplicate of the integral-base def-per-dominant-reduced-part. Delivered and fixed files compile clean with nt_compile (2.4/5.1 s; 5.0/6.2 s). FIX: H8 added source place to the 3 DominantPart docstrings; H9 dropped unused ReducedInducedClosedSubscheme import (DominantPart) and the WeilConjectures Etale and ReductionGenericFibre imports (item), making Mathlib.AlgebraicGeometry.Fiber a public import, which the public statement needs. Statements unchanged; fixes/DominantPart.lean and fixes/DominantPartCoreflection.lean."
  }
 }
