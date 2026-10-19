@@ -1,0 +1,138 @@
+{
+ "id": "new-lem-pur-a1-pullback-lift",
+ "kind": "statement",
+ "title": "Lifting affine-line pullback endomorphisms to the base",
+ "statement": "Let S, Lambda and M satisfy the hypotheses of [lem-pur-a1-pullback-endomorphism-rigidity], omitting its endomorphism normalization. Every endomorphism h of p-star M is p-star b for some endomorphism b of M. Here p is the affine-line projection [def-sbc-affine-space] and inverse images are the canonical intrinsic fixed-coefficient inverse images [def-weil-proetale-inverse-image].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A3H, lemma-sections-upstairs; fixed-module coefficient transport by sites.tex Tag 00YV and proetale.tex Tag 099Y"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-affine-space",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-proetale-inverse-image",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-proetale-geometric-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Use [new-lem-pur-intrinsic-lisse-fixed] to transport M to fixed coefficients. By [lem-sf-proetale-locally-constant-origin], obtain an etale sheaf G and an isomorphism from its comparison inverse image to the inverse realization of M. Realizing it and composing with the counit gives v from the intrinsic comparison image of G to M.",
+   "uses": [
+    "new-lem-pur-intrinsic-lisse-fixed",
+    "lem-sf-proetale-locally-constant-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3H, lemma-sections-upstairs; fixed-module coefficient transport by sites.tex Tag 00YV and proetale.tex Tag 099Y"
+   }
+  },
+  {
+   "text": "Etale affine-line pullback is full by [new-lem-pur-etale-a1-pullback-full]. Comparison is full by its invertible ordinary unit [prop-weil-pbc-site-comparison-finite-level], and intrinsic realization is an equivalence. The comparison pullback isomorphism [lem-weil-pbc-comparison-pullback] and the realization unit identify the composite with comparison followed by intrinsic affine-line pullback. Hence this composite is full. Conjugate h by p-star v, lift it through the full composite, and conjugate its comparison image by v. Functoriality and the two inverse identities give exactly p-star b equals h.",
+   "uses": [
+    "new-lem-pur-etale-a1-pullback-full",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3H, lemma-sections-upstairs; fixed-module coefficient transport by sites.tex Tag 00YV and proetale.tex Tag 099Y"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-proetale-locally-constant-origin",
+  "lem-weil-pbc-comparison-pullback",
+  "new-lem-pur-etale-a1-pullback-full",
+  "new-lem-pur-intrinsic-lisse-fixed",
+  "prop-weil-pbc-site-comparison-finite-level"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A3H, lemma-sections-upstairs; fixed-module coefficient transport by sites.tex Tag 00YV and proetale.tex Tag 099Y"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of etale module sheaves to the affine line over an arbitrary scheme is fully faithful",
+   "results": "8 hits: Etale.forgetFullyFaithful, instFullEtaleOverForget, Modules.fullyFaithfulToPresheafOfModules and related forgetful functors. None states inverse-image fullness. Existing source Etale.isIso_upperStarSectionsMap supplies the section calculation.",
+   "date": "2026-10-18",
+   "verdict": "No direct Mathlib match; reuse the existing source section theorem and categorical fullness APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AffineSpace\", \"Full\"",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "AffineSpace.*[Ff]ull|intrinsic.*lisse",
+   "results": "0 hits in msearch Mathlib search; local search found private localConstancy_iff, finite_stalk_iff, finiteLocal_iff in ProEtaleConstantModuleConstructibility and the source section-isomorphism API.",
+   "date": "2026-10-18",
+   "verdict": "Reuse these arguments and existing comparison declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of etale module sheaves to the affine line is fully faithful, and restriction to constant scalars preserves finite locally constant module sheaves",
+   "results": "8 hits: Scheme.Modules.pullback, SheafOfModules.pullback, pullbackPushforwardAdjunction in both namespaces, Scheme.Modules.instAdditivePullback, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.instIsLeftAdjointPullback, Scheme.Modules.pullbackComp.",
+   "date": "2026-10-19",
+   "verdict": "No match for constant-coefficient affine-line fullness or the finite-lisse coefficient bridge; the hits concern structure-sheaf modules and generic pullback adjunctions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleAffineLineEndomorphismRigidity",
+  "date": "2026-10-18",
+  "group": "D7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-dnc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-a1-pullback-endomorphism-rigidity",
+   "place": "Steps 1-7, coefficient transport and lifting portion; final section normalization remains in the parent",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleAffineLinePullbackLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleAffineLinePullbackLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_a1_pullback_lift",
+  "statement": "theorem proEtale_a1_pullback_lift (S : Scheme.{u})\n    (Λ : Type u) [CommRing Λ] [Finite Λ]\n    (M : proEtaleRingModules S (proEtaleConstantRing S Λ))\n    (hM : IsLocallyConstantProEtaleModuleSheaf S Λ M)\n    (hfinite : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ S),\n      Finite ((finiteCoefficientModuleStalkFunctor y Λ).obj M))\n    (h : (sfIntrinsicPullback Λ (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).obj M ⟶\n      (sfIntrinsicPullback Λ (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).obj M) :\n    ∃ b : M ⟶ M,\n      (sfIntrinsicPullback Λ (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).map b = h",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-2105f",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261019T002526-L-2147795",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-2105f",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261019T002526-L-2147795",
+  "kind": "interface",
+  "note": "independent cc review: Item proof and three new proved modules (compiled, axioms checked, importer PurityDiagonalOrientationCompatibility compiled) against unit sk-thm-dnc (empty realized); removed ProEtaleSiteComparison/FiniteLevel only wrap comparisonAdjunction/isIso_comparisonAdjunction_unit, which the new lift uses directly via full_comparisonUpperStar"
+ }
+}

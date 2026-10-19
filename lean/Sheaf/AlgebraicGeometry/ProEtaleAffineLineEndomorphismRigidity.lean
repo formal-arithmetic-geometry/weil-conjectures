@@ -13,19 +13,8 @@ public import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
 public import Sheaf.Paper.ProEtaleFixedModuleLocalConstancy
 public import Sheaf.AlgebraicGeometry.ProEtaleModuleStalkFunctor
 
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-import Sheaf.Paper.ProEtaleLisseOrigin
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
-import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Mathlib.CategoryTheory.Limits.MorphismProperty
-import WeilConjectures.AlgebraicGeometry.EtaleConnectedFibresSectionCompatible
-import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
+
+import Sheaf.AlgebraicGeometry.ProEtaleAffineLinePullbackLift
 
 /-!
 # Endomorphism rigidity for an affine-line pullback
@@ -113,6 +102,15 @@ theorem proEtale_a1_pullback_endomorphism_rigidity (S : Scheme.{u})
       (proEtaleAffineLineUnitPullbackIso S Λ).hom.app M =
         (proEtaleAffineLineUnitPullbackIso S Λ).hom.app M) :
     h = 𝟙 ((sfIntrinsicPullback Λ (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).obj M) := by
-  sorry
+  obtain ⟨b, hb⟩ := proEtale_a1_pullback_lift S Λ M hM hfinite h
+  have he' := he
+  rw [← hb] at he'
+  -- The section is a left inverse to the affine-line projection.
+  have hn := (proEtaleAffineLineUnitPullbackIso S Λ).hom.naturality b
+  have hb' : b = 𝟙 M := by
+    apply (cancel_epi ((proEtaleAffineLineUnitPullbackIso S Λ).hom.app M)).1
+    exact (hn.symm.trans he').trans (Category.comp_id _).symm
+  rw [← hb, hb']
+  exact CategoryTheory.Functor.map_id _ _
 
 end AlgebraicGeometry.Scheme

@@ -1,0 +1,132 @@
+{
+ "id": "new-lem-pur-etale-a1-pullback-full",
+ "kind": "statement",
+ "title": "Fullness of ordinary etale affine-line pullback",
+ "statement": "For any scheme S [def-pc-scheme] and commutative ring Lambda, ordinary inverse image [def-weil-pbc-inverse-image] along the affine-line projection [def-sbc-affine-space] is full on sheaves of Lambda-modules on the small etale site [def-weil-pbc-etale-site]. No local constancy or finiteness is required.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A3H, lemma-sections-upstairs; fixed-module coefficient transport by sites.tex Tag 00YV and proetale.tex Tag 099Y"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-affine-space",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [
+  {
+   "text": "The affine-line projection is smooth by [sbc-lem-affine-space-smooth], hence flat, and affine, hence quasi-compact. Its geometric fibres are irreducible by the existing Mathlib affine-space instance and therefore connected. These properties persist after etale base change.",
+   "uses": [
+    "sbc-lem-affine-space-smooth",
+    "def-sbc-affine-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3H, lemma-sections-upstairs; fixed-module coefficient transport by sites.tex Tag 00YV and proetale.tex Tag 099Y"
+   }
+  },
+  {
+   "text": "For every etale object V, apply Etale.isIso_upperStarSectionsMap to the identity of V times_S A1_S. The map is precisely the adjunction unit at V; its flat, quasi-compact, geometrically connected hypotheses were verified in the preceding step. This source theorem implements [lem-sbc-module-chart-sections-flat-connected] for module sections. The sheaf-to-presheaf functor reflects isomorphisms, so the unit is invertible. An adjunction with invertible unit has full left adjoint.",
+   "uses": [
+    "lem-sbc-module-chart-sections-flat-connected",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3H, lemma-sections-upstairs; fixed-module coefficient transport by sites.tex Tag 00YV and proetale.tex Tag 099Y"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-affine-space",
+  "def-weil-pbc-inverse-image",
+  "lem-sbc-module-chart-sections-flat-connected",
+  "sbc-lem-affine-space-smooth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A3H, lemma-sections-upstairs; fixed-module coefficient transport by sites.tex Tag 00YV and proetale.tex Tag 099Y"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of etale module sheaves to the affine line over an arbitrary scheme is fully faithful",
+   "results": "8 hits: Etale.forgetFullyFaithful, instFullEtaleOverForget, Modules.fullyFaithfulToPresheafOfModules and related forgetful functors. None states inverse-image fullness. Existing source Etale.isIso_upperStarSectionsMap supplies the section calculation.",
+   "date": "2026-10-18",
+   "verdict": "No direct Mathlib match; reuse the existing source section theorem and categorical fullness APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AffineSpace\", \"Full\"",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "AffineSpace.*[Ff]ull|intrinsic.*lisse",
+   "results": "0 hits in msearch Mathlib search; local search found private localConstancy_iff, finite_stalk_iff, finiteLocal_iff in ProEtaleConstantModuleConstructibility and the source section-isomorphism API.",
+   "date": "2026-10-18",
+   "verdict": "Reuse these arguments and existing comparison declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of etale module sheaves to the affine line is fully faithful, and restriction to constant scalars preserves finite locally constant module sheaves",
+   "results": "8 hits: Scheme.Modules.pullback, SheafOfModules.pullback, pullbackPushforwardAdjunction in both namespaces, Scheme.Modules.instAdditivePullback, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.instIsLeftAdjointPullback, Scheme.Modules.pullbackComp.",
+   "date": "2026-10-19",
+   "verdict": "No match for constant-coefficient affine-line fullness or the finite-lisse coefficient bridge; the hits concern structure-sheaf modules and generic pullback adjunctions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleAffineLineEndomorphismRigidity",
+  "date": "2026-10-18",
+  "group": "D7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-dnc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-a1-pullback-endomorphism-rigidity",
+   "place": "Steps 1-7, coefficient transport and lifting portion; final section normalization remains in the parent",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleAffineLinePullbackFull",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAffineLinePullbackFull.lean",
+  "declaration": "AlgebraicGeometry.etale_a1_pullback_full",
+  "statement": "theorem etale_a1_pullback_full (S : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] :\n    (Etale.upperStar (ModuleCat.{u + 1} Λ)\n      (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).Full",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-2105f",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261019T002526-L-2147795",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-2105f",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261019T002526-L-2147795",
+  "kind": "interface",
+  "note": "independent cc review: Item proof and three new proved modules (compiled, axioms checked, importer PurityDiagonalOrientationCompatibility compiled) against unit sk-thm-dnc (empty realized); removed ProEtaleSiteComparison/FiniteLevel only wrap comparisonAdjunction/isIso_comparisonAdjunction_unit, which the new lift uses directly via full_comparisonUpperStar"
+ }
+}
