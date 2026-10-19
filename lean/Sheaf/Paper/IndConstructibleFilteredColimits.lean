@@ -10,8 +10,12 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubexte
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Sheaf.Paper.CoefficientHeart
-import Sheaf.Paper.IndHeartCanonicalPresentation
+import Sheaf.Paper.IndHeartFullFaithfulness
+import Sheaf.Paper.CoefficientHeartClosure
+import Mathlib.CategoryTheory.Limits.FullSubcategory
+import Mathlib.CategoryTheory.Limits.Pi
+import Mathlib.CategoryTheory.Limits.Constructions.Filtered
+import Mathlib.CategoryTheory.Filtered.Final
 
 /-!
 # Filtered colimits and sums of ind-constructible module sheaves
@@ -37,34 +41,114 @@ open CategoryTheory CategoryTheory.Limits
 
 open scoped CategoryTheory.Obj
 
+private theorem ind_finite_coproduct
+    {C : Type*} [Category.{u + 1} C] [HasColimitsOfSize.{u + 1, u + 1} C]
+    (P : ObjectProperty C)
+    (hfin : ∀ (S : Type (u + 1)) [Finite S] (B : S → C),
+      (∀ s, P (B s)) → P (∐ B))
+    (S : Type (u + 1)) [Finite S] (B : S → C)
+    (hB : ∀ s, P.ind.{u + 1} (B s)) : P.ind.{u + 1} (∐ B) := by
+  classical
+  choose J _ _ pres hpres using hB
+  let F : (∀ s, J s) ⥤ (S → C) := Functor.pi (fun s ↦ (pres s).diag)
+  let c : Cocone F := pi.coconeOfCoconeCompEval
+    (fun s ↦ (pres s).cocone.whisker (Pi.eval J s))
+  have hc : IsColimit c := pi.coconeOfCoconeEvalIsColimit
+    (fun s ↦ (Functor.Final.isColimitWhiskerEquiv (Pi.eval J s)
+      (pres s).cocone).symm (pres s).isColimit)
+  let : PreservesColimitsOfShape (∀ s, J s) (Sigma.functor S : (S → C) ⥤ C) := by
+    rw [← piEquivalenceFunctorDiscrete_functor_comp_colim]
+    infer_instance
+  exact ⟨∀ s, J s, inferInstance, inferInstance,
+    { diag := F ⋙ Sigma.functor S
+      ι := (Sigma.functor S).mapCocone c |>.ι
+      isColimit := isColimitOfPreserves (Sigma.functor S) hc },
+    fun j ↦ hfin S (fun s ↦ (pres s).diag.obj (j s)) (fun s ↦ hpres s (j s))⟩
+
+private theorem ind_coproduct
+    {C : Type*} [Category.{u + 1} C] [LocallySmall.{u + 1} C]
+    [HasColimitsOfSize.{u + 1, u + 1} C]
+    (P : ObjectProperty C) (hfp : P ≤ ObjectProperty.isFinitelyPresentable.{u + 1} C)
+    (hfin : ∀ (S : Type (u + 1)) [Finite S] (B : S → C),
+      (∀ s, P (B s)) → P (∐ B))
+    (S : Type (u + 1)) (B : S → C) (c : Cofan B) (hc : IsColimit c)
+    (hB : ∀ s, P.ind.{u + 1} (B s)) : P.ind.{u + 1} c.pt := by
+  classical
+  apply (P.ind).prop_of_iso ((colimit.isColimit _).coconePointUniqueUpToIso hc)
+  rw [← ObjectProperty.ind_ind hfp]
+  exact ⟨Finset (Discrete S), inferInstance, inferInstance,
+    { diag := CoproductsFromFiniteFiltered.liftToFinsetObj (Discrete.functor B)
+      ι := (CoproductsFromFiniteFiltered.finiteSubcoproductsCocone B).ι
+      isColimit := CoproductsFromFiniteFiltered.isColimitFiniteSubproductsCocone B },
+    fun T ↦ ind_finite_coproduct P hfin T (fun t ↦ B t.val.as) (fun t ↦ hB t.val.as)⟩
+
 namespace AlgebraicGeometry.ProEtale
 
+private theorem constructible_iso
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) :
+    ObjectProperty.IsClosedUnderIsomorphisms (IsConstantModelConstructible Λ X) := by
+  have hloc (Y : Scheme.{u})
+      (M N : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
+      (e : M ≅ N) (h : HasFiniteConstantLocalModel Λ Y M) :
+      HasFiniteConstantLocalModel Λ Y N := by
+    obtain ⟨U, hU⟩ := h
+    refine ⟨U, fun i ↦ ?_⟩
+    obtain ⟨Q, hQ, ⟨eQ⟩⟩ := hU i
+    exact ⟨Q, hQ, ⟨((CondensedRing.upperStar Λ (U.f i)).mapIso e).symm ≪≫ eQ⟩⟩
+  have hstrat (Y : Scheme.{u})
+      (M N : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
+      (e : M ≅ N) (h : IsFiniteConstantStratified Λ Y M) :
+      IsFiniteConstantStratified Λ Y N := by
+    obtain ⟨S, hS⟩ := h
+    exact ⟨S, fun a ↦ hloc _ _ _
+      ((CondensedRing.upperStar Λ (S.immersion a)).mapIso e) (hS a)⟩
+  constructor
+  intro M N e h
+  unfold IsConstantModelConstructible at h ⊢
+  split_ifs at h ⊢ with hX
+  · exact hstrat _ _ _ e h
+  · intro U hU
+    exact hstrat _ _ _ ((CondensedRing.upperStar Λ U.ι).mapIso e) (h U hU)
+
+private theorem constructible_finite_coproduct
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
+    [HasFiniteColimits (ConstantModelConstructible Λ X)]
+    [PreservesFiniteColimits (ObjectProperty.ι (IsConstantModelConstructible Λ X))]
+    (S : Type (u + 1)) [Finite S]
+    (B : S → Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+    (hB : ∀ s, IsConstantModelConstructible Λ X (B s)) :
+    IsConstantModelConstructible Λ X (∐ B) := by
+  let : ObjectProperty.IsClosedUnderIsomorphisms (IsConstantModelConstructible Λ X) :=
+    constructible_iso Λ X
+  let : ObjectProperty.IsClosedUnderColimitsOfShape
+      (IsConstantModelConstructible Λ X) (Discrete S) :=
+    ObjectProperty.isClosedUnderColimitsOfShape_of_preservesColimitsOfShape_ι _ _
+  exact ObjectProperty.prop_colimit (IsConstantModelConstructible Λ X)
+    (Discrete.functor B) (fun s ↦ hB s.as)
+
+set_option linter.unusedVariables false in
 /-- For finite `E/ℚ_ℓ`, IndCons is closed under ambient filtered colimits and arbitrary sums.
 Source: blueprint main-20261015, sk-prop-ind-heart-filtered-colimits, both assertions;
 standing setting: sk-def-sfb-dc-setting (blueprint: det-ind-heart-filtered-colimits).
 
-Proof: Form the category K of pairs (i, C → B_i), with C constructible, and morphisms
-(u, f) satisfying f ≫ c' = c ≫ B.map u. By det-ind-heart-canonical-presentation each fibre
-J(B_i) is essentially small and filtered, and its tautological cocone presents B_i.
-Since I is small, representatives in all the fibres give a set of representatives in K;
-its homs are sets of pairs, so a small skeleton may be used. K is nonempty. Common successors
-are obtained by moving two indices to a common successor in I and then using filteredness
-of its fibre. Equalize parallel base arrows first in I, then the two remaining arrows in
-that fibre; the resulting pair equalizes the original parallel arrows in K.
-Restricting a cocone on K to each fibre gives unique maps B_i → M. The arrows (u, id)
-make these maps compatible with I. Conversely a compatible family gives the cocone with
-legs C → B_i → M. These constructions are inverse, so the given ambient colimit is the
-small filtered colimit of the constructible objects indexed by K.
-For sums, choose filtered presentations for each summand in a finite subsum. Their finite
-product index is filtered, and finite sums of constructibles are constructible by
-sk-lem-coefficient-heart: zero is constructible, and the split short exact sequence gives
-closure under binary sums. Restriction to summands identifies cocones on the product diagram
-with maps from each B_s, since common successors make each map independent of the other
-coordinates. Thus its colimit is the finite subsum, which is ind-constructible. The empty
-product is the one-object category with zero diagram. Finally the finite subsets of the
-arbitrary index set form a nonempty filtered poset under union, and singleton maps identify
-its finite-subsum colimit with the arbitrary sum. Apply the first assertion to this diagram;
-this includes the empty sum. -/
+Proof: The standing finite-type hypotheses make X locally Noetherian and quasi-compact.
+The finite-presentability clause of det-ind-heart-full-faithfulness identifies every
+constructible module as finitely presentable. Mathlib ObjectProperty.ind_ind therefore
+flattens a filtered colimit of ind-constructible objects to a constructible presentation.
+For sums, constructibility is invariant under isomorphisms by composing the pulled-back
+isomorphism with each finite constant local model. The abelianity and finite-colimit
+preservation clauses of det-lem-coefficient-heart-closure then give closure of constructible
+objects under finite coproducts, including the empty coproduct.
+For a finite family of ind-constructible objects, choose filtered presentations and take
+their product index category. Evaluation at each coordinate is final, so the reindexed
+presentation still presents that summand. Assemble these cocones in the category of families
+and apply the coproduct functor, which preserves colimits. Its stages are finite coproducts
+of constructibles. The empty family is covered by the one-object empty product category.
+Finally, Mathlib's finite-subcoproduct cocone presents an arbitrary coproduct as the filtered
+colimit over finite subsets of the index set. Apply ind_ind again and transfer to the given
+colimiting cofan by the canonical isomorphism of colimit points. -/
 theorem indConstructible_filteredColimits_and_sums
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpl : p ≠ ℓ)
@@ -87,31 +171,62 @@ theorem indConstructible_filteredColimits_and_sums
         (IsConstantModelConstructible (Profinite.continuousMapRingObj E) X) (B s)) →
       ObjectProperty.ind.{u + 1}
         (IsConstantModelConstructible (Profinite.continuousMapRingObj E) X) c.pt) := by
-  sorry
+  constructor
+  · intro I _ _ B c hc hB
+    let : IsLocallyNoetherian (Spec (CommRingCat.of k)) := inferInstance
+    let : CompactSpace X :=
+      QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+    let : IsLocallyNoetherian X :=
+      LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+    let P : ObjectProperty (CategoryTheory.Mod
+        (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj (Profinite.continuousMapRingObj E) X)) :=
+      IsConstantModelConstructible (Profinite.continuousMapRingObj E) X
+    have hff := (indHeart_fullFaithfulness ℓ X).1 E
+    have hfp : P ≤ ObjectProperty.isFinitelyPresentable.{u + 1} _ := by
+      intro C hC
+      exact hff.1 ⟨C, hC⟩
+    rw [← ObjectProperty.ind_ind hfp]
+    exact ⟨I, inferInstance, inferInstance,
+      { diag := B, ι := c.ι, isColimit := hc }, hB⟩
+  · intro S B c hc hB
+    let : IsLocallyNoetherian (Spec (CommRingCat.of k)) := inferInstance
+    let : CompactSpace X :=
+      QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+    let : IsLocallyNoetherian X :=
+      LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+    let P := IsConstantModelConstructible (Profinite.continuousMapRingObj E) X
+    have hff := (indHeart_fullFaithfulness ℓ X).1 E
+    have hfp : P ≤ ObjectProperty.isFinitelyPresentable.{u + 1} _ := by
+      intro C hC
+      exact hff.1 ⟨C, hC⟩
+    let : IsNoetherian X := {}
+    have hcoeff := (coefficientHeart_closure ℓ (Profinite.padicSubfieldCondensedRing ℓ E.1)
+      (Or.inl ⟨E.1, inferInstance, rfl⟩)).2 X
+    let := hcoeff.2.2.2.1.some
+    let := hcoeff.2.2.2.2.2.1
+    exact ind_coproduct P hfp
+      (constructible_finite_coproduct (Profinite.continuousMapRingObj E) X) S B c hc hB
 
+set_option linter.unusedVariables false in
 /-- For the condensed algebraic closure, IndCons is closed under ambient filtered colimits
 and arbitrary sums. Source: blueprint main-20261015, sk-prop-ind-heart-filtered-colimits,
 both assertions; standing setting: sk-def-sfb-dc-setting
 (blueprint: det-ind-heart-filtered-colimits).
 
-Proof: As in the finite coefficient case, use det-ind-heart-canonical-presentation to
-present each B_i by its essentially small filtered category J(B_i) of constructible arrows.
-The pair category K has a small skeleton: I is small and the fibres have sets of
-representatives and set-valued homs. It is nonempty; choose common successors first in I
-and then in the common fibre. Equalize parallel base arrows in I, then equalize their
-constructible components in the resulting fibre. Cocones on K restrict to cocones on
-J(B_i), hence to unique maps B_i → M; the arrows (u, id) force transition compatibility.
-Conversely those compatible maps give all cocone legs by composition. These inverse
-constructions identify the colimit of the constructible diagram on K with the given
-ambient colimit, establishing the filtered-colimit assertion.
-For a finite subsum, take the product of the summands' filtered presentation categories.
-It is filtered coordinatewise, including the empty product. Its diagram consists of finite
-sums of constructibles, which are constructible by sk-lem-coefficient-heart and the split
-short exact sequence; the empty sum is zero. Maps on each summand are independent of the
-other coordinates by common successors, so the product diagram has colimit the finite
-subsum. Finally the finite-subset poset is nonempty and filtered by union. Maps from its
-finite subsums are precisely families of maps from the individual summands, so its colimit
-is the arbitrary sum, also for an empty family. Apply the filtered-colimit assertion. -/
+Proof: As in the finite coefficient case, the standing hypotheses make X Noetherian.
+Use the algebraic-closure clause of det-ind-heart-full-faithfulness to obtain finite
+presentability of constructible modules. ObjectProperty.ind_ind then flattens every filtered
+colimit of ind-constructible objects.
+Constructibility is invariant under isomorphisms, by composing the local-model isomorphisms
+on each stratum. Apply det-lem-coefficient-heart-closure for the condensed algebraic closure:
+its abelian full subcategory and finite-colimit-preserving inclusion give constructible
+finite coproducts. Products of filtered presentation categories, final coordinate
+evaluations and the colimit-preserving coproduct functor give filtered constructible
+presentations of finite coproducts of ind-constructibles, also for the empty family.
+The finite subsets of the arbitrary index set form a filtered poset. Mathlib's
+finite-subcoproduct cocone has colimit the arbitrary coproduct, so ind_ind proves it
+ind-constructible. Transfer to the specified cofan by colimit uniqueness. -/
 theorem indConstructible_filteredColimits_and_sums_padicAlgCl
     (ℓ : ℕ) [Fact ℓ.Prime]
     (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpl : p ≠ ℓ)
@@ -134,6 +249,41 @@ theorem indConstructible_filteredColimits_and_sums_padicAlgCl
         (IsConstantModelConstructible (Profinite.padicAlgClRingObj ℓ) X) (B s)) →
       ObjectProperty.ind.{u + 1}
         (IsConstantModelConstructible (Profinite.padicAlgClRingObj ℓ) X) c.pt) := by
-  sorry
+  constructor
+  · intro I _ _ B c hc hB
+    let : IsLocallyNoetherian (Spec (CommRingCat.of k)) := inferInstance
+    let : CompactSpace X :=
+      QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+    let : IsLocallyNoetherian X :=
+      LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+    let P : ObjectProperty (CategoryTheory.Mod
+        (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)) :=
+      IsConstantModelConstructible (Profinite.padicAlgClRingObj ℓ) X
+    have hff := (indHeart_fullFaithfulness ℓ X).2
+    have hfp : P ≤ ObjectProperty.isFinitelyPresentable.{u + 1} _ := by
+      intro C hC
+      exact hff.1 ⟨C, hC⟩
+    rw [← ObjectProperty.ind_ind hfp]
+    exact ⟨I, inferInstance, inferInstance,
+      { diag := B, ι := c.ι, isColimit := hc }, hB⟩
+  · intro S B c hc hB
+    let : IsLocallyNoetherian (Spec (CommRingCat.of k)) := inferInstance
+    let : CompactSpace X :=
+      QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+    let : IsLocallyNoetherian X :=
+      LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+    let P := IsConstantModelConstructible (Profinite.padicAlgClRingObj ℓ) X
+    have hff := (indHeart_fullFaithfulness ℓ X).2
+    have hfp : P ≤ ObjectProperty.isFinitelyPresentable.{u + 1} _ := by
+      intro C hC
+      exact hff.1 ⟨C, hC⟩
+    let : IsNoetherian X := {}
+    have hcoeff := (coefficientHeart_closure ℓ (Profinite.padicAlgClCondensedRing ℓ)
+      (Or.inr rfl)).2 X
+    let := hcoeff.2.2.2.1.some
+    let := hcoeff.2.2.2.2.2.1
+    exact ind_coproduct P hfp
+      (constructible_finite_coproduct (Profinite.padicAlgClRingObj ℓ) X) S B c hc hB
 
 end AlgebraicGeometry.ProEtale

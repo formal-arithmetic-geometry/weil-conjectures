@@ -20,42 +20,40 @@
  ],
  "proof": [
   {
-   "text": "Recall the unit's definition: $\\IndCons(X,\\Lambda)$ consists of the small filtered colimits, in $\\Mod(X_{\\mathrm{proét}},\\Lambda)$, of objects of $\\Cons(X,\\Lambda)$. Let $\\mathcal K$ be the category of pairs $(\\lambda,c\\colon C\\to B_\\lambda)$ with $C$ constructible; a morphism $(\\lambda,c)\\to(\\mu,c')$ is a pair $(u,f)$ with $u\\colon\\lambda\\to\\mu$ in $I$ and $f\\colon C\\to C'$ satisfying $c'f=B(u)c$. Identities and composition are componentwise, and $(\\lambda,c)\\mapsto C$, $(u,f)\\mapsto f$ defines a diagram. By [det-ind-heart-canonical-presentation], each $J(B_\\lambda)$ is essentially small. Since $I$ is small, the union over $\\lambda$ of sets of representatives of these objects is a set of representatives for $\\mathcal K$; its morphisms are sets of pairs $(u,f)$. Thus $\\mathcal K$ is essentially small, and a small skeleton may be used for its colimit.",
+   "text": "The standing finite-type hypotheses make X locally Noetherian and quasi-compact. By det-ind-heart-full-faithfulness, every constructible object is finitely presentable in the ambient module category. Regard any given filtered colimit cocone as a ColimitPresentation. Mathlib ObjectProperty.ind_ind then identifies ind(ind P) with ind P, proving closure under filtered colimits without canonical presentations.",
    "uses": [
-    "det-ind-heart-canonical-presentation"
+    "det-ind-heart-full-faithfulness"
    ],
    "elementary": true
   },
   {
-   "text": "*$\\mathcal K$ is filtered.* Every $J(B_\\lambda)$ is nonempty and filtered by [det-ind-heart-canonical-presentation]. Choose $\\lambda\\in I$ and an object of $J(B_\\lambda)$ to obtain an object of $\\mathcal K$. For $(\\lambda,c\\colon C\\to B_\\lambda)$ and $(\\nu,d\\colon D\\to B_\\nu)$, choose $u\\colon\\lambda\\to\\mu$ and $v\\colon\\nu\\to\\mu$ in $I$. A common successor of $(C,B(u)c)$ and $(D,B(v)d)$ in $J(B_\\mu)$ gives a common successor in $\\mathcal K$. For parallel arrows $(u,f),(v,g)\\colon(\\lambda,c)\\rightrightarrows(\\mu,d)$, choose $w\\colon\\mu\\to\\rho$ with $wu=wv$. The maps $f,g$ are now parallel morphisms from $(C,B(wu)c)$ to $(D,B(w)d)$ in $J(B_\\rho)$. Choose $h\\colon(D,B(w)d)\\to(A,a)$ there with $hf=hg$. Then $(w,h)\\colon(\\mu,d)\\to(\\rho,a)$ equalizes the original two arrows, since its composites have components $(wu,hf)=(wv,hg)$. These are the three filteredness conditions.",
+   "text": "Constructibility is invariant under isomorphisms: retain each finite constant model and compose its local-model isomorphism with the inverse of the pulled-back isomorphism. Apply this on all strata, also after restriction to affine opens in the non-qcqs convention. By det-lem-coefficient-heart-closure the constructible full subcategory is abelian and its inclusion preserves finite colimits. Its finite coproduct cocones therefore give ambient finite coproducts of constructible objects, including the empty coproduct.",
    "uses": [
-    "det-ind-heart-canonical-presentation"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Colimit.* For any $\\Lambda_X$-module sheaf $M$, restrict a cocone on $\\mathcal K$ to each fibre $J(B_\\lambda)$. The canonical presentation in [det-ind-heart-canonical-presentation] gives unique maps $h_\\lambda\\colon B_\\lambda\\to M$. For $u\\colon\\lambda\\to\\mu$, the arrow $(u,\\mathrm{id}_C)\\colon(\\lambda,c)\\to(\\mu,B(u)c)$ implies $h_\\lambda c=h_\\mu B(u)c$ for every $c$; the colimit property of $J(B_\\lambda)$ gives $h_\\lambda=h_\\mu B(u)$. Conversely, such a compatible family gives the cocone $h_\\lambda c$, because for $(u,f)$ one has $h_\\mu c'f=h_\\mu B(u)c=h_\\lambda c$. The two constructions are inverse. Thus cocones on $\\mathcal K$ are exactly cocones from $(B_\\lambda)$ to $M$, naturally in $M$, so $B$ with its maps $C\\to B_\\lambda\\to B$ is the colimit over $\\mathcal K$. Steps 1 and 2 show that this is a small filtered colimit of constructible sheaves, proving the first assertion.",
-   "uses": [
-    "det-ind-heart-canonical-presentation"
+    "det-lem-coefficient-heart-closure"
    ],
    "elementary": true
   },
   {
-   "text": "*Direct sums.* For a finite subset $T\\subset S$, choose presentations $B_s=\\varinjlim_{\\alpha_s\\in A_s}C^{(s)}_{\\alpha_s}$ from the definition of $\\IndCons$. The finite product $A=\\prod_{s\\in T}A_s$ is filtered: it is nonempty, and common successors and equalizers of parallel arrows are chosen coordinatewise. The zero sheaf is constructible, and finite sums of constructibles are constructible by [sk-lem-coefficient-heart]: use $0\\to C\\to C\\oplus D\\to D\\to0$ and closure under extensions. A cocone from $\\bigoplus_{s\\in T}C^{(s)}_{\\alpha_s}$ to $M$ is exactly a compatible family of maps $C^{(s)}_{\\alpha_s}\\to M$ for each $s$. Indeed, restrict to each summand; its map is independent of the other coordinates because any two choices of those coordinates have a common successor. The presentation of $B_s$ then gives a unique map $B_s\\to M$, and the coproduct property gives a unique map $\\bigoplus_{s\\in T}B_s\\to M$. Conversely these maps define the cocone by composition. Hence the colimit over $A$ is $\\bigoplus_{s\\in T}B_s$, so finite sums lie in $\\IndCons$. For $T=\\varnothing$, the product category is the one-object category and its diagram is the zero constructible sheaf. Finally the poset of finite subsets of $S$ is nonempty and directed by union. A compatible family of maps from the finite subsums to $M$ is uniquely determined by its singleton maps $B_s\\to M$, and conversely those maps extend to every finite subsum. Its colimit is therefore $\\bigoplus_{s\\in S}B_s$. The first assertion applied to this filtered diagram proves the result, also for $S=\\varnothing$.",
+   "text": "For a finite family of ind-constructible objects, choose small filtered presentations. Their product category is small and filtered. Each coordinate evaluation is final, so reindexing its presentation along evaluation remains colimiting. Assemble these cocones in the category of families, then apply the coproduct functor, which preserves colimits. The resulting filtered presentation of the finite coproduct has constructible stages by the preceding step. This works for the empty family, whose product category has a unique object.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The finite subsets of any small index set form a small filtered poset. Mathlib CoproductsFromFiniteFiltered.isColimitFiniteSubproductsCocone presents the arbitrary coproduct as the colimit of its finite subcoproducts. The preceding step puts those stages in ind P, and ObjectProperty.ind_ind applies again. Transfer to the given colimiting cofan by its canonical colimit-point isomorphism.",
    "uses": [
-    "sk-lem-coefficient-heart"
+    "det-ind-heart-full-faithfulness"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "det-ind-heart-canonical-presentation",
-  "sk-lem-coefficient-heart"
+  "det-ind-heart-full-faithfulness",
+  "det-lem-coefficient-heart-closure"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-filtered-colimits.md",
-  "place": "## Proof"
+  "document": "lean/Sheaf/Paper/IndConstructibleFilteredColimits.lean",
+  "place": "M1 stage-3 Lean proof: ind_ind, exact constructible inclusion, product presentations and finite-subcoproducts."
  },
  "mathlib_searches": [
   {
@@ -213,5 +211,15 @@
     "note": "It states X is any scheme; its cohomology-sum membership argument cannot invoke a closure interface scoped to separated finite-type schemes over the standing field."
    }
   ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261019T005339-L-2755233",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
