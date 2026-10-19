@@ -75,6 +75,43 @@ namespace AlgebraicGeometry.Scheme
 
 variable {D : Type w} [SmallCategory D] {T : GrothendieckTopology D}
 
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+open scoped ChangeOfRings in
+private def adicFiniteOrdinaryUnitApp {R S : Sheaf T CommRingCat.{w}}
+    (f : R ⟶ S) (M : Mod R) : M ⟶ (res f).obj ((change f).obj M) where
+  val :=
+    { app := fun U ↦ ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars
+        (f.hom.app U).hom
+        ((((PresheafOfModules.sheafificationAdjunction (𝟙 (siteModuleRings S).obj)).unit.app
+          (SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M)).app U))
+      naturality := by
+        intro U V i
+        ext m
+        let eta := (PresheafOfModules.sheafificationAdjunction
+          (𝟙 (siteModuleRings S).obj)).unit.app (SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M)
+        change eta.app V ((1 : S.obj.obj V) ⊗ₜ[R.obj.obj V, (f.hom.app V).hom]
+          M.val.map i m) = ((change f).obj M).val.map i
+            (eta.app U ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] m))
+        have h := PresheafOfModules.naturality_apply eta i
+          ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] m)
+        change eta.app V ((SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M).map i
+            ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] m)) =
+          ((change f).obj M).val.map i
+            (eta.app U ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] m)) at h
+        rw [show (SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M).map i
+            ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] m) =
+            S.obj.map i 1 ⊗ₜ[R.obj.obj V, (f.hom.app V).hom] M.val.map i m from
+          Classical.choose_spec (SheafOfModules.exists_changeOfRingsMap f M i) 1 m,
+          map_one] at h
+        exact h }
+
+private theorem adicFiniteOrdinaryUnitApp_apply {R S : Sheaf T CommRingCat.{w}}
+    (f : R ⟶ S) (M : Mod R) (U : Dᵒᵖ) (m : M.val.obj U) :
+    (adicFiniteOrdinaryUnitApp f M).val.app U m = tensorSection f M U 1 m := by
+  rfl
+
 /-- The ordinary tensor unit is uniquely specified by insertion of 1 on sections.
 Proof: scalar insertion is linear over the source ring, natural and compatible with
 restrictions. Sheafification gives the map. The underlying-sheaf functor is faithful.
@@ -83,7 +120,46 @@ Source: Stacks Tags 06YY, 09C2 and 09AL
 theorem adicFiniteOrdinaryUnit_existsUnique {R S : Sheaf T CommRingCat.{w}} (f : R ⟶ S) :
     ∃! e : 𝟭 (Mod R) ⟶ change f ⋙ res f,
       ∀ M : Mod R, (underlying R).map (e.app M) = insertion f M := by
-  sorry
+  let e : 𝟭 (Mod R) ⟶ change f ⋙ res f :=
+    { app := adicFiniteOrdinaryUnitApp f
+      naturality := by
+        intro M N a
+        apply SheafOfModules.hom_ext
+        ext U m
+        change tensorSection f N U 1 (a.val.app U m) =
+          ((change f).map a).val.app U (tensorSection f M U 1 m)
+        let t : SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M ⟶
+            SheafOfModules.changeOfRingsPresheaf.{w, w, w} f N :=
+          { app := fun U ↦ (ModuleCat.extendScalars (f.hom.app U).hom).map (a.val.app U)
+            naturality := SheafOfModules.changeOfRingsHom_naturality f M a }
+        have h := congrArg (fun z ↦ z.app U)
+          ((PresheafOfModules.sheafificationAdjunction
+            (𝟙 (siteModuleRings S).obj)).unit.naturality t)
+        have h' := ConcreteCategory.congr_hom h
+          (@TensorProduct.tmul (R.obj.obj U) _ _ _ _ _
+            (Module.compHom _ (f.hom.app U).hom) _ (1 : S.obj.obj U) m)
+        change tensorSection f N U 1 (a.val.app U m) = _
+        change ((PresheafOfModules.sheafificationAdjunction
+            (𝟙 (siteModuleRings S).obj)).unit.app
+              (SheafOfModules.changeOfRingsPresheaf.{w, w, w} f N)).app U
+            ((ModuleCat.extendScalars (f.hom.app U).hom).map (a.val.app U)
+              (@TensorProduct.tmul (R.obj.obj U) _ _ _ _ _
+            (Module.compHom _ (f.hom.app U).hom) _ (1 : S.obj.obj U) m)) =
+          ((change f).map a).val.app U (tensorSection f M U 1 m) at h'
+        rw [ModuleCat.ExtendScalars.map_tmul] at h'
+        exact h' }
+  have he : ∀ M : Mod R, (underlying R).map (e.app M) = insertion f M := by
+    intro M
+    apply (insertion_existsUnique f M).unique
+    · intro U m
+      exact adicFiniteOrdinaryUnitApp_apply f M U m
+    · exact (insertion_existsUnique f M).exists.choose_spec
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply NatTrans.ext
+  funext M
+  apply (underlying R).map_injective
+  exact (he' M).trans (he M).symm
 
 /-- The actual scalar insertion, retaining its unique sectionwise normalization.
 Source: Stacks Tags 06YY, 09C2 and 09AL
@@ -133,7 +209,15 @@ theorem adicFiniteResComp_existsUnique {R S V : Sheaf T CommRingCat.{w}}
     (f : R ⟶ S) (g : S ⟶ V) :
     ∃! e : res g ⋙ res f ≅ res (f ≫ g),
       ∀ M : Mod V, (underlying R).map (e.hom.app M) = 𝟙 _ := by
-  sorry
+  refine ⟨Iso.refl _, ?_, ?_⟩
+  · intro M
+    rfl
+  · intro e he
+    apply Iso.ext
+    apply NatTrans.ext
+    funext M
+    apply (underlying R).map_injective
+    exact (he M).trans (by rfl)
 
 /-- The sectionwise restriction composition isomorphism.
 Source: Stacks Tags 06YY, 09C2 and 09AL
@@ -159,6 +243,176 @@ def adicFiniteDresComp {R S V : Sheaf T CommRingCat.{w}} (f : R ⟶ S) (g : S �
   (Functor.mapDerivedCategoryCompIso (res g) (res f)).symm ≪≫
     Functor.mapDerivedCategoryNatIso (adicFiniteResComp f g)
 
+open scoped ChangeOfRings in
+private def adicFiniteTensorToRestriction {R S : Sheaf T CommRingCat.{w}}
+    (f : R ⟶ S) (M : Mod R) (N : Mod S)
+    (a : SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M ⟶ N.val) :
+    M ⟶ (res f).obj N where
+  val :=
+    { app := fun U ↦ ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars
+        (f.hom.app U).hom (a.app U)
+      naturality := by
+        intro U V i
+        ext m
+        change a.app V ((1 : S.obj.obj V) ⊗ₜ[R.obj.obj V, (f.hom.app V).hom]
+          M.val.map i m) = N.val.map i
+            (a.app U ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] m))
+        have h := PresheafOfModules.naturality_apply a i
+          ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] m)
+        rw [show (SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M).map i
+            ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] m) =
+            S.obj.map i 1 ⊗ₜ[R.obj.obj V, (f.hom.app V).hom] M.val.map i m from
+          Classical.choose_spec (SheafOfModules.exists_changeOfRingsMap f M i) 1 m, map_one] at h
+        exact h }
+
+open scoped ChangeOfRings in
+private def adicFiniteRestrictionToTensor {R S : Sheaf T CommRingCat.{w}}
+    (f : R ⟶ S) (M : Mod R) (N : Mod S) (a : M ⟶ (res f).obj N) :
+    SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M ⟶ N.val where
+  app U := ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars
+    (f.hom.app U).hom (a.val.app U)
+  naturality := by
+    intro U V i
+    apply ModuleCat.ExtendScalars.hom_ext
+    intro m
+    change ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars
+      (f.hom.app V).hom (a.val.app V)
+        ((SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M).map i
+          ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] m)) =
+      N.val.map i (ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars
+        (f.hom.app U).hom (a.val.app U)
+          ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] m))
+    rw [show (SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M).map i
+        ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] m) =
+        S.obj.map i 1 ⊗ₜ[R.obj.obj V, (f.hom.app V).hom] M.val.map i m from
+      Classical.choose_spec (SheafOfModules.exists_changeOfRingsMap f M i) 1 m, map_one]
+    have atOne (W : Dᵒᵖ) (n : M.val.obj W) :
+        ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars
+          (f.hom.app W).hom (a.val.app W)
+            ((1 : S.obj.obj W) ⊗ₜ[R.obj.obj W, (f.hom.app W).hom] n) = a.val.app W n := by
+      exact congrArg (fun z : M.val.obj W ⟶
+        (ModuleCat.restrictScalars (f.hom.app W).hom).obj (N.val.obj W) ↦ z n)
+        ((ModuleCat.ExtendRestrictScalarsAdj.homEquiv (f.hom.app W).hom).apply_symm_apply
+          (a.val.app W))
+    rw [atOne, atOne]
+    exact PresheafOfModules.naturality_apply a.val i m
+
+private def adicFinitePresheafHomEquiv {R S : Sheaf T CommRingCat.{w}}
+    (f : R ⟶ S) (M : Mod R) (N : Mod S) :
+    (SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M ⟶ N.val) ≃
+      (M ⟶ (res f).obj N) where
+  toFun := adicFiniteTensorToRestriction f M N
+  invFun := adicFiniteRestrictionToTensor f M N
+  left_inv a := by
+    ext U : 1
+    exact (ModuleCat.ExtendRestrictScalarsAdj.homEquiv (f.hom.app U).hom).symm_apply_apply
+      (a.app U)
+  right_inv a := by
+    apply SheafOfModules.hom_ext
+    ext U : 1
+    exact (ModuleCat.ExtendRestrictScalarsAdj.homEquiv (f.hom.app U).hom).apply_symm_apply
+      (a.val.app U)
+
+private def adicFiniteHomEquiv {R S : Sheaf T CommRingCat.{w}}
+    (f : R ⟶ S) (M : Mod R) (N : Mod S) :
+    ((change f).obj M ⟶ N) ≃ (M ⟶ (res f).obj N) :=
+  ((PresheafOfModules.sheafificationAdjunction (𝟙 (siteModuleRings S).obj)).homEquiv _ _).trans
+    (adicFinitePresheafHomEquiv f M N)
+
+private theorem adicFiniteHomEquiv_apply {R S : Sheaf T CommRingCat.{w}}
+    (f : R ⟶ S) (M : Mod R) (N : Mod S) (a : (change f).obj M ⟶ N)
+    (U : Dᵒᵖ) (m : M.val.obj U) :
+    (adicFiniteHomEquiv f M N a).val.app U m =
+      a.val.app U (tensorSection f M U 1 m) := by
+  rfl
+
+open scoped ChangeOfRings in
+private theorem adicFiniteHomEquiv_naturality_left {R S : Sheaf T CommRingCat.{w}}
+    (f : R ⟶ S) {M M' : Mod R} (a : M ⟶ M') (N : Mod S)
+    (b : (change f).obj M' ⟶ N) :
+    adicFiniteHomEquiv f M N ((change f).map a ≫ b) =
+      a ≫ adicFiniteHomEquiv f M' N b := by
+  change adicFinitePresheafHomEquiv f M N
+      ((PresheafOfModules.sheafificationAdjunction (𝟙 (siteModuleRings S).obj)).homEquiv _ _
+        ((PresheafOfModules.sheafification (𝟙 (siteModuleRings S).obj)).map
+          (show SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M ⟶
+              SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M' from
+            { app := fun U ↦ (ModuleCat.extendScalars (f.hom.app U).hom).map (a.val.app U)
+              naturality := SheafOfModules.changeOfRingsHom_naturality f M a }) ≫ b)) = _
+  rw [Adjunction.homEquiv_naturality_left]
+  ext U m
+  change ((PresheafOfModules.sheafificationAdjunction (𝟙 (siteModuleRings S).obj)).homEquiv
+    (SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M') N b).app U
+      ((ModuleCat.extendScalars (f.hom.app U).hom).map (a.val.app U)
+        ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] m)) = _
+  rw [ModuleCat.ExtendScalars.map_tmul]
+  rfl
+
+private theorem adicFiniteHomEquiv_naturality_right {R S : Sheaf T CommRingCat.{w}}
+    (f : R ⟶ S) (M : Mod R) {N N' : Mod S}
+    (a : (change f).obj M ⟶ N) (b : N ⟶ N') :
+    adicFiniteHomEquiv f M N' (a ≫ b) =
+      adicFiniteHomEquiv f M N a ≫ (res f).map b := by
+  change adicFinitePresheafHomEquiv f M N'
+      ((PresheafOfModules.sheafificationAdjunction (𝟙 (siteModuleRings S).obj)).homEquiv _ _
+        (a ≫ b)) = _
+  rw [Adjunction.homEquiv_naturality_right]
+  rfl
+
+private def adicFiniteAdjunction {R S : Sheaf T CommRingCat.{w}}
+    (f : R ⟶ S) : change f ⊣ res f :=
+  Adjunction.mkOfHomEquiv
+    { homEquiv := adicFiniteHomEquiv f
+      homEquiv_naturality_left_symm := by
+        intro M M' N a g
+        apply (adicFiniteHomEquiv f M N).injective
+        rw [Equiv.apply_symm_apply, adicFiniteHomEquiv_naturality_left,
+          Equiv.apply_symm_apply]
+      homEquiv_naturality_right := fun a b ↦ adicFiniteHomEquiv_naturality_right f _ a b }
+
+private theorem adicFiniteAdjunction_homEquiv {R S : Sheaf T CommRingCat.{w}}
+    (f : R ⟶ S) (M : Mod R) (N : Mod S) (a : (change f).obj M ⟶ N) :
+    (adicFiniteAdjunction f).homEquiv M N a = adicFiniteHomEquiv f M N a := by
+  simp only [adicFiniteAdjunction, Adjunction.mkOfHomEquiv_homEquiv]
+
+private def adicFiniteCompositeAdjunction {R S V : Sheaf T CommRingCat.{w}}
+    (f : R ⟶ S) (g : S ⟶ V) : change f ⋙ change g ⊣ res (f ≫ g) :=
+  (adicFiniteAdjunction f).comp (adicFiniteAdjunction g)
+
+private theorem adicFiniteCompositeAdjunction_homEquiv
+    {R S V : Sheaf T CommRingCat.{w}} (f : R ⟶ S) (g : S ⟶ V)
+    (M : Mod R) (N : Mod V) (a : (change f ⋙ change g).obj M ⟶ N) :
+    (adicFiniteCompositeAdjunction f g).homEquiv M N a =
+      adicFiniteHomEquiv f M ((res g).obj N)
+        (adicFiniteHomEquiv g ((change f).obj M) N a) := by
+  simp only [adicFiniteCompositeAdjunction, Adjunction.comp_homEquiv]
+  change (adicFiniteAdjunction f).homEquiv M _
+    ((adicFiniteAdjunction g).homEquiv ((change f).obj M) N a) = _
+  rw [adicFiniteAdjunction_homEquiv, adicFiniteAdjunction_homEquiv]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+open scoped ChangeOfRings in
+private theorem adicFiniteTensorSection_smul {R S : Sheaf T CommRingCat.{w}}
+    (f : R ⟶ S) (M : Mod R) (U : Dᵒᵖ) (s : S.obj.obj U) (m : M.val.obj U) :
+    tensorSection f M U s m = s • tensorSection f M U 1 m := by
+  let eta := (PresheafOfModules.sheafificationAdjunction
+    (𝟙 (siteModuleRings S).obj)).unit.app (SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M)
+  have h := (eta.app U).hom.map_smul s
+    ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] m)
+  change eta.app U ((s * 1) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] m) = _ at h
+  simpa only [mul_one] using! h
+
+private theorem adicFiniteHomEquiv_apply_tensor {R S : Sheaf T CommRingCat.{w}}
+    (f : R ⟶ S) (M : Mod R) (N : Mod S) (a : (change f).obj M ⟶ N)
+    (U : Dᵒᵖ) (s : S.obj.obj U) (m : M.val.obj U) :
+    a.val.app U (tensorSection f M U s m) =
+      s • (show N.val.obj U from (adicFiniteHomEquiv f M N a).val.app U m) := by
+  rw [adicFiniteTensorSection_smul]
+  exact (a.val.app U).hom.map_smul s _
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Ordinary tensor associativity fixed by pure tensors.
 Proof: balancing sends v tensor (s tensor m) to v*g(s) tensor m, with inverse
 v tensor m mapped to v tensor (1 tensor m). The formulas respect restrictions
@@ -172,7 +426,48 @@ theorem adicFiniteChangeComp_existsUnique {R S V : Sheaf T CommRingCat.{w}}
         (e.hom.app M).val.app U
           (tensorSection g ((change f).obj M) U v (tensorSection f M U s m)) =
             tensorSection (f ≫ g) M U (v * (g.hom.app U) s) m := by
-  sorry
+  let adj := adicFiniteCompositeAdjunction f g
+  let e : change f ⋙ change g ≅ change (f ≫ g) :=
+    adj.leftAdjointUniq (adicFiniteAdjunction (f ≫ g))
+  have he0 (M : Mod R) (U : Dᵒᵖ) (m : M.val.obj U) :
+      (e.hom.app M).val.app U
+        (tensorSection g ((change f).obj M) U 1 (tensorSection f M U 1 m)) =
+          tensorSection (f ≫ g) M U 1 m := by
+    have h := Adjunction.homEquiv_leftAdjointUniq_hom_app adj
+      (adicFiniteAdjunction (f ≫ g)) M
+    rw [← Adjunction.homEquiv_id] at h
+    change (adicFiniteCompositeAdjunction f g).homEquiv M _ (e.hom.app M) = _ at h
+    rw [adicFiniteCompositeAdjunction_homEquiv, adicFiniteAdjunction_homEquiv] at h
+    have hh := congrArg (fun z ↦ z.val.app U m) h
+    exact hh
+  have he : ∀ (M : Mod R) (U : Dᵒᵖ) (s : S.obj.obj U) (v : V.obj.obj U)
+      (m : M.val.obj U), (e.hom.app M).val.app U
+        (tensorSection g ((change f).obj M) U v (tensorSection f M U s m)) =
+          tensorSection (f ≫ g) M U (v * (g.hom.app U) s) m := by
+    intro M U s v m
+    erw [adicFiniteHomEquiv_apply_tensor g ((change f).obj M)
+      ((change (f ≫ g)).obj M) (e.hom.app M) U v (tensorSection f M U s m)]
+    erw [adicFiniteTensorSection_smul f M U s m]
+    erw [(adicFiniteHomEquiv g _ _ (e.hom.app M)).val.app U |>.hom.map_smul]
+    change v • ((g.hom.app U s) •
+      ((e.hom.app M).val.app U
+        (tensorSection g ((change f).obj M) U 1 (tensorSection f M U 1 m)))) = _
+    rw [he0, smul_smul, ← adicFiniteTensorSection_smul]
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  apply (adicFiniteHomEquiv g ((change f).obj M) _).injective
+  apply (adicFiniteHomEquiv f M _).injective
+  apply SheafOfModules.hom_ext
+  ext U m
+  change (e'.hom.app M).val.app U
+      (tensorSection g ((change f).obj M) U 1 (tensorSection f M U 1 m)) =
+    (e.hom.app M).val.app U
+      (tensorSection g ((change f).obj M) U 1 (tensorSection f M U 1 m))
+  rw [he', he0, map_one, mul_one]
+
 
 /-- The ordinary balancing isomorphism, uniquely fixed by its pure-tensor formula.
 Source: Stacks Tags 06YY, 09C2 and 09AL
