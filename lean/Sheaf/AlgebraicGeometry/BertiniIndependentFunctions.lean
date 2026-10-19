@@ -15,9 +15,13 @@ public import Mathlib.RingTheory.Spectrum.Prime.Topology
 public import Mathlib.Topology.Irreducible
 public import Mathlib.Topology.KrullDimension
 
+import Mathlib.Algebra.MvPolynomial.Eval
+import Mathlib.RingTheory.Spectrum.Prime.RingHom
+import Mathlib.RingTheory.KrullDimension.Field
+import Mathlib.Tactic.Convert
+import Mathlib.Tactic.NormNum
+import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 import Mathlib.RingTheory.KrullDimension.Polynomial
-import Mathlib.RingTheory.Spectrum.Prime.Noetherian
-import Mathlib.Topology.NoetherianSpace
 import Sheaf.RingTheory.FiniteTypeDomainDimensionTrdeg
 import Sheaf.RingTheory.FiniteTypeFibreComponentLowerBound
 
@@ -94,6 +98,197 @@ theorem bertini_independent_functions
                     (∑ i : Fin n,
                       algebraMap k (FractionRing A) (c i) *
                         algebraMap A (FractionRing A) (g i))) i)) := by
-  sorry
+  classical
+  let i₀ : Fin n := ⟨0, Nat.zero_lt_of_lt hn⟩
+  let i₁ : Fin n := ⟨1, hn⟩
+  let a : Fin n → k := fun i ↦ if i = i₀ then 1 else 0
+  let b : Fin n ⊕ Fin 2 → k := Sum.elim a (fun _ ↦ 0)
+  let h : (MvPolynomial (Fin n) A) := ∑ i, MvPolynomial.C (g i) * MvPolynomial.X i
+  let f : Fin n ⊕ Fin 2 → (MvPolynomial (Fin n) A) := Sum.elim MvPolynomial.X
+    (fun j ↦ Fin.cases h (fun _ ↦ MvPolynomial.C (g i₁)) j)
+  let φ : (MvPolynomial (Fin n ⊕ Fin 2) k) →ₐ[k] (MvPolynomial (Fin n) A) :=
+    MvPolynomial.aeval f
+  let ev : (MvPolynomial (Fin n ⊕ Fin 2) k) →+* k := MvPolynomial.eval b
+  let m := RingHom.ker ev
+  let J := Ideal.map φ.toRingHom m
+  let I : Ideal A := Ideal.span ({g i₀, g i₁} : Set A)
+  let q := Ideal.Quotient.mk I
+  let e : (MvPolynomial (Fin n) A) →+* A ⧸ I :=
+    MvPolynomial.eval₂Hom q (fun i ↦ q (algebraMap k A (a i)))
+  have hg₀ : q (g i₀) = 0 := Ideal.Quotient.eq_zero_iff_mem.mpr
+    (Ideal.subset_span (by simp))
+  have hg₁ : q (g i₁) = 0 := Ideal.Quotient.eq_zero_iff_mem.mpr
+    (Ideal.subset_span (by simp))
+  have heh : e h = 0 := by
+    simp [e, h, a, apply_ite, hg₀]
+  have heφ : e.comp φ.toRingHom = (algebraMap k (A ⧸ I)).comp ev := by
+    apply MvPolynomial.ringHom_ext
+    · intro r
+      change e (φ (MvPolynomial.C r)) = algebraMap k (A ⧸ I) (ev (MvPolynomial.C r))
+      simp only [φ, MvPolynomial.aeval_C, MvPolynomial.algebraMap_apply,
+        e, MvPolynomial.eval₂Hom_C, ev, MvPolynomial.eval_C]
+      rfl
+    · intro j
+      change e (φ (MvPolynomial.X j)) = algebraMap k (A ⧸ I) (ev (MvPolynomial.X j))
+      simp only [φ, MvPolynomial.aeval_X, ev, MvPolynomial.eval_X]
+      rcases j with i | j
+      · simp only [f, Sum.elim_inl, e, MvPolynomial.eval₂Hom_X', b]
+        rfl
+      · refine Fin.cases ?_ (fun j ↦ ?_) j
+        · simpa only [f, Sum.elim_inr, Fin.cases_zero, b, map_zero] using heh
+        · have hj : j = 0 := Subsingleton.elim _ _
+          subst j
+          simpa only [f, Sum.elim_inr, Fin.cases_succ, e, MvPolynomial.eval₂Hom_C,
+            b, map_zero] using hg₁
+  have hJe : J ≤ RingHom.ker e := by
+    rw [Ideal.map_le_iff_le_comap]
+    intro p hp
+    change e (φ p) = 0
+    change ev p = 0 at hp
+    have hh := DFunLike.congr_fun heφ p
+    simpa [hp] using hh
+  let E : (MvPolynomial (Fin n) A) ⧸ J →+* A ⧸ I := Ideal.Quotient.lift J e hJe
+  have hrel (j : Fin n ⊕ Fin 2) :
+      φ (MvPolynomial.X j - MvPolynomial.C (b j)) ∈ J := by
+    apply Ideal.mem_map_of_mem
+    change ev _ = 0
+    simp only [ev, map_sub, MvPolynomial.eval_X, MvPolynomial.eval_C, sub_self]
+  have hx (i : Fin n) :
+      Ideal.Quotient.mk J (MvPolynomial.X i) =
+        Ideal.Quotient.mk J (MvPolynomial.C (algebraMap k A (a i))) := by
+    apply sub_eq_zero.mp
+    rw [← map_sub, Ideal.Quotient.eq_zero_iff_mem]
+    simpa only [φ, map_sub, MvPolynomial.aeval_X, MvPolynomial.aeval_C, f,
+      Sum.elim_inl, b, MvPolynomial.algebraMap_apply] using hrel (Sum.inl i)
+  have hhJ : h ∈ J := by
+    simpa only [φ, map_sub, MvPolynomial.aeval_X, MvPolynomial.aeval_C, f,
+      Sum.elim_inr, Fin.cases_zero, b, map_zero, sub_zero] using hrel (Sum.inr 0)
+  have hg₁J : MvPolynomial.C (g i₁) ∈ J := by
+    simpa only [φ, map_sub, MvPolynomial.aeval_X, MvPolynomial.aeval_C, f,
+      Sum.elim_inr, Fin.cases_zero, Fin.cases_succ, b, map_zero, sub_zero]
+      using hrel (Sum.inr (Fin.succ 0))
+  have hg₀J : MvPolynomial.C (g i₀) ∈ J := by
+    have hh := Ideal.Quotient.eq_zero_iff_mem.mpr hhJ
+    have hs : Ideal.Quotient.mk J h = Ideal.Quotient.mk J (MvPolynomial.C (g i₀)) := by
+      simp only [h, map_sum, map_mul, hx]
+      simp [a, Finset.sum_ite_eq']
+    rw [hs] at hh
+    exact Ideal.Quotient.eq_zero_iff_mem.mp hh
+  let inc : A →+* (MvPolynomial (Fin n) A) ⧸ J := (Ideal.Quotient.mk J).comp MvPolynomial.C
+  have hIinc : I ≤ RingHom.ker inc := by
+    apply Ideal.span_le.mpr
+    intro x hx
+    rcases hx with rfl | hx
+    · exact Ideal.Quotient.eq_zero_iff_mem.mpr hg₀J
+    · have hhx : x = g i₁ := Set.mem_singleton_iff.mp hx
+      subst x
+      exact Ideal.Quotient.eq_zero_iff_mem.mpr hg₁J
+  let F : A ⧸ I →+* (MvPolynomial (Fin n) A) ⧸ J := Ideal.Quotient.lift I inc hIinc
+  have hFE : F.comp E = RingHom.id _ := by
+    apply Ideal.Quotient.ringHom_ext
+    apply MvPolynomial.ringHom_ext
+    · intro r
+      simp [F, E, e, inc, q]
+    · intro i
+      simp only [RingHom.comp_apply, E, Ideal.Quotient.lift_mk,
+        e, MvPolynomial.eval₂Hom_X', RingHom.id_apply]
+      simpa only [F, q, Ideal.Quotient.lift_mk, inc, RingHom.comp_apply] using (hx i).symm
+  have hEF : E.comp F = RingHom.id _ := by
+    apply Ideal.Quotient.ringHom_ext
+    ext r
+    simp [F, E, e, inc, q]
+  let eqv : (MvPolynomial (Fin n) A) ⧸ J ≃+* A ⧸ I :=
+    { E with
+      invFun := F
+      left_inv := fun x ↦ DFunLike.congr_fun hFE x
+      right_inv := fun x ↦ DFunLike.congr_fun hEF x }
+  have hqrange : Set.range (PrimeSpectrum.comap q) =
+      PrimeSpectrum.zeroLocus ({g i₀, g i₁} : Set A) := by
+    rw [range_comap_of_surjective (A ⧸ I) q
+      Ideal.Quotient.mk_surjective]
+    simp only [q, Ideal.mk_ker, I, PrimeSpectrum.zeroLocus_span]
+  let eqz : PrimeSpectrum (A ⧸ I) ≃ₜ
+      PrimeSpectrum.zeroLocus ({g i₀, g i₁} : Set A) :=
+    (PrimeSpectrum.isClosedEmbedding_comap_of_surjective (A ⧸ I) q
+      Ideal.Quotient.mk_surjective).isEmbedding.toHomeomorph.trans
+        (Homeomorph.setCongr hqrange)
+  let eh := (PrimeSpectrum.homeomorphOfRingEquiv eqv).trans eqz
+  obtain ⟨W, hW, hWd⟩ := hcomp
+  change W ∈ irreducibleComponents
+    (PrimeSpectrum.zeroLocus ({g i₀, g i₁} : Set A)) at hW
+  let W' := eh ⁻¹' W
+  have hW' : W' ∈ irreducibleComponents
+      (PrimeSpectrum ((MvPolynomial (Fin n) A) ⧸ J)) := by
+    apply preimage_mem_irreducibleComponents hW eh.isOpenEmbedding
+    simpa only [eh.surjective.range_eq, Set.inter_univ] using hW.1.nonempty
+  have hdim : topologicalKrullDim W' = topologicalKrullDim W := by
+    let ew : W' ≃ₜ W := eh.subtype (fun _ ↦ Iff.rfl)
+    exact ew.isHomeomorph.topologicalKrullDim_eq ew
+  have hev : Function.Surjective ev := fun r ↦ ⟨MvPolynomial.C r, by simp [ev]⟩
+  have hm : m.IsMaximal := RingHom.ker_isMaximal_of_surjective ev hev
+  have hmk : Function.Bijective (algebraMap k ((MvPolynomial (Fin n ⊕ Fin 2) k) ⧸ m)) := by
+    let em : (MvPolynomial (Fin n ⊕ Fin 2) k) ⧸ m ≃+* k :=
+      ev.quotientKerEquivOfSurjective hev
+    have hem (r : k) : em (algebraMap k _ r) = r := by
+      change em (Ideal.Quotient.mk m (MvPolynomial.C r)) = r
+      exact (RingHom.quotientKerEquivOfSurjective_apply_mk hev (MvPolynomial.C r)).trans
+        (MvPolynomial.eval_C r)
+    refine ⟨fun x y hxy ↦ ?_, fun x ↦ ?_⟩
+    · simpa only [hem] using congrArg em hxy
+    · exact ⟨em x, em.injective (hem (em x))⟩
+  have : FiniteType k (MvPolynomial (Fin n) A) :=
+    FiniteType.trans (inferInstance : FiniteType k A) inferInstance
+  obtain ⟨dC, dP, hdC, hdP, hbound⟩ := finiteType_fibre_component_lower_bound
+    k (MvPolynomial (Fin n ⊕ Fin 2) k) (MvPolynomial (Fin n) A) φ m hm hmk
+  obtain ⟨d, hd, _, _⟩ := finiteType_domain_ringKrullDim_eq_trdeg (k := k) (S := A)
+  have : IsNoetherianRing A := FiniteType.isNoetherianRing k A
+  have hdC' : dC = d + n := by
+    have hc := MvPolynomial.ringKrullDim_of_isNoetherianRing (R := A) (ι := Fin n)
+    rw [hdC, hd] at hc
+    norm_num only [Nat.card_fin, ← Nat.cast_add] at hc
+    exact_mod_cast hc
+  have hinj : Function.Injective φ.toRingHom := by
+    rw [RingHom.injective_iff_ker_eq_bot]
+    by_contra hker
+    obtain ⟨r, hr, hr0⟩ := (Submodule.ne_bot_iff _).mp hker
+    have hdrop := ringKrullDim_succ_le_of_surjective
+      (Ideal.Quotient.mk (RingHom.ker φ.toRingHom)) Ideal.Quotient.mk_surjective
+      (mem_nonZeroDivisors_of_ne_zero hr0) (Ideal.Quotient.eq_zero_iff_mem.mpr hr)
+    rw [hdP, MvPolynomial.ringKrullDim_of_isNoetherianRing] at hdrop
+    simp only [ringKrullDim_eq_zero_of_field, zero_add, Nat.card_eq_fintype_card,
+      Fintype.card_sum, Fintype.card_fin] at hdrop
+    have hdrop' : dP + 1 ≤ n + 2 := by exact_mod_cast hdrop
+    have hb : ((dC - dP : ℕ) : WithBot ℕ∞) + 2 ≤ topologicalKrullDim W' + 2 :=
+      add_le_add (hbound W' hW') le_rfl
+    rw [hdim, hWd, hd] at hb
+    have hb' : dC - dP + 2 ≤ d := by exact_mod_cast hb
+    omega
+  have hf : AlgebraicIndependent k f := hinj
+  let μ : MvPolynomial (Fin n) A →ₐ[k] MvPolynomial (Fin n) (FractionRing A) :=
+    MvPolynomial.mapAlgHom (IsScalarTower.toAlgHom k A (FractionRing A))
+  have hμ : Function.Injective μ :=
+    MvPolynomial.map_injective _ (IsFractionRing.injective A (FractionRing A))
+  have hloc := IsFractionRing.injective
+    (MvPolynomial (Fin n) (FractionRing A))
+    (FractionRing (MvPolynomial (Fin n) (FractionRing A)))
+  have hind := (hf.map' hμ).map'
+    (f := IsScalarTower.toAlgHom k (MvPolynomial (Fin n) (FractionRing A))
+      (FractionRing (MvPolynomial (Fin n) (FractionRing A)))) hloc
+  refine ⟨(fun i ↦ if i = i₁ then 1 else 0), ?_⟩
+  convert hind using 1
+  funext j
+  apply congrArg (algebraMap (MvPolynomial (Fin n) (FractionRing A))
+    (FractionRing (MvPolynomial (Fin n) (FractionRing A))))
+  rcases j with i | j
+  · simp [μ, f]
+  · refine Fin.cases ?_ (fun j ↦ ?_) j
+    · simp [μ, f, h]
+    · have hj : j = 0 := Subsingleton.elim _ _
+      subst j
+      change MvPolynomial.C (∑ i : Fin n,
+        algebraMap k (FractionRing A) (if i = i₁ then 1 else 0) *
+          algebraMap A (FractionRing A) (g i)) =
+        μ (MvPolynomial.C (g i₁))
+      simp [μ, apply_ite]
 
 end Algebra
