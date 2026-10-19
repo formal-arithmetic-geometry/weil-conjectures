@@ -9,10 +9,7 @@ public import Sheaf.Paper.PbcQbarCategory
 public import WeilConjectures.CategoryTheory.Idempotents.Triangulated
 
 import Sheaf.Paper.PbcFilteredRetractDescent
-import Sheaf.Paper.FiniteStagePairCategory
-import Sheaf.Paper.IntrinsicQbarCategory
 import Sheaf.Paper.PbcFiniteStageKaroubian
-import Sheaf.Paper.PbcVerdierAxioms
 
 /-! # Idempotent completeness of the Qbar coefficient category
 
@@ -69,6 +66,12 @@ theorem pbcQbarIdempotentComplete
       (toKaroubi (pbcQbarCategory l Qbar T)).Faithful ∧
       (toKaroubi (pbcQbarCategory l Qbar T)).IsEquivalence ∧
       (toKaroubi (pbcQbarCategory l Qbar T)).IsTriangulated := by
-  sorry
+  have hC : ∀ E : Padic.FiniteCoefficientFields l Qbar,
+      IsIdempotentComplete (pbcStageCategory l Qbar T E) := by
+    intro E
+    exact (finite_stage_karoubian l (pbcFiniteField.{u} l Qbar E) T).1
+  have : IsIdempotentComplete (pbcQbarCategory l Qbar T) :=
+    (pbcFilteredRetractDescent l Qbar T hDim.out hInv.out hC).1
+  exact ⟨inferInstance, inferInstance, inferInstance, inferInstance, inferInstance⟩
 
 end AlgebraicGeometry.Scheme
