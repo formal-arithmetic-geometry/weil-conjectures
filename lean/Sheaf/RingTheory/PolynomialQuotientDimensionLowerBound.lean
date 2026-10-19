@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.Topology.KrullDimension
 import Sheaf.RingTheory.ClosedPointDimensionLocalRing
-import Sheaf.RingTheory.PolynomialRingMaximalLocalizationDimension
+import WeilConjectures.RingTheory.PolynomialRingMaximalLocalizationDimension
 import Sheaf.Topology.DimensionSupremumLocalDimensions
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 

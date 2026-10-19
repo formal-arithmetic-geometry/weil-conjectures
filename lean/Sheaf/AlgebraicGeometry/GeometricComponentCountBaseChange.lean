@@ -11,7 +11,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.Connected.Clopen
 public import Mathlib.SetTheory.Cardinal.Finite
 
-import Sheaf.FieldTheory.CommonExtensionFields
+import WeilConjectures.FieldTheory.CommonExtensionFields
 import Mathlib.FieldTheory.IsSepClosed
 import Sheaf.AlgebraicGeometry.SepClosedFieldComponentsBijection
 

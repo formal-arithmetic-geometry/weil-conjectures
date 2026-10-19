@@ -11,7 +11,7 @@ public import Mathlib.Topology.LocallyConstant.Algebra
 public import Mathlib.LinearAlgebra.Quotient.Defs
 public import Mathlib.Algebra.Module.LinearMap.End
 public import Mathlib.Topology.Algebra.Group.Basic
-import Sheaf.Topology.ContinuousOpenNormalStabilizer
+import WeilConjectures.Topology.ContinuousOpenNormalStabilizer
 import Mathlib.RepresentationTheory.Homological.Resolution
 import Mathlib.RepresentationTheory.Homological.GroupCohomology.Basic
 

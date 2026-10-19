@@ -5,8 +5,8 @@ Released under the Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
-import Sheaf.CategoryTheory.RightDerivedSingleUnitHomologyComparison
-import Sheaf.CategoryTheory.SingleHomologyShiftComparison
+import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyComparison
+import WeilConjectures.CategoryTheory.SingleHomologyShiftComparison
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
 

@@ -10,10 +10,10 @@ public import Sheaf.Paper.StrictHenselizationFunctoriality
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
 public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
-import Sheaf.RingTheory.FiniteRingMapQuasiFinite
+import WeilConjectures.RingTheory.FiniteRingMapQuasiFinite
 import Sheaf.RingTheory.HenselianFiniteTypeProductDecomposition
 import Sheaf.RingTheory.IndEtaleStability
-import Sheaf.RingTheory.QuasiFiniteFourRings
+import WeilConjectures.RingTheory.QuasiFiniteFourRings
 import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
 import WeilConjectures.RingTheory.FiniteLocalHenselian
 import WeilConjectures.RingTheory.ProEtale.HenselianLocalRing

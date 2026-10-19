@@ -17,7 +17,7 @@ import Sheaf.RingTheory.FiniteTypeDomainDimensionTrdeg
 import Sheaf.RingTheory.DimensionAtPointComponents
 import Sheaf.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs
 import Sheaf.Paper.QuasiFiniteOverPolynomialAlgebra
-import Sheaf.RingTheory.QuasiFiniteFourRings
+import WeilConjectures.RingTheory.QuasiFiniteFourRings
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 import Sheaf.TraceFormula.QuasiFinitePolynomialKernelDimensionDrop

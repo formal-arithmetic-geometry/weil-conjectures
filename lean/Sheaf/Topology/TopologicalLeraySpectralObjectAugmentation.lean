@@ -9,7 +9,7 @@ public import WeilConjectures.Topology.Sheaves.PushforwardCohomology
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralObject.SpectralSequence
-import Sheaf.CategoryTheory.GrothendieckBottomResolutionComparison
+import WeilConjectures.CategoryTheory.GrothendieckBottomResolutionComparison
 import Sheaf.Topology.TopologicalTerminalResolutionExtComparison
 
 /-! # The topological Leray spectral object and its augmentation

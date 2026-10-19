@@ -25,7 +25,7 @@ import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
 import Sheaf.AlgebraicGeometry.FiniteBirationalNormalIso
 import Sheaf.RingTheory.QuasiFiniteAtPrimeZeroFibreDimension
 import Mathlib.AlgebraicGeometry.Scheme
-import Sheaf.RingTheory.QuasiFiniteAtPrime
+import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 import Sheaf.RingTheory.ValuationDomainFibreDimensions
 import Sheaf.TraceFormula.ValuationHorizontalCurveModels
 import Sheaf.TraceFormula.ValuationStrictSemistableCofinality

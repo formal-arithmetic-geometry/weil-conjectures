@@ -13,7 +13,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Scheme
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Sheaf.AlgebraicGeometry.ConstantLocalDimensionComponents
+import WeilConjectures.AlgebraicGeometry.ConstantLocalDimensionComponents
 import Sheaf.AlgebraicGeometry.EquidimensionalOpenLocalDimension
 import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
 import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange

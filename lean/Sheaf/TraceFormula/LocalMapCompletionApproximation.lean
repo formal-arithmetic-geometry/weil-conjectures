@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.AlgebraicGeometry.Stalk
 public import Mathlib.RingTheory.AdicCompletion.Algebra
-public import Sheaf.RingTheory.CompletionMapForLocalHom
+public import WeilConjectures.RingTheory.CompletionMapForLocalHom
 public import Sheaf.RingTheory.GRing
 
 import Sheaf.RingTheory.FiniteTypeGRing

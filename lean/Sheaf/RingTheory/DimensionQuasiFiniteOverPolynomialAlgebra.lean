@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.Topology.KrullDimension
-public import Sheaf.RingTheory.QuasiFiniteAtPrime
+public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 import Mathlib.RingTheory.KrullDimension.Polynomial
 import Sheaf.RingTheory.QuasiFiniteLocalDimension
 

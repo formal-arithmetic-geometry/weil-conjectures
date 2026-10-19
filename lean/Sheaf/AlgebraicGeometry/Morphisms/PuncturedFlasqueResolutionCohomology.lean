@@ -6,7 +6,7 @@ Authors: SHEAF group T4
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-public import Sheaf.AlgebraicGeometry.Morphisms.PuncturedSectionsComplex
+public import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedSectionsComplex
 import Sheaf.AlgebraicGeometry.Morphisms.PuncturedFlasqueResolutionComparison
 public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 

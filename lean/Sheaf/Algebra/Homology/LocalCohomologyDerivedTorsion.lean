@@ -5,12 +5,12 @@ Authors: SHEAF group T1
 -/
 module
 
-public import Sheaf.Algebra.Homology.IdealPowerTorsionFunctor
+public import WeilConjectures.Algebra.Homology.IdealPowerTorsionFunctor
 public import Mathlib.Algebra.Homology.LocalCohomology
 public import Mathlib.Algebra.Category.ModuleCat.EnoughInjectives
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 import Sheaf.Algebra.Homology.ExtInjectiveResolutionComparison
-import Sheaf.Algebra.Homology.FilteredColimitCochainHomology
+import WeilConjectures.Algebra.Homology.FilteredColimitCochainHomology
 import Sheaf.Algebra.Homology.QuotientHomComplexColimit
 
 /-! # Ext-colimit local cohomology and derived ideal-power torsion

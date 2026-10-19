@@ -17,13 +17,13 @@ public import Sheaf.Topology.PresheafModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.RingTheory.RegularLocalRing.Polynomial
-import Sheaf.RingTheory.PolynomialRingMaximalLocalizationDimension
+import WeilConjectures.RingTheory.PolynomialRingMaximalLocalizationDimension
 import Sheaf.RingTheory.QuasiFiniteAtPrimeZeroFibreDimension
 import Mathlib.AlgebraicGeometry.Scheme
-import Sheaf.RingTheory.QuasiFiniteAtPrime
+import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 import Sheaf.RingTheory.ClosedPointDimensionLocalRing
 import Sheaf.AlgebraicGeometry.QuasiFiniteAtPointIsolated
-import Sheaf.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs
+import WeilConjectures.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs
 import Sheaf.RingTheory.MiracleFlatness
 import WeilConjectures.Mathlib.RingTheory.Flat.Localization
 import Sheaf.AlgebraicGeometry.QuasiFiniteLocusOpen

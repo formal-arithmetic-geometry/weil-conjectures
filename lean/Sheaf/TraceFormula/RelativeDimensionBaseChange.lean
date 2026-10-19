@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import Sheaf.AlgebraicGeometry.PureDimension
-import Sheaf.AlgebraicGeometry.ConstantLocalDimensionComponents
+import WeilConjectures.AlgebraicGeometry.ConstantLocalDimensionComponents
 import Sheaf.AlgebraicGeometry.EquidimensionalOpenLocalDimension
 import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
 

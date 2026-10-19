@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.BaseChangeStalkTransition
 import Sheaf.AlgebraicGeometry.OpenInjectiveCoefficientLowerComparisonFactorization
-import Sheaf.CategoryTheory.RightDerivedSingleUnitHomologyComparison
+import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyComparison
 import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 
 /-! # Lower-degree comparison for open injective coefficients

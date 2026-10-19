@@ -6,7 +6,7 @@ Authors: SHEAF group T1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-public import Sheaf.Algebra.Homology.IdealPowerTorsionFunctor
+public import WeilConjectures.Algebra.Homology.IdealPowerTorsionFunctor
 public import Mathlib.Algebra.Category.ModuleCat.EnoughInjectives
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 import Sheaf.AlgebraicGeometry.Morphisms.PuncturedInjectiveQuotientCohomology

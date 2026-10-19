@@ -23,7 +23,7 @@ import Mathlib.RingTheory.TensorProduct.MvPolynomial
 import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
 import Sheaf.Paper.QuasiFiniteOverPolynomialAlgebra
 import Sheaf.RingTheory.FibrePrimesResidueFields
-import Sheaf.RingTheory.FiniteRingMapQuasiFinite
+import WeilConjectures.RingTheory.FiniteRingMapQuasiFinite
 import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
 import Sheaf.RingTheory.QuasiFiniteAtPrimePrincipalLocalization
 import Sheaf.RingTheory.QuasiFiniteLocusOpen

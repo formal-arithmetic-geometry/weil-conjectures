@@ -1,7 +1,7 @@
 module
 public import Sheaf.RingTheory.GRing
 import Sheaf.RingTheory.FormalFibreQuasiFiniteAscent
-import Sheaf.RingTheory.FiniteRingMapQuasiFinite
+import WeilConjectures.RingTheory.FiniteRingMapQuasiFinite
 @[expose] public section
 universe u
 /-- Generic formal-fibre regularity over the canonical generic residue field, obtained by

@@ -5,7 +5,7 @@ Authors: SHEAF group W4
 -/
 module
 
-public import Sheaf.CategoryTheory.RightDerivedSingleZeroUnit
+public import WeilConjectures.CategoryTheory.RightDerivedSingleZeroUnit
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 
 /-! # The section pullback and the right-derived unit on singles

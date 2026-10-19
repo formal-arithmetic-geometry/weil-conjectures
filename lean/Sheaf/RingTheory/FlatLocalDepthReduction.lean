@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Noetherian.Defs
 import Mathlib.RingTheory.Ideal.Quotient.Noetherian
 public import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Sheaf.RingTheory.FlatModInjective
+import WeilConjectures.RingTheory.FlatModInjective
 import Mathlib.RingTheory.TensorProduct.Quotient
 import Sheaf.RingTheory.DepthQuotSMulTop
 import Sheaf.RingTheory.DepthOverQuotientRing

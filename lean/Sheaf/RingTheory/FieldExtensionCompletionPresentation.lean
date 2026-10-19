@@ -20,7 +20,7 @@ import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
 import Sheaf.RingTheory.FlatCompletion
 import Sheaf.RingTheory.PowerSeriesUniversalPropertyComplete
 import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
-import Sheaf.RingTheory.FlatModInjective
+import WeilConjectures.RingTheory.FlatModInjective
 
 /-!
 # Completion presentations after extension of the residue field

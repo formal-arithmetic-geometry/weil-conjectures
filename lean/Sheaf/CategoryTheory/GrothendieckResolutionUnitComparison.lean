@@ -6,7 +6,7 @@ Authors: SHEAF group P2
 module
 
 public import Sheaf.CategoryTheory.GrothendieckComposablePair
-import Sheaf.CategoryTheory.CanonicalResolutionHomologyComparison
+import WeilConjectures.CategoryTheory.CanonicalResolutionHomologyComparison
 import Sheaf.CategoryTheory.CanonicalResolutionCompositeUnitComparison
 
 /-! # Resolution comparisons and the composite derived unit

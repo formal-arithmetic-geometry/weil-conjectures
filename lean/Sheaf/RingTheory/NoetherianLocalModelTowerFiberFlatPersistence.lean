@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.NoetherianLocalModelTower
 public import Mathlib.RingTheory.Flat.Basic
-import Sheaf.RingTheory.LocalizedBaseChangeQuotientFlat
+import WeilConjectures.RingTheory.LocalizedBaseChangeQuotientFlat
 
 /-!
 # Persistence of closed-fibre flatness in a local model tower

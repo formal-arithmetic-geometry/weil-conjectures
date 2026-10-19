@@ -5,8 +5,8 @@ Authors: SHEAF group T4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Morphisms.PuncturedSectionsComplex
-public import Sheaf.Algebra.Homology.IdealPowerTorsionCocomplexInclusion
+public import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedSectionsComplex
+public import WeilConjectures.Algebra.Homology.IdealPowerTorsionCocomplexInclusion
 public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 import Sheaf.AlgebraicGeometry.Morphisms.PuncturedInjectiveRestrictionExact
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat

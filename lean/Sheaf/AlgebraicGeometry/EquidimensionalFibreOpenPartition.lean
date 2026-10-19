@@ -6,9 +6,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Sheaf.RingTheory.Depth
 public import Mathlib.Topology.KrullDimension
-import Sheaf.AlgebraicGeometry.RestrictedFibreLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.RestrictedFibreLocallyNoetherian
 import Sheaf.AlgebraicGeometry.CohenMacaulayFibreDimensionNeighbourhood
-import Sheaf.AlgebraicGeometry.ConstantLocalDimensionComponents
+import WeilConjectures.AlgebraicGeometry.ConstantLocalDimensionComponents
 
 /-! # Equidimensional fibre pieces
 

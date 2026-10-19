@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
-import Sheaf.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs
+import WeilConjectures.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs
 import Sheaf.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
 import Sheaf.AlgebraicGeometry.QuasiFiniteAtPointIsolated
 

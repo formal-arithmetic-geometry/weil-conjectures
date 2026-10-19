@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.RingTheory.QuasiFiniteAtPrime
+public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 public import Mathlib.RingTheory.KrullDimension.Basic
 import Mathlib.RingTheory.Ideal.Height
 import Mathlib.RingTheory.ZariskisMainTheorem

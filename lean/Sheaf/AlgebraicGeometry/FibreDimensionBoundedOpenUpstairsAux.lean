@@ -5,12 +5,12 @@ Authors: SHEAF group P2
 -/
 module
 
-public import Sheaf.RingTheory.QuasiFiniteAtPrime
+public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.RingTheory.DimensionQuasiFiniteOverPolynomialAlgebra
-import Sheaf.RingTheory.QuasiFiniteFourRings
+import WeilConjectures.RingTheory.QuasiFiniteFourRings
 import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.LinearAlgebra.TensorProduct.Finiteness
 import Mathlib.RingTheory.TensorProduct.MvPolynomial

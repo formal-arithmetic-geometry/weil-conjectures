@@ -18,7 +18,7 @@ import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.AlgebraicGeometry.Pullbacks
 import Sheaf.RingTheory.ClosedPointDimensionLocalRing
 import Sheaf.RingTheory.QuasiFiniteAtPrimeZeroFibreDimension
-import Sheaf.RingTheory.QuasiFiniteAtPrime
+import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 import Sheaf.AlgebraicGeometry.QuasiFiniteLocusOpen
 import Sheaf.AlgebraicGeometry.QuasiFiniteAtPointIsolated
 import Sheaf.AlgebraicGeometry.IsLocallyQuasiFiniteResLE

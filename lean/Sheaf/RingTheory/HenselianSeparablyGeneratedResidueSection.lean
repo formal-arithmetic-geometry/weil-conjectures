@@ -8,7 +8,7 @@ module
 public import Mathlib.FieldTheory.Separable
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.AlgebraicIndependent.Adjoin
-import Sheaf.RingTheory.MapIntoHenselianColimit
+import WeilConjectures.RingTheory.MapIntoHenselianColimit
 import WeilConjectures.SixFunctors.ProEtale.GenericPoint
 import Mathlib.RingTheory.Localization.Algebra
 

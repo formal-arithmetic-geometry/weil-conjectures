@@ -8,7 +8,7 @@ module
 public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 public import Mathlib.Topology.Connected.TotallyDisconnected
 public import Mathlib.Topology.LocallyConstant.Algebra
-import Sheaf.Topology.ContinuousOpenNormalStabilizer
+import WeilConjectures.Topology.ContinuousOpenNormalStabilizer
 
 /-!
 # Coinduced embeddings of discrete continuous modules

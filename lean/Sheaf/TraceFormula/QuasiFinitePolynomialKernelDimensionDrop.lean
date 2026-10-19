@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
-import Sheaf.RingTheory.QuasiFiniteFourRings
+import WeilConjectures.RingTheory.QuasiFiniteFourRings
 import Sheaf.RingTheory.QuasiFiniteLocalDimension
 
 /-!

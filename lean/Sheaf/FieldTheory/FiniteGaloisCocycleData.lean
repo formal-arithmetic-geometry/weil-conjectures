@@ -6,7 +6,7 @@ Authors: SHEAF worker V1
 module
 
 public import Sheaf.FieldTheory.BrauerScalarDefect
-import Sheaf.Topology.ContinuousOpenNormalStabilizer
+import WeilConjectures.Topology.ContinuousOpenNormalStabilizer
 import Mathlib.FieldTheory.Galois.Profinite
 import Mathlib.Tactic.Abel
 

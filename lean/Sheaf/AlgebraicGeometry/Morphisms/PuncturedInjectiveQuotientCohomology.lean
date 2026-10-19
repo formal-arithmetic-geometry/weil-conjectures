@@ -6,7 +6,7 @@ Authors: SHEAF group E3
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-public import Sheaf.Algebra.Homology.IdealPowerTorsionCocomplexInclusion
+public import WeilConjectures.Algebra.Homology.IdealPowerTorsionCocomplexInclusion
 public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 import Sheaf.AlgebraicGeometry.Morphisms.PuncturedFlasqueResolutionCohomology
 import Sheaf.AlgebraicGeometry.Morphisms.PuncturedSectionsTorsionQuotient

@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import WeilConjectures.Mathlib.Topology.KrullDimension
-import Sheaf.AlgebraicGeometry.RestrictedFibreLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.RestrictedFibreLocallyNoetherian
 import Sheaf.AlgebraicGeometry.RestrictedFibreCohenMacaulayLocus
 import Sheaf.AlgebraicGeometry.CohenMacaulayFibreDimensionDecomposition
 import Sheaf.RingTheory.DepthLeSupportDimension

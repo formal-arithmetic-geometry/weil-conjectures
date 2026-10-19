@@ -5,7 +5,7 @@ Authors: SHEAF group V2
 -/
 module
 
-public import Sheaf.Algebra.Homology.IdealPowerTorsionFunctor
+public import WeilConjectures.Algebra.Homology.IdealPowerTorsionFunctor
 public import Mathlib.Algebra.Homology.LocalCohomology
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Sheaf.Algebra.Homology.ExtInjectiveResolutionComparison

@@ -7,7 +7,7 @@ module
 
 public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
-public import Sheaf.RingTheory.QuasiFiniteAtPrime
+public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 import Mathlib.RingTheory.ZariskisMainTheorem
 
 /-!

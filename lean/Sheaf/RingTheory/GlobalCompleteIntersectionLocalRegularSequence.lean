@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.Regular.RegularSequence
 import Mathlib.RingTheory.RegularLocalRing.Polynomial
 import Mathlib.RingTheory.Regular.Flat
 import Sheaf.RingTheory.IsRegularOfDimensionDrop
-import Sheaf.RingTheory.PolynomialRingMaximalLocalizationDimension
+import WeilConjectures.RingTheory.PolynomialRingMaximalLocalizationDimension
 import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
 
 /-!

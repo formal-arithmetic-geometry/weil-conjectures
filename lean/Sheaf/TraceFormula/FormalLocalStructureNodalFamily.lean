@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.RingTheory.AdicCompletion.Algebra
-public import Sheaf.RingTheory.CompletionMapForLocalHom
+public import WeilConjectures.RingTheory.CompletionMapForLocalHom
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.RingTheory.MvPolynomial.Basic
 public import Mathlib.Topology.JacobsonSpace
@@ -26,7 +26,7 @@ import Sheaf.RingTheory.CompleteLocalQuotient
 import Sheaf.RingTheory.FiniteAfterCompletion
 import Mathlib.RingTheory.FiniteType
 import Sheaf.RingTheory.FlatCompletion
-import Sheaf.RingTheory.FlatModInjective
+import WeilConjectures.RingTheory.FlatModInjective
 import Sheaf.RingTheory.LocalCompletionQuotient
 import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.RingTheory.LocalRing.Module

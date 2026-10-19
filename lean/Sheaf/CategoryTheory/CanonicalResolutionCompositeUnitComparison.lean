@@ -6,8 +6,8 @@ Authors: SHEAF group F3
 module
 
 public import Sheaf.CategoryTheory.GrothendieckComposablePair
-public import Sheaf.CategoryTheory.CanonicalResolutionDerivedIso
-import Sheaf.CategoryTheory.CanonicalResolutionHomologyComparison
+public import WeilConjectures.CategoryTheory.CanonicalResolutionDerivedIso
+import WeilConjectures.CategoryTheory.CanonicalResolutionHomologyComparison
 import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 
 /-! # Resolution comparisons and the composite derived unit

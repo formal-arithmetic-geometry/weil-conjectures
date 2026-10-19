@@ -22,7 +22,7 @@ import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 import Mathlib.RingTheory.PrincipalIdealDomain
 import Mathlib.RingTheory.Polynomial.RationalRoot
 import Sheaf.AlgebraicGeometry.ProperBasic
-import Sheaf.RingTheory.QuasiFiniteAtFiniteSubalgebraAway
+import WeilConjectures.RingTheory.QuasiFiniteAtFiniteSubalgebraAway
 import Sheaf.RingTheory.QuasiFiniteAtPrimePrincipalLocalization
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
 import Sheaf.AlgebraicGeometry.Morphisms.BirationalDenseOpenIso

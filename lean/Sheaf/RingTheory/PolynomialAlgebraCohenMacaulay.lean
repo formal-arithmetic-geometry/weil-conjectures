@@ -18,7 +18,7 @@ import Mathlib.RingTheory.FiniteType
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Sheaf.RingTheory.FlatLocalDepthFormula
 import Mathlib.RingTheory.RingHom.Flat
-import Sheaf.RingTheory.PolynomialRingMaximalLocalizationDimension
+import WeilConjectures.RingTheory.PolynomialRingMaximalLocalizationDimension
 import Mathlib.RingTheory.Flat.Basic
 
 /-!

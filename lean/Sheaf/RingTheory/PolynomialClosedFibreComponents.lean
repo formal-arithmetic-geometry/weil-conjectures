@@ -17,7 +17,7 @@ import Mathlib.RingTheory.RingHom.Flat
 import Sheaf.RingTheory.CompleteLocalExcellent
 import Mathlib.RingTheory.FiniteType
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-import Sheaf.RingTheory.PolynomialRingMaximalLocalizationDimension
+import WeilConjectures.RingTheory.PolynomialRingMaximalLocalizationDimension
 import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 import Mathlib.RingTheory.Spectrum.Prime.Topology
 

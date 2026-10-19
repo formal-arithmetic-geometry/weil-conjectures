@@ -6,7 +6,7 @@ Authors: SHEAF group K1
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-public import Sheaf.RingTheory.QuasiFiniteAtPrime
+public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 import Mathlib.RingTheory.Unramified.LocalStructure
 
 /-!

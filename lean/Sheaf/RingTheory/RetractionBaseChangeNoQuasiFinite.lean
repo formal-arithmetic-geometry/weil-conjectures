@@ -5,7 +5,7 @@ Authors: SHEAF group F4
 -/
 module
 
-public import Sheaf.RingTheory.QuasiFiniteAtPrime
+public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!

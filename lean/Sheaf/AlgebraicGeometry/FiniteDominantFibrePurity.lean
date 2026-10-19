@@ -27,7 +27,7 @@ import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 import Sheaf.AlgebraicGeometry.DimensionLocallyAlgebraic
 import Sheaf.AlgebraicGeometry.LocalFibreDimensionOpen
 import Sheaf.AlgebraicGeometry.EquidimensionalOpenLocalDimension
-import Sheaf.AlgebraicGeometry.ConstantLocalDimensionComponents
+import WeilConjectures.AlgebraicGeometry.ConstantLocalDimensionComponents
 
 /-!
 # Purity of fibres under a finite dominant integral cover

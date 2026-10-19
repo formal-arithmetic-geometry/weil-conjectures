@@ -83,13 +83,14 @@
  "unit": "sk-thm-picard-rr",
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.RightDerivedCanonicalSingleUnitShift",
-  "file": "lean/Sheaf/CategoryTheory/RightDerivedCanonicalSingleUnitShift.lean",
+  "module": "WeilConjectures.CategoryTheory.RightDerivedCanonicalSingleUnitShift",
+  "file": "lean/WeilConjectures/CategoryTheory/RightDerivedCanonicalSingleUnitShift.lean",
   "declaration": "CategoryTheory.Functor.rightDerivedFunctorPlusUnit_canonical_single_shift",
   "statement": "theorem rightDerivedFunctorPlusUnit_canonical_single_shift (X : B) (n : ℕ) :\n    let S : CochainComplex.Plus B :=\n      ⟨(CochainComplex.singleFunctor B (n : ℤ)).obj X, n, inferInstance⟩\n    let e : (DerivedCategory.Plus.singleFunctor B n).obj X ≅\n        DerivedCategory.Plus.Q.obj S :=\n      DerivedCategory.Plus.ι.preimageIso\n        ((DerivedCategory.singleFunctorIsoCompQ B n).app X ≪≫\n          (DerivedCategory.quotientCompQhIso B).symm.app _)\n    let GS := G.mapCochainComplexPlus.obj S\n    let H₀ := DerivedCategory.Plus.homologyFunctor C 0\n    let RG := G.rightDerivedFunctorPlus\n    let c := Functor.isoWhiskerRight\n      ((DerivedCategory.Plus.singleFunctors B).shiftIso (-(n : ℤ)) n 0 (by simp)).symm\n      (RG ⋙ H₀.shift (n : ℤ)) ≪≫\n      Functor.isoWhiskerLeft (DerivedCategory.Plus.singleFunctor B 0)\n        (Functor.isoWhiskerRight (RG.commShiftIso (-(n : ℤ))) (H₀.shift (n : ℤ))) ≪≫\n      Functor.isoWhiskerLeft (DerivedCategory.Plus.singleFunctor B 0 ⋙ RG)\n        (H₀.shiftIso (-(n : ℤ)) (n : ℤ) 0 (by ring))\n    GS.obj.homologyπ n ≫ (DerivedCategory.Plus.homologyFunctorObjQIso GS n).inv ≫\n      (DerivedCategory.Plus.homologyFunctor C n).map\n        (G.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient B).obj S)) ≫\n      (DerivedCategory.Plus.homologyFunctor C n).map (G.rightDerivedFunctorPlus.map e.inv) ≫\n      c.hom.app X =\n    GS.obj.iCycles n ≫\n      G.map (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) n X).hom ≫\n      G.rightDerivedPlusSingleUnitHomology X",
   "branch": "sheaf-dag",
   "by": "B3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.CategoryTheory.RightDerivedCanonicalSingleUnitShift; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

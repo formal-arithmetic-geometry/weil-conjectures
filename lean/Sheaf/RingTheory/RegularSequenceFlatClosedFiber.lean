@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Sheaf.RingTheory.FlatModInjective
+import WeilConjectures.RingTheory.FlatModInjective
 import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
