@@ -17,7 +17,8 @@
   "def-weil-pbc-krull-dimension-ring",
   "def-pc-integral-scheme",
   "def-weil-flat-morphism",
-  "def-weil-finite-type-morphism"
+  "def-weil-finite-type-morphism",
+  "def-per-punctual-purity"
  ],
  "proof": [
   {
@@ -195,5 +196,26 @@
   "group": "Q45",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-4236f86ad (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes and every cited statement against ILO XVI 3.2.1-3.2.5, 3.7 p.254, 2.2.3.1 and 2.3.1, I 2.9, I 10.3 and IV 4.1.8, XVIII-A 2.1 (formal comparison without excellence), and Stacks 03Q6 and 03QT. The item statement is unchanged; testing only over complete traits makes it stronger, not weaker. Step 1: the strict-completion iff (3.2.1 remark + 3.2.4) is true without excellence. Step 2: the case split on characteristic is correct, and the prime-field case is 3.2.5. Step 3: the approximation node is true pure algebra. It uses a Cohen presentation and Popescu on C[x]_(p,x)->C[[x]], not on C->B, which can fail when B is ramified or k imperfect. Cotangent independence gives regular V_i and Z_i; V_i is flat because it is torsion-free; Z_i is an F_p-scheme because p=sum a_j t_j descends. Step 4: two-of-three (b)+(c) gives (a) in codimension d. Step 5: the supported-limit node is true via continuity on the ambient scheme and the complement, plus 2.2.3.1 base change of the Kummer class under a preserved regular sequence. No flatness is needed, so it does not duplicate class-calculus. Step 6: over a separably closed field, RΓ(k,-) is an equivalence, so isomorphisms on every H^q detect the isomorphism. The new nodes are statement-only, sourced, cite no SGA and form no cycle. They do not duplicate completion-supported-constant-comparison (that one assumes excellence), the log-smooth/monomial trait nodes, or the PBC Cohen/Popescu nodes. Tool uses lem-sc-regular-local-domain and lem-exc-etale-sheaves-gsets-point are accepted. Batch 5: all three flagged citations name the Kummer class of lem-per-regular-immersion-class-calculus only in their statements. The item already had that stmt_dep on the base, so the closure is unchanged. The path ends at lem-trf-bounded-below-derived-adjunction, a generic D^+ adjunction lemma that is outside both assumed statements (precedent NW 45bd4f27), so it is accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PunctualPurityTraitTest",
+  "declaration": "AlgebraicGeometry.Etale.punctual_purity_of_complete_mixed_trait_test",
+  "declarations": [
+   "AlgebraicGeometry.Etale.punctual_purity_of_complete_mixed_trait_test"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PunctualPurityTraitTest.lean",
+  "statement": "theorem punctual_purity_of_complete_mixed_trait_test (ℓ : ℕ) (hℓ : ℓ.Prime) (htest : ∀ (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [IsStrictlyHenselianLocalRing R] [IsAdicComplete (IsLocalRing.maximalIdeal R) R] [CharZero R], (∃ p : ℕ, p.Prime ∧ CharP (IsLocalRing.ResidueField R) p) → IsUnit (ℓ : R) → ∀ (V : Scheme.{u}) [IsNoetherian V] [IsIntegral V] (f : V ⟶ Spec (.of R)), IsRegularScheme V → Flat f → LocallyOfFiniteType f → QuasiCompact f → (∃ (N : ℕ) (i : V ⟶ ProjectiveSpace (ULift.{u} (Fin (N + 1))) (Spec (.of R))), IsImmersion i ∧ i ≫ ProjectiveSpace (ULift.{u} (Fin (N + 1))) (Spec (.of R)) ↘ Spec (.of R) = f) → IsPunctuallyPure ℓ hℓ V) : ∀ (W : Scheme.{u}) [IsNoetherian W], IsRegularScheme W → IsUnit (ℓ : Γ(W, ⊤)) → IsPunctuallyPure ℓ hℓ W",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1da2c9717",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Re-delivery after H4/H12 RETURN 069ea282 makes exactly the requested correction: stmt_deps +def-per-punctual-purity (record byte-identical to side), public import of PunctualPurity, four local defs deleted, IsPunctuallyPure used in htest and in the conclusion, redundant imports dropped, lean.declarations = theorem only; statement/proof/proof_deps unchanged. The landed IsPunctuallyPureAt (∃ d = ringKrullDim plus witnesses, IsIso of the transposed level-1 class-calculus Kummer map) matches the item's introductory definition; its witnesses are automatic, so no extra assumption, and it takes no instance args. Re-verified the trait clauses (DVR, adic complete, strictly henselian, CharZero, residue char p, ℓ unit), the test schemes (integral, regular, Flat, LOFT+QC, immersion into P^N_S over S), and the conclusion for every Noetherian regular W with no excellence; one universe u. Edge cases ok. lean.statement verbatim; only sorry; no cycle. nt_compile --json: rc 0, 5.3 s, no warnings. No fixes."
  }
 }

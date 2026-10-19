@@ -194,5 +194,23 @@
   "group": "Q71",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-26d316ac1 (reviewer sub-agent of L); spot-checked: Read the item, the new node, the three cited defs, the citer (rank-one formal comparison step 2, which uses exactly the item's statement), Stacks fields.tex 09H0/09H1 (lines ~1145-1178) and Mathlib Dense.lean TODO / Approximation.lean:132 / Separable.lean. Item statement unchanged and correct; nontriviality is needed (trivial value, T^2 in char 2, eps<=1 is a counterexample). Step 1: d=1, f'=1, so f is separable. Step 2: |t|<1 gives distinct powers tending to 0 (Bernoulli), so they avoid any finite set. Step 3: f'+a=0 for at most one a; h=f+aT has h'≠0 and stays monic for d>=2 (checked T^p in char p). Step 4 cites the new node with exactly its hypothesis h'≠0. Step 5 coefficient bookkeeping is right. New node lem-trf-polynomial-constant-shifts-finite-exceptions is true: an irreducible factor q of h' divides h+b for at most one b, and h' has finitely many such factors. Tested on linear h, T^2 (char≠2), T^3 (char 2) and T^p+aT; h'≠0 is necessary (T^p+b over algebraically closed char p fails for every b). It meets B1-B7, three kinds of search are recorded, it is not a clause of the item, and a DAG-wide scan of separable+finite/dense/approximation/shift statements found no duplicate. The blueprint from/via match the item; there is no cycle, no SGA, no tool_uses, the item is not in route-pivot-dropped, and no parallel run exists. Temkin PDF is missing, WANTED recorded, proof labelled agent-written. No changes. Maintainer note: the item belongs to the historical Temkin chain of sk-i-curve-zero."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.SeparableMonicApproximation",
+  "declaration": "Polynomial.exists_monic_separable_natDegree_eq_coeff_sub_lt",
+  "file": "lean/Sheaf/FieldTheory/SeparableMonicApproximation.lean",
+  "statement": "theorem exists_monic_separable_natDegree_eq_coeff_sub_lt {F : Type u} [Field F] (v : AbsoluteValue F ℝ) (hv : v.IsNontrivial) (hna : ∀ x y : F, v (x + y) ≤ max (v x) (v y)) (f : F[X]) (hf : f.Monic) (d : ℕ) (hd : 1 ≤ d) (hfd : f.natDegree = d) (ε : ℝ) (hε : 0 < ε) : ∃ g : F[X], g.Monic ∧ g.Separable ∧ g.natDegree = d ∧ ∀ i : ℕ, i < d → v (g.coeff i - f.coeff i) < ε",
+  "branch": "newtargets-dag",
+  "by": "Q138",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a6f845b5",
+  "group": "Q138",
+  "result": "pass",
+  "note": "First S2 delivery (live item has only the stage-1 merge; diff vs live = item lean record only). Polynomial.exists_monic_separable_natDegree_eq_coeff_sub_lt matches the node clause by clause: Field F (universe u), AbsoluteValue F ℝ + IsNontrivial (∃x≠0, v x≠1) + explicit ultrametric hna, monic f with natDegree d ≥ 1, ε>0, ∃ g Monic ∧ Separable ∧ natDegree=d ∧ ∀ i<d, v(g_i−f_i)<ε; no completeness, perfectness or char assumptions. Statement verbatim with the file. Edge cases d=1, d=0 or f=0 excluded, char p, trivial value excluded. H4: Mathlib Dense.lean TODO, Approximation.lean:132 lacks separability, no side or Sheaf match. Docstrings carry source and blueprint and the 5 proof steps; Mathlib-only imports; sorry only. nt_compile --json clean 1.8 s, broken control fails. Advisory: the second reading is a self-reading; def-pc-separable-polynomial has a mathlib_match but no lean record (4 landed citers, not a blocker)."
  }
 }

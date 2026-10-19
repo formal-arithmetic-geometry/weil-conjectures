@@ -152,5 +152,23 @@
   "group": "Q150",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-f0747e1f5 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement against ILO Exposé II 2.2.1, Prop 2.2.2, Cor 2.2.4 and Prop 1.2.7 (printed pp. 26–27). The item statement is byte-identical to the live base node and is exactly 2.2.4 for a prime ℓ. The new node lem-per-prime-to-ell-decomposed-locus-constructible is exactly 2.2.2. Its claim 'equivalently open in the constructible topology' is correct: on a Noetherian X every open is quasi-compact, so with the def's subbase (qc opens and their complements) the open sets are exactly the unions of locally closed sets. I tested the new node on Spec Z[i][1/2] → Spec Z[1/2]. For ℓ=2 the locus is the closed points p≡1 mod 4 and the generic point, of degree 2, is correctly left out; for ℓ=3 the locus is all of X. It also holds for a non-quasi-compact Y. It is true by the degree-sum argument of 1.2.7. Step 1 is the same Noetherian → spectral → compact constructible topology chain as the accepted completely-decomposed sibling, and each cited statement says what the step uses. Step 2's hypotheses match the new node's exactly. Step 3 applies the compactness statement directly; X empty gives I_0 empty. The new node is not a duplicate: no blueprint node (main-20261015 or master) states it, and the degree-one nodes completely-decomposed-finite-subcover and rational-lift-locally-closed-section neither imply it nor follow from it. It is strictly smaller than the item, so this is not a relabelling (D1). It has no SGA citation and no trf node. Its blueprint fields are correct: ancestor lem-per-artin-gabber-affine-curve, via list starting with the item, same_as empty. Advisory: the new node's Loogle entry failed with an unknown identifier but is recorded as 'no match' (B7); the other three searches are real. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PrimeToEllDecomposedEtaleFiniteSubcover",
+  "declaration": "AlgebraicGeometry.primeToEllDecomposed_etale_finite_subcover",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrimeToEllDecomposedEtaleFiniteSubcover.lean",
+  "statement": "theorem primeToEllDecomposed_etale_finite_subcover (X : Scheme.{u}) [IsNoetherian X] (ell : ℕ) (hell : ell.Prime) {I : Type w} (U : I → Scheme.{u}) (f : ∀ i : I, U i ⟶ X) (het : ∀ i : I, Etale (f i)) (hcover : ∀ x : X, ∃ (i : I) (z : U i), f i z = x ∧ ((f i).residueFieldMap z).hom.Finite ∧ Nat.Coprime ((f i).residueDegree z) ell) : ∃ I₀ : Set I, I₀.Finite ∧ ∀ x : X, ∃ i ∈ I₀, ∃ z : U i, f i z = x ∧ ((f i).residueFieldMap z).hom.Finite ∧ Nat.Coprime ((f i).residueDegree z) ell",
+  "branch": "newtargets-dag",
+  "by": "Q145",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b8df6cb39",
+  "group": "Q145",
+  "result": "pass",
+  "note": "Only the item lean field changes vs live. Each hypothesis/conclusion clause matches ILO II Cor 2.2.4 and the node: IsNoetherian X (≡ finite affine Noetherian cover), ell.Prime, I : Type w arbitrary, Etale (f i), canonical residueFieldMap with explicit RingHom.Finite, Nat.Coprime residueDegree ell, ∃ finite I₀ : Set I with the same property, no conditions on the sources. Edge cases (X or I empty, identity cover, char ℓ, infinite extension) are handled. Not a duplicate: the completely-decomposed sibling is degree 1 and the Alt-S predicate adds hypotheses. Docstrings, source place, blueprint tag, proof steps, rule-7 imports and the verbatim statement are all fine. nt_compile --json: exit 0, 2.6 s, clean. Report uses the standard accepted second-reading form. No findings."
  }
 }

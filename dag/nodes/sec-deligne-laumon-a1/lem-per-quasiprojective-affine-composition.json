@@ -219,5 +219,23 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-dba8d27d0 (reviewer sub-agent of L); spot-checked: Read the item in full and every cited node's statement; the delivery has no new nodes. The statement is unchanged apart from one added stmt_dep, def-nagata-projective-space-base-change, which defines the projective space used. It has no extra hypotheses and matches what its only citer, lem-per-projective-finite-group-quotient, needs. Sources checked at their tags against tags/tags: 0C4M morphisms.tex:9755, 01VT :9518, 01WD constructions.tex:2927, 01JY schemes.tex:3445, 02V0 schemes.tex:4861, 01NF constructions.tex:2819. The direct Segre proof is labelled agent-written, which is accurate. Step 1 is elementary unpacking of the two immersions. Step 2: the pullback lemma gives u with p_A u = g p_Y, so k = (j p_Y, u) is defined. I re-checked the cartesian argument: the lift (v, r_A t) exists because g v = p_B r_B t = p_A r_A t, k sends it to t, and it is unique. So k is the base change of j along r_B, and clause (1) of lem-weil-pbc-immersion-base-change-lft makes it an immersion. Step 3: clause (e) of lem-weil-pbc-proper-fp-permanence gives h = k∘i over g∘f. Step 4: lem-chow-segre with m=b, n=a gives the Segre closed immersion over S into P^{ab+a+b}_S, def-chow-segre makes it a morphism over the base, and clause (e) applies again. Every step uses statements only, with no cycle. Edge cases checked: a or b = 0, a = b = 0, X or Y empty, R = 0. Closest existing node is lem-trf-h-projective-composition, the closed-immersion version; it does not give the locally closed statement, so it is not a duplicate. The four off-unit tool_uses are generic scheme facts and I accept them. No SGA citations. Minor: the report lists a citations.json that is not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiprojectiveAffineComposition",
+  "declaration": "AlgebraicGeometry.exists_isImmersion_projectiveSpace_comp_of_affine",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiprojectiveAffineComposition.lean",
+  "statement": "theorem exists_isImmersion_projectiveSpace_comp_of_affine (R : Type u) [CommRing R] [IsNoetherianRing R] {X Y : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Spec (.of R)) [LocallyOfFiniteType f] [QuasiCompact f] [LocallyOfFiniteType g] [QuasiCompact g] (hf : ∃ (a : ℕ) (i : X ⟶ ProjectiveSpace (ULift.{u} (Fin (a + 1))) Y), IsImmersion i ∧ i ≫ (ProjectiveSpace (ULift.{u} (Fin (a + 1))) Y ↘ Y) = f) (hg : ∃ (b : ℕ) (j : Y ⟶ ProjectiveSpace (ULift.{u} (Fin (b + 1))) (Spec (.of R))), IsImmersion j ∧ j ≫ (ProjectiveSpace (ULift.{u} (Fin (b + 1))) (Spec (.of R)) ↘ Spec (.of R)) = g) : ∃ (N : ℕ) (i : X ⟶ ProjectiveSpace (ULift.{u} (Fin (N + 1))) (Spec (.of R))), IsImmersion i ∧ i ≫ (ProjectiveSpace (ULift.{u} (Fin (N + 1))) (Spec (.of R)) ↘ Spec (.of R)) = f ≫ g",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9dd96077b",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Single sorry theorem exists_isImmersion_projectiveSpace_comp_of_affine matches node clause by clause: Noetherian CommRing R, base Spec (.of R), finite type = LocallyOfFiniteType ∧ QuasiCompact for f and g, embedding hypotheses as ∃ a, i with IsImmersion i ∧ i ≫ (ℙ(ULift (Fin (a+1)); Y) ↘ Y) = f (homogeneous-coordinate convention of def-nagata-projective-space-base-change), conclusion ∃ N, i with IsImmersion and projection = f ≫ g. IsImmersion = closed then open, as the node defines it. No extra hypotheses; single universe u is the standard Spec typing. Edge cases (dim 0, empty X/Y, R=0) covered. lean.statement verbatim; node copy differs from live only in lean, and live had no lean record. No duplicate: field-only IsQuasiProjective and IsHProjective.comp (closed-immersion version) checked. Docstrings carry source tags, blueprint tag and the 4 proof steps; proof-only imports non-public. nt_compile --json clean in 2.3 s, exit 0, no warnings."
  }
 }

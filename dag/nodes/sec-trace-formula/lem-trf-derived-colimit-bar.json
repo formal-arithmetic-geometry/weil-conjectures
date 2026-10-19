@@ -304,5 +304,37 @@
   "group": "Q71",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-033a9d605 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the sources at the cited places: Stacks 07AC, 08PD, 08PF/08PG/08PH, sites example-indiscrete and 00XJ, derived 0646, 06XN and 015E, and tags 05S8, 05S9, 09T5 and 0DVC. The only change to the item statement is the topology wording, and it is correct. Covers by identities alone break site axiom (i) when E has non-identity isomorphisms; the new wording gives Stacks' chaotic topology with the same sheaves. The K-complex and the map formula agree with 08PG and 08PH, including the n=2 differential. I re-derived the extra-degeneracy contraction (degree 0 included), the cone-kernel contraction of step 12, and every cancellation of the prism homotopy: ends d0p0=K(w,t) and d_{n+1}p_n=K(v,G(eta)t), junction terms by naturality of eta, and every term of Hd matched once. Both new nodes are true for the pointwise 05S9 derived functor, are statement-only, are not duplicates (searched 07AC, cocontinuous and the left-acyclic/projective computation nodes) and restate no clause of the item. No target is weakened, the route is within the unit, and no tool_uses are needed. Repaired in fixes/dag/nodes/sec-trace-formula, three files: (1) B3: 'the total left derived functor exists' cited no defining node; the item and both new nodes now give the 05S9 meaning ('defined at every object') with [def-pur-saturated-triangulated-localization] in stmt_deps. (2) E5/C3 in step 9: it assumed without proof that the step-2 isomorphism Lpi_{F!}Lu_! = Lpi_{E!} is the identity on the bar models. Node 1 now states the derived adjunction explicitly (Q(f) composed with eps_C corresponds to Q(f-flat), the 0DVC formula), and step 9 gains the short unit argument. (3) Cosmetic: node 1's combined bracket citation is split into two. Details are in review.md.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedColimitBar",
+  "declaration": "CategoryTheory.categoryColimitBarSystem_exists",
+  "declarations": [
+   "CategoryTheory.categoryBarModuleDerived",
+   "CategoryTheory.categoryBarPresheafDerived",
+   "CategoryTheory.categoryBarDelete",
+   "CategoryTheory.categoryBarFaceCoefficient",
+   "CategoryTheory.categoryBarConstantRing",
+   "CategoryTheory.CategoryColimitPoint",
+   "CategoryTheory.CategoryColimitBarModel",
+   "CategoryTheory.CategoryColimitBarModel.generator",
+   "CategoryTheory.categoryBarColimitReindex",
+   "CategoryTheory.CategoryColimitBarSystem",
+   "CategoryTheory.categoryColimitBarSystem_exists"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DerivedColimitBar.lean",
+  "statement": "theorem categoryColimitBarSystem_exists : Nonempty CategoryColimitBarSystem.{u}",
+  "branch": "newtargets-dag",
+  "by": "Q108",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The theorem asserts the full existence of the specified bar system. Auxiliary records expand its data, universal properties, generator formulas and canonical resolution comparisons; no definition selects any object from the postponed theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-01c8680ee",
+  "group": "Q108",
+  "result": "fix",
+  "note": "Read the node, all 7 stmt_deps (Lean signatures included) and Stacks 08PF/08PG/08PH/08PD/07AC; every clause matches (faces/signs, n=2 example, 08PD canonical map via lift_aug+colimit.pre, scalar restriction, connecting maps, prism homotopy with NatTrans.op η, 05S9 defined-at via unfolded IsTriangulatedLeftDerivedValue, adjunction normalized by transpose). Edge cases (empty E, zero ring, n=0) and universes (single Type u, same as RingedToposMorphism dep) are fine; no duplicate notion; only the theorem is sorry; docstrings are complete; statement is verbatim. Finding 1 (H3/H5): the canonical model Lπ_!F ≅ K(F) was pinned only up to a unit r of R (free colimitResolution iso; r•id preserves every field). FIX adds field colimitAugmentation: in degree 0, generator (U_0,x) ↦ colimit.ι F U_0 x equals colim of the augmentation (Stacks 08PG). Finding 2 (mechanical): the original timed out in nt_compile at 60 s (load 108; clean in 45 s via lcompile). FIX adds genInjectivity/genSizeOfSpec false before the 3 structures (CPU 34→20 s). fixes/DerivedColimitBar.lean compiles clean via nt_compile in 25.9 s."
  }
 }
