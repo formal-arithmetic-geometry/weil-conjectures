@@ -63,7 +63,7 @@ theorem internalMonoidal_eq_localization :
     (inferInstance : MonoidalCategory (DerivedCategory (Internal Λ X))) =
       DerivedMonoidal.instMonoidalCategory DerivedCategory.Qh
         (HomotopyCategory.quasiIso (Internal Λ X) (.up ℤ)) := by
-  sorry
+  rfl
 
 /-- The actual derived Koszul braiding, transported along the preceding equality.
 Source: Stacks 06YL (blueprint: lem-sfb-module-object-ringed-site-derived-comparison). -/
