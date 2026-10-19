@@ -17073,3 +17073,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:01 L: returned deliver/Q08/lem-trf-analytic-uniformization (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-analytic-uniformization: lem-trf-analytic-unif)
 - 04:02 L: returned deliver/Q109/lem-trf-curve-separating-parameters (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-curve-separating-parameters: lem-trf-curve-sep)
 - 04:02 L: returned deliver/NG/lem-trf-elementary-semistable-chart-globalization (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-elementary-semistable-chart-globalization: lem)
+- 04:02 L: returned deliver/Q26/def-fix-six-functor-datum (reviewer RETURN: L: independent stage-2 immutable head b87e0dbee541: b87e0dbee541 vs RETURNed 5ff2b0984a2e: main 5b7f9412, stages 27f404b)
