@@ -1,0 +1,126 @@
+{
+ "id": "lem-sfb-adic-residue-triangulated",
+ "kind": "statement",
+ "title": "For a Noetherian scheme and a complete Noetherian local coefficient ring with maximal ideal I, the residue condition IsSfbResidueConstructible (bounded constructible etale residue origin and finite Tor amplitude) is closed under isomorphisms and is a triangulated object property in the ambient completed-coefficient derived category",
+ "statement": "For a Noetherian scheme and a complete Noetherian local coefficient ring with maximal ideal I, the residue condition IsSfbResidueConstructible (bounded constructible etale residue origin and finite Tor amplitude) is closed under isomorphisms and is a triangulated object property in the ambient completed-coefficient derived category. No completeness condition on the object is imposed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.5.1 and its following triangulatedness observation; Lemma 6.5.3 (boundedness); Proposition 6.6.11 (stratified perfect characterization), using Definition 6.3.1 and Remark 6.3.2 for the residue-field constructibility condition."
+ },
+ "stmt_deps": [
+  "def-sfb-adic-stratified-perfect-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the exact residue functor and its localization computation from the residue-extension module. In that module the two proved membership lemmas identify IsSfbResidueConstructible with the inverse image of the bounded constructible etale essential image. Maximality makes the residue quotient a field; flatness supplies the Tor clause of the reverse membership implication.",
+   "uses": [
+    "def-sfb-adic-stratified-perfect-data",
+    "lem-pur-derived-change-of-rings",
+    "lem-sfb-adic-residue-extension-closure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Bounded constructible etale complexes form a triangulated category, and their comparison through the bounded-below derived category is full and triangulated. Mathlib makes its essential image isomorphism invariant and triangulated. The inverse image under the residue functor has these same properties. Identify the two object properties pointwise and transport the instances. This replaces separate zero and shift calculations.",
+   "uses": [
+    "prop-constructible-derived-subcategory",
+    "sk-prop-sf-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-adic-stratified-perfect-data",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-adic-residue-extension-closure",
+  "prop-constructible-derived-subcategory",
+  "sk-prop-sf-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Following Definition 6.5.1; exact residue and triangulated essential-image argument, assembled in Lean by P5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Adic constructible complexes are stratified locally perfect and form a bounded triangulated subcategory",
+   "results": "No exact match for the project adic predicates or their characterization.",
+   "date": "2026-10-19",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Perfect\"",
+   "results": "No hits.",
+   "date": "2026-10-19",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally derived complete objects form a triangulated subcategory and constructible residue complexes are closed under cones",
+   "results": "Eight hits, including ObjectProperty.IsTriangulated, its constructor, DerivedCategory.instIsTriangulated, and triangulated closed extension properties. These provide the categorical assembly API, not the geometric lifting or residue comparison.",
+   "date": "2026-10-19",
+   "verdict": "Used the triangulated object-property API; no exact geometric statement."
+  },
+  {
+   "tool": "grep",
+   "query": "stratif.*perfect|perfect.*stratif|adic.*constructib",
+   "results": "The existing item is the only declaration of these predicates; the integral specialization assumes different coefficient hypotheses.",
+   "date": "2026-10-19",
+   "verdict": "no reusable general characterization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicStratifiedPerfect",
+  "date": "2026-10-19",
+  "group": "P5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "The adic stratified-perfect characterization, separated into its geometric and categorical proof steps.",
+   "via": [
+    "lem-sfb-integral-cohomological-adic-criterion",
+    "lem-sfb-adic-stratified-perfect"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicConstructibleResidueTriangles",
+  "file": "lean/Sheaf/Paper/AdicConstructibleResidueTriangles.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sfb_adic_residue_triangulated",
+  "statement": "theorem sfb_adic_residue_triangulated (X : Scheme.{u}) [IsNoetherian X] (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (hI : I.IsMaximal ∧ ∀ J : Ideal A, J.IsMaximal → J = I) [IsAdicComplete I A] : ObjectProperty.IsClosedUnderIsomorphisms (IsSfbResidueConstructible X I) ∧ ObjectProperty.IsTriangulated (IsSfbResidueConstructible X I)",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-a02db",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261019T231257-L-568633",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-a02db",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261019T231257-L-568633",
+  "kind": "interface",
+  "note": "independent cc review: adic_stratified_perfect statement byte-identical to live; the 11 moved definitions identical to the old item text (plus @[no_expose] and 2 new declarations) in AdicStratifiedPerfectData, re-exported publicly; 8 modules + both direct importers compile exit 0; the 2 sorry statements checked against BS 6.5.8/6.6.8/6.6.11/6.5.3"
+ }
+}

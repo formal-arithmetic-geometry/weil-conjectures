@@ -39,171 +39,42 @@
  ],
  "proof": [
   {
-   "text": "Write $B_X=\\widehat A_X$, $k=A/I$, and choose generators $a_1,\\ldots,a_r$ of $I$, which exist since $A$ is Noetherian. First establish the precise restriction and completeness tests. For a stratum immersion $i:S\\to X$, exact inverse image preserves limits, so the maps induced by the finite projections identify $i^{-1}B_X$ with $B_S=\\varprojlim_n(A/I^n)_S$. For a pro-étale object $U\\to S$, the localized site is $S_{\\mathrm{proét}}/U$, so restriction is evaluation on the slice and preserves limits and exact sequences. The constant/completed coefficient lemma identifies local completeness with the unit $M\\to R\\lim_m(M\\otimes^L Q_m)$, where $Q_m=\\bigotimes_j[B\\xrightarrow{a_j^m}B]$ in degrees $[-r,0]$. Exact countable products represent the derived products, and the Roos triangle computes this derived limit by the cone of $1-s$ on those products. Every $Q_m$ has finite free terms, so exact restriction commutes with its tensor complex; it commutes with the products and their cone as well. Thus restriction carries the actual completion unit to the corresponding completion unit on $S$ and on $U$. Its cone is zero if and only if its restrictions to all the chosen stratum covers are zero, by finite-stratum detection. Consequently completeness restricts to strata and their covers and is detected on any such finite family. The finite-reduction comparison in the constant/completed coefficient lemma also identifies restricted residue reduction with reduction of the restricted complex. This uses the coefficient isomorphism for immersions and slices, without identifying completed coefficients under arbitrary scheme pullback.",
+   "text": "Apply the local-model theorem to adic constructibility, retaining the actual finite-projective representative. It is perfect by using itself as its representative, so this gives stratified perfectness.",
    "uses": [
-    "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-derived-countable-products-core",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-pbc-noetherian-stratum-detection"
+    "lem-sfb-adic-stratified-local-models"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.5.8(1),(2), with the explicit completion-unit argument of Stacks Tags 099L (section-derived-completion-noetherian), 099M (lemma-naive-completion), 0A0E (algebraization-lemma-derived-completion-koszul), 09AA (lemma-closed-immersion), and the Roos triangle."
-   }
+   "elementary": false
   },
   {
-   "text": "For later use, every bounded étale complex over the field $k=A/I$ has finite Tor amplitude. Let $C$ have cohomology in $[a,b]$ and let $N$ be an étale $k$-module sheaf in degree zero. At a geometric point $\\bar x$, derived tensor pullback gives $(C\\otimes^L_{k_X}N)_{\\bar x}\\simeq C_{\\bar x}\\otimes_k^L N_{\\bar x}$. The point inverse image is exact, so cohomology of $C_{\\bar x}$ is the stalk cohomology. Over the field $k$, tensoring with the vector space $N_{\\bar x}$ is exact: choose a basis and it is a direct sum of copies of the identity. Thus the right side has zero cohomology outside $[a,b]$. Exactness and conservativity of geometric stalks imply the same vanishing for $C\\otimes^L_{k_X}N$. This proves the claim, including on each stratum, without claiming that bounded complexes over $A$ or $A/I^n$ are perfect.",
+   "text": "Apply stratified descent for the reverse implication. Apply the same descent theorem to the models obtained in the first step to obtain the asserted global bounds.",
    "uses": [
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-sfb-adic-stratified-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Remark 6.3.2 and Definition 6.3.1; the residue-field finite Tor observation used in det-lem-integral-models-stacks. The tensor/stalk identity is the filtered-colimit calculation just written out."
-   }
+   "elementary": false
   },
   {
-   "text": "Assume (a), and choose $C$ as in that condition. Only finitely many $H^q(C)$ are nonzero. Refine their finitely many constructible stratifications to one finite stratification: at each refinement use the fibre-product immersion $S\\times_X T\\to X$, whose image is the intersection, rather than merely a set-theoretic factorization. On each resulting stratum $S$, all cohomology sheaves of $C|_S$ are locally constant with finitely presented $k$-module values. Such an $S$ is Noetherian: locally it is a quotient of a Noetherian affine chart by an ideal, and it is quasi-compact because its image is constructible. Step 1 makes $K|_S$ locally complete over $B_S$. The comparison-pullback isomorphism identifies its residue reduction with $\\nu_S^*(C|_S)$. The restricted étale complex is bounded and has finite Tor amplitude by step 2. Apply the local perfect-lifting lemma with coefficient ring $A$, ideal $I$ and scheme $S$. It supplies a pro-étale covering and bounded finite-projective $A$-complexes giving exactly the models in (b). Here $A\\simeq\\varprojlim A/I^n$ is an explicit hypothesis of the item; neither finiteness of $k$ nor perfectness of $A/I^n$ over $A$ has been used.",
+   "text": "Transport the zero-kernel completeness triangulation through the existing exact equivalence between the original and small-model module sites, using the derived localization computation isomorphism. Intersect this object property with the triangulated residue property. Its zero, isomorphism, shift and three extension-closure properties give precisely the remaining clauses.",
    "uses": [
-    "lem-weil-pbc-constructible-stratification-intersection",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-sfb-adic-residue-lisse-perfect-lift"
+    "lem-sfb-local-completeness-triangulated",
+    "lem-sfb-adic-residue-triangulated",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-proetale-operations"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.6.11, forward implication, using Lemma 6.6.8; Stacks Tag 09C6 (lemma-connected-adic-lisse) gives the local lifting ingredient. Refining the already-given residue strata realizes the same local-to-stratified route."
-   }
-  },
-  {
-   "text": "Assume (b). On a trivializing cover of a stratum the terms of a perfect model are direct summands of finite sums of $B_U=\\varprojlim_n(A/I^n)_U$. More explicitly, if $P^q=eA^d$ for an idempotent $e$, then $B_U\\otimes_A P^q=eB_U^d=\\varprojlim_n e(A/I^n)_U^d$; finite products and the equalizer defining an idempotent image commute with limits. Each sheaf in the last tower is killed by $I^n$. The torsion-limit completeness lemma shows that the realized bounded complex is locally complete after restriction to constant $A$ coefficients. The constant/completed equivalence reflects completeness, so it is complete as a $B_U$-complex. Step 1 detects completeness globally. There are also global cohomological bounds: each stratum is quasi-compact, and the pro-étale covering axiom gives finitely many quasi-compact open pieces of the trivializing members that cover it. The restrictions to those pieces retain the same respective perfect models. Take the smallest and largest term degrees among the finitely many models on all the strata (use $[0,0]$ if $X$ is empty). Exact restriction and finite-stratum detection imply $H^q(K)=0$ outside this finite interval. This proves the boundedness assertion without using any dimension bound on $X$.",
-   "uses": [
-    "lem-weil-pbc-torsion-limit-sheaf-completeness",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "def-weil-pbc-proetale-site",
-    "lem-weil-pbc-noetherian-stratum-detection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.6.11, reverse implication, and Lemma 6.5.3; Stacks Tag 099Q (proposition-enough-weakly-contractibles), power-torsion inverse limits and bounded complete complexes."
-   }
-  },
-  {
-   "text": "Still under (b), each term $B_U\\otimes_A P^q$ of a local model is a direct summand of a finite free $B_U$-module, so it is flat: its tensor functor is a direct summand of a finite sum of identity functors and hence preserves exact sequences. The ringed-site bounded-above flat K-flat lemma applies to this bounded complex. Since derived change of rings is computed on K-flat representatives, its derived reduction along $B_U\\to k_U$ is computed termwise. The completed-constant reduction lemma gives $B_U\\otimes_A^L k\\simeq k_U$, so this reduction is the constant bounded complex $P^\\bullet\\otimes_A k$.",
-   "uses": [
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-completed-constant-sheaf-reduction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.6.11, reverse implication: reduction of the local perfect model; Stacks Tag 06YS (lemma-bounded-flat-K-flat) and the completed-constant reduction comparison."
-   }
-  },
-  {
-   "text": "Exact constant realization, supplied by the constant-module section lemma, identifies the cohomology of this local reduced model with the constant sheaf of $H^q(P^\\bullet\\otimes_A k)$. The latter is a subquotient of a finite-dimensional $k$-vector space, hence finite-dimensional and finitely presented. Its cohomology vanishes outside the finite term interval of the model.",
-   "uses": [
-    "lem-weil-pbc-constant-module-section-properties"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.6.11, reverse implication; cohomology of the constant reduced perfect model."
-   }
-  },
-  {
-   "text": "The finitely many local models selected in step 4 give one cohomological interval for the reduction: take the minimum and maximum of their finite intervals, using $[0,0]$ when $X$ is empty. Finite-stratum detection then gives the same vanishing interval for $K\\otimes^L_{B_X}k_X$ on $X$.",
-   "uses": [
-    "lem-weil-pbc-noetherian-stratum-detection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.6.11, reverse implication; finite-stratum detection."
-   }
-  },
-  {
-   "text": "For each $q$, the restrictions of $H^q(K\\otimes^L_{B_X}k_X)$ to the given strata are locally constant with finitely presented $k$-module values, by steps 5–6, since inverse image along the stratum immersions and restriction to the slices are exact and commute with cohomology sheaves. The given finite stratification is therefore already a global stratification of the kind used for $\\operatorname{Cons}(X,k)$ in the comparison theorem, and it witnesses condition (ii) of the Noetherian global-constructibility lemma. Its implication (ii) to (i), on the pro-étale site with $R=k$, gives the affine-local form of the same condition as well.",
-   "uses": [
-    "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-sfb-noetherian-global-constructibility"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.6.11, reverse implication; Definition 6.5.1 and Lemma 6.5.3, with Stacks Tags 09AL and 005L."
-   }
-  },
-  {
-   "text": "The Noetherian scheme $X$ is quasi-compact and quasi-separated, and $k$ is a discrete Noetherian field. Apply the constructible comparison theorem to the bounded reduction from steps 7–8. It supplies an étale bounded complex $C$ whose pullback is that reduction and whose cohomology is affine-locally constructible with finitely generated $k$-module values; these are finitely presented because $k$ is Noetherian. Apply the global-constructibility lemma, now on the étale site, to each $H^q(C)$ to obtain the finite global stratifications required in (a). Step 2 gives its finite Tor amplitude. With completeness from step 4 this proves (a).",
-   "uses": [
-    "sk-thm-pe-constructible-comparison",
-    "lem-sc-noetherian-finite-module-finite-presentation",
-    "lem-sfb-noetherian-global-constructibility"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.6.11, reverse implication; Stacks Tag 09AL and Lemma 09B5."
-   }
-  },
-  {
-   "text": "Finally, the completion unit of step 1 is a natural transformation between exact functors: derived tensor with each finite free Koszul complex is exact, and derived inverse limit is exact by the strict-tower lemma. Thus the cone of the unit vanishes at the third vertex of a distinguished triangle whenever it vanishes at two vertices, by the long exact cohomology sequence applied to the natural map of triangles. It vanishes for zero and commutes with shifts. The complete objects therefore form a full triangulated subcategory. Residue reduction is an exact triangulated functor by derived change of rings. By the existing constructible comparison theorem, its bounded objects with constructible étale origin are precisely the bounded objects with intrinsically constructible cohomology. By the Noetherian global-constructibility lemma, used in both directions as in steps 8–9, on the Noetherian scheme $X$ the affine-local constructibility of that theorem and the finite-stratification constructibility of (a) and of the weak Serre lemma are the same condition, on both sites. The weak Serre lemma for discrete Noetherian coefficients proves that this latter condition is closed under ambient cones: for any morphism $L\\to M$ between such objects the long exact sequence identifies $H^q(\\operatorname{Cone}(L\\to M))$ as an extension of $\\operatorname{coker}(H^qL\\to H^qM)$ by $\\ker(H^{q+1}L\\to H^{q+1}M)$. Both sheaves, and therefore the extension, are constructible. The same sequence bounds the cone whenever L and M are bounded; rotating triangles gives the other two-out-of-three cases. Zero and shifts retain bounded constructible cohomology. Over $k$ the finite Tor condition adds no further restriction by step 2. Intersecting these two conditions proves exactly the asserted closure of (a) under zero, isomorphisms, shifts, and every ambient distinguished triangle.",
-   "uses": [
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-pur-derived-change-of-rings",
-    "sk-thm-pe-constructible-comparison",
-    "lem-sf-derived-homology-long-exact",
-    "lem-sfb-discrete-noetherian-constructible-serre",
-    "lem-sfb-noetherian-global-constructibility"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.5.1, immediately following triangulatedness observation; Stacks Tag 09AL, proof, and the exact Koszul-completion construction in Tag 0A0E."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-proetale-site",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pur-derived-change-of-rings",
-  "lem-sc-noetherian-finite-module-finite-presentation",
-  "lem-sf-derived-homology-long-exact",
-  "lem-sfb-adic-residue-lisse-perfect-lift",
-  "lem-sfb-discrete-noetherian-constructible-serre",
-  "lem-sfb-noetherian-global-constructibility",
-  "lem-weil-derived-countable-products-core",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-constant-module-section-properties",
-  "lem-weil-pbc-constructible-stratification-intersection",
-  "lem-weil-pbc-noetherian-stratum-detection",
-  "lem-weil-pbc-proetale-immersion-limit-preservation",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-torsion-limit-sheaf-completeness",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "sk-thm-pe-constructible-comparison"
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proetale-inverse-image",
+  "lem-sfb-adic-residue-triangulated",
+  "lem-sfb-adic-stratified-descent",
+  "lem-sfb-adic-stratified-local-models",
+  "lem-sfb-local-completeness-triangulated"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 6.6.11, Definition 6.5.1 and Lemma 6.5.3; completion and constructible-comparison details supplied by the cited Stacks results."
+  "place": "Proposition 6.6.11 and the triangulatedness observation after Definition 6.5.1; geometric steps isolated, categorical assembly written in Lean by P5."
  },
  "mathlib_searches": [
   {
@@ -426,17 +297,6 @@
   "module": "Sheaf.Paper.AdicStratifiedPerfect",
   "declaration": "AlgebraicGeometry.Scheme.adic_stratified_perfect",
   "declarations": [
-   "AlgebraicGeometry.Scheme.sfbFixedScalarRestriction",
-   "AlgebraicGeometry.Scheme.sfbFixedScalarRestriction_additive",
-   "AlgebraicGeometry.Scheme.sfbEtaleTensorDegreeZero",
-   "AlgebraicGeometry.Scheme.sfbResidueComplex",
-   "AlgebraicGeometry.Scheme.sfbModelRings",
-   "AlgebraicGeometry.Scheme.IsSfbAdicComplete",
-   "AlgebraicGeometry.Scheme.IsSfbAdicConstructible",
-   "AlgebraicGeometry.Scheme.sfbCompletedModel",
-   "AlgebraicGeometry.Scheme.sfbLocalRestriction",
-   "AlgebraicGeometry.Scheme.IsSfbStratifiedPerfect",
-   "AlgebraicGeometry.Scheme.SfbAdicConstructibleCategory",
    "AlgebraicGeometry.Scheme.adic_stratified_perfect"
   ],
   "file": "lean/Sheaf/Paper/AdicStratifiedPerfect.lean",
@@ -466,5 +326,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-a02db",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261019T231257-L-568633",
+  "kind": "interface",
+  "note": "independent cc review: adic_stratified_perfect statement byte-identical to live; the 11 moved definitions identical to the old item text (plus @[no_expose] and 2 new declarations) in AdicStratifiedPerfectData, re-exported publicly; 8 modules + both direct importers compile exit 0; the 2 sorry statements checked against BS 6.5.8/6.6.8/6.6.11/6.5.3"
  }
 }

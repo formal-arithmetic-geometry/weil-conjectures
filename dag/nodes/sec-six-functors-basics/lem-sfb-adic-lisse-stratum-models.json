@@ -1,0 +1,142 @@
+{
+ "id": "lem-sfb-adic-lisse-stratum-models",
+ "kind": "statement",
+ "title": "Local perfect models on one immersed lisse residue stratum",
+ "statement": "Let X and S be Noetherian schemes, i : S → X an immersion, A a complete Noetherian local ring with unique maximal ideal I, and K a complex of modules over the completed constant ring on X [def-sfb-adic-stratified-perfect-data]. Assume K is locally derived complete and its residue is the comparison pullback of a specified bounded etale A/I-complex C. Assume every cohomology sheaf of C pulled back to S is finite locally constant. Then there is a covering sieve of the final object of S_proet, on each member of which the restriction of K is isomorphic to the restriction of sfbCompletedModel X I P, for a bounded complex P of finite projective A-modules. No global constructibility or choice of a stratification is assumed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.6.8 and Proposition 6.6.11, forward direction, with restriction along one immersed stratum."
+ },
+ "stmt_deps": [
+  "def-sfb-adic-stratified-perfect-data"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the completed quotient tower and the Koszul/Roos completion unit along i. Immersion inverse image preserves limits and is exact, so the ring comparison and completion unit restrict canonically. Comparison-pullback coherence identifies the restricted residue with the restriction of C. Transport to coefficient-sized site models; boundedness and finite local constancy pass through the exact equivalences. Over the residue field exact geometric stalks identify the total tensor of every K-flat representative with derived tensor and preserve the fixed cohomological bounds.",
+   "uses": [
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-weil-derived-countable-products-core",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "prop-weil-pbc-geometric-stalks-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply adicResidueLissePerfectLift to that complete complex and its bounded lisse finite-Tor residue on S. Transport its covering sieve and slice isomorphisms back through the site equivalence. Canonical constant-section maps and scalar insertion identify its completed finite-projective model with the restriction of sfbCompletedModel X I P: check finite free terms and pass to their idempotent summands. Reverse the order of the finite/projective conjuncts. Empty strata have empty covering sieves.",
+   "uses": [
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-weil-pbc-constant-module-section-properties"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-adic-residue-lisse-perfect-lift",
+  "lem-weil-derived-countable-products-core",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-geometric-stalks-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt--Scholze Lemma 6.6.8 and Proposition 6.6.11, one-stratum application and canonical coefficient transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Adic constructible complexes are stratified locally perfect and form a bounded triangulated subcategory",
+   "results": "No exact match for the project adic predicates or their characterization.",
+   "date": "2026-10-19",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Perfect\"",
+   "results": "No hits.",
+   "date": "2026-10-19",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally derived complete objects form a triangulated subcategory and constructible residue complexes are closed under cones",
+   "results": "Eight hits, including ObjectProperty.IsTriangulated, its constructor, DerivedCategory.instIsTriangulated, and triangulated closed extension properties. These provide the categorical assembly API, not the geometric lifting or residue comparison.",
+   "date": "2026-10-19",
+   "verdict": "Used the triangulated object-property API; no exact geometric statement."
+  },
+  {
+   "tool": "grep",
+   "query": "stratif.*perfect|perfect.*stratif|adic.*constructib",
+   "results": "The existing item is the only declaration of these predicates; the integral specialization assumes different coefficient hypotheses.",
+   "date": "2026-10-19",
+   "verdict": "no reusable general characterization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicStratifiedPerfect",
+  "date": "2026-10-19",
+  "group": "P5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "The adic stratified-perfect characterization, separated into its geometric and categorical proof steps.",
+   "via": [
+    "lem-sfb-integral-cohomological-adic-criterion",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-adic-stratified-local-models"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicLisseStratumModels",
+  "file": "lean/Sheaf/Paper/AdicLisseStratumModels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sfb_adic_lisse_stratum_models",
+  "statement": "theorem sfb_adic_lisse_stratum_models (X S : Scheme.{u}) [IsNoetherian X] [IsNoetherian S] (i : S ⟶ X) [IsImmersion i] (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (hI : I.IsMaximal ∧ ∀ J : Ideal A, J.IsMaximal → J = I) [IsAdicComplete I A] (K : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I))) (hcomplete : IsSfbAdicComplete X I K) (C : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (A ⧸ I ^ (0 + 1)))) ℤ) (a b : ℤ) (hb : ∀ q : ℤ, (q < a ∨ b < q) → IsZero (C.homology q)) (he : Nonempty (DerivedCategory.Q.obj (sfbResidueComplex X I K) ≅ DerivedCategory.Q.obj (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (A ⧸ I ^ (0 + 1))) X).mapHomologicalComplex (.up ℤ)).obj C))) (hlisse : ∀ q : ℤ, IsFiniteLocallyConstantSheaf ((Etale.upperStar (ModuleCat.{u + 1} (A ⧸ I ^ (0 + 1))) i).obj (C.homology q))) : letI := HasDerivedCategory.standard (ModuleCat.{u + 1} A) ∃ V : Sieve (⊤_ S.ProEt), V ∈ ProEt.topology S (⊤_ S.ProEt) ∧ ∀ (U : S.ProEt) (f : U ⟶ ⊤_ S.ProEt), V f → ∃ (P : CochainComplex (ModuleCat.{u + 1} A) ℤ) (c d : ℤ), P.IsStrictlyGE c ∧ P.IsStrictlyLE d ∧ (∀ q : ℤ, Module.Projective A (P.X q) ∧ Module.Finite A (P.X q)) ∧ Nonempty (sfbLocalRestriction i (adicLisseCompletedRing X I) U K ≅ sfbLocalRestriction i (adicLisseCompletedRing X I) U (sfbCompletedModel X I P))",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-a02db",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261019T231257-L-568633",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-a02db",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261019T231257-L-568633",
+  "kind": "interface",
+  "note": "independent cc review: adic_stratified_perfect statement byte-identical to live; the 11 moved definitions identical to the old item text (plus @[no_expose] and 2 new declarations) in AdicStratifiedPerfectData, re-exported publicly; 8 modules + both direct importers compile exit 0; the 2 sorry statements checked against BS 6.5.8/6.6.8/6.6.11/6.5.3"
+ }
+}

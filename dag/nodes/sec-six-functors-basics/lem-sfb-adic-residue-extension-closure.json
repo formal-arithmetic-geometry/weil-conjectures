@@ -1,0 +1,140 @@
+{
+ "id": "lem-sfb-adic-residue-extension-closure",
+ "kind": "statement",
+ "title": "Bounded constructible etale residue origin is closed under distinguished extensions",
+ "statement": "For a Noetherian scheme X and a complete Noetherian local coefficient ring A with maximal ideal I, if T is a distinguished triangle of completed-coefficient complexes and its first and third vertices satisfy IsSfbResidueConstructible X I, then its second vertex satisfies the same condition. Completeness of the vertices is not assumed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.5.1 and its following triangulatedness observation; Lemma 6.5.3 (boundedness); Proposition 6.6.11 (stratified perfect characterization), using Definition 6.3.1 and Remark 6.3.2 for the residue-field constructibility condition."
+ },
+ "stmt_deps": [
+  "def-sfb-adic-stratified-perfect-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing Noetherian finite-locally-constant short-exact-sequence lemma on each common stratum of the endpoint sheaves. Its finite-presentation proof lifts finitely many generators and relations on a common covering sieve; exact geometric stalks give finiteness of the middle stalk modules. Intersect the two constructible stratifications to obtain constructible extension closure. This applies to arbitrary residue fields, with no finite underlying coefficient set.",
+   "uses": [
+    "thm-constructible-serre",
+    "lem-weil-pbc-constructible-stratification-intersection",
+    "lem-sfb-discrete-noetherian-constructible-serre"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use exact scalar restriction and the derived localization computation to identify the residue functor with Q(sfbResidueComplex). Bounded constructible etale complexes form a triangulated full subcategory by kernel/cokernel closure and the preceding field-extension calculation. Its comparison image is triangulated: bounded-below comparison is fully faithful, and all functors in the composite are triangulated. The input residue witnesses belong to that image. Apply distinguished-extension closure in the image and recover a bounded constructible etale representative of the middle residue.",
+   "uses": [
+    "prop-constructible-derived-subcategory",
+    "sk-prop-sf-comparison",
+    "lem-pur-derived-change-of-rings",
+    "lem-sfb-discrete-noetherian-constructible-serre"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Maximality gives the residue quotient its field structure. All residue module sheaves are flat by the exact conservative geometric-stalk flatness criterion and flatness of vector spaces. Tensor with a degree-zero sheaf is therefore exact; mapHomologyIso identifies its cohomology with tensor of the original cohomology. The same finite interval supplies the required Tor bound.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-discrete-noetherian-constructible-serre",
+  "lem-weil-pbc-constructible-stratification-intersection",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-constructible-derived-subcategory",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "sk-prop-sf-comparison",
+  "thm-constructible-serre"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Reuse the proved noetherian_flc_of_shortExact on common strata; the full-faithful triangulated comparison-image and exact tensor proofs are written in Lean by P5, following Bhatt--Scholze Definition 6.5.1 and Remark 6.3.2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Adic constructible complexes are stratified locally perfect and form a bounded triangulated subcategory",
+   "results": "No exact match for the project adic predicates or their characterization.",
+   "date": "2026-10-19",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Perfect\"",
+   "results": "No hits.",
+   "date": "2026-10-19",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally derived complete objects form a triangulated subcategory and constructible residue complexes are closed under cones",
+   "results": "Eight hits, including ObjectProperty.IsTriangulated, its constructor, DerivedCategory.instIsTriangulated, and triangulated closed extension properties. These provide the categorical assembly API, not the geometric lifting or residue comparison.",
+   "date": "2026-10-19",
+   "verdict": "Used the triangulated object-property API; no exact geometric statement."
+  },
+  {
+   "tool": "grep",
+   "query": "stratif.*perfect|perfect.*stratif|adic.*constructib",
+   "results": "The existing item is the only declaration of these predicates; the integral specialization assumes different coefficient hypotheses.",
+   "date": "2026-10-19",
+   "verdict": "no reusable general characterization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicStratifiedPerfect",
+  "date": "2026-10-19",
+  "group": "P5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "The adic stratified-perfect characterization, separated into its geometric and categorical proof steps.",
+   "via": [
+    "lem-sfb-integral-cohomological-adic-criterion",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-adic-residue-triangulated"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicResidueExtensionClosure",
+  "file": "lean/Sheaf/Paper/AdicResidueExtensionClosure.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sfb_adic_residue_extension_closed",
+  "statement": "theorem sfb_adic_residue_extension_closed (X : Scheme.{u}) [IsNoetherian X] (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (hI : I.IsMaximal ∧ ∀ J : Ideal A, J.IsMaximal → J = I) [IsAdicComplete I A] (T : Triangle (DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I)))) (hT : T ∈ distTriang _) (h₁ : IsSfbResidueConstructible X I T.obj₁) (h₃ : IsSfbResidueConstructible X I T.obj₃) : IsSfbResidueConstructible X I T.obj₂",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-a02db",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261019T231257-L-568633",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-a02db",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261019T231257-L-568633",
+  "kind": "interface",
+  "note": "independent cc review: adic_stratified_perfect statement byte-identical to live; the 11 moved definitions identical to the old item text (plus @[no_expose] and 2 new declarations) in AdicStratifiedPerfectData, re-exported publicly; 8 modules + both direct importers compile exit 0; the 2 sorry statements checked against BS 6.5.8/6.6.8/6.6.11/6.5.3"
+ }
+}
