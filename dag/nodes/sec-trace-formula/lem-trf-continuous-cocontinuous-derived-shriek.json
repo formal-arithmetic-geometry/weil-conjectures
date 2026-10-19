@@ -15,9 +15,135 @@
   "def-weil-abstract-derived-category",
   "def-pur-saturated-triangulated-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal A=\\operatorname{Mod}(\\mathcal O')$ and $\\mathcal B=\\operatorname{Mod}(\\mathcal O)$. Restriction along $u$ acts on modules using $\\mathcal O'(U)=\\mathcal O(uU)$, so is additive and preserves kernels sectionwise. A module morphism is epic exactly when its underlying abelian-sheaf morphism is epic: its cokernel has the underlying abelian-sheaf cokernel, by the description of module cokernels. The cited general-site epimorphism criterion therefore applies. If $M\\to N$ is epic and $s\\in N(uU)$, choose a cover of $uU$ on which $s$ lifts to $M$. Cocontinuity gives a cover $\\{U_j\\to U\\}$ whose images factor through that cover; restriction of the chosen lifts gives lifts in $M(uU_j)$. Thus $g^{-1}$ preserves epimorphisms as well as kernels and is exact. With the identity structural ring map there is no scalar extension: $g^*=g^{-1}$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0797, lemma-lower-shriek-modules; exactness written by local lifting from the cocontinuity hypothesis."
+   }
+  },
+  {
+   "text": "On either ringed site $(\\mathcal E,R)$ write $E_U=(R[h_U])^\\#$ for the free sheaf on an object $U$. Free presheaf Yoneda followed by the sheafification adjunction gives $\\operatorname{Hom}_R(E_U,M)=M(U)$, naturally in $M$. All small coproducts exist, since module sheaves form a Grothendieck abelian category. For any module $M$, take the sum of $E_U$ over all pairs $(U,s)$ with $s\\in M(U)$, with its evaluation map to $M$. Every section $s$ is the image of the identity-basis section in its own summand, so this map is epic. These indexing sets lie in the fixed module universe. Let $\\mathcal P$ be all small sums of the $\\mathcal O'$-module generators $E_U$; it contains $0$, is closed under finite sums and epimorphically generates $\\mathcal A$.",
+   "uses": [
+    "lem-weil-pbc-free-yoneda-presheaf-module",
+    "def-weil-presheaf-modules-sheafification",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EW, lemma-module-quotient-flat, proof of (3), and the evaluation calculation in Tag 0797, lemma-lower-shriek-modules."
+   }
+  },
+  {
+   "text": "For each $U\\in\\mathcal C$ and $N\\in\\mathcal B$, the preceding evaluation bijections give $\\operatorname{Hom}_{\\mathcal A}(E_U,g^{-1}N)=N(uU)=\\operatorname{Hom}_{\\mathcal B}(E_{uU},N)$. For a sum $P=\\bigoplus_i E_{U_i}$ the corresponding object of $\\mathcal B$ is $\\bigoplus_i E_{uU_i}$: maps out of either sum are precisely tuples of maps out of its summands. This supplies the natural representing bijections for every $P\\in\\mathcal P$. Apply the partial-adjoint extension criterion to obtain $g_!\\dashv g^{-1}$. Additivity follows directly from its natural Hom bijections: the transpose of $g_!(a+b)$ is the sum of the transposes of $g_!a$ and $g_!b$, because $g^{-1}$ is additive. The colimit-preservation theorem for left adjoints gives preservation of all small colimits, hence right exactness (finite colimits) and preservation of sequential colimits. In particular $g_!E_U\\cong E_{uU}$ by their representing bijections.",
+   "uses": [
+    "lem-trf-partially-defined-module-adjoint",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0797, lemma-lower-shriek-modules, its Hom computation and application of Tag 0793; colimit observation in sites-cohomology Tag 07AC, lemma-existence-derived-lower-shriek."
+   }
+  },
+  {
+   "text": "Let $I$ be any injective object of $\\mathcal B$ and put $F=g^{-1}I$. The module-coefficient acyclicity theorem gives $\\operatorname{Ext}_{\\mathcal O'}^p(E_U,F)=0$ for every $U\\in\\mathcal C$ and $p>0$. It applies to the actual ring sheaves $\\mathcal O,\\mathcal O'=g^{-1}\\mathcal O$ and does not require $F$ itself to be injective. The $E_U$ here are exactly the free sheaves of step 2.",
+   "uses": [
+    "lem-trf-module-pullback-injective-section-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6X, lemma-pullback-injective-pre-limp, and the Ext display in Tag 07AC, lemma-existence-derived-lower-shriek."
+   }
+  },
+  {
+   "text": "Let $P^\\bullet$ be bounded above, acyclic, with terms in $\\mathcal P$. Apply the Ext-orthogonal-sums Hom lemma to the family $(E_U)_U$ and $F=g^{-1}I$ using step 4. It gives acyclicity of $\\operatorname{Hom}_{\\mathcal A}(P^\\bullet,g^{-1}I)$. The ordinary adjunction identifies this complex with $\\operatorname{Hom}_{\\mathcal B}(g_!P^\\bullet,I)$ degree by degree; naturality intertwines precomposition with each differential, including the sign $(-1)^{n+1}$. Thus the latter Hom complex is acyclic for every injective $I$. This forces $B^\\bullet=g_!P^\\bullet$ to be acyclic: if $H^r(B)\\ne0$, embed it in an injective $I$ (enough injectives follow from the cited Grothendieck theorem). Its inclusion gives a nonzero map $Z^r(B)/\\operatorname{im}d^{r-1}\\to I$. Extend this map along the monomorphism $Z^r(B)/\\operatorname{im}d^{r-1}\\hookrightarrow B^r/\\operatorname{im}d^{r-1}$ using injectivity. The resulting map $B^r\\to I$ is a cocycle in $\\operatorname{Hom}(B,I)$, since it kills $\\operatorname{im}d^{r-1}$, and is not a boundary, since every boundary factors through $d^r$ and vanishes on $Z^r(B)$. This contradicts acyclicity of that Hom complex.",
+   "uses": [
+    "lem-trf-acyclic-coproduct-ext-orthogonal-hom",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sp-grothendieck-enough-injectives",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07AC, lemma-existence-derived-lower-shriek, verification of condition (2), with its injective-detection argument expanded."
+   }
+  },
+  {
+   "text": "Apply the unbounded left-derived criterion with $F=g_!$ and $\\mathcal P$ from step 2. Hypothesis (1), including the zero object and finite sums, is step 2. Hypothesis (2), preservation of bounded-above acyclic $\\mathcal P$-complexes, is step 5. Both $\\mathcal A$ and $\\mathcal B$ are Grothendieck abelian by the ringed-site theorem, so sequential colimits exist and are exact: $\\mathbf N$ is a filtered small category. Step 3 gives right exactness and commutation with those colimits, completing (3)-(5). Hence the denominator pro-diagram for $Q g_!$ is essentially constant at every complex, with no boundedness restriction. The assembly theorem supplies the functor $Lg_!$ and its canonical derived comparison $\\varepsilon:Lg_!Q\\to Qg_!$.",
+   "uses": [
+    "lem-trf-unbounded-left-derived-criterion",
+    "prop-pur-kinjective-resolutions-exist",
+    "new-everywhere-defined-derived-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07AC, lemma-existence-derived-lower-shriek, application of derived.tex Tag 0794, proposition-left-derived-exists, conditions (1)-(5); derived-functor assembly."
+   }
+  },
+  {
+   "text": "For an additive functor, applying it termwise commutes with the shift and with the cone: the cone differential is the matrix with entries $d_Y,f,0,-d_X$, and its image is the same matrix with the functor applied to each entry. It also carries $dh+hd$ to the same homotopy formula, so descends to homotopy classes. Thus $K(g_!)$ carries cone triangles to cone triangles. By the cited triangulations and exactness of localization, $QK(g_!)$ is exact. The quasi-isomorphisms form the saturated, triangulation-compatible multiplicative system required by Situation 05S8. Step 6 gives definedness everywhere in precisely that situation. The everywhere-defined-left-derived exactness theorem therefore gives $Lg_!$ its canonical triangulated structure.",
+   "uses": [
+    "lem-pur-homotopy-category-triangulated",
+    "lem-pur-quasi-isos-saturated-triangulated",
+    "lem-pur-left-derived-exact-when-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014X (lemma-additive-exact-homotopy-category), 05SE (proposition-derived-functor), applied to the functor of Tag 07AC."
+   }
+  },
+  {
+   "text": "Since $g^{-1}$ is exact, its termwise functor descends to derived categories by the exact-functor factorization theorem. Its right-derived denominator ind-diagram at $N$ is essentially constant with value $Qg^{-1}N$: each leg $Qg^{-1}N\\to Qg^{-1}I$ over a quasi-isomorphism $N\\to I$ is an isomorphism, whose inverse defines the representing cocone. The identity denominator gives a section, and a common later denominator verifies the common-stage condition, since the legs commute. Use this cocone, whose leg at the identity is $1$, and the pro-cone for $Lg_!$ from step 6 in the canonical pre-derived adjunction theorem for $g_!\\dashv g^{-1}$. Its bifunctorial bijection gives $Lg_!\\dashv g^{-1}$. For the asserted chain map $f:g_!C\\to N$, specialize that theorem to identity denominators $s=1_N$, $t=1_C$ and its map $C\\to g^{-1}N$ equal to $f^\\flat$. Its formula reads $e(Q(f^\\flat))=Q(f)\\circ\\varepsilon_C$. The inverse bijection is exactly the displayed adjunction in the item; hence it sends $Q(f)\\circ\\varepsilon_C$ to $Q(f^\\flat)$, proving the specified normalization.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-pc-essentially-constant-ind-diagram",
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0DVC, lemma-pre-derived-adjoint-functors (via its formula in Tag 0FND), and Tag 09T5, lemma-derived-adjoint-functors, with exact right adjoint."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-free-yoneda-presheaf-module",
+  "def-weil-presheaf-modules-sheafification",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-trf-partially-defined-module-adjoint",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-trf-module-pullback-injective-section-acyclic",
+  "lem-trf-acyclic-coproduct-ext-orthogonal-hom",
+  "lem-sp-grothendieck-enough-injectives",
+  "def-sp-injective-resolutions",
+  "lem-trf-unbounded-left-derived-criterion",
+  "new-everywhere-defined-derived-functors",
+  "lem-pur-homotopy-category-triangulated",
+  "lem-pur-quasi-isos-saturated-triangulated",
+  "lem-pur-left-derived-exact-when-defined",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-pc-essentially-constant-ind-diagram",
+  "lem-pc-pre-derived-adjoint-functors-general"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07AC, lemma-existence-derived-lower-shriek, entire proof; ordinary-adjoint construction from sites-modules Tag 0797; canonical derived-adjunction formula from derived Tags 0DVC and 0FND."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -56,7 +182,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-derived-colimit-bar",
@@ -87,5 +213,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-continuous-cocontinuous-derived-shriek",
+  "worker": "stage1",
+  "summary": "Verified the full unbounded Stacks 07AC route and the normalized adjunction formula. Constructed the ordinary adjoint from free-module evaluation rather than making it a clause-node. Four statement-only prerequisites isolate the partial-adjoint criterion, the unbounded derivability criterion, module (not merely abelian-sheaf) pulled-back-injective acyclicity, and the bounded-above Ext-orthogonal-sums Hom argument. All new statements were searched in Mathlib and the DAG. The imported statement is unchanged.",
+  "blueprint": "The created-item ancestry is the supporting derived-colimit/bar branch of lem-trf-local-term-locality, proof (1)--(2). The supplied from.place is retained in full. This split proves the generic unbounded lower-shriek input by Stacks 07AC; it does not change the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic module-sheaf or derived-category input used with exactly its stated hypotheses in the Stacks 07AC argument; the zero-stalk curve unit supplies no replacement for this general categorical fact."
+   },
+   {
+    "node": "new-everywhere-defined-derived-functors",
+    "why": "Generic module-sheaf or derived-category input used with exactly its stated hypotheses in the Stacks 07AC argument; the zero-stalk curve unit supplies no replacement for this general categorical fact."
+   },
+   {
+    "node": "lem-pur-quasi-isos-saturated-triangulated",
+    "why": "Generic module-sheaf or derived-category input used with exactly its stated hypotheses in the Stacks 07AC argument; the zero-stalk curve unit supplies no replacement for this general categorical fact."
+   },
+   {
+    "node": "lem-pur-left-derived-exact-when-defined",
+    "why": "Generic module-sheaf or derived-category input used with exactly its stated hypotheses in the Stacks 07AC argument; the zero-stalk curve unit supplies no replacement for this general categorical fact."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic module-sheaf or derived-category input used with exactly its stated hypotheses in the Stacks 07AC argument; the zero-stalk curve unit supplies no replacement for this general categorical fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "new-everywhere-defined-derived-functors",
+  "lem-pur-quasi-isos-saturated-triangulated",
+  "lem-pur-left-derived-exact-when-defined",
+  "lem-pc-pre-derived-adjoint-functors-general"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-34840204f",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-34840204f (reviewer sub-agent of L); spot-checked: Read Stacks 07AC (full proof), 0D6X, 0793 and 0794 at their labels. The item statement is unchanged. Step 1 (exactness of g^{-1}): epi in Mod iff epi in Ab via the cokernel description, then local lifting refined by cocontinuity; correct. Step 2: Hom(E_U,M)=M(U) from free Yoneda and sheafification; the sum over pairs (U,s) is epic; P contains 0 and is closed under finite sums. Step 3: 0793 applied with L(⊕E_{U_i})=⊕E_{uU_i}; additivity and colimit preservation are argued. Step 4: the module form of 0D6X with the same E_U; g^{-1}I is not assumed injective. Step 5: the Hom complex is acyclic, carried across the adjunction, and acyclicity is detected by injectives through a cocycle that is not a coboundary; I checked it line by line. Step 6: hypotheses (1)-(5) of 0794 all hold (both categories are Grothendieck). Step 7: the cone-matrix argument plus left-derived exactness gives triangulatedness. Step 8: in pre-derived-adjoint-general take F=g^{-1}, G=g_!, p_s=Q(g^{-1}s)^{-1}; I verified essential constancy (j0=id, k=s). With s=t=1 the theorem gives e(Q(f^flat))=Q(f)∘ε_C, which is the item's normalization in the right direction. All four new nodes are true; I sketched proofs for 0793 and for the Ext-orthogonal Hom node (downward induction on the cycles). None restates an item clause, and none duplicates an existing node by grep of tags and labels. The module 0D6X node generalizes lem-trf-site-pullback-injective-evaluation-acyclic, which is its R=Z case and is not applicable to module injectives (maintainer note). No SGA. The five generic tool_uses are accepted. No changes."
  }
 }
