@@ -37,34 +37,162 @@
   "def-weil-pbc-henselization-at-prime",
   "def-weil-pbc-adic-completion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $R=A_{\\mathfrak p}$, $k=\\kappa(\\mathfrak p)$, and $k_H=H/\\mathfrak m_H$. Since the inverse image of $\\mathfrak m_H$ in $A$ is $\\mathfrak p$, every element of $A\\setminus\\mathfrak p$ maps to a unit of $H$. Thus the localization property [def-weil-pbc-localization-at-prime] gives a unique local map $\\eta:R\\to H$ and an injective field map $k\\to k_H$. This field map is surjective: given $x\\in H$, [lem-weil-pbc-filtered-colimit-algebras-elementwise](2) writes $x=\\lambda_a(b)$. Its residue in $k_H$ is the image of the residue of $b$ in $\\kappa(\\mathfrak p_a)$, and the latter field is the image of $k$ by hypothesis. Every element of $k_H$ has such a representative $x$, so $k\\xrightarrow{\\sim}k_H$, with precisely the structural residue map.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 08HR (lemma-map-into-henselian-colimit), 04GN (lemma-henselization), properties (3)--(4); filtered-colimit representatives as in Tag 00D6."
+   }
+  },
+  {
+   "text": "Let $T$ be any henselian local ring and $g:R\\to T$ a local map. The inverse image of $\\mathfrak m_T$ in $A$ is $\\mathfrak p$. Via Step 1, $g$ gives a $k$-algebra map $\\tau:k_H\\to T/\\mathfrak m_T$. Apply [lem-weil-pbc-map-into-henselian-colimit] with base ring $A$, source algebra $H=\\varinjlim_a A_a$, prime $\\mathfrak m_H$, and target $T$. The directed set is nonempty and hence filtered, every stage is etale over $A$, and $\\mathfrak m_H$ lies over $\\mathfrak p$. We obtain a unique $A$-algebra map $h:H\\to T$ with inverse image of $\\mathfrak m_T$ equal to $\\mathfrak m_H$ and residue map $\\tau$. Thus $h$ is local and $h\\eta=g$ by uniqueness of localization. Conversely, every local $h$ with $h\\eta=g$ induces $\\tau$, since $k\\to k_H$ is an isomorphism, and hence is the same map by the cited theorem. As $H$ is henselian by hypothesis, this is exactly the universal property of [def-weil-pbc-henselization-at-prime]. This proves (1).",
+   "uses": [
+    "lem-weil-pbc-map-into-henselian-colimit",
+    "def-weil-pbc-henselization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 08HR (lemma-map-into-henselian-colimit); Tag 08HT (lemma-uniqueness-henselian) and the paragraph following Definition 04GQ."
+   }
+  },
+  {
+   "text": "Fix $a$, and put $B=(A_a)_{\\mathfrak p_a}$ and $\\mathfrak n=\\mathfrak p_aB$. The composite $A\\to A_a\\to H$ has inverse image $\\mathfrak p_a$ of $\\mathfrak m_H$ at the middle ring. Thus localization [def-weil-pbc-localization-at-prime] gives a local map $\\beta:B\\to H$. The map $R\\to B$ is local because $\\mathfrak p_a$ lies over $\\mathfrak p$, and its residue map is the assumed isomorphism $k\\xrightarrow{\\sim}\\kappa(\\mathfrak p_a)$. Also $\\mathfrak nH=\\mathfrak m_H$: one inclusion follows from locality of $\\beta$, while the other follows from $\\mathfrak pH=\\mathfrak m_H$ and $\\mathfrak pB\\subseteq\\mathfrak n$. In particular the residue map of $\\beta$ is an isomorphism by Step 1.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GV (lemma-henselization-different), the local maps to the pointed colimit; localization and extension of the indicated ideals."
+   }
+  },
+  {
+   "text": "Let $T$ be henselian local and let $g:B\\to T$ be local. The composite $R\\to B\\to T$ is local. Part (1) gives a unique local $h:H\\to T$ extending that composite. Compare the two $A$-algebra maps $A_a\\to H\\xrightarrow{h}T$ and $A_a\\to B\\xrightarrow{g}T$. Their inverse images of $\\mathfrak m_T$ are $\\mathfrak p_a$. Their induced maps $\\kappa(\\mathfrak p_a)\\to T/\\mathfrak m_T$ coincide, since they agree on $k$ and $k\\to\\kappa(\\mathfrak p_a)$ is an isomorphism. Apply [lem-weil-pbc-map-into-henselian-colimit] to the single etale $A$-algebra $A_a$ and this prime and residue map. Its uniqueness gives equality on $A_a$, hence $h\\beta=g$ on $B$ by localization. Any other local extension of $g$ agrees on $R$ and is therefore equal to $h$ by (1). Together with the assumed henselianity of $H$, this verifies [def-weil-pbc-henselization-at-prime] for $B$ and proves (2).",
+   "uses": [
+    "lem-weil-pbc-map-into-henselian-colimit",
+    "def-weil-pbc-henselization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 08HQ (lemma-map-into-henselian), the single-algebra case of 08HR; Tag 04GV (lemma-henselization-different)."
+   }
+  },
+  {
+   "text": "Fix $n\\geq1$. Use the notation $C=R$ or $C=B$, write $\\mathfrak r$ for its maximal ideal, and $u:C\\to H$ for $\\eta$ or $\\beta$ respectively. By Steps 1--4, $u$ has the henselization universal property, induces an isomorphism of residue fields, and $\\mathfrak rH=\\mathfrak m_H$. Put $C_n=C/\\mathfrak r^n$ and $H_n=H/\\mathfrak m_H^n$. These are local rings, with local quotient maps and maximal ideals $\\mathfrak r/\\mathfrak r^n$ and $\\mathfrak m_H/\\mathfrak m_H^n$, by [lem-weil-pbc-quotient-local-structure]. Both maximal ideals have zero $n$th power. Consequently [lem-weil-pbc-henselian-of-nil-maximal-ideal] makes $C_n$ and $H_n$ henselian, even when the original rings are not Noetherian. The induced map $u_n:C_n\\to H_n$ is local, since its residue map is the residue isomorphism of $u$.",
+   "uses": [
+    "lem-weil-pbc-quotient-local-structure",
+    "lem-weil-pbc-henselian-of-nil-maximal-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 06RS (lemma-local-dimension-zero-henselian), applied to nilpotent maximal ideals; quotient local structure from Section 07BH."
+   }
+  },
+  {
+   "text": "Apply the universal property from (1) or (2), as recorded in [def-weil-pbc-henselization-at-prime], to the local quotient map $q_C:C\\to C_n$, whose target is henselian by Step 5. It gives a unique local $v:H\\to C_n$ with $vu=q_C$. Locality implies $v(\\mathfrak m_H)\\subseteq\\mathfrak r/\\mathfrak r^n$, so $v$ kills $\\mathfrak m_H^n$. It therefore factors uniquely as $v=v_nq_H$ for a local map $v_n:H_n\\to C_n$, where $q_H:H\\to H_n$ is the quotient. For each $c\\in C$, $v_nu_n(q_C(c))=v(u(c))=q_C(c)$. Surjectivity of $q_C$ gives $v_nu_n=\\mathrm{id}_{C_n}$.",
+   "uses": [
+    "def-weil-pbc-henselization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 08HR and 08HT, universal-property argument applied to the henselian local nilpotent quotient of Step 5."
+   }
+  },
+  {
+   "text": "The two maps $u_nv$ and $q_H$ from $H$ to $H_n$ are local and agree after $u:C\\to H$, since $u_nvu=u_nq_C=q_Hu$. The target $H_n$ is henselian by Step 5. Uniqueness in the henselization property [def-weil-pbc-henselization-at-prime], proved in (1) and (2), yields $u_nv=q_H$. Substitute $v=v_nq_H$ and use surjectivity of $q_H$ to obtain $u_nv_n=\\mathrm{id}_{H_n}$. Thus $u_n$ is a ring isomorphism with inverse $v_n$. Applying this with $C=R$ and $C=B$ proves that both $R/\\mathfrak p^nR\\to H_n$ and $B/\\mathfrak p_a^nB\\to H_n$ are the specified canonical isomorphisms.",
+   "uses": [
+    "def-weil-pbc-henselization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 08HR and 08HT, uniqueness applied twice to the nilpotent quotients; no Noetherian condition enters."
+   }
+  },
+  {
+   "text": "Let $\\alpha_n:R/\\mathfrak p^nR\\to B/\\mathfrak p_a^nB$ and $\\beta_n:B/\\mathfrak p_a^nB\\to H_n$ be the induced maps in (3). Their composite is the canonical map $\\eta_n:R/\\mathfrak p^nR\\to H_n$. Step 7 says both $\\beta_n$ and $\\eta_n$ are isomorphisms, so $\\alpha_n=\\beta_n^{-1}\\eta_n$ is an isomorphism. The ideal equalities $(\\mathfrak pR)^n=\\mathfrak p^nR$ and $(\\mathfrak p_aB)^n=\\mathfrak p_a^nB$ follow by multiplying the generators of the extended ideals. This proves all finite-quotient assertions in (3).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary composition of the canonical quotient maps from Step 7; powers of extended ideals."
+   }
+  },
+  {
+   "text": "For $m\\geq n$, reduction of $u_m(c\\bmod\\mathfrak r^m)$ to level $n$ is $u(c)\\bmod\\mathfrak m_H^n$, equal to $u_n(c\\bmod\\mathfrak r^n)$. Surjectivity of the quotient maps shows that all reduction squares commute. Their inverses commute as well by composing each square with the inverse isomorphisms. By [def-weil-pbc-adic-completion], send a compatible sequence $(c_n)_n$ to $(u_n(c_n))_n$, with inverse $(h_n)_n\\mapsto(u_n^{-1}(h_n))_n$. These are mutually inverse ring maps, since operations are componentwise. This constructs $\\widehat R\\cong\\widehat H$ and $\\widehat B\\cong\\widehat H$, and hence $\\widehat R\\cong\\widehat B$, commuting with the completion maps and with $R\\to B\\to H$. If level $n=0$ is included, all its quotient rings are the zero ring and add no condition.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Completion as the inverse limit of the quotient rings, Section 00M9; componentwise passage from Step 8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-henselization-at-prime",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-henselian-of-nil-maximal-ideal",
+  "lem-weil-pbc-map-into-henselian-colimit",
+  "lem-weil-pbc-quotient-local-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 08HQ/08HR (unique residue lifts), 08HT, 04GN and 04GV; the completion comparison is written out using universal properties and henselian nilpotent quotients (06RS), rather than an unstated Noetherian completion theorem."
+ },
  "mathlib_searches": [
   {
+   "tool": "leanfinder",
+   "query": "A henselian local filtered colimit of pointed etale algebras with unchanged residue field is the henselization and has the same quotients by powers of the maximal ideal",
+   "results": "Returned HenselianLocalRing, HenselianLocalRing.TFAE, instHenselianRingMaximalIdeal, Field.henselian, HenselianLocalRing.toIsLocalRing, IsAdicComplete.henselianRing, HenselianRing, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot. No theorem identifies a henselian pointed-etale colimit with a henselization or gives all three clauses.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, Algebra.Etale",
+   "results": "No hits. No theorem identifies a henselian pointed-etale colimit with a henselization or gives all three clauses.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
    "tool": "grep",
-   "query": "rg -l -i henselization ~/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib; rg -n \"theorem|lemma|def |class \" Mathlib/RingTheory/Henselian.lean",
-   "results": "no file mentions henselization; Mathlib/RingTheory/Henselian.lean has only HenselianRing, HenselianLocalRing, HenselianLocalRing.TFAE, isLocalHom_of_le_jacobson_bot and IsLocalRing.eq_of_eval_eq_zero_of_not_isUnit_sub",
+   "query": "henseli[sz]ation|henseli[sz]ation|HenselianLocalRing",
+   "results": "Returned Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean. Grep read Henselian.lean lines 34,108,114,119,121; only definitions, field instance and root-lifting TFAE.",
    "date": "2026-10-19",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "henselization of a local ring as colimit of pointed etale neighbourhoods",
-   "results": "not run: the search services are not reachable from the review machine",
+   "query": "henselian local ring ind etale algebra same residue field universal henselization",
+   "results": "Returned HenselianLocalRing.TFAE, HenselianLocalRing, HenselianLocalRing.is_henselian, HenselianLocalRing.mk, HenselianLocalRing.rec, HenselianRing, HenselianLocalRing.toIsLocalRing, Field.henselian. No theorem identifies a henselian pointed-etale colimit with a henselization or gives all three clauses.",
    "date": "2026-10-19",
-   "verdict": "unavailable"
+   "verdict": "no match"
   },
   {
-   "tool": "loogle",
-   "query": "HenselianLocalRing, Algebra.Etale, colimit",
-   "results": "not run: the search services are not reachable from the review machine",
+   "tool": "leanfinder",
+   "query": "An ind etale local algebra with trivial residue extension and henselian target has the universal property of henselization",
+   "results": "Returned HenselianLocalRing, RingHom.Etale.ofLocalizationSpanTarget, HenselianLocalRing.TFAE, Algebra.Etale, RingHom.Etale.ofLocalizationSpan, RingHom.Etale.propertyIsLocal, Algebra.instIsStandardEtaleRing, Algebra.instEtaleOfIsStandardEtale. No theorem identifies a henselian pointed-etale colimit with a henselization or gives all three clauses.",
    "date": "2026-10-19",
-   "verdict": "unavailable"
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-equivariant-marked-cylinder-algebraization",
@@ -72,5 +200,39 @@
   "group": "Q95"
  },
  "chapter": "sec-deligne-laumon-a1",
- "unit": "sk-p-dl-a1-perverse"
+ "unit": "sk-p-dl-a1-perverse",
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-pointed-etale-limit-henselization",
+  "worker": "stage1",
+  "summary": "Statement preserved. Split into localization and residue identification, the two universal properties via 08HR/08HQ, and explicit inverse maps on every maximal-ideal quotient using henselianity of nilpotent local quotients; then pass componentwise to completions. Reused existing DAG statements throughout: no new nodes. Read all cited statements, checked every hypothesis and all Mathlib search hits.",
+  "blueprint": "Supports the IX 1.1 finiteness input in the ancestor lem-per-artin-gabber-affine-curve, along its existing ILO V marked-cylinder branch. Precisely realizes the henselian-colimit identification in lem-per-equivariant-marked-cylinder-algebraization Step 12 and the finite-stage completion identification in Step 13 (ILO V 2.2.7 and 3.2.4). No unit/chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-map-into-henselian-colimit",
+    "why": "General unique lifting of residue maps from an etale algebra or its filtered colimit into a henselian local ring, used for both universal properties; no such lifting statement occurs in the perverse unit."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-of-nil-maximal-ideal",
+    "why": "General henselianity of local rings with nil maximal ideal, needed for all finite maximal-ideal quotients without a Noetherian hypothesis; it is an algebra tool, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-quotient-local-structure",
+    "why": "General local quotient structure supplies exactly the quotient maximal ideals and local quotient maps used to apply henselian lifting; no perverse-unit statement gives this ring fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-map-into-henselian-colimit",
+  "lem-weil-pbc-henselian-of-nil-maximal-ideal",
+  "lem-weil-pbc-quotient-local-structure"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-612080c69",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-612080c69 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. There are no new nodes and the statement is unchanged. Sources checked in algebra.tex: 08HQ (l.42601) and 08HR (l.42881) match lem-weil-pbc-map-into-henselian-colimit, including the single-étale case; 08HT, 04GN and 04GV give the claim. The proof gets the universal property from 08HR and assumes no cofinality. Step 1: by 00D6(2) every element of H comes from a stage, so k is isomorphic to H/m_H. Step 2: 08HR applies to H with prime m_H. Uniqueness holds because any local h with hη=g has preimage m_H and residue map τ. Step 4: B-linearity comes from 08HQ on the single étale algebra A_a. I checked that both maps A_a→T are A-algebra maps with prime preimage p_a and the same residue map on κ(p_a)≅k. Steps 5–7: C/r^n and H/m_H^n are henselian by 06RS (nil maximal ideal, n≥1, no Noetherian hypothesis), and the inverses come from the universal property with both identities checked. Steps 8–9 (quotients, completions) are elementary. Edge cases: field base; Z at (0) with colimit Q; non-maximal p; stages with extra primes. The hypothesis m_H=pH is redundant but harmless. No cycle: the closure of all 7 proof_deps avoids the item. No duplicates: the strict-henselization and pair-henselization nodes have different hypotheses and conclusions. The parent marked-cylinder node uses clause (1) in Step 12 and clause (3) in Step 13, and the statement supports both. I accept the three generic sec-proper-base-change ring tools as tool_uses. No SGA citations."
+ }
 }
