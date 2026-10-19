@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
 public import Sheaf.CategoryTheory.LocallyConstantFiniteTypeModules
-public import Sheaf.Algebra.Homology.MixedTotalTensor
+public import WeilConjectures.Algebra.Homology.MixedTotalTensor
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Data.ZMod.Basic
 public import Mathlib.CategoryTheory.Triangulated.Generators

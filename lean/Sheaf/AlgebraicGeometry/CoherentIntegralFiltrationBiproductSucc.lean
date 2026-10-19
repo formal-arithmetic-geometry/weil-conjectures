@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.CoherentIntegralFiltration
+public import WeilConjectures.AlgebraicGeometry.CoherentIntegralFiltration
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
 
 @[expose] public section

@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim
 import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-import Sheaf.AlgebraicGeometry.ClosedImmersionUnitEpi
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitEpi
 
 /-! # Exactness and degree projections for a graded quotient
 

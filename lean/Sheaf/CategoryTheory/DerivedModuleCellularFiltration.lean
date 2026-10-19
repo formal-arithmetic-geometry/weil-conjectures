@@ -7,7 +7,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Sheaf.Algebra.Homology.LargeFilteredFreeResolution
-import Sheaf.CategoryTheory.DerivedShiftedFreeCoproduct
+import WeilConjectures.CategoryTheory.DerivedShiftedFreeCoproduct
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 
 @[expose] public section

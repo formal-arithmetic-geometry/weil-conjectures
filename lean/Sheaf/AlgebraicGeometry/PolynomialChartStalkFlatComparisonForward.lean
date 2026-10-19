@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.PolynomialChartFibreStalk
+public import WeilConjectures.AlgebraicGeometry.PolynomialChartFibreStalk
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.RingTheory.OpenFlatLocus

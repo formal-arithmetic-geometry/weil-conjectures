@@ -6,7 +6,7 @@ Authors: SHEAF group ND
 module
 
 public import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
-public import Sheaf.Algebra.Homology.MixedTotalTensor
+public import WeilConjectures.Algebra.Homology.MixedTotalTensor
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.BifunctorShift

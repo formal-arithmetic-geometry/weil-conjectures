@@ -5,7 +5,7 @@ Authors: SHEAF group R1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CoherentIntegralFiltration
+public import WeilConjectures.AlgebraicGeometry.CoherentIntegralFiltration
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Noetherian
@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.CoherentGenericLocalFreeModel
 import Sheaf.AlgebraicGeometry.CoherentLocalFreeIdealLattice
 import Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationIdealSumZero
 import Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationBiproductSucc
-import Sheaf.AlgebraicGeometry.PushforwardFinSumSuccIso
+import WeilConjectures.AlgebraicGeometry.PushforwardFinSumSuccIso
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian

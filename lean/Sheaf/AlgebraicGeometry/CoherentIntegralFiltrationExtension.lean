@@ -5,11 +5,11 @@ Authors: SHEAF group N1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CoherentIntegralFiltration
+public import WeilConjectures.AlgebraicGeometry.CoherentIntegralFiltration
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
-import all Sheaf.CategoryTheory.FiniteFiltrationRefinement
+import all WeilConjectures.CategoryTheory.FiniteFiltrationRefinement
 
 /-! # Concatenating coherent integral-ideal filtrations
 

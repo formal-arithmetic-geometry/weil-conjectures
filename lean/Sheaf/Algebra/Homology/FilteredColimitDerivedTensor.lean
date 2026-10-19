@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.Algebra.Category.ModuleCat.Colimits
 import Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence
-import Sheaf.Algebra.Homology.MixedTensorRestrictionComparison
+import WeilConjectures.Algebra.Homology.MixedTensorRestrictionComparison
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 

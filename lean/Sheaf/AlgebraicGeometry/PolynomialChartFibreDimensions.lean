@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PolynomialChartFibreStalk
+public import WeilConjectures.AlgebraicGeometry.PolynomialChartFibreStalk
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Sheaf.RingTheory.DimensionAtPointLocalRingTrdeg

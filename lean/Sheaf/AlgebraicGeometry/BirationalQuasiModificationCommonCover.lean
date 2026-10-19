@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.CenteredValuation
 public import Sheaf.TraceFormula.Modification
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
-import Sheaf.AlgebraicGeometry.AffineBirationalOfFractionRingEquiv
+import WeilConjectures.AlgebraicGeometry.AffineBirationalOfFractionRingEquiv
 import WeilConjectures.AlgebraicGeometry.DenseOpenComponentCoproduct
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.Paper.ReducedSourceFactors
@@ -20,7 +20,6 @@ import Mathlib.AlgebraicGeometry.Pullbacks
 import Mathlib.AlgebraicGeometry.Stalk
 import Mathlib.AlgebraicGeometry.ValuativeCriterion
 import Mathlib.RingTheory.Valuation.LocalSubring
-import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-!

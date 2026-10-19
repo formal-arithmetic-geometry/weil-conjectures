@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Sheaf.CategoryTheory.DerivedModuleDirectSums
+import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
 import Mathlib.Algebra.Category.ModuleCat.AB
 import all Sheaf.AlgebraicGeometry.DerivedAmbientDirectSumsHomology
 

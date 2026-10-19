@@ -8,7 +8,7 @@ public import WeilConjectures.CategoryTheory.SiteCechComplex
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.CategoryTheory.Limits.Shapes.ConcreteCategory
-import Sheaf.AlgebraicGeometry.EtaleFibreProductCoproduct
+import WeilConjectures.AlgebraicGeometry.EtaleFibreProductCoproduct
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleDisjointCover
 
 /-!

@@ -7,10 +7,10 @@ module
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.AlgebraicGeometry.GenericFibreClosedAvoidance
+import WeilConjectures.AlgebraicGeometry.GenericFibreClosedAvoidance
 import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 import Sheaf.AlgebraicGeometry.GenericFibreClosedCoverSpread
-import Sheaf.AlgebraicGeometry.CompatibleEtaleGenericFibreModel
+import WeilConjectures.AlgebraicGeometry.CompatibleEtaleGenericFibreModel
 import Sheaf.AlgebraicGeometry.ClosedFamilyGeometricFibreShrink
 
 /-! # A closed geometric cover on an étale model

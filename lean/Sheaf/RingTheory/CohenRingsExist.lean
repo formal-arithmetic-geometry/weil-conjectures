@@ -9,7 +9,7 @@ public import WeilConjectures.RingTheory.CohenRing
 import Mathlib.NumberTheory.Padics.RingHoms
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import WeilConjectures.RingTheory.CohenCompletionDVR
-import Sheaf.RingTheory.FlatLocalExtensionGivenResidueField
+import WeilConjectures.RingTheory.FlatLocalExtensionGivenResidueField
 
 /-!
 # Existence of Cohen rings

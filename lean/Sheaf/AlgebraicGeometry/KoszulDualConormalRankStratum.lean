@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
+public import WeilConjectures.AlgebraicGeometry.LocallyRankedExteriorComplex
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Sheaf.RingTheory.KoszulRegularSequence
@@ -18,6 +18,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 import Sheaf.AlgebraicGeometry.AffineConormalFrame
 import Sheaf.RingTheory.KoszulConormalBasis
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
+public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 
 /-! # Local rank of the dual conormal for a Koszul-regular immersion
 Source: Stacks Project, Duality for Schemes, Tags 0BQZ and 0BR0.

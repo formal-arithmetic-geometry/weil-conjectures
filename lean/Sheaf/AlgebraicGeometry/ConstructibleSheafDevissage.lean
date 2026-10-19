@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.CategoryTheory.Subobject.Limits
-import all Sheaf.CategoryTheory.FiniteFiltrationRefinement
+import all WeilConjectures.CategoryTheory.FiniteFiltrationRefinement
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.ConstructibleSheaf.GenericConstancy
 import WeilConjectures.SixFunctors.Finite.Exact

@@ -5,7 +5,7 @@ Authors: SHEAF group U1
 -/
 module
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
-import Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisExtFunctorSquare
+import WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisExtFunctorSquare
 /-! # Ext restriction along an exact functor
 
 Source: Stacks Project, Section 01F7; functoriality of Ext.

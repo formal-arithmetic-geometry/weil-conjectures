@@ -10,7 +10,7 @@ public import Sheaf.CategoryTheory.Limits.TowerLimitAdditiveLeftExact
 import Sheaf.Algebra.Category.ModuleCat.TowerLimitExactSurjectiveKernels
 import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
 import Sheaf.CategoryTheory.InjectiveSplitTower
-import Sheaf.CategoryTheory.InjectiveTowerEmbedding
+import WeilConjectures.CategoryTheory.InjectiveTowerEmbedding
 import WeilConjectures.CategoryTheory.Abelian.HorseshoeDeltaFunctor
 
 /-!

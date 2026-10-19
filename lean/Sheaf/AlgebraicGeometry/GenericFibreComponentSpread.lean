@@ -10,7 +10,7 @@ import Mathlib.AlgebraicGeometry.Fiber
 import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.Mathlib.Topology.NoetherianSpace
 import Sheaf.AlgebraicGeometry.GenericFibreClosedCoverSpread
-import Sheaf.AlgebraicGeometry.GenericFibreClosedAvoidance
+import WeilConjectures.AlgebraicGeometry.GenericFibreClosedAvoidance
 
 /-!
 # Spreading a connected component of a generic fibre

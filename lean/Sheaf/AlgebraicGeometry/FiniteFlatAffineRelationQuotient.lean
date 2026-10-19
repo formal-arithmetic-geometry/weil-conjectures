@@ -18,7 +18,7 @@ import Mathlib.CategoryTheory.Yoneda
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.RingTheory.Flat.Basic
-import Sheaf.RingTheory.FlatLocalExtensionGivenResidueField
+import WeilConjectures.RingTheory.FlatLocalExtensionGivenResidueField
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.RingTheory.Flat.Localization
 import Sheaf.AlgebraicGeometry.FinitePushforwardLocallyFree

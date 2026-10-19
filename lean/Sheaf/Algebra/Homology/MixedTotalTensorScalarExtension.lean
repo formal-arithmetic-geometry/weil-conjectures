@@ -5,7 +5,7 @@ Authors: SHEAF group J4
 -/
 module
 
-public import Sheaf.Algebra.Homology.MixedTotalTensor
+public import WeilConjectures.Algebra.Homology.MixedTotalTensor
 public import Sheaf.Algebra.Homology.RingTensorCohomology
 import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap

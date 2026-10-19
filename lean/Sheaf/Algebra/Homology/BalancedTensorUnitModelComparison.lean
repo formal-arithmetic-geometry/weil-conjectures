@@ -6,7 +6,7 @@ Authors: SHEAF group J4
 module
 
 public import Sheaf.Algebra.Homology.LocalizationModelSemilinear
-public import Sheaf.Algebra.Homology.MixedTotalTensor
+public import WeilConjectures.Algebra.Homology.MixedTotalTensor
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import Sheaf.Algebra.Homology.UniversalBalancedTensorComparison
 import Sheaf.Algebra.Homology.MixedTensorUnderlyingHomology

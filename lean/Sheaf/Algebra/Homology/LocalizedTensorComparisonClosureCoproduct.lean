@@ -9,7 +9,7 @@ public import Sheaf.Algebra.Homology.LocalizedTensorComparisonProperty
 public import Mathlib.RingTheory.Flat.Basic
 import Sheaf.Algebra.Homology.LocalizedTensorComparisonDirectSumSquare
 import Sheaf.Algebra.Homology.LocalizedTensorComparisonRepresentativeSquare
-import Sheaf.CategoryTheory.DerivedModuleDirectSums
+import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import WeilConjectures.Mathlib.Algebra.Homology.GrothendieckAbelian

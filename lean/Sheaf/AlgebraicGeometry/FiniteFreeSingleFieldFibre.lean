@@ -11,7 +11,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Homology.Homotopy
 
 import Sheaf.AlgebraicGeometry.FieldFibreHomology
-import Sheaf.AlgebraicGeometry.FieldComplexHomotopyNormalForm
+import WeilConjectures.AlgebraicGeometry.FieldComplexHomotopyNormalForm
 
 /-! # Homotopy normal form of a field fibre of single locally free cohomology
 

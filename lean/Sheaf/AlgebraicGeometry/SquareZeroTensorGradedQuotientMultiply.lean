@@ -1,8 +1,8 @@
 module
 
 public import Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation
-import Sheaf.AlgebraicGeometry.ClosedImmersionUnitEpi
-import Sheaf.AlgebraicGeometry.PullbackTensorUnitSection
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitEpi
+import WeilConjectures.AlgebraicGeometry.PullbackTensorUnitSection
 
 @[expose] public section
 set_option autoImplicit false

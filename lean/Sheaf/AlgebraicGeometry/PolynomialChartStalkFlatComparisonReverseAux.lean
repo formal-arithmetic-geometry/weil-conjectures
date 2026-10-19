@@ -1,10 +1,10 @@
 module
 
-public import Sheaf.AlgebraicGeometry.PolynomialChartFibreStalk
+public import WeilConjectures.AlgebraicGeometry.PolynomialChartFibreStalk
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.AlgebraicGeometry.FinitePresentationStalkLocalizationModel
-import Sheaf.AlgebraicGeometry.PolynomialChartClosedFiberModuleFlat
+import WeilConjectures.AlgebraicGeometry.FinitePresentationStalkLocalizationModel
+import WeilConjectures.AlgebraicGeometry.PolynomialChartClosedFiberModuleFlat
 import Sheaf.RingTheory.FlatOfFlatClosedFiber
 
 @[expose] public section

@@ -4,7 +4,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Module.ULift
 public import Sheaf.CategoryTheory.CompactObject
-import Sheaf.CategoryTheory.DerivedModuleDirectSums
+import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import Mathlib.Algebra.Category.ModuleCat.Projective
 import Mathlib.Algebra.Category.ModuleCat.Products

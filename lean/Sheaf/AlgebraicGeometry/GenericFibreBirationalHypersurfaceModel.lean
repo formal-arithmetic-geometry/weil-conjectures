@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.MvPolynomial.Basic
 
 import Sheaf.AlgebraicGeometry.GenericFibreHypersurfaceFunctionFieldModel
-import Sheaf.AlgebraicGeometry.AffineBirationalOfFractionRingEquiv
+import WeilConjectures.AlgebraicGeometry.AffineBirationalOfFractionRingEquiv
 
 /-! # A birational hypersurface model of a geometrically integral generic fibre
 

@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
+public import WeilConjectures.AlgebraicGeometry.LocallyRankedExteriorComplex
 public import Sheaf.RingTheory.KoszulRegularSequence
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.DerivedCategory
@@ -13,6 +13,7 @@ public import Mathlib.LinearAlgebra.Dimension.Finrank
 
 import Sheaf.AlgebraicGeometry.KoszulRegularImmersionExtSheaf
 import Sheaf.AlgebraicGeometry.ClosedImmersionRankStrataScalarFormality
+public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 
 /-!
 # Derived Hom for a Koszul-regular closed immersion

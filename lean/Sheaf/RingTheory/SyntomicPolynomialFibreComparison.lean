@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Sheaf.RingTheory.CompleteIntersectionOverField
 import Mathlib.RingTheory.TensorProduct.MvPolynomial
-import Sheaf.RingTheory.FibreLocalRingNaturalIso
+import WeilConjectures.RingTheory.FibreLocalRingNaturalIso
 
 /-! # Comparison of a fixed polynomial presentation with its closed fibre
 

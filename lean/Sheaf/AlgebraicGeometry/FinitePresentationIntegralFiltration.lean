@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.Subobject.Limits
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import Sheaf.AlgebraicGeometry.FinitePresentationSupportReductionFiltration
-import Sheaf.CategoryTheory.FiniteFiltrationRefinement
+import WeilConjectures.CategoryTheory.FiniteFiltrationRefinement
 
 /-! # Integral-ideal filtrations in the finite-presentation interface
 

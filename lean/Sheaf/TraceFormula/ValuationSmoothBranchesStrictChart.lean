@@ -18,7 +18,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Sheaf.SixFunctors.TraceFormula.NodalFamilyEtaleLocalModel
 import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Sheaf.AlgebraicGeometry.FiniteEtaleClosedSubschemeSection
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleClosedSubschemeSection
 import Mathlib.RingTheory.Smooth.Basic
 import Sheaf.AlgebraicGeometry.EtaleLocalNormalForm
 

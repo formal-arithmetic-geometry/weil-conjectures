@@ -14,7 +14,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.RingTheory.Ideal.Maps
 import WeilConjectures.AlgebraicGeometry.FreeComplexMapsToResolution
 import Sheaf.RingTheory.TorIdealConnectingFormula
-import Sheaf.RingTheory.TorIdealComparisonCompatibility
+import WeilConjectures.RingTheory.TorIdealComparisonCompatibility
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 

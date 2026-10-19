@@ -6,7 +6,7 @@ Authors: SHEAF group E4
 module
 
 public import Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation
-import Sheaf.AlgebraicGeometry.PullbackTensorUnitSection
+import WeilConjectures.AlgebraicGeometry.PullbackTensorUnitSection
 
 /-! # Local multiplication in the ideal tensor kernel
 

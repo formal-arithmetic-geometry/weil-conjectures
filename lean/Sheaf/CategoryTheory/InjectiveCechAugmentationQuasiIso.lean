@@ -9,7 +9,7 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
-import Sheaf.CategoryTheory.SmallInjectivePresheafCechExact
+import WeilConjectures.CategoryTheory.SmallInjectivePresheafCechExact
 import Sheaf.CategoryTheory.SheafCechAugmentationDegreeZero
 import Mathlib.Algebra.Homology.SingleHomology
 

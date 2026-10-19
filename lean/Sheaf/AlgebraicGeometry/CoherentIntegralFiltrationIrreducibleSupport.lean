@@ -5,7 +5,7 @@ Authors: SHEAF group P3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CoherentIntegralFiltration
+public import WeilConjectures.AlgebraicGeometry.CoherentIntegralFiltration
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.CoherentSupportAdicChain
 import Sheaf.AlgebraicGeometry.CoherentGenericFilteredExtension

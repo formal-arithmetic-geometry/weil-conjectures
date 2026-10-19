@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation
 import Sheaf.AlgebraicGeometry.TensorIdealSectionLocalMultiplication
-import Sheaf.AlgebraicGeometry.ClosedImmersionUnitEpi
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitEpi
 import Mathlib.Topology.Sheaves.LocallySurjective
 
 /-! # Homogeneous quotient multiplication on the degree kernels

@@ -6,8 +6,8 @@ Authors: SHEAF group X3
 module
 
 public import Sheaf.AlgebraicGeometry.ScalarUnitCohomologyComparisonFamily
-import Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisExtFunctorSquare
-import Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison
+import WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisExtFunctorSquare
+import WeilConjectures.CategoryTheory.ExtExactFunctorIdentityComparison
 import Mathlib.CategoryTheory.Sites.Adjunction
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 

@@ -5,7 +5,7 @@ Authors: SHEAF group W3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CoherentIntegralFiltration
+public import WeilConjectures.AlgebraicGeometry.CoherentIntegralFiltration
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact

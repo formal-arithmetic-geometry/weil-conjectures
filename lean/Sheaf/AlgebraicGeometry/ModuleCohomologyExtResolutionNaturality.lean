@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Sheaf.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
+import WeilConjectures.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
 import Sheaf.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
 public import Mathlib.CategoryTheory.Adjunction.Whiskering
 

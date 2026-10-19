@@ -11,12 +11,12 @@ public import Sheaf.RingTheory.CompleteIntersectionOverField
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import all Sheaf.RingTheory.SyntomicPolynomialFibreComparison
 import Sheaf.RingTheory.LciConormalFreeRankCodimension
-import Sheaf.RingTheory.SyntomicLocalKernelIntersection
-import Sheaf.RingTheory.LocalizedIdealConormalGeneratorBound
+import WeilConjectures.RingTheory.SyntomicLocalKernelIntersection
+import WeilConjectures.RingTheory.LocalizedIdealConormalGeneratorBound
 import all Sheaf.RingTheory.SyntomicFibreKernelGenerators
 import Mathlib.RingTheory.Nakayama
 import Mathlib.RingTheory.TensorProduct.MvPolynomial
-import Sheaf.RingTheory.FibreLocalRingNaturalIso
+import WeilConjectures.RingTheory.FibreLocalRingNaturalIso
 
 /-!
 # Local kernel generators with the fibre codimension count

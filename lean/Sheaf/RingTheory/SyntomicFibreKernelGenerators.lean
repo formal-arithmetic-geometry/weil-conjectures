@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Sheaf.RingTheory.CompleteIntersectionOverField
 import Sheaf.RingTheory.SyntomicPolynomialFibreComparison
-import Sheaf.RingTheory.LocalizedIdealConormalGeneratorBound
+import WeilConjectures.RingTheory.LocalizedIdealConormalGeneratorBound
 import Sheaf.RingTheory.LciConormalFreeRankCodimension
 import Mathlib.RingTheory.Polynomial.Basic
 

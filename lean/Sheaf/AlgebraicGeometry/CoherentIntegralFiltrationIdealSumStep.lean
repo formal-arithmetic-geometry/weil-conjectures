@@ -4,12 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CoherentIntegralFiltration
+public import WeilConjectures.AlgebraicGeometry.CoherentIntegralFiltration
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
 import Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationBiproductSucc
-import Sheaf.AlgebraicGeometry.PushforwardFinSumSuccIso
+import WeilConjectures.AlgebraicGeometry.PushforwardFinSumSuccIso
 
 /-! The split-sum induction step for coherent integral filtrations.
 (blueprint: lem-weil-pbc-coherent-integral-filtration-ideal-sum-succ)

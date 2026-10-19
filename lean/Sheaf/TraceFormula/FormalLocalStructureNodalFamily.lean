@@ -10,14 +10,14 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.RingTheory.AdicCompletion.Algebra
-public import Sheaf.RingTheory.CompletionMapForLocalHom
+public import WeilConjectures.RingTheory.CompletionMapForLocalHom
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.RingTheory.MvPolynomial.Basic
 public import Mathlib.Topology.JacobsonSpace
 
 import Mathlib.RingTheory.AdicCompletion.Basic
 import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Sheaf.RingTheory.MvPowerSeriesQuotientKernel
+import WeilConjectures.RingTheory.MvPowerSeriesQuotientKernel
 import Sheaf.AlgebraicGeometry.FibreStalkQuotient
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
