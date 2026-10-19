@@ -1,147 +1,151 @@
 {
-  "id": "lem-exc-coinduced-discrete-embedding",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "def-exc-continuous-cohomology",
-      "place": "The final continuous-cochain comparison clause: the coinduced object used to efface positive cochain cohomology",
-      "via": [
-        "lem-exc-cochains-derived-invariants"
-      ]
-    },
-    "same_as": []
+ "id": "lem-exc-coinduced-discrete-embedding",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-exc-continuous-cohomology",
+   "place": "The final continuous-cochain comparison clause: the coinduced object used to efface positive cochain cohomology",
+   "via": [
+    "lem-exc-cochains-derived-invariants"
+   ]
   },
-  "kind": "statement",
-  "title": "Discrete continuous modules embed in coinduced modules",
-  "statement": "Let $G$ be a profinite group, $A$ a finite ring, and $M$ a left $A$-module with an action of $G$ by $A$-linear automorphisms such that each $m\\in M$ has open stabilizer [lem-exc-discrete-modules-abelian]. Give $M$ the discrete topology and put $D(M)=\\operatorname{Cont}(G,M)$, with pointwise $A$-module structure and left $G$-action $(h\\cdot f)(x)=f(xh)$. Every $f\\in D(M)$ has open stabilizer, so $D(M)$ is again an object of the same category. The map $\\iota_M:M\\to D(M)$ defined by $\\iota_M(m)(x)=x m$ is $A$-linear, $G$-equivariant, injective, and natural in $M$.",
-  "source": {
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Discrete continuous modules embed in coinduced modules",
+ "statement": "Let $G$ be a profinite group, $A$ a finite ring, and $M$ a left $A$-module with an action of $G$ by $A$-linear automorphisms such that each $m\\in M$ has open stabilizer [lem-exc-discrete-modules-abelian]. Give $M$ the discrete topology and put $D(M)=\\operatorname{Cont}(G,M)$, with pointwise $A$-module structure and left $G$-action $(h\\cdot f)(x)=f(xh)$. Every $f\\in D(M)$ has open stabilizer, so $D(M)$ is again an object of the same category. The map $\\iota_M:M\\to D(M)$ defined by $\\iota_M(m)(x)=x m$ is $A$-linear, $G$-equivariant, injective, and natural in $M$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04JP, label definition-G-module-continuous, for the category; Tag 0DVG, label section-continuous-group-cohomology, final profinite comparison (coinduced embedding is an agent-written proof ingredient, not stated there)"
+ },
+ "stmt_deps": [
+  "lem-exc-discrete-modules-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Construct the representation on LocallyConstant G M.obj.V by the linear precomposition map LocallyConstant.comapₗ A for x ↦ x*h. Extensionality, one_mul and associativity prove the action laws. No abelian-category structure or injective-resolution theorem is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04JP, label definition-G-module-continuous, for the category; Tag 0DVG, label section-continuous-group-cohomology, final profinite comparison (coinduced embedding is an agent-written proof ingredient, not stated there)"
+    "place": "Tag 04JP, label definition-G-module-continuous; the action calculation is the agent-written construction used with Tag 0DVG"
+   }
   },
-  "stmt_deps": [
-    "lem-exc-discrete-modules-abelian"
-  ],
-  "proof": [
-    {
-      "text": "Pointwise addition and scalar multiplication make $D(M)=\\operatorname{Cont}(G,M)$ an $A$-module. For $h,k\\in G$ and $f\\in D(M)$, $((hk)\\cdot f)(x)=f(xhk)=(h\\cdot(k\\cdot f))(x)$ and $(1\\cdot f)(x)=f(x)$, so $(h\\cdot f)(x)=f(xh)$ is a left action. Each translate is $A$-linear and continuous because it is precomposition by the homeomorphism $x\\mapsto xh$.",
-      "uses": [
-        "lem-exc-discrete-modules-abelian"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 04JP, label definition-G-module-continuous; the action calculation is the agent-written construction used with Tag 0DVG"
-      }
-    },
-    {
-      "text": "For $f\\in D(M)$, apply [lem-exc-coinduced-functions-open-stabilizer] to obtain an open normal subgroup $U$ with $f(xu)=f(x)$ for all $x\\in G$ and $u\\in U$. Thus $(u\\cdot f)(x)=f(xu)=f(x)$, so $U$ is contained in the stabilizer of $f$. A subgroup containing an open subgroup is open, hence every element of $D(M)$ has open stabilizer and $D(M)$ is an object of the same category of discrete continuous $G$-modules.",
-      "uses": [
-        "lem-exc-coinduced-functions-open-stabilizer",
-        "lem-exc-discrete-modules-abelian"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 04JP, label definition-G-module-continuous"
-      }
-    },
-    {
-      "text": "Define $\\iota_M(m)(x)=xm$. This function is continuous: the stabilizer of $m$ is open, and the orbit map is constant on each left coset $xH$ of the stabilizer $H$ of $m$, since $x h m=x m$ for $h\\in H$. It is $A$-linear pointwise. For $h,x\\in G$, $(h\\cdot\\iota_M(m))(x)=\\iota_M(m)(xh)=(xh)m=x(hm)=\\iota_M(hm)(x)$, so it is $G$-equivariant. Evaluation at the identity gives $\\iota_M(m)(1)=m$, proving injectivity. If $u:M\\to N$ is an equivariant $A$-linear map, then $(D(u)\\circ\\iota_M)(m)(x)=u(xm)=x u(m)=(\\iota_N\\circ u)(m)(x)$, so the construction is natural in $M$.",
-      "uses": [
-        "lem-exc-discrete-modules-abelian"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0DVG, label section-continuous-group-cohomology, coinduced embedding construction (agent-written proof ingredient)"
-      }
-    }
-  ],
-  "proof_deps": [
-    "lem-exc-discrete-modules-abelian",
+  {
+   "text": "For $f\\in D(M)$, apply [lem-exc-coinduced-functions-open-stabilizer] to obtain an open normal subgroup $U$ with $f(xu)=f(x)$ for all $x\\in G$ and $u\\in U$. Thus $(u\\cdot f)(x)=f(xu)=f(x)$, so $U$ is contained in the stabilizer of $f$. A subgroup containing an open subgroup is open, hence every element of $D(M)$ has open stabilizer and $D(M)$ is an object of the same category of discrete continuous $G$-modules.",
+   "uses": [
     "lem-exc-coinduced-functions-open-stabilizer"
-  ],
-  "proof_origin": {
-    "by": "agent",
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04JP and Tag 0DVG, label section-continuous-group-cohomology"
+    "place": "Tag 04JP, label definition-G-module-continuous"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "continuous functions on profinite group coinduced discrete module embedding equivariant",
-      "results": "HTTP 500 from LeanSearch on 2026-10-10.",
-      "date": "2026-10-10",
-      "verdict": "service unavailable; no match established"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A discrete continuous group module embeds equivariantly into continuous maps from profinite group to module with translation action",
-      "results": "ContinuousCohomology.I and Iobj_ρ_apply concern TopModuleCat with compact-open topology and a different action; no match for the discrete coinduced object.",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "rg 'coinduc|Coinduc|coinduced' Mathlib/RepresentationTheory",
-      "results": "RepresentationTheory/Coinduced.lean and Continuous/Basic.lean contain related constructions, but no discrete-object embedding.",
-      "date": "2026-10-10",
-      "verdict": "no exact match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lem-exc-cochains-derived-invariants",
-    "by": "worker",
-    "date": "2026-10-10"
-  },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-prop-h2",
-  "split_report": {
-    "date": "2026-10-10",
-    "item": "lem-exc-coinduced-discrete-embedding",
-    "worker": "stage1",
-    "summary": "Repaired the split by restoring the imported item statement and dependencies, replacing the auxiliary node with the strictly smaller profinite-to-discrete open-normal-subgroup fact, and deriving the coinduced open-stabilizer conclusion in step 2. Corrected the orbit-map cosets and verified the local Stacks passages.",
-    "blueprint": "Realizes the final continuous-cochain comparison clause of def-exc-continuous-cohomology: the new node supplies the topological factorization used to show the coinduced object remains discrete, while the item steps establish the action and canonical natural monomorphism.",
-    "tool_uses": []
-  },
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-cd3",
-    "group": "J1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cd3 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 14:48 return (head f69490006); all three points checked repaired: (1) D1: the new node lem-exc-coinduced-functions-open-stabilizer is now the strictly smaller topological fact (continuous f from a profinite G to a discrete S is right-invariant under an open normal U), no modules in it, searches redone; step 2 derives Stab(f) contains U, hence open, from it; step 1 proves the action and continuity of translates citing only lem-exc-discrete-modules-abelian. (2) E7/B3: item statement and stmt_deps identical to sheaf-dag (git diff starts at proof). (3) F1: report reads etale-cohomology.tex, 04JP (definition-G-module-continuous, line 8786, remark at 8809: continuity iff open stabilizers, verified locally) and 0DVG, WANTED none, proof_origin by agent; step 3 now says left coset xH. Mathematics: new node true (fibres open, choose open normal V_x with xV_x in the fibre, finite subcover x_iV_i, U = intersection; tested on trivial G, finite discrete G, constant maps); step 3 continuity (orbit map constant on open left cosets), linearity, equivariance (xh)m=x(hm), injectivity by evaluation at 1, naturality correct. Item mathlib_searches text edits and status split are split-owned fields. FIX: dag/nodes/sec-curve-estimates/lem-exc-coinduced-functions-open-stabilizer.json: statement and stmt_deps: dropped the citation [lem-exc-discrete-modules-abelian] after 'discrete topological space' (that node does not define a discrete space; stmt_deps now []). Start Sat Oct 10 03:06:47 PM UTC 2026, end Sat Oct 10 03:07:22 PM UTC 2026.; 1 file(s) fixed by the reviewer"
-  },
-  "lean": {
-    "module": "Sheaf.RepresentationTheory.CoinducedDiscreteEmbedding",
-    "declaration": "Rep.exists_coinduced_discrete_embedding",
-    "file": "lean/Sheaf/RepresentationTheory/CoinducedDiscreteEmbedding.lean",
-    "statement": "theorem exists_coinduced_discrete_embedding (G : Type u) [TopologicalSpace G] [Group G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (A : Type v) [Ring A] [Finite A] : ∃ D : DiscreteContinuousRep.{v, u, max u w} A G ⥤ DiscreteContinuousRep.{v, u, max u w} A G, ∃ e : ∀ M : DiscreteContinuousRep.{v, u, max u w} A G, (D.obj M).obj.V ≃ₗ[A] LocallyConstant G M.obj.V, ∃ ι : 𝟭 (DiscreteContinuousRep.{v, u, max u w} A G) ⟶ D, (∀ (M : DiscreteContinuousRep.{v, u, max u w} A G) (h : G) (f : (D.obj M).obj.V) (x : G), e M ((D.obj M).obj.ρ h f) x = e M f (x * h)) ∧ (∀ (M N : DiscreteContinuousRep.{v, u, max u w} A G) (a : M ⟶ N) (f : (D.obj M).obj.V) (x : G), e N ((D.map a).hom.hom f) x = a.hom.hom (e M f x)) ∧ (∀ (M : DiscreteContinuousRep.{v, u, max u w} A G) (m : M.obj.V) (x : G), e M ((ι.app M).hom.hom m) x = M.obj.ρ x m) ∧ (∀ M : DiscreteContinuousRep.{v, u, max u w} A G, Function.Injective (ι.app M).hom.hom)",
-    "branch": "sheaf-dag",
-    "by": "H1",
-    "date": "2026-10-11",
-    "existing": false
-  },
-  "reviewed_lean": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "AUTO",
-    "group": "H1",
-    "result": "pass",
-    "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "text": "For m, construct its orbit function x ↦ M.obj.ρ x m. Around x use the open set {y | M.obj.ρ (x⁻¹*y) m = m}, the inverse image of the given open stabilizer of m. Applying M.obj.ρ x shows the orbit function is constant there. Pointwise linearity and the representation multiplication law give the equivariant orbit map. Define the coinduced morphism by LocallyConstant.mapₗ A on the underlying linear map. Extensionality proves the functor laws; Rep.hom_comm_apply proves naturality. Use the identity linear equivalence on the constructed function modules. The three evaluation formulas are definitional equalities, and evaluation at one and map_one prove injectivity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, label section-continuous-group-cohomology, coinduced embedding construction (agent-written proof ingredient)"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-exc-coinduced-functions-open-stabilizer"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04JP and Tag 0DVG, label section-continuous-group-cohomology; explicit right translation and orbit functions, generalizing the integer-coefficient construction in Sheaf.RepresentationTheory.LocallyConstantCochainsAcyclicEmbedding"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "continuous functions on profinite group coinduced discrete module embedding equivariant",
+   "results": "HTTP 500 from LeanSearch on 2026-10-10.",
+   "date": "2026-10-10",
+   "verdict": "service unavailable; no match established"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A discrete continuous group module embeds equivariantly into continuous maps from profinite group to module with translation action",
+   "results": "ContinuousCohomology.I and Iobj_ρ_apply concern TopModuleCat with compact-open topology and a different action; no match for the discrete coinduced object.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg 'coinduc|Coinduc|coinduced' Mathlib/RepresentationTheory",
+   "results": "RepresentationTheory/Coinduced.lean and Continuous/Basic.lean contain related constructions, but no discrete-object embedding.",
+   "date": "2026-10-10",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-exc-cochains-derived-invariants",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-exc-coinduced-discrete-embedding",
+  "worker": "stage1",
+  "summary": "Repaired the split by restoring the imported item statement and dependencies, replacing the auxiliary node with the strictly smaller profinite-to-discrete open-normal-subgroup fact, and deriving the coinduced open-stabilizer conclusion in step 2. Corrected the orbit-map cosets and verified the local Stacks passages.",
+  "blueprint": "Realizes the final continuous-cochain comparison clause of def-exc-continuous-cohomology: the new node supplies the topological factorization used to show the coinduced object remains discrete, while the item steps establish the action and canonical natural monomorphism.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cd3",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cd3 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 14:48 return (head f69490006); all three points checked repaired: (1) D1: the new node lem-exc-coinduced-functions-open-stabilizer is now the strictly smaller topological fact (continuous f from a profinite G to a discrete S is right-invariant under an open normal U), no modules in it, searches redone; step 2 derives Stab(f) contains U, hence open, from it; step 1 proves the action and continuity of translates citing only lem-exc-discrete-modules-abelian. (2) E7/B3: item statement and stmt_deps identical to sheaf-dag (git diff starts at proof). (3) F1: report reads etale-cohomology.tex, 04JP (definition-G-module-continuous, line 8786, remark at 8809: continuity iff open stabilizers, verified locally) and 0DVG, WANTED none, proof_origin by agent; step 3 now says left coset xH. Mathematics: new node true (fibres open, choose open normal V_x with xV_x in the fibre, finite subcover x_iV_i, U = intersection; tested on trivial G, finite discrete G, constant maps); step 3 continuity (orbit map constant on open left cosets), linearity, equivariance (xh)m=x(hm), injectivity by evaluation at 1, naturality correct. Item mathlib_searches text edits and status split are split-owned fields. FIX: dag/nodes/sec-curve-estimates/lem-exc-coinduced-functions-open-stabilizer.json: statement and stmt_deps: dropped the citation [lem-exc-discrete-modules-abelian] after 'discrete topological space' (that node does not define a discrete space; stmt_deps now []). Start Sat Oct 10 03:06:47 PM UTC 2026, end Sat Oct 10 03:07:22 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.CoinducedDiscreteEmbedding",
+  "declaration": "Rep.exists_coinduced_discrete_embedding",
+  "file": "lean/Sheaf/RepresentationTheory/CoinducedDiscreteEmbedding.lean",
+  "statement": "theorem exists_coinduced_discrete_embedding (G : Type u) [TopologicalSpace G] [Group G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (A : Type v) [Ring A] [Finite A] : ∃ D : DiscreteContinuousRep.{v, u, max u w} A G ⥤ DiscreteContinuousRep.{v, u, max u w} A G, ∃ e : ∀ M : DiscreteContinuousRep.{v, u, max u w} A G, (D.obj M).obj.V ≃ₗ[A] LocallyConstant G M.obj.V, ∃ ι : 𝟭 (DiscreteContinuousRep.{v, u, max u w} A G) ⟶ D, (∀ (M : DiscreteContinuousRep.{v, u, max u w} A G) (h : G) (f : (D.obj M).obj.V) (x : G), e M ((D.obj M).obj.ρ h f) x = e M f (x * h)) ∧ (∀ (M N : DiscreteContinuousRep.{v, u, max u w} A G) (a : M ⟶ N) (f : (D.obj M).obj.V) (x : G), e N ((D.map a).hom.hom f) x = a.hom.hom (e M f x)) ∧ (∀ (M : DiscreteContinuousRep.{v, u, max u w} A G) (m : M.obj.V) (x : G), e M ((ι.app M).hom.hom m) x = M.obj.ρ x m) ∧ (∀ M : DiscreteContinuousRep.{v, u, max u w} A G, Function.Injective (ι.app M).hom.hom)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261019T112454-L-3943434",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
