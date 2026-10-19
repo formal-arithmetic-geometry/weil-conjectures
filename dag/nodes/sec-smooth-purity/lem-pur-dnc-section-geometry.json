@@ -23,30 +23,53 @@
  ],
  "proof": [
   {
-   "text": "Use the blow-up construction of [def-pur-dnc-section-family] and the section invariant of [def-pur-section-invariant]. The local coordinates are those of [sbc-thm-etale-local-normal-form], and the comparison of family fibers uses condition (3) of [def-pur-co-smoothness].\nItem (1): the blow-up along $s(B)\\times\\{0\\}$ is fiberwise trivial\naway from the center, and the strict transform of\n$V\\times_B\\{0\\}$ is removed; the fiber of $\\widetilde g$ over\n$t\\neq0$ is $V$ with the section $s$, and the exceptional\ndivision of the affine cone identifies the fiber over $0$ with the\nnormal bundle $N_s$ of the section. Items (2): the coordinates are\nthe ones of the relative linearization; on the chart\n$u_i=x_i/t$, the map $\\widetilde g$ is the projection\n$(u,x',t)\\mapsto(x',t)$ into the base coordinates, smooth of\nrelative dimension $d$; on the remaining charts of the blow-up the\nsame computation after substituting a generator of the center gives\nsmoothness. Items (3),(4),(5) are the standard Rees-algebra\ncalculations, with the normal-bundle identification of\n[def-pur-normal-bundle] and its base-change behavior; the family\nobject of the standard pair is computed by the rank-$d$ vector-bundle\npurity of [cor-pur-vector-bundle-purity] since\n$\\mathbf A^d_B\\to B$ is the trivial rank-$d$ bundle.",
+   "text": "For the finite purity coefficients of [def-pur-conventions], use the maximal-ideal membership and uniformizer-generation clauses of [lem-weil-l-adic-extension-integers-dvr]. The spectral absolute value of ell is its p-adic norm, strictly less than one. Hence ell lies in the maximal ideal, so ell^n lies in its nth power and vanishes in O_E/(varpi^n), including its ULift. Mathlib charP_of_card_eq_prime_pow gives characteristic p for k_0 from its recorded cardinality, and injectivity of k_0 to k gives characteristic p for k. Since ell and p are distinct primes, ell is nonzero in k and therefore a unit. Map this unit to global sections of T. This proves invertibleExponent without a ramification-index divisibility hypothesis.",
    "uses": [
-    "def-pur-dnc-section-family",
-    "def-pur-section-invariant",
-    "sbc-thm-etale-local-normal-form",
-    "def-pur-co-smoothness",
-    "def-pur-normal-bundle",
-    "cor-pur-vector-bundle-purity"
+    "def-pur-conventions",
+    "lem-weil-l-adic-extension-integers-dvr"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For compactifiable, finite type of B over the field implies that B is locally Noetherian and quasi-compact (Mathlib LocallyOfFiniteType.isLocallyNoetherian and QuasiCompact.compactSpace_of_compactSpace), hence quasi-separated. Apply [thm-nagata-compactification] to g. No new hypothesis or compactification datum is added.",
+   "uses": [
+    "thm-nagata-compactification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the normal projection use the canonical closed-immersion factorization purityNormalProjection of [def-pur-normal-bundle]. Its composite with s is the affine relative-gluing projection to V. Since s is separated, IsAffineHom.of_comp makes this projection to B affine. It equals the published normalConeProj g s by purityNormalProjection_eq and s followed by g equal to the identity. This gives normalQuasiCompact. The published normalConeData, obtained by base change from smoothOfRelativeDimension_deformationSpaceProj along t=0, supplies smoothness of relative dimension d. Affineness supplies separatedness and quasi-compactness, and smoothness supplies local finite type. Apply compactifiable to prove normalCompactifiable.",
+   "uses": [
+    "def-pur-normal-bundle"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Retain the actual section-invariant and finite comparison realization of [def-pur-finite-section-comparison]. For sectionBaseChange, apply the general smooth exceptional base-change compatibility theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension_general of [prop-asd-smooth-base-change], retaining the upstream-sync public compatibility import, to the actual compact-support adjunction mate. Evaluate at the coefficient unit, pass to dualizingComplexBaseChangeMap using its IsIso equivalence, and compose the two canonical inverse-image composition isomorphisms along hs. This gives the displayed isomorphism, rather than choosing an arbitrary endpoint isomorphism.",
+   "uses": [
+    "def-pur-finite-section-comparison",
+    "prop-asd-smooth-base-change"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For fibreOne and fibreZero, retain the published extended-Rees deformation space and its actual one- and zero-fibre pullback squares. Supply their smoothness from smoothOfRelativeDimension_deformationSpaceProj, coefficient invertibility from invertibleExponent, and compactifiability from compactifiable and normalCompactifiable. Apply sectionBaseChange to each square and the published augmentation-section identities. The local-coordinate, punctured-trivialization, standard-pair and geometric base-change calculations remain the existing upstream constructions imported through Coordinates and BaseChange; this module only assembles the canonical fibre comparisons. No unit-level step is replaced.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pur-dnc-section-family",
-  "def-pur-section-invariant",
-  "sbc-thm-etale-local-normal-form",
-  "def-pur-co-smoothness",
+  "def-pur-conventions",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "thm-nagata-compactification",
   "def-pur-normal-bundle",
-  "cor-pur-vector-bundle-purity"
+  "def-pur-finite-section-comparison",
+  "prop-asd-smooth-base-change"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-lem-geometry/lem-pur-dnc-section-geometry.md",
-  "place": "## Proof"
+  "place": "G3 stage-3 proof: coefficient exponent, Nagata domain checks, affine normal projection and canonical actual-fibre base-change maps; original unit route retained."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -133,5 +156,15 @@
   "group": "Q31",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable sources, all statement dependencies, canonical constructions, hypotheses, conclusions, edge cases, universes, report sections, and verbatim signatures. All five modules passed per-file scompile.py checks without diagnostics. No repairs required; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261019T192740-L-1862566",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
