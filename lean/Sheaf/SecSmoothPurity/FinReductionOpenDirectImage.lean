@@ -8,9 +8,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.Algebra.Category.ModuleCat.AB
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
-import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 
 /-!
@@ -52,6 +50,17 @@ theorem finReductionOpenDirectImage (Λ : Type (u + 1)) [CommRing Λ]
         upperStar (ModuleCat.{u + 1} Λ) (U.nilradical.subschemeι) ⋙
           lowerStar (ModuleCat.{u + 1} Λ) ((U.nilradical.subschemeι ≫ j).liftNilradical) ⋙
             lowerStar (ModuleCat.{u + 1} Λ) (X.nilradical.subschemeι)) := by
-  sorry
+  have : Surjective U.nilradical.subschemeι :=
+    (reduction_isReduced_isClosedImmersion_isSurjective_isUniversalHomeomorphism U).2.2.1
+  have : (upperStar (ModuleCat.{u + 1} Λ) U.nilradical.subschemeι).IsEquivalence :=
+    isEquivalence_upperStar _ _
+  let e := asIso (upperStarLowerStarAdjunction
+    (ModuleCat.{u + 1} Λ) U.nilradical.subschemeι).unit
+  refine ⟨(Functor.leftUnitor _).symm ≪≫ Functor.isoWhiskerRight e _ ≪≫
+    Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ ?_⟩
+  exact lowerStarComp (ModuleCat.{u + 1} Λ) U.nilradical.subschemeι j ≪≫
+    (lowerStarComp (ModuleCat.{u + 1} Λ)
+      ((U.nilradical.subschemeι ≫ j).liftNilradical) X.nilradical.subschemeι
+      (U.nilradical.subschemeι ≫ j) (Hom.liftNilradical_subschemeι _).symm).symm
 
 end AlgebraicGeometry.Etale

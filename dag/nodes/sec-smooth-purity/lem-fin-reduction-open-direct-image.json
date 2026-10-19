@@ -17,56 +17,54 @@
  ],
  "proof": [
   {
-   "text": "The induced reduction square commutes: $r\\circ j_{\\mathrm{red}}=j\\circ s$. Indeed, identify $U$ with its open image using [def-weil-open-immersion]. The nilradical sheaf of $U$ is the restriction of that of $X$: on every affine open $V\\subseteq U$, both are the nilradical of the same ring $\\Gamma(V,\\mathcal O_U)=\\Gamma(V,\\mathcal O_X)$. The quotient maps defining reduction in [def-weil-pbc-scheme-reduction] therefore restrict to one another. Thus $j_{\\mathrm{red}}$ is the inclusion of the corresponding open in $X_{\\mathrm{red}}$, and both composites have the same underlying inclusion and the same map of structure sheaves.",
+   "text": "Apply lem-weil-pbc-reduction-universal-homeomorphism to U. Its reduction s = U.nilradical.subschemeι is a surjective closed immersion, hence a universal homeomorphism. The induced reduction map j_red = (s ≫ j).liftNilradical satisfies j_red ≫ r = s ≫ j by Scheme.Hom.liftNilradical_subschemeι. This is the universal property of reduction; no open-immersion property is needed for this equality.",
    "uses": [
-    "def-weil-open-immersion",
+    "lem-weil-pbc-reduction-universal-homeomorphism",
     "def-weil-pbc-scheme-reduction"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-fin-open-degree-zero.proof.md",
-    "place": "First paragraph: reduction comparison; Schemes Tag 01J4 (schemes-definition-reduced-induced-scheme)"
+    "place": "Proof, first paragraph, reduction comparison before Noetherian induction"
    }
   },
   {
-   "text": "By [lem-weil-pbc-reduction-universal-homeomorphism] applied to the arbitrary scheme $U$, its reduction $s:U_{\\mathrm{red}}\\to U$ is a universal homeomorphism. Apply [thm-weil-pbc-universal-homeomorphism-invariance] to $s$: the inverse and direct images on the small etale topoi are quasi-inverse, so the adjunction unit on the underlying abelian sheaf is an isomorphism $\\eta_{s,F}:F\\xrightarrow{\\sim}s_*s^{-1}F$, natural in $F$. For the constant commutative ring $\\Lambda$, [prop-weil-pbc-inverse-image-modules-exact], clauses (1)--(3), identifies $s^{-1}\\Lambda_U$ with $\\Lambda_{U_{\\mathrm{red}}}$ and identifies the module adjunction unit with this abelian unit. In particular $\\eta_{s,F}$ is $\\Lambda_U$-linear. Its inverse is linear as well: if $y=\\eta_{s,F}(x)$ and $a$ is a local coefficient section, then $\\eta_{s,F}^{-1}(ay)=\\eta_{s,F}^{-1}(\\eta_{s,F}(ax))=ax$. Hence it is an isomorphism of module sheaves. The reduction theorem and invariance theorem require neither a nilpotent bound on the nilradical nor any Noetherian or finiteness hypothesis.",
+   "text": "Use the coefficient-generic isEquivalence_upperStar from prop-weil-pbc-universal-homeomorphism-topos with A = ModuleCat Λ and the universal homeomorphism s. The adjunction s^* ⊣ s_* therefore has invertible unit, by the general adjunction theorem for equivalences. Let e : Id ≅ s^* ⋙ s_* be this unit isomorphism. All of its components are morphisms of module sheaves, so linearity requires no separate lifting from abelian sheaves.",
    "uses": [
-    "lem-weil-pbc-reduction-universal-homeomorphism",
-    "thm-weil-pbc-universal-homeomorphism-invariance",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "prop-weil-pbc-universal-homeomorphism-topos",
+    "def-weil-pbc-inverse-image"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03SI (proposition-topological-invariance), (1)--(2), with Tag 04DZ (theorem-topological-invariance); morphisms.tex Tag 054M (lemma-reduction-universal-homeomorphism); sites-modules.tex Tag 03D7 (lemma-adjoint-pullback-pushforward-modules)"
+    "place": "Tag 03SI, topological invariance, applied to module-valued sheaves"
    }
   },
   {
-   "text": "Put $G=s^{-1}F$. Let $d_{a,b}:(a\\circ b)_*\\xrightarrow{\\sim}a_*b_*$ be the natural module direct-image composition comparison of [lem-weil-pbc-inverse-image-composition-module-linear], clause (1). Define the required map to be the composite $$j_*F\\xrightarrow{\\ j_*\\eta_{s,F}\\ }j_*s_*G\\xrightarrow{\\ d_{j,s,G}^{-1}\\ }(j\\circ s)_*G=(r\\circ j_{\\mathrm{red}})_*G\\xrightarrow{\\ d_{r,j_{\\mathrm{red}},G}\\ }r_*j_{\\mathrm{red},*}G.$$ The middle equality uses step 1. The functor $j_*$ of [def-weil-pbc-direct-image] sends the inverse of $\\eta_{s,F}$ to an inverse of $j_*\\eta_{s,F}$; the other arrows are module isomorphisms by the cited composition theorem. Thus the composite is a $\\Lambda$-linear isomorphism. For a module morphism $a:F\\to F\\prime$, naturality of the unit gives $s_*s^{-1}(a)\\circ\\eta_{s,F}=\\eta_{s,F\\prime}\\circ a$; apply $j_*$ and then the naturality squares for both $d$ comparisons to obtain $$r_*j_{\\mathrm{red},*}s^{-1}(a)\\circ\\alpha_F=\\alpha_{F\\prime}\\circ j_*(a),$$ where $\\alpha_F$ is the displayed composite. This proves naturality in $F$ without an additional base-change theorem.",
+   "text": "Whisker e on the right by j_*, obtaining j_* ≅ s^* ⋙ s_* ⋙ j_*, with the functor left unitor and associator inserted. The coefficient-generic lowerStarComp from lem-weil-pbc-inverse-image-composition gives s_* ⋙ j_* ≅ (s ≫ j)_*. Apply lowerStarComp again to j_red and r with specified composite s ≫ j, using the equality in step 1, and invert it to get (s ≫ j)_* ≅ j_red,* ⋙ r_*. Whisker this composite on the left by s^*. Transitivity gives the requested natural isomorphism. Naturality and module linearity hold because every factor is a natural isomorphism between ModuleCat Λ-valued sheaf functors.",
    "uses": [
-    "lem-weil-pbc-inverse-image-composition-module-linear",
+    "lem-weil-pbc-inverse-image-composition",
     "def-weil-pbc-direct-image"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D8 (lemma-push-pull-composition-modules); topologies.tex Tags 021I (lemma-morphism-big-small-etale) and 021J (lemma-composition-etale)"
+    "place": "Tag 03D8, direct-image composition; coefficient-generic implementation in Etale.lowerStarComp"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-open-immersion",
-  "def-weil-pbc-scheme-reduction",
   "lem-weil-pbc-reduction-universal-homeomorphism",
-  "thm-weil-pbc-universal-homeomorphism-invariance",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "def-weil-pbc-scheme-reduction",
+  "prop-weil-pbc-universal-homeomorphism-topos",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition",
   "def-weil-pbc-direct-image"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-fin-open-degree-zero.proof.md",
-  "place": "First paragraph: inverse-image equivalences for reduction and identification of direct images by adjunction; expanded using Stacks Tags 054M, 03SI and 03D8"
+  "place": "Proof, first paragraph, reduction comparison before Noetherian induction; G9 Lean proof uses coefficient-generic topological invariance and lowerStarComp directly in ModuleCat Λ, avoiding the separate SheafOfModules lifting API."
  },
  "mathlib_searches": [
   {
@@ -193,9 +191,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-inverse-image-composition-module-linear"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -221,5 +217,15 @@
   "group": "Q78",
   "result": "pass",
   "note": "Statement matches node clause by clause: IsOpenImmersion j; r,s = nilradical.subschemeι (recorded reduction); j_red = canonical liftNilradical with j_red≫r = s≫j; Nonempty NatIso lowerStar j ≅ upperStar s ⋙ lowerStar j_red ⋙ lowerStar r in node order (Λ-linear, natural in F); no extra hypotheses. Λ : Type (u+1)/ModuleCat.{u+1} forced by recorded lowerStar/upperStar IsGrothendieckAbelian.{u+1} and the lead's Mod(T_et,Λ) encoding decision. Node fields byte-identical except added lean; lean.statement verbatim in file; sorry-only; source/blueprint docstrings; no duplicate in side lean or Mathlib. nt_compile.py --json on snapshot file: clean, 4.0 s, no warnings. Minor: liftNilradical (existing upstream helper) not listed in reduction dep's declarations; no repair needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261019T034258-L-416737",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
