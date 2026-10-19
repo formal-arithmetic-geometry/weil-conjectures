@@ -13,9 +13,7 @@ import Mathlib.CategoryTheory.Limits.Types.Limits
 /-!
 # Sequential limits on weakly contractible pro-étale objects
 
-Source: literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/
-`sk-prop-pe-replete/det-pe-replete-on-contractible.md` and its proof
-(blueprint: det-pe-replete-on-contractible).
+Source: blueprint `det-pe-replete-on-contractible` (sec-proetale-coefficients, sk-prop-pe-replete).
 -/
 
 @[expose] public section
@@ -31,9 +29,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Every transition and every limit projection of an epimorphic inverse sequence is
 surjective on sections over a weakly contractible object.
 
-Source: blueprint main-20261015, `sec-proetale-coefficients`, unit `sk-prop-pe-replete`,
-`det-pe-replete-on-contractible.md` and `det-pe-replete-on-contractible.proof.md`
-(blueprint: det-pe-replete-on-contractible).
+Source: blueprint `det-pe-replete-on-contractible` (sec-proetale-coefficients, sk-prop-pe-replete).
 
 The hypothesis `hW` uses the existing weak-contractibility definition, equivalently
 condition 3 of `det-pe-weak-contractible-equivalences`: epimorphisms of sheaves induce
