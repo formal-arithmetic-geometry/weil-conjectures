@@ -48,6 +48,13 @@ noncomputable def endoPow {D : Type ux} [Category.{vx, ux} D] {X : D} (f : X ⟶
   | 0 => 𝟙 X
   | n + 1 => endoPow f n ≫ f
 
+private lemma endoPow_succ_left {D : Type ux} [Category.{vx, ux} D]
+    {X : D} (f : X ⟶ X) (n : ℕ) : endoPow f (n + 1) = f ≫ endoPow f n := by
+  induction n with
+  | zero => simp [endoPow]
+  | succ n ih =>
+    simpa only [endoPow, Category.assoc] using congrArg (· ≫ f) ih
+
 variable [EssentiallySmall.{r} C]
 variable (R : Sheaf J CommRingCat.{r})
 
@@ -59,8 +66,10 @@ local notation "𝒜" => ringedSiteModules.{r} 𝓞
 
 attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
 attribute [local instance] SheafOfModules.monoidalCategory
-attribute [local instance] SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients
-attribute [local instance] SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
+attribute [local instance]
+  SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients
+attribute [local instance]
+  SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
 
 
 /-- Multiplication by a global section on the unit module sheaf.
@@ -140,7 +149,7 @@ theorem principalKoszul_transition_square
       (CochainComplex.singleFunctor 𝒜 0).map (globalSectionMultiplication R t) ≫
         (CochainComplex.singleFunctor 𝒜 0).map
           (endoPow (globalSectionMultiplication R t) (m + 1)) := by
-  sorry
+  rw [Category.comp_id, ← Functor.map_comp, ← endoPow_succ_left]
 
 /-- The strict Koszul transition: multiplication by `t` in degree `-1`, identity in degree 0.
 Source: Stacks Tag 0A0E (blueprint: def-pur-principal-koszul-quotient-towers). -/
@@ -159,7 +168,8 @@ theorem principalQuotient_transition_zero
     (t : (SheafOfModules.unit 𝓞).sections) (m : ℕ) :
     endoPow (globalSectionMultiplication R t) (m + 2) ≫
       cokernel.π (endoPow (globalSectionMultiplication R t) (m + 1)) = 0 := by
-  sorry
+  rw [endoPow_succ_left _ (m + 1), Category.assoc,
+    cokernel.condition, comp_zero]
 
 /-- The strict quotient transition induced by the identity of the ring sheaf.
 Source: Stacks Tag 0A0E (blueprint: def-pur-principal-koszul-quotient-towers). -/
@@ -170,6 +180,7 @@ noncomputable def principalReductionTransition
     (cokernel.desc _ (cokernel.π (endoPow (globalSectionMultiplication R t) (m + 1)))
       (principalQuotient_transition_zero R t m))
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The augmentations commute with the specified strict transitions.
 Source: Stacks Tag 0A0E (blueprint: def-pur-principal-koszul-quotient-towers).
 Proof: the two composites vanish on the degree `-1` summand of the cone, and on its
@@ -178,7 +189,21 @@ theorem principalAugmentation_naturality
     (t : (SheafOfModules.unit 𝓞).sections) (m : ℕ) :
     principalKoszulTransition R t m ≫ principalAugmentation R t m =
       principalAugmentation R t (m + 1) ≫ principalReductionTransition R t m := by
-  sorry
+  let F := CochainComplex.singleFunctor 𝒜 0
+  let a := globalSectionMultiplication R t
+  let S (n : ℕ) : ShortComplex (CochainComplex 𝒜 ℤ) :=
+    ShortComplex.mk (F.map (endoPow a (n + 1)))
+      (F.map (cokernel.π (endoPow a (n + 1)))) (by
+        rw [← F.map_comp, cokernel.condition, F.map_zero])
+  let f : S (m + 1) ⟶ S m :=
+    { τ₁ := F.map a
+      τ₂ := 𝟙 _
+      τ₃ := principalReductionTransition R t m
+      comm₁₂ := (principalKoszul_transition_square R t m).symm
+      comm₂₃ := by
+        dsimp only [S, principalReductionTransition]
+        rw [Category.id_comp, ← F.map_comp, cokernel.π_desc] }
+  exact CochainComplex.mappingCone.map_descShortComplex (S (m + 1)) (S m) f
 
 /-- The strict Koszul tower of complexes, indexed by `m+1`.
 Source: Stacks Tag 0A0E (blueprint: def-pur-principal-koszul-quotient-towers). -/
@@ -244,6 +269,49 @@ noncomputable def koszulTensorUnitComponent (P : CochainComplex 𝒜 ℤ) (i : �
     HomologicalComplex.ιMapBifunctor _ _ (MonoidalCategory.curriedTensor 𝒜)
       (ComplexShape.up ℤ) 0 i i (zero_add i)
 
+private theorem tensorClosedUnitLeft_comm
+    {A : Type*} [Category* A] [Preadditive A] [MonoidalCategory A]
+    [(MonoidalCategory.curriedTensor A).PreservesZeroMorphisms]
+    [∀ Z, ((MonoidalCategory.curriedTensor A).obj Z).PreservesZeroMorphisms]
+    (D P : CochainComplex A ℤ)
+    [HomologicalComplex.HasMapBifunctor D P (MonoidalCategory.curriedTensor A)
+      (ComplexShape.up ℤ)]
+    (u : MonoidalCategory.tensorUnit A ⟶ D.X 0) (hu : u ≫ D.d 0 1 = 0)
+    (i j : ℤ) (hij : (ComplexShape.up ℤ).Rel i j) :
+    ((MonoidalCategory.leftUnitor (P.X i)).inv ≫
+      MonoidalCategory.whiskerRight u (P.X i) ≫
+      HomologicalComplex.ιMapBifunctor D P (MonoidalCategory.curriedTensor A)
+        (ComplexShape.up ℤ) 0 i i (zero_add i)) ≫
+      (HomologicalComplex.mapBifunctor D P (MonoidalCategory.curriedTensor A)
+        (ComplexShape.up ℤ)).d i j =
+    P.d i j ≫ (MonoidalCategory.leftUnitor (P.X j)).inv ≫
+      MonoidalCategory.whiskerRight u (P.X j) ≫
+      HomologicalComplex.ιMapBifunctor D P (MonoidalCategory.curriedTensor A)
+        (ComplexShape.up ℤ) 0 j j (zero_add j) := by
+  simp only [Category.assoc, HomologicalComplex.mapBifunctor.d_eq,
+    Preadditive.comp_add, HomologicalComplex.mapBifunctor.ι_D₁,
+    HomologicalComplex.mapBifunctor.ι_D₂]
+  rw [HomologicalComplex.mapBifunctor.d₁_eq' _ _ _ _
+      (show (ComplexShape.up ℤ).Rel 0 1 from rfl),
+    HomologicalComplex.mapBifunctor.d₂_eq _ _ _ _ 0 hij j (zero_add j)]
+  dsimp only [MonoidalCategory.curriedTensor_map_app,
+    MonoidalCategory.curriedTensor_obj_map]
+  have hs₁ : ComplexShape.ε₁ (ComplexShape.up ℤ) (ComplexShape.up ℤ)
+      (ComplexShape.up ℤ) (0, i) = 1 := rfl
+  have hs₂ : ComplexShape.ε₂ (ComplexShape.up ℤ) (ComplexShape.up ℤ)
+      (ComplexShape.up ℤ) (0, i) = 1 := by simp
+  have hz : MonoidalCategory.whiskerRight (0 : MonoidalCategory.tensorUnit A ⟶ D.X 1)
+      (P.X i) = 0 := by
+    simpa only [MonoidalCategory.curriedTensor_map_app, zero_app] using
+      congrArg (fun f ↦ f.app (P.X i))
+        ((MonoidalCategory.curriedTensor A).map_zero (MonoidalCategory.tensorUnit A)
+          (D.X 1))
+  rw [hs₁, hs₂, one_smul, one_smul,
+    ← MonoidalCategory.comp_whiskerRight_assoc, hu, hz, zero_comp, comp_zero, zero_add,
+    ← MonoidalCategory.whisker_exchange_assoc,
+    ← MonoidalCategory.leftUnitor_inv_naturality_assoc]
+
+set_option backward.isDefEq.respectTransparency false in
 /-- The unit inclusion commutes with the total tensor differential.
 Source: Stacks Tags 03EK and 0941
 (blueprint: def-pur-principal-koszul-quotient-towers).
@@ -254,7 +322,12 @@ theorem koszulTensorUnitComponent_comm (P : CochainComplex 𝒜 ℤ) (i j : ℤ)
       koszulTensorUnitComponent R P i ≫
         ((koszulTensorFunctor R P).obj
           ((CochainComplex.singleFunctor 𝒜 0).obj (SheafOfModules.unit 𝓞))).d i j := by
-  sorry
+  by_cases hij : (ComplexShape.up ℤ).Rel i j
+  · exact (tensorClosedUnitLeft_comm
+      ((CochainComplex.singleFunctor 𝒜 0).obj (SheafOfModules.unit 𝓞)) P
+      (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0
+        (SheafOfModules.unit 𝓞)).inv (by simp) i j hij).symm
+  · simp only [HomologicalComplex.shape _ _ _ hij, comp_zero, zero_comp]
 
 /-- The canonical chain map `P → O[0] ⊗ P` (inverse unit constraint).
 Source: Stacks Tags 03EK and 0941
@@ -308,6 +381,7 @@ noncomputable def koszulRepresentativeAugmentation (P : CochainComplex 𝒜 ℤ)
       ((CochainComplex.singleFunctor 𝒜 0).map
         (endoPow (globalSectionMultiplication R t) (m + 1))))
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The augmentation followed by the quotient comparison is the prescribed quotient map.
 Source: Stacks Tags 0A0E and 0941
 (blueprint: def-pur-principal-koszul-quotient-towers).
@@ -319,8 +393,20 @@ theorem koszulRepresentativeAugmentation_quotient (P : CochainComplex 𝒜 ℤ)
     koszulRepresentativeAugmentation R P t m ≫
         (koszulTensorTowerComparison R P t).app (op m) =
       koszulRepresentativeQuotient R P t m := by
-  sorry
+  change (koszulTensorUnitInclusion R P ≫ (koszulTensorFunctor R P).map _) ≫
+      (koszulTensorFunctor R P).map (principalAugmentation R t m) =
+    koszulTensorUnitInclusion R P ≫ (koszulTensorFunctor R P).map _
+  rw [Category.assoc, ← Functor.map_comp]
+  let F := CochainComplex.singleFunctor 𝒜 0
+  let a := endoPow (globalSectionMultiplication R t) (m + 1)
+  let S : ShortComplex (CochainComplex 𝒜 ℤ) :=
+    ShortComplex.mk (F.map a) (F.map (cokernel.π a)) (by
+      rw [← F.map_comp, cokernel.condition, F.map_zero])
+  exact congrArg (fun f ↦ koszulTensorUnitInclusion R P ≫
+    (koszulTensorFunctor R P).map f)
+      (CochainComplex.mappingCone.inr_descShortComplex S)
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Compatibility of the canonical strict augmentation.
 Source: Stacks Tags 0A0E and 0941
 (blueprint: def-pur-principal-koszul-quotient-towers).
@@ -331,7 +417,11 @@ theorem koszulRepresentativeAugmentation_naturality (P : CochainComplex 𝒜 ℤ
     koszulRepresentativeAugmentation R P t m =
       koszulRepresentativeAugmentation R P t (m + 1) ≫
         (koszulTensorTower R P t).map (homOfLE (Nat.le_succ m)).op := by
-  sorry
+  dsimp only [koszulRepresentativeAugmentation, koszulTensorTower, Functor.comp_map,
+    principalKoszulTower]
+  rw [Functor.ofOpSequence_map_homOfLE_succ, Category.assoc, ← Functor.map_comp]
+  dsimp only [principalKoszulTransition]
+  simp [CochainComplex.mappingCone.map]
 
 /-- The canonical strict augmentation from the constant representative tower.
 Source: Stacks Tags 0A0E and 0941
