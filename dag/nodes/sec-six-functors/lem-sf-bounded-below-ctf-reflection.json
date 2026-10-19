@@ -25,10 +25,11 @@
  ],
  "proof": [
   {
-   "text": "Write $F=\\nu_T^*$. By [det-pe-classical-sheaves-modules], on ordinary constant-$A$ module sheaves $F$ is exact and fully faithful; this applies to our discrete commutative ring $A$. Its derived functor is the termwise functor specified in [def-weil-pbc-proetale-modules]. For any representing complex $P$, exactness identifies $\\ker F(d^i)$ with $F(\\ker d^i)$ and $\\operatorname{im}F(d^{i-1})$ with $F(\\operatorname{im}d^{i-1})$, and preserves their quotient. Hence $H^i(FP)\\cong F(H^iP)$, and therefore $H^i(FC)\\cong F(H^iC)$. Also, if $FM=0$, then $F(1_M)=0=F(0)$, so faithfulness gives $1_M=0$ and $M=0$. Thus $F$ reflects zero module sheaves.",
+   "text": "Write $F=\\nu_T^*$. By [det-pe-classical-sheaves-modules], on ordinary constant-$A$ module sheaves $F$ is exact and fully faithful; this applies to our discrete commutative ring $A$. Its derived functor is the termwise functor specified in [def-weil-pbc-proetale-modules]. For any representing complex $P$, exactness identifies $\\ker F(d^i)$ with $F(\\ker d^i)$ and $\\operatorname{im}F(d^{i-1})$ with $F(\\operatorname{im}d^{i-1})$, and preserves their quotient. Hence $H^i(FP)\\cong F(H^iP)$, and therefore $H^i(FC)\\cong F(H^iC)$. Also, if $FM=0$, then $F(1_M)=0=F(0)$, so faithfulness gives $1_M=0$ and $M=0$. Thus $F$ reflects zero module sheaves. In Lean use the existing comparisonUpperStar full and faithful instances and Functor.mapDerivedCategoryHomologyFunctorIso. The coefficient-presentation identification [lem-sf-intrinsic-realization-origin-comparison] identifies restriction of intrinsic realization with the identity on fixed-coefficient sheaves. Its component and homology comparison identify the fixed pullback of H^i(C) with restriction of intrinsic H^i(FC). Restriction preserves zero morphisms sectionwise.",
    "uses": [
     "det-pe-classical-sheaves-modules",
-    "def-weil-pbc-proetale-modules"
+    "def-weil-pbc-proetale-modules",
+    "lem-sf-intrinsic-realization-origin-comparison"
    ],
    "elementary": true,
    "source": {
@@ -37,7 +38,7 @@
    }
   },
   {
-   "text": "By the boundedness hypothesis there are integers $u\\le v$ such that $H^i(FC)=0$ outside $[u,v]$. Step 1 gives $F(H^iC)=0$ there and hence $H^iC=0$. Thus $C$ is bounded in the same cohomological interval. This argument also covers $FC=0$: choose any finite interval and conclude that every cohomology sheaf of $C$ vanishes.",
+   "text": "By the boundedness hypothesis there are integers $u\\le v$ such that $H^i(FC)=0$ outside $[u,v]$. Step 1 gives $F(H^iC)=0$ there and hence $H^iC=0$. Thus $C$ is bounded in the same cohomological interval. This argument also covers $FC=0$: choose any finite interval and conclude that every cohomology sheaf of $C$ vanishes. The intrinsic predicate records finiteness of the set of nonzero degrees. Take a lower bound c and an upper bound d of that finite set and use [min(c,d),max(c,d)], which is ordered even when the set is empty.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -46,11 +47,13 @@
    }
   },
   {
-   "text": "For each integer $i$, the sheaf $H^i(FC)$ is intrinsically constructible by hypothesis. Apply the sheaf equivalence, clause (i) of [lem-sf-proetale-constructible-origin], at the given finite coefficient stage $A=A_{E,n}$. It supplies a constructible etale sheaf $G_i$ and an isomorphism $FG_i\\cong H^i(FC)\\cong F(H^iC)$. Fullness on all module sheaves in [det-pe-classical-sheaves-modules] lifts this isomorphism and its inverse to maps $G_i\\to H^iC$ and $H^iC\\to G_i$. Faithfulness makes both composites identities, so $H^iC\\cong G_i$. Transporting the finite stratification and the local constant finite-module models along this isomorphism shows that $H^iC$ is constructible. Together with step 2 this is exactly the bounded constructible condition of [def-weil-pbc-constructible-complexes]. No constructibility of $C$ was used to obtain $G_i$.",
+   "text": "For each integer $i$, the sheaf $H^i(FC)$ is intrinsically constructible by hypothesis. Apply the sheaf equivalence, clause (i) of [lem-sf-proetale-constructible-origin], at the given finite coefficient stage $A=A_{E,n}$. It supplies a constructible etale sheaf $G_i$ and an isomorphism $FG_i\\cong H^i(FC)\\cong F(H^iC)$. Fullness on all module sheaves in [det-pe-classical-sheaves-modules] lifts this isomorphism and its inverse to maps $G_i\\to H^iC$ and $H^iC\\to G_i$. Faithfulness makes both composites identities, so $H^iC\\cong G_i$. Transporting the finite stratification and the local constant finite-module models along this isomorphism shows that $H^iC$ is constructible. Together with step 2 this is exactly the bounded constructible condition of [def-weil-pbc-constructible-complexes]. No constructibility of $C$ was used to obtain $G_i$. For the intrinsic/fixed coefficient conversion use [lem-weil-pbc-proetale-constant-module-constructibility]. Apply the already proved source-library sheaf clause exists_isConstructibleSheaf_iso_comparisonUpperStar_obj directly, without importing the larger derived-origin equivalence module. Lift its isomorphism with comparisonUpperStar.preimageIso and transport constructibility by IsConstructibleSheaf.of_iso. Finally [lem-weil-pbc-constructible-etale-module-sheaf-comparison] identifies the finite-stalk and finite-constant-value etale predicates.",
    "uses": [
     "lem-sf-proetale-constructible-origin",
     "det-pe-classical-sheaves-modules",
-    "def-weil-pbc-constructible-complexes"
+    "def-weil-pbc-constructible-complexes",
+    "lem-weil-pbc-proetale-constant-module-constructibility",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
    "elementary": false,
    "source": {
@@ -59,7 +62,7 @@
    }
   },
   {
-   "text": "Apply clause (ii) of [lem-sf-comparison-tor-amplitude] with $K=FC$, the etale antecedent $C$, and the identity isomorphism $K\\cong\\nu_T^*C$. Its hypotheses hold: $A$ is the specified finite coefficient stage, $C$ is bounded below by the original hypothesis, and $K$ is intrinsically bounded constructible of Tor amplitude in the given interval $[a,b]$. Moreover $\\ell$ is invertible on $T$: since $k$ has characteristic $p\\ne\\ell$, the image of $\\ell$ has an inverse in $k$, and its image under the structure map remains an inverse on every open of $T$. The cited clause gives etale Tor amplitude in this same interval, for every degree-zero etale $A$-module sheaf. Together with step 3 this proves both conclusions.",
+   "text": "Apply clause (ii) of [lem-sf-comparison-tor-amplitude] with $K=FC$, the etale antecedent $C$, and the identity isomorphism $K\\cong\\nu_T^*C$. Its hypotheses hold: $A$ is the specified finite coefficient stage, $C$ is bounded below by the original hypothesis, and $K$ is intrinsically bounded constructible of Tor amplitude in the given interval $[a,b]$. Moreover $\\ell$ is invertible on $T$: since $k$ has characteristic $p\\ne\\ell$, the image of $\\ell$ has an inverse in $k$, and its image under the structure map remains an inverse on every open of $T$. The cited clause gives etale Tor amplitude in this same interval, for every degree-zero etale $A$-module sheaf. Together with step 3 this proves both conclusions. More explicitly, derive CharP D.k₀ D.p from the prime-power cardinality. The distinct prime l is a unit in D.k₀; map it along D.k₀ -> Γ(T) -> κ(x) for each x. Use IsUnit.invertible to supply the residue-field instances required by finiteCoefficient_comparison_reflects_torAmplitude.",
    "uses": [
     "lem-sf-comparison-tor-amplitude"
    ],
@@ -73,14 +76,17 @@
  "proof_deps": [
   "det-pe-classical-sheaves-modules",
   "def-weil-pbc-proetale-modules",
+  "lem-sf-intrinsic-realization-origin-comparison",
   "lem-sf-proetale-constructible-origin",
   "def-weil-pbc-constructible-complexes",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
   "lem-sf-comparison-tor-amplitude"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09AK (lemma-compare-constructible) plus exact fully faithful sheaf comparison (lemma-fully-faithful); Tor reflection is the existing blueprint lemma lem-sf-comparison-tor-amplitude(ii). This is an explicit consequence for arbitrary bounded-below antecedents."
+  "place": "Tag 09AK (lemma-compare-constructible) plus exact fully faithful sheaf comparison (lemma-fully-faithful); Tor reflection is the existing blueprint lemma lem-sf-comparison-tor-amplitude(ii). This is an explicit consequence for arbitrary bounded-below antecedents. W3 Lean implementation, 2026-10-19: the same four-step route, using the existing source-library sheaf-origin clause directly and the canonical intrinsic realization/restriction compatibility; no new intermediate results."
  },
  "mathlib_searches": [
   {
@@ -233,5 +239,15 @@
   "group": "Q146",
   "result": "pass",
   "note": "Snapshot module and node are byte-identical to the already-landed Q90 version except Authors line, lean.by and lean.date (Q90->Q146, 2026-10-18); I re-reviewed the substance independently. Every hypothesis and conclusion clause matches the node: FiniteFieldDatum, l prime with l != p, E/Q_l finite, n>=1 with coefficientExtensionRing, T finite type (LocallyOfFiniteType+QuasiCompact only), C with only t.plus (no constructibility or upper bound), a<=b, intrinsicFiniteTorsionConstructible and HasProEtaleTorAmplitude of the canonical finiteCoefficientIntrinsicDerivedComparison.obj C, conclusions isBoundedConstructible and hasTorAmplitudeIn on the same [a,b] (definitions read). Typed consistently with finiteCoefficient_comparison_reflects_torAmplitude; l invertibility derived, not assumed. Single universe u with standard ULift; edge cases C=0, empty T, a=b, n=1 covered. Proof only sorry; source and blueprint docstrings with 4 proof steps; lean.statement verbatim (script-checked); report has Worker report and Second reading by Q146. nt_compile.py --json rc=0, 17.9 s, no errors. Informational: delivery only reattributes credit from Q90 to Q146."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261019T112606-L-3959842",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
