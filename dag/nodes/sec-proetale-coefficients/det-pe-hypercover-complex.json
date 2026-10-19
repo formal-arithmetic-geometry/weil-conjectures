@@ -48,9 +48,8 @@
    }
   },
   {
-   "text": "Use throughout the $\\mathcal V$-small skeleton stipulated in [def-weil-pbc-proetale-site], with all coefficient and derived categories formed in $\\mathcal V$. Clause 3 of [det-pe-topos-functoriality-site] supplies essential smallness in this larger universe; no essential-smallness assertion in the smaller scheme universe is needed. Choose $s:K\\to I$ by [lem-sc-bounded-below-injective-resolution], applied to this small ringed site. Thus $s$ is a quasi-isomorphism, $I$ is bounded below, every $I^b$ is an injective module sheaf, and $I$ is K-injective. Let $c$ be any lower bound for $I$, and put $N=\\min(a,c)$; no assertion that the resolution has exactly the original lower bound is needed. The right derived functor $R\\Gamma(U,-)$ of the statement exists: on this $\\mathcal V$-small site, $\\operatorname{Mod}(\\mathcal R)$ is Grothendieck abelian by [lem-weil-pbc-ring-sheaves-grothendieck] (no commutativity of $\\mathcal R$ is assumed there), so by [lem-sfb-grothendieck-k-injective] every complex, bounded or not, has a quasi-isomorphism to a K-injective complex; this is the standing hypothesis of [def-sfb-right-derived-functor]. By [def-sfb-right-derived-functor], the K-injective resolution computes $R\\Gamma(U,K)$ as the complex $I(U)$.",
+   "text": "Work in the common module universe max(u,v,t+1). The module-sheaf category is Grothendieck abelian by [lem-weil-pbc-ring-sheaves-grothendieck], hence has enough injectives. Choose a strict lower bound a for K and apply Mathlib CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective to obtain a quasi-isomorphism j:K→J with injective terms and the same lower bound. Mathlib CochainComplex.isKInjective_of_injective makes J K-injective. This avoids the commutative-ring-only wrapper lem-sc-bounded-below-injective-resolution. The chosen complexes are auxiliary proof witnesses, not definitions. The recorded moduleQuasiIsoKInjectiveResolutions uses [lem-sfb-grothendieck-k-injective] for all complexes. By [def-sfb-right-derived-functor], its derived unit is invertible on J, identifying RΓ(U,K) with J(U).",
    "uses": [
-    "lem-sc-bounded-below-injective-resolution",
     "def-sfb-right-derived-functor",
     "def-weil-pbc-proetale-site",
     "det-pe-topos-functoriality-site",
@@ -60,7 +59,7 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A2 (lemma-compute-cohomology), second paragraph: choose a bounded-below injective resolution; derived.tex Tags 05TI and 070I"
+    "place": "Tag 09A2, bounded-below injective replacement; Mathlib Algebra/Homology/Factorizations/CM5a.lean, exists_quasiIso_injective"
    }
   },
   {
@@ -98,10 +97,11 @@
    }
   },
   {
-   "text": "We verify naturality and independence of the resolution rather than merely choosing isomorphisms objectwise. For a chain map $f:K\\to L$ and resolutions $s:K\\to I$, $t:L\\to J$ chosen as in step 3, [lem-weil-pbc-kinjective-hom-derived], applied with source $I$ and target $J$, lifts the derived map $(Qt)(Qf)(Qs)^{-1}:QI\\to QJ$ to a chain map $g:I\\to J$, unique up to homotopy. Applying the injectivity of the same Hom bijection with source $K$ and target $J$ to $Q(gs)=Q(tf)$ gives $gs\\simeq tf$. The functor $T$ preserves chain homotopies: if $h:E^b\\to F^{b-1}$ is a coefficient homotopy, take on the summand of horizontal degree $r$ the total homotopy $(-1)^rh(W_r)$. Writing $u-v=d_Fh+hd_E$ for the coefficient homotopy equation, the vertical part of $d_{T(F)}H+Hd_{T(E)}$ on horizontal degree $r$ is $(-1)^r(-1)^r(d_Fh+hd_E)=u-v$. Its horizontal part is $(-1)^r\\delta_Fh+(-1)^{r+1}h\\delta_E=0$, since $h$ commutes with every restriction. Thus $dH+Hd=T(u)-T(v)$. Hence $T(g)T(s)=T(t)T(f)$ in the derived category. Naturality of restriction gives $T(g)\\alpha_I=\\alpha_Jg(U)$. These two equalities and inversion of $T(s),T(t)$ show that the isomorphisms of step 6 commute with $f$ and $R\\Gamma(U,f)$, the latter being $g(U)$ under the K-injective computation [def-sfb-right-derived-functor]. Taking $f=\\mathrm{id}$ gives independence of the chosen resolution. Since step 6 inverts quasi-isomorphisms, the same naturality passes to derived morphisms.",
+   "text": "Use [lem-weil-pbc-kinjective-hom-derived], through the existing CochainComplex.KInjectiveResolution.map and mapHomotopy API, to lift each coefficient map to a comparison between the chosen resolutions, with a homotopy-commutative resolution square. The generic proved helper map_eq_of_boundedBelow_homotopy in [lem-weil-pbc-proetale-hypercover-computes-bounded-complex] applies to every functor that inverts bounded-below quasi-isomorphisms: the cylinder of a strictly bounded-below complex remains bounded below, its projection is a homotopy equivalence, and cancellation makes its two inclusions have equal images. Apply it both to Q followed by the right derived functor and to T followed by Q. The derived unit is natural, and the restriction augmentation is strictly natural. Cancel the isomorphism Q(T(j_L)) in the resulting square to obtain naturality of the composite comparison RF(Q(j_K)), the inverse unit at J_K, Q(alpha_J_K), and the inverse Q(T(j_K)). This constructs the stated natural isomorphism on the entire Plus category. Only the generic cylinder helper of the cited hypercover module is used; its commutative-coefficient comparison theorem is not applied.",
    "uses": [
     "lem-weil-pbc-kinjective-hom-derived",
-    "def-sfb-right-derived-functor"
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-proetale-hypercover-computes-bounded-complex"
    ],
    "elementary": false,
    "source": {
@@ -111,26 +111,26 @@
   }
  ],
  "proof_deps": [
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
-  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-  "sk-def-pe-weak-contractible",
-  "def-weil-pbc-proetale-site",
-  "lem-sc-bounded-below-injective-resolution",
   "def-sfb-right-derived-functor",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
   "det-pe-topos-functoriality-site",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-sfb-grothendieck-k-injective",
   "lem-sc-ringed-hypercover-injective-augmentation-ring",
+  "lem-sfb-grothendieck-k-injective",
   "lem-weil-pbc-bounded-below-row-augmentation",
   "lem-weil-pbc-bounded-below-total-column-comparison",
-  "lem-weil-pbc-kinjective-hom-derived"
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-proetale-hypercover-computes-bounded-complex",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "sk-def-pe-weak-contractible"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09A2 (lemma-compute-cohomology), expanded along the blueprint Finiteness/Injective case/Comparison route, using Hypercoverings Tags 01GE/01GW in the ringed-module form and Derived Categories Tag 070I for naturality"
+  "place": "Tag 09A2, seven-step derived comparison, formalized by C8; naturality uses the existing bounded-below cylinder helper"
  },
  "mathlib_searches": [
   {
@@ -231,7 +231,6 @@
  "tool_uses": [
   "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
   "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-  "lem-sc-bounded-below-injective-resolution",
   "lem-sc-ringed-hypercover-injective-augmentation-ring",
   "lem-weil-pbc-bounded-below-row-augmentation",
   "lem-weil-pbc-bounded-below-total-column-comparison",
@@ -285,5 +284,15 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "The node allows arbitrary ring sheaves and takes derived values in abelian groups. The module supplies this node’s explicit abelian-section total using the existing presheaf, alternating-coface, zero-extension and signed-total functors; the commutative module-valued hypercoverTotal is not duplicated. Plus is precisely existence of an integer strict lower bound on the terms, and the conclusion is a natural isomorphism on that full category. The existing moduleQuasiIsoKInjectiveResolutions interface is used without any monomorphism, affineness, qcqs or universe-equality assumption."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-349c7",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261019T002519-L-2145648",
+  "kind": "interface",
+  "note": "independent cc review: Delivered HypercoverComplex (2 holes proved, private helpers) and the ring-universe generalization of ringedHypercover_injective_augmentation_exact_ring against nodes det-pe-hypercover-complex / lem-sc-ringed-hypercover-injective-augmentation-ring, change record, live library diff, axioms probes and compiles of all 3 direct importers"
  }
 }

@@ -686,7 +686,7 @@ theorem ringedHypercover_injective_augmentation_exact_ring
     {C : Type u} [SmallCategory C]
     (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]
     [J.IsStableUnderBaseChange] [J.HasPullbacks] [J.toGrothendieck.Subcanonical]
-    (R : Sheaf J.toGrothendieck RingCat.{max u r})
+    (R : Sheaf J.toGrothendieck RingCat.{r})
     (I : ringedSiteModules.{max u v r} R) [Injective I]
     (W : C) (U : SimplicialObject C)
     (e : U ⟶ (Functor.const SimplexCategoryᵒᵖ).obj W)
@@ -716,7 +716,7 @@ theorem ringedHypercover_injective_augmentation_exact_ring
         ∑ j : Fin (n + 3), (-1 : ℤ) ^ j.val • I.val.map (U.δ j).op s) := by
   classical
   let K := J.toGrothendieck
-  let S : Sheaf K RingCat.{max u r} := R
+  let S : Sheaf K RingCat.{r} := R
   let : HasSheafify K AddCommGrpCat.{max u v r} := by
     let q : C ≌ AsSmall.{max u v r} C := AsSmall.equiv
     let L := q.inverse.inducedTopology K
@@ -728,7 +728,7 @@ theorem ringedHypercover_injective_augmentation_exact_ring
     have : L.WEqualsLocallyBijective AddCommGrpCat.{max u v r} := by infer_instance
     exact GrothendieckTopology.WEqualsLocallyBijective.transport K L q.inverse
       (Functor.IsDenseSubsite.coverPreserving _ _ _)
-  let F := RingedHypercover.freeSheafFunctor.{u, v, max u r} K S
+  let F := RingedHypercover.freeSheafFunctor.{u, v, r} K S
   let E (A : C) := RingedHypercover.sectionEquiv K S A I
   have hloc : ∃ Q : Sieve W, Q ∈ K W ∧ ∀ (V : C) (f : V ⟶ W), Q f →
       ∃ t : V ⟶ U _⦋0⦌, t ≫ e.app (op ⦋0⦌) = f := by

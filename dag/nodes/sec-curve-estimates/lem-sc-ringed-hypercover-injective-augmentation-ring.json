@@ -118,7 +118,7 @@
   "module": "Sheaf.CategoryTheory.RingedHypercoverInjectiveAugmentationRing",
   "file": "lean/Sheaf/CategoryTheory/RingedHypercoverInjectiveAugmentationRing.lean",
   "declaration": "CategoryTheory.ringedHypercover_injective_augmentation_exact_ring",
-  "statement": "theorem ringedHypercover_injective_augmentation_exact_ring\n    {C : Type u} [SmallCategory C]\n    (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]\n    [J.IsStableUnderBaseChange] [J.HasPullbacks] [J.toGrothendieck.Subcanonical]\n    (R : Sheaf J.toGrothendieck RingCat.{max u r})\n    (I : ringedSiteModules.{max u v r} R) [Injective I]\n    (W : C) (U : SimplicialObject C)\n    (e : U ⟶ (Functor.const SimplexCategoryᵒᵖ).obj W)\n    (hcover : ∀ (n : ℕ) (T : C) (w : T ⟶ W)\n      (p : ∀ (Δ : SimplexCategory), Δ.len < n →\n        (Δ ⟶ SimplexCategory.mk n) → (T ⟶ U.obj (op Δ))),\n      (∀ (Δ : SimplexCategory) (h : Δ.len < n) (θ : Δ ⟶ SimplexCategory.mk n),\n        p Δ h θ ≫ e.app (op Δ) = w) →\n      (∀ (Δ Δ' : SimplexCategory) (h : Δ.len < n) (h' : Δ'.len < n)\n        (α : Δ' ⟶ Δ) (θ : Δ ⟶ SimplexCategory.mk n),\n        p Δ h θ ≫ U.map α.op = p Δ' h' (α ≫ θ)) →\n      ∃ S : Sieve T, S ∈ J.toGrothendieck T ∧\n        ∀ (V : C) (f : V ⟶ T), S f →\n          ∃ t : V ⟶ U _⦋n⦌,\n            t ≫ e.app (op (SimplexCategory.mk n)) = f ≫ w ∧\n            ∀ (Δ : SimplexCategory) (h : Δ.len < n) (θ : Δ ⟶ SimplexCategory.mk n),\n              t ≫ U.map θ.op = f ≫ p Δ h θ) :\n    Function.Injective (I.val.map (e.app (op (SimplexCategory.mk 0))).op) ∧\n    Function.Exact\n      (I.val.map (e.app (op (SimplexCategory.mk 0))).op)\n      (fun s : I.val.obj (op (U _⦋0⦌)) ↦\n        ∑ j : Fin 2, (-1 : ℤ) ^ j.val • I.val.map (U.δ j).op s) ∧\n    ∀ n : ℕ, Function.Exact\n      (fun s : I.val.obj (op (U _⦋n⦌)) ↦\n        ∑ j : Fin (n + 2), (-1 : ℤ) ^ j.val • I.val.map (U.δ j).op s)\n      (fun s : I.val.obj (op (U _⦋n + 1⦌)) ↦\n        ∑ j : Fin (n + 3), (-1 : ℤ) ^ j.val • I.val.map (U.δ j).op s)",
+  "statement": "theorem ringedHypercover_injective_augmentation_exact_ring\n    {C : Type u} [SmallCategory C]\n    (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]\n    [J.IsStableUnderBaseChange] [J.HasPullbacks] [J.toGrothendieck.Subcanonical]\n    (R : Sheaf J.toGrothendieck RingCat.{r})\n    (I : ringedSiteModules.{max u v r} R) [Injective I]\n    (W : C) (U : SimplicialObject C)\n    (e : U ⟶ (Functor.const SimplexCategoryᵒᵖ).obj W)\n    (hcover : ∀ (n : ℕ) (T : C) (w : T ⟶ W)\n      (p : ∀ (Δ : SimplexCategory), Δ.len < n →\n        (Δ ⟶ SimplexCategory.mk n) → (T ⟶ U.obj (op Δ))),\n      (∀ (Δ : SimplexCategory) (h : Δ.len < n) (θ : Δ ⟶ SimplexCategory.mk n),\n        p Δ h θ ≫ e.app (op Δ) = w) →\n      (∀ (Δ Δ' : SimplexCategory) (h : Δ.len < n) (h' : Δ'.len < n)\n        (α : Δ' ⟶ Δ) (θ : Δ ⟶ SimplexCategory.mk n),\n        p Δ h θ ≫ U.map α.op = p Δ' h' (α ≫ θ)) →\n      ∃ S : Sieve T, S ∈ J.toGrothendieck T ∧\n        ∀ (V : C) (f : V ⟶ T), S f →\n          ∃ t : V ⟶ U _⦋n⦌,\n            t ≫ e.app (op (SimplexCategory.mk n)) = f ≫ w ∧\n            ∀ (Δ : SimplexCategory) (h : Δ.len < n) (θ : Δ ⟶ SimplexCategory.mk n),\n              t ≫ U.map θ.op = f ≫ p Δ h θ) :\n    Function.Injective (I.val.map (e.app (op (SimplexCategory.mk 0))).op) ∧\n    Function.Exact\n      (I.val.map (e.app (op (SimplexCategory.mk 0))).op)\n      (fun s : I.val.obj (op (U _⦋0⦌)) ↦\n        ∑ j : Fin 2, (-1 : ℤ) ^ j.val • I.val.map (U.δ j).op s) ∧\n    ∀ n : ℕ, Function.Exact\n      (fun s : I.val.obj (op (U _⦋n⦌)) ↦\n        ∑ j : Fin (n + 2), (-1 : ℤ) ^ j.val • I.val.map (U.δ j).op s)\n      (fun s : I.val.obj (op (U _⦋n + 1⦌)) ↦\n        ∑ j : Fin (n + 3), (-1 : ℤ) ^ j.val • I.val.map (U.δ j).op s)",
   "branch": "sheaf-dag",
   "by": "N3",
   "date": "2026-10-16"
@@ -146,13 +146,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-19",
   "by": "L",
-  "reviewer": "X-f5655",
-  "group": "N3",
+  "reviewer": "C-349c7",
+  "group": "C8",
   "result": "pass",
-  "landing": "20261015T233749-L-3369289",
+  "landing": "20261019T002519-L-2145648",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean against node statements, recorded interface changes, original signatures, proof dependencies, axiom probes, and all seven direct importers."
+  "note": "independent cc review: Delivered HypercoverComplex (2 holes proved, private helpers) and the ring-universe generalization of ringedHypercover_injective_augmentation_exact_ring against nodes det-pe-hypercover-complex / lem-sc-ringed-hypercover-injective-augmentation-ring, change record, live library diff, axioms probes and compiles of all 3 direct importers"
  }
 }
