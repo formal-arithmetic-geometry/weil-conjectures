@@ -20,6 +20,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
 public import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 public import Sheaf.Paper.SfDerivedComplete
 public import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 import Mathlib.RingTheory.PrincipalIdealDomain
 import Sheaf.Paper.ConstantModuleSectionProperties
@@ -114,7 +115,36 @@ theorem extension_existsUnique :
       (∀ (M N : ModuleCat.{u + 1} (R l E)) (f : M ⟶ N),
         HEq (L.map f) (PointDerivedHom.extensionMorphism.{u, u} D.k (B D l E)
           (alpha D l E) f)) := by
-  sorry
+  let k := D.k
+  let F := PointDerivedHom.constantModules.{u, u} k (CommRingCat.of (R l E))
+  have hconst : (PointDerivedHom.constantPresheaf.{u, u} k
+      (CommRingCat.of (R l E))).Additive := ⟨fun {M N} {f g} ↦ rfl⟩
+  have hsheaf : (PresheafOfModules.sheafification
+      (PointDerivedHom.constantUnit.{u, u} k (CommRingCat.of (R l E)))).Additive :=
+    (PresheafOfModules.sheafificationAdjunction _).left_adjoint_additive
+  have hF : F.Additive := by
+    dsimp only [F, PointDerivedHom.constantModules]
+    infer_instance
+  let := HasDerivedCategory.standard
+    (PointDerivedHom.Modules.{u, u} k
+      (PointDerivedHom.constantRing.{u, u} k (CommRingCat.of (R l E))))
+  let := HasDerivedCategory.standard (integralTowerModules l E (Spec (.of k)))
+  obtain ⟨G, hGobj, hGmap, hGadd, _⟩ :=
+    SheafOfModules.derivedChangeOfRingsIndependentCoefficients (alpha D l E)
+  let := hGadd
+  refine ⟨F ⋙ G, ⟨?_, inferInstance, ?_⟩, ?_⟩
+  · intro M
+    exact hGobj (F.obj M)
+  · intro M N f
+    exact (conj_eqToHom_iff_heq _ _ (hGobj (F.obj M))
+      (hGobj (F.obj N))).mp (hGmap (F.map f))
+  · intro L hL
+    apply Functor.hext
+    · intro M
+      exact (hL.1 M).trans (hGobj (F.obj M)).symm
+    · intro M N f
+      exact (hL.2.2 M N f).trans ((conj_eqToHom_iff_heq _ _
+        (hGobj (F.obj M)) (hGobj (F.obj N))).mp (hGmap (F.map f))).symm
 
 /-- Actual constant-module extension, uniquely fixed by its existing object and map formulas.
 Source: node proof step 1 (blueprint: lem-pod-point-completed-evaluation). -/
@@ -136,6 +166,10 @@ def generator (M : ModuleCat.{u + 1} (R l E))
     ((extension D l E).obj M).val.obj U :=
   (eqToHom ((extension_existsUnique D l E).exists.choose_spec.1 M).symm).val.app U
     (PointDerivedHom.extensionElement.{u, u} D.k (B D l E) (alpha D l E) M U b x)
+
+-- The functor's object and map formulas are fixed by the theorem above. Keeping its
+-- choice term closed avoids expanding that construction in the dependent model formulas.
+attribute [local irreducible] extension
 
 /-- The ordinary derived dual's bounded-projective chain model, with the recorded differential.
 Source: Stacks 0A8H (blueprint: lem-pod-point-completed-evaluation). -/
