@@ -17,9 +17,69 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-convolution-kernel/lem-fd-convolution-kernel.proof.md",
   "place": "Step 1, evaluation sheaves in the adic common-stage category; sk-def-as, sk-def-kernel and sk-def-fourier-set coefficient conventions"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Every additive-character value has p-th power one. The roots-of-unity containment puts it in the fixed coefficient extension. Transport through the small-model equivalence; its absolute value has p-th power one and is nonnegative, so equals one. The DVR criterion makes the value integral. The injective fixed coefficient embedding gives the character laws and uniqueness.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-fourier-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.8, coefficient conventions"
+   }
+  },
+  {
+   "text": "The spectral norm of p in the finite ell-adic extension is its ell-adic norm, which is one since p and ell are distinct primes. The DVR unit criterion gives a unit in O_E, and the ULift ring equivalence transports it to the coefficient universe.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-fourier-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.8, coefficient conventions"
+   }
+  },
+  {
+   "text": "Pull back the universal Artin-Schreier etale surjection along the function b. Functoriality of etale inverse image, the pullback square, the existing artinSchreierSheafUpperStarIso and the constant-sheaf inverse-image comparison give an explicit regular-module trivialization on every member of this cover.",
+   "uses": [
+    "def-fd-artin-schreier-sheaf",
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Corollary 5.1.5; blueprint sk-def-as"
+   }
+  },
+  {
+   "text": "Apply the two general etale-line results to this particular integral sheaf and cover. The first supplies completeness; the second supplies finite constructible reductions with the single bound [0,0]. Assemble these with the witnesses 0,0 and reflexivity of <= into sfIntegralConstructible. The remaining constructions are the original ordinary scalar realization, common-stage kernel and derived tensor integrand.",
+   "uses": [
+    "lem-fd-etale-integral-line-derived-complete",
+    "lem-fd-etale-integral-line-reductions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1); Proposition 6.8.4(1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-fourier-set",
+  "def-fd-artin-schreier-sheaf",
+  "lemma-constructible-pullback-constant",
+  "lem-fd-etale-integral-line-derived-complete",
+  "lem-fd-etale-integral-line-reductions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8 and the original blueprint sk-def-as, explicit integral-character and trivializing-cover proofs"
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -149,5 +209,15 @@
   "group": "Q04",
   "result": "fix",
   "note": "Mathematics and Lean correct: FourierSetting + nontrivial prime-field AddChar; adic common-stage objects from completed pro-etale integral AS sheaves (Etale.fourierKernel of stdPairing, defeq rep); convolution K'*K=Rr13!(r12^*K⊗r23^*K') via tripleProj13 with (Ψ,Ψ⁻¹) and (Ψ,Ψ), unshifted, recorded sfQbarCompactSupportValue; RHS integralCoefficientTwist(-r) pushed along diagonal and (id×neg), shift -2r; edge cases r=0, char 2, p|a, ramified E, universes OK; no hollow defs, 11 true sorry theorems, docstrings/blueprint tags/8-step proof present; new node def-fd-adic-fourier-realization justified (no adic AS/kernel/convolution in Mathlib, slopmaster2 or side); statements verbatim; nt_compile --json both modules rc 0, no warnings. Finding H11: Second reading by Q04 was an admitted self-reading; fixed by fixes/lem-fd-convolution-kernel.report.md (Worker report and New nodes unchanged, independent clause-by-clause second reading; passes check_report). No Lean or node change."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261019T231151-L-556721",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
