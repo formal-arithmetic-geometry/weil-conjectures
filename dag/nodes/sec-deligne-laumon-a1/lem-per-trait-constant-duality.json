@@ -16,9 +16,156 @@
   "def-kun-derived-tensor",
   "def-exc-excellent-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $i:s\\hookrightarrow T$, $j:\\eta\\hookrightarrow T$, and $H,S,G$ as in the trait model. The gluing equivalence identifies a sheaf with $(W,V,a)$ and computes kernels and cokernels componentwise. For a constructible sheaf, $W$ and $V$ are finite-dimensional $A$-spaces. Conversely finite $W,V$ give constructibility on the two locally closed strata $s,\\eta$: a finite continuous representation is trivialized by an etale cover, since a basis has an open common stabilizer, and the field etale/Galois-set equivalence supplies its covering orbit. Thus on this trait kernels, cokernels and extensions of finite-stalk sheaves are constructible, directly by finite-dimensional linear algebra. The constant sheaf has $W=V=A$ and is bounded constructible.",
+   "uses": [
+    "lem-per-trait-sheaf-gluing",
+    "lem-exc-etale-field-gsets",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 1.2.1–1.2.3, printed pp.259–262; finite-field evaluation argument supplied here"
+   }
+  },
+  {
+   "text": "Let $\\mathscr L$ be a lisse finite-dimensional sheaf on $\\eta$, with generic representation $V$. Put $W_0=V^S$, choose a topological generator $\\sigma$ of $G$, and write $t=\\sigma|_{W_0}$. The generic-boundary model, with coefficient exponent $n=1$, computes\n$$C(V)=R\\Gamma(\\eta,\\mathscr L)\\simeq[W_0\\xrightarrow{1-t}W_0]$$\nin degrees $0,1$, using evaluation on $1-\\sigma$. It also gives $R\\Gamma(T,N)\\simeq N_s$ for bounded-below $N$. Hence $i^*Rj_*\\mathscr L=C(V)$: take an injective resolution on $\\eta$; direct image preserves injectives because the exact open restriction is its left adjoint, and $\\Gamma(T,j_*I)=\\Gamma(\\eta,I)$. On $\\eta$, the same resolution restricts back to itself. Thus $Rj_*\\mathscr L$ is bounded constructible: its closed cohomology is the kernel and cokernel of $1-t$, and its generic cohomology is $V$ in degree zero. The residue model for $A_T$ is $[A\\xrightarrow{1}A\\xrightarrow{0}\\operatorname{Hom}_{A[[G]]}(I,A)]$. It follows that $E=Ri^!A_T\\simeq A(-1)[-2]$, where the one-dimensional space $A(-1)=\\operatorname{Hom}_{\\mathrm{cont}}(G,A)$ is identified with the last term as in that model. Indeed on sheaves $i^!_0$ is the kernel of restriction, and on the separably closed $s$ global sections is the stalk; the same injective resolution computes both $Ri^!$ and supported sections.",
+   "uses": [
+    "lem-per-prime-power-trait-generic-boundary-model",
+    "lem-per-trait-residue-model",
+    "lem-per-etale-closed-sheaf-internal-adjunction",
+    "lem-exc-rg-right-adjoint-preserves-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 1.2.1–1.2.3, printed pp.259–262; finite-field evaluation argument supplied here"
+   }
+  },
+  {
+   "text": "The boundary $b:C(A)\\to E[1]=A(-1)[-1]$ is an isomorphism on $H^1$. More precisely the generic-boundary model sends a degree-one class represented by $x\\in\\operatorname{Hom}_{A[[G]]}(I,A)$ to $\\epsilon_0x$ in the degree-two column of the supported complex, with $\\epsilon_0=\\pm1$. The augmentation/cocycle comparison is $f_c(1-\\sigma)=-c(\\sigma)$, so after choosing $\\sigma$ the induced $H^1\\to A$ is $[c]\\mapsto-\\epsilon_0c(\\sigma)$. The minus sign will not affect invertibility; no equality with a Gysin normalization is asserted.",
+   "uses": [
+    "lem-per-prime-power-trait-generic-boundary-model",
+    "lem-per-augmentation-cocycle-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 1.2.1–1.2.3, printed pp.259–262; finite-field evaluation argument supplied here"
+   }
+  },
+  {
+   "text": "Consider the pairing $C(V^\\vee)\\otimes_A^LC(V)\\to C(A)\\xrightarrow b A(-1)[-1]$ induced by evaluation. The averaging projector for $S$ identifies $(V^\\vee)^S$ with $(V^S)^\\vee$: restrict a functional and extend back by the projector. These inverse maps are $G$-equivariant. Thus write $W_0^\\vee$ for this space, with action $t^{-\\mathrm{tr}}$. In degrees $(0,1)$ cup/evaluation sends an invariant functional $f$ and a crossed homomorphism $c$ to $g\\mapsto f(c(g))$; in degrees $(1,0)$ it sends $d$ and invariant $v$ to $g\\mapsto d(g)(v)$. This is simply functoriality of degree-one cohomology for the coefficient maps $f:V\\to A$ and $v:V^\\vee\\to A$; the model is natural in those maps. The preceding step therefore identifies the two induced pairings, up to its nonzero sign, with\n$$(W_0^\\vee)^t\\times W_0/(1-t)W_0\\to A,\\qquad W_0^\\vee/(1-t^{-\\mathrm{tr}})W_0^\\vee\\times W_0^t\\to A,$$\nboth given by evaluation. They are perfect: the first invariant subspace is the annihilator of $(1-t)W_0$, and the image of $1-t^{-\\mathrm{tr}}$ is the annihilator of $\\ker(1-t)$, by the transpose equation and rank-nullity. Consequently the transpose\n$$C(V^\\vee)\\longrightarrow R\\operatorname{Hom}_A(C(V),E)[1]$$\nis an isomorphism. To check this last inference, a bounded finite-dimensional complex splits as its cohomology plus contractible pairs by choosing complements to cycles and boundaries. Its derived dual has the dual cohomology, so the two perfect pairings give isomorphisms in the only cohomological degrees $0,1$.",
+   "uses": [
+    "lem-per-trait-residue-model",
+    "lem-per-prime-power-trait-generic-boundary-model",
+    "lem-per-augmentation-cocycle-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 1.2.1–1.2.3, printed pp.259–262; finite-field evaluation argument supplied here"
+   }
+  },
+  {
+   "text": "Put $D=R\\mathcal Hom_A(-,A_T)$. Apply the internal-Hom localization triangle to $K=i_*W$ for a finite-dimensional $A$-space $W$. Its generic term is zero and its closed restriction is $W$, by the gluing equivalence. It gives $D(i_*W)=i_*R\\operatorname{Hom}_A(W,E)=i_*(W^\\vee\\otimes_A A(-1))[-2]$. Applying it again cancels the line and the shifts. The comparisons are induced by evaluation and adjunction; thus the bidual map restricted to $s$ is the finite-dimensional double-dual evaluation, with the Koszul shift signs, and is invertible. Explicitly choose a basis of $W$ and a nonzero basis of the line $A(-1)$; each basis vector goes to its ordinary double dual times a sign, a unit. Its generic restriction is the map between zero objects. Exact conservative geometric stalks, applied to cohomology, prove that the specified bidual map for $i_*W$ is an isomorphism.",
+   "uses": [
+    "lem-per-etale-internal-hom-localization",
+    "lem-per-trait-sheaf-gluing",
+    "lem-per-relative-bidual-triangles",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 1.2.1–1.2.3, printed pp.259–262; finite-field evaluation argument supplied here"
+   }
+  },
+  {
+   "text": "For lisse $\\mathscr L$ on $\\eta$, apply the same internal-Hom triangle to $K=j_!\\mathscr L$. Its closed restriction is zero, giving $D(j_!\\mathscr L)\\simeq Rj_*\\mathscr L^\\vee$. Here $R\\mathcal Hom_A(\\mathscr L,A_\\eta)=\\mathscr L^\\vee$: on an etale cover trivializing $\\mathscr L$, internal Hom is the finite direct sum of the identity functor, hence has no higher derived terms; the exact slice-restriction theorem identifies these local computations. This object is bounded constructible by step 2. The same argument applies to $\\mathscr L^\\vee$.",
+   "uses": [
+    "lem-per-etale-internal-hom-localization",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 1.2.1–1.2.3, printed pp.259–262; finite-field evaluation argument supplied here"
+   }
+  },
+  {
+   "text": "Now apply the internal-Hom triangle to the bounded complex $K=Rj_*\\mathscr L$. Using $i^*K=C(V)$ and $j^*K=\\mathscr L$, rotate it to\n$$D(Rj_*\\mathscr L)\\longrightarrow Rj_*\\mathscr L^\\vee\\xrightarrow u i_*R\\operatorname{Hom}_A(C(V),E)[1].$$\nBoth terms after the first are bounded constructible by steps 2 and 4, so the first is as well (the cohomology long exact sequence and finite-stalk closure of step 1 suffice). The boundary-pairing comparison states that $i^*u$ is the transpose of exactly the cup/evaluation/$b$ pairing of step 4, up to a unit sign. Hence $i^*u$ is an isomorphism and $i^*D(Rj_*\\mathscr L)=0$. On the generic open, slice restriction of internal Hom gives $j^*D(Rj_*\\mathscr L)=\\mathscr L^\\vee$. The open/closed extension triangle therefore identifies $D(Rj_*\\mathscr L)$ with $j_!\\mathscr L^\\vee$. This deduction uses the boundary comparison, not merely an abstract isomorphism between cohomology spaces.",
+   "uses": [
+    "lem-per-etale-internal-hom-localization",
+    "lem-per-localization-dual-boundary-pairing",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-weil-pbc-open-closed-short-exact",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 1.2.1–1.2.3, printed pp.259–262; finite-field evaluation argument supplied here"
+   }
+  },
+  {
+   "text": "Steps 6 and 7, applied also to $\\mathscr L^\\vee$, show that both the source and target of $\\eta_{j_!\\mathscr L}:j_!\\mathscr L\\to D^2(j_!\\mathscr L)$ have zero closed restriction. On the generic open the map is ordinary finite locally free double-dual evaluation: evaluation, symmetry, and transposition restrict to the same operations on the slice site, and in a local basis this is the ordinary basis-to-double-dual map. It is therefore invertible there. Exactness and conservativity of geometric stalks show that this particular $\\eta$, rather than just some map between isomorphic objects, is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-per-relative-bidual-triangles",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 1.2.1–1.2.3, printed pp.259–262; finite-field evaluation argument supplied here"
+   }
+  },
+  {
+   "text": "Every constructible sheaf $M$ has the short exact sequence $0\\to j_!j^*M\\to M\\to i_*i^*M\\to0$. It gives a distinguished triangle, with the outer terms of the types handled above. Bounded complexes are obtained by finitely many cohomological truncation triangles from their constructible cohomology sheaves. The functor $D$ is contravariantly triangulated, so the long exact cohomology sequence, finite-stalk closure from step 1, and induction over these two kinds of triangles show $D(M)\\in D^b_c$ for every $M\\in D^b_c$. The relative-bidual-triangles theorem says that the specified evaluation-transpose $\\eta$ is natural, respects shifts and all three triangle maps, and its isomorphism locus is triangulated. The same two inductions therefore show that $\\eta_M$ is invertible for every bounded constructible complex. Together with the constant sheaf's constructibility in step 1, these are precisely all three requirements in the statement. None of these steps uses completeness, mixed characteristic, a potential dualizing complex, or absolute purity.",
+   "uses": [
+    "lem-weil-pbc-open-closed-short-exact",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-pbc-truncation-triangle",
+    "lem-per-relative-bidual-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 1.2.1–1.2.3, printed pp.259–262; finite-field evaluation argument supplied here"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-trait-sheaf-gluing",
+  "lem-exc-etale-field-gsets",
+  "def-weil-pbc-constructible-complexes",
+  "lem-per-prime-power-trait-generic-boundary-model",
+  "lem-per-trait-residue-model",
+  "lem-per-etale-closed-sheaf-internal-adjunction",
+  "lem-exc-rg-right-adjoint-preserves-injectives",
+  "lem-per-augmentation-cocycle-comparison",
+  "lem-per-etale-internal-hom-localization",
+  "lem-per-relative-bidual-triangles",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-per-localization-dual-boundary-pairing",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-truncation-triangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVII 1.2.1–1.2.3 (the exact trait model); the linear-algebra and open/closed evaluation-biduality argument is supplied by Q45."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -84,10 +231,46 @@
    "date": "2026-10-19",
    "verdict": "no match: read returned signatures; they concern constant sheaves, general derived categories, condensed modules, algebraic etaleness or constructible subsets, not this etale finiteness/duality assertion",
    "sub": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The constant finite field sheaf is dualizing on a strictly henselian discrete valuation trait",
+   "results": "8 hits; LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf, Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField, IsNonarchimedeanLocalField.instFiniteResidueFieldSubtypeMemSubringIntegerValueGroupWithZeroValuation, FGModuleCat.exactPairing, LightCondMod.LocallyConstant.functorIsoDiscreteAux₁, IsDiscreteValuationRing.TFAE, FGModuleCat.rightDual, Valued.integer.compactSpace_iff_completeSpace_and_isDiscreteValuationRing_and_finite_residueField; digest 70bc9fe6af230561. ",
+   "date": "2026-10-19",
+   "verdict": "no match: constant sheaves, algebraic etaleness, valued fields and finite-dimensional evaluation do not assert constructible etale duality on a trait"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible etale sheaves on a strictly henselian discrete valuation ring satisfy biduality with constant F ell coefficients",
+   "results": "8 hits; CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CategoryTheory.Sheaf.IsConstant.mem_essImage, CategoryTheory.Sheaf.mem_essImage_of_isConstant, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app', CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app, CondensedSet.LocallyConstant.functorFullyFaithful, RingHom.Etale, CategoryTheory.Sheaf.isConstant_of_isIso_counit_app; digest 35ca32b5d214a24c. ",
+   "date": "2026-10-19",
+   "verdict": "no match: constant sheaves, algebraic etaleness, valued fields and finite-dimensional evaluation do not assert constructible etale duality on a trait"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite constructible etale sheaves are reflexive under derived sheaf Hom into the constant finite field on a henselian trait",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.exists_lift_of_germInjective, Algebra.basicOpen_subset_etaleLocus_iff; digest e4651d40e64df2dc. ",
+   "date": "2026-10-19",
+   "verdict": "no match: constant sheaves, algebraic etaleness, valued fields and finite-dimensional evaluation do not assert constructible etale duality on a trait"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "0 hits; ; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-19",
+   "verdict": "no match: constant sheaves, algebraic etaleness, valued fields and finite-dimensional evaluation do not assert constructible etale duality on a trait"
+  },
+  {
+   "tool": "grep",
+   "query": "trait.*dual|dual.*trait|Verdier|[Bb]idual",
+   "results": "0 hits; ; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-19",
+   "verdict": "no match: constant sheaves, algebraic etaleness, valued fields and finite-dimensional evaluation do not assert constructible etale duality on a trait",
+   "sub": "AlgebraicGeometry"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-complete-trait-constructible-biduality",
@@ -114,5 +297,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-trait-constant-duality",
+  "worker": "stage1",
+  "summary": "Preserved the statement and its hypotheses. Reused the finite-field trait residue model and its prime-power generic-boundary model at exponent one, proved the finite-dimensional invariant/coinvariant perfectness explicitly, and used open/closed generators to verify the actual evaluation bidual map. Added one unsplit formal boundary-pairing comparison, with no duality conclusion. No absolute purity, potential dualizing theorem or restricted complete-trait theorem is used.",
+  "blueprint": "Realizes the dimension-one local-duality base case recorded in blueprint.from.place for lem-per-artin-gabber-affine-curve. The trait cohomology source gives the local model; steps 1–4 calculate the two strata and pairing, steps 5–8 handle closed/open generators, and step 9 performs the bounded-constructible devissage. No chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-etale-field-gsets",
+    "why": "Generic Etale schemes over a field and continuous G-sets: supplies the exact functor, resolution, field-site or derived-category operation used in the numbered step; this perverse unit has no replacement for this infrastructure, and no geometric route step is replaced."
+   },
+   {
+    "node": "lem-exc-rg-right-adjoint-preserves-injectives",
+    "why": "Generic A right adjoint of a monomorphism-preserving functor preserves injective objects: supplies the exact functor, resolution, field-site or derived-category operation used in the numbered step; this perverse unit has no replacement for this infrastructure, and no geometric route step is replaced."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Generic Exactness of geometric stalks: supplies the exact functor, resolution, field-site or derived-category operation used in the numbered step; this perverse unit has no replacement for this infrastructure, and no geometric route step is replaced."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic Conservativity of geometric stalks: supplies the exact functor, resolution, field-site or derived-category operation used in the numbered step; this perverse unit has no replacement for this infrastructure, and no geometric route step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Generic Geometric stalks of extension by zero along an open immersion: supplies the exact functor, resolution, field-site or derived-category operation used in the numbered step; this perverse unit has no replacement for this infrastructure, and no geometric route step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic Derived internal Hom calculus on small ringed sites: supplies the exact functor, resolution, field-site or derived-category operation used in the numbered step; this perverse unit has no replacement for this infrastructure, and no geometric route step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-open-closed-short-exact",
+    "why": "Generic The open-closed short exact sequence of an etale sheaf: supplies the exact functor, resolution, field-site or derived-category operation used in the numbered step; this perverse unit has no replacement for this infrastructure, and no geometric route step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic A short exact sequence of complexes gives a distinguished triangle in D(A), functorially: supplies the exact functor, resolution, field-site or derived-category operation used in the numbered step; this perverse unit has no replacement for this infrastructure, and no geometric route step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic The truncation triangle tau_{<=q-1}K -> tau_{<=q}K -> H^q(K)[-q] is distinguished: supplies the exact functor, resolution, field-site or derived-category operation used in the numbered step; this perverse unit has no replacement for this infrastructure, and no geometric route step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-etale-field-gsets",
+  "lem-exc-rg-right-adjoint-preserves-injectives",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-truncation-triangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-3530e6027",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-3530e6027 (reviewer sub-agent of L); spot-checked: Read in full: the item's 9 steps, the new node lem-per-localization-dual-boundary-pairing, every cited statement, the parent complete-trait-biduality (Steps 1 and 8) and ILO XVII 1.2–1.2.3 (printed pp.259–262). Statement unchanged and true; 'ell invertible on R' gives p invertible in F_ell as ILO needs; the excellence hypothesis is unused. S1: finite stalks ⇔ constructible on the two strata via gluing triples and field G-sets. S2: generic-boundary model at n=1 gives i*Rj*L=[W0 -(1−t)-> W0] (j_* keeps injectives), and F(A)=Hom_A(I,A)[−2] gives E=A(−1)[−2]. S3: H^1(b)=[c]↦−ε0·c(σ), a unit. S4: (V^∨)^S≅(V^S)^∨ by averaging, so t acts by t^{−tr}; perfectness by annihilators and rank-nullity; the degrees of RHom(C,E)[1] match; tested on t=1, a unipotent Jordan block and a scalar t≠1. S5–S8: i_*W, j_!L and Rj_*L duals are correct; stalk tests check the specified η, not an abstract isomorphism. S9: dévissage with the triangulated η-locus covers all three dualizing clauses. New node: true by the 3×3 lemma (dual connecting map = ±RHom(δ_K,A), factoring through i_*E[1]), up to a universal sign; strictly smaller than the item, asserts no perfectness, not a duplicate (DAG grep); B1–B9 OK. No cycle; no SGA; declared tool_uses are generic infrastructure and accepted. Batch-5: lem-per-prime-power-trait-generic-boundary-model → lem-trf-bounded-below-derived-adjunction is the generic D^+ adjunction for an exact left adjoint, outside both assumed statements and the only trf/pd node in the closure, so accepted. Advisory notes only: S4 cup-with-H^0 = coefficient functoriality relies on Rj_*'s lax-monoidal unit compatibility (one line, accepted as elementary); S8 compatibility of η with slice restriction is implicit; the support-triangle third map is pinned by Hom-vanishing uniqueness."
  }
 }
