@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-zl-mixed-punctual-cutoff",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Punctual cutoff for an already mixed sheaf",
@@ -14,49 +14,149 @@
  },
  "stmt_deps": [
   "def-weil-punctual-weights",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-constructible-heart"
  ],
  "proof": [
   {
-   "text": "Take a finite filtration by constructible Weil subsheaves supplied\nby the mixedness hypothesis in [def-weil-punctual-weights].\nWrite $\\mathcal Q_r$ for its punctually pure quotients and $u_r$\nfor their weights. Remove zero quotients.",
+   "text": "By [def-weil-punctual-weights], choose a finite filtration $0=\\mathcal G_0\\subseteq\\cdots\\subseteq\\mathcal G_m=\\mathcal G$ by constructible Weil subsheaves with quotients $\\mathcal Q_r=\\mathcal G_r/\\mathcal G_{r-1}$ punctually pure of weights $u_r\\leq u$. Keep zero quotients for now. It suffices to prove $u_r\\leq v$ for each nonzero quotient; zero quotients will be assigned the new weight $v$.",
    "uses": [
     "def-weil-punctual-weights"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-mixed-punctual-cutoff.proof.md",
+    "place": "First proof paragraph: take a mixed filtration."
+   }
   },
   {
-   "text": "A nonzero $\\mathcal Q_r$ has a nonzero stalk on some lisse stratum\nof a constructible stratification\n([def-weil-pbc-constructible-complexes]). The locus where the\nlisse rank is nonzero contains a nonempty locally closed piece.\nIt contains a closed geometric point of $Y=Y_0\\times_{k_0}k$:\non a nonempty affine open of that piece, take a maximal ideal;\nthe weak Nullstellensatz gives residue field $k$.\nIts coordinates lie in a finite extension of the finite field\n$k_0$, so its image $y$ in $Y_0$ is a closed point.\nThus $(\\mathcal Q_r)_{\\bar y}\\neq0$ for some such $y$.",
+   "text": "Fix a nonzero $\\mathcal Q_r$, put $Y=Y_0\\times_{k_0}k$ and $s=\\operatorname{Spec}k$. The forgetful functor of [def-weil-weil-sheaf-complex] is faithful, so the identity of the underlying object of $\\mathcal Q_r$ in the constructible heart $\\Sh_c(Y,\\Qlb)$ [def-weil-constructible-heart] is a nonzero morphism. Since $Y_0$ is separated of finite type over $k_0$ and $\\ell\\neq p$, [lem-dl-a1-constructible-fibres-exact] applies to exactly this heart. Its geometric coefficient fibres are computed by derived pullback to $s$ followed by the point-fibre functor, and its statement says that a morphism of the heart all of whose geometric fibres are zero is zero. The fibre of the identity is the identity of the fibre. Hence there is a geometric point $\\bar x:s\\to Y$ with $(\\mathcal Q_r)_{\\bar x}\\neq0$.",
    "uses": [
-    "def-weil-pbc-constructible-complexes"
+    "def-weil-weil-sheaf-complex",
+    "def-weil-constructible-heart",
+    "lem-dl-a1-constructible-fibres-exact"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-mixed-punctual-cutoff.proof.md",
+    "place": "Second proof paragraph: a nonzero quotient has a nonzero geometric fibre (joint conservativity of the fibres in the actual heart)."
+   }
   },
   {
-   "text": "Taking stalks of the filtration is exact and respects local\nFrobenius. Choose a basis adapted to it. The Frobenius matrix is\nblock triangular, so its characteristic polynomial is the product ([p-linear-filtration])\nof those on the successive quotients. Each eigenvalue on\n$(\\mathcal Q_r)_{\\bar y}$ is therefore an eigenvalue on\n$\\mathcal G_{\\bar y}$. Choose one; it is nonzero since Frobenius\nacts invertibly. Purity and the assumed bound give\n\n$$\nq_y^{u_r/2}=|\\iota(\\alpha)|\\leq q_y^{v/2}.\n$$",
+   "text": "Let $z\\in Y$ be the point under $\\bar x$, so $\\bar x$ gives a field map $\\tau:\\kappa(z)\\to k$ [def-weil-geometric-point], and $\\kappa(z)$ contains $k$ through the structure map. Every element of $k$ is algebraic over $\\mathbf F_p$, hence so is every element of $\\kappa(z)$; thus $\\operatorname{trdeg}_k\\kappa(z)=0$, and [lem-kun-closed-point-field](a) for $Y/k$ makes $z$ closed with $\\kappa(z)$ finite over $k$, so $\\kappa(z)=k$ as $k$ is algebraically closed. The image $y$ of $z$ in $Y_0$ has $\\kappa(y)\\subseteq\\kappa(z)=k$ algebraic over $k_0$, so (a) for $Y_0/k_0$ makes $y$ closed with $\\kappa(y)/k_0$ finite, and $q_y=\\#\\kappa(y)\\geq2$. The canonical $k$-point $\\bar z:s=\\operatorname{Spec}\\kappa(z)\\to Y$ is the geometric point associated with the $k_0$-embedding $\\kappa(y)\\subseteq\\kappa(z)=k$, an admissible choice of $\\bar y$ in [def-weil-punctual-weights] and [lem-wf-rational-stalk-exact]. Now $\\bar x=\\bar z\\circ\\operatorname{Spec}(\\tau)$, and $\\tau$ is an injective endomorphism of $k$ carrying each finite subfield into the unique subfield of the same order, hence bijective. Represent $\\mathcal Q_r$ by $K$ in $D^b_c(Y,E)$ at a finite stage $E$ [def-weil-algebraically-closed-coefficients]. The composition isomorphism of [lem-pod-integral-pullback-composition] on integral representatives, rationalized as in [def-weil-derived-pullback-tensor-hom], gives $L\\bar x^*K\\cong L\\operatorname{Spec}(\\tau)^*L\\bar z^*K$. If $\\operatorname{Fib}_sL\\bar z^*K$ were zero, then $L\\bar z^*K\\cong0$ because $\\operatorname{Fib}_s$ is an equivalence [lem-weil-point-fibre-equivalence], so $L\\bar x^*K\\cong0$ and the fibre at $\\bar x$ would vanish. Hence the fibre at $\\bar y:=\\bar z$, the degree-zero space of this complex, is nonzero.",
    "uses": [
+    "def-weil-geometric-point",
+    "lem-kun-closed-point-field",
+    "def-weil-punctual-weights",
+    "lem-wf-rational-stalk-exact",
+    "def-weil-algebraically-closed-coefficients",
+    "lem-pod-integral-pullback-composition",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-point-fibre-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-mixed-punctual-cutoff.proof.md",
+    "place": "Second proof paragraph: the geometric point lies over a closed point of Y_0, and the fibre at the associated geometric point is nonzero."
+   }
+  },
+  {
+   "text": "At this closed point $y$, apply [lem-wf-rational-stalk-exact] to each short exact sequence $0\\to\\mathcal G_{j-1}\\to\\mathcal G_j\\to\\mathcal Q_j\\to0$. It gives a finite flag of Frobenius-stable subspaces in the finite-dimensional $\\Qlb$-space $\\mathcal G_{\\bar y}$, with graded spaces $(\\mathcal Q_j)_{\\bar y}$ and induced local Frobenius. Apply the invariant-subspace characteristic-polynomial factorization of [p-linear-filtration] successively: $\\det(T-F_y\\mid\\mathcal G_{\\bar y})=\\prod_j\\det(T-F_y\\mid(\\mathcal Q_j)_{\\bar y})$. Consequently an eigenvalue on $(\\mathcal Q_r)_{\\bar y}$ is an eigenvalue on $\\mathcal G_{\\bar y}$ (evaluate the product at that scalar). This uses the current blueprint version of [p-linear-filtration], with $\\det(T-F)$, and needs no semisimplicity.",
+   "uses": [
+    "lem-wf-rational-stalk-exact",
     "p-linear-filtration"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-mixed-punctual-cutoff.proof.md",
+    "place": "Third proof paragraph: exact Frobenius-equivariant stalks and characteristic-polynomial factorization."
+   }
   },
   {
-   "text": "Since $q_y>1$, this implies $u_r\\leq v$.\nThe original finite filtration now has all nonzero quotient weights\nat most $v$, which is precisely the required mixedness bound.",
-   "uses": [],
-   "elementary": null
+   "text": "The nonzero space $(\\mathcal Q_r)_{\\bar y}$ is finite-dimensional by [lem-wf-rational-stalk-exact]. Its coefficient field $\\Qlb$ is algebraically closed, so [lem-zl-alg-closed-endomorphism-eigenvalue] supplies an eigenvalue $\\alpha$ of its Frobenius. By the preceding step it is also an eigenvalue on $\\mathcal G_{\\bar y}$. Purity as defined in [def-weil-punctual-weights] and the assumed punctual upper bound therefore give $q_y^{u_r/2}=|\\iota(\\alpha)|\\leq q_y^{v/2}$.",
+   "uses": [
+    "lem-wf-rational-stalk-exact",
+    "lem-zl-alg-closed-endomorphism-eigenvalue",
+    "def-weil-punctual-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-mixed-punctual-cutoff.proof.md",
+    "place": "Third proof paragraph: choose an eigenvalue and compare its pure weight with the assumed bound."
+   }
+  },
+  {
+   "text": "Since $q_y\\geq2$, one has $\\log q_y>0$. Taking real logarithms of the preceding positive-power inequality gives $(u_r/2)\\log q_y\\leq(v/2)\\log q_y$, so dividing by $\\log q_y/2>0$ yields $u_r\\leq v$. This applies separately to every nonzero quotient. A zero quotient has zero fibres and therefore no eigenvalues, so its punctual purity condition is vacuous for the weight $v$. Retaining the original filtration, give each nonzero quotient its original weight and each zero quotient the weight $v$. All weights are now at most $v$, exactly the mixedness condition of [def-weil-punctual-weights]. If every quotient is zero, the same reassignment works without choosing a point; for the empty filtration there is nothing to reassign.",
+   "uses": [
+    "def-weil-punctual-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-mixed-punctual-cutoff.proof.md",
+    "place": "Final proof paragraph: monotonicity in the weight and the original mixed filtration, including zero quotients."
+   }
   }
  ],
  "proof_deps": [
   "def-weil-punctual-weights",
-  "def-weil-pbc-constructible-complexes",
-  "p-linear-filtration"
+  "def-weil-weil-sheaf-complex",
+  "def-weil-constructible-heart",
+  "lem-dl-a1-constructible-fibres-exact",
+  "def-weil-geometric-point",
+  "lem-kun-closed-point-field",
+  "lem-wf-rational-stalk-exact",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-pod-integral-pullback-composition",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-point-fibre-equivalence",
+  "p-linear-filtration",
+  "lem-zl-alg-closed-endomorphism-eigenvalue"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-mixed-punctual-cutoff.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-mixed-punctual-cutoff.proof.md",
+  "place": "All four proof paragraphs, made explicit using existing adic-heart and geometric lemmas."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An already mixed constructible l-adic Weil sheaf with local Frobenius eigenvalues of weights at most v is mixed of weights at most v",
+   "results": "{\"t\": \"2026-10-19T12:31:28Z\", \"tool\": \"leanfinder\", \"query\": \"An already mixed constructible l-adic Weil sheaf with local Frobenius eigenvalues of weights at most v is mixed of weights at most v\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BoundingSieve.weights\", \"WittVector.instModuleFractionRingStandardOneDimIsocrystal\", \"WittVector.Isocrystal\", \"WittVector.instIsocrystalStandardOneDimIsocrystal\", \"LieModule.exists₂_genWeightSpace_smul_add_eq_bot\", \"WittVector.Isocrystal.toModule\", \"WittVector.isocrystal_classification\", \"LieModule.exists_genWeightSpace_smul_add_eq_bot\"], \"digest\": \"dc1cbda56287a538\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: weight/sheaf declarations are absent; semantic hits concern Lie weights, isocrystals, or number-field bounds, not constructible Weil sheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "IsMixedOfWeightsAtMost|HasWeightsAtMost|WeilSheaf",
+   "results": "{\"t\": \"2026-10-19T12:31:57Z\", \"tool\": \"grep\", \"query\": \"IsMixedOfWeightsAtMost|HasWeightsAtMost|WeilSheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: weight/sheaf declarations are absent; semantic hits concern Lie weights, isocrystals, or number-field bounds, not constructible Weil sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "WeilSheaf, IsMixedOfWeightsAtMost",
+   "results": "{\"t\": \"2026-10-19T12:31:58Z\", \"tool\": \"loogle\", \"query\": \"WeilSheaf, IsMixedOfWeightsAtMost\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'WeilSheaf'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: weight/sheaf declarations are absent; semantic hits concern Lie weights, isocrystals, or number-field bounds, not constructible Weil sheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A mixed l-adic sheaf with punctual upper weight bound v is mixed of weights at most v",
+   "results": "{\"t\": \"2026-10-19T12:32:23Z\", \"tool\": \"leansearch\", \"query\": \"A mixed l-adic sheaf with punctual upper weight bound v is mixed of weights at most v\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.mixedEmbedding.minkowskiBound_lt_top\", \"Finsupp.le_weight_of_ne_zero\", \"LightCondensed\", \"MvPolynomial.IsWeightedHomogeneous\", \"ModularFormClass.exists_bound\", \"MvPowerSeries.IsWeightedHomogeneous\", \"NumberField.mixedEmbedding.convexBodySum_mem\", \"CategoryTheory.SheafOfTypes.adhesive\"], \"digest\": \"a0ab7d33c6c90619\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: weight/sheaf declarations are absent; semantic hits concern Lie weights, isocrystals, or number-field bounds, not constructible Weil sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite filtration by pure sheaves and a bound on all stalk Frobenius eigenvalues bounds the weights of each nonzero pure quotient",
+   "results": "{\"t\": \"2026-10-19T12:32:25Z\", \"tool\": \"leanfinder\", \"query\": \"A finite filtration by pure sheaves and a bound on all stalk Frobenius eigenvalues bounds the weights of each nonzero pure quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.exists_genWeightSpace_smul_add_eq_bot\", \"LieModule.exists₂_genWeightSpace_smul_add_eq_bot\", \"LieModule.eventually_genWeightSpace_smul_add_eq_bot\", \"LieModule.finite_genWeightSpace_ne_bot\", \"Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge\", \"LieModule.genWeightSpace_nsmul_add_ne_bot_of_le\", \"LieModule.finite_genWeightSpaceOf_ne_bot\", \"LieModule.genWeightSpace_zsmul_add_ne_bot\"], \"digest\": \"694131cdeb54e5b6\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: weight/sheaf declarations are absent; semantic hits concern Lie weights, isocrystals, or number-field bounds, not constructible Weil sheaves."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -111,5 +211,49 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-zl-mixed-punctual-cutoff",
+  "worker": "stage1",
+  "summary": "Retained the statement and the unit route. Replaced the finite-torsion constructibility citation by joint conservativity of geometric fibres in the actual common-stage heart (lem-dl-a1-constructible-fibres-exact) and exact Frobenius-equivariant rational fibres. Closed-point detection via the residue-field criterion and transport from an arbitrary geometric point to the associated k-point. Added only the exact Mathlib eigenvalue-existence leaf. Kept zero quotients and reassigned their weights to v. Reviewer FIX (cc, 2026-10-19): steps 2-3 no longer cite the PBC-category lemma lem-per-adic-heart-pullback-fibres, whose adic fibres were silently identified with the local-Frobenius fibres.",
+  "blueprint": "Step 1 realizes paragraph 1; steps 2-3 realize paragraph 2; steps 4-5 realize paragraph 3; step 6 realizes paragraph 4. This is the final sentence of unit step 2, bounding pure quotients in an already mixed filtration.",
+  "tool_uses": [
+   {
+    "node": "lem-dl-a1-constructible-fibres-exact",
+    "why": "Joint conservativity of the geometric coefficient fibres on the constructible heart of def-weil-constructible-heart, with fibres computed by derived pullback and the point-fibre functor; a generic coefficient tool, already used by lem-wf-rational-stalk-exact."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Finite-type closed-point/residue-field criterion, a geometric tool used to descend a geometric point to a closed point of Y_0."
+   },
+   {
+    "node": "lem-wf-rational-stalk-exact",
+    "why": "Exactness and Frobenius compatibility at closed-point rational fibres; a generic coefficient tool, not an affine-line weight estimate."
+   },
+   {
+    "node": "lem-pod-integral-pullback-composition",
+    "why": "Pullback-composition isomorphism used to move a geometric point along an automorphism of Spec k; generic coefficient tool, already in the closure of def-weil-local-frobenius-trace."
+   },
+   {
+    "node": "lem-weil-point-fibre-equivalence",
+    "why": "The point-fibre functor on Spec k is an equivalence, so it detects zero objects."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-dl-a1-constructible-fibres-exact",
+  "lem-kun-closed-point-field",
+  "lem-wf-rational-stalk-exact",
+  "lem-pod-integral-pullback-composition",
+  "lem-weil-point-fibre-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-NX-71e3f95bf",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-71e3f95bf (reviewer sub-agent of L); spot-checked: Read the item, the new node, the main-20261015 blueprint statement and proof (statement verbatim, unchanged), every cited statement, and Mathlib Triangularizable.lean:63-66. Batch 5: with the item made a leaf, the target closure loses only the new Mathlib leaf. lem-per-adic-heart-pullback-fibres (reaching def-pod-lisse-l-adic-sheaves, a definition) and lem-wf-rational-stalk-exact (reaching def-weil-local-frobenius-trace, a definition already in the base closure via def-weil-punctual-weights) are generic fibre tools: neither assumption gives them and neither is a step of the trace formula or of Poincare duality. Accepted. Fault C4/E6 in steps 2-3: lem-per-adic-heart-pullback-fibres is stated for the PBC categories (def-weil-pbc-rational-category / def-weil-pbc-qbar-category) and their adic fibres. The item's sheaf is in def-weil-constructible-heart, whose Frobenius fibres are Fib_s L y^* (def-weil-local-frobenius-trace). The step cites no comparison (lem-weil-pbc-integral-stratified-perfect-characterization or the J of lem-fd-rational-coefficient-category-comparison), and step 3 equates the two fibres without a cited statement. FIX rewrites steps 2-3. Step 2 now uses lem-dl-a1-constructible-fibres-exact: same heart, Fib_s fibres, joint conservativity, Weil sheaves after forgetting; lem-wf already relies on it. Step 3: the point z under the geometric point x is closed with kappa(z)=k by lem-kun-closed-point-field(a), its image y is closed, and the canonical k-point z is the geometric point associated with a k_0-embedding of kappa(y). Since x = z o Spec(tau) with tau an automorphism of Fbar_p, lem-pod-integral-pullback-composition (rationalized) and lem-weil-point-fibre-equivalence carry the nonzero fibre to z. proof_deps and the split_report tools are updated. Steps 1 and 4-6 are checked correct: the p-linear-filtration blueprint_update det product, the eigenvalue from the new leaf, purity equality against the bound at the same y and iota, log q_y>0, and zero quotients reweighted to v. Edge cases checked: empty Y_0, G=0, a Jordan block, rank one, v<u. New node lem-zl-alg-closed-endomorphism-eigenvalue is an exact Mathlib leaf (Module.End.exists_eigenvalue, line 63); B1-B9 are met, no duplicate was found by rg over dag/nodes, and V=0 is correctly excluded. No SGA source; no cycle. Maintainer note: sibling lem-zl-extension-by-zero-punctual conflates the same two fibre notions.; 1 file(s) fixed by the reviewer"
  }
 }
