@@ -17,11 +17,3 @@ L: the delivery could not be prepared for review: NOT MERGED def-weil-pbc-bounde
 
 L (re-issued by the launcher; the entry had been lost): very.py return N3 thm-cbc-finite-level-proetale E1 and 7b: the delivery adds a supplied compactification and quasi-compact open hypothesis, weakening the exact master theorem. The exact blueprint source is present but the report incorrectly says it is absent. The conditional proof checks out, but the target-level source defect must be resolved without silently weakening the target. Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
 
-## prop-sf-dualizable-hom (2026-10-19 19:19 UTC, branch head 6569357a81)
-
-L: independent stage-2 immutable head 6569357a8101: file-only compilation failed: sandbox Sheaf.Stage2.Sandbox0
-/dev/shm/nt-tmp/nt-local-compile-1fu5abs6/lean/Sheaf/Stage2/Sandbox0.lean:273:6: error(lean.unknownIdentifier): Unknown identifier `IsGeneralAlgebraicallyClosedCoefficientSitePerfect`
-
-Note: It is not possible to treat `IsGeneralAlgebraicallyClosedCoefficientSitePerfect` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
-
-[3.3 s]

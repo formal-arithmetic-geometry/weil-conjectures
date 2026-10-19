@@ -258,14 +258,14 @@
  "reviewed_lean": {
   "date": "2026-10-19",
   "by": "L",
-  "reviewer": "NT-stage2-cc-382a01897",
-  "group": "NW",
-  "result": "pass",
-  "note": "Item matches node/source: four stage conjuncts with the same site-perfect predicates on K and on sixFunctorCoefficientDual (RHom into the closed unit), arbitrary X (no separatedness), n+1 exponent; evaluation is a real braiding+adjunction-counit def. def-sf-pf stmt_dep genuine, no cycle. §1(B) append to SitePerfectComplex is an append-only superset (IsGeneralAlgebraicallyClosedCoefficientSitePerfect = legacy common-stage body on the general category commonClosed uses). nt_compile --json clean (item 4.9 s, dep 3.7 s); all 6 live importers of SitePerfectComplex clean against the delivered text. Advisory M1: dep record primary declaration changed to the new def (by ND→NW); M2: NX prop-sf-dualizable-hom 6569357a appends the identical decl to the same module, so the second to land should be dependency-reverted."
+  "reviewer": "NT-stage2-cc-df1b01fce",
+  "group": "NX",
+  "result": "fix",
+  "note": "Re-delivery of PASSed 6569357a (landing RETURN 19:19: NW merged the same IsGeneralAlgebraicallyClosedCoefficientSitePerfect append at 19:18, NX's dep change was auto-reverted, the published olean lacks the def). Item and SitePerfectComplex Lean are byte-identical to 6569357a; statement re-checked (4-level IsIso ringedSiteDualEvaluationLeft gated by the recorded site-perfect predicates), matches the node and source order 2174; sorry only; report sections present; not dropped. Finding: the delivery rebased on NW's landed record but re-pushes NX's own SitePerfectComplex text (same body, different docstring and 2 set_option lines) over NW's → FIX fixes/SitePerfectComplex.lean = live text (byte-identical). The module must stay delivered: the item alone fails against the published olean (Unknown identifier, 273:6). Compiles: live dep text + item 3.9/6.7 s clean; delivered text 3.7/6.5 s clean. Maintainer note: the dep record overwrites NW's by/declaration/note (declarations list, module and file identical, metadata only); restore NW's fields if wanted, do not use --revert-nodes (it would reproduce the stale-olean failure)."
  },
  "lean": {
   "module": "Sheaf.Paper.SitePerfectComplex",
-  "declaration": "WeilConjectures.IsGeneralAlgebraicallyClosedCoefficientSitePerfect",
+  "declaration": "WeilConjectures.IsFiniteCoefficientSitePerfect",
   "declarations": [
    "WeilConjectures.sitePerfectOverAbSheafify",
    "WeilConjectures.sitePerfectOverAbLocallyBijective",
@@ -279,12 +279,12 @@
    "WeilConjectures.IsGeneralAlgebraicallyClosedCoefficientSitePerfect"
   ],
   "file": "lean/Sheaf/Paper/SitePerfectComplex.lean",
-  "statement": "def IsGeneralAlgebraicallyClosedCoefficientSitePerfect (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (Y : AlgebraicGeometry.Scheme.{u}) (K : generalAlgebraicallyClosedConstructibleCategory l Ω Y) : Prop",
+  "statement": "def IsFiniteCoefficientSitePerfect (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : AlgebraicGeometry.Scheme.{t}) (n : ℕ) (K : @DerivedCategory (SheafOfModules.{max u (t + 1)} (integralCoefficientSheaf l E Y n)) _ _ (HasDerivedCategory.standard _)) : Prop",
   "branch": "sheaf-dag",
-  "by": "NW",
+  "by": "NX",
   "date": "2026-10-19",
   "existing": false,
-  "note": "Section 1(B), ownership-preserving extension: the recorded IsAlgebraicallyClosedCoefficientSitePerfect accepts the legacy algebraicallyClosedConstructibleCategory, whereas SixFunctorDatum.commonClosed and the recorded common-stage internal Hom use generalAlgebraicallyClosedConstructibleCategory with intrinsic sf rational stages. Append IsGeneralAlgebraicallyClosedCoefficientSitePerfect to this same owning module: exactly existence, up to common-stage isomorphism, of an IsSfRationalCoefficientSitePerfect finite-field representative. Preserve all nine existing declarations, signatures and bodies; no integral lift of rational retractions, common-stage completion or extra hypothesis is added."
+  "note": "Section 1(B), ownership-preserving extension: the existing common-stage predicate takes the legacy algebraicallyClosedConstructibleCategory, whereas SixFunctorDatum.commonClosed uses generalAlgebraicallyClosedConstructibleCategory. Append IsGeneralAlgebraicallyClosedCoefficientSitePerfect in the owning module using its recorded IsSfRationalCoefficientSitePerfect and the actual general common-stage inclusion. Retain every existing declaration and body, primary declaration, and signature unchanged. The appended definition states exactly the same some-finite-representative-up-to-isomorphism condition."
  },
  "blueprint_update": {
   "snapshot": "main-20261015",
