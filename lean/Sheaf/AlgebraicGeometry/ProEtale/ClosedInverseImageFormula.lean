@@ -10,12 +10,9 @@ public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicFiniteOperations
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ClosedSiteLift
 public import Mathlib.CategoryTheory.Sites.Sheafification
 import WeilConjectures.AlgebraicGeometry.ProEtale.ClosedSiteAdjunction
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
-import Mathlib.CategoryTheory.Adjunction.Mates
 import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
-import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
+import WeilConjectures.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
+import WeilConjectures.CategoryTheory.InverseMateEquivalence
 
 /-!
 # Closed inverse image as sheafification on the affine basis
@@ -88,6 +85,56 @@ theorem closed_inverseImage_sheafification (A : Type u) [CommRing A] (I : Ideal 
           ((closedSiteLift A I ⋙ toProEt (Spec (.of A))).op ⋙
             ((ProEtale.finiteCoefficientRealization (Spec (.of A)) Λ).asEquivalence.inverse.obj
               F).obj)) := by
-  sorry
+  let X := Spec (.of A)
+  let Z := Spec (.of (A ⧸ I))
+  let i : Z ⟶ X := Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))
+  let v := closedSiteLift A I
+  let r := closedSiteBaseChange A I
+  let D := ModuleCat.{u + 1} Λ
+  have : Limits.HasLimitsOfSize.{u, u + 1} D :=
+    Limits.hasLimitsOfSizeShrink.{u, u + 1, u + 1, u + 1} D
+  obtain ⟨adj, _⟩ := exists_closedSiteAdjunction A I
+  obtain ⟨_, _, _, _, hco, _, _, _⟩ := affine_closed_site_functor_properties A I
+  let : v.IsCocontinuous (topology Z) (topology X) := hco
+  let : r.IsContinuous (topology X) (topology Z) :=
+    adj.isContinuous_of_isCocontinuous _ _
+  let : (MorphismProperty.Over.pullback @WeaklyEtale ⊤ i).IsContinuous
+      (ProEt.topology X) (ProEt.topology Z) := ProEt.isContinuous_overPullback i
+  let RX := (toProEt X).sheafPushforwardContinuous D (topology X) (ProEt.topology X)
+  let RZ := (toProEt Z).sheafPushforwardContinuous D (topology Z) (ProEt.topology Z)
+  let : RX.IsEquivalence :=
+    isEquivalence_sheafPushforwardContinuous_toProEt (S := X)
+  let : RZ.IsEquivalence :=
+    isEquivalence_sheafPushforwardContinuous_toProEt (S := Z)
+  -- The site adjunction gives the linear Hom formulas before sheafification.
+  let L := sheafToPresheaf (topology X) D ⋙
+    (Functor.whiskeringLeft _ _ D).obj v.op ⋙ presheafToSheaf (topology Z) D
+  let R := r.sheafPushforwardContinuous D (topology X) (topology Z)
+  let a : L ⊣ R :=
+    ((adj.op.whiskerLeft D).comp (sheafificationAdjunction (topology Z) D)).restrictFullyFaithful
+      (Functor.FullyFaithful.ofFullyFaithful (sheafToPresheaf (topology X) D))
+      (Functor.FullyFaithful.id _) (Iso.refl _) (Iso.refl _)
+  have t : r ⋙ toProEt Z ≅ toProEt X ⋙
+      MorphismProperty.Over.pullback @WeaklyEtale ⊤ i := Iso.refl _
+  let : (toProEt X ⋙ MorphismProperty.Over.pullback @WeaklyEtale ⊤ i).IsContinuous
+      (topology X) (ProEt.topology Z) :=
+    Functor.isContinuous_comp _ _ (topology X) (ProEt.topology X) (ProEt.topology Z)
+  let : (r ⋙ toProEt Z).IsContinuous (topology X) (ProEt.topology Z) :=
+    Functor.isContinuous_comp _ _ (topology X) (topology Z) (ProEt.topology Z)
+  -- Full-site and affine-basis direct images agree by the base-change square.
+  let beta : ProEtale.lowerStar D i ⋙ RX ≅ RZ ⋙ R :=
+    Functor.sheafPushforwardContinuousComp (toProEt X)
+      (MorphismProperty.Over.pullback @WeaklyEtale ⊤ i)
+      D (topology X) (ProEt.topology X) (ProEt.topology Z) ≪≫
+    Functor.sheafPushforwardContinuousIso t.symm D (topology X) (ProEt.topology Z) ≪≫
+    (Functor.sheafPushforwardContinuousComp r (toProEt Z) D
+      (topology X) (topology Z) (ProEt.topology Z)).symm
+  -- Transport the left adjoints across the two affine-basis equivalences.
+  let alpha := ((mateEquiv (ProEtale.upperStarLowerStarAdjunction D i) a).symm
+    beta.hom).natTrans
+  have : IsIso alpha :=
+    isIso_inverseMate_of_equivalences (ProEtale.upperStarLowerStarAdjunction D i) a beta
+  exact ⟨((asIso alpha).symm.app
+    ((ProEtale.finiteCoefficientRealization X Λ).asEquivalence.inverse.obj F))⟩
 
 end AlgebraicGeometry.Scheme.AffineProEt

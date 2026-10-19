@@ -21,101 +21,59 @@
  ],
  "proof": [
   {
-   "text": "Write $X=\\operatorname{Spec}A$ and $Z=\\operatorname{Spec}(A/I)$: here \"affine closed immersion\" means a closed immersion of affine schemes, as in the basis construction. Restrict sheaves to $\\mathcal B_X$ and $\\mathcal B_Z$. The basis lemma determines the sheaves and all their morphisms, so a calculation of the adjunction on these bases determines the full-site inverse image. Base change is $u(W)=W\\times_X Z$ and the closed lift is $v$. By the site-adjunction lemma, choose its unit $\\eta_V:V\\to uv(V)$ (an isomorphism) and counit $\\varepsilon_W:vu(W)\\to W$. Direct image on these bases is $(i_*G)(W)=G(u(W))$ by the direct-image formula for pro-etale inverse image. Work first with sheaves of sets; exactly the same component formulas apply to abelian sheaves.",
+   "text": "Work directly in the category D of left Λ-modules, in the canonical fixed-scalar presentation already used in the Lean statement. Let RX and RZ be restriction from the full pro-etale sites to their affine bases. These restriction functors are equivalences for D-valued sheaves: shrink the existing limits in ModuleCat to the mixed size required by the affine basis comparison. Set v = closedSiteLift and r = closedSiteBaseChange. Obtain v ⊣ r from the closed-site adjunction and cocontinuity of v from the affine closed-site properties, hence continuity of r.",
    "uses": [
+    "def-weil-pbc-proetale-modules",
     "lem-weil-pbc-ind-etale-basis",
     "def-exc-closed-site-lift",
     "lem-exc-closed-site-adjunction",
-    "def-weil-proetale-inverse-image"
+    "lem-weil-pbc-affine-closed-site-functor-properties"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BL (lemma-closed-immersion-affines-apply), proof of (1); Tag 09BK (lemma-closed-immersion-affines)"
-   }
+   "elementary": false
   },
   {
-   "text": "Define the presheaf $P_F$ by $P_F(V)=F(v(V))$, with restriction $F(v(a))$ for $a:V'\\to V$. For $\\beta:F\\to i_*G$, put $\\alpha_V=G(\\eta_V)\\circ\\beta_{v(V)}:F(v(V))\\to G(V)$. Conversely, for $\\alpha:P_F\\to G$, put $\\beta_W=\\alpha_{u(W)}\\circ F(\\varepsilon_W)$. These are natural transformations: for $a:V'\\to V$ use $uv(a)\\circ\\eta_{V'}=\\eta_V\\circ a$ and naturality of $\\beta$ at $v(a)$; for $b:W'\\to W$ use $b\\circ\\varepsilon_{W'}=\\varepsilon_W\\circ vu(b)$ and naturality of $\\alpha$ at $u(b)$. All maps are homomorphisms when $F,G$ are abelian sheaves.",
+   "text": "The opposite site adjunction, whiskered with D, gives precomposition by v.op left adjoint to precomposition by r.op on presheaves. Compose this adjunction with module-valued sheafification and restrict through the fully faithful inclusion of sheaves on the source. The result is L ⊣ R, where L(H) is the sheafification of v.op composed with H, and R is direct image along r. Mathlib Adjunction.op, Adjunction.whiskerLeft, Adjunction.comp and Adjunction.restrictFullyFaithful perform the natural Hom formulas and their triangle identities in the original plan, using actual linear maps throughout.",
+   "uses": [
+    "lem-exc-closed-site-adjunction",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Base change commutes with inclusion of the affine bases into the full sites: r followed by toProEt Z is definitionally the same functor as toProEt X followed by full-site base change. The composition and natural-isomorphism comparisons for continuous sheaf pushforwards therefore give beta: i_* followed by RX is naturally isomorphic to RZ followed by R. Here i^* ⊣ i_* is the existing ModuleCat-valued upperStarLowerStarAdjunction.",
    "uses": [
     "def-exc-closed-site-lift",
-    "lem-exc-closed-site-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-closed-inverse-image-formula.md",
-    "place": "## Proof: the two displayed Hom constructions"
-   }
-  },
-  {
-   "text": "The composites are identities, not just maps in the required direction. Starting with $\\alpha$, its reconstructed component is $G(\\eta_V)\\alpha_{uv(V)}F(\\varepsilon_{v(V)})$. Naturality of $\\alpha$ at $\\eta_V$ rewrites this as $\\alpha_V F(v(\\eta_V))F(\\varepsilon_{v(V)})=\\alpha_V$, by $\\varepsilon_{v(V)}\\circ v(\\eta_V)=1$. Starting with $\\beta$, the reconstructed component is $G(\\eta_{u(W)})\\beta_{vu(W)}F(\\varepsilon_W)$. Naturality of $\\beta$ at $\\varepsilon_W$ rewrites this as $G(\\eta_{u(W)})G(u(\\varepsilon_W))\\beta_W=\\beta_W$, by $u(\\varepsilon_W)\\circ\\eta_{u(W)}=1$. Pre- or post-composing either formula with a sheaf map commutes with every displayed restriction. Thus the bijection $\\operatorname{Hom}(F,i_*G)\\cong\\operatorname{Hom}(P_F,G)$ is natural in both variables.",
-   "uses": [
-    "lem-exc-closed-site-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-closed-inverse-image-formula.md",
-    "place": "## Proof: triangle identities / evaluation of the formulas"
-   }
-  },
-  {
-   "text": "By the universal property of sheafification, maps $P_F\\to G$ for a sheaf $G$ factor uniquely through $P_F^\\#$. Consequently $L(F)=P_F^\\#$ is left adjoint to $i_*$ on basis sheaves, hence on full-site sheaves by step 1. The pro-etale inverse-image definition gives $i^{-1}\\dashv i_*$ as well. Apply uniqueness of left adjoints with $R_1=R_2=i_*$ and the identity comparison of right adjoints: this gives the canonical natural isomorphism $L\\cong i^{-1}$ carrying the two units to each other. This argument applies separately to sets and abelian groups, since the Hom formulas and universal property hold in both categories.",
-   "uses": [
-    "def-weil-pbc-sheafification",
     "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "lem-weil-pbc-ind-etale-basis"
+    "def-weil-pbc-proetale-operations"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BL (lemma-closed-immersion-affines-apply), (1); Sites Tags 00WH and Categories 0B65"
-   }
+   "elementary": true
   },
   {
-   "text": "The same identification also respects the ring and module structures. Precomposition with $v$ preserves products sectionwise, and set sheafification preserves finite products by the sheafification finite-limit lemma (the bases are small in the chosen universes). Therefore $L$ preserves finite products. Apply $L$ to addition, zero, negation, multiplication, one, and the action map $R_X\\times F\\to F$, where $R_X=\\Lambda_{X,\\Proet}$. Product identification gives operations on $L(R_X)$ and $L(F)$; every ring or left-module axiom is an equality between composites of these maps, so applying the functor proves the same equality. No commutativity of $\\Lambda$ is used. The unit preserves these operations: its presheaf component at $W$ is restriction along $\\varepsilon_W$, followed by the sheafification map. For a product it is the pair of the two component units. Write $c:L\\xrightarrow{\\sim}i^{-1}$ for step 4. Naturality at the projections gives $i^{-1}(p_A)c_{A\\times B}=c_A L(p_A)$ and $i^{-1}(p_B)c_{A\\times B}=c_B L(p_B)$. Thus $c_{A\\times B}=c_A\\times c_B$ under the product identifications; the final-object component is its unique map. Naturality at an operation $\\mu:A_1\\times\\cdots\\times A_n\\to B$ now reads $c_B L(\\mu)=i^{-1}(\\mu)(c_{A_1}\\times\\cdots\\times c_{A_n})$, also for nullary operations. This proves compatibility with every ring, abelian-group and module operation explicitly. In particular $L(F)$ with its abelian operations is the abelian sheafification of $V\\mapsto F(v(V))$: maps to any abelian sheaf factor through set sheafification and preserve addition by this same product argument.",
+   "text": "Take the inverse mate of beta across i^* ⊣ i_* and L ⊣ R. Since RX and RZ are equivalences, the inverse-mate equivalence theorem makes this mate invertible. Its inverse is an isomorphism from i^* followed by RZ to RX followed by L. Evaluate it on the inverse realization of F. The latter composite is definitionally the module sheafification of (closedSiteLift followed by toProEt X).op composed with the underlying presheaf of that inverse realization. This is exactly the required isomorphism. Because all functors and adjunctions have values in ModuleCat Λ, every component and its inverse is already Λ-linear, with no commutativity assumption or additional transport of algebraic operations.",
    "uses": [
-    "lem-weil-pbc-sheafification-sets-exact",
-    "def-weil-pbc-sheafification",
+    "lem-stage3-inverse-mate-equivalences",
+    "lem-weil-pbc-ind-etale-basis",
     "def-weil-pbc-proetale-modules",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "def-weil-proetale-inverse-image"
+    "def-weil-pbc-sheafification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00WJ (lemma-sheafification-exact); product-operation argument extending Tag 09BL to modules"
-   }
-  },
-  {
-   "text": "The coefficient comparison proposition gives the canonical ring isomorphism $c_i:i^{-1}R_X\\xrightarrow{\\sim}R_Z$ for every finite discrete ring, including a noncommutative one. Via step 5, $L(F)$ is a module over $i^{-1}R_X$. Give it the $R_Z$-action $r\\cdot m=c_i^{-1}(r)m$. This is exactly the module inverse image with identified coefficients; for commutative coefficients the tensor formula of the operations definition identifies it explicitly with $i^*F$: $m\\otimes r\\mapsto c_i^{-1}(r)m$, with inverse $m\\mapsto m\\otimes1$. Balancing gives $(c_i^{-1}(r)m)\\otimes1=m\\otimes r$, so both composites are identities; the maps commute with restrictions. For general left modules the identical extension-of-scalars calculation uses $R_Z\\otimes_{i^{-1}R_X}i^{-1}F$, $r\\otimes m\\mapsto c_i^{-1}(r)m$, with inverse $m\\mapsto1\\otimes m$. Thus the abelian sheafification $P_F^\\#$ carries the induced coefficient-module structure and is canonically $i^*F$. The argument gives sheafification, and nowhere assumes that $P_F$ itself is a sheaf.",
-   "uses": [
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "def-weil-pbc-proetale-operations",
-    "def-weil-pbc-proetale-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-closed-inverse-image-formula.md",
-    "place": "## Proof: identification with i^* in the pro-etale operations; coefficient identification from prop-weil-pbc-proetale-constant-ring-map"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-proetale-modules",
   "lem-weil-pbc-ind-etale-basis",
   "def-exc-closed-site-lift",
   "lem-exc-closed-site-adjunction",
-  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-affine-closed-site-functor-properties",
   "def-weil-pbc-sheafification",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-sheafification-sets-exact",
-  "def-weil-pbc-proetale-modules",
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "def-weil-pbc-proetale-operations"
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "lem-stage3-inverse-mate-equivalences"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 09BK and 09BL (1), with the blueprint Hom calculation expanded and finite-ring module operations checked explicitly"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/lem-exc-closed-inverse-image-formula.proof.md",
+  "place": "The Hom-adjunction and sheafification argument; Stacks proetale.tex Tag 09BL (1), implemented directly with ModuleCat-valued adjunctions and the existing inverse mate under affine-basis equivalences."
  },
  "mathlib_searches": [
   {
@@ -219,10 +177,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-ind-etale-basis",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-sheafification-sets-exact",
-  "prop-weil-pbc-proetale-constant-ring-map"
+  "lem-weil-pbc-ind-etale-basis"
  ],
  "reviewed": {
   "date": "2026-10-14",
@@ -249,5 +204,15 @@
   "group": "Q31",
   "result": "pass",
   "note": "Reviewed node, dependencies, source alignment, universes, edge cases, docstrings, and exact Lean declaration. Reproduced scompile.py successfully for sandbox and library; no substantive or mechanical errors found. Wrote review.md."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261019T231230-L-563932",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
