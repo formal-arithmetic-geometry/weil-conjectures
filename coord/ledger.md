@@ -16921,3 +16921,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:43 L: merged deliver/V1/Sheaf.Paper.RingedProjectionFirstShift (stage 3; reviewer PASS; first push; landing 20261019T034321-L-420572 (proof); batch 20261019T034248; modules 1; new nodes 0)
 - 03:43 L: merged deliver/V2/Sheaf.Paper.SfCommonStageWeilCohomology (stage 3; reviewer PASS; first push; landing 20261019T034322-L-420773 (proof); batch 20261019T034248; modules 1; new nodes 0)
 - 03:43 L: merged deliver/V3/Sheaf.Paper.FiniteRingSectionDeformation (stage 3; reviewer PASS; first push; landing 20261019T034322-L-420953 (proof); batch 20261019T034248; modules 1; new nodes 0)
+- 03:43 L: merged deliver/V3/Sheaf.Paper.SfAffineChartFactorizationGluing (stage 3; reviewer PASS; first push; landing 20261019T034323-L-421063 (interface); batch 20261019T034248; modules 1; new nodes 1; change records: coord/changes/V3-sf-affine-chart-proof-scope.md)

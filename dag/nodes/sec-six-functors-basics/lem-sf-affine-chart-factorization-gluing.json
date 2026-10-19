@@ -60,58 +60,37 @@
    }
   },
   {
-   "text": "For the remainder write $W_\\alpha=U_{ij}$ and let $j_\\alpha:W_\\alpha\\hookrightarrow X$ be the inclusions. The scheme $X$ is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-over-affine], applied to its separated finite-type structural morphism to $\\operatorname{Spec}k$. Each $W_\\alpha$ is quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. These are precisely the scheme hypotheses needed below for constructibility locality.",
+   "text": "Finite type over Spec k makes X Noetherian by the Mathlib local-Noetherian and quasi-compactness theorems. This supplies the hypotheses of the proved source open-cover constructibility theorem.",
    "uses": [
-    "lem-weil-pbc-qcqs-over-affine",
-    "lem-weil-pbc-affine-scheme-qcqs"
+    "lem-weil-pbc-finite-type-over-noetherian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tags 01K4 (lemma-quasi-compact-affine), 01KN (lemma-affine-separated), and 01KU (lemma-separated-permanence), as assembled by the two cited nodes."
-   }
+   "elementary": true
   },
   {
-   "text": "Open immersions are etale by [lem-weil-pbc-etale-composition-cancellation](1). The inverse-image/restriction comparison [lem-weil-pbc-etale-inverse-image-restriction] therefore applies to $j_\\alpha$. Its termwise action on $A$-module complexes is exact by [prop-weil-pbc-inverse-image-modules-exact], so preservation of kernels, images and quotients gives $\\mathcal H^t(K)|_{W_\\alpha}\\cong\\mathcal H^t(K|_{W_\\alpha})$. We also record explicitly the zero test used below: if an etale module sheaf $F$ restricts to zero on every $W_\\alpha$, then for every etale $T\\to X$ the family $T\\times_XW_\\alpha\\to T$ covers in the small etale site. Every section of $F(T)$ restricts to zero on this cover; the uniqueness part of the sheaf axiom gives $F(T)=0$, and hence $F=0$. This argument works for the empty cover when $X$ is empty.",
+   "text": "Exact upperStar commutes with homology via mapDerivedCategoryHomologyFunctorIso. The jointly-surjective family of open inclusions detects zero sheaves by applying conservativity to the zero map F to 0. For a finite index in Type, lift it to Type u only when applying the source conservativity theorem.",
    "uses": [
-    "lem-weil-pbc-etale-composition-cancellation",
-    "lem-weil-pbc-etale-inverse-image-restriction",
     "prop-weil-pbc-inverse-image-modules-exact",
-    "def-weil-pbc-derived-categories",
-    "def-weil-pbc-etale-site"
+    "lem-etale-sheaf-jointly-surjective-conservative",
+    "def-weil-pbc-derived-categories"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 04JC (lemma-flat-pullback-exact); exactness gives cohomology compatibility by its kernel/image definition. Etale restriction comparison and the separatedness axiom for sheaves on etale coverings are used as stated in the cited nodes."
-   }
+   "elementary": true
   },
   {
-   "text": "Assume $X\\ne\\varnothing$. The finite chart index set is nonempty because its opens cover $X$. Put $r=\\min_\\alpha r_\\alpha$ and $s=\\max_\\alpha s_\\alpha$. If $t\\notin[r,s]$, then $t\\notin[r_\\alpha,s_\\alpha]$ for every $\\alpha$, so step 5 shows $\\mathcal H^t(K)=0$. For any $t$, the same step identifies each restriction of $\\mathcal H^t(K)$ with a constructible sheaf (including the zero sheaf). Apply [lem-weil-pbc-constructible-qcqs-affine-local] first to each affine $W_\\alpha$: its (3) implies (1). Apply it next to the qcqs scheme $X$: the chart restrictions satisfy (1), so (2) implies (3), giving constructibility of $\\mathcal H^t(K)$ on $X$. The cohomology vanishing just proved means that $K$ is bounded, by the definition of the bounded derived category. This proves bounded constructibility [def-weil-pbc-constructible-complexes] with the stated cohomological interval.",
+   "text": "Compare finite-constant-value constructibility with IsConstructibleSheaf and apply its existing Noetherian open-cover locality theorem to each homology sheaf. On nonempty X, the finite chart index is nonempty. Take minima of the lower and maxima of the upper endpoints by finite-set extrema. Cohomology vanishes outside these endpoints by the preceding zero test. The enclosing interval [min(rmin,smax),max(rmin,smax)] has ordered endpoints, proving bounded constructibility even for reversed local intervals.",
    "uses": [
-    "lem-weil-pbc-constructible-qcqs-affine-local",
-    "def-weil-pbc-etale-constructible-sheaf",
-    "def-weil-pbc-derived-categories",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-sf-noetherian-constructible-open-local",
     "def-weil-pbc-constructible-complexes"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095E (lemma-constructible-quasi-compact-quasi-separated) and Tag 095F (lemma-constructible-local), with elementary finite-interval comparison."
-   }
+   "elementary": false
   },
   {
-   "text": "Still assuming $X\\ne\\varnothing$, put $a=\\min_\\alpha a_\\alpha$ and $b=\\max_\\alpha b_\\alpha$. Let $M$ be any degree-zero etale sheaf of $A$-modules on $X$. Exactness of inverse image makes $j_\\alpha^{-1}M$ degree zero, and [lem-kun-inverse-image-monoidal] gives\n$$j_\\alpha^{-1}(K\\otimes_A^{\\mathbf L}M)\\cong (K|_{W_\\alpha})\\otimes_A^{\\mathbf L}(M|_{W_\\alpha}).$$\nFor $t\\notin[a,b]$ one has $t\\notin[a_\\alpha,b_\\alpha]$ for every chart. Its assumed Tor bound therefore makes the $t$-th cohomology of the right side zero. By the cohomology comparison and sheaf zero test of step 5, $\\mathcal H^t(K\\otimes_A^{\\mathbf L}M)=0$ on $X$. Since $M$ was arbitrary, this is exactly Tor amplitude $[a,b]$ in [def-kun-tor-amplitude]. No replacement of arbitrary module sheaves by constant test modules, and no boundedness assumption on a flat resolution, is used.",
+   "text": "For every module sheaf F, construct the isomorphism between the exact derived pullback of K tensor F[0] and the tensor of the pulled-back K with the pulled-back F in degree zero. Compose leftDerivedUpperStarIsoMapDerivedCategory, leftDerivedUpperStarTensorIso and singleFunctorCompLeftDerivedUpperStarIso. Local Tor vanishing outside the minimum lower and maximum upper endpoints then gives global vanishing by the same homology zero test.",
    "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
     "lem-kun-inverse-image-monoidal",
     "def-kun-tor-amplitude"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 (lemma-pullback-tensor-product); compare Tag 0DJJ (lemma-tor-amplitude-stalk), whose proof uses the same cohomology-zero test. Tor amplitude is the quantification in def-kun-tor-amplitude."
-   }
+   "elementary": false
   },
   {
    "text": "If $X=\\varnothing$, every object of its small etale site is empty. The empty family covers each such object, so the sheaf axiom forces every module sheaf to be zero. Every representing complex of $K$ is thus zero, giving $K\\cong0$ in the derived category. Its cohomology and the cohomology of its derived tensor with every degree-zero module sheaf vanish in every degree. The empty stratification gives constructibility. Thus every cohomological and Tor interval is valid; no minimum or maximum of an empty family is formed. Empty charts over a nonempty $X$ are also harmless, since their local vanishing assumptions are vacuous and the displayed minima/maxima still bound all nonempty charts.",
@@ -135,23 +114,22 @@
   "def-sbc-affine-space",
   "sbc-lem-affine-space-smooth",
   "lem-weil-pbc-affine-source-morphism-separated",
-  "lem-weil-pbc-qcqs-over-affine",
-  "lem-weil-pbc-affine-scheme-qcqs",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-finite-type-over-noetherian",
   "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-etale-sheaf-jointly-surjective-conservative",
   "def-weil-pbc-derived-categories",
-  "def-weil-pbc-etale-site",
-  "lem-weil-pbc-constructible-qcqs-affine-local",
-  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-sf-noetherian-constructible-open-local",
   "def-weil-pbc-constructible-complexes",
   "lem-kun-inverse-image-monoidal",
-  "def-kun-tor-amplitude"
+  "def-kun-tor-amplitude",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-constructible-sheaf"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "V3 stage 3",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
-  "place": "Opening and final paragraphs (unit steps 1 and 4); detailed affine quotient and sheaf-locality arguments supplied using the cited Stacks results."
+  "place": "Opening and final paragraphs, realized by explicit finite affine polynomial presentations and finite-cover gluing. Noetherian open locality uses the existing source theorem instead of the planned qcqs affine-local bridge."
  },
  "mathlib_searches": [
   {
@@ -251,11 +229,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-constructible-qcqs-affine-local",
-  "lem-weil-pbc-etale-composition-cancellation"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -281,5 +255,15 @@
   "by": "Q89",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261019T034323-L-421063",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
