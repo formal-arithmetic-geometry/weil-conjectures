@@ -550,7 +550,7 @@ theorem comparison_diagram_naturality (R : Sheaf J CommRingCat.{max u v r})
       (comparison.{u, v, r} J R P L).app (colimit T) ≫
         (tensorFixed.{u, v, r} J R ((coefficientHomResolution.{r, u, v} J R).obj L) ⋙
           homFixed.{u, v, r} J R P).map (colimMap τ) := by
-  sorry
+  exact (comparison.{u, v, r} J R P L).naturality (colimMap τ)
 
 
 /-- The actual derived comparison roof. The target is the recorded derived internal Hom;
@@ -627,6 +627,12 @@ theorem derivedInternalHom_filteredColimit_comparison
           ((resolutionUnit.{u, v, r} J R).app L))),
       @IsIso _ _ _ _ (@derivedComparison.{u, v, r, w} C _ J _ _ R (colimit S) _
         φ E h hmap _ P L hd) := by
-  sorry
+  obtain ⟨hn, hd⟩ := scalarComparison_quasiIso.{u, v, r}
+    J R S algebra φ hφ T hfree E h hmap P L hP hcont b hL
+  have := hn
+  have := hd
+  refine ⟨hd, ?_⟩
+  dsimp only [derivedComparison]
+  infer_instance
 
 end WeilConjectures.SfbHomFilteredColimit
