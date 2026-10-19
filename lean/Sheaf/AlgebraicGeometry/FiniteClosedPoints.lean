@@ -37,6 +37,8 @@ theorem IsClosed.finite_of_finiteType_over_field_of_closed_points
     {K : Type u} [Field K] {X : Scheme.{u}} (f : X ⟶ Spec (.of K))
     [LocallyOfFiniteType f] [QuasiCompact f] {E : Set X} (hE : IsClosed E)
     (hclosed : ∀ x ∈ E, IsClosed {x}) : E.Finite := by
-  sorry
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  exact finite_of_isClosed_of_closed_points X E hE hclosed
 
 end AlgebraicGeometry
