@@ -6,6 +6,7 @@ module
 
 public import Sheaf.Paper.IntrinsicCoefficientTwists
 public import Sheaf.Paper.PbcCoefficientTwists
+import Mathlib.Data.Nat.Prime.Infinite
 
 /-! # Intrinsic coefficient twists without an auxiliary finite field
 
@@ -57,7 +58,20 @@ IsSfDerivedComplete and the uniform constructible-reduction clauses of
 sfIntegralConstructible. No characteristic or structure map of S is used. -/
 theorem sfIntegralTwistingObject_mem (m : ℤ) :
     sfIntegralConstructible l E S (sfIntegralTwistingObject l E S m) := by
-  sorry
+  obtain ⟨p, hlp, hp⟩ := Nat.exists_infinite_primes (l + 1)
+  have : Fact p.Prime := ⟨hp⟩
+  let D : FiniteFieldDatum.{0} :=
+    { p := p
+      a := 1
+      q := p
+      prime := hp
+      exponent_pos := le_rfl
+      cardinality_eq := by simp
+      k₀ := ZMod p
+      card_base := by simp [Nat.card_eq_fintype_card]
+      k := AlgebraicClosure (ZMod p) }
+  have hl : l ≠ D.p := Nat.ne_of_lt (Nat.lt_of_succ_le hlp)
+  exact intrinsicIntegralCoefficientTwist_mem D l hl E S m
 
 /-- The same signed line as an object of the recorded intrinsic full subcategory.
 Source: blueprint coefficient twists, integral paragraph
