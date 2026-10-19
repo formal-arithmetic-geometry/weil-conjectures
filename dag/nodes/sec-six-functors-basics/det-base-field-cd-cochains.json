@@ -73,16 +73,18 @@
    }
   },
   {
-   "text": "A continuous $c:G^n\\to M$ has finite image: its open fibres cover the compact domain, and a finite subcover contains every nonempty fibre. Moreover it factors through $(G/K)^n$ for an open normal $K$. For each tuple choose a box $\\prod_j x_jK_x$ contained in its fibre, using the open-normal neighbourhood basis; take finitely many such boxes covering $G^n$ and put $K=\\bigcap_x K_x$. Multiplication of any coordinate on the right by an element of $K$ preserves every box of this cover, hence preserves $c$. Therefore $c$ is constant on the fibres of $G^n\\to(G/K)^n$. For $n=0$ the domain is a singleton and the assertion is immediate.",
-   "uses": [],
-   "elementary": true,
+   "text": "Apply [lem-exc-coinduced-functions-open-stabilizer] to the profinite group G^n and the locally constant cochain, giving a normal open U in G^n fixing the cochain under right translation. For each coordinate pull U back along the single-coordinate group homomorphism G to G^n and intersect these finitely many open normal subgroups. If g and h agree modulo the resulting N in every coordinate, each single-coordinate vector g_i^{-1}h_i lies in U; their product lies in U, so the cochain has equal values at g and h. In degree zero choose the whole group and use that G^0 is a singleton. This implements the opening compactness factorization paragraph of the source using the existing proved stabilizer lemma.",
+   "uses": [
+    "lem-exc-coinduced-functions-open-stabilizer"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-cochains.proof.md",
     "place": "Opening paragraph: finite image and factorization through an open normal finite quotient; explicit finite-cover argument"
    }
   },
   {
-   "text": "For the union in clause (2), the finite image of any degree-$n$ cochain is contained in some $M_\\alpha$, by directedness and nonemptiness. A function with values in $M_\\alpha$ is continuous exactly when the same function with values in $M$ is continuous, since both have the discrete topology. The maps on cochains are injective, and their union is all $C^n(G,M)$. The differential preserves $M_\\alpha$ because it is $G$-stable, and its formula is unchanged by inclusion. Thus $C^\\bullet(G,M)$ is the degreewise directed colimit of these subcomplexes, with its canonical maps.",
+   "text": "For the union in clause (2), the finite image of any degree-$n$ cochain is contained in some $M_\\alpha$, by directedness and nonemptiness. A function with values in $M_\\alpha$ is continuous exactly when the same function with values in $M$ is continuous, since both have the discrete topology. The maps on cochains are injective, and their union is all $C^n(G,M)$. The differential preserves $M_\\alpha$ because it is $G$-stable, and its formula is unchanged by inclusion. Thus $C^\\bullet(G,M)$ is the degreewise directed colimit of these subcomplexes, with its canonical maps. Lean implementation constructs the colimit descent from chosen representatives, proves representative independence at a common upper bound using the injective cocone legs, and uses LocallyConstant.desc to lift each finite-image cochain to a stage.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -91,7 +93,7 @@
    }
   },
   {
-   "text": "Here is the cohomology comparison for either filtered complex system used in clauses (2) and (3). For a small directed diagram $K_i^\\bullet$ of abelian-group complexes, put $Z_i^n=\\ker d_i^n$ and $B_i^n=\\operatorname{im}d_i^{n-1}$, with $B_i^0=0$. Apply [lem-weil-pbc-filtered-colimit-abelian-groups-exact] to the exact sequences $0\\to Z_i^n\\to K_i^n\\to B_i^{n+1}\\to0$ and $0\\to B_i^n\\to Z_i^n\\to H^n(K_i)\\to0$. Their colimits remain exact. Since $\\varinjlim B_i^{n+1}\\to\\varinjlim K_i^{n+1}$ is injective, the first sequence identifies $\\varinjlim Z_i^n$ with the cycles in $\\varinjlim K_i$; its surjection identifies $\\varinjlim B_i^{n+1}$ with the boundaries there. The second sequence therefore identifies the canonical map $\\varinjlim H^n(K_i)\\to H^n(\\varinjlim K_i)$ as an isomorphism. Apply this to step 6 and then apply the natural comparison from step 4 to obtain clause (2).",
+   "text": "Here is the cohomology comparison for either filtered complex system used in clauses (2) and (3). For a small directed diagram $K_i^\\bullet$ of abelian-group complexes, put $Z_i^n=\\ker d_i^n$ and $B_i^n=\\operatorname{im}d_i^{n-1}$, with $B_i^0=0$. Apply [lem-weil-pbc-filtered-colimit-abelian-groups-exact] to the exact sequences $0\\to Z_i^n\\to K_i^n\\to B_i^{n+1}\\to0$ and $0\\to B_i^n\\to Z_i^n\\to H^n(K_i)\\to0$. Their colimits remain exact. Since $\\varinjlim B_i^{n+1}\\to\\varinjlim K_i^{n+1}$ is injective, the first sequence identifies $\\varinjlim Z_i^n$ with the cycles in $\\varinjlim K_i$; its surjection identifies $\\varinjlim B_i^{n+1}$ with the boundaries there. The second sequence therefore identifies the canonical map $\\varinjlim H^n(K_i)\\to H^n(\\varinjlim K_i)$ as an isomorphism. Apply this to step 6 and then apply the natural comparison from step 4 to obtain clause (2). In Lean, short-complex colimits are assembled from the three termwise colimits. The additive universe-lift functor preserves these colimits and reflects them; AB5 in the larger universe gives preservation of homology, and reflection transports the comparison back to the coefficient universe.",
    "uses": [
     "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
    ],
@@ -102,7 +104,7 @@
    }
   },
   {
-   "text": "For clause (3), first choose an open normal $N_0$ acting trivially on all of $M$. Such a subgroup exists under its hypothesis: if the family of all such subgroups were empty its inverse limit would be the one-element group, so the asserted identification would make $G$ trivial, in which case $G$ itself belongs to the family. Intersections keep the family directed under reverse inclusion. For any cochain, step 5 supplies $K$ through which it factors; replace $K$ by $N=K\\cap N_0$. Then $N$ acts trivially on $M$, and the descended cochain on $(G/N)^n$ has the same differential: in the first term $(g_1N)m=g_1m$, and all other terms use quotient multiplication. Conversely every cochain on a finite quotient inflates to a continuous one on $G$. Each inflation into $C^n(G,M)$ is injective because the quotient map is surjective. If two representatives inflate to the same cochain, their pullbacks already agree at the common refinement $N\\cap N'$. These statements prove the canonical degreewise colimit identification, including its differential and all transition maps.",
+   "text": "For clause (3), first choose an open normal $N_0$ acting trivially on all of $M$. Such a subgroup exists under its hypothesis: if the family of all such subgroups were empty its inverse limit would be the one-element group, so the asserted identification would make $G$ trivial, in which case $G$ itself belongs to the family. Intersections keep the family directed under reverse inclusion. For any cochain, step 5 supplies $K$ through which it factors; replace $K$ by $N=K\\cap N_0$. Then $N$ acts trivially on $M$, and the descended cochain on $(G/N)^n$ has the same differential: in the first term $(g_1N)m=g_1m$, and all other terms use quotient multiplication. Conversely every cochain on a finite quotient inflates to a continuous one on $G$. Each inflation into $C^n(G,M)$ is injective because the quotient map is surjective. If two representatives inflate to the same cochain, their pullbacks already agree at the common refinement $N\\cap N'$. These statements prove the canonical degreewise colimit identification, including its differential and all transition maps. Lean constructs each quotient complex as the additive subgroups of C^n(G,M) consisting of cochains constant on quotient fibers. The displayed differential preserves these groups because N acts trivially on coefficients and quotient multiplication commutes with each contracted face. Since G/N is discrete, evaluation on chosen quotient representatives gives an additive equivalence with all locally constant quotient cochains; quotient surjectivity proves its inverse and the pullback equations. Reverse-inclusion maps are subgroup inclusions, giving the canonical inflation diagram and cocone. Factorization from step 5, intersected with a fixed trivial-action subgroup, proves joint surjectivity in each degree; injectivity is subtype injectivity. The same explicit union-colimit construction as in clause (2) gives the degreewise colimit, and degreewise colimits assemble to the complex colimit.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -130,12 +132,13 @@
   "lem-sc-locally-constant-cochains-effaceable",
   "lem-weil-pbc-effaceable-delta-functor-universal",
   "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-exc-coinduced-functions-open-stabilizer",
   "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-cochains.proof.md",
-  "place": "Opening finite-cover argument and clauses (1)-(3), supplemented by Stacks Tags 04JP, 04JR, 04JF, 010T, 015B, 05TE and 00DB, and the existing integer-cochain effaceability tool"
+  "place": "Opening finite-cover argument and clauses (1)-(3), implemented in Lean by D7 using delta-functor uniqueness, injective union cocones, universe-lifted short-complex homology colimits, the proved open-normal stabilizer lemma applied to powers, and actual quotient-invariant subcomplexes with their canonical inflation maps."
  },
  "mathlib_searches": [
   {
@@ -284,5 +287,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261019T002527-L-2148132",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
