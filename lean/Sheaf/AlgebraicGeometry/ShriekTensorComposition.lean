@@ -29,6 +29,7 @@ import Sheaf.AlgebraicGeometry.EtaleSheafClopenProduct
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.AlgebraicGeometry.ProperOpenSection
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionExchange
 import Sheaf.Paper.RingedExchangeTensorCoherence
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 
@@ -323,6 +324,49 @@ theorem compactSupportProjectionMap_comparison
       (rightDerivedLowerShriekOfCompactificationIso A c d).hom.app
         (((derivedTensor (ModuleCat.{u + 1} A) X).obj
           ((upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory.obj K)).obj M) := by
-  sorry
+  let T := derivedTensor (ModuleCat.{u + 1} A) Y
+  let U := derivedTensor (ModuleCat.{u + 1} A) X
+  let L := (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor
+  let D := (upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory
+  let F := rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c
+  let G := rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) d
+  let N := (U.obj M).obj (L.obj K)
+  let e := rightDerivedLowerShriekOfCompactificationIso A c d
+  let pc : (T.obj (F.obj M)).obj K ⟶ F.obj N :=
+    ((projectionMapOfCompactification (ModuleCat.{u + 1} A) c).app M).app K
+  let pd : (T.obj (G.obj M)).obj K ⟶ G.obj N :=
+    ((projectionMapOfCompactification (ModuleCat.{u + 1} A) d).app M).app K
+  have hp : (T.map (e.hom.app M)).app K ≫ pd = pc ≫ e.hom.app N :=
+    (projectionMapOfCompactification_rightDerivedLowerShriekOfCompactificationIso
+      A c d M K).symm
+  let S := derivedTensorSymmetry (ModuleCat.{u + 1} A) Y
+  let l := leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f
+  let q := ((U.obj M).map (l.hom.app K)) ≫
+    ((derivedTensorSymmetry (ModuleCat.{u + 1} A) X).inv.app (D.obj K)).app M
+  have hc : compactSupportProjectionMapOfCompactification A c M K =
+      (S.hom.app K).app (F.obj M) ≫ pc ≫ F.map q := by
+    dsimp only [compactSupportProjectionMapOfCompactification, q]
+    rw [Functor.map_comp]
+  have hd : compactSupportProjectionMapOfCompactification A d M K =
+      (S.hom.app K).app (G.obj M) ≫ pd ≫ G.map q := by
+    dsimp only [compactSupportProjectionMapOfCompactification, q]
+    rw [Functor.map_comp]
+  rw [hc, hd]
+  have hs : (T.obj K).map (e.hom.app M) ≫ (S.hom.app K).app (G.obj M) =
+      (S.hom.app K).app (F.obj M) ≫ (T.map (e.hom.app M)).app K :=
+    (S.hom.app K).naturality (e.hom.app M)
+  have hn : e.hom.app N ≫ G.map q = F.map q ≫ e.hom.app _ :=
+    (e.hom.naturality q).symm
+  calc
+    _ = (S.hom.app K).app (F.obj M) ≫
+        ((T.map (e.hom.app M)).app K ≫ pd) ≫ G.map q := by
+      rw [← Category.assoc, hs]
+      simp only [Category.assoc]
+    _ = (S.hom.app K).app (F.obj M) ≫
+        (pc ≫ e.hom.app N) ≫ G.map q := by rw [hp]
+    _ = _ := by
+      rw [Category.assoc, Category.assoc, hn]
+      simp only [Category.assoc]
+      rfl
 
 end AlgebraicGeometry.Etale
