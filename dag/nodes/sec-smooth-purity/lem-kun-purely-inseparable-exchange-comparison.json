@@ -1,0 +1,146 @@
+{
+ "id": "lem-kun-purely-inseparable-exchange-comparison",
+ "kind": "statement",
+ "title": "Purely inseparable comparison of canonical field-extension exchange",
+ "statement": "Let K,L,P,M be fields with compatible algebra structures K to L to M and K to P to M (the two composites K to M agree). Assume P/K and M/L purely inseparable. Let g:T to S be any morphism of K-schemes and E any bounded below derived abelian etale complex on T. Let T_P,S_P,g_P be their chosen scalar extensions to P, and E_P the exact inverse image of E. Then the canonical exchange for L/K at g,E is invertible if and only if the canonical exchange for M/P at g_P,E_P is invertible. No qcqs or torsion condition is imposed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F1C, lemma-base-change-field-extension; Tag 0E47 for horizontal exchange pasting"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-scheme-over-base",
+  "def-pc-base-change",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-pbc-derived-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Construct the actual map c_W from the iterated pullback (W_P)_M to W_L by pullback.lift on its projections. The scalar tower equations give b followed by a = c followed by r; pullback hom-ext proves naturality in W. Pullback pasting and cancellation show c_W is the base change of Spec M to Spec L. Pure inseparability gives universal homeomorphisms for Spec P to Spec K and Spec M to Spec L, hence also for a_W and c_W by base-change stability.",
+   "uses": [
+    "lem-pc-spec-pure-insep-integral-radicial-surjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use isEquivalence_upperStar for these universal homeomorphisms. The private plusEquivalence helper constructs the D+ quasi-inverse by applying mapDerivedCategoryPlus to a chosen quasi-inverse; mapDerivedCategoryPlusNatIso, the identity iso and the composition iso give its unit and counit explicitly. Consequently the specified D+ inverse images are equivalences and reflect isomorphisms.",
+   "uses": [
+    "thm-weil-pbc-universal-homeomorphism-invariance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For either purely inseparable square the private universalExchange helper identifies derivedBaseChangeMapPlus with the right mate of pullbackSquareComparison. This is proved by derivedBaseChangeMapPlus_ext, using Adjunction.derivedPlus_mateEquiv_app_fac and pullbackSquareComparison_hom_app_factorsh on every bounded-below homotopy complex. The two derivedPlus adjunctions and the mate-isomorphism theorem now give invertibility of this exact canonical exchange.",
+   "uses": [
+    "lem-weil-mate-iso-along-equivalences",
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "def-weil-pbc-derived-square-iso",
+    "lemma-weil-pbc-derived-exchange-replacement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the upstream horizontal pasting equation to squares (a,b) and (r,c). Their outer horizontal maps agree by the projection equations, so exchange_congr identifies the invertibility propositions for their outer exchanges. Expand the two pasting expressions at E and cancel the composition isomorphisms, the pullback of Ex_a, and Ex_c. This gives IsIso(Ex_b at a_T^* E) iff IsIso(c_S^*(Ex_r at E)). Reflection of isomorphisms by the equivalence c_S^* gives the asserted equivalence. The private exchange_diamond helper carries out this cancellation in Lean.",
+   "uses": [
+    "lemma-weil-pbc-derived-exchange-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-spec-pure-insep-integral-radicial-surjective",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "lem-weil-mate-iso-along-equivalences",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "def-weil-pbc-derived-square-iso",
+  "lemma-weil-pbc-derived-exchange-replacement",
+  "lemma-weil-pbc-derived-exchange-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F1C perfect-closure reduction and Tag 0E47; complete Lean proof using explicit pullback lifts, derived mate computation, horizontal pasting and reflection of isomorphisms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived exchange along purely inseparable field extensions is invariant",
+   "results": "Eight ring-theoretic field-extension results, including AlgEquiv.isPurelyInseparable and Field.sepDegree_eq_of_isPurelyInseparable; no derived exchange comparison.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertibility of derived etale exchange is unchanged by purely inseparable extension of the two base fields",
+   "results": "Eight algebraic etaleness results (Algebra.FormallyEtale.of_isSeparable_aux, Algebra.Etale.of_equiv, and related ring-theoretic statements); no derived exchange theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"isIso\"",
+   "results": "Six ordinary Kan-extension comparisons in CategoryTheory.TwoSquare; none concerns etale derived exchange.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fieldExtension|field_extension|isIso_derivedBaseChangeMapPlus; inseparable.*comparison|inseparable.*exchange",
+   "results": "Read FieldExtensionDerivedDirectImageExchange (only sheaves in degree zero over an algebraically closed ground field); SmoothBaseChangeLimit (general smooth inverse-limit theorem); universal-homeomorphism exchange (underived), ExactEquivalenceDerivedPlus (abstract equivalence), and both existing 0F1C nodes. No separable case or compatible two-field comparison already declared.",
+   "date": "2026-10-19",
+   "verdict": "reuse support nodes; no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FieldExtensionExchange",
+  "date": "2026-10-19",
+  "group": "P6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f1c",
+   "place": "Proof Step 1 (reduction to perfect fields): identify the inverse and direct images under the two purely inseparable field extensions using topological invariance.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FieldExtensionPerfectComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldExtensionPerfectComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_fieldExtension_iff_of_purelyInseparable",
+  "statement": "theorem isIso_fieldExtension_iff_of_purelyInseparable\n    (K L P M : Type u) [Field K] [Field L] [Field P] [Field M]\n    [Algebra K L] [Algebra K P] [Algebra L M] [Algebra P M] [Algebra K M]\n    [IsScalarTower K L M] [IsScalarTower K P M]\n    [IsPurelyInseparable K P] [IsPurelyInseparable L M]\n    (T S : Over (Spec (.of K))) (g : T ⟶ S)\n    (E : DerivedCategory.Plus\n      (Sheaf T.left.smallEtaleTopology AddCommGrpCat.{u + 1})) :\n    let r := Spec.map (CommRingCat.ofHom (algebraMap K L))\n    let a := Spec.map (CommRingCat.ofHom (algebraMap K P))\n    let b := Spec.map (CommRingCat.ofHom (algebraMap P M))\n    let TP := (Over.pullback a).obj T\n    let SP := (Over.pullback a).obj S\n    let gP := (Over.pullback a).map g\n    let EP := (upperStar AddCommGrpCat.{u + 1} (pullback.fst T.hom a)).mapDerivedCategoryPlus.obj E\n    IsIso ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1}\n      (⟨by simp [Over.pullback_map_left]⟩ : CommSq (pullback.fst T.hom r)\n        ((Over.pullback r).map g).left g.left (pullback.fst S.hom r))).app E) ↔\n    IsIso ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1}\n      (⟨by dsimp only [TP, SP]; simp only [Over.pullback_map_left, pullback.lift_fst]⟩ :\n        CommSq (pullback.fst TP.hom b)\n        ((Over.pullback b).map gP).left gP.left (pullback.fst SP.hom b))).app EP)",
+  "branch": "sheaf-dag",
+  "by": "P6",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261019T005358-L-2761266",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261019T005358-L-2761266",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

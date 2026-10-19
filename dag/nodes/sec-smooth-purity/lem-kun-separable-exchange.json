@@ -1,0 +1,157 @@
+{
+ "id": "lem-kun-separable-exchange",
+ "kind": "statement",
+ "title": "Separable ground-field extension exchange",
+ "statement": "Let L/K be a possibly transcendental separable extension, meaning every finitely generated intermediate field is separably generated. Let g:T to S be a quasi-compact quasi-separated morphism of K-schemes. For every bounded below derived abelian etale complex E on T whose geometric cohomology stalk elements have positive annihilators nonzero in K, the canonical exchange for T_L to S_L over T to S is invertible.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F1C, lemma-base-change-field-extension, separable case; Tag 0F09, lemma-smooth-base-change-general"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-scheme-over-base",
+  "def-pc-base-change",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-separable-field-extension",
+  "def-kun-torsion-invertible",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Use the full ordered collection A of finitely generated smooth K-subalgebras of L. The smooth-subalgebra theorem makes A nonempty and directed and the Spec image of its canonical cocone a limit cone.",
+   "uses": [
+    "lem-kun-separable-smooth-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift the Spec diagram to Over(Spec K), using the structure maps. Pull it back along S to Spec K. Pullback is a right adjoint, so preserves this limit; the forgetful functor preserves connected limits. Extend the resulting cone by pullback symmetry to get apex S_L. The structure maps are smooth and affine and the transition maps are affine by base change. The pullback square for g_L follows from cancellation of the two outer pullback squares.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a stalk element in any cohomological degree, hE gives n>0 with n*x=0 and n nonzero in K. Hence n is a unit in K, and its image under K to Gamma(S,O_S) is a unit. Apply smoothBaseChange_of_inverseLimit to g and the constructed smooth system. Its canonical exchange is the one in the conclusion; proof irrelevance identifies the commutativity witnesses.",
+   "uses": [
+    "lem-kun-0f09"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-separable-smooth-colimit",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-kun-0f09"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F1C, separable case; explicit limit construction over S and application of Tag 0F09"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived exchange along purely inseparable field extensions is invariant",
+   "results": "Eight ring-theoretic field-extension results, including AlgEquiv.isPurelyInseparable and Field.sepDegree_eq_of_isPurelyInseparable; no derived exchange comparison.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertibility of derived etale exchange is unchanged by purely inseparable extension of the two base fields",
+   "results": "Eight algebraic etaleness results (Algebra.FormallyEtale.of_isSeparable_aux, Algebra.Etale.of_equiv, and related ring-theoretic statements); no derived exchange theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"isIso\"",
+   "results": "Six ordinary Kan-extension comparisons in CategoryTheory.TwoSquare; none concerns etale derived exchange.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fieldExtension|field_extension|isIso_derivedBaseChangeMapPlus; inseparable.*comparison|inseparable.*exchange",
+   "results": "Read FieldExtensionDerivedDirectImageExchange (only sheaves in degree zero over an algebraically closed ground field); SmoothBaseChangeLimit (general smooth inverse-limit theorem); universal-homeomorphism exchange (underived), ExactEquivalenceDerivedPlus (abstract equivalence), and both existing 0F1C nodes. No separable case or compatible two-field comparison already declared.",
+   "date": "2026-10-19",
+   "verdict": "reuse support nodes; no duplicate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separable extension of fields is a limit of smooth algebras and etale derived base change",
+   "results": "Eight ring-theoretic results including Algebra.FormallyEtale.of_isSeparable and Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable; no etale derived exchange.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "separable.*exchange|separable.*baseChange|smoothBaseChange_of_inverseLimit",
+   "results": "Search service returned zero matches. Local source reading found smoothBaseChange_of_inverseLimit and the smooth-subalgebra colimit theorem, which the proof uses.",
+   "date": "2026-10-19",
+   "verdict": "reuse existing support"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived etale exchange for a separable extension of the ground field is invertible",
+   "results": "Eight algebraic separability and etaleness results, including Algebra.FormallyEtale.of_isSeparable and AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; none states derived exchange for a field extension.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FieldExtensionExchange",
+  "date": "2026-10-19",
+  "group": "P6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f1c",
+   "place": "Proof Step 2 (separable extensions): apply smooth inverse-limit base change to the smooth finitely generated subalgebras.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SeparableFieldExtensionExchange",
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparableFieldExtensionExchange.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_separableFieldExtension",
+  "statement": "theorem isIso_derivedBaseChangeMapPlus_separableFieldExtension\n    (K L : Type u) [Field K] [Field L] [Algebra K L]\n    (hsep : Algebra.IsSeparableExtension K L)\n    (T S : Over (Spec (.of K))) (g : T ⟶ S)\n    [QuasiCompact g.left] [QuasiSeparated g.left]\n    (E : _root_.DerivedCategory.Plus\n      (Sheaf T.left.smallEtaleTopology AddCommGrpCat.{u + 1}))\n    (hE : HasTorsionCohomologyOfInvertibleOrder K T E.obj) :\n    IsIso ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1}\n      (⟨by simp [Over.pullback_map_left]⟩ : CommSq\n        (pullback.fst T.hom (Spec.map (CommRingCat.ofHom (algebraMap K L))))\n        (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap K L)))).map g).left)\n        g.left (pullback.fst S.hom\n          (Spec.map (CommRingCat.ofHom (algebraMap K L)))))).app E)",
+  "branch": "sheaf-dag",
+  "by": "P6",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261019T005358-L-2761266",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261019T005358-L-2761266",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

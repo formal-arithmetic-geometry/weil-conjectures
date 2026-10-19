@@ -27,22 +27,13 @@ public import Sheaf.AlgebraicGeometry.InvertibleTorsionOrders
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.GeometricStalkAsPullback
-import Sheaf.AlgebraicGeometry.DerivedInverseImageComposition
-import Sheaf.AlgebraicGeometry.GeometricStalkCohomology
 import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
-import Sheaf.FieldTheory.SeparableSmoothColimit
-import Sheaf.AlgebraicGeometry.SmoothBaseChangeLimit
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Sheaf.FieldTheory.SeparableExtension
-import Sheaf.AlgebraicGeometry.HomeomorphPurelyInseparableBaseChange
-import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
-import Sheaf.CategoryTheory.MateIsoAlongEquivalences
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
-import Sheaf.Paper.KunBaseChange
+import Mathlib.FieldTheory.PurelyInseparable.PerfectClosure
+import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+import Mathlib.FieldTheory.SeparablyGenerated
+import Sheaf.AlgebraicGeometry.SeparableFieldExtensionExchange
+import Sheaf.AlgebraicGeometry.FieldExtensionPerfectComparison
 
 /-!
 # Canonical derived exchange for an extension of the ground field
@@ -114,7 +105,51 @@ theorem isIso_derivedBaseChangeMapPlus_fieldExtension
         (pullback.fst T.hom (Spec.map (CommRingCat.ofHom (algebraMap K L))))
         (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap K L)))).map g).left)
         g.left (pullback.fst S.hom
-          (Spec.map (CommRingCat.ofHom (algebraMap K L)))))).app E) :=
-  sorry
+          (Spec.map (CommRingCat.ofHom (algebraMap K L)))))).app E) := by
+  classical
+  let M := perfectClosure L (AlgebraicClosure L)
+  let : Algebra K M := ((algebraMap L M).comp (algebraMap K L)).toAlgebra
+  let : IsScalarTower K L M := IsScalarTower.of_algebraMap_eq' rfl
+  let P := perfectClosure K M
+  have hsep : Algebra.IsSeparableExtension P M := by
+    intro F hF
+    let : Algebra.EssFiniteType P F := IntermediateField.essFiniteType_iff.mpr hF
+    obtain ⟨s, hs, hsep⟩ :=
+      exists_isTranscendenceBasis_and_isSeparable_of_perfectField P F
+    exact ⟨(s : Set F), hs, hsep⟩
+  let a := Spec.map (CommRingCat.ofHom (algebraMap K P))
+  let TP := (Over.pullback a).obj T
+  let SP := (Over.pullback a).obj S
+  let gP := (Over.pullback a).map g
+  let F := upperStar AddCommGrpCat.{u + 1} (pullback.fst T.hom a)
+  let EP := F.mapDerivedCategoryPlus.obj E
+  have sq : IsPullback (pullback.fst T.hom a) gP.left g.left
+      (pullback.fst S.hom a) := by
+    have outer : IsPullback (gP.left ≫ pullback.snd S.hom a)
+        (pullback.fst T.hom a) a (g.left ≫ S.hom) := by
+      simpa only [gP, Over.pullback_map_left, pullback.lift_snd, Over.w] using
+        (IsPullback.of_hasPullback T.hom a).flip
+    exact (outer.of_right (by simp [gP, Over.pullback_map_left])
+      (IsPullback.of_hasPullback S.hom a).flip).flip
+  let : QuasiCompact gP.left :=
+    MorphismProperty.of_isPullback (P := @QuasiCompact) sq inferInstance
+  let : QuasiSeparated gP.left :=
+    MorphismProperty.of_isPullback (P := @QuasiSeparated) sq inferInstance
+  have hEP : HasTorsionCohomologyOfInvertibleOrder P TP EP.obj := by
+    intro q Ω _ _ t x
+    let H := (DerivedCategory.homologyFunctor
+      (Sheaf T.left.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj E.obj
+    let e := ((Scheme.pointSmallEtale t).sheafFiber.mapIso
+      ((F.mapDerivedCategoryHomologyFunctorIso q).app E.obj).symm) ≪≫
+        (upperStarCompSheafFiberIso AddCommGrpCat.{u + 1}
+          (pullback.fst T.hom a) t).app H
+    obtain ⟨n, ⟨hn, hnK⟩, hx⟩ := hE q Ω (t ≫ pullback.fst T.hom a) (e.hom x)
+    refine ⟨n, ⟨hn, ?_⟩, ?_⟩
+    · simpa only [map_natCast] using
+        (map_ne_zero_iff (algebraMap K P) (algebraMap K P).injective).mpr hnK
+    · apply (ConcreteCategory.bijective_of_isIso e.hom).injective
+      simpa only [map_nsmul, map_zero] using hx
+  apply (isIso_fieldExtension_iff_of_purelyInseparable K L P M T S g E).mpr
+  exact isIso_derivedBaseChangeMapPlus_separableFieldExtension P M hsep TP SP gP EP hEP
 
 end AlgebraicGeometry.Etale
