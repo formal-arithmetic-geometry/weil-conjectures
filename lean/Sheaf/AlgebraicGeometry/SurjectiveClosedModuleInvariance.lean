@@ -9,24 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 public import Sheaf.Paper.ProEtaleFixedModuleLocalConstancy
-import Sheaf.AlgebraicGeometry.ProEtaleSheafTopologicalInvariance
-import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
-import Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
-import Sheaf.Paper.PbcCompletedPullbackActual
-import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
-import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
-import Sheaf.Paper.ProEtaleSurjectiveClosedCoverRefinement
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
-import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
-import Sheaf.AlgebraicGeometry.ProEtaleObjectInverseImageRestriction
-import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Sheaf.Paper.ProEtaleLocallyConstantSheafOfUniverses
-import Sheaf.SixFunctors.GeometricInverseImageConstantModule
+import WeilConjectures.ConstructibleSheaf.Pullback
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
 # Surjective closed immersions and ordinary module sheaves
@@ -86,36 +70,49 @@ def sfbProEtaleFiniteLocalModels (Y : Scheme.{u}) (A : Type u) [CommRing A]
           (r : (Fin n → ULift.{u + 1, u} A) →ₗ[ULift.{u + 1, u} A] M),
           r.comp i = LinearMap.id)
 
+private theorem sfbEtale_over_model_iff {Y : Scheme.{u}}
+    (A : Type (u + 1)) [CommRing A]
+    (H : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)) (U : Y.Etale)
+    (M : ModuleCat.{u + 1} A) :
+    Nonempty (H.over U ≅
+      (constantSheaf (Y.smallEtaleTopology.over U) (ModuleCat.{u + 1} A)).obj M) ↔
+    Nonempty ((Etale.upperStar (ModuleCat.{u + 1} A) U.hom).obj H ≅
+      (constantSheaf U.left.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M) := by
+  let E := Etale.overSheafEquiv U (ModuleCat.{u + 1} A)
+  let e := overSheafEquivFunctorObjOverIso (ModuleCat.{u + 1} A) U H
+  let c := (Etale.overEquiv U).constantSheafSheafCongrIso
+    (Y.smallEtaleTopology.over U) U.left.smallEtaleTopology (ModuleCat.{u + 1} A)
+    CategoryTheory.Over.mkIdTerminal
+  constructor
+  · rintro ⟨i⟩
+    exact ⟨e.symm ≪≫ E.functor.mapIso i ≪≫ c.app M⟩
+  · rintro ⟨i⟩
+    exact ⟨E.functor.preimageIso (e ≪≫ i ≪≫ (c.app M).symm)⟩
+
 /-- Surjective closed restriction on the etale site: the actual adjunction is an
 adjoint equivalence, constants pull back to the same module models, and finite local
 models, with or without finite-free splittings, are preserved and reflected.
 Source: Stacks, Tags 04DZ, 03SI and Modules on Sites, lemma-pullback-locally-constant
 (blueprint: lem-sfb-surjective-closed-module-invariance).
 
-Proof: (1) A surjective closed immersion and all its base changes are universal
-homeomorphisms [lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism].
-Etale topological invariance gives the set-sheaf equivalence and invertible actual
-adjunction maps [thm-weil-pbc-universal-homeomorphism-invariance].
-(2) The constant-coefficient inverse-image theorem identifies the module and abelian
-units [lem-pe-constant-left-module-inverse-image,
-prop-weil-pbc-inverse-image-modules-exact]. Finite-product adjunction lifting identifies
-the abelian and set units [lem-weil-pbc-adjunction-lifts-group-ring-objects]. An inverse
-of a bijective linear map is linear. Thus the actual module unit is invertible.
-(3) Direct image reflects isomorphisms; the adjunction triangle then makes its counit
-invertible [lem-weil-pbc-ringed-topoi-module-adjunction]. These natural maps give the
-claimed equivalences. (4) Geometric inverse image preserves arbitrary constant modules
-[lem-sfb-geometric-inverse-image-constant-module].
-(5) Pull a trivializing cover back: etale base change preserves covers, localization
-is object restriction, and inverse image commutes with these restrictions
-[lem-weil-pbc-etale-base-change-continuous,
-lem-weil-pbc-etale-site-localization-open,
-lem-weil-pbc-etale-inverse-image-algebraic-structures].
-(6) Conversely lift each etale object across h by the etale site equivalence and use
-covering reflection [lemma-weil-pbc-universal-homeomorphism-site-equivalence,
-lemma-weil-pbc-universal-homeomorphism-coverings]. The base-changed fully faithful
-module inverse image lifts each trivialization and its inverse uniquely.
-(8) All local models and their splitting maps are unchanged. Empty covers, rank zero,
-zero rings and modules are allowed; no Noetherianity or nilpotence bound was used. -/
+Proof: a surjective closed immersion is a universal homeomorphism. The existing
+etale topological-invariance theorem applies directly to ModuleCat-valued sheaves,
+so both functors are equivalences and the actual adjunction unit and counit are
+isomorphisms. The constant comparison is upperStarConstantSheafIso.
+For preservation, pull back a trivializing cover and each chosen module isomorphism.
+The composition comparisons identify the two pullbacks around the cartesian square;
+the constant comparison retains the exact same module M.
+For reflection, lift each member of a trivializing cover through the equivalence of
+etale sites. The lifts cover Y: lift a point to T, then to a cover member and project
+its image in the corresponding fiber product to the lifted member over Y.
+On each lifted member, pull the given trivialization back along the isomorphism to
+the original member. The composition comparisons identify its source with the
+pullback of H. The base-changed universal homeomorphism has fully faithful module
+inverse image, so preimageIso descends the trivialization with the same model M.
+The localization equivalence and its constant-sheaf comparison convert between
+the localized-site and scheme-site presentations throughout. All finiteness proofs,
+integers n and splitting maps are reused unchanged. The cover arguments quantify
+over points, so empty covers and schemes need no exception. -/
 theorem sfbEtale_surjectiveClosed_module_invariance
     {T Y : Scheme.{u}} (h : T ⟶ Y) [IsClosedImmersion h] [Surjective h]
     (A : Type (u + 1)) [CommRing A] [Finite A] :
@@ -131,7 +128,98 @@ theorem sfbEtale_surjectiveClosed_module_invariance
       sfbEtaleFiniteLocalModels A H projective ↔
         sfbEtaleFiniteLocalModels A
           ((Etale.upperStar (ModuleCat.{u + 1} A) h).obj H) projective) := by
-  sorry
+  have : (Etale.upperStar (ModuleCat.{u + 1} A) h).IsEquivalence :=
+    Etale.isEquivalence_upperStar _ h
+  have : (Etale.lowerStar (ModuleCat.{u + 1} A) h).IsEquivalence :=
+    Etale.isEquivalence_lowerStar _ h
+  refine ⟨inferInstance, inferInstance, inferInstance, inferInstance, ?_, ?_⟩
+  · intro M
+    exact ⟨(upperStarConstantSheafIso (ModuleCat.{u + 1} A) h).app M⟩
+  · intro H projective
+    have : JointlySurjective etalePrecoverage.{u} :=
+      inferInstanceAs (JointlySurjective (precoverage @AlgebraicGeometry.Etale))
+    constructor
+    · rintro ⟨d, hd⟩
+      let D := ModuleCat.{u + 1} A
+      let G := (Etale.upperStar D h).obj H
+      have hm (j : d.cover.I₀) :
+          ∃ M : D, Finite M ∧
+            Nonempty (G.over (Cover.etalePrecoverageToEtale (d.cover.pullback₂ h) j) ≅
+              (constantSheaf
+                (T.smallEtaleTopology.over (Cover.etalePrecoverageToEtale (d.cover.pullback₂ h) j))
+                D).obj M) ∧
+            (projective = true → ∃ (n : ℕ) (i : M →ₗ[A] (Fin n → A))
+              (r : (Fin n → A) →ₗ[A] M), r.comp i = LinearMap.id) := by
+        obtain ⟨M, hM, eM, hp⟩ := hd j
+        obtain ⟨iM⟩ := (sfbEtale_over_model_iff A H _ M).mp eM
+        let e : (Etale.upperStar D (Limits.pullback.fst (d.cover.f j) h)).obj
+            ((Etale.upperStar D (d.cover.f j)).obj H) ≅
+            (Etale.upperStar D (Limits.pullback.snd (d.cover.f j) h)).obj G :=
+          ((Etale.upperStarComp D (Limits.pullback.fst (d.cover.f j) h)
+            (d.cover.f j)).app H).symm ≪≫
+            eqToIso (congrArg (fun m ↦ (Etale.upperStar D m).obj H) Limits.pullback.condition) ≪≫
+            (Etale.upperStarComp D (Limits.pullback.snd (d.cover.f j) h) h).app H
+        let iG := e.symm ≪≫
+          (Etale.upperStar D (Limits.pullback.fst (d.cover.f j) h)).mapIso iM ≪≫
+          (upperStarConstantSheafIso D (Limits.pullback.fst (d.cover.f j) h)).app M
+        exact ⟨M, hM, (sfbEtale_over_model_iff A G _ M).mpr ⟨iG⟩, hp⟩
+      refine ⟨⟨d.cover.pullback₂ h, ?_⟩, hm⟩
+      intro j
+      obtain ⟨M, _, ⟨iM⟩, _⟩ := hm j
+      exact Sheaf.isConstant_of_iso _ iM
+    · rintro ⟨d, hd⟩
+      let D := ModuleCat.{u + 1} A
+      let G := (Etale.upperStar D h).obj H
+      let V (i : d.cover.I₀) : Y.Etale :=
+        h.Etale.objPreimage (d.cover.etalePrecoverageToEtale i)
+      let e (i : d.cover.I₀) : h.Etale.obj (V i) ≅ d.cover.etalePrecoverageToEtale i :=
+        h.Etale.objObjPreimageIso _
+      have hinv (i : d.cover.I₀) :
+          (e i).inv.left ≫ Limits.pullback.snd (V i).hom h = d.cover.f i :=
+        MorphismProperty.Over.w (e i).inv
+      let C : Cover.{u} etalePrecoverage Y :=
+        { I₀ := d.cover.I₀
+          X i := (V i).left
+          f i := (V i).hom
+          mem₀ := by
+            refine (presieve₀_mem_precoverage_iff _).mpr ⟨fun y ↦ ?_, fun i ↦ (V i).prop⟩
+            obtain ⟨x, rfl⟩ := h.surjective y
+            obtain ⟨i, x', rfl⟩ := d.cover.exists_eq x
+            refine ⟨i, (Limits.pullback.fst (V i).hom h) ((e i).inv.left x'), ?_⟩
+            change ((e i).inv.left ≫ Limits.pullback.fst (V i).hom h ≫ (V i).hom) x' =
+              (d.cover.f i ≫ h) x'
+            rw [Limits.pullback.condition, ← Category.assoc, hinv]
+            rfl }
+      have hm (i : d.cover.I₀) :
+          ∃ M : D, Finite M ∧
+            Nonempty (H.over (C.etalePrecoverageToEtale i) ≅
+              (constantSheaf (Y.smallEtaleTopology.over (C.etalePrecoverageToEtale i)) D).obj M) ∧
+            (projective = true → ∃ (n : ℕ) (j : M →ₗ[A] (Fin n → A))
+              (r : (Fin n → A) →ₗ[A] M), r.comp j = LinearMap.id) := by
+        obtain ⟨M, hM, eM, hp⟩ := hd i
+        obtain ⟨iM⟩ := (sfbEtale_over_model_iff A G _ M).mp eM
+        have hsnd : Limits.pullback.snd (V i).hom h = (e i).hom.left ≫ d.cover.f i :=
+          (MorphismProperty.Over.w (e i).hom).symm
+        let e' : (Etale.upperStar D (Limits.pullback.fst (V i).hom h)).obj
+            ((Etale.upperStar D (V i).hom).obj H) ≅
+            (Etale.upperStar D (e i).hom.left).obj
+              ((Etale.upperStar D (d.cover.f i)).obj G) :=
+          ((Etale.upperStarComp D (Limits.pullback.fst (V i).hom h) (V i).hom).app H).symm ≪≫
+            eqToIso (congrArg (fun m ↦ (Etale.upperStar D m).obj H) Limits.pullback.condition) ≪≫
+            (Etale.upperStarComp D (Limits.pullback.snd (V i).hom h) h).app H ≪≫
+            eqToIso (congrArg (fun m ↦ (Etale.upperStar D m).obj G) hsnd) ≪≫
+            (Etale.upperStarComp D (e i).hom.left (d.cover.f i)).app G
+        have : (Etale.upperStar D (Limits.pullback.fst (V i).hom h)).IsEquivalence :=
+          Etale.isEquivalence_upperStar D _
+        let iV := (Etale.upperStar D (Limits.pullback.fst (V i).hom h)).preimageIso
+          (e' ≪≫ (Etale.upperStar D (e i).hom.left).mapIso iM ≪≫
+            (upperStarConstantSheafIso D (e i).hom.left).app M ≪≫
+            ((upperStarConstantSheafIso D (Limits.pullback.fst (V i).hom h)).app M).symm)
+        exact ⟨M, hM, (sfbEtale_over_model_iff A H _ M).mpr ⟨iV⟩, hp⟩
+      refine ⟨⟨C, ?_⟩, hm⟩
+      intro i
+      obtain ⟨M, _, ⟨iM⟩, _⟩ := hm i
+      exact Sheaf.isConstant_of_iso _ iM
 
 /-- Surjective closed restriction on the pro-etale site, for the published ordinary
 constant-ring module operations and their tensor-unit-normalized adjunction.
