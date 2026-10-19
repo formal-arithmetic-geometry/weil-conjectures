@@ -1,0 +1,99 @@
+{
+ "id": "lem-sf-module-stupid-truncation-short-exact",
+ "kind": "statement",
+ "title": "Consecutive upper stupid truncations of module complexes form a short exact sequence",
+ "statement": "Let $A$ be a commutative ring and let $K$ be a cochain complex of $A$-modules with differential of degree $+1$. For $c\\in\\mathbf Z$, define $\\sigma_{\\ge c}K$ to agree with $K$ in degrees $i\\ge c$ and to be zero in lower degrees, with induced differential. The natural inclusion and projection give a short exact sequence of cochain complexes $0\\to\\sigma_{\\ge c+1}K\\to\\sigma_{\\ge c}K\\to K^c[-c]\\to0$, where $K^c[-c]$ is the complex with $K^c$ in degree $c$ and zero elsewhere. Short exactness means exactness in each degree.",
+ "stmt_deps": [],
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/ModuleCatTelescope.lean",
+  "place": "CochainComplex.stupidTruncShortComplex_shortExact, lines 288–342; Stacks more-algebra.tex, Tag 0ATI, lemma-perfect-ring-classical-generator, stupid-truncation induction."
+ },
+ "proof": [
+  {
+   "text": "Define the inclusion componentwise by the inclusions of the upper stupid-truncation submodules. Define the projection to the single-term complex by identity in degree c and zero elsewhere. These are chain maps since all degrees below c vanish. In degree c the sequence is 0→0→K^c→K^c→0. Above c it is 0→K^i→K^i→0→0, and below c every term is zero. Thus it is degreewise short exact, so it is short exact as a sequence of complexes. This is the existing proved source-library theorem; no Lean theorem is introduced.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/ModuleCatTelescope.lean",
+  "place": "CochainComplex.stupidTruncShortComplex_shortExact, lines 311–342."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The consecutive upper stupid truncations of a cochain complex of modules form a short exact sequence whose quotient is the term placed in its degree",
+   "results": "8 hits, including CochainComplex.shortComplexTruncLE_shortExact and HomologicalComplex.stupidTrunc. These use canonical cohomological truncations rather than consecutive upper stupid truncations. Exact source-library implementation read.",
+   "date": "2026-10-19",
+   "verdict": "source-library match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The consecutive upper stupid truncations of a cochain complex of modules form a short exact sequence whose quotient is the term placed in its degree",
+   "results": "8 hits including CochainComplex.shortComplexTruncLE_shortExact, shortComplexTruncLE and truncation comparison maps; no exact Mathlib match.",
+   "date": "2026-10-19",
+   "verdict": "source-library match"
+  },
+  {
+   "tool": "grep",
+   "query": "stupidTruncShortComplex|stupidTrunc.*[Ss]hortExact",
+   "results": "0 Mathlib hits. Local rg in the source library found CochainComplex.stupidTruncShortComplex_shortExact; source and proof read. Local rg in dag/nodes found no attachment to this declaration.",
+   "date": "2026-10-19",
+   "verdict": "source-library match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.DerivedCategory.PerfectRingClassicalGenerator",
+  "date": "2026-10-19",
+  "group": "A5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pod-point-perfectness",
+   "place": "Proof, Step 2, integral duals: bounded finite-projective complexes are generated from the ring by shifts, cones and retracts.",
+   "via": [
+    "lem-sf-perfect-ring-classical-generator",
+    "lem-sf-perfect-over-derived-complete-ring"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.ModuleCatTelescope",
+  "declaration": "CochainComplex.stupidTruncShortComplex_shortExact",
+  "statement": "lemma stupidTruncShortComplex_shortExact (a : ℤ) : (stupidTruncShortComplex L a).ShortExact",
+  "branch": "slopmaster2",
+  "by": "A5",
+  "date": "2026-10-19",
+  "note": "Existing proved theorem for any CommRing R and any module cochain complex L. Its sequence is defined by stupidTruncShortComplex; no new Lean module or hole."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261019T231028-L-540551",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261019T231028-L-540551",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
