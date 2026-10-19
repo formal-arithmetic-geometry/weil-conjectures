@@ -1,0 +1,148 @@
+{
+ "id": "lem-formal-closed-pullback-derived-products",
+ "kind": "statement",
+ "title": "Closed coefficient-compatible pullback preserves derived products",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring, $k$ a field, and $X$ a separated finite-type $k$-scheme. Let $i : Z \\to X$ be a closed immersion with complementary quasi-compact open immersion $j : V \\to X$. On the unbounded derived categories [def-weil-abstract-derived-category] of module objects over the pulled-back coefficient rings [sk-lem-formal-closed-support], the exact coefficient-compatible inverse image [def-sfb-module-upper-star] preserves every existing product cone indexed by a type in universe $u+2$, with its projections. Here $u$ is the scheme universe and coefficients lie in universe $u+1$, as in [def-weil-size-convention]. The pullback is the canonical inverse-image functor with scalar action transported along condensedPullbackHom.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support-ii/sk-lem-formal-closed-support-ii-limits.proof.md",
+  "place": "Restriction paragraph, closed-immersion clause; Stacks Tags 09AA and 07KC"
+ },
+ "stmt_deps": [
+  "sk-lem-formal-closed-support",
+  "def-sfb-module-upper-star",
+  "def-weil-abstract-derived-category",
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "The finite-type hypotheses make X compact and quasi-separated; quasi-compactness of j gives compact complement of i. Apply closed_inverseImage_preserves_limits to the internal coefficient ring and compose with the canonical scalar-transport equivalence. Obtain preservation of ordinary products indexed in the coefficient universe.",
+   "uses": [
+    "det-sf-open-closed-pullback-limits",
+    "sk-lem-formal-closed-support"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the explicit sectionModuleEquivalence to internal module objects on X and Z. Transfer products_exact across this equivalence to obtain exact small products in the actual module-object categories.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "det-pe-products-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing source-library DerivedCategory.isLimitFanQ theorem: localization sends each termwise product of complexes to a limiting derived product fan when products are exact. The degreewise exact functor preserves products, as detected by evaluation. Its factorization mapDerivedCategoryFactors identifies the localized composite with Q followed by derived pullback. For every derived family choose complex representatives by essential surjectivity of Q and transport the preserved limiting fans along their representative isomorphisms. This is the proved private helper derivedPreservesProducts.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An existing larger product has small nonzero support: choose insertion maps with identity at one coordinate and zero elsewhere. The corresponding coordinate endomorphisms of the product are distinct for nonzero factors, by sandwiching with insertion and projection. Thus those indices inject into the locally small endomorphism type. Shrink the support, apply small product preservation, and reinsert the zero factors; their images are zero because derived pullback is additive. The Lean proof constructs the limiting restricted fan and the lift of every full image cone explicitly, including uniqueness. No larger product-existence assertion is used.",
+   "uses": [
+    "def-weil-size-convention"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "det-sf-open-closed-pullback-limits",
+  "sk-lem-formal-closed-support",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "det-pe-products-exact",
+  "def-weil-abstract-derived-category",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support-ii/sk-lem-formal-closed-support-ii-limits.proof.md",
+  "place": "Closed restriction clause, with internal/sectionwise equivalence, exact product localization, and explicit nonzero-support universe argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image along a closed immersion of pro-etale sites preserves products on the unbounded derived category",
+   "results": "Search performed using msearch.py; no ready theorem with the actual transported module-object functor found.",
+   "date": "2026-10-19",
+   "verdict": "No exact match for the transported closed pullback derived product statement; use the existing interfaces named in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Limits.PreservesLimitsOfShape",
+   "results": "0 hits",
+   "date": "2026-10-19",
+   "verdict": "No exact match for the transported closed pullback derived product statement; use the existing interfaces named in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "closed_inverseImage_preserves_limits|mapDerivedCategory.*preserves.*[Pp]roduct|preserves.*[Pp]roduct.*mapDerivedCategory",
+   "results": "msearch returned 0 hits; direct rg located closed_inverseImage_preserves_limits in Sheaf.AlgebraicGeometry.ProEtale.ClosedInverseImageLimits, an ordinary-module limit theorem, and products_derived in Sheaf.AlgebraicGeometry.ProEtaleProductsDerived, in the sectionwise ringed-module presentation.",
+   "date": "2026-10-19",
+   "verdict": "No exact match for the transported closed pullback derived product statement; use the existing interfaces named in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functor between Grothendieck abelian categories with exact products induces a product preserving functor on unbounded derived categories",
+   "results": "msearch.py: mapDerivedCategoryFactors and mapDerivedCategory found; source-library search found isLimitFanQ and the internal/sectionwise equivalence. The private generic product helper is proved from these interfaces.",
+   "date": "2026-10-19",
+   "verdict": "No exact match for the transported closed pullback derived product statement; use the existing interfaces named in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact additive functor preserving products induces a product preserving functor on derived categories when products are exact",
+   "results": "8 hits including Functor.mapDerivedCategory, Functor.IsTriangulated.instPreservesLimitsOfShapeDiscreteWalkingPair, Functor.preservesFiniteProductsOfAdditive, and preservesProduct_of_preservesBiproduct.",
+   "date": "2026-10-19",
+   "verdict": "No arbitrary-product derived preservation theorem found. The proof uses mapDerivedCategoryFactors and the existing source isLimitFanQ theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FormalClosedSupportIILimits",
+  "date": "2026-10-19",
+  "group": "W6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-formal-closed-support-ii-limits",
+   "place": "Closed-pullback product clause only; all remaining functor and Roos assertions are proved in the parent."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-formal-closed-support-ii",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FormalClosedPullbackProducts",
+  "file": "lean/Sheaf/Paper/FormalClosedPullbackProducts.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.formalClosedPullback_preservesDerivedProducts",
+  "statement": "theorem formalClosedPullback_preservesDerivedProducts\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    (k : Type u) [Field k]\n    {Z V X : Scheme.{u}} [X.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (X ↘ Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))]\n    (i : Z ⟶ X) (j : V ⟶ X)\n    [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]\n    (hij : Set.range i.base = (Set.range j.base)ᶜ) :\n    ∀ I : Type (u + 2), PreservesLimitsOfShape (Discrete I)\n      (formalSupportPullback Λ i).mapDerivedCategory",
+  "branch": "sheaf-dag",
+  "by": "W6",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261019T034341-L-424170",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261019T034341-L-424170",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
