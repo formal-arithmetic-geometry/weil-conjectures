@@ -201,7 +201,13 @@
   "lem-pod-point-sections-derived-reduction",
   "def-pur-derived-internal-hom",
   "lem-coef-finite-mapping-adjunction",
-  "lem-fix-compact-support-coefficient-change"
+  "lem-fix-compact-support-coefficient-change",
+  "def-coef-tower-coaugmentation-constructions",
+  "def-coef-tower-evaluation-pairing-constructions",
+  "def-coef-tower-trace-constructions",
+  "def-coef-derived-system-calculus-data",
+  "def-coef-tower-currying-models",
+  "def-coef-tower-normalized-tensor-evaluation"
  ],
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
@@ -452,5 +458,36 @@
   "group": "Q60",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q60-25879b08d (reviewer sub-agent of L); spot-checked: Full review written to review.md. The item’s ten steps, hypotheses, coefficient categories, base-change morphisms, sources, edge cases, searches, route-pivot restrictions, and long-step rule all check out. No new nodes or repairs are required."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.FiniteAdjunctionTransition",
+  "declaration": "WeilConjectures.FiniteAdjunctionTransition.finiteAdjunctionTransition",
+  "declarations": [
+   "WeilConjectures.FiniteAdjunctionTransition.H",
+   "WeilConjectures.FiniteAdjunctionTransition.restrictedTau",
+   "WeilConjectures.FiniteAdjunctionTransition.HTransition",
+   "WeilConjectures.FiniteAdjunctionTransition.C",
+   "WeilConjectures.FiniteAdjunctionTransition.J",
+   "WeilConjectures.FiniteAdjunctionTransition.JTransition",
+   "WeilConjectures.FiniteAdjunctionTransition.alpha",
+   "WeilConjectures.FiniteAdjunctionTransition.scalarHom",
+   "WeilConjectures.FiniteAdjunctionTransition.finiteHorizontal",
+   "WeilConjectures.FiniteAdjunctionTransition.finiteAdjunctionTransition"
+  ],
+  "file": "lean/Sheaf/SixFunctors/FiniteAdjunctionTransition.lean",
+  "statement": "theorem finiteAdjunctionTransition (hl : l ≠ D.p) (_homega : ∀ n : ℕ, HasFiniteProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1)) (integralDualizingFiniteTerm l E D X n)) (eQ : ∀ n : ℕ, (coefficientSequenceDerivedEvaluation.{u, u} l E X n).obj (coefTraceInput l E X Q) ≅ integralDualizingFiniteTerm l E D X n) (_hQ : ∀ {m n : ℕ} (h : n ≤ m), (coefficientSequenceDerivedTransition.{u, u} l E X h).app (coefTraceInput l E X Q) ≫ (normalizedDVRRes.{u, u} l E X h).map (eQ n).hom = (eQ m).hom ≫ integralDualizingExceptionalTransition l E D X hl h) (_hab : a₀ ≤ b₀) (_htransition : ∀ (m n : ℕ) (h : n ≤ m) (K : DerivedCategory (scalarReductionSource.{u, u} l E X)), (pbcTowerTransition (Spec (.of D.k)) (completedIntegralCommRingSheafUnrestricted l E (Spec (.of D.k))) m n h).app (T.obj K) ≫ (e n).hom.app K = (e m).hom.app K ≫ compactSupportRestrictedTransition l E (finiteDualizingCompactification D X) m n h K) (_hM : M.IsSpecified l E D X Q a₀ b₀ T e) (_hTensor : ∀ n : ℕ, M.tensorEvaluation n = canonicalTensorEvaluation l E n) (_hscalar : ∀ (r : ℕ) (K : DerivedCategory (scalarReductionSource.{u, u} l E X)), (M.integralHom r).inv.app (op K) ≫ (M.finiteHom r).hom.app (op K) = scalarHom D l E X Q a₀ b₀ T e M r K) (eTrace : ∀ n : ℕ, (coefTraceEvaluation l E n).obj (coefTraceDualizingTower l E D X Q) ≅ coefTraceFiniteValue l E D X n) (_hTrace : ∀ (m n : ℕ) (h : n ≤ m), (coefTraceTransition l E h).app (coefTraceDualizingTower l E D X Q) ≫ (eTrace n).hom ≫ coefTraceFiniteCounit l E D X n ≫ (coefTraceTargetIso l E D n).hom = (eTrace m).hom ≫ coefTraceFiniteCounit l E D X m ≫ (coefTraceTargetIso l E D m).hom ≫ (DerivedCategory.singleFunctor (ModuleCat.{u + 1} (coefTraceRing l E)) 0).map (coefTraceQuotientMap l E h)) (_hOrigin : ∀ n : ℕ, (M.omegaEvaluation n).hom ≫ (M.omegaOrigin n).hom = (eTrace n).hom) (_hHom : ∀ (m n : ℕ) (h : n ≤ m) (K : DerivedCategory (scalarReductionSource.{u, u} l E X)), (coefTraceTransition l E h).app ((coefPairingHom l E X M.calculus Q).obj (op K)) ≫ (M.integralHom n).hom.app (op K) = (M.integralHom m).hom.app (op K) ≫ HTransition D l E X hl h K) : (∀ (K : (CoefTower.inputs l E (X := X) a₀ b₀).FullSubcategory) (m n : ℕ) (h : n ≤ m) (γ_m : (H D l E X m).obj (op K.obj) ≅ (J D l E X T m).obj (op K.obj)) (γ_n : (H D l E X n).obj (op K.obj) ≅ (J D l E X T n).obj (op K.obj)), γ_m.hom = finiteHorizontal D l E X Q a₀ b₀ T e M m K → γ_n.hom = finiteHorizontal D l E X Q a₀ b₀ T e M n K → HTransition D l E X hl h K.obj ≫ γ_n.hom = γ_m.hom ≫ JTransition D l E X T h K.obj) ∧ (∀ (K K' : (CoefTower.inputs l E (X := X) a₀ b₀).FullSubcategory) (z : K ⟶ K') (r : ℕ) (γ : (H D l E X r).obj (op K.obj) ≅ (J D l E X T r).obj (op K.obj)) (γ' : (H D l E X r).obj (op K'.obj) ≅ (J D l E X T r).obj (op K'.obj)), γ.hom = finiteHorizontal D l E X Q a₀ b₀ T e M r K → γ'.hom = finiteHorizontal D l E X Q a₀ b₀ T e M r K' → (H D l E X r).map z.hom.op ≫ γ.hom = γ'.hom ≫ (coefCurryingPointHom l E r).map ((C D l E X T).map z.hom).op) ∧ (∀ (m n : ℕ) (h : n ≤ m), (finiteDualizingEtaleSupport l E D X n).map (finiteDualizingEtaleComparison l E D X h) ≫ finiteDualizingEtaleCounit l E D X n = Etale.ExceptionalCoefficients.comparisonInverse (finiteDualizingQuotient l E h) (finiteDualizingCompactification D X) (finiteDualizingEtaleTerm l E D X m) ≫ (Etale.scalarExtension (finiteDualizingQuotient l E h) (Spec (.of D.k))).map (finiteDualizingEtaleCounit l E D X m) ≫ (Etale.ExceptionalCoefficients.unitIso (finiteDualizingQuotient l E h) (Spec (.of D.k))).hom)",
+  "branch": "sheaf-dag",
+  "by": "Q17",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "Returned sign ambiguity repaired by pinning tensorEvaluation to the unique localization-normalized comparison. The omega-evaluation/origin product remains tied to the same realized trace, and the finite pairing uses those same fields. Deleted the True wrapper and the misleading canonical alias. All mathematical coefficients, inputs, vertical maps and conclusions retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-06423eb6a",
+  "group": "Q17",
+  "result": "pass",
+  "note": "F2/R1 closed: _hTensor fixes M.tensorEvaluation n to canonicalTensorEvaluation (new def node def-coef-tower-normalized-tensor-evaluation: unique iso satisfying a real localization-counit equation on all homotopy complexes, chosen from an ∃! lemma with a proof docstring; not hollow; no duplicate in Mathlib or side-live). The level-wise frame/omegaEvaluation/omegaOrigin enter the horizontal only through fβ_r≫ωO_r, which pairingEvaluation (valid on CoefTower.inputs ⊆ finiteTorConstructibleIntegral via _hab) and _hOrigin fix as (fH⊗eB)⁻¹≫δ⁻¹≫ev(beta)≫eTrace. The returned single-level negation is excluded. Remaining freedom is tower-compatible (_hHom, support_finite, _hTrace up to counit-preserving automorphisms), so the square and naturality hold uniformly. R2 closed: finiteMappingAdjunctionAt/_hFiniteMapping and the finiteHorizontalCanonical alias deleted. H, J, C, alpha, tau, quotient, naturality and étale trace conjunct unchanged from accepted heads. Statements verbatim; docstrings with source/blueprint; sorry only in the theorem and the ∃! lemma; not on the dropped-route list. Compile: nt_compile --json timed out at 60 s on the tensor module at load ~290; lcompile run_set at 560 s: both clean (tensor 180-319 s wall/~30 s CPU, item 11.4 s); worker measured 43.7 s, so land at lower load. Advisory: trace-constructions declarations narrowed 25→9; coefTraceInput (and coefPairingHom/Tensor as in earlier heads) are owned only by theorem nodes outside stmt_deps."
  }
 }

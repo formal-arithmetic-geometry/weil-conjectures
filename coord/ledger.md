@@ -17520,3 +17520,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:13 L: merged deliver/ND/lem-sp-tower-p1-arbitrary-base-integrals (stage 2; reviewer PASS; parallel immutable checks)
 - 19:14 L: merged deliver/Q08/thm-sf-pf-proetale (stage 2; reviewer PASS; parallel immutable checks)
 - 19:15 L: merged deliver/N0/lem-sf-constructible-exceptional-coefficient-construction (reviewer FIX; first push; new nodes: 0)
+- 19:15 L: merged deliver/Q17/lem-coef-finite-adjunction-transition (stage 2; reviewer PASS; parallel immutable checks)

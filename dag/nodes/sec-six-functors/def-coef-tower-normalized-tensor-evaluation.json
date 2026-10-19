@@ -1,0 +1,134 @@
+{
+ "id": "def-coef-tower-normalized-tensor-evaluation",
+ "kind": "definition",
+ "title": "Uniquely normalized tensor evaluation of strict coefficient towers",
+ "status": "split",
+ "statement": "Let ℓ and E be as in [def-weil-l-adic-coefficient-extension], and let R be the lifted integral coefficient ring and ev_n the exact evaluation functor of [def-coef-tower-trace-constructions]. For the pointwise derived tensor of strict R-module towers from [def-coef-tower-evaluation-pairing-constructions], define the canonical comparison δ_n : ev_n(B ⊗ᴸ D) ≅ ev_n(B) ⊗ᴸ_R ev_n(D). It is the unique natural isomorphism whose inverse, composed with evaluation of the localization tensor counit, equals the pointwise identity tensor comparison conjugated by the exact-functor localization comparisons. This equation is imposed on every pair of homotopy complexes and in particular fixes the map, including its sign, on K-flat representatives. Define the comparison by this unique characterization, with no independent choice of a level automorphism. Use the small-Hom point localization fixed by [def-coef-tower-currying-models].",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-coef-tower-trace-constructions",
+  "def-coef-tower-evaluation-pairing-constructions",
+  "def-coef-tower-currying-models"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Paragraph 2: the finite coefficient mapping complexes, compact-support projections, evaluation pairings and traces used in the inverse-limit adjunction."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived tensor comparison for evaluation of strict towers of modules",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "rTensor.toFun",
+     "lTensor.toFun",
+     "TensorProduct.AlgebraTensorModule.rTensor_comp",
+     "ModuleCat.extendScalarsComp_hom_app_one_tmul",
+     "TensorProduct.AlgebraTensorModule.rTensor_tensor",
+     "Module.Invertible.rTensorInv",
+     "TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange",
+     "TensorProduct.AlgebraTensorModule.map_comp"
+    ]
+   },
+   "date": "2026-10-19",
+   "verdict": "No matching Mathlib construction; use the published localization tensor maps to specify the unique comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans, Functor.mapDerivedCategoryFactorsh",
+   "results": {
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans'",
+    "top": []
+   },
+   "date": "2026-10-19",
+   "verdict": "No matching Mathlib construction; use the published localization tensor maps to specify the unique comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorEvaluation|TensorEvaluationNormalized|canonicalTensorEvaluation",
+   "results": {
+    "n_hits": 0,
+    "note": "",
+    "top": []
+   },
+   "date": "2026-10-19",
+   "verdict": "No matching Mathlib construction; use the published localization tensor maps to specify the unique comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "rg canonicalTensorEvaluation|TensorEvaluationNormalized|normalized-tensor-evaluation in dag/nodes, lean/Sheaf and lean/WeilConjectures; blueprint_refs.py search tensor evaluation",
+   "results": "No matching DAG node or project declaration. Blueprint search returned only lem-fix-weil-operations, which is a different notion.",
+   "date": "2026-10-19",
+   "verdict": "Add the missing normalized tensor-evaluation definition; reuse existing tensor, evaluation and localization maps."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-finite-adjunction-transition",
+  "date": "2026-10-19",
+  "group": "Q17"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Proof paragraph 2, construction interfaces for the finite-adjunction transition square.",
+   "via": [
+    "lem-coef-finite-adjunction-transition"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.SixFunctors.NormalizedTowerTensorEvaluation",
+  "declaration": "WeilConjectures.FiniteAdjunctionTransition.canonicalTensorEvaluation",
+  "declarations": [
+   "WeilConjectures.FiniteAdjunctionTransition.ordinaryEvaluation",
+   "WeilConjectures.FiniteAdjunctionTransition.ordinaryEvaluationMonoidal",
+   "WeilConjectures.FiniteAdjunctionTransition.TensorEvaluation",
+   "WeilConjectures.FiniteAdjunctionTransition.TensorEvaluationNormalized",
+   "WeilConjectures.FiniteAdjunctionTransition.tensorEvaluation_existsUnique",
+   "WeilConjectures.FiniteAdjunctionTransition.canonicalTensorEvaluation"
+  ],
+  "file": "lean/Sheaf/SixFunctors/NormalizedTowerTensorEvaluation.lean",
+  "statement": "def canonicalTensorEvaluation (n : ℕ) : TensorEvaluation l E n",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "The sole postponed proof is the existence-and-uniqueness lemma for this definition. Its normalization uses the published localization tensor counit, ordinary pointwise identity tensor map, and exact-functor factors. The comparison is chosen from a unique characterization."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-06423eb6a",
+  "group": "Q17",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-06423eb6a",
+  "group": "Q17",
+  "result": "pass",
+  "note": "F2/R1 closed: _hTensor fixes M.tensorEvaluation n to canonicalTensorEvaluation (new def node def-coef-tower-normalized-tensor-evaluation: unique iso satisfying a real localization-counit equation on all homotopy complexes, chosen from an ∃! lemma with a proof docstring; not hollow; no duplicate in Mathlib or side-live). The level-wise frame/omegaEvaluation/omegaOrigin enter the horizontal only through fβ_r≫ωO_r, which pairingEvaluation (valid on CoefTower.inputs ⊆ finiteTorConstructibleIntegral via _hab) and _hOrigin fix as (fH⊗eB)⁻¹≫δ⁻¹≫ev(beta)≫eTrace. The returned single-level negation is excluded. Remaining freedom is tower-compatible (_hHom, support_finite, _hTrace up to counit-preserving automorphisms), so the square and naturality hold uniformly. R2 closed: finiteMappingAdjunctionAt/_hFiniteMapping and the finiteHorizontalCanonical alias deleted. H, J, C, alpha, tau, quotient, naturality and étale trace conjunct unchanged from accepted heads. Statements verbatim; docstrings with source/blueprint; sorry only in the theorem and the ∃! lemma; not on the dropped-route list. Compile: nt_compile --json timed out at 60 s on the tensor module at load ~290; lcompile run_set at 560 s: both clean (tensor 180-319 s wall/~30 s CPU, item 11.4 s); worker measured 43.7 s, so land at lower load. Advisory: trace-constructions declarations narrowed 25→9; coefTraceInput (and coefPairingHom/Tensor as in earlier heads) are owned only by theorem nodes outside stmt_deps."
+ }
+}
