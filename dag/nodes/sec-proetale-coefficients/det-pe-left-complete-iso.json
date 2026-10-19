@@ -21,55 +21,51 @@
  ],
  "proof": [
   {
-   "text": "Use the good truncations of [def-kun-truncations], with their canonical quotient maps. Put $K_n=\\tau_{\\geq-n}K$, $P=\\prod_{n\\in\\mathbf N}K_n$, $T((x_n)_n)=(t_n(x_{n+1}))_n$, and $F=\\operatorname{Cone}(1-T)[-1]$. Use the cone and shift convention of [def-weil-abstract-derived-category]: identify a standard shifted-cone pair $(b,a)$ with $(x,y)=(a,-b)$. In degree $q$ the fibre is $(\\prod_n\\tau_{\\geq-n}K)^q\\oplus(\\prod_n\\tau_{\\geq-n}K)^{q-1}$\nwith differential $(x,y)\\mapsto(dx,(1-T)x-dy)$. Since the quotient maps are compatible with\nthe transitions, $(1-T)((\\bar k_n)_n)=(\\bar k_n-t_n(\\bar k_{n+1}))_n=0$, so $\\iota$ is a map\nof complexes; composed with the projection to $\\prod_n\\tau_{\\geq-n}K$ it is the family of\nquotient maps.",
+   "text": "Naturality of the good lower-truncation quotient and cancellation of its invertible further truncation give pi_(n+1) followed by postnikovStep n = pi_n. Identify the successor map of Functor.ofOpSequence with postnikovStep. After every product projection the quotient-family map followed by 1-T is zero, so the zero-null-homotopy comparison is a chain map.",
    "uses": [
-    "def-weil-abstract-derived-category",
-    "def-kun-truncations"
+    "def-kun-truncations",
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-left-complete/det-pe-left-complete-iso.proof.md",
-    "place": "First paragraph of the proof"
-   }
+   "elementary": true
   },
   {
-   "text": "The rotated cone triangle of [def-weil-abstract-derived-category] is $F\\xrightarrow{p}P\\xrightarrow{1-T}P\\to F[1]$, where $p(x,y)=x$. Its long exact cohomology sequence [lem-sf-derived-homology-long-exact] is exact at the middle three terms of\n$$H^{q-1}(P)\\xrightarrow{1-T}H^{q-1}(P)\\to H^q(F)\\xrightarrow{H^q(p)}H^q(P)\\xrightarrow{1-T}H^q(P).$$\nBy [det-pe-products-derived], the canonical map $H^r(P)\\to\\prod_nH^r(K_n)$ is an isomorphism; its $n$th component is $H^r(\\mathrm{pr}_n)$, so the $n$th component of $H^r(T)$ is $H^r(t_n)\\circ H^r(\\mathrm{pr}_{n+1})$. Thus the kernel of the last arrow consists precisely of the compatible families, namely $\\varprojlim_nH^q(K_n)$. Exactness gives\n$$0\\to\\operatorname{coker}(1-T:\\prod_nH^{q-1}(K_n)\\to\\prod_nH^{q-1}(K_n))\\to H^q(F)\\xrightarrow{\\rho_q}\\varprojlim_nH^q(K_n)\\to0,$$\nwhere $\\rho_q$ is induced by $p$. In particular the $n$th component of $\\rho_q\\circ H^q(\\iota)$ is $H^q(K\\to K_n)$, by step 1.",
+   "text": "For each integer q, the quotient induces an isomorphism on H^q when n >= -q, by the good-truncation quasi-isomorphism in retained degrees; below that bound the cohomology is zero. Functoriality gives compatibility with transitions. The transitions on cohomology are therefore epimorphisms. Apply det-pe-milnor-epimorphic to conclude that 1-T on the product of cohomologies is epic.",
    "uses": [
-    "def-weil-abstract-derived-category",
+    "def-kun-truncations",
+    "det-pe-milnor-epimorphic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the projection-compatible cohomology/product comparison of det-pe-products-derived, transporting from the coefficient-universe ULift of N to N. Product extensionality and functoriality identify H^q(1-T) under this comparison with 1-T on the cohomology tower. Consequently H^q(1-T) is epic in every degree. Exactness of the mapping-cocone triangle then makes H^q of its first projection monic and identifies it as a kernel.",
+   "uses": [
+    "det-pe-products-derived",
     "lem-sf-derived-homology-long-exact",
-    "det-pe-products-derived"
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0947, label proposition-enough-weakly-contractibles, proof of (6) and (7); expanded map identification for the second paragraph of det-pe-left-complete-iso.proof.md"
-   }
+   "elementary": false
   },
   {
-   "text": "By clause 2 of [det-pe-milnor-sequence], the cokernel in step 2 is $R^1\\varprojlim_nH^{q-1}(K_n)$. Clause 2 of [det-pe-left-complete-truncation-tower], in degree $q-1$, makes this term zero, so the short exact sequence in step 2 makes $\\rho_q$ an isomorphism. The same clause in degree $q$ says that the map $H^q(K)\\to\\varprojlim_nH^q(K_n)$ induced by the quotient maps is an isomorphism. Step 2 identifies this map with $\\rho_q\\circ H^q(\\iota)$; hence $H^q(\\iota)=\\rho_q^{-1}\\circ(\\rho_q\\circ H^q(\\iota))$ is an isomorphism. This holds for every $q\\in\\mathbf Z$, so $\\iota$ is a quasi-isomorphism.",
+   "text": "Prove directly the kernel property of the product of quotient maps on cohomology. At N=max(0,-q), invert the quotient map to recover a map to H^q(K) from any compatible product family. Induction using invertible tail transitions proves the factorization for all n>=N; the zero target gives it for n<N. The Nth component gives uniqueness. Transport this kernel along the cohomology/product comparison. The actual mapping-cocone lift composed with its first projection is the quotient family. Its map on H^q is thus the unique isomorphism between these two kernels. This holds for every q, proving the specified comparison is a quasi-isomorphism.",
    "uses": [
-    "det-pe-milnor-sequence",
-    "det-pe-left-complete-truncation-tower"
+    "def-kun-truncations",
+    "def-weil-abstract-derived-category",
+    "lem-sf-derived-homology-long-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-left-complete/det-pe-left-complete-iso.proof.md",
-    "place": "Second paragraph of the proof"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-abstract-derived-category",
   "def-kun-truncations",
-  "lem-sf-derived-homology-long-exact",
+  "def-weil-abstract-derived-category",
+  "det-pe-milnor-epimorphic",
   "det-pe-products-derived",
-  "det-pe-milnor-sequence",
-  "det-pe-left-complete-truncation-tower"
+  "lem-sf-derived-homology-long-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-left-complete/det-pe-left-complete-iso.proof.md",
-  "place": "First and second proof paragraphs, with the projection-compatible Milnor sequence expanded using Stacks Tag 0947"
+  "place": "First and second proof paragraphs; concrete cone long exact sequence and a direct universal-property proof of the eventual-constant cohomology kernel, formalized by U9 on 2026-10-18."
  },
  "mathlib_searches": [
   {
@@ -302,5 +298,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261019T034318-L-420157",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
