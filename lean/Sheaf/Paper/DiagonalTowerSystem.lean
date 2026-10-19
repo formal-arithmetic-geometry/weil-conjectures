@@ -61,6 +61,8 @@ import WeilConjectures.SixFunctors.Finite.Stalk
 
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.Paper.ProEtaleTateTwistsOfUniverses
+import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
 
 /-!
 # The diagonal class in the derived category of strict torsion towers
@@ -139,7 +141,25 @@ quotients. The unique integer action changes neither construction. -/
 theorem diagonalForget_exact (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
     PreservesFiniteLimits (diagonalForget ℓ W) ∧
       PreservesFiniteColimits (diagonalForget ℓ W) := by
-  sorry
+  constructor
+  · have := (diagonalScalarAdjunction ℓ W).rightAdjoint_preservesLimits
+    infer_instance
+  · let G := ModuleCat.restrictScalars
+        (Int.castRingHom (ULift.{u + 1} ℤ_[ℓ])) ⋙
+        forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}
+    have : (ModuleCat.restrictScalars.{u + 1}
+        (Int.castRingHom (ULift.{u + 1} ℤ_[ℓ]))).IsLeftAdjoint :=
+      (ModuleCat.restrictCoextendScalarsAdj.{u + 1, 0, u + 1}
+        (Int.castRingHom (ULift.{u + 1} ℤ_[ℓ]))).isLeftAdjoint
+    have : G.IsLeftAdjoint := inferInstance
+    let J := Scheme.ProEt.topology W
+    let e : Sheaf.composeAndSheafify J G ≅ sheafCompose J G :=
+      Functor.isoWhiskerLeft (sheafCompose J G)
+        (sheafificationNatIso J AddCommGrpCat.{u + 1}).symm ≪≫
+        Functor.rightUnitor (sheafCompose J G)
+    have : (Sheaf.composeAndSheafify J G).IsLeftAdjoint := inferInstance
+    have : (sheafCompose J G).IsLeftAdjoint := Functor.isLeftAdjoint_of_iso e
+    exact inferInstanceAs (PreservesFiniteColimits (sheafCompose J G))
 
 /-- Exact scalar forgetting, limits. Source: blueprint clause 2
 (blueprint: det-prop-diagonal-tower-system). -/
@@ -156,7 +176,8 @@ instance diagonalForgetColimits (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
 Proof: the underlying section maps add pointwise and forgetting retains them. -/
 theorem diagonalForget_additive (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
     (diagonalForget ℓ W).Additive := by
-  sorry
+  dsimp only [diagonalForget, sheafCompose]
+  infer_instance
 
 attribute [instance] diagonalForget_additive
 
@@ -250,7 +271,33 @@ theorem diagonalFiniteToPadic_exact (ℓ n : ℕ) [Fact ℓ.Prime] (W : Scheme.{
     PreservesFiniteLimits (diagonalFiniteToPadic ℓ n W) ∧
     PreservesFiniteColimits (diagonalFiniteToPadic ℓ n W) ∧
     (diagonalFiniteToPadic ℓ n W).Additive := by
-  sorry
+  constructor
+  · have := (Sheaf.adjunction (Scheme.ProEt.topology W)
+      (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1}
+        (diagonalResidueProjection.{u} ℓ n))).rightAdjoint_preservesLimits
+    exact inferInstanceAs (PreservesFiniteLimits
+      (sheafCompose (Scheme.ProEt.topology W)
+        (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1}
+          (diagonalResidueProjection.{u} ℓ n))))
+  constructor
+  · let q := diagonalResidueProjection.{u} ℓ n
+    have hadj := ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} q
+    have : PreservesLimitsOfSize.{u, u + 1}
+        (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} q) :=
+      hadj.rightAdjoint_preservesLimits
+    have : (Scheme.ProEt.topology W).HasSheafCompose
+        (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} q) :=
+      hasSheafCompose_of_preservesLimitsOfSize _
+    have := (Sheaf.adjunction (Scheme.ProEt.topology W) hadj).isLeftAdjoint
+    let J := Scheme.ProEt.topology W
+    let G := ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q
+    let e : Sheaf.composeAndSheafify J G ≅ sheafCompose J G :=
+      Functor.isoWhiskerLeft (sheafCompose J G)
+        (sheafificationNatIso J (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[ℓ]))).symm ≪≫
+        Functor.rightUnitor (sheafCompose J G)
+    exact preservesFiniteColimits_of_natIso e
+  · dsimp only [diagonalFiniteToPadic, sheafCompose]
+    infer_instance
 
 /-- Exact restriction, limits. Source: blueprint clause 4
 (blueprint: det-prop-diagonal-tower-system). -/
@@ -282,12 +329,26 @@ abbrev diagonalImmersion (Y : Scheme.{u}) : ProjectiveLine Y ⟶ diagonalSurface
 
 /-- The diagonal is Cartier over every base, including the empty base.
 Source: blueprint proof step 1 (blueprint: det-prop-diagonal-tower-system).
-Proof: on equal standard charts its equation is b-a, monic in b. On mixed charts
-it is 1-ab, whose multiplication is injective by successive comparison of
-coefficients starting at the constant term. These equations cut out the diagonal. -/
+Proof: the first projection of the surface is smooth of relative dimension one,
+as a base change of the projective line. Its composite with the diagonal is the
+identity. The closed subscheme defined by the kernel of the diagonal is isomorphic
+to the diagonal, so its projection is an isomorphism, hence finite, flat and locally
+of finite presentation. The relative Cartier criterion gives the invertible ideal. -/
 theorem diagonalImmersion_cartier (Y : Scheme.{u}) :
     (diagonalImmersion Y).ker.IsInvertible := by
-  sorry
+  let d := diagonalImmersion Y
+  let p := pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y)
+  let j := d.ker.subschemeι
+  have hker : d.ker = j.ker := by simp [j]
+  let e := IsClosedImmersion.lift d j hker.le
+  have : IsIso e := IsClosedImmersion.isIso_lift d j hker
+  have he : e ≫ d = j := IsClosedImmersion.lift_fac d j hker.le
+  have hp : j ≫ p = e := by
+    rw [← he, Category.assoc]
+    simp [d, p, diagonalImmersion]
+  have : IsIso (j ≫ p) := hp.symm ▸ inferInstance
+  exact Scheme.IdealSheafData.isInvertible_of_isFinite_of_flat p
+    (J := d.ker) inferInstance inferInstance inferInstance
 
 /-- Invertibility pulls from the base to the diagonal surface and all powers.
 Source: blueprint standing hypothesis (blueprint: det-prop-diagonal-tower-system).
@@ -296,7 +357,9 @@ its positive power. This also applies to the zero ring of the empty scheme. -/
 theorem diagonalSurface_power_unit (ℓ : ℕ) (Y : Scheme.{u})
     (hY : IsUnit (ℓ : Γ(Y, ⊤))) (n : ℕ) :
     IsUnit ((ℓ ^ (n + 1) : ℕ) : Γ(diagonalSurface Y, ⊤)) := by
-  sorry
+  simpa using (hY.map
+    ((pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y)) ≫
+      (ProjectiveLine Y ↘ Y)).appTop.hom).pow (n + 1)
 
 /-- The supported integral constant on the pro-etale site.
 Source: blueprint clause 1 (blueprint: det-prop-diagonal-tower-system). -/
@@ -429,7 +492,9 @@ Source: blueprint main-20261015, sk-prop-diagonal-tower-system.md, clauses 1--4;
 Stacks Project, Tags 099M and 09AD (blueprint: det-prop-diagonal-tower-system).
 
 Proof:
-1. On the four affine charts the diagonal equations b-a and 1-ab are regular.
+1. The diagonal is a section of the smooth relative curve given by the first
+   projection. Its kernel subscheme projects isomorphically to the projective
+   line, so the relative Cartier criterion makes its ideal invertible.
    Form the pole extension with all integer powers of t inverse, sending it to +1.
    Exact conservative geometric stalks identify its quotient with Delta_* Z.
 2. Exact comparison inverse image preserves the extension and its quotient
