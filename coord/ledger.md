@@ -17716,3 +17716,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:12 L: merged deliver/M5/Sheaf.CategoryTheory.RightFractionDenseSubcategory (stage 3; reviewer PASS; first push; landing 20261019T231240-L-565782 (proof); batch 20261019T231019; modules 1; new nodes 0)
 - 23:12 L: merged deliver/M6/Sheaf.AlgebraicGeometry.ClosedPointsProduct (stage 3; reviewer PASS; first push; landing 20261019T231241-L-566056 (proof); batch 20261019T231019; modules 1; new nodes 0)
 - 23:12 L: merged deliver/M8/Sheaf.FieldTheory.AlgebraicSeparableSmooth (stage 3; reviewer PASS; first push; landing 20261019T231243-L-566294 (interface); batch 20261019T231019; modules 1; new nodes 0; change records: coord/changes/M8-algebraic-separable-smooth-proof-scope.md)
+- 23:12 L: merged deliver/M9/Sheaf.AlgebraicGeometry.GlobalGeneratedStalkwise (stage 3; reviewer PASS; first push; landing 20261019T231245-L-566543 (proof); batch 20261019T231019; modules 1; new nodes 0)

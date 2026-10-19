@@ -7,13 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleGloballyGenerated
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
-import Mathlib.CategoryTheory.Preadditive.Basic
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.PointedEtaleStalk
 
 /-!
 # Global generation detected on geometric stalks
@@ -37,25 +32,12 @@ on every geometric stalk.
 The evaluation morphism is the one from
 `AlgebraicGeometry.Scheme.etaleGlobalSectionsEvaluation`; a geometric stalk is
 the `pointSmallEtale` sheaf fibre, as in `def-weil-pbc-geometric-stalks`.
-Proof, following the three steps of the node:
-1. Form the cokernel `C` of the evaluation map `e`. By
-`lem-weil-pbc-module-sheaves-colimits-forgetful`, forgetting scalars preserves this
-cokernel and detects zero objects: a sheaf of modules is zero precisely when all
-its underlying section groups are trivial. The criterion
-`lem-weil-pbc-preadditive-epi-iff-cokernel-zero` identifies global generation with
-the vanishing of the underlying abelian sheaf of `C`.
-2. By `prop-weil-pbc-geometric-stalks-exact`, its stalk at a geometric point is the
-cokernel of the underlying evaluation stalk map. Forgetting scalars does not change
-the germs or their equality relation: the map sends a germ represented by a local
-section `a` to the germ represented by `e(a)` in both categories. A module map is
-surjective precisely when its underlying group map is surjective, equivalently
-when this group cokernel is zero.
-3. Apply `lemma-weil-pbc-geometric-stalk-conservative` to the map from the underlying
-abelian sheaf of `C` to zero. The zero sheaf has zero stalks, so this map is an
-isomorphism precisely when all these cokernel stalks vanish. Combining the three
-equivalences proves both implications. For the recorded conservative family at
-coefficient universe `u + 1`, `uliftSheafFiberIso` identifies the lifted fibres
-with the unlifted `pointSmallEtale` fibres used here.
+Proof: `isConservativeFamilyOfPoints_ulift_pointSmallEtale` gives joint reflection of
+epimorphisms for module-valued sheaves. In the forward direction, the skyscraper
+adjunction makes each sheaf fibre preserve epimorphisms, and
+`ModuleCat.epi_iff_surjective` gives surjectivity. Conversely, apply joint reflection
+at the algebraic-closure points. The resulting lifted fibre map is epi because it is
+identified by `uliftSheafFiberIso` with the original surjective fibre map.
 Source: Stacks Project, Tags 03DA, 010B, 010C, 03PT and 03PU; blueprint proof of
 `lem-kun-global-generated-stalkwise` (blueprint: lem-kun-global-generated-stalkwise).
 -/
@@ -69,6 +51,33 @@ theorem isGloballyGeneratedEtaleSheaf_iff_geometricStalk_surjective
           (((pointSmallEtale t).sheafFiber
             (A := ModuleCat.{u + 1} Λ)).map
             (etaleGlobalSectionsEvaluation F)) := by
-  sorry
+  classical
+  let e := etaleGlobalSectionsEvaluation F
+  constructor
+  · intro he Ω _ _ t
+    have : HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
+      hasLimitsOfSizeShrink.{u, u, u + 1, u + 1} _
+    have : Epi e := he
+    have : ((pointSmallEtale t).sheafFiber
+        (A := ModuleCat.{u + 1} Λ)).PreservesEpimorphisms :=
+      Functor.preservesEpimorphisms_of_adjunction
+        ((pointSmallEtale t).skyscraperSheafAdjunction)
+    exact (ModuleCat.epi_iff_surjective _).mp inferInstance
+  · intro h
+    let hpoints := isConservativeFamilyOfPoints_ulift_pointSmallEtale T
+    apply (hpoints.jointlyReflectEpimorphisms (ModuleCat.{u + 1} Λ)).epi_iff e |>.mpr
+    rintro ⟨-, ⟨x⟩⟩
+    let t := T.algClosurePoint x
+    have : HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
+      hasLimitsOfSizeShrink.{u, u, u + 1, u + 1} _
+    have ht := h (AlgebraicClosure (T.residueField x)) t
+    have : Epi ((pointSmallEtale t).sheafFiber.map e) :=
+      (ModuleCat.epi_iff_surjective _).mpr ht
+    let iso := (pointSmallEtale t).uliftSheafFiberIso.{u + 1}
+      (ModuleCat.{u + 1} Λ)
+    change Epi (((pointSmallEtale t).ulift.{u + 1}).sheafFiber.map e)
+    rw [← epi_comp_iff_of_isIso _ (iso.hom.app F)]
+    erw [iso.hom.naturality e]
+    infer_instance
 
 end AlgebraicGeometry.Scheme

@@ -19,55 +19,40 @@
  ],
  "proof": [
   {
-   "text": "Let $e:E\\to F$ be the evaluation morphism of [def-kun-global-generated], where $E=\\bigoplus_{s\\in\\Gamma(T_{\\Et},F)}\\underline\\Lambda$. Form its cokernel $C$ in the abelian category of $\\Lambda_T$-module sheaves. Apply [lem-weil-pbc-module-sheaves-colimits-forgetful] to the small etale site and $\\mathcal O=\\Lambda_T$: the functor $U$ forgetting scalars preserves cokernels, so $U(C)=\\operatorname{coker}(U(e))$. Moreover $C$ is zero precisely when $U(C)$ is zero: in either case all section groups are trivial, and the unique maps to and from the zero sheaf are automatically linear. By [lem-weil-pbc-preadditive-epi-iff-cokernel-zero] in the module-sheaf category, $e$ is epic precisely when $C$ is zero. Thus global generation is equivalent to $U(C)=0$.",
+   "text": "Write e for the evaluation morphism of [def-kun-global-generated]. If e is epi, the geometric stalk functor preserves it because it is left adjoint to the skyscraper sheaf functor. A module morphism is epi precisely when its underlying function is surjective (ModuleCat.epi_iff_surjective). This proves the forward implication at every geometric point of [def-weil-pbc-geometric-stalks]. The needed smaller limits of modules are supplied by hasLimitsOfSizeShrink.",
    "uses": [
     "def-kun-global-generated",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-preadditive-epi-iff-cokernel-zero"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DA, lemma-abelian; combined with homology.tex Tags 010B (definition-injective-surjective), 010C (lemma-characterize-injective), and the blueprint proof, cokernel criterion"
-   }
-  },
-  {
-   "text": "For every geometric point $\\bar t$, apply [prop-weil-pbc-geometric-stalks-exact] to the abelian sheaf map $U(e)$. It identifies $U(C)_{\\bar t}$ with the cokernel of $U(e)_{\\bar t}$. Explicitly, a stalk element of a module sheaf $M$ is a germ $[V,\\bar v,a]$ with $a\\in M(V)$; two representatives are equal when their restrictions agree on a common pointed refinement, as in [def-weil-pbc-geometric-stalks]. Forgetting scalars leaves these representatives and this equality relation unchanged. Addition is addition of restrictions on a common refinement, and $\\lambda[V,\\bar v,a]=[V,\\bar v,\\lambda a]$ for $\\lambda\\in\\Lambda$. The map on germs sends $[V,\\bar v,a]$ to $[V,\\bar v,e_V(a)]$ before and after forgetting scalars; hence the underlying group map of $e_{\\bar t}$ is $U(e)_{\\bar t}$. A homomorphism of modules is surjective precisely when its underlying group homomorphism is surjective; its group cokernel is the quotient by its image and is zero precisely in that case. Consequently $e_{\\bar t}$ is surjective if and only if $U(C)_{\\bar t}=0$.",
-   "uses": [
-    "prop-weil-pbc-geometric-stalks-exact",
     "def-weil-pbc-geometric-stalks"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03PT, lemma-stalk-exact, part (3); blueprint proof, first sentence"
+    "document": "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean",
+    "place": "Point.skyscraperSheafAdjunction; Functor.preservesEpimorphisms_of_adjunction; ModuleCat.epi_iff_surjective"
    }
   },
   {
-   "text": "Apply [lemma-weil-pbc-geometric-stalk-conservative] to the morphism $U(C)\\to0$ of abelian etale sheaves. The stalk of the zero sheaf is zero (the colimit of the zero section groups), so this morphism is an isomorphism precisely when $U(C)_{\\bar t}=0$ for every geometric point. Its being an isomorphism is precisely $U(C)=0$. Combining this with steps 1 and 2 proves both implications of the asserted equivalence.",
+   "text": "Conversely, specialize the assumed surjectivity to the algebraic closure of the residue field at each x in T. Convert each fibre map to an epimorphism using ModuleCat.epi_iff_surjective. The conservative family underlying [lemma-weil-pbc-geometric-stalk-conservative] is isConservativeFamilyOfPoints_ulift_pointSmallEtale T. Apply its jointlyReflectEpimorphisms theorem directly to module-valued sheaves. At x, use naturality of uliftSheafFiberIso to identify the lifted map, up to pre- and postcomposition by isomorphisms, with the known epic unlifted map. Thus every lifted fibre map is epi, and joint reflection implies e is epi. This is global generation by [def-kun-global-generated].",
    "uses": [
     "lemma-weil-pbc-geometric-stalk-conservative",
-    "def-weil-pbc-geometric-stalks"
+    "def-weil-pbc-geometric-stalks",
+    "def-kun-global-generated"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03PU, theorem-exactness-stalks; blueprint proof, second sentence"
+    "document": "Mathlib/CategoryTheory/Sites/Point/Conservative.lean",
+    "place": "ObjectProperty.IsConservativeFamilyOfPoints.jointlyReflectEpimorphisms; WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint.isConservativeFamilyOfPoints_ulift_pointSmallEtale; Point.uliftSheafFiberIso"
    }
   }
  ],
  "proof_deps": [
   "def-kun-global-generated",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-preadditive-epi-iff-cokernel-zero",
-  "prop-weil-pbc-geometric-stalks-exact",
   "def-weil-pbc-geometric-stalks",
   "lemma-weil-pbc-geometric-stalk-conservative"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-global-generated-stalkwise.md",
-  "place": "## Proof, with coefficient-forgetting and categorical cokernel steps made explicit using Stacks Tags 03DA, 03PT, 03PU, 010B and 010C"
+  "place": "Proof specialized directly to ModuleCat using the existing geometric conservative family, joint reflection of epimorphisms, the skyscraper adjunction and the universe-lift fibre comparison (M9 stage 3)."
  },
  "mathlib_searches": [
   {
@@ -177,9 +162,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-module-sheaves-colimits-forgetful"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-15",
   "by": "L",
@@ -205,5 +188,15 @@
   "group": "Q05",
   "result": "pass",
   "note": "Wrote review.md. Immutable statement, dependencies, canonical evaluation, geometric stalks, universes, edge cases, docstrings and report sections checked. Per-file scompile.py reproduction passed cleanly. No delivery faults or fixes needed; branch head unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261019T231245-L-566543",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
