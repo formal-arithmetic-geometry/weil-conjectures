@@ -17467,3 +17467,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:40 L: merged deliver/F6/Sheaf.Paper.TraceTransposeBaseChange (stage 3; reviewer PASS; first push; landing 20261019T154009-L-3025375 (proof); batch 20261019T153958; modules 1; new nodes 0)
 - 15:40 L: merged deliver/G3/Sheaf.Paper.ConnectedTateLineEndomorphisms (stage 3; reviewer PASS; first push; landing 20261019T154010-L-3025614 (interface); batch 20261019T153958; modules 1; new nodes 1; change records: coord/changes/connected-tate-line-proof-scope.md)
 - 15:40 L: merged deliver/G4/Sheaf.AlgebraicGeometry.FiniteOpenExchangeScalars (stage 3; reviewer PASS; first push; landing 20261019T154011-L-3025921 (proof); batch 20261019T153958; modules 1; new nodes 0)
+- 15:40 L: merged deliver/G4/Sheaf.Paper.MixedWeightsStability (stage 3; reviewer PASS; first push; landing 20261019T154012-L-3026252 (proof); batch 20261019T153958; modules 1; new nodes 0)
