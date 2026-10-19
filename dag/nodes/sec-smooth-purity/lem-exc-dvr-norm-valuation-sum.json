@@ -31,7 +31,7 @@
  ],
  "proof": [
   {
-   "text": "Regard $B$ as an $A$-submodule of $L$ and let $S$ be its $K$-linear span. Finite $A$-generators [def-weil-finitely-generated-module] also span $S$ over $K$, so $S$ is finite-dimensional [def-weil-finite-dimensional-subspace]. It contains $1$, is closed under multiplication, and is contained in the field $L$. For a nonzero $c\\in S$, multiplication by $c$ is an injective $K$-linear endomorphism of the finite-dimensional space $S$, hence is surjective; in particular $1=cz$ for some $z\\in S$. Thus $S$ is a subfield containing $B$ and therefore contains its fraction field $L$. Consequently $S=L$, so $B$ is a finite $A$-submodule spanning $L$.",
+   "text": "Embed B into L and take its A-linear image M. The fraction-ring map is injective, so M is A-linearly isomorphic to B and is finite over A [def-weil-finitely-generated-module]. Its K-span is L [def-weil-finite-dimensional-subspace]: apply Mathlib IsFractionRing.ideal_span_singleton_map_subset with a = 1 and b = Set.univ, using algebraicity from Module.Finite A B. This is the algebraic clearing-of-denominators argument for the lattice B in Tag 02MJ.",
    "uses": [
     "def-weil-finitely-generated-module",
     "def-weil-finite-dimensional-subspace"
@@ -39,23 +39,24 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02MJ (lemma-finite-extension-dim-1), the lattice B in L used in the final proof paragraph; spanning verified explicitly."
+    "place": "Tag 02MJ (lemma-finite-extension-dim-1), proof, with Tags 02MI and 02M0."
    }
   },
   {
-   "text": "Fix $y\\in L^\\times$ and let $g:L\\to L$ be multiplication by $y$, an invertible $K$-linear map with inverse multiplication by $y^{-1}$. Put $H=B\\cap yB$ inside $L$, and $M_+=B/H$, $M_-=yB/H$. The intersection $H$ is a $B$-submodule of both $B$ and $yB$ because multiplication in $L$ is commutative. Apply [lem-exc-dvr-lattice-distance-determinant] to $R=A$, $V=L$, the lattice $B$ from Step 1 and $g$. It gives finite $A$-length of both $M_+$ and $M_-$, and $$v_A(N_{L/K}(y))=\\ell_A(M_+)-\\ell_A(M_-),$$ since $N_{L/K}(y)$ is by definition the determinant of multiplication by $y$ [def-weil-endomorphism-determinant].",
+   "text": "First fix nonzero b in B and let g be multiplication by b on L. Its image N = bM lies in M. Apply [lem-exc-dvr-lattice-distance-determinant] to M and g: the negative quotient N/(M intersect N) is zero. The positive quotient M/N is A-linearly isomorphic to B/bB via B isomorphic to M, using Submodule.Quotient.restrictScalarsEquiv and Submodule.Quotient.equiv. Thus B/bB has finite A-length and its length equals v_A(det_K(g)) = v_A(Norm(b)) [def-weil-endomorphism-determinant, def-weil-pbc-module-length].",
    "uses": [
     "lem-exc-dvr-lattice-distance-determinant",
-    "def-weil-endomorphism-determinant"
+    "def-weil-endomorphism-determinant",
+    "def-weil-pbc-module-length"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 02MI (lemma-order-vanishing-determinant) and 02MG (definition-distance), applied to the lattice B as in Tag 02MJ."
+    "place": "Tag 02MJ (lemma-finite-extension-dim-1), proof, with Tags 02MI and 02M0."
    }
   },
   {
-   "text": "Every strict chain of $B$-submodules of either $M_+$ or $M_-$ is also a strict chain of $A$-submodules. Thus the finite $A$-lengths in Step 2 imply finite $B$-lengths by [def-weil-pbc-module-length]. Apply [lem-exc-semilocal-restriction-length] separately to these two $B$-modules. The hypotheses hold: $X$ is finite, every maximal ideal contracts to $\\mathfrak m_A$, and the residue degrees $f_{\\mathfrak q}$ are finite by assumption. Subtract the resulting two finite sums, in $\\mathbf Z$, to obtain $$v_A(N_{L/K}(y))=\\sum_{\\mathfrak q\\in X}f_{\\mathfrak q}\\bigl(\\ell_{B_{\\mathfrak q}}((M_+)_{\\mathfrak q})-\\ell_{B_{\\mathfrak q}}((M_-)_{\\mathfrak q})\\bigr).$$",
+   "text": "Finite A-length implies both the ascending and descending chain conditions, hence finite B-length, since a chain of B-submodules is a chain of A-submodules. Apply [lem-exc-semilocal-restriction-length] to B/bB. Identify its canonical residue fields with A/(q under A) and B/q through Ideal.quotEquivOfEq and Ideal.bijective_algebraMap_quotient_residueField. The induced ring maps commute by Ideal.ResidueField.map_algebraMap, so Algebra.finrank_eq_of_equiv_equiv identifies the residue degrees; a semilinear surjection transports their finiteness.",
    "uses": [
     "def-weil-pbc-module-length",
     "lem-exc-semilocal-restriction-length"
@@ -63,44 +64,30 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02M0 (lemma-pushdown-module), applied to the two quotient modules in the distance formula of Tag 02MI."
+    "place": "Tag 02MJ (lemma-finite-extension-dim-1), proof, with Tags 02MI and 02M0."
    }
   },
   {
-   "text": "Fix $\\mathfrak q\\in X$ and put $R=B_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime]. Since $B$ is a domain, every denominator outside $\\mathfrak q$ is nonzero, so these localizations embed in $L$. The localizations of $B$ and $yB$ inside $L$ are $R$ and $yR$. Also $\\operatorname{Frac}(R)=L$: the inclusions $B\\subseteq R\\subseteq L$ show that $\\operatorname{Frac}(R)\\subseteq L$, and every fraction of elements of $B$ is a fraction of elements of $R$, giving the reverse inclusion. Moreover $H_{\\mathfrak q}=R\\cap yR$: if $x=b/s=yc/t$ with $b,c\\in B$ and $s,t\\notin\\mathfrak q$, then $stx=tb=ysc\\in B\\cap yB=H$, so $x\\in H_{\\mathfrak q}$; the reverse inclusion is immediate. Apply [lem-weil-pbc-localization-module-exact] to the quotient exact sequences $H\\to B\\to M_+$ and $H\\to yB\\to M_-$. The localized quotient maps are surjective (lift a fraction of a quotient to the fraction of any representative) by [def-weil-pbc-module-localization]. Hence they induce $R$-linear isomorphisms $$(M_+)_{\\mathfrak q}\\cong R/(R\\cap yR),\\qquad (M_-)_{\\mathfrak q}\\cong yR/(R\\cap yR).$$ Each isomorphism identifies submodules in both directions by image and inverse image and preserves strict inclusions; therefore the corresponding module lengths are equal by [def-weil-pbc-module-length].",
+   "text": "For each maximal q, put R = B_q [def-weil-pbc-localization-at-prime]. The localization of B/bB [def-weil-pbc-module-localization] is R/(b/1)R: Submodule.localized'_span identifies the localized principal ideal, and IsLocalizedModule.linearEquiv applied to Submodule.toLocalizedQuotient' gives the quotient isomorphism. Its R-length is Ring.ord R (b/1) by definition. This order is finite since b/1 is nonzero and R is a Noetherian DVR [def-sc-discrete-valuation-ring, lem-weil-pbc-pid-noetherian-normal]. Ring.ordFrac_eq_ord and Ring.ordMonoidWithZeroHom_eq_coe identify its natural-valued length with WithZero.log (Ring.ordFrac R (b in FractionRing B)). Converting the finite length sum from ENat to integers proves the asserted formula for every nonzero b in B.",
    "uses": [
     "def-weil-pbc-localization-at-prime",
     "def-weil-pbc-module-localization",
-    "lem-weil-pbc-localization-module-exact",
-    "def-weil-pbc-module-length"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 02M0 and 02MI; identification of the localized quotients and intersection, written explicitly from fractions."
-   }
-  },
-  {
-   "text": "The ring $R$ is a DVR by hypothesis and [def-sc-discrete-valuation-ring]. It is a principal ideal domain, so [lem-weil-pbc-pid-noetherian-normal] gives Noetherianity. Fix a uniformizer $t$. By [lem-weil-pbc-dvr-unit-times-uniformizer-power], each nonzero principal ideal of $R$ is $(t^j)$ for some $j\\geq0$. Since every ideal is principal, the ideals containing $(t^n)$ are precisely $(t^j)$ for $0\\leq j\\leq n$; if $j>n$ and $t^n\\in(t^j)$, cancellation would make the nonunit $t$ invertible, so necessarily $j\\leq n$; divisibility of powers gives the reverse order on the exponents. Submodules of $R/(t^n)$ are the corresponding ideals modulo $(t^n)$, so their longest strict chain has length $n$, and $\\ell_R(R/(t^n))=n$ by [def-weil-pbc-module-length], also for $n=0$. Every nonzero fraction $y=a/b$ with $a,b\\in R$ has such a form: apply the cited power lemma to $a=u_1t^i$ and $b=u_2t^j$ to get $y=(u_1u_2^{-1})t^{i-j}$. The exponent is unique, since equality of two such forms with different exponents would make a positive power of $t$ a unit. Thus write $y=ut^r$ with $u\\in R^\\times$, $r=v_R(y)\\in\\mathbf Z$, using the normalized-valuation convention stated above. If $r\\geq0$, then $yR=t^rR\\subseteq R$ and the two lengths in Step 4 are $r$ and $0$. If $r=-n<0$, then $R\\subseteq yR=t^{-n}R$ and the two lengths are $0$ and $n$: multiplication by $t^n$ identifies $yR/R$ with $R/t^nR$. In both cases the first length minus the second is $v_R(y)$.",
-   "uses": [
     "def-sc-discrete-valuation-ring",
-    "lem-weil-pbc-pid-noetherian-normal",
-    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
-    "def-weil-pbc-module-length"
+    "lem-weil-pbc-pid-noetherian-normal"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02MD (definition-ord), normalized to the uniformizer exponent using Tag 00PD (lemma-characterize-dvr); the ideal-chain and negative-exponent calculations are written out."
+    "place": "Tag 02MJ (lemma-finite-extension-dim-1), proof, with Tags 02MI and 02M0."
    }
   },
   {
-   "text": "Substitute the local difference computed in Steps 4 and 5 into the sum in Step 3. This yields $$v_A(N_{L/K}(y))=\\sum_{\\mathfrak q\\in X}f_{\\mathfrak q}\\,v_{B_{\\mathfrak q}}(y).$$ The argument used only $y\\ne0$ and includes units, positive valuations and negative valuations, so it proves the assertion for every $y\\in L^\\times$.",
+   "text": "Use IsFractionRing.div_surjective to write y = a/b with a and b nonzero. The norm is multiplicative, so the logarithmic order of Norm(y) plus that of Norm(b) equals that of Norm(a); all norms are nonzero because they are images of units. In each B_q the same equality follows from multiplicativity of Ring.ordFrac and WithZero.log_mul, using that IsLocalization.algEquiv commutes with the maps from B. Subtract the integral formulas for a and b and distribute the finite sum and residue-degree factors. This proves the desired identity for every unit y, including negative local valuations.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02MJ (lemma-finite-extension-dim-1), final norm/order equality, with arbitrary fractions handled by the full lattice-distance formula."
+    "place": "Tag 02MJ (lemma-finite-extension-dim-1), proof, with Tags 02MI and 02M0."
    }
   }
  ],
@@ -113,15 +100,13 @@
   "lem-exc-semilocal-restriction-length",
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-module-localization",
-  "lem-weil-pbc-localization-module-exact",
   "def-sc-discrete-valuation-ring",
-  "lem-weil-pbc-pid-noetherian-normal",
-  "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+  "lem-weil-pbc-pid-noetherian-normal"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 02MJ (lemma-finite-extension-dim-1), using its inputs Tags 02M0 and 02MI directly. Apply the full lattice-distance formula to arbitrary nonzero y instead of first reducing to y in B; compute both signed local lengths explicitly in a DVR."
+  "place": "Tag 02MJ (lemma-finite-extension-dim-1), proof: reduce y = a/b to nonzero a,b in B, then apply Tags 02MI and 02M0 to B/bB. Formalized by S6 using Mathlib localization of principal quotients and the order-of-vanishing API."
  },
  "mathlib_searches": [
   {
@@ -287,5 +272,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261019T112527-L-3950527",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

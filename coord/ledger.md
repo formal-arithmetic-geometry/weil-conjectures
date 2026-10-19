@@ -17351,3 +17351,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:25 L: merged deliver/S5/Sheaf.AlgebraicGeometry.NormalConstantOpenImage (stage 3; reviewer PASS; first push; landing 20261019T112524-L-3950010 (proof); batch 20261019T112432; modules 1; new nodes 0)
 - 11:25 L: merged deliver/S6/Sheaf.Paper.CompleteProetale (stage 3; reviewer PASS; first push; landing 20261019T112525-L-3950163 (interface); batch 20261019T112432; modules 2; new nodes 0; change records: coord/changes/S6-intrinsic-completeness-bridge.md)
 - 11:25 L: merged deliver/S6/Sheaf.Paper.PurityDncFiniteRealization (stage 3; reviewer PASS; first push; landing 20261019T112526-L-3950398 (proof); batch 20261019T112432; modules 1; new nodes 0)
+- 11:25 L: merged deliver/S6/Sheaf.RingTheory.DvrNormValuationSum (stage 3; reviewer PASS; first push; landing 20261019T112527-L-3950527 (proof); batch 20261019T112432; modules 1; new nodes 0)
