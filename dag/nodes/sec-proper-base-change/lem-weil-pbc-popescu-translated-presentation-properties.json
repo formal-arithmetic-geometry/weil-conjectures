@@ -141,14 +141,13 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.RingTheory.PopescuTranslatedPresentationProperties",
-  "file": "lean/WeilConjectures/RingTheory/PopescuTranslatedPresentationProperties.lean",
+  "module": "Sheaf.RingTheory.PopescuTranslatedPresentationProperties",
+  "file": "lean/Sheaf/RingTheory/PopescuTranslatedPresentationProperties.lean",
   "declaration": "Algebra.exists_popescu_translated_presentation_properties",
   "statement": "theorem exists_popescu_translated_presentation_properties\n    (R : Type u) (A : Type v) [CommRing R] [CommRing A]\n    [Algebra R A] (π : R)\n    (ρ : (A ⧸ Ideal.span {(algebraMap R A π) ^ 4}) →ₐ[R]\n      (R ⧸ Ideal.span {π ^ 4}))\n    (n m c : ℕ) (P : Presentation R A (Fin n) (Fin m)) (hc : c ≤ min n m)\n    (b : {I : Finset (Fin n) // I.card = c} → A)\n    (hzero : ∀ i, ρ (Ideal.Quotient.mk _ (P.val i)) = 0)\n    (hminor : algebraMap R A π = ∑ I : {I : Finset (Fin n) // I.card = c}, b I *\n      Matrix.det (fun j i : Fin c =>\n        aeval P.val (pderiv (I.val.orderEmbOfFin I.property i)\n          (P.relation (Fin.castLE (le_trans hc (min_le_right n m)) j))))) :\n    ∃ (a : Fin m → R) (t : R),\n      (∀ j, constantCoeff (P.relation j) = π ^ 4 * a j) ∧\n      (1 - π ^ 3 * t) * π ∈ Ideal.span (Set.range\n        (fun I : {I : Finset (Fin n) // I.card = c} ↦\n          (Matrix.submatrix\n            (fun i j ↦ constantCoeff\n              (pderiv i (P.relation (Fin.castLE (le_trans hc (min_le_right n m)) j))))\n            (I.val.orderEmbOfFin I.property) (fun j ↦ j)).det))",
   "branch": "sheaf-dag",
   "by": "J2",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.PopescuTranslatedPresentationProperties; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

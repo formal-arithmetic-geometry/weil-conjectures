@@ -86,14 +86,13 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.Algebra.FinitePresentationRestrictedHomColimit",
-  "file": "lean/WeilConjectures/Algebra/FinitePresentationRestrictedHomColimit.lean",
+  "module": "Sheaf.Algebra.FinitePresentationRestrictedHomColimit",
+  "file": "lean/Sheaf/Algebra/FinitePresentationRestrictedHomColimit.lean",
   "declaration": "ModuleCat.exists_stage_restricted_hom",
   "statement": "theorem exists_stage_restricted_hom\n    {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat) (i : I) (M N : ModuleCat.{max u v} (F.obj i))\n    [Module.FinitePresentation (F.obj i) M]\n    (h : M ⟶ (restrictScalars (CommRingCat.Hom.hom (colimit.ι F i))).obj\n      ((extendScalars (CommRingCat.Hom.hom (colimit.ι F i))).obj N)) :\n    ∃ (j : I) (hij : i ≤ j),\n      let rij := CommRingCat.Hom.hom (F.map (homOfLE hij))\n      let rj := CommRingCat.Hom.hom (colimit.ι F j)\n      let ri := CommRingCat.Hom.hom (colimit.ι F i)\n      ∃ (a : M ⟶ (restrictScalars rij).obj ((extendScalars rij).obj N)),\n        ∀ (e : (extendScalars ri).obj N ≅\n          (extendScalars rj).obj ((extendScalars rij).obj N)),\n          (∀ n : N, e.hom ((1 : ↑(colimit F : CommRingCat)) ⊗ₜ[F.obj i, ri] n) =\n            (1 : ↑(colimit F : CommRingCat)) ⊗ₜ[F.obj j, rj]\n              ((1 : ↑(F.obj j)) ⊗ₜ[F.obj i, rij] n)) →\n          ∀ m : M, e.hom (h m) =\n            (1 : ↑(colimit F : CommRingCat)) ⊗ₜ[F.obj j, rj] (a m)",
   "branch": "sheaf-dag",
   "by": "V4",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.Algebra.FinitePresentationRestrictedHomColimit; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

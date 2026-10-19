@@ -110,14 +110,13 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.RingTheory.ElementwiseFpModuleEquivDescent",
-  "file": "lean/WeilConjectures/RingTheory/ElementwiseFpModuleEquivDescent.lean",
+  "module": "Sheaf.RingTheory.ElementwiseFpModuleEquivDescent",
+  "file": "lean/Sheaf/RingTheory/ElementwiseFpModuleEquivDescent.lean",
   "declaration": "AlgebraicGeometry.exists_stage_equiv_of_elementwise_colimit",
   "statement": "theorem exists_stage_equiv_of_elementwise_colimit\n    {J : Type v} [Preorder J] [IsDirectedOrder J]\n    (A : J → Type u) [∀ j, CommRing (A j)]\n    (f : ∀ (j l : J), j ≤ l → A j →+* A l)\n    (hself : ∀ j, f j j le_rfl = RingHom.id (A j))\n    (hcomp : ∀ j l m (hjl : j ≤ l) (hlm : l ≤ m),\n      (f l m hlm).comp (f j l hjl) = f j m (hjl.trans hlm))\n    (C : Type w) [CommRing C] (g : ∀ j, A j →+* C)\n    (hg : ∀ j l (hjl : j ≤ l), (g l).comp (f j l hjl) = g j)\n    (hsurj : ∀ c : C, ∃ j a, g j a = c)\n    (hzero : ∀ j a, g j a = 0 → ∃ (l : J) (hjl : j ≤ l), f j l hjl a = 0)\n    (i : J) (P : Type x) (N : Type y) [AddCommMonoid P] [AddCommMonoid N]\n    [Module (A i) P] [Module (A i) N]\n    [Module.FinitePresentation (A i) P] [Module.FinitePresentation (A i) N]\n    (e : letI : Algebra (A i) C := (g i).toAlgebra\n      Nonempty (C ⊗[A i] P ≃ₗ[C] C ⊗[A i] N)) :\n    ∃ (j : J) (hij : i ≤ j),\n      letI : Algebra (A i) (A j) := (f i j hij).toAlgebra\n      Nonempty (A j ⊗[A i] P ≃ₗ[A j] A j ⊗[A i] N)",
   "branch": "sheaf-dag",
   "by": "V1",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.ElementwiseFpModuleEquivDescent; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

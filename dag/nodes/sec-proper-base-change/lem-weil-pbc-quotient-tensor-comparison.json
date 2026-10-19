@@ -105,14 +105,13 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.RingTheory.TorIdealQuotientChainMap",
-  "file": "lean/WeilConjectures/RingTheory/TorIdealQuotientChainMap.lean",
+  "module": "Sheaf.RingTheory.TorIdealQuotientChainMap",
+  "file": "lean/Sheaf/RingTheory/TorIdealQuotientChainMap.lean",
   "declaration": "ModuleCat.exists_quotient_tensor_comparison",
   "statement": "theorem exists_quotient_tensor_comparison\n    {R A : Type u} [CommRing R] [CommRing A]\n    (f : R →+* A) (I : Ideal R) (J : Ideal A) (hJ : J = Ideal.map f I)\n    (M : ModuleCat.{u} R) (N : ModuleCat.{u} A)\n    (P : ProjectiveResolution M) (G : ProjectiveResolution N)\n    (φ : ∀ n : ℕ, (P.complex.X n) →+ (G.complex.X n))\n    (hφ : ∀ (n : ℕ) (r : R) (p : P.complex.X n), φ n (r • p) = f r • φ n p)\n    (hdφ : ∀ (n : ℕ) (p : P.complex.X (n + 1)),\n      G.complex.d (n + 1) n (φ (n + 1) p) = φ n (P.complex.d (n + 1) n p)) :\n    ∃ ψ : ((forget₂ (ModuleCat.{u} R) AddCommGrpCat).mapHomologicalComplex\n        (ComplexShape.down ℕ)).obj ((((tensoringRight (ModuleCat.{u} R)).obj\n        (ModuleCat.of R (R ⧸ I))).mapHomologicalComplex\n        (ComplexShape.down ℕ)).obj P.complex) ⟶\n      ((forget₂ (ModuleCat.{u} A) AddCommGrpCat).mapHomologicalComplex\n        (ComplexShape.down ℕ)).obj ((((tensoringRight (ModuleCat.{u} A)).obj\n        (ModuleCat.of A (A ⧸ J))).mapHomologicalComplex\n        (ComplexShape.down ℕ)).obj G.complex),\n      (∀ (n : ℕ) (p : P.complex.X n) (r : R),\n        ψ.f n (p ⊗ₜ[R] Ideal.Quotient.mk I r) =\n          φ n p ⊗ₜ[A] Ideal.Quotient.mk J (f r)) ∧\n      (∀ z : ((((tensoringRight (ModuleCat.{u} R)).obj\n        (ModuleCat.of R (R ⧸ I))).mapHomologicalComplex\n        (ComplexShape.down ℕ)).obj P.complex).cycles 1,\n        ∃ w : ((((tensoringRight (ModuleCat.{u} A)).obj\n        (ModuleCat.of A (A ⧸ J))).mapHomologicalComplex\n        (ComplexShape.down ℕ)).obj G.complex).cycles 1,\n          ψ.f 1 (((((tensoringRight (ModuleCat.{u} R)).obj\n        (ModuleCat.of R (R ⧸ I))).mapHomologicalComplex\n        (ComplexShape.down ℕ)).obj P.complex).iCycles 1 z) =\n            ((((tensoringRight (ModuleCat.{u} A)).obj\n        (ModuleCat.of A (A ⧸ J))).mapHomologicalComplex\n        (ComplexShape.down ℕ)).obj G.complex).iCycles 1 w)",
   "branch": "sheaf-dag",
   "by": "J4",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.TorIdealQuotientChainMap; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

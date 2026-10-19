@@ -122,14 +122,13 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.RingTheory.FormalGlueingMorphismTuple",
-  "file": "lean/WeilConjectures/RingTheory/FormalGlueingMorphismTuple.lean",
+  "module": "Sheaf.RingTheory.FormalGlueingMorphismTuple",
+  "file": "lean/Sheaf/RingTheory/FormalGlueingMorphismTuple.lean",
   "declaration": "FormalGlueing.canonical_tuple_compatible",
   "statement": "theorem canonical_tuple_compatible {R : Type u} {S : Type v}\n    [CommRing R] [CommRing S] (φ : R →+* S) (t : ℕ) (f : Fin t → R)\n    (M N : ModuleCat.{max u v w} R)\n    (X Y : Data.{u, v, max u v w} φ f)\n    (hX : X.M' = extend φ M ∧\n      (∀ i, X.M i = ModuleCat.of (Localization.Away (f i))\n        (LocalizedModule.Away (f i) M)) ∧\n      (∀ i, HEq (X.alpha i).toLinearMap (compare φ (f i) M)) ∧\n      (∀ i j, HEq (X.alpha_overlap i j).toLinearMap (swap (f i) (f j) M)))\n    (hY : Y.M' = extend φ N ∧\n      (∀ i, Y.M i = ModuleCat.of (Localization.Away (f i))\n        (LocalizedModule.Away (f i) N)) ∧\n      (∀ i, HEq (Y.alpha i).toLinearMap (compare φ (f i) N)) ∧\n      (∀ i j, HEq (Y.alpha_overlap i j).toLinearMap (swap (f i) (f j) N)))\n    (z : X ⟶ Y)\n    (p : extend φ M →ₗ[S] extend φ N)\n    (c : ∀ i, localize (f i) M →ₗ[R] localize (f i) N)\n    (hp : HEq z.prime p) (hc : ∀ i, HEq (z.chart i) (c i)) :\n    letI : Algebra R S := φ.toAlgebra\n    let η : N →ₗ[R] S ⊗[R] N := TensorProduct.mk R S N 1\n    let ρ := fun (a h : R) (ha : a ∣ h) ↦\n      IsLocalizedModule.lift (Submonoid.powers a)\n        (LocalizedModule.mkLinearMap (Submonoid.powers a) N)\n        (LocalizedModule.mkLinearMap (Submonoid.powers h) N)\n        (RingTheory.localizationAway_map_units_of_dvd (M := N) a h ha)\n    let β : (S ⊗[R] N) × (∀ i : Fin t, LocalizedModule.Away (f i) N) →\n        (∀ i : Fin t, LocalizedModule.Away (f i) (S ⊗[R] N)) ×\n          (∀ i j : Fin t, LocalizedModule.Away (f i * f j) N) :=\n      fun q ↦\n        (fun i ↦ LocalizedModule.mkLinearMap (Submonoid.powers (f i)) (S ⊗[R] N) q.1 -\n          IsLocalizedModule.map (Submonoid.powers (f i))\n            (LocalizedModule.mkLinearMap (Submonoid.powers (f i)) N)\n            (LocalizedModule.mkLinearMap (Submonoid.powers (f i)) (S ⊗[R] N)) η (q.2 i),\n         fun i j ↦ ρ (f i) (f i * f j) (dvd_mul_right (f i) (f j)) (q.2 i) -\n          ρ (f j) (f i * f j) (dvd_mul_left (f j) (f i)) (q.2 j))\n    ∀ m : M, β (p ((1 : S) ⊗ₜ[R] m), fun i ↦ c i (LocalizedModule.mk m 1)) = 0",
   "branch": "sheaf-dag",
   "by": "C4",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.FormalGlueingMorphismTuple; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

@@ -207,14 +207,13 @@
  },
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.RingTheory.LocalizedRingColimitComparison",
-  "file": "lean/WeilConjectures/RingTheory/LocalizedRingColimitComparison.lean",
+  "module": "Sheaf.RingTheory.LocalizedRingColimitComparison",
+  "file": "lean/Sheaf/RingTheory/LocalizedRingColimitComparison.lean",
   "declaration": "Algebra.localizedRingColimitComparison",
   "statement": "theorem localizedRingColimitComparison\n    {Λ : Type u} [Preorder Λ] [Nonempty Λ] [IsDirected Λ (· ≤ ·)]\n    {T : Type u} [CommRing T] (F L : Λ ⥤ CommRingCat.{u})\n    (κ : F ⟶ (Functor.const Λ).obj (CommRingCat.of T))\n    (hF : Nonempty (IsColimit (Cocone.mk (CommRingCat.of T) κ)))\n    (p : Ideal T) [p.IsPrime] (pᵢ : ∀ i, Ideal (F.obj i)) [∀ i, (pᵢ i).IsPrime]\n    (hp : ∀ i, pᵢ i = p.comap (κ.app i).hom)\n    (eᵢ : ∀ i, L.obj i ≃+* Localization.AtPrime (pᵢ i))\n    (hm : ∀ (i j : Λ) (f : i ⟶ j) (x : F.obj i),\n      eᵢ j ((L.map f).hom ((eᵢ i).symm (algebraMap _ _ x))) =\n        algebraMap _ _ ((F.map f).hom x)) :\n    ∃ e : (colimit L : CommRingCat.{u}) ≃+* Localization.AtPrime p,\n      ∀ i (z : L.obj i), e ((colimit.ι L i).hom z) =\n        Localization.localRingHom (pᵢ i) p (κ.app i).hom (hp i) (eᵢ i z)",
   "branch": "sheaf-dag",
   "by": "X2",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.LocalizedRingColimitComparison; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

@@ -105,14 +105,13 @@
  "unit": "sk-prop-input-spreading",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.RootProductChartCore",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/RootProductChartCore.lean",
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.RootProductChartCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RootProductChartCore.lean",
   "declaration": "AlgebraicGeometry.Scheme.rootProductChart_stalk_localization_core",
   "statement": "theorem rootProductChart_stalk_localization_core {Z : Scheme.{u}}\n    (R : CommRingCat.{u}) (q : Z ⟶ Spec R) (z : Z)\n    (f : R) (hf : f ∈ (q z).asIdeal)\n    (m : ℕ) (e : Fin m → ℕ) (he : ∀ k, 0 < e k)\n    (α : Z ≅ Spec (CommRingCat.of (∀ k : Fin m,\n      AdjoinRoot ((Polynomial.X : Polynomial R) ^ e k - Polynomial.C f))))\n    (hα : α.hom ≫ Spec.map (CommRingCat.ofHom\n      (algebraMap R (∀ k : Fin m,\n        AdjoinRoot ((Polynomial.X : Polynomial R) ^ e k - Polynomial.C f)))) = q) :\n    let R₀ := (Spec R).presheaf.stalk (q z)\n    ∃ (k : Fin m) (f₀ : R₀), f₀ ∈ IsLocalRing.maximalIdeal R₀ ∧\n      let p := (Polynomial.X : Polynomial R₀) ^ e k - Polynomial.C f₀\n      let D := AdjoinRoot p\n      ∃ (P : Ideal D) (hP : P.IsMaximal),\n        letI : P.IsPrime := hP.isPrime\n        let E := Localization.AtPrime P\n        ∃ θ : Z.presheaf.stalk z ≃+* E,\n          θ.toRingHom.comp (q.stalkMap z).hom =\n            (algebraMap D E).comp (AdjoinRoot.of p)",
   "branch": "sheaf-dag",
   "by": "A4",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.Morphisms.RootProductChartCore; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

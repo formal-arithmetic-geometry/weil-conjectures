@@ -89,14 +89,13 @@
  "unit": "sk-prop-sf-cbc",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.RefinementLocalizationGeometry",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/RefinementLocalizationGeometry.lean",
+  "module": "Sheaf.AlgebraicGeometry.RefinementLocalizationGeometry",
+  "file": "lean/Sheaf/AlgebraicGeometry/RefinementLocalizationGeometry.lean",
   "declaration": "refinement_localization_geometry",
   "statement": "theorem refinement_localization_geometry\n    (S : Type u) [CommRing S] [IsDomain S]\n    (C : Type u) [CommRing C] [IsDomain C] [Algebra S C]\n    [Module.Finite S C] [Algebra.Etale S C]\n    (hcover : Surjective (Spec.map (CommRingCat.ofHom (algebraMap S C))))\n    (r : ℕ) (D : Fin r → Type u) [∀ j, CommRing (D j)] [∀ j, IsDomain (D j)]\n    [∀ j, Algebra C (D j)] [∀ j, Module.Finite C (D j)]\n    (hinj : ∀ j, Function.Injective (algebraMap C (D j)))\n    [∀ j, Algebra S (D j)] [∀ j, IsScalarTower S C (D j)]\n    (s : Fin r → S) (hs : ∀ j, s j ≠ 0)\n    (hhomeo : ∀ j, (topologically IsHomeomorph).universally\n      (Spec.map (CommRingCat.ofHom\n        (Algebra.TensorProduct.map (IsScalarTower.toAlgHom S C (D j))\n          (AlgHom.id S (Localization.Away (s j)))).toRingHom)))\n    (T : Type u) [CommRing T] [Algebra S T]\n    [IsLocalization.Away (∏ j, s j) T]\n    (U : Type u) [CommRing U] [Algebra U T]\n    (hUT : Function.Bijective (algebraMap U T)) :\n    let C' := T ⊗[S] C\n    letI := Algebra.TensorProduct.rightAlgebra (R := S) (A := T) (B := C)\n    Module.Finite U C' ∧ Algebra.Etale U C' ∧\n      Surjective (Spec.map (CommRingCat.ofHom (algebraMap U C'))) ∧\n      ∀ j, Module.Finite C' (C' ⊗[C] D j) ∧ IsDomain (C' ⊗[C] D j) ∧\n        Surjective (Spec.map (CommRingCat.ofHom (algebraMap C' (C' ⊗[C] D j)))) ∧\n        (topologically IsHomeomorph).universally\n          (Spec.map (CommRingCat.ofHom (algebraMap C' (C' ⊗[C] D j))))",
   "branch": "sheaf-dag",
   "by": "A3",
-  "date": "2026-10-12",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.RefinementLocalizationGeometry; points at its upstream twin."
+  "date": "2026-10-12"
  },
  "lean_audit": {
   "master": {

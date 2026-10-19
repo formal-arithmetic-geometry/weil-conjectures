@@ -78,14 +78,13 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.CechSheafLocalPositiveSections",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/CechSheafLocalPositiveSections.lean",
+  "module": "Sheaf.AlgebraicGeometry.CechSheafLocalPositiveSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/CechSheafLocalPositiveSections.lean",
   "declaration": "AlgebraicGeometry.cech_sheaf_restrict_positive_section_boundary",
   "statement": "theorem cech_sheaf_restrict_positive_section_boundary\n    {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (F : X.Modules)\n    (D : CochainComplex X.Modules ℕ)\n    (e : ∀ p : ℕ, (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).obj\n          (D.X p).val ≅\n        ((cechComplexFunctor U).obj\n          ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙\n            (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat)).X p)\n    (hd : ∀ p : ℕ,\n        (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map\n            (D.d p (p + 1)).val ≫ (e (p + 1)).hom =\n          (e p).hom ≫ ((cechComplexFunctor U).obj\n            ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙\n              (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat)).d p (p + 1))\n    (i : ι) (p : ℕ) :\n    let K := ((Scheme.Modules.restrictFunctor (U i).ι).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj D\n    ∀ (W : (U i).toScheme.Opens) (x : Γ((K.sc (p + 1)).X₂, W)),\n      (K.sc (p + 1)).g.app W x = 0 →\n        ∃ z : Γ((K.sc (p + 1)).X₁, W), (K.sc (p + 1)).f.app W z = x",
   "branch": "sheaf-dag",
   "by": "H3",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.CechSheafLocalPositiveSections; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

@@ -81,14 +81,13 @@
  "unit": "sk-lem-failure-field",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.RestrictedAffineSingleCompositionLaw",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/RestrictedAffineSingleCompositionLaw.lean",
+  "module": "Sheaf.AlgebraicGeometry.RestrictedAffineSingleCompositionLaw",
+  "file": "lean/Sheaf/AlgebraicGeometry/RestrictedAffineSingleCompositionLaw.lean",
   "declaration": "AlgebraicGeometry.Etale.restrictedAffineSingleTransition_composition_law",
   "statement": "theorem restrictedAffineSingleTransition_composition_law {S : Scheme.{v}}\n    {I : Type v} [Preorder I]\n    (D : Iᵒᵖ ⥤ Over S)\n    (F : ∀ i : I, Sheaf (D.obj (op i)).left.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (((D.map f.op).left)^*[AddCommGrpCat.{v + 1}]).obj (F i) ⟶ F j)\n    (hφcomp : ∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), HEq (φ (f ≫ g))\n      ((upperStarComp AddCommGrpCat.{v + 1} (D.map g.op).left\n          (D.map f.op).left).hom.app (F i) ≫\n        (((D.map g.op).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ φ g))\n    (U : S.Etale) :\n    let D' := restrictedAffineDiagram D U\n    let K := restrictedAffineK D F U\n    let ψ := fun {i j : Iᵒᵖ} (f : j ⟶ i) ↦ restrictedAffineSingleTransition D F φ U f\n    ( ∀ (i j k : Iᵒᵖ) (f : j ⟶ i) (g : k ⟶ j),\n      ψ (g ≫ f) =\n        (NatIso.mapHomologicalComplex\n          (upperStarComp AddCommGrpCat.{v + 1} (D'.map g) (D'.map f)\n            (D'.map (g ≫ f)) (D'.map_comp g f))\n          (ComplexShape.up ℤ)).hom.app (K i) ≫\n        ((upperStar AddCommGrpCat.{v + 1} (D'.map g)).mapHomologicalComplex\n          (ComplexShape.up ℤ)).map (ψ f) ≫ ψ g)",
   "branch": "sheaf-dag",
   "by": "W2",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.RestrictedAffineSingleCompositionLaw; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

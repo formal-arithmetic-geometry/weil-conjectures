@@ -81,14 +81,13 @@
  },
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.SheafCoinductionCounit",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/SheafCoinductionCounit.lean",
+  "module": "Sheaf.AlgebraicGeometry.SheafCoinductionCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/SheafCoinductionCounit.lean",
   "declaration": "AlgebraicGeometry.sheafHom_restrictScalars_counit",
   "statement": "theorem sheafHom_restrictScalars_counit\n    {X Y : Scheme.{u}} (f : Y ⟶ X) :\n    let A := ((TopologicalSpace.Opens.map f.base).sheafPushforwardContinuous\n      RingCat.{u} _ _).obj Y.ringCatSheaf\n    let T := SheafOfModules.restrictScalars.{u} f.toRingCatSheafHom\n    let M := T.obj (SheafOfModules.unit A)\n    let K := (SheafOfModules.homFunctor X.sheaf).obj (op M)\n    ∀ (H : SheafOfModules.{u} X.ringCatSheaf ⥤ SheafOfModules.{u} A)\n      (i : H ⋙ T ≅ K),\n      (∀ (F : SheafOfModules.{u} X.ringCatSheaf) (U : X.Opens)\n        (a : A.obj.obj (op U)) (φ : (H.obj F).val.obj (op U))\n        (W : Over U) (b : A.obj.obj (op W.left)),\n        (((i.hom.app F).val.app (op U)).hom (a • φ)).app (op W) b =\n          (((i.hom.app F).val.app (op U)).hom φ).app (op W)\n            (A.obj.map W.hom.op a * b)) →\n      ∃ e : Adjunction.CoreHomEquiv T H,\n        ∀ (G : SheafOfModules.{u} A) (F : SheafOfModules.{u} X.ringCatSheaf)\n          (ψ : G ⟶ H.obj F) (U : X.Opens) (m : G.val.obj (op U)),\n          (((e.homEquiv G F).symm ψ).val.app (op U)).hom m =\n            ((((i.hom.app F).val.app (op U)).hom\n              (((ψ.val.app (op U)).hom) m)).app\n              (op (Over.mk (𝟙 U)))) (1 : A.obj.obj (op U))",
   "branch": "sheaf-dag",
   "by": "M1",
-  "date": "2026-10-12",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.SheafCoinductionCounit; points at its upstream twin."
+  "date": "2026-10-12"
  },
  "reviewed": {
   "date": "2026-10-12",

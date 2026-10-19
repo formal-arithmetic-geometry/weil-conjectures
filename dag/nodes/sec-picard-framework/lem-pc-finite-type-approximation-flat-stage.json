@@ -122,15 +122,14 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "module": "WeilConjectures.RingTheory.FiniteTypeApproximationFlatStage",
-  "file": "lean/WeilConjectures/RingTheory/FiniteTypeApproximationFlatStage.lean",
+  "module": "Sheaf.RingTheory.FiniteTypeApproximationFlatStage",
+  "file": "lean/Sheaf/RingTheory/FiniteTypeApproximationFlatStage.lean",
   "declaration": "Algebra.exists_flat_finiteType_approximation_stage",
   "statement": "theorem exists_flat_finiteType_approximation_stage\n    {Λ : Type u} [Preorder Λ] [Nonempty Λ] [IsDirected Λ (· ≤ ·)]\n    (S : Type u) [CommRing S]\n    (A B : Λ ⥤ CommRingCat.{u}) (D : Λ ⥤ AddCommGrpCat.{v})\n    [∀ i : Λ, Module (B.obj i) (D.obj i)]\n    (φ : ∀ i, A.obj i →+* B.obj i)\n    (κ : B ⟶ (Functor.const Λ).obj (CommRingCat.of S))\n    (hc : IsColimit (Cocone.mk (CommRingCat.of S) κ))\n    (U : (i : Λ) → Set (PrimeSpectrum (B.obj i)))\n    (hUopen : ∀ i, IsOpen (U i))\n    (hUflat : ∀ i (q : PrimeSpectrum (B.obj i)), q ∈ U i →\n      letI : Module (A.obj i) (LocalizedModule q.asIdeal.primeCompl (D.obj i)) :=\n        Module.compHom _ (φ i)\n      Module.Flat (A.obj i) (LocalizedModule q.asIdeal.primeCompl (D.obj i)))\n    (hUpersist : ∀ (i j : Λ) (h : i ≤ j),\n      PrimeSpectrum.comap (B.map (homOfLE h)).hom ⁻¹' U i ⊆ U j)\n    (hUcover : ∀ q : PrimeSpectrum S, ∃ i, PrimeSpectrum.comap (κ.app i).hom q ∈ U i) :\n    ∃ i : Λ, letI : Module (A.obj i) (D.obj i) := Module.compHom (D.obj i) (φ i)\n      Module.Flat (A.obj i) (D.obj i)",
   "branch": "sheaf-dag",
   "by": "P4",
   "date": "2026-10-13",
-  "existing": false,
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.FiniteTypeApproximationFlatStage; points at its upstream twin."
+  "existing": false
  },
  "reviewed": {
   "date": "2026-10-13",

@@ -95,14 +95,13 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.RingTheory.KoszulQuotientTensorHomologyBasis",
-  "file": "lean/WeilConjectures/RingTheory/KoszulQuotientTensorHomologyBasis.lean",
+  "module": "Sheaf.RingTheory.KoszulQuotientTensorHomologyBasis",
+  "file": "lean/Sheaf/RingTheory/KoszulQuotientTensorHomologyBasis.lean",
   "declaration": "AlgebraicGeometry.exists_koszul_quotient_tensor_homology_basis",
   "statement": "theorem exists_koszul_quotient_tensor_homology_basis\n    (A : Type u) [CommRing A] (I : Ideal A) (n r : ℕ) (f : Fin r → A)\n    (hf : Ideal.span (Set.range f) = I)\n    (b : Module.Basis (Fin r) (A ⧸ I) I.Cotangent) :\n    let K := ExteriorAlgebra.koszulComplex A r f\n    let T := (tensorRight (ModuleCat.of A (A ⧸ I))).mapHomologicalComplex (.down ℕ)\n    ∃ e : (ModuleCat.restrictScalars (Ideal.Quotient.mk I)).obj\n        (ModuleCat.of (A ⧸ I) (⋀[A ⧸ I]^n I.Cotangent)) ≅ (T.obj K).homology n,\n      ∀ s : Set.powersetCard (Fin r) n,\n        ∃ z : (T.obj K).cycles n,\n          (T.obj K).iCycles n z =\n            (exteriorPower.ιMulti A n\n              (fun j ↦ Finsupp.single (Set.powersetCard.ofFinEmbEquiv.symm s j) 1))\n                ⊗ₜ[A] (1 : A ⧸ I) ∧\n          e.hom (b.exteriorPower n s) = (T.obj K).homologyπ n z",
   "branch": "sheaf-dag",
   "by": "D3",
-  "date": "2026-10-14",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.KoszulQuotientTensorHomologyBasis; points at its upstream twin."
+  "date": "2026-10-14"
  },
  "reviewed": {
   "date": "2026-10-13",

@@ -96,14 +96,13 @@
  "unit": "sk-thm-picard-rr",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.Modules.LocalBilinearSheafificationTensor",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/LocalBilinearSheafificationTensor.lean",
+  "module": "Sheaf.AlgebraicGeometry.Modules.LocalBilinearSheafificationTensor",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/LocalBilinearSheafificationTensor.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.local_bilinear_sheafification_tensor_extension",
   "statement": "theorem local_bilinear_sheafification_tensor_extension {X : Scheme.{v}}\n    (F G : _root_.PresheafOfModules.{v} X.ringCatSheaf.obj) (H : X.Modules)\n    (U : X.Opens)\n    (b : ∀ W : X.Opens, W ≤ U →\n      F.obj (op W) →ₗ[X.presheaf.obj (op W)]\n        G.obj (op W) →ₗ[X.presheaf.obj (op W)] H.val.obj (op W))\n    (hb : ∀ (W Z : X.Opens) (hW : W ≤ U) (hZW : Z ≤ W) x y,\n      b Z (hZW.trans hW) (F.map (homOfLE hZW).op x) (G.map (homOfLE hZW).op y) =\n        H.val.map (homOfLE hZW).op (b W hW x y)) :\n    let S : _root_.PresheafOfModules.{v} X.ringCatSheaf.obj ⥤ X.Modules :=\n      PresheafOfModules.sheafification.{v} (𝟙 X.ringCatSheaf.obj)\n    let η := (PresheafOfModules.sheafificationAdjunction.{v} (𝟙 X.ringCatSheaf.obj)).unit\n    ∃ d : ∀ W : X.Opens, W ≤ U →\n      (S.obj F ⊗ S.obj G).val.obj (op W) →ₗ[X.presheaf.obj (op W)] H.val.obj (op W),\n      (∀ W hW x y,\n        d W hW (tmulSection ((η.app F).app (op W) x) ((η.app G).app (op W) y)) =\n          b W hW x y) ∧\n      (∀ (W Z : X.Opens) (hW : W ≤ U) (hZW : Z ≤ W) y,\n        H.val.map (homOfLE hZW).op (d W hW y) =\n          d Z (hZW.trans hW) ((S.obj F ⊗ S.obj G).val.map (homOfLE hZW).op y))",
   "branch": "sheaf-dag",
   "by": "X2",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.Modules.LocalBilinearSheafificationTensor; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

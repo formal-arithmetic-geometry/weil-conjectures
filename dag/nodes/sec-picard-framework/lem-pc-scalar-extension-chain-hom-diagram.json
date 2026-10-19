@@ -93,14 +93,13 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.ScalarExtensionChainHomDiagram",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/ScalarExtensionChainHomDiagram.lean",
+  "module": "Sheaf.AlgebraicGeometry.ScalarExtensionChainHomDiagram",
+  "file": "lean/Sheaf/AlgebraicGeometry/ScalarExtensionChainHomDiagram.lean",
   "declaration": "AlgebraicGeometry.exists_scalarExtensionChainHomDiagram",
   "statement": "theorem exists_scalarExtensionChainHomDiagram\n    {I : Type u} [Preorder I] (i : I)\n    (F : Set.Ici i ⥤ CommRingCat.{u})\n    [∀ A : CommRingCat.{u}, HasDerivedCategory.{u + 1} (ModuleCat.{u} A)]\n    (E K : CochainComplex (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩)) ℤ)\n    (hE : (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (E.X n)) ∧\n      ∀ n : ℤ, Module.Finite (F.obj ⟨i, le_rfl⟩) (E.X n) ∧\n        Module.Projective (F.obj ⟨i, le_rfl⟩) (E.X n)) :\n      ∃ (H : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i) ⥤ Type (u + 1))\n        (ident : ∀ j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i), H.obj j ≃\n          (DerivedCategory.Q.obj\n            ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom) (.up ℤ)).obj E) ⟶\n           DerivedCategory.Q.obj\n            ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom) (.up ℤ)).obj K)))\n        (d : Cocone H)\n        (e : d.pt ≃\n          (DerivedCategory.Q.obj\n            ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (colimit.ι F ⟨i, le_rfl⟩).hom) (.up ℤ)).obj E) ⟶\n           DerivedCategory.Q.obj\n            ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (colimit.ι F ⟨i, le_rfl⟩).hom) (.up ℤ)).obj K))),\n        (∀ (j k : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i)) (hjk : j ≤ k)\n          (f : ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom) (.up ℤ)).obj E) ⟶\n            ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom) (.up ℤ)).obj K)),\n          ident k (H.map (homOfLE hjk) ((ident j).symm (DerivedCategory.Q.map f))) =\n            DerivedCategory.Q.map (CochainComplex.scalarExtensionHom\n              (F.map (homOfLE j.property)).hom (F.map (homOfLE hjk)).hom\n              (F.map (homOfLE k.property)).hom\n              (congrArg CommRingCat.Hom.hom (F.map_comp\n                (homOfLE j.property) (homOfLE hjk))) E K f)) ∧\n        (∀ (j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i))\n          (f : ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom) (.up ℤ)).obj E) ⟶\n            ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom) (.up ℤ)).obj K)),\n          e (d.ι.app j ((ident j).symm (DerivedCategory.Q.map f))) =\n            DerivedCategory.Q.map (CochainComplex.scalarExtensionHom\n              (F.map (homOfLE j.property)).hom (colimit.ι F j.val).hom\n              (colimit.ι F ⟨i, le_rfl⟩).hom\n              (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE j.property)).symm)\n              E K f)) ",
   "branch": "sheaf-dag",
   "by": "P1",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.ScalarExtensionChainHomDiagram; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

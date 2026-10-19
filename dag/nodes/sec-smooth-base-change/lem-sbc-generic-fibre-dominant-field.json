@@ -71,14 +71,13 @@
  "statement": "Let Z and S be affine schemes in universe u, Z reduced and S integral. Let g: Z to S be flat and locally of finite presentation, eta a generic point of S, and assume the eta fibre is geometrically irreducible. There exist a field L in universe u and a kappa(eta)-algebra structure on L such that the top intermediate field of L/kappa(eta) is finitely generated, and a scheme-theoretically dominant map j: Spec L to the eta fibre of g. The composite of j with the fibre projection is Spec of the displayed algebra map. No base extension, new base scheme, or separability assertion is included.",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.GenericFibreDominantField",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/GenericFibreDominantField.lean",
+  "module": "Sheaf.AlgebraicGeometry.GenericFibreDominantField",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericFibreDominantField.lean",
   "declaration": "AlgebraicGeometry.exists_generic_fibre_dominant_field",
   "statement": "theorem exists_generic_fibre_dominant_field\n    {Z S : Scheme.{u}} [IsAffine Z] [IsReduced Z] [IsAffine S] [IsIntegral S]\n    (g : Z ⟶ S) [Flat g] [LocallyOfFinitePresentation g]\n    (η : S) (hη : IsGenericPoint η Set.univ)\n    (hgeom : GeometricallyIrreducible (g.fiberToSpecResidueField η)) :\n    ∃ (L : Type u) (hL : Field L) (aL : Algebra (S.residueField η) L),\n      letI := hL\n      letI := aL\n      (⊤ : IntermediateField (S.residueField η) L).FG ∧\n      ∃ j : Spec (.of L) ⟶ g.fiber η,\n        IsSchemeTheoreticallyDominant j ∧\n        j ≫ g.fiberToSpecResidueField η =\n          Spec.map (CommRingCat.ofHom (algebraMap (S.residueField η) L))",
   "branch": "sheaf-dag",
   "by": "N4",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.GenericFibreDominantField; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "proof": [
   {

@@ -129,14 +129,13 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.RingTheory.LimitModuleLocalizationRingData",
-  "file": "lean/WeilConjectures/RingTheory/LimitModuleLocalizationRingData.lean",
+  "module": "Sheaf.RingTheory.LimitModuleLocalizationRingData",
+  "file": "lean/Sheaf/RingTheory/LimitModuleLocalizationRingData.lean",
   "declaration": "RingHom.exists_limit_module_localization_ring_data",
   "statement": "theorem exists_limit_module_localization_ring_data\n    {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat.{u}) (c : Cocone F) (hc : IsColimit c)\n    [∀ i : I, IsLocalRing (F.obj i)] [IsLocalRing c.pt]\n    (hF : ∀ (i j : I) (h : i ≤ j), IsLocalHom (F.map (homOfLE h)).hom)\n    (hcLocal : ∀ i : I, IsLocalHom (c.ι.app i).hom)\n    (T : CommRingCat.{u}) [IsLocalRing T] (τ : c.pt →+* T) [IsLocalHom τ]\n    (P : Type p) [CommRing P] [Algebra c.pt P] [Algebra.FinitePresentation c.pt P]\n    (W : Submonoid P) (f : P →+* T)\n    (hf : f.comp (algebraMap c.pt P) = τ)\n    (hT : letI := f.toAlgebra; IsLocalization W T) :\n    ∃ i₀ : I,\n      ∃ (B : {i : I // i₀ ≤ i} ⥤ CommRingCat.{u}) (β : B ⟶ (Functor.const _).obj T),\n        Nonempty (IsColimit (Cocone.mk T β)) ∧\n        ∃ (κ : ∀ i : {i : I // i₀ ≤ i}, B.obj i →+* T),\n          (∀ i, ∀ x : B.obj i, κ i x = (β.app i).hom x) ∧\n          (∀ i, IsLocalRing (B.obj i)) ∧ (∀ i, IsLocalHom (κ i)) ∧\n          (∀ (i j : {i : I // i₀ ≤ i}) (h : i ≤ j),\n            IsLocalHom (B.map (homOfLE h)).hom) ∧\n          ∃ (τ₀ : ∀ i : {i : I // i₀ ≤ i}, F.obj i.1 →+* B.obj i),\n            (∀ i, IsLocalHom (τ₀ i)) ∧ (∀ i, (τ₀ i).EssFiniteType) ∧\n            (∀ i, (κ i).comp (τ₀ i) = τ.comp (c.ι.app i.1).hom) ∧\n            (∀ (i j : {i : I // i₀ ≤ i}) (h : i ≤ j),\n              (B.map (homOfLE h)).hom.comp (τ₀ i) =\n                (τ₀ j).comp (F.map (homOfLE h)).hom) ∧\n            (∀ (i j : {i : I // i₀ ≤ i}) (h : i ≤ j),\n              letI := (τ₀ i).toAlgebra\n              letI := (F.map (homOfLE h)).hom.toAlgebra\n              (∃ φ : B.obj i ⊗[F.obj i.1] F.obj j.1 →+* B.obj j,\n                (∀ (x : B.obj i) (y : F.obj j.1),\n                  φ (x ⊗ₜ[F.obj i.1] y) =\n                    (B.map (homOfLE h)).hom x * τ₀ j y) ∧\n                (letI := φ.toAlgebra\n                 ∃ U : Submonoid (B.obj i ⊗[F.obj i.1] F.obj j.1),\n                   IsLocalization U (B.obj j)))) ∧\n            (∀ i : {i : I // i₀ ≤ i},\n              letI := (τ₀ i).toAlgebra\n              letI : Algebra (F.obj i.1) c.pt := (c.ι.app i.1).hom.toAlgebra\n              (∃ φ : B.obj i ⊗[F.obj i.1] c.pt →+* T,\n                (∀ (x : B.obj i) (y : c.pt),\n                  φ (x ⊗ₜ[F.obj i.1] y) = κ i x * τ y) ∧\n                (letI := φ.toAlgebra\n                 ∃ U : Submonoid (B.obj i ⊗[F.obj i.1] c.pt), IsLocalization U T)))",
   "branch": "sheaf-dag",
   "by": "F2",
-  "date": "2026-10-14",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.LimitModuleLocalizationRingData; points at its upstream twin."
+  "date": "2026-10-14"
  },
  "reviewed": {
   "date": "2026-10-14",

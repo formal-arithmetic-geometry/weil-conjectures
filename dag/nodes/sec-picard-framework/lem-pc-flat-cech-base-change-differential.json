@@ -90,14 +90,13 @@
  "unit": "sk-thm-picard-rr",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyCechDifferential",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/Cohomology/FlatCohomologyCechDifferential.lean",
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechDifferential",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/FlatCohomologyCechDifferential.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.cechBaseChange_components_comm",
   "statement": "theorem cechBaseChange_components_comm (f : X ⟶ Spec (.of R)) (U : ι → X.Opens) (M : X.Modules) (hI : ∀ (k : ℕ) (y : Fin (k + 1) → ι), (⨅ l, baseChangeFst (S := S) f ⁻¹ᵁ U (y l)) ≤ baseChangeFst (S := S) f ⁻¹ᵁ (⨅ l, U (y l))) : let g := baseChangeFst (S := S) f let V : ι → (baseChangedScheme (S := S) f).Opens := fun i ↦ g ⁻¹ᵁ U i let N := baseChangedModule (S := S) f M let P := M.presheafModuleCat ⋙ ModuleCat.restrictScalars (((Scheme.ΓSpecIso (.of R)).inv ≫ f.appTop).hom) let Q := N.presheafModuleCat ⋙ ModuleCat.restrictScalars (((Scheme.ΓSpecIso (.of S)).inv ≫ (baseChangeSnd (S := S) f).appTop).hom) let C := (cechComplexFunctor U).obj P let A := ((ModuleCat.extendScalars (algebraMap R S)).mapHomologicalComplex (.up ℕ)).obj C let B := (cechComplexFunctor V).obj Q let a := fun (k : ℕ) (y : Fin (k + 1) → ι) (x : C.X k) ↦ M.presheaf.map (homOfLE (TopCat.Presheaf.iInf_le_piObj U y)).op (TopCat.Presheaf.cechComplexFunctorπ U P k y x) let z := fun (k : ℕ) (y : Fin (k + 1) → ι) (x : B.X k) ↦ N.presheaf.map (homOfLE (TopCat.Presheaf.iInf_le_piObj V y)).op (TopCat.Presheaf.cechComplexFunctorπ V Q k y x) ∀ c : ∀ k, A.X k ⟶ B.X k, (∀ (k : ℕ) (y : Fin (k + 1) → ι) (b : S) (x : C.X k), z k y (c k (b ⊗ₜ[R] x)) = ((baseChangedScheme (S := S) f).presheaf.map (homOfLE (le_top : (⨅ l, V (y l)) ≤ ⊤)).op).hom (((Scheme.ΓSpecIso (.of S)).inv ≫ (baseChangeSnd (S := S) f).appTop).hom b) • N.presheaf.map (homOfLE (hI k y)).op ((baseChangeUnit (S := S) f M).val.app (op (⨅ l, U (y l))) (a k y x))) → ∀ k, c k ≫ B.d k (k + 1) = A.d k (k + 1) ≫ c (k + 1)",
   "branch": "sheaf-dag",
   "by": "F2",
-  "date": "2026-10-12",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechDifferential; points at its upstream twin."
+  "date": "2026-10-12"
  },
  "reviewed": {
   "date": "2026-10-12",

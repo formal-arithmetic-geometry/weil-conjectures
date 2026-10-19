@@ -103,14 +103,13 @@
  "statement": "Let $p>0$ be a natural number, $k$ a field, $K\\subset k$ a subfield [def-weil-field], $Q$ a finite set, and $b:Q\\to k$ a $K$-basis [def-weil-pbc-free-module]. Let $n,m\\ge0$ and $A=k[[x_1,\\ldots,x_n]][y_1,\\ldots,y_m]$ [def-weil-pbc-multivariate-power-series, def-weil-pbc-mv-polynomial-ring]. Let $S\\subset A$ be a subring consisting exactly of elements whose coefficients lie in $K$ and whose nonzero coefficients have each series and polynomial exponent divisible by $p$. Then $A$ has an $S$-basis indexed by $Q\\times\\{0,\\ldots,p-1\\}^n\\times\\{0,\\ldots,p-1\\}^m$, whose value at $(q,e,h)$ is $b(q)\\prod_i x_i^{e_i}\\prod_j y_j^{h_j}$.",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.RingTheory.PowerSeriesResidueMonomialBasis",
-  "file": "lean/WeilConjectures/RingTheory/PowerSeriesResidueMonomialBasis.lean",
+  "module": "Sheaf.RingTheory.PowerSeriesResidueMonomialBasis",
+  "file": "lean/Sheaf/RingTheory/PowerSeriesResidueMonomialBasis.lean",
   "declaration": "RingTheory.powerSeriesResidueMonomialBasis",
   "statement": "theorem powerSeriesResidueMonomialBasis\n    (p : ℕ) (hp : 0 < p)\n    (k : Type u) [Field k] (K : Subfield k)\n    (Q : Type v) [Finite Q] (b : Module.Basis Q K k)\n    (n m : ℕ)\n    (S : Subring (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)))\n    (hS : ∀ f, f ∈ S ↔\n      ∀ (a : Fin n →₀ ℕ) (g : Fin m →₀ ℕ),\n        MvPowerSeries.coeff a (MvPolynomial.coeff g f) ∈ K ∧\n        (MvPowerSeries.coeff a (MvPolynomial.coeff g f) ≠ 0 →\n          (∀ i, p ∣ a i) ∧ (∀ j, p ∣ g j))) :\n    ∃ B : Module.Basis (Q × (Fin n → Fin p) × (Fin m → Fin p)) S\n      (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)),\n      ∀ q, B q =\n        MvPolynomial.C (MvPowerSeries.C (b q.1) *\n          ∏ i : Fin n, MvPowerSeries.X i ^ (q.2.1 i : ℕ)) *\n        ∏ j : Fin m, MvPolynomial.X j ^ (q.2.2 j : ℕ)",
   "branch": "sheaf-dag",
   "by": "H3",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.PowerSeriesResidueMonomialBasis; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "mathlib_match": null,
  "reviewed": {

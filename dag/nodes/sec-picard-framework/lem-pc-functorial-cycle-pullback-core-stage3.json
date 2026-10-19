@@ -85,14 +85,13 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.Algebra.Homology.CyclePullbackCore",
-  "file": "lean/WeilConjectures/Algebra/Homology/CyclePullbackCore.lean",
+  "module": "Sheaf.Algebra.Homology.CyclePullbackCore",
+  "file": "lean/Sheaf/Algebra/Homology/CyclePullbackCore.lean",
   "declaration": "CochainComplex.exists_functorial_cyclePullback_core",
   "statement": "theorem exists_functorial_cyclePullback_core {A : Type u} [Category.{v} A] [Abelian A]\n    (S : ObjectProperty A) (hzero : ∀ X : A, IsZero X → S X) (T : A ⥤ A)\n    (π : T ⟶ 𝟭 A) (hT : ∀ X : A, S (T.obj X))\n    (N : ℤ) :\n    let P : ObjectProperty (CochainComplex A ℤ) :=\n      fun F ↦ ∀ i : ℤ, N < i → IsZero (F.X i)\n    ∃ Q : P.FullSubcategory ⥤ CochainComplex A ℤ, ∃ ε : Q ⟶ P.ι,\n      ∀ F : P.FullSubcategory,\n        (∀ i : ℤ, S ((Q.obj F).X i)) ∧\n        (∀ i : ℤ, N < i → IsZero ((Q.obj F).X i)) ∧\n        ∀ (i : ℤ), i ≤ N →\n          let d := (Q.obj F).d (i + 1) (i + 1 + 1)\n          let f := F.obj.d i (i + 1)\n          let g := kernel.ι d ≫ (ε.app F).f (i + 1)\n          ∃ (c : (Q.obj F).X i ≅ T.obj (pullback f g)),\n            c.hom ≫ π.app (pullback f g) ≫ pullback.fst f g = (ε.app F).f i ∧\n            c.hom ≫ π.app (pullback f g) ≫ pullback.snd f g ≫ kernel.ι d =\n              (Q.obj F).d i (i + 1)",
   "branch": "sheaf-dag",
   "by": "F3",
-  "date": "2026-10-12",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.Algebra.Homology.CyclePullbackCore; points at its upstream twin."
+  "date": "2026-10-12"
  },
  "reviewed": {
   "date": "2026-10-12",

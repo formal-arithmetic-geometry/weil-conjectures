@@ -98,14 +98,13 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.RingTheory.PolynomialParameterQuotientChart",
-  "file": "lean/WeilConjectures/RingTheory/PolynomialParameterQuotientChart.lean",
+  "module": "Sheaf.RingTheory.PolynomialParameterQuotientChart",
+  "file": "lean/Sheaf/RingTheory/PolynomialParameterQuotientChart.lean",
   "declaration": "Algebra.exists_polynomial_parameter_quotient_chart",
   "statement": "theorem exists_polynomial_parameter_quotient_chart\n    {k : Type u} {Λ : Type w} [Field k] [CommRing Λ] [Algebra k Λ]\n    (m₀ m d n : ℕ) (φ : MvPolynomial (Fin m₀) k →ₐ[k] Λ)\n    (q : PrimeSpectrum Λ)\n    [Algebra (MvPolynomial (Fin m) k) Λ]\n    (E : MvPolynomial (Fin m) k ≃ₐ[k]\n      MvPolynomial (Fin d) (MvPolynomial (Fin m₀) k))\n    (uP : Fin d → MvPolynomial (Fin m₀) k) (tΛ : Fin d → Λ)\n    (hparameters : Ideal.span\n      (Set.range (fun i ↦ algebraMap (MvPolynomial (Fin m₀) k)\n        (Localization.AtPrime (q.asIdeal.comap φ.toRingHom)) (uP i))) =\n      (q.asIdeal.comap φ.toRingHom).map\n        (algebraMap (MvPolynomial (Fin m₀) k)\n          (Localization.AtPrime (q.asIdeal.comap φ.toRingHom))))\n    (hideal : q.asIdeal.map (algebraMap Λ (Localization.AtPrime q.asIdeal)) =\n      (q.asIdeal.comap φ.toRingHom).map\n        ((algebraMap Λ (Localization.AtPrime q.asIdeal)).comp φ.toRingHom))\n    (ht : ∀ i, tΛ i ∉ q.asIdeal)\n    (hC : ∀ z : MvPolynomial (Fin m₀) k,\n      algebraMap (MvPolynomial (Fin m) k) Λ (E.symm (MvPolynomial.C z)) = φ z)\n    (hX : ∀ i,\n      algebraMap (MvPolynomial (Fin m) k) Λ (E.symm (MvPolynomial.X i)) = tΛ i) :\n    let R := MvPolynomial (Fin m) k\n    let P := MvPolynomial (Fin m₀) k\n    let p₀ := q.asIdeal.comap φ.toRingHom\n    let B := P ⧸ p₀ ^ n\n    let Q := Localization.AtPrime (q.asIdeal.under R)\n    let L := Localization.AtPrime q.asIdeal\n    ∃ (H : Ideal R) (e : (R ⧸ H ^ n) ≃ₐ[k] MvPolynomial (Fin d) B),\n      H.map (algebraMap R Q) = Ideal.span\n        (Set.range (fun i ↦ algebraMap R Q\n          (E.symm (MvPolynomial.C (uP i) * MvPolynomial.X i)))) ∧\n      H.map ((algebraMap Λ L).comp (algebraMap R Λ)) = IsLocalRing.maximalIdeal L ∧\n      (∀ z : P, e (Ideal.Quotient.mk (H ^ n) (E.symm (MvPolynomial.C z))) =\n        MvPolynomial.C (Ideal.Quotient.mk (p₀ ^ n) z)) ∧\n      (∀ i, e (Ideal.Quotient.mk (H ^ n) (E.symm (MvPolynomial.X i))) =\n        MvPolynomial.X i)",
   "branch": "sheaf-dag",
   "by": "S3",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.PolynomialParameterQuotientChart; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

@@ -121,14 +121,13 @@
  },
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.RingTheory.TensorAlgebraStructureFiniteStage",
-  "file": "lean/WeilConjectures/RingTheory/TensorAlgebraStructureFiniteStage.lean",
+  "module": "Sheaf.RingTheory.TensorAlgebraStructureFiniteStage",
+  "file": "lean/Sheaf/RingTheory/TensorAlgebraStructureFiniteStage.lean",
   "declaration": "RingHom.exists_tensor_algebra_structure_finite_stage",
   "statement": "theorem exists_tensor_algebra_structure_finite_stage\n    {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat.{v}) [HasColimit F]\n    (i₀ : I) (B₀ : Type w) [CommRing B₀] [Algebra (F.obj i₀) B₀]\n    (P : Type y) [CommRing P] [Algebra.FinitePresentation ℤ P]\n    (aP : letI := (colimit.ι F i₀).hom.toAlgebra\n      Algebra P (↥(colimit F) ⊗[F.obj i₀] B₀)) :\n    ∃ (i : I) (hi : i₀ ≤ i),\n    letI := (colimit.ι F i₀).hom.toAlgebra\n    letI := (F.map (homOfLE hi)).hom.toAlgebra\n    let αi : F.obj i →ₐ[F.obj i₀] ↥(colimit F) :=\n      { (colimit.ι F i).hom with\n        commutes' := fun s ↦\n          congrArg (fun f : F.obj i₀ ⟶ colimit F ↦ f s) (colimit.w F (homOfLE hi)) }\n    ∃ (aPi : Algebra P (↥(F.obj i) ⊗[F.obj i₀] B₀)),\n      letI := aPi\n      letI := aP\n      ∃ (μB : (↥(F.obj i) ⊗[F.obj i₀] B₀) →ₐ[P]\n          (↥(colimit F) ⊗[F.obj i₀] B₀)),\n        μB.toRingHom =\n          (Algebra.TensorProduct.map αi (AlgHom.id (F.obj i₀) B₀)).toRingHom",
   "branch": "sheaf-dag",
   "by": "E3",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.TensorAlgebraStructureFiniteStage; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

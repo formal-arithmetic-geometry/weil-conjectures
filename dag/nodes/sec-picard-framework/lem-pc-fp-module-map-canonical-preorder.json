@@ -94,14 +94,13 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.Algebra.FinitePresentationMapCanonical",
-  "file": "lean/WeilConjectures/Algebra/FinitePresentationMapCanonical.lean",
+  "module": "Sheaf.Algebra.FinitePresentationMapCanonical",
+  "file": "lean/Sheaf/Algebra/FinitePresentationMapCanonical.lean",
   "declaration": "ModuleCat.finitePresentation_map_directedColimit",
   "statement": "theorem finitePresentation_map_directedColimit\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat.{u}) (i₀ : I) (M N : ModuleCat.{u} (F.obj i₀))\n    (hM : Module.FinitePresentation (F.obj i₀) M)\n    (hN : Module.FinitePresentation (F.obj i₀) N)\n    (f : (extendScalars (colimit.ι F i₀).hom).obj M ⟶\n      (extendScalars (colimit.ι F i₀).hom).obj N) :\n    let e (i : Set.Ici i₀) (X : ModuleCat.{u} (F.obj i₀)) :=\n      eqToIso (congrArg (fun r ↦ (extendScalars r).obj X)\n        (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE i.property)).symm)) ≪≫\n      (extendScalarsComp (F.map (homOfLE i.property)).hom (colimit.ι F i.val).hom).app X\n    ∃ i : Set.Ici i₀,\n      ∃ g : (extendScalars (F.map (homOfLE i.property)).hom).obj M ⟶\n        (extendScalars (F.map (homOfLE i.property)).hom).obj N,\n        (e i M).hom ≫ (extendScalars (colimit.ι F i.val).hom).map g ≫ (e i N).inv = f",
   "branch": "sheaf-dag",
   "by": "W3",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.Algebra.FinitePresentationMapCanonical; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

@@ -77,14 +77,13 @@
  "statement": "Let S be an affine integral scheme in universe u with generic point eta. Let k-prime be a field in universe u equipped with a finite purely inseparable extension of kappa(eta). There exist an affine integral scheme S-prime, a universal homeomorphism q: S-prime to S, a generic point eta-prime with q(eta-prime)=eta, and a ring equivalence e: kappa(eta-prime) to k-prime. After identifying kappa(q(eta-prime)) with kappa(eta) using this equality, e composed with the residue field map induced by q equals the given algebra map into k-prime. The statement depends only on S and the specified field extension, and constructs no source-family field map.",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.PurelyInseparableGenericBaseSpread",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/PurelyInseparableGenericBaseSpread.lean",
+  "module": "Sheaf.AlgebraicGeometry.PurelyInseparableGenericBaseSpread",
+  "file": "lean/Sheaf/AlgebraicGeometry/PurelyInseparableGenericBaseSpread.lean",
   "declaration": "AlgebraicGeometry.exists_purely_inseparable_generic_base_spread",
   "statement": "theorem exists_purely_inseparable_generic_base_spread\n    {S : Scheme.{u}} [IsAffine S] [IsIntegral S]\n    (η : S) (hη : IsGenericPoint η Set.univ)\n    (k' : Type u) [Field k'] [Algebra (S.residueField η) k']\n    [Module.Finite (S.residueField η) k'] [IsPurelyInseparable (S.residueField η) k'] :\n    ∃ (S' : Scheme.{u}) (q : S' ⟶ S),\n      IsAffine S' ∧ IsIntegral S' ∧ IsUniversalHomeomorphism q ∧\n      ∃ (η' : S') (hq : q η' = η),\n        IsGenericPoint η' Set.univ ∧\n        ∃ e : S'.residueField η' ≃+* k',\n          e.toRingHom.comp\n            (((S.residueFieldCongr hq).inv ≫ q.residueFieldMap η').hom) =\n              algebraMap (S.residueField η) k'",
   "branch": "sheaf-dag",
   "by": "N4",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.PurelyInseparableGenericBaseSpread; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "proof": [
   {

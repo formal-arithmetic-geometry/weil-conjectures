@@ -123,14 +123,13 @@
  },
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.RingTheory.LocalCotangentComparisonNaturality",
-  "file": "lean/WeilConjectures/RingTheory/LocalCotangentComparisonNaturality.lean",
+  "module": "Sheaf.RingTheory.LocalCotangentComparisonNaturality",
+  "file": "lean/Sheaf/RingTheory/LocalCotangentComparisonNaturality.lean",
   "declaration": "Algebra.exists_localCotangentComparison_naturality",
   "statement": "theorem exists_localCotangentComparison_naturality\n    (k : Type u) (B : Type v) (A : Type w)\n    [CommRing k] [CommRing B] [CommRing A]\n    [Algebra k B] [Algebra B A] [Algebra k A] [IsScalarTower k B A]\n    [IsLocalRing B] [IsLocalRing A] [IsLocalHom (algebraMap B A)] :\n    let K₀ := IsLocalRing.ResidueField B\n    let K := IsLocalRing.ResidueField A\n    let P₀ := Extension.ofSurjective (Algebra.ofId B K₀) IsLocalRing.residue_surjective\n    let P := Extension.ofSurjective (Algebra.ofId A K) IsLocalRing.residue_surjective\n    let c₀ := P₀.h1CotangentEquivCotangent.toLinearMap.comp (H1Cotangent.map k B K₀ K₀)\n    let c := P.h1CotangentEquivCotangent.toLinearMap.comp (H1Cotangent.map k A K K)\n    ∃ μ : K ⊗[K₀] P₀.Cotangent →ₗ[K] P.Cotangent,\n      (∀ (r : K) (x : P₀.ker),\n        μ (r ⊗ₜ[K₀] Extension.Cotangent.mk x) =\n        r • Extension.Cotangent.mk (P := P) ⟨algebraMap B A x.val, by\n          change IsLocalRing.residue A (algebraMap B A x.val) = 0\n          rw [← IsLocalRing.ResidueField.algebraMap_residue]\n          have hx : IsLocalRing.residue B x.val = 0 := x.2\n          rw [hx, map_zero]⟩) ∧\n      μ.comp (c₀.baseChange K) =\n        c.comp ((H1Cotangent.map k k K₀ K).liftBaseChange K)",
   "branch": "sheaf-dag",
   "by": "M4",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.LocalCotangentComparisonNaturality; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

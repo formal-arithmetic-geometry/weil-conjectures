@@ -121,14 +121,13 @@
  },
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.RingTheory.LocalizedFiniteQuotientCharts",
-  "file": "lean/WeilConjectures/RingTheory/LocalizedFiniteQuotientCharts.lean",
+  "module": "Sheaf.RingTheory.LocalizedFiniteQuotientCharts",
+  "file": "lean/Sheaf/RingTheory/LocalizedFiniteQuotientCharts.lean",
   "declaration": "AdicCompletion.localized_finite_quotient_charts",
   "statement": "theorem localized_finite_quotient_charts\n    (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]\n    [Module.Finite R S] (p : Ideal R) [p.IsPrime] :\n    let A := Localization.AtPrime p\n    let B := A ⊗[R] S\n    letI := Algebra.TensorProduct.rightAlgebra (R := R) (A := A) (B := S)\n    let J := p.map (algebraMap R B)\n    let Q := p.primesOver S\n    ∀ (ψ : ∀ q : Q, B →ₐ[S] Localization.AtPrime q.1) (n : ℕ), n ≠ 0 →\n      let K := fun q : Q ↦ J.map (ψ q).toRingHom\n      ∃ e : Q ≃ MaximalSpectrum (B ⧸ J ^ n),\n        (∀ q : Q, (e q).asIdeal.comap\n          ((Ideal.Quotient.mk (J ^ n)).comp (algebraMap S B)) = q.1) ∧\n        ∀ q : Q,\n          let f : (B ⧸ J ^ n) →+* (Localization.AtPrime q.1 ⧸ (K q) ^ n) :=\n            Ideal.quotientMap ((K q) ^ n) (ψ q).toRingHom (by\n            rw [← Ideal.map_le_iff_le_comap, Ideal.map_pow])\n          letI := f.toAlgebra\n          IsLocalization.AtPrime (Localization.AtPrime q.1 ⧸ (K q) ^ n) (e q).asIdeal",
   "branch": "sheaf-dag",
   "by": "X2",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.LocalizedFiniteQuotientCharts; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

@@ -103,14 +103,13 @@
  "unit": "sk-prop-h2",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.PullbackSectionsComparison",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/PullbackSectionsComparison.lean",
+  "module": "Sheaf.AlgebraicGeometry.PullbackSectionsComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/PullbackSectionsComparison.lean",
   "declaration": "AlgebraicGeometry.Etale.pullbackSections_comparison",
   "statement": "theorem pullbackSections_comparison (R : Scheme.{u})\n    (G : Sheaf R.smallEtaleTopology AddCommGrpCat.{u + 1}) (W : R.Etale) :\n    let A := AddCommGrpCat.{u + 1}\n    let v := fun {X : Scheme.{u}} (f : X ⟶ R) ↦ pullback.fst W.hom f ≫ W.hom\n    let F := fun {X : Scheme.{u}} (f : X ⟶ R) ↦ (upperStar A (v f)).obj G\n    let e := fun {X : Scheme.{u}} (f : X ⟶ R) ↦ pullbackSectionsEquiv G W f\n      ∀ {X Y : Scheme.{u}} (h : X ⟶ Y) (f : Y ⟶ R) (g : X ⟶ R)\n        (w : g = h ≫ f) (m : pullback W.hom g ⟶ pullback W.hom f)\n        (hm : m ≫ pullback.fst W.hom f = pullback.fst W.hom g)\n        (hm' : m ≫ pullback.snd W.hom f = pullback.snd W.hom g ≫ h)\n        (s : ((lowerStar A f).obj ((upperStar A f).obj G)).obj.obj (op W)),\n        e g (((lowerStar A f).map\n            ((upperStarLowerStarAdjunction A h).unit.app ((upperStar A f).obj G)) ≫\n          (lowerStarComp A h f g w).hom.app _ ≫\n          (lowerStar A g).map ((upperStarComp A h f g w).inv.app G)).hom.app (op W) s) =\n        (globalSectionsUpperStarMap A m (F f) ≫\n          (Sheaf.Γ (pullback W.hom g).smallEtaleTopology A).map\n            ((upperStarComp A m (v f) (v g)\n              (by dsimp [v]; rw [← Category.assoc, hm])).inv.app G)) (e f s)",
   "branch": "sheaf-dag",
   "by": "P1",
-  "date": "2026-10-12",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.PullbackSectionsComparison; points at its upstream twin."
+  "date": "2026-10-12"
  },
  "reviewed": {
   "date": "2026-10-12",

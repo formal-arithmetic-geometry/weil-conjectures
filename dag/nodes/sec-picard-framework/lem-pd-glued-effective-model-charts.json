@@ -118,14 +118,13 @@
  "unit": "sk-prop-jacobian-descent",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.GluedEffectiveModelCharts",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/GluedEffectiveModelCharts.lean",
+  "module": "Sheaf.AlgebraicGeometry.GluedEffectiveModelCharts",
+  "file": "lean/Sheaf/AlgebraicGeometry/GluedEffectiveModelCharts.lean",
   "declaration": "CategoryTheory.Over.DescentDatum.exists_glued_effective_model_charts",
   "statement": "theorem exists_glued_effective_model_charts\n    {X Y : Scheme.{u}} {p : X ⟶ Y}\n    (hp : Presieve.singleton p ∈ Scheme.fpqcPrecoverage Y)\n    {V : Over X} (D : Over.DescentDatum p V)\n    {I : Type u} (U : I → V.left.Opens)\n    (hcover : ∀ x : V.left, ∃ i, x ∈ U i)\n    (E : ∀ i, Over.DescentDatum p (Over.mk ((U i).ι ≫ V.hom)))\n    (hcompat : ∀ (i : I) {T : Scheme.{u}} (f₁ f₂ : T ⟶ X)\n      (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ Over.mk ((U i).ι ≫ V.hom)),\n      ((E i).transport f₁ f₂ h a).left ≫ (U i).ι =\n        (D.transport f₁ f₂ h (Over.homMk (a.left ≫ (U i).ι)\n          (by simpa only [Over.mk_hom, Category.assoc] using Over.w a))).left)\n    (W : I → Over Y) (q : ∀ i, (U i).toScheme ⟶ (W i).left)\n    (hcart : ∀ i, IsPullback (q i) ((U i).ι ≫ V.hom) (W i).hom p)\n    (hinv : ∀ (i : I) {T : Scheme.{u}} (f₁ f₂ : T ⟶ X)\n      (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ Over.mk ((U i).ι ≫ V.hom)),\n      ((E i).transport f₁ f₂ h a).left ≫ q i = a.left ≫ q i) :\n    ∃ (W₀ : Over Y) (q₀ : V.left ⟶ W₀.left) (j : ∀ i, (W i).left ⟶ W₀.left),\n      (∀ i, IsOpenImmersion (j i)) ∧\n      (∀ w : W₀.left, ∃ i, ∃ z : (W i).left, j i z = w) ∧\n      (∀ i, j i ≫ W₀.hom = (W i).hom) ∧\n      (∀ i, IsPullback (q i) (U i).ι (j i) q₀)",
   "branch": "sheaf-dag",
   "by": "K2",
-  "date": "2026-10-12",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.GluedEffectiveModelCharts; points at its upstream twin."
+  "date": "2026-10-12"
  },
  "reviewed": {
   "date": "2026-10-12",

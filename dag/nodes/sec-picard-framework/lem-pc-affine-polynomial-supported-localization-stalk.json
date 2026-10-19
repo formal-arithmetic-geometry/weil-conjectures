@@ -118,14 +118,13 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.AffinePolynomialSupportedLocalizationStalk",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/AffinePolynomialSupportedLocalizationStalk.lean",
+  "module": "Sheaf.AlgebraicGeometry.AffinePolynomialSupportedLocalizationStalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePolynomialSupportedLocalizationStalk.lean",
   "declaration": "AlgebraicGeometry.affinePolynomial_supportedLocalization_stalk",
   "statement": "theorem affinePolynomial_supportedLocalization_stalk\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (U : Y.Opens) (V : X.Opens) (hV : IsAffineOpen V) (e : V ≤ f ⁻¹ᵁ U)\n    (n : ℕ) (g : MvPolynomial (Fin n) Γ(Y, U) →+* Γ(X, V))\n    (hg : Function.Surjective g)\n    (hcomp : g.comp MvPolynomial.C = (f.appLE U V e).hom)\n    (p : PrimeSpectrum (MvPolynomial (Fin n) Γ(Y, U)))\n    (hker : RingHom.ker g ≤ p.asIdeal) :\n    ∃ (x : X) (hx : x ∈ V), Nonempty\n      (((ModuleCat.restrictScalars\n          ((algebraMap (MvPolynomial (Fin n) Γ(Y, U))\n            (Localization p.asIdeal.primeCompl)).comp MvPolynomial.C)).obj\n          (((ModuleCat.restrictScalars g).obj\n            (ModuleCat.of Γ(X, V) Γ(X, V))).localizedModule p.asIdeal.primeCompl)) ≅\n        (ModuleCat.restrictScalars ((f.stalkMap x).hom.comp\n          (Y.presheaf.germ U (f x) (e hx)).hom)).obj\n            (ModuleCat.of (X.presheaf.stalk x) (X.presheaf.stalk x)))",
   "branch": "sheaf-dag",
   "by": "P4",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.AffinePolynomialSupportedLocalizationStalk; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

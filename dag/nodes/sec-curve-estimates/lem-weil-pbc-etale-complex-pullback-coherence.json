@@ -88,8 +88,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.EtaleComplexPullbackCoherence",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/EtaleComplexPullbackCoherence.lean",
+  "module": "Sheaf.AlgebraicGeometry.EtaleComplexPullbackCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleComplexPullbackCoherence.lean",
   "declaration": "AlgebraicGeometry.Etale.presentation_pullback_coherence",
   "statement": "theorem presentation_pullback_coherence\n    {I : Type u} [SmallCategory I] (T : Scheme.{u})\n    (D : I ⥤ Scheme.{u}) (c : Cone D) (t : D ⟶ (Functor.const I).obj T)\n    (p : c.pt ⟶ T) (hp : ∀ i, c.π.app i ≫ t.app i = p)\n    (C : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ) :\n    let F := fun i : I =>\n      ((upperStar AddCommGrpCat.{u + 1} (t.app i)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj C\n    let φ := fun {i j : I} (f : j ⟶ i) =>\n      (NatIso.mapHomologicalComplex\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map f) (t.app i) (t.app j)\n          ((Category.comp_id (t.app j)).symm.trans (t.naturality f).symm))\n        (ComplexShape.up ℤ)).inv.app C\n    let eG := fun i : I =>\n      (NatIso.mapHomologicalComplex\n        (upperStarComp AddCommGrpCat.{u + 1} (c.π.app i) (t.app i) p (hp i).symm)\n        (ComplexShape.up ℤ)).app C\n    (∀ i : I, φ (𝟙 i) = presentationIdentityMap D i (F i)) ∧\n    (∀ (i j k : I) (f : j ⟶ i) (g : k ⟶ j),\n      φ (g ≫ f) =\n        (NatIso.mapHomologicalComplex\n          (upperStarComp AddCommGrpCat.{u + 1} (D.map g) (D.map f)\n            (D.map (g ≫ f)) (D.map_comp g f))\n          (ComplexShape.up ℤ)).hom.app (F i) ≫\n        ((upperStar AddCommGrpCat.{u + 1} (D.map g)).mapHomologicalComplex\n          (ComplexShape.up ℤ)).map (φ f) ≫ φ g) ∧\n    (∀ (i j : I) (f : j ⟶ i), ((Functor.const Iᵒᵖ).obj\n      (((upperStar AddCommGrpCat.{u + 1} p).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj C)).map f.op =\n      (eG i).hom ≫\n        (NatIso.mapHomologicalComplex\n          (upperStarComp AddCommGrpCat.{u + 1} (c.π.app j) (D.map f)\n            (c.π.app i) (c.w f).symm) (ComplexShape.up ℤ)).hom.app (F i) ≫\n        ((upperStar AddCommGrpCat.{u + 1} (c.π.app j)).mapHomologicalComplex\n          (ComplexShape.up ℤ)).map (φ f) ≫ (eG j).inv)",
   "branch": "sheaf-dag",
@@ -97,8 +97,7 @@
   "date": "2026-10-12",
   "declarations": [
    "AlgebraicGeometry.Etale.presentation_pullback_coherence"
-  ],
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.EtaleComplexPullbackCoherence; points at its upstream twin."
+  ]
  },
  "lean_audit": {
   "master": {

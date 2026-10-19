@@ -140,14 +140,13 @@
  },
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.RingTheory.LimitModuleRingDataCore",
-  "file": "lean/WeilConjectures/RingTheory/LimitModuleRingDataCore.lean",
+  "module": "Sheaf.RingTheory.LimitModuleRingDataCore",
+  "file": "lean/Sheaf/RingTheory/LimitModuleRingDataCore.lean",
   "declaration": "RingHom.exists_limit_module_ring_data_core",
   "statement": "theorem exists_limit_module_ring_data_core\n    {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat.{u}) (c : Cocone F) (hc : IsColimit c)\n    [∀ i : I, IsLocalRing (F.obj i)] [IsLocalRing c.pt]\n    (hF : ∀ (i j : I) (h : i ≤ j), IsLocalHom (F.map (homOfLE h)).hom)\n    (hcLocal : ∀ i : I, IsLocalHom (c.ι.app i).hom)\n    (T : CommRingCat.{u}) [IsLocalRing T] (τ : c.pt →+* T) [IsLocalHom τ]\n    (P : Type p) [CommRing P] [Algebra c.pt P] [Algebra.FinitePresentation c.pt P]\n    (W : Submonoid P) (f : P →+* T)\n    (hf : f.comp (algebraMap c.pt P) = τ)\n    (hT : letI := f.toAlgebra; IsLocalization W T) :\n    ∃ i₀ : I,\n      ∃ (B : {i : I // i₀ ≤ i} ⥤ CommRingCat.{u})\n        (β : B ⟶ (Functor.const _).obj T),\n        Nonempty (IsColimit (Cocone.mk T β)) ∧\n        ∃ (τ₀ : ∀ i : {i : I // i₀ ≤ i}, F.obj i.1 →+* B.obj i),\n          (∀ i, IsLocalHom (τ₀ i)) ∧ (∀ i, (τ₀ i).EssFiniteType) ∧\n          (∀ i, (β.app i).hom.comp (τ₀ i) = τ.comp (c.ι.app i.1).hom) ∧\n          (∀ (i j : {i : I // i₀ ≤ i}) (h : i ≤ j),\n            (B.map (homOfLE h)).hom.comp (τ₀ i) =\n              (τ₀ j).comp (F.map (homOfLE h)).hom) ∧\n          (∀ i, IsLocalRing (B.obj i)) ∧\n          (∀ i, IsLocalHom ((β.app i).hom)) ∧\n          (∀ (i j : {i : I // i₀ ≤ i}) (h : i ≤ j),\n            IsLocalHom (B.map (homOfLE h)).hom)",
   "branch": "sheaf-dag",
   "by": "N1",
-  "date": "2026-10-14",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.LimitModuleRingDataCore; points at its upstream twin."
+  "date": "2026-10-14"
  },
  "reviewed": {
   "date": "2026-10-13",

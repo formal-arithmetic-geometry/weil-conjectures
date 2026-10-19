@@ -96,14 +96,13 @@
  "unit": "sk-lem-failure-field",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.RawAffineComplexSystemMapCoherence",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/RawAffineComplexSystemMapCoherence.lean",
+  "module": "Sheaf.AlgebraicGeometry.RawAffineComplexSystemMapCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawAffineComplexSystemMapCoherence.lean",
   "declaration": "AlgebraicGeometry.Etale.rawAffineComplex_system_map_coherence",
   "statement": "theorem rawAffineComplex_system_map_coherence {J : Type v} [SmallCategory J]\n    (D : J ⥤ Scheme.{v}) (c : Cone D)\n    (K : ∀ i : J, CochainComplex (Sheaf (D.obj i).smallEtaleTopology\n      AddCommGrpCat.{v + 1}) ℤ)\n    (hK : ∀ i : J, CochainComplex.plus _ (K i))\n    (ψ : ∀ {i j : J} (f : j ⟶ i),\n      ((upperStar AddCommGrpCat.{v + 1} (D.map f)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj (K i) ⟶ K j)\n    (hidentity : ∀ i : J, ψ (𝟙 i) =\n      (NatIso.mapHomologicalComplex\n        (eqToIso (congrArg (upperStar AddCommGrpCat.{v + 1}) (D.map_id i)))\n        (ComplexShape.up ℤ)).hom.app (K i) ≫\n      (NatIso.mapHomologicalComplex (upperStarId AddCommGrpCat.{v + 1} (D.obj i))\n        (ComplexShape.up ℤ)).hom.app (K i))\n    (hcomposition : ∀ (i j k : J) (f : j ⟶ i) (g : k ⟶ j),\n      ψ (g ≫ f) =\n        (NatIso.mapHomologicalComplex\n          (upperStarComp AddCommGrpCat.{v + 1} (D.map g) (D.map f)\n            (D.map (g ≫ f)) (D.map_comp g f))\n          (ComplexShape.up ℤ)).hom.app (K i) ≫\n        ((upperStar AddCommGrpCat.{v + 1} (D.map g)).mapHomologicalComplex\n          (ComplexShape.up ℤ)).map (ψ f) ≫ ψ g)\n    (G : (J)ᵒᵖ ⥤ CochainComplex (Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)\n    (eG : ∀ i : J, G.obj (op i) ≅\n      ((upperStar AddCommGrpCat.{v + 1} (c.π.app i)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj (K i))\n    (hG : ∀ (i j : J) (f : j ⟶ i), G.map f.op =\n      (eG i).hom ≫\n        (NatIso.mapHomologicalComplex\n          (upperStarComp AddCommGrpCat.{v + 1} (c.π.app j) (D.map f)\n            (c.π.app i) (c.w f).symm) (ComplexShape.up ℤ)).hom.app (K i) ≫\n        ((upperStar AddCommGrpCat.{v + 1} (c.π.app j)).mapHomologicalComplex\n          (ComplexShape.up ℤ)).map (ψ f) ≫ (eG j).inv)\n    (L : Cocone G) (hL : CochainComplex.plus _ L.pt) (p : ℤ) :\n    let m := fun {i j : J} (f : j ⟶ i) ↦\n      rawAffineComplexPullback p (D.map f) (K i) ≫\n        (cohomology AddCommGrpCat.{v + 1} (D.obj j) p).map\n          (DerivedCategory.Q.map (ψ f))\n    let b := fun i : J ↦\n      rawAffineComplexPullback p (c.π.app i) (K i) ≫\n        (cohomology AddCommGrpCat.{v + 1} c.pt p).map\n          (DerivedCategory.Q.map ((eG i).inv ≫ L.ι.app (op i)))\n    (∀ i : J, m (𝟙 i) = 𝟙 _) ∧\n      (∀ (i j k : J) (f : j ⟶ i) (g : k ⟶ j), m (g ≫ f) = m f ≫ m g) ∧\n      (∀ (i j : J) (f : j ⟶ i), m f ≫ b j = b i)",
   "branch": "sheaf-dag",
   "by": "Q1",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.RawAffineComplexSystemMapCoherence; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

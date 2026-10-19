@@ -79,14 +79,13 @@
  "unit": "sk-prop-av-cube",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.Algebra.Homology.TensorTotalExtendNaturalIso",
-  "file": "lean/WeilConjectures/Algebra/Homology/TensorTotalExtendNaturalIso.lean",
+  "module": "Sheaf.Algebra.Homology.TensorTotalExtendNaturalIso",
+  "file": "lean/Sheaf/Algebra/Homology/TensorTotalExtendNaturalIso.lean",
   "declaration": "HomologicalComplex.tensorTotal_extend_natural_iso",
   "statement": "theorem tensorTotal_extend_natural_iso {k : Type w} [Field k]\n    (A B : CochainComplex (ModuleCat.{w} k) ℕ) :\n    let E := ComplexShape.embeddingUpNat\n    let T := mapBifunctor A B (curriedTensor (ModuleCat.{w} k)) (ComplexShape.up ℕ)\n    let S := mapBifunctor (A.extend E) (B.extend E)\n      (curriedTensor (ModuleCat.{w} k)) (ComplexShape.up ℤ)\n    ∃ c : S ≅ T.extend E,\n      ∀ (n : ℕ) (i : {pq : ℕ × ℕ // pq.1 + pq.2 = n})\n        (a : A.X i.val.1) (b : B.X i.val.2),\n        c.hom.f (n : ℤ)\n          (ιMapBifunctor (A.extend E) (B.extend E) (curriedTensor (ModuleCat.{w} k))\n            (ComplexShape.up ℤ) (i.val.1 : ℤ) (i.val.2 : ℤ) (n : ℤ) (by\n              change (i.val.1 : ℤ) + (i.val.2 : ℤ) = (n : ℤ)\n              exact_mod_cast i.property)\n            (((A.extendXIso E (i := i.val.1) rfl).inv a) ⊗ₜ[k]\n              ((B.extendXIso E (i := i.val.2) rfl).inv b))) =\n          (T.extendXIso E (i := n) rfl).inv\n            (ιMapBifunctor A B (curriedTensor (ModuleCat.{w} k)) (ComplexShape.up ℕ)\n              i.val.1 i.val.2 n i.property (a ⊗ₜ[k] b))",
   "branch": "sheaf-dag",
   "by": "D4",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.Algebra.Homology.TensorTotalExtendNaturalIso; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

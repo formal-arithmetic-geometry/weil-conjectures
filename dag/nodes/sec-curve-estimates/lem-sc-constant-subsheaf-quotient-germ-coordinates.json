@@ -128,14 +128,13 @@
  "unit": "sk-thm-curveestimate",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.Topology.ConstantSubsheafQuotientGermCoordinates",
-  "file": "lean/WeilConjectures/Topology/ConstantSubsheafQuotientGermCoordinates.lean",
+  "module": "Sheaf.Topology.ConstantSubsheafQuotientGermCoordinates",
+  "file": "lean/Sheaf/Topology/ConstantSubsheafQuotientGermCoordinates.lean",
   "declaration": "TopCat.Sheaf.constantSubsheaf_quotient_germ_coordinates",
   "statement": "theorem constantSubsheaf_quotient_germ_coordinates\n    (X : TopCat.{u}) (K C : Sheaf AddCommGrpCat X) (ι : K ⟶ C) [Mono ι]\n    (isoC : C ≅ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj\n      (AddCommGrpCat.of (ULift.{u} ℤ)))\n    (n : ℕ) (A : Fin n → Opens X) (c : Fin n → ℕ)\n    (g : (∐ fun i => (abelianOpenExtensionByZero (A i)).obj\n      ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A i)))\n        AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) ⟶ K) [Epi g]\n    (s : ∀ i, K.obj.obj (op (A i)))\n    (hsection : ∀ i,\n      (Sigma.ι (fun j => (abelianOpenExtensionByZero (A j)).obj\n        ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A j)))\n          AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) i ≫ g).hom.app\n        (op (A i))\n        (abelianOpenExtensionSection (A i)\n          ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A i)))\n            AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) (A i) le_rfl\n          ((toSheafify (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A i)))\n            ((Functor.const (Opens ((Opens.toTopCat X).obj (A i)))ᵒᵖ).obj\n              (AddCommGrpCat.of (ULift.{u} ℤ)))).app\n            (op ((Opens.map (A i).inclusion').obj (A i))) (ULift.up 1))) = s i)\n    (hvalue : ∀ i, (ι ≫ isoC.hom).hom.app (op (A i)) (s i) =\n      (toSheafify (Opens.grothendieckTopology X)\n        ((Functor.const (Opens X)ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u} ℤ)))).app\n          (op (A i)) (ULift.up (c i : ℤ)))\n    (b : ℕ) (hc : ∀ i, 0 < c i ∧ c i ≤ b + 1)\n    (L : Sheaf AddCommGrpCat X) (l : L ⟶ K) [Mono l]\n    (x : X) (hxL : IsZero (TopCat.Presheaf.stalk L.obj x))\n    (hxV : x ∉ ⨆ j : Fin n, if c j ≤ b then A j else ⊥)\n    (i : Fin n) (hxi : x ∈ A i) :\n    ∀ t : ↑(TopCat.Presheaf.stalk (C := AddCommGrpCat.{u}) (cokernel l).obj x),\n      ∃! z : ℤ, z • (TopCat.Presheaf.germ (cokernel l).obj (A i) x hxi\n        ((cokernel.π l).hom.app (op (A i)) (s i))) = t",
   "branch": "sheaf-dag",
   "by": "V3",
-  "date": "2026-10-12",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.Topology.ConstantSubsheafQuotientGermCoordinates; points at its upstream twin."
+  "date": "2026-10-12"
  },
  "reviewed": {
   "date": "2026-10-12",

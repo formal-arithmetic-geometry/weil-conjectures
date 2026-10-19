@@ -97,14 +97,13 @@
  "unit": "sk-thm-curveestimate",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.Topology.ConstantSubsheafQuotientStalkIso",
-  "file": "lean/WeilConjectures/Topology/ConstantSubsheafQuotientStalkIso.lean",
+  "module": "Sheaf.Topology.ConstantSubsheafQuotientStalkIso",
+  "file": "lean/Sheaf/Topology/ConstantSubsheafQuotientStalkIso.lean",
   "declaration": "TopCat.Sheaf.constantSubsheaf_quotient_stalk_iso",
   "statement": "theorem constantSubsheaf_quotient_stalk_iso (X : TopCat.{u}) (K C : Sheaf AddCommGrpCat X) (ι : K ⟶ C) [Mono ι] (isoC : C ≅ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) (n : ℕ) (A : Fin n → Opens X) (c : Fin n → ℕ) (g : (∐ fun i => (abelianOpenExtensionByZero (A i)).obj ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A i))) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) ⟶ K) [Epi g] (s : ∀ i, K.obj.obj (op (A i))) (hsection : ∀ i, (Sigma.ι (fun j => (abelianOpenExtensionByZero (A j)).obj ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A j))) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) i ≫ g).hom.app (op (A i)) (abelianOpenExtensionSection (A i) ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A i))) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) (A i) le_rfl ((toSheafify (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A i))) ((Functor.const (Opens ((Opens.toTopCat X).obj (A i)))ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op ((Opens.map (A i).inclusion').obj (A i))) (ULift.up 1))) = s i) (hvalue : ∀ i, (ι ≫ isoC.hom).hom.app (op (A i)) (s i) = (toSheafify (Opens.grothendieckTopology X) ((Functor.const (Opens X)ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op (A i)) (ULift.up (c i : ℤ))) (b : ℕ) (hc : ∀ i, 0 < c i ∧ c i ≤ b + 1) : let D := fun i => (abelianOpenExtensionByZero (A i)).obj ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A i))) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) let f : (∐ D) ⟶ K := Sigma.desc (fun i ↦ if c i ≤ b then Sigma.ι D i ≫ g else 0) let L := image f let l : L ⟶ K := image.ι f let U := iSup A let V := ⨆ i : Fin n, if c i ≤ b then A i else ⊥ (∀ x : X, x ∉ V → IsZero (TopCat.Presheaf.stalk L.obj x)) → ∀ q : (abelianOpenExtensionByZero (iSup A)).obj ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (iSup A))) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) ⟶ cokernel l, (∀ i, c i = b + 1 → q.hom.app (op (A i)) (abelianOpenExtensionSection (iSup A) ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (iSup A))) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) (A i) (le_iSup A i) ((toSheafify (Opens.grothendieckTopology ((Opens.toTopCat X).obj (iSup A))) ((Functor.const (Opens ((Opens.toTopCat X).obj (iSup A)))ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op ((Opens.map (iSup A).inclusion').obj (A i))) (ULift.up 1))) = (cokernel.π l).hom.app (op (A i)) (s i)) → ∀ x : X, x ∈ U → x ∉ V → IsIso ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map q.hom)",
   "branch": "sheaf-dag",
   "by": "G2",
-  "date": "2026-10-12",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.Topology.ConstantSubsheafQuotientStalkIso; points at its upstream twin."
+  "date": "2026-10-12"
  },
  "mathlib_match": null,
  "reviewed": {

@@ -94,14 +94,13 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.RingTheory.StrictlyStandardLocalizedConormalSplit",
-  "file": "lean/WeilConjectures/RingTheory/StrictlyStandardLocalizedConormalSplit.lean",
+  "module": "Sheaf.RingTheory.StrictlyStandardLocalizedConormalSplit",
+  "file": "lean/Sheaf/RingTheory/StrictlyStandardLocalizedConormalSplit.lean",
   "declaration": "Algebra.Presentation.strictlyStandard_localized_conormal_split",
   "statement": "theorem strictlyStandard_localized_conormal_split\n    {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A]\n    {n m c : ℕ} (P : Presentation R A (Fin n) (Fin m))\n    (hc : c ≤ min n m) (a : A)\n    (a' : {s : Finset (Fin n) // s.card = c} → A)\n    (hminor : a = ∑ s : {s : Finset (Fin n) // s.card = c}, a' s *\n      Matrix.det (fun j i : Fin c =>\n        MvPolynomial.aeval P.val (MvPolynomial.pderiv (s.val.orderEmbOfFin s.property i)\n          (P.relation (Fin.castLE (le_trans hc (min_le_right n m)) j)))))\n    (hrelations : ∀ j : Fin m, c ≤ j.val →\n      P.σ a * P.relation j ∈\n        Ideal.span {f | ∃ k : Fin m, k.val < c ∧ f = P.relation k} +\n          (Ideal.span (Set.range P.relation)) ^ 2) :\n    ∃ l : (Localization.Away a ⊗[A] P.toExtension.CotangentSpace) →ₗ[Localization.Away a]\n        (Localization.Away a ⊗[A] P.toExtension.Cotangent),\n      l.comp (P.toExtension.cotangentComplex.baseChange (Localization.Away a)) =\n        LinearMap.id",
   "branch": "sheaf-dag",
   "by": "E1",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.StrictlyStandardLocalizedConormalSplit; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-12",

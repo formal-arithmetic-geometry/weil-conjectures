@@ -103,14 +103,13 @@
  "unit": "sk-thm-vanishing",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.FiniteCoproductConstantBaseChangeSquare",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/FiniteCoproductConstantBaseChangeSquare.lean",
+  "module": "Sheaf.AlgebraicGeometry.FiniteCoproductConstantBaseChangeSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteCoproductConstantBaseChangeSquare.lean",
   "declaration": "AlgebraicGeometry.Etale.finiteCoproductConstantBaseChangeSquare",
   "statement": "theorem finiteCoproductConstantBaseChangeSquare\n    {k K : Type u} [Field k] [Field K] [Algebra k K]\n    {I : Type u} [Finite I] {C : Scheme.{u}} (D : I → Scheme.{u})\n    (f : C ⟶ Spec (.of k)) (g : ∀ i, D i ⟶ Spec (.of k))\n    (ι : ∀ i, D i ⟶ C) (hw : ∀ i, ι i ≫ f = g i)\n    (hc : IsColimit (Cofan.mk C ι)) (n q : ℕ) :\n    ∃ eK : Sheaf.H\n      ((upperStar AddCommGrpCat.{u + 1}\n        (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj\n          (C.constantZMod n)) q ≃\n      ∀ i, Sheaf.H\n        ((upperStar AddCommGrpCat.{u + 1}\n          (pullback.fst (g i) (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj\n            ((D i).constantZMod n)) q,\n    ∀ (x : Sheaf.H (C.constantZMod n) q) (i : I),\n      eK (cohomologyMap\n        (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))\n        (C.constantZMod n) q x) i =\n      cohomologyMap\n        (pullback.fst (g i) (Spec.map (CommRingCat.ofHom (algebraMap k K))))\n        ((D i).constantZMod n) q\n        (Sheaf.H.map\n          ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} (ι i)).hom.app\n            (AddCommGrpCat.of (ULift.{u + 1} (ZMod n)))) q\n          (cohomologyMap (ι i) (C.constantZMod n) q x))",
   "branch": "sheaf-dag",
   "by": "E1",
-  "date": "2026-10-12",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.FiniteCoproductConstantBaseChangeSquare; points at its upstream twin."
+  "date": "2026-10-12"
  },
  "reviewed": {
   "date": "2026-10-12",

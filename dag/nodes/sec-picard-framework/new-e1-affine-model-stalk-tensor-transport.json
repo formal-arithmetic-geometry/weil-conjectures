@@ -101,14 +101,13 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.AffineModelStalkTensorTransport",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineModelStalkTensorTransport.lean",
+  "module": "Sheaf.AlgebraicGeometry.AffineModelStalkTensorTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineModelStalkTensorTransport.lean",
   "declaration": "AlgebraicGeometry.exists_affine_model_stalk_tensor_transport",
   "statement": "theorem exists_affine_model_stalk_tensor_transport\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) (V : Z.Opens) (z : V.toScheme)\n    (U : Y.affineOpens) (hzU : i z.1 ∈ U.1) :\n    let A := (Γ(Y, U.1) : Type u)\n    let S := (Y.presheaf.stalk (i z.1) : Type u)\n    let R := (V.toScheme.presheaf.stalk z : Type u)\n    let φ : S →+* R := (i.stalkMap z.1 ≫ V.ι.stalkMap z).hom\n    letI : Algebra S R := φ.toAlgebra\n    let ρ : A →+* R := ((Y.presheaf.germ U.1 (i z.1) hzU) ≫\n      i.stalkMap z.1 ≫ V.ι.stalkMap z).hom\n    letI : Algebra A R := ρ.toAlgebra\n    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom\n    ∃ γ : ∀ (F : Y.Modules) (M : ModuleCat.{u} A),\n      ((Scheme.Modules.restrictFunctor U.1.ι).obj F ≅ T.obj M) →\n        (R ⊗[S] F.presheaf.stalk (i z.1)) ≃+ R ⊗[A] M,\n      ∀ (F G : Y.Modules) (M N : ModuleCat.{u} A) (c : F ⟶ G) (d : M ⟶ N)\n        (eF : (Scheme.Modules.restrictFunctor U.1.ι).obj F ≅ T.obj M)\n        (eG : (Scheme.Modules.restrictFunctor U.1.ι).obj G ≅ T.obj N),\n        (Scheme.Modules.restrictFunctor U.1.ι).map c ≫ eG.hom = eF.hom ≫ T.map d →\n        ∀ x, γ G N eG ((c.stalkLinearMap (i z.1)).baseChange R x) =\n          d.hom.baseChange R (γ F M eF x)",
   "branch": "sheaf-dag",
   "by": "E1",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.AffineModelStalkTensorTransport; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

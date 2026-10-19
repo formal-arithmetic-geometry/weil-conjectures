@@ -80,14 +80,13 @@
  "unit": "sk-thm-br",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.RepresentationTheory.LocallyConstantCochainsInvariantsZero",
-  "file": "lean/WeilConjectures/RepresentationTheory/LocallyConstantCochainsInvariantsZero.lean",
+  "module": "Sheaf.RepresentationTheory.LocallyConstantCochainsInvariantsZero",
+  "file": "lean/Sheaf/RepresentationTheory/LocallyConstantCochainsInvariantsZero.lean",
   "declaration": "Rep.locallyConstantCochains_invariants_zero",
   "statement": "theorem locallyConstantCochains_invariants_zero\n    (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]\n    [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]\n    (A : Type v) [Category.{w} A] [Abelian A]\n    (E : A ≌ DiscreteContinuousRep.{0, u, max u s} ℤ G)\n    (C : A ⥤ CochainComplex AddCommGrpCat.{max u s} ℕ)\n    (e : ∀ (M : A) (n : ℕ),\n      (C.obj M).X n ≃+ LocallyConstant (Fin n → G) (E.functor.obj M).obj.V)\n    (hm : ∀ (M N : A) (f : M ⟶ N) (n : ℕ) (x : (C.obj M).X n) (g : Fin n → G),\n      e N n (((C.map f).f n) x) g = (E.functor.map f).hom.hom (e M n x g))\n    (hd : ∀ (M : A) (n : ℕ) (x : (C.obj M).X n) (g : Fin (n + 1) → G),\n      e M (n + 1) (((C.obj M).d n (n + 1)) x) g =\n        (E.functor.obj M).obj.ρ (g 0) (e M n x (fun k ↦ g k.succ)) +\n          ∑ k : Fin (n + 1),\n            (-1 : ℤ) ^ (k.val + 1) • e M n x (Fin.contractNth k (· * ·) g))\n    : Nonempty ((C ⋙ HomologicalComplex.homologyFunctor\n        AddCommGrpCat.{max u s} (ComplexShape.up ℕ) 0) ≅\n      (E.functor ⋙ ObjectProperty.ι _ ⋙ Rep.invariantsFunctor ℤ G ⋙\n        forget₂ (ModuleCat.{max u s} ℤ) AddCommGrpCat))",
   "branch": "sheaf-dag",
   "by": "G4",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RepresentationTheory.LocallyConstantCochainsInvariantsZero; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

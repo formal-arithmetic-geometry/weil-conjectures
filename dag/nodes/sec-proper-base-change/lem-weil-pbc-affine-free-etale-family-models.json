@@ -115,14 +115,13 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.AffineFreeEtaleModuleFamilyModels",
+  "module": "Sheaf.AlgebraicGeometry.AffineFreeEtaleModuleFamilyModels",
   "declaration": "AlgebraicGeometry.Scheme.exists_affine_free_etaleModule_family_models",
   "statement": "theorem exists_affine_free_etaleModule_family_models\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)]\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)]\n    [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    (c : Cone D) (hc : IsLimit c)\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    (n m : ℕ) (U : Fin n → c.pt.Etale) (V : Fin m → c.pt.Etale)\n    (hU : ∀ k : Fin n, IsAffine (U k).left)\n    (hV : ∀ k : Fin m, IsAffine (V k).left) :\n    let P : c.pt.Etale → Sheaf c.pt.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=\n      fun W ↦ (presheafToSheaf c.pt.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj\n        (uliftYoneda.{u + 1}.obj W ⋙ ModuleCat.free Λ)\n    ∃ (i : I) (WU : Fin n → (D.obj (op i)).Etale)\n      (WV : Fin m → (D.obj (op i)).Etale),\n      let Q : (D.obj (op i)).Etale →\n          Sheaf (D.obj (op i)).smallEtaleTopology (ModuleCat.{u + 1} Λ) :=\n        fun W ↦ (Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) W.hom inferInstance).obj\n          ((constantSheaf W.left.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj\n            (ModuleCat.of Λ Λ))\n      (∀ k, IsAffine (WU k).left) ∧ (∀ k, IsAffine (WV k).left) ∧\n      Nonempty ((Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op i))).obj\n        (∐ fun k : Fin n ↦ Q (WU k)) ≅ (∐ fun k : Fin n ↦ P (U k))) ∧\n      Nonempty ((Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op i))).obj\n        (∐ fun k : Fin m ↦ Q (WV k)) ≅ (∐ fun k : Fin m ↦ P (V k)))",
   "branch": "sheaf-dag",
   "by": "R1",
   "date": "2026-10-12",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineFreeEtaleModuleFamilyModels.lean",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.AffineFreeEtaleModuleFamilyModels; points at its upstream twin."
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFreeEtaleModuleFamilyModels.lean"
  },
  "reviewed": {
   "date": "2026-10-12",

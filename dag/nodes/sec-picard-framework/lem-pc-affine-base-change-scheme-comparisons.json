@@ -103,14 +103,13 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.AffineBaseChangeSchemeComparisons",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineBaseChangeSchemeComparisons.lean",
+  "module": "Sheaf.AlgebraicGeometry.AffineBaseChangeSchemeComparisons",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineBaseChangeSchemeComparisons.lean",
   "declaration": "AlgebraicGeometry.exists_affineBaseChangeSchemeComparisons",
   "statement": "theorem exists_affineBaseChangeSchemeComparisons\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)\n    (i : I) (Y : Scheme.{u}) (s : Y ⟶ Spec (R.obj i))\n    (t : Spec (Scheme.Γ.obj (.op Y)) ≅ Y) :\n    let F := affineBaseChangeRingDiagram R i Y s t\n    let C := colimit.cocone F\n    let r := affineBaseChangeInitialMap R i Y s t\n    ∃ (σ : ∀ j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i),\n      Spec (F.obj j.val) ≅ pullback s (Spec.map (R.map (homOfLE j.val.property))))\n    (τ : Spec C.pt ≅ pullback s (Spec.map (c.ι.app i))),\n      (∀ j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i),\n        (σ j).hom ≫ pullback.fst s (Spec.map (R.map (homOfLE j.val.property))) =\n          Spec.map (CommRingCat.ofHom r ≫ F.map (homOfLE j.property)) ≫ t.hom) ∧\n      (τ.hom ≫ pullback.fst s (Spec.map (c.ι.app i)) =\n        Spec.map (CommRingCat.ofHom r ≫ C.ι.app ⟨i, le_rfl⟩) ≫ t.hom) ∧\n      (∀ (j k : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i)) (hjk : j ≤ k),\n        (σ k).hom ≫ baseChangeMap s\n          (T := Over.mk (Spec.map (R.map (homOfLE j.val.property))))\n          (T' := Over.mk (Spec.map (R.map (homOfLE k.val.property))))\n          (Over.homMk (Spec.map (R.map (homOfLE hjk)))\n            (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)) =\n          Spec.map (F.map (homOfLE hjk)) ≫ (σ j).hom) ∧\n      (∀ j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i),\n        τ.hom ≫ baseChangeMap s\n          (T := Over.mk (Spec.map (R.map (homOfLE j.val.property))))\n          (T' := Over.mk (Spec.map (c.ι.app i)))\n          (Over.homMk (Spec.map (c.ι.app j.val))\n            (by dsimp; rw [← Spec.map_comp, c.w (homOfLE j.val.property)])) =\n          Spec.map (C.ι.app j.val) ≫ (σ j).hom)",
   "branch": "sheaf-dag",
   "by": "F1",
-  "date": "2026-10-14",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.AffineBaseChangeSchemeComparisons; points at its upstream twin."
+  "date": "2026-10-14"
  },
  "reviewed": {
   "date": "2026-10-13",

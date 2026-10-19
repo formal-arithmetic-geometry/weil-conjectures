@@ -115,14 +115,13 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.PrincipalOpenSubsetCechComparison",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/PrincipalOpenSubsetCechComparison.lean",
+  "module": "Sheaf.AlgebraicGeometry.PrincipalOpenSubsetCechComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalOpenSubsetCechComparison.lean",
   "declaration": "AlgebraicGeometry.principalOpen_subset_cech_comparison",
   "statement": "theorem principalOpen_subset_cech_comparison\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    (F : (Spec (.of A)).Opensᵒᵖ ⥤ ModuleCat.{u} A)\n    (S : SiteCechComplex (fun i ↦ PrimeSpectrum.basicOpen (f i))\n      (fun i ↦ homOfLE (le_top : PrimeSpectrum.basicOpen (f i) ≤ ⊤))) :\n    let D : Finset (Fin r) → (Spec (.of A)).Opens :=\n      fun T ↦ PrimeSpectrum.basicOpen (∏ j ∈ T, f j)\n    ∀ (hle : ∀ (T : Finset (Fin r)) (j : Fin r), D T ≤ D (T.erase j)),\n    ∃ C : CochainComplex AddCommGrpCat.{u} ℕ,\n      ∃ e : ∀ p : ℕ, C.X p ≅ AddCommGrpCat.of\n        (∀ T : {T : Finset (Fin r) // T.card = p + 1}, F.obj (op (D T.val))),\n        ∃ z : S.complex (F ⋙ forget₂ (ModuleCat A) AddCommGrpCat) ⟶ C,\n          (∀ (p : ℕ) (c : C.X p)\n            (T : {T : Finset (Fin r) // T.card = (p + 1) + 1}),\n            (e (p + 1)).hom (C.d p (p + 1) c) T =\n              ∑ j : T.val, (-1 : A) ^ ((T.val.filter (fun i ↦ i < j.val)).card) •\n                F.map (homOfLE (hle T.val j.val)).op\n                  ((e p).hom c ⟨T.val.erase j.val, by\n                    rw [Finset.card_erase_of_mem j.property, T.property]\n                    omega⟩)) ∧\n          ∀ p : ℕ, IsIso (HomologicalComplex.homologyMap z p)",
   "branch": "sheaf-dag",
   "by": "F4",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.PrincipalOpenSubsetCechComparison; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

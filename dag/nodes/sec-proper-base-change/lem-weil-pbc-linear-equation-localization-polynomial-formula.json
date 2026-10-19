@@ -81,14 +81,13 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.RingTheory.LinearEquationLocalizationPolynomialFormula",
-  "file": "lean/WeilConjectures/RingTheory/LinearEquationLocalizationPolynomialFormula.lean",
+  "module": "Sheaf.RingTheory.LinearEquationLocalizationPolynomialFormula",
+  "file": "lean/Sheaf/RingTheory/LinearEquationLocalizationPolynomialFormula.lean",
   "declaration": "MvPolynomial.linearEquationLocalizationPolynomialFormula",
   "statement": "theorem linearEquationLocalizationPolynomialFormula (A : Type u) [CommRing A]\n    (r : ℕ) (f : Fin r → A) (i : Fin r) :\n    let I : Ideal (MvPolynomial (Fin r) A) :=\n      Ideal.span {(∑ j : Fin r, C (f j) * X j) - 1}\n    let B := MvPolynomial (Fin r) A ⧸ I\n    let q := Ideal.Quotient.mk I\n    let Af := Localization.Away (f i)\n    let Bf := Localization.Away (algebraMap A B (f i))\n    let : Algebra Af Bf := (Localization.awayMap (algebraMap A B) (f i)).toAlgebra\n    let x : Fin r → Bf := fun j ↦ algebraMap B Bf (q (X j))\n    ∀ e : MvPolynomial {j : Fin r // j ≠ i} Af ≃ₐ[Af] Bf,\n      e.toAlgHom = aeval (fun j ↦ x j.1) →\n      (∀ j : {j : Fin r // j ≠ i}, e.symm (x j.1) = X j) →\n      e.symm (x i) = C (IsLocalization.Away.invSelf (S := Af) (f i)) *\n          (1 - ∑ j : {j : Fin r // j ≠ i},\n            C (algebraMap A Af (f j.1)) * X j)",
   "branch": "sheaf-dag",
   "by": "E3",
-  "date": "2026-10-12",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.LinearEquationLocalizationPolynomialFormula; points at its upstream twin."
+  "date": "2026-10-12"
  },
  "reviewed": {
   "date": "2026-10-12",

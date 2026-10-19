@@ -118,14 +118,13 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.RingTheory.WellOrderedPresentationKernelProjectionData",
-  "file": "lean/WeilConjectures/RingTheory/WellOrderedPresentationKernelProjectionData.lean",
+  "module": "Sheaf.RingTheory.WellOrderedPresentationKernelProjectionData",
+  "file": "lean/Sheaf/RingTheory/WellOrderedPresentationKernelProjectionData.lean",
   "declaration": "ModuleCat.exists_projective_presentation_kernel_projection_data",
   "statement": "theorem exists_projective_presentation_kernel_projection_data\n    {R : Type u} [CommRing R] (M : ModuleCat.{v} R)\n    {E : Type w} [LinearOrder E] [IsWellOrder E (· < ·)]\n    (F : E → Submodule R M) (hF : Monotone F)\n    (hcover : ∀ x : M, ∃ e : E, x ∈ F e)\n    (P : ∀ e : E, ProjectiveResolution\n      (ModuleCat.of R ((F e) ⧸\n        ((⨆ i : {j : E // j < e}, F i.val).comap (F e).subtype)))) :\n    ∃ S : ShortComplex (ModuleCat.{v} R), S.X₃ = M ∧ S.ShortExact ∧\n      Projective S.X₂ ∧ ∃ H : E → Submodule R S.X₂,\n        Monotone H ∧ (∀ x : S.X₂, ∃ e : E, x ∈ H e) ∧\n        ∀ e : E,\n          let K : E → Submodule R S.X₁ := fun i ↦ (H i).comap S.f.hom\n          let U := (⨆ i : {j : E // j < e}, K i.val).comap (K e).subtype\n          U = ⊤ ∨ ∃ q : K e →ₗ[R] (kernel ((P e).π.f 0) : ModuleCat.{v} R),\n            Function.Surjective q ∧ q.ker = U",
   "branch": "sheaf-dag",
   "by": "H2",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.WellOrderedPresentationKernelProjectionData; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

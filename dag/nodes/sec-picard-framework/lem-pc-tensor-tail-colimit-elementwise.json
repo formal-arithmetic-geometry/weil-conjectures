@@ -113,14 +113,13 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.RingTheory.TensorTailColimitElementwise",
-  "file": "lean/WeilConjectures/RingTheory/TensorTailColimitElementwise.lean",
+  "module": "Sheaf.RingTheory.TensorTailColimitElementwise",
+  "file": "lean/Sheaf/RingTheory/TensorTailColimitElementwise.lean",
   "declaration": "TensorProduct.tensorTailColimitElementwise",
   "statement": "theorem tensorTailColimitElementwise\n    {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat.{v}) (c : Cocone F) (hc : IsColimit c)\n    (i₀ : I) (M₀ : Type w) [AddCommGroup M₀] [Module (F.obj i₀) M₀] (k : I) (hik : i₀ ≤ k) :\n    let S := F.obj i₀\n    let R := c.pt\n    letI : Algebra S R := (c.ι.app i₀).hom.toAlgebra\n    (∀ x : R ⊗[S] M₀, ∃ (i : I) (h : k ≤ i),\n      letI : Algebra S (F.obj i) := (F.map (homOfLE (hik.trans h))).hom.toAlgebra\n      let αᵢ : F.obj i →ₐ[S] R :=\n        { (c.ι.app i).hom with\n          commutes' := fun s ↦\n            congrArg (fun f : F.obj i₀ ⟶ c.pt ↦ f s) (c.w (homOfLE (hik.trans h))) }\n      ∃ t : F.obj i ⊗[S] M₀, αᵢ.toLinearMap.rTensor M₀ t = x) ∧\n    (∀ (i : I) (h : k ≤ i),\n      letI : Algebra S (F.obj i) := (F.map (homOfLE (hik.trans h))).hom.toAlgebra\n      let αᵢ : F.obj i →ₐ[S] R :=\n        { (c.ι.app i).hom with\n          commutes' := fun s ↦\n            congrArg (fun f : F.obj i₀ ⟶ c.pt ↦ f s) (c.w (homOfLE (hik.trans h))) }\n      ∀ t : F.obj i ⊗[S] M₀, αᵢ.toLinearMap.rTensor M₀ t = 0 →\n        ∃ (i' : I) (h' : i ≤ i'),\n          letI : Algebra S (F.obj i') := (F.map (homOfLE (hik.trans (h.trans h')))).hom.toAlgebra\n          let αᵢ'ᵢ : F.obj i →ₐ[S] F.obj i' :=\n            { (F.map (homOfLE h')).hom with\n              commutes' := fun s ↦\n                congrArg (fun f : F.obj i₀ ⟶ F.obj i' ↦ f s)\n                  (F.map_comp (homOfLE (hik.trans h)) (homOfLE h')).symm }\n          αᵢ'ᵢ.toLinearMap.rTensor M₀ t = 0)",
   "branch": "sheaf-dag",
   "by": "V1",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.TensorTailColimitElementwise; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

@@ -75,14 +75,13 @@
  ],
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.Modules.LocalInvertibleMinorBlockData",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/LocalInvertibleMinorBlockData.lean",
+  "module": "Sheaf.AlgebraicGeometry.Modules.LocalInvertibleMinorBlockData",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/LocalInvertibleMinorBlockData.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exists_local_invertible_minor_block_data",
   "statement": "theorem exists_local_invertible_minor_block_data\n    {Y Z : Scheme.{u}} {M N : Y.Modules} {m n : ℕ}\n    (eM : M ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin m)))\n    (eN : N ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin n)))\n    (φ : M ⟶ N) (j : Z ⟶ Y) [IsOpenImmersion j] (a : ℕ) (z : Z)\n    (rows : Fin a → ULift.{u} (Fin n)) (cols : Fin a → ULift.{u} (Fin m))\n    (hminor : j.base z ∈\n      Y.basicOpen ((freeMatrix (eM.inv ≫ φ ≫ eN.hom)).submatrix rows cols).det) :\n    ∃ U : Z.Opens, z ∈ U ∧\n      ∃ (eS : ((Modules.pullback j).obj M).restrict U.ι ≅\n          free (ULift.{u} (Fin a)) ⊞ free (ULift.{u} (Fin (m - a))))\n        (eT : ((Modules.pullback j).obj N).restrict U.ι ≅\n          free (ULift.{u} (Fin a)) ⊞ free (ULift.{u} (Fin (n - a)))),\n        (freeMatrix (X := U.toScheme) (I := ULift.{u} (Fin a))\n          (J := ULift.{u} (Fin a)) (biprod.inl ≫ eS.inv ≫\n          (restrictFunctor U.ι).map ((Modules.pullback j).map φ) ≫\n          eT.hom ≫ biprod.fst)).det =\n            (U.ι ≫ j).appTop\n              ((freeMatrix (eM.inv ≫ φ ≫ eN.hom)).submatrix rows cols).det ∧\n        IsUnit ((U.ι ≫ j).appTop\n          ((freeMatrix (eM.inv ≫ φ ≫ eN.hom)).submatrix rows cols).det)",
   "branch": "sheaf-dag",
   "by": "N1",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.Modules.LocalInvertibleMinorBlockData; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "mathlib_searches": [
   {

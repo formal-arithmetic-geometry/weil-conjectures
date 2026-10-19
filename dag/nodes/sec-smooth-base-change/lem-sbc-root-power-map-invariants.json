@@ -53,14 +53,13 @@
  "statement": "Let $H$ be a commutative ring, $h\\in H$, and $n>0$. Put $G=\\{\\zeta\\in H^\\times:\\zeta^n=1\\}$. Assume $G$ is finite cyclic of cardinality $n$, and $\\zeta-1$ is a unit for every nonidentity $\\zeta\\in G$. Let $K\\subseteq G$ be a subgroup and $e=[G:K]$. Put $C=H[t]/(t^n-h)$ and $D=H[s]/(s^e-h)$, with $t,s$ the quotient classes of the polynomial variables. Given $H$-algebra homomorphisms $\\rho_\\zeta:C\\to C$ for $\\zeta\\in G$ with $\\rho_\\zeta(t)=\\zeta t$, and an $H$-algebra homomorphism $\\phi:D\\to C$ with $\\phi(s)=t^{|K|}$, the map $\\phi$ is injective and, for each $x\\in C$, $x$ is fixed by every $\\rho_\\zeta$ for $\\zeta\\in K$ if and only if $x$ lies in the image of $\\phi$.",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.RootPowerMapInvariants",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/RootPowerMapInvariants.lean",
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.RootPowerMapInvariants",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RootPowerMapInvariants.lean",
   "declaration": "AlgebraicGeometry.Scheme.root_power_map_invariants",
   "statement": "theorem root_power_map_invariants\n    (H : Type u) [CommRing H] (h : H) (n : ℕ) (hn : 0 < n)\n    [Finite (rootsOfUnity n H)] [IsCyclic (rootsOfUnity n H)]\n    (hcard : Nat.card (rootsOfUnity n H) = n)\n    (hsep : ∀ ζ : rootsOfUnity n H, ζ ≠ 1 → IsUnit (((ζ : Hˣ) : H) - 1))\n    (K : Subgroup (rootsOfUnity n H))\n    (ρ : rootsOfUnity n H →\n      (AdjoinRoot ((Polynomial.X : Polynomial H) ^ n - Polynomial.C h) →ₐ[H]\n        AdjoinRoot ((Polynomial.X : Polynomial H) ^ n - Polynomial.C h)))\n    (hρ : ∀ ζ, ρ ζ (AdjoinRoot.root\n      ((Polynomial.X : Polynomial H) ^ n - Polynomial.C h)) =\n        algebraMap H _ ((ζ : Hˣ) : H) * AdjoinRoot.root _)\n    (φ : AdjoinRoot ((Polynomial.X : Polynomial H) ^ K.index - Polynomial.C h) →ₐ[H]\n      AdjoinRoot ((Polynomial.X : Polynomial H) ^ n - Polynomial.C h))\n    (hφ : φ (AdjoinRoot.root _) =\n      AdjoinRoot.root ((Polynomial.X : Polynomial H) ^ n - Polynomial.C h) ^ Nat.card K) :\n    Function.Injective φ ∧ ∀ x, (∀ ζ : K, ρ ζ.val x = x) ↔ x ∈ Set.range φ",
   "branch": "sheaf-dag",
   "by": "W2",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.Morphisms.RootPowerMapInvariants; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "mathlib_searches": [
   {

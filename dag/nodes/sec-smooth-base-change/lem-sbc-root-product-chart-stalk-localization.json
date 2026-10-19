@@ -103,14 +103,13 @@
  "unit": "sk-prop-input-spreading",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.RootProductChartStalkLocalization",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/RootProductChartStalkLocalization.lean",
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.RootProductChartStalkLocalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RootProductChartStalkLocalization.lean",
   "declaration": "AlgebraicGeometry.Scheme.rootProductChart_stalk_localization",
   "statement": "theorem rootProductChart_stalk_localization {L N : Scheme.{u}} (n : N ⟶ L)\n    (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (y : Spec R) (hφ : Etale φ)\n    (x : N) (hy : φ y = n x) (f : R) (hf : f ∈ y.asIdeal)\n    (m : ℕ) (e : Fin m → ℕ) (he : ∀ k, 0 < e k)\n    (α : pullback n φ ≅ Spec (CommRingCat.of (∀ k : Fin m,\n      AdjoinRoot ((Polynomial.X : Polynomial R) ^ e k - Polynomial.C f))))\n    (hα : α.hom ≫ Spec.map (CommRingCat.ofHom\n      (algebraMap R (∀ k : Fin m,\n        AdjoinRoot ((Polynomial.X : Polynomial R) ^ e k - Polynomial.C f)))) =\n        pullback.snd n φ) :\n    let B := N.presheaf.stalk x\n    let J := (IsLocalRing.maximalIdeal (L.presheaf.stalk (n x))).map (n.stalkMap x).hom\n    ∃ (k : Fin m) (R₀ : CommRingCat.{u}) (_ : IsLocalRing R₀) (f₀ : R₀),\n      f₀ ∈ IsLocalRing.maximalIdeal R₀ ∧\n      let p := (Polynomial.X : Polynomial R₀) ^ e k - Polynomial.C f₀\n      let D := AdjoinRoot p\n      ∃ (P : Ideal D) (hP : P.IsMaximal),\n        letI : P.IsPrime := hP.isPrime\n        let E := Localization.AtPrime P\n        ∃ β : B →+* E, IsLocalHom β ∧ β.Flat ∧\n          J.map β = (IsLocalRing.maximalIdeal R₀).map\n            ((algebraMap D E).comp (AdjoinRoot.of p))",
   "branch": "sheaf-dag",
   "by": "J4",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.Morphisms.RootProductChartStalkLocalization; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

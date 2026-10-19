@@ -75,14 +75,13 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.RingTheory.PopescuPolynomialCoefficientLocalizationSmooth",
-  "file": "lean/WeilConjectures/RingTheory/PopescuPolynomialCoefficientLocalizationSmooth.lean",
+  "module": "Sheaf.RingTheory.PopescuPolynomialCoefficientLocalizationSmooth",
+  "file": "lean/Sheaf/RingTheory/PopescuPolynomialCoefficientLocalizationSmooth.lean",
   "declaration": "Algebra.popescuPolynomialCoefficientLocalization_smooth",
   "statement": "theorem popescuPolynomialCoefficientLocalization_smooth\n    {k : Type u} {A : Type v} [CommRing k] [CommRing A] [Algebra k A]\n    (d n : ℕ) {m : ℕ} (a : Fin m → A) (j : Fin m)\n    (hj : Smooth k (Localization.Away (a j))) :\n    let P := MvPolynomial (Fin d ⊕ (Fin d × Fin m)) A\n    let B := P ⧸ Ideal.span (Set.range (fun i : Fin d ↦\n      MvPolynomial.X (Sum.inl i) ^ n -\n        ∑ l : Fin m, MvPolynomial.X (Sum.inr (i, l)) * MvPolynomial.C (a l)))\n    let f : MvPolynomial (Fin d) k →ₐ[k] B :=\n      MvPolynomial.aeval (fun i ↦ Ideal.Quotient.mk _ (MvPolynomial.X (Sum.inl i)))\n    letI := f.toRingHom.toAlgebra\n    Smooth (MvPolynomial (Fin d) k) (Localization.Away (algebraMap A B (a j)))",
   "branch": "sheaf-dag",
   "by": "F3",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.PopescuPolynomialCoefficientLocalizationSmooth; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-12",
