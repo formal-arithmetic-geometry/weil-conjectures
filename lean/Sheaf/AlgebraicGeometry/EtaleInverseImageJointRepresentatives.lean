@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAbelianLiftHom
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAbelianLiftHom
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
 import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 import Sheaf.AlgebraicGeometry.EtaleInverseImageKanRepresentative

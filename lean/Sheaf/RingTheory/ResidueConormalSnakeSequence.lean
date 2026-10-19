@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.PthRootResidueDifferentials
 public import Mathlib.RingTheory.Extension.Cotangent.Basic
-import Sheaf.RingTheory.SubsingletonH1CotangentOfCharP
+import WeilConjectures.RingTheory.SubsingletonH1CotangentOfCharP
 import Mathlib.Algebra.Field.ZMod
 import Mathlib.Algebra.CharP.Algebra
 import Mathlib.RingTheory.Extension.ExtendScalars

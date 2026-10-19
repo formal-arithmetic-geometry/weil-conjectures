@@ -13,8 +13,8 @@ public import Mathlib.Algebra.Category.Grp.Abelian
 public import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
 import Sheaf.CategoryTheory.RoosAcyclicResolution
 import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
-import Sheaf.CategoryTheory.InjectiveTowerEmbedding
-import Sheaf.CategoryTheory.InjectiveSplitTower
+import WeilConjectures.CategoryTheory.InjectiveTowerEmbedding
+import WeilConjectures.CategoryTheory.InjectiveSplitTower
 
 /-!
 # Roos computation of derived limits of abelian groups

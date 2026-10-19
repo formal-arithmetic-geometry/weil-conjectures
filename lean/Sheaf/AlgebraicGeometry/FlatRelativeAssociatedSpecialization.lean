@@ -21,7 +21,7 @@ import Sheaf.AlgebraicGeometry.LocallyNoetherianComponentsLocallyFinite
 import WeilConjectures.AlgebraicGeometry.ModulePullbackFiniteType
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
-import Sheaf.RingTheory.NonzerodivisorIfMaximalNotAssociated
+import WeilConjectures.RingTheory.NonzerodivisorIfMaximalNotAssociated
 import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation

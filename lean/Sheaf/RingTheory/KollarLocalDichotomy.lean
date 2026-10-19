@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Ideal.Maps
 public import Sheaf.RingTheory.Depth
 import Sheaf.RingTheory.DepthInSES
-import Sheaf.RingTheory.NonzerodivisorIfMaximalNotAssociated
+import WeilConjectures.RingTheory.NonzerodivisorIfMaximalNotAssociated
 import Mathlib.RingTheory.HopkinsLevitzki
 import Mathlib.Algebra.Ring.ULift
 import Sheaf.RingTheory.KollarRegularElementAlternatives

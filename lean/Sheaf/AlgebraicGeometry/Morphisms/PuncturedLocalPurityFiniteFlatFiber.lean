@@ -12,9 +12,9 @@ public import Sheaf.RingTheory.Depth
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Sheaf.RingTheory.FlatLocalDepthFormula
 import Sheaf.AlgebraicGeometry.Morphisms.FlatQuasiFiniteDepthPurity
-import Sheaf.AlgebraicGeometry.Morphisms.FiniteFlatTargetLocus
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteFlatTargetLocus
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtensionUniqueness
-import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore
+import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore
 
 
 /-!

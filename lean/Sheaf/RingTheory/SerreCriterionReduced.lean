@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.SerreConditions
 import Mathlib.RingTheory.LocalProperties.Reduced
-import Sheaf.RingTheory.NonzerodivisorIfMaximalNotAssociated
+import WeilConjectures.RingTheory.NonzerodivisorIfMaximalNotAssociated
 
 /-!
 # Serre's criterion for reducedness

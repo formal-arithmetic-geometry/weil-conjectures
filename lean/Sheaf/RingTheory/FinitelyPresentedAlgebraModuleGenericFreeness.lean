@@ -17,7 +17,7 @@ import Mathlib.RingTheory.FiniteStability
 import Mathlib.RingTheory.TensorProduct.IsBaseChangeFree
 import Mathlib.Algebra.Algebra.Shrink
 import Mathlib.RingTheory.Finiteness.Small
-import Sheaf.RingTheory.LimitModuleFinitePresentation
+import WeilConjectures.RingTheory.LimitModuleFinitePresentation
 import Sheaf.RingTheory.NoetherianAlgebraModuleGenericFreeness
 
 /-!

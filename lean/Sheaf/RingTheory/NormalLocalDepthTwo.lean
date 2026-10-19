@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.RingTheory.KollarLocalDichotomy
-import Sheaf.RingTheory.NonzerodivisorIfMaximalNotAssociated
+import WeilConjectures.RingTheory.NonzerodivisorIfMaximalNotAssociated
 import Mathlib.RingTheory.Artinian.Module
 import Mathlib.RingTheory.KrullDimension.Field
 

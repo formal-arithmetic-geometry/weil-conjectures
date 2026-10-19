@@ -5,9 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
-import Sheaf.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
+import WeilConjectures.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
 import Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechCocycleLiftMax
-import Sheaf.CategoryTheory.InjectiveModulePresheaf
+import WeilConjectures.CategoryTheory.InjectiveModulePresheaf
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 import WeilConjectures.AlgebraicGeometry.EtaleCechVanishingCriterion
 import WeilConjectures.AlgebraicGeometry.EtaleSiteCechComplexComparison

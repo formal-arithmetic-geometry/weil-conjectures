@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.PairHenselization
 public import WeilConjectures.Mathlib.RingTheory.Henselian
-import Sheaf.RingTheory.HenselizationStageMap
+import WeilConjectures.RingTheory.HenselizationStageMap
 
 /-!
 # Universal property of the henselization of a pair

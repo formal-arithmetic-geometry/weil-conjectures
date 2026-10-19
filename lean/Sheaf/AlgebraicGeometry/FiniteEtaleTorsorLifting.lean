@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.Sites.Torsor
 
 import Sheaf.AlgebraicGeometry.FiniteEtaleSchemeTorsorLift
 import Sheaf.AlgebraicGeometry.SchemeTorsorPullbackCompatible
-import Sheaf.AlgebraicGeometry.EtaleTorsorUnitActionUnique
+import WeilConjectures.AlgebraicGeometry.EtaleTorsorUnitActionUnique
 
 /-!
 # Finite étale equivalences and transport of torsors

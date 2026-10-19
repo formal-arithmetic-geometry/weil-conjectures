@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 import Mathlib.AlgebraicGeometry.Gluing
-import Sheaf.AlgebraicGeometry.DescendedOverlapGlueData
+import WeilConjectures.AlgebraicGeometry.DescendedOverlapGlueData
 
 /-!
 # Descended charts with compatible local maps

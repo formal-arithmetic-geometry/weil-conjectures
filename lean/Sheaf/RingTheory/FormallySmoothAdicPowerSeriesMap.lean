@@ -17,7 +17,7 @@ import Mathlib.RingTheory.Nakayama
 import Mathlib.RingTheory.Smooth.Field
 import Mathlib.Algebra.Algebra.Rat
 import Mathlib.Algebra.CharP.Algebra
-import Sheaf.RingTheory.SubsingletonH1CotangentOfCharP
+import WeilConjectures.RingTheory.SubsingletonH1CotangentOfCharP
 import Mathlib.RingTheory.MvPowerSeries.Equiv
 import Mathlib.RingTheory.MvPowerSeries.Inverse
 import Mathlib.RingTheory.AdicCompletion.Completeness

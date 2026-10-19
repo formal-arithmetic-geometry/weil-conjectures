@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 import WeilConjectures.RingTheory.AssociatedPrimePowerQuotient
 import Sheaf.RingTheory.DepthQuotSMulTop
-import Sheaf.RingTheory.NonzerodivisorIfMaximalNotAssociated
+import WeilConjectures.RingTheory.NonzerodivisorIfMaximalNotAssociated
 import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 import Mathlib.RingTheory.Regular.IsSMulRegular
 

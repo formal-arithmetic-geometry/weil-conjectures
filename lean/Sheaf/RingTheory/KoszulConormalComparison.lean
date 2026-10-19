@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.RingTheory.KoszulDualComplex
+public import WeilConjectures.RingTheory.KoszulDualComplex
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.LinearAlgebra.ExteriorPower.Pairing
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings

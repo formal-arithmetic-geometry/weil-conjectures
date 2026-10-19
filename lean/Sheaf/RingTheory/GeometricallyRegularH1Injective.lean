@@ -9,8 +9,8 @@ public import Sheaf.RingTheory.GRing
 public import Mathlib.RingTheory.Extension.ExtendScalars
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 import Sheaf.RingTheory.GeometricallyRegularDifferentialFamily
-import Sheaf.RingTheory.JacobiZariskiConnectingMapNaturality
-import Sheaf.RingTheory.SubsingletonH1CotangentOfCharP
+import WeilConjectures.RingTheory.JacobiZariskiConnectingMapNaturality
+import WeilConjectures.RingTheory.SubsingletonH1CotangentOfCharP
 import Mathlib.LinearAlgebra.Basis.VectorSpace
 import Mathlib.LinearAlgebra.TensorProduct.Basis
 import Mathlib.Algebra.Field.ULift

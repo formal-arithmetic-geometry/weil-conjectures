@@ -19,7 +19,7 @@ import Sheaf.RingTheory.AdicCompletionNoetherian
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoPuncturedPrincipalSliceConnected
 import Sheaf.AlgebraicGeometry.Morphisms.CompletePuncturedPrincipalFormalSections
 import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicSectionsTransfer
-import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicUniqueLift
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleAdicUniqueLift
 import Mathlib.AlgebraicGeometry.QuasiAffine
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 

@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.FieldTheory.Separable
 
 import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
-import Sheaf.AlgebraicGeometry.Morphisms.FormallyUnramifiedStalkNeighbourhood
+import WeilConjectures.AlgebraicGeometry.Morphisms.FormallyUnramifiedStalkNeighbourhood
 
 /-! # The maximal-ideal and residue-field criterion for unramifiedness at a point
 

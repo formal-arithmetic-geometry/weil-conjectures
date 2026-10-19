@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import WeilConjectures.CategoryTheory.SiteCechComplex
 
 import Mathlib.Algebra.Homology.ShortComplex.Ab
-import Sheaf.CategoryTheory.InjectiveModulePresheaf
+import WeilConjectures.CategoryTheory.InjectiveModulePresheaf
 import Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechExact
 
 /-!

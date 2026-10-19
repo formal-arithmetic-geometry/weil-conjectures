@@ -5,7 +5,7 @@ Authors: SHEAF group S1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicUniqueLift
+public import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleAdicUniqueLift
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicSectionsKernel
 

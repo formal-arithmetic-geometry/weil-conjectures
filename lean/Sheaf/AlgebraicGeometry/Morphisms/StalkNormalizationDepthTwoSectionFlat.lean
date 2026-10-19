@@ -20,7 +20,7 @@ import Sheaf.AlgebraicGeometry.Morphisms.NormalIntegralGenericHomFull
 import Sheaf.AlgebraicGeometry.Morphisms.GenericFibreActionExtension
 import Sheaf.RingTheory.NormalLocalDepthTwo
 import Sheaf.RingTheory.FlatLocalDepthFormula
-import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore
+import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationSplitFormalTest
 
 /-!

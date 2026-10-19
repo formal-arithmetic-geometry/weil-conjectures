@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectiv
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 
 import Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechCocycleLiftMax
-import Sheaf.CategoryTheory.InjectiveModulePresheaf
+import WeilConjectures.CategoryTheory.InjectiveModulePresheaf
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 import WeilConjectures.AlgebraicGeometry.EtaleCechVanishingCriterion
 import WeilConjectures.AlgebraicGeometry.EtaleSiteCechComplexComparison

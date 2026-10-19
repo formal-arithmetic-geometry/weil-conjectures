@@ -2,7 +2,7 @@ module
 public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
 public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 import Sheaf.AlgebraicGeometry.SectionRingVeroneseFractions
-import Sheaf.AlgebraicGeometry.SectionFractionRestrictionMap
+import WeilConjectures.AlgebraicGeometry.SectionFractionRestrictionMap
 @[expose] public section
 universe v
 open CategoryTheory

@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
-public import Sheaf.AlgebraicGeometry.SectionFractionPresentation
+public import WeilConjectures.AlgebraicGeometry.SectionFractionPresentation
 public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 public import Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionKernel
 

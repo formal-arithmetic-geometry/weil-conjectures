@@ -5,7 +5,7 @@ Authors: SHEAF group J1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.GeometricFibreExchangeGerms
+public import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeGerms
 public import Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison
 import Sheaf.AlgebraicGeometry.StrictLocalSectionPullback
 

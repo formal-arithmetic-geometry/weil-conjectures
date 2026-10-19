@@ -7,7 +7,7 @@ module
 
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 public import Mathlib.RingTheory.Flat.Basic
-import Sheaf.RingTheory.AnnihilatorAssociatedPrimesFlatBaseChange
+import WeilConjectures.RingTheory.AnnihilatorAssociatedPrimesFlatBaseChange
 import Mathlib.LinearAlgebra.TensorProduct.Quotient
 
 /-!

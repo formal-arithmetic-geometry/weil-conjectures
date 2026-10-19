@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Sheaf.RingTheory.Depth
 
-import Sheaf.AlgebraicGeometry.Morphisms.FiniteFlatTargetLocus
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteFlatTargetLocus
 import Sheaf.AlgebraicGeometry.Morphisms.PuncturedLocalPurityFiniteFlatFiber
 
 /-!

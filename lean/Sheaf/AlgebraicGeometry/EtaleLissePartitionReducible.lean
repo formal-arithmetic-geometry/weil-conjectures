@@ -5,10 +5,10 @@ Authors: SHEAF group J2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleLissePartition
+public import WeilConjectures.AlgebraicGeometry.EtaleLissePartition
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.EtaleLocallyConstantOpenPullback
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 

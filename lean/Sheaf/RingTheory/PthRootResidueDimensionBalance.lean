@@ -13,10 +13,10 @@ import Sheaf.Paper.CartierEquality
 import Mathlib.Algebra.Module.LinearMap.Index
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
 import WeilConjectures.FieldTheory.PthRootsExtensionDegree
-import Sheaf.RingTheory.JacobiZariskiConnectingMapNaturality
+import WeilConjectures.RingTheory.JacobiZariskiConnectingMapNaturality
 import Sheaf.RingTheory.JacobiZariskiHomologySequence
 import Sheaf.RingTheory.PurelyInseparableBaseChangeLocalRing
-import Sheaf.RingTheory.SubsingletonH1CotangentOfCharP
+import WeilConjectures.RingTheory.SubsingletonH1CotangentOfCharP
 
 /-! # Dimension balance for p-root residue differential comparisons
 

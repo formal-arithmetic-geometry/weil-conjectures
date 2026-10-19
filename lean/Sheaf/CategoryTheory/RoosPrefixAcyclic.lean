@@ -5,10 +5,10 @@ Authors: SHEAF group P3
 -/
 module
 
-public import Sheaf.CategoryTheory.RoosFinitePrefixes
+public import WeilConjectures.CategoryTheory.RoosFinitePrefixes
 import Mathlib.Algebra.Category.Grp.EpiMono
-import Sheaf.CategoryTheory.InjectiveTowerEmbedding
-import Sheaf.CategoryTheory.InjectiveSplitTower
+import WeilConjectures.CategoryTheory.InjectiveTowerEmbedding
+import WeilConjectures.CategoryTheory.InjectiveSplitTower
 import WeilConjectures.CategoryTheory.MittagLefflerLimitExact
 import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
 public import Mathlib.CategoryTheory.Abelian.RightDerived

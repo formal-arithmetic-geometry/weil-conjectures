@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionMap
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 import all Sheaf.AlgebraicGeometry.InvertibleSectionRing
 import all Sheaf.AlgebraicGeometry.FractionZeroTensorPower
-import Sheaf.AlgebraicGeometry.SectionFractionPresentation
+import WeilConjectures.AlgebraicGeometry.SectionFractionPresentation
 
 /-! # Compatibility of Veronese numerators with tensor-power transitions
 

@@ -13,7 +13,7 @@ import WeilConjectures.RingTheory.AnnihilatorElementFlatBaseChange
 import Sheaf.RingTheory.DepthLeSupportDimension
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Sheaf.RingTheory.FlatLocalDepthReduction
-import Sheaf.RingTheory.NonzerodivisorIfMaximalNotAssociated
+import WeilConjectures.RingTheory.NonzerodivisorIfMaximalNotAssociated
 
 /-!
 # Depth formula for a flat local homomorphism

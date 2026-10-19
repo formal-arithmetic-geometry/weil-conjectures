@@ -5,7 +5,7 @@ Authors: SHEAF group S1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.GeometricFibreExchangeGerms
+public import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeGerms
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 import Sheaf.AlgebraicGeometry.StrictHenselizationModuleFibreFactorization
 import Sheaf.AlgebraicGeometry.StrictHenselianIntegralSectionsInjective

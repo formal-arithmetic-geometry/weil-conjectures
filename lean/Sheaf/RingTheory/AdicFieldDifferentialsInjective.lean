@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.Algebra.Algebra.ZMod
 public import Mathlib.Algebra.CharP.Algebra
-import Sheaf.RingTheory.DifferentialsInjectiveOfH1CotangentInjectiveCharP
+import WeilConjectures.RingTheory.DifferentialsInjectiveOfH1CotangentInjectiveCharP
 import Sheaf.RingTheory.FormallySmoothAdicGeometricallyRegular
 import Mathlib.RingTheory.Smooth.Field
 import Sheaf.RingTheory.GeometricallyRegularH1Injective

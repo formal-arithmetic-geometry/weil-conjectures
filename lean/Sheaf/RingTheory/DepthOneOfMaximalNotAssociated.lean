@@ -8,7 +8,7 @@ module
 public import Sheaf.RingTheory.Depth
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
-import Sheaf.RingTheory.NonzerodivisorIfMaximalNotAssociated
+import WeilConjectures.RingTheory.NonzerodivisorIfMaximalNotAssociated
 
 @[expose] public section
 

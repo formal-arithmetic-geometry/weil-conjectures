@@ -9,7 +9,7 @@ public import Mathlib.Algebra.CharP.Defs
 public import Mathlib.Algebra.Field.Defs
 public import Mathlib.RingTheory.Ideal.Operations
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Sheaf.RingTheory.SubsingletonH1CotangentOfCharP
+import WeilConjectures.RingTheory.SubsingletonH1CotangentOfCharP
 import Mathlib.RingTheory.Smooth.Basic
 import Mathlib.Algebra.CharP.Basic
 

@@ -14,7 +14,7 @@ import Mathlib.RingTheory.AdicCompletion.Completeness
 import Mathlib.RingTheory.Filtration
 import Sheaf.RingTheory.ConormalTorsionAlgebraization
 import Sheaf.AlgebraicGeometry.EtaleInfinitesimalNeighbourhoods
-import Sheaf.RingTheory.HenselizationStageMap
+import WeilConjectures.RingTheory.HenselizationStageMap
 import Sheaf.RingTheory.HenselianFactorizationCriterion
 import Sheaf.RingTheory.CompletedRetractionConormalTorsion
 
