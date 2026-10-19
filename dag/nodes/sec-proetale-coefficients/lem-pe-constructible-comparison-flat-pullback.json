@@ -1,0 +1,137 @@
+{
+ "id": "lem-pe-constructible-comparison-flat-pullback",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-pe-finite-tor-comparison-noetherian",
+   "place": "Tag 05VD in sites-modules.tex; parent proof step 1.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Flatness of coefficient-model comparison pullback",
+ "statement": "Let X be a scheme and A any discrete commutative ring in the coefficient universe max(v,u+1). On the recorded etale and pro-etale small site models, the canonical module inverse image constructibleComparisonPullback X A carries every flat module sheaf to a flat module sheaf. No boundedness, constructibility, Noetherian or finite coefficient hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 05VD in sites-modules.tex; parent proof step 1."
+ },
+ "stmt_deps": [
+  "sk-thm-pe-constructible-comparison",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "The transported continuous comparison inclusion and canonical constant-section ring map give a ringed-topos morphism with exactly the specified module pushforward. Apply the existing general K-flat pullback theorem and use uniqueness of left adjoints to identify its pullback with constructibleComparisonPullback.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "sk-thm-pe-constructible-comparison",
+    "lem-weil-pbc-continuous-ringed-topos-module-direct-image",
+    "lem-weil-pbc-supplied-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Place the given flat module M in degree zero. All other terms are zero, hence flat. It is bounded above, so it is K-flat. The general pullback theorem gives flat terms for its image. Evaluate in degree zero and transport flatness along the single-complex term isomorphism and the left-adjoint isomorphism.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any K-flat complex with flat terms, the same supplied ringed-topos theorem gives K-flatness of its termwise pullback. The natural isomorphism of left adjoints induces a complex isomorphism. Tensor it with each acyclic test and transport vanishing homology to the canonical comparison complex.",
+   "uses": [
+    "lem-weil-pbc-supplied-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "sk-thm-pe-constructible-comparison",
+  "lem-weil-pbc-continuous-ringed-topos-module-direct-image",
+  "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
+  "lem-pc-bounded-above-flat-kflat-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 05VD; proved by applying the supplied ringed-topos K-flat pullback to a flat sheaf in degree zero and using uniqueness of left adjoints."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback by a morphism of ringed topoi preserves flat module sheaves and detects zero cohomology when exact and fully faithful",
+   "results": "Eight hits including SheafOfModules.pullback and pullbackPushforwardAdjunction; no coefficient-model Tor bridge.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An object of a derived category has Tor amplitude in an interval if and only if it has a bounded flat model in that interval",
+   "results": "Eight Mathlib hits for standard t-structure representatives. The source library has DerivedCategory.torAmplitudeIn_iff_exists_iso_Q_obj_flat; it is used in the proved coefficient-model bridge.",
+   "date": "2026-10-19",
+   "verdict": "generic source theorem reused"
+  },
+  {
+   "tool": "grep",
+   "query": "TorAmplitude|torAmplitude; constructibleComparisonPullback; comparison tensor test reflection",
+   "results": "No Mathlib Tor predicate. Source FlatModel supplies native flat criterion. Existing finite comparison requires Finite A and different site/module encodings. No existing theorem states these coefficient-model bridges.",
+   "date": "2026-10-19",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian",
+  "date": "2026-10-19",
+  "group": "J9"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-cor-pe-finite-tor-comparison",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleComparisonFlatPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleComparisonFlatPullback.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.constructibleComparisonPullback_flat",
+  "statement": "theorem constructibleComparisonPullback_flat (X : Scheme.{u})\n    (A : Type (max v (u + 1))) [CommRing A]\n    (M : ConstantCompletion.Mod (ConstantCompletion.constant\n      (Scheme.smallModelComparisonEtaleTopology.{u, v} X) A))\n    (hM : SheafOfModules.IsFlat M) :\n    SheafOfModules.IsFlat ((constructibleComparisonPullback X A).obj M)",
+  "branch": "sheaf-dag",
+  "by": "J9",
+  "date": "2026-10-19",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.constructibleComparisonPullback_flat",
+   "AlgebraicGeometry.ProEtale.constructibleComparisonComplexPullback_kFlat"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-6232f",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261019T122609-L-472865",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-6232f",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261019T122609-L-472865",
+  "kind": "interface",
+  "note": "independent cc review: 6232fbac Lean byte-identical to returned 684239cf; B9 from-node fix applied as ordered; 5 modules + 16 item importers compile; axioms sorryAx only via pre-existing sorry upstream (constructibleComparison, smallModelProEtaleComparison); unit sk-cor-pe-finite-tor-comparison route (constructibleComparison) kept; item node changes only proof/proof_deps/proof_origin/tool_uses-deletion"
+ }
+}

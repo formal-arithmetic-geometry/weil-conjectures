@@ -1,0 +1,136 @@
+{
+ "id": "lem-pe-constructible-comparison-tensor-test-reflection",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-pe-finite-tor-comparison-noetherian",
+   "place": "Tag 07A4; parent proof steps 2 and 6.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Reflection of a single comparison tensor test",
+ "statement": "Let X be a scheme and A a discrete commutative ring in max(v,u+1). Let P be any cochain complex of modules over the constant ring on the coefficient-sized etale site, M any module sheaf on that site, and q any integer. If degree-q homology of the ordinary total tensor of the termwise canonical comparison inverse image of P with the degree-zero canonical inverse image of M vanishes, then degree-q homology of the ordinary total tensor of P with M in degree zero vanishes. No K-flatness, constructibility, boundedness or Noetherian hypothesis is needed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4; parent proof steps 2 and 6."
+ },
+ "stmt_deps": [
+  "sk-thm-pe-constructible-comparison",
+  "lem-pe-coefficient-tor-flat-model",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Apply exactness and faithfulness of the intrinsic coefficient-sized comparison module pullback. Its left adjoint preserves finite colimits, so finite-limit preservation makes it homology preserving.",
+   "uses": [
+    "lem-pe-constructible-comparison-module-exact",
+    "sk-thm-pe-constructible-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the supplied ringed-topos morphism from the canonical continuous site comparison and constant-section ring map. Its tensor pullback is left adjoint to the specified module pushforward, hence naturally isomorphic to constructibleComparisonPullback. Transport the canonical ordinary tensor-product comparison and its naturality through this left-adjoint isomorphism.",
+   "uses": [
+    "lem-weil-pbc-continuous-ringed-topos-module-direct-image",
+    "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-canonical-ringed-tensor-comparison-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The mapBifunctorSingle₂Iso identifies the ordinary total tensor with M in degree zero with the termwise tensor-right complex. The natural tensor comparison supplies an isomorphism between pullback of that complex and the tensor-right complex after pullback. Homology preservation identifies its homology with the pullback of etale homology. Use faithfulness to reflect id=0, then transport back through the single-tensor isomorphism.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-pe-constructible-comparison-module-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-constructible-comparison-module-exact",
+  "sk-thm-pe-constructible-comparison",
+  "lem-weil-pbc-continuous-ringed-topos-module-direct-image",
+  "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4; ordinary tensor comparison, single-factor totalization, exact homology comparison and faithful reflection of id=0, all proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback by a morphism of ringed topoi preserves flat module sheaves and detects zero cohomology when exact and fully faithful",
+   "results": "Eight hits including SheafOfModules.pullback and pullbackPushforwardAdjunction; no coefficient-model Tor bridge.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An object of a derived category has Tor amplitude in an interval if and only if it has a bounded flat model in that interval",
+   "results": "Eight Mathlib hits for standard t-structure representatives. The source library has DerivedCategory.torAmplitudeIn_iff_exists_iso_Q_obj_flat; it is used in the proved coefficient-model bridge.",
+   "date": "2026-10-19",
+   "verdict": "generic source theorem reused"
+  },
+  {
+   "tool": "grep",
+   "query": "TorAmplitude|torAmplitude; constructibleComparisonPullback; comparison tensor test reflection",
+   "results": "No Mathlib Tor predicate. Source FlatModel supplies native flat criterion. Existing finite comparison requires Finite A and different site/module encodings. No existing theorem states these coefficient-model bridges.",
+   "date": "2026-10-19",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian",
+  "date": "2026-10-19",
+  "group": "J9"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-cor-pe-finite-tor-comparison",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleComparisonTensorTestReflection",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleComparisonTensorTestReflection.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.constructibleComparisonTensorTest_reflects_zero",
+  "statement": "theorem constructibleComparisonTensorTest_reflects_zero (X : Scheme.{u})\n    (A : Type (max v (u + 1))) [CommRing A]\n    (P : ConstantCompletion.Cx (ConstantCompletion.constant\n      (Scheme.smallModelComparisonEtaleTopology.{u, v} X) A))\n    (M : ConstantCompletion.Mod (ConstantCompletion.constant\n      (Scheme.smallModelComparisonEtaleTopology.{u, v} X) A)) (q : ℤ)\n    (hzero : IsZero (coefficientModelTensorTest (ConstantCompletion.constant\n      (Scheme.coefficientProEtaleModelTopology.{u, v} X) A)\n        ((constructibleComparisonComplexPullback X A).obj P)\n        ((constructibleComparisonPullback X A).obj M) q)) :\n    IsZero (coefficientModelTensorTest (ConstantCompletion.constant\n      (Scheme.smallModelComparisonEtaleTopology.{u, v} X) A) P M q)",
+  "branch": "sheaf-dag",
+  "by": "J9",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-6232f",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261019T122609-L-472865",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-6232f",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261019T122609-L-472865",
+  "kind": "interface",
+  "note": "independent cc review: 6232fbac Lean byte-identical to returned 684239cf; B9 from-node fix applied as ordered; 5 modules + 16 item importers compile; axioms sorryAx only via pre-existing sorry upstream (constructibleComparison, smallModelProEtaleComparison); unit sk-cor-pe-finite-tor-comparison route (constructibleComparison) kept; item node changes only proof/proof_deps/proof_origin/tool_uses-deletion"
+ }
+}

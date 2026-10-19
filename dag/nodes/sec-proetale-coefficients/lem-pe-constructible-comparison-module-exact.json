@@ -1,0 +1,141 @@
+{
+ "id": "lem-pe-constructible-comparison-module-exact",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-pe-finite-tor-comparison-noetherian",
+   "place": "Steps 2 and 6 (Tor amplitude is detected): exact inverse image and faithful reflection used in the tensor-test proof.",
+   "via": [
+    "lem-pe-constructible-comparison-tensor-test-reflection"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Exact faithful comparison on coefficient-sized intrinsic modules",
+ "statement": "Let X be any scheme in universe u and A any discrete commutative ring in max(v,u+1). On the recorded coefficient-sized etale and pro-etale site models, the canonical constant-coefficient module pullback constructibleComparisonPullback X A preserves finite limits and is faithful. There is no Noetherianity, constructibility, boundedness or nonzero-ring hypothesis.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-modules.md",
+  "place": "Exact fully faithful module comparison; Stacks Tags 00YV (6) and 099T, transported through the recorded coefficient-sized small sites."
+ },
+ "stmt_deps": [
+  "sk-thm-pe-constructible-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Construct the pullback presentation of constant set sheaves by uniqueness of the constant-sheaf adjunction and the comparison adjunction. Verify its unit equation first at the terminal object and then on every object by naturality. Commute constant sheafification with the underlying-set functor. This gives a ring presentation whose unit is exactly constructibleComparisonRingMap. The module inverse-image unit comparison identifies the underlying additive sheaf of the intrinsic module pullback with the abelian-sheaf pullback.",
+   "uses": [
+    "sk-thm-pe-constructible-comparison",
+    "lem-weil-pbc-module-inverse-image-unit-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The site comparison is representably flat, so its abelian-sheaf inverse image preserves finite limits. The module forgetful functor reflects finite limits. Transport through the proved underlying additive-sheaf comparison to obtain finite-limit preservation of constructibleComparisonPullback.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-module-inverse-image-unit-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Repeat the source comparison-unit argument for AddCommGrpCat in universe max(v,u+1): the affine pro-etale Kan extension carries standard cofiltered presentations to filtered colimits, using preservation of limits by maps to etale schemes. Exactness of filtered colimits makes the restriction a sheaf. Density of the affine pro-etale basis and invertibility of the affine etale Kan-extension unit show that the abelian comparison unit is invertible. Its inverse image is therefore faithful. Transport through AsSmall sheaf equivalences using uniqueness of left adjoints; then the underlying additive-sheaf comparison reflects equality of module morphisms.",
+   "uses": [
+    "det-pe-classical-sheaves-modules",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-module-inverse-image-unit-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-thm-pe-constructible-comparison",
+  "lem-weil-pbc-module-inverse-image-unit-comparison",
+  "def-weil-pbc-site-comparison-morphism",
+  "det-pe-classical-sheaves-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-modules.md",
+  "place": "Constructed constant-ring pullback-unit presentation; underlying abelian inverse-image comparison; direct proof of the enlarged-universe additive comparison unit on affine sites. All steps are proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exact faithful inverse image module sheaves arbitrary coefficients",
+   "results": "Eight hits, including faithful forgetful functors for sheaves of modules; no declaration of exact faithful intrinsic pro-etale comparison.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image from etale to proetale sheaves with arbitrary discrete coefficients is exact and faithful",
+   "results": "Eight hits, including etale forgetFullyFaithful and general condensed sheaf constructions; no coefficient-sized intrinsic-module comparison theorem.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.Faithful.of_comp_iso",
+   "results": "No hits (identifier unknown to remote search index). Local Mathlib has CategoryTheory.Functor.Faithful.of_comp_iso, which transports faithfulness once an underlying comparison is supplied but does not construct that comparison.",
+   "date": "2026-10-19",
+   "verdict": "generic transport only"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesFiniteLimits.*pullback|pullback.*Faithful",
+   "results": "25 hits for generic pullback constructions and faithful comma/subobject pullbacks; no statement for this intrinsic sheaf-of-modules inverse image. Local source proEtaleClassicalSheavesModules is proved but has fixed module encoding and universe u+1.",
+   "date": "2026-10-19",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian",
+  "date": "2026-10-19",
+  "group": "J9"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-cor-pe-finite-tor-comparison",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleComparisonModuleExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleComparisonModuleExact.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.constructibleComparisonPullback_exact_faithful",
+  "statement": "theorem constructibleComparisonPullback_exact_faithful (X : Scheme.{u})\n    (A : Type (max v (u + 1))) [CommRing A] :\n    PreservesFiniteLimits (constructibleComparisonPullback X A) ∧\n      (constructibleComparisonPullback X A).Faithful",
+  "branch": "sheaf-dag",
+  "by": "J9",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-6232f",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261019T122609-L-472865",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-6232f",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261019T122609-L-472865",
+  "kind": "interface",
+  "note": "independent cc review: 6232fbac Lean byte-identical to returned 684239cf; B9 from-node fix applied as ordered; 5 modules + 16 item importers compile; axioms sorryAx only via pre-existing sorry upstream (constructibleComparison, smallModelProEtaleComparison); unit sk-cor-pe-finite-tor-comparison route (constructibleComparison) kept; item node changes only proof/proof_deps/proof_origin/tool_uses-deletion"
+ }
+}

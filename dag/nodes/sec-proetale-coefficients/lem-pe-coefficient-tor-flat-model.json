@@ -1,0 +1,140 @@
+{
+ "id": "lem-pe-coefficient-tor-flat-model",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-pe-finite-tor-comparison-noetherian",
+   "place": "Tags 08G0 and 08G1; native source FlatModel criterion, transported to the coefficient-model predicate.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Bounded flat criterion for coefficient-model Tor tests",
+ "statement": "For a small site (C,J) in universe w, a commutative ring sheaf R with modules in the same universe, K in its standard derived localization, and integers a <= b, the coefficient-model Tor test in [a,b] holds if and only if there is a complex P with flat terms, zero below a and above b, and Q(P) isomorphic to K. The predicate is HasCoefficientModelTorAmplitude and the flatness predicate is SheafOfModules.IsFlat.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08G0 and 08G1; native source FlatModel criterion, transported to the coefficient-model predicate."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-proetale-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Use functorial flat covers to supply categorical flat resolutions; symmetry identifies one-sided sheaf flatness with categorical flatness.",
+   "uses": [
+    "lem-pc-sites-modules-functorial-flat-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify acyclic-test K-flatness with native quasi-isomorphism-preserving K-flatness using the homotopy-category acyclic criterion and symmetry.",
+   "uses": [
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each K-flat representative the native derived tensor is the same total tensor in the coefficient-model test. Homology localization identifies their vanishing conditions. Apply the source theorem DerivedCategory.torAmplitudeIn_iff_exists_iso_Q_obj_flat; its proof resolves above and truncates below, proving flatness of the first opcycle by the tensor exactness criterion.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-pbc-site-flat-opcycles-tor-criterion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sites-modules-functorial-flat-cover",
+  "def-pc-kflat-complex",
+  "def-weil-abstract-derived-category",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-site-flat-opcycles-tor-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08G0 and 08G1; native source FlatModel criterion, transported to the coefficient-model predicate."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback by a morphism of ringed topoi preserves flat module sheaves and detects zero cohomology when exact and fully faithful",
+   "results": "Eight hits including SheafOfModules.pullback and pullbackPushforwardAdjunction; no coefficient-model Tor bridge.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An object of a derived category has Tor amplitude in an interval if and only if it has a bounded flat model in that interval",
+   "results": "Eight Mathlib hits for standard t-structure representatives. The source library has DerivedCategory.torAmplitudeIn_iff_exists_iso_Q_obj_flat; it is used in the proved coefficient-model bridge.",
+   "date": "2026-10-19",
+   "verdict": "generic source theorem reused"
+  },
+  {
+   "tool": "grep",
+   "query": "TorAmplitude|torAmplitude; constructibleComparisonPullback; comparison tensor test reflection",
+   "results": "No Mathlib Tor predicate. Source FlatModel supplies native flat criterion. Existing finite comparison requires Finite A and different site/module encodings. No existing theorem states these coefficient-model bridges.",
+   "date": "2026-10-19",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian",
+  "date": "2026-10-19",
+  "group": "J9"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-cor-pe-finite-tor-comparison",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientTorFlatModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientTorFlatModel.lean",
+  "declaration": "CategoryTheory.coefficientModelTorAmplitude_iff_flatModel",
+  "statement": "theorem coefficientModelTorAmplitude_iff_flatModel (K : ConstantCompletion.D R)\n    (a b : ℤ) (hab : a ≤ b) :\n    HasCoefficientModelTorAmplitude R K a b ↔\n      ∃ (P : ConstantCompletion.Cx R) (_ : P.IsStrictlyGE a) (_ : P.IsStrictlyLE b),\n        (∀ i, SheafOfModules.IsFlat (R := R) (P.X i)) ∧\n          Nonempty ((ConstantCompletion.Q R).obj P ≅ K)",
+  "branch": "sheaf-dag",
+  "by": "J9",
+  "date": "2026-10-19",
+  "declarations": [
+   "CategoryTheory.coefficientModelTensorTest",
+   "CategoryTheory.exists_coefficientModelKFlatRepresentative",
+   "CategoryTheory.exists_coefficientModelFlatKFlatRepresentative",
+   "CategoryTheory.coefficientModelTensorTest_iso",
+   "CategoryTheory.coefficientModelTorAmplitude_iff_flatModel"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-6232f",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261019T122609-L-472865",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-6232f",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261019T122609-L-472865",
+  "kind": "interface",
+  "note": "independent cc review: 6232fbac Lean byte-identical to returned 684239cf; B9 from-node fix applied as ordered; 5 modules + 16 item importers compile; axioms sorryAx only via pre-existing sorry upstream (constructibleComparison, smallModelProEtaleComparison); unit sk-cor-pe-finite-tor-comparison route (constructibleComparison) kept; item node changes only proof/proof_deps/proof_origin/tool_uses-deletion"
+ }
+}
