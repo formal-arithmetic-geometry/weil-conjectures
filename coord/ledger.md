@@ -17616,3 +17616,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:26 L: returned deliver/Q07/lem-trf-finite-horizontal-shriek-mate (reviewer RETURN: L: independent stage-2 immutable head deed6a71b862: Statement mathematics correct (hypotheses/clauses/edge cases checked)
 - 22:28 L: returned deliver/NL/def-sf-cup (reviewer RETURN: L: independent stage-2 immutable head 096576b3292b: H2 (theorem stmt_dep finding): def-sf-cup adds theorem node lem-fix-)
 - 22:30 L: returned deliver/E8/Sheaf.SixFunctors.RingedFiniteFreeHomBaseChange (reviewer RETURN: (reviewer C-fc7ec, head fc7ec3275) D1 (relabelling, brief point 4): in lean/Sheaf/SixFunctors/RingedFiniteFreeHomBaseCha)
+- 22:32 L: merged deliver/NO/fix-lem-tensor-adjunction (stage 2; reviewer PASS; parallel immutable checks)
