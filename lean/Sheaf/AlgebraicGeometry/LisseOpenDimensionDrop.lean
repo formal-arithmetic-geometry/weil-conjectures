@@ -18,18 +18,10 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import Sheaf.AlgebraicGeometry.LocallyClosedStratification
-import WeilConjectures.Topology.Stratification
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
-import WeilConjectures.AlgebraicGeometry.IsFiniteTypeEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.NowhereDenseDimensionDrop
-import Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.ConstructibleSheaf.Defs
 import WeilConjectures.ConstructibleSheaf.GenericConstancy
-import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
-import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 
 /-!
 # A lisse open with smaller-dimensional complement
@@ -85,6 +77,39 @@ theorem exists_lisse_open_dimension_drop
       IsFiniteLocallyConstantSheaf ((Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).obj F) ∧
       (Nonempty X → topologicalKrullDim {x : X // x ∉ U} < topologicalKrullDim X) ∧
       (IsEmpty X → U = ⊤) := by
-  sorry
+  classical
+  have hconstructible : IsConstructibleSheaf F := by
+    obtain ⟨S, hS⟩ := hF
+    exact ⟨⟨S, fun i ↦ (finite_locally_constant_module_values_iff _).1.mp (hS i)⟩⟩
+  let := hconstructible
+  obtain ⟨U, hU, hFU⟩ := IsConstructibleSheaf.exists_dense_open F
+  refine ⟨U, hFU, ?_, ?_⟩
+  · intro hnonempty
+    let := hnonempty
+    let : IsLocallyNoetherian X :=
+      LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+    have : CompactSpace X :=
+      QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+    have htop := topologicalKrullDim_ne_top_of_compactSpace (X ↘ Spec (.of k))
+    have hbot : topologicalKrullDim X ≠ ⊥ := by
+      apply Order.krullDim_ne_bot_iff.mpr
+      exact ⟨⟨closure {Classical.arbitrary X}, isIrreducible_singleton.closure,
+        isClosed_closure⟩⟩
+    obtain ⟨d, hd⟩ : ∃ d : ℕ, topologicalKrullDim X = (d : WithBot ℕ∞) := by
+      generalize topologicalKrullDim X = n at htop hbot ⊢
+      induction n using WithBot.recBotCoe with
+      | bot => exact False.elim (hbot rfl)
+      | coe n =>
+        induction n using ENat.recTopCoe with
+        | top => exact False.elim (htop rfl)
+        | coe n => exact ⟨n, rfl⟩
+    rw [hd]
+    exact X.topologicalKrullDim_lt_of_isNowhereDense d hd (U : Set X)ᶜ
+      U.isOpen.isClosed_compl (U.isOpen.isClosed_compl.isNowhereDense_iff.mpr
+        hU.interior_compl)
+  · intro hempty
+    let := hempty
+    ext x
+    exact isEmptyElim x
 
 end AlgebraicGeometry.Scheme

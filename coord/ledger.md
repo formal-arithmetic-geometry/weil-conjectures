@@ -17341,3 +17341,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:25 L: merged deliver/Q8/Sheaf.Paper.FiniteSystemPullbackCoherence (stage 3; reviewer PASS; first push; landing 20261019T112514-L-3948613 (proof); batch 20261019T112432; modules 1; new nodes 0)
 - 11:25 L: merged deliver/R1/Sheaf.AlgebraicGeometry.KummerCoefficientBaseChange (stage 3; reviewer PASS; first push; landing 20261019T112515-L-3948727 (interface); batch 20261019T112432; modules 4; new nodes 3; change records: coord/changes/R1-kummer-coefficient-proof-elaboration.md)
 - 11:25 L: merged deliver/R1/Sheaf.Paper.PbcIdempotentCompleteTriangulation (stage 3; reviewer PASS; first push; landing 20261019T112516-L-3948878 (proof); batch 20261019T112432; modules 1; new nodes 0)
+- 11:25 L: merged deliver/R3/Sheaf.AlgebraicGeometry.LisseOpenDimensionDrop (stage 3; reviewer PASS; first push; landing 20261019T112517-L-3948997 (proof); batch 20261019T112432; modules 1; new nodes 0)

@@ -22,73 +22,42 @@
  ],
  "proof": [
   {
-   "text": "If $X=\\varnothing$, take $U=X$. The empty family is an etale covering of the empty scheme, so local constancy is vacuous, and there are no geometric stalks to check for finiteness. Thus the restriction is lisse by [def-weil-pbc-constructible-complexes]. No strict dimension comparison is asserted in this case. Henceforth assume $X\\ne\\varnothing$.",
-   "uses": [
-    "def-weil-pbc-constructible-complexes"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "https://stacks.math.columbia.edu/tag/0055",
-    "place": "Empty-space dimension convention; the lisse condition is vacuous on the empty scheme"
-   }
-  },
-  {
-   "text": "The scheme $\\operatorname{Spec}k$ is Noetherian: it is a one-point affine scheme and $k$ has only the ideals $0$ and $k$. Apply [lem-weil-pbc-finite-type-over-noetherian] to the finite-type structure morphism $X\\to\\operatorname{Spec}k$ to conclude that $X$ is Noetherian, in particular locally Noetherian. By [lem-kun-dimension-finite-type], $\\kundim X<\\infty$. The definition [def-kun-dimension] identifies $\\kundim X$ with the supremum of lengths of strict chains of nonempty irreducible closed subsets of $|X|$, which is exactly $\\dim X$ in [def-kun-topological-krull-dimension]. Thus $\\dim X<\\infty$. Since $X$ is nonempty, the closure of any point provides a length-zero irreducible closed chain. The chain definition [def-kun-topological-krull-dimension] therefore shows that $\\dim X=d$ for an integer $d\\ge0$.",
-   "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-kun-dimension-finite-type",
-    "def-kun-topological-krull-dimension",
-    "def-kun-dimension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "https://stacks.math.columbia.edu/tag/01T6",
-    "place": "Finite type over a Noetherian base; finite dimension is the cited lem-kun-dimension-finite-type"
-   }
-  },
-  {
-   "text": "Choose the finite partition by locally closed constructible subschemes witnessing constructibility in [def-weil-pbc-constructible-complexes]. On each stratum the restriction is lisse, hence locally constant with finite stalks as a sheaf of $\\Lambda$-modules. These same strata and immersions give a stratification [def-constructible-stratification]: they are finitely many pairwise disjoint locally closed subsets covering $X$, with their given immersions. No condition on closures of strata is required. This is the stratification used by [def-constructible-constructible]. The finite-values formulation and the finite-stalk formulation on each stratum agree by [lem-weil-pbc-finite-locally-constant-module-values], applied with the same finite ring $\\Lambda$. Thus $F$, with coefficient category the category of $\\Lambda$-modules throughout, satisfies the constructibility hypothesis of [def-constructible-constructible].",
+   "text": "Use the same Stratification already stored in IsConstructibleEtaleModuleSheaf. On each stratum, apply finite_locally_constant_module_values_iff to obtain IsFiniteLocallyConstantSheaf. Package these witnesses as IsConstructibleSheaf; no conversion of partitions or scheme structures is needed.",
    "uses": [
     "def-weil-pbc-constructible-complexes",
     "def-constructible-constructible",
-    "lem-weil-pbc-finite-locally-constant-module-values",
-    "def-constructible-stratification"
+    "lem-weil-pbc-finite-locally-constant-module-values"
    ],
-   "elementary": false,
-   "source": {
-    "document": "https://stacks.math.columbia.edu/tag/095E",
-    "place": "Finite partition characterization, with module coefficients as in Tag 03RW(3); no change of coefficient category"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [prop-constructible-generic-constancy] to this constructible sheaf in the coefficient category of $\\Lambda$-modules. It gives a dense open subscheme $U\\subseteq X$ on which $F|_U$ is finite locally constant. By [def-weil-pbc-constructible-complexes] this is precisely the required lisse condition. Only generic constancy is taken from the cited proposition: it is not being used for any dimension assertion.",
+   "text": "Apply generic constancy in ModuleCat over the same coefficient ring to obtain a dense open U whose restriction is finite locally constant. This works for the empty scheme too. If X is empty, extensionality on its points shows that U is the top open, proving the empty-scheme clause.",
    "uses": [
     "prop-constructible-generic-constancy",
     "def-weil-pbc-constructible-complexes"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/prop-constructible-generic-constancy.md",
-    "place": "Statement; also read in WeilConjectures/ConstructibleSheaf/GenericConstancy.lean:138-164"
-   }
+   "elementary": false
   },
   {
-   "text": "Put $Z=X\\setminus U$ with its subspace topology. It is closed since $U$ is open. It is nowhere dense: its closure is itself, and a nonempty open subset contained in $Z$ would be disjoint from the dense set $U$, a contradiction. We have checked $X$ nonempty, locally Noetherian, and of finite dimension $d$. Apply [lem-sc-hilbert-nowhere-dense-dimension-drop] to this $Z$ to obtain $\\dim Z<d=\\dim X$, with dimension understood as in [def-kun-topological-krull-dimension]. This includes $Z=\\varnothing$, whose dimension is $-\\infty$. Together with the preceding step this gives both required clauses for the same $U$.",
+   "text": "For the dimension clause assume X is nonempty. The finite-type structure morphism to Spec k gives local Noetherianity and compactness of X. The finite-dimensionality result topologicalKrullDim_ne_top_of_compactSpace excludes top. The closure of any chosen point is a nonempty irreducible closed set, excluding bottom by Order.krullDim_ne_bot_iff. Recursion on WithBot and ENat therefore writes topologicalKrullDim X as a natural number d.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The complement of the open U is closed. Density gives interior(U complement) = empty, hence it is nowhere dense by IsClosed.isNowhereDense_iff. Apply the nowhere-dense dimension-drop theorem with dimension d, and rewrite d as topologicalKrullDim X. The complement is allowed to be empty.",
    "uses": [
     "lem-sc-hilbert-nowhere-dense-dimension-drop",
     "def-kun-topological-krull-dimension"
    ],
-   "elementary": false,
-   "source": {
-    "document": "https://stacks.math.columbia.edu/tag/0055",
-    "place": "Chain dimension convention; strict-drop theorem is the cited existing DAG node, not an assertion of Tag 02P2"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-constructible-constructible",
-  "def-constructible-stratification",
-  "def-kun-dimension",
   "def-kun-topological-krull-dimension",
   "def-weil-pbc-constructible-complexes",
   "lem-kun-dimension-finite-type",
@@ -100,7 +69,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-purity/fin2-lem-lisse-dense-open.md",
-  "place": "Imported proof, repaired at the empty case and factored through existing generic-constancy and nowhere-dense dimension-drop statements"
+  "place": "R3 Lean proof: existing finite-value criterion, generic constancy for all schemes, finite dimension and nowhere-dense dimension drop; empty clause by extensionality."
  },
  "mathlib_searches": [
   {
@@ -236,5 +205,15 @@
   "group": "NC",
   "result": "pass",
   "note": "Reviewed immutable snapshot, source passages, dependency declarations, all statement clauses, universes, edge cases, docstrings, and report sections. Signature matches verbatim; per-file scompile.py reproduction passed cleanly. No findings. Recorded in review.md; no project files or branch heads changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261019T112517-L-3948997",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
