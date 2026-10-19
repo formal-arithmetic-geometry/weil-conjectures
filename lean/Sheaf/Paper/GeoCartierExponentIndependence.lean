@@ -57,6 +57,7 @@ def residueProjection (h : n ∣ m) : residues J m ⟶ residues J n :=
     (ULift.ringEquiv.symm.toRingHom.comp
       ((ZMod.castHom h (ZMod n)).comp ULift.ringEquiv.toRingHom)))
 
+set_option linter.unusedSectionVars false in
 /-- The actual constant coefficient projections form the required triangle.
 Source: Stacks 0D6D, Cartier exponent comparison
 (blueprint: lem-geo-cartier-exponent-independence).
@@ -65,7 +66,13 @@ Integer casts determine homomorphisms out of Z. ULift transports that equality,
 and functoriality of constant sheafification preserves the composite. -/
 theorem projection_comp (h : n ∣ m) :
     projection J m ≫ residueProjection (J := J) h = projection J n := by
-  sorry
+  unfold projection residueProjection
+  rw [← Functor.map_comp]
+  congr 1
+  ext x
+  rcases x with ⟨x⟩
+  change (ZMod.castHom h (ZMod n)) (x : ZMod m) = (x : ZMod n)
+  exact map_intCast _ _
 
 /-- Scalar restriction along the modulus map, retaining the underlying sections.
 Source: Stacks 03D7 and 0D6D (blueprint: lem-geo-cartier-exponent-independence). -/
