@@ -16952,3 +16952,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:43 L: merged deliver/X3/Sheaf.Paper.ProjectionFormulaCompactified (stage 3; reviewer PASS; first push; landing 20261019T034346-L-425115 (proof); batch 20261019T034248; modules 1; new nodes 0)
 - 03:43 L: merged deliver/X5/Sheaf.Paper.OpenImmersionLocalizing (stage 3; reviewer PASS; first push; landing 20261019T034346-L-425219 (interface); batch 20261019T034248; modules 1; new nodes 0; change records: coord/changes/open-immersion-localizing-proof-interface.md)
 - 03:43 L: merged deliver/X5/Sheaf.Paper.ProperOpenCoefficientMate (stage 3; reviewer PASS; first push; landing 20261019T034347-L-425320 (proof); batch 20261019T034248; modules 1; new nodes 0)
+- 03:43 L: merged deliver/X6/Sheaf.AlgebraicGeometry.PullbackBoundedConstructible (stage 3; reviewer PASS; first push; landing 20261019T034348-L-425428 (proof); batch 20261019T034248; modules 1; new nodes 0)

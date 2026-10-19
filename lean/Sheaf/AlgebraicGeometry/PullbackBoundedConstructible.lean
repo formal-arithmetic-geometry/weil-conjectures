@@ -9,18 +9,10 @@ public import Sheaf.AlgebraicGeometry.ProEtaleFiniteCoefficientDirectImage
 public import Sheaf.Paper.CompleteCoefficientDatum
 public import Sheaf.AlgebraicGeometry.ConstructibleDirectImageFiniteness
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
-import Sheaf.AlgebraicGeometry.ComparisonPullbackCoherence
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleSetPullback
-import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonDerived
+import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
-import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
-import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
-import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
-import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-import Sheaf.CategoryTheory.RingedSiteModules
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Pullback preserves bounded constructibility and cohomological intervals
@@ -46,6 +38,80 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.ProEtale
 
+private theorem etaleBounded_iff (T : Scheme.{u}) (Λ : Type (u + 1))
+    [CommRing Λ] [Finite Λ] (L : FiniteCoefficientEtaleDerivedCategory T Λ) :
+    ((∀ j : ℤ, ∃ S : Scheme.LocallyClosedStratification T,
+      (∀ k : Fin S.n, Topology.IsConstructible (S.stratum k)) ∧
+      ∀ k : Fin S.n,
+        ∃ d : Scheme.LocallyConstantDatum
+          ((Etale.upperStar (ModuleCat.{u + 1} Λ) (S.immersion k)).obj
+            ((_root_.DerivedCategory.homologyFunctor
+              (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) j).obj L)),
+          ∀ i : d.cover.I₀, ∃ M : ModuleCat.{u + 1} Λ, Finite M ∧
+            Nonempty
+              ((((Etale.upperStar (ModuleCat.{u + 1} Λ) (S.immersion k)).obj
+                ((_root_.DerivedCategory.homologyFunctor
+                  (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) j).obj L)).over
+                    (d.cover.etalePrecoverageToEtale i)) ≅
+                (constantSheaf
+                  ((S.domain k).smallEtaleTopology.over (d.cover.etalePrecoverageToEtale i))
+                  (ModuleCat.{u + 1} Λ)).obj M)) ∧
+      ∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, (i < a ∨ b < i) →
+        IsZero ((_root_.DerivedCategory.homologyFunctor
+          (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) i).obj L)) ↔
+      Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) T L := by
+  constructor
+  · rintro ⟨hc, a, b, _, hab⟩
+    refine ⟨⟨⟨a, (_root_.DerivedCategory.isGE_iff L a).2 (fun i hi ↦ hab i (.inl hi))⟩,
+      ⟨b, (_root_.DerivedCategory.isLE_iff L b).2 (fun i hi ↦ hab i (.inr hi))⟩⟩, ?_⟩
+    intro i
+    obtain ⟨S, _, hS⟩ := hc i
+    exact (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).1 ⟨S, hS⟩
+  · rintro ⟨⟨⟨a, ha⟩, ⟨b, hb⟩⟩, hc⟩
+    refine ⟨?_, min a b, b, min_le_right _ _, ?_⟩
+    · intro i
+      obtain ⟨S, hS⟩ :=
+        (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2 (hc i)
+      exact ⟨S, S.isConstructible_stratum, hS⟩
+    · intro i hi
+      rcases hi with hi | hi
+      · exact (_root_.DerivedCategory.isGE_iff L a).1 ha i (lt_of_lt_of_le hi (min_le_left _ _))
+      · exact (_root_.DerivedCategory.isLE_iff L b).1 hb i hi
+
+private theorem etaleOrigin_iff (T : Scheme.{u}) (Λ : Type (u + 1))
+    [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ]
+    (K : FiniteCoefficientDerivedCategory T Λ) :
+    isBoundedConstructibleFiniteCoefficient T Λ K ↔
+      (Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) T).map
+        (finiteCoefficientDerivedComparison T Λ) K := by
+  constructor
+  · rintro ⟨L, hL, e⟩
+    exact ⟨L, (etaleBounded_iff T Λ L).1 hL, e⟩
+  · rintro ⟨L, hL, e⟩
+    exact ⟨L, (etaleBounded_iff T Λ L).2 hL, e⟩
+
+private noncomputable def coefficientComparisonPullbackIso
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (Λ : Type (u + 1))
+    [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] :
+    finiteCoefficientComparison Y Λ ⋙ finiteCoefficientPullback Y Λ f ≅
+      Etale.upperStar (ModuleCat.{u + 1} Λ) f ⋙ finiteCoefficientComparison X Λ :=
+  (Functor.isoWhiskerLeft (comparisonUpperStar (ModuleCat.{u + 1} Λ) Y)
+    (Functor.isoWhiskerRight (finiteCoefficientRealization Y Λ).asEquivalence.unitIso.symm
+      (upperStar (ModuleCat.{u + 1} Λ) f ⋙ finiteCoefficientRealization X Λ))) ≪≫
+    Functor.isoWhiskerRight
+      (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) f)
+      (finiteCoefficientRealization X Λ)
+
+private noncomputable def derivedCoefficientComparisonPullbackIso
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (Λ : Type (u + 1))
+    [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] :
+    finiteCoefficientDerivedComparison Y Λ ⋙ finiteCoefficientDerivedPullback Y Λ f ≅
+      (Etale.upperStar (ModuleCat.{u + 1} Λ) f).mapDerivedCategory ⋙
+        finiteCoefficientDerivedComparison X Λ :=
+  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryNatIso (coefficientComparisonPullbackIso f Λ) ≪≫
+      Functor.mapDerivedCategoryCompIso _ _
+
 /-- The full essential image of bounded constructible etale complexes is triangulated.
 Source: blueprint order 1303, proof, final paragraph; Stacks, Tags 09AL and 09B5
 (blueprint: lem-weil-pbc-pullback-preserves-bounded-constructible).
@@ -61,7 +127,23 @@ theorem isBoundedConstructibleFiniteCoefficient_isTriangulated (T : Scheme.{u})
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     [TopologicalSpace Λ] [DiscreteTopology Λ] :
     (isBoundedConstructibleFiniteCoefficient T Λ).IsTriangulated := by
-  sorry
+  let P := Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) T
+  let Q := P.inverseImage _root_.DerivedCategory.Plus.ι
+  let F := (finiteCoefficientComparison T Λ).mapDerivedCategoryPlus ⋙
+    _root_.DerivedCategory.Plus.ι
+  have : (finiteCoefficientComparison T Λ).mapDerivedCategoryPlus.Full :=
+    (siteComparison_boundedBelow T Λ).1.some.full
+  have heq : isBoundedConstructibleFiniteCoefficient T Λ = Q.map F := by
+    funext K
+    apply propext
+    rw [etaleOrigin_iff]
+    constructor
+    · rintro ⟨L, hL, e⟩
+      exact ⟨⟨L, hL.1.1⟩, hL, e⟩
+    · rintro ⟨L, hL, e⟩
+      exact ⟨L.obj, hL, e⟩
+  rw [heq]
+  infer_instance
 
 attribute [instance] isBoundedConstructibleFiniteCoefficient_isTriangulated
 
@@ -88,7 +170,12 @@ theorem finiteCoefficientDerivedPullback_preserves_boundedConstructible
     (hK : isBoundedConstructibleFiniteCoefficient Y Λ K) :
     isBoundedConstructibleFiniteCoefficient X Λ
       ((finiteCoefficientDerivedPullback Y Λ f).obj K) := by
-  sorry
+  obtain ⟨L, hL, ⟨e⟩⟩ := (etaleOrigin_iff Y Λ K).1 hK
+  apply (etaleOrigin_iff X Λ _).2
+  refine ⟨(Etale.upperStar (ModuleCat.{u + 1} Λ) f).mapDerivedCategory.obj L,
+    Etale.DerivedCategory.boundedConstructible.mapDerivedCategory_upperStar f hL, ?_⟩
+  exact ⟨(derivedCoefficientComparisonPullbackIso f Λ).symm.app L ≪≫
+    (finiteCoefficientDerivedPullback Y Λ f).mapIso e⟩
 
 /-- The restriction of exact termwise inverse image to the recorded bounded constructible
 full subcategories, acting by the original derived functor on every morphism.
@@ -148,6 +235,15 @@ theorem finiteCoefficientBoundedConstructiblePullback_exact_and_interval
       ∀ i : ℤ, (i < a ∨ b < i) → IsZero
         ((_root_.DerivedCategory.homologyFunctor (FiniteCoefficientModules V' Λ) i).obj
           ((finiteCoefficientBoundedConstructiblePullback g Λ).obj K).obj) := by
-  sorry
+  constructor
+  · unfold finiteCoefficientBoundedConstructiblePullback
+    infer_instance
+  · intro K a b hK i hi
+    change IsZero
+      ((_root_.DerivedCategory.homologyFunctor (FiniteCoefficientModules V' Λ) i).obj
+        ((finiteCoefficientDerivedPullback V Λ g).obj K.obj))
+    exact (finiteCoefficientPullback V Λ g).isZero_homologyFunctor_mapDerivedCategory_obj
+      (hK i hi)
+
 
 end AlgebraicGeometry.ProEtale
