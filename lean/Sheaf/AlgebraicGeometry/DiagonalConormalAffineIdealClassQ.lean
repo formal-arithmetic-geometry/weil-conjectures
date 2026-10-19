@@ -7,7 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalConormal
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.RingTheory.Kaehler.Basic
-import Sheaf.AlgebraicGeometry.AffineOpenKernelConormalSections
+import WeilConjectures.AlgebraicGeometry.AffineOpenKernelConormalSections
 import Mathlib.AlgebraicGeometry.PullbackCarrier
 /-! # Affine diagonal cotangent comparison
 

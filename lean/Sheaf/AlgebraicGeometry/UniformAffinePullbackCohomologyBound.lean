@@ -10,8 +10,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import WeilConjectures.AlgebraicGeometry.QuasiCompactOpenInduction
-import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
+import WeilConjectures.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
 import Sheaf.Topology.ModuleMayerVietoris
+import Sheaf.Paper.PQFCohomology
 
 /-! # Uniform open cohomology bounds under affine morphisms
 

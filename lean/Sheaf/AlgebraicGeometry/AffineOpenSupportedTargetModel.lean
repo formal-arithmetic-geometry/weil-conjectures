@@ -2,10 +2,10 @@
 module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
+public import WeilConjectures.AlgebraicGeometry.AffinePerfectModuleModel
 
 import Sheaf.AlgebraicGeometry.AffineOpenSupportedModelExists
-import Sheaf.AlgebraicGeometry.AffineOpenSupportedModelTorsion
+import WeilConjectures.AlgebraicGeometry.AffineOpenSupportedModelTorsion
 
 /-! # Supported target models on affine opens
 

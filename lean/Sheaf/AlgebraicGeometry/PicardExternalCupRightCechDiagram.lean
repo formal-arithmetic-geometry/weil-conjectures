@@ -12,14 +12,15 @@ import Sheaf.AlgebraicGeometry.PicardExternalRightCechExact
 import Sheaf.AlgebraicGeometry.PicardExternalRightCechComparison
 import WeilConjectures.Algebra.Homology.TensorKunnethNat
 import Sheaf.AlgebraicGeometry.AffineModuleCechComparisonNatural
-import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
+import WeilConjectures.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
 import Sheaf.AlgebraicGeometry.ModuleCechComparisonIsoAffine
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 import Sheaf.AlgebraicGeometry.PicardKunnethResolutionModel
-import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import Sheaf.Paper.CechComparisonMapNaturality
 import Sheaf.Paper.CechCupPullbackCompat
+import Sheaf.Paper.PQFCohomology
 
 /-! # Short exact Cech comparison in the right coefficient
 

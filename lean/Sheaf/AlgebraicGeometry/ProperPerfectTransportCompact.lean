@@ -15,7 +15,7 @@ import Sheaf.AlgebraicGeometry.BoundedCoherentFiniteTorDirectImagePerfect
 import Sheaf.AlgebraicGeometry.PerfectNoetherianCohomology
 import Sheaf.AlgebraicGeometry.PerfectRelativeFiniteTor
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
+import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
 
 /-! # Compactness after comparison with proper perfect direct image

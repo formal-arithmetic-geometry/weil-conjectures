@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.PicardRightCechCupConstruction
 public import Sheaf.AlgebraicGeometry.PicardKunnethResolutionModel
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup
-import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 

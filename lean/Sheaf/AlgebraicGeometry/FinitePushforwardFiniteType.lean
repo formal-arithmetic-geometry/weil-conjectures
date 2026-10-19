@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
-import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 
 /-! Finite pushforward preserves quasi-coherence and finite type without
 Noetherian hypotheses.

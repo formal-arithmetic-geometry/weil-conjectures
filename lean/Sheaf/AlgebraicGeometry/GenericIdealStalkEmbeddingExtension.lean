@@ -8,7 +8,7 @@ public import Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
 import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
-import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.CoherentStalkMapExtends
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent

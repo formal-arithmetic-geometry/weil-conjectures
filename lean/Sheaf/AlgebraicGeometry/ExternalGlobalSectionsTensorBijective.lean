@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.ExternalGlobalSectionsTensorFiniteCover
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
-import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 
 /-! # External tensor product on global sections
 

@@ -14,7 +14,7 @@ import Sheaf.AlgebraicGeometry.BoundedCoherentFiniteTorDirectImagePerfect
 import Sheaf.AlgebraicGeometry.PerfectNoetherianCohomology
 import Sheaf.AlgebraicGeometry.PerfectRelativeFiniteTor
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
+import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Perfect direct image along a proper perfect morphism

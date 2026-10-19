@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.AlgebraicGeometry.ProperSupportPerfectDirectImage
-import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
+import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 
 /-! # Perfect direct image for proper flat finitely presented morphisms
 

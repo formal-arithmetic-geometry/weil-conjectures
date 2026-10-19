@@ -6,7 +6,7 @@ Authors: SHEAF group J1
 module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import Sheaf.AlgebraicGeometry.DerivedGlobalScalar
+public import WeilConjectures.AlgebraicGeometry.DerivedGlobalScalar
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.PerfectSupportAffineOpenTorsion
 import Sheaf.AlgebraicGeometry.DerivedOpenHomScalarMayerVietoris

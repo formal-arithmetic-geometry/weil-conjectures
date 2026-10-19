@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.KoszulOpenOrthogonality
 import Sheaf.AlgebraicGeometry.AffineDerivedOpenTransport
-import Sheaf.AlgebraicGeometry.AffineKoszulGeometricProperties
+import WeilConjectures.AlgebraicGeometry.AffineKoszulGeometricProperties
 import Mathlib.Topology.Compactness.Bases
 import Mathlib.Data.Fintype.EquivFin
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel

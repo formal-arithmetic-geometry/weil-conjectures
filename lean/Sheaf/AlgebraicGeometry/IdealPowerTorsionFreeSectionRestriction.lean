@@ -6,9 +6,9 @@ Authors: SHEAF group H3
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 import all Sheaf.AlgebraicGeometry.CoherentSupportVanishingIdealNilpotence
-import all Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import all WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import Mathlib.RingTheory.Finiteness.Ideal
 

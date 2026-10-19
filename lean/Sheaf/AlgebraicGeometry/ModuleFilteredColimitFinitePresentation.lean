@@ -15,7 +15,6 @@ import Sheaf.AlgebraicGeometry.ModuleFinitePresentationCokernel
 import Sheaf.AlgebraicGeometry.ModuleFinitePresentationExtension
 import Sheaf.AlgebraicGeometry.ModuleFiniteTypeSubmoduleExtension
 import Sheaf.AlgebraicGeometry.ModuleStalkFilteredColimit
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 
 /-!

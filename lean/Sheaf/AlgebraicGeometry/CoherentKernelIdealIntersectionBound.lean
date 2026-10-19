@@ -6,10 +6,10 @@ Authors: SHEAF group E1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Coherent
-public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.AffineIdealIntersectionInclusion
+import WeilConjectures.AlgebraicGeometry.AffineIdealIntersectionInclusion
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.CoherentAffineSectionsFinite
 import Mathlib.RingTheory.Filtration

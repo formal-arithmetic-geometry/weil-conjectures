@@ -5,7 +5,7 @@ Authors: SHEAF group T3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedGlobalScalar
+public import WeilConjectures.AlgebraicGeometry.DerivedGlobalScalar
 import Sheaf.AlgebraicGeometry.OpenDerivedLocalizationAdjunction
 import Sheaf.AlgebraicGeometry.DerivedOpenUnionAdjunctionTriangle
 import Mathlib.CategoryTheory.Adjunction.Additive

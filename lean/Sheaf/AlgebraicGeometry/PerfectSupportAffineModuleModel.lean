@@ -6,14 +6,14 @@ Authors: SHEAF group Y3
 module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import Sheaf.AlgebraicGeometry.DerivedGlobalScalar
+public import WeilConjectures.AlgebraicGeometry.DerivedGlobalScalar
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import Sheaf.AlgebraicGeometry.AffineLocalizedSiteDerivedTransport
+import WeilConjectures.AlgebraicGeometry.AffineLocalizedSiteDerivedTransport
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import Mathlib.CategoryTheory.Preadditive.LeftExact
 import Sheaf.AlgebraicGeometry.AffineOpenPerfectSourceModel
 import Sheaf.AlgebraicGeometry.AffineOpenSupportedTargetModel
-import Sheaf.AlgebraicGeometry.AffineOpenRealizationScalar
+import WeilConjectures.AlgebraicGeometry.AffineOpenRealizationScalar
 
 /-! # Affine module models with supported cohomology
 

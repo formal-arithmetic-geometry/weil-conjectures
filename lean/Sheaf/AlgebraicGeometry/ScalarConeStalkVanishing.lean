@@ -5,7 +5,7 @@ Authors: SHEAF groups Q1 and V2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedGlobalScalar
+public import WeilConjectures.AlgebraicGeometry.DerivedGlobalScalar
 public import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import Mathlib.Algebra.Homology.ShortComplex.Linear

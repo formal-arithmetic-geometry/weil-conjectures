@@ -6,8 +6,8 @@ Authors: SHEAF group C1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Ample
-public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
-import Sheaf.AlgebraicGeometry.AffineOpenCohomologyLocalization
+public import WeilConjectures.AlgebraicGeometry.CohomologyFractionPresentation
+import WeilConjectures.AlgebraicGeometry.AffineOpenCohomologyLocalization
 import Sheaf.Paper.NonvanishingSectionTrivializes
 import Sheaf.AlgebraicGeometry.CohomologySectionLocalizationGluing
 import WeilConjectures.AlgebraicGeometry.QuasiCompactOpenInduction

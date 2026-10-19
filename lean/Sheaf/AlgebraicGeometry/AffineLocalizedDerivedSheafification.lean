@@ -5,8 +5,8 @@ Authors: SHEAF group D3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
-import Sheaf.AlgebraicGeometry.AffineLocalizedSiteDerivedTransport
+public import WeilConjectures.AlgebraicGeometry.AffinePerfectModuleModel
+import WeilConjectures.AlgebraicGeometry.AffineLocalizedSiteDerivedTransport
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
 
 /-! # Derived sheafification on the localized affine site

@@ -6,7 +6,7 @@ Authors: SHEAF group R1
 module
 
 public import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitPresentation
-import Sheaf.AlgebraicGeometry.AffineFlatModuleTensorFlat
+import WeilConjectures.AlgebraicGeometry.AffineFlatModuleTensorFlat
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
 import Sheaf.AlgebraicGeometry.Picard.CanonicalSingleDirectImageComparison
@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.AlgebraicGeometry.Cohomology.InjectiveFlasque
 import WeilConjectures.Topology.Sheaves.CechFlasque
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
-import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChangeIsIso
+import WeilConjectures.AlgebraicGeometry.AffinePushforwardBaseChangeIsIso
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 

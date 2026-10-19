@@ -5,7 +5,7 @@ Authors: SHEAF group Q1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
+public import WeilConjectures.AlgebraicGeometry.AffinePerfectModuleModel
 public import Sheaf.AlgebraicGeometry.FiniteTorDimension
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude

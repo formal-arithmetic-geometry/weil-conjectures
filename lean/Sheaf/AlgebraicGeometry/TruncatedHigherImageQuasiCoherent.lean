@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Sheaf.CategoryTheory.TruncationHypercohomology
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import Sheaf.AlgebraicGeometry.Modules.QuasicoherentExtension
 import WeilConjectures.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel

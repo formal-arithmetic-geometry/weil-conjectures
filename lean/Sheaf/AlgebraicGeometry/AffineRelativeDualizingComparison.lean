@@ -19,7 +19,7 @@ public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
 public import Sheaf.AlgebraicGeometry.FiniteTorDimensionOver
-public import Sheaf.AlgebraicGeometry.DerivedGlobalScalar
+public import WeilConjectures.AlgebraicGeometry.DerivedGlobalScalar
 public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper

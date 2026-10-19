@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 import Sheaf.AlgebraicGeometry.KoszulAffineDetection
 import Sheaf.AlgebraicGeometry.DerivedOpenUnitCone
 import Sheaf.AlgebraicGeometry.KoszulPowersOrthogonality
-import Sheaf.AlgebraicGeometry.KoszulRestrictionZero
+import WeilConjectures.AlgebraicGeometry.KoszulRestrictionZero
 
 /-! # Koszul orthogonality detects extension from an open
 

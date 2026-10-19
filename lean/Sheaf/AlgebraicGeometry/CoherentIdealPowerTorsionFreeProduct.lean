@@ -6,7 +6,7 @@ Authors: SHEAF group H3
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Noetherian
 
@@ -16,8 +16,8 @@ import Sheaf.AlgebraicGeometry.IdealPowerComplement
 import Sheaf.AlgebraicGeometry.IdealDataRecursivePowerComparison
 import WeilConjectures.AlgebraicGeometry.FiniteTypeIdealModule
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
-import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 
 /-! # Removing ideal-power torsion from a coherent module
 

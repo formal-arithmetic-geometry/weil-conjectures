@@ -6,7 +6,7 @@ Authors: SHEAF group R3
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.CoherentOpenSectionCarrier

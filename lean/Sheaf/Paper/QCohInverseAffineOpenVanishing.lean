@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.Topology.OpenModuleCohomology
 
 import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
-import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
+import WeilConjectures.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
 import Sheaf.Topology.ModuleCohomologyTopComparison
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 import Sheaf.AlgebraicGeometry.LerayDegenerateSections

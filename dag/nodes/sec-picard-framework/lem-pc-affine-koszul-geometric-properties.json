@@ -94,13 +94,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineKoszulGeometricProperties",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineKoszulGeometricProperties.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineKoszulGeometricProperties",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineKoszulGeometricProperties.lean",
   "declaration": "AlgebraicGeometry.affine_koszul_geometric_properties",
   "statement": "theorem affine_koszul_geometric_properties\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]\n    [∀ V : (Spec (.of A)).Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over V))] :\n    let Q := DerivedCategory.Q.obj\n      ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A)\n        (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))\n        _ _ _ _ (tilde.functor (.of A))\n        ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj\n        ((ExteriorAlgebra.koszulComplex A r f).extend ComplexShape.embeddingDownNat))\n    Scheme.IsPerfect (Spec (.of A)) Q ∧\n      ∀ (n : ℤ) (x : PrimeSpectrum A), (∃ i, f i ∉ x.asIdeal) →\n        Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) n).obj\n            Q).val.presheaf x))",
   "branch": "sheaf-dag",
   "by": "X2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.AffineKoszulGeometricProperties retired; now WeilConjectures.AlgebraicGeometry.AffineKoszulGeometricProperties."
  },
  "reviewed": {
   "date": "2026-10-12",

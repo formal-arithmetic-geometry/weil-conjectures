@@ -18,7 +18,7 @@ public import Mathlib.Geometry.RingedSpace.Basic
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import Mathlib.CategoryTheory.Abelian.Images
 import Mathlib.LinearAlgebra.Quotient.Basic
 import Mathlib.AlgebraicGeometry.Modules.Tilde
@@ -49,7 +49,7 @@ import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 import WeilConjectures.RingTheory.SymmetricAlgebraBaseChange
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.RingTheory.Noetherian.Basic
-import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Mathlib.Algebra.Module.FinitePresentation
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
@@ -58,8 +58,6 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 /-!
 # The conormal graded algebra of a closed immersion
 

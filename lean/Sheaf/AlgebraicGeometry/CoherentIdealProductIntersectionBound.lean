@@ -6,11 +6,11 @@ Authors: SHEAF group N3
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Noetherian
 
-import Sheaf.AlgebraicGeometry.AffineIdealIntersectionInclusion
+import WeilConjectures.AlgebraicGeometry.AffineIdealIntersectionInclusion
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.CoherentAffineSectionsFinite
 import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator

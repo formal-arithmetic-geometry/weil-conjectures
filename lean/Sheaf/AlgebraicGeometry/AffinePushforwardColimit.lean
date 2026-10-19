@@ -13,9 +13,8 @@ import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentAlgebraColimit
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentModuleColimitAffineSections
-import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
-import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
 
 /-! # Affine pushforward and tensor modules commute with directed limits
 

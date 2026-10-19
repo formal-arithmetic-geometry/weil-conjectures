@@ -33,7 +33,7 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
-import Sheaf.AlgebraicGeometry.NonnegativeProjectiveTwistVanishing
+import WeilConjectures.AlgebraicGeometry.NonnegativeProjectiveTwistVanishing
 import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 import WeilConjectures.AlgebraicGeometry.DensePoints
 import WeilConjectures.AlgebraicGeometry.Cohomology.Serre

@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.IdealPowerProductZeroAffineCover
 import Mathlib.RingTheory.Finiteness.Ideal
-import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
+import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 
 /-! # An ideal power kills a coherent module exactly when its support lies in the zero set
 

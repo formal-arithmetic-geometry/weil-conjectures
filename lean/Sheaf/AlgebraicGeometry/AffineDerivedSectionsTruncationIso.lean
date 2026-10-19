@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
+import WeilConjectures.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 import Mathlib.Algebra.Category.Grp.Zero
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
@@ -19,6 +19,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
+import Sheaf.Paper.PQFCohomology
 
 /-! # Affine sections and the canonical lower truncation
 

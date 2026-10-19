@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PicardScalarAffineSectionsExact
 public import Sheaf.AlgebraicGeometry.ExternalSectionsComponents
 import Sheaf.AlgebraicGeometry.AffineRectangleProjectionSectionsTensor
-import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 

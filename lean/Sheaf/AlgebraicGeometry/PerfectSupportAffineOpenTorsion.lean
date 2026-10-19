@@ -6,7 +6,7 @@ Authors: SHEAF group T3
 module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import Sheaf.AlgebraicGeometry.DerivedGlobalScalar
+public import WeilConjectures.AlgebraicGeometry.DerivedGlobalScalar
 import Sheaf.AlgebraicGeometry.PerfectSupportAffineModuleModel
 import WeilConjectures.CategoryTheory.DerivedCategory.BoundedProjectiveHomPowerTorsion
 

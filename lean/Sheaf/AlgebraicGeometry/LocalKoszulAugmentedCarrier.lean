@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 public import Mathlib.CategoryTheory.Preadditive.Projective.Resolution
-import Sheaf.AlgebraicGeometry.AffineKoszulFiniteFreeResolution
+import WeilConjectures.AlgebraicGeometry.AffineKoszulFiniteFreeResolution
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.Algebra.Homology.Embedding.ExtendHomology

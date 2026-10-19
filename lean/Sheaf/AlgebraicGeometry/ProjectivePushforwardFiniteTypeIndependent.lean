@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.ProjectiveAffineFiniteCohomologyIndependent
 import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
-import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Independent finite type of projective pushforward

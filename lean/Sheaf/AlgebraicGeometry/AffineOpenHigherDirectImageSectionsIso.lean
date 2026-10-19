@@ -14,7 +14,7 @@ import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.AlgebraicGeometry.LerayDegenerateSections
 import WeilConjectures.AlgebraicGeometry.OpenModuleCohomologyComparison
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
-import Sheaf.AlgebraicGeometry.AffineHigherDirectImageCohomologyVanishing
+import WeilConjectures.AlgebraicGeometry.AffineHigherDirectImageCohomologyVanishing
 import Sheaf.AlgebraicGeometry.HigherDirectImageOpenRestriction
 
 /-! # Leray comparison on affine opens of the target

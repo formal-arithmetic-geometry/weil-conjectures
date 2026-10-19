@@ -2,7 +2,7 @@
 module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
+public import WeilConjectures.AlgebraicGeometry.AffinePerfectModuleModel
 
 import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
 import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective

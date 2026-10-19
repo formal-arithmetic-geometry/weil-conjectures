@@ -11,9 +11,10 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 import Mathlib.Algebra.Category.Grp.Zero
-import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
+import WeilConjectures.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
 import Sheaf.AlgebraicGeometry.TruncationDerivedLimit
 import Sheaf.CategoryTheory.Triangulated.DerivedFunctorDerivedLimit
+import Sheaf.Paper.PQFCohomology
 
 /-! # Reconstruction of quasi-coherent complexes by lower truncations
 

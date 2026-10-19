@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CanonicalCoherentEtaleComparison
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
-import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
+import WeilConjectures.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
 import Sheaf.AlgebraicGeometry.EtaleTensorPositiveObjectCohomology
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNormalization
@@ -19,6 +19,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleOpenRestrictionInjectives
 import WeilConjectures.AlgebraicGeometry.ZariskiEtaleInclusionMorphismOfSites
 import WeilConjectures.AlgebraicGeometry.ZariskiModuleAbelianCohomologyNatural
 import WeilConjectures.CategoryTheory.Abelian.HorseshoeDeltaFunctor
+import Sheaf.Paper.PQFCohomology
 
 /-! Comparison squares for additive structure-sheaf cohomology. -/
 

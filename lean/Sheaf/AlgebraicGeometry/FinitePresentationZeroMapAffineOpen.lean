@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.AffineFiniteTypePullbackZeroTest
+import WeilConjectures.AlgebraicGeometry.AffineFiniteTypePullbackZeroTest
 import Sheaf.AlgebraicGeometry.FinitePresentationSectionAffineOpenVanishing
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Mathlib.Data.Finset.Order
