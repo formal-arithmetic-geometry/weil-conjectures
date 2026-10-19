@@ -14,9 +14,145 @@
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-adic-completion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $D_n=F\\langle T_1,\\ldots,T_n\\rangle$, $D_0=F$. Coefficientwise addition and the finite Cauchy sums give a ring with $\\|fg\\|\\le\\|f\\|\\|g\\|$ and the strong triangle inequality. For the product's coefficient decay, bound both coefficient families by $M\\ge1$; outside the sum of their finite $\\epsilon/M$-exceptional exponent sets, every summand in a coefficient has at least one factor less than $\\epsilon/M$. Thus the product is restricted. A Gauss-Cauchy sequence has a coefficientwise limit since $F$ is complete; a uniform approximation by one restricted member shows the limit is restricted and convergence is in Gauss norm. Polynomial truncations are dense. In any $D_n$, $\\|h\\|<1$ implies $1-h$ is a unit: the partial geometric sums are Cauchy by $\\|h^k\\|\\le\\|h\\|^k$, and their limit is its two-sided inverse. These arguments also apply to finite tuples with the maximum norm.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5 Step 3, printed p. 22, supporting analytic comparison; agent reconstruction because the cited PDF is not in this checkout"
+   }
+  },
+  {
+   "text": "For nonzero $f\\in D_n$, $n>0$, divide by a coefficient of maximum absolute value, so $\\|f\\|=1$. There are finitely many coefficients of norm $1$, and all remaining coefficients have a common bound $\\rho<1$: use the finite exceptional set for the threshold $1/2$. Choose positive weights $N_1,\\ldots,N_{n-1}$ so that $\\nu_n+\\sum_{i<n}N_i\\nu_i$ takes distinct values on that finite set (successive sufficiently large weights suffice). The substitutions $T_i\\mapsto T_i+T_n^{N_i}$ for $i<n$, $T_n\\mapsto T_n$, and their minus-sign inverses extend from polynomials by density and completeness; both have operator norm at most $1$, hence are inverse isometries. The unique largest weighted exponent $d$ gives a term $cT_n^d$, $|c|=1$. Every other contribution of norm $1$ has $T_n$-degree less than $d$, so the coefficient $a_d$ is $c$ plus terms of norm at most $\\rho$, and all coefficients above $d$ have norm at most $\\rho$. The geometric-series argument makes $a_d$ a unit of $D_{n-1}$ with it and its inverse of norm $1$. Multiplying the transformed $f$ by $a_d^{-1}$ gives precisely a series to which the cited division/preparation theorem applies. It follows that the transformed principal ideal $(f)$ contains a monic $w\\in D_{n-1}[T_n]$ with lower coefficient norms at most $1$, and division by $w$ has quotient and remainder norm at most the dividend's norm.",
+   "uses": [
+    "lem-trf-tate-weierstrass-norm-division"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5 Step 3, printed p. 22, supporting analytic comparison; agent reconstruction because the cited PDF is not in this checkout"
+   }
+  },
+  {
+   "text": "We prove by induction on $n$ that every submodule $M\\subseteq D_n^r$, for every finite $r$, has generators $v_1,\\ldots,v_t$ and a constant $K>0$ such that every $v\\in M$ can be written $v=\\sum b_jv_j$ with $\\max_j\\|b_j\\|\\le K\\|v\\|$. Empty generators handle the zero submodule. At $n=0$, choose an $F$-basis of $M\\subseteq F^r$. Row reduction gives a nonsingular square minor; its inverse expresses the basis coefficients as finite linear combinations of coordinates, bounding them by a fixed constant times the maximum coordinate norm. This proves the initial case, including $r=0$. For the inductive step assume the assertion in dimension $n-1$ for all finite ranks; the following two steps establish it in dimension $n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5 Step 3, printed p. 22, supporting analytic comparison; agent reconstruction because the cited PDF is not in this checkout"
+   }
+  },
+  {
+   "text": "First let $I\\subseteq D_n$ be a nonzero ideal. Choose a nonzero element and apply step 2; since the coordinate maps are isometries, it suffices to work in the new coordinates, where $w\\in I$ is monic of degree $d$ as there. If $d=0$, $I=D_n$ and $1$ is a bounded generator. Otherwise put $A=D_{n-1}$. The remainders of members of $I$ on division by $w$ form exactly $M=I\\cap A[T_n]_{<d}\\subseteq A^d$: subtraction of a multiple of $w\\in I$ stays in $I$, and the remainder of a polynomial of degree less than $d$ is itself by uniqueness. The dimension-$n-1$ induction supplies generators $r_j$ of this submodule with controlled coefficients. For $h\\in I$, division gives $h=qw+r(h)$ with $\\|q\\|,\\|r(h)\\|\\le\\|h\\|$, and then $r(h)=\\sum a_jr_j$, $\\max\\|a_j\\|\\le K\\|h\\|$. Thus $w,r_j$ are the required bounded generators of $I$. Transporting them back by the inverse isometry proves the assertion for the original ideal.",
+   "uses": [
+    "lem-trf-tate-weierstrass-norm-division"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5 Step 3, printed p. 22, supporting analytic comparison; agent reconstruction because the cited PDF is not in this checkout"
+   }
+  },
+  {
+   "text": "For submodules of $D_n^r$, now induct on $r$, the case $r=0$ being zero. Project $M$ to the last coordinate, an ideal $I$. Use step 4's bounded ideal generators $g_j$ and choose fixed lifts $v_j\\in M$ of them. For $v\\in M$, express its last coordinate as $\\sum b_jg_j$ with $\\max\\|b_j\\|\\le K_I\\|v\\|$. The vector $z=v-\\sum b_jv_j$ has last coordinate zero and $\\|z\\|\\le\\max(1,K_I\\max_j\\|v_j\\|)\\|v\\|$. The rank-$r-1$ induction applied to the kernel submodule expresses $z$ in fixed generators with the corresponding fixed bound. Together with the $v_j$ these generate $M$ with a uniform bound. If $I=0$, apply the kernel argument directly. This completes both inductions; no closedness hypothesis was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5 Step 3, printed p. 22, supporting analytic comparison; agent reconstruction because the cited PDF is not in this checkout"
+   }
+  },
+  {
+   "text": "Every ideal $I$ of $D_n$ is therefore finitely generated, which is exactly Noetherianity [def-weil-pbc-noetherian-ring]. It is also closed. For $x\\in\\overline I$ choose $y_k\\in I$ with $\\|y_k-x\\|\\le2^{-k}$. Set $z_0=y_0$ and $z_{k+1}=y_{k+1}-y_k$; then $\\|z_{k+1}\\|\\le2^{-k}$. Express each $z_k$ in the fixed bounded generators $g_j$ from the induction, with coefficients $b_{jk}$ satisfying $\\|b_{jk}\\|\\le K\\|z_k\\|$. For every $j$, the partial sums of $b_{jk}$ are Cauchy in $D_n$ by the strong triangle inequality, so converge to $b_j$. Finite distributivity and continuity of multiplication give $x=\\sum_jb_jg_j\\in I$. This proves closedness for every ideal, in particular $JD_n$. Ideals of $D_n/JD_n$ are images of their inverse-image ideals in $D_n$; images of finite generating sets generate, so $C$ is Noetherian as well.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5 Step 3, printed p. 22, supporting analytic comparison; agent reconstruction because the cited PDF is not in this checkout"
+   }
+  },
+  {
+   "text": "The quotient seminorm of $D_n/I$ is a norm for any proper closed ideal $I$: norm zero means a representative lies in $\\overline I=I$. Taking infima over representatives gives scalar homogeneity, the strong triangle inequality and submultiplicativity. Also $\\|1\\|\\le1$; positivity and $\\|1\\|\\le\\|1\\|^2$ give $\\|1\\|=1$. Thus the scalar map is isometric when the quotient is nonzero. It is complete. For a Cauchy sequence of cosets choose a subsequence $c_k$ with successive differences of quotient norm less than $2^{-k-2}$. Lift each difference to $h_k\\in D_n$ of norm less than $2^{-k-1}$; this follows from the definition as an infimum, not from attainment of the infimum. Lifting $c_0$, the sums of these $h_k$ converge in $D_n$, and their image is the limit of this subsequence, hence of the original Cauchy sequence. This applies to $I=JD_n$; if $I=D_n$, the quotient is the complete zero ring allowed in the statement. Scalar compatibility and submultiplicativity make it the asserted complete normed $F$-algebra.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5 Step 3, printed p. 22, supporting analytic comparison; agent reconstruction because the cited PDF is not in this checkout"
+   }
+  },
+  {
+   "text": "For later use prove by induction on $n$ that $D_n/N$ is finite over $F$ for every maximal ideal $N$. For $n=0$ it is $F$. For $n>0$, $D_n$ is not a field: $T_n\\ne0$ and evaluation at all variables zero shows $T_n$ is not a unit. Hence $N\\ne0$. Step 2 supplies, after its $F$-algebra coordinate change, a monic $w\\in N$ of degree $d>0$. Division shows $D_n/(w)$ is free of rank $d$ over $A=D_{n-1}$, with basis $1,T_n,\\ldots,T_n^{d-1}$; existence gives spanning, uniqueness gives independence. Thus the field $L=D_n/N$ is a finite $A$-module. Put $D=\\operatorname{image}(A\\to L)$; $L$ is finite and therefore integral over $D$ by [lem-weil-pbc-finite-algebra-is-integral]. For $0\\ne b\\in D$, a monic relation for $b^{-1}\\in L$, multiplied by $b^{e-1}$, expresses $b^{-1}$ as an element of $D$. Thus $D$ is a field, so $\\ker(A\\to L)$ is maximal. The dimension-$n-1$ induction makes $D/F$ finite, and finite spanning sets for $L/D$ and $D/F$ multiply to a finite spanning set for $L/F$. The coordinate change fixes $F$, so this proves the claim for the original $N$.",
+   "uses": [
+    "lem-trf-tate-weierstrass-norm-division",
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5 Step 3, printed p. 22, supporting analytic comparison; agent reconstruction because the cited PDF is not in this checkout"
+   }
+  },
+  {
+   "text": "Fix now a maximal ideal $\\mathfrak m$ of $C$, and let $N\\subset D_n$ be its inverse image; it is maximal and contains $JD_n$. Step 8 makes $L=D_n/N$ a finite-dimensional field over $F$. Steps 6 and 7 supply its quotient vector-space norm $\\nu$ without assuming it is multiplicative. For the image $a_i$ of $T_i$ one has $\\nu(a_i^k)\\le\\|T_i^k\\|=1$ for every $k\\ge0$. Apply [lem-trf-finite-extension-bounded-powers-polynomial] to obtain monic $q_i(T_i)\\in F[T_i]$ of positive degree with coefficients of norm at most $1$ and $q_i(a_i)=0$. Thus $q_i(T_i)\\in N\\cap P$. This includes $a_i=0$ and inseparable algebraic coordinates.",
+   "uses": [
+    "lem-trf-finite-extension-bounded-powers-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5 Step 3, printed p. 22, supporting analytic comparison; agent reconstruction because the cited PDF is not in this checkout"
+   }
+  },
+  {
+   "text": "For $k\\ge1$ put $Q_k=(q_1(T_1)^k,\\ldots,q_n(T_n)^k)\\subset P$. Each $q_i^k$ remains monic with coefficient norms at most $1$. Divide successively by these polynomials using [lem-trf-tate-weierstrass-norm-division], viewing all other variables as coefficients. The result $R_k(h)$ has degree less than $k\\deg(q_i)$ in each variable, hence is a polynomial in the finite rectangular monomial span. Each division remainder operator is linear and norm nonincreasing. For a polynomial, canceling its highest term by a multiple of the monic divisor strictly decreases degree, so terminates and produces the same unique remainder. On each polynomial monomial, a remainder operator acts only on its own variable power. Thus the separate-variable operators commute on polynomials, kill multiples of the corresponding $q_i^k$, and fix the rectangular span. Density and continuity give these identities on $D_n$. The successive division identities show $h-R_k(h)\\in Q_kD_n$, while $R_k$ kills $Q_kD_n$. Therefore its kernel is exactly $Q_kD_n$. Restriction to $P$ is ordinary multivariable remainder, with kernel $Q_k$. It follows that the inclusion induces the specific isomorphism $P/Q_k\\xrightarrow{\\sim}D_n/Q_kD_n$, with both sides represented uniquely in that same rectangular span. For $n=0$ the empty rectangle is the constants and $Q_k=0$.",
+   "uses": [
+    "lem-trf-tate-weierstrass-norm-division"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5 Step 3, printed p. 22, supporting analytic comparison; agent reconstruction because the cited PDF is not in this checkout"
+   }
+  },
+  {
+   "text": "Put $\\mathfrak p_0=N\\cap P$. Since $Q_1\\subseteq\\mathfrak p_0$, step 10 for $k=1$ identifies the ideal $N/Q_1D_n$ with its inverse-image ideal $\\mathfrak p_0/Q_1$ in $P/Q_1$. Hence $P/\\mathfrak p_0\\to D_n/N$ is an isomorphism and $N=\\mathfrak p_0D_n$: the preimage of $N/Q_1D_n$ is generated by $\\mathfrak p_0$ because the quotient map from $P$ is surjective. In particular $\\mathfrak p_0$ is maximal. Because $J\\subseteq\\mathfrak p_0$, its image $\\mathfrak p=\\mathfrak p_0/J$ is the required maximal inverse image in $B$. For every $k\\ge1$, $Q_k\\subseteq\\mathfrak p_0^k$. Quotienting step 10's isomorphism further by the ideal generated by $\\mathfrak p_0^k+J$ gives $P/(\\mathfrak p_0^k+J)\\xrightarrow{\\sim}D_n/(N^k+JD_n)$, since extension of an ideal commutes directly with finite sums and products of its generators. Equivalently the actual ring map induces $B/\\mathfrak p^k\\xrightarrow{\\sim}C/\\mathfrak m^k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5 Step 3, printed p. 22, supporting analytic comparison; agent reconstruction because the cited PDF is not in this checkout"
+   }
+  },
+  {
+   "text": "For a ring $R$ and maximal ideal $\\mathfrak a$, every element $s\\notin\\mathfrak a$ is invertible modulo $\\mathfrak a^k$: choose $t$ with $st=1-v$, $v\\in\\mathfrak a$, and use $t(1+v+\\cdots+v^{k-1})$ as its inverse modulo $\\mathfrak a^k$. Fractions [def-weil-pbc-localization-at-prime] therefore identify $R/\\mathfrak a^k$ with $R_{\\mathfrak a}/(\\mathfrak aR_{\\mathfrak a})^k$; the inverse sends $r/s$ to the displayed inverse of $s$ times $r$, and the fraction relation ensures it is well defined. Apply this for $B,\\mathfrak p$ and $C,\\mathfrak m$ to step 11. All maps come from $B\\to C$, so they commute with reduction from $k+1$ to $k$. Taking compatible sequences, as in [def-weil-pbc-adic-completion], gives an isomorphism of the two completions; its inverse applies the inverse finite-level isomorphisms componentwise, which are compatible by uniqueness of inverse. Thus it is precisely the map induced by the local homomorphism in the statement. If $C=0$ there is no maximal ideal and this last assertion is vacuous.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5 Step 3, printed p. 22, supporting analytic comparison; agent reconstruction because the cited PDF is not in this checkout"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-tate-weierstrass-norm-division",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-trf-finite-extension-bounded-powers-polynomial",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Theorem 3.5.5 Step 3, printed p. 22, supporting analytic comparison; agent reconstruction because the cited PDF is not in this checkout"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -52,10 +188,38 @@
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.IsDistinguishedAt.algEquivQuotient\", \"Polynomial.IsDistinguishedAt.algEquivQuotient_apply\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"Polynomial.IsDistinguishedAt.algEquivQuotient_symm_apply\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\", \"LaurentSeries.powerSeriesAlgEquiv\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply\"], \"sub\": \"\", \"digest\": \"c5bf5a9d89bcc76d\"}",
    "date": "2026-10-18",
    "verdict": "no match: no TateAlgebra or affinoid occurrence in the Mathlib source search. Hits about formal power series, Weierstrass preparation and scheme closed-point stalks do not compare the polynomial algebra with the restricted Tate algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the polynomial and Tate algebra quotients have canonically isomorphic completed local rings at maximal ideals",
+   "results": "{\"t\": \"2026-10-18T23:09:48Z\", \"tool\": \"leanfinder\", \"query\": \"the polynomial and Tate algebra quotients have canonically isomorphic completed local rings at maximal ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.IsDistinguishedAt.algEquivQuotient\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"Polynomial.IsDistinguishedAt.algEquivQuotient_apply\", \"Polynomial.IsDistinguishedAt.algEquivQuotient_symm_apply\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"LaurentSeries.powerSeriesAlgEquiv\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply\"], \"digest\": \"1847d7c5fa3cfd0d\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: formal-power-series quotient equivalences do not compare the polynomial algebra to the Tate algebra at maximal points; Restricted.lean defines a subring but no such comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|affinoid|restricted.*[Ss]eries",
+   "results": "{\"t\": \"2026-10-18T23:09:42Z\", \"tool\": \"grep\", \"query\": \"TateAlgebra|affinoid|restricted.*[Ss]eries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Combinatorics/Enumerative/Partition/Glaisher.lean\", \"Mathlib/Combinatorics/Enumerative/Partition/Glaisher.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/MvPowerSeries/Restricted.lean\"], \"digest\": \"dcbc137874a3852d\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: formal-power-series quotient equivalences do not compare the polynomial algebra to the Tate algebra at maximal points; Restricted.lean defines a subring but no such comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Weierstrass\"",
+   "results": "{\"t\": \"2026-10-18T23:09:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"Weierstrass\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"WeierstrassCurve.«term_⁄_»\", \"WeierstrassCurve\", \"WeierstrassCurve.a₁\", \"WeierstrassCurve.a₂\", \"WeierstrassCurve.a₃\", \"WeierstrassCurve.a₄\", \"WeierstrassCurve.a₆\", \"WeierstrassCurve.IsElliptic\"], \"digest\": \"5228543ec655dd63\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: formal-power-series quotient equivalences do not compare the polynomial algebra to the Tate algebra at maximal points; Restricted.lean defines a subring but no such comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "nonarchimedean Tate algebra division by a distinguished series with bounded quotient and remainder",
+   "results": "{\"t\": \"2026-10-18T23:09:43Z\", \"tool\": \"leansearch\", \"query\": \"nonarchimedean Tate algebra division by a distinguished series with bounded quotient and remainder\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.weierstrassDiv\", \"PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod\", \"PowerSeries.IsWeierstrassDivision.unique\", \"PowerSeries.term_/ʷ_\", \"PowerSeries.isWeierstrassDivisionAt_iff\", \"PowerSeries.IsWeierstrassDivision.isUnit_of_map_ne_zero\", \"PowerSeries.IsWeierstrassDivision.elim\"], \"digest\": \"c376b00c2213bae8\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: formal-power-series quotient equivalences do not compare the polynomial algebra to the Tate algebra at maximal points; Restricted.lean defines a subring but no such comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-rank-one-formal-comparison",
@@ -89,5 +253,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-affinoid-polynomial-closed-point-comparison",
+  "worker": "stage1",
+  "summary": "Expanded the analytic prerequisites and the closed-point comparison: a bounded-generation double induction proves Noetherianity and closed ideals; finite residue fields follow by Weierstrass induction; polynomial rectangular division identifies every maximal-ideal quotient, hence the induced completions. Two genuine analytic inputs are statement-only nodes. No statement change, Lean or compilation. Temkin and BGR sources are WANTED and the proof is explicitly an agent reconstruction.",
+  "blueprint": "Historical supporting ingredient, not a replacement for the current contracting-correspondence route: completed-local-ring comparison invoked in Temkin Theorem 3.5.5, Step 3, printed p. 22; analytic prerequisites expanded in the split of lem-trf-affinoid-polynomial-closed-point-comparison. Steps 1–8 justify the Tate prerequisites; steps 9–12 give the completed-local-ring comparison supporting the historical normalization branch.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-4b0e914bc",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-4b0e914bc (reviewer sub-agent of L); spot-checked: I read the item's 12 steps, both new nodes, every cited statement and the parent's uses of the item (steps 6-7 of lem-trf-valuation-rank-one-formal-comparison). The statement is unchanged and true. Step 2: the coordinate change T_i->T_i+T_n^{N_i} is an isometry, and after normalizing by a_d the series meets the division node's hypotheses (a_d=1, |a_i|<=1 below d, sup above d <=rho<1). Steps 3-5: the bounded-generation double induction is stated explicitly (D4 OK), and the remainder module is an A-submodule with the max norm. Step 6: closedness by telescoping, Noetherian quotient. Step 7: the quotient norm is complete via infimum lifts, and the zero ring is handled. Step 8: D_n/N is finite over F (D_n/(w) is A-free of rank d, D is a field by the inverse-integrality argument, using the leaf Algebra.IsIntegral.of_finite exactly as stated). Step 9: the quotient norm is F-homogeneous and ultrametric, so the bounded-powers node applies. Step 10: the remainder operators commute and ker R_k = Q_kD_n, so P/Q_k = D_n/Q_kD_n. Steps 11-12: ideal correspondence, then R/a^k = R_a/(aR_a)^k, giving compatible isomorphisms and the induced completion map. New nodes: the Tate Weierstrass division/preparation node is BGR 5.2.1/5.2.2; the bounds on u and u^{-1} come from multiplicativity of the Gauss norm; d=0 checked. The bounded-powers node follows from equivalence of norms over a complete F plus the unique extension of the absolute value; a=0 and inseparable a checked. Both are true, statement-only, strictly smaller than the item and not clauses of it. They are not duplicates of lem-per-weierstrass-preparation-complete-local, lem-per-weierstrass-henselian-cylinder, lem-trf-valuation-grauert-remmert-powerbounded or lem-sfb-padic-integers-integral-closure (my own DAG-wide scan). Temkin and BGR are absent from literature/, recorded WANTED, and the proof is marked agent. No SGA, no tool_uses needed, proof_deps equal the union of uses. The route is inherited: the item is reached from nt-target-zeta-rational only through the reviewed old Temkin normalization chain under lem-trf-local-term-locality, while main-20261015 sk-i-curve-zero follows Varshavsky. That is not a fault of this delivery; maintainer note. Advisory: the new nodes lack lean_audit (lean_status fills it). No fixes."
  }
 }
