@@ -121,12 +121,12 @@
    }
   },
   {
-   "text": "For clause (4), [lem-pur-kflat-change-of-rings] makes $P_B$ a valid K-flat, flat-term representative over $B_T$, and [lem-pur-derived-change-of-rings] computes iterated and direct extension by $(P\\otimes_{A_T}B_T)\\otimes_{B_T}C_T$ and $P\\otimes_{A_T}C_T$. The balanced sheaf tensor construction [def-pur-sheaf-tensor-product] gives the chain isomorphism\n$$ \\alpha_P: (P\\otimes_{A_T}B_T)\\otimes_{B_T}C_T\\longrightarrow P\\otimes_{A_T}C_T,\\qquad(p\\otimes b)\\otimes c\\longmapsto p\\otimes g(b)c, $$\nwith inverse $p\\otimes c\\mapsto(p\\otimes1)\\otimes c$. It commutes with every chain map on $P$; its two sides take quasi-isomorphisms between K-flat representatives to quasi-isomorphisms by the cited derived-change-of-rings theorem. The equivalence $W_{A_T}^{-1}\\mathcal P_{A_T}\\simeq D(A_T)$ in [lem-weil-pbc-site-derived-tensor-descent] therefore descends this natural chain isomorphism to a natural isomorphism $\\alpha$ on $D(A_T)$. In particular its naturality holds also for morphisms represented by roofs, because it holds for both arrows of a roof and therefore for the inverse of its quasi-isomorphism. This proves the displayed naturality equation, without choosing a direct comparison between arbitrary resolutions.",
+   "text": "For clause (4), whisker the two universal derived counits and compose with the homotopy image of the canonical balancing chain isomorphism from [def-weil-pbc-adic-coefficient-datum]. The universal left-derived property in [lem-pur-derived-change-of-rings] lifts this counit to a natural transformation from successive to direct scalar extension. Its factorization equation gives the displayed balancing normalization on every complex. Resolve each derived object by a flat-term K-flat complex using [lem-pc-kflat-resolution]. Identify the recorded ordinary change complex with the explicit tensor complex by its object and map equalities. By [lem-pur-kflat-change-of-rings], the first extension of this resolution is K-flat. All three counits and the balancing chain map are therefore invertible, so the lifted comparison is invertible on this representative and hence on the original object. A normalized competing comparison agrees after composition with the invertible direct-extension counit on every K-flat representative. Naturality along resolution quasi-isomorphisms gives equality on every derived object. Naturality for arbitrary derived morphisms is then the naturality field of this unique natural isomorphism.",
    "uses": [
-    "lem-pur-kflat-change-of-rings",
+    "def-weil-pbc-adic-coefficient-datum",
     "lem-pur-derived-change-of-rings",
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings"
    ],
    "elementary": false,
    "source": {
@@ -135,10 +135,12 @@
    }
   },
   {
-   "text": "If $g=\\mathrm{id}_B$, the map in step 8 is $(p\\otimes b)\\otimes c\\mapsto p\\otimes bc$, precisely the tensor unitor under the usual identity-extension identification. For a further map $h:C\\to D$, both ways to collapse $((P\\otimes_A B)\\otimes_B C)\\otimes_C D$ send $((p\\otimes b)\\otimes c)\\otimes d$ to $p\\otimes h(g(b))h(c)d$: one multiplies $g(b)c$ in $C$ first, the other multiplies their images in $D$ first. These are equal since $h$ is a ring map. All maps in the rebracketing pentagon are built from these balanced maps; applying the same formula to their locally generating pure tensors proves the whole diagram commutes. Equality holds after sheafification and at each complex degree. The localization equivalence of [lem-weil-pbc-site-derived-tensor-descent] sends these equal maps to equal maps, so unit and pentagon coherence hold in $D(T_{\\mathrm{proét}},D)$.",
+   "text": "For the identity comparison, the normalized ordinary scalar adjunction in [def-weil-pbc-bounded-constructible-tower] identifies extension along the identity with the identity functor. Its unit is x ↦ 1 tensor x; balancing identifies 1 tensor (s*x) with s tensor x, so its counit is multiplication. Lift the inverse ordinary unitor using [lem-pur-derived-change-of-rings]. Its factorization equation and [lem-pc-kflat-resolution] make the lift invertible, and its inverse gives the derived unitor. The tensor adjunction determines the ordinary multiplication map uniquely; K-flat representatives determine the derived unitor uniquely. Uniqueness identifies the canonical comparison with this construction on every complex. For g=id, apply the scalar adjunction twice to identify the balancing map with multiplication on local tensor generators. Naturality of the derived unitor and the composition normalization then prove the unit law. For three coefficient maps, compose each associativity path with the invertible final counit on a K-flat representative. Composition normalization and counit naturality reduce the two paths to the images of the balancing cocycle in [def-weil-pbc-adic-coefficient-datum]. That cocycle is the equality of the two scalar products on triple pure tensors. Cancelling the counit and using naturality along K-flat resolutions prove associativity on every derived object.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-kflat-resolution",
+    "def-weil-pbc-adic-coefficient-datum"
    ],
    "elementary": true,
    "source": {
@@ -167,12 +169,13 @@
   "lem-weil-pbc-independent-bounded-flat-kflat",
   "det-def-sp-tate-twist-locally-free",
   "lem-sp-invertible-tensor-scalar-extension",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.md",
-  "place": "Proof paragraphs (1)--(4), expanded with Stacks 06YS, 06YY, 0G7E, 094H, 03EL and 06YQ; paragraph (2) uses stratified local-constant tensor rather than an unjustified global constructible flat model"
+  "place": "Proof paragraphs (1)--(4), expanded with Stacks 06YS, 06YY, 0G7E, 094H, 03EL and 06YQ; paragraph (2) uses stratified local-constant tensor rather than an unjustified global constructible flat model; stage-3 composition uses the universal derived lift and flat K-flat resolutions instead of a separate localization-descent theorem; the identity comparison uses the normalized scalar adjunction and the same universal derived lift; coherence follows by cancelling K-flat counits and applying the recorded balancing cocycle, without the separate localization-descent node"
  },
  "mathlib_searches": [
   {
@@ -315,7 +318,6 @@
   "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
   "lem-weil-pbc-locally-constant-tensor",
   "lem-weil-pbc-independent-bounded-flat-kflat",
-  "lem-weil-pbc-site-derived-tensor-descent",
   "lem-weil-proetale-constant-sheaf-stalk",
   "lem-weil-pbc-site-sheafification-sections-local",
   "lem-weil-pbc-left-exact-site-inverse-image-tensor",
@@ -391,5 +393,15 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "Repair of returned a4717a1495b7: retain the published scalarExtension; state actual K-flat counit computations and morphism maps, constructibility and unchanged Tor bounds without flatness, ordinary rank-one extension, canonically normalized signed Tate base change with Kummer exponent independence, and uniquely normalized composition, its naturality, identity unitor and associativity coherence. All helpers belong to the four clauses of this definition node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261019T192734-L-1861613",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
