@@ -17414,3 +17414,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:26 L: merged deliver/Y9/Sheaf.AlgebraicGeometry.DirectImageFinitenessInputHolds (stage 3; reviewer PASS; first push; landing 20261019T112626-L-3963417 (proof); batch 20261019T112432; modules 1; new nodes 0)
 - 11:26 L: merged deliver/Z5/Sheaf.Paper.FiniteTypeExceptionalInverseImage (stage 3; reviewer PASS; first push; landing 20261019T112627-L-3963740 (proof); batch 20261019T112432; modules 1; new nodes 0)
 - 11:26 L: merged deliver/Z8/Sheaf.CategoryTheory.FullyFaithfulCounitDescent (stage 3; reviewer PASS; first push; landing 20261019T112628-L-3964086 (proof); batch 20261019T112432; modules 1; new nodes 0)
+- 11:26 L: merged deliver/Z8/Sheaf.Paper.ExceptionalFiniteSupportRealization (stage 3; reviewer PASS; first push; landing 20261019T112629-L-3964401 (proof); batch 20261019T112432; modules 1; new nodes 0)
