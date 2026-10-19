@@ -16,23 +16,11 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-asd-etale-finite-twist-pullback] with $A=B$, $m=N$, $T=Y$: $NB=0$, and $N$ is invertible on $Y$ because it is invertible in $k$. Thus $F=B_Y(r)$ is locally free of rank one over $B_Y$. The shifts of [def-weil-abstract-derived-category] cancel: applying $[-d]$ to a map $F[d]\\to F[d]$ and $[d]$ to a map $F\\to F$ gives inverse correspondences, preserving composition, and they preserve scalar multiplication because the shift functors are $B$-linear [lem-weil-linear-abelian-derived-category]. By [lem-weil-pbc-derived-single-fully-faithful], maps between these degree-zero sheaves in the derived category are exactly module-sheaf maps. Choose local bases $e_i$ on an etale trivializing cover $U_i\\to Y$. A module-sheaf endomorphism $f$ is uniquely given on $U_i$ by $f(e_i)=a_i e_i$, $a_i\\in B_Y(U_i)$, since on every further etale restriction $f(te_i)=t f(e_i)$. On $U_i\\times_YU_j$ write $e_j=u_{ij}e_i$ with $u_{ij}$ a unit (the inverse change of basis supplies its inverse). Linearity gives $a_j u_{ij}=u_{ij}a_i$, hence $a_j=a_i$ by commutativity and cancellation of the unit. The sheaf axiom for $B_Y$ glues the $a_i$ to a unique $a\\in B_Y(Y)$. Conversely each such $a$ acts on $F$, so this gives the scalar bijection $\\Gamma(Y_{\\mathrm{et}},B_Y)\\to\\operatorname{End}_{D(Y_{\\mathrm{et}},B)}(L)$. Addition, composition and the identity become addition, multiplication and $1$ of sections by the same basis calculation.",
+   "text": "The constant coefficient module sheaf has scalar endomorphisms. On a connected nonempty scheme the constant module sheaf functor is fully faithful: the unit of its adjunction to evaluation at the terminal etale object is the constant-section map, whose bijectivity is the module-valued version of [lem-weil-pbc-constant-sheaf-sections-connected]. Apply [lem-coef-connected-module-constant-sheaf-fully-faithful], attached to the already proved library declaration AlgebraicGeometry.Scheme.fullyFaithfulModuleConstantSheaf in WeilConjectures.AlgebraicGeometry.Sites.ModulePointFunctions. In ModuleCat B every endomorphism of B is multiplication by its value at 1, including B=0; transport this bijection through the linear constant-sheaf functor.",
    "uses": [
-    "lem-asd-etale-finite-twist-pullback",
-    "lem-weil-pbc-derived-single-fully-faithful",
-    "def-weil-abstract-derived-category",
-    "lem-weil-linear-abelian-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XS, lemma-negative-exts (2), degree-zero full faithfulness; agent-written local-basis calculation using the Tate-line statement and the sheaf axiom"
-   }
-  },
-  {
-   "text": "The underlying additive sheaf of rings $B_Y$ is the constant sheaf with value the abelian group $(B,+)$. Since $Y$ is nonempty and connected, [lem-weil-pbc-constant-sheaf-sections-connected] identifies its global sections with $B$, and the identification is induced by the constant-section map. The local calculation in Step 1 is compatible with addition and multiplication, so it upgrades to a ring isomorphism $B\\xrightarrow{\\sim}\\operatorname{End}_{D(Y_{\\mathrm{et}},B)}(L)$, exactly the displayed scalar map. This proves the first assertion, including the zero ring and the case $r=0$.",
-   "uses": [
-    "lem-weil-pbc-constant-sheaf-sections-connected"
+    "lem-weil-pbc-constant-sheaf-sections-connected",
+    "def-weil-linear-category",
+    "lem-coef-connected-module-constant-sheaf-fully-faithful"
    ],
    "elementary": false,
    "source": {
@@ -41,21 +29,35 @@
    }
   },
   {
-   "text": "Let $G$ and $v$ be as in the second assertion. By the $B$-linearity in [def-weil-linear-category] of $G$ between the $B$-linear categories of [lem-weil-linear-abelian-derived-category], and Step 2, write $v=b\\,1_L$ and obtain $G(v)=b\\,1_{G(L)}$. Transporting along the chosen isomorphism $G(L)\\cong B_{\\operatorname{Spec}k}$ gives the scalar endomorphism $b\\,1_{B_{\\operatorname{Spec}k}}$. Apply Steps 1–2 to the nonempty connected scheme $\\operatorname{Spec}k$: its endomorphism ring is $B$, so the inverse of this scalar endomorphism corresponds to some $c\\in B$ and satisfies $bc=1=cb$. Thus $b$ is a unit in $B$.",
+   "text": "The structure morphism Y -> Spec k maps the unit N in k to a unit in Gamma(Y,O_Y). Take the named signed multiplication projection p of finiteEtaleTwistPullbackData, the structured API of [lem-asd-etale-finite-twist-pullback]. For F=B_Y(r), the isomorphisms p(r,-r) and p(-r,r), followed by the exponent-zero identification with B_Y, make B_Y(-r) a two-sided tensor inverse. Tensoring on the left with F is consequently a linear equivalence: its inverse tensors with B_Y(-r), and the unit and counit are the associator, the two multiplication isomorphisms and the unitors. The library TensorInverse.fullyFaithfulTensorLeft implements this elementary construction. Transfer the scalar-endomorphism bijection on B_Y along this functor and then the right unitor F tensor B_Y -> F. No local bases or gluing of endomorphisms are required.",
    "uses": [
-    "def-weil-linear-category",
-    "lem-weil-pbc-constant-sheaf-sections-connected",
-    "lem-weil-linear-abelian-derived-category"
+    "lem-asd-etale-finite-twist-pullback",
+    "def-weil-linear-category"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-dualizing.md",
-    "place": "Agent-written scalar-unit argument for the extracted item; parent proof paragraph beginning \"The Tate rank-one object\" supplies its rank-one context"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+    "place": "Tate rank-one reduction; agent-written tensor equivalence argument using the signed multiplication clause of lem-asd-etale-finite-twist-pullback"
    }
   },
   {
-   "text": "The scalar map $c\\mapsto c\\,1_L$ is multiplicative, and the scalar corresponding to $b^{-1}$ is a two-sided inverse to $v=b\\,1_L$. Hence $v$ is an isomorphism whenever $G(v)$ is an isomorphism.",
-   "uses": [],
+   "text": "By [lem-weil-pbc-derived-single-fully-faithful], the degree-zero embedding is fully faithful. This functor is B-linear by the induced derived linear structure [lem-weil-linear-abelian-derived-category]. Transfer the scalar bijection through it and then through the fully faithful linear shift [d] of [def-weil-abstract-derived-category]. Transfer through a fully faithful linear functor works because its map on endomorphisms is a bijection and sends b times the identity to b times the identity. This proves the first assertion. The same argument on the constant sheaf over Spec k, with the derived-unit comparison singleFunctorObjUnitIso, computes the scalar endomorphisms of the constant coefficient complex.",
+   "uses": [
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-weil-linear-abelian-derived-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XS, lemma-negative-exts (2), degree-zero full faithfulness; agent-written local-basis calculation using the Tate-line statement and the sheaf axiom"
+   }
+  },
+  {
+   "text": "Transport the scalar bijection of the constant coefficient complex through G(L) isomorphic to B_Spec(k). Linearity gives G(b id_L)=b id_G(L). Since both scalar maps are bijective, G.map from End(L) to End(G(L)) is injective and surjective. Lift the inverse of G(v) to w in End(L); applying G to v composed with w and w composed with v gives the identity. Injectivity gives v composed with w=id and w composed with v=id, so v is an isomorphism. This avoids choosing a scalar inverse as a unit. All constructions include the zero ring and r=0.",
+   "uses": [
+    "def-weil-linear-category"
+   ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-dualizing.md",
@@ -67,6 +69,7 @@
   "def-weil-abstract-derived-category",
   "def-weil-linear-category",
   "lem-asd-etale-finite-twist-pullback",
+  "lem-coef-connected-module-constant-sheaf-fully-faithful",
   "lem-weil-linear-abelian-derived-category",
   "lem-weil-pbc-constant-sheaf-sections-connected",
   "lem-weil-pbc-derived-single-fully-faithful"
@@ -74,7 +77,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-dualizing.md",
-  "place": "Agent-written proof of the extracted scalar claim. The parent paragraph beginning \"The Tate rank-one object\" supplies the context, not the scalar argument; degree-zero comparison follows Stacks Tag 06XS and constant sections follow Tag 03P5."
+  "place": "G3 Lean proof, 2026-10-19: scalar endomorphisms transported through the constant-sheaf functor, tensoring with the Tate line, the degree-zero embedding and shift. The two-sided tensor inverse is obtained from the signed multiplication clause of lem-asd-etale-finite-twist-pullback. Invertibility is reflected by lifting the inverse through the resulting bijection on endomorphisms. This replaces the agent-written local-basis proof plan, and preserves the unit route."
  },
  "mathlib_searches": [
   {
@@ -211,5 +214,15 @@
   "group": "Q15",
   "result": "pass",
   "note": "Clause-by-clause match with the node: k alg. closed; N>=1 invertible in k; B comm ring with (N:B)=0 (the unique Z/N-algebra structure, via finiteEtaleTwistScalar); Y.Over Spec k with ConnectedSpace (nonempty+connected); L = shiftFunctor d of singleFunctor 0 of finiteEtaleTateSheaf B N Y hB r (r:N; ofNat branch = tensor powers, 0 = constant sheaf); Bijective (b ↦ b • 𝟙 L) using DerivedCategory.instLinear; ∀ G [G.Linear B] (map_smul only, as the node defines), Nonempty (G L ≅ constantComplex B (Spec k)) (unit sheaf in degree 0; conclusion independent of the iso), ∀ v, IsIso (G.map v) → IsIso v. B : Type (u+1) is the recorded DerivedCategoryModule encoding. Edge cases B=0, N=1, r=0, d of either sign, Y=Spec k covered; empty Y excluded as in the node. Helper has real data, only sorry proof, source/blueprint docstrings with the 4 proof steps, non-public proof-dep imports per stage-2 rule 7, lines <=91 chars, node changed only in lean, lean.statement verbatim, no name clash. nt_compile --json (local side overlay): rc 0, no diagnostics, 10.6 s. No findings beyond the cosmetic ones (redundant hN, no Main-declarations list)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261019T154010-L-3025614",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

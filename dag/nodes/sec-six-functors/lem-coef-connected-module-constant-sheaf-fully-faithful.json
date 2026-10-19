@@ -1,0 +1,111 @@
+{
+ "id": "lem-coef-connected-module-constant-sheaf-fully-faithful",
+ "kind": "statement",
+ "title": "The module-valued constant sheaf functor on a connected scheme is fully faithful",
+ "statement": "Let X be a scheme with nonempty connected underlying topological space [def-weil-connected-scheme], and let B be any commutative ring. On its small etale site, the constant-sheaf functor [def-weil-pbc-constant-sheaf] from B-modules to sheaves of B-modules [def-weil-pbc-etale-sheaves] is fully faithful: every morphism between two constant module sheaves comes from a unique B-linear map of the coefficient modules. In the Lean universe convention, X : Scheme.{u} and B : Type (u+1). No finiteness, field, or nontriviality assumption on B is required.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03P5, remark-constant-locally-constant-maps, and the constant-sheaf/global-sections adjunction; exact existing Lean proof: WeilConjectures/AlgebraicGeometry/Sites/ModulePointFunctions.lean, fullyFaithfulModuleConstantSheaf, lines 210-220"
+ },
+ "stmt_deps": [
+  "def-weil-connected-scheme",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "The module-valued constant sheaf has the same locally constant section description as its underlying additive group. By [lem-weil-pbc-constant-sheaf-sections-connected], for every B-module M the canonical constant-section map M -> Gamma(X,underline M) is bijective. Its restriction maps and the canonical map respect B-scalar multiplication, so this is an isomorphism of B-modules. Equivalently, the source proof shows injectivity by evaluation in the module sheaf of functions on points, and surjectivity because sheafification is locally constant and a locally constant function on the connected nonempty X is constant.",
+   "uses": [
+    "lem-weil-pbc-constant-sheaf-sections-connected"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The preceding isomorphism is exactly the unit at M of constantSheafAdj with the final etale object X -> X. Thus every component of the unit is an isomorphism, hence so is the unit natural transformation. Apply the general adjunction fact fullyFaithfulLOfIsIsoUnit. This is the already-proved definition fullyFaithfulModuleConstantSheaf in the source library; no new Lean assertion or proof hole is introduced.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-sheaf-sections-connected"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03P5 plus the elementary adjunction criterion; existing completed source-library proof in ModulePointFunctions.lean, lines 157-220"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The constant module sheaf functor on a connected scheme is fully faithful",
+   "results": "LightCondMod.LocallyConstant.fullyFaithfulFunctor; CategoryTheory.Sheaf.isConstant_of_forget; CategoryTheory.instFullFunctorConstOfIsConnected; CategoryTheory.constantSheaf. No result specializes to the small etale topology of a connected scheme.",
+   "date": "2026-10-19",
+   "verdict": "no Mathlib match; exact proved source-library declaration fullyFaithfulModuleConstantSheaf found by rg"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheaf",
+   "results": "CategoryTheory.constantSheafAdj, CategoryTheory.constantCommuteCompose and constant-sheaf essential-image lemmas; none computes connected etale constant sections.",
+   "date": "2026-10-19",
+   "verdict": "no Mathlib match; the adjunction supplies the elementary last step"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*[Ff]ull|fullyFaithfulLOfIsIsoUnit",
+   "results": "CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit (Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean:143), local-site and condensed-site results, but no scheme-connected statement. Source rg found WeilConjectures/AlgebraicGeometry/Sites/ModulePointFunctions.lean:210.",
+   "date": "2026-10-19",
+   "verdict": "exact match in source library, not Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConnectedTateLineEndomorphisms",
+  "date": "2026-10-19",
+  "group": "G3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-finite-dualizing",
+   "place": "Affine-space Tate rank-one reduction, scalar-endomorphism calculation used by lem-coef-connected-tate-line-endomorphisms",
+   "via": [
+    "lem-coef-connected-tate-line-endomorphisms"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Sites.ModulePointFunctions",
+  "declaration": "AlgebraicGeometry.Scheme.fullyFaithfulModuleConstantSheaf",
+  "statement": "noncomputable def fullyFaithfulModuleConstantSheaf (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [ConnectedSpace X] : (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).FullyFaithful",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-19",
+  "existing": true,
+  "note": "Attaches a completed existing declaration. The module is already in the library and is not delivered or changed."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261019T154010-L-3025614",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261019T154010-L-3025614",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
