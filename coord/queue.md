@@ -23,6 +23,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalBounded` | 3 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology` | 3 | 1 | proof | route |
 | `Sheaf.PoincareDuality.ProperProjectionFormulaBounded` | 3 | 1 | proof | route |
+| `Sheaf.AlgebraicGeometry.OrdinarySupportedCartierKummer` | 4 | 2 | proof | route |
 | `Sheaf.WeilSheaf.AdicFiniteCoefficientBound` | 4 | 1 | proof | route |
 | `Sheaf.WeilSheaf.CohomologyGeometricConjugacy` | 4 | 1 | proof | route |
 | `Sheaf.WeilSheaf.CompactSupportFiniteCoefficientComparison` | 4 | 1 | proof | route |
@@ -491,7 +492,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.EtaleShriekOpenExchangeAdjoint` | 4 | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.EtaleSumFlatKFlat` | 4 | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.EtaleSupportMapCompatibility` | 4 | 1 | proof | 3 |
-| `Sheaf.AlgebraicGeometry.OrdinarySupportedCartierKummer` | 4 | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.QuasiFiniteCompactSupportExact` | 4 | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.ShriekTensorComposition` | 4 | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.VectorBundleZeroSection` | 4 | 3 | proof | 3 |
