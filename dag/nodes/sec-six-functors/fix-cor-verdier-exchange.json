@@ -17,7 +17,9 @@
  },
  "stmt_deps": [
   "def-fix-six-functor-datum",
-  "def-weil-exceptional-adjoint-admissibility"
+  "def-weil-exceptional-adjoint-admissibility",
+  "def-sf-verdier-exchange-data",
+  "lem-weil-structure-direct-images-constructible"
  ],
  "proof": [
   {
@@ -188,5 +190,31 @@
   "group": "Q54",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-aa3f972af (reviewer sub-agent of L); spot-checked: I read the whole item. It matches the master source (sk-prop-sf-biduality-general/fix-cor-verdier-exchange.md, order 2117) and main-20261015 (sk-thm-sf-package .md/.proof.md) word for word, and the statement is unchanged and not weakened. Compared with the side tree, the delivery only splits old step 3 into steps 3, 4 and 5 (text unchanged), adds step sources (the files exist), sets same_as and status split, and updates split_report. Step 1: the Hom chain uses the composition law of def-fix-six-functor-datum and thm-sf-comp-composition (an isomorphism, so its direction does not matter) and the adjunctions of fix-prop-adjunctions(2) for f, a_Y and a_X, all admissible by hypothesis. The Yoneda mate agrees with the conjugate isomorphism stated in fix-prop-adjunctions(3). Step 2: Λ is in D^b_ctf, and ω_Y is in D^b_ctf by fix-prop-adjunctions(2) and the finite-Tor sentence of def-weil-exceptional-inverse-image. fix-lem-tensor-adjunction (f admissible, M and N in ctf) is used in the inverse direction, and the types check. Step 3 (naturality) holds by the tensor-adjunction's naturality plus bifunctoriality. Step 4: I type-checked the mate equation; both sides map C_X Rf_A^! ω_{Y,A} to ω_{X,B}. The comparisons exist by the Λ-admissibility clause, units and counits are preserved by lem-fix-operation-reduction, and the step stays within the specified comparisons. Step 5 (shifts) is correct. Small cases: f=id gives the identity; M=0 or X empty gives 0 on both sides; Y=Spec k gives global duality. Route: sk-def-sf-operations, sk-thm-sf-comp-composition and sk-lem-sf-mate are in the transitive route. I accept the tool use lem-fix-operation-reduction (sk-prop-sf-pf-reduction), which is declared. proof_deps equals the union of uses, there is no cycle, and there are no new nodes. sk-thm-sf-verdier-exchange and thm-sf-verdier-exchange are more general (no admissibility hypothesis), so recording them in same_as is correct. No SGA. Minor: the report mentions a citations.json that is not in the delivery, and steps 4 and 5 lack the 'Step k:' prefix. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdmissibleVerdierExchange",
+  "declaration": "WeilConjectures.AdmissibleVerdierExchange.verdier_exchange",
+  "declarations": [
+   "WeilConjectures.AdmissibleVerdierExchange.baseUnit",
+   "WeilConjectures.AdmissibleVerdierExchange.atStage",
+   "WeilConjectures.AdmissibleVerdierExchange.admissible",
+   "WeilConjectures.AdmissibleVerdierExchange.Package",
+   "WeilConjectures.AdmissibleVerdierExchange.Assertion",
+   "WeilConjectures.AdmissibleVerdierExchange.verdier_exchange"
+  ],
+  "file": "lean/Sheaf/Paper/AdmissibleVerdierExchange.lean",
+  "statement": "theorem verdier_exchange (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum) (E : Type u) [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n) (_S : SixFunctorOperationDatum D C E n hn) {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] : Assertion C.l C.Qbar D C.different f",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-13bccf939",
+  "group": "NN",
+  "result": "pass",
+  "note": "Re-delivery of 2f2560c1e463 (RETURNed only for H2). The Lean module is byte-identical (sha 291e865f) and compiles cleanly via nt_compile --json in 13.6 s; the first try timed out at load ~280. The H2 repair is correct: new def node def-sf-verdier-exchange-data has existing:true on Sheaf.Paper.VerdierExchange and owns 33 plain decls (StageData…integralAlphaRealization). All exist and a probe compiles cleanly. The statement is verbatim, the theorem/Package/Assertion are excluded and no .choose is used. It covers every VerdierExchange decl the item uses, there is no other owner, and the item cites the node instead of sk-thm-sf-verdier-exchange. Mechanical finding: lem-weil-structure-direct-images-constructible is genuine. baseUnit uses the theorem finiteFieldDatumPrimeUnit itself (IsUnit (l:k)), which is needed to state the admissibility predicates, so PASS on that point. Hypotheses, conclusion, domain and edge cases are unchanged and were checked again. Advisories: the coefficient notions reach the item only through the def node's own stmt_deps, and _S is unused. The units diffs are base drift."
  }
 }
