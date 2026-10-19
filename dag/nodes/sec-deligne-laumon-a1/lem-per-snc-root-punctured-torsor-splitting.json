@@ -18,9 +18,181 @@
   "def-weil-pbc-mv-polynomial-ring",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "A finite group has positive order, so $n\\geq1$. Choose a generator $\\zeta$ of $\\mu_n(R)$ using the strict-local roots-of-unity theorem. Its powers other than $1$ have unit difference from $1$, giving exactly the hypotheses of the simultaneous-root structure theorem. That theorem makes the displayed $B$ a strictly henselian regular Noetherian local domain, finite free over $R$, and makes $E=\\operatorname{Frac}(B)$ a finite separable extension of $K=\\operatorname{Frac}(R)$. We use only these structure assertions, not any quotient classification or torsor splitting.",
+   "uses": [
+    "lem-sbc-strict-local-roots-of-unity",
+    "lem-per-snc-root-algebra-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1, printed pp.133--134, simultaneous-root algebra and essential surjectivity; algebraic expansion of the Abhyankar input."
+   }
+  },
+  {
+   "text": "Write $P_B=P\\times_U U_B$. Pullback of a finite etale $G$-torsor is again such a torsor, so $P_B\\to U_B$ is finite etale and surjective. Apply the field-torsor decomposition to $P_K=P\\times_U\\operatorname{Spec}K$: its coordinate algebra is $\\prod_j L_j$, where each $L_j/K$ is finite Galois of degree dividing $n$. On base change to $E$ this becomes a product $D=\\prod_a F_a$ of finite separable extensions of $E$, again by the field-torsor theorem applied to $(P_B)_E$. Each $F_a$ is a field factor of some $L_j\\otimes_K E$. The decompositions here are decompositions of the actual generic fibres over their structural maps.",
+   "uses": [
+    "lem-sbc-galois-cover-base-change",
+    "lem-sbc-field-torsor-galois-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1, printed pp.133--134, simultaneous-root algebra and essential surjectivity; algebraic expansion of the Abhyankar input."
+   }
+  },
+  {
+   "text": "The localizations of the regular local ring $B$ are regular local, so $B$ is a regular ring and hence normal. For each $a$, let $C_a$ be its integral closure in $F_a$. The finite-separable integral-closure theorem makes each $C_a$ finite over $B$; put $C=\\prod_a C_a$. This constructs a finite normalization in the generic algebra $D$. In particular no excellence assumption is being inserted: the finiteness theorem requires only Noetherian normality and separability, all established here.",
+   "uses": [
+    "lem-weil-pbc-regular-local-localization",
+    "lem-weil-pbc-regular-ring-normal",
+    "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0AFS (lemma-localization-of-regular-local-is-regular), 0567 (lemma-regular-normal), 032L (lemma-Noetherian-normal-domain-finite-separable-extension)."
+   }
+  },
+  {
+   "text": "Let $T$ be the finite $B[1/f]$-algebra of $P_B$. The generic-algebra injection theorem embeds $T$ into some finite etale $E$-algebra. Thus nonzero elements of $B[1/f]$ act injectively on $T$, so the canonical map $T\\to T\\otimes_{B[1/f]}E=D$ is injective. This $D$ is its total quotient algebra: all nonzero base elements are nonzerodivisors, and if an element $z\\in T$ had a zero field coordinate in $D$, a nonzero idempotent $e$ supported on that coordinate could be written $t/b$ with $t\\in T$, $0\\ne b\\in B[1/f]$, giving $0\\ne t$ and $zt=0$. Hence every nonzerodivisor of $T$ is invertible in $D$. By etale ascent of normality $T$ is normal, since $B[1/f]$ is regular and normal. Normal rings are integrally closed in their total quotient rings. The finite-algebra integrality theorem makes $T$ integral over $B[1/f]$. Since $T$ is integral over $B[1/f]$, the integral closure of $B[1/f]$ in $D$ is therefore $T$: an element integral over the base is also integral over $T$, so lies in $T$, and the reverse inclusion is immediate. Integral closure commutes with localization, giving $C[1/f]=T$ and thus $\\operatorname{Spec}C\\times_{\\operatorname{Spec}B}U_B\\cong P_B$ over $U_B$.",
+   "uses": [
+    "lem-sbc-finite-etale-open-generic-algebra",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-normal-ring-integrally-closed-total",
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-weil-pbc-regular-ring-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0307 (lemma-integral-closure-localize); Tag 034M (lemma-normal-ring-integrally-closed); etale ascent of normality."
+   }
+  },
+  {
+   "text": "For each $i$, the regular-parameter quotient theorem makes $R/(t_i)$ regular local, with the remaining $t_j$ extending to parameters there. The strict-henselian quotient theorem makes $R/(t_i)$ strictly henselian as well. The image of $\\zeta$ retains its root and unit-difference identities. Apply the same simultaneous-root structure theorem to this quotient and the $r-1$ remaining parameters. Its algebra is exactly\n$$B/(x_i)\\cong (R/(t_i))[x_j:j\\ne i]/(x_j^n-\\bar t_j:j\\ne i).$$\nIt is a domain, finite free over $R/(t_i)$. Consequently $\\mathfrak p_i=(t_i)$ and $\\mathfrak q_i=(x_i)$ are prime, $\\mathfrak q_i\\cap R=\\mathfrak p_i$, and both parameters are nonzerodivisors. These assertions also cover $r=1$, where the quotient root construction has no variables.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-weil-pbc-strictly-henselian-quotient",
+    "lem-per-snc-root-algebra-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1, printed pp.133--134, simultaneous-root algebra and essential surjectivity; algebraic expansion of the Abhyankar input."
+   }
+  },
+  {
+   "text": "Put $V_i=R_{\\mathfrak p_i}$ and $A_i=B_{\\mathfrak q_i}$. The principal-prime localization criterion says that both are DVRs, with uniformizers $t_i$ and $x_i$. In fact $B\\otimes_R V_i=A_i$: after quotient by $x_i$, this finite $V_i$-algebra is the generic fibre of the domain $B/(x_i)$ over $R/(t_i)$, hence is a field. Every maximal ideal over the maximal ideal of $V_i$ contains $x_i$, since $t_i=x_i^n$. Thus there is exactly one maximal ideal, and the displayed finite algebra is already local, with localization $A_i$. It follows that $V_i\\to A_i$ is finite and faithful, with fraction fields $K\\to E$, and\n$$\\mathfrak m_{V_i}A_i=(t_i)=(x_i^n)=\\mathfrak m_{A_i}^{n}.$$\nIn particular both primes have height one. Any height-one prime of $B$ containing $f=\\prod_i x_i^n$ contains some $x_i$ and therefore equals $\\mathfrak q_i$.",
+   "uses": [
+    "lem-sbc-regular-principal-prime-localization-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1, printed pp.133--134, simultaneous-root algebra and essential surjectivity; algebraic expansion of the Abhyankar input."
+   }
+  },
+  {
+   "text": "Fix $i$ and $j$. The Galois degree bound for normalization over a DVR applies to $L_j/K$ over $V_i$, because $[L_j:K]\\mid n$. At every prime of the integral closure of $V_i$ in $L_j$ above $\\mathfrak m_{V_i}$, both ramification index and residue degree divide $n$. This closure is finite by the separable integral-closure theorem. The integer $n$ is a unit in $V_i$, so these are exactly the invertibility and divisibility hypotheses required by the DVR tame tensor-factor lemma.",
+   "uses": [
+    "lem-sbc-dvr-galois-normalization-ramification-dvd",
+    "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EB (lemma-galois-conclusion), with Tag 032L for finiteness."
+   }
+  },
+  {
+   "text": "For a factor $F_a$ of $L_j\\otimes_K E$, it is also a maximal field quotient of $L_j\\otimes_{V_i} A_i$: in this tensor product $t_i$ is invertible through $L_j$, so it equals $L_j\\otimes_K E$. The map $A_i\\to F_a$ is injective. Its integral closure $S_a$ is finite because $A_i$ is a Noetherian normal DVR and $F_a/E$ is finite separable. Apply the DVR tame tensor-factor unramifiedness theorem with base DVR $V_i$, root DVR $A_i$, and exponent $n$. By Step 6 the root index is exactly $n$; Step 7 supplies both divisibilities. It yields $\\Omega_{(S_a)_Q/A_i}=0$ for every prime $Q$ above $\\mathfrak m_{A_i}$. Integral-closure localization identifies $S_a=C_a\\otimes_B A_i$. Hence for every prime $\\mathfrak Q$ of $C_a$ above $\\mathfrak q_i$ one has $\\Omega_{(C_a)_{\\mathfrak Q}/B_{\\mathfrak q_i}}=0$.",
+   "uses": [
+    "lem-sbc-dvr-tame-tensor-factor-unramified",
+    "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+    "lem-weil-pbc-integral-closure-commutes-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BRM (lemma-abhyankar), through the cited DVR tensor-factor theorem; Tag 0307 for localization."
+   }
+  },
+  {
+   "text": "For a height-one prime $\\mathfrak q$ of $B$ outside $V(f)$, Step 4 identifies the normalization with the finite etale cover $P_B$, so it is etale there. Each $C_a$ is finitely presented over $B$ because it is finite over the Noetherian base. The pointwise etale criterion therefore gives zero relative differentials at each such prime. Every remaining height-one prime is some $\\mathfrak q_i$ by Step 6, and Step 8 gives the vanishing of the corresponding relative differential modules. Apply finite-normalization codimension-one purity separately to $B\\subset C_a\\subset F_a$. Its hypotheses are regular Noetherian domain $B$, finite separable $F_a/E$, finite $C_a$, and precisely these vanishing statements. Each $\\operatorname{Spec}C_a\\to\\operatorname{Spec}B$ is etale. The finite-product etale theorem then makes $N=\\operatorname{Spec}C\\to\\operatorname{Spec}B$ finite etale.",
+   "uses": [
+    "lem-per-finite-normalization-codimension-one-purity",
+    "lem-weil-pbc-etale-algebra-finite-product",
+    "pqf-lem-finite-fp-locnoeth",
+    "lem-sc-etale-at-prime-flat-unramified-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BMB (pione-lemma-purity), applied to the finite normalization; finite products of etale algebras."
+   }
+  },
+  {
+   "text": "The map $N\\to\\operatorname{Spec}B$ is surjective. Indeed its finite image is closed, and contains the generic point because $P_B$ is a nonempty torsor over the nonempty $U_B$; the generic algebra $D$ is nonzero. Since $B$ is a domain, a closed set containing its generic point is all of $\\operatorname{Spec}B$. Apply the etale-section theorem for finite algebras over a strictly henselian ring with $H=A=B$. It gives a section $s:\\operatorname{Spec}B\\to N$. Restricting $s$ to $U_B$ and composing with the isomorphism of Step 4 gives a section $s_U:U_B\\to P_B$.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-sbc-finite-strict-henselian-algebra-etale-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1, printed pp.133--134, simultaneous-root algebra and essential surjectivity; algebraic expansion of the Abhyankar input."
+   }
+  },
+  {
+   "text": "Pull the torsor identity $G\\times P_B\\cong P_B\\times_{U_B}P_B$, $(g,p)\\mapsto(gp,p)$, back along $s_U$ in the second factor. Its source becomes $G\\times U_B=\\coprod_{g\\in G}U_B$ and its target becomes $P_B$. Thus the resulting isomorphism has on the $g$-th summand the explicit map $u\\mapsto g\\,s_U(u)$ and commutes with the structure maps to $U_B$. Inverting it is the requested isomorphism. This is an application of the defining torsor identity, with no connectedness hypothesis on the total space. If $r=0$, all boundary-prime steps are empty, $B=R$ and $f=1$, and the same section argument applies directly to $P$; if $n=1$, the roots and the one-element torsor give the identity case.",
+   "uses": [
+    "def-sbc-normal-dominant-galois"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1, printed pp.133--134, simultaneous-root algebra and essential surjectivity; algebraic expansion of the Abhyankar input."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-strict-local-roots-of-unity",
+  "lem-per-snc-root-algebra-structure",
+  "lem-sbc-galois-cover-base-change",
+  "lem-sbc-field-torsor-galois-components",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+  "lem-sbc-finite-etale-open-generic-algebra",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "lem-weil-pbc-normal-ring-integrally-closed-total",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-strictly-henselian-quotient",
+  "lem-sbc-regular-principal-prime-localization-dvr",
+  "lem-sbc-dvr-galois-normalization-ramification-dvd",
+  "lem-sbc-dvr-tame-tensor-factor-unramified",
+  "lem-per-finite-normalization-codimension-one-purity",
+  "lem-weil-pbc-etale-algebra-finite-product",
+  "pqf-lem-finite-fp-locnoeth",
+  "lem-sc-etale-at-prime-flat-unramified-criterion",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-sbc-finite-strict-henselian-algebra-etale-section",
+  "def-sbc-normal-dominant-galois"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX Proposition 2.1, printed pp.133--134, algebraic expansion of the essential-surjectivity input using Stacks 0BRM and 0BMB, with finite normalization by 032L."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,10 +228,45 @@
    "results": "Logged results: Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, StandardEtalePair, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, StandardEtalePresentation, Algebra.Etale.iff_exists_algEquiv_prod, StandardEtalePair.instFormallyEtaleRing, Algebra.FormallyEtale.iff_exists_algEquiv_prod; 8 hits; digest e2f2170aa665faea.",
    "date": "2026-10-19",
    "verdict": "no match: returned etale base-change, Henselian and field Kummer results do not assert simultaneous-root trivialization of a punctured torsor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale covers of the complement of normal crossing parameters in a strictly henselian regular local ring split after adjoining roots of the parameters of degree the group order",
+   "results": "Logged results: StandardEtalePair.hasMap_X, StandardEtalePair, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, StandardEtalePresentation, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Polynomial.instEtaleUniversalCoprimeFactorizationRing, Algebra.IsStandardEtale; 8 hits; digest 28cbbec6441f1870. ",
+   "date": "2026-10-18",
+   "verdict": "no match: field Kummer theory, standard etale presentations and etale loci do not prove simultaneous-root trivialization of a punctured torsor."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, HenselianLocalRing",
+   "results": "Logged results: ; 0 hits; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-18",
+   "verdict": "no match: field Kummer theory, standard etale presentations and etale loci do not prove simultaneous-root trivialization of a punctured torsor."
+  },
+  {
+   "tool": "grep",
+   "query": "Abhyankar|purity.*branch|tame.*ramifi",
+   "results": "Logged results: ; 0 hits; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-18",
+   "verdict": "no match: field Kummer theory, standard etale presentations and etale loci do not prove simultaneous-root trivialization of a punctured torsor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite etale torsor over punctured strict henselian regular local normal crossing parameters trivialized by Kummer roots",
+   "results": "Logged results: Algebra.FormallyEtale.iff_exists_algEquiv_prod, AlgebraicGeometry.Scheme.Etale, Algebra.Etale.iff_exists_algEquiv_prod, RingHom.Etale, Algebra.FormallyEtale.of_isSeparable_aux, adjoinRootXPowSubCEquiv_root, Algebra.FormallyEtale.instForallOfFinite, Algebra.FormallyEtale.of_isSeparable; 8 hits; digest 2ebfd98d098c2eb8. ",
+   "date": "2026-10-18",
+   "verdict": "no match: field Kummer theory, standard etale presentations and etale loci do not prove simultaneous-root trivialization of a punctured torsor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale Galois cover of prime to residue characteristic degree becomes constant after taking roots of a strict normal crossings divisor in a strictly local regular scheme",
+   "results": "Logged results: Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.Etale.iff_exists_algEquiv_prod, StandardEtalePair.instFormallyEtaleRing, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, Algebra.IsEtaleAt, Algebra.instFiniteResidueFieldOfFormallyUnramified, Algebra.IsEtaleAt.comp; 8 hits; digest d59d8a9943c25fec. ",
+   "date": "2026-10-18",
+   "verdict": "no match: field Kummer theory, standard etale presentations and etale loci do not prove simultaneous-root trivialization of a punctured torsor."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-snc-parameter-root-quotient",
@@ -87,5 +294,109 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-snc-root-punctured-torsor-splitting",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Expanded the ILO IX 2.1 essential-surjectivity input through the existing root structure, generic torsor/Galois decomposition, finite separable normalization, explicit boundary DVRs of index n, the existing DVR Abhyankar theorem, a single new generic finite-normalization purity lemma, and strict henselian section plus the torsor identity. Checked r=0, n=1, disconnected covers and the absence of an excellence hypothesis.",
+  "blueprint": "Realizes the uniformization input of ancestor lem-per-artin-gabber-affine-curve Step 3 through the existing created.item chain, at ILO IX 2.1 pp.133--134: simultaneous roots kill codimension-one ramification; purity extends the cover; strict henselian locality gives a section.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-strict-local-roots-of-unity",
+    "why": "Generic algebraic tool for the root-normalization argument (used in step 1); it supplies its stated local, Galois, integral-closure or etale assertion. The perverse-curve unit has no substitute for this algebraic tool, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-sbc-galois-cover-base-change",
+    "why": "Generic algebraic tool for the root-normalization argument (used in step 2); it supplies its stated local, Galois, integral-closure or etale assertion. The perverse-curve unit has no substitute for this algebraic tool, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-sbc-field-torsor-galois-components",
+    "why": "Generic algebraic tool for the root-normalization argument (used in step 2); it supplies its stated local, Galois, integral-closure or etale assertion. The perverse-curve unit has no substitute for this algebraic tool, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Generic algebraic tool for the root-normalization argument (used in step 3); it supplies its stated local, Galois, integral-closure or etale assertion. The perverse-curve unit has no substitute for this algebraic tool, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-normal",
+    "why": "Generic algebraic tool for the root-normalization argument (used in step 3); it supplies its stated local, Galois, integral-closure or etale assertion. The perverse-curve unit has no substitute for this algebraic tool, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-sbc-finite-etale-open-generic-algebra",
+    "why": "Generic algebraic tool for the root-normalization argument (used in step 4); it supplies its stated local, Galois, integral-closure or etale assertion. The perverse-curve unit has no substitute for this algebraic tool, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-etale-over-normal-ring-normal",
+    "why": "Generic algebraic tool for the root-normalization argument (used in step 4); it supplies its stated local, Galois, integral-closure or etale assertion. The perverse-curve unit has no substitute for this algebraic tool, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-normal-ring-integrally-closed-total",
+    "why": "Generic algebraic tool for the root-normalization argument (used in step 4); it supplies its stated local, Galois, integral-closure or etale assertion. The perverse-curve unit has no substitute for this algebraic tool, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Generic algebraic tool for the root-normalization argument (used in step 5); it supplies its stated local, Galois, integral-closure or etale assertion. The perverse-curve unit has no substitute for this algebraic tool, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-quotient",
+    "why": "Generic algebraic tool for the root-normalization argument (used in step 5); it supplies its stated local, Galois, integral-closure or etale assertion. The perverse-curve unit has no substitute for this algebraic tool, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-sbc-regular-principal-prime-localization-dvr",
+    "why": "Generic algebraic tool for the root-normalization argument (used in step 6); it supplies its stated local, Galois, integral-closure or etale assertion. The perverse-curve unit has no substitute for this algebraic tool, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-sbc-dvr-galois-normalization-ramification-dvd",
+    "why": "Generic algebraic tool for the root-normalization argument (used in step 7); it supplies its stated local, Galois, integral-closure or etale assertion. The perverse-curve unit has no substitute for this algebraic tool, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-sbc-dvr-tame-tensor-factor-unramified",
+    "why": "Generic algebraic tool for the root-normalization argument (used in step 8); it supplies its stated local, Galois, integral-closure or etale assertion. The perverse-curve unit has no substitute for this algebraic tool, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "pqf-lem-finite-fp-locnoeth",
+    "why": "Generic algebraic tool for the root-normalization argument (used in step 9); it supplies its stated local, Galois, integral-closure or etale assertion. The perverse-curve unit has no substitute for this algebraic tool, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-sc-etale-at-prime-flat-unramified-criterion",
+    "why": "Generic algebraic tool for the root-normalization argument (used in step 9); it supplies its stated local, Galois, integral-closure or etale assertion. The perverse-curve unit has no substitute for this algebraic tool, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-sbc-finite-strict-henselian-algebra-etale-section",
+    "why": "Generic algebraic tool for the root-normalization argument (used in step 10); it supplies its stated local, Galois, integral-closure or etale assertion. The perverse-curve unit has no substitute for this algebraic tool, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "def-sbc-normal-dominant-galois",
+    "why": "Generic algebraic tool for the root-normalization argument (used in step 11); it supplies its stated local, Galois, integral-closure or etale assertion. The perverse-curve unit has no substitute for this algebraic tool, and no unit-level proof step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-strict-local-roots-of-unity",
+  "lem-sbc-galois-cover-base-change",
+  "lem-sbc-field-torsor-galois-components",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-sbc-finite-etale-open-generic-algebra",
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "lem-weil-pbc-normal-ring-integrally-closed-total",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-strictly-henselian-quotient",
+  "lem-sbc-regular-principal-prime-localization-dvr",
+  "lem-sbc-dvr-galois-normalization-ramification-dvd",
+  "lem-sbc-dvr-tame-tensor-factor-unramified",
+  "pqf-lem-finite-fp-locnoeth",
+  "lem-sc-etale-at-prime-flat-unramified-criterion",
+  "lem-sbc-finite-strict-henselian-algebra-etale-section",
+  "def-sbc-normal-dominant-galois"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-47a2e87c2",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-47a2e87c2 (reviewer sub-agent of L); spot-checked: Read the item in full: all 11 steps, the new node and every cited statement. The mathematics is correct and the only repair is cosmetic. I checked the item against ILO IX Prop 2.1 on printed pp.133-134. It replaces the SGA1 XIII 5.3 that ILO cites with Stacks 0BRM/0BMB, so the route lock holds and there is no SGA citation in the item or the new node. All Stacks tags match their labels. The statement is true: torsor degree dividing n gives e,f|n, so the cover is tame; adjoining the n-th roots kills ramification; purity applies on the regular B; strict henselianity gives the section. I checked r=0, n=1 and disconnected P, and the statement fits how the parent's Step 4 uses it. Steps 1-11 match the statements they cite hypothesis by hypothesis. Step 4: the idempotent argument identifies D with Q(T), so C[1/f]=T canonically. Step 6: B tensor V_i is local and equals A_i, with m_V A_i = m_A^n. Step 8: the tame tensor-factor lemma applies with L_j tensor_{V_i} A_i = L_j tensor_K E, and 0307 transfers its conclusion to C_a. Step 9: the height-one primes are exhausted. Step 10: the image is closed and contains the generic point, so the cover is surjective, and the section is taken with H=A=B. Step 11: pullback of the torsor isomorphism. The new node lem-per-finite-normalization-codimension-one-purity is true: going-down gives equal heights, so Stacks 0BMB applies at every nonzero prime, and the zero prime is a separable field extension. It is not a duplicate of lem-sbc-regular-local-punctured-etale-purity, lem-sbc-regular-codimension-two-etale-extension, lem-sbc-regular-codimension-two-finite-etale-model or lem-sbc-stalk-normalization-fibre-purity, since none of them concludes that a given normalization is etale from codimension-one unramifiedness. Its fields satisfy B1-B9. For the item, lem-sbc-regular-divisor-galois-root-splitting is only an etale-local single-divisor statement, so it is not a duplicate. There is no cycle, and I accept the 17 tool_uses as generic black-box algebra tools. FIX (B4): the Step 6 display had a stray comma, m_{A_i}^{,n}; it is corrected to m_{A_i}^{n} in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-snc-root-punctured-torsor-splitting.json. Nothing else changed.; 1 file(s) fixed by the reviewer"
  }
 }
