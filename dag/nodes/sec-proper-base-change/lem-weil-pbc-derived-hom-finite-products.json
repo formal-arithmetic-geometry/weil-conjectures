@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-derived-hom-finite-products",
+ "kind": "statement",
+ "title": "Derived local Hom on finite disjoint unions",
+ "status": "split",
+ "statement": "Let $X$ be a scheme, $B$ a commutative ring in $\\mathrm{Type}(u+1)$, and $I$ a finite type in that universe. Let $W_i$ be objects of the pro-etale site [def-weil-pbc-proetale-site], and let $c$ be a coproduct cofan with vertex $V$. Assume that for every set sheaf $H$ the restriction map $H(V)\\to\\prod_i H(W_i)$ is bijective. For any two objects $A,D$ of the unbounded derived category of $B$-module sheaves, restriction induces a bijection $\\operatorname{Hom}(A|_V,D|_V)\\to\\prod_i\\operatorname{Hom}(A|_{W_i},D|_{W_i})$, with restriction and its canonical comparison isomorphisms defined in [def-weil-pbc-derived-morphism-presheaves]. This includes the empty index type.",
+ "source": {
+  "document": "Stacks Project and Mathlib",
+  "place": "Pro-etale Cohomology, lemma-presheaf-value-weakly-contractible (Tag 0F63), finite disjoint union clause; Mathlib.CategoryTheory.Sites.SheafHom and K-injective localization APIs"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-derived-morphism-presheaves"
+ ],
+ "proof": [
+  {
+   "text": "Apply the section-product hypothesis to Mathlib sheafHom M N. Its sections are morphisms between slice restrictions, giving moduleHomProducts. Glue complex maps degreewise with this bijection and verify their differential equations by injectivity. Glue homotopies in the same way and verify their zero and boundary equations after restriction.",
+   "uses": [
+    "def-weil-pbc-derived-morphism-presheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the left adjoint to slice restriction on module presheaves: at V take the direct sum over arrows V to the slice object. DirectSum.toModule gives the adjunction explicitly. Compose with sheafification and restrict along the fully faithful sheaf inclusion. Componentwise injectivity of direct sums proves that the left adjoint preserves monomorphisms. As a left adjoint it preserves colimits, hence is exact. Adjunction.preservesKInjectiveComplexes therefore proves that slice restriction preserves K-injective complexes.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Choose global K-injective representatives using DerivedCategory.exists_iso_Q_obj_of_isKInjective. CochainComplex.IsKInjective.Qh_map_bijective and fullness of the homotopy quotient identify local derived maps with complex maps modulo homotopy. Gluing complex maps proves surjectivity, and gluing homotopies proves injectivity. The exact-functor factorization isomorphisms identify these maps with derivedLocalHomRestriction. Conjugate by the chosen isomorphisms and use naturality to handle arbitrary derived objects. The same proof includes the empty family.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-derived-morphism-presheaves"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-derived-morphism-presheaves"
+ ],
+ "proof_origin": {
+  "by": "T7 stage 3 worker",
+  "document": "literature/stacks-project/proetale.tex; Mathlib.CategoryTheory.Sites.SheafHom; WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp and .KInjective",
+  "place": "lemma-presheaf-value-weakly-contractible, finite disjoint union clause; explicit direct-sum adjunction and K-injective proof implemented in Lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived Hom finite disjoint unions restriction K-injective sheaves",
+   "results": "{\"t\": \"2026-10-19T15:07:32Z\", \"tool\": \"leanfinder\", \"query\": \"derived Hom finite disjoint unions restriction K-injective sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.IsLocallyInjective\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"CategoryTheory.Sheaf.instIsLocallyInjectiveHomObjForgetTypeImage\\u03b9\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CochainComplex.isKInjective_of_injective\", \"PresheafOfModules.IsLocallyInjective\", \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf\"], \"digest\": \"888475d026734126\"}",
+   "date": "2026-10-19",
+   "verdict": "no exact match; use internal Hom and K-injective infrastructure"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Bijective, sheafHom",
+   "results": "{\"t\": \"2026-10-19T13:47:08Z\", \"tool\": \"loogle\", \"query\": \"Function.Bijective, sheafHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'sheafHom'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no exact match; use internal Hom and K-injective infrastructure"
+  },
+  {
+   "tool": "grep",
+   "query": "overPullback.*KInjective|KInjective.*overPullback",
+   "results": "{\"t\": \"2026-10-19T08:04:23Z\", \"tool\": \"grep\", \"query\": \"overPullback.*KInjective|KInjective.*overPullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no exact match; use internal Hom and K-injective infrastructure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of derived morphisms of sheaves to a disjoint union is a product of local derived Hom sets",
+   "results": "{\"t\": \"2026-10-19T16:30:33Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of derived morphisms of sheaves to a disjoint union is a product of local derived Hom sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.isProductOfDisjoint\", \"AlgebraicGeometry.Scheme.coprodPresheafObjIso\", \"TopCat.Presheaf.SheafConditionEqualizerProducts.res\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd\", \"TopCat.Sheaf.isProductOfDisjoint.congr_simp\", \"CategoryTheory.sheafHom\", \"CategoryTheory.Sheaf.\\u0393Res\", \"TopCat.Presheaf.SheafConditionEqualizerProducts.res_\\u03c0\"], \"digest\": \"1ad8042fdbe54489\"}",
+   "date": "2026-10-19",
+   "verdict": "No exact derived statement found; sheafHom is the infrastructure used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedMorphismSheafComparison",
+  "date": "2026-10-19",
+  "group": "T7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "Amplification proof (c), evaluation on affine weakly contractible pro-etale objects; finite disjoint union clause",
+   "via": [
+    "def-weil-pbc-derived-morphism-sheaf-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleDerivedHomFiniteProducts",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleDerivedHom_finiteProducts",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleDerivedHom_finiteProducts"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleDerivedHomFiniteProducts.lean",
+  "statement": "theorem proEtaleDerivedHom_finiteProducts (X : Scheme.{u})\n    (B : Type (u + 1)) [CommRing B]\n    (I : Type (u + 1)) [Finite I] (W : I → X.ProEt) (c : Cofan W)\n    (_hc : IsColimit c)\n    (hsec : ∀ H : Sheaf (ProEt.topology X) (Type (u + 1)),\n      Function.Bijective (fun t : H.obj.obj (op c.pt) ↦\n        fun i ↦ H.obj.map (c.inj i).op t))\n    (A D : DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} B))) :\n    Function.Bijective (fun f : (derivedSliceRestriction (ProEt.topology X) B c.pt).obj A ⟶\n      (derivedSliceRestriction (ProEt.topology X) B c.pt).obj D ↦\n      fun i ↦ derivedLocalHomRestriction (ProEt.topology X) B A D (c.inj i) f)",
+  "branch": "sheaf-dag",
+  "by": "T7",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261019T192841-L-1876019",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261019T192841-L-1876019",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
