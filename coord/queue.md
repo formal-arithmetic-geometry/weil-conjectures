@@ -1,6 +1,6 @@
 # Work queue
 
-1245 items; claim with `tools/claim.py next <group> [--stage N]`.
+1246 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (1)
 
@@ -40,7 +40,7 @@
 
 Not open yet: 304 nodes that below a finished node, not needed, 131 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (1219)
+## Stage 3: modules to prove (1220)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -61,7 +61,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.FiniteReductionConstructibility` | 3 | 1 | proof | route |
 | `Sheaf.Paper.FiniteSmoothGammaNormalization` | 3 | 1 | proof | route |
 | `Sheaf.Paper.IntegralStratifiedPerfectCharacterization` | 3 | 4 | proof | route |
-| `Sheaf.Paper.NoetherianEtaleSectionSpecialization` | 3 | 2 | proof | route |
+| `Sheaf.Paper.NoetherianEtaleSectionSpecialization` | 3 | 3 | proof | route |
 | `Sheaf.PoincareDuality.ProperProjectionFormulaBounded` | 3 | 1 | proof | route |
 | `Sheaf.Targets.VectorBundlePurity` | 3 | 2 | proof | route |
 | `Sheaf.AlgebraicGeometry.AffineSpaceAmbientAdjunction` | 4 | 1 | proof | route |
@@ -127,6 +127,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.ComparisonTorAmplitude` | 6 | 1 | proof | route |
 | `Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients` | 6 | 1 | proof | route |
 | `Sheaf.Paper.DeltaRestriction` | 6 | 4 | proof | route |
+| `Sheaf.Paper.DirectImageTorAmplitude` | 6 | 1 | proof | route |
 | `Sheaf.Paper.DualityPairing` | 6 | 2 | proof | route |
 | `Sheaf.Paper.EtaleGeometricBiduality` | 6 | 1 | proof | route |
 | `Sheaf.Paper.ExceptionalAdjointAdmissibility` | 6 | 1 | proof | route |
