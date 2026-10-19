@@ -10,48 +10,90 @@
  "stmt_deps": [
   "def-weil-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because L is finite-dimensional over K, each element of L is algebraic over K: the powers of an element are linearly dependent over K, yielding a nonzero polynomial relation. Let S be the relative separable closure of K in L, namely the subfield of elements separable algebraic over K. The existing separable-core theorem gives that L/S is purely inseparable (and S/K is separable algebraic).",
+   "uses": [
+    "def-weil-pbc-relative-separable-closure",
+    "lem-weil-pbc-separable-first-purely-inseparable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IV, Proposition 3.2.3(ii), p. 56, with the relative separable core described before the proposition"
+   }
+  },
+  {
+   "text": "The finite K-spanning set of L also spans L over S, because K is contained in S. Thus L/S is finite-dimensional. Apply the bounded-exponent Mathlib leaf to this purely inseparable extension, obtaining e such that y^(p^e) lies in S for every y in L. Fix x in L_perf. For each n choose y_n in L with y_n^(p^(n+e))=x. Put z_n=y_n^(p^e). Then z_n lies in S and z_n^(p^n)=y_n^(p^(e+n))=x. Taking n=0 shows x lies in S, and all n show x lies in S_perf. By the existing embedding theorem, the separable algebraic extension S/K admits a K-embedding sigma into the fixed separable closure K^sep (which is separably closed). For every n, sigma(z_n)^(p^n)=sigma(z_n^(p^n))=sigma(x), so sigma(x) lies in every p^n-power image in K^sep.",
+   "uses": [
+    "lem-weil-pbc-separable-first-purely-inseparable",
+    "lem-per-finite-extension-separable-core-bounded-exponent",
+    "def-pd-separable-closure",
+    "lem-weil-pbc-separable-extension-embeds-separably-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IV, Proposition 3.2.3(ii), p. 56, reduction through the bounded purely inseparable tail"
+   }
+  },
+  {
+   "text": "Apply the perfect-core equality of ILO Lemma 3.2.2 to K and K^sep. It says that sigma(x) is separable algebraic over K_perf, so choose a nonzero polynomial P(T)=sum_i a_i T^i over K_perf with P(sigma(x))=0. Since sigma is a K-algebra map, it fixes every a_i in K_perf, and sigma(sum_i a_i x^i)=sum_i a_i sigma(x)^i=0. Injectivity of sigma gives P(x)=0 in S and hence in L. The polynomial is still nonzero since the coefficient inclusions are injective. This proves the stated algebraicity.",
+   "uses": [
+    "lem-per-separable-closure-perfect-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IV, Lemma 3.2.2 and Proposition 3.2.3(ii), p. 56"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pd-separable-closure",
+  "def-weil-pbc-relative-separable-closure",
+  "lem-per-finite-extension-separable-core-bounded-exponent",
+  "lem-per-separable-closure-perfect-core",
+  "lem-weil-pbc-separable-extension-embeds-separably-closed",
+  "lem-weil-pbc-separable-first-purely-inseparable"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose IV, Lemma 3.2.2 and Proposition 3.2.3(ii), p. 56"
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "perfectCore|perfect_core|maximal.*perfect|perfect.*[Ss]ubfield",
-   "results": "3 hits: Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean, Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean, Mathlib/RingTheory/Ideal/Norm/RelNorm.lean. Search log digest 30b0fef5113ed900.",
-   "date": "2026-10-19",
-   "verdict": "no match: relative perfect closures, perfect fields, residue extensions, Witt vectors or semisimple endomorphisms do not state algebraicity of intersections of Frobenius images"
-  },
-  {
    "tool": "leanfinder",
-   "query": "For a finite field extension L over K in characteristic p, the intersection of all p power images in L is algebraic over the intersection of all p power images in K",
-   "results": "8 hits: perfectClosure.isAlgebraic, IsPRadical.isPurelyInseparable, perfectClosure, le_perfectClosure, IntermediateField.instAlgebraSubtypeMemMin, perfectClosure.isPurelyInseparable, PerfectClosure.instPerfectField, le_perfectClosure_iff. Search log digest 552f6b232535745c.",
+   "query": "finite field extension in characteristic p perfect core algebraic over base perfect core",
+   "results": "8 hits: perfectClosure.isAlgebraic, perfectClosure.perfectRing, perfectClosure.perfectField, PerfectClosure.instPerfectField, perfectClosure, PerfectClosure.instField, FiniteField.instAlgebraExtension, Algebra.IsAlgebraic.perfectField. Search log digest 70a16c16ea8cc659.",
    "date": "2026-10-19",
-   "verdict": "no match: relative perfect closures, perfect fields, residue extensions, Witt vectors or semisimple endomorphisms do not state algebraicity of intersections of Frobenius images"
-  },
-  {
-   "tool": "leansearch",
-   "query": "In a finite extension of fields of positive characteristic, elements admitting p power roots of every order are algebraic over the maximal perfect subfield of the base",
-   "results": "8 hits: IsPurelyInseparable.isPRadical, IsPurelyInseparable, IsPurelyInseparable.hasExponent_of_finiteDimensional, Subalgebra.mem_perfectClosure_iff, isPurelyInseparable_iff_pow_mem, mem_perfectClosure_iff, IsPurelyInseparable.instOfHasExponent, mem_perfectClosure_iff_pow_mem. Search log digest 44db0e3e5ecac8ec.",
-   "date": "2026-10-19",
-   "verdict": "no match: relative perfect closures, perfect fields, residue extensions, Witt vectors or semisimple endomorphisms do not state algebraicity of intersections of Frobenius images"
+   "verdict": "no match: relative perfect closure is the purely inseparable subextension, not the intersection of all Frobenius images"
   },
   {
    "tool": "loogle",
-   "query": "FiniteDimensional, PerfectField",
-   "results": "12 hits: Module.End.IsSemisimple.mul_of_commute, Module.End.IsSemisimple.sub_of_commute, Module.End.IsSemisimple.add_of_commute, Module.End.IsSemisimple.of_mem_adjoin_pair, LieAlgebra.ad_isSemisimple_of_isSemisimple, Module.End.isNilpotent_isSemisimple_unique, Module.End.exists_isNilpotent_isSemisimple, LieAlgebra.ad_mem_adjoin_of_isNilpotent. Search log digest 2047ab6a25251047.",
+   "query": "IsPurelyInseparable.hasExponent_of_finiteDimensional",
+   "results": "1 hits: IsPurelyInseparable.hasExponent_of_finiteDimensional. Search log digest 66c7fd0e7dbdbe8a.",
    "date": "2026-10-19",
-   "verdict": "no match: relative perfect closures, perfect fields, residue extensions, Witt vectors or semisimple endomorphisms do not state algebraicity of intersections of Frobenius images"
+   "verdict": "no match: relative perfect closure is the purely inseparable subextension, not the intersection of all Frobenius images"
   },
   {
-   "tool": "leanfinder",
-   "query": "If L is finite dimensional over K in characteristic p then the maximal perfect subfield of L is algebraic over the maximal perfect subfield of K",
-   "results": "8 hits: perfectClosure.isAlgebraic, Algebra.IsAlgebraic.perfectField, PerfectClosure.instPerfectField, perfectClosure.perfectField, perfectClosure, isPurelyInseparable_iff_fd_isPurelyInseparable, perfectClosure.perfectRing, PerfectClosure.instField. Search log digest f9f2478c51f4e885.",
+   "tool": "grep",
+   "query": "perfectCore|perfectClosure|separableClosure_inf_perfectClosure",
+   "results": "20 hits: Mathlib/FieldTheory/PurelyInseparable/Tower.lean, Mathlib/FieldTheory/IsPerfectClosure.lean, Mathlib/FieldTheory/IsPerfectClosure.lean, Mathlib/FieldTheory/IsPerfectClosure.lean, Mathlib/FieldTheory/IsPerfectClosure.lean, Mathlib/FieldTheory/IsPerfectClosure.lean, Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean, Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean. Search log digest 9bbdcbef99f80680.",
    "date": "2026-10-19",
-   "verdict": "no match: relative perfect closures, perfect fields, residue extensions, Witt vectors or semisimple endomorphisms do not state algebraicity of intersections of Frobenius images"
+   "verdict": "no match: relative perfect closure is the purely inseparable subextension, not the intersection of all Frobenius images"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a finite extension of fields of positive characteristic, the perfect core of the extension is algebraic over the perfect core of the base",
+   "results": "8 hits: perfectClosure.isAlgebraic, le_perfectClosure, Algebra.IsAlgebraic.perfectField, PerfectClosure, AlgEquiv.perfectClosure, perfectClosure, isPurelyInseparable_iff_perfectClosure_eq_top, IsSepClosure.isAlgClosure_of_perfectField. Search log digest 8422599c4968d41b.",
+   "date": "2026-10-19",
+   "verdict": "no match: relative perfect closure is the purely inseparable subextension, not the intersection of all Frobenius images"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-epp-perfect-core-complete-local",
@@ -63,7 +105,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general. Supporting input: Cohen–Gabber presentations with an etale open meeting the special fibre; the finite presentation input itself: ILO IV 2.1.4–2.1.12 and IV 4.2.3–4.2.5. Supporting input: Epp cover with reduced equidimensional special fibre; supporting Epp field hypothesis for complete local domains in ILO IV 4.2.3. Finite-extension input in ILO IV 3.2.3(iv): the perfect core after the finite Cohen parameter extension.",
+   "place": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; the finite-extension input in ILO Exposé IV §3.2.3(ii) is used in the Epp perfect-core reduction.",
    "via": [
     "lem-per-epp-perfect-core-complete-local",
     "lem-per-mixed-reduced-special-fibre-cover",
@@ -77,5 +119,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-finite-extension-perfect-core",
+  "worker": "stage1",
+  "summary": "Separated the finite purely inseparable tail using the existing separable-core theorem and a uniform-exponent Mathlib leaf, then applied ILO IV Lemma 3.2.2 in a separable closure. The embedding is supplied by an existing Mathlib-backed node, and preservation of roots and polynomial equations is written out. Statement unchanged except TeX escape normalization; original creation provenance retained.",
+  "blueprint": "Realizes the finite-extension input in the ancestor route: the ILO IV §3.2.2 perfect-core equality and §3.2.3(ii) finite-extension Epp-property reduction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-separable-first-purely-inseparable",
+    "why": "The step needs the general algebraic-extension decomposition over the relative separable closure; this is an existing Mathlib leaf from another unit and no node in this unit restates it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-separable-first-purely-inseparable"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-f09007173",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-f09007173 (reviewer sub-agent of L); spot-checked: I read ILO Exposé IV §3.2 (pdf pp. 61–63, printed 55–56): Lemma 3.2.2 and its proof by minimal polynomials, and Prop. 3.2.3(i)/(ii), the reduction through the separable part and the bounded radicial part. The item is the Epp variant 'x ∈ L_perf is algebraic over K_perf' that the parent lem-per-epp-perfect-core-complete-local uses in Steps 5–6; its statement is unchanged. Step 1: L/K is algebraic by linear dependence of powers, and lem-weil-pbc-separable-first-purely-inseparable gives S/K separable algebraic and L/S purely inseparable. Step 2: L/S is finite because the K-spanning set also spans over S. The new leaf then gives a uniform e (Mathlib Exponent.lean: hasExponent_of_finiteDimensional at line 215 under [IsPurelyInseparable] at line 108, field has_exponent at line 55, ringExpChar = p). Roots z_n = y_n^{p^e} ∈ S with z_n^{p^n} = x put x in S_perf. IsSepClosed.lift (the embeds-separably-closed leaf) gives σ: S → K^sep over K, and σ(x) ∈ (K^sep)_perf. Step 3: the new node lem-per-separable-closure-perfect-core (exactly ILO Lemma 3.2.2) gives P ∈ K_perf[T], which pulls back by injectivity. I re-derived both inclusions of 3.2.2 (the norm-form coefficients satisfy c'^{p^n} = c) and tested it on perfect K and on F_p(t). I tested the item on L = K, separable, purely inseparable and finite-field cases. The perfect closure of F_p(t) over F_p(t) shows the finiteness hypothesis is essential. Both new nodes introduce their objects, cite their definition nodes, record searches with no Mathlib match for 3.2.2, and do not restate the item. Greps for Epp, 3.2.2/3.2.3, perfect-core intersections and HasExponent across dag/nodes and blueprint main-20261015 found no duplicate. The cited statements say what each step takes from them. There is no SGA citation. Off-unit citations are Mathlib leaves or definitions; the declared tool_use is accepted. No fixes."
  }
 }
