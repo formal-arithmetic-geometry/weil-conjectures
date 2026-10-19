@@ -42,6 +42,26 @@ theorem quotient_prod_X_sub_C_algEquiv_pi {Ω : Type u} [Field Ω] (n : ℕ)
         ({∏ i : Fin n, (X - C (ρ i))} : Set Ω[X])) ≃ₐ[Ω] (Fin n → Ω),
       ∀ (p : Ω[X]) (i : Fin n),
         e (Ideal.Quotient.mk _ p) i = p.eval (ρ i) := by
-  sorry
+  let I : Fin n → Ideal Ω[X] := fun i ↦ Ideal.span {X - C (ρ i)}
+  have hcop := pairwise_coprime_X_sub_C hρ
+  have hI : Pairwise (fun i j ↦ IsCoprime (I i) (I j)) := by
+    intro i j hij
+    exact (Ideal.isCoprime_span_singleton_iff _ _).2 (hcop hij)
+  have hprod : (⨅ i, I i) = Ideal.span {∏ i : Fin n, (X - C (ρ i))} :=
+    Ideal.iInf_span_singleton hcop
+  let e₁ := Ideal.quotEquivOfEq hprod.symm
+  let e₂ := Ideal.quotientInfRingEquivPiQuotient I hI
+  let e₃ := RingEquiv.piCongrRight fun i ↦ (quotientSpanXSubCAlgEquiv (ρ i)).toRingEquiv
+  let e := (e₁.trans e₂).trans e₃
+  have he (p : Ω[X]) (i : Fin n) :
+      e (Ideal.Quotient.mk _ p) i = p.eval (ρ i) := by
+    change quotientSpanXSubCAlgEquiv (ρ i)
+      (e₂ (e₁ (Ideal.Quotient.mk _ p)) i) = _
+    rw [Ideal.quotEquivOfEq_mk]
+    rfl
+  refine ⟨{ e with commutes' := ?_ }, he⟩
+  intro c
+  ext i
+  exact (he (C c) i).trans eval_C
 
 end Polynomial
