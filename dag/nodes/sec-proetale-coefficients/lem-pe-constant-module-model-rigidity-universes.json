@@ -1,0 +1,117 @@
+{
+ "id": "lem-pe-constant-module-model-rigidity-universes",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-pe-finite-local-systems-type",
+   "place": "proof step 5",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Rigidity of two constant module models on an overlap",
+ "statement": "Let X be a scheme, Λ a commutative ring, and F a sheaf of modules over the constant ring sheaf on the small pro-etale site [def-weil-proetale-locally-constant-sheaf]. Let U and V be objects of this site and M and N modules over the lifted coefficient ring. If the restrictions of F to U and V are isomorphic to the respective localized constant models M and N, then any points x of U and y of V with equal image in X give a module isomorphism M ≅ N.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-type.proof.md",
+  "place": "proof step 5"
+ },
+ "stmt_deps": [
+  "def-weil-proetale-locally-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Choose a point of U times_X V above the given pair and an algebraic closure of its residue field. Reuse the geometricPoint construction from ProEtaleFiniteModelStalks: pointed weakly etale neighbourhoods form a site point, using their cofilteredness and the section of any nonempty weakly etale scheme over an algebraically closed field. Restrict scalars along the constant ring unit to construct a ModuleCat-valued sheaf from F and from each localized constant model. The module-sheafification unit is locally bijective; the point fibre functor sends it to a bijective linear map, so the fibre of the constant model is its coefficient module. Mathlib filtered-colimit universe shrinking supplies this fact for independent coefficient sizes. Finality of the over-category forgetful functor identifies slice fibres of F with its original fibre. Apply the two slice fibre functors to the trivializations and compose the resulting module isomorphisms.",
+   "uses": [
+    "def-weil-proetale-locally-constant-sheaf",
+    "def-weil-proetale-geometric-stalk",
+    "lem-fix-weakly-etale-algclosed-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-type.proof.md",
+    "place": "proof step 5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-proetale-geometric-stalk",
+  "lem-fix-weakly-etale-algclosed-section"
+ ],
+ "proof_origin": {
+  "by": "F6",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-type.proof.md",
+  "place": "proof step 5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a constant module sheaf to a slice site is constant with the same model; geometric fibres recover its coefficient module",
+   "results": "Retained searches.jsonl entry 2026-10-18T14:23:35Z: ModuleCat.Tilde.res_const, CompHausLike.LocallyConstantModule.functor, SheafOfModules.over and other topology-specific hits.",
+   "date": "2026-10-18",
+   "verdict": "No exact statement; use sheafification units and the existing fibre API."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctorMap",
+   "results": "Retained searches.jsonl entry 2026-10-18T14:23:35Z: exact overFunctorMap declaration.",
+   "date": "2026-10-18",
+   "verdict": "Used in restriction proof; does not alone identify localized constant constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiberConstantSheafIso|pushforwardContinuousSheafificationCompatibility",
+   "results": "Retained search found Sites/CoverLifting. This session also read ProEtaleFiniteModelStalks, Sites/Point/ConstantSheaf, Scheme.Cover.glueMorphisms and nonempty_isColimit_cofanMk_of.",
+   "date": "2026-10-19",
+   "verdict": "Restriction, coproduct and rigidity are now proved. The proofs use the slice sheafification API, geometricPoint from ProEtaleFiniteModelStalks, filtered-colimit universe shrinking, and direct gluing of scheme morphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The geometric fibre of a constant sheaf of modules is its coefficient module, so isomorphic constant sheaves on a nonempty scheme have isomorphic coefficient modules",
+   "results": "CategoryTheory.Sheaf.isConstant_of_iso; CategoryTheory.constantSheaf; CategoryTheory.Sheaf.IsConstant.mk; CategoryTheory.Sheaf.IsConstant.mem_essImage; CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app; AlgebraicGeometry.Scheme.Modules; CategoryTheory.Sheaf.mem_essImage_of_isConstant; CategoryTheory.Sheaf.isConstant_congr",
+   "date": "2026-10-18",
+   "verdict": "No exact theorem for this localized constant-module construction or unrestricted index universe; the displayed Lean proof supplies the needed result from the existing sheafification, fibre and gluing APIs."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleFiniteLocalSystemsType",
+  "date": "2026-10-18",
+  "group": "F6"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-pe-finite-local-systems",
+ "merged_into": null,
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleConstantModuleModelRigidity",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleConstantModule_model_rigidity",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleConstantModuleModelRigidity.lean",
+  "statement": "theorem proEtaleConstantModule_model_rigidity (X : Scheme.{t}) (Λ : Type u) [CommRing Λ]\n    (F : SheafOfModules.{max u (t + 1)}\n      ((sheafCompose (ProEt.topology X)\n        (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj\n          ((constantSheaf (ProEt.topology X) CommRingCat.{max u (t + 1)}).obj\n            (CommRingCat.of (ULift.{t + 1, u} Λ)))))\n    (U V : X.ProEt)\n    (M N : ModuleCat.{max u (t + 1)} (ULift.{t + 1, u} Λ))\n    (eM : Nonempty (F.over U ≅ proEtaleConstantModuleSheafOverOfUniverses X Λ U M))\n    (eN : Nonempty (F.over V ≅ proEtaleConstantModuleSheafOverOfUniverses X Λ V N))\n    (x : U.left) (y : V.left) (hxy : U.hom x = V.hom y) : Nonempty (M ≅ N)",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-3d7b8",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261019T002546-L-2152988",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-3d7b8",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261019T002546-L-2152988",
+  "kind": "interface",
+  "note": "independent cc review: item statement byte-identical vs clone; 3 delivered modules + 2 importers (FiniteLocalSystemsTwist, ConstructibleProEtaleClassical) compile; axioms: sorryAx only via existing proEtaleConstantRingUnit_*locallyBijectiveOfUniverses; unit realized empty so no unit bypass; node changes limited to proof/proof_deps/proof_origin + pruned tool_uses"
+ }
+}

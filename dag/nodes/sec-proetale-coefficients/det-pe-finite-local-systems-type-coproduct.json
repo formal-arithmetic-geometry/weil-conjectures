@@ -1,0 +1,115 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-pe-finite-local-systems-type",
+   "place": "proof step 7",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-type.proof.md",
+  "place": "proof step 7"
+ },
+ "stmt_deps": [
+  "lem-galois-coproduct-copies-morphisms-clopen"
+ ],
+ "proof": [
+  {
+   "text": "Construct the open cover from the pieces. Any family of scheme maps on the pieces agrees on overlaps: for equal indices use monicity of the open inclusion; for distinct indices disjointness makes the pullback empty and hence initial. Glue the maps and use open-cover hom_ext for uniqueness. This works for arbitrary index universes, including empty pieces and the empty base.",
+   "uses": [
+    "lem-galois-coproduct-copies-morphisms-clopen",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-type.proof.md",
+    "place": "proof step 7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-galois-coproduct-copies-morphisms-clopen",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "F6",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-type.proof.md",
+  "place": "proof step 7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a constant module sheaf to a slice site is constant with the same model; geometric fibres recover its coefficient module",
+   "results": "Retained searches.jsonl entry 2026-10-18T14:23:35Z: ModuleCat.Tilde.res_const, CompHausLike.LocallyConstantModule.functor, SheafOfModules.over and other topology-specific hits.",
+   "date": "2026-10-18",
+   "verdict": "No exact statement; use sheafification units and the existing fibre API."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctorMap",
+   "results": "Retained searches.jsonl entry 2026-10-18T14:23:35Z: exact overFunctorMap declaration.",
+   "date": "2026-10-18",
+   "verdict": "Used in restriction proof; does not alone identify localized constant constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiberConstantSheafIso|pushforwardContinuousSheafificationCompatibility",
+   "results": "Retained search found Sites/CoverLifting. This session also read ProEtaleFiniteModelStalks, Sites/Point/ConstantSheaf, Scheme.Cover.glueMorphisms and nonempty_isColimit_cofanMk_of.",
+   "date": "2026-10-19",
+   "verdict": "Restriction, coproduct and rigidity are now proved. The proofs use the slice sheafification API, geometricPoint from ProEtaleFiniteModelStalks, filtered-colimit universe shrinking, and direct gluing of scheme morphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pairwise disjoint open cover of a scheme exhibits the scheme as the coproduct of the open subschemes",
+   "results": "AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall; AlgebraicGeometry.Scheme.OpenCover; AlgebraicGeometry.instHasFiniteCoproductsScheme; AlgebraicGeometry.IsAffineOpen.iSup_of_disjoint; AlgebraicGeometry.instFinitaryExtensiveScheme; AlgebraicGeometry.Scheme.affineCover; AlgebraicGeometry.sigmaOpenCover; AlgebraicGeometry.Scheme.openCover_affineOpenCover",
+   "date": "2026-10-18",
+   "verdict": "No exact theorem for this localized constant-module construction or unrestricted index universe; the displayed Lean proof supplies the needed result from the existing sheafification, fibre and gluing APIs."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleFiniteLocalSystemsType",
+  "date": "2026-10-18",
+  "group": "F6"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-pe-finite-local-systems",
+ "merged_into": null,
+ "id": "det-pe-finite-local-systems-type-coproduct",
+ "title": "Coproduct of a clopen decomposition",
+ "statement": "Let X be a scheme, R a type, and U : R → X.Opens a clopen decomposition. Then the inclusions of the open pieces form a scheme coproduct: Nonempty (IsColimit (Cofan.mk X (fun r : R ↦ (U r).ι))).",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleFiniteLocalSystemsType",
+  "declaration": "AlgebraicGeometry.Scheme.finiteLocalSystemsType_coproduct",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleFiniteLocalSystemsType.lean",
+  "statement": "theorem finiteLocalSystemsType_coproduct (X : Scheme.{t}) (R : Type v)\n    (U : R → X.Opens) (hU : IsClopenDecomposition X R U) :\n    Nonempty (IsColimit (Cofan.mk X (fun r : R ↦ (U r).ι)))",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-3d7b8",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261019T002546-L-2152988",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-3d7b8",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261019T002546-L-2152988",
+  "kind": "interface",
+  "note": "independent cc review: item statement byte-identical vs clone; 3 delivered modules + 2 importers (FiniteLocalSystemsTwist, ConstructibleProEtaleClassical) compile; axioms: sorryAx only via existing proEtaleConstantRingUnit_*locallyBijectiveOfUniverses; unit realized empty so no unit bypass; node changes limited to proof/proof_deps/proof_origin + pruned tool_uses"
+ }
+}

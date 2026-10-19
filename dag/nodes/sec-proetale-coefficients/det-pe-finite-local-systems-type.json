@@ -22,125 +22,70 @@
  ],
  "proof": [
   {
-   "text": "For a set $E$ put $C_E=\\nu_X^*\\underline E_{X,\\mathrm{et}}$. This is the constant pro-etale sheaf with value $E$. Indeed the comparison adjunction and the constant-sheaf adjunction give, naturally in a pro-etale sheaf of sets $G$,\n$\\operatorname{Hom}(C_E,G)=\\operatorname{Hom}(\\underline E_{X,\\mathrm{et}},\\nu_{X,*}G)=\\operatorname{Map}(E,(\\nu_{X,*}G)(X))=\\operatorname{Map}(E,G(X))$.\nThe last equality is the explicit direct-image formula at the identity object in [def-weil-pbc-site-comparison-morphism]. By [lem-weil-pbc-constant-sheaf-maps-global-sections] the constant pro-etale sheaf has this same universal property. The maps in both directions corresponding to their coefficient sections are inverse: either composite fixes every coefficient section, hence is the identity by that universal property. This fixes the identification canonically on constants.",
-   "uses": [
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-constant-sheaf-maps-global-sections"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 0H7J, example-constant-sheaf; comparison adjunction at the final object"
-   }
-  },
-  {
-   "text": "For every object $f:V\\to X$ of $X_{\\mathrm{proet}}$, [lem-cbc-comparison-pullback-sections] gives\n$C_E(V)=\\Gamma(V_{\\mathrm{et}},f_{\\mathrm{et}}^{-1}\\underline E_{X,\\mathrm{et}})$.\nUse [lem-weil-pbc-sets-etale-inverse-image-constant-sheaf] to identify the sheaf on the right with $\\underline E_{V,\\mathrm{et}}$, carrying each coefficient section to the same coefficient section. Thus $C_E(V)\\cong\\underline E_{V,\\mathrm{et}}(V)$. The comparison section formula specifies restriction along every pro-etale arrow, and the constant-sheaf pullback identification is unique with this normalization, so these bijections commute with restriction and with maps of coefficient sets.",
-   "uses": [
-    "lem-cbc-comparison-pullback-sections",
-    "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 0GLZ (lemma-describe-pullback-from-etale) and 099T (lemma-fully-faithful); canonical constant-sheaf pullback"
-   }
-  },
-  {
-   "text": "Apply [lem-galois-constant-sheaf-sets-representable] with base $V$ and arbitrary set $E$: the last set in step 2 is the set of $V$-morphisms $V\\to\\coprod_E V$, sending a coefficient $e$ to the $e$-coprojection. By [lem-galois-coproduct-copies-morphisms-clopen] these are exactly the maps $|V|\\to E$ whose fibres are open, equivalently the Zariski-locally constant maps. A coefficient section is the constant function with that value. Restriction along $g:W\\to V$ is composition with $|g|$: on every open fibre of the locally constant map the section is a coefficient section; after pullback it remains that coefficient by step 2, and those inverse-image opens cover $W$. Uniqueness in the sheaf condition therefore gives this formula. Consequently\n$C_E(V)=\\operatorname{LC}(|V|,E)$ naturally in $V$ and $E$.\nFor module coefficients the addition and scalar operations are pointwise: they agree on constant local sections and hence on their open coverings. In particular the constant module sheaves used below restrict to the constant module models on every localized site.",
-   "uses": [
-    "lem-galois-constant-sheaf-sets-representable",
-    "lem-galois-coproduct-copies-morphisms-clopen",
-    "def-weil-proetale-locally-constant-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03P5, remark-constant-locally-constant-maps (the argument does not use a group law); Groupoids Tag 03YW, example-constant-group"
-   }
-  },
-  {
-   "text": "Choose a trivializing covering $\\{u_i:U_i\\to X\\}_{i\\in I}$ and finitely presented models $N_i$ as in the hypothesis and [def-weil-proetale-locally-constant-sheaf]. For each $i$ choose the unique representative $M_i\\in R$ isomorphic to $N_i$ and replace the trivialization by its composite with that module isomorphism, obtaining $e_i:\\underline{M_i}|_{U_i}\\xrightarrow{\\sim}F|_{U_i}$. Restricting again to $U_i\\times_XU_j$ gives two trivializations of the same sheaf: restriction is sectionwise and relocalizes as specified in [def-pur-localized-ringed-site].",
+   "text": "Choose local models and their unique representative labels. Overlap rigidity gives equality of labels at pairs of points with equal base image.",
    "uses": [
     "def-weil-proetale-locally-constant-sheaf",
-    "def-pur-localized-ringed-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-type.proof.md",
-    "place": "paragraph 1: choose local isomorphisms instead of presenting their epimorphism"
-   }
-  },
-  {
-   "text": "If a nonempty object $W\\to X$ has isomorphisms $\\underline M|_W\\cong F|_W\\cong\\underline{M'}|_W$ with $M,M'\\in R$, compose them to obtain inverse morphisms $a,b$ between the two constant sheaves. Clause 2 of [det-pe-finite-local-systems-hom], applied to the finitely presented modules $M,M'$, identifies $a$ and $b$ with sections of the constant Hom sheaves. By steps 1--3 these sections are locally constant functions\n$|W|\\to\\operatorname{Hom}_\\Lambda(M,M')$ and $|W|\\to\\operatorname{Hom}_\\Lambda(M',M)$.\nThat clause is compatible with composition; hence at any point $w\\in|W|$ the two values satisfy $b(w)a(w)=1_M$ and $a(w)b(w)=1_{M'}$. They are inverse module maps. Thus $M\\cong M'$, and the representative condition gives $M=M'$. In particular, if $M_i\\ne M_j$ then $U_i\\times_XU_j$ is empty. No connectedness or finiteness of the underlying sets of the modules is used.",
-   "uses": [
-    "det-pe-finite-local-systems-hom"
+    "lem-pe-constant-module-model-rigidity-universes"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-type.proof.md",
-    "place": "Models are locally unique; expanded using the listed Hom-sheaf lemma instead of a geometric-point evaluation"
+    "place": "The type map and Local models on X_M"
    }
   },
   {
-   "text": "For each $i$ take the coefficient section $s_i=M_i$ of the sheaf $C_R$ over $U_i$. These sections agree on $U_i\\times_XU_j$: if that object is nonempty step 5 gives $M_i=M_j$; if it is empty its set of sections is a singleton, since the empty covering of the empty scheme is a pro-etale covering by the fpqc definition [def-weil-pbc-fpqc-covering]. The equalizer condition defining a sheaf [def-weil-pbc-sites-and-cohomology] now gives a unique section $\\sigma\\in C_R(X)$ with $\\sigma|_{U_i}=s_i$. This is the blueprint's type-map descent, expressed directly on a chosen trivializing covering; it requires neither objectwise surjectivity of an epimorphism nor a pointwise formula for a sheaf coproduct.",
+   "text": "Descend constant label maps through the fpqc sheaf of continuous maps to the discrete label type, using Mathlib isSheaf_fpqcTopology_continuousMapPresheaf. This directly constructs the locally constant type map.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "sk-def-pe-site",
-    "def-weil-pbc-fpqc-covering"
+    "def-weil-pbc-fpqc-covering",
+    "sk-def-pe-site"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-type.proof.md",
-    "place": "The type map: descent of the compatible local type labels"
+    "place": "The type map and Local models on X_M"
    }
   },
   {
-   "text": "Under step 3 at $V=X$, let $t:|X|\\to R$ be the locally constant function corresponding to $\\sigma$, and put $X_M=t^{-1}(M)$ with its open subscheme structure [def-weil-open-immersion]. These opens cover and are pairwise disjoint, and $X\\setminus X_M=\\bigcup_{M'\\ne M}X_{M'}$ is open, so each is closed as well; this is also the clopen decomposition in [lem-galois-coproduct-copies-morphisms-clopen]. The coproduct $Y=\\coprod_M X_M$ exists by [lem-weil-pbc-scheme-coproduct-family]. The inclusions define $Y\\to X$. On underlying spaces this is the bijection from the disjoint union of the open pieces onto their union, a homeomorphism since each piece is open. On each piece its map on structure sheaves is the identity restriction of $\\mathcal O_X$, so it is an isomorphism of locally ringed spaces and hence of schemes. Thus the claimed decomposition is a scheme coproduct, including empty pieces and an infinite indexing set.",
+   "text": "Its fibres are pairwise disjoint opens covering X. Their inclusions form a coproduct by direct gluing of morphisms.",
    "uses": [
-    "def-weil-open-immersion",
     "lem-galois-coproduct-copies-morphisms-clopen",
-    "lem-weil-pbc-scheme-coproduct-family"
+    "det-pe-finite-local-systems-type-coproduct"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-type.proof.md",
-    "place": "The type map: fibres of the global locally constant type function"
+    "place": "The type map and Local models on X_M"
    }
   },
   {
-   "text": "Fix $M\\in R$. Base change of the chosen covering gives a pro-etale covering $\\{W_i=U_i\\times_X X_M\\to X_M\\}_i$ by the site axiom in [def-weil-pbc-sites-and-cohomology]. On $W_i$ the restriction of $\\sigma$ is the coefficient $M_i$ by step 6. By the restriction-as-composition formula in step 3 it is also the coefficient $M$, since the map to $X$ factors through $X_M$. If $W_i$ is nonempty, evaluation of these equal constant functions at a point gives $M_i=M$; the restriction of $e_i$ is therefore a trivialization by $\\underline M$. If $W_i$ is empty, its module sheaf has exactly one section (the zero module) and the unique map between any two such module sheaves is an isomorphism. Restricting the $e_i$ as in [def-pur-localized-ringed-site] supplies the required trivializations on this covering. This proves the conclusion also when $X_M$ or $X$ is empty.",
+   "text": "Base change the cover to each fibre and restrict each actual trivialization. On a nonempty member the label equals the fibre label. On an empty member every module sheaf is zero, using the empty pro-etale covering.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-proetale-locally-constant-sheaf",
+    "lem-pe-constant-module-restriction-universes",
     "def-pur-localized-ringed-site",
-    "def-weil-proetale-locally-constant-sheaf"
+    "sk-def-pe-site"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-type.proof.md",
-    "place": "Local models on X_M: restrict the actual trivializing cover to a type fibre"
+    "place": "The type map and Local models on X_M"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-site-comparison-morphism",
-  "lem-weil-pbc-constant-sheaf-maps-global-sections",
-  "lem-cbc-comparison-pullback-sections",
-  "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf",
-  "lem-galois-constant-sheaf-sets-representable",
-  "lem-galois-coproduct-copies-morphisms-clopen",
   "def-weil-proetale-locally-constant-sheaf",
-  "def-pur-localized-ringed-site",
-  "det-pe-finite-local-systems-hom",
-  "def-weil-pbc-sites-and-cohomology",
-  "sk-def-pe-site",
+  "lem-pe-constant-module-model-rigidity-universes",
   "def-weil-pbc-fpqc-covering",
-  "def-weil-open-immersion",
-  "lem-weil-pbc-scheme-coproduct-family"
+  "sk-def-pe-site",
+  "lem-galois-coproduct-copies-morphisms-clopen",
+  "det-pe-finite-local-systems-type-coproduct",
+  "lem-pe-constant-module-restriction-universes",
+  "def-pur-localized-ringed-site"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "F6",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-type.proof.md",
-  "place": "All four paragraphs, with explicit constant-sheaf section formula and covering-gluing implementation of descent"
+  "place": "The type map and Local models on X_M"
  },
  "mathlib_searches": [
   {
@@ -253,12 +198,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-constant-sheaf-maps-global-sections",
-  "lem-cbc-comparison-pullback-sections",
-  "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf",
-  "lem-galois-constant-sheaf-sets-representable",
-  "lem-galois-coproduct-copies-morphisms-clopen",
-  "lem-weil-pbc-scheme-coproduct-family"
+  "lem-galois-coproduct-copies-morphisms-clopen"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -297,5 +237,15 @@
   "by": "Q79",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-3d7b8",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261019T002546-L-2152988",
+  "kind": "interface",
+  "note": "independent cc review: item statement byte-identical vs clone; 3 delivered modules + 2 importers (FiniteLocalSystemsTwist, ConstructibleProEtaleClassical) compile; axioms: sorryAx only via existing proEtaleConstantRingUnit_*locallyBijectiveOfUniverses; unit realized empty so no unit bypass; node changes limited to proof/proof_deps/proof_origin + pruned tool_uses"
  }
 }

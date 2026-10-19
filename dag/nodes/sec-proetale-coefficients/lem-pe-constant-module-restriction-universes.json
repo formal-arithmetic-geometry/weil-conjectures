@@ -1,0 +1,116 @@
+{
+ "id": "lem-pe-constant-module-restriction-universes",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-pe-finite-local-systems-type",
+   "place": "proof steps 4 and 8",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Restriction of a constant module sheaf to a pro-etale slice",
+ "statement": "Let X be a scheme, Λ a commutative ring, F a sheaf of modules over the constant lifted ring sheaf on the small pro-etale site [def-weil-proetale-locally-constant-sheaf], U and W objects of that site, a : W → U an arrow, and M a module over the lifted coefficient ring. If F restricted to the localized ringed site over U [def-pur-localized-ringed-site] is isomorphic to the localized constant module sheaf with model M, then F restricted to W is isomorphic to the localized constant module sheaf with the same model M.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-type.proof.md",
+  "place": "proof steps 4 and 8"
+ },
+ "stmt_deps": [
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the sheafification unit along Over.map a, obtaining g. Local bijectivity is preserved by the continuous and cocontinuous slice functor. The adjoint map from the smaller-slice sheafification is an isomorphism: after forgetting to additive sheaves it is sheafification of g followed by the invertible counit. Compose its inverse with overMap applied to the given trivialization and overFunctorMap.",
+   "uses": [
+    "def-weil-proetale-locally-constant-sheaf",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-type.proof.md",
+    "place": "proof steps 4 and 8"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof_origin": {
+  "by": "F6",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-type.proof.md",
+  "place": "proof steps 4 and 8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a constant module sheaf to a slice site is constant with the same model; geometric fibres recover its coefficient module",
+   "results": "Retained searches.jsonl entry 2026-10-18T14:23:35Z: ModuleCat.Tilde.res_const, CompHausLike.LocallyConstantModule.functor, SheafOfModules.over and other topology-specific hits.",
+   "date": "2026-10-18",
+   "verdict": "No exact statement; use sheafification units and the existing fibre API."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctorMap",
+   "results": "Retained searches.jsonl entry 2026-10-18T14:23:35Z: exact overFunctorMap declaration.",
+   "date": "2026-10-18",
+   "verdict": "Used in restriction proof; does not alone identify localized constant constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiberConstantSheafIso|pushforwardContinuousSheafificationCompatibility",
+   "results": "Retained search found Sites/CoverLifting. This session also read ProEtaleFiniteModelStalks, Sites/Point/ConstantSheaf, Scheme.Cover.glueMorphisms and nonempty_isColimit_cofanMk_of.",
+   "date": "2026-10-19",
+   "verdict": "Restriction, coproduct and rigidity are now proved. The proofs use the slice sheafification API, geometricPoint from ProEtaleFiniteModelStalks, filtered-colimit universe shrinking, and direct gluing of scheme morphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The restriction of a sheafification of a constant module presheaf to a slice site is the constant module sheaf with the same coefficient module",
+   "results": "CategoryTheory.constantSheaf; PresheafOfModules.sheafify; CategoryTheory.Sheaf.isConstant_of_iso; AlgebraicGeometry.StructureSheaf.res_const'; ModuleCat.Tilde.res_const; LightCondensed.IsDiscrete; CategoryTheory.Sheaf.IsConstant.mk; AlgebraicGeometry.StructureSheaf.res_const",
+   "date": "2026-10-18",
+   "verdict": "No exact theorem for this localized constant-module construction or unrestricted index universe; the displayed Lean proof supplies the needed result from the existing sheafification, fibre and gluing APIs."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleFiniteLocalSystemsType",
+  "date": "2026-10-18",
+  "group": "F6"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-pe-finite-local-systems",
+ "merged_into": null,
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleConstantModuleRestriction",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleConstantModule_restrict",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleConstantModuleRestriction.lean",
+  "statement": "theorem proEtaleConstantModule_restrict (X : Scheme.{t}) (Λ : Type u) [CommRing Λ]\n    (F : SheafOfModules.{max u (t + 1)}\n      ((sheafCompose (ProEt.topology X)\n        (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj\n          ((constantSheaf (ProEt.topology X) CommRingCat.{max u (t + 1)}).obj\n            (CommRingCat.of (ULift.{t + 1, u} Λ)))))\n    (U W : X.ProEt) (a : W ⟶ U)\n    (M : ModuleCat.{max u (t + 1)} (ULift.{t + 1, u} Λ))\n    (e : Nonempty (F.over U ≅ proEtaleConstantModuleSheafOverOfUniverses X Λ U M)) :\n    Nonempty (F.over W ≅ proEtaleConstantModuleSheafOverOfUniverses X Λ W M)",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-3d7b8",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261019T002546-L-2152988",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-3d7b8",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261019T002546-L-2152988",
+  "kind": "interface",
+  "note": "independent cc review: item statement byte-identical vs clone; 3 delivered modules + 2 importers (FiniteLocalSystemsTwist, ConstructibleProEtaleClassical) compile; axioms: sorryAx only via existing proEtaleConstantRingUnit_*locallyBijectiveOfUniverses; unit realized empty so no unit bypass; node changes limited to proof/proof_deps/proof_origin + pruned tool_uses"
+ }
+}

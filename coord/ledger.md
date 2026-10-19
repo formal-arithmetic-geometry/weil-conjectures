@@ -16686,3 +16686,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:25 L: merged deliver/F5/Sheaf.AlgebraicGeometry.ProEtaleFiniteConstantHom (stage 3; reviewer PASS; first push; landing 20261019T002544-L-2152582 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:25 L: merged deliver/F5/Sheaf.Paper.AmbientIndDerivedSums (stage 3; reviewer PASS; first push; landing 20261019T002545-L-2152705 (interface); batch 20261019T002449; modules 1; new nodes 0; change records: coord/changes/F5-ambient-ind-derived-sums-imports.md)
 - 00:25 L: merged deliver/F5/Sheaf.SmoothPurity.UniqueAdjointCoefficients (stage 3; reviewer PASS; first push; landing 20261019T002545-L-2152822 (proof); batch 20261019T002449; modules 1; new nodes 0)
+- 00:25 L: merged deliver/F6/Sheaf.AlgebraicGeometry.ProEtaleFiniteLocalSystemsType (stage 3; reviewer PASS; first push; landing 20261019T002546-L-2152988 (interface); batch 20261019T002449; modules 3; new nodes 3)
