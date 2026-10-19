@@ -10,6 +10,8 @@ public import Sheaf.Paper.SfConstructibleHeart
 public import Sheaf.AlgebraicGeometry.FrobeniusDetailed
 public import WeilConjectures.Mathlib.CategoryTheory.Endofunctor.Algebra
 
+import Mathlib.Algebra.CharP.CharAndCard
+
 /-! # Weil complexes as fixed pairs on the recorded constructible categories
 
 Source: Weil blueprint, order 1507, Weil sheaves and Weil complexes
@@ -45,7 +47,19 @@ The distinct prime l is nonzero in each residue field, hence invertible there. -
 theorem FiniteFieldDatum.geometricFiber_coefficientPrimeInvertible :
     ∀ x : (D.geometricFiber Y₀).left,
       IsUnit (l : (D.geometricFiber Y₀).left.residueField x) := by
-  sorry
+  classical
+  intro x
+  let : Fintype D.k₀ := Fintype.ofFinite D.k₀
+  have : Fact D.p.Prime := ⟨D.prime⟩
+  have : CharP D.k₀ D.p := charP_of_card_eq_prime_pow
+    (by simpa only [Nat.card_eq_fintype_card] using D.card_base.trans D.cardinality_eq)
+  have hunit : IsUnit (l : D.k₀) :=
+    (CharP.cast_ne_zero_of_ne_of_prime D.k₀ (Fact.out : l.Prime) hl.symm).isUnit
+  let f := (D.geometricFiber Y₀).hom ≫
+    Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))
+  simpa only [map_natCast] using hunit.map
+    ((Scheme.ΓSpecIso (CommRingCat.of D.k₀)).inv ≫ f.appTop ≫
+      (D.geometricFiber Y₀).left.Γevaluation x).hom
 
 /-- The inherited prime-invertibility structure; it imposes no additional hypothesis.
 Source: blueprint order 1507 (blueprint: def-weil-weil-sheaf-complex). -/
