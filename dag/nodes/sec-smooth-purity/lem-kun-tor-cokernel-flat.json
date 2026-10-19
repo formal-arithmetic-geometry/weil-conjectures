@@ -23,9 +23,10 @@
  ],
  "proof": [
   {
-   "text": "For every module sheaf $\\mathcal M$, take $n=a-1<a$ in the hypothesis. By [def-pc-acyclic-complex-modules], $H^{a-1}=\\ker d^{a-1}/\\operatorname{im}d^{a-2}$ in the abelian category of module sheaves. Its vanishing says precisely $\\operatorname{im}d^{a-2}=\\ker d^{a-1}$, so $\\mathcal K^\\bullet\\otimes_\\Lambda\\mathcal M$ is exact in degree $a-1$.",
+   "text": "For every test sheaf M use the hypothesis in degree a-1<a. Vanishing of homology is equivalent to ExactAt by HomologicalComplex.exactAt_iff_isZero_homology. The proved CochainComplex.mapBifunctorSingle₂Iso identifies total tensor with M[0] with termwise tensorRight M, without a sign or change of the complex.",
    "uses": [
-    "def-pc-acyclic-complex-modules"
+    "def-pc-acyclic-complex-modules",
+    "def-kun-derived-tensor"
    ],
    "elementary": true,
    "source": {
@@ -34,29 +35,48 @@
    }
   },
   {
-   "text": "Work with the small-site representative of $T_{\\Et}$ fixed by [def-weil-size-convention]. In [lem-weil-pbc-site-flat-opcycles-tor-criterion], set $\\mathcal O=\\Lambda_T$, $P^\\bullet=\\mathcal K^\\bullet$, and $n=a$. For $\\mathcal M[0]$, the totalization formula of [def-kun-derived-tensor] has just $\\mathcal K^j\\otimes_{\\Lambda_T}\\mathcal M$ in degree $j$ and differential $d_{\\mathcal K}^j\\otimes1$. The cited symmetry has sign $(-1)^{j\\cdot0}=1$ and sends $x\\otimes m$ to $m\\otimes x$; it intertwines this differential with $1\\otimes d_{\\mathcal K}^j$, since both composites send $x\\otimes m$ to $m\\otimes d_{\\mathcal K}^j x$. Thus step 1 gives exactly the criterion's universal tensor exactness in degree $a-1$. All terms of $P^\\bullet$ are flat by hypothesis. Its opcycle $P^a/\\operatorname{im}d^{a-1}$ is exactly the stated cokernel $\\mathcal N$, so the criterion concludes that $\\mathcal N$ is flat over $\\Lambda_T$.",
+   "text": "Work directly on T.smallEtaleTopology with independent object, morphism and coefficient universes. The tensor-colimit theorem supplies finite-colimit preservation of tensorLeft and, by symmetry, tensorRight; its additive corollary supplies MonoidalPreadditive. Its siteSheafTensorRightIso transports IsFlatOnSite of each term to exactness of tensorRight; symmetry gives categorical flatness. Only terms a-1 and a are needed by the following chase.",
    "uses": [
     "def-weil-size-convention",
-    "def-kun-derived-tensor",
-    "lem-weil-pbc-site-flat-opcycles-tor-criterion"
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": false,
    "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-tor-cokernel-flat.proof.md",
+    "place": "Cokernel/Tor argument; independent-universe tensor implementation supplied by TensorColimitsIndependentCoefficients"
+   }
+  },
+  {
+   "text": "Put d=P.d(a-1,a), d′=P.d(a-2,a-1), p=P.pOpcycles(a). For a short exact sequence S₁→S₂→S₃, tensor-colimit preservation makes d⊗Sᵢ followed by p⊗Sᵢ exact, with p⊗Sᵢ epic. To prove opcycles⊗S₁→opcycles⊗S₂ monic, take a morphism x into its kernel. After an epimorphic refinement lift x to y in Pᵃ⊗S₁, and after another refinement lift its image to z in P^(a-1)⊗S₂. The image of z in P^(a-1)⊗S₃ is a cycle; step 1 gives a boundary w in P^(a-2)⊗S₃ after a third refinement. Tensor preserves the epimorphism S₂→S₃, so lift w to w′ after a fourth refinement. Subtract d′w′ from z. The corrected z dies in P^(a-1)⊗S₃; flatness of P^(a-1) lifts it from v in P^(a-1)⊗S₁. Flatness of Pᵃ cancels the monomorphism into Pᵃ⊗S₂ and proves dv equals the refined y, since dd′=0. Thus the refined x is pdv=0. Cancelling the composite refinement, which is epic, gives x=0. This is the private fully proved flat_opcycles_of_tensor_exactAt helper, adapted from the already proved FlatModel.flat_opcycles_of_exactAt and RingedToposAcyclicKFlatPullback chase; it requires colimit preservation instead of monoidal closedness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-tor-cokernel-flat.proof.md",
+    "place": "Cokernel-flatness Tor argument, implemented by the epimorphic-refinement diagram chase from WeilConjectures.CategoryTheory.DerivedCategory.FlatModel"
+   }
+  },
+  {
+   "text": "Right exactness and preservation of monomorphisms show exactness of tensor with P.opcycles(a); the exactness/monomorphism criterion in an abelian category supplies finite-limit preservation. Symmetry gives the right tensor functor, and siteSheafTensorRightIso transports its exactness back to IsFlatOnSite. The opcycles object is the original cokernel; no definition or statement changes.",
+   "uses": [
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": true,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-tor-cokernel-flat.md",
-    "place": "## Proof, cokernel/Tor criterion paragraph"
+    "place": "## Proof, first paragraph: vanishing of H^{a-1} and exactness"
    }
   }
  ],
  "proof_deps": [
   "def-pc-acyclic-complex-modules",
-  "def-weil-size-convention",
   "def-kun-derived-tensor",
-  "lem-weil-pbc-site-flat-opcycles-tor-criterion"
+  "def-weil-size-convention",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-tor-cokernel-flat.md",
-  "place": "## Proof; direct specialization of the general ringed-site flat-opcycles criterion"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-tor-cokernel-flat.proof.md",
+  "place": "C6: proved categorical Tor diagram chase at independent site universes, following the existing FlatModel and RingedToposAcyclicKFlatPullback proofs; degree-zero total tensor comparison and existing site tensor comparison."
  },
  "mathlib_searches": [
   {
@@ -168,9 +188,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-site-flat-opcycles-tor-criterion"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-15",
   "by": "L",
@@ -196,5 +214,15 @@
   "group": "NH",
   "result": "pass",
   "note": "Statement matches the node; dependencies, universes, source/docstrings, edge cases, and required compile checks verified. No fixes needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261019T093313-L-2292367",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
