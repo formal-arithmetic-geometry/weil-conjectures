@@ -1,0 +1,301 @@
+{
+ "id": "lem-pur-finite-kummer-level-geometric",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-kummer-level",
+   "place": "Proof steps (3)--(5)"
+  },
+  "same_as": []
+ },
+ "kind": "lemma",
+ "title": "Geometric finite Kummer comparison and base change",
+ "statement": "Assume the finite arithmetic data at level n gives a ring map a from Z/ell^(N+1) to A and an additive coordinate isomorphism b that is linear for a. For every scheme T where ell is invertible, the normalized finite Tate-line isomorphism A(1)_T ≅ mu_(ell^(N+1),T) tensor A exists and is uniquely characterized on local pure tensors by the N-th root projection. It is compatible with the derived tensor comparison and with arbitrary base change, including the root-limit map and the commuting tensor square.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md",
+  "place": "Proof steps (3)--(5), normalized projection, derived tensor and base-change clauses"
+ },
+ "stmt_deps": [
+  "def-coefficient-twists-detailed",
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-derived-tensor",
+  "def-weil-proetale-inverse-image",
+  "def-pur-roots-of-unity-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Set $L_T=\\mathbf Z_\\ell(1)_T$ and $M_{N,T}=L_T\\otimes_{(\\mathbf Z_\\ell)_T}(R_N)_T$. By [lem-pur-twist-sheaf-locally-free] (3), specialized to $E=\\mathbf Q_\\ell$, uniformizer $\\ell$ and level $N$, $M_{N,T}$ is locally free of rank one over $(R_N)_T$; these are exactly the scalar extensions of [def-coefficient-twists-detailed]. We verify that the particular map $\\rho_{N,T}:M_{N,T}\\to\\mu_{\\ell^N,T}$, $x\\otimes\\bar a\\mapsto a\\,p_N(x)$, is an isomorphism, rather than merely using an unspecified isomorphism of the two lines. The balanced tensor definition [def-pur-sheaf-tensor-product] identifies $M_{N,T}$ with $L_T/\\ell^N L_T$: the inverse maps are $x\\otimes\\bar a\\mapsto a[x]$ and $[x]\\mapsto x\\otimes1$, with lifts of $\\bar a$ chosen locally; changing a lift contributes $\\ell^N[x]=0$. The inverse limit is sectionwise [def-pur-sheaf-inverse-limit]. Write a section $x$ of $\\ker p_N$ multiplicatively as $(x_r)$, so $x_N=1$. Then $y_r=x_{r+N}$ belongs to $\\mu_{\\ell^r}$ because $x_{r+N}^{\\ell^r}=x_N=1$, the $y_r$ are compatible, and $\\ell^Ny=x$. Conversely $p_N(\\ell^Ny)=1$ for every $y$. Thus $\\ker p_N=\\ell^NL_T$, and $\\rho_{N,T}$ is a monomorphism. Trivialize $M_{N,T}$ and $\\mu_{\\ell^N,T}$ together using (3) and (1) of the cited Tate-line lemma. The map between the two constant $R_N$-lines is multiplication by a locally constant scalar $a$; refine the cover until $a$ is constant. On a nonempty member of this cover, a nonunit $a\\in R_N$ is divisible by $\\ell$ and annihilates the nonzero constant section $\\ell^{N-1}$, contradicting monicity. On an empty member both module sheaves are zero, so the comparison is already an isomorphism. Hence $a$ is a unit on every member of this cover and $\\rho_{N,T}$ is an isomorphism. This proves the required projection formula without identifying the completed coefficient sheaf with the constant sheaf.",
+   "uses": [
+    "lem-pur-twist-sheaf-locally-free",
+    "def-coefficient-twists-detailed",
+    "def-pur-sheaf-tensor-product",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md",
+    "place": "Proof; expanded finite-level reduction argument"
+   }
+  },
+  {
+   "text": "The two successive scalar extensions in [def-coefficient-twists-detailed] identify $A(1)_T$ with $L_T\\otimes_{(\\mathbf Z_\\ell)_T}A_T$. Here the explicit associativity maps are $(x\\otimes b)\\otimes a\\mapsto x\\otimes ba$ and $x\\otimes a\\mapsto(x\\otimes1)\\otimes a$. Since $\\ell^N A=0$, the balanced tensor relations give mutually inverse maps\n$$L_T\\otimes_{\\mathbf Z_\\ell}A_T\\longleftrightarrow (L_T\\otimes_{\\mathbf Z_\\ell}(R_N)_T)\\otimes_{(R_N)_T}A_T,$$\n$$x\\otimes a\\longmapsto(x\\otimes1)\\otimes a,\\qquad (x\\otimes\\bar b)\\otimes a\\longmapsto x\\otimes\\bar b a.$$\nChanging a lift of $\\bar b$ changes the latter by a multiple of $\\ell^N a=0$. These formulas first define maps of presheaf tensor products and then of their sheafifications [def-pur-sheaf-tensor-product]; checking them on pure tensors proves that they are inverse. Compose with $\\rho_{N,T}\\otimes1$ from step 3. This proves the asserted canonical isomorphism $\\alpha_T$, explicitly $x\\otimes a\\mapsto p_N(x)\\otimes a$.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md",
+    "place": "Proof; expanded finite-level reduction argument"
+   }
+  },
+  {
+   "text": "By [lem-pur-twist-sheaf-locally-free] (1), $\\mu_{\\ell^N,T}$ is locally free of rank one over $(R_N)_T$. On a trivializing cover, tensoring with it is the identity functor on module sheaves. Thus it preserves exactness: a section in a kernel can locally be lifted from the preceding term on that cover, and equalities are checked locally. This is flatness as defined by [def-pc-flat-sheaf-modules]. By [lem-pc-bounded-above-flat-kflat-site] this sheaf in degree zero is K-flat. Consequently the ordinary tensor on the right of $\\alpha_T$ is also $\\mu_{\\ell^N,T}\\otimes^L_{R_N}A_T$, by [def-weil-derived-tensor], with the canonical augmentation given by the degree-zero model. Put $B_T=\\mu_{\\ell^N,T}\\otimes_{(R_N)_T}A_T$. On the same trivializing cover $B_T$ is $A_T$, so tensoring over $A_T$ with $B_T$ restricts to the identity on that cover. For any exact sequence, a section of a kernel therefore locally has a preimage from the preceding term, and these local image conditions prove exactness of its tensor sequence. Thus $B_T$ is flat over $A_T$; the isomorphism $A(1)_T\\cong B_T$ makes tensoring with $A(1)_T$ isomorphic to this exact functor. Both are K-flat in degree zero by the cited bounded-above criterion. Tensoring termwise with either line therefore computes the derived twist of any complex of $A_T$-modules. Applying the derived tensor bifunctor to $\\alpha_T$ gives the comparison naturally in that complex. The $R_N$-flat sheaf in the first calculation is $\\mu_{\\ell^N,T}$; the $A_T$-flat sheaves in the twist calculation are $B_T$ and $A(1)_T$.",
+   "uses": [
+    "lem-pur-twist-sheaf-locally-free",
+    "def-pc-flat-sheaf-modules",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "def-weil-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md",
+    "place": "Proof; expanded finite-level reduction argument"
+   }
+  },
+  {
+   "text": "Use the constant-sheaf resolution $C=[R\\xrightarrow{\\ell^N}R]\\to(R_N)_T$ of [lem-pur-constant-two-term-resolution], with $R=(\\mathbf Z_\\ell)_T$. Multiplication by $\\ell^N$ on $L_T$ is injective: if $x=(x_r)$ satisfies $x_r^{\\ell^N}=1$ for all $r$, then $x_r=x_{r+N}^{\\ell^N}=1$ for every $r$, using the sectionwise limit [def-pur-sheaf-inverse-limit]. Hence that lemma gives a quasi-isomorphism $L_T\\otimes_R C\\to(L_T\\otimes_R(R_N)_T)[0]$. Its augmentation on degree-zero cohomology is the quotient projection, which step 3 identifies with $p_N:L_T\\to\\mu_{\\ell^N,T}$.",
+   "uses": [
+    "lem-pur-constant-two-term-resolution",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md",
+    "place": "Proof; expanded finite-level reduction argument; constant-coefficient resolution and augmentation repair"
+   }
+  },
+  {
+   "text": "Choose a bounded-above flat resolution $q:P\\to L_T[0]$ by [lem-pc-kflat-bounded-flat-replacement]; it is K-flat by [lem-pc-bounded-above-flat-kflat-site]. Apply [lem-pur-kflat-cone-comparison] with $M=(R_N)_T$ and the resolution $C$ from step 6. Its bottom arrow is the quasi-isomorphism just proved. The lemma's commuting augmentation square therefore identifies the canonical comparison $L_T\\otimes_R^{\\mathbf L}(R_N)_T\\to(L_T\\otimes_R(R_N)_T)[0]$ as an isomorphism, with the quotient augmentation used in step 3.",
+   "uses": [
+    "lem-pc-kflat-bounded-flat-replacement",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-pur-kflat-cone-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md",
+    "place": "Proof; expanded finite-level reduction argument; constant-coefficient resolution and augmentation repair"
+   }
+  },
+  {
+   "text": "Choose the finite basis $A\\cong R_N^{ef}$ from step 2. Its inclusions and projections give $A_T\\cong((R_N)_T)^{\\oplus ef}$ and the resolution $D=C^{\\oplus ef}\\to A_T$. Under the tensor relations [def-pur-sheaf-tensor-product], $x\\otimes(a_i)_i\\mapsto(x\\otimes a_i)_i$ has inverse given by summing the basis inclusions; these maps commute with differentials and augmentations. Kernels and images of a finite sum of differentials are computed componentwise, so both $D\\to A_T$ and $L_T\\otimes_R D\\to(L_T\\otimes_R A_T)[0]$ are quasi-isomorphisms by step 6. Each term of $D$ is finite free; tensoring with it is a finite sum of identity functors, whose kernels and images are componentwise, so it is flat [def-pc-flat-sheaf-modules]. Thus $D$ is K-flat by [lem-pc-bounded-above-flat-kflat-site]. Apply the augmentation-square conclusion of [lem-pur-kflat-cone-comparison] to $q:P\\to L_T[0]$ and $D\\to A_T$: the canonical comparison $L_T\\otimes_R^{\\mathbf L}A_T\\to(L_T\\otimes_R A_T)[0]$ is an isomorphism. Step 4 identifies its target with $B_T$ by $x\\otimes a\\mapsto p_N(x)\\otimes a$. The basis verifies invertibility; the augmentation maps were defined without it.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-flat-sheaf-modules",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-pur-kflat-cone-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md",
+    "place": "Proof; expanded finite-level reduction argument; constant-coefficient resolution and augmentation repair"
+   }
+  },
+  {
+   "text": "We spell out finite-root base change on the pro-etale site. Let $h:T'\\to T$ be any morphism and $m=\\ell^r$, $r\\geq1$. Put $W_m=\\operatorname{Spec}(\\mathbf Z[z]/(z^m-1))$ and $V_{m,T}=T\\times_{\\operatorname{Spec}\\mathbf Z}W_m$, using the fibre product [def-pc-fibre-product]. On an affine $U=\\operatorname{Spec}B\\subset T$, the fibre-product universal property and [def-weil-affine-spectrum] identify $V_{m,T}\\times_TU$ with $\\operatorname{Spec}(B[z]/(z^m-1))$: compatible ring maps from $B$ and $\\mathbf Z[z]/(z^m-1)$ are exactly a $B$-algebra map from this polynomial quotient. A map from an affine scheme into this root scheme is exactly an element $z$ satisfying $z^m=1$, whose inverse is $z^{m-1}$. For any scheme $Q\\to T$, cover $Q$ by affine opens mapping into affine opens of $T$; the maps determined by a global root agree on every affine open of each overlap, since their ring maps send $z$ to that same restricted root. They glue uniquely by [lem-weil-pbc-scheme-morphism-gluing]. Conversely a morphism gives these compatible local roots, which glue by the structure-sheaf axiom. This proves that $V_{m,T}$ represents the root functor [def-pur-roots-of-unity-sheaf], without assuming $T$ affine. Apply [lem-sbc-root-split-away-cover-etale] on each affine chart with $g=1$ and exponent $m$; $D(1)$ is the whole chart and $m$ is invertible. The affine-local criterion in [def-weil-etale-morphism] now shows that $V_{m,T}\\to T$ is etale, since the displayed affine root charts cover its source and their bases cover $T$. It is an object of the pro-etale site by [def-weil-pbc-site-comparison-morphism]; its represented functor is a sheaf by [lem-weil-pbc-proetale-subcanonical]. Finally the fibre-product universal property identifies $T'\\times_TV_{m,T}$ with $V_{m,T'}$: a map into either object is exactly a map into $T'$ together with a compatible map into $W_m$. This identification retains the coordinate $z$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-pur-roots-of-unity-sheaf",
+    "lem-sbc-root-split-away-cover-etale",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-proetale-subcanonical",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PK, section-kummer; groupoids.tex Tag 040M, example-roots-of-unity; explicit root-scheme base change"
+   }
+  },
+  {
+   "text": "For an object $V$ of $T_{\\mathrm{proet}}$, its base change $V'=T'\\times_TV$ is the object used by [def-weil-proetale-inverse-image]. For every sheaf $G$ on $T'_{\\mathrm{proet}}$, the adjunction and [lem-galois-yoneda-hom-bijection] give natural bijections\n$$\\operatorname{Hom}(h^{-1}h_V,G)=\\operatorname{Hom}(h_V,h_*G)=(h_*G)(V)=G(V')=\\operatorname{Hom}(h_{V'},G).$$\nThe represented presheaves are sheaves by [lem-weil-pbc-proetale-subcanonical]. Write $\\Phi_G$ for this chain of bijections. The criterion [lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection] gives an isomorphism $\\theta:h_{V'}\\to h^{-1}h_V$ with $\\Phi_G(f)=f\\theta$. Let $\\delta:h^{-1}h_V\\to h_{V'}$ be adjoint to the map $h_V\\to h_*h_{V'}$ sending $a:Q\\to V$ to $\\mathrm{id}_{T'}\\times_Ta:T'\\times_TQ\\to V'$. Evaluating this adjoint at $\\mathrm{id}_V$ shows $\\Phi_{h_{V'}}(\\delta)=\\mathrm{id}_{h_{V'}}$. Thus $\\delta\\theta=\\mathrm{id}$, so $\\delta=\\theta^{-1}$ is precisely the canonical isomorphism $h^{-1}h_V\\to h_{V'}$. Apply this to the global root scheme $V_{\\ell^r,T}$ of step 9. We obtain $\\beta_{r,h}:h^{-1}\\mu_{\\ell^r,T}\\xrightarrow{\\sim}\\mu_{\\ell^r,T'}$. Under the Hom bijections its adjoint sends a root $z$ on $Q\\to T$ to its image under the global-section ring map for $T'\\times_TQ\\to Q$. This is precisely the comparison map of [def-pur-roots-of-unity-inverse-image]. That ring map sends $zz'$ to the product of their images and $z^j$ to the $j$-th power of the image. Thus $\\beta_{r,h}$ respects the group law and the scalar action, and for $t_r:z\\mapsto z^\\ell$ one has $t'_r\\beta_{r+1,h}=\\beta_{r,h}h^{-1}t_r$. For $g:T''\\to T'$, the ring maps for the two projections compose to the ring map for $T''\\times_TQ\\to Q$, so, under the inverse-image composition identification, $\\beta_{r,h\\circ g}=\\beta_{r,g}\\,g^{-1}\\beta_{r,h}$. The projection for the identity map is the identity, giving $\\beta_{r,\\mathrm{id}}=\\mathrm{id}$. These formulas prove the transition, identity and composition compatibilities explicitly.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-galois-yoneda-hom-bijection",
+    "lem-weil-pbc-proetale-subcanonical",
+    "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection",
+    "def-pur-roots-of-unity-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md",
+    "place": "Proof; expanded finite-level reduction argument"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-tate-inverse-limit-base-change] to $F_{r,S}=\\mu_{\\ell^r,S}$ and the transition-, scalar-, identity- and composition-compatible maps $\\beta_{r,h}$ of step 10. The canonical constant-ring identifications, including $\\mathbf Z_\\ell$, are supplied by [lem-pe-constant-left-module-inverse-image]. In the lemma's notation $B_S=A(1)_S$ by step 4, and its $\\alpha_S$ is exactly that step's projection-tensor map. The lemma gives $c_h$, its linearity and composition laws, and $\\alpha_{T'}b_h=(\\beta_{N,h}\\otimes1)h^{-1}\\alpha_T$. Both $\\alpha$ maps are isomorphisms by step 4, so the lemma also gives that $b_h$ is an isomorphism, with its identity and composition laws.",
+   "uses": [
+    "lem-pur-tate-inverse-limit-base-change",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md",
+    "place": "Proof; expanded finite-level reduction argument"
+   }
+  },
+  {
+   "text": "Finally [prop-weil-pbc-proetale-constant-exact] says that module pullback for the finite constant ring $A$ is exact, so its derived pullback is termwise inverse image with the coefficient action identified by the canonical ring isomorphism. Put $B_T=\\mu_{\\ell^N,T}\\otimes_{(R_N)_T}A_T$ and $d_h=\\beta_{N,h}\\otimes1:h^{-1}B_T\\xrightarrow{\\sim}B_{T'}$. For any $K\\in D(T_{\\mathrm{proet}},A)$, [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], with $R=A_T$ and $S=A_{T'}$, identifies the pullbacks of $K\\otimes_A^L A(1)_T$ and $K\\otimes_A^L B_T$ with $h^{-1}K\\otimes_A^L h^{-1}A(1)_T$ and $h^{-1}K\\otimes_A^L h^{-1}B_T$, respectively. Bifunctoriality and the equation $\\alpha_{T'}b_h=d_h h^{-1}\\alpha_T$ in step 11 give\n$$ (1\\otimes^L\\alpha_{T'})(1\\otimes^Lb_h)=(1\\otimes^Ld_h)(1\\otimes^Lh^{-1}\\alpha_T). $$\nThe coefficient lines $A(1)_T,B_T$ are flat over $A_T$ and K-flat in degree zero by step 5, so these derived tensors can be computed by termwise tensoring $K$ with the lines. On each term the displayed equation is exactly the pure-tensor equation of step 11; the maps commute with the differentials because they act as the identity on $K$. Thus the ordinary and derived comparisons agree, naturally in $K$. This is the asserted joint compatibility with derived tensor and base change.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md",
+    "place": "Proof; expanded finite-level reduction argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coefficient-twists-detailed",
+  "def-pc-fibre-product",
+  "def-pur-roots-of-unity-inverse-image",
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-weil-proetale-inverse-image",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-pur-constant-two-term-resolution",
+  "lem-pur-kflat-cone-comparison",
+  "lem-pur-tate-inverse-limit-base-change",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-sbc-root-split-away-cover-etale",
+  "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection",
+  "lem-weil-pbc-proetale-subcanonical",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-pur-sheaf-inverse-limit",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-derived-tensor",
+  "def-weil-pbc-site-comparison-morphism",
+  "prop-weil-pbc-proetale-constant-exact"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md",
+  "place": "Separated geometric comparison portion of steps (3)--(5); the arithmetic and coefficient basis remain in the parent item."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cyclotomic Tate module sheaf quotient by a prime power and scalar extension on the proetale site",
+   "results": "{\"t\": \"2026-10-16T11:46:07Z\", \"tool\": \"leanfinder\", \"query\": \"Cyclotomic Tate module sheaf quotient by a prime power and scalar extension on the proetale site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRham\", \"BDeRhamPlus\", \"WittVector.StandardOneDimIsocrystal\", \"cyclotomicCharacter\", \"cyclotomicCharacter.toZModPow_toFun\", \"cyclotomicCharacter.spec\", \"cyclotomicCharacter.toFun\", \"cyclotomicCharacter.toFun_apply\"], \"digest\": \"cef9e08750c85e2a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned types describe cyclotomic characters of domain automorphisms, perfectoid period rings and isocrystals; none is a comparison of pro-etale module sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rootsOfUnity\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-16T10:58:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"rootsOfUnity\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned cyclotomic-character, Zariski module-sheaf, perfectoid-ring and general cohomology constructions do not state the finite pro-etale Tate comparison or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "cyclotomic|TateModule|tateModule|rootsOfUnity",
+   "results": "{\"t\": \"2026-10-16T10:59:06Z\", \"tool\": \"grep\", \"query\": \"cyclotomic|TateModule|tateModule|rootsOfUnity\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned cyclotomic-character, Zariski module-sheaf, perfectoid-ring and general cohomology constructions do not state the finite pro-etale Tate comparison or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite coefficient Tate twist is roots of unity tensor a finite ring on pro etale site",
+   "results": "{\"ok\":true,\"n_hits\":0,\"top\":[]}",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1890,
+ "blueprint_uses": [
+  "def-coefficient-twists-detailed",
+  "def-pur-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-weil-derived-tensor",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "uses_not_cited": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-derived-tensor",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "split_report": null,
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-83fd1",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261019T192811-L-1869624",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurityFiniteKummerLevel",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteKummerLevel_geometric",
+  "file": "lean/Sheaf/Paper/PurityFiniteKummerLevel.lean",
+  "statement": "theorem finiteKummerLevel_geometric (P : PurityFiniteSetting.{u}) (h : P.ramificationIndex ∣ P.level) (n : ℕ) (hn : P.level = n + 1) (N : ℕ) (hN : P.kummerLevel = N + 1) (a : ZMod (P.coefficients.l ^ (N + 1)) →+* P.kummerCoefficient n) (f : ℕ) (hf : Nat.card (Padic.coefficientExtensionResidueField P.coefficients.l P.extension) = P.coefficients.l ^ f) (b : P.kummerCoefficient n ≃+ (Fin (P.ramificationIndex * f) → ZMod (P.coefficients.l ^ (N + 1)))) : (∀ (z : ZMod (P.coefficients.l ^ (N + 1))) (x : P.kummerCoefficient n), b (a z * x) = z • b x) → ∃ α : ∀ (T : Scheme.{u}) (_hT : ∀ x : T, IsUnit (P.coefficients.l : T.presheaf.stalk x)), P.kummerLine n T ≅ P.kummerRootsTensor n N a T, (∀ (T : Scheme.{u}) (hT : ∀ x : T, IsUnit (P.coefficients.l : T.presheaf.stalk x)), P.IsKummerComparison n N a T (α T hT) ∧ (∀ γ : P.kummerLine n T ≅ P.kummerRootsTensor n N a T, P.IsKummerComparison n N a T γ → γ = α T hT) ∧ P.KummerDerivedCompatible n N a T (α T hT)) ∧ P.KummerBaseChangeCompatible n N a α",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-20"
+ },
+ "reviewed_lean": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityFiniteKummerLevel",
+  "date": "2026-10-20",
+  "group": "P1"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-83fd1",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261019T192811-L-1869624",
+  "kind": "proof",
+  "note": "independent cc review: Delivered module and nodes vs the C-85315 return (all 3 points done) and the live module; finiteKummerLevel_geometric vs the parent's former geometric conjunct; compiled the delivered module, #print axioms, and the importers PurityRelativeKummer (ok) and PurityConventions (identical failure on the published build)"
+ }
+}
