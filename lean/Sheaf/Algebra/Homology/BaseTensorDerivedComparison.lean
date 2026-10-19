@@ -8,7 +8,7 @@ public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.Algebra.Homology.BaseTensorDerivedChainComparison
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.Algebra.Homology.RestrictionCompositeHomology
+import WeilConjectures.Algebra.Homology.RestrictionCompositeHomology
 
 /-! # Construction of the derived coefficient comparison
 

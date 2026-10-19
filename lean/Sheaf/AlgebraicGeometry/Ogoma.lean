@@ -2,7 +2,7 @@ module
 
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 public import Mathlib.RingTheory.Noetherian.Basic
-import Sheaf.RingTheory.ExistsAnnihilatorOfSubsingletonLocalizedModule
+import WeilConjectures.RingTheory.ExistsAnnihilatorOfSubsingletonLocalizedModule
 
 /-! # Ogoma's lemma
 Source: literature/stacks-project/smoothing.tex, Smoothing Ring Maps, Lemma Tag 07FC

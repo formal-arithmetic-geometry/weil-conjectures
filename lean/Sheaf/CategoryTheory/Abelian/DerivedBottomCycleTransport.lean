@@ -6,7 +6,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import Sheaf.CategoryTheory.Abelian.DerivedSingleShiftNormalization
-import Sheaf.CategoryTheory.Abelian.DerivedBottomInclusion
+import WeilConjectures.CategoryTheory.Abelian.DerivedBottomInclusion
 import Sheaf.CategoryTheory.Abelian.DerivedCyclesUnitNaturality
 
 /-! # Canonical-cycle transport to the double truncation

@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.PerfectMorphism
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.MvPolynomial.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Localization
-import Sheaf.AlgebraicGeometry.AffinePolynomialSupportedLocalizationStalk
+import WeilConjectures.AlgebraicGeometry.AffinePolynomialSupportedLocalizationStalk
 import Sheaf.RingTheory.TorVanishingRestrictionFlatBase
 import Mathlib.RingTheory.Flat.Localization
 

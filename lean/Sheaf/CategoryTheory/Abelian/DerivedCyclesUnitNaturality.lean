@@ -4,7 +4,7 @@ Released under the Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.CategoryTheory.Abelian.DerivedCyclesMap
+public import WeilConjectures.CategoryTheory.Abelian.DerivedCyclesMap
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import Sheaf.CategoryTheory.Abelian.DerivedSingleShiftNormalization
 

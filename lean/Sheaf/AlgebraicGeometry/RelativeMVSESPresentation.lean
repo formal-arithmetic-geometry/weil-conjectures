@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 import Sheaf.AlgebraicGeometry.RelativeMVConePresentation
-import Sheaf.CategoryTheory.DerivedCategory.ConeDiagramSESPresentation
+import WeilConjectures.CategoryTheory.DerivedCategory.ConeDiagramSESPresentation
 
 /-! # Chain-level relative Mayer--Vietoris presentation
 

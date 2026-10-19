@@ -8,7 +8,7 @@ public import Sheaf.AlgebraicGeometry.SelfTorAffineSection
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
 import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Sheaf.AlgebraicGeometry.SelfTorAffineChartSections
+import WeilConjectures.AlgebraicGeometry.SelfTorAffineChartSections
 import Sheaf.AlgebraicGeometry.LocallyQuasicoherentAffinePullbackSections
 
 /-! # Affine sections of the chart model after tensor pullback

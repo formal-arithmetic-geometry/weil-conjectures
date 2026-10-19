@@ -6,7 +6,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
 import Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESCore
-import Sheaf.CategoryTheory.DerivedCategory.ConeDiagramSESPresentation
+import WeilConjectures.CategoryTheory.DerivedCategory.ConeDiagramSESPresentation
 
 /-! # Construction component for the union SES presentation
 (blueprint: new-single-complex-open-union-ses-objects). -/

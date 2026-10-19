@@ -9,7 +9,7 @@ public import Sheaf.Paper.DerivedHomMayerVietoris
 public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
-import Sheaf.RingTheory.KoszulGeneratorHomotopy
+import WeilConjectures.RingTheory.KoszulGeneratorHomotopy
 import Sheaf.AlgebraicGeometry.BasicOpenTildeScalarIso
 import Mathlib.Algebra.Homology.Embedding.ExtendHomotopy
 

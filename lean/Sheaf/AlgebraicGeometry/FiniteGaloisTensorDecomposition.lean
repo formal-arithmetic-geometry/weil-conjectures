@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Sites.Sheaf
 public import Mathlib.FieldTheory.Galois.Basic
 public import Mathlib.RingTheory.TensorProduct.Maps
 import WeilConjectures.Mathlib.RingTheory.Etale.Field
-import Sheaf.AlgebraicGeometry.FiniteGaloisTensorCoproduct
+import WeilConjectures.AlgebraicGeometry.FiniteGaloisTensorCoproduct
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleDisjointCover
 import Mathlib.CategoryTheory.Limits.Types.Products
 import Mathlib.LinearAlgebra.Dual.Lemmas

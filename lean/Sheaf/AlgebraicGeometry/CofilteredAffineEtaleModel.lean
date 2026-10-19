@@ -6,7 +6,7 @@ Authors: SHEAF group E1
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Sheaf.AlgebraicGeometry.AffineEtaleFiniteDiagramObjects
+import WeilConjectures.AlgebraicGeometry.AffineEtaleFiniteDiagramObjects
 import Mathlib.CategoryTheory.Presentable.Directed
 import Mathlib.CategoryTheory.Limits.Final
 

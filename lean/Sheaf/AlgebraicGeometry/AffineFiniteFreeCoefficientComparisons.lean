@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 import Sheaf.AlgebraicGeometry.AffineHomComparisonMaps
-import Sheaf.AlgebraicGeometry.AffineHomComparisonFiniteFree
+import WeilConjectures.AlgebraicGeometry.AffineHomComparisonFiniteFree
 
 /-! # Finite-free affine Hom comparisons with coefficients
 

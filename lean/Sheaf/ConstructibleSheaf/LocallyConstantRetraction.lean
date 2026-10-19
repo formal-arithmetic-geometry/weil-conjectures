@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 public import WeilConjectures.ConstructibleSheaf.Defs
 
-import Sheaf.AlgebraicGeometry.FiniteEtaleModuleTraceDegree
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleModuleTraceDegree
 import Mathlib.Algebra.Field.ZMod
 
 /-!

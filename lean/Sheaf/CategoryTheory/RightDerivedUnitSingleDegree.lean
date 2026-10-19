@@ -7,7 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.RightDerivedSingleDegreeComparison
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
-import Sheaf.CategoryTheory.SupportedComplexSingleRealization
+import WeilConjectures.CategoryTheory.SupportedComplexSingleRealization
 import Sheaf.CategoryTheory.RightDerivedCanonicalSingleUnit
 
 /-! # Normalization of the derived unit on a single-degree complex

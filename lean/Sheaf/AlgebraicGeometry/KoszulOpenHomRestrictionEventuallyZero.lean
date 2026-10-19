@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.KoszulOpenSystem
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
 import Sheaf.AlgebraicGeometry.AffineKoszulCechDerivedComparison
 import Sheaf.AlgebraicGeometry.KoszulOpenHomHomologyComparison
-import Sheaf.Algebra.Homology.FilteredModuleComplexHomologyZero
+import WeilConjectures.Algebra.Homology.FilteredModuleComplexHomologyZero
 
 /-! # Degree-zero consequences of the Koszul-to-Čech comparison
 

@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 import Sheaf.Algebra.Homology.BaseDerivedExtensionResolution
-import Sheaf.Algebra.Homology.BaseDerivedExtensionScalar
+import WeilConjectures.Algebra.Homology.BaseDerivedExtensionScalar
 
 /-!
 # Linear total derived extension of scalars

@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Sheaf.AlgebraicGeometry.Morphisms.GenericFibreHomExtensionExistence
-import Sheaf.AlgebraicGeometry.Morphisms.GenericFibreCoverDensity
+import WeilConjectures.AlgebraicGeometry.Morphisms.GenericFibreCoverDensity
 import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-!

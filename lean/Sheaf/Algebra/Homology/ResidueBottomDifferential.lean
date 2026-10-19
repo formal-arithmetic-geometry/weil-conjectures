@@ -14,7 +14,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import Sheaf.RingTheory.FiniteProjectiveCokernelLocalization
-import Sheaf.RingTheory.PrincipalCokernelProjectiveDescent
+import WeilConjectures.RingTheory.PrincipalCokernelProjectiveDescent
 
 /-! # A single bottom differential tested on residue fields
 

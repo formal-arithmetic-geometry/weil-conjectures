@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatRe
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Monoidal.Tor
-import Sheaf.Algebra.Homology.BoundedComplexTermAmplitude
+import WeilConjectures.Algebra.Homology.BoundedComplexTermAmplitude
 import Sheaf.Algebra.Homology.ProjectiveRestrictionTorBound
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap

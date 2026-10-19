@@ -11,7 +11,7 @@ public import Sheaf.RingTheory.Depth
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.CohenMacaulayFlatQuasiFiniteChart
-import Sheaf.AlgebraicGeometry.FlatQuasiFiniteSmoothDimension
+import WeilConjectures.AlgebraicGeometry.FlatQuasiFiniteSmoothDimension
 
 /-! # Constant dimension neighbourhoods in a Cohen-Macaulay family
 

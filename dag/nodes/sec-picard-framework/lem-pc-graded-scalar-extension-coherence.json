@@ -94,13 +94,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.GradedScalarExtensionCoherence",
-  "file": "lean/Sheaf/Algebra/Homology/GradedScalarExtensionCoherence.lean",
+  "module": "WeilConjectures.Algebra.Homology.GradedScalarExtensionCoherence",
+  "file": "lean/WeilConjectures/Algebra/Homology/GradedScalarExtensionCoherence.lean",
   "declaration": "CochainComplex.graded_scalarExtension_colimit_coherence",
   "statement": "theorem graded_scalarExtension_colimit_coherence\n    {I : Type u} [Preorder I] (F : I ⥤ CommRingCat.{u}) (i₀ : I)\n    (P Q : CochainComplex (ModuleCat.{u} (F.obj i₀)) ℤ)\n    (i j : Set.Ici i₀) (hij : i.val ≤ j.val)\n    (hc : (F.map (homOfLE j.property)).hom =\n      (F.map (homOfLE hij)).hom.comp (F.map (homOfLE i.property)).hom)\n    (v : ∀ n : ℤ,\n      (ModuleCat.extendScalars (F.map (homOfLE i.property)).hom).obj (P.X n) ⟶\n        (ModuleCat.extendScalars (F.map (homOfLE i.property)).hom).obj (Q.X n)) :\n    let c := eqToIso (congrArg ModuleCat.extendScalars hc) ≪≫\n      ModuleCat.extendScalarsComp (F.map (homOfLE i.property)).hom\n        (F.map (homOfLE hij)).hom\n    let e (t : Set.Ici i₀) (C : CochainComplex (ModuleCat.{u} (F.obj i₀)) ℤ) :=\n      eqToIso (congrArg (fun r ↦\n        ((ModuleCat.extendScalars r).mapHomologicalComplex (.up ℤ)).obj C)\n        (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE t.property)).symm)) ≪≫\n      (NatIso.mapHomologicalComplex\n        (ModuleCat.extendScalarsComp (F.map (homOfLE t.property)).hom\n          (colimit.ι F t.val).hom) (.up ℤ)).app C\n    ∀ n : ℤ, (e j P).hom.f n ≫\n      (ModuleCat.extendScalars (colimit.ι F j.val).hom).map\n        (c.hom.app (P.X n) ≫\n          (ModuleCat.extendScalars (F.map (homOfLE hij)).hom).map (v n) ≫\n            c.inv.app (Q.X n)) ≫ (e j Q).inv.f n =\n      (e i P).hom.f n ≫\n        (ModuleCat.extendScalars (colimit.ι F i.val).hom).map (v n) ≫\n          (e i Q).inv.f n",
   "branch": "sheaf-dag",
   "by": "W3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.Algebra.Homology.GradedScalarExtensionCoherence; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

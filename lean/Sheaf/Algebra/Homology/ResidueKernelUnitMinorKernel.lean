@@ -5,7 +5,7 @@ public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
 import Sheaf.Algebra.Homology.ResidueKernelUnitMinorMatrixCore
-import Sheaf.Algebra.Homology.ResidueKernelUnitMinorBaseChangeFree
+import WeilConjectures.Algebra.Homology.ResidueKernelUnitMinorBaseChangeFree
 import Mathlib.RingTheory.TensorProduct.Finite
 @[expose] public section
 set_option autoImplicit false

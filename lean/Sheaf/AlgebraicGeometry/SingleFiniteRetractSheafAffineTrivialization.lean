@@ -9,7 +9,7 @@ public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.CategoryTheory.MorphismProperty.Retract
-import Sheaf.RingTheory.FiniteProjectivePrimeLocalFree
+import WeilConjectures.RingTheory.FiniteProjectivePrimeLocalFree
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Affine trivialization of a single finite free retract

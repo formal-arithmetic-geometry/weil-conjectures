@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import Sheaf.AlgebraicGeometry.ProjChartPullbackFractionRelation
+import WeilConjectures.AlgebraicGeometry.ProjChartPullbackFractionRelation
 
 /-! # Clearing denominators between section-ring charts
 

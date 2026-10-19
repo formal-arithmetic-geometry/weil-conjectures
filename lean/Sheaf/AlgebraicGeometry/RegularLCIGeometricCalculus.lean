@@ -32,7 +32,7 @@ import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.RingTheory.RegularLocalQuotientKernelParameters
 import Sheaf.RingTheory.RegularRingSmoothAscent
 import Sheaf.RingTheory.RegularSequenceConormal
-import Sheaf.RingTheory.SmoothConormalSequenceExact
+import WeilConjectures.RingTheory.SmoothConormalSequenceExact
 import Mathlib.RingTheory.TensorProduct.Quotient
 import Mathlib.RingTheory.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.Separated

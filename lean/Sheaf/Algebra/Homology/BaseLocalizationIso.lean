@@ -9,7 +9,7 @@ public import Sheaf.Algebra.Homology.RingTensorCohomology
 public import Sheaf.Algebra.Homology.BaseLocalizationMap
 import Sheaf.Algebra.Homology.BaseLocalizationCohomologyIsIso
 import Sheaf.Algebra.Homology.BaseLocalizationCohomologyAction
-import Sheaf.Algebra.Homology.BaseLocalizationDLinearGlue
+import WeilConjectures.Algebra.Homology.BaseLocalizationDLinearGlue
 /-! # Localizing the base and second factor of a derived tensor
 
 Source: Stacks Project, perfect.tex, Tag 0DJ8, localization of the base and

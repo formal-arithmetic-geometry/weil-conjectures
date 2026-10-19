@@ -3,7 +3,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
-import Sheaf.Algebra.Homology.ResidueKernelUnitMinorPivot
+import WeilConjectures.Algebra.Homology.ResidueKernelUnitMinorPivot
 @[expose] public section
 set_option autoImplicit false
 universe v

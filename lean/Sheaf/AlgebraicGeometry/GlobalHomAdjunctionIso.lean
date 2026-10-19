@@ -16,7 +16,7 @@ import Sheaf.AlgebraicGeometry.QCqsSheafRHomAdjunction
 import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorMonoidalRealization
 import Sheaf.AlgebraicGeometry.DirectImageGlobalSectionsKInjectiveAcyclic
 import Sheaf.AlgebraicGeometry.DQCoheratorAdjunction
-import Sheaf.AlgebraicGeometry.InternalHomMateCounitTransport
+import WeilConjectures.AlgebraicGeometry.InternalHomMateCounitTransport
 
 /-!
 This module was independently rechecked by S3; all declarations are already proved.

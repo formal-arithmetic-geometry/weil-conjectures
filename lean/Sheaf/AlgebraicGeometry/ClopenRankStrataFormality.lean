@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
 import Sheaf.AlgebraicGeometry.ClopenRankStrataHomologyLift
-import Sheaf.AlgebraicGeometry.FiniteZeroDifferentialAssembly
+import WeilConjectures.AlgebraicGeometry.FiniteZeroDifferentialAssembly
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Sheaf.AlgebraicGeometry.DerivedCategory
 

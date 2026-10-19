@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.AlgebraicGeometry.DensePoints
 import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
 import Sheaf.AlgebraicGeometry.BaseChangeCurve
-import Sheaf.AlgebraicGeometry.RationalPointBaseChangeMaximalIdeal
+import WeilConjectures.AlgebraicGeometry.RationalPointBaseChangeMaximalIdeal
 import WeilConjectures.AlgebraicGeometry.Regular
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 

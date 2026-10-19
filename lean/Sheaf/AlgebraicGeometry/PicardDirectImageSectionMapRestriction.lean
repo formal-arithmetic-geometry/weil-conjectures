@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PicardDirectImageSectionMap
 
 import Sheaf.AlgebraicGeometry.PicardDirectImageUnitMorphismPullback
-import Sheaf.AlgebraicGeometry.PicardAdjunctionSectionEvaluation
+import WeilConjectures.AlgebraicGeometry.PicardAdjunctionSectionEvaluation
 import Sheaf.AlgebraicGeometry.PicardDirectImageUnitMorphismEvaluation
 
 /-! # Compatibility of the fixed section map with restriction

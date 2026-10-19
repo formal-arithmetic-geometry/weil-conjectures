@@ -6,9 +6,10 @@ Authors: SHEAF group N8
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
-public import Sheaf.CategoryTheory.RepleteSheafTopos
+public import WeilConjectures.CategoryTheory.RepleteSheafTopos
 public import WeilConjectures.CategoryTheory.Sites.WeaklyContractible
 import Mathlib.CategoryTheory.Limits.Types.Limits
+public import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Sequential limits on weakly contractible pro-étale objects

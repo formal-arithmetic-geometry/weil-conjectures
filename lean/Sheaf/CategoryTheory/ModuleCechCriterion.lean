@@ -6,7 +6,7 @@ Authors: SHEAF group NU
 module
 
 public import Sheaf.CategoryTheory.RingedSiteModules
-public import Sheaf.CategoryTheory.SiteCechComplex
+public import WeilConjectures.CategoryTheory.SiteCechComplex
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Algebra.Category.Grp.FilteredColimits

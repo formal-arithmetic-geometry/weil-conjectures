@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Homology.Homotopy
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 import Sheaf.AlgebraicGeometry.SplitTopDifferentialCancellationProperties
-import Sheaf.AlgebraicGeometry.SplitTopDifferentialCancellationHomotopy
+import WeilConjectures.AlgebraicGeometry.SplitTopDifferentialCancellationHomotopy
 
 /-! # Cancelling one split top differential of a sheaf complex
 

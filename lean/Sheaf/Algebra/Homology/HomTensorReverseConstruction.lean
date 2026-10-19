@@ -8,7 +8,7 @@ module
 public import Sheaf.Algebra.Homology.HomTensorDegreewiseEquation
 import Sheaf.Algebra.Homology.HomComplexProjections
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomTensorReversePair
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.InternalHomProduct
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomProduct
 
 /-!
 # Reverse degreewise currying construction

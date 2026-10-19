@@ -8,7 +8,7 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.CategoryTheory.SiteCechComplex
 public import Mathlib.Algebra.Homology.Homotopy
 import Sheaf.AlgebraicGeometry.AlternatingCechSection
-import Sheaf.AlgebraicGeometry.AlternatingCechKernelNullHomotopic
+import WeilConjectures.AlgebraicGeometry.AlternatingCechKernelNullHomotopic
 
 /-!
 # Homotopy inverse for ordered Čech restriction

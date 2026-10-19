@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.RingTheory.IsSMulRegularOfGoodSequence
-import Sheaf.RingTheory.GoodElementCuttingParameter
+import WeilConjectures.RingTheory.GoodElementCuttingParameter
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.RingTheory.Support
 
