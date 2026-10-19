@@ -23,7 +23,13 @@
   "lem-coef-semilinear-derived-sections",
   "lem-sf-proetale-constructible-origin",
   "lem-sf-class-compact-support-comparison",
-  "lem-sf-comparison-open-tensor-coherence"
+  "lem-sf-comparison-open-tensor-coherence",
+  "def-weil-proetale-constructible-sheaf",
+  "def-coef-finite-coefficient-stages",
+  "def-sp-semilinear-constant-ring-operations",
+  "def-sf-semilinear-proper-open-comparisons",
+  "def-coef-semilinear-proper-open-mate",
+  "def-coef-compact-support-tensor-comparison"
  ],
  "proof": [
   {
@@ -190,5 +196,60 @@
   "group": "Q107",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-1df9e1718 (reviewer sub-agent of L); spot-checked: I read the item, all 4 steps, the parent's Steps 4 and 9, every cited statement, and blueprint main-20261015 lem-coef-rational-operations blueprint_update proof paragraph 8. That paragraph treats the coefficient comparison as the projection comparison for a finite sum of the unit, which is the item's route. Step 1 is correct: the finite-level equation is exactly Q57's c_gf S(alpha_A)=alpha_B P_g(c_f)c_g, and the item's alpha_h (from lem-coef-finite-free-extension and q_j of lem-coef-etale-open-tensor) is Q57's c_h. One E5 gap, repaired. lem-pur-system-level-projection-formula-coherence gives an equality in D(S_Z) of A_bullet-systems, but the item's alpha_h and gamma_B are B_bullet-system maps, and restriction of scalars is not faithful when e>1 (n=1, e=2: B_1=F[v]/v^2). The rewritten Step 2 shows Res commutes with u^*, Ru_*, j_!, units, counits and compositors (Res is exact with an exact left adjoint T because B_n is free, so it preserves K-injectives), so Res(alpha~_h)=PF^sys(K,B_bullet). It also checks that B_bullet is in N_W: normalized, constructible, Tor amplitude [0,0]. The rewritten Step 3 uses that both sides have source T(F_gF_fK); by T -| Res, equal restrictions give equal transposes, so the maps are equal as B_bullet-system maps before total limit, not inferred from evaluations. Step 4 was rewritten: the realization node allows any fixed compactification, so no transport is needed; independence of choice comes from the substitution lemma and thm-sf-comp-composition. stmt_deps: added the cited lem-coef-etale-open-tensor (B3) and removed three ids the statement does not cite. proof_deps gains thm-sf-comp-composition, which is in the route. The fixed file is acyclic. I accepted the three declared tool uses (Q57, system projection coherence, compactification substitution). This is not a duplicate of Q57: the item adds the coherent system clause the parent uses in its Step 9. The statement is unchanged and there are no new nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteFreeCompactComposition",
+  "declaration": "WeilConjectures.FiniteFreeCompactComposition.systemComposition",
+  "declarations": [
+   "WeilConjectures.FiniteFreeCompactComposition.support",
+   "WeilConjectures.FiniteFreeCompactComposition.refinement",
+   "WeilConjectures.FiniteFreeCompactComposition.change",
+   "WeilConjectures.FiniteFreeCompactComposition.triangleWord",
+   "WeilConjectures.FiniteFreeCompactComposition.compositor",
+   "WeilConjectures.FiniteFreeCompactComposition.upperStage",
+   "WeilConjectures.FiniteFreeCompactComposition.lowerStage",
+   "WeilConjectures.FiniteFreeCompactComposition.inclusion",
+   "WeilConjectures.FiniteFreeCompactComposition.upperTransition",
+   "WeilConjectures.FiniteFreeCompactComposition.lowerTransition",
+   "WeilConjectures.FiniteFreeCompactComposition.upperRings",
+   "WeilConjectures.FiniteFreeCompactComposition.lowerRings",
+   "WeilConjectures.FiniteFreeCompactComposition.upperMaps",
+   "WeilConjectures.FiniteFreeCompactComposition.lowerMaps",
+   "WeilConjectures.FiniteFreeCompactComposition.coefficientInclusion",
+   "WeilConjectures.FiniteFreeCompactComposition.coefficientInclusion_commutes",
+   "WeilConjectures.FiniteFreeCompactComposition.scalarData",
+   "WeilConjectures.FiniteFreeCompactComposition.restriction",
+   "WeilConjectures.FiniteFreeCompactComposition.restrictionD",
+   "WeilConjectures.FiniteFreeCompactComposition.pushRestriction_existsUnique",
+   "WeilConjectures.FiniteFreeCompactComposition.pullRestrictionInv",
+   "WeilConjectures.FiniteFreeCompactComposition.pullRestrictionInv_isIso",
+   "WeilConjectures.FiniteFreeCompactComposition.pullRestriction",
+   "WeilConjectures.FiniteFreeCompactComposition.pushRestriction",
+   "WeilConjectures.FiniteFreeCompactComposition.pushRestriction_isIso",
+   "WeilConjectures.FiniteFreeCompactComposition.openRestrictionInv",
+   "WeilConjectures.FiniteFreeCompactComposition.openRestrictionInv_isIso",
+   "WeilConjectures.FiniteFreeCompactComposition.supportRestriction",
+   "WeilConjectures.FiniteFreeCompactComposition.coefficientComparison",
+   "WeilConjectures.FiniteFreeCompactComposition.lowerCalculus",
+   "WeilConjectures.FiniteFreeCompactComposition.normalizedCtf",
+   "WeilConjectures.FiniteFreeCompactComposition.finiteTensorOrigin",
+   "WeilConjectures.FiniteFreeCompactComposition.finiteLevelComposition",
+   "WeilConjectures.FiniteFreeCompactComposition.systemComposition"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteFreeCompactComposition.lean",
+  "statement": "theorem systemComposition (cf : Compactification f) (cg : Compactification g) (cfg : Compactification (f ≫ g)) (K : Derived (lowerRings l E) (lowerMaps l E) X) (hK : normalizedCtf l E X K) : IsIso ((coefficientComparison l E L i cf).app K) ∧ IsIso ((coefficientComparison l E L i cg).app ((support (lowerRings l E) (lowerMaps l E) cf).obj K)) ∧ IsIso ((coefficientComparison l E L i cfg).app K) ∧ IsIso (compositor (lowerRings l E) (lowerMaps l E) cf cg cfg K) ∧ IsIso (compositor (upperRings l E L i) (upperMaps l E L i) cf cg cfg ((scalarData l E L i X).scalar.T.obj K)) ∧ (coefficientComparison l E L i cg).app ((support (lowerRings l E) (lowerMaps l E) cf).obj K) ≫ (support (upperRings l E L i) (upperMaps l E L i) cg).map ((coefficientComparison l E L i cf).app K) ≫ compositor (upperRings l E L i) (upperMaps l E L i) cf cg cfg ((scalarData l E L i X).scalar.T.obj K) = (scalarData l E L i Z).scalar.T.map (compositor (lowerRings l E) (lowerMaps l E) cf cg cfg K) ≫ (coefficientComparison l E L i cfg).app K",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "finiteLevelComposition states the finite-level clause using the published universal B-linear tensor comparisons; systemComposition states the coherent-system clause. Helpers define the ramified base-uniformizer tower, the canonical scalar-adjunction coefficient mate, and the canonical proper/open compositor transported through graph refinements. All comparisons are actual maps, before evaluation or total limit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c20cb53ba",
+  "group": "NC",
+  "result": "fix",
+  "note": "Re-delivery after the H2 RETURN of b1f4d5bdb0ff. The Lean is byte-identical (sha c9bff4f0) and the earlier clause check stands. stmt_deps: the 4 theorem deps are replaced by def-coef-finite-coefficient-stages, def-sp-semilinear-constant-ring-operations and def-sf-semilinear-proper-open-comparisons (landed), plus two new existing:true def nodes: def-coef-semilinear-proper-open-mate (gamma = mateEquiv of alpha) and def-coef-compact-support-tensor-comparison (CoefficientTensorModel, map, compactSupportCoefficientComparison). TeX matches the Lean; check_new_node is clean, there is no duplicate owner and no cycle. Every used declaration from those modules has an owner in stmt_deps. Report sections and the item statement are verbatim-clean. nt_compile --json is clean in 30.3 s; a module probe #checking the owner declarations is clean in 4.6 s, and the deliver2 legacy probe failure is a tool artefact. FIX: fixes/def-coef-semilinear-proper-open-mate.json trims 'noncomputable ' from lean.statement, after which check_existing returns ([], []). Advisories: the SemilinearSections helpers and rightDerivedLowerShriek have def-node owners outside stmt_deps; one new def node cites a theorem for compactSupportRestrictionIso; some docstrings in CompactSupportCoefficientChange name the old blueprint id."
  }
 }

@@ -1,0 +1,112 @@
+{
+ "id": "def-coef-compact-support-tensor-comparison",
+ "kind": "definition",
+ "title": "Universal coefficient tensor presentations and canonical compact-support coefficient map",
+ "status": "split",
+ "statement": "Let $u$ be a universe, $A,B$ commutative rings in universe $u+1$, $\\varphi:A\\to B$ a ring homomorphism, and $T$ a scheme in universe $u$. Use the small pro-etale site [def-weil-pbc-proetale-site] and the ordinary derived categories of module sheaves [def-weil-pbc-derived-categories]. Write $\\operatorname{Res}_T:D(T_{\\mathrm{proet}},B)\\to D(T_{\\mathrm{proet}},A)$ for restriction of scalars, and use the derived scalar-extension universal property of [lem-pur-derived-change-of-rings]. A coefficient tensor presentation of $K\\in D(T_{\\mathrm{proet}},A)$ consists of an object $M\\in D(T_{\\mathrm{proet}},B)$ and an arrow $\\eta_M:K\\to\\operatorname{Res}_T M$ such that, for every $N\\in D(T_{\\mathrm{proet}},B)$, the map $\\operatorname{Hom}_B(M,N)\\to\\operatorname{Hom}_A(K,\\operatorname{Res}_T N)$ sending $a$ to $\\operatorname{Res}_T(a)\\eta_M$ is bijective. For presentations $M,N$ of $K,L$ and $f:K\\to L$, define $M.\\operatorname{map}(N,f)$ as the unique $B$-linear arrow whose image under this bijection is $\\eta_N f$.\n\nSuppose additionally that $A,B$ are finite. Let $f:X\\to Y$ be a scheme map, and fix a compactification $c$ [def-weil-compactifications-refinements]. Write $F_{c,A}=Rp_*j_!$ and $F_{c,B}=Rp_*j_!$ for the compact-support candidates [def-weil-compact-support-candidate]. Use the canonical restriction comparison $\\rho_c:F_{c,A}\\operatorname{Res}_X\\cong\\operatorname{Res}_Y F_{c,B}$ of [lem-sf-compact-support-restriction-of-scalars], normalized by the ordinary proper/open restriction comparisons. For presentations $M$ of $K$ on $X$ and $N$ of $F_{c,A}K$ on $Y$, define the compact-support coefficient comparison $N\\to F_{c,B}M$ as the unique $B$-linear arrow whose image under $N$'s universal bijection is $\\rho_c(M)\\circ F_{c,A}(\\eta_M)$. Thus the map is specified by the tensor unit and the canonical proper/open restriction comparison. No flatness, boundedness, constructibility, invertibility, or composition law is part of this definition.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-derived-categories",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-compactifications-refinements",
+  "def-weil-compact-support-candidate",
+  "lem-sf-compact-support-restriction-of-scalars"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-rational-operations.proof.md",
+  "place": "Paragraph 8, canonical finite-free compact-support coefficient comparison; Stacks Tags 06YY, 07A6, 0GL5 and 0GL6, as implemented in CompactSupportCoefficientChange."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Universal B-linear derived coefficient tensor model and compact support coefficient comparison",
+   "results": "{\"t\": \"2026-10-19T09:11:11Z\", \"tool\": \"leansearch\", \"query\": \"Universal B-linear derived coefficient tensor model and compact support coefficient comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TestFunction.coe_ofSupportedInLM\", \"LinearMap.BilinForm.tensorDistribEquiv_tmul\", \"MvPolynomial.scalarRTensor_apply_tmul_apply\", \"IsTensorProduct.inductionOn\", \"LinearMap.BilinForm.tmul.congr_simp\", \"IsTensorProduct\", \"PiTensorProduct.ofFinsuppEquiv'\", \"PiTensorProduct.ofFinsuppEquiv\"], \"digest\": \"481b1b957a97cd7a\"}",
+   "date": "2026-10-19",
+   "verdict": "No exact Mathlib match; use the existing project declarations with existing:true."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"mateEquiv\"",
+   "results": "{\"t\": \"2026-10-19T09:11:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"Adjunction\\\", \\\"mateEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "No exact Mathlib match; use the existing project declarations with existing:true."
+  },
+  {
+   "tool": "grep",
+   "query": "CoefficientTensorModel|compactSupportCoefficientComparison|SemilinearProperOpen|properOpenMate",
+   "results": "{\"t\": \"2026-10-19T09:11:11Z\", \"tool\": \"grep\", \"query\": \"CoefficientTensorModel|compactSupportCoefficientComparison|SemilinearProperOpen|properOpenMate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "No exact Mathlib match; use the existing project declarations with existing:true."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n CoefficientTensorModel|compactSupportCoefficientComparison|SemilinearProperOpen lean/WeilConjectures; rg -l CoefficientTensorModel|compactSupportCoefficientComparison|SemilinearProperOpen.gamma dag/nodes; read lean/Sheaf/Paper/CompactSupportCoefficientChange.lean and lean/Sheaf/SixFunctors/SemilinearProperOpenMatePasting.lean",
+   "results": "No upstream matches. Project declarations occur in the two published modules. DAG exact-name matches are theorem ownership or mentions; existing definition owners def-sp-semilinear-constant-ring-operations and def-sf-semilinear-proper-open-comparisons do not own gamma, and no definition node owns CoefficientTensorModel, its map, or compactSupportCoefficientComparison. blueprint_refs.py search compact support coefficient and semilinear proper open each returned 0 blueprint matches.",
+   "date": "2026-10-19",
+   "verdict": "Register existing plain definitions only; no new Lean definition or theorem is needed."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-finite-free-compact-composition",
+  "date": "2026-10-19",
+  "group": "NC"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-rational-operations",
+   "place": "blueprint_update.proof paragraph 8, first sentence: compact support commutes with the finite free coefficient tensor; compatibility of that comparison with compact-support composition used when transposing through absolute duality",
+   "via": [
+    "lem-coef-finite-free-compact-composition",
+    "lem-coef-dual-formula-scalar-transpose"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportCoefficientChange",
+  "declaration": "AlgebraicGeometry.ProEtale.CoefficientTensorModel",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CoefficientTensorModel",
+   "AlgebraicGeometry.ProEtale.CoefficientTensorModel.map",
+   "AlgebraicGeometry.ProEtale.compactSupportCoefficientComparison"
+  ],
+  "statement": "structure CoefficientTensorModel\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u})\n    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A)))",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-19",
+  "existing": true,
+  "note": "Definition ownership requested by L H2 for returned head b1f4d5bdb0ff. Reuses the unchanged published plain definitions, with no theorem or extra hypothesis asserted."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c20cb53ba",
+  "group": "NC",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c20cb53ba",
+  "group": "NC",
+  "result": "fix",
+  "note": "Re-delivery after the H2 RETURN of b1f4d5bdb0ff. The Lean is byte-identical (sha c9bff4f0) and the earlier clause check stands. stmt_deps: the 4 theorem deps are replaced by def-coef-finite-coefficient-stages, def-sp-semilinear-constant-ring-operations and def-sf-semilinear-proper-open-comparisons (landed), plus two new existing:true def nodes: def-coef-semilinear-proper-open-mate (gamma = mateEquiv of alpha) and def-coef-compact-support-tensor-comparison (CoefficientTensorModel, map, compactSupportCoefficientComparison). TeX matches the Lean; check_new_node is clean, there is no duplicate owner and no cycle. Every used declaration from those modules has an owner in stmt_deps. Report sections and the item statement are verbatim-clean. nt_compile --json is clean in 30.3 s; a module probe #checking the owner declarations is clean in 4.6 s, and the deliver2 legacy probe failure is a tool artefact. FIX: fixes/def-coef-semilinear-proper-open-mate.json trims 'noncomputable ' from lean.statement, after which check_existing returns ([], []). Advisories: the SemilinearSections helpers and rightDerivedLowerShriek have def-node owners outside stmt_deps; one new def node cites a theorem for compactSupportRestrictionIso; some docstrings in CompactSupportCoefficientChange name the old blueprint id."
+ }
+}
