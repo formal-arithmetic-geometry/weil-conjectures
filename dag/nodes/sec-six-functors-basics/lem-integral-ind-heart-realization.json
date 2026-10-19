@@ -1,0 +1,190 @@
+{
+ "id": "lem-integral-ind-heart-realization",
+ "kind": "statement",
+ "title": "Integral constructible Ind realization and exact image",
+ "statement": "Fix a prime $\\ell$, a finite intermediate extension $E/\\mathbf Q_\\ell$ in its fixed algebraic closure, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and a separated finite-type $k$-scheme $X$ [sk-def-sfb-dc-setting]. Let $R_X=p_X^*\\underline{\\mathcal O_E}$ [def-sfb-padic-integers-condensed-ring; sk-def-sfb-pulled-back-coefficients], $\\mathcal A=\\operatorname{Mod}_{R_X}$ [sk-def-sfb-module-objects], and $H=\\operatorname{Cons}(X,\\mathcal O_E)$, defined by finite constant models on constructible strata [sk-def-sfb-constructible]. Work in the ordinary unbounded category $D(\\mathcal A)$ [def-weil-abstract-derived-category] and the fixed small universe [def-weil-size-convention]. Write $H^{\\mathrm{ind}}$ for objects isomorphic to small filtered colimits of objects of $H$, and $P$ for complexes all of whose cohomology sheaves lie in $H^{\\mathrm{ind}}$. Then $H$ is replete and $H^{\\mathrm{ind}}$ contains zero and is closed under ambient kernels, cokernels, extensions and small direct sums. The formal category $\\operatorname{Ind}(H)$ has finite limits and finite colimits. There exists a functor $\\Phi:\\operatorname{Ind}(H)\\to\\mathcal A$, with $\\Phi\\circ\\operatorname{Ind.yoneda}\\cong H\\hookrightarrow\\mathcal A$, preserving filtered colimits, finite limits and finite colimits, fully faithful, and with essential image exactly $H^{\\mathrm{ind}}$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+  "place": "Paragraph (1), steps 1--7 of the expanded proof"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-sfb-padic-integers-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-constructible",
+  "def-weil-abstract-derived-category",
+  "def-weil-size-convention",
+  "lem-sfb-ind-filtered-colimits",
+  "def-kun-truncations"
+ ],
+ "proof": [
+  {
+   "text": "Apply integralExtHomContinuous to the degree-zero complex diagram of a filtered diagram of module sheaves, in every integer shift. Transport through singleFunctorIsoCompQ. Full faithfulness of singleFunctor in degree zero then identifies ordinary Hom continuity with this comparison, proving finite presentation of every constructible sheaf. The source is bounded constructible: the only nonzero homology is the original constructible object, and zero is constructible by the identity-cover finite constant model.",
+   "uses": [
+    "det-lem-int-ext-continuity",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+    "place": "Paragraph (1), Hom and Ext continuity"
+   }
+  },
+  {
+   "text": "Use the coefficient-independent stratifiedModelsSmall argument in CoefficientHeartSmall for the actual integral condensed ring; finite type over a field makes X Noetherian and compact. The integral constant-model Serre theorem supplies ambient kernel, cokernel and extension closure. The full subcategory inherits an abelian structure and its inclusion preserves kernels, cokernels, finite limits and finite colimits.",
+   "uses": [
+    "det-lem-coefficient-heart-small",
+    "lem-sfb-integral-constant-model-heart-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+    "place": "Paragraph (1), essentially small abelian constructible heart"
+   }
+  },
+  {
+   "text": "For each filtered constructible presentation, finite presentation factors every map from a constructible object through a stage and equalizes two factorizations after a transition. The filtered finality criterion proves finality of the functor into the costructured-arrow category of all constructible maps. This category is essentially small and filtered, and its tautological cocone is colimiting. Apply the coefficient-independent assertions_of_closure proof of IndHeartKernelsCokernels to obtain ambient kernel and cokernel closure of the filtered-colimit image.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "det-ind-heart-canonical-presentation",
+    "det-ind-heart-kernels-cokernels"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+    "place": "Paragraph (1), canonical arrow presentations and exactness"
+   }
+  },
+  {
+   "text": "Use the generic ind_extension_of_finitelyPresentable argument: pull back along constructible quotient stages, descend each Ext-one class by the integral degree-one filtered comparison, and express its pushout as a filtered colimit of constructible extensions. Exact filtered colimits and the short five lemma reassemble the original extension. Thus the integral Ind image is extension closed. Use ind_coproduct and constructible_finite_coproduct: finite sums are constructible, filtered-colimit closure is idempotent for finitely presentable generators, and every coproduct is the filtered colimit of its finite partial sums.",
+   "uses": [
+    "det-ind-heart-extensions",
+    "det-ind-heart-filtered-colimits",
+    "det-lem-int-ext-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+    "place": "Paragraph (1), extension closure; paragraph (2), sums"
+   }
+  },
+  {
+   "text": "Construct the realization by IndRealization.functor on the constructible inclusion. Its proved fullyFaithful API applies by finite presentation, its yonedaIso fixes its restriction, and realization_essImage identifies its image with ObjectProperty.ind. The realization preserves filtered colimits by the existing construction. Kernel, cokernel, zero and extension closure make the image abelian with exact inclusion. Factor realization through its essential image, use its full-faithful equivalence there, and transport finite-limit and finite-colimit preservation along toEssImageCompι. Ind itself has finite limits and colimits because the constructible heart is abelian.",
+   "uses": [
+    "det-ind-heart-full-faithfulness-realization",
+    "det-ind-heart-full-faithfulness",
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+    "place": "Paragraph (1), exact fully faithful realization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-lem-int-ext-continuity",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "det-lem-coefficient-heart-small",
+  "lem-sfb-integral-constant-model-heart-closure",
+  "def-weil-pbc-category-colimit",
+  "det-ind-heart-canonical-presentation",
+  "det-ind-heart-kernels-cokernels",
+  "det-ind-heart-extensions",
+  "det-ind-heart-filtered-colimits",
+  "det-ind-heart-full-faithfulness-realization",
+  "det-ind-heart-full-faithfulness",
+  "def-sp-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+  "place": "Paragraph (1), realized using the existing coefficient-independent private categorical proofs via import all, with integral Ext continuity and the actual integral constant-model Serre theorem. All intermediate arguments are proved in this delivery."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ind category exact fully faithful realization compact objects filtered colimits",
+   "results": "{\"t\": \"2026-10-18T20:29:52Z\", \"tool\": \"leanfinder\", \"query\": \"Ind category exact fully faithful realization compact objects filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Ind.leftExactFunctorEquivalence\", \"CategoryTheory.Limits.instHasExactColimitsOfShapeIndOfHasFiniteLimits\", \"CategoryTheory.Limits.isGrothendieckAbelian_ind\", \"CategoryTheory.instHasFilteredColimitsInd\", \"CategoryTheory.Ind.isIndObject_inclusion_obj\", \"Condensed.hasExactColimitsOfShape\", \"CategoryTheory.Limits.instAB5IndOfHasFiniteLimits\", \"CategoryTheory.Limits.isIndObject_of_isFiltered_of_finallySmall\"], \"digest\": \"2779e0a32128f06e\"}",
+   "date": "2026-10-19",
+   "verdict": "No exact integral-coefficient result. The hits provide categorical tools or the rational coefficient special case, not this assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Ind",
+   "results": "{\"t\": \"2026-10-18T20:37:23Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Ind\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Ind\", \"CategoryTheory.instCategoryInd\", \"CategoryTheory.instHasFilteredColimitsInd\", \"CategoryTheory.Ind.yoneda\", \"CategoryTheory.instHasColimitsIndOfHasFiniteColimits\", \"CategoryTheory.instHasCoproductsIndOfHasFiniteCoproducts\", \"CategoryTheory.instHasFiniteLimitsInd\", \"CategoryTheory.instHasLimitsInd\"], \"digest\": \"fc9529165c1241d2\"}",
+   "date": "2026-10-19",
+   "verdict": "No exact integral-coefficient result. The hits provide categorical tools or the rational coefficient special case, not this assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ind abelian subcategory realization full faithful exact finite presentable objects",
+   "results": "{\"t\": \"2026-10-18T21:11:06Z\", \"tool\": \"leansearch\", \"query\": \"Ind abelian subcategory realization full faithful exact finite presentable objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.freyd_mitchell\", \"CategoryTheory.Abelian.mk.noConfusion\", \"CategoryTheory.instAbelianInd\", \"CategoryTheory.IsFinitelyPresentable\", \"CategoryTheory.ObjectProperty.isFinitelyPresentable\", \"CategoryTheory.Limits.isGrothendieckAbelian_ind\", \"CategoryTheory.abelianOfAdjunction\", \"CategoryTheory.ObjectProperty.FullSubcategory.ctorIdx\"], \"digest\": \"9404a94cd6658168\"}",
+   "date": "2026-10-19",
+   "verdict": "No exact integral-coefficient result. The hits provide categorical tools or the rational coefficient special case, not this assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom from constructible sheaves into filtered colimits extends the constructible heart to an exact fully faithful Ind realization",
+   "results": "{\"t\": \"2026-10-18T22:34:29Z\", \"tool\": \"leansearch\", \"query\": \"Hom from constructible sheaves into filtered colimits extends the constructible heart to an exact fully faithful Ind realization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.isIndObject_colimit\", \"CategoryTheory.Ind.lim\", \"CategoryTheory.Ind.inclusion.fullyFaithful\", \"CategoryTheory.Limits.IndObjectPresentation.mk\", \"CategoryTheory.Limits.isIndObject_of_isFiltered_of_finallySmall\", \"CategoryTheory.instHasFilteredColimitsInd\", \"CategoryTheory.Sheaf.hasFilteredColimitsOfSize\", \"CategoryTheory.Limits.instHasExactColimitsOfShapeIndOfHasFiniteLimits\"], \"digest\": \"2005f711ccdcea8b\"}",
+   "date": "2026-10-19",
+   "verdict": "No exact integral-coefficient result. The hits provide categorical tools or the rational coefficient special case, not this assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Ind.*(extension|realization|realisation)|ind.*fullyFaithful",
+   "results": "{\"t\": \"2026-10-18T20:43:58Z\", \"tool\": \"grep\", \"query\": \"Ind.*(extension|realization|realisation)|ind.*fullyFaithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/NumberTheory/Padics/Complex.lean\", \"Mathlib/NumberTheory/Cyclotomic/Basic.lean\", \"Mathlib/Lean/Meta/RefinedDiscrTree.lean\", \"Mathlib/Topology/DenseEmbedding.lean\", \"Mathlib/Topology/DenseEmbedding.lean\", \"Mathlib/RingTheory/FractionalIdeal/Extended.lean\"], \"digest\": \"bc13f3d1c07bdbfe\"}",
+   "date": "2026-10-19",
+   "verdict": "No exact result; the Ind APIs are components of the argument."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralConstructibleCompactness",
+  "date": "2026-10-19",
+  "group": "E7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-int-compactness-compact",
+   "place": "Paragraph (1), steps 1--7 of the expanded proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-int-compactness",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralIndHeartRealization",
+  "file": "lean/Sheaf/Paper/IntegralIndHeartRealization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralIndHeartRealization",
+  "statement": "theorem integralIndHeartRealization\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpℓ : p ≠ ℓ)\n    (X : Scheme.{u}) [X.Over (Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (X ↘ Spec (.of k))]\n    :\n    let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)\n    let H : ObjectProperty A := IsConstantModelConstructible\n      (Profinite.padicIntegersRingObj ℓ E) X\n    H.IsClosedUnderIsomorphisms ∧ H.ind.{u + 1}.ContainsZero ∧\n    H.ind.{u + 1}.IsClosedUnderKernels ∧ H.ind.{u + 1}.IsClosedUnderCokernels ∧\n    H.ind.{u + 1}.IsClosedUnderExtensions ∧\n    (∀ I : Type (u + 1), H.ind.{u + 1}.IsClosedUnderColimitsOfShape (Discrete I)) ∧\n    HasFiniteLimits (Ind H.FullSubcategory) ∧ HasFiniteColimits (Ind H.FullSubcategory) ∧\n    ∃ Φ : Ind H.FullSubcategory ⥤ A,\n      Nonempty (Ind.yoneda ⋙ Φ ≅ H.ι) ∧ PreservesFilteredColimits.{u + 1} Φ ∧\n      PreservesFiniteLimits Φ ∧ PreservesFiniteColimits Φ ∧ Φ.Full ∧ Φ.Faithful ∧\n      Φ.essImage = H.ind.{u + 1}",
+  "branch": "sheaf-dag",
+  "by": "E7",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261019T154008-L-3025015",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261019T154008-L-3025015",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

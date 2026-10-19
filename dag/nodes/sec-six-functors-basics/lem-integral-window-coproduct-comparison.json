@@ -1,0 +1,117 @@
+{
+ "id": "lem-integral-window-coproduct-comparison",
+ "kind": "statement",
+ "title": "Coproduct continuity on the integral finite window",
+ "statement": "Fix a prime $\\ell$, a finite intermediate extension $E/\\mathbf Q_\\ell$ in its fixed algebraic closure, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and a separated finite-type $k$-scheme $X$ [sk-def-sfb-dc-setting]. Let $R_X=p_X^*\\underline{\\mathcal O_E}$ [def-sfb-padic-integers-condensed-ring; sk-def-sfb-pulled-back-coefficients], $\\mathcal A=\\operatorname{Mod}_{R_X}$ [sk-def-sfb-module-objects], and $H=\\operatorname{Cons}(X,\\mathcal O_E)$, defined by finite constant models on constructible strata [sk-def-sfb-constructible]. Work in the ordinary unbounded category $D(\\mathcal A)$ [def-weil-abstract-derived-category] and the fixed small universe [def-weil-size-convention]. Write $H^{\\mathrm{ind}}$ for objects isomorphic to small filtered colimits of objects of $H$, and $P$ for complexes all of whose cohomology sheaves lie in $H^{\\mathrm{ind}}$. For $C\\in H$ and $a\\in\\mathbf N$ let $W=\\operatorname{Hom}_{D(\\mathcal A)}(C[0],\\tau_{\\ge-a}\\tau_{\\le0}(-))$, valued in abelian groups, with the canonical truncations [def-kun-truncations]. For every small family $(K_i)$ of arbitrary objects of $D(\\mathcal A)$ and every coproduct cocone $(K_i\\to K)$, the additive map $\\bigoplus_i W(K_i)\\to W(K)$ induced by applying $W$ to these coprojections is bijective. This is only continuity of the finite-window functor; no reduction of unbounded Hom to a finite window is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+  "place": "Paragraph (3), continuity on a finite cohomological range and commutation of truncations with sums"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-sfb-padic-integers-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-constructible",
+  "def-weil-abstract-derived-category",
+  "def-weil-size-convention",
+  "lem-sfb-ind-filtered-colimits",
+  "def-kun-truncations"
+ ],
+ "proof": [
+  {
+   "text": "Both standard truncations preserve coproducts: for truncGE construct the inverse of sigmaComparison by its universal property; for truncLE test on every homology object, where either the canonical inclusion is invertible or both terms vanish. Integral Ext continuity gives preservation of the filtered diagram of finite partial sums of complexes with a common termwise lower bound. Prove directly, by their cocone universal properties, that a functor preserving those filtered colimits and finite coproducts preserves the coproduct. Represent every uniformly bounded-below derived object by a strictly bounded-below complex and transport the comparison along its chosen isomorphism; Grothendieck derived coproducts are computed termwise. Apply this to the windowed targets, which have the common lower bound -a. Both truncations send the given coproduct cocone to a colimit cofan. Finally the direct sum of abelian groups has its explicit colimit cofan, and uniqueness of colimits makes precisely the canonical coprojection-induced additive map bijective.",
+   "uses": [
+    "def-kun-truncations",
+    "lem-kun-grothendieck-derived-coproducts",
+    "det-lem-int-ext-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+    "place": "Paragraph (3), continuity on a common finite cohomological interval"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-truncations",
+  "lem-kun-grothendieck-derived-coproducts",
+  "det-lem-int-ext-continuity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+  "place": "Paragraph (3), proved via finite-partial-sum continuity, bounded-below complex representatives, explicit truncation/coproduct comparisons, and the direct-sum colimit universal property."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "truncLE.*[Cc]oprod|[Cc]oprod.*truncLE|[Hh]om.*[Cc]ontinuity",
+   "results": "{\"t\": \"2026-10-18T21:16:05Z\", \"tool\": \"grep\", \"query\": \"truncLE.*[Cc]oprod|[Cc]oprod.*truncLE|[Hh]om.*[Cc]ontinuity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Modular.lean\", \"Mathlib/Analysis/Asymptotics/Lemmas.lean\", \"Mathlib/Analysis/Calculus/FDeriv/OfCompLeft.lean\", \"Mathlib/Topology/OpenPartialHomeomorph/Continuity.lean\", \"Mathlib/Topology/OpenPartialHomeomorph/IsImage.lean\", \"Mathlib/Topology/UniformSpace/Equicontinuity.lean\", \"Mathlib/Topology/UniformSpace/Equicontinuity.lean\"], \"digest\": \"9a312de909ac0aaf\"}",
+   "date": "2026-10-19",
+   "verdict": "No exact integral-coefficient result. The hits provide categorical tools or the rational coefficient special case, not this assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.TStructure.truncLE",
+   "results": "{\"t\": \"2026-10-18T21:16:06Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Triangulated.TStructure.truncLE\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Triangulated.TStructure.truncLE\", \"CategoryTheory.Triangulated.TStructure.instAdditiveTruncLE\", \"CategoryTheory.Triangulated.TStructure.instIsLEObjTruncLE\", \"CategoryTheory.Triangulated.TStructure.isLE_truncLE_obj\", \"CategoryTheory.Triangulated.TStructure.truncLEι\", \"CategoryTheory.Triangulated.TStructure.instIsLEObjTruncLE_1\", \"CategoryTheory.Triangulated.TStructure.triangleLEGT_obj_obj₁\", \"CategoryTheory.Triangulated.TStructure.liftTruncLE\"], \"digest\": \"599fb2c3ced2d7b7\"}",
+   "date": "2026-10-19",
+   "verdict": "No exact integral-coefficient result. The hits provide categorical tools or the rational coefficient special case, not this assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom from a constructible integral sheaf vanishes on an unbounded complex supported below the negative Ext bound",
+   "results": "{\"t\": \"2026-10-18T23:03:17Z\", \"tool\": \"leansearch\", \"query\": \"Hom from a constructible integral sheaf vanishes on an unbounded complex supported below the negative Ext bound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isZero_of_isGE\", \"DerivedCategory.isZero_of_isLE\", \"DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.isZero_of_isGE\", \"CategoryTheory.sheafHom\", \"SheafOfModules.Hom.casesOn\", \"SheafOfModules.Hom.mk.noConfusion\", \"SheafOfModules.Hom.noConfusion\"], \"digest\": \"40f212f8e1610c0e\"}",
+   "date": "2026-10-19",
+   "verdict": "No exact integral-coefficient result. The hits provide categorical tools or the rational coefficient special case, not this assertion."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralConstructibleCompactness",
+  "date": "2026-10-19",
+  "group": "E7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-int-compactness-compact",
+   "place": "Paragraph (3), continuity on a finite cohomological range and commutation of truncations with sums",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-int-compactness",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralWindowCoproductComparison",
+  "file": "lean/Sheaf/Paper/IntegralWindowCoproductComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralWindowCoproductComparison",
+  "statement": "theorem integralWindowCoproductComparison\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpℓ : p ≠ ℓ)\n    (X : Scheme.{u}) [X.Over (Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (X ↘ Spec (.of k))]\n    (C : ConstantModelConstructible (Profinite.padicIntegersRingObj ℓ E) X)\n    (a : ℕ) :\n    let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)\n    let _H : ObjectProperty A := IsConstantModelConstructible\n      (Profinite.padicIntegersRingObj ℓ E) X\n    ∀ (I : Type (u + 1)) (K : I → DerivedCategory A) (c : Cofan K), IsColimit c →\n      let W := DerivedCategory.TStructure.t.truncLE 0 ⋙\n        DerivedCategory.TStructure.t.truncGE (-(a : ℤ)) ⋙\n          preadditiveCoyoneda.obj (op ((DerivedCategory.singleFunctor A 0).obj C.obj))\n      Function.Bijective (DirectSum.toAddMonoid (fun i ↦ (W.map (c.inj i)).hom))",
+  "branch": "sheaf-dag",
+  "by": "E7",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261019T154008-L-3025015",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261019T154008-L-3025015",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

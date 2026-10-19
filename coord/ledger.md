@@ -17463,3 +17463,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:40 L: merged deliver/C6/Sheaf.Paper.ConstructibleFiniteTorAdjunctions (stage 3; reviewer PASS; first push; landing 20261019T154004-L-3024005 (proof); batch 20261019T153958; modules 1; new nodes 0)
 - 15:40 L: merged deliver/D6/Sheaf.Paper.TensorTraceTranspose (stage 3; reviewer PASS; first push; landing 20261019T154005-L-3024342 (proof); batch 20261019T153958; modules 1; new nodes 0)
 - 15:40 L: merged deliver/E5/Sheaf.FieldTheory.HenselianDVRTameSequence (stage 3; reviewer PASS; first push; landing 20261019T154006-L-3024588 (proof); batch 20261019T153958; modules 1; new nodes 0)
+- 15:40 L: merged deliver/E7/Sheaf.Paper.IntegralConstructibleCompactness (stage 3; reviewer PASS; first push; landing 20261019T154008-L-3025015 (interface); batch 20261019T153958; modules 4; new nodes 3; change records: coord/changes/E7-integral-compactness-private-proof-helpers.md)

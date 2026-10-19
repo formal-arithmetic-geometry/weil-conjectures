@@ -1,0 +1,165 @@
+{
+ "id": "lem-integral-ind-lower-tail",
+ "kind": "statement",
+ "title": "Integral Ind lower-tail vanishing",
+ "statement": "Fix a prime $\\ell$, a finite intermediate extension $E/\\mathbf Q_\\ell$ in its fixed algebraic closure, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and a separated finite-type $k$-scheme $X$ [sk-def-sfb-dc-setting]. Let $R_X=p_X^*\\underline{\\mathcal O_E}$ [def-sfb-padic-integers-condensed-ring; sk-def-sfb-pulled-back-coefficients], $\\mathcal A=\\operatorname{Mod}_{R_X}$ [sk-def-sfb-module-objects], and $H=\\operatorname{Cons}(X,\\mathcal O_E)$, defined by finite constant models on constructible strata [sk-def-sfb-constructible]. Work in the ordinary unbounded category $D(\\mathcal A)$ [def-weil-abstract-derived-category] and the fixed small universe [def-weil-size-convention]. Write $H^{\\mathrm{ind}}$ for objects isomorphic to small filtered colimits of objects of $H$, and $P$ for complexes all of whose cohomology sheaves lie in $H^{\\mathrm{ind}}$. For each $C\\in H$ fix $d_C\\in\\mathbf N$ such that $\\operatorname{Hom}_{D(\\mathcal A)}(C[0],N[0][q])=0$ for all $N\\in H$ and all integers $q>d_C$. Then every $L\\in P$ with $L\\in D^{\\le-d_C-1}(\\mathcal A)$ satisfies $\\operatorname{Hom}_{D(\\mathcal A)}(C[0],L)=0$. No lower bound on $L$ is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+  "place": "Paragraph (2), uniform bound and bounded/unbounded lower-tail arguments"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-sfb-padic-integers-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-constructible",
+  "def-weil-abstract-derived-category",
+  "def-weil-size-convention",
+  "lem-sfb-ind-filtered-colimits",
+  "def-kun-truncations"
+ ],
+ "proof": [
+  {
+   "text": "Apply the integral degree-zero-complex filtered comparison from integral_single_preserves_filtered in IntegralIndHeartRealization in shift -n. The single-functor shift isomorphism identifies it with Hom from C into singleFunctor at degree n. A representative of the inverse image of any map in the filtered colimit gives factorization through one stage. This is exactly DerivedCategory.HomFactorsThroughFilteredColimits for the integral source.",
+   "uses": [
+    "det-lem-int-ext-continuity",
+    "lem-integral-ind-heart-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+    "place": "Paragraph (2), extension of the uniform bound to IndCons"
+   }
+  },
+  {
+   "text": "Set N=-d_C-1. The given Ext bound and the single-functor shift isomorphism imply zero Hom into every constructible sheaf placed in a degree n at most N. The coefficient-independent source-library lemma eq_zero_of_ind extends this vanishing to filtered colimits by the factorization from step 1. This uses the generic proof, not the rational coefficient specialization.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+    "place": "Paragraph (2), uniform vanishing on IndCons"
+   }
+  },
+  {
+   "text": "Use the internal-module/sectionwise-module equivalence for the actual integral coefficient sheaf. Apply products_exact to its section-ring sheaf and the countable indexing set, explicitly fixing the module universe to u+1. Transport limits and exactness of countable products across the equivalence. Grothendieckness gives K-injective resolutions. The general source-library DerivedCategory.eq_zero_of_isLE applies: bounded truncation induction gives vanishing on each tower term and on its degree-minus-one shift, and the proved homotopy-limit/left-completeness API gives zero Hom on a tail supported in degrees at most N-1.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "det-pe-products-exact",
+    "det-pe-left-complete-iso",
+    "det-pe-products-derived",
+    "lem-sf-derived-truncation-triangle",
+    "def-kun-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+    "place": "Paragraph (2), the unbounded lower tail"
+   }
+  },
+  {
+   "text": "Use the truncation triangle at N to separate L into its part at most N-1 and its single layer in degree N. The first receives no maps by step 3; the single layer receives no maps by eq_zero_of_isGE_of_isLE_self and step 2. Exactness of Hom into the triangle factors every map through the first term and hence makes it zero. This recovers the exact endpoint at most -d_C-1 without weakening the statement.",
+   "uses": [
+    "lem-sf-derived-truncation-triangle",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+    "place": "Paragraph (2), endpoint layer and exactness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-lem-int-ext-continuity",
+  "lem-integral-ind-heart-realization",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "det-pe-products-exact",
+  "det-pe-left-complete-iso",
+  "det-pe-products-derived",
+  "lem-sf-derived-truncation-triangle",
+  "def-kun-truncations",
+  "lem-weil-pbc-hom-into-triangle-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+  "place": "Paragraph (2), continuity plus the general CompactOfBoundedExt lower-tail proof, exact countable pro-etale products transported to internal modules, followed by the endpoint truncation triangle. No new unproved statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Hom from constructible integral sheaf vanishes on complexes whose cohomology is below its Ext dimension bound",
+   "results": "{\"t\": \"2026-10-18T21:16:08Z\", \"tool\": \"leanfinder\", \"query\": \"Hom from constructible integral sheaf vanishes on complexes whose cohomology is below its Ext dimension bound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CategoryTheory.hasInjectiveDimensionLT_iff\", \"CategoryTheory.HasInjectiveDimensionLT.mk\", \"CategoryTheory.hasProjectiveDimensionLT_iff\", \"DerivedCategory.isGE_iff\", \"CategoryTheory.HasInjectiveDimensionLT.subsingleton\", \"DerivedCategory.isLE_iff\"], \"digest\": \"7e26a00c2b57ec68\"}",
+   "date": "2026-10-19",
+   "verdict": "No exact integral-coefficient result. The hits provide categorical tools or the rational coefficient special case, not this assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom into finite cohomological truncations preserves direct sums by bounded below filtered colimit continuity",
+   "results": "{\"t\": \"2026-10-18T23:03:17Z\", \"tool\": \"leansearch\", \"query\": \"Hom into finite cohomological truncations preserves direct sums by bounded below filtered colimit continuity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddGrpCat.FilteredColimits.colimit\", \"CategoryTheory.isFinitelyPresentable_iff_preservesFilteredColimits\", \"instPreservesFiniteLimitsFunctorAddCommGrpCatColim\", \"HomologicalComplex.instHasFilteredColimitsOfSize\", \"AddGrpCat.FilteredColimits.colimitCoconeIsColimit\", \"AddMonCat.FilteredColimits.colimitCoconeIsColimit\", \"AddCommGrpCat.FilteredColimits.colimitCoconeIsColimit\", \"AddCommGrpCat.FilteredColimits.colimitCocone\"], \"digest\": \"3a68482e7288e0c5\"}",
+   "date": "2026-10-19",
+   "verdict": "No exact integral-coefficient result. The hits provide categorical tools or the rational coefficient special case, not this assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "from_singleFunctor_obj_eq_zero_of_projective|preservesColimitsOfShape_homologyFunctor|Ind.lim",
+   "results": "{\"t\": \"2026-10-18T23:03:37Z\", \"tool\": \"grep\", \"query\": \"from_singleFunctor_obj_eq_zero_of_projective|preservesColimitsOfShape_homologyFunctor|Ind.lim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Indization/Category.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean\", \"Mathlib/CategoryTheory/Abelian/Indization.lean\"], \"digest\": \"94e04673d7c4da08\"}",
+   "date": "2026-10-19",
+   "verdict": "No exact integral-coefficient result. The hits provide categorical tools or the rational coefficient special case, not this assertion."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralConstructibleCompactness",
+  "date": "2026-10-19",
+  "group": "E7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-int-compactness-compact",
+   "place": "Paragraph (2), uniform bound and bounded/unbounded lower-tail arguments",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-int-compactness",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralIndLowerTail",
+  "file": "lean/Sheaf/Paper/IntegralIndLowerTail.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralIndLowerTail",
+  "statement": "theorem integralIndLowerTail\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpℓ : p ≠ ℓ)\n    (X : Scheme.{u}) [X.Over (Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (X ↘ Spec (.of k))]\n    (d : ConstantModelConstructible (Profinite.padicIntegersRingObj ℓ E) X → ℕ)\n    (hd : ∀ (C N : ConstantModelConstructible (Profinite.padicIntegersRingObj ℓ E) X)\n      (q : ℤ), (d C : ℤ) < q →\n        Subsingleton (((DerivedCategory.singleFunctor _ 0).obj C.obj) ⟶\n          ((DerivedCategory.singleFunctor _ 0).obj N.obj)⟦q⟧)) :\n    let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)\n    let H : ObjectProperty A := IsConstantModelConstructible\n      (Profinite.padicIntegersRingObj ℓ E) X\n    ∀ (C : H.FullSubcategory) (L : DerivedCategory A),\n      DerivedCategory.homologyProperty H.ind.{u + 1} L →\n      L.IsLE (-(d C : ℤ) - 1) →\n      Subsingleton (((DerivedCategory.singleFunctor A 0).obj C.obj) ⟶ L)",
+  "branch": "sheaf-dag",
+  "by": "E7",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261019T154008-L-3025015",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261019T154008-L-3025015",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
