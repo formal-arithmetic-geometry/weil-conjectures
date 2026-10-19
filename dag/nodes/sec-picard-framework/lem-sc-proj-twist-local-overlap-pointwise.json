@@ -84,13 +84,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ProjTwistLocalOverlapCompatibility",
-  "file": "lean/Sheaf/AlgebraicGeometry/ProjTwistLocalOverlapCompatibility.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ProjTwistLocalOverlapCompatibility",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ProjTwistLocalOverlapCompatibility.lean",
   "declaration": "AlgebraicGeometry.Proj.twist_localOverlap_pointwise",
   "statement": "theorem twist_localOverlap_pointwise\n    {A σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]\n    (𝒜 : ℕ → σ) [GradedRing 𝒜] (k : ℤ) (f : A) (b : ℕ)\n    (hb : 0 < b) (hf : f ∈ 𝒜 b)\n    (s : (twist 𝒜 k).val.obj (op (basicOpen 𝒜 f)))\n    (n : ℕ) (g : Fin n → HomogeneousLocalization.Away 𝒜 f)\n    (t : ∀ i : Fin n, LocalizedModule.Away (g i)\n      (LocalizedModule.Away f A))\n    (hlocal : ∀ (i : Fin n) (p : basicOpen 𝒜 f),\n      let F := IsLocalization.map (M := Submonoid.powers f)\n        (T := p.1.asHomogeneousIdeal.toIdeal.primeCompl)\n        (Localization.AtPrime p.1.asHomogeneousIdeal.toIdeal) (RingHom.id A)\n        (Submonoid.powers_le.mpr p.2)\n      IsUnit (F (algebraMap (HomogeneousLocalization.Away 𝒜 f)\n        (LocalizedModule.Away f A) (g i))) →\n      ∃ e : LocalizedModule.Away (g i) (LocalizedModule.Away f A) →+\n          Localization.AtPrime p.1.asHomogeneousIdeal.toIdeal,\n        (∀ z : LocalizedModule.Away f A,\n          e (LocalizedModule.mkLinearMap (Submonoid.powers (g i))\n            (LocalizedModule.Away f A) z) = F z) ∧\n        (∀ (a : HomogeneousLocalization.Away 𝒜 f)\n          (x : LocalizedModule.Away (g i) (LocalizedModule.Away f A)),\n          e (a • x) = F (algebraMap (HomogeneousLocalization.Away 𝒜 f)\n            (LocalizedModule.Away f A) a) * e x) ∧\n        e (t i) = (s.1 p).1)\n    (i j : Fin n) :\n      let ρ := fun (a h : HomogeneousLocalization.Away 𝒜 f) (ha : a ∣ h) ↦\n        IsLocalizedModule.lift (Submonoid.powers a)\n          (LocalizedModule.mkLinearMap (Submonoid.powers a)\n            (LocalizedModule.Away f A))\n          (LocalizedModule.mkLinearMap (Submonoid.powers h)\n            (LocalizedModule.Away f A))\n          (RingTheory.localizationAway_map_units_of_dvd\n            (M := LocalizedModule.Away f A) a h ha)\n      ρ (g i) (g i * g j) (dvd_mul_right (g i) (g j)) (t i) =\n        ρ (g j) (g i * g j) (dvd_mul_left (g j) (g i)) (t j) ",
   "branch": "sheaf-dag",
   "by": "K2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.ProjTwistLocalOverlapCompatibility; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

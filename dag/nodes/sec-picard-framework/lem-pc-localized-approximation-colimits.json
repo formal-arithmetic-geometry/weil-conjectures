@@ -106,13 +106,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.LocalizedApproximationColimits",
-  "file": "lean/Sheaf/RingTheory/LocalizedApproximationColimits.lean",
+  "module": "WeilConjectures.RingTheory.LocalizedApproximationColimits",
+  "file": "lean/WeilConjectures/RingTheory/LocalizedApproximationColimits.lean",
   "declaration": "Algebra.localized_approximation_colimits",
   "statement": "theorem localized_approximation_colimits\n    (R S : Type u) (M : Type v) [CommRing R] [CommRing S] [Algebra R S]\n    [AddCommGroup M] [Module S M]\n    {Λ : Type u} [Preorder Λ] [Nonempty Λ] [IsDirected Λ (· ≤ ·)]\n    (A B : Λ ⥤ CommRingCat.{u}) (η : A ⟶ B)\n    (π : A ⟶ (Functor.const Λ).obj (CommRingCat.of R))\n    (κ : B ⟶ (Functor.const Λ).obj (CommRingCat.of S))\n    (D : Λ ⥤ AddCommGrpCat.{v})\n    (ν : D ⟶ (Functor.const Λ).obj (AddCommGrpCat.of M))\n    [∀ i : Λ, Module (B.obj i) (D.obj i)]\n    (hA : Nonempty (IsColimit (Cocone.mk (CommRingCat.of R) π)))\n    (hB : Nonempty (IsColimit (Cocone.mk (CommRingCat.of S) κ)))\n    (hD : Nonempty (IsColimit (Cocone.mk (AddCommGrpCat.of M) ν)))\n    (hη : ∀ i, η.app i ≫ κ.app i = π.app i ≫ CommRingCat.ofHom (algebraMap R S))\n    (hs : ∀ (i j : Λ) (f : i ⟶ j) (b : B.obj i) (x : D.obj i),\n      (D.map f).hom (b • x) = (B.map f).hom b • (D.map f).hom x)\n    (hν : ∀ i (b : B.obj i) (x : D.obj i),\n      (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app i)) (b • x) =\n        (@CommRingCat.Hom.hom _ (CommRingCat.of S) (κ.app i)) b •\n          (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app i)) x)\n    (q : PrimeSpectrum S) :\n    let Aq := primeRingDiagram A (η ≫ κ) q\n    let Bq := primeRingDiagram B κ q\n    let Nq := primeModuleDiagram B κ q D hs\n    ∃ (ψ : (colimit Aq : CommRingCat.{u}) →+* (colimit Bq : CommRingCat.{u}))\n      (act : Module (colimit Bq : CommRingCat.{u})\n        (colimit Nq : AddCommGrpCat.{max u v})),\n      letI := act\n      (∀ i, ψ.comp (colimit.ι Aq i).hom =\n        (colimit.ι Bq i).hom.comp (primeDiagramHom A B η κ q i)) ∧\n      (∀ (i : Λ) (b : Bq.obj i) (x : Nq.obj i),\n        (colimit.ι Nq i).hom (b • x) =\n          (colimit.ι Bq i).hom b • (colimit.ι Nq i).hom x) ∧\n      ((letI := Module.compHom (colimit Nq : AddCommGrpCat.{max u v}) ψ\n        Module.Flat (colimit Aq : CommRingCat.{u}) (colimit Nq : AddCommGrpCat.{max u v})) ↔\n        @Module.Flat (Localization.AtPrime (q.asIdeal.comap (algebraMap R S)))\n          (LocalizedModule q.asIdeal.primeCompl M) _ _\n          (Module.compHom _ (Localization.localRingHom\n            (q.asIdeal.comap (algebraMap R S)) q.asIdeal (algebraMap R S) rfl)))",
   "branch": "sheaf-dag",
   "by": "D3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.LocalizedApproximationColimits; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

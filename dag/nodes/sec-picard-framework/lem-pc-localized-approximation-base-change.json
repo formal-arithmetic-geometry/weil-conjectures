@@ -124,13 +124,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.LocalizedApproximationBaseChange",
-  "file": "lean/Sheaf/RingTheory/LocalizedApproximationBaseChange.lean",
+  "module": "WeilConjectures.RingTheory.LocalizedApproximationBaseChange",
+  "file": "lean/WeilConjectures/RingTheory/LocalizedApproximationBaseChange.lean",
   "declaration": "Algebra.localized_approximation_baseChange",
   "statement": "theorem localized_approximation_baseChange\n    {S : Type u} [CommRing S]\n    {Λ : Type u} [Preorder Λ]\n    (A B : Λ ⥤ CommRingCat.{u}) (η : A ⟶ B)\n    (κ : B ⟶ (Functor.const Λ).obj (CommRingCat.of S))\n    (D : Λ ⥤ AddCommGrpCat.{v}) [∀ i : Λ, Module (B.obj i) (D.obj i)]\n    (hs : ∀ (i j : Λ) (f : i ⟶ j) (b : B.obj i) (x : D.obj i),\n      (D.map f).hom (b • x) = (B.map f).hom b • (D.map f).hom x)\n    (hring : ∀ (i j : Λ) (f : i ⟶ j),\n      letI := (η.app i).hom.toAlgebra\n      letI := (A.map f).hom.toAlgebra\n      ∃ e : B.obj i ⊗[A.obj i] A.obj j ≃+* B.obj j,\n        ∀ (x : B.obj i) (y : A.obj j),\n          e (x ⊗ₜ[A.obj i] y) = (B.map f).hom x * (η.app j).hom y)\n    (hmodule : ∀ (i j : Λ) (f : i ⟶ j),\n      letI := (B.map f).hom.toAlgebra\n      ∃ e : B.obj j ⊗[B.obj i] D.obj i ≃ₗ[B.obj j] D.obj j,\n        ∀ (y : B.obj j) (x : D.obj i),\n          e (y ⊗ₜ[B.obj i] x) = y • (D.map f).hom x)\n    (q : PrimeSpectrum S) :\n    let Aq := primeRingDiagram A (η ≫ κ) q\n    let Bq := primeRingDiagram B κ q\n    let Nq := primeModuleDiagram B κ q D hs\n    (∀ (i j : Λ) (f : i ⟶ j),\n      letI := (primeDiagramHom A B η κ q i).toAlgebra\n      letI := (Aq.map f).hom.toAlgebra\n      ∃ (t : Bq.obj i ⊗[Aq.obj i] Aq.obj j →+* Bq.obj j)\n        (W : Submonoid (Bq.obj i ⊗[Aq.obj i] Aq.obj j)),\n        (∀ (b : Bq.obj i) (a : Aq.obj j),\n          t (b ⊗ₜ[Aq.obj i] a) =\n            (Bq.map f).hom b * primeDiagramHom A B η κ q j a) ∧\n        (letI := t.toAlgebra; IsLocalization W (Bq.obj j))) ∧\n    (∀ (i j : Λ) (f : i ⟶ j),\n      letI := (Bq.map f).hom.toAlgebra\n      ∃ e : Bq.obj j ⊗[Bq.obj i] Nq.obj i ≃ₗ[Bq.obj j] Nq.obj j,\n        ∀ (b : Bq.obj j) (x : Nq.obj i),\n          e (b ⊗ₜ[Bq.obj i] x) = b • (Nq.map f).hom x)",
   "branch": "sheaf-dag",
   "by": "D3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.LocalizedApproximationBaseChange; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

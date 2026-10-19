@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.TensorProduct.Basic
 import Sheaf.RingTheory.FormalGlueingEquivalence
-import Sheaf.RingTheory.FormalGlueingComplexExact
+import WeilConjectures.RingTheory.FormalGlueingComplexExact
 import Sheaf.RingTheory.FiniteIffFormalGlueing
 import WeilConjectures.RingTheory.FormalGlueingH0
 

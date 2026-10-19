@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
-import Sheaf.AlgebraicGeometry.DeterminantDualLocalFrames
+import WeilConjectures.AlgebraicGeometry.DeterminantDualLocalFrames
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.LinearAlgebra.Dual.Basis
 

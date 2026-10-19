@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Mathlib.Algebra.MvPolynomial.Equiv
 import Sheaf.RingTheory.PolynomialSuccessorTorBound
-import Sheaf.RingTheory.TorVanishingLocalizedBase
+import WeilConjectures.RingTheory.TorVanishingLocalizedBase
 
 /-! # Tor bounds for polynomial modules
 Source: Weibel, An Introduction to Homological Algebra, Theorem 4.3.7, pp. 101–102.

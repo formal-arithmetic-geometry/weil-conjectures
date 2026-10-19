@@ -9,7 +9,7 @@ public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian
 public import Mathlib.RingTheory.Finiteness.Basic
-import Sheaf.RingTheory.FiniteOverHenselianLocalProduct
+import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct
 import Mathlib.FieldTheory.PurelyInseparable.Basic
 import Mathlib.AlgebraicGeometry.Limits
 

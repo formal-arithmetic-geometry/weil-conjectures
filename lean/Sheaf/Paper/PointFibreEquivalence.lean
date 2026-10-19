@@ -39,7 +39,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
 import Sheaf.AlgebraicGeometry.ProEtaleConstantSheafStalk
 import Sheaf.Paper.PointSectionsFiniteness
-import Sheaf.RingTheory.FiniteFreeResolution
+import WeilConjectures.RingTheory.FiniteFreeResolution
 import Mathlib.LinearAlgebra.FreeModule.PID
 import Sheaf.CategoryTheory.DerivedCategory.PerfectCohomologyAssembly
 import Sheaf.Paper.IntegralStratifiedPerfectCharacterization

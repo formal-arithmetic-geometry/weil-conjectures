@@ -6,13 +6,13 @@ Authors: SHEAF group P4
 module
 
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
-public import Sheaf.AlgebraicGeometry.ChartOrdinaryMapRecovery
-public import Sheaf.AlgebraicGeometry.AffineChartUpperTailLimitData
+public import WeilConjectures.AlgebraicGeometry.ChartOrdinaryMapRecovery
+public import WeilConjectures.AlgebraicGeometry.AffineChartUpperTailLimitData
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Order.Antisymmetrization
 import Sheaf.AlgebraicGeometry.AffineChartNormalizedSectionModels
-import Sheaf.AlgebraicGeometry.AffineChartTensorRecovery
+import WeilConjectures.AlgebraicGeometry.AffineChartTensorRecovery
 
 /-! # Canonical affine chart Hom naturality
 

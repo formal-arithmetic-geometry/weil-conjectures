@@ -6,7 +6,7 @@ Authors: SHEAF group F3
 module
 
 public import Sheaf.CategoryTheory.CanonicalResolutionDerivedIso
-public import Sheaf.CategoryTheory.RightDerivedSingleUnitHomologyComparison
+public import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyComparison
 
 /-! # The derived unit and an augmented resolution comparison
 

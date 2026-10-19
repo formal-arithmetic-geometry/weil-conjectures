@@ -5,11 +5,11 @@ Authors: SHEAF group U4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectMorphism
+public import WeilConjectures.AlgebraicGeometry.PerfectMorphism
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.MvPolynomial.Basic
 import Sheaf.AlgebraicGeometry.AffinePolynomialLocalizedFiniteProjectiveDimension
-import Sheaf.RingTheory.ProjectiveDimensionLocusOpen
+import WeilConjectures.RingTheory.ProjectiveDimensionLocusOpen
 import Sheaf.RingTheory.BoundedProjectiveResolutionDimension
 
 /-! # A bounded polynomial resolution from finite stalk Tor dimension

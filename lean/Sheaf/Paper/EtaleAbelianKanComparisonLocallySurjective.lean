@@ -11,8 +11,8 @@ public import Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
 public import Mathlib.CategoryTheory.Sites.LocallySurjective
 
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAbelianLiftHom
-import Sheaf.AlgebraicGeometry.EtaleInverseImageSmallUniverse
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAbelianLiftHom
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageSmallUniverse
 import Mathlib.Algebra.Category.Grp.Ulift
 
 /-! # The underlying-set Kan comparison for an abelian inverse image

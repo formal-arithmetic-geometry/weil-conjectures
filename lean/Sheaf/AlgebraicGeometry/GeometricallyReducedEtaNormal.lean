@@ -18,7 +18,7 @@ public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Sheaf.AlgebraicGeometry.MultipointedCurveModification
 
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoHartogsRestriction
-import Sheaf.AlgebraicGeometry.Morphisms.NormalDenseOpenIntegralSection
+import WeilConjectures.AlgebraicGeometry.Morphisms.NormalDenseOpenIntegralSection
 import Sheaf.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
 import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
 import Sheaf.RingTheory.FlatLocalDepthFormula

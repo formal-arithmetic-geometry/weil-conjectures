@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 public import WeilConjectures.Algebra.Module.DegreeZeroFractions
 import Sheaf.AlgebraicGeometry.ProjTwistFiniteLocalizationData
-import Sheaf.RingTheory.CoverModuleExact
+import WeilConjectures.RingTheory.CoverModuleExact
 import WeilConjectures.AlgebraicGeometry.ProjTwistDegreeDetection
 
 /-!

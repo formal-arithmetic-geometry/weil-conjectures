@@ -15,7 +15,7 @@ import Mathlib.RingTheory.RegularLocalRing.Polynomial
 import Mathlib.RingTheory.Polynomial.UniqueFactorization
 import Mathlib.RingTheory.Polynomial.Eisenstein.Criterion
 import Mathlib.Algebra.MvPolynomial.PDeriv
-import Sheaf.RingTheory.HypersurfaceDerivationRegular
+import WeilConjectures.RingTheory.HypersurfaceDerivationRegular
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import Sheaf.AlgebraicGeometry.IsRegularScheme
 

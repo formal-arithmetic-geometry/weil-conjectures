@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.RawRestrictedHomotopySectionsIso
-import Sheaf.CategoryTheory.RightDerivedSingleUnitHomologyComparison
+import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyComparison
 
 /-! # Degree-zero normalization of the restricted sections unit
 

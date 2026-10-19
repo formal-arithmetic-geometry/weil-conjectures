@@ -5,8 +5,8 @@ Authors: SHEAF group H2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentInjective
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
+public import WeilConjectures.AlgebraicGeometry.FiniteSurjectiveSetDescentInjective
+import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
 import WeilConjectures.AlgebraicGeometry.EtaleSetSectionsGeometricGermExt
 import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 import Mathlib.CategoryTheory.Sites.LocallySurjective

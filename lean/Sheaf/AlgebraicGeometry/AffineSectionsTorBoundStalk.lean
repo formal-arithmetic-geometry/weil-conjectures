@@ -5,10 +5,10 @@ Authors: SHEAF group H1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectMorphism
+public import WeilConjectures.AlgebraicGeometry.PerfectMorphism
 public import Mathlib.AlgebraicGeometry.AffineScheme
 import Sheaf.RingTheory.TorVanishingLocalizedAlgebra
-import Sheaf.RingTheory.TorVanishingLocalizedBase
+import WeilConjectures.RingTheory.TorVanishingLocalizedBase
 
 /-! # Localization of an affine coordinate Tor bound
 

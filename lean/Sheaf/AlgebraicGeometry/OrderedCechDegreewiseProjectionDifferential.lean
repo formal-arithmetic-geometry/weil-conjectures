@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.OrderedCechDegreewiseProjection
-import Sheaf.AlgebraicGeometry.SignedCechExtension
+import WeilConjectures.AlgebraicGeometry.SignedCechExtension
 import WeilConjectures.Topology.Sheaves.CechComparison
 import Sheaf.AlgebraicGeometry.OrderedCechModuleCoordinates
 

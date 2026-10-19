@@ -5,7 +5,7 @@ Authors: SHEAF group K2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentInjective
+public import WeilConjectures.AlgebraicGeometry.FiniteSurjectiveSetDescentInjective
 public import Mathlib.CategoryTheory.Sites.LocallySurjective
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentGermLifts

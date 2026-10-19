@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 public import Sheaf.CategoryTheory.CanonicalResolutionDerivedIso
-import Sheaf.CategoryTheory.GrothendieckBottomEdgeSingleUnit
+import WeilConjectures.CategoryTheory.GrothendieckBottomEdgeSingleUnit
 import Sheaf.CategoryTheory.ResolutionDerivedSingleUnitAugmentation
 
 /-! # The bottom interval and an augmented comparison

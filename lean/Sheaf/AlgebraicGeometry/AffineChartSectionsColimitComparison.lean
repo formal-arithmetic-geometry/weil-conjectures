@@ -9,8 +9,8 @@ public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.Ring.Colimits
 
-import Sheaf.AlgebraicGeometry.AffineChartRingColimitGeometric
-import Sheaf.AlgebraicGeometry.ModuleSectionsPullbackIsoTransport
+import WeilConjectures.AlgebraicGeometry.AffineChartRingColimitGeometric
+import WeilConjectures.AlgebraicGeometry.ModuleSectionsPullbackIsoTransport
 
 /-! # Colimit and sections comparisons for a fixed affine chart
 

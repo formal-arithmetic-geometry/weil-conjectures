@@ -8,7 +8,7 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.Algebra.Homology.HomologicalComplex
 public import WeilConjectures.CategoryTheory.SiteCechComplex
 import Mathlib.Algebra.Category.Grp.EpiMono
-import Sheaf.AlgebraicGeometry.AlternatingCechRestrictionHomotopy
+import WeilConjectures.AlgebraicGeometry.AlternatingCechRestrictionHomotopy
 
 /-!
 # The alternating Čech complex computes Čech cohomology

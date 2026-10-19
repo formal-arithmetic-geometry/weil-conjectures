@@ -5,10 +5,10 @@ Authors: SHEAF group H3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentInjective
+public import WeilConjectures.AlgebraicGeometry.FiniteSurjectiveSetDescentInjective
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentCoordinatesConstant
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.FiniteSurjectiveSetDescentCoordinatesConstant
+import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.FinitePushforwardSetStalk
 import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 

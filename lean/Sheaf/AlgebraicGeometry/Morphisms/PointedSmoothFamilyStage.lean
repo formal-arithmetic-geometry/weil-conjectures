@@ -11,8 +11,8 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import WeilConjectures.AlgebraicGeometry.Morphisms.Slicing
-import Sheaf.AlgebraicGeometry.Morphisms.AffineLimitSmoothStage
-import Sheaf.AlgebraicGeometry.Morphisms.PointedSectionStageDescent
+import WeilConjectures.AlgebraicGeometry.Morphisms.AffineLimitSmoothStage
+import WeilConjectures.AlgebraicGeometry.Morphisms.PointedSectionStageDescent
 
 /-!
 # Descent of a pointed smooth family to one Noetherian stage

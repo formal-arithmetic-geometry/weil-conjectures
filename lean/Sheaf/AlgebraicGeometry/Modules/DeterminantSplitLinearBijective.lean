@@ -10,13 +10,13 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
-import Sheaf.AlgebraicGeometry.Modules.DeterminantSplitChartComparison
+import WeilConjectures.AlgebraicGeometry.Modules.DeterminantSplitChartComparison
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.LinearAlgebra.Prod
 import Mathlib.LinearAlgebra.TensorProduct.Basis
-import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafLocalFreeComparison
+import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafLocalFreeComparison
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRankWedgeZero
-import Sheaf.LinearAlgebra.ExteriorTopDirectSum
+import WeilConjectures.LinearAlgebra.ExteriorTopDirectSum
 
 /-!
 # Local bijectivity of split determinant linear maps

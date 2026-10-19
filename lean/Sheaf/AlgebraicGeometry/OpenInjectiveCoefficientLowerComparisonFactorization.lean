@@ -1,6 +1,6 @@
 module
 public import Sheaf.AlgebraicGeometry.BaseChangeStalkTransition
-public import Sheaf.CategoryTheory.RightDerivedSingleUnitHomologyComparison
+public import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyComparison
 import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 open CategoryTheory Limits
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale

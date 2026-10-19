@@ -96,13 +96,14 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.TensorModelPushoutBaseChange",
-  "file": "lean/Sheaf/RingTheory/TensorModelPushoutBaseChange.lean",
+  "module": "WeilConjectures.RingTheory.TensorModelPushoutBaseChange",
+  "file": "lean/WeilConjectures/RingTheory/TensorModelPushoutBaseChange.lean",
   "declaration": "AlgebraicGeometry.tensor_model_pushout_base_change",
   "statement": "theorem tensor_model_pushout_base_change\n    (R : Type u) (S : Type v) (T : Type w) (A : Type x) (B : Type y)\n    (P Q : Type z)\n    [CommRing R] [CommRing S] [CommRing T] [CommRing A] [CommRing B]\n    [CommRing P] [CommRing Q] [Algebra R S] [Algebra R T]\n    [Algebra R A] [Algebra R B] [Algebra P Q]\n    (t : S →ₐ[R] T) (f : A →ₐ[R] B) (q : Q →+* S ⊗[R] B)\n    (h : let D := S ⊗[R] A\n      let E := S ⊗[R] B\n      let d : D →+* E :=\n        (Algebra.TensorProduct.map (AlgHom.id S S) f).toRingHom\n      letI : Algebra D E := d.toAlgebra\n      letI : Algebra Q E := q.toAlgebra\n      ∃ aP : Algebra P D,\n        letI := aP\n        letI : Algebra P E := (d.comp (algebraMap P D)).toAlgebra\n        letI : IsScalarTower P D E := .of_algebraMap_eq fun _ ↦ rfl\n        ∃ hPQ : IsScalarTower P Q E,\n          letI := hPQ\n          Algebra.IsPushout P D Q E) :\n    let D := T ⊗[R] A\n    let E := T ⊗[R] B\n    let d : D →+* E := (Algebra.TensorProduct.map (AlgHom.id T T) f).toRingHom\n    letI : Algebra D E := d.toAlgebra\n    letI : Algebra Q E :=\n      ((Algebra.TensorProduct.map t (AlgHom.id R B)).toRingHom.comp q).toAlgebra\n    ∃ aP : Algebra P D,\n      letI := aP\n      letI : Algebra P E := (d.comp (algebraMap P D)).toAlgebra\n      letI : IsScalarTower P D E := .of_algebraMap_eq fun _ ↦ rfl\n      ∃ hPQ : IsScalarTower P Q E,\n        letI := hPQ\n        Algebra.IsPushout P D Q E",
   "branch": "sheaf-dag",
   "by": "S2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.TensorModelPushoutBaseChange; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

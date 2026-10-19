@@ -10,8 +10,8 @@ public import Mathlib.Algebra.Category.Ring.Basic
 public import Mathlib.CategoryTheory.Category.Preorder
 public import Mathlib.CategoryTheory.Limits.IsLimit
 public import Mathlib.RingTheory.EssentialFiniteness
-import Sheaf.RingTheory.TensorLocalizationTowerTransition
-import Sheaf.RingTheory.LocalizedModuleOfLiftedTensorComparison
+import WeilConjectures.RingTheory.TensorLocalizationTowerTransition
+import WeilConjectures.RingTheory.LocalizedModuleOfLiftedTensorComparison
 import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.Algebra.Module.LocalizedModule.IsLocalization
 import Mathlib.Algebra.Category.Ring.FilteredColimits

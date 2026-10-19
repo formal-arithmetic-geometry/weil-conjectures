@@ -9,10 +9,10 @@ public import Mathlib.Algebra.Category.Ring.Basic
 public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Sheaf.RingTheory.FiniteProductNormal
-import Sheaf.RingTheory.IntegralClosureFinitePi
+import WeilConjectures.RingTheory.FiniteProductNormal
+import WeilConjectures.RingTheory.IntegralClosureFinitePi
 import Mathlib.RingTheory.Localization.Pi
-import Sheaf.RingTheory.IntegrallyClosedReducedFiniteDomainDecomposition
+import WeilConjectures.RingTheory.IntegrallyClosedReducedFiniteDomainDecomposition
 import Sheaf.RingTheory.NormalRingIntegrallyClosedTotal
 
 /-!

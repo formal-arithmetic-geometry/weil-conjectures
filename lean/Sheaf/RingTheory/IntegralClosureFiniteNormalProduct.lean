@@ -7,7 +7,7 @@ module
 
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Sheaf.RingTheory.FiniteProductNormal
+import WeilConjectures.RingTheory.FiniteProductNormal
 
 /-!
 # Integral closure in a finite product of normal domains

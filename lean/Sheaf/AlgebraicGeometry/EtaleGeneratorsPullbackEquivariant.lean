@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleIsoTorsor
 import Sheaf.AlgebraicGeometry.EtaleGeneratorsPullbackUnitMap
-import Sheaf.AlgebraicGeometry.EtaleInverseImageJointRepresentatives
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageJointRepresentatives
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!

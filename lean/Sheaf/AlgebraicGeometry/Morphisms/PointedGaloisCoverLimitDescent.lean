@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 import Sheaf.AlgebraicGeometry.Morphisms.GaloisCoverBaseChange
 import Sheaf.AlgebraicGeometry.Morphisms.GaloisCoverStageDescent
-import Sheaf.AlgebraicGeometry.Morphisms.PointedSectionStageDescent
+import WeilConjectures.AlgebraicGeometry.Morphisms.PointedSectionStageDescent
 
 /-!
 # Descent of a pointed finite torsor along affine inverse limits

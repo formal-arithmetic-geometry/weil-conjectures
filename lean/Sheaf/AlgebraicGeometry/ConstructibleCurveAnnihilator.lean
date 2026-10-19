@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.ConstructibleTorsionCurveSheaf
-import Sheaf.AlgebraicGeometry.ConstructibleStalkCardinalityBound
+import WeilConjectures.AlgebraicGeometry.ConstructibleStalkCardinalityBound
 import Mathlib.GroupTheory.OrderOfElement
 import Mathlib.Data.Nat.Factorial.Basic
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper

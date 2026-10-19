@@ -5,10 +5,10 @@ Authors: SHEAF group S1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.GaloisCategories
+public import WeilConjectures.AlgebraicGeometry.GaloisCategories
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorDescent
-import Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 import Sheaf.AlgebraicGeometry.Sites.InverseImageRepresentable
 import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
 

@@ -5,11 +5,11 @@ Authors: SHEAF group N3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectMorphism
+public import WeilConjectures.AlgebraicGeometry.PerfectMorphism
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.MvPolynomial.Basic
 public import Mathlib.RingTheory.LocalProperties.ProjectiveDimension
-import Sheaf.AlgebraicGeometry.AffinePolynomialLocalizedTorOfStalkwise
+import WeilConjectures.AlgebraicGeometry.AffinePolynomialLocalizedTorOfStalkwise
 import Sheaf.RingTheory.LocalizedPolynomialFiniteProjectiveDimension
 
 /-! # Pointwise projective dimension from stalkwise finite Tor dimension
