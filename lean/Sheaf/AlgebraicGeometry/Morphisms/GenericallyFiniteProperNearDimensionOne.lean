@@ -18,7 +18,7 @@ import Mathlib.AlgebraicGeometry.Fiber
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 import WeilConjectures.AlgebraicGeometry.QuasiFiniteAtPointIsolated
-import Sheaf.AlgebraicGeometry.ProperBasic
+import WeilConjectures.AlgebraicGeometry.ProperBasic
 import Sheaf.AlgebraicGeometry.Morphisms.GenericallyFiniteQuasiFiniteOverDimensionOne
 
 /-!

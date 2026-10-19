@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
-import Sheaf.AlgebraicGeometry.RelativelyFlatModulePullback
+import WeilConjectures.AlgebraicGeometry.RelativelyFlatModulePullback
 import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportPullback
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
 

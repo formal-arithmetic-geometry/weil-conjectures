@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-import Sheaf.AlgebraicGeometry.RelativeFlatModuleStalk
+import WeilConjectures.AlgebraicGeometry.RelativeFlatModuleStalk
 import Sheaf.AlgebraicGeometry.OpenScalarRestrictionStalkCriterion
 import WeilConjectures.AlgebraicGeometry.InverseImageStructureStalkIso
 import Mathlib.RingTheory.RingHom.Flat

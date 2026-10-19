@@ -5,11 +5,11 @@ Authors: SHEAF group W4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardCupProductMap
+public import WeilConjectures.AlgebraicGeometry.PicardCupProductMap
 public import Sheaf.AlgebraicGeometry.PicardDirectImageRankLocus
-import Sheaf.AlgebraicGeometry.PicardDirectImageBaseChangeIso
-import Sheaf.AlgebraicGeometry.PicardTensorDualComparisonIso
-import Sheaf.AlgebraicGeometry.PicardCupPairingBaseChange
+import WeilConjectures.AlgebraicGeometry.PicardDirectImageBaseChangeIso
+import WeilConjectures.AlgebraicGeometry.PicardTensorDualComparisonIso
+import WeilConjectures.AlgebraicGeometry.PicardCupPairingBaseChange
 
 /-! # Base change of the degree-zero cup-product transpose
 

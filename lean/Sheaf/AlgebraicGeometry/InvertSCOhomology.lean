@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
 import Sheaf.AlgebraicGeometry.AffineOpenCohomologyLocalization
 import Sheaf.Paper.NonvanishingSectionTrivializes
 import Sheaf.AlgebraicGeometry.CohomologySectionLocalizationGluing
-import Sheaf.AlgebraicGeometry.QuasiCompactOpenInduction
+import WeilConjectures.AlgebraicGeometry.QuasiCompactOpenInduction
 
 /-! # Localization of graded cohomology at a section
 

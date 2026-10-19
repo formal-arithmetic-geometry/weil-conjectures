@@ -6,7 +6,7 @@ Authors: SHEAF group K4
 module
 
 public import Sheaf.AlgebraicGeometry.ScalarUnitCohomologyCoordinates
-public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
+public import WeilConjectures.AlgebraicGeometry.StructureSheafCohomologyPullback
 import Sheaf.AlgebraicGeometry.ScalarUnitCohomologyPullbackComparison
 import Sheaf.AlgebraicGeometry.ExternalCupUnitCoefficientIdentities
 

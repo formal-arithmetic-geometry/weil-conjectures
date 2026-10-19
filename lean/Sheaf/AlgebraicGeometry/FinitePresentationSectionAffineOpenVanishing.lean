@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.AffineSectionZeroAtStage
-import Sheaf.AlgebraicGeometry.SectionBaseChangeZeroPersists
+import WeilConjectures.AlgebraicGeometry.SectionBaseChangeZeroPersists
 
 /-!
 # Descent of the vanishing of one module section

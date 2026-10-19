@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.LinearAlgebra.TensorProduct.Tower
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
-public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
+public import WeilConjectures.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage

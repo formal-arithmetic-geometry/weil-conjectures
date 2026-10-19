@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.RingTheory.KrullDimension.Basic
-import Sheaf.AlgebraicGeometry.RationalPointTopologicalLocalDimensionBaseChange
+import WeilConjectures.AlgebraicGeometry.RationalPointTopologicalLocalDimensionBaseChange
 import Sheaf.AlgebraicGeometry.RationalPointStalkTopologicalLocalDimension
 
 /-!

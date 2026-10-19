@@ -11,8 +11,8 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Mathlib.RingTheory.Flat.Localization
 import Mathlib.RingTheory.TensorProduct.Maps
 import Sheaf.AlgebraicGeometry.AffinePullbackChartTensorFlatStalks
-import Sheaf.AlgebraicGeometry.RelativeFlatModuleStalk
-import Sheaf.AlgebraicGeometry.RelativeFlatOfStalks
+import WeilConjectures.AlgebraicGeometry.RelativeFlatModuleStalk
+import WeilConjectures.AlgebraicGeometry.RelativeFlatOfStalks
 
 /-! # Tensor flatness on a specified affine cover
 

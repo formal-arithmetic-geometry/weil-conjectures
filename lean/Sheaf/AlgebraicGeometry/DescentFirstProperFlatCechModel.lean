@@ -10,8 +10,8 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCateg
 public import WeilConjectures.RingTheory.FiniteProjectiveComplexFreeModel
 public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
-public import Sheaf.AlgebraicGeometry.RelativeFlatModuleStalk
-public import Sheaf.AlgebraicGeometry.RelativeFlatOfStalks
+public import WeilConjectures.AlgebraicGeometry.RelativeFlatModuleStalk
+public import WeilConjectures.AlgebraicGeometry.RelativeFlatOfStalks
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 public import Sheaf.AlgebraicGeometry.AffineFlatModuleTensorFlat
 public import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat

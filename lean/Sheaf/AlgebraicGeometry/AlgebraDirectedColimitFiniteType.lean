@@ -16,12 +16,11 @@ import WeilConjectures.AlgebraicGeometry.QuasiCoherentModuleColimitAffineSection
 import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
 import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
-import Sheaf.RingTheory.SymmetricAlgebraFinitePresentation
+import WeilConjectures.RingTheory.SymmetricAlgebraFinitePresentation
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
-import WeilConjectures.RingTheory.SymmetricAlgebraFinitePresentation
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 
 /-! # Quasi-coherent algebras as directed colimits of finite type subalgebras

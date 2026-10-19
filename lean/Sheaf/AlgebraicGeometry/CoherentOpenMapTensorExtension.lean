@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 import all Sheaf.AlgebraicGeometry.CoherentStalkMapExtends
 import WeilConjectures.AlgebraicGeometry.QuasicoherentSheafHom
 import Sheaf.AlgebraicGeometry.QuasicoherentOpenSectionIdealExtension
-import Sheaf.AlgebraicGeometry.TensorHomRestrictionScalar
+import WeilConjectures.AlgebraicGeometry.TensorHomRestrictionScalar
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
 
 /-! # Tensor extension of a coherent local morphism

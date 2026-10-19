@@ -12,7 +12,7 @@ public import WeilConjectures.Algebra.Module.DegreeZeroFractions
 public import WeilConjectures.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism
 import Sheaf.AlgebraicGeometry.ProjectiveLineTwistExists
 import WeilConjectures.AlgebraicGeometry.ProjectiveLinePolynomialProjectionChartIso
-import Sheaf.AlgebraicGeometry.ProjTwistGluedComparison
+import WeilConjectures.AlgebraicGeometry.ProjTwistGluedComparison
 import Sheaf.AlgebraicGeometry.ProjFiniteTwistCoproductFractions
 import Mathlib.AlgebraicGeometry.Morphisms.IsIso
 

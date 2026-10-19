@@ -86,13 +86,14 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SectionBaseChangeZeroPersists",
-  "file": "lean/Sheaf/AlgebraicGeometry/SectionBaseChangeZeroPersists.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.SectionBaseChangeZeroPersists",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SectionBaseChangeZeroPersists.lean",
   "declaration": "AlgebraicGeometry.section_baseChange_zero_persists",
   "statement": "theorem section_baseChange_zero_persists\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u})\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    (j : I) (hij : i ≤ j)\n    (G : (pullback f (Spec.map (R.map (homOfLE hij)))).Modules)\n    (U : Xi.Opens)\n    (y : Γ(G, (pullback.fst f (Spec.map (R.map (homOfLE hij)))) ⁻¹ᵁ U))\n    (adjstage : ∀ (k : I) (hjk : j ≤ k),\n      let g := baseChangeMap f\n        (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n        (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n        (Over.homMk (Spec.map (R.map (homOfLE hjk)))\n          (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))\n      Scheme.Modules.tensorPullback g ⊣ Scheme.Modules.pushforward g)\n    (l : I) (hjl : j ≤ l)\n    (hy : ((adjstage l hjl).unit.app G).val.app\n      (op ((pullback.fst f (Spec.map (R.map (homOfLE hij)))) ⁻¹ᵁ U)) y = 0) :\n    ∀ (k : I) (hjk : j ≤ k), l ≤ k →\n      ((adjstage k hjk).unit.app G).val.app\n        (op ((pullback.fst f (Spec.map (R.map (homOfLE hij)))) ⁻¹ᵁ U)) y = 0",
   "branch": "sheaf-dag",
   "by": "Q2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.SectionBaseChangeZeroPersists; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

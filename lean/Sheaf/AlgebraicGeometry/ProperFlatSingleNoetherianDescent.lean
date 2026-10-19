@@ -14,7 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 import Sheaf.AlgebraicGeometry.EventuallyProper
 import Sheaf.AlgebraicGeometry.FlatModuleOnLaterStage
-import Sheaf.AlgebraicGeometry.RelativelyFlatModulePullback
+import WeilConjectures.AlgebraicGeometry.RelativelyFlatModulePullback
 import Sheaf.AlgebraicGeometry.TensorPullbackFinitePresentation
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 

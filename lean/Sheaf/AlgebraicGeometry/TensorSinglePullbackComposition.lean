@@ -6,10 +6,10 @@ Authors: SHEAF group A4
 module
 
 public import Sheaf.AlgebraicGeometry.SchemeDerivedMateEvaluation
-public import Sheaf.AlgebraicGeometry.TensorCoefficientComparison
+public import WeilConjectures.AlgebraicGeometry.TensorCoefficientComparison
 public import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
 import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComposition
-import Sheaf.AlgebraicGeometry.TensorCoefficientPullbackComposition
+import WeilConjectures.AlgebraicGeometry.TensorCoefficientPullbackComposition
 
 /-! # Composition of tensor coefficient single-pullback comparisons
 Source: Stacks Project, Tag 0D5S.

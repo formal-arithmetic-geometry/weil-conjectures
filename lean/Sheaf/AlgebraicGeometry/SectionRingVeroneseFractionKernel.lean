@@ -5,7 +5,7 @@ Authors: SHEAF group R3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionMap
+public import WeilConjectures.AlgebraicGeometry.SectionRingVeroneseFractionMap
 public import WeilConjectures.AlgebraicGeometry.SectionFractionPresentation
 import Sheaf.AlgebraicGeometry.SectionRingVeroneseNumeratorTransition
 

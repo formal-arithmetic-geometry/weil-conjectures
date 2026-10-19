@@ -11,7 +11,7 @@ import Mathlib.Topology.Sheaves.Abelian
 import Sheaf.Algebra.Homology.ModuleStalkExact
 import Sheaf.Algebra.Homology.KFlatStalkCriterion
 import Sheaf.Algebra.Homology.TorIndependentKFlatTensorComparison
-import Sheaf.AlgebraicGeometry.PullbackStalkTensorFlat
+import WeilConjectures.AlgebraicGeometry.PullbackStalkTensorFlat
 import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 
 /-! # Tor-independent perfect pullback comparison at a stalk

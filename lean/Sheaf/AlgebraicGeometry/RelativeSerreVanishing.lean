@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 import Sheaf.AlgebraicGeometry.CoherentSerreVanishing
 import WeilConjectures.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
-import Sheaf.AlgebraicGeometry.TensorPowerSectionOpenRestrictionN
+import WeilConjectures.AlgebraicGeometry.TensorPowerSectionOpenRestrictionN
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 
 /-!

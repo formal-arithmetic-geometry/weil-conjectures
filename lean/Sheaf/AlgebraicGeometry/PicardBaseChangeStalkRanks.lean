@@ -5,11 +5,11 @@ Authors: SHEAF group Q1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardUniversalRankMatch
+public import WeilConjectures.AlgebraicGeometry.PicardUniversalRankMatch
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.AlgebraicGeometry.PicardBaseChangeStalkFiniteBases
+import WeilConjectures.AlgebraicGeometry.PicardBaseChangeStalkFiniteBases
 import Sheaf.AlgebraicGeometry.PicardBaseChangeStalkFinrankEq
 
 /-! # Equal finite ranks of the stalks in Picard base change

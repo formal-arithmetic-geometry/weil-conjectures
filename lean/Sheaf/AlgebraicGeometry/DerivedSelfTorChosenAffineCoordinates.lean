@@ -21,7 +21,7 @@ import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
 import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 import Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinates
 
-import Sheaf.AlgebraicGeometry.QuotientResolutionTensorComparison
+import WeilConjectures.AlgebraicGeometry.QuotientResolutionTensorComparison
 
 /-! # Intrinsic affine self-Tor for one chosen augmented lift
 

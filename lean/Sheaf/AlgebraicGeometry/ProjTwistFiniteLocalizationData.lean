@@ -6,10 +6,10 @@ Authors: SHEAF group P1
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
-public import Sheaf.RingTheory.CoverModuleExact
+public import WeilConjectures.RingTheory.CoverModuleExact
 
 import Sheaf.AlgebraicGeometry.ProjTwistFiniteLocalRepresentatives
-import Sheaf.AlgebraicGeometry.ProjTwistLocalOverlapCompatibility
+import WeilConjectures.AlgebraicGeometry.ProjTwistLocalOverlapCompatibility
 
 import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 

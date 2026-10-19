@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.SchemeTangentSpace
 public import Mathlib.AlgebraicGeometry.Stalk
 public import Mathlib.RingTheory.Ideal.Cotangent
-import Sheaf.AlgebraicGeometry.RationalPointTangentDerivationIdentification
+import WeilConjectures.AlgebraicGeometry.RationalPointTangentDerivationIdentification
 
 /-!
 # Rational tangent spaces and cotangent duality

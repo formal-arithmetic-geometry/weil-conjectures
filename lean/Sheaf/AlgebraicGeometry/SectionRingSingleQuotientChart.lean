@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 import Sheaf.Paper.NonvanishingSectionTrivializes
 import Sheaf.AlgebraicGeometry.SectionRingCoefficientHom
-import Sheaf.AlgebraicGeometry.SectionRingQuotientChartTransfer
+import WeilConjectures.AlgebraicGeometry.SectionRingQuotientChartTransfer
 
 /-! # A single quotient chart for an invertible section ring
 

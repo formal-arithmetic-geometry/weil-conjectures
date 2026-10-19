@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.AlgebraicGeometry.ProjectionMateAffineChartData
+import WeilConjectures.AlgebraicGeometry.ProjectionMateAffineChartData
 import Sheaf.AlgebraicGeometry.ProjectionMateAffineChartTransport
 
 /-! # A local affine comparison certificate for a supplied projection mate

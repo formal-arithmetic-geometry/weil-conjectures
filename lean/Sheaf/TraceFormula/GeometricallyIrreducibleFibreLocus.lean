@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.Topology.Constructible
 import Sheaf.AlgebraicGeometry.NoetherianConstructibleSubsetCriterion
 import WeilConjectures.AlgebraicGeometry.RadicialPreparationFibreComparison
-import Sheaf.AlgebraicGeometry.SubsetGeometricIrreducibility
+import WeilConjectures.AlgebraicGeometry.SubsetGeometricIrreducibility
 import Sheaf.TraceFormula.GeometricComponentCountGenericConstancy
 import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
 

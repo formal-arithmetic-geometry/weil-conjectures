@@ -14,7 +14,7 @@ import Mathlib.Algebra.Module.LinearMap.Index
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
 import WeilConjectures.FieldTheory.PthRootsExtensionDegree
 import WeilConjectures.RingTheory.JacobiZariskiConnectingMapNaturality
-import Sheaf.RingTheory.JacobiZariskiHomologySequence
+import WeilConjectures.RingTheory.JacobiZariskiHomologySequence
 import Sheaf.RingTheory.PurelyInseparableBaseChangeLocalRing
 import WeilConjectures.RingTheory.SubsingletonH1CotangentOfCharP
 

@@ -7,10 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.PicardDiagonalLocallyClosed
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
-public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
+public import WeilConjectures.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 import Sheaf.AlgebraicGeometry.PicardH1IntersectionSection
-import Sheaf.AlgebraicGeometry.ProperFibreGeneratorPullbackLocus
+import WeilConjectures.AlgebraicGeometry.ProperFibreGeneratorPullbackLocus
 
 /-!
 # H¹ injectivity and the multiple Picard triviality locus

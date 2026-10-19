@@ -6,7 +6,7 @@ Authors: SHEAF group C4
 module
 
 public import WeilConjectures.RingTheory.FormalGlueingData
-public import Sheaf.RingTheory.CoverModuleExact
+public import WeilConjectures.RingTheory.CoverModuleExact
 import Sheaf.Paper.FormalGlueingCanonicalMaps
 
 /-!

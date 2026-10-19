@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
-import Sheaf.AlgebraicGeometry.ProperFlatStructureSheafStalkInjective
+import WeilConjectures.AlgebraicGeometry.ProperFlatStructureSheafStalkInjective
 import Sheaf.AlgebraicGeometry.ProperFlatStructureSheafStalkSurjective
 
 /-!

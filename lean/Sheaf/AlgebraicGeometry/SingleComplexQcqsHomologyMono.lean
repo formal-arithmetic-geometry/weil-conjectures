@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
-import Sheaf.AlgebraicGeometry.QuasiCompactOpenInduction
+import WeilConjectures.AlgebraicGeometry.QuasiCompactOpenInduction
 import Sheaf.AlgebraicGeometry.SingleComplexOpenAffine
 import Sheaf.AlgebraicGeometry.SingleComplexOpenAffineUnion
 import Sheaf.AlgebraicGeometry.SingleComplexOpenTop

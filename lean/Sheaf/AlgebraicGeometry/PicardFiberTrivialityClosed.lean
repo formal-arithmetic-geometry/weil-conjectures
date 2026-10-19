@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
-import Sheaf.AlgebraicGeometry.PicardLocusFiberRange
+import WeilConjectures.AlgebraicGeometry.PicardLocusFiberRange
 import Sheaf.AlgebraicGeometry.PicardLocusClosed
 import Sheaf.AlgebraicGeometry.ProperFlatGlobalSections
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula

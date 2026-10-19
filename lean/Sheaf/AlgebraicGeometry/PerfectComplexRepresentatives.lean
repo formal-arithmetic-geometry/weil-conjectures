@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Topology.QuasiSeparated
 import Sheaf.AlgebraicGeometry.PerfectAffineClassesSmall
 import Sheaf.AlgebraicGeometry.PerfectComplexClassesSmallGluing
-import Sheaf.AlgebraicGeometry.QuasiCompactOpenInduction
+import WeilConjectures.AlgebraicGeometry.QuasiCompactOpenInduction
 
 /-! # A set of representatives for perfect complexes
 

@@ -97,13 +97,14 @@
  "unit": "sk-thm-picard-f-representable",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Picard.HomotopySinglePullbackComposition",
-  "file": "lean/Sheaf/AlgebraicGeometry/Picard/HomotopySinglePullbackComposition.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Picard.HomotopySinglePullbackComposition",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Picard/HomotopySinglePullbackComposition.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.homotopySinglePullbackComposition",
   "statement": "theorem homotopySinglePullbackComposition\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (N : Z.Modules)\n    [(tensorPullback f).Additive] [(tensorPullback g).Additive]\n    [(tensorPullback (f ≫ g)).Additive] :\n    let t_f := (Classical.choose (exists_tensorPullbackAdjunction f)).leftAdjointUniq\n      (pullbackPushforwardAdjunction f)\n    let t_g := (Classical.choose (exists_tensorPullbackAdjunction g)).leftAdjointUniq\n      (pullbackPushforwardAdjunction g)\n    let t_fg := (Classical.choose (exists_tensorPullbackAdjunction (f ≫ g))).leftAdjointUniq\n      (pullbackPushforwardAdjunction (f ≫ g))\n    let r_f := (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map\n      ((HomologicalComplex.singleMapHomologicalComplex\n        (tensorPullback f) (ComplexShape.up ℤ) 0).hom.app ((pullback g).obj N)) ≫\n      (HomotopyCategory.singleFunctor X.Modules 0).map\n        (t_f.hom.app ((pullback g).obj N))\n    let r_g := (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map\n      ((HomologicalComplex.singleMapHomologicalComplex\n        (tensorPullback g) (ComplexShape.up ℤ) 0).hom.app N) ≫\n      (HomotopyCategory.singleFunctor Y.Modules 0).map (t_g.hom.app N)\n    let r_fg := (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map\n      ((HomologicalComplex.singleMapHomologicalComplex\n        (tensorPullback (f ≫ g)) (ComplexShape.up ℤ) 0).hom.app N) ≫\n      (HomotopyCategory.singleFunctor X.Modules 0).map (t_fg.hom.app N)\n    (Functor.mapHomotopyCategoryCompIso\n      ((conjugateIsoEquiv\n        (Classical.choose (exists_tensorPullbackAdjunction (f ≫ g)))\n        ((Classical.choose (exists_tensorPullbackAdjunction g)).comp\n          (Classical.choose (exists_tensorPullbackAdjunction f)))).symm\n        (pushforwardComp f g).symm)\n      (ComplexShape.up ℤ)).hom.app\n        ((HomotopyCategory.singleFunctor Z.Modules 0).obj N) ≫ r_fg =\n    ((tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ)).map r_g ≫ r_f ≫\n      (HomotopyCategory.singleFunctor X.Modules 0).map\n        ((pullbackComp f g).hom.app N)",
   "branch": "sheaf-dag",
   "by": "K3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.Picard.HomotopySinglePullbackComposition; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

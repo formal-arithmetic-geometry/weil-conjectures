@@ -12,7 +12,7 @@ import Mathlib.RingTheory.Kaehler.TensorProduct
 import Mathlib.RingTheory.Kaehler.JacobiZariski
 import Mathlib.LinearAlgebra.TensorProduct.Prod
 import Sheaf.RingTheory.SymmetricAlgebraBaseChange
-import Sheaf.RingTheory.SymmetricAlgebraSmooth
+import WeilConjectures.RingTheory.SymmetricAlgebraSmooth
 import WeilConjectures.AlgebraicGeometry.CotangentComplexSymmetricAlgebra
 
 /-! # Differentials of a localized symmetric algebra

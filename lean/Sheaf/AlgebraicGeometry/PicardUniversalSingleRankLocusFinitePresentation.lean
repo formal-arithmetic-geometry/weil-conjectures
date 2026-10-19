@@ -5,7 +5,7 @@ Authors: SHEAF group X2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardUniversalSingleRankMatch
+public import WeilConjectures.AlgebraicGeometry.PicardUniversalSingleRankMatch
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation

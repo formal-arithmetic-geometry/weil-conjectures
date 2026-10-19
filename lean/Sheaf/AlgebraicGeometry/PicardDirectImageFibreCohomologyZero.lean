@@ -17,7 +17,7 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
 
 import Sheaf.AlgebraicGeometry.RelativelyFlatCanonicalModuleBaseChange
-import Sheaf.AlgebraicGeometry.PicardH1BaseDescentFibreGenerator
+import WeilConjectures.AlgebraicGeometry.PicardH1BaseDescentFibreGenerator
 import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine

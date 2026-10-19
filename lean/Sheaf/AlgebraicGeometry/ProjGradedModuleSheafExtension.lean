@@ -8,7 +8,7 @@ module
 public import WeilConjectures.Algebra.Module.DegreeZeroFractions
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import Sheaf.AlgebraicGeometry.ProjGradedModuleChartGluing
+import WeilConjectures.AlgebraicGeometry.ProjGradedModuleChartGluing
 import Sheaf.AlgebraicGeometry.ProjGradedModuleChartQuasicoherent
 import WeilConjectures.AlgebraicGeometry.ProjStandardOpenProperties
 import Sheaf.Topology.SheafOfModulesFromIndexedBasis

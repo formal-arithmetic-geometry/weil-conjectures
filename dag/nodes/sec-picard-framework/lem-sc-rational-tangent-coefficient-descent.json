@@ -115,13 +115,14 @@
  "unit": "sk-thm-picard-rr",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.RationalTangentCoefficientDescent",
-  "file": "lean/Sheaf/AlgebraicGeometry/RationalTangentCoefficientDescent.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.RationalTangentCoefficientDescent",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RationalTangentCoefficientDescent.lean",
   "declaration": "AlgebraicGeometry.exists_rationalTangent_coefficient_descent",
   "statement": "theorem exists_rationalTangent_coefficient_descent\n    (k : Type u) [Field k] (X : Scheme.{u}) (p : X ⟶ Spec (.of k)) (x : X) :\n    let R := X.presheaf.stalk x\n    let K := X.residueField x\n    let s : k →+* R := (StructureSheaf.toStalk k (p x) ≫ p.stalkMap x).hom\n    let r : k →+* K :=\n      (StructureSheaf.toStalk k (p x) ≫ p.stalkMap x ≫ X.residue x).hom\n    Function.Bijective r →\n    letI : Module K (IsLocalRing.CotangentSpace R) :=\n      inferInstanceAs (Module (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R))\n    letI : Module k (IsLocalRing.CotangentSpace R) :=\n      Module.compHom (IsLocalRing.CotangentSpace R) r\n    ∃ L : schemeTangentSpace k X p x → (IsLocalRing.CotangentSpace R →ₗ[k] k),\n      ∀ θ : schemeTangentSpace k X p x,\n        ∃ hx : θ.val (IsLocalRing.closedPoint (DualNumber K)) = x,\n          let sharp : R →+* DualNumber K :=\n            (eqToHom (congrArg (fun y : X ↦ X.presheaf.stalk y) hx.symm) ≫\n              Scheme.stalkClosedPointTo θ.val).hom\n          ∃ D : R →+ k,\n            (∀ a : R, sharp a =\n              TrivSqZeroExt.inl ((X.residue x).hom a) + TrivSqZeroExt.inr (r (D a))) ∧\n            (∀ a : IsLocalRing.maximalIdeal R,\n              L θ ((IsLocalRing.maximalIdeal R).toCotangent a) = D a) ∧\n            (∀ c : k, D (s c) = 0)",
   "branch": "sheaf-dag",
   "by": "J1",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.RationalTangentCoefficientDescent; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

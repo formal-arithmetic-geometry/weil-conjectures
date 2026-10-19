@@ -1,5 +1,5 @@
 module
-public import Sheaf.AlgebraicGeometry.PicardUniversalRankMatch
+public import WeilConjectures.AlgebraicGeometry.PicardUniversalRankMatch
 import Sheaf.AlgebraicGeometry.PicardUniversalRankMatchLocusFinitePresentationCore
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat

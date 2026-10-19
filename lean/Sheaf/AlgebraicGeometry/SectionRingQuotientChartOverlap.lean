@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.InvertibleSectionRing
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import Sheaf.AlgebraicGeometry.SectionRingQuotientChartOverlapBase
+import WeilConjectures.AlgebraicGeometry.SectionRingQuotientChartOverlapBase
 import Sheaf.AlgebraicGeometry.SectionRingQuotientChartOverlapSheaf
 
 /-! # Uniqueness of section-ring quotient charts on overlaps

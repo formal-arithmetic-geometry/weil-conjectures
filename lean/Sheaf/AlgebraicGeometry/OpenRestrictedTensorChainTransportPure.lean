@@ -2,7 +2,7 @@
 module
 public import Sheaf.AlgebraicGeometry.OpenRestrictedTensorComplexIso
 import Sheaf.AlgebraicGeometry.OpenRestrictedTensorChainTransportPureOne
-import Sheaf.AlgebraicGeometry.RestrictStalkInvSmul
+import WeilConjectures.AlgebraicGeometry.RestrictStalkInvSmul
 /-! # Homology transport for normalized open tensor coordinates
 
 Source: Stacks Project, Tag 0098, stalks of pullback and restriction.

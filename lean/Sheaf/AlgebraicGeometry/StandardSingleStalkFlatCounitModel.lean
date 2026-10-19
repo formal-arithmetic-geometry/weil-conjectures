@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitAffine
 import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitUnion
 import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalization
-import Sheaf.AlgebraicGeometry.QuasiCompactOpenInduction
+import WeilConjectures.AlgebraicGeometry.QuasiCompactOpenInduction
 
 /-! # Flat scalar-extension coordinates for a single-module comparison
 

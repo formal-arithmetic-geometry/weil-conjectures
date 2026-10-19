@@ -5,10 +5,10 @@ Authors: SHEAF group E3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
+public import WeilConjectures.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.PicardH1ProductSpanningBypass
-import Sheaf.AlgebraicGeometry.ProperBasic
+import WeilConjectures.AlgebraicGeometry.ProperBasic
 
 import Sheaf.AlgebraicGeometry.PicardExternalCupScalarComparison
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent

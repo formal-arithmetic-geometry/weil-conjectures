@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.PolynomialChartFibreDimensions
+import WeilConjectures.AlgebraicGeometry.PolynomialChartFibreDimensions
 import Sheaf.AlgebraicGeometry.PolynomialChartStalkFlatComparison
 
 /-! # Local algebra comparison for a polynomial chart

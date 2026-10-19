@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
+public import WeilConjectures.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import WeilConjectures.AlgebraicGeometry.DensePoints
 import Sheaf.AlgebraicGeometry.PicardH1ProductSpanning
 import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullbackFunctorial

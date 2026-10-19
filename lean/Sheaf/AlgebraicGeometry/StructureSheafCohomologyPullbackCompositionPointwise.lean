@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
+public import WeilConjectures.AlgebraicGeometry.StructureSheafCohomologyPullback
 import Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison
 
 /-! Pointwise composition formula for structure-sheaf cohomology pullback.

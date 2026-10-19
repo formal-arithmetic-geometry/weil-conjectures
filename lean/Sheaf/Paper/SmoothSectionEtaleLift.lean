@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Sheaf.AlgebraicGeometry.SmoothSectionEtaleNeighbourhoods
+import WeilConjectures.AlgebraicGeometry.SmoothSectionEtaleNeighbourhoods
 import WeilConjectures.AlgebraicGeometry.EtaleLocalizeUpstairs
 import WeilConjectures.AlgebraicGeometry.EtaleSectionQuotientCutout
 

@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.PicardH1RestrictionCompatibility
+import WeilConjectures.AlgebraicGeometry.PicardH1RestrictionCompatibility
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitsEpi
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitsCohomologyComparison
 import Sheaf.Topology.NoetherianCohomologyDimOne

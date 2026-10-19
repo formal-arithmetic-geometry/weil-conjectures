@@ -5,7 +5,7 @@ Authors: SHEAF groups T3 and E4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionMap
+public import WeilConjectures.AlgebraicGeometry.SectionRingVeroneseFractionMap
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 import all WeilConjectures.AlgebraicGeometry.InvertibleSectionRing
 import all Sheaf.AlgebraicGeometry.FractionZeroTensorPower

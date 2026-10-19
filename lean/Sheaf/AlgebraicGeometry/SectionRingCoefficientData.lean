@@ -2,7 +2,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.InvertibleSectionRing
 public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 import Sheaf.AlgebraicGeometry.SectionRingCoefficientNumerator
-import Sheaf.AlgebraicGeometry.SectionRingCoefficientArithmetic
+import WeilConjectures.AlgebraicGeometry.SectionRingCoefficientArithmetic
 @[expose] public section
 universe v
 open CategoryTheory

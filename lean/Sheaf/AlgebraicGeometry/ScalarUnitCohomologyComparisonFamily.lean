@@ -5,7 +5,7 @@ Authors: SHEAF group Y2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
+public import WeilConjectures.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic

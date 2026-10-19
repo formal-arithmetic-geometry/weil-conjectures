@@ -6,7 +6,7 @@ Authors: SHEAF group U3
 module
 
 public import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
-import Sheaf.AlgebraicGeometry.Picard.HomotopySinglePullbackComposition
+import WeilConjectures.AlgebraicGeometry.Picard.HomotopySinglePullbackComposition
 
 /-! # Single-module comparison and composition of two pullbacks
 

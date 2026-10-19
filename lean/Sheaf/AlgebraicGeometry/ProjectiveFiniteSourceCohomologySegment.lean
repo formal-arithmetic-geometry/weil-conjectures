@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.Algebra.Exact.Basic
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
 import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
-import Sheaf.AlgebraicGeometry.ProjectiveFiniteCohomologyPresentation
+import WeilConjectures.AlgebraicGeometry.ProjectiveFiniteCohomologyPresentation
 import Sheaf.Paper.PQFCohomology
 
 /-! # A finite-source cohomology segment for a projective embedding

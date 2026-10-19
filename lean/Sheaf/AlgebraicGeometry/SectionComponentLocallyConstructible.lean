@@ -7,7 +7,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
 import WeilConjectures.Mathlib.Topology.Constructible
-import Sheaf.AlgebraicGeometry.SectionComponentNoetherianModel
+import WeilConjectures.AlgebraicGeometry.SectionComponentNoetherianModel
 import Sheaf.AlgebraicGeometry.SectionComponentGenericDichotomy
 
 /-!

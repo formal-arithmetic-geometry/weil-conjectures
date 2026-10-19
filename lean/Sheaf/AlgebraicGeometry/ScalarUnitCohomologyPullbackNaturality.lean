@@ -11,7 +11,7 @@ import Sheaf.AlgebraicGeometry.ScalarAbelianPullbackSquare
 import Sheaf.AlgebraicGeometry.ScalarCohomologyExtCoefficientNaturality
 import WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisExtFunctorSquare
 import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
-import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
+import WeilConjectures.AlgebraicGeometry.StructureSheafCohomologyPullback
 import WeilConjectures.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
 
 /-! # Pullback compatibility of the explicit unit comparison

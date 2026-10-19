@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import Mathlib.Topology.Sheaves.Sheaf
-import Sheaf.Topology.SheafOfModulesFromBasis
+import WeilConjectures.Topology.SheafOfModulesFromBasis
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 /-!

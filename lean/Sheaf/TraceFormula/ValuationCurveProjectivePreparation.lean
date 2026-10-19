@@ -25,7 +25,7 @@ import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Sheaf.AlgebraicGeometry.RelativelyFlatModulePullback
+import WeilConjectures.AlgebraicGeometry.RelativelyFlatModulePullback
 import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationDominantLift
 import WeilConjectures.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
 import WeilConjectures.AlgebraicGeometry.Regular

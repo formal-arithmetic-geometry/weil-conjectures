@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
+public import WeilConjectures.AlgebraicGeometry.StructureSheafCohomologyPullback
 import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullbackCompositionPointwise
 
 /-! Composition law for pullback on structure-sheaf cohomology.

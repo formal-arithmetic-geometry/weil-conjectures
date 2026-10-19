@@ -6,7 +6,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
-public import Sheaf.AlgebraicGeometry.PicardTensorDualComparisonIso
+public import WeilConjectures.AlgebraicGeometry.PicardTensorDualComparisonIso
 
 /-!
 # Cartier line bundle and canonical section under Cartier-preserving pullback

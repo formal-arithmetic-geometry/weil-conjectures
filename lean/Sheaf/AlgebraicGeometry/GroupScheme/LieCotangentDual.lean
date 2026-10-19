@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Ring
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.LinearAlgebra.Dual.Defs
-import Sheaf.AlgebraicGeometry.RationalPointTangentDerivationIdentification
+import WeilConjectures.AlgebraicGeometry.RationalPointTangentDerivationIdentification
 import WeilConjectures.AlgebraicGeometry.GroupScheme.LieCotangentDualResidue
 import Sheaf.AlgebraicGeometry.GroupScheme.LieIdentityTangentEquiv
 

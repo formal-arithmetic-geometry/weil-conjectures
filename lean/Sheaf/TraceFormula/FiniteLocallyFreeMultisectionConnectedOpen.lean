@@ -19,7 +19,7 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Mathlib.AlgebraicGeometry.Sites.Fpqc
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Sheaf.AlgebraicGeometry.SectionComponentPullback
+import WeilConjectures.AlgebraicGeometry.SectionComponentPullback
 import WeilConjectures.AlgebraicGeometry.GeometricallyConnectedCheckAfterExtension
 import WeilConjectures.AlgebraicGeometry.FpqcOpenSubschemeDescent
 import Mathlib.AlgebraicGeometry.Morphisms.Proper

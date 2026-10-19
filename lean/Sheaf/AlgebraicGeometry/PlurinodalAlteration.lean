@@ -28,14 +28,14 @@ import Sheaf.AlgebraicGeometry.ClosedIrreducibleDimensionTrdeg
 import Mathlib.RingTheory.FiniteType
 import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.ComponentsFiniteSeparableDescent
-import Sheaf.AlgebraicGeometry.SubsetGeometricIrreducibility
+import WeilConjectures.AlgebraicGeometry.SubsetGeometricIrreducibility
 import Sheaf.AlgebraicGeometry.FiniteInseparableGeometricReduction
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 import Sheaf.AlgebraicGeometry.Morphisms.GenericFiniteOpenNeighborhood
-import Sheaf.AlgebraicGeometry.ProperBasic
+import WeilConjectures.AlgebraicGeometry.ProperBasic
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
 import Mathlib.AlgebraicGeometry.Morphisms.Etale

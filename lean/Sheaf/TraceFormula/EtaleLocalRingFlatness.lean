@@ -7,7 +7,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.RingHom.Flat
 import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
-import Sheaf.AlgebraicGeometry.PullbackStalkRelativeFlatExtension
+import WeilConjectures.AlgebraicGeometry.PullbackStalkRelativeFlatExtension
 import Sheaf.AlgebraicGeometry.UnramifiedMorphism
 
 /-!

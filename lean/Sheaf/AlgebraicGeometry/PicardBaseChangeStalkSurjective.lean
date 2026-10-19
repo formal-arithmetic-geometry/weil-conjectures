@@ -5,7 +5,7 @@ Authors: SHEAF group Q1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardUniversalRankMatch
+public import WeilConjectures.AlgebraicGeometry.PicardUniversalRankMatch
 public import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper

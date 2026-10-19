@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectHomTransport
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.AlgebraicGeometry.QuasiCompactOpenInduction
+import WeilConjectures.AlgebraicGeometry.QuasiCompactOpenInduction
 import Sheaf.AlgebraicGeometry.PerfectHomContinuityAffine
 import Sheaf.AlgebraicGeometry.PerfectHomContinuityUnion
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition

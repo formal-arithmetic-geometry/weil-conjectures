@@ -3,7 +3,7 @@ module
 public import Sheaf.AlgebraicGeometry.AffineSpectrumCanonicalStalkRingCoordinates
 public import Sheaf.AlgebraicGeometry.IsoPullbackStalkCohomology
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
-import Sheaf.AlgebraicGeometry.RestrictStalkInvSmul
+import WeilConjectures.AlgebraicGeometry.RestrictStalkInvSmul
 /-! # Scalar compatibility of the canonical affine-spectrum comparison -/
 
 @[expose] public section

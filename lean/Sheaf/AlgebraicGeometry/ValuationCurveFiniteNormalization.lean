@@ -23,7 +23,7 @@ import Mathlib.AlgebraicGeometry.ValuativeCriterion
 import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.RingTheory.Localization.Integral
-import Sheaf.AlgebraicGeometry.RelativelyFlatModulePullback
+import WeilConjectures.AlgebraicGeometry.RelativelyFlatModulePullback
 import WeilConjectures.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
 import Sheaf.AlgebraicGeometry.GeometricallyReducedEtaNormal
 import Sheaf.TraceFormula.FlatDenseGenericFibrePureDimension

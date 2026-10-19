@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.LinearAlgebra.TensorProduct.Tower
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
-public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
+public import WeilConjectures.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
@@ -21,7 +21,7 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
 import Sheaf.AlgebraicGeometry.PicardAffineTargetNormalization
 import Sheaf.AlgebraicGeometry.PicardResidueHomologySourceResidueComparison
-import Sheaf.AlgebraicGeometry.PicardDescendedFibreCoefficientTrivial
+import WeilConjectures.AlgebraicGeometry.PicardDescendedFibreCoefficientTrivial
 import Sheaf.AlgebraicGeometry.AffineBettiModelResidueMinimality
 import Mathlib.LinearAlgebra.Projection
 import Mathlib.LinearAlgebra.Basis.VectorSpace

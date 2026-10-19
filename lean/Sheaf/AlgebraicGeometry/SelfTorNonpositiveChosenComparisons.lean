@@ -19,7 +19,7 @@ import Sheaf.AlgebraicGeometry.DerivedSelfTorAffineCoordinates
 import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 
-import Sheaf.AlgebraicGeometry.QuotientResolutionTensorComparison
+import WeilConjectures.AlgebraicGeometry.QuotientResolutionTensorComparison
 
 /-! # Chosen affine comparison for nonpositive flat resolutions
 Source: Stacks Project, Tags 08DX(2), 06YG, 06YB, 01I9, and 00LS(1).

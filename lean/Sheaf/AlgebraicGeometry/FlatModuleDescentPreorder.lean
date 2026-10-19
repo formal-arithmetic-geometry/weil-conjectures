@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.FlatModuleDescentPreorderStage
-import Sheaf.AlgebraicGeometry.RelativelyFlatModulePullback
+import WeilConjectures.AlgebraicGeometry.RelativelyFlatModulePullback
 import Sheaf.AlgebraicGeometry.TensorPullbackFinitePresentation
 import Sheaf.AlgebraicGeometry.PullbackModelFlatnessComparison
 

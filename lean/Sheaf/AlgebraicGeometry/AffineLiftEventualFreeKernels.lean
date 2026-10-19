@@ -14,7 +14,7 @@ import Mathlib.CategoryTheory.Localization.Equivalence
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
-import Sheaf.AlgebraicGeometry.RelativeFlatOfStalks
+import WeilConjectures.AlgebraicGeometry.RelativeFlatOfStalks
 import Sheaf.AlgebraicGeometry.FlatSheafStalk
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent

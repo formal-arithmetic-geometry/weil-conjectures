@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic
-import Sheaf.AlgebraicGeometry.PrincipalOpenSubsetCechComparison
+import WeilConjectures.AlgebraicGeometry.PrincipalOpenSubsetCechComparison
 
 /-! # Subset Čech exactness for a single injective coefficient module
 

@@ -8,7 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 import Sheaf.AlgebraicGeometry.PicardH1LocalDescent
-import Sheaf.AlgebraicGeometry.ProductUniversalStructurePushforward
+import WeilConjectures.AlgebraicGeometry.ProductUniversalStructurePushforward
 import Sheaf.AlgebraicGeometry.ProductResidueH1Injective
 import Mathlib.Tactic.FinCases
 

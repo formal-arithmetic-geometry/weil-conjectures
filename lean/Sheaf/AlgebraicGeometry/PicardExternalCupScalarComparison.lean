@@ -6,7 +6,7 @@ Authors: SHEAF group U3
 module
 
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
-public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
+public import WeilConjectures.AlgebraicGeometry.StructureSheafCohomologyPullback
 import Sheaf.AlgebraicGeometry.ScalarUnitCohomologyCoordinates
 import Sheaf.AlgebraicGeometry.ExternalCupScalarBalance
 import Sheaf.AlgebraicGeometry.PicardExternalCupUnitComparison

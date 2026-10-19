@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.DerivedGlobalScalar
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.PerfectSupportAffineOpenTorsion
 import Sheaf.AlgebraicGeometry.DerivedOpenHomScalarMayerVietoris
-import Sheaf.AlgebraicGeometry.QuasiCompactOpenInduction
+import WeilConjectures.AlgebraicGeometry.QuasiCompactOpenInduction
 
 /-! # Maps from perfect complexes into principal support
 

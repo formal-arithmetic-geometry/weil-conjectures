@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Sheaf.AlgebraicGeometry.QuasiCompactOpenInduction
+import WeilConjectures.AlgebraicGeometry.QuasiCompactOpenInduction
 import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
 import Sheaf.Topology.ModuleMayerVietoris
 

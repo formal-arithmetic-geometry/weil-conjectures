@@ -2,7 +2,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PicardDirectImageRankLocus
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
-import Sheaf.AlgebraicGeometry.PicardCupProductLocalCriterion
+import WeilConjectures.AlgebraicGeometry.PicardCupProductLocalCriterion
 import Sheaf.AlgebraicGeometry.PicardCupProductBaseChange
 
 @[expose] public section

@@ -14,7 +14,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.AlgebraicGeometry.SelfTorOrdinaryResolutionSections
-import Sheaf.AlgebraicGeometry.QuotientResolutionTensorComparison
+import WeilConjectures.AlgebraicGeometry.QuotientResolutionTensorComparison
 import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
 
 /-! # Ambient self-Tor coordinates on affine sections

@@ -74,13 +74,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.QuotientResolutionTensorComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/QuotientResolutionTensorComparison.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.QuotientResolutionTensorComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/QuotientResolutionTensorComparison.lean",
   "declaration": "AlgebraicGeometry.exists_quotient_resolution_tensor_comparison",
   "statement": "theorem exists_quotient_resolution_tensor_comparison\n    (A C : Type u) [CommRing A] [CommRing C]\n    (I : Ideal A) (J : Ideal C) (φ : A →+* C)\n    (hI : ∀ x ∈ I, φ x ∈ J)\n    (P : ProjectiveResolution (ModuleCat.of A (A ⧸ I)))\n    (R : ProjectiveResolution (ModuleCat.of C (C ⧸ J))) :\n          let TA := (tensorRight (ModuleCat.of A (A ⧸ I))).mapHomologicalComplex\n            (.down ℕ)\n          let TC := (tensorRight (ModuleCat.of C (C ⧸ J))).mapHomologicalComplex\n            (.down ℕ)\n          ∃ (ψ : (A ⧸ I) →+* (C ⧸ J))\n            (a : P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex\n              (.down ℕ)).obj R.complex)\n            (k : TA.obj P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex\n              (.down ℕ)).obj (TC.obj R.complex)),\n            (∀ x : A, ψ (Ideal.Quotient.mk I x) = Ideal.Quotient.mk J (φ x)) ∧\n            (∀ x : P.complex.X 0, R.π.f 0 (a.f 0 x) = ψ (P.π.f 0 x)) ∧\n            (∀ (j : ℕ) (x : P.complex.X j) (y : A ⧸ I),\n              k.f j (x ⊗ₜ[A] y) = (show R.complex.X j from a.f j x) ⊗ₜ[C] (ψ y))",
   "branch": "sheaf-dag",
   "by": "P4",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.QuotientResolutionTensorComparison; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-14",

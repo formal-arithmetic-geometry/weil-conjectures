@@ -82,13 +82,14 @@
  "unit": "sk-prop-av-cube",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PicardBaseChangeFactorization",
-  "file": "lean/Sheaf/AlgebraicGeometry/PicardBaseChangeFactorization.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.PicardBaseChangeFactorization",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PicardBaseChangeFactorization.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.picardDirectImageBaseChangeMap_factorization",
   "statement": "theorem picardDirectImageBaseChangeMap_factorization\n    {X S W T : Scheme.{u}} (f : X ⟶ S) (j : W ⟶ S) (h : T ⟶ W) (M : X.Modules)\n    (I : (tensorPullback (picardBaseChangeTop f j h)).obj\n        ((tensorPullback (Limits.pullback.fst f j)).obj M) ≅\n      (tensorPullback (Limits.pullback.fst f (h ≫ j))).obj M)\n    (hI : I = (picardTensorCompIso (picardBaseChangeTop f j h)\n        (Limits.pullback.fst f j) M ≪≫\n      eqToIso (congrArg (fun k ↦ (tensorPullback k).obj M)\n        (show picardBaseChangeTop f j h ≫ Limits.pullback.fst f j =\n            Limits.pullback.fst f (h ≫ j) from by\n          dsimp [picardBaseChangeTop]\n          rw [Limits.pullback.lift_fst])))) :\n    picardDirectImageBaseChangeMap f j h M =\n      moduleBaseChangeMap (Limits.pullback.snd f j)\n        (Limits.pullback.snd f (h ≫ j)) h (picardBaseChangeTop f j h)\n        (by dsimp [picardBaseChangeTop]; rw [Limits.pullback.lift_snd])\n        ((tensorPullback (Limits.pullback.fst f j)).obj M) ≫\n      (pushforward (Limits.pullback.snd f (h ≫ j))).map I.hom",
   "branch": "sheaf-dag",
   "by": "D2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.PicardBaseChangeFactorization; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

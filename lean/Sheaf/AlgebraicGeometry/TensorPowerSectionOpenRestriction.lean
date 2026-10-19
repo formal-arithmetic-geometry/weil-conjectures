@@ -6,8 +6,8 @@ Authors: SHEAF group T4
 module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
-import Sheaf.AlgebraicGeometry.TensorPowerSectionOpenRestrictionN
-import Sheaf.AlgebraicGeometry.TensorPowerSectionOpenRestrictionT
+import WeilConjectures.AlgebraicGeometry.TensorPowerSectionOpenRestrictionN
+import WeilConjectures.AlgebraicGeometry.TensorPowerSectionOpenRestrictionT
 
 /-! # Tensor-power sections under open restriction
 

@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import Sheaf.Topology.RingedSpaceModuleCohomology
-import all Sheaf.AlgebraicGeometry.ProjectiveFiniteCohomologyPresentation
+import all WeilConjectures.AlgebraicGeometry.ProjectiveFiniteCohomologyPresentation
 import Sheaf.AlgebraicGeometry.NonnegativeProjectiveTwistVanishing
 import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
 import WeilConjectures.AlgebraicGeometry.Cohomology.Exact

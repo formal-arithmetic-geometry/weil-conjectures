@@ -17,7 +17,7 @@ import Mathlib.RingTheory.MvPolynomial.Ideal
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
 import WeilConjectures.Algebra.TorDimensionShifting
-import Sheaf.AlgebraicGeometry.ProjectiveSpace.KoszulResolution
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.KoszulResolution
 
 /-!
 # Vanishing of first Tor for second syzygies over two variables

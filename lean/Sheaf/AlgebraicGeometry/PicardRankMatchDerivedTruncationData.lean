@@ -5,7 +5,7 @@ Authors: SHEAF group F4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardUniversalRankMatch
+public import WeilConjectures.AlgebraicGeometry.PicardUniversalRankMatch
 public import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback

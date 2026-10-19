@@ -5,7 +5,7 @@ Authors: SHEAF group V2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardUniversalSingleRankMatch
+public import WeilConjectures.AlgebraicGeometry.PicardUniversalSingleRankMatch
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
@@ -14,11 +14,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
-import Sheaf.AlgebraicGeometry.PicardReferenceRankNeighbourhood
+import WeilConjectures.AlgebraicGeometry.PicardReferenceRankNeighbourhood
 import Sheaf.AlgebraicGeometry.ProperFlatDirectImagePerfectChart
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
-import Sheaf.AlgebraicGeometry.PicardFiberRankClopen
+import WeilConjectures.AlgebraicGeometry.PicardFiberRankClopen
 
 /-! # Perfect charts for one direct-image rank condition
 

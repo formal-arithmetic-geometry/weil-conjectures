@@ -13,7 +13,7 @@ public import WeilConjectures.Topology.PresheafModuleStalkFunctor
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Sheaf.AlgebraicGeometry.PullbackStalkRelativeFlatExtension
+import WeilConjectures.AlgebraicGeometry.PullbackStalkRelativeFlatExtension
 import WeilConjectures.AlgebraicGeometry.DimensionLocallyAlgebraic
 import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
 import WeilConjectures.AlgebraicGeometry.BaseChangeConventions

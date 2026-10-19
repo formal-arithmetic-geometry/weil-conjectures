@@ -8,7 +8,7 @@ public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 import Sheaf.Paper.QuasiFiniteOverPolynomialAlgebra
 import WeilConjectures.AlgebraicGeometry.QuasiFinitePolynomialChart.CoordinateFibreDimension
-import Sheaf.AlgebraicGeometry.QuasiFinitePolynomialChart.LocalizedChart
+import WeilConjectures.AlgebraicGeometry.QuasiFinitePolynomialChart.LocalizedChart
 
 @[expose] public section
 

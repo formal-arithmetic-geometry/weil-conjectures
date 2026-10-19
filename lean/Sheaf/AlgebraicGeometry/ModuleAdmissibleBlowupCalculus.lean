@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 public import WeilConjectures.Blowup.AdmissibleBlowup
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.AlgebraicGeometry.RelativelyFlatModulePullback
+import WeilConjectures.AlgebraicGeometry.RelativelyFlatModulePullback
 import WeilConjectures.AlgebraicGeometry.ModulePullbackFiniteType
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk

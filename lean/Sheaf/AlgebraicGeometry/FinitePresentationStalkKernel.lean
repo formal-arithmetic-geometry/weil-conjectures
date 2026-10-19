@@ -15,7 +15,7 @@ public import Mathlib.Algebra.Exact.Basic
 import WeilConjectures.AlgebraicGeometry.StalkInternalHomEvaluation
 import Sheaf.AlgebraicGeometry.FinitePresentationSourceStalk
 import WeilConjectures.AlgebraicGeometry.InternalHomGermZeroFiniteType
-import Sheaf.AlgebraicGeometry.StalkLinearMapLocalLiftFinitePresentation
+import WeilConjectures.AlgebraicGeometry.StalkLinearMapLocalLiftFinitePresentation
 import Mathlib.LinearAlgebra.LeftExact
 
 /-!

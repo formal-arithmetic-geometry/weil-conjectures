@@ -17,7 +17,7 @@ import Sheaf.AlgebraicGeometry.CoherentFiniteType
 import Sheaf.RingTheory.FiniteProjectiveOfStandardCover
 import WeilConjectures.LinearAlgebra.ExteriorTopDirectSum
 import Mathlib.RingTheory.Localization.BaseChange
-import Sheaf.RingTheory.CoverModuleExact
+import WeilConjectures.RingTheory.CoverModuleExact
 
 /-!
 # Determinants of exact sequences of finite projective modules

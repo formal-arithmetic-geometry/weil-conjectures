@@ -5,8 +5,8 @@ Authors: SHEAF group Q4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardUniversalSingleRankMatch
-public import Sheaf.AlgebraicGeometry.PicardUniversalRankMatch
+public import WeilConjectures.AlgebraicGeometry.PicardUniversalSingleRankMatch
+public import WeilConjectures.AlgebraicGeometry.PicardUniversalRankMatch
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank

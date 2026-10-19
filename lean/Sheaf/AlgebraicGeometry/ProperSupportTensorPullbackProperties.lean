@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportPullback
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
-import Sheaf.AlgebraicGeometry.RelativelyFlatModulePullback
+import WeilConjectures.AlgebraicGeometry.RelativelyFlatModulePullback
 import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-! # Base change of finitely presented relatively flat modules with proper support

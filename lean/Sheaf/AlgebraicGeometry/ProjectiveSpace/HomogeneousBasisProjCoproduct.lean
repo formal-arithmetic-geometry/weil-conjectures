@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 
 import Sheaf.AlgebraicGeometry.ProjFiniteTwistCoproductFractions
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.HomogeneousBasisCoordinates
-import Sheaf.AlgebraicGeometry.ProjectiveSpace.GradedChartComparison
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.GradedChartComparison
 
 /-!
 # Associated sheaves of homogeneous bases on polynomial Proj

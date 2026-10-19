@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
 import Sheaf.AlgebraicGeometry.ClosedImmersionUnitKernel
 import WeilConjectures.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
-import Sheaf.AlgebraicGeometry.PrincipalQuotientMultiplicationImage
+import WeilConjectures.AlgebraicGeometry.PrincipalQuotientMultiplicationImage
 
 /-! # Multiplication is the kernel of restriction to a principal quotient
 

@@ -1,11 +1,11 @@
 module
-public import Sheaf.AlgebraicGeometry.PicardUniversalRankMatch
+public import WeilConjectures.AlgebraicGeometry.PicardUniversalRankMatch
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Sheaf.AlgebraicGeometry.PicardUniversalSingleRankLocusFinitePresentation
-import Sheaf.AlgebraicGeometry.PicardUniversalRankMatchSynchronization
+import WeilConjectures.AlgebraicGeometry.PicardUniversalRankMatchSynchronization
 @[expose] public section
 set_option autoImplicit false
 universe u

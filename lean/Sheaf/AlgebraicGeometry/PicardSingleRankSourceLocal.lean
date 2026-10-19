@@ -5,7 +5,7 @@ Authors: SHEAF group V2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardUniversalSingleRankMatch
+public import WeilConjectures.AlgebraicGeometry.PicardUniversalSingleRankMatch
 import all Sheaf.AlgebraicGeometry.PicardUniversalRankMatchConjunction
 import WeilConjectures.AlgebraicGeometry.TensorPullback
 

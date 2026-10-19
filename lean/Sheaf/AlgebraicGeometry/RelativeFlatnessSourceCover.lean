@@ -13,8 +13,8 @@ public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.AlgebraicGeometry.RelativeFlatModuleStalk
-import Sheaf.AlgebraicGeometry.RelativeFlatOfStalks
+import WeilConjectures.AlgebraicGeometry.RelativeFlatModuleStalk
+import WeilConjectures.AlgebraicGeometry.RelativeFlatOfStalks
 import Sheaf.RingTheory.FlatnessFaithfullyFlatExtension
 
 /-!

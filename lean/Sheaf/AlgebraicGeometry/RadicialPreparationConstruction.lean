@@ -4,7 +4,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 
-import Sheaf.AlgebraicGeometry.ReducedFlatAffinePreparation
+import WeilConjectures.AlgebraicGeometry.ReducedFlatAffinePreparation
 import Sheaf.AlgebraicGeometry.RadicialReducedFlatGenericFibre
 import WeilConjectures.AlgebraicGeometry.RadicialPreparationFibreComparison
 import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism

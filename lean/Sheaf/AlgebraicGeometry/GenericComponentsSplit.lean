@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.RingTheory.Etale.Field
 import Sheaf.AlgebraicGeometry.ComponentsFiniteSeparableDescent
-import Sheaf.AlgebraicGeometry.SubsetGeometricIrreducibility
+import WeilConjectures.AlgebraicGeometry.SubsetGeometricIrreducibility
 
 /-!
 # Splitting the irreducible components over a field

@@ -5,13 +5,13 @@ Authors: SHEAF group E3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardUniversalRankMatch
+public import WeilConjectures.AlgebraicGeometry.PicardUniversalRankMatch
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.Topology.Constructible
-import Sheaf.AlgebraicGeometry.PicardFiberRankClopen
+import WeilConjectures.AlgebraicGeometry.PicardFiberRankClopen
 import Sheaf.AlgebraicGeometry.PicardFiberDirectImageRankConstructible
 import Sheaf.AlgebraicGeometry.PicardUniversalRankMatchResidueCriterion
 import WeilConjectures.Topology.ConstructibleIsRetrocompact

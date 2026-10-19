@@ -5,15 +5,15 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardUniversalRankMatch
+public import WeilConjectures.AlgebraicGeometry.PicardUniversalRankMatch
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.ResidueField
 import Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionIso
 import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsLift
-import all Sheaf.AlgebraicGeometry.PicardPullbackLocalRanks
-import all Sheaf.AlgebraicGeometry.PicardUniversalRankMatchFiniteRanks
+import all WeilConjectures.AlgebraicGeometry.PicardPullbackLocalRanks
+import all WeilConjectures.AlgebraicGeometry.PicardUniversalRankMatchFiniteRanks
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 
 /-! # Residue-field criterion for universal Picard rank matching

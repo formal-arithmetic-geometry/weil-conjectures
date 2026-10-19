@@ -6,7 +6,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Sheaf.AlgebraicGeometry.SmoothSectionComponentNoetherianModel
-import Sheaf.AlgebraicGeometry.SmoothSectionComponentNoetherianGeneralization
+import WeilConjectures.AlgebraicGeometry.SmoothSectionComponentNoetherianGeneralization
 
 /-!
 # Generalization stability of a smooth section component

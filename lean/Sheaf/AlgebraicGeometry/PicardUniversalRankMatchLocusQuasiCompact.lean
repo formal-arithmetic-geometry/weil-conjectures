@@ -1,10 +1,10 @@
 module
-public import Sheaf.AlgebraicGeometry.PicardUniversalRankMatch
+public import WeilConjectures.AlgebraicGeometry.PicardUniversalRankMatch
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Sheaf.AlgebraicGeometry.PicardUniversalRankMatchFiniteRanks
+import WeilConjectures.AlgebraicGeometry.PicardUniversalRankMatchFiniteRanks
 import Sheaf.AlgebraicGeometry.PicardUniversalRankMatchFixedRankRetrocompact
 import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
 @[expose] public section

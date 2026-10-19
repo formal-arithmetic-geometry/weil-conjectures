@@ -114,13 +114,14 @@
  "unit": "sk-prop-av-cube",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PicardTensorSquareConjugacy",
-  "file": "lean/Sheaf/AlgebraicGeometry/PicardTensorSquareConjugacy.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.PicardTensorSquareConjugacy",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PicardTensorSquareConjugacy.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.picardTensorSquareConjugacy",
   "statement": "theorem picardTensorSquareConjugacy\n    {X S T X' : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ T)\n    (g : T ⟶ S) (v : X' ⟶ X) (e : v ≫ f = f' ≫ g) (A : S.Modules) :\n    let adj : ∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), tensorPullback k ⊣ pushforward k :=\n      fun k ↦ Classical.choose (exists_tensorPullbackAdjunction k)\n    ((conjugateEquiv ((adj f).comp (adj v)) ((adj g).comp (adj f'))).symm\n      ((pushforwardComp v f).hom ≫ (pushforwardCongr e).hom ≫\n        (pushforwardComp f' g).inv)).app A =\n    (picardTensorCompIso f' g A ≪≫\n      eqToIso (congrArg (fun k ↦ (tensorPullback k).obj A) e.symm) ≪≫\n      (picardTensorCompIso v f A).symm).hom",
   "branch": "sheaf-dag",
   "by": "D2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.PicardTensorSquareConjugacy; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

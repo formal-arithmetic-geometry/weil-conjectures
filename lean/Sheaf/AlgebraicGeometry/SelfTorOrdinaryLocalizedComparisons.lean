@@ -18,7 +18,7 @@ import Sheaf.AlgebraicGeometry.SelfTorNonpositiveFlatSections
 import Sheaf.Algebra.Homology.BoundedFlatReplacement
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
-import Sheaf.AlgebraicGeometry.QuotientResolutionTensorComparison
+import WeilConjectures.AlgebraicGeometry.QuotientResolutionTensorComparison
 import Mathlib.Algebra.Homology.BifunctorFlip
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone

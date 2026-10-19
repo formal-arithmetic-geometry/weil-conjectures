@@ -74,13 +74,14 @@
  "statement": "Let Z, S and S-prime be affine schemes in universe u, with S-prime integral. Let g: Z to S and q: S-prime to S be morphisms, eta in S, and eta-prime a generic point of S-prime mapping to eta. Let L, k-prime and E be fields in universe u with algebra structures kappa(eta) to L, kappa(eta) to k-prime, L to E and k-prime to E. Assume k-prime/kappa(eta) is finite purely inseparable and the two composites kappa(eta) to E coincide. Suppose j: Spec L to the eta fibre of g is scheme-theoretically dominant and its base composite is Spec of the algebra map. Suppose a ring equivalence e: kappa(eta-prime) to k-prime identifies the q residue field map with the specified base extension. If E/k-prime is separably generated, then E admits a kappa(eta-prime)-algebra structure and a scheme-theoretically dominant map h: Spec E to the eta-prime fibre of the canonical reduction of Z times_S S-prime. The extension E/kappa(eta-prime) is separably generated, and h followed by the reduced fibre projection equals Spec of its algebra map. No base scheme, field, or purely inseparable extension is constructed by this theorem.",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ReducedGenericFibreFieldEmbedding",
-  "file": "lean/Sheaf/AlgebraicGeometry/ReducedGenericFibreFieldEmbedding.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ReducedGenericFibreFieldEmbedding",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ReducedGenericFibreFieldEmbedding.lean",
   "declaration": "AlgebraicGeometry.exists_reduced_generic_fibre_field_embedding",
   "statement": "theorem exists_reduced_generic_fibre_field_embedding\n    {Z S S' : Scheme.{u}} [IsAffine Z] [IsAffine S] [IsAffine S'] [IsIntegral S']\n    (g : Z ⟶ S) (q : S' ⟶ S) (η : S) (η' : S') (hq : q η' = η)\n    (hη' : IsGenericPoint η' Set.univ)\n    (L k' E : Type u) [Field L] [Field k'] [Field E]\n    [Algebra (S.residueField η) L] [Algebra (S.residueField η) k']\n    [Algebra L E] [Algebra k' E]\n    [Module.Finite (S.residueField η) k'] [IsPurelyInseparable (S.residueField η) k']\n    (j : Spec (.of L) ⟶ g.fiber η) (hj : IsSchemeTheoreticallyDominant j)\n    (hjbase : j ≫ g.fiberToSpecResidueField η =\n      Spec.map (CommRingCat.ofHom (algebraMap (S.residueField η) L)))\n    (e : S'.residueField η' ≃+* k')\n    (he : e.toRingHom.comp\n      (((S.residueFieldCongr hq).inv ≫ q.residueFieldMap η').hom) =\n        algebraMap (S.residueField η) k')\n    (hsquare : (algebraMap k' E).comp (algebraMap (S.residueField η) k') =\n      (algebraMap L E).comp (algebraMap (S.residueField η) L))\n    (hsep : Algebra.IsSeparablyGenerated k' E) :\n    ∃ aE : Algebra (S'.residueField η') E,\n      letI := aE\n      ∃ h : Spec (.of E) ⟶\n          ((pullback g q).nilradical.subschemeι ≫ pullback.snd g q).fiber η',\n        IsSchemeTheoreticallyDominant h ∧\n        Algebra.IsSeparablyGenerated (S'.residueField η') E ∧\n        h ≫ ((pullback g q).nilradical.subschemeι ≫\n          pullback.snd g q).fiberToSpecResidueField η' =\n            Spec.map (CommRingCat.ofHom (algebraMap (S'.residueField η') E))",
   "branch": "sheaf-dag",
   "by": "N4",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.ReducedGenericFibreFieldEmbedding; points at its upstream twin."
  },
  "proof": [
   {

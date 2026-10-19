@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FunctionField
 public import Sheaf.AlgebraicGeometry.IsRegularScheme
-public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
+public import WeilConjectures.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed

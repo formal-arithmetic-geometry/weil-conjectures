@@ -136,13 +136,14 @@
  "unit": "sk-thm-picard-coherence",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.TensorHomRestrictionScalar",
-  "file": "lean/Sheaf/AlgebraicGeometry/TensorHomRestrictionScalar.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.TensorHomRestrictionScalar",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/TensorHomRestrictionScalar.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.tensorHom_restriction_of_local_scalar",
   "statement": "theorem tensorHom_restriction_of_local_scalar\n    {X : Scheme.{u}} (A H F : X.Modules)\n    (ι : A ⟶ SheafOfModules.unit X.ringCatSheaf) (U : X.Opens)\n    (s : (SheafOfModules.homObj (R := X.sheaf) H F).val.obj (op U))\n    (α : A ⟶ SheafOfModules.homObj (R := X.sheaf) H F)\n    (hα : ∀ (W : X.Opens) (h : W ≤ U) (a : A.val.obj (op W)),\n      α.val.app (op W) a = ι.val.app (op W) a •\n        (SheafOfModules.homObj (R := X.sheaf) H F).val.map (homOfLE h).op s) :\n    letI : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf\n    ∀ (β : A ⊗ H ⟶ F),\n      (∀ (W : X.Opens) (a : A.val.obj (op W)) (g : H.val.obj (op W)),\n        β.val.app (op W)\n          ((SheafOfModules.tensorObjIsoSheafification A H).inv.val.app (op W)\n            (((PresheafOfModules.sheafificationAdjunction.{u}\n              (𝟙 X.ringCatSheaf.obj)).unit.app (A.val ⊗ H.val)).app (op W)\n                (a ⊗ₜ[X.sheaf.obj.obj (op W)] g))) =\n          (α.val.app (op W) a).app (op (Over.mk (𝟙 W))) g) →\n      (restrictFunctor U.ι).map β =\n        (restrictFunctor U.ι).map (ι ▷ H ≫ (λ_ H).hom) ≫\n          (overFunctorEquiv U).inv.app H ≫\n          (overEquiv U).functor.map (⟨s⟩ : H.over U ⟶ F.over U) ≫\n          (overFunctorEquiv U).hom.app F",
   "branch": "sheaf-dag",
   "by": "E3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.TensorHomRestrictionScalar; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

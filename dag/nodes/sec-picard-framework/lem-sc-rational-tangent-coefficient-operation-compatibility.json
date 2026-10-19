@@ -118,13 +118,14 @@
  "unit": "sk-thm-picard-rr",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.RationalTangentCoefficientOperations",
-  "file": "lean/Sheaf/AlgebraicGeometry/RationalTangentCoefficientOperations.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.RationalTangentCoefficientOperations",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RationalTangentCoefficientOperations.lean",
   "declaration": "AlgebraicGeometry.rationalTangent_coefficient_operation_compatibility",
   "statement": "theorem rationalTangent_coefficient_operation_compatibility\n    (k : Type u) [Field k] (X : Scheme.{u}) (p : X ⟶ Spec (.of k)) (x : X) :\n    let R := X.presheaf.stalk x\n    let K := X.residueField x\n    let r : k →+* K :=\n      (StructureSheaf.toStalk k (p x) ≫ p.stalkMap x ≫ X.residue x).hom\n    Function.Bijective r →\n    letI : Module k (schemeTangentSpace k X p x) :=\n      Module.compHom (schemeTangentSpace k X p x) r\n    letI : Module K (IsLocalRing.CotangentSpace R) :=\n      inferInstanceAs (Module (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R))\n    letI : Module k (IsLocalRing.CotangentSpace R) :=\n      Module.compHom (IsLocalRing.CotangentSpace R) r\n    ∀ C : schemeTangentSpace k X p x → (IsLocalRing.CotangentSpace R →ₗ[k] k),\n      (∀ θ : schemeTangentSpace k X p x,\n        ∃ hx : θ.val (IsLocalRing.closedPoint (DualNumber K)) = x,\n          ∀ a : IsLocalRing.maximalIdeal R,\n            r (C θ ((IsLocalRing.maximalIdeal R).toCotangent a)) =\n              ((eqToHom (congrArg (fun y : X ↦ X.presheaf.stalk y) hx.symm) ≫\n                Scheme.stalkClosedPointTo θ.val).hom a).snd) →\n      (∀ θ η, C (θ + η) = C θ + C η) ∧\n        (∀ (a : k) θ, C (a • θ) = a • C θ)",
   "branch": "sheaf-dag",
   "by": "J1",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.RationalTangentCoefficientOperations; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

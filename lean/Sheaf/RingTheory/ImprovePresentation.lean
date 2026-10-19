@@ -13,8 +13,8 @@ import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 import WeilConjectures.RingTheory.PresentationLocalizedConormalSplit
 import Sheaf.RingTheory.LocalizedSymmetricDifferentialsSplit
 import Sheaf.RingTheory.SymmetricAlgebraBaseChange
-import Sheaf.RingTheory.SymmetricAlgebraFinitePresentation
-import Sheaf.RingTheory.SymmetricAlgebraSmooth
+import WeilConjectures.RingTheory.SymmetricAlgebraFinitePresentation
+import WeilConjectures.RingTheory.SymmetricAlgebraSmooth
 
 /-!
 # Improving a presentation by a symmetric algebra

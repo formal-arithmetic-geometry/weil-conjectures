@@ -18,7 +18,7 @@ public import Mathlib.FieldTheory.Separable
 
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
-import Sheaf.AlgebraicGeometry.RelativelyFlatModulePullback
+import WeilConjectures.AlgebraicGeometry.RelativelyFlatModulePullback
 import Sheaf.TraceFormula.GeometricReducedFibreLocusBaseChange
 import WeilConjectures.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
 import Sheaf.TraceFormula.ValuationReducedFibreNormalization

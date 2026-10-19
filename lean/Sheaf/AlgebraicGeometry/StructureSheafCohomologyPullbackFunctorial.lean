@@ -5,9 +5,9 @@ Authors: SHEAF group E3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
+public import WeilConjectures.AlgebraicGeometry.StructureSheafCohomologyPullback
 
-import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullbackIdentity
+import WeilConjectures.AlgebraicGeometry.StructureSheafCohomologyPullbackIdentity
 import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullbackComposition
 
 /-!

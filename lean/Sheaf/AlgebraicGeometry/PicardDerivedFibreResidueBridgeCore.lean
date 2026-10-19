@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.PicardDerivedCoefficientMap
 public import Sheaf.AlgebraicGeometry.AffineResidueModelNaturality
 public import Sheaf.AlgebraicGeometry.PerfectAffineMapRepresentative
-public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
+public import WeilConjectures.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat

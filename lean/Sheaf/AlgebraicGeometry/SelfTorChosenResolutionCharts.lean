@@ -14,7 +14,7 @@ public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.SelfTorAffineSection
 
 import Sheaf.AlgebraicGeometry.SelfTorAugmentedResolutionCharts
-import Sheaf.AlgebraicGeometry.QuotientResolutionTensorComparison
+import WeilConjectures.AlgebraicGeometry.QuotientResolutionTensorComparison
 
 /-! # Affine derived-Tor charts from chosen resolution comparisons
 
