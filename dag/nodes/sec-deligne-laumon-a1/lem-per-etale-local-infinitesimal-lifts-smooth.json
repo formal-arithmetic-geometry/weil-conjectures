@@ -15,9 +15,87 @@
   "def-pc-fibre-product",
   "def-sbc-smooth-morphisms"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an arbitrary affine first-order thickening $i:T_0\\hookrightarrow T$ and maps $a_0,b$ satisfying $fa_0=bi$. Apply [lem-per-etale-local-lift-torsor-quasi-coherent] to this square. It gives the quasi-coherent $\\mathcal O_T$-module $\\mathcal H$, the etale sheaf $\\mathcal L$ of compatible lifts, and the simply transitive $\\mathcal H_{\\mathrm{et}}$-action wherever a section exists.",
+   "uses": [
+    "lem-per-etale-local-lift-torsor-quasi-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04AM, lemma-smooth-formally-smooth, sheaf-of-lifts torsor argument; Tags 061A, 061C, 061D for the lift sheaf and its action, restricted to schemes."
+   }
+  },
+  {
+   "text": "For each member $v_j:T_j\\to T$ of the jointly surjective etale family in the hypothesis, the given $a_j$ is a section of $\\mathcal L(T_j)$, since its two compatibility identities are exactly the defining identities of $\\mathcal L$. Translation by $a_j$ identifies the restriction of $\\mathcal L$ to $T_j$ with that of $\\mathcal H_{\\mathrm{et}}$: the bijections from Step 1 hold after every further restriction. Thus $\\mathcal L$ is an $\\mathcal H_{\\mathrm{et}}$-torsor in the general abelian-sheaf sense of [def-sc-gm-torsor].",
+   "uses": [
+    "def-sc-gm-torsor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04AM, lemma-smooth-formally-smooth, sheaf-of-lifts torsor argument; Tags 061A, 061C, 061D for the lift sheaf and its action, restricted to schemes."
+   }
+  },
+  {
+   "text": "Since $T$ is affine and $\\mathcal H$ is quasi-coherent, [lem-sc-etale-affine-qcoherent] with $q=1$ gives $H^1(T_{\\mathrm{et}},\\mathcal H_{\\mathrm{et}})=0$. This applies to the module on $T$, not to a module on $T_0$ without a comparison.",
+   "uses": [
+    "lem-sc-etale-affine-qcoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P2, theorem-zariski-fpqc-quasi-coherent, affine case."
+   }
+  },
+  {
+   "text": "The torsor classification [lem-sc-torsor-h1] sends the trivial torsor to zero and is bijective. Step 3 therefore forces the torsor $\\mathcal L$ from Step 2 to be isomorphic to the trivial torsor $\\mathcal H_{\\mathrm{et}}$. The inverse image of its zero global section is an element of $\\mathcal L(T)$; by the defining section condition this is a map $a:T\\to V$ with $fa=b$ and $ai=a_0$.",
+   "uses": [
+    "lem-sc-torsor-h1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, lemma-torsors-h1, zero class and trivial torsor."
+   }
+  },
+  {
+   "text": "The preceding construction works for every affine first-order thickening and every compatible pair $a_0,b$. These are precisely the quantified lifting problems in [def-sbc-formally-smooth], so $f$ is formally smooth.",
+   "uses": [
+    "def-sbc-formally-smooth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02H0, definition-formally-smooth."
+   }
+  },
+  {
+   "text": "Combine formal smoothness from Step 5 with the original locally finite presentation hypothesis. By [def-sbc-smooth-morphisms], these two properties say that $f$ is smooth.",
+   "uses": [
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02H6, lemma-smooth-formally-smooth; the cited definition uses its equivalent formulation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-formally-smooth",
+  "def-sbc-smooth-morphisms",
+  "def-sc-gm-torsor",
+  "lem-per-etale-local-lift-torsor-quasi-coherent",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-sc-torsor-h1"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 04AM, lemma-smooth-formally-smooth, sheaf-of-lifts torsor argument; Tags 061A, 061C, 061D for the lift sheaf and its action, restricted to schemes."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,7 +141,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-strict-log-jacobian-criterion",
@@ -75,7 +153,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof Step 3, regular finite-torsion local model via the tame equivariant modification in XVI 3.7; specifically Expose X Proposition 1.2, first and last assertions, printed pp.136--139 (the smooth comparison, before adjoining the representation). Internal preparation argument: Expose X proof of Proposition 1.2, printed p.138, strictness and the Jacobian criterion attributed there to Kato 1988, 3.12. Scheme-theoretic infinitesimal criterion used after correcting a lift by a logarithmic derivation.",
+   "place": "Supporting scheme-theoretic infinitesimal criterion used by lem-per-strict-log-jacobian-criterion, proof Steps 3--5 (a descendant in the inherited lem-per-artin-gabber-affine-curve lineage). The current ancestor proof no longer has the historical local-model Step 3; lineage is retained, not presented as a quotation of its current proof.",
    "via": [
     "lem-per-strict-log-jacobian-criterion",
     "lem-per-equivariant-log-smooth-chart",
@@ -92,5 +170,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-etale-local-infinitesimal-lifts-smooth",
+  "worker": "stage1",
+  "summary": "Retained the item statement. Repaired the earlier supporting node: Hom is over T_0 and its direct image is a quasi-coherent module on T; the new node asserts only the sheaf of lifts and its derivation action, without any existence conclusion. The item itself proves local nonemptiness from the hypothesis, uses the existing affine etale vanishing and general abelian torsor-H1 nodes to obtain a global section, and unfolds formal smoothness and smoothness. Re-ran missing supporting-node searches through msearch.py and read the candidates.",
+  "blueprint": "Supporting scheme-theoretic infinitesimal criterion used by lem-per-strict-log-jacobian-criterion, proof Steps 3--5 (a descendant in the inherited lem-per-artin-gabber-affine-curve lineage). The current ancestor proof no longer has the historical local-model Step 3; lineage is retained, not presented as a quotation of its current proof.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-etale-affine-qcoherent",
+    "why": "Generic affine quasi-coherent etale H1 vanishing for the derivation module; the perverse unit supplies no substitute."
+   },
+   {
+    "node": "lem-sc-torsor-h1",
+    "why": "Generic classification for arbitrary abelian etale sheaves, needed to trivialize the lift torsor, not a replacement of the perverse unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-etale-affine-qcoherent",
+  "lem-sc-torsor-h1"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-43fc40001",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-43fc40001 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-per-etale-local-lift-torsor-quasi-coherent and every cited statement in full. Sources read in the Stacks project: spaces-more-morphisms.tex 061A lemma-sheaf, 061C lemma-action-sheaf, 061D remark-special-case and 04AM lemma-smooth-formally-smooth, which uses the same argument (pseudo-torsor, local sections (I), qc H^1 vanishing (II), torsors-H1). The tags 02H0, 03AJ and 03P2 map to the cited labels. The item statement and stmt_deps are identical to the live unsplit node. The statement is true; the lfp hypothesis is used exactly for quasi-coherence of Hom(a0^*Ω, I). Step 1 applies the new node to the affine square. Step 2 is correctly elementary: the given a_j are sections of L, translation trivializes L on the jointly surjective étale cover, so L is a torsor in def-sc-gm-torsor's general abelian clause. Step 3: lem-sc-etale-affine-qcoherent with q=1 applies to H on affine T, and its H_et is the same associated sheaf. Step 4: lem-sc-torsor-h1 covers arbitrary abelian sheaves and sends 0 to the trivial torsor, giving a global lift. Steps 5 and 6 are exact instances of def-sbc-formally-smooth (affine thickenings over S) and def-sbc-smooth-morphisms (lfp + formally smooth). New node: true, because Ω_{V/W} is finitely presented for lfp f, Hom out of a finitely presented module is quasi-coherent and commutes with flat pullback, and lifts differ by W-derivations into I O_U. Tested at I=0, at V=A^1_W, with no global lift (the action is conditional on a section), and with non-affine T. It is statement-only and self-contained (B1–B9), with no existence clause, so it is not a restatement of the item (D1/D2). DAG search over 061A/061C/04FJ/04AM/02H6 and square-zero lift/torsor/smooth statements found only log-smooth calculus nodes, ring-level lifting nodes and finite-M torsor nodes; no duplicate. The tool uses lem-sc-etale-affine-qcoherent and lem-sc-torsor-h1 are generic black boxes, declared and accepted. No SGA. No changes."
  }
 }
