@@ -1,0 +1,145 @@
+{
+ "id": "lem-sfb-continuous-integral-diagonal-rank-locus",
+ "kind": "statement",
+ "title": "Continuous reduction near a fixed diagonal rank locus",
+ "statement": "Let l be prime, E a finite extension of Q_l, and A its coefficient-extension integer ring [def-weil-l-adic-coefficient-extension], with the maximal-ideal-adic topology. Let pi generate its maximal ideal. Let T be any topological space, m,n,r natural numbers with r <= min(m,n), and e : Fin r -> Nat monotone. Let D be the n by m matrix whose (i,j) entry is pi^(e i) when i=j and i<r and is zero otherwise. If F : T -> Mat(n,m,A) has continuous entries, t0 : T satisfies F(t0)=D, and rank(F(t)) <= r for every t, then there is an open neighbourhood U of t0 and maps L : U -> GL(n,A), R : U -> GL(m,A), with all entries of L, R and their inverses continuous, such that L(t) F(t) R(t)=D for every t in U. Empty dimensions and r=0 are allowed.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Proof of Theorem 6.12(2), finite extension case; auxiliary fixed-diagonal induction."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [
+  {
+   "text": "Let N be the maximum of the finitely many exponents, or zero when r=0. Continuity gives an open neighbourhood V on which all entries of F-D lie in (pi)^N. For each pivot column k<r, divide its error by pi^(e k), filling the other columns with zero, to form a square n by n matrix B. These quotients are uniquely determined since pi is nonzero. Cancellation in the principal-ideal neighbourhood bases proves their continuity: to control the quotient modulo pi^a, control its multiple modulo pi^(a+e k). At the centre B=0.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 6.12(2), finite extension case; auxiliary fixed-diagonal induction."
+   }
+  },
+  {
+   "text": "Set M=1+B. Its determinant is one at the centre. Units form an open set in the maximal-ideal-adic topology of the local ring, so restrict to the open unit-determinant locus U0. M is invertible there, and its inverse is continuous by the adjugate formula and continuity of inversion on units. The first r columns of M D equal those of F by the definition of B. Thus G=M^(-1) F has its first r columns equal to D.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 6.12(2), finite extension case; auxiliary fixed-diagonal induction."
+   }
+  },
+  {
+   "text": "Every entry in an extra column of F is divisible by each pivot pi^(e k), since D vanishes in those columns and F-D is divisible by pi^N. Multiplication by M^(-1) preserves this divisibility. Divide the first r rows of the extra columns of G by their corresponding pivots to get q, supported only at row indices <r and column indices >=r. These quotients are again unique and continuous. Consequently q squared is zero, R=1-q has inverse 1+q, and G R agrees with D whenever the row or the column index is <r.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 6.12(2), finite extension case; auxiliary fixed-diagonal induction."
+   }
+  },
+  {
+   "text": "Any nonzero entry of the remaining bottom-right block would give an (r+1) by (r+1) diagonal minor with nonzero determinant, using the first r rows and columns and that entry. Over the domain its rank would be r+1, contradicting rank(G R)<=rank(F)<=r. Therefore G R=D. Transport U0 through the open subtype inclusion into T and use L=M^(-1). The same formulas handle r=0, empty dimensions and exponent-zero pivots.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 6.12(2), finite extension case; auxiliary fixed-diagonal induction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Agent direct near-identity matrix argument, using the adic continuous-division mechanism associated with Theorem 6.12(2); not a verbatim theorem of HRS."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Matrix\", \"smith\"",
+   "results": "{\"t\": \"2026-10-18T13:44:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"Matrix\\\", \\\"smith\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Module.Basis.SmithNormalForm.toMatrix_restrict_eq_toMatrix\"], \"digest\": \"b0404eacffd215e6\"}",
+   "date": "2026-10-18",
+   "verdict": "Scalar Smith statements found; no local continuous fixed-diagonal reduction. Scalar result implemented from the basis Smith API.",
+   "digest": "b0404eacffd215e6"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous family of matrices over a discrete valuation ring with locally constant cokernel is locally equivalent to a fixed diagonal Smith form",
+   "results": "{\"t\": \"2026-10-18T13:44:20Z\", \"tool\": \"leanfinder\", \"query\": \"A continuous family of matrices over a discrete valuation ring with locally constant cokernel is locally equivalent to a fixed diagonal Smith form\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Basis.SmithNormalForm.repr_comp_embedding_eq_smul\", \"Module.Basis.SmithNormalForm.a\", \"Module.Basis.SmithNormalForm\", \"Ideal.quotientEquivPiSpan\", \"Module.Basis.SmithNormalForm.toMatrix_restrict_eq_toMatrix\", \"Submodule.smithNormalFormCoeffs\", \"Module.Basis.SmithNormalForm.f\", \"Submodule.quotientEquivPiSpan\"], \"digest\": \"1206d68cc8f0ec21\"}",
+   "date": "2026-10-18",
+   "verdict": "Scalar Smith statements found; no local continuous fixed-diagonal reduction. Scalar result implemented from the basis Smith API.",
+   "digest": "1206d68cc8f0ec21"
+  },
+  {
+   "tool": "grep",
+   "query": "(smith|Smith).*(continuous|Continuous)|(continuous|Continuous).*(smith|Smith)",
+   "results": "{\"t\": \"2026-10-18T13:44:40Z\", \"tool\": \"grep\", \"query\": \"(smith|Smith).*(continuous|Continuous)|(continuous|Continuous).*(smith|Smith)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "Scalar Smith statements found; no local continuous fixed-diagonal reduction. Scalar result implemented from the basis Smith API.",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Near a fixed diagonal matrix over an adic discrete valuation ring, a continuous matrix family of rank at most the number of nonzero diagonal entries is continuously equivalent to that diagonal",
+   "results": "Continuous.matrix_diagonal; Continuous.matrix_blockDiag; continuous_matrix_diag; Continuous.matrix_diag; ContinuousLinearEquiv.ofFinrankEq; Continuous.matrix_blockDiagonal'; Continuous.matrix_blockDiagonal; Continuous.matrix_blockDiag'. Matrix continuity declarations are in Mathlib.Topology.Instances.Matrix.",
+   "date": "2026-10-19",
+   "verdict": "No match: the matrix continuity constructors and finite-dimensional continuous equivalence do not provide local integral changes of basis on an adic rank locus."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.LinearAlgebra.ContinuousIntegralMatrixLocalSmith",
+  "date": "2026-10-19",
+  "group": "C4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-continuous-integral-matrix-local-smith",
+   "place": "Auxiliary declaration needed by the local Smith proof.",
+   "via": [
+    "lem-sfb-continuous-integral-matrix-local-smith"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.ContinuousIntegralDiagonalRankLocus",
+  "declaration": "Padic.continuous_integral_diagonal_rank_locus",
+  "file": "lean/Sheaf/LinearAlgebra/ContinuousIntegralDiagonalRankLocus.lean",
+  "statement": "theorem continuous_integral_diagonal_rank_locus (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (π : coefficientExtensionIntegers l E) (hπ : Ideal.span ({π} : Set (coefficientExtensionIntegers l E)) = coefficientExtensionMaximalIdeal l E) (T : Type v) [TopologicalSpace T] (m n r : ℕ) (hr : r ≤ min m n) (e : Fin r → ℕ) (he : Monotone e) (D : Matrix (Fin n) (Fin m) (coefficientExtensionIntegers l E)) (hD : ∀ (i : Fin n) (j : Fin m), D i j = if h : i.val = j.val ∧ i.val < r then π ^ e ⟨i.val, h.2⟩ else 0) (F : T → Matrix (Fin n) (Fin m) (coefficientExtensionIntegers l E)) (hF : ∀ (i : Fin n) (j : Fin m), @Continuous T (coefficientExtensionIntegers l E) _ (coefficientExtensionMaximalIdeal l E).adicTopology (fun t ↦ F t i j)) (t₀ : T) (hcenter : F t₀ = D) (hrank : ∀ t, (F t).rank ≤ r) : ∃ U : TopologicalSpace.Opens T, t₀ ∈ U ∧ ∃ (L : U → Matrix.GeneralLinearGroup (Fin n) (coefficientExtensionIntegers l E)) (R : U → Matrix.GeneralLinearGroup (Fin m) (coefficientExtensionIntegers l E)), (∀ i j : Fin n, @Continuous U (coefficientExtensionIntegers l E) _ (coefficientExtensionMaximalIdeal l E).adicTopology (fun t ↦ L t i j)) ∧ (∀ i j : Fin n, @Continuous U (coefficientExtensionIntegers l E) _ (coefficientExtensionMaximalIdeal l E).adicTopology (fun t ↦ (L t)⁻¹ i j)) ∧ (∀ i j : Fin m, @Continuous U (coefficientExtensionIntegers l E) _ (coefficientExtensionMaximalIdeal l E).adicTopology (fun t ↦ R t i j)) ∧ (∀ i j : Fin m, @Continuous U (coefficientExtensionIntegers l E) _ (coefficientExtensionMaximalIdeal l E).adicTopology (fun t ↦ (R t)⁻¹ i j)) ∧ ∀ t : U, (L t : Matrix (Fin n) (Fin n) (coefficientExtensionIntegers l E)) * F t.val * (R t : Matrix (Fin m) (Fin m) (coefficientExtensionIntegers l E)) = D",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261019T034251-L-415519",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261019T034251-L-415519",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

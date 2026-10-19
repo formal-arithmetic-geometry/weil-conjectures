@@ -1,0 +1,118 @@
+{
+ "id": "lem-sfb-dvr-matrix-smith-powers",
+ "kind": "statement",
+ "title": "Rectangular Smith matrices over a DVR",
+ "statement": "Let A be a commutative domain which is a discrete valuation ring [def-sc-discrete-valuation-ring], and let pi generate its maximal ideal. Every n by m matrix F over A admits invertible L in GL(n,A), R in GL(m,A), a natural number r<=min(m,n), and a monotone e:Fin r -> Nat such that L F R has entry pi^(e i) for i=j<r and zero elsewhere. Moreover r=rank(F). Empty dimensions, r=0, and exponent-zero unit pivots are included.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00PD (DVR characterization); Mathlib LinearAlgebra/FreeModule/PID.lean, Submodule.smithNormalForm and Submodule.exists_smith_normal_form_of_le, for scalar Smith form. Agent rectangular-matrix basis calculation."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring"
+ ],
+ "proof": [
+  {
+   "text": "Apply the scalar DVR Smith normal form to the image and split the source into kernel and lifted image bases. Express each nonzero coefficient as a unit times a power of the chosen uniformizer, absorb units into the codomain basis, and sort powers. The resulting basis matrices are invertible and give the displayed rectangular diagonal; the number of pivots is the matrix rank.",
+   "uses": [
+    "lem-sc-dvr-saturation-line-smith-normal-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (DVR characterization); Mathlib LinearAlgebra/FreeModule/PID.lean, Submodule.smithNormalForm and Submodule.exists_smith_normal_form_of_le, for scalar Smith form. Agent rectangular-matrix basis calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-dvr-saturation-line-smith-normal-form"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00PD (DVR characterization); Mathlib LinearAlgebra/FreeModule/PID.lean, Submodule.smithNormalForm and Submodule.exists_smith_normal_form_of_le, for scalar Smith form. Agent rectangular-matrix basis calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Matrix\", \"smith\"",
+   "results": "{\"t\": \"2026-10-18T13:44:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"Matrix\\\", \\\"smith\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Module.Basis.SmithNormalForm.toMatrix_restrict_eq_toMatrix\"], \"digest\": \"b0404eacffd215e6\"}",
+   "date": "2026-10-18",
+   "verdict": "Scalar Smith statements found; no local continuous fixed-diagonal reduction. Scalar result implemented from the basis Smith API.",
+   "digest": "b0404eacffd215e6"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous family of matrices over a discrete valuation ring with locally constant cokernel is locally equivalent to a fixed diagonal Smith form",
+   "results": "{\"t\": \"2026-10-18T13:44:20Z\", \"tool\": \"leanfinder\", \"query\": \"A continuous family of matrices over a discrete valuation ring with locally constant cokernel is locally equivalent to a fixed diagonal Smith form\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Basis.SmithNormalForm.repr_comp_embedding_eq_smul\", \"Module.Basis.SmithNormalForm.a\", \"Module.Basis.SmithNormalForm\", \"Ideal.quotientEquivPiSpan\", \"Module.Basis.SmithNormalForm.toMatrix_restrict_eq_toMatrix\", \"Submodule.smithNormalFormCoeffs\", \"Module.Basis.SmithNormalForm.f\", \"Submodule.quotientEquivPiSpan\"], \"digest\": \"1206d68cc8f0ec21\"}",
+   "date": "2026-10-18",
+   "verdict": "Scalar Smith statements found; no local continuous fixed-diagonal reduction. Scalar result implemented from the basis Smith API.",
+   "digest": "1206d68cc8f0ec21"
+  },
+  {
+   "tool": "grep",
+   "query": "(smith|Smith).*(continuous|Continuous)|(continuous|Continuous).*(smith|Smith)",
+   "results": "{\"t\": \"2026-10-18T13:44:40Z\", \"tool\": \"grep\", \"query\": \"(smith|Smith).*(continuous|Continuous)|(continuous|Continuous).*(smith|Smith)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "Scalar Smith statements found; no local continuous fixed-diagonal reduction. Scalar result implemented from the basis Smith API.",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A matrix over a discrete valuation ring admits invertible left and right matrices reducing it to a diagonal of sorted uniformizer powers with pivot count equal to rank",
+   "results": "Matrix.Pivot.exists_list_transvec_mul_diagonal_mul_list_transvec (Mathlib.LinearAlgebra.Matrix.Transvection); Matrix.Pivot.exists_list_transvec_mul_mul_list_transvec_eq_diagonal_induction; Matrix.diagonalInvertible; Matrix.rank_mul_eq_right_of_isUnit_det; Matrix.invertibleEquivDetInvertible; Valuation.IsUniformizer.not_isUnit; Valuation.exists_pow_Uniformizer; Matrix.rank_unit.",
+   "date": "2026-10-19",
+   "verdict": "No match: transvection diagonalization is over a field and has no integral uniformizer-power conclusion. Rank and invertibility lemmas do not supply a rectangular DVR Smith presentation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.LinearAlgebra.ContinuousIntegralMatrixLocalSmith",
+  "date": "2026-10-19",
+  "group": "C4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-continuous-integral-matrix-local-smith",
+   "place": "Auxiliary declaration needed by the local Smith proof.",
+   "via": [
+    "lem-sfb-continuous-integral-matrix-local-smith"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.DvrMatrixSmithPowers",
+  "declaration": "Matrix.exists_smith_pow",
+  "file": "lean/Sheaf/LinearAlgebra/DvrMatrixSmithPowers.lean",
+  "statement": "theorem exists_smith_pow {A : Type u} [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] (π : A) (hπ : IsLocalRing.maximalIdeal A = Ideal.span {π}) (m n : ℕ) (F : Matrix (Fin n) (Fin m) A) : ∃ (L : GeneralLinearGroup (Fin n) A) (R : GeneralLinearGroup (Fin m) A) (r : ℕ) (_hr : r ≤ min m n) (e : Fin r → ℕ) (D : Matrix (Fin n) (Fin m) A), Monotone e ∧ (∀ (i : Fin n) (j : Fin m), D i j = if h : i.val = j.val ∧ i.val < r then π ^ e ⟨i.val, h.2⟩ else 0) ∧ r = F.rank ∧ (L : Matrix (Fin n) (Fin n) A) * F * (R : Matrix (Fin m) (Fin m) A) = D",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261019T034251-L-415519",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261019T034251-L-415519",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

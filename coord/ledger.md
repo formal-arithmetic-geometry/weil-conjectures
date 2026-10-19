@@ -16883,3 +16883,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:54 L: merged deliver/U2/Sheaf.Paper.FiniteCoefficientAdjointComparisons (stage 3; reviewer PASS; first push; landing 20261019T005435-L-2771774 (proof); batch 20261019T005255; modules 1; new nodes 0)
 - 03:42 L: returned deliver/N4/Sheaf.Paper.ClosedSupportConstructible (reviewer RETURN: (the landing tools, head e0538bcae) the delivery did not land: (d) user Sheaf.Paper.RationalClosedSupportConstructible ()
 - 03:42 L: merged deliver/A9/Sheaf.AlgebraicGeometry.ClosedSupportExceptionalComparison (stage 3; reviewer PASS; first push; landing 20261019T034251-L-415326 (proof); batch 20261019T034248; modules 1; new nodes 0)
+- 03:42 L: merged deliver/C4/Sheaf.LinearAlgebra.ContinuousIntegralMatrixLocalSmith (stage 3; reviewer PASS; first push; landing 20261019T034251-L-415519 (interface); batch 20261019T034248; modules 3; new nodes 2)

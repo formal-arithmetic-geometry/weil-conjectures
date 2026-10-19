@@ -12,91 +12,35 @@
  ],
  "proof": [
   {
-   "text": "Fix a point y₀ and an open neighbourhood on which the scalar cokernel isomorphism class is constant. At y₀, apply the scalar Smith statement to the image submodule of Aⁿ. Its diagonal inclusion has nonzero diagonal scalars (the inclusion is injective). The image is finite free, so choose lifts in Aᵐ of its diagonal basis; the resulting map from a free complement to the image is a section, and applying the same Smith statement to the kernel gives a kernel basis, so these lifts together with that basis form a basis of Aᵐ. Taking the cokernel of this diagonal presentation gives a direct sum of a free part and cyclic summands A/(πᵉ), with the exponent-zero summands equal to zero. For each k≥1, multiplication by π^(k−1) followed by reduction modulo πᵏ identifies the contribution of a free summand with one residue-field dimension and the contribution of A/(πᵉ) with one dimension exactly when e≥k. Hence the isomorphism class of P determines its free rank and, for every k, the number of exponents at least k. The same calculation for every z in the chosen neighbourhood shows that the positive exponents and the number of exponent-zero pivots are fixed there; m and n determine the remaining zero rows and columns. Choose the resulting fixed diagonal D.",
+   "text": "At a point choose the open constant-cokernel neighbourhood. Apply rectangular scalar Smith form to the central matrix. Equality of cokernel finranks and the quotient-plus-range finrank formula show equality of the matrix ranks on this neighbourhood. Conjugate the family by the constant scalar Smith factors.",
    "uses": [
-    "lem-sc-dvr-saturation-line-smith-normal-form"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Example 3.1 and the agent's constant-type Smith argument; scalar diagonalization uses Stacks Algebra Lemma 00PD in the finite-free form recorded by the cited Mathlib leaf."
-   }
-  },
-  {
-   "text": "If the fixed list is empty, every scalar specialization on the chosen neighbourhood has cokernel free of rank n, hence image of rank zero over the fraction field, so every matrix entry is zero because A is a domain; identity matrices give the required factorization.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Continuous integral pivot and division argument in the proof of Theorem 6.12(2), finite E case; agent local constant-type Smith variant."
-   }
-  },
-  {
-   "text": "Otherwise let e be the least exponent in D. For each z, write D=L_z F(z) R_z and F(z)=L_z⁻¹ D R_z⁻¹ using the pointwise Smith equivalence of Step 1. Every entry of F(z) is an A-linear combination of entries of D, hence lies in πᵉA. At y₀, if all entries lay in π^(e+1)A, the first equality would force the entry πᵉ of D to lie there too, a contradiction. Thus some entry p has valuation exactly e at y₀. A constant row and column permutation puts p in the upper-left corner.",
-   "uses": [
+    "lem-sfb-dvr-matrix-smith-powers",
     "def-weil-l-adic-coefficient-extension"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Continuous integral pivot and division argument in the proof of Theorem 6.12(2), finite E case; agent local constant-type Smith variant."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-sfb-continuous-integral-pivot-splitting] to this permuted matrix on the type-constant open neighbourhood: the preceding step supplies divisibility of every entry by πᵉ at every point and the required pivot at y₀. On a smaller open neighbourhood it gives continuous integral invertible L₁,R₁, continuous inverses, and L₁FR₁=diag(πᵉ,F′).",
+   "text": "The conjugated family equals the chosen diagonal at the centre and has rank at most its number of pivots. Apply fixed-diagonal rank-locus reduction. Transport the resulting neighbourhood through the open subtype inclusion and compose its continuous factors with the constant scalar Smith factors; continuity of inverse entries follows by reversing multiplication.",
    "uses": [
-    "lem-sfb-continuous-integral-pivot-splitting"
+    "lem-sfb-continuous-integral-diagonal-rank-locus"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Continuous integral pivot and division argument in the proof of Theorem 6.12(2), finite E case; agent local constant-type Smith variant."
-   }
+   "elementary": false
   },
   {
-   "text": "Taking quotients coordinatewise gives coker(diag(πᵉ,F′(z))) ≅ A/(πᵉ) ⊕ coker F′(z): the relation submodule is πᵉA ⊕ image(F′(z)). Invertible row and column matrices induce isomorphisms of cokernels, so P_z ≅ A/(πᵉ) ⊕ coker F′(z). Let Q be the cokernel of the fixed diagonal D with its first row and column removed. Then P_z ≅ coker D ≅ A/(πᵉ) ⊕ Q. Both Q and coker F′(z) are finitely generated, being quotients of A^(n−1). Apply [lem-sfb-dvr-cyclic-summand-cancellation] to conclude coker F′(z) ≅ Q for every z. The residual type is therefore constant and is exactly the original type with the least invariant factor removed, including e=0.",
-   "uses": [
-    "lem-sfb-dvr-cyclic-summand-cancellation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Continuous integral pivot and division argument in the proof of Theorem 6.12(2), finite E case; agent local constant-type Smith variant."
-   }
-  },
-  {
-   "text": "Induct on min(m,n), with the predicate that every continuous matrix of smaller minimum size whose scalar cokernel type is locally constant admits the asserted local reduction. After the first pivot, the residual block has smaller minimum size and, by the pivot and cancellation steps, a constant scalar cokernel type given by the remaining exponents, so the induction hypothesis supplies continuous integral invertible row and column matrices reducing it to the remaining diagonal. Extend those matrices by identity on the pivot row and column and compose them with the elementary matrices from the pivot step. Only finitely many pivots occur, so the products and their inverses remain entrywise continuous. This yields the asserted factorization on an open neighbourhood of y₀.",
-   "uses": [
-    "lem-sc-dvr-saturation-line-smith-normal-form",
-    "lem-sfb-continuous-integral-pivot-splitting",
-    "lem-sfb-dvr-cyclic-summand-cancellation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Agent induction completing the local constant-type Smith argument."
-   }
-  },
-  {
-   "text": "The construction applies at every point, and the resulting neighbourhoods form an open cover. The cases m=0, n=0, r=0, one-point spaces, zero matrices, unit pivots (e=0), and mixed free/torsion cokernels are included by the same argument; no scheme or sheaf structure on Y is used.",
+   "text": "Choose the constructed neighbourhood and factors at every point to get the point-indexed open cover.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Example 3.1; edge cases added in the agent proof."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-dvr-saturation-line-smith-normal-form",
+  "lem-sfb-dvr-matrix-smith-powers",
   "def-weil-l-adic-coefficient-extension",
-  "lem-sfb-continuous-integral-pivot-splitting",
-  "lem-sfb-dvr-cyclic-summand-cancellation"
+  "lem-sfb-continuous-integral-diagonal-rank-locus"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "agent C4",
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-  "place": "Example 3.1 and the continuous integral pivot/division argument in the proof of Theorem 6.12(2), finite E case; local constant-type Smith argument written out in this split."
+  "place": "Scalar Smith form, rank invariance of cokernels, and local diagonal rank-locus reduction."
  },
  "mathlib_searches": [
   {
@@ -216,5 +160,15 @@
   "by": "Q55",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261019T034251-L-415519",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
