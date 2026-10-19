@@ -7,24 +7,6 @@ module
 
 public import Sheaf.Paper.ProperOpenCoefficientRefinement
 public import Sheaf.Paper.ProEtaleProperOpenComparison
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.AlgebraicGeometry.ClopenSectionComponent
-import Sheaf.AlgebraicGeometry.ClopenSectionDirectImage
-import Sheaf.AlgebraicGeometry.DerivedOpenRestriction
-import Sheaf.AlgebraicGeometry.EtaleSheafClopenProduct
-import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
-import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
-import Sheaf.AlgebraicGeometry.IntrinsicDerivedOpenAdjunction
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
-import Sheaf.AlgebraicGeometry.ProperOpenComparison
-import Sheaf.AlgebraicGeometry.ProperOpenSection
-import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-import Sheaf.Paper.ComparisonPullbackExact
-import Sheaf.SixFunctors.OpenTensorNormalization
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Coefficient and site squares for the explicit refinement theta
@@ -101,6 +83,11 @@ theorem refinementCoefficientMate
                 K) ≫
             (ProEtale.lowerStar (ModuleCat.{u + 1} R) u).rightDerivedFunctorPlus.map
               ((ProEtale.properOpenSiteExtensionIso R j₁).hom.app K)) := by
-  sorry
+  constructor
+  · exact Etale.properOpenComparison_coefficient_refinement φ u j₁ j₂ h L hL
+  · intro R _ _ K
+    simp only [ProEtale.properOpenProEtaleIsoPlus, Iso.trans_hom, Iso.symm_hom,
+      Iso.app_hom, Functor.mapIso_hom, asIso_hom,
+      Iso.hom_inv_id_app_assoc]
 
 end AlgebraicGeometry
