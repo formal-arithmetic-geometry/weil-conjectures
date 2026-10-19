@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.RingTheory.GRing
 public import Mathlib.Algebra.Polynomial.Basic
-import Sheaf.RingTheory.PolynomialGRingRegularComparison
+import WeilConjectures.RingTheory.PolynomialGRingRegularComparison
 import WeilConjectures.RingTheory.FibreRingNoetherian
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.PolynomialCompleteLocalFormalFibres

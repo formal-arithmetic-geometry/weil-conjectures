@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.StrictHenselizationPointEvaluationImage
 import Sheaf.Paper.StrictHenselizationPointEvaluationComparison
-import Sheaf.RingTheory.StrictHenselizationTriples
+import WeilConjectures.RingTheory.StrictHenselizationTriples
 import Sheaf.AlgebraicGeometry.StrictHenselization
 import Sheaf.Paper.StrictHenselizationPointEvaluation
 

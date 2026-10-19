@@ -12,7 +12,7 @@ import Sheaf.AlgebraicGeometry.ProperFlatBoundedPresentationModel
 import Sheaf.AlgebraicGeometry.AffineFlatConnectiveTruncation
 import Sheaf.Algebra.Homology.FlatOpcyclesTorCriterion
 import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
-import Sheaf.RingTheory.PseudoCoherentBoundedFiniteFreeModel
+import WeilConjectures.RingTheory.PseudoCoherentBoundedFiniteFreeModel
 
 /-! # Finite-presentation flat models on a fixed affine base -/
 

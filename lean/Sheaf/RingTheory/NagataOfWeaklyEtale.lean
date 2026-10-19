@@ -19,7 +19,7 @@ import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.RingTheory.KrullDimension.Zero
 import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 import Mathlib.RingTheory.Spectrum.Maximal.Localization
-import Sheaf.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
+import WeilConjectures.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
 import Sheaf.RingTheory.WeaklyEtaleField
 import Mathlib.CategoryTheory.MorphismProperty.Composition
 import Mathlib.CategoryTheory.MorphismProperty.Limits

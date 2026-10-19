@@ -6,8 +6,8 @@ Authors: SHEAF group W2
 module
 
 public import WeilConjectures.RingTheory.IsStrictHenselization
-import Sheaf.RingTheory.StrictHenselizationTriples
-import Sheaf.RingTheory.StrictHenselizationTriplesPresentation
+import WeilConjectures.RingTheory.StrictHenselizationTriples
+import WeilConjectures.RingTheory.StrictHenselizationTriplesPresentation
 
 /-!
 # Local structure of a ring strict henselization

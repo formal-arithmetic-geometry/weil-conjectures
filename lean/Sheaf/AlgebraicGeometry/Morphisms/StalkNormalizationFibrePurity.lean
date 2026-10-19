@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import Mathlib.AlgebraicGeometry.Normalization
 
-import Sheaf.RingTheory.NormalLocalDepthTwo
+import WeilConjectures.RingTheory.NormalLocalDepthTwo
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationNormalDense
 import Sheaf.AlgebraicGeometry.Morphisms.FiniteNormalTraitPurity
 import Sheaf.AlgebraicGeometry.Morphisms.FiniteNormalDepthTwoPurity

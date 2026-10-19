@@ -12,7 +12,7 @@ import Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison
 import Sheaf.AlgebraicGeometry.LogRegularCompletedChart
 import Sheaf.AlgebraicGeometry.LogRegularSharpChart
 import Sheaf.RingTheory.StrictHenselizationCompletionNoetherian
-import Sheaf.RingTheory.StrictHenselizationTriples
+import WeilConjectures.RingTheory.StrictHenselizationTriples
 import Sheaf.RingTheory.TorFlatBaseChange
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import WeilConjectures.RingTheory.CohenRing

@@ -35,7 +35,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.RingTheory.RegularBaseChange
 import Sheaf.AlgebraicGeometry.RegularEtaleDirectImageBaseChange
 import WeilConjectures.CategoryTheory.TruncationTriangle
-import Sheaf.RingTheory.StrictHenselizationTriples
+import WeilConjectures.RingTheory.StrictHenselizationTriples
 import Mathlib.RingTheory.Localization.Submodule
 import Sheaf.RingTheory.StrictHenselizationNoetherian
 import Sheaf.RingTheory.IndEtaleStability

@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
-import Sheaf.RingTheory.KoszulProjectiveResolution
+import WeilConjectures.RingTheory.KoszulProjectiveResolution
 import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 import Sheaf.AlgebraicGeometry.AffineKoszulFiniteFreeResolution
 import Sheaf.AlgebraicGeometry.LocalFiniteFreeHomologyNatural

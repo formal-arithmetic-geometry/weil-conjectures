@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Mathlib.RingTheory.Polynomial.Basic
 import Mathlib.RingTheory.Localization.Submodule
-import Sheaf.RingTheory.LocalizedPolynomialTorBound
+import WeilConjectures.RingTheory.LocalizedPolynomialTorBound
 import Sheaf.RingTheory.FiniteProjectiveDimensionOfTorBound
 
 /-! # Finite projective dimension over a localized polynomial ring

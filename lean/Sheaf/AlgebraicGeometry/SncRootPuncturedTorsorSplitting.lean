@@ -20,7 +20,7 @@ import Sheaf.RingTheory.RegularRingNormal
 import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleOpenGenericAlgebra
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Sheaf.RingTheory.EtaleNormalRing
-import Sheaf.RingTheory.NormalRingIntegrallyClosedTotal
+import WeilConjectures.RingTheory.NormalRingIntegrallyClosedTotal
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import WeilConjectures.RingTheory.StrictlyHenselianQuotient
 import WeilConjectures.RingTheory.RegularPrincipalPrimeLocalizationDvr

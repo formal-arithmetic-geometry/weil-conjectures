@@ -14,7 +14,7 @@ import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
 import Mathlib.CategoryTheory.Filtered.Connected
 import Mathlib.FieldTheory.SeparablyGenerated
 import WeilConjectures.RingTheory.FilteredColimitOfFactorization
-import Sheaf.RingTheory.PopescuFinalSolve
+import WeilConjectures.RingTheory.PopescuFinalSolve
 import Sheaf.RingTheory.PopescuReduceToField
 import Sheaf.RingTheory.PopescuResolveCharP
 import Sheaf.RingTheory.PopescuResolveSeparable

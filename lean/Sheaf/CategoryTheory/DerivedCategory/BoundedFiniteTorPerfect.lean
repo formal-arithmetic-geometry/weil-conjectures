@@ -20,7 +20,7 @@ import Mathlib.RingTheory.Noetherian.Basic
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import Sheaf.Algebra.Homology.FlatOpcyclesTorCriterion
 import Sheaf.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
-import Sheaf.RingTheory.PseudoCoherentBoundedFiniteFreeModel
+import WeilConjectures.RingTheory.PseudoCoherentBoundedFiniteFreeModel
 
 /-! # Bounded finite Tor amplitude implies perfect
 

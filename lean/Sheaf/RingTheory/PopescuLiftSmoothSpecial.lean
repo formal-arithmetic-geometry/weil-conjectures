@@ -5,10 +5,10 @@ Authors: SHEAF group E3
 -/
 module
 
-public import Sheaf.RingTheory.PopescuLiftPresentation
+public import WeilConjectures.RingTheory.PopescuLiftPresentation
 import Sheaf.AlgebraicGeometry.FlatSmoothFibreSmoothAtPrime
-import Sheaf.RingTheory.PopescuLiftChartFibres
-import Sheaf.RingTheory.PopescuLiftChartFlat
+import WeilConjectures.RingTheory.PopescuLiftChartFibres
+import WeilConjectures.RingTheory.PopescuLiftChartFlat
 
 @[expose] public section
 

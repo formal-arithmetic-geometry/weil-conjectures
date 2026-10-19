@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
 public import Mathlib.RingTheory.KrullDimension.Basic
 import Mathlib.RingTheory.DedekindDomain.Ideal.Lemmas
 import WeilConjectures.RingTheory.FiniteLengthGlobalSubmodule
-import Sheaf.RingTheory.KrullAkizukiNoetherian
+import WeilConjectures.RingTheory.KrullAkizukiNoetherian
 import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 
 /-!

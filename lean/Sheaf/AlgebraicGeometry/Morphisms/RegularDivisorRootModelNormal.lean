@@ -13,7 +13,7 @@ import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.Algebra.Polynomial.Derivation
 import Mathlib.RingTheory.RegularLocalRing.Polynomial
 import WeilConjectures.RingTheory.Derivation.CompletionAndLocalization
-import Sheaf.RingTheory.RootAlgebraRegularAtRoot
+import WeilConjectures.RingTheory.RootAlgebraRegularAtRoot
 import Sheaf.RingTheory.RegularRingNormal
 import WeilConjectures.RingTheory.FiniteProductNormal
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs

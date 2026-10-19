@@ -7,7 +7,7 @@ public import Mathlib.RingTheory.Regular.RegularSequence
 public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 public import Mathlib.RingTheory.RegularLocalRing.Polynomial
 import WeilConjectures.RingTheory.GlobalCompleteIntersectionLocalRegularSequence
-import Sheaf.RingTheory.LCIRegularSequenceGlobalCompleteIntersection
+import WeilConjectures.RingTheory.LCIRegularSequenceGlobalCompleteIntersection
 import Sheaf.TraceFormula.EssentiallyFiniteTypeCIKernelInvariance
 
 /-!

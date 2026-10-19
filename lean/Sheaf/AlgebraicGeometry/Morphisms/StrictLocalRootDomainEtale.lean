@@ -6,7 +6,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.Algebra.Regular.SMul
 
-import Sheaf.RingTheory.RootAlgebraRegularAtRoot
+import WeilConjectures.RingTheory.RootAlgebraRegularAtRoot
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayCoverEtale
 import Sheaf.RingTheory.RegularLocalLocalization

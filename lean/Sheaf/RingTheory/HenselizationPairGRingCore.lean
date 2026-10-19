@@ -6,8 +6,8 @@ Authors: SHEAF group K3
 module
 
 public import Sheaf.RingTheory.GRingMaximalIdealCriterion
-public import Sheaf.RingTheory.PairHenselizationNoetherianCompletion
-import Sheaf.RingTheory.PairHenselizationRegularFibers
+public import WeilConjectures.RingTheory.PairHenselizationNoetherianCompletion
+import WeilConjectures.RingTheory.PairHenselizationRegularFibers
 import WeilConjectures.RingTheory.FlatLocalCompletionIso
 import WeilConjectures.RingTheory.RegularThroughLocalization
 import WeilConjectures.RingTheory.RegularComposition

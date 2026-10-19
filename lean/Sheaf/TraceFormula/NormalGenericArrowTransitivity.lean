@@ -17,7 +17,7 @@ public import Sheaf.CategoryTheory.Sites.GeometricMorphism
 import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Sheaf.AlgebraicGeometry.StrictHenselization
 import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
-import Sheaf.RingTheory.StrictHenselizationTriples
+import WeilConjectures.RingTheory.StrictHenselizationTriples
 import Sheaf.RingTheory.EtaleColimitNormalLocalDomain
 import Sheaf.RingTheory.IndPrincipalZariski
 import WeilConjectures.RingTheory.ProEtale.IndEtale

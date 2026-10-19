@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
-import Sheaf.RingTheory.LocalNormalIntermediateAlgebra
+import WeilConjectures.RingTheory.LocalNormalIntermediateAlgebra
 import Sheaf.RingTheory.PatchLocalNormalIntermediateAlgebras
 import Mathlib.RingTheory.LocalProperties.IntegrallyClosed
 

@@ -118,13 +118,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.PopescuZeroBaseSingleChartPolynomial",
-  "file": "lean/Sheaf/RingTheory/PopescuZeroBaseSingleChartPolynomial.lean",
+  "module": "WeilConjectures.RingTheory.PopescuZeroBaseSingleChartPolynomial",
+  "file": "lean/WeilConjectures/RingTheory/PopescuZeroBaseSingleChartPolynomial.lean",
   "declaration": "Algebra.PopescuLiftPresentation.zero_base_single_chart_polynomial",
   "statement": "theorem zero_base_single_chart_polynomial (R : Type a) (Cbar : Type c)\n    [CommRing R] [CommRing Cbar] (π : R)\n    [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]\n    (d : PopescuLiftPresentation R Cbar π)\n    (hnorm : ∀ (k : Fin d.r) (l : Fin d.m), l ∈ d.E k →\n      ∀ j : Fin d.m, d.h k l j = if l = j then d.a k else 0)\n    (B : Type b) [CommRing B] [Algebra R B]\n    [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) B]\n    [IsScalarTower R (R ⧸ Ideal.span ({π ^ 2} : Set R)) B]\n    (hπ : algebraMap R B π = 0) (k : Fin d.r) :\n    let J : Ideal d.polynomial := Ideal.span (Set.range (fun i : Fin d.m ⊕ Fin d.m ↦\n      match i with\n      | .inl j => d.equation (.inl j)\n      | .inr l => d.equation (.inr (k, l))))\n    Nonempty (MvPolynomial (d.E k)\n      (B ⊗[R ⧸ Ideal.span ({π ^ 2} : Set R)]\n        Localization.Away (d.reducedElement k)) ≃ₐ[B]\n      Localization.Away (Algebra.TensorProduct.includeRight (R := R) (A := B)\n        (ULift.up (Ideal.Quotient.mk J (d.includeX (d.a k))))))",
   "branch": "sheaf-dag",
   "by": "N4",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.PopescuZeroBaseSingleChartPolynomial; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

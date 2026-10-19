@@ -18,7 +18,7 @@ public import Mathlib.LinearAlgebra.Dimension.Finrank
 
 import Sheaf.AlgebraicGeometry.KoszulExtCoefficientStalkIso
 import Sheaf.AlgebraicGeometry.KoszulSelfExtExterior
-import Sheaf.RingTheory.KoszulConormalBasis
+import WeilConjectures.RingTheory.KoszulConormalBasis
 import Sheaf.AlgebraicGeometry.AffineConormalFrame
 import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 

@@ -95,13 +95,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.PopescuClearConormalChart",
-  "file": "lean/Sheaf/RingTheory/PopescuClearConormalChart.lean",
+  "module": "WeilConjectures.RingTheory.PopescuClearConormalChart",
+  "file": "lean/WeilConjectures/RingTheory/PopescuClearConormalChart.lean",
   "declaration": "Algebra.exists_popescu_cleared_conormal_chart",
   "statement": "theorem exists_popescu_cleared_conormal_chart\n    {R : Type u} [CommRing R] (π : R) (n m : ℕ)\n    (f : Fin m → MvPolynomial (Fin n) R)\n    (a0 : MvPolynomial (Fin n) R) (E : Finset (Fin m)) :\n    let red := MvPolynomial.map (Ideal.Quotient.mk (Ideal.span ({π ^ 2} : Set R)))\n    let I := Ideal.span (Set.range (fun j ↦ red (f j)))\n    let val := fun a ↦ Ideal.Quotient.mk I (red a)\n    Smooth (R ⧸ Ideal.span ({π ^ 2} : Set R)) (Localization.Away (val a0)) →\n    (∃ b : Module.Basis E (Localization.Away (val a0))\n        (LocalizedModule.Away (val a0) I.Cotangent),\n      ∀ j : E, b j = LocalizedModule.mkLinearMap (Submonoid.powers (val a0))\n        I.Cotangent (I.toCotangent ⟨red (f j), Ideal.subset_span ⟨j, rfl⟩⟩)) →\n    Nonempty (Module.Basis (Fin (n - E.card)) (Localization.Away (val a0))\n      (KaehlerDifferential (R ⧸ Ideal.span ({π ^ 2} : Set R)) (Localization.Away (val a0)))) →\n    ∃ (a : MvPolynomial (Fin n) R)\n      (h : Fin m → Fin m → MvPolynomial (Fin n) R)\n      (g : Fin m → MvPolynomial (Fin n) R) (s : ℕ),\n      0 < s ∧ val a = val a0 ^ s ∧\n      Smooth (R ⧸ Ideal.span ({π ^ 2} : Set R)) (Localization.Away (val a)) ∧\n      (∃ b : Module.Basis E (Localization.Away (val a))\n        (LocalizedModule.Away (val a) I.Cotangent),\n      ∀ j : E, b j = LocalizedModule.mkLinearMap (Submonoid.powers (val a))\n        I.Cotangent (I.toCotangent ⟨red (f j), Ideal.subset_span ⟨j, rfl⟩⟩)) ∧\n      Nonempty (Module.Basis (Fin (n - E.card)) (Localization.Away (val a))\n      (KaehlerDifferential (R ⧸ Ideal.span ({π ^ 2} : Set R)) (Localization.Away (val a)))) ∧\n      ∀ l : Fin m,\n        a * f l = ∑ j ∈ E, h l j * f j + MvPolynomial.C (π ^ 2) * g l",
   "branch": "sheaf-dag",
   "by": "N3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.PopescuClearConormalChart; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 
 import Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison
-import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
+import WeilConjectures.RingTheory.StrictHenselizationFaithfullyFlat
 import Sheaf.RingTheory.StrictHenselizationCompletionNoetherian
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen

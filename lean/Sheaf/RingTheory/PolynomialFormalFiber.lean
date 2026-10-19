@@ -16,8 +16,8 @@ import WeilConjectures.RingTheory.FormallySmoothAdic
 import Sheaf.RingTheory.FormallySmoothCompleteLocalRegular
 import WeilConjectures.RingTheory.HypersurfaceDerivationRegular
 import WeilConjectures.RingTheory.LocalizationPrimeResidueFieldIso
-import Sheaf.RingTheory.PolynomialLocalCompletionFormallySmooth
-import Sheaf.RingTheory.PolynomialFormalFiberNoetherian
+import WeilConjectures.RingTheory.PolynomialLocalCompletionFormallySmooth
+import WeilConjectures.RingTheory.PolynomialFormalFiberNoetherian
 import Sheaf.RingTheory.PolynomialFormalFiberGeometric
 
 /-!

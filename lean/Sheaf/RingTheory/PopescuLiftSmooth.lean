@@ -5,8 +5,8 @@ Authors: SHEAF group T2
 -/
 module
 
-public import Sheaf.RingTheory.PopescuLiftPresentation
-import Sheaf.RingTheory.PopescuLiftSmoothAway
+public import WeilConjectures.RingTheory.PopescuLiftPresentation
+import WeilConjectures.RingTheory.PopescuLiftSmoothAway
 import Sheaf.RingTheory.PopescuLiftSmoothSpecial
 
 /-! # Smoothness of the explicit Popescu quotient

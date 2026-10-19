@@ -5,7 +5,7 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import WeilConjectures.RingTheory.GRing
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
-import Sheaf.RingTheory.PolynomialCompleteLocalFibreReduction
+import WeilConjectures.RingTheory.PolynomialCompleteLocalFibreReduction
 import Sheaf.RingTheory.PolynomialCompleteLocalGenericFibre
 import Sheaf.RingTheory.PolynomialCompleteLocalNonzeroFibreCharZero
 import Sheaf.RingTheory.PolynomialFormalFiber

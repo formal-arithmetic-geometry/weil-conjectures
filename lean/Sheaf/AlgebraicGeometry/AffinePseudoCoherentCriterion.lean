@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import Sheaf.RingTheory.RingPseudoCoherentLocalizationGlue
+import WeilConjectures.RingTheory.RingPseudoCoherentLocalizationGlue
 import Sheaf.AlgebraicGeometry.AffinePseudoCoherentLocalizationCover
 
 /-! # Pseudo-coherence on an affine scheme

@@ -5,11 +5,11 @@ import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import WeilConjectures.RingTheory.FibreRingNoetherian
 import Sheaf.RingTheory.FormallySmoothCompleteLocalRegular
 import WeilConjectures.RingTheory.HypersurfaceDerivationRegular
-import Sheaf.RingTheory.PolynomialLocalCompletionFormallySmooth
+import WeilConjectures.RingTheory.PolynomialLocalCompletionFormallySmooth
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.Spectrum.Prime.RingHom
 import WeilConjectures.RingTheory.PolynomialLinearFormalFiberPresentation
-import Sheaf.RingTheory.PolynomialFormalFiberFiniteReduction
+import WeilConjectures.RingTheory.PolynomialFormalFiberFiniteReduction
 @[expose] public section
 universe u
 namespace Polynomial

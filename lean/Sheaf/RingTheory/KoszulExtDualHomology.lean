@@ -9,7 +9,7 @@ public import WeilConjectures.RingTheory.KoszulDualComplex
 public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
 public import Mathlib.Algebra.Category.ModuleCat.Ext.HasExt
-import Sheaf.RingTheory.KoszulProjectiveResolution
+import WeilConjectures.RingTheory.KoszulProjectiveResolution
 import Sheaf.CategoryTheory.ExtSignedDualHomology
 
 /-! # Ext computed by a finite free Koszul resolution

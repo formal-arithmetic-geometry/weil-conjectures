@@ -59,7 +59,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
 import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Sheaf.RingTheory.SimpleFiltration
+import WeilConjectures.RingTheory.SimpleFiltration
 import Mathlib.RingTheory.FiniteStability
 import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.RingTheory.Flat.Stability
@@ -78,7 +78,6 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.AlgebraicGeometry.QuasiFiniteFinitePartsPresentation
-import WeilConjectures.RingTheory.SimpleFiltration
 /-!
 # Weighted trace for a quasi-finite flat morphism
 

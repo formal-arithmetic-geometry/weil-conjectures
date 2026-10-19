@@ -22,7 +22,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.NormalDenseOpenIntegralSectio
 import WeilConjectures.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
 import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
 import WeilConjectures.RingTheory.FlatLocalDepthFormula
-import Sheaf.RingTheory.SerreCriterionReduced
+import WeilConjectures.RingTheory.SerreCriterionReduced
 import Sheaf.RingTheory.SmoothNormalRing
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 import Sheaf.AlgebraicGeometry.Morphisms.NormalApproximationFiniteEtaModification

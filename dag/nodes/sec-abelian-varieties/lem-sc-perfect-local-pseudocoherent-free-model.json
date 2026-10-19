@@ -116,14 +116,15 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lpf0132 (reviewer sub-agent of L); spot-checked: Read Tag 0BCC/0BCB and the citer 2edf1260d (uses existence for a bounded finite-free P_p, compatible). FIX more, RETURN less: (1) class (b): new lem-sc-perfect-derived-morphism-chain-map duplicates existing leaf lem-pc-ring-derived-map-representative (Qh_map_bijective, missed by the second reading); cited it, dropped the new node. (2) C4/B3: def-pur-pseudo-coherent-complex is for schemes; inlined the ring wording (bounded-above finite free model, as in lem-pc-ring-pseudo-coherent-iff-all-m) in the item and in lem-sc-pseudo-coherent-lift-stably-free-complex, inlined 'finite stably free'. (3) C1 Step 4: beta tensor kappa quasi-iso and zero reduced differentials were unjustified; now homotopy equivalence via the representative lemma, K-flatness via lem-pc-module-bounded-flat-kflat, rank count, and Nakayama for surjectivity plus kernel (injectivity). (4) B4: plain-text statements/steps rewritten in TeX. d_i finite and eventual vanishing are hypotheses here though they follow from pseudo-coherence (Stacks); used in Step 1; uniqueness clause added with reason (E7).; 2 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.RingTheory.MinimalFreeModel",
+  "module": "WeilConjectures.RingTheory.MinimalFreeModel",
   "declaration": "DerivedCategory.exists_unique_minimalFreeModel",
-  "file": "lean/Sheaf/RingTheory/MinimalFreeModel.lean",
+  "file": "lean/WeilConjectures/RingTheory/MinimalFreeModel.lean",
   "statement": "theorem exists_unique_minimalFreeModel {R : Type u} [CommRing R] [IsLocalRing R] [HasDerivedCategory.{w} (ModuleCat.{max u v} R)] (K : DerivedCategory (ModuleCat.{max u v} R)) (hK : IsPseudoCoherent K) (d : ℤ → ℕ) (hfinite : ∀ i : ℤ, Module.Finite (IsLocalRing.ResidueField R) ((((ModuleCat.extendScalars (IsLocalRing.residue R)).mapHomologicalComplex (ComplexShape.up ℤ)).obj (Classical.choose hK)).homology i)) (hd : ∀ i : ℤ, d i = Module.finrank (IsLocalRing.ResidueField R) ((((ModuleCat.extendScalars (IsLocalRing.residue R)).mapHomologicalComplex (ComplexShape.up ℤ)).obj (Classical.choose hK)).homology i)) (hbound : ∃ b : ℤ, ∀ i : ℤ, b < i → d i = 0) : ∃ F : CochainComplex (ModuleCat.{max u v} R) ℤ, (∃ b : ℤ, F.IsStrictlyLE b) ∧ Nonempty (Q.obj F ≅ K) ∧ (∀ i : ℤ, Nonempty (F.X i ≅ ModuleCat.of R (ULift.{v} (Fin (d i) → R)))) ∧ (∀ G : CochainComplex (ModuleCat.{max u v} R) ℤ, (∃ b : ℤ, G.IsStrictlyLE b) → Nonempty (Q.obj G ≅ K) → (∀ i : ℤ, Nonempty (G.X i ≅ ModuleCat.of R (ULift.{v} (Fin (d i) → R)))) → Nonempty (F ≅ G))",
   "branch": "sheaf-dag",
   "by": "F1",
   "date": "2026-10-11",
-  "existing": false
+  "existing": false,
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.MinimalFreeModel; points at its upstream twin."
  },
  "reviewed_lean": {
   "date": "2026-10-11",

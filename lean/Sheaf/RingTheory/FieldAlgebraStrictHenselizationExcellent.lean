@@ -10,7 +10,7 @@ public import WeilConjectures.RingTheory.IsStrictHenselization
 public import WeilConjectures.RingTheory.GRing
 public import Sheaf.RingTheory.ExcellentRing
 import Sheaf.RingTheory.StrictHenselizationNoetherian
-import Sheaf.RingTheory.PointedEtaleSmallFiltered
+import WeilConjectures.RingTheory.PointedEtaleSmallFiltered
 import Sheaf.RingTheory.IndEtaleStability
 import Sheaf.RingTheory.ExcellentOfWeaklyEtale
 import Sheaf.RingTheory.FieldsExcellent

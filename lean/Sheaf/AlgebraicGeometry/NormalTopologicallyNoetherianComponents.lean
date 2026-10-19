@@ -13,7 +13,7 @@ public import Mathlib.Topology.NoetherianSpace
 import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.Topology.Sets.Closeds
-import Sheaf.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
+import WeilConjectures.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
 
 /-!
 # Components of a normal, topologically Noetherian scheme

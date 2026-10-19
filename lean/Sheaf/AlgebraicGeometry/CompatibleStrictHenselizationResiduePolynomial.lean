@@ -10,7 +10,7 @@ public import WeilConjectures.Mathlib.RingTheory.Henselian
 import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 import WeilConjectures.AlgebraicGeometry.CompatibleStrictHenselizationResiduePolynomialCore
 import Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationResidueSeparability
-import Sheaf.RingTheory.StrictHenselizationTriples
+import WeilConjectures.RingTheory.StrictHenselizationTriples
 
 /-! # Separable polynomials for compatible strict-henselization residues
 

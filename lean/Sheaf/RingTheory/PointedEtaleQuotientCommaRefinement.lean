@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.PointedEtaleQuotientFunctor
 public import Mathlib.CategoryTheory.Comma.StructuredArrow.Basic
-import Sheaf.RingTheory.PointedEtaleFiltered
+import WeilConjectures.RingTheory.PointedEtaleFiltered
 import Sheaf.RingTheory.PointedEtaleQuotientMorphismLift
 
 /-! # Common refinements in pointed base-change comma categories

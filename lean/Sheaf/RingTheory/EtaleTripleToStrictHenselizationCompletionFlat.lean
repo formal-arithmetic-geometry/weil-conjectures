@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.RingTheory.Unramified.Finite
 import WeilConjectures.RingTheory.EtaleResidueTriplesStrictHenselization
-import Sheaf.RingTheory.StrictHenselizationCompletionFlatOverBase
+import WeilConjectures.RingTheory.StrictHenselizationCompletionFlatOverBase
 
 /-!
 # Flatness of etale triple maps to the completed strict henselization

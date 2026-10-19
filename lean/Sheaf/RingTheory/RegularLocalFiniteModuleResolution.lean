@@ -6,7 +6,7 @@ import Mathlib.CategoryTheory.Abelian.Projective.Dimension
 import Sheaf.RingTheory.CohenMacaulayFreeResolution
 import Sheaf.RingTheory.ProjectiveResolutionExtCharacterization
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
-import Sheaf.RingTheory.RegularLocalMaximalCohenMacaulayFree
+import WeilConjectures.RingTheory.RegularLocalMaximalCohenMacaulayFree
 
 /-!
 # Finite module resolutions over regular local rings

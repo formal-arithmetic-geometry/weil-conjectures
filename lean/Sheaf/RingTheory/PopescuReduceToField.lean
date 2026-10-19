@@ -6,12 +6,12 @@ public import Mathlib.RingTheory.Smooth.Basic
 public import WeilConjectures.RingTheory.GRing
 import WeilConjectures.RingTheory.DesingularizeStrictlyStandard
 import WeilConjectures.RingTheory.FilteredColimitOfFactorization
-import Sheaf.RingTheory.PopescuFinalSolve
-import Sheaf.RingTheory.PopescuMaximalBadQuotient
+import WeilConjectures.RingTheory.PopescuFinalSolve
+import WeilConjectures.RingTheory.PopescuMaximalBadQuotient
 import WeilConjectures.Algebra.PopescuLiftNilpotent
 import Mathlib.RingTheory.Noetherian.Nilpotent
 import Mathlib.RingTheory.Flat.TorsionFree
-import Sheaf.RingTheory.PopescuStandardNonzerodivisor
+import WeilConjectures.RingTheory.PopescuStandardNonzerodivisor
 import Sheaf.RingTheory.PopescuSmoothLiftModuloEight
 
 /-!

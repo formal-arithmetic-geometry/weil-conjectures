@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.LocalKoszulAugmentedCarrier
 import Sheaf.AlgebraicGeometry.LocalKFlatTensorRoof
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatRestriction
-import Sheaf.RingTheory.KoszulProjectiveResolution
+import WeilConjectures.RingTheory.KoszulProjectiveResolution
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Local zero-differential tensor models

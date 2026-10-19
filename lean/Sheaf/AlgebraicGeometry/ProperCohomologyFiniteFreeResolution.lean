@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.QuasiIso
 
-import Sheaf.RingTheory.PseudoCoherentBoundedFiniteFreeModel
+import WeilConjectures.RingTheory.PseudoCoherentBoundedFiniteFreeModel
 import Sheaf.AlgebraicGeometry.AffineSheafResolutionOfRingModel
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import Mathlib.Algebra.Category.ModuleCat.Projective

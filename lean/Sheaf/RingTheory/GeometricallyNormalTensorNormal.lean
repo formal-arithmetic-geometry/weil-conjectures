@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Mathlib.RingTheory.TensorProduct.Maps
-import Sheaf.RingTheory.NormalRingIntegrallyClosedTotal
+import WeilConjectures.RingTheory.NormalRingIntegrallyClosedTotal
 import Mathlib.RingTheory.FiniteType
 import Mathlib.CategoryTheory.Limits.HasLimits
 import WeilConjectures.RingTheory.FilteredColimitNormalRing
@@ -19,7 +19,7 @@ import WeilConjectures.FieldTheory.GeometricallyReducedExtensionSeparable
 import WeilConjectures.FieldTheory.SeparableExtension
 import Sheaf.RingTheory.SmoothNormalRing
 import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
-import Sheaf.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
+import WeilConjectures.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
 import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.RingTheory.Flat.Basic
 import Mathlib.LinearAlgebra.Basis.VectorSpace

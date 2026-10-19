@@ -14,7 +14,7 @@ public import Mathlib.Algebra.Homology.Embedding.Extend
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 import WeilConjectures.RingTheory.KoszulGeneratorChainMap
-import all Sheaf.RingTheory.KoszulProjectiveResolution
+import all WeilConjectures.RingTheory.KoszulProjectiveResolution
 import Sheaf.RingTheory.KoszulPowerHomologyProZero
 import Sheaf.RingTheory.KoszulConeHomologyProZero
 import Mathlib.LinearAlgebra.ExteriorPower.Basis

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
-import Sheaf.RingTheory.StrictHenselizationTriples
+import WeilConjectures.RingTheory.StrictHenselizationTriples
 import Sheaf.AlgebraicGeometry.StrictHenselization
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 

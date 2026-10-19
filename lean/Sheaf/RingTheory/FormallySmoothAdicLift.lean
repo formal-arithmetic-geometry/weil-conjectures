@@ -16,7 +16,7 @@ import WeilConjectures.RingTheory.CompleteLocalMapRegularPresentation
 import WeilConjectures.RingTheory.CompleteLocalBaseChangeFiber
 import WeilConjectures.RingTheory.FormallySmoothAdicBaseChange
 import Sheaf.RingTheory.FormallySmoothAdicOfFlatClosedFiber
-import Sheaf.RingTheory.RegularPresentationFlatFiber
+import WeilConjectures.RingTheory.RegularPresentationFlatFiber
 
 /-!
 # Lifting formally smooth complete local algebras from a residue field

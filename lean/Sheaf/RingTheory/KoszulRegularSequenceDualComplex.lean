@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.RingTheory.KoszulConormalComparison
+public import WeilConjectures.RingTheory.KoszulConormalComparison
 public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
 public import Mathlib.Algebra.Category.ModuleCat.Ext.HasExt
@@ -13,10 +13,10 @@ public import Mathlib.RingTheory.Localization.Defs
 import Sheaf.RingTheory.KoszulCoefficientExtension
 import WeilConjectures.RingTheory.KoszulRegularFlatBaseChange
 import Mathlib.RingTheory.Flat.Localization
-import Sheaf.RingTheory.KoszulExtRoofRepresentatives
+import WeilConjectures.RingTheory.KoszulExtRoofRepresentatives
 import Sheaf.RingTheory.KoszulRoofComparisonIndependence
-import Sheaf.RingTheory.KoszulConormalBasis
-import Sheaf.RingTheory.KoszulConormalComparisonExistence
+import WeilConjectures.RingTheory.KoszulConormalBasis
+import WeilConjectures.RingTheory.KoszulConormalComparisonExistence
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.LinearAlgebra.Dual.Basis
 import Mathlib.Algebra.Homology.SingleHomology

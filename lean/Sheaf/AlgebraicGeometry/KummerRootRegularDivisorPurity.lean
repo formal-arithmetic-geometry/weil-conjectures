@@ -24,10 +24,10 @@ import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 import Mathlib.RingTheory.RingHom.Flat
 import Sheaf.RepresentationTheory.ProcyclicTwoTerm
 import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleRegularDivisorBaseChange
-import Sheaf.RingTheory.RootAlgebraRegularAtRoot
+import WeilConjectures.RingTheory.RootAlgebraRegularAtRoot
 import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayCoverEtale
 import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotient
-import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
+import WeilConjectures.RingTheory.StrictHenselizationFaithfullyFlat
 import Sheaf.RingTheory.StrictHenselizationRegular
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle

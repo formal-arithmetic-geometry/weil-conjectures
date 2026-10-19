@@ -5,14 +5,14 @@ Authors: SHEAF group A4
 -/
 module
 
-public import Sheaf.RingTheory.KoszulConormalComparison
+public import WeilConjectures.RingTheory.KoszulConormalComparison
 public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
 public import Mathlib.Algebra.Category.ModuleCat.Ext.HasExt
 
 import WeilConjectures.RingTheory.KoszulGeneratorChainMap
 import WeilConjectures.RingTheory.KoszulDerivedTopEvaluation
-import Sheaf.RingTheory.KoszulConormalBasis
+import WeilConjectures.RingTheory.KoszulConormalBasis
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.LinearAlgebra.Dual.Basis
 

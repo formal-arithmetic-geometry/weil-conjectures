@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.Algebra.Regular.SMul
 
-import Sheaf.RingTheory.RootAlgebraRegularAtRoot
+import WeilConjectures.RingTheory.RootAlgebraRegularAtRoot
 import Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootDomainEtale
 import WeilConjectures.AlgebraicGeometry.Morphisms.StrictLocalRootTorsorUnique
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs

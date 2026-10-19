@@ -5,7 +5,7 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.RingTheory.PopescuSolutionModulo
+public import WeilConjectures.RingTheory.PopescuSolutionModulo
 import WeilConjectures.RingTheory.ArtinianSeparableResidueLift
 import WeilConjectures.RingTheory.ArtinianTranscendentalLocalization
 

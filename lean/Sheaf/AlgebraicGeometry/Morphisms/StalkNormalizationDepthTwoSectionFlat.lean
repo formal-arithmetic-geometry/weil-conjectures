@@ -18,7 +18,7 @@ public import WeilConjectures.RingTheory.Depth
 
 import WeilConjectures.AlgebraicGeometry.Morphisms.NormalIntegralGenericHomFull
 import Sheaf.AlgebraicGeometry.Morphisms.GenericFibreActionExtension
-import Sheaf.RingTheory.NormalLocalDepthTwo
+import WeilConjectures.RingTheory.NormalLocalDepthTwo
 import WeilConjectures.RingTheory.FlatLocalDepthFormula
 import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationSplitFormalTest

@@ -33,7 +33,7 @@ import Sheaf.RingTheory.EtaleColimitNormalLocalDomain
 import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
 import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct
 import WeilConjectures.RingTheory.RegularRingSmoothAscent
-import Sheaf.RingTheory.StrictHenselizationTriples
+import WeilConjectures.RingTheory.StrictHenselizationTriples
 import Sheaf.AlgebraicGeometry.FinitePresentationOfFiniteLocallyNoetherian
 import Sheaf.AlgebraicGeometry.SncRootPuncturedTorsorSplitting
 

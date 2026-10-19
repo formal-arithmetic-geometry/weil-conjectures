@@ -101,13 +101,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.PopescuAppendFlatParameters",
-  "file": "lean/Sheaf/RingTheory/PopescuAppendFlatParameters.lean",
+  "module": "WeilConjectures.RingTheory.PopescuAppendFlatParameters",
+  "file": "lean/WeilConjectures/RingTheory/PopescuAppendFlatParameters.lean",
   "declaration": "Algebra.exists_popescu_append_flat_parameters",
   "statement": "theorem exists_popescu_append_flat_parameters\n    (k : Type u) (Λ : Type v) [Field k] [CommRing Λ] [Algebra k Λ]\n    [IsNoetherianRing Λ] (p : ℕ) [CharP k p] (hp : 0 < p)\n    (hreg : IsGeometricallyRegular k Λ) (q : Ideal Λ) [q.IsPrime]\n    (F : Type w) [Field F] [Algebra k F] [EssFiniteType k F]\n    (ι : F →ₐ[k] q.ResidueField)\n    (t r : ℕ) (xs : Fin t → Λ) (ys : Fin r → Λ) (a : Fin t → F)\n    (ha : ∀ j, ι (a j) = IsLocalRing.residue (Localization.AtPrime q)\n      (algebraMap Λ (Localization.AtPrime q) (xs j)))\n    (b : Module.Basis (Fin t) F (KaehlerDifferential k F))\n    (hb : ∀ j, b j = KaehlerDifferential.D k F (a j))\n    (hyq : ∀ i, ys i ∈ q)\n    (hys : Ideal.span (Set.range (fun i ↦ algebraMap Λ (Localization.AtPrime q) (ys i))) =\n      q.map (algebraMap Λ (Localization.AtPrime q))) :\n    ∃ (e : ℕ) (s : Fin e → Fin r),\n      let φ : MvPolynomial (Fin (t + e)) k →ₐ[k] Λ :=\n        MvPolynomial.aeval (Fin.addCases xs (fun i ↦ ys (s i)))\n      ∃ ψ : Localization.AtPrime (q.comap φ.toRingHom) →+* Localization.AtPrime q,\n        ψ.comp (algebraMap (MvPolynomial (Fin (t + e)) k)\n            (Localization.AtPrime (q.comap φ.toRingHom))) =\n          (algebraMap Λ (Localization.AtPrime q)).comp φ.toRingHom ∧\n        q.map (algebraMap Λ (Localization.AtPrime q)) =\n          (q.comap φ.toRingHom).map\n            ((algebraMap Λ (Localization.AtPrime q)).comp φ.toRingHom) ∧\n        ψ.Flat",
   "branch": "sheaf-dag",
   "by": "J1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.PopescuAppendFlatParameters; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

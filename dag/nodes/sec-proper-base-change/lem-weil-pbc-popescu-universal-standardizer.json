@@ -134,13 +134,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.PopescuUniversalStandardizer",
-  "file": "lean/Sheaf/RingTheory/PopescuUniversalStandardizer.lean",
+  "module": "WeilConjectures.RingTheory.PopescuUniversalStandardizer",
+  "file": "lean/WeilConjectures/RingTheory/PopescuUniversalStandardizer.lean",
   "declaration": "Algebra.exists_popescu_universal_standardizer",
   "statement": "theorem exists_popescu_universal_standardizer\n    {k : Type u} {A : Type v} {Λ : Type w}\n    [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ]\n    [FinitePresentation k A] (d N : ℕ) (hN : 0 < N) :\n    let S := MvPolynomial (Fin d) k\n    ∃ (s : ℕ) (a : Fin s → A), Ideal.span (Set.range a) = singularIdeal k A ∧\n      ∃ (B : Type (max u v)) (_ : CommRing B) (_ : Algebra k B)\n        (_ : Algebra A B) (_ : IsScalarTower k A B)\n        (_ : Algebra S B) (_ : IsScalarTower k S B)\n        (P : Presentation A B (Fin d ⊕ (Fin d × Fin s)) (Fin d)),\n        (∀ i, P.val (Sum.inl i) = algebraMap S B (MvPolynomial.X i)) ∧\n        (∀ i : Fin d, P.relation i =\n          ((MvPolynomial.X (Sum.inl i) :\n            MvPolynomial (Fin d ⊕ (Fin d × Fin s)) A) ^ (2 * N) -\n            ∑ j : Fin s, MvPolynomial.X (Sum.inr (i, j)) * MvPolynomial.C (a j) :\n              MvPolynomial (Fin d ⊕ (Fin d × Fin s)) A)) ∧\n      ∃ (C₀ : Type (max u v)) (_ : CommRing C₀) (_ : Algebra k C₀)\n        (_ : Algebra S C₀) (_ : IsScalarTower k S C₀)\n        (_ : FinitePresentation S C₀)\n        (β₀ : A →ₐ[k] C₀) (ρ : C₀ →ₐ[S] B) (c : ℕ),\n        0 < c ∧ (ρ.restrictScalars k).comp β₀ = IsScalarTower.toAlgHom k A B ∧\n        ∀ (R : Type u) [CommRing R] [Algebra k R] [Algebra S R]\n          [IsScalarTower k S R] [Algebra R Λ] [IsScalarTower k R Λ]\n          [Algebra S Λ] [IsScalarTower S R Λ] [IsScalarTower k S Λ]\n          (h : B →ₐ[S] Λ),\n          let C := R ⊗[S] C₀\n          let γ := AlgHom.liftEquiv S R C₀ Λ (h.comp ρ)\n          popescuIdeal ((h.restrictScalars k).comp (IsScalarTower.toAlgHom k A B)) ≤\n              popescuIdeal γ ∧\n            ∀ x : R, (x = 0 ∨ ∃ i : Fin d,\n              x = algebraMap S R (MvPolynomial.X i ^ c)) →\n              IsStrictlyStandardElement (R := R) (algebraMap R C x)",
   "branch": "sheaf-dag",
   "by": "B3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.PopescuUniversalStandardizer; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

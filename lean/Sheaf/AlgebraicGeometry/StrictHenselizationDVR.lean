@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 import Sheaf.RingTheory.StrictHenselizationDimension
 import Sheaf.RingTheory.StrictHenselizationNoetherian
 import Sheaf.RingTheory.StrictHenselizationRegular
-import Sheaf.RingTheory.StrictHenselizationTriples
+import WeilConjectures.RingTheory.StrictHenselizationTriples
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
 

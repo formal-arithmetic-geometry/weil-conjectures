@@ -16,7 +16,7 @@ import Sheaf.AlgebraicGeometry.LogRegularCompletedChart
 import Sheaf.RingTheory.LogRegularSaturationNormality
 import WeilConjectures.RingTheory.CompletionDimension
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedImmersionCartesian
-import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
+import WeilConjectures.RingTheory.StrictHenselizationFaithfullyFlat
 import Sheaf.AlgebraicGeometry.IndEtaleStrictLocalInvariance
 import Sheaf.AlgebraicGeometry.FSLogSmoothEtale
 import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup

@@ -7,11 +7,11 @@ module
 
 public import WeilConjectures.RingTheory.SerreConditions
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Sheaf.RingTheory.NormalLocalDepthTwo
+import WeilConjectures.RingTheory.NormalLocalDepthTwo
 import WeilConjectures.RingTheory.IntegralTotalFractionLocalDenominator
-import Sheaf.RingTheory.SerreS2TotalFractionMembership
-import Sheaf.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
-import Sheaf.RingTheory.SerreCriterionReduced
+import WeilConjectures.RingTheory.SerreS2TotalFractionMembership
+import WeilConjectures.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
+import WeilConjectures.RingTheory.SerreCriterionReduced
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 

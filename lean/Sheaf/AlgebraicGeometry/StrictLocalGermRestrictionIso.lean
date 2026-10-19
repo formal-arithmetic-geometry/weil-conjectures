@@ -11,7 +11,7 @@ import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 import Sheaf.AlgebraicGeometry.StrictHenselization
-import Sheaf.RingTheory.StrictHenselizationTriples
+import WeilConjectures.RingTheory.StrictHenselizationTriples
 
 /-! # The strict-local germ restriction is an isomorphism
 

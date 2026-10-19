@@ -20,7 +20,7 @@ import WeilConjectures.RingTheory.MvPowerSeriesFlat
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationBoundaryDimensionTwo
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationNormalPart
 import WeilConjectures.RingTheory.FlatLocalDepthFormula
-import Sheaf.RingTheory.NormalLocalDepthTwo
+import WeilConjectures.RingTheory.NormalLocalDepthTwo
 
 /-! # Formal test: BoundaryDepths -/
 

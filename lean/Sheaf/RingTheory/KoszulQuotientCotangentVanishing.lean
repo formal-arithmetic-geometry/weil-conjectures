@@ -9,7 +9,7 @@ public import Sheaf.RingTheory.CotangentResolutionCoherence
 public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
-import Sheaf.RingTheory.KoszulConormalBasis
+import WeilConjectures.RingTheory.KoszulConormalBasis
 import Sheaf.RingTheory.KoszulDerivedQuotient
 import Sheaf.RingTheory.CotangentFlatBaseChange
 

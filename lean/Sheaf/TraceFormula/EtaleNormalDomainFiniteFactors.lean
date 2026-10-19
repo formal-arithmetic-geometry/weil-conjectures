@@ -4,7 +4,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.Algebra.Algebra.Pi
 import Sheaf.RingTheory.EtaleNormalRing
 import WeilConjectures.RingTheory.LocalizationPrimeResidueFieldIso
-import Sheaf.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
+import WeilConjectures.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
 
 /-!
 # Finite normal-domain factors of an étale algebra over a normal domain

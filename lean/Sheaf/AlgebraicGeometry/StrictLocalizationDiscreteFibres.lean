@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.ResidueField
 import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 import WeilConjectures.RingTheory.EtaleResidueTriplesLocalizedStrictHenselization
-import Sheaf.RingTheory.StrictHenselizationTriples
+import WeilConjectures.RingTheory.StrictHenselizationTriples
 import Sheaf.RingTheory.StrictHenselizationPresentationIn
 import Mathlib.RingTheory.Localization.Submodule
 import Sheaf.RingTheory.StrictHenselizationNoetherian
@@ -18,7 +18,7 @@ import WeilConjectures.RingTheory.FilteredEtaleFiberStructure
 import Sheaf.AlgebraicGeometry.ZeroDimensionalNoetherianFiniteDiscrete
 import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
+import WeilConjectures.RingTheory.StrictHenselizationFaithfullyFlat
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Sheaf.AlgebraicGeometry.StrictHenselization
 

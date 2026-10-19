@@ -10,7 +10,7 @@ public import WeilConjectures.RingTheory.CohenRing
 public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 import WeilConjectures.RingTheory.FormallySmoothAdicSmallKernelCriterion
-import Sheaf.RingTheory.PowerSeriesParameterPreservingRingLift
+import WeilConjectures.RingTheory.PowerSeriesParameterPreservingRingLift
 import Sheaf.RingTheory.ClosedFiberDefectDerivationExtension
 
 /-! # Formal smoothness of parameter-preserving power-series maps

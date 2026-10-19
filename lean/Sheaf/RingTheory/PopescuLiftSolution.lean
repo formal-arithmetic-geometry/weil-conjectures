@@ -5,11 +5,11 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.RingTheory.PopescuResolution
+public import WeilConjectures.RingTheory.PopescuResolution
 public import WeilConjectures.RingTheory.StrictlyStandardElement
-import Sheaf.RingTheory.PopescuLiftInduction
+import WeilConjectures.RingTheory.PopescuLiftInduction
 import Sheaf.RingTheory.PopescuLiftOne
-import Sheaf.RingTheory.PopescuLiftSuccessor
+import WeilConjectures.RingTheory.PopescuLiftSuccessor
 
 /-!
 # Lifting a Popescu resolution modulo eighth powers

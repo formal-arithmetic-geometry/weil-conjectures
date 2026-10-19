@@ -20,7 +20,7 @@ import Sheaf.AlgebraicGeometry.EtaleSupportedKernelAdjunction
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 import Sheaf.AlgebraicGeometry.EtaleSupportedSections
 import Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison
-import Sheaf.RingTheory.StrictHenselizationTriples
+import WeilConjectures.RingTheory.StrictHenselizationTriples
 import Sheaf.RingTheory.StrictHenselizationNoetherian
 import Sheaf.AlgebraicGeometry.IndEtaleClosedSupportBaseChange
 import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk

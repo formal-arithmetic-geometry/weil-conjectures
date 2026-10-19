@@ -22,7 +22,7 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import WeilConjectures.RingTheory.PairHenselization
 import WeilConjectures.RingTheory.HenselizationUniversalProperty
 import WeilConjectures.RingTheory.HenselianFactorizationCriterion
-import Sheaf.RingTheory.PairHenselizationNoetherianCompletion
+import WeilConjectures.RingTheory.PairHenselizationNoetherianCompletion
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 import WeilConjectures.RingTheory.CompletionDimension
 import Sheaf.TraceFormula.HenselizationPrimeIndEtale

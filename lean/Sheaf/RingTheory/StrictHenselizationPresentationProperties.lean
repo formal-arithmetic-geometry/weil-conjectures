@@ -6,7 +6,7 @@ module
 
 public import Sheaf.RingTheory.StrictHenselizationPresentation
 public import WeilConjectures.Mathlib.RingTheory.Henselian
-import Sheaf.RingTheory.StrictHenselizationTriples
+import WeilConjectures.RingTheory.StrictHenselizationTriples
 import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
 import WeilConjectures.RingTheory.EtaleResidueTriplesFiltered
 

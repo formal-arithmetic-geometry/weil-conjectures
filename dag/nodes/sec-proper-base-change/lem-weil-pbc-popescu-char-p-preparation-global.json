@@ -122,13 +122,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.PopescuCharPPreparationGlobal",
-  "file": "lean/Sheaf/RingTheory/PopescuCharPPreparationGlobal.lean",
+  "module": "WeilConjectures.RingTheory.PopescuCharPPreparationGlobal",
+  "file": "lean/WeilConjectures/RingTheory/PopescuCharPPreparationGlobal.lean",
   "declaration": "Algebra.exists_popescu_char_p_preparation_global",
   "statement": "theorem exists_popescu_char_p_preparation_global\n    {k : Type u} {A : Type v} {Λ : Type w}\n    [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ]\n    [FinitePresentation k A] [IsNoetherianRing Λ]\n    (p : ℕ) [CharP k p] (hp : 0 < p)\n    (α : A →ₐ[k] Λ) (q : PrimeSpectrum Λ)\n    (hreg : IsGeometricallyRegular k Λ)\n    (N : ℕ) (hN : 0 < N)\n    (hpower : IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal) ^ N ≤\n      (Ideal.map α.toRingHom (singularIdeal k A)).map\n        (algebraMap Λ (Localization.AtPrime q.asIdeal))) :\n    ∃ (m : ℕ) (_ : Algebra (MvPolynomial (Fin m) k) Λ)\n      (_ : IsScalarTower k (MvPolynomial (Fin m) k) Λ)\n      (C : Type (max u v)) (_ : CommRing C) (_ : Algebra k C)\n      (_ : Algebra (MvPolynomial (Fin m) k) C)\n      (_ : IsScalarTower k (MvPolynomial (Fin m) k) C)\n      (_ : FinitePresentation (MvPolynomial (Fin m) k) C)\n      (β : A →ₐ[k] C) (γ : C →ₐ[MvPolynomial (Fin m) k] Λ),\n      (γ.restrictScalars k).comp β = α ∧ popescuIdeal α ≤ popescuIdeal γ ∧\n      ∃ (r : ℕ) (π : Fin r → MvPolynomial (Fin m) k),\n        1 ≤ r ∧\n        (∀ i, algebraMap (MvPolynomial (Fin m) k) Λ (π i) ∈ q.asIdeal) ∧\n        (∀ (i : Fin r)\n          (x : MvPolynomial (Fin m) k ⧸ Ideal.span\n            {y | ∃ j : Fin r, j.val < i.val ∧ y = π j ^ 8}),\n          π i • x = 0 ↔ π i ^ 2 • x = 0) ∧\n        (∀ (i : Fin r)\n          (x : Λ ⧸ Ideal.span\n            {y | ∃ j : Fin r, j.val < i.val ∧\n              y = algebraMap (MvPolynomial (Fin m) k) Λ (π j) ^ 8}),\n          π i • x = 0 ↔ π i ^ 2 • x = 0) ∧\n        (∀ i, IsStrictlyStandardElement\n          (R := MvPolynomial (Fin m) k) (algebraMap (MvPolynomial (Fin m) k) C (π i))) ∧\n    let R := MvPolynomial (Fin m) k\n    let J := Ideal.span (Set.range (fun i : Fin r ↦ π i ^ 8))\n    let Q := Localization.AtPrime (q.asIdeal.under R)\n    let L := Localization.AtPrime q.asIdeal\n    letI := Localization.AtPrime.algebraOfLiesOver (q.asIdeal.under R) q.asIdeal\n    let JQ := J.map (algebraMap R Q)\n    let JL := (J.map (algebraMap R Λ)).map (algebraMap Λ L)\n    ∃ (n : ℕ), 0 < n ∧ IsLocalRing.maximalIdeal L ^ n ≤ JL ∧\n      ∃ (I₀ : Ideal R) (K : Ideal L),\n        I₀.map (algebraMap R Q) ≤ JQ ∧ K ≤ JL ∧\n        (I₀.map (algebraMap R Q)).map (algebraMap Q L) ≤ K ∧\n        ∃ (t : ℕ) (D' : Type (max u v)) (_ : CommRing D')\n          (_ : IsLocalRing D') (_ : IsArtinianRing D'),\n          let E := MvPolynomial (Fin t) D'\n          ∃ (_ : Algebra R E) (_ : Algebra (R ⧸ I₀) E)\n            (_ : IsScalarTower R (R ⧸ I₀) E),\n            EssentiallySmooth (R ⧸ I₀) E ∧\n            ∃ (a : C →ₐ[R] E) (b : E →ₐ[R] L ⧸ K),\n              b.comp a = (Ideal.Quotient.mkₐ R K).comp\n                ((IsScalarTower.toAlgHom R Λ L).comp γ)",
   "branch": "sheaf-dag",
   "by": "P1",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.PopescuCharPPreparationGlobal; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

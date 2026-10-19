@@ -17,7 +17,7 @@ import Sheaf.RingTheory.IntegralExtensionDimension
 import WeilConjectures.RingTheory.NagataDomainN2
 import WeilConjectures.RingTheory.NagataLocalization
 import Sheaf.RingTheory.NormalDomainPrincipalQuotientAssociatedHeight
-import Sheaf.RingTheory.RegularLocalDimOneIffNormal
+import WeilConjectures.RingTheory.RegularLocalDimOneIffNormal
 
 /-!
 # Reduced completion of a local Nagata domain

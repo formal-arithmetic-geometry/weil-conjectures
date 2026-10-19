@@ -26,7 +26,7 @@ import Sheaf.AlgebraicGeometry.IndEtaleStrictLocalInvariance
 import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct
 import Sheaf.Paper.StrictHenselizationFunctoriality
-import Sheaf.RingTheory.StrictHenselizationTriples
+import WeilConjectures.RingTheory.StrictHenselizationTriples
 import Sheaf.RingTheory.StrictHenselizationFiniteLifts
 
 import Mathlib.FieldTheory.PurelyInseparable.Basic

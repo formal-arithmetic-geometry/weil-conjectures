@@ -17,7 +17,7 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlat
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFlatEtale
-import Sheaf.RingTheory.NormalLocalDepthTwo
+import WeilConjectures.RingTheory.NormalLocalDepthTwo
 
 /-!
 # Source etaleness over the local section in dimension at least two

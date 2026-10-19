@@ -17,7 +17,7 @@ import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import Mathlib.FieldTheory.SeparableClosure
 import Mathlib.RingTheory.Etale.Field
 import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
-import Sheaf.RingTheory.StrictHenselizationTriples
+import WeilConjectures.RingTheory.StrictHenselizationTriples
 import Sheaf.Paper.StrictHenselizationFunctoriality
 import Sheaf.RingTheory.EtaleColimitNormalLocalDomain
 import Sheaf.RingTheory.IndEtaleStability

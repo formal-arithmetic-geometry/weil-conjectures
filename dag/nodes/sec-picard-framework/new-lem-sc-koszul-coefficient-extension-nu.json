@@ -135,13 +135,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.KoszulCoefficientExtensionNu",
-  "file": "lean/Sheaf/RingTheory/KoszulCoefficientExtensionNu.lean",
+  "module": "WeilConjectures.RingTheory.KoszulCoefficientExtensionNu",
+  "file": "lean/WeilConjectures/RingTheory/KoszulCoefficientExtensionNu.lean",
   "declaration": "ExteriorAlgebra.exists_koszul_coefficient_extension_nu",
   "statement": "theorem exists_koszul_coefficient_extension_nu\n    (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A)\n    (hreg : RingTheory.Sequence.IsKoszulRegular f) (hf : Ideal.span (Set.range f) = I)\n    (T : Submonoid A) (S : Type u) [CommRing S] [Algebra A S]\n    [IsLocalization T S]\n    (hs : Ideal.span (Set.range (algebraMap A S ∘ f)) = I.map (algebraMap A S))\n    (q : (A ⧸ I) →+* (S ⧸ I.map (algebraMap A S)))\n    (hq : ∀ b : A, q (Ideal.Quotient.mk I b) =\n      Ideal.Quotient.mk (I.map (algebraMap A S)) (algebraMap A S b)) :\n  ∃ (ν : koszulNormalDeterminant A I r →ₗ[A]\n    (ModuleCat.restrictScalars (algebraMap A S)).obj\n      (koszulNormalDeterminant S (I.map (algebraMap A S)) r)),\n  ∀ (w : koszulNormalDeterminant A I r) (v : Fin r → (Fin r →₀ A)),\n    exteriorPower.pairingDual (S ⧸ I.map (algebraMap A S))\n      (I.map (algebraMap A S)).Cotangent r (ν w)\n      (exteriorPower.ιMulti (S ⧸ I.map (algebraMap A S)) r\n        (fun i ↦ koszulConormalVector S (I.map (algebraMap A S)) r\n          (algebraMap A S ∘ f) hs\n          ((v i).mapRange (algebraMap A S) (map_zero _)))) =\n    q (exteriorPower.pairingDual (A ⧸ I) I.Cotangent r w\n      (exteriorPower.ιMulti (A ⧸ I) r\n        (fun i ↦ koszulConormalVector A I r f hf (v i))))",
   "branch": "sheaf-dag",
   "by": "B4",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.KoszulCoefficientExtensionNu; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

@@ -16,7 +16,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 import Mathlib.AlgebraicGeometry.FunctionField
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
+import WeilConjectures.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
 import Sheaf.AlgebraicGeometry.SteinFactorizationAffine
 
 /-!

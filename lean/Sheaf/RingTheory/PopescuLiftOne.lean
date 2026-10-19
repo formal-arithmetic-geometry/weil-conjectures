@@ -5,13 +5,13 @@ Authors: SHEAF groups X3, Q1
 -/
 module
 
-public import Sheaf.RingTheory.PopescuLiftInduction
+public import WeilConjectures.RingTheory.PopescuLiftInduction
 import Sheaf.RingTheory.PopescuDesingularizeLiftingApply
-import Sheaf.RingTheory.PopescuIdealCompEquiv
+import WeilConjectures.RingTheory.PopescuIdealCompEquiv
 import WeilConjectures.RingTheory.SingularIdealMapEquiv
 import Mathlib.RingTheory.TensorProduct.Quotient
 import Mathlib.RingTheory.Localization.BaseChange
-import Sheaf.RingTheory.PopescuResolution
+import WeilConjectures.RingTheory.PopescuResolution
 import WeilConjectures.RingTheory.SingularIdeal
 import WeilConjectures.RingTheory.StrictlyStandardElement
 

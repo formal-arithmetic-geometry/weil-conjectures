@@ -10,9 +10,9 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 import WeilConjectures.RingTheory.Etale.LocalDimension
 import WeilConjectures.RingTheory.FilteredColimitPrimeChainDimension
 import WeilConjectures.RingTheory.RingKrullDimLeOfFaithfullyFlatOfIsLocalHom
-import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
-import Sheaf.RingTheory.StrictHenselizationTriples
-import Sheaf.RingTheory.StrictHenselizationTriplesPresentation
+import WeilConjectures.RingTheory.StrictHenselizationFaithfullyFlat
+import WeilConjectures.RingTheory.StrictHenselizationTriples
+import WeilConjectures.RingTheory.StrictHenselizationTriplesPresentation
 import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 

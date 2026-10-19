@@ -150,13 +150,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.PairHenselizationFiberProjection",
-  "file": "lean/Sheaf/RingTheory/PairHenselizationFiberProjection.lean",
+  "module": "WeilConjectures.RingTheory.PairHenselizationFiberProjection",
+  "file": "lean/WeilConjectures/RingTheory/PairHenselizationFiberProjection.lean",
   "declaration": "RingTheory.pair_henselization_fiber_projection",
   "statement": "theorem pair_henselization_fiber_projection\n    (A : Type u) [CommRing A] (I : Ideal A)\n    (c : Cocone (ObjectProperty.ι\n      (fun D : Under (CommRingCat.of A) ↦\n        AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map D.hom) ∧\n          Function.Bijective (Ideal.quotientMap (I.map D.hom.hom) D.hom.hom\n            (Ideal.le_comap_map)))))\n    (hc : IsColimit c) [IsNoetherianRing c.pt.right]\n    (C : Type u) [CommRing C] (g : c.pt.right →+* C)\n    (q : Ideal c.pt.right) [q.IsPrime] :\n    letI := c.pt.hom.hom.toAlgebra\n    letI := g.toAlgebra\n    letI := (g.comp c.pt.hom.hom).toAlgebra\n    letI : IsScalarTower A c.pt.right C :=\n      IsScalarTower.of_algebraMap_eq fun _ ↦ rfl\n    let p := q.comap c.pt.hom.hom\n    ∀ (ρ : p.ResidueField →ₐ[A] q.ResidueField),\n      ρ = Ideal.ResidueField.mapₐ p q (Algebra.ofId A c.pt.right) rfl →\n    ∀ (φ : p.Fiber C →+* q.Fiber C),\n      (∀ (x : p.ResidueField) (y : C),\n        φ (TensorProduct.tmul A x y) = TensorProduct.tmul c.pt.right (ρ x) y) →\n      ∃ e : p.Fiber C, IsIdempotentElem e ∧ φ e = 1 ∧\n        Function.Surjective φ ∧ ∀ x, φ x = 0 → e * x = 0",
   "branch": "sheaf-dag",
   "by": "K3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.PairHenselizationFiberProjection; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import Sheaf.RingTheory.WeaklyEtaleField
 import Sheaf.RingTheory.NormalOfFlatNormalFibers
-import Sheaf.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
+import WeilConjectures.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
 import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 import Mathlib.RingTheory.Spectrum.Maximal.Localization
 import Mathlib.RingTheory.LocalProperties.Reduced

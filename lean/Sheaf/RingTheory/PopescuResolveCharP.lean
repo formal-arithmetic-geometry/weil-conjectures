@@ -6,9 +6,9 @@ Authors: SHEAF group E1
 module
 
 public import WeilConjectures.RingTheory.GRing
-public import Sheaf.RingTheory.PopescuResolution
-import Sheaf.RingTheory.PopescuCharPPreparation
-import Sheaf.RingTheory.PopescuDelocalizeHeightZero
+public import WeilConjectures.RingTheory.PopescuResolution
+import WeilConjectures.RingTheory.PopescuCharPPreparation
+import WeilConjectures.RingTheory.PopescuDelocalizeHeightZero
 import Sheaf.RingTheory.PopescuLiftSolution
 import WeilConjectures.RingTheory.FactorsThroughSmooth
 

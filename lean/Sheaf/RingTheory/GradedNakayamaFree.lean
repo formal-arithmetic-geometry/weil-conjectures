@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.Algebra.DirectSum.Decomposition
 public import Mathlib.LinearAlgebra.Basis.Defs
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Sheaf.RingTheory.MinimalPresentationTor
+import WeilConjectures.RingTheory.MinimalPresentationTor
 import Sheaf.RingTheory.GradedKernelFinite
 import Sheaf.RingTheory.GradedNakayamaGeneration
 import Sheaf.RingTheory.MinimalGradedPresentationExists

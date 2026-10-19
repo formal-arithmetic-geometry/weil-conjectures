@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.RingTheory.StablyFreeComplexLift
+public import WeilConjectures.RingTheory.StablyFreeComplexLift
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 import WeilConjectures.RingTheory.RingPseudoCoherent

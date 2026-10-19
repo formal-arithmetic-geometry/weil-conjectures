@@ -23,7 +23,7 @@ import WeilConjectures.RingTheory.FilteredColimitHenselianPair
 import Sheaf.RingTheory.IndEtaleUniverseTransport
 import Sheaf.TraceFormula.HenselizationPrimeIndEtale
 import Sheaf.RingTheory.IndEtaleStability
-import Sheaf.RingTheory.StrictHenselizationTriples
+import WeilConjectures.RingTheory.StrictHenselizationTriples
 import WeilConjectures.RingTheory.EtaleResidueTriplesStrictHenselization
 import WeilConjectures.RingTheory.MapIntoHenselianColimit
 import Mathlib.FieldTheory.SeparableClosure

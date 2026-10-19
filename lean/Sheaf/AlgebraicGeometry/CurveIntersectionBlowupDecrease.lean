@@ -15,7 +15,7 @@ import WeilConjectures.Blowup.Affine.Principalization
 import WeilConjectures.Blowup.Principalization
 import WeilConjectures.Compactification.StrictTransformBlowup
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
-import Sheaf.RingTheory.RegularLocalDimOneIffNormal
+import WeilConjectures.RingTheory.RegularLocalDimOneIffNormal
 import Mathlib.RingTheory.DiscreteValuationRing.Basic
 import Mathlib.RingTheory.OrderOfVanishing.Basic
 import WeilConjectures.AlgebraicGeometry.Regular

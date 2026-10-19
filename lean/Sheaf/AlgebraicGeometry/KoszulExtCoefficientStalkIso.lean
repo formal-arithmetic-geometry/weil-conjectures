@@ -16,7 +16,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
 import Sheaf.AlgebraicGeometry.KoszulExtCoefficientStalkModel
-import Sheaf.RingTheory.KoszulCoefficientTopHomology
+import WeilConjectures.RingTheory.KoszulCoefficientTopHomology
 
 /-! # Coefficient comparison for scalar Koszul Ext
 

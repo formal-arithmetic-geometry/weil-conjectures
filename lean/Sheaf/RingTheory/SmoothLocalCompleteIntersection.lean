@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.Smooth.Basic
 public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 import Mathlib.RingTheory.RegularLocalRing.Polynomial
-import Sheaf.RingTheory.LCIRegularSequenceGlobalCompleteIntersection
+import WeilConjectures.RingTheory.LCIRegularSequenceGlobalCompleteIntersection
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import WeilConjectures.RingTheory.RegularLocalQuotientKernelParameters
 import Sheaf.RingTheory.SmoothOverFieldRegularLocal

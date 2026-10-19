@@ -32,7 +32,7 @@ import Mathlib.RingTheory.Finiteness.Defs
 import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.Paper.FiniteMittagLeffler
 import Sheaf.CategoryTheory.Triangulated.MilnorSequence
-import Sheaf.RingTheory.PseudoCoherentBoundedFiniteFreeModel
+import WeilConjectures.RingTheory.PseudoCoherentBoundedFiniteFreeModel
 import Sheaf.Paper.CompletedConstantFiniteComplexRealization
 import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
 import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification

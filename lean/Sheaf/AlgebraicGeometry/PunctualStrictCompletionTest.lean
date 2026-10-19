@@ -24,7 +24,7 @@ public import Mathlib.RingTheory.AdicCompletion.LocalRing
 public import Mathlib.FieldTheory.SeparableClosure
 
 import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
-import Sheaf.RingTheory.StrictHenselizationTriples
+import WeilConjectures.RingTheory.StrictHenselizationTriples
 import Sheaf.RingTheory.StrictHenselizationNoetherian
 import Sheaf.RingTheory.StrictHenselizationRegular
 import Sheaf.RingTheory.StrictHenselizationDimension

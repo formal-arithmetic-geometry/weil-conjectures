@@ -20,7 +20,7 @@ import Sheaf.Algebra.Homology.PerfectRingHomTensorDegrees
 import Sheaf.Algebra.Homology.PerfectRingHomTensorDifferential
 import Sheaf.Algebra.Homology.ProjectiveHomEvaluationModel
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Sheaf.RingTheory.KoszulComplementaryEquivalences
+import WeilConjectures.RingTheory.KoszulComplementaryEquivalences
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Sheaf.TraceFormula.AlgebraicShriekCalculus
 import Sheaf.TraceFormula.FlatPolynomialQuotientPerfect

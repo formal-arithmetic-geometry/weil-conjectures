@@ -18,7 +18,7 @@ import Sheaf.TraceFormula.HenselizationPrimeIndEtale
 import Sheaf.RingTheory.IndEtaleUniverseTransport
 import Sheaf.RingTheory.EtaleColimitNormalLocalDomain
 import Sheaf.RingTheory.HenselianFiniteEtaleEquivalence
-import Sheaf.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
+import WeilConjectures.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
 import Sheaf.RingTheory.ValuationRingNormal
 import Sheaf.RingTheory.HenselianFiniteGaloisLift
 import Sheaf.RingTheory.StrictHenselizationFiniteLifts

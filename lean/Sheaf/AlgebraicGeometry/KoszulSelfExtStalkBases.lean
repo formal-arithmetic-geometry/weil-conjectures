@@ -21,7 +21,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Sheaf.AlgebraicGeometry.KoszulSelfExtPullbackLocalFrame
-import Sheaf.RingTheory.KoszulConormalBasis
+import WeilConjectures.RingTheory.KoszulConormalBasis
 import Sheaf.AlgebraicGeometry.AffineConormalFrame
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafLocalFreeComparison
 

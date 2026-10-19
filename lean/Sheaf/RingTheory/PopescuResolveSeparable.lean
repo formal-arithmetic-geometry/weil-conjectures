@@ -5,19 +5,19 @@ Authors: SHEAF group G1
 -/
 module
 
-public import Sheaf.RingTheory.PopescuResolution
+public import WeilConjectures.RingTheory.PopescuResolution
 public import WeilConjectures.FieldTheory.SeparableExtension
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 import Mathlib.RingTheory.Ideal.MinimalPrime.Localization
 import Mathlib.RingTheory.Finiteness.Ideal
 import Mathlib.RingTheory.MvPolynomial.Ideal
-import Sheaf.RingTheory.PopescuDelocalizeHeightZero
+import WeilConjectures.RingTheory.PopescuDelocalizeHeightZero
 import Sheaf.RingTheory.PopescuLiftSolution
-import Sheaf.RingTheory.PopescuResolutionSmoothBase
-import Sheaf.RingTheory.PopescuSeparableHeightZeroLocal
-import Sheaf.RingTheory.PopescuSeparableParameterQuotient
-import Sheaf.RingTheory.PopescuSeparablePreparation
+import WeilConjectures.RingTheory.PopescuResolutionSmoothBase
+import WeilConjectures.RingTheory.PopescuSeparableHeightZeroLocal
+import WeilConjectures.RingTheory.PopescuSeparableParameterQuotient
+import WeilConjectures.RingTheory.PopescuSeparablePreparation
 
 /-!
 # Resolving Popescu's local problem with separable residue field

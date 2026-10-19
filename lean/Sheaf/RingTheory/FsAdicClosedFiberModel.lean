@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import WeilConjectures.RingTheory.FormallySmoothAdic
 import WeilConjectures.RingTheory.CompleteLocalQuotient
-import Sheaf.RingTheory.ResidueFormallySmoothTransport
+import WeilConjectures.RingTheory.ResidueFormallySmoothTransport
 import Sheaf.RingTheory.ModelOfResidueSmooth
 
 /-!

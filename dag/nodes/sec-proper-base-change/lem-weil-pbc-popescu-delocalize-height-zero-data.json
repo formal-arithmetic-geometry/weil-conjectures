@@ -108,13 +108,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.PopescuDelocalizeHeightZeroData",
-  "file": "lean/Sheaf/RingTheory/PopescuDelocalizeHeightZeroData.lean",
+  "module": "WeilConjectures.RingTheory.PopescuDelocalizeHeightZeroData",
+  "file": "lean/WeilConjectures/RingTheory/PopescuDelocalizeHeightZeroData.lean",
   "declaration": "Algebra.exists_popescu_resolution_data_of_local_height_zero",
   "statement": "theorem exists_popescu_resolution_data_of_local_height_zero\n    {R : Type u} {A : Type v} {Λ : Type t}\n    [CommRing R] [CommRing A] [CommRing Λ]\n    [Algebra R A] [Algebra R Λ] [IsNoetherianRing R] [FinitePresentation R A]\n    (α : A →ₐ[R] Λ) (q : PrimeSpectrum Λ)\n    (hminimal : q.asIdeal ∈ (popescuIdeal α).minimalPrimes)\n    (hlocal :\n      letI := Localization.AtPrime.algebraOfLiesOver (q.asIdeal.under R) q.asIdeal\n      CanBePopescuResolved\n        (Algebra.TensorProduct.lift\n          (Algebra.ofId (Localization.AtPrime (q.asIdeal.under R))\n            (Localization.AtPrime q.asIdeal))\n          ((IsScalarTower.toAlgHom R Λ (Localization.AtPrime q.asIdeal)).comp α)\n          (fun _ _ => Commute.all _ _))\n        ⟨IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal), inferInstance⟩)\n    (hdim : ringKrullDim (Localization.AtPrime q.asIdeal) = 0) :\n    ∃ (B : Type (max u v)) (_ : CommRing B) (_ : Algebra R B),\n      ∃ (β : A →ₐ[R] B) (γ : B →ₐ[R] Λ),\n        FinitePresentation R B ∧ γ.comp β = α ∧\n          popescuIdeal α ≤ popescuIdeal γ ∧ ¬ popescuIdeal γ ≤ q.asIdeal",
   "branch": "sheaf-dag",
   "by": "W3",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.PopescuDelocalizeHeightZeroData; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

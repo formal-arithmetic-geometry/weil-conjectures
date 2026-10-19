@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 public import Mathlib.LinearAlgebra.ExteriorPower.Basic
-import all Sheaf.RingTheory.KoszulProjectiveResolution
+import all WeilConjectures.RingTheory.KoszulProjectiveResolution
 import Mathlib.RingTheory.Finiteness.Ideal
 import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone

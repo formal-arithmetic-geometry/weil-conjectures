@@ -16,7 +16,7 @@ public import Mathlib.LinearAlgebra.Dimension.Finrank
 
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import Sheaf.AlgebraicGeometry.AffineConormalFrame
-import Sheaf.RingTheory.KoszulConormalBasis
+import WeilConjectures.RingTheory.KoszulConormalBasis
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 
 /-! # Local rank of the dual conormal for a Koszul-regular immersion

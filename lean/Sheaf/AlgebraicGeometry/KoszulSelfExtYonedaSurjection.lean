@@ -21,7 +21,7 @@ import Sheaf.AlgebraicGeometry.DeterminantDualPairing
 import Sheaf.AlgebraicGeometry.DeterminantDualPairingLocal
 import Sheaf.AlgebraicGeometry.AffineConormalFrame
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRestrictIso
-import Sheaf.RingTheory.KoszulConormalBasis
+import WeilConjectures.RingTheory.KoszulConormalBasis
 
 /-! # Surjectivity of the exterior Yoneda comparison
 

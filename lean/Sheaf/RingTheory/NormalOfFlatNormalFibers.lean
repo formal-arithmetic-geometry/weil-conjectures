@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import WeilConjectures.RingTheory.FibreRingNoetherian
 import WeilConjectures.RingTheory.RegularityRkGoesUp
 import Sheaf.RingTheory.SerreCriterionNormal
-import Sheaf.RingTheory.SerreSkGoesUp
+import WeilConjectures.RingTheory.SerreSkGoesUp
 
 /-!
 # Normality ascends along flat maps with normal fibres

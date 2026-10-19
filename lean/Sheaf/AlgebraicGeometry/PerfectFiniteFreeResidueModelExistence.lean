@@ -4,7 +4,7 @@ public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.StrictPerfectStalkFiberData
 import Sheaf.AlgebraicGeometry.BoundedFreeStalkModelSpread
-import Sheaf.RingTheory.MinimalFreeModel
+import WeilConjectures.RingTheory.MinimalFreeModel
 
 @[expose] public section
 universe u w

@@ -25,7 +25,7 @@ import Sheaf.AlgebraicGeometry.IntegralClosureDedekindSurjectiveFibres
 import WeilConjectures.RingTheory.CompletionOfDVR
 import WeilConjectures.RingTheory.CompletionFiniteExtension
 import WeilConjectures.RingTheory.CompletionDimension
-import Sheaf.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
+import WeilConjectures.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
 import Mathlib.RingTheory.FiniteType
 import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 import Mathlib.RingTheory.DedekindDomain.Dvr

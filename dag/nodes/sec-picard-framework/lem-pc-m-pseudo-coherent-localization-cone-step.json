@@ -100,13 +100,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.MPseudoCoherentLocalizationConeStep",
-  "file": "lean/Sheaf/RingTheory/MPseudoCoherentLocalizationConeStep.lean",
+  "module": "WeilConjectures.RingTheory.MPseudoCoherentLocalizationConeStep",
+  "file": "lean/WeilConjectures/RingTheory/MPseudoCoherentLocalizationConeStep.lean",
   "declaration": "DerivedCategory.isMPseudoCoherent_localization_cone_step",
   "statement": "theorem isMPseudoCoherent_localization_cone_step\n    {A : Type u₁} [CommRing A] [HasDerivedCategory.{w₁} (ModuleCat.{max u₁ v₁} A)]\n    (M : CochainComplex (ModuleCat.{max u₁ v₁} A) ℤ)\n    (r : ℕ) (f : Fin r → A)\n    [∀ i : Fin r, HasDerivedCategory.{w₂} (ModuleCat.{max u₁ v₁} (Localization.Away (f i)))]\n    (hf : Ideal.span (Set.range f) = ⊤)\n    (m n : ℤ) (hmn : m ≤ n)\n    (hvan : ∀ j : ℤ, n < j →\n      IsZero ((homologyFunctor (ModuleCat.{max u₁ v₁} A) j).obj (Q.obj M)))\n    (hlocal : ∀ i : Fin r, IsMPseudoCoherent m\n        (Q.obj ((Functor.mapHomologicalComplex\n          (ModuleCat.extendScalars (algebraMap A (Localization.Away (f i))))\n          (ComplexShape.up ℤ)).obj M))) :\n    ∃ (E N : CochainComplex (ModuleCat.{max u₁ v₁} A) ℤ)\n      (a : Q.obj E ⟶ Q.obj M) (b : Q.obj M ⟶ Q.obj N)\n      (c : Q.obj N ⟶ (Q.obj E)⟦(1 : ℤ)⟧),\n      Triangle.mk a b c ∈ distTriang (DerivedCategory (ModuleCat.{max u₁ v₁} A)) ∧\n      IsMPseudoCoherent m (Q.obj E) ∧\n      (∀ j : ℤ, n - 1 < j →\n        IsZero ((homologyFunctor (ModuleCat.{max u₁ v₁} A) j).obj (Q.obj N))) ∧\n      (∀ i : Fin r, IsMPseudoCoherent m\n        (Q.obj ((Functor.mapHomologicalComplex\n          (ModuleCat.extendScalars (algebraMap A (Localization.Away (f i))))\n          (ComplexShape.up ℤ)).obj N)))",
   "branch": "sheaf-dag",
   "by": "D3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.MPseudoCoherentLocalizationConeStep; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

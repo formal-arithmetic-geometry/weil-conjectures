@@ -17,7 +17,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotient
 import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselizationStructuralFlat
 import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
-import Sheaf.RingTheory.RootAlgebraRegularAtRoot
+import WeilConjectures.RingTheory.RootAlgebraRegularAtRoot
 import Sheaf.RingTheory.RegularLocalLocalization
 import Sheaf.RingTheory.RegularRingNormal
 import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleOpenIntegralClosure

@@ -9,8 +9,8 @@ public import WeilConjectures.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.FieldTheory.IsSepClosed
 import Sheaf.RingTheory.StrictHenselizationCompletionNoetherian
-import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
-import Sheaf.RingTheory.StrictHenselizationTriplesPresentation
+import WeilConjectures.RingTheory.StrictHenselizationFaithfullyFlat
+import WeilConjectures.RingTheory.StrictHenselizationTriplesPresentation
 import Mathlib.RingTheory.Noetherian.Basic
 
 /-!

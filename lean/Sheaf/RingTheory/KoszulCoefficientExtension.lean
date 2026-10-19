@@ -5,11 +5,11 @@ Authors: SHEAF group V1
 -/
 module
 
-public import Sheaf.RingTheory.KoszulConormalComparison
+public import WeilConjectures.RingTheory.KoszulConormalComparison
 public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import Mathlib.RingTheory.Localization.Defs
 import Sheaf.RingTheory.KoszulCoefficientExtensionChi
-import Sheaf.RingTheory.KoszulCoefficientExtensionNu
+import WeilConjectures.RingTheory.KoszulCoefficientExtensionNu
 
 /-! # Coefficient extension of the dual Koszul complex and normal determinant
 

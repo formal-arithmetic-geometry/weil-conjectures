@@ -13,7 +13,7 @@ import Sheaf.TraceFormula.EssentiallyFiniteTypeCIKernelInvariance
 import WeilConjectures.AlgebraicGeometry.DimensionAtPointFieldExtension
 import Sheaf.RingTheory.LciConormalFreeRankCodimension
 import Sheaf.RingTheory.ConormalGeneratorsGlobalCompleteIntersection
-import Sheaf.RingTheory.LCIRegularSequenceGlobalCompleteIntersection
+import WeilConjectures.RingTheory.LCIRegularSequenceGlobalCompleteIntersection
 import Mathlib.Algebra.MvPolynomial.Basic
 import Mathlib.RingTheory.Noetherian.Defs
 import Mathlib.RingTheory.LocalRing.Module

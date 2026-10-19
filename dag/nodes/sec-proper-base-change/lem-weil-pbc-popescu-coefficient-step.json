@@ -127,13 +127,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.PopescuCoefficientStep",
-  "file": "lean/Sheaf/RingTheory/PopescuCoefficientStep.lean",
+  "module": "WeilConjectures.RingTheory.PopescuCoefficientStep",
+  "file": "lean/WeilConjectures/RingTheory/PopescuCoefficientStep.lean",
   "declaration": "Algebra.exists_popescu_coefficient_step",
   "statement": "theorem exists_popescu_coefficient_step\n    {k : Type u} {Λ : Type v} [Field k] [CommRing Λ] [Algebra k Λ]\n    [IsNoetherianRing Λ] (p : ℕ) [CharP k p] (hp : 0 < p)\n    (q : PrimeSpectrum Λ) (N n : ℕ) (hN : 0 < N) (hn : N ≤ n)\n    (d s c : ℕ) (hc : 0 < c)\n    (uΛ : Fin d → Λ) (hu : ∀ j, uΛ j ∈ q.asIdeal)\n    (hsequence : RingTheory.Sequence.IsRegular (Localization.AtPrime q.asIdeal)\n      (List.ofFn (fun j ↦ algebraMap Λ (Localization.AtPrime q.asIdeal) (uΛ j))))\n    (z : Fin s → Λ)\n    (hpower : IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal) ^ N ≤\n      (Ideal.span (Set.range z)).map (algebraMap Λ (Localization.AtPrime q.asIdeal)))\n    (D : Type w) [CommRing D] [IsLocalRing D] [IsArtinianRing D] [Algebra k D]\n    (g : D →+* Localization.AtPrime q.asIdeal ⧸\n      IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal) ^ n)\n    [IsLocalRing (Localization.AtPrime q.asIdeal ⧸\n      IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal) ^ n)]\n    [IsLocalHom g] (hgflat : g.Flat)\n    (hgk : ∀ x : k, g (algebraMap k D x) = algebraMap k _ x)\n    (b : Fin s → D)\n    (hb : ∀ j, g (b j) = Ideal.Quotient.mk\n      (IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal) ^ n)\n      (algebraMap Λ (Localization.AtPrime q.asIdeal) (z j)))\n    (hinc : ∀ j, Ideal.Quotient.mk\n      (IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal) ^ n)\n      (algebraMap Λ (Localization.AtPrime q.asIdeal) (uΛ j)) ∈ Set.range g)\n    (i : Fin d) (t : Fin d → Λ) (ht : ∀ j, j.val < i.val → t j ∉ q.asIdeal) :\n    ∃ (l : Λ) (ell : Fin s → Λ),\n      l ∉ q.asIdeal ∧\n      (uΛ i * l) ^ (2 * N) = ∑ j : Fin s, ell j * z j ∧\n      (∀ x : Λ ⧸ Ideal.span {y | ∃ j : Fin d, j.val < i.val ∧\n        y = (uΛ j * t j) ^ (c * 8)},\n        (uΛ i * l) • x = 0 ↔ (uΛ i * l) ^ 2 • x = 0) ∧\n      ∃ (D' : Type (max u v w)) (_ : CommRing D') (_ : IsLocalRing D')\n        (_ : IsArtinianRing D') (_ : Algebra k D')\n        (h : D →ₐ[k] D')\n        (g' : D' →+* Localization.AtPrime q.asIdeal ⧸\n          IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal) ^ n),\n        IsLocalHom g' ∧ g'.Flat ∧\n        (letI : Algebra D D' := h.toRingHom.toAlgebra; EssentiallySmooth D D') ∧\n        g'.comp h.toRingHom = g ∧\n        Ideal.Quotient.mk (IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal) ^ n)\n          (algebraMap Λ (Localization.AtPrime q.asIdeal) l) ∈ Set.range g' ∧\n        (∀ j, Ideal.Quotient.mk\n          (IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal) ^ n)\n          (algebraMap Λ (Localization.AtPrime q.asIdeal) (ell j)) ∈ Set.range g')",
   "branch": "sheaf-dag",
   "by": "K4",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.PopescuCoefficientStep; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

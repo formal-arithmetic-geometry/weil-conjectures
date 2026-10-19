@@ -5,9 +5,9 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.RingHom.Flat
 public import WeilConjectures.RingTheory.SingularIdeal
-import Sheaf.RingTheory.RelativeGlobalCompleteIntersectionSmoothJacobian
+import WeilConjectures.RingTheory.RelativeGlobalCompleteIntersectionSmoothJacobian
 import Sheaf.RingTheory.SmoothLocalCompleteIntersection
-import Sheaf.RingTheory.SmoothFibreLocalizedPresentationJacobian
+import WeilConjectures.RingTheory.SmoothFibreLocalizedPresentationJacobian
 import Sheaf.RingTheory.SyntomicAtPrimeRelativeGlobalCompleteIntersection
 
 /-!

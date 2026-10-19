@@ -8,7 +8,7 @@ public import Mathlib.RingTheory.Localization.FractionRing
 import WeilConjectures.RingTheory.InjectivePiLocalizationAssociatedPrimes
 import WeilConjectures.RingTheory.IntegralClosureFiniteNormalProduct
 import WeilConjectures.RingTheory.JapaneseDomain
-import Sheaf.RingTheory.KrullAkizukiNoetherian
+import WeilConjectures.RingTheory.KrullAkizukiNoetherian
 import WeilConjectures.RingTheory.NagataOfCompleteLocal
 import Sheaf.RingTheory.NormalDomainPrincipalQuotientAssociatedHeight
 import Sheaf.RingTheory.NormalizationPrincipalHeightOneRefinement

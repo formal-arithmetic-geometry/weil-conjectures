@@ -8,7 +8,7 @@ module
 public import WeilConjectures.RingTheory.NagataRing
 import Sheaf.RingTheory.AlgebraicMonogenicNagataDomainN2
 import WeilConjectures.RingTheory.NagataDomainN2
-import Sheaf.RingTheory.PolynomialRingN2
+import WeilConjectures.RingTheory.PolynomialRingN2
 import WeilConjectures.RingTheory.N2AscendsFiniteDomainExtension
 import Mathlib.RingTheory.Algebraic.Basic
 

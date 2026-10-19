@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 import Sheaf.RingTheory.SmoothColimitRegular
 import WeilConjectures.RingTheory.EtaleResidueTriplesLocalizedStrictHenselization
 import Sheaf.RingTheory.StrictHenselizationPresentationIn
-import Sheaf.RingTheory.StrictHenselizationTriples
+import WeilConjectures.RingTheory.StrictHenselizationTriples
 import Sheaf.Paper.StrictHenselizationFunctoriality
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import Sheaf.RingTheory.StrictHenselizationNoetherian

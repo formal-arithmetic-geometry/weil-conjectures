@@ -146,13 +146,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.SmoothFibreLocalizedPresentationJacobian",
-  "file": "lean/Sheaf/RingTheory/SmoothFibreLocalizedPresentationJacobian.lean",
+  "module": "WeilConjectures.RingTheory.SmoothFibreLocalizedPresentationJacobian",
+  "file": "lean/WeilConjectures/RingTheory/SmoothFibreLocalizedPresentationJacobian.lean",
   "declaration": "Algebra.exists_jacobian_minor_of_smooth_fibre_localizedPresentation",
   "statement": "theorem exists_jacobian_minor_of_smooth_fibre_localizedPresentation\n    {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]\n    (q : PrimeSpectrum S) (g : S)\n    (qg : PrimeSpectrum (Localization.Away g))\n    (hqg : PrimeSpectrum.comap (algebraMap S (Localization.Away g)) qg = q)\n    (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R)\n    (hci : IsRelativeGlobalCompleteIntersectionPresentation f)\n    (e : Localization.Away g ≃ₐ[R]\n      (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)))\n    (hsmooth : IsSmoothAtPrime (q.comap (algebraMap R S)).asIdeal.ResidueField\n      (PrimeSpectrum.preimageEquivFiber R S (q.comap (algebraMap R S)) ⟨q, rfl⟩)) :\n    ∃ i : Fin c → Fin n, StrictMono i ∧\n      Ideal.Quotient.mk (Ideal.span (Set.range f))\n        (Matrix.det (fun j k : Fin c ↦ MvPolynomial.pderiv (i k) (f j))) ∉\n          (PrimeSpectrum.comap e.symm.toRingHom qg).asIdeal",
   "branch": "sheaf-dag",
   "by": "M3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.SmoothFibreLocalizedPresentationJacobian; points at its upstream twin."
  },
  "proof_deps": [
   "lem-weil-pbc-relative-global-complete-intersection-base-change",

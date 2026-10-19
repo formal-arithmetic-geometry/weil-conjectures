@@ -128,13 +128,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.PopescuPolynomialKernelParameters",
-  "file": "lean/Sheaf/RingTheory/PopescuPolynomialKernelParameters.lean",
+  "module": "WeilConjectures.RingTheory.PopescuPolynomialKernelParameters",
+  "file": "lean/WeilConjectures/RingTheory/PopescuPolynomialKernelParameters.lean",
   "declaration": "Algebra.exists_popescu_polynomial_kernel_parameters",
   "statement": "theorem exists_popescu_polynomial_kernel_parameters\n    {k : Type u} {Λ : Type w}\n    [Field k] [CommRing Λ] [Algebra k Λ] [IsNoetherianRing Λ]\n    (q : PrimeSpectrum Λ) (hreg : IsGeometricallyRegular k Λ)\n    (d : ℕ) (hd : d =\n      (IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal)).spanFinrank)\n    (e : ℕ) (he : 0 < e)\n    (m₀ : ℕ) (φ₀ : MvPolynomial (Fin m₀) k →ₐ[k] Λ)\n    (ψ₀ : Localization.AtPrime (q.asIdeal.comap φ₀.toRingHom) →+*\n      Localization.AtPrime q.asIdeal)\n    (hψ₀ : ψ₀.comp (algebraMap (MvPolynomial (Fin m₀) k)\n        (Localization.AtPrime (q.asIdeal.comap φ₀.toRingHom))) =\n      (algebraMap Λ (Localization.AtPrime q.asIdeal)).comp φ₀.toRingHom)\n    (hideal₀ : q.asIdeal.map (algebraMap Λ (Localization.AtPrime q.asIdeal)) =\n      (q.asIdeal.comap φ₀.toRingHom).map\n        ((algebraMap Λ (Localization.AtPrime q.asIdeal)).comp φ₀.toRingHom))\n    (hflat₀ : ψ₀.Flat) :\n    let P := MvPolynomial (Fin m₀) k\n    let p₀ := q.asIdeal.comap φ₀.toRingHom\n    let L := Localization.AtPrime q.asIdeal\n    ∃ uP : Fin d → P,\n      (∀ i, uP i ∈ p₀) ∧\n      Ideal.span (Set.range (fun i ↦ algebraMap P (Localization.AtPrime p₀) (uP i))) =\n        p₀.map (algebraMap P (Localization.AtPrime p₀)) ∧\n      RingTheory.Sequence.IsRegular L\n        (List.ofFn (fun i ↦ algebraMap Λ L (φ₀ (uP i)))) ∧\n      (∀ (i : Fin d)\n        (x : MvPolynomial (Fin d) P ⧸ Ideal.span\n          {y | ∃ j : Fin d, j.val < i.val ∧\n            y = (MvPolynomial.C (uP j) * MvPolynomial.X j) ^ e}),\n        (MvPolynomial.C (uP i) * MvPolynomial.X i) • x = 0 ↔\n          (MvPolynomial.C (uP i) * MvPolynomial.X i) ^ 2 • x = 0)",
   "branch": "sheaf-dag",
   "by": "A3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.PopescuPolynomialKernelParameters; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

@@ -9,8 +9,8 @@ public import WeilConjectures.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.RingHom.Flat
 import WeilConjectures.RingTheory.FlatColimitRings
-import Sheaf.RingTheory.PointedEtaleSmallFiltered
-import Sheaf.RingTheory.PointedEtaleCompletionStageFlat
+import WeilConjectures.RingTheory.PointedEtaleSmallFiltered
+import WeilConjectures.RingTheory.PointedEtaleCompletionStageFlat
 import Mathlib.CategoryTheory.Limits.Preserves.Over
 
 /-!

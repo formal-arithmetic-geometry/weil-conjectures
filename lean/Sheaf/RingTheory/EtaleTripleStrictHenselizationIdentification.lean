@@ -5,7 +5,7 @@ Authors: SHEAF group N1
 -/
 module
 
-public import Sheaf.RingTheory.StrictHenselizationTriples
+public import WeilConjectures.RingTheory.StrictHenselizationTriples
 import Sheaf.RingTheory.StrictHenselizationComparison
 import WeilConjectures.RingTheory.EtaleResidueTriplesLocalization
 import WeilConjectures.RingTheory.PairHenselizationCompletionData

@@ -11,9 +11,9 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Sheaf.AlgebraicGeometry.StrictHenselization
 public import Mathlib.Topology.KrullDimension
 import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
-import Sheaf.RingTheory.StrictHenselizationTriples
+import WeilConjectures.RingTheory.StrictHenselizationTriples
 import Sheaf.RingTheory.IndEtaleUniverseTransport
-import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
+import WeilConjectures.RingTheory.StrictHenselizationFaithfullyFlat
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 import Sheaf.TraceFormula.IndEtaleLocalHenselianIntegral
 import Sheaf.RingTheory.GeneralizedHenselizationAtPrime

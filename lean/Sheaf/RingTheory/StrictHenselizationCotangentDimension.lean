@@ -7,9 +7,9 @@ module
 public import WeilConjectures.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
+import WeilConjectures.RingTheory.StrictHenselizationFaithfullyFlat
 import Sheaf.RingTheory.StrictHenselizationLocalMaximalIdeal
-import Sheaf.RingTheory.StrictHenselizationTriplesPresentation
+import WeilConjectures.RingTheory.StrictHenselizationTriplesPresentation
 import Mathlib.RingTheory.Ideal.CotangentBaseChange
 import Mathlib.LinearAlgebra.Dimension.Constructions
 

@@ -120,13 +120,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.PowerSeriesParameterPreservingRingLift",
-  "file": "lean/Sheaf/RingTheory/PowerSeriesParameterPreservingRingLift.lean",
+  "module": "WeilConjectures.RingTheory.PowerSeriesParameterPreservingRingLift",
+  "file": "lean/WeilConjectures/RingTheory/PowerSeriesParameterPreservingRingLift.lean",
   "declaration": "MvPowerSeries.exists_parameterPreserving_ringLift",
   "statement": "theorem exists_parameterPreserving_ringLift\n    (ΛR : Type u) (ΛT : Type v) [CommRing ΛR] [CommRing ΛT] (n m : ℕ)\n    [IsRegularLocalRing (MvPowerSeries (Fin n) ΛR)]\n    [IsRegularLocalRing (MvPowerSeries (Fin m) ΛT)]\n    (i : MvPowerSeries (Fin n) ΛR →+* MvPowerSeries (Fin m) ΛT) [IsLocalHom i]\n    (t : List (MvPowerSeries (Fin n) ΛR))\n    (y : List (MvPowerSeries (Fin m) ΛT))\n    (hy : IsRegularSystemOfParameters (t.map i ++ y))\n    (hcoeff : (IsField ΛR ∧ IsField ΛT ∧ CharZero ΛR ∧ CharZero ΛT) ∨\n      ∃ p : ℕ, p.Prime ∧ IsCohenRing p ΛR ∧ IsCohenRing p ΛT ∧\n        t.head? = some (p : MvPowerSeries (Fin n) ΛR)) :\n    let R := MvPowerSeries (Fin n) ΛR\n    let T := MvPowerSeries (Fin m) ΛT\n    letI : Algebra R T := i.toAlgebra\n    ∀ (D : Type w) [CommRing D] [Algebra R D] (J : Ideal D), J ^ 2 = ⊥ →\n      ∀ g : T →ₐ[R] D ⧸ J,\n      (∃ k : ℕ, 1 ≤ k ∧ ∀ x ∈ maximalIdeal T ^ k, g x = 0) →\n      ∃ f : T →+* D, (Ideal.Quotient.mk J).comp f = g.toRingHom ∧\n        ∀ r ∈ t, f (i r) = algebraMap R D r ",
   "branch": "sheaf-dag",
   "by": "A3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.PowerSeriesParameterPreservingRingLift; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

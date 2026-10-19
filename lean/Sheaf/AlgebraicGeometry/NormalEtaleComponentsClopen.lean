@@ -14,7 +14,7 @@ public import Mathlib.Topology.NoetherianSpace
 public import Mathlib.Topology.Connected.Clopen
 public import Sheaf.RingTheory.StrictHenselizationPresentationIn
 import Sheaf.RingTheory.EtaleNormalRing
-import Sheaf.RingTheory.PointedEtaleSmallFiltered
+import WeilConjectures.RingTheory.PointedEtaleSmallFiltered
 import Sheaf.RingTheory.StrictHenselizationLocalMaximalIdeal
 import Sheaf.RingTheory.EtaleColimitNormalLocalDomain
 import Sheaf.AlgebraicGeometry.RegularNormalDecomposition

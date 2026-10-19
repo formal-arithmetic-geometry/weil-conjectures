@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import WeilConjectures.RingTheory.GRing
 import Sheaf.RingTheory.PolynomialRegularBaseFormalFibre
-import Sheaf.RingTheory.PolynomialCompleteLocalNonzeroFibreCharZeroReduction
+import WeilConjectures.RingTheory.PolynomialCompleteLocalNonzeroFibreCharZeroReduction
 
 /-!
 # Nonzero polynomial formal fibres in characteristic zero

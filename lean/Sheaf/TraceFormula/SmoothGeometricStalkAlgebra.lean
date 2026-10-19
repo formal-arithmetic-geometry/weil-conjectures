@@ -22,7 +22,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
 import Sheaf.AlgebraicGeometry.IndEtaleStrictLocalInvariance
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
+import WeilConjectures.RingTheory.StrictHenselizationFaithfullyFlat
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedImmersionCartesian
 import Sheaf.RingTheory.SmoothOverFieldRegularLocal

@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.RingTheory.SingularIdeal
 public import Mathlib.RingTheory.FinitePresentation
-import Sheaf.RingTheory.PopescuLiftMaps
+import WeilConjectures.RingTheory.PopescuLiftMaps
 import Sheaf.RingTheory.PopescuLiftSmooth
 
 /-! # Popescu lifting lemma

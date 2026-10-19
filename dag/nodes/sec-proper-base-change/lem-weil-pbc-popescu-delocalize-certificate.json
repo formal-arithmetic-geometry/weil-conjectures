@@ -147,14 +147,15 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "module": "Sheaf.RingTheory.PopescuDelocalizeCertificate",
+  "module": "WeilConjectures.RingTheory.PopescuDelocalizeCertificate",
   "declaration": "Algebra.exists_delocalization_polynomial_certificate",
-  "file": "lean/Sheaf/RingTheory/PopescuDelocalizeCertificate.lean",
+  "file": "lean/WeilConjectures/RingTheory/PopescuDelocalizeCertificate.lean",
   "statement": "theorem exists_delocalization_polynomial_certificate {R : Type u} {A : Type v} {Λ : Type w} [CommRing R] [CommRing A] [CommRing Λ] [Algebra R A] [Algebra R Λ] (α : A →ₐ[R] Λ) (S : Submonoid R) {n t m c : ℕ} (P : Presentation R A (Fin n) (Fin t)) (hc : c ≤ n + m) {D : Type x} [CommRing D] [Algebra (Localization S) D] (Q : SubmersivePresentation (Localization S) D (Fin (n + m)) (Fin c)) (β : Localization (algebraMapSubmonoid A S) →ₐ[Localization S] D) (γ : D →ₐ[Localization S] Localization (algebraMapSubmonoid Λ S)) (hfactor : γ.comp β = IsLocalization.mapₐ S (Localization S) (Localization (algebraMapSubmonoid A S)) (Localization (algebraMapSubmonoid Λ S)) α) (hmap : Q.map = Fin.castLE hc) (hval : ∀ i : Fin n, Q.val (Fin.castAdd m i) = β (algebraMap A (Localization (algebraMapSubmonoid A S)) (P.val i))) : ∃ (F : Fin (c + t) → MvPolynomial (Fin (n + m)) R) (l : Fin (n + m) → Λ) (s : S) (a₀ : MvPolynomial (Fin (n + m)) R), (∀ i : Fin n, l (Fin.castAdd m i) = α (P.val i)) ∧ (∀ j : Fin t, F (Fin.natAdd c j) = rename (Fin.castAdd m) (P.relation j)) ∧ (∀ j, aeval l (F j) = 0) ∧ C s.val - a₀ * Matrix.det (fun i j : Fin c ↦ pderiv (Fin.castLE hc i) (F (Fin.castAdd t j))) ∈ Ideal.span (Set.range F) ∧ ∀ j : Fin (c + t), c ≤ j.val → C s.val * F j ∈ Ideal.span {f | ∃ k : Fin (c + t), k.val < c ∧ f = F k}",
   "branch": "sheaf-dag",
   "by": "P1",
   "date": "2026-10-13",
-  "existing": false
+  "existing": false,
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.PopescuDelocalizeCertificate; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",
