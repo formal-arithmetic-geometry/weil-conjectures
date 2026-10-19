@@ -272,5 +272,23 @@
   "group": "Q131",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-1ba098505 (reviewer sub-agent of L); spot-checked: I read all 8 steps against the cited statements and against Stacks divisors.tex 0AG8 (l.2939), 0AG9 (l.3006), 0AGA (l.3056) and the second proof paragraph of 0AGB (l.3076). The statement keeps the source's hypotheses. 0AG9's global Noetherian hypothesis is avoided by using regular + dim 1 => DVR at xi (lem-sc-regular-dim1-dvr), which is right because X is only locally Noetherian. Step 4: lem-trf-regular-local-ufd-boundary-factorization with r=0 (its statement allows r>=0) gives that A is a UFD, then lem-trf-ufd-height-one gives p=(f). Step 5 spreads the stalk equation to an open with the annihilators u_i correctly accounted for, and gets a nonzerodivisor because R_h is a domain. Step 6 matches def-nagata-effective-cartier-ideal and its blueprint_update form. Step 7 covers every generator g; Step 8 shows the image of g is a uniformizer. Edge cases checked: x=xi; D=X impossible; Spec k[u,v] with D=V(u); nonreduced D excluded; points off D. There are no new nodes, and the duplicate search found no existing node stating the item (lem-sbc-regular-cartier-generic-stalk-dvr overlaps only the DVR clause and assumes Cartier). Accepted tool_uses: lem-trf-regular-local-ufd-boundary-factorization and lem-sc-regular-dim1-dvr, both generic algebra. Batch-5 check: lem-trf-ufd-height-one is a Mathlib leaf (Stacks 0AFT) with empty proof_deps. The full closure of lem-trf-regular-local-ufd-boundary-factorization (322 nodes) contains only commutative algebra, K0/Pic and basic sheaf nodes, with no trace-formula, Poincare-duality, sk-thm-trace-transport or assumption node. Both citations are outside the assumed statements, so both are accepted. Advisory: lem-sc-regular-dim1-dvr cites Tag 00DV where 00PD is meant (this delivery does not own that node). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularPrimeDivisorLocalEquations",
+  "declaration": "AlgebraicGeometry.Scheme.regular_prime_divisor_local_equations",
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularPrimeDivisorLocalEquations.lean",
+  "statement": "theorem regular_prime_divisor_local_equations (X D : Scheme.{u}) [IsIntegral X] [IsIntegral D] [IsLocallyNoetherian X] (hRegular : IsRegularScheme X) (i : D ⟶ X) [IsClosedImmersion i] (ξ : D) (hξ : IsGenericPoint ξ Set.univ) (hDim : ringKrullDim (X.presheaf.stalk (i ξ)) = 1) : i.ker.IsInvertible ∧ IsDiscreteValuationRing (X.presheaf.stalk (i ξ)) ∧ ∀ (x : D) (f : X.presheaf.stalk (i x)), Ideal.span {f} = RingHom.ker (i.stalkMap x).hom → Prime f ∧ ∃ h : i ξ ⤳ i x, @IsLocalization.AtPrime (X.presheaf.stalk (i x)) _ (X.presheaf.stalk (i ξ)) _ (X.presheaf.stalkSpecializes h).hom.toAlgebra (RingHom.ker (i.stalkMap x).hom) (RingHom.ker_isPrime (i.stalkMap x).hom) ∧ IsLocalRing.maximalIdeal (X.presheaf.stalk (i ξ)) = Ideal.span {(X.presheaf.stalkSpecializes h).hom f}",
+  "branch": "newtargets-dag",
+  "by": "Q132",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ac3e5a0a0",
+  "group": "Q132",
+  "result": "pass",
+  "note": "Q132 ac3e5a0a: only node.lean changed (diffed vs live side node); statement verbatim in file. Clause check: IsIntegral X/D, IsRegularScheme (+redundant IsLocallyNoetherian instance, not stronger), IsClosedImmersion i, IsGenericPoint ξ univ, ringKrullDim stalk(iξ)=1; conclusions i.ker.IsInvertible (= affine-local single nonzerodivisor generator, matches def-nagata-effective-cartier-ideal blueprint_update), DVR of generic stalk, ∀x f, span{f}=ker stalkMap (stalk ideal of closed immersion, ker_stalkMap) → Prime f ∧ ∃ specialization with IsLocalization.AtPrime via canonical stalkSpecializes algebra ∧ maximalIdeal = span{image f} (uniformizer). Edge cases x=ξ, D=X excluded, off-D, nonreduced, universes fine; all 10 stmt_dep records read; no H4 duplicate; docstrings with source+blueprint+8 steps; proof sorry only. nt_compile --json clean (3.0 s, exit 0). Advisory: redundant IsLocallyNoetherian instance; proof-only plain imports."
  }
 }
