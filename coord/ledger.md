@@ -17618,3 +17618,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:30 L: returned deliver/E8/Sheaf.SixFunctors.RingedFiniteFreeHomBaseChange (reviewer RETURN: (reviewer C-fc7ec, head fc7ec3275) D1 (relabelling, brief point 4): in lean/Sheaf/SixFunctors/RingedFiniteFreeHomBaseCha)
 - 22:32 L: merged deliver/NO/fix-lem-tensor-adjunction (stage 2; reviewer PASS; parallel immutable checks)
 - 22:42 L: returned deliver/M7/Sheaf.Paper.NormalizedConstructibleTowerLocalEffectivity (reviewer RETURN: (reviewer C-2e50e, head 2e50e3069) H9 / brief point 5 (unused imports in a proved module): in lean/Sheaf/Paper/FiniteCoe)
+- 22:47 L: returned deliver/NP/lem-pur-finite-adjoint-mate-compatibility (reviewer RETURN: L: independent stage-2 immutable head 281b10d770e1: H2/theorem stmt_dep: lem-pur-exceptional-coefficient-comparison is c)
