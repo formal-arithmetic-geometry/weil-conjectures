@@ -99,6 +99,24 @@ def SupportTriangleCanonicality : Prop :=
       IsIso (DerivedCategory.Q.map (supportAMap Λ s j hPair f)) ∧
       IsIso (DerivedCategory.Q.map (supportCMap Λ j f)))
 
+/-- The natural transformation comparing the open quotient functors in a commutative
+square: pushforward base change followed by the inverse-image composition comparison.
+Source: blueprint def-pur-triangle-meaning; Stacks Tag 09BN
+(blueprint: def-pur-triangle-meaning). -/
+noncomputable def supportOpenBaseChange
+    {X' U' : Scheme.{u}} (v : X' ⟶ X) (vU : U' ⟶ U) (j' : U' ⟶ X')
+    [Etale v] [Etale vU] (sq : vU ≫ j = j' ≫ v) :
+    (upperStar (ModuleCat.{u + 1} Λ) j ⋙ lowerStar (ModuleCat.{u + 1} Λ) j) ⋙
+        upperStar (ModuleCat.{u + 1} Λ) v ⟶
+      upperStar (ModuleCat.{u + 1} Λ) v ⋙
+        (upperStar (ModuleCat.{u + 1} Λ) j' ⋙ lowerStar (ModuleCat.{u + 1} Λ) j') :=
+  Functor.whiskerLeft (upperStar (ModuleCat.{u + 1} Λ) j)
+      (baseChangeMap (ModuleCat.{u + 1} Λ) (CommSq.mk sq.symm)) ≫
+    Functor.whiskerRight (((upperStarComp (ModuleCat.{u + 1} Λ) vU j).symm ≪≫
+      upperStarCongr (ModuleCat.{u + 1} Λ) sq ≪≫
+      upperStarComp (ModuleCat.{u + 1} Λ) j' v).hom)
+      (lowerStar (ModuleCat.{u + 1} Λ) j')
+
 /-- The canonical quotient comparison for a commutative open square and etale vertical
 maps: pushforward base change followed by the inverse-image composition comparison.
 Source: blueprint def-pur-triangle-meaning; Stacks Tag 09BN
@@ -111,13 +129,10 @@ noncomputable def supportOpenBaseChangeApp
         ((upperStar (ModuleCat.{u + 1} Λ) j ⋙ lowerStar (ModuleCat.{u + 1} Λ) j).obj M) ⟶
       (upperStar (ModuleCat.{u + 1} Λ) j' ⋙ lowerStar (ModuleCat.{u + 1} Λ) j').obj
         ((upperStar (ModuleCat.{u + 1} Λ) v).obj M) :=
-  (baseChangeMap (ModuleCat.{u + 1} Λ) (CommSq.mk sq.symm)).app
-      ((upperStar (ModuleCat.{u + 1} Λ) j).obj M) ≫
-    (lowerStar (ModuleCat.{u + 1} Λ) j').map
-      (((upperStarComp (ModuleCat.{u + 1} Λ) vU j).symm ≪≫
-        upperStarCongr (ModuleCat.{u + 1} Λ) sq ≪≫
-        upperStarComp (ModuleCat.{u + 1} Λ) j' v).hom.app M)
+  (supportOpenBaseChange Λ j v vU j' sq).app M
 
+-- Keep the existing instance binders of this public theorem for compatibility.
+set_option linter.unusedSectionVars false in
 /-- Naturality of the specified quotient comparison, used only to construct its chain map.
 Source: blueprint def-pur-triangle-meaning (blueprint: def-pur-triangle-meaning).
 Proof: expand the composite. Naturality of the base-change mate and of the
@@ -132,7 +147,7 @@ theorem supportOpenBaseChangeApp_naturality
     supportOpenBaseChangeApp Λ j v vU j' sq M ≫
       (upperStar (ModuleCat.{u + 1} Λ) j' ⋙ lowerStar (ModuleCat.{u + 1} Λ) j').map
         ((upperStar (ModuleCat.{u + 1} Λ) v).map f) := by
-  sorry
+  exact (supportOpenBaseChange Λ j v vU j' sq).naturality f
 
 /-- The same canonical quotient comparison on complexes, degree by degree.
 Source: blueprint def-pur-triangle-meaning (blueprint: def-pur-triangle-meaning). -/
