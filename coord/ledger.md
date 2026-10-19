@@ -17009,3 +17009,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:57 L: merged deliver/Q61/lem-trf-modification-fibre-centre-finite (stage 2; reviewer FIX; parallel immutable checks)
 - 03:57 L: returned deliver/Q118/lem-per-complete-trait-constructible-biduality (reviewer RETURN: L: independent stage-2 immutable head 3318552a0e98: Item lem-per-complete-trait-constructible-biduality is itself route-)
 - 03:57 L: returned deliver/Q101/lem-per-inseparable-surface-differential-data (reviewer RETURN: Return because of the route pivot: the 2026-10-19 artin-gabber section of side coord/route-pivot-dropped.txt drops the i)
+- 03:57 L: returned deliver/Q71/lem-per-blowup-differentials-dualizing (reviewer RETURN: F (route pivot): the item lem-per-blowup-differentials-dualizing is itself in the 2026-10-19 artin-gabber dropped sectio)
