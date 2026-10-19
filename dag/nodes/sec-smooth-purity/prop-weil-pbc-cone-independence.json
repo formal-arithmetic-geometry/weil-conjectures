@@ -35,7 +35,7 @@
  ],
  "proof": [
   {
-   "text": "Fix the scheme, coefficient fields, rational categories $\\mathcal C_E(T)$ and coherent extension functors of [def-weil-pbc-finite-stage-pair-category]. The finite-stage pre-triangulated structures are part of the exact-functor assertion of [prop-weil-pbc-scalar-extension], where exact has the meaning of [def-weil-triangulated-category]. Let $u:X_M\\to Y_M$ represent $f:(E,K)\\to(F,L)$, with $X_M=T_{M/E}K$, $Y_M=T_{M/F}L$, and choose the distinguished triangle $X_M\\xrightarrow{u}Y_M\\xrightarrow{i}Z\\xrightarrow{p}X_M[1]$ of [def-weil-pbc-common-stage-cones]. For $M\\subseteq N$ put $H=T_{N/M}$, $A_X=a_{N,M,E,K}$ and $A_Y=a_{N,M,F,L}$. Exactness of $H$ [prop-weil-pbc-scalar-extension], in the meaning of [def-weil-triangulated-category], says that\n$$HX_M\\xrightarrow{H(u)}HY_M\\xrightarrow{H(i)}HZ\\xrightarrow{\\sigma_{N/M,X_M}\\circ H(p)}(HX_M)[1]$$\nis distinguished. Replace its first and second objects using $A_X,A_Y$. The resulting triangle has arrows\n$$u_N=A_Y\\circ H(u)\\circ A_X^{-1},\\quad i_N=H(i)\\circ A_Y^{-1},\\quad p_N=A_X[1]\\circ\\sigma_{N/M,X_M}\\circ H(p).$$\nThe triple $(A_X,A_Y,1_{HZ})$ is a triangle isomorphism: substitution verifies each of its three squares. TR1 therefore makes this a distinguished cone triangle of exactly the transported representative $u_N$.",
+   "text": "Fix the scheme, coefficient fields, rational categories $\\mathcal C_E(T)$ and coherent extension functors of [def-weil-pbc-finite-stage-pair-category]. The finite-stage pre-triangulated structures are part of the exact-functor assertion of [prop-weil-pbc-scalar-extension], where exact has the meaning of [def-weil-triangulated-category]. Let $u:X_M\\to Y_M$ represent $f:(E,K)\\to(F,L)$, with $X_M=T_{M/E}K$, $Y_M=T_{M/F}L$, and choose the distinguished triangle $X_M\\xrightarrow{u}Y_M\\xrightarrow{i}Z\\xrightarrow{p}X_M[1]$ of [def-weil-pbc-common-stage-cones]. For $M\\subseteq N$ put $H=T_{N/M}$, $A_X=a_{N,M,E,K}$ and $A_Y=a_{N,M,F,L}$. Exactness of $H$ [prop-weil-pbc-scalar-extension], in the meaning of [def-weil-triangulated-category], says that\n$$HX_M\\xrightarrow{H(u)}HY_M\\xrightarrow{H(i)}HZ\\xrightarrow{\\sigma_{N/M,X_M}\\circ H(p)}(HX_M)[1]$$\nis distinguished. Replace its first and second objects using $A_X,A_Y$. The resulting triangle has arrows\n$$u_N=A_Y\\circ H(u)\\circ A_X^{-1},\\quad i_N=H(i)\\circ A_Y^{-1},\\quad p_N=A_X[1]\\circ\\sigma_{N/M,X_M}\\circ H(p).$$\nThe triple $(A_X,A_Y,1_{HZ})$ is a triangle isomorphism: substitution verifies each of its three squares. TR1 therefore makes this a distinguished cone triangle of exactly the transported representative $u_N$. In Lean, exactness of the actual coefficient transition is obtained from the derived scalar adjunction: restriction is exact, so Mathlib triangulated-adjunction exactness makes its left adjoint exact. The fully faithful integral inclusion reflects exactness. The integral-image characterization of the published rational distinguished triangles, together with the shift-compatible integral/rational comparison, transfers this exactness to the actual rational scalar functor, including equal fields. These are the concrete finite-stage constructions of the already cited nodes.",
    "uses": [
     "def-weil-pbc-finite-stage-pair-category",
     "def-weil-pbc-common-stage-cones",
@@ -76,7 +76,7 @@
    }
   },
   {
-   "text": "We verify that the scalar-extended triangle in Step 1 gives the same triangle in $\\mathcal P_T$, up to an isomorphism with identity on $(E,K)$ and $(F,L)$. Its old cone is $(M,Z)$ and its new cone is $(N,HZ)$. Define $\\eta:(M,Z)\\to(N,HZ)$ and its inverse by the representatives $[N,1_{HZ}]$ in the two directions. These are typed because $T_{N/M}Z=HZ$ and $T_{N/N}=1$. The composition formula of [def-weil-pbc-finite-stage-pair-category] gives identities at stage $N$, which represent the pair identities by the unit equations and representative-independence of [prop-weil-pbc-common-stage-calculus]. The second-arrow square is precisely $i_N=H(i)A_Y^{-1}$. For the third arrow, the coherence of shift comparisons with associators in [prop-weil-pbc-scalar-extension] reads\n$$A_X[1]\\circ\\sigma_{N/M,X_M}\\circ H(\\sigma_{M/E,K})=\\sigma_{N/E,K}\\circ a_{N,M,E,K[1]}.$$\nConsequently transport of the old third-arrow representative is\n$$a_{N,M,E,K[1]}\\circ H(\\sigma_{M/E,K}^{-1}\\circ p)=\\sigma_{N/E,K}^{-1}\\circ A_X[1]\\circ\\sigma_{N/M,X_M}\\circ H(p)=\\sigma_{N/E,K}^{-1}\\circ p_N.$$\nThis is exactly the new third arrow prescribed by [def-weil-pbc-common-stage-cones]. The first-arrow square is equality of the two representatives of $f$. The definition of triangle morphisms and its componentwise isomorphism criterion [def-weil-pbc-triangles-with-shift] now give the claimed pair-category triangle isomorphism.",
+   "text": "We verify that the scalar-extended triangle in Step 1 gives the same triangle in $\\mathcal P_T$, up to an isomorphism with identity on $(E,K)$ and $(F,L)$. Its old cone is $(M,Z)$ and its new cone is $(N,HZ)$. Define $\\eta:(M,Z)\\to(N,HZ)$ and its inverse by the representatives $[N,1_{HZ}]$ in the two directions. These are typed because $T_{N/M}Z=HZ$ and $T_{N/N}=1$. The composition formula of [def-weil-pbc-finite-stage-pair-category] gives identities at stage $N$, which represent the pair identities by the unit equations and representative-independence of [prop-weil-pbc-common-stage-calculus]. The second-arrow square is precisely $i_N=H(i)A_Y^{-1}$. For the third arrow, the coherence of shift comparisons with associators in [prop-weil-pbc-scalar-extension] reads\n$$A_X[1]\\circ\\sigma_{N/M,X_M}\\circ H(\\sigma_{M/E,K})=\\sigma_{N/E,K}\\circ a_{N,M,E,K[1]}.$$\nConsequently transport of the old third-arrow representative is\n$$a_{N,M,E,K[1]}\\circ H(\\sigma_{M/E,K}^{-1}\\circ p)=\\sigma_{N/E,K}^{-1}\\circ A_X[1]\\circ\\sigma_{N/M,X_M}\\circ H(p)=\\sigma_{N/E,K}^{-1}\\circ p_N.$$\nThis is exactly the new third arrow prescribed by [def-weil-pbc-common-stage-cones]. The first-arrow square is equality of the two representatives of $f$. The definition of triangle morphisms and its componentwise isomorphism criterion [def-weil-pbc-triangles-with-shift] now give the claimed pair-category triangle isomorphism. The Lean implementation uses commonStageConeIso, Functor.mapTriangleIso, Functor.mapTriangleCompIso, and transportedConeIso to form this comparison. Compatibility of transIso with shifts follows directly from the recorded associator shift coherence. The endpoint equations reduce to the stage-system cocycle; no pretriangulation on the pair category is assumed.",
    "uses": [
     "def-weil-pbc-finite-stage-pair-category",
     "prop-weil-pbc-common-stage-calculus",
@@ -129,8 +129,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/prop-weil-pbc-cone-independence.md",
-  "place": "## Proof, expanded using Stacks Tags 014B and 014A"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-weil-pbc-cone-independence.proof.md",
+  "place": "Full proof; six-step expansion realized by mapped triangles, Mathlib cone uniqueness and the actual scalar adjunction/localization interfaces (P5, 2026-10-19)."
  },
  "mathlib_searches": [
   {
@@ -294,7 +294,8 @@
   "declarations": [
    "CategoryTheory.StageSystem.transportedCone",
    "CategoryTheory.StageSystem.ConeIndependenceSpec",
-   "AlgebraicGeometry.Scheme.pbcConeIndependence"
+   "AlgebraicGeometry.Scheme.pbcConeIndependence",
+   "CategoryTheory.StageSystem.coneIndependenceOfExact"
   ],
   "file": "lean/Sheaf/Paper/PbcConeIndependence.lean",
   "statement": "theorem pbcConeIndependence (l : ℕ) [Fact l.Prime] (Ω : Type c) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (T : Scheme.{u}) [IsNoetherian T] [hDim : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)] [hInv : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))] : StageSystem.ConeIndependenceSpec (pbcScalarSystem l Ω T hDim.out hInv.out)",
@@ -303,5 +304,15 @@
   "date": "2026-10-16",
   "existing": false,
   "note": "The main theorem specializes the clause-by-clause ConeIndependenceSpec to the actual pbcScalarSystem, with the published stage/pair shifts and pretriangulations. transportedCone explicitly constructs the scalar-extended triangle with associator endpoint identifications. The recorded scalar-extension module is imported for the proof plan."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261019T093534-L-2323828",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
