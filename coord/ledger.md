@@ -17652,3 +17652,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:10 L: merged deliver/B3/Sheaf.AlgebraicGeometry.SchemeUniverseEnlargement (stage 3; reviewer PASS; first push; landing 20261019T231038-L-542251 (proof); batch 20261019T231019; modules 1; new nodes 0)
 - 23:10 L: merged deliver/B4/Sheaf.RingTheory.LocalGeneratingTuples (stage 3; reviewer PASS; first push; landing 20261019T231040-L-542686 (interface); batch 20261019T231019; modules 1; new nodes 0; change records: coord/changes/B4-local-generating-tuples-private-helper-scopes.md)
 - 23:10 L: merged deliver/B5/Sheaf.SixFunctors.FrobeniusPointTransportNatural (stage 3; reviewer PASS; first push; landing 20261019T231041-L-543350 (proof); batch 20261019T231019; modules 1; new nodes 0)
+- 23:10 L: merged deliver/B5/Sheaf.SixFunctors.GraphFrobeniusOpenExchange (stage 3; reviewer PASS; first push; landing 20261019T231043-L-543793 (interface); batch 20261019T231019; modules 2; new nodes 1)

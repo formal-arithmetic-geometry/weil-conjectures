@@ -1,0 +1,166 @@
+{
+ "id": "lem-trf-scheme-galois-pullback-naturality",
+ "kind": "statement",
+ "title": "Pullback naturality of the specified positive-iterate scheme/Galois comparison",
+ "statement": "Fix the finite-field datum D of [def-weil-finite-field-fiber]. Let X0 and Y0 be finite-type k0-schemes and j0:X0 to Y0 an arbitrary k0-morphism, with geometric base change j:X to Y. Let A be a finite commutative ring with an integer annihilator invertible in k, as in [prop-trf-scheme-galois-comparison], and m>=1. Write P_Z=L(Phi_Z^m)^*, G_Z=L(g_Z^m)^* and kappa_Z:P_Z to G_Z for the specified comparison. Supply commutativity equalities Phi_X^m followed by j = j followed by Phi_Y^m and g_X^m followed by j = j followed by g_Y^m. Let r be intrinsic derived pullback along j. Define alpha_P:r followed by P_X to P_Y followed by r, and alpha_G similarly, by the intrinsic square comparison of [lem-trf-open-square-exchange], conjugated on the horizontal functors by the unique unit-normalized tensor/intrinsic comparisons of that node. Then alpha_P followed by kappa_Y whiskered on the right by r equals kappa_X whiskered on the left by r followed by alpha_G. This equality is on the entire ordinary unbounded derived categories, with no open, smooth, Cartesian, separatedness or constructibility assumption on j.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-scheme-geometric-frobenius.md",
+  "place": "Final displayed equality Lf^* kappa_Y = kappa_X Lf^*, with its pullback-composition identifications; positive iterates use the same construction at exponent a*m. Used in graph-Frobenius-operator proof, Step 2."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-trf-scheme-frobenius",
+  "prop-trf-scheme-galois-comparison",
+  "lem-trf-open-square-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Expand the specified comparison of prop-trf-scheme-galois-comparison at each model Z0 as the factorization transport Phi_Z^m = H_Z followed by g_Z^m, the inverse canonical composition comparison, and the derived absolute-Frobenius trivialization at exponent a*m, whiskered by g_Z^m. The finite coefficient and annihilator hypotheses are exactly the hypotheses of that comparison theorem.",
+   "uses": [
+    "prop-trf-scheme-galois-comparison",
+    "prop-trf-frobenius-factorization",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the relative-Frobenius site isomorphisms used in this expansion with those of lem-pur-frobenius-trivialization-pullback. Both have first projection F_V^(a*m) and second projection V to Z; fibre-product uniqueness identifies them. Their ordinary module trivializations then agree: their adjuncts have the identical section-unit formula M(r_V inverse), so injectivity of the normalized adjunction Hom bijection identifies their components. Apply the arbitrary-pullback naturality equation of that node to the geometric base change of j0.",
+   "uses": [
+    "lem-pur-frobenius-trivialization-pullback",
+    "def-pc-fibre-product",
+    "prop-trf-scheme-galois-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical coefficient maps compose by lem-trf-constant-coefficient-composition. Use lem-sf-proetale-tensor-composition-unit to fix the ordinary comparisons: both ways of reassociating a triple tensor send ((v tensor a) tensor b) tensor c to v tensor c_h(c_k(a))*c_h(b)*c. The fibre-product comparisons keep the same projections, so they also agree. Exact termwise descent and the K-flat normalization of the canonical derived composition identify these maps with those used in Step 1. The derived associativity equation is lem-trf-derived-pullback-coherence.",
+   "uses": [
+    "lem-trf-constant-coefficient-composition",
+    "lem-sf-proetale-tensor-composition-unit",
+    "lem-trf-derived-pullback-coherence",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "prop-weil-pbc-proetale-constant-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two coordinate comparisons from tensor pullback to intrinsic pullback are fixed by their section-unit equations in lem-trf-open-square-exchange. Conjugating the composition and Frobenius naturality identities by these comparisons yields the mixed square constantIntrinsicSquarePullback. Substitute the expansion of kappa from Step 1, use the triple associativity identity from Step 3, then the absolute-Frobenius naturality identity from Step 2. Naturality of tau_X with respect to the Galois square comparison moves it to the last factor. These operations give exactly alpha_P followed by restriction of kappa_Y equals kappa_X at the restricted input followed by alpha_G. Neither Cartesianity nor smoothness enters this calculation, and a*m is arbitrary; hence the equation holds for all supplied wP,wG and every positive m.",
+   "uses": [
+    "lem-trf-open-square-exchange",
+    "lem-pur-frobenius-trivialization-pullback",
+    "lem-trf-derived-pullback-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-trf-scheme-galois-comparison",
+  "prop-trf-frobenius-factorization",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pur-frobenius-trivialization-pullback",
+  "def-pc-fibre-product",
+  "lem-trf-constant-coefficient-composition",
+  "lem-sf-proetale-tensor-composition-unit",
+  "lem-trf-derived-pullback-coherence",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-trf-open-square-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-scheme-geometric-frobenius.md",
+  "place": "Final displayed equality Lf^* kappa_Y = kappa_X Lf^*, with its pullback-composition identifications; positive iterates use the same construction at exponent a*m. Used in graph-Frobenius-operator proof, Step 2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Frobenius.*natur|Galois.*pullback",
+   "results": "{\"ok\": true, \"n_hits\": 9, \"top\": [\"Mathlib/NumberTheory/FrobeniusNumber.lean\", \"Mathlib/NumberTheory/FrobeniusNumber.lean\", \"Mathlib/NumberTheory/FrobeniusNumber.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean\", \"Mathlib/CategoryTheory/Sites/Sieves.lean\", \"Mathlib/CategoryTheory/Sites/Sieves.lean\", \"Mathlib/CategoryTheory/Sites/Sieves.lean\", \"Mathlib/CategoryTheory/Sites/Sieves.lean\"]}",
+   "date": "2026-10-19",
+   "verdict": "No match for this specified comparison on pro-etale derived categories; generic adjunction, scheme Frobenius and pullback results only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"unit\"",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"top\": [\"CategoryTheory.Adjunction.mkOfUnitCounit\", \"CategoryTheory.Adjunction.counit\", \"CategoryTheory.Adjunction.unit\", \"CategoryTheory.Adjunction.ext_counit\", \"CategoryTheory.Adjunction.ofNatIsoLeft_counit\", \"CategoryTheory.Adjunction.ofNatIsoLeft_unit\", \"CategoryTheory.Adjunction.ofNatIsoRight_counit\", \"CategoryTheory.Adjunction.ofNatIsoRight_unit\"]}",
+   "date": "2026-10-19",
+   "verdict": "No match for this specified comparison on pro-etale derived categories; generic adjunction, scheme Frobenius and pullback results only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scheme Galois Frobenius pullback comparison is natural under morphisms of models",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"AlgebraicGeometry.Scheme.ΓSpecIso_naturality\", \"AlgebraicGeometry.Scheme.ΓSpecIso_naturality_assoc\", \"AlgebraicGeometry.Scheme.toSpecΓ_naturality\", \"AlgebraicGeometry.Scheme.toSpecΓ_naturality_assoc\", \"AlgebraicGeometry.Scheme.Hom.naturality_assoc\", \"AlgebraicGeometry.Spec_Γ_naturality_assoc\", \"AlgebraicGeometry.Scheme.Hom.naturality\", \"AlgebraicGeometry.Scheme.Modules.pullbackComp\"]}",
+   "date": "2026-10-19",
+   "verdict": "No match for this specified comparison on pro-etale derived categories; generic adjunction, scheme Frobenius and pullback results only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical comparison between scheme Frobenius and geometric Galois Frobenius pullbacks is compatible with arbitrary pullback",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"CategoryTheory.Limits.pullbackComparison\", \"AlgebraicGeometry.Scheme.Pullback.instHasPullback\", \"AlgebraicGeometry.IsProper.instFstScheme\", \"AlgebraicGeometry.IsProper.instSndScheme\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Flat.instSndScheme\", \"AlgebraicGeometry.Scheme.canonicallyOverPullback\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\"]}",
+   "date": "2026-10-19",
+   "verdict": "No match for this specified comparison on pro-etale derived categories; generic adjunction, scheme Frobenius and pullback results only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.GraphFrobeniusOpenExchange",
+  "date": "2026-10-19",
+  "group": "B5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-graph-frobenius-operator",
+   "place": "Step 2: compatibility of the scheme/Galois comparisons with compact-support exchange, restriction identity before taking open-adjunction mates.",
+   "via": [
+    "lem-trf-graph-frobenius-open-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.SchemeGaloisPullbackNaturality",
+  "file": "lean/Sheaf/SixFunctors/SchemeGaloisPullbackNaturality.lean",
+  "declaration": "WeilConjectures.FiniteFieldDatum.canonicalSchemeGaloisComparison_pullback",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.constantIntrinsicSquarePullback",
+   "WeilConjectures.FiniteFieldDatum.canonicalSchemeGaloisComparison_pullback"
+  ],
+  "statement": "theorem canonicalSchemeGaloisComparison_pullback\n    (D : WeilConjectures.FiniteFieldDatum.{u})\n    (X₀ Y₀ : Over (Spec (CommRingCat.of D.k₀)))\n    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]\n    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]\n    (j₀ : X₀ ⟶ Y₀) (A : Type u) [CommRing A] [Finite A]\n    (hA : ∃ n : ℕ, IsUnit (n : D.k) ∧ ∀ a : A, n • a = 0)\n    (m : ℕ) (hm : 1 ≤ m)\n    (wP : D.schemeFrobeniusIterate X₀ m ≫\n        ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map j₀).left =\n      ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map j₀).left ≫\n        D.schemeFrobeniusIterate Y₀ m)\n    (wG : (HPow.hPow (α := End (D.geometricFiber X₀).left)\n        (D.geometricGaloisFrobenius X₀) m) ≫\n        ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map j₀).left =\n      ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map j₀).left ≫\n        (HPow.hPow (α := End (D.geometricFiber Y₀).left)\n          (D.geometricGaloisFrobenius Y₀) m)) :\n    (constantIntrinsicSquarePullback A (D.schemeFrobeniusIterate X₀ m) _ _\n        (D.schemeFrobeniusIterate Y₀ m) wP).hom ≫\n      Functor.whiskerRight (D.canonicalSchemeGaloisComparison Y₀ A hA m hm).hom\n        (sfIntrinsicDerivedPullback A\n          (((Over.pullback (Spec.map (CommRingCat.ofHom\n            (algebraMap D.k₀ D.k)))).map j₀).left)) =\n    Functor.whiskerLeft\n        (sfIntrinsicDerivedPullback A\n          (((Over.pullback (Spec.map (CommRingCat.ofHom\n            (algebraMap D.k₀ D.k)))).map j₀).left))\n        (D.canonicalSchemeGaloisComparison X₀ A hA m hm).hom ≫\n      (constantIntrinsicSquarePullback A\n        (HPow.hPow (α := End (D.geometricFiber X₀).left)\n          (D.geometricGaloisFrobenius X₀) m) _ _\n        (HPow.hPow (α := End (D.geometricFiber Y₀).left)\n          (D.geometricGaloisFrobenius Y₀) m) wG).hom",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261019T231043-L-543793",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261019T231043-L-543793",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
