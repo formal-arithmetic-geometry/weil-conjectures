@@ -10,18 +10,7 @@ public import Sheaf.Paper.IntegralReductionTowerCanonical
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-import Sheaf.Paper.PurInverseImageTensorHom
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.QuasiIsoSaturatedTriangulated
-import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
-import Sheaf.Paper.KFlatRingedToposPullback
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.ScalarExtensionRingIso
-import Sheaf.Paper.EtaleDerivedScalarTensor
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Paper.IntegralReductionTowerWellDefinedUnrestricted
+import Mathlib.CategoryTheory.Limits.Preserves.Limits
 
 /-! # Isomorphism inverse image of completed coefficient reduction towers
 
@@ -75,6 +64,81 @@ instance (priority := 4000) isoReductionSiteSmall (W : Scheme.{t}) :
     EssentiallySmall.{max u (t + 1)} W.ProEt :=
   essentiallySmallSelf _
 
+private theorem isoReductionConstant_hom_ext (W : Scheme.{t})
+    (A B : CommRingCat.{max u (t + 1)})
+    (f h : (sheafCompose (ProEt.topology W)
+      (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj
+        ((constantSheaf (ProEt.topology W) CommRingCat.{max u (t + 1)}).obj A) ⟶
+      (sheafCompose (ProEt.topology W)
+      (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj
+        ((constantSheaf (ProEt.topology W) CommRingCat.{max u (t + 1)}).obj B))
+    (hf : ∀ (U : W.ProEt) (a : A),
+      f.hom.app (op U)
+          ((toSheafify (ProEt.topology W) ((Functor.const W.ProEtᵒᵖ).obj A)).app
+            (op U) a) =
+        h.hom.app (op U)
+          ((toSheafify (ProEt.topology W) ((Functor.const W.ProEtᵒᵖ).obj A)).app
+            (op U) a)) : f = h := by
+  let S := sheafCompose (ProEt.topology W)
+    (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})
+  have he : S.preimage f = S.preimage h := by
+    apply Sheaf.hom_ext
+    apply sheafify_hom_ext (ProEt.topology W) _ _
+      ((constantSheaf (ProEt.topology W) CommRingCat.{max u (t + 1)}).obj B).property
+    ext U a
+    have ef := congrArg (fun z ↦ z.hom.app U) (S.map_preimage f)
+    have eh := congrArg (fun z ↦ z.hom.app U) (S.map_preimage h)
+    change ((S.map (S.preimage f)).hom.app U) _ =
+      ((S.map (S.preimage h)).hom.app U) _
+    rw [ef, eh]
+    exact hf U.unop a
+  simpa only [S.map_preimage] using congrArg S.map he
+
+private theorem isoReductionConstant_map (W : Scheme.{t})
+    {A B : CommRingCat.{max u (t + 1)}} (f : A ⟶ B) (U : W.ProEt) (a : A) :
+    (((constantSheaf (ProEt.topology W) CommRingCat.{max u (t + 1)}).map f).hom.app (op U))
+        (((toSheafify (ProEt.topology W) ((Functor.const W.ProEtᵒᵖ).obj A)).app
+          (op U)) a) =
+      ((toSheafify (ProEt.topology W) ((Functor.const W.ProEtᵒᵖ).obj B)).app
+        (op U)) (f a) := by
+  exact (congrArg (fun e ↦ (e.app (op U)) a)
+    (toSheafify_naturality (ProEt.topology W)
+      ((Functor.const W.ProEtᵒᵖ).map f))).symm
+
+private theorem isoReductionConstant_naturality
+    {A B : CommRingCat.{max u (t + 1)}} (f : A ⟶ B) :
+    (isoSectionwiseInverseImage g RingCat.{max u (t + 1)}).map
+        ((sheafCompose (ProEt.topology Y)
+          (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
+          ((constantSheaf (ProEt.topology Y) CommRingCat.{max u (t + 1)}).map f)) ≫
+      isoSectionwiseConstantMap g B =
+    isoSectionwiseConstantMap g A ≫
+      (sheafCompose (ProEt.topology X)
+          (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
+        ((constantSheaf (ProEt.topology X) CommRingCat.{max u (t + 1)}).map f) := by
+  let cA := isoSectionwiseConstantMap g A
+  let cB := isoSectionwiseConstantMap g B
+  have hA := (isoSectionwiseConstantMap_existsUnique g A).exists.choose_spec
+  have hB := (isoSectionwiseConstantMap_existsUnique g B).exists.choose_spec
+  apply (cancel_epi (inv cA)).1
+  apply isoReductionConstant_hom_ext X A B
+  intro U a
+  have hi : (inv cA).hom.app (op U)
+      ((toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj A)).app (op U) a) =
+      (toSheafify (ProEt.topology Y) ((Functor.const Y.ProEtᵒᵖ).obj A)).app
+        (op ((proEtaleIsoPostcompose g).obj U)) a := by
+    rw [← hA U a]
+    exact congrArg (fun e ↦ e.hom.app (op U)
+      ((toSheafify (ProEt.topology Y) ((Functor.const Y.ProEtᵒᵖ).obj A)).app
+        (op ((proEtaleIsoPostcompose g).obj U)) a)) (IsIso.hom_inv_id cA)
+  change cB.hom.app (op U)
+      ((((constantSheaf (ProEt.topology Y) CommRingCat.{max u (t + 1)}).map f).hom.app
+        (op ((proEtaleIsoPostcompose g).obj U)))
+          ((inv cA).hom.app (op U) _)) =
+    (((constantSheaf (ProEt.topology X) CommRingCat.{max u (t + 1)}).map f).hom.app (op U))
+      (cA.hom.app (op U) ((inv cA).hom.app (op U) _))
+  erw [hi, isoReductionConstant_map, hB, hA, isoReductionConstant_map]
+
 /-- The completed coefficient comparison is uniquely specified by its projections.
 Source: Stacks Tags 09A5, 03CO
 (blueprint: lem-weil-isomorphism-derived-pullback-reduction-tower).
@@ -91,7 +155,35 @@ theorem isoReductionCompletedMap_existsUnique :
           (limit.π (integralCoefficientSheafSystem l E Y) (op n)) ≫
           isoSectionwiseConstantMap g
             (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1)))) := by
-  sorry
+  let F := isoSectionwiseInverseImage g RingCat.{max u (t + 1)}
+  let A := integralCoefficientSheafSystem l E Y
+  let B := integralCoefficientSheafSystem l E X
+  let α : A ⋙ F ⟶ B := NatTrans.ofOpSequence
+    (fun n ↦ isoSectionwiseConstantMap g
+      (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1)))))
+    (fun n ↦ by
+      simp only [Functor.comp_map, A, B, integralCoefficientSheafSystem,
+        Functor.ofOpSequence_map_homOfLE_succ]
+      exact isoReductionConstant_naturality g _)
+  have : ∀ n, IsIso (α.app n) := fun n ↦ isoSectionwiseConstantMap_isIso g _
+  let e : A ⋙ F ≅ B := NatIso.ofComponents (fun n ↦ asIso (α.app n))
+    (fun f ↦ α.naturality f)
+  have : PreservesLimitsOfSize.{0, 0} F :=
+    (isoSectionwiseInverseImage_equivalence g RingCat.{max u (t + 1)}).2.1
+  let d : F.obj (limit A) ≅ limit B :=
+    preservesLimitIso F A ≪≫ HasLimit.isoOfNatIso e
+  have hd : ∀ n : ℕ, d.hom ≫ limit.π B (op n) =
+      F.map (limit.π A (op n)) ≫ α.app (op n) := by
+    intro n
+    simp only [d, Iso.trans_hom, Category.assoc,
+      HasLimit.isoOfNatIso_hom_π, preservesLimitIso_hom_π_assoc, e,
+      NatIso.ofComponents_hom_app, asIso_hom]
+  refine ⟨d, hd, ?_⟩
+  intro c hc
+  apply Iso.ext
+  apply (limit.isLimit B).hom_ext
+  intro n
+  exact (hc n.unop).trans (hd n.unop).symm
 
 /-- The actual limit comparison followed by the limit of constant comparisons.
 Source: Stacks Tag 03CO
@@ -191,7 +283,9 @@ theorem isoReductionMapQuasiIso
     {P K : CochainComplex (scalarReductionSource l E Y) ℤ}
     (q : P ⟶ K) (hq : QuasiIso q) :
     QuasiIso ((isoReductionIntegralComplex l E g).map q) := by
-  sorry
+  have : QuasiIso q := hq
+  exact HomologicalComplex.quasiIso_map_of_preservesHomology q
+    (isoReductionIntegralInverse l E g)
 
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The normalized tensor identifications intertwine quotient arrows, transitions,
