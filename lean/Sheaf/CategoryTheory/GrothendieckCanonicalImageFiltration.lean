@@ -5,7 +5,7 @@ Authors: SHEAF group T3
 -/
 module
 
-public import Sheaf.CategoryTheory.GrothendieckComposablePair
+public import WeilConjectures.CategoryTheory.GrothendieckComposablePair
 public import Sheaf.CategoryTheory.Filtration
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 

@@ -11,7 +11,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Sheaf.Paper.ComparisonPullbackExact
 public import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
 public import Sheaf.AlgebraicGeometry.ComparisonGlobalCohomologyFiniteNormalized
-public import Sheaf.CategoryTheory.HypercohomologyLeftEdge
+public import WeilConjectures.CategoryTheory.HypercohomologyLeftEdge
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections

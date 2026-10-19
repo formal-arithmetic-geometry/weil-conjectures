@@ -7,7 +7,7 @@ module
 public import Mathlib.FieldTheory.KrullTopology
 public import Mathlib.FieldTheory.IsSepClosed
 import Mathlib.FieldTheory.Galois.Infinite
-import Sheaf.FieldTheory.OpenSubgroupFixedField
+import WeilConjectures.FieldTheory.OpenSubgroupFixedField
 
 /-!
 # Finite separable extensions and finite continuous Galois sets

@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
 import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.GeometricLifts
-import Sheaf.FieldTheory.GaloisAutomorphismExtension
+import WeilConjectures.FieldTheory.GaloisAutomorphismExtension
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 
 /-!

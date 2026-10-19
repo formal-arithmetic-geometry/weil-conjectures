@@ -16,7 +16,7 @@ public import Mathlib.LinearAlgebra.Quotient.Basic
 import Sheaf.RingTheory.ColimitEventuallyFlat
 import Sheaf.LinearAlgebra.TensorProduct.ColimitVaryingRings
 import Sheaf.RingTheory.FlatModInjective
-import Sheaf.RingTheory.LocalizedBaseChangeQuotientFlat
+import WeilConjectures.RingTheory.LocalizedBaseChangeQuotientFlat
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.LinearAlgebra.Basis.VectorSpace
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits

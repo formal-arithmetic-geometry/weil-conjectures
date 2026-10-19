@@ -1,5 +1,5 @@
 module
-public import Sheaf.RingTheory.LimitModuleRingData
+public import WeilConjectures.RingTheory.LimitModuleRingData
 @[expose] public section
 universe u v p
 open CategoryTheory CategoryTheory.Limits

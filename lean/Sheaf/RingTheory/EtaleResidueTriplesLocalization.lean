@@ -8,9 +8,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.FieldTheory.IsSepClosed
-import Sheaf.RingTheory.EtaleResidueTripleUnitRefinement
-import Sheaf.RingTheory.EtaleResidueTripleIdealRefinement
-import Sheaf.RingTheory.EtaleResidueTriplesRepresentatives
+import WeilConjectures.RingTheory.EtaleResidueTripleUnitRefinement
+import WeilConjectures.RingTheory.EtaleResidueTripleIdealRefinement
+import WeilConjectures.RingTheory.EtaleResidueTriplesRepresentatives
 
 /-!
 # Localization properties of the pointed etale colimit

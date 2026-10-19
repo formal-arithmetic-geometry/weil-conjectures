@@ -12,8 +12,8 @@ import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
 import WeilConjectures.RepresentationTheory.SylowModuleFiltration
 import Mathlib.FieldTheory.Galois.Profinite
 import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
-import Sheaf.FieldTheory.OpenSubgroupFixedField
-import Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationSheafTransport
+import WeilConjectures.FieldTheory.OpenSubgroupFixedField
+import WeilConjectures.AlgebraicGeometry.Curve.PrimaryModuleFiltrationSheafTransport
 
 @[expose] public section
 set_option autoImplicit false

@@ -5,7 +5,7 @@ Authors: SHEAF group NK
 -/
 module
 
-public import Sheaf.Algebra.Homology.IdealPowerTorsionFunctor
+public import WeilConjectures.Algebra.Homology.IdealPowerTorsionFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.EnoughInjectives
 public import Mathlib.CategoryTheory.Abelian.RightDerived
@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.Abelian.FunctorCategory
 public import Mathlib.RingTheory.Noetherian.Defs
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
 import Sheaf.Algebra.Homology.IdealPowerTorsionInjective
-import Sheaf.CategoryTheory.GrothendieckComposablePair
+import WeilConjectures.CategoryTheory.GrothendieckComposablePair
 import Sheaf.CategoryTheory.GrothendieckSpectralSequence
 import WeilConjectures.CategoryTheory.Abelian.Filtration
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic

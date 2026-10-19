@@ -5,7 +5,7 @@ Authors: SHEAF group Q04
 -/
 module
 
-public import Sheaf.Algebra.Homology.IdealPowerTorsionFunctor
+public import WeilConjectures.Algebra.Homology.IdealPowerTorsionFunctor
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 import Mathlib.Algebra.Category.ModuleCat.Injective

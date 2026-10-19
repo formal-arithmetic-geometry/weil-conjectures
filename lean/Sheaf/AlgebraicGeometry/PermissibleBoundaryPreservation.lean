@@ -15,7 +15,7 @@ public import WeilConjectures.Blowup.Gluing
 public import WeilConjectures.Compactification.StrictTransform
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-public import Sheaf.RingTheory.IsRegularSystemOfParameters
+public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.Blowup.Proper
 import WeilConjectures.Blowup.Complement

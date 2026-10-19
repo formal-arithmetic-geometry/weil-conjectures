@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.CategoryTheory.HypercohomologyLeftEdge
+public import WeilConjectures.CategoryTheory.HypercohomologyLeftEdge
 public import Mathlib.Algebra.Homology.SingleHomology
 import Sheaf.CategoryTheory.HypercohomologyLeftEdgeTruncation
 import Sheaf.CategoryTheory.RightDerivedUnitSingleDegree

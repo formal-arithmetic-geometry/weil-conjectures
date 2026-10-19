@@ -7,7 +7,7 @@ module
 
 public import Sheaf.DeligneLaumon.SmoothAffineGeometricFiltration
 public import Sheaf.Paper.FiniteFieldFiber
-import Sheaf.AlgebraicGeometry.GeometricallyConnectedCheckAfterExtension
+import WeilConjectures.AlgebraicGeometry.GeometricallyConnectedCheckAfterExtension
 import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.LimitBaseChange
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier

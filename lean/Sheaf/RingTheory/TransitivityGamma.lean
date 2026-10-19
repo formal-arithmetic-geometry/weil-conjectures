@@ -5,7 +5,7 @@ Authors: SHEAF groups Q1, G2
 -/
 module
 
-public import Sheaf.RingTheory.JacobiZariskiHomologySequence
+public import WeilConjectures.RingTheory.JacobiZariskiHomologySequence
 import Sheaf.FieldTheory.FieldExtensionCompleteIntersectionSubalgebras
 import Sheaf.RingTheory.JacobiZariskiRegularSequenceLeftInjective
 

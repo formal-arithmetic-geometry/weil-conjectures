@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.FormallySmoothAdic
 public import WeilConjectures.RingTheory.CohenRing
-public import Sheaf.RingTheory.IsRegularSystemOfParameters
+public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 import Sheaf.RingTheory.PowerSeriesUniversalPropertyComplete
 import Sheaf.RingTheory.PowerSeriesParameterQuotient

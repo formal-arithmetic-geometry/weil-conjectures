@@ -6,7 +6,7 @@ Authors: SHEAF group M2
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectHomTransport
-public import Sheaf.Algebra.Homology.ScalarExtensionHom
+public import WeilConjectures.Algebra.Homology.ScalarExtensionHom
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.Finiteness.Defs
@@ -15,9 +15,9 @@ import Sheaf.AlgebraicGeometry.SchemeIsoDerivedEquivalence
 import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import Mathlib.Algebra.Category.ModuleCat.AB
-import Sheaf.AlgebraicGeometry.AffineBaseChangeSchemeComparisons
+import WeilConjectures.AlgebraicGeometry.AffineBaseChangeSchemeComparisons
 import Sheaf.AlgebraicGeometry.AffineBaseChangeModelIsosOfSchemeComparisons
-public import Sheaf.AlgebraicGeometry.AffineBaseChangeRingDiagram
+public import WeilConjectures.AlgebraicGeometry.AffineBaseChangeRingDiagram
 public import Sheaf.AlgebraicGeometry.AffineModelComparisonData
 
 /-! # Coherent geometric isomorphisms of specified affine models

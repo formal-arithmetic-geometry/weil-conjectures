@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 
 import WeilConjectures.AlgebraicGeometry.EtaleAwayOfLocalizedCotangentVanishing
 import Sheaf.AlgebraicGeometry.SmoothSectionDifferentialBasis
-import Sheaf.RingTheory.SectionDifferentialBasisQuotient
+import WeilConjectures.RingTheory.SectionDifferentialBasisQuotient
 
 /-! # Étale neighbourhoods along a smooth algebra section
 

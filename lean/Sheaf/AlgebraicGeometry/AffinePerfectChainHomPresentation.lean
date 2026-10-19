@@ -7,13 +7,13 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectHomTransport
 public import Sheaf.AlgebraicGeometry.PerfectComplex
-public import Sheaf.Algebra.Homology.ScalarExtensionHom
+public import WeilConjectures.Algebra.Homology.ScalarExtensionHom
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
-import Sheaf.AlgebraicGeometry.ScalarExtensionChainHomDiagram
+import WeilConjectures.AlgebraicGeometry.ScalarExtensionChainHomDiagram
 import Sheaf.AlgebraicGeometry.AffinePerfectChainGeometricModels
 
 /-! # Chain-level affine perfect Hom comparison

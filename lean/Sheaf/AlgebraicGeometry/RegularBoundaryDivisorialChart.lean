@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.IsRegularScheme
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Sheaf.AlgebraicGeometry.StrictNormalCrossingsBoundary
 public import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
-public import Sheaf.RingTheory.IsRegularSystemOfParameters
+public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 public import Sheaf.AlgebraicGeometry.LogRegularPair
 public import WeilConjectures.ConstructibleSheaf.OpenClosedStratification
 import Sheaf.AlgebraicGeometry.PointedEtaleStalk

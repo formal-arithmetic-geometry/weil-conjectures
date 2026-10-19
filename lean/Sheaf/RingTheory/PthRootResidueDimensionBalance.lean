@@ -13,8 +13,8 @@ import Sheaf.Paper.CartierEquality
 import Mathlib.Algebra.Module.LinearMap.Index
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
 import WeilConjectures.FieldTheory.PthRootsExtensionDegree
-import Sheaf.RingTheory.JacobiZariskiConnectingMapNaturality
-import Sheaf.RingTheory.JacobiZariskiHomologySequence
+import WeilConjectures.RingTheory.JacobiZariskiConnectingMapNaturality
+import WeilConjectures.RingTheory.JacobiZariskiHomologySequence
 import Sheaf.RingTheory.PurelyInseparableBaseChangeLocalRing
 import Sheaf.RingTheory.SubsingletonH1CotangentOfCharP
 

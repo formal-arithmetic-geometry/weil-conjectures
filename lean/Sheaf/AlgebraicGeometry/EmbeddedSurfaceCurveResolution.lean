@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.OrdinaryResolutionRule
 public import Sheaf.AlgebraicGeometry.StrictNormalCrossingsBoundary
 public import Sheaf.RingTheory.ExcellentRing
-public import Sheaf.RingTheory.IsRegularSystemOfParameters
+public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 public import WeilConjectures.AlgebraicGeometry.RelativeProj.Basic

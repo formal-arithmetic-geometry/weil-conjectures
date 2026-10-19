@@ -14,7 +14,7 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.RingTheory.Etale.Field
-import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleOpenIntegralClosure
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleOpenIntegralClosure
 import Sheaf.AlgebraicGeometry.Morphisms.RelativeNormalizationNormalStalks
 import Sheaf.RingTheory.SmoothNormalRing
 import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField

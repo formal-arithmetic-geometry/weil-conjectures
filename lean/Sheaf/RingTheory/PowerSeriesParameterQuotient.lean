@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.MvPowerSeries.Equiv
 public import Mathlib.RingTheory.MvPowerSeries.Inverse
 public import WeilConjectures.RingTheory.CohenRing
-public import Sheaf.RingTheory.IsRegularSystemOfParameters
+public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
 import Sheaf.RingTheory.PowerSeriesQuotientVariables
 import Sheaf.RingTheory.PowerSeriesFullCoordinatesField

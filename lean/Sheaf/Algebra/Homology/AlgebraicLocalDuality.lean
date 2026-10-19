@@ -6,7 +6,7 @@ Authors: SHEAF group Q21
 module
 
 public import Sheaf.Algebra.Homology.AlgebraicNormalizedDualizing
-public import Sheaf.Algebra.Homology.IdealPowerTorsionFunctor
+public import WeilConjectures.Algebra.Homology.IdealPowerTorsionFunctor
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.RingTheory.AdicCompletion.Basic

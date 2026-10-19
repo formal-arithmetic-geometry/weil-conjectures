@@ -20,7 +20,7 @@ import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Mathlib.AlgebraicGeometry.Sites.Fpqc
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 import Sheaf.AlgebraicGeometry.SectionComponentPullback
-import Sheaf.AlgebraicGeometry.GeometricallyConnectedCheckAfterExtension
+import WeilConjectures.AlgebraicGeometry.GeometricallyConnectedCheckAfterExtension
 import WeilConjectures.AlgebraicGeometry.FpqcOpenSubschemeDescent
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite

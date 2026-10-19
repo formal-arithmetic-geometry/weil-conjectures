@@ -5,11 +5,11 @@ Authors: SHEAF group M3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
+public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparison
 public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleTopos
 import Mathlib.CategoryTheory.Sites.Limits
 import Mathlib.CategoryTheory.Sites.LocallyBijective
-import Sheaf.AlgebraicGeometry.EtaleSetStagePresheafLocallyInjective
+import WeilConjectures.AlgebraicGeometry.EtaleSetStagePresheafLocallyInjective
 import Sheaf.AlgebraicGeometry.EtaleSetStagePresheafLocallySurjective
 
 /-! # Sheaf-level continuity on the original affine étale site

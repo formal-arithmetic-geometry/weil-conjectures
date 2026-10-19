@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Sheaf.AlgebraicGeometry.GeometricallyConnectedCheckAfterExtension
+import WeilConjectures.AlgebraicGeometry.GeometricallyConnectedCheckAfterExtension
 
 /-!
 # Testing geometric connectedness on an algebraically closed extension

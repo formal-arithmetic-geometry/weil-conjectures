@@ -97,13 +97,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.TorKernelBoundaryHorseshoeComparison",
-  "file": "lean/Sheaf/RingTheory/TorKernelBoundaryHorseshoeComparison.lean",
+  "module": "WeilConjectures.RingTheory.TorKernelBoundaryHorseshoeComparison",
+  "file": "lean/WeilConjectures/RingTheory/TorKernelBoundaryHorseshoeComparison.lean",
   "declaration": "CategoryTheory.tor_kernel_boundary_horseshoe_comparison",
   "statement": "theorem tor_kernel_boundary_horseshoe_comparison\n    (R : Type u) [CommRing R] (M : ModuleCat.{u} R)\n    (F N : ModuleCat.{u} R) (q : F →ₗ[R] N) (hq : Function.Surjective q)\n    (A : ProjectiveResolution (ModuleCat.of R (LinearMap.ker q)))\n    (B : ProjectiveResolution F) (C : ProjectiveResolution N)\n    (a : A.complex ⟶ B.complex) (b : B.complex ⟶ C.complex) (w : a ≫ b = 0)\n    (ha : a.f 0 ≫ B.π.f 0 = A.π.f 0 ≫ ModuleCat.ofHom (LinearMap.ker q).subtype)\n    (hb : b.f 0 ≫ C.π.f 0 = B.π.f 0 ≫ ModuleCat.ofHom q)\n    (hs : ∀ n, Nonempty ((ShortComplex.mk a b w).map\n      (HomologicalComplex.eval (ModuleCat R) (ComplexShape.down ℕ) n)).Splitting)\n    (hS : ((ShortComplex.mk a b w).map\n      (((MonoidalCategory.tensoringRight (ModuleCat R)).obj M).mapHomologicalComplex\n        (ComplexShape.down ℕ))).ShortExact) :\n    (C.isoLeftDerivedObj ((MonoidalCategory.tensoringRight (ModuleCat R)).obj M) 1).hom ≫\n      hS.δ 1 0 (by simp) ≫\n      (ChainComplex.isoHomologyι₀ _).hom ≫\n      A.fromLeftDerivedZero' ((MonoidalCategory.tensoringRight (ModuleCat R)).obj M) =\n        -ModuleCat.ofHom (torKernelBoundary M F N q hq)",
   "branch": "sheaf-dag",
   "by": "T1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.TorKernelBoundaryHorseshoeComparison; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

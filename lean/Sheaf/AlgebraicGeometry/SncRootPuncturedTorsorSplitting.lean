@@ -6,7 +6,7 @@ Authors: SHEAF group Q116
 module
 
 public import WeilConjectures.Mathlib.RingTheory.Henselian
-public import Sheaf.RingTheory.IsRegularSystemOfParameters
+public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 public import Sheaf.AlgebraicGeometry.NormalScheme
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.RingTheory.MvPolynomial.Basic
@@ -17,13 +17,13 @@ import Sheaf.AlgebraicGeometry.Morphisms.GaloisCoverBaseChange
 import Sheaf.AlgebraicGeometry.Morphisms.FieldTorsorGaloisComponents
 import Sheaf.RingTheory.RegularLocalLocalization
 import Sheaf.RingTheory.RegularRingNormal
-import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleOpenGenericAlgebra
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleOpenGenericAlgebra
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Sheaf.RingTheory.EtaleNormalRing
 import Sheaf.RingTheory.NormalRingIntegrallyClosedTotal
 import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.RingTheory.StrictlyHenselianQuotient
-import Sheaf.RingTheory.RegularPrincipalPrimeLocalizationDvr
+import WeilConjectures.RingTheory.RegularPrincipalPrimeLocalizationDvr
 import Sheaf.RingTheory.DvrGaloisNormalizationRamificationDvd
 import Sheaf.RingTheory.DvrTameTensorFactorUnramified
 import Sheaf.AlgebraicGeometry.FinitePresentationOfFiniteLocallyNoetherian

@@ -5,10 +5,10 @@ Authors: SHEAF group B3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
-import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonLaws
+public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparison
+import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonLaws
 import Sheaf.AlgebraicGeometry.EtaleSetSectionEventualEquality
-import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonNaturality
+import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonNaturality
 import WeilConjectures.AlgebraicGeometry.EtalePairRestrictionDetection
 
 /-! # One overlap equation remains effective at later stages

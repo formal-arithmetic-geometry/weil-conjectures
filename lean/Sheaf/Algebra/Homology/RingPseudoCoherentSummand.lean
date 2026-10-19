@@ -2,10 +2,10 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Biproducts
 
-public import Sheaf.RingTheory.MPseudoCoherent
+public import WeilConjectures.RingTheory.MPseudoCoherent
 public import Sheaf.RingTheory.RingPseudoCoherent
 import Sheaf.RingTheory.PseudoCoherentDistinguishedTriangle
-import Sheaf.RingTheory.MPseudoCoherentVanishingBase
+import WeilConjectures.RingTheory.MPseudoCoherentVanishingBase
 import Sheaf.RingTheory.PseudoCoherentIffAllM
 
 @[expose] public section

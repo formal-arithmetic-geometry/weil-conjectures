@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
 public import Mathlib.LinearAlgebra.TensorProduct.Quotient
 import Sheaf.RingTheory.NoetherianFlatClosedFiberModel
-import Sheaf.RingTheory.Flat.LocalizationPreservesFlatness
+import WeilConjectures.RingTheory.Flat.LocalizationPreservesFlatness
 import Sheaf.RingTheory.FlatAndFlatOfFlatFibreNoetherian
 
 /-!

@@ -28,7 +28,7 @@ import Sheaf.RingTheory.PowerSeriesCompleteOverCompleteBase
 import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegular
 import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 import Sheaf.RingTheory.PowerSeriesUniversalPropertyComplete
-import Sheaf.RingTheory.RegularPrincipalPrimeLocalizationDvr
+import WeilConjectures.RingTheory.RegularPrincipalPrimeLocalizationDvr
 import Sheaf.Paper.CoefficientFieldGenericDifferentialBasis
 import Sheaf.RingTheory.FiniteAlgebraEtaleNearFieldOrDvr
 import Sheaf.RingTheory.FiniteFormalMapDifferentialCokernel

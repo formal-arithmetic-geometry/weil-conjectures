@@ -14,7 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 public import Mathlib.AlgebraicGeometry.Normalization
 import Sheaf.AlgebraicGeometry.Morphisms.SmoothConnectedGenericGeometryCore
-import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleOpenIntegralClosure
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleOpenIntegralClosure
 
 /-!
 # Finiteness of the normalization over a stalk

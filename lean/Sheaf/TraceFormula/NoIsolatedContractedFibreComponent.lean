@@ -23,12 +23,12 @@ import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 public import Sheaf.AlgebraicGeometry.SchemeUniverseEnlargement
-import Sheaf.RingTheory.Flat.LocalizationPreservesFlatness
+import WeilConjectures.RingTheory.Flat.LocalizationPreservesFlatness
 import Sheaf.AlgebraicGeometry.ConstantLocalDimensionComponents
 import Sheaf.AlgebraicGeometry.EquidimensionalOpenLocalDimension
 import Sheaf.AlgebraicGeometry.NoetherianSpecializationTrait
 import Sheaf.TraceFormula.FlatDenseGenericFibrePureDimension
-import Sheaf.FieldTheory.CommonExtensionFields
+import WeilConjectures.FieldTheory.CommonExtensionFields
 import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
 import Sheaf.AlgebraicGeometry.SteinFactorizationAffine
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex

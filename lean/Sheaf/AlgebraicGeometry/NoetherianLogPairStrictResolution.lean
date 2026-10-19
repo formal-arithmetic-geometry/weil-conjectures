@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.LogRegularPair
 public import Sheaf.AlgebraicGeometry.StrictNormalCrossingsBoundary
-public import Sheaf.RingTheory.IsRegularSystemOfParameters
+public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 public import Sheaf.RingTheory.ExcellentRing
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic

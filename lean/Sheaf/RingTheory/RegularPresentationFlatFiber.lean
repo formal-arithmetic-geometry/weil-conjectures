@@ -6,7 +6,7 @@ Authors: SHEAF group S1
 module
 
 public import Sheaf.RingTheory.FormallySmoothAdic
-public import Sheaf.RingTheory.IsRegularSystemOfParameters
+public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic

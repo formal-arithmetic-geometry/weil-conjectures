@@ -106,13 +106,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ModulePullbackSectionComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/ModulePullbackSectionComparison.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ModulePullbackSectionComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ModulePullbackSectionComparison.lean",
   "declaration": "AlgebraicGeometry.Etale.exists_modulePullbackSectionComparison",
   "statement": "theorem exists_modulePullbackSectionComparison\n    (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})\n    (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    ∃ e : ∀ (Y : Scheme.{u}) (f : Y ⟶ X) (U : X.Etale),\n      (((lowerStar (ModuleCat.{u + 1} Λ) f).obj\n        ((upperStar (ModuleCat.{u + 1} Λ) f).obj G)).obj.obj (op U)) ≃\n      (((Scheme.etaleSetPullback f).obj\n        ((sheafForget X.smallEtaleTopology).obj G)).obj.obj\n          (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj U))),\n      ∀ (Y Z : Scheme.{u}) (h : Z ⟶ Y) (f : Y ⟶ X) (k : Z ⟶ X)\n        (hk : h ≫ f = k) (U : X.Etale)\n        (s : ((lowerStar (ModuleCat.{u + 1} Λ) f).obj\n          ((upperStar (ModuleCat.{u + 1} Λ) f).obj G)).obj.obj (op U)),\n        e Z k U\n          ((((lowerStar (ModuleCat.{u + 1} Λ) f).map\n            ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) h).unit.app\n              ((upperStar (ModuleCat.{u + 1} Λ) f).obj G)) ≫\n            (lowerStarComp (ModuleCat.{u + 1} Λ) h f k hk.symm).hom.app _ ≫\n            (lowerStar (ModuleCat.{u + 1} Λ) k).map\n              ((upperStarComp (ModuleCat.{u + 1} Λ) h f k hk.symm).inv.app G)).hom.app\n                (op U)) s) =\n          etaleSetSectionComparison h f k hk\n            ((sheafForget X.smallEtaleTopology).obj G) U (e Y f U s)",
   "branch": "sheaf-dag",
   "by": "M3",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.ModulePullbackSectionComparison; points at its upstream twin."
  },
  "proof_deps": [
   "lem-sc-etale-module-set-pullback-comparison",

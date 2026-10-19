@@ -5,7 +5,7 @@ Authors: SHEAF group N8
 -/
 module
 
-public import Sheaf.RingTheory.MPseudoCoherent
+public import WeilConjectures.RingTheory.MPseudoCoherent
 public import Sheaf.RingTheory.RingPseudoCoherent
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat

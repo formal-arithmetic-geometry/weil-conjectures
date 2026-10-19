@@ -6,7 +6,7 @@ Authors: SHEAF group S3
 module
 
 public import Sheaf.RingTheory.FormallySmoothAdic
-public import Sheaf.RingTheory.IsRegularSystemOfParameters
+public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 public import Mathlib.RingTheory.Regular.RegularSequence
 import Sheaf.RingTheory.RegularLocalOfFormallySmoothAdic
 import Sheaf.RingTheory.RegularLocalQuotientKernelParameters

@@ -5,7 +5,7 @@ Authors: SHEAF group N2
 -/
 module
 
-public import Sheaf.CategoryTheory.GrothendieckComposablePair
+public import WeilConjectures.CategoryTheory.GrothendieckComposablePair
 import Sheaf.CategoryTheory.HypercohomologyEdgeCocycle
 import Sheaf.CategoryTheory.GrothendieckHypercohomologyEdge
 

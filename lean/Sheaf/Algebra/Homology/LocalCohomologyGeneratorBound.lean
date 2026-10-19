@@ -6,7 +6,7 @@ Authors: SHEAF group NV
 module
 
 public import Sheaf.Algebra.Homology.LocalCohomologicalDimension
-public import Sheaf.Algebra.Homology.IdealPowerTorsionFunctor
+public import WeilConjectures.Algebra.Homology.IdealPowerTorsionFunctor
 public import Mathlib.RingTheory.Ideal.Operations
 import Sheaf.Algebra.Homology.IdealTorsionCechComputation
 import Sheaf.Algebra.Homology.LocalCohomologySumSpectral
