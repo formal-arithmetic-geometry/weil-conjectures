@@ -45,14 +45,13 @@
  },
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.Algebra.Homology.ModuleRestrictionStalkNaturality",
-  "file": "lean/WeilConjectures/Algebra/Homology/ModuleRestrictionStalkNaturality.lean",
+  "module": "Sheaf.Algebra.Homology.ModuleRestrictionStalkNaturality",
+  "file": "lean/Sheaf/Algebra/Homology/ModuleRestrictionStalkNaturality.lean",
   "declaration": "AlgebraicGeometry.moduleRestrictionStalk_components_natural",
   "statement": "theorem moduleRestrictionStalk_components_natural (X : RingedSpace.{u}) (W : Opens X)\n    (x : X) (hx : x ∈ W)\n    (c : ∀ F : SheafOfModules.{u} (moduleRings X),\n      (ModuleCat.restrictScalars\n          (X.toPresheafedSpace.restrictStalkIso W.isOpenEmbedding ⟨x, hx⟩).inv.hom).obj\n        ((RingedSpace.moduleStalkFunctor (X.restrict W.isOpenEmbedding) ⟨x, hx⟩).obj\n          ((W.sheafOfModulesEquivOver (moduleRings X)).functor.obj\n            ((SheafOfModules.overFunctor (moduleRings X) W).obj F))) ⟶\n        (RingedSpace.moduleStalkFunctor X x).obj F)\n    (hc : ∀ (F : SheafOfModules.{u} (moduleRings X)) (V : Opens W)\n        (hV : (⟨x, hx⟩ : W) ∈ V)\n        (s : F.val.obj (op (W.isOpenEmbedding.isOpenMap.functor.obj V))),\n        (c F) (TopCat.Presheaf.germ (C := Ab.{u})\n          (X := (X.restrict W.isOpenEmbedding).carrier)\n          ((W.sheafOfModulesEquivOver (moduleRings X)).functor.obj\n            ((SheafOfModules.overFunctor (moduleRings X) W).obj F)).val.presheaf\n          V ⟨x, hx⟩ hV s) =\n        TopCat.Presheaf.germ (C := Ab.{u}) (X := X.carrier) F.val.presheaf\n          (W.isOpenEmbedding.isOpenMap.functor.obj V) x ⟨⟨x, hx⟩, hV, rfl⟩ s) :\n    ∀ {F G : SheafOfModules.{u} (moduleRings X)} (f : F ⟶ G),\n      (ModuleCat.restrictScalars\n          (X.toPresheafedSpace.restrictStalkIso W.isOpenEmbedding ⟨x, hx⟩).inv.hom).map\n        ((RingedSpace.moduleStalkFunctor (X.restrict W.isOpenEmbedding) ⟨x, hx⟩).map\n          ((W.sheafOfModulesEquivOver (moduleRings X)).functor.map\n            ((SheafOfModules.overFunctor (moduleRings X) W).map f))) ≫\n        c G =\n      (c F) ≫ (RingedSpace.moduleStalkFunctor X x).map f",
   "branch": "sheaf-dag",
   "by": "M1",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.Algebra.Homology.ModuleRestrictionStalkNaturality retired; now WeilConjectures.Algebra.Homology.ModuleRestrictionStalkNaturality."
+  "date": "2026-10-13"
  },
  "stmt_deps": [
   "def-weil-locally-ringed-space-morphism",

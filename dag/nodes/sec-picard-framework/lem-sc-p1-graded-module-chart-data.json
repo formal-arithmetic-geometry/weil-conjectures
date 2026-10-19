@@ -88,14 +88,13 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.GradedModuleChartData",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/ProjectiveSpace/GradedModuleChartData.lean",
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpace.GradedModuleChartData",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpace/GradedModuleChartData.lean",
   "declaration": "AlgebraicGeometry.Proj.graded_module_chart_data_exists",
   "statement": "theorem graded_module_chart_data_exists (k : Type u) [Field k]\n    (A : ModuleCat.{u} (MvPolynomial (Fin 2) k))\n    (𝒢 : ℤ → AddSubgroup A) (h𝒢 : DirectSum.IsInternal 𝒢)\n    (hsmul : ∀ (n : ℕ) (j : ℤ) (s : MvPolynomial (Fin 2) k) (x : A),\n      s ∈ homogeneousSubmodule (Fin 2) k n → x ∈ 𝒢 j → s • x ∈ 𝒢 ((n : ℤ) + j)) :\n    ∃ E : (Proj (homogeneousSubmodule (Fin 2) k)).Modules,\n    ∃ (alpha : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ),\n      0 < d → f ∈ homogeneousSubmodule (Fin 2) k d →\n      E.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f)) →+\n        LocalizedModule.Away f A),\n      (∀ (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d),\n        Function.Injective (alpha f d hd hf) ∧\n        Set.range (alpha f d hd hf) = degreeZeroFractions\n          (fun n : ℕ ↦ (homogeneousSubmodule (Fin 2) k n : Set (MvPolynomial (Fin 2) k)))\n          (fun n : ℕ ↦ (𝒢 n : Set A)) (Submonoid.powers f)) ∧\n      (∀ (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d)\n        (r : HomogeneousLocalization.Away (homogeneousSubmodule (Fin 2) k) f)\n        (s : E.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))),\n        alpha f d hd hf (awayToSection (homogeneousSubmodule (Fin 2) k) f r • s) =\n          algebraMap (HomogeneousLocalization.Away (homogeneousSubmodule (Fin 2) k) f)\n            (Localization.Away f) r • alpha f d hd hf s) ∧\n      (∀ (f g : MvPolynomial (Fin 2) k) (d b : ℕ) (hd : 0 < d) (hb : 0 < b)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d)\n        (hg : g ∈ homogeneousSubmodule (Fin 2) k b)\n        (inc : basicOpen (homogeneousSubmodule (Fin 2) k) g ≤\n          basicOpen (homogeneousSubmodule (Fin 2) k) f)\n        (e c : ℕ) (a : MvPolynomial (Fin 2) k),\n        0 < e → a ∈ homogeneousSubmodule (Fin 2) k c → g ^ e = a * f →\n        ∀ (m : ℕ) (y : A)\n          (s : E.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))),\n          alpha f d hd hf s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) →\n          alpha g b hb hg (E.val.map (homOfLE inc).op s) =\n            mk (a ^ m • y) (⟨g ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g))",
   "branch": "sheaf-dag",
   "by": "X2",
-  "date": "2026-10-12",
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.ProjectiveSpace.GradedModuleChartData retired; now WeilConjectures.AlgebraicGeometry.ProjectiveSpace.GradedModuleChartData."
+  "date": "2026-10-12"
  },
  "reviewed": {
   "date": "2026-10-12",

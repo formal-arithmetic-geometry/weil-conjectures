@@ -130,14 +130,13 @@
  "unit": "sk-thm-picard-rr",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.LeraySectionsResolutionComparison",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/LeraySectionsResolutionComparison.lean",
+  "module": "Sheaf.AlgebraicGeometry.LeraySectionsResolutionComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/LeraySectionsResolutionComparison.lean",
   "declaration": "AlgebraicGeometry.leray_sections_resolution_comparison",
   "statement": "theorem leray_sections_resolution_comparison {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    let D := RingedSpace.moduleDirectImage f.toLRSHom.toShHom\n    let G := RingedSpace.globalSectionsFunctor Y.toRingedSpace\n    ∃ e : ∀ q : ℕ,\n      (RingedSpace.moduleCohomology X.toRingedSpace q ⋙ forget₂ _ AddCommGrpCat) ≅\n        ((D ⋙ G).rightDerived q ⋙ forget₂ _ AddCommGrpCat),\n    ∀ (q : ℕ) (F : SheafOfModules.{u} (moduleRings X.toRingedSpace))\n      (I : InjectiveResolution F)\n      (s : (RingedSpace.globalSectionsComplex I).cycles q),\n      let K := (D.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex\n      let T := ((D ⋙ G).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex\n      ∃ z : G.obj (K.cycles q),\n        (I.cocomplex.X q).val.presheaf.map\n            (eqToHom (congrArg op (Opens.map_top f.base).symm))\n            ((RingedSpace.globalSectionsComplex I).iCycles q s) = G.map (K.iCycles q) z ∧\n        ∀ (c : G.obj (K.cycles q) ⟶ T.cycles q),\n          c ≫ T.iCycles q = G.map (K.iCycles q) →\n          (e q).hom.app F\n              ((I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) q).inv\n                ((RingedSpace.globalSectionsComplex I).homologyπ q s)) =\n            (I.isoRightDerivedObj (D ⋙ G) q).inv (T.homologyπ q (c z))",
   "branch": "sheaf-dag",
   "by": "G1",
-  "date": "2026-10-12",
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.LeraySectionsResolutionComparison retired; now WeilConjectures.AlgebraicGeometry.LeraySectionsResolutionComparison."
+  "date": "2026-10-12"
  },
  "reviewed": {
   "date": "2026-10-12",

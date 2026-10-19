@@ -99,14 +99,13 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.OpenDerivedSectionsTruncationTowerComparison",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/OpenDerivedSectionsTruncationTowerComparison.lean",
+  "module": "Sheaf.AlgebraicGeometry.OpenDerivedSectionsTruncationTowerComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenDerivedSectionsTruncationTowerComparison.lean",
   "declaration": "AlgebraicGeometry.openDerivedSections_truncationTower_comparison",
   "statement": "theorem openDerivedSections_truncationTower_comparison\n    (X : Scheme.{u}) (V : X.Opens)\n    [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wV} (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{wA} AddCommGrpCat.{u}]\n    (E : DerivedCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))) :\n    let S := SheafOfModules.evaluation.{u} (moduleRings X.toRingedSpace) (op V)\n    letI : S.Additive := inferInstanceAs\n      ((SheafOfModules.forget.{u} (moduleRings X.toRingedSpace) ⋙\n        PresheafOfModules.evaluation.{u} (moduleRings X.toRingedSpace).obj (op V)).Additive)\n    let G := S ⋙ forget₂\n      (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op V))) AddCommGrpCat.{u}\n    let H := RingedSpace.openModuleSections V.toScheme.toRingedSpace ⊤\n    let R := (schemeOpenRestriction X V).mapDerivedCategory\n    let t := DerivedCategory.TStructure.t\n      (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    let s := DerivedCategory.TStructure.t\n      (C := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))\n    ∃ (e : H.rightDerivedFunctor.obj (R.obj E) ≅ G.rightDerivedFunctor.obj E)\n      (en : ∀ n : ℕ, H.rightDerivedFunctor.obj ((s.truncGE (-(n : ℤ))).obj (R.obj E)) ≅\n        G.rightDerivedFunctor.obj ((t.truncGE (-(n : ℤ))).obj E)),\n      (∀ n : ℕ, H.rightDerivedFunctor.map ((s.truncGEπ (-(n : ℤ))).app (R.obj E)) ≫\n        (en n).hom = e.hom ≫ G.rightDerivedFunctor.map ((t.truncGEπ (-(n : ℤ))).app E)) ∧\n      (∀ n : ℕ, H.rightDerivedFunctor.map\n        ((s.natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by omega)).app (R.obj E)) ≫\n          (en n).hom = (en (n + 1)).hom ≫ G.rightDerivedFunctor.map\n            ((t.natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by omega)).app E))",
   "branch": "sheaf-dag",
   "by": "A4",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.OpenDerivedSectionsTruncationTowerComparison retired; now WeilConjectures.AlgebraicGeometry.OpenDerivedSectionsTruncationTowerComparison."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

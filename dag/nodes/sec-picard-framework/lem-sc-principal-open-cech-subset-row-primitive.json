@@ -121,14 +121,13 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetRowPrimitive",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/PrincipalOpenCechSubsetRowPrimitive.lean",
+  "module": "Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetRowPrimitive",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalOpenCechSubsetRowPrimitive.lean",
   "declaration": "AlgebraicGeometry.principalOpenCech_subset_row_primitive",
   "statement": "theorem principalOpenCech_subset_row_primitive\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    (J : CochainComplex\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ) :\n    let D : Finset (Fin r) → (Spec (.of A)).Opens :=\n      fun S ↦ PrimeSpectrum.basicOpen (∏ j ∈ S, f j)\n    ∀ (hle : ∀ (S : Finset (Fin r)) (j : Fin r), D S ≤ D (S.erase j))\n      (he : ∀ (S : Finset (Fin r)) (j : Fin r), j ∈ S → ∀ n : ℤ,\n        n + 1 - ((S.erase j).card : ℤ) = n + 1 + 1 - (S.card : ℤ))\n      (n : ℤ) (k : ℕ), 1 ≤ k → Injective (J.X (n + 1 - (k : ℤ))) →\n      ∀ c : (∀ S : {S : Finset (Fin r) // S.Nonempty},\n        (modulesSpecToSheaf.obj (J.X (n + 1 + 1 - (S.val.card : ℤ)))).obj.obj (op (D S.val))),\n      (∀ S : {S : Finset (Fin r) // S.Nonempty}, S.val.card = k + 2 →\n        (∑ j : S.val, if h : (S.val.erase j.val).Nonempty then\n            (-1 : A) ^ ((S.val.filter (fun i ↦ i < j.val)).card) •\n              (modulesSpecToSheaf.obj (J.X (n + 1 + 1 + 1 - (S.val.card : ℤ)))).obj.map\n                (homOfLE (hle S.val j.val)).op\n                ((modulesSpecToSheaf.map\n                  (eqToHom (congrArg J.X (he S.val j.val j.property (n + 1))))).hom.app\n                    (op (D (S.val.erase j.val))) (c ⟨S.val.erase j.val, h⟩))\n          else 0) = 0) →\n      ∃ b : (∀ S : {S : Finset (Fin r) // S.Nonempty},\n        (modulesSpecToSheaf.obj (J.X (n + 1 - (S.val.card : ℤ)))).obj.obj\n          (op (D S.val))),\n        (∀ S : {S : Finset (Fin r) // S.Nonempty}, S.val.card ≠ k → b S = 0) ∧\n        (∀ S : {S : Finset (Fin r) // S.Nonempty}, S.val.card = k + 1 →\n          (∑ j : S.val, if h : (S.val.erase j.val).Nonempty then\n            (-1 : A) ^ ((S.val.filter (fun i ↦ i < j.val)).card) •\n              (modulesSpecToSheaf.obj (J.X (n + 1 + 1 - (S.val.card : ℤ)))).obj.map\n                (homOfLE (hle S.val j.val)).op\n                ((modulesSpecToSheaf.map\n                  (eqToHom (congrArg J.X (he S.val j.val j.property n)))).hom.app\n                    (op (D (S.val.erase j.val))) (b ⟨S.val.erase j.val, h⟩))\n          else 0) = c S)",
   "branch": "sheaf-dag",
   "by": "P2",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetRowPrimitive retired; now WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetRowPrimitive."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

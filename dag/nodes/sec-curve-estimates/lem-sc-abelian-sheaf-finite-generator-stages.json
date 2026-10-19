@@ -98,14 +98,13 @@
  "unit": "sk-thm-curveestimate",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.Topology.AbelianSheafFiniteGeneratorStages",
-  "file": "lean/WeilConjectures/Topology/AbelianSheafFiniteGeneratorStages.lean",
+  "module": "Sheaf.Topology.AbelianSheafFiniteGeneratorStages",
+  "file": "lean/Sheaf/Topology/AbelianSheafFiniteGeneratorStages.lean",
   "declaration": "TopCat.abelianSheaf_finiteGenerator_stages",
   "statement": "theorem abelianSheaf_finiteGenerator_stages\n    (X : TopCat.{u})\n    (hbas : ∀ (U : Set X), IsOpen U → ∀ x ∈ U, ∃ V : Set X, IsOpen V ∧\n      IsCompact V ∧ x ∈ V ∧ V ⊆ U)\n    (F : X.Sheaf AddCommGrpCat.{u}) :\n    let S := Σ U : {U : Opens X // IsCompact (U : Set X)}, F.obj.obj (op U.val)\n    ∃ (D : Finset S ⥤ X.Sheaf AddCommGrpCat.{u})\n      (c : D ⟶ (Functor.const (Finset S)).obj F),\n      (∀ (x : X) (t : Presheaf.stalk (C := AddCommGrpCat.{u}) F.obj x),\n        ∃ (i : Finset S) (s : Presheaf.stalk (C := AddCommGrpCat.{u}) (D.obj i).obj x),\n          (Presheaf.stalkFunctor AddCommGrpCat.{u} x).map (c.app i).hom s = t) ∧\n      ∀ i : Finset S, Mono (c.app i) ∧\n      (∃ (n : ℕ) (U : Fin n → Opens X)\n        (_ : ∀ i, IsCompact ((U i : Opens X) : Set X)),\n        ∃ g : (∐ fun i ↦\n          (TopCat.Sheaf.abelianOpenExtensionByZero (U i)).obj\n          ((constantSheaf\n            (Opens.grothendieckTopology ((Opens.toTopCat X).obj (U i)))\n            AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) ⟶ (D.obj i), Epi g)",
   "branch": "sheaf-dag",
   "by": "S1",
-  "date": "2026-10-12",
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.Topology.AbelianSheafFiniteGeneratorStages retired; now WeilConjectures.Topology.AbelianSheafFiniteGeneratorStages."
+  "date": "2026-10-12"
  },
  "lean_audit": {
   "master": {

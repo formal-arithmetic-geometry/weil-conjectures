@@ -102,14 +102,13 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.HomogeneousBasisProjCoproduct",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/ProjectiveSpace/HomogeneousBasisProjCoproduct.lean",
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpace.HomogeneousBasisProjCoproduct",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpace/HomogeneousBasisProjCoproduct.lean",
   "declaration": "AlgebraicGeometry.Proj.homogeneous_basis_proj_coproduct",
   "statement": "theorem homogeneous_basis_proj_coproduct (k : Type u) [Field k]\n    (M : ModuleCat.{u} (MvPolynomial (Fin 2) k))\n    (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜)\n    (hsmul : ∀ (n : ℕ) (z : ℤ) (a : MvPolynomial (Fin 2) k) (y : M),\n      a ∈ homogeneousSubmodule (Fin 2) k n → y ∈ 𝓜 z → a • y ∈ 𝓜 (n + z))\n    (F : (Proj (homogeneousSubmodule (Fin 2) k)).Modules)\n    (alpha : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ),\n      0 < d → f ∈ homogeneousSubmodule (Fin 2) k d →\n      F.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f)) →+\n        LocalizedModule.Away f M)\n    (halpha : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d),\n        Function.Injective (alpha f d hd hf) ∧\n        Set.range (alpha f d hd hf) = degreeZeroFractions\n          (fun n : ℕ ↦ (homogeneousSubmodule (Fin 2) k n : Set (MvPolynomial (Fin 2) k)))\n          (fun n : ℕ ↦ (𝓜 n : Set M)) (Submonoid.powers f))\n    (hscalar : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d)\n        (r : HomogeneousLocalization.Away (homogeneousSubmodule (Fin 2) k) f)\n        (s : F.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))),\n        alpha f d hd hf (awayToSection (homogeneousSubmodule (Fin 2) k) f r • s) =\n          algebraMap (HomogeneousLocalization.Away (homogeneousSubmodule (Fin 2) k) f)\n            (Localization.Away f) r • alpha f d hd hf s)\n    (hres : ∀ (f g : MvPolynomial (Fin 2) k) (d b : ℕ) (hd : 0 < d) (hb : 0 < b)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d)\n        (hg : g ∈ homogeneousSubmodule (Fin 2) k b)\n        (inc : basicOpen (homogeneousSubmodule (Fin 2) k) g ≤\n          basicOpen (homogeneousSubmodule (Fin 2) k) f)\n        (e c : ℕ) (a : MvPolynomial (Fin 2) k),\n        0 < e → a ∈ homogeneousSubmodule (Fin 2) k c → g ^ e = a * f →\n        ∀ (m : ℕ) (y : M)\n          (s : F.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))),\n          alpha f d hd hf s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) →\n          alpha g b hb hg (F.val.map (homOfLE inc).op s) =\n            mk (a ^ m • y) (⟨g ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g))\n    (r : ℕ) (d : Fin r → ℤ)\n    (b : Module.Basis (Fin r) (MvPolynomial (Fin 2) k) M)\n    (hb : ∀ a : Fin r, b a ∈ 𝓜 (-(d a))) :\n    Nonempty (F ≅ ∐ (fun a ↦ twist (homogeneousSubmodule (Fin 2) k) (d a)))",
   "branch": "sheaf-dag",
   "by": "X2",
-  "date": "2026-10-12",
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.ProjectiveSpace.HomogeneousBasisProjCoproduct retired; now WeilConjectures.AlgebraicGeometry.ProjectiveSpace.HomogeneousBasisProjCoproduct."
+  "date": "2026-10-12"
  },
  "reviewed": {
   "date": "2026-10-12",

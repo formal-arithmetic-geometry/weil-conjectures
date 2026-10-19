@@ -101,14 +101,13 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.RelativeTensorPullbackBalancedNaturality",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/RelativeTensorPullbackBalancedNaturality.lean",
+  "module": "Sheaf.AlgebraicGeometry.RelativeTensorPullbackBalancedNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeTensorPullbackBalancedNaturality.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_relativeTensorPullback_balanced_natural",
   "statement": "theorem exists_relativeTensorPullback_balanced_natural {X S : Scheme.{u}} (f : X ⟶ S) (G : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤ SheafOfModules.{u} (moduleRings X.toRingedSpace)) (hG : ∀ M, G.obj M = Modules.tensorPullbackObj f M) (hGmap : ∀ {M N} (a : M ⟶ N), G.map a = eqToHom (hG M) ≫ Modules.tensorPullbackMap f a ≫ eqToHom (hG N).symm) : let R := ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u} RingCat.{u})).obj (TopCat.Sheaf.inverseImageRing f.base S.sheaf)) let U := SheafOfModules.toSheaf (moduleRings X.toRingedSpace) let V := SheafOfModules.toSheaf R let H := SheafOfModules.restrictScalars ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u} RingCat.{u})).map (Modules.tensorPullbackRingMap f)) let I := TopCat.Sheaf.inverseImageModuleFunctor f.base S.sheaf let T := @curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf) let T' := @curriedTensor _ _ (SheafOfModules.monoidalCategory (TopCat.Sheaf.inverseImageRing f.base S.sheaf)) ∃ e : ∀ M N, U.obj ((T.obj M).obj (G.obj N)) ≅ V.obj ((T'.obj (H.obj M)).obj (I.obj N)), (∀ M M' (a : M ⟶ M') N, U.map ((T.map a).app (G.obj N)) ≫ (e M' N).hom = (e M N).hom ≫ V.map ((T'.map (H.map a)).app (I.obj N))) ∧ (∀ M N N' (b : N ⟶ N'), U.map ((T.obj M).map (G.map b)) ≫ (e M N').hom = (e M N).hom ≫ V.map ((T'.obj (H.obj M)).map (I.map b)))",
   "branch": "sheaf-dag",
   "by": "J3",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.RelativeTensorPullbackBalancedNaturality retired; now WeilConjectures.AlgebraicGeometry.RelativeTensorPullbackBalancedNaturality."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

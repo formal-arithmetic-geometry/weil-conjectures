@@ -97,14 +97,13 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.SchemeIsoNestedOpenFiniteFreeModel",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/SchemeIsoNestedOpenFiniteFreeModel.lean",
+  "module": "Sheaf.AlgebraicGeometry.SchemeIsoNestedOpenFiniteFreeModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeIsoNestedOpenFiniteFreeModel.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_scheme_iso_nested_open_finite_free_model",
   "statement": "theorem exists_scheme_iso_nested_open_finite_free_model\n    {X Y : Scheme.{u}} (s : X ≅ Y) (U : X.Opens)\n    [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    [∀ V : U.toScheme.Opens, HasDerivedCategory.{wX}\n      (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))]\n    [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ W : Y.Opens, HasDerivedCategory.{wY}\n      (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over W))]\n    (C : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (D : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (hC : Nonempty (C ≅\n      ((Modules.restrictFunctor s.hom).mapHomologicalComplex (ComplexShape.up ℤ)).obj D))\n    (V : U.toScheme.Opens)\n    (P : CochainComplex\n      (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V)) ℤ)\n    (hb : ∃ N : ℤ, ∀ i : ℤ, N < i → IsZero (P.X i))\n    (hfree : ∀ i : ℤ, ∃ r : ℕ, Nonempty (P.X i ≅ SheafOfModules.free\n      (R := (moduleRings U.toScheme.toRingedSpace).over V) (ULift.{u} (Fin r))))\n    (hiso : Nonempty ((SheafOfModules.overFunctor.{u}\n      (moduleRings U.toScheme.toRingedSpace) V).mapDerivedCategory.obj\n        (((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Modules.overEquiv U)).mapDerivedCategory.obj (DerivedCategory.Q.obj C)) ≅\n        DerivedCategory.Q.obj P)) :\n    ∃ W : Y.Opens,\n      (∀ y : X, s.hom y ∈ W ↔ ∃ hy : y ∈ U, (⟨y, hy⟩ : U.toScheme) ∈ V) ∧\n      ∃ P' : CochainComplex\n          (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over W)) ℤ,\n        (∃ N : ℤ, ∀ i : ℤ, N < i → IsZero (P'.X i)) ∧\n        (∀ i : ℤ, ∃ r : ℕ, Nonempty (P'.X i ≅ SheafOfModules.free\n          (R := (moduleRings Y.toRingedSpace).over W) (ULift.{u} (Fin r)))) ∧\n        Nonempty ((SheafOfModules.overFunctor.{u}\n          (moduleRings Y.toRingedSpace) W).mapDerivedCategory.obj\n            (DerivedCategory.Q.obj D) ≅ DerivedCategory.Q.obj P')",
   "branch": "sheaf-dag",
   "by": "W2",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.SchemeIsoNestedOpenFiniteFreeModel retired; now WeilConjectures.AlgebraicGeometry.SchemeIsoNestedOpenFiniteFreeModel."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

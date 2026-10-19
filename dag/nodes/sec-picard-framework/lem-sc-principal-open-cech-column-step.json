@@ -101,14 +101,13 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.PrincipalOpenCechColumnStep",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/PrincipalOpenCechColumnStep.lean",
+  "module": "Sheaf.AlgebraicGeometry.PrincipalOpenCechColumnStep",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalOpenCechColumnStep.lean",
   "declaration": "AlgebraicGeometry.principalOpenCech_column_step",
   "statement": "theorem principalOpenCech_column_step\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    (J : CochainComplex\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ) :\n    let D : Finset (Fin r) → (Spec (.of A)).Opens :=\n      fun S ↦ PrimeSpectrum.basicOpen (∏ j ∈ S, f j)\n    ∀ (T : CochainComplex (ModuleCat.{u} A) ℤ)\n      (τ : ∀ n : ℤ, T.X n ≅ ModuleCat.of A\n        (∀ S : {S : Finset (Fin r) // S.Nonempty},\n          (modulesSpecToSheaf.obj (J.X (n + 1 - (S.val.card : ℤ)))).obj.obj (op (D S.val))))\n      (hle : ∀ (S : Finset (Fin r)) (j : Fin r), D S ≤ D (S.erase j))\n      (he : ∀ (S : Finset (Fin r)) (j : Fin r), j ∈ S → ∀ n : ℤ,\n        n + 1 - ((S.erase j).card : ℤ) = n + 1 + 1 - (S.card : ℤ)),\n      (∀ (n : ℤ) (s : T.X n) (S : {S : Finset (Fin r) // S.Nonempty}),\n        (τ (n + 1)).hom (T.d n (n + 1) s) S =\n          (-1 : A) ^ (S.val.card - 1) •\n            (modulesSpecToSheaf.map\n              (J.d (n + 1 - (S.val.card : ℤ)) (n + 1 + 1 - (S.val.card : ℤ)))).hom.app\n                (op (D S.val)) ((τ n).hom s S) +\n          ∑ j : S.val, if h : (S.val.erase j.val).Nonempty then\n            (-1 : A) ^ ((S.val.filter (fun i ↦ i < j.val)).card) •\n              (modulesSpecToSheaf.obj (J.X (n + 1 + 1 - (S.val.card : ℤ)))).obj.map\n                (homOfLE (hle S.val j.val)).op\n                ((modulesSpecToSheaf.map\n                  (eqToHom (congrArg J.X (he S.val j.val j.property n)))).hom.app\n                    (op (D (S.val.erase j.val))) ((τ n).hom s ⟨S.val.erase j.val, h⟩))\n          else 0) →\n      ∀ (n : ℤ) (k : ℕ), 1 ≤ k → Injective (J.X (n - (k : ℤ))) → ∀ t : T.X n,\n        (∀ S : {S : Finset (Fin r) // S.Nonempty},\n          k + 1 < S.val.card → (τ n).hom t S = 0) →\n        (∀ S : {S : Finset (Fin r) // S.Nonempty},\n          1 < S.val.card → (τ (n + 1)).hom (T.d n (n + 1) t) S = 0) →\n        ∃ u : T.X (n - 1), ∀ S : {S : Finset (Fin r) // S.Nonempty},\n          k < S.val.card → (τ n).hom (t - T.d (n - 1) n u) S = 0",
   "branch": "sheaf-dag",
   "by": "H2",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.PrincipalOpenCechColumnStep retired; now WeilConjectures.AlgebraicGeometry.PrincipalOpenCechColumnStep."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

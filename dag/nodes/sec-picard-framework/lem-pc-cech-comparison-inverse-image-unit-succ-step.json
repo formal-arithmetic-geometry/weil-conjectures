@@ -80,14 +80,13 @@
  "unit": "sk-thm-picard-rr",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.Cohomology.CechComparisonInverseImageSuccessor",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/Cohomology/CechComparisonInverseImageSuccessor.lean",
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.CechComparisonInverseImageSuccessor",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/CechComparisonInverseImageSuccessor.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.cechComparison_inverseImage_succ_step",
   "statement": "theorem cechComparison_inverseImage_succ_step\n    {X Y : Scheme.{u}} {ι : Type u} (g : Y ⟶ X)\n    (U : ι → X.Opens) (V : ι → Y.Opens) (hcover : iSup U = ⊤)\n    (hcover' : iSup V = ⊤)\n    (hinter : ∀ (k : ℕ) (y : Fin (k + 1) → ι),\n      (⨅ l, V (y l)) ≤ g ⁻¹ᵁ (⨅ l, U (y l)))\n    (c : CechComparisonSystem U hcover) (c' : CechComparisonSystem V hcover')\n    (T : ShortComplex (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}))\n    (hT : T.ShortExact)\n    (hg : ∀ (k : ℕ) (y : Fin (k + 1) → ι),\n      Function.Surjective (T.g.hom.app (op (⨅ l, U (y l)))))\n    (hg' : ∀ (k : ℕ) (y : Fin (k + 1) → ι),\n      Function.Surjective (((invImage g).map T.g).hom.app (op (⨅ l, V (y l)))))\n    (q : ℕ) (y : (TopCat.Sheaf.cechCohomologyFunctor U q).obj T.X₃)\n    (hih : (c'.comparison q).app ((invImage g).obj T.X₃)\n        (HomologicalComplex.homologyMap\n          (cechInverseImageCochainMap g U V hinter T.X₃ ((invImage g).obj T.X₃)\n            ((TopCat.Sheaf.pullbackPushforwardAdjunction AddCommGrpCat.{u} g.base).unit.app\n              T.X₃).hom) q y) =\n      Sheaf.H.mapFunctor (invImage g) (constIso g).symm T.X₃ q\n        ((c.comparison q).app T.X₃ y)) :\n    (c'.comparison (q + 1)).app ((invImage g).obj T.X₁)\n        (HomologicalComplex.homologyMap\n          (cechInverseImageCochainMap g U V hinter T.X₁ ((invImage g).obj T.X₁)\n            ((TopCat.Sheaf.pullbackPushforwardAdjunction AddCommGrpCat.{u} g.base).unit.app\n              T.X₁).hom) (q + 1)\n          (TopCat.Sheaf.cechδ U hT hg q y)) =\n      Sheaf.H.mapFunctor (invImage g) (constIso g).symm T.X₁ (q + 1)\n        ((c.comparison (q + 1)).app T.X₁\n          (TopCat.Sheaf.cechδ U hT hg q y))",
   "branch": "sheaf-dag",
   "by": "Q3",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.Cohomology.CechComparisonInverseImageSuccessor retired; now WeilConjectures.AlgebraicGeometry.Cohomology.CechComparisonInverseImageSuccessor."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-12",

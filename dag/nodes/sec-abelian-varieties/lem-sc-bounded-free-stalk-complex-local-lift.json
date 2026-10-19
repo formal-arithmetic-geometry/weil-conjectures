@@ -109,14 +109,13 @@
  "unit": "sk-prop-av-cube",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.BoundedFreeStalkComplexLocalLift",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/BoundedFreeStalkComplexLocalLift.lean",
+  "module": "Sheaf.AlgebraicGeometry.BoundedFreeStalkComplexLocalLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedFreeStalkComplexLocalLift.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_boundedFree_stalk_complex_local_lift",
   "statement": "theorem exists_boundedFree_stalk_complex_local_lift\n    (X : Scheme.{u}) (x : X) (d : ℤ → ℕ)\n    (F : CochainComplex (ModuleCat.{u} (X.presheaf.stalk x)) ℤ)\n    (hterms : ∀ i : ℤ, F.X i = ModuleCat.of (X.presheaf.stalk x)\n      (ULift.{0} (Fin (d i) → X.presheaf.stalk x)))\n    (a b : ℤ) (hd : ∀ i : ℤ, i < a ∨ b < i → d i = 0) :\n    ∃ U : X.Opens, x ∈ U ∧ IsAffineOpen U ∧\n      ∃ L : CochainComplex\n          (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ,\n        (∀ i : ℤ, i < a ∨ b < i → IsZero (L.X i)) ∧\n        (∀ i : ℤ, Nonempty (L.X i ≅ SheafOfModules.free\n          (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin (d i))))) ∧\n        Nonempty (F ≅\n          (((SheafOfModules.pushforward.{u}\n              (SheafOfModules.pushforwardOver (R := moduleRings X.toRingedSpace) U) ⋙\n            RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj L))",
   "branch": "sheaf-dag",
   "by": "G3",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.BoundedFreeStalkComplexLocalLift retired; now WeilConjectures.AlgebraicGeometry.BoundedFreeStalkComplexLocalLift."
+  "date": "2026-10-13"
  },
  "proof_deps": [
   "def-pc-cochain-complex-modules",

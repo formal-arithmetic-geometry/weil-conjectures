@@ -115,14 +115,13 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.LocalDirectImageStalkNormalization",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/LocalDirectImageStalkNormalization.lean",
+  "module": "Sheaf.AlgebraicGeometry.LocalDirectImageStalkNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalDirectImageStalkNormalization.lean",
   "declaration": "AlgebraicGeometry.localDirectImage_stalk_cohomology_normalization",
   "statement": "theorem localDirectImage_stalk_cohomology_normalization\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y) (F : X.Modules) (p : ℕ)\n    (e : (RingedSpace.moduleCohomology (pullback (Y.fromSpecStalk y) f).toRingedSpace p ⋙\n        ModuleCat.restrictScalars\n          ((Scheme.ΓSpecIso (CommRingCat.of (Y.presheaf.stalk y))).inv ≫\n            (pullback.fst (Y.fromSpecStalk y) f).appTop).hom).obj\n        ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F)\n      ≃ₗ[Y.presheaf.stalk y]\n      (RingedSpace.moduleStalkFunctor Y.toRingedSpace y).obj\n      ((Scheme.Modules.pushforward (Y.fromSpecStalk y)).obj\n        (((Scheme.Modules.pushforward (pullback.fst (Y.fromSpecStalk y) f)).rightDerived\n          p).obj\n          ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F))))\n    (he : ∀ x, e x = localDirectImage_stalk_class f y F p x) :\n      ∀ (I : InjectiveResolution F)\n        (K : InjectiveResolution\n          ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F))\n        (V : Y.Opens) (hy : y ∈ V)\n        (D : Scheme.Modules.FlatBaseChangeOpenChoices f (Y.fromSpecStalk y) F I K V)\n        (xi : (forget₂ _ AddCommGrpCat.{u}).obj\n          ((RingedSpace.moduleCohomology\n            ((pullback.snd (Y.fromSpecStalk y) f) ⁻¹ᵁ (f ⁻¹ᵁ V)).toScheme.toRingedSpace p).obj\n            ((Scheme.Modules.restrictFunctor\n              ((pullback.snd (Y.fromSpecStalk y) f) ⁻¹ᵁ (f ⁻¹ᵁ V)).ι).obj\n              ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F)))),\n        Scheme.Modules.moduleCohomologyFMap\n          ((pullback.snd (Y.fromSpecStalk y) f) ⁻¹ᵁ (f ⁻¹ᵁ V)).ι\n          ((Scheme.Modules.restrictAdjunction\n            ((pullback.snd (Y.fromSpecStalk y) f) ⁻¹ᵁ (f ⁻¹ᵁ V)).ι).unit.app\n              ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F)) p\n          (e.symm.toLinearMap (TopCat.Presheaf.germ\n            ((Scheme.Modules.pushforward (Y.fromSpecStalk y)).obj\n              (((Scheme.Modules.pushforward (pullback.fst (Y.fromSpecStalk y) f)).rightDerived\n                p).obj\n                ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj\n                  F))).presheaf V y hy (D.targetClass p xi))) = xi",
   "branch": "sheaf-dag",
   "by": "S3",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.LocalDirectImageStalkNormalization retired; now WeilConjectures.AlgebraicGeometry.LocalDirectImageStalkNormalization."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-12",

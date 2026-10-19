@@ -90,14 +90,13 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.FlatBaseChangeAffineSource",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/FlatBaseChangeAffineSource.lean",
+  "module": "Sheaf.AlgebraicGeometry.FlatBaseChangeAffineSource",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatBaseChangeAffineSource.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exists_flatBaseChange_affine_source",
   "statement": "theorem Scheme.Modules.exists_flatBaseChange_affine_source\n    {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)\n    [QuasiCompact f] [QuasiSeparated f] [Flat g] [Flat (pullback.snd g f)]\n    (F : X.Modules) [F.IsQuasicoherent]\n    (I : InjectiveResolution F)\n    (J : InjectiveResolution\n      ((Scheme.Modules.tensorPullback (pullback.snd g f)).obj F))\n    (p : ℕ) (V : S.Opens) (W : S'.Opens) (hV : IsAffineOpen V) (hW : IsAffineOpen W)\n    (eVW : W ≤ g ⁻¹ᵁ V)\n    (D : Scheme.Modules.FlatBaseChangeOpenChoices f g F I J V) :\n    letI : Algebra Γ(S, V) Γ(S', W) := (g.appLE V W eVW).hom.toAlgebra\n    let h := f.resLE V (f ⁻¹ᵁ V) le_rfl ≫ V.toSpecΓ\n    let N := (Scheme.Modules.pullback (f ⁻¹ᵁ V).ι).obj F\n    let P := ((Scheme.Modules.pushforward f).rightDerived p).obj F\n    ∃ (eH : ((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).obj\n        ((Scheme.Modules.restrictFunctor (f ⁻¹ᵁ V).ι).obj F)) ≃+\n          Scheme.Modules.HOver h N p)\n      (a : TensorProduct Γ(S, V) Γ(S', W) (Scheme.Modules.HOver h N p) →ₗ[Γ(S', W)]\n        Γ((Scheme.Modules.tensorPullback g).obj P, W)),\n      Function.Bijective a ∧\n      (∀ (s : Γ(S', W)) (xi : Scheme.Modules.HOver h N p),\n        a (s ⊗ₜ[Γ(S, V)] xi) = s •\n          ((Scheme.Modules.tensorPullback g).obj P).presheaf.map (homOfLE eVW).op\n            (Scheme.Modules.Hom.app\n              ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).unit.app P)\n              V (D.sourceClass p (eH.symm xi))))",
   "branch": "sheaf-dag",
   "by": "N3",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.FlatBaseChangeAffineSource retired; now WeilConjectures.AlgebraicGeometry.FlatBaseChangeAffineSource."
+  "date": "2026-10-13"
  },
  "proof_deps": [
   "def-pc-flat-cohomology-comparison",

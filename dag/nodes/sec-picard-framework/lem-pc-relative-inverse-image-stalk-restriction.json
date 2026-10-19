@@ -104,14 +104,13 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.RelativeInverseImageStalkRestriction",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/RelativeInverseImageStalkRestriction.lean",
+  "module": "Sheaf.AlgebraicGeometry.RelativeInverseImageStalkRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeInverseImageStalkRestriction.lean",
   "declaration": "AlgebraicGeometry.Scheme.relative_inverseImage_stalk_restriction_iso",
   "statement": "theorem relative_inverseImage_stalk_restriction_iso\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (y : X)\n    (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :\n    let Z : RingedSpace.{u} :=\n      { carrier := X.carrier\n        presheaf := (TopCat.Sheaf.inverseImageRing f.base Y.sheaf).obj\n        IsSheaf := (TopCat.Sheaf.inverseImageRing f.base Y.sheaf).property }\n    let k := TopCat.Presheaf.stalkPullbackHom CommRingCat.{u} f.base Y.presheaf y ≫\n      (TopCat.Presheaf.stalkFunctor CommRingCat.{u} y).map\n        (toSheafify (Opens.grothendieckTopology X)\n          ((TopCat.Presheaf.pullback CommRingCat.{u} f.base).obj Y.presheaf))\n    letI := RingedSpace.moduleStalkFunctor_preservesZeroMorphisms Z y\n    Nonempty ((((ModuleCat.restrictScalars k.hom).mapHomologicalComplex (.up ℤ)).obj\n      (((RingedSpace.moduleStalkFunctor Z y).mapHomologicalComplex (.up ℤ)).obj\n      (((SheafOfModules.restrictScalars\n        ((sheafCompose (Opens.grothendieckTopology X)\n          (forget₂ CommRingCat.{u} RingCat.{u})).map\n            (Modules.tensorPullbackRingMap f))).mapHomologicalComplex (.up ℤ)).obj K))) ≅\n      (((ModuleCat.restrictScalars (f.stalkMap y).hom).mapHomologicalComplex (.up ℤ)).obj\n        (((RingedSpace.moduleStalkFunctor X.toRingedSpace y).mapHomologicalComplex\n          (.up ℤ)).obj K)))",
   "branch": "sheaf-dag",
   "by": "M1",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.RelativeInverseImageStalkRestriction retired; now WeilConjectures.AlgebraicGeometry.RelativeInverseImageStalkRestriction."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

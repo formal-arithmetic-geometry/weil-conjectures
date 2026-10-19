@@ -116,14 +116,13 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.FlatBaseChangeTargetOpenEdge",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/FlatBaseChangeTargetOpenEdge.lean",
+  "module": "Sheaf.AlgebraicGeometry.FlatBaseChangeTargetOpenEdge",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatBaseChangeTargetOpenEdge.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exists_flatBaseChange_target_open_edge",
   "statement": "theorem exists_flatBaseChange_target_open_edge\n    {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)\n    [QuasiCompact f] [QuasiSeparated f]\n    (F : X.Modules) [F.IsQuasicoherent] (I : InjectiveResolution F)\n    (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F))\n    (p : ℕ) (V : S.Opens) (W : S'.Opens) (hW : IsAffineOpen W)\n    (eVW : W ≤ g ⁻¹ᵁ V) (D : FlatBaseChangeOpenChoices f g F I J V) :\n    let G := (tensorPullback (pullback.snd g f)).obj F\n    let U := (pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)\n    let L := (pullback.fst g f) ⁻¹ᵁ W\n    let e : L ≤ U := by\n      change (pullback.fst g f) ⁻¹ᵁ W ≤ (pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)\n      rw [flatBaseChangeOpenEquality f g V]\n      exact (pullback.fst g f).preimage_mono eVW\n    let M := (restrictFunctor L.ι).obj G\n    let C := RingedSpace.moduleCohomology L.toScheme.toRingedSpace p\n    let k := (pullback.fst g f).resLE W L le_rfl ≫ W.toSpecΓ\n    let Q := ((pushforward (pullback.fst g f)).rightDerived p).obj G\n    ∃ d : C.obj M ≃+ Γ(Q, W),\n      (∀ (a : Γ(S', W)) (y : C.obj M),\n        d ((C.map (M.smulHom (((Scheme.ΓSpecIso Γ(S', W)).inv ≫ k.appTop).hom a))).hom y)\n          = a • d y) ∧\n      (∀ y : (RingedSpace.moduleCohomology U.toScheme.toRingedSpace p).obj\n          ((restrictFunctor U.ι).obj G),\n        d (cohomologyOpenRestriction G U L e p y) =\n          Q.presheaf.map (homOfLE eVW).op (D.targetClass p y))",
   "branch": "sheaf-dag",
   "by": "U3",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.FlatBaseChangeTargetOpenEdge retired; now WeilConjectures.AlgebraicGeometry.FlatBaseChangeTargetOpenEdge."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

@@ -96,14 +96,13 @@
  "unit": "sk-thm-curveestimate",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.TensorPowerSectionOpenRestriction",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/TensorPowerSectionOpenRestriction.lean",
+  "module": "Sheaf.AlgebraicGeometry.TensorPowerSectionOpenRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorPowerSectionOpenRestriction.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exists_tensorPowSection_open_restriction",
   "statement": "theorem exists_tensorPowSection_open_restriction (X : Scheme.{u}) (L F : X.Modules)\n    (s : Γ(L, ⊤)) (U : X.Opens) :\n    let LU := L.restrict U.ι\n    let FU := F.restrict U.ι\n    let sU : Γ(LU, ⊤) :=\n      (L.restrictAppIso U.ι ⊤).inv (L.presheaf.map (homOfLE le_top).op s)\n    ∃ N : ∀ n : ℕ, Γ(F ⊗ L.tensorPow n, U) ≃+ Γ(FU ⊗ LU.tensorPow n, ⊤),\n      (∀ (n b : ℕ) (t : Γ(F ⊗ L.tensorPow n, U)),\n        N (n + b) ((mulTensorPowSection (homOfGlobalSection L s) F n b).app U t) =\n          (mulTensorPowSection (homOfGlobalSection LU sU) FU n b).app ⊤ (N n t)) ∧\n      ∀ (V : U.toScheme.Opens) (W : X.Opens) (hW : U.ι ''ᵁ V = W) (hWU : W ≤ U),\n        ∃ T : Γ(FU, V) ≃+ Γ(F, W),\n          ∀ (n : ℕ) (t : Γ(F ⊗ L.tensorPow n, U)) (z : Γ(FU, V)),\n            tmulSection z (tensorPowSectionOne (homOfGlobalSection LU sU) n V) =\n                (FU ⊗ LU.tensorPow n).presheaf.map (homOfLE le_top).op (N n t) ↔\n              (((ρ_ F).inv ≫ F ◁ tensorPowSection (homOfGlobalSection L s) n) :\n                  F ⟶ (F ⊗ L.tensorPow n : X.Modules)).app W (T z) =\n                (F ⊗ L.tensorPow n).presheaf.map (homOfLE hWU).op t",
   "branch": "sheaf-dag",
   "by": "T4",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.TensorPowerSectionOpenRestriction retired; now WeilConjectures.AlgebraicGeometry.TensorPowerSectionOpenRestriction."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

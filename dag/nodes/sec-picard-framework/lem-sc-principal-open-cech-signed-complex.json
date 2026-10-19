@@ -92,14 +92,13 @@
  },
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSignedComplex",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/PrincipalOpenCechSignedComplex.lean",
+  "module": "Sheaf.AlgebraicGeometry.PrincipalOpenCechSignedComplex",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalOpenCechSignedComplex.lean",
   "declaration": "AlgebraicGeometry.principalOpenCech_signed_complex_exists",
   "statement": "theorem principalOpenCech_signed_complex_exists\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    (I : CochainComplex\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ) :\n    let D : Finset (Fin r) → (Spec (.of A)).Opens :=\n      fun S ↦ PrimeSpectrum.basicOpen (∏ j ∈ S, f j)\n    ∀\n      (hle : ∀ (S : Finset (Fin r)) (j : Fin r), D S ≤ D (S.erase j))\n      (he : ∀ (S : Finset (Fin r)) (j : Fin r), j ∈ S → ∀ n : ℤ,\n        n + 1 - ((S.erase j).card : ℤ) = n + 1 + 1 - (S.card : ℤ)),\n      ∃ (T₁ : CochainComplex (ModuleCat.{u} A) ℤ)\n      (τ₁ : ∀ n : ℤ, T₁.X n ≅ ModuleCat.of A\n        (∀ S : {S : Finset (Fin r) // S.Nonempty},\n          (modulesSpecToSheaf.obj (I.X (n + 1 - (S.val.card : ℤ)))).obj.obj (op (D S.val)))),\n      (∀ (n : ℤ) (s : T₁.X n) (S : {S : Finset (Fin r) // S.Nonempty}),\n        (τ₁ (n + 1)).hom (T₁.d n (n + 1) s) S =\n          (-1 : A) ^ (S.val.card - 1) •\n            (modulesSpecToSheaf.map\n              (I.d (n + 1 - (S.val.card : ℤ)) (n + 1 + 1 - (S.val.card : ℤ)))).hom.app\n                (op (D S.val)) ((τ₁ n).hom s S) +\n          ∑ j : S.val, if h : (S.val.erase j.val).Nonempty then\n            (-1 : A) ^ ((S.val.filter (fun i ↦ i < j.val)).card) •\n              (modulesSpecToSheaf.obj (I.X (n + 1 + 1 - (S.val.card : ℤ)))).obj.map\n                (homOfLE (hle S.val j.val)).op\n                ((modulesSpecToSheaf.map\n                  (eqToHom (congrArg I.X (he S.val j.val j.property n)))).hom.app\n                    (op (D (S.val.erase j.val))) ((τ₁ n).hom s ⟨S.val.erase j.val, h⟩))\n          else 0)",
   "branch": "sheaf-dag",
   "by": "H4",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.PrincipalOpenCechSignedComplex retired; now WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSignedComplex."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

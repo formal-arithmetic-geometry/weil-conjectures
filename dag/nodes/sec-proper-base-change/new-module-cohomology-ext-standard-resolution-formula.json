@@ -83,14 +83,13 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtStandardResolutionFormula",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/ModuleCohomologyExtStandardResolutionFormula.lean",
+  "module": "Sheaf.AlgebraicGeometry.ModuleCohomologyExtStandardResolutionFormula",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCohomologyExtStandardResolutionFormula.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.standard_resolution_formula",
   "statement": "theorem standard_resolution_formula\n    (X : Scheme.{u}) (F : SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    [EnoughInjectives (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (I : InjectiveResolution F) (hI : I = injectiveResolution F)\n    (hι : QuasiIso\n      ((HomologicalComplex.singleMapHomologicalComplex\n        (SheafOfModules.toSheaf (moduleRings X.toRingedSpace)) (.up ℕ) 0).inv.app F ≫\n        ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).mapHomologicalComplex\n          (.up ℕ)).map I.ι)) (p : ℕ)\n    (a : (forget₂ _ AddCommGrpCat.{u}).obj\n      ((RingedSpace.moduleCohomology X.toRingedSpace p).obj F) ≅\n      (((RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙\n        forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (.up ℕ)).obj I.cocomplex).homology p)\n    (b : AddCommGrpCat.of (H F p) ≅\n      (((RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙\n        forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (.up ℕ)).obj I.cocomplex).homology p)\n    (ha : a = (forget₂ _ AddCommGrpCat.{u}).mapIso\n      (I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) p) ≪≫\n        (((RingedSpace.globalSectionsComplex I).sc p).mapHomologyIso\n          (forget₂ _ AddCommGrpCat.{u})).symm)\n    (hb : b = (by\n      let T := SheafOfModules.toSheaf (moduleRings X.toRingedSpace)\n      let ι := (HomologicalComplex.singleMapHomologicalComplex T (.up ℕ) 0).inv.app F ≫\n        (T.mapHomologicalComplex (.up ℕ)).map I.ι\n      haveI : QuasiIso ι := hι\n      exact (Abelian.Ext.precompAddEquiv (terminalSourceIso X) (T.obj F) p).toAddCommGrpIso ≪≫\n        siteSectionsObjIso (Opens.grothendieckTopology X) ⊤ (T.obj F) p ≪≫\n        (sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⋙\n          (evaluation X.Opensᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)).rightDerivedObjIsoOfResolution ι\n            (fun n ↦ forgottenInjectiveAcyclic X (I.cocomplex.X n)) p))\n    (x : (RingedSpace.moduleCohomology X.toRingedSpace p).obj F) :\n    moduleCohomologyExtResolutionEquiv X F p x = b.inv (a.hom x)",
   "branch": "sheaf-dag",
   "by": "D2",
-  "date": "2026-10-14",
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.ModuleCohomologyExtStandardResolutionFormula retired; now WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtStandardResolutionFormula."
+  "date": "2026-10-14"
  },
  "reviewed": {
   "date": "2026-10-14",

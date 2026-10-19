@@ -79,14 +79,13 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.ProjTwistFiniteLocalizationData",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/ProjTwistFiniteLocalizationData.lean",
+  "module": "Sheaf.AlgebraicGeometry.ProjTwistFiniteLocalizationData",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjTwistFiniteLocalizationData.lean",
   "declaration": "AlgebraicGeometry.Proj.twist_finiteLocalization_data",
   "statement": "theorem twist_finiteLocalization_data {A σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A] (𝒜 : ℕ → σ) [GradedRing 𝒜] (k : ℤ) (f : A) (b : ℕ) (hb : 0 < b) (hf : f ∈ 𝒜 b) (s : (twist 𝒜 k).val.obj (op (basicOpen 𝒜 f))) : let B := HomogeneousLocalization.Away 𝒜 f let M := LocalizedModule.Away f A letI : Module B M := Module.compHom M (algebraMap B (Localization.Away f)) ∃ (n : ℕ) (g : Fin n → B) (hspan : Ideal.span (Set.range g) = ⊤), let ρ := fun (a h : B) (ha : a ∣ h) ↦ IsLocalizedModule.lift (Submonoid.powers a) (LocalizedModule.mkLinearMap (Submonoid.powers a) M) (LocalizedModule.mkLinearMap (Submonoid.powers h) M) (RingTheory.localizationAway_map_units_of_dvd (M := M) a h ha) ∃ t : ∀ i : Fin n, LocalizedModule.Away (g i) M, (∀ i j : Fin n, ρ (g i) (g i * g j) (dvd_mul_right (g i) (g j)) (t i) = ρ (g j) (g i * g j) (dvd_mul_left (g j) (g i)) (t j)) ∧ ∀ p : basicOpen 𝒜 f, ∃ (i : Fin n) (e : LocalizedModule.Away (g i) M →+ Localization.AtPrime p.1.asHomogeneousIdeal.toIdeal), (∀ z : M, e (LocalizedModule.mkLinearMap (Submonoid.powers (g i)) M z) = IsLocalization.map (M := Submonoid.powers f) (T := p.1.asHomogeneousIdeal.toIdeal.primeCompl) (Localization.AtPrime p.1.asHomogeneousIdeal.toIdeal) (RingHom.id A) (Submonoid.powers_le.mpr p.2) z) ∧ e (t i) = (s.1 p).1",
   "branch": "sheaf-dag",
   "by": "P1",
-  "date": "2026-10-12",
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.ProjTwistFiniteLocalizationData retired; now WeilConjectures.AlgebraicGeometry.ProjTwistFiniteLocalizationData."
+  "date": "2026-10-12"
  },
  "lean_audit": {
   "master": {

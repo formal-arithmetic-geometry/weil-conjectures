@@ -84,14 +84,13 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.DiagonalConormalAffineIdealClassQ",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/DiagonalConormalAffineIdealClassQ.lean",
+  "module": "Sheaf.AlgebraicGeometry.DiagonalConormalAffineIdealClassQ",
+  "file": "lean/Sheaf/AlgebraicGeometry/DiagonalConormalAffineIdealClassQ.lean",
   "declaration": "AlgebraicGeometry.diagonalConormal_affine_ideal_class_q",
   "statement": "theorem diagonalConormal_affine_ideal_class_q (f : X ⟶ S)\n    (U : X.affineOpens) (V : S.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1)\n    : letI : Algebra Γ(S, V.1) Γ(X, U.1) :=\n        (f.appLE V.1 U.1 hUV).hom.toAlgebra\n      let W := (pullback.fst f f) ⁻¹ᵁ U.1 ⊓ (pullback.snd f f) ⁻¹ᵁ U.1\n      ∀ (r : (Γ(X, U.1) ⊗[Γ(S, V.1)] Γ(X, U.1)) ≃+* Γ(pullback f f, W)),\n        (∀ a : Γ(X, U.1), r ((1 : Γ(X, U.1)) ⊗ₜ[Γ(S, V.1)] a) =\n          (pullback.snd f f).appLE U.1 W inf_le_right a) →\n        (∀ a : Γ(X, U.1), r (a ⊗ₜ[Γ(S, V.1)] (1 : Γ(X, U.1))) =\n          (pullback.fst f f).appLE U.1 W inf_le_left a) →\n        ∃ e : KaehlerDifferential Γ(S, V.1) Γ(X, U.1) ≃ₗ[Γ(X, U.1)]\n            Γ(diagonalConormal f, U.1),\n          ∀ (hδ : U.1 ≤ (pullback.diagonal f) ⁻¹ᵁ W)\n            (j : KaehlerDifferential.ideal Γ(S, V.1) Γ(X, U.1))\n            (s : Γ(kernel (SheafOfModules.unitToPushforwardObjUnit\n              (pullback.diagonal f).toRingCatSheafHom), W)),\n            (kernel.ι (SheafOfModules.unitToPushforwardObjUnit\n              (pullback.diagonal f).toRingCatSheafHom)).val.app (op W) s = r j →\n            e (KaehlerDifferential.fromIdeal Γ(S, V.1) Γ(X, U.1) j) =\n              (diagonalConormal f).presheaf.map (homOfLE hδ).op\n                (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction\n                  (pullback.diagonal f))).unit.app\n                    (kernel (SheafOfModules.unitToPushforwardObjUnit\n                      (pullback.diagonal f).toRingCatSheafHom))).val.app (op W) s)",
   "branch": "sheaf-dag",
   "by": "U3",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.DiagonalConormalAffineIdealClassQ retired; now WeilConjectures.AlgebraicGeometry.DiagonalConormalAffineIdealClassQ."
+  "date": "2026-10-13"
  },
  "stmt_deps": [
   "def-pc-scheme",

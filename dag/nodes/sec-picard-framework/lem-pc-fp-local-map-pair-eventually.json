@@ -109,14 +109,13 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.FinitePresentationLocalMapPairEventually",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/FinitePresentationLocalMapPairEventually.lean",
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationLocalMapPairEventually",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationLocalMapPairEventually.lean",
   "declaration": "AlgebraicGeometry.finitePresentation_local_map_pair_eventually",
   "statement": "theorem finitePresentation_local_map_pair_eventually\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u})\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    [QuasiSeparated f]\n    (k : I) (hik : i ≤ k)\n    (F G : (pullback f (Spec.map (R.map (homOfLE hik)))).Modules)\n    (hF : F.IsFinitePresentation) (hFq : F.IsQuasicoherent)\n    (hG : G.IsFinitePresentation) (hGq : G.IsQuasicoherent)\n    (U₀ : (pullback f (Spec.map (R.map (homOfLE hik)))).OpenCover.{u})\n    (a b : U₀.I₀) [IsAffine (U₀.X a)] [IsAffine (U₀.X b)]\n    (δ : (Scheme.Modules.tensorPullback (overlapLimitMap R c f hik)).obj F ⟶\n      (Scheme.Modules.tensorPullback (overlapLimitMap R c f hik)).obj G)\n    (r₀ : ∀ x, (Scheme.Modules.pullback (U₀.f x)).obj F ⟶\n      (Scheme.Modules.pullback (U₀.f x)).obj G)\n    (hr : ∀ x,\n      let p := overlapLimitMap R c f hik\n      let e := Scheme.Modules.openCoverTensorPullbackComparison p U₀ x\n      e.inv.app F ≫ (Scheme.Modules.pullback (U₀.pullbackHom p x)).map (r₀ x) ≫\n        e.hom.app G = (Scheme.Modules.pullback ((U₀.pullback₁ p).f x)).map δ) :\n    ∃ (l : I) (hkl : k ≤ l), ∀ (m : I) (hkm : k ≤ m), l ≤ m →\n      let q := baseChangeMap f\n        (T := Over.mk (Spec.map (R.map (homOfLE hik))))\n        (T' := Over.mk (Spec.map (R.map (homOfLE (hik.trans hkm)))))\n        (Over.homMk (Spec.map (R.map (homOfLE hkm)))\n          (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))\n      let U := U₀.pullback₁ q\n      let Q := modulesPseudofunctor.toDescentData U.f\n      let C := Scheme.Modules.tensorPullback q\n      let r : ∀ x, (Q.obj (C.obj F)).obj x ⟶ (Q.obj (C.obj G)).obj x := fun x ↦\n        let e := Scheme.Modules.openCoverTensorPullbackComparison q U₀ x\n        e.inv.app F ≫ (Scheme.Modules.pullback (U₀.pullbackHom q x)).map (r₀ x) ≫\n          e.hom.app G\n      Pseudofunctor.DescentData.PairCompatibility r a b",
   "branch": "sheaf-dag",
   "by": "F2",
-  "date": "2026-10-14",
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.FinitePresentationLocalMapPairEventually retired; now WeilConjectures.AlgebraicGeometry.FinitePresentationLocalMapPairEventually."
+  "date": "2026-10-14"
  },
  "reviewed": {
   "date": "2026-10-13",

@@ -178,15 +178,14 @@
  },
  "reviewed": "Reviewed by L 2026-10-10: faithful to the structure of More on Algebra 07P5 with the explicit basis t^E x^e y^g (E supported in J, exponents < p) of A over A_J replacing the source's appeal to 0394 and to derivations (steps 4, 6-7, checked); p-th powers coefficientwise by a new exact Mathlib leaf; the fields k_J handled from the p-basis (step 3). Statement gained a citation only. No Mathlib match for the item.",
  "lean": {
-  "module": "WeilConjectures.RingTheory.PowerSeriesRingSubfields",
+  "module": "Sheaf.RingTheory.PowerSeriesRingSubfields",
   "declaration": "RingTheory.iInter_frobenius_subfields_mvPolynomial_mvPowerSeries",
-  "file": "lean/WeilConjectures/RingTheory/PowerSeriesRingSubfields.lean",
+  "file": "lean/Sheaf/RingTheory/PowerSeriesRingSubfields.lean",
   "statement": "theorem powerSeriesRingSubfields (p : ℕ) [Fact p.Prime] (k : Type u) [Field k] [CharP k p] (I : Type w) (t : I → k) (hpb : ∃ b : Module.Basis {E : I →₀ ℕ // ∀ i : I, E i < p} (IntermediateField.adjoin (ZMod p) (Set.range (fun x : k => x ^ p))) k, ∀ E, b E = (E : I →₀ ℕ).prod (fun i e => t i ^ e)) (n m : ℕ) (K : Type v) [Field K] [Algebra (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)) K] [IsFractionRing (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)) K] (kJ : Finset I → Subfield k) (hkJ : ∀ J, kJ J = Subfield.closure (Set.range (fun x : k => x ^ p) ∪ {x : k | ∃ i : I, i ∉ J ∧ t i = x})) (AJ : Finset I → Subring (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))) (hAJ : ∀ J f, f ∈ AJ J ↔ ∀ (a : Fin n →₀ ℕ) (g : Fin m →₀ ℕ), MvPowerSeries.coeff a (MvPolynomial.coeff g f) ∈ kJ J ∧ (MvPowerSeries.coeff a (MvPolynomial.coeff g f) ≠ 0 → (∀ i, p ∣ a i) ∧ (∀ j, p ∣ g j))) (KJ : Finset I → Subfield K) (hKJ : ∀ J z, z ∈ KJ J ↔ ∃ a b : AJ J, (b : MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)) ≠ 0 ∧ z = algebraMap (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)) K a / algebraMap (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)) K b) : (∀ J : Finset I, Module.Finite (AJ J) (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))) ∧ (∀ J : Finset I, Set.range (fun x : K => x ^ p) ⊆ (KJ J : Set K)) ∧ (Set.range (fun x : K => x ^ p) = ⋂ J : Finset I, (KJ J : Set K)) ∧ (∀ J J' : Finset I, KJ (J ∪ J') ≤ KJ J ⊓ KJ J')",
   "branch": "sheaf-dag",
   "by": "H1",
   "date": "2026-10-11",
-  "existing": false,
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.RingTheory.PowerSeriesRingSubfields retired; now WeilConjectures.RingTheory.PowerSeriesRingSubfields."
+  "existing": false
  },
  "reviewed_lean": {
   "date": "2026-10-11",

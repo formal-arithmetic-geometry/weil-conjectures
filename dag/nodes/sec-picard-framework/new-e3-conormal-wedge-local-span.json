@@ -116,14 +116,13 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.ConormalWedgeLocalSpan",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/ConormalWedgeLocalSpan.lean",
+  "module": "Sheaf.AlgebraicGeometry.ConormalWedgeLocalSpan",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConormalWedgeLocalSpan.lean",
   "declaration": "AlgebraicGeometry.conormal_wedge_mem_span_locally",
   "statement": "theorem conormal_wedge_mem_span_locally\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] (n : ℕ)\n    (V : Y.affineOpens) (W : Z.Opens) (hW : W ≤ i ⁻¹ᵁ V.1)\n    (a : Fin n → ((Scheme.Modules.tensorPullback i).obj i.ker.toModules).val.obj (op W))\n    (x : Z) (hx : x ∈ W) :\n    let N := (Scheme.Modules.tensorPullback i).obj i.ker.toModules\n    let E := Scheme.Modules.exteriorSheaf N n\n    let η := (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app\n      i.ker.toModules\n    ∃ (W' : Z.Opens) (hW' : W' ≤ W), x ∈ W' ∧\n      E.val.map (homOfLE hW').op (Scheme.Modules.exteriorSheafSection N n W a) ∈\n        Submodule.span (Z.presheaf.obj (op W'))\n          (Set.range (fun b : Fin n → i.ker.toModules.val.obj (op V.1) ↦\n            Scheme.Modules.exteriorSheafSection N n W'\n              (fun j ↦ N.val.map (homOfLE (hW'.trans hW)).op\n                (η.val.app (op V.1) (b j)))))",
   "branch": "sheaf-dag",
   "by": "E3",
-  "date": "2026-10-14",
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.ConormalWedgeLocalSpan retired; now WeilConjectures.AlgebraicGeometry.ConormalWedgeLocalSpan."
+  "date": "2026-10-14"
  },
  "reviewed": {
   "date": "2026-10-13",

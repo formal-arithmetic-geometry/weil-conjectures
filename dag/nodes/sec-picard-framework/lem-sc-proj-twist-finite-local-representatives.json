@@ -74,14 +74,13 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.ProjTwistFiniteLocalRepresentatives",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/ProjTwistFiniteLocalRepresentatives.lean",
+  "module": "Sheaf.AlgebraicGeometry.ProjTwistFiniteLocalRepresentatives",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjTwistFiniteLocalRepresentatives.lean",
   "declaration": "AlgebraicGeometry.Proj.twist_finiteLocal_representatives",
   "statement": "theorem twist_finiteLocal_representatives\n    {A σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]\n    (𝒜 : ℕ → σ) [GradedRing 𝒜] (k : ℤ) (f : A) (b : ℕ)\n    (hb : 0 < b) (hf : f ∈ 𝒜 b)\n    (s : (twist 𝒜 k).val.obj (op (basicOpen 𝒜 f))) :\n    let B := HomogeneousLocalization.Away 𝒜 f\n    let M := LocalizedModule.Away f A\n    letI : Module B M := Module.compHom M (algebraMap B (Localization.Away f))\n    ∃ (n : ℕ) (g : Fin n → B) (hspan : Ideal.span (Set.range g) = ⊤)\n      (t : ∀ i : Fin n, LocalizedModule.Away (g i) M),\n      (∀ (i : Fin n) (p : basicOpen 𝒜 f),\n      let F := IsLocalization.map (M := Submonoid.powers f)\n        (T := p.1.asHomogeneousIdeal.toIdeal.primeCompl)\n        (Localization.AtPrime p.1.asHomogeneousIdeal.toIdeal) (RingHom.id A)\n        (Submonoid.powers_le.mpr p.2)\n      IsUnit (F (algebraMap B (Localization.Away f) (g i))) →\n      ∃ e : LocalizedModule.Away (g i) M →+\n          Localization.AtPrime p.1.asHomogeneousIdeal.toIdeal,\n        (∀ z : M, e (LocalizedModule.mkLinearMap (Submonoid.powers (g i)) M z) = F z) ∧\n        (∀ (a : B) (x : LocalizedModule.Away (g i) M),\n          e (a • x) = F (algebraMap B (Localization.Away f) a) * e x) ∧\n        e (t i) = (s.1 p).1)",
   "branch": "sheaf-dag",
   "by": "C2",
-  "date": "2026-10-12",
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.ProjTwistFiniteLocalRepresentatives retired; now WeilConjectures.AlgebraicGeometry.ProjTwistFiniteLocalRepresentatives."
+  "date": "2026-10-12"
  },
  "lean_audit": {
   "master": {

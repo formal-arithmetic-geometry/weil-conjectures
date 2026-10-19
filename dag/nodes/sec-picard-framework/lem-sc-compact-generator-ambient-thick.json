@@ -98,14 +98,13 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.CategoryTheory.CompactGeneratorAmbientThick",
-  "file": "lean/WeilConjectures/CategoryTheory/CompactGeneratorAmbientThick.lean",
+  "module": "Sheaf.CategoryTheory.CompactGeneratorAmbientThick",
+  "file": "lean/Sheaf/CategoryTheory/CompactGeneratorAmbientThick.lean",
   "declaration": "CategoryTheory.compact_generator_ambient_thick",
   "statement": "theorem compact_generator_ambient_thick\n    {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]\n    [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive]\n    [Pretriangulated C] [IsTriangulated C]\n    (A : ObjectProperty C) [A.IsTriangulated] [A.IsClosedUnderIsomorphisms]\n    [HasCoproducts.{w} A.FullSubcategory]\n    [∀ I : Type w, A.IsClosedUnderColimitsOfShape (Discrete I)]\n    (G : A.FullSubcategory) (hG : IsCompactObject G)\n    (P : A.FullSubcategory) (hP : IsCompactObject P)\n    (X : ℕ → A.FullSubcategory) (t : ∀ n : ℕ, (X n).obj ⟶ (X (n + 1)).obj)\n    (hzero : IsZero (X 0).obj)\n    (hsteps : ∀ n : ℕ, ∃ (I : Type w) (m : I → ℤ)\n      (B : Cofan (fun i : I ↦ G.obj⟦m i⟧)), Nonempty (IsColimit B) ∧\n      ∃ (a : (X (n + 1)).obj ⟶ B.pt) (b : B.pt ⟶ (X n).obj⟦(1 : ℤ)⟧),\n        Pretriangulated.Triangle.mk (t n) a b ∈ distTriang C)\n    (S : Cofan (fun n : ℕ ↦ (X n).obj)) (hS : IsColimit S)\n    (s : S.pt ⟶ S.pt) (q : S.pt ⟶ P.obj) (r : P.obj ⟶ S.pt⟦(1 : ℤ)⟧)\n    (hs : ∀ n : ℕ, S.inj n ≫ s = t n ≫ S.inj (n + 1))\n    (hT : Pretriangulated.Triangle.mk (𝟙 S.pt - s) q r ∈ distTriang C) :\n    (ObjectProperty.singleton G.obj).triangEnvelope P.obj",
   "branch": "sheaf-dag",
   "by": "B3",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.CategoryTheory.CompactGeneratorAmbientThick retired; now WeilConjectures.CategoryTheory.CompactGeneratorAmbientThick."
+  "date": "2026-10-13"
  },
  "proof_deps": [
   "def-pc-thick-closure",

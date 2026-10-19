@@ -101,14 +101,13 @@
  "unit": "sk-thm-picard-coherence",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.ResolutionOpenScalarComparison",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/ResolutionOpenScalarComparison.lean",
+  "module": "Sheaf.AlgebraicGeometry.ResolutionOpenScalarComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ResolutionOpenScalarComparison.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.resolution_open_scalar_comparison",
   "statement": "theorem resolution_open_scalar_comparison {X T : Scheme.{u}}\n    (f : X ⟶ T) (F : X.Modules) (I : InjectiveResolution F) (q : ℕ)\n    (W : T.Opens) (a : Γ(T, W)) :\n    let K := ((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex\n    let P := sectionCohomologyPresheaf K q\n    let Y := (f ⁻¹ᵁ W).toScheme\n    let G := (restrictFunctor (f ⁻¹ᵁ W).ι).obj F\n    let b := ((f.app W) ≫ (f ⁻¹ᵁ W).topIso.inv).hom a\n    let s : Γ(𝟙_ Y.Modules, ⊤) := unitSectionsEquiv ⊤ b\n    ∃ c : P.obj (op W) ≃+\n        (RingedSpace.openModuleCohomology Y.toRingedSpace q ⊤).obj G,\n      (∀ (U : Y.Opens), (U : Set Y) = nonvanishingLocus (𝟙_ Y.Modules) s →\n        ∃ d : P.obj (op (T.basicOpen a)) ≃+\n          (RingedSpace.openModuleCohomology Y.toRingedSpace q U).obj G,\n          ∀ x : P.obj (op W),\n            (RingedSpace.openModuleCohomologyRestriction Y.toRingedSpace q\n              (homOfLE (le_top : U ≤ ⊤))).app G (c x) =\n                d ((P.map (homOfLE (T.basicOpen_le a)).op).hom x)) ∧\n      (∀ (n : ℕ) (x : P.obj (op W)),\n        (RingedSpace.openModuleCohomology Y.toRingedSpace q ⊤).map\n          (G.smulHom (b ^ n)) (c x) = c (a ^ n • x))",
   "branch": "sheaf-dag",
   "by": "B2",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.ResolutionOpenScalarComparison retired; now WeilConjectures.AlgebraicGeometry.ResolutionOpenScalarComparison."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

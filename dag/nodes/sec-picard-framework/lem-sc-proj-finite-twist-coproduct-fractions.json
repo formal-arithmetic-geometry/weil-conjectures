@@ -102,14 +102,13 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.ProjFiniteTwistCoproductFractions",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/ProjFiniteTwistCoproductFractions.lean",
+  "module": "Sheaf.AlgebraicGeometry.ProjFiniteTwistCoproductFractions",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjFiniteTwistCoproductFractions.lean",
   "declaration": "AlgebraicGeometry.Proj.finite_twist_coproduct_fractions",
   "statement": "theorem finite_twist_coproduct_fractions\n    {A σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]\n    (𝒜 : ℕ → σ) [GradedRing 𝒜] (r : ℕ) (a : Fin r → ℤ) :\n  ∃ alpha : ∀ (f : A) (b : ℕ),\n    0 < b → f ∈ 𝒜 b →\n    (∐ (fun i : Fin r ↦ twist 𝒜 (a i))).val.obj (op (basicOpen 𝒜 f))\n      →+ LocalizedModule.Away f (Fin r → A),\n  (∀ (f : A) (b : ℕ) (hb : 0 < b)\n    (hf : f ∈ 𝒜 b),\n    Function.Injective (alpha f b hb hf) ∧\n    Set.range (alpha f b hb hf) = degreeZeroFractions\n      (fun n : ℕ ↦ (𝒜 n : Set _))\n      (fun n : ℕ ↦ {y : Fin r → A | ∀ i,\n        if 0 ≤ a i + n then\n          y i ∈ 𝒜 (a i + n).toNat\n        else y i = 0}) (Submonoid.powers f)) ∧\n  (∀ (f : A) (b : ℕ) (hb : 0 < b)\n    (hf : f ∈ 𝒜 b)\n    (q : HomogeneousLocalization.Away 𝒜 f)\n    (s : (∐ (fun i : Fin r ↦ twist 𝒜 (a i))).val.obj (op (basicOpen 𝒜 f))),\n    alpha f b hb hf (awayToSection 𝒜 f q\n      • s) = algebraMap\n        (HomogeneousLocalization.Away 𝒜 f)\n        (Localization.Away f) q • alpha f b hb hf s) ∧\n  (∀ (f g : A) (b c : ℕ) (hb : 0 < b) (hc : 0 < c)\n    (hf : f ∈ 𝒜 b)\n    (hg : g ∈ 𝒜 c)\n    (inc : basicOpen 𝒜 g ≤\n      basicOpen 𝒜 f)\n    (e t : ℕ) (h : A),\n    0 < e → h ∈ 𝒜 t → g ^ e = h * f →\n    ∀ (m : ℕ) (y : Fin r → A)\n      (s : (∐ (fun i : Fin r ↦ twist 𝒜 (a i))).val.obj\n          (op (basicOpen 𝒜 f))),\n      alpha f b hb hf s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) →\n      alpha g c hc hg ((∐ (fun i : Fin r ↦\n        twist 𝒜 (a i))).val.map\n          (homOfLE inc).op s) =\n        mk (h ^ m • y) (⟨g ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g))",
   "branch": "sheaf-dag",
   "by": "X2",
-  "date": "2026-10-12",
-  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.ProjFiniteTwistCoproductFractions retired; now WeilConjectures.AlgebraicGeometry.ProjFiniteTwistCoproductFractions."
+  "date": "2026-10-12"
  },
  "reviewed": {
   "date": "2026-10-12",
