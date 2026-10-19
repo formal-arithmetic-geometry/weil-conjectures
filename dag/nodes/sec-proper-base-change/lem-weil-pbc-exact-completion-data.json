@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-exact-completion-data",
+ "kind": "statement",
+ "title": "Exact completion from the intrinsic-complete reflection and its unit criterion",
+ "statement": "On a small pro-etale site and for an adic coefficient datum d, there exist an additive exact endofunctor F of the actual completed-coefficient derived category, a coherent integer-shift comparison, and a shift-compatible natural unit eta:Id -> F, such that a complex is intrinsically derived complete if and only if eta at that complex is invertible. This is only the completion part of the uniform-category argument; no constructibility or etale-origin conclusion is asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-adic-coefficient-datum"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/cor-weil-pbc-constructible-complete.md",
+  "place": "## Proof: implicit triangulation needed for the constructible restriction; agent supplement. Stacks Tag 09C3, proetale.tex, lemma-local-structure-constructible-complex, supplies contextual local models, not this tower-category closure theorem."
+ },
+ "proof": [
+  {
+   "text": "Use the published intrinsic-complete inclusion and its left adjoint, whose unit is the actual completion unit. Closure under isomorphisms follows directly by transporting the existential cochain representative in PbcIsIntrinsicallyComplete. For a fully faithful right adjoint, the unit is invertible exactly on its essential image; isomorphism closure identifies this image with the original completeness predicate.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-weil-pbc-bounded-constructible-complete"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The unit-normalized completion shift makes the completeness predicate stable under every integer shift, since the shifted unit is a conjugate of the shift of the original unit. To prove triangulation, identify the reflective subcategory P with its double orthogonal. For X in the double orthogonal complete its unit to a distinguished triangle X -> F(X) -> Z -> X[1]. The universal Hom bijection shows Z is left orthogonal to P: use exactness of Hom and the shifted universal Hom bijection. Since X[1] is right orthogonal the connecting arrow is zero; exactness of Hom then factors id_Z through F(X), forcing id_Z=0. Thus the unit of X is invertible. Orthogonals are triangulated by the Mathlib instances.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The full inclusion of this triangulated predicate is exact. Give its left adjoint the adjunction-induced shift. Mathlib triangulated adjunction then makes that adjoint exact and additive, and makes its unit shift-compatible. Composing with the exact inclusion gives the required exact pointed endofunctor and the already proved unit criterion.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-subcategory"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/cor-weil-pbc-constructible-complete.md",
+  "place": "Completion part: reuse the existing shift-compatible reflection and prove its exactness through the double-orthogonal argument in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Koszul derived completion is exact and the completion unit detects derived complete complexes",
+   "results": "8 hits: CategoryTheory.Abelian.LeftResolution.exactAt_map_chainComplex_succ, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt, CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ, AdicCompletion.map_exact, HomologicalComplex.exact_of_degreewise_exact, HomologicalComplex.exact_iff_degreewise_exact. Local project interfaces were also read; the proved categorical arguments use their stated APIs.",
+   "date": "2026-10-19",
+   "verdict": "no exact match for this coefficient presentation; use the stated project APIs and the categorical assembly proved here"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatTrans\", \"CommShift\"",
+   "results": "12 hits: CategoryTheory.NatTrans.CommShift.id, CategoryTheory.NatTrans.CommShift.isoRefl_hom, CategoryTheory.NatTrans.CommShift, CategoryTheory.NatTrans.CommShiftCore, CategoryTheory.NatTrans.CommShiftCore.zero, CategoryTheory.NatTrans.CommShift.of_core, CategoryTheory.NatTrans.CommShift.leftUnitor, CategoryTheory.NatTrans.CommShift.rightUnitor. Local project interfaces were also read; the proved categorical arguments use their stated APIs.",
+   "date": "2026-10-19",
+   "verdict": "no exact match for this coefficient presentation; use the stated project APIs and the categorical assembly proved here"
+  },
+  {
+   "tool": "grep",
+   "query": "PbcIsIntrinsicallyComplete|PbcUniformReductionProfile|constructibleCoefficient",
+   "results": "0 hits: . Local project interfaces were also read; the proved categorical arguments use their stated APIs.",
+   "date": "2026-10-19",
+   "verdict": "no exact match for this coefficient presentation; use the stated project APIs and the categorical assembly proved here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reflection onto a shift stable triangulated subcategory is an exact functor",
+   "results": "8 hits: CategoryTheory.Functor.IsTriangulated, CategoryTheory.Equivalence.IsTriangulated.mk'', CategoryTheory.Functor.IsTriangulated.mk, CategoryTheory.IsTriangulated.of_fully_faithful_triangulated_functor, CategoryTheory.Equivalence.IsTriangulated.mk', CategoryTheory.Functor.isTriangulated_of_iso, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Triangulated.Localization.isTriangulated_functor",
+   "date": "2026-10-19",
+   "verdict": "no exact match: the returned generic categorical, sheaf or adic algebra declarations do not state this coefficient-sheaf assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PbcUniformCompleteTriangulated",
+  "date": "2026-10-19",
+  "group": "Q5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-uniform-complete-triangulated",
+   "place": "Analytic steps of the triangulation proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PbcExactCompletionData",
+  "file": "lean/Sheaf/Paper/PbcExactCompletionData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pbcExactCompletionData",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.pbcExactCompletionData"
+  ],
+  "statement": "theorem pbcExactCompletionData (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) : ∃ (F : PbcCompletedDerived T d ⥤ PbcCompletedDerived T d) (η : 𝟭 _ ⟶ F) (_ : F.Additive) (_ : F.CommShift ℤ) (_ : F.IsTriangulated) (_ : NatTrans.CommShift η ℤ), ∀ K, PbcIsIntrinsicallyComplete T d K ↔ IsIso (η.app K)",
+  "branch": "sheaf-dag",
+  "by": "Q5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261019T192819-L-1871155",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261019T192819-L-1871155",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

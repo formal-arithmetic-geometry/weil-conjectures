@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-uniform-reduction-criterion",
+ "kind": "statement",
+ "title": "Uniform cohomology criterion for constructible reductions with compatible etale origins",
+ "statement": "For a Noetherian scheme T, a prime l and a finite extension E of Q_l, an object K of the actual completed integral-coefficient derived category has uniformly bounded constructible reduction local models and compatible bounded-below etale origins if and only if its reductions, transported to constant coefficients by the canonical exact restriction, have intrinsically constructible cohomology in one interval [a,b] independent of the positive quotient level. No completeness condition on K is included.",
+ "stmt_deps": [
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-uniform-reduction-profile"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/cor-weil-pbc-constructible-complete.md",
+  "place": "## Proof: implicit triangulation needed for the constructible restriction; agent supplement. Stacks Tag 09C3, proetale.tex, lemma-local-structure-constructible-complex, supplies contextual local models, not this tower-category closure theorem."
+ },
+ "proof": [
+  {
+   "text": "The forward implication is precisely the common cohomology bound theorem for uniform local models.",
+   "uses": [
+    "lem-weil-pbc-uniform-local-model-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the converse build the canonical strict normalized reduction tower from the fixed evaluation comparison and reduction normalizations; use the existing pbcReductionAdicTower and its canonical coherence laws from LevelwiseAdicTruncations. The current dependency graph permits this import. Exact constant-coefficient restriction commutes with homology and reflects zero objects. Thus the profile supplies normalizedConstructibleTower_local_effectivity with a common interval, yielding uniform local models and bounded constructible etale origins for every level. Transport each local origin through the canonical function/constant realization comparison. Exact etale comparison reflects the lower cohomological bound. Its full faithfulness on bounded-below derived categories lifts each adjacent normalization and its inverse. Faithfulness then verifies the specified compatibility square, giving the compatible witnessed tower. Combining the two implications proves the criterion.",
+   "uses": [
+    "prop-weil-pbc-levelwise-truncations",
+    "lem-weil-pbc-normalized-constructible-local-effectivity",
+    "thm-weil-pbc-site-comparison",
+    "def-weil-pbc-bounded-constructible-complete"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-uniform-local-model-cohomology",
+  "prop-weil-pbc-levelwise-truncations",
+  "lem-weil-pbc-normalized-constructible-local-effectivity",
+  "thm-weil-pbc-site-comparison",
+  "def-weil-pbc-bounded-constructible-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/cor-weil-pbc-constructible-complete.md",
+  "place": "The parent triangulation supplement; analytic part separated from the formal triangulated-category argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Uniform cohomology bounds for normalized adic constructible towers imply common bounded local models and compatible etale origins",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.of_comp, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, Algebra.IsEtaleAt.comp, Algebra.Etale.exists_subalgebra_fg, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top, StandardEtalePair.instFormallyEtaleRing, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial. Local project interfaces were also read; the proved categorical arguments use their stated APIs.",
+   "date": "2026-10-19",
+   "verdict": "no exact match for this coefficient presentation; use the stated project APIs and the categorical assembly proved here"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"IsGE\", \"IsLE\"",
+   "results": "2 hits: DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE. Local project interfaces were also read; the proved categorical arguments use their stated APIs.",
+   "date": "2026-10-19",
+   "verdict": "no exact match for this coefficient presentation; use the stated project APIs and the categorical assembly proved here"
+  },
+  {
+   "tool": "grep",
+   "query": "PbcHasUniformConstructibleReductions|PbcUniformReductionProfile",
+   "results": "0 hits: . Local project interfaces were also read; the proved categorical arguments use their stated APIs.",
+   "date": "2026-10-19",
+   "verdict": "no exact match for this coefficient presentation; use the stated project APIs and the categorical assembly proved here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform bounded constructible cohomology of an adic tower is equivalent to common bounded local integral models",
+   "results": "8 hits: IsAdic, IsAdic.isPrecomplete_iff, Rat.HeightOneSpectrum.adicCompletion.padicEquiv, AdicCompletion, Rat.HeightOneSpectrum.adicCompletionIntegers.padicIntEquiv, WithIdeal.instIsUniformAddGroup, AdicCompletion.instIsScalarTower, AdicCompletion.ofLinearEquiv",
+   "date": "2026-10-19",
+   "verdict": "no exact match: the returned generic categorical, sheaf or adic algebra declarations do not state this coefficient-sheaf assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PbcUniformCompleteTriangulated",
+  "date": "2026-10-19",
+  "group": "Q5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-uniform-complete-triangulated",
+   "place": "Analytic steps of the triangulation proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PbcUniformReductionCriterion",
+  "file": "lean/Sheaf/Paper/PbcUniformReductionCriterion.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pbcUniformReductionCriterion",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.pbcUniformReductionCriterion_backward",
+   "AlgebraicGeometry.Scheme.pbcUniformReductionCriterion"
+  ],
+  "statement": "theorem pbcUniformReductionCriterion (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (T : Scheme.{u}) [IsNoetherian T] (K : PbcCompletedDerived T (pbcIntegralDatum l E)) : (PbcHasUniformConstructibleReductions T (pbcIntegralDatum l E) K ∧ PbcHasCompatibleEtaleOrigins T (pbcIntegralDatum l E) K) ↔ PbcUniformReductionProfile T (pbcIntegralDatum l E) K",
+  "branch": "sheaf-dag",
+  "by": "Q5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261019T192819-L-1871155",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261019T192819-L-1871155",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

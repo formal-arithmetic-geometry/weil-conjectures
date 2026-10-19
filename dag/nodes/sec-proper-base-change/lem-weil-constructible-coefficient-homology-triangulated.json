@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-constructible-coefficient-homology-triangulated",
+ "kind": "statement",
+ "title": "Triangulation of intrinsic constructible cohomology in the site coefficient universe",
+ "statement": "For a scheme T:Scheme u and finite commutative ring A:Type (u+1), the property on D(Mod of the constant A ring sheaf) that every cohomology module sheaf is intrinsically constructible is closed under isomorphisms and is triangulated. There is no cohomological boundedness condition and no completion, tower, or etale-origin condition.",
+ "stmt_deps": [
+  "def-weil-proetale-constructible-sheaf"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/cor-weil-pbc-constructible-complete.md",
+  "place": "## Proof: implicit triangulation needed for the constructible restriction; agent supplement. Stacks Tag 09C3, proetale.tex, lemma-local-structure-constructible-complex, supplies contextual local models, not this tower-category closure theorem."
+ },
+ "proof": [
+  {
+   "text": "Prove isomorphism closure by transporting every local trivialization. For zero choose one whole stratum, including for the empty scheme, the top covering sieve, and the zero finite module. Inverse image and constant module sheafification preserve zero, and restriction preserves zero morphisms. Apply the abelian exact-closure theorem. Kernel and cokernel universal-property isomorphisms transfer its selected-limit statements to the ObjectProperty closure classes. The derived homologyProperty instances then give isomorphism closure and triangulation, with no boundedness assumption.",
+   "uses": [
+    "def-weil-proetale-constructible-sheaf",
+    "lem-weil-constructible-coefficient-serre",
+    "lem-sbc-cohomology-in-weak-serre-subcategory",
+    "def-weil-pbc-bounded-constructible-complete"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-constructible-sheaf",
+  "lem-weil-constructible-coefficient-serre",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "def-weil-pbc-bounded-constructible-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/cor-weil-pbc-constructible-complete.md",
+  "place": "The parent triangulation supplement; analytic part separated from the formal triangulated-category argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaves of modules over a finite ring form a Serre subcategory",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, SheafOfModules.IsFiniteType, CondensedMod.IsSolid, Condensed.instAB5CondensedMod, CondensedMod, instAbelianCondensedMod, CondensedMod.ofSheafCompHaus, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat. Local project interfaces were also read; the proved categorical arguments use their stated APIs.",
+   "date": "2026-10-19",
+   "verdict": "no exact match for this coefficient presentation; use the stated project APIs and the categorical assembly proved here"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyProperty\"",
+   "results": "0 hits: . Local project interfaces were also read; the proved categorical arguments use their stated APIs.",
+   "date": "2026-10-19",
+   "verdict": "no exact match for this coefficient presentation; use the stated project APIs and the categorical assembly proved here"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Tt]riangulated|constructible.*[Ee]xactClosure",
+   "results": "0 hits: . Local project interfaces were also read; the proved categorical arguments use their stated APIs.",
+   "date": "2026-10-19",
+   "verdict": "no exact match for this coefficient presentation; use the stated project APIs and the categorical assembly proved here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complexes whose cohomology sheaves lie in a Serre subcategory form a triangulated subcategory",
+   "results": "8 hits: CategoryTheory.Triangulated.Subcategory, CategoryTheory.ObjectProperty.IsTriangulated, CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderSubobjects, DerivedCategory.instIsTriangulated, CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated, CategoryTheory.ObjectProperty.IsSerreClass, HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic, CategoryTheory.ObjectProperty.IsTriangulated.mk",
+   "date": "2026-10-19",
+   "verdict": "no exact match: the returned generic categorical, sheaf or adic algebra declarations do not state this coefficient-sheaf assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PbcUniformCompleteTriangulated",
+  "date": "2026-10-19",
+  "group": "Q5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-uniform-complete-triangulated",
+   "place": "Analytic steps of the triangulation proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstructibleCoefficientHomologyTriangulated",
+  "file": "lean/Sheaf/Paper/ConstructibleCoefficientHomologyTriangulated.lean",
+  "declaration": "AlgebraicGeometry.Scheme.constructibleCoefficientHomology_isTriangulated",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.constructibleCoefficientHomology_isTriangulated"
+  ],
+  "statement": "theorem constructibleCoefficientHomology_isTriangulated (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A] : ObjectProperty.IsClosedUnderIsomorphisms (DerivedCategory.homologyProperty (IsConstructibleProEtaleCoefficientModuleSheaf T A)) ∧ ObjectProperty.IsTriangulated (DerivedCategory.homologyProperty (IsConstructibleProEtaleCoefficientModuleSheaf T A))",
+  "branch": "sheaf-dag",
+  "by": "Q5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261019T192819-L-1871155",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261019T192819-L-1871155",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

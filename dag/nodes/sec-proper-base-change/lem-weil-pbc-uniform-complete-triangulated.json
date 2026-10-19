@@ -23,160 +23,47 @@
  ],
  "proof": [
   {
-   "text": "Write $B=A_T$ and $R_n=(P_n)_T$. The ambient category is $D(\\operatorname{Mod}(B))$, with the cone and shift conventions of [def-weil-abstract-derived-category]. Let $\\Phi(K)=K^{\\wedge}_{\\mathrm{Kos}}$ and $\\eta_K:K\\to\\Phi(K)$ be the specified construction and unit in [def-weil-pbc-intrinsic-completion]. This construction preserves zero and is functorial on complexes and on the derived category: tensor by each finite free Koszul complex preserves quasi-isomorphisms, and exact countable products preserve acyclic complexes, so the displayed mapping-fiber construction does too. Its naturality is the componentwise identity $(\\prod f_m)(1-s)=(1-s')(\\prod f_m)$. Hence completeness is invariant under ambient isomorphisms. Membership in the tower condition is invariant under isomorphisms by composing its level isomorphisms with the reductions of that isomorphism; their normalization squares commute by naturality of coefficient reduction. Compose the witness isomorphisms in the same way. This proves isomorphism closure of the full subcategory. Zero has zero local complexes, any interval containing zero, the one-stratum partition when $T$ is nonempty (the empty partition when $T$ is empty), and zero etale witnesses with the unique normalization maps; its completion map is the identity of zero.",
+   "text": "Use the exact completion data from the actual reflector. For the locus where its natural unit is invertible, transport units through isomorphisms, use the zero objects and coherent shift square, and apply the two-isomorphism lemma to the unit morphism of distinguished triangles. This proves isomorphism closure and triangulation of intrinsic completeness.",
    "uses": [
-    "def-weil-pbc-adic-coefficient-datum",
-    "def-weil-pbc-bounded-constructible-complete",
-    "def-weil-pbc-bounded-constructible-tower",
-    "def-weil-pbc-intrinsic-completion",
-    "def-weil-abstract-derived-category",
-    "lem-weil-proetale-countable-products-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/cor-weil-pbc-constructible-complete.md",
-    "place": "Statement: ordinary triangulated functors; proof: restriction to Dbc. Agent supplement, zero and isomorphism closure."
-   }
-  },
-  {
-   "text": "There is a uniform cohomological bound for the reductions of each object $K$ in our subcategory, even though the tower definition initially bounds the terms of its local models. Indeed, the constant sheaf functor is exact by [lem-weil-pbc-constant-module-section-properties]. Since $A$ is a valuation subring of the field $E$ and $\\varpi\\ne0$, the sequence $0\\to A\\xrightarrow{\\varpi^n}A\\to P_n\\to0$ is exact for every $n\\geq1$. Flatness and the quotient identification in [lem-weil-pbc-constant-completion-equivalence] turn this into $0\\to B\\xrightarrow{\\varpi^n}B\\to R_n\\to0$. Exact inverse image preserves this sequence on each stratum and each local covering member, with the restricted coefficient ring; no equality with a newly completed coefficient ring on that stratum is used. This is a length-one free resolution of the restricted $R_n$. If $L$ is any defining local complex with terms only in $[d_0,d_1]$, then $L\\otimes^L R_n$ is represented by the total complex of $[L\\xrightarrow{\\varpi^n}L]$ in the two tensor degrees $[-1,0]$, and is therefore zero outside $[d_0-1,d_1]$. This computes derived reduction because the resolution is bounded and free. Thus the restrictions of $\\mathcal H^q(K_n)$ vanish outside this interval; inside it they are finite lisse by the tower definition, so the cohomology sheaves are intrinsically constructible. To justify global vanishing, use the given etale witness $\\nu_T^*L_n\\simeq K_n$. Exactness and the sheaf unit isomorphism of finite-level comparison show that $\\nu^*$ commutes with cohomology and detects zero sheaves. The comparison-pullback isomorphism therefore implies $\\mathcal H^q(L_n)$ vanishes on every stratum for these $q$. Every geometric point belongs to a stratum, so etale stalk conservativity, applied to $0\\to\\mathcal H^q(L_n)[0]$ after forgetting to abelian sheaves, gives global vanishing. Exact inverse image then gives the asserted global bound for $K_n$.",
-   "uses": [
-    "def-weil-pbc-bounded-constructible-complete",
-    "def-weil-pbc-bounded-constructible-tower",
-    "def-weil-proetale-constructible-sheaf",
-    "lem-weil-pbc-constant-module-section-properties",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "lem-pur-derived-change-of-rings",
-    "prop-weil-pbc-site-comparison-finite-level",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-weil-pbc-derived-stalk-conservative"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 093J (lemma-constant-exact), 093M (lemma-completion-flat); agent length-one DVR resolution and bound on the given local models."
-   }
-  },
-  {
-   "text": "For an integer $m$, derived reduction is exact and hence $(K[m])_n\\simeq K_n[m]$. The same local models shifted by $m$ have term window $[d_0-m,d_1-m]$ and finite-lisse reduction cohomology $\\mathcal H^q(K_n[m])=\\mathcal H^{q+m}(K_n)$. Shift every normalization and every witness $(L_n,\\alpha_n,\\beta_n)$; the witness compatibility equation is the original equation shifted by $m$, with the canonical tensor-shift identification. In the completion model of step 1, tensor, products and the mapping fiber commute with shift, with the usual tensor-shift identification. For the mapping fiber $F(C)^i=B(C)^i\\oplus B(C)^{i-1}$, its comparison with $F(C)[m]$ multiplies the second coordinate by $(-1)^m$; substitution in $d_F(x,y)=(d_Bx,(1-s)x-d_By)$ checks it is a chain isomorphism. The unit becomes $\\eta_K[m]$ under this identification, so it remains invertible. This verifies each defining clause for $K[m]$, for positive, zero and negative $m$.",
-   "uses": [
-    "lem-pur-derived-change-of-rings",
-    "def-weil-pbc-bounded-constructible-complete",
-    "def-weil-pbc-bounded-constructible-tower",
-    "def-weil-pbc-intrinsic-completion",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/cor-weil-pbc-constructible-complete.md",
-    "place": "Statement: ordinary triangulated functors; proof: restriction to Dbc. Agent supplement, explicit integer shift calculation."
-   }
-  },
-  {
-   "text": "Fix an arbitrary ambient distinguished triangle $K\\xrightarrow{u}L\\to C\\to K[1]$ with $K,L$ in the subcategory. The Koszul completion functor $\\Phi$ of step 1 is exact: on complexes, tensor by $Q_m$ distributes over the two cone summands and commutes with its differential; products distribute over the two finite summands; and for the mapping fiber, write a degree-$i$ element of $F(\\operatorname{Cone}(u))$ as $((l,k),(l',k'))$ with $l\\in B_L^i$, $k\\in B_K^{i+1}$, $l'\\in B_L^{i-1}$, $k'\\in B_K^i$. The map $((l,k),(l',k'))\\mapsto((l,l'),(k,-k'))$ identifies it with $\\operatorname{Cone}(F(u))$. Substitution in the two displayed differential formulas in the cited definitions verifies the chain-map equation; the inverse regroups these coordinates and negates the last one again. Thus the completion of a cone triangle is its cone triangle after completion. Exact products ensure these computations descend through quasi-isomorphisms, as in step 1. The unit on a cone is the block map induced by its units on the two summands, so the three units form a morphism from the displayed triangle to its image under $\\Phi$, including the connecting arrow. The first two components are isomorphisms by completeness of $K,L$; [lem-sf-triangle-morphism-iso] proves that $\\eta_C$ is an isomorphism. Hence $C$ is derived complete. This argument uses the specified Koszul completion unit, rather than an arbitrary isomorphism between two limit objects.",
-   "uses": [
-    "def-weil-pbc-intrinsic-completion",
-    "def-weil-abstract-derived-category",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-sf-triangle-morphism-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/cor-weil-pbc-constructible-complete.md",
-    "place": "Statement: ordinary triangulated functors; proof: restriction to Dbc. Agent supplement, exactness of the explicit Koszul mapping-fiber complex."
-   }
-  },
-  {
-   "text": "Apply exact derived reduction to the triangle in step 4, obtaining $K_n\\to L_n\\to C_n\\to K_n[1]$ over the finite commutative ring $P_n$. Choose a common cohomological interval $[a,b]$ containing the two intervals furnished by step 2. By [lem-weil-proetale-dbc-triangulated], the finite-level property of bounded intrinsically constructible cohomology is shift-stable and has the stated outer-vertex closure. Rotate the reduced triangle to $L_n\\to C_n\\to K_n[1]\\to L_n[1]$ and apply that closure: $C_n$ has intrinsically constructible cohomology. The long exact cohomology sequence gives the sharper bound $\\mathcal H^q(C_n)=0$ for $q\\notin[a-1,b]$, independent of $n$, since the two adjacent sheaves $\\mathcal H^q(L_n)$ and $\\mathcal H^{q+1}(K_n)$ both vanish there. The normalized reduction tower of $C$ is the one defined by the completed coefficient datum; it has its specified quotient cocycle. Thus we have a normalized tower, levelwise constructibility and a single cohomological interval, not just separately bounded levels.",
-   "uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-proetale-dbc-triangulated",
-    "lem-sf-derived-homology-long-exact",
-    "def-weil-pbc-adic-coefficient-datum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09B5 (lemma-constructible-serre), Tag 09AL (lemma-compare-constructible-derived); agent uniform bound from the long exact sequence."
-   }
-  },
-  {
-   "text": "Here are compatible etale witnesses for $C$, including the missing compatibility check for arbitrary $u$. Write the given witnesses of $K_n,L_n$ as $E_n,F_n\\in D^+(T_{\\Et},P_n)$ with isomorphisms $\\alpha^K_n,\\alpha^L_n$. Full faithfulness in [thm-weil-pbc-site-comparison] lifts $(\\alpha^L_n)^{-1}u_n\\alpha^K_n$ to a unique $v_n:E_n\\to F_n$. Choose a cone triangle of $v_n$ with third vertex $G_n$. The bounded-below subcategory is closed under cones, so $G_n\\in D^+$. Finite-level inverse image is exact and its termwise derived functor is triangulated; applying it to this triangle and using TR3 with the first two witness isomorphisms gives $\\alpha_n:\\nu_T^*G_n\\simeq C_n$, by the two-isomorphism lemma. For $b\\geq a$, tensor-pullback compatibility identifies $\\nu_T^*(G_b\\otimes^L_{P_b}P_a)$ with $C_b\\otimes^L_{P_b}P_a\\simeq C_a$. Before using bounded-below full faithfulness again, note that exact inverse image commutes with all cohomology and detects zero sheaves by its sheaf unit. Therefore $G_b\\otimes^L_{P_b}P_a$ has the same bounded cohomological interval as $C_a$, and belongs to $D^+$. Full faithfulness lifts the isomorphism $\\alpha_a^{-1}\\rho^C_{b,a}(\\alpha_b\\otimes^L P_a)$ uniquely to an isomorphism $\\beta_{b,a}:G_b\\otimes^L_{P_b}P_a\\simeq G_a$, lifting its inverse as well. Its defining equality is exactly $\\alpha_a\\nu^*(\\beta_{b,a})=\\rho^C_{b,a}(\\alpha_b\\otimes^L P_a)$. For three indices, applying $\\nu^*$ to the two composites of the $\\beta$ gives the same map by the quotient cocycle of $\\rho^C$ and naturality of tensor-pullback; faithfulness makes those composites equal. All these sources are bounded below by the same preceding check. This supplies the compatible witnesses required in the definition without assuming functorial cones in an ordinary derived category.",
-   "uses": [
-    "def-weil-pbc-bounded-constructible-complete",
-    "thm-weil-pbc-site-comparison",
-    "prop-weil-pbc-site-comparison-finite-level",
-    "lem-sf-exact-functor-derived-triangulated",
-    "def-weil-pbc-bounded-derived-subcategories",
-    "def-weil-triangulated-category",
-    "lem-sf-triangle-morphism-iso",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-weil-pbc-adic-coefficient-datum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09B1 (lemma-compare-derived); compatible witness lifts using finite-level full faithfulness and canonical quotient normalization."
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-normalized-constructible-local-effectivity] to the normalized reduction tower of $C$ from step 5. Its hypotheses hold: $T$ is Noetherian, the coefficients are the given completed adic datum, the reductions carry their $R_n$ actions and the quotient normalization cocycle, every cohomology sheaf is intrinsically constructible, and $[a-1,b]$ is independent of $n$. Its statement supplies the common finite stratification, pro-etale covers, bounded adic-lisse finite-type local complexes and compatible local reduction isomorphisms required by [def-weil-pbc-bounded-constructible-tower]. No assertion of local projectivity or finite Tor dimension over the Artinian $P_n$ is needed. Together with completeness from step 4 and compatible witnesses from step 6, these data prove $C\\in\\Dbc(T_{\\Proet},A)$ by its definition. The argument applied to an arbitrary ambient triangle, so every cone of every morphism between the selected objects belongs.",
-   "uses": [
-    "lem-weil-pbc-normalized-constructible-local-effectivity",
-    "def-weil-pbc-bounded-constructible-tower",
-    "def-weil-pbc-bounded-constructible-complete"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/cor-weil-pbc-constructible-complete.md",
-    "place": "Proof: all displayed objects lie in the bounded constructible complete category; agent triangulation supplement using existing normalized local effectivity."
-   }
-  },
-  {
-   "text": "We now verify the precise full-subcategory criterion, including the omitted middle-vertex and additive checks. For a distinguished triangle $K\\to L\\to M\\to K[1]$ with $K,M$ in the subcategory, inverse rotation gives $M[-1]\\to K\\to L\\to M$. Steps 3 and 7 imply $L$ lies in the subcategory. If the known pair is $L,M$, rotate to $L\\to M\\to K[1]\\to L[1]$, use step 7 and then shift back. Thus every pair of vertices gives the third. Step 1 already proved ambient isomorphism closure. For two objects $K,L$, the cone of the zero map $K[-1]\\to L$ is $L\\oplus K$, by the explicit cone differential, so steps 3 and 7 imply closure under finite biproducts; zero is present by step 1. The full subcategory consequently inherits the abelian-group structure on Hom and these biproducts and is additive. Its shift is an autoequivalence, with inverse the inherited shift by $-1$. All hypotheses of [def-weil-triangulated-subcategory] are now satisfied, in the ambient triangulated derived category. Its statement supplies the inherited distinguished triangles, the triangulated structure and exact inclusion. Explicitly the inclusion uses the identity shift comparison and takes each inherited distinguished triangle to that same ambient triangle.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "def-weil-triangulated-category",
+    "lem-weil-pbc-exact-completion-data",
     "def-weil-triangulated-subcategory"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05QM (definition-triangulated-subcategory), Tag 05QX (lemma-triangulated-subcategory); explicit rotations and cone of the zero map."
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply the uniform cohomology criterion. Each constant-coefficient reduction is exact: choose the triangulated structure supplied by derived scalar extension and compose with exact coefficient restriction. The intrinsic constructible homology property is triangulated at each level. The parent proves the following family argument: isomorphisms preserve each bound; shifts send [a,b] to [a-m,b-m]; for a distinguished triangle use the common outside-vertex interval [min(a1,a3),max(b1,b3)] and t-structure extension closure, plus middle-vertex constructibility at every level. Zero lies in every level. Thus the uniform profile is isomorphism-closed and triangulated. Retain the direct finite-level site-comparison import required by the unit route; the compatible-origin portion of the criterion uses this comparison.",
+   "uses": [
+    "lem-weil-pbc-uniform-reduction-criterion",
+    "lem-weil-constructible-coefficient-homology-triangulated",
+    "lem-pur-derived-change-of-rings",
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-subcategory",
+    "prop-weil-pbc-site-comparison-finite-level"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rewrite the unchanged three-clause predicate as the intersection of intrinsic completeness and the uniform profile, using the reduction criterion. Apply the Mathlib intersection instances for isomorphism-closed triangulated properties. The full subcategory inherits the ambient distinguished triangles and exact inclusion.",
+   "uses": [
+    "def-weil-triangulated-subcategory",
+    "lem-weil-pbc-uniform-reduction-criterion"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-bounded-constructible-complete",
-  "def-weil-pbc-bounded-constructible-tower",
-  "def-weil-pbc-intrinsic-completion",
-  "def-weil-abstract-derived-category",
-  "lem-weil-proetale-countable-products-exact",
-  "def-weil-proetale-constructible-sheaf",
-  "lem-weil-pbc-constant-module-section-properties",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-exact-completion-data",
+  "def-weil-triangulated-subcategory",
+  "lem-weil-pbc-uniform-reduction-criterion",
+  "lem-weil-constructible-coefficient-homology-triangulated",
   "lem-pur-derived-change-of-rings",
-  "prop-weil-pbc-site-comparison-finite-level",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-derived-stalk-conservative",
-  "lem-sf-triangle-morphism-iso",
-  "lem-weil-proetale-dbc-triangulated",
-  "lem-sf-derived-homology-long-exact",
-  "thm-weil-pbc-site-comparison",
-  "lem-sf-exact-functor-derived-triangulated",
-  "def-weil-pbc-bounded-derived-subcategories",
-  "def-weil-triangulated-category",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-normalized-constructible-local-effectivity",
-  "def-weil-triangulated-subcategory"
+  "def-weil-abstract-derived-category",
+  "prop-weil-pbc-site-comparison-finite-level"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/cor-weil-pbc-constructible-complete.md",
-  "place": "Proof: restriction to Dbc; the triangulation argument is the agent supplement, using the explicitly cited existing local-effectivity and finite-level comparison results."
+  "place": "The original route with the categorical closure argument fully proved; exact completion is deduced from the stated reflector, while uniform reduction is factored through its cohomology profile."
  },
  "mathlib_searches": [
   {
@@ -267,11 +154,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-derived-stalk-conservative",
-  "lem-weil-proetale-dbc-triangulated"
+  "lem-pur-derived-change-of-rings"
  ],
  "reviewed": {
   "date": "2026-10-14",
@@ -302,5 +185,15 @@
   "date": "2026-10-16",
   "existing": false,
   "note": "The current recorded Sheaf.Paper.UniformCompleteTriangulated theorem applies to E : Type (u+1), IsPbcBoundedConstructibleComplete T l E, and the unlifted pbcPadicCoefficientDatum. The rational-category dependency of this item uses E : Type u, ULift coefficients, and pbcIntegralDatum l E. The two completed coefficient categories are not definitionally equal. This §1(B) interface states the same closure and inherited triangulation for the published lifted-coefficient category, with the same geometric hypotheses. Its distinct declaration name avoids a duplicate of the newly recorded unlifted theorem. No coefficient construction, tower, completion, or compatible-origin predicate is redefined."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261019T192819-L-1871155",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-constructible-coefficient-serre",
+ "kind": "statement",
+ "title": "Exact closure of intrinsic constructible sheaves in the site coefficient universe",
+ "statement": "For a scheme T:Scheme u and a finite commutative ring A:Type (u+1), intrinsic globally finite-stratification constructible sheaves of modules over the actual constant A ring sheaf are closed under kernels, cokernels, and extensions. The empty scheme and the zero coefficient ring are allowed. This statement is about the abelian sheaf category only; it has no derived-category, boundedness, completeness, or tower conclusion.",
+ "stmt_deps": [
+  "def-weil-proetale-constructible-sheaf"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093U(3), finite-type locally constant Serre closure; combine with the finite global partition argument of Tag 03RZ and proetale.tex Tag 09B5."
+ },
+ "proof": [
+  {
+   "text": "restriction to the canonical constant sections identifies modules over the\nconstant ring sheaf with sheaves of ordinary coefficient modules. The sheafification\nadjunction gives full faithfulness and essential surjectivity. Uniqueness of left\nadjoints identifies this encoding with inverse image, including on slices and on\nconstant modules. A terminal covering sieve of finite constant models is equivalent\nto finite local constancy, hence the encoding preserves and reflects constructibility.\nFor kernels and cokernels choose constructible etale origins, lift the morphism by\nfull faithfulness, and apply etale constructible Serre closure; exact comparison\nidentifies their kernels and cokernels. For extensions, the existing origin theorem\nmakes the middle sheaf an etale comparison object. The comparison counit identifies\nthe whole short complex with the comparison of its direct image. Faithful exact\ncomparison reflects short exactness, so etale Serre closure applies to the middle\nterm. Transport these three closure assertions through the encoding equivalence.\nPositive stratifications include the empty scheme, and zero coefficients are allowed.",
+   "uses": [
+    "def-weil-proetale-constructible-sheaf",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-weil-pbc-proetale-finite-model-local-constancy",
+    "lem-sf-proetale-constructible-origin",
+    "def-constructible-stratification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-constructible-sheaf",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-proetale-finite-model-local-constancy",
+  "lem-sf-proetale-constructible-origin",
+  "def-constructible-stratification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 09B5 via constructible etale origins, etale Serre closure, and the canonical constant-section encoding equivalence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaves of finite modules over a finite coefficient ring are closed under kernels cokernels and extensions",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, instAbelianLightCondMod, instAbelianCondensedMod, SheafOfModules.isFinitePresentation, SheafOfModules.IsFiniteType, Condensed.instAB5CondensedMod, SheafOfModules.IsFinitePresentation, AlgebraicGeometry.Scheme.Modules.instAbelian. Local project interfaces were also read; the proved categorical arguments use their stated APIs.",
+   "date": "2026-10-19",
+   "verdict": "no exact match for this coefficient presentation; use the stated project APIs and the categorical assembly proved here"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFiniteTypeLocallyConstant\"",
+   "results": "0 hits: . Local project interfaces were also read; the proved categorical arguments use their stated APIs.",
+   "date": "2026-10-19",
+   "verdict": "no exact match for this coefficient presentation; use the stated project APIs and the categorical assembly proved here"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Ee]xactClosure|constructible.*[Ss]erre",
+   "results": "0 hits: . Local project interfaces were also read; the proved categorical arguments use their stated APIs.",
+   "date": "2026-10-19",
+   "verdict": "no exact match for this coefficient presentation; use the stated project APIs and the categorical assembly proved here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible sheaves of modules over a finite ring are closed under kernels cokernels and extensions",
+   "results": "8 hits: instAbelianCondensedMod, AlgebraicGeometry.Scheme.Modules.instAbelian, Condensed.instAB4CondensedMod, instAB4ModuleCat, SheafOfModules.instAbelian, SheafOfModules.hasLimitsOfShape, AlgebraicGeometry.Scheme.Modules.instHasLimits, SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat",
+   "date": "2026-10-19",
+   "verdict": "no exact match: the returned generic categorical, sheaf or adic algebra declarations do not state this coefficient-sheaf assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PbcUniformCompleteTriangulated",
+  "date": "2026-10-19",
+  "group": "Q5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-constructible-coefficient-homology-triangulated",
+   "place": "Abelian exact-closure ingredient of constructible homology triangulation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstructibleCoefficientSerre",
+  "file": "lean/Sheaf/Paper/ConstructibleCoefficientSerre.lean",
+  "declaration": "AlgebraicGeometry.Scheme.constructibleCoefficient_exactClosure",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.constructibleCoefficient_exactClosure"
+  ],
+  "statement": "theorem constructibleCoefficient_exactClosure (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A] : (∀ (F G : pbcModules T (adicLisseConstantRing T A)) (f : F ⟶ G), IsConstructibleProEtaleCoefficientModuleSheaf T A F → IsConstructibleProEtaleCoefficientModuleSheaf T A G → IsConstructibleProEtaleCoefficientModuleSheaf T A (kernel f) ∧ IsConstructibleProEtaleCoefficientModuleSheaf T A (cokernel f)) ∧ (∀ S : ShortComplex (pbcModules T (adicLisseConstantRing T A)), S.ShortExact → IsConstructibleProEtaleCoefficientModuleSheaf T A S.X₁ → IsConstructibleProEtaleCoefficientModuleSheaf T A S.X₃ → IsConstructibleProEtaleCoefficientModuleSheaf T A S.X₂)",
+  "branch": "sheaf-dag",
+  "by": "Q5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261019T192819-L-1871155",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261019T192819-L-1871155",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
