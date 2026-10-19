@@ -2,7 +2,7 @@
  "id": "lem-per-kummer-relative-cone-functor",
  "kind": "statement",
  "title": "Relative topos cohomology cone and finite covering comparison",
- "statement": "Let $G$ be a profinite group, $H\\subset G$ an open subgroup of finite index, $Q=G/H$, and $A$ a finite commutative ring. Let $BG$ and $BH$ denote the topoi of discrete continuous sets with action of the indicated group; $A$-module objects are as in [def-exc-discrete-modules-category]. Let $E$ be a Grothendieck topos (the category of sheaves on a small site [def-weil-pbc-topos]) and $\\rho:E\\to BG$ a morphism of topoi (an adjunction with finite-limit-preserving inverse image). Form $E'=E/\\rho^*Q$ and the cartesian square\n$$\\begin{matrix} E'&\\xrightarrow{\\rho'}&BH\\simeq(BG)/Q\\\\ g\\downarrow&&\\downarrow g'\\\\ E&\\xrightarrow{\\rho}&BG.\\end{matrix}$$\nAll ring sheaves are the constant sheaf $A$, all module inverse images are exact, and $D^+$ means the derived category of complexes whose cohomology vanishes in sufficiently negative degrees [def-weil-abstract-derived-category]; on $BG$ sections and their derived functor are invariants and continuous cohomology [def-exc-continuous-cohomology]. Write\n$$a_K:R\\Gamma(BG,K)\\longrightarrow R\\Gamma(E,\\rho^*K)$$\nfor the canonical unit-induced comparison. There exists an $A$-linear triangulated functor $F:D^+(BG,A)\\to D^+(A)$, with natural distinguished triangles\n$$R\\Gamma(BG,K)\\xrightarrow{a_K}R\\Gamma(E,\\rho^*K)\\longrightarrow F(K)\\longrightarrow R\\Gamma(BG,K)[1],$$\nwhere triangulated has the meaning of [def-weil-triangulated-category]. Put $M=g'_*A$, namely the permutation module $\\operatorname{Map}(Q,A)$ with translation action. There is a canonical sheaf isomorphism $g_*A\\simeq\\rho^*M$. The finite-cover direct images $g_*,g'_*$ are exact, and the natural derived-section identifications\n$$R\\Gamma(BG,M)\\simeq R\\Gamma(BH,A),\\qquad R\\Gamma(E,\\rho^*M)\\simeq R\\Gamma(E',A)$$\ncarry $a_M$ to the unit-induced map $R\\Gamma(BH,A)\\to R\\Gamma(E',A)$ for $\\rho'$. In particular, $F(M)$ is a cone of that latter map. No purity hypothesis or conclusion is part of this statement.",
+ "statement": "Let $G$ be a profinite group, $H\\subset G$ an open subgroup of finite index, $Q=G/H$ the finite left $G$-set of cosets, and $A$ a finite commutative ring. Let $BG$ and $BH$ denote the topoi of discrete continuous sets with action of the indicated group; $A$-module objects are as in [def-exc-discrete-modules-category]. Let $E$ be a Grothendieck topos (the category of sheaves on a small site [def-weil-pbc-topos]) and $\\rho:E\\to BG$ a morphism of topoi (an adjunction with finite-limit-preserving inverse image). Form $E'=E/\\rho^*Q$ and the cartesian square\n$$\\begin{matrix} E'&\\xrightarrow{\\rho'}&BH\\simeq(BG)/Q\\\\ g\\downarrow&&\\downarrow g'\\\\ E&\\xrightarrow{\\rho}&BG.\\end{matrix}$$\nAll ring sheaves are the constant sheaf $A$ [def-weil-pbc-constant-sheaf], and modules on a topos mean sheaves of modules over that ring [def-weil-sheaf-of-modules-category]. All module inverse images are exact, and $D^+$ means the derived category of complexes whose cohomology vanishes in sufficiently negative degrees [def-weil-abstract-derived-category]; on $BG$ sections and their derived functor are invariants and continuous cohomology [def-exc-continuous-cohomology]. Write\n$$a_K:R\\Gamma(BG,K)\\longrightarrow R\\Gamma(E,\\rho^*K)$$\nfor the canonical unit-induced comparison. There exists an $A$-linear triangulated functor $F:D^+(BG,A)\\to D^+(A)$, with natural distinguished triangles\n$$R\\Gamma(BG,K)\\xrightarrow{a_K}R\\Gamma(E,\\rho^*K)\\longrightarrow F(K)\\longrightarrow R\\Gamma(BG,K)[1],$$\nwhere triangulated has the meaning of [def-weil-triangulated-category]. Put $M=g'_*A$, namely the permutation module $\\operatorname{Map}(Q,A)$ with translation action. There is a canonical sheaf isomorphism $g_*A\\simeq\\rho^*M$. The finite-cover direct images $g_*,g'_*$ are exact, and the natural derived-section identifications\n$$R\\Gamma(BG,M)\\simeq R\\Gamma(BH,A),\\qquad R\\Gamma(E,\\rho^*M)\\simeq R\\Gamma(E',A)$$\ncarry $a_M$ to the unit-induced map $R\\Gamma(BH,A)\\to R\\Gamma(E',A)$ for $\\rho'$. In particular, $F(M)$ is a cone of that latter map. No purity hypothesis or conclusion is part of this statement.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose XVI, paragraphs between Lemmas 3.4.8 and 3.4.9, printed pp.247–248: finite covering direct-image comparison and the triangulated relative cohomology functor. The general finite-slice formulation records precisely the topos argument used there."
@@ -12,11 +12,163 @@
   "def-exc-continuous-cohomology",
   "def-weil-abstract-derived-category",
   "def-weil-triangulated-category",
-  "def-weil-pbc-topos"
+  "def-weil-pbc-topos",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Identify $BH$ with $(BG)/Q$ explicitly. An object over $Q$ goes to its fiber over the coset $H$, with its $H$-action. The inverse sends a discrete continuous $H$-set $S$ to $G\\times_H S\\to G/H$; the mutually inverse maps are $[g,s]\\mapsto gs$ and, over the fiber $gH$, $x\\mapsto[g,g^{-1}x]$. The latter is independent of the coset representative. Stabilizers in the induced set are conjugates of stabilizers in $H$, hence open in $G$, since $H$ is open. These formulas also identify module objects. For a module $V$ on $BH$, sections of $g'_*V$ are the $H$-equivariant functions on $G$ with values in $V$; for trivial $V=A$ these are $\\operatorname{Map}(G/H,A)$ with $(g f)(q)=f(g^{-1}q)$. The slice description of the geometric morphism agrees with this restriction/coinduction adjunction.",
+   "uses": [
+    "def-exc-discrete-modules-category",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, pp.247–248, finite-cover square; explicit fiber/induction verification for an open subgroup"
+   }
+  },
+  {
+   "text": "Here is a simultaneous finite trivialization. The kernel $N$ of the action $G\\to\\operatorname{Sym}(Q)$ is the intersection of the finitely many conjugates of $H$, so is open and normal. Put $S=G/N$. Over $S$, the map $(xN,yH)\\mapsto(xN,x^{-1}yH)$ identifies $S\\times Q$ with the constant family indexed by the finite set $Q$. Also $S\\to1$ is the coequalizer of $S\\times S\\rightrightarrows S$ in $BG$. Since $\\rho^*$ is a left adjoint preserving finite limits, it preserves that coequalizer and its kernel pair. Thus $\\rho^*S\\to1$ is an epimorphic cover of $E$, trivializing $\\rho^*Q$. This argument uses only finite products and a coequalizer, so all index categories are small.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, p.248, canonical finite-cover comparison; finite-coset trivialization"
+   }
+  },
+  {
+   "text": "In these slice charts the module direct image is the finite product of the modules on the individual sheets: this follows by applying the slice adjunction to each sheet. Products preserve kernels, and finitely many local lifts of a tuple through epimorphisms can be chosen on a common refinement; therefore this product functor is exact. Exactness of sheaves is tested locally by kernels and local lifting of sections, so $g_*$ and $g'_*$ are exact globally. For any module $V$ on $BH$, the canonical base-change mate $\\beta_V:\\rho^*g'_*V\\to g_*\\rho'{}^*V$ is, in each of these charts, the canonical finite-product comparison $\\rho^*(\\prod_q V_q)\\to\\prod_q\\rho^*V_q$. It is an isomorphism because $\\rho^*$ preserves finite products. These local isomorphisms agree on overlaps, since the product projections define them uniquely. In particular $\\beta_A$ gives $\\rho^*M\\cong g_*A$. The same projections show that the section map for $\\beta_V$ sends a section over the covering object to its pullback to the pulled-back covering object.",
+   "uses": [
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, p.248, sentence identifying the two finite direct images; explicit finite-product verification"
+   }
+  },
+  {
+   "text": "Put $\\mathcal A=\\operatorname{Mod}(BG,A)$, $\\mathcal B=\\operatorname{Mod}(E,A)$ and $L=\\rho^*$. Small site presentations and the theorem on module sheaves make both categories Grothendieck abelian, hence they have enough injectives. The module adjunction gives $L\\dashv\\rho_*$. Apply the exact-comma lemma to obtain the abelian category $\\mathcal T_L$ of triples $(P,N,u:LP\\to N)$, with enough injectives and exact graph functor $\\Delta(P)=(P,LP,1)$. Injective triples have injective components. This auxiliary category supplies simultaneous resolutions of both endpoints and their comparison; no acyclicity of $\\rho^*$ on injectives is assumed.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-per-exact-comma-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, p.248, construction filling in the sentence defining relative cohomology"
+   }
+  },
+  {
+   "text": "For a bounded-below complex $X=(P^\\bullet,N^\\bullet,u^\\bullet)$ of triples, let $s_X:\\Gamma(BG,P^\\bullet)\\to\\Gamma(E,N^\\bullet)$ send a section first to its inverse image and then through $u$. Define $C(X)^n=\\Gamma(E,N^n)\\oplus\\Gamma(BG,P^{n+1})$ with differential $\\left(\\begin{smallmatrix}d_N&s_X\\\\0&-d_P\\end{smallmatrix}\\right)$. A chain map of triples induces the diagonal map on these two summands. A homotopy $(h_P,h_N)$ induces the homotopy $\\operatorname{diag}(h_N,-h_P[1])$; the off-diagonal term vanishes by the relation defining a morphism of triples. Consequently $C$ defines an $A$-linear functor on the homotopy category, with natural cone triangles for the maps $s_X$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E, definition-cone, and Tag 014F, lemma-functorial-cone; explicit strict-square specialization"
+   }
+  },
+  {
+   "text": "This functor is exact on homotopy categories, as a direct signed-summand calculation shows. The shift comparison $C(X[1])\\cong C(X)[1]$ is $\\operatorname{diag}(1,-1)$. For a chain map $f:X\\to Y$, reorder the four summands of $C(\\operatorname{Cone}(f))$ by $(b_Y,b_X,a_Y,a_X)\\mapsto(b_Y,a_Y,b_X,-a_X)$, where $b$ denotes the $N$-section summand and $a$ the shifted $P$-section summand. With the differential of Step 5 this is a chain isomorphism to $\\operatorname{Cone}(C(f))$: the two cross terms in $a_X$ change sign, and all other entries are unchanged. It respects the inclusion and the connecting map with the stated shift comparison. Since distinguished triangles in the homotopy category are precisely cone triangles up to isomorphism, $C$ preserves them. Its value is bounded below, with lower bound at worst one smaller than that of $X$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-pur-homotopy-category-triangulated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E, definition-cone, and proposition-homotopy-category-triangulated; signed total-cone computation"
+   }
+  },
+  {
+   "text": "By the bounded-below injective representative theorem and the computation of morphisms into a K-injective, localization identifies $K^+(\\operatorname{Inj}\\mathcal T_L)$ with $D^+(\\mathcal T_L)$. This is a triangulated equivalence: shifts and cones of bounded-below complexes of injectives are still such complexes (their terms are finite direct sums of injectives, using the injective lifting definition), and localization preserves cone triangles. Restrict the functor $QC$ to this homotopy category and transport it across that equivalence, obtaining $\\widetilde C:D^+(\\mathcal T_L)\\to D^+(A)$. The exact graph functor induces a triangulated functor $D^+(\\Delta)$ by termwise localization. Set $F=\\widetilde C\\circ D^+(\\Delta)$. The displayed construction and the equivalence are $A$-linear, so $F$ is $A$-linear and triangulated.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-pur-homotopy-category-triangulated",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-sp-injective-resolutions",
+    "lem-per-exact-comma-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013K and 070I, bounded-below injective resolutions and homotopy computation; exact graph localization"
+   }
+  },
+  {
+   "text": "To identify its triangle, represent $K$ by a bounded-below complex $P$ and resolve $\\Delta P$ in $\\mathcal T_L$ by injective triples $(I,J,w)$. Their two components resolve $P$ and $LP$ by bounded-below injective complexes. Thus the first two terms of the cone triangle of Step 5 compute $R\\Gamma(BG,K)$ and $R\\Gamma(E,LK)$ by the right-derived-on-injectives theorem. The chain map between them is $\\Gamma(I)\\to\\Gamma(J)$ induced by $w:LI\\to J$. This is the unit-induced comparison: $w$ represents the identity of $LK$ after the two resolution quasi-isomorphisms, and its adjoint $I\\to\\rho_*J$ represents the derived unit. Indeed $\\rho_*$ sends injectives to injectives, and the termwise adjunction, together with the K-injective Hom computation, identifies that adjunct with the morphism corresponding to $1_{LK}$. The cone triangle therefore has precisely the stated first map $a_K$. Chain maps of triple resolutions give its naturality, with uniqueness in the homotopy category as in Step 7.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-per-exact-comma-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, p.248, relative cohomology functor and its cone; Stacks 05TI/05TH and 070I give the resolution model"
+   }
+  },
+  {
+   "text": "The same construction applies to $\\rho': E'\\to BH$, since these slices have small presentations by the ringed-slice theorem. Resolve its graph object $(A,\\rho'{}^*A,1)$ by injective triples $(I',J',w')$. The inverse images of $g,g'$ are exact, so their right adjoints send injectives to injectives. Exactness from Step 3 makes $g'_*I'$ an injective resolution of $M$ and $g_*J'$ an injective resolution of $g_*A\\cong\\rho^*M$. The identities $\\Gamma(BG,g'_*(-))=\\Gamma(BH,-)$ and $\\Gamma(E,g_*(-))=\\Gamma(E',-)$ follow from the direct-image adjunction applied to the constant free rank-one module. Applied termwise, they give the two claimed derived-section identifications.",
+   "uses": [
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-per-exact-comma-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, p.248, finite covering cohomology identifications"
+   }
+  },
+  {
+   "text": "For these resolutions the comparison for $M$ is represented by the structural chain map $\\rho^*g'_*I'\\xrightarrow{\\beta}g_*\\rho'{}^*I'\\xrightarrow{g_*w'}g_*J'$. To check this, its augmentation square with $\\rho^*M\\cong g_*A$ commutes by naturality of $\\beta$, so it represents the identity of $\\rho^*M$, exactly as in Step 8. Under the two section identities of Step 9, the induced map on section complexes sends a section of $I'$ to its $\\rho'$-pullback followed by $w'$: this is the projection-by-projection description at the end of Step 3. Thus the square of actual section complexes commutes, not merely their cohomology groups. Step 8 for $\\rho'$ identifies this chain map with its unit-induced comparison. Hence the derived identifications carry $a_M$ to that comparison. Applying the natural triangle already constructed shows that $F(M)$ is a cone of it.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, p.248, compatibility of the finite-cover identifications with the canonical comparison morphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-discrete-modules-category",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-per-exact-comma-injectives",
+  "def-weil-abstract-derived-category",
+  "lem-pur-homotopy-category-triangulated",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-sp-right-adjoint-preserves-injectives"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI, printed pp.247–248: source route, with an explicit exact-comma/injective model and the finite-product calculation filling the omitted constructions."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +211,52 @@
    "results": "{\"t\": \"2026-10-18T21:44:30Z\", \"tool\": \"leansearch\", \"query\": \"Relative derived cohomology of a morphism of topoi and finite covering Shapiro comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.coindIso\", \"groupCohomology.linearYonedaObjResProjectiveResolutionIso\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\", \"CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"PresheafOfModules.Derivation.ctorIdx\", \"CategoryTheory.ShortComplex.leftRightHomologyComparison\"], \"digest\": \"bdc601097e0d01c0\"}",
    "date": "2026-10-18",
    "verdict": "no exact match: returned declarations concern algebraic Kummer extensions, abstract group cohomology, or general cone/functor infrastructure; none states this topos comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Abelian category of triples (X,Y,L X to Y) for an exact functor L with right adjoint: kernels and cokernels componentwise and enough injectives",
+   "results": "{\"t\": \"2026-10-18T23:23:49Z\", \"tool\": \"leanfinder\", \"query\": \"Abelian category of triples (X,Y,L X to Y) for an exact functor L with right adjoint: kernels and cokernels componentwise and enough injectives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.abelianOfAdjunction\", \"CategoryTheory.IsGrothendieckAbelian\", \"CategoryTheory.exact_f_d\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"CategoryTheory.Functor.exact_tfae\", \"CategoryTheory.Abelian.isoModSerre_kernel_eq_isLocal_of_rightAdjoint\", \"CategoryTheory.Abelian.isoModSerre_kernel_eq_leftBousfield_W_of_rightAdjoint\", \"CategoryTheory.AbelianOfAdjunction.hasKernels\"], \"digest\": \"13eb55b3d81bfb12\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: individual mapping cones, discrete-group Shapiro, and sheaf cohomology infrastructure do not state relative cohomology for a geometric morphism and its finite-slice comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative cohomology cone functor for a morphism of Grothendieck topoi compatible with finite covering direct image",
+   "results": "{\"t\": \"2026-10-18T23:23:54Z\", \"tool\": \"leanfinder\", \"query\": \"Relative cohomology cone functor for a morphism of Grothendieck topoi compatible with finite covering direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.coneCompEvaluationOfConeCompDiagramFunctorCompEvaluation\", \"CategoryTheory.GrothendieckTopology.Cover.mapMultifork\", \"CategoryTheory.GrothendieckTopology.coneCompEvaluationOfConeCompDiagramFunctorCompEvaluation_pt\", \"CategoryTheory.Functor.IsCoverDense.Types.pushforwardFamily\", \"CategoryTheory.GrothendieckTopology.diagramFunctor\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.lift\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\"], \"digest\": \"2e175a52c9c45ae3\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: individual mapping cones, discrete-group Shapiro, and sheaf cohomology infrastructure do not state relative cohomology for a geometric morphism and its finite-slice comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*cohomology|classifying.*topos|finite.*slice",
+   "results": "{\"t\": \"2026-10-18T23:24:05Z\", \"tool\": \"grep\", \"query\": \"relative.*cohomology|classifying.*topos|finite.*slice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Probability/Kernel/RadonNikodym.lean\"], \"digest\": \"93042abb9401f36e\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: individual mapping cones, discrete-group Shapiro, and sheaf cohomology infrastructure do not state relative cohomology for a geometric morphism and its finite-slice comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\"",
+   "results": "{\"t\": \"2026-10-18T23:24:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"mappingCone\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.fst\", \"CochainComplex.mappingCone.snd\", \"CochainComplex.mappingCone.inl\", \"CochainComplex.mappingCone\", \"CochainComplex.mappingCone.descCochain\", \"CochainComplex.mappingCone.liftCochain\", \"CochainComplex.mappingCone.liftCochain_snd\", \"CochainComplex.mappingCone.inl_descCochain\"], \"digest\": \"c635c86b913ff8c6\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: individual mapping cones, discrete-group Shapiro, and sheaf cohomology infrastructure do not state relative cohomology for a geometric morphism and its finite-slice comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Triangulated relative cohomology of a geometric morphism and finite slice Shapiro comparison",
+   "results": "{\"t\": \"2026-10-18T23:24:13Z\", \"tool\": \"leansearch\", \"query\": \"Triangulated relative cohomology of a geometric morphism and finite slice Shapiro comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.coindIso\", \"groupCohomology.linearYonedaObjResProjectiveResolutionIso\", \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"DerivedCategory.instIsTriangulated\", \"DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh\", \"CategoryTheory.Triangulated.TStructure.triangleLTGE_obj_mor₁\", \"HomotopyCategory.instPretriangulatedIntUp\", \"CategoryTheory.Triangulated.TStructure.triangle_map_ext\"], \"digest\": \"2209553559fd8bf7\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: individual mapping cones, discrete-group Shapiro, and sheaf cohomology infrastructure do not state relative cohomology for a geometric morphism and its finite-slice comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an exact geometric inverse image, relative derived global sections is an exact functor and finite covering cohomology is computed on its permutation sheaf",
+   "results": "{\"t\": \"2026-10-18T23:26:36Z\", \"tool\": \"leanfinder\", \"query\": \"For an exact geometric inverse image, relative derived global sections is an exact functor and finite covering cohomology is computed on its permutation sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"Condensed.hasExactColimitsOfShape\", \"Condensed.hasExactLimitsOfShape\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf\"], \"digest\": \"166a4ed3248be541\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: individual mapping cones, discrete-group Shapiro, and sheaf cohomology infrastructure do not state relative cohomology for a geometric morphism and its finite-slice comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-kummer-root-regular-divisor-purity",
@@ -89,5 +283,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-kummer-relative-cone-functor",
+  "worker": "stage1",
+  "summary": "Expanded the ILO finite-cover comparison and relative cohomology construction into ten steps. A single new statement-only exact-comma lemma supplies simultaneous injective resolutions; signed cone calculations establish functoriality and triangulatedness before identifying the canonical unit and checking its finite-cover compatibility on actual complexes. Clarified G/H as a finite left G-set, without requiring normality.",
+  "blueprint": "Realizes the historical regular finite-coefficient input of lem-per-artin-gabber-affine-curve, via the recorded Kummer-root ancestry: ILO XVI p.248 finite-cover direct-image comparison and relative triangulated cohomology. The containing unit and chapter route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "why": "Generic Ringed slice over an arbitrary sheaf: element-site presentation and exact extension by zero used for the explicit injective/cone or finite-slice construction; the Fourier/perverse unit provides no substitute for this homological-algebra/topos tool."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic Left adjoints preserve colimits used for the explicit injective/cone or finite-slice construction; the Fourier/perverse unit provides no substitute for this homological-algebra/topos tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic Module pullback and pushforward adjunction on arbitrary ringed topoi used for the explicit injective/cone or finite-slice construction; the Fourier/perverse unit provides no substitute for this homological-algebra/topos tool."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic Module sheaves over arbitrary ring sheaves are Grothendieck used for the explicit injective/cone or finite-slice construction; the Fourier/perverse unit provides no substitute for this homological-algebra/topos tool."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic Grothendieck abelian categories have enough injectives used for the explicit injective/cone or finite-slice construction; the Fourier/perverse unit provides no substitute for this homological-algebra/topos tool."
+   },
+   {
+    "node": "lem-pur-homotopy-category-triangulated",
+    "why": "Generic The homotopy category of complexes is triangulated used for the explicit injective/cone or finite-slice construction; the Fourier/perverse unit provides no substitute for this homological-algebra/topos tool."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Generic Every object of D^+ is represented by a bounded below K-injective complex of injectives used for the explicit injective/cone or finite-slice construction; the Fourier/perverse unit provides no substitute for this homological-algebra/topos tool."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic Morphisms into a K-injective complex are computed in the homotopy category used for the explicit injective/cone or finite-slice construction; the Fourier/perverse unit provides no substitute for this homological-algebra/topos tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic The functor induced on derived categories by an exact functor, with its factorization through the localization functors used for the explicit injective/cone or finite-slice construction; the Fourier/perverse unit provides no substitute for this homological-algebra/topos tool."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Generic Right derived functor on bounded below derived categories, computed on bounded below complexes of injectives used for the explicit injective/cone or finite-slice construction; the Fourier/perverse unit provides no substitute for this homological-algebra/topos tool."
+   },
+   {
+    "node": "lem-sp-right-adjoint-preserves-injectives",
+    "why": "Generic Right adjoints of exact functors preserve injectives used for the explicit injective/cone or finite-slice construction; the Fourier/perverse unit provides no substitute for this homological-algebra/topos tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-pur-homotopy-category-triangulated",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-sp-right-adjoint-preserves-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-cdfa6408e",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-cdfa6408e (reviewer sub-agent of L); spot-checked: I read ILO XVI pp.246-248 (pdf 252-254), from Prop 3.4.5 to Lemma 3.4.9. The item is the general form of ILO's finite-cover comparison g_*Λ≅ρ^*g'_*Λ and of the triangulated relative cohomology functor F with cone values. In the source, H=ℓG. The only citer (kummer-root-regular-divisor-purity, Steps 5 and 7) uses only what the item states. The statement change is clarification only: G/H as a left G-set, plus citations of the constant-sheaf and module-sheaf definitions. I checked all 10 steps. Step 2: the N-trivialisation (xN,yH)↦(xN,x⁻¹yH) is well defined and G-equivariant, and the kernel-pair coequaliser is preserved by ρ^*. Step 5: d²=0, and the homotopy off-diagonal term h_N s_X − s_Y h_P vanishes by the triple relation. Step 6: I recomputed C(Cone f) against Cone(C f); they differ exactly in the a_X sign, and diag(1,−1) gives the shift. Steps 7-8: the K^+(Inj)≃D^+ equivalence holds, and the derived unit is represented through ρ_* preserving injectives and K-injective Hom. Steps 9-10: the slice right adjoints preserve injectives, g_* and g'_* are exact, and the β-augmentation identifies a_M with the ρ' comparison on actual section complexes. New node lem-per-exact-comma-injectives: I verified it independently. Kernels and cokernels are componentwise because L is exact. Δ⊣e0 and (0,N,0)⊣e1, so both evaluations preserve injectives. The right adjoints are i0=(I,0,0) and i1=(RJ,J,ε), and the embedding into i0(I)⊕i1(J) is a monomorphism. I tested it on L=0 and L=id. It is statement-only and self-contained, with searches recorded, and is not a restated clause of the item. No duplicate found: trait-specialization triples, trait-sheaf-gluing, def-amb-relative-etale-cohomology and pur-divisor-relative-cone are all different. There is no cycle, no trf node in the closure, and no SGA. The 11 tool_uses are generic homological-algebra or topos nodes, and I accept them. No changes."
  }
 }
