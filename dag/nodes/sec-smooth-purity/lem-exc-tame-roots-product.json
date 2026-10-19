@@ -24,107 +24,61 @@
  ],
  "proof": [
   {
-   "text": "First prove that every primitive root of order $n$ lifts to a primitive root of order $N$ under the power map whenever $n\\mid N$ and both are prime to $p$. By [lem-sc-primitive-root], choose a primitive $N$-th root $\\eta$. The element $\\eta^{N/n}$ has order $n$: its $d$-th power is $1$ exactly when $N\\mid (N/n)d$, or $n\\mid d$. It generates $\\mu_n(k)$, so the prescribed primitive root is $(\\eta^{N/n})^b$ with $b$ prime to $n$. Use [lem-pc-crt-ideal-quotient-product] over $\\mathbf Z$ to choose a nonnegative integer $a$ with $a\\equiv b\\pmod n$ and $a\\equiv1\\pmod q$ for every prime $q\\mid N$ not dividing $n$. These ideals are pairwise coprime by Bezout's identity. Every prime dividing $N$ either divides $n$, and hence cannot divide $a$, or occurs among these $q$, and again cannot divide $a$. Thus $a$ is prime to $N$. The root $\\eta^a$ has order $N$ (if $N\\mid ad$, Bezout gives $N\\mid d$), and $(\\eta^a)^{N/n}$ is the prescribed root. For $n=1$ the congruence modulo $1$ imposes no condition; for $N=1$ take $\\eta=1$.",
+   "text": "For each positive tame order m, take the finite nonempty set of primitive m-th roots, using [lem-sc-primitive-root]. Order the tame integers by divisibility, directed by multiplication. For m dividing n send z to z^(n/m); exact order follows from cancellation, identities from m/m=1, and composition from (N/n)(n/m)=N/m. Apply the finite nonempty cofiltered-system section theorem [lem-trf-cofiltered-finite-sets-section]. The section supplies all compatible primitive roots, and the order-one root equation gives normalization. No surjectivity of transitions or recursive primitive-root lifting is needed.",
    "uses": [
     "lem-sc-primitive-root",
-    "lem-pc-crt-ideal-quotient-product"
+    "lem-trf-cofiltered-finite-sets-section"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/fields.tex",
-    "place": "Tag 09HW (section-roots-of-1), finite cyclic groups; algebra.tex Tag 00DT (lemma-chinese-remainder), applied to the displayed integer ideals"
-   }
+   "elementary": false
   },
   {
-   "text": "Put $N_0=1$ and $N_j=\\prod_{1\\leq i\\leq j,\\ (i,p)=1}i$. Each $N_j$ is positive and prime to $p$, $N_j\\mid N_{j+1}$, and every positive $m$ prime to $p$ divides $N_j$ for all $j\\geq m$. Starting with $\\eta_0=1$, use Step 1 recursively to choose a primitive $N_{j+1}$-th root $\\eta_{j+1}$ such that $\\eta_{j+1}^{N_{j+1}/N_j}=\\eta_j$. Composing these equations gives $\\eta_b^{N_b/N_a}=\\eta_a$ for $a\\leq b$. Repeated values of $N_j$ force equal roots because the exponent is $1$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/fields.tex",
-    "place": "Tag 09HW (section-roots-of-1); explicit recursive choice using Step 1"
-   }
-  },
-  {
-   "text": "For $m$ prime to $p$, choose any $j\\geq m$ and set $\\zeta_m=\\eta_j^{N_j/m}$. If $j'$ is another choice, compare both with an index $b\\geq j,j'$ and use $\\eta_b^{N_b/N_j}=\\eta_j$; both expressions equal $\\eta_b^{N_b/m}$. This proves independence. Since $\\eta_j$ has order $N_j$, the equation $(\\eta_j^{N_j/m})^d=1$ is equivalent to $m\\mid d$, so $\\zeta_m$ has order $m$. For $m\\mid n$ take a single $j\\geq n$ and compute $\\zeta_n^{n/m}=\\eta_j^{(N_j/n)(n/m)}=\\zeta_m$; in particular $\\zeta_1=1$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/fields.tex",
-    "place": "Tag 09HW (section-roots-of-1); explicit all-orders compatibility constructed from the cofinal sequence"
-   }
-  },
-  {
-   "text": "Now let $(\\zeta_m)_m$ be any family satisfying the statement, including one just constructed. By [lem-sc-primitive-root], $\\mu_m(k)$ has $m$ elements. The map $\\theta_m:\\mathbf Z/m\\mathbf Z\\to\\mu_m(k)$, $[a]\\mapsto\\zeta_m^a$, is a homomorphism and is injective by the order-$m$ condition, hence bijective. For $m\\mid n$ its transition satisfies $(\\zeta_n^a)^{n/m}=\\zeta_m^a$, exactly reduction of $[a]$ modulo $m$. Consequently $(a_m)_m\\mapsto(\\theta_m(a_m))_m$ gives an isomorphism from $C=\\varprojlim_{(m,p)=1}\\mathbf Z/m\\mathbf Z$ to the root limit; its inverse applies $\\theta_m^{-1}$ in each coordinate. All levels are discrete, and the preimage of a coordinate cylinder is a coordinate cylinder, in both directions. Thus this is an isomorphism of topological groups.",
+   "text": "Fix any compatible primitive family. Use the finite cyclic trivializations from [lem-sc-primitive-root], concretely IsPrimitiveRoot.zmodAddEquivRootsOfUnity. Their values are zeta_m raised to the canonical representative of a residue. Compatibility of the family and reduction of exponents modulo m show that these trivializations intertwine power transitions with residue reductions. Apply them coordinatewise to give an additive-to-multiplicative group isomorphism between the subring of compatible residues and the root limit. Injectivity and surjectivity follow coordinatewise from the finite equivalences.",
    "uses": [
     "lem-sc-primitive-root"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/fields.tex",
-    "place": "Tag 09HW (section-roots-of-1); compatibility of the finite cyclic identifications and the inverse-limit topology"
-   }
+   "elementary": false
   },
   {
-   "text": "For $m=\\prod_{r\\mid m}r^{v_r(m)}$, apply [lem-pc-crt-ideal-quotient-product] to the finitely many ideals $r^{v_r(m)}\\mathbf Z$ in $\\mathbf Z$. Distinct prime powers are coprime by Bezout. Their intersection is $m\\mathbf Z$, since an integer is divisible by all these prime powers exactly when it is divisible by their product. This gives the ring isomorphism $\\gamma_m:\\mathbf Z/m\\mathbf Z\\to\\prod_{r\\mid m}\\mathbf Z/r^{v_r(m)}\\mathbf Z$ by ordinary reductions. If $m=1$, the index set is empty and both sides are the one-element ring. If $m\\mid n$, reducing a residue modulo $n$ first modulo $m$ and then modulo $r^{v_r(m)}$ is the same as reducing it directly to that prime power; this follows by taking an integer representative.",
+   "text": "For m>0 use ZMod.equivPi, the integer-residue specialization of [lem-pc-crt-ideal-quotient-product], to reconstruct a residue modulo m from its prime-power coordinates. Evaluate each input adic integer at the exponent v_r(m). Ring homomorphisms out of ZMod are unique, so each CRT projection is the canonical reduction. Compatibility of the adic residue maps from [lem-exc-padic-residue-universal-property] then proves the reconstruction is compatible under divisibility. At exponent zero the target ZMod 1 is a singleton, and CRT at m=1 is the empty product.",
    "uses": [
+    "lem-pc-crt-ideal-quotient-product",
+    "lem-exc-padic-residue-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conversely, restrict a compatible tame residue family to each prime-power order and apply PadicInt.lift from [lem-exc-padic-residue-universal-property]. Its lift_spec gives every residue of the resulting adic integer. CRT injectivity proves reconstruction after restriction is the identity, and separation by all adic residues proves restriction after reconstruction is the identity. Thus reconstruction is a bijective ring homomorphism from the adic product to compatible residues.",
+   "uses": [
+    "lem-exc-padic-residue-universal-property",
     "lem-pc-crt-ideal-quotient-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00DT (lemma-chinese-remainder), finite prime-power ideals in the integers"
-   }
+   "elementary": false
   },
   {
-   "text": "For a prime $r\\ne p$, let $R_r$ be the ring of compatible sequences $b_{r,a}\\in\\mathbf Z/r^a\\mathbf Z$, $a\\geq1$, with its subspace topology in the product of the discrete quotient rings. Restriction defines $C\\to\\prod_{r\\ne p}R_r$ by $(a_m)_m\\mapsto((a_{r^a})_{a\\geq1})_r$. Conversely, given $(b_{r,a})$, let $a_m$ be the unique residue whose reductions are $b_{r,v_r(m)}$ for $r\\mid m$, using $\\gamma_m$ of Step 5. For $m\\mid n$, compatibility of each $b_{r,a}$ shows that $a_n\\bmod m$ and $a_m$ have identical reductions at every prime power dividing $m$, so injectivity of $\\gamma_m$ makes them equal. Taking $m=r^a$ recovers $b_{r,a}$; applying $\\gamma_m$ recovers every original $a_m$. These are inverse ring maps. Restriction is continuous since its coordinates are input projections. Each output $a_m$ of the inverse depends on the finitely many discrete coordinates $b_{r,v_r(m)}$, so its fibres are open cylinders. This proves continuity of the inverse and hence the asserted topological product decomposition of $C$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00DT (lemma-chinese-remainder); the explicit restriction and reconstruction of compatible residue coordinates"
-   }
-  },
-  {
-   "text": "Fix $r\\ne p$. Append the unique coordinate modulo $r^0=1$ to $R_r$. Coordinatewise addition and multiplication preserve compatibility, so this is a commutative unital ring and each projection $f_a:R_r\\to\\mathbf Z/r^a\\mathbf Z$ is a unital ring homomorphism. Apply [lem-exc-padic-residue-universal-property] with this source ring and these compatible projections to obtain $\\psi_r:R_r\\to\\mathbf Z_r$ with $\\rho_a\\psi_r=f_a$. The same node says that the residues $\\rho_a$ are compatible, so they define $\\phi_r:\\mathbf Z_r\\to R_r$. The equality $\\phi_r\\psi_r=1$ follows at every coordinate from $\\rho_a\\psi_r=f_a$. For $x\\in\\mathbf Z_r$, $\\psi_r\\phi_r(x)$ and $x$ have equal residues at every level; point separation in that node proves $\\psi_r\\phi_r(x)=x$. Thus these are inverse ring isomorphisms. Appending or deleting the unique zero-th coordinate changes neither the ring nor its topology.",
+   "text": "Compose reconstruction with the root trivializations. Each output coordinate factors through finitely many adic residue maps and a map between discrete spaces. The kernel and norm description in [lem-exc-padic-residue-universal-property] makes each residue map continuous: a norm ball of radius r^(-a) lies in its fibre. In Lean use the existing proved PadicInt.continuous_toZModPow. Hence the composite into the initial root-limit topology is continuous. The adic integers are compact by Mathlib.NumberTheory.Padics.ProperSpace, and their product is compact. The root limit embeds continuously and injectively in the product of discrete unit groups, hence is Hausdorff. Apply [lem-weil-pbc-compact-hausdorff-bijection] to obtain continuity of the inverse.",
    "uses": [
-    "lem-exc-padic-residue-universal-property"
+    "lem-exc-padic-residue-universal-property",
+    "lem-weil-pbc-compact-hausdorff-bijection"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00M9 (section-completion), compatible sequences; exact specialization of the Mathlib residue universal property recorded in the cited leaf"
-   }
+   "elementary": false
   },
   {
-   "text": "The same residue lemma gives $\\ker\\rho_a=r^a\\mathbf Z_r$ and $r^a\\mathbf Z_r=\\{x:|x|_r\\leq r^{-a}\\}$. The open norm ball $\\{y\\in\\mathbf Z_r:|y-x|_r<r^{-a}\\}$ about $x$ is contained in the fibre of $\\rho_a(x)$, since $|y-x|_r<r^{-a}$ implies $y-x\\in r^a\\mathbf Z_r$ by the displayed equality. This open neighbourhood at each $x$ proves that every residue map to its discrete quotient is locally constant. It follows by inverse images of coordinate cylinders that $\\phi_r$ is continuous. Conversely, given $b\\in R_r$ and $\\epsilon>0$, choose $a\\geq1$ with $r^{-a}<\\epsilon$ (since $r>1$). If $b'$ agrees with $b$ at coordinate $a$, then $\\rho_a(\\psi_r(b')-\\psi_r(b))=0$ and the displayed kernel/norm equality gives $|\\psi_r(b')-\\psi_r(b)|_r\\leq r^{-a}<\\epsilon$. The coordinate-$a$ cylinder is an open neighbourhood of $b$, which proves continuity of $\\psi_r$. Thus $R_r\\cong\\mathbf Z_r$ topologically. This argument uses the norm and topology of the valuation-ring definition, rather than assuming that definition already is an inverse limit.",
-   "uses": [
-    "lem-exc-padic-residue-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00M9 (section-completion), residue topology; norm and kernel clauses of the cited Mathlib leaf"
-   }
-  },
-  {
-   "text": "Take the product of the mutually inverse continuous maps $\\phi_r,\\psi_r$; continuity follows coordinatewise in the product topology. Compose the inverse of the root/residue isomorphism in Step 4 with the isomorphism of Step 6 and these product isomorphisms. This gives exactly $\\varprojlim_{(m,p)=1}\\mu_m(k)\\cong\\prod_{r\\ne p}(\\mathbf Z_r,+)$. The finite maps used in Step 4 are precisely $[a]\\mapsto\\zeta_m^a$, so the resulting isomorphism is the one induced by the chosen family as required. Only that choice is noncanonical; Steps 5--8 use the canonical residue maps.",
+   "text": "Take the inverse topological group equivalence. Applying the forward inverse law at a prime-power order identifies the given root coordinate with its primitive root raised to the CRT residue. The prime-power specification of CRT reconstruction identifies that residue with PadicInt.toZModPow of the corresponding product coordinate. This proves exactly the required displayed normalization, also for a=0 and m=1.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
-    "place": "Proof, second paragraph, displayed tame quotient product; compatible-root and Chinese-remainder identification made explicit"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sc-primitive-root",
+  "lem-trf-cofiltered-finite-sets-section",
   "lem-pc-crt-ideal-quotient-product",
-  "lem-exc-padic-residue-universal-property"
+  "lem-exc-padic-residue-universal-property",
+  "lem-weil-pbc-compact-hausdorff-bijection"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
-  "place": "Proof, second paragraph, tame quotient product, expanded using Stacks Tags 09HW, 00DT, 00M9 and the exact Mathlib p-adic residue API. The generator recursion and two-sided coordinate/topology arguments are supplied here."
+  "place": "Second paragraph, tame product. Finite inverse-system compactness replaces recursive generator lifting; explicit CRT and PadicInt.lift give both inverse laws; compact-to-Hausdorff gives inverse continuity. Stacks fields.tex 09HW and algebra.tex 00DT, 00M9; proved Mathlib and library APIs as recorded in the proof steps."
  },
  "mathlib_searches": [
   {
@@ -275,5 +229,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261019T093509-L-2318179",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
