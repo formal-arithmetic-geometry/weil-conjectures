@@ -6,7 +6,6 @@ Authors: SHEAF group X2
 module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
-import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Sheaf.AlgebraicGeometry.ConstructibleAffineFreePresentationGeneral
 import WeilConjectures.AlgebraicGeometry.AffineEtaleBaseChangeSystem
 import WeilConjectures.AlgebraicGeometry.AffineEtaleDescentData
@@ -14,8 +13,6 @@ import Sheaf.AlgebraicGeometry.AffineFreeEtaleModuleEventualHomLift
 import WeilConjectures.AlgebraicGeometry.FreeEtaleModuleShriekComparison
 import Sheaf.AlgebraicGeometry.EtaleStratifiedFinite
 import WeilConjectures.ConstructibleSheaf.FreeLifting
-import WeilConjectures.ConstructibleSheaf.KernelCokernel
-import Mathlib.Data.Finset.Order
 
 /-!
 # Constructible module descent with Noetherian coefficients

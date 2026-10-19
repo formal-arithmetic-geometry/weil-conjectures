@@ -9,7 +9,6 @@ public import Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientUnshifted
 
 import Sheaf.AlgebraicGeometry.RawModuleScalarSheafComposition
 import WeilConjectures.AlgebraicGeometry.RawModuleScalarSourceSquareCore
-public import Sheaf.AlgebraicGeometry.RawModuleScalarDerivedPullbackIso
 public import Sheaf.AlgebraicGeometry.RawModuleScalarSourceFactors
 
 /-! # Source factors of the derived scalar pullback square

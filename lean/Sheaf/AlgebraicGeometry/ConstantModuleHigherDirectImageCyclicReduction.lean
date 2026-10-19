@@ -11,9 +11,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 import WeilConjectures.Algebra.FinitelyGeneratedCyclicFunctorVanishing
 import Sheaf.AlgebraicGeometry.ConstantAbelianHigherDirectImageFilteredColimit
 import Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
-import Mathlib.Algebra.Colimit.Finiteness
-import Mathlib.Algebra.Category.ModuleCat.Limits
-import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 
 /-!
 # Reduction of constant module coefficients to cyclic abelian coefficients

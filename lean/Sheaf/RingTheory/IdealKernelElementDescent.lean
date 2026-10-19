@@ -6,11 +6,8 @@ Authors: SHEAF group G1
 module
 
 public import Mathlib.Algebra.Category.Ring.Basic
-public import Mathlib.Algebra.Category.Grp.Basic
-public import Mathlib.CategoryTheory.Category.Preorder
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.RingTheory.Flat.Basic
-public import Mathlib.RingTheory.Ideal.Maps
 
 import WeilConjectures.RingTheory.ColimitFlatRelationDescentElementwise
 import Mathlib.Algebra.Category.Ring.FilteredColimits

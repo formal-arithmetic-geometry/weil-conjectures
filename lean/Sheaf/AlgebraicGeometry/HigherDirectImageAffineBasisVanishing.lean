@@ -9,8 +9,6 @@ public import Sheaf.Topology.OpenModuleCohomology
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Mathlib.Algebra.Category.Grp.Zero
-import Mathlib.Topology.Sheaves.Abelian
 import Sheaf.Paper.HigherDirectImagePresheaf
 import Sheaf.Topology.RestrictInjectiveResolution
 

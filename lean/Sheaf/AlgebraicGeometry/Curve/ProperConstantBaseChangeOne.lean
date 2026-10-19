@@ -1,6 +1,4 @@
 module
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 import Sheaf.AlgebraicGeometry.Curve.ArtinSchreierBaseChangeModel

@@ -6,11 +6,7 @@ Authors: SHEAF group E1
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Basic
-public import Mathlib.Algebra.DirectSum.Decomposition
-public import Mathlib.LinearAlgebra.Basis.Defs
-public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.LinearAlgebra.Dimension.Finite
 import Sheaf.RingTheory.GradedFreeCover
 import Sheaf.RingTheory.GradedKernelInternal
 import Sheaf.RingTheory.GradedNakayamaFree

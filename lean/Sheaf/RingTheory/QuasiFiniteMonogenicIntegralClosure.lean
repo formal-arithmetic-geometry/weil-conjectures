@@ -5,8 +5,6 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-public import Mathlib.RingTheory.Localization.Away.Basic
 public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 import Mathlib.RingTheory.ZariskisMainTheorem
 

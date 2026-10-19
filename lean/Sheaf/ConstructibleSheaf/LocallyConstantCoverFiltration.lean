@@ -10,7 +10,6 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 import Sheaf.ConstructibleSheaf.SylowCoverAssociatedSheaf
 import WeilConjectures.RepresentationTheory.InvariantFlagCategoricalFiltration
 import WeilConjectures.Mathlib.RepresentationTheory.Invariants
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 
 /-!
 # Cover and filtration

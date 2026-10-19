@@ -13,7 +13,6 @@ import Sheaf.AlgebraicGeometry.AffineTruncationKernelFlat
 import Sheaf.AlgebraicGeometry.PrincipalOpenFiniteProjectiveTilde
 import Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
 import Mathlib.Algebra.Category.ModuleCat.Images
-import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Images
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 

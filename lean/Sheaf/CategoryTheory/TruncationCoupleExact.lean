@@ -6,7 +6,6 @@ Authors: SHEAF group J1
 module
 
 public import Sheaf.CategoryTheory.TruncationCouple
-public import Mathlib.Algebra.Homology.ShortComplex.Exact
 import Sheaf.CategoryTheory.TruncationRawExact
 
 /-!

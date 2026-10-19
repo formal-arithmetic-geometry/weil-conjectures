@@ -6,11 +6,7 @@ Authors: SHEAF group R1
 module
 
 public import WeilConjectures.SixFunctors.BaseChange.Square
-public import Mathlib.AlgebraicGeometry.Morphisms.Integral
-public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import Sheaf.AlgebraicGeometry.IntegralGeometricFibreSections
-import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeGerms
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-!
 # Integral exchange over a geometric point

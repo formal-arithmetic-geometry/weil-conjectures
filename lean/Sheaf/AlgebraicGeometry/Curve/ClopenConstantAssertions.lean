@@ -8,11 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 import Sheaf.AlgebraicGeometry.Curve.ClopenConstantAssertionsFirst
 import Sheaf.AlgebraicGeometry.Curve.ClopenConstantAssertionsLast
-import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import Sheaf.AlgebraicGeometry.EtaleSheafClopenProduct
-import Sheaf.Paper.FiniteCoproductCohomologyAssembly
-import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
-import WeilConjectures.ConstructibleSheaf.Pullback
 
 /-! # Assembling constant-coefficient assertions over a finite clopen partition -/
 

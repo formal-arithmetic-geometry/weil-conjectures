@@ -5,7 +5,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Mathlib.RingTheory.HopfAlgebra.Basic
-public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Ideal.Height
 import Mathlib.RingTheory.FiniteStability
 import Mathlib.RingTheory.HopfAlgebra.Convolution

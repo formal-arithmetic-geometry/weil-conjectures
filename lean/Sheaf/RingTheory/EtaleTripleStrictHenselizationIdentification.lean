@@ -6,8 +6,6 @@ Authors: SHEAF group N1
 module
 
 public import Sheaf.RingTheory.StrictHenselizationTriples
-public import Mathlib.RingTheory.AdicCompletion.Algebra
-public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Sheaf.RingTheory.StrictHenselizationComparison
 import Sheaf.RingTheory.EtaleResidueTriplesLocalization
 import WeilConjectures.RingTheory.PairHenselizationCompletionData

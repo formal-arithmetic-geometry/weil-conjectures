@@ -2,16 +2,12 @@ module
 
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.AlgebraicGeometry.QCohAcyclicDerivedPushforwardCohomology
 import Sheaf.Paper.DerivedSectionsLeftExactBottom
-import Sheaf.Topology.RingedSpaceModuleEnoughInjectives
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 @[expose] public section
 universe v

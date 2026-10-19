@@ -5,12 +5,9 @@ Authors: SHEAF group H1
 -/
 module
 
-public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
-public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Sheaf.AlgebraicGeometry.Curve.GenericTorsionFiniteStalk
 import Sheaf.AlgebraicGeometry.Curve.GenericTorsionCohomologyColimit

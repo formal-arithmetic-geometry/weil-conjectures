@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
-public import Mathlib.RingTheory.Noetherian.Basic
 
 /-! # Finiteness of cohomology under extensions
 

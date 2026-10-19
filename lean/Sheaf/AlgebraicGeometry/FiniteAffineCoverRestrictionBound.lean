@@ -6,7 +6,6 @@ Authors: SHEAF group C1
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import WeilConjectures.AlgebraicGeometry.AffineLocalAcyclicOpenRestriction
 import Sheaf.AlgebraicGeometry.EtaleMayerVietorisModuleVanishing
 import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules

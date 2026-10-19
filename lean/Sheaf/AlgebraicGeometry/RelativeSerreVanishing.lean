@@ -5,14 +5,10 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Noetherian
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.Ample
-public import Sheaf.Topology.RingedSpaceModuleEnoughInjectives
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 import Sheaf.AlgebraicGeometry.CoherentSerreVanishing
-import WeilConjectures.AlgebraicGeometry.Cohomology.RelativeSerre
 import WeilConjectures.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
 import Sheaf.AlgebraicGeometry.TensorPowerSectionOpenRestrictionN
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison

@@ -6,18 +6,11 @@ Authors: SHEAF group Q1
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-public import Mathlib.Data.ZMod.Basic
-public import Mathlib.Algebra.Ring.ULift
 import WeilConjectures.AlgebraicGeometry.KilledSheafModuleLift
 import Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import Sheaf.AlgebraicGeometry.Curve.ModuleSheafUnderlyingColimit
 import Sheaf.AlgebraicGeometry.Curve.EtaleSheafHLargeFilteredColimit
-import Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit
-import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageColimits
-import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-! # Constructible approximation for one prime and one pullback -/
 

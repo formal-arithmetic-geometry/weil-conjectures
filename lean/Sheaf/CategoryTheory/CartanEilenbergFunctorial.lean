@@ -6,10 +6,8 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.CategoryTheory.DoubleComplexTotal
-public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.Algebra.Homology.Embedding.Extend
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
-public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 import Sheaf.CategoryTheory.CartanEilenbergAugmentedComparison
 import Sheaf.CategoryTheory.DoubleComplexBoundedBelowTotal
 import Sheaf.CategoryTheory.DoubleComplexFirstFiltrationDifferential

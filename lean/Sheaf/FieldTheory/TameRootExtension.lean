@@ -5,21 +5,15 @@ Authors: SHEAF group Q58
 -/
 module
 
-public import Mathlib.RingTheory.DiscreteValuationRing.Basic
-public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.FieldTheory.KummerExtension
 public import Mathlib.RingTheory.RamificationInertia.Ramification
 public import WeilConjectures.Mathlib.RingTheory.Henselian
-public import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
 
 import Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootsOfUnity
 import WeilConjectures.AlgebraicGeometry.Morphisms.DvrUniformizerRootAlgebra
-import Mathlib.RingTheory.Polynomial.RationalRoot
 import Mathlib.RingTheory.Polynomial.Eisenstein.Basic
 import Mathlib.RingTheory.Polynomial.GaussLemma
 import Mathlib.RingTheory.RootsOfUnity.EnoughRootsOfUnity
-import Mathlib.RingTheory.Ideal.GoingUp
 
 /-!
 # Prime-to-residue-characteristic uniformizer root extensions

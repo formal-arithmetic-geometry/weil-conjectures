@@ -1,10 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.SingleComplexOpenComparison
-public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
 import Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESCore
 import WeilConjectures.CategoryTheory.DerivedCategory.ConeDiagramSESPresentation
 
