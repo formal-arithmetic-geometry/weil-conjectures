@@ -1,49 +1,19 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group Q51
+Authors: SHEAF groups Q51, X6
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CondensedPullbackTensorComparison
-public import Sheaf.Topology.ProfiniteCondensedRing
+public import Sheaf.AlgebraicGeometry.CondensedOpenClosedInternalHomMaps
+import Sheaf.AlgebraicGeometry.CondensedSupportProjectionFormula
+import Sheaf.CategoryTheory.ProjectionInternalHom
 
-import Sheaf.Paper.ModuleObjects
-import Sheaf.CategoryTheory.SheafTensor
-import Sheaf.CategoryTheory.RingedSiteModules
-import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
-import Sheaf.CategoryTheory.ModulePullbackTensorIso
-import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
-import Mathlib.Algebra.Homology.BifunctorShift
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Sheaf.AlgebraicGeometry.CondensedClosedSupportAdjunction
-import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
-import Sheaf.Paper.CondensedModuleDerivedPushpull
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+/-! # Open and closed formulas for internal derived Hom
 
-/-!
-# Open and closed formulas for internal derived Hom
-
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.7.13, internal
-adjunction calculation; Stacks Project Tag 08JB
-(blueprint: lem-sfb-open-closed-internal-hom-formulas).
-
-All categories are ordinary unbounded derived categories of modules over the pulled-back
-commutative condensed coefficient ring. Support inverse image is canonically identified
-with the recorded upper star by `supportPullbackIsoUpperStar`. No completion or finiteness
-condition on a derived input is imposed. The theorem includes the evaluation normalization
-of both isomorphisms, as well as simultaneous naturality in both arguments.
+The evaluation-normalized comparison maps are imported from the common maps module.
+The formal adjunction argument reduces the formulas to the natural tensor projections.
+Source: Bhatt--Scholze Lemma 6.7.13; Stacks Tag 08JB.
 -/
 
 @[expose] public section
@@ -60,106 +30,186 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-/-- The open extension/restriction adjunction, using the canonical alpha transport.
-Source: Stacks Tag 09BN (blueprint: lem-sfb-open-closed-internal-hom-formulas). -/
-noncomputable def openSupportDerivedAdjunction {U X : Scheme.{u}} (j : U ⟶ X)
-    [IsOpenImmersion j] :
-    (openImmersionLowerShriek Λ j).mapDerivedCategory ⊣
-      (supportPullback Λ j).mapDerivedCategory :=
-  ((openImmersionLowerShriekUpperStarAdjunction Λ j).ofNatIsoRight
-    (supportPullbackIsoUpperStar Λ j).symm).mapDerivedCategoryRightDerivedAdjunction.ofNatIsoRight
-      (supportPullback Λ j).rightDerivedFunctorIsoMapDerivedCategory
+private theorem tensorComparison_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (K K' M M' : DerivedCategory (supportModules Λ Y)) (a : K ⟶ K') (b : M ⟶ M') :
+    (supportPullback Λ f).mapDerivedCategory.map
+        (((derivedTensor Λ Y).map a).app M ≫ ((derivedTensor Λ Y).obj K').map b) ≫
+        (supportDerivedTensorComparison Λ f K' M').hom =
+      (supportDerivedTensorComparison Λ f K M).hom ≫
+        ((derivedTensor Λ X).map ((supportPullback Λ f).mapDerivedCategory.map a)).app
+          ((supportPullback Λ f).mapDerivedCategory.obj M) ≫
+        ((derivedTensor Λ X).obj ((supportPullback Λ f).mapDerivedCategory.obj K')).map
+          ((supportPullback Λ f).mapDerivedCategory.map b) := by
+  exact (Classical.choose_spec
+    (ExistsUnique.exists (existsUnique_supportDerivedTensorComparison Λ f))).1 K K' M M' a b
 
-/-- Closed inverse/direct-image adjunction, both functors exact and applied termwise.
-Source: Stacks Tag 09AA (blueprint: lem-sfb-open-closed-internal-hom-formulas). -/
-noncomputable def closedPullbackDerivedAdjunction {Z X : Scheme.{u}} (i : Z ⟶ X)
-    [IsClosedImmersion i] :
-    (supportPullback Λ i).mapDerivedCategory ⊣ (lowerStar Λ i).mapDerivedCategory :=
-  (supportPullbackAdjunction Λ i).mapDerivedCategoryRightDerivedAdjunction.ofNatIsoRight
-    (lowerStar Λ i).rightDerivedFunctorIsoMapDerivedCategory
-
-/-- Open projection map: the adjunct of unit tensor identity followed by inverse tensor
-comparison. Source: proof step 3 (blueprint: lem-sfb-open-closed-internal-hom-formulas). -/
-noncomputable def openSupportProjection {U X : Scheme.{u}} (j : U ⟶ X)
+set_option maxHeartbeats 800000 in
+-- Elaborating the concrete derived adjunctions needs more than the default heartbeat budget.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem openProjection_naturality_right {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (L : DerivedCategory (supportModules Λ U))
-    (T : DerivedCategory (supportModules Λ X)) :
-    (openImmersionLowerShriek Λ j).mapDerivedCategory.obj
-        (((derivedTensor Λ U).obj L).obj ((supportPullback Λ j).mapDerivedCategory.obj T)) ⟶
+    {T T' : DerivedCategory (supportModules Λ X)} (f : T ⟶ T') :
+    (openImmersionLowerShriek Λ j).mapDerivedCategory.map
+        (((derivedTensor Λ U).obj L).map ((supportPullback Λ j).mapDerivedCategory.map f)) ≫
+      openSupportProjection Λ j L T' =
+    openSupportProjection Λ j L T ≫
       ((derivedTensor Λ X).obj
-        ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj L)).obj T :=
-  ((openSupportDerivedAdjunction Λ j).homEquiv
-    (((derivedTensor Λ U).obj L).obj ((supportPullback Λ j).mapDerivedCategory.obj T))
-    (((derivedTensor Λ X).obj
-      ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj L)).obj T)).symm
-    (((derivedTensor Λ U).map ((openSupportDerivedAdjunction Λ j).unit.app L)).app
-        ((supportPullback Λ j).mapDerivedCategory.obj T) ≫
-      (supportDerivedTensorComparison Λ j
-        ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj L) T).inv)
+        ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj L)).map f := by
+  let e := (openImmersionLowerShriek Λ j).mapDerivedCategory
+  let r := (supportPullback Λ j).mapDerivedCategory
+  let tX := derivedTensor Λ X
+  let tU := derivedTensor Λ U
+  let η : L ⟶ r.obj (e.obj L) := (openSupportDerivedAdjunction Λ j).unit.app L
+  let χ : ∀ M : DerivedCategory (supportModules Λ X),
+      r.obj ((tX.obj (e.obj L)).obj M) ≅
+        (tU.obj (r.obj (e.obj L))).obj (r.obj M) :=
+    fun M ↦ supportDerivedTensorComparison Λ j (e.obj L) M
+  apply ((openSupportDerivedAdjunction Λ j).homEquiv _ _).injective
+  rw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_right]
+  simp only [openSupportProjection, Equiv.apply_symm_apply]
+  change (tU.obj L).map (r.map f) ≫ (tU.map η).app (r.obj T') ≫ (χ T').inv =
+    ((tU.map η).app (r.obj T) ≫ (χ T).inv) ≫ r.map ((tX.obj (e.obj L)).map f)
+  have h := tensorComparison_naturality Λ j (e.obj L) (e.obj L) T T' (𝟙 _) f
+  change r.map ((tX.map (𝟙 (e.obj L))).app T ≫ (tX.obj (e.obj L)).map f) ≫
+      (χ T').hom = (χ T).hom ≫ (tU.map (r.map (𝟙 (e.obj L)))).app (r.obj T) ≫
+        (tU.obj (r.obj (e.obj L))).map (r.map f) at h
+  rw [tX.map_id, NatTrans.id_app, Category.id_comp, r.map_id,
+    tU.map_id, NatTrans.id_app, Category.id_comp] at h
+  rw [← Category.assoc, (tU.map η).naturality]
+  simp only [Category.assoc]
+  apply (cancel_mono (χ T').hom).1
+  simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  rw [h, Iso.inv_hom_id_assoc]
 
-/-- Closed projection map: closed unit followed by pullback tensor comparison and closed
-counit. Source: proof step 3 (blueprint: lem-sfb-open-closed-internal-hom-formulas).
-Its direction uses the unit of i^* adjoint to i_*, never a nonexistent counit i_*i^* -> id. -/
-noncomputable def closedSupportProjection {Z X : Scheme.{u}} (i : Z ⟶ X)
-    [IsClosedImmersion i] (P : DerivedCategory (supportModules Λ Z))
+set_option maxHeartbeats 800000 in
+-- Elaborating the concrete derived adjunctions needs more than the default heartbeat budget.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem openProjection_naturality_left {U X : Scheme.{u}} (j : U ⟶ X)
+    [IsOpenImmersion j] {L L' : DerivedCategory (supportModules Λ U)} (a : L' ⟶ L)
     (T : DerivedCategory (supportModules Λ X)) :
-    ((derivedTensor Λ X).obj ((lowerStar Λ i).mapDerivedCategory.obj P)).obj T ⟶
-      (lowerStar Λ i).mapDerivedCategory.obj
-        (((derivedTensor Λ Z).obj P).obj ((supportPullback Λ i).mapDerivedCategory.obj T)) :=
-  (closedPullbackDerivedAdjunction Λ i).unit.app
-      (((derivedTensor Λ X).obj ((lowerStar Λ i).mapDerivedCategory.obj P)).obj T) ≫
-    (lowerStar Λ i).mapDerivedCategory.map
-      ((supportDerivedTensorComparison Λ i
-        ((lowerStar Λ i).mapDerivedCategory.obj P) T).hom ≫
-        ((derivedTensor Λ Z).map ((closedPullbackDerivedAdjunction Λ i).counit.app P)).app
-          ((supportPullback Λ i).mapDerivedCategory.obj T))
+    (openImmersionLowerShriek Λ j).mapDerivedCategory.map
+        (((derivedTensor Λ U).map a).app ((supportPullback Λ j).mapDerivedCategory.obj T)) ≫
+      openSupportProjection Λ j L T =
+    openSupportProjection Λ j L' T ≫
+      ((derivedTensor Λ X).map
+        ((openImmersionLowerShriek Λ j).mapDerivedCategory.map a)).app T := by
+  let e := (openImmersionLowerShriek Λ j).mapDerivedCategory
+  let r := (supportPullback Λ j).mapDerivedCategory
+  let tX := derivedTensor Λ X
+  let tU := derivedTensor Λ U
+  let η (M) : M ⟶ r.obj (e.obj M) := (openSupportDerivedAdjunction Λ j).unit.app M
+  let χ : ∀ M : DerivedCategory (supportModules Λ U),
+      r.obj ((tX.obj (e.obj M)).obj T) ≅
+        (tU.obj (r.obj (e.obj M))).obj (r.obj T) :=
+    fun M ↦ supportDerivedTensorComparison Λ j (e.obj M) T
+  apply ((openSupportDerivedAdjunction Λ j).homEquiv _ _).injective
+  rw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_right]
+  simp only [openSupportProjection, Equiv.apply_symm_apply]
+  change (tU.map a).app (r.obj T) ≫ (tU.map (η L)).app (r.obj T) ≫ (χ L).inv =
+    ((tU.map (η L')).app (r.obj T) ≫ (χ L').inv) ≫ r.map ((tX.map (e.map a)).app T)
+  have h := tensorComparison_naturality Λ j (e.obj L') (e.obj L) T T (e.map a) (𝟙 T)
+  change r.map ((tX.map (e.map a)).app T ≫ (tX.obj (e.obj L)).map (𝟙 T)) ≫
+      (χ L).hom = (χ L').hom ≫ (tU.map (r.map (e.map a))).app (r.obj T) ≫
+        (tU.obj (r.obj (e.obj L))).map (r.map (𝟙 T)) at h
+  rw [(tX.obj (e.obj L)).map_id, Category.comp_id, r.map_id,
+    (tU.obj (r.obj (e.obj L))).map_id, Category.comp_id] at h
+  have hu : a ≫ η L = η L' ≫ r.map (e.map a) :=
+    (openSupportDerivedAdjunction Λ j).unit.naturality a
+  rw [← Category.assoc, ← NatTrans.comp_app, ← tU.map_comp, hu,
+    tU.map_comp, NatTrans.comp_app]
+  simp only [Category.assoc]
+  apply (cancel_mono (χ L).hom).1
+  simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  rw [h, Iso.inv_hom_id_assoc]
 
-/-- Open internal-Hom comparison determined by projection and evaluation transposes.
-Source: proof steps 9 and 11 (blueprint: lem-sfb-open-closed-internal-hom-formulas). -/
-noncomputable def openSupportHomMap {U X : Scheme.{u}} (j : U ⟶ X)
-    [IsOpenImmersion j] (L : DerivedCategory (supportModules Λ U))
-    (N : DerivedCategory (supportModules Λ X)) :
-    ((derivedHom Λ X).obj
-      (op ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj L))).obj N ⟶
-    (lowerStar Λ j).rightDerivedFunctor.obj
-      (((derivedHom Λ U).obj (op L)).obj
-        ((supportPullback Λ j).mapDerivedCategory.obj N)) :=
-  let H := ((derivedHom Λ X).obj
-    (op ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj L))).obj N
-  let rH := (supportPullback Λ j).mapDerivedCategory.obj H
-  let rN := (supportPullback Λ j).mapDerivedCategory.obj N
-  (closedSupportOpenDerivedAdjunction Λ j).homEquiv H
-    (((derivedHom Λ U).obj (op L)).obj rN)
-    ((derivedTensorHomAdjunction Λ L).homEquiv rH rN
-      ((openSupportDerivedAdjunction Λ j).homEquiv (((derivedTensor Λ U).obj L).obj rH) N
-        (openSupportProjection Λ j L H ≫
-          (derivedTensorHomAdjunction Λ
-            ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj L)).counit.app N)))
+set_option maxHeartbeats 800000 in
+-- Elaborating the concrete derived adjunctions needs more than the default heartbeat budget.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem closedProjection_naturality_right {Z X : Scheme.{u}} (i : Z ⟶ X)
+    [IsClosedImmersion i] (P : DerivedCategory (supportModules Λ Z))
+    {T T' : DerivedCategory (supportModules Λ X)} (f : T ⟶ T') :
+    ((derivedTensor Λ X).obj ((lowerStar Λ i).mapDerivedCategory.obj P)).map f ≫
+      closedSupportProjection Λ i P T' =
+    closedSupportProjection Λ i P T ≫
+      (lowerStar Λ i).mapDerivedCategory.map
+        (((derivedTensor Λ Z).obj P).map ((supportPullback Λ i).mapDerivedCategory.map f)) := by
+  let e := (lowerStar Λ i).mapDerivedCategory
+  let r := (supportPullback Λ i).mapDerivedCategory
+  let tX := derivedTensor Λ X
+  let tZ := derivedTensor Λ Z
+  let η (M) : M ⟶ e.obj (r.obj M) := (closedPullbackDerivedAdjunction Λ i).unit.app M
+  let ε : r.obj (e.obj P) ⟶ P := (closedPullbackDerivedAdjunction Λ i).counit.app P
+  let χ : ∀ M : DerivedCategory (supportModules Λ X),
+      r.obj ((tX.obj (e.obj P)).obj M) ≅
+        (tZ.obj (r.obj (e.obj P))).obj (r.obj M) :=
+    fun M ↦ supportDerivedTensorComparison Λ i (e.obj P) M
+  change (tX.obj (e.obj P)).map f ≫
+      (η ((tX.obj (e.obj P)).obj T') ≫
+        e.map ((χ T').hom ≫ (tZ.map ε).app (r.obj T'))) =
+    (η ((tX.obj (e.obj P)).obj T) ≫
+        e.map ((χ T).hom ≫ (tZ.map ε).app (r.obj T))) ≫
+      e.map ((tZ.obj P).map (r.map f))
+  have hu : (tX.obj (e.obj P)).map f ≫ η ((tX.obj (e.obj P)).obj T') =
+      η ((tX.obj (e.obj P)).obj T) ≫ e.map (r.map ((tX.obj (e.obj P)).map f)) :=
+    (closedPullbackDerivedAdjunction Λ i).unit.naturality _
+  have h := tensorComparison_naturality Λ i (e.obj P) (e.obj P) T T' (𝟙 _) f
+  change r.map ((tX.map (𝟙 (e.obj P))).app T ≫ (tX.obj (e.obj P)).map f) ≫
+      (χ T').hom = (χ T).hom ≫ (tZ.map (r.map (𝟙 (e.obj P)))).app (r.obj T) ≫
+        (tZ.obj (r.obj (e.obj P))).map (r.map f) at h
+  rw [tX.map_id, NatTrans.id_app, Category.id_comp, r.map_id,
+    tZ.map_id, NatTrans.id_app, Category.id_comp] at h
+  rw [← Category.assoc, hu]
+  simp only [Category.assoc, ← e.map_comp]
+  congr 2
+  rw [← Category.assoc, h, Category.assoc, (tZ.map ε).naturality]
 
-/-- Closed internal-Hom comparison using an inverse of the canonical closed projection.
-Source: proof steps 10 and 11 (blueprint: lem-sfb-open-closed-internal-hom-formulas).
-The theorem supplies its inverse projection as an isomorphism with specified hom. -/
-noncomputable def closedSupportHomMap {Z U X : Scheme.{u}}
-    (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]
-    (hij : Set.range i.base = (Set.range j.base)ᶜ)
-    (P : DerivedCategory (supportModules Λ Z)) (N : DerivedCategory (supportModules Λ X))
-    (χ : (lowerStar Λ i).mapDerivedCategory.obj
-        (((derivedTensor Λ Z).obj P).obj
-          ((supportPullback Λ i).mapDerivedCategory.obj
-            (((derivedHom Λ X).obj (op ((lowerStar Λ i).mapDerivedCategory.obj P))).obj N))) ⟶
-      ((derivedTensor Λ X).obj ((lowerStar Λ i).mapDerivedCategory.obj P)).obj
-        (((derivedHom Λ X).obj (op ((lowerStar Λ i).mapDerivedCategory.obj P))).obj N)) :
-    (((derivedHom Λ X).obj (op ((lowerStar Λ i).mapDerivedCategory.obj P))).obj N) ⟶
-      (lowerStar Λ i).mapDerivedCategory.obj
-        (((derivedHom Λ Z).obj (op P)).obj ((closedSupport Λ i j).rightDerivedFunctor.obj N)) :=
-  let H := ((derivedHom Λ X).obj (op ((lowerStar Λ i).mapDerivedCategory.obj P))).obj N
-  let rH := (supportPullback Λ i).mapDerivedCategory.obj H
-  let iN := (closedSupport Λ i j).rightDerivedFunctor.obj N
-  (closedPullbackDerivedAdjunction Λ i).homEquiv H
-    (((derivedHom Λ Z).obj (op P)).obj iN)
-    ((derivedTensorHomAdjunction Λ P).homEquiv rH iN
-      ((closedSupportDerivedAdjunction Λ i j hij).homEquiv (((derivedTensor Λ Z).obj P).obj rH) N
-        (χ ≫ (derivedTensorHomAdjunction Λ
-          ((lowerStar Λ i).mapDerivedCategory.obj P)).counit.app N)))
+set_option maxHeartbeats 800000 in
+-- Elaborating the concrete derived adjunctions needs more than the default heartbeat budget.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem closedProjection_naturality_left {Z X : Scheme.{u}} (i : Z ⟶ X)
+    [IsClosedImmersion i] {P P' : DerivedCategory (supportModules Λ Z)} (a : P' ⟶ P)
+    (T : DerivedCategory (supportModules Λ X)) :
+    ((derivedTensor Λ X).map ((lowerStar Λ i).mapDerivedCategory.map a)).app T ≫
+      closedSupportProjection Λ i P T =
+    closedSupportProjection Λ i P' T ≫
+      (lowerStar Λ i).mapDerivedCategory.map
+        (((derivedTensor Λ Z).map a).app ((supportPullback Λ i).mapDerivedCategory.obj T)) := by
+  let e := (lowerStar Λ i).mapDerivedCategory
+  let r := (supportPullback Λ i).mapDerivedCategory
+  let tX := derivedTensor Λ X
+  let tZ := derivedTensor Λ Z
+  let η (M) : M ⟶ e.obj (r.obj M) := (closedPullbackDerivedAdjunction Λ i).unit.app M
+  let ε (M) : r.obj (e.obj M) ⟶ M := (closedPullbackDerivedAdjunction Λ i).counit.app M
+  let χ : ∀ M : DerivedCategory (supportModules Λ Z),
+      r.obj ((tX.obj (e.obj M)).obj T) ≅
+        (tZ.obj (r.obj (e.obj M))).obj (r.obj T) :=
+    fun M ↦ supportDerivedTensorComparison Λ i (e.obj M) T
+  change (tX.map (e.map a)).app T ≫
+      (η ((tX.obj (e.obj P)).obj T) ≫
+        e.map ((χ P).hom ≫ (tZ.map (ε P)).app (r.obj T))) =
+    (η ((tX.obj (e.obj P')).obj T) ≫
+        e.map ((χ P').hom ≫ (tZ.map (ε P')).app (r.obj T))) ≫
+      e.map ((tZ.map a).app (r.obj T))
+  have hu : (tX.map (e.map a)).app T ≫ η ((tX.obj (e.obj P)).obj T) =
+      η ((tX.obj (e.obj P')).obj T) ≫ e.map (r.map ((tX.map (e.map a)).app T)) :=
+    (closedPullbackDerivedAdjunction Λ i).unit.naturality _
+  have h := tensorComparison_naturality Λ i (e.obj P') (e.obj P) T T (e.map a) (𝟙 T)
+  change r.map ((tX.map (e.map a)).app T ≫ (tX.obj (e.obj P)).map (𝟙 T)) ≫
+      (χ P).hom = (χ P').hom ≫ (tZ.map (r.map (e.map a))).app (r.obj T) ≫
+        (tZ.obj (r.obj (e.obj P))).map (r.map (𝟙 T)) at h
+  rw [(tX.obj (e.obj P)).map_id, Category.comp_id, r.map_id,
+    (tZ.obj (r.obj (e.obj P))).map_id, Category.comp_id] at h
+  have hc : r.map (e.map a) ≫ ε P = ε P' ≫ a :=
+    (closedPullbackDerivedAdjunction Λ i).counit.naturality a
+  rw [← Category.assoc, hu]
+  simp only [Category.assoc, ← e.map_comp]
+  congr 2
+  rw [← Category.assoc, h, Category.assoc, ← NatTrans.comp_app,
+    ← tZ.map_comp, hc, tZ.map_comp, NatTrans.comp_app]
 
 /-- The two internal sheaf-valued derived-Hom formulas, normalized by evaluation and all
 adjunction transposes, natural contravariantly in L,P and covariantly in N.
@@ -248,6 +298,83 @@ theorem openClosedInternalHomFormulas {Z U X : Scheme.{u}}
           (((derivedHom Λ Z).map a.op).app ((closedSupport Λ i j).rightDerivedFunctor.obj N) ≫
             ((derivedHom Λ Z).obj (op P')).map
               ((closedSupport Λ i j).rightDerivedFunctor.map b))) := by
-  sorry
+  obtain ⟨hc, ho⟩ := openClosedSupportProjectionFormula Λ i j hij
+  have hon := openProjection_naturality_right Λ j
+  have hol := @openProjection_naturality_left.{u} Λ _ _ U X j _
+  have hcn := closedProjection_naturality_right Λ i
+  have hcl := @closedProjection_naturality_left.{u} Λ _ _ Z X i _
+  let _ := hc
+  let _ := ho
+  let φc := fun P T ↦ inv (closedSupportProjection Λ i P T)
+  have hciN : ∀ (P : DerivedCategory (supportModules Λ Z))
+      {T T' : DerivedCategory (supportModules Λ X)} (f : T ⟶ T'),
+      (lowerStar Λ i).mapDerivedCategory.map
+          (((derivedTensor Λ Z).obj P).map ((supportPullback Λ i).mapDerivedCategory.map f)) ≫
+        φc P T' =
+      φc P T ≫ ((derivedTensor Λ X).obj
+        ((lowerStar Λ i).mapDerivedCategory.obj P)).map f := by
+    intro P T T' f
+    apply (cancel_mono (closedSupportProjection Λ i P T')).1
+    dsimp [φc]
+    simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+    rw [hcn P f, IsIso.inv_hom_id_assoc]
+  have hciL : ∀ {P P' : DerivedCategory (supportModules Λ Z)} (a : P' ⟶ P)
+      (T : DerivedCategory (supportModules Λ X)),
+      (lowerStar Λ i).mapDerivedCategory.map
+          (((derivedTensor Λ Z).map a).app
+            ((supportPullback Λ i).mapDerivedCategory.obj T)) ≫ φc P T =
+      φc P' T ≫ ((derivedTensor Λ X).map
+        ((lowerStar Λ i).mapDerivedCategory.map a)).app T := by
+    intro P P' a T
+    apply (cancel_mono (closedSupportProjection Λ i P T)).1
+    dsimp [φc]
+    simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+    rw [hcl a T, IsIso.inv_hom_id_assoc]
+  have hoi : ∀ L N, IsIso (openSupportHomMap Λ j L N) := by
+    intro L N
+    exact projectionInternalHomMap_isIso
+      (derivedTensor Λ X) (derivedHom Λ X) (derivedTensor Λ U) (derivedHom Λ U)
+      (derivedTensorHomAdjunction₂ Λ X) (derivedTensorHomAdjunction₂ Λ U)
+      (openImmersionLowerShriek Λ j).mapDerivedCategory
+      (supportPullback Λ j).mapDerivedCategory (supportPullback Λ j).mapDerivedCategory
+      (lowerStar Λ j).rightDerivedFunctor
+      (openSupportDerivedAdjunction Λ j) (closedSupportOpenDerivedAdjunction Λ j)
+      (openSupportProjection Λ j) ho hon L N
+  have hci : ∀ P N, IsIso (closedSupportHomMap Λ i j hij P N
+      (φc P (((derivedHom Λ X).obj
+        (op ((lowerStar Λ i).mapDerivedCategory.obj P))).obj N))) := by
+    intro P N
+    exact projectionInternalHomMap_isIso
+      (derivedTensor Λ X) (derivedHom Λ X) (derivedTensor Λ Z) (derivedHom Λ Z)
+      (derivedTensorHomAdjunction₂ Λ X) (derivedTensorHomAdjunction₂ Λ Z)
+      (lowerStar Λ i).mapDerivedCategory (supportPullback Λ i).mapDerivedCategory
+      (closedSupport Λ i j).rightDerivedFunctor (lowerStar Λ i).mapDerivedCategory
+      (closedSupportDerivedAdjunction Λ i j hij) (closedPullbackDerivedAdjunction Λ i)
+      φc (fun P T ↦ inferInstance) hciN P N
+  let _ := hoi
+  let _ := hci
+  refine ⟨(fun P T ↦ asIso (closedSupportProjection Λ i P T)),
+    (fun L N ↦ asIso (openSupportHomMap Λ j L N)),
+    (fun P N ↦ asIso (closedSupportHomMap Λ i j hij P N
+      (φc P (((derivedHom Λ X).obj
+        (op ((lowerStar Λ i).mapDerivedCategory.obj P))).obj N)))),
+    (fun _ _ ↦ rfl), (fun _ _ ↦ rfl), (fun _ _ ↦ rfl), ?_, ?_⟩
+  · intro L L' N N' a b
+    exact projectionInternalHomMap_naturality
+      (derivedTensor Λ X) (derivedHom Λ X) (derivedTensor Λ U) (derivedHom Λ U)
+      (derivedTensorHomAdjunction₂ Λ X) (derivedTensorHomAdjunction₂ Λ U)
+      (openImmersionLowerShriek Λ j).mapDerivedCategory
+      (supportPullback Λ j).mapDerivedCategory (supportPullback Λ j).mapDerivedCategory
+      (lowerStar Λ j).rightDerivedFunctor
+      (openSupportDerivedAdjunction Λ j) (closedSupportOpenDerivedAdjunction Λ j)
+      (openSupportProjection Λ j) hon hol L L' N N' a b
+  · intro P P' N N' a b
+    exact projectionInternalHomMap_naturality
+      (derivedTensor Λ X) (derivedHom Λ X) (derivedTensor Λ Z) (derivedHom Λ Z)
+      (derivedTensorHomAdjunction₂ Λ X) (derivedTensorHomAdjunction₂ Λ Z)
+      (lowerStar Λ i).mapDerivedCategory (supportPullback Λ i).mapDerivedCategory
+      (closedSupport Λ i j).rightDerivedFunctor (lowerStar Λ i).mapDerivedCategory
+      (closedSupportDerivedAdjunction Λ i j hij) (closedPullbackDerivedAdjunction Λ i)
+      φc hciN hciL P P' N N' a b
 
 end AlgebraicGeometry.ProEtale.CondensedRing

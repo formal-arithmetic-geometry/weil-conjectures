@@ -27,184 +27,45 @@
  ],
  "proof": [
   {
-   "text": "Fix the small pro-etale sites and the module universe in the statement. The rings $B_T$ are commutative by [sk-def-sfb-pulled-back-coefficients]. We use their actual sheaves of modules, not modules over $\\Lambda(*)$. Here is the comparison with the internal module notation. The action $B_T\\otimes M\\to M$ in [sk-def-sfb-module-objects], with the sheafified sectionwise tensor of [sk-def-sfb-sheaf-tensor], is exactly a restriction-compatible family of bilinear section actions. The unit and associativity identities are precisely the sectionwise module axioms in [def-weil-sheaf-of-modules-category]; linear maps agree in both descriptions. The coequalizer in [def-sfb-modobj-relative-tensor] imposes the relations $bm\\otimes n=m\\otimes bn$. Its maps into any module are therefore exactly balanced bilinear sheaf maps, the universal property of the relative sheaf tensor [def-pur-sheaf-tensor-product]. Thus these descriptions identify the relative tensor, complexes and quasi-isomorphisms, and their K-flat derived tensor [sk-def-sfb-derived-tensor-hom]. By [lem-sfb-alpha-iso], $a^{-1}B_X\\simeq B_T$ for $a=i,j$. The formula in [def-sfb-module-upper-star] consequently identifies $a^*$ with inverse image and transport of action across this ring isomorphism. The action formula in [def-sfb-module-lower-star] is the usual ringed direct-image action. In [def-sfb-module-linear-open-lower-shriek], the action on an extension-presheaf section over a factorization $V\\to U$ is $b\\otimes m\\mapsto b|_U m$, and over a zero summand it is zero. Sheafification and restriction along the invertible $\\alpha_j$ in [def-sfb-module-open-lower-shriek] give the usual ringed $j_!$. All later ringed-site calculations therefore use the specified coefficient-compatible functors.",
+   "text": "Use [lem-sfb-condensed-support-projection-formula] for invertibility of the two canonical tensor projections. Prove all four naturality equations directly from the naturality clause of [def-sfb-condensed-pullback-tensor-comparison], applying the open Hom adjunction and naturality of its unit, or naturality of the closed unit and counit. Invert the closed projection and cancel its invertible hom to obtain naturality of the inverse.",
    "uses": [
-    "sk-def-sfb-pulled-back-coefficients",
-    "sk-def-sfb-module-objects",
-    "sk-def-sfb-sheaf-tensor",
-    "def-weil-sheaf-of-modules-category",
-    "def-sfb-modobj-relative-tensor",
-    "def-pur-sheaf-tensor-product",
-    "sk-def-sfb-derived-tensor-hom",
-    "lem-sfb-alpha-iso",
-    "def-sfb-module-upper-star",
-    "def-sfb-module-lower-star",
-    "def-sfb-module-linear-open-lower-shriek",
-    "def-sfb-module-open-lower-shriek"
+    "lem-sfb-condensed-support-projection-formula",
+    "def-sfb-condensed-pullback-tensor-comparison",
+    "def-sfb-open-closed-internal-hom-comparisons"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09AA, 09BN: inverse-image coefficient rings; section-action and balanced-tensor identifications written out here."
-   }
+   "elementary": true
   },
   {
-   "text": "The quasi-compactness of the open complement is exactly the hypothesis of [lem-weil-pbc-proetale-ringed-open-closed]. With ring $B_X$ that node gives exact $j_!,i_*$, $j_!\\dashv j^*$, $j^*j_!=1$, $i^*i_*=1$, $i^*j_!=0$, $j^*i_*=0$, and the short exact localization sequence $0\\to j_!j^*M\\to M\\to i_*i^*M\\to0$. The inverse images $i^*,j^*$ are exact by [lem-weil-pbc-proetale-immersion-limit-preservation], with the ring isomorphisms of step 1. If a sheaf morphism becomes invertible under both inverse images, its kernel and cokernel have both restrictions zero; the localization sequence makes each zero. Thus the two restrictions jointly detect isomorphisms of module sheaves. No global quasi-compactness or quasi-separatedness of $X$ is used.",
+   "text": "Apply [lem-sfb-projection-internal-hom-formal] first with e=j!, r=s=j^*, q=Rj*, and then with e=q=i*, r=i^*, s=Ri!. These use exactly the transported and support adjunctions of [def-sfb-open-closed-internal-hom-comparisons]. The two comparison maps are definitionally the evaluation-normalized maps recorded there.",
    "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-weil-pbc-proetale-immersion-limit-preservation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09AA (lemma-closed-immersion), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09BN (lemma-open-immersion), 09AH (lemma-ses-associated-to-open)."
-   }
-  },
-  {
-   "text": "Construct the two sheaf projection maps, rather than assuming a projection theorem with additional finiteness hypotheses. For $F$ on $U$ and $M$ on $X$, the adjoint under $j_!\\dashv j^*$ of the unit-induced identification $F\\otimes j^*M\\to j^*(j_!F\\otimes M)$ gives $\\theta:j_!(F\\otimes j^*M)\\to j_!F\\otimes M$. Inverse image commutes with relative tensor by [lem-weil-pbc-ringed-topoi-module-pullback-tensor]. Consequently $j^*\\theta$ is the identity by the open adjunction triangle identity, and both sides of $i^*\\theta$ vanish by step 2. The detector in step 2 makes $\\theta$ invertible. For $G$ on $Z$, apply the unit $\\eta:N\\to i_*i^*N$ of $i^*\\dashv i_*$ [def-sfb-module-upper-lower-adjunction] to $N=i_*G\\otimes M$ and follow it by $i_*$ of the pullback-tensor comparison and of the closed counit $\\varepsilon_G:i^*i_*G\\xrightarrow{\\sim}G$ (invertible by step 2): this gives the canonical map $\\psi:i_*G\\otimes M\\to i_*i^*(i_*G\\otimes M)\\simeq i_*(i^*i_*G\\otimes i^*M)\\simeq i_*(G\\otimes i^*M)$. Its $i^*$ restriction is $i^*\\eta_N$ followed by the isomorphism $i^*i_*$ of the comparison; since $\\varepsilon_{i^*N}\\circ i^*\\eta_N=1$ by the triangle identity and $\\varepsilon$ is invertible, $i^*\\eta_N$ and hence $i^*\\psi$ are isomorphisms. Its $j^*$ restriction is a map between zero objects, since $j^*i_*=0$ and $j^*(i_*G\\otimes M)\\simeq j^*i_*G\\otimes j^*M=0$. The detector in step 2 makes $\\psi$ invertible; put $\\chi=\\psi^{-1}:i_*(G\\otimes i^*M)\\to i_*G\\otimes M$. (There is no counit $i_*i^*\\to1$; the closed comparison is the unit-induced map $\\psi$, and $\\chi$ is only its inverse.) These constructions are natural in both variables since the units, counits and pullback-tensor comparisons are natural. Hence, writing $(e,r)=(j_!,j^*)$ or $(i_*,i^*)$, we have $eF\\otimes M\\simeq e(F\\otimes rM)$.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "def-sfb-module-upper-lower-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL (lemma-tensor-product-pullback); projection maps checked by the localization sequence of step 2."
-   }
-  },
-  {
-   "text": "All four functors $j_!,j^*,i_*,i^*$ preserve the small coproducts required by total tensor complexes. For $j_!$ use its adjunction in step 2. For $j^*,i^*$ use [def-sfb-module-upper-lower-adjunction]. For $i_*$ use clause (1) of [det-lem-formal-closed-support-adjunction], which makes it left adjoint to $\\underline\\Gamma_Z$ for the closed immersion $i:Z\\hookrightarrow X$ with quasi-compact complementary open immersion $j:U\\hookrightarrow X$ and the coefficient ring $B_X$. Apply [lem-weil-pbc-left-adjoint-preserves-colimits] to each of these adjunctions. The small module categories have all these colimits by [lem-pur-ringed-site-grothendieck-abelian]. In particular, this proves coproduct preservation of $i_*$ without using the qcqs filtered-colimit clause of the localization node.",
-   "uses": [
-    "def-sfb-module-upper-lower-adjunction",
+    "lem-sfb-projection-internal-hom-formal",
+    "def-sfb-open-closed-internal-hom-comparisons",
     "det-lem-formal-closed-support-adjunction",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "lem-pur-ringed-site-grothendieck-abelian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0038 (lemma-adjoint-exact); support left-adjoint argument with the existing formal support adjunction."
-   }
-  },
-  {
-   "text": "Apply the sheaf comparison of step 3 to every pair of terms of complexes $F,Q$, and sum over $p+q=n$. Step 4 and [def-pc-tensor-complex-sheaves] give a natural chain isomorphism $\\operatorname{Tot}(eF\\otimes Q)\\simeq e\\operatorname{Tot}(F\\otimes rQ)$. Naturality in each differential identifies $d_F\\otimes1$ and $(-1)^p1\\otimes d_Q$ on both sides, with the same signs because $e$ is additive. Pullback likewise commutes with total tensor by [lem-weil-pbc-ringed-topoi-module-pullback-tensor] and coproduct preservation. The signed symmetry $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ is a chain isomorphism: for the two differential terms the required sign identities are $(-1)^{(p+1)q}=(-1)^{pq+q}$ and $(-1)^{p(q+1)+p}=(-1)^{pq}$. Its square is the identity. Thus all subsequent K-flat tests can put the flat factor on either side.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YL, total tensor convention and sign calculation."
-   }
-  },
-  {
-   "text": "Both $e$ and $r$ preserve flat-term K-flat complexes; this is a direct test from the projection maps, not a finiteness assertion. If $Q$ is K-flat on $X$ and $C$ acyclic on the subscheme, then $eC$ is acyclic by exactness. The total tensor $eC\\otimes Q$ is acyclic by [def-pc-kflat-complex]. Applying exact $r$, using $re=1$ and step 5, identifies it with $C\\otimes rQ$; hence $rQ$ is K-flat. Conversely, if $F$ is K-flat on the subscheme and $A$ acyclic on $X$, then $rA$ is acyclic and $eF\\otimes A\\simeq e(F\\otimes rA)$ is acyclic by the signed symmetry of step 5 and exactness of $e$. Thus $eF$ is K-flat. For flat terms, [def-pc-flat-sheaf-modules] defines flatness as exactness of tensor. Tensoring with $eF^p$ is isomorphic by step 3 to the composite $e(F^p\\otimes r(-))$, a composite of exact functors when $F^p$ is flat. If $Q^q$ is flat, apply $e$, tensor with $Q^q$, then apply $r$ to a short exact sequence on the subscheme; the result identifies with tensoring that sequence by $rQ^q$. This proves flatness of the pulled-back terms as well.",
-   "uses": [
-    "def-pc-kflat-complex",
-    "def-pc-flat-sheaf-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YN (definition-K-flat) and 03ER (sites-modules-definition-flat); preservation proved by the explicit acyclicity and exact-sequence tests."
-   }
-  },
-  {
-   "text": "Choose flat-term K-flat representatives of the two arbitrary derived inputs using [lem-pc-kflat-resolution]. Exact $e,r$ act termwise on unbounded derived categories by [lem-weil-pbc-exact-functor-derived-factorization]. By step 6 the images of these representatives are also flat-term K-flat. The tensor-computation clause of [lem-weil-pbc-site-derived-tensor-descent] identifies step 5 with natural derived projection isomorphisms $eF\\otimes^{\\mathbf L}_{B_X}T\\simeq e(F\\otimes^{\\mathbf L}_{rB_X}rT)$. These are exactly the relative derived tensors of [sk-def-sfb-derived-tensor-hom] by step 1. For precision about naturality, apply the resolving-class localization equivalence in the descent node separately to the two small ringed sites. The chain comparison passes to their homotopy categories: additive termwise functors preserve $f-g=dh+hd$, and the tensor homotopies are $h\\otimes1$ in the first variable and $(-1)^p1\\otimes h$ in the second variable. Naturality squares for quasi-isomorphisms also commute for their inverses, by multiplying by the inverse vertical arrows. Morphisms in each localization are generated by chain-homotopy classes and those inverses. Thus the comparison descends in both variables along the product of the two localization equivalences, is independent of representatives, and is natural on the required two different derived categories. No same-ring bifunctor extension assertion is being applied across different sites.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-site-derived-tensor-descent",
     "sk-def-sfb-derived-tensor-hom"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7D (lemma-factor-through-K-flat), 06YT (lemma-derived-tor-quasi-isomorphism-other-side), 06YU (definition-derived-tor)."
-   }
+   "elementary": false
   },
   {
-   "text": "Use the unbounded derived adjunctions with their actual units and counits. The adjunction $j^*\\dashv Rj_*$ is [sk-def-sfb-module-derived-pushpull], because $j^*$ is exact (step 2) and so equals its left derived functor by the exact-functor clause of [sk-def-sfb-derived-categories] and is computed termwise by [lem-weil-pbc-exact-functor-derived-factorization]; likewise $Ri_*\\cong i_*$ since $i_*$ is exact. The adjunction $i^*\\dashv i_*$ follows either from that same node, since both functors are exact, or by descending their termwise unit and counit. The adjunction $i_*\\dashv Ri^!$ is clause (2) of [det-lem-formal-closed-support-adjunction], on ordinary unbounded categories. Finally $j_!\\dashv j^*$ on the derived categories follows from the sheaf adjunction in step 2: [lem-weil-pbc-termwise-adjunction-homotopy] gives the adjunction on complexes and homotopy categories. Both exact functors preserve quasi-isomorphisms, so their unit and counit descend by localization and their two triangle identities remain identities. Consequently the derived adjunction is normalized by the original sheaf unit and counit. No bounded-below recollement theorem is used for an unbounded input.",
+   "text": "Take asIso of the canonical closed projection and of both canonical Hom maps. Their hom equations are reflexivity. Apply the proven naturality theorem to the open and inverse closed projections for the simultaneous contravariant/covariant equations.",
    "uses": [
-    "sk-def-sfb-module-derived-pushpull",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "det-lem-formal-closed-support-adjunction",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "sk-def-sfb-derived-categories"
+    "lem-sfb-projection-internal-hom-formal",
+    "def-sfb-open-closed-internal-hom-comparisons"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-formal-closed-support-adjunction.proof.md",
-    "place": "Formal support adjunction clause (2); open and pullback adjunctions on the ordinary unbounded categories, with Stacks Tag 08BJ homotopy-adjunction normalization."
-   }
-  },
-  {
-   "text": "Write $H_T=R\\mathcal Hom_{B_T}$ and let $T$ be an arbitrary object of $D(B_X)$. Closedness in [sk-def-sfb-derived-tensor-hom], the open projection isomorphism of step 7, and the adjunctions of step 8 give bijections\n$$\\begin{aligned}\n\\operatorname{Hom}_{D(B_X)}(T,H_X(j_!L,N))\n&\\simeq\\operatorname{Hom}_{D(B_X)}(j_!L\\otimes^{\\mathbf L}T,N)\\\\\n&\\simeq\\operatorname{Hom}_{D(B_X)}(j_!(L\\otimes^{\\mathbf L}j^*T),N)\\\\\n&\\simeq\\operatorname{Hom}_{D(B_U)}(L\\otimes^{\\mathbf L}j^*T,j^*N)\\\\\n&\\simeq\\operatorname{Hom}_{D(B_U)}(j^*T,H_U(L,j^*N))\\\\\n&\\simeq\\operatorname{Hom}_{D(B_X)}(T,Rj_*H_U(L,j^*N)).\n\\end{aligned}$$\nEvery bijection is natural in $T,L,N$. In particular the test object ranges over all derived $B_X$-modules, not just the coefficient unit; this calculation determines an internal sheaf-valued derived object.",
-   "uses": [
-    "sk-def-sfb-derived-tensor-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Open counterpart of the internal-adjunction calculation; tensor-Hom representability in Stacks Tag 08J9 (lemma-internal-hom)."
-   }
-  },
-  {
-   "text": "For an arbitrary $T\\in D(B_X)$ the closed projection isomorphism of step 7 and the adjunctions of step 8 instead give\n$$\\begin{aligned}\n\\operatorname{Hom}_{D(B_X)}(T,H_X(i_*P,N))\n&\\simeq\\operatorname{Hom}_{D(B_X)}(i_*P\\otimes^{\\mathbf L}T,N)\\\\\n&\\simeq\\operatorname{Hom}_{D(B_X)}(i_*(P\\otimes^{\\mathbf L}i^*T),N)\\\\\n&\\simeq\\operatorname{Hom}_{D(B_Z)}(P\\otimes^{\\mathbf L}i^*T,Ri^!N)\\\\\n&\\simeq\\operatorname{Hom}_{D(B_Z)}(i^*T,H_Z(P,Ri^!N))\\\\\n&\\simeq\\operatorname{Hom}_{D(B_X)}(T,i_*H_Z(P,Ri^!N)).\n\\end{aligned}$$\nThe first and fourth bijections are [sk-def-sfb-derived-tensor-hom], and all are natural in $T,P,N$. Exactness of $i_*$ is why the last object has $i_*$, without an additional right-derived resolution. This proves the representable-functor comparison for the closed formula without applying Bhatt--Scholze's constructible-preservation conclusion or its excellence hypotheses.",
-   "uses": [
-    "sk-def-sfb-derived-tensor-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.7.13, proof: internal closed-immersion adjunction calculation, expanded for arbitrary sources and ordinary unbounded modules."
-   }
-  },
-  {
-   "text": "For either calculation let $A$ be its left internal-Hom object, $C$ its claimed right-hand object, and $\\Phi_T:\\operatorname{Hom}(T,A)\\simeq\\operatorname{Hom}(T,C)$ the displayed natural bijection. Define $f=\\Phi_A(1_A):A\\to C$ and $g=\\Phi_C^{-1}(1_C):C\\to A$. Naturality in $T$ says $\\Phi_T(a)=f\\circ a$ and $\\Phi_T^{-1}(c)=g\\circ c$. Taking $a=g$ and $c=f$ gives $fg=1_C$ and $gf=1_A$. This constructs the two required isomorphisms. Naturality of every bijection in the source and target variables implies the corresponding naturality of $f$ and $g$ by these formulas; it includes contravariance in $L,P$ and covariance in $N$. To identify their normalization, the transpose of a map into $H_X(eF,N)$ is its composite with the tensor-Hom evaluation $eF\\otimes^{\\mathbf L}H_X(eF,N)\\to N$. Steps 9 and 10 then precompose this evaluation with the inverse projection comparison, apply respectively the counit/unit transpose for $j_!\\dashv j^*$ or $i_*\\dashv Ri^!$, curry for $H_U$ or $H_Z$, and apply the transpose for $j^*\\dashv Rj_*$ or $i^*\\dashv i_*$. This is exactly the evaluation-and-adjunction construction in the statement. Every reverse operation uses the inverse projection map and reverse adjunction transpose; the triangle identities make it the inverse. Thus the maps have the prescribed normalization as well as their full three-variable naturality.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.7.13 internal adjunction calculation: explicit representing-object inverse and evaluation normalization."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-pulled-back-coefficients",
-  "sk-def-sfb-module-objects",
-  "sk-def-sfb-sheaf-tensor",
-  "def-weil-sheaf-of-modules-category",
-  "def-sfb-modobj-relative-tensor",
-  "def-pur-sheaf-tensor-product",
-  "sk-def-sfb-derived-tensor-hom",
-  "lem-sfb-alpha-iso",
-  "def-sfb-module-upper-star",
-  "def-sfb-module-lower-star",
-  "def-sfb-module-linear-open-lower-shriek",
-  "def-sfb-module-open-lower-shriek",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-proetale-immersion-limit-preservation",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "def-sfb-module-upper-lower-adjunction",
+  "lem-sfb-condensed-support-projection-formula",
+  "def-sfb-condensed-pullback-tensor-comparison",
+  "def-sfb-open-closed-internal-hom-comparisons",
+  "lem-sfb-projection-internal-hom-formal",
   "det-lem-formal-closed-support-adjunction",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "def-pc-tensor-complex-sheaves",
-  "def-pc-kflat-complex",
-  "def-pc-flat-sheaf-modules",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "sk-def-sfb-module-derived-pushpull",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "sk-def-sfb-derived-categories"
+  "sk-def-sfb-derived-tensor-hom"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.7.13, formal internal closed-adjunction calculation; its open counterpart and unbounded relative-tensor details supplied from Stacks Tags 09AA, 09BM, 09AH, 03EL, 06YS, 0G7D, 08J9."
+  "place": "Lemma 6.7.13 formal argument: projection step isolated as lem-sfb-condensed-support-projection-formula; steps 9--11 proved by explicit natural Hom equivalences in Lean."
  },
  "mathlib_searches": [
   {
@@ -367,13 +228,7 @@
  },
  "tool_uses": [
   "lem-sfb-alpha-iso",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-proetale-immersion-limit-preservation",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
   "det-lem-formal-closed-support-adjunction",
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-site-derived-tensor-descent",
   "lem-weil-pbc-termwise-adjunction-homotopy"
  ],
  "reviewed": {
@@ -396,12 +251,6 @@
   "module": "Sheaf.AlgebraicGeometry.CondensedOpenClosedInternalHom",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.openClosedInternalHomFormulas",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.CondensedRing.openSupportDerivedAdjunction",
-   "AlgebraicGeometry.ProEtale.CondensedRing.closedPullbackDerivedAdjunction",
-   "AlgebraicGeometry.ProEtale.CondensedRing.openSupportProjection",
-   "AlgebraicGeometry.ProEtale.CondensedRing.closedSupportProjection",
-   "AlgebraicGeometry.ProEtale.CondensedRing.openSupportHomMap",
-   "AlgebraicGeometry.ProEtale.CondensedRing.closedSupportHomMap",
    "AlgebraicGeometry.ProEtale.CondensedRing.openClosedInternalHomFormulas"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/CondensedOpenClosedInternalHom.lean",
@@ -411,5 +260,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "The existential families o,c are precisely the two isomorphisms. Their simultaneous morphism equations give full contravariant/covariant naturality. Their hom components equal the explicitly constructed evaluation/adjunction transposes. The auxiliary closed projection isomorphism p has its hom fixed to the actual unit-induced projection. supportPullback is identified with recorded upperStar by the canonical alpha scalar-transport isomorphism, without changing coefficients. Exact closed image uses mapDerivedCategory; the open image and support use total unbounded rightDerivedFunctor."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-72cfb",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261019T122649-L-482400",
+  "kind": "interface",
+  "note": "independent cc review: delivered item theorem and six relocated definitions vs live clone text (byte-identical); compiled the 5 delivered modules and the 4 direct importers; #print axioms of the proved declarations vs upstream sorry sources; new node statements and proof_deps vs Lean"
  }
 }
