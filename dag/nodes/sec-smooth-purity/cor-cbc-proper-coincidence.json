@@ -21,11 +21,26 @@
  ],
  "proof": [
   {
-   "text": "For $j=\\operatorname{id}$ the extension-by-zero identification\nof [def-cbc-exchange-map] is the identity, so\n$\\operatorname{Ex}_!$ is the exchange map of\n[def-weil-pbc-derived-exchange] for the proper $p=f$, by\n[def-cbc-exchange-map] and the identification\n$Rf_!=Rf_*$ of [def-compact-support-direct-image-detailed].",
+   "text": "Use the identity-open compactification in [def-cbc-exchange-map]. Compare the levelwise derived identity-open adjunction isomorphism with the identity isomorphism shId of the derived compact-support formalism: their conjugates agree, since on the localization functor Qh the derived unit is the levelwise unit and the underived leftAdjointIdIso is conjugate to the inverse pullback identity. Then baseChange_id_vert cancels the identity-open factor in shriekBaseChange. Naturality of the proper exchange in [def-weil-pbc-derived-exchange] gives the required identity for the two identity-open compactifications.",
    "uses": [
     "def-cbc-exchange-map",
-    "def-weil-pbc-derived-exchange",
-    "def-compact-support-direct-image-detailed"
+    "def-weil-pbc-derived-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The identity-open compactification of the base-changed proper map refines the literal pullback compactification via the latter open immersion. Its refinement square is cartesian because both vertical identity maps are isomorphisms. Write the canonical comparison of [lem-weil-pbc-etale-shriek-compactification-independence] using this refinement and the identity refinement. The refinement compatibility of the exchange construction [def-cbc-exchange-map] identifies the identity-open exchange with the literal-pullback exchange followed by this canonical comparison. The derivedPlusFormalism_shriekIso comparison identifies this formalism comparison with the specified candidate comparison. Compose with the identity-open identification on the base-changed scheme.",
+   "uses": [
+    "lem-weil-pbc-etale-shriek-compactification-independence",
+    "def-cbc-exchange-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A finite commutative coefficient ring is additively torsion. Apply the finite-ring form isIso_baseChange_of_isProper_of_isAddTorsion_ring of [thm-weil-pbc-bounded-below] to the supplied cartesian square. The equality baseChange_eq_derivedBaseChangeMapPlus identifies that invertible transformation with the specified proper derived exchange. Pair this invertibility with the equality already proved.",
+   "uses": [
+    "thm-weil-pbc-bounded-below",
+    "def-weil-pbc-derived-exchange"
    ],
    "elementary": false
   }
@@ -33,12 +48,14 @@
  "proof_deps": [
   "def-cbc-exchange-map",
   "def-weil-pbc-derived-exchange",
-  "def-compact-support-direct-image-detailed"
+  "lem-weil-pbc-etale-shriek-compactification-independence",
+  "thm-weil-pbc-bounded-below"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-comp-proper/cor-cbc-proper-coincidence.md",
-  "place": "## Proof"
+  "by": "worker",
+  "group": "F4",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-comp-proper/cor-cbc-proper-coincidence.md",
+  "place": "Identity-open normalization proof, expanded using the existing compact-support formalism identity/refinement laws and the ordinary proper-base-change theorem."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -117,5 +134,15 @@
   "group": "Q44",
   "result": "pass",
   "note": "Every hypothesis matches the node and none is stronger: field k, prime l invertible in k, E/Q_l finite, n:ℕ+, separated finite-type k-schemes and maps, the IsProper h ∨ IsProper f disjunction, arbitrary compactifications ch/cf/chf, L in D+. All three conclusions match: the composition square with the recorded compositors (Etale.unboundedEtaleLowerShriekCompIso; originCompositionAmbient), c = symm of compactSupportSiteComparison (b, then P(e)), correct order and direction; the refinement square with the actual def (b) refinement map; the proper case c = b under adjunction-built identity-open identifications. The statement is verbatim. Dependency repairs: cor-cbc-proper-coincidence now states that Ex_! equals the PBC exchange, using the recorded maps (the old record was only a Nonempty iso); the other three modules only migrate imports, plus two def (b) helpers in the owning refinement module. No hollow definitions; sorry only in theorems; docstrings and the 10 proof steps present. nt_compile --json on all 5 files: rc 0, clean. Direct importers: ProjectiveLineFullAdjunction compiles before and after; CompactificationCoherence, CompactCoefficientComposition, FiniteCoefficientDirectImage and EtaleGeometricBiduality fail at baseline from unrelated duplicate-import or DeltaRestriction errors, the same way with the delivery, so no regression. Observations only: the recorded pro-etale compositor and proper/open map are conjugations of the etale ones, so the squares are near-formal (inherited from thm-sf-comp-composition); E : Type (u+1) is a presentation convention, not a restriction."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261019T112448-L-3942303",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
