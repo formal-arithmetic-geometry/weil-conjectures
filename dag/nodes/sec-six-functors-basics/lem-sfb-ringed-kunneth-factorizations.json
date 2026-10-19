@@ -21,89 +21,91 @@
  ],
  "proof": [
   {
-   "text": "Write $T=RM\\otimes^L RN$, $Z=AM\\otimes^L BN$, and write $F:T\\to RUZ$, $G:T\\to RSZ$ for the first and second displayed composites. Put $\\theta:BL\\xrightarrow{\\sim}AL$, $w:BU\\to1$, $s:AS\\to1$, and $v:LR\\to1$ for the comparison and the three counits. Let $d_B=(t_B)\\circ B(t_L)$ and $d_A=(t_A)\\circ A(t_L)$ denote the tensor comparisons for $BL$ and $AL$. The tensor-pullback node supplies the natural isomorphisms $t_L,t_A,t_B$. Apply [lem-sfb-ringed-comparison-tensor-adjunction] with $(f_1,g_1)=(a,q)$ and $(f_2,g_2)=(b,q)$. It gives the canonical $c:RS\\xrightarrow{\\sim}RU$, its adjunction compatibility, and\n$$d_A\\circ\\theta_T=(\\theta_{RM}\\otimes\\theta_{RN})\\circ d_B.$$\nAll these are ordinary unbounded ringed module categories; the two paths have the specified ringed commutation isomorphism, so the lemma's hypotheses hold.",
+   "text": "Establish the tensor identity for the specified RingedTensorSquare. Form the two natural transformations whose components are theta followed by the A-path tensor map and the B-path tensor map followed by tensor(theta,theta). Restriction to pairs of flat K-flat homotopy complexes is injective by lem-weil-pbc-site-derived-tensor-descent. On representatives they agree by lem-weil-pbc-ringed-square-tensor-compatibility, using the defining representative equation of derivedComparison. Transport along quotientCompQhIso and naturality extends equality to all derived objects. This uses the specified comparison directly and requires no additional right-derived witnesses.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sfb-ringed-comparison-tensor-adjunction"
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-weil-pbc-ringed-square-tensor-compatibility",
+    "lem-weil-pbc-site-derived-tensor-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0D6E (lemma-derived-pushforward-composition); explicit two-counit calculation"
+    "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0D6E (lemma-derived-pushforward-composition); two-counit expansion of the blueprint First identity"
    }
   },
   {
-   "text": "The mate characterization of [def-weil-pbc-adjunction-mate] gives, with the orientations in the statement,\n$$w_{AM}\\circ B(\\beta_M)=A(v_M)\\circ\\theta_{RM},\\qquad s_{BN}\\circ A(\\bar\\beta_N)=B(v_N)\\circ\\theta_{RN}^{-1}.$$\nIndeed take $(L_1,R_1,L_2,R_2,G,H)=(L,R,B,U,L,A)$ for the first mate and $(L,R,A,S,L,B)$ for the second. The transformations to be mated are respectively $BL\\to AL$ and $AL\\to BL$. These are the node's explicit transpose formulas, with no claim that either mate is invertible.",
+   "text": "Apply mateEquiv_counit to the comparison and its inverse. These give B(beta_M);w_AM = theta_RM;A(v_M) and A(bar-beta_N);s_BN = theta_RN inverse;B(v_N), respectively. Neither mate is inverted.",
    "uses": [
     "def-weil-pbc-adjunction-mate"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0D6E (lemma-derived-pushforward-composition); explicit two-counit calculation"
+    "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0D6E (lemma-derived-pushforward-composition); two-counit expansion of the blueprint First identity"
    }
   },
   {
-   "text": "Transpose $F$ first under $L\\dashv R$ and then under $B\\dashv U$, using [def-weil-pbc-composite-adjunction]. Denote the resulting map $BLT\\to Z$ by $F^\\flat$. In the displayed factor order the transpose of the first $\\pi_q$ is $(1_{LRM}\\otimes v_N)\\circ t_L$. The transpose of $\\pi_b:UAM\\otimes N\\to UZ$ is $(w_{AM}\\otimes1_{BN})\\circ t_B$, by the definition of $\\pi$ in [lem-weil-pbc-ringed-exchange-tensor-coherence]. Naturality of $w$ moves the last projection arrow out of the composite transpose, giving\n$$F^\\flat=(w_{AM}\\otimes1)\\circ t_B\\circ B(\\beta_M\\otimes1_N)\\circ B(1_{LRM}\\otimes v_N)\\circ B(t_L).$$\nNaturality of $t_B$ and bifunctoriality of tensor rewrite this as\n$$F^\\flat=(w_{AM}\\circ B\\beta_M\\;\\otimes\\;Bv_N)\\circ d_B=(Av_M\\circ\\theta_{RM}\\;\\otimes\\;Bv_N)\\circ d_B,$$\nwhere the last equality is step 2. This is an expansion of the particular three arrows of $F$, using neither exchange/projection invertibility nor a projection-formula theorem.",
+   "text": "Expand the hom bijection of the composite adjunction. Naturality of the hom bijection transposes the q-projection to its tensor-comparison/counit definition and then the b-projection to its own definition. Naturality of the b tensor comparison moves the exchange and q-counit through it. Tensor bifunctoriality combines them. The first transpose is d_B followed by tensor(theta_RM;A(v_M),B(v_N)), using the first mate equation.",
    "uses": [
     "def-weil-pbc-composite-adjunction",
     "lem-weil-pbc-ringed-exchange-tensor-coherence",
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0D6E (lemma-derived-pushforward-composition); explicit two-counit calculation"
-   }
-  },
-  {
-   "text": "Similarly transpose $G$ successively under $L\\dashv R$ and $A\\dashv S$ and call the map $ALT\\to Z$ $G^\\flat$. Here the transpose of $\\pi_q$ is $(v_M\\otimes1_{LRN})\\circ t_L$, and that of the last projection, written with the fixed factor $M$ first, is $(1_{AM}\\otimes s_{BN})\\circ t_A$. The latter is the same counit-tensor-identity definition after tensor symmetry. Counit naturality and naturality of $t_A$ therefore give\n$$\\begin{aligned}G^\\flat&=(1\\otimes s_{BN})\\circ t_A\\circ A(1_M\\otimes\\bar\\beta_N)\\circ A(v_M\\otimes1_{LRN})\\circ A(t_L)\\\\\n&=(Av_M\\;\\otimes\\;s_{BN}\\circ A\\bar\\beta_N)\\circ d_A\\\\\n&=(Av_M\\;\\otimes\\;Bv_N\\circ\\theta_{RN}^{-1})\\circ d_A.\\end{aligned}$$\nThe last equality is the second mate equation of step 2. No relation between $M$ and $N$ has been imposed.",
-   "uses": [
-    "def-weil-pbc-composite-adjunction",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0D6E (lemma-derived-pushforward-composition); explicit two-counit calculation"
-   }
-  },
-  {
-   "text": "Use the tensor comparison equation of step 1 and the inverse of $\\theta$. It yields\n$$d_B\\circ\\theta_T^{-1}=(\\theta_{RM}^{-1}\\otimes\\theta_{RN}^{-1})\\circ d_A.$$\nSubstituting this into step 3 and cancelling $\\theta_{RM}\\theta_{RM}^{-1}$ gives\n$$F^\\flat\\circ\\theta_T^{-1}=(Av_M\\otimes Bv_N\\circ\\theta_{RN}^{-1})\\circ d_A=G^\\flat.$$\nUnder $(qa)^*\\cong AL$, this is exactly the displayed common transpose: its initial isomorphism is $(1_{ALRM}\\otimes\\theta_{RN}^{-1})\\circ d_A:ALT\\to ALRM\\otimes BLRN$, followed by $Av_M\\otimes Bv_N$. Thus the mixed $A,B$ factors and the orientation of the comparison are accounted for explicitly.",
-   "uses": [
-    "lem-sfb-ringed-comparison-tensor-adjunction"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0D6E (lemma-derived-pushforward-composition); explicit two-counit calculation"
+    "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0D6E (lemma-derived-pushforward-composition); two-counit expansion of the blueprint First identity"
    }
   },
   {
-   "text": "It remains to compare targets with the canonical direct-image comparison, rather than an arbitrary isomorphism of right adjoints. Let $e_A:ALRS\\to1$ and $e_B:BLRU\\to1$ be the composite counits. By [lem-sfb-ringed-comparison-tensor-adjunction],\n$$e_B\\circ BL(c)=e_A\\circ\\theta_{RS}.$$\nApply this at $Z$ and precompose with $BL(c_Z^{-1}\\circ F)$. Naturality of $\\theta$ for the morphism $c_Z^{-1}\\circ F:T\\to RSZ$ gives\n$$F^\\flat=(e_{A,Z}\\circ AL(c_Z^{-1}\\circ F))\\circ\\theta_T.$$\nConsequently the $AL\\dashv RS$ transpose of $c_Z^{-1}\\circ F$ is $F^\\flat\\circ\\theta_T^{-1}$. By step 5 this equals $G^\\flat$. The composite hom bijection of [def-weil-pbc-composite-adjunction] is injective, so $c_Z^{-1}\\circ F=G$, as asserted. Only $\\theta$ and the canonical composition comparisons were inverted; none of $\\beta,\\bar\\beta,\\pi$ was inverted.",
+   "text": "Perform the same calculation with the opposite factor order for the second route. Its transpose is d_A followed by tensor(A(v_M),theta_RN inverse;B(v_N)), using the second mate equation. This is definitionally commonTranspose and proves the second conjunct.",
    "uses": [
-    "lem-sfb-ringed-comparison-tensor-adjunction",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0D6E (lemma-derived-pushforward-composition); two-counit expansion of the blueprint First identity"
+   }
+  },
+  {
+   "text": "Mathlib conjugateEquiv_counit for the inverse comparison and naturality of theta inverse show that transposing first followed by directComparison inverse equals theta_T inverse followed by the first transpose. This is the specific adjunction-compatible directComparison defined in the module, so no independent normalization witnesses are needed.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
     "def-weil-pbc-composite-adjunction"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0D6E (lemma-derived-pushforward-composition); explicit two-counit calculation"
+    "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0D6E (lemma-derived-pushforward-composition); two-counit expansion of the blueprint First identity"
+   }
+  },
+  {
+   "text": "Compare the transported first transpose with commonTranspose. Precompose with theta_T and cancel theta_T;theta_T inverse. The tensor identity of step 1 replaces theta_T;d_A by d_B;tensor(theta_RM,theta_RN). Tensor functoriality and cancellation on the second factor give equality with d_B;tensor(theta_RM;A(v_M),B(v_N)). Injectivity of the composite adjunction hom bijection proves the first conjunct. The unit First identity is preserved.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0D6E (lemma-derived-pushforward-composition); two-counit expansion of the blueprint First identity"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-sfb-ringed-comparison-tensor-adjunction",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-ringed-square-tensor-compatibility",
+  "lem-weil-pbc-site-derived-tensor-descent",
   "def-weil-pbc-adjunction-mate",
   "def-weil-pbc-composite-adjunction",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence"
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 07A7, 0B56 and 0D6E: explicit expansion of the two mates, realizing the blueprint First identity"
+  "place": "Tags 07A7, 0B56, 0D6E: two-counit expansion; tensor compatibility descended from flat K-flat representatives; Mathlib conjugate counit identity for the specified comparison"
  },
  "mathlib_searches": [
   {
@@ -410,5 +412,15 @@
   "group": "Q36",
   "result": "pass",
   "note": "Every clause matches the node: theta BL≅AL; beta=s.exchange (mate of theta.hom); betaBar=mate of theta.inv, LR→SB; directComparison=conjugateIsoEquiv of theta, the canonical c per Stacks 0D6E and lem-sfb-ringed-comparison-tensor-adjunction; first/second have the displayed arrows and factor order; conjunct 1 first≫c.inv=second; conjunct 2 composite homEquiv.symm of second = A(t_L)≫t_A≫(Av_M⊗θ⁻¹≫Bv_N). No stronger assumptions or universe restriction; edge cases covered; lean.statement verbatim; declarations listed with real data and docstrings; only the theorem's proof is sorry; added stmt_dep is the landed presentation, acyclic; no name clashes. nt_compile --json on the snapshot file: 9.9 s, exit code 0, no errors or warnings. Second-reading section is the standard post-2026-10-17 placeholder. No fixes needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261019T005416-L-2765672",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
