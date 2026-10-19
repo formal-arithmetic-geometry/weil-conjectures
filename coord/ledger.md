@@ -17334,3 +17334,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:25 L: merged deliver/P6/Sheaf.RingTheory.RegularMapReducedTarget (stage 3; reviewer PASS; first push; landing 20261019T112508-L-3947286 (proof); batch 20261019T112432; modules 1; new nodes 0)
 - 11:25 L: merged deliver/P6/Sheaf.SixFunctors.SelectedSchemeGaloisComparison (stage 3; reviewer PASS; first push; landing 20261019T112509-L-3947666 (proof); batch 20261019T112432; modules 1; new nodes 0)
 - 11:25 L: merged deliver/P7/Sheaf.RingTheory.UniversallyJapaneseN1Criterion (stage 3; reviewer PASS; first push; landing 20261019T112509-L-3947846 (proof); batch 20261019T112432; modules 1; new nodes 0)
+- 11:25 L: merged deliver/P8/Sheaf.DeligneLaumon.AffineGeometricComponentsFiniteExtension (stage 3; reviewer PASS; first push; landing 20261019T112510-L-3948000 (proof); batch 20261019T112432; modules 1; new nodes 0)

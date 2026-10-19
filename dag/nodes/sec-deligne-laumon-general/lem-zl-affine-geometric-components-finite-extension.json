@@ -20,21 +20,19 @@
  ],
  "proof": [
   {
-   "text": "For every intermediate field $k_0\\subseteq K\\subseteq k$, [lem-weil-pbc-fibre-product-affine-spectra] identifies $X_{0,K}$ with $\\operatorname{Spec}(B\\otimes_{k_0}K)$. By clause (2) of [lem-sfb-finite-type-composition-base-change], its structure morphism is of finite type. Thus [lem-pc-affine-finite-type-algebra] makes $B\\otimes_{k_0}K$ a finitely generated $K$-algebra. Applying [lem-wf-affine-noetherian-components] gives the descending-chain condition on closed subsets of $X_{0,K}$. In particular $X=X_{0,k}$ is a Noetherian topological space.",
+   "text": "Let X be the base change to k. Finite type survives base change by [lem-sfb-finite-type-composition-base-change]. The spectrum of a field is Noetherian; [lem-weil-pbc-finite-type-over-noetherian] therefore makes X Noetherian. This uses Mathlib AlgebraicGeometry.Noetherian directly, without writing an affine tensor-product presentation.",
    "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra",
     "lem-sfb-finite-type-composition-base-change",
-    "lem-pc-affine-finite-type-algebra",
-    "lem-wf-affine-noetherian-components"
+    "lem-weil-pbc-finite-type-over-noetherian"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 038E, final paragraph of proof: finite type base change and Noetherianity; schemes.tex Tag 01I4; morphisms.tex Tag 01T4"
+    "place": "Tag 038E, lemma-galois-action-connected-components-continuous, statement and proof (components descend to finite subextensions); Tag 0387, lemma-characterize-geometrically-connected; morphisms.tex Tags 01VB (lemma-base-change-smooth), 02NK (lemma-base-change-relative-dimension-d)"
    }
   },
   {
-   "text": "By [lem-sfb-noetherian-connected-components-open], $X$ has a finite set $I$ of nonempty connected components $U_i$, each open. They partition $X$: for any point $x$, the union of all connected subsets containing $x$ is connected, since in a separation every such subset must lie in the side containing $x$; this union is maximal. The same argument shows that two intersecting maximal connected subsets coincide. This uses the meaning of connectedness in [def-weil-connected-scheme]. Each $U_i$ is closed because its complement is the union of the other open components. By [lem-sfb-noetherian-space-compact-subsets] every $U_i$ is quasi-compact. Regard $U_i$ as the open subscheme with the restricted structure sheaf.",
+   "text": "Index the components by I = ConnectedComponents X. By [lem-sfb-noetherian-connected-components-open] this type is finite and each fibre of the quotient map is open. Choose a representative r(i) in each fibre, which is the nonempty connected set connectedComponent(r(i)) by [def-weil-connected-scheme]. Its compactness follows from [lem-sfb-noetherian-space-compact-subsets]. This construction works when X is empty: I is then empty.",
    "uses": [
     "lem-sfb-noetherian-connected-components-open",
     "def-weil-connected-scheme",
@@ -43,123 +41,108 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 038E, proof of (a); topology.tex Tags 004T (lemma-connected-components), 04MF, 04ME, 04ZA"
+    "place": "Tag 038E, lemma-galois-action-connected-components-continuous, statement and proof (components descend to finite subextensions); Tag 0387, lemma-characterize-geometrically-connected; morphisms.tex Tags 01VB (lemma-base-change-smooth), 02NK (lemma-base-change-relative-dimension-d)"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-descend-qc-open-fg-subalgebra] with base field $k_0$, scheme $X_0$, algebra $A=k$, and quasi-compact open $U_i\\subset X$. For every $i\\in I$ it gives a finitely generated $k_0$-subalgebra $A_i\\subset k$ and a quasi-compact open $W_i\\subset X_{0,A_i}$ such that $U_i$ is the inverse image of $W_i$ along $X\\to X_{0,A_i}$. Only the openness and inverse-image equality are asserted at this point; clopenness and geometric connectedness downstairs will be proved below.",
+   "text": "For each component open apply [lem-weil-pbc-descend-qc-open-fg-subalgebra]. A finitely generated subalgebra of the algebraic extension k/k_0 [def-weil-algebraic-closure] is finite over k_0: its finitely many algebra generators are integral, so their algebra is module-finite, as in [lem-weil-pbc-algebraic-generators-finite-extension]. Being a finite-dimensional domain over a field it is a field, hence gives a finite intermediate field. Take the supremum of the finitely many intermediate fields; it is still finite. Pull every descended open back to this common field. Functoriality of baseChangeMap [def-pc-base-change] shows that their preimages over k are the original opens.",
    "uses": [
-    "lem-weil-pbc-descend-qc-open-fg-subalgebra"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 038E, proof of (b), using Tag 0388 (lemma-descend-open), statement and proof"
-   }
-  },
-  {
-   "text": "Choose a finite algebra generating set $S_i$ for each $A_i$ and put $S=\\bigcup_{i\\in I}S_i$, which is finite. Every element of $S$ is algebraic over $k_0$ because $k$ is an algebraic closure [def-weil-algebraic-closure]. By [lem-weil-pbc-algebraic-generators-finite-extension], the intermediate subfield $L=k_0(S)\\subset k$ is finite-dimensional over $k_0$ and contains every $A_i$. Set $e=[L:k_0]\\geq1$. A basis gives a bijection of sets $L\\simeq k_0^{\\{1,\\ldots,e\\}}$, so $|L|=q^e$. Uniqueness in [lem-weil-unique-subfield-of-closure] therefore gives $L=k_e=\\mathbf F_{q^e}\\subset k$. If $I$ is empty, take $S=\\varnothing$ and $L=k_0$, so $e=1$.",
-   "uses": [
+    "lem-weil-pbc-descend-qc-open-fg-subalgebra",
     "def-weil-algebraic-closure",
     "lem-weil-pbc-algebraic-generators-finite-extension",
-    "lem-weil-unique-subfield-of-closure"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/fields.tex",
-    "place": "Tag 09GH (lemma-algebraic-finitely-generated); finite-field naming as in the blueprint ancestor proof, second paragraph"
-   }
-  },
-  {
-   "text": "Write $Y=X_{0,L}$ and $p:X\\to Y$. Pull the open immersion $W_i\\hookrightarrow X_{0,A_i}$ back along $Y\\to X_{0,A_i}$, obtaining an open subscheme $V_i\\subset Y$ by [lem-weil-pbc-open-immersion-base-change]. Its underlying open is the inverse image of $W_i$. The composite $X\\to Y\\to X_{0,A_i}$ is the canonical map induced by $A_i\\subset L\\subset k$. Hence $p^{-1}(V_i)=U_i$. The iterated-base-change identification in [def-pc-base-change] identifies $V_i\\times_L k$ with the open subscheme $U_i$ of $X$, with its restricted structure sheaf.",
-   "uses": [
-    "lem-weil-pbc-open-immersion-base-change",
     "def-pc-base-change"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0388, inverse-image description of descended opens; schemes.tex Tags 01JX, 01JY"
+    "place": "Tag 038E, lemma-galois-action-connected-components-continuous, statement and proof (components descend to finite subextensions); Tag 0387, lemma-characterize-geometrically-connected; morphisms.tex Tags 01VB (lemma-base-change-smooth), 02NK (lemma-base-change-relative-dimension-d)"
    }
   },
   {
-   "text": "The map $\\operatorname{Spec}k\\to\\operatorname{Spec}L$ is surjective by [lem-pc-field-extension-surjective]. Since $Y$ is affine by step 1, [lem-weil-pbc-fibre-product-affine-spectra] and [lem-weil-pbc-spec-surjective-base-change] imply that its base change $p:X\\to Y$ is surjective. Thus the opens $V_i$ are pairwise disjoint and cover $Y$: the inverse image of $V_i\\cap V_j$ is $U_i\\cap U_j=\\varnothing$ for $i\\ne j$, and the inverse image of $Y\\setminus\\bigcup_i V_i$ is empty. A nonempty subset of $Y$ cannot have empty inverse image under a surjection. Moreover $V_i$ is nonempty because its inverse image is the nonempty $U_i$. The complement of $V_i$ is $\\bigcup_{j\\ne i}V_j$, so $V_i$ is also closed.",
+   "text": "Put e = finrank(k_0,L), which is positive, and compute Nat.card L = q^e using the finite-dimensional cardinality formula. Uniqueness in [lem-weil-unique-subfield-of-closure] identifies its subfield with D.extensionSubfield e he. The subfield equality gives the comparison algebra map L to this specified field; compatibility of its inclusion with extensionEmbedding gives the scalar-extension projection p. By [def-pc-base-change] its square with the two structure maps is cartesian, and its composite with the first projection is the first projection upstairs.",
+   "uses": [
+    "lem-weil-unique-subfield-of-closure",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038E, lemma-galois-action-connected-components-continuous, statement and proof (components descend to finite subextensions); Tag 0387, lemma-characterize-geometrically-connected; morphisms.tex Tags 01VB (lemma-base-change-smooth), 02NK (lemma-base-change-relative-dimension-d)"
+   }
+  },
+  {
+   "text": "The field-spectrum map is surjective by [lem-pc-field-extension-surjective], so its scheme base change p is surjective. This is the general Mathlib base-change stability of Surjective and does not require an affine spectrum calculation. If W_i denotes the descended open, membership p(x) in W_i is equivalent to ConnectedComponents.mk x = i. Surjectivity therefore proves that the W_i cover and are pairwise disjoint. Each W_i is nonempty because it contains p(r(i)). Its complement is the union of W_j for j different from i, hence open, so W_i is closed.",
    "uses": [
     "lem-pc-field-extension-surjective",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-spec-surjective-base-change"
+    "def-pc-base-change"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00FI (lemma-surjective-spec-radical-ideal), final base-change assertion; varieties.tex Tag 038E, assembly of descended components"
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038E, lemma-galois-action-connected-components-continuous, statement and proof (components descend to finite subextensions); Tag 0387, lemma-characterize-geometrically-connected; morphisms.tex Tags 01VB (lemma-base-change-smooth), 02NK (lemma-base-change-relative-dimension-d)"
    }
   },
   {
-   "text": "Let $R=B\\otimes_{k_0}L$, so $Y=\\operatorname{Spec}R$. For each clopen $V_i$, [lem-weil-pbc-spec-clopen-idempotent] supplies an idempotent $a_i\\in R$ with $V_i=D(a_i)$. By [lem-weil-pbc-affine-open-section-vanishing-prime], this basic open is affine, with coordinate ring $R_{a_i}$. Put $X_{i,e}=V_i$ with its open-subscheme structure. The disjoint open cover of step 6 identifies $Y$ with $\\coprod_{i\\in I}X_{i,e}$ as schemes: the inclusions glue, and their inverses on each member of the cover glue to the inverse morphism. Thus this is a decomposition into nonempty open and closed affine subschemes.",
+   "text": "Take X_{i,e} to be W_i with its restricted scheme structure. Its inclusion is an open immersion; since its range is closed it is also a closed immersion (IsClosedImmersion.of_isPreimmersion). A closed immersion into an affine scheme has affine source by clause (1) of [lem-weil-pbc-closed-immersion-affine-cover-criterion]. Thus no idempotent/basic-open construction is needed. The inclusions, coverage, and disjointness give exactly the decomposition recorded by AffineGeometricComponentDecomposition.",
    "uses": [
-    "lem-weil-pbc-spec-clopen-idempotent",
-    "lem-weil-pbc-affine-open-section-vanishing-prime"
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00EE, clopen-idempotent correspondence; schemes.tex Tag 01I3 (lemma-standard-open-affine); blueprint ancestor proof, second paragraph"
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038E, lemma-galois-action-connected-components-continuous, statement and proof (components descend to finite subextensions); Tag 0387, lemma-characterize-geometrically-connected; morphisms.tex Tags 01VB (lemma-base-change-smooth), 02NK (lemma-base-change-relative-dimension-d)"
    }
   },
   {
-   "text": "By step 5, $X_{i,e}\\times_{k_e}k=U_i$, which is connected. The field $k$ is algebraically closed; it is also algebraic over $k_e$, since the nonzero polynomials over $k_0$ witnessing algebraicity remain nonzero over the subfield $k_e\\subset k$ [def-weil-algebraic-closure]. Apply [lem-weil-geometrically-connected-algebraic-closure] over $k_e$ to conclude that $X_{i,e}$ is geometrically connected. Their base changes are exactly the components indexed by $I$. If $X_0$ is empty then $X$ and $Y$ are empty, $I=\\varnothing$ and step 4 gives $e=1$; every assertion about an individual component is vacuous.",
+   "text": "Restrict p to the inverse image of each W_i. The restriction square is cartesian, and pasting it with the scalar-extension square [def-pc-base-change] identifies that open subscheme with the pullback of X_{i,e} to k. This is also the restricted-scheme base change of the open inclusion [lem-weil-pbc-open-immersion-base-change]. Use the inverse comparison isomorphism followed by the open inclusion to define baseComponent. The pullback projection identities prove both prescribed projection equations. Its range is the original component open, and the image of the chosen componentPoint is r(i); thus component_range holds, and components_bijective is the identity of I under the representative equations. The pullback is connected because it is isomorphic to the connected component. The field k is algebraically closed [def-weil-algebraic-closure]; applying [lem-weil-geometrically-connected-algebraic-closure] over the finite field proves geometric connectedness.",
    "uses": [
+    "def-pc-base-change",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-weil-connected-scheme",
     "def-weil-algebraic-closure",
     "lem-weil-geometrically-connected-algebraic-closure"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0387 (lemma-characterize-geometrically-connected); Tag 038E, descended-component conclusion"
+    "place": "Tag 038E, lemma-galois-action-connected-components-continuous, statement and proof (components descend to finite subextensions); Tag 0387, lemma-characterize-geometrically-connected; morphisms.tex Tags 01VB (lemma-base-change-smooth), 02NK (lemma-base-change-relative-dimension-d)"
    }
   },
   {
-   "text": "Finally suppose $X_0\\to\\operatorname{Spec}k_0$ is smooth of relative dimension $d$. Clause (1) of [lem-sbc-smooth-relative-dimension-permanence] makes $Y\\to\\operatorname{Spec}k_e$ smooth of relative dimension $d$. The inclusion $X_{i,e}\\hookrightarrow Y$ is an open immersion, hence etale by [lem-weil-pbc-open-immersion-etale]. By [def-sbc-smooth-morphisms] it is smooth of relative dimension zero. Clause (2) of the same permanence lemma makes the composite $X_{i,e}\\to\\operatorname{Spec}k_e$ smooth of relative dimension $0+d=d$, as required.",
+   "text": "Given SmoothOfRelativeDimension d f_0, install the base-change stability from [lem-sbc-smooth-relative-dimension-permanence] to obtain the property for the second projection. Open immersions are smooth of relative dimension zero by the Mathlib instance for [def-sbc-smooth-morphisms]. Compose using smoothOfRelativeDimension_comp and simplify zero plus d. The inclusion_over equation identifies this composite with componentMap.",
    "uses": [
     "lem-sbc-smooth-relative-dimension-permanence",
-    "lem-weil-pbc-open-immersion-etale",
     "def-sbc-smooth-morphisms"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 01VB (lemma-base-change-smooth), 02NK (lemma-base-change-relative-dimension-d), 02GP (lemma-open-immersion-etale), 02NL (lemma-composition-relative-dimension-d)"
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038E, lemma-galois-action-connected-components-continuous, statement and proof (components descend to finite subextensions); Tag 0387, lemma-characterize-geometrically-connected; morphisms.tex Tags 01VB (lemma-base-change-smooth), 02NK (lemma-base-change-relative-dimension-d)"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-fibre-product-affine-spectra",
   "lem-sfb-finite-type-composition-base-change",
-  "lem-pc-affine-finite-type-algebra",
-  "lem-wf-affine-noetherian-components",
+  "lem-weil-pbc-finite-type-over-noetherian",
   "lem-sfb-noetherian-connected-components-open",
   "def-weil-connected-scheme",
   "lem-sfb-noetherian-space-compact-subsets",
   "lem-weil-pbc-descend-qc-open-fg-subalgebra",
   "def-weil-algebraic-closure",
   "lem-weil-pbc-algebraic-generators-finite-extension",
-  "lem-weil-unique-subfield-of-closure",
-  "lem-weil-pbc-open-immersion-base-change",
   "def-pc-base-change",
+  "lem-weil-unique-subfield-of-closure",
   "lem-pc-field-extension-surjective",
-  "lem-weil-pbc-spec-surjective-base-change",
-  "lem-weil-pbc-spec-clopen-idempotent",
-  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-open-immersion-base-change",
   "lem-weil-geometrically-connected-algebraic-closure",
   "lem-sbc-smooth-relative-dimension-permanence",
-  "lem-weil-pbc-open-immersion-etale",
   "def-sbc-smooth-morphisms"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 038E (lemma-galois-action-connected-components-continuous), proof: Noetherian geometric fibre and descent of its finitely many quasi-compact open components via Tag 0388; Tag 0387; finite-field and smoothness details supplied explicitly"
+  "place": "Tags 038E and 0388: descend the finitely many compact open geometric components to finite fields; Tag 0387 tests geometric connectedness. The Lean proof uses general Noetherian and surjective base-change APIs and affineness of closed immersions rather than tensor spectra and clopen idempotents."
  },
  "mathlib_searches": [
   {
@@ -290,11 +273,9 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-affine-finite-type-algebra",
   "lem-sfb-noetherian-connected-components-open",
   "lem-weil-pbc-descend-qc-open-fg-subalgebra",
   "lem-weil-unique-subfield-of-closure",
-  "lem-weil-pbc-spec-surjective-base-change",
   "lem-weil-geometrically-connected-algebraic-closure",
   "lem-sbc-smooth-relative-dimension-permanence"
  ],
@@ -328,5 +309,15 @@
   "by": "Q143",
   "date": "2026-10-17",
   "note": "The helper structure records the canonical base-change maps by both pullback projections and the component quotient/range characterization; it is part of the stated notion."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261019T112510-L-3948000",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
