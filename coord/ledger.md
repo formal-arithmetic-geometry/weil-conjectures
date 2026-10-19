@@ -17402,3 +17402,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:26 L: merged deliver/W2/Sheaf.AlgebraicGeometry.FundamentalGroup.AlgebraicFieldLimit (stage 3; reviewer PASS; first push; landing 20261019T122644-L-481082 (proof); batch 20261019T121044; modules 1; new nodes 0)
 - 12:26 L: merged deliver/X2/Sheaf.AlgebraicGeometry.GenericPointGeometricIrreducibility (stage 3; reviewer PASS; first push; landing 20261019T122646-L-481668 (proof); batch 20261019T121044; modules 1; new nodes 0)
 - 12:26 L: merged deliver/X6/Sheaf.AlgebraicGeometry.CondensedOpenClosedInternalHom (stage 3; reviewer PASS; after a return; landing 20261019T122649-L-482400 (interface); batch 20261019T121044; modules 5; new nodes 4; change records: coord/changes/X6-open-closed-hom-map-relocation.md)
+- 12:30 L: merged deliver/NP/lem-pur-flag-local-comparison (stage 2; reviewer PASS; parallel immutable checks)

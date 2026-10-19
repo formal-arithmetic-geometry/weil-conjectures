@@ -2,7 +2,7 @@
  "id": "lem-pur-flag-local-comparison",
  "kind": "statement",
  "title": "Coordinate Gysin composition and the supported cup product",
- "statement": "In the finite setting [def-pur-conventions], let $S$ be a separated finite-type $k$-scheme and $r\\geq0$. In $E_r=\\mathbf A^r_S$ with coordinates $x_1,\\ldots,x_r$, put $E_j=\\{x_{j+1}=\\cdots=x_r=0\\}$, so $E_0=S$ and $a_j:E_{j-1}\\hookrightarrow E_j$ has equation $x_j=0$. Form $\\Theta_r:(z_r)_*A_S\\to A_{E_r}(r)[2r]$ by composing the Cartier supported morphisms along this chain exactly as in [lem-pur-flag-localized-product]. In the supported-Hom identification [lem-pur-supported-hom],\n$$\\Theta_r=\\partial\\kappa(x_1)\\cup\\cdots\\cup\\partial\\kappa(x_r)\\in H^{2r}_{E_0}(E_r,A(r)).$$\nHere the $j$th factor on the right is the Kummer boundary for the divisor $\\{x_j=0\\}$ in the full ambient $E_r$, and the cup product is [def-pur-supported-cup]. Equivalently, when the frame construction [def-pur-frame-class] is read with its rank parameter instantiated by $r$ (independently of the coefficient index), this is the ordered coordinate frame class for the smooth pair $E_r\\to S$, $E_0\\to S$. For every morphism $S'\\to S$ of separated finite-type $k$-schemes, the equality commutes with restriction to $S'$. For $r=0$ both maps are the identity. There is no assertion here about applying the smooth-pair frame definition to an arbitrary zero scheme.",
+ "statement": "In the finite setting [def-pur-conventions], let $S$ be a separated finite-type $k$-scheme and $r\\geq0$. In $E_r=\\mathbf A^r_S$ with coordinates $x_1,\\ldots,x_r$, put $E_j=\\{x_{j+1}=\\cdots=x_r=0\\}$, so $E_0=S$ and $a_j:E_{j-1}\\hookrightarrow E_j$ has equation $x_j=0$. Form $\\Theta_r:(z_r)_*A_S\\to A_{E_r}(r)[2r]$ by composing the Cartier supported morphisms along this chain exactly as in [lem-pur-flag-localized-product]. In the supported-Hom identification [lem-pur-supported-hom],\n$$\\Theta_r=(-1)^r\\,\\partial\\kappa(x_1)\\cup\\cdots\\cup\\partial\\kappa(x_r)\\in H^{2r}_{E_0}(E_r,A(r)).$$\nHere the $j$th factor on the right is the Kummer boundary for the divisor $\\{x_j=0\\}$ in the full ambient $E_r$, and the cup product is [def-pur-supported-cup]. Equivalently, when the frame construction [def-pur-frame-class] is read with its rank parameter instantiated by $r$ (independently of the coefficient index), this is $(-1)^r$ times the ordered coordinate frame class for the smooth pair $E_r\\to S$, $E_0\\to S$. For every morphism $S'\\to S$ of separated finite-type $k$-schemes, the equality commutes with restriction to $S'$. For $r=0$ both maps are the identity. There is no assertion here about applying the smooth-pair frame definition to an arbitrary zero scheme.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-localized-top-chern.proof.md",
   "place": "Step 3: coordinate comparison, corrected to the smooth zero-section pair on the total bundle"
@@ -17,7 +17,7 @@
  ],
  "proof": [
   {
-   "text": "For each $j\\geq1$ and $1\\leq l\\leq j$, put $D_{j,l}=V(x_l)\\subset E_j$. On an affine chart these are polynomial coordinate divisors: multiplication by $x_l$ is injective by comparison of polynomial coefficients, even over a nonreduced ring. Their intersections are defined by the sums of their coordinate ideals. Write $\\beta_{j,l}=\\partial\\kappa(x_l)\\in H^2_{D_{j,l}}(E_j,A(1))$. The local-equation formula in [lem-pur-divisor-class], followed by [lem-pur-cartier-class-agreement], says that its supported-Hom representative is $c_{D_{j,l},A}$. In particular $D_{j,j}=E_{j-1}$ and this representative is $d_j$ of [lem-pur-flag-localized-product]. These schemes are separated finite type, and coordinate divisors and their successive coordinate pullbacks remain Cartier, so the base-change assertion of [lem-amb-cartier-kummer-map] applies whenever used below.",
+   "text": "For each $j\\geq1$ and $1\\leq l\\leq j$, put $D_{j,l}=V(x_l)\\subset E_j$. On an affine chart these are polynomial coordinate divisors: multiplication by $x_l$ is injective by comparison of polynomial coefficients, even over a nonreduced ring. Their intersections are defined by the sums of their coordinate ideals. Write $\\beta_{j,l}=-\\partial\\kappa(x_l)\\in H^2_{D_{j,l}}(E_j,A(1))$. The corrected local-equation formula in [lem-pur-divisor-class], followed by [lem-pur-cartier-class-agreement], says that the negative boundary has supported-Hom representative $c_{D_{j,l},A}$. In particular $D_{j,j}=E_{j-1}$ and this representative is $d_j$ of [lem-pur-flag-localized-product]. These schemes are separated finite type, and coordinate divisors and their successive coordinate pullbacks remain Cartier, so the base-change assertion of [lem-amb-cartier-kummer-map] applies whenever used below.",
    "uses": [
     "def-sbc-affine-space",
     "lem-pur-divisor-class",
@@ -91,7 +91,7 @@
    }
   },
   {
-   "text": "For $j=0$, $Q_0$ and $\\Theta_0$ are both $\\operatorname{id}_{A_S}$. Suppose $[Q_{j-1}]=\\Theta_{j-1}$ as morphisms on $E_{j-1}$. Pulling the tensor-morphism representative of $R_j$ back along $a_j$ gives the representative of $a_j^*R_j=Q_{j-1}$: inverse image is exact by [prop-weil-pbc-proetale-constant-exact] and commutes with tensor and shifts by [lem-weil-pbc-ringed-projection-mate-exact], and the source multiplication comparison is the one checked in Step 4. Equivalently this follows factor by factor from [lem-pur-supported-cup-functoriality] and the explicit cup definition. Thus $a_j^*\\gamma_j=\\Theta_{j-1}$, as an equality on $E_{j-1}$. Apply the exact functor $(a_j)_*$ to this equality. Step 5 now gives\n$$[Q_j]=d_j(j-1)[2j-2]\\circ(a_j)_*\\Theta_{j-1}=\\Theta_j,$$\nwhere the last equality is the recurrence in [lem-pur-flag-localized-product]. No equality is inferred on $E_j$ merely from an equality after restriction to $E_{j-1}$: the specified pushforward and then $d_j$ are applied to both sides. At $j=r$, $Q_r$ is exactly the product of the full ambient coordinate boundaries required by the statement; [lem-pur-supported-hom] gives the asserted cohomology equality.",
+   "text": "For $j=0$, $Q_0$ and $\\Theta_0$ are both $\\operatorname{id}_{A_S}$. Suppose $[Q_{j-1}]=\\Theta_{j-1}$ as morphisms on $E_{j-1}$. Pulling the tensor-morphism representative of $R_j$ back along $a_j$ gives the representative of $a_j^*R_j=Q_{j-1}$: inverse image is exact by [prop-weil-pbc-proetale-constant-exact] and commutes with tensor and shifts by [lem-weil-pbc-ringed-projection-mate-exact], and the source multiplication comparison is the one checked in Step 4. Equivalently this follows factor by factor from [lem-pur-supported-cup-functoriality] and the explicit cup definition. Thus $a_j^*\\gamma_j=\\Theta_{j-1}$, as an equality on $E_{j-1}$. Apply the exact functor $(a_j)_*$ to this equality. Step 5 now gives\n$$[Q_j]=d_j(j-1)[2j-2]\\circ(a_j)_*\\Theta_{j-1}=\\Theta_j,$$\nwhere the last equality is the recurrence in [lem-pur-flag-localized-product]. No equality is inferred on $E_j$ merely from an equality after restriction to $E_{j-1}$: the specified pushforward and then $d_j$ are applied to both sides. At $j=r$, $Q_r$ is the product of the negatives of the full ambient coordinate boundaries. Bilinearity of the supported cup product gives $Q_r=(-1)^r\\,\\partial\\kappa(x_1)\\cup\\cdots\\cup\\partial\\kappa(x_r)$; [lem-pur-supported-hom] gives the asserted cohomology equality.",
    "uses": [
     "def-pur-supported-cup",
     "lem-weil-pbc-ringed-projection-mate-exact",
@@ -107,7 +107,7 @@
    }
   },
   {
-   "text": "For the frame interpretation, $E_r\\to S$ is smooth of relative dimension $r$ by [sbc-lem-affine-space-smooth], and $E_0=S\\to S$ is smooth of relative dimension zero. These schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian] applied over the field $k$. At $z\\in E_0$ the successive coordinate quotients of $\\mathcal O_{E_r,z}$ are the corresponding local rings of the coordinate subspaces. Each coordinate lies in the maximal ideal and is a nonzerodivisor, since the same is true in the polynomial ring before localization and after quotienting by any preceding coordinates. Applying [lem-weil-pbc-dimension-quotient-nonzerodivisor] at each quotient gives $\\dim\\mathcal O_{E_r,z}=\\dim\\mathcal O_{S,z}+r$. Hence the pure-codimension hypothesis in [def-pur-frame-class] holds. With its geometric rank parameter named $r$, independently of the coefficient index, the ordered coordinate frame defines exactly $Q_r$ by that definition. The empty frame for $r=0$ gives the identity, as does the nested construction.",
+   "text": "For the frame interpretation, $E_r\\to S$ is smooth of relative dimension $r$ by [sbc-lem-affine-space-smooth], and $E_0=S\\to S$ is smooth of relative dimension zero. These schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian] applied over the field $k$. At $z\\in E_0$ the successive coordinate quotients of $\\mathcal O_{E_r,z}$ are the corresponding local rings of the coordinate subspaces. Each coordinate lies in the maximal ideal and is a nonzerodivisor, since the same is true in the polynomial ring before localization and after quotienting by any preceding coordinates. Applying [lem-weil-pbc-dimension-quotient-nonzerodivisor] at each quotient gives $\\dim\\mathcal O_{E_r,z}=\\dim\\mathcal O_{S,z}+r$. Hence the pure-codimension hypothesis in [def-pur-frame-class] holds. With its geometric rank parameter named $r$, independently of the coefficient index, the ordered coordinate frame defines the product of the positive boundaries by that definition, so $Q_r$ is $(-1)^r$ times that frame class. The empty frame for $r=0$ gives the identity, as does the nested construction.",
    "uses": [
     "sbc-lem-affine-space-smooth",
     "lem-weil-pbc-finite-type-over-noetherian",
@@ -263,5 +263,184 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q27-e6cdf6b66 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, unit/chapter route, and source passages. Steps 3–5 establish the normalized projection comparison; Step 6 repairs the induction. Checked coefficient categories, supported base change, edge cases, duplicates, cycles, and step lengths. No repairs needed; findings and historical-audit limits recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FlagLocalComparison",
+  "declaration": "WeilConjectures.PurityFiniteSetting.flag_local_comparison",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.flagCoordinateSpace",
+   "WeilConjectures.PurityFiniteSetting.flagCoordinates",
+   "WeilConjectures.PurityFiniteSetting.flagCoordinateZero",
+   "WeilConjectures.PurityFiniteSetting.flagCoordinateInclusion",
+   "WeilConjectures.PurityFiniteSetting.flagCoordinateGeometry",
+   "WeilConjectures.PurityFiniteSetting.flagCoordinateZero_closed",
+   "WeilConjectures.PurityFiniteSetting.flagCoordinateInclusion_closed",
+   "WeilConjectures.PurityFiniteSetting.flagCoordinateEmptyRestriction",
+   "WeilConjectures.PurityFiniteSetting.FlagCoordinateThetaNormalization",
+   "WeilConjectures.PurityFiniteSetting.flagCoordinateTheta_existsUnique",
+   "WeilConjectures.PurityFiniteSetting.flagCoordinateThetaEtale",
+   "WeilConjectures.PurityFiniteSetting.flagCoordinateTheta",
+   "WeilConjectures.PurityFiniteSetting.flagCoordinateSupport_existsUnique",
+   "WeilConjectures.PurityFiniteSetting.flagCoordinateSupportIso",
+   "WeilConjectures.PurityFiniteSetting.flagCoordinateSupportIso_over",
+   "WeilConjectures.PurityFiniteSetting.flagCoordinateCup",
+   "WeilConjectures.PurityFiniteSetting.flagCoordinateBaseChange_cartesian",
+   "WeilConjectures.PurityFiniteSetting.flagCoordinateBaseChange",
+   "WeilConjectures.PurityFiniteSetting.flagCoordinateSmoothPair",
+   "WeilConjectures.PurityFiniteSetting.flagCoordinateEmptyProRestriction",
+   "WeilConjectures.PurityFiniteSetting.flag_local_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/FlagLocalComparison.lean",
+  "statement": "theorem flag_local_comparison (P : PurityFiniteSetting.{u}) {S : Scheme.{u}} (aS : S ⟶ Spec (.of P.field.k)) [IsSeparated aS] [LocallyOfFiniteType aS] [QuasiCompact aS] : (∀ r : ℕ, P.flagCoordinateTheta aS r = ((-1 : ℤ) ^ r) • P.flagCoordinateCup aS r) ∧ (∀ (T : Scheme.{u}) (aT : T ⟶ Spec (.of P.field.k)) [IsSeparated aT] [LocallyOfFiniteType aT] [QuasiCompact aT] (f : T ⟶ S) (_hf : f ≫ aS = aT) (r : ℕ), P.functorialCupPullback true (flagCoordinateZero S r) (flagCoordinateZero T r) (AffineSpace.map (ULift.{u} (Fin r)) f) f (flagCoordinateBaseChange f r) (flagCoordinateSpace S r ↘ S ≫ aS) (2 * (r : ℤ)) (r : ℤ) (P.flagCoordinateTheta aS r) = P.flagCoordinateTheta aT r ∧ P.functorialCupPullback true (flagCoordinateZero S r) (flagCoordinateZero T r) (AffineSpace.map (ULift.{u} (Fin r)) f) f (flagCoordinateBaseChange f r) (flagCoordinateSpace S r ↘ S ≫ aS) (2 * (r : ℤ)) (r : ℤ) (P.flagCoordinateCup aS r) = P.flagCoordinateCup aT r) ∧ HEq (P.flagCoordinateTheta aS 0) (localizedFlagInitialModel (cupCoefficientRestriction P (flagCoordinateZero S 0)) (P.flagCoordinateEmptyProRestriction S)) ∧ HEq (P.flagCoordinateCup aS 0) (localizedFlagInitialModel (cupCoefficientRestriction P (flagCoordinateZero S 0)) (P.flagCoordinateEmptyProRestriction S))",
+  "branch": "sheaf-dag",
+  "by": "NP",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-29c6dc21b",
+  "group": "NP",
+  "result": "pass",
+  "note": "Re-delivery of 98d05cfc (RETURN H3/H7, sign). The first part of the theorem is now flagCoordinateTheta = (-1)^r • flagCoordinateCup, which is correct: localizedFlagCartierClass restricts to -frameBoundary per the corrected lem-pur-divisor-class (live DivisorLocalEquations lines 113-116) and lem-pur-cartier-class-agreement, and bilinearity gives (-1)^r. The statement_change old_statement/old_proof match the live node exactly. The sole citer thm-pur-localized-top-chern is holds:false (correct: Step 9 uses the unsigned identification). Proof Steps 1/6/7 rewritten consistently. The module diff vs 98d05cfc is only docstrings plus that part of the theorem. Hypotheses, affine tower, unique Θ, ambient frame product, base-change and rank-0 HEq parts are unchanged and correct. The statement is verbatim and all 21 declarations are present. Worker report, Statement corrected and Second reading by NP sections are present. nt_compile --json: clean in 21.4 s (load ~196). Maintainer note: the def-pur-frame-class Lean interface ties rank to P.level.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-19",
+  "by": "NP stage 2",
+  "old_statement": "In the finite setting [def-pur-conventions], let $S$ be a separated finite-type $k$-scheme and $r\\geq0$. In $E_r=\\mathbf A^r_S$ with coordinates $x_1,\\ldots,x_r$, put $E_j=\\{x_{j+1}=\\cdots=x_r=0\\}$, so $E_0=S$ and $a_j:E_{j-1}\\hookrightarrow E_j$ has equation $x_j=0$. Form $\\Theta_r:(z_r)_*A_S\\to A_{E_r}(r)[2r]$ by composing the Cartier supported morphisms along this chain exactly as in [lem-pur-flag-localized-product]. In the supported-Hom identification [lem-pur-supported-hom],\n$$\\Theta_r=\\partial\\kappa(x_1)\\cup\\cdots\\cup\\partial\\kappa(x_r)\\in H^{2r}_{E_0}(E_r,A(r)).$$\nHere the $j$th factor on the right is the Kummer boundary for the divisor $\\{x_j=0\\}$ in the full ambient $E_r$, and the cup product is [def-pur-supported-cup]. Equivalently, when the frame construction [def-pur-frame-class] is read with its rank parameter instantiated by $r$ (independently of the coefficient index), this is the ordered coordinate frame class for the smooth pair $E_r\\to S$, $E_0\\to S$. For every morphism $S'\\to S$ of separated finite-type $k$-schemes, the equality commutes with restriction to $S'$. For $r=0$ both maps are the identity. There is no assertion here about applying the smooth-pair frame definition to an arbitrary zero scheme.",
+  "what": "The unsigned equality is false for odd r: the corrected lem-pur-divisor-class local-equation formula and lem-pur-cartier-class-agreement identify each normalized Cartier map with -boundary(kappa(x_j)). For A = F_3, k an algebraic closure of F_2, S = Spec(k), r = 1, the boundary has residue 1, which differs from its negative. Bilinearity gives the necessary factor (-1)^r; the frame class itself retains positive boundaries.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-localized-top-chern.proof.md",
+   "place": "Step 3: coordinate comparison on the smooth zero-section pair; read with the corrected Yoneda local-equation sign of lem-pur-divisor-class, clause (a), and lem-pur-cartier-class-agreement."
+  },
+  "citers": [
+   {
+    "id": "thm-pur-localized-top-chern",
+    "holds": false,
+    "note": "Proof Step 9 identifies Theta_r with the positive coordinate product/local value of u; that identification needs the factor (-1)^r, so the unsigned proof use fails in odd rank."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "For each $j\\geq1$ and $1\\leq l\\leq j$, put $D_{j,l}=V(x_l)\\subset E_j$. On an affine chart these are polynomial coordinate divisors: multiplication by $x_l$ is injective by comparison of polynomial coefficients, even over a nonreduced ring. Their intersections are defined by the sums of their coordinate ideals. Write $\\beta_{j,l}=\\partial\\kappa(x_l)\\in H^2_{D_{j,l}}(E_j,A(1))$. The local-equation formula in [lem-pur-divisor-class], followed by [lem-pur-cartier-class-agreement], says that its supported-Hom representative is $c_{D_{j,l},A}$. In particular $D_{j,j}=E_{j-1}$ and this representative is $d_j$ of [lem-pur-flag-localized-product]. These schemes are separated finite type, and coordinate divisors and their successive coordinate pullbacks remain Cartier, so the base-change assertion of [lem-amb-cartier-kummer-map] applies whenever used below.",
+    "uses": [
+     "def-sbc-affine-space",
+     "lem-pur-divisor-class",
+     "lem-pur-cartier-class-agreement",
+     "lem-pur-flag-localized-product",
+     "lem-amb-cartier-kummer-map"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-localized-top-chern.proof.md",
+     "place": "Step 3: coordinate comparison, corrected to the smooth zero-section pair on the total bundle"
+    }
+   },
+   {
+    "text": "Define $Q_j=\\beta_{j,1}\\cup\\cdots\\cup\\beta_{j,j}\\in H^{2j}_{E_0}(E_j,A(j))$, with $Q_0=1$ on $E_0=S$. Let $p_j:E_j\\to E_{j-1}$ forget $x_j$, so $p_ja_j=\\operatorname{id}$. Put $C_j=V(x_1,\\ldots,x_{j-1})\\subset E_j$ and $R_j=p_j^*Q_{j-1}$. By [lem-pur-supported-cup-functoriality] and Step 1, $R_j$ is the product of the first $j-1$ coordinate classes in $E_j$, and $a_j^*R_j=Q_{j-1}$. The supports here are $p_j^{-1}(E_0)=C_j$ and $C_j\\times_{E_j}E_{j-1}=E_0$. By [lem-pur-supported-hom], write its representative as $\\gamma_j:P_{C_j}\\to L_j$, where $P_C=(C\\hookrightarrow E_j)_*A_C$ and $L_j=A_{E_j}(j-1)[2j-2]$. Thus $Q_j=R_j\\cup\\beta_{j,j}$. We will prove $Q_j=\\Theta_j$ by induction, with both sides interpreted as morphisms on the same $E_j$.",
+    "uses": [
+     "def-pur-supported-cup",
+     "lem-pur-supported-cup-functoriality",
+     "lem-pur-supported-hom",
+     "lem-pur-flag-localized-product"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-localized-top-chern.proof.md",
+     "place": "Step 3: coordinate comparison, corrected to the smooth zero-section pair on the total bundle"
+    }
+   },
+   {
+    "text": "Fix $j\\geq1$ and abbreviate $X=E_j$, $D=E_{j-1}$, $a=a_j$, $P_D=a_*A_D$. Let $u:X\\setminus D\\hookrightarrow X$. On each affine chart $u$ is the principal open $D(x_j)$, hence is quasi-compact. The functor $a^*$ is exact by [prop-weil-pbc-proetale-constant-exact]; $a_*$ is exact, $a^*a_*\\cong1$, and $u^*a_*=0$ by [lem-weil-pbc-proetale-ringed-open-closed]. Let\n$$\\rho_K:K\\otimes_A^LP_D\\longrightarrow a_*a^*K$$\nbe the symmetry-ordered projection mate $\\pi_{a;A_D,K}$ of [lem-weil-pbc-ringed-projection-mate-exact]. This is an isomorphism for the objects used here. Indeed $P_D$ is flat by [def-pur-supported-cup], so the source is the termwise tensor $K^t\\otimes P_D$. Its restriction to $X\\setminus D$ is zero. The unit $K^t\\otimes P_D\\to a_*a^*(K^t\\otimes P_D)$ is therefore an isomorphism by [lem-exc-proetale-closed-essential-image]. Identifying $a^*P_D=A_D$ gives the displayed target termwise. This unit composite is exactly $\\rho_K$: its adjunct is the tensor comparison followed by the closed counit $a^*P_D\\to A_D$, which is the defining adjunct of the projection mate. Exactness lets these termwise identifications pass to derived categories.",
+    "uses": [
+     "lem-weil-pbc-proetale-ringed-open-closed",
+     "lem-weil-pbc-ringed-projection-mate-exact",
+     "def-pur-supported-cup",
+     "lem-exc-proetale-closed-essential-image",
+     "prop-weil-pbc-proetale-constant-exact"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/proetale.tex",
+     "place": "Tags 09AH (lemma-ses-associated-to-open), 09AA (lemma-closed-immersion), 09BM (lemma-closed-immersion-complement-retrocompact-exact), with sites-cohomology.tex Tag 0B56 (equation-projection-formula-map): the unit computation of the closed projection mate."
+    }
+   },
+   {
+    "text": "For $C=C_j$, let $\\mu:P_C\\otimes_A^LP_D\\xrightarrow{\\sim}(z_j)_*A_S$ be the specified multiplication isomorphism of [def-pur-supported-cup]. Its section formula is restriction to $E_0=C\\cap D$ followed by multiplication. The same formula is the projection mate on these coefficients: its adjunct restricts the first factor to $D$ and multiplies by the second factor in $A_D$. Applying $a^*$ and using $a^*a_*\\cong1$ identifies $a^*P_C$ with $(z_{j-1})_*A_S$; the resulting $\\rho_{P_C}\\mu^{-1}$ is the identity on $a_*(z_{j-1})_*A_S=(z_j)_*A_S$. This fixes the supported-source comparison by its quotient generators, rather than by an unspecified isomorphism. On $K=L_j$ the same projection formula is\n$$\\rho_{L_j}:L_j\\otimes_A^LP_D\\xrightarrow{\\sim}a_*\\bigl(A_D(j-1)[2j-2]\\bigr).$$\nIt is the twist comparison used in [lem-pur-flag-localized-product]: locally a twist is a free rank-one degree-zero sheaf by [lem-pur-twist-sheaf-locally-free], and both maps send $l\\otimes b$ to $b\\,a^*l$. Shifts use the projection mate's shift comparison; these degree-zero sheaf maps agree on local generators and under change of basis, so sheaf gluing gives equality before shifting.",
+    "uses": [
+     "def-pur-supported-cup",
+     "lem-weil-pbc-proetale-ringed-open-closed",
+     "lem-weil-pbc-ringed-projection-mate-exact",
+     "lem-pur-flag-localized-product",
+     "lem-pur-twist-sheaf-locally-free"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/sites-cohomology.tex",
+     "place": "Tag 0B56 (equation-projection-formula-map), compared with the specified multiplication of closed constants in def-pur-supported-cup; quotient-generator and twist normalization by the agent."
+    }
+   },
+   {
+    "text": "Naturality of the projection mate in $K$, applied to $\\gamma_j:P_C\\to L_j$, gives the typed identity\n$$\\rho_{L_j}(\\gamma_j\\otimes1_{P_D})\\mu^{-1}=(a_j)_*(a_j^*\\gamma_j): (z_j)_*A_S\\longrightarrow(a_j)_*a_j^*L_j.$$\nHere the source comparison is exactly Step 4. Functoriality of tensor [lem-weil-derived-tensor-functorial] factors $\\gamma_j\\otimes d_j$ as $(1_{L_j}\\otimes d_j)(\\gamma_j\\otimes1_{P_D})$. Consequently the defining tensor formula in [def-pur-supported-cup] represents $Q_j=R_j\\cup\\beta_{j,j}$ by\n$$\\sigma\\,(1_{L_j}\\otimes d_j)\\rho_{L_j}^{-1}(a_j)_*(a_j^*\\gamma_j).$$\nThe map $\\sigma$ is the specified shift comparison followed by twist multiplication. By Step 4 the first three factors are precisely $d_j(j-1)[2j-2]$. To order the factors as in that notation use tensor symmetry: its sign is $(-1)^{(2j-2)2}=1$, and the shift comparisons are those of [lem-pur-shifted-tensor-morphism-calculus]. We have therefore proved the actual nested-composition formula\n$$[Q_j]=d_j(j-1)[2j-2]\\circ(a_j)_*(a_j^*\\gamma_j).$$",
+    "uses": [
+     "lem-weil-pbc-ringed-projection-mate-exact",
+     "lem-weil-derived-tensor-functorial",
+     "def-pur-supported-cup",
+     "lem-pur-shifted-tensor-morphism-calculus",
+     "lem-pur-flag-localized-product"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/sites-cohomology.tex",
+     "place": "Tag 0B56 (equation-projection-formula-map), naturality of its adjunct; signed tensor-morphism calculation as specified by lem-pur-shifted-tensor-morphism-calculus."
+    }
+   },
+   {
+    "text": "For $j=0$, $Q_0$ and $\\Theta_0$ are both $\\operatorname{id}_{A_S}$. Suppose $[Q_{j-1}]=\\Theta_{j-1}$ as morphisms on $E_{j-1}$. Pulling the tensor-morphism representative of $R_j$ back along $a_j$ gives the representative of $a_j^*R_j=Q_{j-1}$: inverse image is exact by [prop-weil-pbc-proetale-constant-exact] and commutes with tensor and shifts by [lem-weil-pbc-ringed-projection-mate-exact], and the source multiplication comparison is the one checked in Step 4. Equivalently this follows factor by factor from [lem-pur-supported-cup-functoriality] and the explicit cup definition. Thus $a_j^*\\gamma_j=\\Theta_{j-1}$, as an equality on $E_{j-1}$. Apply the exact functor $(a_j)_*$ to this equality. Step 5 now gives\n$$[Q_j]=d_j(j-1)[2j-2]\\circ(a_j)_*\\Theta_{j-1}=\\Theta_j,$$\nwhere the last equality is the recurrence in [lem-pur-flag-localized-product]. No equality is inferred on $E_j$ merely from an equality after restriction to $E_{j-1}$: the specified pushforward and then $d_j$ are applied to both sides. At $j=r$, $Q_r$ is exactly the product of the full ambient coordinate boundaries required by the statement; [lem-pur-supported-hom] gives the asserted cohomology equality.",
+    "uses": [
+     "def-pur-supported-cup",
+     "lem-weil-pbc-ringed-projection-mate-exact",
+     "lem-pur-supported-cup-functoriality",
+     "lem-pur-flag-localized-product",
+     "lem-pur-supported-hom",
+     "prop-weil-pbc-proetale-constant-exact"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-localized-top-chern.proof.md",
+     "place": "Step 3: coordinate comparison, corrected to the smooth zero-section pair on the total bundle"
+    }
+   },
+   {
+    "text": "For the frame interpretation, $E_r\\to S$ is smooth of relative dimension $r$ by [sbc-lem-affine-space-smooth], and $E_0=S\\to S$ is smooth of relative dimension zero. These schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian] applied over the field $k$. At $z\\in E_0$ the successive coordinate quotients of $\\mathcal O_{E_r,z}$ are the corresponding local rings of the coordinate subspaces. Each coordinate lies in the maximal ideal and is a nonzerodivisor, since the same is true in the polynomial ring before localization and after quotienting by any preceding coordinates. Applying [lem-weil-pbc-dimension-quotient-nonzerodivisor] at each quotient gives $\\dim\\mathcal O_{E_r,z}=\\dim\\mathcal O_{S,z}+r$. Hence the pure-codimension hypothesis in [def-pur-frame-class] holds. With its geometric rank parameter named $r$, independently of the coefficient index, the ordered coordinate frame defines exactly $Q_r$ by that definition. The empty frame for $r=0$ gives the identity, as does the nested construction.",
+    "uses": [
+     "sbc-lem-affine-space-smooth",
+     "lem-weil-pbc-finite-type-over-noetherian",
+     "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+     "def-pur-frame-class",
+     "lem-pur-flag-localized-product"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-localized-top-chern.proof.md",
+     "place": "Step 3: coordinate comparison, corrected to the smooth zero-section pair on the total bundle"
+    }
+   },
+   {
+    "text": "Let $S'\\to S$ be a morphism as in the statement and $v:E'_r\\to E_r$ its affine-space base change. The coordinate divisor $D_{r,l}$ pulls back to $D'_{r,l}$, again Cartier. By [lem-amb-cartier-kummer-map] and [lem-pur-cartier-class-agreement], $v^*\\beta_{r,l}=\\beta'_{r,l}$. The pullback and cup identities of [lem-pur-supported-cup-functoriality] give $v^*Q_r=Q'_r$. Apply the already established equality both over $S$ and over $S'$ to obtain $v^*\\Theta_r=v^*Q_r=Q'_r=\\Theta'_r$ under the same supported-source and twist comparisons. This proves restriction compatibility without assuming that restriction from a closed subspace detects a morphism.",
+    "uses": [
+     "lem-amb-cartier-kummer-map",
+     "lem-pur-cartier-class-agreement",
+     "lem-pur-supported-cup-functoriality"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-localized-top-chern.proof.md",
+     "place": "Step 3: coordinate comparison, corrected to the smooth zero-section pair on the total bundle"
+    }
+   }
+  ]
  }
 }
