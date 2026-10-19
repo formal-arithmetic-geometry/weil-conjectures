@@ -5,7 +5,7 @@ Authors: SHEAF group U1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Topology.Sheaves.Stalks
 public import Mathlib.CategoryTheory.Sites.LeftExact

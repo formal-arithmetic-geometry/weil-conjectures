@@ -6,7 +6,7 @@ Authors: SHEAF group Q2
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullbackAcrossUniverses
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 import Mathlib.CategoryTheory.ObjectProperty.Equivalence
 
 /-! # Transport of a quasi-coherent direct-image adjunction to standard localizations

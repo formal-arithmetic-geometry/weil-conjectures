@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.Picard.CanonicalSingleDirectImageComparison
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 
 /-! # Degree-zero normalization of the canonical direct-image unit
 

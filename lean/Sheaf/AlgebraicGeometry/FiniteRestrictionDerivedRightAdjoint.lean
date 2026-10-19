@@ -5,7 +5,7 @@ Authors: SHEAF group Q2
 module
 
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 import Sheaf.AlgebraicGeometry.FiniteSheafHomAffineAdjoint
 import Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule

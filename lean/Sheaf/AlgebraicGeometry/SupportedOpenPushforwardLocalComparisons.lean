@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroStalkOutside
 import Sheaf.AlgebraicGeometry.SupportedDerivedRestrictionZero

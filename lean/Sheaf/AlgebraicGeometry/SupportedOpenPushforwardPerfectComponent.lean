@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 import Sheaf.AlgebraicGeometry.OpenRestrictionPerfectLocalModels
 import Sheaf.AlgebraicGeometry.SupportedOpenPushforwardComplementZero
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction

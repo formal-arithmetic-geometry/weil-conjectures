@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V2
 -/
 module
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
 public import Sheaf.AlgebraicGeometry.PerfectObjectCompact
 public import Mathlib.AlgebraicGeometry.Noetherian

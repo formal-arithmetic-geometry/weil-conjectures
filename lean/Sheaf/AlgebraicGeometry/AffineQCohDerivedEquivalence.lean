@@ -6,11 +6,11 @@ Authors: SHEAF group S1
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.CategoryTheory.Triangulated.Functor
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceShift
 import Sheaf.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullbackAcrossUniverses
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 import Sheaf.AlgebraicGeometry.SchemeDerivedStandardEquivalenceMonoidal
 import Sheaf.AlgebraicGeometry.DerivedPullbackAcrossUniversesLeftDerived
 import Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalModel

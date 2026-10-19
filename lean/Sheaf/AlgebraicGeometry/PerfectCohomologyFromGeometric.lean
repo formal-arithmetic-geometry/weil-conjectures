@@ -23,7 +23,7 @@ import Sheaf.AlgebraicGeometry.LerayDegenerateSections
 import Sheaf.AlgebraicGeometry.AffineHigherDirectImageCohomologyVanishing
 import Sheaf.AlgebraicGeometry.ProperFlatSingleDerivedDirectImagePerfect
 import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 
 /-! # Finite projective complex models for cohomology over an affine base
 

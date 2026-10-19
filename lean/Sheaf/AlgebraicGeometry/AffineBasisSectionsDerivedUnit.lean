@@ -5,7 +5,7 @@ Authors: SHEAF group G2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 import Sheaf.AlgebraicGeometry.AffineBasisSectionsResolutionHomologyMono
 import Sheaf.AlgebraicGeometry.AffineBasisSectionsResolutionHomologyEpi

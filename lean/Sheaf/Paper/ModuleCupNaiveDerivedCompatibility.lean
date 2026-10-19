@@ -8,7 +8,7 @@ module
 public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import Sheaf.Paper.ModuleCupKInjectiveTarget
 

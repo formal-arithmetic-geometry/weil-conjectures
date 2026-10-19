@@ -5,7 +5,7 @@ Authors: SHEAF group Q4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 import WeilConjectures.CategoryTheory.Abelian.DerivedBottomUnitNormalization
 import Sheaf.AlgebraicGeometry.QCohAcyclicDerivedPushforwardCohomology

@@ -14,7 +14,7 @@ import Sheaf.AlgebraicGeometry.Picard.CanonicalSingleAdjunctionTranspose
 import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackSquare
 import Sheaf.AlgebraicGeometry.Picard.CanonicalDirectImageH0Unit
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Degree-zero compatibility square for the canonical mate

@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 import Sheaf.AlgebraicGeometry.NoetherianDerivedDirectImageRightAdjoint
 import Sheaf.AlgebraicGeometry.SmoothDiagonalKoszulRegular
 import Sheaf.AlgebraicGeometry.PerfectDiagonalDualizingEvaluation

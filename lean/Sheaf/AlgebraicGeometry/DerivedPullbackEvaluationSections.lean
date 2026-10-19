@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalModel
 public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.Algebra.Homology.RhomGlobalSections
 import Sheaf.AlgebraicGeometry.DerivedAdjoint
 import Sheaf.AlgebraicGeometry.DerivedTensorHomSectionsUnit
