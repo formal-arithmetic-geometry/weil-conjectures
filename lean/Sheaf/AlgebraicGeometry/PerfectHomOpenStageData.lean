@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
 import Sheaf.AlgebraicGeometry.DerivedPullbackPerfect
 import Mathlib.CategoryTheory.Localization.Equivalence

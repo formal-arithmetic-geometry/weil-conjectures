@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import WeilConjectures.AlgebraicGeometry.PerfectClosedImmersion
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.Algebra.Homology.Single
@@ -15,7 +15,7 @@ import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 import Sheaf.RingTheory.KoszulRegularSequenceDualComplex
 import WeilConjectures.AlgebraicGeometry.AffineQuotientResolutionSheafification
-import Sheaf.AlgebraicGeometry.AffineFiniteFreeResolutionPerfectModel
+import WeilConjectures.AlgebraicGeometry.AffineFiniteFreeResolutionPerfectModel
 
 /-!
 # Koszul-regular closed immersions are perfect

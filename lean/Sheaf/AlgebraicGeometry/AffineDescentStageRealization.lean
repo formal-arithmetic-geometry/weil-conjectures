@@ -6,7 +6,7 @@ Authors: SHEAF group U1
 module
 
 public import Sheaf.AlgebraicGeometry.AffineDescentRingDiagram
-import Sheaf.AlgebraicGeometry.PerfectComplex
+import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Sheaf.AlgebraicGeometry.AffineKFlatPullbackChartComparison
 import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat

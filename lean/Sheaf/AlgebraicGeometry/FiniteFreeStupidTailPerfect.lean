@@ -5,7 +5,7 @@ Authors: SHEAF group Q4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Algebra.Homology.Embedding.StupidTrunc
 
 /-! # Perfectness of finite-free stupid tails

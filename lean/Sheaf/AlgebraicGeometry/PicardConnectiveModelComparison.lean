@@ -6,7 +6,7 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.AlgebraicGeometry.PicardOrdinaryModelCycles
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.PicardDerivedModelSections
 import WeilConjectures.AlgebraicGeometry.ConnectiveSingleHom
 import Sheaf.AlgebraicGeometry.PicardTermwiseModelComparison

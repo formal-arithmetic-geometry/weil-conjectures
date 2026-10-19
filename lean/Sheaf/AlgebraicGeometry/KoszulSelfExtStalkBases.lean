@@ -22,7 +22,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Sheaf.AlgebraicGeometry.KoszulSelfExtPullbackLocalFrame
 import WeilConjectures.RingTheory.KoszulConormalBasis
-import Sheaf.AlgebraicGeometry.AffineConormalFrame
+import WeilConjectures.AlgebraicGeometry.AffineConormalFrame
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafLocalFreeComparison
 
 /-! # Finite bases for self Ext and exterior stalks on a Koszul chart

@@ -6,7 +6,7 @@ Authors: SHEAF group V1
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Topology.QuasiSeparated
 import Sheaf.AlgebraicGeometry.SupportedPerfectDetectorAffineConstruction
 import Sheaf.AlgebraicGeometry.SupportedDerivedRestrictionZero

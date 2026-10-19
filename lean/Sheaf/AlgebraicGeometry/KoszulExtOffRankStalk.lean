@@ -17,7 +17,7 @@ public import Mathlib.LinearAlgebra.Dimension.Finrank
 
 import Sheaf.RingTheory.KoszulRegularSequenceDualComplex
 import WeilConjectures.RingTheory.KoszulConormalBasis
-import Sheaf.AlgebraicGeometry.AffineConormalFrame
+import WeilConjectures.AlgebraicGeometry.AffineConormalFrame
 import Sheaf.AlgebraicGeometry.AffineKoszulScalarExtComparison
 import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 

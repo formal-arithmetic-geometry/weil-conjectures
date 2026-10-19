@@ -6,7 +6,7 @@ Authors: SHEAF group G4
 module
 
 public import WeilConjectures.AlgebraicGeometry.PicardUniversalSingleRankMatch
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper

@@ -5,7 +5,7 @@ Authors: SHEAF group S4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import WeilConjectures.AlgebraicGeometry.AffineSectionsComplexCounit

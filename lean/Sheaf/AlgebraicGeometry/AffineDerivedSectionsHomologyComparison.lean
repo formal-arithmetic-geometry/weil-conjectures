@@ -5,7 +5,7 @@ public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.AlgebraicGeometry.AffineDerivedSectionsTruncationIso
-import Sheaf.AlgebraicGeometry.AffineDerivedSectionsTruncatedBottom
+import WeilConjectures.AlgebraicGeometry.AffineDerivedSectionsTruncatedBottom
 
 /-! # Cohomology of derived affine sections
 

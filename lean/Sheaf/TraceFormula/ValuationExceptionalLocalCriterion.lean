@@ -12,7 +12,7 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.RingTheory.Valuation.ValuationSubring
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.Topology.KrullDimension
-import Sheaf.AlgebraicGeometry.PerfectComplex
+import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectBaseChange
 import Sheaf.TraceFormula.CurveP1TreeLocalCriterion
 import Sheaf.AlgebraicGeometry.GeometricallyReducedEtaNormal

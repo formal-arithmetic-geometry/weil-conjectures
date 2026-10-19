@@ -6,7 +6,7 @@ Authors: SHEAF group U1
 module
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
 public import Mathlib.CategoryTheory.Adjunction.Additive
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.AffineKFlatResiduePullbackModel
 import WeilConjectures.AlgebraicGeometry.AffineResidueScalarTransport
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf

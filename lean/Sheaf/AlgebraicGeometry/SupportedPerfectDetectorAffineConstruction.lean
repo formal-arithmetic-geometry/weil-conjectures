@@ -6,7 +6,7 @@ Authors: SHEAF groups V1 and X2
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.KoszulOpenOrthogonality
 import Sheaf.AlgebraicGeometry.AffineDerivedOpenTransport
 import Sheaf.AlgebraicGeometry.AffineKoszulGeometricProperties

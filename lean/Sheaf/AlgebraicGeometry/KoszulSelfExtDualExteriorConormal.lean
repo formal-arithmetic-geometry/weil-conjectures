@@ -20,7 +20,7 @@ import Sheaf.AlgebraicGeometry.KoszulSelfExtConormalComparisonSurjection
 import Sheaf.AlgebraicGeometry.KoszulSelfExtStalkBases
 import Sheaf.AlgebraicGeometry.DeterminantDualPairing
 import Sheaf.AlgebraicGeometry.DeterminantDualPairingLocal
-import Sheaf.AlgebraicGeometry.AffineConormalFrame
+import WeilConjectures.AlgebraicGeometry.AffineConormalFrame
 import WeilConjectures.RingTheory.KoszulConormalBasis
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRestrictIso
 import Mathlib.RingTheory.FiniteType

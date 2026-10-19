@@ -5,7 +5,7 @@ Authors: SHEAF group S4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import WeilConjectures.Algebra.Homology.OpenExtensionRestrictionIso
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import Sheaf.AlgebraicGeometry.OpenPerfectModelTransport

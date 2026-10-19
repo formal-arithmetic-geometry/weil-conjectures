@@ -6,7 +6,7 @@ Authors: SHEAF group D4
 module
 
 public import Sheaf.AlgebraicGeometry.StrictPerfectRelativeTensorComplex
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.DerivedTensorOpenRestrictionUniverses
 import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison

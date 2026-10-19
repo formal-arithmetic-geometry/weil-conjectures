@@ -19,7 +19,7 @@ import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import Sheaf.AlgebraicGeometry.BoundedComplexTensorProperSupportBound
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
-import Sheaf.AlgebraicGeometry.PerfectComplex
+import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.PerfectTensorBoundedCoherent
 import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 

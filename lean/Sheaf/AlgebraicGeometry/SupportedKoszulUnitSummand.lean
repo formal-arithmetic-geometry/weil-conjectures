@@ -5,7 +5,7 @@ Authors: SHEAF group B2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Topology.QuasiSeparated
 public import Mathlib.CategoryTheory.Retract
 import Sheaf.AlgebraicGeometry.SupportedKoszulRelativeDetector

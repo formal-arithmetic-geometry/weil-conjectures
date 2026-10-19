@@ -19,7 +19,7 @@ public import Mathlib.LinearAlgebra.Dimension.Finrank
 import Sheaf.AlgebraicGeometry.KoszulExtCoefficientStalkIso
 import Sheaf.AlgebraicGeometry.KoszulSelfExtExterior
 import WeilConjectures.RingTheory.KoszulConormalBasis
-import Sheaf.AlgebraicGeometry.AffineConormalFrame
+import WeilConjectures.AlgebraicGeometry.AffineConormalFrame
 import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
 /-! # Constant-rank top scalar Koszul Ext

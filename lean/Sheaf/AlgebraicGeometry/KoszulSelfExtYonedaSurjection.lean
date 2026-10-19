@@ -19,7 +19,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 import Sheaf.AlgebraicGeometry.KoszulSelfExtDualExteriorConormal
 import Sheaf.AlgebraicGeometry.DeterminantDualPairing
 import Sheaf.AlgebraicGeometry.DeterminantDualPairingLocal
-import Sheaf.AlgebraicGeometry.AffineConormalFrame
+import WeilConjectures.AlgebraicGeometry.AffineConormalFrame
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRestrictIso
 import WeilConjectures.RingTheory.KoszulConormalBasis
 

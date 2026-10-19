@@ -2,7 +2,7 @@ module
 public import Sheaf.AlgebraicGeometry.SelfTorAffineSection
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.AffineConormalSections
+import WeilConjectures.AlgebraicGeometry.AffineConormalSections
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafAffineUnit
 import Sheaf.AlgebraicGeometry.SelfTorConormalExteriorSectionModel
 @[expose] public section

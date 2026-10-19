@@ -5,7 +5,7 @@ Authors: SHEAF group H2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.BoundedFreeStalkComplexLift
 import Sheaf.AlgebraicGeometry.PerfectStalkDerivedIsoSpread

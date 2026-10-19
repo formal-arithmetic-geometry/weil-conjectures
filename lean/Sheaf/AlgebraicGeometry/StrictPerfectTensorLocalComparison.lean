@@ -5,7 +5,7 @@ Authors: SHEAF group R1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.Algebra.Homology.KFlat
 import Sheaf.AlgebraicGeometry.LocalizedOpenKFlatTensorRestriction
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed

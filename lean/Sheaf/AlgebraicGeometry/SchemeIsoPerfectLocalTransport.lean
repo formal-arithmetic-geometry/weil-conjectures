@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import all Sheaf.AlgebraicGeometry.DerivedPullbackPerfect
 import all Sheaf.AlgebraicGeometry.SchemeIsoDerivedRestrictionSquare
 

@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.PicardOrdinaryModelCycles
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.PicardDerivedModelSections
 import Sheaf.AlgebraicGeometry.PicardOrdinaryAffineDifferentialFrames
 import Sheaf.AlgebraicGeometry.PicardTensorFrameRestriction

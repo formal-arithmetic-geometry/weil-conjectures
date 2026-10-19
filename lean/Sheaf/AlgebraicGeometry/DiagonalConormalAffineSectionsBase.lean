@@ -1,7 +1,7 @@
 module
 
 public import WeilConjectures.AlgebraicGeometry.DiagonalConormalDerivation
-import Sheaf.AlgebraicGeometry.AffineConormalSections
+import WeilConjectures.AlgebraicGeometry.AffineConormalSections
 import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import WeilConjectures.AlgebraicGeometry.DiagonalConormal
 import Sheaf.AlgebraicGeometry.DiagonalConormalAffineSectionsChosen

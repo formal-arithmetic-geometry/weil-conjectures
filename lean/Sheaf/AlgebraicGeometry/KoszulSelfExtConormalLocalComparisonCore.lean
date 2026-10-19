@@ -16,7 +16,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
 import Sheaf.AlgebraicGeometry.KoszulSelfExtPullbackLocalFrame
-import Sheaf.AlgebraicGeometry.AffineConormalFrame
+import WeilConjectures.AlgebraicGeometry.AffineConormalFrame
 import WeilConjectures.RingTheory.KoszulConormalBasis
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafLocalFreeComparison
 

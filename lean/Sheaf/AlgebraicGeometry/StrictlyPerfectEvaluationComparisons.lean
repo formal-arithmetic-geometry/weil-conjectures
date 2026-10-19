@@ -15,7 +15,7 @@ import Sheaf.AlgebraicGeometry.StrictlyPerfectKInjectiveEvaluationComparisons
 import Sheaf.Algebra.Homology.DerivedInternalHom
 import Sheaf.Algebra.Homology.HomComplex
 import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-import Sheaf.AlgebraicGeometry.PerfectComplex
+import WeilConjectures.AlgebraicGeometry.PerfectComplex
 
 /-! # Compatible comparison isomorphisms for an ordinary evaluation map
 

@@ -15,7 +15,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import Sheaf.AlgebraicGeometry.AffineConormalFrame
+import WeilConjectures.AlgebraicGeometry.AffineConormalFrame
 import WeilConjectures.RingTheory.KoszulConormalBasis
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 
