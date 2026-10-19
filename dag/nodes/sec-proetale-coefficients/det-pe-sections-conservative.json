@@ -33,10 +33,10 @@
    }
   },
   {
-   "text": "By [det-pe-wcb-cover], every site object $V$ admits a covering $\\{W_i\\to V\\}$ with $W_i=\\operatorname{Spec}D_i$ and $D_i$ w-contractible. The last assertion of [det-pe-weak-contractible-equivalences] says each such affine is weakly contractible. Consequently every $V$ has a covering by objects of $\\mathcal W$. Only this inclusion is used; we do not assume the converse between ring-theoretic w-contractibility and weak contractibility of an affine site object.",
+   "text": "By [det-pe-wcb-cover], every site object V admits a covering by objects W_i with an isomorphism Spec D_i ≅ W_i.left and D_i w-contractible. Affineness transfers across this isomorphism. Apply the closed source theorem isWeaklyContractible_of_iso, recorded by [lem-weil-pbc-source-affine-wcontractible-evaluation], to its inverse. This makes each W_i weakly contractible in the full module universe max u (t+1). No equivalence with representable projectivity is needed.",
    "uses": [
     "det-pe-wcb-cover",
-    "det-pe-weak-contractible-equivalences"
+    "lem-weil-pbc-source-affine-wcontractible-evaluation"
    ],
    "elementary": false,
    "source": {
@@ -45,10 +45,9 @@
    }
   },
   {
-   "text": "Assume the sequence is exact and fix any $W\\in\\mathcal W$. In step 1 the underlying abelian map $u:A\\to Z$ is locally surjective. Its underlying map of sheaves of sets is therefore epic by [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective]. Part 3 of [det-pe-weak-contractible-equivalences] makes $A(W)\\to Z(W)$ surjective. Since $Z(W)=\\ker(g(W))$ by [def-weil-sheaf-of-modules-category], every element of the evaluated kernel is in the image of $f(W)$; the opposite inclusion follows from $gf=0$. This proves the forward implication of clause 1 for every affine weakly contractible $W$, not only those furnished by the ring-theoretic covering theorem.",
+   "text": "Assume the sequence exact. The kernel lift u is epic, and the exact forgetful functor of step 1 preserves epimorphisms. The general abelian-sheaf epi criterion [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] therefore makes its underlying abelian sheaf map locally surjective. Mathlib Presheaf.isLocallySurjective_iff_whisker_forget identifies this with local surjectivity after forgetting to sheaves of sets. Apply the definition GrothendieckTopology.IsWeaklyContractible at W directly to get surjectivity on sections. Evaluation preserves kernels, so ShortComplex.exact_map_iff_epi_map_kernel_lift and ModuleCat.epi_iff_surjective give exactness after evaluation. There is no conversion to an epimorphism of set sheaves and no use of the full weak-contractibility equivalence theorem.",
    "uses": [
-    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-    "det-pe-weak-contractible-equivalences",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
     "def-weil-sheaf-of-modules-category"
    ],
    "elementary": false,
@@ -78,7 +77,7 @@
    }
   },
   {
-   "text": "An isomorphism of module sheaves has bijective components, by evaluating its inverse. Conversely suppose $\\varphi(W)$ is bijective for every $W\\in\\mathcal W$. Cover an arbitrary $V$ as in step 2. If $\\varphi(s)=\\varphi(t)$ in $N(V)$, injectivity on each covering member makes $s|_{W_i}=t|_{W_i}$, whence $s=t$ by the sheaf condition. Thus $\\varphi$ is injective on sections of every object. Given $n\\in N(V)$, choose the unique lifts $m_i\\in M(W_i)$. Their restrictions agree on $W_i\\times_VW_j$ by the injectivity just proved for all objects. The sheaf condition glues them to $m\\in M(V)$ with $\\varphi(m)=n$. Hence every component is bijective. Its inverse is linear and commutes with restrictions, since applying $\\varphi$ verifies both assertions and $\\varphi$ is injective. These inverses define the inverse morphism of module sheaves, proving the first assertion of clause 3.",
+   "text": "An isomorphism evaluates to an isomorphism, hence to a bijective module map. Conversely, apply the exactness equivalence from steps 1-4 to the short complexes A --0--> A --f--> B and A --f--> B --0--> B. Bijectivity of each evaluated f makes these evaluated complexes exact by ShortComplex.exact_iff_mono and ShortComplex.exact_iff_epi. The original complexes are therefore exact, making f both mono and epi. Since the module-sheaf category is abelian, isIso_of_mono_of_epi f finishes. This uses only the exactness equivalence already proved and standard abelian category lemmas; no separate inverse-gluing proof is necessary.",
    "uses": [
     "def-weil-sheaf-of-modules-category"
    ],
@@ -107,16 +106,15 @@
   "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
   "def-weil-sheaf-of-modules-category",
   "det-pe-wcb-cover",
-  "det-pe-weak-contractible-equivalences",
-  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "lem-weil-pbc-source-affine-wcontractible-evaluation",
   "def-weil-abstract-derived-category",
   "lem-pur-quasi-iso-cone-acyclic",
   "lem-weil-pbc-module-sheaves-limits-sectionwise"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0947, proposition-enough-weakly-contractibles, proof of (1); clauses 2-3 follow degreewise and by the cone criterion Tag 05RT, as in the blueprint proof"
+  "place": "Tag 0947 proof of (1), implemented via the kernel lift and local image sieves; clauses 2-3 use degreewise exactness, mono/epi short complexes, and the mapping-cone criterion Tag 05RT. D5, 2026-10-19."
  },
  "mathlib_searches": [
   {
@@ -212,7 +210,6 @@
  "tool_uses": [
   "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
-  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
   "lem-pur-quasi-iso-cone-acyclic"
  ],
  "reviewed": {
@@ -254,5 +251,15 @@
   "group": "NY",
   "result": "pass",
   "note": "Matches the landed N6 version (9295b66a11) except one added docstring sentence and lean.by N6->NY. Statement checked against the node, the blueprint and Stacks 0947(1)/090M/05RT/0115: all clauses (exact iff evaluated exact with only f≫g=0; Acyclic of unbounded ℤ complexes; IsIso iff evaluation bijective; QuasiIso iff evaluated QuasiIso) over W with IsAffine W.left and IsWeaklyContractible; no extra hypotheses. Modules in max u (t+1) over RingCat.{u}; scheme and ring universes independent. Weak contractibility at max u (t+1) is equivalent to the dependency's t+1 condition. lean.statement verbatim; docstrings carry source, blueprint tag and seven proof steps; the theorem's only proof is sorry; instances have no sorryAx. nt_compile.py --json with side overlay: rc 0, no errors or warnings, 2.9 s. Nonblocking: redundant re-delivery and attribution change; the worker report wrongly says existing:true/no module; instances not listed in lean.declarations."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261019T002524-L-2147073",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
