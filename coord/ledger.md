@@ -17082,3 +17082,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:34 L: returned deliver/N7/lem-tw-lisse-rational-realization (reviewer RETURN: L: independent stage-2 immutable head 49c0ff749400: Lean module sha 787e4e0b is byte-identical to returned heads 5c136a5)
 - 04:39 L: merged deliver/NA/lem-per-finite-affine-direct-image-support-bound (stage 2; reviewer PASS; parallel immutable checks)
 - 04:52 L: merged deliver/Q02/lem-per-artin-gabber-affine-curve (reviewer FIX; after a return; new nodes: 0)
+- 04:52 L: merged deliver/Q64/lem-per-finite-compact-support-fibre-support-bound (reviewer FIX; first push; new nodes: 0)

@@ -25,91 +25,249 @@
  ],
  "proof": [
   {
-   "text": "Choose a compactification $f=rj$ with $j:X\\hookrightarrow\\overline X$ an open immersion and $r:\\overline X\\to Y$ proper [thm-nagata-compactification], so $Rf_!F=Rr_*(j_!F)$ [def-amb-etale-compact-support]. The sheaf $j_!F$ is constructible: keep the finitely many strata of $F$ and add the closed complement $\\overline X\\setminus X$, on which it is zero. The scheme $\\overline X$ is of finite type over $k$, so $Rr_*$ preserves bounded constructibility [thm-dg-finite-type-constructibility]; hence every $R^qf_!F$ is constructible, and it is zero for $q<0$. For a constructible sheaf $G$ on the Noetherian scheme $Y$ the set $S(G)$ of points with a nonzero geometric stalk is a finite union of strata, so it is constructible; its closure is the closed support of $G$ [lemma-weil-pbc-geometric-stalk-conservative], and the generic point of every irreducible component of that closure lies in $S(G)$.",
+   "text": "Choose a compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{r}Y$ by [thm-nagata-compactification]. Here $Y$ is qcqs, $f$ is separated of finite type, and $\\overline X$ is finite type over $k$ since $r$ is proper. Use $Rf_!=Rr_*Dj_!$ as defined in [def-amb-etale-compact-support]. Apply [lem-fd-finite-ring-compact-support-finiteness] to $F[0]$ and this compactification. It gives constructibility of every $G_q=R^qf_!F$ and $G_q=0$ for $q<0$ (its amplitude clause with $[a,b]=[0,0]$). The sheaf $F[0]$ is bounded constructible by [def-weil-pbc-constructible-complexes].",
    "uses": [
     "thm-nagata-compactification",
     "def-amb-etale-compact-support",
-    "thm-dg-finite-type-constructibility",
-    "def-weil-pbc-constructible-complexes",
+    "lem-fd-finite-ring-compact-support-finiteness",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "4.2.4: finite-coefficient sheaf support estimate, fibrewise argument"
+   }
+  },
+  {
+   "text": "For each $q$, [lem-weil-pbc-constructible-module-support-constructible] makes the nonzero-stalk set $S_q$ constructible and makes its definition independent of the geometric point over a fixed point. Its closure is the closed support $C_q$: an open set misses $S_q$ exactly when the restricted sheaf is zero by [lemma-weil-pbc-geometric-stalk-conservative]. The schemes here are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since a field is Noetherian. In particular [lem-sc-noetherian-closed-subset-finite-components] gives finitely many irreducible components of $C_q$.",
+   "uses": [
+    "lem-weil-pbc-constructible-module-support-constructible",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-noetherian-closed-subset-finite-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "4.2.4: finite-coefficient sheaf support estimate, fibrewise argument"
+   }
+  },
+  {
+   "text": "The generic point $t$ of every irreducible component $T$ of $C_q$ belongs to $S_q$. Indeed, remove the other finitely many components and work on the resulting nonempty open subset of $T$. It meets $S_q$ densely. Express $S_q$ as a finite union of locally closed sets by [def-weil-constructible-subset]. Some one of their closures is all of $T$: a finite closed cover of an irreducible space has a member equal to the space. This locally closed set therefore contains a nonempty open of $T$, and hence its generic point. Thus $t\\in S_q$.",
+   "uses": [
+    "def-weil-constructible-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "4.2.4: finite-coefficient sheaf support estimate, fibrewise argument"
+   }
+  },
+  {
+   "text": "Fix $y\\in Y$ and an algebraic closure $\\Omega$ of $\\kappa(y)$, giving $\\bar y:P=\\operatorname{Spec}\\Omega\\to Y$; write $r':\\overline X_{\\bar y}\\to P$, $j_{\\bar y}$ and $F_{\\bar y}$ for the base changes and $H=j_{\\bar y!}F_{\\bar y}$. Proper base change [lem-kun-proper-base-change-torsion-ring] for the proper map $r$, applied to $Dj_!F$, and [lem-cbc-extension-zero-base-change] for $j$ (degreewise, on the single sheaf $j_!F$) give $\\bar y^{-1}Rf_!F\\cong Rr'_*H$ in $D(P_{\\mathrm{et}},\\Lambda)$. Taking cohomology and stalks commutes by [lem-kun-stalks-of-cohomology]. By [lem-weil-pbc-geometric-point-pullback-stalk] a stalk at $\\bar y$ is $\\Gamma(P,\\bar y^{-1}(-))$ and $\\Gamma(P,-)$ is exact, so $(G_q)_{\\bar y}\\cong\\mathcal H^q(\\Gamma(P,Rr'_*H))$. Represent $Rr'_*H$ by $r'_*I$ for a K-injective resolution $H\\to I$, as in [def-amb-etale-compact-support]. Termwise $\\Gamma(P,r'_*I)=\\Gamma(\\overline X_{\\bar y},I)$ by the direct-image formula recorded in [def-weil-pbc-cohomology-pullback], whose cohomology is $H^q(\\overline X_{\\bar y},H)$ by [def-weil-pbc-etale-cohomology]; module and abelian cohomology agree by [lem-weil-pbc-etale-module-cohomology-forget]. Therefore\n$$(G_q)_{\\bar y}\\cong H^q(\\overline X_{\\bar y},j_{\\bar y!}F_{\\bar y}).$$\nAll coefficient sheaves are torsion because the additive exponent of $\\Lambda$ kills them; proper base change allows this arbitrary geometric base change.",
+   "uses": [
+    "lem-kun-proper-base-change-torsion-ring",
+    "lem-cbc-extension-zero-base-change",
+    "lem-kun-stalks-of-cohomology",
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "def-amb-etale-compact-support",
+    "def-weil-pbc-cohomology-pullback",
+    "def-weil-pbc-etale-cohomology",
+    "lem-weil-pbc-etale-module-cohomology-forget"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Proper base change (Tag 095T); geometric-point cohomology Tags 03QT/03QU; extension by zero and pullback"
+   }
+  },
+  {
+   "text": "Give $Z$ its reduced induced closed subscheme structure by [lem-weil-pbc-reduced-induced-closed-subscheme]. Put $Z_y=Z\\times_Y\\operatorname{Spec}\\kappa(y)$. If it is nonempty, write $e(y)=\\dim Z_y$. The closed immersion into $X_y$ gives $e(y)\\le d$: chains of irreducible closed subsets stay chains in $X_y$. For the field extension $\\kappa(y)\\subset\\Omega$, [lem-sc-fibre-dimension-after-base-change] preserves local fibre dimensions. The projection $Z_{\\bar y}\\to Z_y$ is surjective: above a point $z$ its fibre is the spectrum of the nonzero ring $\\kappa(z)\\otimes_{\\kappa(y)}\\Omega$, nonzero by a vector-space basis. Consequently $\\dim Z_{\\bar y}=\\dim Z_y=e(y)$. To see the global dimension conclusion from the local one, use the finite irreducible components of these finite-type schemes, [lem-sc-dimension-locally-algebraic] on each component, and the definition of local dimension [def-kun-dimension]: the maximum of component dimensions is both the global dimension and the maximum of the local dimensions. Empty fibres stay empty.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sc-fibre-dimension-after-base-change",
+    "lem-sc-dimension-locally-algebraic",
+    "def-kun-dimension",
+    "lem-sc-noetherian-closed-subset-finite-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "4.2.4: finite-coefficient sheaf support estimate, fibrewise argument"
+   }
+  },
+  {
+   "text": "Let $W$ be the closure of $Z_{\\bar y}$ in $\\overline X_{\\bar y}$, with reduced induced structure [lem-weil-pbc-reduced-induced-closed-subscheme]. Since $Z_{\\bar y}$ is closed in the open $X_{\\bar y}$, it is locally closed, hence constructible. Apply [lem-per-constructible-subset-closure-dimension] over $\\Omega$ to get $\\dim W=e(y)$ when nonempty. The sheaf $H=j_{\\bar y!}F_{\\bar y}$ vanishes outside $W$: it is zero outside $X_{\\bar y}$ by extension by zero and outside $Z_{\\bar y}$ inside that open by the closed support of $F$ and conservativity of geometric stalks [lemma-weil-pbc-geometric-stalk-conservative]. By [lem-kun-04ca], its underlying abelian sheaf is $i_*i^{-1}H$, where $i:W\\hookrightarrow\\overline X_{\\bar y}$ is the closed immersion. This also handles $W=\\varnothing$, giving $H=0$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-per-constructible-subset-closure-dimension",
+    "lem-kun-04ca",
     "lemma-weil-pbc-geometric-stalk-conservative"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-    "place": "4.1.1 and 4.2.4: constructibility of the direct images and supports of constructible sheaves"
+    "place": "4.2.4: finite-coefficient sheaf support estimate, fibrewise argument"
    }
   },
   {
-   "text": "Let $y\\in Y$ with a geometric point $\\bar y$ over it, and write $X_{\\bar y}\\subset\\overline X_{\\bar y}$ for the fibres. Proper base change for $r$ along $\\bar y\\to Y$ [lem-kun-proper-base-change-torsion-ring] and base change for extension by zero [lem-cbc-extension-zero-base-change] identify $(R^qf_!F)_{\\bar y}$ with $H^q(\\overline X_{\\bar y},(j_!F)|_{\\overline X_{\\bar y}})$, the cohomology with compact support of $F|_{X_{\\bar y}}$. Proper base change is a general theorem of etale cohomology (not a step of the trace formula or of Poincare duality).",
+   "text": "For $W\\ne\\varnothing$, the closed immersion $i$ is finite: on affine charts its map is $A\\to A/I$, generated by $1$ as an $A$-module. Thus [lem-weil-pbc-finite-pushforward-cohomology] gives\n$$H^q(\\overline X_{\\bar y},H)\\cong H^q(W,i^{-1}H)\\quad(q\\ge0)$$\nfor underlying abelian sheaves. Module cohomology has the same underlying groups by [lem-weil-pbc-etale-module-cohomology-forget]. The field $\\Omega$ is separably closed, so [lem-sf-separably-closed-torsion-cd] gives $\\operatorname{cd}_{\\rm tor}(\\Omega)\\le0$; apply [thm-sc-finite-type-torsion-cd] to the finite-type $\\Omega$-scheme $W$ of dimension $e(y)$ and the torsion sheaf $i^{-1}H$. Combining with Steps 4--6, the stalk of $G_q$ is zero if $Z_y$ is empty or $q>2e(y)$.",
    "uses": [
-    "lem-kun-proper-base-change-torsion-ring",
-    "lem-cbc-extension-zero-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project",
-    "place": "Tag 0F0X (stalks of direct images); proper base change"
-   }
-  },
-  {
-   "text": "Put $Z_y=Z\\times_Y\\operatorname{Spec}\\kappa(y)$ and $e(y)=\\dim Z_y\\le\\dim X_y\\le d$. The restriction of $j_!F$ to $\\overline X_{\\bar y}$ vanishes off the closure $W$ of $Z_{\\bar y}$. As $Z_{\\bar y}$ is closed in the open $X_{\\bar y}$, it is open and dense in $W$, so $\\dim W=\\dim Z_{\\bar y}$, and $\\dim Z_{\\bar y}=e(y)$ by [lem-sc-fibre-dimension-after-base-change]. The sheaf is pushed forward from $W$ [lem-kun-04ca], so its cohomology is that of a torsion sheaf on the finite-type $\\kappa(\\bar y)$-scheme $W$. The field $\\kappa(\\bar y)$ is separably closed, of torsion cohomological dimension $0$, so [thm-sc-finite-type-torsion-cd] gives vanishing in degrees $q>2\\dim W$. Hence $(R^qf_!F)_{\\bar y}=0$ whenever $Z_y$ is empty or $q>2e(y)$.",
-   "uses": [
-    "lem-sc-fibre-dimension-after-base-change",
-    "lem-kun-04ca",
+    "lem-weil-pbc-finite-pushforward-cohomology",
+    "lem-weil-pbc-etale-module-cohomology-forget",
+    "lem-sf-separably-closed-torsion-cd",
     "thm-sc-finite-type-torsion-cd"
    ],
    "elementary": false,
    "source": {
-    "document": "Stacks Project",
-    "place": "Tag 0F0V and the bound cd <= 2 dim for finite-type schemes over a separably closed field"
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "4.2.4: finite-coefficient sheaf support estimate, fibrewise argument"
    }
   },
   {
-   "text": "Let $q\\ge0$ and let $T$ be an irreducible component of the closed support of $R^qf_!F$, with generic point $t$. By Step 1, $t$ has a nonzero stalk, so Step 3 gives $q\\le2e(t)\\le2d$ and $Z_t\\neq\\varnothing$. Let $Z'$ be the closure in $Z$ of an irreducible component of $Z_t$ of dimension $e(t)$; it is an irreducible closed subset of $Z\\times_YT$ dominating $T$, its generic point $\\zeta$ lies over $t$, and its fibre over $t$ is irreducible with generic point $\\zeta$ and dimension $e(t)$. Apply [lem-zl-irreducible-fibre-dimension-lower-bound] to $Z'\\to Y$ (with the reduced structure): $\\dim Z'=\\dim T+r$, and the local fibre dimension equals $r$ on a dense open of $Z'$, which contains $\\zeta$; so $r=e(t)$. Therefore $\\dim T=\\dim Z'-e(t)\\le a-\\lceil q/2\\rceil$.",
+   "text": "Take $q\\ge0$ and an irreducible component $T$ of the nonempty closed support $C_q$, with generic point $t$. By Step 3 the stalk there is nonzero. Step 7 implies $Z_t\\ne\\varnothing$ and $q\\le2e(t)\\le2d$. Choose an irreducible component $B$ of $Z_t$ of dimension $e(t)$ and let $Z'$ be its closure in $Z$, with reduced induced structure [lem-weil-pbc-reduced-induced-closed-subscheme]. Then $Z'$ is an irreducible finite-type $k$-scheme, $\\overline{f(Z')}=T$, and its fibre over $t$ has underlying space $B$. For the last assertion, $Z'\\subseteq f^{-1}(T)$ since that is closed and contains $B$. The fibre over the generic point $t$ embeds topologically into $f^{-1}(t)$ by affine localization (the description of [def-pc-scheme-fibre]); intersecting the closure of $B$ with that fibre gives its closure in the fibre, which is $B$ since $B$ is closed there. The generic point $\\zeta$ of $Z'$ is the generic point of $B$ and lies over $t$.",
    "uses": [
-    "lem-zl-irreducible-fibre-dimension-lower-bound",
-    "def-kun-topological-krull-dimension",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
     "def-pc-scheme-fibre"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-    "place": "4.2.4: dim f(Z) + fibre dimension <= dim Z, Kiehl--Weissauer III"
+    "place": "4.2.4: finite-coefficient sheaf support estimate, fibrewise argument"
    }
   },
   {
-   "text": "Since $q\\le2d$ we have $\\lfloor q/2\\rfloor\\le d$, hence $a-\\lceil q/2\\rceil=a-q+\\lfloor q/2\\rfloor\\le a+d-q$. The closed support of $R^qf_!F$ is the finite union of its irreducible components, so its dimension is at most $a+d-q$. When $a+d-q<0$ no component can exist, as a nonempty space has dimension at least $0$, and $R^qf_!F=0$.",
-   "uses": [],
+   "text": "Apply [lem-zl-irreducible-fibre-dimension-lower-bound] to $Z'\\to Y$: there is $r\\ge0$ with $\\dim Z'=\\dim T+r$, and the locus where the local fibre dimension equals $r$ is dense open in $Z'$. This open contains its generic point $\\zeta$. The fibre $Z'_t$ is irreducible finite type over $\\kappa(t)$ with underlying space $B$; [lem-sc-dimension-locally-algebraic] therefore says its local dimension at $\\zeta$ equals its dimension $e(t)$. Hence $r=e(t)$ and\n$$\\dim T=\\dim Z'-e(t)\\le a-e(t)\\le a-\\lceil q/2\\rceil.$$\nHere $\\dim Z'\\le\\dim Z\\le a$ follows by including chains of closed irreducible subsets, and $e(t)\\ge\\lceil q/2\\rceil$ follows from $q\\le2e(t)$.",
+   "uses": [
+    "lem-zl-irreducible-fibre-dimension-lower-bound",
+    "lem-sc-dimension-locally-algebraic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0B2L (lemma-dimension-fibres-locally-algebraic), (2)(b), and 0A21 (lemma-dimension-locally-algebraic), (3)"
+   }
+  },
+  {
+   "text": "Since $q\\le2d$, $\\lfloor q/2\\rfloor\\le d$, so\n$$\\dim T\\le a-\\lceil q/2\\rceil=a-q+\\lfloor q/2\\rfloor\\le a+d-q.$$\nThe finitely many irreducible components $T$ cover $C_q$, so this bounds $\\dim C_q$: the largest member of a chain of irreducible closed subsets in a finite closed cover lies in one cover member, by irreducibility, and then the whole chain does. If $a+d-q<0$, a nonempty component would have dimension at least zero; hence $C_q=\\varnothing$, and geometric-stalk conservativity gives $G_q=0$ [lemma-weil-pbc-geometric-stalk-conservative]. For empty $C_q$ the asserted dimension bound uses $\\dim\\varnothing=-\\infty$; negative $q$ were covered in Step 1.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
    "elementary": true,
    "source": {
     "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-    "place": "4.2.4: the count of degrees"
+    "place": "4.2.4: finite-coefficient sheaf support estimate, fibrewise argument"
    }
   }
  ],
  "proof_deps": [
   "def-amb-etale-compact-support",
-  "def-kun-topological-krull-dimension",
+  "def-kun-dimension",
   "def-pc-scheme-fibre",
+  "def-weil-constructible-subset",
+  "def-weil-pbc-cohomology-pullback",
   "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-etale-cohomology",
   "lem-cbc-extension-zero-base-change",
+  "lem-fd-finite-ring-compact-support-finiteness",
   "lem-kun-04ca",
   "lem-kun-proper-base-change-torsion-ring",
+  "lem-kun-stalks-of-cohomology",
+  "lem-per-constructible-subset-closure-dimension",
+  "lem-sc-dimension-locally-algebraic",
   "lem-sc-fibre-dimension-after-base-change",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sf-separably-closed-torsion-cd",
+  "lem-weil-pbc-constructible-module-support-constructible",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-weil-pbc-finite-pushforward-cohomology",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
   "lem-zl-irreducible-fibre-dimension-lower-bound",
   "lemma-weil-pbc-geometric-stalk-conservative",
-  "thm-dg-finite-type-constructibility",
   "thm-nagata-compactification",
   "thm-sc-finite-type-torsion-cd"
  ],
  "proof_origin": {
-  "by": "L (route decision of the human, 2026-10-19)",
+  "by": "agent",
   "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-  "place": "4.2.4 and the fibrewise bound behind 4.1.1, at finite coefficients"
+  "place": "4.2.4 gives the amplitude conclusion; Q64 writes the elementary fibrewise support assembly, using the cited DAG cohomological-dimension and dimension inputs"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Dimension of the support of compactly supported higher direct image of a constructible etale sheaf under a morphism with fibres of dimension at most d",
+   "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_image; PrimeSpectrum.ConstructibleSetData.degBound; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; AlgebraicGeometry.Scheme.Hom.range_subset_ker_support; Module.supportDim_le_of_surjective; AlgebraicGeometry.Scheme.IdealSheafData.support_map; Topology.IsConstructible.image_of_isOpenEmbedding; AlgebraicGeometry.Scheme.Hom.support_ker",
+   "date": "2026-10-19",
+   "verdict": "no match: algebraic module support or scheme topology results do not state the etale higher compact-support estimate"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.?support.*(dimension|bound)|(dimension|bound).*compact.?support",
+   "results": "Mathlib/Topology/Algebra/Module/FiniteDimension.lean; Mathlib/Topology/Algebra/Module/FiniteDimension.lean; Mathlib/Topology/Order/Compact.lean; Mathlib/Topology/Order/Compact.lean; Mathlib/Topology/Order/Compact.lean; Mathlib/Topology/Order/Compact.lean; Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean; Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean",
+   "date": "2026-10-19",
+   "verdict": "no match: algebraic module support or scheme topology results do not state the etale higher compact-support estimate"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme, \"support\"",
+   "results": "No hits; loogle: unknown identifier 'Scheme'",
+   "date": "2026-10-19",
+   "verdict": "no usable result: loogle: unknown identifier 'Scheme'"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The support dimension of the qth higher direct image with compact support is at most the support dimension of the sheaf plus fibre dimension minus q",
+   "results": "Module.supportDim_le_of_surjective; Module.supportDim_le_supportDim_quotSMulTop_succ; Module.supportDim_le_of_injective; Module.supportDim; Module.supportDim_le_ringKrullDim; Module.supportDim_eq_of_equiv; Module.supportDim_quotient_eq_ringKrullDim; Module.supportDim_le_supportDim_quotSMulTop_succ_of_mem_jacobson",
+   "date": "2026-10-19",
+   "verdict": "no match: algebraic module support or scheme topology results do not state the etale higher compact-support estimate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology vanishes above twice the dimension and higher direct images with proper support have bounded support dimension",
+   "results": "DerivedCategory.isZero_of_isGE; Algebra.etaleLocus_eq_compl_support; DerivedCategory.isZero_of_isLE; DerivedCategory.isLE_iff; DerivedCategory.isGE_iff; CochainComplex.isZero_of_isGE; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; CochainComplex.isZero_of_isLE",
+   "date": "2026-10-19",
+   "verdict": "no match: algebraic module support or scheme topology results do not state the etale higher compact-support estimate"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"dim\"",
+   "results": "AlgebraicGeometry.ringKrullDim_stalk_eq_coheight; AlgebraicGeometry.krullDimLE_of_coheight_le; AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme; AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange; AlgebraicGeometry.IsClosedImmersion.respectsIso; AlgebraicGeometry.IsClosedImmersion.instSubschemeι; AlgebraicGeometry.IsClosedImmersion; AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion",
+   "date": "2026-10-19",
+   "verdict": "no match: algebraic module support or scheme topology results do not state the etale higher compact-support estimate"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.?support.*fibre.*dimension|support.*higher.*direct.*image",
+   "results": "No hits",
+   "date": "2026-10-19",
+   "verdict": "no match: algebraic module support or scheme topology results do not state the etale higher compact-support estimate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dimension of the support of a higher compact support direct image is bounded by support dimension plus fibre dimension minus cohomological degree",
+   "results": "Module.supportDim_le_of_surjective; Module.supportDim_le_of_injective; Module.supportDim; Module.supportDim_le_supportDim_quotSMulTop_succ; Module.supportDim_le_ringKrullDim; ContDiffMapSupportedIn.support_subset; CochainComplex.isStrictlyGE_iff; HasCompactSupport.mono",
+   "date": "2026-10-19",
+   "verdict": "no match: algebraic module support or scheme topology results do not state the etale higher compact-support estimate"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.supportDim, AlgebraicGeometry.Scheme.Hom, IsConstructible",
+   "results": "No hits; loogle: unknown identifier 'IsConstructible'",
+   "date": "2026-10-19",
+   "verdict": "no usable result: loogle: unknown identifier 'IsConstructible'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dimension bound for support of compactly supported higher direct images of constructible etale sheaves with bounded fibre dimension",
+   "results": "PrimeSpectrum.ConstructibleSetData.degBound; AlgebraicGeometry.Scheme.Hom.isConstructible_image; Module.supportDim_le_of_surjective; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; Module.supportDim_le_supportDim_quotSMulTop_succ; Module.supportDim_le_ringKrullDim",
+   "date": "2026-10-19",
+   "verdict": "no match: algebraic module support or scheme topology results do not state the etale higher compact-support estimate"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "L",
   "item": "lem-per-artin-gabber-affine-curve",
@@ -127,5 +285,154 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-finite-compact-support-fibre-support-bound",
+  "worker": "stage1",
+  "summary": "Audited the imported fibrewise proof, kept the statement, replaced unsupported constructibility/cohomology inferences by existing precise nodes, made the generic-fibre dimension calculation explicit, and corrected source tags. No new nodes. Mathlib searches and attachment audit found no match. Review FIX (cc maintainer reader): Step 4 now cites the geometric-point stalk lemma, the direct-image global-sections formula and the definition of etale cohomology for the identification of the stalk with fibre cohomology.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve, Step 2, finite-coefficient sheaf support estimate used on the generating blocks F_i[i]; the fibrewise route is the human route decision of 2026-10-19. No unit/chapter route change.",
+  "tool_uses": [
+   {
+    "node": "def-amb-etale-compact-support",
+    "why": "Generic Compact supports on the ordinary etale category input in the finite-coefficient compactification, stalk/cohomology, or scheme-dimension calculation; the perverse unit does not provide this general tool."
+   },
+   {
+    "node": "def-kun-dimension",
+    "why": "Generic Dimension input in the finite-coefficient compactification, stalk/cohomology, or scheme-dimension calculation; the perverse unit does not provide this general tool."
+   },
+   {
+    "node": "def-pc-scheme-fibre",
+    "why": "Generic Scheme-theoretic fibre of a morphism over a point input in the finite-coefficient compactification, stalk/cohomology, or scheme-dimension calculation; the perverse unit does not provide this general tool."
+   },
+   {
+    "node": "def-weil-constructible-subset",
+    "why": "Generic Constructible subset input in the finite-coefficient compactification, stalk/cohomology, or scheme-dimension calculation; the perverse unit does not provide this general tool."
+   },
+   {
+    "node": "def-weil-pbc-constructible-complexes",
+    "why": "Generic Constructible finite-coefficient complexes input in the finite-coefficient compactification, stalk/cohomology, or scheme-dimension calculation; the perverse unit does not provide this general tool."
+   },
+   {
+    "node": "lem-cbc-extension-zero-base-change",
+    "why": "Generic Extension by zero commutes with arbitrary base change input in the finite-coefficient compactification, stalk/cohomology, or scheme-dimension calculation; the perverse unit does not provide this general tool."
+   },
+   {
+    "node": "lem-fd-finite-ring-compact-support-finiteness",
+    "why": "Generic Compact-support finiteness for arbitrary finite rings and a finite-type target input in the finite-coefficient compactification, stalk/cohomology, or scheme-dimension calculation; the perverse unit does not provide this general tool."
+   },
+   {
+    "node": "lem-kun-04ca",
+    "why": "Generic Pushforward along a closed immersion input in the finite-coefficient compactification, stalk/cohomology, or scheme-dimension calculation; the perverse unit does not provide this general tool."
+   },
+   {
+    "node": "lem-kun-proper-base-change-torsion-ring",
+    "why": "Generic Unbounded proper base change over a torsion coefficient ring input in the finite-coefficient compactification, stalk/cohomology, or scheme-dimension calculation; the perverse unit does not provide this general tool."
+   },
+   {
+    "node": "lem-kun-stalks-of-cohomology",
+    "why": "Generic Stalks of cohomology sheaves input in the finite-coefficient compactification, stalk/cohomology, or scheme-dimension calculation; the perverse unit does not provide this general tool."
+   },
+   {
+    "node": "lem-sc-dimension-locally-algebraic",
+    "why": "Generic Dimension of an irreducible locally algebraic scheme over a field input in the finite-coefficient compactification, stalk/cohomology, or scheme-dimension calculation; the perverse unit does not provide this general tool."
+   },
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Generic Fibre dimensions are preserved by base change input in the finite-coefficient compactification, stalk/cohomology, or scheme-dimension calculation; the perverse unit does not provide this general tool."
+   },
+   {
+    "node": "lem-sc-noetherian-closed-subset-finite-components",
+    "why": "Generic A closed subset of a Noetherian scheme has finitely many irreducible components input in the finite-coefficient compactification, stalk/cohomology, or scheme-dimension calculation; the perverse unit does not provide this general tool."
+   },
+   {
+    "node": "lem-sf-separably-closed-torsion-cd",
+    "why": "Generic Torsion cohomological dimension of a separably closed field input in the finite-coefficient compactification, stalk/cohomology, or scheme-dimension calculation; the perverse unit does not provide this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-module-support-constructible",
+    "why": "Generic The support of a constructible sheaf of modules on a qcqs scheme is well defined and constructible input in the finite-coefficient compactification, stalk/cohomology, or scheme-dimension calculation; the perverse unit does not provide this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-module-cohomology-forget",
+    "why": "Generic Natural comparison of etale module cohomology with underlying abelian cohomology input in the finite-coefficient compactification, stalk/cohomology, or scheme-dimension calculation; the perverse unit does not provide this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-pushforward-cohomology",
+    "why": "Generic Finite direct image does not change etale cohomology (edge map) input in the finite-coefficient compactification, stalk/cohomology, or scheme-dimension calculation; the perverse unit does not provide this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) input in the finite-coefficient compactification, stalk/cohomology, or scheme-dimension calculation; the perverse unit does not provide this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic Reduced induced closed subscheme structure on a closed subset: existence and uniqueness input in the finite-coefficient compactification, stalk/cohomology, or scheme-dimension calculation; the perverse unit does not provide this general tool."
+   },
+   {
+    "node": "lem-zl-irreducible-fibre-dimension-lower-bound",
+    "why": "Generic Lower bound for fibres of an irreducible finite-type scheme input in the finite-coefficient compactification, stalk/cohomology, or scheme-dimension calculation; the perverse unit does not provide this general tool."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic Conservativity of geometric stalks input in the finite-coefficient compactification, stalk/cohomology, or scheme-dimension calculation; the perverse unit does not provide this general tool."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic Nagata compactification, [stacks-project] input in the finite-coefficient compactification, stalk/cohomology, or scheme-dimension calculation; the perverse unit does not provide this general tool."
+   },
+   {
+    "node": "thm-sc-finite-type-torsion-cd",
+    "why": "Generic Torsion cohomological dimension of a finite-type scheme input in the finite-coefficient compactification, stalk/cohomology, or scheme-dimension calculation; the perverse unit does not provide this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-pullback-stalk",
+    "why": "Generic geometric-point stalk as global sections of the pullback, with exact global sections on an algebraically closed point; used to read the stalk of the compact-support image."
+   },
+   {
+    "node": "def-weil-pbc-cohomology-pullback",
+    "why": "Generic record of Gamma(X,u_*F)=Gamma(Y,F), used to compute global sections of the direct image to the geometric point."
+   },
+   {
+    "node": "def-weil-pbc-etale-cohomology",
+    "why": "Generic definition of etale cohomology by K-injective resolutions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-amb-etale-compact-support",
+  "def-kun-dimension",
+  "def-pc-scheme-fibre",
+  "def-weil-constructible-subset",
+  "def-weil-pbc-constructible-complexes",
+  "lem-cbc-extension-zero-base-change",
+  "lem-fd-finite-ring-compact-support-finiteness",
+  "lem-kun-04ca",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-kun-stalks-of-cohomology",
+  "lem-sc-dimension-locally-algebraic",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sf-separably-closed-torsion-cd",
+  "lem-weil-pbc-constructible-module-support-constructible",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-weil-pbc-finite-pushforward-cohomology",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-zl-irreducible-fibre-dimension-lower-bound",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "thm-nagata-compactification",
+  "thm-sc-finite-type-torsion-cd",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-a8e24c120",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-a8e24c120 (reviewer sub-agent of L); spot-checked: Verdict FIX: the mathematics is correct and complete; the only repair is one missing citation in Step 4. I read the item in full, every cited statement, BBD 4.2.4 and the parent's Step 2. The statement is L's own and unchanged; it gives exactly the bound dim supp R^q f_!F_i <= i+d-q that the parent needs with a=i. The proof is correct. Step 1 cites the finite-ring compact-support finiteness node; its amplitude clause with [0,0] gives constructibility and vanishing for q<0. Steps 2-3 give constructible support and put the generic point of each component of the support in the nonzero-stalk set. Steps 4-7 combine proper base change and extension-by-zero base change with cd(Omega)=0 and cd <= 2e(y) on the closure W in the compactified fibre (dim W = e(y) by the closure-dimension node). Steps 8-9 apply the irreducible fibre-dimension node to the closure Z' of a top-dimensional fibre component, giving dim T <= a - ceil(q/2). Step 10's arithmetic is right (floor(q/2) <= d). Edge cases checked: F=0, X empty or empty fibres, q<0, d=0 with f the identity, and A^d -> Spec k (sharp at q=2d). FIX (C1/C4): Step 4 identified the pulled-back Rr_* on Spec Omega with RGamma of the fibre without citing anything. It now cites lem-weil-pbc-geometric-point-pullback-stalk (stalk = Gamma(P, pullback), Gamma(P,-) exact), the K-injective representation from def-amb-etale-compact-support, the formula Gamma(X,u_*F)=Gamma(Y,F) from def-weil-pbc-cohomology-pullback, and def-weil-pbc-etale-cohomology. lem-weil-pbc-geometric-point-cohomology is dropped, and proof_deps and tool_uses are updated. All listed tool_uses are accepted as generic. Batch-5 check: lem-fd-finite-ring-compact-support-finiteness is accepted. It states finiteness/amplitude of H^i_c, a hypothesis of the trace formula, not part of its proof. Its closure's pod/trf nodes are all generic: lisse = FLC module objects, local constancy, ring scalar extension, separated finite-type base change, bounded-below derived adjunction, ind-etale residue separability, and proper finite-fibre finite near. The three nodes the FIX adds reach no trf/pod nodes. Route check: 'gabber' appears only in the parent id lem-per-artin-gabber-affine-curve. The route is the human's finite-coefficient support side (Nagata, proper base change, cd <= 2dim, fibre-dimension count); no Qbar/adic, duality, middle t-structure, Gabber finiteness, alterations or SGA. Maintainer note: the item's source.external still names Stacks 0F0V, which is the affine cd bound, not this statement. source is a maintainer field; please drop it.; 1 file(s) fixed by the reviewer"
  }
 }
