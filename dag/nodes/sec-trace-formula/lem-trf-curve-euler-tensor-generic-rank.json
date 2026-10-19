@@ -21,9 +21,152 @@
   "def-pc-euler-characteristic",
   "def-pc-degree-line-bundle"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The field $k$ is Noetherian: its only ideals are $(0)$ and $(1)$ [def-weil-pbc-noetherian-ring]. Its spectrum is a one-point affine scheme [def-weil-affine-spectrum], hence quasi-compact and locally Noetherian [pqf-def-locnoeth]. Properness gives that $C\\to\\operatorname{Spec}k$ is of finite type [def-weil-proper-morphism], so [lem-weil-pbc-finite-type-over-noetherian] makes $C$ Noetherian. The module $\\mathcal O_C$ is quasi-coherent of finite type, hence coherent by [pqf-lem-coherent-ft-locnoeth]. Fix $\\mathcal L$. On every open trivializing $\\mathcal L$, the tensor $\\mathcal L\\otimes\\mathcal H$ is isomorphic to $\\mathcal H$ by $a\\otimes h\\mapsto ah$ [def-sc-invertible-module, def-pur-sheaf-tensor-product]. Thus it is coherent whenever $\\mathcal H$ is coherent [pqf-def-coherent]. A finite local generating set for $\\mathcal H$ gives a finite generating set of $\\mathcal H_\\xi$ by taking germs [def-weil-pbc-module-stalk]; since $\\mathcal O_{C,\\xi}=\\kappa(\\xi)$ is a field, its dimension $r(\\mathcal H)$ is finite. Set $D(\\mathcal H)=\\chi(C,\\mathcal L\\otimes\\mathcal H)-\\chi(C,\\mathcal H)-r(\\mathcal H)\\deg_k\\mathcal L$, and let $\\mathcal P(\\mathcal H)$ mean $D(\\mathcal H)=0$. For the zero module its tensor, stalk and cohomology groups are zero, so $\\mathcal P(0)$ holds [def-pc-euler-characteristic].",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-affine-spectrum",
+    "pqf-def-locnoeth",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-coherent-ft-locnoeth",
+    "def-sc-invertible-module",
+    "def-pur-sheaf-tensor-product",
+    "pqf-def-coherent",
+    "def-weil-pbc-module-stalk",
+    "def-pc-euler-characteristic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYV, lemma-degree-on-proper-curve, proof: define the property P; Noetherian and coherence hypotheses made explicit using 01T6 and 01XZ."
+   }
+  },
+  {
+   "text": "Consider a short exact sequence $0\\to\\mathcal H_1\\to\\mathcal H_2\\to\\mathcal H_3\\to0$ of coherent modules. The invertible module $\\mathcal L$ is finite locally free of rank one [def-sc-invertible-module]. By [lem-sc-ext-tensor-exact], tensoring this sequence on the left with $\\mathcal L$ gives a short exact sequence. Its terms are coherent by Step 1. Apply the first assertion of [lem-pc-euler-additive] to both sequences to obtain $\\chi(C,\\mathcal H_2)=\\chi(C,\\mathcal H_1)+\\chi(C,\\mathcal H_3)$ and $\\chi(C,\\mathcal L\\otimes\\mathcal H_2)=\\chi(C,\\mathcal L\\otimes\\mathcal H_1)+\\chi(C,\\mathcal L\\otimes\\mathcal H_3)$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-sc-ext-tensor-exact",
+    "lem-pc-euler-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYV, proof of condition (1); Tag 08AA, lemma-euler-characteristic-additive."
+   }
+  },
+  {
+   "text": "Taking stalks at $\\xi$ in the sequence of Step 2 gives a short exact sequence of finite-dimensional $\\kappa(\\xi)$-vector spaces by [lem-weil-pbc-module-stalk-exact], including the injectivity and surjectivity assertions. A basis of $(\\mathcal H_1)_\\xi$, mapped into $(\\mathcal H_2)_\\xi$, together with arbitrary lifts of a basis of $(\\mathcal H_3)_\\xi$, is a basis of $(\\mathcal H_2)_\\xi$: subtract the lifted image to prove spanning, and apply the quotient map to prove independence. Counting these basis elements [def-weil-vector-space-dimension] gives $r(\\mathcal H_2)=r(\\mathcal H_1)+r(\\mathcal H_3)$. Substitution in Step 2 yields $D(\\mathcal H_2)=D(\\mathcal H_1)+D(\\mathcal H_3)$. Consequently if any two of these three integers vanish then the third vanishes. This verifies the two-out-of-three condition for $\\mathcal P$.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYV, proof of condition (1): additivity of generic rank; Modules 01AG for exact stalks."
+   }
+  },
+  {
+   "text": "Let $i:Z\\hookrightarrow C$ be an integral closed subscheme, and $z$ its generic point. Its underlying set is an irreducible closed subset [def-pc-integral-scheme, def-weil-closed-immersion]. If $z\\ne\\xi$, this subset is proper. It cannot contain a point $y\\ne z$: because $z$ is generic, $\\overline{\\{y\\}}\\subsetneq Z\\subsetneq C$ would be a chain of irreducible closed subsets of length two, contradicting $\\dim C=1$ [def-kun-topological-krull-dimension]. Thus $Z$ is the closed singleton $\\{z\\}$. If $z=\\xi$, the image of $Z$ is all of $C$. On an affine open $\\operatorname{Spec}A$ of the integral scheme $C$, the closed subscheme is $\\operatorname{Spec}(A/I)$ [def-weil-closed-immersion], and its image contains the generic prime $(0)$, so $I\\subseteq(0)$ and $I=0$. These local descriptions identify $i$ with the identity of $C$. In the singleton case, take an affine neighbourhood $\\operatorname{Spec}A$ of $z$. The integral quotient $A/I$ has only one prime ideal, so that ideal is $(0)$ and is maximal; hence $A/I$ is a field. The corresponding ideal of $A$ is the maximal ideal of $z$, so $Z=\\operatorname{Spec}\\kappa(z)$, with its reduced closed-point structure [def-weil-residue-field].",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-weil-closed-immersion",
+    "def-kun-topological-krull-dimension",
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYV, proof of condition (2): Z is X or a closed point; affine quotient and dimension-chain details."
+   }
+  },
+  {
+   "text": "For $Z=C$, choose $\\mathcal G=\\mathcal O_C$. It is coherent by Step 1, its support is $C$ because every local ring is nonzero, and its generic stalk is the one-dimensional field $\\kappa(\\xi)$. The maximal ideal of that field is zero, so it annihilates the generic stalk [def-weil-residue-field, def-pc-integral-scheme]. Finally $\\mathcal L\\otimes\\mathcal O_C\\cong\\mathcal L$ by $l\\otimes a\\mapsto al$, with inverse $l\\mapsto l\\otimes1$ [def-pur-sheaf-tensor-product], and $\\deg_k\\mathcal L=\\chi(C,\\mathcal L)-\\chi(C,\\mathcal O_C)$ [def-pc-degree-line-bundle]. Thus $D(\\mathcal O_C)=0$. This supplies all four required properties of the witness for $Z=C$.",
+   "uses": [
+    "def-weil-residue-field",
+    "def-pc-integral-scheme",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-degree-line-bundle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYV, proof of condition (2), case Z=X; Tag 0AYR, definition-degree-invertible-sheaf."
+   }
+  },
+  {
+   "text": "For $Z=\\operatorname{Spec}\\kappa(z)$ at a closed point $z\\ne\\xi$, choose $\\mathcal G=i_*\\mathcal O_Z$. Both $C$ and the one-point field scheme $Z$ are locally Noetherian, and $\\mathcal O_Z$ is coherent by [pqf-lem-coherent-ft-locnoeth]. Clause (1) of [lem-weil-pbc-closed-immersion-coherent-equivalence] therefore makes $\\mathcal G$ coherent and identifies its support with $\\{z\\}$. By [lem-weil-pbc-closed-pushforward-stalks], its stalk at $z$ is $\\kappa(z)$, with $\\mathcal O_{C,z}$-action through the residue map [def-weil-residue-field]; this stalk is killed by $\\mathfrak m_z$ and has dimension one over $\\kappa(z)$. The same stalk lemma gives $\\mathcal G_\\xi=0$, because $\\xi\\notin\\{z\\}$, so $r(\\mathcal G)=0$. All the support and generic-stalk requirements of the closed-point witness are now verified.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYV, proof of condition (2), closed-point witness i_*O_Z; coherent 087T and sheaves 00AE."
+   }
+  },
+  {
+   "text": "The support $\\{z\\}$ in Step 6 has dimension zero [def-kun-topological-krull-dimension]. Apply the last clause of [lem-pc-chi-zero-dim-support] on the proper scheme $C$ to the coherent module $\\mathcal G$ and the invertible module $\\mathcal L$. It gives $\\chi(C,\\mathcal G\\otimes\\mathcal L)=\\chi(C,\\mathcal G)$. The balanced maps $g\\otimes l\\mapsto l\\otimes g$ and $l\\otimes g\\mapsto g\\otimes l$ give inverse sheaf isomorphisms [def-pur-sheaf-tensor-product]. Cohomology sends inverse maps to inverse maps, so their Euler characteristics agree [def-pc-euler-characteristic]. Thus $\\chi(C,\\mathcal L\\otimes\\mathcal G)=\\chi(C,\\mathcal G)$; together with $r(\\mathcal G)=0$ this is $D(\\mathcal G)=0$.",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "lem-pc-chi-zero-dim-support",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-euler-characteristic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYV, proof of condition (2), closed-point calculation; Tag 0AYT, lemma-chi-tensor-finite, clause (5) with n=1."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-coherent-property-devissage] on the Noetherian scheme $C$ to the property $\\mathcal P$ of Step 1. Its condition (0) was checked there; its two-out-of-three condition (1) was checked in Steps 2 and 3; and Step 4 lists every integral closed subscheme, for which Steps 5 through 7 supply a coherent witness with the required support, annihilated generic stalk of residue-field dimension one, and property $\\mathcal P$. The theorem gives $D(\\mathcal F)=0$ for the given coherent module $\\mathcal F$. Expanding this equality gives $\\chi(C,\\mathcal L\\otimes\\mathcal F)=r\\deg_k\\mathcal L+\\chi(C,\\mathcal F)$, including $r=0$.",
+   "uses": [
+    "lem-pc-coherent-property-devissage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYV, final application of Cohomology of Schemes Tag 01YI, lemma-property."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "pqf-def-locnoeth",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-coherent-ft-locnoeth",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-stalk",
+  "def-pc-euler-characteristic",
+  "lem-sc-ext-tensor-exact",
+  "lem-pc-euler-additive",
+  "lem-weil-pbc-module-stalk-exact",
+  "def-weil-vector-space-dimension",
+  "def-pc-integral-scheme",
+  "def-weil-closed-immersion",
+  "def-kun-topological-krull-dimension",
+  "def-weil-residue-field",
+  "def-pc-degree-line-bundle",
+  "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "lem-pc-chi-zero-dim-support",
+  "lem-pc-coherent-property-devissage"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0AYV, lemma-degree-on-proper-curve, rank-one case; its stated route through coherent Tag 01YI, lemma-property, and varieties Tags 08AA and 0AYT."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +202,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.rankAtStalk_tensorProduct\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Flat R M]\\n  [Module.Finite R M] (N : Type u_1) [inst_5 : AddCommGroup N] [inst_6 : Module R N] [Module.Finite R N]\\n  [Module.Flat R N], Module.rankAtStalk (TensorProduct R M N) = Module.rankAtSt\", \"doc\": \"For modules $M$ and $N$ over a commutative semiring $R$, if both are finitely generated and flat, then the rank of their tensor product $M \\\\otimes_R N$ at the stalk corresponding to a prime ideal $\\\\ma\"}\n  {\"name\": \"Module.rankAtStalk_tensorProduct_of_isScalarTower\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Flat R M]\\n  [Module.Finite R M] {S : Type u_1} [inst_5 : CommRing S] [inst_6 : Algebra R S] (N : Type u_2)\\n  [inst_7 : AddCommGroup N] [inst_8 : Module R N] [inst_9 : Module S N] [inst_10 : IsSc\", \"doc\": \"Given commutative rings $R$ and $S$ with $S$ an $R$-algebra, an $S$-module $N$ that is finitely generated and flat over $S$ with compatible $R$-action (via scalar tower), and a prime ideal $\\\\mathfrak{\"}\n  {\"name\": \"Module.rankAtStalk_baseChange\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Flat R M]\\n  [Module.Finite R M] {S : Type u_1} [inst_5 : CommRing S] [inst_6 : Algebra R S] (p : PrimeSpectrum S),\\n  Module.rankAtStalk (TensorProduct R S M) p = Module.rankAtStalk M (PrimeSpect\", \"doc\": \"For a commutative ring homomorphism $ R \\\\to S $, a prime ideal $ \\\\mathfrak{p} \\\\in \\\\text{Spec}(S) $, and an $ R $-module $ M $, the rank of the base-changed module $ S \\\\otimes_R M $ at $ \\\\mathfrak{p} $\"}\n  {\"name\": \"Module.rankAtStalk_eq_finrank_tensorProduct\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (p : PrimeSpectrum R),\\n  Module.rankAtStalk M p =\\n    Module.finrank (Localization.AtPrime p.asIdeal) (TensorProduct R (Localization.AtPrime p.asIdeal) M)\", \"doc\": \"For a prime ideal $\\\\mathfrak{p}$ in the prime spectrum of a commutative semiring $R$, the finite rank of the module $M$ localized at $\\\\mathfrak{p}$ is equal to the finite rank of the tensor product of\"}\n  {\"name\": \"Module.rankAtStalk_eq\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Flat R M]\\n  [Module.Finite R M] (p : PrimeSpectrum R),\\n  Module.rankAtStalk M p = Module.finrank p.asIdeal.ResidueField (TensorProduct R p.asIdeal.ResidueField M)\", \"doc\": \"For a prime ideal $\\\\mathfrak{p}$ in the prime spectrum of a commutative semiring $R$, the finite rank of the module $M$ localized at $\\\\mathfrak{p}$ (converted to a natural number) equals the finite ra\"}\n  {\"name\": \"Module.rankAtStalk_prod\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} (M : Type uM) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Flat R M]\\n  [Module.Finite R M] (N : Type u_1) [inst_5 : AddCommGroup N] [inst_6 : Module R N] [Module.Flat R N]\\n  [Module.Finite R N], Module.rankAtStalk (M × N) = Module.rankAtStalk M + Module\", \"doc\": \"For a commutative semiring $R$ and flat, finitely generated $R$-modules $M$ and $N$, the rank at the stalk of the product module $M \\\\times N$ is equal to the sum of the ranks at the stalks of $M$ and \"}\n  {\"name\": \"Module.rankAtStalk_pi\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} [inst : CommRing R] {ι : Type u_1} [Finite ι] (M : ι → Type u_2) [inst_2 : (i : ι) → AddCommGroup (M i)]\\n  [inst_3 : (i : ι) → Module R (M i)] [∀ (i : ι), Module.Flat R (M i)] [∀ (i : ι), Module.Finite R (M i)]\\n  (p : PrimeSpectrum R), Module.rankAtStalk ((i : ι) → M i) p = ∑ᶠ (i : ι\", \"doc\": \"Let $ R $ be a commutative semiring, and let $ \\\\{M_i\\\\}_{i \\\\in \\\\iota} $ be a finite family of finitely generated flat $ R $-modules, each equipped with an additive commutative group structure. For any \"}\n  {\"name\": \"CommRing.Pic.mul_eq_tensor\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] (M N : CommRing.Pic R),\\n  M * N = CommRing.Pic.mk R (TensorProduct R M.AsModule N.AsModule)\", \"doc\": \"For any commutative semiring $ R $ and elements $ M, N $ in the Picard group $ \\\\mathrm{Pic}(R) $, the group multiplication satisfies $ M \\\\cdot N = [M \\\\otimes_R N] $, where $ [M \\\\otimes_R N] $ denotes \"}\nRead the returned statements: none gives the scheme-theoretic Euler-characteristic formula or a one-line specialization. ",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Euler characteristic of an invertible twist of a coherent sheaf on an integral proper curve equals degree times generic rank plus Euler characteristic",
+   "results": "Returned 8 hits: IncidenceAlgebra.eulerChar_orderDual, IncidenceAlgebra.eulerChar_prod, FDRep.char_one, FDRep.scalar_product_char_eq_finrank_equivariant, LieModule.rank_le_natTrailingDegree_charpoly_ad, FDRep.char_tensor, AlgebraicGeometry.Scheme.Modules.instAbelian, Module.isLocallyConstant_rankAtStalk. Read the returned statements: none states the proper-curve Euler formula. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Riemann Roch Euler characteristic tensor line bundle coherent module generic rank integral proper curve",
+   "results": "Returned 8 hits: Module.rankAtStalk_eq, rank_tensorProduct', Module.isLocallyConstant_rankAtStalk, Module.rankAtStalk_eq_of_equiv, Module.isLocallyConstant_rankAtStalk_freeLocus, Module.rankAtStalk_tensorProduct, WeierstrassCurve.IsIntegral, Module.rankAtStalk_self. Read the returned statements: none states the proper-curve Euler formula. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"eulerChar\", \"tensor\"",
+   "results": "Returned 0 hits: . Read the returned statements: none states the proper-curve Euler formula. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Degree of a line bundle on an algebraic curve controls the change in Euler characteristic of every coherent module under tensoring",
+   "results": "Returned 8 hits: Module.rankAtStalk_tensorProduct, Module.rankAtStalk_tensorProduct_of_isScalarTower, Module.rankAtStalk_baseChange, AlgebraicGeometry.Scheme.Modules.instAbelian, CommRing.Pic.mk_tensor, CommRing.Pic.mul_eq_tensor, CommRing.Pic.mapAlgebra_apply, Module.rankAtStalk_eq_finrank_tensorProduct. Read the returned statements: none states the proper-curve Euler formula. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "eulerChar.*tensor|tensor.*eulerChar|Euler.*generic|generic.*Euler",
+   "results": "Returned 0 hits: . Read the returned statements: none states the proper-curve Euler formula. Mathlib/AlgebraicGeometry searched.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-curve-degree-tensor-additive",
@@ -92,5 +270,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-curve-euler-tensor-generic-rank",
+  "worker": "Q73",
+  "summary": "Realize Stacks 0AYV with n=1 by the existing coherent-property devissage theorem. Explicitly verify zero, tensor and generic-rank additivity, classification of integral closed subschemes, and the structure-sheaf and closed-point witnesses. Reuse existing tensor exactness, coherent closed pushforward, stalk and zero-support lemmas; no new nodes or statement changes.",
+  "blueprint": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Supporting input: the proper integral curve degree criterion (0B5X). In the 0B5X proof this is the tensor-product degree formula used to pass from the degree of a positive tensor power to the degree of the line bundle and to obtain linear Euler-characteristic growth. Supporting input: the integral-curve Euler-characteristic calculation in the proof of Stacks 0AYX (via 0AYV). The steps realize the 0AYV generic-rank calculation in this supporting degree argument: condition (1) in steps 2-3, condition (2) in steps 4-7 and devissage in step 8.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-ext-tensor-exact",
+    "why": "General exactness of tensoring by a finite locally free sheaf, needed for the explicit short exact sequence calculation of 0AYV; this trace-formula unit has no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "why": "Use only clause (1), coherence and support of closed pushforward, to construct the closed-point witness; this generic scheme-module tool is absent from the trace-formula unit."
+   },
+   {
+    "node": "lem-pc-chi-zero-dim-support",
+    "why": "The rank-one zero-dimensional-support calculation is exactly the 0AYT input cited in the 0AYV source proof, not a replacement proof route for a trace-formula unit step."
+   },
+   {
+    "node": "lem-pc-coherent-property-devissage",
+    "why": "The generic coherent-property devissage theorem is the explicit 01YI input of the 0AYV proof; no trace-formula-unit node states this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-ext-tensor-exact",
+  "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "lem-pc-chi-zero-dim-support",
+  "lem-pc-coherent-property-devissage"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-7e0d93e3c",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-7e0d93e3c (reviewer sub-agent of L); spot-checked: I read the whole item, each of its 8 steps and every node it cites. The delivery adds no new nodes, and the statement and stmt_deps are unchanged. Sources: Stacks varieties.tex 9669ff (0AYV, lemma-degree-on-proper-curve) and coherent.tex 3270ff (01YI, lemma-property). The item is 0AYV with n=1 for an integral proper curve of dimension 1, and it follows the source's proof: devissage via 01YI with witnesses O_C (Z=C) and i_*O_Z (closed points, via 0AYT and r=0). Hypotheses checked where they are used: C is Noetherian by finite type over Spec k; both sides are additive, by lem-sc-ext-tensor-exact, the first clause of lem-pc-euler-additive and stalk exactness (clauses 1 and 5) for the generic rank; the classification of integral closed subschemes uses dim C = 1, uniqueness of generic points, and the fact that a domain with one prime is a field; the closed-point witness gets coherence and support {z} from clause (1) of the closed-immersion coherent equivalence, and its stalk is κ(z) acted on through the residue map, zero at ξ, by the closed-pushforward stalk lemma; the twist of the point sheaf comes from clause 3 of lem-pc-chi-zero-dim-support with an explicit swap of tensor factors; all of devissage conditions (0), (1) and (2)(a)-(d) are supplied. Small cases: F=0, F=O_C, O(e) on P^1, point sheaves with residue field extensions, a nodal cubic. The dependency closure has no cycle and no trf nodes. Not a duplicate: degree-weighted-irreducible-components and generic-rank-leading-degree (the latter needs an ample module) are different statements. I accept all four declared tool_uses (tensor exactness, closed-immersion coherent equivalence clause (1), chi-zero-dim-support, coherent-property devissage) as generic scheme-module tools; they are the inputs named in the 0AYV proof. One minor advisory: Step 1 cites pqf-def-coherent for coherence of the twist, where the cleaner reason is the locality of qc+finite type through 01XZ, which is already in that step's uses. No changes."
  }
 }
