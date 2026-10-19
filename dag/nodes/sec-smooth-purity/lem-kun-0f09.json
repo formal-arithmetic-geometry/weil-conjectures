@@ -1,305 +1,297 @@
 {
-  "id": "lem-kun-0f09",
-  "blueprint": {
-    "is": "lem-kun-0f09",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Smooth base change for limits of smooth schemes",
-  "statement": "Let $S$ be a scheme [def-weil-pbc-scheme-conventions] and let $I$ be a nonempty directed set. Let $(S_i)_{i\\in I}$ be an inverse system of schemes over $S$, with structure maps $g_i:S_i\\to S$ which are smooth [def-sbc-smooth-morphisms], quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions], and with affine transition morphisms [pqf-def-affine-morphism]. Suppose $S'=\\varprojlim_i S_i$, with induced structure map $g:S'\\to S$. Let $f:X\\to S$ be quasi-compact and quasi-separated and form the cartesian square [def-weil-pbc-cartesian-square]\n$$\n\\begin{array}{ccc}\nX'=X\\times_S S'&\\xrightarrow{g'}&X\\\\\nf'\\downarrow&&\\downarrow f\\\\\nS'&\\xrightarrow{g}&S.\n\\end{array}\n$$\nLet $E\\in\\Dplus(X_{\\Et})$ be a bounded below complex of abelian etale sheaves [def-weil-pbc-derived-categories]. Assume its cohomology has torsion orders invertible on $S$: explicitly, for every integer $q$, every geometric point $\\bar x$ of $X$, and every element $v\\in\\mathcal H^q(E)_{\\bar x}$ [def-weil-pbc-geometric-stalks], there is a positive integer $n$ such that $nv=0$ and $n\\cdot1$ is a unit in $\\Gamma(S,\\mathcal O_S)$. No common annihilator is required. Then the canonical bounded below derived exchange morphism [def-weil-pbc-derived-exchange]\n$$\n\\Ex_{\\square,E}:g^{-1}Rf_*E\\longrightarrow Rf'_*g'^{-1}E\n$$\nis an isomorphism in $\\Dplus(S'_{\\Et})$. Here $u^{-1}$ and $Ru_*$ are inverse image and derived direct image of abelian etale sheaves [def-weil-pbc-derived-inverse-image], [def-weil-pbc-direct-image]. This is Stacks Tag 0F09 in the case in which the maps $S_i\\to S$ are also quasi-compact and quasi-separated.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f09.md",
-    "place": "node lem-kun-0f09, order 1754",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0F09"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-weil-pbc-scheme-conventions",
-    "def-sbc-smooth-morphisms",
-    "pqf-def-affine-morphism",
-    "def-weil-pbc-cartesian-square",
-    "def-weil-pbc-derived-categories",
-    "def-weil-pbc-geometric-stalks",
-    "def-weil-pbc-derived-exchange",
-    "def-weil-pbc-derived-inverse-image",
-    "def-weil-pbc-direct-image"
-  ],
-  "proof": [
-    {
-      "text": "Put $X_i=X\\times_S S_i$, with projections $g'_i:X_i\\to X$ and $f_i:X_i\\to S_i$. These are cartesian squares in the convention of [def-weil-pbc-cartesian-square]. For $j\\ge i$, $X_j\\to X_i$ is the base change of $S_j\\to S_i$, so is affine by clause (1) of [lem-weil-pbc-affine-morphism-permanence]. The constant systems $S$ and $X$ have affine identity transitions as well. The limit of $(X_i)$ is $X'$, without any assumption that $S$ is quasi-compact: a compatible cone $T\\to X_i$ gives maps $T\\to X$ all equal (use a common upper bound for any two indices) and a compatible family $T\\to S_i$, hence a unique map $T\\to S'$. Their composites to $S$ agree, so the fibre-product universal property gives a unique map $T\\to X'$, inducing the original cone. Conversely a map to $X'$ gives this cone. This proves the required limit universal property.",
-      "uses": [
-        "def-weil-pbc-cartesian-square",
-        "lem-weil-pbc-affine-morphism-permanence"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F09, lemma-smooth-base-change-general, proof; Tag 01SD, morphisms-lemma-base-change-affine"
-      }
-    },
-    {
-      "text": "First let $F$ be an abelian etale sheaf on $X$ with torsion orders invertible on $S$ as explicitly defined in the statement, and fix $p\\ge0$. Apply [sbc-thm-smooth-base-change] with its four corners $(X,Y,S,T)=(S_i,X_i,S,X)$ and its morphisms $(f,g,h,e)=(g_i,f,f_i,g'_i)$. Its smooth leg is $g_i$, its quasi-compact and quasi-separated leg is the given $f$, and its coefficient sheaf is $F$ on $X$, with orders invertible on the same base $S$. All of these are hypotheses already in force. It gives the canonical sheaf base-change isomorphism\n$$g_i^{-1}R^pf_*F\\xrightarrow{\\sim}R^pf_{i,*}(g'_i)^{-1}F$$\nfor every $i$. In particular we do not require the limit map $g$ itself to be smooth.",
-      "uses": [
-        "sbc-thm-smooth-base-change"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F09, lemma-smooth-base-change-general, proof, applying Theorem Tag 0EYU (theorem-smooth-base-change)"
-      }
-    },
-    {
-      "text": "Apply [lem-kun-0ezt] to the transposed inverse system: its corners $(X_i,Y_i,S_i,T_i)$ are $(S_i,X_i,S,X)$, and its arrows $(f_i,h_i,e_i,g_i)$ are $(g_i,f_i,g'_i,f)$. In particular the direct-image leg called $g_i$ in that lemma is the constant map $f:X\\to S$, which is quasi-compact and quasi-separated. Its coefficient system on the constant corner $T_i=X$ is $F_i=F$ with identity transition maps, not the sheaves $(g'_i)^{-1}F$ on $X_i$. This is a compatible system of torsion sheaves and its limit coefficient is $F$: a cocone from the constant identity diagram is exactly a single map from $F$, since $I$ is nonempty and directed. All four systems have affine transitions and the limits identified in Step 1. The finite-stage base-change maps required by that lemma are precisely the maps of Step 2. Its conclusion is therefore\n$$g^{-1}R^pf_*F\\xrightarrow{\\sim}R^pf'_*g'^{-1}F.$$\nThis proves the sheaf assertion for every $p\\ge0$.",
-      "uses": [
-        "lem-kun-0ezt"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F09, lemma-smooth-base-change-general, proof, applying Tag 0EZT (lemma-base-change-Rf-star-colim), assertion (2)"
-      }
-    },
-    {
-      "text": "Choose $a\\in\\mathbf Z$ with $\\mathcal H^q(E)=0$ for $q<a$, and put $\\Phi=g^{-1}Rf_*$ and $\\Psi=Rf'_*g'^{-1}$ on bounded below derived categories of abelian sheaves. Use the two truncation couples, on $S'$, of [def-weil-pbc-hypercohomology-filtrations], parts (2) and (3). Their first pages are\n$$E_2^{p,q}=g^{-1}R^pf_*\\mathcal H^q(E),\\qquad E_2'^{p,q}=R^pf'_*g'^{-1}\\mathcal H^q(E).$$\nThe first is already pulled back to $S'$; we do not compare sheaves on different bases. Clauses (1)--(3) of [lem-weil-pbc-truncation-couple-morphism] give exact couples and a morphism of them induced by $\\Ex_\\square$, with first-page component $\\mathcal H^p(\\Ex_{\\square,\\mathcal H^q(E)})$. By [lem-kun-bc-map-on-cohomology] this component is exactly the usual sheaf base-change map in Step 3, hence is an isomorphism for $p\\ge0$. For $p<0$ both higher direct images vanish, as that same node states, so it is an isomorphism there too. Each sheaf $\\mathcal H^q(E)$ satisfies the coefficient condition by assumption. Now [lem-sp-couple-morphism] supplies a compatible morphism on all spectral-sequence pages.",
-      "uses": [
-        "def-weil-pbc-hypercohomology-filtrations",
-        "lem-weil-pbc-truncation-couple-morphism",
-        "lem-kun-bc-map-on-cohomology",
-        "lem-sp-couple-morphism"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F09, lemma-smooth-base-change-general, proof, spectral sequences; Tag 015J, derived-lemma-two-ss-complex-functor; functoriality made explicit by the cited exact-couple statements"
-      }
-    },
-    {
-      "text": "An isomorphism on page $r$ commuting with differentials induces an isomorphism on page $r+1$: it carries the kernels of the differentials bijectively to the corresponding kernels and their images bijectively to the corresponding images, hence induces an inverse on the quotients defining cohomology. Starting with Step 4 proves that the maps on every page are isomorphisms. Apply [lemma-weil-pbc-hypercohomology-convergence] to these couples: $E$ is bounded below by $a$ and has torsion cohomology, so for fixed total degree $n\\ge a$ there are only $0\\le p\\le n-a$, $q=n-p$, and all these terms have stabilized by $r=n-a+2$. Thus their $E_\\infty$ maps are isomorphisms. By clauses (2)--(4) of [lemma-weil-pbc-exact-couple-abutment], the resulting map on the actual abutments is $\\mathcal H^n(\\Ex_{\\square,E})$, it preserves their finite filtrations, and its maps on associated graded pieces are precisely those $E_\\infty$ maps. Apply [lem-sp-finite-filtration-induction] to conclude that $\\mathcal H^n(\\Ex_{\\square,E})$ is an isomorphism. For $n<a$ both abutments vanish: the finite-filtration assertion of the convergence node gives $F^0H^n=H^n$ and also $F^0H^n=0$ since $0\\ge n-a+1$. Hence the same conclusion holds for every integer $n$.",
-      "uses": [
-        "lemma-weil-pbc-hypercohomology-convergence",
-        "lemma-weil-pbc-exact-couple-abutment",
-        "lem-sp-finite-filtration-induction"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F09, lemma-smooth-base-change-general, proof, final spectral-sequence comparison; Tag 015J, derived-lemma-two-ss-complex-functor, finite convergence"
-      }
-    },
-    {
-      "text": "The exchange is a morphism in $\\Dplus(S'_{\\Et})$. Step 5 shows it is an isomorphism on every cohomology sheaf. Apply [lem-weil-pbc-derived-plus-iso-on-cohomology], with the abelian category of abelian etale sheaves on $S'$, to conclude that $\\Ex_{\\square,E}$ is an isomorphism, as asserted.",
-      "uses": [
-        "lem-weil-pbc-derived-plus-iso-on-cohomology"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F09, lemma-smooth-base-change-general, proof, conclusion; derived-category cohomology criterion"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-weil-pbc-cartesian-square",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "sbc-thm-smooth-base-change",
-    "lem-kun-0ezt",
-    "def-weil-pbc-hypercohomology-filtrations",
-    "lem-weil-pbc-truncation-couple-morphism",
-    "lem-kun-bc-map-on-cohomology",
-    "lem-sp-couple-morphism",
-    "lemma-weil-pbc-hypercohomology-convergence",
-    "lemma-weil-pbc-exact-couple-abutment",
-    "lem-sp-finite-filtration-induction",
-    "lem-weil-pbc-derived-plus-iso-on-cohomology"
-  ],
-  "proof_origin": {
-    "by": "document",
+ "id": "lem-kun-0f09",
+ "blueprint": {
+  "is": "lem-kun-0f09",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Smooth base change for limits of smooth schemes",
+ "statement": "Let $S$ be a scheme [def-weil-pbc-scheme-conventions] and let $I$ be a nonempty directed set. Let $(S_i)_{i\\in I}$ be an inverse system of schemes over $S$, with structure maps $g_i:S_i\\to S$ which are smooth [def-sbc-smooth-morphisms], quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions], and with affine transition morphisms [pqf-def-affine-morphism]. Suppose $S'=\\varprojlim_i S_i$, with induced structure map $g:S'\\to S$. Let $f:X\\to S$ be quasi-compact and quasi-separated and form the cartesian square [def-weil-pbc-cartesian-square]\n$$\n\\begin{array}{ccc}\nX'=X\\times_S S'&\\xrightarrow{g'}&X\\\\\nf'\\downarrow&&\\downarrow f\\\\\nS'&\\xrightarrow{g}&S.\n\\end{array}\n$$\nLet $E\\in\\Dplus(X_{\\Et})$ be a bounded below complex of abelian etale sheaves [def-weil-pbc-derived-categories]. Assume its cohomology has torsion orders invertible on $S$: explicitly, for every integer $q$, every geometric point $\\bar x$ of $X$, and every element $v\\in\\mathcal H^q(E)_{\\bar x}$ [def-weil-pbc-geometric-stalks], there is a positive integer $n$ such that $nv=0$ and $n\\cdot1$ is a unit in $\\Gamma(S,\\mathcal O_S)$. No common annihilator is required. Then the canonical bounded below derived exchange morphism [def-weil-pbc-derived-exchange]\n$$\n\\Ex_{\\square,E}:g^{-1}Rf_*E\\longrightarrow Rf'_*g'^{-1}E\n$$\nis an isomorphism in $\\Dplus(S'_{\\Et})$. Here $u^{-1}$ and $Ru_*$ are inverse image and derived direct image of abelian etale sheaves [def-weil-pbc-derived-inverse-image], [def-weil-pbc-direct-image]. This is Stacks Tag 0F09 in the case in which the maps $S_i\\to S$ are also quasi-compact and quasi-separated.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f09.md",
+  "place": "node lem-kun-0f09, order 1754",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0F09"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-smooth-morphisms",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Transport each algebraically closed geometric-stalk annihilator in hE to a separably closed geometric stalk by precomposing its point with Spec of its algebraic closure. Scheme.isIso_pointSmallEtalePrecomp_sheafFiber is a proved additive isomorphism, so injectivity transports n*x=0 back to the original stalk, retaining the same positive integer and global unit.",
+   "uses": [
+    "lem-weil-pbc-geometric-point-field-extension"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F09, lemma-smooth-base-change-general, proof; sheaf limit application and spectral-sequence comparison expanded using existing DAG statements"
+    "place": "Tag 0F09, lemma-smooth-base-change-general, proof; canonical truncation comparison implemented with the proved PlusDevissage tool"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Smooth base change for torsion etale cohomology along an inverse limit of smooth scheme morphisms with affine transition maps",
-      "results": "Eight hits, including Algebra.FormallyEtale.comp, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.Etale.comp and AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme. They concern rings, differentials, or stability of etaleness, not higher direct images of etale sheaves.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "AlgebraicGeometry.Smooth, CategoryTheory.IsIso",
-      "results": "AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth, Mathlib/AlgebraicGeometry/Normalization.lean:609-611 (read). It is an isomorphism for normalization pullback, not the derived etale exchange.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "smooth.*base.?change|base.?change.*smooth|etale.*cohomology",
-      "results": "Seven hits: smooth_isStableUnderBaseChange in Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:116-118, its alias and relative-dimension heading, and normalization base change in Normalization.lean:28,609. None concerns derived etale cohomology.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Etale cohomology smooth base change and inverse limits of schemes",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "For bounded below complexes of torsion abelian sheaves, derived direct image commutes with pullback by a pro-smooth morphism of schemes",
-      "results": "Eight hits: SheafOfModules.pullbackComp and related coherence identities, and AlgebraicGeometry.Scheme.Modules.pushforwardComp/pseudofunctor_associativity. None is a theorem identifying derived etale direct images under pro-smooth base change.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "baseChange|higherDirectImage|IsTorsionSheaf",
-      "results": "First 25 returned hits are stability APIs, elliptic-curve division-polynomial base change and Weierstrass base change. None states the item; this broad grep is supplemental to the targeted grep.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1754,
-  "blueprint_uses": [
-    "def-kun-torsion-invertible",
-    "def-kun-unbounded-exchange",
-    "def-sbc-smooth-morphisms",
-    "def-weil-pbc-cartesian-square",
-    "def-weil-pbc-derived-categories",
-    "def-weil-pbc-hypercohomology-filtrations",
-    "def-weil-pbc-scheme-conventions",
-    "lem-kun-0ezt",
-    "lem-kun-bc-base-change",
-    "lem-kun-fibre-product-limits",
-    "lem-sp-finite-filtration-induction",
-    "lemma-weil-pbc-hypercohomology-convergence",
-    "sbc-thm-smooth-base-change"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-cartesian-square"
-  ],
-  "proof_split_by": "labels",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-kunneth-ordinary",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "lem-kun-0f09",
-    "worker": "stage1",
-    "summary": "Checked Stacks 0F09, 0EZT(2), 0EYU and 015J. Made the scheme-base torsion condition explicit because def-kun-torsion-invertible only defines the field case. Corrected the orientation and coefficient system in the limit application, replaced the unrelated base-square naturality citation by the existing truncation-couple theorem, and identified the canonical exchange on first pages and abutments. Reused existing nodes only; no attachment covers pro-smooth limits and no Mathlib match was found.",
-    "blueprint": "Steps 1--3 realize blueprint Proof Step 1 (smooth sheaf base change followed by 0EZT); Steps 4--6 realize blueprint Proof Step 2 (finite hypercohomology spectral-sequence comparison). No chapter or unit route changed.",
-    "tool_uses": [
-      {
-        "node": "sbc-thm-smooth-base-change",
-        "why": "Step 2 uses smooth base change for abelian sheaves (Tag 0EYU), explicitly required by the item's source and blueprint proof; no node of this unit replaces its proof."
-      },
-      {
-        "node": "lem-weil-pbc-truncation-couple-morphism",
-        "why": "Step 4 uses the generic exchange morphism of truncation exact couples and its identified first-page map, rather than assuming coefficient naturality implies shift compatibility."
-      },
-      {
-        "node": "lem-sp-couple-morphism",
-        "why": "Step 4 uses the generic functoriality of spectral sequences of exact couples; the unit has no separate exact-couple functoriality theorem."
-      },
-      {
-        "node": "lemma-weil-pbc-hypercohomology-convergence",
-        "why": "Step 5 uses the generic finite convergence and stabilization bounds for bounded below hypercohomology, already part of the imported proof route."
-      },
-      {
-        "node": "lemma-weil-pbc-exact-couple-abutment",
-        "why": "Step 5 uses identification of the actual abutment map with cohomology of the derived exchange and of its graded maps with the E-infinity maps."
-      },
-      {
-        "node": "lem-sp-finite-filtration-induction",
-        "why": "Step 5 uses the general finite-filtration isomorphism criterion, already cited in the blueprint proof."
-      }
-    ]
-  },
-  "tool_uses": [
+  {
+   "text": "For an abelian sheaf F with this elementwise condition, use the existing equivalence sheafCompose(forget from ULift Z modules) to choose its uniquely determined module encoding G and its comparison eF. The proved Point.sheafFiberCompIso and eF identify the underlying module stalk with the abelian stalk. Its injective additive comparison transfers annihilators, giving Scheme.IsTorsionSheafOfInvertibleOrder S G. Apply the recorded smooth base change theorem, via the already proved isIso_baseChange_app_singleFunctor_obj_of_smooth of SmoothBaseChange/Derived.lean, to each stage. The source-library DerivedForget theorem isIso_derivedBaseChangeMapPlus_app_forget₂_iff and the exact functor single comparison transport the same canonical exchange back to F. This uses no choice from an unproved mere existence theorem: objPreimage and objObjPreimageIso belong to the proved equivalence.",
+   "uses": [
     "sbc-thm-smooth-base-change",
-    "lem-weil-pbc-truncation-couple-morphism",
-    "lem-sp-couple-morphism",
-    "lemma-weil-pbc-hypercohomology-convergence",
-    "lemma-weil-pbc-exact-couple-abutment",
-    "lem-sp-finite-filtration-induction"
-  ],
-  "reviewed": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-Codex-Q42-f3583ed62",
-    "group": "Q42",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q42-f3583ed62 (reviewer sub-agent of L); spot-checked: Reviewed item lem-kun-0f09, all six steps, cited DAG statements, Stacks Tags 0F09/0EYU/0EZT/015J/01SD, unit/chapter route, and archived master coefficient category. Verified hypotheses, coefficient corner, canonical exchange, spectral-sequence comparison, edge cases, searches, tool uses, and acyclicity. Wrote review.md; no repairs needed."
+    "def-weil-pbc-derived-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F09, lemma-smooth-base-change-general, proof; canonical truncation comparison implemented with the proved PlusDevissage tool"
+   }
   },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.SmoothBaseChangeLimit",
-    "declaration": "AlgebraicGeometry.smoothBaseChange_of_inverseLimit",
-    "statement": "theorem smoothBaseChange_of_inverseLimit {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (S : Scheme.{u}) (D : Iᵒᵖ ⥤ Scheme.{u}) (η : D ⟶ (Functor.const Iᵒᵖ).obj S) (htrans : ∀ (i j : Iᵒᵖ) (a : i ⟶ j), IsAffineHom (D.map a)) (c : Cone D) (hc : IsLimit c) (g : c.pt ⟶ S) (hη : ∀ (i : Iᵒᵖ), c.π.app i ≫ η.app i = g) (hsm : ∀ (i : Iᵒᵖ), Smooth (η.app i)) (hqc : ∀ (i : Iᵒᵖ), QuasiCompact (η.app i)) (hqs : ∀ (i : Iᵒᵖ), QuasiSeparated (η.app i)) {X : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] {X' : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ c.pt} (sq : ChosenCartesianSquare g' f' f g) (E : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (hE : ∀ (q : ℤ) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ X) (x : ((Scheme.pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).obj ((DerivedCategory.Plus.homologyFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj E)), ∃ n : ℕ, 0 < n ∧ n • x = 0 ∧ IsUnit (n : Γ(S, ⊤))) : IsIso ((Etale.derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app E)",
-    "by": "Q44",
-    "date": "2026-10-16",
-    "file": "lean/Sheaf/AlgebraicGeometry/SmoothBaseChangeLimit.lean",
-    "branch": "newtargets-dag",
-    "existing": false
+  {
+   "text": "Construct the pointwise fibre products X ×_S D_i, their two projection natural transformations and the cone from X-prime using pullback.lift. Prove the cone is limiting directly: any competing cone gives a map to X by the constant-cone universal property and a map to c.pt by hc; their composites to S agree at any chosen index. The chosen pullback square lifts them uniquely to X-prime. Checking both projections proves factorization and uniqueness. MorphismProperty.pullbackMap gives affine transitions from htrans; constant diagrams have identity transitions. No absolute quasi-compactness assumption on S is used.",
+   "uses": [
+    "def-weil-pbc-cartesian-square",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F09, lemma-smooth-base-change-general, proof; canonical truncation comparison implemented with the proved PlusDevissage tool"
+   }
   },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-c98b0791c",
-    "group": "Q44",
-    "result": "pass",
-    "note": "Reviewed packet, node, all dependencies, source alignment, Lean signature, docstrings, edge cases, report sections, and searches. scompile.py passed sandbox and library compilation; no substantive or mechanical findings."
+  {
+   "text": "Apply higherDirectImage_baseChange_of_limit to the four diagrams (D, pulled-back D, constant S, constant X), with direct-image leg the constant f. Its finite-stage hypotheses are Step 2. Its coefficient sheaves are all F, with transition maps upperStarId.hom. The upperStarComp unit laws prove their identity and composition conditions and the compatibility with the constant diagram with value F. The latter has cocone F and is colimiting since I is connected; the two constant scheme cones are likewise limiting. Positive elementwise annihilators give Sheaf.IsTorsion F. The conclusion proves invertibility of each nonnegative cohomology map of the canonical exchange on F[0]. In negative degrees both sides are zero: right derived direct image preserves the lower bound zero and exact inverse image preserves cohomology. DerivedCategory.Plus.isIso_iff therefore makes exchange on F[0] invertible.",
+   "uses": [
+    "lem-kun-0ezt",
+    "lem-weil-pbc-derived-functor-negative-vanishing",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "lem-weil-pbc-derived-plus-iso-on-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F09, lemma-smooth-base-change-general, proof; canonical truncation comparison implemented with the proved PlusDevissage tool"
+   }
   },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $S$ be a scheme and $S'=\\varprojlim_iS_i$ a directed inverse\nlimit of schemes $S_i$ which are\nsmooth, quasi-compact and\nquasi-separated over $S$, with affine transition morphisms. Let\n$f:X\\to S$ be quasi-compact\nand quasi-separated and form the\ncartesian square\n\n$$\n\\begin{array}{ccc}\nX'&\\xrightarrow{\\;g'\\;}&X\\\\\n\\Big\\downarrow{\\scriptstyle f'}&&\\Big\\downarrow{\\scriptstyle f}\\\\\nS'&\\xrightarrow{\\;g\\;}&S .\n\\end{array}\n$$\n\nThen $g^{-1}Rf_*E=Rf'_*(g')^{-1}E$ for any\n$E\\in\\Dplus(X_{\\Et})$ whose cohomology sheaves have stalks which are\ntorsion of orders invertible on $S$, in the sense of\n[def-kun-torsion-invertible].",
-    "proof": [
-      {
-        "text": "*Step 1 (the sheaf case).* Let $F$ be an abelian sheaf on\n$X_{\\Et}$ with torsion stalks of orders invertible on $S$, and fix\n$p\\ge0$. For every $i$ form the cartesian square\n\n$$\n\\begin{array}{ccc}\nX&\\xleftarrow{\\;g'_i\\;}&X\\times_SS_i\\\\\n\\Big\\downarrow{\\scriptstyle f}&&\\Big\\downarrow{\\scriptstyle f_i}\\\\\nS&\\xleftarrow{\\;g_i\\;}&S_i\n\\end{array}\n$$\n\nwith $g_i:S_i\\to S$ smooth and quasi-compact and quasi-separated\n([def-sbc-smooth-morphisms],\n[def-weil-pbc-scheme-conventions]) and\n$f_i=f\\times_S\\id_{S_i}$. The schemes $X\\times_SS_i$ form an inverse\nsystem with affine transition morphisms whose limit is\n$X'=X\\times_SS'$, by\n[lem-kun-fibre-product-limits] (limits and fibre products commute), so\nthe squares displayed above form an inverse system of cartesian squares, in\nthe sense of [lem-kun-0ezt], with limit the square of the\nstatement.\n\nSince $g_i$ is smooth and $f$ is quasi-compact and quasi-separated, the\nsmooth base change theorem [sbc-thm-smooth-base-change] of the smooth-base-change chapter,\napplied to the displayed square in the transposed orientation, gives\n\n$$\ng_i^{-1}R^pf_*F\\xrightarrow{\\ \\sim\\ }R^pf_{i,*}(g'_i)^{-1}F ,\n$$\n\nthe coefficient $F$ having torsion stalks of orders invertible on $S$,\nhence on the smooth $S$-scheme $S_i$. The sheaves\n$F_i:=(g'_i)^{-1}F$ form a compatible system with\n$\\varinjlim_ip_i^{-1}F_i=(g')^{-1}F$, so the higher-direct-image form\n[lem-kun-0ezt] of the limit statement, applied for the fixed $p$,\nyields\n\n$$\ng^{-1}R^pf_*F\\xrightarrow{\\ \\sim\\ }R^pf'_*(g')^{-1}F .\n$$",
-        "uses": [
-          "def-sbc-smooth-morphisms",
-          "def-weil-pbc-scheme-conventions",
-          "lem-kun-fibre-product-limits",
-          "lem-kun-0ezt",
-          "sbc-thm-smooth-base-change"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Step 2 (the complex case).* Let $E\\in\\Dplus(X_{\\Et})$ be as in the\nstatement. By [def-weil-pbc-hypercohomology-filtrations] the two\nhypercohomology spectral sequences\n\n$$\nE_2^{p,q}=R^pf_*\\mathcal H^q(E)\\Longrightarrow\\mathcal H^{p+q}(Rf_*E),\n\\qquad\nE_2'^{p,q}=R^pf'_*(g')^{-1}\\mathcal H^q(E)\n\\Longrightarrow\\mathcal H^{p+q}(Rf'_*(g')^{-1}E)\n$$\n\nare defined by the truncation filtrations, and by\n[lemma-weil-pbc-hypercohomology-convergence] the induced filtrations in\neach degree are finite, exhaustive and separated. The exchange morphism\n$g^{-1}Rf_*E\\to Rf'_*(g')^{-1}E$ of [def-kun-unbounded-exchange] is\nnatural in the coefficient object\n([lem-kun-bc-base-change]), so it is compatible with the truncation\ntriangles and induces a morphism of filtered objects, hence a morphism of\nthe two spectral sequences which on $E_2^{p,q}$ is the base-change map\n$g^{-1}R^pf_*\\mathcal H^q(E)\\to R^pf'_*(g')^{-1}\\mathcal H^q(E)$. By Step\n1 this is an isomorphism for every $(p,q)$; a morphism of spectral\nsequences which is an isomorphism on $E_2$ is an isomorphism on every\n$E_r$ and hence on the associated graded objects of the abutments. Since\nthe filtrations are finite, [lem-sp-finite-filtration-induction]\nupgrades this to an isomorphism of the abutments in every degree, i.e. to\n\n$$\n\\mathcal H^n\\bigl(g^{-1}Rf_*E\\bigr)\\xrightarrow{\\ \\sim\\ }\n\\mathcal H^n\\bigl(Rf'_*(g')^{-1}E\\bigr)\\qquad(n\\in\\mathbf Z).\n$$\n\nA morphism in $D(S'_{\\Et})$ which is an isomorphism on all cohomology\nsheaves is an isomorphism ([def-weil-pbc-derived-categories]), which is\nthe assertion.",
-        "uses": [
-          "def-weil-pbc-hypercohomology-filtrations",
-          "lemma-weil-pbc-hypercohomology-convergence",
-          "def-kun-unbounded-exchange",
-          "lem-kun-bc-base-change",
-          "lem-sp-finite-filtration-induction",
-          "def-weil-pbc-derived-categories"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Apply the already proved source-library tool DerivedCategory.Plus.isIso_app_of_forall_homology (WeilConjectures.CategoryTheory.DerivedCategory.PlusDevissage) to the canonical exchange and the object property P(F) = exchange on F[0] is invertible. Naturality makes P invariant under isomorphisms. The triangulated and shift-compatible structures of canonical exchange are existing ones. Both composite functors preserve every lower cohomology bound: apply right-derived negative vanishing and the exact-inverse-image homology comparison, in the source and target orders respectively. Step 4 and Step 1 give P(H^q(E)) for every q. The tool performs finite induction along truncation triangles and the bounded-below truncation comparison, proving precisely the asserted exchange isomorphism. Thus no explicit exact couples, convergence data or finite-filtration induction are needed; no realized statement or proof step of the containing unit is bypassed (its realized fields are empty).",
+   "uses": [
+    "def-weil-pbc-derived-exchange",
+    "lem-weil-pbc-derived-functor-negative-vanishing",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F09, lemma-smooth-base-change-general, proof; canonical truncation comparison implemented with the proved PlusDevissage tool"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-geometric-point-field-extension",
+  "sbc-thm-smooth-base-change",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-cartesian-square",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-kun-0ezt",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-derived-plus-iso-on-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent R7",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F09, lemma-smooth-base-change-general: finite-stage smooth base change and Tag 0EZT continuity, followed by the proved PlusDevissage truncation-triangle comparison instead of explicit spectral sequences. Full Lean reduction, no new holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth base change for torsion etale cohomology along an inverse limit of smooth scheme morphisms with affine transition maps",
+   "results": "Eight hits, including Algebra.FormallyEtale.comp, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.Etale.comp and AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme. They concern rings, differentials, or stability of etaleness, not higher direct images of etale sheaves.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, CategoryTheory.IsIso",
+   "results": "AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth, Mathlib/AlgebraicGeometry/Normalization.lean:609-611 (read). It is an isomorphism for normalization pullback, not the derived etale exchange.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*base.?change|base.?change.*smooth|etale.*cohomology",
+   "results": "Seven hits: smooth_isStableUnderBaseChange in Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:116-118, its alias and relative-dimension heading, and normalization base change in Normalization.lean:28,609. None concerns derived etale cohomology.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology smooth base change and inverse limits of schemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For bounded below complexes of torsion abelian sheaves, derived direct image commutes with pullback by a pro-smooth morphism of schemes",
+   "results": "Eight hits: SheafOfModules.pullbackComp and related coherence identities, and AlgebraicGeometry.Scheme.Modules.pushforwardComp/pseudofunctor_associativity. None is a theorem identifying derived etale direct images under pro-smooth base change.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|higherDirectImage|IsTorsionSheaf",
+   "results": "First 25 returned hits are stability APIs, elliptic-curve division-polynomial base change and Weierstrass base change. None states the item; this broad grep is supplemental to the targeted grep.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1754,
+ "blueprint_uses": [
+  "def-kun-torsion-invertible",
+  "def-kun-unbounded-exchange",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-hypercohomology-filtrations",
+  "def-weil-pbc-scheme-conventions",
+  "lem-kun-0ezt",
+  "lem-kun-bc-base-change",
+  "lem-kun-fibre-product-limits",
+  "lem-sp-finite-filtration-induction",
+  "lemma-weil-pbc-hypercohomology-convergence",
+  "sbc-thm-smooth-base-change"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-cartesian-square"
+ ],
+ "proof_split_by": "labels",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-0f09",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0F09, 0EZT(2), 0EYU and 015J. Made the scheme-base torsion condition explicit because def-kun-torsion-invertible only defines the field case. Corrected the orientation and coefficient system in the limit application, replaced the unrelated base-square naturality citation by the existing truncation-couple theorem, and identified the canonical exchange on first pages and abutments. Reused existing nodes only; no attachment covers pro-smooth limits and no Mathlib match was found.",
+  "blueprint": "Steps 1--3 realize blueprint Proof Step 1 (smooth sheaf base change followed by 0EZT); Steps 4--6 realize blueprint Proof Step 2 (finite hypercohomology spectral-sequence comparison). No chapter or unit route changed.",
+  "tool_uses": [
+   {
+    "node": "sbc-thm-smooth-base-change",
+    "why": "Step 2 uses smooth base change for abelian sheaves (Tag 0EYU), explicitly required by the item's source and blueprint proof; no node of this unit replaces its proof."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-couple-morphism",
+    "why": "Step 4 uses the generic exchange morphism of truncation exact couples and its identified first-page map, rather than assuming coefficient naturality implies shift compatibility."
+   },
+   {
+    "node": "lem-sp-couple-morphism",
+    "why": "Step 4 uses the generic functoriality of spectral sequences of exact couples; the unit has no separate exact-couple functoriality theorem."
+   },
+   {
+    "node": "lemma-weil-pbc-hypercohomology-convergence",
+    "why": "Step 5 uses the generic finite convergence and stabilization bounds for bounded below hypercohomology, already part of the imported proof route."
+   },
+   {
+    "node": "lemma-weil-pbc-exact-couple-abutment",
+    "why": "Step 5 uses identification of the actual abutment map with cohomology of the derived exchange and of its graded maps with the E-infinity maps."
+   },
+   {
+    "node": "lem-sp-finite-filtration-induction",
+    "why": "Step 5 uses the general finite-filtration isomorphism criterion, already cited in the blueprint proof."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-thm-smooth-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q42-f3583ed62",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q42-f3583ed62 (reviewer sub-agent of L); spot-checked: Reviewed item lem-kun-0f09, all six steps, cited DAG statements, Stacks Tags 0F09/0EYU/0EZT/015J/01SD, unit/chapter route, and archived master coefficient category. Verified hypotheses, coefficient corner, canonical exchange, spectral-sequence comparison, edge cases, searches, tool uses, and acyclicity. Wrote review.md; no repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothBaseChangeLimit",
+  "declaration": "AlgebraicGeometry.smoothBaseChange_of_inverseLimit",
+  "statement": "theorem smoothBaseChange_of_inverseLimit {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (S : Scheme.{u}) (D : Iᵒᵖ ⥤ Scheme.{u}) (η : D ⟶ (Functor.const Iᵒᵖ).obj S) (htrans : ∀ (i j : Iᵒᵖ) (a : i ⟶ j), IsAffineHom (D.map a)) (c : Cone D) (hc : IsLimit c) (g : c.pt ⟶ S) (hη : ∀ (i : Iᵒᵖ), c.π.app i ≫ η.app i = g) (hsm : ∀ (i : Iᵒᵖ), Smooth (η.app i)) (hqc : ∀ (i : Iᵒᵖ), QuasiCompact (η.app i)) (hqs : ∀ (i : Iᵒᵖ), QuasiSeparated (η.app i)) {X : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] {X' : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ c.pt} (sq : ChosenCartesianSquare g' f' f g) (E : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (hE : ∀ (q : ℤ) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ X) (x : ((Scheme.pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).obj ((DerivedCategory.Plus.homologyFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj E)), ∃ n : ℕ, 0 < n ∧ n • x = 0 ∧ IsUnit (n : Γ(S, ⊤))) : IsIso ((Etale.derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app E)",
+  "by": "Q44",
+  "date": "2026-10-16",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothBaseChangeLimit.lean",
+  "branch": "newtargets-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c98b0791c",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Reviewed packet, node, all dependencies, source alignment, Lean signature, docstrings, edge cases, report sections, and searches. scompile.py passed sandbox and library compilation; no substantive or mechanical findings."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $S$ be a scheme and $S'=\\varprojlim_iS_i$ a directed inverse\nlimit of schemes $S_i$ which are\nsmooth, quasi-compact and\nquasi-separated over $S$, with affine transition morphisms. Let\n$f:X\\to S$ be quasi-compact\nand quasi-separated and form the\ncartesian square\n\n$$\n\\begin{array}{ccc}\nX'&\\xrightarrow{\\;g'\\;}&X\\\\\n\\Big\\downarrow{\\scriptstyle f'}&&\\Big\\downarrow{\\scriptstyle f}\\\\\nS'&\\xrightarrow{\\;g\\;}&S .\n\\end{array}\n$$\n\nThen $g^{-1}Rf_*E=Rf'_*(g')^{-1}E$ for any\n$E\\in\\Dplus(X_{\\Et})$ whose cohomology sheaves have stalks which are\ntorsion of orders invertible on $S$, in the sense of\n[def-kun-torsion-invertible].",
+  "proof": [
+   {
+    "text": "*Step 1 (the sheaf case).* Let $F$ be an abelian sheaf on\n$X_{\\Et}$ with torsion stalks of orders invertible on $S$, and fix\n$p\\ge0$. For every $i$ form the cartesian square\n\n$$\n\\begin{array}{ccc}\nX&\\xleftarrow{\\;g'_i\\;}&X\\times_SS_i\\\\\n\\Big\\downarrow{\\scriptstyle f}&&\\Big\\downarrow{\\scriptstyle f_i}\\\\\nS&\\xleftarrow{\\;g_i\\;}&S_i\n\\end{array}\n$$\n\nwith $g_i:S_i\\to S$ smooth and quasi-compact and quasi-separated\n([def-sbc-smooth-morphisms],\n[def-weil-pbc-scheme-conventions]) and\n$f_i=f\\times_S\\id_{S_i}$. The schemes $X\\times_SS_i$ form an inverse\nsystem with affine transition morphisms whose limit is\n$X'=X\\times_SS'$, by\n[lem-kun-fibre-product-limits] (limits and fibre products commute), so\nthe squares displayed above form an inverse system of cartesian squares, in\nthe sense of [lem-kun-0ezt], with limit the square of the\nstatement.\n\nSince $g_i$ is smooth and $f$ is quasi-compact and quasi-separated, the\nsmooth base change theorem [sbc-thm-smooth-base-change] of the smooth-base-change chapter,\napplied to the displayed square in the transposed orientation, gives\n\n$$\ng_i^{-1}R^pf_*F\\xrightarrow{\\ \\sim\\ }R^pf_{i,*}(g'_i)^{-1}F ,\n$$\n\nthe coefficient $F$ having torsion stalks of orders invertible on $S$,\nhence on the smooth $S$-scheme $S_i$. The sheaves\n$F_i:=(g'_i)^{-1}F$ form a compatible system with\n$\\varinjlim_ip_i^{-1}F_i=(g')^{-1}F$, so the higher-direct-image form\n[lem-kun-0ezt] of the limit statement, applied for the fixed $p$,\nyields\n\n$$\ng^{-1}R^pf_*F\\xrightarrow{\\ \\sim\\ }R^pf'_*(g')^{-1}F .\n$$",
+    "uses": [
+     "def-sbc-smooth-morphisms",
+     "def-weil-pbc-scheme-conventions",
+     "lem-kun-fibre-product-limits",
+     "lem-kun-0ezt",
+     "sbc-thm-smooth-base-change"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 2 (the complex case).* Let $E\\in\\Dplus(X_{\\Et})$ be as in the\nstatement. By [def-weil-pbc-hypercohomology-filtrations] the two\nhypercohomology spectral sequences\n\n$$\nE_2^{p,q}=R^pf_*\\mathcal H^q(E)\\Longrightarrow\\mathcal H^{p+q}(Rf_*E),\n\\qquad\nE_2'^{p,q}=R^pf'_*(g')^{-1}\\mathcal H^q(E)\n\\Longrightarrow\\mathcal H^{p+q}(Rf'_*(g')^{-1}E)\n$$\n\nare defined by the truncation filtrations, and by\n[lemma-weil-pbc-hypercohomology-convergence] the induced filtrations in\neach degree are finite, exhaustive and separated. The exchange morphism\n$g^{-1}Rf_*E\\to Rf'_*(g')^{-1}E$ of [def-kun-unbounded-exchange] is\nnatural in the coefficient object\n([lem-kun-bc-base-change]), so it is compatible with the truncation\ntriangles and induces a morphism of filtered objects, hence a morphism of\nthe two spectral sequences which on $E_2^{p,q}$ is the base-change map\n$g^{-1}R^pf_*\\mathcal H^q(E)\\to R^pf'_*(g')^{-1}\\mathcal H^q(E)$. By Step\n1 this is an isomorphism for every $(p,q)$; a morphism of spectral\nsequences which is an isomorphism on $E_2$ is an isomorphism on every\n$E_r$ and hence on the associated graded objects of the abutments. Since\nthe filtrations are finite, [lem-sp-finite-filtration-induction]\nupgrades this to an isomorphism of the abutments in every degree, i.e. to\n\n$$\n\\mathcal H^n\\bigl(g^{-1}Rf_*E\\bigr)\\xrightarrow{\\ \\sim\\ }\n\\mathcal H^n\\bigl(Rf'_*(g')^{-1}E\\bigr)\\qquad(n\\in\\mathbf Z).\n$$\n\nA morphism in $D(S'_{\\Et})$ which is an isomorphism on all cohomology\nsheaves is an isomorphism ([def-weil-pbc-derived-categories]), which is\nthe assertion.",
+    "uses": [
+     "def-weil-pbc-hypercohomology-filtrations",
+     "lemma-weil-pbc-hypercohomology-convergence",
+     "def-kun-unbounded-exchange",
+     "lem-kun-bc-base-change",
+     "lem-sp-finite-filtration-induction",
+     "def-weil-pbc-derived-categories"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261019T231331-L-575159",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

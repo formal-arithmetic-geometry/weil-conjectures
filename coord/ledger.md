@@ -17742,3 +17742,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:13 L: merged deliver/R5/Sheaf.AlgebraicGeometry.EtaleSheafAlgebraicSpaceRealization (stage 3; reviewer PASS; first push; landing 20261019T231326-L-574292 (proof); batch 20261019T231019; modules 1; new nodes 0)
 - 23:13 L: merged deliver/R6/Sheaf.Paper.CompletedReductionSquare (stage 3; reviewer PASS; first push; landing 20261019T231328-L-574549 (proof); batch 20261019T231019; modules 1; new nodes 0)
 - 23:13 L: merged deliver/R6/Sheaf.Paper.LocalFrobeniusTrace (stage 3; reviewer PASS; first push; landing 20261019T231329-L-574840 (interface); batch 20261019T231019; modules 1; new nodes 0; change records: coord/changes/local-frobenius-trace-transparency.md)
+- 23:13 L: merged deliver/R7/Sheaf.AlgebraicGeometry.SmoothBaseChangeLimit (stage 3; reviewer PASS; first push; landing 20261019T231331-L-575159 (proof); batch 20261019T231019; modules 1; new nodes 0)
