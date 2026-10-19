@@ -18,7 +18,7 @@
  ],
  "proof": [
   {
-   "text": "Put $f=\\operatorname{id}_X$, $L=f^{-1}$, $R=f_*$ and $B=A_X$. Specializing [lem-weil-proetale-isomorphism-inverse-image](1) gives $e:L\\xrightarrow{\\sim}\\operatorname{id}$, natural in sheaves and site objects. Its normalization can be read directly in [def-weil-proetale-inverse-image]: for $U\\to X$, the pair $(U,\\delta_U:U\\to X\\times_XU)$ is initial in $\\mathcal I_U$, since the unique arrow to $(V,\\phi)$ is $a=\\operatorname{pr}_2\\phi:U\\to V$. Indeed its two projections force $u_f(a)\\delta_U=\\phi$ and determine $a$. Thus it is terminal in $\\mathcal I_U^{\\mathrm{op}}$. The maps from the colimit to $F(U)$ send the coprojection of $s\\in F(V)$ at $(V,\\phi)$ to $a^*s$; their inverse is the coprojection at $(U,\\delta_U)$. Both composites are identities by the cocone equations. These maps commute with restrictions and sheaf morphisms. Their target is already the sheaf $F$, so the sheafification universal property [def-weil-pbc-sheafification] gives exactly $e_F$. For abelian or ring sheaves all maps here are restriction homomorphisms, so $e_F$ is an isomorphism in the corresponding algebraic category.",
+   "text": "Construct the ring-sheaf identity comparison as the conjugate of the canonical direct-image identity isomorphism. Its adjunction-unit equation, and the normalized inverse of proEtaleIsoInverseImageIdentification, show the required sectionwise formula by naturality and the pullback projection identities.",
    "uses": [
     "lem-weil-proetale-isomorphism-inverse-image",
     "def-weil-proetale-inverse-image",
@@ -31,7 +31,7 @@
    }
   },
   {
-   "text": "Compute the adjoint $\\widetilde e_B:B\\to RB$ of $e_B:LB\\to B$. By the colimit/sheafification adjunction in [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction], the unit on $s\\in B(V)$ is the coprojection indexed by $(V,\\operatorname{id}_{u_f(V)})$, followed by sheafification. This formula follows from the adjunction bijection: a map out of the colimit is evaluated on that coprojection to obtain its adjunct. Step 1 then gives $\\widetilde e_{B,V}(s)=\\operatorname{pr}_2^*(s)\\in B(X\\times_XV)$. In particular the image of each constant $a\\in A$ is the same constant section on $X\\times_XV$. The map $\\rho_A^f:B\\to RB$ of [def-weil-proetale-inverse-image] has exactly those values on the constant presheaf. Since $B$ is its sheafification [def-weil-pbc-constant-sheaf], uniqueness in [def-weil-pbc-sheafification] gives $\\widetilde e_B=\\rho_A^f$. The ring adjunction of [def-weil-proetale-inverse-image] has the same unit as the underlying sheaf adjunction, and Step 1 already made $e_B$ a ring map. Taking adjuncts therefore proves $e_B=c_A^f$ as ring-sheaf morphisms, with the specified coefficient map, not just some isomorphism $LB\\cong B$.",
+   "text": "Apply the ring inverse-image adjunction Hom equivalence to the identity comparison on the constant ring. Its transpose is the inverse of the direct-image identity comparison. Apply the constant-presheaf sheafification adjunction: naturality of its unit along the identity pullback projection identifies this transpose with the specified constant direct-image map. Hence the comparison equals the specified coefficient map.",
    "uses": [
     "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
     "def-weil-proetale-inverse-image",
@@ -45,12 +45,13 @@
    }
   },
   {
-   "text": "Let $M$ be a $B$-module sheaf, with action $\\mu:B\\times M\\to M$ as in [def-weil-sheaf-of-modules-category]. The inverse-image action in [def-weil-proetale-inverse-image] is $L\\mu$ under $L(B\\times M)\\cong LB\\times LM$. Naturality of $e$ with the two projections identifies $e_{B\\times M}$ with $e_B\\times e_M$: the two projection composites agree, which determines a map to a product. Naturality with $\\mu$ therefore gives, on every site object, $e_M(t\\cdot m)=e_B(t)\\cdot e_M(m)$. Naturality with addition and zero gives the analogous additive identities; alternatively Step 1 already gives an abelian-sheaf isomorphism. By Step 2, transporting the source action to $B$ means $b\\cdot m=(c_A^f)^{-1}(b)\\cdot m$, whence $e_M(b\\cdot m)=b\\cdot e_M(m)$. Its inverse is linear too: substitute $m=e_M^{-1}(z)$ in this equality. Thus $e_M:(LM)^{(c_A^f)}\\to M$ is an isomorphism of $B$-module sheaves. Naturality for a module morphism follows from naturality for its underlying sheaf map, and the maps commute with all restrictions.",
+   "text": "Use the uniquely unit-normalized module identity comparison of lem-pur-proetale-inverse-image-tensor-comparison. The ring comparison of that lemma is the conjugate of the same direct-image identity isomorphism, hence equals the specified coefficient isomorphism by Step 2. Restrict scalars along its inverse and cancel the two scalar restrictions using ModuleCat.restrictScalarsComp and restrictScalarsId. Naturality with the identity pullback inverse shows that the inverse is exactly the distinguished coprojection. Naturality of that coprojection follows from the module adjunction unit and its restriction maps, and yields the module natural isomorphism.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
-    "def-weil-proetale-inverse-image"
+    "def-weil-proetale-inverse-image",
+    "lem-pur-proetale-inverse-image-tensor-comparison"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
     "place": "Tag 03D1 (lemma-pullback-module); naturality with the action and product projections, written explicitly"
@@ -70,7 +71,7 @@
    }
   },
   {
-   "text": "Write $F=f^*$ on the abelian category $\\mathcal A=\\operatorname{Mod}(B)$ of [def-weil-sheaf-of-modules-category]. Step 4 identifies $F$ naturally with the identity. Hence $F$ is additive (conjugate $F(h+k)$ by the components of $\\alpha$ and use $h+k$), and preserves kernels and cokernels: conjugating any candidate kernel or cokernel diagram by $\\alpha$ gives the original diagram with its universal property. Thus it is exact. Apply [lem-weil-pbc-exact-functor-derived-factorization] to obtain the termwise functor $C(F)$ preserving quasi-isomorphisms and its derived factorization. For a cochain complex $M^\\bullet$, naturality of $\\alpha$ with each differential gives $d_M^j\\alpha_{M^j}=\\alpha_{M^{j+1}}F(d_M^j)$. Therefore $(\\alpha_{M^j})_j:C(F)M^\\bullet\\to M^\\bullet$ is an isomorphism of complexes, its inverse being the termwise inverse. The same naturality equation with a cochain map shows that these complex isomorphisms form a natural isomorphism $C(F)\\cong\\operatorname{id}$.",
+   "text": "Map the module natural isomorphism alpha to cochain complexes by NatIso.mapHomologicalComplex and compose with Functor.mapHomologicalComplexIdIso. Naturality supplies compatibility with differentials, and the component in each degree is alpha as required. The published exact derived pullback factorization is used in Step 6.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
     "lem-weil-pbc-exact-functor-derived-factorization"
@@ -82,7 +83,7 @@
    }
   },
   {
-   "text": "Let $Q:\\mathrm{CoCh}(\\mathcal A)\\to D(\\mathcal A)$ be the localization of [def-weil-abstract-derived-category]. By [def-weil-pbc-proetale-operations], in this identified-coefficient situation $Lf^*$ is the exact termwise descent, so it comes with $\\varphi_M:Lf^*(QM)\\xrightarrow{\\sim}Q(C(F)M)$. Both $Q\\circ C(F)$ and $Q$ invert quasi-isomorphisms, the first by Step 5 and the second by definition of $Q$. Apply [lem-weil-pbc-localization-universal-property](2) to the natural isomorphism $Q(\\alpha^\\bullet):Q\\circ C(F)\\xrightarrow{\\sim}Q$ of Step 5 and the two factorizations $Lf^*$ and $\\operatorname{id}_{D(\\mathcal A)}$. It gives a natural isomorphism $Lf^*\\xrightarrow{\\sim}\\operatorname{id}_{D(\\mathcal A)}$ whose component at $QM$ is $Q(\\alpha_M^\\bullet)\\circ\\varphi_M$. The inverse descends from the termwise inverse, and the composites are identities by the identity/composition clause of the same localization lemma. Thus on every cochain representative the comparison is represented by the termwise $e_{M^j}$ after the scalar-transport identification of Step 4, as required. This uses the unbounded localization and imposes no boundedness or constructibility condition.",
+   "text": "Let Q be the ordinary unbounded derived localization and D the published derived pullback. Its specified factorization fac, followed by Q of the cochain identity comparison b and the canonical unitors, gives beta: Q composed with D is naturally isomorphic to Q composed with the identity. The fully faithful precomposition functor of lem-weil-pbc-localization-universal-property has a unique preimage isomorphism gamma of beta. Its map_preimage equation, evaluated at a cochain representative K, gives gamma(QK) = fac(K) followed by Q(b(K)); the unitors are identities. This descends both maps of b and requires no boundedness or constructibility.",
    "uses": [
     "def-weil-abstract-derived-category",
     "def-weil-pbc-proetale-operations",
@@ -115,6 +116,7 @@
   "def-weil-pbc-sheafification",
   "def-weil-proetale-inverse-image",
   "def-weil-sheaf-of-modules-category",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
   "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-localization-universal-property",
@@ -122,9 +124,9 @@
   "lem-weil-sheaf-scalar-extension-ring-iso"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "T9 stage 3",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/lem-pur-diagonal-base-change.proof.md",
-  "place": "Last sentence: identity normalization in the functoriality of L(-)^* after p_2 composed with Delta is id_X; explicit coefficient and module calculation with cited Stacks and existing DAG tools."
+  "place": "Identity normalization, following the existing seven-step route. The ring comparison is computed by adjunction conjugacy; module normalization uses the existing uniquely unit-normalized module identity lemma; scalar extension, termwise complexes and localization use their existing APIs."
  },
  "mathlib_searches": [
   {
@@ -299,5 +301,15 @@
   "group": "Q82",
   "result": "pass",
   "note": "Read the item node, all 7 statement dependencies and their recorded Lean (ProEtaleInverseImage, IsoSectionwiseInverseImage/ProEtaleIsomorphismInverseImage, ProEtaleOperations, ProEtaleConstantRingOperations, TensorProduct changeOfRings), the report and the module. The commit touches only the report, the module and a complete lean record; the statement is verbatim. Clauses match: e is pinned sectionwise to proEtaleIsoInverseImageIdentification followed by Over.mapId restriction, and e at A_X equals the specified coefficient map. eM is the inverse-image module with scalars restricted along c inverse, and eM inverse is pinned to the (U, delta_U) adjunction-unit coprojection. alpha has both tensor formulas on the actual changeOfRings sheafification generators (scalar first). b is termwise alpha, and gamma's value at Q K is the mapDerivedCategoryFactors component followed by Q(b) for all unbounded K. No extra hypotheses; the zero ring and empty scheme are covered; a single universe u is used with site universes u+1/u and no forced equality. Helpers carry real data, docstrings have source and blueprint tags, the only sorry is the theorem proof, and there is no substitute or duplicate notion. The Second reading section is the accepted 2026-10-17 placeholder. nt_compile.py --json on the module path: 20.6 s, exit code 0, no errors or warnings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261019T112539-L-3953932",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
