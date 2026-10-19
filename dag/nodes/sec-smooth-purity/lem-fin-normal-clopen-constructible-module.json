@@ -4,10 +4,9 @@
  "status": "split",
  "proof": [
   {
-   "text": "For an etale covering $\\{W_i\\to W\\}$ in $Y_{\\Et}$, put $W_a=W\\times_Y Y_a$ and $W_{i,a}=W_i\\times_Y Y_a$. The maps $W_{i,a}\\to W_a$ are again a jointly surjective etale family. A matching family in $E(W_i)$ is exactly, for each $a$, a matching family in $\\underline{M_a}(W_{i,a})$. Glue each such family uniquely in $\\underline{M_a}(W_a)$ and take the tuple. This proves the sheaf axiom for the displayed formula, including the empty covering: a module sheaf has the zero module on the empty scheme. Define the action of $\\lambda\\in\\Lambda_Y(W)$ on a tuple $(s_a)_a$ by $(\\lambda|_{W_a}s_a)_a$. The module identities and semilinearity of restrictions hold componentwise, so $E$ is a sheaf of $\\Lambda_Y$-modules.",
+   "text": "The displayed definition is the categorical product of the direct images of the specified constant ModuleCat-valued sheaves. Products of sheaves and the direct images already exist in the library, so this defines a genuine module-valued sheaf without any new sheaf axiom or coefficient action construction.",
    "uses": [
-    "def-weil-pbc-etale-site",
-    "def-weil-sheaf-of-modules-category"
+    "def-weil-pbc-etale-site"
    ],
    "elementary": true,
    "source": {
@@ -16,11 +15,10 @@
    }
   },
   {
-   "text": "Write $\\iota_a:Y_a\\hookrightarrow Y$ for a coprojection. It is an open immersion by the disjoint-union hypothesis, hence etale by [lem-weil-pbc-open-immersion-etale]. For $W\\to Y_a$ etale, viewed as an object over $Y$, disjointness gives $W\\times_Y Y_b=\\varnothing$ for $b\\ne a$ and $W\\times_Y Y_a\\cong W$. Thus projection to the $a$th factor is an isomorphism $E(W)\\cong\\underline{M_a}(W)$, inverse to inserting zero in the other factors. These maps commute with every restriction and with the restricted coefficient action. By [lem-weil-pbc-etale-inverse-image-restriction](1), inverse image of the underlying abelian sheaf along the etale map $\\iota_a$ is restriction to these objects. By [lem-weil-pbc-module-abelian-inverse-image-comparison] this is also the underlying abelian sheaf of the fixed-coefficient module inverse image. The comparison is determined by the adjunction unit; its maps on germs commute with multiplication by each $\\lambda\\in\\Lambda$, and hence with local sections of the constant ring sheaf, which are locally represented by such $\\lambda$. Consequently the projection above gives the required module isomorphism $\\iota_a^{-1}E\\cong\\underline{M_a}_{Y_a}$.",
+   "text": "The coproduct universal property identifies Y with the categorical coproduct of C a. Mathlib coproduct disjointness and the coproduct open cover show that the ranges of the legs are disjoint and cover Y. For a fixed leg iota a, use the existing localization restriction functor, which is isomorphic to upperStar. This restriction is a right adjoint and preserves products. For b different from a, each section of the restriction of (iota b)_* F b is a section over the empty pullback: disjointness of the ranges proves its underlying scheme empty, and the empty-cover sheaf axiom makes its sections terminal, hence zero. A product with all factors zero except the a-th factor is isomorphic to that factor: use the projection and the map inserting zero off the diagonal, and verify both composites by the product universal property. The counit of restriction left adjoint to (iota a)_* is an isomorphism for an open immersion, and identifies the remaining factor with F a. All these isomorphisms are in ModuleCat-valued sheaves, so no passage through abelian sheaves is necessary.",
    "uses": [
     "lem-weil-pbc-open-immersion-etale",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-module-abelian-inverse-image-comparison"
+    "lem-weil-pbc-etale-inverse-image-restriction"
    ],
    "elementary": false,
    "source": {
@@ -29,10 +27,10 @@
    }
   },
   {
-   "text": "The finitely many images $|Y_a|$ cover $|Y|$, are pairwise disjoint, and are locally closed because they are clopen; the maps $\\iota_a$ realize them as immersed subschemes. This is the stratification of [def-constructible-stratification]. Each $|Y_a|$ is also retrocompact: for a quasi-compact open $U\\subseteq Y$, an open cover of $U\\cap Y_a$, together with $U\\setminus Y_a$, covers $U$ and has a finite subcover; the selected members cover $U\\cap Y_a$. Thus $Y_a$ is open and retrocompact. The empty open is retrocompact, so $|Y_a|=|Y_a|\\cap(Y\\setminus\\varnothing)$ is a constructible subset by [def-weil-constructible-subset]. This argument uses no Noetherian or quasi-compact assumption on $Y$.",
+   "text": "Use the finite ranges of the coproduct legs as strata, their given schemes as domains and their given maps as immersions. Coverage and disjointness come from the coproduct argument. Each range is open and closed. Its intersection with a compact open is closed in that compact open and therefore compact; hence the range is retrocompact and constructible. The stronger constructible scheme-stratification structure in the existing constructibility definition packages these data directly, without a separate finite-locally-closed-stratification structure.",
    "uses": [
-    "def-constructible-stratification",
-    "def-weil-constructible-subset"
+    "def-weil-constructible-subset",
+    "def-constructible-constructible"
    ],
    "elementary": true,
    "source": {
@@ -41,7 +39,7 @@
    }
   },
   {
-   "text": "On each $Y_a$, step 2 exhibits $\\iota_a^{-1}E$ as the constant module sheaf with the finite value $M_a$. The identity cover of $Y_a$ is therefore a finite-value trivialization. Apply implication (1)$\\Rightarrow$(2) of [lem-weil-pbc-finite-locally-constant-module-values], with base $Y_a$, coefficient ring $\\Lambda$, and sheaf $\\iota_a^{-1}E$: it is finite locally constant in the coefficient category of $\\Lambda$-modules, including finiteness of every geometric stalk. Its further assertion identifies those stalks with $M_a$. In particular the finite-value formulation and the finite-stalk formulation used in the two constructibility definitions both hold.",
+   "text": "On each stratum the isomorphism in step 2 makes the restricted sheaf constant with value M a. Use the identity etale cover as its locally constant datum. The existing overPullbackConstantSheafIso identifies its restrictions to the localized site with the same finite module value. Apply the first equivalence of finite_locally_constant_module_values_iff to get finite local constancy.",
    "uses": [
     "lem-weil-pbc-finite-locally-constant-module-values"
    ],
@@ -52,7 +50,7 @@
    }
   },
   {
-   "text": "Use the single finite clopen stratification from step 3. Its strata are constructible, and the module restrictions have finite constant models by step 2. These are exactly conditions (a) and (b) of [def-weil-pbc-etale-constructible-sheaf]. Thus it witnesses the first constructibility assertion. By step 4 the same restrictions are finite locally constant in the coefficient category of $\\Lambda$-modules, so the same stratification also witnesses [def-constructible-constructible]. Empty components may be omitted. If $r=0$, then $Y=\\varnothing$, $E$ is the zero sheaf given by the empty product, and the empty stratification satisfies both definitions vacuously.",
+   "text": "The common stratification in step 3 and the identity-cover finite-value data in step 4 witness IsConstructibleEtaleModuleSheaf. Applying the finite-value equivalence on each stratum gives IsConstructibleSheaf for exactly the same stratification. Return these two witnesses and the component isomorphisms from step 2. If r is zero the strata and all assertions about them are empty, so the same construction applies without an additional case.",
    "uses": [
     "def-weil-pbc-etale-constructible-sheaf",
     "def-constructible-constructible"
@@ -66,20 +64,17 @@
  ],
  "proof_deps": [
   "def-weil-pbc-etale-site",
-  "def-weil-sheaf-of-modules-category",
   "lem-weil-pbc-open-immersion-etale",
   "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-module-abelian-inverse-image-comparison",
-  "def-constructible-stratification",
   "def-weil-constructible-subset",
+  "def-constructible-constructible",
   "lem-weil-pbc-finite-locally-constant-module-values",
-  "def-weil-pbc-etale-constructible-sheaf",
-  "def-constructible-constructible"
+  "def-weil-pbc-etale-constructible-sheaf"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-fin-normal-open-lisse-image.proof.md",
-  "place": "Second paragraph: common finite lisse partition for the finite product; explicit clopen construction, using Stacks 005G, 09XZ, 03S2, 03RU and 03RW."
+  "place": "Second paragraph: common finite lisse partition for the finite product. R5 formalizes the clopen specialization directly in ModuleCat-valued sheaves, using localization restriction and the existing finite-value bridge."
  },
  "mathlib_match": null,
  "created": {
@@ -233,5 +228,15 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "The helper is the canonical finite product of `Etale.lowerStar` component pushforwards of the specified constant module sheaves; the theorem states both constructibility predicates and the specified component restriction isomorphisms."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261019T093551-L-2328356",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

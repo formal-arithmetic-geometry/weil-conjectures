@@ -17267,3 +17267,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:35 L: merged deliver/Q8/Sheaf.RingTheory.RegularLocusOpenFromPrimeQuotients (stage 3; reviewer PASS; first push; landing 20261019T093547-L-2327135 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:35 L: merged deliver/R1/Sheaf.Paper.IsomorphismDerivedPullback (stage 3; reviewer PASS; first push; landing 20261019T093549-L-2327553 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:35 L: merged deliver/R3/Sheaf.Paper.WeilMixedUpperBounds (stage 3; reviewer PASS; first push; landing 20261019T093550-L-2327897 (interface); batch 20261019T093237; modules 2; new nodes 1)
+- 09:35 L: merged deliver/R5/Sheaf.AlgebraicGeometry.FiniteNormalClopenConstructibleModule (stage 3; reviewer PASS; first push; landing 20261019T093551-L-2328356 (proof); batch 20261019T093237; modules 1; new nodes 0)
