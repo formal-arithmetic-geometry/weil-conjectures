@@ -210,5 +210,24 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-d7ff86a4c (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes and the statement and stmt_deps are unchanged. Target source: Stacks dualizing.tex 0ALZ (lemma-torsion-change-rings, which tensors the extended alternating complex), 0956 (module RΓ_I for Noetherian A = Čech complex) and 0955. Flat f, Noetherian A and B, any module M and the extended ideal IB match the master source specialized to a module and a flat map. The coefficient category is ordinary scalar extension via def-weil-module-base-change; the target is not weakened. Step 1 is elementary: Noetherian gives finite generators t_i, and IB=(f(t_i)). Step 2 applies lem-per-ideal-torsion-cech-computation over A and over B, by its statement: any module, r=0 allowed, natural. Step 3 uses lem-weil-pbc-localization-tensor-over-base with R=A=A and N=B, plus the fraction relation of def-weil-pbc-module-localization, to identify the A-localization at t_S with the B-localization at u_S. θ_S((m/t^a)⊗b)=(m⊗b)/u^a, which gives B-linearity. Step 4 is elementary: finite products commute with tensor. I recomputed the face-map compatibility t_j^a m/(t_St_j)^a, and the signs and r=0 case are fine. Step 5 uses lem-pc-flat-tensor-complex-cohom on a bounded complex with a flat map, and naturality is shown. No cycle: the Čech node is unsplit with no proof_deps. I accept the off-unit generic tool lem-pc-flat-tensor-complex-cohom. Duplicate search: grep for 0ALZ/0956/change-rings/'local cohomology flat'. lem-per-local-cohomology-change-rings only bounds cd, and the pbc ring-complex Čech node works at site level; neither duplicates the item. Maintainer note: the existing nodes lem-per-local-cohomology-cech-bound and lem-per-ideal-torsion-cech-computation (both unsplit, same unit) duplicate each other. This predates the delivery, which cites only one. Edge cases checked: I=0, I=A, nilpotent generator, M=0, B=0, k[x]→k[x,y], and the non-flat ℤ→F_p case, which shows flatness is needed. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.LocalCohomologyFlatBaseChange",
+  "declaration": "ModuleCat.idealPowerTorsion_rightDerived_flat_base_change",
+  "statement": "theorem idealPowerTorsion_rightDerived_flat_base_change (A B : Type u) [CommRing A] [CommRing B] [IsNoetherianRing A] [IsNoetherianRing B] (f : A →+* B) (hf : RingHom.Flat f) (I : Ideal A) : letI := f.toAlgebra ∃ e : ∀ (M : ModuleCat.{u} A) (q : ℕ), TensorProduct A B ((idealPowerTorsion I).rightDerived q |>.obj M) ≃ₗ[B] ((idealPowerTorsion (Ideal.map f I)).rightDerived q).obj (ModuleCat.of B (TensorProduct A B M)), ∀ (M N : ModuleCat.{u} A) (g : M ⟶ N) (q : ℕ), (((idealPowerTorsion (Ideal.map f I)).rightDerived q).map (ModuleCat.ofHom (TensorProduct.AlgebraTensorModule.map (LinearMap.id : B →ₗ[B] B) g.hom))).hom.comp (e M q).toLinearMap = (e N q).toLinearMap.comp (TensorProduct.AlgebraTensorModule.map (LinearMap.id : B →ₗ[B] B) (((idealPowerTorsion I).rightDerived q).map g).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q148",
+  "date": "2026-10-19",
+  "existing": false,
+  "file": "lean/Sheaf/Algebra/Homology/LocalCohomologyFlatBaseChange.lean",
+  "fixed_by": "NT-stage2-cc-1df344044"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1df344044",
+  "group": "Q148",
+  "result": "fix",
+  "note": "Statement matches node and Stacks 0ALZ/0955: flat f (RingHom.Flat), A and B Noetherian, I with Ideal.map f I, idealPowerTorsion (= the node's inline Γ_J, canonical project decl) rightDerived q for all M and q, B-linear ≃ₗ[B] between B⊗[A]H^q_I(M) and H^q_{IB}(B⊗[A]M), explicit naturality square. Edge cases I=0, I=A, M=0, q=0, B=0 covered; flatness needed (ℤ→F_p). No duplicate found; only the item's lean field changed; lean.statement verbatim; docstrings and proof plan present; sorry only. Delivered file compiles clean (nt_compile --json, 2.3 s; control error confirms the compile is real). H9: unused import Sheaf.Algebra.Homology.IdealTorsionCechComputation; FIX fixes/LocalCohomologyFlatBaseChange.lean drops it and compiles clean. Advisory: def-sbc-ideal-power-torsion-functor is not in stmt_deps (a stage-2 FIX cannot add it); single universe u is forced by idealPowerTorsion."
  }
 }

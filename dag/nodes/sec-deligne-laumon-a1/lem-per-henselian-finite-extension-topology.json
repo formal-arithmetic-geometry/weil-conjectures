@@ -216,5 +216,24 @@
   "group": "Q09",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-4321cb4de (reviewer sub-agent of L); spot-checked: I read the item, its 4 steps and all 4 new nodes in full, plus the statement of every cited node and the source, ILO XX 4.4 printed pp.373–374 (dense henselian valued fields, Krasner, Bourbaki VI §8; Bourbaki is WANTED and the proof is agent-written). The item statement is unchanged against live, where the item is unsplit. Step 1: the normalization lemma gives C as a domain integral over V; a domain has only the idempotents 0 and 1, so integral henselian permanence makes C local, and the converse clause plus locality gives a unique henselian prolongation. Step 2: the torsion clause gives n·max(δ,0)+ε>δ, so Γ is cofinal in Δ and the subspace topology on F is the v-topology. Step 3: w|_F is nontrivial (otherwise w would be trivial and the topology discrete), then the common-coarsening criterion gives a proper U ⊇ V ∪ V_w, which is henselian by the coarsening node because V is henselian. Step 4: lift U to U_W and U_C, and the integral closure D of U is local, so U_W = D = U_C and W and C have the same topology. All hypotheses are checked, no node's proof is used, and there is no cycle. The new nodes are the classical theorems: Bourbaki VI §8.6 (prolongations are the maximal localizations of the normalization), coarsenings of a henselian valuation are henselian, the algebraic value-group quotient is torsion with the coarsening correspondence, and equal topologies iff dependent valuations. I tested them on small cases (E=F; Z_(5) in Q(i); Z in (1/e)Z; p-adic vs q-adic valuations on Q; a rank-2 refinement), and they are true. They are statement-only and searched with all three kinds of search. I scanned the whole DAG and found no duplicates; the krasner-neighbourhood, simple-root-stability, nagata-extension and trf-prime-convex nodes are different statements. No node relabels a clause of the item. The tool use of lem-trf-integral-component-henselian-permanence is accepted. Batch-5 flags: def-trf-valuation-ring is a general definition with a closure of 3 nodes; lem-trf-integral-component-henselian-permanence is pure Stacks 092X/09XK algebra, and its 196-node closure has no other trace-formula or Poincaré node. Neither is part of the assumed statements or their proofs, so both are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.HenselianFiniteExtensionTopology",
+  "declaration": "Valuation.henselian_finite_extension_topology",
+  "file": "lean/Sheaf/FieldTheory/HenselianFiniteExtensionTopology.lean",
+  "statement": "theorem henselian_finite_extension_topology (F : Type u) (E : Type v) [Field F] [Field E] [Algebra F E] [FiniteDimensional F E] (Γ : Type w) [LinearOrderedCommGroupWithZero Γ] (vF : Valuation F Γ) [vF.IsNontrivial] [HenselianLocalRing vF.valuationSubring] : ∃ W : ValuationSubring E, W.comap (algebraMap F E) = vF.valuationSubring ∧ (∀ W' : ValuationSubring E, W'.comap (algebraMap F E) = vF.valuationSubring → W' = W) ∧ HenselianLocalRing W ∧ TopologicalSpace.induced (algebraMap F E) W.valuation.subgroups_basis.topology = vF.subgroups_basis.topology ∧ (Algebra.IsSeparable F E → ∀ U : ValuationSubring E, TopologicalSpace.induced (algebraMap F E) U.valuation.subgroups_basis.topology = vF.subgroups_basis.topology → U.valuation.subgroups_basis.topology = W.valuation.subgroups_basis.topology)",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-19",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-847472675"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-847472675",
+  "group": "Q05",
+  "result": "fix",
+  "note": "Statement matches the node clause by clause: finite E/F, nontrivial vF with arbitrary value group, henselian valuationSubring, existence and uniqueness of the prolongation among all prolongations, HenselianLocalRing W, induced topology equal to the vF-topology, and the separable clause over every ValuationSubring E concluding topology equality. subgroups_basis is indexed by the image value group, so an oversized Γ is harmless. Universes explicit, no extra hypotheses, node changed only in lean, record verbatim, no duplicate found in Mathlib or the project. H8: the theorem docstring gave a different proof route and none of the node's 4 steps or 5 proof_deps; the report wrongly says the node has no proof steps. FIX: fixes/HenselianFiniteExtensionTopology.lean puts Steps 1-4 with their node citations in the docstring; signature unchanged. nt_compile --json clean for the original and the fix (1.5 s each)."
  }
 }
