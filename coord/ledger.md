@@ -17721,3 +17721,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:12 L: merged deliver/N2/Sheaf.Paper.TowerCompactSupportProjectionFormula (stage 3; reviewer PASS; first push; landing 20261019T231248-L-567218 (proof); batch 20261019T231019; modules 1; new nodes 0)
 - 23:12 L: merged deliver/N3/Sheaf.Paper.CompletedCondensedCoefficients (stage 3; reviewer PASS; first push; landing 20261019T231250-L-567498 (interface); batch 20261019T231019; modules 1; new nodes 0; change records: coord/changes/completedCoefficient.md)
 - 23:12 L: merged deliver/P1/Sheaf.AlgebraicGeometry.NormalizedSupportTriangle (stage 3; reviewer PASS; first push; landing 20261019T231252-L-567777 (proof); batch 20261019T231019; modules 1; new nodes 0)
+- 23:12 L: merged deliver/P2/Sheaf.Paper.CommonStageConstituentNonexceptional (stage 3; reviewer PASS; first push; landing 20261019T231253-L-568066 (proof); batch 20261019T231019; modules 1; new nodes 0)

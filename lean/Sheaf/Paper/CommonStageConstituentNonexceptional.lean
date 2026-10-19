@@ -9,6 +9,8 @@ public import Sheaf.Paper.CommonStageCurveWeilMiddleExtension
 public import Sheaf.Paper.CommonStageLisse
 public import Sheaf.Paper.FourierTraceFormula
 public import WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import Mathlib.LinearAlgebra.LinearIndependent.Lemmas
 
 /-! # Geometric constituent exclusion in the common-stage heart
 
@@ -61,7 +63,32 @@ theorem sfFourierCharacterScale_existsUnique
     (ψ : AddChar F.field.k₀ F.coefficients.Qbar) :
     ∃! b : F.field.k₀, ∀ x : F.field.k₀,
       ψ x = fourierTraceBaseCharacter F Ψ (b * x) := by
-  sorry
+  classical
+  let := Fintype.ofFinite F.field.k₀
+  let := fourierBaseCharacteristic F
+  let := (ZMod.castHom (dvd_refl F.field.p) F.field.k₀).toAlgebra
+  let χ := fourierTraceBaseCharacter F Ψ
+  have hχ : χ ≠ 1 := AddChar.compTrace_ne_one hΨ
+  have hinj := AddChar.to_mulShift_inj_of_isPrimitive (AddChar.IsPrimitive.of_ne_one hχ)
+  have hli := (linearIndependent_monoidHom (Multiplicative F.field.k₀)
+    F.coefficients.Qbar).comp AddChar.toMonoidHomEquiv
+      AddChar.toMonoidHomEquiv.injective
+  let := hli.finite
+  let := Fintype.ofFinite (AddChar F.field.k₀ F.coefficients.Qbar)
+  have hcard : Fintype.card (AddChar F.field.k₀ F.coefficients.Qbar) ≤
+      Fintype.card F.field.k₀ := by
+    simpa using hli.fintype_card_le_finrank
+  have hbij := (Fintype.bijective_iff_injective_and_card χ.mulShift).2
+    ⟨hinj, Nat.le_antisymm (Fintype.card_le_of_injective _ hinj) hcard⟩
+  obtain ⟨b, hb⟩ := hbij.2 ψ
+  refine ⟨b, ?_, ?_⟩
+  · intro x
+    exact (DFunLike.congr_fun hb x).symm
+  · intro c hc
+    apply hinj
+    apply AddChar.ext
+    intro x
+    exact (hc x).symm.trans (DFunLike.congr_fun hb x).symm
 
 /-- The uniquely specified trace-pairing coefficient of the given psi.
 Source: definition's function ax convention (blueprint: def-a1-constituent-nonexceptional). -/
@@ -77,7 +104,24 @@ prime spectrum has dimension one and its unique irreducible component is itself.
 theorem sfAffineLine_curve :
     Smooth (fourierAffineModel F PUnit.{u + 1}).hom ∧
       (fourierAffineModel F PUnit.{u + 1}).left.IsPureDimension 1 := by
-  sorry
+  constructor
+  · change Smooth (AffineSpace PUnit.{u + 1} (Spec (.of F.field.k₀)) ↘ _)
+    exact (AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1}
+      (Spec (.of F.field.k₀))).smooth
+  · intro Z hZ
+    have hZ' : Z = Set.univ := by
+      change Z ∈ irreducibleComponents
+        (AffineSpace PUnit.{u + 1} (Spec (.of F.field.k₀))) at hZ
+      simpa only [irreducibleComponents_eq_singleton, Set.mem_singleton_iff] using hZ
+    subst Z
+    rw [IsHomeomorph.topologicalKrullDim_eq _ (Homeomorph.Set.univ _).isHomeomorph]
+    let : SmoothOfRelativeDimension (Nat.card PUnit.{u + 1})
+        (fourierAffineModel F PUnit.{u + 1}).hom :=
+      AffineSpace.smoothOfRelativeDimension_over _ _
+    let : Nonempty (fourierAffineModel F PUnit.{u + 1}).left :=
+      inferInstanceAs (Nonempty (AffineSpace PUnit.{u + 1} (Spec (.of F.field.k₀))))
+    simpa using topologicalKrullDim_eq_of_smoothOfRelativeDimension
+      (fourierAffineModel F PUnit.{u + 1}).hom (Nat.card PUnit.{u + 1})
 
 /-- The same dense-open datum in the recorded ordinary-middle-extension interface.
 Source: rem-dl-a1-conventions (blueprint: def-a1-constituent-nonexceptional). -/
@@ -100,7 +144,33 @@ nonzero k-algebra, of the same characteristic p. -/
 theorem sfAffineOpen_geometry :
     IsNoetherian (F.field.geometricFiber A.U).left ∧
       CharP Γ((F.field.geometricFiber A.U).left, ⊤) F.field.p := by
-  sorry
+  let g := (F.field.geometricFiber A.U).hom
+  have : LocallyOfFiniteType g := by
+    change LocallyOfFiniteType (pullback.snd A.U.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap F.field.k₀ F.field.k))))
+    infer_instance
+  have : QuasiCompact g := by
+    change QuasiCompact (pullback.snd A.U.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap F.field.k₀ F.field.k))))
+    infer_instance
+  let : IsLocallyNoetherian (F.field.geometricFiber A.U).left :=
+    LocallyOfFiniteType.isLocallyNoetherian g
+  let : CompactSpace (F.field.geometricFiber A.U).left :=
+    QuasiCompact.compactSpace_of_compactSpace g
+  refine ⟨⟨⟩, ?_⟩
+  let : Nonempty (fourierAffineModel F PUnit.{u + 1}).left :=
+    inferInstanceAs (Nonempty (AffineSpace PUnit.{u + 1} (Spec (.of F.field.k₀))))
+  let : Nonempty A.U.left := A.dense.nonempty
+  let e := Spec.map (CommRingCat.ofHom (algebraMap F.field.k₀ F.field.k))
+  have : Surjective e := inferInstance
+  have : Surjective (pullback.fst A.U.hom e) := inferInstance
+  let : Nonempty (F.field.geometricFiber A.U).left :=
+    (pullback.fst A.U.hom e).surjective.nonempty
+  let := fourierBaseCharacteristic F
+  let : CharP F.field.k F.field.p :=
+    charP_of_injective_ringHom (algebraMap F.field.k₀ F.field.k).injective F.field.p
+  exact charP_of_injective_ringHom
+    ((Scheme.ΓSpecIso (.of F.field.k)).inv ≫ g.appTop).hom.injective F.field.p
 
 /-- The function ax on the geometric open; a ranges over k, not only k0.
 The x coordinate is pulled from the arithmetic line and a from the geometric base.
@@ -140,7 +210,21 @@ theorem sfAffineLinearArtinSchreier_mem
     (Ψ : AddChar (ZMod F.field.p) F.coefficients.Qbar) (a : F.field.k) :
     sfCommonStageHeartProperty F.coefficients.l (F.field.geometricFiber A.U).left
       F.coefficients.Qbar (sfAffineLinearArtinSchreierComplex F A Ψ a) := by
-  sorry
+  let := (sfAffineOpen_geometry F A).1
+  let := (sfAffineOpen_geometry F A).2
+  constructor
+  · refine ⟨fourierCoefficientStage F, _, ?_, ⟨Iso.refl _⟩⟩
+    refine ⟨⟨_, fourierAdicArtinSchreier_mem F _ Ψ _⟩, ?_, ⟨Iso.refl _⟩⟩
+    intro i hi
+    change IsZero ((DerivedCategory.homologyFunctor _ i).obj
+      ((DerivedCategory.singleFunctor _ 0).obj _))
+    exact DerivedCategory.isZero_of_isLE _ 0 i hi
+  · refine ⟨fourierCoefficientStage F, _, ?_, ⟨Iso.refl _⟩⟩
+    refine ⟨⟨_, fourierAdicArtinSchreier_mem F _ Ψ _⟩, ?_, ⟨Iso.refl _⟩⟩
+    intro i hi
+    change IsZero ((DerivedCategory.homologyFunctor _ i).obj
+      ((DerivedCategory.singleFunctor _ 0).obj _))
+    exact DerivedCategory.isZero_of_isGE _ 0 i hi
 
 /-- The character line as an actual geometric heart object, with no Weil structure
 required when a is outside k0.
