@@ -54,7 +54,13 @@ theorem scalarLocalizationSectionsMap_mem {R S : Sheaf J CommRingCat.{u}}
     (f : R ⟶ S) (a : RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)) :
     (fun U ↦ f.hom.app U (a.val U)) ∈
       RingCat.sectionsSubring (S.obj ⋙ forget₂ CommRingCat RingCat) := by
-  sorry
+  intro U V g
+  change S.obj.map g (f.hom.app U (a.val U)) = f.hom.app V (a.val V)
+  have h := ConcreteCategory.congr_hom (f.hom.naturality g) (a.val U)
+  change f.hom.app V (R.obj.map g (a.val U)) =
+    S.obj.map g (f.hom.app U (a.val U)) at h
+  rw [← h]
+  exact congrArg (f.hom.app V) (a.property g)
 
 /-- The map of global coefficient rings induced by a ring-sheaf morphism.
 Source: Bhatt–Scholze, Proposition 6.8.14(2)
@@ -109,7 +115,30 @@ theorem scalarLocalizationSections_isUnit (A : Type v) [CommRing A]
     (a : A →+* RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)) (t : A) :
     IsUnit ((scalarLocalizationSectionsMap
       (ringedLocalizationRingUnit R (a t))).comp a t) := by
-  sorry
+  classical
+  let b := (scalarLocalizationSectionsMap (ringedLocalizationRingUnit R (a t))).comp a t
+  have hu (U : Cᵒᵖ) : IsUnit (b.val U) := by
+    change IsUnit ((toSheafify J (ringedLocalizationRingPresheaf R (a t))).app U
+      (algebraMap (R.obj.obj U) (ringedSectionLocalizationCarrier R (a t) U)
+        ((a t).val U)))
+    exact (IsLocalization.Away.algebraMap_isUnit (R := R.obj.obj U)
+      (S := ringedSectionLocalizationCarrier R (a t) U) ((a t).val U)).map
+        ((toSheafify J (ringedLocalizationRingPresheaf R (a t))).app U).hom
+  choose c hc using fun U ↦ (hu U).exists_right_inv
+  let d : RingCat.sectionsSubring
+      ((ringedLocalizationRing R (a t)).obj ⋙ forget₂ CommRingCat RingCat) :=
+    ⟨c, by
+      intro U V g
+      let ρ := (((ringedLocalizationRing R (a t)).obj ⋙
+        forget₂ CommRingCat RingCat).map g).hom
+      change ρ (c U) = c V
+      apply (hu V).mul_left_cancel
+      have hb : ρ (b.val U) = b.val V := b.property g
+      calc
+        b.val V * ρ (c U) = ρ (b.val U * c U) := by rw [← hb, map_mul]
+        _ = 1 := by rw [hc, map_one]
+        _ = b.val V * c V := (hc V).symm⟩
+  exact IsUnit.of_mul_eq_one d (by ext U; exact hc U)
 
 /-- The canonical A[1/t]-algebra structure of the localized ring sheaf.
 Source: Bhatt–Scholze, Proposition 6.8.14(2)
