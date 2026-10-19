@@ -6,26 +6,11 @@ Authors: SHEAF group NY
 module
 
 public import Sheaf.Paper.FormalClosedSupportSheaves
-public import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import Sheaf.AlgebraicGeometry.CondensedClosedSupportAdjunction
-import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
-import Sheaf.AlgebraicGeometry.ProEtaleOpenClosedSequenceRingSheaf
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Sheaf.AlgebraicGeometry.ProEtale.ClosedInverseImageLimits
+import Mathlib.CategoryTheory.Adjunction.Additive
+import Mathlib.CategoryTheory.Adjunction.Unique
 import Mathlib.CategoryTheory.Triangulated.Triangulated
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Spectrum.Prime.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+import Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # Derived sections with closed support
@@ -45,6 +30,110 @@ universe u
 open scoped CategoryTheory.Obj
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
+
+private def adjunctionHomComplexIso
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    {L : C ⥤ D} {R : D ⥤ C} [L.Additive] [R.Additive] (adj : L ⊣ R)
+    (A : CochainComplex C ℤ) (I : CochainComplex D ℤ) :
+    CochainComplex.HomComplex ((L.mapHomologicalComplex (.up ℤ)).obj A) I ≅
+      CochainComplex.HomComplex A ((R.mapHomologicalComplex (.up ℤ)).obj I) :=
+  HomologicalComplex.Hom.isoOfComponents
+    (fun n ↦ (AddEquiv.piCongrRight fun t : CochainComplex.HomComplex.Triplet n ↦
+      adj.homAddEquiv (A.X t.p) (I.X t.q)).toAddCommGrpIso)
+    (by
+      intro n m hnm
+      apply AddCommGrpCat.ext
+      intro a
+      funext ⟨p, q, hpq⟩
+      symm
+      change adj.homEquiv _ _ (CochainComplex.HomComplex.δ n m a ⟨p, q, hpq⟩) =
+        CochainComplex.HomComplex.δ (F := A)
+          (G := (R.mapHomologicalComplex (.up ℤ)).obj I) n m
+          (fun t ↦ adj.homEquiv (A.X t.p) (I.X t.q) (a t)) ⟨p, q, hpq⟩
+      simp only [CochainComplex.HomComplex.δ, CochainComplex.HomComplex.Cochain.mk,
+        CochainComplex.HomComplex.Cochain.v, Functor.mapHomologicalComplex_obj_d]
+      rw [adj.homAddEquiv_add]
+      congr 1
+      · exact adj.homEquiv_naturality_right _ _
+      · change (adj.homAddEquiv _ _) (_ • _) = _
+        rw [Units.smul_def, map_zsmul, ← Units.smul_def]
+        congr 1
+        exact adj.homEquiv_naturality_left _ _)
+
+private theorem epiUnitOfOtherLeftAdjoint
+    {C D : Type*} [Category C] [Category D]
+    {L L' : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R) (adj' : L' ⊣ R)
+    (I : C) [Epi (adj'.unit.app I)] : Epi (adj.unit.app I) := by
+  have h := Adjunction.unit_leftAdjointUniq_hom_app adj adj' I
+  have hepi : Epi (adj.unit.app I ≫
+      R.map ((Adjunction.leftAdjointUniq adj adj').hom.app I)) := by
+    rw [h]
+    infer_instance
+  exact (epi_comp_iff_of_isIso (adj.unit.app I)
+    (R.map ((Adjunction.leftAdjointUniq adj adj').hom.app I))).mp hepi
+
+set_option backward.isDefEq.respectTransparency false in
+private noncomputable def adjunctionUnitConeIso
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    [HasBinaryBiproducts C]
+    {L L' : C ⥤ D} {R : D ⥤ C} [L.Additive] [L'.Additive] [R.Additive]
+    (adj : L ⊣ R) (adj' : L' ⊣ R) (I : CochainComplex C ℤ) :
+    CochainComplex.mappingCone
+      ((NatTrans.mapHomologicalComplex adj.unit (.up ℤ)).app I) ≅
+    CochainComplex.mappingCone
+      ((NatTrans.mapHomologicalComplex adj'.unit (.up ℤ)).app I) := by
+  let c := Adjunction.leftAdjointUniq adj adj'
+  let cI := (R.mapHomologicalComplex (.up ℤ)).mapIso
+    ((NatIso.mapHomologicalComplex c (.up ℤ)).app I)
+  let φ := (NatTrans.mapHomologicalComplex adj.unit (.up ℤ)).app I
+  let ψ := (NatTrans.mapHomologicalComplex adj'.unit (.up ℤ)).app I
+  have hφψ : φ ≫ cI.hom = ψ := by
+    apply HomologicalComplex.Hom.ext
+    funext n
+    exact Adjunction.unit_leftAdjointUniq_hom_app adj adj' (I.X n)
+  exact HomologicalComplex.homotopyCofiber.mapArrowIso φ ψ
+    (fun n ↦ ⟨n - 1, by simp⟩)
+    (Arrow.isoMk (Iso.refl I) cI ((Category.id_comp ψ).trans hφψ.symm))
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem transportAdjunctionTriangle
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    {L : D ⥤ C} {R R' : C ⥤ D} {U U' : C ⥤ E} {F : E ⥤ C}
+    (adj : L ⊣ R) (adj' : L ⊣ R') (openAdj : U ⊣ F) (openAdj' : U' ⊣ F)
+    (h : ∃ δ : U' ⋙ F ⟶ (R' ⋙ L) ⋙ shiftFunctor C (1 : ℤ),
+      ∀ K : C, Triangle.mk (adj'.counit.app K) (openAdj'.unit.app K) (δ.app K) ∈
+        distinguishedTriangles) :
+    ∃ δ : U ⋙ F ⟶ (R ⋙ L) ⋙ shiftFunctor C (1 : ℤ),
+      ∀ K : C, Triangle.mk (adj.counit.app K) (openAdj.unit.app K) (δ.app K) ∈
+        distinguishedTriangles := by
+  obtain ⟨δ, hδ⟩ := h
+  let s := Adjunction.rightAdjointUniq adj adj'
+  let t := Adjunction.leftAdjointUniq openAdj openAdj'
+  let a := Functor.isoWhiskerRight s L
+  let b := Functor.isoWhiskerRight t F
+  let d := b.hom ≫ δ ≫ (Functor.isoWhiskerRight a (shiftFunctor C (1 : ℤ))).inv
+  refine ⟨d, fun K ↦ ?_⟩
+  refine isomorphic_distinguished _ (hδ K) _
+    (Triangle.isoMk (Triangle.mk (adj.counit.app K) (openAdj.unit.app K) (d.app K))
+      (Triangle.mk (adj'.counit.app K) (openAdj'.unit.app K) (δ.app K))
+      (a.app K) (Iso.refl _) (b.app K) ?_ ?_ ?_)
+  · change adj.counit.app K ≫ 𝟙 K =
+      L.map ((Adjunction.rightAdjointUniq adj adj').hom.app K) ≫ adj'.counit.app K
+    exact (Category.comp_id (adj.counit.app K)).trans
+      (Adjunction.rightAdjointUniq_hom_app_counit adj adj' K).symm
+  · change openAdj.unit.app K ≫ F.map
+        ((Adjunction.leftAdjointUniq openAdj openAdj').hom.app K) =
+      𝟙 K ≫ openAdj'.unit.app K
+    rw [Category.id_comp]
+    exact Adjunction.unit_leftAdjointUniq_hom_app openAdj openAdj' K
+  · change (b.hom.app K ≫ δ.app K ≫
+        (Functor.isoWhiskerRight a (shiftFunctor C (1 : ℤ))).inv.app K) ≫
+      (shiftFunctor C (1 : ℤ)).map (a.hom.app K) = b.hom.app K ≫ δ.app K
+    simp only [Functor.isoWhiskerRight_inv, Functor.whiskerRight_app,
+      Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app]
+    simp
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -138,6 +227,43 @@ theorem formal_closed_support_derived
                   (CochainComplex.mappingCone
                     ((NatTrans.mapHomologicalComplex (upperStarLowerStarAdjunction Λ j).unit
                       (ComplexShape.up ℤ)).app I)))))) := by
-  sorry
+  classical
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  have : CompactSpace X :=
+    QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have : IsNoetherian X := ⟨⟩
+  have : QuasiCompact j := inferInstance
+  have hji : Set.range i.base = (Set.range j.base)ᶜ := by
+    simp only [hij, compl_compl]
+  obtain ⟨_, hlim, hcolim, ⟨adj⟩, _, _, hAdd, _⟩ :=
+    formal_closed_support_sheaves Λ ℓ k hΛ i j hij
+  let := hAdd
+  let := hlim
+  let := hcolim
+  refine ⟨hAdd, adj, ?_, ?_, ?_, ?_⟩
+  · intro A I _
+    exact ⟨adjunctionHomComplexIso adj A I, fun _ _ _ _ _ ↦ rfl⟩
+  · intro I _
+    have := closedSupport_injective_unit_epi Λ i j hji I
+    exact epiUnitOfOtherLeftAdjoint (upperStarLowerStarAdjunction Λ j)
+      (supportPullbackAdjunction Λ j) I
+  · exact transportAdjunctionTriangle adj.mapDerivedCategoryRightDerivedAdjunction
+      (closedSupportDerivedAdjunction Λ i j hji)
+      (upperStarLowerStarAdjunction Λ j).mapDerivedCategoryRightDerivedAdjunction
+      (closedSupportOpenDerivedAdjunction Λ j) (closedSupport_triangle Λ i j hji)
+  · intro K I _ e
+    obtain ⟨eB⟩ := closedSupport_fiber Λ i j hji K I e
+    let s := Adjunction.rightAdjointUniq adj.mapDerivedCategoryRightDerivedAdjunction
+      (closedSupportDerivedAdjunction Λ i j hji)
+    let t := Adjunction.leftAdjointUniq
+      (upperStarLowerStarAdjunction Λ i).mapDerivedCategoryRightDerivedAdjunction
+      (closedSupportOpenDerivedAdjunction Λ i)
+    let ce := adjunctionUnitConeIso (supportPullbackAdjunction Λ j)
+      (upperStarLowerStarAdjunction Λ j) I
+    let qe := DerivedCategory.Q.mapIso
+      ((shiftFunctor (CochainComplex (pulledBackModuleObjects Λ X) ℤ) (-1 : ℤ)).mapIso ce)
+    exact ⟨s.app K ≪≫ eB ≪≫ (t.app _).symm ≪≫
+      (upperStar Λ i).mapDerivedCategory.mapIso qe⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing

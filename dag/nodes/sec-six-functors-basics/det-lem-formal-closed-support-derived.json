@@ -27,107 +27,62 @@
  ],
  "proof": [
   {
-   "text": "The standing setting [sk-def-sfb-dc-setting] makes $X$ finite type over a field. By [def-weil-finite-type-morphism] choose a finite affine cover $X=\\bigcup_{r=1}^m\\operatorname{Spec}A_r$ with each $A_r$ a finitely generated algebra over that field. By [lem-wf-affine-noetherian-components], descending chains of closed subsets in each chart stabilize, equivalently ascending chains of open subsets stabilize. Consequently every union of opens in a chart is a finite subunion: the finite subunions have a maximal element, since otherwise one could recursively construct a strictly increasing chain. In particular every open subset of a chart is quasi-compact, and every open subset of $X$ is quasi-compact by this finite cover. This also proves that $j$ is quasi-compact: its inverse image of any affine open of $X$ is an open subset of $X$. Finally every inverse image of an affine open under the diagonal $X\\to X\\times_{\\operatorname{Spec}\\mathbf Z}X$ is open in $X$, hence quasi-compact, so $X$ is quasi-separated by [def-weil-quasi-separated-morphism]. Thus the qcqs and quasi-compact-complement hypotheses used below follow from the inherited setting.",
+   "text": "Finite type over the field makes X locally Noetherian by LocallyOfFiniteType.isLocallyNoetherian, and quasi-compactness of its structure map makes X compact. Thus X is Noetherian and the open immersion j is quasi-compact. Complementing the given equality gives range(i)=range(j)^c.",
    "uses": [
     "sk-def-sfb-dc-setting",
     "def-weil-finite-type-morphism",
-    "lem-wf-affine-noetherian-components",
-    "def-weil-quasi-separated-morphism"
+    "lem-weil-pbc-finite-type-over-noetherian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support/det-lem-formal-closed-support-derived.md",
-    "place": "standing-scheme hypotheses for the open--closed operations in clauses (1)--(3)"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply clauses (2) and (3) of the existing broader statement [det-lem-formal-closed-support-adjunction]. The admissible coefficient ring is a condensed ring, the closed immersion is the given $i$, and step 1 verifies quasi-compactness of its open complement. Its support functor is exactly $M\\mapsto i^*\\ker(M\\to j_*j^*M)$ from [det-lem-formal-closed-support-sheaves], with the same inverse-image coefficient rings. Its derived functor is computed on K-injectives, just as in the present statement. Clause (2) therefore gives both the derived adjunction and the global $R\\operatorname{Hom}$ isomorphism of assertion (1), on the whole unbounded derived categories. Clause (3) gives assertion (2): the particular sheaf adjunction unit $I\\to j_*j^*I$ is surjective for every injective $I$. This application uses neither a constructibility restriction nor constant discrete coefficients. We will construct the triangle rather than infer the identity of its middle map from the unlabeled arrows in that node's clause (4).",
+   "text": "Take the additive structure, exactness of i_*, and sheaf adjunction i_* ⊣ H from det-lem-formal-closed-support-sheaves. Construct the Hom-complex isomorphism degreewise by the additive Hom adjunction. Naturality on the right intertwines the target differential; naturality on the left intertwines the source differential, and additivity respects its signed term. This proves the specified component formula.",
    "uses": [
-    "det-lem-formal-closed-support-adjunction",
     "det-lem-formal-closed-support-sheaves"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support/det-lem-formal-closed-support-derived.md",
-    "place": "clauses (1) and (2); the unit proof also explicitly cites det-lem-formal-closed-support-adjunction"
-   }
+   "elementary": true
   },
   {
-   "text": "The module-sheaf categories on $X,Z,V$, over their actual pulled-back ring sheaves, are Grothendieck abelian by [lem-weil-pbc-ring-sheaves-grothendieck], taking the small site models in the fixed common universe. Apply [lem-pur-kinjective-degreewise-existence] to resolve an arbitrary, possibly unbounded complex $K$ by $K\\to I$, with $I$ K-injective and every $I^n$ injective. Assertion (3) of [det-lem-formal-closed-support-sheaves] makes $H(I)$ K-injective, where $H=\\underline\\Gamma_Z$, and [def-sfb-right-derived-functor] identifies it with $RHK$. With $B=\\Lambda_X$, clause (1) of [det-sf-open-closed-sequence-ring-sheaf] gives exact $j_!\\dashv j^*$ and exact $j^*$. Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] with $v=j_!$, $u=j^*$; thus $j^*I$ is K-injective and $j^*K\\to j^*I$ is a quasi-isomorphism. It follows that $Rj_*j^*K$ is represented by $j_*j^*I$. Assertion (1) of the sheaf-support node identifies the kernel of the unit in each degree with $i_*H(I^n)$; step 2 gives surjectivity in each degree. Hence there is a natural degreewise short exact sequence of complexes\n$$0\\longrightarrow i_*H(I)\\longrightarrow I\\xrightarrow{\\eta_I}j_*j^*I\\longrightarrow0.$$\nThe kernel identifications commute with the differentials by their naturality. No choice of splittings enters this sequence.",
+   "text": "Apply closedSupport_injective_unit_epi from the broader support-adjunction node. Both supportPullback and upperStar are left adjoints to the very same lowerStar. The uniqueness isomorphism of left adjoints intertwines their units, so epimorphy transfers across its image under lowerStar.",
    "uses": [
-    "lem-weil-pbc-ring-sheaves-grothendieck",
-    "lem-pur-kinjective-degreewise-existence",
-    "det-lem-formal-closed-support-sheaves",
-    "def-sfb-right-derived-functor",
-    "det-sf-open-closed-sequence-ring-sheaf",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+    "det-lem-formal-closed-support-adjunction",
+    "def-sfb-module-upper-lower-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Tags 079P (theorem-K-injective-embedding-grothendieck), 079Q (remark-existence-D); derived.tex Tag 08BJ (lemma-adjoint-preserve-K-injectives); blueprint clause (3)"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply [lem-weil-pbc-complex-ses-triangle] to the sequence of step 3. Exactness of $i_*$ is assertion (2) of [det-lem-formal-closed-support-sheaves]; by [lem-sf-exact-functor-derived-triangulated] its degreewise application computes its derived action. Thus the triangle's terms are $i_*RHK$, $K$, and $Rj_*j^*K$. Its second arrow is the map represented by the sheaf unit $\\eta_I$. This is specifically the derived unit: apply the termwise adjunction [lem-weil-pbc-termwise-adjunction-homotopy] to $j^*\\dashv j_*$ from [def-sfb-module-upper-lower-adjunction]. Since $j^*$ is exact, [lem-weil-pbc-right-adjoint-preserves-kinjective] with $v=j^*$ and $u=j_*$ makes $j_*j^*I$ K-injective as well. The Hom comparison [lem-weil-pbc-kinjective-hom-derived] then identifies the derived Hom adjunction with the homotopy adjunction on these representatives; the identity of $j^*I$ corresponds to $\\eta_I$, proving the claim about the unit. The connecting arrow is natural for chain maps by the short-exact-sequence triangle node. Every derived morphism between $K,K'$ is represented by a homotopy class of maps between their K-injective resolutions, by the same Hom comparison. The additive termwise functors $i_*H$, identity, and $j_*j^*$ preserve homotopies explicitly: if $f-g=d_{I'}h+hd_I$, then for any of these functors $F$ additivity and preservation of composition give $F(f)-F(g)=d_{F(I')}F(h)+F(h)d_{F(I)}$. Thus the three component maps depend only on the derived morphism. Therefore the naturality of the connecting arrow descends to the derived categories, giving the natural triangle of assertion (3).",
+   "text": "Use the counit/unit localization triangle now explicitly stated by closedSupport_triangle in the broader node. Uniqueness of right adjoints compares RH with RclosedSupport because both are right adjoints to exact i_*; uniqueness of left adjoints compares the two open derived pullbacks. Whisker these isomorphisms and conjugate the connecting transformation. Their counit and unit identities give the first two triangle squares. The third square follows by cancellation of an isomorphism and its inverse. Invariance of distinguished triangles under isomorphism proves the desired natural triangle with exactly the specified arrows.",
    "uses": [
-    "lem-weil-pbc-complex-ses-triangle",
+    "det-lem-formal-closed-support-adjunction",
     "det-lem-formal-closed-support-sheaves",
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply closedSupport_fiber from the broader support-adjunction node. Uniqueness of the derived right adjoint compares its left-hand side with RH(K), and uniqueness of derived left adjoints compares its closed pullback with i^*. For the remaining difference, the uniqueness isomorphism between the two sheaf-level open pullbacks intertwines their units. Applying it termwise yields an isomorphism of arrows from I, hence an isomorphism of their actual mapping cones. Shift by -1, apply Q and then i^*, and compose these four isomorphisms. This gives precisely the required cone of the specified open unit for every K-injective representative.",
+   "uses": [
+    "det-lem-formal-closed-support-adjunction",
     "def-sfb-module-upper-lower-adjunction",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived"
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 0152 (lemma-derived-canonical-delta-functor), 070I (lemma-K-injective), 08BJ (lemma-adjoint-preserve-K-injectives), 015F (lemma-right-derived-exact-functor); blueprint clause (3), unit and naturality"
-   }
-  },
-  {
-   "text": "Write $A=i_*RHK$, $B=K$, $C=Rj_*j^*K$, and $g:B\\to C$ for the verified unit. By TR2 in [def-weil-triangulated-category], rotate the triangle of step 4 to $B\\xrightarrow{g}C\\to A[1]\\to B[1]$. The representative $\\eta_I$ of $g$ has the distinguished cone triangle $B\\xrightarrow{g}C\\to\\operatorname{cone}(\\eta_I)\\to B[1]$ by [def-weil-abstract-derived-category]. TR3 supplies a morphism between these triangles whose first two components are identities; [lem-sf-triangle-morphism-iso] makes its third component an isomorphism. Shifting by $[-1]$ gives $A\\simeq\\operatorname{cone}(\\eta_I)[-1]=\\operatorname{fib}(g)$. This is an isomorphism with the fiber of the specified unit; no functorial choice of cones in an arbitrary triangulated category is being used. Apply $i^*$, which is exact on the actual ring-sheaf modules by clause (2) of [det-sf-open-closed-pullback-limits] and hence acts termwise on derived categories by [lem-sf-exact-functor-derived-triangulated]. Clause (2) of [det-sf-open-closed-sequence-ring-sheaf] gives $i^*i_*\\cong\\mathrm{id}$ on these modules; applying its natural counit termwise gives the same identity on complexes and derived categories. We obtain\n$$RHK\\simeq i^*i_*RHK\\simeq i^*\\operatorname{fib}(K\\to Rj_*j^*K),$$\nwhich is the required fiber formula. The inverse-image coefficients are exactly those fixed in the sheaf-support statement throughout.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "det-sf-open-closed-pullback-limits",
-    "lem-sf-exact-functor-derived-triangulated",
-    "det-sf-open-closed-sequence-ring-sheaf",
-    "def-weil-triangulated-category",
-    "lem-sf-triangle-morphism-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support/det-lem-formal-closed-support-derived.md",
-    "place": "clause (3), final fiber formula"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "sk-def-sfb-dc-setting",
   "def-weil-finite-type-morphism",
-  "lem-wf-affine-noetherian-components",
-  "def-weil-quasi-separated-morphism",
-  "det-lem-formal-closed-support-adjunction",
+  "lem-weil-pbc-finite-type-over-noetherian",
   "det-lem-formal-closed-support-sheaves",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-pur-kinjective-degreewise-existence",
-  "def-sfb-right-derived-functor",
-  "det-sf-open-closed-sequence-ring-sheaf",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-complex-ses-triangle",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "det-lem-formal-closed-support-adjunction",
   "def-sfb-module-upper-lower-adjunction",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "def-weil-abstract-derived-category",
-  "det-sf-open-closed-pullback-limits",
   "def-weil-triangulated-category",
-  "lem-sf-triangle-morphism-iso"
+  "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support/det-lem-formal-closed-support-derived.md",
-  "place": "det-lem-formal-closed-support-derived.proof.md, clauses (1)--(3); existing broader node for (1)--(2), explicit injective-resolution triangle for (3)"
+  "place": "Clauses (1)--(3), via the existing broader support node, whose Lean interface now specifies both triangle arrows and the actual-unit fibre. Transport by uniqueness of adjoints; direct Hom-complex construction. W5, 2026-10-18."
  },
  "mathlib_searches": [
   {
@@ -247,16 +202,7 @@
   ]
  },
  "tool_uses": [
-  "det-lem-formal-closed-support-adjunction",
-  "lem-wf-affine-noetherian-components",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-pur-kinjective-degreewise-existence",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-complex-ses-triangle",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "det-sf-open-closed-sequence-ring-sheaf"
+  "det-lem-formal-closed-support-adjunction"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -295,5 +241,15 @@
   "group": "NY",
   "result": "pass",
   "note": "Statement matches node and blueprint clauses (1)-(3). Hypotheses are identical to formal_closed_support_sheaves: no QuasiCompact j, no universe restriction. The objects are the stmt_dep's own closedModuleSectionsWithSupport/upperStar/lowerStar on pulledBackModuleObjects. (1) The derived adjunction comes from mapDerivedCategoryRightDerivedAdjunction, a real construction; the RHom isomorphism is on whole Hom complexes, pinned componentwise by adj.homEquiv, with Γ_Z I K-injective. (2) Epi of the actual unit on every injective. (3) Natural δ, distinguished triangle whose second arrow is the derived unit of j^*⊣Rj_*; the counit as first arrow is stronger than the source but true. The fibre formula uses the shifted mapping cone of the actual unit over every K-injective representative. Edge cases (Z or V empty, unbounded complexes, shifts) are covered. Proof is sorry only, docstrings carry source/blueprint and a step-by-step plan, statement verbatim, only the item node's lean field changed. Clean nt_compile --json (8.6 s, exit 0). Advisory only: upstream rightDerivedFunctor is used instead of the recorded rightDerivedFunctorOfQuasiIsoResolutions (the derived-categories record and the broader landed node use the upstream functor, so this is not an H4 copy); one unused public import of a stmt_dep module."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261019T034339-L-423813",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
