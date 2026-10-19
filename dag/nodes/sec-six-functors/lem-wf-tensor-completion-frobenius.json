@@ -246,5 +246,47 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-3680884d5 (reviewer sub-agent of L); spot-checked: Read in full: the item, all five steps, every cited statement, def-pur-integral-derived-operations and the parent fix-prop-projection-formula steps 13–15. Checked against the main-20261015 blueprint sentence 'Its equivariance for Weil complexes is the equivariance of the projection transformation in [lem-fix-weil-operations]'. There are no new nodes. The statement is true and unchanged. Coefficients are the completed Ô_{E,W} on the small pro-étale site with raw rationalization, and Frobenius is coefficient transport along Φ=id×Spec(z↦z^{1/q}); def-wf-weil-category and def-wf-tensor-product agree on both. Edge cases checked: unit object, zero objects, identity Weil maps, E=L. Step 1: W is finite type over k, so noetherian, finite-dimensional and qcqs, and ℓ≠p is invertible; this meets the hypotheses of the integral-characterization lemma and of lem-fix-constructible-tensor-completion. Step 2: R is a DVR, hence Noetherian; constant-completion-equivalence (last paragraph) identifies the Koszul and quotient-tower completions over B, respecting the units. Step 3: checked against the explicit μ construction in def-wf-tensor-product. c(1)=1 and c(ϖ)=ϖ, so bH(η_A)=η_{A'}a holds as chain maps. Step 4: unit naturality plus Step 3 gives χφ_T=φ_{T̂}Φ^*(χ). Fixed two faults. (1) C1/E1, step 4: the claim 'morphism in the Weil category' needs T and T̂ to be bounded constructible, and nothing cited this. Added clause 2 of lem-pur-integral-operations-preserve-constructible with f=id_W, plus a tool_use for it. (2) C3/C4, step 5: the common-field half claimed component formulas for the isomorphisms of lem-pur-integral-operations-scalar-extension. That node is unsplit and its statement only says the isomorphisms exist. Rewrote the step: pass to L⊇E,F by the transition functors of def-wf-weil-category, apply Steps 1–4 and the rational argument at L, and use the colimit category's identity and composition rules. Dropped lem-weil-finite-free-completed-scalar-comparison and lem-pur-integral-operations-scalar-extension from uses, proof_deps and tool_uses. Accepted tool_uses: integral-stratified-perfect-characterization, ringed-koszul-completion-reflector, constant-completion-equivalence, l-adic-extension-integers-dvr and preserve-constructible. No duplicate found (lem-fix-weil-operations, def-wf-automorphism-completed-transport and lem-sf-proper-open-tensor-compatibility checked). No cycle and no SGA citation.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WfTensorCompletionFrobenius",
+  "declaration": "WeilConjectures.wfTensorCompletionFrobenius",
+  "file": "lean/Sheaf/Paper/WfTensorCompletionFrobenius.lean",
+  "statement": "theorem wfTensorCompletionFrobenius (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum) (X₀ : Over (Spec (.of D.k₀))) [IsSeparated X₀.hom] [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] (E : Padic.FiniteCoefficientFields c.l c.Qbar) : ∃! R : RationalComparison D c X₀ E, R.Normalized D c X₀ E ∧ ∀ K L : WeilD D c X₀ E, (R.ordinaryMu.app (K.carrier, L.carrier) ≪≫ R.ordinary.mapIso (K.str.prod L.str)).hom ≫ R.chi.hom.app (K.carrier, L.carrier) = ((weilFrobeniusPullback D c X₀ E).mapIso (R.chi.app (K.carrier, L.carrier)) ≪≫ R.completedMu.app (K.carrier, L.carrier) ≪≫ R.completed.mapIso (K.str.prod L.str)).hom ∧ ∃ e : R.ordinaryPair D c X₀ E K L ≅ R.completedPair D c X₀ E K L, e.hom.hom.f = R.chi.hom.app (K.carrier, L.carrier)",
+  "branch": "newtargets-dag",
+  "by": "Q64",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.WfTensorCompletion.Integral",
+   "WeilConjectures.WfTensorCompletion.completion",
+   "WeilConjectures.WfTensorCompletion.unit",
+   "WeilConjectures.WfTensorCompletion.ordinaryAmbient",
+   "WeilConjectures.WfTensorCompletion.completedAmbient",
+   "WeilConjectures.WfTensorCompletion.integral",
+   "WeilConjectures.WfTensorCompletion.ordinary",
+   "WeilConjectures.WfTensorCompletion.completed",
+   "WeilConjectures.WfTensorCompletion.chi",
+   "WeilConjectures.WfTensorCompletion.pullback",
+   "WeilConjectures.WfTensorCompletion.ordinaryMu",
+   "WeilConjectures.WfTensorCompletion.completedMu",
+   "WeilConjectures.WfTensorCompletion.integral_equivariance",
+   "WeilConjectures.WfTensorCompletion.Rational",
+   "WeilConjectures.WfTensorCompletion.localization",
+   "WeilConjectures.WfTensorCompletion.RationalComparison",
+   "WeilConjectures.WfTensorCompletion.RationalComparison.Normalized",
+   "WeilConjectures.WfTensorCompletion.RationalComparison.ordinaryPair",
+   "WeilConjectures.WfTensorCompletion.RationalComparison.completedPair",
+   "WeilConjectures.wfTensorCompletionFrobenius",
+   "WeilConjectures.wfTensorCompletionCommonField"
+  ],
+  "fixed_by": "NT-stage2-cc-fb3fbd1b7"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fb3fbd1b7",
+  "group": "Q64",
+  "result": "fix",
+  "note": "Mathematics accepted: every node clause matched. Objects are the recorded wf ordinary/completed tensors on PbcBoundedConstructibleComplete. chi is the Koszul completion unit, equal to the lem-fix comparison followed by the intrinsic identification by proof Step 2. mu^ord is proEtaleCanonicalTensorComparison at geometric Frobenius and mu-hat is wfIntegralTensorPullback restricted. Weil equation orientation is right and the Weil iso has underlying map chi. The rational ∃! is unique by localization functor equalities, and the same-category HEq pins hold by rfl on objects. The common-field theorem covers E,F<=G. No extra hypotheses, no sorry data, no duplicate. H10 mechanical: the delivered module timed out at nt_compile's 60 s limit at load ~107-117 and took 45-48 s at load 25-45 (worker 57.9 s). Profiling found ~42 s of kernel checking in the main theorem's Weil equation, ~12 s of it from R.ordinary.map (Prod.mkHom ..). FIX rewrites phi_T and phi_hatT as Iso composites (≪≫ / mapIso (K.str.prod L.str)), rfl-equal to the delivered equation (checked with an rfl example plus a broken control), adds module-wide genInjectivity/genSizeOfSpec/linter options and a docstring note. Fixed module compiles clean in 21.5/21.4 s back to back vs 45.7/45.1 s. Files: fixes/WfTensorCompletionFrobenius.lean and fixes/lem-wf-tensor-completion-frobenius.lean-record.json (statement verbatim). Advisories: the equation conjunct is implied by ∃ e; the ebar clause is tautological; unused stmt_dep imports."
  }
 }
