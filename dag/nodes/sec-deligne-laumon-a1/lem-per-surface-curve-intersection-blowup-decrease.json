@@ -18,9 +18,142 @@
   "def-nagata-strict-transform",
   "def-weil-pbc-module-length"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S=\\mathcal O_{X,p}$ and $R=\\mathcal O_{Y,p}$. The closed immersion gives a surjection $S\\to R$. The ring $R$ is Noetherian and a domain. Its dimension is one: the generic point of the integral one-dimensional $Y$ is distinct from its closed point $p$, giving a chain of length one, and a longer chain in the local spectrum would give a longer chain in $Y$. Apply [lem-weil-pbc-regular-local-dim-one-iff-normal] to the assumed regular local ring $R$, and then [lem-sc-normal-dim1-dvr], to obtain a DVR. In particular every ideal of $R$ is principal, and its maximal ideal has a nonzero generator $\\tau$ [def-sc-discrete-valuation-ring].",
+   "uses": [
+    "lem-weil-pbc-regular-local-dim-one-iff-normal",
+    "lem-sc-normal-dim1-dvr",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BI7, lemma-blowup-nonsingular-curves-meeting-at-point, proof, first sentence"
+   }
+  },
+  {
+   "text": "Lift $\\tau$ to an element $t$ of the maximal ideal of $S$. Represent it on an affine Noetherian neighbourhood $U=\\operatorname{Spec}A$ of $p$, with maximal ideal $\\mathfrak m$ and ideals $I,J$ for $Y,Z$. Write $B=A/I$. After replacing $U$ by a smaller principal neighbourhood of $p$, we have $\\mathfrak m=I+(t)$: choose finite generators of $\\mathfrak m$; their classes in $R=B_{\\mathfrak m/I}$ are multiples of $\\tau$, and clear the finitely many denominators and the finitely many equalities. Thus the ideal of the reduced point $p$ on $Y\\cap U$ is $(\\bar t)$. Since $B$ is a domain and $\\bar t\\ne0$, this is a free ideal of rank one. Away from $p$ the ideal of $p$ is the unit ideal. Hence that ideal is invertible on all of $Y$ [def-nagata-invertible-ideal].",
+   "uses": [
+    "def-nagata-invertible-ideal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BI7, lemma-blowup-nonsingular-curves-meeting-at-point, proof, choice of x_1 and shrinking U"
+   }
+  },
+  {
+   "text": "Apply [thm-nagata-strict-transform-is-blowup] to the closed immersion $Y\\to X$ and the ideal of $p$. It identifies $Y^\\prime$ over $Y$ with the blowup of the invertible ideal just obtained. By [cor-nagata-blowup-cartier-iso], $Y^\\prime\\to Y$ is an isomorphism. The exceptional divisor is defined by the extended centre ideal, which is an effective Cartier ideal by [thm-nagata-blowup-principalizes-center]. Its intersection with $Y^\\prime$ is therefore the inverse image of the reduced closed point $p\\subset Y$; in particular its underlying set is a single point, denoted $q$.",
+   "uses": [
+    "thm-nagata-strict-transform-is-blowup",
+    "cor-nagata-blowup-cartier-iso",
+    "thm-nagata-blowup-principalizes-center"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BI7, lemma-blowup-nonsingular-curves-meeting-at-point, proof, Cartier centre and strict-transform identification"
+   }
+  },
+  {
+   "text": "Let $H=JR\\subset R$. This is nonzero because the generic point of $Y$ is not in $Z$, and is proper because $p\\in Z$. Since $R$ is a DVR, write $H=(a)$ with $a\\ne0$. We may choose $a$ to be the image of an element $f\\in J$: express any generator as a finite $R$-linear combination of images of elements of $J$, and clear its denominators in $B\\setminus(\\mathfrak m/I)$; the resulting multiplier is a unit in $R$. Then $a\\in\\tau R$. The finite-length lemma [lem-weil-pbc-dim-le-one-principal-quotient-finite-length] applies to this nonzerodivisor $a$ in the Noetherian ring $R$ of dimension one. Thus $R/(a)$ has positive finite length. Its $S$-submodules and $R$-submodules are identical, since $S\\to R$ is surjective; consequently this length is precisely $m=m_p(Y,Z)$ by [def-weil-pbc-module-length].",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-dim-le-one-principal-quotient-finite-length",
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BI7, lemma-blowup-nonsingular-curves-meeting-at-point, paragraph before the lemma and proof, final choice of f"
+   }
+  },
+  {
+   "text": "Use the $t$-chart $\\operatorname{Spec}C$ of the blowup over $U$, where $C=A[\\mathfrak m/t]$ [prop-nagata-affine-blowup-chart, def-nagata-affine-blowup-chart-map, def-nagata-blowup-chart-ring]. The global blowup restricts over $U$ to the affine local model $\\operatorname{Bl}_{\\mathfrak m}(U)$: by [prop-nagata-global-blowup-cover-independent] the open immersion $\\iota_U$ identifies it with the preimage of $U$ over $U$ [def-nagata-global-blowup, def-nagata-global-blowup-glue-data, def-nagata-global-blowup-local-model]. Define $\\psi:C\\to B$ by $y/t^n\\mapsto\\bar y/\\bar t^n$ for $y\\in\\mathfrak m^n$. This lies in $B$ because $\\mathfrak m^nB=(\\bar t^n)$. Equality of two fractions can be multiplied by a power of $t$; reducing modulo $I$ and cancelling the nonzero element $\\bar t$ proves that $\\psi$ is well defined. The same cancellation verifies addition and multiplication. The resulting map $\\operatorname{Spec}B\\to\\operatorname{Spec}C$ factors through $Y^\\prime$: every equation of the scheme-theoretic closure vanishes after inverting $\\bar t$ and hence vanishes in the domain $B$ [def-nagata-strict-transform, def-nagata-scheme-theoretic-image]. Its composite to $Y\\cap U$ is the identity. By the isomorphism in step 3 it is the inverse on this neighbourhood. In particular $q$ lies on this chart and $\\mathcal O_{Y^\\prime,q}=R$.",
+   "uses": [
+    "prop-nagata-affine-blowup-chart",
+    "def-nagata-affine-blowup-chart-map",
+    "def-nagata-blowup-chart-ring",
+    "prop-nagata-global-blowup-cover-independent",
+    "def-nagata-global-blowup",
+    "def-nagata-global-blowup-glue-data",
+    "def-nagata-global-blowup-local-model",
+    "def-nagata-strict-transform",
+    "def-nagata-scheme-theoretic-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BI7, lemma-blowup-nonsingular-curves-meeting-at-point, proof, construction of psi on the x_1-chart"
+   }
+  },
+  {
+   "text": "On this chart the ideal of $E$ is $\\mathfrak m C$ [lemma-nagata-extended-ideal-affine-chart], and $\\mathfrak m C=(t)$ [lemma-nagata-chart-extended-ideal-principal]: the inclusion $(t)\\subseteq\\mathfrak m C$ holds since $t\\in\\mathfrak m$, and every generator $y\\in\\mathfrak m$ equals $t(y/t)$. Under $\\psi$ this ideal becomes $(\\bar t)$ and at $q$ becomes $(\\tau)$. Thus the intersection stalk is $R/\\tau R$, its residue field. This module has just two submodules and hence length one [def-weil-pbc-module-length]. The closed immersion gives a surjection $\\mathcal O_{X^\\prime,q}\\to R$, so its submodules over the ambient stalk are the same; therefore $m_q(Y^\\prime,E)=1$.",
+   "uses": [
+    "lemma-nagata-extended-ideal-affine-chart",
+    "lemma-nagata-chart-extended-ideal-principal",
+    "def-nagata-blowup-chart-ring",
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BI7, lemma-blowup-nonsingular-curves-meeting-at-point, proof, exceptional equation x_1"
+   }
+  },
+  {
+   "text": "Let $L\\subset C$ be the ideal of $Z^\\prime$ on the chosen chart. Away from $E$ the chart is $D(t)$, and the restriction of $Z^\\prime$ there is defined by $JC_t$. The closure definition says that its ideal is $L=\\ker(C\\to(C/JC)_t)$ [def-nagata-strict-transform, def-nagata-scheme-theoretic-image]. Since $f\\in J\\subset\\mathfrak m$, the element $f/t\\in C$ maps to zero in this localization, and therefore belongs to $L$. Its image in $R$ is $b=a/\\tau$, which is nonzero. Let $K=\\psi(L)R$; then $(b)\\subseteq K$, and $R/K$ is the intersection stalk at $q$. If $q\\in Z^\\prime$, the ideal $K$ is proper.",
+   "uses": [
+    "def-nagata-strict-transform",
+    "def-nagata-scheme-theoretic-image",
+    "def-nagata-blowup-chart-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BI7, lemma-blowup-nonsingular-curves-meeting-at-point, proof, inclusion of f/x_1 in the strict-transform ideal"
+   }
+  },
+  {
+   "text": "Assume $q\\in Z^\\prime$. Multiplication by $\\tau$ identifies $R/(b)$ with the proper submodule $\\tau R/(a)$ of $R/(a)$: it is injective because $\\tau$ is nonzero in the domain $R$, and $a=\\tau b$. It is proper because its quotient is the nonzero field $R/\\tau R$. Every strict submodule chain in $R/K$ pulls back under the surjection $R/(b)\\to R/K$ to a strict chain in $R/(b)$, and hence in $\\tau R/(a)$; appending the larger module $R/(a)$ adds one strict inclusion. By the definition of length [def-weil-pbc-module-length], $\\operatorname{length}_R(R/K)+1\\le m$. This also proves that $R/K$ has finite length. Since $\\mathcal O_{X^\\prime,q}\\to R$ is surjective, its module length over that ambient stalk equals its length over $R$. We obtain $m_q(Y^\\prime,Z^\\prime)<m_p(Y,Z)$, as required. If $b$ is a unit then $K=R$, so the conditional case cannot occur; this includes the transverse case $m=1$.",
+   "uses": [
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BI7, lemma-blowup-nonsingular-curves-meeting-at-point, proof, final valuation drop, expressed as a submodule-chain calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-nagata-blowup-cartier-iso",
+  "def-nagata-affine-blowup-chart-map",
+  "def-nagata-blowup-chart-ring",
+  "def-nagata-global-blowup",
+  "def-nagata-global-blowup-glue-data",
+  "def-nagata-global-blowup-local-model",
+  "def-nagata-invertible-ideal",
+  "def-nagata-scheme-theoretic-image",
+  "def-nagata-strict-transform",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-module-length",
+  "lem-sc-normal-dim1-dvr",
+  "lem-weil-pbc-dim-le-one-principal-quotient-finite-length",
+  "lem-weil-pbc-regular-local-dim-one-iff-normal",
+  "lemma-nagata-chart-extended-ideal-principal",
+  "lemma-nagata-extended-ideal-affine-chart",
+  "prop-nagata-affine-blowup-chart",
+  "prop-nagata-global-blowup-cover-independent",
+  "thm-nagata-blowup-principalizes-center",
+  "thm-nagata-strict-transform-is-blowup"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0BI7, lemma-blowup-nonsingular-curves-meeting-at-point and preceding equation-multiplicity; the last valuation comparison is expanded using module chains."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +182,38 @@
    "results": "Mathlib grep returned 0 hits.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Blowing up a closed point on a regular curve decreases the length of its intersection with a closed subscheme",
+   "results": "Returned 8 hits: ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, Module.supportDim_add_length_eq_supportDim_of_isRegular, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim, ringKrullDim_le_ringKrullDim_add_card, ringKrullDim_quotSMulTop_succ_eq_ringKrullDim, ringKrullDim_le_ringKrullDim_add_spanFinrank, Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors. Read the printed types; none states the geometric blowup intersection claim.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "0 hits.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "intersection.?multiplicity|strictTransform|strict_transform|exceptional.?divisor",
+   "results": "0 hits.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The strict transform of a regular curve under a point blowup meets the exceptional divisor with multiplicity one",
+   "results": "Returned 8 hits: Ideal.IsDedekindDomain.ramificationIdx_eq_multiplicity, WeierstrassCurve.Projective.map_nonsingular, WeierstrassCurve.Projective.baseChange_nonsingular, WeierstrassCurve.Affine.baseChange_nonsingular, WeierstrassCurve.coe_variableChange_Δ', WeierstrassCurve.variableChange_Δ', WeierstrassCurve.Projective.Point.toAffine_of_singular, WeierstrassCurve.Projective.nonsingular_smul. Read the printed types; none states the geometric blowup intersection claim.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-embedded-surface-curve-resolution",
@@ -78,5 +239,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-surface-curve-intersection-blowup-decrease",
+  "worker": "stage1",
+  "summary": "Read Stacks 0BI7 and its cited blowup and DVR facts; supplied the uniformizer chart map and strict-transform ideal calculation. Reused existing DAG statements, and proved the strict length drop directly with submodule chains, creating no nodes. No matching completed project declaration was found.",
+  "blueprint": "Realizes the embedded-resolution intersection-separation input in the recorded ancestor lem-per-artin-gabber-affine-curve, through lem-per-embedded-surface-curve-resolution; the local calculation of Stacks 0BI7 is expanded without replacing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-local-dim-one-iff-normal",
+    "why": "Generic local algebra: supplies normality of the one-dimensional regular local stalk, for the existing DVR theorem; this unit has no regular-local-ring characterization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-local-dim-one-iff-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-916db6d86",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-916db6d86 (reviewer sub-agent of L); spot-checked: Read Stacks 0BI7 (resolve.tex 4109-4175) in full; the item statement matches it hypothesis by hypothesis, with primes restored in m_q(Y',E) and m_q(Y',Z'). I read all 8 steps against the cited statements, base and main-20261015 blueprint_update. The DVR route is regular dim-1 → normal (lem-weil-pbc-regular-local-dim-one-iff-normal, accepted tool_use) → lem-sc-normal-dim1-dvr. The ideal of p is invertible in both definition versions. The strict transform is the blowup of Y (thm-nagata-strict-transform-is-blowup) and the invertible centre gives an isomorphism (cor-nagata-blowup-cartier-iso). JR ≠ 0 because ker(A→B_{m/I}) = I. lem-weil-pbc-dim-le-one-principal-quotient-finite-length is an exact leaf for finite length. psi is well defined and factors through Y' scheme-theoretically via the kernel ideal. f/t lies in L. The length drop is proved by chains through R/(b) ≅ τR/(a) inside R/(a). Small cases checked: transverse (m=1, conditional case empty), y-x^r, nonreduced (y,x^r), X=Y. The delivery has no new nodes and no duplicates; the grep finds only the citer and a sibling with a different statement. No SGA. One C3/C4 fault, fixed: step 5 took the global blowup over U to be the affine local model from definitions alone. That identification is prop-nagata-global-blowup-cover-independent (BU clauses 2-3), which the parent proof of thm-nagata-blowup-principalizes-center cites for exactly this, so step 5 now cites it. Step 6 now also cites lemma-nagata-extended-ideal-affine-chart (the ideal of E on the chart is mC) and lemma-nagata-chart-extended-ideal-principal (mC=(t)). proof_deps is the union of the step uses; the statement is unchanged and every step is under 2000 characters.; 1 file(s) fixed by the reviewer"
  }
 }
