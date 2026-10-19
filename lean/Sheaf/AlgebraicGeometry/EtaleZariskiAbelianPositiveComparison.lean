@@ -15,7 +15,7 @@ public import Mathlib.Algebra.Category.Grp.AB
 import WeilConjectures.AlgebraicGeometry.ZariskiEtaleCore
 import Sheaf.AlgebraicGeometry.EtaleTensorDirectImageIdentification
 import Sheaf.AlgebraicGeometry.EtaleTensorPositiveDirectImageVanishing
-import Sheaf.AlgebraicGeometry.EtaleZariskiNaturalAcyclicLeray
+import WeilConjectures.AlgebraicGeometry.EtaleZariskiNaturalAcyclicLeray
 
 /-! # Positive-degree comparison for underlying abelian sheaves
 

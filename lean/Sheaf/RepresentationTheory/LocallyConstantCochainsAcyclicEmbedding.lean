@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.Topology.LocallyConstant.Algebra
 public import Mathlib.Data.Fin.Tuple.Basic
 public import Mathlib.Topology.Connected.TotallyDisconnected
-import Sheaf.Topology.ContinuousOpenNormalStabilizer
+import WeilConjectures.Topology.ContinuousOpenNormalStabilizer
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 import Mathlib.Tactic.Abel
 
