@@ -13,6 +13,8 @@ public import Sheaf.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction
 public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
 public import WeilConjectures.Topology.Stratification
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import all Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
+import Mathlib.CategoryTheory.Adjunction.CompositionIso
 
 /-!
 # Uniformly bounded constructible adic towers
@@ -40,7 +42,6 @@ inverse-image coefficients, without choosing a tensor/pullback comparison.
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option warn.sorry false
 
 universe u
 
@@ -48,6 +49,98 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped TensorProduct ChangeOfRings
 
 namespace AlgebraicGeometry.Scheme
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem normalizedDerivedAdjunction
+    {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    (L : A ⥤ B) (R : B ⥤ A) [L.Additive] [R.Additive]
+    [PreservesFiniteLimits R] [PreservesFiniteColimits R] (adj : L ⊣ R)
+    (P : CochainComplex A ℤ → Prop)
+    (hres : ∀ G : CochainComplex A ℤ, ∃ (K : CochainComplex A ℤ) (s : K ⟶ G),
+      P K ∧ QuasiIso s)
+    (LD : DerivedCategory A ⥤ DerivedCategory B)
+    (ε : DerivedCategory.Qh ⋙ LD ⟶ L.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (hLD : LD.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso A (.up ℤ)))
+    (hε : ∀ K : CochainComplex A ℤ, P K →
+      IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj K))) :
+    ∃! d : LD ⊣ R.mapDerivedCategory,
+      ∀ K : CochainComplex A ℤ, P K →
+        d.unit.app (DerivedCategory.Q.obj K) ≫
+          R.mapDerivedCategory.map
+            (LD.map ((DerivedCategory.quotientCompQhIso _).inv.app K) ≫
+              ε.app ((HomotopyCategory.quotient _ _).obj K) ≫
+              DerivedCategory.Qh.map ((L.mapHomotopyCategoryFactors (.up ℤ)).hom.app K) ≫
+              (DerivedCategory.quotientCompQhIso _).hom.app
+                ((L.mapHomologicalComplex (.up ℤ)).obj K)) ≫
+          R.mapDerivedCategoryFactors.hom.app ((L.mapHomologicalComplex (.up ℤ)).obj K) =
+        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex adj.unit (.up ℤ)).app K) := by
+  have hr (X : HomotopyCategory A (.up ℤ)) :
+      ∃ (K : HomotopyCategory A (.up ℤ)) (s : K ⟶ X),
+        IsIso (ε.app K) ∧ HomotopyCategory.quasiIso A (.up ℤ) s := by
+    obtain ⟨G, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
+    obtain ⟨K, s, hK, hs⟩ := hres G
+    exact ⟨_, (HomotopyCategory.quotient _ _).map s, hε K hK,
+      (HomotopyCategory.quotient_map_mem_quasiIso_iff s).2 hs⟩
+  obtain ⟨d, hd⟩ := ScalarReductionDerivedProof.derivedAdjunction_of_resolutions
+    L R adj LD ε hLD hr
+  have hn (K : CochainComplex A ℤ) :
+        d.unit.app (DerivedCategory.Q.obj K) ≫
+          R.mapDerivedCategory.map
+            (LD.map ((DerivedCategory.quotientCompQhIso _).inv.app K) ≫
+              ε.app ((HomotopyCategory.quotient _ _).obj K) ≫
+              DerivedCategory.Qh.map ((L.mapHomotopyCategoryFactors (.up ℤ)).hom.app K) ≫
+              (DerivedCategory.quotientCompQhIso _).hom.app
+                ((L.mapHomologicalComplex (.up ℤ)).obj K)) ≫
+          R.mapDerivedCategoryFactors.hom.app ((L.mapHomologicalComplex (.up ℤ)).obj K) =
+        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex adj.unit (.up ℤ)).app K) := by
+    have hp := hd ((HomotopyCategory.quotient _ _).obj K)
+    change d.unit.app (DerivedCategory.Qh.obj
+        ((HomotopyCategory.quotient _ _).obj K)) ≫
+      R.mapDerivedCategory.map (ε.app ((HomotopyCategory.quotient _ _).obj K)) ≫
+      R.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient _ _).obj
+        ((L.mapHomologicalComplex (.up ℤ)).obj K)) = _ at hp
+    simp only [Functor.mapDerivedCategoryFactorsh_hom_app,
+      Adjunction.mapHomotopyCategory_unit_app_quotient] at hp
+    dsimp only [DerivedCategory.quotientCompQhIso,
+      HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+      Quotient.lift.isLift_hom, Quotient.lift.isLift_inv,
+      Functor.mapHomotopyCategoryFactors, Functor.map_id,
+      Category.id_comp, Category.comp_id] at hp ⊢
+    erw [LD.map_id, DerivedCategory.Qh.map_id, Category.comp_id, Category.id_comp]
+    erw [R.mapDerivedCategory.map_id, DerivedCategory.Qh.map_id, Category.comp_id,
+      Category.comp_id] at hp
+    erw [Category.comp_id]
+    erw [Category.id_comp] at hp
+    exact hp
+  refine ⟨d, fun K _ ↦ hn K, ?_⟩
+  intro d' hd'
+  have hu (K : CochainComplex A ℤ) (hK : P K) :
+      d'.unit.app (DerivedCategory.Q.obj K) = d.unit.app (DerivedCategory.Q.obj K) := by
+    have : IsIso (ε.app ((HomotopyCategory.quotient _ _).obj K)) := hε K hK
+    apply (cancel_mono (R.mapDerivedCategory.map
+      (LD.map ((DerivedCategory.quotientCompQhIso _).inv.app K) ≫
+        ε.app ((HomotopyCategory.quotient _ _).obj K) ≫
+        DerivedCategory.Qh.map ((L.mapHomotopyCategoryFactors (.up ℤ)).hom.app K) ≫
+        (DerivedCategory.quotientCompQhIso _).hom.app
+          ((L.mapHomologicalComplex (.up ℤ)).obj K)) ≫
+      R.mapDerivedCategoryFactors.hom.app
+        ((L.mapHomologicalComplex (.up ℤ)).obj K))).mp
+    simpa only [Category.assoc] using (hd' K hK).trans (hn K).symm
+  apply Adjunction.ext
+  apply Localization.natTrans_ext DerivedCategory.Q
+    (HomologicalComplex.quasiIso A (.up ℤ))
+  intro K
+  obtain ⟨K', s, hK', hs⟩ := hres K
+  have : QuasiIso s := hs
+  apply (cancel_epi (DerivedCategory.Q.map s)).mp
+  change (𝟭 _).map (DerivedCategory.Q.map s) ≫ _ =
+    (𝟭 _).map (DerivedCategory.Q.map s) ≫ _
+  rw [d'.unit.naturality, d.unit.naturality]
+  dsimp only [Functor.comp_map, Functor.id_map]
+  rw [hu K' hK']
+
 
 /-- Finite lissity over an inverse-image constant ring. A covering sieve on the final
 object trivializes F as a module sheaf; on each member the constant is a finite module.
@@ -137,7 +230,16 @@ instance pbcExtend_additive : (pbcExtend φ).Additive :=
 set_option linter.defProp false in
 /-- The universal derived pair supplied by the existing K-flat scalar-extension theorem.
 Source: Stacks Tag 06YY (blueprint: def-weil-pbc-bounded-constructible-tower). -/
-abbrev pbcDerivedExtensionExistence :=
+@[no_expose] def pbcDerivedExtensionExistence :
+    ∃ (LF : DerivedCategory (pbcModules X R) ⥤ DerivedCategory (pbcModules X S))
+      (ε : DerivedCategory.Qh ⋙ LF ⟶
+        (pbcExtend φ).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh),
+      LF.IsLeftDerivedFunctor ε
+          (HomotopyCategory.quasiIso (pbcModules X R) (.up ℤ)) ∧
+        (∃ (_ : LF.CommShift ℤ), LF.IsTriangulated) ∧
+        ∀ P : CochainComplex (pbcModules X R) ℤ,
+          CochainComplex.IsKFlatIndependentCoefficients (J := ProEt.topology X) (R := R) P →
+          IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) :=
   (pbcExtensionExistence φ).choose_spec.choose_spec.choose_spec.choose_spec.2.2
 
 /-- Derived scalar extension, determined up to unique comparison compatible with its
@@ -151,6 +253,20 @@ Source: Stacks Tag 06YY (blueprint: def-weil-pbc-bounded-constructible-tower). -
 def pbcExtensionCounit : DerivedCategory.Qh ⋙ pbcDerivedExtend φ ⟶
     (pbcExtend φ).mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh :=
   (pbcDerivedExtensionExistence φ).choose_spec.choose
+
+/-- The universal property of the recorded scalar-extension comparison.
+Source: Stacks Tag 06YY (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+theorem pbcDerivedExtension_universal :
+    (pbcDerivedExtend φ).IsLeftDerivedFunctor (pbcExtensionCounit φ)
+      (HomotopyCategory.quasiIso (pbcModules X R) (.up ℤ)) :=
+  (pbcDerivedExtensionExistence φ).choose_spec.choose_spec.1
+
+/-- The recorded scalar-extension comparison computes tensor on K-flat complexes.
+Source: Stacks Tag 06YY (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+theorem pbcExtensionCounit_isIso (P : CochainComplex (pbcModules X R) ℤ)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients (J := ProEt.topology X) (R := R) P) :
+    IsIso ((pbcExtensionCounit φ).app ((HomotopyCategory.quotient _ _).obj P)) :=
+  (pbcDerivedExtensionExistence φ).choose_spec.choose_spec.2.2 P hP
 
 /-- A sheafified pure tensor, using the object equality in the scalar-extension witness.
 Source: Stacks Tag 03EK (blueprint: def-weil-pbc-bounded-constructible-tower). -/
@@ -168,7 +284,24 @@ theorem pbcScalarAdjunction_exists :
     ∃! adj : pbcExtend φ ⊣ pbcRestrict φ,
       ∀ (M : pbcModules X R) (U : X.ProEtᵒᵖ) (x : M.val.obj U),
         (adj.unit.app M).val.app U x = pbcTensorSection φ M U 1 x := by
-  sorry
+  let : HasSheafify (ProEt.topology X) AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbSheafify.{u, 0} X
+  let : (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} X
+  obtain ⟨adj, hadj⟩ :=
+    SheafOfModules.ScalarReductionProof.tensorAdjunction_of_identifications.{u + 1, u, u + 1}
+      (K := ProEt.topology X) (A := R) (S := S)
+      φ (pbcExtend φ) (pbcExtensionExistence φ).choose_spec.choose
+      (pbcExtensionExistence φ).choose_spec.choose_spec.choose
+  have hu : ∀ (M : pbcModules X R) (U : X.ProEtᵒᵖ) (x : M.val.obj U),
+      (adj.unit.app M).val.app U x = pbcTensorSection φ M U 1 x := by
+    intro M U x
+    exact hadj M U x
+  refine ⟨adj, hu, ?_⟩
+  intro adj' hadj'
+  apply Adjunction.ext
+  ext M U x
+  exact (hadj' M U x).trans (hu M U x).symm
 
 /-- The ordinary adjunction with its actual tensor unit.
 Source: Stacks Tag 03EK (blueprint: def-weil-pbc-bounded-constructible-tower). -/
@@ -204,7 +337,17 @@ theorem pbcDerivedScalarAdjunction_exists :
               (((pbcExtend φ).mapHomologicalComplex (.up ℤ)).obj P) =
           DerivedCategory.Q.map
             ((NatTrans.mapHomologicalComplex (pbcScalarAdjunction φ).unit (.up ℤ)).app P) := by
-  sorry
+  let : HasSheafify (ProEt.topology X) AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbSheafify.{u, 0} X
+  let : (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} X
+  let : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  exact normalizedDerivedAdjunction (pbcExtend φ) (pbcRestrict φ) (pbcScalarAdjunction φ)
+    (CochainComplex.IsKFlatIndependentCoefficients (J := ProEt.topology X) (R := R))
+    (ScalarReductionDerivedProof.kFlatResolutions.{u + 1, u, u + 1}
+      (J := ProEt.topology X) (O := R))
+    (pbcDerivedExtend φ) (pbcExtensionCounit φ)
+    (pbcDerivedExtension_universal φ) (pbcExtensionCounit_isIso φ)
 
 /-- Canonical derived scalar extension/restriction adjunction.
 Source: Stacks Tag 06YY (blueprint: def-weil-pbc-bounded-constructible-tower). -/
@@ -223,7 +366,25 @@ theorem pbcRestrictComp_exists :
     ∃! e : pbcRestrict ψ ⋙ pbcRestrict φ ≅ pbcRestrict χ,
       ∀ (M : pbcModules X B) (U : X.ProEtᵒᵖ) (x : M.val.obj U),
         (e.hom.app M).val.app U x = x := by
-  sorry
+  have hU (U : X.ProEtᵒᵖ) : (χ.hom.app U).hom =
+      (ψ.hom.app U).hom.comp (φ.hom.app U).hom := by
+    exact congrArg (fun f : R ⟶ B ↦ (f.hom.app U).hom) h.symm
+  let eM (M : pbcModules X B) :
+      (pbcRestrict φ).obj ((pbcRestrict ψ).obj M) ≅ (pbcRestrict χ).obj M :=
+    (SheafOfModules.fullyFaithfulForget _).preimageIso
+      (PresheafOfModules.isoMk (fun U ↦
+        (ModuleCat.restrictScalarsComp'App (φ.hom.app U).hom (ψ.hom.app U).hom
+          (χ.hom.app U).hom (hU U) (M.val.obj U)).symm)
+        (fun {U V} f ↦ by ext x; rfl))
+  let e : pbcRestrict ψ ⋙ pbcRestrict φ ≅ pbcRestrict χ :=
+    NatIso.ofComponents eM (fun f ↦ by ext U x; rfl)
+  refine ⟨e, ?_, ?_⟩
+  · intro M U x
+    rfl
+  · intro e' he'
+    apply Iso.ext
+    ext M U x
+    exact he' M U x
 
 /-- The canonical ordinary restriction comparison.
 Source: Stacks Tag 03DA (blueprint: def-weil-pbc-bounded-constructible-tower). -/
@@ -266,7 +427,15 @@ s⊗x to s⊗(1⊗x). The balancing relations prove the inverse identities. Loca
 generation and sheafification give inverse chain maps, hence an isomorphism on localization. -/
 theorem pbcReductionNormalization_isIso (K : DerivedCategory (pbcModules X R)) :
     IsIso (pbcReductionNormalizationHom φ ψ χ h K) := by
-  sorry
+  let e := Adjunction.leftAdjointCompIso (pbcDerivedScalarAdjunction φ)
+    (pbcDerivedScalarAdjunction ψ) (pbcDerivedScalarAdjunction χ)
+    (pbcDerivedRestrictComp φ ψ χ h)
+  have he : pbcReductionNormalizationHom φ ψ χ h K = e.hom.app K := by
+    dsimp [pbcReductionNormalizationHom, pbcReductionTransition, e]
+    simp only [Adjunction.leftAdjointCompIso_hom_app, Adjunction.homEquiv_counit,
+      Functor.map_comp, Category.assoc]
+  rw [he]
+  infer_instance
 
 /-- Canonical normalization, retaining its balancing and unit characterization.
 Source: blueprint order 1239 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
@@ -315,7 +484,7 @@ Proof: apply the naturality equation of the limit cone to the arrow b→a. -/
 theorem pbcAdicProjection_comp (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (b a : ℕ) (hab : a ≤ b) :
     pbcAdicProjection X d b ≫ pbcAdicQuotient X d b a hab = pbcAdicProjection X d a := by
-  sorry
+  exact limit.w (pbcAdicRings X d) (homOfLE hab).op
 
 set_option linter.defProp false in
 /-- Quotient maps satisfy the full quotient cocycle.
@@ -326,7 +495,7 @@ theorem pbcAdicQuotient_comp (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (c b a : ℕ) (hab : a ≤ b) (hbc : b ≤ c) :
     pbcAdicQuotient X d c b hbc ≫ pbcAdicQuotient X d b a hab =
       pbcAdicQuotient X d c a (hab.trans hbc) := by
-  sorry
+  exact ((pbcAdicRings X d).map_comp (homOfLE hbc).op (homOfLE hab).op).symm
 
 /-- The natural derived transition between any two evaluations of a strict tower.
 Source: blueprint order 1239 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
@@ -376,7 +545,70 @@ theorem pbcLevelConstantComparison_exists (X : Scheme.{u}) {A : Type (u + 1)} [C
             (CommRingCat.of (A ⧸ d.ideal ^ (n + 1))))).app U b) =
           (toSheafify (ProEt.topology X) (pbcQuotientPresheaf X d n)).app U
             (pbcQuotientConstant X d n U b (⊥ : TopologicalSpace (A ⧸ d.ideal ^ (n + 1)))) := by
-  sorry
+  let := d.quotientFinite n
+  let : TopologicalSpace (A ⧸ d.ideal ^ (n + 1)) := ⊥
+  let : DiscreteTopology (A ⧸ d.ideal ^ (n + 1)) := ⟨rfl⟩
+  let c := AdicCoefficients.constants X (A ⧸ d.ideal ^ (n + 1))
+  let η := toSheafify (ProEt.topology X)
+    (AdicCoefficients.functionPresheaf X (A ⧸ d.ideal ^ (n + 1)))
+  let cr := Functor.whiskerRight c (forget₂ CommRingCat RingCat)
+  let ηr := Functor.whiskerRight η (forget₂ CommRingCat RingCat)
+  let eR := AdicCoefficients.finiteRingComparison X (A ⧸ d.ideal ^ (n + 1))
+  have hη : ηr ≫ eR.hom.hom = AdicCoefficients.finiteRingUnit X
+      (A ⧸ d.ideal ^ (n + 1)) :=
+    (AdicCoefficients.finiteRingComparison_exists X
+      (A ⧸ d.ideal ^ (n + 1))).choose_spec.1.2
+  have hiη : Presheaf.IsLocallyInjective (ProEt.topology X) ηr :=
+    (Presheaf.isLocallyInjective_forget_iff (ProEt.topology X) ηr).mp
+      ((Presheaf.isLocallyInjective_forget_iff (ProEt.topology X) η).mpr inferInstance)
+  have hsη : Presheaf.IsLocallySurjective (ProEt.topology X) ηr :=
+    (Presheaf.isLocallySurjective_iff_whisker_forget (ProEt.topology X) ηr).mpr
+      ((Presheaf.isLocallySurjective_iff_whisker_forget (ProEt.topology X) η).mp
+        inferInstance)
+  have hcr : cr ≫ ηr ≫ eR.hom.hom = ProEtale.finiteCoefficientScalarMap X
+      (A ⧸ d.ideal ^ (n + 1)) := by
+    rw [hη]
+    rfl
+  have hir : Presheaf.IsLocallyInjective (ProEt.topology X) cr := by
+    have hi : Presheaf.IsLocallyInjective (ProEt.topology X) (cr ≫ ηr ≫ eR.hom.hom) := by
+      rw [hcr]
+      exact (ProEtale.finiteCoefficientScalarMap_locallyBijective X
+        (A ⧸ d.ideal ^ (n + 1))).1
+    exact Presheaf.isLocallyInjective_of_isLocallyInjective
+      (ProEt.topology X) cr (ηr ≫ eR.hom.hom)
+  have hsr : Presheaf.IsLocallySurjective (ProEt.topology X) cr := by
+    have hs : Presheaf.IsLocallySurjective (ProEt.topology X) (cr ≫ ηr ≫ eR.hom.hom) := by
+      rw [hcr]
+      exact (ProEtale.finiteCoefficientScalarMap_locallyBijective X
+        (A ⧸ d.ideal ^ (n + 1))).2
+    exact Presheaf.isLocallySurjective_of_isLocallySurjective_of_isLocallyInjective
+      (ProEt.topology X) cr (ηr ≫ eR.hom.hom)
+  have hi : Presheaf.IsLocallyInjective (ProEt.topology X) c :=
+    (Presheaf.isLocallyInjective_forget_iff (ProEt.topology X) c).mp
+      ((Presheaf.isLocallyInjective_forget_iff (ProEt.topology X) cr).mpr hir)
+  have hs : Presheaf.IsLocallySurjective (ProEt.topology X) c :=
+    (Presheaf.isLocallySurjective_iff_whisker_forget (ProEt.topology X) c).mpr
+      ((Presheaf.isLocallySurjective_iff_whisker_forget (ProEt.topology X) cr).mp hsr)
+  have hc : IsIso (AdicCoefficients.constantComparison X
+      (A ⧸ d.ideal ^ (n + 1))) :=
+    ((ProEt.topology X).W_iff c).mp
+      (((ProEt.topology X).W_iff_isLocallyBijective c).mpr ⟨hi, hs⟩)
+  let e := asIso (AdicCoefficients.constantComparison X (A ⧸ d.ideal ^ (n + 1)))
+  have he (U : X.ProEtᵒᵖ) (b : A ⧸ d.ideal ^ (n + 1)) :
+      e.hom.hom.app U
+        ((toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj
+          (CommRingCat.of (A ⧸ d.ideal ^ (n + 1))))).app U b) =
+      (toSheafify (ProEt.topology X) (pbcQuotientPresheaf X d n)).app U
+        (pbcQuotientConstant X d n U b ⊥) := by
+    exact ConcreteCategory.congr_hom (congr_app (toSheafify_naturality
+      (ProEt.topology X) c) U) b |>.symm
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply Sheaf.hom_ext
+  apply sheafify_hom_ext _ _ _ ((pbcAdicRings X d).obj (op n)).property
+  ext U b
+  exact (he' U b).trans (he U b).symm
 
 /-- The canonical finite coefficient identification, fixed on constant sections.
 Source: blueprint order 1250 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
@@ -398,7 +630,28 @@ theorem pbcConstantSystemComparison_naturality (X : Scheme.{u})
         (pbcLevelConstantComparison X d n.unop).hom =
       (pbcLevelConstantComparison X d m.unop).hom ≫
         (pbcAdicRings X d).map f := by
-  sorry
+  let := d.quotientFinite
+  have he (k : ℕ) : (pbcLevelConstantComparison X d k).hom =
+      AdicCoefficients.constantComparison X (A ⧸ d.ideal ^ (k + 1)) := by
+    apply Sheaf.hom_ext
+    apply sheafify_hom_ext _ _ _ ((pbcAdicRings X d).obj (op k)).property
+    change toSheafify _ _ ≫ (pbcLevelConstantComparison X d k).hom.hom =
+      toSheafify _ _ ≫ sheafifyMap _ _
+    rw [← toSheafify_naturality]
+    ext U b
+    exact (pbcLevelConstantComparison_exists X d k).exists.choose_spec U b
+  let t : adicLisseRingSystem X d.ideal ⟶ pbcAdicRings X d :=
+    NatTrans.ofOpSequence (fun k ↦ (pbcLevelConstantComparison X d k).hom) (fun k ↦ by
+      simp only [adicLisseRingSystem, pbcAdicRings, AdicCoefficients.ringSystem,
+        Functor.ofOpSequence_map_homOfLE_succ]
+      rw [he k, he (k + 1)]
+      change (presheafToSheaf _ CommRingCat).map _ ≫
+          (presheafToSheaf _ CommRingCat).map _ =
+        (presheafToSheaf _ CommRingCat).map _ ≫
+          (presheafToSheaf _ CommRingCat).map _
+      rw [← Functor.map_comp, ← Functor.map_comp]
+      congr 1)
+  exact t.naturality f
 
 /-- The comparison of constant and continuous-function quotient coefficient diagrams.
 Source: blueprint order 1250 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
