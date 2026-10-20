@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.SemiRepresentableObject
 public import Sheaf.CategoryTheory.ProperFaceMatchingObject
 import Sheaf.AlgebraicGeometry.SemiRepresentableCoveringPermanence
-import Sheaf.CategoryTheory.SimplicialMatchingObject
+import WeilConjectures.CategoryTheory.SimplicialMatchingObject
 import all Sheaf.AlgebraicGeometry.HypercoverOneMoreSimplex
 import all Sheaf.AlgebraicGeometry.ProEtaleAffineAcyclicHypercoverGeometry
 
@@ -76,12 +76,46 @@ private theorem etaleFaces (X : Scheme.{u}) (U : SimplicialObject X.Etale) (n : 
               uniq := fun s m hm ↦ ht.hom_ext _ _ }
     · intro a
       exact (Nat.not_lt_zero _ a.property.1).elim
-  · obtain ⟨c, hc, _, _, μ, hμ, _⟩ := SimplicialObject.matching_object_one U
+  · let c : Fan (fun _ : Fin 2 ↦ U _⦋0⦌) :=
+      limit.cone (Discrete.functor (fun _ : Fin 2 ↦ U _⦋0⦌))
+    have hc : Nonempty (IsLimit c) := ⟨limit.isLimit _⟩
+    let μ : U _⦋1⦌ ⟶ c.pt := Fan.IsLimit.lift hc.some (fun i ↦ U.δ i)
+    have hμ : ∀ i : Fin 2, μ ≫ c.proj i = U.δ i :=
+      fun i ↦ Fan.IsLimit.fac hc.some _ i
     obtain ⟨π, hπ, _, hfac, _⟩ :=
       (SimplicialObject.matching_object_proper_faces_one U c hc.some μ hμ).2
     exact ⟨Cone.mk c.pt π, μ, by omega, hπ, hfac⟩
-  · obtain ⟨c, hc, _, _, _, μ, hμ, _⟩ :=
-      SimplicialObject.matching_object_succ_succ U n
+  · let : Fintype (SimplicialObject.matchingBoundaryShape n).L :=
+      inferInstanceAs (Fintype (Fin (n + 3)))
+    let : Fintype (SimplicialObject.matchingBoundaryShape n).R :=
+      inferInstanceAs (Fintype {p : Fin (n + 3) × Fin (n + 3) // p.1 < p.2})
+    let : DecidableEq (SimplicialObject.matchingBoundaryShape n).L :=
+      inferInstanceAs (DecidableEq (Fin (n + 3)))
+    let : DecidableEq (SimplicialObject.matchingBoundaryShape n).R :=
+      inferInstanceAs (DecidableEq {p : Fin (n + 3) × Fin (n + 3) // p.1 < p.2})
+    let c : Multifork (SimplicialObject.matchingBoundaryIndex U n) :=
+      Multiequalizer.multifork _
+    have hc : Nonempty (IsLimit c) := ⟨limit.isLimit _⟩
+    have hδ : ∀ p : (SimplicialObject.matchingBoundaryShape n).R,
+        U.δ p.val.1 ≫ (SimplicialObject.matchingBoundaryIndex U n).fst p =
+          U.δ p.val.2 ≫ (SimplicialObject.matchingBoundaryIndex U n).snd p := by
+      rintro ⟨⟨a, b⟩, h⟩
+      dsimp [SimplicialObject.matchingBoundaryIndex]
+      have hb : b = (b.pred (Fin.ne_zero_of_lt h)).succ := (Fin.succ_pred _ _).symm
+      have H : a.castLT (Nat.lt_of_lt_of_le h (Nat.le_of_lt_succ b.isLt)) ≤
+          b.pred (Fin.ne_zero_of_lt h) := by
+        rw [Fin.le_iff_val_le_val]
+        have h' : a.val < b.val := h
+        simp only [Fin.val_castLT, Fin.val_pred]
+        omega
+      have hface := (SimplicialObject.δ_comp_δ U H).symm
+      rw [← hb] at hface
+      exact hface
+    let μ : U _⦋n + 2⦌ ⟶ c.pt :=
+      Multifork.IsLimit.lift hc.some (fun i ↦ U.δ i) hδ
+    have hμ : ∀ i : Fin (n + 3),
+        μ ≫ c.π.app (WalkingMulticospan.left i) = U.δ i :=
+      fun i ↦ Multifork.IsLimit.fac hc.some _ hδ i
     obtain ⟨π, hπ, _, hfac, _⟩ :=
       (SimplicialObject.matching_object_proper_faces_succ_succ U n c hc.some μ hμ).2
     exact ⟨Cone.mk c.pt π, μ, by omega, hπ, hfac⟩

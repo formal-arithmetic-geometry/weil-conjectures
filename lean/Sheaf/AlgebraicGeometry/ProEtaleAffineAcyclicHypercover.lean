@@ -6,7 +6,7 @@ Authors: SHEAF group NM
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-public import Sheaf.CategoryTheory.SimplicialMatchingObject
+public import WeilConjectures.CategoryTheory.SimplicialMatchingObject
 import Sheaf.AlgebraicGeometry.ProEtaleAffineAcyclicHypercoverGeometry
 import Sheaf.AlgebraicGeometry.ProEtaleAffineAcyclicHypercoverWeak
 

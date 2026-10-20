@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.CategoryTheory.SimplicialMatchingObject
+public import WeilConjectures.CategoryTheory.SimplicialMatchingObject
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 
 /-!

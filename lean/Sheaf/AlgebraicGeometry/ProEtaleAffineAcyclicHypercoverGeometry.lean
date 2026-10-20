@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-public import Sheaf.CategoryTheory.SimplicialMatchingObject
+public import WeilConjectures.CategoryTheory.SimplicialMatchingObject
 import Sheaf.AlgebraicGeometry.ProEtaleQcqsFiniteFamilyGeometry
 import Sheaf.CategoryTheory.SiteFiniteBasisHypercoverExistence
 import all Mathlib.CategoryTheory.Limits.FormalCoproducts.Basic
@@ -646,7 +646,12 @@ theorem exists_affine_hypercover_geometry
     have h' : Epi (Y.map κ.left) := h
     rw [show κ.left = (U _⦋0⦌).hom from Over.mkIdTerminal_from_left _] at h'
     exact yoneda_epi_of_ulift (topology X) _ h'
-  · obtain ⟨c, hc, _, _, κ, hκ, _⟩ := SimplicialObject.matching_object_one U
+  · let c : Fan (fun _ : Fin 2 ↦ U _⦋0⦌) :=
+      limit.cone (Discrete.functor (fun _ : Fin 2 ↦ U _⦋0⦌))
+    have hc : Nonempty (IsLimit c) := ⟨limit.isLimit _⟩
+    let κ : U _⦋1⦌ ⟶ c.pt := Fan.IsLimit.lift hc.some (fun i ↦ U.δ i)
+    have hκ : ∀ i : Fin 2, κ ≫ c.proj i = U.δ i :=
+      fun i ↦ Fan.IsLimit.fac hc.some _ i
     obtain ⟨_, π, hπ, _, hfaces, _⟩ :=
       SimplicialObject.matching_object_proper_faces_one U c hc.some κ hκ
     let := hFepi 1
@@ -656,8 +661,37 @@ theorem exists_affine_hypercover_geometry
     exact ⟨c, hc, κ, hκ,
       yoneda_epi_of_ulift (topology X) κ.left h⟩
   · intro n
-    obtain ⟨c, hc, _, _, _, κ, hκ, _⟩ :=
-      SimplicialObject.matching_object_succ_succ U n
+    let : Fintype (SimplicialObject.matchingBoundaryShape n).L :=
+      inferInstanceAs (Fintype (Fin (n + 3)))
+    let : Fintype (SimplicialObject.matchingBoundaryShape n).R :=
+      inferInstanceAs (Fintype {p : Fin (n + 3) × Fin (n + 3) // p.1 < p.2})
+    let : DecidableEq (SimplicialObject.matchingBoundaryShape n).L :=
+      inferInstanceAs (DecidableEq (Fin (n + 3)))
+    let : DecidableEq (SimplicialObject.matchingBoundaryShape n).R :=
+      inferInstanceAs (DecidableEq {p : Fin (n + 3) × Fin (n + 3) // p.1 < p.2})
+    let c : Multifork (SimplicialObject.matchingBoundaryIndex U n) :=
+      Multiequalizer.multifork _
+    have hc : Nonempty (IsLimit c) := ⟨limit.isLimit _⟩
+    have hδ : ∀ p : (SimplicialObject.matchingBoundaryShape n).R,
+        U.δ p.val.1 ≫ (SimplicialObject.matchingBoundaryIndex U n).fst p =
+          U.δ p.val.2 ≫ (SimplicialObject.matchingBoundaryIndex U n).snd p := by
+      rintro ⟨⟨a, b⟩, h⟩
+      dsimp [SimplicialObject.matchingBoundaryIndex]
+      have hb : b = (b.pred (Fin.ne_zero_of_lt h)).succ := (Fin.succ_pred _ _).symm
+      have H : a.castLT (Nat.lt_of_lt_of_le h (Nat.le_of_lt_succ b.isLt)) ≤
+          b.pred (Fin.ne_zero_of_lt h) := by
+        rw [Fin.le_iff_val_le_val]
+        have h' : a.val < b.val := h
+        simp only [Fin.val_castLT, Fin.val_pred]
+        omega
+      have hface := (SimplicialObject.δ_comp_δ U H).symm
+      rw [← hb] at hface
+      exact hface
+    let κ : U _⦋n + 2⦌ ⟶ c.pt :=
+      Multifork.IsLimit.lift hc.some (fun i ↦ U.δ i) hδ
+    have hκ : ∀ i : Fin (n + 3),
+        κ ≫ c.π.app (WalkingMulticospan.left i) = U.δ i :=
+      fun i ↦ Multifork.IsLimit.fac hc.some _ hδ i
     obtain ⟨_, π, hπ, _, hfaces, _⟩ :=
       SimplicialObject.matching_object_proper_faces_succ_succ U n c hc.some κ hκ
     let := hFepi (n + 2)

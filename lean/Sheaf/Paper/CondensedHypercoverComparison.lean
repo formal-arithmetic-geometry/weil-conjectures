@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import Sheaf.AlgebraicGeometry.ProEtaleAbelianHypercoverTotal
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-public import Sheaf.CategoryTheory.SimplicialMatchingObject
+public import WeilConjectures.CategoryTheory.SimplicialMatchingObject
 public import Mathlib.Algebra.Homology.CochainComplexPlus
 import Sheaf.Paper.CondensedHypercoverInjectiveRow
 import Sheaf.AlgebraicGeometry.ProEtaleAbelianHypercoverQuasiIso

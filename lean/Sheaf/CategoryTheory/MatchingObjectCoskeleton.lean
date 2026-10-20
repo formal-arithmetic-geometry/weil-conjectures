@@ -5,7 +5,7 @@ Authors: SHEAF group J1
 -/
 module
 
-public import Sheaf.CategoryTheory.SimplicialMatchingObject
+public import WeilConjectures.CategoryTheory.SimplicialMatchingObject
 import Sheaf.CategoryTheory.MatchingObjectCoskeletonComparisonOne
 import Sheaf.CategoryTheory.MatchingObjectCoskeletonComparison
 

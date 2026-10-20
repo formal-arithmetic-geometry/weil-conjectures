@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import Sheaf.AlgebraicGeometry.ProEtaleAbelianHypercoverAugmentation
-public import Sheaf.CategoryTheory.SimplicialMatchingObject
+public import WeilConjectures.CategoryTheory.SimplicialMatchingObject
 import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
 import Sheaf.CategoryTheory.RingedHypercoverInjectiveAugmentation
 import Sheaf.AlgebraicGeometry.ProEtaleHypercoverLocalLifting

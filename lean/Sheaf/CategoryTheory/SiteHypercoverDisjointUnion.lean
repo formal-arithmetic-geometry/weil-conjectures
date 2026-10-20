@@ -9,7 +9,7 @@ public import Mathlib.CategoryTheory.Sites.Subcanonical
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Limits.FormalCoproducts.Basic
 public import Mathlib.CategoryTheory.Comma.Over.Basic
-public import Sheaf.CategoryTheory.SimplicialMatchingObject
+public import WeilConjectures.CategoryTheory.SimplicialMatchingObject
 import Sheaf.CategoryTheory.FormalCoproductSheafRealization
 import Sheaf.CategoryTheory.FormalCoproductSheafCoverEpi
 import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
@@ -72,11 +72,47 @@ private theorem exists_properFaceMatchingArrow
     {D : Type u} [Category.{v} D] [HasFiniteLimits D]
     (K : SimplicialObject D) (n : ℕ) :
     ∃ (M : D) (μ : K _⦋n⦌ ⟶ M), IsProperFaceMatchingArrow K n M μ := by
+  classical
   rcases n with _ | _ | n
   · exact ⟨⊤_ D, terminal.from _, ⟨terminalIsTerminal⟩⟩
-  · obtain ⟨c, hc, _, _, μ, hμ, _⟩ := matching_object_one K
+  · let c : Fan (fun _ : Fin 2 ↦ K _⦋0⦌) :=
+      limit.cone (Discrete.functor (fun _ : Fin 2 ↦ K _⦋0⦌))
+    have hc : Nonempty (IsLimit c) := ⟨limit.isLimit _⟩
+    let μ : K _⦋1⦌ ⟶ c.pt := Fan.IsLimit.lift hc.some (fun i ↦ K.δ i)
+    have hμ : ∀ i : Fin 2, μ ≫ c.proj i = K.δ i :=
+      fun i ↦ Fan.IsLimit.fac hc.some _ i
     exact ⟨c.pt, μ, c.proj, hc, hμ⟩
-  · obtain ⟨c, hc, _, _, _, μ, hμ, _⟩ := matching_object_succ_succ K n
+  · let : Fintype (SimplicialObject.matchingBoundaryShape n).L :=
+      inferInstanceAs (Fintype (Fin (n + 3)))
+    let : Fintype (SimplicialObject.matchingBoundaryShape n).R :=
+      inferInstanceAs (Fintype {p : Fin (n + 3) × Fin (n + 3) // p.1 < p.2})
+    let : DecidableEq (SimplicialObject.matchingBoundaryShape n).L :=
+      inferInstanceAs (DecidableEq (Fin (n + 3)))
+    let : DecidableEq (SimplicialObject.matchingBoundaryShape n).R :=
+      inferInstanceAs (DecidableEq {p : Fin (n + 3) × Fin (n + 3) // p.1 < p.2})
+    let c : Multifork (SimplicialObject.matchingBoundaryIndex K n) :=
+      Multiequalizer.multifork _
+    have hc : Nonempty (IsLimit c) := ⟨limit.isLimit _⟩
+    have hδ : ∀ p : (SimplicialObject.matchingBoundaryShape n).R,
+        K.δ p.val.1 ≫ (SimplicialObject.matchingBoundaryIndex K n).fst p =
+          K.δ p.val.2 ≫ (SimplicialObject.matchingBoundaryIndex K n).snd p := by
+      rintro ⟨⟨a, b⟩, h⟩
+      dsimp [SimplicialObject.matchingBoundaryIndex]
+      have hb : b = (b.pred (Fin.ne_zero_of_lt h)).succ := (Fin.succ_pred _ _).symm
+      have H : a.castLT (Nat.lt_of_lt_of_le h (Nat.le_of_lt_succ b.isLt)) ≤
+          b.pred (Fin.ne_zero_of_lt h) := by
+        rw [Fin.le_iff_val_le_val]
+        have h' : a.val < b.val := h
+        simp only [Fin.val_castLT, Fin.val_pred]
+        omega
+      have hface := (SimplicialObject.δ_comp_δ K H).symm
+      rw [← hb] at hface
+      exact hface
+    let μ : K _⦋n + 2⦌ ⟶ c.pt :=
+      Multifork.IsLimit.lift hc.some (fun i ↦ K.δ i) hδ
+    have hμ : ∀ i : Fin (n + 3),
+        μ ≫ c.π.app (WalkingMulticospan.left i) = K.δ i :=
+      fun i ↦ Multifork.IsLimit.fac hc.some _ hδ i
     exact ⟨c.pt, μ, c, hc, Iso.refl _, by simpa using hμ⟩
 
 private theorem matching_epi_transport
