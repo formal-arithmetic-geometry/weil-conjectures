@@ -23,3 +23,7 @@ Conflicts resolved:
 ## Status
 
 landed
+
+## Prefer upstream, round 1
+
+The upstream module(s) `WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.SubalgebraLimit` failed here while identical to the tip: the upstream files of their environment that this sync had merged with changes of ours take the tip's file: `WeilConjectures.AlgebraicGeometry.Sites.TorsionCohomologicalDimensionLimit`.
