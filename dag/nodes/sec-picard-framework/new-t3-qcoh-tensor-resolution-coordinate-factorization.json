@@ -86,14 +86,14 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.QCohTensorResolutionCoordinateFactorization",
-  "file": "lean/Sheaf/AlgebraicGeometry/QCohTensorResolutionCoordinateFactorization.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.QCohTensorResolutionCoordinateFactorization",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/QCohTensorResolutionCoordinateFactorization.lean",
   "declaration": "AlgebraicGeometry.tensorResolutionCoordinateSheafIso_factors",
-  "statement": "theorem tensorResolutionCoordinateSheafIso_factors\n    (Y : Scheme.{u}) (M N : Y.Modules) [M.IsQuasicoherent] [N.IsQuasicoherent]\n    (U : Y.affineOpens) (MA NA : ModuleCat.{u} (Γ(Y, U.1) : Type u))\n    (sM : MA ≃ₗ[Γ(Y, U.1)] M.val.obj (op U.1))\n    (sN : NA ≃ₗ[Γ(Y, U.1)] N.val.obj (op U.1))\n    (P : ProjectiveResolution MA) (K F : CochainComplex Y.Modules ℤ)\n    (q : K ⟶ (CochainComplex.singleFunctor Y.Modules 0).obj M)\n    (s : F ⟶ (CochainComplex.singleFunctor Y.Modules 0).obj N)\n    (hK : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) K)\n    (hF : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) F)\n    (hq : QuasiIso q) (hs : QuasiIso s) (n : ℕ) :\n    tensorResolutionCoordinateSheafIso Y M N U MA NA sM sN P K F q s hK hF hq hs n =\n      (tensorResolutionChartHomologyIso N U MA NA sN P n ≪≫\n        tensorResolutionChartComparisonIso Y M N U MA sM P K F q s hK hF hq hs (-(n : ℤ)) ≪≫\n        (tensorResolutionNormalizedRestrictHomologyIso U.2.fromSpec K\n          ((CochainComplex.singleFunctor Y.Modules 0).obj N) (-(n : ℤ))).symm)",
+  "statement": "theorem tensorResolutionCoordinateSheafIso_factors\n    (Y : Scheme.{u}) (M N : Y.Modules) [M.IsQuasicoherent] [N.IsQuasicoherent]\n    (U : Y.affineOpens) (MA NA : ModuleCat.{u} (Γ(Y, U.1) : Type u))\n    (sM : MA ≃ₗ[Γ(Y, U.1)] M.val.obj (op U.1))\n    (sN : NA ≃ₗ[Γ(Y, U.1)] N.val.obj (op U.1))\n    (P : ProjectiveResolution MA) (K F : CochainComplex Y.Modules ℤ)\n    (q : K ⟶ (CochainComplex.singleFunctor Y.Modules 0).obj M)\n    (s : F ⟶ (CochainComplex.singleFunctor Y.Modules 0).obj N)\n    (hK : CochainComplex.IsKFlatTensor (R := Y.sheaf) K)\n    (hF : CochainComplex.IsKFlatTensor (R := Y.sheaf) F)\n    (hq : QuasiIso q) (hs : QuasiIso s) (n : ℕ) :\n    tensorResolutionCoordinateSheafIso Y M N U MA NA sM sN P K F q s hK hF hq hs n =\n      (tensorResolutionChartHomologyIso N U MA NA sN P n ≪≫\n        tensorResolutionChartComparisonIso Y M N U MA sM P K F q s hK hF hq hs (-(n : ℤ)) ≪≫\n        (tensorResolutionNormalizedRestrictHomologyIso U.2.fromSpec K\n          ((CochainComplex.singleFunctor Y.Modules 0).obj N) (-(n : ℤ))).symm)",
   "branch": "sheaf-dag",
-  "by": "T3",
-  "date": "2026-10-15"
+  "by": "C1",
+  "date": "2026-10-20"
  },
  "reviewed": {
   "date": "2026-10-15",
@@ -106,14 +106,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-a207d",
-  "group": "T3",
+  "reviewer": "C-b1935",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261015T065832-L-2599491",
+  "landing": "20261020T162258-L-3585157",
   "kind": "interface",
-  "note": "independent Codex review: Matched all four Lean signatures to their nodes, verified the unchanged existing signature and permitted DAG edits; all four delivered modules and direct importer QCohOrdinaryTensorResolutionCoordinates compile cleanly; axioms match the two documented remaining holes."
+  "note": "independent cc review: 9 restored Sheaf modules vs quarantined originals and WeilConjectures counterparts (identical modulo predicate rename); 5 node lean.statements verbatim in WeilConjectures files; ChartIso proved equal to old composite; all compile, axioms clean, 0 importers"
  },
  "lean_audit": {
   "master": {
