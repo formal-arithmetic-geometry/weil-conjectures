@@ -76,6 +76,7 @@ private noncomputable def moduleExtension (J : GrothendieckTopology C) (Λ : Typ
     [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α] :=
   moduleEmbedding J Λ ⋙ PresheafOfModules.sheafification.{u} α
 
+set_option backward.isDefEq.respectTransparency false in
 private noncomputable def moduleExtensionForgetIso
     (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ]
     (R : Sheaf J RingCat.{u})
@@ -153,6 +154,20 @@ private noncomputable def moduleRestrictionObj
       map_comp f g := by ext x; exact ConcreteCategory.congr_hom (P.presheaf.map_comp f g) x }
   exact ⟨F, Presheaf.isSheaf_of_isSheaf_comp J F
     (forget₂ (ModuleCat.{u} Λ) AddCommGrpCat.{u}) M.isSheaf⟩
+
+private noncomputable def moduleRestriction
+    (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ]
+    (R : Sheaf J RingCat.{u})
+    (α : (Functor.const Cᵒᵖ).obj (RingCat.of Λ) ⟶ R.obj)
+    [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α] :
+    SheafOfModules.{u} R ⥤ Sheaf J (ModuleCat.{u} Λ) where
+  obj := moduleRestrictionObj J Λ R α
+  map φ := ⟨{
+    app X := (PresheafOfModules.restrictScalars α).map φ.val |>.app X
+    naturality _ _ f := by
+      ext x
+      exact PresheafOfModules.naturality_apply
+        ((PresheafOfModules.restrictScalars α).map φ.val) f x }⟩
 
 private noncomputable instance (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ]
     (R : Sheaf J RingCat.{u})
@@ -345,6 +360,52 @@ private theorem constantSliceTransformation_isIso
   exact this
 
 
+private noncomputable def moduleRestrictionCounit
+    (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ]
+    (R : Sheaf J RingCat.{u})
+    (α : (Functor.const Cᵒᵖ).obj (RingCat.of Λ) ⟶ R.obj)
+    [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α] :
+    moduleRestriction J Λ R α ⋙ moduleExtension J Λ R α ≅ 𝟭 _ :=
+  NatIso.ofComponents
+    (fun M ↦ asIso ((PresheafOfModules.sheafificationAdjunction.{u} α).counit.app M))
+    (fun φ ↦ (PresheafOfModules.sheafificationAdjunction.{u} α).counit.naturality φ)
+
+private noncomputable instance moduleRestriction_isEquivalence
+    (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ]
+    (R : Sheaf J RingCat.{u})
+    (α : (Functor.const Cᵒᵖ).obj (RingCat.of Λ) ⟶ R.obj)
+    [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α] :
+    (moduleRestriction J Λ R α).IsEquivalence := by
+  let : (moduleExtension J Λ R α).IsEquivalence := {}
+  let : (moduleRestriction J Λ R α ⋙ moduleExtension J Λ R α).IsEquivalence :=
+    Functor.isEquivalence_of_iso (moduleRestrictionCounit J Λ R α).symm
+  exact Functor.isEquivalence_of_comp_right _ (moduleExtension J Λ R α)
+
+private noncomputable def moduleRestrictionUnit
+    (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ]
+    (R : Sheaf J RingCat.{u})
+    (α : (Functor.const Cᵒᵖ).obj (RingCat.of Λ) ⟶ R.obj)
+    [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α] :
+    moduleExtension J Λ R α ⋙ moduleRestriction J Λ R α ≅ 𝟭 _ :=
+  Functor.fullyFaithfulCancelRight (moduleExtension J Λ R α)
+    ((Functor.associator _ _ _) ≪≫
+      Functor.isoWhiskerLeft _ (moduleRestrictionCounit J Λ R α) ≪≫
+      Functor.rightUnitor _ ≪≫ (Functor.leftUnitor _).symm)
+
+private noncomputable def moduleRestrictionConstantIso
+    (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ]
+    (R : Sheaf J RingCat.{u})
+    (α : (Functor.const Cᵒᵖ).obj (RingCat.of Λ) ⟶ R.obj)
+    [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α] :
+    SheafOfModules.strictPerfectConstantPresheaf (C := C) Λ ⋙
+      PresheafOfModules.sheafification.{u} α ⋙ moduleRestriction J Λ R α ≅
+        constantSheaf J (ModuleCat.{u} Λ) := by
+  have := constantExtensionUnit_isIso J Λ R α
+  exact (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight (asIso (constantExtensionUnit J Λ R α)) _ ≪≫
+    Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ (moduleRestrictionUnit J Λ R α) ≪≫
+    Functor.rightUnitor _
+
 /-- Module-valued sheaves are modules over the constant ring sheaf. The equivalence
 retains the additive sheaf and naturally identifies both constant-module realizations.
 The locally bijective constant-ring unit may be the restriction of a global unit to a slice.
@@ -402,5 +463,40 @@ theorem site_moduleSheaf_constantRing_equivalence
   intro U
   have := constantSliceTransformation_isIso J Λ R α U
   exact ⟨asIso (constantSliceTransformation J Λ R α U)⟩
+
+/-- Restriction of scalars along a locally bijective constant-ring unit is an equivalence,
+compatible with constants and slice restriction.
+
+Source: Stacks Project, Modules on Sites, Tag 093I; Cohomology on Sites, Tag 03FD.
+(blueprint: lem-weil-pbc-site-module-sheaf-constant-ring-equivalence).
+
+Proof: retain the section modules and restrict their scalar actions along the ring unit.
+The module-sheafification counit makes this functor inverse to extension of scalars.
+The constant-presheaf unit gives the comparison on constants. Restricting a scalar action
+and restricting to a slice commute sectionwise, including on morphisms. -/
+theorem site_moduleSheaf_restriction_equivalence
+    (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ]
+    (R : Sheaf J RingCat.{u})
+    (α : (Functor.const Cᵒᵖ).obj (RingCat.of Λ) ⟶ R.obj)
+    [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α] :
+    let c := SheafOfModules.strictPerfectConstantPresheaf (C := C) Λ ⋙
+      PresheafOfModules.sheafification.{u} α
+    ∃ G : SheafOfModules.{u} R ⥤ Sheaf J (ModuleCat.{u} Λ),
+      G.IsEquivalence ∧ Nonempty (c ⋙ G ≅ constantSheaf J (ModuleCat.{u} Λ)) ∧
+      ∀ U : C, ∃ GU : SheafOfModules.{u} (R.over U) ⥤
+          Sheaf (J.over U) (ModuleCat.{u} Λ),
+        GU.IsEquivalence ∧ Nonempty
+          (SheafOfModules.overFunctor R U ⋙ GU ≅
+            G ⋙ J.overPullback (ModuleCat.{u} Λ) U) := by
+  refine ⟨moduleRestriction J Λ R α, inferInstance,
+    ⟨moduleRestrictionConstantIso J Λ R α⟩, ?_⟩
+  intro U
+  let αU := Functor.whiskerLeft (Over.forget U).op α
+  let : Presheaf.IsLocallyInjective (J.over U) αU :=
+    Presheaf.isLocallyInjective_whisker (J.over U) J (Over.forget U) α
+  let : Presheaf.IsLocallySurjective (J.over U) αU :=
+    Presheaf.isLocallySurjective_whisker (J.over U) J (Over.forget U) α
+  refine ⟨moduleRestriction (J.over U) Λ (R.over U) αU, inferInstance, ⟨?_⟩⟩
+  exact NatIso.ofComponents (fun M ↦ Iso.refl _) (by cat_disch)
 
 end CategoryTheory

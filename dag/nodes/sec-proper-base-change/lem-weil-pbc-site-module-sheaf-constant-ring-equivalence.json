@@ -53,6 +53,15 @@
     "lem-pc-sites-module-sheafification-interface"
    ],
    "elementary": false
+  },
+  {
+   "text": "The explicit scalar-restriction functor is inverse to extension by the module-sheafification counit. Cancel the fully faithful extension to obtain the other inverse comparison, and compose with the natural constant unit to identify realized constants. On each slice use the restricted ring unit; scalar restriction and slice restriction commute sectionwise, so the comparison is natural. This proves the inverse-oriented interface without choosing data from an unproved existence theorem.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-module-sheafification-interface",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -66,7 +75,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Modules on Sites, section-constant (Tag 093I), opening paragraph, and Section 03DH (restriction to slices); Cohomology on Sites, lemma-cohomology-modules-abelian-agree (Tag 03FD); arbitrary-site encoding proof adapted from the existing scheme-specific construction; stage-3 interface reduction of lem-weil-pbc-locally-constant-tensor"
+  "place": "Modules on Sites, section-constant (Tag 093I), opening paragraph, and Section 03DH (restriction to slices); Cohomology on Sites, lemma-cohomology-modules-abelian-agree (Tag 03FD); arbitrary-site encoding proof adapted from the existing scheme-specific construction; stage-3 interface reduction of lem-weil-pbc-locally-constant-tensor; G9 inverse-oriented scalar restriction and slice compatibility, 2026-10-20"
  },
  "mathlib_searches": [
   {
@@ -127,7 +136,12 @@
   "statement": "theorem site_moduleSheaf_constantRing_equivalence\n    (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ]\n    (R : Sheaf J RingCat.{u})\n    (α : (Functor.const Cᵒᵖ).obj (RingCat.of Λ) ⟶ R.obj)\n    [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α] :\n    let c := SheafOfModules.strictPerfectConstantPresheaf (C := C) Λ ⋙\n      PresheafOfModules.sheafification.{u} α\n    ∃ e : Sheaf J (ModuleCat.{u} Λ) ≌ SheafOfModules.{u} R,\n      Nonempty (e.functor ⋙ SheafOfModules.toSheaf R ≅\n        sheafCompose J (forget₂ (ModuleCat.{u} Λ) AddCommGrpCat.{u})) ∧\n      Nonempty (c ≅ constantSheaf J (ModuleCat.{u} Λ) ⋙ e.functor) ∧\n      ∀ U : C,\n        let αU := Functor.whiskerLeft (Over.forget U).op α\n        letI : Presheaf.IsLocallyInjective (J.over U) αU :=\n          Presheaf.isLocallyInjective_whisker (J.over U) J (Over.forget U) α\n        letI : Presheaf.IsLocallySurjective (J.over U) αU :=\n          Presheaf.isLocallySurjective_whisker (J.over U) J (Over.forget U) α\n        Nonempty\n          (SheafOfModules.strictPerfectConstantPresheaf (C := Over U) Λ ⋙\n              PresheafOfModules.sheafification.{u} (R := R.over U) αU ≅\n            c ⋙ SheafOfModules.overFunctor R U)",
   "branch": "sheaf-dag",
   "by": "N1",
-  "date": "2026-10-18"
+  "date": "2026-10-18",
+  "declarations": [
+   "CategoryTheory.site_moduleSheaf_constantRing_equivalence",
+   "CategoryTheory.site_moduleSheaf_restriction_equivalence"
+  ],
+  "note": "G9 exposes the proved scalar-restriction inverse with natural constant and slice comparisons; the original equivalence theorem is unchanged."
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -140,12 +154,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "G9",
   "result": "pass",
-  "landing": "20261018T091407-L-3256965",
+  "landing": "20261020T122108-L-476463",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
