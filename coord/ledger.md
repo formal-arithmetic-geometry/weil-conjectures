@@ -17910,3 +17910,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:20 L: returned deliver/R2/Sheaf.Paper.SmoothPurityTowerP1Adjunction (reviewer RETURN: (the landing tools, head 522fad460) the delivery did not land: lean/Sheaf/Paper/SmoothPurityTowerP1Adjunction.lean chang)
 - 12:20 L: returned deliver/R3/Sheaf.Algebra.Homology.RingHomExtensionDifferential (reviewer RETURN: (the landing tools, head ca57320f6) the delivery did not land: missing import source modules: Sheaf.Algebra.Homology.Rin)
 - 12:20 L: returned deliver/R3/Sheaf.Paper.FiniteWindowBounded (reviewer RETURN: (the landing tools, head 53e79c61d) the delivery did not land: lean/Sheaf/Paper/FiniteWindowBounded.lean changed on shea)
+- 12:20 L: returned deliver/R4/Sheaf.Paper.CompletedMapReduction (reviewer RETURN: (the landing tools, head 7685eae1c) the delivery did not land: lean/Sheaf/Paper/CompletedMapReduction.lean changed on sh)
