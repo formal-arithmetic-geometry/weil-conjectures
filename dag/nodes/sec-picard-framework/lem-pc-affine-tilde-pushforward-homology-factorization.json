@@ -33,11 +33,11 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "G3",
-  "date": "2026-10-14",
+  "group": "B6",
+  "date": "2026-10-20",
   "document": "https://stacks.math.columbia.edu/tag/06Z0; https://stacks.math.columbia.edu/tag/0AVW",
   "place": "Exact functor homology comparison and affine pushforward cohomology coordinates; parent proof step 2.",
-  "note": "Recovered reviewed D4 proof with current displayed category instance bridges; no sorry. Composite comparison proof is reused from MixedTensorUnderlyingHomology."
+  "note": "Restored the complete G3/D4 proof after the upstream update. The local Abelian bridge fixes the sheaf-module universe explicitly. Present the derived unit with the same ordinary scheme pushforward functor as the termwise comparison; this is definitionally the ringed-space module direct image and preserves the statement and proof route. Reconciled the returned delivery with the current quarantined source and the retirement of the Sheaf mixed-tensor module: privately import all from the adopted source mixed-tensor module to reuse its proved private composition helper, as the upstream factorization module does. Both theorem proofs and all mathematical dependencies are preserved."
  },
  "mathlib_searches": [
   {
@@ -120,10 +120,10 @@
    "AlgebraicGeometry.affineTildePushforwardHomologyFactorization",
    "AlgebraicGeometry.mapHomologyIso_inv_comp"
   ],
-  "statement": "theorem affineTildePushforwardHomologyFactorization\n    (D B : Type u) [CommRing D] [CommRing B] (ψ : B →+* D)\n    [(affineTildeFunctor D ⋙\n      Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom ψ))).PreservesZeroMorphisms]\n    (Cg : CochainComplex (ModuleCat.{u} D) ℤ) (i : ℤ)\n    (S : ModuleCat.{u} B)\n    (v : S ⟶ (ModuleCat.restrictScalars ψ).obj (Cg.homology i)) :\n    let T := affineTildeFunctor B\n    let _ : T.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor\n    let _ : T.PreservesHomology := tilde_preservesHomology B\n    let H := DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i\n    let σ := affineTildePushforwardComparison D B ψ\n    let a := (σ.hom.mapHomologicalComplex\n      (.up ℤ)).app Cg\n    let β := (RingedSpace.moduleDirectImage\n      (Spec.map (CommRingCat.ofHom ψ)).toLRSHom.toShHom).rightDerivedFunctorUnit.app\n        ((HomotopyCategory.quotient _ (.up ℤ)).obj\n          (((affineTildeFunctor D).mapHomologicalComplex (.up ℤ)).obj Cg))\n    T.map (v ≫ ((Cg.sc i).mapHomologyIso (ModuleCat.restrictScalars ψ)).inv) ≫\n        (((((ModuleCat.restrictScalars ψ).mapHomologicalComplex\n          (.up ℤ)).obj Cg).sc i).mapHomologyIso T).inv ≫\n        (DerivedCategory.homologyFunctorFactors _ i).inv.app\n          ((T.mapHomologicalComplex (.up ℤ)).obj\n            (((ModuleCat.restrictScalars ψ).mapHomologicalComplex (.up ℤ)).obj Cg)) ≫\n        H.map (DerivedCategory.Q.map a) ≫ H.map β =\n    T.map v ≫ affineTildePushforwardCohomologyMap D B ψ Cg i",
+  "statement": "theorem affineTildePushforwardHomologyFactorization\n    (D B : Type u) [CommRing D] [CommRing B] (ψ : B →+* D)\n    [(affineTildeFunctor D ⋙\n      Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom ψ))).PreservesZeroMorphisms]\n    (Cg : CochainComplex (ModuleCat.{u} D) ℤ) (i : ℤ)\n    (S : ModuleCat.{u} B)\n    (v : S ⟶ (ModuleCat.restrictScalars ψ).obj (Cg.homology i)) :\n    let T := affineTildeFunctor B\n    let _ : T.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor\n    let _ : T.PreservesHomology := tilde_preservesHomology B\n    let H := DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i\n    let σ := affineTildePushforwardComparison D B ψ\n    let a := (σ.hom.mapHomologicalComplex\n      (.up ℤ)).app Cg\n    -- Use the same pushforward functor for the comparison and its derived unit.\n    let P : SheafOfModules.{u} (moduleRings (Spec (.of D)).toRingedSpace) ⥤\n        SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace) :=\n      Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom ψ))\n    let _ : P.Additive := RingedSpace.moduleDirectImage_additive\n      (Spec.map (CommRingCat.ofHom ψ)).toLRSHom.toShHom\n    let β := P.rightDerivedFunctorUnit.app\n      ((HomotopyCategory.quotient _ (.up ℤ)).obj\n        (((affineTildeFunctor D).mapHomologicalComplex (.up ℤ)).obj Cg))\n    T.map (v ≫ ((Cg.sc i).mapHomologyIso (ModuleCat.restrictScalars ψ)).inv) ≫\n        (((((ModuleCat.restrictScalars ψ).mapHomologicalComplex\n          (.up ℤ)).obj Cg).sc i).mapHomologyIso T).inv ≫\n        (DerivedCategory.homologyFunctorFactors _ i).inv.app\n          ((T.mapHomologicalComplex (.up ℤ)).obj\n            (((ModuleCat.restrictScalars ψ).mapHomologicalComplex (.up ℤ)).obj Cg)) ≫\n        H.map (DerivedCategory.Q.map a) ≫ H.map β =\n    T.map v ≫ affineTildePushforwardCohomologyMap D B ψ Cg i",
   "branch": "sheaf-dag",
-  "by": "G3",
-  "date": "2026-10-14"
+  "by": "B6",
+  "date": "2026-10-20"
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -136,14 +136,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-2d9a0",
-  "group": "G3",
+  "reviewer": "C-39372",
+  "group": "B6",
   "result": "pass",
-  "landing": "20261014T141504-L-226067",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered files, DAG records, report, and change record matched the stated item; all four modules and direct importers compiled successfully with no mechanical, proof, interface, or forced-adaptation violations."
+  "landing": "20261020T154039-L-3032972",
+  "kind": "proof",
+  "note": "independent cc review: delivered module vs quarantine copy and PASSed 90d6e451 (only the import changed); old statement proved by the new theorem term; node lean.statement vs signature; axioms clean; no live importers"
  },
  "lean_audit": {
   "master": {
