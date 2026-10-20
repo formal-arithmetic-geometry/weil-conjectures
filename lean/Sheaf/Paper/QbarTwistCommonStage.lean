@@ -5,12 +5,7 @@ Authors: SHEAF group Q25
 -/
 module
 
-public import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
-public import Sheaf.Paper.IntegralTwistDerivedScalarCanonical
 public import Sheaf.Paper.IntegralTwistScalarCoherence
-public import Sheaf.Paper.PbcCoefficientTwists
-public import Sheaf.CategoryTheory.StageSystemFunctorDescent
-import WeilConjectures.CategoryTheory.StageSystem.Functor
 
 /-! # Tate twists descend through common finite coefficient stages
 

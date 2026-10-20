@@ -9,7 +9,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 import Sheaf.CategoryTheory.GrothendieckDerivedBrownRightAdjoint
 import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
 import Sheaf.CategoryTheory.ProjectionFormulaCoproducts
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 
 /-! # Right adjoint to proper étale derived direct image

@@ -5,7 +5,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.AmbientExceptionalRightAdjoint
 public import Sheaf.AlgebraicGeometry.IntrinsicDerivedOpenAdjunction
-public import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-!
 # Base change for an exceptional right adjoint reduces to the proper part

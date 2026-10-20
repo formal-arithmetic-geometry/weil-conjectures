@@ -7,7 +7,6 @@ module
 
 public import Sheaf.Paper.SixFunctorDatum
 public import Sheaf.Paper.FixProjectionCompactificationComparison
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-!
 # Mixed-support cup product at the four coefficient stages

@@ -7,7 +7,6 @@ module
 
 public import Sheaf.Paper.CohomologicalSmoothnessComparison
 public import Sheaf.AlgebraicGeometry.SfFiniteExceptionalInverseImage
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Constructible
 
 /-!
 # Base change of a trace transpose

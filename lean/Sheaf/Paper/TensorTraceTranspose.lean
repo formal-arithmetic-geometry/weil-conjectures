@@ -8,12 +8,6 @@ module
 public import Sheaf.Paper.CohomologicalSmoothnessComparison
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModuleIntrinsicComparison
 public import Sheaf.Paper.FiniteTorAmplitude
-public import Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude
-public import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
-public import Sheaf.Paper.SfIntegralConstructible
-public import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
-public import Sheaf.Paper.SfDerivedComplete
-public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
 

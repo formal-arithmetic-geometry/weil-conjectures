@@ -4,15 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ProperExceptionalOpenBaseChange
 public import Sheaf.SecSmoothPurity.ProEtaleDerivedOpenRestriction
 public import Sheaf.AlgebraicGeometry.ExceptionalBaseChangeCartesianOpenInjectiveAcyclic
 public import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroExact
-public import Sheaf.AlgebraicGeometry.ProEtaleConstantDerivedDirectImage
-import WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimension
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.FullyFaithful
-import Mathlib.CategoryTheory.Monad.Adjunction
 
 /-!
 # Finite-CD proper/open interchange on the small pro-etale site

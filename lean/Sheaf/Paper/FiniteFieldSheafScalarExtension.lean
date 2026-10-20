@@ -6,9 +6,6 @@ Authors: SHEAF group Q59
 module
 
 public import Sheaf.Paper.ProEtaleConstructibleCoefficientSheaf
-public import Sheaf.Paper.BoundedConstructibleTower
-public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 import Sheaf.Paper.FiniteFieldLocalTensorModel
 import Sheaf.Paper.ProEtaleConstantModuleEncoding

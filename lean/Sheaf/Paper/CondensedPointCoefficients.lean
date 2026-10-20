@@ -5,16 +5,10 @@ Authors: SHEAF group Q68
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ProEtalePointPullback
 public import Sheaf.Paper.CondensedPointBasis
 public import Sheaf.AlgebraicGeometry.ContinuousCoefficientCommRing
 public import Sheaf.Paper.ProfinitePointPullback
-public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Monoidal
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
-public import Mathlib.Topology.Category.Profinite.AsLimit
-import Mathlib.Algebra.Category.Ring.FilteredColimits
 import all Sheaf.Paper.GeometricFieldProfiniteDenseSubsite
 import Sheaf.Paper.GeometricFieldProEtaleEvaluation
 import Sheaf.Paper.CondensedPointDiscreteConstantComparison

@@ -6,28 +6,18 @@ Authors: SHEAF group Q102
 module
 
 public import Sheaf.AlgebraicGeometry.Sites.TorsionEtaleCohomologicalDimension
-public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
-public import Mathlib.AlgebraicGeometry.Over
-public import Mathlib.AlgebraicGeometry.OpenImmersion
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 import Sheaf.AlgebraicGeometry.Sites.FiniteTorsionEtaleCohomologicalDimension
 import WeilConjectures.AlgebraicGeometry.HigherDirectImageSheafifiedPresheaf
 import Sheaf.AlgebraicGeometry.ComparisonDirectImage
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 import Mathlib.CategoryTheory.Sites.Adjunction
 import WeilConjectures.CategoryTheory.Sites.InjectivePresheafModuleCechCocycleLiftMax
 import WeilConjectures.CategoryTheory.InjectiveModulePresheaf
-import Mathlib.Algebra.Homology.ShortComplex.Ab
 import WeilConjectures.AlgebraicGeometry.EtaleCechVanishingCriterion
 import WeilConjectures.AlgebraicGeometry.EtaleSiteCechComplexComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
 
 /-!
 # Amplitude of open direct image on classical finite-coefficient sheaves

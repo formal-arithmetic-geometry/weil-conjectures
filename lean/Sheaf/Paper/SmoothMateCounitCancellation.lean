@@ -7,10 +7,7 @@ module
 
 public import Sheaf.Paper.PurityFiniteSetting
 public import Sheaf.Paper.CompactSupportExchangeTransport
-public import Sheaf.AlgebraicGeometry.EtaleOriginAdjointClass
 public import Sheaf.AlgebraicGeometry.CompactSupportFiniteTorsion
-public import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
-public import Sheaf.AlgebraicGeometry.ComparisonDerivedPullbackFixed
 public import Sheaf.AlgebraicGeometry.SfFiniteExceptionalInverseImage
 
 /-!
