@@ -31,6 +31,39 @@ universe u uA
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 
+section CachedComparison
+
+variable {C : Type*} [Category.{u + 1} C] [Abelian C]
+  [IsGrothendieckAbelian.{u + 1} C]
+  [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+  [Abelian.HasFunctorialFlatResolution C]
+  {D : Type*} [Category.{u + 1} D] [Abelian D]
+  [IsGrothendieckAbelian.{u + 1} D]
+  [MonoidalCategory D] [MonoidalPreadditive D] [MonoidalClosed D] [BraidedCategory D]
+  [Abelian.HasFunctorialFlatResolution D]
+  (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+  [F.PreservesFlat] [F.IsLeftAdjoint] [F.Monoidal]
+
+/-- The canonical derived tensor comparison, kept behind a compact interface to avoid
+expanding its localization construction during kernel checking of projection maps.
+Source: the canonical tensor comparison in Stacks Tags 07A4 and 0F12, implemented by
+`Functor.leftDerivedTensorComparison` (blueprint: def-kun-constant-projection-morphism).
+The data are the existing comparison verbatim; the following equation exposes that identity. -/
+@[no_expose] noncomputable def CategoryTheory.Functor.cachedDerivedTensorComparison :
+    F.leftDerivedDerivedTensor ⟶ F.derivedTensorLeftDerived :=
+  F.leftDerivedTensorComparison
+
+/-- The compact interface denotes exactly the canonical left-derived tensor comparison.
+Source: the defining comparison in Stacks Tags 07A4 and 0F12
+(blueprint: def-kun-constant-projection-morphism).
+Proof: unfold the interface; its body is the existing comparison. -/
+theorem CategoryTheory.Functor.cachedDerivedTensorComparison_eq :
+    F.cachedDerivedTensorComparison = F.leftDerivedTensorComparison := by
+  unfold cachedDerivedTensorComparison
+  rfl
+
+end CachedComparison
+
 namespace AlgebraicGeometry.Etale
 
 /-- The constant presheaf has the unique monoidal core whose unit and tensor constraints
@@ -122,7 +155,7 @@ noncomputable def constantDerivedProjectionMap (X : Scheme.{u})
         (constantSheaf X.smallEtaleTopology A).leftDerivedFunctor).obj
           (curriedTensor _))).obj E).obj K :=
   (((derivedConstantGlobalSectionsAdjunction A X).rightAdjointProjectionMap
-    (constantSheaf X.smallEtaleTopology A).leftDerivedTensorComparison).app
+    (constantSheaf X.smallEtaleTopology A).cachedDerivedTensorComparison).app
       E).app K
 
 end AlgebraicGeometry.Etale

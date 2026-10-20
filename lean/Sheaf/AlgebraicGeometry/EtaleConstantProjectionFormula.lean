@@ -8,38 +8,17 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleConstantProjectionMap
 public import Sheaf.AlgebraicGeometry.Sites.TorsionEtaleCohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import Mathlib.Algebra.Homology.Additive
-public import Mathlib.CategoryTheory.Sites.GlobalSections
-import WeilConjectures.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
 import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
-import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
-import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
-import Sheaf.CategoryTheory.GrothendieckDerivedCoproductsColimit
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-import Sheaf.CategoryTheory.FiniteCohomologicalDimensionAcyclicComplex
-import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Mathlib.Algebra.Homology.BifunctorShift
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
-import Sheaf.AlgebraicGeometry.EtaleDerivedTensorDirectSums
-import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
+import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
 import WeilConjectures.CategoryTheory.DerivedModuleFreeGeneration
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.Paper.ProjectionMateExact
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ShiftComparison
+import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapShift
+import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
+import Mathlib.CategoryTheory.Triangulated.Adjunction
+import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
+import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidal
+import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMonoidal
 
 /-!
 # Tensoring derived global sections with a constant complex
@@ -51,9 +30,328 @@ lem-kun-0f12.md; Stacks Project, etale-cohomology.tex, Tag 0F12
 
 @[expose] public section
 
-universe u
+universe u uC uD uA
 
-open CategoryTheory
+open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
+open scoped CategoryTheory.Functor
+
+section ExactTensorComparison
+
+variable {C : Type uC} [Category.{u + 1} C] [Abelian C]
+  [IsGrothendieckAbelian.{u + 1} C]
+  [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+  [Abelian.HasFunctorialFlatResolution C]
+  {D : Type uD} [Category.{u + 1} D] [Abelian D]
+  [IsGrothendieckAbelian.{u + 1} D]
+  [MonoidalCategory D] [MonoidalPreadditive D] [MonoidalClosed D] [BraidedCategory D]
+  [Abelian.HasFunctorialFlatResolution D]
+
+variable (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+  [F.PreservesFlat] [F.IsLeftAdjoint] [F.Monoidal]
+
+omit [Abelian.HasFunctorialFlatResolution D] [PreservesFiniteLimits F]
+  [PreservesFiniteColimits F] [F.Monoidal] in
+private theorem commonFlat_iso_aux
+    (K : DerivedCategory C) :
+    ∃ P : HomotopyCategory C (.up ℤ),
+      (HomotopyCategory.quasiIso C (.up ℤ)).kFlat P ∧ F.kFlatMap P ∧
+        Nonempty (K ≅ DerivedCategory.Qh.obj P) := by
+  let resolution := (inferInstance : Abelian.HasFunctorialFlatResolution C).some.reduced
+  let K₀ := DerivedCategory.Q.objPreimage K
+  refine ⟨(HomotopyCategory.quotient _ _).obj (resolution.resolutionFunctor.obj K₀),
+    (HomotopyCategory.kFlat_quotient_obj_iff _).mpr
+      (resolution.kFlat_resolutionFunctor_obj ObjectProperty.flat.essImage_ι_le K₀),
+    F.kFlatMap_quotient_obj_resolutionFunctor_obj resolution K₀, ?_⟩
+  exact ⟨(DerivedCategory.Q.objObjPreimageIso K).symm ≪≫
+    (asIso (DerivedCategory.Q.map (resolution.resolutionNatTrans.app K₀))).symm⟩
+
+private noncomputable def derivedUnitComparison :
+    F.leftDerivedFunctor.obj (𝟙_ _) ⟶ 𝟙_ (DerivedCategory D) := by
+  have := DerivedCategory.isIso_ε_Qh.{u + 1, u + 1, uD} D
+  exact F.leftDerivedFunctor.map (Functor.LaxMonoidal.ε DerivedCategory.Qh) ≫
+    F.leftDerivedFunctorCounit.app (𝟙_ _) ≫
+    DerivedCategory.Qh.map ((HomotopyCategory.quotient D (.up ℤ)).map
+      F.mapCochainComplexεIso.inv) ≫
+    inv (Functor.LaxMonoidal.ε DerivedCategory.Qh)
+
+omit [F.PreservesFlat] [F.IsLeftAdjoint] in
+private theorem derivedUnitComparison_isIso : IsIso (derivedUnitComparison F) := by
+  have := DerivedCategory.isIso_ε_Qh.{u + 1, u + 1, uC} C
+  have := DerivedCategory.isIso_ε_Qh.{u + 1, u + 1, uD} D
+  unfold derivedUnitComparison
+  infer_instance
+
+private theorem derivedComparison_rightUnit (K : DerivedCategory C) :
+    (F.leftDerivedTensorComparison.app K).app (𝟙_ _) ≫
+      F.leftDerivedFunctor.obj K ◁ derivedUnitComparison F ≫
+        (ρ_ (F.leftDerivedFunctor.obj K)).hom = F.leftDerivedFunctor.map (ρ_ K).hom := by
+  generalize hcomp : F.leftDerivedTensorComparison = φ
+  have := DerivedCategory.isIso_ε_Qh.{u + 1, u + 1, uD} D
+  obtain ⟨P, _, _, ⟨e⟩⟩ := commonFlat_iso_aux F K
+  have := Functor.LaxMonoidal.isIso_μ_tensorUnit_right DerivedCategory.Qh
+    ((F.mapHomotopyCategory (.up ℤ)).obj P)
+  have h : (ρ_ (F.leftDerivedFunctor.obj K)).inv =
+      F.leftDerivedFunctor.map (ρ_ K).inv ≫ (φ.app K).app (𝟙_ _) ≫
+        F.leftDerivedFunctor.obj K ◁ derivedUnitComparison F := by
+    apply Functor.OplaxMonoidal.oplax_right_unitality_of_iso φ e.symm
+    have hδ := F.leftDerivedTensorComparison_app_app_comp_tensorHom
+    rw [hcomp] at hδ
+    have hsource := Functor.OplaxMonoidal.oplax_right_unitality_of_lax_square
+      (Q₁ := DerivedCategory.Qh) (Q₂ := DerivedCategory.Qh)
+      (F := F.mapHomotopyCategory (.up ℤ)) φ
+      (fun P ↦ F.leftDerivedFunctorCounit.app P)
+      (fun _ _ f ↦ F.leftDerivedFunctorCounit.naturality f) hδ P
+    simpa only [derivedUnitComparison, Functor.mapHomotopyCategory_η F,
+      Functor.mapCochainComplex_η F] using hsource
+  apply (cancel_epi (F.leftDerivedFunctor.map (ρ_ K).inv)).mp
+  rw [← F.leftDerivedFunctor.map_comp, Iso.inv_hom_id, F.leftDerivedFunctor.map_id]
+  simpa only [Category.assoc, Iso.inv_hom_id] using
+    congrArg (fun f ↦ f ≫ (ρ_ (F.leftDerivedFunctor.obj K)).hom) h.symm
+
+variable [F.leftDerivedFunctor.CommShift ℤ]
+  [NatTrans.CommShift
+    (F₁ := DerivedCategory.Qh ⋙ F.leftDerivedFunctor)
+    (F₂ := F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    F.leftDerivedFunctorCounit ℤ]
+
+private theorem exactComparison_commShift_aux
+    (K : DerivedCategory C) :
+    NatTrans.CommShift
+      (F₁ := tensorLeft K ⋙ F.leftDerivedFunctor)
+      (F₂ := F.leftDerivedFunctor ⋙ tensorLeft (F.leftDerivedFunctor.obj K))
+      (F.leftDerivedTensorComparison.app K) ℤ := by
+  generalize hcomp : F.leftDerivedTensorComparison = φ
+  obtain ⟨P, hP, hFP, ⟨e⟩⟩ := commonFlat_iso_aux F K
+  let τP : tensorLeft (DerivedCategory.Qh.obj P) ⋙ F.leftDerivedFunctor ⟶
+      F.leftDerivedFunctor ⋙ tensorLeft (F.leftDerivedFunctor.obj (DerivedCategory.Qh.obj P)) :=
+    φ.app (DerivedCategory.Qh.obj P)
+  have : NatTrans.CommShift τP ℤ := by
+    apply DerivedCategory.commShift_of_tensorLeft_fac F F.leftDerivedFunctor
+      F.leftDerivedFunctorCounit P hP hFP
+    intro M
+    have h := F.leftDerivedTensorComparison_app_app_comp_tensorHom P M
+    rw [hcomp] at h
+    simpa only [τP, Functor.leftDerivedDerivedTensor, Functor.comp_obj,
+      DerivedCategory.tensorLeftCounit, Functor.bifunctorCounit₁_app,
+      Functor.LaxMonoidal.μNatTrans_app_app,
+      MonoidalCategory.tensorHom_def, Category.assoc] using h
+  have he : φ.app K =
+      Functor.whiskerRight ((curriedTensor _).map e.hom) F.leftDerivedFunctor ≫ τP ≫
+        Functor.whiskerLeft F.leftDerivedFunctor
+          ((curriedTensor _).map (F.leftDerivedFunctor.map e.inv)) := by
+    ext M
+    have h := NatTrans.congr_app (φ.naturality e.hom) M
+    dsimp [τP] at h ⊢
+    rw [← Category.assoc, h, Category.assoc]
+    simp [← comp_whiskerRight, ← Functor.map_comp]
+  have : NatTrans.CommShift ((curriedTensor (DerivedCategory C)).map e.hom) ℤ :=
+    Functor.CommShift₂.commShift_map
+      (G := curriedTensor (DerivedCategory C)) (h := .int) e.hom
+  have : NatTrans.CommShift
+      ((curriedTensor (DerivedCategory D)).map (F.leftDerivedFunctor.map e.inv)) ℤ :=
+    Functor.CommShift₂.commShift_map
+      (G := curriedTensor (DerivedCategory D)) (h := .int) (F.leftDerivedFunctor.map e.inv)
+  rw [he]
+  infer_instance
+
+end ExactTensorComparison
+
+section Generation
+
+variable (C : Type uC) [Category.{u + 1} C] [Abelian C]
+  [IsGrothendieckAbelian.{u + 1} C]
+  [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+  [Abelian.HasFunctorialFlatResolution C]
+
+/-- Closure under shifts of the tensor unit, coproducts, triangles, and retracts. -/
+private def UnitGeneration : Prop :=
+  ∀ (P : ObjectProperty (DerivedCategory C)),
+    (∀ n : ℤ, P ((𝟙_ (DerivedCategory C))⟦n⟧)) →
+    (∀ {I : Type (u + 1)} (Y : I → DerivedCategory C) (S : DerivedCategory C)
+      (ι : ∀ i, Y i ⟶ S), IsColimit (Cofan.mk S ι) → (∀ i, P (Y i)) → P S) →
+    (∀ T : Pretriangulated.Triangle (DerivedCategory C),
+      T ∈ Pretriangulated.distinguishedTriangles → P T.obj₁ → P T.obj₂ → P T.obj₃) →
+    (∀ {X Y : DerivedCategory C}, Retract X Y → P Y → P X) →
+    ∀ K : DerivedCategory C, P K
+
+variable {C}
+  {D : Type uD} [Category.{u + 1} D] [Abelian D]
+  [IsGrothendieckAbelian.{u + 1} D]
+  [MonoidalCategory D] [MonoidalPreadditive D] [MonoidalClosed D] [BraidedCategory D]
+  [Abelian.HasFunctorialFlatResolution D]
+
+private theorem projection_isIso_of_generation_aux (hgen : UnitGeneration C)
+    (L : DerivedCategory C ⥤ DerivedCategory D)
+    [L.CommShift ℤ] [L.IsTriangulated] [L.IsLeftAdjoint]
+    (R : DerivedCategory D ⥤ DerivedCategory C)
+    [R.CommShift ℤ] [R.IsTriangulated]
+    [∀ J : Type (u + 1), PreservesColimitsOfShape (Discrete J) R]
+    (E : DerivedCategory D)
+    (τ : tensorLeft (R.obj E) ⟶ (L ⋙ tensorLeft E) ⋙ R)
+    [NatTrans.CommShift τ ℤ] (hunit : IsIso (τ.app (𝟙_ _)))
+    (K : DerivedCategory C) : IsIso (τ.app K) := by
+  apply hgen (fun K ↦ IsIso (τ.app K)) _ _ _ _ K
+  · intro n
+    exact (NatTrans.isIso_app_shift_iff τ _ n).mpr hunit
+  · intro I Y S ι hc hY
+    have : IsIso (Functor.whiskerLeft (Discrete.functor Y) τ) := by
+      rw [NatTrans.isIso_iff_isIso_app]
+      intro i
+      exact hY i.as
+    exact isIso_app_coconePt_of_preservesColimit (Discrete.functor Y) τ (Cofan.mk S ι) hc
+  · intro T hT h₁ h₂
+    exact NatTrans.isIso_app_obj₃_of_isIso_app_obj₁₂ τ hT h₁ h₂
+  · intro Y Z h hZ
+    have := hZ
+    exact NatTrans.isIso_app_of_retract τ h
+
+attribute [-instance] ModuleCat.MonoidalCategory.instBraidedCategory in
+private theorem module_unitGeneration_aux (Λ : Type (u + 1)) [CommRing Λ] :
+    UnitGeneration (ModuleCat.{u + 1} Λ) := by
+  intro P hshift hcop htri hret K
+  apply derivedModuleFreeGeneration.{u + 1, 0} Λ K P _ hcop htri hret
+  intro n
+  apply hret (Retract.ofIso ?_) (hshift n)
+  apply (shiftFunctor _ n).mapIso
+  exact (DerivedCategory.singleFunctor _ 0).mapIso
+    (ULift.moduleEquiv : ULift.{0} Λ ≃ₗ[Λ] Λ).toModuleIso ≪≫
+      DerivedCategory.singleFunctorObjUnitIso (ModuleCat.{u + 1} Λ)
+
+end Generation
+
+section ProjectionData
+
+variable {C : Type uC} [Category.{u + 1} C] [Abelian C]
+  [IsGrothendieckAbelian.{u + 1} C]
+  [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+  [Abelian.HasFunctorialFlatResolution C]
+  {D : Type uD} [Category.{u + 1} D] [Abelian D]
+  [IsGrothendieckAbelian.{u + 1} D]
+  [MonoidalCategory D] [MonoidalPreadditive D] [MonoidalClosed D] [BraidedCategory D]
+  [Abelian.HasFunctorialFlatResolution D]
+  (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+  [F.PreservesFlat] [F.IsLeftAdjoint] [F.Monoidal]
+
+private theorem projection_data_aux
+    (R : DerivedCategory D ⥤ DerivedCategory C) (adj : F.leftDerivedFunctor ⊣ R)
+    (E : DerivedCategory D) :
+    ∃ sL : F.leftDerivedFunctor.CommShift ℤ, letI := sL
+      ∃ sR : R.CommShift ℤ, letI := sR
+        F.leftDerivedFunctor.IsTriangulated ∧ R.IsTriangulated ∧
+        (let τ : tensorLeft (R.obj E) ⟶ (F.leftDerivedFunctor ⋙ tensorLeft E) ⋙ R :=
+          (adj.rightAdjointProjectionMap F.cachedDerivedTensorComparison).app E
+        NatTrans.CommShift τ ℤ ∧ IsIso (τ.app (𝟙_ _))) := by
+  rw [Functor.cachedDerivedTensorComparison_eq]
+  generalize he : F.leftDerivedFunctorIsoMapDerivedCategory = e
+  let := Functor.CommShift.ofIso e.symm ℤ
+  have := Functor.CommShift.ofIso_compatibility
+    e.symm ℤ
+  have : NatTrans.CommShift e.hom ℤ :=
+    inferInstanceAs
+      (NatTrans.CommShift e.symm.inv ℤ)
+  have : F.leftDerivedFunctor.IsTriangulated :=
+    Functor.isTriangulated_of_iso e.symm
+  have : NatTrans.CommShift F.leftDerivedFunctorCounit ℤ := by
+    have hfac := F.leftDerivedFunctorIsoMapDerivedCategory_hom_fac
+    rw [he] at hfac
+    rw [← hfac]
+    infer_instance
+  let := adj.rightAdjointCommShift ℤ
+  have := Adjunction.commShift_of_leftAdjoint adj ℤ
+  have := Adjunction.isTriangulated_rightAdjoint adj
+  have : F.leftDerivedFunctor.IsLeftAdjoint := adj.isLeftAdjoint
+  let τ : tensorLeft (R.obj E) ⟶ (F.leftDerivedFunctor ⋙ tensorLeft E) ⋙ R :=
+    (adj.rightAdjointProjectionMap F.leftDerivedTensorComparison).app E
+  have := exactComparison_commShift_aux F (R.obj E)
+  have : NatTrans.CommShift τ ℤ :=
+    Adjunction.commShift_rightAdjointProjectionMap_app adj F.leftDerivedTensorComparison E
+  have hunit : IsIso (τ.app (𝟙_ _)) := by
+    have := derivedUnitComparison_isIso F
+    have hη := derivedComparison_rightUnit F
+    have h := adj.rightAdjointProjectionMap_rightUnitality
+      F.leftDerivedTensorComparison (derivedUnitComparison F) hη E
+    let g := R.map (E ◁ derivedUnitComparison F) ≫ R.map (ρ_ E).hom
+    have : IsIso g := by dsimp only [g]; infer_instance
+    have : IsIso (τ.app (𝟙_ _) ≫ g) := by
+      change IsIso (_ ≫ R.map (E ◁ derivedUnitComparison F) ≫ R.map (ρ_ E).hom)
+      rw [h]
+      infer_instance
+    exact IsIso.of_isIso_comp_right (τ.app (𝟙_ _)) g
+  exact ⟨inferInstance, inferInstance, inferInstance, inferInstance, inferInstance, hunit⟩
+
+end ProjectionData
+
+namespace AlgebraicGeometry.Etale
+private theorem module_isZero_of_underlying_iso
+    {Λ : Type (u + 1)} [CommRing Λ] (A : ModuleCat.{u + 1} Λ)
+    (B : AddCommGrpCat.{u + 1})
+    (e : (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}).obj A ≅ B)
+    (hB : Subsingleton B) : IsZero A := by
+  apply ModuleCat.isZero_iff_subsingleton.mpr
+  exact @Function.Injective.subsingleton _ _ _
+    (ConcreteCategory.bijective_of_isIso e.hom).1 hB
+
+private theorem finite_module_cd_aux
+    (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
+    [CompactSpace X] [QuasiSeparatedSpace X]
+    (hcd : X.torsionEtaleCohomologicalDimension < ⊤)
+    (hΛ : ∃ n : ℕ, 0 < n ∧ (n : Λ) = 0) :
+    HasFiniteCohomologicalDimension Λ X := by
+  obtain ⟨d, hd, hdt⟩ := (sInf_lt_iff).mp hcd
+  obtain ⟨n, rfl, hn⟩ := hd
+  refine ⟨n, fun M q hq ↦ ?_⟩
+  obtain ⟨r, hr, hΛr⟩ := hΛ
+  let U := sheafCompose X.smallEtaleTopology
+    (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
+  have hM : (U.obj M).IsTorsion := by
+    apply Sheaf.IsTorsion.of_forall_isAddTorsion
+    intro V
+    change IsAddTorsion (M.obj.obj V)
+    intro x
+    apply isOfFinAddOrder_iff_nsmul_eq_zero.mpr
+    refine ⟨r, hr, ?_⟩
+    have hx : (r : Λ) • (x : M.obj.obj V) = 0 := by
+      rw [hΛr, zero_smul]
+    simpa only [Nat.cast_smul_eq_nsmul] using hx
+  have hq0 : 0 ≤ q := (Int.natCast_nonneg n).trans hq.le
+  obtain ⟨k, rfl⟩ : ∃ k : ℕ, q = (k : ℤ) :=
+    ⟨q.toNat, (Int.toNat_of_nonneg hq0).symm⟩
+  have hzero := hn (U.obj M) hM k (Int.ofNat_lt.mp hq)
+  obtain ⟨e⟩ := Scheme.nonempty_etaleModuleCohomology_forgetIso X Λ k
+  exact module_isZero_of_underlying_iso _ _ (e.app M) hzero
+
+end AlgebraicGeometry.Etale
+
+namespace AlgebraicGeometry.Etale
+
+variable (A : Type uA) [Category.{u + 1} A] [Abelian A]
+  [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A]
+
+omit [HasSmallSiteSheafify A] in
+private theorem constant_projection_map_isIso_aux (hgen : UnitGeneration A)
+    (X : Scheme.{u}) [(constantSheaf X.smallEtaleTopology A).Monoidal]
+    [(constantSheaf X.smallEtaleTopology A).PreservesFlat]
+    [∀ J : Type (u + 1), PreservesColimitsOfShape (Discrete J) (rightDerivedGlobalSections A X)]
+    (E : DerivedCategory (Sheaf X.smallEtaleTopology A)) (K : DerivedCategory A) :
+    IsIso (constantDerivedProjectionMap A X E K) := by
+  let F := constantSheaf X.smallEtaleTopology A
+  let R := rightDerivedGlobalSections A X
+  let L := F.leftDerivedFunctor
+  unfold constantDerivedProjectionMap
+  generalize derivedConstantGlobalSectionsAdjunction A X = adj
+  obtain ⟨sL, sR, hL, hR, hs, hu⟩ := projection_data_aux F R adj E
+  let := sL
+  let := sR
+  have := hL
+  have := hR
+  let τ : tensorLeft (R.obj E) ⟶ (L ⋙ tensorLeft E) ⋙ R :=
+    (adj.rightAdjointProjectionMap F.cachedDerivedTensorComparison).app E
+  have := hs
+  have : L.IsLeftAdjoint := adj.isLeftAdjoint
+  exact projection_isIso_of_generation_aux hgen L R E τ hu K
+end AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
@@ -63,113 +361,31 @@ complexes over any torsion commutative coefficient ring. Torsion of a unital rin
 expressed by a positive integer annihilating its unit; it then annihilates every element.
 Source: Stacks Tag 0F12 (blueprint: lem-kun-0f12).
 
-Proof plan from the DAG:
-1. Write $\mathcal A=\operatorname{Mod}(X_{\Et},\Lambda)$ and $\Gamma=\Gamma(X,-):\mathcal
-A\to\operatorname{Mod}(\Lambda)$. The category $\mathcal A$ is Grothendieck abelian. Sections are
-additive and preserve kernels, so $\Gamma$ is left exact. Put $d=\kuncd(X)<\infty$. A torsion
-unital ring has some integer $n\ge1$ with $n1=0$, hence every $\Lambda$-module sheaf is a torsion
-abelian sheaf. The coefficient-forgetting cohomology comparison therefore gives $R^q\Gamma(M)=0$
-for all $M\in\mathcal A$ and $q>d$. For any set-indexed family $(M_i)$, its sum is the filtered
-colimit of its finite subsums, in both module sheaves and underlying abelian sheaves. Finite sums
-of injective resolutions are injective resolutions (extend a map into each coordinate separately),
-and additivity gives $R^q\Gamma(\bigoplus_{i\in J}M_i)=\bigoplus_{i\in J}R^q\Gamma(M_i)$ for
-finite $J$. Cohomology commutes with this filtered colimit on the qcqs scheme $X$, including
-constant-ring module coefficients. Thus the canonical map $\bigoplus_iR^q\Gamma(M_i)\to
-R^q\Gamma(\bigoplus_iM_i)$ is an isomorphism for every $q\ge0$. This proves the sheaf-level input
-of Stacks 0F11 for the actual ring $\Lambda$, rather than assuming its stated $\mathbf Z/n$
-conclusion also covers $\Lambda$.
-Dependencies: lem-weil-pbc-module-sheaves-grothendieck-abelian,
-def-weil-pbc-global-sections-functor, def-kun-cd, lem-weil-pbc-etale-module-cohomology-forget,
-lem-weil-pbc-module-sheaves-colimits-forgetful, lem-weil-pbc-cohomology-filtered-colimit.
-
-2. For an arbitrary family $(E_i)$ in $D(\mathcal A)$ choose K-injective representatives
-$I_i^\bullet$ with injective terms. The termwise sum $J^\bullet=\bigoplus_i I_i^\bullet$
-represents $\bigoplus_iE_i$. Each injective term is $\Gamma$-acyclic: the resolution concentrated
-in degree zero computes its higher derived sections as zero. Step 1 gives
-$R^q\Gamma(J^r)=\bigoplus_i R^q\Gamma(I_i^r)=0$ for $q>0$. The unbounded acyclic-complex theorem
-applies, with the uniform bound $d$, and computes $R\Gamma(E_i)$ and $R\Gamma(\bigoplus_iE_i)$ by
-$\Gamma(I_i^\bullet)$ and $\Gamma(J^\bullet)$ respectively, naturally on all coprojections. The
-$q=0$ comparison of Step 1 gives a termwise isomorphism
-$\theta^r:\bigoplus_i\Gamma(I_i^r)\to\Gamma(J^r)$. Since $d_J\iota_i=\iota_i d_{I_i}$, equality on
-every coprojection gives $\Gamma(d_J)\theta^r=\theta^{r+1}(\bigoplus_i\Gamma(d_{I_i}))$. Thus
-$\theta$ is a complex isomorphism preserving coprojections. Termwise sums compute coproducts in
-$D(\Lambda)$, proving that the canonical comparison $\bigoplus_iR\Gamma(E_i)\to
-R\Gamma(\bigoplus_iE_i)$ is invertible. No assertion that $J^\bullet$ is K-injective is needed.
-Dependencies: lem-pur-kinjective-degreewise-existence, lem-kun-grothendieck-derived-coproducts,
-lem-kun-finite-cd-acyclic-complex, lem-pc-derived-module-direct-sums.
-
-3. Let $a:(\operatorname{Sh}(X_{\Et}),\Lambda_X)\to(\operatorname{Sets},\Lambda)$ be the terminal
-geometric morphism, presented using the small etale site and the one-object point site. Its module
-inverse image is the constant-sheaf functor: a presheaf map from the constant presheaf $M$ to a
-sheaf $F$ is determined by its component $M\to F(X)$ at the terminal object, and conversely
-restriction of that component defines every component on $U\to X$. For the constant presheaf of
-rings $\mathcal O(U)=\Lambda$, the component maps are $\Lambda$-linear. The module-sheafification
-interface, applied to this presheaf ring and the constant presheaf module $M$, extends its action
-to $\mathcal O^\#=\Lambda_X$ and identifies $\Lambda_X$-linear maps $\underline M\to F$ with these
-presheaf $\Lambda$-linear maps, hence with module maps $M\to\Gamma(X,F)$, and its coefficient ring
-map is the identity $a^{-1}\Lambda=\Lambda_X$. The constant-complex construction preserves
-quasi-isomorphisms, so $La^*K=\underline K$. The derived ringed-topos adjunction identifies $Ra_*$
-with $R\Gamma$. Apply the ringed projection-mate statement to this morphism and the fixed $E$. It
-supplies exact functors $F(K)=R\Gamma(E)\otimes^L_\Lambda K$ and $G(K)=R\Gamma(E\otimes^L_\Lambda
-La^*K)$ and a natural transformation $\alpha:F\to G$, compatible with shifts and distinguished
-triangles. Its component is adjoint to $(\varepsilon_E\otimes1)\mu_{R\Gamma(E),K}$, hence is
-exactly the canonical map in the item, including its connecting-square compatibility.
-Dependencies: def-kun-constant-sheaf, lem-weil-pbc-ringed-projection-mate-exact,
-lem-pc-sites-module-sheafification-interface.
-
-4. The functor $F$ preserves set-indexed coproducts. Here is the module-complex argument, so that
-no etale-sheaf tensor lemma is misapplied to $D(\Lambda)$. On the point site choose K-flat
-flat-term models $P$ of $R\Gamma(E)$ and $C_i$ of $K_i$. The canonical distribution map
-$\operatorname{Tot}(P\otimes\bigoplus_i C_i)\cong\bigoplus_i\operatorname{Tot}(P\otimes C_i)$
-sends $p\otimes(c_i)_i$ to $(p\otimes c_i)_i$ on finite-support tensors; its inverse uses the
-coprojections. Both maps respect $d_P\otimes1+(-1)^p1\otimes d_C$. For an acyclic complex $B$, the
-degree-$n$ distribution isomorphism is $\bigoplus_{p+q=n}B^p\otimes(\bigoplus_i
-C_i^q)\cong\bigoplus_i\bigoplus_{p+q=n}B^p\otimes C_i^q$, with the displayed signed differentials.
-Thus $\operatorname{Tot}(B\otimes(\bigoplus_i C_i))$ is the sum of the acyclic
-$\operatorname{Tot}(B\otimes C_i)$, whose cycles and boundaries are respectively the sums of
-cycles and boundaries. The terms of $\bigoplus_i C_i$ are flat, since tensoring a module short
-exact sequence with a sum is the sum of the exact tensor sequences. The derived-tensor descent
-statement now computes both sides by these total complexes. Termwise module sums compute derived
-coproducts, so the displayed isomorphism localizes to the canonical coproduct comparison for $F$.
-This also includes the empty family.
-Dependencies: lem-pc-kflat-resolution, def-pc-kflat-complex, def-pc-flat-sheaf-modules,
-def-pc-tensor-complex-sheaves, lem-weil-pbc-site-derived-tensor-descent,
-lem-pc-derived-module-direct-sums.
-
-5. The functor $G$ preserves set-indexed coproducts as well. The derived adjunction of Step 3
-makes $L=La^*$ a left adjoint to $R=R\Gamma$. Explicitly
-Hom(L(⨁ᵢ Kᵢ), H) = Hom(⨁ᵢ Kᵢ, RH) = ∏ᵢ Hom(Kᵢ, RH) = ∏ᵢ Hom(LKᵢ, H),
-naturally in $H$, and the bijections take the legs to $L$ of the original coprojections. This is
-the coproduct universal property, so $L$ preserves these sums. Tensor with $E$ in the etale
-derived category preserves sums by the cited tensor theorem. Applying the coproduct comparison for
-$R\Gamma$ proved in Step 2 proves the assertion for their composite $G$. Under the two functors'
-coproduct comparisons, naturality on each coprojection identifies $\alpha_{\bigoplus_iK_i}$ with
-$\bigoplus_i\alpha_{K_i}$. Thus if every $\alpha_{K_i}$ is invertible, the direct sum of their
-inverses is an inverse of this component.
-Dependencies: lem-weil-pbc-ringed-projection-mate-exact, lem-kun-derived-tensor-direct-sums.
-
-6. Let $\mathcal C$ be the full subcategory of $D(\Lambda)$ consisting of $K$ for which $\alpha_K$
-is invertible. Under the tensor-unit identifications the projection mate satisfies
-$\alpha_\Lambda=1_{R\Gamma(E)}$. Its compatibility with integer shifts identifies
-$\alpha_{\Lambda[k]}$ with the shift of that identity, so $\Lambda[k]\in\mathcal C$ for every
-integer $k$. Dependency: lem-weil-pbc-ringed-projection-mate-exact.
-
-7. For a distinguished triangle in $D(\Lambda)$, Step 3 produces a morphism between its images
-under $F$ and $G$, including the shifted connecting square. The third-isomorphism triangle theorem
-shows that if two vertices lie in $\mathcal C$, then the third does too. The class is also closed
-under isomorphisms by naturality and under retracts: if $i:K\to H$, $r:H\to K$ satisfy $ri=1$ and
-$\alpha_H$ is invertible, then $F(r)\alpha_H^{-1}G(i):G(K)\to F(K)$ is inverse to $\alpha_K$.
-Indeed naturality gives $\alpha_K F(r)=G(r)\alpha_H$ and $G(i)\alpha_K=\alpha_H F(i)$, so the two
-composites reduce to $G(ri)$ and $F(ri)$. Together with Steps 4-5 this proves all required closure
-properties.
-Dependencies: lem-weil-pbc-ringed-projection-mate-exact, lem-sf-triangle-morphism-iso.
-
-8. Apply derived-module free generation with $A=\Lambda$. The subcategory $\mathcal C$ contains
-all shifts $\Lambda[k]$ by Step 6 and is closed under set-indexed direct sums, third vertices of
-distinguished triangles, and retracts by Steps 5 and 7. It therefore contains every object of
-$D(\Lambda)$. Hence $\alpha_K$ is invertible for the arbitrary complex $K$ in the statement. This
-is precisely the canonical tensor-with-constant-complex map identified in Step 3.
-Dependency: lem-pc-derived-module-free-generation.
+Proof:
+1. Choose a natural cohomological-dimension bound from the defining infimum. A positive
+integer annihilating the coefficient ring annihilates every section of every module sheaf.
+Thus the underlying abelian sheaf is torsion. The coefficient-forgetting cohomology
+isomorphism transfers its vanishing above the bound to module-valued cohomology.
+2. Apply the source library's finite-cohomological-dimension coproduct theorem (Stacks
+0F11) to obtain preservation of all coproducts by derived global sections.
+3. Work with the actual derived constant/global-sections adjunction defining the map.
+Exactness identifies the left derived functor with the termwise derived functor, giving
+its shift structure and triangulatedness. The right adjoint inherits compatible shifts
+and is triangulated. To check the derived tensor comparison against shifts, choose a
+flat resolution whose source and constant image are K-flat. Its defining tensor/counit
+square gives shift compatibility on that representative; naturality transports it across
+the representative's isomorphism to an arbitrary first input. Taking the adjunction mate
+therefore gives the required shift-compatible projection transformation.
+4. Both functors in that transformation preserve coproducts: tensoring is a left adjoint
+in the closed derived monoidal categories, derived constants are a left adjoint, and
+Step 2 handles derived global sections. Construct the unit comparison from the localization
+unit and the derived counit. Its right-unit law follows on common K-flat representatives
+and then by naturality. The adjunction's unitality identity gives invertibility at the unit.
+5. The isomorphism locus contains every shift of the rank-one free module, using its
+identification with the derived tensor unit. Naturality and preservation of coproducts
+give coproduct closure; the third-isomorphism triangle theorem gives triangle closure;
+naturality gives retract closure. Apply derived-module free generation (Stacks 09PB) to
+conclude invertibility at every complex. No boundedness restriction is imposed.
 -/
 theorem isIso_constantDerivedProjectionMap_of_finite_torsion_cd
     (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
@@ -178,6 +394,10 @@ theorem isIso_constantDerivedProjectionMap_of_finite_torsion_cd
     (hΛ : ∃ n : ℕ, 0 < n ∧ (n : Λ) = 0)
     (E : DerivedCategoryModule Λ X) (K : DerivedCategory (ModuleCat.{u + 1} Λ)) :
     IsIso (constantDerivedProjectionMap (ModuleCat.{u + 1} Λ) X E K) := by
-  sorry
+  have (J : Type (u + 1)) : PreservesColimitsOfShape (Discrete J)
+      (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X) :=
+    preservesCoproducts_rightDerivedGlobalSections Λ X (finite_module_cd_aux Λ X hcd hΛ) J
+  exact constant_projection_map_isIso_aux (ModuleCat.{u + 1} Λ)
+    (module_unitGeneration_aux Λ) X E K
 
 end AlgebraicGeometry.Etale
