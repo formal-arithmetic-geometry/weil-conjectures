@@ -1,0 +1,154 @@
+{
+ "id": "lem-amb-vector-integration-local-trace-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-amb-vector-integration",
+   "place": "Compatibility of prescribed local vector traces on overlaps",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Compatibility of prescribed local vector traces on overlaps",
+ "statement": "Under [def-amb-vector-integration-charts], fix alpha:C_pi≅single(L), a normalized Tate transport t, and a normalized projective-line datum family D with its base-change equations. Turn each prescribed trace on a frame open V into a local sheaf map by the actual Hom equivalence, after the inverse constant-object pullback comparison. For two frame opens V,V_prime and every W in S_et with lifts to both, the descentComponent values of these sheaf maps are equal. This states overlap equality only: no concentration, global existence, global uniqueness or normalized identification is in its conclusion. Separate proved uniqueness results imply that all normalized families coincide and force their base-change equations; the proved wrapper therefore gives the same overlap equality for independently specified normalized families without a base-change hypothesis.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "The concentration, overlap, and degree-zero gluing argument"
+ },
+ "stmt_deps": [
+  "def-amb-vector-integration-charts",
+  "lem-amb-etale-degree-zero-hom",
+  "def-asd-ordinary-finite-p1-data"
+ ],
+ "proof": [
+  {
+   "text": "Restrict frames to the intersection. Exact inverse image commutes with the Hom correspondence. Compact-support exchange pasting and normalized Tate composition identify the restricted maps with the prescribed affine counits of the restricted frames. The supplied projective-line base-change equation passes to the ordered affine counit by composition of adjunctions.",
+   "uses": [
+    "def-amb-vector-integration-charts",
+    "thm-cbc-finite-torsion",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-amb-affine-trace-tower-counit-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the intersection write e_j=e_i G. The coordinate convention gives phi_j=a_(G transpose) phi_i and g=(G transpose)^(-1). The inverse coordinate squares paste to give B_j=rho_g B_i with rho_g the actual affineLinearTraceAction.",
+   "uses": [
+    "def-asd-vector-bundle-zero-section",
+    "def-amb-vector-integration-charts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply affineSpaceLinearTraceInvariance on the Noetherian intersection, where N remains invertible. Pull back the equality to W and evaluate. Full faithfulness and the Hom correspondence give equality of the descent components.",
+   "uses": [
+    "lem-amb-linear-trace-invariance",
+    "lem-amb-etale-degree-zero-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the wrapper, identify any two normalized Tate transports and then their datum families by the proved uniqueness theorems. Obtain base change from normalization and apply the fixed-family overlap result.",
+   "uses": [
+    "lem-amb-ordinary-finite-twist-transport-uniqueness",
+    "lem-amb-ordinary-finite-p1-datum-uniqueness"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-amb-vector-integration-charts",
+  "thm-cbc-finite-torsion",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-amb-affine-trace-tower-counit-base-change",
+  "def-asd-vector-bundle-zero-section",
+  "lem-amb-linear-trace-invariance",
+  "lem-amb-etale-degree-zero-hom",
+  "lem-amb-ordinary-finite-twist-transport-uniqueness",
+  "lem-amb-ordinary-finite-p1-datum-uniqueness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Explicit Lean implementation of Compatibility of prescribed local vector traces on overlaps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived object concentrated in degree zero has a unique isomorphism to its degree zero cohomology inducing the identity",
+   "results": "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE is the existence input. No result adds the specified identity normalization and its uniqueness. Searches for vector-bundle integration returned scheme and topological gluing, not the compact-support trace.",
+   "date": "2026-10-20",
+   "verdict": "reuse Mathlib t-structure existence and full faithfulness; supply normalization and gluing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv\", \"FullyFaithful\"",
+   "results": "Functor.FullyFaithful.homEquiv and its apply/symm_apply lemmas; no inverse-image specialization or overlap trace result.",
+   "date": "2026-10-20",
+   "verdict": "reuse hom equivalence for the local correspondence"
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctorCompHomologyFunctorIso|exists_iso_singleFunctor_obj_of_isGE_of_isLE|IsSheafFor.*arrows|homCongr",
+   "results": "Mathlib HomCongr and standard derived-category lemmas. Source EtaleMorphismDescent supplies localization restriction, descentComponent and its naturality. Source OpenClosed.Conservative supplies jointly faithful restriction. There is no declared overlap compatibility for vectorIntegrationLocalTrace.",
+   "date": "2026-10-20",
+   "verdict": "reuse the existing categorical and site APIs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local compactly supported trace maps for an algebraic vector bundle are equal on overlaps of linear trivializations by linear invariance and base change",
+   "results": "Trivialization.coe_coordChangeL; Trivialization.coordChangeL; Trivialization.linearMapAt.congr_simp; Trivialization.symmₗ.congr_simp; Trivialization.coordChangeL_symm_apply; Trivialization.comp_continuousLinearEquivAt_eq_coord_change; Trivialization.apply_symm_apply_eq_coordChangeL; Pretrivialization.linearMapAt.congr_simp",
+   "date": "2026-10-20",
+   "verdict": "no match: the hits are topological vector-bundle coordinate changes, not equality of the actual algebraic étale compact-support exchanges"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorBundleIntegration",
+  "date": "2026-10-20",
+  "group": "F1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VectorIntegrationLocalTraceCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/VectorIntegrationLocalTraceCompatibility.lean",
+  "declaration": "AlgebraicGeometry.Etale.vectorIntegrationLocalSheafTrace_compatible_of_baseChange",
+  "statement": "theorem vectorIntegrationLocalSheafTrace_compatible_of_baseChange (N : ℕ) (hN : 0 < N)\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)\n    (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d]\n    {L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)}\n    (α : vectorIntegrationSource A N hA S d F ≅\n      (_root_.DerivedCategory.singleFunctor _ 0).obj L)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),\n      OrdinaryFiniteP1Datum A N hA t T hT)\n    (hD : OrdinaryFiniteP1BaseChange A N hA t D)\n    (V V' : S.Opens) (e : VectorBundleZeroSection.Trivialization S d F V)\n    (e' : VectorBundleZeroSection.Trivialization S d F V')\n    (W : S.Etale) (q : W ⟶ Scheme.Etale.mk V.ι) (q' : W ⟶ Scheme.Etale.mk V'.ι) :\n    descentComponent V.ι\n        (vectorIntegrationLocalSheafTrace N hN A hA t D S hS d F α V e) q =\n      descentComponent V'.ι\n        (vectorIntegrationLocalSheafTrace N hN A hA t D S hS d F α V' e') q'",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-20",
+  "declarations": [
+   "AlgebraicGeometry.Etale.vectorIntegrationLocalSheafTrace",
+   "AlgebraicGeometry.Etale.vectorIntegrationLocalSheafTrace_normalization_iff",
+   "AlgebraicGeometry.Etale.vectorIntegrationLocalSheafTrace_compatible_of_baseChange",
+   "AlgebraicGeometry.Etale.vectorIntegrationLocalSheafTrace_compatible"
+  ]
+ },
+ "blueprint_snapshot": "main-20261015",
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0612a",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261020T221141-L-4149524",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0612a",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261020T221141-L-4149524",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 9 new modules + adapted VectorPurityDirectSum vs live clone: moved Charts block byte-identical, item theorem statement unchanged, remaining sorry (overlap compatibility) checked against proved affineSpaceLinearTraceInvariance and node; all 10 delivered modules and 10 direct importers compiled clean against overlay; axioms probed"
+ }
+}

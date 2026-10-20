@@ -1,0 +1,121 @@
+{
+ "id": "lem-amb-derived-degree-zero-normalization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-amb-vector-integration",
+   "place": "Unique cohomology-normalized identification with a degree-zero object",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Unique cohomology-normalized identification with a degree-zero object",
+ "statement": "For an abelian category C with a derived category, let X be an object with H^q(X)=0 for q≠0. There exists a unique isomorphism e:X≅single(H^0(X)) such that H^0(e) followed by the standard single-cohomology comparison is the identity of H^0(X). This is valid for every abelian category, including the zero category.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "The concentration, overlap, and degree-zero gluing argument"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use Mathlib isGE_iff and isLE_iff to put X in degree zero, and exists_iso_singleFunctor_obj_of_isGE_of_isLE to choose e:X≅single(Y).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compose with the single image of the inverse of H^0(e) followed by the standard single-H^0 comparison. Its naturality proves that the new isomorphism induces the identity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For uniqueness, use full faithfulness of singleFunctor and faithfulness of its composition with H^0. Cancel the chosen inverse to compare the two isomorphisms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Explicit Lean implementation of Unique cohomology-normalized identification with a degree-zero object"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived object concentrated in degree zero has a unique isomorphism to its degree zero cohomology inducing the identity",
+   "results": "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE is the existence input. No result adds the specified identity normalization and its uniqueness. Searches for vector-bundle integration returned scheme and topological gluing, not the compact-support trace.",
+   "date": "2026-10-20",
+   "verdict": "reuse Mathlib t-structure existence and full faithfulness; supply normalization and gluing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv\", \"FullyFaithful\"",
+   "results": "Functor.FullyFaithful.homEquiv and its apply/symm_apply lemmas; no inverse-image specialization or overlap trace result.",
+   "date": "2026-10-20",
+   "verdict": "reuse hom equivalence for the local correspondence"
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctorCompHomologyFunctorIso|exists_iso_singleFunctor_obj_of_isGE_of_isLE|IsSheafFor.*arrows|homCongr",
+   "results": "Mathlib HomCongr and standard derived-category lemmas. Source EtaleMorphismDescent supplies localization restriction, descentComponent and its naturality. Source OpenClosed.Conservative supplies jointly faithful restriction. There is no declared overlap compatibility for vectorIntegrationLocalTrace.",
+   "date": "2026-10-20",
+   "verdict": "reuse the existing categorical and site APIs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived object with cohomology concentrated in degree zero has a unique isomorphism to its degree zero cohomology inducing the identity",
+   "results": "CochainComplex.single₀ObjXSelf; CategoryTheory.instIsIsoAppToRightDerivedZero; CochainComplex.fromSingle₀Equiv; HomologicalComplex.singleObjOpcyclesSelfIso; HomologicalComplex.singleObjHomologySelfIso; CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self; CategoryTheory.Limits.HasZeroObject.instSubsingletonIsoOfNat; groupCohomology.π_comp_H0Iso_hom_apply",
+   "date": "2026-10-20",
+   "verdict": "no exact match: reuse the single-degree homology comparison and the separately located derived heart existence theorem; prove identity normalization and uniqueness"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorBundleIntegration",
+  "date": "2026-10-20",
+  "group": "F1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedDegreeZeroNormalization",
+  "file": "lean/Sheaf/CategoryTheory/DerivedDegreeZeroNormalization.lean",
+  "declaration": "DerivedCategory.existsUnique_iso_single_homology_zero",
+  "statement": "theorem existsUnique_iso_single_homology_zero\n    {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]\n    (X : DerivedCategory C)\n    (hX : ∀ q : ℤ, q ≠ 0 → IsZero ((homologyFunctor C q).obj X)) :\n    ∃! e : X ≅ (singleFunctor C 0).obj ((homologyFunctor C 0).obj X),\n      (homologyFunctor C 0).map e.hom ≫\n        (singleFunctorCompHomologyFunctorIso C 0).hom.app ((homologyFunctor C 0).obj X) =\n      𝟙 ((homologyFunctor C 0).obj X)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-20",
+  "declarations": [
+   "DerivedCategory.existsUnique_iso_single_homology_zero",
+   "DerivedCategory.existsUnique_normalized_iso_and_map"
+  ]
+ },
+ "blueprint_snapshot": "main-20261015",
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0612a",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261020T221141-L-4149524",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0612a",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261020T221141-L-4149524",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 9 new modules + adapted VectorPurityDirectSum vs live clone: moved Charts block byte-identical, item theorem statement unchanged, remaining sorry (overlap compatibility) checked against proved affineSpaceLinearTraceInvariance and node; all 10 delivered modules and 10 direct importers compiled clean against overlay; axioms probed"
+ }
+}

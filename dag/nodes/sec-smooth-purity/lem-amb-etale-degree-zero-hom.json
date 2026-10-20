@@ -1,0 +1,125 @@
+{
+ "id": "lem-amb-etale-degree-zero-hom",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-amb-vector-integration",
+   "place": "Derived-to-sheaf Hom correspondence under étale restriction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Derived-to-sheaf Hom correspondence under étale restriction",
+ "statement": "Let f:U→X be étale, A a commutative ring, K an object of D(X_et,A), M,N module sheaves, and alpha:K≅single(M). Inverse image of single complexes and localization restriction give a canonical bijection between Hom(Lf^*K,Lf^*single(N)) and Hom(M|U,N|U). It sends Lf^*(alpha followed by single(a)) to a|U for every a:M→N. All inverse choices are the unique preimages of fully faithful functors.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "The concentration, overlap, and degree-zero gluing argument"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [
+  {
+   "text": "For abstract functors F,G,R,T with T fully faithful and an isomorphism F⋙G≅R⋙T, conjugate by G(alpha) and the comparison, then use T.homEquiv inverse. Naturality of the comparison proves the image formula.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply this construction to singleFunctor, ordinaryFinitePullback, localizationRestriction, and singleFunctor on U. The comparison is singleFunctorCompLeftDerivedUpperStarIso followed by upperStarIsoLocalizationRestriction.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Explicit Lean implementation of Derived-to-sheaf Hom correspondence under étale restriction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived object concentrated in degree zero has a unique isomorphism to its degree zero cohomology inducing the identity",
+   "results": "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE is the existence input. No result adds the specified identity normalization and its uniqueness. Searches for vector-bundle integration returned scheme and topological gluing, not the compact-support trace.",
+   "date": "2026-10-20",
+   "verdict": "reuse Mathlib t-structure existence and full faithfulness; supply normalization and gluing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv\", \"FullyFaithful\"",
+   "results": "Functor.FullyFaithful.homEquiv and its apply/symm_apply lemmas; no inverse-image specialization or overlap trace result.",
+   "date": "2026-10-20",
+   "verdict": "reuse hom equivalence for the local correspondence"
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctorCompHomologyFunctorIso|exists_iso_singleFunctor_obj_of_isGE_of_isLE|IsSheafFor.*arrows|homCongr",
+   "results": "Mathlib HomCongr and standard derived-category lemmas. Source EtaleMorphismDescent supplies localization restriction, descentComponent and its naturality. Source OpenClosed.Conservative supplies jointly faithful restriction. There is no declared overlap compatibility for vectorIntegrationLocalTrace.",
+   "date": "2026-10-20",
+   "verdict": "reuse the existing categorical and site APIs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A fully faithful functor and specified isomorphisms on source and target give a bijection of morphism sets compatible with natural isomorphisms of composite functors",
+   "results": "CategoryTheory.Functor.FullyFaithful.ctorIdx; CategoryTheory.Functor.FullyFaithful.homEquiv; CategoryTheory.Functor.FullyFaithful.casesOn; CategoryTheory.Functor.FullyFaithful.ofFullyFaithful; CategoryTheory.fullyFaithfulInducedFunctor; CategoryTheory.Functor.FullyFaithful.nonempty_iff_map_bijective; CategoryTheory.Functor.Faithful.recOn; CategoryTheory.Functor.FullyFaithful.mk",
+   "date": "2026-10-20",
+   "verdict": "reuse FullyFaithful.homEquiv; the comparison of composites and its naturality formula are the explicitly proved specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorBundleIntegration",
+  "date": "2026-10-20",
+  "group": "F1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleDegreeZeroHom",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleDegreeZeroHom.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleDegreeZeroHomEquiv_map",
+  "statement": "theorem etaleDegreeZeroHomEquiv_map (A : Type (u + 1)) [CommRing A]\n    {X U : Scheme.{u}} (f : U ⟶ X) [Etale f]\n    {K : DerivedCategoryModule A X}\n    {M N : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)}\n    (α : K ≅ (_root_.DerivedCategory.singleFunctor _ 0).obj M) (a : M ⟶ N) :\n    etaleDegreeZeroHomEquiv A f α\n        ((ordinaryFinitePullback A f).map\n          (α.hom ≫ (_root_.DerivedCategory.singleFunctor _ 0).map a)) =\n      (localizationRestriction (ModuleCat.{u + 1} A) f inferInstance).map a",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-20",
+  "declarations": [
+   "CategoryTheory.fullyFaithfulHomEquivOfIsos",
+   "CategoryTheory.fullyFaithfulHomEquivOfIsos_symm_apply",
+   "CategoryTheory.fullyFaithfulHomEquivOfCompIso",
+   "CategoryTheory.fullyFaithfulHomEquivOfCompIso_map",
+   "CategoryTheory.homEquiv_comp_iso_eq_iff",
+   "DerivedCategory.fullyFaithfulSingleFunctor",
+   "AlgebraicGeometry.Etale.etaleSingleRestrictionIso",
+   "AlgebraicGeometry.Etale.etaleDegreeZeroHomEquiv",
+   "AlgebraicGeometry.Etale.etaleDegreeZeroHomEquiv_map",
+   "AlgebraicGeometry.Etale.etaleDegreeZeroHomEquiv_unit_normalization"
+  ]
+ },
+ "blueprint_snapshot": "main-20261015",
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0612a",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261020T221141-L-4149524",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0612a",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261020T221141-L-4149524",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 9 new modules + adapted VectorPurityDirectSum vs live clone: moved Charts block byte-identical, item theorem statement unchanged, remaining sorry (overlap compatibility) checked against proved affineSpaceLinearTraceInvariance and node; all 10 delivered modules and 10 direct importers compiled clean against overlay; axioms probed"
+ }
+}

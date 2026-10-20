@@ -1,0 +1,117 @@
+{
+ "id": "lem-amb-ordinary-finite-twist-transport-uniqueness",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-amb-vector-integration",
+   "place": "Uniqueness of normalized finite Tate transport",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Uniqueness of normalized finite Tate transport",
+ "statement": "For any commutative A, N and hA:(N:A)=0, any two OrdinaryFiniteTwistTransport systems of [def-asd-ordinary-finite-p1-arrows] are equal. The inclusion into units fixes the roots comparison; the pure-generator condition fixes the scalar-extended line comparison. No positivity, finite-ring, Noetherian or nonempty-base hypothesis is needed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "The concentration, overlap, and degree-zero gluing argument"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-arrows"
+ ],
+ "proof": [
+  {
+   "text": "Cancel the monomorphic roots inclusion in the two normalization equations; Iso.ext and function extensionality identify the roots families.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Transpose the line comparisons under inverse-image/direct-image adjunction. Sheafification and scalar extension identify maps out of the Tate line with maps from the roots sheaf. Evaluation is at 1 tensor z. The line normalizations and equality of roots identify these maps.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use injectivity of the two adjunction equivalences, Iso.ext, function extensionality, and proof irrelevance to identify the transport records.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Explicit Lean implementation of Uniqueness of normalized finite Tate transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived object concentrated in degree zero has a unique isomorphism to its degree zero cohomology inducing the identity",
+   "results": "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE is the existence input. No result adds the specified identity normalization and its uniqueness. Searches for vector-bundle integration returned scheme and topological gluing, not the compact-support trace.",
+   "date": "2026-10-20",
+   "verdict": "reuse Mathlib t-structure existence and full faithfulness; supply normalization and gluing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv\", \"FullyFaithful\"",
+   "results": "Functor.FullyFaithful.homEquiv and its apply/symm_apply lemmas; no inverse-image specialization or overlap trace result.",
+   "date": "2026-10-20",
+   "verdict": "reuse hom equivalence for the local correspondence"
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctorCompHomologyFunctorIso|exists_iso_singleFunctor_obj_of_isGE_of_isLE|IsSheafFor.*arrows|homCongr",
+   "results": "Mathlib HomCongr and standard derived-category lemmas. Source EtaleMorphismDescent supplies localization restriction, descentComponent and its naturality. Source OpenClosed.Conservative supplies jointly faithful restriction. There is no declared overlap compatibility for vectorIntegrationLocalTrace.",
+   "date": "2026-10-20",
+   "verdict": "reuse the existing categorical and site APIs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two maps from a sheafified scalar extension are equal when they agree on every pure tensor generator",
+   "results": "ModuleCat.ExtendScalars.hom_ext; TensorProduct.ext'; ModuleCat.ExtendScalars.hom_ext_iff; Algebra.TensorProduct.ext'; TensorProduct.ext_iff; Algebra.Generators.extendScalars.congr_simp; Algebra.TensorProduct.ext_iff; LinearMap.extendScalarsOfIsLocalization.congr_simp",
+   "date": "2026-10-20",
+   "verdict": "reuse scalar-extension extensionality and sheafification adjunctions; no hit states uniqueness of the normalized Tate-transport record"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorBundleIntegration",
+  "date": "2026-10-20",
+  "group": "F1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteTwistTransportUniqueness",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteTwistTransportUniqueness.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteTwistTransport_unique",
+  "statement": "theorem ordinaryFiniteTwistTransport_unique (A : Type (u + 1)) [CommRing A]\n    (N : ℕ) (hA : (N : A) = 0) (t t' : OrdinaryFiniteTwistTransport A N hA) :\n    t = t'",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-20"
+ },
+ "blueprint_snapshot": "main-20261015",
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0612a",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261020T221141-L-4149524",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0612a",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261020T221141-L-4149524",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 9 new modules + adapted VectorPurityDirectSum vs live clone: moved Charts block byte-identical, item theorem statement unchanged, remaining sorry (overlap compatibility) checked against proved affineSpaceLinearTraceInvariance and node; all 10 delivered modules and 10 direct importers compiled clean against overlay; axioms probed"
+ }
+}

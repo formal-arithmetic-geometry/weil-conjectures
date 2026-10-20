@@ -1,0 +1,112 @@
+{
+ "id": "lem-amb-ordinary-finite-class-injectivity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-amb-vector-integration",
+   "place": "Injectivity of the constant-coefficient derived class realization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Injectivity of the constant-coefficient derived class realization",
+ "statement": "For a commutative ring A, a quasi-compact quasi-separated scheme T, a sheaf P of A-modules on T_et and n≥0, ordinaryFiniteClass A T P n is injective. It realizes a derived arrow single(A_T)→single(P)[n] by forgetting scalars and precomposing its Ext class with the actual integral generator. No finiteness of A or invertibility is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "The concentration, overlap, and degree-zero gluing argument"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-kummer-class"
+ ],
+ "proof": [
+  {
+   "text": "The constant-sheaf adjunction identifies module maps from the free constant A sheaf with sections at the terminal object, by evaluation at 1. The integral constant-sheaf adjunction does the same for abelian maps. The explicit integral generator sends 1 to 1. Its adjunction formula and naturality therefore make precomposition after forgetting scalars bijective.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the already proved source-library bijective_extToSheafHOf of WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBoundaryComparison. Its universal delta-functor argument is applicable because T is qcqs. Compose its injectivity with the derived Ext Hom equivalence. The comparison formula extToSheafHOf_apply is exactly ordinaryFiniteClass.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Explicit Lean implementation of Injectivity of the constant-coefficient derived class realization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The cohomology realization of a derived map from a constant free module sheaf is injective, because Ext from the free constant sheaf equals sheaf cohomology",
+   "results": "Sheaf.H, InjectiveResolution.extEquivCohomologyClass, and Ext postcomposition results. No lemma already states injectivity of the concrete ordinaryFiniteClass.",
+   "date": "2026-10-20",
+   "verdict": "reuse the existing source universal Ext-to-cohomology comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheafAdj\"",
+   "results": "constantSheafAdj and its counit formula identify maps from constant sheaves with terminal sections.",
+   "date": "2026-10-20",
+   "verdict": "use the adjunction and evaluation at 1"
+  },
+  {
+   "tool": "grep",
+   "query": "bijective_extToSheafHOf|extToSheafHOf_apply|ordinaryFiniteClass",
+   "results": "The remote grep returned no hits; local rg located the already proved bijective_extToSheafHOf and its defining formula in WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBoundaryComparison.",
+   "date": "2026-10-20",
+   "verdict": "apply that source theorem after proving the explicit integral-generator normalization corepresents sections"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ext groups from the constant free module sheaf are isomorphic to sheaf cohomology and the natural derived class realization is injective",
+   "results": "CategoryTheory.Sheaf.H; CategoryTheory.Abelian.Ext.mk₀; CategoryTheory.InjectiveResolution.extEquivCohomologyClass; CategoryTheory.ProjectiveResolution.extMk.congr_simp; CategoryTheory.Sheaf.cohomologyPresheafFunctor; CategoryTheory.Sheaf.cohomologyPresheaf; CategoryTheory.ProjectiveResolution.extEquivCohomologyClass; CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk",
+   "date": "2026-10-20",
+   "verdict": "reuse the Ext/cohomology machinery; the actual scalar-forgetting generator comparison is the proved source theorem, after the normalization is checked"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorBundleIntegration",
+  "date": "2026-10-20",
+  "group": "F1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteClassInjectivity",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteClassInjectivity.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteClass_injective",
+  "statement": "theorem ordinaryFiniteClass_injective (A : Type (u + 1)) [CommRing A]\n    (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]\n    (P : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) (n : ℕ) :\n    Function.Injective (ordinaryFiniteClass A T P n)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-20"
+ },
+ "blueprint_snapshot": "main-20261015",
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0612a",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261020T221141-L-4149524",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0612a",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261020T221141-L-4149524",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 9 new modules + adapted VectorPurityDirectSum vs live clone: moved Charts block byte-identical, item theorem statement unchanged, remaining sorry (overlap compatibility) checked against proved affineSpaceLinearTraceInvariance and node; all 10 delivered modules and 10 direct importers compiled clean against overlay; axioms probed"
+ }
+}

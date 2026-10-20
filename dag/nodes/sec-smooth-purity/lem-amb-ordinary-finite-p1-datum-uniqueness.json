@@ -1,0 +1,135 @@
+{
+ "id": "lem-amb-ordinary-finite-p1-datum-uniqueness",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-amb-vector-integration",
+   "place": "Uniqueness and automatic base change of normalized projective-line data",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Uniqueness and automatic base change of normalized projective-line data",
+ "statement": "For finite commutative coefficients A, N with NA=0, a fixed normalized Tate transport t and a Noetherian S with N invertible, any two OrdinaryFiniteP1Datum A N hA t S hS are equal. If N>0, every family of such normalized data already has OrdinaryFiniteP1BaseChange: normalization is the only hypothesis on the family.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "The concentration, overlap, and degree-zero gluing argument"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-data",
+  "lem-amb-ordinary-finite-class-injectivity",
+  "lem-amb-ordinary-finite-twist-transport-uniqueness"
+ ],
+ "proof": [
+  {
+   "text": "The projective line is Noetherian, hence qcqs. Its specified Kummer class determines the Chern arrow by ordinaryFiniteClass_injective. The two prescribed components then determine the decomposition isomorphism.",
+   "uses": [
+    "lem-amb-ordinary-finite-class-injectivity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical reordered proper projection map is invertible. Cancel it in the two counit normalizations; the equal decompositions give equal counits. Adjunction.ext_counit identifies the adjunctions, and proof irrelevance identifies the entire records.",
+   "uses": [
+    "lem-amb-proper-coproducts-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For automatic base change choose the family already given by exists_ordinaryFiniteP1Adjunction. Normalized Tate-transport uniqueness identifies its transport with the specified one, and pointwise datum uniqueness identifies its family. Substitute these equalities in its base-change equations.",
+   "uses": [
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-amb-ordinary-finite-twist-transport-uniqueness"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-ordinary-finite-class-injectivity",
+  "lem-amb-proper-coproducts-projection",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-amb-ordinary-finite-twist-transport-uniqueness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Explicit Lean implementation of Uniqueness and automatic base change of normalized projective-line data"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived object concentrated in degree zero has a unique isomorphism to its degree zero cohomology inducing the identity",
+   "results": "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE is the existence input. No result adds the specified identity normalization and its uniqueness. Searches for vector-bundle integration returned scheme and topological gluing, not the compact-support trace.",
+   "date": "2026-10-20",
+   "verdict": "reuse Mathlib t-structure existence and full faithfulness; supply normalization and gluing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv\", \"FullyFaithful\"",
+   "results": "Functor.FullyFaithful.homEquiv and its apply/symm_apply lemmas; no inverse-image specialization or overlap trace result.",
+   "date": "2026-10-20",
+   "verdict": "reuse hom equivalence for the local correspondence"
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctorCompHomologyFunctorIso|exists_iso_singleFunctor_obj_of_isGE_of_isLE|IsSheafFor.*arrows|homCongr",
+   "results": "Mathlib HomCongr and standard derived-category lemmas. Source EtaleMorphismDescent supplies localization restriction, descentComponent and its naturality. Source OpenClosed.Conservative supplies jointly faithful restriction. There is no declared overlap compatibility for vectorIntegrationLocalTrace.",
+   "date": "2026-10-20",
+   "verdict": "reuse the existing categorical and site APIs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An adjunction is uniquely determined by its counit and a biproduct decomposition is uniquely determined by its two components",
+   "results": "CategoryTheory.Bicategory.Adjunction.mk.inj; CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit; CategoryTheory.Adjunction.mk.injEq; CategoryTheory.Adjunction.noConfusionType; CategoryTheory.Adjunction.mk; CategoryTheory.Adjunction.noConfusion; CategoryTheory.Adjunction.leftAdjointUniq_hom_counit; CategoryTheory.Adjunction.mk.noConfusion",
+   "date": "2026-10-20",
+   "verdict": "reuse adjunction counit uniqueness; the Chern-class realization and decomposition/counit normalizations must be combined explicitly"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorBundleIntegration",
+  "date": "2026-10-20",
+  "group": "F1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DatumUniqueness",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteP1DatumUniqueness.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteP1Datum_unique",
+  "statement": "theorem ordinaryFiniteP1Datum_unique (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤)))\n    (D D' : OrdinaryFiniteP1Datum A N hA t S hS) : D = D'",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-20",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ordinaryFiniteP1Datum_unique",
+   "AlgebraicGeometry.Etale.ordinaryFiniteP1BaseChange_of_normalization"
+  ]
+ },
+ "blueprint_snapshot": "main-20261015",
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0612a",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261020T221141-L-4149524",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0612a",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261020T221141-L-4149524",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 9 new modules + adapted VectorPurityDirectSum vs live clone: moved Charts block byte-identical, item theorem statement unchanged, remaining sorry (overlap compatibility) checked against proved affineSpaceLinearTraceInvariance and node; all 10 delivered modules and 10 direct importers compiled clean against overlay; axioms probed"
+ }
+}

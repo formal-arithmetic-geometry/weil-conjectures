@@ -20,10 +20,16 @@ Every map is constructed before the compatibility proposition is stated.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 2048
 universe u v₁ v₂ w₁ w₂
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory AlgebraicGeometry
 namespace WeilConjectures.PurityFiniteSetting
+
+-- Preserve the single-degree embedding while comparing its tensor-unit objects.
+-- Unfolding it here expands the derived localization before comparing the sheaves.
+attribute [local irreducible] _root_.DerivedCategory.singleFunctors
 
 /-- The unique symmetric-algebra extension of a map of degree-one generators.
 Source: the symmetric-algebra universal property in sk-prop-an, direct-sum geometry

@@ -1,0 +1,122 @@
+{
+ "id": "lem-amb-etale-sheaf-hom-family-gluing",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-amb-vector-integration",
+   "place": "Gluing module-sheaf maps over an étale covering family",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Gluing module-sheaf maps over an étale covering family",
+ "statement": "Let B be a commutative ring, a_i:U_i→X a jointly surjective family of étale morphisms of schemes and P,Q sheaves of B-modules on X_et. Let psi_i be maps between their localization restrictions. Assume their components on every étale object W with maps q_i:W→U_i and q_j:W→U_j agree, using the canonical liftEtaleIso identifications. Then there is a unique map P→Q whose localization restriction along every a_i is psi_i. The empty covering family on the empty scheme is allowed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "The concentration, overlap, and degree-zero gluing argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [
+  {
+   "text": "Use presheafHom(P,Q) as a sheaf on the small étale site. The arrows a_i cover its terminal object by joint surjectivity. The given descentComponent maps are matching sections by their existing naturality theorem.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Glue the matching sections with isSheafFor_arrows and evaluate the glued section at each object mapping to the terminal object. This constructs a natural transformation of B-module sheaves. The liftEtaleIso identities show its restrictions equal psi_i.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Transport restriction equality to inverse image via upperStarIsoLocalizationRestriction. The jointly surjective inverse-image family is jointly faithful, giving uniqueness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Explicit Lean implementation of Gluing module-sheaf maps over an étale covering family"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived object concentrated in degree zero has a unique isomorphism to its degree zero cohomology inducing the identity",
+   "results": "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE is the existence input. No result adds the specified identity normalization and its uniqueness. Searches for vector-bundle integration returned scheme and topological gluing, not the compact-support trace.",
+   "date": "2026-10-20",
+   "verdict": "reuse Mathlib t-structure existence and full faithfulness; supply normalization and gluing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv\", \"FullyFaithful\"",
+   "results": "Functor.FullyFaithful.homEquiv and its apply/symm_apply lemmas; no inverse-image specialization or overlap trace result.",
+   "date": "2026-10-20",
+   "verdict": "reuse hom equivalence for the local correspondence"
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctorCompHomologyFunctorIso|exists_iso_singleFunctor_obj_of_isGE_of_isLE|IsSheafFor.*arrows|homCongr",
+   "results": "Mathlib HomCongr and standard derived-category lemmas. Source EtaleMorphismDescent supplies localization restriction, descentComponent and its naturality. Source OpenClosed.Conservative supplies jointly faithful restriction. There is no declared overlap compatibility for vectorIntegrationLocalTrace.",
+   "date": "2026-10-20",
+   "verdict": "reuse the existing categorical and site APIs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible morphisms between sheaves of modules on a jointly surjective etale covering family glue uniquely",
+   "results": "TopCat.Presheaf.IsSheaf.isSheafUniqueGluing_types; TopCat.Presheaf.IsSheaf.isSheafUniqueGluing; TopCat.Sheaf.existsUnique_gluing'; TopCat.Presheaf.IsSheafUniqueGluing; AlgebraicGeometry.Scheme.OpenCover.glueMorphismsOverOfLocallyDirected.congr_simp; TopCat.Sheaf.interUnionPullbackConeLift; TopCat.Sheaf.existsUnique_gluing; TopCat.Presheaf.isSheaf_iff_isSheafUniqueGluing_types",
+   "date": "2026-10-20",
+   "verdict": "no exact match: the hits concern topological sheaves or scheme morphisms; use the general site sheaf-of-Hom axiom and actual étale descent APIs"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorBundleIntegration",
+  "date": "2026-10-20",
+  "group": "F1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSheafHomFamilyGluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSheafHomFamilyGluing.lean",
+  "declaration": "AlgebraicGeometry.Etale.existsUnique_etaleSheafHom_of_family",
+  "statement": "theorem existsUnique_etaleSheafHom_of_family\n    (B : Type (u + 1)) [CommRing B]\n    {X : Scheme.{u}} {I : Type u} {U : I → Scheme.{u}}\n    (a : ∀ i, U i ⟶ X) [∀ i, Etale (a i)]\n    (ha : ∀ x : X, ∃ (i : I) (y : U i), (a i).base y = x)\n    (P Q : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))\n    (ψ : ∀ i, (localizationRestriction (ModuleCat.{u + 1} B) (a i) inferInstance).obj P ⟶\n      (localizationRestriction (ModuleCat.{u + 1} B) (a i) inferInstance).obj Q)\n    (hψ : ∀ (W : X.Etale) (i j : I)\n      (q₁ : W ⟶ Scheme.Etale.mk (a i)) (q₂ : W ⟶ Scheme.Etale.mk (a j)),\n      descentComponent (a i) (ψ i) q₁ = descentComponent (a j) (ψ j) q₂) :\n    ∃! φ : P ⟶ Q,\n      ∀ i, (localizationRestriction (ModuleCat.{u + 1} B) (a i) inferInstance).map φ = ψ i",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-20",
+  "declarations": [
+   "AlgebraicGeometry.Etale.existsUnique_etaleSheafHom_of_family",
+   "AlgebraicGeometry.Etale.etaleSheafHom_restriction_eq_of_compatible",
+   "AlgebraicGeometry.Etale.descentComponent_eq_of_mono"
+  ]
+ },
+ "blueprint_snapshot": "main-20261015",
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0612a",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261020T221141-L-4149524",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0612a",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261020T221141-L-4149524",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 9 new modules + adapted VectorPurityDirectSum vs live clone: moved Charts block byte-identical, item theorem statement unchanged, remaining sorry (overlap compatibility) checked against proved affineSpaceLinearTraceInvariance and node; all 10 delivered modules and 10 direct importers compiled clean against overlay; axioms probed"
+ }
+}

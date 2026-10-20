@@ -1,0 +1,148 @@
+{
+ "id": "def-amb-vector-integration-charts",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-amb-vector-integration",
+   "place": "Concrete vector-bundle coefficient, chart exchange, and local trace",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Concrete vector-bundle coefficient, chart exchange, and local trace",
+ "statement": "For N>0, a finite commutative ring A with NA=0, a Noetherian scheme S on which N is invertible and a constant-rank vector bundle E of rank d [def-asd-vector-bundle-zero-section], retain exactly the coefficient, compact-support source, cohomology sheaf, inverse-frame chart, coefficient comparison, local trace and normalization predicate of [def-amb-vector-integration]. This is their relocation only: C_pi=R pi_! pi^*(ordered tensor of d shifted Tate lines), L_pi=H^0(C_pi). A chart is the tower-to-affine-space comparison followed by the inverse frame and the open inclusion into E. Its square over V→S is Cartesian. The local trace is the actual compact-support exchange for this square, then the canonical coefficient comparison and the affine counit. Normalization demands these restrictions for every frame and normalized data. No global trace is defined here.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "The concentration, overlap, and degree-zero gluing argument"
+ },
+ "stmt_deps": [
+  "def-asd-vector-bundle-zero-section",
+  "def-weil-pbc-derived-categories",
+  "def-amb-etale-compact-support",
+  "lem-amb-affine-space-top-trace",
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Preserve the original explicit constructions, signatures, attributes and bodies. The affine relative spectrum and the finite locally free frame cover give the existing geometric properties.",
+   "uses": [
+    "def-asd-vector-bundle-zero-section"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse frame is an isomorphism over its open; paste its isomorphism square with the open inverse-image square. This proves vectorIntegrationChart_isPullback.",
+   "uses": [
+    "def-asd-vector-bundle-zero-section"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define the coefficient comparison by inverse-image composition and the canonical Tate tensor comparisons. Compose the actual exchange with that comparison and the existing ordered affine counit.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-amb-affine-space-top-trace",
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-asd-vector-bundle-zero-section",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-amb-affine-space-top-trace",
+  "def-amb-etale-compact-support"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Explicit Lean implementation of Concrete vector-bundle coefficient, chart exchange, and local trace"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived object concentrated in degree zero has a unique isomorphism to its degree zero cohomology inducing the identity",
+   "results": "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE is the existence input. No result adds the specified identity normalization and its uniqueness. Searches for vector-bundle integration returned scheme and topological gluing, not the compact-support trace.",
+   "date": "2026-10-20",
+   "verdict": "reuse Mathlib t-structure existence and full faithfulness; supply normalization and gluing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv\", \"FullyFaithful\"",
+   "results": "Functor.FullyFaithful.homEquiv and its apply/symm_apply lemmas; no inverse-image specialization or overlap trace result.",
+   "date": "2026-10-20",
+   "verdict": "reuse hom equivalence for the local correspondence"
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctorCompHomologyFunctorIso|exists_iso_singleFunctor_obj_of_isGE_of_isLE|IsSheafFor.*arrows|homCongr",
+   "results": "Mathlib HomCongr and standard derived-category lemmas. Source EtaleMorphismDescent supplies localization restriction, descentComponent and its naturality. Source OpenClosed.Conservative supplies jointly faithful restriction. There is no declared overlap compatibility for vectorIntegrationLocalTrace.",
+   "date": "2026-10-20",
+   "verdict": "reuse the existing categorical and site APIs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical compactly supported integration maps of a finite rank algebraic vector bundle constructed from local frames and Tate coefficients",
+   "results": "IsLocalFrameOn.coeff; CompactlySupportedContinuousMap.integralLinearMap; CompactlySupportedContinuousMap.integralLinearMap_apply; CompactlySupportedContinuousMap.integralPositiveLinearMap_toFun; IsLocalFrameOn.coeff.congr_simp; CompactlySupportedContinuousMap.integralPositiveLinearMap; IsLocalFrameOn.eventually_eq_sum_coeff_smul; HasCompactSupport.toSchwartzMap",
+   "date": "2026-10-20",
+   "verdict": "no match: manifold frames and integration of continuous functions do not construct the algebraic étale compact-support trace"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorBundleIntegration",
+  "date": "2026-10-20",
+  "group": "F1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VectorBundleIntegrationCharts",
+  "file": "lean/Sheaf/AlgebraicGeometry/VectorBundleIntegrationCharts.lean",
+  "declaration": "AlgebraicGeometry.Etale.vectorIntegrationLocalTrace",
+  "statement": "def vectorIntegrationLocalTrace (N : ℕ) (hN : 0 < N)\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),\n      OrdinaryFiniteP1Datum A N hA t T hT)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)\n    (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d] (V : S.Opens)\n    (e : VectorBundleZeroSection.Trivialization S d F V) :\n    (ordinaryFinitePullback A V.ι).obj (vectorIntegrationSource A N hA S d F) ⟶\n      ordinaryFiniteUnit A V.toScheme",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-20",
+  "declarations": [
+   "AlgebraicGeometry.Etale.vectorIntegrationZariskiWeakSheafify",
+   "AlgebraicGeometry.Etale.vectorIntegrationZariskiLocallyBijective",
+   "AlgebraicGeometry.Etale.vectorIntegration_geometry",
+   "AlgebraicGeometry.Etale.vectorIntegrationBaseCoefficientPullback",
+   "AlgebraicGeometry.Etale.vectorIntegrationCoefficient",
+   "AlgebraicGeometry.Etale.vectorIntegrationSource",
+   "AlgebraicGeometry.Etale.vectorIntegrationSheaf",
+   "AlgebraicGeometry.Etale.vectorIntegrationChart",
+   "AlgebraicGeometry.Etale.vectorIntegrationChart_isPullback",
+   "AlgebraicGeometry.Etale.vectorIntegrationChartCoefficient",
+   "AlgebraicGeometry.Etale.vectorIntegrationLocalTrace",
+   "AlgebraicGeometry.Etale.VectorIntegrationNormalization"
+  ]
+ },
+ "blueprint_snapshot": "main-20261015",
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0612a",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261020T221141-L-4149524",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0612a",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261020T221141-L-4149524",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 9 new modules + adapted VectorPurityDirectSum vs live clone: moved Charts block byte-identical, item theorem statement unchanged, remaining sorry (overlap compatibility) checked against proved affineSpaceLinearTraceInvariance and node; all 10 delivered modules and 10 direct importers compiled clean against overlay; axioms probed"
+ }
+}
