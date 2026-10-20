@@ -1,119 +1,120 @@
 {
-  "id": "lem-weil-pbc-derived-cohomology-germ-isomorphism",
-  "kind": "statement",
-  "title": "DerivedCohomologyGermIso",
-  "statement": "For every scheme S, geometric point s, L in D⁺(Ab(S_et)) and integer n, the canonical comparison from derived sections to sections of H^n(L) [def-weil-pbc-canonical-derived-cohomology-germs] induces an isomorphism on geometric stalks. This is the sheafification comparison and has no strict-local continuity or mate assertion.",
-  "source": {
-    "document": "Stacks Project",
-    "place": "Tags 03Q9, 03Q8 and 0BKV; neighbourhood colimit and final injective-complex paragraph"
-  },
-  "stmt_deps": [
-    "def-weil-pbc-canonical-derived-cohomology-germs"
-  ],
-  "proof": [
-    {
-      "text": "Use the free-sheaf/sections adjunction to identify morphisms from ℤ[U] with sections. Represent L[n] by a bounded below complex of injectives, using the cited injective-representative lemma. Cycles surject locally onto homology, so every homology section locally comes from a chain map out of the single free sheaf. A class mapping to zero locally lifts through the degree -1 differential; the corresponding single-complex map is null-homotopic, hence zero in the derived category. Transport both local properties through the representative isomorphism. Postcompose with the homology shift isomorphism. The resulting map is locally bijective, hence lies in the sheafification equivalences W. Mathlib Point.W_isInvertedBy_presheafFiber then makes its canonical geometric stalk map an isomorphism. This uses the skyscraper adjunction and requires no local-smallness assumption on the full small-etale category. All these arguments are implemented by proved private helpers; no new statement is left unproved.",
-      "uses": [
-        "lem-weil-pbc-dplus-injective-representative"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-weil-pbc-derived-cohomology-germ-isomorphism",
+ "kind": "statement",
+ "title": "DerivedCohomologyGermIso",
+ "statement": "For every scheme S, geometric point s, L in D⁺(Ab(S_et)) and integer n, the canonical comparison from derived sections to sections of H^n(L) [def-weil-pbc-canonical-derived-cohomology-germs] induces an isomorphism on geometric stalks. This is the sheafification comparison and has no strict-local continuity or mate assertion.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03Q9, 03Q8 and 0BKV; neighbourhood colimit and final injective-complex paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-canonical-derived-cohomology-germs"
+ ],
+ "proof": [
+  {
+   "text": "Use the free-sheaf/sections adjunction to identify morphisms from ℤ[U] with sections. Represent L[n] by a bounded below complex of injectives, using the cited injective-representative lemma. Cycles surject locally onto homology, so every homology section locally comes from a chain map out of the single free sheaf. A class mapping to zero locally lifts through the degree -1 differential; the corresponding single-complex map is null-homotopic, hence zero in the derived category. Transport both local properties through the representative isomorphism. Postcompose with the homology shift isomorphism. The resulting map is locally bijective, hence lies in the sheafification equivalences W. Mathlib Point.W_isInvertedBy_presheafFiber then makes its canonical geometric stalk map an isomorphism. This uses the skyscraper adjunction and requires no local-smallness assumption on the full small-etale category. All these arguments are implemented by proved private helpers; no new statement is left unproved.",
+   "uses": [
     "lem-weil-pbc-dplus-injective-representative"
-  ],
-  "proof_origin": {
-    "by": "D3 adapting the proved local comparison in AbelianHigherDirectImagePresheaf",
-    "document": "Stacks Project",
-    "place": "Tags 03Q8 and 0BKV; cycles, local boundary lifting and null homotopy, followed by Mathlib Point.W_isInvertedBy_presheafFiber"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "Derived cohomology germs and strict-local neighbourhood projection restriction",
-      "results": "Service unavailable: Internal Server Error; no verdict based on this service.",
-      "date": "2026-10-12"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Geometric stalk of higher direct image as colimit of cohomology of affine etale neighbourhoods with restriction map to strict henselization",
-      "results": "Eight results about structure-sheaf stalks and ordinary module pullback; none realizes these abelian derived-section maps. Loogle presheafToSheaf, homology and IsPullback, IsAffineHom queries returned no hits.",
-      "date": "2026-10-12",
-      "verdict": "No exact match."
-    },
-    {
-      "tool": "grep",
-      "query": "homology.*sheaf|sheaf.*homology|mate.*section|IsAffineHom.*pullback",
-      "results": "Mathlib has general stalk and pullback infrastructure, but no strict-local derived mate or the canonical derived Hom-to-germ comparison. The existing AbelianHigherDirectImagePresheaf has private definitions of the comparison, inaccessible from another module.",
-      "date": "2026-10-12",
-      "verdict": "No existing public declaration for this part."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.StrictLocalMateContinuityPresentation",
-    "date": "2026-10-12",
-    "group": "G2"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "prop-weil-pbc-strict-henselization-stalk-formula",
-      "place": "03Q9 neighbourhood colimit and final injective-complex restriction paragraph",
-      "via": [
-        "lem-weil-pbc-strict-local-mate-continuity-presentation",
-        "lem-weil-pbc-strict-local-base-change-global-homology"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-prop-h2",
-  "lean": {
-    "existing": false,
-    "module": "WeilConjectures.AlgebraicGeometry.DerivedCohomologyGermIso",
-    "file": "lean/WeilConjectures/AlgebraicGeometry/DerivedCohomologyGermIso.lean",
-    "declaration": "AlgebraicGeometry.Etale.isIso_strictLocalCohomologyGermMap",
-    "declarations": [
-      "AlgebraicGeometry.Etale.isIso_strictLocalCohomologyGermMap"
-    ],
-    "statement": "theorem isIso_strictLocalCohomologyGermMap {S : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1})) (n : ℤ) : IsIso ((Scheme.pointSmallEtale s).presheafFiber.map (strictLocalCohomologyGermMap L n))",
-    "branch": "sheaf-dag",
-    "by": "G2",
-    "date": "2026-10-12"
-  },
-  "reviewed": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "G2",
-    "result": "pass",
-    "landing": "20261012T085242-L-16042",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "X-aa785",
-    "group": "D3",
-    "result": "pass",
-    "landing": "20261012T112833-L-765603",
-    "kind": "interface",
-    "note": "independent Codex review: Delivered module, node proof route, report, and direct importer match the packet; all compile cleanly and theorem axioms are exactly propext, Classical.choice, Quot.sound."
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-dplus-injective-representative"
+ ],
+ "proof_origin": {
+  "by": "D3 adapting the proved local comparison in AbelianHigherDirectImagePresheaf",
+  "document": "Stacks Project",
+  "place": "Tags 03Q8 and 0BKV; cycles, local boundary lifting and null homotopy, followed by Mathlib Point.W_isInvertedBy_presheafFiber"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived cohomology germs and strict-local neighbourhood projection restriction",
+   "results": "Service unavailable: Internal Server Error; no verdict based on this service.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric stalk of higher direct image as colimit of cohomology of affine etale neighbourhoods with restriction map to strict henselization",
+   "results": "Eight results about structure-sheaf stalks and ordinary module pullback; none realizes these abelian derived-section maps. Loogle presheafToSheaf, homology and IsPullback, IsAffineHom queries returned no hits.",
+   "date": "2026-10-12",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*sheaf|sheaf.*homology|mate.*section|IsAffineHom.*pullback",
+   "results": "Mathlib has general stalk and pullback infrastructure, but no strict-local derived mate or the canonical derived Hom-to-germ comparison. The existing AbelianHigherDirectImagePresheaf has private definitions of the comparison, inaccessible from another module.",
+   "date": "2026-10-12",
+   "verdict": "No existing public declaration for this part."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalMateContinuityPresentation",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "03Q9 neighbourhood colimit and final injective-complex restriction paragraph",
+   "via": [
+    "lem-weil-pbc-strict-local-mate-continuity-presentation",
+    "lem-weil-pbc-strict-local-base-change-global-homology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalSmallModel.DerivedCohomologyGermIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalSmallModel/DerivedCohomologyGermIso.lean",
+  "declaration": "AlgebraicGeometry.Etale.smallModel_isIso_strictLocalCohomologyGermMap",
+  "declarations": [
+   "AlgebraicGeometry.Etale.smallModel_isIso_strictLocalCohomologyGermMap"
+  ],
+  "statement": "theorem smallModel_isIso_strictLocalCohomologyGermMap {S : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1})) (n : ℤ) : IsIso ((Scheme.pointSmallEtale s).presheafFiber.map (strictLocalCohomologyGermMap L n))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-21",
+  "note": "Fully proved original small-colimit-model realization. The canonical upstream realization uses strictLocalization instead of strictHenselizationScheme and cannot be imported with the original Sheaf interfaces. Restores the proved StrictLocalSmallModel dependency chain previously landed in c03b8450536."
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T085242-L-16042",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261020T233100-L-891847",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -7,9 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
 public import WeilConjectures.AlgebraicGeometry.GlobalCohomologyContinuityPresentation
-import WeilConjectures.AlgebraicGeometry.StrictLocalNeighbourhoodGeometryExistence
-import WeilConjectures.AlgebraicGeometry.StrictLocalCohomologySourceColimit
-import WeilConjectures.AlgebraicGeometry.StrictLocalMateProjectionFormulas
+import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalNeighbourhoodGeometryExistence
+import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalCohomologySourceColimit
+import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalMateProjectionFormulas
 
 /-! # Presenting the strict-local mate as projection restriction
 
@@ -74,10 +74,10 @@ theorem nonempty_strictLocalBaseChange_continuityPresentation
                 (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom))
                 |>.natTrans.app K)))) := by
   classical
-  obtain ⟨Q⟩ := nonempty_strictLocalNeighbourhoodGeometry f s
-  obtain ⟨E⟩ := nonempty_strictLocalMateProjectionData f s K n Q
+  obtain ⟨Q⟩ := smallModel_nonempty_strictLocalNeighbourhoodGeometry f s
+  obtain ⟨E⟩ := smallModel_nonempty_strictLocalMateProjectionData f s K n Q
   let := (Scheme.strictHenselization_properties s).2.1
-  obtain ⟨hsource⟩ := isColimit_strictLocalCohomologySourceLegs s
+  obtain ⟨hsource⟩ := smallModel_isColimit_strictLocalCohomologySourceLegs s
     ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K) n
   let : ∀ i, CompactSpace ((strictLocalNeighbourhoodDiagram f s).obj i) := Q.compact
   let : ∀ i, QuasiSeparatedSpace ((strictLocalNeighbourhoodDiagram f s).obj i) := Q.quasiSeparated

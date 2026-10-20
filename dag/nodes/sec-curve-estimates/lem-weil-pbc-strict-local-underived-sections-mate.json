@@ -1,150 +1,154 @@
 {
-  "id": "lem-weil-pbc-strict-local-underived-sections-mate",
-  "kind": "statement",
-  "title": "Underived exchange on pointed neighbourhood sections",
-  "statement": "Let f:X→S be any scheme morphism, s:Spec Ω→S a geometric point, and Q the strict-local neighbourhood geometry [def-weil-pbc-strict-local-neighbourhood-geometry]. Write g:S_(s)→S, p:X×_S S_(s)→X, and f′:X×_S S_(s)→S_(s). For a pointed neighbourhood i, define b_i:f_* followed by sections on V_i → p^* followed by global sections to be restriction to S_(s) [lem-weil-pbc-strict-local-localized-hom-germ], followed by global sections of baseChangeMap [def-weil-pbc-underived-exchange], followed by lowerStarCompGlobalSectionsIso for f′. Then b_i equals sourceStageSectionsIso.hom [def-weil-pbc-strict-local-injective-source-comparison] followed by sectionsPullbackNat along Q.legs.app i and the inverse upperStarComp for p = Q.legs.app i ≫ t_i [lem-weil-pbc-injective-sections-pullback-comparison]. This is an equality of natural transformations on abelian etale sheaves on X, with the usual associators of functor composition.",
-  "source": {
-    "document": "Stacks Project",
-    "place": "Tag 03Q9, final injective-complex paragraph; details of the adjunction compatibility written by P1"
-  },
-  "stmt_deps": [
-    "def-weil-pbc-strict-local-injective-source-comparison",
-    "def-weil-pbc-strict-local-neighbourhood-geometry",
+ "id": "lem-weil-pbc-strict-local-underived-sections-mate",
+ "kind": "statement",
+ "title": "Underived exchange on pointed neighbourhood sections",
+ "statement": "Let f:X→S be any scheme morphism, s:Spec Ω→S a geometric point, and Q the strict-local neighbourhood geometry [def-weil-pbc-strict-local-neighbourhood-geometry]. Write g:S_(s)→S, p:X×_S S_(s)→X, and f′:X×_S S_(s)→S_(s). For a pointed neighbourhood i, define b_i:f_* followed by sections on V_i → p^* followed by global sections to be restriction to S_(s) [lem-weil-pbc-strict-local-localized-hom-germ], followed by global sections of baseChangeMap [def-weil-pbc-underived-exchange], followed by lowerStarCompGlobalSectionsIso for f′. Then b_i equals sourceStageSectionsIso.hom [def-weil-pbc-strict-local-injective-source-comparison] followed by sectionsPullbackNat along Q.legs.app i and the inverse upperStarComp for p = Q.legs.app i ≫ t_i [lem-weil-pbc-injective-sections-pullback-comparison]. This is an equality of natural transformations on abelian etale sheaves on X, with the usual associators of functor composition.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03Q9, final injective-complex paragraph; details of the adjunction compatibility written by P1"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-local-injective-source-comparison",
+  "def-weil-pbc-strict-local-neighbourhood-geometry",
+  "def-weil-pbc-underived-exchange",
+  "lem-weil-pbc-strict-local-localized-hom-germ",
+  "lem-weil-pbc-injective-sections-pullback-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Reuse the complete proof in WeilConjectures.AlgebraicGeometry.StrictLocalUnderivedSectionsMate by public import, retaining the existing declarations under their original names. Its construction consistently uses Scheme.strictLocalization and Scheme.strictLocalizationToBase, matching the adopted restriction and neighbourhood geometry. Work componentwise on a sheaf F. Use unit_map_baseChangeMap_app, the pushforward-unit form of the mate, and naturality at the pointed neighbourhood section to replace the mate by the p-unit followed by the square pullback-pasting map. Terminal evaluation and lowerStarCompGlobalSectionsIso identify its terminal component with the pullback-site arrow psi into p^*V_i. These are proved by the private terminalEvaluation_map_eq_res_forAdjoint and lowerStarSections_eval helpers. The terminal-evaluation helper explicitly quantifies over any HasGlobalSectionsFunctor instance, so it applies to any chosen right adjoint, not only the terminal-object instance.",
+   "uses": [
     "def-weil-pbc-underived-exchange",
-    "lem-weil-pbc-strict-local-localized-hom-germ",
-    "lem-weil-pbc-injective-sections-pullback-comparison"
-  ],
-  "proof": [
-    {
-      "text": "Reuse the complete proof in WeilConjectures.AlgebraicGeometry.StrictLocalUnderivedSectionsMate by public import, retaining the existing declarations under their original names. Its construction consistently uses Scheme.strictLocalization and Scheme.strictLocalizationToBase, matching the adopted restriction and neighbourhood geometry. Work componentwise on a sheaf F. Use unit_map_baseChangeMap_app, the pushforward-unit form of the mate, and naturality at the pointed neighbourhood section to replace the mate by the p-unit followed by the square pullback-pasting map. Terminal evaluation and lowerStarCompGlobalSectionsIso identify its terminal component with the pullback-site arrow psi into p^*V_i. These are proved by the private terminalEvaluation_map_eq_res_forAdjoint and lowerStarSections_eval helpers. The terminal-evaluation helper explicitly quantifies over any HasGlobalSectionsFunctor instance, so it applies to any chosen right adjoint, not only the terminal-object instance.",
-      "uses": [
-        "def-weil-pbc-underived-exchange",
-        "lem-weil-pbc-strict-local-localized-hom-germ"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "The private restriction_unit and composition_unit helpers follow from adjunction uniqueness and upperStarComp_hom_app_unit_app. Combining them with terminal evaluation proves pointedSections_pullback: a section evaluated after the unit along an arbitrary map into an etale stage equals etaleObjectSectionsIso followed by globalSectionsUpperStarMap and the inverse upperStarComp. This is a complete proof, with no new postponed lemma.",
-      "uses": [
-        "lem-weil-pbc-etale-object-sections-base-change",
-        "lem-weil-pbc-inverse-image-composition"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "The first projection of psi into V_i times_S X is the strict-henselization cone leg composed with the second limit projection: compute pullback-pasting projections, use the defining pointed section, and apply Q.first. The second projection is p by the site-arrow equation and Q.over. Pullback extensionality therefore identifies it with Q.legs.app i. Apply pointedSections_pullback, identify the etale-object section iso with sourceStageSectionsIso by proof irrelevance, and identify globalSectionsUpperStarMap with sectionsPullbackNat using naturality of terminal evaluation. NatTrans.ext gives the stated equality.",
-      "uses": [
-        "def-weil-pbc-strict-local-injective-source-comparison",
-        "def-weil-pbc-strict-local-neighbourhood-geometry",
-        "lem-weil-pbc-injective-sections-pullback-comparison"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-weil-pbc-strict-local-injective-source-comparison",
-    "def-weil-pbc-strict-local-neighbourhood-geometry",
-    "def-weil-pbc-underived-exchange",
-    "lem-weil-pbc-etale-object-sections-base-change",
-    "lem-weil-pbc-injective-sections-pullback-comparison",
-    "lem-weil-pbc-inverse-image-composition",
     "lem-weil-pbc-strict-local-localized-hom-germ"
-  ],
-  "proof_origin": {
-    "by": "agent F1",
-    "document": "Stacks Project",
-    "place": "Tag 03Q9, final injective-complex paragraph; reuse the adopted source construction and complete pointed-section mate calculation, with the canonical strict-local model throughout. The mathematical argument and all seven proof dependencies are retained."
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "underived base change mate on sections is restriction along a pullback cone leg",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-13"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Underived base change mate evaluated on sections equals inverse image restriction along a pullback cone leg",
-      "results": "Scheme.Modules.conjugateEquiv_pullbackComp_inv and SheafOfModules conjugate equivalences; no statement on these etale section functors.",
-      "date": "2026-10-13"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction.unit",
-      "results": "unit_mateEquiv, unit_mateEquiv_symm, mateEquiv_apply, mateEquiv_symm_apply: generic formulas only.",
-      "date": "2026-10-13"
-    },
-    {
-      "tool": "grep",
-      "query": "sectionsPullbackNat|unit_map_baseChangeMap_app",
-      "results": "msearch: zero hits. Direct rg found sectionsPullbackNat in EtaleInjectiveSectionsComparison and unit_map_baseChangeMap_app in WeilConjectures.SixFunctors.BaseChange.Square; neither evaluates the pointed section. Blueprint search: zero matches for underived mate sections.",
-      "date": "2026-10-13"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.StrictLocalComplexSectionsMate",
-    "date": "2026-10-13",
-    "group": "P1"
+  {
+   "text": "The private restriction_unit and composition_unit helpers follow from adjunction uniqueness and upperStarComp_hom_app_unit_app. Combining them with terminal evaluation proves pointedSections_pullback: a section evaluated after the unit along an arbitrary map into an etale stage equals etaleObjectSectionsIso followed by globalSectionsUpperStarMap and the inverse upperStarComp. This is a complete proof, with no new postponed lemma.",
+   "uses": [
+    "lem-weil-pbc-etale-object-sections-base-change",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
   },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "prop-weil-pbc-strict-henselization-stalk-formula",
-      "place": "03Q9 final injective-complex paragraph: construct the map from neighbourhood sections and identify it with the derived base-change mate",
-      "via": [
-        "lem-weil-pbc-strict-local-injective-source-restriction",
-        "lem-weil-pbc-strict-local-injective-source-derived-restriction",
-        "lem-weil-pbc-strict-local-complex-sections-mate"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-prop-h2",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.StrictLocalUnderivedSectionsMate",
-    "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalUnderivedSectionsMate.lean",
-    "declaration": "AlgebraicGeometry.Etale.strictLocalUnderivedMateSections_eq",
-    "statement": "theorem strictLocalUnderivedMateSections_eq {X S : Scheme.{v}} (f : X ⟶ S)\n    {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)\n    (Q : StrictLocalNeighbourhoodGeometry f s)\n    (i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) :\n    strictLocalUnderivedMateSections f s i =\n      (sourceStageSectionsIso f s i).hom ≫\n        Functor.whiskerLeft\n          (upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app i))\n          (sectionsPullbackNat (Q.legs.app i)) ≫\n        (Functor.associator _ _ _).inv ≫\n        Functor.whiskerRight\n          (upperStarComp AddCommGrpCat.{v + 1} (Q.legs.app i)\n            ((strictLocalNeighbourhoodProjection f s).app i)\n            (pullback.fst f (Scheme.strictLocalizationToBase s)) (Q.over i).symm).inv\n          (Sheaf.Γ (pullback f (Scheme.strictLocalizationToBase s)).smallEtaleTopology\n            AddCommGrpCat.{v + 1})",
-    "branch": "sheaf-dag",
-    "by": "P1",
-    "date": "2026-10-13",
-    "note": "Restored compatibility module publicly re-exports WeilConjectures.AlgebraicGeometry.StrictLocalUnderivedSectionsMate. Both public names retain their unique adopted source implementation. The explicit strict-local model is now Scheme.strictLocalization with Scheme.strictLocalizationToBase, matching neighbourhood restriction and Q.legs; no mathematical dependency or attachment is withdrawn."
-  },
-  "reviewed": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "P1",
-    "result": "pass",
-    "landing": "20261013T025306-L-3424146",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-20",
-    "by": "L",
-    "reviewer": "C-5371c",
-    "group": "F1",
-    "result": "pass",
-    "landing": "20261020T163701-L-3785858",
-    "kind": "proof",
-    "note": "independent cc review: delivered re-export module vs quarantined Sheaf copy and the live WC StrictLocalUnderivedSectionsMate (only the strict-local model differs); node lean.statement vs #check through the delivered import (canonical strictLocalizationToBase); change record vs node diff"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "text": "The first projection of psi into V_i times_S X is the strict-henselization cone leg composed with the second limit projection: compute pullback-pasting projections, use the defining pointed section, and apply Q.first. The second projection is p by the site-arrow equation and Q.over. Pullback extensionality therefore identifies it with Q.legs.app i. Apply pointedSections_pullback, identify the etale-object section iso with sourceStageSectionsIso by proof irrelevance, and identify globalSectionsUpperStarMap with sectionsPullbackNat using naturality of terminal evaluation. NatTrans.ext gives the stated equality.",
+   "uses": [
+    "def-weil-pbc-strict-local-injective-source-comparison",
+    "def-weil-pbc-strict-local-neighbourhood-geometry",
+    "lem-weil-pbc-injective-sections-pullback-comparison"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-local-injective-source-comparison",
+  "def-weil-pbc-strict-local-neighbourhood-geometry",
+  "def-weil-pbc-underived-exchange",
+  "lem-weil-pbc-etale-object-sections-base-change",
+  "lem-weil-pbc-injective-sections-pullback-comparison",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-strict-local-localized-hom-germ"
+ ],
+ "proof_origin": {
+  "by": "agent F1",
+  "document": "Stacks Project",
+  "place": "Tag 03Q9, final injective-complex paragraph; reuse the adopted source construction and complete pointed-section mate calculation, with the canonical strict-local model throughout. The mathematical argument and all seven proof dependencies are retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "underived base change mate on sections is restriction along a pullback cone leg",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Underived base change mate evaluated on sections equals inverse image restriction along a pullback cone leg",
+   "results": "Scheme.Modules.conjugateEquiv_pullbackComp_inv and SheafOfModules conjugate equivalences; no statement on these etale section functors.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction.unit",
+   "results": "unit_mateEquiv, unit_mateEquiv_symm, mateEquiv_apply, mateEquiv_symm_apply: generic formulas only.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionsPullbackNat|unit_map_baseChangeMap_app",
+   "results": "msearch: zero hits. Direct rg found sectionsPullbackNat in EtaleInjectiveSectionsComparison and unit_map_baseChangeMap_app in WeilConjectures.SixFunctors.BaseChange.Square; neither evaluates the pointed section. Blueprint search: zero matches for underived mate sections.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalComplexSectionsMate",
+  "date": "2026-10-13",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "03Q9 final injective-complex paragraph: construct the map from neighbourhood sections and identify it with the derived base-change mate",
+   "via": [
+    "lem-weil-pbc-strict-local-injective-source-restriction",
+    "lem-weil-pbc-strict-local-injective-source-derived-restriction",
+    "lem-weil-pbc-strict-local-complex-sections-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalUnderivedSectionsMate",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalSmallModel/StrictLocalUnderivedSectionsMate.lean",
+  "declaration": "AlgebraicGeometry.Etale.smallModel_strictLocalUnderivedMateSections_eq",
+  "statement": "theorem smallModel_strictLocalUnderivedMateSections_eq {X S : Scheme.{v}} (f : X ⟶ S) {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (Q : StrictLocalNeighbourhoodGeometry f s) (i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) : smallModel_strictLocalUnderivedMateSections f s i = (smallModel_sourceStageSectionsIso f s i).hom ≫ Functor.whiskerLeft (upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app i)) (sectionsPullbackNat (Q.legs.app i)) ≫ (Functor.associator _ _ _).inv ≫ Functor.whiskerRight (upperStarComp AddCommGrpCat.{v + 1} (Q.legs.app i) ((strictLocalNeighbourhoodProjection f s).app i) (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) (Q.over i).symm).inv (Sheaf.Γ (pullback f (Scheme.strictHenselizationStructuralMap s)).smallEtaleTopology AddCommGrpCat.{v + 1})",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-21",
+  "note": "Fully proved original small-colimit-model realization. The canonical upstream realization uses strictLocalization instead of strictHenselizationScheme and cannot be imported with the original Sheaf interfaces. Restores the proved StrictLocalSmallModel dependency chain previously landed in c03b8450536.",
+  "declarations": [
+   "AlgebraicGeometry.Etale.smallModel_strictLocalUnderivedMateSections",
+   "AlgebraicGeometry.Etale.smallModel_strictLocalUnderivedMateSections_eq"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T025306-L-3424146",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261020T233100-L-891847",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

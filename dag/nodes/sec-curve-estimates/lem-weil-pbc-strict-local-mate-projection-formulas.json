@@ -1,135 +1,137 @@
 {
-  "id": "lem-weil-pbc-strict-local-mate-projection-formulas",
-  "kind": "statement",
-  "title": "StrictLocalMateProjectionFormulas",
-  "statement": "For every f:X→S, geometric point s, K in D⁺(Ab(X_et)), integer n, and Q as in [def-weil-pbc-strict-local-neighbourhood-geometry], stage hypercohomology identifications compatible with neighbourhood transitions and the canonical mate projection restrictions exist [def-weil-pbc-strict-local-mate-projection-data]. No colimit or invertibility assertion is made.",
-  "source": {
-    "document": "Stacks Project",
-    "place": "Tags 03Q9, 03Q8 and 0BKV; neighbourhood colimit and final injective-complex paragraph"
+ "id": "lem-weil-pbc-strict-local-mate-projection-formulas",
+ "kind": "statement",
+ "title": "StrictLocalMateProjectionFormulas",
+ "statement": "For every f:X→S, geometric point s, K in D⁺(Ab(X_et)), integer n, and Q as in [def-weil-pbc-strict-local-neighbourhood-geometry], stage hypercohomology identifications compatible with neighbourhood transitions and the canonical mate projection restrictions exist [def-weil-pbc-strict-local-mate-projection-data]. No colimit or invertibility assertion is made.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03Q9, 03Q8 and 0BKV; neighbourhood colimit and final injective-complex paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-local-mate-projection-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose an injective representative J of K with the existing Mathlib theorem, and pass its isomorphism through the bounded-below inclusion.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [
-    "def-weil-pbc-strict-local-mate-projection-data"
-  ],
-  "proof": [
-    {
-      "text": "Choose an injective representative J of K with the existing Mathlib theorem, and pass its isomorphism through the bounded-below inclusion.",
-      "uses": [
-        "lem-weil-pbc-dplus-injective-representative"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Obtain source-to-termwise-sections isomorphisms A and their transition and mate-restriction formulas on J.",
-      "uses": [
-        "lem-weil-pbc-strict-local-injective-source-sections"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Obtain invertible canonical termwise-sections-to-hypercohomology comparisons c_i and their transition and projection squares. Define e_i as A_i followed by asIso c_i. Substitute the squares and cancel c_i followed by its inverse to prove transitions. Precompose the projection square with A_i and postcompose with the inverse strict-local target isomorphism to prove restriction. Assemble StrictLocalMateProjectionData.",
-      "uses": [
-        "lem-weil-pbc-injective-sections-pullback-comparison",
-        "lem-weil-pbc-strict-local-injective-source-sections"
-      ],
-      "elementary": true
-    }
-  ],
-  "proof_deps": [
-    "lem-weil-pbc-dplus-injective-representative",
+  {
+   "text": "Obtain source-to-termwise-sections isomorphisms A and their transition and mate-restriction formulas on J.",
+   "uses": [
+    "lem-weil-pbc-strict-local-injective-source-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain invertible canonical termwise-sections-to-hypercohomology comparisons c_i and their transition and projection squares. Define e_i as A_i followed by asIso c_i. Substitute the squares and cancel c_i followed by its inverse to prove transitions. Precompose the projection square with A_i and postcompose with the inverse strict-local target isomorphism to prove restriction. Assemble StrictLocalMateProjectionData.",
+   "uses": [
     "lem-weil-pbc-injective-sections-pullback-comparison",
     "lem-weil-pbc-strict-local-injective-source-sections"
-  ],
-  "proof_origin": {
-    "by": "E3 following document",
-    "document": "Stacks Project",
-    "place": "Tag 03Q9 final injective-complex paragraph, decomposition into source computation and target comparison; Lean assembly by composition and cancellation"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "Derived cohomology germs and strict-local neighbourhood projection restriction",
-      "results": "Service unavailable: Internal Server Error; no verdict based on this service.",
-      "date": "2026-10-12"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Geometric stalk of higher direct image as colimit of cohomology of affine etale neighbourhoods with restriction map to strict henselization",
-      "results": "Eight results about structure-sheaf stalks and ordinary module pullback; none realizes these abelian derived-section maps. Loogle presheafToSheaf, homology and IsPullback, IsAffineHom queries returned no hits.",
-      "date": "2026-10-12",
-      "verdict": "No exact match."
-    },
-    {
-      "tool": "grep",
-      "query": "homology.*sheaf|sheaf.*homology|mate.*section|IsAffineHom.*pullback",
-      "results": "Mathlib has general stalk and pullback infrastructure, but no strict-local derived mate or the canonical derived Hom-to-germ comparison. The existing AbelianHigherDirectImagePresheaf has private definitions of the comparison, inaccessible from another module.",
-      "date": "2026-10-12",
-      "verdict": "No existing public declaration for this part."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.StrictLocalMateContinuityPresentation",
-    "date": "2026-10-12",
-    "group": "G2"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "prop-weil-pbc-strict-henselization-stalk-formula",
-      "place": "03Q9 neighbourhood colimit and final injective-complex restriction paragraph",
-      "via": [
-        "lem-weil-pbc-strict-local-mate-continuity-presentation",
-        "lem-weil-pbc-strict-local-base-change-global-homology"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-prop-h2",
-  "lean": {
-    "existing": false,
-    "module": "WeilConjectures.AlgebraicGeometry.StrictLocalMateProjectionFormulas",
-    "file": "lean/WeilConjectures/AlgebraicGeometry/StrictLocalMateProjectionFormulas.lean",
-    "declaration": "AlgebraicGeometry.Etale.nonempty_strictLocalMateProjectionData",
-    "declarations": [
-      "AlgebraicGeometry.Etale.nonempty_strictLocalMateProjectionData"
-    ],
-    "statement": "theorem nonempty_strictLocalMateProjectionData {X S : Scheme.{v}} (f : X ⟶ S) {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1})) (n : ℤ) (Q : StrictLocalNeighbourhoodGeometry f s) : Nonempty (StrictLocalMateProjectionData f s K n Q)",
-    "branch": "sheaf-dag",
-    "by": "G2",
-    "date": "2026-10-12"
-  },
-  "reviewed": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "G2",
-    "result": "pass",
-    "landing": "20261012T085242-L-16042",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "X-a40cd",
-    "group": "E3",
-    "result": "pass",
-    "landing": "20261012T144105-L-2092764",
-    "kind": "interface"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+   ],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-injective-sections-pullback-comparison",
+  "lem-weil-pbc-strict-local-injective-source-sections"
+ ],
+ "proof_origin": {
+  "by": "E3 following document",
+  "document": "Stacks Project",
+  "place": "Tag 03Q9 final injective-complex paragraph, decomposition into source computation and target comparison; Lean assembly by composition and cancellation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived cohomology germs and strict-local neighbourhood projection restriction",
+   "results": "Service unavailable: Internal Server Error; no verdict based on this service.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric stalk of higher direct image as colimit of cohomology of affine etale neighbourhoods with restriction map to strict henselization",
+   "results": "Eight results about structure-sheaf stalks and ordinary module pullback; none realizes these abelian derived-section maps. Loogle presheafToSheaf, homology and IsPullback, IsAffineHom queries returned no hits.",
+   "date": "2026-10-12",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*sheaf|sheaf.*homology|mate.*section|IsAffineHom.*pullback",
+   "results": "Mathlib has general stalk and pullback infrastructure, but no strict-local derived mate or the canonical derived Hom-to-germ comparison. The existing AbelianHigherDirectImagePresheaf has private definitions of the comparison, inaccessible from another module.",
+   "date": "2026-10-12",
+   "verdict": "No existing public declaration for this part."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalMateContinuityPresentation",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "03Q9 neighbourhood colimit and final injective-complex restriction paragraph",
+   "via": [
+    "lem-weil-pbc-strict-local-mate-continuity-presentation",
+    "lem-weil-pbc-strict-local-base-change-global-homology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalMateProjectionFormulas",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalSmallModel/StrictLocalMateProjectionFormulas.lean",
+  "declaration": "AlgebraicGeometry.Etale.smallModel_nonempty_strictLocalMateProjectionData",
+  "declarations": [
+   "AlgebraicGeometry.Etale.smallModel_nonempty_strictLocalMateProjectionData"
+  ],
+  "statement": "theorem smallModel_nonempty_strictLocalMateProjectionData {X S : Scheme.{v}} (f : X ⟶ S) {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1})) (n : ℤ) (Q : StrictLocalNeighbourhoodGeometry f s) : Nonempty (StrictLocalMateProjectionData f s K n Q)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-21",
+  "note": "Fully proved original small-colimit-model realization. The canonical upstream realization uses strictLocalization instead of strictHenselizationScheme and cannot be imported with the original Sheaf interfaces. Restores the proved StrictLocalSmallModel dependency chain previously landed in c03b8450536."
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T085242-L-16042",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261020T233100-L-891847",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }
