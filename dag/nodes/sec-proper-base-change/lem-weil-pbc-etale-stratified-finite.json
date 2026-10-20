@@ -1,186 +1,187 @@
 {
-  "id": "lem-weil-pbc-etale-stratified-finite",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lemma-weil-pbc-h1-constructible-representation",
-      "place": "step 2 of its split (source: Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, second paragraph, 'By Lemmas 03SA (lemma-torsion-colimit-constructible) and 03Q5 (lemma-colimit) we can find a map F -> I with F a constructible sheaf of Z/lZ-modules')",
-      "via": [
-        "lem-weil-pbc-etale-free-sheaf-constructible",
-        "lem-weil-pbc-constructible-generation",
-        "lem-weil-pbc-module-sheaf-colimit-constructible"
-      ]
-    },
-    "same_as": null
+ "id": "lem-weil-pbc-etale-stratified-finite",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "step 2 of its split (source: Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, second paragraph, 'By Lemmas 03SA (lemma-torsion-colimit-constructible) and 03Q5 (lemma-colimit) we can find a map F -> I with F a constructible sheaf of Z/lZ-modules')",
+   "via": [
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "lem-weil-pbc-constructible-generation",
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ]
   },
-  "kind": "statement",
-  "title": "Etale morphisms become finite etale on a constructible stratification",
-  "statement": "Let $X$ be a quasi-compact and quasi-separated scheme [def-weil-pbc-scheme-conventions], and let $j:U\\to X$ be an etale morphism [def-weil-etale-morphism] with $U$ quasi-compact and quasi-separated. Then there exists a finite partition $X=\\coprod_i X_i$ by constructible locally closed subschemes [def-weil-constructible-subset], forming a stratification [def-constructible-stratification], such that each base change $U_i:=U\\times_X X_i\\to X_i$ is finite etale [def-weil-pbc-finite-etale-category]. The fibre products are those of [def-pc-fibre-product]. This is Stacks Project Lemma Tag 03S0 (lemma-etale-stratified-finite).",
-  "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Lemma Tag 03S0 (lemma-etale-stratified-finite), line 12034"
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Etale morphisms become finite etale on a constructible stratification",
+ "statement": "Let $X$ be a quasi-compact and quasi-separated scheme [def-weil-pbc-scheme-conventions], and let $j:U\\to X$ be an etale morphism [def-weil-etale-morphism] with $U$ quasi-compact and quasi-separated. Then there exists a finite partition $X=\\coprod_i X_i$ by constructible locally closed subschemes [def-weil-constructible-subset], forming a stratification [def-constructible-stratification], such that each base change $U_i:=U\\times_X X_i\\to X_i$ is finite etale [def-weil-pbc-finite-etale-category]. The fibre products are those of [def-pc-fibre-product]. This is Stacks Project Lemma Tag 03S0 (lemma-etale-stratified-finite).",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Lemma Tag 03S0 (lemma-etale-stratified-finite), line 12034"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-etale-morphism",
+  "def-weil-constructible-subset",
+  "def-weil-pbc-finite-etale-category",
+  "def-pc-fibre-product",
+  "def-constructible-stratification"
+ ],
+ "proof": [
+  {
+   "text": "Choose finite affine open covers of U and X using Mathlib Scheme.OpenCover.finiteSubcover on the canonical affine cover, take opensRange of the cover maps, and reindex by Fin using Fintype.equivFin.",
+   "uses": [],
+   "elementary": true
   },
-  "stmt_deps": [
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-etale-morphism",
-    "def-weil-constructible-subset",
-    "def-weil-pbc-finite-etale-category",
-    "def-pc-fibre-product",
-    "def-constructible-stratification"
-  ],
-  "proof": [
-    {
-      "text": "Choose finite affine open covers of U and X using Mathlib Scheme.OpenCover.finiteSubcover on the canonical affine cover, take opensRange of the cover maps, and reindex by Fin using Fintype.equivFin.",
-      "uses": [],
-      "elementary": true
-    },
-    {
-      "text": "Over an affine base apply exists_etale_affine_cover_stratification to the finite affine cover of U. Keep its immersed constructible affine partition and the separatedness of the pullbacks.",
-      "uses": [
-        "lem-weil-pbc-etale-affine-cover-gluing"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "For each affine piece, apply exists_etale_separated_stratified_finite to the separated etale quasi-compact pullback. Assemble the resulting local stratifications with exists_stratification_of_stratified_partition, using the predicate that the pullback of j is finite etale. The inverse of pullbackLeftPullbackSndIso identifies the iterated and composite pullback projections, and finite and etale properties are invariant under this isomorphism.",
-      "uses": [
-        "lem-weil-pbc-etale-separated-stratified-finite",
-        "lem-weil-pbc-constructible-stratification-assembly",
-        "def-pc-fibre-product"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Apply the affine result to the pullback of j to each affine open in the finite cover of X. Compactness follows from quasi-compact base change, and quasi-separatedness from quasi-separated base change. Pullback pasting identifies each local projection with the pullback of j along the composite stratum immersion into X. Apply exists_constructible_stratification_finite_etale_of_affine_local.",
-      "uses": [
-        "lem-weil-pbc-etale-stratification-local-gluing",
-        "def-pc-fibre-product"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-pc-fibre-product",
-    "lem-weil-pbc-constructible-stratification-assembly",
-    "lem-weil-pbc-etale-affine-cover-gluing",
+  {
+   "text": "Over an affine base apply exists_etale_affine_cover_stratification to the finite affine cover of U. Keep its immersed constructible affine partition and the separatedness of the pullbacks.",
+   "uses": [
+    "lem-weil-pbc-etale-affine-cover-gluing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each affine piece, apply exists_etale_separated_stratified_finite to the separated etale quasi-compact pullback. Assemble the resulting local stratifications with exists_stratification_of_stratified_partition, using the predicate that the pullback of j is finite etale. The inverse of pullbackLeftPullbackSndIso identifies the iterated and composite pullback projections, and finite and etale properties are invariant under this isomorphism.",
+   "uses": [
     "lem-weil-pbc-etale-separated-stratified-finite",
-    "lem-weil-pbc-etale-stratification-local-gluing"
-  ],
-  "proof_origin": {
-    "by": "document",
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03S0, proof (finite affine-cover reduction, separated affine pieces, final refinement, locality); implemented by U2 on 2026-10-12, with assembly proved using Tag 09YJ."
+    "lem-weil-pbc-constructible-stratification-assembly",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "etale morphism quasi-compact quasi-separated constructible stratification finite etale",
-      "results": "No theorem about stratifying an etale morphism into finite etale pieces; only general etale and constructible-set declarations.",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "|- IsEtale f -> _ finite etale stratification",
-      "results": "No matching declaration; results concern Algebra.IsEtale and finite etale algebras.",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "rg -n -i 'stratified.*finite|finite.*stratification|constructible.*etale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology",
-      "results": "No statement of this scheme-theoretic stratification theorem.",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "lem-weil-pbc-etale-free-sheaf-constructible",
-    "date": "2026-10-10"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "split_report": {
-    "date": "2026-10-10",
-    "item": "lem-weil-pbc-etale-stratified-finite",
-    "worker": "stage1",
-    "summary": "Split Tag 03S9 into the separated case (More on Morphisms 07RZ), the finite affine chart and overlap gluing reduction on an affine base, and a final separated-case refinement. The proof explicitly records base change, common refinement, affine refinement, and the finite-etale gluing argument; two reusable non-Mathlib statements were created with three kinds of Mathlib searches each."
-  },
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "group": "F1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: 4th delivery meets the third return: the locality node is now a concrete statement, the separated case (07RZ) and the affine-cover gluing have Stacks places. Route along 03S9 correct (separated case, charts and overlaps over an affine base with common refinement and affine strata, separatedness of the glued piece, locality over a finite affine cover). Stage-3 note: lem-weil-pbc-etale-affine-cover-gluing packages the whole of step 2; the reusable content is the gluing lemma 'a finite open cover whose pairwise intersections are proper over X makes U -> X separated'. Proof-hint sentence removed from the locality node by L after merge."
-  },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.EtaleStratifiedFinite",
-    "declaration": "AlgebraicGeometry.Scheme.exists_etale_stratified_finite",
-    "file": "lean/Sheaf/AlgebraicGeometry/EtaleStratifiedFinite.lean",
-    "statement": "theorem exists_etale_stratified_finite {X U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace U] [QuasiSeparatedSpace U] (j : U ⟶ X) [Etale j] : ∃ S : Stratification X, (∀ i : Fin S.n, Topology.IsConstructible (S.stratum i)) ∧ (∀ i : Fin S.n, IsFinite (pullback.snd j (S.immersion i)) ∧ Etale (pullback.snd j (S.immersion i)))",
-    "branch": "sheaf-dag",
-    "by": "F1",
-    "date": "2026-10-11",
-    "existing": false
-  },
-  "reviewed_lean": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "R-esf1002",
-    "group": "F1",
-    "result": "pass",
-    "note": "X,U qcqs as CompactSpace+QuasiSeparatedSpace; j etale, no separatedness; finite partition by locally closed subschemes = LocallyClosedStratification X (landed def-constructible-stratification, same form as IsConstructibleEtaleModuleSheaf); constructible strata = Topology.IsConstructible (S.stratum i); U_i -> X_i = pullback.snd j (S.immersion i), IsFinite ∧ Etale; n=0/empty U fine; tag 03S0 checked in tags file; names #check'd (IsFinite/Etale rfl to AlgebraicGeometry.*)",
-    "statement_corrected": true
-  },
-  "statement_change": {
-    "date": "2026-10-11",
-    "by": "F1 stage 2",
-    "old_statement": "Let $X$ be a quasi-compact and quasi-separated scheme [def-weil-pbc-scheme-conventions], and let $j:U\\to X$ be an etale morphism [def-weil-etale-morphism] with $U$ quasi-compact and quasi-separated. Then there exists a finite partition $X=\\coprod_i X_i$ by constructible locally closed subschemes [def-weil-constructible-subset] such that each base change $U_i:=U\\times_X X_i\\to X_i$ is finite etale [def-weil-pbc-finite-etale-category]. The fibre products are those of [def-pc-fibre-product]. This is Stacks Project Lemma Tag 03S9 (lemma-etale-stratified-finite).",
-    "what": "The named lemma-etale-stratified-finite is Stacks Tag 03S0, not 03S9. Correct that erroneous citation; explicitly cite the already landed finite scheme-stratification notion used to render the partition. No mathematical hypothesis or conclusion changes.",
-    "source": {
-      "document": "Stacks Project, Etale Cohomology",
-      "place": "Tag 03S0, Lemma 59.72.1 (lemma-etale-stratified-finite), https://stacks.math.columbia.edu/tag/03S0"
-    },
-    "citers": [
-      {
-        "id": "lem-weil-pbc-etale-free-sheaf-constructible",
-        "holds": true,
-        "note": "Only the citation tag is corrected and the existing partition notion is cited explicitly; the mathematical theorem and its application are unchanged."
-      }
-    ],
-    "old_stmt_deps": [
-      "def-weil-pbc-scheme-conventions",
-      "def-weil-etale-morphism",
-      "def-weil-constructible-subset",
-      "def-weil-pbc-finite-etale-category",
-      "def-pc-fibre-product"
-    ]
-  },
-  "lead_note": "2026-10-11 10:16 UTC L (via B-1015): source.place: Stacks tag 03S9 (no such tag) corrected to 03S0 (tags file: 03S0,etale-cohomology-lemma-etale-stratified-finite).",
-  "reviewed_proof": {
-    "date": "2026-10-20",
-    "by": "L",
-    "reviewer": "C-cfb1a",
-    "group": "F9",
-    "result": "pass",
-    "landing": "20261020T153004-L-2859933",
-    "kind": "interface",
-    "note": "independent cc review: 27 delivered consumers vs live sources with the alias→Stratification and import substitution applied (byte-identical); 12 node records vs live (only lean.statement/note respelled); 155-module sandbox (28 delivered + 67 direct importers + intermediates) all compiled"
+  {
+   "text": "Apply the affine result to the pullback of j to each affine open in the finite cover of X. Compactness follows from quasi-compact base change, and quasi-separatedness from quasi-separated base change. Pullback pasting identifies each local projection with the pullback of j along the composite stratum immersion into X. Apply exists_constructible_stratification_finite_etale_of_affine_local.",
+   "uses": [
+    "lem-weil-pbc-etale-stratification-local-gluing",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-constructible-stratification-assembly",
+  "lem-weil-pbc-etale-affine-cover-gluing",
+  "lem-weil-pbc-etale-separated-stratified-finite",
+  "lem-weil-pbc-etale-stratification-local-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03S0, proof (finite affine-cover reduction, separated affine pieces, final refinement, locality); implemented by U2 on 2026-10-12, with assembly proved using Tag 09YJ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale morphism quasi-compact quasi-separated constructible stratification finite etale",
+   "results": "No theorem about stratifying an etale morphism into finite etale pieces; only general etale and constructible-set declarations.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "|- IsEtale f -> _ finite etale stratification",
+   "results": "No matching declaration; results concern Algebra.IsEtale and finite etale algebras.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'stratified.*finite|finite.*stratification|constructible.*etale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology",
+   "results": "No statement of this scheme-theoretic stratification theorem.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-free-sheaf-constructible",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-stratified-finite",
+  "worker": "stage1",
+  "summary": "Split Tag 03S9 into the separated case (More on Morphisms 07RZ), the finite affine chart and overlap gluing reduction on an affine base, and a final separated-case refinement. The proof explicitly records base change, common refinement, affine refinement, and the finite-etale gluing argument; two reusable non-Mathlib statements were created with three kinds of Mathlib searches each."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: 4th delivery meets the third return: the locality node is now a concrete statement, the separated case (07RZ) and the affine-cover gluing have Stacks places. Route along 03S9 correct (separated case, charts and overlaps over an affine base with common refinement and affine strata, separatedness of the glued piece, locality over a finite affine cover). Stage-3 note: lem-weil-pbc-etale-affine-cover-gluing packages the whole of step 2; the reusable content is the gluing lemma 'a finite open cover whose pairwise intersections are proper over X makes U -> X separated'. Proof-hint sentence removed from the locality node by L after merge."
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.EtaleStratifiedFinite",
+  "declaration": "AlgebraicGeometry.Scheme.exists_etale_stratified_finite",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/EtaleStratifiedFinite.lean",
+  "statement": "theorem exists_etale_stratified_finite {X U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace U] [QuasiSeparatedSpace U] (j : U ⟶ X) [Etale j] : ∃ S : Stratification X, (∀ i : Fin S.n, Topology.IsConstructible (S.stratum i)) ∧ (∀ i : Fin S.n, IsFinite (pullback.snd j (S.immersion i)) ∧ Etale (pullback.snd j (S.immersion i)))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "2026-10-21 (B2): retire the duplicate Sheaf module; the upstream module is byte-identical from the module header, including the complete proof and all imports. The same declaration and proof dependencies remain available to all actual and quarantined DAG parents."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-esf1002",
+  "group": "F1",
+  "result": "pass",
+  "note": "X,U qcqs as CompactSpace+QuasiSeparatedSpace; j etale, no separatedness; finite partition by locally closed subschemes = LocallyClosedStratification X (landed def-constructible-stratification, same form as IsConstructibleEtaleModuleSheaf); constructible strata = Topology.IsConstructible (S.stratum i); U_i -> X_i = pullback.snd j (S.immersion i), IsFinite ∧ Etale; n=0/empty U fine; tag 03S0 checked in tags file; names #check'd (IsFinite/Etale rfl to AlgebraicGeometry.*)",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "F1 stage 2",
+  "old_statement": "Let $X$ be a quasi-compact and quasi-separated scheme [def-weil-pbc-scheme-conventions], and let $j:U\\to X$ be an etale morphism [def-weil-etale-morphism] with $U$ quasi-compact and quasi-separated. Then there exists a finite partition $X=\\coprod_i X_i$ by constructible locally closed subschemes [def-weil-constructible-subset] such that each base change $U_i:=U\\times_X X_i\\to X_i$ is finite etale [def-weil-pbc-finite-etale-category]. The fibre products are those of [def-pc-fibre-product]. This is Stacks Project Lemma Tag 03S9 (lemma-etale-stratified-finite).",
+  "what": "The named lemma-etale-stratified-finite is Stacks Tag 03S0, not 03S9. Correct that erroneous citation; explicitly cite the already landed finite scheme-stratification notion used to render the partition. No mathematical hypothesis or conclusion changes.",
+  "source": {
+   "document": "Stacks Project, Etale Cohomology",
+   "place": "Tag 03S0, Lemma 59.72.1 (lemma-etale-stratified-finite), https://stacks.math.columbia.edu/tag/03S0"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-etale-free-sheaf-constructible",
+    "holds": true,
+    "note": "Only the citation tag is corrected and the existing partition notion is cited explicitly; the mathematical theorem and its application are unchanged."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-scheme-conventions",
+   "def-weil-etale-morphism",
+   "def-weil-constructible-subset",
+   "def-weil-pbc-finite-etale-category",
+   "def-pc-fibre-product"
+  ]
+ },
+ "lead_note": "2026-10-11 10:16 UTC L (via B-1015): source.place: Stacks tag 03S9 (no such tag) corrected to 03S0 (tags file: 03S0,etale-cohomology-lemma-etale-stratified-finite).",
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-53484",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261020T235541-L-1188623",
+  "kind": "interface",
+  "note": "independent cc review: live Sheaf module vs WeilConjectures twin (identical from the module line); 5 adapted importers vs live (private import lines only); node lean record vs live (module/file/existing/note only); compile of the delivery and its 5 direct importers; #print axioms of the twin theorem"
+ }
 }

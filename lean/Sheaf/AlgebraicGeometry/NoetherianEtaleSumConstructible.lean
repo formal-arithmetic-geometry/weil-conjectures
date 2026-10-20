@@ -11,10 +11,9 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.RingTheory.Noetherian.Defs
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-import Sheaf.AlgebraicGeometry.EtaleStratifiedFinite
+import WeilConjectures.AlgebraicGeometry.EtaleStratifiedFinite
 import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale
-import Sheaf.AlgebraicGeometry.FiniteEtalePushforwardFiniteType
 
 /-!
 # Constructibility of etale sum extension with Noetherian coefficients

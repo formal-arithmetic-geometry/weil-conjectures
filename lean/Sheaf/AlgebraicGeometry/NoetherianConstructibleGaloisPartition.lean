@@ -16,7 +16,7 @@ import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
 import Sheaf.SixFunctors.GeometricInverseImageConstantModule
 import WeilConjectures.Mathlib.Topology.NoetherianSpace
 import WeilConjectures.ConstructibleSheaf.Refinement
-import Sheaf.AlgebraicGeometry.EtaleStratifiedFinite
+import WeilConjectures.AlgebraicGeometry.EtaleStratifiedFinite
 import WeilConjectures.ConstructibleSheaf.FiniteSetMonodromyTorsor
 import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
