@@ -67,52 +67,48 @@
    }
   },
   {
-   "text": "Represent $E$ by a K-injective complex $I$ of abelian sheaves on $Z$, using [prop-weil-pbc-kinjective-resolutions-exist] with $R=\\mathbf Z$. The recipes in [def-kun-projection-formula-map] and [def-kun-rgamma-unbounded] represent $GE$ by $S(h_*I)$ and $R\\Gamma_ZE$ by $\\Gamma(Z,I)$, respectively. The termwise equivalence in [lem-kun-geometric-point-derived-constants] identifies its counit with the termwise ordinary counit. By [lem-weil-pbc-termwise-adjunction-homotopy], ordinary counits also give the counits on homotopy categories. The right adjoints $h_*$ and $\\Gamma_Z$ preserve K-injectives by [lem-weil-pbc-right-adjoint-preserves-kinjective], since their left adjoints $h^{-1}$ and $C_Z$ are exact by the two adjunction definitions. Thus $h_*I$ and $\\Gamma_ZI$ are K-injective too. By [lem-weil-pbc-kinjective-hom-derived], all three Hom sets with these targets are computed on homotopy categories; consequently the canonical derived adjunctions in [def-kun-projection-formula-map] and [def-kun-constant-projection-morphism] have counits represented by the ordinary evaluation counits on $I$. For the constants adjunction one can also apply the Hom bijection directly on complexes and then localize: its exact left adjoint is the termwise constant functor, as specified in the latter definition. These are computations on a chosen resolution, not an assertion that ordinary sections is exact.",
+   "text": "Identify the transported left-derived adjunction for an exact left adjoint with mapDerivedCategoryRightDerivedAdjunction by equality of their units: precompose with Qh, compose with the exact-functor factorization, and apply derivedη_fac_app and leftDerivedFunctorIsoMapDerivedCategory_hom_fac. This also identifies the levelwise constant/stalk adjunction after transporting the right adjoint. The existing proved CompConjugate theorem rightDerivedFunctorCompIso'_hom_eq_conjugateEquiv then identifies beta with the derived ordinary conjugate of the pullback-of-constants comparison. Its proof uses the termwise adjunction and preservation of K-injectives; no chosen representative is needed here.",
    "uses": [
-    "prop-weil-pbc-kinjective-resolutions-exist",
-    "def-kun-projection-formula-map",
-    "def-kun-rgamma-unbounded",
-    "lem-kun-geometric-point-derived-constants",
     "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-kun-constant-projection-morphism",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-kun-geometric-point-derived-constants",
+    "def-kun-rgamma-unbounded"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6, lemma-adjoint; derived.tex Tags 070K (lemma-enough-K-injectives-implies), 070I (lemma-K-injective), and 08BJ (lemma-adjoint-preserve-K-injectives); canonical Hom bijections computed on K-injective targets."
+    "place": "Tag 07A6, lemma-adjoint, applied to the constant-section adjunction and h; the canonical adjunction identification implicit in etale-cohomology.tex Tag 0F0F, lemma-projection-formula-proper, reduction to geometric-fibre derived global sections."
    }
   },
   {
-   "text": "The inverses of Step 4's maps $\\rho_{h_*I^q}:\\Gamma(Z,I^q)\\xrightarrow{\\sim}S(h_*I^q)$ form a cochain isomorphism $b_I:S(h_*I)\\to\\Gamma(Z,I)$, since $\\rho$ is natural. Check the equation of Step 3 on this representative, in each degree. A constant element $a\\in S(h_*I^q)$ corresponds under $\\rho^{-1}$ to a unique section $t\\in(h_*I^q)(s)=I^q(Z)$. The normalized counit $C_sS(h_*I^q)\\to h_*I^q$ sends the constant $a$ to $t$: applying the faithful stalk functor gives $a$, by the counit normalization of [lem-kun-geometric-point-derived-constants] and the definition of $\\rho$. Pulling this map back and applying the $h$-counit evaluates the section $t$ on $Z$. The other side first uses the canonical $\\gamma$ of [lem-kun-pullback-constant], then $b_I$ to take $a$ to $t$, and then the constant-section counit, which evaluates the same section. Hence the two maps agree on constants and their restrictions, and therefore on their sheafifications [def-kun-constant-sheaf]. Step 5's counit models give the derived equation. The uniqueness assertion of [det-sp-unique-right-adjoint] now identifies the class of $b_I$ with $\\beta_E$.",
+   "text": "At the ordinary sheaf level, compute the germ as the uniqueness isomorphism between constantSheafΓAdj and the normalized constant/stalk adjunction. Use the fixed constant-germ unit, naturality of toSheafify, and the triangle identity of the constant/evaluation adjunction. Conjugation under composition and transport then identifies germ followed by the ordinary comparison with lowerStarCompGlobalSectionsIso. This is the normalization of Step 4 as an equality of natural maps, without choosing elements.",
    "uses": [
     "lem-kun-geometric-point-derived-constants",
-    "lem-kun-pullback-constant",
     "def-kun-constant-sheaf",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-global-sections-functor",
+    "def-weil-pbc-direct-image",
+    "lem-kun-pullback-constant",
     "det-sp-unique-right-adjoint"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6, lemma-adjoint; termwise evaluation calculation of the displayed counit identity, with sites.tex Tag 0H7J for evaluation of constant sections."
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JQ, lemma-equivalence-abelian-sheaves-point, with trivial Galois group; normalized constant-germ calculation using sites.tex Tag 0H7J, example-constant-sheaf."
    }
   },
   {
-   "text": "Now let $E=J[0]$ for a sheaf $J$ on $Z$. On a small representative of the etale site, [lem-weil-pbc-site-sheaves-enough-injectives] and [lem-weil-pbc-left-exact-injective-resolution-degree-zero](1) give an injective resolution $J[0]\\to I$ with $I^q=0$ for $q<0$. It is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective], so Step 6 applies. The additive left exactness of $h_*$ is part of [def-weil-pbc-direct-image]. Evaluation of sheaf morphisms at $Z$ preserves their pointwise sums, so sections is additive; being the right adjoint in [def-weil-pbc-global-sections-functor], preserves kernels by [lem-weil-pbc-right-adjoint-preserves-limits] (apply it to the finite kernel diagram). Thus [lem-weil-pbc-left-exact-injective-resolution-degree-zero](2) gives the augmentation identifications $\\mathcal H^0(h_*I)=h_*J$ and $\\mathcal H^0\\Gamma(Z,I)=J(Z)$. Exactness of $S$ [lem-kun-geometric-point-derived-constants] gives $\\mathcal H^0S(h_*I)=S(h_*J)$. Naturality of $\\rho$ for $h_*J\\to h_*I^0$ says that the square of the two augmentation maps with $\\rho_{h_*J}$ and $\\rho_{h_*I^0}$ commutes. Since the degree-zero boundaries are zero, passing to degree-zero kernels shows that $\\mathcal H^0(b_I)=\\rho_{h_*J}^{-1}$. This is precisely $S(h_*J)\\cong(h_*J)(s)=J(Z)$, inverse to the global-section-to-germ map, as required. The bounded-below resolution here only computes the normalization for a sheaf; Steps 1-6 apply to arbitrary unbounded $E$.",
+   "text": "Use the proved exact-right composition comparison rightDerivedFunctorCompMapDerivedCategoryIso_eq_viaRightDerived to express beta as the inverse direct exact-right composition comparison followed by rightDerivedFunctorNatIso of the ordinary comparison. Its defining unit equation, restricted to a single complex, gives compatibility with the canonical rightDerivedSingleUnit. Apply H0 and the generic normalization [lem-sbc-right-derived-single-zero-unit] to h_* and Gamma. Naturality of the exact stalk/homology comparison and its single-complex formula cancel the augmentation comparisons. The resulting map is the ordinary comparison from Step 6. Precompose with the germ map and use that step to obtain exactly the stated degree-zero identity.",
    "uses": [
+    "lem-sbc-right-derived-single-zero-unit",
     "lem-weil-pbc-site-sheaves-enough-injectives",
-    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-    "lem-weil-pbc-bounded-below-injectives-kinjective",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-global-sections-functor",
     "lem-weil-pbc-right-adjoint-preserves-limits",
     "lem-kun-geometric-point-derived-constants"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 013K, lemma-injective-resolutions-exist; 070J, lemma-bounded-below-injectives-K-injective; 05TD, lemma-left-exact-higher-derived (3); naturality of the augmentations and the germ map."
+    "place": "Tag 05TD; canonical derived-unit factorization and naturality of the single-complex and exact-functor homology comparisons."
    }
   }
  ],
@@ -126,20 +122,17 @@
   "def-weil-pbc-global-sections-functor",
   "def-kun-constant-sheaf",
   "def-weil-pbc-direct-image",
-  "prop-weil-pbc-kinjective-resolutions-exist",
-  "def-kun-rgamma-unbounded",
   "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-weil-pbc-kinjective-hom-derived",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "def-kun-rgamma-unbounded",
+  "lem-sbc-right-derived-single-zero-unit",
   "lem-weil-pbc-site-sheaves-enough-injectives",
-  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-  "lem-weil-pbc-bounded-below-injectives-kinjective",
   "lem-weil-pbc-right-adjoint-preserves-limits"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "agent P5",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 07A6 and the uniqueness-of-adjoints proof immediately following it; explicit normalized Hom, germ and counit calculations supplied by Q82 for the geometric-point reduction of etale-cohomology.tex Tag 0F0F."
+  "place": "Tag 07A6, the specified composite adjunction and uniqueness of right adjoints, with the constant-germ sheafification calculation (04JQ). Lean uses the proved source CompConjugate, DerivedExactCompositionComparison and RightDerivedSingleZeroUnit APIs to perform the resolution and augmentation calculations abstractly."
  },
  "mathlib_searches": [
   {
@@ -262,7 +255,6 @@
   ]
  },
  "tool_uses": [
-  "prop-weil-pbc-kinjective-resolutions-exist",
   "lem-weil-pbc-termwise-adjunction-homotopy",
   "lem-weil-pbc-right-adjoint-preserves-kinjective"
  ],
@@ -287,7 +279,9 @@
    "AlgebraicGeometry.Etale.geometricPointSectionsGerm",
    "AlgebraicGeometry.Etale.geometricPointSectionsImageH0Iso",
    "AlgebraicGeometry.Etale.geometricPointSectionsGlobalH0Iso",
-   "AlgebraicGeometry.Etale.geometricPoint_derivedSections_adjunction"
+   "AlgebraicGeometry.Etale.geometricPoint_derivedSections_adjunction",
+   "CategoryTheory.Functor.geometricSectionsSingleH0Iso",
+   "CategoryTheory.Functor.geometricSectionsExactSingleH0Iso"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/GeometricPointDerivedSectionsAdjunction.lean",
   "statement": "theorem geometricPoint_derivedSections_adjunction (Ω : Type u) [Field Ω] [IsAlgClosed Ω] {Z : Scheme.{u}} (h : Z ⟶ Spec (.of Ω)) : (∀ E : DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))), (geometricPointSectionsConstantsIso Ω h).hom.app (((lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h).rightDerivedFunctor ⋙ (geometricPointStalk Ω).mapDerivedCategory).obj E) ≫ (constantSheaf Z.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))).mapDerivedCategory.map ((geometricPointDerivedSectionsIso Ω h).hom.app E) ≫ (geometricPointSectionsConstantAdjunction Z).counit.app E = (upperStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h).mapDerivedCategory.map ((geometricPointSectionsStalkAdjunction Ω).mapDerivedCategoryAdjunction.counit.app ((lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h).rightDerivedFunctor.obj E)) ≫ (geometricPointSectionsImageAdjunction Ω h).counit.app E) ∧ (∀ G : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)), geometricPointSectionsGerm Ω ((lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h).obj G) ≫ (geometricPointSectionsImageH0Iso Ω h G).inv ≫ (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) 0).map ((geometricPointDerivedSectionsIso Ω h).hom.app ((DerivedCategory.singleFunctor _ 0).obj G)) ≫ (geometricPointSectionsGlobalH0Iso Z G).hom = (lowerStarCompGlobalSectionsIso (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h).hom.app G)",
@@ -304,5 +298,15 @@
   "group": "NO",
   "result": "pass",
   "note": "All clauses match the node via the recorded dependency declarations; no stronger hypotheses, and universes follow the dependencies' ModuleCat.{u+1}(ULift ℤ) encoding. β is rightAdjointUniq of the (stalk/constant ∘ inverse/direct-image) adjunction transported by the canonical upperStarConstantSheafIso comparison against the recorded constant/global-sections adjunction. The Classical.choice adjunction is uniquely determined because the dependency fixes its functors and unit. The degree-zero clause uses the real germ map and canonical H0 augmentation isos and is equivalent to H0β = inverse germ. Snapshot module compiled cleanly with nt_compile.py --json (12.5 s and 16.4 s, rc 0, no errors or warnings); a false probe showed errors are reported, and a probe proved the first conjunct from the definitions, confirming the counit orientation. One sorry; source and blueprint docstrings present; node changes only lean, statement verbatim; report sections present. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261020T132020-L-1402192",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
