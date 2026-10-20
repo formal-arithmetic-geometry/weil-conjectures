@@ -14,24 +14,9 @@ public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.AlgebraicGeometry.ProEtaleOperations
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import WeilConjectures.SixFunctors.OpenClosed.Stalk
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Sheaf.Paper.PbcCompletedPullbackActual
-import Sheaf.Paper.PbcActualScalarPullback
-import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
-import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import Mathlib.CategoryTheory.Sites.Point.Skyscraper
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.CategoryTheory.Triangulated.Pretriangulated
-import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.SixFunctors.ClosedProjectionEtale
+import Sheaf.SixFunctors.ClosedProjectionProEtale
+import Sheaf.CategoryTheory.RingedSiteDualityMaps
 
 /-!
 # Exceptional restriction of a Verdier dual
@@ -51,7 +36,159 @@ set_option autoImplicit false
 
 universe u
 
-open CategoryTheory CategoryTheory.Limits Opposite
+open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
+
+section FormalDuality
+
+universe a b v₁ v₂
+
+private noncomputable def costalkHomEquiv
+    {A : Type a} {B : Type b} [Category.{v₁} A] [Category.{v₂} B]
+    {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}
+    (SA : WeilConjectures.CoefficientClosedStructure HA)
+    (SB : WeilConjectures.CoefficientClosedStructure HB)
+    {L : A ⥤ B} {V : B ⥤ A} {E : A ⥤ B} (adj : V ⊣ E)
+    (p : ((𝟭 B).prod L) ⋙ SB.tensor ⋙ V ≅ (V.prod (𝟭 A)) ⋙ SA.tensor)
+    (O K : A) (N : B) :
+    (N ⟶ E.obj (HA.obj (op K, O))) ≃ (N ⟶ HB.obj (op (L.obj K), E.obj O)) := by
+  let e₁ := (adj.homEquiv N (HA.obj (op K, O))).symm
+  let e₂ := (SA.transpose (V.obj N) K O).symm
+  let e₃ := Iso.homCongr (p.app (N, K)).symm (Iso.refl O)
+  let e₄ := adj.homEquiv (SB.tensor.obj (N, L.obj K)) O
+  let e₅ := SB.transpose N (L.obj K) (E.obj O)
+  exact e₁.trans (e₂.trans (e₃.trans (e₄.trans e₅)))
+
+private theorem costalkTranspose_left
+    {D : Type a} [Category.{v₁} D] {H : Dᵒᵖ × D ⥤ D}
+    (S : WeilConjectures.CoefficientClosedStructure H)
+    {T T' P Q : D} (f : T' ⟶ T) (g : S.tensor.obj (T, P) ⟶ Q) :
+    S.transpose T' P Q (S.tensor.map (Prod.mkHom f (𝟙 P)) ≫ g) =
+      f ≫ S.transpose T P Q g := by
+  let _ := S.monoidal
+  dsimp only [WeilConjectures.CoefficientClosedStructure.transpose,
+    WeilConjectures.CoefficientClosedStructure.tensor, MonoidalCategory.tensor]
+  rw [MonoidalCategory.tensorHom_id]
+  exact (S.adjunction P).homEquiv_naturality_left f g
+
+private theorem costalkTranspose_source
+    {D : Type a} [Category.{v₁} D] {H : Dᵒᵖ × D ⥤ D}
+    (S : WeilConjectures.CoefficientClosedStructure H)
+    (T : D) {P P' Q : D} (f : P' ⟶ P) (g : S.tensor.obj (T, P) ⟶ Q) :
+    S.transpose T P' Q (S.tensor.map (Prod.mkHom (𝟙 T) f) ≫ g) =
+      S.transpose T P Q g ≫ H.map (Prod.mkHom f.op (𝟙 Q)) := by
+  let _ := S.monoidal
+  apply (S.transpose T P' Q).symm.injective
+  rw [Equiv.symm_apply_apply]
+  change _ = (tensorRight P').map
+    (S.transpose T P Q g ≫ H.map (Prod.mkHom f.op (𝟙 Q))) ≫ S.evaluation P' Q
+  rw [Functor.map_comp, Category.assoc]
+  change _ = (S.transpose T P Q g ▷ P') ≫
+    (H.map (Prod.mkHom f.op (𝟙 Q)) ▷ P') ≫ S.evaluation P' Q
+  rw [show (H.map (Prod.mkHom f.op (𝟙 Q)) ▷ P') ≫ S.evaluation P' Q =
+    (H.obj (op P, Q) ◁ f) ≫ S.evaluation P Q from S.evaluation_naturality P P' Q f]
+  rw [← Category.assoc, ← whisker_exchange, Category.assoc]
+  change _ = (T ◁ f) ≫ (S.transpose T P Q).symm (S.transpose T P Q g)
+  rw [Equiv.symm_apply_apply]
+  simp only [WeilConjectures.CoefficientClosedStructure.tensor, tensor_map, id_tensorHom]
+
+private theorem costalkHomEquiv_left
+    {A : Type a} {B : Type b} [Category.{v₁} A] [Category.{v₂} B]
+    {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}
+    (SA : WeilConjectures.CoefficientClosedStructure HA)
+    (SB : WeilConjectures.CoefficientClosedStructure HB)
+    {L : A ⥤ B} {V : B ⥤ A} {E : A ⥤ B} (adj : V ⊣ E)
+    (p : ((𝟭 B).prod L) ⋙ SB.tensor ⋙ V ≅ (V.prod (𝟭 A)) ⋙ SA.tensor)
+    (O : A)
+    (K : A) {N N' : B} (f : N' ⟶ N)
+    (g : N ⟶ E.obj (HA.obj (op K, O))) :
+    costalkHomEquiv SA SB adj p O K N' (f ≫ g) =
+      f ≫ costalkHomEquiv SA SB adj p O K N g := by
+  dsimp only [costalkHomEquiv, Equiv.trans_apply]
+  rw [adj.homEquiv_naturality_left_symm]
+  have hA := costalkTranspose_left SA (V.map f)
+    ((SA.transpose (V.obj N) K O).symm ((adj.homEquiv N _).symm g))
+  rw [Equiv.apply_symm_apply] at hA
+  rw [← hA, Equiv.symm_apply_apply]
+  dsimp only [Iso.homCongr, Iso.symm, Iso.refl]
+  simp only [Category.comp_id]
+  dsimp only [Equiv.coe_fn_mk]
+  simp only [← Category.assoc]
+  change SB.transpose N' (L.obj K) (E.obj O)
+    (adj.homEquiv _ _ ((p.hom.app (N', K) ≫
+      SA.tensor.map (Prod.mkHom (V.map f) (𝟙 K))) ≫ _)) = _
+  have hp := p.hom.naturality (Prod.mkHom f (𝟙 K))
+  dsimp only [Functor.comp_map, Functor.prod_map, Functor.id_map] at hp
+  rw [← hp, Category.assoc, L.map_id]
+  rw [adj.homEquiv_naturality_left]
+  exact costalkTranspose_left SB f _
+
+
+private theorem costalkHomEquiv_source
+    {A : Type a} {B : Type b} [Category.{v₁} A] [Category.{v₂} B]
+    {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}
+    (SA : WeilConjectures.CoefficientClosedStructure HA)
+    (SB : WeilConjectures.CoefficientClosedStructure HB)
+    {L : A ⥤ B} {V : B ⥤ A} {E : A ⥤ B} (adj : V ⊣ E)
+    (p : ((𝟭 B).prod L) ⋙ SB.tensor ⋙ V ≅ (V.prod (𝟭 A)) ⋙ SA.tensor)
+    (O : A)
+    {K K' : A} (f : K' ⟶ K) (N : B)
+    (g : N ⟶ E.obj (HA.obj (op K, O))) :
+    costalkHomEquiv SA SB adj p O K' N
+        (g ≫ E.map (HA.map (Prod.mkHom f.op (𝟙 O)))) =
+      costalkHomEquiv SA SB adj p O K N g ≫
+        HB.map (Prod.mkHom (L.map f).op (𝟙 (E.obj O))) := by
+  dsimp only [costalkHomEquiv, Equiv.trans_apply]
+  rw [adj.homEquiv_naturality_right_symm]
+  have hA := costalkTranspose_source SA (V.obj N) f
+    ((SA.transpose (V.obj N) K O).symm ((adj.homEquiv N _).symm g))
+  rw [Equiv.apply_symm_apply] at hA
+  rw [← hA, Equiv.symm_apply_apply]
+  dsimp only [Iso.homCongr, Iso.symm, Iso.refl]
+  simp only [Category.comp_id]
+  dsimp only [Equiv.coe_fn_mk]
+  simp only [← Category.assoc]
+  change SB.transpose N (L.obj K') (E.obj O)
+    (adj.homEquiv _ _ ((p.hom.app (N, K') ≫
+      SA.tensor.map (Prod.mkHom (𝟙 (V.obj N)) f)) ≫ _)) = _
+  have hp := p.hom.naturality (Prod.mkHom (𝟙 N) f)
+  dsimp only [Functor.comp_map, Functor.prod_map, Functor.id_map] at hp
+  rw [V.map_id] at hp
+  rw [← hp, Category.assoc, adj.homEquiv_naturality_left]
+  exact costalkTranspose_source SB N (L.map f) _
+
+private theorem costalkDualityOfProjection
+    {A : Type a} {B : Type b} [Category.{v₁} A] [Category.{v₂} B]
+    {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}
+    (SA : WeilConjectures.CoefficientClosedStructure HA)
+    (SB : WeilConjectures.CoefficientClosedStructure HB)
+    {L : A ⥤ B} {V : B ⥤ A} {E : A ⥤ B} (adj : V ⊣ E)
+    (p : ((𝟭 B).prod L) ⋙ SB.tensor ⋙ V ≅ (V.prod (𝟭 A)) ⋙ SA.tensor)
+    (O : A) :
+    Nonempty (((𝟭 Aᵒᵖ).prod' ((Functor.const _).obj O)) ⋙ HA ⋙ E ≅
+      L.op ⋙ ((𝟭 Bᵒᵖ).prod' ((Functor.const _).obj (E.obj O))) ⋙ HB) := by
+  let F := ((𝟭 Aᵒᵖ).prod' ((Functor.const _).obj O)) ⋙ HA ⋙ E
+  let G := L.op ⋙ ((𝟭 Bᵒᵖ).prod' ((Functor.const _).obj (E.obj O))) ⋙ HB
+  let e (K : Aᵒᵖ) (N : B) := costalkHomEquiv SA SB adj p O K.unop N
+  have hn (K : Aᵒᵖ) {N N' : B} (f : N' ⟶ N) (g : N ⟶ F.obj K) :
+      e K N' (f ≫ g) = f ≫ e K N g := costalkHomEquiv_left SA SB adj p O _ f g
+  let c (K : Aᵒᵖ) : F.obj K ≅ G.obj K :=
+    Yoneda.ext _ _ (fun {N} ↦ e K N) (fun {N} ↦ (e K N).symm)
+      (fun _ ↦ (e K _).symm_apply_apply _) (fun _ ↦ (e K _).apply_symm_apply _)
+      (fun f g ↦ hn K f g)
+  have hc (K : Aᵒᵖ) (N : B) (g : N ⟶ F.obj K) :
+      g ≫ (c K).hom = e K N g := by
+    change g ≫ e K (F.obj K) (𝟙 _) = e K N g
+    simpa using (hn K g (𝟙 _)).symm
+  refine ⟨NatIso.ofComponents c ?_⟩
+  intro K K' f
+  rw [hc]
+  change e K' (F.obj K) (F.map f) =
+    e K (F.obj K) (𝟙 _) ≫ G.map f
+  simpa [e, F, G] using
+    costalkHomEquiv_source SA SB adj p O f.unop (F.obj K) (𝟙 _)
+
+
+end FormalDuality
 
 namespace AlgebraicGeometry.Scheme
 
@@ -115,6 +252,8 @@ noncomputable instance closedCostalkEtaleModulePush_additive {X Y : Scheme.{u}}
     (closedCostalkEtaleModulePush f R).Additive where
   map_add := by intros; rfl
 
+-- The recorded open-complement coefficient is intentionally unused in the conclusion.
+set_option linter.unusedVariables false in
 /-- Exceptional restriction of derived internal Hom, on the small etale site.
 The underived inverse image is specified by its adjunction to the actual module
 pushforward; the two factorization isomorphisms specify termwise descent through Q.
@@ -141,7 +280,11 @@ identity, the exceptional adjunction again, and tensor-Hom. This identifies
 Hom(N,Ri! RHom(K,omega)) with Hom(N,RHom(i^*K,Ri!omega)).
 6. These bijections are natural in N and K. Their values on identities and their
 inverse values on identities give mutually inverse Yoneda maps, natural in K.
-All arrows are induced by adjunction and evaluation, as in the source. -/
+All arrows are induced by adjunction and evaluation, as in the source.
+
+The Lean proof uses the normalized closed tensor-Hom model for step 4, and delegates
+steps 1--3 to closedImmersionEtaleProjection. The Hom-chain naturality and Yoneda
+construction in steps 5--6 are proved directly in this module. -/
 theorem exceptionalRestrictionVerdierDuality_etale
     {T Z U : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i]
     (j : U ⟶ T) [IsOpenImmersion j]
@@ -171,8 +314,18 @@ theorem exceptionalRestrictionVerdierDuality_etale
       iPull.op ⋙ ((𝟭 _).prod' ((Functor.const _).obj (riExcl.obj ωT))) ⋙
         derivedInternalHomOfUniverses.{u + 1, u, 0, u + 2} Z.smallEtaleTopology
           ((closedCostalkEtaleRingPullback i).obj R)) := by
-  sorry
+  intro ΛU
+  clear ΛU
+  obtain ⟨t⟩ := ringedSiteDualityMaps_exists.{u + 1, u, 0, u + 2}
+    T.smallEtaleTopology R
+  obtain ⟨z⟩ := ringedSiteDualityMaps_exists.{u + 1, u, 0, u + 2}
+    Z.smallEtaleTopology ((closedCostalkEtaleRingPullback i).obj R)
+  obtain ⟨p⟩ := closedImmersionEtaleProjection i j _hij R iStar _ai iPull
+    _pullFactors iPush _pushFactors t z
+  exact costalkDualityOfProjection t.closed z.closed _adj p ωT
 
+-- The recorded open-complement coefficient is intentionally unused in the conclusion.
+set_option linter.unusedVariables false in
 /-- Exceptional restriction of a Verdier dual, on the small pro-etale site.
 Here the open complement is quasi-compact, as required for the ringed recollement.
 The coefficient ring on Z is exactly the actual inverse image of R; its identification
@@ -189,7 +342,11 @@ Its quasi-compact-complement hypothesis is supplied by j. The closed counit and 
 open-closed exact sequence give joint detection, so the projection map is invertible
 on arbitrary unbounded complexes. The ringed tensor-Hom and global-Hom comparisons
 and the assumed ambient exceptional adjunction give the same natural Hom chain.
-Yoneda gives the natural isomorphism, without a biduality or Tor bound. -/
+Yoneda gives the natural isomorphism, without a biduality or Tor bound.
+
+The Lean proof uses the normalized closed tensor-Hom model and the separate
+closedImmersionProEtaleProjection statement. The Hom-chain and both naturality
+checks are the same proved categorical argument as on the etale site. -/
 theorem exceptionalRestrictionVerdierDuality
     {T Z U : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i]
     (j : U ⟶ T) [IsOpenImmersion j] [QuasiCompact j]
@@ -210,6 +367,13 @@ theorem exceptionalRestrictionVerdierDuality
       ((𝟭 _).prod' ((Functor.const _).obj (riExcl.obj ωT))) ⋙
         derivedInternalHomOfUniverses.{u + 1, u, 0, u + 2} (ProEt.topology Z)
           ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R)) := by
-  sorry
+  intro ΛU
+  clear ΛU
+  obtain ⟨t⟩ := ringedSiteDualityMaps_exists.{u + 1, u, 0, u + 2}
+    (ProEt.topology T) R
+  obtain ⟨z⟩ := ringedSiteDualityMaps_exists.{u + 1, u, 0, u + 2}
+    (ProEt.topology Z) ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R)
+  obtain ⟨p⟩ := closedImmersionProEtaleProjection i j _hij R t z
+  exact costalkDualityOfProjection t.closed z.closed _adj p ωT
 
 end AlgebraicGeometry.Scheme

@@ -1,0 +1,188 @@
+{
+ "id": "lem-sf-etale-closed-projection-unbounded",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-closed-costalk-duality",
+   "place": "Proof, middle projection identity for a closed immersion, justified by exact fully faithful extension by zero and flat resolutions. Small etale case.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Unbounded closed projection with arbitrary etale ring sheaves",
+ "statement": "Let i:Z→T be a closed immersion of schemes [def-weil-closed-immersion], and j:U→T its complementary open immersion; use the small etale sites [def-weil-pbc-etale-site]. Let R be any sheaf of commutative rings on T, and RZ its actual inverse image on Z. Use ordinary unbounded derived categories of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Let iStar be any additive left adjoint to actual sectionwise module direct image, and let iPull,iPush be functors identified with their termwise complex functors by natural Q-factorization isomorphisms. For any normalized ringed-site duality models t on (T,R) and z on (Z,RZ) [def-zl-ringed-site-duality-model], there is an isomorphism of bifunctors on D(Z)×D(T), natural in both variables:\n\n iPush(N tensor_z iPull(K)) ≅ iPush(N) tensor_t K.\n\nThere is no exceptional adjoint, dualizing object, boundedness, constructibility or Tor-amplitude condition in this statement.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-weil-closed-costalk-duality.proof.md",
+  "place": "Middle projection identity, expanded by closed counit and open-closed detection"
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-zl-ringed-site-duality-model"
+ ],
+ "proof": [
+  {
+   "text": "For a closed immersion, IsFinite is automatic. Apply the already proved finite etale direct-image exactness [lemma-weil-pbc-finite-direct-image-exact] with AddCommGrpCat coefficients. The actual module pushforward followed by forgetting its coefficient action is definitionally the source module forgetful functor followed by this abelian-sheaf direct image. Module forgetful functors preserve finite colimits [lem-weil-pbc-module-sheaves-colimits-forgetful] and reflect them, since they preserve colimits and reflect isomorphisms. Thus the actual module pushforward preserves finite colimits. This entire coefficient-action argument is Lean-proved in the private closedEtaleModulePushExact helper, for an arbitrary coefficient map. The closed counit and supported essential image are [lem-kun-04ca]; they give j^{-1}i_*=0 and joint detection by i^{-1},j^{-1}. Indeed if j^{-1}F=0, its support is in Z, so F≅i_*G and i^{-1}F≅G; if the latter is zero, so is F. These abelian-sheaf assertions apply to module sheaves: the canonical maps respect the induced coefficient actions, and forgetting those actions reflects isomorphisms.",
+   "uses": [
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-kun-04ca",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AA (lemma-closed-immersion), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09AH (lemma-ses-associated-to-open); etale-cohomology.tex Tag 04CA (proposition-closed-immersion-pushforward)"
+   }
+  },
+  {
+   "text": "The inverse-image functors on abelian sheaves are exact by\n[lem-weil-pbc-site-pullback-abelian-exact]. For the identified coefficient\nsheaves, module pullback is inverse image: the tensor formula in\n[lem-weil-pbc-ringed-topoi-module-adjunction] has inverse maps\n$m\\otimes a\\mapsto am$ and $m\\mapsto m\\otimes1$. Thus module inverse image\nis exact as well. Exactness of both $i^{-1}$ and $i_*$ lets their termwise\nfunctors, unit, and counit descend through the localization at\nquasi-isomorphisms [def-weil-abstract-derived-category]; the homotopy\nadjunction and its triangle identities are\n[lem-weil-pbc-termwise-adjunction-homotopy]. Hence\n$i^{-1}\\dashv Ri_*=i_*$ on the ordinary derived categories, and the closed\ncounit stays invertible. Since exact inverse image commutes with cohomology,\nthe joint detection in step 1 also detects acyclic complexes, by applying it\nto every cohomology sheaf.\nFor $t=i,j$, [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] gives\n$t^{-1}(P\\otimes^L Q)\\cong t^{-1}P\\otimes^Lt^{-1}Q$ for arbitrary complexes,\nwith the relevant inverse-image coefficient rings; no Tor bound is used. The given Q-factorizations identify all the allowed presentations with these localized functors. The K-flat comparisons in [def-zl-ringed-site-duality-model] identify the derived tensor comparisons with the tensor functors of the two supplied normalized models.",
+   "uses": [
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-zl-ringed-site-duality-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product); sites-modules.tex Tags 03D7 (lemma-adjoint-pullback-pushforward-modules), 04JC (lemma-flat-pullback-exact)"
+   }
+  },
+  {
+   "text": "For arbitrary $N\\in\\mathcal D(Z)$ and $K\\in\\mathcal D(T)$, form the\nprojection morphism\n$$c_{N,K}:i_*N\\otimes^L K\\longrightarrow i_*(N\\otimes^Li^{-1}K)$$\nas the adjoint, under step 2, of\n$i^{-1}(i_*N\\otimes^LK)\\cong i^{-1}i_*N\\otimes^Li^{-1}K\n\\xrightarrow{\\varepsilon_N\\otimes1}N\\otimes^Li^{-1}K$.\nApplying $i^{-1}$ to $c_{N,K}$ gives this isomorphism followed by the inverse\nclosed counit, so is invertible. Applying $j^{-1}$ gives the map between\nzero objects, since $j^{-1}i_*=0$ and inverse image commutes with derived\ntensor. Exact inverse image preserves mapping cones, since the termwise additive\nfunctor preserves their direct sums and differential matrices. The cone of\n$c_{N,K}$ therefore has both inverse images acyclic and is acyclic by\nstep 2. The morphism from the zero object to this cone induces an\nisomorphism on every cohomology sheaf, hence is an isomorphism by\n[lem-weil-pbc-unbounded-derived-iso-cohomology]. The cone is a zero object,\nso [lem-kun-distinguished-cone-zero] makes $c_{N,K}$ an isomorphism.\nThe construction is natural in $N,K$. Inverting this natural projection map gives i_*(N tensor i^*K) ≅ i_*N tensor K, the orientation of the Lean conclusion. Both variables remain arbitrary in the ordinary unbounded derived categories; the zero and empty-complement cases use the same zero-object argument.",
+   "uses": [
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "lem-kun-distinguished-cone-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-closed-costalk-duality.md",
+    "place": "Proof, middle projection identity; expanded by closed counit and open-closed detection instead of pro-etale geometric stalks"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-kun-04ca",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-zl-ringed-site-duality-model",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-kun-distinguished-cone-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-weil-closed-costalk-duality.proof.md",
+  "place": "Middle projection identity, expanded by closed counit and open-closed detection; module pushforward exactness is proved by the existing finite direct-image theorem and reflection through forgetting coefficients"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unbounded derived projection formula for a closed immersion with arbitrary sheaf coefficients",
+   "results": "Eight results: Scheme.Modules.restrictAdjunction_counit_app_app and closed-immersion scheme facts; no unbounded ringed-site projection formula.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "closed immersion derived projection formula arbitrary sheaf of commutative rings unbounded complexes",
+   "results": "Eight results, including Proj.pullbackAwayιIso, IsClosedImmersion.lift and SheafOfModules.Presentation.map_π_eq. None gives the derived projection identity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointProjectionMap",
+   "results": "Unknown identifier in Mathlib search. The project source supplies a generic projection map but no automatic closed-support invertibility theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*projection|projection.*closed",
+   "results": "25 displayed Mathlib matches: primitive recursive, model-theoretic, topological and Hilbert-space projection terminology. No ringed-site derived closed projection.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ClosedCostalkDuality",
+  "date": "2026-10-21",
+  "group": "C7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ClosedProjectionEtale",
+  "file": "lean/Sheaf/SixFunctors/ClosedProjectionEtale.lean",
+  "declaration": "AlgebraicGeometry.Scheme.closedImmersionEtaleProjection",
+  "statement": "theorem closedImmersionEtaleProjection\n    {T Z U : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i]\n    (j : U ⟶ T) [IsOpenImmersion j]\n    (hij : Set.range j.base = (Set.range i.base)ᶜ)\n    (R : Sheaf T.smallEtaleTopology CommRingCat.{u + 1}) :\n    let RZ := (Functor.sheafPullbackConstruction.sheafPullback\n      (MorphismProperty.Over.pullback @Etale ⊤ i) CommRingCat.{u + 1}\n      (T.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale)).obj R\n    let MT := ringedSiteModules.{u + 1} ((sheafCompose T.smallEtaleTopology\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)\n    let MZ := ringedSiteModules.{u + 1} ((sheafCompose Z.smallEtaleTopology\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RZ)\n    letI : HasDerivedCategory.{u + 2} MT := HasDerivedCategory.standard _\n    letI : HasDerivedCategory.{u + 2} MZ := HasDerivedCategory.standard _\n    let V₀ : MZ ⥤ MT :=\n      SheafOfModules.pushforward.{u + 1}\n      (F := MorphismProperty.Over.pullback @Etale ⊤ i)\n      (J := T.smallGrothendieckTopology @Etale) (K := Z.smallGrothendieckTopology @Etale)\n      (S := (sheafCompose T.smallEtaleTopology\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)\n      (R := (sheafCompose Z.smallEtaleTopology\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj\n      ((Functor.sheafPullbackConstruction.sheafPullback\n      (MorphismProperty.Over.pullback @Etale ⊤ i) CommRingCat.{u + 1}\n      (T.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale)).obj R))\n      ⟨Functor.whiskerRight ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n      (MorphismProperty.Over.pullback @Etale ⊤ i) CommRingCat.{u + 1}\n      (T.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale)).unit.app R).hom\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩\n    letI : V₀.Additive := ⟨by intros; rfl⟩\n    ∀ (iStar : MT ⥤ MZ) [iStar.Additive] (ai : iStar ⊣ V₀)\n      (iPull : DerivedCategory MT ⥤ DerivedCategory MZ)\n      (pullFactors : DerivedCategory.Q ⋙ iPull ≅\n        iStar.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q)\n      (iPush : DerivedCategory MZ ⥤ DerivedCategory MT)\n      (pushFactors : DerivedCategory.Q ⋙ iPush ≅\n        V₀.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q)\n      (t : RingedSiteDualityModel.{u + 1, u, 0, u + 2} T.smallEtaleTopology R)\n      (z : RingedSiteDualityModel.{u + 1, u, 0, u + 2} Z.smallEtaleTopology RZ),\n      Nonempty (((𝟭 (DerivedCategory MZ)).prod iPull) ⋙ z.closed.tensor ⋙ iPush ≅\n        (iPush.prod (𝟭 (DerivedCategory MT))) ⋙ t.closed.tensor)",
+  "branch": "sheaf-dag",
+  "by": "C7",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-etale-closed-projection-unbounded",
+  "worker": "stage3",
+  "summary": "Separate the actual closed projection formula, without exceptional inverse image or a dualizing object, from the Hom-chain and Yoneda argument.",
+  "blueprint": "Realizes only the middle projection identity of closed-costalk duality.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-04ca",
+    "why": "Use only the generic small-etale exact fully faithful closed pushforward and supported essential image, as already used in the parent projection argument."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Use only the existing exact finite etale direct-image instance with abelian-group coefficients, for the closed immersion. The coefficient-action reflection bridge is proved privately here; no cohomological-dimension or curve-unit conclusion is invoked."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Use only the generic exact forgetful functor from module sheaves to abelian sheaves. The source sheafification API supplies the finite-colimit-preserving instance used in the private exactness proof."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261020T211645-L-3484815",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261020T211645-L-3484815",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

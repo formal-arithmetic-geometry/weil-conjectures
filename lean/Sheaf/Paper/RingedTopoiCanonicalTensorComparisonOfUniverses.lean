@@ -9,6 +9,8 @@ public import Sheaf.Paper.RingedTopoiCanonicalTensorPullback
 public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+
 /-!
 # Canonical tensor pullback with independent site universes
 
@@ -60,8 +62,8 @@ Proof: the additive tensorLeft and tensorRight functors of MonoidalFree give the
 four zero and addition laws of MonoidalPreadditive. Assemble those four laws. -/
 theorem ringedTensorPreadditive :
     @MonoidalPreadditive (SheafOfModules.{max s h} ((sheafCompose JC (forget₂ CommRingCat.{max s h}
-      RingCat.{max s h})).obj R)) _ _ (monoidalCategory R) :=
-  by sorry
+      RingCat.{max s h})).obj R)) _ _ (monoidalCategory R) := by
+  exact cochainModulesPreadditive R
 
 /-- The ordinary tensor comparison with its pure-tensor characterization.
 The maps q insert 1 in scalar extension; the generalized-element equation fixes
@@ -211,7 +213,12 @@ theorem CanonicalRingedTensorComparison.total_isIso [L.Additive]
       V)
     (P Q : CochainComplex (SheafOfModules.{max s h} ((sheafCompose JC (forget₂ CommRingCat.{max s h}
       RingCat.{max s h})).obj R)) ℤ) :
-    IsIso (k.total R S RI uInv I c L hobj P Q) := sorry
+    IsIso (k.total R S RI uInv I c L hobj P Q) := by
+  let := monoidalCategory R
+  let := monoidalCategory S
+  let := ringedTensorPreadditive R
+  let := ringedTensorPreadditive S
+  exact tensorPullbackTotal_isIso L k.mu k.naturality V am P Q
 
 /-- The canonical chain comparison as an isomorphism, with no arbitrary choice.
 Source: Stacks 07A4 (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback). -/
