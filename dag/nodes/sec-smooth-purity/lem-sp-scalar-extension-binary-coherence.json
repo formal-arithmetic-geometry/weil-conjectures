@@ -1,0 +1,221 @@
+{
+ "id": "lem-sp-scalar-extension-binary-coherence",
+ "kind": "statement",
+ "title": "Normalized binary scalar-extension comparisons",
+ "statement": "Let R→S be a map of sheaves of commutative rings on a site, with coefficient universe u independent of the two site universes and with module sheafification in u. For the actual sheaf tensors and pure sections of [def-sp-scalar-tensor-comparison-data], there exist normalized associators and both unitors for R and S, an isomorphism E(R)≅S sending s tensor a to s α(a), and natural binary isomorphisms E(N tensor_R P)≅E(N) tensor_S E(P) sending s tensor (x tensor y) to (s tensor x) tensor (1 tensor y). The associator square and both unitor squares commute. Bifunctor naturality holds for arbitrary maps in the two module factors. No tensor-power, internal-dual or ring-tower comparison is included in this existence assertion.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK (section-tensor-product), Section 04TT (section-internal-hom), Lemma 03EM (lemma-internal-hom)"
+ },
+ "stmt_deps": [
+  "def-sp-scalar-tensor-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the left and right unitors as the sheafification of the sectionwise TensorProduct.lid/rid followed by the sheafification counit. Construct the associator by first undoing sheafification in the first factor, applying the sectionwise associator, and sheafifying the second factor. Tensor descent for a locally bijective map makes the intermediate maps invertible. The adjunction and unit naturality prove all pure-section formulas.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-tensor-local-bijection-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the binary forward map by the R-bilinear pairing (x,y) ↦ ηα(1 tensor x) tensor ηα(1 tensor y), first descending through the R-module sheafification and then extending scalars by the sectionwise tensor adjunction and S-module sheafification. Construct the inverse using distribBaseChange.symm on section tensors, then the sheafification unit of N tensor P. Tensor descent identifies the sheafification of the raw binary source with E(N) tensor E(P). The two composites are identities on pure section tensors, hence everywhere by the adjunction and tensor generation.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-tensor-local-bijection-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Morphisms out of E(N tensor P) and E((N tensor P) tensor Q) are determined on iterated pure tensors. Prove this by the sheafification adjunction and separatedness over the covering image sieve of the tensor sheafification unit. Check the associator, unitor and bifunctor naturality squares with these tests; the formulas give identical tensors and scalar products. Assemble the core. Its tensor comparison is uniquely determined by its normalization.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Define power comparisons recursively, with multiplication in degree zero and the identity in degree one. Bifunctor naturality and induction prove power naturality. No duals or ring towers are used in this module.",
+   "uses": [
+    "def-sp-scalar-tensor-comparison-data",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-tensor-local-bijection-universes",
+  "def-sp-scalar-tensor-comparison-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK tensor and scalar-extension formulas, Tag 05V4 tensor descent; explicit adjunction construction and tensor-power induction by T1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf module tensor powers and rank one internal dual commute with extension of scalars",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.internallyProjective_iff_tensor_condition",
+   "date": "2026-10-18",
+   "verdict": "No complete normalized independent-universe sheaf comparison; ordinary module results and equal-universe monoidal structures are ingredients only."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*[Tt]ensor|[Tt]ensor.*[Cc]omparison|[Dd]ual.*[Ss]calar",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean; Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean; Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean; Mathlib/Algebra/Polynomial/Module/TensorProduct.lean; Mathlib/FieldTheory/PurelyInseparable/Basic.lean; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean; Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean",
+   "date": "2026-10-18",
+   "verdict": "No complete normalized independent-universe sheaf comparison; ordinary module results and equal-universe monoidal structures are ingredients only."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.assoc",
+   "results": "TensorProduct.assoc; TensorProduct.assoc_tmul; TensorProduct.lid_tensor; TensorProduct.assoc_symm_tmul; TensorProduct.leftComm_def; TensorProduct.rightComm_def; LinearMap.lTensor_rTensor_comp_assoc; Equiv.tensorProductAssoc_def",
+   "date": "2026-10-18",
+   "verdict": "No complete normalized independent-universe sheaf comparison; ordinary module results and equal-universe monoidal structures are ingredients only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf tensor product extension of scalars comparison coherent with tensor associators",
+   "results": "TensorProduct.leftComm; TensorProduct.assoc; TensorProduct.AlgebraTensorModule.distribBaseChange; ModuleCat.extendScalars_assoc; PresheafOfModules.monoidalCategory; ModuleCat.extendScalars_assoc_assoc; TensorProduct.tensorTensorTensorAssoc; PresheafOfModules.Monoidal.tensorObj",
+   "date": "2026-10-18",
+   "verdict": "No complete normalized independent-universe sheaf comparison; ordinary module results and equal-universe monoidal structures are ingredients only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.InvertibleTensorScalarExtension",
+  "date": "2026-10-18",
+  "group": "T1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sp-scalar-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-scalar-extension-functor",
+   "place": "proof paragraph (3), tensor powers and internal duals under coefficient extension; paragraph (4), compatibility with iteration",
+   "via": [
+    "lem-sp-invertible-tensor-scalar-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarExtensionBinaryCoherence",
+  "file": "lean/Sheaf/Paper/ScalarExtensionBinaryCoherence.lean",
+  "declaration": "SheafOfModules.exists_scalarExtensionTensorCore",
+  "declarations": [
+   "SheafOfModules.scalarExtensionUnitRawIso",
+   "SheafOfModules.scalarExtensionUnitIso",
+   "SheafOfModules.scalarExtensionUnitIso_tmul",
+   "SheafOfModules.scalarTensorLeftUnitRawIso",
+   "SheafOfModules.scalarTensorLeftUnitor",
+   "SheafOfModules.scalarTensorLeftUnitor_tmul",
+   "SheafOfModules.scalarTensorRightUnitRawIso",
+   "SheafOfModules.scalarTensorRightUnitor",
+   "SheafOfModules.scalarTensorRightUnitor_tmul",
+   "SheafOfModules.scalarTensorSwapRawIso",
+   "SheafOfModules.scalarTensorAssocRawIso",
+   "SheafOfModules.scalarSheafificationUnit",
+   "SheafOfModules.scalarSheafificationUnit_locallyInjective",
+   "SheafOfModules.scalarSheafificationUnit_locallySurjective",
+   "SheafOfModules.scalarSheafification_map_unit",
+   "SheafOfModules.scalarTensorSheafifyFirst_isIso",
+   "SheafOfModules.scalarTensorSheafifyFirstIso",
+   "SheafOfModules.scalarTensorSheafifySecondIso",
+   "SheafOfModules.scalarTensorAssociatorIso",
+   "SheafOfModules.scalarTensorSheafifyFirstIso_hom_tmul",
+   "SheafOfModules.scalarTensorSheafifyFirstIso_inv_tmul",
+   "SheafOfModules.scalarTensorSheafifySecondIso_hom_tmul",
+   "SheafOfModules.scalarTensorAssociatorIso_tmul",
+   "SheafOfModules.scalarTensorCoherence",
+   "SheafOfModules.ScalarExtensionTensorCore",
+   "SheafOfModules.ScalarExtensionTensorCore.sourceCoherence",
+   "SheafOfModules.ScalarExtensionTensorCore.targetCoherence",
+   "SheafOfModules.ScalarExtensionTensorCore.unitComparison",
+   "SheafOfModules.ScalarExtensionTensorCore.unit_tmul",
+   "SheafOfModules.scalarExtension_hom_ext",
+   "SheafOfModules.scalarTensor_hom_ext",
+   "SheafOfModules.scalarExtensionSection_naturality",
+   "SheafOfModules.scalarTensorTmul_naturality",
+   "SheafOfModules.scalarExtension_map_tmul",
+   "SheafOfModules.scalarTensor_first_tmul",
+   "SheafOfModules.scalarTensor_second_tmul",
+   "SheafOfModules.scalarExtensionSection_add",
+   "SheafOfModules.scalarExtensionSection_zero",
+   "SheafOfModules.scalarExtension_tensor_hom_ext",
+   "SheafOfModules.scalarExtensionSection_smul",
+   "SheafOfModules.scalarExtensionSection_base_smul",
+   "SheafOfModules.scalarTensorTmul_add_first",
+   "SheafOfModules.scalarTensorTmul_zero_first",
+   "SheafOfModules.scalarExtension_tensor3_hom_ext",
+   "SheafOfModules.scalarTensorComparison_associator",
+   "SheafOfModules.scalarTensorComparison_leftUnitor",
+   "SheafOfModules.scalarTensorComparison_rightUnitor",
+   "SheafOfModules.scalarTensorComparison_natural",
+   "SheafOfModules.scalarTensorBinaryInverseApp",
+   "SheafOfModules.scalarTensorBinaryInverseApp_tmul",
+   "SheafOfModules.scalarTensorBinaryRawInverse",
+   "SheafOfModules.scalarTensorBinaryDescentIso",
+   "SheafOfModules.scalarTensorBinaryDescentIso_hom",
+   "SheafOfModules.scalarTensorBinaryInverse",
+   "SheafOfModules.scalarTensorBinaryInverse_tmul",
+   "SheafOfModules.scalarTensorTmul_smul_first",
+   "SheafOfModules.scalarTensorTmul_smul_second",
+   "SheafOfModules.scalarTensorBinaryPair",
+   "SheafOfModules.scalarTensorBinaryRawForward",
+   "SheafOfModules.scalarTensorBinaryBaseForward",
+   "SheafOfModules.scalarTensorBinaryBaseForward_tmul",
+   "SheafOfModules.scalarExtensionRawLift",
+   "SheafOfModules.scalarExtensionLift",
+   "SheafOfModules.scalarExtensionLift_tmul",
+   "SheafOfModules.scalarTensorBinaryForward",
+   "SheafOfModules.scalarTensorBinaryForward_tmul",
+   "SheafOfModules.scalarTensorBinaryForward_inverse",
+   "SheafOfModules.scalarTensorBinaryInverse_forward",
+   "SheafOfModules.scalarTensorBinaryIso",
+   "SheafOfModules.scalarExtensionTensorCore_subsingleton",
+   "SheafOfModules.exists_scalarExtensionTensorCore",
+   "SheafOfModules.scalarExtension_map_id",
+   "SheafOfModules.scalarExtension_map_comp",
+   "SheafOfModules.scalarTensor_second_id",
+   "SheafOfModules.ScalarExtensionTensorCore.first_natural",
+   "SheafOfModules.ScalarExtensionTensorCore.power",
+   "SheafOfModules.ScalarExtensionTensorCore.power_natural",
+   "SheafOfModules.ScalarExtensionTensorCore.withPowers"
+  ],
+  "statement": "theorem exists_scalarExtensionTensorCore (R S : Sheaf J CommRingCat.{u}) (α : R ⟶ S) : Nonempty (ScalarExtensionTensorCore R S α)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-3bb71",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261020T144304-L-2261825",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-3bb71",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261020T144304-L-2261825",
+  "kind": "interface",
+  "note": "independent cc review: Re-delivery 3bb71e6 vs returned 49c1d2f: Lean byte-identical, all four ordered DAG repairs (step-3 uses/text, item proof_deps, tower-core stmt_deps) applied verbatim; relocated decls diffed byte-for-byte against live item; theorem signature identical to live; --all compiles clean; axioms only via pre-existing SiteTensorFunctoriality sorries; no live importers"
+ }
+}

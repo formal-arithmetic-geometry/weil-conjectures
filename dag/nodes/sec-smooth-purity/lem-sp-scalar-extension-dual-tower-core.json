@@ -1,0 +1,148 @@
+{
+ "id": "lem-sp-scalar-extension-dual-tower-core",
+ "kind": "statement",
+ "title": "Dual comparisons and binary scalar-extension tower squares",
+ "statement": "Let R→S and an invertible R-module sheaf M be on a general site with independent site and coefficient universes and sheafification in the module and internal-Hom universes, and fix binary comparisons e of [lem-sp-scalar-extension-binary-coherence]. There exist normalized internal-dual comparison isomorphisms for all invertible R-modules, contravariantly natural and sending s tensor f to the functional t tensor x ↦ st α(f(x)). For every further map S→T there are binary comparison data after S→T and for R→T, normalized iterated-extension isomorphisms on arbitrary module sheaves sending a tensor (s tensor x) to a β(s) tensor x, and commuting unit and binary tensor tower squares relative to e. The dual comparisons after extension, for the composite, and the tower comparison in the larger internal-Hom universe are normalized by the same evaluation and tensor formulas, and their dual tower square commutes. No powers or power tower squares are asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK (section-tensor-product), Section 04TT (section-internal-hom), Lemma 03EM (lemma-internal-hom)"
+ },
+ "stmt_deps": [
+  "def-sp-scalar-tensor-comparison-data",
+  "lem-sp-scalar-extension-binary-coherence",
+  "def-pur-sheaf-hom",
+  "lem-sp-scalar-extension-dual-evaluation"
+ ],
+ "proof": [
+  {
+   "text": "Construct the explicit dual evaluation and naturality from the slice sheafification Hom equivalence. Apply local rank-one invertibility, which determines the inverse of this explicit map uniquely.",
+   "uses": [
+    "lem-sp-scalar-extension-dual-evaluation",
+    "lem-sp-scalar-extension-dual-local-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the tower forward and reverse maps by multiplying scalars and inserting one. Prove their inverse identities and unit/binary tower squares by tensor descent. Prove the dual tower square as scalarExtensionTowerDual on nested tensor generators and evaluations on every slice. The original item assembles the required comparison data directly from these explicit maps; no additional comparison record or tensor powers are constructed here.",
+   "uses": [
+    "lem-sp-scalar-extension-binary-coherence",
+    "lem-sp-scalar-extension-dual-evaluation",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "lem-sp-scalar-extension-binary-coherence",
+  "lem-sp-scalar-extension-dual-evaluation",
+  "lem-sp-scalar-extension-dual-local-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK (section-tensor-product), Section 04TT (section-internal-hom), Lemma 03EM (lemma-internal-hom); follows the corresponding steps of lem-sp-invertible-tensor-scalar-extension"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf module tensor powers and rank one internal dual commute with extension of scalars",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.internallyProjective_iff_tensor_condition",
+   "date": "2026-10-18",
+   "verdict": "No complete normalized independent-universe sheaf comparison; ordinary module results and equal-universe monoidal structures are ingredients only."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*[Tt]ensor|[Tt]ensor.*[Cc]omparison|[Dd]ual.*[Ss]calar",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean; Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean; Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean; Mathlib/Algebra/Polynomial/Module/TensorProduct.lean; Mathlib/FieldTheory/PurelyInseparable/Basic.lean; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean; Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean",
+   "date": "2026-10-18",
+   "verdict": "No complete normalized independent-universe sheaf comparison; ordinary module results and equal-universe monoidal structures are ingredients only."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.assoc",
+   "results": "TensorProduct.assoc; TensorProduct.assoc_tmul; TensorProduct.lid_tensor; TensorProduct.assoc_symm_tmul; TensorProduct.leftComm_def; TensorProduct.rightComm_def; LinearMap.lTensor_rTensor_comp_assoc; Equiv.tensorProductAssoc_def",
+   "date": "2026-10-18",
+   "verdict": "No complete normalized independent-universe sheaf comparison; ordinary module results and equal-universe monoidal structures are ingredients only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf tensor product extension of scalars comparison coherent with tensor associators",
+   "results": "TensorProduct.leftComm; TensorProduct.assoc; TensorProduct.AlgebraTensorModule.distribBaseChange; ModuleCat.extendScalars_assoc; PresheafOfModules.monoidalCategory; ModuleCat.extendScalars_assoc_assoc; TensorProduct.tensorTensorTensorAssoc; PresheafOfModules.Monoidal.tensorObj",
+   "date": "2026-10-18",
+   "verdict": "No complete normalized independent-universe sheaf comparison; ordinary module results and equal-universe monoidal structures are ingredients only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.InvertibleTensorScalarExtension",
+  "date": "2026-10-18",
+  "group": "T1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sp-scalar-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-scalar-extension-functor",
+   "place": "proof paragraph (3), tensor powers and internal duals under coefficient extension; paragraph (4), compatibility with iteration",
+   "via": [
+    "lem-sp-invertible-tensor-scalar-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarExtensionDualTowerCore",
+  "file": "lean/Sheaf/Paper/ScalarExtensionDualTowerCore.lean",
+  "declaration": "SheafOfModules.scalarExtensionTowerDual",
+  "declarations": [
+   "SheafOfModules.scalarExtensionEmbedding",
+   "SheafOfModules.scalarExtensionTowerMiddle",
+   "SheafOfModules.scalarExtensionTowerForward",
+   "SheafOfModules.scalarExtensionTowerForward_tmul",
+   "SheafOfModules.scalarExtensionTowerBaseReverse",
+   "SheafOfModules.scalarExtensionTowerReverse",
+   "SheafOfModules.scalarExtensionTowerReverse_tmul",
+   "SheafOfModules.scalarExtensionTower_hom_ext",
+   "SheafOfModules.scalarExtensionTower_reverse_forward",
+   "SheafOfModules.scalarExtensionTower_forward_reverse",
+   "SheafOfModules.scalarExtensionTowerIso",
+   "SheafOfModules.scalarExtensionTowerIso_hom",
+   "SheafOfModules.scalarExtensionTowerUnit",
+   "SheafOfModules.scalarExtensionTowerTensor",
+   "SheafOfModules.scalarDual_hom_ext",
+   "SheafOfModules.scalarDualTower_section_ext",
+   "SheafOfModules.scalarExtensionDualIso",
+   "SheafOfModules.scalarExtensionDualIso_hom",
+   "SheafOfModules.scalarExtensionTowerDual"
+  ],
+  "statement": "theorem scalarExtensionTowerDual [J.WEqualsLocallyBijective AddCommGrpCat.{max uC vC u}] [HasWeakSheafify J AddCommGrpCat.{max uC vC u}] [∀ X, (J.over X).WEqualsLocallyBijective AddCommGrpCat.{u}] {R S T : Sheaf J CommRingCat.{u}} (α : R ⟶ S) (β : S ⟶ T) (M : Mod R) : changeOfRingsHomOfUniverses β _ (scalarExtensionDualMap α M) ≫ scalarExtensionDualMap β (changeOfRingsOfUniverses α M) = (scalarExtensionTowerIso.{uC, vC, u, max uC vC u} α β (homObj M (𝒪 R))).hom ≫ scalarExtensionDualMap (α ≫ β) M ≫ homObjMap (scalarExtensionTowerIso.{uC, vC, u, u} α β M).hom (𝟙 (𝒪 T))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-3bb71",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261020T144304-L-2261825",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-3bb71",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261020T144304-L-2261825",
+  "kind": "interface",
+  "note": "independent cc review: Re-delivery 3bb71e6 vs returned 49c1d2f: Lean byte-identical, all four ordered DAG repairs (step-3 uses/text, item proof_deps, tower-core stmt_deps) applied verbatim; relocated decls diffed byte-for-byte against live item; theorem signature identical to live; --all compiles clean; axioms only via pre-existing SiteTensorFunctoriality sorries; no live importers"
+ }
+}

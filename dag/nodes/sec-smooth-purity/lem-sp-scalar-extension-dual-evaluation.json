@@ -1,0 +1,133 @@
+{
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK (section-tensor-product), Section 04TT (section-internal-hom), Lemma 03EM (lemma-internal-hom)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf module tensor powers and rank one internal dual commute with extension of scalars",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.internallyProjective_iff_tensor_condition",
+   "date": "2026-10-18",
+   "verdict": "No complete normalized independent-universe sheaf comparison; ordinary module results and equal-universe monoidal structures are ingredients only."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*[Tt]ensor|[Tt]ensor.*[Cc]omparison|[Dd]ual.*[Ss]calar",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean; Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean; Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean; Mathlib/Algebra/Polynomial/Module/TensorProduct.lean; Mathlib/FieldTheory/PurelyInseparable/Basic.lean; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean; Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean",
+   "date": "2026-10-18",
+   "verdict": "No complete normalized independent-universe sheaf comparison; ordinary module results and equal-universe monoidal structures are ingredients only."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.assoc",
+   "results": "TensorProduct.assoc; TensorProduct.assoc_tmul; TensorProduct.lid_tensor; TensorProduct.assoc_symm_tmul; TensorProduct.leftComm_def; TensorProduct.rightComm_def; LinearMap.lTensor_rTensor_comp_assoc; Equiv.tensorProductAssoc_def",
+   "date": "2026-10-18",
+   "verdict": "No complete normalized independent-universe sheaf comparison; ordinary module results and equal-universe monoidal structures are ingredients only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf tensor product extension of scalars comparison coherent with tensor associators",
+   "results": "TensorProduct.leftComm; TensorProduct.assoc; TensorProduct.AlgebraTensorModule.distribBaseChange; ModuleCat.extendScalars_assoc; PresheafOfModules.monoidalCategory; ModuleCat.extendScalars_assoc_assoc; TensorProduct.tensorTensorTensorAssoc; PresheafOfModules.Monoidal.tensorObj",
+   "date": "2026-10-18",
+   "verdict": "No complete normalized independent-universe sheaf comparison; ordinary module results and equal-universe monoidal structures are ingredients only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sp-scalar-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-scalar-extension-functor",
+   "place": "proof paragraph (3), tensor powers and internal duals under coefficient extension; paragraph (4), compatibility with iteration",
+   "via": [
+    "lem-sp-invertible-tensor-scalar-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-sp-scalar-extension-dual-evaluation",
+ "kind": "statement",
+ "title": "Explicit scalar-extension evaluation on internal duals",
+ "statement": "For an arbitrary module sheaf N on a general ringed site, construct the scalar extension map from its internal dual to the internal dual of its scalar extension. Its evaluation on s tensor f and t tensor x is st alpha(f(x)), on every slice, and it is contravariantly natural in N. Tensor generators detect equalities of these maps.",
+ "stmt_deps": [
+  "lem-sp-scalar-extension-binary-coherence",
+  "def-pur-sheaf-hom",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Construct the raw balanced functional on each slice. Restriction of the sheafification unit is locally bijective, hence its Hom equivalence extends the functional uniquely. Check additivity, scalar multiplication and restriction on tensor generators. Descend in the larger internal-Hom universe and prove the evaluation and naturality formulas.",
+   "uses": [
+    "lem-sp-scalar-extension-binary-coherence",
+    "def-pur-sheaf-hom",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-scalar-extension-binary-coherence",
+  "def-pur-sheaf-hom",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK (section-tensor-product), Section 04TT (section-internal-hom), Lemma 03EM (lemma-internal-hom); follows the corresponding steps of lem-sp-invertible-tensor-scalar-extension"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.InvertibleTensorScalarExtension",
+  "date": "2026-10-19",
+  "group": "T1"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarExtensionDualEvaluation",
+  "file": "lean/Sheaf/Paper/ScalarExtensionDualEvaluation.lean",
+  "declaration": "SheafOfModules.scalarExtensionDualMap",
+  "declarations": [
+   "SheafOfModules.scalarDual_eval_restrict",
+   "SheafOfModules.scalarDual_section_ext",
+   "SheafOfModules.scalarDualRawSection",
+   "SheafOfModules.scalarDualSliceUnit",
+   "SheafOfModules.scalarDualSliceUnit_locallyInjective",
+   "SheafOfModules.scalarDualSliceUnit_locallySurjective",
+   "SheafOfModules.scalarDualBaseSection",
+   "SheafOfModules.scalarDualBaseSection_tmul",
+   "SheafOfModules.scalarDualBaseMap",
+   "SheafOfModules.scalarExtensionDualMap",
+   "SheafOfModules.scalarExtensionDualMap_tmul",
+   "SheafOfModules.scalarExtensionDual_hom_ext",
+   "SheafOfModules.scalarExtensionDualMap_natural",
+   "SheafOfModules.scalarExtensionDualMap_tmul_slice"
+  ],
+  "statement": "def scalarExtensionDualMap\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max uC vC u}]\n    [HasWeakSheafify J AddCommGrpCat.{max uC vC u}]\n    [∀ X, (J.over X).WEqualsLocallyBijective AddCommGrpCat.{u}]\n    {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S) (N : Mod R) :\n    changeOfRingsOfUniverses α (homObj N (𝒪 R)) ⟶\n      homObj (changeOfRingsOfUniverses α N) (𝒪 S)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-3bb71",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261020T144304-L-2261825",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-3bb71",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261020T144304-L-2261825",
+  "kind": "interface",
+  "note": "independent cc review: Re-delivery 3bb71e6 vs returned 49c1d2f: Lean byte-identical, all four ordered DAG repairs (step-3 uses/text, item proof_deps, tower-core stmt_deps) applied verbatim; relocated decls diffed byte-for-byte against live item; theorem signature identical to live; --all compiles clean; axioms only via pre-existing SiteTensorFunctoriality sorries; no live importers"
+ }
+}

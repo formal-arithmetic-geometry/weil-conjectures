@@ -1,0 +1,111 @@
+{
+ "id": "def-sp-scalar-tensor-comparison-data",
+ "kind": "definition",
+ "title": "Normalized tensor and scalar-extension comparison data",
+ "statement": "For a ring sheaf R on a site and module sheaves as in [def-pur-sheaf-tensor-product], define powers with degree zero R, degree one M, and successive powers associated to the left. The map on powers tensors a module morphism in every factor. A scalar-extension section is the image of s tensor x under the actual module sheafification unit [def-weil-presheaf-modules-sheafification]. ScalarTensorCoherence records associators and both unitors specified on local pure tensors. ScalarExtensionTensorComparison records the normalized unit and binary scalar-extension comparisons, their associator and unitor squares, and natural recursively compatible power comparisons. InvertibleTensorScalarExtensionData additionally records internal-dual comparisons [def-pur-sheaf-hom], contravariant naturality and the normalized ring-tower maps with their power and dual squares. These are the existing data definitions of the parent node, relocated unchanged to allow its proof dependencies to refer to them without an import cycle.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK (section-tensor-product), Section 04TT (section-internal-hom), Lemma 03EM (lemma-internal-hom)"
+ },
+ "stmt_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK (section-tensor-product), Section 04TT (section-internal-hom), Lemma 03EM (lemma-internal-hom); follows the corresponding steps of lem-sp-invertible-tensor-scalar-extension"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf module tensor powers and rank one internal dual commute with extension of scalars",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.internallyProjective_iff_tensor_condition",
+   "date": "2026-10-18",
+   "verdict": "No complete normalized independent-universe sheaf comparison; ordinary module results and equal-universe monoidal structures are ingredients only."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*[Tt]ensor|[Tt]ensor.*[Cc]omparison|[Dd]ual.*[Ss]calar",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean; Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean; Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean; Mathlib/Algebra/Polynomial/Module/TensorProduct.lean; Mathlib/FieldTheory/PurelyInseparable/Basic.lean; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean; Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean",
+   "date": "2026-10-18",
+   "verdict": "No complete normalized independent-universe sheaf comparison; ordinary module results and equal-universe monoidal structures are ingredients only."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.assoc",
+   "results": "TensorProduct.assoc; TensorProduct.assoc_tmul; TensorProduct.lid_tensor; TensorProduct.assoc_symm_tmul; TensorProduct.leftComm_def; TensorProduct.rightComm_def; LinearMap.lTensor_rTensor_comp_assoc; Equiv.tensorProductAssoc_def",
+   "date": "2026-10-18",
+   "verdict": "No complete normalized independent-universe sheaf comparison; ordinary module results and equal-universe monoidal structures are ingredients only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf tensor product extension of scalars comparison coherent with tensor associators",
+   "results": "TensorProduct.leftComm; TensorProduct.assoc; TensorProduct.AlgebraTensorModule.distribBaseChange; ModuleCat.extendScalars_assoc; PresheafOfModules.monoidalCategory; ModuleCat.extendScalars_assoc_assoc; TensorProduct.tensorTensorTensorAssoc; PresheafOfModules.Monoidal.tensorObj",
+   "date": "2026-10-18",
+   "verdict": "No complete normalized independent-universe sheaf comparison; ordinary module results and equal-universe monoidal structures are ingredients only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.InvertibleTensorScalarExtension",
+  "date": "2026-10-18",
+  "group": "T1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sp-scalar-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-scalar-extension-functor",
+   "place": "proof paragraph (3), tensor powers and internal duals under coefficient extension; paragraph (4), compatibility with iteration",
+   "via": [
+    "lem-sp-invertible-tensor-scalar-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.InvertibleTensorScalarExtensionDefinitions",
+  "file": "lean/Sheaf/Paper/InvertibleTensorScalarExtensionDefinitions.lean",
+  "declaration": "SheafOfModules.ScalarTensorCoherence",
+  "declarations": [
+   "SheafOfModules.scalarTensorPower",
+   "SheafOfModules.scalarTensorPowerMap",
+   "SheafOfModules.scalarExtensionSection",
+   "SheafOfModules.ScalarTensorCoherence",
+   "SheafOfModules.ScalarExtensionTensorComparison",
+   "SheafOfModules.InvertibleTensorScalarExtensionData"
+  ],
+  "statement": "structure ScalarTensorCoherence (R : Sheaf J CommRingCat.{u})",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-3bb71",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261020T144304-L-2261825",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-3bb71",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261020T144304-L-2261825",
+  "kind": "interface",
+  "note": "independent cc review: Re-delivery 3bb71e6 vs returned 49c1d2f: Lean byte-identical, all four ordered DAG repairs (step-3 uses/text, item proof_deps, tower-core stmt_deps) applied verbatim; relocated decls diffed byte-for-byte against live item; theorem signature identical to live; --all compiles clean; axioms only via pre-existing SiteTensorFunctoriality sorries; no live importers"
+ }
+}
