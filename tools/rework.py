@@ -551,7 +551,7 @@ def _published() -> str:
 
 
 def autorestore(workers: int = 24, limit: int = 2000, recheck: bool = False, recheck_errors: bool = False,
-                max_levels: int = 30) -> int:
+                max_levels: int = 30, from_loop: bool = False) -> int:
     """Bulk, transitive autorestore (the coordinator, 2026-10-21; it used to compile 1-4 new roots per run while 2,035
     importers stayed quarantined). Each run, level by level: EVERY quarantined module that imports no other quarantined
     module any more (all its project imports are in lean/) and that no group has claimed is compiled as it is against
@@ -606,7 +606,7 @@ def autorestore(workers: int = 24, limit: int = 2000, recheck: bool = False, rec
         return m, "bad", msg
 
     for level in range(1, max_levels + 1):
-        if (ROOT / "local" / "rework-autorestore.stop").exists() or time.time() - T0 > 1200:
+        if (not from_loop and (ROOT / "local" / "rework-autorestore.stop").exists()) or time.time() - T0 > 1200:
             print(f"rework autorestore: stopping before level {level} (stop file or 20-min budget)", flush=True)
             break
         rows = load()
@@ -904,7 +904,7 @@ def main() -> int:
     if cmd == "autorestore":
         autorestore(workers=int(a[a.index("--workers") + 1]) if "--workers" in a else 24,
                     limit=int(a[a.index("--limit") + 1]) if "--limit" in a else 2000,
-                    recheck="--recheck-unlocated" in a, recheck_errors="--recheck-errors" in a); return 0
+                    recheck="--recheck-unlocated" in a, recheck_errors="--recheck-errors" in a, from_loop="--from-loop" in a); return 0
     if cmd == "cluster-restore":
         cluster_restore(dry="--dry-run" in a); return 0
     if cmd == "release-held":
