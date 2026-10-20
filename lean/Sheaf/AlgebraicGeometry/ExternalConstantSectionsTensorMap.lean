@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.PicardConstantSectionsTensor
 public import Sheaf.Paper.PQFCohomology
 public import WeilConjectures.AlgebraicGeometry.ExternalSectionsComponents
-import Sheaf.AlgebraicGeometry.PicardConstantTensorBalancedSections
+import WeilConjectures.AlgebraicGeometry.PicardConstantTensorBalancedSections
 
 /-! # The ordinary external section map on constant tensor coefficients
 
@@ -57,8 +57,9 @@ theorem exists_external_constant_sections_tensor_map
       ∀ V : Y.Opens, Function.Bijective (φ.app (op V)) ↔
         Function.Bijective (externalSectionsComponent f g F G V) := by
   classical
-  obtain ⟨e, he, hn⟩ := exists_picard_constant_tensor_balanced_sections
-    k Y g (scalarObj f F (op ⊤)) G
+  let e := picardConstantTensorBalancedSections k Y g (scalarObj f F (op ⊤)) G
+  have he := picardConstantTensorBalancedSections_smul k Y g (scalarObj f F (op ⊤)) G
+  have hn := @picardConstantTensorBalancedSections_map k _ Y g (scalarObj f F (op ⊤)) G
   let P := picardConstantSectionsTensor k Y g (scalarObj f F (op ⊤)) G
   let T := ((RingedSpace.moduleDirectImage
     (pullback.snd f g).toLRSHom.toShHom).obj (externalCupCoefficients f g F G)).val

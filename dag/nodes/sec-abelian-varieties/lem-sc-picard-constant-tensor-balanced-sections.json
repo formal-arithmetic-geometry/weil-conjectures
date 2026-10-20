@@ -30,7 +30,7 @@
  "proof_origin": {
   "by": "M1 worker, complete Lean proof",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0BED, degree-zero tensor calculation; representing-object comparison from Tag 006R and Mathlib tensor cancellation. Original route retained and every step formalized. Q1 migration: choose the upstream named q_V directly and rewrite with its restriction theorem; the remaining tensor-cancellation proof is unchanged."
+  "place": "Tag 0BED, degree-zero tensor calculation; representing-object comparison from Tag 006R and Mathlib tensor cancellation. Original route retained and every step formalized. Q1 migration: choose the upstream named q_V directly and rewrite with its restriction theorem; the remaining tensor-cancellation proof is unchanged. R2 retirement: reuse the same complete tensor-cancellation construction and its two laws in the adopted-source twin instead of the duplicate Sheaf existential theorem."
  },
  "mathlib_searches": [
   {
@@ -86,14 +86,20 @@
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-cube",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PicardConstantTensorBalancedSections",
-  "file": "lean/Sheaf/AlgebraicGeometry/PicardConstantTensorBalancedSections.lean",
-  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_picard_constant_tensor_balanced_sections",
-  "statement": "theorem exists_picard_constant_tensor_balanced_sections\n    (k : Type w) [Field k] (Y : Scheme.{w})\n    (g : Y ⟶ Spec (CommRingCat.of k)) (M : ModuleCat.{w} k) (G : Y.Modules) :\n    ∃ e : ∀ V : Y.Opens,\n        (picardConstantSectionsTensor k Y g M G).obj (op V) ≃+\n          (M ⊗[k] scalarObj g G (op V)),\n      (∀ (V : Y.Opens) (a : Γ(Y, V)) (s : M) (t : scalarObj g G (op V)),\n        e V (a • (e V).symm (s ⊗ₜ[k] t)) =\n          s ⊗ₜ[k] (show scalarObj g G (op V) from a • (show G.val.obj (op V) from t))) ∧\n      (∀ {U V : Y.Opensᵒᵖ} (i : U ⟶ V)\n          (x : (picardConstantSectionsTensor k Y g M G).obj U),\n        e V.unop ((picardConstantSectionsTensor k Y g M G).map i x) =\n          ((scalarPresheaf g G ⋙ MonoidalCategory.tensorLeft M).map i) (e U.unop x))",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.PicardConstantTensorBalancedSections",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PicardConstantTensorBalancedSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardConstantTensorBalancedSections",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.picardConstantTensorBalancedSections",
+   "AlgebraicGeometry.Scheme.Modules.picardConstantTensorBalancedSections_smul",
+   "AlgebraicGeometry.Scheme.Modules.picardConstantTensorBalancedSections_map"
+  ],
+  "statement": "noncomputable def picardConstantTensorBalancedSections\n    (k : Type w) [Field k] (Y : Scheme.{w})\n    (g : Y ⟶ Spec (CommRingCat.of k)) (M : ModuleCat.{w} k) (G : Y.Modules)\n    (V : Y.Opens) :\n    (picardConstantSectionsTensor k Y g M G).obj (op V) ≃+ (M ⊗[k] scalarObj g G (op V))",
   "branch": "sheaf-dag",
-  "by": "U4",
-  "date": "2026-10-13"
+  "by": "R2",
+  "date": "2026-10-20",
+  "note": "The named adopted-source construction supplies the family e_V; its _smul and _map theorems supply exactly the two laws of the existing existential statement. The duplicate Sheaf existential theorem is retired and its sole consumer uses this construction and its laws directly. The mathematical statement and unit route are unchanged."
  },
  "mathlib_match": null,
  "reviewed": {
@@ -109,12 +115,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-13328",
-  "group": "Q1",
+  "reviewer": "C-add6d",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261020T153018-L-2863582",
+  "landing": "20261020T162322-L-3589734",
   "kind": "interface",
-  "note": "independent cc review: retired Sheaf PicardConstantScalarExtensionSections vs upstream WeilConjectures twin (def + _map, live lines 179-203); adapted unclaimed importer (3 forced lines) compiles, indirect ExternalConstantSectionsTensorMap compiles, axioms clean, node changes limited to lean/proof_origin/proof text"
+  "note": "independent cc review: removed Sheaf exists_picard_constant_tensor_balanced_sections vs live upstream WeilConjectures picardConstantTensorBalancedSections + _smul/_map (identical laws); adapted unclaimed consumer ExternalConstantSectionsTensorMap compiles (10.7 s), axioms clean; node changes limited to lean/proof_origin/proof text"
  },
  "lean_audit": {
   "master": {
