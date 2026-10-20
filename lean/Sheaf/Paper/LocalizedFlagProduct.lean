@@ -29,7 +29,7 @@ import Sheaf.Paper.ProjectionMateExact
 import Sheaf.Paper.PurTwistSheafLocallyFree
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.Paper.ShiftedTensorMorphismCalculus
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.ClosedImmersion
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
 
 /-! # Nested supported Cartier classes of vector subbundles
 

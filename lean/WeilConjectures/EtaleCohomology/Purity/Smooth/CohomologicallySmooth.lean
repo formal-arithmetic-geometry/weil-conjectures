@@ -103,8 +103,11 @@ A morphism `f : X ⟶ Y` admitting a compactification is *cohomologically smooth
    isomorphism.
 
 The blueprint asks for clause 3 for every cartesian square; the base change map, the mate of the
-compact-support base change `Ex_!`, is only constructed for quasi-compact `f'`. The blueprint
-writes the tensor factors of clause 2 in the other order. -/
+compact-support base change `Ex_!`, is only constructed for quasi-compact `f'`; in the blueprint's
+setting `f` is of finite type, so every base change `f'` of it is quasi-compact and this is no
+restriction. The blueprint writes the tensor factors of clause 2 in the other order. As for all
+purity conventions (`AlgebraicGeometry.Etale.tateTwist`), the categories are those of the small
+étale site, identified with the pro-étale ones of the blueprint by the pro-étale comparison. -/
 structure IsCohomologicallySmooth {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
     Prop where
   isInvertible_dualizingComplex :

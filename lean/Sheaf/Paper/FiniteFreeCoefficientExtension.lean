@@ -16,7 +16,7 @@ public import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 public import Sheaf.Paper.FiniteTorAmplitudeSites
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 public import Sheaf.AlgebraicGeometry.EtaleClosedAmbientAdjoint
-public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.Paper.DualityPairing

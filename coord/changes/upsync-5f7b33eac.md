@@ -1,4 +1,4 @@
-# Scheduled upstream sync e9ba49ac4 -> 5f7b33eac (2026-10-20T07:59:03Z)
+# Scheduled upstream sync e9ba49ac4 -> 5f7b33eac (2026-10-20T08:30:31Z)
 
 ## Reason
 
@@ -23,17 +23,3 @@ Conflicts resolved:
 ## Status
 
 landed
-
-## Prefer upstream, round 1
-
-The upstream module(s) `WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.SubalgebraLimit` failed here while identical to the tip: the upstream files of their environment that this sync had merged with changes of ours take the tip's file: `WeilConjectures.AlgebraicGeometry.Sites.TorsionCohomologicalDimensionLimit`.
-
-## Aborted (2026-10-20T08:25:41Z)
-
-the failures reach Weil.Solution (the six target statements, never changed) through WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.SubalgebraLimit
-
-Every landing of the run was dropped; the library is the one from before the sync.
-
-## Status
-
-reverted

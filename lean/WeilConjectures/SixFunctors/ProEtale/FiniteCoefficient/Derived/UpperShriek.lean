@@ -99,13 +99,16 @@ section Definition
 variable [(Etale.rightDerivedLowerShriek A f).IsLeftAdjoint]
 
 /-- Blueprint `sk-def-sf-operations` (vi) and blueprint `def-weil-exceptional-inverse-image`:
-the exceptional inverse image
+(at a finite stage `A = A_{E,n}`) the exceptional inverse image
 `Rf^! := ν_X^* ∘ f^× ∘ Rν_{Y,*} : D(Y_proét) ⥤ D(X_proét)` along a morphism `f : X ⟶ Y`
 admitting a compactification, where `f^×` is the étale exceptional inverse image
 `AlgebraicGeometry.Etale.rightDerivedUpperShriek`, the right adjoint of the étale `Rf_!`. It is
 the constructible exceptional inverse image of the blueprint, meaningful on bounded below
 complexes, where it is right adjoint to `Rf_!` on objects of étale origin
-(`AlgebraicGeometry.ProEtale.rightDerivedUpperShriekHomEquiv`). -/
+(`AlgebraicGeometry.ProEtale.rightDerivedUpperShriekHomEquiv`). For `f` separated of finite type
+over a finite-type scheme over a field, it carries `D_c^[a, b]` into `D_c^[a - 2D, b + 2 dim Y + 1]`
+and Tor amplitude `[a, b]` to `[a - 2D, b + 2 dim Y + 1]`, with `D` independent of the stage
+(`AlgebraicGeometry.ProEtale.exists_preservationClauses`). -/
 noncomputable def rightDerivedUpperShriek :
     DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A) ⥤
       DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) :=

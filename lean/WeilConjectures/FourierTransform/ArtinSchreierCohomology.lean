@@ -87,7 +87,7 @@ theorem cohomology_affineLine_unit [Finite Λ] (p : ℕ) [CharP Ω p] [Invertibl
   -- chapter, on which `Rp_* Λ ≅ Λ_S`; so `RΓ(𝔸¹_Ω, Λ) ≅ RΓ(S, Rp_* Λ) ≅ RΓ(S, Λ)`
   let E : 𝔸(PUnit; S) ≅ 𝔸(ULift.{u} (Fin 1); S) :=
     AffineSpace.reindexIso S (Equiv.ofUnique (ULift.{u} (Fin 1)) PUnit)
-  obtain ⟨eR⟩ := nonempty_iso_rightDerivedLowerStar_affineLine Λ (Y := S)
+  obtain ⟨eR⟩ := nonempty_iso_rightDerivedLowerStar_affineLine Λ (𝟙 S)
   let e : (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) 𝔸(PUnit; S)).obj
       ((DerivedCategory.singleFunctor _ 0).obj (𝟙_ _)) ≅
       (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) S).obj
