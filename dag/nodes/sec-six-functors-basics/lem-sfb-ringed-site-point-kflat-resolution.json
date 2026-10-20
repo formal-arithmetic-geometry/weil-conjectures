@@ -1,0 +1,132 @@
+{
+ "id": "lem-sfb-ringed-site-point-kflat-resolution",
+ "kind": "statement",
+ "title": "K-flat resolution with K-flat stalk",
+ "statement": "Let C be a category essentially small in the coefficient universe, J a Grothendieck topology, R a sheaf of commutative rings, p a point of Sh(C,J), and s a normalized ringed-site point [def-sfb-ringed-site-point], with stalk ring A and module functor S. For any unbounded module complex K there exist P and a quasi-isomorphism q:P→K such that P is K-flat [def-pc-kflat-complex] and S(P) is K-flat over A [def-pc-module-kflat-complex].",
+ "stmt_deps": [
+  "def-sfb-ringed-site-point",
+  "def-pc-kflat-complex",
+  "def-pc-module-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7E, first paragraph; Tags 077J, 06YQ and 06YR"
+ },
+ "proof": [
+  {
+   "text": "Use the constructed functorial flat resolution and its reduced left-resolution functor. The augmentation P→K is a quasi-isomorphism, P is categorically K-flat, and the independent-coefficient comparison makes it K-flat on the site. The reduced resolution has a countable filtered-colimit presentation by bounded-above complexes of flat terms.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-pullback-adapted-flat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The point module adjunction makes S preserve colimits. Each image complex remains bounded above, and its terms are flat by flat preservation. Hence each is K-flat over A.",
+   "uses": [
+    "lem-sfb-ringed-site-point-tensor",
+    "lem-sfb-ringed-site-point-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The module category has exact filtered colimits and tensor preserves these colimits. K-flat objects are closed under the indicated filtered colimit; its value is S(P). This supplies the required resolution.",
+   "uses": [
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-kflat-complex",
+  "lem-sfb-ringed-site-point-flat",
+  "lem-sfb-ringed-site-point-tensor",
+  "lem-weil-pbc-ringed-topos-pullback-adapted-flat-resolution"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F2",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7E, first paragraph; Tags 077J, 06YQ and 06YR",
+  "note": "Formal proof supplied in full; generic singleton-site and universal-matrix arguments expand the cited source step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every sheaf complex has a K flat resolution with K flat stalk at a specified point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat) → AlgebraicGeometry.Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] (x : ↥X),\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf\", \"type\": \"∀ {C : Type v} [inst : CategoryTheory.SmallCategory C] (J : CategoryTheory.GrothendieckTopology C) (A : Type u₁)\\n  [inst_1 : CategoryTheory.Category.{v, u₁} A] [inst_2 : CategoryTheory.Abelian A]\\n  [CategoryTheory.IsGrothendieckAbelian.{v, v, u₁} A] [inst_4 : CategoryTheory.HasSheafify J A],\\n  Categ\", \"doc\": \"Given a small category $\\\\mathcal{C}$ with a Grothendieck topology $J$, and an abelian category $\\\\mathcal{A}$ that is Grothendieck abelian with a sheafification functor, the category of sheaves on $\\\\ma\"}\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔ ∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}\n  {\"name\": \"SheafOfModules.Presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [J.HasSheafCompo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring existence of sheafification, local bijectivity, and composition compatib\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}",
+   "date": "2026-10-20",
+   "verdict": "No equivalent theorem for the normalized RingedSitePoint interface; use existing general APIs where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CochainComplex\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplex\", \"type\": \" (V : Type u) [CategoryTheory.Category.{v, u} V] [CategoryTheory.Limits.HasZeroMorphisms V] (α : Type u_2) [AddRightCancelSemigroup α] [One α] : Type (max (max u_2 u) v)\", \"doc\": \"An `α`-indexed cochain complex is a `HomologicalComplex`\\nin which `d i j ≠ 0` only if `i + 1 = j`.\"}\n  {\"name\": \"CochainComplex.mk'\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplex\", \"type\": \" {V : Type u} [CategoryTheory.Category.{v, u} V] [CategoryTheory.Limits.HasZeroMorphisms V] (X₀ X₁ : V) (d : X₀ ⟶ X₁) (succ' : {X₀ X₁ : V} → (f : X₀ ⟶ X₁) → (X₂ : V) ×' (d : X₁ ⟶ X₂) ×' CategoryTheory.CategoryStruct.comp f d = 0) : CochainComplex V ℕ\", \"doc\": \"A simpler inductive constructor for `ℕ`-indexed cochain complexes.\\n\\nYou provide explicitly the first differential,\\nthen a function which takes a differential,\\nand returns the next object, its differen\"}\n  {\"name\": \"CochainComplex.mk\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplex\", \"type\": \" {V : Type u} [CategoryTheory.Category.{v, u} V] [CategoryTheory.Limits.HasZeroMorphisms V] (X₀ X₁ X₂ : V) (d₀ : X₀ ⟶ X₁) (d₁ : X₁ ⟶ X₂) (s : CategoryTheory.CategoryStruct.comp d₀ d₁ = 0) (succ : (S : CategoryTheory.ShortComplex V) → (X₄ : V) ×' (d₂ : S.X₃ ⟶ X₄) ×' CategoryTheory.CategoryStruct.comp\", \"doc\": \"An inductive constructor for `ℕ`-indexed cochain complexes.\\n\\nYou provide explicitly the first two differentials,\\nthen a function which takes two differentials and the fact they compose to zero,\\nand re\"}\n  {\"name\": \"CochainComplex.of\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplex\", \"type\": \" {V : Type u} [CategoryTheory.Category.{v, u} V] [CategoryTheory.Limits.HasZeroMorphisms V] {α : Type u_2} [AddRightCancelSemigroup α] [One α] [DecidableEq α] (X : α → V) (d : (n : α) → X n ⟶ X (n + 1)) (sq : ∀ (n : α), CategoryTheory.CategoryStruct.comp (d n) (d (n + 1)) = 0) : CochainComplex V α\", \"doc\": \"Construct an `α`-indexed cochain complex from a dependently-typed differential.\"}\n  {\"name\": \"CochainComplex.ofHom\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplex\", \"type\": \" {V : Type u} [CategoryTheory.Category.{v, u} V] [CategoryTheory.Limits.HasZeroMorphisms V] {α : Type u_2} [AddRightCancelSemigroup α] [One α] {X Y : CochainComplex V α} (f : (i : α) → X.X i ⟶ Y.X i) (comm : ∀ (i : α), CategoryTheory.CategoryStruct.comp (f i) (Y.d i (i + 1)) = CategoryTheory.Categor\", \"doc\": \"A constructor for chain maps between `α`-indexed cochain complexes built using `CochainComplex.of`,\\nfrom a dependently typed collection of morphisms.\"}\n  {\"name\": \"CochainComplex.mkHom\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplex\", \"type\": \" {V : Type u} [CategoryTheory.Category.{v, u} V] [CategoryTheory.Limits.HasZeroMorphisms V] (P Q : CochainComplex V ℕ) (zero : P.X 0 ⟶ Q.X 0) (one : P.X 1 ⟶ Q.X 1) (one_zero_comm : CategoryTheory.CategoryStruct.comp zero (Q.d 0 1) = CategoryTheory.CategoryStruct.comp (P.d 0 1) one) (succ : (n : ℕ) →\", \"doc\": \"A constructor for chain maps between `ℕ`-indexed cochain complexes,\\nworking by induction on commutative squares.\\n\\nYou need to provide the components of the chain map in degrees 0 and 1,\\nshow that thes\"}\n  {\"name\": \"CochainComplex.mkHom_f_0\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplex\", \"type\": \" {V : Type u} [CategoryTheory.Category.{v, u} V] [CategoryTheory.Limits.HasZeroMorphisms V] (P Q : CochainComplex V ℕ) (zero : P.X 0 ⟶ Q.X 0) (one : P.X 1 ⟶ Q.X 1) (one_zero_comm : CategoryTheory.CategoryStruct.comp zero (Q.d 0 1) = CategoryTheory.CategoryStruct.comp (P.d 0 1) one) (succ : (n : ℕ) →\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.mkHom_f_1\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplex\", \"type\": \" {V : Type u} [CategoryTheory.Category.{v, u} V] [CategoryTheory.Limits.HasZeroMorphisms V] (P Q : CochainComplex V ℕ) (zero : P.X 0 ⟶ Q.X 0) (one : P.X 1 ⟶ Q.X 1) (one_zero_comm : CategoryTheory.CategoryStruct.comp zero (Q.d 0 1) = CategoryTheory.CategoryStruct.comp (P.d 0 1) one) (succ : (n : ℕ) →\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.mkHomAux\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplex\", \"type\": \" {V : Type u} [CategoryTheory.Category.{v, u} V] [CategoryTheory.Limits.HasZeroMorphisms V] (P Q : CochainComplex V ℕ) (zero : P.X 0 ⟶ Q.X 0) (one : P.X 1 ⟶ Q.X 1) (one_zero_comm : CategoryTheory.CategoryStruct.comp zero (Q.d 0 1) = CategoryTheory.CategoryStruct.comp (P.d 0 1) one) (succ : (n : ℕ) →\", \"doc\": \"An auxiliary construction for `mkHom`.\\n\\nHere we build by induction a family of commutative squares,\\nbut don't require at the type level that these successive commutative squares actually agree.\\nThey d\"}\n  {\"name\": \"CochainComplex.mkHom_f_succ_succ\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplex\", \"type\": \" {V : Type u} [CategoryTheory.Category.{v, u} V] [CategoryTheory.Limits.HasZeroMorphisms V] (P Q : CochainComplex V ℕ) (zero : P.X 0 ⟶ Q.X 0) (one : P.X 1 ⟶ Q.X 1) (one_zero_comm : CategoryTheory.CategoryStruct.comp zero (Q.d 0 1) = CategoryTheory.CategoryStruct.comp (P.d 0 1) one) (succ : (n : ℕ) →\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.single₀\", \"module\": \"Mathlib.Algebra.Homology.Single\", \"type\": \" (V : Type u) [CategoryTheory.Category.{v, u} V] [CategoryTheory.Limits.HasZeroMorphisms V] [CategoryTheory.Limits.HasZeroObject V] : CategoryTheory.Functor V (CochainComplex V ℕ)\", \"doc\": \"The functor `V ⥤ CochainComplex V ℕ` creating a cochain complex supported in degree zero.\"}\n  {\"name\": \"CochainComplex.single₀_obj_zero\", \"module\": \"Mathlib.Algebra.Homology.Single\", \"type\": \" {V : Type u} [CategoryTheory.Category.{v, u} V] [CategoryTheory.Limits.HasZeroMorphisms V] [CategoryTheory.Limits.HasZeroObject V] (A : V) : ((CochainComplex.single₀ V).obj A).X 0 = A\", \"doc\": \"\"}",
+   "date": "2026-10-20",
+   "verdict": "No equivalent theorem for the normalized RingedSitePoint interface; use existing general APIs where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "kFlat.*resolution|resolution.*kFlat",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-20",
+   "verdict": "No equivalent theorem for the normalized RingedSitePoint interface; use existing general APIs where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every unbounded complex of sheaf modules has a K flat resolution whose stalk is K flat",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": Flat f ↔ ∀ x, (f.stalkMap x).hom.Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}\n  {\"name\": \"Module.flat_of_isLocalized_span\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \"(H : ∀ r : s, Module.Flat R (Mₛ r)) : Module.Flat R M\", \"doc\": \"If for every element $ r $ in the set $ s $, the localized module $ M_{\\\\mathfrak{p}_r} $ is flat over $ R $, then the module $ M $ is flat over $ R $.\"}\n  {\"name\": \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits\", \"type\": \"[HasColimitsOfShape K (PresheafOfModules.{v} R.val)] : HasColimitsOfShape K (SheafOfModules.{v} R)\", \"doc\": \"If the category of presheaves of modules over a presheaf of rings $ R $ admits colimits of shape $ K $, then the category of sheaves of modules over the corresponding sheaf of rings $ R $ also admits \"}\n  {\"name\": \"Module.Flat.rTensor_shortComplex_exact\", \"module\": \"Mathlib.RingTheory.Flat.CategoryTheory\", \"type\": \"[Flat R M] (C : ShortComplex <| ModuleCat R) (hC : C.Exact) : C.map (tensorRight M) |>.Exact\", \"doc\": \"For a commutative ring $ R $, a flat $ R $-module $ M $, and an exact short complex $ C $ in the category of $ R $-modules, the tensor product of $ C $ with $ M $ results in an exact short complex.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(H : ∀ x, (f.stalkMap x).hom.Flat) : Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[Flat f] (x : X) : (f.stalkMap x).hom.Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"Module.Flat.exists_factorization_of_comp_eq_zero_of_free\", \"module\": \"Mathlib.RingTheory.Flat.EquationalCriterion\", \"type\": \"[Flat R M] {K N : Type*} [AddCommGroup K] [Module R K] [Module.Finite R K] [AddCommGroup N] [Module R N] [Free R N]\\n  [Module.Finite R N] {f : K →ₗ[R] N} {x : N →ₗ[R] M} (h : x ∘ₗ f = 0) :\\n  ∃ (k : ℕ) (a : N →ₗ[R] (Fin k →₀ R)) (y : (Fin k →₀ R) →ₗ[R] M), x = y ∘ₗ a ∧ a ∘ₗ f = 0\", \"doc\": \"Let $ R $ be a commutative semiring and $ M $ a flat $ R $-module. If $ K $ and $ N $ are finite $ R $-modules with $ N $ free, and $ f: K \\\\to N $, $ x: N \\\\to M $ are linear maps satisfying $ x \\\\circ \"}\n  {\"name\": \"Module.Flat.lTensor_shortComplex_exact\", \"module\": \"Mathlib.RingTheory.Flat.CategoryTheory\", \"type\": \"[Flat R M] (C : ShortComplex <| ModuleCat R) (hC : C.Exact) : C.map (tensorLeft M) |>.Exact\", \"doc\": \"For a commutative ring $ R $ and a flat $ R $-module $ M $, if $ C $ is an exact short complex in the category of $ R $-modules, then the tensor product of $ C $ with $ M $ (via left tensoring) result\"}\n",
+   "date": "2026-10-21",
+   "verdict": "No match: these results concern ordinary flatness, scheme/topological stalks, finite-presentation predicates, or general homological APIs; none states this normalized ringed-site point lemma."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedSiteKFlatStalkCriterion",
+  "date": "2026-10-21",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-module-mapmod-pullback-kflat",
+   "place": "Proof: testing an arbitrary acyclic complex on X, replacing the unsupported unrestricted invocation of K-flat ringed-topos pullback by the stalk criterion; K-flat resolution with K-flat stalk",
+   "via": [
+    "lem-sfb-ringed-site-kflat-stalk-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sfb-module-derived-factorization",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedSitePointKFlatResolution",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSitePointKFlatResolution.lean",
+  "declaration": "CategoryTheory.RingedSitePoint.exists_kFlat_resolution",
+  "statement": "theorem exists_kFlat_resolution\n    {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]\n    {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{w}}\n    {p : GeometricMorphism (Type w) (Sheaf J (Type w))}\n    (s : RingedSitePoint R p)\n    (K : CochainComplex (ringedSiteModules.{w}\n      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ) :\n    ∃ (P : CochainComplex (ringedSiteModules.{w}\n        ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ)\n      (q : P ⟶ K), P.IsKFlatIndependentCoefficients ∧ QuasiIso q ∧\n      (HomologicalComplex.quasiIso (ModuleCat.{w} s.ring) (.up ℤ)).kFlat\n        ((s.modules.mapHomologicalComplex (.up ℤ)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261020T174753-L-794151",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261020T174753-L-794151",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

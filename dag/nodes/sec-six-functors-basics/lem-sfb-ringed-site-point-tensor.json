@@ -1,0 +1,130 @@
+{
+ "id": "lem-sfb-ringed-site-point-tensor",
+ "kind": "statement",
+ "title": "Signed total tensor comparison for normalized stalks",
+ "statement": "Let C be a category essentially small in the coefficient universe, J a Grothendieck topology, R a sheaf of commutative rings, p a point of Sh(C,J), and s a normalized ringed-site point [def-sfb-ringed-site-point], with stalk ring A and module functor S. For any unbounded cochain complexes F,K of R-modules, there is an isomorphism S(Tot(F tensor_R K)) ≅ Tot(S(F) tensor_A S(K)) of signed total complexes [def-pc-tensor-complex-sheaves].",
+ "stmt_deps": [
+  "def-sfb-ringed-site-point",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0DEN; pointwise total tensor comparison"
+ },
+ "proof": [
+  {
+   "text": "Present ordinary sets and A-modules as sheaves and module sheaves on the bottom-topology singleton site. Use the ring and module operation graphs in s to give the point an algebraic inverse-image presentation. Its module adjunction gives preservation of colimits.",
+   "uses": [
+    "def-sfb-ringed-site-point",
+    "lem-pur-independent-module-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse-image tensor comparison gives a natural comparison on module sheaves. Evaluation at the singleton is an equivalence compatible with tensor, by the sheafification unit and the explicit tensor map. This identifies the comparison with S(M tensor N) ≅ S(M) tensor S(N).",
+   "uses": [
+    "lem-pur-independent-inverse-image-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply mapBifunctorComparison to that natural comparison and the colimit-preserving functor S. Totalization uses coproducts, whose comparison is invertible. Its differential is the signed total differential, so this is an isomorphism of unbounded signed complexes, not merely a degreewise comparison.",
+   "uses": [
+    "def-sfb-ringed-site-point"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-ringed-site-point",
+  "lem-pur-independent-inverse-image-tensor-comparison",
+  "lem-pur-independent-module-adjunction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F2",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0DEN; pointwise total tensor comparison",
+  "note": "Formal proof supplied in full; generic singleton-site and universal-matrix arguments expand the cited source step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of module sheaves at a topos point commutes with unbounded total tensor complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.ιFree_mapFree_inv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"Given a functor $ F $ between categories of sheaves of modules over ring sheaves $ R $ and $ S $, if $ F $ preserves colimits of discrete diagrams, then the image of the free $ R $-module sheaf over a\"}\n  {\"name\": \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (CategoryTheory.presheafToSheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)).Monoidal\", \"doc\": \"The sheafification functor from presheaves to sheaves on the coherent topology of light profinite spaces (compact, Hausdorff, totally disconnected, second-countable topological spaces) with values in \"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.ιFree_mapFree_inv_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"For a functor $F$ between sheaf of modules categories over ring sheaves $R$ and $S$, the composition of $\\\\iota_{\\\\text{Free}}(i)$ with the inverse of $\\\\text{mapFree}(F,\\\\eta,I)$ followed by a morphism $\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalCategory\\n      (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal category. This structure is defined by equipping the category of sheaves on light profinite spaces (compa\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}",
+   "date": "2026-10-20",
+   "verdict": "No equivalent theorem for the normalized RingedSitePoint interface; use existing general APIs where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "mapBifunctor _ _ _",
+   "results": "[loogle] OK 0 hit(s) | loogle: Unknown identifier `mapBifunctor`",
+   "date": "2026-10-20",
+   "verdict": "No equivalent theorem for the normalized RingedSitePoint interface; use existing general APIs where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*tensor|tensor.*stalk|inverseImageTensorComparison",
+   "results": "[grep] OK 20 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean\", \"line\": \"128\", \"text\": \"            (PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks R A B H)).comp\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean\", \"line\": \"16\", \"text\": \"- `PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks`:\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean\", \"line\": \"42\", \"text\": \"lemma PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks_aux\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean\", \"line\": \"63\", \"text\": \"lemma PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks :\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean\", \"line\": \"66\", \"text\": \"    (isEmbedding_tensorProductTo_of_surjectiveOnStalks_aux R S T hRT p₁ p₂ e).antisymm\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean\", \"line\": \"67\", \"text\": \"      (isEmbedding_tensorProductTo_of_surjectiveOnStalks_aux R S T hRT p₂ p₁ e.symm)⟩\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"278\", \"text\": \"lemma rankAtStalk_eq_finrank_tensorProduct (p : PrimeSpectrum R) :\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"358\", \"text\": \"/-- See `rankAtStalk_tensorProduct_of_isScalarTower` for a hetero-basic version. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"359\", \"text\": \"lemma rankAtStalk_tensorProduct (N : Type*) [AddCommGroup N] [Module R N] [Module.Finite R N]\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"367\", \"text\": \"  rw [rankAtStalk_eq_finrank_tensorProduct, e.finrank_eq, finrank_tensorProduct,\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"368\", \"text\": \"    ← rankAtStalk_eq_finrank_tensorProduct, ← rankAtStalk_eq_finrank_tensorProduct, Pi.mul_apply]\"}\n  {\"file\": \"Mathlib/RingTheory/LocalRing/ResidueField/Fiber.lean\", \"line\": \"217\", \"text\": \"    have := PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks _ S _\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Rank.lean\", \"line\": \"90\", \"text\": \"      simp [← finrank_eq_rank, ← rankAtStalk_eq_finrank_tensorProduct ⟨p, inferInstance⟩, hr]\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Rank.lean\", \"line\": \"93\", \"text\": \"    grind [rankAtStalk_eq_finrank_tensorProduct ⟨p, inferInstance⟩]\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Rank.lean\", \"line\": \"106\", \"text\": \"      simp [rankAtStalk_tensorProduct, sq]\"}\n  {\"file\": \"Mathlib/RingTheory/SurjectiveOnStalks.lean\", \"line\": \"191\", \"text\": \"    (Algebra.TensorProduct.includeRight (R := R) (A := S) (B := T)).SurjectiveOnStalks := by\"}\n  {\"file\": \"Mathlib/RingTheory/SurjectiveOnStalks.lean\", \"line\": \"193\", \"text\": \"    (surjectiveOnStalks_of_surjective (Algebra.TensorProduct.comm R T S).surjective).comp\"}\n  {\"file\": \"Mathlib/RingTheory/SurjectiveOnStalks.lean\", \"line\": \"195\", \"text\": \"        -- Subsumed by `RingHom.SurjectiveOnStalks.tensorProductMap`.\"}\n  {\"file\": \"Mathlib/RingTheory/SurjectiveOnStalks.lean\", \"line\": \"198\", \"text\": \"-- Subsumed by `RingHom.SurjectiveOnStalks.tensorProductMap`.\"}\n  {\"file\": \"Mathlib/RingTheory/SurjectiveOnStalks.lean\", \"line\": \"199\", \"text\": \"private lemma SurjectiveOnStalks.tensorProductMap_id\"}",
+   "date": "2026-10-20",
+   "verdict": "No equivalent theorem for the normalized RingedSitePoint interface; use existing general APIs where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stalk inverse image commutes with signed unbounded total tensor of cochain complexes of sheaf modules",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TopCat.Presheaf.stalkPullbackIso\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(f : X ⟶ Y) (F : Y.Presheaf C) (x : X) : F.stalk (f x) ≅ ((pullback C f).obj F).stalk x\", \"doc\": \"For any category $\\\\mathcal{C}$ with colimits, topological spaces $X$ and $Y$, a continuous map $f: X \\\\to Y$, a presheaf $\\\\mathcal{F}$ on $Y$, and a point $x \\\\in X$, there is an isomorphism between the\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.stalkMap.isIso\", \"module\": \"Mathlib.Geometry.RingedSpace.Stalks\", \"type\": \"{X Y : PresheafedSpace.{_, _, v} C} (α : X ⟶ Y) [IsIso α] (x : X) : IsIso (α.stalkMap x)\", \"doc\": \"For any isomorphism $\\\\alpha: X \\\\to Y$ of presheafed spaces over a category $\\\\mathcal{C}$ and any point $x \\\\in X$, the induced stalk map $\\\\mathcal{F}_{Y, \\\\alpha(x)} \\\\to \\\\mathcal{F}_{X, x}$ between the \"}\n  {\"name\": \"TopCat.Presheaf.stalkPullbackHom\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(f : X ⟶ Y) (F : Y.Presheaf C) (x : X) : F.stalk (f x) ⟶ ((pullback C f).obj F).stalk x\", \"doc\": \"Given a continuous map $f: X \\\\to Y$ between topological spaces, a presheaf $\\\\mathcal{F}$ on $Y$ with values in a category $\\\\mathcal{C}$, and a point $x \\\\in X$, this defines the canonical morphism from\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(f : X ⟶ Y) [IsOpenImmersion f] (x : X) :\\n  restrictFunctor f ⋙ toPresheaf _ ⋙ TopCat.Presheaf.stalkFunctor _ x ≅\\n    toPresheaf _ ⋙ TopCat.Presheaf.stalkFunctor _ (f x)\", \"doc\": \"For an open immersion of schemes $f: X \\\\to Y$ and a point $x \\\\in X$, this definition establishes a natural isomorphism between the functor that computes the stalk at $x$ of the pullback of a sheaf of \"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_inv_eq_germ_apply\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"(y) :\\n  (X.restrictStalkIso h x).inv (X.presheaf.germ (h.isOpenMap.functor.obj V) (f x) ⟨x, hx, rfl⟩ y) =\\n    (X.restrict h).presheaf.germ _ x hx y\", \"doc\": \"Let $X$ be a locally ringed space with structure sheaf $\\\\mathcal{O}_X$. Let $f: U \\\\to X$ be an open embedding of a topological space $U$ into $X$. This induces a restricted locally ringed space on $U$\"}\n  {\"name\": \"TopCat.Presheaf.stalkPullbackInv\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(f : X ⟶ Y) (F : Y.Presheaf C) (x : X) : ((pullback C f).obj F).stalk x ⟶ F.stalk (f x)\", \"doc\": \"Let $f: X \\\\to Y$ be a continuous map between topological spaces, $F$ be a presheaf on $Y$ with values in a category $C$ that has colimits, and $x$ be a point in $X$. This definition constructs the can\"}\n  {\"name\": \"ModuleCat.Tilde.toStalk\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"(x : PrimeSpectrum.Top R) : ModuleCat.of R M ⟶ TopCat.Presheaf.stalk (tildeInModuleCat M) x\", \"doc\": \"For a point $ x $ in the prime spectrum $ \\\\operatorname{Spec}(R) $, this defines the canonical morphism from the module $ M $ (viewed as an object in the category of $ R $-modules) to the stalk of the\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_inv_eq_ofRestrict\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \": (X.restrictStalkIso h x).inv = (X.ofRestrict h).stalkMap x\", \"doc\": \"For a locally ringed space $ X $, an open subset $ U $ with open embedding $ f: U \\\\to X $, and a point $ x \\\\in U $, the inverse of the stalk isomorphism $ (X.restrictStalkIso \\\\, h \\\\, x)^{-1} $ at $ x \"}\n",
+   "date": "2026-10-21",
+   "verdict": "No match: these results concern ordinary flatness, scheme/topological stalks, finite-presentation predicates, or general homological APIs; none states this normalized ringed-site point lemma."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedSiteKFlatStalkCriterion",
+  "date": "2026-10-21",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-module-mapmod-pullback-kflat",
+   "place": "Proof: testing an arbitrary acyclic complex on X, replacing the unsupported unrestricted invocation of K-flat ringed-topos pullback by the stalk criterion; Signed total tensor comparison for normalized stalks",
+   "via": [
+    "lem-sfb-ringed-site-kflat-stalk-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sfb-module-derived-factorization",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedSitePointTensor",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSitePointTensor.lean",
+  "declaration": "CategoryTheory.RingedSitePoint.tensor",
+  "statement": "theorem tensor (s : RingedSitePoint R p) :\n    letI := SheafOfModules.isMonoidal_W_independentCoefficients R\n    letI := SheafOfModules.monoidalCategory R\n    letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients R\n    letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients R\n    ∀ F K : CochainComplex (ringedSiteModules.{w}\n      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ,\n      Nonempty (((s.modules.mapHomologicalComplex (.up ℤ)).obj\n        (CochainComplex.mapBifunctor F K (curriedTensor _))) ≅\n        CochainComplex.mapBifunctor\n          ((s.modules.mapHomologicalComplex (.up ℤ)).obj F)\n          ((s.modules.mapHomologicalComplex (.up ℤ)).obj K) (curriedTensor _))",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261020T174753-L-794151",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261020T174753-L-794151",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

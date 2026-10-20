@@ -1,0 +1,122 @@
+{
+ "id": "lem-sfb-ringed-site-point-acyclic",
+ "kind": "statement",
+ "title": "A conservative point family detects acyclicity",
+ "statement": "Let C be a category essentially small in the coefficient universe, J a Grothendieck topology, R a sheaf of commutative rings, p a point of Sh(C,J), and s a normalized ringed-site point [def-sfb-ringed-site-point], with stalk ring A and module functor S. For a set-indexed family (p_i,s_i) whose inverse images jointly reflect isomorphisms of set sheaves, a module complex K is acyclic if and only if every S_i(K) is acyclic. The family may be empty.",
+ "stmt_deps": [
+  "def-sfb-ringed-site-point",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0DEN, proof of (2), with Tag 07A4"
+ },
+ "proof": [
+  {
+   "text": "Exact S_i preserve homology, hence preserve acyclicity.",
+   "uses": [
+    "lem-sfb-ringed-site-point-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The prescribed underlying-set isomorphisms transfer joint reflection of isomorphisms to module sheaves. If every stalk complex is acyclic, every map H^n(K) to zero is an isomorphism at each point. Joint reflection makes it an isomorphism, hence H^n(K) is zero. No point is selected; an empty conservative family is covered.",
+   "uses": [
+    "def-sfb-ringed-site-point",
+    "lem-sfb-ringed-site-point-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-ringed-site-point",
+  "lem-sfb-ringed-site-point-exact"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F2",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0DEN, proof of (2), with Tag 07A4",
+  "note": "Formal proof supplied in full; generic singleton-site and universal-matrix arguments expand the cited source step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A conservative family of exact stalk functors detects acyclicity of unbounded complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Acyclic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] (K : CochainComplex C ℤ),\\n  HomotopyCategory.subcategoryAcyclic C ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K) ↔\\n    ∀ (n : ℤ), HomologicalComplex.ExactAt K n\", \"doc\": \"A cochain complex $ K $ in the homotopy category belongs to the acyclic subcategory if and only if it is exact at every integer index $ n $, meaning the image of the differential at each degree equals\"}\n  {\"name\": \"HomologicalComplex.Acyclic\", \"module\": \"Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n      {ι : Type u_2} → {c : ComplexShape ι} → HomologicalComplex C c → Prop\", \"doc\": \"A homological complex $ K $ is acyclic if, for every index $ i $, the image of the differential $ d_{\\\\text{prev}(i),i} $ equals the kernel of the differential $ d_{i,\\\\text{next}(i)} $. This means the \"}\n  {\"name\": \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Acyclic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] (K : CochainComplex C ℤ),\\n  HomotopyCategory.subcategoryAcyclic C ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K) ↔\\n    HomologicalComplex.Acyclic K\", \"doc\": \"For a cochain complex $ K $ in a preadditive category $ C $ with integer indices, the image of $ K $ under the quotient functor to the homotopy category belongs to the acyclic subcategory (consisting \"}\n  {\"name\": \"HomotopyCategory.mem_subcategoryAcyclic_iff\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Acyclic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  (X : HomotopyCategory C (ComplexShape.up ℤ)),\\n  HomotopyCategory.subcategoryAcyclic C X ↔\\n    ∀ (n : ℤ), CategoryTheory.Limits.IsZero ((HomotopyCategory.homologyFunctor C (ComplexShape.up ℤ) n).obj X)\", \"doc\": \"An object $ X $ in the homotopy category belongs to the acyclic subcategory if and only if, for every integer $ n $, the $ n $-th homology object of $ X $ is zero.\"}\n  {\"name\": \"HomologicalComplex.acyclic_iff\", \"module\": \"Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  {ι : Type u_2} {c : ComplexShape ι} (K : HomologicalComplex C c), K.Acyclic ↔ ∀ (i : ι), K.ExactAt i\", \"doc\": \"A homological complex $ K $ is acyclic if and only if it is exact at every index $ i $.\"}\n  {\"name\": \"DerivedCategory.isLE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsLE n ↔ ∀ (i : ℤ), n < i → CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and an integer $ n $, $ X $ belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure if and only if for e\"}\n  {\"name\": \"DerivedCategory.isGE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsGE n ↔ ∀ i < n, CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, $ X $ satisfies the $ \\\\text{IsGE}(n) $ condition (i.e., belongs to the $ \\\\mathcal{G}_n $ family of\"}\n  {\"name\": \"HomologicalComplex.exact_of_degreewise_exact\", \"module\": \"Mathlib/Algebra/Homology/HomologicalComplexAbelian\", \"type\": \"∀ {C : Type u_1} {ι : Type u_2} {c : ComplexShape ι} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Abelian C] (S : CategoryTheory.ShortComplex (HomologicalComplex C c)),\\n  (∀ (i : ι), (S.map (HomologicalComplex.eval C c i)).Exact) → S.Exact\", \"doc\": \"If a short complex $ S $ in an abelian category has the property that its evaluation at every index $ i $ is an exact sequence, then $ S $ itself is an exact complex. In other words, if for all $ i $,\"}",
+   "date": "2026-10-20",
+   "verdict": "No equivalent theorem for the normalized RingedSitePoint interface; use existing general APIs where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "JointlyReflectIsomorphisms",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'JointlyReflectIsomorphisms'",
+   "date": "2026-10-20",
+   "verdict": "No equivalent theorem for the normalized RingedSitePoint interface; use existing general APIs where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "acyclic.*stalk|stalk.*acyclic|jointly.*homology",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-20",
+   "verdict": "No equivalent theorem for the normalized RingedSitePoint interface; use existing general APIs where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A conservative family of exact stalk functors detects acyclicity of module complexes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TopCat.Presheaf.stalkFunctor\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(x : X) : X.Presheaf C ⥤ C\", \"doc\": \"Given a topological space `X` and a category `C` with all colimits, this defines the stalk functor at a point `x \\\\in X`. It is a functor from the category of presheaves on `X` with values in `C` to th\"}\n  {\"name\": \"HomologicalComplex.Acyclic\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n      {ι : Type u_2} → {c : ComplexShape ι} → HomologicalComplex C c → Prop\", \"doc\": \"A homological complex $ K $ is acyclic if, for every index $ i $, the image of the differential $ d_{\\\\text{prev}(i),i} $ equals the kernel of the differential $ d_{i,\\\\text{next}(i)} $. This means the \"}\n  {\"name\": \"CategoryTheory.exactFunctor\", \"module\": \"Mathlib.CategoryTheory.Limits.ExactFunctor\", \"type\": \": ObjectProperty (C ⥤ D)\", \"doc\": \"A functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ that preserves both finite limits and finite colimits, i.e., it preserves the limit of any finite diagram and the colimit of any finite diagram in $ \\\\math\"}\n  {\"name\": \"TopCat.Presheaf.stalk_mono_of_mono\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"{F G : Sheaf C X} (f : F ⟶ G) [Mono f] : ∀ x, Mono <| (stalkFunctor C x).map f.1\", \"doc\": \"For any topological space $X$ and category $\\\\mathcal{C}$, if $f : F \\\\to G$ is a monomorphism between sheaves $F$ and $G$ on $X$ with values in $\\\\mathcal{C}$, then for every point $x \\\\in X$, the induce\"}\n  {\"name\": \"CategoryTheory.Functor.exact_tfae\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.ExactFunctor\", \"type\": \":\\n  List.TFAE\\n    [∀ (S : ShortComplex C), S.ShortExact → (S.map F).ShortExact, ∀ (S : ShortComplex C), S.Exact → (S.map F).Exact,\\n      PreservesHomology F, PreservesFiniteLimits F ∧ PreservesFiniteColimits F]\", \"doc\": \"For a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ between abelian categories, the following are equivalent: (1) $F$ preserves short exact sequences, (2) $F$ preserves exact complexes, (3) $F$ preserves \"}\n  {\"name\": \"TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"{F : Sheaf C X} {G : Presheaf C X} (f : F.1 ⟶ G) :\\n  (∀ x : X, Function.Injective ((stalkFunctor C x).map f)) ↔ ∀ U : Opens X, Function.Injective (f.app (op U))\", \"doc\": \"For a sheaf $\\\\mathcal{F}$ and a presheaf $\\\\mathcal{G}$ on a topological space $X$, a morphism $f : \\\\mathcal{F} \\\\to \\\\mathcal{G}$ is injective on all stalks $\\\\mathcal{F}_x \\\\to \\\\mathcal{G}_x$ for every $\"}\n  {\"name\": \"TopCat.Presheaf.stalkFunctor_obj\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(ℱ : X.Presheaf C) (x : X) : (stalkFunctor C x).obj ℱ = ℱ.stalk x\", \"doc\": \"For a presheaf $\\\\mathcal{F}$ on a topological space $X$ and a point $x \\\\in X$, the object part of the stalk functor at $x$ applied to $\\\\mathcal{F}$ yields the stalk $\\\\mathcal{F}_x$ of $\\\\mathcal{F}$ at\"}\n  {\"name\": \"instIsLeftAdjointPresheafStalkFunctor\", \"module\": \"Mathlib.Topology.Sheaves.Skyscraper\", \"type\": \"[HasColimits C] : (Presheaf.stalkFunctor C p₀).IsLeftAdjoint\", \"doc\": \"For any topological space $X$ and category $\\\\mathcal{C}$ with colimits, the stalk functor at a point $p_0$ from the category of presheaves on $X$ to $\\\\mathcal{C}$ is a left adjoint functor.\"}\n",
+   "date": "2026-10-21",
+   "verdict": "No match: these results concern ordinary flatness, scheme/topological stalks, finite-presentation predicates, or general homological APIs; none states this normalized ringed-site point lemma."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedSiteKFlatStalkCriterion",
+  "date": "2026-10-21",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-module-mapmod-pullback-kflat",
+   "place": "Proof: testing an arbitrary acyclic complex on X, replacing the unsupported unrestricted invocation of K-flat ringed-topos pullback by the stalk criterion; A conservative point family detects acyclicity",
+   "via": [
+    "lem-sfb-ringed-site-kflat-stalk-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sfb-module-derived-factorization",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedSitePointAcyclic",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSitePointAcyclic.lean",
+  "declaration": "CategoryTheory.RingedSitePoint.acyclic_iff",
+  "statement": "theorem acyclic_iff\n    {I : Type t} (p : I → GeometricMorphism (Type w) (Sheaf J (Type w)))\n    (s : ∀ i : I, RingedSitePoint R (p i))\n    (hp : JointlyReflectIsomorphisms (fun i : I ↦ (p i).inverse))\n    (K : CochainComplex (ringedSiteModules.{w}\n      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ) :\n    K.Acyclic ↔ ∀ i : I,\n      (((s i).modules.mapHomologicalComplex (.up ℤ)).obj K).Acyclic",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261020T174753-L-794151",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261020T174753-L-794151",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

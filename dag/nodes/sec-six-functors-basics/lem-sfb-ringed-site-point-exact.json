@@ -1,0 +1,120 @@
+{
+ "id": "lem-sfb-ringed-site-point-exact",
+ "kind": "statement",
+ "title": "Exactness of normalized module stalks",
+ "statement": "Let C be a category essentially small in the coefficient universe, J a Grothendieck topology, R a sheaf of commutative rings, p a point of Sh(C,J), and s a normalized ringed-site point [def-sfb-ringed-site-point], with stalk ring A and module functor S. Then S is exact as a functor between abelian categories.",
+ "stmt_deps": [
+  "def-sfb-ringed-site-point"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 05V3; exactness of module inverse image"
+ },
+ "proof": [
+  {
+   "text": "Underlying set sheaves create finite limits of modules; inverse image preserves finite limits. The prescribed underlying natural isomorphism and reflection by forgetting module structure therefore show S preserves finite limits.",
+   "uses": [
+    "def-sfb-ringed-site-point"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The module-to-abelian-sheaf forgetful functor preserves finite colimits. Thus module epis become locally surjective maps of underlying set sheaves. The point inverse image preserves epis as a left adjoint; the underlying natural isomorphism and module forgetful reflection make S preserve epis. Additivity, kernels and epis imply exactness.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-ringed-site-point",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F2",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 05V3; exactness of module inverse image",
+  "note": "Formal proof supplied in full; generic singleton-site and universal-matrix arguments expand the cited source step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The additive inverse image on modules at a topos point is an exact functor",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Condensed.instAB4StarCondensedMod\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.AB4Star (CondensedMod R)\", \"doc\": \"The category of condensed modules over a ring $ R $ satisfies the AB4* axiom, meaning it has all products and the product of any family of epimorphisms is an epimorphism.\"}\n  {\"name\": \"Condensed.instAB4CondensedMod\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.AB4 (CondensedMod R)\", \"doc\": \"The category of condensed modules over any ring $ R $ satisfies the AB4 axiom, meaning it has all coproducts and coproducts preserve exact sequences (are exact functors).\"}\n  {\"name\": \"instAbelianCondensedMod\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Abelian (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ forms an abelian category. This follows from the fact that the category of sheaves on the site of compact Hausdorff spaces with the coh\"}\n  {\"name\": \"Condensed.instAB5CondensedMod\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.AB5 (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ satisfies the AB5 axiom, meaning it has all filtered colimits and these colimits are exact (preserve finite limits).\"}\n  {\"name\": \"instAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → CategoryTheory.Abelian (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules forms an abelian category. This follows from the fact that the category of sheaves on the site of light profinite spaces (equipped wit\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"SheafOfModules.instAbelian\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] → CategoryTheory.Abelian (SheafOfM\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ is an abelian category. This follows from the pre\"}\n  {\"name\": \"ModuleCat.localizedModule_functor_map_exact\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Localization\", \"type\": \"∀ {R : Type u} [inst : CommRing R] [inst_1 : Small.{v, u} R] (S : Submonoid R)\\n  (T : CategoryTheory.ShortComplex (ModuleCat R)), T.Exact → (T.map (ModuleCat.localizedModule_functor S)).Exact\", \"doc\": \"For a small commutative ring $ R $, a submonoid $ S $, and an exact short complex $ T $ in the category of left $ R $-modules, the image of $ T $ under the localization functor from $ R $-modules to $\"}",
+   "date": "2026-10-20",
+   "verdict": "No equivalent theorem for the normalized RingedSitePoint interface; use existing general APIs where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "exactFunctor _ _",
+   "results": "[loogle] OK 0 hit(s) | loogle: Unknown identifier `exactFunctor`",
+   "date": "2026-10-20",
+   "verdict": "No equivalent theorem for the normalized RingedSitePoint interface; use existing general APIs where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "RingedSitePoint.*exact|module.*inverse.*exact",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-20",
+   "verdict": "No equivalent theorem for the normalized RingedSitePoint interface; use existing general APIs where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The additive inverse image on modules at a topos point is an exact functor",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.leftExactFunctor_le_additiveFunctor\", \"module\": \"Mathlib.CategoryTheory.Preadditive.AdditiveFunctor\", \"type\": \": leftExactFunctor C D ≤ additiveFunctor C D\", \"doc\": \"In preadditive categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, every left exact functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is additive, meaning the collection of left exact functors is contained within the\"}\n  {\"name\": \"CategoryTheory.exactFunctor_le_additiveFunctor\", \"module\": \"Mathlib.CategoryTheory.Preadditive.AdditiveFunctor\", \"type\": \": exactFunctor C D ≤ additiveFunctor C D\", \"doc\": \"The type of exact functors from category $\\\\mathcal{C}$ to $\\\\mathcal{D}$ is a subtype of the type of additive functors between the same categories. This means every exact functor (preserving finite lim\"}\n  {\"name\": \"CategoryTheory.rightExactFunctor_le_additiveFunctor\", \"module\": \"Mathlib.CategoryTheory.Preadditive.AdditiveFunctor\", \"type\": \": rightExactFunctor C D ≤ additiveFunctor C D\", \"doc\": \"Every right exact functor from category $\\\\mathcal{C}$ to category $\\\\mathcal{D}$ is an additive functor, i.e., the property of preserving finite colimits implies the property of preserving morphism add\"}\n  {\"name\": \"CategoryTheory.AdditiveFunctor.ofExact_obj_fst\", \"module\": \"Mathlib.CategoryTheory.Preadditive.AdditiveFunctor\", \"type\": \"(F : C ⥤ₑ D) : ((AdditiveFunctor.ofExact C D).obj F).obj = F.obj\", \"doc\": \"For any exact functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the object component of the additive functor obtained by inclusion into the category of additive functors is equal to the object component of\"}\n  {\"name\": \"CategoryTheory.Equivalence.additive_inverse_of_FullyFaithful\", \"module\": \"Mathlib.CategoryTheory.Preadditive.Transfer\", \"type\": \"(e : C ≌ D) :\\n  letI : Preadditive C := ofFullyFaithful e.fullyFaithfulFunctor\\n  e.inverse.Additive\", \"doc\": \"Given a categorical equivalence $ e : C ≌ D $ where the forward functor is fully faithful, transferring the preadditive structure from $ D $ to $ C $ via this equivalence ensures that the inverse func\"}\n  {\"name\": \"AddCommGrpCat.leftExactFunctorForgetEquivalence.inverseAux\", \"module\": \"Mathlib.Algebra.Category.Grp.LeftExactFunctor\", \"type\": \": (C ⥤ₗ Type v) ⥤ C ⥤ AddCommGrpCat.{v}\", \"doc\": \"The inverse functor in the equivalence between left exact functors from a category $\\\\mathcal{C}$ to the category of types $\\\\mathrm{Type}\\\\, v$ and left exact functors from $\\\\mathcal{C}$ to the category\"}\n  {\"name\": \"AddCommGrpCat.leftExactFunctorForgetEquivalence.instPreservesFiniteLimitsObjLeftExactFunctorTypeFunctorInverseAux\", \"module\": \"Mathlib.Algebra.Category.Grp.LeftExactFunctor\", \"type\": \"(F : C ⥤ₗ Type v) : PreservesFiniteLimits (inverseAux.obj F)\", \"doc\": \"The inverse functor in the equivalence between left exact functors from a category $\\\\mathcal{C}$ to the category of types $\\\\mathrm{Type}\\\\, v$ and left exact functors from $\\\\mathcal{C}$ to the category\"}\n  {\"name\": \"AddCommGrpCat.leftExactFunctorForgetEquivalence.inverse\", \"module\": \"Mathlib.Algebra.Category.Grp.LeftExactFunctor\", \"type\": \": (C ⥤ₗ Type v) ⥤ (C ⥤ₗ AddCommGrpCat.{v})\", \"doc\": \"The inverse functor in the equivalence between left exact functors from a category $\\\\mathcal{C}$ to the category of types $\\\\mathrm{Type}\\\\, v$ and left exact functors from $\\\\mathcal{C}$ to the category\"}\n",
+   "date": "2026-10-21",
+   "verdict": "No match: these results concern ordinary flatness, scheme/topological stalks, finite-presentation predicates, or general homological APIs; none states this normalized ringed-site point lemma."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedSiteKFlatStalkCriterion",
+  "date": "2026-10-21",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-module-mapmod-pullback-kflat",
+   "place": "Proof: testing an arbitrary acyclic complex on X, replacing the unsupported unrestricted invocation of K-flat ringed-topos pullback by the stalk criterion; Exactness of normalized module stalks",
+   "via": [
+    "lem-sfb-ringed-site-kflat-stalk-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sfb-module-derived-factorization",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedSitePointExact",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSitePointExact.lean",
+  "declaration": "CategoryTheory.RingedSitePoint.exact",
+  "statement": "theorem exact (s : RingedSitePoint R p) : exactFunctor _ _ s.modules",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261020T174753-L-794151",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261020T174753-L-794151",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

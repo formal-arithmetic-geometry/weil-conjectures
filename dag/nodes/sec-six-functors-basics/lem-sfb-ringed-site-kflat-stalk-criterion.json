@@ -17,115 +17,71 @@
  ],
  "proof": [
   {
-   "text": "For any point $p$, exact transported module inverse image preserves kernels and cokernels. Thus, using $H^n=\\ker(d^n)/\\operatorname{im}(d^{n-1})$ and $\\operatorname{im}(d)=\\ker(\\operatorname{coker}(d))$, it gives $H^n(K_p)\\cong p^{-1}H^n(K)$ and preserves acyclic complexes. Apply the ordinary total-tensor comparison to the ringed-topos map $(\\mathbf{Set},R_p)\\to(\\operatorname{Sh}(C),R)$ with identity coefficient map. Tensor extension along that identity is removed by $a\\otimes m\\mapsto am$. Consequently $(\\operatorname{Tot}(F\\otimes_RK))_p\\cong\\operatorname{Tot}(F_p\\otimes_{R_p}K_p)$ for all unbounded complexes. The cited comparison is already an isomorphism of signed total complexes, so no boundedness or interchange of infinite products is being asserted.",
+   "text": "The normalized module stalk functor is exact and commutes with signed unbounded total tensor. A conservative family on set sheaves detects acyclicity of module complexes, using reflection on the map from each homology to zero.",
    "uses": [
-    "lem-trf-geometric-inverse-image-exact",
-    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-sfb-ringed-site-point-exact",
+    "lem-sfb-ringed-site-point-tensor",
+    "lem-sfb-ringed-site-point-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose P→K from the reduced flat resolution, with P K-flat on the site and with K-flat stalk. If K is K-flat, its cone E is K-flat by the independent-coefficient cone theorem and is acyclic by the quasi-isomorphism cone criterion.",
+   "uses": [
+    "lem-sfb-ringed-site-point-kflat-resolution",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-pur-quasi-iso-cone-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An acyclic K-flat E tensors acyclically with every source complex. For each finitely presented stalk module M, the universal matrix retract lemma, exact stalks and tensor compatibility imply that E_p tensor M[0] is acyclic. The ordinary module finite-presentation criterion makes E_p K-flat.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-acyclic-kflat-pullback",
+    "lem-sfb-ringed-site-point-universal-tensor",
+    "lem-sfb-universal-acyclic-module-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Additive module inverse image commutes with the mapping cone, so E_p is the cone of P_p→K_p. In the homotopy category the quasi-isomorphism K-flat property is triangulated and closed under two-out-of-three. Since P_p and E_p are K-flat, K_p is K-flat.",
+   "uses": [
+    "def-pc-module-kflat-complex",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0DEN, proof of (2), stalk exactness and total tensor comparison; sites-modules.tex Tag 05V3 and sites-cohomology.tex Tag 07A4"
-   }
+   "elementary": false
   },
   {
-   "text": "For the forward direction only, replace $\\operatorname{Sh}(C)$ by a finite-limit subcanonical site presentation using the presentation theorem with the terminal sheaf as its specified object. Transport $R$, $K$, and $p$ along the topos equivalence. The inverse-image functors of this equivalence and its inverse give inverse equivalences on module sheaves: their composites preserve each addition and scalar action through the finite-product comparisons, so the topos inverse equations are module-linear. Both functors are exact by the inverse-image theorem and commute with total tensor by the ordinary cochain comparison. Hence K-flatness is preserved and reflected: every acyclic test complex on one side is the image, up to the inverse equations, of an acyclic test complex on the other, and its total tensor is the image of the corresponding total tensor. The composite point gives the same stalk ring and stalk complex by these inverse equations. We may therefore assume $C$ has finite limits without assuming this in the item.",
+   "text": "Conversely, for each acyclic source F, exact stalks make F_p acyclic. K-flat K_p makes its tensor with F_p acyclic. Tensor comparison identifies these with stalks of F tensor K, and conservative-family acyclicity detection gives source acyclicity. This holds for every F and proves K-flatness, including an empty conservative family.",
    "uses": [
-    "lem-trf-topos-localization-site-presentation",
-    "lem-trf-geometric-inverse-image-exact",
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "def-trf-geometric-morphism",
-    "def-pc-kflat-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0DEN, proof of (1), replacement by a good site; sites.tex Tag 03CI"
-   }
-  },
-  {
-   "text": "Assume $K$ is K-flat. Choose a quasi-isomorphism $a:L\\to K$ with $L$ K-flat and all $L^n$ flat, using the site resolution theorem. Put $E=C(a)$. The quasi-isomorphism--cone criterion says $E$ is acyclic. For every acyclic $A$, the two tensors with $L$ and $K$ are acyclic, so the tensor-cone two-out-of-three theorem implies the tensor with $E$ is acyclic; this is exactly K-flatness of $E$. The flat-term pullback theorem, applied to the point with coefficient map $p^{-1}R\\xrightarrow{\\mathrm{id}}R_p$, proves $L_p$ K-flat. Its flat-term hypothesis is used only for this chosen resolution, not for $K$ or $E$.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-quasi-iso-cone-acyclic",
-    "lem-pc-kflat-tensor-cone-two-out-of-three",
+    "lem-sfb-ringed-site-point-exact",
+    "lem-sfb-ringed-site-point-tensor",
+    "lem-sfb-ringed-site-point-acyclic",
     "def-pc-kflat-complex",
-    "lem-weil-pbc-ringed-topos-kflat-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0DEN, proof of (1), first paragraph: resolution, cone, and flat-term pullback"
-   }
-  },
-  {
-   "text": "We now handle an arbitrary acyclic K-flat $E$ on this finite-limit site. Fix a finitely presented $R_p$-module $M$. The local realization theorem gives a pointed object $(U,x)$, its lifted point $q$ of $C/U$, and an $R_U$-module sheaf $F$ with $F_q\\cong M$ and $(E|_U)_q\\cong E_p$. Exact restriction makes $E|_U$ acyclic, and the restriction K-flat theorem makes it K-flat. The universal tensor-acyclicity theorem therefore makes $\\operatorname{Tot}(F[0]\\otimes_{R_U}E|_U)$ acyclic. Take its $q$-stalk: exactness and the ordinary signed cochain tensor comparison identify this acyclic complex with $\\operatorname{Tot}(M[0]\\otimes_{R_p}E_p)$. The signed symmetry from the same cochain comparison theorem changes the factor order to $\\operatorname{Tot}(E_p\\otimes_{R_p}M[0])$; here the sign is $1$ because $M$ has degree zero.",
-   "uses": [
-    "lem-sfb-site-fp-stalk-realization",
-    "lem-sfb-ringed-site-restriction-kflat",
-    "lem-pur-acyclic-kflat-tensor-arbitrary",
-    "lem-trf-geometric-inverse-image-exact",
-    "lem-pur-cochain-pullback-tensor-coherence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0DEN, proof of (1), paragraphs beginning Assume K is acyclic and Let M be finitely presented"
-   }
-  },
-  {
-   "text": "The preceding construction applies to every finitely presented $M$, so the universal-acyclicity criterion for ordinary modules shows $E_p$ is K-flat. Return to $E=C(a)$ from step 3. Exact additive inverse image commutes with the cone matrix: $p^{-1}(K^n\\oplus L^{n+1})=K_p^n\\oplus L_p^{n+1}$ and its differential is still $(d_K,a;0,-d_L)$. Thus $E_p\\cong C(a_p)$. For any acyclic $R_p$-module complex $B$, the tensors with $L_p$ and $E_p$ are acyclic. Apply the tensor-cone two-out-of-three theorem on the one-object ringed site presenting ordinary $R_p$-modules to obtain acyclicity of $\\operatorname{Tot}(B\\otimes_{R_p}K_p)$. This is the module definition of K-flatness, proving the forward direction for every point.",
-   "uses": [
-    "lem-sfb-universal-acyclic-module-kflat",
-    "lem-trf-geometric-inverse-image-exact",
-    "def-weil-abstract-derived-category",
-    "lem-pc-kflat-tensor-cone-two-out-of-three",
     "def-pc-module-kflat-complex"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0DEN, proof of (1), universal-acyclic module test and return through the cone"
-   }
-  },
-  {
-   "text": "For the converse, let $F$ be any acyclic complex of $R$-module sheaves and put $T=\\operatorname{Tot}(F\\otimes_RK)$. Exact inverse image makes each $F_{p_i}$ acyclic. K-flatness of $K_{p_i}$ makes $\\operatorname{Tot}(F_{p_i}\\otimes_{R_{p_i}}K_{p_i})$ acyclic, and the ordinary cochain comparison identifies this with $T_{p_i}$. Hence $p_i^{-1}H^n(T)=0$ for all $i,n$. The underlying set-sheaf map $H^n(T)\\to0$ becomes an isomorphism at every $p_i$, so conservativity makes it an isomorphism. Its inverse is module-linear, since the only inverse section is zero. Therefore all $H^n(T)$ vanish and $T$ is acyclic. Since $F$ was arbitrary, $K$ is K-flat. This uses precisely the given family, including an empty family when its conservativity forces the topos to be degenerate.",
-   "uses": [
-    "lem-trf-geometric-inverse-image-exact",
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "def-weil-abstract-derived-category",
-    "def-pc-module-kflat-complex",
-    "def-pc-kflat-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0DEN, proof of (2); sites-modules.tex Tag 05V3 (conservative-family exactness)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-kflat-complex",
   "def-pc-module-kflat-complex",
-  "def-trf-geometric-morphism",
   "def-weil-abstract-derived-category",
-  "lem-pc-kflat-resolution",
-  "lem-pc-kflat-tensor-cone-two-out-of-three",
-  "lem-pur-acyclic-kflat-tensor-arbitrary",
-  "lem-pur-cochain-pullback-tensor-coherence",
   "lem-pur-quasi-iso-cone-acyclic",
-  "lem-sfb-ringed-site-restriction-kflat",
-  "lem-sfb-site-fp-stalk-realization",
+  "lem-sfb-ringed-site-point-acyclic",
+  "lem-sfb-ringed-site-point-exact",
+  "lem-sfb-ringed-site-point-kflat-resolution",
+  "lem-sfb-ringed-site-point-tensor",
+  "lem-sfb-ringed-site-point-universal-tensor",
   "lem-sfb-universal-acyclic-module-kflat",
-  "lem-trf-geometric-inverse-image-exact",
-  "lem-trf-topos-localization-site-presentation",
+  "lem-weil-pbc-ringed-topos-acyclic-kflat-pullback",
   "lem-weil-pbc-ringed-topos-kflat-pullback"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "F2",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0DEN, lemma-check-K-flat-stalks, both directions. Expanded with the existing good-site presentation, exact inverse image, tensor-cone and signed cochain tensor comparisons; the converse is written for the conservative family used by the proof."
+  "place": "Tag 0DEN, both directions; formalized via the reduced flat resolution and universal finite matrix retract in place of good-site replacement and localized finite-presentation descent."
  },
  "mathlib_searches": [
   {
@@ -260,13 +216,7 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-kflat-resolution",
-  "lem-pc-kflat-tensor-cone-two-out-of-three",
-  "lem-pur-acyclic-kflat-tensor-arbitrary",
-  "lem-pur-cochain-pullback-tensor-coherence",
   "lem-pur-quasi-iso-cone-acyclic",
-  "lem-trf-geometric-inverse-image-exact",
-  "lem-trf-topos-localization-site-presentation",
   "lem-weil-pbc-ringed-topos-kflat-pullback"
  ],
  "reviewed": {
@@ -294,5 +244,15 @@
   "group": "N8",
   "result": "pass",
   "note": "I checked the item theorem CochainComplex.ringedSite_kFlat_stalk_criterion clause by clause against the node and Stacks 0DEN. The site uses EssentiallySmall.{w} with a Precoverage and IsSiteForCoverings, R is a sheaf of commutative rings, K is an unbounded ℤ-complex in ringedSiteModules.{w} (w is the module universe). Points are GeometricMorphism (Type w) (Sheaf (Type w)). Both directions use the recorded IsKFlatIndependentCoefficients and MorphismProperty.kFlat predicates. The converse uses JointlyReflectIsomorphisms over a free index universe t with no Nonempty, the same form as lem-trf-point-family-conservative. There are no flatness, boundedness or finite-limit hypotheses. The new def-sfb-ringed-site-point (RingedSitePoint) is real data: because the point's inverse image preserves finite limits, its conditions on all test sheaves force the transported finite-product operations, and naturality fixes the maps. So the data are unique up to unique iso, quantifying over every presentation equals the natural statement, and the existence theorem is true. I found no existing equivalent in Mathlib Sites.Point, AlgebraicInverseImage, constant-coefficient point evaluation or topological stalks. Both statement fields are verbatim in their files. Imports match the proof dependencies with Lean records. Docstrings give sources, blueprint IDs and all six proof steps. Proofs are sorry only, lines are at most 98 characters, universes are bound, and edge cases are covered. nt_compile --json on both files in dependency order exited with rc 0, no errors and no warnings. I did not run the merge tool's dry run (write-capable), so the new node record fields are unverified until landing."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261020T174753-L-794151",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

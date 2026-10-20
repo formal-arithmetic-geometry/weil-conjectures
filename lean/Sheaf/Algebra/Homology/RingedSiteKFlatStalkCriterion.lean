@@ -7,27 +7,21 @@ module
 
 public import Sheaf.CategoryTheory.Sites.RingedSitePoint
 public import Sheaf.CategoryTheory.SiteCoveringAxioms
-public import Sheaf.Algebra.Homology.KFlat
+public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
 public import Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
 public import Mathlib.Algebra.Homology.Additive
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import WeilConjectures.Algebra.Homology.KFlatTensorConeTwoOutOfThree
-import Sheaf.Algebra.Homology.AcyclicKFlatTensor
-import Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence
-import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
-import Sheaf.CategoryTheory.Sites.ToposLocalizationSitePresentation
-import Sheaf.Paper.KFlatRingedToposPullback
-
-public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import Sheaf.Algebra.Homology.RingedSiteRestrictionKFlat
+import all Sheaf.Paper.KFlatRingedToposPullback
+import all Sheaf.Algebra.Homology.RingedToposAcyclicKFlatPullback
+import Sheaf.Algebra.Homology.RingedSitePointUniversalTensor
+import Sheaf.Algebra.Homology.RingedSitePointKFlatResolution
+import Sheaf.Algebra.Homology.RingedSitePointAcyclic
+import Sheaf.Algebra.Homology.RingedSitePointTensor
 import Sheaf.Algebra.Homology.UniversalAcyclicModuleKFlat
-import Sheaf.CategoryTheory.Sites.FpStalkRealization
-import Sheaf.CategoryTheory.Sites.GeometricInverseImageExact
-import Sheaf.CategoryTheory.Sites.GeometricMorphism
-import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
+import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+import Mathlib.CategoryTheory.Monoidal.Closed.Braided
+
 /-!
 # K-flatness and stalks of a ringed site
 
@@ -37,11 +31,51 @@ Source: Stacks Project, Cohomology on Sites, Tag 0DEN, lemma-check-K-flat-stalks
 
 @[expose] public section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 universe u v w t
 open CategoryTheory CategoryTheory.Limits
+open scoped ZeroObject
 namespace CochainComplex
 
+private theorem module_tensor_acyclic_of_kFlat
+    {A : Type w} [CommRing A] (K F : CochainComplex (ModuleCat.{w} A) ℤ)
+    (hK : (HomologicalComplex.quasiIso (ModuleCat.{w} A) (.up ℤ)).kFlat K)
+    (hF : F.Acyclic) : (mapBifunctor F K (MonoidalCategory.curriedTensor _)).Acyclic := by
+  let T := MonoidalCategory.tensorRight K
+  have hz : QuasiIso (0 : (0 : CochainComplex (ModuleCat.{w} A) ℤ) ⟶ F) := by
+    rw [quasiIso_iff]
+    intro i
+    exact (quasiIsoAt_iff_exactAt _ i
+      ((HomologicalComplex.acyclic_of_isZero _ (isZero_zero _)) i)).2 (hF i)
+  have hmap : QuasiIso (T.map (0 : (0 : CochainComplex (ModuleCat.{w} A) ℤ) ⟶ F)) :=
+    hK.2 _ hz
+  have htzero : (T.obj (0 : CochainComplex (ModuleCat.{w} A) ℤ)).Acyclic :=
+    HomologicalComplex.acyclic_of_isZero _ (T.map_isZero (isZero_zero _))
+  exact fun i ↦ (exactAt_iff_of_quasiIsoAt
+    (T.map (0 : (0 : CochainComplex (ModuleCat.{w} A) ℤ) ⟶ F)) i).1 (htzero i)
+
+private theorem module_kFlat_of_cone
+    {A : Type w} [CommRing A] (P K : CochainComplex (ModuleCat.{w} A) ℤ)
+    (q : P ⟶ K)
+    (hP : (HomologicalComplex.quasiIso (ModuleCat.{w} A) (.up ℤ)).kFlat P)
+    (hC : (HomologicalComplex.quasiIso (ModuleCat.{w} A) (.up ℤ)).kFlat
+      (mappingCone q)) :
+    (HomologicalComplex.quasiIso (ModuleCat.{w} A) (.up ℤ)).kFlat K := by
+  rw [← HomotopyCategory.kFlat_quotient_obj_iff] at hP hC ⊢
+  have : MonoidalPreadditive (ModuleCat.{w} A) := inferInstance
+  have (X Y Z : GradedObject ℤ (ModuleCat.{w} A)) :
+      GradedObject.HasGoodTensor₁₂Tensor X Y Z := inferInstance
+  have (X Y Z : GradedObject ℤ (ModuleCat.{w} A)) :
+      GradedObject.HasGoodTensorTensor₂₃ X Y Z := inferInstance
+  have (X Y Z W : GradedObject ℤ (ModuleCat.{w} A)) :
+      GradedObject.HasTensor₄ObjExt X Y Z W := inferInstance
+  let Q := (HomotopyCategory.quasiIso (ModuleCat.{w} A) (.up ℤ)).kFlat
+  exact Q.ext_of_isTriangulatedClosed₂ (mappingCone.triangleh q)
+    (HomotopyCategory.mappingCone_triangleh_distinguished q) hP hC
+
+set_option linter.unusedVariables false in
 /-- K-flat complexes have K-flat stalks at every topos point, and a specified
 conservative family detects K-flatness. RingedSitePoint fixes the ordinary stalk
 ring, module action and functor on maps by inverse-image operation graphs. Such
@@ -49,74 +83,28 @@ presentations exist for every point, and both assertions hold for every presenta
 There is no flat-term or boundedness hypothesis, and the family may be empty.
 Source: Stacks 0DEN (blueprint: lem-sfb-ringed-site-kflat-stalk-criterion).
 
-Proof plan:
-1. For any point $p$, exact transported module inverse image preserves kernels and cokernels.
-Thus, using $H^n=\ker(d^n)/\operatorname{im}(d^{n-1})$ and
-$\operatorname{im}(d)=\ker(\operatorname{coker}(d))$, it gives $H^n(K_p)\cong p^{-1}H^n(K)$ and
-preserves acyclic complexes. Apply the ordinary total-tensor comparison to the ringed-topos map
-$(\mathbf{Set},R_p)\to(\operatorname{Sh}(C),R)$ with identity coefficient map. Tensor extension
-along that identity is removed by $a\otimes m\mapsto am$. Consequently
-$(\operatorname{Tot}(F\otimes_RK))_p\cong\operatorname{Tot}(F_p\otimes_{R_p}K_p)$ for all
-unbounded complexes. The cited comparison is already an isomorphism of signed total complexes, so
-no boundedness or interchange of infinite products is being asserted. Uses:
-lem-trf-geometric-inverse-image-exact, lem-pur-cochain-pullback-tensor-coherence,
-def-weil-abstract-derived-category.
-2. For the forward direction only, replace $\operatorname{Sh}(C)$ by a finite-limit subcanonical
-site presentation using the presentation theorem with the terminal sheaf as its specified object.
-Transport $R$, $K$, and $p$ along the topos equivalence. The inverse-image functors of this
-equivalence and its inverse give inverse equivalences on module sheaves: their composites preserve
-each addition and scalar action through the finite-product comparisons, so the topos inverse
-equations are module-linear. Both functors are exact by the inverse-image theorem and commute with
-total tensor by the ordinary cochain comparison. Hence K-flatness is preserved and reflected:
-every acyclic test complex on one side is the image, up to the inverse equations, of an acyclic
-test complex on the other, and its total tensor is the image of the corresponding total tensor.
-The composite point gives the same stalk ring and stalk complex by these inverse equations. We may
-therefore assume $C$ has finite limits without assuming this in the item. Uses:
-lem-trf-topos-localization-site-presentation, lem-trf-geometric-inverse-image-exact,
-lem-pur-cochain-pullback-tensor-coherence, def-trf-geometric-morphism, def-pc-kflat-complex.
-3. Assume $K$ is K-flat. Choose a quasi-isomorphism $a:L\to K$ with $L$ K-flat and all $L^n$ flat,
-using the site resolution theorem. Put $E=C(a)$. The quasi-isomorphism--cone criterion says $E$ is
-acyclic. For every acyclic $A$, the two tensors with $L$ and $K$ are acyclic, so the tensor-cone
-two-out-of-three theorem implies the tensor with $E$ is acyclic; this is exactly K-flatness of
-$E$. The flat-term pullback theorem, applied to the point with coefficient map
-$p^{-1}R\xrightarrow{\mathrm{id}}R_p$, proves $L_p$ K-flat. Its flat-term hypothesis is used only
-for this chosen resolution, not for $K$ or $E$. Uses: lem-pc-kflat-resolution,
-lem-pur-quasi-iso-cone-acyclic, lem-pc-kflat-tensor-cone-two-out-of-three, def-pc-kflat-complex,
-lem-weil-pbc-ringed-topos-kflat-pullback.
-4. We now handle an arbitrary acyclic K-flat $E$ on this finite-limit site. Fix a finitely
-presented $R_p$-module $M$. The local realization theorem gives a pointed object $(U,x)$, its
-lifted point $q$ of $C/U$, and an $R_U$-module sheaf $F$ with $F_q\cong M$ and $(E|_U)_q\cong
-E_p$. Exact restriction makes $E|_U$ acyclic, and the restriction K-flat theorem makes it K-flat.
-The universal tensor-acyclicity theorem therefore makes
-$\operatorname{Tot}(F[0]\otimes_{R_U}E|_U)$ acyclic. Take its $q$-stalk: exactness and the
-ordinary signed cochain tensor comparison identify this acyclic complex with
-$\operatorname{Tot}(M[0]\otimes_{R_p}E_p)$. The signed symmetry from the same cochain comparison
-theorem changes the factor order to $\operatorname{Tot}(E_p\otimes_{R_p}M[0])$; here the sign is
-$1$ because $M$ has degree zero. Uses: lem-sfb-site-fp-stalk-realization,
-lem-sfb-ringed-site-restriction-kflat, lem-pur-acyclic-kflat-tensor-arbitrary,
-lem-trf-geometric-inverse-image-exact, lem-pur-cochain-pullback-tensor-coherence.
-5. The preceding construction applies to every finitely presented $M$, so the universal-acyclicity
-criterion for ordinary modules shows $E_p$ is K-flat. Return to $E=C(a)$ from step 3. Exact
-additive inverse image commutes with the cone matrix: $p^{-1}(K^n\oplus L^{n+1})=K_p^n\oplus
-L_p^{n+1}$ and its differential is still $(d_K,a;0,-d_L)$. Thus $E_p\cong C(a_p)$. For any acyclic
-$R_p$-module complex $B$, the tensors with $L_p$ and $E_p$ are acyclic. Apply the tensor-cone
-two-out-of-three theorem on the one-object ringed site presenting ordinary $R_p$-modules to obtain
-acyclicity of $\operatorname{Tot}(B\otimes_{R_p}K_p)$. This is the module definition of
-K-flatness, proving the forward direction for every point. Uses:
-lem-sfb-universal-acyclic-module-kflat, lem-trf-geometric-inverse-image-exact,
-def-weil-abstract-derived-category, lem-pc-kflat-tensor-cone-two-out-of-three,
-def-pc-module-kflat-complex.
-6. For the converse, let $F$ be any acyclic complex of $R$-module sheaves and put
-$T=\operatorname{Tot}(F\otimes_RK)$. Exact inverse image makes each $F_{p_i}$ acyclic. K-flatness
-of $K_{p_i}$ makes $\operatorname{Tot}(F_{p_i}\otimes_{R_{p_i}}K_{p_i})$ acyclic, and the ordinary
-cochain comparison identifies this with $T_{p_i}$. Hence $p_i^{-1}H^n(T)=0$ for all $i,n$. The
-underlying set-sheaf map $H^n(T)\to0$ becomes an isomorphism at every $p_i$, so conservativity
-makes it an isomorphism. Its inverse is module-linear, since the only inverse section is zero.
-Therefore all $H^n(T)$ vanish and $T$ is acyclic. Since $F$ was arbitrary, $K$ is K-flat. This
-uses precisely the given family, including an empty family when its conservativity forces the
-topos to be degenerate. Uses: lem-trf-geometric-inverse-image-exact,
-lem-pur-cochain-pullback-tensor-coherence, def-weil-abstract-derived-category,
-def-pc-module-kflat-complex, def-pc-kflat-complex.
+Proof:
+1. The exact module stalk functor commutes with signed total tensor. A conservative
+family of set stalks reflects isomorphisms of module sheaves and therefore detects
+zero homology, including for an empty conservative family.
+2. Choose a K-flat resolution P → K whose stalk is K-flat. Construct P with the
+categorical reduced flat resolution: it is a filtered colimit of bounded-above
+flat complexes. Stalks preserve flat modules and colimits, so its stalk is K-flat.
+3. The cone E of this resolution is acyclic and K-flat. Hence F tensor E is acyclic
+for every complex F, by the proved universal-acyclicity argument for K-flat cones.
+4. For every finitely presented stalk module M, the universal finite matrix
+construction realizes M as a retract of the stalk of a global module sheaf F.
+Stalk exactness and the tensor comparison make F_p[0] tensor E_p acyclic. Tensor
+and homology preserve retracts, so E_p tensor M[0] is acyclic. The finite module
+test criterion makes E_p K-flat. Additive stalks commute with mapping cones, and
+triangulated two-out-of-three then makes K_p K-flat.
+5. Conversely, stalk the tensor of K with an arbitrary acyclic test complex.
+Each stalk is acyclic by the assumed K-flatness. Conservative-family detection
+makes the original tensor acyclic, which is precisely K-flatness of K.
+
+The universal matrix construction avoids replacing the site or transporting
+canonical filtered-colimit stalk rings. The chosen point presentation is used
+throughout, and no flatness of K's individual terms is assumed.
 -/
 theorem ringedSite_kFlat_stalk_criterion
     {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
@@ -137,6 +125,43 @@ theorem ringedSite_kFlat_stalk_criterion
         (HomologicalComplex.quasiIso (ModuleCat.{w} (s i).ring) (.up ℤ)).kFlat
           (((s i).modules.mapHomologicalComplex (.up ℤ)).obj K)) →
       IsKFlatIndependentCoefficients (R := R) K) := by
-  sorry
+  constructor
+  · intro p s hK
+    let := SheafOfModules.isMonoidal_W_independentCoefficients R
+    let := SheafOfModules.monoidalCategory R
+    let := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients R
+    let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients R
+    obtain ⟨P, q, hP, hq, hPp⟩ := s.exists_kFlat_resolution K
+    let E := mappingCone q
+    have hE : E.IsKFlatIndependentCoefficients :=
+      (SheafOfModules.kFlat_cone_independent R P K q).1 hP hK
+    have hEa : E.Acyclic := (mappingCone.quasiIso_iff_acyclic q).1 hq
+    have hEp : (HomologicalComplex.quasiIso (ModuleCat.{w} s.ring) (.up ℤ)).kFlat
+        ((s.modules.mapHomologicalComplex (.up ℤ)).obj E) := by
+      apply kFlat_of_acyclic_tensor_finitePresentation
+      intro M hM
+      exact s.acyclic_tensor_finitePresentation E
+        (SheafOfModules.tensor_acyclic R E hE hEa) M hM
+    let S := s.modules.mapHomologicalComplex (.up ℤ)
+    have hCone : (HomologicalComplex.quasiIso (ModuleCat.{w} s.ring) (.up ℤ)).kFlat
+        (mappingCone (S.map q)) :=
+      ObjectProperty.prop_of_iso _ (mappingCone.mapHomologicalComplexIso q s.modules) hEp
+    exact module_kFlat_of_cone _ _ (S.map q) hPp hCone
+  · intro I p s hp hK
+    let := SheafOfModules.isMonoidal_W_independentCoefficients R
+    let := SheafOfModules.monoidalCategory R
+    let := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients R
+    let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients R
+    intro F hF
+    apply (CategoryTheory.RingedSitePoint.acyclic_iff p s hp _).2
+    intro i
+    have he := (exactFunctor_iff _).1 ((s i).exact)
+    have : PreservesFiniteLimits (s i).modules := he.1
+    have : PreservesFiniteColimits (s i).modules := he.2
+    have hFp : (((s i).modules.mapHomologicalComplex (.up ℤ)).obj F).Acyclic :=
+      fun n ↦ (hF n).map (s i).modules
+    have ht := module_tensor_acyclic_of_kFlat _ _ (hK i) hFp
+    obtain ⟨e⟩ := (s i).tensor F K
+    exact fun n ↦ (ht n).of_iso e.symm
 
 end CochainComplex

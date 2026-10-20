@@ -1,0 +1,123 @@
+{
+ "id": "lem-sfb-ringed-site-point-flat",
+ "kind": "statement",
+ "title": "Flat modules remain flat at normalized stalks",
+ "statement": "Let C be a category essentially small in the coefficient universe, J a Grothendieck topology, R a sheaf of commutative rings, p a point of Sh(C,J), and s a normalized ringed-site point [def-sfb-ringed-site-point], with stalk ring A and module functor S. If M is a flat sheaf of R-modules, then S(M) is a flat A-module.",
+ "stmt_deps": [
+  "def-sfb-ringed-site-point",
+  "def-pc-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 05VD; geometric inverse image preserves flatness"
+ },
+ "proof": [
+  {
+   "text": "Use the singleton-site point presentation and its explicit tensor-compatible evaluation equivalence.",
+   "uses": [
+    "lem-sfb-ringed-site-point-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply algebraic inverse-image flatness with independent universes. The tensor functor with the image module is exact. Transport this through the tensor-compatible evaluation equivalence; the categorical exact-tensor criterion is ordinary module flatness.",
+   "uses": [
+    "lem-weil-pbc-flat-algebraic-inverse-image-universes",
+    "lem-weil-pbc-ringed-topos-pullback-adapted-flat-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-site-point-tensor",
+  "lem-weil-pbc-flat-algebraic-inverse-image-universes",
+  "lem-weil-pbc-ringed-topos-pullback-adapted-flat-resolution"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F2",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 05VD; geometric inverse image preserves flatness",
+  "note": "Formal proof supplied in full; generic singleton-site and universal-matrix arguments expand the cited source step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Geometric inverse image of a flat module sheaf is a flat stalk module",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] (x : ↥X),\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔ ∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat) → AlgebraicGeometry.Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"instFlatAtPrime\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ {A : Type u_4} {B : Type u_5} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] [Module.Flat A B]\\n  (p : Ideal A) [inst_4 : p.IsPrime] (P : Ideal B) [inst_5 : P.IsPrime] [inst_6 : P.LiesOver p],\\n  Module.Flat (Localization.AtPrime p) (Localization.AtPrime P)\", \"doc\": \"If $ \\\\mathfrak{p} $ is a prime ideal in a commutative ring $ A $ and $ \\\\mathfrak{P} $ is a prime ideal in a commutative ring $ B $ lying over $ \\\\mathfrak{p} $, then the localization of $ B $ at $ \\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}",
+   "date": "2026-10-20",
+   "verdict": "No equivalent theorem for the normalized RingedSitePoint interface; use existing general APIs where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Module.Flat\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \" (R : Type u) (M : Type v) [CommSemiring R] [AddCommMonoid M] [Module R M] : Prop\", \"doc\": \"An `R`-module `M` is flat if for every finitely generated submodule `N` of every\\nfinitely generated `R`-module `P` in the same universe as `R`,\\nthe canonical map `N ⊗ M → P ⊗ M` is injective. This imp\"}\n  {\"name\": \"Module.Flat.self\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \" {R : Type u} [CommSemiring R] : Module.Flat R R\", \"doc\": \"\"}\n  {\"name\": \"Module.Flat.of_free\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \" {R : Type u} {M : Type v} [CommSemiring R] [AddCommMonoid M] [Module R M] [Module.Free R M] : Module.Flat R M\", \"doc\": \"\"}\n  {\"name\": \"Module.Flat.of_projective\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \" {R : Type u} {M : Type v} [CommSemiring R] [AddCommMonoid M] [Module R M] [Module.Projective R M] : Module.Flat R M\", \"doc\": \"\"}\n  {\"name\": \"Module.Flat.of_ulift\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \" {R : Type u} {M : Type v} [CommSemiring R] [AddCommMonoid M] [Module R M] [Module.Flat R (ULift.{v', v} M)] : Module.Flat R M\", \"doc\": \"\"}\n  {\"name\": \"Module.Flat.ulift\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \" {R : Type u} {M : Type v} [CommSemiring R] [AddCommMonoid M] [Module R M] [Module.Flat R M] : Module.Flat R (ULift.{v', v} M)\", \"doc\": \"\"}\n  {\"name\": \"Module.Flat.of_shrink\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \" {R : Type u} {M : Type v} [CommSemiring R] [AddCommMonoid M] [Module R M] [Small.{v', v} M] [Module.Flat R (Shrink.{v', v} M)] : Module.Flat R M\", \"doc\": \"\"}\n  {\"name\": \"Module.Flat.shrink\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \" {R : Type u} {M : Type v} [CommSemiring R] [AddCommMonoid M] [Module R M] [Small.{v', v} M] [Module.Flat R M] : Module.Flat R (Shrink.{v', v} M)\", \"doc\": \"\"}\n  {\"name\": \"Module.Flat.finsupp\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \" {R : Type u} [CommSemiring R] (ι : Type v) : Module.Flat R (ι →₀ R)\", \"doc\": \"Free `R`-modules over discrete types are flat.\"}\n  {\"name\": \"Module.Flat.directSum\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \" {R : Type u} [CommSemiring R] {ι : Type v} {M : ι → Type w} [(i : ι) → AddCommMonoid (M i)] [(i : ι) → Module R (M i)] [∀ (i : ι), Module.Flat R (M i)] : Module.Flat R (DirectSum ι fun i => M i)\", \"doc\": \"A direct sum of flat `R`-modules is flat.\"}\n  {\"name\": \"Module.Flat.directSum_iff\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \" {R : Type u} [CommSemiring R] {ι : Type v} {M : ι → Type w} [(i : ι) → AddCommMonoid (M i)] [(i : ι) → Module R (M i)] : Module.Flat R (DirectSum ι fun i => M i) ↔ ∀ (i : ι), Module.Flat R (M i)\", \"doc\": \"\"}\n  {\"name\": \"Module.Flat.dfinsupp\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \" {R : Type u} [CommSemiring R] {ι : Type v} {M : ι → Type w} [(i : ι) → AddCommMonoid (M i)] [(i : ι) → Module R (M i)] [∀ (i : ι), Module.Flat R (M i)] : Module.Flat R (Π₀ (i : ι), M i)\", \"doc\": \"\"}",
+   "date": "2026-10-20",
+   "verdict": "No equivalent theorem for the normalized RingedSitePoint interface; use existing general APIs where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*stalk|stalk.*flat|isFlat_algebraicInverseImage",
+   "results": "[grep] OK 14 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"line\": \"19\", \"text\": \"asking that all stalk maps are flat (see `AlgebraicGeometry.Flat.iff_flat_stalkMap`).\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"line\": \"39\", \"text\": \"asking that all stalk maps are flat (see `AlgebraicGeometry.Flat.iff_flat_stalkMap`).\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"line\": \"99\", \"text\": \"lemma of_stalkMap (H : ∀ x, (f.stalkMap x).hom.Flat) : Flat f :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"line\": \"100\", \"text\": \"  HasRingHomProperty.of_stalkMap RingHom.Flat.ofLocalizationPrime H\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"line\": \"102\", \"text\": \"lemma stalkMap [Flat f] (x : X) : (f.stalkMap x).hom.Flat :=\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"34\", \"text\": \"  If `M` is flat over `R`, then `rankAtStalk` is locally constant.\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"224\", \"text\": \"lemma isLocallyConstant_rankAtStalk [Module.FinitePresentation R M] [Module.Flat R M] :\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"343\", \"text\": \"lemma rankAtStalk_eq_of_le_of_finite_of_flat {p q : PrimeSpectrum R} (hpq : p ≤ q) :\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"354\", \"text\": \"lemma rankAtStalk_eq_of_le_of_finite_of_flat' {p q : Ideal R} [hp : p.IsPrime] [hq : q.IsPrime]\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"356\", \"text\": \"  rankAtStalk_eq_of_le_of_finite_of_flat M hpq\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/LocallyFree.lean\", \"line\": \"11\", \"text\": \"# A finite flat module `M` is locally free if `rankAtStalk M` is constant\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/LocallyFree.lean\", \"line\": \"34\", \"text\": \"/-- Let `M` be a finite flat `R`-module, `p` be a prime ideal of `R`. If `rankAtStalk M` is\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/LocallyFree.lean\", \"line\": \"36\", \"text\": \"theorem Free.away_of_finite_of_flat_of_rankAtStalk_constant (p : Ideal R) [p.IsPrime]\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/LocallyFree.lean\", \"line\": \"62\", \"text\": \"      rankAtStalk_eq_of_le_of_finite_of_flat' M hm𝔪, h 𝔪, n]\"}",
+   "date": "2026-10-20",
+   "verdict": "No equivalent theorem for the normalized RingedSitePoint interface; use existing general APIs where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The stalk at a topos point of a flat sheaf of modules is a flat module",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[Flat f] (x : X) : (f.stalkMap x).hom.Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"ModuleCat.Tilde.toOpen_germ_apply\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (hx : x ∈ U) (x_1 : CategoryTheory.ToType (ModuleCat.of R ↑M)),\\n  (CategoryTheory.ConcreteCategory.hom (M.tildeInModuleCat.ger\", \"doc\": \"Let $R$ be a commutative ring, $M$ be an $R$-module, and $\\\\widetilde{M}$ be the sheaf of modules on the prime spectrum $\\\\operatorname{Spec}(R)$ associated to $M$. Let $U$ be an open subset of $\\\\operat\"}\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": Flat f ↔ ∀ x, (f.stalkMap x).hom.Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}\n  {\"name\": \"Module.Flat.of_isLocalizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) [IsLocalization S Rp] (f : M →ₗ[R] Mp) [h : IsLocalizedModule S f] : Flat Rp Mp\", \"doc\": \"If $ M $ is a flat $ R $-module and $ M' $ is the localization of $ M $ at a submonoid $ S $ of $ R $, then $ M' $ is a flat module over the localized ring $ R' $, where $ R' $ is the localization of \"}\n  {\"name\": \"TopCat.Presheaf.stalk\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(ℱ : X.Presheaf C) (x : X) : C\", \"doc\": \"The stalk of a presheaf $\\\\mathcal{F}$ on a topological space $X$ at a point $x$ is the object in the category $\\\\mathcal{C}$ obtained by applying the stalk functor at $x$ to $\\\\mathcal{F}$.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.instIsLocalRingCarrierStalkCommRingCatPresheaf\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"(x : X) : IsLocalRing (X.presheaf.stalk x)\", \"doc\": \"For any locally ringed space $X$ and any point $x$ in $X$, the stalk of the structure sheaf (a presheaf of commutative rings) at $x$ is a local ring. This asserts the defining property of a locally ri\"}\n  {\"name\": \"smoothSheafCommRing.instLocalRing_stalk\", \"module\": \"Mathlib.Geometry.Manifold.Sheaf.LocallyRingedSpace\", \"type\": \"(x : M) : IsLocalRing ((smoothSheafCommRing IM 𝓘(𝕜) M 𝕜).presheaf.stalk x)\", \"doc\": \"For any point $ x $ in the manifold $ M $, the stalk of the smooth sheaf commutative ring at $ x $ is a local ring. This means the stalk has a unique maximal ideal, corresponding to the germs of smoot\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(p : PrimeSpectrum R) : IsLocalization.AtPrime ((structureSheaf R).presheaf.stalk p) p.asIdeal\", \"doc\": \"For any commutative ring $ R $ and a prime ideal $ \\\\mathfrak{p} $ in $ R $, the stalk $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R), \\\\mathfrak{p}} $ of the structure sheaf at $ \\\\mathfrak{p} $ is canonically i\"}\n",
+   "date": "2026-10-21",
+   "verdict": "No match: these results concern ordinary flatness, scheme/topological stalks, finite-presentation predicates, or general homological APIs; none states this normalized ringed-site point lemma."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedSiteKFlatStalkCriterion",
+  "date": "2026-10-21",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-module-mapmod-pullback-kflat",
+   "place": "Proof: testing an arbitrary acyclic complex on X, replacing the unsupported unrestricted invocation of K-flat ringed-topos pullback by the stalk criterion; Flat modules remain flat at normalized stalks",
+   "via": [
+    "lem-sfb-ringed-site-kflat-stalk-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sfb-module-derived-factorization",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedSitePointFlat",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSitePointFlat.lean",
+  "declaration": "CategoryTheory.RingedSitePoint.flat",
+  "statement": "theorem flat\n    {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]\n    {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{w}}\n    {p : GeometricMorphism (Type w) (Sheaf J (Type w))}\n    (s : RingedSitePoint R p)\n    (M : ringedSiteModules.{w}\n      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R))\n    (hM : SheafOfModules.IsFlatOnSite.{u, v, w, w} (J := J) (R := R) M) :\n    Module.Flat s.ring (s.modules.obj M)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261020T174753-L-794151",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261020T174753-L-794151",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,131 @@
+{
+ "id": "lem-sfb-ringed-site-point-universal-tensor",
+ "kind": "statement",
+ "title": "Finite module tests from universal tensor acyclicity",
+ "statement": "Let C be a category essentially small in the coefficient universe, J a Grothendieck topology, R a sheaf of commutative rings, p a point of Sh(C,J), and s a normalized ringed-site point [def-sfb-ringed-site-point], with stalk ring A and module functor S. Let E be an unbounded module complex such that Tot(F tensor_R E) is acyclic for every complex F. For every finitely presented A-module M, Tot(S(E) tensor_A M[0]) is acyclic.",
+ "stmt_deps": [
+  "def-sfb-ringed-site-point",
+  "def-sc-finitely-presented-module",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0DEN, proof of (1), the finite-presentation tensor test"
+ },
+ "proof": [
+  {
+   "text": "Realize M as a retract of S(F) for a global module sheaf F by the universal finite matrix construction.",
+   "uses": [
+    "lem-sfb-ringed-site-point-fp-retract"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The hypothesis applied to F[0] gives an acyclic tensor. Exactness of S preserves it, and its signed tensor comparison and compatibility with degree-zero complexes identify the image with S(F)[0] tensor S(E). Signed symmetry changes the order to S(E) tensor S(F)[0].",
+   "uses": [
+    "lem-sfb-ringed-site-point-exact",
+    "lem-sfb-ringed-site-point-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the single-degree functor, tensor with S(E), and each homology functor to the retract. Each homology of S(E) tensor M[0] is a retract of zero, so its identity is zero and it is a zero object. Thus the desired complex is acyclic.",
+   "uses": [
+    "lem-sfb-ringed-site-point-fp-retract"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-site-point-exact",
+  "lem-sfb-ringed-site-point-fp-retract",
+  "lem-sfb-ringed-site-point-tensor"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F2",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0DEN, proof of (1), the finite-presentation tensor test",
+  "note": "Formal proof supplied in full; generic singleton-site and universal-matrix arguments expand the cited source step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Universal tensor acyclicity of a module sheaf complex gives acyclic finite presentation tests at a stalk",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n  {\"name\": \"SheafOfModules.Presentation.IsFinite\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring existence of sheafification, local bijectivity, and composition compatib\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For any sheaf of modules $ \\\\mathcal{M} $ over a ring sheaf $ \\\\mathcal{R} $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, if $ \\\\mathcal{M} $ is of finite presentation (i.e., locally t\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a site $(\\\\mathcal{C}, J)$ has finite presentation, then its local generators data satisfies the finite type condition under th\"}",
+   "date": "2026-10-20",
+   "verdict": "No equivalent theorem for the normalized RingedSitePoint interface; use existing general APIs where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.Acyclic",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"HomologicalComplex.Acyclic\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasZeroMorphisms C] {ι : Type u_2} {c : ComplexShape ι} (K : HomologicalComplex C c) : Prop\", \"doc\": \"A homological complex `K` is acyclic if it is exact at `i` for any `i`.\"}\n  {\"name\": \"HomologicalComplex.acyclic_iff\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasZeroMorphisms C] {ι : Type u_2} {c : ComplexShape ι} (K : HomologicalComplex C c) : K.Acyclic ↔ ∀ (i : ι), K.ExactAt i\", \"doc\": \"\"}\n  {\"name\": \"HomologicalComplex.acyclic_of_isZero\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasZeroMorphisms C] {ι : Type u_2} {c : ComplexShape ι} (K : HomologicalComplex C c) (hK : CategoryTheory.Limits.IsZero K) : K.Acyclic\", \"doc\": \"\"}\n  {\"name\": \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.Acyclic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] (K : CochainComplex C ℤ) : HomotopyCategory.subcategoryAcyclic C ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K) ↔ HomologicalComplex.Acyclic K\", \"doc\": \"\"}\n  {\"name\": \"HomologicalComplex.Acyclic.op\", \"module\": \"Mathlib.Algebra.Homology.Opposite\", \"type\": \" {ι : Type u_1} {V : Type u_2} [CategoryTheory.Category.{v_1, u_2} V] {c : ComplexShape ι} [CategoryTheory.Limits.HasZeroMorphisms V] {K : HomologicalComplex V c} (h : K.Acyclic) : K.op.Acyclic\", \"doc\": \"\"}\n  {\"name\": \"HomologicalComplex.acyclic_op_iff\", \"module\": \"Mathlib.Algebra.Homology.Opposite\", \"type\": \" {ι : Type u_1} {V : Type u_2} [CategoryTheory.Category.{v_1, u_2} V] {c : ComplexShape ι} [CategoryTheory.Limits.HasZeroMorphisms V] (K : HomologicalComplex V c) : K.op.Acyclic ↔ K.Acyclic\", \"doc\": \"\"}\n  {\"name\": \"HomologicalComplex.Acyclic.unop\", \"module\": \"Mathlib.Algebra.Homology.Opposite\", \"type\": \" {ι : Type u_1} {V : Type u_2} [CategoryTheory.Category.{v_1, u_2} V] {c : ComplexShape ι} [CategoryTheory.Limits.HasZeroMorphisms V] {K : HomologicalComplex Vᵒᵖ c} (h : K.Acyclic) : K.unop.Acyclic\", \"doc\": \"\"}\n  {\"name\": \"HomologicalComplex.Acyclic.truncGE\", \"module\": \"Mathlib.Algebra.Homology.Embedding.TruncGEHomology\", \"type\": \" {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3} [CategoryTheory.Category.{v_1, u_3} C] [CategoryTheory.Limits.HasZeroMorphisms C] {K : HomologicalComplex C c'} [∀ (i' : ι'), K.HasHomology i'] [CategoryTheory.Limits.HasZeroObject C] (hK : K.Acyclic) (e : c.E\", \"doc\": \"\"}\n  {\"name\": \"HomologicalComplex.acyclic_truncGE_iff_isSupportedOutside\", \"module\": \"Mathlib.Algebra.Homology.Embedding.TruncGEHomology\", \"type\": \" {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3} [CategoryTheory.Category.{v_1, u_3} C] [CategoryTheory.Limits.HasZeroMorphisms C] (K : HomologicalComplex C c') (e : c.Embedding c') [e.IsTruncGE] [∀ (i' : ι'), K.HasHomology i'] [CategoryTheory.Limits.HasZero\", \"doc\": \"\"}\n  {\"name\": \"HomologicalComplex.Acyclic.truncLE\", \"module\": \"Mathlib.Algebra.Homology.Embedding.TruncLEHomology\", \"type\": \" {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3} [CategoryTheory.Category.{v_1, u_3} C] [CategoryTheory.Limits.HasZeroMorphisms C] {K : HomologicalComplex C c'} [∀ (i' : ι'), K.HasHomology i'] [CategoryTheory.Limits.HasZeroObject C] (hK : K.Acyclic) (e : c.E\", \"doc\": \"\"}\n  {\"name\": \"HomologicalComplex.acyclic_truncLE_iff_isSupportedOutside\", \"module\": \"Mathlib.Algebra.Homology.Embedding.TruncLEHomology\", \"type\": \" {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3} [CategoryTheory.Category.{v_1, u_3} C] [CategoryTheory.Limits.HasZeroMorphisms C] (K : HomologicalComplex C c') (e : c.Embedding c') [e.IsTruncLE] [∀ (i' : ι'), K.HasHomology i'] [CategoryTheory.Limits.HasZero\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.acyclic_truncGE_iff\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \" {C : Type u_2} [CategoryTheory.Category.{u_3, u_2} C] [CategoryTheory.Limits.HasZeroMorphisms C] [CategoryTheory.Limits.HasZeroObject C] (K : CochainComplex C ℤ) [∀ (i : ℤ), HomologicalComplex.HasHomology K i] (n₀ n₁ : ℤ) (h : n₀ + 1 = n₁ := by lia) : HomologicalComplex.Acyclic (K.truncGE n₁) ↔ K.I\", \"doc\": \"\"}",
+   "date": "2026-10-20",
+   "verdict": "No equivalent theorem for the normalized RingedSitePoint interface; use existing general APIs where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "universally.*acyclic|acyclic_tensor_finitePresentation",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-20",
+   "verdict": "No equivalent theorem for the normalized RingedSitePoint interface; use existing general APIs where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal tensor acyclicity on a ringed site implies finite presented stalk module tensor tests are acyclic",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a quasicoherent sheaf data $ q $ over a ring sheaf $ \\\\mathcal{O} $, if every indexed presentation $ q.\\text{presentation}(i) $ is finite (admits finite generators and relations), then $ q $ itsel\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If there exists a quasicoherent sheaf $\\\\sigma$ over the ring sheaf $\\\\mathcal{O}$ such that $\\\\sigma$ satisfies the finite presentation condition, then the sheaf $\\\\mathcal{M}$ also satisfies the finite \"}\n  {\"name\": \"Module.rankAtStalk_tensorProduct\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"(N : Type*) [AddCommGroup N] [Module R N] [Module.Finite R N] [Module.Flat R N] :\\n  rankAtStalk (M ⊗[R] N) = rankAtStalk M * rankAtStalk (R := R) N\", \"doc\": \"For modules $M$ and $N$ over a commutative semiring $R$, if both are finitely generated and flat, then the rank of their tensor product $M \\\\otimes_R N$ at the stalk corresponding to a prime ideal $\\\\ma\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"instFinitePresentationTensorProduct\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \"{A} [CommRing A] [Algebra R A] [Module.FinitePresentation R M] : Module.FinitePresentation A (A ⊗[R] M)\", \"doc\": \"Let $R$ be a commutative semiring and let $A$ be a commutative ring that is also an $R$-algebra. If $M$ is a finitely presented $R$-module, then the tensor product $A \\\\otimes_R M$, viewed as an $A$-mo\"}\n  {\"name\": \"Module.free_of_maximalIdeal_rTensor_injective\", \"module\": \"Mathlib.RingTheory.LocalRing.Module\", \"type\": \"[Module.FinitePresentation R M] (H : Function.Injective ((𝔪).subtype.rTensor M)) : Module.Free R M\", \"doc\": \"Let $ R $ be a local ring with maximal ideal $ \\\\mathfrak{m} $, and let $ M $ be a finitely presented $ R $-module. If the natural linear map $ \\\\mathfrak{m} \\\\otimes_R M \\\\to R \\\\otimes_R M \\\\cong M $ indu\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n",
+   "date": "2026-10-21",
+   "verdict": "No match: these results concern ordinary flatness, scheme/topological stalks, finite-presentation predicates, or general homological APIs; none states this normalized ringed-site point lemma."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedSiteKFlatStalkCriterion",
+  "date": "2026-10-21",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-module-mapmod-pullback-kflat",
+   "place": "Proof: testing an arbitrary acyclic complex on X, replacing the unsupported unrestricted invocation of K-flat ringed-topos pullback by the stalk criterion; Finite module tests from universal tensor acyclicity",
+   "via": [
+    "lem-sfb-ringed-site-kflat-stalk-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sfb-module-derived-factorization",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedSitePointUniversalTensor",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSitePointUniversalTensor.lean",
+  "declaration": "CategoryTheory.RingedSitePoint.acyclic_tensor_finitePresentation",
+  "statement": "theorem acyclic_tensor_finitePresentation\n    {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]\n    {J : GrothendieckTopology C}\n    {R : Sheaf J CommRingCat.{w}}\n    {p : GeometricMorphism (Type w) (Sheaf J (Type w))}\n    (s : RingedSitePoint R p)\n    (E : CochainComplex (ringedSiteModules.{w}\n      ((sheafCompose J\n        (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ)\n    (hE : letI := SheafOfModules.isMonoidal_W_independentCoefficients R\n      letI := SheafOfModules.monoidalCategory R\n      letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients R\n      letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients R\n      ∀ F : CochainComplex (ringedSiteModules.{w}\n        ((sheafCompose J\n          (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ,\n        (CochainComplex.mapBifunctor F E (MonoidalCategory.curriedTensor _)).Acyclic)\n    (M : ModuleCat.{w} s.ring) (hM : Module.FinitePresentation s.ring M) :\n    (CochainComplex.mapBifunctor\n      ((s.modules.mapHomologicalComplex (.up ℤ)).obj E)\n      ((HomologicalComplex.single (ModuleCat.{w} s.ring) (.up ℤ) 0).obj M)\n      (MonoidalCategory.curriedTensor _)).Acyclic",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261020T174753-L-794151",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261020T174753-L-794151",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
