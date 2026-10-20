@@ -123,15 +123,16 @@
   "note": "Six steps: etale gives flat, lfp, unramified hence locally quasi-finite, with quasi-compactness quasi-finite (01TJ tool); 07RZ as a new unsplit node stated faithfully (checked against more-morphisms.tex); finitely many nonempty strata by universally bounded fibres (new unsplit 03JA node) and the universal property at Spec kappa(y); strata constructible via retrocompact opens of the spectral space Y; subscheme structure; finite locally free + etale base change (new leaf etale_isStableUnderBaseChange Etale.lean:74 verified) = finite etale. Statement corrected: f quasi-compact added (the delivered statement was false). Correct."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.EtaleSeparatedStratifiedFinite",
+  "module": "WeilConjectures.AlgebraicGeometry.EtaleSeparatedStratifiedFinite",
   "declaration": "AlgebraicGeometry.Scheme.exists_etale_separated_stratified_finite",
-  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSeparatedStratifiedFinite.lean",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/EtaleSeparatedStratifiedFinite.lean",
   "statement": "theorem exists_etale_separated_stratified_finite {X U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] (j : U ⟶ X) [Etale j] [IsSeparated j] [QuasiCompact j] : ∃ S : Stratification X, (∀ i : Fin S.n, Topology.IsConstructible (S.stratum i)) ∧ (∀ i : Fin S.n, IsFinite (pullback.snd j (S.immersion i)) ∧ Etale (pullback.snd j (S.immersion i)))",
   "branch": "sheaf-dag",
   "by": "H1",
   "date": "2026-10-11",
-  "existing": false,
-  "fixed_by": "R-ess1013"
+  "existing": true,
+  "fixed_by": "R-ess1013",
+  "note": "2026-10-21 (C4): retire duplicate Sheaf module; the upstream theorem has the byte-identical signature and complete proof. All mathematical dependencies and the unit route are preserved."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -144,11 +145,11 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-cfb1a",
-  "group": "F9",
+  "reviewer": "C-e1294",
+  "group": "C4",
   "result": "pass",
-  "landing": "20261020T153004-L-2859933",
+  "landing": "20261020T164812-L-3966793",
   "kind": "interface",
-  "note": "independent cc review: 27 delivered consumers vs live sources with the alias→Stratification and import substitution applied (byte-identical); 12 node records vs live (only lean.statement/note respelled); 155-module sandbox (28 delivered + 67 direct importers + intermediates) all compiled"
+  "note": "independent cc review: retired Sheaf module's exists_etale_separated_stratified_finite vs WeilConjectures.AlgebraicGeometry.EtaleSeparatedStratifiedFinite (byte-identical signature and proof); adapted EtaleStratifiedFinite vs live (only the import line changed; forced, since line 75 uses the theorem); node lean record re-attached, other fields unchanged; both modules compile clean; axioms are only propext, Classical.choice, Quot.sound"
  }
 }
