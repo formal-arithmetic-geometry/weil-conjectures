@@ -54,10 +54,7 @@ theorem isKProjective_of_filtered_free_stage {A : Type u} [CommRing A]
       refine ⟨fun f _ => ⟨Homotopy.ofEq ?_⟩⟩
       exact hzero.eq_of_src f 0
   | succ n ih =>
-      apply isKProjective_of_filtered_free_step (step n) ih
-      · intro k
-        exact hsplit n k
-      · exact hquot n
+      exact isKProjective_of_filtered_free_step (step n) ih (hsplit n) (hquot n)
 
 /-- Telescope assembly for an exhaustive split filtration.
 (source: Stacks Project, Tags 09KL to 09KM)
@@ -135,9 +132,7 @@ theorem isKProjective_of_filtered_free {A : Type u} [CommRing A]
           (HomologicalComplex.single (ModuleCat.{max u v} A) (.up ℤ) (degree i)).obj
             (ModuleCat.of A (ULift.{v} A))))) :
     P.IsKProjective := by
-  have hstage' : ∀ n, (F n).IsKProjective :=
-    isKProjective_of_filtered_free_stage F step hzero hsplit hquot
   exact isKProjective_of_filtered_free_telescope P F ι step hzero hmono hcompat
-    hexhaustive hsplit hstage'
+    hexhaustive hsplit (isKProjective_of_filtered_free_stage F step hzero hsplit hquot)
 
 end CochainComplex
