@@ -15,7 +15,6 @@ import Mathlib.RingTheory.Regular.RegularSequence
 import WeilConjectures.RingTheory.Depth
 import WeilConjectures.RingTheory.DepthLeSupportDimension
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
-import Sheaf.AlgebraicGeometry.IsRegularScheme
 import Sheaf.RingTheory.CohenMacaulayRingUniversallyCatenary
 
 /-!
@@ -57,4 +56,33 @@ Proof:
    length. Saturation excludes inserting a prime between adjacent terms, and length
    counts strict inclusions. -/
 theorem IsRegularRing.isUniversallyCatenary (R : Type u) [CommRing R] [IsRegularRing R] :
-    IsUniversallyCatenary R := sorry
+    IsUniversallyCatenary R := by
+  classical
+  apply IsUniversallyCatenary.of_local_depth_eq_dimension
+  intro p hp
+  let S := Localization.AtPrime p
+  let m := IsLocalRing.maximalIdeal S
+  obtain ⟨s, hcard, hs⟩ := (IsNoetherian.noetherian m).exists_span_finset_card_eq_spanFinrank
+  let rs := s.toList
+  have hspan : Ideal.span {x | x ∈ rs} = m := by
+    simpa [rs] using hs
+  have hdim : ringKrullDim S = (rs.length : WithBot ℕ∞) := by
+    simpa [rs, hcard, m] using
+      (IsRegularLocalRing.spanFinrank_maximalIdeal (R := S)).symm
+  have hparams : IsLocalRing.IsRegularSystemOfParameters rs := ⟨hspan, hdim.symm⟩
+  have hreg := (IsRegularLocalRing.isRegular_and_quotients_of_generators
+    S rs.length hdim rs hparams).1
+  have hmem : ∀ x ∈ rs, x ∈ m := by
+    intro x hx
+    rw [← hspan]
+    exact Ideal.subset_span hx
+  have hdepth : (rs.length : ℕ∞) ≤ IsLocalRing.depth (R := S) S := by
+    unfold IsLocalRing.depth Ideal.depth
+    split_ifs
+    · exact le_top
+    · exact le_sSup ⟨rs, hreg, hmem, rfl⟩
+  apply le_antisymm
+  · simpa only [Module.supportDim_self_eq_ringKrullDim] using
+      IsLocalRing.depth_le_supportDim (R := S) S
+  · rw [hdim]
+    exact WithBot.coe_le_coe.mpr hdepth
