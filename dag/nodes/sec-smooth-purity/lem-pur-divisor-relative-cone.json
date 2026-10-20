@@ -21,77 +21,50 @@
  ],
  "proof": [
   {
-   "text": "Fix the chosen site and the injective resolution $F\\to I^\\bullet$. For every degree $q$, the map $I^q(T)\\to I^q(W)$ is restriction along the monomorphism $W\\to T$ in the site, hence is surjective by [lem-weil-pbc-injective-sheaf-mono-restriction]. Its kernel is $K^q$, and the differentials preserve these kernels, so $0\\to K^\\bullet\\to A^\\bullet\\xrightarrow{r}B^\\bullet\\to0$ is a short exact sequence of complexes. The injective-resolution convention computes the derived sections on both $T$ and $W$ from $A^\\bullet$ and $B^\\bullet$.",
+   "text": "On either chosen site, restriction of each injective term along the given open monomorphism is epimorphic by [lem-weil-pbc-injective-sheaf-mono-restriction]. The supported-section complex is the kernel of this restriction: verify the universal property degreewise, including the zero terms in negative degrees. Thus the restriction fits into a short exact sequence of complexes. The injective-resolution convention [def-sp-injective-resolutions] computes the relevant derived section functors.",
    "uses": [
     "lem-weil-pbc-injective-sheaf-mono-restriction",
-    "def-sp-injective-resolutions"
+    "def-sp-injective-resolutions",
+    "def-pur-support-cohomology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Section \\ref{section-cohomology-support}, second paragraph (restriction $\\mathcal I(X)\\to\\mathcal I(U)$ surjective with kernel $\\Gamma_Z(X,\\mathcal I)$), citing sites-cohomology.tex Lemma \\ref{lemma-restriction-along-monomorphism-surjective}"
-   }
+   "elementary": false
   },
   {
-   "text": "Use the signed cone convention of [def-amb-relative-etale-cohomology]. In degree $q$, $C^q=A^q\\oplus B^{q-1}$ and $D(a,b)=(da,r(a)-db)$. A cycle $(a,b)$ can be changed by the boundary $D(x,0)=(dx,r(x))$: choose $x$ with $r(x)=b$ and replace it by $(a-dx,0)$; the new first component lies in $K^q$. The same calculation for boundaries shows that two elements of $K^q$ become homologous in $C^\\bullet$ exactly when they were homologous in $K^\\bullet$. Thus $K^\\bullet\\to C^\\bullet$, $k\\mapsto(k,0)$, is a quasi-isomorphism in the sense of [def-weil-abstract-derived-category].",
+   "text": "Apply [lem-weil-degreewise-epi-kernel-cocone-qis] to obtain the kernel-to-shifted-cone quasi-isomorphism with components (k,0). These coordinates determine the map uniquely. Identify the kernel with the supported-section complex from Step 1. The coordinate equations show that its composite with cone projection is the kernel inclusion. The complete cycle calculation in [lem-pur-kernel-shifted-cone-boundary] identifies the shifted cone inclusion with the connecting morphism of the kernel short exact sequence, including the shift-homology identification. This proves the signed localization-boundary formula.",
    "uses": [
+    "lem-weil-degreewise-epi-kernel-cocone-qis",
+    "lem-pur-kernel-shifted-cone-boundary",
     "def-amb-relative-etale-cohomology",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Section 13.11 (cone complexes and quasi-isomorphisms), with the displayed degreewise calculation"
-   }
+   "elementary": false
   },
   {
-   "text": "By [def-pur-support-cohomology], the underived supported-sections functor is $\\Gamma_Z(T,-)=\\ker((-)(T)\\to(-)(W))$, and its right derived functors are computed on $I^\\bullet$ by the cohomology of this kernel complex. Therefore the quasi-isomorphism of Step 2 canonically identifies $H^q(C^\\bullet)$ with $R^q\\Gamma_Z(T,F)$. The first cone projection is the map forgetting support, while the cone triangle convention gives the connecting representative $b\\mapsto(0,-b)$. All these maps are functorial in coefficient morphisms and in commuting restriction squares, so etale restriction and $W'\\subseteq W$ give the stated enlargement-of-support compatibilities. Independence of the resolution: for a second nonnegative injective resolution $F\\to I'^\\bullet$, a chain map $\\varphi:I^\\bullet\\to I'^\\bullet$ over $\\mathrm{id}_F$ is built inductively from the injectivity of the $I'^n$ [def-sp-injective-resolutions]. Being a morphism of sheaves, it commutes with restriction, so $(a,b)\\mapsto(\\varphi a,\\varphi b)$ maps $K^\\bullet$, $C^\\bullet$, the inclusion $K^\\bullet\\to C^\\bullet$, the projection to $A^\\bullet$ and the boundary $b\\mapsto(0,-b)$ to the primed ones. By [lem-weil-pbc-derived-functor-map-via-lift] with $h=\\mathrm{id}_F$, applied to $\\Gamma_Z(T,-)$, to $\\Gamma(T,-)$ and to $\\Gamma(W,-)$, the maps induced on $H^q(K^\\bullet)$, $H^q(A^\\bullet)$ and $H^q(B^\\bullet)$ are the canonical identifications of the derived groups. A second such $\\varphi$ differs by $dH+Hd$; then $(a,b)\\mapsto(Ha,-Hb)$ satisfies $DH_C+H_CD=(dH+Hd,dH+Hd)$ on $C^\\bullet$, since $H$ commutes with $r$. Hence the identification of $H^q(C^\\bullet)$ with $R^q\\Gamma_Z(T,F)$ does not depend on the resolution.",
+   "text": "Define the support realization as the inverse of homology of the kernel-to-cone quasi-isomorphism, followed by the inverse kernel identification and the inverse injective-resolution computation isomorphism [lem-weil-pbc-derived-functor-map-via-lift]. This gives the required normalization. Naturality of the derived-functor computation gives forgetting support, coefficient maps and object/support restriction maps. For every commuting restriction square, compare the induced kernel map and cone map by their two components; the (k,0) equations make the square commute. Applying homology yields all the single-site System equations.",
    "uses": [
-    "def-pur-support-cohomology",
-    "def-amb-relative-etale-cohomology",
-    "def-weil-abstract-derived-category",
-    "def-sp-injective-resolutions",
-    "lem-weil-pbc-derived-functor-map-via-lift"
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "def-pur-support-cohomology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Section \\ref{section-cohomology-support}, definition of $\\Gamma_Z(X,-)$, $H^q_Z$ and the localization triangle from the kernel of $\\mathcal I(X)\\to\\mathcal I(U)$"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $u_T:T_{\\mathrm{et}}\\to T_{\\mathrm{proet}}$ for the inclusion defining $\\nu_T$ [def-weil-pbc-site-comparison-morphism], so $u_T(T)=T$ and $u_T(W)=W$, and put $L=\\nu_T^{-1}$, $G=\\nu_{T,*}$ on abelian sheaves. Choose a nonnegative injective resolution $LF\\to J^\\bullet$ on $T_{\\mathrm{proet}}$ and, since $L$ is exact [lem-weil-pbc-site-pullback-abelian-exact], one chain map $\\beta:LI^\\bullet\\to J^\\bullet$ under $LF$. For an object $V$ of $T_{\\mathrm{et}}$, [lem-weil-pbc-site-cohomology-pullback] defines the canonical pullback $\\nu_T^*:H^p(V,F)\\to H^p(V,LF)$ as $H^p$ of $\\phi_V:I^\\bullet(V)\\xrightarrow{\\eta}(LI^\\bullet)(V)\\xrightarrow{\\beta}J^\\bullet(V)$, independent of the choices. Here $H^p(V,-)$ is the derived functor of sections over the object $V$ of the site of $T$; $A^\\bullet$, $B^\\bullet$ and $A'^\\bullet=J^\\bullet(T)$, $B'^\\bullet=J^\\bullet(W)$ compute these groups. Since $\\eta$ and $\\beta$ are morphisms of sheaves, $\\phi_W\\circ r=r'\\circ\\phi_T$. For $V=T$ the map $H^p(\\phi_T)$ is the canonical pullback of [lem-cbc-abelian-etale-proetale-cohomology-comparison], hence an isomorphism. For $V=W$ the argument is made at the object $W$ of the sites of $T$, without identifying these groups with cohomology of the small sites of the scheme $W$. By [lem-cbc-comparison-pullback-sections], the unit $\\eta_E:E\\to GLE$ is bijective on sections over every etale object for every etale sheaf $E$. The abelian unit has this underlying map [def-weil-pbc-sites-and-cohomology] (3), so $\\eta_F$ and each $\\eta_{I^n}$ are isomorphisms of abelian sheaves. Exactness of $L$ makes $LF\\to LI^\\bullet$ a resolution, and each $LI^n$ is $G$-acyclic by [lem-cbc-abelian-comparison-injective-acyclicity]. By [lemma-weil-pbc-leray-acyclicity] (2), $R^qG(LF)=H^q(GLI^\\bullet)\\cong H^q(I^\\bullet)=0$ for $q>0$, using the isomorphism $\\eta_{I^\\bullet}$. Now [lem-weil-pbc-site-leray-degenerate], for $\\nu_T$, the sheaf $LF$ and the object $W$, makes $e^p_{W,LF}=H^p(W,\\varepsilon_{LF})\\circ\\nu_T^*$ an isomorphism. Coefficient naturality (2) of [lem-weil-pbc-site-cohomology-pullback] for $\\eta_F$ and the triangle identity $\\varepsilon_{LF}\\circ L\\eta_F=\\mathrm{id}$ give $e^p_{W,LF}\\circ H^p(W,\\eta_F)=\\nu_T^*$ on $H^p(W,F)$. Both factors are isomorphisms, so $H^p(\\phi_W)$ is an isomorphism for every $p\\ge0$.",
+   "text": "Write L and G for the comparison adjoints [def-weil-pbc-site-comparison-morphism]. Exactness of L makes L(I) a resolution, so the standard injective-resolution lifting construction produces an augmented lift β:L(I)→K. This lift is a quasi-isomorphism. Each term L(I^n) is G-acyclic by [lem-cbc-abelian-comparison-injective-acyclicity], and each injective K^n is G-acyclic. The acyclic-resolution comparison criterion [lemma-weil-pbc-leray-acyclicity], in the already-proved source API Functor.quasiIso_map_of_rightAcyclic_nat, therefore makes Gβ a quasi-isomorphism. The unit is an isomorphism by [lem-weil-pbc-comparison-grothendieck-unit], so its composite ψβ:I→G(K) is a quasi-isomorphism. Since G is right adjoint to the exact functor L, G preserves injectives. A quasi-isomorphism between these nonnegative complexes of injectives is a homotopy equivalence by CochainComplex.quasiIso_iff_of_injective. Every additive functor, including evaluation at any etale object and supported sections, preserves this homotopy equivalence. Extension by zero preserves the resulting quasi-isomorphism. Consequently the section and supported-section comparison maps are isomorphisms on homology. The kernel/cone comparison square from Step 3 then gives the cone isomorphism directly.",
    "uses": [
     "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "lem-weil-pbc-site-cohomology-pullback",
-    "lem-cbc-abelian-etale-proetale-cohomology-comparison",
-    "lem-cbc-comparison-pullback-sections",
-    "def-weil-pbc-sites-and-cohomology",
+    "def-sp-injective-resolutions",
     "lem-cbc-abelian-comparison-injective-acyclicity",
     "lemma-weil-pbc-leray-acyclicity",
-    "lem-weil-pbc-site-leray-degenerate"
+    "lem-weil-pbc-comparison-grothendieck-unit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Section \\ref{section-cohomology-support} (sections over $U=X\\setminus Z$ as an object of $X_{\\mathrm{et}}$); the object-level comparison follows the proof route of lem-cbc-abelian-etale-proetale-cohomology-comparison, applied with the object $W$ through the cited statements"
-   }
+   "elementary": false
   },
   {
-   "text": "By Step 4, $(a,b)\\mapsto(\\phi_Ta,\\phi_Wb)$ is a chain map $C^\\bullet\\to C'^\\bullet$ of the signed cones, where $C'$ uses the identical construction on $T_{\\mathrm{proet}}$. It is compatible with the degreewise split short exact sequences $0\\to B^{\\bullet-1}\\to C^\\bullet\\to A^\\bullet\\to0$ given by $b\\mapsto(0,-b)$ and $(a,b)\\mapsto a$, and with their primed versions. [lem-weil-pbc-complex-ses-homology-long-exact] and [lem-weil-pbc-complex-ses-long-exact-naturality] give a morphism of long exact sequences $H^{q-1}(A)\\to H^{q-1}(B)\\to H^q(C)\\to H^q(A)\\to H^q(B)$ to the primed one. The four outer maps are isomorphisms by Step 4, so the five lemma [lem-weil-pbc-five-lemma] shows that $H^q(T,W;F)\\to H^q(T_{\\mathrm{proet}},W_{\\mathrm{proet}};LF)$ is an isomorphism for every $q\\geq0$. The cone map commutes with forgetting support (projection to $A$) and with the boundary $b\\mapsto(0,-b)$ by construction. For etale restriction to $U\\to T$ and for $W'\\subseteq W$, the same sheaf maps $\\eta,\\beta$ are evaluated at the other objects, so the squares commute strictly. For a coefficient morphism $\\alpha:F\\to F_1$, choose lifts $\\tilde\\alpha:I\\to I_1$ and $\\tilde\\alpha':J\\to J_1$ of $\\alpha$ and $L\\alpha$. The two chain maps $\\beta_1\\circ L\\tilde\\alpha$ and $\\tilde\\alpha'\\circ\\beta$ both lift $L\\alpha$ into the injective resolution $J_1$, so they differ by a homotopy $H$. As in Step 3, $(a,b)\\mapsto(Ha,-Hb)$ is a homotopy on the cones, which gives the coefficient compatibility in cohomology. For a pro-etale coefficient morphism $LF\\to F'$, the pro-etale cone construction of Steps 1-3 is functorial in the same way, and postcomposition gives the final assertion.",
+   "text": "For an arbitrary pro-etale coefficient map γ, the two transposed augmented lifts I→G(K) agree on the augmentation. They are homotopic because the source augmentation is a quasi-isomorphism and the target terms are injective. Apply supported sections, extend the homotopy by zero, and use the homology square of Step 3; cancel its invertible kernel-to-cone map to obtain lift independence. The same argument compares β′ with β followed by a coefficient-resolution lift, proving postcomposition. For simultaneous etale and pro-etale coefficient maps, unit naturality makes the two resulting maps into G(K₁) agree on the augmentation; their homotopy gives the coefficient equation. Object restriction squares commute strictly by naturality of sheaf morphisms, and functoriality of mapArrowHom gives the cone square. The cone projection and shifted inclusion commute with every cone map by their component formulas. These prove every TopologyComparison field. Specialize the single-site realization to the open complement of the closed immersion to obtain the asserted e and its normalization.",
    "uses": [
-    "lem-weil-pbc-complex-ses-homology-long-exact",
-    "lem-weil-pbc-complex-ses-long-exact-naturality",
-    "lem-weil-pbc-five-lemma",
-    "def-amb-relative-etale-cohomology",
-    "def-sp-injective-resolutions"
+    "def-sp-injective-resolutions",
+    "def-amb-relative-etale-cohomology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md",
-    "place": "Support boundary of the first sentence and the comparison with ordinary Kummer cohomology used for (b), abstracted to the relative section cone"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -100,24 +73,18 @@
   "def-sp-injective-resolutions",
   "def-weil-abstract-derived-category",
   "def-weil-pbc-site-comparison-morphism",
-  "def-weil-pbc-sites-and-cohomology",
   "lem-cbc-abelian-comparison-injective-acyclicity",
-  "lem-cbc-abelian-etale-proetale-cohomology-comparison",
-  "lem-cbc-comparison-pullback-sections",
-  "lem-weil-pbc-complex-ses-homology-long-exact",
-  "lem-weil-pbc-complex-ses-long-exact-naturality",
+  "lem-pur-kernel-shifted-cone-boundary",
+  "lem-weil-degreewise-epi-kernel-cocone-qis",
+  "lem-weil-pbc-comparison-grothendieck-unit",
   "lem-weil-pbc-derived-functor-map-via-lift",
-  "lem-weil-pbc-five-lemma",
   "lem-weil-pbc-injective-sheaf-mono-restriction",
-  "lem-weil-pbc-site-cohomology-pullback",
-  "lem-weil-pbc-site-leray-degenerate",
-  "lem-weil-pbc-site-pullback-abelian-exact",
   "lemma-weil-pbc-leray-acyclicity"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md",
-  "place": "First sentence (support boundary) and final paragraph (comparison with ordinary Kummer cohomology); cone calculation supplied explicitly from the definitions"
+  "place": "The support-boundary and comparison clauses, formalized by B8 using kernel/cone coordinates and the transposed injective-resolution lift. Step 4 uses the existing acyclic-resolution API and the Grothendieck comparison unit; it avoids the Leray-edge and five-lemma detour. The independent boundary calculation is lem-pur-kernel-shifted-cone-boundary."
  },
  "mathlib_searches": [
   {
@@ -211,13 +178,8 @@
  },
  "tool_uses": [
   "lem-weil-pbc-injective-sheaf-mono-restriction",
-  "lem-cbc-abelian-etale-proetale-cohomology-comparison",
-  "lem-weil-pbc-site-cohomology-pullback",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-cbc-comparison-pullback-sections",
   "lem-cbc-abelian-comparison-injective-acyclicity",
-  "lemma-weil-pbc-leray-acyclicity",
-  "lem-weil-pbc-site-leray-degenerate"
+  "lemma-weil-pbc-leray-acyclicity"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -267,5 +229,15 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "Repair of 796e2f5338c0: normalized kernel/right-derived realizations on both sites; actual derived forget/support/boundary equations; coefficient, resolution and object-square naturality; topology maps are the adjunction unit followed by an augmented lift, including arbitrary pro-etale coefficient postcomposition. No chosen maps from a sorried existence theorem."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-69281",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261020T221054-L-4140707",
+  "kind": "interface",
+  "note": "independent cc review: item node lem-pur-divisor-relative-cone + new lem-pur-kernel-shifted-cone-boundary vs delivered Lean (both compile; axioms checked); removed ProEtaleComparisonPullbackSections import vs dag/units sk-prop-a1-kummer realized (empty) and sk-prop-pe-comparison-morphism (other unit)"
  }
 }

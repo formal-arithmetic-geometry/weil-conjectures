@@ -1,0 +1,123 @@
+{
+ "id": "lem-pur-kernel-shifted-cone-boundary",
+ "kind": "statement",
+ "title": "The shifted cone boundary agrees with the kernel connecting map",
+ "statement": "Let C be an abelian category [def-sp-abelian], A and B integer-indexed cochain complexes, and r:A→B a morphism whose kernel sequence 0→ker(r)→A→B→0 is short exact. Use the mapping cone and shift conventions of [def-weil-abstract-derived-category]. Suppose κ:ker(r)→Cone(r)[-1] has components (k,0): after transport through the shift isomorphism, its projection to B in degree n-1 is zero and its projection to A in degree n is the kernel inclusion. For every integer q, the homology map induced by the shifted cone inclusion B[-1]→Cone(r)[-1] equals the shift identification H^q(B[-1])→H^(q-1)(B), followed by the connecting map H^(q-1)(B)→H^q(ker(r)) of the kernel short exact sequence and by H^q(κ). No boundedness assumption is required.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Lemma lemma-long-exact-sequence-cochain (Tag 0117), connecting homomorphism defined by lifting a cycle; cone and shift conventions are in derived.tex, section-cones, definition-cone."
+ },
+ "proof": [
+  {
+   "text": "Test equality after applying Yoneda. Represent a morphism into H^q(B[-1]) by a cycle after an epimorphic refinement. Transport it to a cycle b in B^(q-1), and after another epimorphic refinement lift b through r to a in A^(q-1). Since db=0, da lifts uniquely to c in ker(r)^q. The connecting-map cycle formula identifies δ[b] with [c]. This is the cycle-lifting construction of [lem-weil-pbc-complex-ses-homology-long-exact].",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the shifted cone convention [def-weil-abstract-derived-category], D(a,0)=(da,-r(a)). The component hypotheses on κ therefore identify κ(c)-(0,b) with the boundary D(a,0). Thus the classes of the shifted cone inclusion of b and κ(c) are equal. The formal proof uses the boundary of (-a,0) to express the difference in the opposite order.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The shift-homology isomorphism transports the cycle representative b to its unshifted class. Cancel the two epimorphic refinements and use faithfulness of Yoneda to obtain the claimed equality of morphisms. This also handles q=0 and arbitrary negative degrees.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-complex-ses-homology-long-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "The connecting-map cycle chase of lemma-long-exact-sequence-cochain, combined with derived.tex definition-cone; the complete cone boundary computation is formalized."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The boundary map from a shifted mapping cone equals the connecting homomorphism of the kernel short exact sequence",
+   "results": "Eight hits including mappingCone.homologySequenceδ_triangleh, δ_descCochain, δ_inl, d_snd_v and δ_snd. None states the kernel-to-shifted-cone boundary equality.",
+   "date": "2026-10-21",
+   "verdict": "generalization: prove the kernel comparison by the connecting-map cycle formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone, HomologicalComplex.homologyMap",
+   "results": "One hit: CochainComplex.mappingCone.homologySequenceδ_triangleh in Mathlib.Algebra.Homology.HomotopyCategory.ShortExact.",
+   "date": "2026-10-21",
+   "verdict": "no exact match: the result concerns a different cone triangle comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*mappingCone|mappingCone.*boundary",
+   "results": "No matching declaration found by the project Mathlib search.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The boundary map from a shifted mapping cone equals the connecting homomorphism of the kernel short exact sequence",
+   "results": "Eight hits: SnakeLemma.δ and δ′; CategoryTheory.ShortComplex.ShortExact.δ, δ.congr_simp and comp_δ in Mathlib.Algebra.Homology.HomologySequence; DerivedCategory.triangleOfSESδ in Mathlib.Algebra.Homology.DerivedCategory.ShortExact; ShortExact.singleδ; kernelCokernelCompSequence.δ. These define connecting morphisms or derived-category triangles, rather than identifying the shifted cone inclusion with the connecting map through a kernel morphism with specified components.",
+   "date": "2026-10-21",
+   "verdict": "generalization: the existing connecting-map API is used, but the kernel-to-shifted-cone boundary equality still needs proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PurityRelativeCone",
+  "date": "2026-10-21",
+  "group": "B8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-divisor-relative-cone",
+   "place": "Step 3: identification of the localization boundary with the shifted cone inclusion.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.KernelShiftedConeBoundary",
+  "file": "lean/Sheaf/Algebra/Homology/KernelShiftedConeBoundary.lean",
+  "declaration": "CochainComplex.kernelShiftedCone_boundary",
+  "statement": "theorem kernelShiftedCone_boundary\n    {C : Type*} [Category* C] [Abelian C]\n    {A B : CochainComplex C ℤ} (r : A ⟶ B)\n    (hS : (ShortComplex.mk (kernel.ι r) r (kernel.condition r)).ShortExact)\n    (κ : kernel r ⟶ (mappingCone r)⟦(-1 : ℤ)⟧)\n    (hκ : ∀ n : ℤ,\n      κ.f n ≫ ((mappingCone r).shiftFunctorObjXIso (-1) n (n - 1) (by omega)).hom ≫\n        homotopyCofiber.sndX r (n - 1) = 0 ∧\n      κ.f n ≫ ((mappingCone r).shiftFunctorObjXIso (-1) n (n - 1) (by omega)).hom ≫\n        homotopyCofiber.fstX r (n - 1) n (by change n - 1 + 1 = n; omega) =\n        (kernel.ι r).f n) (q : ℤ) :\n    homologyMap ((CategoryTheory.shiftFunctor _ (-1 : ℤ)).map (mappingCone.inr r)) q =\n      (ShiftSequence.shiftIso C (-1) q (q - 1) (by omega)).hom.app B ≫\n        hS.δ (q - 1) q (by change q - 1 + 1 = q; omega) ≫ homologyMap κ q",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-69281",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261020T221054-L-4140707",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-69281",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261020T221054-L-4140707",
+  "kind": "interface",
+  "note": "independent cc review: item node lem-pur-divisor-relative-cone + new lem-pur-kernel-shifted-cone-boundary vs delivered Lean (both compile; axioms checked); removed ProEtaleComparisonPullbackSections import vs dag/units sk-prop-a1-kummer realized (empty) and sk-prop-pe-comparison-morphism (other unit)"
+ }
+}
