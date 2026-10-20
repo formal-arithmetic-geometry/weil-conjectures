@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
-import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
+import WeilConjectures.AlgebraicGeometry.Modules.IsKFlatTilde
 import Sheaf.Algebra.Homology.KFlatPullback
 
 /-! # Affine pullback comparison through spectrum charts

@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
+import WeilConjectures.AlgebraicGeometry.Modules.IsKFlatTilde
 import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
 import WeilConjectures.AlgebraicGeometry.AffineTildeTotalTensor
 import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
@@ -46,13 +46,28 @@ with no boundedness, flatness of the ring map, or quasi-coherence hypothesis add
 
 universe u w
 
+
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
+-- Inline local instance proofs to keep dependent category comparisons small.
+set_option linter.style.haveILetI false
 set_option synthInstance.maxSize 2048
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 
 namespace AlgebraicGeometry
+
+attribute [local instance 2000] SheafOfModules.instCategory
+attribute [local instance 2001] Scheme.Modules.instCategory Scheme.Modules.instAbelian
+  Scheme.Modules.instHasLimits Scheme.Modules.instHasColimits
+attribute [local instance 2002] CategoryTheory.Abelian.toPreadditive
+
+-- Match the public scheme/sheaf wrappers while keeping derived constructions folded.
+attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
+attribute [local implicit_reducible] Scheme.Modules.Hom Scheme.Modules.instCategory
+  Scheme.Modules.instAbelian HomotopyCategory DerivedCategory
+  Functor.mapHomologicalComplex Functor.mapHomotopyCategory HomotopyCategory.quotient
+  HomologicalComplexUpToQuasiIso.Qh
 
 
 attribute [local instance] Functor.additive_of_preserves_binary_products
@@ -62,6 +77,17 @@ private instance tilde_additive (A : Type u) [CommRing A] :
     (tilde.functor (.of A) : ModuleCat.{u} A ⥤
       SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)).Additive :=
   ⟨by intros; exact tilde.map_add _ _⟩
+
+-- Convert the official acyclic-tensor API once, before specializing the comparisons.
+private theorem isKFlat_tilde_acyclic (A : Type u) [CommRing A]
+    (K : CochainComplex (ModuleCat.{u} A) ℤ)
+    (hK : ∀ F : CochainComplex (ModuleCat.{u} A) ℤ,
+      F.Acyclic → (CochainComplex.mapBifunctor F K (curriedTensor (ModuleCat A))).Acyclic) :
+    CochainComplex.IsAcyclicTensorKFlat (R := (Spec (.of A)).sheaf)
+      ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A) (Spec (.of A)).Modules
+        _ _ _ _ (tilde.functor (.of A)) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj K) := by
+  intro F hF
+  exact isKFlat_tilde A K hK F hF
 
 private theorem tensorDerivedCounit {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -77,13 +103,17 @@ private theorem tensorDerivedCounit {X Y : Scheme.{u}} (f : X ⟶ Y)
       ∀ P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ,
         CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P →
           IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) := by
-  obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
-    E, hE, hEmap, hEadd, ε, hL, htri, hK⟩ := derivedPullback_spec f
+  have d := derivedPullback_spec f
+  obtain ⟨E, hE, hEmap, hEadd, ε, hL, htri, hK⟩ :=
+    d.choose_spec.choose_spec.choose_spec.choose_spec.2.2.2
   have h : E = Scheme.Modules.tensorPullback f :=
     CategoryTheory.Functor.ext hE (fun M N a ↦ hEmap a)
   subst E
   exact ⟨hEadd, ε, hL, hK⟩
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+-- The comparison needs the equations of the homotopy-category functors.
 private theorem pullbackCompIso {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -92,7 +122,7 @@ private theorem pullbackCompIso {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
   obtain ⟨ag, εg, hLg, hKg⟩ := tensorDerivedCounit g
   obtain ⟨af, εf, hLf, hKf⟩ := tensorDerivedCounit f
   obtain ⟨ac, εc, hLc, hKc⟩ := tensorDerivedCounit (f ≫ g)
-  let := hLc
+  letI := hLc
   obtain ⟨θ⟩ := Scheme.Modules.nonempty_tensorPullbackComp f g
   let β : DerivedCategory.Qh.{w} ⋙ (derivedPullback g ⋙ derivedPullback f) ⟶
       (Scheme.Modules.tensorPullback (f ≫ g)).mapHomotopyCategory (.up ℤ) ⋙
@@ -118,13 +148,13 @@ private theorem pullbackCompIso {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
       (hP : CochainComplex.IsAcyclicTensorKFlat (R := Z.sheaf) P) :
       IsIso (τ.app (DerivedCategory.Qh.{w}.obj
         ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) := by
-    have hg := hKg P hP
-    have hfg := hKc P hP
+    haveI hg := hKg P hP
+    haveI hfg := hKc P hP
     have hPg : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf)
         (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P) := by
       exact CochainComplex.isKFlat_pullback g.base Y.sheaf Z.sheaf ⟨g.c⟩ P hP
-    have hf := hKf _ hPg
-    have hfapp : IsIso (εf.app
+    haveI hf := hKf _ hPg
+    haveI hfapp : IsIso (εf.app
         (((Scheme.Modules.tensorPullback g).mapHomotopyCategory (.up ℤ)).obj
           ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) := by
       rw [Functor.mapHomotopyCategory_obj]
@@ -134,22 +164,22 @@ private theorem pullbackCompIso {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
         (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (.up ℤ))
       (derivedPullback g ⋙ derivedPullback f) β
       ((HomotopyCategory.quotient _ (.up ℤ)).obj P)
-    have : IsIso (τ.app (DerivedCategory.Qh.{w}.obj
+    haveI : IsIso (τ.app (DerivedCategory.Qh.{w}.obj
         ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
           εc.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
       rw [show τ.app _ ≫ _ = _ from fac]
       dsimp only [β, NatTrans.comp_app, Functor.associator_inv_app,
         Functor.associator_hom_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
-      have h1 : IsIso ((derivedPullback f).map
+      haveI h1 : IsIso ((derivedPullback f).map
           (εg.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) := inferInstance
-      have h2 : IsIso ((DerivedCategory.Qh.{w}
+      haveI h2 : IsIso ((DerivedCategory.Qh.{w}
           (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).map
           ((Functor.mapHomotopyCategoryCompIso θ.symm (.up ℤ)).hom.app
             ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) := inferInstance
       simp only [Category.id_comp]
       exact IsIso.comp_isIso' h1 (IsIso.comp_isIso' hfapp h2)
     exact IsIso.of_isIso_comp_right _ (εc.app _)
-  have : IsIso τ := by
+  haveI : IsIso τ := by
     apply (NatTrans.isIso_iff_isIso_app τ).2
     intro K
     let Q := DerivedCategory.Qh.{w}
@@ -160,12 +190,15 @@ private theorem pullbackCompIso {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     obtain ⟨P, s, hP, _, hs, _⟩ :=
       CochainComplex.exists_isKFlatResolution (R := Z.sheaf) G
     have hsq := (HomotopyCategory.quotient_map_mem_quasiIso_iff s).2 hs
-    have := Localization.inverts Q (HomotopyCategory.quasiIso _ (.up ℤ)) _ hsq
+    haveI := Localization.inverts Q (HomotopyCategory.quasiIso _ (.up ℤ)) _ hsq
     apply (NatTrans.isIso_app_iff_of_iso τ
       (asIso (Q.map ((HomotopyCategory.quotient _ (.up ℤ)).map s)))).1
     exact hflat P hP
   exact ⟨asIso τ⟩
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+-- The comparison needs the equations of the homotopy-category functors.
 private theorem pullbackOpenIso (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w}
@@ -181,14 +214,14 @@ private theorem pullbackOpenIso (X : Scheme.{u}) (U : X.Opens)
     SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙
     (Scheme.Modules.overEquiv U).functor
   obtain ⟨a, ε, hL, _⟩ := tensorDerivedCounit U.ι
-  let := hL
+  letI := hL
   obtain ⟨adj⟩ := Scheme.Modules.nonempty_tensorPullbackAdjunction U.ι
   let θ : Scheme.Modules.tensorPullback U.ι ≅ R :=
     adj.leftAdjointUniq (Scheme.Modules.restrictAdjunction U.ι) ≪≫
       (Scheme.Modules.overFunctorEquiv U).symm
-  have : R.Additive := by dsimp [R]; infer_instance
-  have : PreservesFiniteLimits R := by dsimp [R]; infer_instance
-  have : PreservesFiniteColimits R := by dsimp [R]; infer_instance
+  haveI : R.Additive := by dsimp [R]; infer_instance
+  haveI : PreservesFiniteLimits R := by dsimp [R]; infer_instance
+  haveI : PreservesFiniteColimits R := by dsimp [R]; infer_instance
   let θh : (Scheme.Modules.tensorPullback U.ι).mapHomotopyCategory (.up ℤ) ≅
       R.mapHomotopyCategory (.up ℤ) :=
     { hom := θ.hom.mapHomotopyCategory (.up ℤ)
@@ -198,7 +231,7 @@ private theorem pullbackOpenIso (X : Scheme.{u}) (U : X.Opens)
   let δ := Functor.isoWhiskerRight θh
     (DerivedCategory.Qh.{w} (C := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)))
   let α := (Functor.mapDerivedCategoryFactorsh.{w, w} R) ≪≫ δ.symm
-  have := Functor.isLeftDerivedFunctor_of_inverts
+  haveI := Functor.isLeftDerivedFunctor_of_inverts
     (HomotopyCategory.quasiIso
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ))
     (Functor.mapDerivedCategory.{w, w} R) α
@@ -331,7 +364,7 @@ private theorem baseChangeCounitComparison
     Nonempty (F ⋙ T.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q.{w} ⋙ L ≅
       F ⋙ H.mapHomologicalComplex (.up ℤ) ⋙ S.mapHomologicalComplex (.up ℤ) ⋙
         DerivedCategory.Q.{w}) := by
-  have : IsIso (Functor.whiskerLeft
+  haveI : IsIso (Functor.whiskerLeft
       ((F ⋙ T.mapHomologicalComplex (.up ℤ)) ⋙ HomotopyCategory.quotient _ (.up ℤ)) ε) :=
     (NatTrans.isIso_iff_isIso_app _).2 hε
   obtain ⟨β⟩ := counitComparison E L (F ⋙ T.mapHomologicalComplex (.up ℤ)) ε
@@ -372,19 +405,22 @@ theorem derivedPullback_tilde_kFlat_natIso (A B : Type u) [CommRing A] [CommRing
             (tilde.functor (.of B))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)) ⋙ DerivedCategory.Q) := by
   let f := Spec.map (CommRingCat.ofHom φ)
   obtain ⟨hEadd, ε, hε, hflat⟩ := tensorDerivedCounit f
+  haveI : (Scheme.Modules.tensorPullback f).Additive := hEadd
   obtain ⟨θ, _⟩ := Scheme.Modules.exists_tensorPullback_tilde_iso (CommRingCat.ofHom φ)
   let TA : ModuleCat.{u} A ⥤
       SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace) := tilde.functor (.of A)
   let TB : ModuleCat.{u} B ⥤
       SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace) := tilde.functor (.of B)
-  have : TA.Additive := tilde_additive A
-  have : TB.Additive := tilde_additive B
-  apply baseChangeCounitComparison TA TB
-    (ModuleCat.extendScalars φ) (Scheme.Modules.tensorPullback f)
-    (derivedPullback f) (CochainComplex.ιKFlat (ModuleCat.{u} A)) ε θ
+  haveI : TA.Additive := tilde_additive A
+  haveI : TB.Additive := tilde_additive B
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
+    apply baseChangeCounitComparison TA TB
+      (ModuleCat.extendScalars φ) (Scheme.Modules.tensorPullback f)
+      (derivedPullback f) (CochainComplex.ιKFlat (ModuleCat.{u} A)) ε θ
   intro P
   apply hflat
-  exact isKFlat_tilde A P.obj (moduleKFlat_acyclic A P.obj P.property)
+  exact isKFlat_tilde_acyclic A P.obj (moduleKFlat_acyclic A P.obj P.property)
 
 /-- Naturality of the affine tensor comparison in a K-flat first model and an arbitrary
 second complex. Source: Stacks, Tag 08DX(2), via Tag 08DV
@@ -429,7 +465,7 @@ theorem derivedTensor_tilde_kFlat_natIso (A : Type u) [CommRing A]
       (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)
   let F := CochainComplex.ιKFlat (ModuleCat.{u} A) ⋙ T
   have hβ := kFlat_derivedTensor_comparison_natIso (Spec (.of A)) F T
-    (fun P ↦ isKFlat_tilde A P.obj (moduleKFlat_acyclic A P.obj P.property))
+    (fun P ↦ isKFlat_tilde_acyclic A P.obj (moduleKFlat_acyclic A P.obj P.property))
   have hθ := affineTilde_totalTensor_natIso A
   refine Nonempty.map2 ?_ hβ hθ
   intro β θ
@@ -450,7 +486,7 @@ private theorem affineTilde_Q_map_isIso (A : Type u) [CommRing A]
           (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ))).map s)) := by
   let := HasDerivedCategory.standard (ModuleCat.{u} A)
   obtain ⟨e, ⟨α⟩, _⟩ := exists_affineQCohDerivedEquivalence A
-  have : QuasiIso s := hs
+  haveI : QuasiIso s := hs
   exact (NatIso.isIso_map_iff α s).mp (by
     change IsIso (((e.functor ⋙ (schemeDerivedQCohProperty (Spec (.of A))).ι).map
       (DerivedCategory.Q.map s)))
@@ -504,7 +540,7 @@ theorem derivedPullback_tilde_iso (A B : Type u) [CommRing A] [CommRing B]
     (@id (ModuleCat.{u} A ⥤
       SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
       (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)
-  have : IsIso (DerivedCategory.Q.map (T.map s)) := affineTilde_Q_map_isIso A s hs
+  haveI : IsIso (DerivedCategory.Q.map (T.map s)) := affineTilde_Q_map_isIso A s hs
   obtain ⟨α⟩ := derivedPullback_tilde_kFlat_natIso A B φ
   exact mapIso_trans_nonempty (derivedPullback (Spec.map (CommRingCat.ofHom φ)))
     (DerivedCategory.Q.map (T.map s)) (α.app ⟨P, hP⟩)
@@ -548,7 +584,7 @@ theorem derivedTensor_tilde_iso (A : Type u) [CommRing A]
     (@id (ModuleCat.{u} A ⥤
       SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
       (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)
-  have : IsIso (DerivedCategory.Q.map (T.map s)) := affineTilde_Q_map_isIso A s hs
+  haveI : IsIso (DerivedCategory.Q.map (T.map s)) := affineTilde_Q_map_isIso A s hs
   obtain ⟨α⟩ := derivedTensor_tilde_kFlat_natIso A
   exact tensorIso_trans_nonempty (DerivedCategory.Q.map (T.map s))
     ((α.app ⟨P, hP⟩).app N)

@@ -6,7 +6,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
-public import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
+public import WeilConjectures.AlgebraicGeometry.Modules.IsKFlatTilde
 public import WeilConjectures.Algebra.Homology.AffineBaseChangeTildeCoordinates
 public import WeilConjectures.AlgebraicGeometry.Modules.AffineTildeTensor
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
@@ -162,7 +162,8 @@ set_option maxHeartbeats 800000 in
 homology. Both the extension and the exact-tilde homology comparisons are canonical. -/
 noncomputable def tensorResolutionHomologyTildeIso (A : Type u) [CommRing A]
     (M N : ModuleCat.{u} A) (P : ProjectiveResolution M) (n : ℕ) :
-    tilde (R := .of A) ((((tensorRight N).mapHomologicalComplex (.down ℕ)).obj P.complex).homology n) ≅
+    tilde (R := .of A)
+      ((((tensorRight N).mapHomologicalComplex (.down ℕ)).obj P.complex).homology n) ≅
       (CochainComplex.mapBifunctor
         (((tilde.functor (.of A)).mapHomologicalComplex (.up ℤ)).obj
           (P.complex.extend ComplexShape.embeddingDownNat))
@@ -228,15 +229,15 @@ theorem exists_tensorResolutionSections (A : Type u) [CommRing A]
   classical
   let X := Spec (.of A)
   let C := SheafOfModules.{u} (moduleRings X.toRingedSpace)
-  letI := HasDerivedCategory.standard C
-  letI : HasDerivedCategory.{u + 1} X.Modules := HasDerivedCategory.standard C
+  let := HasDerivedCategory.standard C
+  let : HasDerivedCategory.{u + 1} X.Modules := HasDerivedCategory.standard C
   let E := (((tilde.functor (.of A)).mapHomologicalComplex (.up ℤ)).obj
     (P.complex.extend ComplexShape.embeddingDownNat))
   let N0 := (CochainComplex.singleFunctor X.Modules 0).obj (tilde (R := .of A) N)
   let p := tensorResolutionTildeAugmentation A M P
   have hp : QuasiIso p := tensorResolutionTildeAugmentation_quasiIso A M P
-  haveI : QuasiIso q := hq
-  haveI : QuasiIso p := hp
+  have : QuasiIso q := hq
+  have : QuasiIso p := hp
   obtain ⟨comparisonE⟩ := kFlat_derivedTensor_comparison_natIso X
     ((Functor.const PUnit.{1}).obj E) ((Functor.const PUnit.{1}).obj N0)
     (fun _ ↦ tensorResolution_isKFlat A M P)

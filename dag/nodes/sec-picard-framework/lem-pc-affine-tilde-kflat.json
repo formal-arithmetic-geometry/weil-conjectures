@@ -121,14 +121,15 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-atk2110 (reviewer sub-agent of L); spot-checked: Route 01HV leaf -> base change -> 06YB stalk criterion (lem-pc-kflat-stalk-criterion, reverse direction) confirmed, C1/C4 ok, no restatement of the item. FIX more, RETURN less: (1) B/class (d) + wrong source: new node lem-pc-kflat-module-base-change was tagged 064K (that tag is the bounded-above-flat lemma, already lem-pc-module-bounded-flat-kflat); the real lemma is more-algebra lemma-base-change-K-flat, Tag 06Y1, whose proof is 'follows from the definitions' via (K(x)_A A_p)(x)_{A_p} L = K (x)_A L; folded into step 2 as elementary citing Tag 06Y1, node dropped; (2) item source.place and blueprint.place corrected 064K -> 06Y1. Second reading by H1 missed the wrong tag.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde",
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.IsKFlatTilde",
   "declaration": "AlgebraicGeometry.isKFlat_tilde",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/IsKFlatTilde.lean",
-  "statement": "theorem isKFlat_tilde (A : Type u) [CommRing A] (K : CochainComplex (ModuleCat.{u} A) ℤ) (hK : ∀ F : CochainComplex (ModuleCat.{u} A) ℤ, F.Acyclic → (CochainComplex.mapBifunctor F K (curriedTensor (ModuleCat A))).Acyclic) : CochainComplex.IsAcyclicTensorKFlat (R := (Spec (.of A)).sheaf) ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A) (Spec (.of A)).Modules _ _ _ _ (tilde.functor (.of A)) ⟨fun _ _ => tilde.map_zero⟩ (ComplexShape.up ℤ)).obj K)",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/IsKFlatTilde.lean",
+  "statement": "theorem isKFlat_tilde (A : Type u) [CommRing A] (K : CochainComplex (ModuleCat.{u} A) ℤ) (hK : ∀ F : CochainComplex (ModuleCat.{u} A) ℤ, F.Acyclic → (CochainComplex.mapBifunctor F K (curriedTensor (ModuleCat A))).Acyclic) : CochainComplex.IsKFlatTensor (R := (Spec (.of A)).sheaf) ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A) (Spec (.of A)).Modules _ _ _ _ (tilde.functor (.of A)) ⟨fun _ _ => tilde.map_zero⟩ (ComplexShape.up ℤ)).obj K)",
   "branch": "sheaf-dag",
-  "by": "M1",
-  "date": "2026-10-11",
-  "existing": false
+  "by": "U4",
+  "date": "2026-10-20",
+  "existing": true,
+  "note": "Sheaf twin retired in favor of the official library module (2026-10-20); the acyclic-tensor K-flat conclusion is named IsKFlatTensor upstream."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -151,13 +152,13 @@
   }
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F3",
+  "reviewer": "C-2c955",
+  "group": "U4",
   "result": "pass",
-  "landing": "20261012T085238-L-14261",
+  "landing": "20261020T145541-L-2410468",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: twin WeilConjectures…IsKFlatTilde.isKFlat_tilde (IsKFlatTensor) vs node lean.statement and the three consumer call sites; delivered files and 3 direct importers compiled; axioms clean"
  }
 }
