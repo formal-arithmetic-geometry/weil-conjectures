@@ -1,17 +1,12 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+-/
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry
-import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
-import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import Sheaf.AlgebraicGeometry.CompactifiableOverField
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-import Sheaf.AlgebraicGeometry.ProperProjectionFormula
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
 
 /-! # Evaluation formula for the canonical internal compact-support adjunction
 
@@ -42,40 +37,6 @@ private theorem conjugate_uncurry
       α.app C₀ ≫ (a₁.homEquiv _ _).symm f := by
   simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
   rw [conjugateEquiv_counit, ← α.naturality_assoc]
-
-private theorem parametrized_conjugate_uncurry
-    {C D E : Type*} [Category C] [Category D] [Category E]
-    {T₁ T₂ : C ⥤ D ⥤ E} {H₁ H₂ : Cᵒᵖ ⥤ E ⥤ D}
-    (a₁ : T₁ ⊣₂ H₁) (a₂ : T₂ ⊣₂ H₂) (π : T₂ ≅ T₁)
-    (P : C) (M : E) (C₀ : D) (f : C₀ ⟶ (H₁.obj (op P)).obj M) :
-    ((a₂.adj P).homEquiv C₀ M).symm
-        (f ≫ ((a₁.conjugateIso a₂ π).hom.app (op P)).app M) =
-      (π.hom.app P).app C₀ ≫ ((a₁.adj P).homEquiv C₀ M).symm f := by
-  change ((a₂.adj P).homEquiv C₀ M).symm
-    (f ≫ (conjugateEquiv (a₁.adj P) (a₂.adj P) (π.hom.app P)).app M) = _
-  exact conjugate_uncurry (a₁.adj P) (a₂.adj P) (π.hom.app P) f
-
-private theorem composite_conjugate_uncurry
-    {C D : Type*} [Category C] [Category D]
-    {TS : D ⥤ D ⥤ D} {HS : Dᵒᵖ ⥤ D ⥤ D}
-    {TX : C ⥤ C ⥤ C} {HX : Cᵒᵖ ⥤ C ⥤ C}
-    {F : D ⥤ C} {G : C ⥤ D} {L : C ⥤ D} {R : D ⥤ C}
-    (tS : TS ⊣₂ HS) (tX : TX ⊣₂ HX) (a : L ⊣ R) (b : F ⊣ G)
-    (π : F ⋙ TX ≅ TS ⋙ (Functor.whiskeringLeft _ _ _).obj L ⋙
-      (Functor.whiskeringRight _ _ _).obj F)
-    (P : D) (M C₀ : C) (f : C₀ ⟶ R.obj ((HS.obj (op P)).obj (G.obj M))) :
-    ((tX.adj (F.obj P)).homEquiv C₀ M).symm
-        (f ≫ (((tS.comp a b).conjugateIso (tX.precomp F) π).hom.app (op P)).app M) =
-      (π.hom.app P).app C₀ ≫ F.map
-        (((tS.adj P).homEquiv (L.obj C₀) (G.obj M)).symm
-          ((a.homEquiv C₀ _).symm f)) ≫ b.counit.app M := by
-  have h := parametrized_conjugate_uncurry (tS.comp a b) (tX.precomp F) π P M C₀ f
-  simp only [ParametrizedAdjunction.precomp_adj, ParametrizedAdjunction.comp_adj,
-    Adjunction.comp_homEquiv, Equiv.symm_trans, Equiv.trans_apply] at h
-  change _ = (π.hom.app P).app C₀ ≫
-    (b.homEquiv _ _).symm (((tS.adj P).homEquiv _ _).symm
-      ((a.homEquiv _ _).symm f)) at h
-  simpa only [Functor.comp_obj, Adjunction.homEquiv_counit, Category.assoc] using h
 
 end CategoryTheory
 
@@ -112,7 +73,40 @@ theorem internalAdjunctionEvaluation_mate_core
                 Q (((RHom(X)[ModuleCat A]).obj (op M)).obj
                   ((R(f)^![ModuleCat A]).obj K))).symm h)) ≫
         (rightDerivedUpperShriekAdjunction (ModuleCat A) f).counit.app K := by
-  sorry
+  let := isIso_projectionMap_of_finite A f
+  simp only [derivedHomRightDerivedLowerShriekIsoOfFinite,
+    derivedHomRightDerivedLowerShriekIso, Iso.app_hom,
+    ParametrizedAdjunction.conjugateIso, NatIso.ofComponents_hom_app,
+    conjugateIsoEquiv_apply_hom, ParametrizedAdjunction.precomp_adj,
+    derivedTensorHomAdjunction, asIso_hom]
+  -- Abstract the projection component before normalizing its functor types. This avoids
+  -- unfolding the compactification and the derived functors during mate matching.
+  generalize hα : (projectionMap (ModuleCat A) f).app M = α
+  change ((derivedTensor (ModuleCat A) S).obj ((R(f)_![ModuleCat A]).obj M) ⟶
+    L((f)^*[ModuleCat A]) ⋙ (derivedTensor (ModuleCat A) X).obj M ⋙
+      R(f)_![ModuleCat A]) at α
+  change ((derivedTensorHomAdjunction (ModuleCat A)
+      ((R(f)_![ModuleCat A]).obj M)).homEquiv Q K).symm
+    (h ≫ (conjugateEquiv
+      ((derivedUpperStarLowerStarAdjunction (ModuleCat A) f).comp
+        ((derivedTensorHomAdjunction (ModuleCat A) M).comp
+          (rightDerivedUpperShriekAdjunction (ModuleCat A) f)))
+      (derivedTensorHomAdjunction (ModuleCat A) ((R(f)_![ModuleCat A]).obj M))
+      α).app K) =
+    α.app Q ≫ (R(f)_![ModuleCat A]).map
+      (((derivedTensorHomAdjunction (ModuleCat A) M).homEquiv
+        (L((f)^*[ModuleCat A]).obj Q) ((R(f)^![ModuleCat A]).obj K)).symm
+        (((derivedUpperStarLowerStarAdjunction (ModuleCat A) f).homEquiv Q
+          (((RHom(X)[ModuleCat A]).obj (op M)).obj
+            ((R(f)^![ModuleCat A]).obj K))).symm h)) ≫
+      (rightDerivedUpperShriekAdjunction (ModuleCat A) f).counit.app K
+  have e := conjugate_uncurry
+    ((derivedUpperStarLowerStarAdjunction (ModuleCat A) f).comp
+      ((derivedTensorHomAdjunction (ModuleCat A) M).comp
+        (rightDerivedUpperShriekAdjunction (ModuleCat A) f)))
+    (derivedTensorHomAdjunction (ModuleCat A) ((R(f)_![ModuleCat A]).obj M)) α h
+  simpa only [Adjunction.comp_homEquiv, Equiv.symm_trans, Equiv.trans_apply,
+    Adjunction.homEquiv_counit, Functor.comp_obj, Category.assoc] using e
 
 /-- The tensor--Hom transpose of the canonical compact-support internal adjunction.
 Source: literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/
@@ -146,6 +140,5 @@ theorem internalAdjunctionEvaluation
                   ((R(f)^![ModuleCat A]).obj K))).symm h)) ≫
         (rightDerivedUpperShriekAdjunction (ModuleCat A) f).counit.app K := by
   rw [internalAdjunctionEvaluation_mate_core A f M K Q h]
-
 
 end AlgebraicGeometry.Etale
