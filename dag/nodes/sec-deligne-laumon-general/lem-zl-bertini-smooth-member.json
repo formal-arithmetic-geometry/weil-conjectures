@@ -18,7 +18,23 @@
  ],
  "proof": [
   {
-   "text": "Choose a basis of $V$ and form the universal section $s_{\\mathrm{univ}}=\\sum_i x_i\\psi(v_i)$ on $\\mathbf A^r_k\\times_kY$; by the definition of the zero-scheme construction and base change, its zero scheme $H_{\\mathrm{univ}}$ has fibre over every coefficient point $v$ equal to $H_v=Z(\\psi(v))$.",
+   "text": "Reindex the finite basis by ULift(Fin r), with r its cardinality. Generation is unchanged because the ranges of the stalk germs are unchanged under a bijection. Trivialize the invertible sheaf on the complements of the zero loci of its generating sections; the stalk-span criterion and the local-ring maximal-ideal argument show that these opens cover. On these opens the native projective morphism equals the morphism specified by the generating sections, by the uniqueness statement of the projective-space functor of points. Coordinate ratios show that reindexing this morphism is its composite with the projective coordinate reindexing isomorphism. Thus the reindexed morphism is still an immersion. These comparisons do not require a nonempty indexing set.",
+   "uses": [
+    "def-weil-pbc-morphism-to-projective-space-by-sections",
+    "lem-weil-pbc-projective-space-functor-of-points",
+    "lem-weil-pbc-projective-space-reindex-is-iso",
+    "lem-weil-pbc-generating-sections-stalk-span",
+    "lem-weil-pbc-invertible-stalk-linear-equiv",
+    "lem-weil-pbc-section-nonvanishing-zero-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Situation 0FD3, choice of a finite basis; Lemma 0FD6, associated projective immersion"
+   }
+  },
+  {
+   "text": "Choose a basis of $V$ and form the universal section $s_{\\mathrm{univ}}=\\sum_i x_i\\psi(v_i)$ on $\\mathbf A^r_k\\times_kY$; by the definition of the zero-scheme construction and base change, its zero scheme $H_{\\mathrm{univ}}$ has fibre over every coefficient point $v$ equal to $H_v=Z(\\psi(v))$. In Lean, compare tensorPullback with the ordinary module pullback by uniqueness of left adjoints. The adjunction units identify the sections, and the composition isomorphism sends the iterated unit to the composite unit. Pulling back the universal sum therefore evaluates its coordinates at the coefficient tuple. Zero-locus invariance under module isomorphisms and the ideal-sheaf comap pullback square give the required cartesian square, for arbitrary field extensions.",
    "uses": [
     "def-pc-zero-scheme",
     "def-pc-base-change"
@@ -41,7 +57,7 @@
    }
   },
   {
-   "text": "Put $U=\\mathbf A^r_k\\setminus B$, an open subset. Since $q(\\Sigma)\\subseteq B$, every point of the open $q^{-1}(U)$ has an open neighbourhood on which $q$ is smooth; these neighbourhoods intersected with $q^{-1}(U)$ cover $q^{-1}(U)$, so $q_U:q^{-1}(U)\\to U$ is smooth by [lem-weil-pbc-smooth-local-on-source]. For a field extension $k'/k$ and $v\\in U(k')$, viewed as $\\operatorname{Spec}k'\\to U\\subseteq\\mathbf A^r_k$, the fibre $H_{\\mathrm{univ}}\\times_{\\mathbf A^r_k}\\operatorname{Spec}k'=q^{-1}(U)\\times_U\\operatorname{Spec}k'$ is the base change of $q_U$, hence smooth over $k'$ by [lem-pc-proper-base-change](2); by Step 1 it is $H_v$.",
+   "text": "Put $U=\\mathbf A^r_k\\setminus B$, an open subset. Since $q(\\Sigma)\\subseteq B$, every point of the open $q^{-1}(U)$ has an open neighbourhood on which $q$ is smooth; these neighbourhoods intersected with $q^{-1}(U)$ cover $q^{-1}(U)$, so $q_U:q^{-1}(U)\\to U$ is smooth by [lem-weil-pbc-smooth-local-on-source]. For a field extension $k'/k$ and $v\\in U(k')$, viewed as $\\operatorname{Spec}k'\\to U\\subseteq\\mathbf A^r_k$, the fibre $H_{\\mathrm{univ}}\\times_{\\mathbf A^r_k}\\operatorname{Spec}k'=q^{-1}(U)\\times_U\\operatorname{Spec}k'$ is the base change of $q_U$, hence smooth over $k'$ by [lem-pc-proper-base-change](2); by Step 2 it is $H_v$.",
    "uses": [
     "lem-zl-bertini-singular-locus-dimension",
     "lem-weil-pbc-smooth-local-on-source",
@@ -55,7 +71,7 @@
    }
   },
   {
-   "text": "Because $B$ is proper, $U$ is nonempty and Zariski open. The same $U$ works after every field extension by the universal-family base-change identification in Step 1, which is exactly the stated meaning of 'for general' $v$.",
+   "text": "Because $B$ is proper, $U$ is nonempty and Zariski open. The same $U$ works after every field extension by the universal-family base-change identification in Step 2, which is exactly the stated meaning of 'for general' $v$. Finally transport the open back along Spec of the polynomial-variable renaming isomorphism. Evaluation commutes with renaming, and the finite sum defining the member section is unchanged by the indexing equivalence.",
    "uses": [
     "def-pc-base-change"
    ],
@@ -69,14 +85,20 @@
  "proof_deps": [
   "def-pc-base-change",
   "def-pc-zero-scheme",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
   "lem-pc-proper-base-change",
+  "lem-weil-pbc-generating-sections-stalk-span",
+  "lem-weil-pbc-invertible-stalk-linear-equiv",
+  "lem-weil-pbc-projective-space-functor-of-points",
+  "lem-weil-pbc-projective-space-reindex-is-iso",
+  "lem-weil-pbc-section-nonvanishing-zero-locus",
   "lem-weil-pbc-smooth-local-on-source",
   "lem-zl-bertini-singular-locus-dimension"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0FD6, lemma-bertini proof via the universal divisor and singular-locus dimension estimate"
+  "place": "Tag 0FD6, lemma-bertini proof via the universal divisor and singular-locus dimension estimate; explicit adjunction-unit and coordinate-reindexing comparisons supplied in Lean by E5"
  },
  "mathlib_searches": [
   {
@@ -166,5 +188,15 @@
   "group": "Q107",
   "result": "pass",
   "note": "Read node, 7 stmt_deps, Stacks varieties.tex Situation 0FD3/Lemma 0FD6 (l.10908-10964), module, report, and declarations homOfGlobalSection, Hom.zeroLocus, tensorSectionsUnit, tensorPullback, ProjectiveSpace.homOfGeneratingSections. Every clause matches: Smooth f; IsInvertible L; finite basis b (I may be empty); additive psi plus canonical scalar law via f.appTop and GammaSpecIso; Epi generation on psi(b_i); IsImmersion of the recorded map to P(I;Spec k); a single nonempty open U in Spec k[x_I] before all K-points (eval2 point, range in U); smoothness of the zero scheme of sum a_i psi(b_i) on the pullback Y_K over Spec K. Statement field unchanged from base; stmt_deps gained only the landed P(V)-morphism node (permitted); lean.statement verbatim. Helpers are real constructions; the Classical.choose adjunction unit can change the section only by a global unit, so the zero locus is unchanged. Edge cases: empty Y, V=0, finite k, any characteristic. Single universe u including K: natural and loses nothing. rg/grep found no duplicate or name collision. nt_compile clean (9.0 s/6.1 s, no diagnostics); a probe with #check, #print axioms and a deliberate error confirmed elaboration, sorryAx only. The Second reading section was a second pass by the same worker: process remark, not a fault."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261020T051212-L-1593985",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
