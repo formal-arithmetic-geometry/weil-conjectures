@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
-import Sheaf.AlgebraicGeometry.FinitePresentationLocalMapLifts
+import WeilConjectures.AlgebraicGeometry.FinitePresentationLocalMapLifts
 import Sheaf.AlgebraicGeometry.FinitePresentationLocalMapOverlapCompatibility
 
 /-! # Local finite-presentation descent data
