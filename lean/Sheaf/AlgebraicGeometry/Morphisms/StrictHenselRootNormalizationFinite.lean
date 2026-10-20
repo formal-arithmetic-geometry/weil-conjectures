@@ -300,6 +300,6 @@ theorem GaloisCover.strict_hensel_root_normalization_finite
     obtain ⟨_, hnormal⟩ := IsRegularRing.isNormalRing A z.asIdeal
     exact IsIntegrallyClosed.of_equiv
       (Spec.stalkIso (CommRingCat.of A) z).commRingCatIsoToRingEquiv.symm
-  exact finite_normalization_of_normal_open hn V p
+  simpa only using finite_normalization_of_normal_open hn V p
 
 end AlgebraicGeometry.Scheme
