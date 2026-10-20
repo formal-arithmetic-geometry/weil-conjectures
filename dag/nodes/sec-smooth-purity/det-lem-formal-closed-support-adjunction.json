@@ -58,7 +58,7 @@
    }
   },
   {
-   "text": "For the completed clauses use the proved abelian closed-support interface [lem-weil-pbc-proetale-abelian-closed-support] instead of passage through commutative ringed module sheaves. Lift invertibility of its counit and supported units through mapModAdjunction, the scalar-transport equivalence, and the faithful module forgetful functor. The open restriction of a closed direct image is zero by evaluation on empty base changes. For extension by zero use the source-library mapModLeft construction and its exactness; composing its adjunction with inverse scalar transport works for noncommutative monoid objects too. The standalone unrestricted closed-pushforward exactness declaration is still open and is marked STATEMENT-DISPUTED: unlike this node it omits the quasi-compact open-complement hypothesis.",
+   "text": "For the completed clauses use the proved abelian closed-support interface [lem-weil-pbc-proetale-abelian-closed-support] instead of passage through commutative ringed module sheaves. Lift invertibility of its counit and supported units through mapModAdjunction, the scalar-transport equivalence, and the faithful module forgetful functor. The open restriction of a closed direct image is zero by evaluation on empty base changes. For extension by zero use the source-library mapModLeft construction and its exactness; composing its adjunction with inverse scalar transport works for noncommutative monoid objects too. Closed direct image preserves colimits because Step 5 exhibits it as a left adjoint. The exactness helper is restricted to the quasi-compact complementary-open case asserted by this node; there is no unrestricted exactness instance.",
    "uses": [
     "lem-weil-pbc-proetale-abelian-closed-support",
     "def-sfb-module-linear-open-lower-shriek",
@@ -194,7 +194,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-formal-closed-support-adjunction.md",
-  "place": "J7 stage 3, 2026-10-19: complete triangle and fibre proofs by generic recollement and the actual mapping-cocone triangle. Earlier completed clauses retained. The unrestricted standalone closed exactness helper remains disputed and unchanged; needed exactness follows locally from the support adjunction with quasi-compact complement."
+  "place": "C2 stage 3, 2026-10-20: repair the disputed unrestricted closed-direct-image exactness helper to the quasi-compact complementary-open case of this node; prove it by the support adjunction and left-adjoint preservation of colimits. Retain all other proved clauses and adapt derived consumers to use local exactness."
  },
  "mathlib_searches": [
   {
@@ -391,7 +391,7 @@
    "AlgebraicGeometry.ProEtale.CondensedRing.closedSupportComputedOnKInjective"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/CondensedClosedSupportAdjunction.lean",
-  "statement": "theorem closedSupport_triangle {Z U X : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j] (hij : Set.range i.base = (Set.range j.base)ᶜ) : ∃ δ : (supportPullback Λ j).mapDerivedCategory ⋙ (lowerStar Λ j).rightDerivedFunctor ⟶ ((closedSupport Λ i j).rightDerivedFunctor ⋙ (lowerStar Λ i).mapDerivedCategory) ⋙ shiftFunctor (DerivedCategory (supportModules Λ X)) (1 : ℤ), ∀ K : DerivedCategory (supportModules Λ X), Triangle.mk ((closedSupportDerivedAdjunction Λ i j hij).counit.app K) ((closedSupportOpenDerivedAdjunction Λ j).unit.app K) (δ.app K) ∈ Pretriangulated.distinguishedTriangles",
+  "statement": "theorem closedSupport_triangle {Z U X : Scheme.{u}}\n    (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]\n    (hij : Set.range i.base = (Set.range j.base)ᶜ) :\n    letI := closedSupport_lowerStarExact Λ i j hij\n    ∃ δ : (supportPullback Λ j).mapDerivedCategory ⋙ (lowerStar Λ j).rightDerivedFunctor ⟶\n      ((closedSupport Λ i j).rightDerivedFunctor ⋙ (lowerStar Λ i).mapDerivedCategory) ⋙\n        shiftFunctor (DerivedCategory (supportModules Λ X)) (1 : ℤ),\n      ∀ K : DerivedCategory (supportModules Λ X),\n        Triangle.mk ((closedSupportDerivedAdjunction Λ i j hij).counit.app K)\n          ((closedSupportOpenDerivedAdjunction Λ j).unit.app K) (δ.app K) ∈\n            Pretriangulated.distinguishedTriangles",
   "branch": "newtargets-dag",
   "by": "Q15",
   "date": "2026-10-18",
@@ -399,13 +399,13 @@
   "note": "The declarations jointly state clauses (1)--(4). The support kernel and pullback are real constructions for every condensed ring, with no commutativity or finiteness hypothesis. Pullback transports the canonical alpha isomorphism by inverse restriction of scalars, extending the commutative upstream API without changing coefficients. The sheaf adjunction is chosen from its unique counit normalization; the derived adjunctions use the existing exact-left-adjoint construction. The global RHom clause is specified on K-injective Hom complexes componentwise, and the fibre is the shifted mapping cone of the actual open unit. The recorded arbitrary-quasi-isomorphism right-derived interface is identified with the upstream universal pair by a unique unit-compatible comparison."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J7",
+  "reviewer": "C-5fefd",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261019T112452-L-3942964",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T144237-L-2258061",
+  "kind": "interface",
+  "note": "independent cc review: closedSupport_lowerStarExact repaired to node det-lem-formal-closed-support-adjunction's quasi-compact-complement hypotheses and proved via leftAdjoint_preservesColimits; change record vs live users (none outside item); both direct importers compiled against the delivery"
  }
 }

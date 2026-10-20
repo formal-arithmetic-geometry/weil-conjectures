@@ -375,17 +375,19 @@ theorem closedSupport_leftExact {Z U X : Scheme.{u}}
   have := (closedSupportAdjunction Λ i j hij).rightAdjoint_preservesLimits
   infer_instance
 
-/-- Closed direct image is exact, also for noncommutative coefficient rings.
-Source: blueprint proof Step 3 (blueprint: det-lem-formal-closed-support-adjunction).
-The abelian-sheaf closed direct image is exact. The action through the coefficient unit
-lifts it to left modules; the forgetful functor detects kernels and sheafified cokernels. -/
-/- STATEMENT-DISPUTED: the signature omits the quasi-compact open-complement hypothesis
-of the node and of the cited Stacks exactness result (proetale.tex,
-lemma-closed-immersion-complement-retrocompact-exact). The unrestricted assertion requires
-separate justification or repair; it is not used by the proofs completed in this delivery. -/
-@[instance] theorem closedSupport_lowerStarExact {Z X : Scheme.{u}} (i : Z ⟶ X)
-    [IsClosedImmersion i] : PreservesFiniteColimits (lowerStar Λ i) := by
-  sorry
+/-- Closed direct image is exact for a quasi-compact open complement, also for
+noncommutative coefficient rings.
+Source: blueprint proof Steps 3 and 5 (blueprint: det-lem-formal-closed-support-adjunction).
+The support adjunction exhibits closed direct image as a left adjoint, so it preserves
+colimits, in particular finite colimits. The quasi-compact complement hypothesis is the
+one in Stacks, Tag 09BM. -/
+theorem closedSupport_lowerStarExact {Z U X : Scheme.{u}}
+    (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]
+    (hij : Set.range i.base = (Set.range j.base)ᶜ) :
+    PreservesFiniteColimits (lowerStar Λ i) := by
+  have : PreservesColimitsOfSize.{u + 1, u + 1} (lowerStar Λ i) :=
+    (closedSupportAdjunction Λ i j hij).leftAdjoint_preservesColimits
+  infer_instance
 
 /-- Clause (2): the total right derived support functor is right adjoint to exact i*.
 Source: blueprint proof Steps 6--7 (blueprint: det-lem-formal-closed-support-adjunction).
@@ -395,8 +397,10 @@ and the Hom bijection into K-injectives identifies it with the derived adjunctio
 noncomputable def closedSupportDerivedAdjunction {Z U X : Scheme.{u}}
     (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ) :
-    (lowerStar Λ i).mapDerivedCategory ⊣ (closedSupport Λ i j).rightDerivedFunctor :=
-  (closedSupportAdjunction Λ i j hij).mapDerivedCategoryRightDerivedAdjunction
+    letI := closedSupport_lowerStarExact Λ i j hij
+    (lowerStar Λ i).mapDerivedCategory ⊣ (closedSupport Λ i j).rightDerivedFunctor := by
+  let := closedSupport_lowerStarExact Λ i j hij
+  exact (closedSupportAdjunction Λ i j hij).mapDerivedCategoryRightDerivedAdjunction
 
 /-- The open derived adjunction, with its canonical derived unit.
 Source: blueprint proof Steps 6 and 10 (blueprint: det-lem-formal-closed-support-adjunction). -/
@@ -627,6 +631,7 @@ homotopies descend, giving a natural transformation as the connecting arrow. -/
 theorem closedSupport_triangle {Z U X : Scheme.{u}}
     (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ) :
+    letI := closedSupport_lowerStarExact Λ i j hij
     ∃ δ : (supportPullback Λ j).mapDerivedCategory ⋙ (lowerStar Λ j).rightDerivedFunctor ⟶
       ((closedSupport Λ i j).rightDerivedFunctor ⋙ (lowerStar Λ i).mapDerivedCategory) ⋙
         shiftFunctor (DerivedCategory (supportModules Λ X)) (1 : ℤ),
@@ -634,6 +639,7 @@ theorem closedSupport_triangle {Z U X : Scheme.{u}}
         Triangle.mk ((closedSupportDerivedAdjunction Λ i j hij).counit.app K)
           ((closedSupportOpenDerivedAdjunction Λ j).unit.app K) (δ.app K) ∈
             Pretriangulated.distinguishedTriangles := by
+  let := closedSupport_lowerStarExact Λ i j hij
   classical
   have : PreservesColimitsOfSize.{u + 1, u + 1} (lowerStar Λ i) :=
     (closedSupportAdjunction Λ i j hij).leftAdjoint_preservesColimits
@@ -808,6 +814,7 @@ theorem closedSupport_fiber {Z U X : Scheme.{u}}
           ((CochainComplex.mappingCone
             ((NatTrans.mapHomologicalComplex (supportPullbackAdjunction Λ j).unit
               (ComplexShape.up ℤ)).app I))⟦(-1 : ℤ)⟧))) := by
+  let := closedSupport_lowerStarExact Λ i j hij
   classical
   have : PreservesColimitsOfSize.{u + 1, u + 1} (lowerStar Λ i) :=
     (closedSupportAdjunction Λ i j hij).leftAdjoint_preservesColimits
