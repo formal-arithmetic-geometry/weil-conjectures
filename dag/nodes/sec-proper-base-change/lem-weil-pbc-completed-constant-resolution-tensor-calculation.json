@@ -1,0 +1,113 @@
+{
+ "id": "lem-weil-pbc-completed-constant-resolution-tensor-calculation",
+ "kind": "statement",
+ "title": "Tensor quotient diagrams on finite-free completion resolutions",
+ "statement": "Let X, A, I, C and H be as in [def-weil-pbc-completed-constant-realization-data], with A Noetherian, and let d be a module-realization record. Let beta:R -> H be an isomorphism of coefficient ring sheaves, and c an additive functor from C-modules to R-module sheaves, naturally isomorphic to the restriction of d.realization along beta. For the category of bounded-above finite-free resolutions of bounded finite C-complexes, the realized sources are K-flat over R. Given any actual quotient-module tower P with its specified quotient levels and transitions, there exists the constant scalar-reduction tower T with the prescribed tensor-generator transitions. On the source complexes of those resolutions, ordinary tensor with P followed by localization is naturally isomorphic, as an entire quotient diagram, to T followed by localization. This does not compare the realized target of a resolution with that source; the parent proves that step using exactness.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YN, 06YT, 06YU; finite-free tensor computation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-completed-constant-realization-data"
+ ],
+ "proof": [
+  {
+   "text": "the supplied P already has the actual quotient levels and transition maps.\nForm T termwise\nby extending completion modules to A/I^(n+1), taking constants, and restricting\nscalars. On tensors the successor transition is p tensor x mapped to its scalar\nresidue tensor x, which commutes with differentials and module maps.\nFor a bounded-above finite-free complex F, each realized term is a finite sum of H, hence\nflat, and the source vanishes above its bound. It is therefore K-flat.\nIn each finite-free degree, tensoring its realization with a quotient is the\nconstant extension of that finite-free term to the quotient. The differentials\non both sides are the same matrices with scalar residues. These maps are natural\nin every chain map and compatible with every quotient transition by the formula\np tensor x mapped to residue(p) tensor x. After localization they yield the\nstated natural isomorphism. Restriction along the coefficient isomorphism β\nis an exact monoidal equivalence, so the same calculation holds over R; conjugate\nby e to replace the restricted realization by c. No conclusion for the target Q\nis assumed here.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat-site",
+    "def-pur-sheaf-tensor-product",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YN, 06YT and 06YU, finite-free calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-bounded-above-flat-kflat-site",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "proof (c): finite quotient realizations, including compatibility on restriction to a stratum; finite-free tensor calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite free complexes of modules over a completed constant sheaf admit compatible derived tensor quotient comparisons",
+   "results": "8 hits: algebraic AdicCompletion tensor equivalences, SheafOfModules.free, iotaFree, pullbackObjFreeIso. No derived quotient-diagram comparison.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "10 hits for presheaf tensor objects, maps and preservation of colimits; no derived quotient diagram.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsKFlat.*tensor|tensor.*IsKFlat",
+   "results": "0 hits.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedConstantFiniteComplexRealization",
+  "date": "2026-10-20",
+  "group": "Y2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c): finite quotient realizations, including compatibility on restriction to a stratum; finite-free tensor calculation",
+   "via": [
+    "lem-weil-pbc-completed-constant-finite-complex-realization",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedConstantResolutionTensorCalculation",
+  "file": "lean/Sheaf/Paper/CompletedConstantResolutionTensorCalculation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completed_constant_resolution_tensor_calculation",
+  "statement": "theorem completed_constant_resolution_tensor_calculation (X : Scheme.{u})\n    {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)\n    (d : CompletedConstantModuleRealization X I)\n    (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (β : R ⟶ adicLisseCompletedRing X I) [IsIso β]\n    (c : ModuleCat.{u + 1} (AdicCompletion I A) ⥤ completedConstantModules X R)\n    (hc : c.Additive)\n    (e : c ≅ completedConstantRealization X I d.scalar ⋙\n      SheafOfModules.restrictScalars ((adicLisseForget X).map β))\n    (h : ∀ n : ℕ, (adicLisseConstantModules X (A ⧸ I ^ (n + 1))).Additive)\n    (P : CompletedConstantQuotientTower X I R β) :\n    ∃ (T : CompletedConstantReductionTower X I R β h),\n      (∀ r : (completedConstantResolutions (AdicCompletion I A)).FullSubcategory,\n        CochainComplex.IsKFlatIndependentCoefficients\n          (R := R)\n          ((completedConstantMapComplex c hc).obj r.obj.left)) ∧\n      Nonempty\n        (((completedConstantResolutions (AdicCompletion I A)).ι ⋙ Arrow.leftFunc ⋙\n            completedConstantMapComplex c hc ⋙\n            completedConstantTensorTower X R P.diagram) ≅\n          ((completedConstantResolutions (AdicCompletion I A)).ι ⋙ Arrow.leftFunc ⋙\n            T.functor ⋙ (Functor.whiskeringRight _ _ _).obj (completedConstantQ _)))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-bcb75",
+  "group": "Y2",
+  "result": "fix",
+  "landing": "20261020T221406-L-4182504",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-bcb75",
+  "group": "Y2",
+  "result": "fix",
+  "landing": "20261020T221406-L-4182504",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof + 4 new modules/nodes vs live CompletedConstantFiniteComplexRealization (25 defs moved verbatim, signature byte-identical), compiled --all, 3 direct importers and #print axioms"
+ }
+}
