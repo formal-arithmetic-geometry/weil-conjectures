@@ -18388,3 +18388,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:47 L: returned deliver/H3/Sheaf.CategoryTheory.ConstantLeftModuleInverseImage (reviewer RETURN: (reviewer C-b1473, head b1473c27a) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.CategoryTheory.Const)
 - 14:47 L: returned deliver/P5/Sheaf.Algebra.Homology.KFlatPullback (reviewer RETURN: (reviewer C-b44ac, head b44ac794a) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Algebra.Homology.KFl)
 - 14:47 L: returned deliver/Q4/Sheaf.Paper.ProperOpenTowerComparison (reviewer RETURN: (reviewer C-bd08a, head bd08adbef) B3 (dag/nodes/sec-smooth-purity/lem-sp-proper-open-adjunct-evaluation.json): its lean)
+- 14:49 L: returned deliver/A9/Sheaf.AlgebraicGeometry.PrimeTorsionCoefficientReduction (reviewer RETURN: (reviewer C-c50ef, head c50ef1844) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Pr)
