@@ -85,14 +85,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SupportedOpenPushforwardLocalComparisons",
-  "file": "lean/Sheaf/AlgebraicGeometry/SupportedOpenPushforwardLocalComparisons.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.SupportedOpenPushforwardLocalComparisons",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SupportedOpenPushforwardLocalComparisons.lean",
   "declaration": "AlgebraicGeometry.Scheme.supported_open_pushforward_local_comparisons",
-  "statement": "theorem supported_open_pushforward_local_comparisons (X : Scheme.{u}) (U : X.Opens)\n    (T : Set X) (hT : IsClosed T) (hTU : T ⊆ (U : Set X))\n    (V : X.Opens) (hV : (V : Set X) = Tᶜ)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ V : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    [∀ V : U.toScheme.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))] :\n    (∀ (adj : ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Modules.overEquiv U)).mapDerivedCategory ⊣ schemeDerivedDirectImage U.ι)\n        (E : schemeDerivedCategory X),\n      (∀ (n : ℤ) (x : X), x ∉ T →\n        Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj E).val.presheaf x))) →\n      ∀ W : X.Opens, W = U ∨ W = V →\n        IsIso ((SheafOfModules.overFunctor.{u}\n          (moduleRings X.toRingedSpace) W).mapDerivedCategory.map (adj.unit.app E))) ∧\n    (∀ (adj : ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Modules.overEquiv U)).mapDerivedCategory ⊣ schemeDerivedDirectImage U.ι)\n        (S : schemeDerivedCategory U.toScheme ⥤ schemeDerivedCategory X)\n        (adjS : S ⊣ ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Modules.overEquiv U)).mapDerivedCategory)\n        (F : schemeDerivedCategory U.toScheme), IsPerfect U.toScheme F →\n      (∀ (n : ℤ) (x : U.toScheme), x.val ∉ T →\n        Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) n).obj F).val.presheaf\n            x))) →\n      ∀ φ : S.obj F ⟶ (schemeDerivedDirectImage U.ι).obj F,\n        adjS.unit.app F ≫ (adj.homEquiv (S.obj F) F).symm φ = 𝟙 F →\n        ∀ W : X.Opens, W = U ∨ W = V →\n          IsIso ((SheafOfModules.overFunctor.{u}\n            (moduleRings X.toRingedSpace) W).mapDerivedCategory.map φ))",
+  "statement": "theorem supported_open_pushforward_local_comparisons (X : Scheme.{u}) (U : X.Opens)\n    (T : Set X) (hT : IsClosed T)\n    (V : X.Opens) (hV : (V : Set X) = Tᶜ)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ V : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    [∀ V : U.toScheme.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))] :\n    (∀ (adj : ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Modules.overEquiv U)).mapDerivedCategory ⊣ schemeDerivedDirectImage U.ι)\n        (E : schemeDerivedCategory X),\n      (∀ (n : ℤ) (x : X), x ∉ T →\n        Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj E).val.presheaf x))) →\n      ∀ W : X.Opens, W = U ∨ W = V →\n        IsIso ((SheafOfModules.overFunctor.{u}\n          (moduleRings X.toRingedSpace) W).mapDerivedCategory.map (adj.unit.app E))) ∧\n    (∀ (adj : ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Modules.overEquiv U)).mapDerivedCategory ⊣ schemeDerivedDirectImage U.ι)\n        (S : schemeDerivedCategory U.toScheme ⥤ schemeDerivedCategory X)\n        (adjS : S ⊣ ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Modules.overEquiv U)).mapDerivedCategory)\n        (F : schemeDerivedCategory U.toScheme),\n      (∀ (n : ℤ) (x : U.toScheme), x.val ∉ T →\n        Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) n).obj F).val.presheaf\n            x))) →\n      ∀ φ : S.obj F ⟶ (schemeDerivedDirectImage U.ι).obj F,\n        adjS.unit.app F ≫ (adj.homEquiv (S.obj F) F).symm φ = 𝟙 F →\n        ∀ W : X.Opens, W = U ∨ W = V →\n          IsIso ((SheafOfModules.overFunctor.{u}\n            (moduleRings X.toRingedSpace) W).mapDerivedCategory.map φ))",
   "branch": "sheaf-dag",
-  "by": "R2",
-  "date": "2026-10-12"
+  "by": "K9",
+  "date": "2026-10-21",
+  "note": "Retired the Sheaf copy in favour of the proved upstream theorem. The upstream theorem drops the unused containment hypothesis T ⊆ U; it also drops the unused perfectness hypothesis. The original DAG statement follows by ignoring these extra hypotheses; the mathematical statement and unit route are unchanged. The sole former consumer has already migrated to WeilConjectures.AlgebraicGeometry.SupportedOpenPushforward."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -105,19 +106,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X3",
+  "reviewer": "C-cfaa9",
+  "group": "K9",
   "result": "pass",
-  "landing": "20261013T040806-L-3954613",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.supported_open_pushforward_local_comparisons_first",
-   "AlgebraicGeometry.Scheme.supported_open_pushforward_local_comparisons_second"
-  ],
-  "sorry_after": []
+  "landing": "20261020T221239-L-4163432",
+  "kind": "interface",
+  "note": "independent cc review: the 3 retargeted node lean.statement records matched verbatim against the upstream WeilConjectures.AlgebraicGeometry.SupportedOpenPushforwardLocalComparisons theorems (stronger: no hTU, no IsPerfect); the withdrawn Sheaf stub against live importers (none) and retire-items.tsv row 801"
  },
  "lean_audit": {
   "master": {
