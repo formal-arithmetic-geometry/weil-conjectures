@@ -17712,3 +17712,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:13 L: returned deliver/NJ/lem-pod-hom-chain-counit-formula (reviewer RETURN: L: independent stage-2 immutable head 4df427a8af6f: H2/H13 stmt_dep fault (mechanical finding upheld): statement_change )
 - 05:09 L: returned deliver/C2/Sheaf.Paper.FiniteClopenExceptionalRestriction (reviewer RETURN: (the landing tools, head c9892dd1f) the delivery did not land: lean/Sheaf/Paper/FiniteClopenExceptionalRestriction.lean )
 - 05:09 L: returned deliver/C6/Sheaf.AlgebraicGeometry.EtaleHorizontalSupportMate (reviewer RETURN: (the landing tools, head 772a2e6b8) the delivery did not land: lean/Sheaf/AlgebraicGeometry/EtaleHorizontalSupportMate.l)
+- 05:09 L: returned deliver/E2/Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit (reviewer RETURN: (the landing tools, head bab751083) the delivery did not land: lean/Sheaf/CategoryTheory/RingedStrictTowerHomotopyLimit.)
