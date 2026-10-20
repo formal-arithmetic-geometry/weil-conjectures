@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 import Sheaf.SixFunctors.BrownHypothesesAmbient
 import Sheaf.Paper.BrownHypothesesGeneration
 import Sheaf.SixFunctors.BrownHypothesesSmall
+import Sheaf.SixFunctorsBasics.BrownHypothesesStructural
 import Mathlib.CategoryTheory.Triangulated.Orthogonal
 
 /-!

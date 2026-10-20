@@ -1,0 +1,111 @@
+{
+ "id": "h1-brown-hypotheses-structural",
+ "kind": "statement",
+ "title": "Generic ambient Brown data for the localizing closure",
+ "statement": "For every scheme X and commutative condensed coefficient ring Λ, the localizing closure from [sk-def-localizing-closure] is locally small, triangulated, closed under isomorphisms, has coproducts in the fixed universe, and is idempotent complete. No base-field finiteness or coefficient admissibility assumption is needed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/_section.md",
+  "place": "proof paragraph 1, ambient structures"
+ },
+ "stmt_deps": [
+  "sk-def-localizing-closure"
+ ],
+ "proof": [
+  {
+   "text": "Apply the generic localizing-closure existence theorem for ambient coproducts and the localizing property. The full inclusion gives local smallness. Restrict coproduct closure along the equivalence with a lifted discrete indexing type and apply countable-coproduct idempotent completeness.",
+   "uses": [
+    "det-def-localizing-closure-existence",
+    "lem-countable-coproducts-idempotent-complete"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-def-localizing-closure-existence",
+  "lem-countable-coproducts-idempotent-complete"
+ ],
+ "proof_origin": {
+  "by": "H1 stage 3",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/_section.md",
+  "place": "proof paragraphs 1-2; strictly intermediate split of the Brown-hypotheses proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "structural Brown hypotheses for localizing closure of bounded constructible objects",
+   "results": "No exact theorem; split statement records the structural intermediate result.",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A localizing closure in a triangulated derived category has local smallness, coproducts, triangulation, isomorphism closure, and idempotent completeness",
+   "results": "No exact theorem; generic localizing and triangulated subcategory infrastructure does not package this project-specific closure.",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LocallySmall IsTriangulated IsClosedUnderIsomorphisms EssentiallySmall IsIdempotentComplete HasCoproducts",
+   "results": "No exact project theorem matching the all-coefficient statement.",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "brownHypotheses_structural|brownHypotheses_compactness",
+   "results": "No prior declaration; these are new split interfaces.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "date": "2026-10-20",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-brown-hypotheses",
+   "place": "proof paragraphs 1-2",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-brown-hypotheses",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctorsBasics.BrownHypothesesStructural",
+  "file": "lean/Sheaf/SixFunctorsBasics/BrownHypothesesStructural.lean",
+  "declaration": "CategoryTheory.brownHypotheses_structural",
+  "statement": "theorem brownHypotheses_structural\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) :\n    LocallySmall.{u + 1} (localizingClosureProEtale Λ X).FullSubcategory ∧\n      ∃ hTri : (localizingClosureProEtale Λ X).IsTriangulated,\n        let := hTri\n        (localizingClosureProEtale Λ X).IsClosedUnderIsomorphisms ∧\n          IsIdempotentComplete (localizingClosureProEtale Λ X).FullSubcategory ∧\n          ∃ _ : HasCoproducts.{u + 1}\n              (localizingClosureProEtale Λ X).FullSubcategory, True",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261020T051346-L-1651141",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261020T051346-L-1651141",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
