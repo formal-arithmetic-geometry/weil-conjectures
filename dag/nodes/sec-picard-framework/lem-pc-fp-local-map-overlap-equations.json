@@ -120,14 +120,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FinitePresentationLocalMapOverlapEquations",
-  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationLocalMapOverlapEquations.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.FinitePresentationLocalMapOverlapEquations",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FinitePresentationLocalMapOverlapEquations.lean",
   "declaration": "AlgebraicGeometry.finitePresentation_local_maps_eventual_overlap_equations",
-  "statement": "theorem finitePresentation_local_maps_eventual_overlap_equations {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)] (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt] (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] : (∀ (j : I) (hij : i ≤ j) (Fj Gj : (pullback f (Spec.map (R.map (homOfLE hij)))).Modules), Fj.IsFinitePresentation → Fj.IsQuasicoherent → Gj.IsFinitePresentation → Gj.IsQuasicoherent → ∀ (k : I) (hjk : j ≤ k), ∀ (A₀ : (pullback f (Spec.map (R.map (homOfLE hij)))).Modules ⥤ (pullback f (Spec.map (R.map (homOfLE (hij.trans hjk))))).Modules), A₀ = Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk))))) (Over.homMk (Spec.map (R.map (homOfLE hjk))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)) → let B₀ := Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk))))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op k)) (c.w (homOfLE (hij.trans hjk)).op)) ∀ δ : B₀.obj (A₀.obj Fj) ⟶ B₀.obj (A₀.obj Gj), ∀ (U₀ : (pullback f (Spec.map (R.map (homOfLE (hij.trans hjk))))).OpenCover.{u}), Finite U₀.I₀ → (∀ a, IsAffine (U₀.X a)) → let Q₀ := modulesPseudofunctor.toDescentData U₀.f let p₀ := baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk))))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op k)) (c.w (homOfLE (hij.trans hjk)).op)) let V₀ := U₀.pullback₁ p₀ ∀ r₀ : ∀ a, (Q₀.obj (A₀.obj Fj)).obj a ⟶ (Q₀.obj (A₀.obj Gj)).obj a, localMapRecovery p₀ U₀ (A₀.obj Fj) (A₀.obj Gj) δ r₀ → ∃ (j' : I) (hkj' : k ≤ j'), let q := (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk))))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans (hjk.trans hkj')))))) (Over.homMk (Spec.map (R.map (homOfLE hkj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))); let U : (pullback f (Spec.map (R.map (homOfLE (hij.trans (hjk.trans hkj')))))).OpenCover.{u} := U₀.pullback₁ q let Q := modulesPseudofunctor.toDescentData U.f let C := Scheme.Modules.tensorPullback q (∀ α, IsAffine (U.X α)) ∧ (∀ (F' G' : (pullback f (Spec.map (R.map (homOfLE (hij.trans (hjk.trans hkj')))))).Modules) (κ : F' ⟶ C.obj (A₀.obj Fj)) (ρ : C.obj (A₀.obj Gj) ⟶ G'), let r : ∀ α, (Q.obj F').obj α ⟶ (Q.obj G').obj α := localMapPullbackFamily q U₀ (A₀.obj Fj) (A₀.obj Gj) F' G' κ ρ r₀ ∃ ψ : Q.obj F' ⟶ Q.obj G', ∀ α, ψ.hom α = r α))",
+  "statement": "theorem finitePresentation_local_maps_eventual_overlap_equations\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u})\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] :\n    (∀ (j : I) (hij : i ≤ j) (Fj Gj : (pullback f (Spec.map (R.map (homOfLE hij)))).Modules),\n      Fj.IsFinitePresentation → Fj.IsQuasicoherent →\n      Gj.IsFinitePresentation → Gj.IsQuasicoherent →\n      ∀ (k : I) (hjk : j ≤ k),\n        ∀ (A₀ : (pullback f (Spec.map (R.map (homOfLE hij)))).Modules ⥤\n            (pullback f (Spec.map (R.map (homOfLE (hij.trans hjk))))).Modules),\n          A₀ = Scheme.Modules.moduleBaseChange f\n            (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n            (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n            (Over.homMk (Spec.map (R.map (homOfLE hjk)))\n              (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)) →\n        let B₀ := Scheme.Modules.moduleBaseChange f\n              (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n              (T' := Over.mk (c.π.app (op i)))\n              (Over.homMk (c.π.app (op k)) (c.w (homOfLE (hij.trans hjk)).op))\n        ∀ δ : B₀.obj (A₀.obj Fj) ⟶ B₀.obj (A₀.obj Gj),\n        ∀ (U₀ : (pullback f (Spec.map (R.map (homOfLE (hij.trans hjk))))).OpenCover.{u}),\n          Finite U₀.I₀ → (∀ a, IsAffine (U₀.X a)) →\n          let Q₀ := modulesPseudofunctor.toDescentData U₀.f\n          let p₀ := baseChangeMap f\n            (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n            (T' := Over.mk (c.π.app (op i)))\n            (Over.homMk (c.π.app (op k)) (c.w (homOfLE (hij.trans hjk)).op))\n          let V₀ := U₀.pullback₁ p₀\n          ∀ r₀ : ∀ a, (Q₀.obj (A₀.obj Fj)).obj a ⟶ (Q₀.obj (A₀.obj Gj)).obj a,\n            localMapRecovery p₀ U₀ (A₀.obj Fj) (A₀.obj Gj) δ r₀ →\n          ∃ (j' : I) (hkj' : k ≤ j'),\n            let q := (baseChangeMap f\n              (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n              (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans (hjk.trans hkj'))))))\n              (Over.homMk (Spec.map (R.map (homOfLE hkj')))\n                (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)));\n            let U : (pullback f\n              (Spec.map (R.map (homOfLE (hij.trans (hjk.trans hkj')))))).OpenCover.{u} :=\n              U₀.pullback₁ q\n            let Q := modulesPseudofunctor.toDescentData U.f\n            let C := Scheme.Modules.tensorPullback q\n            (∀ α, IsAffine (U.X α)) ∧\n            (∀ (F' G' : (pullback f\n                (Spec.map (R.map (homOfLE (hij.trans (hjk.trans hkj')))))).Modules)\n              (κ : F' ⟶ C.obj (A₀.obj Fj)) (ρ : C.obj (A₀.obj Gj) ⟶ G'),\n              let r : ∀ α, (Q.obj F').obj α ⟶ (Q.obj G').obj α :=\n                localMapPullbackFamily q U₀ (A₀.obj Fj) (A₀.obj Gj) F' G' κ ρ r₀\n              ∃ ψ : Q.obj F' ⟶ Q.obj G', ∀ α, ψ.hom α = r α))",
   "branch": "sheaf-dag",
-  "by": "F3",
-  "date": "2026-10-13"
+  "by": "C5",
+  "date": "2026-10-20",
+  "note": "The adopted source theorem has the same conclusion without the Noetherian-ring hypothesis. It specializes to the node; the duplicate Sheaf module is withdrawn and its sole importer is redirected."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -140,13 +141,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-e2580",
-  "group": "F2",
+  "reviewer": "C-83965",
+  "group": "C5",
   "result": "pass",
-  "landing": "20261013T215603-L-897579",
+  "landing": "20261020T135353-L-1815216",
   "kind": "interface",
-  "note": "independent Codex review: Delivered modules and nodes match the recorded statements; extended compilation succeeds, axioms are permitted, direct importer compiles, and no interface or mechanical violations found."
+  "note": "independent cc review: Withdrawn Sheaf copy of finitePresentation_local_maps_eventual_overlap_equations against its WeilConjectures twin (same statement minus the Noetherian hypothesis, matches the node's lean.statement); one-line private import redirect in the unclaimed consumer; all 11 'after' copies already gone; the delivery, the consumer and the Datum importer compile; axioms clean"
  }
 }

@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 public import WeilConjectures.AlgebraicGeometry.OpenCoverTensorPullbackComparison
 public import WeilConjectures.AlgebraicGeometry.LocalMapPullbackFamily
 public import WeilConjectures.AlgebraicGeometry.LocalMapRecovery
-import Sheaf.AlgebraicGeometry.FinitePresentationLocalMapOverlapEquations
+import WeilConjectures.AlgebraicGeometry.FinitePresentationLocalMapOverlapEquations
 import WeilConjectures.AlgebraicGeometry.FinitePresentationLocalMapRecoveryTransport
 
 /-! # Eventual overlap compatibility of local lifts
