@@ -28,14 +28,9 @@
  ],
  "proof": [
   {
-   "text": "For the fixed compactification, $p$ is proper, hence quasi-compact and quasi-separated by [pqf-lem-proper-basic]. Exactness of $j_!^e$ [lem-weil-pbc-extension-by-zero-exact] makes $j_!^eG$ bounded below whenever $G$ is. Both extension-by-zero functors are exact [lem-weil-extension-by-zero-exact], and $C_T$ is the termwise exact comparison [def-sf-comparison-derived-pullback]. Thus the natural sheaf isomorphism $e_j$ of [lem-cbc-proetale-extension-zero-comparison] gives a natural isomorphism on complexes: its naturality applied to each differential says precisely that its components are a chain map, and the inverse components give its inverse. It descends to derived categories since these exact functors preserve quasi-isomorphisms. Apply [lem-weil-pbc-comparison-direct-image-canonical-mate] to $p$ and $j_!^eG$ and apply the functor $Rp_{p,*}$ to $e_{j,G}$. Their composite is exactly the specified $B_{f,G}$, so it is a natural isomorphism. In particular, for $b:G\\to G'$,\n$$B_{f,G'}\\circ C_Y(F_eb)=F_p(C_Xb)\\circ B_{f,G}.$$\nThis uses the named proper counit-mate and the named open comparison, so introduces no independently chosen compact-support isomorphism.",
+   "text": "Use the existing compactSupportSiteComparison of [lem-sf-class-compact-support-comparison], whose inverse is exactly the specified B. Its inverse naturality gives the source naturality of the first Hom-chain arrow. This already packages the exact open comparison and the named proper counit mate; neither geometric construction is repeated here.",
    "uses": [
-    "pqf-lem-proper-basic",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-extension-by-zero-exact",
-    "def-sf-comparison-derived-pullback",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+    "lem-sf-class-compact-support-comparison"
    ],
    "elementary": false,
    "source": {
@@ -44,12 +39,9 @@
    }
   },
   {
-   "text": "Write $H=f^\\times$ and $R=C_XHU_Y$. The hypotheses of [thm-sf-ambient-adjoint-class] are exactly the field, finite coefficient ring, separated finite-type morphism, compactification and dimension bound in the statement. It supplies $R$ on $D^+$ and the natural relative Hom bijection. By [thm-weil-pbc-site-comparison], $C_X$ is fully faithful on $D^+$ and $C_Y\\dashv U_Y$ has invertible unit there. The ordinary adjunction $F_e\\dashv H$ is supplied by [thm-amb-etale-exceptional-adjoint]. With the normalization explicitly fixed in the statement, the bijection is the composite\n$$\\operatorname{Hom}(F_pC_XG,L)\\xrightarrow{z\\mapsto zB_{f,G}}\\operatorname{Hom}(C_YF_eG,L)\\xrightarrow{w\\mapsto U_Y(w)\\eta_{Y,F_eG}}\\operatorname{Hom}(F_eG,U_YL)\\xrightarrow{\\operatorname{adj}_e}\\operatorname{Hom}(G,HU_YL)\\xrightarrow{C_X}\\operatorname{Hom}(C_XG,RL).$$\nEvery displayed arrow is bijective. The first is Step 1; the middle arrows are the two cited adjunctions; the last is full faithfulness. To check the last domain, exactness gives $\\mathcal H^i(RL)=C_X\\mathcal H^i(HU_YL)$ [lem-sf-comparison-pullback-exact]. Full faithfulness on degree-zero sheaves reflects zero: if $C_XM=0$, its identity has zero image, hence $1_M=0$. Since $RL$ is bounded below by the class theorem, $HU_YL$ is therefore bounded below, as is $G$. These are precisely its bounded etale-origin domains, without a separatedness assumption on $X$ or $Y$ over $k$.",
+   "text": "The target Y is quasi-compact because its structure morphism to Spec k is quasi-compact. The specifiedExceptionalEtale_boundedBelow helper of [thm-sf-ambient-adjoint-class] bounds the canonical right adjoint at U_Y L. Compare that right adjoint with the supplied H by Adjunction.rightAdjointUniq and transport the lower-bound property along its component isomorphism. This proves boundedSiteRightAdjoint_plus for the actual supplied adjunction.",
    "uses": [
-    "thm-sf-ambient-adjoint-class",
-    "thm-weil-pbc-site-comparison",
-    "lem-sf-comparison-pullback-exact",
-    "thm-amb-etale-exceptional-adjoint"
+    "thm-sf-ambient-adjoint-class"
    ],
    "elementary": false,
    "source": {
@@ -58,19 +50,19 @@
    }
   },
   {
-   "text": "For $L\\in D^+(Y_{\\mathrm{proet}},A)$ put $G=HU_YL$ in Step 2. The inverse image of $1_{RL}=C_X(1_{HU_YL})$ in that chain is, successively, $1_{HU_YL}$, the etale counit $\\varepsilon^e_{U_YL}$, then $\\tau_{Y,L}\\circ C_Y(\\varepsilon^e_{U_YL})$, and finally\n$$\\varepsilon^p_L=\\tau_{Y,L}\\circ C_Y(\\varepsilon^e_{U_YL})\\circ B_{f,HU_YL}^{-1}.$$\nThese inverse formulas follow directly from an adjunction: the inverse transpose of $b:G\\to HV$ is $\\varepsilon^e_V\\circ F_e(b)$, and the inverse comparison transpose of $a:M\\to U_YL$ is $\\tau_{Y,L}\\circ C_Y(a)$. Thus the displayed map is the specified relative counit, not just some map between the same objects. Here $G$ is bounded below by Step 2 and $RL=C_XG$ has its identity etale-origin witness.",
-   "uses": [],
-   "elementary": true,
+   "text": "Precomposition with B, the comparison adjunction, the supplied etale adjunction, and C_X.map form the specified function. The first three factors are equivalences. The last is bijective by bounded-target comparison full faithfulness [thm-weil-pbc-site-comparison], using the lower bound of Step 2. Function.Bijective.comp proves boundedSiteTranspose_bijective. The existing Equiv.ofBijective then determines the inverse and the counit; apply_symm_apply proves that the counit transposes to the identity.",
+   "uses": [
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/categories.tex",
     "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints, proof: counit corresponds to identity; inverse adjunction formulas"
    }
   },
   {
-   "text": "Let $L=C_YK$ and $h=H(\\eta_{Y,K})$. The comparison unit is a natural isomorphism on $D^+$ [thm-weil-pbc-site-comparison], so $\\rho_K=C_Xh$ is a natural isomorphism. Both $HK$ and $HU_YC_YK$ lie in $D^+$, the first by the hypothesis $f^\\times K\\in D^+$ and the second by Step 2. Step 1 gives\n$$B_{f,HU_YC_YK}^{-1}\\circ F_p(\\rho_K)\\circ B_{f,HK}=C_Y(F_eh).$$\nSubstituting this into Step 3 and then using naturality of the etale counit gives\n$$\\begin{aligned}\n\\varepsilon^p_{C_YK}\\circ F_p(\\rho_K)\\circ B_{f,HK}\n&=\\tau_{Y,C_YK}\\circ C_Y(\\varepsilon^e_{U_YC_YK}\\circ F_eH(\\eta_{Y,K}))\\\\\n&=\\tau_{Y,C_YK}\\circ C_Y(\\eta_{Y,K})\\circ C_Y(\\varepsilon^e_K)\\\\\n&=C_Y(\\varepsilon^e_K).\n\\end{aligned}$$\nThe last equality is the left triangle identity for $C_Y\\dashv U_Y$. This proves the required normalization with its specified direction of $B$ and $\\rho$.",
-   "uses": [
-    "thm-weil-pbc-site-comparison"
-   ],
+   "text": "For compatible a_e and a_p substitute a_p B = C_Y(a_e) into the specified transpose. Naturality of the comparison unit identifies the comparison transpose of C_Y(a_e) with a_e followed by eta_Y,K. Naturality in the target of the supplied etale Hom equivalence and functoriality of C_X identify the result with C_X(adj_e(a_e)) followed by rho_K. This proves the generic compatibility helper directly.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/categories.tex",
@@ -78,8 +70,10 @@
    }
   },
   {
-   "text": "Given $a_e,a_p$ as in the statement, set $b_e=\\operatorname{adj}_e(a_e)$, so $\\varepsilon^e_K\\circ F_e(b_e)=a_e$. Let $b_p=\\rho_K\\circ C_X(b_e)$. Naturality of $B$ at $b_e:J\\to HK$ and Step 4 give\n$$\\begin{aligned}\n\\varepsilon^p_{C_YK}\\circ F_p(b_p)\\circ B_{f,J}\n&=\\varepsilon^p_{C_YK}\\circ F_p(\\rho_K)\\circ B_{f,HK}\\circ C_Y(F_e(b_e))\\\\\n&=C_Y(\\varepsilon^e_K\\circ F_e(b_e))=C_Y(a_e)=a_p\\circ B_{f,J}.\n\\end{aligned}$$\nCancel the isomorphism $B_{f,J}$. By naturality in the source of the Hom bijection in Step 2, its inverse sends $b_p:C_XJ\\to RC_YK$ to $\\varepsilon^p_{C_YK}\\circ F_p(b_p)$: apply source naturality to the identity of $RC_YK$, whose inverse image defines the counit in Step 3. Injectivity of that inverse bijection therefore gives $\\operatorname{adj}_p(a_p)=b_p$, as required. This argument only uses sources $C_XJ$ and $RC_YK$ that are bounded below and of etale origin.",
-   "uses": [],
+   "text": "The comparison unit at bounded-below K is invertible by [thm-weil-pbc-site-comparison]; both H and C_X preserve isomorphisms, so rho_K is invertible. Apply injectivity of the Hom-chain bijection to F_p(rho_K) followed by the specified counit, and to B inverse followed by C_Y of the etale counit. Source naturality and Step 3 send the first map to rho_K. Step 4 sends the second map to rho_K, because the etale counit transposes to the identity. Precompose the resulting equality by B to obtain the required normalized counit equation. Step 4 also gives the asserted transpose equality for every compatible pair.",
+   "uses": [
+    "thm-weil-pbc-site-comparison"
+   ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/categories.tex",
@@ -87,7 +81,7 @@
    }
   },
   {
-   "text": "Naturality in $J$ follows by precomposing each of the Hom-chain maps in Step 2; naturality in $K$ follows by postcomposition in that chain and the naturality of $\\eta_Y$. More explicitly, for $u:J'\\to J$, both transposes precompose by $C_Xu$, and for $v:K\\to K'$ they postcompose by $RC_Yv$ and $C_XHv$, respectively, with\n$$RC_Y(v)\\circ\\rho_K=\\rho_{K'}\\circ C_X(Hv).$$\nThe latter equality is $C_XH$ applied to $U_YC_Y(v)\\eta_{Y,K}=\\eta_{Y,K'}v$. Thus the comparison of transposes is natural in both variables on the stated domains. All constructions used one chosen compactification and the specified Hom bijections, so no assertion about an unbounded pro-etale exceptional adjunction has entered.",
+   "text": "Use inverse naturality of compactSupportSiteComparison and the source naturality of both adjunction Hom equivalences to prove source naturality of the specified transpose. Target naturality follows from target naturality of both equivalences. Naturality of rho is C_X H applied to naturality of the actual comparison unit. Functor.map_comp and the category associativity laws close all three equations.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -97,21 +91,14 @@
   }
  ],
  "proof_deps": [
-  "pqf-lem-proper-basic",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-extension-by-zero-exact",
-  "def-sf-comparison-derived-pullback",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-sf-class-compact-support-comparison",
   "thm-sf-ambient-adjoint-class",
-  "thm-weil-pbc-site-comparison",
-  "lem-sf-comparison-pullback-exact",
-  "thm-amb-etale-exceptional-adjoint"
+  "thm-weil-pbc-site-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/categories.tex",
-  "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints, elementary counit/mate calculation applied to the explicitly specified bounded-etale-origin Hom chain; geometric inputs from existing DAG statements"
+  "place": "Tag 0B65, Hom-equivalence naturality and the counit as inverse transpose of the identity; G7 uses the existing canonical compact-support comparison, specified boundedness helper, right-adjoint uniqueness, and bounded-target comparison full faithfulness."
  },
  "mathlib_searches": [
   {
@@ -248,14 +235,8 @@
   ]
  },
  "tool_uses": [
-  "pqf-lem-proper-basic",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
   "thm-weil-pbc-site-comparison",
-  "thm-sf-ambient-adjoint-class",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "lem-weil-extension-by-zero-exact",
-  "lem-sf-comparison-pullback-exact"
+  "thm-sf-ambient-adjoint-class"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -295,5 +276,15 @@
   "group": "Q88",
   "result": "pass",
   "note": "Checked every hypothesis and conclusion part of lem-pur-bounded-site-adjunction-transpose against BoundedSiteAdjunctionTranspose.lean; lean.statement is verbatim. B = compactSupportSiteComparison.inv, read from its construction: Rp_*(e_j) after fixedComparisonDirectImageMatePlus, node's direction, canonical. boundedSiteTranspose is exactly Phi (Mathlib homEquiv = unit then U_Y.map); boundedSiteHomEquiv = Equiv.ofBijective of that fixed function via a named postponed theorem, not hollow; counit = inverse at identity; rho = C_X H of the comparison unit; counit equation and transpose identity in the node's order; naturality in J, L and K. Right adjoint quantified over every adjunction (covers canonical, no stronger assumption). Added stmt_dep lem-sf-class-compact-support-comparison is a landed node, allowed, no cycle; no dependency nodes edited. Postponed auxiliaries (lower bound of H U_Y L via cd <= 2d, bijectivity via full faithfulness on D^+) are true. Edge cases (empty schemes, d=0, n=1) and universes (Scheme.{u}, ModuleCat.{u+1}) ok; docstrings carry source, blueprint and the 6-step proof; all theorems sorry; only real proof is a one-line Finite instance (glue, as in landed modules). Both report sections present (second reading = standard 2026-10-17 notice). nt_compile.py --json: exit 0, no errors or warnings (9.3 s and 22.1 s); no lake build."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261020T051335-L-1644516",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
