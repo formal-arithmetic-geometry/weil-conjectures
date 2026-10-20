@@ -12,8 +12,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.Algebra.Homology.QuasiIso
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.RingTheory.FiniteFreeResolution
-import Sheaf.AlgebraicGeometry.FiniteFreeResolutionSheafification
+import WeilConjectures.AlgebraicGeometry.FiniteFreeResolutionSheafification
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Finite free resolutions on affine neighbourhoods
 

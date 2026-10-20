@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 
-import Sheaf.AlgebraicGeometry.KoszulCoordinateConeIso
+import WeilConjectures.AlgebraicGeometry.KoszulCoordinateConeIso
 import Mathlib.Algebra.Homology.HomotopyCategory.Triangulated
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Multiplication in one Koszul coordinate
 

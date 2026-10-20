@@ -15,7 +15,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Topology.Sheaves.Abelian
 import Sheaf.Algebra.Homology.StalkKFlatTensorHomology
-import Sheaf.AlgebraicGeometry.RelativeInverseImageStalkRestriction
+import WeilConjectures.AlgebraicGeometry.RelativeInverseImageStalkRestriction
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Category.Grp.Colimits

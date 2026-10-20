@@ -6,7 +6,8 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.Localization.Away.Basic
 import Sheaf.AlgebraicGeometry.AffinePrincipalSheafComplexTransport
-import Sheaf.AlgebraicGeometry.AffineFiniteFreeSheafComplexLift
+import WeilConjectures.AlgebraicGeometry.AffineFiniteFreeSheafComplexLift
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! A finite-free witness for the local principal-open pseudo-coherence comparison.
 (blueprint: lem-pc-affine-pseudo-coherent-principal-sheaf-model)
