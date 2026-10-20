@@ -8,11 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.RelativeFrobeniusGeometricFiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
-import Sheaf.AlgebraicGeometry.RelativeFrobeniusIntegralUniversalHomeomorphism
-import Mathlib.FieldTheory.Finite.Basic
-import Sheaf.AlgebraicGeometry.RelativeFrobeniusFinite
-import WeilConjectures.AlgebraicGeometry.AbsoluteFrobenius
-import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.Morphisms.Frobenius
 
 /-!
 # Finiteness and radiciality of the scalar-extended scheme Frobenius
@@ -29,7 +25,6 @@ finite field is finite and radicial.  Radiciality is rendered by Mathlib's
 @[expose] public section
 
 set_option autoImplicit false
-set_option warn.sorry false
 
 universe u
 
@@ -43,26 +38,17 @@ and Tags 01WL, 0472, and 01S4 in `morphisms.tex`
 (blueprint: lem-trf-scheme-frobenius-finite-radicial).
 
 Proof:
-1. Set S = Spec k₀. The datum gives a prime p, a positive a, and q = p^a.
-   `model_characteristic` supplies characteristic p. Apply
-   `lem-trf-relative-frobenius-finite` to the locally finite type structure
-   morphism with n = a to obtain finiteness of its a-fold relative Frobenius.
-2. Put Yᵢ = X₀ ×_{S,F_S^i} S. Associativity of fibre products identifies the
-   one-step Frobenius twist of Yᵢ with Yᵢ₊₁. Each relative Frobenius
-   Yᵢ → Yᵢ₊₁ is a universal homeomorphism by
-   `lem-trf-relative-frobenius-universal-homeomorphism`, hence radicial by
-   `def-weil-radicial-morphism`. Their composite is radicial by
-   `lem-trf-finite-radicial-basechange`. Inductively its projections are the
-   i-th absolute Frobenius and the structure morphism: absolute Frobenius is
-   natural since ring maps preserve p-th powers. Pullback uniqueness thus
-   identifies the a-fold composite with the a-fold relative Frobenius.
-   `FiniteField.pow_card` and q = p^a imply F_S^a = id. The final twist is
-   canonically X₀ and the first projection of the relative Frobenius becomes
-   its q-power absolute Frobenius, proving that model map finite and radicial.
-3. `relativeFrobenius` is exactly the scalar extension of that model map.
-   By `lem-trf-finite-radicial-basechange`, finite morphisms and universally
-   injective morphisms remain so under this base change to k. No separatedness
-   or reducedness is used.
+1. Check that the constructed model endomorphism satisfies the source library's
+   `Scheme.Hom.IsFrobenius` predicate at `Nat.card D.k₀ = D.p ^ D.a`.
+   Naturality follows on every open from preservation of powers by `t.app U`.
+   On `Spec R`, the global-sections adjunction identifies the constructed map
+   with `Spec.map φ` whenever `φ` is the cardinality-power ring map.
+2. The geometric fibre is the chosen pullback. Its two projection identities
+   are `relativeFrobenius_projections`. Apply the source library's
+   `IsFrobenius.isFinite_of_isPullback` and
+   `IsFrobenius.isUniversalHomeomorphism_of_isPullback` to this square.
+3. A universal homeomorphism is universally injective. Pair this with finiteness.
+   No separatedness or reducedness is used.
 -/
 theorem relativeFrobenius_isFinite_isRadicial
     (D : WeilConjectures.FiniteFieldDatum.{u})
@@ -70,6 +56,35 @@ theorem relativeFrobenius_isFinite_isRadicial
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] :
     IsFinite (D.relativeFrobenius X₀) ∧
       UniversallyInjective (D.relativeFrobenius X₀) := by
-  sorry
+  have hF : (X₀.left.iterateFrobenius D.prime
+      (D.model_characteristic X₀.hom) D.a).IsFrobenius (Nat.card D.k₀) := by
+    intro R t φ hφ
+    have hR := D.model_characteristic (t ≫ X₀.hom)
+    have hn : t ≫ X₀.left.iterateFrobenius D.prime
+        (D.model_characteristic X₀.hom) D.a =
+        (Spec R).iterateFrobenius D.prime hR D.a ≫ t := by
+      refine Scheme.Hom.ext (f := t ≫ _) (g := _ ≫ t) rfl ?_
+      intro U
+      simp only [eqToHom_refl, Scheme.Hom.comp_app]
+      ext s
+      change t.app U (s ^ D.p ^ D.a) = (t.app U s) ^ D.p ^ D.a
+      exact map_pow (t.app U).hom s (D.p ^ D.a)
+    have ha : (Spec R).iterateFrobenius D.prime hR D.a = Spec.map φ := by
+      apply AlgebraicGeometry.ext_to_Spec
+      change (Scheme.ΓSpecIso R).inv ≫
+          ((Spec R).iterateFrobenius D.prime hR D.a).appTop =
+        (Scheme.ΓSpecIso R).inv ≫ (Spec.map φ).appTop
+      rw [← Scheme.ΓSpecIso_inv_naturality]
+      ext x
+      change ((Scheme.ΓSpecIso R).inv x) ^ D.p ^ D.a =
+        (Scheme.ΓSpecIso R).inv (φ x)
+      rw [hφ, map_pow, D.card_base, D.cardinality_eq]
+    rw [hn, ha]
+  have hp := IsPullback.of_hasPullback X₀.hom
+    (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))
+  have hΦ := D.relativeFrobenius_projections X₀
+  have hfinite := hF.isFinite_of_isPullback hp hΦ.2 hΦ.1
+  have hhomeo := hF.isUniversalHomeomorphism_of_isPullback hp hΦ.2 hΦ.1
+  exact ⟨hfinite, hhomeo.toUniversallyInjective⟩
 
 end WeilConjectures.FiniteFieldDatum

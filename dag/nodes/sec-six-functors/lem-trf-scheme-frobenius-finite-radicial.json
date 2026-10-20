@@ -18,48 +18,31 @@
  ],
  "proof": [
   {
-   "text": "Put $S=\\operatorname{Spec}k_0$ and let $f:X_0\\to S$ be the structure map. Finite type implies locally finite type by [def-weil-finite-type-morphism]. The finite-field datum supplies a prime $p$ and $a\\geq1$, and $X_0$ and $S$ have characteristic $p$ as in [def-weil-relative-frobenius-geometric-fiber]. Applying [lem-trf-relative-frobenius-finite] with $n=a$ proves that $R_a=F_{X_0/S}^{(a)}:X_0\\to X_0^{(p^a/S)}$ is finite.",
+   "text": "Let F be the constructed p^a-power absolute Frobenius of X_0 [def-weil-absolute-frobenius-scheme], using model_characteristic from [def-weil-relative-frobenius-geometric-fiber]. Verify the source-library predicate F.IsFrobenius (Nat.card k_0). For t : Spec R -> X_0 and any cardinality-power endomorphism phi of R, naturality t F = F_R t is equality on points and on each open is exactly map_pow for t.app U. The global-sections adjunction GammaSpecIso identifies F_R with Spec.map phi: its inverse preserves powers and Nat.card k_0 = q = p^a. These computations prove the predicate for every affine test scheme, including the empty one.",
    "uses": [
-    "def-weil-finite-type-morphism",
-    "def-weil-relative-frobenius-geometric-fiber",
-    "lem-trf-relative-frobenius-finite"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0CCD, lemma-relative-frobenius-finite, and Tag 0CCG, remark-n-fold-relative-frobenius"
-   }
-  },
-  {
-   "text": "Here is the radiciality argument, including the iteration identification. Set $Y_i=X_0\\times_{S,F_S^i}S$ for $0\\leq i\\leq a$, with $Y_0=X_0$, and write $\\pi_i:Y_i\\to X_0$ for the first projection. Associating the fibre products gives $(Y_i)^{(p/S)}\\cong Y_{i+1}$: the two successive base changes are along $F_S^i$ and $F_S$, whose composite is $F_S^{i+1}$; both directions of this identification are the unique maps with the given projections [def-pc-fibre-product]. Let $r_i:Y_i\\to Y_{i+1}$ be the one-step relative Frobenius under this identification. Each $r_i$ is a universal homeomorphism by [lem-trf-relative-frobenius-universal-homeomorphism], since every $Y_i$ is over the characteristic-$p$ scheme $S$. A homeomorphism is injective after each base change, so [def-weil-universal-homeomorphism, def-weil-radicial-morphism] imply that each $r_i$ is radicial. For clarity, the composite $C_i=r_{i-1}\\circ\\cdots\\circ r_0:X_0\\to Y_i$ has projection to $X_0$ equal to $F_{X_0}^i$ and projection to $S$ equal to $f$. This holds for $i=1$ by the definition of relative Frobenius; the induction step uses that the first projection of $r_i$ is $F_{Y_i}$ and that $\\pi_iF_{Y_i}=F_{X_0}\\pi_i$, an equality of structure-sheaf maps because homomorphisms preserve $p$th powers [def-weil-absolute-frobenius-scheme]. Uniqueness in [def-pc-fibre-product] therefore identifies $C_a$ with $R_a$. Composition stability in [lem-trf-finite-radicial-basechange] makes $R_a$ radicial. Now $c^q=c$ in $k_0$ by [lem-weil-finite-field-pow-card], so $F_S^a=\\operatorname{id}_S$. Thus $Y_a\\cong X_0$, and the first projection of $R_a$ is $F_{X_0}^a=\\operatorname{Fr}^{(q)}_{X_0}=\\Phi_0$ by [def-weil-absolute-frobenius-scheme, def-weil-relative-frobenius-geometric-fiber]. Under this canonical identification the model map $\\Phi_0$ is finite and radicial.",
-   "uses": [
-    "def-pc-fibre-product",
-    "lem-trf-relative-frobenius-universal-homeomorphism",
-    "def-weil-universal-homeomorphism",
-    "def-weil-radicial-morphism",
     "def-weil-absolute-frobenius-scheme",
-    "lem-trf-finite-radicial-basechange",
-    "lem-weil-finite-field-pow-card",
     "def-weil-relative-frobenius-geometric-fiber"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0CCB, lemma-relative-frobenius; Tag 0CCG, remark-n-fold-relative-frobenius, first factorization formula, with the projection check written out"
-   }
+   "elementary": true
   },
   {
-   "text": "The morphism in the statement is $\\Phi=\\Phi_0\\times_{k_0}\\operatorname{id}_k$, the base change of $\\Phi_0$ along $k_0\\to k$, by [def-weil-relative-frobenius-geometric-fiber] and [def-pc-base-change]. Finiteness and radiciality are preserved by this scalar extension by [lem-trf-finite-radicial-basechange]. Therefore $\\Phi$ is finite and radicial, with no separatedness or reducedness assumption.",
+   "text": "Use the already proved source-library candidates recorded on this node, Scheme.Hom.IsFrobenius.isFinite_of_isPullback and Scheme.Hom.IsFrobenius.isUniversalHomeomorphism_of_isPullback, with k = k_0 and the predicate established in step 1. The chosen pullback square is X = X_0 x_{Spec k_0} Spec k [def-pc-fibre-product, def-pc-base-change]. Its required compatibility equations are exactly relativeFrobenius_projections [def-weil-relative-frobenius-geometric-fiber]. The given locally finite type hypothesis [def-weil-finite-type-morphism] supplies the sole finiteness hypothesis. These source theorems already prove the affine finiteness and universal-homeomorphism argument and its base-change stability [lem-trf-finite-radicial-basechange], so no iteration through Frobenius twists is needed.",
    "uses": [
-    "def-weil-relative-frobenius-geometric-fiber",
+    "def-pc-fibre-product",
     "def-pc-base-change",
+    "def-weil-relative-frobenius-geometric-fiber",
+    "def-weil-finite-type-morphism",
     "lem-trf-finite-radicial-basechange"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01WL, lemma-base-change-finite, and Tag 0472, lemma-base-change-universally-injective; radiciality equivalence Tag 01S4, lemma-universally-injective"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The source-library IsUniversalHomeomorphism class extends UniversallyInjective, so take its toUniversallyInjective projection [def-weil-universal-homeomorphism, def-weil-radicial-morphism]. Pair this with the finiteness obtained in step 2. The proof adds no separatedness, reducedness or nonemptiness assumption.",
+   "uses": [
+    "def-weil-universal-homeomorphism",
+    "def-weil-radicial-morphism"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -70,15 +53,12 @@
   "def-weil-radicial-morphism",
   "def-weil-relative-frobenius-geometric-fiber",
   "def-weil-universal-homeomorphism",
-  "lem-trf-finite-radicial-basechange",
-  "lem-trf-relative-frobenius-finite",
-  "lem-trf-relative-frobenius-universal-homeomorphism",
-  "lem-weil-finite-field-pow-card"
+  "lem-trf-finite-radicial-basechange"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tags 0CCB, 0CCD, 0CCG, followed by the base-change stability cited in morphisms.tex"
+  "place": "V7 Lean proof: specialize the already proved candidates in WeilConjectures/AlgebraicGeometry/Morphisms/Frobenius.lean (isFinite_of_isPullback and isUniversalHomeomorphism_of_isPullback) after proving the IsFrobenius predicate directly by naturality on sections and GammaSpecIso. This uses the absolute Frobenius argument of Tags 0CC7 and 0CC8 and base-change stability, avoiding the general relative-Frobenius iteration of Tags 0CCD and 0CCG."
  },
  "mathlib_searches": [
   {
@@ -227,5 +207,15 @@
   "by": "NH",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261020T131214-L-1259767",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
