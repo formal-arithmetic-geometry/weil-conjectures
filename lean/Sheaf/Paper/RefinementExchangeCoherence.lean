@@ -52,6 +52,51 @@ noncomputable def refinementComparison {X Y : Scheme.{u}} {f : X ⟶ Y}
   letI : QuasiCompact c₂.i := c₂.quasiCompact_openImmersion hf
   exact compositionC B r
 
+private noncomputable def refinementR {X Y : Scheme.{u}} {f : X ⟶ Y}
+    {c₁ c₂ : Compactification f} (r : c₁.Refinement c₂) :
+    R B r.hom ⋙ R B c₂.g ≅ R B c₁.g :=
+  rComp B r.hom c₂.g ≪≫ eqToIso (congrArg (R B) r.hom_g)
+
+private noncomputable def refinementPasting {A C D E : Type*}
+    [Category A] [Category C] [Category D] [Category E]
+    (J₁ : A ⥤ C) (J₂ : A ⥤ D) (R₀ : A ⥤ A) (R₁ : C ⥤ D) (R₂ : D ⥤ E)
+    (H : C ⥤ E) (e₀ : R₀ ≅ 𝟭 A) (e₁ : R₁ ⋙ R₂ ≅ H)
+    (g : R₀ ⋙ J₂ ⟶ J₁ ⋙ R₁) : J₂ ⋙ R₂ ⟶ J₁ ⋙ H :=
+  Functor.whiskerRight
+    ((Functor.leftUnitor J₂).inv ≫ Functor.whiskerRight e₀.inv J₂ ≫ g) R₂ ≫
+    (Functor.associator J₁ R₁ R₂).hom ≫ Functor.whiskerLeft J₁ e₁.hom
+
+private theorem comparison_factor_isIso {A C C₂ D : Type*}
+    [Category A] [Category C] [Category C₂] [Category D]
+    (J₁ : A ⥤ C) (J₂ : A ⥤ C₂) (R₀ : A ⥤ A) (R₁ : C ⥤ C₂) (R₂ : C₂ ⥤ D)
+    (H : C ⥤ D) (e₀ : R₀ ≅ 𝟭 A) (e₁ : R₁ ⋙ R₂ ≅ H)
+    (g : R₀ ⋙ J₂ ⟶ J₁ ⋙ R₁) (M : A) [IsIso (g.app M)] :
+    IsIso ((refinementPasting J₁ J₂ R₀ R₁ R₂ H e₀ e₁ g).app M) := by
+  dsimp only [refinementPasting, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app]
+  infer_instance
+
+-- Transport before specializing the component formula, to avoid expanding derived functors.
+private theorem comparison_transport_isIso {A C D E : Type*}
+    [Category A] [Category C] [Category D] [Category E]
+    (J₁ : A ⥤ C) (J₂ : A ⥤ D) (R₀ : A ⥤ A) (R₁ : C ⥤ D) (R₂ : D ⥤ E)
+    (H : C ⥤ E) (e₀ : R₀ ≅ 𝟭 A) (e₁ : R₁ ⋙ R₂ ≅ H)
+    (g : R₀ ⋙ J₂ ⟶ J₁ ⋙ R₁) (a : J₂ ⋙ R₂ ⟶ J₁ ⋙ H)
+    (ha : a = refinementPasting J₁ J₂ R₀ R₁ R₂ H e₀ e₁ g)
+    (M : A) (hg : IsIso (g.app M)) : IsIso (a.app M) := by
+  subst a
+  exact comparison_factor_isIso J₁ J₂ R₀ R₁ R₂ H e₀ e₁ g M
+
+private theorem refinementComparison_factor {X Y : Scheme.{u}} {f : X ⟶ Y}
+    {c₁ c₂ : Compactification f} (r : c₁.Refinement c₂) (hf : QuasiCompact f) :
+    let : QuasiCompact c₁.i := c₁.quasiCompact_openImmersion hf
+    let : QuasiCompact c₂.i := c₂.quasiCompact_openImmersion hf
+    refinementComparison B r hf =
+      refinementPasting (J B c₁.i) (J B c₂.i) (R B (𝟙 X)) (R B r.hom)
+        (R B c₂.g) (R B c₁.g) (rId B X) (refinementR B r)
+        (gamma B c₁.i (𝟙 X) r.hom c₂.i
+          (r.i_hom.trans (Category.id_comp c₂.i).symm)) := rfl
+
 /-- Invertibility of the comparison on the finite scalar etale-origin domain.
 Source: Stacks, Tag 0F7B; item proof steps 1 and 2
 (blueprint: lem-cbc-complete-proetale-refinement-exchange-coherence).
@@ -65,7 +110,16 @@ theorem refinementComparison_isIso {X Y : Scheme.{u}} {f : X ⟶ Y}
     (hM : ∀ n : ℕ, Nonempty (ScalarEtaleOrigin B X ((ev B X n).obj M)))
     (hf : QuasiCompact f := by infer_instance) :
     IsIso ((refinementComparison B r hf).app M) := by
-  sorry
+  let : QuasiCompact c₁.i := c₁.quasiCompact_openImmersion hf
+  let : QuasiCompact c₂.i := c₂.quasiCompact_openImmersion hf
+  exact comparison_transport_isIso (J B c₁.i) (J B c₂.i) (R B (𝟙 X))
+    (R B r.hom) (R B c₂.g) (R B c₁.g) (rId B X)
+    (refinementR B r)
+    (gamma B c₁.i (𝟙 X) r.hom c₂.i
+      (r.i_hom.trans (Category.id_comp c₂.i).symm))
+    (refinementComparison B r hf) (refinementComparison_factor B r hf) M
+    (gamma_isIso B c₁.i (𝟙 X) r.hom c₂.i
+      (r.i_hom.trans (Category.id_comp c₂.i).symm) M hM)
 
 /-- Pullback preserves the exact finite scalar etale-origin domain used in this item.
 Source: blueprint, thm-cbc-complete-proetale, final naturality argument; Stacks, Tag 04JC
@@ -82,7 +136,36 @@ theorem refinementFiniteOrigin_pullback {X X' : Scheme.{u}} (g' : X' ⟶ X)
     (hM : ∀ n : ℕ, Nonempty (ScalarEtaleOrigin B X ((ev B X n).obj M))) :
     ∀ n : ℕ,
       Nonempty (ScalarEtaleOrigin B X' ((ev B X' n).obj ((G B g').obj M))) := by
-  sorry
+  intro n
+  classical
+  let w := Classical.choice (hM n)
+  let L := (Etale.upperStar (ModuleCat.{u + 1} w.Λ) g').mapDerivedCategoryPlus.obj
+    w.origin.L
+  let F := (finiteCoefficientComparison X' w.Λ).mapDerivedCategoryPlus.obj L
+  let w' : ScalarEtaleOrigin B X'
+      ((finiteRestriction B X' w.Λ w.φ).mapDerivedCategory.obj F.obj) :=
+    { Λ := w.Λ
+      φ := w.φ
+      F := F
+      origin := ⟨L, Iso.refl _⟩
+      iso := Iso.refl _ }
+  have := hPullbackInv_isIso B g' w.Λ w.φ
+  let e : (Etale.upperStar (ModuleCat.{u + 1} w.Λ) g').mapDerivedCategoryPlus ⋙
+        HD B X' w.Λ w.φ ≅
+      HD B X w.Λ w.φ ⋙ (modulePullback B g').mapDerivedCategory :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight
+        ((Functor.mapDerivedCategoryPlusCompIso _ _).symm ≪≫
+          Functor.mapDerivedCategoryPlusNatIso (asIso (hPullbackInv B g' w.Λ w.φ)).symm ≪≫
+          Functor.mapDerivedCategoryPlusCompIso _ _) DerivedCategory.Plus.ι ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft (H B X w.Λ w.φ).mapDerivedCategoryPlus
+        (modulePullback B g').mapDerivedCategoryPlusCompatibility ≪≫
+      (Functor.associator _ _ _).symm
+  exact ⟨{ w' with
+    iso := (originIso B w').symm ≪≫ e.app w.origin.L ≪≫
+      (modulePullback B g').mapDerivedCategory.mapIso (originIso B w) ≪≫
+      ((evalG B g' n).app M).symm }⟩
 
 /-- The actual common-refinement isomorphism C_{u₂}⁻¹ C_{u₁}, with no arbitrary choice.
 Source: blueprint, thm-cbc-complete-proetale, final independence argument; item step 5
