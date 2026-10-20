@@ -17,6 +17,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import WeilConjectures.Compactification.NagataCompactification
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
+import Sheaf.Paper.DualityPairingHelpers
 import WeilConjectures.Algebra.Homology.RhomGlobalSections
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
@@ -65,7 +66,7 @@ is the double-dual morphism. All derived categories here are unbounded.
 
 set_option autoImplicit false
 
-universe v u a
+universe v u a c d w
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 open CategoryTheory.MonoidalCategory Opposite
@@ -278,6 +279,26 @@ end AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
+private theorem koszulComponents
+    {C : Type c} {D : Type d} [Category.{v} C] [Category.{w} D]
+    [MonoidalCategory C] [BraidedCategory C]
+    (L : C ⥤ D) (W : MorphismProperty C)
+    [L.IsLocalization W] [W.ContainsIdentities] [L.HasDerivedMonoidalCategory W]
+    (T : D ⥤ D ⥤ D)
+    (h : T = @curriedTensor _ _ (DerivedMonoidal.instMonoidalCategory L W)) :
+    ∃ b : ∀ M N : D, (T.obj M).obj N ≅ (T.obj N).obj M,
+      ∀ M N, HEq (b M N).hom (DerivedMonoidal.braiding' L W M N).hom := by
+  subst T
+  let b : @curriedTensor _ _ (DerivedMonoidal.instMonoidalCategory L W) ≅
+      (@curriedTensor _ _ (DerivedMonoidal.instMonoidalCategory L W)).flip :=
+    NatIso.ofComponents (fun M ↦ NatIso.ofComponents
+      (fun N ↦ DerivedMonoidal.braiding' L W M N)
+      (fun f ↦ DerivedMonoidal.braiding_naturality_right L W M f))
+      (fun f ↦ NatTrans.ext (funext (fun N ↦
+        DerivedMonoidal.braiding_naturality_left L W f N)))
+  refine ⟨fun M N ↦ (b.app M).app N, ?_⟩
+  exact fun _ _ ↦ HEq.rfl
+
 /-- A componentwise characterization of the actual descended Koszul symmetry.
 Naming this predicate keeps the large derived-monoidal instance out of the implicit
 predicate argument to Classical.choose; it imposes exactly the original HEq clause.
@@ -315,7 +336,25 @@ theorem etaleKoszulSymmetry (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
         ((derivedTensor (ModuleCat.{u + 1} A) X).obj M).obj N ≅
           ((derivedTensor (ModuleCat.{u + 1} A) X).obj N).obj M,
       IsEtaleKoszulSymmetry A X b := by
-  sorry
-
+  unfold IsEtaleKoszulSymmetry
+  run_tac Lean.Elab.Tactic.withMainContext do
+    let target ← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)
+    let target ← Lean.Meta.whnf target
+    let some tensor := target.find? (fun e => e.isAppOf ``derivedTensor) |
+      throwError "tensor absent"
+    let some raw := target.find? (fun e =>
+      e.isAppOf ``DerivedMonoidal.braiding') | throwError "raw absent"
+    let ts := tensor.getAppArgs
+    let args := raw.getAppArgs
+    let ls := raw.getAppFn.constLevels!
+    let L := args[6]!
+    let W := args[7]!
+    let h ← Lean.Meta.mkAppM
+      ``AlgebraicGeometry.Etale.etaleTensorRaw #[ts[0]!, ts[7]!]
+    let proof := Lean.mkAppN
+      (Lean.mkConst ``AlgebraicGeometry.Etale.koszulComponents
+        [ls[2]!, ls[0]!, ls[1]!, ls[3]!])
+      (args[:11].toArray ++ #[tensor, h])
+    (← Lean.Elab.Tactic.getMainGoal).assign proof
 
 end AlgebraicGeometry.Etale

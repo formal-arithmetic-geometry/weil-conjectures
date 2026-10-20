@@ -1,0 +1,28 @@
+module
+public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
+@[expose] public section
+set_option autoImplicit false
+universe c u
+open CategoryTheory Limits MonoidalCategory
+namespace AlgebraicGeometry.Etale
+
+/-- The derived étale tensor is definitionally the tensor induced by localization.
+This is the concrete specialization needed to instantiate the generic Koszul symmetry.
+Source: the tensor construction in `WeilConjectures.SixFunctors.Etale.Derived.Tensor`;
+proof step 2 of `lem-weil-duality-pairing` (blueprint: lem-weil-duality-pairing-etale-tensor-raw).
+
+Proof: unfold `derivedTensor`, which is the curried tensor of the derived monoidal
+instance associated with the quasi-isomorphism localization. The resulting expression
+is exactly the displayed raw curried tensor. -/
+theorem etaleTensorRaw
+    (B : Type c) [Category.{u + 1} B] [Abelian B]
+    [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B]
+    [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]
+    [Abelian.HasFunctorialFlatResolution B]
+    (X : Scheme.{u}) : derivedTensor B X =
+      @curriedTensor _ _ (DerivedMonoidal.instMonoidalCategory _root_.DerivedCategory.Qh
+        (HomotopyCategory.quasiIso (Sheaf X.smallEtaleTopology B) (.up ℤ))) := by
+  sorry
+
+end AlgebraicGeometry.Etale

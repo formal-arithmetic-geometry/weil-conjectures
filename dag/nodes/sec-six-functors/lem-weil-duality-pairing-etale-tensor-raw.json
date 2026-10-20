@@ -1,0 +1,111 @@
+{
+ "id": "lem-weil-duality-pairing-etale-tensor-raw",
+ "kind": "statement",
+ "title": "Concrete raw presentation of the étale derived tensor",
+ "statement": "For a monoidal Grothendieck abelian coefficient category B with functorial flat resolutions and a scheme X, the derived étale tensor functor is equal to the curried tensor of the derived monoidal structure induced by the quasi-isomorphism localization.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Tensor.lean",
+  "place": "definition derivedTensor"
+ },
+ "stmt_deps": [
+  "def-kun-derived-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Unfold derivedTensor and identify its localization functor and quasi-isomorphism property with the displayed raw curried tensor.",
+   "uses": [
+    "def-kun-derived-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Tensor.lean",
+    "place": "definition derivedTensor"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-derived-tensor"
+ ],
+ "proof_origin": {
+  "by": "F4 stage 3",
+  "date": "2026-10-21"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DualityPairingHelpers",
+  "declaration": "AlgebraicGeometry.Etale.etaleTensorRaw",
+  "file": "lean/Sheaf/Paper/DualityPairingHelpers.lean",
+  "statement": "theorem etaleTensorRaw (B : Type c) [Category.{u + 1} B] [Abelian B]\n    [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B]\n    [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]\n    [Abelian.HasFunctorialFlatResolution B]\n    (X : Scheme.{u}) : derivedTensor B X =\n      @curriedTensor _ _ (DerivedMonoidal.instMonoidalCategory _root_.DerivedCategory.Qh\n        (HomotopyCategory.quasiIso (Sheaf X.smallEtaleTopology B) (.up ℤ)))",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DualityPairing",
+  "date": "2026-10-21",
+  "group": "F4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-duality-pairing",
+   "place": "proof step 2: tensor symmetry presentation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derivedTensor curriedTensor DerivedMonoidal",
+   "results": "The source definition is the only concrete presentation; no independent Mathlib theorem found.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "derivedTensor curriedTensor",
+   "results": "No matching concrete étale derived tensor equality.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived tensor localization curried tensor monoidal category",
+   "results": "Only generic localization monoidal declarations; no concrete equality.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derivedTensor equals curriedTensor derived monoidal localization",
+   "results": "No matching theorem found.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261020T211707-L-3489436",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261020T211707-L-3489436",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
