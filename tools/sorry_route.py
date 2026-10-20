@@ -95,7 +95,7 @@ def walk(mod, stops=(), stop_mods=()):
     # 2026-10-20 (b69): no `import {mod}` (the twin modules collide in one environment); the walk reads the .oleans
     # of the target's project closure itself. Every constant of a loaded stop module is a stop (not entered, not reported).
     f.write_text(f"import Lean\nopen Lean\n\n{body}\n#eval SorryRoute.run {arr(declaring(mod))} {arr(stops)} {arr(stop_mods)}\n")
-    env = dict(os.environ, SHEAF_FILE_TIMEOUT="900")
+    env = dict(os.environ, SHEAF_TOOL_TIMEOUT="900")   # SHEAF_FILE_TIMEOUT is reset to 60 by coord/sheaf.env (b69, 2026-10-20)
     r = subprocess.run(["tools/lean_file.sh", str(f.relative_to(R))], cwd=R, env=env, capture_output=True, text=True,
                        timeout=1200)
     out = r.stdout + r.stderr

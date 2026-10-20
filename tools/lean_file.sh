@@ -24,6 +24,11 @@
 source "$(dirname "$0")/sheaf_env.sh"
 F=${1:?usage: tools/lean_file.sh <file.lean>}; [ -f "$F" ] || { echo "no such file: $F"; exit 2; }
 F=$(realpath "$F")
+# 2026-10-20 (b69): coord/sheaf.env sets SHEAF_FILE_TIMEOUT=60 for every compile, which also cut the tools' own
+# scratch walks (tools/sorry_route.py asked for 900 s; its walks timed out from 07:01 that day under load and the route
+# went stale). The 60 s rule is for library files; a tool scratch file under lean/.sandbox/_sheaf/ may set
+# SHEAF_TOOL_TIMEOUT instead.
+case "$F" in "$SHEAF_LEAN"/.sandbox/_sheaf/*) [ -n "${SHEAF_TOOL_TIMEOUT:-}" ] && SHEAF_FILE_TIMEOUT=$SHEAF_TOOL_TIMEOUT;; esac
 LP=$(cd "$SHEAF_LEAN" && lake env printenv LEAN_PATH) || { echo "lake env failed in $SHEAF_LEAN"; exit 2; }
 OUT=(); PARTS=()
 OPTS=("${SHEAF_LEAN_OPTS[@]}")
