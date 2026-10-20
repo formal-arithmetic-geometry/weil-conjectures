@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "Extract support bounds a,b and finite-free retractions iota_n,pi_n from strict perfectness. Apply the uniform single finite-free-source local lifting theorem to each pi_n followed by t_n, obtaining neighbourhoods V_n and one family of natural comparisons independent of n.",
+   "text": "Extract support bounds a,b and finite-free retractions iota_n,pi_n from strict perfectness. Apply the uniform single finite-free-source local lifting theorem to each pi_n followed by t_n. Its canonical openModuleStalkRestrictionComparison is independent of n, so all component lifts have common comparison coordinates.",
    "uses": [
     "def-pc-perfect-complex",
     "lem-sc-open-stalk-free-map-local-lift"
@@ -46,8 +46,10 @@
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "E4",
+  "date": "2026-10-21",
   "document": "Stacks Project",
-  "place": "Tags 09RE and 01CP; D4 uses finite-free source retractions directly, then proves finite support assembly and affine shrinking in Lean."
+  "place": "Tags 09RE and 01CP. Reuse the existing proved source theorem, whose finite-support assembly, affine shrinking, naturality and retraction cancellation follow the original route. Its canonical comparison realizes the unchanged existential assertion; no additional hypothesis is used."
  },
  "mathlib_searches": [
   {
@@ -106,14 +108,15 @@
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-cube",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PerfectOpenStalkDegreewiseLift",
-  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOpenStalkDegreewiseLift.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.PerfectOpenStalkDegreewiseLift",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PerfectOpenStalkDegreewiseLift.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_affine_perfect_open_stalk_degreewise_lift",
-  "statement": "theorem exists_affine_perfect_open_stalk_degreewise_lift\n    (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U)\n    (P Q : CochainComplex\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hP : IsStrictlyPerfect X U P)\n    (t : ∀ n : ℤ,\n      (((openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ)).obj P).X n ⟶\n      (((openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ)).obj Q).X n) :\n    ∃ (W : X.Opens) (hxW : x ∈ W) (_hW : IsAffineOpen W) (hWU : W ≤ U),\n      let R := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hWU : W ⟶ U)).mapHomologicalComplex (.up ℤ)\n      let S := (openModuleStalkFunctor X W ⟨x, hxW⟩).mapHomologicalComplex (.up ℤ)\n      let T := (openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ)\n      ∃ (e : R ⋙ S ≅ T) (g : ∀ n : ℤ, (R.obj P).X n ⟶ (R.obj Q).X n),\n        ∀ n : ℤ, (openModuleStalkFunctor X W ⟨x, hxW⟩).map (g n) =\n          (e.app P).hom.f n ≫ t n ≫ (e.app Q).inv.f n",
+  "statement": "theorem exists_affine_perfect_open_stalk_degreewise_lift\n    (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U)\n    (P Q : CochainComplex\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hP : IsStrictlyPerfect X U P)\n    (t : ∀ n : ℤ,\n      (((openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ)).obj P).X n ⟶\n      (((openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ)).obj Q).X n) :\n    ∃ (W : X.Opens) (hxW : x ∈ W) (_hW : IsAffineOpen W) (hWU : W ≤ U),\n      let R := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hWU : W ⟶ U)).mapHomologicalComplex (.up ℤ)\n      let S := (openModuleStalkFunctor X W ⟨x, hxW⟩).mapHomologicalComplex (.up ℤ)\n      let T := (openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ)\n      let e : R ⋙ S ≅ T := Functor.mapHomologicalComplexCompIso\n        (openModuleStalkRestrictionComparison X U W hWU x hxU hxW) (.up ℤ)\n      ∃ g : ∀ n : ℤ, (R.obj P).X n ⟶ (R.obj Q).X n,\n        ∀ n : ℤ, (openModuleStalkFunctor X W ⟨x, hxW⟩).map (g n) =\n          (e.app P).hom.f n ≫ t n ≫ (e.app Q).inv.f n",
   "branch": "sheaf-dag",
-  "by": "V3",
-  "date": "2026-10-13"
+  "by": "E4",
+  "date": "2026-10-21",
+  "note": "Retired the duplicate Sheaf module. The existing proved source theorem fixes e to the termwise canonical openModuleStalkRestrictionComparison. Choosing that e proves the unchanged existential-comparison statement of this node. The sole direct consumer constructs this e explicitly; its public statement is unchanged. All dependency edges and the unit route are preserved."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -126,14 +129,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D4",
+  "reviewer": "C-e1117",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261013T111842-L-3048954",
+  "landing": "20261020T221132-L-4147945",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired Sheaf duplicate vs proved WeilConjectures source theorem (node lean.statement verbatim, statement/stmt_deps/proof_deps unchanged); adapted ChainMapLift vs live clone (only import + canonical eW/change lines differ)"
  },
  "lean_audit": {
   "master": {

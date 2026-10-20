@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
-import Sheaf.AlgebraicGeometry.PerfectOpenStalkDegreewiseLift
+import WeilConjectures.AlgebraicGeometry.PerfectOpenStalkDegreewiseLift
 import WeilConjectures.AlgebraicGeometry.PerfectOpenStalkDegreewiseShrink
 public import Sheaf.Paper.DerivedHomMayerVietoris
 
@@ -58,8 +58,12 @@ theorem exists_affine_perfect_open_stalk_chainMap_lift
       ∃ (e : R ⋙ S ≅ T) (g : R.obj P ⟶ R.obj Q),
         S.map g = (e.app P).hom ≫ t ≫ (e.app Q).inv := by
   clear hU hQ
-  obtain ⟨W, hxW, _, hWU, eW, g, hg⟩ :=
+  obtain ⟨W, hxW, _, hWU, g, hg⟩ :=
     exists_affine_perfect_open_stalk_degreewise_lift X U x hxU P Q hP t.f
+  let eW := Functor.mapHomologicalComplexCompIso
+    (openModuleStalkRestrictionComparison X U W hWU x hxU hxW) (.up ℤ)
+  change ∀ n, (openModuleStalkFunctor X W ⟨x, hxW⟩).map (g n) =
+    (eW.app P).hom.f n ≫ t.f n ≫ (eW.app Q).inv.f n at hg
   let RW := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
     (homOfLE hWU : W ⟶ U)).mapHomologicalComplex (.up ℤ)
   let SW := (openModuleStalkFunctor X W ⟨x, hxW⟩).mapHomologicalComplex (.up ℤ)
