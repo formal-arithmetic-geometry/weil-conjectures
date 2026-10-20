@@ -1,0 +1,139 @@
+{
+ "id": "lem-pur-finite-smooth-two-level-reduction",
+ "kind": "statement",
+ "title": "Two-level reduction of finite smooth purity",
+ "statement": "For positive prime-power levels r≥m and any supplied geometrically normalized finite smooth levels a,b [def-pur-finite-smooth-adjunction-data], the actual quotient maps form ReductionData. The root comparison is normalized by its power map into G_m and every scalar/root generator. The ordinary and pro-etale compact, exceptional, counit, naturality, pullback, purity and constructibility assertions retain the original canonical maps. This is the two-level result sk-lem-sp-reduction, separate from triple-level quotient coherence.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "sk-thm-smooth-purity and proof: inverse diagonal orientation followed by the tensor map; sk-prop-sp-orientation.proof.md: diagonal, deformation, vector bundle; sk-lem-sp-reduction.proof.md and sk-lem-sp-reduction-compatibilities.proof.md: counit-defined coefficient comparisons and quotient cocycle. The ordinary-etale Noetherian formulation retains arbitrary ground fields."
+ },
+ "stmt_deps": [
+  "def-pur-finite-smooth-adjunction-data",
+  "def-pur-finite-smooth-canonical-maps",
+  "def-pur-finite-smooth-coefficient-arrows"
+ ],
+ "proof": [
+  {
+   "text": "construct the root comparison by the ell^(r-m) power map. Its inclusion in\nG_m and its values on scalar/root generators fix the sheaf comparison; derive the\nactual scalar counit and iterate its normalized tensor and shift comparisons. Do this for every positive quotient and apply finiteSmoothQuotientCoherence to obtain the compact-support cocycle needed by exceptional_coefficient_comparison.\nThe projective-line Kummer and diagonal classes reduce to their counterparts, and\nthe splitting has free rank-one summands. Thus the ordered affine-line counits and\nbundle integration commute with reduction. For the diagonal deformation, transport\ndiagonalOrientationCompatibility from its single lifted coefficient presentation to\nthe double lift here. The actual scalar comparison on the family has the specified\none-fibre transpose. Uniqueness of normalized specialization identifies its zero\nfibre. Paste with the diagonal smooth-base-change mate and inverse bundle comparison.\nSubstitute both supplied OrientationNormalized equations and cancel the invertible\nfactors. This proves the unit-orientation coefficient equation for a.alpha and b.alpha.\nTensor compatibility of exceptional_coefficient_comparison, composed with this unit\nequation, gives ordinary_purity. Its other three edges are invertible, so the actual\nexceptional mate is invertible. Its defining adjunction gives the counit equation.\nFor reduction_ctf on arbitrary T use scalarExtensionFunctor_preserves_constructible_tor,\nwhich has no invertibility hypothesis on T. Canonical realization and uniqueness of\nscalar left adjoints identify its extension with proScalar; finite homology support\nand bounded intervals are equivalent. On X and Y the stronger ordinary-origin result\nof finiteReduction_constructibility also applies. Canonical tensor/pullback comparisons\ncommute reduction with inverse image. Transport the compact, exceptional and purity\nmaps through exact site comparison and scalar comparison. The actual ordinary-origin\ncounits are invertible on this domain. Adjoint transposition identifies transported\ncounits and naturality, and cancellation of origin counits gives the pro equations.\nAll maps retain their original formulas; equal positive levels and zero inputs are\nincluded. This is the source's two-level coefficient argument.",
+   "uses": [
+    "lem-pur-exceptional-coefficient-comparison",
+    "lem-pur-finite-reduction-constructibility",
+    "det-sp-scalar-extension-functor",
+    "lem-pur-diagonal-orientation-compatibility",
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-amb-affine-space-top-trace",
+    "def-amb-vector-integration",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-pur-finite-smooth-quotient-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-exceptional-coefficient-comparison",
+  "lem-pur-finite-reduction-constructibility",
+  "det-sp-scalar-extension-functor",
+  "lem-pur-diagonal-orientation-compatibility",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-amb-affine-space-top-trace",
+  "def-amb-vector-integration",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-pur-finite-smooth-quotient-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "The source two-level reduction lemma: root normalization, coefficient compatibility of the actual diagonal/deformation/bundle orientation, then tensor/counit and exact-site transport. The human route pivot forbids the NoetherianPrimePowerSmoothDuality shortcut."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "smooth purity finite torsion coefficient quotient cocycle derived etale adjunction",
+   "results": "Eight hits, including derived adjunction factorization and smooth ring definitions; none supplies these geometric finite-coefficient assertions.",
+   "date": "2026-10-19",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsNoetherian",
+   "results": "Existing Noetherian permanence API found and used in the parent; it does not supply normalized finite smooth adjunction or coefficient coherence.",
+   "date": "2026-10-19",
+   "verdict": "Use existing geometric setup; no match for this obligation."
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteSmoothSystem|SmoothLevel|ReductionData|OrientationNormalized|ordinary_natural|origin_ctf|trace_transport|HasTwistCocycle|roots_power",
+   "results": "Read FiniteSmoothAdjunctionData, FiniteSmoothPurityMaps, FiniteSmoothCoefficientArrows and the original proof dependency modules. The exact remaining assembly or coherence theorem is absent.",
+   "date": "2026-10-19",
+   "verdict": "Reuse all canonical definitions; isolate only the missing proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSmoothAdjunctionGeneralBase",
+  "date": "2026-10-19",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-smooth-purity-qbar",
+   "place": "Two-level finite smooth coefficient reduction in lem-pur-finite-smooth-adjunction-general-base",
+   "via": [
+    "lem-pur-finite-smooth-adjunction-general-base",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSmoothTwoLevelReduction",
+  "file": "lean/Sheaf/Paper/FiniteSmoothTwoLevelReduction.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.finiteSmoothTwoLevelReduction",
+  "statement": "theorem finiteSmoothTwoLevelReduction\n    (ell : ℕ) [Fact ell.Prime]\n    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n    (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] [IsSeparated f]\n    [LocallyOfFiniteType f] (d : ℕ) [SmoothOfRelativeDimension d f]\n    (hY : ∀ y : Y, IsUnit (ell : Y.presheaf.stalk y))\n    (r m : ℕ) (hm : 1 ≤ m) (hmr : m ≤ r)\n    (a : Level ell r f d) (b : Level ell m f d) :\n    Nonempty (ReductionData (FiniteReduction.quotient ell hmr) f d a b)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261020T051002-L-1519603",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261020T051002-L-1519603",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

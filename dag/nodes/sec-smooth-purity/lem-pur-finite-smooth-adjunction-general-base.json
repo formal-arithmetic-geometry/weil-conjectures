@@ -46,174 +46,60 @@
  ],
  "proof": [
   {
-   "text": "A field is Noetherian, since its only ideals are $0$ and itself; [lem-weil-pbc-finite-type-over-noetherian] therefore makes $X,Y$ Noetherian. The graph of $f$ is a closed immersion into $X\\times_kY$ because $Y$ is separated over $k$. The projection $X\\times_kY\\to Y$ is the base change of the finite-type structure map $X\\to\\operatorname{Spec}k$, so the graph-to-$Y$ composite (which is $f$) is separated and finite type. By [thm-nagata-compactification] it has a compactification $f=qj$ over the qcqs Noetherian base $Y$. The same applies to the smooth maps, vector bundles and deformation spaces used below: they are separated finite type over Noetherian schemes. For each $A=A_n$, [thm-amb-etale-exceptional-adjoint] supplies $P_A=Rf^{\\mathrm{et}}_{!,A}\\dashv G_A=f_A^\\times$. The canonical comparisons of [lem-amb-etale-compact-comparisons] identify compactification choices on the bounded-below objects used here. All later constructions are on these ordinary etale categories until the final transport; no ambient unbounded pro-etale right adjoint is asserted.",
+   "text": "Finite type over the spectrum of a field makes X and Y locally Noetherian and quasi-compact, hence Noetherian. Nagata gives the chosen compactification. The characteristic inequality makes ell a unit in the field; map it to global sections of X and Y and then to all stalks.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
-    "thm-nagata-compactification",
-    "thm-amb-etale-exceptional-adjoint",
-    "lem-amb-etale-compact-comparisons"
+    "thm-nagata-compactification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-finite-existence/_section.md",
-    "place": "Finite-existence input, with ordinary Noetherian compactification and adjoint prerequisites"
-   }
+   "elementary": false
   },
   {
-   "text": "The finite-origin comparison, preservation of the Tor interval by a bounded flat K-flat model, associativity of quotient tensors, and constructibility of derived reduction are exactly the finite-reduction lemma [lem-pur-finite-reduction-constructibility]. Applying it with $A_r\twoheadrightarrow A_m$ proves that every reduction remains in the stated intrinsic categories and has an ordinary-etale origin.",
+   "text": "For each positive n apply finite-ring section geometry and unique normalized deformation comparison to the diagonal. The normalized Rees-to-associated-graded comparison followed by coneBundleIso gives an isomorphism over X; purityNormalProjection_eq identifies its projection with the actual normal-cone projection. Smoothness of that projection follows by base change from the deformation, hence also holds for the isomorphic bundle. Smooth exceptional base change makes both section maps invertible. Compose the diagonal factor, specialization, inverse cone/bundle section map and inverse Kummer bundle adjunct. Cancellation proves OrientationNormalized for this constructed alpha.",
    "uses": [
-    "lem-pur-finite-reduction-constructibility"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction.proof.md",
-    "place": "Coefficient extension on bounded flat models; intrinsic finite-Tor and constructibility checks"
-   }
-  },
-  {
-   "text": "Construct $b_M:S_YP_AM\\to P_BS_XM$, where $S=(-)\\otimes_A^LB$, on one compactification $f=qj$. The open tensor map $S(j_!Q)\\to j_!S(Q)$ is the identity on the open and zero off it by [lem-weil-pbc-extension-by-zero-stalks]. Exactness [lem-weil-pbc-extension-by-zero-exact] derives it. It is legitimate on K-flat models: $j_!Q\\otimes L=j_!(Q\\otimes j^*L)$ by the same stalk formula, and exact $j^*$ and $j_!$ show that $j_!Q$ stays K-flat. Define the proper $B$-linear map $S_YRq_{*,A}L\\to Rq_{*,B}S_{\\bar X}L$ as the transpose of $q_B^*S_YRq_{*,A}L\\cong S_{\\bar X}q_A^*Rq_{*,A}L\\to S_{\\bar X}L$. Its restriction to $A$ is the proper projection map with tensor factor $B$, followed by the inverse of the canonical restriction-of-scalars direct-image comparison [lem-sbc-canonical-restrict-scalars-functor-comparisons]: transposing either map is precisely the $A$-counit tensored with $B$. The proper projection formula [lem-amb-proper-coproducts-projection] is unbounded and imposes no flatness on $B$, so this map is an isomorphism. Restriction of scalars reflects isomorphisms because it leaves cohomology sheaves unchanged. Compose these proper and open comparisons to get $b_M$. The restriction-of-scalars comparison is only used on bounded-below $L$ and $S(L)$; the latter is bounded by Step 2. For $A\\to B\\to C$, transposing the twice-applied proper comparison gives the original proper counit tensored with $C$, since $(x\\otimes b)\\otimes c\\mapsto x\\otimes bc$. The open comparisons have exactly this formula. Hence $b_{A,C}=b_{B,C}\\circ S_C(b_{A,B})$ after tensor associativity. Adjunction pasting [lem-weil-pbc-mate-pasting] and compactification comparisons [lem-amb-etale-compact-comparisons] give the same map on a common refinement.",
-   "uses": [
-    "lem-weil-pbc-extension-by-zero-stalks",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
-    "lem-amb-proper-coproducts-projection",
-    "lem-weil-pbc-mate-pasting",
-    "lem-amb-etale-compact-comparisons"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction.proof.md",
-    "place": "Construction of b; non-flat proper projection argument and associativity"
-   }
-  },
-  {
-   "text": "Apply [lem-pur-exceptional-coefficient-comparison] to the canonical $b$ of Step 3. Its ordinary-etale hypotheses hold by Step 1 and the quotient-domain checks of Step 2. It supplies the bounded finite-Tor domain of $G_AK$, the counit-defined map $c_K$, naturality, the quotient cocycle, compatibility with exceptional base change, and the tensor-map identity\n$$c_K\\circ S_X\\phi_{A,K}=\\phi_{B,S_YK}\\circ(1\\otimes c_{A_Y}).$$\nNo invertibility of $c$ is used at this point.",
-   "uses": [
-    "lem-pur-exceptional-coefficient-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
-    "place": "Composition, base-change mates, and tensor-map compatibility"
-   }
-  },
-  {
-   "text": "Fix the vector-bundle normalization over any Noetherian $S$. Apply [thm-amb-vector-bundle-purity] with $F=\\mathbf Q_\\ell$ and coefficient $A_n$. It gives $v_{\\pi,A}:A_E(d)[2d]\\xrightarrow{\\sim}\\omega_{\\pi,A}$, adjoint to the integration specified by [def-amb-vector-integration]. This orientation commutes with $A_r\\to A_m$. Indeed choose the common annihilator $N=\\ell^r$. The roots-of-unity lines and their reductions agree by [lem-asd-etale-finite-twist-pullback]. The projective-line splitting in [lem-asd-ordinary-finite-p1-adjunction] has components the unit and the scalar-extended Kummer Chern class of $\\mathcal O(1)$. Coefficient extension carries these components to the same two components over $B$: the unit is transposed from identity; the Chern class over $A$ and over $B$ is the image of the same class over $\\mathbf Z/N$. A split pair of free rank-one summands remains split under derived extension, so its inverse followed by projection onto the second summand reduces to the same trace over $B$. Restrict to $\\mathbf A^1$, then iterate the ordered affine-line counits of [lem-amb-affine-space-top-trace]. The composite-counit formula $\\varepsilon_{FG}=\\varepsilon_F\\circ F(\\varepsilon_G)$ shows that each iterated trace reduces to the corresponding trace over $B$. Hence the vector-bundle traces agree on a trivializing cover. Their sources are isomorphic to $A_S[0]$ by [def-amb-vector-integration]; after extension they are $B_S[0]$. Full faithfulness of the degree-zero embedding [lem-weil-pbc-derived-single-fully-faithful] makes the equality a sheaf-morphism equality, so agreement on this cover proves global equality. Taking adjoints in the counit identity defining $c$ gives $c_{A_S}\\circ S(v_{\\pi,A})=v_{\\pi,B}$, with source identified by the canonical twist comparison. This includes rank zero, where the ordered counit is the identity.",
-   "uses": [
-    "thm-amb-vector-bundle-purity",
-    "def-amb-vector-integration",
-    "lem-asd-etale-finite-twist-pullback",
-    "lem-asd-ordinary-finite-p1-adjunction",
-    "lem-amb-affine-space-top-trace",
-    "lem-weil-pbc-derived-single-fully-faithful"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation.proof.md",
-    "place": "Vector-bundle factor; sk-lem-sp-reduction.proof.md, common Kummer class and two free projective-line summands"
-   }
-  },
-  {
-   "text": "The projection $p_1:X\\times_YX\\to X$ is smooth of pure relative dimension $d$ by [lem-sbc-smooth-relative-dimension-permanence], and its diagonal section is regular with normal bundle $T_{X/Y}$ by [lem-pur-diagonal-regular-immersion]. Apply [lem-pur-noetherian-etale-section-specialization] to this pair. Compose its $\\delta$ with the exceptional base-change map [prop-asd-smooth-base-change] pulled back by $\\Delta$ and the inverse vector-bundle normalization from Step 5. This is exactly $\\alpha_{f,A}$ in the statement. Step 4 gives coefficient maps on the deformation family whose $t=1$ restrictions agree. Hence [lem-pur-diagonal-orientation-compatibility] identifies their $t=0$ restrictions, without requiring them to be invertible. Composing this equality with the base-change equality of Step 4 and the vector-bundle equality of Step 5 gives $\\alpha_{f,B}\\circ c_{A_Y}=S_X\\alpha_{f,A}$ under the canonical twist identifications. Use [lem-trf-finite-ring-section-deformation] for the actual smooth-section geometry and the symmetric-algebra cone-to-bundle comparison with its projection and zero-section identities. The homogeneous Rees-to-associated-graded identification specified in the statement supplies the intermediate transport needed to compose the two factors.",
-   "uses": [
-    "lem-sbc-smooth-relative-dimension-permanence",
-    "lem-pur-diagonal-regular-immersion",
-    "lem-pur-noetherian-etale-section-specialization",
+    "lem-trf-finite-ring-section-deformation",
     "prop-asd-smooth-base-change",
-    "lem-pur-diagonal-orientation-compatibility",
-    "lem-trf-finite-ring-section-deformation"
+    "def-pur-finite-smooth-canonical-interfaces",
+    "def-pur-normal-bundle"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation.proof.md",
-    "place": "Diagonal, deformation, and vector-bundle factors; coefficient compatibility"
-   }
+   "elementary": false
   },
   {
-   "text": "Define $\\gamma_{A,K_0}=\\phi_{f,A,K_0}\\circ(1\\otimes\\alpha_{f,A}^{-1})$ with the twist reassociation in the statement. The orientation is invertible because its three factors are the isomorphisms of [prop-asd-smooth-base-change], [lem-pur-noetherian-etale-section-specialization] and [thm-amb-vector-bundle-purity] (Step 6 proves only its coefficient compatibility), and [thm-asd-smooth-tensor] makes the tensor map invertible and natural; thus their composite is an isomorphism natural in $K_0$. Its source lies in the claimed category: pull back the bounded flat model from Step 2, using [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and tensor it with the locally free rank-one twist of [lem-asd-etale-finite-twist-pullback]. This gives Tor interval $[a-2d,b-2d]$. Exact inverse image pulls each finite constructibility stratification back to one on $X$ and preserves finite locally constant sheaves there; tensoring with a rank-one line preserves them as well. Hence the source, and its isomorphic target, have bounded constructible cohomology and finite Tor amplitude. At $d=0$, [lem-pur-finite-smooth-gamma-normalization] identifies the three factors with the inverse-image comparison for the etale sum adjunction and its given counit.",
+   "text": "Apply the finite-level properties theorem to each constructed orientation. Choose the level witnesses inside this proof of a proposition. Apply the two-level reduction theorem to each pair and choose its reduction witnesses, also only inside this proof.",
    "uses": [
-    "thm-asd-smooth-tensor",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-asd-etale-finite-twist-pullback",
-    "lem-pur-finite-smooth-gamma-normalization",
-    "prop-asd-smooth-base-change",
-    "lem-pur-noetherian-etale-section-specialization",
-    "thm-amb-vector-bundle-purity"
+    "lem-pur-finite-smooth-level-of-orientation",
+    "lem-pur-finite-smooth-two-level-reduction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
-    "place": "Three-factor finite smooth purity map and relative-dimension-zero normalization"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-weil-pbc-comparison-pullback], $C_Xf^*\\cong Lf^*C_Y$. The open comparison [lem-cbc-proetale-extension-zero-comparison] and the proper comparison [lem-weil-pbc-comparison-direct-image-canonical-mate] compose to $C_YP_A\\cong Rf_{!,A}C_X$. The latter proper map is the adjoint-of-counit map explicitly specified in its statement, so these comparisons transport the Hom adjunction and its actual counit. On the right, by the definition in this item $Rf_A^!K=C_XG_AK_0$; Step 7 proves that this object lies in the stated subcategory. Full faithfulness [thm-weil-pbc-site-comparison] and the origin equivalence [lem-weil-pbc-finite-ring-constructible-derived-origin] identify different choices of $K_0$ and make the transported $\\gamma$ natural. Since $C$ preserves tensor [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], it carries all finite coefficient comparisons and their defining counit identities to those in the statement. For the proper part this follows by transposing the same counit square, and for the open part by the identity/zero formula. The comparisons apply to bounded-below objects: all inputs have the bounds of Steps 2 and 7, and proper direct image is left t-exact. The source of the compact-support coefficient comparison, if computed by an unbounded resolution of $B$ over $A$, is identified by Step 3 with $P_BS_XM$, a bounded-below object, before the site comparison is applied.",
+   "text": "The proved site realization theorem gives normalized root transport. The existing sfIntrinsicCompactSupportComparison identifies intrinsic compact-support realization on the same chosen compactification. Apply quotient coherence to the reduction twists to obtain the ordinary compact-support coefficient cocycle and the eight remaining cocycles. Apply exceptional_coefficient_comparison at r,m with that compact-support cocycle and extract its triple-level exceptional cocycle; this is HasExceptionalCocycle by unfolding. Assemble the two existential witnesses and every original conjunct, with no change to the target signature or its defining maps.",
    "uses": [
-    "lem-weil-pbc-comparison-pullback",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "thm-weil-pbc-site-comparison",
-    "lem-weil-pbc-finite-ring-constructible-derived-origin",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-pur-finite-smooth-quotient-coherence",
+    "lem-pur-finite-smooth-site-realizations",
+    "lem-pur-exceptional-coefficient-comparison",
+    "cor-exc-base-change-open-immersion-general"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/det-sp-et-proet-adjunction-transfer.proof.md",
-    "place": "Transport through the fully faithful finite constructible comparisons, including counit"
-   }
-  },
-  {
-   "text": "The pullback/twist comparison $\\lambda$ is the tensor/pullback isomorphism of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and the canonical finite twist comparison of [lem-asd-etale-finite-twist-pullback]. Combine the tensor-map identity of Step 4 with $\\alpha_Bc_{A_Y}=S\\alpha_A$ from Step 6. Substituting the three-factor formula for $\\gamma$ and cancelling $\\alpha_B$ gives\n$$c_K\\circ S_X\\gamma_{A,K}=\\gamma_{B,S_YK}\\circ\\lambda_K.$$\nBoth $S_X\\gamma_A$ and $\\gamma_B\\lambda$ are isomorphisms, so this proves $c_K$ is an isomorphism. It also proves that the adjoint traces reduce, by the defining counit identity of $c$; no separately normalized trace is assumed. The cocycle for $b$ is Step 3, the cocycle for $c$ is Step 4, and those for pullback and twist are the tensor reassociation $(q\\otimes b)\\otimes c\\mapsto q\\otimes bc$ and the composition of the root power maps. Thus the purity square has the same two-stage and direct versions for $A_r\\to A_m\\to A_n$, including equal levels. At $K=A_{n,Y}$ the source is the locally free line $A_{n,X}(d)[2d]$, so its only cohomology is in degree $-2d$; the isomorphism gives the same for the target. Its derived reductions are the corresponding free lines, with the cocycle just proved.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-asd-etale-finite-twist-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
-    "place": "(2) quotient cocycle and (3) purity compatibility; unit-coefficient conclusion"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-finite-type-over-noetherian",
   "thm-nagata-compactification",
-  "thm-amb-etale-exceptional-adjoint",
-  "lem-amb-etale-compact-comparisons",
-  "lem-pur-finite-reduction-constructibility",
-  "lem-weil-pbc-extension-by-zero-stalks",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
-  "lem-amb-proper-coproducts-projection",
-  "lem-weil-pbc-mate-pasting",
-  "lem-pur-exceptional-coefficient-comparison",
-  "thm-amb-vector-bundle-purity",
-  "def-amb-vector-integration",
-  "lem-asd-etale-finite-twist-pullback",
-  "lem-asd-ordinary-finite-p1-adjunction",
-  "lem-amb-affine-space-top-trace",
-  "lem-weil-pbc-derived-single-fully-faithful",
-  "lem-sbc-smooth-relative-dimension-permanence",
-  "lem-pur-diagonal-regular-immersion",
-  "lem-pur-noetherian-etale-section-specialization",
+  "lem-trf-finite-ring-section-deformation",
   "prop-asd-smooth-base-change",
-  "lem-pur-diagonal-orientation-compatibility",
-  "thm-asd-smooth-tensor",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-pur-finite-smooth-gamma-normalization",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "thm-weil-pbc-site-comparison",
-  "lem-weil-pbc-finite-ring-constructible-derived-origin",
-  "lem-trf-finite-ring-section-deformation"
+  "def-pur-finite-smooth-canonical-interfaces",
+  "def-pur-normal-bundle",
+  "lem-pur-finite-smooth-level-of-orientation",
+  "lem-pur-finite-smooth-two-level-reduction",
+  "lem-pur-finite-smooth-quotient-coherence",
+  "lem-pur-finite-smooth-site-realizations",
+  "lem-pur-exceptional-coefficient-comparison",
+  "cor-exc-base-change-open-immersion-general"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/_section.md",
-  "place": "Current diagonal/deformation route, with ordinary-etale Noetherian interfaces to retain arbitrary fields, and the explicit scalar/counit calculations of current sk-lem-sp-reduction-compatibilities."
+  "place": "Construct the normalized orientation from actual diagonal, specialization and cone/bundle factors; apply the proved level assembly, the separate direct source two-level reduction, proved root realization and existing intrinsic compact-support comparison. Obtain all triple-level equations from the separate quotient-coherence result. No Noetherian smooth-duality side route is used."
  },
  "mathlib_searches": [
   {
@@ -692,11 +578,21 @@
    "AlgebraicGeometry.Etale.FiniteSmoothPurity.finiteSmoothAdjunctionGeneralBase"
   ],
   "file": "lean/Sheaf/Paper/FiniteSmoothAdjunctionGeneralBase.lean",
-  "statement": "theorem finiteSmoothAdjunctionGeneralBase (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k] [Fact (ringChar k ≠ ell)] {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (d : ℕ) [SmoothOfRelativeDimension d f] : ∃ (c : Compactification f) (hX : IsNoetherian X) (hY : IsNoetherian Y), FiniteSmoothAdjunctionDatum ell f d c hX hY",
+  "statement": "theorem finiteSmoothAdjunctionGeneralBase\n    (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k] [Fact (ringChar k ≠ ell)]\n    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsSeparated f]\n    [LocallyOfFiniteType f] [QuasiCompact f] (d : ℕ) [SmoothOfRelativeDimension d f] :\n    ∃ (c : Compactification f) (hX : IsNoetherian X) (hY : IsNoetherian Y),\n      FiniteSmoothAdjunctionDatum ell f d c hX hY",
   "branch": "newtargets-dag",
   "by": "Q07",
   "date": "2026-10-18",
   "existing": false,
   "note": "Repair of H3/H5/H8: characteristic exclusion and positive levels; full pullback-tensor purity source; specified diagonal/Kummer gamma and actual transported exceptional, scalar, compact-support and counit maps; counit, naturality, reduction, all quotient cocycles, d=0 and degree -2d clauses. FiniteSmoothSystem expresses existence of the same level/reduction data and all properties as an existential proposition, avoiding expensive generated dependent-record eliminators without changing the theorem signature or mathematical conclusion. The nine long cocycle clauses are named predicates in the same module, with their original formulas verbatim; the existential system joins those exact predicates."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261020T051002-L-1519603",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

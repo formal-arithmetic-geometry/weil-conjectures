@@ -7,34 +7,12 @@ module
 
 public import Sheaf.Paper.FiniteSmoothAdjunctionData
 import WeilConjectures.Compactification.NagataCompactification
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
-import Sheaf.Paper.FiniteReductionConstructibility
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.Paper.EtaleUnboundedRestrictionComparison
-import Sheaf.AlgebraicGeometry.ProperProjectionFormula
-import Sheaf.Paper.ExceptionalCoefficientComparison
-import Sheaf.Targets.VectorBundlePurity
-import Sheaf.AlgebraicGeometry.VectorBundleIntegration
-import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
-import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Adjunction
-import Sheaf.AlgebraicGeometry.AffineSpaceTopTrace
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.AlgebraicGeometry.DiagonalRegularPureCodimension
-import Sheaf.Paper.NoetherianEtaleSectionSpecialization
-import Sheaf.AlgebraicGeometry.SmoothExceptionalBaseChange
-import Sheaf.Paper.PurityDiagonalOrientationCompatibility
-import Sheaf.AlgebraicGeometry.SmoothTensorDuality
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.Paper.FiniteRingSectionDeformation
-import Sheaf.Paper.FiniteSmoothGammaNormalization
-import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
-import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
-import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
-import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
+import Sheaf.Paper.FiniteSmoothLevelOfOrientation
+import Sheaf.Paper.FiniteSmoothTwoLevelReduction
+import Sheaf.Paper.FiniteSmoothQuotientCoherence
+import Sheaf.Paper.FiniteSmoothSiteRealizations
+import Sheaf.AlgebraicGeometry.SfOpenExceptionalBaseChange
+import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothBaseChange
 
 /-! # Finite smooth adjunction over an arbitrary field
 
@@ -52,7 +30,6 @@ sk-lem-sp-reduction and its compatibility proof
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option relaxedAutoImplicit false
-set_option warn.sorry false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory AlgebraicGeometry
 open scoped CategoryTheory.Functor
@@ -357,6 +334,86 @@ def FiniteSmoothAdjunctionDatum (ell : ℕ) [Fact ell.Prime]
   letI := hY
   FiniteSmoothSystem ell f d
 
+private theorem normalizedOrientation
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
+    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] [IsSeparated f]
+    (d : ℕ) [SmoothOfRelativeDimension d f] (hX : IsUnit (N : Γ(X, ⊤))) :
+    ∃ (G : FiniteRingSectionDeformation.Geometry d
+        (pullback.fst f f) (pullback.diagonal f))
+      (alpha : dualizingComplex (ModuleCat.{u + 1} A) f ≅ line A N hA X d),
+      OrientationNormalized A N hN hA f d G hX alpha := by
+  let G := FiniteRingSectionDeformation.geometry d (pullback.fst f f)
+    (pullback.diagonal f) (pullback.diagonal_fst f)
+  have := G
+  obtain ⟨κ, hκ, _⟩ := FiniteRingSectionDeformation.existsUnique_normalized
+    N hN A hA hX d (pullback.fst f f) (pullback.diagonal f) (pullback.diagonal_fst f)
+  have : HasInvertibleExponent A X := ⟨N, hN, hA, hX⟩
+  have : IsIso (dualizingComplexBaseChangeMap A (IsPullback.of_hasPullback f f).flip) := by
+    have := isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension
+      A f d (IsPullback.of_hasPullback f f).flip
+    exact (isIso_dualizingComplexBaseChangeMap_iff A _).2 inferInstance
+  have : IsIso (finiteSmoothDiagonalFactor A f) := by
+    unfold finiteSmoothDiagonalFactor
+    infer_instance
+  have := FiniteRingSectionDeformation.isIso_specialization
+    N hN A hA hX d (pullback.fst f f) (pullback.diagonal f)
+      (pullback.diagonal_fst f) κ hκ
+  let q := reesConeComparison (pullback.diagonal f) ≪≫
+    FiniteRingSectionDeformation.coneBundleIso d (pullback.fst f f) (pullback.diagonal f)
+  have hq : q.hom ≫ VectorBundleZeroSection.π X d
+      (ConormalGradedAlgebra.piece (pullback.diagonal f) 1) =
+      Scheme.Hom.normalConeProj (pullback.fst f f) (pullback.diagonal f) := by
+    dsimp [q]
+    rw [Category.assoc,
+      (FiniteRingSectionDeformation.coneBundleIso_spec d (pullback.fst f f)
+        (pullback.diagonal f) (pullback.diagonal_fst f)).1,
+      (reesConeComparison_spec (pullback.diagonal f)).1]
+    exact Scheme.Hom.purityNormalProjection_eq _ _ (pullback.diagonal_fst f)
+  have sq : IsPullback q.hom
+      (Scheme.Hom.normalConeProj (pullback.fst f f) (pullback.diagonal f))
+      (VectorBundleZeroSection.π X d (ConormalGradedAlgebra.piece (pullback.diagonal f) 1))
+      (𝟙 X) := IsPullback.of_horiz_isIso ⟨by simpa using hq⟩
+  have := smoothOfRelativeDimension_isStableUnderBaseChange (n := d)
+  have : SmoothOfRelativeDimension d
+      (Scheme.Hom.normalConeProj (pullback.fst f f) (pullback.diagonal f)) :=
+    MorphismProperty.of_isPullback (P := @SmoothOfRelativeDimension d)
+      (Scheme.Hom.isPullback_normalConeToDeformationSpace
+        (pullback.fst f f) (pullback.diagonal f)) inferInstance
+  let π := VectorBundleZeroSection.π X d
+    (ConormalGradedAlgebra.piece (pullback.diagonal f) 1)
+  have : SmoothOfRelativeDimension d π := by
+    apply (MorphismProperty.cancel_left_of_respectsIso
+      (@SmoothOfRelativeDimension d) q.hom π).mp
+    rw [hq]
+    infer_instance
+  have : HasInvertibleExponent A (VectorBundleZeroSection.scheme X d
+      (ConormalGradedAlgebra.piece (pullback.diagonal f) 1)) :=
+    HasInvertibleExponent.of_hom π
+  let := (vectorBundlePurityCompactification X d
+    (ConormalGradedAlgebra.piece (pullback.diagonal f) 1)).hasCompactification
+  have : IsIso (dualizingComplexBaseChangeMap A sq) := by
+    have := isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension A π d sq
+    exact (isIso_dualizingComplexBaseChangeMap_iff A sq).2 inferInstance
+  have : IsIso (normalSectionMap A d (pullback.fst f f) (pullback.diagonal f)
+      (pullback.diagonal_fst f) sq) := by
+    unfold normalSectionMap NoetherianSectionSpecialization.sectionMap
+    infer_instance
+  have := (FiniteRingSectionDeformation.bundleAdjoint_isIso
+    N hN A hA X hX d (ConormalGradedAlgebra.piece (pullback.diagonal f) 1)).2
+  let alpha : dualizingComplex (ModuleCat.{u + 1} A) f ≅ line A N hA X d :=
+    asIso (finiteSmoothDiagonalFactor A f) ≪≫
+      asIso (NoetherianSectionSpecialization.specialization A
+        (pullback.fst f f) (pullback.diagonal f) κ) ≪≫
+      (asIso (normalSectionMap A d (pullback.fst f f) (pullback.diagonal f)
+        (pullback.diagonal_fst f) sq)).symm ≪≫
+      FiniteRingSectionDeformation.bundleOrientation N hN A hA X hX d
+        (ConormalGradedAlgebra.piece (pullback.diagonal f) 1)
+  refine ⟨G, alpha, κ, hκ, sq, ?_⟩
+  dsimp [alpha, FiniteRingSectionDeformation.bundleOrientation]
+  simp only [Category.assoc, IsIso.inv_hom_id_assoc, IsIso.inv_hom_id, Category.comp_id]
+
 /-- Finite smooth purity with Kummer/diagonal normalization, actual adjunction counits,
 and coherent reduction for every positive quotient, over any ground field.
 Source: main-20261015, sk-thm-smooth-purity, sk-prop-sp-orientation and
@@ -364,41 +421,26 @@ sk-lem-sp-reduction/compatibilities
 (blueprint: lem-pur-finite-smooth-adjunction-general-base).
 
 Proof:
-1. The characteristic hypothesis makes ell^n invertible, so its root scheme is finite
-   etale. Comparison identifies it by its inclusion into units and hence identifies every
-   tensor power. A field is Noetherian; finite type makes X and Y Noetherian. The graph
-   factorization
-   makes f separated finite type; Nagata gives a compactification and the ordinary
-   compact-support adjunction. No ambient unbounded pro-etale adjoint is used.
-2. Finite reduction on bounded flat K-flat models preserves intrinsic constructibility,
-   the ordered Tor interval, and ordinary etale origin, without quotient flatness.
-3. Form b on one compactification by identity/zero for the open factor and the proper
-   projection/counit mate. Tensor associativity gives its quotient cocycle.
-4. The exceptional coefficient comparison theorem gives the actual counit transpose c,
-   its naturality, tensor-map equation and base-change compatibility before invertibility.
-5. Kummer/projective-line integration defines the bundle orientation. Its unit and common
-   Kummer Chern class commute with reduction. Iterate the ordered affine-line counits;
-   trivializing covers and degree-zero full faithfulness glue the trace equality.
-6. Apply normalized section specialization to the diagonal. The finite-ring section
-   deformation theorem supplies its geometry and canonical symmetric-algebra comparison.
-   Transport the Rees zero fibre by the uniquely specified homogeneous comparison, then
-   by coneBundleIso; coneBundleIso_spec supplies its projection and zero-section identities.
-   The unique comparison at t=1 and its value at zero, followed by inverse bundle
-   integration, give alpha. Mate pasting and diagonal-orientation compatibility prove
-   its coefficient equation.
-7. Compose inverse alpha with the smooth tensor map phi. Each factor is invertible and
-   natural. Pull back bounded flat models and tensor with the locally free root line;
-   the Tor interval shifts by -2d. Pull back finite strata to obtain constructibility.
-8. At d=0 the gamma-normalization theorem identifies all factors with the graph-normalized
-   etale sum adjunction, including its specified counit, proving both displayed equations.
-9. Transport through exact comparison using its normalized tensorator, pullback square,
-   open/proper site comparison and actual origin counit. Full faithfulness makes this
-   independent of every chosen origin, and transports the trace and both coefficient maps.
-10. Substitute the orientation and tensor-map coefficient equations to obtain
-    S(gamma) followed by c equals lambda followed by gamma. The counit identity and
-    adjunction bijectivity give all quotient cocycles. At the coefficient unit the root
-    line is a sheaf, so source and target have cohomology only in degree -2d. The same
-    comparison equations specialize to that unit and all its successive reductions.
+1. Finite type over the ground field makes X and Y Noetherian. Nagata supplies the
+   compactification. The characteristic hypothesis makes ell a global unit, hence
+   makes every positive ell-power a global unit and gives the required stalk units.
+2. Construct the orientation from the diagonal smooth-base-change isomorphism,
+   normalized section specialization, the actual Rees/cone-to-bundle comparison and
+   inverse bundle integration. The projection identities give the required pullback
+   square. Cancellation proves the complete OrientationNormalized equation.
+3. Apply finiteSmoothLevelOfOrientation at each positive level. Its only geometric
+   remainder is the separate rank-zero normalization; it proves the tensor, origin,
+   counit, trace, constructibility, Tor and degree assertions. Apply
+   finiteSmoothTwoLevelReduction to each pair for the source's independent two-level
+   argument: normalized root comparison, coefficient compatibility of the diagonal,
+   deformation and bundle orientation, followed by tensor/counit and site transport.
+4. The proved finiteSmoothSiteRealizations supplies normalized root transport on X
+   and Y. The existing intrinsic compact-support comparison supplies the requested
+   realization. Apply finiteSmoothQuotientCoherence to the resulting normalized
+   twists for the compact-support cocycle and the eight other quotient equations.
+   The existing exceptional coefficient comparison, using that compact-support
+   cocycle, gives the remaining ordinary exceptional cocycle. Assemble the system.
+   Witness selections occur only inside this existential proof.
 -/
 theorem finiteSmoothAdjunctionGeneralBase
     (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k] [Fact (ringChar k ≠ ell)]
@@ -410,6 +452,61 @@ theorem finiteSmoothAdjunctionGeneralBase
     [LocallyOfFiniteType f] [QuasiCompact f] (d : ℕ) [SmoothOfRelativeDimension d f] :
     ∃ (c : Compactification f) (hX : IsNoetherian X) (hY : IsNoetherian Y),
       FiniteSmoothAdjunctionDatum ell f d c hX hY := by
-  sorry
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have hX : IsNoetherian X := {}
+  have : IsLocallyNoetherian Y :=
+    LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (.of k))
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (.of k))
+  have hY : IsNoetherian Y := {}
+  let c := NagataCompactification f
+  refine ⟨c, hX, hY, ?_⟩
+  change FiniteSmoothSystem ell f d
+  have hk : IsUnit (ell : k) :=
+    (CharP.cast_ne_zero_of_ne_of_prime k (Fact.out : ell.Prime)
+      (Fact.out : ringChar k ≠ ell)).isUnit
+  have hSpec : IsUnit (ell : Γ(Spec (.of k), ⊤)) := by
+    simpa only [map_natCast] using hk.map (Scheme.ΓSpecIso (.of k)).inv.hom
+  have hXu : IsUnit (ell : Γ(X, ⊤)) := by
+    simpa only [map_natCast] using hSpec.map (X ↘ Spec (.of k)).appTop.hom
+  have hYu : IsUnit (ell : Γ(Y, ⊤)) := by
+    simpa only [map_natCast] using hSpec.map (Y ↘ Spec (.of k)).appTop.hom
+  have hYs : ∀ y : Y, IsUnit (ell : Y.presheaf.stalk y) := by
+    intro y
+    simpa only [map_natCast] using hYu.map (Y.presheaf.germ ⊤ y trivial).hom
+  have hlevels : ∀ (n : ℕ) (_hn : 1 ≤ n), Nonempty (Level ell n f d) := by
+    intro n hn
+    have hXn : IsUnit ((ell ^ n : ℕ) : Γ(X, ⊤)) := by
+      simpa only [Nat.cast_pow] using hXu.pow n
+    obtain ⟨G, alpha, hAlpha⟩ := normalizedOrientation (coefficient ell n) (ell ^ n)
+      (pow_pos (Fact.out : ell.Prime).pos n) (CharP.cast_eq_zero _ _) f d hXn
+    exact finiteSmoothLevelOfOrientation ell f d hYs n hn G hXn alpha hAlpha
+  let level (n : ℕ) (hn : 1 ≤ n) := (hlevels n hn).some
+  have hreductions : ∀ (r m : ℕ) (hm : 1 ≤ m) (hmr : m ≤ r),
+      Nonempty (ReductionData (FiniteReduction.quotient ell hmr) f d
+        (level r (hm.trans hmr)) (level m hm)) := by
+    intro r m hm hmr
+    exact finiteSmoothTwoLevelReduction ell f d hYs r m hm hmr
+      (level r (hm.trans hmr)) (level m hm)
+  let reduction (r m : ℕ) (hm : 1 ≤ m) (hmr : m ≤ r) :=
+    (hreductions r m hm hmr).some
+  have hRoots := finiteSmoothSiteRealizations ell f d hYs
+  have hIntrinsic : ∀ (n : ℕ) (_hn : 1 ≤ n)
+      (M : proCategory (coefficient ell n) X), IsCtf (coefficient ell n) X M →
+      Nonempty ((FiniteReduction.realize Y ell n).obj
+          ((proCompact (coefficient ell n) f).obj M) ≅
+        (Scheme.sfIntrinsicCompactSupport (HasCompactification.compactification f)
+          (FiniteReduction.Ring.{u} ell n)).obj ((FiniteReduction.realize X ell n).obj M)) := by
+    intro n _ M _
+    exact ⟨((ProEtale.sfIntrinsicCompactSupportComparison (FiniteReduction.Ring ell n)
+      (HasCompactification.compactification f)).app M).symm⟩
+  obtain ⟨hb, hCoherence⟩ := finiteSmoothQuotientCoherence ell f d hYs
+    (fun r m hm hmr ↦ (reduction r m hm hmr).twist)
+  have he : HasExceptionalCocycle ell f := by
+    intro r m n hn hnm hmr K hK
+    exact (exceptional_coefficient_comparison ell r m d hmr (hn.trans hnm) f hYs hb).2.2.2.1
+      n hnm hn K hK
+  exact ⟨level, reduction, hIntrinsic, hRoots, hb, he, hCoherence⟩
 
 end AlgebraicGeometry.Etale.FiniteSmoothPurity

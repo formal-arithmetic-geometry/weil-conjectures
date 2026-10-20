@@ -1,0 +1,122 @@
+{
+ "id": "lem-pur-finite-smooth-intrinsic-level-properties",
+ "kind": "statement",
+ "title": "Dimension-zero normalization of a supplied finite smooth orientation",
+ "statement": "For the supplied geometrically normalized orientation of finite smooth purity, in relative dimension zero the actual tensor mate composed with the supplied graph-normalized etale adjoint coordinates equals zeroSourceMap. The maps are exactly those of [def-pur-finite-smooth-canonical-maps] and [def-pur-finite-smooth-adjunction-data]. This is solely the geometric normalization step: naturality, constructible domains, actual origin counits, trace transport and the deduction of the dimension-zero trace equation are proved in the level assembly.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+  "place": "sk-thm-smooth-purity and proof: inverse diagonal orientation followed by the tensor map; sk-prop-sp-orientation.proof.md: diagonal, deformation, vector bundle; sk-lem-sp-reduction.proof.md and sk-lem-sp-reduction-compatibilities.proof.md: counit-defined coefficient comparisons and quotient cocycle. The ordinary-etale Noetherian formulation retains arbitrary ground fields."
+ },
+ "stmt_deps": [
+  "def-pur-finite-smooth-adjunction-data",
+  "def-pur-finite-smooth-canonical-maps",
+  "def-pur-finite-smooth-coefficient-arrows"
+ ],
+ "proof": [
+  {
+   "text": "First transport finite smooth gamma normalization from its single universe lift of Z/(ell^n) to the double lift used here, along the canonical ring equivalence. Extension and restriction along that equivalence preserve the units, root generators, tensor products and adjunction counits; the normalized comparisons identify the actual arrows. Apply finite smooth gamma normalization for the supplied graph-normalized sum comparison. The supplied section specialization and its comparison restrict to identity at one, so uniqueness of normalized section specialization identifies the deformation factors. In relative dimension zero the diagonal normal bundle has rank zero. Under its canonical cone-to-bundle identification, rank-zero bundle integration and the unit identification give the same rank-zero factor as finite smooth gamma normalization. Substitution in OrientationNormalized identifies alpha with its normalized omega coordinates. The tensor mate identity then gives the required equation, with the empty tensor identified using zeroLineIso.",
+   "uses": [
+    "lem-pur-finite-smooth-gamma-normalization",
+    "lem-pur-noetherian-etale-section-specialization",
+    "lem-trf-finite-ring-section-deformation",
+    "def-amb-vector-integration"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-smooth-gamma-normalization",
+  "lem-pur-noetherian-etale-section-specialization",
+  "lem-trf-finite-ring-section-deformation",
+  "def-amb-vector-integration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+  "place": "Geometric dimension-zero normalization remainder; all categorical transport and trace assertions are proved in FiniteSmoothLevelOfOrientation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "smooth purity finite torsion coefficient quotient cocycle derived etale adjunction",
+   "results": "Eight hits, including derived adjunction factorization and smooth ring definitions; none supplies these geometric finite-coefficient assertions.",
+   "date": "2026-10-19",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsNoetherian",
+   "results": "Existing Noetherian permanence API found and used in the parent; it does not supply normalized finite smooth adjunction or coefficient coherence.",
+   "date": "2026-10-19",
+   "verdict": "Use existing geometric setup; no match for this obligation."
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteSmoothSystem|SmoothLevel|ReductionData|OrientationNormalized|ordinary_natural|origin_ctf|trace_transport|HasTwistCocycle|roots_power",
+   "results": "Read FiniteSmoothAdjunctionData, FiniteSmoothPurityMaps, FiniteSmoothCoefficientArrows and the original proof dependency modules. The exact remaining assembly or coherence theorem is absent.",
+   "date": "2026-10-19",
+   "verdict": "Reuse all canonical definitions; isolate only the missing proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSmoothAdjunctionGeneralBase",
+  "date": "2026-10-19",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-smooth-purity-qbar",
+   "place": "Intrinsic finite-level finiteness and normalization in lem-pur-finite-smooth-level-of-orientation",
+   "via": [
+    "lem-pur-finite-smooth-level-of-orientation",
+    "lem-pur-finite-smooth-adjunction-general-base",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSmoothIntrinsicLevelProperties",
+  "file": "lean/Sheaf/Paper/FiniteSmoothIntrinsicLevelProperties.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.finiteSmoothIntrinsicLevelProperties",
+  "statement": "theorem finiteSmoothIntrinsicLevelProperties\n    (ell : ℕ) [Fact ell.Prime]\n    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n    (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] [IsSeparated f]\n    [LocallyOfFiniteType f] (d : ℕ) [SmoothOfRelativeDimension d f]\n    (hY : ∀ y : Y, IsUnit (ell : Y.presheaf.stalk y))\n    (n : ℕ) (hn : 1 ≤ n)\n    (G : FiniteRingSectionDeformation.Geometry d\n      (pullback.fst f f) (pullback.diagonal f))\n    (hX : IsUnit ((ell ^ n : ℕ) : Γ(X, ⊤)))\n    (alpha : dualizingComplex (ModuleCat.{u + 1} (coefficient ell n)) f ≅\n      line (coefficient ell n) (ell ^ n) (CharP.cast_eq_zero _ _) X d)\n    (hAlpha : OrientationNormalized (coefficient ell n) (ell ^ n)\n      (pow_pos (Fact.out : ell.Prime).pos n) (CharP.cast_eq_zero _ _) f d G hX alpha) :\n    let A := coefficient ell n;\n    let N := ell ^ n;\n    let hA : (N : A) = 0 := CharP.cast_eq_zero _ _;\n    /- dimension_zero -/\n    (∀ hd : d = 0, ∀ [Etale f],\n      ∀ C : FiniteSmoothCompactSupportComparisons A, FiniteSmoothComparisonNormalized A C →\n      ∀ K : DerivedCategoryModule A Y,\n        gamma A f (line A N hA X d) alpha K ≫\n            (finiteSmoothAdjointCoordinates A C f).hom.app K = zeroSourceMap A N hA f d hd K)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261020T051002-L-1519603",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261020T051002-L-1519603",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
