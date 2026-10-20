@@ -18908,3 +18908,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:50 L: returned deliver/R6/Sheaf.Paper.CoefficientEvaluationDerivedLeftAdjoint (reviewer RETURN: (reviewer C-2b1eb, head 2b1eb3be9) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.CoefficientEva)
 
 - 05:51 L: batch 20261020T211611 dependency take-out
+- 21:51 L: returned deliver/Q4/Sheaf.Paper.FiniteLevelRectangle (reviewer RETURN: (reviewer C-4405c, head 4405cb369) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.FiniteLevelRec)
