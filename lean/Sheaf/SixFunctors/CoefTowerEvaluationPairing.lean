@@ -21,6 +21,8 @@ public import Mathlib.CategoryTheory.Monoidal.Closed.FunctorCategory.Basic
 public import Mathlib.CategoryTheory.Monoidal.FunctorCategory
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 
+import Mathlib.CategoryTheory.Generator.Presheaf
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.FunctorCategory
 import Sheaf.Paper.CoefficientRingedSequenceSite
 import Sheaf.Paper.CoefficientRingedTensorHomModel
 import Sheaf.Paper.CoefficientHomRepresentativeEvaluation
@@ -68,7 +70,6 @@ compact-support tower, before its trace. All constructions retain the tower inde
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option relaxedAutoImplicit false
-set_option warn.sorry false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -94,7 +95,7 @@ Filtered colimits and exactness are levelwise; coproducts of the free representa
 form a generator. This is also the trivial-topology sheaf presentation. -/
 @[instance] theorem coefPairingModules_grothendieck :
     IsGrothendieckAbelian.{u + 1} (coefPairingModules l E) := by
-  sorry
+  exact { ab5OfSize := ⟨fun _ _ _ ↦ inferInstance⟩ }
 
 /-- Functorial flat resolutions for the pointwise tensor of strict module towers.
 Source: Stacks 06YY, 0941 (blueprint: lem-coef-tower-evaluation-pairing).
@@ -103,7 +104,26 @@ so tensor with it preserves finite limits levelwise. The free representables for
 a flat separator. Apply the functorial-flat-resolution theorem for flat separators. -/
 @[instance] theorem coefPairingModules_flat :
     Abelian.HasFunctorialFlatResolution (coefPairingModules l E) := by
-  sorry
+  obtain ⟨G, hG, hflat⟩ :=
+    Abelian.exists_flat_separator_of_hasFunctorialFlatResolution
+      (ModuleCat.{u + 1} (coefTraceRing l E))
+  apply Abelian.hasFunctorialFlatResolution_of_flat_separator _
+    (Presheaf.isSeparator ℕ (S := fun _ : ULift.{u + 1} Unit ↦ G) (by
+      intro X Y f g h
+      exact hG.def f g (fun k ↦ h G ⟨ULift.up ()⟩ k)))
+  apply ObjectProperty.flat_coproduct
+  rintro ⟨n, _⟩
+  rw [ObjectProperty.flat_iff_preservesFiniteLimits]
+  have (m : ℕᵒᵖ) :
+      PreservesFiniteLimits (tensorLeft ((Presheaf.freeYoneda n G).obj m)) :=
+    (ObjectProperty.flat_iff_preservesFiniteLimits _).1
+      (ObjectProperty.prop_of_iso ObjectProperty.flat
+        (Sigma.reindex (Equiv.ulift : ULift.{u + 1} _ ≃ _) _)
+        (ObjectProperty.flat_coproduct _ fun _ ↦ hflat))
+  exact preservesFiniteLimits_of_evaluation _ fun m ↦
+    inferInstanceAs (PreservesFiniteLimits
+      ((evaluation ℕᵒᵖ (ModuleCat.{u + 1} (coefTraceRing l E))).obj m ⋙
+        tensorLeft ((Presheaf.freeYoneda n G).obj m)))
 
 /-- The ordinary unbounded derived category of strict R-module towers.
 Source: Stacks 0941 (blueprint: lem-coef-tower-evaluation-pairing). -/
@@ -245,8 +265,8 @@ Source: Stacks 0941 (blueprint: lem-coef-tower-evaluation-pairing).
 Proof: sections add pointwise and restriction of scalars changes no addition of maps. -/
 @[instance] theorem coefPairingOrdinarySections_additive (W : Scheme.{u}) :
     ((sheafSections (ProEt.topology W) (ModuleCat.{u + 1} (coefTraceRing l E))).obj
-      (op (ProEt.mk (𝟙 W)))).Additive := by
-  sorry
+      (op (ProEt.mk (𝟙 W)))).Additive where
+  map_add := rfl
 
 /-- Ordinary sections with the fixed constant integral action, prior to deriving.
 Source: blueprint step 2 (blueprint: lem-coef-tower-evaluation-pairing). -/
@@ -271,7 +291,10 @@ theorem coefPairingComplexTower_shape {A : Type a} [Category.{v} A]
     [HasZeroMorphisms A] (F : ℕᵒᵖ ⥤ CochainComplex A ℤ) (i j : ℤ)
     (_h : ¬ (ComplexShape.up ℤ).Rel i j) :
     Functor.whiskerLeft F (HomologicalComplex.dNatTrans A (.up ℤ) i j) = 0 := by
-  sorry
+  ext n
+  dsimp
+  change (F.obj n).d i j = 0
+  exact F.obj n |>.shape i j _h
 
 /-- The reassembled differential squares to zero.
 Source: Stacks 0941 (blueprint: lem-coef-tower-evaluation-pairing).
@@ -282,7 +305,10 @@ theorem coefPairingComplexTower_d_comp_d {A : Type a} [Category.{v} A]
     [HasZeroMorphisms A] (F : ℕᵒᵖ ⥤ CochainComplex A ℤ) (i j k : ℤ) :
     Functor.whiskerLeft F (HomologicalComplex.dNatTrans A (.up ℤ) i j) ≫
       Functor.whiskerLeft F (HomologicalComplex.dNatTrans A (.up ℤ) j k) = 0 := by
-  sorry
+  ext n
+  dsimp
+  change (F.obj n).d i j ≫ (F.obj n).d j k = 0
+  exact F.obj n |>.d_comp_d i j k
 
 /-- Reassemble a strict functor to complexes as a complex of strict towers.
 Source: Stacks 0941 (blueprint: lem-coef-tower-evaluation-pairing). -/
