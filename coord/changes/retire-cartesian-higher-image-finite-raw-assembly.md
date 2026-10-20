@@ -140,3 +140,25 @@ route needs modification.
 ## Status
 
 landed 20261020T132051-L-1408849 2026-10-20 (merge of deliver/V3/Sheaf.AlgebraicGeometry.CartesianHigherImageFiniteRawAssembly)
+
+## Maintenance: completed retirement marker (2026-10-20)
+
+The V3 retirement landed at 2761b4d54d (landing 20261020T132051-L-1408849).
+The later E1 commit 427c1e776a changed the empty assembly module's canonical
+`Withdrawn: no declarations remain.` marker to
+`Withdrawn: no declarations remain; use the official WeilConjectures twin.`
+Both tools/rework.py `_present` and the remote dispatcher's finished-item check
+recognize the period-terminated marker literally. The semicolon reopened this
+completed retirement, repeatedly assigning E4 a delivery which preflight correctly
+rejected because the item had not changed.
+
+Maintenance restores the period and keeps the twin guidance as a separate sentence.
+The module still contains only `module` and a comment, below the 200-character
+withdrawal limit. There are no remaining live Lean importers or DAG lean attachments
+for the copy; the three official consumers already use WeilConjectures modules.
+No mathematics or source-library declaration changes. Keep this exact marker in
+withdrawn stubs; a new retirement delivery for this item is unnecessary.
+
+Backups of both edited files are adjacent `*.maintenance-<UTC timestamp>.bak` files.
+Validation uses tools/lean_file.sh sequentially with SHEAF_FILE_TIMEOUT=60 for the
+stub and the three official consumers, plus the queue and dispatcher predicates.
