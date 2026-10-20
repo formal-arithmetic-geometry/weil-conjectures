@@ -1,6 +1,6 @@
 # Work queue
 
-197 items; claim with `tools/claim.py next <group> [--stage N]`.
+184 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (96 clusters, 2492 modules)
 
@@ -105,7 +105,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.Etale.Derived.UpperShriek` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/Etale/Derived/UpperShriek.lean:104:0: error: Unexpected name `Unbounded` after `end`: The current section |
 | `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/UpperLowerStar/Coherence.lean:116:0: error: Unexpected name `Eta` after `end`: |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 2, stage 2 32, stage 3 135 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 2, stage 2 33, stage 3 134 items.
 
 ## Stage 1: nodes to split (0)
 
@@ -124,13 +124,13 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `WeilConjectures.SixFunctors.Etale.Derived.Exchange` | 7 | 1 | disputed | route |
 | `Sheaf.Paper.LisseAdicSheaves` | 6 | 2 | proof | route |
 | `WeilConjectures.SixFunctors.Etale.Derived.CompactificationUpperShriek` | 8 | 1 | proof | route |
+| `Sheaf.CategoryTheory.BraidedSheafTensorGenerators` | 9 | 2 | proof | route |
 | `Sheaf.CategoryTheory.LocalizationInverseImageCoherence` | - | 2 | proof | 2 |
 | `Sheaf.CategoryTheory.ConstantLeftModuleInverseImage` | - | 1 | proof | 3 |
 | `Sheaf.CategoryTheory.Sites.GeometricInverseImageExact` | - | 1 | proof | 3 |
 | `Sheaf.Paper.InvertibleTensorScalarExtension` | - | 1 | proof | 4 |
 | `Sheaf.Algebra.Homology.RingedSiteRestrictionKFlat` | - | 1 | proof | 5 |
 | `Sheaf.Paper.FiniteFieldDerivedTensorSummand` | - | 1 | proof | 6 |
-| `Sheaf.AlgebraicGeometry.FiniteAffineProetaleRefinement` | - | 1 | proof | 7 |
 
 ## Stage 3: held for an open upstream PR (22)
 
