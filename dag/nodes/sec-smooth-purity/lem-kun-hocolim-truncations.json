@@ -18,50 +18,49 @@
  ],
  "proof": [
   {
-   "text": "Choose a cochain complex $C^\\bullet$ of $\\Lambda_T$-module sheaves representing $E$, using [def-weil-pbc-derived-categories]. Realize the good truncations of [def-kun-truncations] by the subcomplexes $C_N=\\tau_{\\le N}C$: $C_N^i=C^i$ for $i<N$, $C_N^N=\\ker(d^N)$, and $C_N^i=0$ for $i>N$. This is the standard truncation subcomplex in [def-sbc-standard-tstructure-derived-category], shifted from degree zero to degree $N$. Its differential into degree $N$ is $d^{N-1}$ with codomain restricted to $\\ker(d^N)$, since $d^Nd^{N-1}=0$. The inclusions $C_N\\to C_{N+1}\\to C$ define the truncation sequence and its compatible cocone to $C$. We index it by $N\\in\\mathbf N$, which is sufficient for $N\\to+\\infty$.",
+   "text": "In the derived category of etale Lambda-module sheaves, form the natural-number diagram of the canonical upper truncations and their inclusions into E. Compatibility of truncation inclusions implies that the sum a of the inclusions annihilates the specified telescope endomorphism t=1-shift. Exactness of Hom(-,E) on the given distinguished triangle gives c:H→E with p c=a, hence all required coprojection equations.",
    "uses": [
     "def-weil-pbc-derived-categories",
-    "def-kun-truncations",
-    "def-sbc-standard-tstructure-derived-category"
+    "def-kun-truncations"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0118, section-truncations, canonical truncation of cochain complexes"
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-hocolim-truncations.md",
+    "place": "node lem-kun-hocolim-truncations, order 1720"
    }
   },
   {
-   "text": "For every integer $i$, choose $M\\in\\mathbf N$ with $M>i+1$. In degrees $i$ and $i+1$, all $C_N$ for $N\\ge M$ equal $C$, the transition maps are identities and the differential is $d^i$. The cocone $C_N^i\\to C^i$ is colimiting: a compatible family of maps $C_N^i\\to F$ is uniquely determined by its map $C_M^i=C^i\\to F$, because for $N<M$ compatibility forces the composite $C_N^i\\to C_M^i\\to F$, and for $N\\ge M$ forces the same map. Thus the induced map $\\varinjlim_N C_N^i\\to C^i$ is an isomorphism. Write $j_N^i:C_N^i\\to L^i$ for the structure maps into the degreewise colimit and $a^i:L^i\\to C^i$ for the resulting isomorphism. The colimit differential $\\delta^i$ is determined by $\\delta^i j_N^i=j_N^{i+1}d_{C_N}^i$. Since each inclusion $b_N:C_N\\to C$ is a chain map, $(a^{i+1}\\delta^i)j_N^i=b_N^{i+1}d_{C_N}^i=d^ib_N^i=(d^ia^i)j_N^i$. Uniqueness in the colimit universal property gives $a^{i+1}\\delta^i=d^ia^i$. Thus the degreewise isomorphisms $a^i$ form an isomorphism of complexes $\\varinjlim_N C_N^\\bullet\\xrightarrow{\\sim}C^\\bullet$.",
+   "text": "For any abelian category, a compatible cocone whose maps are isomorphisms from some index N onward is colimiting: use the inverse of its Nth map to define descent and use compatibility on either side of N for the factorization equations. Consequently, if B is the coproduct and t=1-shift, the sum a of the cocone maps is a cokernel of t. Indeed, a map out of B annihilates t exactly when its restrictions to the summands form a compatible cocone. This argument is the proved private stableTelescopeCokernel construction.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-hocolim-truncations.md",
-    "place": "Proof, termwise colimit of the truncations; explicit eventually constant calculation"
+    "place": "node lem-kun-hocolim-truncations, order 1720"
    }
   },
   {
-   "text": "Apply [lem-kun-complex-colimit-hocolim] to this sequence of complexes of etale module sheaves: its canonical morphism $\\operatorname{hocolim}_N C_N\\to\\varinjlim_N C_N$ is a quasi-isomorphism. Compose it with the complex isomorphism to $C$ constructed in step 2. This composite is the canonical morphism in the statement: the map to the termwise colimit followed by its cocone map to $C$ is induced by the inclusions $C_N\\to C$. In the localization at quasi-isomorphisms of [def-weil-pbc-derived-categories], the first map is invertible and the second already is invertible. Their composite is therefore an isomorphism to $E$.",
+   "text": "Homology preserves countable coproducts in the derived category of etale module sheaves by the proved source-library DerivedCategory.preservesColimitsOfShape_homologyFunctor. The sheaf category is Grothendieck abelian; AB5 implies exact countable coproducts. Apply [lem-kun-sequential-telescope-mono] after each homology functor: H^r(t) is monic in every degree. The long exact homology sequence of the given triangle then makes H^r(p) a cokernel of H^r(t). The standard truncation triangle implies H^r(truncLEι(n)) is invertible for r≤n: the complementary truncGE(n+1) has zero homology in degrees r-1 and r. Take N=r.toNat. The previous step shows H^r(a) is also a cokernel of H^r(t). The equality H^r(p) H^r(c)=H^r(a) identifies H^r(c) with the canonical map between these cokernels, so it is invertible. Mathlib DerivedCategory.isIso_iff now proves c invertible.",
    "uses": [
-    "lem-kun-complex-colimit-hocolim",
-    "def-weil-pbc-derived-categories"
+    "lem-kun-sequential-telescope-mono",
+    "def-sbc-standard-tstructure-derived-category"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0949, lemma-colim-hocolim; canonical colimit cocone"
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-hocolim-truncations.md",
+    "place": "node lem-kun-hocolim-truncations, order 1720"
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-derived-categories",
   "def-kun-truncations",
-  "def-sbc-standard-tstructure-derived-category",
-  "lem-kun-complex-colimit-hocolim"
+  "lem-kun-sequential-telescope-mono",
+  "def-sbc-standard-tstructure-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-hocolim-truncations.md",
-  "place": "Proof, made explicit by the termwise stabilization calculation (Stacks 0118 and 0949)"
+  "place": "Proof via eventual stabilization on homology, the standard truncation triangle, sequential telescope monicity, and the universal property of cokernels; V4, 2026-10-20."
  },
  "mathlib_searches": [
   {
@@ -173,5 +172,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "Uses the recorded telescope formula with an arbitrary coproduct cofan and its universal property. The conclusion supplies an invertible comparison induced by the truncation cocone rather than assuming that comparison exists. No functorial or unique cone choice is asserted."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261020T132052-L-1409056",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
