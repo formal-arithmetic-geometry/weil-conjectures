@@ -48,7 +48,7 @@
    "elementary": false
   },
   {
-   "text": "Use the same rearranged associativity component equations for (e prime,f prime,g), (e prime,g prime,f), and (g double prime,e,f). Communtativity of the squares identifies the intermediate diagonals, and the internal comparison maps cancel. This expresses the outer square comparison as the vertical composite with the source and target composition isomorphisms. Precompose with the inverse source comparison and cancel it to obtain (3). Specialize the three proved identities from arbitrary Grothendieck abelian coefficients to AddCommGrpCat. The sheaf-level identities mentioned at the end of the node are already the source declarations squareUpperStarIso_id and squareUpperStarIso_paste_horiz_hom / squareUpperStarIso_paste_vert_hom; no duplicate declarations are needed.",
+   "text": "Use the same rearranged associativity component equations for (e prime,f prime,g), (e prime,g prime,f), and (g double prime,e,f). Commutativity of the squares identifies the intermediate diagonals, and the internal comparison maps cancel. This expresses the outer square comparison as the vertical composite with the source and target composition isomorphisms. Precompose with the inverse source comparison and cancel it to obtain (3). Specialize the three proved identities from arbitrary Grothendieck abelian coefficients to AddCommGrpCat. The sheaf-level identities mentioned at the end of the node are already the source declarations squareUpperStarIso_id and squareUpperStarIso_paste_horiz_hom / squareUpperStarIso_paste_vert_hom; no duplicate declarations are needed. In Lean, cancel the source comparison inside each generic component lemma, assemble the three formulas with all local functor notation expanded, and specialize to abelian groups. Expanding P, theta, c and i in the public statement is only beta/zeta reduction and inverse projection, preventing costly kernel conversions after the upstream sync.",
    "uses": [
     "def-weil-pbc-derived-square-iso",
     "lem-weil-pbc-derived-inverse-image-composition"
@@ -63,7 +63,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Remarks 0E46 and 0E47; Lemma 0D6D. Direct coherence proof on D-plus written by X2 from the already-proved pullbackSquareComparison_eq, upperStarCompDerivedPlus_assoc, and upperStarCompDerivedPlus_id_left/right; the rearrangements follow the existing sheaf-level proof in WeilConjectures.SixFunctors.BaseChange.Pasting."
+  "place": "Remarks 0E46 and 0E47; Lemma 0D6D. Direct coherence proof on D-plus written by X2 from the already-proved pullbackSquareComparison_eq, upperStarCompDerivedPlus_assoc, and upperStarCompDerivedPlus_id_left/right; the rearrangements follow the existing sheaf-level proof in WeilConjectures.SixFunctors.BaseChange.Pasting. P9 repair after the 2026-10-20 upstream sync: expand the local functor notation in the Lean signature, perform source cancellation in the generic components, and specialize the resulting explicit conjunction; the mathematical statement and coherence route are unchanged."
  },
  "mathlib_searches": [
   {
@@ -150,7 +150,7 @@
    "AlgebraicGeometry.Etale.derivedSquareIsoPasting"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/DerivedSquareIsoPasting.lean",
-  "statement": "theorem derivedSquareIsoPasting : let A := AddCommGrpCat.{u + 1} let P := fun {S T : Scheme.{u}} (q : S ⟶ T) => (upperStar A q).mapDerivedCategoryPlus let θ := fun {S T S' T' : Scheme.{u}} {a : S' ⟶ S} {b : S' ⟶ T'} {c : S ⟶ T} {d : T' ⟶ T} (sq : CommSq a b c d) => pullbackSquareComparison A sq let c := fun {R S T : Scheme.{u}} (a : T ⟶ S) (b : S ⟶ R) => (upperStarCompDerivedPlus A a b).symm let i := fun S : Scheme.{u} => upperStarIdDerivedPlus A S (∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A)), (θ (IsPullback.id_horiz f).toCommSq).hom.app K = (P f).map ((i Y).hom.app K) ≫ (i X).inv.app ((P f).obj K)) ∧ (∀ {X Y X' Y' X'' Y'' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} {g : Y' ⟶ Y} {g' : X' ⟶ X} {f'' : X'' ⟶ Y''} {h : Y'' ⟶ Y'} {h' : X'' ⟶ X'} (sq₁ : IsPullback g' f' f g) (sq₂ : IsPullback h' f'' f' h) (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A)), (P f'').map ((c h g).hom.app K) ≫ (θ (sq₂.paste_horiz sq₁).toCommSq).hom.app K = (θ sq₂.toCommSq).hom.app ((P g).obj K) ≫ (P h').map ((θ sq₁.toCommSq).hom.app K) ≫ (c h' g').hom.app ((P f).obj K)) ∧ (∀ {X Y X' Y' W W' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} {g : Y' ⟶ Y} {g' : X' ⟶ X} {e : W ⟶ X} {e' : W' ⟶ X'} {g'' : W' ⟶ W} (sq₁ : IsPullback g' f' f g) (sq₃ : IsPullback g'' e' e g') (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A)), (c e' f').hom.app ((P g).obj K) ≫ (θ (sq₃.paste_vert sq₁).toCommSq).hom.app K = (P e').map ((θ sq₁.toCommSq).hom.app K) ≫ (θ sq₃.toCommSq).hom.app ((P f).obj K) ≫ (P g'').map ((c e f).hom.app K))",
+  "statement": "theorem derivedSquareIsoPasting :\n    (∀ {X Y : Scheme.{u}} (f : X ⟶ Y)\n        (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})),\n      (pullbackSquareComparison AddCommGrpCat.{u + 1} (IsPullback.id_horiz f).toCommSq).hom.app K =\n        (upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategoryPlus.map\n          ((upperStarIdDerivedPlus AddCommGrpCat.{u + 1} Y).hom.app K) ≫\n          (upperStarIdDerivedPlus AddCommGrpCat.{u + 1} X).inv.app\n            ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategoryPlus.obj K)) ∧\n    (∀ {X Y X' Y' X'' Y'' : Scheme.{u}}\n        {f : X ⟶ Y} {f' : X' ⟶ Y'} {g : Y' ⟶ Y} {g' : X' ⟶ X}\n        {f'' : X'' ⟶ Y''} {h : Y'' ⟶ Y'} {h' : X'' ⟶ X'}\n        (sq₁ : IsPullback g' f' f g) (sq₂ : IsPullback h' f'' f' h)\n        (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})),\n      (upperStar AddCommGrpCat.{u + 1} f'').mapDerivedCategoryPlus.map\n          ((upperStarCompDerivedPlus AddCommGrpCat.{u + 1} h g).inv.app K) ≫\n          (pullbackSquareComparison AddCommGrpCat.{u + 1}\n            (sq₂.paste_horiz sq₁).toCommSq).hom.app K =\n        (pullbackSquareComparison AddCommGrpCat.{u + 1} sq₂.toCommSq).hom.app\n            ((upperStar AddCommGrpCat.{u + 1} g).mapDerivedCategoryPlus.obj K) ≫\n          (upperStar AddCommGrpCat.{u + 1} h').mapDerivedCategoryPlus.map\n            ((pullbackSquareComparison AddCommGrpCat.{u + 1} sq₁.toCommSq).hom.app K) ≫\n          (upperStarCompDerivedPlus AddCommGrpCat.{u + 1} h' g').inv.app\n            ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategoryPlus.obj K)) ∧\n    (∀ {X Y X' Y' W W' : Scheme.{u}}\n        {f : X ⟶ Y} {f' : X' ⟶ Y'} {g : Y' ⟶ Y} {g' : X' ⟶ X}\n        {e : W ⟶ X} {e' : W' ⟶ X'} {g'' : W' ⟶ W}\n        (sq₁ : IsPullback g' f' f g) (sq₃ : IsPullback g'' e' e g')\n        (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})),\n      (upperStarCompDerivedPlus AddCommGrpCat.{u + 1} e' f').inv.app\n          ((upperStar AddCommGrpCat.{u + 1} g).mapDerivedCategoryPlus.obj K) ≫\n          (pullbackSquareComparison AddCommGrpCat.{u + 1}\n            (sq₃.paste_vert sq₁).toCommSq).hom.app K =\n        (upperStar AddCommGrpCat.{u + 1} e').mapDerivedCategoryPlus.map\n            ((pullbackSquareComparison AddCommGrpCat.{u + 1} sq₁.toCommSq).hom.app K) ≫\n          (pullbackSquareComparison AddCommGrpCat.{u + 1} sq₃.toCommSq).hom.app\n            ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategoryPlus.obj K) ≫\n          (upperStar AddCommGrpCat.{u + 1} g'').mapDerivedCategoryPlus.map\n            ((upperStarCompDerivedPlus AddCommGrpCat.{u + 1} e f).inv.app K))",
   "branch": "sheaf-dag",
   "by": "C1",
   "date": "2026-10-11",
@@ -167,13 +167,13 @@
   "note": "sq₁/sq₂/sq₃ = IsPullback g' f' f g / h' f'' f' h / g'' e' e g'; θ = pullbackSquareComparison A sq.toCommSq (f'^*g^* ≅ g'^*f^*); c = (upperStarCompDerivedPlus a b).symm = cD of derivedInverseImageComposition, i = upperStarIdDerivedPlus = eD; id_horiz f = (f,f,id,id); paste_horiz/paste_vert give (g'h', f'', f, hg) and (g'', e'f', ef, g); all three equations in diagrammatic order match; sheaf restatement dropped for existing squareUpperStarIso_* lemmas"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X2",
+  "reviewer": "C-f1bda",
+  "group": "P9",
   "result": "pass",
-  "landing": "20261018T062945-L-690351",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T150700-L-2572860",
+  "kind": "proof",
+  "note": "independent cc review: delivered derivedSquareIsoPasting vs quarantined original: let/beta expansion + .symm.hom→.inv, elaborator accepts old statement from new theorem; compiles clean, axioms standard, no importers, node fields match Lean"
  }
 }
