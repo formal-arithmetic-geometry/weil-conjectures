@@ -120,14 +120,15 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-prop-input-spreading",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationBoundaryDimensionTwo",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StalkNormalizationBoundaryDimensionTwo.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationBoundaryDimensionTwo",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/StalkNormalizationBoundaryDimensionTwo.lean",
   "declaration": "AlgebraicGeometry.Scheme.stalk_normalization_boundary_dimension_two",
-  "statement": "theorem stalk_normalization_boundary_dimension_two {S C : Scheme.{u}}\n    [IsNoetherian S]\n    [QuasiSeparatedSpace S] [IsIntegral S]\n    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))\n    (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c]\n    (U : S.Opens) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)\n    (s : S) (hs : s ∉ U)\n    (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s)\n    (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth\n      (R := S.presheaf.stalk s) (S.presheaf.stalk s)) :\n    letI : IsFinite PA.obj.hom := PA.property\n    letI : QuasiCompact (c ⁻¹ᵁ U).ι :=\n      MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)\n        (inferInstance : QuasiCompact U.ι)\n    let a := S.fromSpecStalk s\n    let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a)\n    IsFinite n → ∀ z : (pullback\n      (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a) : Scheme.{u}),\n      n z ∉ (pullback.fst c a) ⁻¹ᵁ (c ⁻¹ᵁ U) →\n      (2 : WithBot ℕ∞) ≤ ringKrullDim\n        ((pullback (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization\n          (pullback.fst c a) : Scheme.{u}).presheaf.stalk z)",
+  "statement": "theorem stalk_normalization_boundary_dimension_two {S C : Scheme.{u}}\n    [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S]\n    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))\n    (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c]\n    (U : S.Opens) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)\n    (s : S)\n    (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s)\n    (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth\n      (R := S.presheaf.stalk s) (S.presheaf.stalk s)) :\n    letI : IsFinite PA.obj.hom := PA.property\n    letI : QuasiCompact (c ⁻¹ᵁ U).ι :=\n      MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)\n        (inferInstance : QuasiCompact U.ι)\n    let a := S.fromSpecStalk s\n    let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a)\n    IsFinite n → ∀ z : (pullback\n      (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a) : Scheme.{u}),\n      n z ∉ (pullback.fst c a) ⁻¹ᵁ (c ⁻¹ᵁ U) →\n      (2 : WithBot ℕ∞) ≤ ringKrullDim\n        ((pullback (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization\n          (pullback.fst c a) : Scheme.{u}).presheaf.stalk z)",
   "branch": "sheaf-dag",
-  "by": "T2",
-  "date": "2026-10-13"
+  "by": "E9",
+  "date": "2026-10-21",
+  "note": "E9: retirement requested by coord/retire-items.tsv. The upstream theorem has the same conclusion and drops only the unused hs hypothesis. The sole direct consumer retains its signature and omits hs in this application. The mathematical node and its proof route remain in use."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -140,18 +141,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E4",
+  "reviewer": "C-49fc6",
+  "group": "E9",
   "result": "pass",
-  "landing": "20261013T145119-L-695680",
+  "landing": "20261020T233131-L-898052",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.stalk_normalization_boundary_dimension_two"
-  ],
-  "sorry_after": []
+  "note": "independent cc review: retire-items.tsv row 2193 (Sheaf copy → WeilConjectures twin, drops unused hs) with the withdrawn item module, the adapted sole consumer StalkNormalizationFormalBoundaryDepths (import swap, hs dropped at the call, scoped linter option, signature unchanged), and the node lean record (byte-identical to the twin's signature); --all compile clean, axioms standard"
  },
  "lean_audit": {
   "master": {

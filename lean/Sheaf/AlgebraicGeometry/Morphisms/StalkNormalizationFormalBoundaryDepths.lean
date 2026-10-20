@@ -17,7 +17,7 @@ public import Mathlib.RingTheory.MvPowerSeries.Basic
 
 import Mathlib.RingTheory.MvPowerSeries.Equiv
 import WeilConjectures.RingTheory.MvPowerSeriesFlat
-import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationBoundaryDimensionTwo
+import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationBoundaryDimensionTwo
 import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationNormalPart
 import WeilConjectures.RingTheory.FlatLocalDepthFormula
 import WeilConjectures.RingTheory.NormalLocalDepthTwo
@@ -40,6 +40,8 @@ private theorem depth_le_of_flat_stalk {X Y : Scheme.{u}}
   rw [hd]
   exact le_self_add
 
+-- Retain the public boundary hypothesis, unused by the stronger upstream dimension lemma.
+set_option linter.unusedVariables false in
 /-- Source: Stacks Project, Tag 0EYJ; Tags 0EY6, 0EY9, 0337 and 031S.
 (blueprint: lem-sbc-stalk-normalization-formal-boundary-depths)
 
@@ -113,7 +115,7 @@ theorem GaloisCover.stalk_normalization_formal_boundary_depths {S C : Scheme.{u}
   have : IsLocallyNoetherian N := LocallyOfFiniteType.isLocallyNoetherian n
   have : IsLocallyNoetherian (pullback n t) :=
     LocallyOfFiniteType.isLocallyNoetherian (pullback.snd n t)
-  have hdim := stalk_normalization_boundary_dimension_two hS c U PA s hs hmin hdepth hn
+  have hdim := stalk_normalization_boundary_dimension_two hS c U PA s hmin hdepth hn
   have hnormal := stalk_normalization_normal_part hS c U PA s
   have hN : ∀ z : N, n z ∉ l ⁻¹ᵁ (c ⁻¹ᵁ U) →
       (2 : ℕ∞) ≤ IsLocalRing.depth (R := N.presheaf.stalk z) (N.presheaf.stalk z) := by
