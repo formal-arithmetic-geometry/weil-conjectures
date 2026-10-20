@@ -10,7 +10,7 @@ public import Sheaf.Paper.ProEtaleFixedModuleLocalConstancy
 public import Sheaf.Paper.AdicLisseModule
 public import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
 public import Sheaf.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction
-public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 public import WeilConjectures.Topology.Stratification
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import all Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
@@ -822,7 +822,7 @@ covering morphism. The finite-lisse cohomology covers can depend on both level a
 Source: blueprint order 1250; Stacks Tags 09AI and 09BT
 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
 def IsUniformlyBoundedConstructibleAdicTower (M : AdicTower X d) : Prop :=
-  ∃ (d₀ d₁ : ℤ), d₀ ≤ d₁ ∧ ∃ S : LocallyClosedStratification X,
+  ∃ (d₀ d₁ : ℤ), d₀ ≤ d₁ ∧ ∃ S : Stratification X,
     ∀ α : Fin S.n, ∃ V : Sieve (⊤_ (S.domain α).ProEt),
       V ∈ ProEt.topology (S.domain α) (⊤_ (S.domain α).ProEt) ∧
       ∀ (U : (S.domain α).ProEt) (f : U ⟶ ⊤_ (S.domain α).ProEt), V f →

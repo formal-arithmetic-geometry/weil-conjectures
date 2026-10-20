@@ -40,7 +40,7 @@ namespace AlgebraicGeometry.ProEtale
 
 private theorem etaleBounded_iff (T : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] (L : FiniteCoefficientEtaleDerivedCategory T Λ) :
-    ((∀ j : ℤ, ∃ S : Scheme.LocallyClosedStratification T,
+    ((∀ j : ℤ, ∃ S : Scheme.Stratification T,
       (∀ k : Fin S.n, Topology.IsConstructible (S.stratum k)) ∧
       ∀ k : Fin S.n,
         ∃ d : Scheme.LocallyConstantDatum

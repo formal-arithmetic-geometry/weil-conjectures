@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.CondensedFieldContinuousRealization
 public import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
 public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
 public import Sheaf.NumberTheory.Padics.CoefficientExtension
-public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 public import Mathlib.Topology.NoetherianSpace
 
 
@@ -233,7 +233,7 @@ theorem exists_finiteFree_cover_on_condensedField_strata
     (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E]
     [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
-    (S : Scheme.LocallyClosedStratification X)
+    (S : Scheme.Stratification X)
     (P : Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})
       (condensedRingObj (Profinite.continuousCoefficientRingObj E) X))
     (hP : ∀ a : Fin S.n,

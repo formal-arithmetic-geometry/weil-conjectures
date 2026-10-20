@@ -6,7 +6,7 @@ Authors: SHEAF group NF
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleRingInverseImage
-public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.CategoryTheory.ModuleInverseImageAdjunction
@@ -257,7 +257,7 @@ open/closed sequence of Tag 09AH gives zero on each neighborhood; covering detec
 gives zero globally. Actual immersion structures are retained, also for nonreduced strata.
 The constant integer sheaf action allows use of module localization and detection. -/
 theorem proEtale_isZero_of_stratum_cover (X : Scheme.{u})
-    [IsLocallyNoetherian X] [CompactSpace X] (S : LocallyClosedStratification X)
+    [IsLocallyNoetherian X] [CompactSpace X] (S : Stratification X)
     (V : ∀ a : Fin S.n, Scheme.Cover.{w} proetalePrecoverage (S.domain a))
     (F : Sheaf (ProEt.topology X) AddCommGrpCat.{u + 1})
     (hF : ∀ (a : Fin S.n) (j : (V a).I₀),
@@ -318,7 +318,7 @@ restrictions agree canonically with successive stratum and cover restrictions by
 adjunction composition formula, so the composite notation includes precisely the
 inverse images in the informal statement. -/
 theorem proEtale_derived_stratum_cover_detection (X : Scheme.{u})
-    [IsLocallyNoetherian X] [CompactSpace X] (S : LocallyClosedStratification X)
+    [IsLocallyNoetherian X] [CompactSpace X] (S : Stratification X)
     (V : ∀ a : Fin S.n, Scheme.Cover.{w} proetalePrecoverage (S.domain a))
     (R : Sheaf (ProEt.topology X) RingCat.{u + 1}) :
     (∀ K : DerivedCategory (ringedSiteModules.{u + 1} R),

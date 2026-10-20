@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModuleAdjunction
 public import Sheaf.AlgebraicGeometry.ProEtaleOperations
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
-public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 public import Sheaf.AlgebraicGeometry.ProEtaleGeometricStalk
 public import Sheaf.Paper.ProEtaleLocallyConstantSheaf
 public import Sheaf.Algebra.Homology.KFlat

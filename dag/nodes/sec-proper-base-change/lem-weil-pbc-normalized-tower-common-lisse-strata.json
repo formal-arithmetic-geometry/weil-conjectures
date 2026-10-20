@@ -104,7 +104,7 @@
   "module": "Sheaf.Paper.NormalizedTowerCommonLisseStrata",
   "file": "lean/Sheaf/Paper/NormalizedTowerCommonLisseStrata.lean",
   "declaration": "AlgebraicGeometry.Scheme.normalizedTower_common_lisse_strata",
-  "statement": "theorem normalizedTower_common_lisse_strata\n    (X : Scheme.{u}) [IsNoetherian X] {A : Type (u + 1)} [CommRing A]\n    (d : AdicCoefficientDatum A) (M : AdicTower X d)\n    (hconstructible : ∀ q : ℤ,\n      @IsConstructibleProEtaleCoefficientModuleSheaf X (A ⧸ d.ideal ^ (0 + 1)) _\n        (d.quotientFinite 0)\n        ((pbcRestrict (pbcLevelConstantComparison X d 0).hom).obj\n          ((DerivedCategory.homologyFunctor _ q).obj (M.level 0))))\n    (a b : ℤ) (hab : a ≤ b)\n    (hbounded : ∀ (n : ℕ) (q : ℤ), (q < a ∨ b < q) →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj (M.level n))) :\n    ∃ S : LocallyClosedStratification X, ∀ (i : Fin S.n) (n : ℕ) (q : ℤ),\n      IsRelativelyFiniteLisseModule (S.immersion i) (A ⧸ d.ideal ^ (n + 1))\n        ((pbcRestrict ((adicTowerInverseImage (S.immersion i)).map\n          (pbcLevelConstantComparison X d n).hom)).obj\n            ((DerivedCategory.homologyFunctor _ q).obj\n              ((adicTowerPullback (S.immersion i)\n                ((pbcAdicRings X d).obj (op n))).obj (M.level n))))",
+  "statement": "theorem normalizedTower_common_lisse_strata\n    (X : Scheme.{u}) [IsNoetherian X] {A : Type (u + 1)} [CommRing A]\n    (d : AdicCoefficientDatum A) (M : AdicTower X d)\n    (hconstructible : ∀ q : ℤ,\n      @IsConstructibleProEtaleCoefficientModuleSheaf X (A ⧸ d.ideal ^ (0 + 1)) _\n        (d.quotientFinite 0)\n        ((pbcRestrict (pbcLevelConstantComparison X d 0).hom).obj\n          ((DerivedCategory.homologyFunctor _ q).obj (M.level 0))))\n    (a b : ℤ) (hab : a ≤ b)\n    (hbounded : ∀ (n : ℕ) (q : ℤ), (q < a ∨ b < q) →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj (M.level n))) :\n    ∃ S : Stratification X, ∀ (i : Fin S.n) (n : ℕ) (q : ℤ),\n      IsRelativelyFiniteLisseModule (S.immersion i) (A ⧸ d.ideal ^ (n + 1))\n        ((pbcRestrict ((adicTowerInverseImage (S.immersion i)).map\n          (pbcLevelConstantComparison X d n).hom)).obj\n            ((DerivedCategory.homologyFunctor _ q).obj\n              ((adicTowerPullback (S.immersion i)\n                ((pbcAdicRings X d).obj (op n))).obj (M.level n))))",
   "branch": "sheaf-dag",
   "by": "M7",
   "date": "2026-10-19"
@@ -122,11 +122,11 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-77ef7",
-  "group": "M7",
+  "reviewer": "C-cfb1a",
+  "group": "F9",
   "result": "pass",
-  "landing": "20261020T051519-L-1699457",
+  "landing": "20261020T153004-L-2859933",
   "kind": "interface",
-  "note": "independent cc review: diff vs returned head 2e50e3069563: only the ordered H9 deletion of the two imports in FiniteCoefficientDerivedOriginPresentation plus report text; 5 modules and the 6 direct importers of the item compiled; axioms rechecked; unit route still via LisseNormalizedTowerLocalModels/prop-weil-pbc-site-comparison-finite-level"
+  "note": "independent cc review: 27 delivered consumers vs live sources with the alias→Stratification and import substitution applied (byte-identical); 12 node records vs live (only lean.statement/note respelled); 155-module sandbox (28 delivered + 67 direct importers + intermediates) all compiled"
  }
 }

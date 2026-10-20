@@ -5,7 +5,7 @@ Authors: SHEAF group Q129
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 public import Sheaf.AlgebraicGeometry.ProEtaleOperations
 public import Sheaf.Paper.ProEtaleLocallyConstantSheaf
 
@@ -42,7 +42,7 @@ def IsAffineLocallyConstructibleProEtaleModuleSheaf
     (X : Scheme.{u}) (R : Type u) [CommRing R] [IsNoetherianRing R]
     (F : proEtaleRingModules X (proEtaleConstantRing X R)) : Prop :=
   ∀ U : X.Opens, IsAffineOpen U →
-    ∃ S : LocallyClosedStratification U.toScheme,
+    ∃ S : Stratification U.toScheme,
       (∀ a : Fin S.n, Topology.IsConstructible (S.stratum a)) ∧
       ∀ (a : Fin S.n) (V : (S.domain a).ProEt),
         ∃ T : Sieve V, T ∈ ProEt.topology (S.domain a) V ∧

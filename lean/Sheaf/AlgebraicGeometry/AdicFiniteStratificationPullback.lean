@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import Sheaf.CategoryTheory.FiniteTypeLocallyConstantModuleSheaf
-public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 public import Mathlib.CategoryTheory.Limits.Shapes.WidePullbacks
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
@@ -782,7 +782,7 @@ structure AdicStratificationInput (pro : Bool) (R : Type (u + 1)) [CommRing R]
   /-- Each family is an open covering, including empty covers of the empty scheme. -/
   covers : ∀ j : Fin r, ⨆ a, opens j a = ⊤
   /-- The given finite constructible locally closed scheme stratifications. -/
-  strata : ∀ (j : Fin r) (a : coverIndex j), LocallyClosedStratification (opens j a).toScheme
+  strata : ∀ (j : Fin r) (a : coverIndex j), Stratification (opens j a).toScheme
   /-- The input restrictions are locally constant of finite type over the same ring. -/
   locallyConstant : ∀ (j : Fin r) (a : coverIndex j) (k : Fin (strata j a).n),
     SheafOfModules.IsFiniteTypeLocallyConstant
@@ -824,7 +824,7 @@ Source: Stacks 093R and the eight proof steps of the common-strata lemma.
 (blueprint: lem-sfb-adic-finite-stratification-pullback). -/
 structure CommonRefinement (p : ∀ j : Fin r, D.coverIndex j) where
   /-- A finite constructible locally closed scheme partition of the intersection U. -/
-  strata : LocallyClosedStratification (D.commonOpen p).toScheme
+  strata : Stratification (D.commonOpen p).toScheme
   /-- One original stratum for each input partition and each refined stratum. -/
   factor : Fin strata.n → ∀ j : Fin r, Fin (D.strata j (p j)).n
   /-- All the actual projections, including the map to U. -/

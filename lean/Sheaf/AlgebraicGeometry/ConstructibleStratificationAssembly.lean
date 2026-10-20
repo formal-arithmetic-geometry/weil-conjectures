@@ -5,7 +5,7 @@ Authors: SHEAF group U2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import WeilConjectures.Topology.ConstructibleInConstructible
 
@@ -43,7 +43,7 @@ Proof:
 3. These images cover X because the outer pieces cover X and each local stratification
    covers its source. Two images in different outer pieces are disjoint by the outer
    partition; in the same piece they are disjoint by injectivity of its immersion and
-   the local partition. These data define a LocallyClosedStratification of X.
+   the local partition. These data define a Stratification of X.
 4. The predicate on every new immersion is precisely the corresponding given proof,
    since we used the local domain and the composite immersion without replacement.
    Empty outer partitions and empty local partitions use the empty dependent sum. -/
@@ -54,10 +54,10 @@ theorem exists_stratification_of_stratified_partition
     (hc : ∀ i, Topology.IsConstructible (Set.range (ι i)))
     (hd : Pairwise (fun i k ↦ Disjoint (Set.range (ι i)) (Set.range (ι k))))
     (hu : (⋃ i, Set.range (ι i)) = Set.univ)
-    (T : ∀ i, LocallyClosedStratification (Y i))
+    (T : ∀ i, Stratification (Y i))
     (P : ∀ Z : Scheme.{u}, (Z ⟶ X) → Prop)
     (hP : ∀ i b, P ((T i).domain b) ((T i).immersion b ≫ ι i)) :
-    ∃ R : LocallyClosedStratification X,
+    ∃ R : Stratification X,
       (∀ k, Topology.IsConstructible (R.stratum k)) ∧
       ∀ k, P (R.domain k) (R.immersion k) := by
   classical
@@ -105,7 +105,7 @@ theorem exists_stratification_of_stratified_partition
     · exact (hd hij).mono
         (by rintro x ⟨z, rfl⟩; exact Set.mem_range_self _)
         (by rintro x ⟨z, rfl⟩; exact Set.mem_range_self _)
-  let R : LocallyClosedStratification X := {
+  let R : Stratification X := {
     n := Fintype.card K
     stratum := fun k ↦ Set.range (f (e k))
     isLocallyClosed_stratum := fun k ↦ (f (e k)).isLocallyClosed_range

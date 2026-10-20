@@ -5,7 +5,7 @@ Authors: SHEAF group NF
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 public import Sheaf.AlgebraicGeometry.ProEtaleOperations
 public import Sheaf.AlgebraicGeometry.ProEtaleGeometricStalk
 public import Sheaf.Paper.ProEtaleLocallyConstantSheaf
@@ -43,7 +43,7 @@ compare Stacks Tag 09AJ, whose affine-local convention differs from this global 
 noncomputable def IsConstructibleProEtaleModuleSheaf
     (Y : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
     (F : proEtaleRingModules Y (proEtaleConstantRing Y A)) : Prop :=
-  ∃ S : LocallyClosedStratification Y, 0 < S.n ∧
+  ∃ S : Stratification Y, 0 < S.n ∧
     ∀ i : Fin S.n,
       IsLocallyConstantProEtaleModuleSheaf (S.domain i) A
         (proEtaleConstantModulePullback (S.immersion i) A F) ∧

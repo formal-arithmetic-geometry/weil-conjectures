@@ -96,7 +96,7 @@
   "module": "Sheaf.AlgebraicGeometry.ConstructibleStratificationAssembly",
   "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleStratificationAssembly.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_stratification_of_stratified_partition",
-  "statement": "theorem exists_stratification_of_stratified_partition {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]\n    (n : ℕ) (Y : Fin n → Scheme.{u}) (ι : ∀ i, Y i ⟶ X)\n    (hι : ∀ i, IsImmersion (ι i))\n    (hc : ∀ i, Topology.IsConstructible (Set.range (ι i)))\n    (hd : Pairwise (fun i k ↦ Disjoint (Set.range (ι i)) (Set.range (ι k))))\n    (hu : (⋃ i, Set.range (ι i)) = Set.univ)\n    (T : ∀ i, LocallyClosedStratification (Y i))\n    (P : ∀ Z : Scheme.{u}, (Z ⟶ X) → Prop)\n    (hP : ∀ i b, P ((T i).domain b) ((T i).immersion b ≫ ι i)) :\n    ∃ R : LocallyClosedStratification X,\n      (∀ k, Topology.IsConstructible (R.stratum k)) ∧\n      ∀ k, P (R.domain k) (R.immersion k)",
+  "statement": "theorem exists_stratification_of_stratified_partition {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]\n    (n : ℕ) (Y : Fin n → Scheme.{u}) (ι : ∀ i, Y i ⟶ X)\n    (hι : ∀ i, IsImmersion (ι i))\n    (hc : ∀ i, Topology.IsConstructible (Set.range (ι i)))\n    (hd : Pairwise (fun i k ↦ Disjoint (Set.range (ι i)) (Set.range (ι k))))\n    (hu : (⋃ i, Set.range (ι i)) = Set.univ)\n    (T : ∀ i, Stratification (Y i))\n    (P : ∀ Z : Scheme.{u}, (Z ⟶ X) → Prop)\n    (hP : ∀ i b, P ((T i).domain b) ((T i).immersion b ≫ ι i)) :\n    ∃ R : Stratification X,\n      (∀ k, Topology.IsConstructible (R.stratum k)) ∧\n      ∀ k, P (R.domain k) (R.immersion k)",
   "branch": "sheaf-dag",
   "by": "U2",
   "date": "2026-10-12"
@@ -112,14 +112,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U2",
+  "reviewer": "C-cfb1a",
+  "group": "F9",
   "result": "pass",
-  "landing": "20261012T044756-L-2041530",
+  "landing": "20261020T153004-L-2859933",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: 27 delivered consumers vs live sources with the alias→Stratification and import substitution applied (byte-identical); 12 node records vs live (only lean.statement/note respelled); 155-module sandbox (28 delivered + 67 direct importers + intermediates) all compiled"
  },
  "lean_audit": {
   "master": {

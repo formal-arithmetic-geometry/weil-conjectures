@@ -15,7 +15,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import Sheaf.NumberTheory.Padics.CoefficientExtension
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Sheaf.Paper.AdicLisseModule
-public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 public import WeilConjectures.Topology.Stratification
 public import Mathlib.Algebra.Module.FinitePresentation
 
@@ -146,7 +146,7 @@ def IsContinuousConstructible (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace
     (A : Type u)
     [TopologicalSpace A] [CommRing A] [IsTopologicalRing A]
     (N : SheafOfModules.{u + 1} (latticeModuleRing X A)) : Prop :=
-  ∃ s : Scheme.LocallyClosedStratification X, ∀ k : Fin s.n,
+  ∃ s : Scheme.Stratification X, ∀ k : Fin s.n,
     ∃ (I : Type (u + 1)) (V : I → (s.domain k).ProEt),
       (Scheme.ProEt.topology (s.domain k)).CoversTop V ∧
       ∀ i : I, ∃ P : ModuleCat.{u + 1} (ULift.{u + 1} A),

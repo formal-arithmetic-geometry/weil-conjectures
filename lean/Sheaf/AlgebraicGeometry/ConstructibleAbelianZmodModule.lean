@@ -85,7 +85,7 @@ theorem isConstructibleEtaleModuleSheaf_of_constructible_abelian
         (RingCat.of (ULift.{u + 1} (ZMod (n : ℕ)))))).obj G = C) :
     IsConstructibleEtaleModuleSheaf
       ((etaleConstantModuleRestrictionFunctor T (ULift.{u + 1} (ZMod (n : ℕ)))).obj G) ∧
-    ∀ S : LocallyClosedStratification T,
+    ∀ S : Stratification T,
       (∀ k : Fin S.n, Topology.IsConstructible (S.stratum k)) →
       (∀ k : Fin S.n, ∃ V : Cover.{u} etalePrecoverage (S.domain k),
         ∀ i : V.I₀, ∃ A : AddCommGrpCat.{u + 1}, Finite A ∧

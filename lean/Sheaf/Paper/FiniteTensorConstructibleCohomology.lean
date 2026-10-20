@@ -64,13 +64,13 @@ private theorem common_stratification {I : Type*} (s : Finset I)
     (T : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
     (F : I → proEtaleRingModules T (proEtaleConstantRing T A))
     (hF : ∀ k ∈ s, IsConstructibleProEtaleModuleSheaf T A (F k)) :
-    ∃ S : LocallyClosedStratification T, 0 < S.n ∧
+    ∃ S : Stratification T, 0 < S.n ∧
       ∀ k ∈ s, ∀ j : Fin S.n, finiteLocalConstancy (S.domain j) A
         (proEtaleConstantModulePullback (S.immersion j) A (F k)) := by
   classical
   induction s using Finset.induction_on with
   | empty =>
-    let S : LocallyClosedStratification T :=
+    let S : Stratification T :=
       { n := 1
         stratum := fun _ ↦ Set.univ
         isLocallyClosed_stratum := fun _ ↦ isOpen_univ.isLocallyClosed

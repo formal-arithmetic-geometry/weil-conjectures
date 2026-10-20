@@ -5,7 +5,7 @@ Authors: SHEAF group Q142
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 import WeilConjectures.ConstructibleSheaf.Pullback
 
 /-!
@@ -88,7 +88,7 @@ Proof:
 theorem etaleLocalIsomorphismConstructible
     {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     (F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (S : LocallyClosedStratification X)
+    (S : Stratification X)
     (hSc : ∀ k : Fin S.n, Topology.IsConstructible (S.stratum k))
     (hG : ∀ k : Fin S.n,
       ∃ d : LocallyConstantDatum ((Etale.upperStar (ModuleCat.{u + 1} Λ)

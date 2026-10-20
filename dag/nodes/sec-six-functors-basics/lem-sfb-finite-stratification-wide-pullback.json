@@ -119,7 +119,7 @@
   "module": "Sheaf.AlgebraicGeometry.FiniteStratificationWidePullback",
   "file": "lean/Sheaf/AlgebraicGeometry/FiniteStratificationWidePullback.lean",
   "declaration": "AlgebraicGeometry.Scheme.finite_stratification_wide_pullback",
-  "statement": "theorem finite_stratification_wide_pullback {X : Scheme.{u}} (r : ℕ) (U : X.Opens)\n    (O : Fin r → X.Opens) (S : ∀ j, LocallyClosedStratification (O j).toScheme)\n    (hU : ∀ j, U ≤ O j) :\n    ∃ (T : LocallyClosedStratification U.toScheme)\n      (a : Fin T.n → ∀ j, Fin (S j).n)\n      (c : ∀ k, WidePullbackCone (stratificationWideArrows U O S (a k)))\n      (hp : ∀ k, (c k).pt = T.domain k),\n      (∀ k, eqToHom (hp k).symm ≫ (c k).π none = T.immersion k) ∧\n      (∀ k, Nonempty (IsLimit (c k))) ∧\n      (r ≠ 0 → ∀ k, Nonempty (T.domain k)) ∧\n      (r = 0 → T.n = 1 ∧ ∀ k, IsIso (T.immersion k))",
+  "statement": "theorem finite_stratification_wide_pullback {X : Scheme.{u}} (r : ℕ) (U : X.Opens)\n    (O : Fin r → X.Opens) (S : ∀ j, Stratification (O j).toScheme)\n    (hU : ∀ j, U ≤ O j) :\n    ∃ (T : Stratification U.toScheme)\n      (a : Fin T.n → ∀ j, Fin (S j).n)\n      (c : ∀ k, WidePullbackCone (stratificationWideArrows U O S (a k)))\n      (hp : ∀ k, (c k).pt = T.domain k),\n      (∀ k, eqToHom (hp k).symm ≫ (c k).π none = T.immersion k) ∧\n      (∀ k, Nonempty (IsLimit (c k))) ∧\n      (r ≠ 0 → ∀ k, Nonempty (T.domain k)) ∧\n      (r = 0 → T.n = 1 ∧ ∀ k, IsIso (T.immersion k))",
   "branch": "sheaf-dag",
   "by": "M5",
   "date": "2026-10-19",
@@ -142,11 +142,11 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-a4c5c",
-  "group": "M5",
+  "reviewer": "C-cfb1a",
+  "group": "F9",
   "result": "pass",
-  "landing": "20261020T131144-L-1250594",
+  "landing": "20261020T153004-L-2859933",
   "kind": "interface",
-  "note": "independent cc review: 4 delivered modules (compiled clean, axioms standard, no sorry) and importer AdicConstructibleFiniteReductions (compiles) matched with node lem-sfb-adic-finite-stratification-pullback, 3 new nodes and change record adic-stratification-normalization-predicate (abbrev→def topology, compatibility predicate defeq to old ∃! equation)"
+  "note": "independent cc review: 27 delivered consumers vs live sources with the alias→Stratification and import substitution applied (byte-identical); 12 node records vs live (only lean.statement/note respelled); 155-module sandbox (28 delivered + 67 direct importers + intermediates) all compiled"
  }
 }

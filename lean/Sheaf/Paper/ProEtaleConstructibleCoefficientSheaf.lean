@@ -40,7 +40,7 @@ Source: blueprint def-weil-finite-torsion-constructibility, second paragraph; St
 def IsConstructibleProEtaleCoefficientModuleSheaf
     (Y : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A]
     (F : pbcModules Y (adicLisseConstantRing Y A)) : Prop :=
-  ∃ S : LocallyClosedStratification Y, 0 < S.n ∧
+  ∃ S : Stratification Y, 0 < S.n ∧
     (∀ i : Fin S.n, Topology.IsConstructible (S.stratum i)) ∧
     ∀ i : Fin S.n,
       IsRelativelyFiniteLisseModule (S.immersion i) A

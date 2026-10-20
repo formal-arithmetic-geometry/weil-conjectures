@@ -5,7 +5,7 @@ Authors: SHEAF group M5
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 public import Mathlib.CategoryTheory.Limits.Shapes.WidePullbacks
 import WeilConjectures.ConstructibleSheaf.Refinement
 
@@ -31,7 +31,7 @@ namespace AlgebraicGeometry.Scheme
 Source: finite-reductions Step 6.
 (blueprint: lem-sfb-finite-stratification-wide-pullback). -/
 def stratificationWideFactors {X : Scheme.{u}} {r : ℕ} (U : X.Opens)
-    (O : Fin r → X.Opens) (S : ∀ j, LocallyClosedStratification (O j).toScheme)
+    (O : Fin r → X.Opens) (S : ∀ j, Stratification (O j).toScheme)
     (a : ∀ j, Fin (S j).n) : Option (Fin r) → Scheme.{u}
   | none => U.toScheme
   | some j => (S j).domain (a j)
@@ -40,7 +40,7 @@ def stratificationWideFactors {X : Scheme.{u}} {r : ℕ} (U : X.Opens)
 Source: finite-reductions Step 6.
 (blueprint: lem-sfb-finite-stratification-wide-pullback). -/
 def stratificationWideArrows {X : Scheme.{u}} {r : ℕ} (U : X.Opens)
-    (O : Fin r → X.Opens) (S : ∀ j, LocallyClosedStratification (O j).toScheme)
+    (O : Fin r → X.Opens) (S : ∀ j, Stratification (O j).toScheme)
     (a : ∀ j, Fin (S j).n) : ∀ t, stratificationWideFactors U O S a t ⟶ X
   | none => U.ι
   | some j => (S j).immersion (a j) ≫ (O j).ι
@@ -59,7 +59,7 @@ private def identityStratification (Y : Scheme.{u}) : Stratification Y where
   range_immersion _ := by simp
 
 private structure WideRefinement {X : Scheme.{u}} {r : ℕ} (U : X.Opens)
-    (O : Fin r → X.Opens) (S : ∀ j, LocallyClosedStratification (O j).toScheme) where
+    (O : Fin r → X.Opens) (S : ∀ j, Stratification (O j).toScheme) where
   T : Stratification U.toScheme
   a : Fin T.n → ∀ j, Fin (S j).n
   c : ∀ k, WidePullbackCone (stratificationWideArrows U O S (a k))
@@ -69,7 +69,7 @@ private structure WideRefinement {X : Scheme.{u}} {r : ℕ} (U : X.Opens)
   he : r = 0 → T.n = 1 ∧ ∀ k, IsIso (T.immersion k)
 
 private theorem wideRefinement_exists {X : Scheme.{u}} (r : ℕ) (U : X.Opens)
-    (O : Fin r → X.Opens) (S : ∀ j, LocallyClosedStratification (O j).toScheme)
+    (O : Fin r → X.Opens) (S : ∀ j, Stratification (O j).toScheme)
     (hU : ∀ j, U ≤ O j) : Nonempty (WideRefinement U O S) := by
   classical
   induction r with
@@ -246,9 +246,9 @@ original stratum as a factor. Its projection to U is the composite immersion. Fo
 r = 0 the identity stratum and its singleton-factor cone already have the required
 universal property, including when U is empty. No sheaves or coefficients enter. -/
 theorem finite_stratification_wide_pullback {X : Scheme.{u}} (r : ℕ) (U : X.Opens)
-    (O : Fin r → X.Opens) (S : ∀ j, LocallyClosedStratification (O j).toScheme)
+    (O : Fin r → X.Opens) (S : ∀ j, Stratification (O j).toScheme)
     (hU : ∀ j, U ≤ O j) :
-    ∃ (T : LocallyClosedStratification U.toScheme)
+    ∃ (T : Stratification U.toScheme)
       (a : Fin T.n → ∀ j, Fin (S j).n)
       (c : ∀ k, WidePullbackCone (stratificationWideArrows U O S (a k)))
       (hp : ∀ k, (c k).pt = T.domain k),

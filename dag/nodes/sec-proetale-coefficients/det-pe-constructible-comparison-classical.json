@@ -217,12 +217,12 @@
    "AlgebraicGeometry.ProEtale.locallyConstructible_isClassicalModule"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleProEtaleClassical.lean",
-  "statement": "theorem constructible_isClassicalModule (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (Λ : Type u) [CommRing Λ] [IsNoetherianRing Λ] (F : ringedSiteModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (Scheme.proEtaleConstantRing X Λ))) (S : Scheme.LocallyClosedStratification X) (_hred : ∀ k : Fin S.n, IsReduced (S.domain k)) (_hmodels : ∀ k : Fin S.n, ∃ (I : Type (u + 1)) (V : I → (S.domain k).ProEt) (f : ∀ a : I, V a ⟶ Scheme.ProEt.mk (𝟙 (S.domain k))), Presieve.ofArrows V f ∈ (Scheme.ProEt.precoverage (S.domain k)).coverings _ ∧ ∀ a : I, ∃ M : ModuleCat.{u + 1} (ULift.{u + 1, u} Λ), Module.Finite (ULift.{u + 1, u} Λ) M ∧ Nonempty ((Scheme.proEtaleConstantModulePullback (S.immersion k) Λ F).over (V a) ≅ Scheme.proEtaleConstantModuleSheafOver (S.domain k) Λ (V a) M)) : IsClassicalModule Λ F",
+  "statement": "theorem constructible_isClassicalModule (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (Λ : Type u) [CommRing Λ] [IsNoetherianRing Λ] (F : ringedSiteModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (Scheme.proEtaleConstantRing X Λ))) (S : Scheme.Stratification X) (_hred : ∀ k : Fin S.n, IsReduced (S.domain k)) (_hmodels : ∀ k : Fin S.n, ∃ (I : Type (u + 1)) (V : I → (S.domain k).ProEt) (f : ∀ a : I, V a ⟶ Scheme.ProEt.mk (𝟙 (S.domain k))), Presieve.ofArrows V f ∈ (Scheme.ProEt.precoverage (S.domain k)).coverings _ ∧ ∀ a : I, ∃ M : ModuleCat.{u + 1} (ULift.{u + 1, u} Λ), Module.Finite (ULift.{u + 1, u} Λ) M ∧ Nonempty ((Scheme.proEtaleConstantModulePullback (S.immersion k) Λ F).over (V a) ≅ Scheme.proEtaleConstantModuleSheafOver (S.domain k) Λ (V a) M)) : IsClassicalModule Λ F",
   "branch": "newtargets-dag",
   "by": "Q122",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Two statements, respectively the global finite-partition assertion and its Zariski-local variant. Classicality is the recorded continuity-map predicate for intrinsic constant-ring modules. The existing LocallyClosedStratification includes constructibility in its inherited current Topology.Stratification; its reduced immersed domains realize the reduced induced strata. Finite type is stated by finitely generated constant models on a pro-etale trivializing cover. No finite coefficient ring or reduced ambient scheme is assumed."
+  "note": "Two statements, respectively the global finite-partition assertion and its Zariski-local variant. Classicality is the recorded continuity-map predicate for intrinsic constant-ring modules. The existing Stratification includes constructibility in its inherited current Topology.Stratification; its reduced immersed domains realize the reduced induced strata. Finite type is stated by finitely generated constant models on a pro-etale trivializing cover. No finite coefficient ring or reduced ambient scheme is assumed."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -233,13 +233,13 @@
   "note": "Clause-by-clause match: Λ any commutative Noetherian ring (no [Finite]); X qcqs; F an intrinsic constant-ring module sheaf on the recorded pro-étale site; the finite stratification's strata are locally closed, disjoint, covering and constructible (isConstructible_stratum confirmed by #check); reduced domains realize the reduced induced structure; restriction is the canonical proEtaleConstantModulePullback; finite-type local constancy is the recorded predicate's body plus Module.Finite; conclusion IsClassicalModule; the Zariski-local variant is correct. Edge cases n=0, empty strata, nonreduced X, zero ring, infinite Λ and universes are fine. Two sorry-only theorems, no definitions, docstrings carry source, blueprint tag and proof steps. lean.statement is verbatim; dependency records are unchanged; added stmt_dep def-constructible-stratification creates no cycle. nt_compile.py --json: clean, 2.1 s. Non-blocking: the landed def-constructible-stratification text and docstring still say 'no constructibility'."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-335f8",
-  "group": "Q6",
+  "reviewer": "C-cfb1a",
+  "group": "F9",
   "result": "pass",
-  "landing": "20261019T005405-L-2762980",
+  "landing": "20261020T153004-L-2859933",
   "kind": "interface",
-  "note": "independent cc review: item proofs (stratified_classical via finiteLocalSystemsTwist + comparison_essImage_of_stratification; Zariski-local via proEtaleConstantModulePullback_comp + proEtaleClassical_zariskiLocal) against node det-pe-constructible-comparison-classical; 3 support-module generalizations against their change records, statement_change entries and 10 compiled importers/consumers; axiom probes confirm C-68837 repair (finite pullback theorem sorry-free)"
+  "note": "independent cc review: 27 delivered consumers vs live sources with the alias→Stratification and import substitution applied (byte-identical); 12 node records vs live (only lean.statement/note respelled); 155-module sandbox (28 delivered + 67 direct importers + intermediates) all compiled"
  }
 }

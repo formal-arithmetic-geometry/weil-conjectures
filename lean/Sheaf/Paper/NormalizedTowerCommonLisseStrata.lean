@@ -809,7 +809,7 @@ theorem normalizedTower_common_lisse_strata
     (a b : ℤ) (hab : a ≤ b)
     (hbounded : ∀ (n : ℕ) (q : ℤ), (q < a ∨ b < q) →
       IsZero ((DerivedCategory.homologyFunctor _ q).obj (M.level n))) :
-    ∃ S : LocallyClosedStratification X, ∀ (i : Fin S.n) (n : ℕ) (q : ℤ),
+    ∃ S : Stratification X, ∀ (i : Fin S.n) (n : ℕ) (q : ℤ),
       IsRelativelyFiniteLisseModule (S.immersion i) (A ⧸ d.ideal ^ (n + 1))
         ((pbcRestrict ((adicTowerInverseImage (S.immersion i)).map
           (pbcLevelConstantComparison X d n).hom)).obj

@@ -5,7 +5,7 @@ Authors: SHEAF group Q28
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
@@ -41,14 +41,14 @@ namespace AlgebraicGeometry
 /-- Affine-local constructibility in the module-valued encoding. On every affine open,
 a finite constructible locally closed stratification admits etale trivializations with
 finitely generated constant module values. The schemes and immersions of the strata are
-those of the recorded `LocallyClosedStratification`; constructibility is in the affine open.
+those of the recorded `Stratification`; constructibility is in the affine open.
 Source: Stacks Project, Tag 03RW(3)
 (blueprint: def-pe-etale-constructible-module). -/
 def Scheme.IsAffineLocallyConstructibleEtaleModuleSheaf
     {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] [IsNoetherianRing Λ]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : Prop :=
   ∀ U : X.Opens, IsAffineOpen U →
-    ∃ S : Scheme.LocallyClosedStratification U.toScheme,
+    ∃ S : Scheme.Stratification U.toScheme,
       (∀ a : Fin S.n, Topology.IsConstructible (S.stratum a)) ∧
       ∀ a : Fin S.n,
         ∃ V : Scheme.Cover.{u} Scheme.etalePrecoverage (S.domain a),

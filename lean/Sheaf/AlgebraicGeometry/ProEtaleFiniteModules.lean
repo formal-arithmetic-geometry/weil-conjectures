@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 public import Mathlib.Topology.Connected.TotallyDisconnected
 public import Mathlib.Topology.ContinuousMap.Algebra
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
@@ -407,7 +407,7 @@ def isBoundedConstructibleFiniteCoefficient (T : Scheme.{u}) (Λ : Type (u + 1))
     [Ring Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] :
     ObjectProperty (FiniteCoefficientDerivedCategory T Λ) :=
   ObjectProperty.map (fun L : FiniteCoefficientEtaleDerivedCategory T Λ ↦
-    (∀ j : ℤ, ∃ S : Scheme.LocallyClosedStratification T,
+    (∀ j : ℤ, ∃ S : Scheme.Stratification T,
       (∀ k : Fin S.n, Topology.IsConstructible (S.stratum k)) ∧
       ∀ k : Fin S.n,
         ∃ d : Scheme.LocallyConstantDatum

@@ -5,7 +5,7 @@ Authors: SHEAF project, group H1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
@@ -54,7 +54,7 @@ Proof:
 theorem exists_etale_separated_stratified_finite {X U : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X]
     (j : U ⟶ X) [Etale j] [IsSeparated j] [QuasiCompact j] :
-    ∃ S : LocallyClosedStratification X,
+    ∃ S : Stratification X,
       (∀ i : Fin S.n, Topology.IsConstructible (S.stratum i)) ∧
       (∀ i : Fin S.n,
         IsFinite (pullback.snd j (S.immersion i)) ∧

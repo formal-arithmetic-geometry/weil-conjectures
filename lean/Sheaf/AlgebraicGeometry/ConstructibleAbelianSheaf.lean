@@ -5,7 +5,7 @@ Authors: SHEAF group NJ
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
@@ -35,7 +35,7 @@ by 095E(3); finite local constancy is as in 03RU.
 (blueprint: def-weil-pbc-constructible-abelian-sheaf) -/
 def IsConstructibleAbelianSheaf {T : Scheme.{u}}
     (C : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) : Prop :=
-  ∃ S : LocallyClosedStratification T,
+  ∃ S : Stratification T,
     (∀ k : Fin S.n, Topology.IsConstructible (S.stratum k)) ∧
     ∀ k : Fin S.n, ∃ V : Cover.{u} etalePrecoverage (S.domain k),
       ∀ i : V.I₀, ∃ A : AddCommGrpCat.{u + 1}, Finite A ∧

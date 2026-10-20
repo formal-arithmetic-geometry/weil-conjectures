@@ -174,7 +174,7 @@ private theorem finite_stalk_of_isZero (Y : Scheme.{u}) (A : Type u) [CommRing A
 private theorem constructibleProEtale_of_isZero (Y : Scheme.{u}) (A : Type u)
     [CommRing A] [Finite A] (F : proEtaleRingModules Y (proEtaleConstantRing Y A))
     (hF : IsZero F) : IsConstructibleProEtaleModuleSheaf Y A F := by
-  let S : LocallyClosedStratification Y :=
+  let S : Stratification Y :=
     { n := 1
       stratum := fun _ ↦ Set.univ
       isLocallyClosed_stratum := fun _ ↦ IsOpen.isLocallyClosed isOpen_univ

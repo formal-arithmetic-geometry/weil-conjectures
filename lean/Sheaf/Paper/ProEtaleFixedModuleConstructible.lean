@@ -33,7 +33,7 @@ def-weil-proetale-constructible-sheaf, second paragraph
 def IsConstructibleProEtaleFixedModuleSheaf (Y : Scheme.{u})
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (F : Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} A)) : Prop :=
-  ∃ S : LocallyClosedStratification Y, 0 < S.n ∧
+  ∃ S : Stratification Y, 0 < S.n ∧
     (∀ i : Fin S.n, Topology.IsConstructible (S.stratum i)) ∧
     ∀ i : Fin S.n,
       IsLocallyConstantProEtaleFixedModuleSheaf (S.domain i) A

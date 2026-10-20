@@ -208,7 +208,7 @@ theorem finiteFieldSheafScalarExtension
         IsConstructibleProEtaleCoefficientModuleSheaf Y (ULift.{u + 1} k) F →
           IsConstructibleProEtaleCoefficientModuleSheaf Y (ULift.{u + 1} k')
             ((finiteFieldScalarExtension Y f).obj F) ∧
-          (∀ (S : LocallyClosedStratification Y) (i : Fin S.n)
+          (∀ (S : Stratification Y) (i : Fin S.n)
               (K : Sieve (⊤_ (S.domain i).ProEt)),
             K ∈ ProEt.topology (S.domain i) (⊤_ (S.domain i).ProEt) →
             ∀ (V : (S.domain i).ProEt) (g : V ⟶ ⊤_ (S.domain i).ProEt), K g →

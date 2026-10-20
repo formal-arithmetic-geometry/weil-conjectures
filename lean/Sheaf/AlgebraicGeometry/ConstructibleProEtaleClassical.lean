@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ClassicalContinuityMap
 public import Sheaf.CategoryTheory.RingedSiteModules
-public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 public import Sheaf.Paper.ProEtaleLocallyConstantSheaf
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
@@ -135,7 +135,7 @@ private theorem intrinsicClassical_zariskiLocal {X : Scheme.{u}}
 private theorem stratified_classical {X : Scheme.{u}}
     (Λ : Type u) [CommRing Λ] [IsNoetherianRing Λ]
     (F : Scheme.proEtaleRingModules X (Scheme.proEtaleConstantRing X Λ))
-    (S : Scheme.LocallyClosedStratification X)
+    (S : Scheme.Stratification X)
     (hm : ∀ k : Fin S.n,
       ∃ (I : Type (u + 1)) (V : I → (S.domain k).ProEt)
         (f : ∀ a : I, V a ⟶ Scheme.ProEt.mk (𝟙 (S.domain k))),
@@ -184,7 +184,7 @@ theorem constructible_isClassicalModule (X : Scheme.{u}) [CompactSpace X]
       ((sheafCompose (Scheme.ProEt.topology X)
         (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
           (Scheme.proEtaleConstantRing X Λ)))
-    (S : Scheme.LocallyClosedStratification X)
+    (S : Scheme.Stratification X)
     (_hred : ∀ k : Fin S.n, IsReduced (S.domain k))
     (_hmodels : ∀ k : Fin S.n,
       ∃ (I : Type (u + 1)) (V : I → (S.domain k).ProEt)
@@ -216,7 +216,7 @@ theorem locallyConstructible_isClassicalModule (X : Scheme.{u}) [CompactSpace X]
         (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
           (Scheme.proEtaleConstantRing X Λ)))
     (_hlocal : ∀ x : X, ∃ U : X.Opens, x ∈ U ∧
-      ∃ S : Scheme.LocallyClosedStratification U.toScheme,
+      ∃ S : Scheme.Stratification U.toScheme,
         (∀ k : Fin S.n, IsReduced (S.domain k)) ∧
         ∀ k : Fin S.n,
           ∃ (I : Type (u + 1)) (V : I → (S.domain k).ProEt)

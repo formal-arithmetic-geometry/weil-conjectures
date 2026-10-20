@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
@@ -61,7 +61,7 @@ theorem exists_constructible_stratified_finite
     {X U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (j : U ⟶ X) [Flat j] [LocallyOfFinitePresentation j] [IsSeparated j]
     (hj : j.IsQuasiFinite) :
-    ∃ S : LocallyClosedStratification X,
+    ∃ S : Stratification X,
       (∀ i : Fin S.n, Topology.IsConstructible (S.stratum i)) ∧
       (∀ i : Fin S.n, IsFinite (pullback.snd j (S.immersion i))) := by
   classical
@@ -131,7 +131,7 @@ theorem exists_constructible_stratified_finite
     (hcon (i.val + 1)).sdiff (hcon i.val)
   -- Realize each locally closed difference as an immersed subscheme.
   choose T g hg hrange using fun i ↦ exists_immersion_of_locallyClosed (hlc i)
-  let S : LocallyClosedStratification X :=
+  let S : Stratification X :=
     { n := N + 1
       stratum := A
       isLocallyClosed_stratum := hlc

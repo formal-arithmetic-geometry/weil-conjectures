@@ -5,7 +5,7 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.Topology.Constructible
@@ -58,7 +58,7 @@ private theorem finite_etale_pullback_comp {X U Y Z : Scheme.{u}}
 
 private theorem exists_etale_stratified_finite_affine {X U : Scheme.{u}}
     [IsAffine X] [CompactSpace U] [QuasiSeparatedSpace U] (j : U ⟶ X) [Etale j] :
-    ∃ S : LocallyClosedStratification X,
+    ∃ S : Stratification X,
       (∀ i, Topology.IsConstructible (S.stratum i)) ∧
       ∀ i, IsFinite (pullback.snd j (S.immersion i)) ∧
         Etale (pullback.snd j (S.immersion i)) := by
@@ -66,7 +66,7 @@ private theorem exists_etale_stratified_finite_affine {X U : Scheme.{u}}
   obtain ⟨m, A, hA, hcover⟩ := exists_finite_affine_open_cover U
   obtain ⟨n, Y, ι, hY, hd, hu, _, _, hsep⟩ :=
     exists_etale_affine_cover_stratification j m A hA hcover.iSup_eq_top
-  have hlocal (i : Fin n) : ∃ T : LocallyClosedStratification (Y i),
+  have hlocal (i : Fin n) : ∃ T : Stratification (Y i),
       (∀ b, Topology.IsConstructible (T.stratum b)) ∧
       ∀ b, IsFinite (pullback.snd (pullback.snd j (ι i)) (T.immersion b)) ∧
         Etale (pullback.snd (pullback.snd j (ι i)) (T.immersion b)) := by
@@ -102,7 +102,7 @@ Proof:
 theorem exists_etale_stratified_finite {X U : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace U] [QuasiSeparatedSpace U] (j : U ⟶ X) [Etale j] :
-    ∃ S : LocallyClosedStratification X,
+    ∃ S : Stratification X,
       (∀ i : Fin S.n, Topology.IsConstructible (S.stratum i)) ∧
       (∀ i : Fin S.n,
         IsFinite (pullback.snd j (S.immersion i)) ∧

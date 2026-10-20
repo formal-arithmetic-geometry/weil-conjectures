@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Data.List.TFAE
-public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
@@ -115,7 +115,7 @@ theorem constructible_etale_module_qcqs_affine_local
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     List.TFAE [
       (∀ U : T.Opens, IsAffineOpen U →
-        ∃ S : LocallyClosedStratification U.toScheme,
+        ∃ S : Stratification U.toScheme,
           (∀ k : Fin S.n, Topology.IsConstructible (S.stratum k)) ∧
           (∀ k : Fin S.n, IsReduced (S.domain k)) ∧
           ∀ k : Fin S.n,
@@ -124,7 +124,7 @@ theorem constructible_etale_module_qcqs_affine_local
       (∃ 𝒱 : Set T.Opens,
         (∀ x : T, ∃ V ∈ 𝒱, x ∈ V) ∧
         ∀ V ∈ 𝒱, ∀ U : V.toScheme.Opens, IsAffineOpen U →
-          ∃ S : LocallyClosedStratification U.toScheme,
+          ∃ S : Stratification U.toScheme,
             (∀ k : Fin S.n, Topology.IsConstructible (S.stratum k)) ∧
             (∀ k : Fin S.n, IsReduced (S.domain k)) ∧
             ∀ k : Fin S.n,
