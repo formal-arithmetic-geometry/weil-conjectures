@@ -311,6 +311,16 @@ def rework_quarantine(git, base: str, item: str) -> str | None:
     return None
 
 
+def rework_rows_at(git, base: str) -> dict[str, str]:
+    """module -> quarantine path of every row of coord/rework.tsv at `base`"""
+    out = {}
+    for line in (git.show(base, "coord/rework.tsv") or "").splitlines():
+        r = line.split("\t")
+        if not line.startswith("#") and len(r) >= 3:
+            out[r[0]] = r[2]
+    return out
+
+
 def upstream_exception(mod: str) -> bool:
     """`mod` has an entry in coord/upstream-statement-exceptions.tsv (our corrections of false upstream statements)"""
     try:
@@ -354,6 +364,7 @@ def read_delivery(git: s2.Git, ref: str, base: str, group: str, item: str, overr
     status = [l.split("\t") for l in git.run("diff", "--name-status", base, ref).splitlines() if l]
     seen_item = False
     rw = rework_quarantine(git, base, item)   # the human, 2026-10-20: a module the upstream sync quarantined
+    rw_all = rework_rows_at(git, base) if rw else {}   # a cluster delivery may restore other quarantined modules too
     for st in status:
         code, p = st[0], st[-1]
         if code[0] in "DR":
@@ -371,7 +382,16 @@ def read_delivery(git: s2.Git, ref: str, base: str, group: str, item: str, overr
                 if p.startswith("lean/WeilConjectures/") and show(p) != old and not upstream_exception(item):
                     f("a", f"{p}: an upstream module comes back verbatim from {rw} (tools/rework.py); make it compile by "
                            "changing our own modules (lean/Sheaf/), not the upstream file")
-            role = "item" if p == item_file else ("new" if old is None else "adapted")
+            restored = False
+            if p != item_file and old is None and rw:
+                mod = module_of_path(p)
+                if mod in rw_all:
+                    # the human, 2026-10-20: a dependent of the cluster restored in the same delivery (partial restores
+                    # are fine; the root must be among them); judged against its quarantined text
+                    old = git.show(base, rw_all[mod]); restored = True
+                    if p.startswith("lean/WeilConjectures/") and show(p) != old and not upstream_exception(mod):
+                        f("a", f"{p}: an upstream module comes back verbatim from {rw_all[mod]} (tools/rework.py)")
+            role = "item" if p == item_file else ("restored" if restored else "new" if old is None else "adapted")
             if role == "new" and not p.startswith(f"lean/{PROJECT_ROOT}/"):
                 f("a", f"{p}: a new module goes under lean/{PROJECT_ROOT}/ (the project's root; the source root only "
                        "holds the modules adopted from the source repository)")
@@ -752,7 +772,7 @@ def classify(D: dict, group: str, item: str) -> list[str]:
         why.append("changes a node file")
     if D["changes"]:
         why.append("a change record (stage 3 §3)")
-    others = [m["file"] for m in D["modules"] if m["role"] != "item"]
+    others = [m["file"] for m in D["modules"] if m["role"] not in ("item", "restored")]   # restored: a rework cluster
     if others:
         why.append(f"modules besides the item ({len(others)})")
     routes = None

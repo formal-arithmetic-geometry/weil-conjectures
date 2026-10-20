@@ -195,9 +195,10 @@ def main() -> int:
     # rework (the human, 2026-10-20): the quarantined modules first; whatever depends on one is not an item meanwhile
     import rework
     rw_rows = rework.load()
-    rw_open, blocked_n, blocked_m = [], set(), set()
+    rw_open, blocked_n, blocked_m, rw_clusters = [], set(), set(), []
     if rw_rows:
-        rw_open = rework.open_items(rw_rows, imports)
+        rw_clusters = rework.clusters(rw_rows)   # the human, 2026-10-20: one item per cluster (its root), bottom-up
+        rw_open = [c["item"] for c in rw_clusters]
         blocked_n, blocked_m, _ = rework.blocked(g, imports, rw_rows)
         nb = (len(s1), len(s2), len(items3))
         s1 = [x for x in s1 if x[1] not in blocked_n]
@@ -237,7 +238,8 @@ def main() -> int:
         p = rework.ROOT / (rw_rows[m].get("quarantine") or rework.qpath(m))
         try: return li.sorry_count(p.read_text(errors="ignore"))
         except OSError: return ""
-    rows = [(m, 3, "-", qsorry(m), "rework", "rework") for m in rw_open]
+    rows = [(c["item"], 3, "-", sum(qsorry(m) or 0 for m in c["members"]), "rework", f"cluster {len(c['members'])}")
+            for c in rw_clusters]
     rows += [(i, 1, d if d < 10**6 else "-", "", dag_queue.audit_state(g.live[i]), "") for d, i in s1]
     rows += [(i, 2, h, "", "target-statement" if pri == 0 else "state", nb) for pri, h, i, nb in s2]
     rows += [(m, 3, _d(d), n, k, "route" if rd == 0 else rd) for _, d, m, n, k, rd in items3]
@@ -252,14 +254,14 @@ def main() -> int:
         f.write(f"# Work queue\n\n{len(rows)} items; claim with `tools/claim.py next <group> [--stage N]`.\n\n")
         if rw_rows:
             b = STATE.get("blocked", (0, 0, 0))
-            f.write(f"## Rework: quarantined by the upstream sync ({len(rw_open)} open of {len(rw_rows)})\n\n"
-                    "Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). Open: imports no other "
-                    "rework module. Restore the module to its original path so that it compiles against the current library, "
-                    "without changing upstream statements.\n\n")
-            if rw_open:
-                f.write("| module | sorry | quarantined by | cause |\n|---|---|---|---|\n")
-                for m in rw_open:
-                    f.write(f"| `{m}` | {qsorry(m)} | {rw_rows[m].get('sync', '')} | {rw_rows[m].get('cause', '')[:160]} |\n")
+            f.write(f"## Rework: quarantined by the upstream sync ({len(rw_clusters)} clusters, {len(rw_rows)} modules)\n\n"
+                    "Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: "
+                    "its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; "
+                    "fix the root, then the dependents as far as possible, deliver every module that compiles.\n\n")
+            if rw_clusters:
+                f.write("| item (root) | modules | other roots | cause of the root |\n|---|---|---|---|\n")
+                for c in rw_clusters:
+                    f.write(f"| `{c['item']}` | {len(c['members'])} | {', '.join(c['roots'][1:])[:120]} | {rw_rows[c['item']].get('cause', '')[:160]} |\n")
             f.write(f"\nBlocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 "
                     f"{b[0]}, stage 2 {b[1]}, stage 3 {b[2]} items.\n\n")
         f.write(f"## Stage 1: nodes to split ({len(s1)})\n\n")

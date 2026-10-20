@@ -409,7 +409,10 @@ def check(c: dict, classify: bool = True) -> dict:
     if reviewer == "AUTO":
         m0 = D["modules"][0]
         ch = li.interface_changes(m0["old"] or "", m0["text"] or "") if m0["old"] else ["(new module)"]
-        if len(D["modules"]) > 1 or (ch and not set(ch) <= {"(imports removed)"}):
+        # 2026-10-20: modules a rework cluster delivery restores verbatim or with proof changes only stay AUTO
+        others = [m for m in D["modules"][1:] if not (m.get("role") == "restored"
+                  and set(li.interface_changes(m["old"] or "", m["text"] or "")) <= {"(imports removed)"})]
+        if others or (ch and not set(ch) <= {"(imports removed)"}):
             raise Refuse("the landing would be of kind interface, not proof: the delivery is CODEX")
     graph_file = c.get("_import_graph_file")
     if graph_file:
@@ -605,7 +608,13 @@ def land_one(plan: dict, batch_id: str) -> dict:
     # the human, 2026-10-20 (tools/rework.py): a rework item restores a quarantined module; its import lines go back into
     # the root files they were removed from, in this same landing (compiled by the build, taken out with it)
     import rework
-    roots_add = rework.roots_to_restore(item)
+    roots_add = {}
+    for m in [item] + [m["module"] for m in mods if m.get("role") == "restored"]:   # a cluster: every restored module
+        for rel, text in rework.roots_to_restore(m).items():
+            f0 = li.LEAN / rel
+            cur = roots_add.get(rel)
+            roots_add[rel] = rework.add_import_line(cur, m) if cur is not None else text
+    
     rels += [r for r in roots_add if r not in rels]
     is_set = len(mods) > 1 or bool(roots_add)
     r = subprocess.run([sys.executable, "tools/landing.py", "begin", "L", *rels], cwd=ROOT, capture_output=True, text=True)

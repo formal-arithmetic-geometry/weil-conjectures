@@ -134,6 +134,54 @@ def open_items(rows=None, imports=None) -> list[str]:
     return sorted(out, key=lambda m: (-waiting(m), m))
 
 
+def clusters(rows=None) -> list[dict]:
+    """The rework items as CLUSTERS (the human, 2026-10-20): a root is a quarantined module whose fix has not landed and
+    that imports no other open rework module; its cluster is the root and every open rework module that imports it
+    (transitively, through rework modules: a library module importing a quarantined one is quarantined itself).
+    Clusters sharing members are merged. [{item: the representative root, roots: [...], members: [...] (roots first)}],
+    deepest (largest) first. One worker claims the whole cluster through its item."""
+    rows = load() if rows is None else rows
+    live = {m for m in rows if not landed(m)}
+    if not live:
+        return []
+    rimp = {m: i & live for m, i in rework_imports({m: rows[m] for m in live}).items()}
+    roots = sorted(m for m in live if not (rimp.get(m, set()) - {m}))
+    rev = collections.defaultdict(set)
+    for m, ims in rimp.items():
+        for i in ims:
+            if i != m:
+                rev[i].add(m)
+    member_of = {}
+    for r in roots:
+        seen, st = {r}, [r]
+        while st:
+            for p in rev.get(st.pop(), ()):
+                if p not in seen:
+                    seen.add(p); st.append(p)
+        member_of[r] = seen
+    parent = {r: r for r in roots}
+    def find(x):
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]; x = parent[x]
+        return x
+    owner = {}
+    for r in roots:
+        for m in member_of[r]:
+            if m in owner:
+                parent[find(r)] = find(owner[m])
+            else:
+                owner[m] = r
+    groups = collections.defaultdict(list)
+    for r in roots:
+        groups[find(r)].append(r)
+    out = []
+    for rs in groups.values():
+        rs = sorted(rs)
+        mem = set().union(*(member_of[r] for r in rs))
+        out.append({"item": rs[0], "roots": rs, "members": rs + sorted(mem - set(rs))})
+    return sorted(out, key=lambda c: (-len(c["members"]), c["item"]))
+
+
 def blocked(g=None, imports=None, rows=None) -> tuple[set[str], set[str], dict[str, str]]:
     """(blocked node ids, blocked library modules, why: item -> the rework module it waits for).
     Nodes: the nodes realized by a rework module and every node whose stmt_deps/proof_deps (and proof-step `uses`)
@@ -304,7 +352,9 @@ def main() -> int:
         t = time.time()
         rows = load()
         _, imports = li.scan()
-        op = open_items(rows, imports)
+        op = [c["item"] for c in clusters(rows)]
+        cl = clusters(rows)
+        print(f"clusters: {len(cl)}; sizes " + ", ".join(str(len(c["members"])) for c in cl[:30]))
         nodes, mods, _ = blocked(None, imports, rows)
         print(f"rework items: {len(rows)}; open {len(op)}; fix landed (waiting for a green build) "
               f"{sum(1 for m in rows if landed(m))}; waiting for deeper rework {len(rows) - len(op) - sum(1 for m in rows if landed(m))}")
