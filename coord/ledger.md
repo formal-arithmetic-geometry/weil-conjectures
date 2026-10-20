@@ -17704,3 +17704,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:07 L: returned deliver/NL/lem-pur-system-level-projection-formula-coherence (reviewer RETURN: L: independent stage-2 immutable head ec9ccd68059b: Statement clauses, edge cases, universes, helpers and docstrings che)
 - 03:10 L: returned deliver/U9/Sheaf.CategoryTheory.RingedToposBinaryDescent (reviewer RETURN: (reviewer C-561a3, head 561a3aa3c) H9: lean/Sheaf/CategoryTheory/RingedToposRestrictionModels.lean line 18 — delete the )
 - 03:12 L: returned deliver/H3/Sheaf.CategoryTheory.ConstantLeftModuleInverseImage (reviewer RETURN: (reviewer C-9c0b5, head 9c0b57f0d) 8 (d): coord/changes/H3-constant-left-module-transport-extraction.md, ## Users table:)
+- 03:15 L: returned deliver/F7/Sheaf.AlgebraicGeometry.VectorBundleIntegration (reviewer RETURN: (reviewer C-58de6, head 58de68030) Brief point 2 (importer no longer compiles; no stage-3 letter in delivery-errors.md f)
