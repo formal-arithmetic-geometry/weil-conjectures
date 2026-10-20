@@ -107,8 +107,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.ResolutionSectionClassOpenRestriction",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/ResolutionSectionClassOpenRestriction.lean",
+  "module": "Sheaf.AlgebraicGeometry.ResolutionSectionClassOpenRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ResolutionSectionClassOpenRestriction.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.resolutionSectionClass_open_restriction",
   "statement": "theorem resolutionSectionClass_open_restriction\n    {X S : Scheme.{u}} (f : X ⟶ S) (F : X.Modules) (I : InjectiveResolution F)\n    (p : ℕ) (V W : S.Opens) (eWV : W ≤ V)\n    (U : X.Opens) (e : U = f ⁻¹ᵁ V) (R : RestrictedResolutionSections I U)\n    (R' : RestrictedResolutionSections I (f ⁻¹ᵁ W)) :\n    let eU : f ⁻¹ᵁ W ≤ U := by rw [e]; exact f.preimage_mono eWV\n    let K := ((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex\n    let Q := ((pushforward f).rightDerived p).obj F\n    let c := resolutionSectionClass R.resolution K V\n      (R.sections ≪≫ eqToIso (congrArg (fun T ↦\n        ((RingedSpace.openModuleSections X.toRingedSpace T).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj I.cocomplex) e)) p ≫\n      Hom.app (I.isoRightDerivedObj (pushforward f) p).inv V\n    let c' := resolutionSectionClass R'.resolution K W R'.sections p ≫\n      Hom.app (I.isoRightDerivedObj (pushforward f) p).inv W\n    ∀ y : (RingedSpace.moduleCohomology U.toScheme.toRingedSpace p).obj\n        ((restrictFunctor U.ι).obj F),\n      c' (cohomologyOpenRestriction F U (f ⁻¹ᵁ W) eU p y) =\n        Q.presheaf.map (homOfLE eWV).op (c y)",
   "branch": "sheaf-dag",
@@ -117,8 +117,7 @@
   "declarations": [
    "AlgebraicGeometry.Scheme.Modules.resolutionSectionClass_open_restriction",
    "AlgebraicGeometry.Scheme.Modules.cohomologyOpenRestriction"
-  ],
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.ResolutionSectionClassOpenRestriction; points at its upstream twin."
+  ]
  },
  "reviewed": {
   "date": "2026-10-13",

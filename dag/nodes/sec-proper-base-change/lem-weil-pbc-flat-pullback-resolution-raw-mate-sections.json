@@ -124,14 +124,13 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.FlatPullbackResolutionRawMateSections",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/FlatPullbackResolutionRawMateSections.lean",
+  "module": "Sheaf.AlgebraicGeometry.FlatPullbackResolutionRawMateSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatPullbackResolutionRawMateSections.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.flatBaseChangeResolution_rawMate_sections",
   "statement": "theorem flatBaseChangeResolution_rawMate_sections {X S S' : Scheme.{uBC}}\n    (f : X ⟶ S) (g : S' ⟶ S) [Flat g] {F : X.Modules}\n    (I : InjectiveResolution F)\n    (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F))\n    (t : I.cocomplex ⟶ ((pushforward (pullback.snd g f)).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj J.cocomplex) (p : ℕ) (V : S.Opens) :\n    let K := ((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex\n    let L := ((pushforward (pullback.fst g f)).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj J.cocomplex\n    let U := SheafOfModules.forget S.ringCatSheaf\n    let U' := SheafOfModules.forget S'.ringCatSheaf\n    let E := PresheafOfModules.toPresheaf S.ringCatSheaf.obj ⋙\n      (CategoryTheory.evaluation S.Opensᵒᵖ AddCommGrpCat.{uBC}).obj (op V)\n    let E' := PresheafOfModules.toPresheaf S'.ringCatSheaf.obj ⋙\n      (CategoryTheory.evaluation S'.Opensᵒᵖ AddCommGrpCat.{uBC}).obj (op (g ⁻¹ᵁ V))\n    let adj := Classical.choose (exists_tensorPullbackAdjunction g)\n    ((((U.mapHomologicalComplex (ComplexShape.up ℕ)).obj K).sc p).mapHomologyIso E).hom ≫\n        E.map (sectionCohomologyTheta K p) ≫\n        Hom.app (adj.homEquiv _ _\n          (((K.sc p).mapHomologyIso (tensorPullback g)).inv ≫\n            HomologicalComplex.homologyMap (flatBaseChangeResolutionC f g I J t) p)) V =\n      HomologicalComplex.homologyMap\n        (((RingedSpace.openModuleSections S.toRingedSpace V).mapHomologicalComplex\n          (ComplexShape.up ℕ)).map (flatBaseChangeResolutionQ f g I J t)) p ≫\n        ((((U'.mapHomologicalComplex (ComplexShape.up ℕ)).obj L).sc p)\n          |>.mapHomologyIso E').hom ≫ E'.map (sectionCohomologyTheta L p)",
   "branch": "sheaf-dag",
   "by": "G4",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.FlatPullbackResolutionRawMateSections; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

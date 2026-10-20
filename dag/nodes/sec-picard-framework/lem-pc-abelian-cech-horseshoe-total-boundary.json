@@ -111,14 +111,13 @@
  "unit": "sk-thm-picard-rr",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.Cohomology.AbelianCechHorseshoeTotalBoundary",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/Cohomology/AbelianCechHorseshoeTotalBoundary.lean",
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.AbelianCechHorseshoeTotalBoundary",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/AbelianCechHorseshoeTotalBoundary.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.abelianCechHorseshoe_total_boundary",
   "statement": "theorem abelianCechHorseshoe_total_boundary\n    {X : Scheme.{u}}\n    (T : ShortComplex (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}))\n    (hT : T.ShortExact)\n    (I₁ : InjectiveResolution T.X₁) (I₂ : InjectiveResolution T.X₂)\n    (I₃ : InjectiveResolution T.X₃)\n    (α : I₁.cocomplex ⟶ I₂.cocomplex) (β : I₂.cocomplex ⟶ I₃.cocomplex)\n    (hαβ : α ≫ β = 0)\n    (hα : I₁.ι ≫ α = (CochainComplex.single₀ _).map T.f ≫ I₂.ι)\n    (hβ : I₂.ι ≫ β = (CochainComplex.single₀ _).map T.g ≫ I₃.ι)\n    (hrows : ∀ n : ℕ, ((ShortComplex.mk α β hαβ).map\n      (HomologicalComplex.eval _ (.up ℕ) n)).ShortExact)\n    (hS : ((ShortComplex.mk α β hαβ).map\n      ((sheafToPresheaf _ _ ⋙ (CategoryTheory.evaluation _ _).obj\n        (op (⊤ : X.Opens))).mapHomologicalComplex (.up ℕ))).ShortExact)\n    {ι : Type u} (U : ι → X.Opens)\n    (hg : ∀ (k : ℕ) (y : Fin (k + 1) → ι),\n      Function.Surjective (T.g.hom.app (op (⨅ l, U (y l))))) (q : ℕ) :\n    ∃ (δ : ((abelianCechDouble U I₃).total (.up ℕ)).homology q ⟶\n        ((abelianCechDouble U I₁).total (.up ℕ)).homology (q + 1)),\n      TopCat.Sheaf.cechδ U hT hg q ≫\n          HomologicalComplex.homologyMap (abelianCechBeta U I₁) (q + 1) =\n        HomologicalComplex.homologyMap (abelianCechBeta U I₃) q ≫ δ ∧\n      hS.δ q (q + 1) rfl ≫\n          HomologicalComplex.homologyMap (abelianCechAlpha U I₁) (q + 1) =\n        HomologicalComplex.homologyMap (abelianCechAlpha U I₃) q ≫ δ",
   "branch": "sheaf-dag",
   "by": "C2",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.Cohomology.AbelianCechHorseshoeTotalBoundary; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

@@ -102,14 +102,13 @@
  },
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.FinitePresentationSectionAffineOpenVanishing",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/FinitePresentationSectionAffineOpenVanishing.lean",
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationSectionAffineOpenVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationSectionAffineOpenVanishing.lean",
   "declaration": "AlgebraicGeometry.finitePresentation_section_affine_open_eventually_zero",
   "statement": "theorem finitePresentation_section_affine_open_eventually_zero {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt] (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i)) (j : I) (hij : i ≤ j) (G : (pullback f (Spec.map (R.map (homOfLE hij)))).Modules) (hG_fp : G.IsFinitePresentation) (hG_qc : G.IsQuasicoherent) (U : Xi.Opens) (hU : IsAffineOpen U) (y : Γ(G, (pullback.fst f (Spec.map (R.map (homOfLE hij)))) ⁻¹ᵁ U)) (adjlim : Scheme.Modules.tensorPullback (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))) ⊣ Scheme.Modules.pushforward (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op)))) (adjstage : ∀ (k : I) (hjk : j ≤ k), let g := baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk))))) (Over.homMk (Spec.map (R.map (homOfLE hjk))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)) Scheme.Modules.tensorPullback g ⊣ Scheme.Modules.pushforward g) (hy : (adjlim.unit.app G).val.app (op ((pullback.fst f (Spec.map (R.map (homOfLE hij)))) ⁻¹ᵁ U)) y = 0) : ∃ (l : I), j ≤ l ∧ ∀ (k : I) (hjk : j ≤ k), l ≤ k → ((adjstage k hjk).unit.app G).val.app (op ((pullback.fst f (Spec.map (R.map (homOfLE hij)))) ⁻¹ᵁ U)) y = 0",
   "branch": "sheaf-dag",
   "by": "W4",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.FinitePresentationSectionAffineOpenVanishing; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

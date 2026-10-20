@@ -99,14 +99,13 @@
  "unit": "sk-thm-iff",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.EtaleSetStageSheafColimit",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/EtaleSetStageSheafColimit.lean",
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetStageSheafColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetStageSheafColimit.lean",
   "declaration": "AlgebraicGeometry.etaleSetStageSheaf_isColimit",
   "statement": "theorem etaleSetStageSheaf_isColimit {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)] (c : Cone D) (hc : IsLimit c) (i₀ : I) (G : Sheaf (D.obj (op i₀)).smallEtaleTopology (Type (u + 1))) : let ρ := (Scheme.fullAffineEtaleInclusion (D.obj (op i₀))).sheafPushforwardContinuous (Type (u + 1)) (Scheme.fullAffineEtaleTopology (D.obj (op i₀))) (D.obj (op i₀)).smallEtaleTopology let A := fun j : Over (op i₀) ↦ ρ.obj (((MorphismProperty.Over.pullback @Etale ⊤ (D.map j.hom)).sheafPushforwardContinuous (Type (u + 1)) ((D.obj (op i₀)).smallGrothendieckTopology (P := @Etale) (Q := @Etale)) ((D.obj j.left).smallGrothendieckTopology (P := @Etale) (Q := @Etale))).obj ((Scheme.etaleSetPullback (D.map j.hom)).obj G)) let L := ρ.obj ((@Functor.sheafPushforwardContinuous _ _ _ _ (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))) (Type (u + 1)) _ ((D.obj (op i₀)).smallGrothendieckTopology (P := @Etale) (Q := @Etale)) (c.pt.smallGrothendieckTopology (P := @Etale) (Q := @Etale)) (Etale.isContinuous_overPullback (c.π.app (op i₀)))).obj ((Scheme.etaleSetPullback (c.π.app (op i₀))).obj G)) ∀ (E : (Over (op i₀))ᵒᵖ ⥤ Sheaf (Scheme.fullAffineEtaleTopology (D.obj (op i₀))) (Type (u + 1))) (K : Cocone E), (∀ j : Over (op i₀), E.obj (op j) = A j) → K.pt = L → (∀ (j k : Over (op i₀)) (a : k ⟶ j) (W : (D.obj (op i₀)).FullAffineEtale), Arrow.mk ((E.map a.op).hom.app (op W)) = Arrow.mk (etaleSetSectionComparison (D.map a.left) (D.map j.hom) (D.map k.hom) ((D.map_comp a.left j.hom).symm.trans (congrArg (fun t : k.left ⟶ op i₀ ↦ D.map t) a.w)) G W.obj)) → (∀ (j : Over (op i₀)) (W : (D.obj (op i₀)).FullAffineEtale), Arrow.mk ((K.ι.app (op j)).hom.app (op W)) = Arrow.mk (etaleSetSectionComparison (c.π.app j.left) (D.map j.hom) (c.π.app (op i₀)) (c.w j.hom) G W.obj)) → Nonempty (IsColimit K)",
   "branch": "sheaf-dag",
   "by": "M3",
-  "date": "2026-10-12",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.EtaleSetStageSheafColimit; points at its upstream twin."
+  "date": "2026-10-12"
  },
  "reviewed": {
   "date": "2026-10-12",

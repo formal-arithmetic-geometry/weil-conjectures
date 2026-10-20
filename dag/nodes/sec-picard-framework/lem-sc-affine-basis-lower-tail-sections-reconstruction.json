@@ -129,14 +129,13 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.AffineBasisLowerTailSectionsReconstruction",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineBasisLowerTailSectionsReconstruction.lean",
+  "module": "Sheaf.AlgebraicGeometry.AffineBasisLowerTailSectionsReconstruction",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineBasisLowerTailSectionsReconstruction.lean",
   "declaration": "AlgebraicGeometry.affineBasisLowerTail_sections_reconstruction",
   "statement": "theorem affineBasisLowerTail_sections_reconstruction\n    (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)\n    [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wA} AddCommGrpCat.{u}]\n    (F : CochainComplex X.Modules ℤ)\n    (hhomology : ∀ (W : X.Opens), IsAffineOpen W → W ≤ V → ∀ (n : ℤ) (q : ℕ),\n      Subsingleton (((F.homology n).restrict W.ι).H (q + 1)))\n    (a : ℤ) :\n    let S := SheafOfModules.evaluation.{u} (moduleRings X.toRingedSpace) (op V)\n    letI : S.Additive := inferInstanceAs\n      ((SheafOfModules.forget.{u} (moduleRings X.toRingedSpace) ⋙\n        PresheafOfModules.evaluation.{u} (moduleRings X.toRingedSpace).obj (op V)).Additive)\n    let G := S ⋙ forget₂\n      (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op V))) AddCommGrpCat.{u}\n    let t := DerivedCategory.TStructure.t\n      (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    let E := (t.truncLT a).obj (DerivedCategory.Q.obj F)\n    ∃ δ : (∏ᶜ (fun n : ℕ => G.rightDerivedFunctor.obj\n        ((t.truncGE (-(n : ℤ))).obj E))) ⟶ (G.rightDerivedFunctor.obj E)⟦(1 : ℤ)⟧,\n      IsDerivedLimitTriangle (fun n : ℕ => G.rightDerivedFunctor.map\n        ((t.natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by omega)).app E))\n        (G.rightDerivedFunctor.obj E)\n        (Pi.lift (fun n : ℕ => G.rightDerivedFunctor.map\n          ((t.truncGEπ (-(n : ℤ))).app E))) δ",
   "branch": "sheaf-dag",
   "by": "M1",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.AffineBasisLowerTailSectionsReconstruction; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

@@ -108,14 +108,13 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.RestrictedResolutionCohomology",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/RestrictedResolutionCohomology.lean",
+  "module": "Sheaf.AlgebraicGeometry.RestrictedResolutionCohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/RestrictedResolutionCohomology.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.restrictedResolution_cohomology",
   "statement": "theorem restrictedResolution_cohomology {Z : Scheme.{u}} {F : Z.Modules}\n    (I : InjectiveResolution F) (U : Z.Opens) (R : RestrictedResolutionSections I U)\n    (p : ℕ) :\n    let := RingedSpace.globalSectionsFunctor_additive Z.toRingedSpace\n    let := RingedSpace.globalSectionsFunctor_additive U.toScheme.toRingedSpace\n    moduleCohomologyRestriction U F p ≫\n      (forget₂ _ AddCommGrpCat.{u}).map\n        (R.resolution.isoRightDerivedObj\n          (RingedSpace.globalSectionsFunctor U.toScheme.toRingedSpace) p).hom ≫\n      (((RingedSpace.globalSectionsComplex R.resolution).sc p).mapHomologyIso\n        (forget₂ _ AddCommGrpCat.{u})).inv ≫\n      (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p).map\n        R.sections.hom =\n    (forget₂ _ AddCommGrpCat.{u}).map\n      (I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor Z.toRingedSpace) p).hom ≫\n      (((RingedSpace.globalSectionsComplex I).sc p).mapHomologyIso\n        (forget₂ _ AddCommGrpCat.{u})).inv ≫\n      (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p).map\n        ((NatTrans.mapHomologicalComplex\n          (Functor.whiskerLeft (SheafOfModules.forget Z.ringCatSheaf ⋙\n            PresheafOfModules.toPresheaf Z.ringCatSheaf.obj)\n              ((evaluation Z.Opensᵒᵖ AddCommGrpCat.{u}).map\n                (homOfLE (show U ≤ ⊤ from le_top)).op))\n          (ComplexShape.up ℕ)).app I.cocomplex)",
   "branch": "sheaf-dag",
   "by": "Y3",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.RestrictedResolutionCohomology; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

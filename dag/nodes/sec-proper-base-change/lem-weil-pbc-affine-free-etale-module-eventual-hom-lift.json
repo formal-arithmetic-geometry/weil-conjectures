@@ -115,14 +115,13 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.AffineFreeEtaleModuleEventualHomLift",
+  "module": "Sheaf.AlgebraicGeometry.AffineFreeEtaleModuleEventualHomLift",
   "declaration": "AlgebraicGeometry.Scheme.exists_affine_free_etaleModule_eventual_hom_lift",
   "statement": "theorem exists_affine_free_etaleModule_eventual_hom_lift\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)]\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)]\n    [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    (c : Cone D) (hc : IsLimit c)\n    (Λ : Type (u + 1)) [CommRing Λ]\n    (i : I) (m : ℕ) (W : Fin m → (D.obj (op i)).Etale)\n    (hW : ∀ k, IsAffine (W k).left)\n    (G : Sheaf (D.obj (op i)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    let Q : (D.obj (op i)).Etale →\n        Sheaf (D.obj (op i)).smallEtaleTopology (ModuleCat.{u + 1} Λ) :=\n      fun Z ↦ (Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) Z.hom inferInstance).obj\n        ((constantSheaf Z.left.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj\n          (ModuleCat.of Λ Λ))\n    let A := ∐ fun k : Fin m ↦ Q (W k)\n    ∀ f : (Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op i))).obj A ⟶\n        (Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op i))).obj G,\n      ∃ (j : I) (h : i ≤ j)\n        (a : (Etale.upperStar (ModuleCat.{u + 1} Λ) (D.map (homOfLE h).op)).obj A ⟶\n          (Etale.upperStar (ModuleCat.{u + 1} Λ) (D.map (homOfLE h).op)).obj G),\n        (Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op j))).map a ≫\n          (Etale.upperStarComp (ModuleCat.{u + 1} Λ) (c.π.app (op j))\n            (D.map (homOfLE h).op) (c.π.app (op i))\n            (c.w (homOfLE h).op).symm).inv.app G =\n        (Etale.upperStarComp (ModuleCat.{u + 1} Λ) (c.π.app (op j))\n          (D.map (homOfLE h).op) (c.π.app (op i))\n          (c.w (homOfLE h).op).symm).inv.app A ≫ f",
   "branch": "sheaf-dag",
   "by": "R1",
   "date": "2026-10-12",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineFreeEtaleModuleEventualHomLift.lean",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.AffineFreeEtaleModuleEventualHomLift; points at its upstream twin."
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFreeEtaleModuleEventualHomLift.lean"
  },
  "reviewed": {
   "date": "2026-10-12",

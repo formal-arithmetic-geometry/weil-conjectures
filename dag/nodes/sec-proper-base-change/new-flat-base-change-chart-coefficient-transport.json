@@ -139,14 +139,13 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.FlatBaseChangeChartCoefficientTransport",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/FlatBaseChangeChartCoefficientTransport.lean",
+  "module": "Sheaf.AlgebraicGeometry.FlatBaseChangeChartCoefficientTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatBaseChangeChartCoefficientTransport.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exists_flatBaseChange_chart_coefficient_transport",
   "statement": "theorem exists_flatBaseChange_chart_coefficient_transport\n    {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)\n    (F : X.Modules) (I : InjectiveResolution F)\n    (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F))\n    (V : S.Opens) (W : S'.Opens) (hV : IsAffineOpen V) (hW : IsAffineOpen W)\n    (eVW : W ≤ g ⁻¹ᵁ V) (D : FlatBaseChangeOpenChoices f g F I J V)\n    [Algebra Γ(S, V) Γ(S', W)]\n    (hAlgebra : algebraMap Γ(S, V) Γ(S', W) = (g.appLE V W eVW).hom) :\n    let h := f.resLE V (f ⁻¹ᵁ V) le_rfl ≫ V.toSpecΓ\n    let N := (pullback (f ⁻¹ᵁ V).ι).obj F\n    let T := baseChangedScheme (S := Γ(S', W)) h\n    let A := baseChangedModule (S := Γ(S', W)) h N\n    let G := (tensorPullback (pullback.snd g f)).obj F\n    let U := (pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)\n    let L := (pullback.fst g f) ⁻¹ᵁ W\n    let e : L ≤ U := by\n      change (pullback.fst g f) ⁻¹ᵁ W ≤ (pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)\n      rw [flatBaseChangeOpenEquality f g V]\n      exact (pullback.fst g f).preimage_mono eVW\n    let M := (restrictFunctor L.ι).obj G\n    let k := (pullback.fst g f).resLE W L le_rfl ≫ W.toSpecΓ\n    let j := (Limits.pullback g f).homOfLE e\n    let c := (restrictFunctorComp j U.ι).symm.app G ≪≫\n      (restrictFunctorCongr ((Limits.pullback g f).homOfLE_ι e)).app G\n    let r := (restrictAdjunction j).unit.app ((restrictFunctor U.ι).obj G) ≫\n      (pushforward j).map c.hom\n    let q := (pullback.snd g f).resLE (f ⁻¹ᵁ V) U le_rfl\n    let α := ((restrictFunctorIsoPullback (f ⁻¹ᵁ V).ι).app F).hom\n    ∃ (σ : L.toScheme ≅ T)\n      (φ : A ⟶ (pushforward σ.hom).obj M)\n      (ψ : M ⟶ (pushforward σ.inv).obj A),\n      (φ ≫ (pushforward σ.hom).map ψ ≫ (pushforwardComp σ.inv σ.hom).hom.app A ≫\n        (pushforwardCongr σ.inv_hom_id).hom.app A = (pushforwardId T).inv.app A) ∧\n      (ψ ≫ (pushforward σ.inv).map φ ≫ (pushforwardComp σ.hom σ.inv).hom.app M ≫\n        (pushforwardCongr σ.hom_inv_id).hom.app M =\n          (pushforwardId L.toScheme).inv.app M) ∧\n      (∀ a : Γ(S', W),\n        A.smulHom (((Scheme.ΓSpecIso Γ(S', W)).inv ≫\n          (baseChangeSnd (S := Γ(S', W)) h).appTop).hom a) ≫ φ =\n        φ ≫ (pushforward σ.hom).map\n          (M.smulHom (((Scheme.ΓSpecIso Γ(S', W)).inv ≫ k.appTop).hom a))) ∧\n      ∃ ef : σ.hom ≫ baseChangeFst (S := Γ(S', W)) h = j ≫ q,\n        α ≫ baseChangeUnit (S := Γ(S', W)) h N ≫\n          (pushforward (baseChangeFst (S := Γ(S', W)) h)).map φ ≫\n          (pushforwardComp σ.hom (baseChangeFst (S := Γ(S', W)) h)).hom.app M ≫\n          (pushforwardCongr ef).hom.app M =\n        D.psi ≫ (pushforward q).map r ≫ (pushforwardComp j q).hom.app M",
   "branch": "sheaf-dag",
   "by": "U1",
-  "date": "2026-10-14",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.FlatBaseChangeChartCoefficientTransport; points at its upstream twin."
+  "date": "2026-10-14"
  },
  "reviewed": {
   "date": "2026-10-13",

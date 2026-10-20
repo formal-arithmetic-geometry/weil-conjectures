@@ -137,14 +137,13 @@
  "unit": "sk-thm-picard-coherence",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.SectionCohomologyUnitComparisons",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/SectionCohomologyUnitComparisons.lean",
+  "module": "Sheaf.AlgebraicGeometry.SectionCohomologyUnitComparisons",
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionCohomologyUnitComparisons.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.sectionCohomology_unit_comparisons",
   "statement": "theorem sectionCohomology_unit_comparisons {X T : Scheme.{u}}\n    (f : X ⟶ T) (F : X.Modules) (I : InjectiveResolution F)\n    (q : ℕ) (W : T.Opens) (a : Γ(T, W)) :\n    let Y := (f ⁻¹ᵁ W).toScheme\n    let G := (restrictFunctor (f ⁻¹ᵁ W).ι).obj F\n    let L := 𝟙_ Y.Modules\n    let b := ((f.app W) ≫ (f ⁻¹ᵁ W).topIso.inv).hom a\n    let s : Γ(L, ⊤) := unitSectionsEquiv ⊤ b\n    let K := ((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex\n    let P := sectionCohomologyPresheaf K q\n    let : Module Γ(T, W) (P.obj (op (T.basicOpen a))) :=\n      Module.compHom _ (T.presheaf.map (homOfLE (T.basicOpen_le a)).op).hom\n    ∀ (U : Y.Opens), (U : Set Y) = nonvanishingLocus L s →\n      ∃ e : (RingedSpace.openModuleCohomology Y.toRingedSpace q U).obj G ≃+\n          P.obj (op (T.basicOpen a)),\n      ∃ c : ∀ n : ℕ,\n        (RingedSpace.openModuleCohomology Y.toRingedSpace q ⊤).obj\n          (G ⊗ L.tensorPow n : Y.Modules) ≃+ P.obj (op W),\n      ∃ d : ∀ n : ℕ,\n        (RingedSpace.openModuleCohomology Y.toRingedSpace q U).obj\n          (G ⊗ L.tensorPow n : Y.Modules) ≃+ P.obj (op (T.basicOpen a)),\n      (∀ (n : ℕ) (z : (RingedSpace.openModuleCohomology Y.toRingedSpace q U).obj G),\n        d n ((RingedSpace.openModuleCohomology Y.toRingedSpace q U).map\n          (((ρ_ G).inv ≫ G ◁ tensorPowSection (homOfGlobalSection L s) n) :\n            G ⟶ (G ⊗ L.tensorPow n : Y.Modules)) z) = a ^ n • e z) ∧\n      (∀ (n : ℕ) (ξ : (RingedSpace.openModuleCohomology Y.toRingedSpace q ⊤).obj\n          (G ⊗ L.tensorPow n : Y.Modules)),\n        d n ((RingedSpace.openModuleCohomologyRestriction Y.toRingedSpace q\n          (homOfLE (le_top : U ≤ ⊤))).app (G ⊗ L.tensorPow n : Y.Modules) ξ) =\n            (P.map (homOfLE (T.basicOpen_le a)).op).hom (c n ξ))",
   "branch": "sheaf-dag",
   "by": "T2",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.SectionCohomologyUnitComparisons; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",

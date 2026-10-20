@@ -139,14 +139,13 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.PullbackSectionsIsColimit",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/PullbackSectionsIsColimit.lean",
+  "module": "Sheaf.AlgebraicGeometry.PullbackSectionsIsColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/PullbackSectionsIsColimit.lean",
   "declaration": "AlgebraicGeometry.Etale.nonempty_isColimit_pullbackSections",
   "statement": "theorem nonempty_isColimit_pullbackSections {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] (c : Cone D) (hc : IsLimit c) (Λ : Type (u + 1)) [CommRing Λ] (i₀ : I) (G : Sheaf (D.obj (op i₀)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) (V₀ : (D.obj (op i₀)).Etale) [IsAffine V₀.left] : let J := {i : I // i₀ ≤ i} let S : J → ModuleCat.{u + 1} Λ := fun i ↦ ((lowerStar (ModuleCat.{u + 1} Λ) (D.map (homOfLE i.property).op)).obj ((upperStar (ModuleCat.{u + 1} Λ) (D.map (homOfLE i.property).op)).obj G)).obj.obj (op V₀) let T : ModuleCat.{u + 1} Λ := ((lowerStar (ModuleCat.{u + 1} Λ) (c.π.app (op i₀))).obj ((upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op i₀))).obj G)).obj.obj (op V₀) let μ : ∀ {i j : J}, (i ⟶ j) → (S i ⟶ S j) := fun {i j} f ↦ ((lowerStar (ModuleCat.{u + 1} Λ) (D.map (homOfLE i.property).op)).map ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (D.map (homOfLE (show i.val ≤ j.val from leOfHom f)).op)).unit.app ((upperStar (ModuleCat.{u + 1} Λ) (D.map (homOfLE i.property).op)).obj G)) ≫ (lowerStarComp (ModuleCat.{u + 1} Λ) (D.map (homOfLE (show i.val ≤ j.val from leOfHom f)).op) (D.map (homOfLE i.property).op) (D.map (homOfLE j.property).op) (by rw [← Functor.map_comp]; rfl)).hom.app _ ≫ (lowerStar (ModuleCat.{u + 1} Λ) (D.map (homOfLE j.property).op)).map ((upperStarComp (ModuleCat.{u + 1} Λ) (D.map (homOfLE (show i.val ≤ j.val from leOfHom f)).op) (D.map (homOfLE i.property).op) (D.map (homOfLE j.property).op) (by rw [← Functor.map_comp]; rfl)).inv.app G)).hom.app (op V₀) let τ : ∀ i : J, S i ⟶ T := fun i ↦ ((lowerStar (ModuleCat.{u + 1} Λ) (D.map (homOfLE i.property).op)).map ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (c.π.app (op i.val))).unit.app ((upperStar (ModuleCat.{u + 1} Λ) (D.map (homOfLE i.property).op)).obj G)) ≫ (lowerStarComp (ModuleCat.{u + 1} Λ) (c.π.app (op i.val)) (D.map (homOfLE i.property).op) (c.π.app (op i₀)) (c.w (homOfLE i.property).op).symm).hom.app _ ≫ (lowerStar (ModuleCat.{u + 1} Λ) (c.π.app (op i₀))).map ((upperStarComp (ModuleCat.{u + 1} Λ) (c.π.app (op i.val)) (D.map (homOfLE i.property).op) (c.π.app (op i₀)) (c.w (homOfLE i.property).op).symm).inv.app G)).hom.app (op V₀) ∀ (F : J ⥤ ModuleCat.{u + 1} Λ) (B : Cocone F) (e : ∀ i : J, F.obj i ≅ S i) (eB : B.pt ≅ T), (∀ (i j : J) (f : i ⟶ j), (e i).inv ≫ F.map f ≫ (e j).hom = μ f) → (∀ i : J, (e i).inv ≫ B.ι.app i ≫ eB.hom = τ i) → Nonempty (IsColimit B)",
   "branch": "sheaf-dag",
   "by": "A3",
-  "date": "2026-10-12",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.PullbackSectionsIsColimit; points at its upstream twin."
+  "date": "2026-10-12"
  },
  "reviewed": {
   "date": "2026-10-12",

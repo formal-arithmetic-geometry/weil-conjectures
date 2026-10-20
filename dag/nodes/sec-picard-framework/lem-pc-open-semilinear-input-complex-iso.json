@@ -82,14 +82,13 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.OpenSemilinearInputComplexIso",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/OpenSemilinearInputComplexIso.lean",
+  "module": "Sheaf.AlgebraicGeometry.OpenSemilinearInputComplexIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenSemilinearInputComplexIso.lean",
   "declaration": "AlgebraicGeometry.exists_openSemilinearInputComplexIso",
   "statement": "theorem exists_openSemilinearInputComplexIso (X : Scheme.{u}) (U : X.Opens) (x : U.toScheme) (y : X)\n    (hxy : x.val = y)\n    (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :\n    letI : (schemeOpenRestriction X U).Additive := schemeOpenRestriction_additive X U\n    letI : (schemeOpenRestriction X U).PreservesZeroMorphisms :=\n      Functor.preservesZeroMorphisms_of_additive _\n    let L₀ := RingedSpace.moduleStalkFunctor U.toScheme.toRingedSpace x\n    let L₁ := RingedSpace.moduleStalkFunctor X.toRingedSpace y\n    let F₀ := forget₂ (ModuleCat.{u} (U.toScheme.presheaf.stalk x)) AddCommGrpCat.{u}\n    let F₁ := forget₂ (ModuleCat.{u} (X.presheaf.stalk y)) AddCommGrpCat.{u}\n    let K₀ := (L₀.mapHomologicalComplex (.up ℤ)).obj\n      (((schemeOpenRestriction X U).mapHomologicalComplex (.up ℤ)).obj P)\n    let K₁ := (L₁.mapHomologicalComplex (.up ℤ)).obj P\n    let eA := (U.stalkIso x ≪≫ X.presheaf.stalkCongr (.of_eq hxy)).commRingCatIsoToRingEquiv\n    let γ := Functor.isoWhiskerRight (Scheme.Modules.overFunctorEquiv U) (L₀ ⋙ F₀) ≪≫\n      Scheme.Modules.restrictStalkNatIso U.ι x\n    ∃ α : (F₀.mapHomologicalComplex (.up ℤ)).obj K₀ ≅\n        (F₁.mapHomologicalComplex (.up ℤ)).obj K₁,\n      (∀ (n : ℤ) (a : U.toScheme.presheaf.stalk x) (q : K₀.X n),\n        α.hom.f n (a • q) = eA a • (show K₁.X n from α.hom.f n q)) ∧\n      ∀ n : ℤ, α.hom.f n = γ.hom.app (P.X n) ≫\n        ((show X.Modules from P.X n).presheaf.stalkCongr (.of_eq hxy)).hom",
   "branch": "sheaf-dag",
   "by": "H4",
-  "date": "2026-10-14",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.OpenSemilinearInputComplexIso; points at its upstream twin."
+  "date": "2026-10-14"
  },
  "reviewed": {
   "date": "2026-10-13",

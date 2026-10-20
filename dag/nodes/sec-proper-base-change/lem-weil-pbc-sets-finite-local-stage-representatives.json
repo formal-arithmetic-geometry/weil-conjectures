@@ -113,14 +113,13 @@
  "unit": "sk-thm-iff",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.EtaleSetFiniteLocalStageRepresentatives",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/EtaleSetFiniteLocalStageRepresentatives.lean",
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetFiniteLocalStageRepresentatives",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetFiniteLocalStageRepresentatives.lean",
   "declaration": "AlgebraicGeometry.etaleSet_finiteLocalStageRepresentatives",
   "statement": "theorem etaleSet_finiteLocalStageRepresentatives\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)]\n    [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)]\n    (c : Cone D) (hc : IsLimit c) (i₀ : I)\n    (G : Sheaf (D.obj (op i₀)).smallEtaleTopology (Type (u + 1)))\n    (W : (D.obj (op i₀)).FullAffineEtale)\n    (t : ((Scheme.etaleSetPullback (c.π.app (op i₀))).obj G).obj.obj\n      (op ((MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).obj W.obj))) :\n    let H := fun j : Over (op i₀) ↦ (Scheme.etaleSetPullback (D.map j.hom)).obj G\n    let L := (Scheme.etaleSetPullback (c.π.app (op i₀))).obj G\n    let B := fun j : Over (op i₀) ↦ MorphismProperty.Over.pullback @Etale ⊤ (c.π.app j.left)\n    let Y := fun j : Over (op i₀) ↦\n      (MorphismProperty.Over.pullback @Etale ⊤ (D.map j.hom)).obj W.obj\n    let e := fun j : Over (op i₀) ↦\n      (MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤)\n        (c.π.app j.left) (D.map j.hom) (c.π.app (op i₀)) (c.w j.hom).symm).app W.obj\n    let β := fun j : Over (op i₀) ↦\n      etaleSetSheafComparison (c.π.app j.left) (D.map j.hom)\n        (c.π.app (op i₀)) (c.w j.hom) G\n    ∃ (j : Over (op i₀)) (n : ℕ) (V : Fin n → (D.obj j.left).Etale)\n      (a : ∀ q, V q ⟶ Y j) (s : ∀ q, (H j).obj.obj (op (V q))),\n      Sieve.ofArrows V a ∈ (D.obj j.left).smallEtaleTopology (Y j) ∧\n      (∀ q, IsAffine (V q).left) ∧\n      (∀ q, (β j).hom.app (op (V q)) (s q) =\n        L.obj.map ((B j).map (a q) ≫ (e j).inv).op t)",
   "branch": "sheaf-dag",
   "by": "Q2",
-  "date": "2026-10-13",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.EtaleSetFiniteLocalStageRepresentatives; points at its upstream twin."
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-12",

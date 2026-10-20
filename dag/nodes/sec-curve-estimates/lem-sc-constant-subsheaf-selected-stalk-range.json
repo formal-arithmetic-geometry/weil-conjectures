@@ -101,14 +101,13 @@
  "unit": "sk-thm-curveestimate",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.Topology.ConstantSubsheafSelectedStalkRange",
-  "file": "lean/WeilConjectures/Topology/ConstantSubsheafSelectedStalkRange.lean",
+  "module": "Sheaf.Topology.ConstantSubsheafSelectedStalkRange",
+  "file": "lean/Sheaf/Topology/ConstantSubsheafSelectedStalkRange.lean",
   "declaration": "TopCat.Sheaf.constantSubsheaf_selected_stalk_range",
   "statement": "theorem constantSubsheaf_selected_stalk_range (X : TopCat.{u}) (K C : Sheaf AddCommGrpCat X) (ι : K ⟶ C) (isoC : C ≅ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) (n : ℕ) (A : Fin n → Opens X) (c : Fin n → ℕ) (g : (∐ fun i => (abelianOpenExtensionByZero (A i)).obj ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A i))) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) ⟶ K) (s : ∀ i, K.obj.obj (op (A i))) (hsection : ∀ i, (Sigma.ι (fun j => (abelianOpenExtensionByZero (A j)).obj ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A j))) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) i ≫ g).hom.app (op (A i)) (abelianOpenExtensionSection (A i) ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A i))) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) (A i) le_rfl ((toSheafify (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A i))) ((Functor.const (Opens ((Opens.toTopCat X).obj (A i)))ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op ((Opens.map (A i).inclusion').obj (A i))) (ULift.up 1))) = s i) (hvalue : ∀ i, (ι ≫ isoC.hom).hom.app (op (A i)) (s i) = (toSheafify (Opens.grothendieckTopology X) ((Functor.const (Opens X)ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op (A i)) (ULift.up (c i : ℤ))) (P : Fin n → Prop) [DecidablePred P] (e : ∀ x : X, TopCat.Presheaf.stalk C.obj x ≅ AddCommGrpCat.of (ULift.{u} ℤ)) : let D := fun i => (abelianOpenExtensionByZero (A i)).obj ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A i))) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) let f : (∐ D) ⟶ K := Sigma.desc (fun i ↦ if P i then Sigma.ι D i ≫ g else 0) ∀ x : X, Set.range (fun t : ToType (TopCat.Presheaf.stalk (∐ D).obj x) ↦ (e x).hom ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map (f ≫ ι).hom t)) = (AddSubgroup.closure {z : ULift.{u} ℤ | ∃ i, x ∈ A i ∧ P i ∧ z = ULift.up (c i : ℤ)} : Set (ULift.{u} ℤ))",
   "branch": "sheaf-dag",
   "by": "B2",
-  "date": "2026-10-12",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.Topology.ConstantSubsheafSelectedStalkRange; points at its upstream twin."
+  "date": "2026-10-12"
  },
  "reviewed": {
   "date": "2026-10-12",

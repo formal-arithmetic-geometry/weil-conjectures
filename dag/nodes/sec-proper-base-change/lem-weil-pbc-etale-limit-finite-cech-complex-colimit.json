@@ -84,14 +84,13 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.EtaleLimitFiniteCechComplexColimit",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/EtaleLimitFiniteCechComplexColimit.lean",
+  "module": "Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechComplexColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLimitFiniteCechComplexColimit.lean",
   "declaration": "AlgebraicGeometry.Etale.etale_limit_finite_cech_complex_colimit",
   "statement": "theorem etale_limit_finite_cech_complex_colimit\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    [∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D.map f)]\n    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)\n    (hidentity : ∀ i : I, φ (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i))\n    (hcomposition : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),\n      φ (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n          (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φ f) ≫ φ g)\n    (G : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (eG : ∀ i : I, G.obj i ≅\n      (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (F i))\n    (hG : ∀ (i j : I) (f : i ⟶ j), G.map f =\n      (eG i).hom ≫\n        (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)\n          (c.π.app (op i)) (c.w f.op).symm).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (φ f) ≫ (eG j).inv)\n    (L : Cocone G) (hL : IsColimit L)\n    (U : c.pt.Etale) [CompactSpace U.left] [QuasiSeparatedSpace U.left]\n    (K : Type (u + 1)) [Finite K] (V : K → c.pt.Etale) (f : ∀ k, V k ⟶ U)\n    (hV : ∀ k, CompactSpace (V k).left ∧ QuasiSeparatedSpace (V k).left)\n    (hf : Sieve.ofArrows V f ∈ c.pt.smallEtaleTopology U) :\n    ∃ (i₀ : I) (A : {j : I // i₀ ≤ j} ⥤ CochainComplex AddCommGrpCat.{u + 1} ℕ)\n      (Uj : ∀ j : {j : I // i₀ ≤ j}, (D.obj (op j.val)).Etale)\n      (Vj : ∀ j : {j : I // i₀ ≤ j}, K → (D.obj (op j.val)).Etale)\n      (fj : ∀ (j : {j : I // i₀ ≤ j}) (k : K), Vj j k ⟶ Uj j)\n      (eA : ∀ j : {j : I // i₀ ≤ j}, A.obj j ≅\n        (cechComplexFunctor (fun k : K ↦ Over.mk (fj j k))).obj\n          ((Over.forget (Uj j)).op ⋙ (F j.val).obj))\n      (cA : Cocone A)\n      (eK : cA.pt ≅ (cechComplexFunctor (fun k : K ↦ Over.mk (f k))).obj\n        ((Over.forget U).op ⋙ L.pt.obj)),\n      (∀ j : {j : I // i₀ ≤ j},\n        Sieve.ofArrows (Vj j) (fj j) ∈ (D.obj (op j.val)).smallEtaleTopology (Uj j)) ∧\n      Nonempty (IsColimit cA)",
   "branch": "sheaf-dag",
   "by": "N2",
-  "date": "2026-10-12",
-  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechComplexColimit; points at its upstream twin."
+  "date": "2026-10-12"
  },
  "proof_deps": [
   "lem-weil-pbc-etale-limit-finite-cech-stage-data",
