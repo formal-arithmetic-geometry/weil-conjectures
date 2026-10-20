@@ -1,0 +1,150 @@
+{
+ "id": "lem-sp-finite-p1-diagonal-chern-components",
+ "kind": "statement",
+ "title": "The two components of the diagonal Kummer class",
+ "statement": "Let $N>0$, let $A$ be a finite commutative ring annihilated by $N$, and let $S$ be any scheme on which $N$ is invertible. Put $P=\\mathbf P^1_S$, $W=P\\times_SP$ and let $\\Delta:P\\to W$ be its diagonal [def-nagata-projective-space-base-change, def-pc-fibre-product]. Use any normalized finite twist transport [def-asd-ordinary-finite-p1-arrows] and any relative hyperplane morphism $c:A_{\\mathbf P^1_P}\\to A_{\\mathbf P^1_P}(1)[2]$ satisfying the actual scalar Kummer specification [def-asd-ordinary-finite-p1-kummer-class]. Then the diagonal ideal is invertible [def-nagata-effective-cartier-ideal], and there is a supported Ext class $\\kappa\\in\\operatorname{Ext}^2(\\Delta_*A_P,A_W(1))$ with SupportedKummerBoundary [lem-asd-ordinary-supported-kummer]. For either projection $p$, let $J_p:Rp_*A_W(1)[2]\\to Rr_{P,*}A_{\\mathbf P^1_P}(1)[2]$ be the canonical transport through its projective-line chart, and let $\\alpha_p$ be the pasted constant unit [lem-amb-p1-diagonal-integrals]. There is a morphism $\\beta_p:A_P\\to A_P(1)[2]$ such that $\\alpha_p\\,Rp_*(\\delta_\\kappa)\\,J_p=\\beta_p\\,u_P+h_c$, where $u_P$ is the twisted unit and $h_c$ the Chern adjunct [def-asd-ordinary-finite-p1-arrows]. No splitting, trace, or integral identity is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Levelwise finite diagonal check, expanded in lem-sp-tower-p1-arbitrary-base-integrals"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-inverse-image",
+  "def-nagata-projective-space-base-change",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-asd-ordinary-finite-p1-data",
+  "def-pc-fibre-product",
+  "def-nagata-effective-cartier-ideal",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-amb-p1-diagonal-integrals"
+ ],
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "proof": [
+  {
+   "text": "Reuse the short argument of diagonalImmersion_cartier: its diagonal is a section of a smooth relative-dimension-one projection, so the relative Cartier criterion makes its ideal invertible. The smooth projective-line instance is proved in ProjectiveSpace.LineSmooth.",
+   "uses": [
+    "lem-pc-cartier-criterion",
+    "lem-weil-pbc-projective-space-standard-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Levelwise finite diagonal check, expanded in lem-sp-tower-p1-arbitrary-base-integrals"
+   }
+  },
+  {
+   "text": "The uniquely normalized supported Kummer boundary exists for this Cartier diagonal.",
+   "uses": [
+    "lem-asd-ordinary-supported-kummer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Levelwise finite diagonal check, expanded in lem-sp-tower-p1-arbitrary-base-integrals"
+   }
+  },
+  {
+   "text": "Apply the independent diagonal Kummer component formula to this boundary and the given relative hyperplane class.",
+   "uses": [
+    "lem-sp-finite-p1-diagonal-kummer-component-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Levelwise finite diagonal check, expanded in lem-sp-tower-p1-arbitrary-base-integrals"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-ordinary-supported-kummer",
+  "lem-pc-cartier-criterion",
+  "lem-sp-finite-p1-diagonal-kummer-component-formula",
+  "lem-weil-pbc-projective-space-standard-charts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Levelwise finite diagonal check, expanded in lem-sp-tower-p1-arbitrary-base-integrals"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective line Kummer splitting and supported diagonal integral over arbitrary base scheme",
+   "results": "No matching theorem; returned elliptic-curve and projectivization results.",
+   "date": "2026-10-20",
+   "verdict": "No matching theorem; returned elliptic-curve and projectivization results."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.biprod.inr_desc",
+   "results": "Found biprod.inr_desc, used for the second-component normalization.",
+   "date": "2026-10-20",
+   "verdict": "Found biprod.inr_desc, used for the second-component normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*integral|arbitraryBaseFiniteP1|P1.*Splitting",
+   "results": "No matching Mathlib theorem; local source search found only the existing Noetherian interfaces.",
+   "date": "2026-10-20",
+   "verdict": "No matching Mathlib theorem; local source search found only the existing Noetherian interfaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projective line diagonal is Cartier and its supported Kummer class has a base Chern component and a relative hyperplane component",
+   "results": "AlgebraicGeometry.IsImmersion.instDiagonalScheme (Mathlib.AlgebraicGeometry.Morphisms.Immersion); AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal (Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified); AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal (Mathlib.AlgebraicGeometry.Morphisms.Constructors); AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion (Mathlib.AlgebraicGeometry.Morphisms.Separated); AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal (Mathlib.AlgebraicGeometry.Morphisms.Constructors); AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme (Mathlib.AlgebraicGeometry.Morphisms.Constructors); AlgebraicGeometry.Scheme.Pullback.diagonalCoverDiagonalRange (Mathlib.AlgebraicGeometry.Pullbacks); Projectivization.card_of_finrank_two (Mathlib.LinearAlgebra.Projectivization.Cardinality)",
+   "date": "2026-10-20",
+   "verdict": "Only generic scheme-diagonal and projectivization-cardinality results; no supported Kummer boundary or component formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteP1ArbitraryBaseIntegrals",
+  "date": "2026-10-20",
+  "group": "G5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-tower-p1-arbitrary-base-integrals",
+   "place": "The two components of the diagonal Kummer class",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteP1DiagonalChernComponents",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteP1DiagonalChernComponents.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteP1_diagonal_chern_components",
+  "statement": "theorem ordinaryFiniteP1_diagonal_chern_components (N : ℕ) (hN : 0 < N)\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤)))\n    (hP : IsUnit (N : Γ(ProjectiveLine S, ⊤)))\n    (hPP : IsUnit (N : Γ(ProjectiveLine (ProjectiveLine S), ⊤)))\n    (hW : IsUnit (N : Γ(pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S), ⊤)))\n    (c : ordinaryFiniteUnit A (ProjectiveLine (ProjectiveLine S)) ⟶\n      (ordinaryFiniteLine A N hA (ProjectiveLine (ProjectiveLine S)))⟦(2 : ℤ)⟧)\n    (hc : ordinaryFiniteP1ChernSpec A N hA (ProjectiveLine S) hPP c) :\n    ∃ hI : (pullback.diagonal (ProjectiveLine S ↘ S)).ker.IsInvertible,\n      ∃ κ : Ext\n        ((lowerStar (ModuleCat.{u + 1} A) (pullback.diagonal (ProjectiveLine S ↘ S))).obj\n          (ordinaryFiniteConstant A (ProjectiveLine S)))\n        (Scheme.finiteEtaleTateLine\n          (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) N A hA) 2,\n        SupportedKummerBoundary A N hA (pullback.diagonal (ProjectiveLine S ↘ S))\n          hI hW κ ∧\n        ∀ a : Bool, ∃ β : ordinaryFiniteUnit A (ProjectiveLine S) ⟶\n              (ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧,\n            ordinaryFiniteP1DiagonalSupportedMap A N hA S a κ ≫\n              ordinaryFiniteP1DiagonalChartMap A N hA t S hS a =\n            β ≫ ordinaryFiniteP1Unit A N hA t (ProjectiveLine S) hP +\n              ordinaryFiniteP1ChernPushforward A N hA (ProjectiveLine S) c",
+  "branch": "sheaf-dag",
+  "by": "G5",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-810d7",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261020T230743-L-608710",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-810d7",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261020T230743-L-608710",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery byte-identical to PASSed b77640285 (landing failed on unrelated missing file); recompiled all 8 modules + #print axioms against current live build, re-checked item statement folding vs change record, node lean records, live importers (none), new B2 kummer-maps node overlap and dropped lists"
+ }
+}

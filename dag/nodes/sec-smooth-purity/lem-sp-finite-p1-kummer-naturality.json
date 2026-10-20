@@ -1,0 +1,162 @@
+{
+ "id": "lem-sp-finite-p1-kummer-naturality",
+ "kind": "statement",
+ "title": "Naturality of the normalized hyperplane Kummer map",
+ "statement": "Let $N>0$ and let $A$ be a finite commutative ring with $NA=0$. In the ordinary etale module derived categories [def-weil-pbc-derived-categories], use the normalized finite twist transport of [def-amb-p1-trace]. For every scheme $S$ with $N$ invertible, there is a morphism $c_S:A_{P_S}\\to A_{P_S}(1)[2]$ whose abelian cohomology realization is the scalar Kummer class of $\\mathcal O(1)$ [def-asd-ordinary-finite-p1-kummer-class]. If $S$ is Noetherian, $c_S$ equals the Chern morphism of the normalized datum [def-amb-p1-trace]. Put $b_S=\\operatorname{desc}(\\text{twisted unit},\\text{adjoint of }c_S)$ [def-asd-ordinary-finite-p1-arrows]. For every morphism $f:S^\\prime\\to S$ between N-invertible schemes, canonical exchange and shifted twist transport take $f^{-1}b_S$ to $b_{S^\\prime}$ after the canonical two-summand comparison [def-asd-ordinary-finite-p1-data]. No invertibility of $b_S$, trace, or diagonal integral is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Levelwise finite diagonal check, expanded in lem-sp-tower-p1-arbitrary-base-integrals"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-inverse-image",
+  "def-nagata-projective-space-base-change",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-asd-ordinary-finite-p1-data",
+  "def-amb-p1-trace"
+ ],
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "proof": [
+  {
+   "text": "The hyperplane is Cartier over every base: its ideals are (t) and the unit ideal on the two standard charts. Their dual transitions identify its line with the specified O(1). This remains true after any base change.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "def-nagata-effective-cartier-ideal",
+    "def-pc-divisor-line-bundle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Levelwise finite diagonal check, expanded in lem-sp-tower-p1-arbitrary-base-integrals"
+   }
+  },
+  {
+   "text": "Use the supported Kummer boundary and compose with the constant unit. The free rank-one constant module source identifies module-derived Hom with abelian cohomology evaluated at one, so its Kummer realization determines c. This also identifies c with the existing normalized datum over Noetherian bases.",
+   "uses": [
+    "lem-asd-ordinary-supported-kummer",
+    "def-asd-ordinary-finite-p1-kummer-class",
+    "def-amb-p1-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Levelwise finite diagonal check, expanded in lem-sp-tower-p1-arbitrary-base-integrals"
+   }
+  },
+  {
+   "text": "The Cartier-preserving supported pullback square and unit mate identity give the hyperplane Chern pullback square. Take adjoints for the second direct-image component; the mate formula gives the first twisted-unit component. Biproduct extensionality gives the asserted square.",
+   "uses": [
+    "lem-asd-ordinary-supported-kummer",
+    "def-kun-unbounded-exchange",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Levelwise finite diagonal check, expanded in lem-sp-tower-p1-arbitrary-base-integrals"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-p1-trace",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-kun-unbounded-exchange",
+  "def-nagata-effective-cartier-ideal",
+  "def-pc-divisor-line-bundle",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-weil-pbc-projective-space-standard-charts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Levelwise finite diagonal check, expanded in lem-sp-tower-p1-arbitrary-base-integrals"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective line Kummer splitting and supported diagonal integral over arbitrary base scheme",
+   "results": "No matching theorem; returned elliptic-curve and projectivization results.",
+   "date": "2026-10-20",
+   "verdict": "No matching theorem; returned elliptic-curve and projectivization results."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.biprod.inr_desc",
+   "results": "Found biprod.inr_desc, used for the second-component normalization.",
+   "date": "2026-10-20",
+   "verdict": "Found biprod.inr_desc, used for the second-component normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*integral|arbitraryBaseFiniteP1|P1.*Splitting",
+   "results": "No matching Mathlib theorem; local source search found only the existing Noetherian interfaces.",
+   "date": "2026-10-20",
+   "verdict": "No matching Mathlib theorem; local source search found only the existing Noetherian interfaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The hyperplane Kummer Chern class of projective line over any base scheme commutes with pullback and derived direct image exchange",
+   "results": "AlgebraicGeometry.Scheme.Modules.instAdditivePushforward (Mathlib.AlgebraicGeometry.Modules.Sheaf); AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic); AlgebraicGeometry.Scheme.Modules.pullbackComp (Mathlib.AlgebraicGeometry.Modules.Sheaf); AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom (Mathlib.AlgebraicGeometry.Cover.Open); AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_inv_snd (Mathlib.AlgebraicGeometry.Pullbacks); AlgebraicGeometry.Scheme.Modules.instAdditivePullback (Mathlib.AlgebraicGeometry.Modules.Sheaf); AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion (Mathlib.AlgebraicGeometry.IdealSheaf.Functorial); AlgebraicGeometry.IsProper.isStableUnderBaseChange (Mathlib.AlgebraicGeometry.Morphisms.Proper)",
+   "date": "2026-10-20",
+   "verdict": "No match; module-sheaf additivity, ordinary pullback composition, and generic scheme base change do not state finite etale Kummer Chern naturality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteP1ArbitraryBaseIntegrals",
+  "date": "2026-10-20",
+  "group": "G5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-tower-p1-arbitrary-base-integrals",
+   "place": "Naturality of the normalized hyperplane Kummer map",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteP1KummerNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteP1KummerNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_ordinaryFiniteP1KummerNaturality",
+  "statement": "theorem exists_ordinaryFiniteP1KummerNaturality (N : ℕ) (hN : 0 < N)\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) :\n    ∃ c : ∀ (S : Scheme.{u}) (_hS : IsUnit (N : Γ(S, ⊤))),\n        ordinaryFiniteUnit A (ProjectiveLine S) ⟶\n          (ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧,\n      (∀ (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))),\n        ordinaryFiniteP1ChernSpec A N hA S\n          ((map_natCast (ProjectiveLine S ↘ S).appTop.hom N) ▸\n            hS.map (ProjectiveLine S ↘ S).appTop.hom) (c S hS) ∧\n        (∀ [IsNoetherian S],\n          c S hS = (projectiveLineTraceDatum N hN A hA S hS).chern)) ∧\n      ∀ {S' S : Scheme.{u}} (f : S' ⟶ S) (hS : IsUnit (N : Γ(S, ⊤)))\n          (hS' : IsUnit (N : Γ(S', ⊤))),\n        (ordinaryFinitePullback A (X := S') (Y := S) f).map (ordinaryFiniteP1SplittingMap A N hA\n            (projectiveLineTraceTransport N hN A hA) S hS (c S hS)) ≫\n          ordinaryFiniteP1Exchange A f\n            ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) ≫\n          (ordinaryFinitePushforward A (X := ProjectiveLine S') (Y := S')\n            (ProjectiveLine S' ↘ S')).map\n            (ordinaryFiniteShiftedLinePullback A N hA\n              (projectiveLineTraceTransport N hN A hA)\n              (X := ProjectiveLine S') (Y := ProjectiveLine S)\n              (ProjectiveSpace.map (ULift.{u} (Fin 2)) f)\n              ((map_natCast (ProjectiveLine S ↘ S).appTop.hom N) ▸\n                hS.map (ProjectiveLine S ↘ S).appTop.hom)).hom =\n        ordinaryFiniteP1DecompositionSourceMap A N hA\n            (projectiveLineTraceTransport N hN A hA) f hS ≫\n          ordinaryFiniteP1SplittingMap A N hA\n            (projectiveLineTraceTransport N hN A hA) S' hS' (c S' hS')",
+  "branch": "sheaf-dag",
+  "by": "G5",
+  "date": "2026-10-20",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ordinaryFiniteP1SplittingSource",
+   "AlgebraicGeometry.Etale.ordinaryFiniteP1SplittingTarget",
+   "AlgebraicGeometry.Etale.ordinaryFiniteP1SplittingMap",
+   "AlgebraicGeometry.Etale.exists_ordinaryFiniteP1KummerNaturality"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-810d7",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261020T230743-L-608710",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-810d7",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261020T230743-L-608710",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery byte-identical to PASSed b77640285 (landing failed on unrelated missing file); recompiled all 8 modules + #print axioms against current live build, re-checked item statement folding vs change record, node lean records, live importers (none), new B2 kummer-maps node overlap and dropped lists"
+ }
+}

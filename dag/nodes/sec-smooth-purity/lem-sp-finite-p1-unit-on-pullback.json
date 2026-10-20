@@ -1,0 +1,109 @@
+{
+ "id": "lem-sp-finite-p1-unit-on-pullback",
+ "kind": "statement",
+ "title": "Invertibility after scheme pullback",
+ "statement": "If $f:X\\to Y$ is a morphism of schemes [def-pc-scheme] and $N$ is a natural number invertible in the global functions of Y, then N is invertible in the global functions of X. No positivity, Noetherian or nonempty hypothesis is needed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Levelwise finite diagonal check, expanded in lem-sp-tower-p1-arbitrary-base-integrals"
+ },
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "proof": [
+  {
+   "text": "Apply IsUnit.map to the global-sections ring homomorphism of f. Transport the result through map_natCast, which says the image of N is N.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Levelwise finite diagonal check, expanded in lem-sp-tower-p1-arbitrary-base-integrals"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Levelwise finite diagonal check, expanded in lem-sp-tower-p1-arbitrary-base-integrals"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural number invertible in global sections stays invertible after pullback along a scheme morphism",
+   "results": "No scheme-specific map-unit helper found.",
+   "date": "2026-10-20",
+   "verdict": "No scheme-specific map-unit helper found."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsUnit.map",
+   "results": "Found IsUnit.map; combine with map_natCast.",
+   "date": "2026-10-20",
+   "verdict": "Found IsUnit.map; combine with map_natCast."
+  },
+  {
+   "tool": "grep",
+   "query": "IsUnit.map_natCast|isUnit.*map_natCast",
+   "results": "Only cast-transport uses in Perfection; no named composite lemma.",
+   "date": "2026-10-20",
+   "verdict": "Only cast-transport uses in Perfection; no named composite lemma."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural number invertible in global sections of a scheme remains invertible after a scheme morphism pullback",
+   "results": "AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality (Mathlib.AlgebraicGeometry.Scheme); AlgebraicGeometry.IsLocalAtTarget.of_isPullback (Mathlib.AlgebraicGeometry.Morphisms.Basic); AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality_assoc (Mathlib.AlgebraicGeometry.Scheme); IsScalarTower.invertibleAlgebraCoeNat (Mathlib.RingTheory.AlgebraTower); AlgebraicGeometry.Scheme.Hom.inv_appTop (Mathlib.AlgebraicGeometry.Scheme); AlgebraicGeometry.Scheme.inv_appTop (Mathlib.AlgebraicGeometry.Scheme); AlgebraicGeometry.Scheme.isoSpec_inv_naturality (Mathlib.AlgebraicGeometry.AffineScheme); AlgebraicGeometry.IsAffineOpen.appLE_eq_away_map (Mathlib.AlgebraicGeometry.AffineScheme)",
+   "date": "2026-10-20",
+   "verdict": "No direct scheme unit-transport theorem; the abstract IsUnit.map and map_natCast proof is already complete."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteP1ArbitraryBaseIntegrals",
+  "date": "2026-10-20",
+  "group": "G5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-tower-p1-arbitrary-base-integrals",
+   "place": "Invertibility after scheme pullback",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteP1UnitOnPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteP1UnitOnPullback.lean",
+  "declaration": "AlgebraicGeometry.finiteP1_unitOnPullback",
+  "statement": "theorem finiteP1_unitOnPullback (N : ℕ) {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (hY : IsUnit (N : Γ(Y, ⊤))) : IsUnit (N : Γ(X, ⊤))",
+  "branch": "sheaf-dag",
+  "by": "G5",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-810d7",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261020T230743-L-608710",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-810d7",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261020T230743-L-608710",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery byte-identical to PASSed b77640285 (landing failed on unrelated missing file); recompiled all 8 modules + #print axioms against current live build, re-checked item statement folding vs change record, node lean records, live importers (none), new B2 kummer-maps node overlap and dropped lists"
+ }
+}

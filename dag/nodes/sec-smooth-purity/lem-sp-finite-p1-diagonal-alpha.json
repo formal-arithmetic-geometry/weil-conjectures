@@ -1,0 +1,131 @@
+{
+ "id": "lem-sp-finite-p1-diagonal-alpha",
+ "kind": "statement",
+ "title": "Invertibility of the pasted constant unit along the diagonal",
+ "statement": "For any commutative ring $A$ and any scheme $S$ [def-pc-scheme], let $P=\\mathbf P^1_S$, $W=P\\times_SP$ [def-nagata-projective-space-base-change, def-pc-fibre-product], and choose either projection $p:W\\to P$. Let $\\Delta:P\\to W$ be the diagonal. In the ordinary etale unbounded module derived categories [def-weil-pbc-derived-categories], the morphism $\\alpha:A_P\\to Rp_*R\\Delta_*A_P$ obtained by pasting the two constant-object units, exactly projectiveLineDiagonalAlpha of [lem-amb-p1-diagonal-integrals], is invertible. There is no finiteness, torsion, or Noetherian hypothesis.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Levelwise finite diagonal check, expanded in lem-sp-tower-p1-arbitrary-base-integrals"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-nagata-projective-space-base-change",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-inverse-image",
+  "def-kun-unbounded-exchange",
+  "lem-amb-p1-diagonal-integrals"
+ ],
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "proof": [
+  {
+   "text": "The composite of the diagonal with either projection is identity. Compose leftDerivedUpperStarComp with the derived upperStarId comparison, the exact identity-derived comparison, and mapDerivedCategoryIdIso. These explicitly identify the composite inverse-image functor with identity.",
+   "uses": [
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Levelwise finite diagonal check, expanded in lem-sp-tower-p1-arbitrary-base-integrals"
+   }
+  },
+  {
+   "text": "The abstract two-adjunction lemma transports fullness and faithfulness from the identity through this isomorphism, so the composite adjunction unit is invertible. Expand alpha, use naturality of the second unit, and identify it with this composite unit followed by the image of the composite of the two constant-object comparison isomorphisms. All these factors are invertible. The Lean proof uses the Mathlib composite-unit formula and full-faithfulness unit instance.",
+   "uses": [
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Levelwise finite diagonal check, expanded in lem-sp-tower-p1-arbitrary-base-integrals"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Levelwise finite diagonal check, expanded in lem-sp-tower-p1-arbitrary-base-integrals"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The unit of a composite adjunction is an isomorphism if the composite left adjoint is naturally isomorphic to the identity",
+   "results": "Found Adjunction.comp_unit and unit_isIso_of_L_fully_faithful, which prove the abstract part.",
+   "date": "2026-10-20",
+   "verdict": "Found Adjunction.comp_unit and unit_isIso_of_L_fully_faithful, which prove the abstract part."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isEquivalence_of_iso",
+   "results": "Exact match; the final proof only needs its simpler Full.of_iso and Faithful.of_iso consequences.",
+   "date": "2026-10-20",
+   "verdict": "Exact match; the final proof only needs its simpler Full.of_iso and Faithful.of_iso consequences."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_isIso_of_L_fully_faithful|comp_unit_app",
+   "results": "Found Adjunction.comp_unit_app and Adjunction.unit_isIso_of_L_fully_faithful.",
+   "date": "2026-10-20",
+   "verdict": "Found Adjunction.comp_unit_app and Adjunction.unit_isIso_of_L_fully_faithful."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The pasted constant object adjunction unit for a projective line diagonal followed by either projection is an isomorphism",
+   "results": "CategoryTheory.Adjunction.unitAsIsoOfIso (Mathlib.CategoryTheory.Monad.Adjunction); CategoryTheory.Adjunction.isIso_unit_of_iso (Mathlib.CategoryTheory.Monad.Adjunction); CategoryTheory.Adjunction.instIsIsoFunctorUnitOfIsEquivalence (Mathlib.CategoryTheory.Adjunction.FullyFaithful); CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_unit (Mathlib.CategoryTheory.Localization.CalculusOfFractions.OfAdjunction); CategoryTheory.Adjunction.isIso_unit_app_of_iso (Mathlib.CategoryTheory.Adjunction.FullyFaithful); CategoryTheory.Functor.essImage.unit_isIso (Mathlib.CategoryTheory.Adjunction.Reflective); CategoryTheory.Adjunction.instIsIsoAppUnitObjOfFaithfulOfFull (Mathlib.CategoryTheory.Adjunction.FullyFaithful); CategoryTheory.Functor.instIsIsoAppUnitLanAdjunctionOfHasPointwiseLeftKanExtension (Mathlib.CategoryTheory.Functor.KanExtension.Adjunction)",
+   "date": "2026-10-20",
+   "verdict": "Abstract adjunction-unit isomorphism results only. Read Monad.Adjunction and FullyFaithful: isIso_unit_of_iso requires left-then-right composition identity; our proof uses fullness and faithfulness of the composite left adjoint and the existing unit_isIso_of_L_fully_faithful instance."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteP1ArbitraryBaseIntegrals",
+  "date": "2026-10-20",
+  "group": "G5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-tower-p1-arbitrary-base-integrals",
+   "place": "Invertibility of the pasted constant unit along the diagonal",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteP1DiagonalAlpha",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteP1DiagonalAlpha.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_projectiveLineDiagonalAlpha",
+  "statement": "theorem isIso_projectiveLineDiagonalAlpha (A : Type (u + 1)) [CommRing A]\n    (S : Scheme.{u}) (a : Bool) :\n    IsIso (C := DerivedCategoryModule A (ProjectiveLine S))\n      (projectiveLineDiagonalAlpha A S a)",
+  "branch": "sheaf-dag",
+  "by": "G5",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-810d7",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261020T230743-L-608710",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-810d7",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261020T230743-L-608710",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery byte-identical to PASSed b77640285 (landing failed on unrelated missing file); recompiled all 8 modules + #print axioms against current live build, re-checked item statement folding vs change record, node lean records, live importers (none), new B2 kummer-maps node overlap and dropped lists"
+ }
+}

@@ -1,0 +1,109 @@
+{
+ "id": "lem-sp-finite-p1-noetherian-base",
+ "kind": "statement",
+ "title": "A Noetherian base for every N-invertible scheme",
+ "statement": "For every natural number $N$, there is a scheme $U$ [def-pc-scheme] which is Noetherian, on which $N$ is invertible, and such that every scheme $S$ on which $N$ is invertible admits a morphism $S\\to U$. No positivity or nonemptiness assumption is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Levelwise finite diagonal check, expanded in lem-sp-tower-p1-arbitrary-base-integrals"
+ },
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "proof": [
+  {
+   "text": "Take $U=\\operatorname{Spec}((\\operatorname{ULift}\\mathbf Z)[1/N])$. Transport Noetherianity of the integers through ULift and localize. The localization universal property and the global-sections/spectrum adjunction give a map from every N-invertible scheme to U. The localization map and the spectrum/global-sections comparison show N invertible on U. These are Mathlib constructions, and the displayed Lean proof directly assembles them.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Levelwise finite diagonal check, expanded in lem-sp-tower-p1-arbitrary-base-integrals"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Levelwise finite diagonal check, expanded in lem-sp-tower-p1-arbitrary-base-integrals"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every scheme where N is a unit maps to the noetherian spectrum of integers localized at N",
+   "results": "Found AlgebraicGeometry.isNoetherian_Spec and instIsNoetherianSpecOfOfIsNoetherianRing; no universal-base theorem.",
+   "date": "2026-10-20",
+   "verdict": "Found AlgebraicGeometry.isNoetherian_Spec and instIsNoetherianSpecOfOfIsNoetherianRing; no universal-base theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away.lift",
+   "results": "Found lift, lift_comp and lift_eq, used for the localization map.",
+   "date": "2026-10-20",
+   "verdict": "Found lift, lift_comp and lift_eq, used for the localization map."
+  },
+  {
+   "tool": "grep",
+   "query": "IsNoetherianRing \\(Localization|isNoetherianRing_of_ringEquiv",
+   "results": "Found localization Noetherian instance and transport through a ring equivalence.",
+   "date": "2026-10-20",
+   "verdict": "Found localization Noetherian instance and transport through a ring equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every scheme where N is invertible admits a morphism to a Noetherian scheme on which N is invertible using the integers localized at N",
+   "results": "Module.Invertible.of_isLocalization (Mathlib.RingTheory.PicardGroup); AlgebraicGeometry.Scheme.instIsOpenImmersionMapOfHomAwayAlgebraMap (Mathlib.AlgebraicGeometry.OpenImmersion); AlgebraicGeometry.Γ_restrict_isLocalization (Mathlib.AlgebraicGeometry.AffineScheme); AlgebraicGeometry.IsIntegralHom.hasAffineProperty (Mathlib.AlgebraicGeometry.Morphisms.Integral); AlgebraicGeometry.instIsGermInjectiveOfIsIntegral (Mathlib.AlgebraicGeometry.SpreadingOut); AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian (Mathlib.AlgebraicGeometry.Noetherian); AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing (Mathlib.AlgebraicGeometry.Noetherian); AlgebraicGeometry.IsLocallyNoetherian.component_noetherian (Mathlib.AlgebraicGeometry.Noetherian)",
+   "date": "2026-10-20",
+   "verdict": "Partial matches for localization and Noetherian Spec, already used in the proof; none packages the universal N-invertible base."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteP1ArbitraryBaseIntegrals",
+  "date": "2026-10-20",
+  "group": "G5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-tower-p1-arbitrary-base-integrals",
+   "place": "A Noetherian base for every N-invertible scheme",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteP1NoetherianBase",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteP1NoetherianBase.lean",
+  "declaration": "AlgebraicGeometry.finiteP1_exists_noetherianBase",
+  "statement": "theorem finiteP1_exists_noetherianBase (N : ℕ) :\n    ∃ (U : Scheme.{u}) (_ : IsNoetherian U),\n      IsUnit (N : Γ(U, ⊤)) ∧\n      ∀ (S : Scheme.{u}), IsUnit (N : Γ(S, ⊤)) → Nonempty (S ⟶ U)",
+  "branch": "sheaf-dag",
+  "by": "G5",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-810d7",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261020T230743-L-608710",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-810d7",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261020T230743-L-608710",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery byte-identical to PASSed b77640285 (landing failed on unrelated missing file); recompiled all 8 modules + #print axioms against current live build, re-checked item statement folding vs change record, node lean records, live importers (none), new B2 kummer-maps node overlap and dropped lists"
+ }
+}
