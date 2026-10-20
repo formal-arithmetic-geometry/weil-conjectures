@@ -1,14 +1,13 @@
 # Work queue
 
-100 items; claim with `tools/claim.py next <group> [--stage N]`.
+94 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (39 clusters, 2096 modules)
+## Rework: quarantined by the upstream sync (36 clusters, 2086 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
 | item (root) | modules | other roots | cause of the root |
 |---|---|---|---|
-| `Sheaf.CategoryTheory.RingedCechKoszulDualLimit` | 1 |  | error: Sheaf/CategoryTheory/RingedCechKoszulDualLimit.lean:452:11: error(lean.unknownIdentifier): Unknown constant `CochainComplex.telescopeShiftColimit` | Shea |
 | `Sheaf.AlgebraicGeometry.StrictLocalMateContinuityPresentation` | 1 |  | error: Sheaf/AlgebraicGeometry/StrictLocalMateContinuityPresentation.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension fail |
 | `Sheaf.AlgebraicGeometry.RelativeMVResolvedRoofMiddleMateComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/RelativeMVResolvedRoofMiddleMateComparison.lean:26:17: error: failed to set `[local irreducible]`, `derivedPullback` is currently |
 | `Sheaf.AlgebraicGeometry.StrictLocalUnderivedSectionsMate` | 1 |  | error: Sheaf/AlgebraicGeometry/StrictLocalUnderivedSectionsMate.lean:392:4: error: Application type mismatch: The argument | Functor.whiskerRight (baseChangeMap |
@@ -37,7 +36,6 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootPurityData` | 1 |  | error: Sheaf/AlgebraicGeometry/Morphisms/StrictHenselRootPurityData.lean:167:16: error(lean.unknownIdentifier): Unknown identifier `strictHenselization_structur |
 | `Sheaf.CategoryTheory.FiniteFilteredDerivedPresentation` | 1 |  | error: Sheaf/CategoryTheory/FiniteFilteredDerivedPresentation.lean:6:0: error: import Sheaf.CategoryTheory.Filtration failed, environment already contains 'Cate |
 | `Sheaf.Algebra.Homology.SplitFlatFilteredSheafModels` | 1 |  | error: Sheaf/Algebra/Homology/SplitFlatFilteredSheafModels.lean:6:0: error: import WeilConjectures.CategoryTheory.CanonicalFiltration failed, environment alread |
-| `Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDescentRepresentative` | 1 |  | error: Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryDescentRepresentative.lean:51:10: error(lean.invalidField): Invalid field `IsAcyclicTensorKFlat`: The en |
 | `Sheaf.AlgebraicGeometry.CoherentFrobeniusPullback` | 1 |  | error: Sheaf/AlgebraicGeometry/CoherentFrobeniusPullback.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality faile |
 | `Sheaf.AlgebraicGeometry.EtaleGenericDirectImageExchange` | 1 |  | error: Sheaf/AlgebraicGeometry/EtaleGenericDirectImageExchange.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleAbelianCoefficientComparison fail |
 | `Sheaf.AlgebraicGeometry.RawModuleScalarHomCompositeFormula` | 1 |  | error: Sheaf/AlgebraicGeometry/RawModuleScalarHomCompositeFormula.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.RawModuleScalarCoefficientFactors fa |
@@ -46,9 +44,8 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.AffinePerfectTensorRoof` | 1 |  | error: Sheaf/AlgebraicGeometry/AffinePerfectTensorRoof.lean:146:10: error(lean.unknownIdentifier): Unknown constant `CochainComplex.IsAcyclicTensorKFlat` | | No |
 | `Sheaf.AlgebraicGeometry.RawModuleScalarPullbackFormulas` | 1 |  | error: Sheaf/AlgebraicGeometry/RawModuleScalarPullbackFormulas.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.RawModuleScalarCoefficientFactors faile |
 | `Sheaf.Paper.FlatFilteredComplexComparison` | 1 |  | error: Sheaf/Paper/FlatFilteredComplexComparison.lean:6:0: error: import Sheaf.CategoryTheory.Filtration failed, environment already contains 'CategoryTheory.De |
-| `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/ProEtale/BaseChange/SmoothBaseChange.lean:1:0: error: import Sheaf.SixFunctors.ProEtale.BaseChange.Smooth |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 32, stage 3 153 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 32, stage 3 152 items.
 
 ## Stage 1: nodes to split (0)
 
@@ -58,7 +55,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 
 Not open yet: 302 nodes that below a finished node, not needed, 84 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (15)
+## Stage 3: modules to prove (14)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -66,12 +63,10 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 |---|---|---|---|---|
 | `Sheaf.Algebra.Homology.RingedSiteKFlatStalkCriterion` | - | 1 | proof | 1 |
 | `Sheaf.AlgebraicGeometry.ProEtaleEnoughPoints` | - | 1 | proof | 1 |
-| `Sheaf.Algebra.Homology.UniversalAcyclicModuleKFlat` | - | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.ProEtaleAffineSubsiteEquivalence` | - | 1 | proof | 2 |
 | `Sheaf.CategoryTheory.Sites.FinitarySliceEnoughPoints` | - | 1 | proof | 2 |
 | `Sheaf.CategoryTheory.Sites.FpStalkRealization` | - | 1 | proof | 2 |
 | `Sheaf.CategoryTheory.Sites.RingedSitePoint` | - | 1 | proof | 2 |
-| `Sheaf.Algebra.ModuleDirectedColimitFinitePresentation` | - | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.VectorBundleZeroSection` | - | 3 | proof | 3 |
 | `Sheaf.Paper.FinitarySiteEnoughPoints` | - | 1 | proof | 3 |
 | `Sheaf.Paper.SitePointReconstructionSets` | - | 1 | proof | 3 |
@@ -79,6 +74,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.TraceFormula.InverseSystemSitePoint` | - | 1 | proof | 4 |
 | `Sheaf.Paper.PointSystemRefine` | - | 1 | proof | 5 |
 | `Sheaf.Paper.FiniteFieldDerivedTensorSummand` | - | 1 | proof | 6 |
+| `Sheaf.CategoryTheory.BoundedFilteredPageFunctorNormalized` | - | 1 | proof | 21 |
 
 ## Stage 3: held for an open upstream PR (19)
 
