@@ -1,6 +1,6 @@
 # Work queue
 
-270 items; claim with `tools/claim.py next <group> [--stage N]`.
+271 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (31 clusters, 1726 modules)
 
@@ -12,6 +12,8 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.RelativeMVResolvedRoofOpenMateComparisons` | 1 |  | error: Sheaf/AlgebraicGeometry/RelativeMVResolvedRoofOpenMateComparisons.lean:5:0: error: import Sheaf.AlgebraicGeometry.DerivedPullback failed, environment alr |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackTensorUnitKFlat` | 1 |  | error: Sheaf/AlgebraicGeometry/DerivedPullbackTensorUnitKFlat.lean:6:0: error: import Sheaf.AlgebraicGeometry.DerivedPullback failed, environment already contai |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapStageEquivalence` | 1 |  | error: Sheaf/AlgebraicGeometry/PerfectOverlapStageEquivalence.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.DerivedPullback failed, environment alre |
+| `Sheaf.AlgebraicGeometry.QcoherentNormalizedComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/QcoherentNormalizedComparison.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality f |
+| `Sheaf.AlgebraicGeometry.QcoherentNormalizedPullbackSquare` | 1 |  | error: Sheaf/AlgebraicGeometry/QcoherentNormalizedPullbackSquare.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturali |
 | `Sheaf.AlgebraicGeometry.TorAmplitudeOpenLocal` | 1 |  | error: Sheaf/AlgebraicGeometry/TorAmplitudeOpenLocal.lean:5:0: error: import Sheaf.AlgebraicGeometry.DerivedPullback failed, environment already contains 'Algeb |
 | `Sheaf.TraceFormula.TwoTermPerfectDeterminant` | 1 |  | error: Sheaf/TraceFormula/TwoTermPerfectDeterminant.lean:112:17: error(lean.unknownIdentifier): Unknown identifier `derivedPullback` | | Note: A public declarat |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh` | 1 |  | error: Sheaf/AlgebraicGeometry/DerivedPullbackTensorQCoh.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.DerivedPullback failed, environment already c |
@@ -21,17 +23,15 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.Algebra.Homology.AffineTildeTensorSourceComparisonCorePreBase` | 1 |  | error: Sheaf/Algebra/Homology/AffineTildeTensorSourceComparisonCorePreBase.lean:6:0: error: import Sheaf.AlgebraicGeometry.DerivedPullback failed, environment a |
 | `Sheaf.Paper.LevelwiseAdicTruncations` | 1 |  | error: Sheaf/Paper/LevelwiseAdicTruncations.lean:685:32: error(lean.unknownIdentifier): Unknown identifier `LocallyClosedStratification` | | Note: It is not pos |
 | `Sheaf.AlgebraicGeometry.AffineModelCoherentObjectComparisons` | 1 |  | error: Sheaf/AlgebraicGeometry/AffineModelCoherentObjectComparisons.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.DerivedPullback failed, environmen |
+| `Sheaf.AlgebraicGeometry.CoefficientConstructibleEtaleModules` | 1 |  | error: Sheaf/AlgebraicGeometry/CoefficientConstructibleEtaleModules.lean:111:10: error(lean.unknownIdentifier): Unknown identifier `LocallyClosedStratification` |
 | `Sheaf.AlgebraicGeometry.ScalarExtCupInverseImage` | 1 |  | error: Sheaf/AlgebraicGeometry/ScalarExtCupInverseImage.lean:26:23: error(lean.unknownIdentifier): Unknown identifier `Field` | | Note: A public declaration `Fi |
 | `Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryNormalizedComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryNormalizedComparison.lean:174:12: error(lean.invalidField): Invalid field `IsAcyclicTensorKFlat`: The en |
-| `Sheaf.AlgebraicGeometry.CoefficientConstructibleEtaleModules` | 1 |  | error: Sheaf/AlgebraicGeometry/CoefficientConstructibleEtaleModules.lean:111:10: error(lean.unknownIdentifier): Unknown identifier `LocallyClosedStratification` |
 | `Sheaf.CategoryTheory.FilteredHomotopySpectralSequence` | 1 |  | error: Sheaf/CategoryTheory/FilteredHomotopySpectralSequence.lean:6:0: error: import WeilConjectures.CategoryTheory.CanonicalFiltration failed, environment alre |
 | `Sheaf.AlgebraicGeometry.CoherentFrobeniusPullback` | 1 |  | error: Sheaf/AlgebraicGeometry/CoherentFrobeniusPullback.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality faile |
 | `Sheaf.AlgebraicGeometry.DerivedProjectionMateOpenRestrictionComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/DerivedProjectionMateOpenRestrictionComparison.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.DerivedPullback failed,  |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackSingleCohomology` | 1 |  | error: Sheaf/AlgebraicGeometry/DerivedPullbackSingleCohomology.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.DerivedPullback failed, environment alr |
 | `Sheaf.AlgebraicGeometry.FlatTelescopePullbackSumColimit` | 1 |  | error: Sheaf/AlgebraicGeometry/FlatTelescopePullbackSumColimit.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.DerivedPullback failed, environment alr |
 | `Sheaf.AlgebraicGeometry.HigherDirectImageDerivedModel` | 1 |  | error: Sheaf/AlgebraicGeometry/HigherDirectImageDerivedModel.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.DerivedPullback failed, environment alrea |
-| `Sheaf.AlgebraicGeometry.QcoherentNormalizedComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/QcoherentNormalizedComparison.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality f |
-| `Sheaf.AlgebraicGeometry.QcoherentNormalizedPullbackSquare` | 1 |  | error: Sheaf/AlgebraicGeometry/QcoherentNormalizedPullbackSquare.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturali |
 | `Sheaf.AlgebraicGeometry.RawModuleScalarPullbackFormulas` | 1 |  | error: Sheaf/AlgebraicGeometry/RawModuleScalarPullbackFormulas.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.RawModuleScalarCoefficientFactors faile |
 | `Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral` | 1 |  | error: Sheaf/AlgebraicGeometry/RingedSpaceDerivedAdjunctionGeneral.lean:70:18: error(lean.unknownIdentifier): Unknown constant `SheafOfModules.changeOfRings` |  |
 | `Sheaf.AlgebraicGeometry.ScalarAbelianPullbackSquare` | 1 |  | error: Sheaf/AlgebraicGeometry/ScalarAbelianPullbackSquare.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ScalarAbelianExtFactorization failed, envir |
@@ -53,7 +53,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 
 Not open yet: 302 nodes that below a finished node, not needed, 84 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (153)
+## Stage 3: modules to prove (154)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -212,6 +212,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.EtaleConstantProjectionFormulaBoundedBelow` | - | 1 | proof | 16 |
 | `Sheaf.AlgebraicGeometry.GeometricPointDerivedConstants` | - | 1 | proof | 17 |
 | `Sheaf.AlgebraicGeometry.GeometricPointDerivedSectionsAdjunction` | - | 1 | proof | 17 |
+| `Sheaf.CategoryTheory.RingedSiteCechRefinementSquare` | - | 2 | proof | 17 |
 
 ## Stage 3: waiting for statements of dependencies (15)
 
@@ -255,7 +256,7 @@ Not items: an open Orchestra branch or PR of the source library proves the modul
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar` | bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs` | bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal` | bundle/sec-smooth-purity-d1 |
-| `WeilConjectures.WeilSheaf.FourierInversion.OtherSections` | bundle/sec-poincare-duality-c1,bundle/sec-poincare-duality-d1,bundle/sec-smooth-purity-d3 |
+| `WeilConjectures.WeilSheaf.FourierInversion.OtherSections` | bundle/sec-poincare-duality-c1,bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.WeilSheaf.LowerShriekFunctoriality` | bundle/sec-six-functors-c1,bundle/sec-six-functors-d1,bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.WeilSheaf.LowerShriekOperations` | bundle/sec-poincare-duality-c1 |
 | `WeilConjectures.WeilSheaf.PoincareDuality` | bundle/sec-poincare-duality-c1,bundle/sec-poincare-duality-d1 |
