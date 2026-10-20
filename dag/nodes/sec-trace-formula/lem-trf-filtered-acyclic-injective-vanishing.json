@@ -1,0 +1,119 @@
+{
+ "id": "lem-trf-filtered-acyclic-injective-vanishing",
+ "kind": "statement",
+ "title": "Filtered acyclic complexes map trivially to filtered injective complexes",
+ "statement": "Let C be an abelian category [def-sp-abelian]. Use the finite filtered homotopy categories and optional interval B of [def-trf-finite-filtered-localization]. Let A and I be bounded-below complexes in that filtered homotopy category. Assume every graded complex gr^p A is acyclic, and every graded object gr^p I^n is injective [def-sp-injective-resolutions]. Then every filtered homotopy-category morphism A → I is zero. This holds for unrestricted finite filtrations and for every prescribed interval [a,b], and does not assume enough injectives.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05TX"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-trf-finite-filtered-localization"
+ ],
+ "proof": [
+  {
+   "text": "For a strict exact pair u,v and a filtered map r killing u, factor the underlying r through image(v) using ShortComplex.Exact.isColimitImage. Give image(v) the quotient filtration from the source of v. The factor is filtered because image of each step factors into the corresponding target step; strictness of v identifies the image filtration under the inclusion with image(v) intersected with each target step. Use the filtered injective extension property across this strict inclusion.",
+   "uses": [
+    "lem-trf-enough-strict-filtered-injectives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a graded-acyclic complex, apply finite filtered graded exactness to each consecutive pair of differentials. The preceding extension result solves each residual homotopy equation. Adapt Mathlib CochainComplex.isKInjective_of_injective induction: improve a degree-minus-one cochain by a single component, using the cochain differential to verify the new equation, and pass to its componentwise stable limit. Boundedness below initializes the zero cochain. This yields a homotopy to zero. Finally descend the homotopy through the quotient functor, using its fullness to represent any homotopy-category arrow.",
+   "uses": [
+    "lem-trf-finite-filtered-graded-exactness"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-enough-strict-filtered-injectives",
+  "lem-trf-finite-filtered-graded-exactness"
+ ],
+ "proof_origin": {
+  "by": "D4 stage 3",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05TX"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bounded below complexes of finite filtered objects admit graded injective resolutions; maps from graded acyclic complexes to graded injective complexes are null homotopic",
+   "results": "8 hits: ordinary InjectiveResolution.ofCocomplex and descHomotopyZero; CochainComplex.isKInjective_of_injective. All require an abelian category, not the strict exact category of filtered objects.",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.isKInjective_of_injective",
+   "results": "One hit: Mathlib.Algebra.Homology.HomotopyCategory.KInjective.CochainComplex.isKInjective_of_injective, requiring Abelian C and termwise Injective.",
+   "date": "2026-10-20",
+   "verdict": "ordinary K-injectivity does not impose filtered homotopies"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*[Ii]njective|filtered.*[Aa]cyclic",
+   "results": "One irrelevant hit Mathlib/CategoryTheory/Filtered/Final.lean:152.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map from a graded acyclic filtered complex to a bounded below complex whose graded objects are injective is null homotopic by filtration preserving homotopies",
+   "results": "8 hits: ordinary CochainComplex.IsKInjective homotopy-zero API, Homotopy.nullHomotopicMap and nullHomotopy, and ShortComplex.nullHomotopic. None supplies filtration-preserving homotopies from injectivity of graded pieces.",
+   "date": "2026-10-20",
+   "verdict": "no exact match; the ordinary abelian-category results do not apply to the strict filtered category"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FilteredLocalizationInjectiveModel",
+  "date": "2026-10-20",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-filtered-localization-injective-model",
+   "place": "proof step 7: contraction of maps from graded-acyclic complexes into bounded-below filtered injectives (Tag 05TX)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FilteredAcyclicInjectiveVanishing",
+  "declaration": "CategoryTheory.filteredAcyclic_injective_vanishing",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredAcyclicInjectiveVanishing.lean",
+  "statement": "theorem filteredAcyclic_injective_vanishing (B : Option (ℤ × ℤ))\n    (A I : FiniteFilteredHomotopyPlus C B false)\n    (hA : ∀ p n : ℤ, IsZero ((HomotopyCategory.homologyFunctor C (.up ℤ) n).obj\n      (((filteredEvaluation C B false (some p)).mapHomotopyCategoryPlus.obj A).obj)))\n    (hI : ∀ n p : ℤ, Injective ((I.obj.as.X n).obj.filtration.gradedPiece p))\n    (f : A ⟶ I) : f = 0",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-20",
+  "existing": false
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-global-additivity",
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261020T051130-L-1571161",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261020T051130-L-1571161",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,184 @@
+{
+ "id": "lem-trf-filtered-injective-resolution",
+ "kind": "statement",
+ "title": "Filtered-injective resolution of a bounded-below finite filtered complex",
+ "statement": "Let C be an abelian category [def-sp-abelian] with enough injectives [def-sp-injective-resolutions]. For B = none, or B = some (a,b), let K be a bounded-below cochain complex of finite filtered objects in the category of [def-trf-finite-filtered-localization]. There exist a bounded-below complex I of finite filtered objects with injective graded pieces and a chain map K → I inducing a quasi-isomorphism on every graded complex. For B = some (a,b), the terms of K and I all satisfy F^a = top and F^(b+1) = bottom; for B = none no common interval across degrees is required.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 05TW"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-trf-finite-filtered-localization"
+ ],
+ "proof": [
+  {
+   "text": "First resolve a single finite filtered object $X$. By [lem-trf-enough-strict-filtered-injectives] choose a strict monomorphism $X\\to J^0$, put $Q^0=\\operatorname{coker}(X\\to J^0)$ with its quotient filtration, choose a strict monomorphism $Q^0\\to J^1$, and repeat with $Q^{r+1}=\\operatorname{coker}(Q^r\\to J^{r+1})$. Define $d_J^r$ by $J^r\\twoheadrightarrow Q^r\\hookrightarrow J^{r+1}$. Its square is zero. Each augmented graded sequence is exact by the strict quotient formulas of the induced and quotient filtration conventions. Thus $X[0]\\to J$ is a filtered quasi-isomorphism, $J^{<0}=0$, all $J^r$ are filtered injective, and the augmented differentials are strict. This construction uses enough injectives only through the cited strict-embedding result.",
+   "uses": [
+    "lem-trf-enough-strict-filtered-injectives",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TT, lemma-filtered-injective-right-resolution-single-object"
+   }
+  },
+  {
+   "text": "For a map $f:X\\to Y$ and two resolutions as in the single-object resolution construction, lift it to a chain map $f^r:J_X^r\\to J_Y^r$. Extend $X\\to Y\\to J_Y^0$ across the strict monomorphism $X\\to J_X^0$ using [lem-trf-enough-strict-filtered-injectives]. Once $f^r$ is chosen, $d_Y^rf^r$ vanishes on $\\operatorname{im}d_X^{r-1}$, hence factors through $\\operatorname{coker}d_X^{r-1}=\\operatorname{im}d_X^r$. This equality, with its induced filtration, follows from [lem-trf-finite-filtered-graded-exactness] applied to the augmented resolution. Extend this factor across the strict inclusion $\\operatorname{im}d_X^r\\hookrightarrow J_X^{r+1}$ into the filtered injective $J_Y^{r+1}$. This defines $f^{r+1}$ and gives $f^{r+1}d_X^r=d_Y^rf^r$.",
+   "uses": [
+    "lem-trf-enough-strict-filtered-injectives",
+    "lem-trf-finite-filtered-graded-exactness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TU, lemma-filtered-injective-right-resolution-map"
+   }
+  },
+  {
+   "text": "For a strict exact sequence $0\\to X\\xrightarrow{i}Y\\xrightarrow{\\pi}Z\\to0$, resolve $X,Z$ by $J,H$. Extend $X\\to J^0$ to $b:Y\\to J^0$ using [lem-trf-enough-strict-filtered-injectives]. The map $d_Jb$ factors through $\\pi$, defining $t:Z\\to J^1$. Extend $-t$ across $Z\\hookrightarrow H^0$ to $c^0:H^0\\to J^1$. Inductively, $d_Jc^r$ vanishes on $\\operatorname{im}d_H^{r-1}$: for $r=0$ this is the augmented $Z$, and subsequently it follows from the previous identity $d_Jc^{r-1}+c^rd_H^{r-1}=0$. By strict exactness [lem-trf-finite-filtered-graded-exactness], factor through $\\operatorname{im}d_H^r$ and extend its negative to $c^{r+1}:H^{r+1}\\to J^{r+2}$. Set $M^r=J^r\\oplus H^r$ and $d_M=\\begin{pmatrix}d_J&c\\\\0&d_H\\end{pmatrix}$. The identity just imposed gives $d_M^2=0$, and $(b,(Z\\to H^0)\\pi)$ is an augmentation $Y[0]\\to M$. This yields a termwise split sequence $0\\to J\\to M\\to H\\to0$. After each graded functor, the natural long exact sequences [lem-weil-pbc-complex-ses-homology-long-exact, lem-weil-pbc-complex-ses-long-exact-naturality] show that this augmentation is a quasi-isomorphism, since the outside augmentations are so: in nonzero degrees all outside cohomology vanishes, and in degree zero the short exact sequences identify the middle map as an isomorphism. Finite sums of injectives are injective by extending each component separately, so every $M^r$ is filtered injective.",
+   "uses": [
+    "lem-trf-enough-strict-filtered-injectives",
+    "lem-trf-finite-filtered-graded-exactness",
+    "def-sp-filtered-complex-subquotients",
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-weil-pbc-complex-ses-long-exact-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TV, lemma-filtered-injective-right-resolution-ses"
+   }
+  },
+  {
+   "text": "Put $Z_i=\\ker d_K^i$ and $B_i=\\operatorname{coim}d_K^i$, with the filtrations from the induced and quotient filtration conventions. The sequence $0\\to Z_i\\to K^i\\to B_i\\to0$ is strict exact directly from its subobject and quotient filtrations. Resolve $Z_i,B_i$ by $J_i,H_i$ using the single-object resolution construction. Lift $u_i:B_i\\to Z_{i+1}$ to $\\widetilde u_i:H_i\\to J_{i+1}$ using the comparison lift construction, and use the horseshoe construction to obtain $0\\to J_i\\xrightarrow{\\alpha_i}M_i\\xrightarrow{\\beta_i}H_i\\to0$ with compatible augmentation of $K^i[0]$. The horizontal differential $\\partial_i=\\alpha_{i+1}\\widetilde u_i\\beta_i$ satisfies $\\partial_{i+1}\\partial_i=0$ because $\\beta_{i+1}\\alpha_{i+1}=0$; it commutes with the resolution differentials because all three factors are chain maps. Its augmentation is $d_K^i$, by the lifting and augmentation equations. We have therefore constructed the first-quadrant double complex $D^{i,r}=M_i^r$ and an augmentation $K\\to D$ supported in resolution degree zero [def-sp-double-complex-total].",
+   "uses": [
+    "def-sp-filtration",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TW, lemma-right-resolution-by-filtered-injectives, construction before totalization"
+   }
+  },
+  {
+   "text": "Take $I^n=\\bigoplus_{i+r=n}D^{i,r}$ with differential $\\partial+(-1)^i d_{M_i}$ [def-sp-double-complex-total]. Each sum is finite, hence is a finite filtered object with injective graded pieces; $I^{<0}=0$. The degree-$n$ augmentation is $K^n\\to D^{n,0}\\hookrightarrow I^n$. For each filtration index $p$, the additive functor $\\operatorname{gr}^p$ commutes with these finite sums and differentials. Every resolution column $\\operatorname{gr}^p K^i[0]\\to\\operatorname{gr}^p M_i$ is a quasi-isomorphism by the horseshoe construction. Apply [lem-sc-first-quadrant-column-augmentation], with the resolution index first, namely the flipped bicomplex $D^{\\prime\\,r,i}=D^{i,r}$. The two total complexes are identified by multiplication by $(-1)^{ir}$ on the $(i,r)$ summand: a horizontal differential changes that sign by $(-1)^r$ and a vertical differential by $(-1)^i$, which identifies $\\partial+(-1)^i d_{M_i}$ with $d_{M_i}+(-1)^r\\partial$. The sign is $1$ on the resolution-zero augmentation. Its augmentation hypotheses are exactly the chain-map and vanishing equations of the double-complex construction. It gives $\\operatorname{gr}^pK\\to\\operatorname{gr}^pI$ a quasi-isomorphism. Shift back to the original lower bound. This proves existence of the required representative.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-sp-filtered-complex-subquotients",
+    "lem-sc-first-quadrant-column-augmentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TW, totalization argument; Homology Tag 0133, lemma-double-complex-gives-resolution"
+   }
+  },
+  {
+   "text": "The same-interval embedding clause keeps every object resolution in [a,b]. Induced kernel filtrations, quotient coimage filtrations and finite sums preserve these bounds, so the horseshoe and finite diagonal totalization do also. If b<a, monotonicity and the prescribed top and bottom steps force each term to be zero; its identity is a resolution.",
+   "uses": [
+    "lem-trf-enough-strict-filtered-injectives",
+    "def-sp-filtration"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-total",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "lem-sc-first-quadrant-column-augmentation",
+  "lem-trf-enough-strict-filtered-injectives",
+  "lem-trf-finite-filtered-graded-exactness",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-complex-ses-long-exact-naturality"
+ ],
+ "proof_origin": {
+  "by": "D4 stage 3",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 05TW"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bounded below complexes of finite filtered objects admit graded injective resolutions; maps from graded acyclic complexes to graded injective complexes are null homotopic",
+   "results": "8 hits: ordinary InjectiveResolution.ofCocomplex and descHomotopyZero; CochainComplex.isKInjective_of_injective. All require an abelian category, not the strict exact category of filtered objects.",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.isKInjective_of_injective",
+   "results": "One hit: Mathlib.Algebra.Homology.HomotopyCategory.KInjective.CochainComplex.isKInjective_of_injective, requiring Abelian C and termwise Injective.",
+   "date": "2026-10-20",
+   "verdict": "ordinary K-injectivity does not impose filtered homotopies"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*[Ii]njective|filtered.*[Aa]cyclic",
+   "results": "One irrelevant hit Mathlib/CategoryTheory/Filtered/Final.lean:152.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every bounded below finite filtered cochain complex has a quasi-isomorphism on graded pieces to a bounded below complex with injective graded pieces",
+   "results": "8 hits: ordinary InjectiveResolution constructors, ofCocomplex, of_def, quasiIso, self, and CochainComplex.isKInjective_of_injective. None constructs a filtered resolution in the strict exact category.",
+   "date": "2026-10-20",
+   "verdict": "no exact match; the ordinary abelian-category results do not apply to the strict filtered category"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FilteredLocalizationInjectiveModel",
+  "date": "2026-10-20",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-filtered-localization-injective-model",
+   "place": "proof steps 2-7",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FilteredInjectiveResolution",
+  "declaration": "CategoryTheory.filteredInjectiveResolution",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredInjectiveResolution.lean",
+  "statement": "theorem filteredInjectiveResolution (B : Option (ℤ × ℤ))\n    (K : CochainComplex.Plus (FiniteFilteredObjects C B false)) :\n    ∃ (I : CochainComplex.Plus (FiniteFilteredObjects C B true))\n      (f : K ⟶ (filteredInjectiveInclusion C B).mapCochainComplexPlus.obj I),\n      finiteFilteredQuasiIso C B\n        ((HomotopyCategory.Plus.quotient (FiniteFilteredObjects C B false)).map f)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-20",
+  "existing": false
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-global-additivity",
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261020T051130-L-1571161",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261020T051130-L-1571161",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

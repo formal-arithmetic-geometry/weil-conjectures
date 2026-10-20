@@ -17,177 +17,44 @@
  "kind": "statement",
  "proof": [
   {
-   "text": "Use the filtration and quotient conventions of [def-sp-filtration, def-sp-filtered-complex-subquotients]. Kernels have the induced subobject filtration; cokernels and coimages have the quotient filtration. A strict short exact sequence means an underlying short exact sequence whose maps are strict; its graded sequences are short exact, by the formulas for the induced and quotient filtrations. Conversely graded exact sequences are strict exact by [lem-trf-finite-filtered-graded-exactness]. Filtered cone triangles and their localization are supplied by [lem-trf-filtered-cone-localization]. Shifting the cochain index lets us assume $K^n=0$ for $n<0$.",
+   "text": "Use the bounded-below filtered-injective resolution theorem for the first conjunct.",
    "uses": [
-    "def-sp-filtration",
-    "def-sp-filtered-complex-subquotients",
-    "lem-trf-finite-filtered-graded-exactness",
-    "lem-trf-filtered-cone-localization"
+    "lem-trf-filtered-injective-resolution"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 05RX and 05TW, exact-category conventions and shift reduction"
-   }
+   "elementary": false
   },
   {
-   "text": "First resolve a single finite filtered object $X$. By [lem-trf-enough-strict-filtered-injectives] choose a strict monomorphism $X\\to J^0$, put $Q^0=\\operatorname{coker}(X\\to J^0)$ with its quotient filtration, choose a strict monomorphism $Q^0\\to J^1$, and repeat with $Q^{r+1}=\\operatorname{coker}(Q^r\\to J^{r+1})$. Define $d_J^r$ by $J^r\\twoheadrightarrow Q^r\\hookrightarrow J^{r+1}$. Its square is zero. Each augmented graded sequence is exact by the strict quotient formulas of Step 1. Thus $X[0]\\to J$ is a filtered quasi-isomorphism, $J^{<0}=0$, all $J^r$ are filtered injective, and the augmented differentials are strict. This construction uses enough injectives only through the cited strict-embedding result.",
+   "text": "Use the filtered acyclic-to-injective vanishing theorem and the distinguished-triangle exactness of the localized filtered homotopy category to show precomposition by every graded quasi-isomorphism is bijective. The localization left-fraction API then gives the Hom bijection by a denominator retraction.",
    "uses": [
-    "lem-trf-enough-strict-filtered-injectives",
-    "def-sp-filtration",
-    "def-sp-filtered-complex-subquotients"
+    "lem-trf-filtered-acyclic-injective-vanishing"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05TT, lemma-filtered-injective-right-resolution-single-object"
-   }
+   "elementary": false
   },
   {
-   "text": "For a map $f:X\\to Y$ and two resolutions as in Step 2, lift it to a chain map $f^r:J_X^r\\to J_Y^r$. Extend $X\\to Y\\to J_Y^0$ across the strict monomorphism $X\\to J_X^0$ using [lem-trf-enough-strict-filtered-injectives]. Once $f^r$ is chosen, $d_Y^rf^r$ vanishes on $\\operatorname{im}d_X^{r-1}$, hence factors through $\\operatorname{coker}d_X^{r-1}=\\operatorname{im}d_X^r$. This equality, with its induced filtration, follows from [lem-trf-finite-filtered-graded-exactness] applied to the augmented resolution. Extend this factor across the strict inclusion $\\operatorname{im}d_X^r\\hookrightarrow J_X^{r+1}$ into the filtered injective $J_Y^{r+1}$. This defines $f^{r+1}$ and gives $f^{r+1}d_X^r=d_Y^rf^r$.",
+   "text": "The inclusion is full and faithful. Combining its map bijections with the localization Hom bijection gives full faithfulness of the comparison; resolutions and localization essential surjectivity give essential surjectivity.",
    "uses": [
-    "lem-trf-enough-strict-filtered-injectives",
-    "lem-trf-finite-filtered-graded-exactness"
+    "lem-trf-filtered-injective-resolution",
+    "lem-trf-filtered-acyclic-injective-vanishing"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05TU, lemma-filtered-injective-right-resolution-map"
-   }
+   "elementary": false
   },
   {
-   "text": "For a strict exact sequence $0\\to X\\xrightarrow{i}Y\\xrightarrow{\\pi}Z\\to0$, resolve $X,Z$ by $J,H$. Extend $X\\to J^0$ to $b:Y\\to J^0$ using [lem-trf-enough-strict-filtered-injectives]. The map $d_Jb$ factors through $\\pi$, defining $t:Z\\to J^1$. Extend $-t$ across $Z\\hookrightarrow H^0$ to $c^0:H^0\\to J^1$. Inductively, $d_Jc^r$ vanishes on $\\operatorname{im}d_H^{r-1}$: for $r=0$ this is the augmented $Z$, and subsequently it follows from the previous identity $d_Jc^{r-1}+c^rd_H^{r-1}=0$. By strict exactness [lem-trf-finite-filtered-graded-exactness], factor through $\\operatorname{im}d_H^r$ and extend its negative to $c^{r+1}:H^{r+1}\\to J^{r+2}$. Set $M^r=J^r\\oplus H^r$ and $d_M=\\begin{pmatrix}d_J&c\\\\0&d_H\\end{pmatrix}$. The identity just imposed gives $d_M^2=0$, and $(b,(Z\\to H^0)\\pi)$ is an augmentation $Y[0]\\to M$. This yields a termwise split sequence $0\\to J\\to M\\to H\\to0$. After each graded functor, the natural long exact sequences [lem-weil-pbc-complex-ses-homology-long-exact, lem-weil-pbc-complex-ses-long-exact-naturality] show that this augmentation is a quasi-isomorphism, since the outside augmentations are so: in nonzero degrees all outside cohomology vanishes, and in degree zero the short exact sequences identify the middle map as an isomorphism. Finite sums of injectives are injective by extending each component separately, so every $M^r$ is filtered injective.",
+   "text": "Filtered injectivity of the underlying terms follows from the finite graded-filtration splitting theorem. The comparison is triangulated by the standard localization and full-subcategory instances. Termwise equality of evaluation functors descends through localization to the displayed comparison isomorphisms.",
    "uses": [
-    "lem-trf-enough-strict-filtered-injectives",
-    "lem-trf-finite-filtered-graded-exactness",
-    "def-sp-filtered-complex-subquotients",
-    "lem-weil-pbc-complex-ses-homology-long-exact",
-    "lem-weil-pbc-complex-ses-long-exact-naturality"
+    "lem-trf-injective-graded-filtration-splits"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05TV, lemma-filtered-injective-right-resolution-ses"
-   }
-  },
-  {
-   "text": "Put $Z_i=\\ker d_K^i$ and $B_i=\\operatorname{coim}d_K^i$, with the filtrations from Step 1. The sequence $0\\to Z_i\\to K^i\\to B_i\\to0$ is strict exact directly from its subobject and quotient filtrations. Resolve $Z_i,B_i$ by $J_i,H_i$ using Step 2. Lift $u_i:B_i\\to Z_{i+1}$ to $\\widetilde u_i:H_i\\to J_{i+1}$ using Step 3, and use Step 4 to obtain $0\\to J_i\\xrightarrow{\\alpha_i}M_i\\xrightarrow{\\beta_i}H_i\\to0$ with compatible augmentation of $K^i[0]$. The horizontal differential $\\partial_i=\\alpha_{i+1}\\widetilde u_i\\beta_i$ satisfies $\\partial_{i+1}\\partial_i=0$ because $\\beta_{i+1}\\alpha_{i+1}=0$; it commutes with the resolution differentials because all three factors are chain maps. Its augmentation is $d_K^i$, by the lifting and augmentation equations. We have therefore constructed the first-quadrant double complex $D^{i,r}=M_i^r$ and an augmentation $K\\to D$ supported in resolution degree zero [def-sp-double-complex-total].",
-   "uses": [
-    "def-sp-filtration",
-    "def-sp-double-complex-total"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05TW, lemma-right-resolution-by-filtered-injectives, construction before totalization"
-   }
-  },
-  {
-   "text": "Take $I^n=\\bigoplus_{i+r=n}D^{i,r}$ with differential $\\partial+(-1)^i d_{M_i}$ [def-sp-double-complex-total]. Each sum is finite, hence is a finite filtered object with injective graded pieces; $I^{<0}=0$. The degree-$n$ augmentation is $K^n\\to D^{n,0}\\hookrightarrow I^n$. For each filtration index $p$, the additive functor $\\operatorname{gr}^p$ commutes with these finite sums and differentials. Every resolution column $\\operatorname{gr}^p K^i[0]\\to\\operatorname{gr}^p M_i$ is a quasi-isomorphism by Step 4. Apply [lem-sc-first-quadrant-column-augmentation], with the resolution index first, namely the flipped bicomplex $D^{\\prime\\,r,i}=D^{i,r}$. The two total complexes are identified by multiplication by $(-1)^{ir}$ on the $(i,r)$ summand: a horizontal differential changes that sign by $(-1)^r$ and a vertical differential by $(-1)^i$, which identifies $\\partial+(-1)^i d_{M_i}$ with $d_{M_i}+(-1)^r\\partial$. The sign is $1$ on the resolution-zero augmentation. Its augmentation hypotheses are exactly the chain-map and vanishing equations of Step 5. It gives $\\operatorname{gr}^pK\\to\\operatorname{gr}^pI$ a quasi-isomorphism. Shift back to the original lower bound. This proves existence of the required representative.",
-   "uses": [
-    "def-sp-double-complex-total",
-    "def-sp-filtered-complex-subquotients",
-    "lem-sc-first-quadrant-column-augmentation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05TW, totalization argument; Homology Tag 0133, lemma-double-complex-gives-resolution"
-   }
-  },
-  {
-   "text": "Let $A$ be graded acyclic and $I$ bounded below and termwise filtered injective. For a filtered chain map $f:A\\to I$, construct a filtered homotopy $h^n:A^n\\to I^{n-1}$. Start with $h^n=0$ below the lower bound $N$ of $I$. Having $h^n$ and the identities in smaller degrees, set $r^n=f^n-d_I^{n-1}h^n$. The chain-map equation and the previous identity give $r^nd_A^{n-1}=0$. By [lem-trf-finite-filtered-graded-exactness], the acyclic graded sequences imply strict exactness of $A$, so $r^n$ factors through $A^n/\\operatorname{im}d_A^{n-1}=\\operatorname{im}d_A^n$ with its induced filtration. Extend that factor across the strict inclusion $\\operatorname{im}d_A^n\\hookrightarrow A^{n+1}$ into $I^n$ using [lem-trf-enough-strict-filtered-injectives], and call it $h^{n+1}$. Then $f^n=d_I^{n-1}h^n+h^{n+1}d_A^n$. Induction gives the homotopy in every degree, also when $A$ has no lower bound. Thus all maps from a graded acyclic complex to $I$ are nullhomotopic.",
-   "uses": [
-    "lem-trf-finite-filtered-graded-exactness",
-    "lem-trf-enough-strict-filtered-injectives"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05TX, lemma-filtered-acyclic-is-zero"
-   }
-  },
-  {
-   "text": "For a filtered quasi-isomorphism $s:K\\to L$, its cone and shifted cone are graded acyclic by [lem-trf-filtered-cone-localization]. Precomposition $s^*:\\operatorname{Hom}(L,I)\\to\\operatorname{Hom}(K,I)$ in the homotopy category is bijective, as follows directly from Step 7 and the cone formulas [def-weil-abstract-derived-category]. For surjectivity, a chain map $a:K\\to I$ composed with $C(s)[-1]\\to K$ has a nullhomotopy whose components are $(b^{n-1},h^n):L^{n-1}\\oplus K^n\\to I^{n-1}$. The homotopy equation on the first summand says $b:L\\to I$ is a chain map; on the second it says $a=d_Ih+hd_K-bs$. Hence $a$ is homotopic to $(-b)s$. For injectivity, if $bs=d_Ih+hd_K$, the components $(b^n,h^{n+1})$ define a map $C(s)\\to I$: substituting the cone differential verifies the chain-map equation. Step 7 makes it nullhomotopic, and restriction along $L\\to C(s)$ makes $b$ nullhomotopic.",
-   "uses": [
-    "lem-trf-filtered-cone-localization",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05TY, lemma-morphisms-into-filtered-injective-complex, part (1); explicit cone calculation"
-   }
-  },
-  {
-   "text": "Write $\\mathcal K=K_F^+(\\mathcal A)$ and $Q:\\mathcal K\\to DF^+(\\mathcal A)$. By Step 8 the contravariant functor $H=\\operatorname{Hom}_{\\mathcal K}(-,I)$ inverts every filtered quasi-isomorphism, so it descends through localization to $\\overline H$. The maps $H(X)\\to\\operatorname{Hom}_{DF^+}(QX,QI)$ induced by $Q$ are natural for ordinary arrows and, because both functors invert denominators, for their inverses and every localized composite. For a localized arrow $v:QX\\to QI$, define $\\rho(v)=\\overline H(v)(1_I)$. Naturality gives $\\rho(Qf)=f$ and $Q\\rho(v)=v$, by applying that naturality to $v$ and $1_I$. Thus $Q$ gives the asserted Hom bijection. This universal-property argument supplies both injectivity and surjectivity without assuming a fraction calculus for the filtered category.",
-   "uses": [
-    "lem-trf-filtered-cone-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05TY, lemma-morphisms-into-filtered-injective-complex, part (2); localization universal property"
-   }
-  },
-  {
-   "text": "The canonical functor $K^+(\\mathcal I^f)\\to DF^+(\\mathcal A)$ is essentially surjective by Step 6 and fully faithful by Step 9. Filtered injectives are closed under finite sums (extend components separately), shifts and cone terms; their homotopy category has the cone triangulation. By [lem-trf-filtered-cone-localization] its inclusion followed by localization preserves precisely these cone triangles, hence is exact. Full faithfulness and essential surjectivity give the asserted exact equivalence.",
-   "uses": [
-    "lem-trf-filtered-cone-localization",
-    "def-sp-injective-resolutions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015Q, lemma-filtered-localization-functor, equivalence"
-   }
-  },
-  {
-   "text": "For a finite filtered injective object $J$, descend through the finite filtration: the highest nonzero $F^pJ=\\operatorname{gr}^pJ$ is injective; if $F^{p+1}J$ is injective then its inclusion in $F^pJ$ splits by extending its identity [def-sp-injective-resolutions]. Thus $F^pJ\\cong F^{p+1}J\\oplus\\operatorname{gr}^pJ$ is injective, since its two components extend separately. This proves the underlying object is injective; every graded object is injective by definition. The forgetting functor sends graded acyclic complexes to acyclic complexes, by applying [lem-trf-finite-filtered-graded-exactness] in each degree; hence it sends filtered quasi-isomorphisms to quasi-isomorphisms by taking their cones [lem-trf-filtered-cone-localization]. Each graded functor does so by definition. The two squares now commute before localization termwise, and after localization by its universal property. This proves all comparisons with $D^+(\\mathcal A)$ [def-weil-abstract-derived-category].",
-   "uses": [
-    "def-sp-injective-resolutions",
-    "lem-trf-finite-filtered-graded-exactness",
-    "lem-trf-filtered-cone-localization",
-    "def-sp-filtered-complex-subquotients",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015Q, comparison squares; Tag 05TP, lemma-filtered-injective; Tag 05S3, lemma-filtered-derived-functors"
-   }
-  },
-  {
-   "text": "Fix $a\\le b$. The same-interval clause of [lem-trf-enough-strict-filtered-injectives] keeps each embedding of Step 2 in $[a,b]$; quotients retain these bounds, so all single-object resolutions do too. Kernels, coimages and images in Steps 3–5 inherit these same bounds from their subobject or quotient filtrations [def-sp-filtration]. In Step 4 the terms $J^r\\oplus H^r$ retain the bounds and the extended maps preserve every filtration step. The finite diagonal sums in Step 6 retain the bounds. Step 7 constructs only filtered maps between the given objects; its extension property changes no object and hence no interval. Steps 8–9 apply inside this bounded-interval category, where cones, shifts and localization have the structure in [lem-trf-filtered-cone-localization]. Steps 10–11 then give the restricted exact equivalence and the same forgetting and graded squares. For $a=b$ these constructions are ordinary injective resolutions placed in that one filtration degree; for the zero complex one may choose zero throughout.",
-   "uses": [
-    "lem-trf-enough-strict-filtered-injectives",
-    "def-sp-filtration",
-    "lem-trf-filtered-cone-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 05TS and 05TW constructions, and Tags 05TX, 05TY, 015Q restricted to a fixed filtration interval"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sp-double-complex-total",
-  "def-sp-filtered-complex-subquotients",
-  "def-sp-filtration",
-  "def-sp-injective-resolutions",
-  "def-weil-abstract-derived-category",
-  "lem-sc-first-quadrant-column-augmentation",
-  "lem-trf-enough-strict-filtered-injectives",
-  "lem-trf-filtered-cone-localization",
-  "lem-trf-finite-filtered-graded-exactness",
-  "lem-weil-pbc-complex-ses-homology-long-exact",
-  "lem-weil-pbc-complex-ses-long-exact-naturality"
+  "lem-trf-filtered-injective-resolution",
+  "lem-trf-filtered-acyclic-injective-vanishing",
+  "lem-trf-injective-graded-filtration-splits"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "D4 stage 3",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 05TW, 05TY and 015Q; fixed filtration intervals by the resolution construction in Tag 05TW and its preceding lemmas"
+  "place": "Tags 05TW, 05TX, 05TY and 015Q, with the Mathlib localization APIs"
  },
  "mathlib_match": null,
  "status": "split",
@@ -365,5 +232,15 @@
   "group": "Q03",
   "result": "pass",
   "note": "Checked every clause of the node against the six parts of filteredLocalization_injectiveModel and against Stacks derived.tex 05TW/05TY/015Q: real filtered quasi-isomorphism to a bounded-below graded-injective complex; localization Hom bijection for every bounded-below K; comparison K+(I^f)->DF+ is IsEquivalence and IsTriangulated (Mathlib's standard localization triangulation, confirmed by #synth); forgetting and every gr^p give ordinary injectives; comparison squares with DerivedCategory.Plus.Qh; B = none or some (a,b) covers all fixed intervals. No extra hypotheses; universes u, v, w independent. New def node def-trf-finite-filtered-localization has real data; its six postponed validity theorems are true, stated in the node, and carry source/proof docstrings. Edge cases checked: zero object, b<a, a=b, filtration bounds varying with cochain degree. No name clashes and no duplicate Preadditive instance. The lean-only §1(B) record repair of def-sp-filtration (Sheaf.CategoryTheory.Filtration / DecreasingFiltration) passes stage2_delivery.check_existing; it is contested with NA's PBC record but matches about 110 of roughly 125 consumers. Item node changes only by the added stmt_dep; both lean.statement fields appear verbatim in their files. nt_compile of both files: clean, no warnings; axioms are standard plus sorryAx. Report has real '## Worker report' and '## Second reading by Q03' sections.; reverted the delivery's change of existing node(s) def-sp-filtration (--revert-nodes; kept as on newtargets-dag)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261020T051130-L-1571161",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
