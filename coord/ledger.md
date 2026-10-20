@@ -17706,3 +17706,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:12 L: returned deliver/H3/Sheaf.CategoryTheory.ConstantLeftModuleInverseImage (reviewer RETURN: (reviewer C-9c0b5, head 9c0b57f0d) 8 (d): coord/changes/H3-constant-left-module-transport-extraction.md, ## Users table:)
 - 03:15 L: returned deliver/F7/Sheaf.AlgebraicGeometry.VectorBundleIntegration (reviewer RETURN: (reviewer C-58de6, head 58de68030) Brief point 2 (importer no longer compiles; no stage-3 letter in delivery-errors.md f)
 - 03:39 L: returned deliver/U4/Sheaf.Paper.FiniteProperBaseChange (reviewer RETURN: (reviewer C-c49a5, head c49a52b58) 1 (H9, brief point 5): lean/Sheaf/Paper/FiniteProperGeometricCohomologicalBound.lean )
+- 03:40 L: returned deliver/P8/Sheaf.CategoryTheory.RingedSiteDualityMaps (reviewer RETURN: (reviewer C-f8100, head f8100e0cb) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.CategoryTheory.Ringe)
