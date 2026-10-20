@@ -1,0 +1,174 @@
+{
+ "id": "lem-sf-ringed-finite-free-hom-transpose",
+ "kind": "statement",
+ "title": "Finite-free evaluation transpose is invertible",
+ "statement": "Let C be a small site [def-weil-pbc-sites-and-cohomology], R to S a finite free map of commutative ring sheaves, E the actual additive sheafified scalar extension, and (T, ε) its universal left derived pair [lem-pur-derived-change-of-rings]. Fix normalized closed tensor-Hom models AR, AS, MR, MS [def-coef-ringed-tensor-hom-model] and natural tensor comparisons κ, μ satisfying the pure-tensor formula and K-flat counit square of [lem-sf-ringed-finite-free-tensor-data]. Then the evaluation transpose μ inverse followed by T(evaluation) is a natural isomorphism T H_R(P,Q) to H_S(TP,TQ), for arbitrary unbounded P,Q.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08J9, label lemma-internal-hom: derived tensor-Hom adjunction. The finite-free change-of-rings specialization and its evaluation normalization are the auxiliary assertion here, not a verbatim assertion of that tag."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-derived-internal-hom",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sf-ringed-finite-free-tensor-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sf-ringed-finite-free-hom-coordinates] to obtain a_H, a_Q, β and the equation on each basis inclusion. The functor G = RHom_R(P,-) is a right adjoint by [def-coef-ringed-tensor-hom-model], so it preserves products. Compose G applied to the biproduct-to-product isomorphism, its product comparison, and the inverse product-to-biproduct isomorphism. This constructs γ : RHom_R(P,Q^d) ≅ RHom_R(P,Q)^d, with j-th projection G(pr_j). Set b = β followed by G(a_Q inverse) and γ. The basis-inclusion equation gives ι_i a_H U(c) b = G(ι_i) γ, since a_Q followed by its inverse cancels. Projecting to j gives G(ι_i pr_j), which is δ_ij identity: right adjoints preserve zero morphisms and all functors preserve identities. Biproduct extensionality proves a_H U(c) b is identity, hence U(c) is invertible. This includes the empty family for d=0.",
+   "uses": [
+    "lem-sf-ringed-finite-free-hom-coordinates",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Ordinary restriction is faithful and exact, hence reflects isomorphisms. Its derived homology comparison shows that every cohomology map of the comparison is invertible. Apply DerivedCategory.isIso_iff to obtain invertibility of the comparison itself.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of evaluation in both variables, naturality of mu, and injectivity of tensor-Hom transposition prove naturality of the displayed components. Their invertibility assembles a natural isomorphism by NatIso.ofComponents; its components are the required transposes by construction.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-sf-ringed-finite-free-hom-coordinates",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9 and 08JA; the importing module proves right-adjoint product preservation, the coordinate matrix calculation, homology conservativity, and naturality by tensor-Hom transposition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(internalHom|derivedHom|rhom).*(baseChange|finiteFree)|finiteFree.*(internalHom|derivedHom|rhom)",
+   "results": {
+    "top": [],
+    "note": "",
+    "n_hits": 0
+   },
+   "date": "2026-10-18",
+   "verdict": "No exact match; results are underived scalar adjunctions or unrelated closed categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"internalHom\", \"extendScalars\"",
+   "results": {
+    "top": [],
+    "note": "",
+    "n_hits": 0
+   },
+   "date": "2026-10-18",
+   "verdict": "No exact match; results are underived scalar adjunctions or unrelated closed categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension along finite free ring sheaves commutes with internal Hom on unbounded derived categories",
+   "results": {
+    "top": [
+     "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory",
+     "LightCondensed.instMonoidalClosedLightCondMod",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+     "CategoryTheory.Functor.mapExactFunctor_smul",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.internallyProjective_iff_tensor_condition",
+     "LightCondensed.internallyProjective_iff_tensor_condition'"
+    ],
+    "note": "",
+    "n_hits": 8
+   },
+   "date": "2026-10-18",
+   "verdict": "No exact match; results are underived scalar adjunctions or unrelated closed categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free scalar extension of sheaves commutes with derived tensor and derived internal Hom",
+   "results": {
+    "top": [
+     "ModuleCat.ExtendScalars.obj'",
+     "ModuleCat.extendScalars",
+     "SheafOfModules.freeFunctor",
+     "ModuleCat.preservesFiniteLimits_extendScalars_of_flat",
+     "PresheafOfModules.free",
+     "Algebra.TensorProduct.instFree",
+     "ModuleCat.extendRestrictScalarsAdj",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality"
+    ],
+    "note": "",
+    "n_hits": 8
+   },
+   "date": "2026-10-18",
+   "verdict": "No exact match; results are underived scalar adjunctions or unrelated closed categories."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RingedFiniteFreeHomBaseChange",
+  "date": "2026-10-19",
+  "group": "E8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-tensor-hom",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-tensor-hom",
+   "place": "Scalar-extension compatibility of the tensor-Hom ingredients; finite-free comparison.",
+   "via": [
+    "lem-sf-ringed-finite-free-hom-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.RingedFiniteFreeHomBaseChangeHom",
+  "file": "lean/Sheaf/SixFunctors/RingedFiniteFreeHomBaseChangeHom.lean",
+  "declaration": "CategoryTheory.ringedFiniteFreeHomBaseChange_hom",
+  "statement": "theorem ringedFiniteFreeHomBaseChange_hom\n    [HasDerivedCategory.{w} (SheafOfModules.{max c v r}\n      (SheafOfModules.derivedChangeRingIndependentCoefficients J R))]\n    [HasDerivedCategory.{w} (SheafOfModules.{max c v r}\n      (SheafOfModules.derivedChangeRingIndependentCoefficients J S))]\n    (hfree : ∃ d : ℕ, Nonempty\n      ((SheafOfModules.restrictScalars\n        ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).map φ)).obj\n          (SheafOfModules.unit\n            (SheafOfModules.derivedChangeRingIndependentCoefficients J S)) ≅\n        SheafOfModules.free (R :=\n          SheafOfModules.derivedChangeRingIndependentCoefficients J R)\n            (ULift.{max c v r} (Fin d))))\n    (E : SheafOfModules.{max c v r}\n      (SheafOfModules.derivedChangeRingIndependentCoefficients J R) ⥤ SheafOfModules.{max c v r}\n      (SheafOfModules.derivedChangeRingIndependentCoefficients J S))\n      (h : ∀ M, E.obj M = SheafOfModules.changeOfRings φ M)\n      (_hm : ∀ {M N : SheafOfModules.{max c v r}\n      (SheafOfModules.derivedChangeRingIndependentCoefficients J R)} (f : M ⟶ N),\n        E.map f = eqToHom (h M) ≫ SheafOfModules.changeOfRingsHom φ M f ≫\n          eqToHom (h N).symm)\n      (_hE : E.Additive)\n      (T : DerivedCategory (SheafOfModules.{max c v r}\n      (SheafOfModules.derivedChangeRingIndependentCoefficients J R)) ⥤\n        DerivedCategory (SheafOfModules.{max c v r}\n          (SheafOfModules.derivedChangeRingIndependentCoefficients J S)))\n      (ε : DerivedCategory.Q ⋙ T ⟶\n        E.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q)\n      (_hT : T.IsLeftDerivedFunctor ε\n        (HomologicalComplex.quasiIso (SheafOfModules.{max c v r}\n      (SheafOfModules.derivedChangeRingIndependentCoefficients J R)) (ComplexShape.up ℤ)))\n      (AR : WeilConjectures.CoefficientClosedStructure\n        (derivedInternalHomOfUniverses.{c, v, r, w} J R))\n      (AS : WeilConjectures.CoefficientClosedStructure\n        (derivedInternalHomOfUniverses.{c, v, r, w} J S))\n      (MR : WeilConjectures.CoefficientTensorModels.{r, c, v, w} J R AR)\n      (MS : WeilConjectures.CoefficientTensorModels.{r, c, v, w} J S AS)\n      (κ : WeilConjectures.coefficientTotalTensor.{r, c, v} J R ⋙\n          E.mapHomologicalComplex (ComplexShape.up ℤ) ≅\n        (E.mapHomologicalComplex (ComplexShape.up ℤ)).prod\n          (E.mapHomologicalComplex (ComplexShape.up ℤ)) ⋙\n            WeilConjectures.coefficientTotalTensor.{r, c, v} J S)\n      (μ : AR.tensor ⋙ T ≅ T.prod T ⋙ AS.tensor)\n    (hκ : (∀ (P Q : CochainComplex (SheafOfModules.{max c v r}\n      (SheafOfModules.derivedChangeRingIndependentCoefficients J R)) ℤ)\n        (p q : ℤ) (U : Cᵒᵖ) (x : (P.X p).val.obj U) (y : (Q.X q).val.obj U),\n        ((κ.hom.app (P, Q)).f (p + q)).val.app U\n          (ringedFiniteFreeScalarSection.{c, v, r} J φ E h\n            (((WeilConjectures.coefficientTotalTensor.{r, c, v} J R).obj (P, Q)).X (p + q))\n            U 1 (WeilConjectures.coefficientTensorGenerator.{r, c, v} J R\n              P Q p q (p + q) rfl U x y)) =\n        WeilConjectures.coefficientTensorGenerator.{r, c, v} J S\n          ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)\n          ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj Q) p q (p + q) rfl U\n          (ringedFiniteFreeScalarSection.{c, v, r} J φ E h (P.X p) U 1 x)\n          (ringedFiniteFreeScalarSection.{c, v, r} J φ E h (Q.X q) U 1 y)))\n    (hcomp : (∀ (P Q : CochainComplex (SheafOfModules.{max c v r}\n      (SheafOfModules.derivedChangeRingIndependentCoefficients J R)) ℤ)\n        (hP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P)\n        (hQ : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) Q),\n        ∃ (hEP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := S)\n            ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj P))\n          (hEQ : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := S)\n            ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj Q)),\n          IsIso (ε.app P) ∧ IsIso (ε.app Q) ∧\n          T.map ((MR.iso J R AR P Q hP hQ).hom) ≫\n              μ.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫\n              AS.tensor.map (Prod.mkHom (ε.app P) (ε.app Q)) =\n            ε.app ((WeilConjectures.coefficientTotalTensor.{r, c, v} J R).obj (P, Q)) ≫\n              DerivedCategory.Q.map (κ.hom.app (P, Q)) ≫\n              (MS.iso J S AS _ _ hEP hEQ).hom)) :\n    ∃ α : derivedInternalHomOfUniverses.{c, v, r, w} J R ⋙ T ≅\n        T.op.prod T ⋙ derivedInternalHomOfUniverses.{c, v, r, w} J S,\n      ∀ P Q : DerivedCategory (SheafOfModules.{max c v r}\n      (SheafOfModules.derivedChangeRingIndependentCoefficients J R)),\n        α.hom.app (op P, Q) = AS.transpose _ (T.obj P) (T.obj Q)\n          (μ.inv.app ((derivedInternalHomOfUniverses.{c, v, r, w} J R).obj (op P, Q), P) ≫\n            T.map (AR.evaluation P Q))",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-b080a",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261020T051227-L-1601075",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-b080a",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261020T051227-L-1601075",
+  "kind": "interface",
+  "note": "independent cc review: Coordinates sorry vs item node step 4 (a/aQ pinned by RingedFiniteFreeBasisCoordinates on all K-flat reps, β by restricted-evaluation transpose, adj/δ by unit and scalarChainTranspose); Data sorry vs tensor-complex node; Hom/Tensor/main proofs vs proof_deps; 5 delivered modules + 3 importers compiled (SpecifiedHomScalarEvaluation fails identically on published = pre-existing)"
+ }
+}
