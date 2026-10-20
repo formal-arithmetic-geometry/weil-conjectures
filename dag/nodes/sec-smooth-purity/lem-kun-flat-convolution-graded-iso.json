@@ -1,0 +1,135 @@
+{
+ "id": "lem-kun-flat-convolution-graded-iso",
+ "kind": "statement",
+ "title": "Ordinary associated graded of a flat convolution",
+ "statement": "Let R be a commutative ring, and P,Q integer cochain complexes of R-modules [def-weil-abstract-derived-category] with finite decreasing filtrations by subcomplexes [def-sp-filtration]. Suppose the underlying terms, every step term and every graded term of both complexes are flat. Graded pieces and projections are the successive cokernels of [def-sp-filtered-complex-subquotients]. Give the signed total tensor [def-pc-tensor-complex-sheaves] a decreasing filtration G with G^a equal to the image of the coproduct of the tensor inclusions F^iP tensor F^(a-i)Q -> P tensor Q. Let l_ai be any lifts of these tensor inclusions to G^a. For every a there is an isomorphism e_a : coproduct_i (gr^i P tensor gr^(a-i) Q) -> gr^a G whose composite with the tensor of the two quotient projections and the i-th coprojection equals l_ai followed by the quotient projection of G. No K-flatness, derived comparison or naturality is asserted.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Section section-kunneth-spectral-sequence, explicit convolution filtration, diagonal quotient/kernel calculation and short exact sequence before Tag 0H7W (lemma-kunneth-converges), lines 15425-15500. The finite hypothesis supplies exhaustiveness and the flat quotient induction."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Flat modules are closed under extensions: tensor a short exact sequence with flat outer terms against an injection, use flat quotient tensor injectivity for both rows and chase the kernel of the middle vertical map. Induct through the finite graded layers to show every term of P/F^i P and Q/F^j Q is flat; below the lower bound the quotient is zero, and above the upper bound it is the whole flat module.",
+   "uses": [
+    "lem-weil-pbc-flat-quotient-tensor-injective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For i+j=a project the total tensor to Tot((P/F^(i+1)P) tensor (Q/F^(j+1)Q)). On the diagonal step tensor (r,s) all components except (r,s) vanish, because r>i or s>j. There are only finitely many possibly nonzero components. Flat quotient tensor injectivity identifies the diagonal image with gr^r P tensor gr^s Q, degree by degree, and direct sums preserve these injections. Right exactness of tensor identifies the diagonal kernel with the sum of the two next-step tensor images.",
+   "uses": [
+    "lem-weil-pbc-flat-quotient-tensor-injective",
+    "def-pc-tensor-complex-sheaves",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the diagonal projection to G^a and factor through the direct sum of diagonal images. It is surjective by lifting representatives. It kills G^(a+1). Conversely every element in the kernel is a finite sum of diagonal step-tensor contributions; off-diagonal vanishing makes each contribution vanish separately in its graded tensor, and the diagonal kernel calculation puts it in G^(a+1). The maps commute with the signed differential. Thus the cokernel of G^(a+1)->G^a is canonically the indicated sum. Inverting that quotient isomorphism gives e_a and the representative formula. The lifts l_ai are unique by monicity of the subobject inclusions.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-quotient-tensor-injective",
+  "def-pc-tensor-complex-sheaves",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Section section-kunneth-spectral-sequence, explicit convolution filtration, diagonal quotient/kernel calculation and short exact sequence before Tag 0H7W (lemma-kunneth-converges), lines 15425-15500. The finite hypothesis supplies exhaustiveness and the flat quotient induction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The associated graded of the convolution tensor of finite filtered complexes is the direct sum of tensors of associated graded complexes",
+   "results": "8 hits: HomologicalComplex.instHasTensorXTensorUnit_1, TensorProduct.gradedMul, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, TensorProduct.tmul_of_gradedMul_of_tmul, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, TensorProduct.gradedMul_assoc, TensorProduct.gradedMul_def, HomologicalComplex.instHasTensorOfHasTensorX",
+   "date": "2026-10-21",
+   "verdict": "No whole-statement match: the hits provide graded multiplication, submodule tensor maps or flatness infrastructure, rather than the convolution associated graded calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule, TensorProduct",
+   "results": "12 hits: TensorProduct.map₂_mk_top_top_eq_top, TensorProduct.span_tmul_eq_top, TensorProduct.range_map, TensorProduct.mapIncl, TensorProduct.range_map_eq_span_tmul, TensorProduct.range_mapIncl, TensorProduct.range_map_mono, TensorProduct.map₂_eq_range_lift_comp_mapIncl",
+   "date": "2026-10-21",
+   "verdict": "No whole-statement match: the hits provide graded multiplication, submodule tensor maps or flatness infrastructure, rather than the convolution associated graded calculation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The associated graded of a tensor product of filtered complexes with flat graded terms is the direct sum of the tensor products of their graded pieces",
+   "results": "8 hits: TensorProduct.algebraMap_gradedMul, TensorProduct.gradedComm_of_zero_tmul, TensorProduct.gradedMul, TensorProduct.gradedMul_assoc, GradedTensorProduct.tmul, TensorProduct.gradedMul_def, GradedTensorProduct.auxEquiv, GradedTensorProduct.instRing",
+   "date": "2026-10-21",
+   "verdict": "No whole-statement match: the hits provide graded multiplication, submodule tensor maps or flatness infrastructure, rather than the convolution associated graded calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "K.flat.*(ShortExact|short exact)|flat.*extension|convolution.*graded",
+   "results": "6 hits: Mathlib/RingTheory/LocalRing/Length.lean, Mathlib/RingTheory/LocalRing/Length.lean, Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean, Mathlib/RingTheory/RamificationInertia/Basic.lean, Mathlib/RingTheory/RamificationInertia/Basic.lean, Mathlib/RingTheory/RamificationInertia/Basic.lean",
+   "date": "2026-10-21",
+   "verdict": "No whole-statement match: the hits provide graded multiplication, submodule tensor maps or flatness infrastructure, rather than the convolution associated graded calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FilteredTensorGradedComparison",
+  "date": "2026-10-21",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f0f",
+   "place": "Proof of lem-kun-0f0f, final paragraph, via lem-kun-filtered-tensor-graded-comparison: its original Steps 1, 3 and 4, the ordinary convolution quotient calculation before any K-flat or derived conclusions.",
+   "via": [
+    "lem-kun-filtered-tensor-graded-comparison",
+    "lem-kun-bounded-tensor-tor-spectral-sequence",
+    "lem-kun-integral-bounded-kunneth-exact",
+    "lem-kun-integral-derived-tensor-bounded-torsion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FlatConvolutionGradedIso",
+  "file": "lean/Sheaf/Algebra/Homology/FlatConvolutionGradedIso.lean",
+  "declaration": "CochainComplex.flatConvolution_graded_iso",
+  "statement": "theorem flatConvolution_graded_iso\n    (P Q : FilteredObject (CochainComplex (ModuleCat.{u} R) ℤ))\n    (hPfin : P.filtration.IsFinite) (hQfin : Q.filtration.IsFinite)\n    (hP : ∀ n, ObjectProperty.flat (P.obj.X n))\n    (hQ : ∀ n, ObjectProperty.flat (Q.obj.X n))\n    (hPs : ∀ i n, ObjectProperty.flat\n      ((P.filtration.step i : CochainComplex (ModuleCat.{u} R) ℤ).X n))\n    (hQs : ∀ i n, ObjectProperty.flat\n      ((Q.filtration.step i : CochainComplex (ModuleCat.{u} R) ℤ).X n))\n    (hPg : ∀ i n, ObjectProperty.flat ((P.filtration.gradedPiece i).X n))\n    (hQg : ∀ i n, ObjectProperty.flat ((Q.filtration.gradedPiece i).X n))\n    (G : DecreasingFiltration (P.obj ⊗ Q.obj))\n    (hG : ∀ a : ℤ, G.step a = imageSubobject\n      (Sigma.desc (fun i : ℤ ↦\n        (P.filtration.step i).arrow ⊗ₘ (Q.filtration.step (a - i)).arrow)))\n    (l : ∀ a i : ℤ,\n      (P.filtration.step i : CochainComplex (ModuleCat.{u} R) ℤ) ⊗\n          (Q.filtration.step (a - i) : CochainComplex (ModuleCat.{u} R) ℤ) ⟶\n        (G.step a : CochainComplex (ModuleCat.{u} R) ℤ))\n    (hl : ∀ a i, l a i ≫ (G.step a).arrow =\n      (P.filtration.step i).arrow ⊗ₘ (Q.filtration.step (a - i)).arrow) :\n    ∀ a : ℤ, ∃ e :\n      (∐ fun i : ℤ ↦ P.filtration.gradedPiece i ⊗ Q.filtration.gradedPiece (a - i)) ≅\n        G.gradedPiece a,\n      ∀ i : ℤ,\n        (P.filtration.complexQuotientπ i (i + 1) (by omega) ⊗ₘ\n          Q.filtration.complexQuotientπ (a - i) (a - i + 1) (by omega)) ≫\n          Sigma.ι (fun i : ℤ ↦\n            P.filtration.gradedPiece i ⊗ Q.filtration.gradedPiece (a - i)) i ≫ e.hom =\n        l a i ≫ G.complexQuotientπ a (a + 1) (by omega)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261020T235613-L-1195016",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261020T235613-L-1195016",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
