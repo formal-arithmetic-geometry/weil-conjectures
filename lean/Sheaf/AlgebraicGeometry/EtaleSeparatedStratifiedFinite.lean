@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Topology.Constructible
-import Sheaf.AlgebraicGeometry.ConstructibleStratifiedFinite
+import WeilConjectures.AlgebraicGeometry.ConstructibleStratifiedFinite
 import WeilConjectures.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
 import WeilConjectures.AlgebraicGeometry.UnramifiedQuasiFinite
 

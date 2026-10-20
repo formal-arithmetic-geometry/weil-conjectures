@@ -116,14 +116,15 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ConstructibleStratifiedFinite",
-  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleStratifiedFinite.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.ConstructibleStratifiedFinite",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ConstructibleStratifiedFinite.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_constructible_stratified_finite",
   "statement": "theorem exists_constructible_stratified_finite {X U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] (j : U ⟶ X) [Flat j] [LocallyOfFinitePresentation j] [IsSeparated j] (hj : j.IsQuasiFinite) : ∃ S : Stratification X, (∀ i : Fin S.n, Topology.IsConstructible (S.stratum i)) ∧ (∀ i : Fin S.n, IsFinite (pullback.snd j (S.immersion i)))",
   "branch": "sheaf-dag",
-  "by": "G2",
-  "date": "2026-10-12"
+  "by": "R3",
+  "date": "2026-10-20",
+  "note": "The adopted source module already proves exactly this declaration. R3 retires the duplicate Sheaf module and redirects its only direct consumer to this unchanged source proof; the six-step proof plan and dependencies remain applicable."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -138,12 +139,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-cfb1a",
-  "group": "F9",
+  "reviewer": "C-08a1b",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261020T153004-L-2859933",
+  "landing": "20261020T160110-L-3325970",
   "kind": "interface",
-  "note": "independent cc review: 27 delivered consumers vs live sources with the alias→Stratification and import substitution applied (byte-identical); 12 node records vs live (only lean.statement/note respelled); 155-module sandbox (28 delivered + 67 direct importers + intermediates) all compiled"
+  "note": "independent cc review: Retired Sheaf.AlgebraicGeometry.ConstructibleStratifiedFinite vs live WeilConjectures twin (byte-identical apart from the header); sole importer EtaleSeparatedStratifiedFinite redirected by one import line and compiled; node diff is lean attachment fields only; upstream theorem's axioms are propext/choice/Quot.sound"
  },
  "lean_audit": {
   "master": {
