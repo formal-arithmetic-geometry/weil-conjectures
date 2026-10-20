@@ -31,7 +31,6 @@ import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 import Mathlib.LinearAlgebra.Basis.VectorSpace
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
-import Sheaf.AlgebraicGeometry.SchematicDensityGenericFibreOpen
 
 /-!
 # Geometrically reduced fibres near the generic fibre

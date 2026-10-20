@@ -24,14 +24,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
-import Sheaf.CategoryTheory.DiagramSiteRealization
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison
-import Sheaf.Paper.ProjectionMateExact
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 
 
 /-!
