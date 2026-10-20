@@ -6,7 +6,7 @@ Authors: SHEAF group U4
 module
 
 public import WeilConjectures.AlgebraicGeometry.PicardConstantSectionsTensor
-import Sheaf.AlgebraicGeometry.PicardConstantScalarExtensionSections
+import WeilConjectures.AlgebraicGeometry.PicardConstantScalarExtensionSections
 
 /-! # Balanced sections of scalar-extended constant tensor coefficients
 
@@ -68,7 +68,7 @@ theorem exists_picard_constant_tensor_balanced_sections
       (ModuleCat.extendScalars (scalarMap g V)).obj M := by
     let : Module k Γ(Y, V) := Module.compHom _ (scalarMap g V)
     exact TensorProduct.tmul k a s
-  obtain ⟨q, hq⟩ := exists_picard_constant_scalar_extension_sections k Y g M
+  let q := picardConstantScalarExtensionSections k Y g M
   let P := (PresheafOfModules.pullback (picardConstantRingMap k Y g)).obj
     (picardConstantVector k Y M)
   let e (V : Y.Opens) :
@@ -119,7 +119,7 @@ theorem exists_picard_constant_tensor_balanced_sections
       | tmul a s =>
         change e V.unop (P.map i (q U.unop (tmul U.unop a s))
           ⊗ₜ[Γ(Y, V.unop)] G.val.map i t) = _
-        rw [hq, he]
+        rw [picardConstantScalarExtensionSections_map, he]
         change _ = ((scalarPresheaf g G ⋙ MonoidalCategory.tensorLeft M).map i)
           (e U.unop ((q U.unop (tmul U.unop a s))
             ⊗ₜ[Γ(Y, U.unop)] t))
