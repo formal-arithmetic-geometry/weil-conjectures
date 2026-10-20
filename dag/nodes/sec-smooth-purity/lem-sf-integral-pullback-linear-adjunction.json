@@ -1,0 +1,120 @@
+{
+ "id": "lem-sf-integral-pullback-linear-adjunction",
+ "kind": "lemma",
+ "title": "Integral constructible pullback has a coefficient-linear right adjoint",
+ "statement": "Let K be a field with l invertible, E a finite extension of Q_l, and f:X to Y a morphism of finite-type K-schemes, without separatedness. The recorded constructibleIntegralPullback [def-weil-derived-pullback-tensor-hom] has a right adjoint R on the full intrinsic integral constructible categories. The functor R is additive and O_E-linear. This is an integral universal-property statement, before rationalization, common-stage descent, scalar-change mates or Weil lifting. The right-adjoint object with its adjunction is determined up to its unique counit-compatible natural isomorphism.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "6.5.9 and Lemma 6.7.2; Stacks Project Tag 099N(2), normalization on complete constructible categories"
+ },
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Compose the actual whole-system reduction/limit adjunction with systemAdjunction for the sectionwise derived direct image. The reconstruction unit is invertible on constructible complete objects. For a fully faithful inclusion i and an adjunction S ⊣ T whose unit is invertible on i, define the inverse on Hom of i followed by S by the adjunction homEquiv followed by the inverse unit, then the full inclusion preimage. The unit naturality and triangle equations prove both inverse identities. This fully faithful reduction argument is proved explicitly in Lean.",
+   "uses": [
+    "def-weil-system-operation-exchange-realization",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The actual normalized integralComparisonPullbackCounit is invertible on constructible objects by effective pullback. Its inverse identifies the included constructible pullback followed by reduction with reduction followed by strict system pullback. Apply Mathlib Adjunction.restrictFullyFaithful using the full inclusion on the source, the just-proved fully faithful reduction on the target, and this comparison. The right functor is literally directImageFunctor, with identity comparison, so no arbitrary right-adjoint data are selected. The existing directImage_linear gives additivity and O_E-linearity.",
+   "uses": [
+    "def-weil-system-operation-exchange-realization",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-sf-integral-direct-image-constructible"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-system-operation-exchange-realization",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-sf-integral-direct-image-constructible"
+ ],
+ "proof_origin": "E1, 2026-10-20: fully proved from the actual system adjunction and normalized integral pullback realization, using an explicit fully faithful reduction helper and Mathlib Adjunction.restrictFullyFaithful. Remove the unused ordinary SfCommonStageDirectImage import from SfIntegralCompactSupportConstructible to break the otherwise circular compact-support import closure. That held K9 module has no other change. Its signatures and public imports remain identical. No new integral adjunction hole remains.",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Completed integral pullback on bounded constructible pro-etale complexes is left adjoint to a coefficient-linear derived direct image",
+   "results": "Eight ordinary scheme-module/sheaf adjunction hits. They do not identify normalized completed pullback or its bounded constructible restriction.",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.restrictFullyFaithful",
+   "results": "Six hits, including the restriction constructor and its unit/counit equations. Restriction still requires the normalized ambient completed adjunction and preservation of the intrinsic constructible categories.",
+   "date": "2026-10-20",
+   "verdict": "formal restriction available, concrete comparison remains"
+  },
+  {
+   "tool": "grep",
+   "query": "constructibleIntegralPullback.*Adjunction",
+   "results": "Remote grep has zero hits. Local signatures in SystemOperationExchangeRealization permit a system construction, but its compact-support imports form a cycle through the assigned module. CompletedPullbackAdjunction is lower and generic, with different complete-category coordinates.",
+   "date": "2026-10-20",
+   "verdict": "normalized integral statement not exposed by an importable declaration"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed pullback on integral constructible pro-etale complexes has a coefficient-linear right adjoint",
+   "results": "Eight ordinary module/sheaf and over-category adjunction hits; no completed constructible coefficient theorem.",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-rational-direct-image-adjunctions",
+   "place": "Integral adjunction before raw Hom localization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfCommonStageDirectImage",
+  "date": "2026-10-20",
+  "group": "E1"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfIntegralPullbackLinearAdjunction",
+  "file": "lean/Sheaf/Paper/SfIntegralPullbackLinearAdjunction.lean",
+  "declaration": "WeilConjectures.sfIntegralPullbackLinearAdjunction",
+  "statement": "theorem sfIntegralPullbackLinearAdjunction\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (K₀ : Type u) [Field K₀] (hl : IsUnit (l : K₀))\n    {X Y : Scheme.{u}}\n    [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))]\n    [LocallyOfFiniteType (X ↘ Spec (.of K₀))] [QuasiCompact (X ↘ Spec (.of K₀))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of K₀))] [QuasiCompact (Y ↘ Spec (.of K₀))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of K₀))]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)] :\n    ∃ R : sfIntegralConstructibleCategory l E X ⥤ sfIntegralConstructibleCategory l E Y,\n      Nonempty (constructibleIntegralPullback l E f ⊣ R) ∧ R.Additive ∧\n        R.Linear (Padic.coefficientExtensionIntegers l E)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261020T051204-L-1589890",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261020T051204-L-1589890",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

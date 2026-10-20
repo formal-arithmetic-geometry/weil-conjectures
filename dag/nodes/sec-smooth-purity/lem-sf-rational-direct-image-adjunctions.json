@@ -1,0 +1,120 @@
+{
+ "id": "lem-sf-rational-direct-image-adjunctions",
+ "kind": "lemma",
+ "title": "Finite rational adjunctions and invertible scalar-change mates",
+ "statement": "Fix a finite-field datum D, a prime l different from its characteristic, and an algebraic closure Omega of Q_l. For a morphism f between finite-type models, on their geometric fibres the rational derived inverse images form a coherent stage-system morphism L with exactly the normalized pullback comparisons [def-weil-derived-pullback-tensor-hom]. At every finite coefficient field there is a right adjoint R_E. For every coefficient inclusion E ≤ F the canonical right-adjoint scalar-change mate is invertible: there is an isomorphism R_E T_Y ≅ T_X R_F satisfying L_F(beta_R) followed by counit_F = beta_L inverse followed by T_X(counit_E). No coherence of R, compatible units, common-stage quotient adjunction or Weil structure is asserted; the consumer proves those formal consequences.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.7.2; 6.8.14(2); Remark 6.8.15; blueprint def-weil-derived-direct-image finite and rational coefficient clauses"
+ },
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-rationalization-karoubi",
+  "prop-weil-pbc-descent-functors"
+ ],
+ "proof": [
+  {
+   "text": "Use the integral constructible adjunction with its additive O_E-linear right functor. The adjunction makes the left functor additive and O_E-linear. Tensor its unit and counit with one in the actual raw Hom localization. Tensor induction proves naturality and both triangle equations. The pure-tensor characterization uniquely identifies the left functor with rationalDerivedPullback. The entire raw rationalization argument is proved in Lean; the normalized integral adjunction is a separate source result.",
+   "uses": [
+    "lem-sf-integral-pullback-linear-adjunction",
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the unique left stage family with its fixed functor family and all common-stage comparison components from the separate coefficient theorem. This normalization determines the data in equality. The completely proved pointwise construction supplies an adjunction at each stage, transported along the fixed functor-family equality. Apply the coefficient-change theorem to these actual adjunctions to obtain invertible literal Mathlib right mates. Mathlib mateEquiv_counit proves the displayed counit equation in Lean. No arbitrary family or adjunction is assumed from mere existence.",
+   "uses": [
+    "lem-sf-rational-direct-image-coefficient-compatibility"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-pullback-linear-adjunction",
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-sf-rational-direct-image-coefficient-compatibility"
+ ],
+ "proof_origin": "E1, 2026-10-20: completely prove raw Hom localization of the integral adjunction and the Mathlib mate counit equation. The lower integral adjunction is now fully proved by system restriction after removing the unused cycle-closing ordinary import in SfIntegralCompactSupportConstructible. Only the separate normalized coefficient-change mate theorem remains a hole.",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction at each finite coefficient stage with scalar compatible unit and counit descends to the directed common stage category",
+   "results": "Generic adjunction lifting and functoriality lemmas; no theorem about these constructible coefficient stages.",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.restrictFullyFaithful",
+   "results": "Six hits, including Adjunction.restrictFullyFaithful and its unit/counit component equations. The restriction constructor is used to prove pointwise integral adjunctions.",
+   "date": "2026-10-20",
+   "verdict": "used for the proved pointwise restriction"
+  },
+  {
+   "tool": "grep",
+   "query": "Adjunction|adjunction|IsLeftAdjoint in PbcDescentFunctors, PbcScalarExtension, CompletedPullbackAdjunction and DerivedPullbackTensorHom",
+   "results": "CompletedPullbackAdjunction supplies the ambient adjunction; PbcDescentFunctors descends compatible families but assumes their stage functors; neither provides the constructible rational adjunction family for the actual sf categories.",
+   "date": "2026-10-20",
+   "verdict": "finite-stage construction remains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An adjunction of additive linear functors induces an adjunction after scalar extension of its Hom modules",
+   "results": "Eight hits: Adjunction.homAddEquiv and ordinary ModuleCat extension/restriction adjunctions. No raw Hom scalar-localization adjunction constructor; the proof constructs its unit, counit and triangles explicitly.",
+   "date": "2026-10-20",
+   "verdict": "generic additive Hom API only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-direct-image",
+   "place": "Finite and rational coefficient construction, before common-stage descent",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfCommonStageDirectImage",
+  "date": "2026-10-20",
+  "group": "E1"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfRationalDirectImageAdjunction",
+  "file": "lean/Sheaf/Paper/SfRationalDirectImageAdjunction.lean",
+  "declaration": "WeilConjectures.sfRationalDirectImageAdjunctions",
+  "statement": "theorem sfRationalDirectImageAdjunctions\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]\n    {X₀ Y₀ : Over (Spec (.of D.k₀))}\n    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]\n    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (f : X₀ ⟶ Y₀) :\n    letI := sfWeilPrimeInvertible D l hl X₀\n    letI := sfWeilPrimeInvertible D l hl Y₀\n    ∃ (L : (stageSystem l Ω (D.geometricFiber Y₀).left).Morphism\n        (stageSystem l Ω (D.geometricFiber X₀).left))\n      (R : ∀ E : Index l Ω,\n        sfRationalConstructibleCategory l (Coefficient.{u} l Ω E)\n            (D.geometricFiber X₀).left ⥤\n          sfRationalConstructibleCategory l (Coefficient.{u} l Ω E)\n            (D.geometricFiber Y₀).left),\n      L.Φ = (fun E ↦ rationalDerivedPullback l (Coefficient.{u} l Ω E) (zlFiberMap D f)) ∧\n      (∀ (E F : Index l Ω) (h : E ≤ F)\n        (K : sfRationalConstructibleCategory l (Coefficient.{u} l Ω E)\n          (D.geometricFiber Y₀).left),\n        HEq ((L.β h).app K)\n          (commonStagePullbackComparison l Ω (zlFiberMap D f) ⟨E, K⟩ F h)) ∧\n      ∃ (a : ∀ E, L.Φ E ⊣ R E)\n        (β : ∀ {E F : Index l Ω} (h : E ≤ F),\n          R E ⋙ (stageSystem l Ω (D.geometricFiber Y₀).left).T h ≅\n            (stageSystem l Ω (D.geometricFiber X₀).left).T h ⋙ R F),\n        ∀ {E F : Index l Ω} (h : E ≤ F)\n          (K : sfRationalConstructibleCategory l (Coefficient.{u} l Ω E)\n            (D.geometricFiber X₀).left),\n          (L.Φ F).map ((β h).hom.app K) ≫\n              (a F).counit.app\n                (((stageSystem l Ω (D.geometricFiber X₀).left).T h).obj K) =\n            (L.β h).inv.app ((R E).obj K) ≫\n              ((stageSystem l Ω (D.geometricFiber X₀).left).T h).map\n                ((a E).counit.app K)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261020T051204-L-1589890",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261020T051204-L-1589890",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

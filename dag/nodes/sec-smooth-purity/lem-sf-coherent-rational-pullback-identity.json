@@ -1,0 +1,135 @@
+{
+ "id": "lem-sf-coherent-rational-pullback-identity",
+ "kind": "statement",
+ "title": "Scalar-compatible identity pullback comparisons at rational stages",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$, a simultaneous coefficient comparison system $S$ [def-fd-pullback-comparison-datum], and its scheme coherence $h_S$ [lem-fd-rational-coefficient-category-comparison]. Let $X$ be a Noetherian scheme of finite topological Krull dimension such that $\\ell$ is a unit in every stalk. For each finite coefficient subfield $E\\subset\\Omega$ [def-weil-algebraically-closed-coefficients], let $F_E$ be the recorded rational derived pullback along $\\mathrm{id}_X$ [def-weil-derived-pullback-tensor-hom]. There exist natural isomorphisms $e_E:F_E\\cong\\mathrm{Id}$ simultaneously compatible with the prescribed common-stage pullback comparisons: for every common-stage object $P=(E,K)$, every finite coefficient subfield $L$ containing $E$, and the inclusion $h:E\\leq L$, one has $\\beta_{P,L,h}\\,e_L(P_L)=T_h(e_E(K))$. Here $T_h$ is the recorded scalar transition, $P_L=T_h(K)$, and $\\beta_{P,L,h}:T_h(F_EK)\\to F_L(P_L)$ is commonStagePullbackComparison. The pullbacks use the canonical residue-field inverses supplied by stalk invertibility. No separatedness or nonemptiness hypothesis is imposed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, identity compatibility; Stacks Tag 099N, completed pullback identity comparison"
+ },
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-algebraically-closed-coefficients",
+  "def-fd-pullback-comparison-datum",
+  "lem-fd-rational-coefficient-category-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Take the natural integral identity isomorphism given by hs at each coefficient stage. Copy the prescribed rational pullback to its literal integral object map. Localize the integral components and inverses. Naturality on a pure tensor is exactly the integral naturality equation tensored with its scalar; tensor induction and additivity give naturality for all rational arrows. Compose with the copy-object isomorphism.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-rationalization-karoubi",
+    "lem-fd-rational-coefficient-category-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The comparison identification in hs and the scalarSchemeUnit field of the simultaneous realization identify the integral scalar/pullback comparison followed by the target identity unit with scalar extension of the source unit. Pass to rationalization using its normalized pure-tensor scalar-extension formula. The heterogeneous object specifications supply exactly the equality transports at each endpoint.",
+   "uses": [
+    "lem-fd-rational-coefficient-category-comparison",
+    "lem-trf-integral-pullback-comparison-realization",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Conjugate the rational scalar equation by operationStageTransitionIso. Naturality of the rational target unit moves it past the inverse transition comparison. The rational scalar equation replaces the middle two factors. Naturality of the transition comparison moves the source unit through; its inverse cancels. This is the recorded T_h equation. All operations use the canonical fdResidueInvertible instance from stalk invertibility.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-rationalization-karoubi",
+  "lem-fd-rational-coefficient-category-comparison",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": "E1, 2026-10-19: explicit Lean rationalization and scalar transport from the existing simultaneous coefficient comparison system; no new assumed theorem.",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural identity comparison for rational derived inverse image compatible with finite scalar extension",
+   "results": "Only generic field and scalar identities returned; no theorem about the project rational constructible pullback.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "Generic construction of a natural isomorphism from components, used in the proved common-stage descent; no scalar-compatible rational identity comparison.",
+   "date": "2026-10-19",
+   "verdict": "generic tool only"
+  },
+  {
+   "tool": "grep",
+   "query": "rationalDerivedPullback.*[Uu]nit|coherentRationalPullbackIdentity",
+   "results": "No match. Library CompletedStalk.rationalUnit constructs individual object isomorphisms from integralComparisonUnit, but does not supply rational naturality and compatibility for all coefficient inclusions. Blueprint search found no duplicate.",
+   "date": "2026-10-19",
+   "verdict": "no exact existing statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived inverse image of the identity is naturally isomorphic to identity on rational constructible complexes, compatibly with extension of coefficients.",
+   "results": "Eight results, including Functor.mapHomologicalComplexIdIso_inv_app_f and generic derived-resolution naturality. None supplies rational constructible identity comparisons or their coefficient compatibility.",
+   "date": "2026-10-19",
+   "verdict": "generic tools only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-direct-image",
+   "place": "Common-stage inverse-image identity comparison: finite rational unit maps and their compatibility with scalar extension, before quotient-category descent",
+   "via": [
+    "lem-sf-common-stage-pullback-identity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfCommonStageDirectImage",
+  "date": "2026-10-19",
+  "group": "E1"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoherentRationalPullbackIdentity",
+  "file": "lean/Sheaf/Paper/CoherentRationalPullbackIdentity.lean",
+  "declaration": "WeilConjectures.coherentRationalPullbackIdentity",
+  "statement": "theorem coherentRationalPullbackIdentity\n    (l : ℕ) [Fact l.Prime] (Ω : Type v)\n    [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]\n    (S : FdCoefficientComparisonSystem.{u} l Ω)\n    (hs : FdComparisonSchemeCoherence l Ω S)\n    (X : Scheme.{u}) [IsNoetherian X]\n    [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]\n    [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))] :\n    ∃ e : ∀ E : Index l Ω,\n        rationalDerivedPullback l (Coefficient.{u} l Ω E) (𝟙 X) ≅ 𝟭 _,\n      ∀ (P : generalAlgebraicallyClosedConstructibleCategory l Ω X)\n        (L : Index l Ω) (h : P.stage ≤ L),\n        (commonStagePullbackComparison l Ω (𝟙 X) P L h).hom ≫\n            (e L).hom.app (P.toStage h) =\n          ((stageSystem l Ω X).T h).map ((e P.stage).hom.app P.obj)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261020T051204-L-1589890",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261020T051204-L-1589890",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

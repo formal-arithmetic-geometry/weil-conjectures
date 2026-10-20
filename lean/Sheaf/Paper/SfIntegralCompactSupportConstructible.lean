@@ -44,7 +44,6 @@ import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
 import Sheaf.AlgebraicGeometry.ProEtaleFixedScalarRestrictionDirectImage
 import Sheaf.Paper.DerivedCompleteOnSlices
 import Sheaf.Paper.IntegralReductionTowerWellDefinedUnrestricted
-import Sheaf.Paper.SfCommonStageDirectImage
 import Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
 import Sheaf.Algebra.Homology.KFlatIndependentCoefficients

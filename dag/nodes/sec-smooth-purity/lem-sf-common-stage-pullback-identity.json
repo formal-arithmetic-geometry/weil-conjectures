@@ -1,0 +1,119 @@
+{
+ "id": "lem-sf-common-stage-pullback-identity",
+ "kind": "statement",
+ "title": "Identity comparison for common-stage derived pullback",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$, a simultaneous coefficient comparison system $S$ [def-fd-pullback-comparison-datum], and its scheme coherence $h_S$ [lem-fd-rational-coefficient-category-comparison]. Let $X$ be a Noetherian scheme of finite topological Krull dimension such that $\\ell$ is a unit in every stalk. The recorded common-stage derived pullback along $\\mathrm{id}_X$ [def-weil-derived-pullback-tensor-hom], using the canonical residue-field inverses supplied by stalk invertibility, is naturally isomorphic to the identity functor of the algebraically closed constructible coefficient category [def-weil-algebraically-closed-coefficients]. No separatedness or nonemptiness hypothesis is imposed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, identity compatibility; Stacks Tag 099N, completed pullback identity comparison"
+ },
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-algebraically-closed-coefficients",
+  "def-fd-pullback-comparison-datum",
+  "lem-fd-rational-coefficient-category-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Take compatible rational identity isomorphisms at every finite coefficient stage. Identify the chosen common-stage pullback object with its prescribed pair by its uniqueness specification. The component at (E,K) is the stage inclusion applied to the rational identity comparison on K.",
+   "uses": [
+    "lem-sf-coherent-rational-pullback-identity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every arrow is represented at a common finite stage L. The prescribed pullback map is beta_P followed by rational pullback of the representative followed by beta_Q inverse. Rewrite each component using the stage inclusion formula. Scalar compatibility cancels beta_Q inverse, rational naturality moves the identity unit past the representative, and compatibility at P gives the required equality. Thus these objectwise isomorphisms form a natural isomorphism; compose with the initial equality identification.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-coherent-rational-pullback-identity",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": "E1, 2026-10-19: explicit Lean descent on representatives from scalar-compatible rational units.",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Identity comparison for completed derived pullback on common-stage constructible algebraically closed coefficient categories",
+   "results": "Generic pullback and presheaf-module identity comparisons only; no common-stage derived constructible comparison.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, CategoryTheory.Iso",
+   "results": "Functor.mapIso and its identity/composition laws; no comparison for the recorded completed/common-stage pullback.",
+   "date": "2026-10-19",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "commonStageDerivedPullback_identity|commonStageDerivedPullback.*IdIso|commonStageDerivedPullback.*idIso",
+   "results": "No match. Blueprint search common-stage identity found no duplicate. IntegralPullbackComparisonRealization supplies integral unit data, but rationalization and common-stage descent remain.",
+   "date": "2026-10-19",
+   "verdict": "no exact existing statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The common-stage derived inverse image of the identity on a scheme is naturally isomorphic to the identity functor.",
+   "results": "Eight results, including Scheme.Modules.pullbackId, Over.pullbackId and SheafOfModules.pullbackId. These concern ordinary module or over categories, not the recorded common-stage derived pair category.",
+   "date": "2026-10-19",
+   "verdict": "generic tools only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-direct-image",
+   "place": "Common-stage Weil direct image: invertibility of Frobenius pullback, using inverse automorphism, identity and composition comparisons",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfCommonStageDirectImage",
+  "date": "2026-10-19",
+  "group": "E1"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonStagePullbackIdentity",
+  "file": "lean/Sheaf/Paper/CommonStagePullbackIdentity.lean",
+  "declaration": "WeilConjectures.commonStageDerivedPullback_identity",
+  "statement": "theorem commonStageDerivedPullback_identity\n    (l : ℕ) [Fact l.Prime] (Ω : Type v)\n    [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]\n    (S : FdCoefficientComparisonSystem.{u} l Ω)\n    (hs : FdComparisonSchemeCoherence l Ω S)\n    (X : Scheme.{u}) [IsNoetherian X]\n    [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]\n    [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))] :\n    Nonempty (commonStageDerivedPullback l Ω (𝟙 X) ≅ 𝟭 _)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261020T051204-L-1589890",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261020T051204-L-1589890",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

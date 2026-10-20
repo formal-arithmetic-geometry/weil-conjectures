@@ -1,0 +1,129 @@
+{
+ "id": "lem-sf-rational-direct-image-coefficient-compatibility",
+ "kind": "lemma",
+ "title": "Coherent coefficient pullback comparisons and invertible geometric right mates",
+ "statement": "Fix a finite-field datum D, a prime l different from its characteristic, an algebraic closure Omega of Q_l, and a finite-type model morphism f. There is a unique coherent stage-system morphism L whose functor family is literally the recorded rational derived pullback and whose comparison components equal commonStagePullbackComparison [def-weil-derived-pullback-tensor-hom]. For every already specified pointwise adjunction L_E left adjoint to R_E, the literal Mathlib right mate of the inverse coefficient comparison is invertible. No pointwise adjoint existence, common-stage adjunction or Weil lift is asserted. The fixed functor family and all comparison components determine the entire stage morphism in equality, so no arbitrary family data are selected.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.7.2; 6.8.14(2); Remark 6.8.15; blueprint def-weil-derived-direct-image finite and rational coefficient clauses"
+ },
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-rationalization-karoubi",
+  "prop-weil-pbc-descent-functors"
+ ],
+ "proof": [
+  {
+   "text": "Construct the natural coefficient comparison by conjugating the recorded rational scalar/pullback comparison with operationStageTransitionIso. The normalized integral coefficient-tower equation follows on simultaneous flat-term K-flat representatives because both routes multiply the new coefficients in the same order. Scalar associativity and completion normalization give the completed identity. Rationalize and conjugate by the stage transitions to obtain stage-system coherence. The functor family is fixed in equality and the component normalization fixes every comparison natural isomorphism; proof irrelevance fixes coherence, proving uniqueness of the whole stage morphism in equality.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-scalar-extension-composition",
+    "def-weil-derived-pullback-tensor-hom",
+    "prop-weil-pbc-descent-functors"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a finite coefficient inclusion O_E into O_F, finite freeness identifies tensor extension with a finite direct sum. Ordinary derived direct image and total derived inverse limit preserve this sum. The normalized finite-reduction comparisons identify the resulting isomorphism with the geometric right-adjoint mate of the inverse pullback comparison. Rationalize this isomorphism. Transport from the actual geometric right adjoints to any specified R and a by rightAdjointUniq; its counit equation preserves the specified normalization. The conclusion asserts only invertibility of the explicitly constructed mate; the consumer proves its counit equation by Mathlib mateEquiv_counit. This works without separatedness and for empty schemes.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "prop-weil-pbc-scalar-extension",
+    "lem-pur-completed-coefficient-pushforward-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-scalar-extension-composition",
+  "def-weil-derived-pullback-tensor-hom",
+  "prop-weil-pbc-descent-functors",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "prop-weil-pbc-scalar-extension",
+  "lem-pur-completed-coefficient-pushforward-comparison"
+ ],
+ "proof_origin": "E1, 2026-10-20: the separate coefficient-change result specifies a unique normalized left stage family and invertibility of its literal right mates for arbitrary already supplied pointwise adjunctions. Pointwise adjoint existence and rationalization are proved in the consumer. The unique family is fixed by its literal functor family and all comparison components; thus using it selects no arbitrary data from mere existence. No common-stage adjunction or Weil lift is moved into this statement.",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite free extension of coefficient fields commutes with derived direct image and the geometric right adjoint scalar mate is invertible",
+   "results": "Eight integral-closure Galois restriction/lift hits; none supplies the geometric scalar comparison.",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "results": "One hit, Mathlib.CategoryTheory.Adjunction.Mates, used in the consumer to prove the counit equation rather than leave it in this statement.",
+   "date": "2026-10-20",
+   "verdict": "used for the formal counit equation only"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarOperationsOrdinary_tower|modelScalarMap_isIso|systemDirectScalar",
+   "results": "Remote grep has zero hits. Local rg finds scalarOperationsOrdinary_tower in IntegralOperationsScalarComparisons, modelScalarMap_isIso in FrobeniusSquareExchange and systemDirectScalar in SystemOperationExchangeRealization. The first gives ordinary left-comparison tower equations; the second has separatedness among its hypotheses; the third defines the mate without asserting invertibility.",
+   "date": "2026-10-20",
+   "verdict": "normalization ingredients exist, required general geometric comparison not exposed"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free coefficient extension commutes with derived direct image and gives an invertible adjunction mate",
+   "results": "Eight generic derived-adjunction, module-sheaf pullback and scalar-adjunction hits; none supplies the normalized geometric finite-free mate.",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-rational-direct-image-adjunctions",
+   "place": "Finite-free coefficient comparison step, after pointwise adjunctions have been proved",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfCommonStageDirectImage",
+  "date": "2026-10-20",
+  "group": "E1"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfRationalDirectImageCoefficientCompatibility",
+  "file": "lean/Sheaf/Paper/SfRationalDirectImageCoefficientCompatibility.lean",
+  "declaration": "WeilConjectures.sfRationalDirectImageCoefficientCompatibility",
+  "statement": "theorem sfRationalDirectImageCoefficientCompatibility\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]\n    {X₀ Y₀ : Over (Spec (.of D.k₀))}\n    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]\n    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (f : X₀ ⟶ Y₀) :\n    letI := sfWeilPrimeInvertible D l hl X₀\n    letI := sfWeilPrimeInvertible D l hl Y₀\n    ∃! L : (stageSystem l Ω (D.geometricFiber Y₀).left).Morphism\n        (stageSystem l Ω (D.geometricFiber X₀).left),\n      L.Φ = (fun E ↦ rationalDerivedPullback l (Coefficient.{u} l Ω E) (zlFiberMap D f)) ∧\n      (∀ (E F : Index l Ω) (h : E ≤ F)\n        (K : sfRationalConstructibleCategory l (Coefficient.{u} l Ω E)\n          (D.geometricFiber Y₀).left),\n        HEq ((L.β h).app K)\n          (commonStagePullbackComparison l Ω (zlFiberMap D f) ⟨E, K⟩ F h)) ∧\n      ∀ (R : ∀ E : Index l Ω,\n        sfRationalConstructibleCategory l (Coefficient.{u} l Ω E)\n            (D.geometricFiber X₀).left ⥤\n          sfRationalConstructibleCategory l (Coefficient.{u} l Ω E)\n            (D.geometricFiber Y₀).left)\n        (a : ∀ E, L.Φ E ⊣ R E),\n        ∀ {E F : Index l Ω} (h : E ≤ F),\n          IsIso ((mateEquiv (a E) (a F) (TwoSquare.mk _ _ _ _ (L.β h).inv)).natTrans)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-20",
+  "declarations": [
+   "WeilConjectures.sfRationalDirectImageCoefficientCompatibility"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261020T051204-L-1589890",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261020T051204-L-1589890",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
