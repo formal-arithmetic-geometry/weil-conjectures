@@ -1,0 +1,128 @@
+{
+ "id": "lem-pur-coefficient-evaluation-derived-above",
+ "kind": "statement",
+ "title": "Vanishing above the extension level",
+ "statement": "Let $J$ be an essentially small site, $O$ a commutative ring, $\\ell\\in O$, $B_n=(O/(\\ell^{n+1}))_J$, and $\\mathsf S_B$ the category of strict successive semilinear systems of $B_n$-module sheaves [lem-pur-coefficient-evaluation-strict-extension]. Fix an ordinary extension $E_n\\dashv e_n$ with its stated zero components above $n$, and its universal derived extension $LE_n$ with derived evaluation $e_q$ and K-flat comparison [lem-pur-coefficient-evaluation-derived-core]. For arbitrary independently chosen unbounded derived categories, for every $n<q$ and $N\\in D(B_n)$, the object $e_qLE_nN$ is zero. No flatness of quotient coefficient maps or boundedness is assumed.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21: the functors e_n! and (Le_n!, e_n^-1), with indices shifted from n >= 0 to n >= 1. The natural sigma maps are the truncation inclusions in its explicit formula; the Hom identity specifies their adjunction mates."
+ },
+ "stmt_deps": [
+  "lem-pur-coefficient-evaluation-strict-extension",
+  "lem-pur-coefficient-evaluation-derived-core"
+ ],
+ "proof": [
+  {
+   "text": "Represent the derived input by a complex and take a K-flat resolution. The core counit is invertible on that resolution.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-coefficient-evaluation-derived-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every term of its extension evaluated above n is zero by the ordinary above-level formula, hence the evaluated complex is zero. Localization preserves zero objects, and the evaluation factorization transports this zero object to the required derived value.",
+   "uses": [
+    "lem-pur-coefficient-evaluation-strict-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-coefficient-evaluation-derived-core",
+  "lem-pur-coefficient-evaluation-strict-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Adic-stage paragraph: the zero components of Zheng Construction 4.1 after deriving, original proof step 3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived extension by zero from a level of an inverse system of varying coefficient rings is left adjoint to evaluation with tensor associators",
+   "results": "CategoryTheory.Functor.IsLeftDerivedFunctor.mk; CategoryTheory.Adjunction.derived; CategoryTheory.Functor.leftDerivedZeroIsoSelf.congr_simp; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom; CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc; CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero; CondensedMod.LocallyConstant.adjunction; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id",
+   "date": "2026-10-20",
+   "verdict": "No exact match: the results do not supply the normalized unbounded varying-coefficient construction and its representative formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"evaluation\", \"Adjunction\"",
+   "results": "CategoryTheory.evaluationAdjunctionLeft; CategoryTheory.evaluationAdjunctionRight; CategoryTheory.evaluationAdjunctionRight_unit_app; CategoryTheory.evaluationAdjunctionLeft_counit_app; CategoryTheory.evaluationAdjunctionLeft_unit_app_app; CategoryTheory.evaluationAdjunctionRight_counit_app_app",
+   "date": "2026-10-20",
+   "verdict": "No exact match: the results do not supply the normalized unbounded varying-coefficient construction and its representative formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Aa]dj|[Aa]dj.*evaluation",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean; Mathlib/CategoryTheory/Limits/Shapes/Pullback/EquifiberedLimits.lean; Mathlib/Order/ConditionallyCompleteLattice/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean",
+   "date": "2026-10-20",
+   "verdict": "No exact match: the results do not supply the normalized unbounded varying-coefficient construction and its representative formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientEvaluationDerivedLeftAdjoint",
+  "date": "2026-10-21",
+  "group": "R6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph: the zero components of Zheng Construction 4.1 after deriving, original proof step 3.",
+   "via": [
+    "lem-pur-coefficient-evaluation-derived-left-adjoint",
+    "lem-pur-coefficient-system-derived-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientEvaluationDerivedAbove",
+  "file": "lean/Sheaf/Paper/CoefficientEvaluationDerivedAbove.lean",
+  "declaration": "SheafOfModules.coefficientEvaluationDerivedAbove",
+  "statement": "theorem coefficientEvaluationDerivedAbove\n    (ordinary : CoefficientOrdinaryEvaluationData (J := J) (O := O) (ell := ell))\n    [∀ n, (ordinary.extension n).Additive]\n    (core : CoefficientEvaluationDerivedCoreData ordinary)\n    (n q : ℕ) (hq : n < q) (N : DerivedCategory (coefficientLevelModules (J := J) O ell n)) :\n    IsZero ((core.evaluation q).obj ((core.derivedExtension n).obj N))",
+  "branch": "sheaf-dag",
+  "by": "R6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-e4f8b",
+  "group": "R6",
+  "result": "fix",
+  "landing": "20261020T235620-L-1196128",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-e4f8b",
+  "group": "R6",
+  "result": "fix",
+  "landing": "20261020T235620-L-1196128",
+  "kind": "interface",
+  "note": "independent cc review: delivered files vs prior reviewed head 81039679 (only change record differs: +4 users); item+Models vs published item (diff, #check @ binder order); 14 modules compiled with --all; corrected item + #print axioms scratch; sole direct importer CoefficientSystemDerivedComparison compiled vs corrected sandbox (46.5 s); new sorry coefficientEvaluationDerivedCoherence vs original package fields"
+ }
+}

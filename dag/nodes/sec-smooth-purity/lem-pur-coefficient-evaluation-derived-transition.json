@@ -1,0 +1,128 @@
+{
+ "id": "lem-pur-coefficient-evaluation-derived-transition",
+ "kind": "statement",
+ "title": "Normalized descent of coefficient transitions",
+ "statement": "Let $J,O,\\ell,B_n$ and $\\mathsf S_B$ be as in the strict semilinear system construction [lem-pur-coefficient-evaluation-strict-extension], with independently chosen ordinary unbounded derived categories. Fix strict transitions $\\tau_{mn}:e_m\\to e_nR_{mn}$ for $n\\leq m$, derived evaluations and their localization factors [lem-pur-coefficient-evaluation-derived-core], and exact derived restrictions with their localization factors [lem-pur-coefficient-scalar-derived-adjunction]. There is a natural transformation $t_{mn}:e_m\\to e_nR_{mn}$ on derived categories. At every system complex $K$, composing $t_{mn,QK}$ with derived restriction of the $n$-evaluation factor and then with the restriction factor equals the $m$-evaluation factor followed by $Q$ of the strict termwise transition. Thus it descends the specified strict transition, rather than an arbitrary transformation with the same source and target.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21: the functors e_n! and (Le_n!, e_n^-1), with indices shifted from n >= 0 to n >= 1. The natural sigma maps are the truncation inclusions in its explicit formula; the Hom identity specifies their adjunction mates."
+ },
+ "stmt_deps": [
+  "lem-pur-coefficient-evaluation-strict-extension",
+  "lem-pur-coefficient-scalar-derived-adjunction",
+  "lem-pur-coefficient-evaluation-derived-core"
+ ],
+ "proof": [
+  {
+   "text": "Compose the m-evaluation localization comparison, the localized termwise strict transition, the inverse restriction comparison and the inverse n-evaluation comparison, inserting functor associators. This gives a transformation after precomposing by system localization.",
+   "uses": [
+    "lem-pur-coefficient-evaluation-strict-extension",
+    "lem-pur-coefficient-scalar-derived-adjunction",
+    "lem-pur-coefficient-evaluation-derived-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precomposition by a localization is fully faithful. Take its preimage transformation. Evaluate the preimage equation at a complex and cancel the restriction and evaluation comparison isomorphisms; functoriality identifies the resulting composite with the normalized equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-coefficient-evaluation-strict-extension",
+  "lem-pur-coefficient-scalar-derived-adjunction",
+  "lem-pur-coefficient-evaluation-derived-core"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Adic-stage paragraph: descent of the iterated system transitions in original proof step 5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived extension by zero from a level of an inverse system of varying coefficient rings is left adjoint to evaluation with tensor associators",
+   "results": "CategoryTheory.Functor.IsLeftDerivedFunctor.mk; CategoryTheory.Adjunction.derived; CategoryTheory.Functor.leftDerivedZeroIsoSelf.congr_simp; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom; CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc; CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero; CondensedMod.LocallyConstant.adjunction; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id",
+   "date": "2026-10-20",
+   "verdict": "No exact match: the results do not supply the normalized unbounded varying-coefficient construction and its representative formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"evaluation\", \"Adjunction\"",
+   "results": "CategoryTheory.evaluationAdjunctionLeft; CategoryTheory.evaluationAdjunctionRight; CategoryTheory.evaluationAdjunctionRight_unit_app; CategoryTheory.evaluationAdjunctionLeft_counit_app; CategoryTheory.evaluationAdjunctionLeft_unit_app_app; CategoryTheory.evaluationAdjunctionRight_counit_app_app",
+   "date": "2026-10-20",
+   "verdict": "No exact match: the results do not supply the normalized unbounded varying-coefficient construction and its representative formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Aa]dj|[Aa]dj.*evaluation",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean; Mathlib/CategoryTheory/Limits/Shapes/Pullback/EquifiberedLimits.lean; Mathlib/Order/ConditionallyCompleteLattice/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean",
+   "date": "2026-10-20",
+   "verdict": "No exact match: the results do not supply the normalized unbounded varying-coefficient construction and its representative formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientEvaluationDerivedLeftAdjoint",
+  "date": "2026-10-21",
+  "group": "R6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph: descent of the iterated system transitions in original proof step 5.",
+   "via": [
+    "lem-pur-coefficient-evaluation-derived-left-adjoint",
+    "lem-pur-coefficient-system-derived-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientEvaluationDerivedTransition",
+  "file": "lean/Sheaf/Paper/CoefficientEvaluationDerivedTransition.lean",
+  "declaration": "SheafOfModules.coefficientEvaluationDerivedTransition",
+  "statement": "theorem coefficientEvaluationDerivedTransition\n    (ordinary : CoefficientOrdinaryEvaluationData (J := J) (O := O) (ell := ell))\n    [∀ n, (ordinary.extension n).Additive]\n    (scalar : CoefficientScalarDerivedAssignment (J := J) (O := O) (ell := ell))\n    (core : CoefficientEvaluationDerivedCoreData ordinary) {m n : ℕ} (h : n ≤ m) :\n    ∃ t : core.evaluation m ⟶ core.evaluation n ⋙ (scalar h).restriction,\n      ∀ K, t.app (DerivedCategory.Q.obj K) ≫\n        (scalar h).restriction.map ((core.evaluationFactors n).hom.app K) ≫\n        (scalar h).restrictionFactors.hom.app\n          (((coefficientEvaluation (J := J) (O := O) (ell := ell) n).mapHomologicalComplex\n            (.up ℤ)).obj K) =\n        (core.evaluationFactors m).hom.app K ≫ DerivedCategory.Q.map\n          ((NatTrans.mapHomologicalComplex (ordinary.strictTransition h) (.up ℤ)).app K)",
+  "branch": "sheaf-dag",
+  "by": "R6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-e4f8b",
+  "group": "R6",
+  "result": "fix",
+  "landing": "20261020T235620-L-1196128",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-e4f8b",
+  "group": "R6",
+  "result": "fix",
+  "landing": "20261020T235620-L-1196128",
+  "kind": "interface",
+  "note": "independent cc review: delivered files vs prior reviewed head 81039679 (only change record differs: +4 users); item+Models vs published item (diff, #check @ binder order); 14 modules compiled with --all; corrected item + #print axioms scratch; sole direct importer CoefficientSystemDerivedComparison compiled vs corrected sandbox (46.5 s); new sorry coefficientEvaluationDerivedCoherence vs original package fields"
+ }
+}

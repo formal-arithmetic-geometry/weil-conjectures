@@ -1,0 +1,137 @@
+{
+ "id": "lem-pur-coefficient-scalar-derived-adjunction",
+ "kind": "statement",
+ "title": "Normalized derived quotient scalar extension",
+ "statement": "Let J,O,ell and B_n be as in the strict coefficient construction [lem-pur-coefficient-evaluation-strict-extension], and choose arbitrary unbounded derived categories at every level [def-weil-abstract-derived-category]. For n<=m the actual sheafified quotient scalar extension T_mn, with its ordinary adjunction normalized on 1 tensor x, has a universal left derived functor computed on every K-flat complex [def-pc-kflat-complex]. It is left adjoint to exact derived quotient restriction. For every complex P, every complex K at the target level, and every map f:T_mn P to K, its derived transpose after the universal comparison equals the localization of its specified ordinary complex transpose followed by the inverse restriction comparison.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21: the functors e_n! and (Le_n!, e_n^-1), with indices shifted from n >= 0 to n >= 1. The natural sigma maps are the truncation inclusions in its explicit formula; the Hom identity specifies their adjunction mates."
+ },
+ "stmt_deps": [
+  "lem-pur-coefficient-evaluation-strict-extension",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Restricting scalars is exact. The independent-coefficient derived-change theorem supplies a tensor functor with the prescribed object/map formulas, hence equal to the fixed tensor functor; transport its K-flat quasi-isomorphism preservation.",
+   "uses": [
+    "lem-pur-system-level-left-extension",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every complex admits a K-flat resolution. Apply the normalized resolving-class adjunction theorem with the fixed ordinary scalar adjunction and assemble the derived scalar model, retaining its counit and all-representative transpose.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-resolving-class-derived-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-level-left-extension",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-resolution",
+  "lem-pur-resolving-class-derived-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Adic-stage paragraph: the normalized coefficient scalar adjunction used in original proof step 4 and the coherent truncation maps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived extension by zero from a level of an inverse system of varying coefficient rings is left adjoint to evaluation with tensor associators",
+   "results": "CategoryTheory.Functor.IsLeftDerivedFunctor.mk; CategoryTheory.Adjunction.derived; CategoryTheory.Functor.leftDerivedZeroIsoSelf.congr_simp; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom; CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc; CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero; CondensedMod.LocallyConstant.adjunction; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id",
+   "date": "2026-10-20",
+   "verdict": "No exact match: the results do not supply the normalized unbounded varying-coefficient construction and its representative formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"evaluation\", \"Adjunction\"",
+   "results": "CategoryTheory.evaluationAdjunctionLeft; CategoryTheory.evaluationAdjunctionRight; CategoryTheory.evaluationAdjunctionRight_unit_app; CategoryTheory.evaluationAdjunctionLeft_counit_app; CategoryTheory.evaluationAdjunctionLeft_unit_app_app; CategoryTheory.evaluationAdjunctionRight_counit_app_app",
+   "date": "2026-10-20",
+   "verdict": "No exact match: the results do not supply the normalized unbounded varying-coefficient construction and its representative formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Aa]dj|[Aa]dj.*evaluation",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean; Mathlib/CategoryTheory/Limits/Shapes/Pullback/EquifiberedLimits.lean; Mathlib/Order/ConditionallyCompleteLattice/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean",
+   "date": "2026-10-20",
+   "verdict": "No exact match: the results do not supply the normalized unbounded varying-coefficient construction and its representative formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientEvaluationDerivedLeftAdjoint",
+  "date": "2026-10-21",
+  "group": "R6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph: the normalized coefficient scalar adjunction used in original proof step 4 and the coherent truncation maps.",
+   "via": [
+    "lem-pur-coefficient-evaluation-derived-left-adjoint",
+    "lem-pur-coefficient-system-derived-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientScalarDerivedAdjunction",
+  "file": "lean/Sheaf/Paper/CoefficientScalarDerivedAdjunction.lean",
+  "declaration": "SheafOfModules.coefficientScalarDerivedAdjunction",
+  "statement": "theorem coefficientScalarDerivedAdjunction {m n : ℕ} (h : n ≤ m) :\n    Nonempty (DerivedCoefficientScalarExtension\n      (coefficientTensor (J := J) (O := O) (ell := ell) h)\n      (coefficientRestriction (J := J) O ell h)\n      (coefficientTensorAdj (J := J) (O := O) (ell := ell) h)\n      (CochainComplex.IsKFlatIndependentCoefficients\n        (R := coefficientQuotientSheaf (J := J) O ell m)))",
+  "branch": "sheaf-dag",
+  "by": "R6",
+  "date": "2026-10-21",
+  "declarations": [
+   "SheafOfModules.coefficientScalarDerivedAdjunction",
+   "SheafOfModules.CoefficientScalarDerivedAssignment"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-e4f8b",
+  "group": "R6",
+  "result": "fix",
+  "landing": "20261020T235620-L-1196128",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-e4f8b",
+  "group": "R6",
+  "result": "fix",
+  "landing": "20261020T235620-L-1196128",
+  "kind": "interface",
+  "note": "independent cc review: delivered files vs prior reviewed head 81039679 (only change record differs: +4 users); item+Models vs published item (diff, #check @ binder order); 14 modules compiled with --all; corrected item + #print axioms scratch; sole direct importer CoefficientSystemDerivedComparison compiled vs corrected sandbox (46.5 s); new sorry coefficientEvaluationDerivedCoherence vs original package fields"
+ }
+}

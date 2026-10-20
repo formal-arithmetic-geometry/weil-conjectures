@@ -1,0 +1,118 @@
+{
+ "id": "lem-pur-coefficient-tensor-derived-unit",
+ "kind": "statement",
+ "title": "Universal derived comparison for the identity coefficient tensor",
+ "statement": "Let $J$ be an essentially small site, $O$ a commutative ring, $\\ell\\in O$, and $B_n=(O/(\\ell^{n+1}))_J$ [lem-pur-coefficient-evaluation-strict-extension]. Fix independently chosen unbounded derived categories and universal scalar extensions $LT_{mn}$ with counits $\\epsilon_{mn}$ [lem-pur-coefficient-scalar-derived-adjunction]. Given an ordinary isomorphism $u:T_{nn}\\cong\\mathrm{id}$, there is an isomorphism $Lu:LT_{nn}\\cong\\mathrm{id}$. For every complex $P$, $(Lu)_{QP}=\\epsilon_{nn,P}\\,Q(u_P)$, where $u_P$ is the termwise ordinary unit comparison followed by the identity-complex comparison. This equation holds for all complexes, without a resolving-class restriction.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06XN: uniqueness of universal left derived functors"
+ },
+ "stmt_deps": [
+  "lem-pur-coefficient-evaluation-strict-extension",
+  "lem-pur-coefficient-scalar-derived-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Apply the ordinary unit isomorphism termwise, compose with the identity-complex comparison, and localize. The identity derived functor is the universal left derived functor of localization. Uniqueness gives the isomorphism from the prescribed scalar derived functor; its defining natural-transformation equation gives the stated formula.",
+   "uses": [
+    "lem-pur-coefficient-scalar-derived-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-coefficient-scalar-derived-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Adic-stage paragraph: the derived identity tensor and its normalized representative equation in original proof step 6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived extension by zero from a level of an inverse system of varying coefficient rings is left adjoint to evaluation with tensor associators",
+   "results": "CategoryTheory.Functor.IsLeftDerivedFunctor.mk; CategoryTheory.Adjunction.derived; CategoryTheory.Functor.leftDerivedZeroIsoSelf.congr_simp; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom; CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc; CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero; CondensedMod.LocallyConstant.adjunction; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id",
+   "date": "2026-10-20",
+   "verdict": "No exact match: the results do not supply the normalized unbounded varying-coefficient construction and its representative formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"evaluation\", \"Adjunction\"",
+   "results": "CategoryTheory.evaluationAdjunctionLeft; CategoryTheory.evaluationAdjunctionRight; CategoryTheory.evaluationAdjunctionRight_unit_app; CategoryTheory.evaluationAdjunctionLeft_counit_app; CategoryTheory.evaluationAdjunctionLeft_unit_app_app; CategoryTheory.evaluationAdjunctionRight_counit_app_app",
+   "date": "2026-10-20",
+   "verdict": "No exact match: the results do not supply the normalized unbounded varying-coefficient construction and its representative formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Aa]dj|[Aa]dj.*evaluation",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean; Mathlib/CategoryTheory/Limits/Shapes/Pullback/EquifiberedLimits.lean; Mathlib/Order/ConditionallyCompleteLattice/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean",
+   "date": "2026-10-20",
+   "verdict": "No exact match: the results do not supply the normalized unbounded varying-coefficient construction and its representative formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientEvaluationDerivedLeftAdjoint",
+  "date": "2026-10-21",
+  "group": "R6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph: the derived identity tensor and its normalized representative equation in original proof step 6.",
+   "via": [
+    "lem-pur-coefficient-evaluation-derived-left-adjoint",
+    "lem-pur-coefficient-system-derived-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientTensorDerivedUnit",
+  "file": "lean/Sheaf/Paper/CoefficientTensorDerivedUnit.lean",
+  "declaration": "SheafOfModules.coefficientTensorDerivedUnit",
+  "statement": "theorem coefficientTensorDerivedUnit\n    (scalar : CoefficientScalarDerivedAssignment (J := J) (O := O) (ell := ell))\n    (n : ℕ) (unit : coefficientTensor (J := J) (O := O) (ell := ell) (Nat.le_refl n) ≅\n      𝟭 (coefficientLevelModules (J := J) O ell n)) :\n    ∃ i : (scalar (Nat.le_refl n)).derived ≅ 𝟭 _, ∀ P,\n      i.hom.app (DerivedCategory.Q.obj P) =\n        (scalar (Nat.le_refl n)).counit.app P ≫ DerivedCategory.Q.map\n          (((NatIso.mapHomologicalComplex unit (.up ℤ) ≪≫\n            CategoryTheory.Functor.mapHomologicalComplexIdIso _ (.up ℤ)).app P).hom)",
+  "branch": "sheaf-dag",
+  "by": "R6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-e4f8b",
+  "group": "R6",
+  "result": "fix",
+  "landing": "20261020T235620-L-1196128",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-e4f8b",
+  "group": "R6",
+  "result": "fix",
+  "landing": "20261020T235620-L-1196128",
+  "kind": "interface",
+  "note": "independent cc review: delivered files vs prior reviewed head 81039679 (only change record differs: +4 users); item+Models vs published item (diff, #check @ binder order); 14 modules compiled with --all; corrected item + #print axioms scratch; sole direct importer CoefficientSystemDerivedComparison compiled vs corrected sandbox (46.5 s); new sorry coefficientEvaluationDerivedCoherence vs original package fields"
+ }
+}

@@ -1,0 +1,163 @@
+{
+ "id": "lem-pur-coefficient-evaluation-derived-extension-coherence",
+ "kind": "statement",
+ "title": "Derived truncation comparison and composition",
+ "statement": "Let $J,O,\\ell,B_n$ and strict coefficient systems be as in [lem-pur-coefficient-evaluation-strict-extension]. Fix normalized universal derived scalar adjunctions [lem-pur-coefficient-scalar-derived-adjunction], normalized pointwise derived evaluation adjunctions [lem-pur-coefficient-evaluation-derived-core], and the descended strict transitions satisfying their localization equation [lem-pur-coefficient-evaluation-derived-transition]. Define $\\sigma_{mn}:LT_{mn}LE_n\\to LE_m$ as the mate of that transition [lem-pur-evaluation-transition-mate]. Fix normalized strict tensor unit/associator and truncation inclusions, with their specified termwise complex lifts [lem-pur-coefficient-evaluation-ordinary-coherence], and a derived tensor unit with its universal comparison equation [lem-pur-coefficient-tensor-derived-unit]. On flat-term K-flat representatives [def-pc-kflat-complex], $\\sigma_{mn}$ commutes with the universal counits and the localized strict truncation map. There is a derived tensor associator $LT_{lm}LT_{mn}\\cong LT_{ln}$ commuting with those counits and the termwise ordinary associator on such representatives. The mates $\\sigma_{nn}$ equal extension applied to the derived unit; two successive mates equal the direct mate preceded by extension of this derived associator. These last two laws hold on every derived object.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21: the functors e_n! and (Le_n!, e_n^-1), with indices shifted from n >= 0 to n >= 1. The natural sigma maps are the truncation inclusions in its explicit formula; the Hom identity specifies their adjunction mates."
+ },
+ "stmt_deps": [
+  "lem-pur-coefficient-evaluation-strict-extension",
+  "lem-pur-coefficient-scalar-derived-adjunction",
+  "lem-pur-coefficient-evaluation-derived-core",
+  "lem-pur-coefficient-evaluation-derived-transition",
+  "lem-pur-evaluation-transition-mate",
+  "lem-pur-coefficient-evaluation-ordinary-coherence",
+  "lem-pur-coefficient-tensor-derived-unit",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Scalar extension preserves flat-term K-flatness. Transpose the sigma representative comparison first under the derived evaluation adjunction and then under the scalar adjunction. Their normalized representative formulas and the localized transition equation reduce both sides to the strict extension Hom formula. The two Hom equivalences are injective.",
+   "uses": [
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-pur-coefficient-scalar-derived-adjunction",
+    "lem-pur-coefficient-evaluation-derived-core",
+    "lem-pur-coefficient-evaluation-derived-transition",
+    "lem-pur-coefficient-evaluation-strict-extension",
+    "lem-pur-coefficient-evaluation-ordinary-coherence",
+    "lem-pur-evaluation-transition-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The same scalar calculation for two successive extensions constructs the derived associator and its universal counit equation. Construct the inverse using the inverse ordinary associator. Resolving by flat-term K-flat complexes shows the two composites are identities.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-coefficient-scalar-derived-adjunction",
+    "lem-pur-coefficient-evaluation-ordinary-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The strict identity truncation is extension of the tensor unit by the normalized Hom formula. The strict composition law follows below the least index by the normalized three-factor tensor formula; above it the source is zero. Transport these identities through the representative comparison, the derived unit comparison and the derived associator comparison. Cancel the invertible universal counits on a flat-term K-flat resolution, and use naturality along its localization isomorphism for every derived object.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-coefficient-evaluation-derived-core",
+    "lem-pur-coefficient-scalar-derived-adjunction",
+    "lem-pur-coefficient-evaluation-ordinary-coherence",
+    "lem-pur-coefficient-tensor-derived-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-pur-coefficient-scalar-derived-adjunction",
+  "lem-pur-coefficient-evaluation-derived-core",
+  "lem-pur-coefficient-evaluation-derived-transition",
+  "lem-pur-coefficient-evaluation-strict-extension",
+  "lem-pur-coefficient-evaluation-ordinary-coherence",
+  "lem-pur-evaluation-transition-mate",
+  "lem-pc-kflat-resolution",
+  "lem-pur-coefficient-tensor-derived-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Zheng Construction 4.1: representative compatibility and index coherence in original proof steps 5 and 6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived extension by zero from a level of an inverse system of varying coefficient rings is left adjoint to evaluation with tensor associators",
+   "results": "CategoryTheory.Functor.IsLeftDerivedFunctor.mk; CategoryTheory.Adjunction.derived; CategoryTheory.Functor.leftDerivedZeroIsoSelf.congr_simp; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom; CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc; CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero; CondensedMod.LocallyConstant.adjunction; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id",
+   "date": "2026-10-20",
+   "verdict": "No exact match: the results do not supply the normalized unbounded varying-coefficient construction and its representative formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"evaluation\", \"Adjunction\"",
+   "results": "CategoryTheory.evaluationAdjunctionLeft; CategoryTheory.evaluationAdjunctionRight; CategoryTheory.evaluationAdjunctionRight_unit_app; CategoryTheory.evaluationAdjunctionLeft_counit_app; CategoryTheory.evaluationAdjunctionLeft_unit_app_app; CategoryTheory.evaluationAdjunctionRight_counit_app_app",
+   "date": "2026-10-20",
+   "verdict": "No exact match: the results do not supply the normalized unbounded varying-coefficient construction and its representative formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Aa]dj|[Aa]dj.*evaluation",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean; Mathlib/CategoryTheory/Limits/Shapes/Pullback/EquifiberedLimits.lean; Mathlib/Order/ConditionallyCompleteLattice/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean",
+   "date": "2026-10-20",
+   "verdict": "No exact match: the results do not supply the normalized unbounded varying-coefficient construction and its representative formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientEvaluationDerivedLeftAdjoint",
+  "date": "2026-10-21",
+  "group": "R6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Zheng Construction 4.1: representative compatibility and index coherence in original proof steps 5 and 6.",
+   "via": [
+    "lem-pur-coefficient-evaluation-derived-left-adjoint",
+    "lem-pur-coefficient-system-derived-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientEvaluationDerivedExtension",
+  "file": "lean/Sheaf/Paper/CoefficientEvaluationDerivedExtension.lean",
+  "declaration": "SheafOfModules.coefficientEvaluationDerivedCoherence",
+  "statement": "theorem coefficientEvaluationDerivedCoherence\n    (ordinary : CoefficientOrdinaryEvaluationData (J := J) (O := O) (ell := ell))\n    [∀ n, (ordinary.extension n).Additive]\n    (scalar : CoefficientScalarDerivedAssignment (J := J) (O := O) (ell := ell))\n    (core : CoefficientEvaluationDerivedCoreData ordinary)\n    (transition : ∀ {m n : ℕ} (h : n ≤ m),\n      core.evaluation m ⟶ core.evaluation n ⋙ (scalar h).restriction)\n    (strict : CoefficientEvaluationOrdinaryCoherenceData ordinary)\n    (unit : ∀ n, (scalar (Nat.le_refl n)).derived ≅ 𝟭 _)\n    (unit_rep : ∀ n P,\n      (unit n).hom.app (DerivedCategory.Q.obj P) =\n        (scalar (Nat.le_refl n)).counit.app P ≫\n          DerivedCategory.Q.map (strict.tensorUnitComplex n P).hom)\n    (transition_rep : ∀ {m n} (h : n ≤ m) K,\n    (transition h).app (DerivedCategory.Q.obj K) ≫\n      (scalar h).restriction.map ((core.evaluationFactors n).hom.app K) ≫\n      (scalar h).restrictionFactors.hom.app\n        (((ev n).mapHomologicalComplex (ComplexShape.up ℤ)).obj K) =\n      (core.evaluationFactors m).hom.app K ≫\n        DerivedCategory.Q.map\n          (((ordinary.strictTransition h).mapHomologicalComplex (ComplexShape.up ℤ)).app K)) :\n    Nonempty\n      (CoefficientEvaluationDerivedCoherenceData ordinary scalar core transition strict unit)",
+  "branch": "sheaf-dag",
+  "by": "R6",
+  "date": "2026-10-21",
+  "declarations": [
+   "SheafOfModules.coefficientEvaluationSigma",
+   "SheafOfModules.CoefficientEvaluationDerivedCoherenceData",
+   "SheafOfModules.coefficientEvaluationDerivedCoherence"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-e4f8b",
+  "group": "R6",
+  "result": "fix",
+  "landing": "20261020T235620-L-1196128",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-e4f8b",
+  "group": "R6",
+  "result": "fix",
+  "landing": "20261020T235620-L-1196128",
+  "kind": "interface",
+  "note": "independent cc review: delivered files vs prior reviewed head 81039679 (only change record differs: +4 users); item+Models vs published item (diff, #check @ binder order); 14 modules compiled with --all; corrected item + #print axioms scratch; sole direct importer CoefficientSystemDerivedComparison compiled vs corrected sandbox (46.5 s); new sorry coefficientEvaluationDerivedCoherence vs original package fields"
+ }
+}

@@ -1,0 +1,115 @@
+{
+ "id": "lem-pur-evaluation-transition-mate",
+ "kind": "statement",
+ "title": "Iterated Hom formula for the transition mate",
+ "statement": "Let A,B,S be categories, E1:B to S left adjoint to e1, E2:A to S left adjoint to e2, and T:A to B left adjoint to R. Given a natural transition t:e2 to e1 followed by R, define sigma:T followed by E1 to E2 as its conjugate under E2 and the composite adjunction. For any f:E2 N to M, the E1-adjunct of sigma_N followed by f equals T applied to the E2-adjunct of f followed by the inverse scalar adjunct of t_M.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 09T5: functor adjunction and its transpose"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Use the unit equation for conjugate natural transformations. Naturality of t moves f across t; the composite Hom equivalence is the composite of the two Hom equivalences. Apply scalar left-variable naturality and cancel its inverse Hom correspondence.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Adic-stage paragraph: the Hom mate identity of the single-level truncation comparison, original proof step 7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An additive left adjoint preserving quasi-isomorphisms between resolving complexes has a left derived adjoint to an exact functor",
+   "results": "CategoryTheory.Adjunction.left_adjoint_additive; CategoryTheory.Functor.IsLeftDerivedFunctor.mk; CategoryTheory.Functor.leftDerived; CategoryTheory.Functor.leftDerivedToHomotopyCategory; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj; CategoryTheory.Adjunction.derived; CategoryTheory.Functor.HasLeftDerivedFunctor.mk; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom",
+   "date": "2026-10-20",
+   "verdict": "No exact match: the results do not supply the normalized unbounded varying-coefficient construction and its representative formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"leftDerived\"",
+   "results": "No hits",
+   "date": "2026-10-20",
+   "verdict": "No exact match: the results do not supply the normalized unbounded varying-coefficient construction and its representative formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*adjunction|adjunction.*leftDerived|derived.*[Mm]ate",
+   "results": "No hits",
+   "date": "2026-10-20",
+   "verdict": "No exact match: the results do not supply the normalized unbounded varying-coefficient construction and its representative formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientEvaluationDerivedLeftAdjoint",
+  "date": "2026-10-21",
+  "group": "R6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph: the Hom mate identity of the single-level truncation comparison, original proof step 7.",
+   "via": [
+    "lem-pur-coefficient-evaluation-derived-left-adjoint",
+    "lem-pur-coefficient-system-derived-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Adjunction.CompositeMate",
+  "file": "lean/Sheaf/CategoryTheory/Adjunction/CompositeMate.lean",
+  "declaration": "CategoryTheory.Adjunction.compositeMate_homEquiv",
+  "statement": "theorem compositeMate_homEquiv (a₁ : E₁ ⊣ e₁) (a₂ : E₂ ⊣ e₂) (b : T ⊣ R)\n    (t : e₂ ⟶ e₁ ⋙ R) :\n    ∀ N M (f : E₂.obj N ⟶ M),\n      a₁.homEquiv (T.obj N) M ((compositeMate a₁ a₂ b t).app N ≫ f) =\n        T.map (a₂.homEquiv N M f) ≫ (b.homEquiv (e₂.obj M) (e₁.obj M)).symm (t.app M)",
+  "branch": "sheaf-dag",
+  "by": "R6",
+  "date": "2026-10-21",
+  "declarations": [
+   "CategoryTheory.Adjunction.compositeMate",
+   "CategoryTheory.Adjunction.compositeMate_homEquiv"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-e4f8b",
+  "group": "R6",
+  "result": "fix",
+  "landing": "20261020T235620-L-1196128",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-e4f8b",
+  "group": "R6",
+  "result": "fix",
+  "landing": "20261020T235620-L-1196128",
+  "kind": "interface",
+  "note": "independent cc review: delivered files vs prior reviewed head 81039679 (only change record differs: +4 users); item+Models vs published item (diff, #check @ binder order); 14 modules compiled with --all; corrected item + #print axioms scratch; sole direct importer CoefficientSystemDerivedComparison compiled vs corrected sandbox (46.5 s); new sorry coefficientEvaluationDerivedCoherence vs original package fields"
+ }
+}

@@ -1,0 +1,127 @@
+{
+ "id": "lem-pur-coefficient-evaluation-strict-sigma",
+ "kind": "statement",
+ "title": "Strict truncation inclusions with their tensor components",
+ "statement": "For $J,O,\\ell,B_n$ and the strict semilinear coefficient systems as in [lem-pur-coefficient-evaluation-strict-extension], fix ordinary extension adjunctions $E_n\\dashv e_n$ with their normalized below-level tensor comparisons and their zero components above the extension level. Fix a normalized ordinary quotient tensor associator [lem-pur-coefficient-tensor-ordinary-coherence]. For every $n\\leq m$ there is a natural transformation $s_{mn}:T_{mn}E_n\\to E_m$. Its evaluated component at $q\\leq n$, conjugated by the two below-level comparisons, is the tensor associator $T_{mn}T_{nq}\\cong T_{mq}$. At $q>n$ its evaluated component is zero. Its transpose under $E_n\\dashv e_n$ is the inverse below-level comparison $E_me_n\\cong T_{mn}$.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21: the functors e_n! and (Le_n!, e_n^-1), with indices shifted from n >= 0 to n >= 1. The natural sigma maps are the truncation inclusions in its explicit formula; the Hom identity specifies their adjunction mates."
+ },
+ "stmt_deps": [
+  "lem-pur-coefficient-evaluation-strict-extension",
+  "lem-pur-coefficient-tensor-ordinary-coherence"
+ ],
+ "proof": [
+  {
+   "text": "Transpose the inverse below-level comparison E_m e_n to T_mn under E_n left adjoint to e_n. Naturality of the Hom bijection gives a transformation T_mn E_n to E_m.",
+   "uses": [
+    "lem-pur-coefficient-evaluation-strict-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Below n transpose the component twice by scalar adjunctions. The ordinary extension Hom formula identifies this with two strict transitions applied to the m-level adjunction unit. Their composition law replaces them by the direct transition. The normalized tensor associator has the same value on successive scalar-extension units. Injectivity of the two Hom bijections gives equality. Above n the source is zero.",
+   "uses": [
+    "lem-pur-coefficient-evaluation-strict-extension",
+    "lem-pur-coefficient-tensor-ordinary-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-coefficient-evaluation-strict-extension",
+  "lem-pur-coefficient-tensor-ordinary-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Zheng Construction 4.1: the strict truncation inclusions, original proof step 5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived extension by zero from a level of an inverse system of varying coefficient rings is left adjoint to evaluation with tensor associators",
+   "results": "CategoryTheory.Functor.IsLeftDerivedFunctor.mk; CategoryTheory.Adjunction.derived; CategoryTheory.Functor.leftDerivedZeroIsoSelf.congr_simp; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom; CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc; CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero; CondensedMod.LocallyConstant.adjunction; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id",
+   "date": "2026-10-20",
+   "verdict": "No exact match: the results do not supply the normalized unbounded varying-coefficient construction and its representative formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"evaluation\", \"Adjunction\"",
+   "results": "CategoryTheory.evaluationAdjunctionLeft; CategoryTheory.evaluationAdjunctionRight; CategoryTheory.evaluationAdjunctionRight_unit_app; CategoryTheory.evaluationAdjunctionLeft_counit_app; CategoryTheory.evaluationAdjunctionLeft_unit_app_app; CategoryTheory.evaluationAdjunctionRight_counit_app_app",
+   "date": "2026-10-20",
+   "verdict": "No exact match: the results do not supply the normalized unbounded varying-coefficient construction and its representative formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Aa]dj|[Aa]dj.*evaluation",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean; Mathlib/CategoryTheory/Limits/Shapes/Pullback/EquifiberedLimits.lean; Mathlib/Order/ConditionallyCompleteLattice/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean",
+   "date": "2026-10-20",
+   "verdict": "No exact match: the results do not supply the normalized unbounded varying-coefficient construction and its representative formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientEvaluationDerivedLeftAdjoint",
+  "date": "2026-10-21",
+  "group": "R6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Zheng Construction 4.1: the strict truncation inclusions, original proof step 5.",
+   "via": [
+    "lem-pur-coefficient-evaluation-derived-left-adjoint",
+    "lem-pur-coefficient-system-derived-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientEvaluationStrictSigma",
+  "file": "lean/Sheaf/Paper/CoefficientEvaluationStrictSigma.lean",
+  "declaration": "SheafOfModules.coefficientEvaluationStrictSigma",
+  "statement": "theorem coefficientEvaluationStrictSigma\n    (ordinary : CoefficientOrdinaryEvaluationData (J := J) (O := O) (ell := ell))\n    (assoc : ∀ {l m n : ℕ} (h₁ : m ≤ l) (h₂ : n ≤ m),\n      coefficientTensor (J := J) (O := O) (ell := ell) h₁ ⋙\n        coefficientTensor (J := J) (O := O) (ell := ell) h₂ ≅\n        coefficientTensor (J := J) (O := O) (ell := ell) (h₂.trans h₁))\n    (ha : CoefficientTensorAssocNormalized assoc) :\n    ∃ sigma : ∀ {m n : ℕ} (h : n ≤ m),\n      coefficientTensor (J := J) (O := O) (ell := ell) h ⋙ ordinary.extension n ⟶\n        ordinary.extension m,\n      (∀ {m n q : ℕ} (h : n ≤ m) (hq : q ≤ n) F,\n        (ordinary.below hq).inv.app ((coefficientTensor (J := J) (O := O) (ell := ell) h).obj F) ≫\n          (coefficientEvaluation (J := J) (O := O) (ell := ell) q).map ((sigma h).app F) ≫\n          (ordinary.below (hq.trans h)).hom.app F = (assoc h hq).hom.app F) ∧\n      (∀ {m n q : ℕ} (h : n ≤ m) (_hq : n < q) F,\n        (coefficientEvaluation (J := J) (O := O) (ell := ell) q).map ((sigma h).app F) = 0) ∧\n      (∀ {m n : ℕ} (h : n ≤ m) F,\n        (ordinary.adj n).homEquiv _ _ ((sigma h).app F) =\n          (ordinary.below h).inv.app F)",
+  "branch": "sheaf-dag",
+  "by": "R6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-e4f8b",
+  "group": "R6",
+  "result": "fix",
+  "landing": "20261020T235620-L-1196128",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-e4f8b",
+  "group": "R6",
+  "result": "fix",
+  "landing": "20261020T235620-L-1196128",
+  "kind": "interface",
+  "note": "independent cc review: delivered files vs prior reviewed head 81039679 (only change record differs: +4 users); item+Models vs published item (diff, #check @ binder order); 14 modules compiled with --all; corrected item + #print axioms scratch; sole direct importer CoefficientSystemDerivedComparison compiled vs corrected sandbox (46.5 s); new sorry coefficientEvaluationDerivedCoherence vs original package fields"
+ }
+}

@@ -1,0 +1,133 @@
+{
+ "id": "lem-pur-coefficient-evaluation-strict-extension",
+ "kind": "statement",
+ "title": "Strict extension adjoint to coefficient-level evaluation",
+ "statement": "Let J be an essentially small site, O a commutative ring and ell an element, and put B_n=(O/(ell^(n+1)))_J for n in N [def-weil-pbc-constant-sheaf]. In the category of strict successive semilinear systems of B_n-module sheaves [def-weil-sheaf-of-modules-category, def-pc-sheaf-restrict-scalars], iterated transitions satisfy the identity, successor and composition equations. There are additive extension functors E_n left adjoint to evaluation e_n, with E_n F evaluated at q isomorphic to F tensor over B_n with B_q for q<=n and zero for n<q [def-pur-sheaf-tensor-product]. Choose the ordinary scalar adjunction by its value on 1 tensor x. For every map f:E_n F to M, its qth component, transported by the below-level isomorphism and transposed by that scalar adjunction, equals the n-level adjunct of f followed by the iterated transition of M. No completeness, regularity, cartesianness or normalization of the systems is assumed.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21: the functors e_n! and (Le_n!, e_n^-1), with indices shifted from n >= 0 to n >= 1. The natural sigma maps are the truncation inclusions in its explicit formula; the Hom identity specifies their adjunction mates."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Form the actual quotient ring diagram and the equivalence between successor systems and all-transition strict ring systems. Use the general single-level extension adjunction and its below/above formulas. The equivalence has identity components on levels and morphisms.",
+   "uses": [
+    "lem-pur-system-level-left-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The general scalar model has exactly the prescribed tensor objects and maps, so the scalar functors are equal. Both normalized scalar adjunctions evaluate on the sheafification image of 1 tensor x; hence their Hom equivalences agree. Transport the general single-level Hom formula through these equalities. Additivity follows from the adjunction.",
+   "uses": [
+    "lem-pur-system-level-left-extension",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-level-left-extension",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Adic-stage paragraph: the strict single-level extension in Zheng Construction 4.1, needed before deriving and comparing coherent finite-level functors."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived extension by zero from a level of an inverse system of varying coefficient rings is left adjoint to evaluation with tensor associators",
+   "results": "CategoryTheory.Functor.IsLeftDerivedFunctor.mk; CategoryTheory.Adjunction.derived; CategoryTheory.Functor.leftDerivedZeroIsoSelf.congr_simp; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom; CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc; CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero; CondensedMod.LocallyConstant.adjunction; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id",
+   "date": "2026-10-20",
+   "verdict": "No exact match: the results do not supply the normalized unbounded varying-coefficient construction and its representative formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"evaluation\", \"Adjunction\"",
+   "results": "CategoryTheory.evaluationAdjunctionLeft; CategoryTheory.evaluationAdjunctionRight; CategoryTheory.evaluationAdjunctionRight_unit_app; CategoryTheory.evaluationAdjunctionLeft_counit_app; CategoryTheory.evaluationAdjunctionLeft_unit_app_app; CategoryTheory.evaluationAdjunctionRight_counit_app_app",
+   "date": "2026-10-20",
+   "verdict": "No exact match: the results do not supply the normalized unbounded varying-coefficient construction and its representative formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Aa]dj|[Aa]dj.*evaluation",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean; Mathlib/CategoryTheory/Limits/Shapes/Pullback/EquifiberedLimits.lean; Mathlib/Order/ConditionallyCompleteLattice/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean",
+   "date": "2026-10-20",
+   "verdict": "No exact match: the results do not supply the normalized unbounded varying-coefficient construction and its representative formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientEvaluationDerivedLeftAdjoint",
+  "date": "2026-10-21",
+  "group": "R6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph: the strict single-level extension in Zheng Construction 4.1, needed before deriving and comparing coherent finite-level functors.",
+   "via": [
+    "lem-pur-coefficient-evaluation-derived-left-adjoint",
+    "lem-pur-coefficient-system-derived-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientEvaluationModels",
+  "file": "lean/Sheaf/Paper/CoefficientEvaluationModels.lean",
+  "declaration": "SheafOfModules.coefficientOrdinaryEvaluationExtension",
+  "statement": "theorem coefficientOrdinaryEvaluationExtension :\n    Nonempty (CoefficientOrdinaryEvaluationData (J := J) (O := O) (ell := ell))",
+  "branch": "sheaf-dag",
+  "by": "R6",
+  "date": "2026-10-21",
+  "declarations": [
+   "SheafOfModules.CoefficientOrdinaryEvaluationData",
+   "SheafOfModules.coefficientOrdinaryEvaluationExtension"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-e4f8b",
+  "group": "R6",
+  "result": "fix",
+  "landing": "20261020T235620-L-1196128",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-e4f8b",
+  "group": "R6",
+  "result": "fix",
+  "landing": "20261020T235620-L-1196128",
+  "kind": "interface",
+  "note": "independent cc review: delivered files vs prior reviewed head 81039679 (only change record differs: +4 users); item+Models vs published item (diff, #check @ binder order); 14 modules compiled with --all; corrected item + #print axioms scratch; sole direct importer CoefficientSystemDerivedComparison compiled vs corrected sandbox (46.5 s); new sorry coefficientEvaluationDerivedCoherence vs original package fields"
+ }
+}

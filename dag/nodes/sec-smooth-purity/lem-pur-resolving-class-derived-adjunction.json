@@ -1,0 +1,137 @@
+{
+ "id": "lem-pur-resolving-class-derived-adjunction",
+ "kind": "statement",
+ "title": "Normalized derived adjunction from a resolving class",
+ "statement": "Let A and B be abelian categories with independently chosen unbounded derived localizations [def-weil-abstract-derived-category]. Let E:A to B and R:B to A be additive, E left adjoint to R, and R exact. Let P be a predicate on cochain complexes of A such that every complex admits a quasi-isomorphism Y to X from P, and E applied termwise preserves quasi-isomorphisms between P-complexes. Then E on complexes followed by localization has a pointwise left derived functor L with universal counit epsilon, invertible on P-complexes. Moreover L is left adjoint to the exact termwise derived R. For every chain map f:E X to K, the derived adjunct of epsilon_X followed by Q(f) is Q of the ordinary complex adjunct, followed by the inverse of the fixed derived-restriction factorization. The transpose formula holds for all complexes X, not just resolving objects.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 06XN, 0FND and 09T5"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Pass to the homotopy quotient. Represent the resolving class there by complexes satisfying P; fullness of the quotient lifts its morphisms. The given preservation hypothesis makes their images invertible after localization. Apply the resolving-class left-derived existence theorem.",
+   "uses": [
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Quasi-isomorphisms form a saturated system with calculi of fractions. Resolving-class essential constancy gives the left derived pro-diagrams. Exactness makes the restriction ind-diagrams essentially constant. Apply the normalized derived-adjunction compatibility theorem.",
+   "uses": [
+    "lem-pur-quasi-isos-saturated-triangulated",
+    "lem-pur-resolving-class-essential-constancy",
+    "new-derived-adjunction-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose the pointwise Kan extension with the full essentially surjective homotopy quotient, which is initial on the relevant comma categories. Transport along the quotient/localization factorization isomorphisms. Their components are identities; the homotopy adjunction descends the cochain transpose, giving the displayed formula.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pur-quasi-isos-saturated-triangulated",
+  "lem-pur-resolving-class-essential-constancy",
+  "new-derived-adjunction-compatibility",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Adic-stage paragraph: the normalized unbounded derived adjunction needed for level evaluation and scalar restriction; general resolving-class glue for original proof steps 3 and 4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An additive left adjoint preserving quasi-isomorphisms between resolving complexes has a left derived adjoint to an exact functor",
+   "results": "CategoryTheory.Adjunction.left_adjoint_additive; CategoryTheory.Functor.IsLeftDerivedFunctor.mk; CategoryTheory.Functor.leftDerived; CategoryTheory.Functor.leftDerivedToHomotopyCategory; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj; CategoryTheory.Adjunction.derived; CategoryTheory.Functor.HasLeftDerivedFunctor.mk; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom",
+   "date": "2026-10-20",
+   "verdict": "No exact match: the results do not supply the normalized unbounded varying-coefficient construction and its representative formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"leftDerived\"",
+   "results": "No hits",
+   "date": "2026-10-20",
+   "verdict": "No exact match: the results do not supply the normalized unbounded varying-coefficient construction and its representative formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*adjunction|adjunction.*leftDerived|derived.*[Mm]ate",
+   "results": "No hits",
+   "date": "2026-10-20",
+   "verdict": "No exact match: the results do not supply the normalized unbounded varying-coefficient construction and its representative formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientEvaluationDerivedLeftAdjoint",
+  "date": "2026-10-21",
+  "group": "R6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph: the normalized unbounded derived adjunction needed for level evaluation and scalar restriction; general resolving-class glue for original proof steps 3 and 4.",
+   "via": [
+    "lem-pur-coefficient-evaluation-derived-left-adjoint",
+    "lem-pur-coefficient-system-derived-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedCategory.ResolvingAdjunction",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/ResolvingAdjunction.lean",
+  "declaration": "CategoryTheory.Adjunction.exists_leftDerived_adjunction",
+  "statement": "theorem exists_leftDerived_adjunction\n    (E : A ⥤ B) (R : B ⥤ A) [E.Additive] [R.Additive]\n    [PreservesFiniteLimits R] [PreservesFiniteColimits R] (a : E ⊣ R)\n    (P : CochainComplex A ℤ → Prop)\n    (hres : ∀ X : CochainComplex A ℤ, ∃ (Y : CochainComplex A ℤ) (s : Y ⟶ X),\n      P Y ∧ QuasiIso s)\n    (hpres : ∀ {X Y : CochainComplex A ℤ} (f : X ⟶ Y), P X → P Y → QuasiIso f →\n      QuasiIso ((E.mapHomologicalComplex (.up ℤ)).map f)) :\n    (E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q).HasPointwiseLeftDerivedFunctor\n      (HomologicalComplex.quasiIso A (.up ℤ)) ∧\n    ∃ (L : DerivedCategory A ⥤ DerivedCategory B)\n      (ε : DerivedCategory.Q ⋙ L ⟶ E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q),\n      L.IsLeftDerivedFunctor ε (HomologicalComplex.quasiIso A (.up ℤ)) ∧\n      (∀ X, P X → IsIso (ε.app X)) ∧\n      ∃ d : L ⊣ R.mapDerivedCategory, ∀ X K\n        (f : (E.mapHomologicalComplex (.up ℤ)).obj X ⟶ K),\n        d.homEquiv (DerivedCategory.Q.obj X) (DerivedCategory.Q.obj K)\n          (ε.app X ≫ DerivedCategory.Q.map f) =\n        DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).homEquiv X K f) ≫\n          R.mapDerivedCategoryFactors.inv.app K",
+  "branch": "sheaf-dag",
+  "by": "R6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-e4f8b",
+  "group": "R6",
+  "result": "fix",
+  "landing": "20261020T235620-L-1196128",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-e4f8b",
+  "group": "R6",
+  "result": "fix",
+  "landing": "20261020T235620-L-1196128",
+  "kind": "interface",
+  "note": "independent cc review: delivered files vs prior reviewed head 81039679 (only change record differs: +4 users); item+Models vs published item (diff, #check @ binder order); 14 modules compiled with --all; corrected item + #print axioms scratch; sole direct importer CoefficientSystemDerivedComparison compiled vs corrected sandbox (46.5 s); new sorry coefficientEvaluationDerivedCoherence vs original package fields"
+ }
+}
