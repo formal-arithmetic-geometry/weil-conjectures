@@ -17,7 +17,9 @@
   "def-exchange-projection",
   "prop-functor-package",
   "def-weil-pbc-adjunction-mate",
-  "fix-lem-exchanges"
+  "fix-lem-exchanges",
+  "sk-def-sf-exchanges",
+  "def-trf-finite-horizontal-shriek-composition"
  ],
  "proof": [
   {
@@ -495,5 +497,27 @@
   "group": "Q06",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-f49163c8a (reviewer sub-agent of L); spot-checked: Read in full: the item (12 steps), the four new nodes, every cited statement, blueprint main-20261015 lem-trf-weil-shriek-operator-fibres Proof (β), Mathlib Mates.lean 55-155 and the duplicate candidates. Statement unchanged; it is the β sentence generalized to a finite bottom arrow, with pro-étale A_{E,n} D^b_ctf coefficients and def-exchange-projection's Ex_!^c, so no target is weakened. Steps 1-7 and 12 re-derived: (O) sectionwise, (P) by pasting and transpose, (C) from the interchange and identity-open normalization, then the four-line substitution. Step 8 is correct: b_u is the mate of a_u^{-1} with L1=u_e^*, L2=u_p^*, G=C_V, H=C_U, and unit_mateEquiv at line 136 gives the displayed unit equation. In Steps 9-10 the S/T types of the three transport lemmas check, and the lemmas are true canonical-comparison statements with consistent hypotheses (Noetherian, finite r/q, one proper factor). None restates the item; no cycle; all deps exist and are on the route, so no tool_uses need accepting. Faults fixed: (1) C5 duplicate: new leaf lem-trf-square-mate-unit-identity is identical to the existing Mathlib leaf lem-pur-mate-unit-compatibility (same formula, declaration and line); dropped, and Step 8 now cites the existing node. (2) C4 wording: Step 9 said thm-cbc-finite-level-proetale identifies the transported composite with Ex_!^c, but that theorem only gives invertibility; rewritten to derive the identification from the transport equations and naturality of b and e. (3) Step 1 source document changed to morphisms.tex (01WL/01WN), and two stale split_report.tool_uses entries not in proof_deps removed. The corrected item is in fixes/; the decision and step-by-step checks are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteHorizontalShriekMate",
+  "declaration": "WeilConjectures.finiteHorizontalShriekMate",
+  "declarations": [
+   "WeilConjectures.finiteHorizontalShriekMate"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteHorizontalShriekMate.lean",
+  "statement": "theorem finiteHorizontalShriekMate (T : TraceFormulaCoefficientConventions.{u}) {X' X Y' Y : Scheme.{u}} [X'.Over (Spec (.of T.datum.k))] [X.Over (Spec (.of T.datum.k))] [Y'.Over (Spec (.of T.datum.k))] [Y.Over (Spec (.of T.datum.k))] [IsSeparated (X' ↘ Spec (.of T.datum.k))] [LocallyOfFiniteType (X' ↘ Spec (.of T.datum.k))] [QuasiCompact (X' ↘ Spec (.of T.datum.k))] [IsSeparated (X ↘ Spec (.of T.datum.k))] [LocallyOfFiniteType (X ↘ Spec (.of T.datum.k))] [QuasiCompact (X ↘ Spec (.of T.datum.k))] [IsSeparated (Y' ↘ Spec (.of T.datum.k))] [LocallyOfFiniteType (Y' ↘ Spec (.of T.datum.k))] [QuasiCompact (Y' ↘ Spec (.of T.datum.k))] [IsSeparated (Y ↘ Spec (.of T.datum.k))] [LocallyOfFiniteType (Y ↘ Spec (.of T.datum.k))] [QuasiCompact (Y ↘ Spec (.of T.datum.k))] (f : X ⟶ Y) (f' : X' ⟶ Y') (p : X' ⟶ X) (g : Y' ⟶ Y) [f.IsOver (Spec (.of T.datum.k))] [f'.IsOver (Spec (.of T.datum.k))] [p.IsOver (Spec (.of T.datum.k))] [g.IsOver (Spec (.of T.datum.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsFinite g] (sq : ChosenCartesianSquare p f' f g) (c : Compactification f) : letI : Finite T.coefficientRing := Padic.finite_coefficientExtensionRing T.coefficients.l T.coefficientField T.level T.level_pos IsFinite p ∧ ∀ K : (finiteHorizontalFiniteTorConstructible T.coefficients.l T.coefficientField T.level T.level_pos X).FullSubcategory, (CategoryTheory.Adjunction.unit ((sfIntrinsicConstantModuleAdjunction g T.coefficientRing).mapDerivedCategoryRightDerivedAdjunction)).app ((sfIntrinsicCompactSupport c T.coefficientRing).obj K.obj) ≫ (proEtaleConstantDerivedDirectImage g T.coefficientRing).map ((sfExchangeShriek T.coefficients.l T.coefficientField T.level T.level_pos c (c.ofIsPullback (IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd)) (pullback.fst c.g g) (c.isPullback_g_ofIsPullback (IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd)).flip (c.isPullback_i_ofIsPullback (IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd))).app K.obj) = (sfIntrinsicCompactSupport c T.coefficientRing).map ((CategoryTheory.Adjunction.unit ((sfIntrinsicConstantModuleAdjunction p T.coefficientRing).mapDerivedCategoryRightDerivedAdjunction)).app K.obj) ≫ (finiteHorizontalShriekComposition T.coefficientRing (IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd) c).app ((sfIntrinsicDerivedPullback T.coefficientRing p).obj K.obj)",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "Repair RETURN 1: the canonical composition and proper/open construction are owned by def-trf-finite-horizontal-shriek-composition. Coefficient finiteness is supplied by the explicit letI of Padic.finite_coefficientExtensionRing, without importing the scheme/Galois comparison for an instance. The mathematical assertion is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d80247107",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Re-delivery after RETURN deed6a71: both points repaired. (1) The theorem stmt_deps prop-exc-base-change-proper and prop-trf-scheme-galois-comparison are dropped. chi moves to the new definition node def-trf-finite-horizontal-shriek-composition. That node's module wraps the published sfProperOpenDerivedComparison (its description of gamma matches the live body, l.140) and builds Rb_*(gamma) then the conjugate sigma, which is real data. Finite T.coefficientRing comes from an explicit letI of Padic.finite_coefficientExtensionRing. (2) The def-weil-finite-tor-amplitude record is byte-identical to live (NW untouched); finiteTorConstructible, which no live node owns, is reached through a transparent abbrev owned by the new node. The item's statement, proof and proof_deps are unchanged; stmt_deps only add the definition nodes sk-def-sf-exchanges and the new node. Every other dependency record equals live. Both lean.statement strings appear verbatim in their files. Hypotheses, clauses, unit order and edge cases are unchanged from the delivery whose mathematics was already found correct. nt_compile --json: Composition 3.0 s and Mate 13.8 s, exit 0, no warnings. Advisory: the wrapper's owning theorem node is not cited (import-only); plain proof-dependency imports were not tested one by one (H9)."
  }
 }
