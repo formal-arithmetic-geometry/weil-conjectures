@@ -17,9 +17,11 @@
  ],
  "proof": [
   {
-   "text": "Apply pointed_etale_ring_colimit to obtain a small cofiltered ring diagram, its colimit presentation over H, and the etale maps and points over y. This step is completely proved in Lean.",
+   "text": "Compare the small affine ring colimit strictHenselizationRing with the adopted strictHenselization by the unique colimit isomorphism. Its coprojection equation and the defining leg equations of both structural maps prove Spec(e.hom);strictHenselizationStructuralMap=strictLocalizationToBase. Apply the adopted pointed_etale_ring_colimit to b;e.hom, then compose the returned colimit comparison with e.inv. Its leg equation follows by cancellation of e.hom;e.inv, yielding the required colimit presentation over the original ring and the same etale maps and points.",
    "uses": [
-    "lem-sbc-pointed-etale-ring-colimit"
+    "lem-sbc-pointed-etale-ring-colimit",
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map"
    ],
    "elementary": false
   },
@@ -38,13 +40,16 @@
  ],
  "proof_deps": [
   "lem-sbc-pointed-etale-ring-colimit",
-  "lem-sbc-punctured-root-colimit-continuity"
+  "lem-sbc-punctured-root-colimit-continuity",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "Y3",
+  "group": "F3",
   "document": "Stacks Project",
-  "place": "Tags 0BSK, 03Q9, 05N9 and 01YW; original three-step route, with the pointed presentation proved and the root-colimit calculation split off"
+  "place": "Tags 0BSK, 03Q9, 05N9 and 01YW; original ring-colimit and root-continuity route",
+  "note": "Retirement adaptation preserves the original theorem signature. The private proved colimit comparison makes the adopted ring-colimit theorem applicable without changing any root chart or hypothesis."
  },
  "mathlib_searches": [
   {
@@ -118,14 +123,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Y3",
+  "reviewer": "C-da727",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261013T140829-L-317383",
+  "landing": "20261020T162912-L-3674008",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: withdrawn Sheaf PuncturedRootLimitCone + node re-pointed verbatim to the WeilConjectures twin pointed_etale_ring_colimit; adapted PuncturedRootLimitPresentation (signature unchanged, private colimit comparison) compiled with its importer PuncturedRootSectionEtaleDescent; original fails against the stub (unknown identifier); axioms standard"
  },
  "lean_audit": {
   "master": {

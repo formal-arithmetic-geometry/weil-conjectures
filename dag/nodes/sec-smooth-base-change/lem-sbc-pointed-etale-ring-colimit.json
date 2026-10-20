@@ -17,7 +17,7 @@
  ],
  "proof": [
   {
-   "text": "Use the chosen small representative category, strictHenselizationAffineDiagram and its canonical colimit cocone. strictHenselization_properties supplies cofilteredness. Take e to be the identity isomorphism.",
+   "text": "Use the chosen small representative category, strictHenselizationAffineDiagram and smallStrictHenselizationCocone. isColimitSmallStrictHenselizationCocone proves this cocone colimiting with vertex the adopted strictHenselization. strictHenselizationAffineProperties supplies cofilteredness. Take e to be the identity isomorphism.",
    "uses": [
     "def-weil-pbc-strict-henselization-limit",
     "def-weil-pbc-category-colimit"
@@ -25,12 +25,11 @@
    "elementary": false
   },
   {
-   "text": "Define the base-ring maps by global sections of the affine pointed neighbourhood structure maps and GammaSpecIso. The over-category equation gives the separate naturality lemma, and Spec.map_injective together with strictHenselizationStructuralMap_eq and hb proves the colimit-leg composite is b.",
+   "text": "For each representative affine pointed neighbourhood define its structure map k to Spec R using GammaSpecIso, and take a=Spec.preimage k. Prove naturality directly by Spec.map_injective, GammaSpecIso_inv_naturality and the over-category triangle equation. The structural-map leg equation strictHenselizationStructuralMap_eq and hb prove the colimit-leg composite is b.",
    "uses": [
     "def-weil-pbc-strict-henselization-limit",
     "def-weil-affine-spectrum",
-    "def-weil-pbc-strict-henselization-structural-map",
-    "lem-sbc-pointed-etale-ring-colimit-base-map-naturality"
+    "def-weil-pbc-strict-henselization-structural-map"
    ],
    "elementary": false
   },
@@ -49,15 +48,14 @@
   "def-weil-affine-spectrum",
   "def-weil-pbc-strict-henselization-structural-map",
   "def-weil-etale-morphism",
-  "def-weil-geometric-point",
-  "lem-sbc-pointed-etale-ring-colimit-base-map-naturality"
+  "def-weil-geometric-point"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "J2",
+  "group": "F3",
   "document": "Stacks Project",
-  "place": "Tag 0BSK, with the affine global-sections naturality calculation made explicit",
-  "note": "The chosen strict affine diagram has identity comparison to strictHenselizationRing; the affine and pointed clauses are proved by GammaSpecIso and the over-category lift."
+  "place": "Tags 0BSK and 03Q9; proved adopted-source pointed_etale_ring_colimit",
+  "note": "Human-authorized twin retirement: attach the existing source proof; the consumer transports its result through the unique colimit comparison, with the structural-map equation proved from the two cocone leg equations. No source-library edit."
  },
  "mathlib_searches": [
   {
@@ -105,14 +103,15 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-prop-input-spreading",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootLimitCone",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedRootLimitCone.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedRootLimitCone",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/PuncturedRootLimitCone.lean",
   "declaration": "AlgebraicGeometry.Scheme.pointed_etale_ring_colimit",
-  "statement": "theorem pointed_etale_ring_colimit (R : CommRingCat.{u}) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R) (y : Spec R) (hy : ∀ x : Spec (.of Ω), barY x = y) (b : R ⟶ strictHenselizationRing barY) (hb : Spec.map b = strictHenselizationStructuralMap barY) : ∃ (I : Type u) (cat : Category.{u} I), letI := cat ∃ (_ : IsCofiltered I) (F : Iᵒᵖ ⥤ CommRingCat.{u}) (c : Cocone F) (a : (Functor.const Iᵒᵖ).obj R ⟶ F) (e : c.pt ≅ strictHenselizationRing barY), Nonempty (IsColimit c) ∧ (∀ j, a.app j ≫ c.ι.app j ≫ e.hom = b) ∧ ∀ j, Etale (Spec.map (a.app j)) ∧ ∃ z : Spec (F.obj j), (Spec.map (a.app j)) z = y",
+  "statement": "theorem pointed_etale_ring_colimit\n    (R : CommRingCat.{u})\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)\n    (y : Spec R) (hy : ∀ x : Spec (.of Ω), barY x = y)\n    (b : R ⟶ strictHenselization barY)\n    (hb : Spec.map b = strictLocalizationToBase barY) :\n    ∃ (I : Type u) (cat : Category.{u} I), letI := cat\n      ∃ (_ : IsCofiltered I) (F : Iᵒᵖ ⥤ CommRingCat.{u}) (c : Cocone F)\n        (a : (Functor.const Iᵒᵖ).obj R ⟶ F)\n        (e : c.pt ≅ strictHenselization barY),\n        Nonempty (IsColimit c) ∧\n        (∀ j, a.app j ≫ c.ι.app j ≫ e.hom = b) ∧\n        ∀ j, Etale (Spec.map (a.app j)) ∧\n          ∃ z : Spec (F.obj j), (Spec.map (a.app j)) z = y",
   "branch": "sheaf-dag",
   "by": "Y3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "F3 retirement (2026-10-20): use the proved adopted-source theorem, whose vertex is strictHenselization barY and whose structural map is strictLocalizationToBase barY. The consumer PuncturedRootLimitPresentation preserves its original strictHenselizationRing statement: its proved private strictHenselization_colimit_comparison identifies the two colimit vertices and proves compatibility of the structural maps, then transports the returned cocone isomorphism back. No mathematical hypothesis or conclusion changes."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -125,14 +124,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-17",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J2",
+  "reviewer": "C-da727",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261017T003422-L-3315188",
+  "landing": "20261020T162912-L-3674008",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: withdrawn Sheaf PuncturedRootLimitCone + node re-pointed verbatim to the WeilConjectures twin pointed_etale_ring_colimit; adapted PuncturedRootLimitPresentation (signature unchanged, private colimit comparison) compiled with its importer PuncturedRootSectionEtaleDescent; original fails against the stub (unknown identifier); axioms standard"
  },
  "lean_audit": {
   "master": {

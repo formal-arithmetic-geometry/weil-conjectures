@@ -5,10 +5,11 @@ Authors: SHEAF group C3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootLimitCone
+import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedRootLimitCone
 import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedRootLimitPunctures
 
 /-! # The pointed etale limit presentation of a punctured root chart
@@ -23,6 +24,51 @@ universe u
 set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
+
+/-- The unique comparison between the two ring colimits respects their structure maps.
+This follows from the two colimit coprojection equations and the defining structure-map
+leg equations (Stacks Project, Tags 0BSK and 03Q9). -/
+private theorem strictHenselization_colimit_comparison
+    (R : CommRingCat.{u})
+    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R) :
+    ∃ e : strictHenselizationRing barY ≅ strictHenselization barY,
+      Spec.map e.hom ≫ strictHenselizationStructuralMap barY =
+        strictLocalizationToBase barY := by
+  classical
+  let F := strictHenselizationAffineDiagram barY
+  let e : strictHenselizationRing barY ≅ strictHenselization barY :=
+    (colimit.isColimit F).coconePointUniqueUpToIso
+      (isColimitSmallStrictHenselizationCocone barY)
+  have hleg (j) : colimit.ι F j ≫ e.hom =
+      (smallStrictHenselizationCocone barY).ι.app j := by
+    exact (colimit.isColimit F).comp_coconePointUniqueUpToIso_hom
+      (isColimitSmallStrictHenselizationCocone barY) j
+  let := (strictHenselization_properties barY).2.1
+  let j := Classical.choice (IsCofiltered.nonempty (C :=
+    SmallModel.{u} (strictHenselizationNeighbourhoods barY)))
+  let k : Spec (F.obj (Opposite.op j)) ⟶ Spec R :=
+    Spec.map (ΓSpecIso
+      (((equivSmallModel.{u} (strictHenselizationNeighbourhoods barY)).inverse.obj
+        j).1.left.unop)).inv ≫
+      ((AffineEtale.Spec (Spec R)).obj
+        (((equivSmallModel.{u} (strictHenselizationNeighbourhoods barY)).inverse.obj
+          j).1)).hom
+  have hold : Spec.map (colimit.ι F (Opposite.op j)) ≫ k =
+      strictHenselizationStructuralMap barY :=
+    (exists_strictHenselizationStructuralMap barY).choose_spec j
+  have hnew : Spec.map ((smallStrictHenselizationCocone barY).ι.app
+      (Opposite.op j)) ≫ k = strictLocalizationToBase barY :=
+    strictHenselizationStructuralMap_eq barY j
+  refine ⟨e, ?_⟩
+  calc
+    Spec.map e.hom ≫ strictHenselizationStructuralMap barY =
+        Spec.map e.hom ≫ (Spec.map (colimit.ι F (Opposite.op j)) ≫ k) :=
+      congrArg (fun t ↦ Spec.map e.hom ≫ t) hold.symm
+    _ = Spec.map (colimit.ι F (Opposite.op j) ≫ e.hom) ≫ k := by
+      rw [Spec.map_comp, Category.assoc]
+    _ = Spec.map ((smallStrictHenselizationCocone barY).ι.app (Opposite.op j)) ≫ k := by
+      rw [hleg]
+    _ = strictLocalizationToBase barY := hnew
 
 /-- Punctured root charts commute with the pointed etale limit defining strict henselization.
 
@@ -75,8 +121,17 @@ theorem punctured_root_limit_presentation
             ∃ d : V.toScheme ≅ D.obj j,
               d.hom ≫ t.app j = V.ι ≫ q ≫ Spec.map a := by
   classical
-  obtain ⟨I, cat, hI, F, c₀, a, e₀, hc₀, ha, hstage⟩ :=
-    pointed_etale_ring_colimit R barY y hy b hb
+  obtain ⟨eH, heH⟩ := strictHenselization_colimit_comparison R barY
+  have hb' : Spec.map (b ≫ eH.hom) = strictLocalizationToBase barY := by
+    rw [Spec.map_comp, hb, heH]
+  obtain ⟨I, cat, hI, F, c₀, a, e₀', hc₀, ha', hstage⟩ :=
+    pointed_etale_ring_colimit R barY y hy (b ≫ eH.hom) hb'
+  let e₀ := e₀' ≪≫ eH.symm
+  have ha : ∀ j, a.app j ≫ c₀.ι.app j ≫ e₀.hom = b := by
+    intro j
+    change a.app j ≫ c₀.ι.app j ≫ e₀'.hom ≫ eH.inv = b
+    rw [← Category.assoc (c₀.ι.app j), ← Category.assoc, ha']
+    simp
   let := cat
   let := hI
   obtain ⟨D, c, t, hc, hD, e, he, hd⟩ :=
