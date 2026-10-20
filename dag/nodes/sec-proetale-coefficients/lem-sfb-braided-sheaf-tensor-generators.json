@@ -259,5 +259,29 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-ebb9dc243 (reviewer sub-agent of L); spot-checked: I read the whole delivery and passed it. The item statement is byte-identical to the live node. The blueprint source is lem-sfb-pushforward-comp-monoidal.proof.md, first sentence; its statement has closed braided coefficients. The existing sk-def-sfb-sheaf-tensor and det-def-sfb-sheaf-tensor-* nodes are all symmetric, so they cannot be cited at braided generality and the split fills a real gap. Leaf lem-sfb-local-equivalences-braided-tensor matches Mathlib: J.W = isLocal(IsSheaf) (Sites/Localization.lean:34) and the multiplicative parent is at Bousfield.lean:82. W.monoidal is at Sites/Monoidal.lean:126-154 and needs MonoidalClosed + Braided + the enriched-end instances, which follow from V-small completeness through lem-coef-grothendieck-small-limits. Leaf lem-sfb-braided-monoidal-localization matches Mathlib: LocalizedMonoidal is at Basic.lean:80-105 and 447-477 and the braided instances at Braided.lean:124-139. Taking epsilon = Iso.refl makes the unit comparison the identity. Step checks: step 2 shows Hom test <=> a(f) iso and eta in W. Step 4 is localization by a reflective subcategory. I checked step 6 (transport along c = (eps◇eps)mu^{-1}) and step 7 (mu c Delta = 1 via naturality of mu and the triangle identity, braiding a(beta^p)) by hand. Step 8 is unit naturality plus unique extension. Step 9 is the small skeleton, as the statement says. Edge cases: trivial topology, empty site, and a non-symmetric 2^{mn}-braided graded category. Project GrothendieckAbelian/Monoidal/Defs.lean has the monoidal/braided instances but not the Hom-bijection clauses, so B10 does not apply. Accepted tool_uses: lem-coef-grothendieck-small-limits, def-weil-pbc-sheafification, def-sfb-monoidal-category. Advisory: (1) the localization leaf uses the 2-universal-property form rather than Mathlib's IsLocalization; the Lean instance presheafToSheaf.IsLocalization supplies it. (2) det-def-sfb-sheaf-tensor-local-iso clause 1 is the symmetric special case of the new leaf. (3) The report names citations.json, but that file is not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BraidedSheafTensorGenerators",
+  "declaration": "CategoryTheory.Sheaf.nonempty_braidedTensorGenerators",
+  "declarations": [
+   "CategoryTheory.Sheaf.BraidedTensorGenerators",
+   "CategoryTheory.Sheaf.nonempty_braidedTensorGenerators",
+   "CategoryTheory.Sheaf.nonempty_braidedTensorGenerators_smallSkeleton"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/BraidedSheafTensorGenerators.lean",
+  "statement": "theorem nonempty_braidedTensorGenerators {C : Type w} [Category.{w} C] (J : GrothendieckTopology C) (A : Type uA) [Category.{w} A] [Abelian A] [IsGrothendieckAbelian.{w} A] [MonoidalCategory A] [MonoidalClosed A] [BraidedCategory A] [HasWeakSheafify J A] : Nonempty (BraidedTensorGenerators J A)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-20",
+  "existing": false,
+  "note": "BraidedTensorGenerators packages exactly the conclusion on the prescribed sheafified pointwise tensor. Its object, morphism, unit and braiding equations and the normalized inverse tensorator pin the canonical structure; the two Hom tests use the actual toSheafify units. The second theorem states the final clause on Skeleton (SmallModel C) with the induced topology. No statement correction or dependency repair."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-76be03036",
+  "group": "NA",
+  "result": "pass",
+  "note": "Single new module BraidedSheafTensorGenerators + item lean record; deps byte-identical to side-live, no stmt_deps change. All node clauses match: V-small site Type w/Category.{w}, IsGrothendieckAbelian.{w} A with free object universe, MonoidalClosed+Braided (no symmetry), HasWeakSheafify per the dependency's convention. The structure pins tensorObj/tensorHom/tensorUnit by equality, the braiding to a(β^p), δ=a(η⊗η) in the correct direction and ε=𝟙 on a strong braided presheafToSheaf; associator and unitors are then determined (μ invertible, counit iso), so the package is not hollow and is satisfiable (same-category HEq, braided axiom reduces to β naturality). Hom bijections, equality tests and naturality use the actual toSheafify (rfl = adjunction unit, probed); skeleton clause on Skeleton(SmallModel C) with induced topology and free uC,vC. No duplicate in Mathlib (localized Sheaf.monoidalCategory) or the project (symmetric SfbSheafTensorStructure). Docstrings with source/blueprint and steps 1-9; only sorry; statement verbatim. nt_compile --json clean 2.2 s; error-injected control confirms a real compile. Advisory: SiteCoveringAxioms import unused in the signature."
  }
 }
