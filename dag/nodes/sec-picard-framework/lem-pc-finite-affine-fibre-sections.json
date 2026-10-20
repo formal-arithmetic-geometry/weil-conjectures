@@ -96,14 +96,15 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ffs0029 (reviewer sub-agent of L); spot-checked: Read packet whole; step 3 matches lem-weil-pbc-fibre-product-affine-spectra (R=A, factors B, kappa(s)); step 2 elementary; no duplicate (grep fibre-sections/affine-base-change-sections: only item and citer lem-pc-flf-properties, whose step 2 uses exactly this); Mathlib grep Fiber.lean has fiber/fiberToSpecResidueField but no sections iso. FIX more, RETURN less: C1 step 1 marked elementary but used O_SpecB = B~, f_* B~ = (B_A)~ and stalk of tilde = localization; now cites lem-weil-pbc-spec-tilde-free-module (n=1), lem-weil-pbc-pushforward-tilde-spec, lem-weil-pbc-spec-tilde-stalk-localization, elementary false, proof_deps updated; C4 note: finiteness unused, kept for citer. Second reading by M1 missed this C1.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.FiniteAffineFibreSections",
-  "declaration": "AlgebraicGeometry.finite_affine_fibre_sections",
-  "file": "lean/Sheaf/AlgebraicGeometry/FiniteAffineFibreSections.lean",
-  "statement": "theorem finite_affine_fibre_sections [Module.Finite A B] : ∃ (e : (P ⊗[R] K) ≃+* Γ((f).fiber p, ⊤)) (g : (B ⊗[A] K) ≃+* Γ((f).fiber p, ⊤)), (∀ b : B, e ((StructureSheaf.toPushforwardStalk (CommRingCat.ofHom (algebraMap A B)) p).hom b ⊗ₜ[R] (1 : K)) = g (b ⊗ₜ[A] (1 : K))) ∧ (∀ k : K, e ((1 : P) ⊗ₜ[R] k) = g ((1 : B) ⊗ₜ[A] k)) ∧ (∀ b : B, g (b ⊗ₜ[A] (1 : K)) = ((f).fiberι p).appTop.hom ((Scheme.ΓSpecIso (CommRingCat.of B)).inv.hom b)) ∧ (∀ k : K, g ((1 : B) ⊗ₜ[A] k) = ((f).fiberToSpecResidueField p).appTop.hom ((Scheme.ΓSpecIso K).inv.hom k))",
-  "branch": "sheaf-dag",
-  "by": "G1",
-  "date": "2026-10-11",
-  "existing": false
+  "module": "WeilConjectures.AlgebraicGeometry.FiniteAffineFibreSections",
+  "declaration": "AlgebraicGeometry.Spec.exists_ringEquiv_stalk_tensorProduct_fiber",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FiniteAffineFibreSections.lean",
+  "statement": "theorem Spec.exists_ringEquiv_stalk_tensorProduct_fiber (A B : Type u) [CommRing A] [CommRing B] [Algebra A B] (p : Spec (CommRingCat.of A)) : letI φ := CommRingCat.ofHom (algebraMap A B) letI f := Spec.map φ letI R := (Spec (CommRingCat.of A)).presheaf.stalk p letI P := (Spec.topMap φ _* (Spec.structureSheaf (CommRingCat.of B)).1).stalk p letI K := (Spec (CommRingCat.of A)).residueField p letI : Algebra R P := ((TopCat.Presheaf.stalkFunctor CommRingCat p).map (Spec.sheafedSpaceMap φ).hom.c).hom.toAlgebra letI : Algebra R K := ((Spec (CommRingCat.of A)).residue p).hom.toAlgebra letI : Algebra A K := (StructureSheaf.toStalk (CommRingCat.of A) p ≫ (Spec (CommRingCat.of A)).residue p).hom.toAlgebra ∃ (e : P ⊗[R] K ≃+* Γ(f.fiber p, ⊤)) (g : B ⊗[A] K ≃+* Γ(f.fiber p, ⊤)), (∀ b : B, e ((StructureSheaf.toPushforwardStalk φ p).hom b ⊗ₜ 1) = g (b ⊗ₜ 1)) ∧ (∀ k : K, e (1 ⊗ₜ k) = g (1 ⊗ₜ k)) ∧ (∀ b : B, g (b ⊗ₜ 1) = (f.fiberι p).appTop.hom ((Scheme.ΓSpecIso (CommRingCat.of B)).inv.hom b)) ∧ (∀ k : K, g (1 ⊗ₜ k) = (f.fiberToSpecResidueField p).appTop.hom ((Scheme.ΓSpecIso K).inv.hom k))",
+  "branch": "slopmaster2",
+  "by": "E3",
+  "date": "2026-10-20",
+  "existing": true,
+  "note": "Retirement of the Sheaf duplicate (coord/retire-items.tsv); the upstream theorem is the one the withdrawn finite_affine_fibre_sections called, same letI structures and four clauses, without the unused [Module.Finite A B]."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -128,11 +129,11 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C8",
+  "reviewer": "C-26fa3",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261020T131944-L-1394867",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T152958-L-2858108",
+  "kind": "interface",
+  "note": "independent cc review: lean record of lem-pc-finite-affine-fibre-sections vs upstream Spec.exists_ringEquiv_stalk_tensorProduct_fiber signature (verbatim, whitespace-normalized); retire-items.tsv row; importer FiniteLocallyFreeStructureSheaf compiled against the stub"
  }
 }
