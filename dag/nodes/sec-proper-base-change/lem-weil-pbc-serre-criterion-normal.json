@@ -213,14 +213,15 @@
  },
  "reviewed": "pass (L, 2026-10-10): 10 steps follow 031S with the gaps written out: localizations inherit (R_k)/(S_k); (1)=>(2) by the dimension 0,1 cases directly and Kollar's dichotomy (0BHZ, new node) for d>=2 with the embedding of the finite extension into Frac(A); (2)=>(1) by strong induction on dimension via 031R (new node), 00PD (new node), 030C (new node), agreement of A and A[x] at non-maximal primes, a power of m killing A[x]/A, and the exclusion (3)/(4) of 0BHZ. New 00LL node for the nonzerodivisor.",
  "lean": {
-  "module": "Sheaf.RingTheory.SerreCriterionNormal",
+  "module": "WeilConjectures.RingTheory.SerreCriterionNormal",
   "declaration": "Ring.forall_isIntegrallyClosed_localization_iff_isSerreR_and_isSerreS",
-  "file": "lean/Sheaf/RingTheory/SerreCriterionNormal.lean",
-  "statement": "theorem serreCriterionNormal (R : Type u) [CommRing R] [IsNoetherianRing R] : (∀ (p : Ideal R) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) ↔ IsSerreR R 1 ∧ IsSerreS R 2",
+  "file": "lean/WeilConjectures/RingTheory/SerreCriterionNormal.lean",
+  "statement": "theorem forall_isIntegrallyClosed_localization_iff_isSerreR_and_isSerreS (R : Type u) [CommRing R]\n    [IsNoetherianRing R] :\n    (∀ (p : Ideal R) [p.IsPrime],\n      IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) ↔\n    IsSerreR R 1 ∧ IsSerreS R 2",
   "branch": "sheaf-dag",
   "by": "M1",
   "date": "2026-10-11",
-  "existing": false
+  "existing": true,
+  "note": "R1 retirement: the adopted source theorem has exactly the same type as Ring.serreCriterionNormal; consumers now use its canonical name directly."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -230,12 +231,12 @@
   "result": "pass"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261012T085316-L-30537",
+  "landing": "20261020T132033-L-1405115",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

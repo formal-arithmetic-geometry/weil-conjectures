@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Spectrum.Prime.Defs
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 import all WeilConjectures.RingTheory.FlatFiberLocalDepth
-import Sheaf.RingTheory.SerreCriterionNormal
+import WeilConjectures.RingTheory.SerreCriterionNormal
 import WeilConjectures.RingTheory.DepthLeDimAssociatedPrime
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import WeilConjectures.RingTheory.DepthQuotSMulTop
@@ -49,10 +49,11 @@ private theorem normal_local_depth_bound {A : Type*} [CommRing A]
       IsLocalRing.depth (R := Localization.AtPrime r) (Localization.AtPrime r) := by
   let C := Localization.AtPrime r
   have : IsIntegrallyClosed C := hn
-  have hS : Ring.IsSerreS C 2 := (Ring.serreCriterionNormal C).mp (by
-    intro s hs
-    exact ⟨inferInstance, isIntegrallyClosed_of_isLocalization
-      (Localization.AtPrime s) s.primeCompl s.primeCompl_le_nonZeroDivisors⟩) |>.2
+  have hS : Ring.IsSerreS C 2 :=
+    (Ring.forall_isIntegrallyClosed_localization_iff_isSerreR_and_isSerreS C).mp (by
+      intro s hs
+      exact ⟨inferInstance, isIntegrallyClosed_of_isLocalization
+        (Localization.AtPrime s) s.primeCompl s.primeCompl_le_nonZeroDivisors⟩) |>.2
   let m := IsLocalRing.maximalIdeal C
   let e : C ≃+* Localization.AtPrime m :=
     (IsLocalization.atUnits C m.primeCompl (by
@@ -101,7 +102,7 @@ private theorem exists_nonNormal_lowDepth_prime_le
   let A := Localization.AtPrime p.asIdeal
   have hnot : ¬ (Ring.IsSerreR A 1 ∧ Ring.IsSerreS A 2) := by
     intro h
-    have hall := (Ring.serreCriterionNormal A).mpr h
+    have hall := (Ring.forall_isIntegrallyClosed_localization_iff_isSerreR_and_isSerreS A).mpr h
     let m := IsLocalRing.maximalIdeal A
     let e : A ≃+* Localization.AtPrime m :=
       (IsLocalization.atUnits A m.primeCompl (by
