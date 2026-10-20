@@ -172,7 +172,7 @@
    }
   },
   {
-   "text": "Because the full triangulated subcategory $\\mathcal T$ is preserved by duality, $F$ restricts to it. Extend this $R$-linear functor to its raw scalar localization by $\\overline F(f\\otimes a)=F(f)\\otimes a$ and extend $d,\\psi$ by $\\overline d_V=d_V\\otimes1$, $\\overline\\psi_V=\\psi_V\\otimes1$. These formulas respect tensor balancing by Step 11. Naturality on $f\\otimes a$ is the original naturality equation tensored with $a$; additivity gives it on all morphisms. The shift square is its original equality tensored with $1$. By the scalar-localization triangulated lemma every distinguished triangle is isomorphic to the localization of an original one. The functor $\\overline F$ takes that original image to the localization of its $F$-image, which is distinguished by Step 6. Functoriality and naturality extend this conclusion, and the triangle morphism from Step 8, across the specified triangle isomorphism. Thus $\\overline F$ is exact with $\\overline\\psi$, and $\\overline d$ has all three commuting squares on every localized distinguished triangle, including triangles whose arrows are fractions.",
+   "text": "The ambient signed compatibility constructed in Steps 6–8 restricts to the full dual-stable triangulated subcategory: use the full inclusion to lift its coherent shift comparisons, and test exactness and the evaluation shift equation after that faithful inclusion. For scalar descent, compare the raw tensor-Hom category with the existing rationalization by the tensorHomEquiv linear equivalences. Tensor induction verifies its functor laws; these equivalences make the comparison fully faithful, and every rationalized object has a lattice, so it is an equivalence. Thus the raw Q is a categorical localization. The identity-component isomorphism Q composed with the extended F is isomorphic to F composed with Q. Mathlib localization descent gives a coherent CommShift structure on the extended F for all integer shifts, with the displayed Q comparison equation. Descend the natural transformation by the same universal property; its component is exactly Q(d_X). The unitor-adjusted whiskering equation proves shift compatibility after Q, and essential surjectivity on objects proves it before Q. Every localized distinguished triangle is isomorphic to a Q-image triangle; compare the two composite image-triangle functors to deduce exactness of the descended F. Apply the generic shift-compatible transformation triangle morphism construction to obtain all three squares. This argument works for the specified localization shift structure without using the extra degree-one hshift or hQ normalizations.",
    "uses": [
     "def-weil-linear-scalar-localization",
     "lem-weil-linear-scalar-localization-triangulated"
@@ -184,7 +184,7 @@
    }
   },
   {
-   "text": "Apply triangle two-out-of-three to the exact functors $\\mathrm{id},F$ and their shift-compatible natural transformation $d$, as established in Steps 6–8. It proves that any two invertible components among $d_V,d_W,d_Z$ force the third. Apply the same lemma to $\\mathrm{id},\\overline F,\\overline d$ using Step 12 to obtain all three cases in $\\mathcal T[1/s]$. The equation $\\psi_Vd_{V[1]}=d_V[1]$ and invertibility of $\\psi$ show that invertibility of $d_V$ is equivalent to that of $d_{V[1]}$; the inverse shift gives all integer shifts. The same equation holds after localization. None of these implications asserts that every component is invertible.",
+   "text": "For any exact endofunctor F with a shift-compatible natural transformation d from the identity, use the canonical identity image-triangle isomorphism followed by NatTrans.mapTriangle to obtain the triangle map with components d. Mathlib triangle two-out-of-three for natural transformations gives all three invertibility implications. The formula for d on X[n] expresses it as the shifted d_X conjugated by the two shift comparisons, so invertibility of d_X implies invertibility of d_(X[n]). Conversely the shift equation gives invertibility of the shifted d_X, and the shift equivalence reflects isomorphisms. Apply this categorical argument both on the full subcategory and on its scalar localization in Step 12. The same categorical conclusion is available to the ambient signed construction in Steps 6–8; that construction and the slice construction remain separate unfinished declarations.",
    "uses": [
     "lem-sf-triangle-two-out-of-three"
    ],
@@ -220,9 +220,9 @@
   "prop-pur-kinjective-resolutions-exist"
  ],
  "proof_origin": {
-  "by": "K3",
+  "by": "W4",
   "date": "2026-10-21",
-  "note": "Step 11 proved directly from closed tensor-Hom adjunction, central unit action, natural evaluation, and Mathlib finite-biproduct and monoidal coherence APIs. Other proof steps are unchanged."
+  "note": "Completed scalar_compatibility from the existing ambient compatibility declaration, with proved private categorical helpers for full-subcategory restriction, scalar localization and the triangle/isomorphism-locus consequences. Steps 12–13 describe this proof. No new holes or nodes; ambient compatibility and slice_compatibility remain unchanged."
  },
  "mathlib_searches": [
   {
@@ -411,9 +411,9 @@
   "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K3",
+  "group": "W4",
   "result": "pass",
-  "landing": "20261020T230803-L-612389",
+  "landing": "20261020T233232-L-909620",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },

@@ -10,7 +10,8 @@ public import Sheaf.CategoryTheory.ScalarLocalizationTriangulated
 public import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
-import Sheaf.Algebra.Homology.SignedDoubleHomCone
+import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationHom
+import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShift
 import Mathlib.CategoryTheory.Monoidal.Linear
 import Mathlib.CategoryTheory.Monoidal.Limits.Preserves
 
@@ -19,17 +20,6 @@ public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.CategoryTheory.ScalarLocalization
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Mathlib.Algebra.Homology.BifunctorShift
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.HomComplexGlobalHomotopyOfUniverses
-import Sheaf.Algebra.Homology.KInjectiveHomComplex
-import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
-import WeilConjectures.Algebra.Homology.HomComplex
-import WeilConjectures.Algebra.Homology.HomTensorTotal
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 
 /-! # Coefficient biduality, signed shifts, triangles and scalar localization
 
@@ -91,7 +81,210 @@ def ScalarCompatibility (A : Type k) [CommRing A] [Linear A E]
           (ScalarLocalization.localization A E s).map ((F.commShiftIso n).hom.app X) ≫
             ((ScalarLocalization.localization A E s).commShiftIso n).hom.app (F.obj X)) ∧
         TriangleCompatibility (ScalarLocalization.map A E s F) delta) (_shiftInst := S)
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- The categorical conclusions follow from exactness and shift compatibility. -/
+private theorem triangleCompatibility_of [F.IsTriangulated] [NatTrans.CommShift d ℤ] :
+    TriangleCompatibility F d := by
+  refine ⟨inferInstance, inferInstance, ?_, ?_, ?_⟩
+  · intro T _
+    let m := ((Functor.mapTriangleIdIso E).inv.app T) ≫ (NatTrans.mapTriangle d).app T
+    refine ⟨m, ?_, ?_, ?_⟩
+    · change 𝟙 _ ≫ d.app T.obj₁ = _
+      exact Category.id_comp _
+    · change 𝟙 _ ≫ d.app T.obj₂ = _
+      exact Category.id_comp _
+    · change 𝟙 _ ≫ d.app T.obj₃ = _
+      exact Category.id_comp _
+  · intro X n
+    have h := NatTrans.app_shift d n X
+    constructor
+    · intro hX
+      let := hX
+      rw [h]
+      infer_instance
+    · intro hX
+      let := hX
+      have hs : IsIso ((d.app X)⟦n⟧') := by
+        rw [NatTrans.shift_app d n X]
+        infer_instance
+      exact isIso_of_reflects_iso (d.app X) (shiftFunctor E n)
+  · intro T hT
+    exact ⟨fun h ↦ NatTrans.isIso_app_obj₃_of_isIso_app_obj₁₂ d hT h.1 h.2,
+      fun h ↦ NatTrans.isIso_app_obj₂_of_isIso_app_obj₁₃ d hT h.1 h.2,
+      fun h ↦ NatTrans.isIso_app_obj₁_of_isIso_app_obj₂₃ d hT h.1 h.2⟩
+
 end General
+
+section ScalarDescent
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+open TensorProduct
+
+private theorem all_shift_linear
+    (R : Type k) [CommRing R] (C : Type a) [Category.{b} C]
+    [Preadditive C] [Linear R C] [HasShift C ℤ]
+    [(shiftFunctor C (1 : ℤ)).Linear R] (n : ℤ) :
+    (shiftFunctor C n).Linear R := by
+  have hn : (shiftFunctor C (-1 : ℤ)).Linear R :=
+    by
+      have : (shiftEquiv C (1 : ℤ)).functor.Linear R := ‹_›
+      exact Equivalence.inverseLinear R (shiftEquiv C (1 : ℤ))
+  induction n using Int.induction_on with
+  | zero => exact Functor.linear_of_iso R (shiftFunctorZero C ℤ).symm
+  | @succ n ih =>
+    have := ih
+    exact Functor.linear_of_iso R (shiftFunctorAdd C (n : ℤ) 1).symm
+  | @pred n ih =>
+    have := ih
+    exact Functor.linear_of_iso R (shiftFunctorAdd C (-(n : ℤ)) (-1)).symm
+
+private noncomputable def rationalComparison
+    (R : Type k) [CommRing R] (C : Type a) [Category.{b} C]
+    [Preadditive C] [Linear R C] [HasZeroObject C] [HasShift C ℤ]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C]
+    [∀ n : ℤ, (shiftFunctor C n).Linear R] (p : R) :
+    ScalarLocalization R C p ⥤ Rationalization (Submonoid.powers p) C where
+  obj X := (Rationalization.Q (Submonoid.powers p) C).obj X.obj
+  map {X Y} f := Rationalization.tensorHomEquiv (Submonoid.powers p)
+    (Localization.Away p) X.obj Y.obj f
+  map_id X := by
+    change Rationalization.tensorHomEquiv _ _ _ _ (1 ⊗ₜ[R] 𝟙 X.obj) = _
+    simp
+  map_comp {X Y Z} f g := by
+    induction f using TensorProduct.induction_on with
+    | zero => simp only [Limits.zero_comp, map_zero, Limits.zero_comp]
+    | tmul a f =>
+      induction g using TensorProduct.induction_on with
+      | zero => simp only [Limits.comp_zero, map_zero, Limits.comp_zero]
+      | tmul b g =>
+        change Rationalization.tensorHomEquiv _ _ _ _
+          (ScalarLocalization.composition R C p _ _ _ (b ⊗ₜ[R] g) (a ⊗ₜ[R] f)) = _
+        rw [ScalarLocalization.composition_tmul]
+        simp only [Rationalization.tensorHomEquiv_tmul, Functor.map_comp,
+          Linear.smul_comp, Linear.comp_smul, smul_smul, mul_comm]
+      | add g h hg hh =>
+        rw [Preadditive.comp_add X Y Z (a ⊗ₜ[R] f) g h]
+        simp only [_root_.map_add]
+        rw [hg, hh]
+        exact (Preadditive.comp_add _ _ _ _ _ _).symm
+    | add f h hf hh =>
+      rw [Preadditive.add_comp X Y Z f h g]
+      simp only [_root_.map_add]
+      rw [hf, hh]
+      exact (Preadditive.add_comp _ _ _ _ _ _).symm
+
+private theorem scalarLocalization_isLocalization
+    (A : Type k) [CommRing A] (E : Type a) [Category.{b} E]
+    [Preadditive E] [Linear A E] [HasZeroObject E] [HasShift E ℤ]
+    [∀ n : ℤ, (shiftFunctor E n).Additive] [Pretriangulated E] [IsTriangulated E]
+    [∀ n : ℤ, (shiftFunctor E n).Linear A] (s : A) :
+    (ScalarLocalization.localization A E s).IsLocalization
+      (Rationalization.W (Submonoid.powers s) E) := by
+  classical
+  let M := Submonoid.powers s
+  let V := rationalComparison A E s
+  have : V.Full := ⟨fun {X Y} ↦
+    (Rationalization.tensorHomEquiv M (Localization.Away s) X.obj Y.obj).surjective⟩
+  have : V.Faithful := ⟨fun {X Y} ↦
+    (Rationalization.tensorHomEquiv M (Localization.Away s) X.obj Y.obj).injective⟩
+  have : V.EssSurj := ⟨fun X ↦ by
+    obtain ⟨Y, ⟨e⟩⟩ := Rationalization.exists_iso_obj X
+    exact ⟨⟨Y⟩, ⟨e⟩⟩⟩
+  have : V.IsEquivalence := {}
+  let Q := ScalarLocalization.localization A E s
+  have fac : Q ⋙ V ≅ Rationalization.Q M E :=
+    NatIso.ofComponents (fun X ↦ Iso.refl _) (by
+      intro X Y f
+      dsimp [Q, V, ScalarLocalization.localization, rationalComparison]
+      simp only [Category.comp_id, Category.id_comp,
+        Rationalization.tensorHomEquiv_tmul, one_smul]
+      rfl)
+  exact Functor.IsLocalization.of_equivalence_target (Rationalization.Q M E)
+    (Rationalization.W M E) Q V.asEquivalence.symm
+    (Functor.isoWhiskerRight fac.symm V.inv ≪≫ (Functor.associator _ _ _) ≪≫
+      Functor.isoWhiskerLeft Q V.asEquivalence.unitIso.symm ≪≫ Q.rightUnitor)
+
+/-- An exact linear transformation descends through raw scalar localization. -/
+private theorem scalarCompatibility_of
+    {E : Type a} [Category.{b} E] [Preadditive E] [HasZeroObject E]
+    [HasShift E ℤ] [∀ n : ℤ, (shiftFunctor E n).Additive]
+    [Pretriangulated E] [IsTriangulated E]
+    (F : E ⥤ E) (d : 𝟭 E ⟶ F) [F.CommShift ℤ]
+    [F.IsTriangulated] [NatTrans.CommShift d ℤ]
+    (A : Type k) [CommRing A] [Linear A E] [F.Additive] [F.Linear A]
+    [(shiftFunctor E (1 : ℤ)).Linear A] (s : A)
+    [HasZeroObject (ScalarLocalization A E s)] [HasShift (ScalarLocalization A E s) ℤ]
+    [∀ n : ℤ, (shiftFunctor (ScalarLocalization A E s) n).Additive]
+    [Pretriangulated (ScalarLocalization A E s)]
+    [(ScalarLocalization.localization A E s).CommShift ℤ]
+    [(ScalarLocalization.localization A E s).IsTriangulated]
+    (htriangles : ∀ T : Triangle (ScalarLocalization A E s),
+      T ∈ distTriang _ ↔ ∃ T' : Triangle E, T' ∈ distTriang _ ∧
+        Nonempty (T ≅ (ScalarLocalization.localization A E s).mapTriangle.obj T')) :
+    ScalarCompatibility F d A s := by
+  classical
+  have : ∀ n : ℤ, (shiftFunctor E n).Linear A := all_shift_linear A E
+  let Q := ScalarLocalization.localization A E s
+  let G := ScalarLocalization.map A E s F
+  let W := Rationalization.W (Submonoid.powers s) E
+  have : Q.IsLocalization W := scalarLocalization_isLocalization A E s
+  let e : Q ⋙ G ≅ F ⋙ Q := NatIso.ofComponents (fun _ ↦ Iso.refl _) (by
+    intro X Y f
+    dsimp [Q, G, ScalarLocalization.map, ScalarLocalization.mapHom,
+      ScalarLocalization.localization]
+    simp)
+  let : Localization.Lifting Q W (F ⋙ Q) G := ⟨e⟩
+  let : G.CommShift ℤ := Functor.commShiftOfLocalization Q W ℤ (F ⋙ Q) G
+  have he : NatTrans.CommShift e.hom ℤ :=
+    NatTrans.commShift_iso_hom_of_localization Q W ℤ (F ⋙ Q) G
+  let := he
+  let : Localization.Lifting Q W Q (𝟭 _) := ⟨Q.rightUnitor⟩
+  let delta : 𝟭 (ScalarLocalization A E s) ⟶ G :=
+    Localization.liftNatTrans Q W Q (F ⋙ Q) (𝟭 _) G
+      (Q.leftUnitor.inv ≫ Functor.whiskerRight d Q)
+  have hd (X : E) : delta.app (Q.obj X) = Q.map (d.app X) := by
+    dsimp only [delta]
+    rw [Localization.liftNatTrans_app]
+    change 𝟙 _ ≫ (𝟙 _ ≫ Q.map (d.app X)) ≫ 𝟙 _ = _
+    simp
+  have hshift (X : E) (n : ℤ) :
+      G.map ((Q.commShiftIso n).hom.app X) ≫
+          (G.commShiftIso n).hom.app (Q.obj X) =
+        Q.map ((F.commShiftIso n).hom.app X) ≫
+          (Q.commShiftIso n).hom.app (F.obj X) := by
+    have h := NatTrans.shift_app_comm e.hom n X
+    simp only [Functor.commShiftIso_comp_hom_app] at h
+    change (G.map _ ≫ _) ≫ (shiftFunctor _ n).map (𝟙 _) = 𝟙 _ ≫ _ at h
+    simpa only [Functor.map_id, Category.comp_id, Category.id_comp] using h
+  have hdelta : NatTrans.CommShift delta ℤ := by
+    have hwhisker : Functor.whiskerLeft Q delta =
+        Q.rightUnitor.hom ≫ Q.leftUnitor.inv ≫
+          (Functor.whiskerRight d Q) ≫ e.inv := by
+      ext X
+      change delta.app (Q.obj X) = 𝟙 _ ≫ 𝟙 _ ≫ Q.map (d.app X) ≫ 𝟙 _
+      simpa only [Category.id_comp, Category.comp_id] using hd X
+    have : NatTrans.CommShift (Functor.whiskerLeft Q delta) ℤ := by
+      rw [hwhisker]
+      infer_instance
+    exact NatTrans.CommShift.of_whiskerLeft delta Q (fun X ↦ ⟨X.obj, 𝟙 _, by
+      dsimp [Q, ScalarLocalization.localization]
+      infer_instance⟩)
+  let := hdelta
+  have hG : G.IsTriangulated := by
+    have : (Q ⋙ G).IsTriangulated := (Functor.isTriangulated_iff_of_iso e).mpr inferInstance
+    constructor
+    intro T hT
+    obtain ⟨T', hT', ⟨i⟩⟩ := (htriangles T).mp hT
+    exact isomorphic_distinguished _ ((Q ⋙ G).map_distinguished T' hT') _
+      (G.mapTriangle.mapIso i ≪≫ (Functor.mapTriangleCompIso Q G).symm.app T')
+  let := hG
+  refine ⟨inferInstanceAs (G.CommShift ℤ), delta, ?_, hshift, ?_⟩
+  · intro X
+    exact hd X.obj
+  · exact triangleCompatibility_of G delta
+
+end ScalarDescent
 
 section ClosedLinearity
 open MonoidalCategory
@@ -484,6 +677,9 @@ theorem subcategory_linearity (M : RingedSiteDualityModel.{c, v, r, w} J R)
   apply P.hom_ext
   exact Functor.Linear.map_smul (F := bidual.{c, v, r, w} J R) f.hom a
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option linter.unusedVariables false in
 /-- Descent through the raw scalar localization with precisely its induced shift and image
 distinguished triangles. The structural parameters describe the triangulation supplied by
 exists_triangulated_scalarLocalization, rather than additional assumptions on the site or on
@@ -536,7 +732,40 @@ theorem scalar_compatibility (M : RingedSiteDualityModel.{c, v, r, w} J R)
         ScalarCompatibility (subcategoryBidual.{c, v, r, w} J R P hdual)
           (subcategoryEvaluation.{c, v, r, w} J R P hdual M) A s)
         (subShiftInst := subShift) := by
-  sorry
+  obtain ⟨ambientShift, hnormalized, hcompatible⟩ := compatibility.{c, v, r, w} J R M
+  let : (bidual.{c, v, r, w} J R).CommShift ℤ := ambientShift
+  have : (bidual.{c, v, r, w} J R).IsTriangulated := hcompatible.1
+  have : NatTrans.CommShift (evaluation.{c, v, r, w} J R M) ℤ := hcompatible.2.1
+  let G := subcategoryBidual.{c, v, r, w} J R P hdual
+  let d := subcategoryEvaluation.{c, v, r, w} J R P hdual M
+  let hG := fun X : P.FullSubcategory ↦ hdual _ (hdual X.obj X.property)
+  let e : G ⋙ P.ι ≅ P.ι ⋙ bidual.{c, v, r, w} J R :=
+    P.liftCompιIso (P.ι ⋙ bidual.{c, v, r, w} J R) hG
+  let subShift : G.CommShift ℤ := Functor.CommShift.ofComp e ℤ
+  have : NatTrans.CommShift e.hom ℤ := Functor.CommShift.ofComp_compatibility e ℤ
+  have hd : Functor.whiskerRight d P.ι =
+      P.ι.leftUnitor.hom ≫ P.ι.rightUnitor.inv ≫
+        Functor.whiskerLeft P.ι (evaluation.{c, v, r, w} J R M) ≫
+        e.inv := by
+    ext X
+    change (evaluation.{c, v, r, w} J R M).app X.obj =
+      𝟙 _ ≫ 𝟙 _ ≫ (evaluation.{c, v, r, w} J R M).app X.obj ≫ 𝟙 _
+    simp only [Category.id_comp, Category.comp_id]
+  have : NatTrans.CommShift d ℤ := by
+    have : NatTrans.CommShift (Functor.whiskerRight d P.ι) ℤ := by
+      rw [hd]
+      infer_instance
+    exact NatTrans.CommShift.of_whiskerRight d P.ι
+  have : G.IsTriangulated := (Functor.isTriangulated_iff_comp_right e).mpr inferInstance
+  refine ⟨subShift, ?_, triangleCompatibility_of G d, ?_⟩
+  · intro X
+    have h := NatTrans.shift_app_comm e.hom (1 : ℤ) X
+    simp only [Functor.commShiftIso_comp_hom_app] at h
+    change (P.ι.map _ ≫ _) ≫ (shiftFunctor _ (1 : ℤ)).map (𝟙 _) =
+      𝟙 _ ≫ _ ≫ _ at h
+    simp only [Functor.map_id, Category.comp_id, Category.id_comp, hnormalized] at h
+    convert h using 1 <;> rfl
+  · exact scalarCompatibility_of G d A s htriangles
 
 
 end Subcategory
