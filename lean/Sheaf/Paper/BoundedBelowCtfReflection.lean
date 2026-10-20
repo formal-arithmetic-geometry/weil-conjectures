@@ -23,6 +23,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesModules
 import Sheaf.Paper.ProEtaleConstructibleOrigin
 import Sheaf.Paper.ComparisonTorAmplitude
+import Sheaf.Paper.BoundedBelowConstructibleReflection
+import Mathlib.Algebra.CharP.CharAndCard
+
+set_option linter.style.haveILetI false
 
 /-!
 # Bounded-below reflection of finite-Tor constructibility
@@ -94,6 +98,29 @@ theorem finiteCoefficient_boundedBelow_ctf_reflection
           (Padic.finite_coefficientExtensionRing l E n hn)) T C ∧
     Etale.DerivedCategory.hasTorAmplitudeIn
       (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) T a b C := by
-  sorry
+  classical
+  let B := Padic.coefficientExtensionRing l E n
+  letI : Finite B := Padic.finite_coefficientExtensionRing l E n hn
+  have hunit : IsUnit (l : D.k) := by
+    letI : Fintype D.k₀ := Fintype.ofFinite D.k₀
+    letI : Fact D.p.Prime := ⟨D.prime⟩
+    have hc : CharP D.k₀ D.p := charP_of_card_eq_prime_pow
+      ((Nat.card_eq_fintype_card (α := D.k₀)).symm.trans
+        (D.card_base.trans D.cardinality_eq))
+    letI : CharP D.k₀ D.p := hc
+    letI : CharP D.k D.p := charP_of_injective_algebraMap' D.k₀ D.p
+    exact (CharP.isUnit_natCast_iff (R := D.k) D.prime).2
+      (fun h ↦ _hlp ((Nat.prime_dvd_prime_iff_eq D.prime (Fact.out : l.Prime)).1 h).symm)
+  let residueMap (x : T) : D.k →+* T.residueField x :=
+    ((Scheme.ΓSpecIso (.of D.k)).inv ≫
+      (T ↘ Spec (.of D.k)).appTop ≫ T.Γevaluation x).hom
+  letI : ∀ x : T, Invertible (l : T.residueField x) := fun x ↦
+    (map_natCast (residueMap x) l) ▸ (hunit.map (residueMap x)).invertible
+  let K := (@ProEtale.finiteCoefficientIntrinsicDerivedComparison.{u} T B
+    inferInstance (Padic.finite_coefficientExtensionRing l E n hn)).obj C
+  have hTor' := finiteCoefficient_comparison_reflects_torAmplitude D l _hlp E n hn T a b C
+    _hPlus K _hConstructible _hTor (Iso.refl K)
+  exact ⟨finiteCoefficient_boundedBelow_constructible_reflection D l _hlp E n hn T C
+    _hPlus _hConstructible, hTor'⟩
 
 end AlgebraicGeometry
