@@ -98,14 +98,15 @@
   }
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.RingTheory.StabilizedFiniteFreeTower",
-  "file": "lean/Sheaf/RingTheory/StabilizedFiniteFreeTower.lean",
-  "declaration": "DerivedCategory.exists_model_of_stabilized_finite_free_tower",
+  "existing": true,
+  "module": "WeilConjectures.RingTheory.StabilizedFiniteFreeTower",
+  "file": "lean/WeilConjectures/RingTheory/StabilizedFiniteFreeTower.lean",
+  "declaration": "CochainComplex.exists_model_of_stabilized_finite_free_tower",
   "statement": "theorem exists_model_of_stabilized_finite_free_tower (A : Type u) [CommRing A] (M : CochainComplex (ModuleCat.{u} A) ℤ) (r : ℕ) (f : Fin r → A) (b : ℤ) (F : ℕ → CochainComplex (ModuleCat.{u} A) ℤ) (α : ∀ k : ℕ, F k ⟶ M) (τ : ∀ k : ℕ, F k ⟶ F (k + 1)) (hupper : ∀ k : ℕ, (F k).IsStrictlyLE b) (hfinite : ∀ k : ℕ, ∀ i : ℤ, Module.Free A ((F k).X i) ∧ Module.Finite A ((F k).X i)) (hcomm : ∀ k : ℕ, τ k ≫ α (k + 1) = α k) (hstable : ∀ k : ℕ, ∀ i : ℤ, b + 1 - (k : ℤ) ≤ i → IsIso ((τ k).f i)) (hiso : ∀ k : ℕ, ∀ j : Fin r, ∀ i : ℤ, b + 1 - (k : ℤ) < i → QuasiIsoAt ((Functor.mapHomologicalComplex (ModuleCat.extendScalars (algebraMap A (Localization.Away (f j)))) (ComplexShape.up ℤ)).map (α k)) i) : ∃ (E : CochainComplex (ModuleCat.{u} A) ℤ), E.IsStrictlyLE b ∧ (∀ i : ℤ, Module.Free A (E.X i) ∧ Module.Finite A (E.X i)) ∧ ∃ γ : E ⟶ M, ∀ j : Fin r, QuasiIso ((Functor.mapHomologicalComplex (ModuleCat.extendScalars (algebraMap A (Localization.Away (f j)))) (ComplexShape.up ℤ)).map γ)",
   "branch": "sheaf-dag",
-  "by": "X3",
-  "date": "2026-10-13"
+  "by": "R2",
+  "date": "2026-10-20",
+  "note": "Retired the unused Sheaf copy in favor of the adopted source theorem; the signature and proof agree verbatim after the namespace rename."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -118,13 +119,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X3",
+  "reviewer": "C-65ad6",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261013T100223-L-2503751",
+  "landing": "20261020T135420-L-1821106",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired Sheaf DerivedCategory.exists_model_of_stabilized_finite_free_tower vs live WeilConjectures CochainComplex.exists_model_of_stabilized_finite_free_tower (identical signature and proof); node lean block re-pointed with existing:true; no importers; compile exit 0; axioms standard"
  }
 }
