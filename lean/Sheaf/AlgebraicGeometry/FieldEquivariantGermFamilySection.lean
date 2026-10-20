@@ -7,7 +7,8 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.KrullTopology
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
-import Sheaf.AlgebraicGeometry.FieldEquivariantGermsOnePoint
+import Mathlib.CategoryTheory.Limits.Preserves.Ulift
+import WeilConjectures.AlgebraicGeometry.FieldEquivariantGermsOnePoint
 
 /-! # Realizing equivariant families of geometric germs as sections
 
@@ -69,9 +70,11 @@ and Tag 03QW, section-galois-action-stalks.
 Proof: By quasi-finiteness, the inverse image of the unique point of Spec K is
 discrete; that inverse image is all of X. Cover X by its singleton open subschemes.
 Each is nonempty and has exactly one point. Apply
-field_equivariant_germ_family_section_onePoint to the restriction of f along
-the inclusion of each singleton. Its covariance follows by composing the
-change-of-lift equation with that inclusion.
+the upstream field_equivariant_germ_family_section_onePoint after composing F
+with ULift and transporting rho and f along the stalk comparison equivalence.
+Lower each resulting section using ULift.down; the germ comparison recovers the
+prescribed original germs. Covariance on each singleton follows by composing the
+change-of-lift equation with its inclusion.
 To compare the resulting sections on overlaps, first prove that sections on any
 etale K-scheme are determined by their germs at lifts from Spec Omega. Indeed,
 equal germs admit a common pointed refinement on which the sections agree. Every
@@ -125,18 +128,47 @@ theorem field_equivariant_germ_family_section
     refine ⟨fun x y ↦ Subtype.ext ?_⟩
     exact x.property.trans y.property.symm
   have inhabited (i : X.left) : Nonempty (Y i).left := ⟨⟨i, rfl⟩⟩
+  let liftFunctor := uliftFunctor.{u + 1, max u v}
+  let F' := (sheafCompose (Spec (.of K)).smallEtaleTopology liftFunctor).obj F
+  let e := ((p.presheafFiberCompIso liftFunctor).app F.obj).toEquiv.trans Equiv.ulift
+  have he (Z : (Spec (.of K)).Etale) (y : p.fiber.obj Z)
+      (z : F'.obj.obj (op Z)) :
+      e (p.toPresheafFiber Z y F'.obj z) =
+        p.toPresheafFiber Z y F.obj z.down :=
+    congrArg ULift.down (ConcreteCategory.congr_hom
+      (p.toPresheafFiber_presheafFiberCompIso_hom_app liftFunctor Z y F.obj) z)
+  let ρ' (g : Gal(Ks/K)) (m : p.sheafFiber.obj F') := e.symm (ρ g (e m))
+  have hρ' (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)
+      (hτ : (algebraMap Ks Ω).comp g.toRingHom =
+        τ.toRingHom.comp (algebraMap Ks Ω))
+      (Z : (Spec (.of K)).Etale) (y y' : p.fiber.obj Z)
+      (hy : y'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ y.left)
+      (z : F'.obj.obj (op Z)) :
+      ρ' g (p.toPresheafFiber Z y F'.obj z) =
+        p.toPresheafFiber Z y' F'.obj z := by
+    apply e.injective
+    change e (e.symm (ρ g (e (p.toPresheafFiber Z y F'.obj z)))) = _
+    rw [e.apply_symm_apply, he, he]
+    exact hρ g τ hτ Z y y' hy z.down
   have local_section (i : X.left) :
       ∃ z : F.obj.obj (op (Y i)), ∀ y : p.fiber.obj (Y i),
         p.toPresheafFiber (Y i) y F.obj z = f (p.fiber.map (a i) y) := by
     have := one i
     have := inhabited i
-    apply field_equivariant_germ_family_section_onePoint K Ks Ω F (Y i) ρ hρ
-      (fun y ↦ f (p.fiber.map (a i) y))
-    intro g τ hτ y y' hy
-    apply hf g τ hτ
-    change y'.left ≫ (a i).left =
-      Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ (y.left ≫ (a i).left)
-    rw [hy, Category.assoc]
+    obtain ⟨z, hz⟩ := field_equivariant_germ_family_section_onePoint K Ks Ω F'
+      (Y i) ρ' hρ' (fun y ↦ e.symm (f (p.fiber.map (a i) y))) (by
+        intro g τ hτ y y' hy
+        change e.symm (f (p.fiber.map (a i) y')) =
+          e.symm (ρ g (e (e.symm (f (p.fiber.map (a i) y)))))
+        rw [e.apply_symm_apply]
+        apply congrArg e.symm
+        apply hf g τ hτ
+        change y'.left ≫ (a i).left =
+          Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ (y.left ≫ (a i).left)
+        rw [hy, Category.assoc])
+    refine ⟨z.down, fun y ↦ ?_⟩
+    exact (he (Y i) y z).symm.trans ((congrArg e (hz y)).trans
+      (e.apply_symm_apply _))
   choose z hz using local_section
   have hcover : Sieve.ofArrows Y a ∈ (Spec (.of K)).smallEtaleTopology X := by
     rw [ofArrows_mem_smallEtaleTopology_iff]

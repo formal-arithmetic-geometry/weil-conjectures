@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "The structure morphism of X is etale, hence locally quasi-finite. Mathlib Scheme.Hom.isDiscrete_preimage_singleton makes its fibre as a subset discrete. Spec K is a singleton, so this subset is all of X. Its singleton open subschemes Y_i form a covering family a_i:Y_i -> X, including the empty covering for empty X. Each Y_i is nonempty and subsingleton. Compose the change-of-lift equation with a_i to check covariance of the pulled-back germ family. Apply lem-exc-field-equivariant-germs-one-point to obtain z_i on Y_i with the prescribed germs.",
+   "text": "The structure morphism of X is etale, hence locally quasi-finite. Mathlib Scheme.Hom.isDiscrete_preimage_singleton makes its fibre as a subset discrete. Spec K is a singleton, so this subset is all of X. Its singleton open subschemes Y_i form a covering family a_i:Y_i -> X, including the empty covering for empty X. Each Y_i is nonempty and subsingleton. Compose the change-of-lift equation with a_i to check covariance of the pulled-back germ family. Apply lem-exc-field-equivariant-germs-one-point to obtain z_i on Y_i with the prescribed germs. To use the adopted upstream one-point theorem at its coefficient universe max (u + 1) v, compose F with uliftFunctor. Point.presheafFiberCompIso and Equiv.ulift give a stalk equivalence e to the original stalk, respecting germs after ULift.down. Conjugate rho by e, and apply e.symm to f. The assumed germ formula and covariance transport along e. Apply the upstream theorem on each singleton and lower the resulting section; the germ comparison gives exactly the original local-section formula.",
    "uses": [
     "lem-exc-field-equivariant-germs-one-point",
     "def-weil-pbc-etale-sheaf-of-sets"
@@ -46,7 +46,9 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 04JM and 03QW; E2 formalization of singleton-cover gluing after the one-point invariant-section argument; repair X-27111 generalizes the private germ-extensionality helper to arbitrary base schemes with lift coverage"
+  "place": "Tags 04JM and 03QW; E2 formalization of singleton-cover gluing after the one-point invariant-section argument; repair X-27111 generalizes the private germ-extensionality helper to arbitrary base schemes with lift coverage; D6 uses the adopted upstream one-point theorem through ULift, preserving the smaller coefficient universe.",
+  "group": "D6",
+  "date": "2026-10-21"
  },
  "mathlib_searches": [
   {
@@ -123,12 +125,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-a97e8",
-  "group": "D5",
+  "reviewer": "C-b4dc1",
+  "group": "D6",
   "result": "pass",
-  "landing": "20261020T051137-L-1575484",
+  "landing": "20261020T235552-L-1190254",
   "kind": "interface",
-  "note": "independent cc review: item etaleSheavesGsetsPoint proof (statement byte-identical) against node lem-exc-etale-sheaves-gsets-point; universe generalization max(u+1) v → max u v of 13 unclaimed supporting modules against the change record and the statement_change records of the nodes; all 16 delivered modules and the 5 outside direct importers compiled clean against the delivery; axioms propext/choice/Quot.sound only"
+  "note": "independent cc review: Withdrawn item stub + 3 node lean records vs upstream WeilConjectures.AlgebraicGeometry.FieldEquivariantGermsOnePoint source (verbatim); 2 adapted importers vs live (signatures identical, adaptations forced: import-swap-only original fails on universe max(u+1) v vs max u v); all compile, axioms clean"
  },
  "lean_audit": {
   "master": {

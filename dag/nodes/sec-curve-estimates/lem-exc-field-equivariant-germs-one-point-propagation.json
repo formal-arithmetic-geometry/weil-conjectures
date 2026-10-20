@@ -42,10 +42,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "K2",
-  "date": "2026-10-13",
+  "group": "D6",
+  "date": "2026-10-21",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 03QW, section-galois-action-stalks; Tag 02GL for the finite separable residue extension; formal proof by K2 using Mathlib and the existing automorphism-extension theorem"
+  "place": "Tag 03QW, section-galois-action-stalks; Tag 02GL for the finite separable residue extension; formal proof by K2 using Mathlib and the existing automorphism-extension theorem D6 retirement: retain the adopted upstream proof and attach this node there; transport smaller-universe consumer data through the ULift stalk equivalence."
  },
  "mathlib_searches": [
   {
@@ -96,14 +96,15 @@
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-h2",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FieldEquivariantGermsOnePoint",
-  "file": "lean/Sheaf/AlgebraicGeometry/FieldEquivariantGermsOnePoint.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.FieldEquivariantGermsOnePoint",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FieldEquivariantGermsOnePoint.lean",
   "declaration": "AlgebraicGeometry.Scheme.onePoint_propagate_from_selected_lift",
-  "statement": "theorem onePoint_propagate_from_selected_lift (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω] [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω] [IsScalarTower K Ks Ω] [IsAlgClosed Ω] (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max u v))) (X : (Spec (.of K)).Etale) [Subsingleton X.left] [Nonempty X.left] : let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω))) ∀ (x₀ : p.fiber.obj X) (ρ : Gal(Ks/K) → p.sheafFiber.obj F → p.sheafFiber.obj F), (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω) (hτ : (algebraMap Ks Ω).comp g.toRingHom = τ.toRingHom.comp (algebraMap Ks Ω)) (Y : (Spec (.of K)).Etale) (y y' : p.fiber.obj Y) (hy : y'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ y.left) (z : F.obj.obj (op Y)), ρ g (p.toPresheafFiber Y y F.obj z) = p.toPresheafFiber Y y' F.obj z) → ∀ (f : p.fiber.obj X → p.sheafFiber.obj F), (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω) (hτ : (algebraMap Ks Ω).comp g.toRingHom = τ.toRingHom.comp (algebraMap Ks Ω)) (x x' : p.fiber.obj X) (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left), f x' = ρ g (f x)) → ∀ (z : F.obj.obj (op X)), p.toPresheafFiber X x₀ F.obj z = f x₀ → ∀ x : p.fiber.obj X, p.toPresheafFiber X x F.obj z = f x",
+  "statement": "theorem onePoint_propagate_from_selected_lift (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω] [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω] [IsScalarTower K Ks Ω] [IsAlgClosed Ω] (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v))) (X : (Spec (.of K)).Etale) [Subsingleton X.left] [Nonempty X.left] : let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω))) ∀ (x₀ : p.fiber.obj X) (ρ : Gal(Ks/K) → p.sheafFiber.obj F → p.sheafFiber.obj F), (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω), (algebraMap Ks Ω).comp g.toRingHom = τ.toRingHom.comp (algebraMap Ks Ω) → ∀ (Y : (Spec (.of K)).Etale) (y y' : p.fiber.obj Y), y'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ y.left → ∀ (z : F.obj.obj (op Y)), ρ g (p.toPresheafFiber Y y F.obj z) = p.toPresheafFiber Y y' F.obj z) → ∀ (f : p.fiber.obj X → p.sheafFiber.obj F), (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω), (algebraMap Ks Ω).comp g.toRingHom = τ.toRingHom.comp (algebraMap Ks Ω) → ∀ (x x' : p.fiber.obj X), x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left → f x' = ρ g (f x)) → ∀ (z : F.obj.obj (op X)), p.toPresheafFiber X x₀ F.obj z = f x₀ → ∀ x : p.fiber.obj X, p.toPresheafFiber X x F.obj z = f x",
   "branch": "sheaf-dag",
-  "by": "V3",
-  "date": "2026-10-13"
+  "by": "D6",
+  "date": "2026-10-21",
+  "note": "The adopted upstream theorem has coefficient universe max (u + 1) v. The smaller coefficient universe in the mathematical statement is recovered by composition with ULift and Point.presheafFiberCompIso; the germ-family consumer implements this transport explicitly without changing its signature."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -118,12 +119,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-a97e8",
-  "group": "D5",
+  "reviewer": "C-b4dc1",
+  "group": "D6",
   "result": "pass",
-  "landing": "20261020T051137-L-1575484",
+  "landing": "20261020T235552-L-1190254",
   "kind": "interface",
-  "note": "independent cc review: item etaleSheavesGsetsPoint proof (statement byte-identical) against node lem-exc-etale-sheaves-gsets-point; universe generalization max(u+1) v → max u v of 13 unclaimed supporting modules against the change record and the statement_change records of the nodes; all 16 delivered modules and the 5 outside direct importers compiled clean against the delivery; axioms propext/choice/Quot.sound only"
+  "note": "independent cc review: Withdrawn item stub + 3 node lean records vs upstream WeilConjectures.AlgebraicGeometry.FieldEquivariantGermsOnePoint source (verbatim); 2 adapted importers vs live (signatures identical, adaptations forced: import-swap-only original fails on universe max(u+1) v vs max u v); all compile, axioms clean"
  },
  "lean_audit": {
   "master": {
