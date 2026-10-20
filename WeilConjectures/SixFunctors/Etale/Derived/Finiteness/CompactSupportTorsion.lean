@@ -62,7 +62,7 @@ theorem isPerfect_compactlySupportedGlobalSections_of_nsmul_eq_zero (Λ : Type (
     ⟨⟨hbc, _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn hta⟩, hta⟩
   have hNL : N • 𝟙 L = 0 := by
     rw [← CategoryTheory.Functor.map_id, ← Functor.map_nsmul, hN, Functor.map_zero]
-  exact isPerfect_rightDerivedGlobalSections_of_isSepClosed
+  exact isPerfect_rightDerivedGlobalSections_of_isSepClosed _
     ⟨boundedConstructible_rightDerivedLowerStar _ c.g (𝟙 _) c.g (Category.comp_id _) N hNL hNk
       hL.1.1, _, _, torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing Λ c.g (𝟙 _) c.g
       (Category.comp_id _) d hd a b N hNL hNk hL.1.1 hL.2⟩

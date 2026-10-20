@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import WeilConjectures.CategoryTheory.DerivedCategory.CoproductsOfFiniteAmplitude
 
 /-!
 # Morphisms to an injective object in the derived category
