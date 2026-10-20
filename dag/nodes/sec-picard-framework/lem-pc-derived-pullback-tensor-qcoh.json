@@ -134,12 +134,13 @@
   "module": "Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh",
   "declaration": "AlgebraicGeometry.derivedPullback_tensor_preserve_QCoh",
   "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackTensorQCoh.lean",
-  "statement": "theorem derivedPullback_tensor_preserve_QCoh {X Y : Scheme.{uX}} (f : X ⟶ Y) [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings Y.toRingedSpace))] : (∀ E : schemeDerivedCategory Y, schemeDerivedQCohProperty Y E → schemeDerivedQCohProperty X ((derivedPullback f).obj E)) ∧ (∀ P N : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ, CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P → schemeDerivedQCohProperty X (DerivedCategory.Q.obj P) → schemeDerivedQCohProperty X (DerivedCategory.Q.obj N) → schemeDerivedQCohProperty X (DerivedCategory.Q.obj (CochainComplex.mapBifunctor P N (curriedTensor _))))",
+  "statement": "theorem derivedPullback_tensor_preserve_QCoh {X Y : Scheme.{uX}} (f : X ⟶ Y) [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings Y.toRingedSpace))] : (∀ E : schemeDerivedCategory Y, schemeDerivedQCohProperty Y E → schemeDerivedQCohProperty X ((derivedPullback f).obj E)) ∧ (∀ P N : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ, CochainComplex.IsKFlatTensor (R := X.sheaf) P → schemeDerivedQCohProperty X (DerivedCategory.Q.obj P) → schemeDerivedQCohProperty X (DerivedCategory.Q.obj N) → schemeDerivedQCohProperty X (DerivedCategory.Q.obj (CochainComplex.mapBifunctor P N (curriedTensor _))))",
   "branch": "sheaf-dag",
   "by": "C1",
   "date": "2026-10-11",
   "existing": false,
-  "fixed_by": "R-dpt1330"
+  "fixed_by": "R-dpt1330",
+  "note": "Restored after quarantine as a public re-export of the adopted source theorem. Same declaration, universes, and affine-local proof dependencies; IsKFlatTensor has the identical body to the former IsAcyclicTensorKFlat predicate. Sheaf module/file attachment retained."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -162,13 +163,13 @@
   }
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R1",
+  "reviewer": "C-3897f",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261012T053950-L-2644151",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T221330-L-4175236",
+  "kind": "proof",
+  "note": "independent cc review: re-export module + node lean.statement (IsKFlatTensor) with WeilConjectures source theorem, old IsAcyclicTensorKFlat signature (defeq, scratch-checked), node proof_deps vs the source proof, quarantine rework row"
  }
 }
