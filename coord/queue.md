@@ -1,20 +1,18 @@
 # Work queue
 
-102 items; claim with `tools/claim.py next <group> [--stage N]`.
+101 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (46 clusters, 2349 modules)
+## Rework: quarantined by the upstream sync (43 clusters, 2291 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
 | item (root) | modules | other roots | cause of the root |
 |---|---|---|---|
 | `Sheaf.AlgebraicGeometry.EllAdicBoundedTriangulated` | 1 |  | error: Sheaf/AlgebraicGeometry/EllAdicBoundedTriangulated.lean:84:33: error: Application type mismatch: The argument | R | has type | Sheaf (Scheme.ProEt.topolo |
-| `Sheaf.AlgebraicGeometry.HigherDirectImageRawDiagram` | 1 |  | error: Sheaf/AlgebraicGeometry/HigherDirectImageRawDiagram.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawTrianglePullback failed |
 | `Sheaf.Paper.CondensedFlatCoefficientCalculus` | 1 |  | error: Sheaf/Paper/CondensedFlatCoefficientCalculus.lean:6:0: error: object file '/home/ubuntu/weil-conjectures-sheaf/local/build/RW/Sheaf/UpstreamExtra/WeilCon |
 | `Sheaf.AlgebraicGeometry.StrictLocalMateContinuityPresentation` | 1 |  | error: Sheaf/AlgebraicGeometry/StrictLocalMateContinuityPresentation.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension fail |
 | `Sheaf.Paper.IntegralConstantModelHeartClosure` | 1 |  | error: Sheaf/Paper/IntegralConstantModelHeartClosure.lean:290:2: error: Tactic `generalize` failed: result is not type correct | @CategoryTheory.ObjectProperty. |
 | `Sheaf.AlgebraicGeometry.StalkFreeResidueCohomologyComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/StalkFreeResidueCohomologyComparison.lean:6:0: error: object file '/home/ubuntu/weil-conjectures-sheaf/local/build/RW/Sheaf/Algeb |
-| `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/Monoidal.lean:548:4: error: Type mismatch | isLeftDerivedFunctor₂_upperStar |
 | `Sheaf.AlgebraicGeometry.StrictLocalLocalizedHomGerm` | 1 |  | error: Sheaf/AlgebraicGeometry/StrictLocalLocalizedHomGerm.lean:57:6: error: Application type mismatch: The argument | ((Scheme.strictHenselizationStructuralMap |
 | `Sheaf.AlgebraicGeometry.QcoherentNormalizedComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/QcoherentNormalizedComparison.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality f |
 | `Sheaf.AlgebraicGeometry.QcoherentNormalizedPullbackSquare` | 1 |  | error: Sheaf/AlgebraicGeometry/QcoherentNormalizedPullbackSquare.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturali |
@@ -42,7 +40,6 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDescentRepresentative` | 1 |  | error: Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryDescentRepresentative.lean:51:10: error(lean.invalidField): Invalid field `IsAcyclicTensorKFlat`: The en |
 | `Sheaf.AlgebraicGeometry.CoherentFrobeniusPullback` | 1 |  | error: Sheaf/AlgebraicGeometry/CoherentFrobeniusPullback.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality faile |
 | `Sheaf.AlgebraicGeometry.EtaleGenericDirectImageExchange` | 1 |  | error: Sheaf/AlgebraicGeometry/EtaleGenericDirectImageExchange.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleAbelianCoefficientComparison fail |
-| `Sheaf.AlgebraicGeometry.HigherDirectImageRawAffineImageRep` | 1 |  | error: Sheaf/AlgebraicGeometry/HigherDirectImageRawAffineImageRep.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawTrianglePullback |
 | `Sheaf.AlgebraicGeometry.OpenPinnedSourceCounitTriangle` | 1 |  | error: Sheaf/AlgebraicGeometry/OpenPinnedSourceCounitTriangle.lean:56:17: error: failed to set `[local irreducible]`, `derivedPullback` is currently `[irreducib |
 | `Sheaf.Paper.IntegralReductionConservative` | 1 |  | error: Sheaf/Paper/IntegralReductionConservative.lean:55:2: error: Tactic `generalize` failed: result is not type correct | @CategoryTheory.ObjectProperty.IsClo |
 | `Sheaf.RingTheory.ResidueFieldProjectiveDimensionDepth` | 1 |  | error: Sheaf/RingTheory/ResidueFieldProjectiveDimensionDepth.lean:1:0: error: import WeilConjectures.RingTheory.GlobalDimension failed, environment already cont |
