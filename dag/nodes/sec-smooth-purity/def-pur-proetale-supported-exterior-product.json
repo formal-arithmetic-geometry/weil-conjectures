@@ -19,9 +19,31 @@
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-kunneth-supported.md",
   "place": "node lem-pur-kunneth-supported, order 1939"
  },
- "proof": [],
+ "proof": [
+  {
+   "text": "For elaboration of the derived functors, supportedSheaf_intColimitsGeneric proves existence of integer-indexed colimits of sheaves directly with Mathlib Sheaf.instHasColimitsOfShape. Register it only as a local instance. It replaces repeated general colimit-shrinking searches by a single proved proposition and introduces no mathematical choice or new data. The companion supportedSheaf_smallColimitsGeneric supplies all small-shaped colimits directly from Sheaf.instHasColimitsOfShape, so cochain tensor instances do not repeatedly shrink general colimit universes.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Auxiliary complex-tensor identity: supportedComplexTensorGeneric is the upstream curried tensor on cochain complexes, whose object is definitionally HomologicalComplex.tensorObj, exactly supportedTotalTensorGeneric. Reflexivity proves supportedComplexTensorGeneric_eq without using flat resolutions. Its existing flat-resolution parameter is retained for interface compatibility.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Auxiliary exactness of supportedCoefficients: first use the normalized ordinary supportedCoefficientAdjunction already stated in this node. Its left adjoint preserves colimits, hence finite colimits. Independently, constantSheaf preserves finite limits by the existing ConstantSheafOver instance, and lowerStar preserves finite limits as a right adjoint, so their composite preserves finite limits. This proves supportedCoefficients_exact from the existing ordinary-adjunction theorem without a second closed-direct-image exactness argument. The ordinary adjunction and its normalization remain an open named theorem, and its construction does not use supportedCoefficients_exact. Move the exactness declaration and its two instances after the ordinary adjunction so this dependency is acyclic. All signatures and definitions stay unchanged.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "worker",
+  "group": "W4",
+  "date": "2026-10-21",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-kunneth-supported.proof.md",
+  "place": "The supported-coefficient adjunction clause and the signed tensor convention. Partial stage-3 proof: the complex identity is proved by reflexivity, exactness follows from the existing stated ordinary adjunction plus left exactness, and the five original normalization/identification theorem holes remain unchanged."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -109,6 +131,8 @@
   "declarations": [
    "AlgebraicGeometry.ProEtale.supportedSheaf_isMonoidal",
    "AlgebraicGeometry.ProEtale.supportedSheaf_monoidalPreadditive",
+   "AlgebraicGeometry.ProEtale.supportedSheaf_smallColimitsGeneric",
+   "AlgebraicGeometry.ProEtale.supportedSheaf_intColimitsGeneric",
    "AlgebraicGeometry.ProEtale.supportedModuleSectionsToSections",
    "AlgebraicGeometry.ProEtale.supportedModuleSectionsι",
    "AlgebraicGeometry.ProEtale.supportedSheaf_isMonoidalGeneric",
@@ -181,5 +205,15 @@
   "group": "Q106",
   "result": "pass",
   "note": "Read the item node (7 steps, Q57's corrected adjunction-preserving uniqueness), the source place (blueprint lem-pur-kunneth-supported.proof.md para 4), all 18 stmt_dep lean records, and the reused declarations in SupportedExteriorProduct / ProEtaleSupportedExteriorProduct. Clause by clause: finite A in Type (u+1) ModuleCat (dependency convention, no restriction); smallEtaleTopology / ProEt.topology; unbounded DerivedCategory; separated finite-type X,Y over an algebraically closed k via LocallyOfFiniteType+QuasiCompact+IsSeparated; the recorded supportedProductImmersion; Q = actual cokernel of the j_! adjunct of the constant-pullback iso; E = Q[0] tensor-derived constant V with the recorded derivedTensor; conjuncts give the generator normalization, the sigma -> sigma(1 tensor v) ordinary bijection, compatibility iff b = comparison (identity on supportedSectionsDerived), the representative formula on every complex, and counit equality; i, j and h in both topologies; IsLocallyNoetherian derived from f, g and the product structure map. Edge cases A=0, C empty, C=T, T empty, non-flat, unbounded: ok. No hollow defs; sorry only in theorems; source and blueprint docstrings; statement verbatim; declarations complete. The 2-import dependency repair (duplicate upperStarIsoLowerStarInv) is a valid lean-only interface repair. Compile: the dependency compiled clean twice (54.2 s, 45.9 s); the item hit the hard 60 s cap in both attempts that reached it, under load 156-218 (CPU-starved, no errors output), so I relied on the delivery's clean 53.2 s / 45.1 s evidence."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261020T211848-L-3511552",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

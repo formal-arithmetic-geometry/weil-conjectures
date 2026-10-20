@@ -48,6 +48,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 
+
 /-!
 # The supported exterior product
 
@@ -63,6 +64,9 @@ adjunction and the coefficient tensor comparison specify the supported pairing.
 @[expose] public section
 
 set_option autoImplicit false
+
+-- Check proofs synchronously before the delivery appends its axiom probe.
+set_option Elab.async false
 
 universe u v
 
@@ -85,6 +89,29 @@ noncomputable instance supportedSheaf_monoidalPreadditive (A : Type (u + 1)) [Co
     (X : Scheme.{u}) : MonoidalPreadditive (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A))
       :=
   Sheaf.monoidalPreadditive
+
+/-- Small colimits of pro-etale sheaves, supplied once to the cochain tensor instances.
+Source: Mathlib sheaf colimits
+(blueprint: def-pur-proetale-supported-exterior-product). -/
+theorem supportedSheaf_smallColimitsGeneric
+    (C : Type v) [Category.{u + 1} C] [Abelian C]
+    [IsGrothendieckAbelian.{u + 1} C] (X : Scheme.{u}) :
+    HasColimitsOfSize.{0, 0} (Sheaf (Scheme.ProEt.topology X) C) :=
+  ⟨fun _ ↦ Sheaf.instHasColimitsOfShape⟩
+
+attribute [local instance] supportedSheaf_smallColimitsGeneric
+
+/-- Integer-indexed colimits of pro-etale sheaves, using the direct sheaf-colimit instance.
+This avoids repeatedly searching through general colimit-shrinking instances when deriving
+projection inverse images. Source: Mathlib sheaf colimits
+(blueprint: def-pur-proetale-supported-exterior-product). -/
+theorem supportedSheaf_intColimitsGeneric
+    (C : Type v) [Category.{u + 1} C] [Abelian C]
+    [IsGrothendieckAbelian.{u + 1} C] (X : Scheme.{u}) :
+    HasColimitsOfShape ℤ (Sheaf (Scheme.ProEt.topology X) C) :=
+  Sheaf.instHasColimitsOfShape
+
+attribute [local instance] supportedSheaf_intColimitsGeneric
 
 /-- The existing support kernel maps to evaluation on the terminal object.
 Source: blueprint kernel-of-restriction construction
@@ -164,6 +191,8 @@ noncomputable def supportedTotalTensorGeneric (X : Scheme.{u})
     (P Q : CochainComplex (Sheaf (Scheme.ProEt.topology X) C) ℤ) :=
   HomologicalComplex.tensorObj (C := Sheaf (Scheme.ProEt.topology X) C) (c := .up ℤ) P Q
 
+-- Retain the existing flat-resolution parameter for compatibility with callers.
+set_option linter.unusedSectionVars false in
 /-- The upstream complex tensor has the signed total complex as its object.
 Source: blueprint signed total construction (blueprint:
 def-pur-proetale-supported-exterior-product).
@@ -174,7 +203,7 @@ theorem supportedComplexTensorGeneric_eq (X : Scheme.{u})
     (P Q : CochainComplex (Sheaf (Scheme.ProEt.topology X) C) ℤ) :
     ((supportedComplexTensorGeneric C X).obj P).obj Q =
       supportedTotalTensorGeneric C X P Q := by
-  sorry
+  rfl
 
 /-- Localization comparison, retaining its canonical identification with the signed
  total tensor. Source: blueprint K-flat derivation (blueprint:
@@ -243,37 +272,6 @@ noncomputable instance supportedCoefficients_additive
   inferInstanceAs ((constantSheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} A) ⋙
     lowerStar (ModuleCat.{u + 1} A) i).Additive)
 
-/-- Exactness of closed supported coefficients.
-Source: blueprint `def-pur-supported-exterior-product`, closed-support construction
-(blueprint: def-pur-proetale-supported-exterior-product); Stacks Tag 09BM,
-proetale.tex, lemma-closed-immersion-complement-retrocompact-exact.
-Proof: the open complement is retrocompact in a locally Noetherian ambient scheme:
-its intersection with every affine open is quasi-compact. Work on these affine opens.
-There the support is cut out set-theoretically by finitely many functions.
-Topological invariance replaces its defining ideal by the ideal they generate;
-the finitely presented closed-immersion case gives exactness of direct image,
-as in Stacks Tag 09BM. Constant inverse image is exact. Their composite therefore
-preserves finite limits and finite colimits, also for the empty closed subscheme. -/
-theorem supportedCoefficients_exact (A : Type (u + 1)) [CommRing A] [Finite A]
-    {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] [IsLocallyNoetherian X] :
-    PreservesFiniteLimits (supportedCoefficients A i) ∧
-      PreservesFiniteColimits (supportedCoefficients A i) := by
-  sorry
-
-/-- The finite-limit instance from closed-support exactness. Source: blueprint
-`def-pur-supported-exterior-product` (blueprint: def-pur-proetale-supported-exterior-product). -/
-noncomputable instance supportedCoefficients_preservesFiniteLimits
-    (A : Type (u + 1)) [CommRing A] [Finite A] {Z X : Scheme.{u}}
-    (i : Z ⟶ X) [IsClosedImmersion i] [IsLocallyNoetherian X] :
-    PreservesFiniteLimits (supportedCoefficients A i) := (supportedCoefficients_exact A i).1
-
-/-- The finite-colimit instance from closed-support exactness. Source: blueprint
-`def-pur-supported-exterior-product` (blueprint: def-pur-proetale-supported-exterior-product). -/
-noncomputable instance supportedCoefficients_preservesFiniteColimits
-    (A : Type (u + 1)) [CommRing A] [Finite A] {Z X : Scheme.{u}}
-    (i : Z ⟶ X) [IsClosedImmersion i] [IsLocallyNoetherian X] :
-    PreservesFiniteColimits (supportedCoefficients A i) := (supportedCoefficients_exact A i).2
-
 /-- The ordinary adjunction, uniquely normalized by inclusion of the support kernel.
 Source: blueprint `def-pur-supported-exterior-product`, supported-section construction
 (blueprint: def-pur-proetale-supported-exterior-product).
@@ -301,6 +299,40 @@ noncomputable def supportedCoefficientAdjunction
     (i : Z ⟶ X) [IsClosedImmersion i] [IsLocallyNoetherian X] :
     supportedCoefficients A i ⊣ supportSections i A :=
   (exists_unique_supportedCoefficientAdjunction A i).choose
+
+/-- Exactness of closed supported coefficients.
+Source: blueprint `def-pur-supported-exterior-product`, closed-support construction
+(blueprint: def-pur-proetale-supported-exterior-product); Stacks Tag 09BM,
+proetale.tex, lemma-closed-immersion-complement-retrocompact-exact.
+Proof: the open complement is retrocompact in a locally Noetherian ambient scheme:
+its intersection with every affine open is quasi-compact. Work on these affine opens.
+There the support is cut out set-theoretically by finitely many functions.
+Topological invariance replaces its defining ideal by the ideal they generate;
+the finitely presented closed-immersion case gives exactness of direct image,
+as in Stacks Tag 09BM. Constant inverse image is exact. Their composite therefore
+preserves finite limits and finite colimits, also for the empty closed subscheme. -/
+theorem supportedCoefficients_exact (A : Type (u + 1)) [CommRing A] [Finite A]
+    {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] [IsLocallyNoetherian X] :
+    PreservesFiniteLimits (supportedCoefficients A i) ∧
+      PreservesFiniteColimits (supportedCoefficients A i) := by
+  have := (supportedCoefficientAdjunction A i).leftAdjoint_preservesColimits
+  exact ⟨inferInstanceAs (PreservesFiniteLimits
+    (constantSheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} A) ⋙
+      lowerStar (ModuleCat.{u + 1} A) i)), inferInstance⟩
+
+/-- The finite-limit instance from closed-support exactness. Source: blueprint
+`def-pur-supported-exterior-product` (blueprint: def-pur-proetale-supported-exterior-product). -/
+noncomputable instance supportedCoefficients_preservesFiniteLimits
+    (A : Type (u + 1)) [CommRing A] [Finite A] {Z X : Scheme.{u}}
+    (i : Z ⟶ X) [IsClosedImmersion i] [IsLocallyNoetherian X] :
+    PreservesFiniteLimits (supportedCoefficients A i) := (supportedCoefficients_exact A i).1
+
+/-- The finite-colimit instance from closed-support exactness. Source: blueprint
+`def-pur-supported-exterior-product` (blueprint: def-pur-proetale-supported-exterior-product). -/
+noncomputable instance supportedCoefficients_preservesFiniteColimits
+    (A : Type (u + 1)) [CommRing A] [Finite A] {Z X : Scheme.{u}}
+    (i : Z ⟶ X) [IsClosedImmersion i] [IsLocallyNoetherian X] :
+    PreservesFiniteColimits (supportedCoefficients A i) := (supportedCoefficients_exact A i).2
 
 /-- The unbounded support functor, extending the bounded-below injective construction.
 Source: blueprint `def-pur-supported-exterior-product`, derived support resolutions
@@ -685,3 +717,4 @@ noncomputable def supportedExteriorProductOverField
   supportedExteriorProduct A f g i j K L
 
 end AlgebraicGeometry.ProEtale
+
