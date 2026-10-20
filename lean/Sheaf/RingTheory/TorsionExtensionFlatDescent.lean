@@ -8,8 +8,8 @@ module
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.LinearAlgebra.TensorProduct.Tower
-import WeilConjectures.RingTheory.CyclicExtensionFlatDescent
-import Sheaf.RingTheory.DirectSumExtensionAssembly
+import Sheaf.RingTheory.CyclicExtensionFlatDescent
+import WeilConjectures.RingTheory.DirectSumExtensionAssembly
 import WeilConjectures.RingTheory.TorsionCyclicPresentation
 import WeilConjectures.RingTheory.TorsionHomFlatComparison
 
