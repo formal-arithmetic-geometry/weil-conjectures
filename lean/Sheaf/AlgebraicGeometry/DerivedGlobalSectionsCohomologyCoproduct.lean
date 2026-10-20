@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import Mathlib.Algebra.DirectSum.Basic
 import Sheaf.AlgebraicGeometry.DerivedGlobalSectionsPreservesCoproducts
-import Sheaf.CategoryTheory.DerivedModuleHomologyCoproduct
+import WeilConjectures.CategoryTheory.DerivedModuleHomologyCoproduct
 import Mathlib.Algebra.Category.ModuleCat.Products
 
 /-! # Zeroth derived global sections of a coproduct

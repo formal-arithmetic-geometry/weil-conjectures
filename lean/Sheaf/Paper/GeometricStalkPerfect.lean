@@ -23,7 +23,7 @@ import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import Sheaf.AlgebraicGeometry.EtaleStalkTensorScalar
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Sheaf.CategoryTheory.Triangulated.DerivedLimitProducts
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
@@ -49,8 +49,6 @@ import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.Paper.SfIntegralConstructible
 import Sheaf.Paper.SfRationalizationKaroubi
-import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 /-!
 # Perfect geometric stalks
 

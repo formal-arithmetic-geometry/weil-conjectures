@@ -9,7 +9,7 @@ public import Sheaf.Paper.AdicCoefficientDatum
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.CategoryTheory.Triangulated.DerivedLimitProducts
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.Algebra.Homology.HomologicalComplexLimits

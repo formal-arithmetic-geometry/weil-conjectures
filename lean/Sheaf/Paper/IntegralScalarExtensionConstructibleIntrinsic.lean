@@ -27,7 +27,7 @@ import Sheaf.Paper.IntegralScalarExtensionWellDefined
 import Sheaf.Paper.NormalizedDVREffectivity
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitOfUniverses
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.CategoryTheory.Triangulated.DerivedLimitProducts
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic

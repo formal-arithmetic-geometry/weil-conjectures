@@ -102,13 +102,14 @@
  "unit": "sk-thm-curveestimate",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Topology.ConstantSubsheafLowerLayerGenerator",
-  "file": "lean/Sheaf/Topology/ConstantSubsheafLowerLayerGenerator.lean",
+  "module": "WeilConjectures.Topology.ConstantSubsheafLowerLayerGenerator",
+  "file": "lean/WeilConjectures/Topology/ConstantSubsheafLowerLayerGenerator.lean",
   "declaration": "TopCat.Sheaf.constantSubsheaf_lower_layer_generator",
   "statement": "theorem constantSubsheaf_lower_layer_generator\n    (X : TopCat.{u})\n    (hqc : ∀ U V : Opens X, IsCompact (U : Set X) → IsCompact (V : Set X) →\n      IsCompact ((U ⊓ V : Opens X) : Set X))\n    (K C : Sheaf AddCommGrpCat X)\n    (ι : K ⟶ C)\n    [Mono ι]\n    (hC : Nonempty (C ≅\n      (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj\n        (AddCommGrpCat.of (ULift.{u} ℤ))))\n    (hgen : ∃ (n : ℕ) (U : Fin n → Opens X)\n      (_ : ∀ i, IsCompact ((U i : Opens X) : Set X)),\n      ∃ g : (∐ fun i => (abelianOpenExtensionByZero (U i)).obj\n        ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (U i)))\n          AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) ⟶ K, Epi g)\n    (e : ∀ x : X, TopCat.Presheaf.stalk C.obj x ≅ AddCommGrpCat.of (ULift.{u} ℤ))\n    (b : ℕ)\n    (hb : ∀ x : X, ∃ a : ℕ, a ≤ b + 1 ∧\n      Set.range (fun t : ToType (TopCat.Presheaf.stalk K.obj x) ↦\n        (e x).hom ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map ι.hom t)) =\n      Set.range (fun z : ULift.{u} ℤ ↦ (a : ℤ) • z)) :\n    ∃ (L : Sheaf AddCommGrpCat X) (l : L ⟶ K), Mono l ∧\n      (∃ (n : ℕ) (U : Fin n → Opens X)\n      (_ : ∀ i, IsCompact ((U i : Opens X) : Set X)),\n      ∃ g : (∐ fun i => (abelianOpenExtensionByZero (U i)).obj\n        ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (U i)))\n          AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) ⟶ L, Epi g) ∧\n      (∀ x : X, ∃ a : ℕ, a ≤ b ∧\n      Set.range (fun t : ToType (TopCat.Presheaf.stalk L.obj x) ↦\n        (e x).hom ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map (l ≫ ι).hom t)) =\n      Set.range (fun z : ULift.{u} ℤ ↦ (a : ℤ) • z)) ∧\n      ∃ (U V : Opens X), IsCompact (U : Set X) ∧ IsCompact (V : Set X) ∧ V ≤ U ∧\n        ∃ q : (abelianOpenExtensionByZero U).obj\n          ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj U))\n            AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) ⟶ cokernel l,\n          (∀ x : X, x ∈ V ∨ x ∉ U →\n            IsZero (TopCat.Presheaf.stalk (cokernel l).obj x)) ∧\n          (∀ x : X, x ∈ U → x ∉ V →\n            IsIso ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map q.hom))",
   "branch": "sheaf-dag",
   "by": "A2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.Topology.ConstantSubsheafLowerLayerGenerator; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

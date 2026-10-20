@@ -13,7 +13,7 @@ import Sheaf.CategoryTheory.SequentialTowerEvaluationFull
 import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.CategoryTheory.Triangulated.DerivedLimitProducts
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
@@ -29,7 +29,6 @@ import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficient
 import Sheaf.Paper.ConstantCompletionEquivalence
 import Sheaf.Paper.DerivedCompleteOnSlices
 import Sheaf.Paper.PbcRoosTriangle
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-! # Effectivity of normalized DVR towers
