@@ -10,6 +10,10 @@ public import Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus
 public import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 public import Mathlib.CategoryTheory.Adjunction.CompositionIso
 import Mathlib.CategoryTheory.Sites.Equivalence
+import Mathlib.CategoryTheory.Adjunction.Additive
+import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+import Mathlib.CategoryTheory.Adjunction.AdjointFunctorTheorems
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Coseparator
 
 /-!
 # Geometric operations for varying constant coefficient rings
@@ -32,6 +36,8 @@ unit-preserving adjoint comparisons.
 
 @[expose] public noncomputable section
 
+
+
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
@@ -43,6 +49,9 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open WeilConjectures WeilConjectures.SemilinearSections
 
 namespace AlgebraicGeometry.ProEtale.VaryingRing
+
+attribute [local irreducible] Functor.leftAdjoint Functor.mapDerivedCategory
+  Functor.rightDerivedFunctor
 
 variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n)
 
@@ -204,10 +213,6 @@ Source: Stacks 03DA; Zheng 4.1 (blueprint: def-sp-varying-ring-operations). -/
 def push {X Y : Scheme.{u}} (f : X ⟶ Y) : Modules R φ X ⥤ Modules R φ Y :=
   SheafOfModules.pushforward (ringMap R φ f)
 
-private abbrev modelTopology (X : Scheme.{u}) :=
-  (AsSmall.down : AsSmall.{u + 1} (ℕ × X.ProEt) ⥤ ℕ × X.ProEt).inducedTopology
-    (coefficientSequenceTopology (Scheme.ProEt.topology X))
-
 private abbrev sequenceRing (X : Scheme.{u}) :=
   ring.{u + 1, u, u + 1} (coefficientSequenceTopology (Scheme.ProEt.topology X))
     (systemRing.{u + 1, u, u + 1} (Scheme.ProEt.topology X) (coefficients R X)
@@ -224,31 +229,71 @@ private theorem sequenceRing_map_vertical (X : Scheme.{u}) (n : ℕ)
         (coefficients R X n).obj.map a.op) = _
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
 
-private def sequenceModelEquivalence (X : Scheme.{u}) :
+private def smallModelEquivalence {C : Type (u + 1)} [Category.{u} C]
+    (J : GrothendieckTopology C) (A : Sheaf J RingCat.{u + 1}) :
     SheafOfModules.{u + 1}
-      (((AsSmall.down : AsSmall.{u + 1} (ℕ × X.ProEt) ⥤ ℕ × X.ProEt).sheafPushforwardContinuous
-         RingCat.{u + 1} (modelTopology X)
-          (coefficientSequenceTopology (Scheme.ProEt.topology X))).obj (sequenceRing R φ X)) ≌
-      Modules R φ X := by
-  let A := sequenceRing R φ X
-  let B := ((AsSmall.down : AsSmall.{u + 1} (ℕ × X.ProEt) ⥤ ℕ × X.ProEt).sheafPushforwardContinuous
-     RingCat.{u + 1} (modelTopology X)
-      (coefficientSequenceTopology (Scheme.ProEt.topology X))).obj A
-  have : (AsSmall.equiv.{u, u + 1, u + 1} (C := ℕ × X.ProEt)).functor.IsContinuous
-      (coefficientSequenceTopology (Scheme.ProEt.topology X)) (modelTopology X) :=
-    inferInstanceAs ((AsSmall.equiv.{u, u + 1, u + 1} (C := ℕ × X.ProEt)).functor.IsContinuous
-      (coefficientSequenceTopology (Scheme.ProEt.topology X))
-      ((AsSmall.equiv.{u, u + 1, u + 1} (C := ℕ × X.ProEt)).inverse.inducedTopology
-        (coefficientSequenceTopology (Scheme.ProEt.topology X))))
-  have : (AsSmall.equiv.{u, u + 1, u + 1} (C := ℕ × X.ProEt)).inverse.IsContinuous
-      (modelTopology X) (coefficientSequenceTopology (Scheme.ProEt.topology X)) := by
-    change AsSmall.down.IsContinuous (modelTopology X)
-      (coefficientSequenceTopology (Scheme.ProEt.topology X))
+      (((AsSmall.down : AsSmall.{u + 1} C ⥤ C).sheafPushforwardContinuous
+        RingCat.{u + 1} (AsSmall.down.inducedTopology J) J).obj A) ≌
+      SheafOfModules.{u + 1} A := by
+  let K := (AsSmall.down : AsSmall.{u + 1} C ⥤ C).inducedTopology J
+  let B := ((AsSmall.down : AsSmall.{u + 1} C ⥤ C).sheafPushforwardContinuous
+    RingCat.{u + 1} K J).obj A
+  have : (AsSmall.equiv.{u, u + 1, u + 1} (C := C)).functor.IsContinuous J K :=
+    inferInstanceAs ((AsSmall.equiv.{u, u + 1, u + 1} (C := C)).functor.IsContinuous
+      J ((AsSmall.equiv.{u, u + 1, u + 1} (C := C)).inverse.inducedTopology J))
+  have : (AsSmall.equiv.{u, u + 1, u + 1} (C := C)).inverse.IsContinuous K J := by
+    change AsSmall.down.IsContinuous K J
     infer_instance
   exact SheafOfModules.pushforwardPushforwardEquivalence
-    (AsSmall.equiv.{u, u + 1, u + 1} (C := ℕ × X.ProEt)) (𝟙 A) (𝟙 B)
-    (by ext U; dsimp [AsSmall.equiv]; erw [B.obj.map_id]; rfl)
-    (by ext U; dsimp [AsSmall.equiv]; erw [A.obj.map_id]; rfl)
+    (AsSmall.equiv.{u, u + 1, u + 1} (C := C)) (𝟙 A) (𝟙 B)
+    (by
+      apply NatTrans.ext
+      funext U
+      change B.obj.map (𝟙 U) = 𝟙 _ ≫ 𝟙 _
+      rw [CategoryTheory.Functor.map_id, Category.id_comp])
+    (by
+      apply NatTrans.ext
+      funext U
+      change (𝟙 _ ≫ 𝟙 _) ≫ A.obj.map (𝟙 U) = 𝟙 _
+      rw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp])
+
+private theorem largePush_isRightAdjoint
+    {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
+    (JC : GrothendieckTopology C) (JD : GrothendieckTopology D)
+    (F : C ⥤ D) [F.IsContinuous JC JD]
+    (A : Sheaf JC RingCat.{u + 1}) (B : Sheaf JD RingCat.{u + 1})
+    (a : A ⟶ (F.sheafPushforwardContinuous RingCat JC JD).obj B) :
+    (SheafOfModules.pushforward.{u + 1} a).IsRightAdjoint := by
+  let KC := (AsSmall.down : AsSmall.{u + 1} C ⥤ C).inducedTopology JC
+  let KD := (AsSmall.down : AsSmall.{u + 1} D ⥤ D).inducedTopology JD
+  have : (AsSmall.up : D ⥤ AsSmall.{u + 1} D).IsContinuous JD KD :=
+    inferInstanceAs ((AsSmall.equiv.{u, u + 1, u + 1} (C := D)).functor.IsContinuous
+      JD ((AsSmall.equiv.{u, u + 1, u + 1} (C := D)).inverse.inducedTopology JD))
+  let G : AsSmall.{u + 1} C ⥤ AsSmall.{u + 1} D :=
+    AsSmall.down ⋙ F ⋙ AsSmall.up
+  have := Functor.isContinuous_comp F (AsSmall.up : D ⥤ AsSmall.{u + 1} D) JC JD KD
+  have : G.IsContinuous KC KD :=
+    Functor.isContinuous_comp AsSmall.down (F ⋙ AsSmall.up) KC JC KD
+  let AC := ((AsSmall.down : AsSmall.{u + 1} C ⥤ C).sheafPushforwardContinuous
+    RingCat.{u + 1} KC JC).obj A
+  let BD := ((AsSmall.down : AsSmall.{u + 1} D ⥤ D).sheafPushforwardContinuous
+    RingCat.{u + 1} KD JD).obj B
+  let b : AC ⟶ (G.sheafPushforwardContinuous RingCat.{u + 1} KC KD).obj BD :=
+    ⟨Functor.whiskerLeft AsSmall.down.op a.hom⟩
+  let eD := smallModelEquivalence JD B
+  let eC := smallModelEquivalence JC A
+  let adj := eC.symm.toAdjunction.comp
+    ((SheafOfModules.pullbackPushforwardAdjunction b).comp eD.toAdjunction)
+  refine (adj.ofNatIsoRight ?_).isRightAdjoint
+  refine NatIso.ofComponents (fun M ↦ ?_) ?_
+  · apply (SheafOfModules.fullyFaithfulForget _).preimageIso
+    dsimp only [eD, eC, smallModelEquivalence]
+    exact PresheafOfModules.isoMk (fun U ↦ Iso.refl _) (by intros; rfl)
+  · intro M N c
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro U
+    rfl
 
 /-- Existence of inverse image as the left adjoint of the actual section functor.
 Source: Stacks 03EK; Zheng 4.1 (blueprint: def-sp-varying-ring-operations).
@@ -257,42 +302,10 @@ Constant sheaves pull back to the same constants, compatibly with φ. Thus this
 module pullback is the componentwise inverse image and has the usual adjunction. -/
 theorem push_isRightAdjoint {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (push R φ f).IsRightAdjoint := by
-  let JX := coefficientSequenceTopology (Scheme.ProEt.topology X)
-  let JY := coefficientSequenceTopology (Scheme.ProEt.topology Y)
-  have : (AsSmall.up : ℕ × X.ProEt ⥤ AsSmall.{u + 1} (ℕ × X.ProEt)).IsContinuous
-      JX (modelTopology X) :=
-    inferInstanceAs ((AsSmall.equiv.{u, u + 1, u + 1} (C := ℕ × X.ProEt)).functor.IsContinuous
-       JX ((AsSmall.equiv.{u, u + 1, u + 1} (C := ℕ × X.ProEt)).inverse.inducedTopology JX))
-  let F : AsSmall.{u + 1} (ℕ × Y.ProEt) ⥤ AsSmall.{u + 1} (ℕ × X.ProEt) :=
-    AsSmall.down ⋙ baseChange f ⋙ AsSmall.up
-  have := Functor.isContinuous_comp (baseChange f)
-    (AsSmall.up : ℕ × X.ProEt ⥤ AsSmall.{u + 1} (ℕ × X.ProEt))
-    JY JX (modelTopology X)
-  have : F.IsContinuous (modelTopology Y) (modelTopology X) :=
-    Functor.isContinuous_comp AsSmall.down (baseChange f ⋙ AsSmall.up)
-      (modelTopology Y) JY (modelTopology X)
-  let SX := ((AsSmall.down : AsSmall.{u + 1} (ℕ × X.ProEt) ⥤ ℕ × X.ProEt).sheafPushforwardContinuous
-     RingCat.{u + 1} (modelTopology X) JX).obj (sequenceRing R φ X)
-  let SY := ((AsSmall.down : AsSmall.{u + 1} (ℕ × Y.ProEt) ⥤ ℕ × Y.ProEt).sheafPushforwardContinuous
-     RingCat.{u + 1} (modelTopology Y) JY).obj (sequenceRing R φ Y)
-  let a : SY ⟶ (F.sheafPushforwardContinuous RingCat.{u + 1}
-      (modelTopology Y) (modelTopology X)).obj SX :=
-    ⟨Functor.whiskerLeft AsSmall.down.op (ringMap R φ f).hom⟩
-  let eX := sequenceModelEquivalence R φ X
-  let eY := sequenceModelEquivalence R φ Y
-  let adj := eY.symm.toAdjunction.comp
-    ((SheafOfModules.pullbackPushforwardAdjunction a).comp eX.toAdjunction)
-  refine (adj.ofNatIsoRight ?_).isRightAdjoint
-  refine NatIso.ofComponents (fun M ↦ ?_) ?_
-  · apply (SheafOfModules.fullyFaithfulForget _).preimageIso
-    dsimp only [eX, eY, sequenceModelEquivalence]
-    exact PresheafOfModules.isoMk (fun U ↦ Iso.refl _) (by intros; rfl)
-  · intro M N b
-    apply SheafOfModules.hom_ext
-    apply PresheafOfModules.hom_ext
-    intro U
-    rfl
-
+  exact largePush_isRightAdjoint (C := ℕ × Y.ProEt) (D := ℕ × X.ProEt)
+    (coefficientSequenceTopology (Scheme.ProEt.topology Y))
+    (coefficientSequenceTopology (Scheme.ProEt.topology X)) (baseChange f)
+    (sequenceRing R φ Y) (sequenceRing R φ X) (ringMap R φ f)
 
 attribute [instance] push_isRightAdjoint
 
@@ -304,16 +317,6 @@ abbrev pull {X Y : Scheme.{u}} (f : X ⟶ Y) := (push R φ f).leftAdjoint
 Source: Stacks 03EK (blueprint: def-sp-varying-ring-operations). -/
 def moduleAdj {X Y : Scheme.{u}} (f : X ⟶ Y) : pull R φ f ⊣ push R φ f :=
   Adjunction.ofIsRightAdjoint _
-
-/-- Inverse image is additive and exact on all systems.
-Source: Zheng 4.1; Stacks 03EK (blueprint: def-sp-varying-ring-operations).
-Proof: the left adjoint is canonically the componentwise abelian inverse image.
-Kernels and sheafified cokernels are componentwise; inverse image preserves both.
-Addition is inherited from abelian inverse image. No flatness of φ is used. -/
-theorem pull_exact {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (pull R φ f).Additive ∧ PreservesFiniteLimits (pull R φ f) ∧
-      PreservesFiniteColimits (pull R φ f) := by
-  sorry
 
 /-- Direct image is additive on all section modules.
 Source: Stacks 03DA (blueprint: def-sp-varying-ring-operations).
@@ -327,6 +330,329 @@ theorem push_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
   rfl
 
 attribute [instance] push_additive
+
+private theorem towerEvaluation_isRightAdjoint
+    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
+    (J : GrothendieckTopology C) (A : ℕ → Sheaf J CommRingCat.{u + 1})
+    (α : ∀ n, A (n + 1) ⟶ A n) (n : ℕ) :
+    (SemilinearSections.evaluation.{u + 1, u, u + 1} J A α n).IsRightAdjoint := by
+  let := evaluationContinuous.{u + 1, u, u + 1} J n
+  exact largePush_isRightAdjoint J (coefficientSequenceTopology J) (Prod.sectR n C)
+    (ring.{u + 1, u, u + 1} J (A n))
+    (ring.{u + 1, u, u + 1} (coefficientSequenceTopology J)
+      (systemRing.{u + 1, u, u + 1} J A α))
+    (eqToHom (evaluation_ring.{u + 1, u, u + 1} J A α n).symm)
+
+private theorem preservesLimits_underlyingEvaluation
+    {M : Type (u + 2)} [Category.{u + 1} M]
+    {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    (F : C ⥤ D) [F.IsContinuous J K]
+    {A : Sheaf J RingCat.{u + 1}} {B : Sheaf K RingCat.{u + 1}}
+    (a : A ⟶ (F.sheafPushforwardContinuous RingCat.{u + 1} J K).obj B)
+    (T : M ⥤ SheafOfModules.{u + 1} B)
+    (h : PreservesLimits (T ⋙ SheafOfModules.pushforward a)) (U : Cᵒᵖ) :
+    PreservesLimits
+      ((T ⋙ (SheafOfModules.forget B ⋙ PresheafOfModules.toPresheaf B.obj)) ⋙
+        (CategoryTheory.evaluation Dᵒᵖ AddCommGrpCat.{u + 1}).obj (F.op.obj U)) := by
+  let := h
+  have : PreservesLimits
+      (((T ⋙ SheafOfModules.pushforward a) ⋙
+        (SheafOfModules.forget A ⋙ PresheafOfModules.toPresheaf A.obj)) ⋙
+        (CategoryTheory.evaluation Cᵒᵖ AddCommGrpCat.{u + 1}).obj U) := by
+    infer_instance
+  exact this
+
+private theorem towerFunctor_preservesLimits
+    {M : Type (u + 2)} [Category.{u + 1} M]
+    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
+    (J : GrothendieckTopology C) (A : ℕ → Sheaf J CommRingCat.{u + 1})
+    (α : ∀ n, A (n + 1) ⟶ A n)
+    (F : M ⥤ Systems.{u + 1, u, u + 1} J A α)
+    (H : ∀ n, M ⥤ SemilinearSections.Mod.{u + 1, u, u + 1} J (A n))
+    [∀ n, PreservesLimits (H n)]
+    (e : ∀ n, F ⋙ SemilinearSections.evaluation.{u + 1, u, u + 1} J A α n ≅ H n) :
+    PreservesLimits F := by
+  let T : Systems.{u + 1, u, u + 1} J A α ⥤
+      (ℕ × C)ᵒᵖ ⥤ AddCommGrpCat.{u + 1} :=
+    SheafOfModules.forget _ ⋙ PresheafOfModules.toPresheaf _
+  have : ReflectsLimits T := reflectsLimits_of_reflectsIsomorphisms
+  have : PreservesLimits (F ⋙ T) := by
+    apply preservesLimits_of_evaluation
+    intro V
+    have hEval : PreservesLimits (F ⋙
+        SemilinearSections.evaluation.{u + 1, u, u + 1} J A α V.unop.1) :=
+      preservesLimits_of_natIso (e V.unop.1).symm
+    let := evaluationContinuous.{u + 1, u, u + 1} J V.unop.1
+    exact preservesLimits_underlyingEvaluation
+      (M := M) (C := C) (D := ℕ × C) (J := J) (K := coefficientSequenceTopology J)
+      (A := ring.{u + 1, u, u + 1} J (A V.unop.1))
+      (B := ring.{u + 1, u, u + 1} (coefficientSequenceTopology J)
+        (systemRing.{u + 1, u, u + 1} J A α))
+      (Prod.sectR V.unop.1 C) (eqToHom (evaluation_ring.{u + 1, u, u + 1} J A α V.unop.1).symm)
+      F hEval (op V.unop.2)
+  exact preservesLimits_of_reflects_of_preserves F T
+
+/-- Exact ordinary evaluation of a semilinear system.
+Source: Zheng 4.1 (blueprint: def-sp-varying-ring-operations). -/
+abbrev eval (X : Scheme.{u}) (n : ℕ) :
+    Modules R φ X ⥤ StrictTower.Modules (R n) X :=
+  SemilinearSections.evaluation.{u + 1, u, u + 1} (Scheme.ProEt.topology X) (coefficients R X)
+    (coefficientTransition R φ X) n
+
+private theorem moduleFunctorIso_ext
+    {M : Type (u + 2)} [Category.{u + 1} M]
+    {C : Type (u + 1)} [Category.{u} C] {J : GrothendieckTopology C}
+    {A : Sheaf J RingCat.{u + 1}} {F H : M ⥤ SheafOfModules.{u + 1} A}
+    (d e : F ≅ H)
+    (h : ∀ (N : M) (U : Cᵒᵖ) (x : (F.obj N).val.obj U),
+      (d.hom.app N).val.app U x = (e.hom.app N).val.app U x) : d = e := by
+  apply Iso.ext
+  apply NatTrans.ext
+  funext N
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  ext x
+  exact h N U x
+
+private theorem sequencePushforwardEvaluation
+    {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
+    (J : GrothendieckTopology C) (K : GrothendieckTopology D)
+    (F : C ⥤ D) [F.IsContinuous J K]
+    [((𝟭 ℕ).prod F).IsContinuous (coefficientSequenceTopology J)
+      (coefficientSequenceTopology K)] (n : ℕ)
+    [(Prod.sectR n C).IsContinuous J (coefficientSequenceTopology J)]
+    [(Prod.sectR n D).IsContinuous K (coefficientSequenceTopology K)]
+    {A : Sheaf (coefficientSequenceTopology J) RingCat.{u + 1}}
+    {B : Sheaf (coefficientSequenceTopology K) RingCat.{u + 1}}
+    {S : Sheaf J RingCat.{u + 1}} {T : Sheaf K RingCat.{u + 1}}
+    (a : S ⟶ ((Prod.sectR n C).sheafPushforwardContinuous RingCat.{u + 1}
+      J (coefficientSequenceTopology J)).obj A)
+    (b : T ⟶ ((Prod.sectR n D).sheafPushforwardContinuous RingCat.{u + 1}
+      K (coefficientSequenceTopology K)).obj B)
+    (φ : A ⟶ (((𝟭 ℕ).prod F).sheafPushforwardContinuous RingCat.{u + 1}
+      (coefficientSequenceTopology J) (coefficientSequenceTopology K)).obj B)
+    (ψ : S ⟶ (F.sheafPushforwardContinuous RingCat.{u + 1} J K).obj T)
+    (h : ∀ U : Cᵒᵖ,
+      a.hom.app U ≫ φ.hom.app (op (n, U.unop)) =
+        ψ.hom.app U ≫ b.hom.app (F.op.obj U)) :
+    ∃! d : SheafOfModules.pushforward.{u + 1} φ ⋙ SheafOfModules.pushforward a ≅
+        SheafOfModules.pushforward b ⋙ SheafOfModules.pushforward ψ,
+      ∀ (N : SheafOfModules.{u + 1} B) (U : C)
+        (x : ((SheafOfModules.pushforward φ).obj N).val.obj (op (n, U))),
+        (d.hom.app N).val.app (op U) x = x := by
+  have := Functor.isContinuous_comp (Prod.sectR n C) ((𝟭 ℕ).prod F)
+    J (coefficientSequenceTopology J) (coefficientSequenceTopology K)
+  have := Functor.isContinuous_comp F (Prod.sectR n D)
+    J K (coefficientSequenceTopology K)
+  have he : a ≫ ((Prod.sectR n C).sheafPushforwardContinuous RingCat.{u + 1}
+      J (coefficientSequenceTopology J)).map φ =
+      ψ ≫ (F.sheafPushforwardContinuous RingCat.{u + 1} J K).map b := by
+    apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext U
+    exact h U
+  let d : SheafOfModules.pushforward.{u + 1} φ ⋙ SheafOfModules.pushforward a ≅
+      SheafOfModules.pushforward b ⋙ SheafOfModules.pushforward ψ :=
+    SheafOfModules.pushforwardComp a φ ≪≫ SheafOfModules.pushforwardCongr he ≪≫
+      (SheafOfModules.pushforwardComp ψ b).symm
+  refine ⟨d, fun _ _ _ ↦ rfl, ?_⟩
+  intro d' hd'
+  apply moduleFunctorIso_ext d' d
+  intro N U x
+  exact hd' N U.unop x
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem towerPushforwardEvaluation
+    {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
+    [EssentiallySmall.{u + 1} C] [EssentiallySmall.{u + 1} D]
+    (J : GrothendieckTopology C) (K : GrothendieckTopology D)
+    (F : C ⥤ D) [F.IsContinuous J K]
+    [((𝟭 ℕ).prod F).IsContinuous (coefficientSequenceTopology J)
+      (coefficientSequenceTopology K)]
+    (A : ℕ → Sheaf J CommRingCat.{u + 1}) (α : ∀ n, A (n + 1) ⟶ A n)
+    (B : ℕ → Sheaf K CommRingCat.{u + 1}) (β : ∀ n, B (n + 1) ⟶ B n) (n : ℕ)
+    (φ : ring.{u + 1, u, u + 1} (coefficientSequenceTopology J)
+        (systemRing.{u + 1, u, u + 1} J A α) ⟶
+      (((𝟭 ℕ).prod F).sheafPushforwardContinuous RingCat.{u + 1}
+        (coefficientSequenceTopology J) (coefficientSequenceTopology K)).obj
+          (ring.{u + 1, u, u + 1} (coefficientSequenceTopology K)
+            (systemRing.{u + 1, u, u + 1} K B β)))
+    (ψ : ring.{u + 1, u, u + 1} J (A n) ⟶
+      (F.sheafPushforwardContinuous RingCat.{u + 1} J K).obj
+        (ring.{u + 1, u, u + 1} K (B n)))
+    (h : ∀ U : Cᵒᵖ, φ.hom.app (op (n, U.unop)) = ψ.hom.app U) :
+    ∃! d : SheafOfModules.pushforward.{u + 1} φ ⋙
+        SemilinearSections.evaluation.{u + 1, u, u + 1} J A α n ≅
+      SemilinearSections.evaluation.{u + 1, u, u + 1} K B β n ⋙
+        SheafOfModules.pushforward ψ,
+      ∀ (N : Systems.{u + 1, u, u + 1} K B β) (U : C)
+        (x : ((SheafOfModules.pushforward φ).obj N).val.obj (op (n, U))),
+        (d.hom.app N).val.app (op U) x = x := by
+  let := evaluationContinuous.{u + 1, u, u + 1} J n
+  let := evaluationContinuous.{u + 1, u, u + 1} K n
+  let a := eqToHom (evaluation_ring.{u + 1, u, u + 1} J A α n).symm
+  let b := eqToHom (evaluation_ring.{u + 1, u, u + 1} K B β n).symm
+  dsimp only [SemilinearSections.evaluation]
+  exact sequencePushforwardEvaluation (C := C) (D := D)
+    (A := ring.{u + 1, u, u + 1} (coefficientSequenceTopology J)
+      (systemRing.{u + 1, u, u + 1} J A α))
+    (B := ring.{u + 1, u, u + 1} (coefficientSequenceTopology K)
+      (systemRing.{u + 1, u, u + 1} K B β))
+    (S := ring.{u + 1, u, u + 1} J (A n))
+    (T := ring.{u + 1, u, u + 1} K (B n)) J K F n a b φ ψ (by
+    intro U
+    have ha : a.hom.app U = 𝟙 _ := by
+      dsimp only [a]
+      rw [ObjectProperty.eqToHom_hom, eqToHom_app]
+      rfl
+    have hb : b.hom.app (F.op.obj U) = 𝟙 _ := by
+      dsimp only [b]
+      rw [ObjectProperty.eqToHom_hom, eqToHom_app]
+      rfl
+    rw [ha, hb]
+    erw [Category.id_comp, Category.comp_id]
+    exact h U
+  )
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+set_option maxHeartbeats 800000 in
+-- Elaborating the section-carrier normalization unfolds both continuous module functors.
+/-- Ordinary pushforward evaluation is identity on every section carrier.
+Source: Zheng 4.1 (blueprint: def-sp-varying-ring-operations).
+Proof: both sides have sections N_n(H ×_Y X), maps induced by the same restrictions,
+and the same constant scalar map. The identity is linear and natural. Equality on
+all sections proves uniqueness. -/
+theorem moduleEvalP_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
+    ∃! d : push R φ f ⋙ eval R φ Y n ≅
+        eval R φ X n ⋙ StrictTower.moduleDirectImage (R n) f,
+      ∀ (N : Modules R φ X) (U : Y.ProEt)
+        (x : ((push R φ f).obj N).val.obj (op (n, U))),
+        (d.hom.app N).val.app (op U) x = x := by
+  let : ((𝟭 ℕ).prod (Scheme.proEtaleBaseChange f)).IsContinuous
+      (coefficientSequenceTopology (Scheme.ProEt.topology Y))
+      (coefficientSequenceTopology (Scheme.ProEt.topology X)) := baseChange_continuous f
+  let b := (sheafCompose (Scheme.ProEt.topology Y)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+      (Scheme.proEtaleRingDirectImageMap f (coefficients R Y n) (coefficients R X n)
+        (StrictTower.constantRingIso (R n) f))
+  have hb : Scheme.proEtaleRingDirectImageMap f (coefficients R Y n)
+      (coefficients R X n) (StrictTower.constantRingIso (R n) f) =
+      Scheme.proEtaleConstantDirectImageMap f CommRingCat.{u + 1} (R n) :=
+    ((Scheme.proEtaleSheafAdjunction f CommRingCat.{u + 1}).homEquiv _ _).apply_symm_apply _
+  exact towerPushforwardEvaluation (C := Y.ProEt) (D := X.ProEt)
+    (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)
+    (Scheme.proEtaleBaseChange f) (coefficients R Y) (coefficientTransition R φ Y)
+    (coefficients R X) (coefficientTransition R φ X) n (ringMap R φ f) b (by
+      intro U
+      exact congrArg (fun t ↦ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}).map
+        (t.hom.app U)) hb.symm)
+
+/-- The actual componentwise direct-image identification.
+Source: Zheng 4.1 (blueprint: def-sp-varying-ring-operations). -/
+def moduleEvalP {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
+    push R φ f ⋙ eval R φ Y n ≅
+      eval R φ X n ⋙ StrictTower.moduleDirectImage (R n) f :=
+  (moduleEvalP_existsUnique R φ f n).choose
+
+/-- Inverse-image evaluation is uniquely fixed by the ordinary unit equation.
+Source: Zheng 4.1 (blueprint: def-sp-varying-ring-operations).
+Proof: the componentwise ordinary inverse-image adjunction identifies the left
+adjoint with level inverse image. Its unit is the displayed system unit. The Hom
+bijection forces the comparison uniquely, and inverse images of the same constant
+rings make it invertible. This includes all semilinear transitions. -/
+theorem moduleEvalG_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
+    ∃! d : pull R φ f ⋙ eval R φ X n ≅
+        eval R φ Y n ⋙ StrictTower.modulePullback (R n) f,
+      ∀ N : Modules R φ Y,
+        (eval R φ Y n).map ((moduleAdj R φ f).unit.app N) ≫
+          (moduleEvalP R φ f n).hom.app ((pull R φ f).obj N) ≫
+          (StrictTower.moduleDirectImage (R n) f).map (d.hom.app N) =
+        (Scheme.proEtaleRingModuleAdjunction f (coefficients R Y n)
+          (coefficients R X n) (StrictTower.constantRingIso (R n) f)).unit.app
+            ((eval R φ Y n).obj N) := by
+  sorry
+
+/-- The normalized ordinary pullback evaluation comparison.
+Source: Zheng 4.1 (blueprint: def-sp-varying-ring-operations). -/
+def moduleEvalG {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
+    pull R φ f ⋙ eval R φ X n ≅
+      eval R φ Y n ⋙ StrictTower.modulePullback (R n) f :=
+  (moduleEvalG_existsUnique R φ f n).choose
+
+private theorem exact_of_componentwise
+    {A B : Type (u + 2)} [Category.{u + 1} A] [Category.{u + 1} B]
+    [Abelian A] [Abelian B] (F : A ⥤ B) [F.Additive]
+    {C D : ℕ → Type (u + 2)} [∀ n, Category.{u + 1} (C n)]
+    [∀ n, Category.{u + 1} (D n)] [∀ n, Abelian (C n)] [∀ n, Abelian (D n)]
+    (E : ∀ n, B ⥤ D n) (T : ∀ n, A ⥤ C n) (H : ∀ n, C n ⥤ D n)
+    [∀ n, (E n).Additive] [∀ n, (T n).Additive] [∀ n, (H n).Additive]
+    [∀ n, PreservesFiniteLimits (T n)] [∀ n, PreservesFiniteColimits (T n)]
+    [∀ n, PreservesFiniteLimits (H n)] [∀ n, PreservesFiniteColimits (H n)]
+    (h : ∀ s : ShortComplex B, s.Exact ↔ ∀ n, (s.map (E n)).Exact)
+    (e : ∀ n, F ⋙ E n ≅ T n ⋙ H n) :
+    PreservesFiniteLimits F ∧ PreservesFiniteColimits F := by
+  apply ((Functor.exact_tfae F).out 1 3).mp
+  intro s hs
+  apply (h (s.map F)).mpr
+  intro n
+  exact (ShortComplex.exact_iff_of_iso (s.mapNatIso (e n))).mpr
+    ((hs.map (T n)).map (H n))
+
+/-- Inverse image is additive and exact on all systems.
+Source: Zheng 4.1; Stacks 03EK (blueprint: def-sp-varying-ring-operations).
+Proof: the left adjoint is canonically the componentwise abelian inverse image.
+Kernels and sheafified cokernels are componentwise; inverse image preserves both.
+Addition is inherited from abelian inverse image. No flatness of φ is used. -/
+theorem pull_exact {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (pull R φ f).Additive ∧ PreservesFiniteLimits (pull R φ f) ∧
+      PreservesFiniteColimits (pull R φ f) := by
+  have : (pull R φ f).Additive := (moduleAdj R φ f).left_adjoint_additive
+  refine ⟨inferInstance, ?_⟩
+  obtain ⟨A⟩ := semilinearDerivedSections.{u + 1, u, u + 1}
+    (Scheme.ProEt.topology X) (coefficients R X) (coefficientTransition R φ X)
+  exact exact_of_componentwise (A := Modules R φ Y) (B := Modules R φ X)
+    (C := fun n ↦ StrictTower.Modules (R n) Y)
+    (D := fun n ↦ StrictTower.Modules (R n) X)
+    (pull R φ f) (eval R φ X) (eval R φ Y)
+    (fun n ↦ StrictTower.modulePullback (R n) f)
+    A.systems.componentwise (moduleEvalG R φ f)
+
+/-- Open restriction has the extension-by-zero left adjoint.
+Source: Stacks 03DI, 09AE (blueprint: def-sp-varying-ring-operations).
+Proof: moduleEvalG identifies every level of restriction with evaluation followed by
+the single-ring open pullback. Both preserve all limits. The conservative forgetful
+functor to presheaves of abelian groups reflects limits, which are pointwise. Thus
+restriction preserves all limits. The system category is Grothendieck abelian, so
+its small coseparator and the special adjoint functor theorem give a left adjoint. -/
+theorem pull_isRightAdjoint {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    (pull R φ j).IsRightAdjoint := by
+  let : IsGrothendieckAbelian.{u + 1} (Modules R φ X) :=
+    (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{
+      u + 1, u, u + 1} (coefficientSequenceTopology (Scheme.ProEt.topology X))
+      (systemRing.{u + 1, u, u + 1} (Scheme.ProEt.topology X) (coefficients R X)
+        (coefficientTransition R φ X))).1
+  have hEval (n : ℕ) : (eval R φ X n).IsRightAdjoint :=
+    towerEvaluation_isRightAdjoint (C := X.ProEt) (Scheme.ProEt.topology X)
+      (coefficients R X)
+      (coefficientTransition R φ X) n
+  have hH (n : ℕ) : PreservesLimits
+      (eval R φ X n ⋙ StrictTower.modulePullback (R n) j) := by
+    have := hEval n
+    infer_instance
+  have : PreservesLimits (pull R φ j) :=
+    towerFunctor_preservesLimits (M := Modules R φ X) (C := U.ProEt)
+      (Scheme.ProEt.topology U) (coefficients R U)
+      (coefficientTransition R φ U) (pull R φ j)
+      (fun n ↦ eval R φ X n ⋙ StrictTower.modulePullback (R n) j)
+      (moduleEvalG R φ j)
+  exact isRightAdjoint_of_preservesLimits_of_isCoseparating.{u + 1}
+    (isCoseparator_coseparator (Modules R φ X)) (pull R φ j)
+
+attribute [instance] pull_isRightAdjoint
 
 /-- Additivity needed for the actual exact derived inverse image.
 Source: Zheng 4.1 (blueprint: def-sp-varying-ring-operations). -/
@@ -373,8 +699,8 @@ abbrev P {X Y : Scheme.{u}} (f : X ⟶ Y) : Derived R φ X ⥤ Derived R φ Y :=
 /-- The canonical derived adjunction is induced from the ordinary one.
 Source: Stacks 07A6 (blueprint: def-sp-varying-ring-operations). -/
 def adj {X Y : Scheme.{u}} (f : X ⟶ Y) : G R φ f ⊣ P R φ f :=
-  (moduleAdj R φ f).mapDerivedCategoryRightDerivedAdjunction
-
+  Adjunction.mapDerivedCategoryRightDerivedAdjunction
+    (L := pull R φ f) (R := push R φ f) (moduleAdj R φ f)
 
 private theorem constantMap_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (A : CommRingCat.{u + 1}) :
@@ -491,7 +817,10 @@ def modulePComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :=
 Source: Stacks 0D6D (blueprint: def-sp-varying-ring-operations). -/
 def moduleGComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     pull R φ (f ≫ g) ≅ pull R φ g ⋙ pull R φ f :=
-  (Adjunction.leftAdjointCompIso (moduleAdj R φ g) (moduleAdj R φ f)
+  (Adjunction.leftAdjointCompIso
+    (F₀₁ := pull R φ g) (F₁₂ := pull R φ f) (F₀₂ := pull R φ (f ≫ g))
+    (G₁₀ := push R φ g) (G₂₁ := push R φ f) (G₂₀ := push R φ (f ≫ g))
+    (moduleAdj R φ g) (moduleAdj R φ f)
     (moduleAdj R φ (f ≫ g)) (modulePComp R φ f g)).symm
 
 /-- Derived inverse-image composition is localized from the actual system comparison.
@@ -499,13 +828,15 @@ Source: Stacks 0D6D (blueprint: def-sp-varying-ring-operations). -/
 def gComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     G R φ (f ≫ g) ≅ G R φ g ⋙ G R φ f :=
   Functor.mapDerivedCategoryNatIso (moduleGComp R φ f g) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    Functor.mapDerivedCategoryCompIso (pull R φ g) (pull R φ f)
 
 /-- Proper direct-image composition is the conjugate of inverse-image composition.
 Source: Stacks 0D6D (blueprint: def-sp-varying-ring-operations). -/
 def pComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     P R φ f ⋙ P R φ g ≅ P R φ (f ≫ g) :=
-  conjugateIsoEquiv ((adj R φ g).comp (adj R φ f)) (adj R φ (f ≫ g)) (gComp R φ f g)
+  conjugateIsoEquiv (L₁ := G R φ g ⋙ G R φ f) (R₁ := P R φ f ⋙ P R φ g)
+    (L₂ := G R φ (f ≫ g)) (R₂ := P R φ (f ≫ g))
+    ((adj R φ g).comp (adj R φ f)) (adj R φ (f ≫ g)) (gComp R φ f g)
 
 /-- The identity comparison for ordinary direct image is the pullback graph map.
 Source: Stacks 07A7 (blueprint: def-sp-varying-ring-operations).
@@ -592,25 +923,16 @@ def modulePId (X : Scheme.{u}) := (modulePId_existsUnique R φ X).choose
 Source: Stacks 07A7 (blueprint: def-sp-varying-ring-operations). -/
 def gId (X : Scheme.{u}) : G R φ (𝟙 X) ≅ 𝟭 (Derived R φ X) :=
   Functor.mapDerivedCategoryNatIso
-    (Adjunction.leftAdjointIdIso (moduleAdj R φ (𝟙 X)) (modulePId R φ X)) ≪≫
+    (Adjunction.leftAdjointIdIso (F := pull R φ (𝟙 X)) (G := push R φ (𝟙 X))
+      (moduleAdj R φ (𝟙 X)) (modulePId R φ X)) ≪≫
       Functor.mapDerivedCategoryIdIso _
 
 /-- The right-adjoint identity is fixed by the same unit normalization.
 Source: Stacks 07A7 (blueprint: def-sp-varying-ring-operations). -/
 def pId (X : Scheme.{u}) : P R φ (𝟙 X) ≅ 𝟭 (Derived R φ X) :=
-  (conjugateIsoEquiv Adjunction.id (adj R φ (𝟙 X)) (gId R φ X)).symm
-
-/-- Open restriction has the extension-by-zero left adjoint.
-Source: Stacks 03DI, 09AE (blueprint: def-sp-varying-ring-operations).
-Proof: localization identifies the open pro-etale site with the slice site. On each
-coefficient level use localizedSystemExtension and localizedSystemAdjunction. Their
-direct-sum lift formula commutes with φ, so the adjunction assembles on the actual
-sequence site. It identifies its right adjoint with pull along the open immersion. -/
-theorem pull_isRightAdjoint {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
-    (pull R φ j).IsRightAdjoint := by
-  sorry
-
-attribute [instance] pull_isRightAdjoint
+  (conjugateIsoEquiv (L₁ := 𝟭 (Derived R φ X)) (R₁ := 𝟭 (Derived R φ X))
+    (L₂ := G R φ (𝟙 X)) (R₂ := P R φ (𝟙 X))
+    Adjunction.id (adj R φ (𝟙 X)) (gId R φ X)).symm
 
 /-- Open extension chosen by the localized module universal property.
 Source: Stacks 03DI (blueprint: def-sp-varying-ring-operations). -/
@@ -656,7 +978,10 @@ abbrev J {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
 /-- The derived open adjunction retains the ordinary units and counits.
 Source: Stacks 03DI, 07A6 (blueprint: def-sp-varying-ring-operations). -/
 def jAdj {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] : J R φ j ⊣ G R φ j :=
-  Adjunction.ofNatIsoRight ((moduleJAdj R φ j).mapDerivedCategoryRightDerivedAdjunction)
+  Adjunction.ofNatIsoRight (F := (pull R φ j).rightDerivedFunctor) (G := G R φ j)
+    (H := J R φ j)
+    (Adjunction.mapDerivedCategoryRightDerivedAdjunction
+      (L := extension R φ j) (R := pull R φ j) (moduleJAdj R φ j))
     (pull R φ j).rightDerivedFunctorIsoMapDerivedCategory
 
 /-- Ordinary open composition has the inverse-image composition as its conjugate.
@@ -664,72 +989,29 @@ Source: Stacks 03DI, 0F7D (blueprint: def-sp-varying-ring-operations). -/
 def moduleJComp {U V X : Scheme.{u}} (i : U ⟶ V) (j : V ⟶ X)
     [IsOpenImmersion i] [IsOpenImmersion j] :
     extension R φ i ⋙ extension R φ j ≅ extension R φ (i ≫ j) :=
-  Adjunction.leftAdjointCompIso (moduleJAdj R φ i) (moduleJAdj R φ j)
+  Adjunction.leftAdjointCompIso
+    (F₀₁ := extension R φ i) (F₁₂ := extension R φ j) (F₀₂ := extension R φ (i ≫ j))
+    (G₁₀ := pull R φ i) (G₂₁ := pull R φ j) (G₂₀ := pull R φ (i ≫ j))
+    (moduleJAdj R φ i) (moduleJAdj R φ j)
     (moduleJAdj R φ (i ≫ j)) (moduleGComp R φ i j).symm
 
 /-- Derived open composition is localized from that ordinary comparison.
 Source: Stacks 0F7D (blueprint: def-sp-varying-ring-operations). -/
 def jComp {U V X : Scheme.{u}} (i : U ⟶ V) (j : V ⟶ X)
     [IsOpenImmersion i] [IsOpenImmersion j] : J R φ i ⋙ J R φ j ≅ J R φ (i ≫ j) :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso (extension R φ i) (extension R φ j)).symm ≪≫
     Functor.mapDerivedCategoryNatIso (moduleJComp R φ i j)
 
 /-- Identity extension with its canonical adjoint normalization.
 Source: Stacks 03DI (blueprint: def-sp-varying-ring-operations). -/
 def jId (X : Scheme.{u}) : J R φ (𝟙 X) ≅ 𝟭 (Derived R φ X) :=
-  Adjunction.leftAdjointIdIso (jAdj R φ (𝟙 X)) (gId R φ X)
+  Adjunction.leftAdjointIdIso (F := J R φ (𝟙 X)) (G := G R φ (𝟙 X))
+    (jAdj R φ (𝟙 X)) (gId R φ X)
 
-
-/-- Exact ordinary evaluation of a semilinear system.
-Source: Zheng 4.1 (blueprint: def-sp-varying-ring-operations). -/
-abbrev eval (X : Scheme.{u}) (n : ℕ) :=
-  SemilinearSections.evaluation.{u + 1, u, u + 1} (Scheme.ProEt.topology X) (coefficients R X)
-    (coefficientTransition R φ X) n
 
 /-- Evaluation on the ordinary unbounded derived category.
 Source: Zheng 4.1 (blueprint: def-sp-varying-ring-operations). -/
 abbrev ev (X : Scheme.{u}) (n : ℕ) := (eval R φ X n).mapDerivedCategory
-
-/-- Ordinary pushforward evaluation is identity on every section carrier.
-Source: Zheng 4.1 (blueprint: def-sp-varying-ring-operations).
-Proof: both sides have sections N_n(H ×_Y X), maps induced by the same restrictions,
-and the same constant scalar map. The identity is linear and natural. Equality on
-all sections proves uniqueness. -/
-theorem moduleEvalP_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
-    ∃! d : push R φ f ⋙ eval R φ Y n ≅
-        eval R φ X n ⋙ StrictTower.moduleDirectImage (R n) f,
-      ∀ (N : Modules R φ X) (U : Y.ProEt)
-        (x : ((push R φ f).obj N).val.obj (op (n, U))),
-        (d.hom.app N).val.app (op U) x = x := by
-  sorry
-
-/-- The actual componentwise direct-image identification.
-Source: Zheng 4.1 (blueprint: def-sp-varying-ring-operations). -/
-def moduleEvalP {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
-  (moduleEvalP_existsUnique R φ f n).choose
-
-/-- Inverse-image evaluation is uniquely fixed by the ordinary unit equation.
-Source: Zheng 4.1 (blueprint: def-sp-varying-ring-operations).
-Proof: the componentwise ordinary inverse-image adjunction identifies the left
-adjoint with level inverse image. Its unit is the displayed system unit. The Hom
-bijection forces the comparison uniquely, and inverse images of the same constant
-rings make it invertible. This includes all semilinear transitions. -/
-theorem moduleEvalG_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
-    ∃! d : pull R φ f ⋙ eval R φ X n ≅
-        eval R φ Y n ⋙ StrictTower.modulePullback (R n) f,
-      ∀ N : Modules R φ Y,
-        (eval R φ Y n).map ((moduleAdj R φ f).unit.app N) ≫
-          (moduleEvalP R φ f n).hom.app ((pull R φ f).obj N) ≫
-          (StrictTower.moduleDirectImage (R n) f).map (d.hom.app N) =
-        (Scheme.proEtaleRingModuleAdjunction f (coefficients R Y n)
-          (coefficients R X n) (StrictTower.constantRingIso (R n) f)).unit.app
-            ((eval R φ Y n).obj N) := by
-  sorry
-
-/-- The normalized ordinary pullback evaluation comparison.
-Source: Zheng 4.1 (blueprint: def-sp-varying-ring-operations). -/
-def moduleEvalG {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
-  (moduleEvalG_existsUnique R φ f n).choose
 
 /-- Derived evaluation is localization of the actual ordinary comparison.
 Source: Zheng 4.1 (blueprint: def-sp-varying-ring-operations). -/
@@ -742,23 +1024,32 @@ def evalG {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     StrictTower.modulePullback_finiteLimits (R n) f
   letI : PreservesFiniteColimits (StrictTower.modulePullback (R n) f) :=
     StrictTower.modulePullback_finiteColimits (R n) f
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso (pull R φ f) (eval R φ X n)).symm ≪≫
     Functor.mapDerivedCategoryNatIso (moduleEvalG R φ f n) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      Functor.mapDerivedCategoryCompIso (eval R φ Y n)
+        (StrictTower.modulePullback (R n) f)
 
 /-- The ordinary exact-level adjunction, derived with its original unit.
 Source: Stacks 07A6 (blueprint: def-sp-varying-ring-operations). -/
 def levelAdj {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
-  (Scheme.proEtaleRingModuleAdjunction f (coefficients R Y n)
-    (coefficients R X n)
-      (StrictTower.constantRingIso (R n) f)).mapDerivedCategoryRightDerivedAdjunction
+  Adjunction.mapDerivedCategoryRightDerivedAdjunction
+    (L := Scheme.proEtaleRingModulePullback f (coefficients R Y n) (coefficients R X n)
+      (StrictTower.constantRingIso (R n) f))
+    (R := Scheme.proEtaleRingModuleDirectImage f (coefficients R Y n) (coefficients R X n)
+      (StrictTower.constantRingIso (R n) f))
+    (Scheme.proEtaleRingModuleAdjunction f (coefficients R Y n) (coefficients R X n)
+      (StrictTower.constantRingIso (R n) f))
 
 /-- Evaluation of total direct image is the canonical mate, before inversion.
 Source: Zheng 4.1, Lemma 4.10 (blueprint: def-sp-varying-ring-operations). -/
 def evalPMate {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     P R φ f ⋙ ev R φ Y n ⟶
       ev R φ X n ⋙ (StrictTower.moduleDirectImage (R n) f).rightDerivedFunctor :=
-  mateEquiv (adj R φ f) (levelAdj R f n) (evalG R φ f n).inv
+  mateEquiv (L₁ := G R φ f) (R₁ := P R φ f)
+    (L₂ := (StrictTower.modulePullback (R n) f).mapDerivedCategory)
+    (R₂ := (StrictTower.moduleDirectImage (R n) f).rightDerivedFunctor)
+    (G := ev R φ Y n) (H := ev R φ X n)
+    (adj R φ f) (levelAdj R f n) (evalG R φ f n).inv
 
 /-- The canonical direct-image evaluation mate is invertible on all systems.
 Source: Zheng 4.10; semilinear derived sections (blueprint: def-sp-varying-ring-operations).
@@ -780,7 +1071,12 @@ def evalP {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
 Source: Stacks 03DI, 07A6 (blueprint: def-sp-varying-ring-operations). -/
 def levelJAdj {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (n : ℕ) :=
   Adjunction.ofNatIsoRight
-    ((StrictTower.moduleJAdj (R n) j).mapDerivedCategoryRightDerivedAdjunction)
+    (F := (StrictTower.modulePullback (R n) j).rightDerivedFunctor)
+    (G := (StrictTower.modulePullback (R n) j).mapDerivedCategory)
+    (H := (StrictTower.moduleJ (R n) j).mapDerivedCategory)
+    (Adjunction.mapDerivedCategoryRightDerivedAdjunction
+      (L := StrictTower.moduleJ (R n) j) (R := StrictTower.modulePullback (R n) j)
+      (StrictTower.moduleJAdj (R n) j))
       (StrictTower.modulePullback (R n) j).rightDerivedFunctorIsoMapDerivedCategory
 
 /-- The open-extension evaluation comparison is fixed by the pullback comparison.
@@ -788,7 +1084,11 @@ Source: Stacks 03DI; Zheng 4.1 (blueprint: def-sp-varying-ring-operations). -/
 def evalJInv {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (n : ℕ) :
     ev R φ U n ⋙ (StrictTower.moduleJ (R n) j).mapDerivedCategory ⟶
       J R φ j ⋙ ev R φ X n :=
-  (mateEquiv (jAdj R φ j) (levelJAdj R j n)).symm (evalG R φ j n).hom
+  (mateEquiv (L₁ := J R φ j) (R₁ := G R φ j)
+    (L₂ := (StrictTower.moduleJ (R n) j).mapDerivedCategory)
+    (R₂ := (StrictTower.modulePullback (R n) j).mapDerivedCategory)
+    (G := ev R φ U n) (H := ev R φ X n)
+    (jAdj R φ j) (levelJAdj R j n)).symm (evalG R φ j n).hom
 
 /-- The open-extension mate is the localization of the coefficientwise lift map.
 Source: Stacks 03DI, 03DJ (blueprint: def-sp-varying-ring-operations).
