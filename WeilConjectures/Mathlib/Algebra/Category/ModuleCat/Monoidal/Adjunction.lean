@@ -42,11 +42,11 @@ noncomputable def restrictScalarsObjUnitIso :
       right_inv _ := rfl }
 
 /-- The unit projection map `K ⊗_R S ⟶ S ⊗_R K` of extension and restriction of scalars is the
-inverse of `ModuleCat.extendScalarsCompRestrictScalarsIso`, sending `k ⊗ s` to `s ⊗ k`. -/
+inverse of `ModuleCat.extendScalarsCompRestrictScalarsIso'`, sending `k ⊗ s` to `s ⊗ k`. -/
 lemma extendRestrictScalarsAdj_unitProjection (K : ModuleCat.{u} R) :
     (extendRestrictScalarsAdj (algebraMap R S)).unitProjection K =
       (K ◁ (restrictScalarsObjUnitIso R S).hom) ≫
-        (extendScalarsCompRestrictScalarsIso R S).inv.app K := by
+        (extendScalarsCompRestrictScalarsIso' R S).inv.app K := by
   refine MonoidalCategory.tensor_ext (fun k s ↦ ?_)
   refine (?_ : _ = (TensorProduct.tmul R ((1 : S) * @id S s * (1 * 1)) k :
     (extendScalars (algebraMap R S)).obj K)).trans ?_

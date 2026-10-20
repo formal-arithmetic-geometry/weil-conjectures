@@ -69,7 +69,7 @@ noncomputable def extendScalarsCompRestrictScalarsIso :
     Functor.isoWhiskerLeft P (Functor.isoWhiskerRight
       (Functor.whiskeringRightObjCompIso _ _ ≪≫
         (Functor.whiskeringRight _ _ _).mapIso
-          (ModuleCat.extendScalarsCompRestrictScalarsIso R S) ≪≫
+          (ModuleCat.extendScalarsCompRestrictScalarsIso' R S) ≪≫
         whiskeringRightTensorRightIso _) a) ≪≫
     Functor.isoWhiskerLeft P (Sheaf.presheafToSheafCompTensorRightIso X).symm ≪≫
     (Functor.associator P a (tensorRight (a.obj X))).symm ≪≫

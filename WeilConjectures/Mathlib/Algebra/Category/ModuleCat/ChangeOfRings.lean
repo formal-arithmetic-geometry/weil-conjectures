@@ -174,7 +174,7 @@ lemma tensorEquivRestrictScalarsExtendScalars_tmul (N : ModuleCat.{u} R) (n : N)
 /-- **Extension followed by restriction of scalars is tensoring with `S`.** For an `R`-algebra
 `S`, extending the scalars of an `R`-module `N` to `S` and restricting them back to `R` gives
 `N ⊗[R] S`, naturally in `N`. -/
-noncomputable def extendScalarsCompRestrictScalarsIso :
+noncomputable def extendScalarsCompRestrictScalarsIso' :
     extendScalars.{u, u, u} (algebraMap R S) ⋙ restrictScalars (algebraMap R S) ≅
       tensorRight (ModuleCat.of R S) :=
   NatIso.ofComponents (fun N ↦ (tensorEquivRestrictScalarsExtendScalars R S N).toModuleIso.symm)
