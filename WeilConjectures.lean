@@ -7322,6 +7322,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.RingCoadjunctPreservesOp
 public import WeilConjectures.CategoryTheory.Adjunction.RingHomEquivCore
 public import WeilConjectures.CategoryTheory.Adjunction.TensorInvertible
 public import WeilConjectures.CategoryTheory.Adjunction.UnitProjection
+public import WeilConjectures.CategoryTheory.Adjunction.UniversalArrowMate
 public import WeilConjectures.CategoryTheory.AdjunctionSquareComposition
 public import WeilConjectures.CategoryTheory.ArrowProductTransitionsCocycleLaw
 public import WeilConjectures.CategoryTheory.ArrowProductTransitionsExistence
@@ -11244,6 +11245,7 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Flat
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Square
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
+public import WeilConjectures.SixFunctors.Etale.LowerStarGeometricPoint
 public import WeilConjectures.SixFunctors.Etale.Perverse.AffineDirectImage
 public import WeilConjectures.SixFunctors.Etale.Perverse.AffinePushforward
 public import WeilConjectures.SixFunctors.Etale.Perverse.Basic
