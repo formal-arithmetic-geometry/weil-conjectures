@@ -68,7 +68,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00M1; repair by A2, 2026-10-13: reuse the public row-cokernel theorem for projection exactness and first-coordinate congruence for index disequality, without duplicating private library helpers."
+  "place": "Algebra, Lemma Tag 00M1; repair by A2, 2026-10-13: reuse the public row-cokernel theorem for projection exactness and first-coordinate congruence for index disequality, without duplicating private library helpers. R3, 2026-10-20: retire the unused Sheaf duplicate and attach to the adopted source-library theorem zigzagBoundary_reduction, whose signature and proof are identical modulo the theorem name. The existing two-step proof and dependencies stay unchanged."
  },
  "mathlib_searches": [
   {
@@ -113,14 +113,14 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "module": "Sheaf.Algebra.Homology.ZigzagBoundaryReduction",
-  "declaration": "HomologicalComplex₂.zigzag_boundary_reduction",
-  "file": "lean/Sheaf/Algebra/Homology/ZigzagBoundaryReduction.lean",
-  "statement": "theorem zigzag_boundary_reduction\n    (A : HomologicalComplex₂ (ModuleCat.{v} R) (ComplexShape.down ℕ)\n      (ComplexShape.down ℕ))\n    (hrow : ∀ (p q : ℕ), 0 < p →\n      (ShortComplex.mk ((A.d (p + 1) p).f q) ((A.d p (p - 1)).f q)\n        (by rw [← HomologicalComplex.comp_f, A.d_comp_d,\n          HomologicalComplex.zero_f])).Exact)\n    (n : ℕ) (a : zigzagTotal A n) (ha : a ∈ zigzagCycles A n)\n    (hboundary : ∃ y : (A.opcycles 0).X (n + 1),\n      (A.opcycles 0).d (n + 1) n y = (A.pOpcycles 0).f n\n        (DirectSum.component R (ZigzagIndex n)\n          (fun i : ZigzagIndex n => (A.X i.1.1).X i.1.2) ⟨(0, n), by simp⟩ a)) :\n    ∃ b : zigzagTotal A (n + 1),\n      a - zigzagBoundary A n b ∈ zigzagCycles A n ∧\n      DirectSum.component R (ZigzagIndex n)\n        (fun i : ZigzagIndex n => (A.X i.1.1).X i.1.2)\n        ⟨(0, n), by simp⟩ (a - zigzagBoundary A n b) = 0",
+  "module": "WeilConjectures.Algebra.Homology.ZigzagBoundaryReduction",
+  "declaration": "HomologicalComplex₂.zigzagBoundary_reduction",
+  "file": "lean/WeilConjectures/Algebra/Homology/ZigzagBoundaryReduction.lean",
+  "statement": "theorem zigzagBoundary_reduction\n    (A : HomologicalComplex₂ (ModuleCat.{v} R) (ComplexShape.down ℕ)\n      (ComplexShape.down ℕ))\n    (hrow : ∀ (p q : ℕ), 0 < p →\n      (ShortComplex.mk ((A.d (p + 1) p).f q) ((A.d p (p - 1)).f q)\n        (by rw [← HomologicalComplex.comp_f, A.d_comp_d,\n          HomologicalComplex.zero_f])).Exact)\n    (n : ℕ) (a : zigzagTotal A n) (ha : a ∈ zigzagCycles A n)\n    (hboundary : ∃ y : (A.opcycles 0).X (n + 1),\n      (A.opcycles 0).d (n + 1) n y = (A.pOpcycles 0).f n\n        (DirectSum.component R (ZigzagIndex n)\n          (fun i : ZigzagIndex n => (A.X i.1.1).X i.1.2) ⟨(0, n), by simp⟩ a)) :\n    ∃ b : zigzagTotal A (n + 1),\n      a - zigzagBoundary A n b ∈ zigzagCycles A n ∧\n      DirectSum.component R (ZigzagIndex n)\n        (fun i : ZigzagIndex n => (A.X i.1.1).X i.1.2)\n        ⟨(0, n), by simp⟩ (a - zigzagBoundary A n b) = 0",
   "branch": "sheaf-dag",
-  "by": "V3",
-  "date": "2026-10-12",
-  "existing": false
+  "by": "R3",
+  "date": "2026-10-20",
+  "existing": true
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -133,14 +133,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A2",
+  "reviewer": "C-a8418",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261012T163610-L-2783757",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T132036-L-1405855",
+  "kind": "interface",
+  "note": "independent cc review: retired Sheaf HomologicalComplex₂.zigzag_boundary_reduction against the canonical WeilConjectures zigzagBoundary_reduction (same signature apart from the name, axioms clean); node lean record diff vs clone; 0 importers; --all compile exit 0"
  },
  "lean_audit": {
   "master": {
