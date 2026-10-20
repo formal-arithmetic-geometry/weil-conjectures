@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonProperty
 public import Mathlib.RingTheory.Flat.Basic
-import Sheaf.Algebra.Homology.LocalizedTensorComparisonDirectSumSquare
+import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonDirectSumSquare
 import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonRepresentativeSquare
 import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
@@ -98,6 +98,7 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex
       (.up ℤ)).obj Q) ⟶ N)
 
+set_option linter.unusedVariables false in
 /-- The localized tensor comparison predicate is closed under coproducts.
 Source: Stacks Project, Tags 0DJA(1), 0BYJ and 09PB.
 
@@ -147,7 +148,7 @@ theorem localizedTensorComparisonProperty_closure_coproducts
       ((Functor.Monoidal.μIso F (U j) Q).inv ≫ (F.obj (U j) ◁ t)) i
     have (j : I) : IsIso (α j) := hG j (U j) ⟨eU j⟩ (hU j) (m j) i
     obtain ⟨e, d, hsquare⟩ := exists_localizedTensorComparison_direct_sum_square
-      R A B C Q N t hC hQ U hU m mS i
+      R A B C Q N t U m mS i
     have : IsIso (e.hom ≫ (mS.localizedComparison i ≫ HomologicalComplex.homologyMap
         ((Functor.Monoidal.μIso F (∐ U) Q).inv ≫ (F.obj (∐ U) ◁ t)) i)) := by
       rw [← hsquare]
