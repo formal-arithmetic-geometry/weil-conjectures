@@ -15,14 +15,14 @@
    "elementary": true
   },
   {
-   "text": "Apply strictHenselizationResidue to s = nu composed with sigma, with the Omega algebra structure given by its canonical residue embedding. Obtain strict henselian local structure on the concrete strictHenselizationRing s, the unique residue equivalence delta with the relative separable closure E in Omega, and the geometric-point factorization.",
+   "text": "Apply strictHenselizationResidue to s = nu composed with sigma, with the Omega algebra structure given by its canonical residue embedding. Obtain strict henselian local structure on the concrete strictHenselization s, the unique residue equivalence delta with the relative separable closure E in Omega, and the geometric-point factorization.",
    "uses": [
     "lem-weil-pbc-strict-henselization-functoriality"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the proved upstream RingHom.exists_comp_eq_of_isSepClosed (WeilConjectures.Mathlib.FieldTheory.IsSepClosed) to the separable extension E/F, the integral embedding b:F to k, and the embeddings k to Omega and E to Omega. This gives eta:E to k whose composite into Omega is the inclusion. Injectivity of k to Omega proves eta composed with F to E equals b. For every x in k, its integral polynomial over F is mapped to E, proving eta.IsIntegral by RingHom.IsIntegralElem.of_comp. Compose eta with delta to obtain gamma:ResidueField(strictHenselizationRing s) to k; it is integral since delta is an isomorphism. Since its source is separably closed, Mathlib infers IsPurelyInseparable, and Algebra.IsUniversalHomeomorphism.of_isPurelyInseparable makes rho = Spec.map gamma a universal homeomorphism.",
+   "text": "Apply the proved upstream RingHom.exists_comp_eq_of_isSepClosed (WeilConjectures.Mathlib.FieldTheory.IsSepClosed) to the separable extension E/F, the integral embedding b:F to k, and the embeddings k to Omega and E to Omega. This gives eta:E to k whose composite into Omega is the inclusion. Injectivity of k to Omega proves eta composed with F to E equals b. For every x in k, its integral polynomial over F is mapped to E, proving eta.IsIntegral by RingHom.IsIntegralElem.of_comp. Compose eta with delta to obtain gamma:ResidueField(strictHenselization s) to k; it is integral since delta is an isomorphism. Since its source is separably closed, Mathlib infers IsPurelyInseparable, and Algebra.IsUniversalHomeomorphism.of_isPurelyInseparable makes rho = Spec.map gamma a universal homeomorphism.",
    "uses": [
     "lem-weil-pbc-strict-henselization-functoriality"
    ],
@@ -46,7 +46,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 04HX, 03PS and 04DY; J3 Lean implementation 2026-10-12 using existing strictHenselizationResidue and separable-field descent"
+  "place": "Tags 04HX, 03PS and 04DY; J3 Lean implementation 2026-10-12 using existing strictHenselizationResidue and separable-field descent; F1 2026-10-20 retirement reuses this complete proof in the upstream large affine-colimit presentation"
  },
  "mathlib_searches": [
   {
@@ -98,14 +98,15 @@
  "id": "compatible-strict-henselization-core-existence",
  "title": "Strict henselization ring and residue existence",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationCoreExistence",
-  "file": "lean/Sheaf/AlgebraicGeometry/CompatibleStrictHenselizationCoreExistence.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.CompatibleStrictHenselizationCoreExistence",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CompatibleStrictHenselizationCoreExistence.lean",
   "declaration": "AlgebraicGeometry.Etale.exists_compatibleStrictHenselizationCoreExistence",
-  "statement": "theorem Etale.exists_compatibleStrictHenselizationCoreExistence\n    {S T : Scheme.{u}} {g : T ⟶ S}\n    {k k' Ω : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']\n    [Field Ω] [IsAlgClosed Ω]\n    (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T)\n    (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g)\n    (hσ : ∃ (s : S) (ψ : S.residueField s ⟶ .of k),\n      ψ.hom.IsIntegral ∧ Spec.map ψ ≫ S.fromSpecResidueField s = σ)\n    (hτ : ∃ (t : T) (ψ : T.residueField t ⟶ .of k'),\n      ψ.hom.IsIntegral ∧ Spec.map ψ ≫ T.fromSpecResidueField t = τ)\n    (ν : Spec (.of Ω) ⟶ Spec (.of k')) :\n    let s := ν ≫ ι ≫ σ\n    let t := ν ≫ τ\n    ∃ (A B : Type u) (cA : CommRing A) (cB : CommRing B),\n      letI := cA\n      letI := cB\n      ∃ (hA : HenselianLocalRing A) (hB : HenselianLocalRing B),\n        letI := hA\n        letI := hB\n        ∃ (sA : IsSepClosed (IsLocalRing.ResidueField A))\n          (sB : IsSepClosed (IsLocalRing.ResidueField B)),\n          letI := sA\n          letI := sB\n          ∃ (eA : Spec (.of A) ≅ strictHenselizationScheme s)\n            (eB : Spec (.of B) ≅ strictHenselizationScheme t)\n            (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A)))\n            (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B))),\n            IsUniversalHomeomorphism ρA ∧ IsUniversalHomeomorphism ρB ∧\n            ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫\n              eA.hom ≫ strictHenselizationStructuralMap s = σ ∧\n            ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫\n              eB.hom ≫ strictHenselizationStructuralMap t = τ",
+  "statement": "theorem Etale.exists_compatibleStrictHenselizationCoreExistence\n    {S T : Scheme.{u}} {g : T ⟶ S}\n    {k k' Ω : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']\n    [Field Ω] [IsAlgClosed Ω]\n    (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T)\n    (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g)\n    (hσ : ∃ (s : S) (ψ : S.residueField s ⟶ .of k),\n      ψ.hom.IsIntegral ∧ Spec.map ψ ≫ S.fromSpecResidueField s = σ)\n    (hτ : ∃ (t : T) (ψ : T.residueField t ⟶ .of k'),\n      ψ.hom.IsIntegral ∧ Spec.map ψ ≫ T.fromSpecResidueField t = τ)\n    (ν : Spec (.of Ω) ⟶ Spec (.of k')) :\n    let s := ν ≫ ι ≫ σ\n    let t := ν ≫ τ\n    ∃ (A B : Type u) (cA : CommRing A) (cB : CommRing B),\n      letI := cA\n      letI := cB\n      ∃ (hA : HenselianLocalRing A) (hB : HenselianLocalRing B),\n        letI := hA\n        letI := hB\n        ∃ (sA : IsSepClosed (IsLocalRing.ResidueField A))\n          (sB : IsSepClosed (IsLocalRing.ResidueField B)),\n          letI := sA\n          letI := sB\n          ∃ (eA : Spec (.of A) ≅ strictLocalization s)\n            (eB : Spec (.of B) ≅ strictLocalization t)\n            (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A)))\n            (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B))),\n            IsUniversalHomeomorphism ρA ∧ IsUniversalHomeomorphism ρB ∧\n            ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫\n              eA.hom ≫ strictLocalizationToBase s = σ ∧\n            ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫\n              eB.hom ≫ strictLocalizationToBase t = τ",
   "branch": "sheaf-dag",
   "by": "G3",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "F1 retirement 2026-10-20: use the existing upstream theorem for strictLocalization. The small-colimit consumer preserves its statement by composing its spectrum presentations with the canonical smallStrictHenselizationColimitIso comparison; its proved comparison of structural maps transports both residue factorizations."
  },
  "statement": "For the two geometric points induced from σ and τ in the algebraically closed Ω, the coordinate-ring strict henselizations have henselian local and separably closed residue structures, spectrum identifications, and universal-homeomorphism residue maps factoring σ and τ. No ring map between the two rings is asserted.",
  "reviewed": {
@@ -119,14 +120,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J3",
+  "reviewer": "C-b7068",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T163616-L-2785849",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T154937-L-3174647",
+  "kind": "interface",
+  "note": "independent cc review: Retired Sheaf CoreExistence/CoreCompletion against their upstream WeilConjectures twins (node lean.statement verbatim in upstream files, no sorry); adapted unclaimed CoreData keeps its signature byte-identical, compiles with both downstream importers, axioms clean"
  },
  "lean_audit": {
   "master": {

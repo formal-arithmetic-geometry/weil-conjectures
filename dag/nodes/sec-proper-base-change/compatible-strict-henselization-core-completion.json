@@ -84,14 +84,15 @@
  "id": "compatible-strict-henselization-core-completion",
  "title": "Functoriality of compatible strict henselizations",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationCoreCompletion",
-  "file": "lean/Sheaf/AlgebraicGeometry/CompatibleStrictHenselizationCoreCompletion.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.CompatibleStrictHenselizationCoreCompletion",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CompatibleStrictHenselizationCoreCompletion.lean",
   "declaration": "AlgebraicGeometry.Etale.exists_compatibleStrictHenselizationCoreCompletion",
-  "statement": "theorem Etale.exists_compatibleStrictHenselizationCoreCompletion\n    {S T : Scheme.{u}} {g : T ⟶ S}\n    {Ω A B : Type u} [Field Ω] [IsAlgClosed Ω]\n    [CommRing A] [CommRing B] [HenselianLocalRing A] [HenselianLocalRing B]\n    [IsSepClosed (IsLocalRing.ResidueField A)]\n    [IsSepClosed (IsLocalRing.ResidueField B)]\n    {s : Spec (.of Ω) ⟶ S} {t : Spec (.of Ω) ⟶ T}\n    (hst : s = t ≫ g)\n    (eA : Spec (.of A) ≅ strictHenselizationScheme s)\n    (eB : Spec (.of B) ≅ strictHenselizationScheme t) :\n    ∃ (φ : A →+* B) (hφ : IsLocalHom φ),\n      Spec.map (CommRingCat.ofHom φ) ≫ eA.hom ≫\n          strictHenselizationStructuralMap s =\n        eB.hom ≫ strictHenselizationStructuralMap t ≫ g",
+  "statement": "theorem Etale.exists_compatibleStrictHenselizationCoreCompletion\n    {S T : Scheme.{u}} {g : T ⟶ S}\n    {Ω A B : Type u} [Field Ω] [IsAlgClosed Ω]\n    [CommRing A] [CommRing B] [HenselianLocalRing A] [HenselianLocalRing B]\n    [IsSepClosed (IsLocalRing.ResidueField A)]\n    [IsSepClosed (IsLocalRing.ResidueField B)]\n    {s : Spec (.of Ω) ⟶ S} {t : Spec (.of Ω) ⟶ T}\n    (hst : s = t ≫ g)\n    (eA : Spec (.of A) ≅ strictLocalization s)\n    (eB : Spec (.of B) ≅ strictLocalization t) :\n    ∃ (φ : A →+* B) (hφ : IsLocalHom φ),\n      Spec.map (CommRingCat.ofHom φ) ≫ eA.hom ≫\n          strictLocalizationToBase s =\n        eB.hom ≫ strictLocalizationToBase t ≫ g",
   "branch": "sheaf-dag",
   "by": "G3",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "F1 2026-10-20: the only consumer now uses the proved upstream core-completion theorem on strictLocalization before transporting its spectrum presentations to the small colimit. Retire the now-unused Sheaf copy with the core-existence copy; no mathematical node or unit step is removed."
  },
  "statement": "Given geometric points s and t over the same algebraically closed field with s = t composed with g, and affine strictly henselian presentations eA and eB of their strict henselization schemes, there exists a local ring map A to B whose spectrum map commutes with the structural maps over g.",
  "reviewed": {
@@ -105,14 +106,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-e6557",
-  "group": "P1",
+  "reviewer": "C-b7068",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T153649-L-2395362",
+  "landing": "20261020T154937-L-3174647",
   "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged item signature, both new declarations and their proofs with the DAG records and cited sources; all delivered modules and the direct importer compile cleanly; axioms are as reported."
+  "note": "independent cc review: Retired Sheaf CoreExistence/CoreCompletion against their upstream WeilConjectures twins (node lean.statement verbatim in upstream files, no sorry); adapted unclaimed CoreData keeps its signature byte-identical, compiles with both downstream importers, axioms clean"
  },
  "lean_audit": {
   "master": {

@@ -1,22 +1,80 @@
 module
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
-import Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationCoreExistence
-import Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationCoreCompletion
+import WeilConjectures.AlgebraicGeometry.CompatibleStrictHenselizationCoreExistence
+import WeilConjectures.AlgebraicGeometry.CompatibleStrictHenselizationCoreCompletion
+/-!
+# Compatible strict henselization data
+
+Use the upstream existence and functoriality theorems, transporting their affine colimit
+presentations to the small coordinate-ring colimits without changing the public statement.
+
+Source: Stacks Project, Tags 04HX, 03PS, 04GU and 04DY.
+(blueprint: compatible-strict-henselization-core-data).
+-/
+
 @[expose] public section
 universe u
 set_option autoImplicit false
 open CategoryTheory Limits
 namespace AlgebraicGeometry
 open Scheme Etale
+/-- The spectrum of the canonical comparison between the two affine colimits. -/
+private noncomputable def localizationComparison
+    {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (s : Spec (.of Ω) ⟶ S) : strictLocalization s ≅ strictHenselizationScheme s :=
+  asIso (Spec.map (smallStrictHenselizationColimitIso s).hom)
+
+/-- The comparison identifies the two structure morphisms, as checked on a limit leg. -/
+@[reassoc] private theorem localizationComparison_base
+    {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (s : Spec (.of Ω) ⟶ S) :
+    (localizationComparison s).hom ≫ strictHenselizationStructuralMap s =
+      strictLocalizationToBase s := by
+  classical
+  let : HasColimit (strictHenselizationDiagram s) := inferInstance
+  let := (strictHenselization_properties s).2.1
+  let j := Classical.choice (IsCofiltered.nonempty (C :=
+    SmallModel.{u} (strictHenselizationNeighbourhoods s)))
+  have hs : (strictHenselizationCone s).π.app (Opposite.op (Opposite.op j)) ≫
+      Spec.map (ΓSpecIso
+        (((equivSmallModel.{u}
+          (strictHenselizationNeighbourhoods s)).inverse.obj j).1.left.unop)).inv ≫
+      ((AffineEtale.Spec S).obj
+        (((equivSmallModel.{u}
+          (strictHenselizationNeighbourhoods s)).inverse.obj j).1)).hom =
+      strictHenselizationStructuralMap s :=
+    (exists_strictHenselizationStructuralMap s).choose_spec j
+  rw [← hs]
+  have hι : colimit.ι (strictHenselizationAffineDiagram s) (Opposite.op j) ≫
+      (smallStrictHenselizationColimitIso s).hom =
+      (smallStrictHenselizationCocone s).ι.app (Opposite.op j) := by
+    let := strictHenselizationAffineInclusion_isEquivalence s
+    exact Functor.Final.ι_colimitIso_hom
+      ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse ⋙
+        strictHenselizationAffineInclusion s).op (strictHenselizationDiagram s) (Opposite.op j)
+  have hleg : (localizationComparison s).hom ≫
+      (strictHenselizationCone s).π.app (Opposite.op (Opposite.op j)) =
+      (strictHenselizationAffineCone s).π.app (Opposite.op (Opposite.op j)) := by
+    change Spec.map (smallStrictHenselizationColimitIso s).hom ≫
+      Spec.map (colimit.ι (strictHenselizationAffineDiagram s) (Opposite.op j)) = _
+    rw [← Spec.map_comp, hι]
+    rfl
+  rw [← Category.assoc, hleg]
+  exact strictHenselizationStructuralMap_eq s j
+
 /-- Construction of compatible strict henselization data from pointed affine etale neighbourhoods.
 Source: Stacks Tags 04HX, 03PS, 04GU, 04DY. (blueprint: compatible-strict-henselization-core-data)
 
-Proof: construct the coordinate-ring colimits of pointed affine etale neighbourhoods.
-Tags 04HX and 03PS identify these colimits with strict henselizations and their residue
-fields. Functoriality from Tag 04GU gives the local map, structural equality, and residue
-factorizations. Tag 04DY gives universal homeomorphisms on residue spectra.
+Proof: upstream core existence supplies henselian local rings, separably closed residue
+fields, universal homeomorphisms, and presentations of the large affine colimits.
+Upstream core completion supplies the local ring map over g. Compose the spectrum
+presentations with Spec of smallStrictHenselizationColimitIso to obtain presentations
+of the small coordinate-ring colimits. The colimit injection formula identifies the
+corresponding cone legs. Composing a leg with its neighbourhood structure map identifies
+the two structural maps, so all three equalities transport by associativity. The rings,
+local map, residue maps and universal-homeomorphism proofs are retained unchanged.
 -/
 theorem Etale.exists_compatibleStrictHenselizationCoreData
     {S T : Scheme.{u}} {g : T ⟶ S}
@@ -67,6 +125,11 @@ theorem Etale.exists_compatibleStrictHenselizationCoreData
   obtain ⟨φ, hφ, hbase⟩ :=
     Etale.exists_compatibleStrictHenselizationCoreCompletion
       (by simpa only [Category.assoc] using congrArg (ν ≫ ·) hι) eA eB
-  exact ⟨A, B, cA, cB, hA, hB, sA, sB, φ, hφ, eA, eB, ρA, ρB, hUA, hUB,
-    hbase, ha0, hb0⟩
+  refine ⟨A, B, cA, cB, hA, hB, sA, sB, φ, hφ,
+    eA ≪≫ localizationComparison _, eB ≪≫ localizationComparison _, ρA, ρB,
+    hUA, hUB, ?_, ?_, ?_⟩
+  · simpa only [Iso.trans_hom, Category.assoc, localizationComparison_base,
+      localizationComparison_base_assoc] using hbase
+  · simpa only [Iso.trans_hom, Category.assoc, localizationComparison_base] using ha0
+  · simpa only [Iso.trans_hom, Category.assoc, localizationComparison_base] using hb0
 end AlgebraicGeometry
