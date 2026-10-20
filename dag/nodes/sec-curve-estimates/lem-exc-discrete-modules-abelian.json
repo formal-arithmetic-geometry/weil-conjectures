@@ -41,7 +41,7 @@
    }
   },
   {
-   "text": "The finite coefficient ring A is small in every universe. Since G lies in universe u, the group ring (ULift A)[G] is small in max(u,w): inject its finitely supported functions into all functions G -> ULift A. Mathlib ModuleCat.EnoughInjectives gives enough injectives for modules over this small ring. Use the carrier-independent form of [lem-exc-rg-representation-lifted-group-algebra-equivalence] to transfer enough injectives to Rep A G. The inclusion of the discrete representations is faithful, preserves monomorphisms, and has the open-stabilizer right adjoint by [lem-exc-rg-open-stabilizer-adjoint]. Mathlib EnoughInjectives.of_adjunction transfers enough injectives to discrete representations. Pair this with the structural conclusions from the first step, using [def-sp-injective-resolutions] for the injective terminology.",
+   "text": "The finite coefficient ring A is small in every universe. Replace it by the isomorphic ring A0=Shrink A in carrier universe max(u,w). Apply the original upstream form of [lem-exc-rg-representation-lifted-group-algebra-equivalence] to A0 and G, at this same carrier universe; its group ring is in that universe and Mathlib gives enough injectives for its modules. Transfer enough injectives to Rep A0 G. Restriction of scalars along A0 ≃+* A is an equivalence of module categories; Mathlib Equivalence.mapAction transports it to categories of G-actions, and Rep.repIsoAction identifies these with Rep A G and Rep A0 G. Thus Rep A G has enough injectives without changing its carrier universe. The inclusion of the discrete representations is faithful, preserves monomorphisms, and has the open-stabilizer right adjoint by [lem-exc-rg-open-stabilizer-adjoint]. Mathlib EnoughInjectives.of_adjunction transfers enough injectives to discrete representations. Pair this with the structural conclusions from the first step, using [def-sp-injective-resolutions] for the injective terminology.",
    "uses": [
     "lem-exc-rg-representation-lifted-group-algebra-equivalence",
     "lem-exc-rg-open-stabilizer-adjoint",
@@ -64,7 +64,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/injectives.tex",
-  "place": "Tag 04JF, label lemma-G-modules: the group-ring inclusion/open-stabilizer adjunction; abelian structure from etale-cohomology.tex Definition 04JP and Tag 0A2H."
+  "place": "Tag 04JF, label lemma-G-modules: the group-ring inclusion/open-stabilizer adjunction; abelian structure from etale-cohomology.tex Definition 04JP and Tag 0A2H. The universe bookkeeping uses the finite coefficient ring's small model and Mathlib module restriction/Action equivalences; it no longer requires the generalized anyUniverse theorem."
  },
  "mathlib_searches": [
   {
@@ -154,13 +154,13 @@
   "note": "Rep.DiscreteContinuousRep.{v,u,w} A G landed+imported, no copy, stmt_deps +def-exc-discrete-modules-category; G profinite = TopGroup+Compact+T2+TotDisc; A Ring+Finite; w carriers; exists Abelian h; EnoughInjectives; F=iota>>forget2 preserves finite limits/colimits (module kernels/cokernels, induced action); ShortComplex exact iff map F exact; h0 PreservesZeroMorphisms harmless (zero morphisms unique); docstring both proof steps; fix: 2 unused imports, stale worker report"
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-7a70f",
-  "group": "S4",
+  "reviewer": "C-8b1b9",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261019T093559-L-2329828",
+  "landing": "20261020T144251-L-2259748",
   "kind": "interface",
-  "note": "independent cc review: carrier change w→max u w justified by checked F_p^K counterexample + change record; all 11 direct importers/users compiled against delivered modules; public equivalence signature unchanged (unclaimed module); axioms clean; nodes match Lean"
+  "note": "independent cc review: retired Sheaf copy vs WeilConjectures twin (identical signature of Rep.representation_liftedGroupAlgebra_equivalence); adapted DiscreteModulesAbelian proof (Shrink A + restrictScalars mapAction transport) vs node steps and change record; delivery + 3 importers compiled, axioms clean"
  }
 }

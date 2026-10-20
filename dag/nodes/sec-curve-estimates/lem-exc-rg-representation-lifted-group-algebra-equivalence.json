@@ -20,7 +20,7 @@
    "elementary": true
   },
   {
-   "text": "Both composites preserve the underlying additive groups and maps. The recovered action on an original representation satisfies (1[g])x=rho(g)x and its recovered scalar action is rx; the recovered group-ring action on an original module is a[g]x=(a[1])(1[g])x. Expansion into singleton terms proves equality for every group-ring element. The identity underlying additive maps therefore give unit and counit isomorphisms. They are natural because both functors preserve underlying maps, and the triangle identities hold because all underlying maps are identities. The constructions work at any carrier universe, independently of the coefficient-lift universe. Specializing to carrier max(u,v,w) and coefficient lift w gives the original theorem. ULift changes only the coefficient ring universe, not the carriers.",
+   "text": "Both composites preserve the underlying additive groups and maps. The recovered action on an original representation satisfies (1[g])x=rho(g)x and its recovered scalar action is rx; the recovered group-ring action on an original module is a[g]x=(a[1])(1[g])x. Expansion into singleton terms proves equality for every group-ring element. The identity underlying additive maps therefore give unit and counit isomorphisms. They are natural because both functors preserve underlying maps, and the triangle identities hold because all underlying maps are identities. The upstream construction works directly at carrier universe max(u,v,w) with coefficient lift w, as required by the statement.",
    "uses": [],
    "elementary": true
   }
@@ -76,19 +76,18 @@
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-h2",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.RepresentationTheory.RepresentationLiftedGroupAlgebraEquivalence",
-  "file": "lean/Sheaf/RepresentationTheory/RepresentationLiftedGroupAlgebraEquivalence.lean",
+  "existing": true,
+  "module": "WeilConjectures.RepresentationTheory.RepresentationLiftedGroupAlgebraEquivalence",
+  "file": "lean/WeilConjectures/RepresentationTheory/RepresentationLiftedGroupAlgebraEquivalence.lean",
   "declaration": "Rep.representation_liftedGroupAlgebra_equivalence",
   "statement": "theorem representation_liftedGroupAlgebra_equivalence (R : Type u) [Ring R] (G : Type v) [Group G] : Nonempty (Rep.{max u v w} R G ≌ ModuleCat.{max u v w} (MonoidAlgebra (ULift.{w} R) G))",
   "branch": "sheaf-dag",
-  "by": "H2",
-  "date": "2026-10-13",
+  "by": "J2",
+  "date": "2026-10-20",
   "declarations": [
-   "Rep.representation_liftedGroupAlgebra_equivalence",
-   "Rep.representation_liftedGroupAlgebra_equivalence_anyUniverse"
+   "Rep.representation_liftedGroupAlgebra_equivalence"
   ],
-  "note": "S4 exposes the same proved construction at independent carrier universe w and independent coefficient-lift universe t as representation_liftedGroupAlgebra_equivalence_anyUniverse. The original declaration and its signature remain unchanged and are now a specialization. The group-ring equivalence itself needs no size bound; existence of small injectives is checked separately."
+  "note": "Retired the Sheaf copy in favor of the proved upstream theorem with the identical original signature. The former anyUniverse extension is no longer needed: the sole remaining consumer shrinks its finite coefficient ring into the carrier universe and transports representations along the coefficient ring equivalence using Mathlib repIsoAction and Equivalence.mapAction."
  },
  "lean_audit": {
   "master": {
@@ -113,13 +112,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-7a70f",
-  "group": "S4",
+  "reviewer": "C-8b1b9",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261019T093559-L-2329828",
+  "landing": "20261020T144251-L-2259748",
   "kind": "interface",
-  "note": "independent cc review: carrier change w→max u w justified by checked F_p^K counterexample + change record; all 11 direct importers/users compiled against delivered modules; public equivalence signature unchanged (unclaimed module); axioms clean; nodes match Lean"
+  "note": "independent cc review: retired Sheaf copy vs WeilConjectures twin (identical signature of Rep.representation_liftedGroupAlgebra_equivalence); adapted DiscreteModulesAbelian proof (Shrink A + restrictScalars mapAction transport) vs node steps and change record; delivery + 3 importers compiled, axioms clean"
  }
 }

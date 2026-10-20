@@ -14,7 +14,7 @@ public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 import Mathlib.Algebra.Category.ModuleCat.EnoughInjectives
 import Mathlib.Data.Countable.Small
 import WeilConjectures.RepresentationTheory.OpenStabilizerAdjunction
-import Sheaf.RepresentationTheory.RepresentationLiftedGroupAlgebraEquivalence
+import WeilConjectures.RepresentationTheory.RepresentationLiftedGroupAlgebraEquivalence
 import Sheaf.RepresentationTheory.DiscreteRep
 
 /-!
@@ -78,11 +78,15 @@ theorem discreteModules_abelian
     forget₂ (Rep.{max u w} A G) (ModuleCat.{max u w} A)
   let : F.Additive := ha
   let : Small.{max u w} G := small_max G
-  let : Small.{max u w} (MonoidAlgebra (ULift.{max u w} A) G) :=
-    small_of_injective (DFunLike.coe_injective.comp MonoidAlgebra.coeff_injective)
-  obtain ⟨E⟩ := Rep.representation_liftedGroupAlgebra_equivalence_anyUniverse.{v, u,
-    max u w, max u w} A G
-  let : EnoughInjectives (Rep.{max u w} A G) := E.enoughInjectives_iff.mpr inferInstance
+  let A₀ := Shrink.{max u w} A
+  obtain ⟨E⟩ := Rep.representation_liftedGroupAlgebra_equivalence.{max u w, u, w} A₀ G
+  let : EnoughInjectives (Rep.{max u w} A₀ G) := E.enoughInjectives_iff.mpr inferInstance
+  let e : Action (ModuleCat.{max u w} A) G ≌ Action (ModuleCat.{max u w} A₀) G :=
+    (ModuleCat.restrictScalarsEquivalenceOfRingEquiv
+      (show A₀ ≃+* A from Shrink.ringEquiv.{max u w, v} A)).mapAction G
+  let E₀ : Rep.{max u w} A G ≌ Rep.{max u w} A₀ G :=
+    (Rep.repIsoAction A G).trans (e.trans (Rep.repIsoAction A₀ G).symm)
+  let : EnoughInjectives (Rep.{max u w} A G) := E₀.enoughInjectives_iff.mpr inferInstance
   obtain ⟨_, hfaithful, hmono, U, adj, _⟩ :=
     ModuleCat.openStabilizerAdjunction.{v, u, max u w} A G
   let V := ModuleCat.forgetDiscreteGModule.{v, u, max u w} A G
