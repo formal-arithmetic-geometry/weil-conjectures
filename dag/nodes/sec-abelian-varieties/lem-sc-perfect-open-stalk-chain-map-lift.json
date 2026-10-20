@@ -22,14 +22,14 @@
    "elementary": false
   },
   {
-   "text": "Conjugating t by eW gives a chain map. Its adjacent chain equations, together with the component identities of g, prove that the stalks of g commute with the differentials. Apply the degreewise shrinking theorem to obtain V, eV and k with adjacent chain equations and the stalk conjugation formula.",
+   "text": "Conjugating t by eW gives a chain map. Its adjacent equations and the component identities of g prove that the stalks of g commute with the differentials. Apply the source degreewise shrinking theorem using its canonical comparisons cW and cV, obtaining V and chain-compatible components k. Set eV = cV followed by cW inverse followed by eW to express the result in the arbitrary coordinates supplied by the degreewise lift.",
    "uses": [
     "lem-sc-perfect-open-stalk-degreewise-shrink"
    ],
    "elementary": false
   },
   {
-   "text": "Construct fV with CochainComplex.ofHom k hk. Use HomologicalComplex.hom_ext to check the desired stalk equality degreewise. Substitute the identities of k and g and cancel eW.inv followed by eW.hom for both P and Q. This yields exactly the conjugation of t by eV. The original theorem signature, including hU and hQ, stays identical although those hypotheses are not needed.",
+   "text": "Construct fV with CochainComplex.ofHom k hk. Check the desired stalk equality degreewise with HomologicalComplex.hom_ext. Substitute the stalk identities of k and g. Expanding the components of eV = cV followed by cW inverse followed by eW identifies the two sides by associativity, without assuming eW is canonical. The original signature, including hU and hQ, stays identical.",
    "uses": [],
    "elementary": true
   }
@@ -40,8 +40,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "Stacks Project",
-  "place": "Tags 09RE and 01CP, expanded by V3 into degreewise extension and differential-defect shrinking; Lean constructs the chain map and proves the comparison equality."
+  "group": "M1",
+  "date": "2026-10-20",
+  "document": "Stacks Project and adopted source library",
+  "place": "Same degreewise extension and shrinking route (Tags 09RE and 01CP); use the source canonical shrink theorem and transport the final natural isomorphism to the arbitrary lift coordinates."
  },
  "mathlib_searches": [
   {
@@ -119,14 +121,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V3",
+  "reviewer": "C-e8086",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261013T100205-L-2498620",
+  "landing": "20261020T162915-L-3674512",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: the delivered emptied Sheaf module and the adapted PerfectOpenStalkChainMapLift (signature unchanged) checked against the live WeilConjectures twin (node lean.statement verbatim), the change record and the retire-items row; files and both importers of ChainMapLift compiled, axioms clean"
  },
  "lean_audit": {
   "master": {

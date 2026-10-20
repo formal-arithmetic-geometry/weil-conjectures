@@ -8,8 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.PerfectOpenStalkDegreewiseLift
-import Sheaf.AlgebraicGeometry.PerfectOpenStalkDegreewiseShrink
-import Sheaf.AlgebraicGeometry.StalkInternalHomFinitePresentation
+import WeilConjectures.AlgebraicGeometry.PerfectOpenStalkDegreewiseShrink
 public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Lifting a perfect stalk chain map
@@ -73,23 +72,24 @@ theorem exists_affine_perfect_open_stalk_chainMap_lift
     change (eW.app P).hom.f n ≫ t.f n ≫ (eW.app Q).inv.f n ≫
         (SW.obj (RW.obj Q)).d n (n + 1) = _
     exact ((eW.app P).hom ≫ t ≫ (eW.app Q).inv).comm n (n + 1)
-  obtain ⟨V, hxV, hV, _, hVU, eV, k, hk, hkg⟩ :=
+  obtain ⟨V, hxV, hV, _, hVU, k, hk, hkg⟩ :=
     exists_affine_perfect_open_stalk_degreewise_shrink
-      X U x hxU P Q hP W hxW hWU eW g hcomm
+      X U x hxU P Q hP W hxW hWU g hcomm
+  -- Transport the canonical shrink coordinates to the comparison returned by the lift.
+  let cW := Functor.mapHomologicalComplexCompIso
+    (openModuleStalkRestrictionComparison X U W hWU x hxU hxW) (.up ℤ)
+  let cV := Functor.mapHomologicalComplexCompIso
+    (openModuleStalkRestrictionComparison X U V hVU x hxU hxV) (.up ℤ)
+  let eV := cV ≪≫ cW.symm ≪≫ eW
   let fV := CochainComplex.ofHom k hk
   refine ⟨V, hxV, hV, hVU, eV, fV, ?_⟩
   apply HomologicalComplex.hom_ext
   intro n
   change (openModuleStalkFunctor X V ⟨x, hxV⟩).map (k n) = _
   rw [hkg n, hg n]
-  simp only [HomologicalComplex.comp_f, Category.assoc]
-  have hPcancel : (eW.app P).inv.f n ≫ (eW.app P).hom.f n = 𝟙 _ := by
-    simpa only [HomologicalComplex.comp_f, HomologicalComplex.id_f] using
-      congrArg (fun f ↦ f.f n) (eW.app P).inv_hom_id
-  have hQcancel : (eW.app Q).inv.f n ≫ (eW.app Q).hom.f n = 𝟙 _ := by
-    simpa only [HomologicalComplex.comp_f, HomologicalComplex.id_f] using
-      congrArg (fun f ↦ f.f n) (eW.app Q).inv_hom_id
-  simp only [← Category.assoc, hPcancel, hQcancel, Category.id_comp]
+  simp only [eV, NatIso.trans_app, Iso.trans_hom, Iso.trans_inv,
+    HomologicalComplex.comp_f, Category.assoc]
+  rfl
 
 end
 end AlgebraicGeometry.Scheme

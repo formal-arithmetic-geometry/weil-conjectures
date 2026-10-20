@@ -31,10 +31,11 @@
    "elementary": true
   },
   {
-   "text": "Take the natural module-stalk comparison c for V inside W and apply it termwise. Whisker it with restriction from U, and compose with the supplied e and restriction transitivity, to construct eV. Expand the component formula, cancel e.hom and e.inv, and apply c.hom.naturality to g n. This proves the exact displayed formula for every n and arbitrary e.",
+   "text": "The source theorem uses exists_openStalk_restriction_transport to identify its constructed comparison with the canonical V comparison. It then proves the canonical conjugation formula by naturality. For arbitrary initial comparison e as in the node statement, take eV to be canonical eV followed by canonical eW inverse followed by e. Expanding component composition yields the stated formula by cancellation. The parent chain-map lift implements exactly this coordinate change.",
    "uses": [
     "def-sc-open-module-stalk-functor",
-    "lem-sc-open-module-stalk-restriction-comparison"
+    "lem-sc-open-module-stalk-restriction-comparison",
+    "lem-sc-open-stalk-restriction-transport"
    ],
    "elementary": false
   }
@@ -43,13 +44,15 @@
   "def-pc-perfect-complex",
   "def-sc-open-module-stalk-functor",
   "lem-sc-perfect-open-stalk-retract-hom-equality",
-  "lem-sc-open-module-stalk-restriction-comparison"
+  "lem-sc-open-module-stalk-restriction-comparison",
+  "lem-sc-open-stalk-restriction-transport"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "D4",
-  "document": "Stacks Project",
-  "place": "Tag 01CP finite-type injectivity and Tag 00A0(3), read 2026-10-13; finite-support intersection and naturality proof implemented in Lean."
+  "group": "M1",
+  "date": "2026-10-20",
+  "document": "WeilConjectures.AlgebraicGeometry.PerfectOpenStalkDegreewiseShrink",
+  "place": "Adopt the complete source proof, preserving the original existential-coordinate meaning by the explicit canonical eV / canonical eW inverse / arbitrary e composition in PerfectOpenStalkChainMapLift. No source declaration changes."
  },
  "mathlib_searches": [
   {
@@ -108,14 +111,15 @@
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-cube",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PerfectOpenStalkDegreewiseShrink",
-  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOpenStalkDegreewiseShrink.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.PerfectOpenStalkDegreewiseShrink",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PerfectOpenStalkDegreewiseShrink.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_affine_perfect_open_stalk_degreewise_shrink",
-  "statement": "theorem exists_affine_perfect_open_stalk_degreewise_shrink\n    (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U)\n    (P Q : CochainComplex\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hP : IsStrictlyPerfect X U P)\n    (W : X.Opens) (hxW : x ∈ W) (hWU : W ≤ U)\n    (e :\n      (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hWU : W ⟶ U)).mapHomologicalComplex (.up ℤ) ⋙\n      (openModuleStalkFunctor X W ⟨x, hxW⟩).mapHomologicalComplex (.up ℤ) ≅\n      (openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ))\n    (g : ∀ n : ℤ,\n      (((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hWU : W ⟶ U)).mapHomologicalComplex (.up ℤ)).obj P).X n ⟶\n      (((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hWU : W ⟶ U)).mapHomologicalComplex (.up ℤ)).obj Q).X n)\n    (hcomm : ∀ n : ℤ,\n      (openModuleStalkFunctor X W ⟨x, hxW⟩).map (g n) ≫\n        (((openModuleStalkFunctor X W ⟨x, hxW⟩).mapHomologicalComplex (.up ℤ)).obj\n          (((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n            (homOfLE hWU : W ⟶ U)).mapHomologicalComplex (.up ℤ)).obj Q)).d n (n + 1) =\n      (((openModuleStalkFunctor X W ⟨x, hxW⟩).mapHomologicalComplex (.up ℤ)).obj\n        (((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n          (homOfLE hWU : W ⟶ U)).mapHomologicalComplex (.up ℤ)).obj P)).d n (n + 1) ≫\n        (openModuleStalkFunctor X W ⟨x, hxW⟩).map (g (n + 1))) :\n    ∃ (V : X.Opens) (hxV : x ∈ V) (_hV : IsAffineOpen V) (_hVW : V ≤ W) (hVU : V ≤ U),\n      let R := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ)\n      let S := (openModuleStalkFunctor X V ⟨x, hxV⟩).mapHomologicalComplex (.up ℤ)\n      let T := (openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ)\n      ∃ (eV : R ⋙ S ≅ T) (k : ∀ n : ℤ, (R.obj P).X n ⟶ (R.obj Q).X n),\n        (∀ n : ℤ, k n ≫ (R.obj Q).d n (n + 1) =\n          (R.obj P).d n (n + 1) ≫ k (n + 1)) ∧\n        (∀ n : ℤ, (openModuleStalkFunctor X V ⟨x, hxV⟩).map (k n) =\n          (eV.app P).hom.f n ≫ (e.app P).inv.f n ≫\n            (openModuleStalkFunctor X W ⟨x, hxW⟩).map (g n) ≫\n              (e.app Q).hom.f n ≫ (eV.app Q).inv.f n)",
+  "statement": "theorem exists_affine_perfect_open_stalk_degreewise_shrink\n    (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U)\n    (P Q : CochainComplex\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hP : IsStrictlyPerfect X U P)\n    (W : X.Opens) (hxW : x ∈ W) (hWU : W ≤ U)\n    (g : ∀ n : ℤ,\n      (((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hWU : W ⟶ U)).mapHomologicalComplex (.up ℤ)).obj P).X n ⟶\n      (((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hWU : W ⟶ U)).mapHomologicalComplex (.up ℤ)).obj Q).X n)\n    (hcomm : ∀ n : ℤ,\n      (openModuleStalkFunctor X W ⟨x, hxW⟩).map (g n) ≫\n        (((openModuleStalkFunctor X W ⟨x, hxW⟩).mapHomologicalComplex (.up ℤ)).obj\n          (((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n            (homOfLE hWU : W ⟶ U)).mapHomologicalComplex (.up ℤ)).obj Q)).d n (n + 1) =\n      (((openModuleStalkFunctor X W ⟨x, hxW⟩).mapHomologicalComplex (.up ℤ)).obj\n        (((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n          (homOfLE hWU : W ⟶ U)).mapHomologicalComplex (.up ℤ)).obj P)).d n (n + 1) ≫\n        (openModuleStalkFunctor X W ⟨x, hxW⟩).map (g (n + 1))) :\n    let e : (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n          (homOfLE hWU : W ⟶ U)).mapHomologicalComplex (.up ℤ) ⋙\n        (openModuleStalkFunctor X W ⟨x, hxW⟩).mapHomologicalComplex (.up ℤ) ≅\n        (openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ) :=\n      Functor.mapHomologicalComplexCompIso\n        (openModuleStalkRestrictionComparison X U W hWU x hxU hxW) (.up ℤ)\n    ∃ (V : X.Opens) (hxV : x ∈ V) (_hV : IsAffineOpen V) (_hVW : V ≤ W) (hVU : V ≤ U),\n      let R := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ)\n      let S := (openModuleStalkFunctor X V ⟨x, hxV⟩).mapHomologicalComplex (.up ℤ)\n      let T := (openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ)\n      let eV : R ⋙ S ≅ T := Functor.mapHomologicalComplexCompIso\n        (openModuleStalkRestrictionComparison X U V hVU x hxU hxV) (.up ℤ)\n      ∃ k : ∀ n : ℤ, (R.obj P).X n ⟶ (R.obj Q).X n,\n        (∀ n : ℤ, k n ≫ (R.obj Q).d n (n + 1) =\n          (R.obj P).d n (n + 1) ≫ k (n + 1)) ∧\n        (∀ n : ℤ, (openModuleStalkFunctor X V ⟨x, hxV⟩).map (k n) =\n          (eV.app P).hom.f n ≫ (e.app P).inv.f n ≫\n            (openModuleStalkFunctor X W ⟨x, hxW⟩).map (g n) ≫\n              (e.app Q).hom.f n ≫ (eV.app Q).inv.f n)",
   "branch": "sheaf-dag",
-  "by": "V3",
-  "date": "2026-10-13"
+  "by": "M1",
+  "date": "2026-10-20",
+  "note": "Source theorem returns canonical comparisons. For an arbitrary initial e, compose the returned canonical eV with canonical eW inverse and e; component composition proves the original existential-coordinate formulation. The sole parent implements this coordinate conversion without changing its signature."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -128,14 +132,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D4",
+  "reviewer": "C-e8086",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261013T113338-L-3181977",
+  "landing": "20261020T162915-L-3674512",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: the delivered emptied Sheaf module and the adapted PerfectOpenStalkChainMapLift (signature unchanged) checked against the live WeilConjectures twin (node lean.statement verbatim), the change record and the retire-items row; files and both importers of ChainMapLift compiled, axioms clean"
  },
  "lean_audit": {
   "master": {
