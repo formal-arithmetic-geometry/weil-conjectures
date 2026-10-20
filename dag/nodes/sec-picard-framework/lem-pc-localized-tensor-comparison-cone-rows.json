@@ -107,14 +107,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.Algebra.Homology.LocalizedTensorComparisonConeRows",
-  "file": "lean/Sheaf/Algebra/Homology/LocalizedTensorComparisonConeRows.lean",
+  "existing": true,
+  "module": "WeilConjectures.Algebra.Homology.LocalizedTensorComparisonConeRows",
+  "file": "lean/WeilConjectures/Algebra/Homology/LocalizedTensorComparisonConeRows.lean",
   "declaration": "ModuleCat.exists_localizedTensorComparison_cone_rows",
-  "statement": "theorem exists_localizedTensorComparison_cone_rows\n    (hC : Module.Flat (A ⊗[R] B) C)\n    (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)\n    (P₁ P₂ : CochainComplex (ModuleCat.{u} A) ℤ) (f : P₁ ⟶ P₂)\n    (hK₁ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V P₁ (curriedTensor _)).Acyclic)\n    (hK₂ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V P₂ (curriedTensor _)).Acyclic)\n    (m₁ : BaseDerivedTensorCohomologyModel R A B (P₁ ⊗ Q) C)\n    (m₂ : BaseDerivedTensorCohomologyModel R A B (P₂ ⊗ Q) C)\n    (m₃ : BaseDerivedTensorCohomologyModel R A B (CochainComplex.mappingCone f ⊗ Q) C)\n    (i : ℤ) :\n    let F := (extendScalars.{u, u, u}\n      ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex\n        (.up ℤ)\n    let E := extendScalars (algebraMap (A ⊗[R] B) C)\n    let P₃ := CochainComplex.mappingCone f\n    let cmp := fun (V : CochainComplex (ModuleCat.{u} A) ℤ)\n      (m : BaseDerivedTensorCohomologyModel R A B (V ⊗ Q) C) (j : ℤ) ↦\n        m.localizedComparison j ≫ HomologicalComplex.homologyMap\n          ((Functor.Monoidal.μIso F V Q).inv ≫ (F.obj V ◁ t)) j\n    let d₀ := HomologicalComplex.homologyMap (F.map f ▷ N) i\n    let d₁ := HomologicalComplex.homologyMap (F.map (CochainComplex.mappingCone.inr f) ▷ N) i\n    let d₂ := CochainComplex.homologyδOfTriangle\n      (tensorConeTriangle\n        ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B))) f N) i (i + 1)\n    let d₃ := HomologicalComplex.homologyMap (F.map f ▷ N) (i + 1)\n    ∃ (s₀ : E.obj (m₁.cohomology i) ⟶ E.obj (m₂.cohomology i))\n      (s₁ : E.obj (m₂.cohomology i) ⟶ E.obj (m₃.cohomology i))\n      (s₂ : E.obj (m₃.cohomology i) ⟶ E.obj (m₁.cohomology (i + 1)))\n      (s₃ : E.obj (m₁.cohomology (i + 1)) ⟶ E.obj (m₂.cohomology (i + 1))),\n      (ComposableArrows.mk₄ s₀ s₁ s₂ s₃).Exact ∧\n      s₀ ≫ cmp P₂ m₂ i = cmp P₁ m₁ i ≫ d₀ ∧\n      s₁ ≫ cmp P₃ m₃ i = cmp P₂ m₂ i ≫ d₁ ∧\n      s₂ ≫ cmp P₁ m₁ (i + 1) = cmp P₃ m₃ i ≫ d₂ ∧\n      s₃ ≫ cmp P₂ m₂ (i + 1) = cmp P₁ m₁ (i + 1) ≫ d₃",
+  "statement": "theorem exists_localizedTensorComparison_cone_rows\n    (hC : Module.Flat (A ⊗[R] B) C)\n    (P₁ P₂ : CochainComplex (ModuleCat.{u} A) ℤ) (f : P₁ ⟶ P₂)\n    (m₁ : BaseDerivedTensorCohomologyModel R A B (P₁ ⊗ Q) C)\n    (m₂ : BaseDerivedTensorCohomologyModel R A B (P₂ ⊗ Q) C)\n    (m₃ : BaseDerivedTensorCohomologyModel R A B (CochainComplex.mappingCone f ⊗ Q) C)\n    (i : ℤ) :\n    let F := (extendScalars.{u, u, u}\n      ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex\n        (.up ℤ)\n    let E := extendScalars (algebraMap (A ⊗[R] B) C)\n    let P₃ := CochainComplex.mappingCone f\n    let cmp := fun (V : CochainComplex (ModuleCat.{u} A) ℤ)\n      (m : BaseDerivedTensorCohomologyModel R A B (V ⊗ Q) C) (j : ℤ) ↦\n        m.localizedComparison j ≫ HomologicalComplex.homologyMap\n          ((Functor.Monoidal.μIso F V Q).inv ≫ (F.obj V ◁ t)) j\n    let d₀ := HomologicalComplex.homologyMap (F.map f ▷ N) i\n    let d₁ := HomologicalComplex.homologyMap (F.map (CochainComplex.mappingCone.inr f) ▷ N) i\n    let d₂ := CochainComplex.homologyδOfTriangle\n      (tensorConeTriangle\n        ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B))) f N) i (i + 1)\n    let d₃ := HomologicalComplex.homologyMap (F.map f ▷ N) (i + 1)\n    ∃ (s₀ : E.obj (m₁.cohomology i) ⟶ E.obj (m₂.cohomology i))\n      (s₁ : E.obj (m₂.cohomology i) ⟶ E.obj (m₃.cohomology i))\n      (s₂ : E.obj (m₃.cohomology i) ⟶ E.obj (m₁.cohomology (i + 1)))\n      (s₃ : E.obj (m₁.cohomology (i + 1)) ⟶ E.obj (m₂.cohomology (i + 1))),\n      (ComposableArrows.mk₄ s₀ s₁ s₂ s₃).Exact ∧\n      s₀ ≫ cmp P₂ m₂ i = cmp P₁ m₁ i ≫ d₀ ∧\n      s₁ ≫ cmp P₃ m₃ i = cmp P₂ m₂ i ≫ d₁ ∧\n      s₂ ≫ cmp P₁ m₁ (i + 1) = cmp P₃ m₃ i ≫ d₂ ∧\n      s₃ ≫ cmp P₂ m₂ (i + 1) = cmp P₁ m₁ (i + 1) ≫ d₃",
   "branch": "sheaf-dag",
   "by": "D2",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "Retired the Sheaf duplicate (C9, 2026-10-21). The adopted source theorem has the same conclusion for arbitrary Q, P1 and P2; specialize it under the node's retained K-flatness assumptions. Compatibility.lean verifies the full former signature from this theorem. No source declaration or mathematical node statement changes."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -127,14 +128,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U2",
+  "reviewer": "C-a4d37",
+  "group": "C9",
   "result": "pass",
-  "landing": "20261013T211118-L-396354",
+  "landing": "20261020T233113-L-893834",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired Sheaf stub + node lean record (existing:true) against the live WeilConjectures.Algebra.Homology.LocalizedTensorComparisonConeRows theorem (verbatim statement, axioms clean); importer grep in live clone (none)"
  },
  "lean_audit": {
   "master": {
