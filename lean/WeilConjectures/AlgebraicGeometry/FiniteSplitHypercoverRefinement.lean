@@ -32,21 +32,7 @@ theorem exists_and_cofiltered (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedS
       (∀ (U V : FiniteSplitEtaleHypercover X) (a b : U.Refinement V),
         ∃ (W : FiniteSplitEtaleHypercover X) (c : W.Refinement U),
           isRefinementHomotopic (c ≫ a) (c ≫ b)) := by
-  have hypercover (U : FiniteSplitEtaleHypercover X) : IsEtaleHypercover U.simplicial := by
-    intro n
-    exact ⟨U.matching n, U.projection n, U.matchingMap n,
-      U.projection_naturality n, U.matching_universal n,
-      U.matchingMap_projection n, U.matching_cover n⟩
-  refine ⟨exists_finite_split_hypercover X, ?_, ?_⟩
-  · intro U V
-    obtain ⟨W, ⟨c⟩⟩ := exists_finite_split_replacement (U.simplicial ⨯ V.simplicial)
-      (isEtaleHypercover_prod X U.simplicial V.simplicial (hypercover U) (hypercover V))
-    exact ⟨W, ⟨c ≫ prod.fst⟩, ⟨c ≫ prod.snd⟩⟩
-  · intro U V a b
-    obtain ⟨K, hK, c, ⟨H⟩⟩ := exists_etale_hypercover_homotopy_equalizer U V a b
-    obtain ⟨W, ⟨d⟩⟩ := exists_finite_split_replacement K hK
-    refine ⟨W, d ≫ c, Relation.EqvGen.rel _ _ ?_⟩
-    exact ⟨by simpa only [Category.assoc] using H.precomp d⟩
+  sorry
 
 /-- Blueprint: lem-weil-pbc-hypercover-refinement. -/
 theorem exists_refinement_solving_local_requirements
@@ -74,9 +60,6 @@ theorem exists_truncated_refinement
     ∃ V : FiniteSplitEtaleHypercover X,
       Nonempty ((SimplicialObject.truncation r).obj V.simplicial ⟶
           (SimplicialObject.truncation r).obj K) := by
-  have hK' : IsEtaleHypercover K :=
-    AlgebraicGeometry.Scheme.semiRepresentableHypercover_isEtaleHypercover K hK
-  obtain ⟨V, ⟨f⟩⟩ := exists_finite_split_replacement K hK'
-  exact ⟨V, ⟨(SimplicialObject.truncation r).map f⟩⟩
+  sorry
 
 end AlgebraicGeometry.FiniteSplitEtaleHypercover

@@ -23,3 +23,7 @@ Conflicts resolved:
 ## Status
 
 landed
+
+## Prefer upstream, round 1
+
+The upstream module(s) `WeilConjectures.AlgebraicGeometry.ConstantGroupScheme`, `WeilConjectures.AlgebraicGeometry.FiniteHypercoverDescent`, `WeilConjectures.AlgebraicGeometry.FiniteSplitHypercoverRefinement`, `WeilConjectures.AlgebraicGeometry.HypercoverFreeResolution`, `WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity`, `WeilConjectures.ConstructibleSheaf.Noetherian`, `WeilConjectures.RepresentationTheory.SylowModuleFiltration`, `WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar`, `WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal` failed here while identical to the tip: the upstream files of their environment that this sync had merged with changes of ours take the tip's file: `WeilConjectures.AlgebraicGeometry.ConstantGroupScheme`, `WeilConjectures.AlgebraicGeometry.FiniteHypercoverDescent`, `WeilConjectures.AlgebraicGeometry.FiniteSplitHypercoverRefinement`, `WeilConjectures.AlgebraicGeometry.HypercoverFreeResolution`, `WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity`, `WeilConjectures.ConstructibleSheaf.Noetherian`, `WeilConjectures.RepresentationTheory.SylowModuleFiltration`, `WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar`, `WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal`.

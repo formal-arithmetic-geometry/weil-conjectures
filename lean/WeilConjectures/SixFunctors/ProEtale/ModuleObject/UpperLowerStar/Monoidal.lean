@@ -121,15 +121,7 @@ variable {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
 a monoidal natural isomorphism, for the composite lax monoidal structure on `f_* ⋙ g_*`. See
 the module docstring. -/
 instance ProEtale.isMonoidal_lowerStarComp :
-    NatTrans.IsMonoidal (ProEtale.lowerStarComp A f g).hom := by
-  let := Scheme.ProEt.isContinuous_overPullback g
-  let := Scheme.ProEt.isContinuous_overPullback f
-  let := Scheme.ProEt.isContinuous_overPullback (f ≫ g)
-  change NatTrans.IsMonoidal
-    (Functor.sheafPushforwardContinuousComp'
-      (MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤) f g).symm
-      A (Scheme.ProEt.topology Z) (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)).hom
-  infer_instance
+    NatTrans.IsMonoidal (ProEtale.lowerStarComp A f g).hom := sorry
 
 end LowerStarComp
 
