@@ -3,8 +3,6 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.AlgebraicGeometry.Cover.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.AlgebraicGeometry.WeaklyEtaleStability
-import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
 
 /-!
 # Finite affine refinement of a pro-etale cover
@@ -17,7 +15,6 @@ sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md`, Step (2), Local models
 @[expose] public section
 
 set_option autoImplicit false
-set_option warn.sorry false
 
 universe u
 
@@ -39,33 +36,24 @@ by `Σ α : Fin t, Fin (n α)`; the last conjunct is the finite (quasi-compact o
 condition of `sk-def-pe-site` over every affine open `W ⊆ S`, written for the base changes
 `V α j ×_S W → W`, exactly as in `QuasiCompactCover`.
 
-Proof (node proof, steps 1--5):
+Proof:
 
-1. Each affine open `U α → S` is an object of the small pro-etale site. The covering clause
-   of `sk-def-pe-site` for `{W_i → S}` and the affine open `U α` gives finitely many indices
-   `i α j` and affine opens `V α j ⊆ W_{i α j} ×_S U α` whose images cover `U α`.
-2. Each `W_i → S` is weakly etale (object clause of `sk-def-pe-site`). Base change along
-   `U α → S` preserves weak etaleness (`sk-lem-pe-weakly-etale-stability`), so
-   `W_i ×_S U α → U α` is weakly etale; its restriction to the affine open `V α j` is weakly
-   etale by locality on the source. The open immersion `U α → S` is weakly etale as the
-   restriction of `id_S` (flat with isomorphic diagonal, `sk-def-pe-morphisms`) to an open,
-   so the composite is weakly etale by the composition clause. The fibre-product universal
-   property (`def-pc-fibre-product`) identifies it with `V α j → W_{i α j} → S`.
-3. Let `W ⊆ S` be an affine open. As `S` is quasi-separated, each `W ∩ U α` is quasi-compact
-   (`lem-weil-pbc-quasi-separated-affine-cover-criterion` (1)), hence covered by finitely
-   many affine opens `A α k` (`lem-weil-pbc-qcqs-finite-affine-open-cover`); as the `U α`
-   cover `S`, the finitely many `A α k` cover `W`.
-4. For each `A α k` and each `V α j`, the fibre product `V α j ×_{U α} A α k` of affine
-   schemes over the affine `U α` is affine (`lem-weil-pbc-fibre-product-affine-spectra`).
-   Since `A α k ⊆ W ∩ U α` and `U α → S` is an open immersion, `def-pc-fibre-product`
-   identifies it with `V α j ×_S A α k`, the open subscheme of `V α j ×_S W` over `A α k`.
-   Its image in `A α k` is the intersection of the image of `V α j` with `A α k`; as the
-   images of the `V α j` cover `U α ⊇ A α k`, these finitely many affine opens have images
-   covering `A α k`. The finite union over `α, k, j` covers `W`.
-5. The covering condition of `sk-def-pe-site` for `{V α j → S}` is exactly what Step 4
-   verifies for every affine open `W ⊆ S`, and Step 2 gives weak etaleness of every member.
-   So the finite family is a covering family of `S_proet`; its index set is finite because
-   the affine cover and each local refinement are finite.
+1. Pull the quasi-compact cover back to each affine `U α` and apply
+   `QuasiCompactCover.exists_isAffineOpen_of_isCompact` to its whole space. This gives
+   the finite affine opens and their covering equalities.
+2. The selected maps to `S` are weakly etale: they compose an open immersion, the base
+   change of the open immersion `U α → S`, and a member of the original cover.
+   Mathlib's weakly etale instances prove this directly.
+3. The pullback identity shows that the selected images cover `S`, using the given
+   cover by the `U α`. Every selected source is affine, hence quasi-compact; since `S`
+   is quasi-separated, its map to `S` is quasi-compact
+   (`lem-weil-pbc-qcqs-morphism-permanence` (1)). After base change to an affine `W`,
+   these maps are still quasi-compact, as is `W → S`.
+4. The composites from the base changes to `S` are spectral. Their images cover `W`
+   by `Scheme.Pullback.exists_preimage_pullback`. The finite-family lemma
+   `IsCompactOpenCovered.of_finite_of_isSpectralMap` now gives the final clause:
+   explicitly, the whole base changes are compact opens with images covering `W`.
+   No auxiliary affine cover of the intersections `W ∩ U α` is needed.
 -/
 theorem finite_affine_proetale_refinement
     (S : Scheme.{u}) [CompactSpace S] [IsLocallyNoetherian S]
@@ -91,6 +79,54 @@ theorem finite_affine_proetale_refinement
                 pullback.fst (𝒰.f (i p.1 p.2)) (U p.1).ι ≫
                 𝒰.f (i p.1 p.2))) W.ι ≫ W.ι).base)
           (W : Set S)) := by
-  sorry
+  classical
+  -- Refine the pullback cover over each affine member of the fixed open cover.
+  have hlocal (α : Fin t) :=
+    QuasiCompactCover.exists_isAffineOpen_of_isCompact
+      (𝒰.toPreZeroHypercover.pullback₂ (U α).ι)
+      (U := ⊤) (by
+        have : IsAffine (U α).toScheme := hU_affine α
+        exact isCompact_univ)
+  dsimp only [PreZeroHypercover.pullback₂] at hlocal
+  choose n i V hV hcov using hlocal
+  have hrange (α : Fin t) :
+      ⋃ j, Set.range (((V α j).ι ≫
+        pullback.snd (𝒰.f (i α j)) (U α).ι).base) =
+        (Set.univ : Set (U α).toScheme) := by
+    simpa only [Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp,
+      Scheme.Opens.range_ι, TopologicalSpace.Opens.coe_top] using hcov α
+  have hweak (α : Fin t) (j : Fin (n α)) : WeaklyEtale
+      ((V α j).ι ≫ pullback.fst (𝒰.f (i α j)) (U α).ι ≫ 𝒰.f (i α j)) := by
+    have : WeaklyEtale (𝒰.f (i α j)) := 𝒰.forgetQc.map_prop _
+    infer_instance
+  refine ⟨n, i, V, hV, hrange, hweak, ?_⟩
+  let f (p : Σ α : Fin t, Fin (n α)) : (V p.1 p.2).toScheme ⟶ S :=
+    (V p.1 p.2).ι ≫ pullback.fst (𝒰.f (i p.1 p.2)) (U p.1).ι ≫ 𝒰.f (i p.1 p.2)
+  -- Affine sources and a quasi-separated target make these maps quasi-compact.
+  have haff (p : Σ α : Fin t, Fin (n α)) : IsAffine (V p.1 p.2).toScheme :=
+    hV p.1 p.2
+  have hsurj (x : S) : ∃ p, x ∈ Set.range (f p).base := by
+    have hx : x ∈ ⋃ α, (U α : Set S) := hU_cover.symm ▸ Set.mem_univ x
+    obtain ⟨α, hα⟩ := Set.mem_iUnion.mp hx
+    have hy : (⟨x, hα⟩ : (U α).toScheme) ∈
+        ⋃ j, Set.range (((V α j).ι ≫
+          pullback.snd (𝒰.f (i α j)) (U α).ι).base) :=
+      (hrange α).symm ▸ Set.mem_univ _
+    obtain ⟨j, y, hy⟩ := Set.mem_iUnion.mp hy
+    refine ⟨⟨α, j⟩, y, ?_⟩
+    change ((V α j).ι ≫ pullback.fst _ _ ≫ 𝒰.f _) y = x
+    rw [pullback.condition, ← Category.assoc]
+    exact congrArg (fun z : (U α).toScheme ↦ z.1) hy
+  intro W hW
+  have : IsAffine W.toScheme := hW
+  -- A finite spectral family covering the compact open W gives its fpqc condition.
+  apply IsCompactOpenCovered.of_finite_of_isSpectralMap
+    (fun p ↦ (pullback.snd (f p) W.ι ≫ W.ι).isSpectralMap)
+    (hU := W.isOpen) (hc := hW.isCompact)
+  intro x hx
+  obtain ⟨p, y, hy⟩ := hsurj x
+  obtain ⟨z, _, hz⟩ := Scheme.Pullback.exists_preimage_pullback (f := f p) (g := W.ι)
+    y (⟨x, hx⟩ : W.toScheme) hy
+  exact ⟨p, z, congrArg (fun z : W.toScheme ↦ z.1) hz⟩
 
 end AlgebraicGeometry

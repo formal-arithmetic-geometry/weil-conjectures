@@ -27,79 +27,47 @@
  ],
  "proof": [
   {
-   "text": "For each $\\alpha$, regard the affine open $U_\\alpha\\to S$ as an object of the small pro-étale site. Applying the covering clause of [sk-def-pe-site] to the given covering family $\\{W_i\\to S\\}$ and the affine open $U_\\alpha$ gives finitely many indices $i(\\alpha,j)$ and affine opens $V_{\\alpha j}\\subset W_{i(\\alpha,j)}\\times_S U_\\alpha$ whose images cover $U_\\alpha$. This is exactly the asserted local finite refinement.",
+   "text": "Pull the given pro-etale cover back to each affine U_alpha. Its underlying PreZeroHypercover remains a QuasiCompactCover by the base-change instances in Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean. Apply QuasiCompactCover.exists_isAffineOpen_of_isCompact to the top open of U_alpha, which is compact because U_alpha is affine. Choose these finite refinements for all alpha and convert images of opens into ranges of their inclusions. These are the local covering clauses of [sk-def-pe-site].",
    "uses": [
     "sk-def-pe-site"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
-    "place": "Step (2), Local models: finite affine refinement needed"
-   }
+   "elementary": false
   },
   {
-   "text": "Each $W_i\\to S$ is weakly étale by the object clause of [sk-def-pe-site]. Base change along $U_\\alpha\\to S$ preserves weak étaleness by [sk-lem-pe-weakly-etale-stability], so $W_i\\times_S U_\\alpha\\to U_\\alpha$ is weakly étale. Restricting its source to the affine open $V_{\\alpha j}$ remains weakly étale by the locality-on-the-source clause of that node (apply it to the open cover $\\{V_{\\alpha j},W_i\\times_SU_\\alpha\\}$). The open immersion $U_\\alpha\\to S$ is weakly étale by the same clause, as the restriction of $\\mathrm{id}_S$ (flat with isomorphic diagonal, hence weakly étale by [sk-def-pe-morphisms]) to the open $U_\\alpha$; so composing with $U_\\alpha\\to S$ is weakly étale by the composition clause. The fibre-product universal property [def-pc-fibre-product] identifies this composite with the displayed map $V_{\\alpha j}\\to S$.",
+   "text": "For every original covering map W_i → S, WeaklyEtale is given by Scheme.Cover.forgetQc.map_prop, the morphism clause of [sk-def-pe-site]. The projection W_i ×_S U_alpha → W_i is a base change of the open immersion U_alpha → S. Its composite with V_alpha_j → W_i ×_S U_alpha and W_i → S is weakly etale, by the open-immersion and composition instances in Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean. This uses only the weakly etale notion in [sk-def-pe-morphisms], without the bundled stability theorem.",
    "uses": [
     "sk-def-pe-site",
-    "sk-lem-pe-weakly-etale-stability",
-    "def-pc-fibre-product",
     "sk-def-pe-morphisms"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
-    "place": "Step (2), verification that the finite family is a pro-etale cover"
-   }
+   "elementary": true
   },
   {
-   "text": "Let $W\\subset S$ be any affine open. Since $S$ is quasi-separated, each intersection $W\\cap U_\\alpha$ is quasi-compact by [lem-weil-pbc-quasi-separated-affine-cover-criterion](1). The finite-affine-cover statement [lem-weil-pbc-qcqs-finite-affine-open-cover] gives finitely many affine opens $A_{\\alpha k}$ covering each $W\\cap U_\\alpha$. As the $U_\\alpha$ cover $S$, the finitely many $A_{\\alpha k}$ cover $W$.",
+   "text": "Write f_p : V_p → S for the selected maps, indexed by p = (alpha,j). Given x in S, choose alpha containing x and then a preimage of x in V_alpha_j from the local covering equality. The pullback identity [def-pc-fibre-product] identifies its image under f_p with x, so the family is jointly surjective. For an affine open W of S, all f_p are quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](1), since V_p is affine and S quasi-separated. Their base changes to W remain quasi-compact by clause (3). W → S is quasi-compact by clause (1); hence the composites V_p ×_S W → S are quasi-compact, and their underlying maps are spectral (Scheme.Hom.isSpectralMap).",
    "uses": [
-    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
-    "lem-weil-pbc-qcqs-finite-affine-open-cover"
+    "def-pc-fibre-product",
+    "lem-weil-pbc-qcqs-morphism-permanence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
-    "place": "Step (2), finite affine refinement over an arbitrary affine open of S"
-   }
+   "elementary": false
   },
   {
-   "text": "For each $A_{\\alpha k}$ and each selected $V_{\\alpha j}$, form $V_{\\alpha j}\\times_{U_\\alpha}A_{\\alpha k}$. The fibre product of affine schemes over the affine scheme $U_\\alpha$ is affine by [lem-weil-pbc-fibre-product-affine-spectra]. Since $A_{\\alpha k}\\subset W\\cap U_\\alpha$ and $U_\\alpha\\to S$ is an open immersion, the universal property [def-pc-fibre-product] identifies $V_{\\alpha j}\\times_{U_\\alpha}A_{\\alpha k}$ with $V_{\\alpha j}\\times_S A_{\\alpha k}$, which is the open subscheme of $V_{\\alpha j}\\times_S W$ over the open $A_{\\alpha k}\\subset W$ (base change of the open immersion $A_{\\alpha k}\\to W$). Its image in $A_{\\alpha k}$ is the intersection of the image of $V_{\\alpha j}$ with $A_{\\alpha k}$; hence, as $j$ varies, these finitely many affine opens have images covering $A_{\\alpha k}$, because the images of the $V_{\\alpha j}$ cover $U_\\alpha\\supset A_{\\alpha k}$. Taking the finite union over $\\alpha,k,j$ gives finitely many members $V_{\\alpha j}$ of the new family and affine opens $V_{\\alpha j}\\times_SA_{\\alpha k}\\subset V_{\\alpha j}\\times_SW$ whose images cover $W$.",
+   "text": "For x in W, choose y in some V_p mapping to x. Scheme.Pullback.exists_preimage_pullback gives z in V_p ×_S W over y and x, using [def-pc-fibre-product]. Thus the base-changed family covers W. Apply IsCompactOpenCovered.of_finite_of_isSpectralMap (Mathlib/Topology/Sets/CompactOpenCovered.lean:157) to this finite family and to the compact open W. It takes inverse images of W, which here are whole base changes, and proves exactly the final IsCompactOpenCovered assertion of [sk-def-pe-site]. Together with the affine and weakly etale clauses this proves the unchanged statement.",
    "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "def-pc-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
-    "place": "Step (2), finite affine refinement over every affine open of S"
-   }
-  },
-  {
-   "text": "The covering condition in [sk-def-pe-site], applied to the family $\\{V_{\\alpha j}\\to S\\}$ (so with the fibre products $V_{\\alpha j}\\times_SW$), is precisely the requirement verified in Step 4 for every affine open $W\\subset S$, while Step 2 verifies weak étaleness of every member. Therefore the finite family $\\{V_{\\alpha j}\\to S\\}$ is a covering family in the small pro-étale site. Its index set is finite because both the affine cover and each local refinement are finite.",
-   "uses": [
+    "def-pc-fibre-product",
     "sk-def-pe-site"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
-    "place": "Step (2), verification that the finite family is a pro-etale cover"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-fibre-product",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-qcqs-finite-affine-open-cover",
-  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-weil-pbc-qcqs-morphism-permanence",
   "sk-def-pe-morphisms",
-  "sk-def-pe-site",
-  "sk-lem-pe-weakly-etale-stability"
+  "sk-def-pe-site"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
-  "place": "Step (2), Local models: finite affine refinement and verification that the finite family is a pro-etale cover"
+  "place": "Step (2), Local models; direct Mathlib implementation by K4, 2026-10-20: QuasiCompactCover.exists_isAffineOpen_of_isCompact and finite spectral-family compact-open coverage replace the auxiliary intersection covers."
  },
  "mathlib_searches": [
   {
@@ -187,5 +155,15 @@
   "group": "Q47",
   "result": "fix",
   "note": "Statement checked clause by clause against the node and recorded deps. CompactSpace/IsLocallyNoetherian/QuasiSeparatedSpace hypotheses, S.Cover Scheme.proetalePrecoverage (the recorded sk-def-pe-site match, cover index universe free), Fin t affine cover, affine V α j in W_i ×_S U_α covering U α, WeaklyEtale composites, and IsCompactOpenCovered over every affine W (= QuasiCompactCover of the family): correct, no extra hypotheses. Edge cases fine (t=0, empty S, n α=0). lean.statement verbatim; per-file compile clean. Fix (fixes/FiniteAffineProetaleRefinement.lean, signature unchanged, compiles clean): H8, the statement docstring now carries the node's proof steps 1-5 with source place/blueprint tag; H9 minor, redundant ProAffineEtale import and unused universe v removed. Remark H11: the group's second reading is brief, but the mathematics is unaffected."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-d4b1f",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261020T141312-L-2034573",
+  "kind": "interface",
+  "note": "independent cc review: delivered FiniteAffineProetaleRefinement.lean (unchanged signature, full proof, axioms propext/choice/Quot.sound) and node proof/proof_deps/proof_origin against live clone; unit sk-prop-scalar-six realized empty, so dropping WeaklyEtaleStability bypasses nothing; zero importers"
  }
 }
