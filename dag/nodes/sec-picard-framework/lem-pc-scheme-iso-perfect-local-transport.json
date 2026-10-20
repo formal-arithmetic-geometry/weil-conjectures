@@ -112,14 +112,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SchemeIsoPerfectLocalTransport",
-  "file": "lean/Sheaf/AlgebraicGeometry/SchemeIsoPerfectLocalTransport.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.SchemeIsoPerfectLocalTransport",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SchemeIsoPerfectLocalTransport.lean",
   "declaration": "AlgebraicGeometry.Scheme.scheme_iso_local_perfect_transport",
-  "statement": "theorem scheme_iso_local_perfect_transport {X Y : Scheme.{u}}\n    (s : X ≅ Y)\n    [HasDerivedCategory.{w₁} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w₂} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w₁} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    [∀ V : Y.Opens,\n      HasDerivedCategory.{w₂} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))]\n    (e : schemeDerivedCategory X ≌ schemeDerivedCategory Y)\n    (he : DerivedCategory.Q ⋙ e.functor ≅\n      (@Functor.mapHomologicalComplex ℤ\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) _ _ _ _\n        (SheafOfModules.pushforward s.hom.toRingCatSheafHom)\n        ⟨fun _ _ ↦ rfl⟩ (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q)\n    (E : schemeDerivedCategory Y) (x : X)\n    (V : Y.Opens) (hx : s.hom.base x ∈ V)\n    (K : CochainComplex\n      (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V)) ℤ)\n    (hK : IsStrictlyPerfect Y V K)\n    (hE : Nonempty ((SheafOfModules.overFunctor\n      (moduleRings Y.toRingedSpace) V).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj K)) :\n    ∃ U : X.Opens, x ∈ U ∧\n      ∃ K' : CochainComplex\n          (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ,\n        IsStrictlyPerfect X U K' ∧\n        Nonempty ((SheafOfModules.overFunctor\n          (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj (e.inverse.obj E) ≅\n          DerivedCategory.Q.obj K')",
+  "statement": "theorem scheme_iso_local_perfect_transport {X Y : Scheme.{u}}\n    (s : X ≅ Y)\n    [HasDerivedCategory.{w₁} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w₂} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w₁} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    [∀ V : Y.Opens,\n      HasDerivedCategory.{w₂} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))]\n    (e : schemeDerivedCategory X ≌ schemeDerivedCategory Y)\n    (he : DerivedCategory.Q ⋙ e.functor ≅\n      (@Functor.mapHomologicalComplex ℤ\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) _ _ _ _\n        (SheafOfModules.pushforward s.hom.toRingCatSheafHom)\n        ⟨fun _ _ ↦ rfl⟩ (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q)\n    (E : schemeDerivedCategory Y) (x : X)\n    (V : Y.Opens) (hx : s.hom.base x ∈ V)\n    (K : CochainComplex\n      (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V)) ℤ)\n    (hK : IsStrictlyPerfect Y V K)\n    (hE : Nonempty ((SheafOfModules.overFunctor.{u}\n      (moduleRings Y.toRingedSpace) V).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj K)) :\n    ∃ U : X.Opens, x ∈ U ∧\n      ∃ K' : CochainComplex\n          (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ,\n        IsStrictlyPerfect X U K' ∧\n        Nonempty ((SheafOfModules.overFunctor.{u}\n          (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj (e.inverse.obj E) ≅\n          DerivedCategory.Q.obj K')",
   "branch": "sheaf-dag",
   "by": "U2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "The quarantined Sheaf copy is restored as a re-export of the proved upstream twin; the upstream signature makes the module-sheaf universe explicit."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -132,14 +133,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-802cf",
-  "group": "C3",
+  "reviewer": "C-655c9",
+  "group": "R7",
   "result": "pass",
-  "landing": "20261012T230753-L-1907282",
-  "kind": "interface",
-  "note": "independent Codex review: Unchanged theorem signature matched the node; proof, dependency records, scoped commands and report agree. Delivery and sole direct importer compile cleanly; both proved declarations use only permitted axioms."
+  "landing": "20261020T154052-L-3040495",
+  "kind": "proof",
+  "note": "independent cc review: delivered Sheaf re-export module and node lean.statement matched verbatim against the proved upstream WeilConjectures.AlgebraicGeometry.SchemeIsoPerfectLocalTransport and the quarantined copy (difference only overFunctor.{u}); compile clean, axioms standard, no importers"
  },
  "lean_audit": {
   "master": {
