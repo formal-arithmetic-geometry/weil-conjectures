@@ -14,113 +14,122 @@
  ],
  "proof": [
   {
-   "text": "For each S, the tower (F_{r,S}, t_{r,S}) is a diagram of sheaves of R_S-modules. By [def-pur-sheaf-inverse-limit], its inverse limit L_S exists in that module category, is computed sectionwise by compatible tuples, and has coordinate projections p_{r,S}. In particular the projections satisfy t_{r,S} p_{r+1,S}=p_{r,S}.",
-   "uses": [
-    "def-pur-sheaf-inverse-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03DB and Lemma 03CO (2), limits of sheaves of modules and sectionwise computation"
-   }
-  },
-  {
-   "text": "Apply h^{-1} to p_{r,T} and then compose with beta_{r,h}. The resulting maps h^{-1}L_T -> F_{r,T'} are R_{T'}-linear after the stipulated identification h^{-1}R_T ≅ R_{T'}. For every transition, the equality t_{r,T'} beta_{r+1,h}=beta_{r,h} h^{-1}(t_{r,T}) and functoriality of h^{-1} give t_{r,T'} beta_{r+1,h} h^{-1}p_{r+1,T}=beta_{r,h}h^{-1}p_{r,T}, so these maps form a cone over the T' tower.",
-   "uses": [
-    "def-weil-proetale-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A5, functoriality of the inverse-image construction on sheaf morphisms"
-   }
-  },
-  {
-   "text": "The limit universal property in [def-pur-sheaf-inverse-limit] gives a unique morphism c_h:h^{-1}L_T -> L_{T'} whose composite with p_{r,T'} is beta_{r,h} h^{-1}p_{r,T} for every r. The cone maps are R_{T'}-linear, so the induced map is R_{T'}-linear in the sheaf-of-modules category. Uniqueness is tested after all coordinate projections, since the compatible-tuple description makes those projections jointly monic.",
-   "uses": [
-    "def-pur-sheaf-inverse-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03DB and Lemma 03CO (2), limit universal property and coordinate projections"
-   }
-  },
-  {
-   "text": "For composable maps $T''\\xrightarrow{g}T'\\xrightarrow{h}T$, use $(h\\circ g)^{-1}\\cong g^{-1}h^{-1}$ from [det-pe-topos-functoriality-inverse-image]. The defining equations give\n$$p_{r,T''}c_g g^{-1}(c_h)=\\beta_{r,g}g^{-1}(p_{r,T'}c_h)=\\beta_{r,g}g^{-1}(\\beta_{r,h})(h\\circ g)^{-1}p_{r,T}=\\beta_{r,h\\circ g}(h\\circ g)^{-1}p_{r,T}.$$\nThe assumed composition equation for $\\beta$ gives the last equality. Limit uniqueness [def-pur-sheaf-inverse-limit] implies $c_{h\\circ g}=c_g g^{-1}(c_h)$. For the identity map, the assumed identity equation for $\\beta$ gives $p_{r,T}c_{\\mathrm{id}}=p_{r,T}$, so the same uniqueness gives $c_{\\mathrm{id}}=\\mathrm{id}$.",
-   "uses": [
-    "det-pe-topos-functoriality-inverse-image",
-    "def-pur-sheaf-inverse-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md",
-    "place": "Final sentence, compatibility with identity and composition of base changes"
-   }
-  },
-  {
-   "text": "Apply [lem-pur-proetale-inverse-image-tensor-comparison] (1) with $\\mathcal O=R_T$ to $L_T,A_T$, and with $\\mathcal O=Q_T$ to $F_{N,T},A_T$: the isomorphisms $\\sigma^h$ give $h^{-1}B_T\\cong h^{-1}L_T\\otimes_{h^{-1}R_T}h^{-1}A_T$ and $h^{-1}D_T\\cong h^{-1}F_{N,T}\\otimes_{h^{-1}Q_T}h^{-1}A_T$. Transport these along the stipulated ring isomorphisms $h^{-1}R_T\\cong R_{T'}$, $h^{-1}Q_T\\cong Q_{T'}$ and $h^{-1}A_T\\cong A_{T'}$ of [def-weil-proetale-inverse-image]; the balancing relations correspond because these maps commute with the coefficient ring homomorphisms $\\mathbf Z_\\ell\\to\\mathbf Z/\\ell^N\\to A$: both composites send each constant section to that same section, so they agree by the defining uniqueness in [def-weil-proetale-inverse-image]. This gives the canonical tensor pullback identifications\n$$h^{-1}B_T\\cong(h^{-1}L_T)\\otimes_{R_{T'}}A_{T'},\\qquad h^{-1}D_T\\cong(h^{-1}F_{N,T})\\otimes_{Q_{T'}}A_{T'},$$\nsending $h^{-1}(x\\otimes a)$ to $h^{-1}x\\otimes a$ and $h^{-1}(y\\otimes a)$ to $h^{-1}y\\otimes a$ for local sections $x,y$ and constant $a$. Here $\\beta_{N,h}$ is $Q_{T'}$-linear, since it is $R_{T'}$-linear and $R_{T'}\\to Q_{T'}$ is locally surjective. Postcomposing the first identification with $c_h\\otimes1$ defines $b_h$; postcomposing the second with $\\beta_{N,h}\\otimes1$ defines $d_h$. These maps are supplied by functoriality of the tensor construction [def-pur-sheaf-tensor-product].",
-   "uses": [
-    "lem-pur-proetale-inverse-image-tensor-comparison",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-proetale-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback, with the pure-tensor description of the comparison"
-   }
-  },
-  {
-   "text": "First, the formula for $\\alpha_S$ is balanced: $p_{N,S}(rx)\\otimes a=(\\bar r\\,p_{N,S}(x))\\otimes a=p_{N,S}(x)\\otimes ra$, since both $F_{N,S}$ and $A_S$ carry the quotient $Q_S$-action. Hence $\\alpha_S=\\pi_S\\circ(p_{N,S}\\otimes1)$, where $p_{N,S}\\otimes1:L_S\\otimes_{R_S}A_S\\to F_{N,S}\\otimes_{R_S}A_S$ is the tensor map [def-pur-sheaf-tensor-product] and $\\pi_S:F_{N,S}\\otimes_{R_S}A_S\\to F_{N,S}\\otimes_{Q_S}A_S$ sends $y\\otimes a$ to $y\\otimes a$. By naturality in [lem-pur-proetale-inverse-image-tensor-comparison] (1) applied to $p_{N,T}$, and by its change-of-rings clause (2) for $R_T\\to Q_T$, the identifications of Step 5 carry $h^{-1}\\alpha_T$ to the map $h^{-1}x\\otimes a\\mapsto h^{-1}p_{N,T}(x)\\otimes a$, and then $d_hh^{-1}\\alpha_T$ sends $h^{-1}x\\otimes a$ to $\\beta_{N,h}(h^{-1}p_{N,T}(x))\\otimes a$. Along the other route, $\\alpha_{T'}b_h$ sends it to $p_{N,T'}(c_h(h^{-1}x))\\otimes a$, which is the same element by Step 3. The elements $h^{-1}x\\otimes a$, for $x$ a section of $L_T$ over some $V$ and $a$ constant, generate $(h^{-1}L_T)\\otimes_{R_{T'}}A_{T'}$ locally (the sections of an inverse image are locally restrictions of such $h^{-1}x$, and the sheaf tensor is locally generated by pure tensors), so the two module maps agree. This proves $\\alpha_{T'}b_h=d_hh^{-1}\\alpha_T$.",
+   "text": "Use limit.post and limMap for the cone formed by applying inverse image to the projections and composing with beta. limit.post_pi, limMap_pi and limit.hom_ext give the coordinate formula and uniqueness. No preservation of infinite limits is asserted.",
    "uses": [
     "def-pur-sheaf-inverse-limit",
-    "lem-pur-proetale-inverse-image-tensor-comparison",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-proetale-inverse-image"
+    "def-weil-pbc-proetale-operations"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md",
-    "place": "Final sentence, compatibility of the inverse-limit projection with the finite tensor square"
+    "place": "Final sentence, inverse-limit and finite-tensor base-change compatibility; Stacks 03DB, 03EK, 03EL and 09A5"
    }
   },
   {
-   "text": "Use the composition isomorphism $\\gamma:(h\\circ g)^{-1}\\cong g^{-1}h^{-1}$ and the coherence clause (3) of [lem-pur-proetale-inverse-image-tensor-comparison], whose $\\gamma$ is the identification of [det-pe-topos-functoriality-inverse-image] used in Step 4. For $T''\\xrightarrow{g}T'\\xrightarrow{h}T$, clause (3) shows that the tensor pullback identification for $h\\circ g$ is the composite of $g^{-1}$ of that for $h$ with that for $g$, so the two routes $b_g g^{-1}(b_h)$ and $b_{h\\circ g}$ are $(c_g\\,g^{-1}(c_h))\\otimes1$ and $c_{h\\circ g}\\otimes1$ after the same identification. These are equal by Step 4. The coefficient comparisons agree because their composites send each constant section $a$ to itself, as in Step 5. The identity clause of (3) and $c_{\\mathrm{id}}=\\mathrm{id}$ give $b_{\\mathrm{id}}=\\mathrm{id}$. Functoriality of the tensor construction [def-pur-sheaf-tensor-product] gives these equations as sheaf maps.",
+   "text": "Construct the scalar-extension Hom equivalence by the sectionwise extend/restrict-scalars adjunction and module sheafification. Its value on a pure tensor is a times the value on 1 tensor x. Naturality of toSheafify makes the constant coefficient maps commute with direct image. Combine the scalar-extension equivalence, the inverse-image adjunction, and the resulting identity-on-sections direct-scalar isomorphism to obtain tensorPullbackHomEquiv. Its value on adjunction units proves existence and uniqueness of tateTensorMap. Yoneda and these equivalences show that this map is invertible whenever the supplied module map is.",
    "uses": [
-    "det-pe-topos-functoriality-inverse-image",
     "def-pur-sheaf-tensor-product",
-    "lem-pur-proetale-inverse-image-tensor-comparison"
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-proetale-operations",
+    "lem-pur-isomorphism-inverse-image-tensor-hom"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md",
-    "place": "Final sentence, compatibility with composition after tensoring"
+    "place": "Final sentence, inverse-limit and finite-tensor base-change compatibility; Stacks 03DB, 03EK, 03EL and 09A5"
    }
   },
   {
-   "text": "If $\\alpha_T$ and $\\alpha_{T'}$ are isomorphisms, then $d_h$ is an isomorphism: it is the composite of the isomorphism $\\sigma^h$ of [lem-pur-proetale-inverse-image-tensor-comparison] (1) (transported along the coefficient ring isomorphisms) with $\\beta_{N,h}\\otimes1$, and tensoring $\\beta_{N,h}^{-1}$ with $1$ gives an inverse to $\\beta_{N,h}\\otimes1$. The inverse image of $\\alpha_T$ is an isomorphism because a functor sends an inverse pair to an inverse pair. The commutative square therefore rewrites $b_h=\\alpha_{T'}^{-1}d_hh^{-1}(\\alpha_T)$, a composite of isomorphisms, so $b_h$ is an isomorphism.",
+   "text": "Construct the reduction map by the scalar-extension Hom equivalence applied to the projection followed by the inverse of the finite presentation and the tensor unit. The coefficient-composition equation follows from constantSheaf.map_comp. Linearity and the pure-tensor formula prove its normalization and uniqueness.",
    "uses": [
-    "lem-pur-proetale-inverse-image-tensor-comparison"
+    "def-pur-sheaf-tensor-product",
+    "lem-pur-isomorphism-inverse-image-tensor-hom"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md",
-    "place": "Final sentence, isomorphism conclusion from the commuting tensor square"
+    "place": "Final sentence, inverse-limit and finite-tensor base-change compatibility; Stacks 03DB, 03EK, 03EL and 09A5"
+   }
+  },
+  {
+   "text": "For a surjective coefficient homomorphism q, the induced map of constant ring sheaves is locally surjective. Mathlib restrictHomEquivOfIsLocallySurjective therefore identifies maps before and after scalar restriction. Construct the quotient action on the unchanged underlying abelian sheaf by factoring its scalar representation through q, and extend the action from the constant presheaf via PresheafOfModules.sheafify. The old and new restricted actions agree by the sheafification scalar equation, giving the presentation. For p-adic reduction, ker_toZModPow and the level annihilation hypothesis supply the required kernel condition. Full faithfulness of scalar restriction proves uniqueness up to the unique compatible isomorphism. Separately factor the algebra map using RingHom.liftOfSurjective; its kernel condition follows from l^(n+1)=0 in A.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md",
+    "place": "Final sentence, inverse-limit and finite-tensor base-change compatibility; Stacks 03DB, 03EK, 03EL and 09A5"
+   }
+  },
+  {
+   "text": "Combine scalar-restriction full faithfulness, the inverse-image adjunctions and the direct-scalar isomorphism to lift the finite-level R-linear isomorphism to Q coefficients. Its unit formula is the specified finite tensor formula. Yoneda reflects invertibility through this Hom equivalence, and tensorMap_isIso gives invertibility after tensoring.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-weil-proetale-inverse-image",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md",
+    "place": "Final sentence, inverse-limit and finite-tensor base-change compatibility; Stacks 03DB, 03EK, 03EL and 09A5"
+   }
+  },
+  {
+   "text": "Apply tensorPullbackHomEquiv and injectivity of the inverse-image adjunction to test the finite square on units of 1 tensor x. The tensor-map and reduction formulas reduce its two sides to the limit projection equation; cancel the finite presentation isomorphisms. If both reduction maps are invertible, the square and invertibility of the finite tensor map imply invertibility of the limit tensor map. Specialize to the unique quotient presentations and algebra map for the canonical square.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md",
+    "place": "Final sentence, inverse-limit and finite-tensor base-change compatibility; Stacks 03DB, 03EK, 03EL and 09A5"
+   }
+  },
+  {
+   "text": "For identity pullback, identify direct image with the identity using site pullbackId and constant-sheaf unit naturality. Take the adjoint mate of this identification; the mate unit equation proves the required identity normalization and adjunction injectivity proves uniqueness. For composition retain the existing exchangeModuleComposition and the canonical equality proEtaleConstantRingCompositeCoefficients_eq. Its prescribed conjugate and the adjunction mate unit equation give the iterated-unit formula for this same compositor.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-strict-tower-operations",
+    "pur713-def-pullback-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md",
+    "place": "Final sentence, inverse-limit and finite-tensor base-change compatibility; Stacks 03DB, 03EK, 03EL and 09A5"
+   }
+  },
+  {
+   "text": "Limit identity and composition follow from the projection equations and naturality of the retained canonical comparisons. Tensor identity follows from its unique pure-tensor normalization. Tensor composition is checked on units of 1 tensor x using tensorPullbackHomEquiv injectivity: the compositor unit formula, naturality, and the pure-tensor formulas give identical iterated images. This proves the laws for the b maps with the same canonical compositor.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-strict-tower-operations",
+    "pur713-def-pullback-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md",
+    "place": "Final sentence, inverse-limit and finite-tensor base-change compatibility; Stacks 03DB, 03EK, 03EL and 09A5"
    }
   }
  ],
  "proof_deps": [
   "def-pur-sheaf-inverse-limit",
   "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-strict-tower-operations",
   "def-weil-proetale-inverse-image",
-  "det-pe-topos-functoriality-inverse-image",
-  "lem-pur-proetale-inverse-image-tensor-comparison"
+  "lem-pur-isomorphism-inverse-image-tensor-hom",
+  "pur713-def-pullback-comparison"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "B9",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md",
-  "place": "Final sentence: inverse-limit projection/tensor base-change compatibility, expanded into the eight steps above"
+  "place": "Final sentence, implemented directly by the scalar-extension and inverse-image Hom equivalences, quotient scalar representations, and the existing normalized exchangeModuleComposition"
  },
  "mathlib_searches": [
   {
@@ -244,9 +253,7 @@
    }
   ]
  },
- "tool_uses": [
-  "det-pe-topos-functoriality-inverse-image"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -311,5 +318,15 @@
   "existing": false,
   "note": "The node is stated across the recorded declarations: the limit projection/uniqueness theorem, its identity/composition laws, the canonical finite tensor square and isomorphism criterion, and the tensor identity/composition laws. All additional definitions are explicit canonical-map or quotient-action helpers of this same node; chosen maps are uniquely normalized, and the finite quotient module has a unique-compatible-isomorphism universal property. Positive level r is encoded by op (r-1).",
   "fixed_by": "NT-stage2-cc-002329eb7"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261020T131940-L-1393758",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
