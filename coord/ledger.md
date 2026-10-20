@@ -17703,3 +17703,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:05 L: returned deliver/T1/Sheaf.Paper.InvertibleTensorScalarExtension (reviewer RETURN: (reviewer C-49c1d, head 49c1d2feb) 6/C1: dag/nodes/sec-smooth-purity/lem-sp-invertible-tensor-scalar-extension.json — th)
 - 03:07 L: returned deliver/NL/lem-pur-system-level-projection-formula-coherence (reviewer RETURN: L: independent stage-2 immutable head ec9ccd68059b: Statement clauses, edge cases, universes, helpers and docstrings che)
 - 03:10 L: returned deliver/U9/Sheaf.CategoryTheory.RingedToposBinaryDescent (reviewer RETURN: (reviewer C-561a3, head 561a3aa3c) H9: lean/Sheaf/CategoryTheory/RingedToposRestrictionModels.lean line 18 — delete the )
+- 03:12 L: returned deliver/H3/Sheaf.CategoryTheory.ConstantLeftModuleInverseImage (reviewer RETURN: (reviewer C-9c0b5, head 9c0b57f0d) 8 (d): coord/changes/H3-constant-left-module-transport-extraction.md, ## Users table:)
