@@ -14,57 +14,45 @@
  ],
  "proof": [
   {
-   "text": "Put $J_n=\\operatorname{gr}^n I$ for $a\\le n\\le b$, so these objects are injective by hypothesis and their required graded-piece isomorphisms are identities. For $a\\le n\\le b+1$ put $B_n=\\bigoplus_{n\\le k\\le b}J_k$; these finite biproducts exist by [def-sp-abelian]. Write $u_{p,n}:F^pI\\to F^nI$ for the filtration inclusion and $j_{p,n}:B_p\\to B_n$ for the tail inclusion when $n\\le p\\le b+1$. Construct, by induction on the nonnegative integer $b+1-n$, isomorphisms $\\theta_n:F^nI\\xrightarrow{\\sim}B_n$ satisfying $\\theta_n u_{p,n}=j_{p,n}\\theta_p$ for every $n\\le p\\le b+1$. The base $n=b+1$ is the unique isomorphism from $F^{b+1}I=0$ to the empty biproduct $B_{b+1}=0$; its sole compatibility equation is the identity.",
-   "uses": [
-    "def-sp-abelian",
-    "def-sp-filtration"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05TP, lemma-filtered-injective: expand the omitted finite-filtration splitting argument"
-   }
-  },
-  {
-   "text": "Suppose the compatible isomorphisms have been constructed for indices $n+1,\\ldots,b+1$, where $a\\le n\\le b$. The biproduct $B_{n+1}$ is also the product of the finite family $(J_k)_{n+1\\le k\\le b}$. By [lem-weil-pbc-product-injectives] it is injective, including when this family is empty. Consequently $F^{n+1}I$ is injective: for a monomorphism $v:M\\to N$ and a map $f:M\\to F^{n+1}I$, extend $\\theta_{n+1}f$ to $g:N\\to B_{n+1}$ and then use $\\theta_{n+1}^{-1}g$ as the extension of $f$. This verifies exactly the extension property of [def-sp-injective-resolutions].",
-   "uses": [
-    "def-sp-abelian",
-    "def-sp-injective-resolutions",
-    "lem-weil-pbc-product-injectives"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0137, lemma-product-injectives; applied to finite biproducts in the induction for derived.tex Tag 05TP"
-   }
-  },
-  {
-   "text": "Let $i_n=u_{n+1,n}$ and let $q_n:F^nI\\to J_n=F^nI/F^{n+1}I$ be the quotient. By the definition of a subobject quotient in an abelian category, $i_n$ is the kernel of $q_n$, $q_n$ is its cokernel, and hence $0\\to F^{n+1}I\\xrightarrow{i_n}F^nI\\xrightarrow{q_n}J_n\\to0$ is short exact. The first object is injective by Step 2, so [lem-weil-pbc-ses-injective-kernel-splits] gives $r_n:F^nI\\to F^{n+1}I$ and $s_n:J_n\\to F^nI$ with $r_ni_n=1$, $q_ns_n=1$, and $i_nr_n+s_nq_n=1$. It is the injectivity of the first term, established by descending induction, that permits this application.",
+   "text": "Put $J_n=\\operatorname{gr}^n I$ for $n\\in[a,b]$, and let $q_n:F^nI\\to J_n$ be the cokernel of $F^{n+1}I\\to F^nI$. Since $J_n$ is injective, extend $q_n$ along the monomorphism $F^nI\\to I$ to a map $f_n:I\\to J_n$. For $p>n$, the composite $F^pI\\to I\\xrightarrow{f_n}J_n$ vanishes: factor through $F^{n+1}I\\to F^nI$ and use the cokernel relation. This is exactly the extension property in the definition of injectivity (Mathlib Injective.factorThru and comp_factorThru), without any injectivity assertion about the filtration steps.",
    "uses": [
     "def-sp-abelian",
     "def-sp-filtration",
-    "lem-weil-pbc-ses-injective-kernel-splits"
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TP, lemma-filtered-injective; omitted finite-filtration splitting argument expanded by extending graded coordinate maps and descending induction"
+   }
+  },
+  {
+   "text": "For every integer $p$ put $B_p=\\bigoplus_{n\\in[a,b],\\ p\\le n}J_n$ and define $\\alpha_p:F^pI\\to B_p$ by the coordinates $F^pI\\to I\\xrightarrow{f_n}J_n$. The vanishing in Step 1 shows that $\\alpha_p$ commutes with the next-step filtration inclusion and the tail inclusion $d_p:B_{p+1}\\to B_p$. Explicitly, compare each projection: at $n\\ge p+1$ the two coordinates are the same inclusion followed by $f_n$; at $n=p$ they both vanish. For $a\\le p\\le b$, projection onto the $p$-coordinate gives a split short exact sequence $0\\to B_{p+1}\\xrightarrow{d_p}B_p\\to J_p\\to0$. Its retraction is restriction to coordinates $n\\ge p+1$, its section is the $p$-summand inclusion, and their two complementary idempotents sum to the identity, as checked on each biproduct coordinate.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TP, lemma-filtered-injective; omitted finite-filtration splitting argument expanded by extending graded coordinate maps and descending induction"
+   }
+  },
+  {
+   "text": "Prove that $\\alpha_p$ is invertible for $a\\le p\\le b+1$ by descending induction. For $p=b+1$, its source is zero by the upper filtration bound and its target is an empty biproduct, hence it is invertible. At a successor step compare the short exact sequence $0\\to F^{p+1}I\\to F^pI\\xrightarrow{q_p}J_p\\to0$ with the split short exact sequence of Step 2. The left vertical map is $\\alpha_{p+1}$, invertible by induction; the middle map is $\\alpha_p$; the right vertical map is the identity of $J_p$. The left square commutes by Step 2, and the right square commutes because the $p$-coordinate restricts to $q_p$ on $F^pI$. Apply the short five lemma [lem-weil-pbc-short-five-lemma] to get invertibility of $\\alpha_p$.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration",
+    "lem-weil-pbc-short-five-lemma"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0136, lemma-characterize-injectives, (1) implies (3); the injection-splitting fact used by derived.tex Tag 05TP"
-   }
-  },
-  {
-   "text": "The splitting identities also give $r_ns_n=0$: composing $i_nr_n+s_nq_n=1$ with $s_n$ yields $i_nr_ns_n=0$, and $i_n$ is monic. Therefore the maps $(q_n,r_n):F^nI\\to J_n\\oplus F^{n+1}I$ and $(s_n,i_n):J_n\\oplus F^{n+1}I\\to F^nI$ are inverse: the composite on $F^nI$ is $s_nq_n+i_nr_n=1$, and the four blocks of the other composite are $q_ns_n=1$, $q_ni_n=0$, $r_ns_n=0$, $r_ni_n=1$. Compose the first isomorphism with $1_{J_n}\\oplus\\theta_{n+1}$ and identify $J_n\\oplus B_{n+1}$ with $B_n$, using the same coordinates indexed by $k=n,\\ldots,b$. This defines $\\theta_n$.",
-   "uses": [
-    "def-sp-abelian",
-    "lem-weil-pbc-ses-injective-kernel-splits"
-   ],
-   "elementary": true,
-   "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05TP, lemma-filtered-injective: expand the omitted finite-filtration splitting argument"
+    "place": "Tag 05TP, lemma-filtered-injective; omitted finite-filtration splitting argument expanded by extending graded coordinate maps and descending induction"
    }
   },
   {
-   "text": "Since $q_ni_n=0$ and $r_ni_n=1$, the just-constructed map satisfies $\\theta_ni_n=j_{n+1,n}\\theta_{n+1}$. If $n+1\\le p\\le b+1$, the inclusions satisfy $u_{p,n}=i_nu_{p,n+1}$, so the induction hypothesis gives $\\theta_nu_{p,n}=j_{n+1,n}\\theta_{n+1}u_{p,n+1}=j_{n+1,n}j_{p,n+1}\\theta_p=j_{p,n}\\theta_p$. For $p=n$ the equation is the identity. Thus the whole compatibility invariant is preserved. All equations here are equations of morphisms; as $\\theta_p$ is an isomorphism, they identify the subobject $F^pI\\subseteq F^nI$ with precisely the tail sub-biproduct $B_p\\subseteq B_n$.",
+   "text": "Let $\\beta:I\\to B=\\bigoplus_{n\\in[a,b]}J_n$ have coordinates $f_n$, and let $j_p:B_p\\to B$ be the canonical tail inclusion. Comparing coordinates and using Step 1 gives $(F^pI\\to I)\\beta=\\alpha_pj_p$ for every integer $p$. At $p=a$, the filtration inclusion is invertible by $F^aI=I$, $\\alpha_a$ is invertible by Step 3, and $j_a$ is invertible because every index lies in the tail. Hence $\\beta$ is invertible. Take $\\theta$ to be this isomorphism, the already chosen injective $J_n$, and their identity graded-piece isomorphisms.",
    "uses": [
     "def-sp-abelian",
     "def-sp-filtration"
@@ -72,11 +60,11 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05TP, lemma-filtered-injective: expand the omitted finite-filtration splitting argument"
+    "place": "Tag 05TP, lemma-filtered-injective; omitted finite-filtration splitting argument expanded by extending graded coordinate maps and descending induction"
    }
   },
   {
-   "text": "After the finite descent to $n=a$, use $F^aI=I$ to set $\\theta=\\theta_a:I\\xrightarrow{\\sim}\\bigoplus_{k=a}^bJ_k$. Step 5 proves the required subobject identification for $a\\le p\\le b+1$. For $p<a$, decreasingness gives $I=F^aI\\subseteq F^pI\\subseteq I$, so $F^pI=I$ and every index $k\\in[a,b]$ satisfies $k\\ge p$. For $p>b+1$, decreasingness gives $F^pI\\subseteq F^{b+1}I=0$, while the specified index set is empty. Hence the same $\\theta$ works for every integer $p$, with the injective $J_n$ and their identity graded-piece isomorphisms chosen in Step 1.",
+   "text": "For $a\\le p\\le b+1$, the factorization in Step 4 and invertibility of $\\alpha_p$ give $\\operatorname{im}((F^pI\\to I)\\theta)=\\operatorname{im}(j_p)$; this is the required equality of subobjects, not merely of abstract objects. If $p<a$, decreasingness and $F^aI=I$ give $F^pI=I$, and $j_p$ is an isomorphism because all indices are in the tail, so both subobjects are top. If $p>b+1$, the tail is empty, so $j_p=0$; the factorization in Step 4 makes both images zero. This covers every integer $p$, including the empty tail at the upper endpoint.",
    "uses": [
     "def-sp-abelian",
     "def-sp-filtration"
@@ -84,7 +72,7 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05TP, lemma-filtered-injective: expand the omitted finite-filtration splitting argument"
+    "place": "Tag 05TP, lemma-filtered-injective; omitted finite-filtration splitting argument expanded by extending graded coordinate maps and descending induction"
    }
   }
  ],
@@ -92,13 +80,12 @@
   "def-sp-abelian",
   "def-sp-filtration",
   "def-sp-injective-resolutions",
-  "lem-weil-pbc-product-injectives",
-  "lem-weil-pbc-ses-injective-kernel-splits"
+  "lem-weil-pbc-short-five-lemma"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 05TP, lemma-filtered-injective: expand the omitted finite-filtration splitting argument"
+  "place": "Tag 05TP, lemma-filtered-injective; omitted finite-filtration splitting argument expanded by extending graded coordinate maps and descending induction; written by V3, 2026-10-20"
  },
  "mathlib_searches": [
   {
@@ -235,5 +222,15 @@
   "by": "N8",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261020T131209-L-1258112",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
