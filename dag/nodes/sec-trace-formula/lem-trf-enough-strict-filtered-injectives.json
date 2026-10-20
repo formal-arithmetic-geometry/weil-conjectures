@@ -25,7 +25,7 @@
    }
   },
   {
-   "text": "For $c\\le n\\le d$ let $\\bar u_n:X/F^{n+1}X\\to Y/F^{n+1}Y$ be induced by $u$. Its kernel is zero: the inverse image of $F^{n+1}Y$ under $u$ is $F^{n+1}X$, precisely the strictness equality after identifying $X$ with $u(X)$. Equivalently, the kernel of $X\\xrightarrow{u}Y\\to Y/F^{n+1}Y$ is $F^{n+1}X$, so passage to its quotient gives a monomorphism $\\bar u_n$. This is the kernel/quotient universal-property calculation in the abelian category [def-sp-abelian], using the subobject and quotient conventions of [def-sp-filtration]. The vanishing from Step 1 factors $f_n$ through a map $\\bar f_n:X/F^{n+1}X\\to J_n$.",
+   "text": "For each $c\\le n\\le d$, strictness says that a morphism $z:Z\\to X$ whose composite with $u$ factors through $F^{n+1}Y$ factors through $F^{n+1}X$: factor $uz$ through the intersection $u(X)\\cap F^{n+1}Y=u(F^{n+1}X)$ and cancel the monomorphism $u$. Therefore the square of step inclusions and their restrictions is a pullback. Mathlib CategoryTheory.Abelian.mono_cokernel_map_of_isPullback makes the induced quotient map $\\bar u_n:X/F^{n+1}X\\to Y/F^{n+1}Y$ monic. The vanishing from Step 1 factors $f_n$ through $\\bar f_n:X/F^{n+1}X\\to J_n$ by the cokernel universal property. These constructions use [def-sp-abelian] and [def-sp-filtration].",
    "uses": [
     "def-sp-abelian",
     "def-sp-filtration"
@@ -50,7 +50,7 @@
    }
   },
   {
-   "text": "Now assume enough injectives and fix any bounds $a\\le b$ with $F^aX=X$, $F^{b+1}X=0$; such bounds exist for every finite filtration [def-sp-filtration], enlarging the interval if necessary. For each $a\\le n\\le b$ choose a monomorphism $e_n:X/F^{n+1}X\\hookrightarrow E_n$ into an injective object, exactly as allowed by the enough-injectives hypothesis. Form the finite biproduct $E=\\bigoplus_{n=a}^b E_n$ [def-sp-abelian] and give it the filtration $F^pE=\\bigoplus_{n\\ge p}E_n$, restricting indices to $[a,b]$. Define $v:X\\to E$ by components $v_n=e_nq_n$. If $n<p$, then $q_n$ vanishes on $F^pX$, so $v$ preserves filtration. Direct projection onto the $p$th summand identifies $F^pE/F^{p+1}E$ with $E_p$ for $a\\le p\\le b$; outside the interval that quotient is zero. Zero is injective because all maps into it are the unique zero map [def-sp-injective-resolutions]. Thus $E$ is filtered injective, and by construction $F^aE=E$ and $F^{b+1}E=0$.",
+   "text": "Assume enough injectives and fix $a\\le b$ with $F^aX=X$ and $F^{b+1}X=0$. For a finite filtration [def-sp-filtration], such bounds are obtained from any top index $a$ and zero index $m$ by taking $b=\\max(a,m)$. For $n\\in[a,b]$, take the Mathlib injective presentation $e_n:X/F^{n+1}X\\hookrightarrow E_n$ and form the finite biproduct $E=\\bigoplus E_n$ [def-sp-abelian]. Define $F^pE$ as the image of the canonical inclusion of the summands with $n\\ge p$. A morphism into $E$ factors through $F^pE$ exactly when its components with $n<p$ vanish: the reverse factorization is its composite with the projection to the tail sub-biproduct. This criterion proves decreasingness and filtration preservation of $v:X\\to E$ with components $e_nq_n$. Each tail is isomorphic to a finite biproduct of injectives, hence injective. The short exact sequence $0\\to F^{p+1}E\\to F^pE\\to\\operatorname{gr}^pE\\to0$ splits by injectivity of its first object. Its quotient is a retract of the injective middle object, hence injective by CategoryTheory.Retract.injective. This also handles empty tails and degrees outside the interval, without identifying each individual graded quotient. The tail criterion gives $F^aE=E$ and $F^{b+1}E=0$. The extension property and presentations are [def-sp-injective-resolutions].",
    "uses": [
     "def-sp-filtration",
     "def-sp-abelian",
@@ -63,7 +63,7 @@
    }
   },
   {
-   "text": "The last coordinate $v_b=e_bq_b=e_b$ is monic since $F^{b+1}X=0$, so $v$ is monic. For $a<p\\le b+1$, projection from $E$ to its summands with $n<p$ has kernel $F^pE$. Its composite with $v$ has kernel $F^pX$: the coordinate $n=p-1$ has exactly that kernel, since $e_{p-1}$ is monic, and all coordinates $n<p$ vanish on $F^pX$. Therefore $v^{-1}(F^pE)=F^pX$, equivalently $v(X)\\cap F^pE=v(F^pX)$ as $v$ is monic. For $p\\le a$, both filtrations are the whole object, so the same equality holds; for $p>b+1$, both steps are zero and monicity again gives it. These kernel and finite-projection computations use [def-sp-abelian] and [def-sp-filtration] only. Thus $v$ is strict and retains the prescribed bounds, proving the remaining assertions. If $a=b$, $v$ is just $e_a:X\\hookrightarrow E_a$ in a single filtration degree. The zero object may be embedded into zero throughout.",
+   "text": "The last coordinate $v_b=e_bq_b$ is monic, since the cokernel projection $q_b$ of the zero step inclusion is an isomorphism, so $v$ is monic. To prove strictness it suffices to show: for every $z:Z\\to X$, if $vz$ factors through $F^pE$, then $z$ factors through $F^pX$. For $p\\le a$, $F^pX=X$. For $a<p\\le b+1$, the tail criterion of Step 4 gives $e_{p-1}q_{p-1}z=0$; cancel the mono $e_{p-1}$ and apply the fact that a mono is the kernel of its cokernel to factor $z$ through $F^pX$. For $p>b+1$, the last coordinate vanishes and is monic, so $z=0$. Conversely filtration preservation gives factorization whenever $z$ factors through $F^pX$. Apply this universal factorization criterion to the intersection subobject to get $v(X)\\cap F^pE=v(F^pX)$. This proves the prescribed-interval embedding, including $a=b$ and the zero object; choosing bounds proves the unbounded existence clause, with finite target filtration witnessed by $a,b+1$. All subobject and cokernel calculations use [def-sp-abelian] and [def-sp-filtration].",
    "uses": [
     "def-sp-abelian",
     "def-sp-filtration"
@@ -84,7 +84,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Componentwise extension proof using Tag 05TP instead of the pushout proof of Tag 05TR; embedding and bounds follow Tag 05TS with explicit kernel checks"
+  "place": "Tags 05TP, 05TR and 05TS; F4 Lean implementation of the componentwise quotient proof, with Mathlib pullback/cokernel monicity and injective retracts for the split-filtration graded pieces."
  },
  "mathlib_searches": [
   {
@@ -202,5 +202,15 @@
    "CategoryTheory.FilteredObject.enough_strict_filtered_injectives"
   ],
   "fixed_by": "NT-stage2-cc-96a69d600"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261020T051235-L-1605666",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
