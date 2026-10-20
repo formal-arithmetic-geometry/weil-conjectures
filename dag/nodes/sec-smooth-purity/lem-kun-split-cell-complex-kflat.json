@@ -28,74 +28,51 @@
  ],
  "proof": [
   {
-   "text": "Fix an arbitrary acyclic complex $A$. Write $Q_m=C_{m+1}/C_m$ and choose a basis $(e_{m,q,b})_{b\\in B_{m,q}}$ of each $Q_m^q$ using [def-weil-pbc-free-module]. The signed total tensor convention [def-pc-tensor-complex-sheaves], specialized to modules, gives\n$$\\operatorname{Tot}(A\\otimes_R Q_m)^n\\cong\\bigoplus_{q\\in\\mathbf Z}\\ \\bigoplus_{b\\in B_{m,q}} A^{n-q}.$$\nThe map sends $a\\otimes e_{m,q,b}$ to $a$ in coordinate $(q,b)$; its inverse sums these pure tensors, and balancing and the unique finite basis expansion verify the two inverse identities. Since $d_{Q_m}=0$, the differential on each coordinate is exactly $d_A$. A cycle therefore has finitely many nonzero coordinates, each a cycle of $A$; choose a preimage under $d_A$ for each of these coordinates and put zero elsewhere. This gives a finite-support boundary preimage in total degree $n-1$. Thus $\\operatorname{Tot}(A\\otimes_R Q_m)$ is acyclic for every $m$, even with unbounded degrees and infinite basis sets.",
+   "text": "For a zero-differential complex Q, construct the cofan of single complexes (single n).obj (Q.X n) with vertex Q using mkHomFromSingle. Its universal map in degree n is obtained from the nth coprojection by the singleObjXSelf isomorphism. The chain-map equation follows from the coprojection chain-map equation; from_single_hom_ext proves factorization, and testing the nth coprojection proves uniqueness. Every free term [def-weil-pbc-free-module] is flat by ModuleCat.flat_iff_flat. CochainComplex.kFlat_single_obj_iff_flat makes each single complex K-flat [def-pc-module-kflat-complex], and the proved CochainComplex.closedUnderColimitsOfShape_kFlat instance for discrete integer diagrams gives K-flatness of Q. ModuleCat.AB supplies exact coproducts. No degree or rank bound is used.",
    "uses": [
     "def-weil-pbc-free-module",
-    "def-pc-tensor-complex-sheaves"
+    "def-pc-module-kflat-complex"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0H7X, lemma-resolution-filtered-complex, proof of (2): the zero-differential free-complex assertion, with its omitted coordinate argument supplied."
-   }
+   "elementary": false
   },
   {
-   "text": "For each degree $q$, let $i:C_m^q\\to C_{m+1}^q$ be inclusion, $r$ its assumed retraction, and $\\pi:C_{m+1}^q\\to Q_m^q$ the quotient. The formula $s(\\pi x)=x-i(r x)$ is well-defined because replacing $x$ by $x+i(u)$ leaves it unchanged; it is linear, $\\pi s=1$, and $i r+s\\pi=1$. Tensoring these identities with $A^p$ shows directly that $0\\to A^p\\otimes C_m^q\\to A^p\\otimes C_{m+1}^q\\to A^p\\otimes Q_m^q\\to0$ is split exact. Taking direct sums over $p+q=n$ preserves these splitting identities coordinatewise. The resulting inclusion and quotient maps commute with both terms $d_A\\otimes1$ and $(-1)^p1\\otimes d_C$ of [def-pc-tensor-complex-sheaves], since the original inclusion and quotient are chain maps. Hence\n$$0\\to T_m\\to T_{m+1}\\to\\operatorname{Tot}(A\\otimes_R Q_m)\\to0,\\qquad T_m=\\operatorname{Tot}(A\\otimes_R C_m),$$\nis degreewise short exact. The maps $r,s$ need not commute with differentials; only degreewise splitting is used.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0BYH, lemma-K-flat-two-out-of-three-ses, first proof paragraph; degreewise splitting replaces the flat-quotient exactness argument."
-   }
-  },
-  {
-   "text": "We prove $T_m$ acyclic by induction on $m$. For $m=0$, $C_0=0$ gives $T_0=0$. Assume $T_m$ acyclic. Apply [lem-weil-pbc-complex-ses-homology-long-exact] to the degreewise short exact sequence in step 2, in the abelian category of $R$-modules and with integer cochain indices. Its exact segment is\n$$H^n(T_m)\\longrightarrow H^n(T_{m+1})\\longrightarrow H^n(\\operatorname{Tot}(A\\otimes_R Q_m)).$$\nThe outside terms vanish by the induction hypothesis and step 1, so exactness forces $H^n(T_{m+1})=0$ for every $n$. This proves the inductive claim for every finite stage.",
-   "uses": [
-    "lem-weil-pbc-complex-ses-homology-long-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0BYH, lemma-K-flat-two-out-of-three-ses, final sentence; Tag 0H7X, proof of (2), induction on the stages; Homology Tag 0117."
-   }
-  },
-  {
-   "text": "The increasing union hypothesis identifies $C$ with the degreewise colimit of $(C_m)_{m\\in\\mathbf N}$: a compatible family of linear maps on the $C_m^q$ has the unique extension sending $x\\in C^q$ to its value in any stage containing $x$; a common later stage proves independence and linearity. Since every inclusion is a chain map, this extension commutes with differentials. Apply [lem-pc-module-filtered-colimits-tensor] on the site with one object, its identity morphism and only the maximal covering sieve, with ring sheaf $R$. A module sheaf on this small site is exactly an $R$-module, so both its exactness clause and its total-tensor colimit comparison apply to our small filtered index category $\\mathbf N$. Its displayed comparison is for the varying first factor; for our varying second factor use the signed symmetry $a\\otimes c\\mapsto(-1)^{pq}c\\otimes a$ in bidegree $(p,q)$. With the differential of [def-pc-tensor-complex-sheaves], the $d_A$ terms have signs $(-1)^{(p+1)q}$ and $(-1)^{pq+q}$, and the $d_C$ terms have signs $(-1)^{p+p(q+1)}$ and $(-1)^{pq}$, respectively, so symmetry is a chain isomorphism. It is its own inverse and commutes with all stage maps. We obtain\n$$T:=\\operatorname{Tot}(A\\otimes_R C)\\cong\\varinjlim_m T_m.$$\nFor completeness, exactness of that filtered colimit implies acyclicity here as follows. Let $Z_m^n=\\ker d_{T_m}^n$. Step 3 gives compatible short exact sequences $0\\to Z_m^n\\to T_m^n\\to Z_m^{n+1}\\to0$. Their colimits remain short exact, and $\\varinjlim_m Z_m^{n+1}\\to\\varinjlim_m T_m^{n+1}$ is injective. Factoring the colimit differential through this injection shows that its kernel in degree $n$ and the image from degree $n-1$ are both $\\varinjlim_m Z_m^n$. Thus $T$ is acyclic.",
-   "uses": [
-    "lem-pc-module-filtered-colimits-tensor",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 06Y3, lemma-colimit-K-flat, complete proof; ordinary modules obtained from the general ringed-site tensor/filtered-colimit statement (Tags 03DB and 03EP)."
-   }
-  },
-  {
-   "text": "The complex $A$ in step 1 was arbitrary among acyclic complexes of $R$-modules. Step 4 proves acyclicity of $\\operatorname{Tot}(A\\otimes_R C)$ for every such $A$, which is precisely K-flatness in [def-pc-module-kflat-complex]. The only finiteness used was the finite support of an individual direct-sum element, not any bound on cochain degrees or free ranks.",
+   "text": "For a monic stage map f, form ShortComplex.cokernelSequence f. Its exactness and the supplied degreewise retractions give a splitting in every degree by ShortComplex.Splitting.ofExactOfRetraction. CochainComplex.trianglehOfDegreewiseSplit is distinguished by HomotopyCategory.distinguished_iff_iso_trianglehOfDegreewiseSplit. Transfer the K-flat predicates to the homotopy category using HomotopyCategory.kFlat_quotient_obj_iff, apply the proved triangulated closure of K-flatness and ObjectProperty.ext_of_isTriangulatedClosed₂, and transfer back. The retractions need not be chain maps.",
    "uses": [
     "def-pc-module-kflat-complex"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 06XZ, definition-K-flat; Tag 0H7X, proof of (2), conclusion."
-   }
+   "elementary": false
+  },
+  {
+   "text": "Induct on the stages. The initial stage is K-flat because it is zero. Each stage map is monic since its composite with the next inclusion is the previous monic inclusion. The quotient differential vanishes in adjacent degrees by hypothesis and in every other pair by the complex shape. Apply the first step to its free terms and the second step to the previous K-flat stage to obtain K-flatness of the successor.",
+   "uses": [
+    "def-pc-module-kflat-complex",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct Functor.ofSequence step and a cocone with vertex C using NatTrans.ofSequence and compatibility. To verify its colimit property, use HomologicalComplex.isColimitOfEval. For every degree, reflect the colimit from types through the module forgetful functor. Types.FilteredColimit.isColimitOf' applies: exhaustion gives surjectivity of the cocone legs jointly, and monicity of the stage inclusion makes equality of images imply equality already at that stage. Transport the filtered-colimit reflection instance from AsSmall ℕ along its equivalence with ℕ.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "ModuleCat.AB gives exact filtered colimits. Transport the exact-colimit instance from AsSmall ℕ to ℕ, and expose tensor-right colimit preservation from the braided closed structure. The proved source CochainComplex.closedUnderColimitsOfShape_kFlat instance and ObjectProperty.prop_of_isColimit apply to the sequential cocone and the K-flatness of all finite stages. This proves exactly the categorical K-flat predicate [def-pc-module-kflat-complex].",
+   "uses": [
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-module-kflat-complex",
-  "def-pc-tensor-complex-sheaves",
-  "def-weil-pbc-free-module",
-  "lem-pc-module-filtered-colimits-tensor",
-  "lem-weil-pbc-complex-ses-homology-long-exact"
+  "def-weil-pbc-free-module"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "M8",
+  "date": "2026-10-21",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tags 0H7X, proof of (2), 0BYH and 06Y3. Follows the finite-stage induction and filtered-colimit route; supplies the free-coordinate and degreewise-splitting calculations explicitly. Source read in /home/ubuntu/c1-stacks-review/."
+  "place": "Tags 0BYH (lemma-K-flat-two-out-of-three-ses), 06Y3 (lemma-colimit-K-flat), and 0H7X (lemma-resolution-filtered-complex), part (2). Full Lean proof using the already proved source-library K-flat coproduct, homotopy-triangle, and exact-colimit closure results; ordinary modules throughout, with no one-point-site bridge."
  },
  "mathlib_searches": [
   {
@@ -212,9 +189,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pc-module-filtered-colimits-tensor"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -252,5 +227,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261020T174825-L-803879",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
