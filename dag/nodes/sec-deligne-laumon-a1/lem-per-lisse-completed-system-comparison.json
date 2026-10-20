@@ -23,151 +23,42 @@
  ],
  "proof": [
   {
-   "text": "Write $A_n=A/\\varpi^nA$, write $(A_n)_X$ for the constant sheaf of this finite ring, and write $A_X$ for the continuous-function coefficient sheaf. The coefficient datum defining $B_X$ applies: $A$ is a Noetherian DVR, $A/\\varpi$ is a finite field and hence torsion, and each $A_n$ is finite with the two-term free resolution $A\\xrightarrow{\\varpi^n}A$. Its levels are the sheafified presheaves $U\\mapsto\\operatorname{Cont}(\\pi_0(|U|),A_n)$, not by definition the constant sheaves; by the final clause of [lem-weil-pbc-completed-constant-sheaf-reduction] (with $I=\\varpi A$, every $A/I^n$ finite) the constant sheaf $(A_n)_X$ is that level sheaf, compatibly with the reduction maps, so $\\varprojlim_n(A_n)_X=B_X$. By [lem-sfb-integral-lisse-reduction-equivalence], its canonical coefficient maps give $A_X\\cong\\varprojlim_n(A_n)_X=B_X$ and $B_X/\\varpi^nB_X\\cong(A_n)_X$. The same node identifies $A_X[1/\\ell]$ with the continuous-function $E_X$. These localizations agree with the $E_X$ in the statement: the DVR conventions of [def-weil-l-adic-coefficient-extension] give $\\ell=u\\varpi^e$ for a unit $u\\in A$ and an integer $e>0$, so inverting either element inverts the other. All these identifications preserve the coefficient inclusions and residue projections. Thus the existing integral reduction equivalence applies to precisely the completed coefficient sheaf in this item, rather than to the constant sheaf with value $A$.",
+   "text": "Obtain the integral continuous reduction datum and the residue-normalized coefficient isomorphism. Apply the pointwise comparison at every allowed base, and choose the resulting family inside this existence proof.",
    "uses": [
     "lem-sfb-integral-lisse-reduction-equivalence",
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "def-weil-pbc-adic-coefficient-datum",
-    "def-weil-l-adic-coefficient-extension"
+    "lem-per-lisse-completed-coefficient-iso",
+    "lem-per-lisse-completed-pointwise-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.2(1),(2) and Proposition 6.8.4(1), pp.58–59"
-   }
+   "elementary": false
   },
   {
-   "text": "For each $n$, apply [det-pe-finite-local-systems-twist] with the finite discrete ring $A_n$. It gives a fully faithful equivalence between etale and pro-etale local systems with finite module models. This restricts to finite locally free objects. Indeed, if a descended etale sheaf has constant model $P$ on a nonempty etale trivializing object, intersect its pullback with a finite-free pro-etale trivializing covering. On a nonempty member of this covering its constant model is both $P$ and $A_n^r$. Taking a geometric stalk and using [lem-weil-proetale-constant-sheaf-stalk] gives $P\\cong A_n^r$. Empty covering members impose no condition. Conversely an etale finite-free trivialization remains one on the pro-etale site. Hence at each finite level the two locally free categories are equivalent, with quasi-inverse $\\nu_{X,*}$ as specified in the cited equivalence.",
+   "text": "Apply the normalized tensor-operation construction to that family. Retain its integral and rational identity/composition maps and their four adjunction-unit normalizations.",
    "uses": [
-    "det-pe-finite-local-systems-twist",
-    "lem-weil-proetale-constant-sheaf-stalk"
+    "lem-per-lisse-completed-tensor-operations"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099Y, label lemma-compare-locally-constant; compare Bhatt–Scholze Corollary 5.1.5, p.35"
-   }
+   "elementary": false
   },
   {
-   "text": "This finite-level comparison also identifies normalized towers, not just their individual objects. Inverse image preserves colimits and tensor products by [lem-weil-pbc-left-exact-site-inverse-image-tensor]; tensor over a ring is the coequalizer imposing its balancing relations, so it preserves scalar extension along $A_{n+1}\\to A_n$. Explicitly, the comparison sends the inverse image of $a\\otimes x$ to the corresponding tensor of the inverse-image sections. Thus a normalization isomorphism pulls back to the normalization isomorphism. Conversely use [det-pe-finite-local-systems-twist] to descend every finite-level object. A transition map is descended uniquely by full faithfulness for the ring $A_{n+1}$: its target, originally an $A_n$-module, is regarded as an $A_{n+1}$-module and is still a finite local system. The descended normalization becomes an isomorphism after $\\nu_X^*$, hence is an isomorphism since an equivalence reflects inverses. Uniqueness also descends all transition and morphism equations. Consequently finite-level comparison gives an equivalence of the two normalized tower categories.",
-   "uses": [
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "det-pe-finite-local-systems-twist"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(1) together with Corollary 5.1.5: passage to the normalized inverse-system categories"
-   }
+   "text": "Precomposition by each integral equivalence is fully faithful on functor categories. Lift the conjugated integral tensor identity/composition isomorphisms, obtaining the etale maps and precisely the two reduction equations. Postcomposition by each fully faithful rational realization similarly lifts the rational tensor maps to raw maps and gives the realization equations. These are the proved private lift/descend lemmas in the item.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Compose the tower equivalence of step 3 with [lem-sfb-integral-lisse-reduction-equivalence]. The latter has quasi-inverse the actual sheaf limit and canonical isomorphisms $N\\cong\\varprojlim_nN/\\varpi^nN$ and $(\\varprojlim_nF_n)/\\varpi^n\\cong F_n$. It therefore gives exactly the inverse $\\varprojlim_n\\nu_X^*N_n$ asserted here. The limit and its action are sectionwise by [lem-weil-pbc-module-sheaves-colimits-forgetful](2); its $n$-th projection is the map inducing the displayed counit. The resulting unit and counit are natural because their composites with each projection are the residue map and the given tower map, respectively. Normalization forces all finite-level ranks to agree locally: reduction to $A/\\varpi$ makes the free ranks equal, since the finite residue field has cardinality $q>1$ and $q^r=q^s$ implies $r=s$. The reconstruction node allows arbitrary varying finite local ranks, including rank zero, so no global constant-rank or positive-rank assumption has been introduced.",
-   "uses": [
-    "lem-sfb-integral-lisse-reduction-equivalence",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(1), p.59: canonical unit, counit and inverse-limit functor"
-   }
-  },
-  {
-   "text": "For integral lisse modules $M,N$, form $H=\\mathcal Hom_{B_X}(M,N)$ using [def-pur-sheaf-hom], so $H(X)=\\operatorname{Hom}_{B_X}(M,N)$. Let $H[1/\\varpi]$ denote the sheaf colimit of $H\\xrightarrow{\\varpi}H\\xrightarrow{\\varpi}\\cdots$, whose existence and sheafified sectionwise description are [lem-weil-pbc-module-sheaves-colimits-forgetful](2). There is a canonical map to $\\mathcal Hom_{E_X}(M[1/\\varpi],N[1/\\varpi])$, sending a map in stage $k$ to $\\varpi^{-k}$ times its scalar extension. It is an isomorphism: on a common trivializing covering for $M=B_X^r$ and $N=B_X^s$, it is the coordinate map from the localization of the finite matrix module $B_X^{sr}$ to $E_X^{sr}$, with inverse obtained by writing its finitely many entries as local fractions and taking a common exponent. The maps agree on overlaps because they are the specified scalar-extension map. This also treats $r=0$ or $s=0$.",
-   "uses": [
-    "def-pur-sheaf-hom",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(4), p.59: internal Hom comparison"
-   }
-  },
-  {
-   "text": "A Noetherian underlying space is quasi-compact, and every open subspace is quasi-compact; in particular intersections of affine opens are quasi-compact. Thus $X$ satisfies the qcqs hypothesis of [det-pe-bounded-continuity-sections]. Apply it with $\\mathcal R=B_X$, $U=X$, $I=\\mathbf N$, and the diagram of degree-zero complexes $H\\xrightarrow{\\varpi}H\\to\\cdots$; the uniform lower bound is $a=0$ and take $q=0$. Together with step 5 it gives\n$$\\operatorname{Hom}_{B_X}(M,N)[1/\\varpi]\\cong H[1/\\varpi](X)\\cong\\operatorname{Hom}_{E_X}(M[1/\\varpi],N[1/\\varpi]).$$\nHere the first term is the module localization, equivalently $E\\otimes_A\\operatorname{Hom}_{B_X}(M,N)$. The map sends $\\varpi^{-k}f$ to $\\varpi^{-k}(1\\otimes f)$, so it is precisely the Hom map from the raw rational category of [def-pod-lisse-l-adic-sheaves](2), restricted to the finite-free towers in step 4. It respects identity and composition because scalar multiplication does. This proves full faithfulness; it requires no assertion that every rational lisse sheaf has a global integral lattice.",
-   "uses": [
-    "det-pe-bounded-continuity-sections",
-    "def-pod-lisse-l-adic-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(4), p.59: sections of the localized internal Hom on a qcqs scheme"
-   }
-  },
-  {
-   "text": "Let $f:Y\\to X$ be a morphism between schemes satisfying the statement's hypotheses. Use the underlying sheaf inverse image $f^{-1}$ of [def-weil-proetale-inverse-image]. Form $f^*N=B_Y\\otimes_{f^{-1}B_X}f^{-1}N$ with the sheaf tensor of [def-pur-sheaf-tensor-product] and the coefficient map $f^{-1}B_X\\to B_Y$ induced by the residue projections. The action on $f^{-1}N$ is the inverse image of the action on $N$, using finite-product preservation. The inverse-image tensor comparison of [lem-weil-pbc-left-exact-site-inverse-image-tensor] identifies\n$$(f^*N)/\\varpi^n\\cong f_n^*(N/\\varpi^nN).$$\nOn a pure tensor it sends the class of $b\\otimes x$ to $\\bar b\\otimes\\bar x$; the inverse sends $\\bar b\\otimes\\bar x$ to that class, with lift independence following from the quotient relation. By [lem-weil-pbc-comparison-pullback], the finite etale and pro-etale pullbacks in this formula agree. For a tower $(N_n)$ the resulting maps to $\\nu_Y^*f_{n,\\mathrm{et}}^*N_n$ are compatible with its transitions, hence give\n$$f^*(\\varprojlim_n\\nu_X^*N_n)\\longrightarrow\\varprojlim_n\\nu_Y^*f_{n,\\mathrm{et}}^*N_n.$$\nThis map is an isomorphism on a pulled-back trivializing covering: a compatible basis furnished by step 4 identifies it with $B_Y^r\\to\\varprojlim_n(A_n)_Y^r$, the coefficient-limit isomorphism coordinate by coordinate. Thus it is an isomorphism globally. This proves the inverse-limit compatibility without claiming that inverse image preserves arbitrary inverse limits.",
-   "uses": [
-    "def-weil-proetale-inverse-image",
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "lem-weil-pbc-comparison-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(1): pullback naturality of the residue maps and inverse-limit reconstruction"
-   }
-  },
-  {
-   "text": "For a finite extension $E\\subset E'$ write $A'=\\mathcal O_{E'}$, choose $\\varpi'$, and let $e$ be its ramification index. The scalar-extension tower of [def-pod-lisse-l-adic-sheaves](3) has $m$-th term $N_{n(m)}\\otimes_{A/\\varpi^{n(m)}}A'/\\varpi'^m$, with $n(m)=\\lceil m/e\\rceil$; the coefficient map exists because $\\varpi^{n(m)}\\in\\varpi'^mA'$. Put $B'_X=\\varprojlim_m(A'/\\varpi'^m)_X$. With the sheaf tensor of [def-pur-sheaf-tensor-product], residue projections define a map\n$$B'_X\\otimes_{B_X}N\\longrightarrow\\varprojlim_m\\nu_X^*\\bigl(N_{n(m)}\\otimes_{A/\\varpi^{n(m)}}A'/\\varpi'^m\\bigr),$$\nwhose $m$-th component sends $b'\\otimes x$ to $\\bar b'\\otimes\\bar x$. The finite comparison in step 3 justifies the finite-level tensor identification. The formula commutes with transitions: both composites reduce $b'$ and $x$ to the smaller quotient. On a compatible trivializing basis for $N$ from step 4 the map is $B'_X{}^r\\to\\varprojlim_m(A'/\\varpi'^m)_X^r$, an isomorphism by the coefficient-limit identification of step 1 applied to $E'$. Thus scalar extension corresponds to precisely this tower, and reduction and reconstruction commute with it. No flatness of a map between the finite quotient rings is used.",
-   "uses": [
-    "def-pod-lisse-l-adic-sheaves",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(1) and Lemma 6.8.2: finite coefficient-extension comparisons, with the ramified reindexing of Weil II (1.1.1)"
-   }
-  },
-  {
-   "text": "The comparisons just constructed have the claimed normalization and coherence. On a map of modules each residue comparison commutes with that map, since both routes send $b\\otimes x$ to $\\bar b\\otimes\\overline{h(x)}$. The etale/pro-etale pullback comparisons satisfy identity and composition by [lem-weil-pbc-comparison-pullback], and inverse-image tensor comparisons do so by [lem-weil-pbc-left-exact-site-inverse-image-tensor]. After those identifications, two successive module pullbacks send $c\\otimes(b\\otimes x)$ to $c\\,f^{-1}(b)\\otimes x$ along either comparison with the composite. For two coefficient extensions both composites send $c\\otimes(b\\otimes x)$ to $cb\\otimes x$ in every residue quotient; choose a common sufficiently large source quotient when necessary. Identity maps send $1\\otimes x$ to $x$. A pullback followed by coefficient extension, or the reverse, likewise sends $c\\otimes(b\\otimes x)$ to the same tensor with coefficient product $cb$. These formulas define maps of sheaf tensors since they respect the balancing relations and restriction maps; local pure tensors generate the sheafified tensor [def-pur-sheaf-tensor-product]. Equalities on them give the finite-level equations. The limit comparisons satisfy the same equations because composing with each residue projection gives those equations and maps into a limit are determined by their projections.",
-   "uses": [
-    "lem-weil-pbc-comparison-pullback",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(1): identity, composition, naturality and mixed pullback/scalar-extension equations for the canonical maps"
-   }
-  },
-  {
-   "text": "Finally scalar localization is the sheaf tensor $N[1/\\varpi]=E_X\\otimes_{B_X}N$. The pullback and finite-extension comparisons extend to these rational realizations by the same balanced-tensor maps [def-pur-sheaf-tensor-product]. On local fractions the pullback comparison sends $b\\otimes(x/\\varpi^k)$ to $(b\\otimes x)/\\varpi^k$; extension to $E'$ sends $a'\\otimes(x/\\varpi^k)$ to $a'\\otimes x$ divided by the image of $\\varpi^k$. This image is invertible in $E'$ even when the extension is ramified. These maps are isomorphisms on a pulled-back or extended finite-free basis and hence globally. On a raw rational morphism $\\varpi^{-k}h$, the formula in step 6 is carried to $\\varpi^{-k}f^*h$, or to the image of $\\varpi^{-k}$ times the extended $h$, respectively, exactly the rational scalar-extension rule of [def-pod-lisse-l-adic-sheaves](2),(3). The equations in step 9 persist on fractions, since both routes give the same coefficient product and the same integral vector. Thus rational realization commutes with the specified pullbacks and finite coefficient extensions, with the required identity and composition equations. For $X=\\varnothing$ all module sheaves are zero and all formulas reduce to the unique map.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-pod-lisse-l-adic-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(4): localization of the canonical integral comparisons"
-   }
+   "text": "For reconstruction, apply the target equivalence and postcompose with its invertible counit. The mate equation reduces identity to reduction_id using counit and etaleId naturality. For composition, use counit naturality, the second reduction naturality across the first reconstruction, and reduction_comp. Cancel the counit and use faithfulness. Assemble all System fields without a remaining hole in the item.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sfb-integral-lisse-reduction-equivalence",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-l-adic-coefficient-extension",
-  "det-pe-finite-local-systems-twist",
-  "lem-weil-proetale-constant-sheaf-stalk",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "def-pur-sheaf-hom",
-  "det-pe-bounded-continuity-sections",
-  "def-pod-lisse-l-adic-sheaves",
-  "def-weil-proetale-inverse-image",
-  "def-pur-sheaf-tensor-product",
-  "lem-weil-pbc-comparison-pullback"
+  "lem-per-lisse-completed-coefficient-iso",
+  "lem-per-lisse-completed-pointwise-comparison",
+  "lem-per-lisse-completed-tensor-operations"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.8.2, Corollary 5.1.5 and Proposition 6.8.4(1),(4), pp.35,58–59. Uses the existing integral reconstruction node for the omitted proof of (1); supplies the finite-system comparison and explicit pullback, ramified scalar-extension and coherence formulas."
+  "place": "BS 6.8.2 and 6.8.4(1),(4), with the pointwise and tensor parts isolated; the coefficient-limit identification and categorical coherence assembly are proved in Lean by B6."
  },
  "mathlib_searches": [
   {
@@ -311,8 +202,7 @@
   "lem-weil-pbc-left-exact-site-inverse-image-tensor",
   "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "det-pe-bounded-continuity-sections",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-completed-constant-sheaf-reduction"
+  "lem-weil-pbc-comparison-pullback"
  ],
  "reviewed": {
   "date": "2026-10-18",
@@ -326,42 +216,6 @@
   "module": "Sheaf.Paper.LisseCompletedSystemComparison",
   "declaration": "AlgebraicGeometry.ProEtale.CompletedLisse.completed_system_comparison",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.CompletedLisse.Base",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.Integers",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.completedRing",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.rationalRing",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.Integral",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.Rational",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.IsFreeSystem",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.Systems",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.RawRational",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.integralForget",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.etaleDiagram",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.proEtaleDiagram",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.integralScalar",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.rationalScalar",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.Comparison",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.Arrow",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.identity",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.composite",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.sourceIndex",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.finiteLevel",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.finiteScalarUnit",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.finiteEtaleUnit",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.finiteProEtaleUnit",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.EtaleOperation",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.EtaleOperation.unit",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.EtaleOperation.proEtaleUnit",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.RingOperation",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.RingOperation.integralPush",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.RingOperation.rationalPush",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.ModuleOperation",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.ModuleOperation.integralUnit",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.ModuleOperation.rationalUnit",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.levelMap",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.Operation",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.rationalForget",
-   "AlgebraicGeometry.ProEtale.CompletedLisse.System",
    "AlgebraicGeometry.ProEtale.CompletedLisse.completed_system_comparison"
   ],
   "file": "lean/Sheaf/Paper/LisseCompletedSystemComparison.lean",
@@ -370,7 +224,7 @@
   "by": "Q11",
   "date": "2026-10-18",
   "existing": false,
-  "note": "R1 repair: statement prerequisites cite definition-owned integral reduction data and canonical comparison pullback data; the original two theorem nodes remain proof dependencies. The theorem signature and all mathematical data in this module are unchanged from the independently reviewed returned head 88a3b6a45ca4."
+  "note": "All existing mathematical data moved verbatim to LisseCompletedSystemData and are publicly re-exported here; this theorem has its unchanged signature. See coord/changes/lisse-completed-system-data.md."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -379,5 +233,15 @@
   "group": "Q11",
   "result": "pass",
   "note": "Head 7704166b02bf repairs both earlier returns. (1) The 88a3b6 return said the statement dependencies cited two theorem nodes only for their definitions. The item now cites two new definition nodes instead: def-per-integral-lisse-reduction-data and def-per-site-comparison-pullback-data. Both are existing:true records of the published declarations in Sheaf.SixFunctors.IntegralLisseReductionEquivalence and Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence. The theorem nodes stay as proof dependencies. (2) L's 8a66bc return found duplicate declarations; there are no copied modules now. The side DAG has 21 landed precedents of this pattern. Each new node statement matches the published structure or predicate field by field. The pullback node records that nu_X^* is definitionally comparisonUpperStar. stage2_delivery.check_existing and check_new_node report no failures for either node. No other node in the side DAG records these declarations except the two owning theorem nodes. The item module is byte-identical to the 88a3b6 module that was reviewed in full. Outside the lean record, the only item-node change is the two statement-dependency swaps, and lean.statement is verbatim. On my own re-reading, every hypothesis and conclusion clause matches the node and BS 6.8.2, 6.8.4(1),(4) and 5.1.5. Specifically: IsFreeSystem keeps the towers finite free; the inverse limit is pinned by IsLimit; rational realization is fully faithful with no essential surjectivity; pullback, ramified coefficient extension at sourceIndex, and identity/composition equations are all pinned. Edge cases checked: empty X, rank 0 and varying rank, index 0 = A/varpi, e=2. Single explicit universe u; no hollow definitions; the only sorry is the item theorem, with the ten-step proof docstring. nt_compile per-file compile: 57.3 s, exit 0, clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-39555",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261020T221049-L-4139958",
+  "kind": "interface",
+  "note": "independent cc review: delivered 5 modules + 5 nodes vs live LisseCompletedSystemComparison/item node: data moved verbatim (field lists identical after IntegralComparison/IntegralOperation/SystemCore grouping), item proved from coefficient-iso (proved) + pointwise and tensor-operations sorries (true, smaller); 5 modules + 7 direct importers compile rc 0, axioms as expected"
  }
 }
