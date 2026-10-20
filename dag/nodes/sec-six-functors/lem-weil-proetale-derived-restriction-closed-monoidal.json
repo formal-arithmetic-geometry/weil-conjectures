@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-proetale-derived-restriction-closed-monoidal",
+ "kind": "statement",
+ "title": "Normalized native pro-etale restriction is braided closed monoidal",
+ "statement": "Let $A$ be a Grothendieck abelian symmetric closed monoidal category with additive tensor and functorial flat resolutions [def-kun-derived-tensor, def-pc-kflat-complex, def-pur-derived-internal-hom]. Suppose pro-etale inverse images preserve flat objects. Let $j:W\\to Y$ be weakly etale [def-weil-pbc-proetale-site]. Put $r=D(j^*)$ on the ordinary unbounded derived categories of native $A$-valued sheaves. Let $e:rK\\otimes^L rL\\cong r(K\\otimes^L L)$ be natural and normalized by the exact-functor factorization and the ordinary homotopy oplax tensor square. Then $r$ admits a strong monoidal structure with tensor map exactly $e$. It preserves the descended Koszul braiding, and its closed comparison $rR\\mathcal Hom(K,-)\\to R\\mathcal Hom(rK,r(-))$ is an invertible natural transformation for every $K$. No dualizing object is chosen.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JB, lemma-restriction-RHom-to-U, with the native constant-coefficient slice construction; tensor derivation and Koszul interchange as in Tags 06YU and 0FPT."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-kun-derived-tensor",
+  "def-pc-kflat-complex",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [
+  {
+   "text": "Identify the pro-etale site of W with the slice of Y at its weakly etale object j. Restriction is exact and strong symmetric monoidal, and its exact sum-extension left adjoint implies preservation of K-injectives. The native constant-coefficient functor upperStar is this restriction.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-pur-kinjective-restrict-localized"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use functorial K-flat resolutions to derive the ordinary tensor structure, including its unit and associativity. The Koszul interchange on complexes descends to the stated braided identity. On a pair of K-flat resolutions whose restrictions are K-flat, the maps in the normalization square are invertible, hence the square fixes the tensor component. Naturality and essential surjectivity extend this identification to all objects. Thus the tensor map is exactly e.hom.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-kflat-complex",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent the second argument by a K-injective complex. Its restriction is K-injective. On each object of the localized site the enriched Hom complex and its differential are unchanged. Its evaluation is the same application map, so this isomorphism equals the closed comparison attached to the tensor structure, rather than merely an arbitrary isomorphism with the same endpoints. It is natural in the second variable and hence its natural transformation is invertible. The construction is unbounded and also applies to the empty site.",
+   "uses": [
+    "lem-pur-kinjective-restrict-localized",
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-kun-derived-tensor",
+  "def-pc-kflat-complex",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Proof of lemma-restriction-RHom-to-U; native constant-coefficient realization and derived tensor normalization made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived inverse image along a weakly etale morphism is a braided closed monoidal functor",
+   "results": "8 hits, including underived condensed and sheaf closed structures; no native derived restriction theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match; local source search found the etale derived theorem and the pro-etale underived theorem, neither has this signature"
+  },
+  {
+   "tool": "loogle",
+   "query": "ihomComparison",
+   "results": "0 hits; service reported unknown identifier ihomComparison",
+   "date": "2026-10-21",
+   "verdict": "query identifier unavailable; local source signatures inspected instead"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomComparison.*[Dd]erived|[Dd]erived.*ihomComparison",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image on the pro etale slice site preserves internal Hom and its normalized braided monoidal structure",
+   "results": "8 hits: monoidal inverse-image morphism properties, underived sheafification braiding, monoid functor-category equivalences and LightCondensed internal Hom point formulas.",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected signatures concern underived monoidal functors or condensed points, not the normalized unbounded native derived slice comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DeltaRestriction",
+  "date": "2026-10-21",
+  "group": "B9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-delta-restriction",
+   "place": "Proof, pro-etale exact slice restriction commutes with derived tensor, internal Hom and evaluation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleDerivedRestrictionClosed",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleDerivedRestrictionClosed.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_normalizedRestrictionMonoidalClosed",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.exists_normalizedRestrictionMonoidalClosed",
+   "AlgebraicGeometry.ProEtale.deltaRestrictionNativeTensor",
+   "AlgebraicGeometry.ProEtale.DeltaRestrictionTensorComparison",
+   "AlgebraicGeometry.ProEtale.IsNormalizedDeltaRestrictionTensor"
+  ],
+  "statement": "theorem exists_normalizedRestrictionMonoidalClosed\n    (A : Type z) [Category.{u + 1} A] [Abelian A]\n    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]\n    [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]\n    [UpperStarPreservesFlat A] {W Y : Scheme.{u}} (j : W ⟶ Y) [WeaklyEtale j]\n    (e : DeltaRestrictionTensorComparison A j)\n    (he : IsNormalizedDeltaRestrictionTensor A j e) :\n    letI := _root_.DerivedCategory.braidedCategory' (Sheaf (Scheme.ProEt.topology Y) A)\n    letI := _root_.DerivedCategory.braidedCategory' (Sheaf (Scheme.ProEt.topology W) A)\n    ∃ m : (upperStar A j).mapDerivedCategory.Monoidal,\n      letI := m\n      (∀ K L, Functor.LaxMonoidal.μ (upperStar A j).mapDerivedCategory K L =\n        (e.hom.app K).app L) ∧\n      (∀ K L, Functor.LaxMonoidal.μ (upperStar A j).mapDerivedCategory K L ≫\n          (upperStar A j).mapDerivedCategory.map (β_ K L).hom =\n        (β_ ((upperStar A j).mapDerivedCategory.obj K)\n          ((upperStar A j).mapDerivedCategory.obj L)).hom ≫\n            Functor.LaxMonoidal.μ (upperStar A j).mapDerivedCategory L K) ∧\n      (∀ K, IsIso (Functor.LaxMonoidal.ihomComparison\n        (upperStar A j).mapDerivedCategory K).natTrans)",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-5d3a9",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261020T221056-L-4141280",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-5d3a9",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261020T221056-L-4141280",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item and new module compiled (--all and in a /tmp sandbox) together with the direct importer IntegralVerdier; #print axioms checked; the 3 moved defs compared verbatim with the live versions; new deltaRestrictionPairingBraiding checked against the HEq pin of AmbientDualityPairing (braidedCategory' = DerivedMonoidal.braidedCategory'); new sorry statement read against Stacks 08JB, its node and the étale analogue in the library"
+ }
+}
