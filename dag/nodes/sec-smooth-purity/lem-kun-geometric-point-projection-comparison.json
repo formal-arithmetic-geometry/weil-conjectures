@@ -18,65 +18,65 @@
  ],
  "proof": [
   {
-   "text": "Write $F=h^{-1}$, $H=Rh_*$, $S=S_D$, $C=C_s$, $L=C_Z$, $R=R\\Gamma_Z$, and $u:1\\to SC$, $v:CS\\to1$ for the equivalence unit and counit. All tensors below are derived over $\\mathbf Z$, and $c^T:T(A\\otimes B)\\to TA\\otimes TB$ denotes a comonoidal constraint. Let $a:s_{\\mathrm{Et}}\\to *$ and $b:Z_{\\mathrm{Et}}\\to *$ be the terminal ringed-topos morphisms, with coefficient ring $\\mathbf Z$ on the one-object point site. Their inverse images are the constant-sheaf functors, and $b=ah$ with pullback comparison $\\gamma:FC\\to L$. The adjunction for $a$ is $C\\dashv S$, with unit $u$ and counit $v$, by [lem-kun-geometric-point-derived-constants]. The adjunction for $b$ is $L\\dashv R$ by [def-kun-constant-projection-morphism]. The comparison of the composite right adjoint $SH$ with $R$ is precisely $\\beta$: [lem-kun-geometric-point-derived-sections-adjunction] specifies it by the counit equation, rather than by an arbitrary isomorphism of functors. Thus these are the canonical comparisons to which the ringed-topos composition formula applies.",
+   "text": "Put $F=h^{-1}$, $H=Rh_*$, $S=S_D$, $K=C_s$, $L=C_Z$, $R=R\\Gamma_Z$, and let $a:F\\dashv H$, $b:L\\dashv R$, $e:K\\dashv S$ be the fixed adjunctions. With $\\gamma:KF\\simeq L$, put $\\sigma_A=F(e_A)\\circ\\gamma_{SA}^{-1}:L(SA)\\to FA$. By [lem-kun-geometric-point-pullback-tensor-normalization], $c^F_{A,B}\\circ\\sigma_{A\\otimes B}=(\\sigma_A\\otimes\\sigma_B)\\circ c^L_{SA,SB}\\circ L(c^S_{A,B})$. This concerns only pullback, constants and stalk evaluation; it contains neither a projection morphism nor a direct image.",
    "uses": [
-    "lem-kun-geometric-point-derived-constants",
-    "def-kun-constant-projection-morphism",
-    "lem-kun-geometric-point-derived-sections-adjunction"
+    "lem-kun-geometric-point-pullback-tensor-normalization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56, equation-projection-formula-map (counit-defined projection); Tags 07A4 and 07A6 (canonical tensor and adjunction comparisons); etale-cohomology.tex Tag 0F0F, final geometric-fibre formula."
+    "place": "Tag 07A4, lemma-pullback-tensor-product, especially its proof on flat K-flat representatives; Tag 07A6, lemma-adjoint. The evaluation normalization is etale-cohomology.tex Tag 04JQ, lemma-equivalence-abelian-sheaves-point, and Tag 0F0F, lemma-projection-formula-proper, geometric-point reduction."
    }
   },
   {
-   "text": "For $A\\in D(s_{\\mathrm{Et}},\\mathbf Z)$ put\n$$a_{A,M}=(1_{SA}\\otimes u_M^{-1})\\circ c^S_{A,CM}:S(A\\otimes CM)\\xrightarrow{\\sim}SA\\otimes M.$$\nLet $\\pi_a(A,M):SA\\otimes M\\to S(A\\otimes CM)$ be the counit-defined projection map for $C\\dashv S$. Its adjunct is $(v_A\\otimes1_{CM})\\circ c^C_{SA,M}$ by the projection-map definition. Monoidality of $v$ and the triangle identity $v_{CM}\\circ C(u_M)=1_{CM}$ give the three-line calculation\n$$\\begin{aligned}\nv_{A\\otimes CM}\\circ C(a_{A,M}^{-1})\n&=v_{A\\otimes CM}\\circ C((c^S_{A,CM})^{-1})\\circ C(1_{SA}\\otimes u_M)\\\\\n&=(v_A\\otimes v_{CM})\\circ c^C_{SA,SCM}\\circ C(1_{SA}\\otimes u_M)\\\\\n&=(v_A\\otimes1_{CM})\\circ c^C_{SA,M}.\n\\end{aligned}$$\nThe left side is the adjunct of $a_{A,M}^{-1}$; injectivity of the adjunction bijection therefore proves $\\pi_a(A,M)=a_{A,M}^{-1}$. This uses the specified monoidal unit and counit of the equivalence, without changing tensor normalizations.",
+   "text": "The first clause of [lem-kun-geometric-point-derived-sections-adjunction] is the counit identity for the specified comparison $\\beta:HS\\simeq R$. Transport it through the canonical identifications of the exact termwise functors with their left derived functors. Naturality of these identifications and cancellation of $\\gamma$ yield $\\varepsilon^b_E\\circ L(\\beta_E)=\\varepsilon^a_E\\circ\\sigma_{HE}$. This transport is proved in Lean by transport_counit; no arbitrary right-adjoint identification is substituted.",
    "uses": [
-    "lem-kun-geometric-point-derived-constants",
+    "lem-kun-geometric-point-derived-sections-adjunction",
+    "def-kun-projection-formula-map",
     "def-kun-constant-projection-morphism"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56, equation-projection-formula-map (counit-defined projection); Tags 07A4 and 07A6 (canonical tensor and adjunction comparisons); etale-cohomology.tex Tag 0F0F, final geometric-fibre formula."
+    "place": "Tag 07A4, lemma-pullback-tensor-product, especially its proof on flat K-flat representatives; Tag 07A6, lemma-adjoint. The evaluation normalization is etale-cohomology.tex Tag 04JQ, lemma-equivalence-abelian-sheaves-point, and Tag 0F0F, lemma-projection-formula-proper, geometric-point reduction."
    }
   },
   {
-   "text": "Apply the composition identity of [lem-sfb-ringed-projection-tensor-composition] to the ringed-topos morphisms $Z_{\\mathrm{Et}}\\xrightarrow h s_{\\mathrm{Et}}\\xrightarrow a *$, the object $E$ and the coefficient complex $M$. Its hypotheses allow arbitrary unbounded module complexes and impose no properness or invertibility assumption. Set $A=HE$, $N=E\\otimes FCM$, $B=E\\otimes LM$, $q=1_E\\otimes\\gamma_M:N\\to B$, and $P=\\mathrm{PF}_h(E,CM)$. The three projection maps in the cited identity are exactly $P$, $\\pi_a(A,M)$ and $\\mathrm{PF}_{Z,\\mathbf Z}(E,M)$ by their counit-adjunct definitions. Restoring the canonical right-adjoint comparisons suppressed in that identity gives\n$$\\mathrm{PF}_{Z,\\mathbf Z}(E,M)\\circ(\\beta_E\\otimes1_M)\n=R(q)\\circ\\beta_N\\circ S(P)\\circ\\pi_a(A,M).$$\nIn particular the target comparison is $R(q)\\circ\\beta_N$, and the source comparison is $\\beta_E\\otimes1_M$. These are the specific $\\gamma$ and $\\beta$ fixed in step 1 by the constant pullback and the counit equation; the cited lemma asserts the formula with canonical pullback and direct-image composition comparisons, so no compatibility is being inferred from the bare existence of an isomorphism.",
+   "text": "Apply the existing categorical theorem CategoryTheory.Adjunction.rightAdjointProjectionMap_mate (WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCompat) to $a,b$, their tensor comparisons, the monoidal constraint of $S$, $\\sigma$ and $\\beta$. Its tensor hypothesis is step 1 and its counit hypothesis is step 2. The conclusion is the projection square evaluated at $E,K M$, with coefficient $S(KM)$ on the bottom and $\\sigma_{KM}:L(S(KM))\\to F(KM)$ on the target. The two projection maps are exactly those of [def-kun-projection-formula-map] and [def-kun-constant-projection-morphism].",
    "uses": [
-    "lem-sfb-ringed-projection-tensor-composition",
     "def-kun-projection-formula-map",
     "def-kun-constant-projection-morphism",
-    "lem-kun-geometric-point-derived-sections-adjunction"
+    "lem-kun-geometric-point-derived-constants"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56, equation-projection-formula-map (counit-defined projection); Tags 07A4 and 07A6 (canonical tensor and adjunction comparisons); etale-cohomology.tex Tag 0F0F, final geometric-fibre formula."
-   }
-  },
-  {
-   "text": "Substitute $\\pi_a(A,M)=a_{A,M}^{-1}$ from step 2 into the equation of step 3 and precompose by $a_{A,M}$. Since $\\alpha=(\\beta_E\\otimes1_M)\\circ a_{A,M}$ and $\\delta=R(q)\\circ\\beta_N$ by the statement, cancellation gives\n$$\\mathrm{PF}_{Z,\\mathbf Z}(E,M)\\circ\\alpha=\\delta\\circ S(P).$$\nThis is precisely the asserted square. Only $a_{A,M}$, which is an isomorphism of normalized tensor constraints and the equivalence unit, was inverted. Neither projection morphism was inverted. All objects remain in the unbounded ordinary integer-coefficient derived categories throughout.",
-   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56, equation-projection-formula-map (counit-defined projection); Tags 07A4 and 07A6 (canonical tensor and adjunction comparisons); etale-cohomology.tex Tag 0F0F, final geometric-fibre formula."
+    "place": "Tag 07A4, lemma-pullback-tensor-product, especially its proof on flat K-flat representatives; Tag 07A6, lemma-adjoint. The evaluation normalization is etale-cohomology.tex Tag 04JQ, lemma-equivalence-abelian-sheaves-point, and Tag 0F0F, lemma-projection-formula-proper, geometric-point reduction."
+   }
+  },
+  {
+   "text": "Naturality of $\\gamma^{-1}$ and the left triangle identity for $e$ give $\\gamma_M\\circ\\sigma_{KM}\\circ L(u_M)=1$. Since the germ unit $u_M$ is invertible by [lem-kun-geometric-point-derived-constants], $\\gamma_M\\circ\\sigma_{KM}=L(u_M^{-1})$. Postcompose the equation of step 3 by $R(1_E\\otimes\\gamma_M)$. Naturality of the sections projection map for $u_M^{-1}$ and tensor interchange convert its right side to $\\mathrm{PF}_{Z,\\mathbf Z}(E,M)\\circ(\\beta_E\\otimes1_M)\\circ(1\\otimes u_M^{-1})\\circ c^S_{HE,KM}$. This is precisely the specified square, and no projection map has been inverted.",
+   "uses": [
+    "lem-kun-geometric-point-derived-constants"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, especially its proof on flat K-flat representatives; Tag 07A6, lemma-adjoint. The evaluation normalization is etale-cohomology.tex Tag 04JQ, lemma-equivalence-abelian-sheaves-point, and Tag 0F0F, lemma-projection-formula-proper, geometric-point reduction."
    }
   }
  ],
  "proof_deps": [
-  "lem-kun-geometric-point-derived-constants",
-  "def-kun-constant-projection-morphism",
+  "lem-kun-geometric-point-pullback-tensor-normalization",
   "lem-kun-geometric-point-derived-sections-adjunction",
-  "lem-sfb-ringed-projection-tensor-composition",
-  "def-kun-projection-formula-map"
+  "def-kun-projection-formula-map",
+  "def-kun-constant-projection-morphism",
+  "lem-kun-geometric-point-derived-constants"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0B56 (counit-defined projection) and canonical composition; expanded normalization for the geometric-point equivalence. The general composition lemma is an existing DAG input, not a claim that the square is displayed verbatim in Stacks."
+  "place": "Direct application of the already proved abstract projection-mate compatibility theorem, after the canonical pullback/stalk tensor normalization (07A4) and the specified counit equation (07A6). The unit cancellation is the adjunction triangle identity. Group W4, 2026-10-20."
  },
  "mathlib_searches": [
   {
@@ -198,9 +198,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-sfb-ringed-projection-tensor-composition"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -234,6 +232,16 @@
    "AlgebraicGeometry.Etale.GeometricPointProjectionSquare",
    "AlgebraicGeometry.Etale.geometricPoint_projection_comparison"
   ],
-  "note": "GeometricPointProjectionSquare is a transparent formula for the original square, universally quantified over E and M. The theorem specializes its functors, monoidal stalk, invertible germ unit, canonical beta and gamma, and the two recorded counit-defined projection transformations; it assumes none of their compatibility. The lower transformation is exactly the one evaluated by constantDerivedProjectionMap. Factoring the equation at the abstract categorical level avoids kernel expansion of specialized derived tensor objects; the file remains one module and uses the default 60-second compilation limit."
+  "note": "GeometricPointProjectionSquare is a transparent formula for the original square, universally quantified over E and M. The theorem specializes its functors, monoidal stalk, invertible germ unit, canonical beta and gamma, and the two recorded counit-defined projection transformations; it assumes none of their compatibility. The lower transformation is exactly the one evaluated by constantDerivedProjectionMap. Factoring the equation at the abstract categorical level avoids kernel expansion of specialized derived tensor objects; the file remains one module and uses the default 60-second compilation limit. The stage-3 proof now uses the categorical projection-mate compatibility theorem and the separate pullback/stalk tensor-normalization input; all existing signatures and definitions are unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261020T131219-L-1261205",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
