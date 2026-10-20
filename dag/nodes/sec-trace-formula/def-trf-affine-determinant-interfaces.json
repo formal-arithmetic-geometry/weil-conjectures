@@ -1,0 +1,131 @@
+{
+ "id": "def-trf-affine-determinant-interfaces",
+ "kind": "definition",
+ "title": "Affine cartesian determinant interfaces and compatible local exterior formulas",
+ "statement": "Fix normalized derived pullback coherence [lem-trf-two-term-determinant-pullback-coherence]. TwoTermDeterminantFunctorData is the determinant-functor and cartesian-comparison part of [def-trf-two-term-determinant-data], with the already proved source-membership assertions [lem-trf-two-term-perfect-tor-window] and the fixed coherence supplied separately. AffineTwoTermDeterminantData asks for the functors and cartesian comparisons only on affine schemes and maps of affines. In addition it records, for any displayed model P on any scheme X and any affine f:Y→X, an isomorphism from f*P.line to the affine determinant of Lf*P, compatible with further affine pullback. It records the analogous unit isomorphisms for zero and one global contractible-to-zero isomorphism whose pullbacks satisfy the evaluation equation on every affine test scheme. These last families ensure that the exterior, zero and evaluation comparisons can actually be glued; bare unrelated objectwise comparisons would not suffice.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FJM and its scalar-extension construction; perfect.tex Tags 0FJX and 0FJY."
+ },
+ "stmt_deps": [
+  "def-trf-two-term-determinant-data",
+  "lem-trf-two-term-determinant-pullback-coherence",
+  "lem-trf-two-term-perfect-tor-window"
+ ],
+ "proof": [
+  {
+   "text": "Separate the fixed coherent derived comparisons from the determinant functor fields. Restrict the latter to affine test schemes, and retain the natural exterior-power and zero families under a further affine morphism. Write their coherence and evaluation equations explicitly.",
+   "uses": [
+    "def-trf-two-term-determinant-data",
+    "lem-trf-two-term-determinant-pullback-coherence",
+    "lem-trf-two-term-perfect-tor-window"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-trf-two-term-determinant-data",
+  "lem-trf-two-term-determinant-pullback-coherence",
+  "lem-trf-two-term-perfect-tor-window"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FJM and its scalar-extension construction; perfect.tex Tags 0FJX and 0FJY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "determinant functor two term perfect complexes invertible sheaf pullback",
+   "results": "Eight hits about free module pullback isomorphisms; none constructs determinant functors or affine descent. For the Tor-window search, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE gives a cohomologically bounded complex, without finite locally free terms. The existing finite-free residue model in our library supplies the stronger input.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"determinant\", \"Complex\"",
+   "results": "Zero hits. The separate \"Perfect\", \"Tor\" query returned unrelated perfect groups, perfect closures and graph matchings.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "determinant.*[Cc]omplex|determinantFunctor|determinantLine",
+   "results": "Two hits in Mathlib/LinearAlgebra/Complex/Determinant.lean concern complex numbers, not complexes. The additional leftAdjointCompIso search found the mate/composition API used in the proved normalized-coherence argument. No determinant construction was found.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Determinant line of two term perfect complexes compatible with affine base change and descent",
+   "results": "Eight hits: LinearMap.det, IsBaseChange.det_endHom, LinearEquiv.det_baseChange, LinearMap.det_baseChange and related scalar determinants. These are endomorphism determinants, not determinant lines of complexes or compatible gluing data. The queried theorem types do not provide the required construction.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.TwoTermPerfectDeterminant",
+  "date": "2026-10-21",
+  "group": "G2"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Within the two-term determinant auxiliary: Affine cartesian determinant interfaces and compatible local exterior formulas.",
+   "via": [
+    "lem-trf-two-term-perfect-determinant",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.AffineTwoTermDeterminantData",
+  "file": "lean/Sheaf/TraceFormula/AffineTwoTermDeterminantData.lean",
+  "declaration": "AlgebraicGeometry.AffineTwoTermDeterminantData",
+  "declarations": [
+   "AlgebraicGeometry.AffineTwoTermDeterminantData",
+   "AlgebraicGeometry.TwoTermDeterminantFunctorData"
+  ],
+  "statement": "structure AffineTwoTermDeterminantData (κ : TwoTermDeterminantPullbackCoherence.{u, w})",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-ee750",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261020T233143-L-899803",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-ee750",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261020T233143-L-899803",
+  "kind": "interface",
+  "note": "independent cc review: ee7502bc vs PASSed fbdc6cf3 (diff -r: only 5 Users rows added to G2-derived-tensor-vanishing-single-definition.md), delivery recompiled against live build, #print axioms of proved decls, all 13 direct importers of Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes compiled against the delivered .lbuild (10 pass, 3 quarantined fail identically on published build)"
+ }
+}

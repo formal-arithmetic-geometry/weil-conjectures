@@ -121,14 +121,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes",
+  "module": "WeilConjectures.AlgebraicGeometry.DerivedTensorCohomologyVanishes",
   "declaration": "AlgebraicGeometry.schemeDerivedTensorCohomologyVanishes",
-  "file": "lean/Sheaf/AlgebraicGeometry/DerivedTensorCohomologyVanishes.lean",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DerivedTensorCohomologyVanishes.lean",
   "statement": "def schemeDerivedTensorCohomologyVanishes (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (E : schemeDerivedCategory X) (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (i : ℤ) : Prop",
   "branch": "sheaf-dag",
   "by": "E1",
   "date": "2026-10-11",
-  "existing": false
+  "existing": false,
+  "note": "The Sheaf path publicly reexports this adopted definition. The old IsAcyclicTensorKFlat body and the adopted IsKFlatTensor body are definitionally equal, as checked by the private rfl lemma in TwoTermPerfectTorWindow. The public predicate name, signature and meaning are unchanged."
  },
  "reviewed": {
   "date": "2026-10-11",
@@ -145,5 +146,15 @@
   "group": "E1",
   "result": "pass",
   "note": "08EA (2)=>(1): X Scheme.{uT} + [QuasiSeparatedSpace X] (mathlib_match of def-weil-quasi-separated-morphism); E : schemeDerivedCategory X on the moduleRings carrier + schemeDerivedQCohProperty (D_QCoh); a b : Z, hab; h over F.IsQuasicoherent, i<a or b<i; conclusion all O_X-modules G, same degrees, no qcoh premise. New def-pc-derived-tensor-cohomology-vanishes: exists K-flat P (IsKFlat R:=X.sheaf), Q.obj P iso E, IsZero H^i(Tot(P (x) F[0])) with SheafOfModules.monoidalCategory; exists=forall by 06YS/06YT, not hollow; source torAmplitudeIn not instantiable on SheafOfModules (MonoidalPreadditive/MonoidalClosed fail to synthesize, no HasDerivedMonoidalCategory), no O_X derived tensor in DAG/lean/Sheaf. No let in the statement, universes shared."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-ee750",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261020T233143-L-899803",
+  "kind": "interface",
+  "note": "independent cc review: ee7502bc vs PASSed fbdc6cf3 (diff -r: only 5 Users rows added to G2-derived-tensor-vanishing-single-definition.md), delivery recompiled against live build, #print axioms of proved decls, all 13 direct importers of Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes compiled against the delivered .lbuild (10 pass, 3 quarantined fail identically on published build)"
  }
 }

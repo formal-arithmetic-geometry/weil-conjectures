@@ -1,0 +1,163 @@
+{
+ "id": "lem-trf-two-term-perfect-tor-window",
+ "kind": "statement",
+ "title": "Two-term perfect models, Tor amplitude, and preservation by pullback",
+ "statement": "For every scheme X [def-pc-scheme] with the recorded derived categories on X and its localized sites [def-pc-derived-category], the local two-term finite locally free condition [def-trf-two-term-determinant-data] is equivalent to being perfect [def-pc-perfect-complex] with derived tensor cohomology vanishing outside [-1,0] [def-pc-scheme-derived-tensor-structure]. Every displayed model and the zero complex satisfy the condition, and arbitrary derived pullback preserves it [def-pc-module-pullback]. No quasi-compactness, separatedness or uniform global rank hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 0FJX, 08G7, 068V and 09UA; pullback in Tag 0FJY."
+ },
+ "stmt_deps": [
+  "def-trf-two-term-determinant-data",
+  "def-pc-perfect-complex",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Trivialize the two model terms on a common open refinement. The mapped complex has finite free terms and support [-1,0]. It is strictly perfect. Bounded-above flat K-flatness and the termwise tensor calculation give the required cohomology vanishings.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat",
+    "lem-pc-perfect-pseudo-coherent-locally-finite-tor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use perfectness and Tor-amplitude locality on open neighbourhoods to descend these properties. Open pullback is exact restriction, with the universe-polymorphic comparison lifted through localization.",
+   "uses": [
+    "lem-pc-perfect-of-open-pullbacks",
+    "lem-pc-tor-amplitude-open-local"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At a point choose the finite free residue model. Its ranks are the residue Betti numbers. The assumed tensor vanishings make all ranks outside [-1,0] zero. The corresponding terms vanish; compare the complex to the double of its remaining differential componentwise.",
+   "uses": [
+    "lem-sc-perfect-finite-free-residue-model",
+    "lem-sc-residue-betti-zero-of-tensor-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a model use its locally free trivializations; for zero use a finite free complex all of whose terms vanish. For arbitrary pullback, pull the residue model to the inverse-image open using localizedPullback. It preserves finite free terms and zero objects; the retained strictly-perfect-model comparison identifies this with derived pullback.",
+   "uses": [
+    "lem-pc-derived-pullback-perfect",
+    "lem-pc-localized-pullback-perfect-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+  "lem-pc-perfect-of-open-pullbacks",
+  "lem-pc-tor-amplitude-open-local",
+  "lem-sc-perfect-finite-free-residue-model",
+  "lem-sc-residue-betti-zero-of-tensor-vanishing",
+  "lem-pc-derived-pullback-perfect",
+  "lem-pc-localized-pullback-perfect-model"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 0FJX, 08G7, 068V and 09UA; pullback in Tag 0FJY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "determinant functor two term perfect complexes invertible sheaf pullback",
+   "results": "Eight hits about free module pullback isomorphisms; none constructs determinant functors or affine descent. For the Tor-window search, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE gives a cohomologically bounded complex, without finite locally free terms. The existing finite-free residue model in our library supplies the stronger input.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"determinant\", \"Complex\"",
+   "results": "Zero hits. The separate \"Perfect\", \"Tor\" query returned unrelated perfect groups, perfect closures and graph matchings.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "determinant.*[Cc]omplex|determinantFunctor|determinantLine",
+   "results": "Two hits in Mathlib/LinearAlgebra/Complex/Determinant.lean concern complex numbers, not complexes. The additional leftAdjointCompIso search found the mate/composition API used in the proved normalized-coherence argument. No determinant construction was found.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Determinant line of two term perfect complexes compatible with affine base change and descent",
+   "results": "Eight hits: LinearMap.det, IsBaseChange.det_endHom, LinearEquiv.det_baseChange, LinearMap.det_baseChange and related scalar determinants. These are endomorphism determinants, not determinant lines of complexes or compatible gluing data. The queried theorem types do not provide the required construction.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.TwoTermPerfectDeterminant",
+  "date": "2026-10-21",
+  "group": "G2"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Within the two-term determinant auxiliary: Two-term perfect models, Tor amplitude, and preservation by pullback.",
+   "via": [
+    "lem-trf-two-term-perfect-determinant",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.TwoTermPerfectTorWindow",
+  "file": "lean/Sheaf/TraceFormula/TwoTermPerfectTorWindow.lean",
+  "declaration": "AlgebraicGeometry.isTwoTermPerfect_iff_perfect_tor",
+  "declarations": [
+   "AlgebraicGeometry.isTwoTermPerfect_iff_perfect_tor",
+   "AlgebraicGeometry.twoTermPerfect_model",
+   "AlgebraicGeometry.twoTermPerfect_zero",
+   "AlgebraicGeometry.twoTermPerfect_pullback"
+  ],
+  "statement": "theorem isTwoTermPerfect_iff_perfect_tor\n    [∀ (X : Scheme.{u}) (U : X.Opens),\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (X : Scheme.{u}) (L : schemeDerivedCategory X) :\n    isTwoTermPerfect X L ↔ Scheme.IsPerfect X L ∧\n      ∀ (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (i : ℤ),\n        i < -1 ∨ 0 < i → IsZero ((DerivedCategory.homologyFunctor _ i).obj\n          (L ⊗ (DerivedCategory.singleFunctor _ 0).obj M))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-ee750",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261020T233143-L-899803",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-ee750",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261020T233143-L-899803",
+  "kind": "interface",
+  "note": "independent cc review: ee7502bc vs PASSed fbdc6cf3 (diff -r: only 5 Users rows added to G2-derived-tensor-vanishing-single-definition.md), delivery recompiled against live build, #print axioms of proved decls, all 13 direct importers of Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes compiled against the delivered .lbuild (10 pass, 3 quarantined fail identically on published build)"
+ }
+}

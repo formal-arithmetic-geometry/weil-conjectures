@@ -1,347 +1,231 @@
 {
-  "id": "lem-trf-two-term-perfect-determinant",
-  "kind": "statement",
-  "title": "Determinant functor for two-term perfect complexes on arbitrary schemes",
-  "statement": "Let $X$ be any scheme [def-pc-scheme]. In $D(\\mathcal O_X)$ [def-pc-derived-category], call a complex perfect of Tor amplitude $[-1,0]$ if it is locally quasi-isomorphic to $[E^{-1}\\to E^0]$ in degrees $-1,0$, with both terms finite locally free [def-amb-finite-locally-free-module]; equivalently it is perfect and derived tensoring with any module has cohomology only in those degrees. There is a determinant functor from the category of these objects with isomorphisms as morphisms to the category of invertible $\\mathcal O_X$-modules [def-sc-invertible-module] with isomorphisms as morphisms. On a two-term model of locally constant ranks $a,b$ its value is canonically $(\\bigwedge^a E^{-1})^\\vee\\otimes\\bigwedge^b E^0$, using exterior powers [def-weil-pbc-exterior-algebra] and the sheaf dual $\\mathcal Hom(-,\\mathcal O_X)$. For isomorphisms $u,v$ one has $\\det(vu)=\\det(v)\\det(u)$ and $\\det(1)=1$; hence the value depends on the derived object, with canonical comparisons between models. In the special acyclic model $[E\\xrightarrow{1}E]$ the comparison with the zero complex is the evaluation trivialization of $(\\det E)^\\vee\\otimes\\det E$. For every scheme morphism $g:X'\\to X$, there is a natural isomorphism $g^*\\det(L)\\simeq\\det(Lg^*L)$, where $g^*$ is module pullback [def-pc-module-pullback] and $Lg^*$ is its derived functor computed with flat resolutions. This comparison commutes with isomorphisms of $L$, restrictions, identity pullbacks and composition of pullbacks.",
-  "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tags 0FJX (lemma-determinant-two-term-complexes), 0FJY (remark-functorial-det); affine construction in more-algebra.tex, Tags 0FJI (section-determinants-complexes) and 0FJM (lemma-determinant-two-term-complexes)."
+ "id": "lem-trf-two-term-perfect-determinant",
+ "kind": "statement",
+ "title": "Determinant functor for two-term perfect complexes on arbitrary schemes",
+ "statement": "Let $X$ be any scheme [def-pc-scheme]. In $D(\\mathcal O_X)$ [def-pc-derived-category], call a complex perfect of Tor amplitude $[-1,0]$ if it is locally quasi-isomorphic to $[E^{-1}\\to E^0]$ in degrees $-1,0$, with both terms finite locally free [def-amb-finite-locally-free-module]; equivalently it is perfect and derived tensoring with any module has cohomology only in those degrees. There is a determinant functor from the category of these objects with isomorphisms as morphisms to the category of invertible $\\mathcal O_X$-modules [def-sc-invertible-module] with isomorphisms as morphisms. On a two-term model of locally constant ranks $a,b$ its value is canonically $(\\bigwedge^a E^{-1})^\\vee\\otimes\\bigwedge^b E^0$, using exterior powers [def-weil-pbc-exterior-algebra] and the sheaf dual $\\mathcal Hom(-,\\mathcal O_X)$. For isomorphisms $u,v$ one has $\\det(vu)=\\det(v)\\det(u)$ and $\\det(1)=1$; hence the value depends on the derived object, with canonical comparisons between models. In the special acyclic model $[E\\xrightarrow{1}E]$ the comparison with the zero complex is the evaluation trivialization of $(\\det E)^\\vee\\otimes\\det E$. For every scheme morphism $g:X'\\to X$, there is a natural isomorphism $g^*\\det(L)\\simeq\\det(Lg^*L)$, where $g^*$ is module pullback [def-pc-module-pullback] and $Lg^*$ is its derived functor computed with flat resolutions. This comparison commutes with isomorphisms of $L$, restrictions, identity pullbacks and composition of pullbacks.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 0FJX (lemma-determinant-two-term-complexes), 0FJY (remark-functorial-det); affine construction in more-algebra.tex, Tags 0FJI (section-determinants-complexes) and 0FJM (lemma-determinant-two-term-complexes)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-amb-finite-locally-free-module",
+  "def-sc-invertible-module",
+  "def-weil-pbc-exterior-algebra",
+  "def-pc-module-pullback",
+  "def-pc-perfect-complex",
+  "def-sc-sheaf-exterior-power",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-pc-recorded-pullback-composition"
+ ],
+ "proof": [
+  {
+   "text": "Apply the proved Tor-window equivalence. Its direct construction also supplies source membership of every model, zero, and arbitrary derived pullback.",
+   "uses": [
+    "lem-trf-two-term-perfect-tor-window"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-pc-derived-category",
-    "def-amb-finite-locally-free-module",
-    "def-sc-invertible-module",
-    "def-weil-pbc-exterior-algebra",
-    "def-pc-module-pullback",
-    "def-pc-perfect-complex",
-    "def-sc-sheaf-exterior-power",
-    "def-pc-scheme-derived-tensor-structure",
-    "lem-pc-recorded-pullback-composition"
-  ],
-  "proof": [
-    {
-      "text": "First check the stated equivalence of the two descriptions of the objects. A finite locally free sheaf is flat: locally tensoring is a finite direct sum, hence exact. Thus a two-term model is K-flat by [lem-pc-bounded-above-flat-kflat], and its tensor with a degree-zero module has terms only in degrees $-1,0$. Conversely apply [lem-sf-site-perfect-tor-window] on the small Zariski site with $a=-1,b=0$. This gives local two-term models whose terms are summands of finite free sheaves. On an affine open a splitting is an idempotent matrix of sections; its image module is a summand of a finite free module. By [lem-weil-pbc-finite-projective-standard-free-cover], shrink to principal opens making that image free. Do this for both terms and take their common refinement. The resulting models are two-term finite locally free models with unchanged degree bounds. No regularity or quasi-compactness of $X$ is used.",
-      "uses": [
-        "lem-pc-bounded-above-flat-kflat",
-        "lem-sf-site-perfect-tor-window",
-        "lem-weil-pbc-finite-projective-standard-free-cover"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/perfect.tex",
-        "place": "Tags 0FJX, 08G7 (site-perfect-precise), 00NX; cohomology.tex Tag 06YD."
-      }
-    },
-    {
-      "text": "Work first over a commutative ring $A$ with good complexes $P=[P^{-1}\\to P^0]$ of finite projective modules. Set $D(P)=\\det_A(P^0)\\otimes\\det_A(P^{-1})^\\vee$ as in [lem-trf-surjective-two-term-determinant-calculus]. It is invertible: on the finite free localizations of [lem-weil-pbc-finite-projective-standard-free-cover], wedge products of bases identify each top exterior power with $A$ (also for rank zero). Good complexes are bounded above with projective terms, so [lem-sc-bounded-above-projective-kprojective] and [lem-coef-kprojective-derived-hom-bijection] identify their derived morphisms with chain maps modulo homotopy. In particular a derived isomorphism is represented by a quasi-isomorphism $a:P\\to Q$ and has a chain-map inverse up to homotopy. The surjective case already has the explicit map $T_a$ of the new calculus lemma.",
-      "uses": [
-        "lem-trf-surjective-two-term-determinant-calculus",
-        "lem-weil-pbc-finite-projective-standard-free-cover",
-        "lem-sc-bounded-above-projective-kprojective",
-        "lem-coef-kprojective-derived-hom-bijection"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-algebra.tex",
-        "place": "Tag 0FJM, opening paragraph; derived.tex Tag 064B."
-      }
-    },
-    {
-      "text": "For an arbitrary quasi-isomorphism $a:P\\to Q$, choose a finite free module $F$ and a surjection $p:F\\to Q^{-1}$. Let $M=[P^{-1}\\oplus F\\xrightarrow{d_P\\oplus1}P^0\\oplus F]$, let $b:M\\to P$ be projection, and put $c^{-1}=(a^{-1},p)$ and $c^0=(a^0,d_Qp)$. Then $c$ is a chain map homotopic to $ab$ by $h(x,f)=p(f)$ in degree zero. The kernel of $b$ is $[F\\xrightarrow{1}F]$, so $b$ and $c$ are quasi-isomorphisms. The map $c^{-1}$ is surjective. Given $y\\in Q^0$, surjectivity of $H^0(a)$ writes $y=a^0(x)+d_Q(z)$; lift $z$ through $p$ to see that $c^0$ is surjective. Hence both $b,c$ qualify for [lem-trf-surjective-two-term-determinant-calculus]. For any such good diagram (allowing $c\\simeq ab$) define its proposed map to be $T_cT_b^{-1}:D(P)\\to D(Q)$.",
-      "uses": [
-        "lem-trf-surjective-two-term-determinant-calculus"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-algebra.tex",
-        "place": "Tag 0FJM, existence of good diagrams."
-      }
-    },
-    {
-      "text": "For a good diagram for $1_P$, its two legs are homotopic, and the homotopy clause of [lem-trf-surjective-two-term-determinant-calculus] makes $T_cT_b^{-1}=1$. Next take good diagrams $(b_{12},c_{12})$ for $a:P_1\\to P_2$ and $(b_{23},c_{23})$ for $a':P_2\\to P_3$. Form the degreewise fibre product $N=M_{12}\\times_{P_2}M_{23}$, along $c_{12},b_{23}$, with projections $r,s$. Each projection is surjective; its kernel is the kernel complex of the other surjective leg, hence has an isomorphism as differential. The exact sequence on terms splits since the quotient terms are projective, so $N$ has finite projective terms. The projections are quasi-isomorphisms: a cycle lifts after correcting its differential using the acyclic kernel, and a lift of a boundary differs from a boundary by a kernel cycle, which is a kernel boundary. Thus $(b_{12}r,c_{23}s)$ is a good diagram for $a'a$. The equality $c_{12}r=b_{23}s$ and the composition clause of the calculus lemma give $T_{c_{12}}T_r=T_{b_{23}}T_s$. Rearranging yields $T_{c_{23}s}T_{b_{12}r}^{-1}=(T_{c_{23}}T_{b_{23}}^{-1})(T_{c_{12}}T_{b_{12}}^{-1})$.",
-      "uses": [
-        "lem-trf-surjective-two-term-determinant-calculus"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-algebra.tex",
-        "place": "Tag 0FJM, identity diagrams and composition via degreewise fibre products."
-      }
-    },
-    {
-      "text": "Fix a homotopy inverse $a':Q\\to P$ of $a$ from [lem-coef-kprojective-derived-hom-bijection] and fix one good diagram for $a'$. Compose it with any good diagram for $a$ using the preceding fibre product. Since $a'a\\simeq1_P$, the resulting legs are homotopic; step 4 makes its map the identity. Thus every proposed map for $a$ equals the inverse of the fixed map for $a'$, proving independence of good diagram. A good diagram for $a$ is also one for any homotopic representative, so the map depends only on the derived morphism. Step 4 now proves the composition law, and its identity calculation proves the identity law. Transport along identifications of a model with a derived object gives the determinant functor and its canonical comparisons between models: the comparison for a composite identification is the composite comparison, by this same law.",
-      "uses": [
-        "lem-coef-kprojective-derived-hom-bijection",
-        "lem-trf-surjective-two-term-determinant-calculus"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-algebra.tex",
-        "place": "Tag 0FJM, independence paragraph."
-      }
-    },
-    {
-      "text": "For a ring map $A\\to B$, the map $B\\otimes_A\\bigwedge^r V\\to\\bigwedge^r(B\\otimes_A V)$ sends $b\\otimes(v_1\\wedge\\cdots\\wedge v_r)$ to $b((1\\otimes v_1)\\wedge\\cdots\\wedge(1\\otimes v_r))$. It is an isomorphism for finite projective $V$: check on the free localizations of [lem-weil-pbc-finite-projective-standard-free-cover], where basis wedges give its inverse. Likewise $B\\otimes_A V^\\vee\\cong(B\\otimes_A V)^\\vee$ is checked on a finite basis. These formulas give $B\\otimes_A D(P)\\cong D(B\\otimes_A P)$. A surjective good map has split exact term sequences and kernel differential an isomorphism, so tensoring preserves its defining kernel sequences and quasi-isomorphism. The wedge-lift maps $\\gamma^i$ and $\\delta_N=\\det(d_N)$ in [lem-trf-surjective-two-term-determinant-calculus] commute with this scalar extension, directly by their displayed wedge formulas. Consequently $T_a$ commutes with scalar extension for surjective maps, and $T_cT_b^{-1}$ does so for all good diagrams. Identities and iterated scalar extension agree because both maps send a pure wedge tensor to the same wedge tensor. This also proves naturality in derived isomorphisms. No flatness of $A\\to B$ is required.",
-      "uses": [
-        "lem-trf-surjective-two-term-determinant-calculus",
-        "lem-weil-pbc-finite-projective-standard-free-cover"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-algebra.tex",
-        "place": "Tag 0FJI, kernel and wedge construction; perfect.tex Tags 0FJX, 0FJY."
-      }
-    },
-    {
-      "text": "The preceding scalar-extension formula computes derived extension of scalars on good complexes. Indeed a finite projective module is flat: tensoring with it is a direct summand of tensoring with a finite free module, so preserves exactness. By [lem-pc-module-bounded-flat-kflat], a good complex is K-flat, hence ordinary tensor computes its derived tensor. In the special model $P=[V\\xrightarrow{1}V]$, apply the surjective-map construction of [lem-trf-surjective-two-term-determinant-calculus] to $P\\to0$. Its kernel is $P$, $\\delta_P=\\det(1_V)$, and the short-exact-sequence maps for quotient zero are identities. Thus $D(P)\\to A$ takes $\\det(1_V)$ to $1$. Under the ordinary symmetry identifying $D(P)$ with $(\\det V)^\\vee\\otimes\\det V$, this is exactly evaluation. This includes $V=0$.",
-      "uses": [
-        "lem-pc-module-bounded-flat-kflat",
-        "lem-trf-surjective-two-term-determinant-calculus"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-algebra.tex",
-        "place": "Tag 0FJI, acyclic canonical element and kernel-normalized map; Tag 0FJM."
-      }
-    },
-    {
-      "text": "Choose an affine open cover $U_i=\\operatorname{Spec}A_i$ on which $L$ has a two-term finite free model. By [lem-pc-affine-qcoh-derived-equivalence], the local derived objects and their isomorphisms can be treated as ring complexes, so the construction in steps 2--7 gives invertible sheaves $\\mathcal D_i$ and maps on them. On an affine open $W\\subset U_i\\cap U_j$, restrict both models. The restriction and affine tensor identifications of [lem-pc-affine-derived-pullback-tensor-tilde], together with steps 6--7, identify their determinant sheaves with those computed over $\\Gamma(W,\\mathcal O_X)$. Apply the ring determinant functor to the comparison induced by their identifications with $L|_W$. Its composition law gives identity and cocycle identities on affine refinements of overlaps, hence on overlaps by the sheaf axiom. In particular we never assume intersections of affine opens are affine. The comparisons are compatible with further restriction by step 6.",
-      "uses": [
-        "lem-pc-affine-qcoh-derived-equivalence",
-        "lem-pc-affine-derived-pullback-tensor-tilde"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/perfect.tex",
-        "place": "Tag 0FJX, affine restriction paragraph; Tag 0FJY."
-      }
-    },
-    {
-      "text": "An open cover satisfies [def-weil-pbc-fpqc-covering]: its local ring maps are identities, hence flat; affine opens have finite subcovers by principal opens subordinate to the cover, by [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact]. Apply [lem-pc-fpqc-descent] to the invertible sheaves and cocycles of step 8. Its equivalence gives an invertible sheaf $\\det(L)$, and full faithfulness glues the local determinant maps for every derived isomorphism. Local identity and composition identities remain identities after gluing. Refining two choices of models/covers to common affine subopens gives the canonical comparisons, independent of refinements by the same full faithfulness. On a finite locally free two-term model the construction is precisely $(\\bigwedge^a E^{-1})^\\vee\\otimes\\bigwedge^b E^0$, since that formula is checked on affine trivializations; varying ranks are handled on their rank-constant opens. The evaluation comparison of step 7 also glues. Thus all assertions other than arbitrary pullback have been established.",
-      "uses": [
-        "def-weil-pbc-fpqc-covering",
-        "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-        "lem-pc-fpqc-descent"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/perfect.tex",
-        "place": "Tag 0FJX, gluing of invertible modules, morphisms and canonical sections; descent.tex Tag 023T."
-      }
-    },
-    {
-      "text": "Let $g:X'\\to X$ be any scheme morphism. Cover $X'$ by affine opens $V$ mapping into affine model opens $U=\\operatorname{Spec}A$ of step 8. A finite locally free model remains two-term finite locally free after ordinary pullback; by [lem-pc-flat-complex-derived-pullback] it represents $Lg^*L$. On $V=\\operatorname{Spec}B$, [lem-pc-affine-derived-pullback-tensor-tilde] identifies this with the derived scalar extension of the model. The map of step 6 therefore gives $g^*\\det(L)|_V\\cong\\det(Lg^*L)|_V$. Its naturality for model comparisons and its restriction compatibility show that these maps agree on affine refinements of overlaps. Full faithfulness in [lem-pc-fpqc-descent] glues them to the required natural isomorphism. For identities and composite scheme morphisms, use [lem-pc-ringed-spaces-derived-pullback-composition] to identify the derived pullbacks. On affine models both proposed determinant comparisons send pure wedge tensors to the same pure wedge tensor by step 6, so they coincide globally. The same local check gives naturality in $L$ and restriction compatibility. Arbitrary $g$ is allowed because only finite projective/locally free terms and split kernel sequences were tensored.",
-      "uses": [
-        "lem-pc-flat-complex-derived-pullback",
-        "lem-pc-affine-derived-pullback-tensor-tilde",
-        "lem-pc-fpqc-descent",
-        "lem-pc-ringed-spaces-derived-pullback-composition"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/perfect.tex",
-        "place": "Tag 0FJY; cohomology.tex Tags 06YD and 0D5S."
-      }
-    }
-  ],
-  "proof_deps": [
-    "lem-pc-bounded-above-flat-kflat",
-    "lem-sf-site-perfect-tor-window",
-    "lem-weil-pbc-finite-projective-standard-free-cover",
-    "lem-trf-surjective-two-term-determinant-calculus",
-    "lem-sc-bounded-above-projective-kprojective",
-    "lem-coef-kprojective-derived-hom-bijection",
-    "lem-pc-module-bounded-flat-kflat",
-    "lem-pc-affine-qcoh-derived-equivalence",
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "def-weil-pbc-fpqc-covering",
-    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-    "lem-pc-fpqc-descent",
-    "lem-pc-flat-complex-derived-pullback",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
-  ],
-  "proof_origin": {
-    "by": "document",
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0FJM, good diagrams, fibre products and independence; perfect.tex Tags 0FJX and 0FJY, affine gluing and pullback, with explicit scalar-extension checks."
+  {
+   "text": "Construct normalized derived identity/composition comparisons from the original recorded K-flat counits, using the proved section-normalized coherence theorem.",
+   "uses": [
+    "lem-trf-two-term-determinant-pullback-coherence"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "determinant functor on two term perfect complexes of sheaves gives invertible module and commutes with derived pullback",
-      "results": "8 hits; top=['SheafOfModules.freeFunctorCompPullbackIso', 'SheafOfModules.conjugateEquiv_pullbackComp_inv', 'SheafOfModules.pullbackObjFreeIso', 'SheafOfModules.pullbackIso', 'SheafOfModules.pullbackObjFreeIso_hom_naturality', 'SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc', 'SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom', 'SheafOfModules.pullbackObjUnitToUnit']; note=; digest=a95d90e0c684f204. Read the returned types. LinearMap.det and LinearEquiv.det are determinants of endomorphisms, not determinant lines of complexes. DerivedCategory localization declarations do not construct this functor. The two grep hits are Mathlib/LinearAlgebra/Complex/Determinant.lean:12,14, about the complex numbers over the reals, not cochain complexes.",
-      "date": "2026-10-18",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Determinant line of perfect complexes with tor amplitude minus one to zero functorial in quasi isomorphisms",
-      "results": "8 hits; top=['CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso', 'LinearMap.det', 'HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso', 'DerivedCategory.instIsIsoMapCochainComplexIntQ', 'CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism', 'LinearEquiv.det', 'LinearMap.det_def', 'DerivedCategory.Qh']; note=; digest=05ad08e6315b124f. Read the returned types. LinearMap.det and LinearEquiv.det are determinants of endomorphisms, not determinant lines of complexes. DerivedCategory localization declarations do not construct this functor. The two grep hits are Mathlib/LinearAlgebra/Complex/Determinant.lean:12,14, about the complex numbers over the reals, not cochain complexes.",
-      "date": "2026-10-18",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"determinant\", \"Complex\"",
-      "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read the returned types. LinearMap.det and LinearEquiv.det are determinants of endomorphisms, not determinant lines of complexes. DerivedCategory localization declarations do not construct this functor. The two grep hits are Mathlib/LinearAlgebra/Complex/Determinant.lean:12,14, about the complex numbers over the reals, not cochain complexes.",
-      "date": "2026-10-18",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "determinant.*[Cc]omplex|determinantFunctor|determinantLine",
-      "results": "2 hits; top=['Mathlib/LinearAlgebra/Complex/Determinant.lean', 'Mathlib/LinearAlgebra/Complex/Determinant.lean']; note=; digest=7d1137fb85deaec3. Read the returned types. LinearMap.det and LinearEquiv.det are determinants of endomorphisms, not determinant lines of complexes. DerivedCategory localization declarations do not construct this functor. The two grep hits are Mathlib/LinearAlgebra/Complex/Determinant.lean:12,14, about the complex numbers over the reals, not cochain complexes.",
-      "date": "2026-10-18",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "lem-trf-flat-lci-canonical-adjunction",
-    "date": "2026-10-18",
-    "group": "Q13"
+  {
+   "text": "Construct affine cartesian determinant data by good diagrams, then extend it by affine descent. These are distinct algebra and gluing results, and neither assumes a global derived determinant functor.",
+   "uses": [
+    "lem-trf-affine-two-term-determinant",
+    "lem-trf-two-term-determinant-affine-descent"
+   ],
+   "elementary": false
   },
-  "chapter": "sec-trace-formula",
-  "unit": "sk-i-curve-zero",
-  "blueprint": {
-    "from": {
-      "node": "lem-trf-local-term-locality",
-      "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted.",
-      "via": [
-        "lem-trf-flat-lci-canonical-adjunction",
-        "lem-trf-marked-nodal-dualizing-degrees",
-        "lem-trf-temkin-stable-modification",
-        "lem-trf-stable-modification-flat-curve-pair",
-        "lem-trf-dejong-relative-marked-semistable",
-        "lem-trf-relative-marked-nodal-reduction",
-        "lem-trf-plurinodal-alteration",
-        "lem-trf-nearby-cycle-verdier-duality",
-        "lem-trf-specialization-cohomological-comparison",
-        "lem-trf-trace-specialization"
-      ]
-    },
-    "same_as": [],
-    "is": null
-  },
-  "split_report": {
-    "date": "2026-10-18",
-    "item": "lem-trf-two-term-perfect-determinant",
-    "worker": "stage1",
-    "summary": "Kept the imported statement. Constructed the affine determinant functor explicitly by good diagrams, proved independence and composition using fibre products, checked scalar extension on wedges, and glued objects and maps by existing descent. Retained just one lower-level unsplit input: the kernel-normalized determinant calculus for degreewise surjective quasi-isomorphisms; removed preliminary children that overlapped the item clauses. Read the cited statements and Stacks sources, searched Lean/Mathlib/blueprint, and checked zero, contractible, variable-rank and nonflat-base-change cases.",
-    "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. This determinant input serves the local complete-intersection adjunction used before adding the markings; it does not alter the semistable-modification route.",
-    "tool_uses": [
-      {
-        "node": "lem-pc-bounded-above-flat-kflat",
-        "why": "K-flatness of two-term flat sheaf models verifies the Tor-window equivalence."
-      },
-      {
-        "node": "lem-sf-site-perfect-tor-window",
-        "why": "The generic ringed-site shortening theorem produces models in exactly the Tor window; this unit has no shortening theorem."
-      },
-      {
-        "node": "lem-weil-pbc-finite-projective-standard-free-cover",
-        "why": "Finite free localization covers control variable ranks, local invertibility, and basis checks."
-      },
-      {
-        "node": "lem-sc-bounded-above-projective-kprojective",
-        "why": "K-projectivity of bounded projective module complexes is generic homological algebra."
-      },
-      {
-        "node": "lem-coef-kprojective-derived-hom-bijection",
-        "why": "Derived morphisms between the good models are chain maps modulo homotopy."
-      },
-      {
-        "node": "lem-pc-module-bounded-flat-kflat",
-        "why": "Ordinary tensor on a two-term projective module model computes derived tensor."
-      },
-      {
-        "node": "lem-pc-affine-qcoh-derived-equivalence",
-        "why": "The affine derived equivalence identifies sheaf-derived morphisms with ring-derived morphisms."
-      },
-      {
-        "node": "lem-pc-affine-derived-pullback-tensor-tilde",
-        "why": "Restriction and affine derived scalar extension identify the local constructions."
-      },
-      {
-        "node": "def-weil-pbc-fpqc-covering",
-        "why": "The definition supplies the exact covering hypotheses for descent."
-      },
-      {
-        "node": "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-        "why": "Quasi-compactness of each affine open proves the chosen open cover satisfies the fpqc definition."
-      },
-      {
-        "node": "lem-pc-fpqc-descent",
-        "why": "Generic descent of invertible modules and full faithfulness glue local objects and maps."
-      },
-      {
-        "node": "lem-pc-flat-complex-derived-pullback",
-        "why": "A bounded flat sheaf model computes pullback termwise."
-      },
-      {
-        "node": "lem-pc-ringed-spaces-derived-pullback-composition",
-        "why": "The generic unital associative derived-pullback comparison identifies composite pullbacks."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-pc-bounded-above-flat-kflat",
-    "lem-sf-site-perfect-tor-window",
-    "lem-weil-pbc-finite-projective-standard-free-cover",
-    "lem-sc-bounded-above-projective-kprojective",
-    "lem-coef-kprojective-derived-hom-bijection",
-    "lem-pc-module-bounded-flat-kflat",
-    "lem-pc-affine-qcoh-derived-equivalence",
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "def-weil-pbc-fpqc-covering",
-    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-    "lem-pc-fpqc-descent",
-    "lem-pc-flat-complex-derived-pullback",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
-  ],
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-Codex-Q92-c492a2c4f",
-    "group": "Q92",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q92-c492a2c4f (reviewer sub-agent of L); spot-checked: Read both nodes in full and checked all ten steps against Stacks 0FJI–0FJM, 0FJX–0FJY and the cited interfaces. Verified normalization, nonflat pullback, edge cases, duplicates and absence of a dependency cycle. No repairs needed. Detailed checks and accepted tool uses are in review.md; unavailable pivot-history checks are explicitly noted."
-  },
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.TraceFormula.TwoTermPerfectDeterminant",
-    "file": "lean/Sheaf/TraceFormula/TwoTermPerfectDeterminant.lean",
-    "declaration": "AlgebraicGeometry.exists_twoTermPerfectDeterminantData",
-    "statement": "theorem exists_twoTermPerfectDeterminantData [∀ (X : Scheme.{u}) (U : X.Opens), HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] : (∀ (X : Scheme.{u}) (L : schemeDerivedCategory X), isTwoTermPerfect X L ↔ Scheme.IsPerfect X L ∧ ∀ (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (i : ℤ), i < -1 ∨ 0 < i → IsZero ((DerivedCategory.homologyFunctor _ i).obj (L ⊗ (DerivedCategory.singleFunctor _ 0).obj M))) ∧ Nonempty (TwoTermPerfectDeterminantData.{u, w})",
-    "branch": "newtargets-dag",
-    "by": "NK",
-    "date": "2026-10-17",
-    "declarations": [
-      "AlgebraicGeometry.TwoTermDeterminantModel",
-      "AlgebraicGeometry.TwoTermDeterminantModel.complex",
-      "AlgebraicGeometry.TwoTermDeterminantModel.line",
-      "AlgebraicGeometry.TwoTermDeterminantModel.identity",
-      "AlgebraicGeometry.isTwoTermPerfect",
-      "AlgebraicGeometry.TwoTermPerfectCore",
-      "AlgebraicGeometry.twoTermDeterminantValue",
-      "AlgebraicGeometry.twoTermDeterminantIso",
-      "AlgebraicGeometry.twoTermDeterminantZeroObject",
-      "AlgebraicGeometry.twoTermDeterminantPullbackId",
-      "AlgebraicGeometry.twoTermDeterminantDerivedCompositionLift",
-      "AlgebraicGeometry.TwoTermPerfectDeterminantData",
-      "AlgebraicGeometry.exists_twoTermPerfectDeterminantData"
-    ],
-    "note": "The local two-term condition, model/zero comparisons, evaluation normalization, and all pullback coherences are explicit data. Ordinary pullbacks use the recorded section-normalized adjunction. Derived composition is pinned to the universal lift from its original K-flat counits and this normalized tensor comparison; no natural isomorphism is chosen from a bare existence assertion. Reuses four additional landed dependencies for perfect complexes, sheaf exterior powers, derived tensor and the retained original pullback counits. Only the final existence/equivalence theorem is postponed."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-b6e53d456",
-    "group": "NK",
-    "result": "fix",
-    "note": "Mechanical report repair supplied; Lean, node statement, dependencies, source alignment, edge cases, and compilation all checked."
+  {
+   "text": "Assemble the full determinant record from the descended functors and comparisons, the independently proved membership assertions, and the fixed coherent derived comparisons. The left unit law at the identity is exactly derivedId_normalization; every other required equation is the corresponding descended or normalized field.",
+   "uses": [
+    "def-trf-two-term-determinant-data",
+    "def-trf-affine-determinant-interfaces",
+    "lem-trf-two-term-perfect-tor-window",
+    "lem-trf-two-term-determinant-pullback-coherence"
+   ],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "lem-trf-two-term-perfect-tor-window",
+  "lem-trf-two-term-determinant-pullback-coherence",
+  "lem-trf-affine-two-term-determinant",
+  "lem-trf-two-term-determinant-affine-descent",
+  "def-trf-two-term-determinant-data",
+  "def-trf-affine-determinant-interfaces"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 0FJX and 0FJY, using the separately stated affine Tag 0FJM construction and affine descent; Tor equivalence via finite-free residue models; normalized recorded coherence via Tag 0D5S."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "determinant functor on two term perfect complexes of sheaves gives invertible module and commutes with derived pullback",
+   "results": "8 hits; top=['SheafOfModules.freeFunctorCompPullbackIso', 'SheafOfModules.conjugateEquiv_pullbackComp_inv', 'SheafOfModules.pullbackObjFreeIso', 'SheafOfModules.pullbackIso', 'SheafOfModules.pullbackObjFreeIso_hom_naturality', 'SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc', 'SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom', 'SheafOfModules.pullbackObjUnitToUnit']; note=; digest=a95d90e0c684f204. Read the returned types. LinearMap.det and LinearEquiv.det are determinants of endomorphisms, not determinant lines of complexes. DerivedCategory localization declarations do not construct this functor. The two grep hits are Mathlib/LinearAlgebra/Complex/Determinant.lean:12,14, about the complex numbers over the reals, not cochain complexes.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Determinant line of perfect complexes with tor amplitude minus one to zero functorial in quasi isomorphisms",
+   "results": "8 hits; top=['CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso', 'LinearMap.det', 'HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso', 'DerivedCategory.instIsIsoMapCochainComplexIntQ', 'CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism', 'LinearEquiv.det', 'LinearMap.det_def', 'DerivedCategory.Qh']; note=; digest=05ad08e6315b124f. Read the returned types. LinearMap.det and LinearEquiv.det are determinants of endomorphisms, not determinant lines of complexes. DerivedCategory localization declarations do not construct this functor. The two grep hits are Mathlib/LinearAlgebra/Complex/Determinant.lean:12,14, about the complex numbers over the reals, not cochain complexes.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"determinant\", \"Complex\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read the returned types. LinearMap.det and LinearEquiv.det are determinants of endomorphisms, not determinant lines of complexes. DerivedCategory localization declarations do not construct this functor. The two grep hits are Mathlib/LinearAlgebra/Complex/Determinant.lean:12,14, about the complex numbers over the reals, not cochain complexes.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "determinant.*[Cc]omplex|determinantFunctor|determinantLine",
+   "results": "2 hits; top=['Mathlib/LinearAlgebra/Complex/Determinant.lean', 'Mathlib/LinearAlgebra/Complex/Determinant.lean']; note=; digest=7d1137fb85deaec3. Read the returned types. LinearMap.det and LinearEquiv.det are determinants of endomorphisms, not determinant lines of complexes. DerivedCategory localization declarations do not construct this functor. The two grep hits are Mathlib/LinearAlgebra/Complex/Determinant.lean:12,14, about the complex numbers over the reals, not cochain complexes.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-flat-lci-canonical-adjunction",
+  "date": "2026-10-18",
+  "group": "Q13"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted.",
+   "via": [
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-two-term-perfect-determinant",
+  "worker": "stage1",
+  "summary": "Kept the imported statement. Constructed the affine determinant functor explicitly by good diagrams, proved independence and composition using fibre products, checked scalar extension on wedges, and glued objects and maps by existing descent. Retained just one lower-level unsplit input: the kernel-normalized determinant calculus for degreewise surjective quasi-isomorphisms; removed preliminary children that overlapped the item clauses. Read the cited statements and Stacks sources, searched Lean/Mathlib/blueprint, and checked zero, contractible, variable-rank and nonflat-base-change cases.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. This determinant input serves the local complete-intersection adjunction used before adding the markings; it does not alter the semistable-modification route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-bounded-above-flat-kflat",
+    "why": "K-flatness of two-term flat sheaf models verifies the Tor-window equivalence."
+   },
+   {
+    "node": "lem-sf-site-perfect-tor-window",
+    "why": "The generic ringed-site shortening theorem produces models in exactly the Tor window; this unit has no shortening theorem."
+   },
+   {
+    "node": "lem-weil-pbc-finite-projective-standard-free-cover",
+    "why": "Finite free localization covers control variable ranks, local invertibility, and basis checks."
+   },
+   {
+    "node": "lem-sc-bounded-above-projective-kprojective",
+    "why": "K-projectivity of bounded projective module complexes is generic homological algebra."
+   },
+   {
+    "node": "lem-coef-kprojective-derived-hom-bijection",
+    "why": "Derived morphisms between the good models are chain maps modulo homotopy."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Ordinary tensor on a two-term projective module model computes derived tensor."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "The affine derived equivalence identifies sheaf-derived morphisms with ring-derived morphisms."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Restriction and affine derived scalar extension identify the local constructions."
+   },
+   {
+    "node": "def-weil-pbc-fpqc-covering",
+    "why": "The definition supplies the exact covering hypotheses for descent."
+   },
+   {
+    "node": "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "why": "Quasi-compactness of each affine open proves the chosen open cover satisfies the fpqc definition."
+   },
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Generic descent of invertible modules and full faithfulness glue local objects and maps."
+   },
+   {
+    "node": "lem-pc-flat-complex-derived-pullback",
+    "why": "A bounded flat sheaf model computes pullback termwise."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-pullback-composition",
+    "why": "The generic unital associative derived-pullback comparison identifies composite pullbacks."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q92-c492a2c4f",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q92-c492a2c4f (reviewer sub-agent of L); spot-checked: Read both nodes in full and checked all ten steps against Stacks 0FJI–0FJM, 0FJX–0FJY and the cited interfaces. Verified normalization, nonflat pullback, edge cases, duplicates and absence of a dependency cycle. No repairs needed. Detailed checks and accepted tool uses are in review.md; unavailable pivot-history checks are explicitly noted."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.TwoTermPerfectDeterminant",
+  "file": "lean/Sheaf/TraceFormula/TwoTermPerfectDeterminant.lean",
+  "declaration": "AlgebraicGeometry.exists_twoTermPerfectDeterminantData",
+  "statement": "theorem exists_twoTermPerfectDeterminantData [∀ (X : Scheme.{u}) (U : X.Opens), HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] : (∀ (X : Scheme.{u}) (L : schemeDerivedCategory X), isTwoTermPerfect X L ↔ Scheme.IsPerfect X L ∧ ∀ (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (i : ℤ), i < -1 ∨ 0 < i → IsZero ((DerivedCategory.homologyFunctor _ i).obj (L ⊗ (DerivedCategory.singleFunctor _ 0).obj M))) ∧ Nonempty (TwoTermPerfectDeterminantData.{u, w})",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-17",
+  "declarations": [
+   "AlgebraicGeometry.exists_twoTermPerfectDeterminantData"
+  ],
+  "note": "The original data definitions are publicly reexported verbatim from TwoTermPerfectDeterminantData. The unchanged theorem is assembled from the proved Tor characterization and normalized recorded coherence, the affine good-diagram construction, and conditional affine descent."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b6e53d456",
+  "group": "NK",
+  "result": "fix",
+  "note": "Mechanical report repair supplied; Lean, node statement, dependencies, source alignment, edge cases, and compilation all checked."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-ee750",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261020T233143-L-899803",
+  "kind": "interface",
+  "note": "independent cc review: ee7502bc vs PASSed fbdc6cf3 (diff -r: only 5 Users rows added to G2-derived-tensor-vanishing-single-definition.md), delivery recompiled against live build, #print axioms of proved decls, all 13 direct importers of Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes compiled against the delivered .lbuild (10 pass, 3 quarantined fail identically on published build)"
+ }
 }
