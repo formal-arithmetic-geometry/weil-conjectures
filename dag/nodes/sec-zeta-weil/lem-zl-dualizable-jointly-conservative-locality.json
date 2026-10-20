@@ -15,94 +15,61 @@
  ],
  "proof": [
   {
-   "text": "First prove preservation. Given duality data $E,a,b$ for $K$, fix $i$, write $F=F_i$, and let $s:\\mathbf1_i\\xrightarrow{\\sim}F\\mathbf1$ be its unit comparison. Set\n$$a_i=s^{-1}\\circ F(a)\\circ\\mu_{E,K},\\qquad b_i=\\mu_{K,E}^{-1}\\circ F(b)\\circ s.$$\nThese are maps $FE\\otimes FK\\to\\mathbf1_i$ and $\\mathbf1_i\\to FK\\otimes FE$. Substitute these formulas into each triangle composite. Tensorator naturality moves $F(a)$ and $F(b)$ together; the associativity and unit equations in [def-sfb-strong-monoidal-functor] cancel the intervening tensorators and $s,s^{-1}$. The two composites become respectively $F((1_K\\otimes a)(b\\otimes1_K))=1_{FK}$ and $F((a\\otimes1_E)(1_E\\otimes b))=1_{FE}$, with the associators and unitors of [def-sfb-monoidal-category] included on each side. Thus $FE,a_i,b_i$ are duality data for $FK$. This direction uses neither conservativity nor preservation of internal Hom.",
+   "text": "Preservation is the existing source-library construction ExactPairing.map: apply the strong monoidal functor to evaluation and coevaluation and compose with its unit and tensor comparisons. Its two proved triangle identities give ExactPairing (F_i K) (F_i E). No conservative or closed hypothesis is needed in this direction.",
    "uses": [
     "def-sfb-strong-monoidal-functor",
     "def-sfb-monoidal-category"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0FFP, definition-dual and the observation immediately following it; Tag 0FFL, definition-functor-monoidal-categories"
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 4.5 proof: monoidal, conservative, and internal-Hom properties imply locality of lisse objects"
    }
   },
   {
-   "text": "For reflection put $D=[K,\\mathbf1]$ and let $\\epsilon:D\\otimes K\\to\\mathbf1$ be the inverse transpose of $1_D$. For every object $M$ define $\\varphi_M:M\\otimes D\\to[K,M]$ to be the transpose of\n$$(M\\otimes D)\\otimes K\\xrightarrow{\\alpha_{M,D,K}}M\\otimes(D\\otimes K)\\xrightarrow{1_M\\otimes\\epsilon}M\\otimes\\mathbf1\\xrightarrow{\\rho_M}M.$$\nFor any objects $A,B$ write $\\operatorname{ev}_{A,B}:[A,B]\\otimes A\\to B$ for the inverse transpose of $1_{[A,B]}$. Naturality of the given Hom bijections says that the inverse transpose of $t:T\\to[A,B]$ is $\\operatorname{ev}_{A,B}\\circ(t\\otimes1_A)$. All associators, unitors and tensor compositions used here are those of [def-sfb-monoidal-category].",
+   "text": "Identify the given internal-Hom comparison h_i(B,T) with the canonical mate Functor.LaxMonoidal.ihomComparison. Put A=[B,T] and apply the transpose hypothesis to g = symmetry(A,B) followed by evaluation B tensor A -> T. Expand F_i of a composite. The symmetry compatibility rewrites mu(A,B) followed by F_i(symmetry(A,B)); the two symmetries cancel in each category. The transpose of evaluation is the identity, so the resulting equation is curry(mu(B,A) followed by F_i(evaluation)) = h_i(B,T). The left side is exactly ihomComparison_app_eq_curry. Thus the canonical comparison is invertible at every T. The extra contravariant naturality hypothesis is retained but is not needed.",
    "uses": [
-    "def-sfb-monoidal-category"
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
    ],
    "elementary": true,
    "source": {
     "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Lemma 4.5, lisse part of the proof; explicit canonical evaluation comparison"
+    "place": "Lemma 4.5 proof: monoidal, conservative, and internal-Hom properties imply locality of lisse objects"
    }
   },
   {
-   "text": "Fix $i$, put $L=F_iK$, and choose a dual $E$ of $L$ with evaluation $a:E\\otimes L\\to\\mathbf1_i$ and coevaluation $b:\\mathbf1_i\\to L\\otimes E$. By [lem-sfb-dual-tensor-adjunctions], $-\\otimes E$ is right adjoint to $-\\otimes L$. Normalize this adjunction by the dual-pair bijection\n$$f:A\\otimes L\\to M\\ \\longmapsto\\ (f\\otimes1_E)\\circ(1_A\\otimes b),\\qquad t\\longmapsto(1_M\\otimes a)\\circ(t\\otimes1_L).$$\nHere and below in this step the canonical associators and unitors are suppressed, as in [def-sfb-monoidal-category]. Composing the displayed formulas in either order cancels $b$ against $a$ by the corresponding triangle identity, so its counit at $M$ is $1_M\\otimes a$. Apply [det-sp-unique-right-adjoint] to this adjunction and the given internal-Hom adjunction. It gives isomorphisms $\\theta_M:M\\otimes E\\xrightarrow{\\sim}[L,M]$ whose inverse transposes are $1_M\\otimes a$. In particular $q=\\theta_{\\mathbf1_i}\\circ\\lambda_E^{-1}:E\\xrightarrow{\\sim}[L,\\mathbf1_i]$ satisfies $\\operatorname{ev}_{L,\\mathbf1_i}(q\\otimes1_L)=a$. Let $\\varphi^i_M:M\\otimes[L,\\mathbf1_i]\\to[L,M]$ be the evaluation comparison defined as in step 2 in $\\mathcal D_i$. Taking inverse transposes of both sides gives\n$$\\varphi^i_M\\circ(1_M\\otimes q)=\\theta_M.$$\nIndeed both inverse transposes are $1_M\\otimes a$, followed by the right unitor. Thus $\\varphi^i_M=\\theta_M\\circ(1_M\\otimes q^{-1})$ is an isomorphism for every $M\\in\\mathcal D_i$.",
+   "text": "Use the existing source-library canonical comparison t = MonoidalClosed.ihomUnitTensorToIhom K K : [K,1] tensor K -> [K,K]. For each i, swap the assumed exact pairing for F_i K using BraidedCategory.exactPairing_swap to get a left dual. The proved source theorem isIso_ihomUnitTensorToIhom makes the target comparison invertible: its proof identifies tensor with internal Hom by the exact-pairing tensor adjunction and uniqueness of right adjoints. With the canonical internal-Hom comparison invertible by the previous step, Functor.Monoidal.isIso_map_ihomUnitTensorToIhom_of_ihomComparison makes F_i(t) invertible. This source theorem follows from its explicit tensorator/unit/evaluation comparison equation.",
    "uses": [
     "lem-sfb-dual-tensor-adjunctions",
     "det-sp-unique-right-adjoint",
-    "def-sfb-monoidal-category"
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0FFQ, lemma-left-dual (including its displayed Hom maps); Tag 0FFR, remark-left-dual-adjoint; right-adjoint uniqueness as stated in det-sp-unique-right-adjoint"
-   }
-  },
-  {
-   "text": "Fix $i$ again, write $F=F_i$, and retain its unit comparison $s:\\mathbf1_i\\xrightarrow{\\sim}F\\mathbf1$. Define the isomorphism\n$$u_i:FD\\xrightarrow{h_i(K,\\mathbf1)}[FK,F\\mathbf1]\\xrightarrow{[FK,s^{-1}]}[FK,\\mathbf1_i].$$\nThe compatibility of transposes assumed in the statement, applied to $\\epsilon$ (whose transpose is $1_D$), and naturality in the target $s^{-1}$, gives the exact evaluation identity\n$$\\operatorname{ev}_{FK,\\mathbf1_i}\\circ(u_i\\otimes1_{FK})=s^{-1}\\circ F(\\epsilon)\\circ\\mu_{D,K}.$$\nThis specifies the comparison on the actual evaluation, including the unit factor. The map $[FK,s^{-1}]$ is invertible because its inverse is $[FK,s]$; hence $u_i$ is invertible. This uses only the assumed internal-Hom functoriality and [def-sfb-strong-monoidal-functor], with tensor notation from [def-sfb-monoidal-category].",
-   "uses": [
-    "def-sfb-strong-monoidal-functor",
-    "def-sfb-monoidal-category"
-   ],
-   "elementary": true,
-   "source": {
     "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Lemma 4.5 proof, internal-Hom preservation in the lisse argument; explicit transpose calculation"
+    "place": "Lemma 4.5 proof: monoidal, conservative, and internal-Hom properties imply locality of lisse objects"
    }
   },
   {
-   "text": "For every $M\\in\\mathcal C$, the precise comparison of the canonical maps is\n$$h_i(K,M)\\circ F_i(\\varphi_M)\\circ\\mu_{M,D}=\\varphi^i_{F_iM}\\circ(1_{F_iM}\\otimes u_i).$$\nTo check it, take inverse transposes in $\\mathcal D_i$. By the assumed transpose compatibility, the inverse transpose on the left is $F_i(\\rho_M(1_M\\otimes\\epsilon)\\alpha_{M,D,K})$, precomposed with $\\mu_{M\\otimes D,K}\\circ(\\mu_{M,D}\\otimes1_{F_iK})$. The associativity and right-unit equations and tensorator naturality of [def-sfb-strong-monoidal-functor] rewrite this as\n$$\\rho_{F_iM}\\circ\\bigl(1_{F_iM}\\otimes(s^{-1}F_i(\\epsilon)\\mu_{D,K})\\bigr)\\circ\\alpha_{F_iM,F_iD,F_iK}.$$\nUsing the evaluation identity in step 4, this is exactly the inverse transpose of the right side. Injectivity of the transpose bijection proves the displayed comparison. Associators and unitors have the directions fixed by [def-sfb-monoidal-category].",
-   "uses": [
-    "def-sfb-strong-monoidal-functor",
-    "def-sfb-monoidal-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Lemma 4.5 proof, monoidal and internal-Hom properties in the lisse argument; canonical-map compatibility"
-   }
-  },
-  {
-   "text": "Every factor on the right of the comparison in step 5 is an isomorphism, by steps 3 and 4. Its two outer factors $h_i(K,M)$ and $\\mu_{M,D}$ on the left are isomorphisms by hypothesis. Composing their inverses shows that $F_i(\\varphi_M)$ is an isomorphism for every $i$. Joint conservativity therefore makes $\\varphi_M$ an isomorphism, in particular $\\varphi_K$. This reasoning applies unchanged to an infinite index set. If $I$ is empty, the assumption of joint conservativity itself says every morphism of $\\mathcal C$ is an isomorphism, so it still applies to $\\varphi_K$.",
+   "text": "Apply the given joint conservativity directly to t and the isomorphism instances F_i(t). There is no finiteness or nonemptiness assumption on I: for empty I the same universally quantified premise is vacuous, exactly as required by joint conservativity.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Lemma 4.5 proof, conservative functor in the lisse argument; jointly conservative family version"
+    "place": "Lemma 4.5 proof: monoidal, conservative, and internal-Hom properties imply locality of lisse objects"
    }
   },
   {
-   "text": "Let $j:\\mathbf1\\to[K,K]$ be the transpose of $\\lambda_K:\\mathbf1\\otimes K\\to K$, and set $c=\\varphi_K^{-1}\\circ j:\\mathbf1\\to K\\otimes D$. Untranspose $\\varphi_K\\circ c=j$. By step 2 and naturality in the first variable, this gives\n$$\\rho_K\\circ(1_K\\otimes\\epsilon)\\circ\\alpha_{K,D,K}\\circ(c\\otimes1_K)=\\lambda_K.$$\nPrecompose by $\\lambda_K^{-1}$. The resulting equality is precisely the $K$-triangle for $\\epsilon,c$. These are substitutions into the stated adjunction bijection, using only the monoidal constraints of [def-sfb-monoidal-category].",
+   "text": "Use the proved source construction MonoidalClosed.exactPairingOfIsIso K. It constructs coevaluation as the transpose of the right unitor followed by the inverse of t, takes internal-Hom evaluation as evaluation, and proves both triangles by uncurrying and tensor interchange. This gives ExactPairing [K,1] K. Swap it through the braiding to get ExactPairing K [K,1], and supply this explicit internal dual as the existential witness. No new construction or unproved intermediate theorem is needed.",
    "uses": [
     "def-sfb-monoidal-category"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0FFP, definition-dual, first triangle; direct inverse-transpose calculation"
-   }
-  },
-  {
-   "text": "For the second triangle put $g=(\\epsilon\\otimes1_D)\\circ(1_D\\otimes c):D\\to D$, suppressing the canonical associator and unitors of [def-sfb-monoidal-category]. Bifunctoriality of tensor gives\n$$\\epsilon\\circ(g\\otimes1_K)=\\epsilon\\circ(\\epsilon\\otimes1_D\\otimes1_K)\\circ(1_D\\otimes c\\otimes1_K)=\\epsilon\\circ(1_D\\otimes1_K\\otimes\\epsilon)\\circ(1_D\\otimes c\\otimes1_K)=\\epsilon.$$\nThe middle equality says that contracting the two disjoint $D\\otimes K$ pairs in either order is the same morphism $\\epsilon\\otimes\\epsilon$, followed by $\\mathbf1\\otimes\\mathbf1\\cong\\mathbf1$; the final equality is the $K$-triangle of step 7. Under the given transpose bijection $\\operatorname{Hom}(D\\otimes K,\\mathbf1)\\cong\\operatorname{Hom}(D,D)$, the first and last morphisms correspond to $g$ and $1_D$, since the transpose of $\\epsilon$ is $1_D$. Thus $g=1_D$, which is the $D$-triangle. Consequently $D,\\epsilon,c$ are duality data for $K$, proving reflection and the equivalence.",
-   "uses": [
-    "def-sfb-monoidal-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0FFP, definition-dual, second triangle; direct bifunctoriality and adjunction calculation"
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 4.5 proof: monoidal, conservative, and internal-Hom properties imply locality of lisse objects"
    }
   }
  ],
@@ -115,7 +82,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-  "place": "Lemma 4.5, first paragraph of proof: expansion of the formal lisse-locality inference to jointly conservative families; dual-pair adjunction route of Stacks Tags 0FFP, 0FFQ and 0FFR"
+  "place": "Lemma 4.5, lisse-locality argument; implemented using the proved source-library APIs in WeilConjectures/Mathlib/CategoryTheory/Monoidal/Rigid/{Basic,Comparison,OfEquivalence}.lean. The same canonical-comparison route is used with left tensor orientation, with braiding converting the resulting exact pairing to the stated orientation."
  },
  "mathlib_searches": [
   {
@@ -243,5 +210,15 @@
   "by": "NP",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261020T131955-L-1397126",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

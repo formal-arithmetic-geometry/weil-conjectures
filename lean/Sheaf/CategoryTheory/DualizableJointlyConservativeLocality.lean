@@ -7,8 +7,9 @@ module
 
 public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
-import Mathlib.CategoryTheory.Adjunction.Unique
-import Mathlib.CategoryTheory.Adjunction.Limits
+import Mathlib.CategoryTheory.Monoidal.Rigid.Braided
+import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Comparison
+import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 
 /-!
 # Dualizability detected by jointly conservative closed monoidal functors
@@ -85,6 +86,37 @@ theorem dualizable_iff_of_jointly_conservative
     (K : C) :
     (∃ E : C, Nonempty (ExactPairing K E)) ↔
       ∀ i : I, ∃ E : D i, Nonempty (ExactPairing ((F i).obj K) E) := by
-  sorry
+  -- Transpose compatibility already determines the internal-Hom comparison.
+  have _ := hHomNaturality
+  constructor
+  · rintro ⟨E, ⟨p⟩⟩ i
+    let := p
+    exact ⟨(F i).obj E, ⟨ExactPairing.map (F i) K E⟩⟩
+  · intro hK
+    have hc (i : I) (B T : C) :
+        (Functor.LaxMonoidal.ihomComparison (F i) B).natTrans.app T =
+          (h i B).hom.app T := by
+      let A := (ihom B).obj T
+      have ht := hTranspose i A B T ((β_ A B).hom ≫ (ihom.ev B).app T)
+      have hs := hSymmetry i A B
+      simp only [Functor.map_comp] at ht
+      rw [← Category.assoc (Functor.LaxMonoidal.μ (F i) A B), hs] at ht
+      simpa [Functor.LaxMonoidal.ihomComparison_app_eq_curry, Category.assoc,
+        ← MonoidalClosed.uncurry_id_eq_ev, A] using ht
+    have hi (i : I) : IsIso (Functor.LaxMonoidal.ihomComparison (F i) K).natTrans := by
+      rw [NatTrans.isIso_iff_isIso_app]
+      intro T
+      rw [hc]
+      infer_instance
+    have hm (i : I) : IsIso ((F i).map (ihomUnitTensorToIhom K K)) := by
+      obtain ⟨E, ⟨p⟩⟩ := hK i
+      let := p
+      let := BraidedCategory.exactPairing_swap ((F i).obj K) E
+      let := isIso_ihomUnitTensorToIhom E ((F i).obj K) ((F i).obj K)
+      let := hi i
+      exact Functor.Monoidal.isIso_map_ihomUnitTensorToIhom_of_ihomComparison (F i) K K
+    let := hConservative (ihomUnitTensorToIhom K K) hm
+    let := exactPairingOfIsIso K
+    exact ⟨(ihom K).obj (𝟙_ C), ⟨BraidedCategory.exactPairing_swap _ K⟩⟩
 
 end CategoryTheory
