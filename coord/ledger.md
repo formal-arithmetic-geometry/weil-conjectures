@@ -19090,3 +19090,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:07 L: merged deliver/G1/Sheaf.Paper.ProperOpenCoefficientMate (stage 3; reviewer PASS; first push; landing 20261020T230739-L-607549 (proof); batch 20261020T230657; modules 1; new nodes 1)
 - 23:07 L: merged deliver/G3/Sheaf.SixFunctors.ClosedCostalkDuality (stage 3; reviewer PASS; first push; landing 20261020T230740-L-608051 (interface); batch 20261020T230657; modules 2; new nodes 3)
 - 23:07 L: merged deliver/G5/Sheaf.AlgebraicGeometry.FiniteP1ArbitraryBaseIntegrals (stage 3; reviewer PASS; after a return; landing 20261020T230743-L-608710 (interface); batch 20261020T230657; modules 8; new nodes 7; change records: coord/changes/finite-p1-diagonal-trace-api.md)
+- 23:07 L: merged deliver/G5/Sheaf.SixFunctors.OpenPullbackSupport (stage 3; reviewer PASS; first push; landing 20261020T230745-L-609287 (proof); batch 20261020T230657; modules 1; new nodes 0)
