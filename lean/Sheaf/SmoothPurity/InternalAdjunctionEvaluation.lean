@@ -3,15 +3,6 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry
-import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
-import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import Sheaf.AlgebraicGeometry.CompactifiableOverField
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-import Sheaf.AlgebraicGeometry.ProperProjectionFormula
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
 
 /-! # Evaluation formula for the canonical internal compact-support adjunction
 
@@ -32,6 +23,57 @@ open CategoryTheory Limits MonoidalCategory Opposite
 open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
+
+-- Prefer the direct monoidal-localization instance to the enough-points reconstruction.
+attribute [local instance high] GrothendieckTopology.W.monoidal
+
+private theorem transpose_conjugate
+    {C D : Type*} [Category* C] [Category* D]
+    {L₁ L₂ : C ⥤ D} {R₁ R₂ : D ⥤ C}
+    (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂) (t : L₂ ⟶ L₁)
+    (Q : C) (K : D) (h : Q ⟶ R₁.obj K) :
+    (b.homEquiv Q K).symm (h ≫ (conjugateEquiv a b t).app K) =
+      t.app Q ≫ (a.homEquiv Q K).symm h := by
+  rw [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc,
+    conjugateEquiv_counit, ← Category.assoc, t.naturality, Category.assoc,
+    Adjunction.homEquiv_counit]
+
+private theorem transpose_composite
+    {C D E B : Type*} [Category* C] [Category* D] [Category* E] [Category* B]
+    {L : C ⥤ D} {R : D ⥤ C} {T : D ⥤ E} {H : E ⥤ D}
+    {F : E ⥤ B} {G : B ⥤ E} {L₂ : C ⥤ B} {R₂ : B ⥤ C}
+    (c : L ⊣ R) (d : T ⊣ H) (e : F ⊣ G) (b : L₂ ⊣ R₂)
+    (t : L₂ ⟶ L ⋙ T ⋙ F) (Q : C) (K : B)
+    (h : Q ⟶ R.obj (H.obj (G.obj K))) :
+    (b.homEquiv Q K).symm
+        (h ≫ (conjugateEquiv (c.comp (d.comp e)) b t).app K) =
+      t.app Q ≫ F.map ((d.homEquiv (L.obj Q) (G.obj K)).symm
+        ((c.homEquiv Q (H.obj (G.obj K))).symm h)) ≫ e.counit.app K := by
+  rw [transpose_conjugate (c.comp (d.comp e)) b t Q K h]
+  simp only [Adjunction.comp_homEquiv, Equiv.symm_trans_apply]
+  exact congrArg (fun k ↦ t.app Q ≫ k)
+    (e.homEquiv_counit (T.obj (L.obj Q)) K
+      ((d.homEquiv (L.obj Q) (G.obj K)).symm
+        ((c.homEquiv Q (H.obj (G.obj K))).symm h)))
+
+private theorem tensor_conjugate_evaluation
+    {C D : Type*} [Category* C] [Category* D]
+    {TX : C ⥤ C ⥤ C} {HX : Cᵒᵖ ⥤ C ⥤ C}
+    {TS : D ⥤ D ⥤ D} {HS : Dᵒᵖ ⥤ D ⥤ D}
+    {L : D ⥤ C} {R : C ⥤ D} {F : C ⥤ D} {G : D ⥤ C}
+    (tX : TX ⊣₂ HX) (tS : TS ⊣₂ HS) (a : L ⊣ R) (c : F ⊣ G)
+    (t : F ⋙ TS ≅ TX ⋙ (Functor.whiskeringLeft _ _ _).obj L ⋙
+      (Functor.whiskeringRight _ _ _).obj F)
+    (M : C) (K Q : D) (h : Q ⟶ R.obj ((HX.obj (op M)).obj (G.obj K))) :
+    ((tS.adj (F.obj M)).homEquiv Q K).symm
+        (h ≫ ((((tX.comp a c).conjugateIso (tS.precomp F) t).app (op M)).app K).hom) =
+      (t.hom.app M).app Q ≫ F.map
+        (((tX.adj M).homEquiv (L.obj Q) (G.obj K)).symm
+          ((a.homEquiv Q ((HX.obj (op M)).obj (G.obj K))).symm h)) ≫ c.counit.app K := by
+  change ((tS.adj (F.obj M)).homEquiv Q K).symm
+    (h ≫ (conjugateEquiv (a.comp ((tX.adj M).comp c))
+      (tS.adj (F.obj M)) (t.hom.app M)).app K) = _
+  exact transpose_composite a (tX.adj M) c (tS.adj (F.obj M)) (t.hom.app M) Q K h
 
 /-- The tensor--Hom transpose of the canonical compact-support internal adjunction is
 obtained by the compact-support projection map, evaluation, and the exceptional counit.
@@ -77,6 +119,15 @@ theorem internalAdjunctionEvaluation
                 Q (((RHom(X)[ModuleCat A]).obj (op M)).obj
                   ((R(f)^![ModuleCat A]).obj K))).symm h)) ≫
         (rightDerivedUpperShriekAdjunction (ModuleCat A) f).counit.app K := by
-  sorry
+  have := isIso_projectionMap_of_finite A f
+  apply congrArg (fun k :
+      ((-⊗ᴸ-(S)[ModuleCat A]).obj ((R(f)_![ModuleCat A]).obj M)).obj Q ⟶ K ↦
+    ((derivedTensorSymmetry (ModuleCat A) S).hom.app Q).app
+      ((R(f)_![ModuleCat A]).obj M) ≫ k)
+  exact tensor_conjugate_evaluation (derivedTensorHomAdjunction₂ (ModuleCat A) X)
+      (derivedTensorHomAdjunction₂ (ModuleCat A) S)
+      (derivedUpperStarLowerStarAdjunction (ModuleCat A) f)
+      (rightDerivedUpperShriekAdjunction (ModuleCat A) f)
+      (asIso (projectionMap (ModuleCat A) f)) M K Q h
 
 end AlgebraicGeometry.Etale

@@ -20,112 +20,40 @@
  ],
  "proof": [
   {
-   "text": "Write $H=R\\mathcal Hom_A(M,f^\\times K)$ and $U=Rf_*H$. We first spell out the ordinary inverse-image transpose on the unbounded categories. By [prop-weil-pbc-inverse-image-modules-exact], $f^*=f^{-1}$ is exact on constant-$A$ modules and is left adjoint to $f_*$. Choose a complex $T$ for a test object $B$ and a K-injective complex $I$ for $H$ by [prop-pur-kinjective-resolutions-exist]. Degreewise adjunction gives\n$$\\operatorname{Hom}_{K(S)}(T,f_*I)=\\operatorname{Hom}_{K(X)}(f^*T,I):$$\nit carries a chain homotopy $a-b=ds+sd$ to the same equation, by naturality of the sheaf adjunction. For acyclic $T$, $f^*T$ is acyclic, so this equality says that $f_*I$ is K-injective. The two applications of [lem-weil-pbc-kinjective-hom-derived] therefore give\n$$\\operatorname{Hom}_{D(S)}(B,U)=\\operatorname{Hom}_{K(S)}(T,f_*I)=\\operatorname{Hom}_{D(X)}(f^*B,H).$$\nHere $f_*I$ computes $Rf_*H$ by [lem-weil-pbc-kinjective-total-derived]: the functor $Q_Sf_*$ on homotopy categories is exact because additive $f_*$ respects the finite-sum matrices defining shifts and cones. These are natural bijections, and their inverse-image counit is denoted $e:f^*U\\to H$.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-kinjective-total-derived"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6, lemma-adjoint; explicit exact-inverse-image specialization using derived.tex Tag 070I, lemma-K-injective, and Tag 070K, lemma-enough-K-injectives-implies"
-   }
-  },
-  {
-   "text": "For either small etale ringed site, put $H_A(C,D)=R\\mathcal Hom_A(C,D)$. Apply $H^0$ of derived global sections to the natural isomorphism $H_A(B,H_A(C,D))\\cong H_A(B\\otimes_A^L C,D)$ of [lem-weil-pbc-ringed-internal-hom-exact-restriction]. Applying [lem-pur-rhom-global-sections] to its two sides gives the natural bijection\n$$c_{B,C,D}:\\operatorname{Hom}(B,H_A(C,D))\\xrightarrow{\\sim}\\operatorname{Hom}(B\\otimes_A^LC,D).$$\nIts evaluation is $\\operatorname{ev}_{C,D}=c_{H_A(C,D),C,D}(1)$. Naturality in $B$ gives $c(a)=\\operatorname{ev}_{C,D}\\circ(a\\otimes1_C)$, by substituting $a:B\\to H_A(C,D)$ into the naturality square for the identity. Thus this is exactly the tensor--Hom transpose convention of the statement.",
-   "uses": [
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-pur-rhom-global-sections"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08J9, lemma-internal-hom, and 08JA, lemma-section-RHom-over-U; equation-internal-hom"
-   }
-  },
-  {
-   "text": "Choose a compactification $f=rj$ by [def-asd-compactifiable]. Its middle scheme is Noetherian: $r$ is of finite type by [def-weil-proper-morphism], hence locally of finite type and quasi-compact by [def-weil-finite-type-morphism]; [pqf-lem-locnoeth-lft] gives local Noetherianity. A finite affine cover of $S$, together with finite affine covers of its inverse images under $r$, gives quasi-compactness and a finite cover of the middle scheme by Noetherian affines. Apply [lem-amb-proper-coproducts-projection] to $j_!M$. Using $Rf_!=Rr_*j_!$ of [def-amb-etale-compact-support], compose its map with [lem-pur-etale-open-derived-tensor] to obtain\n$$\\Pi_{B,M}:B\\otimes_A^LRf_!M\\xrightarrow{\\sim}Rr_*(r^*B\\otimes_A^Lj_!M)\\xrightarrow{\\sim}Rf_!(f^*B\\otimes_A^LM).$$\nIn the second arrow interchange tensor factors, apply the cited open comparison, and interchange them back. This uses exactly the sign symmetries specified in the proper projection statement, not an independently chosen isomorphism. The identification $j^*r^*=f^*$ is composition of the ordinary inverse images. Both arrows are natural in $B,M$, and neither citation requires boundedness or constructibility. This is the projection map normalized in the item.",
-   "uses": [
-    "def-asd-compactifiable",
-    "def-weil-proper-morphism",
-    "def-weil-finite-type-morphism",
-    "pqf-lem-locnoeth-lft",
-    "lem-amb-proper-coproducts-projection",
-    "def-amb-etale-compact-support",
-    "lem-pur-etale-open-derived-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-internal-adjunction.proof.md",
-    "place": "Proof, third displayed bijection: proper projection formula on a compactification, preceded by extension by zero"
-   }
-  },
-  {
-   "text": "The Noetherian compactification of step 3 satisfies [thm-amb-etale-exceptional-adjoint], so $F=Rf_!$ is left adjoint to $G=f^\\times$. Apply the inverse-Hom formula of [lem-weil-pbc-adjunction-of-natural-bijection] with $P=f^*B\\otimes_A^LM$. It sends a map $p_B:P\\to f^\\times K$ to exactly\n$$\\varepsilon_{f,K}\\circ Rf_!(p_B):Rf_!(f^*B\\otimes_A^LM)\\longrightarrow K.$$\nThis fixes the direction and the counit of the exceptional transposition. It uses the ordinary unbounded exceptional adjunction, with $A$ finite as assumed, and imposes no invertibility condition on $|A|$.",
-   "uses": [
-    "thm-amb-etale-exceptional-adjoint",
-    "lem-weil-pbc-adjunction-of-natural-bijection"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0037, definition-adjoint and following unit/counit formulas; blueprint prop-asd-internal-adjunction.proof.md, second displayed bijection"
-   }
-  },
-  {
-   "text": "Set $V=R\\mathcal Hom_A(Rf_!M,K)$. For every test object $B$ compose the bijections of steps 1, 2 and 4, precomposition with $\\Pi_{B,M}$ of step 3, and the inverse of the bijection of step 2 on $S$. This gives a bijection $\\Phi_B:\\operatorname{Hom}_S(B,U)\\to\\operatorname{Hom}_S(B,V)$. Explicitly, if $a:B\\to U$ and $p_B=c(e\\circ f^*a)$, then\n$$\\Phi_B(a)=c_{B,Rf_!M,K}^{-1}\\bigl(\\varepsilon_{f,K}\\circ Rf_!(p_B)\\circ\\Pi_{B,M}\\bigr).$$\nEach constituent is natural in $B$: the two adjunctions and $c$ are natural Hom bijections, and $\\Pi$ was shown natural in step 3. Their composite and its inverse are consequently natural in $B$. This is the full chain of Hom bijections in the blueprint, now with every arrow specified.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-internal-adjunction.proof.md",
-    "place": "Proof, full displayed chain of natural Hom bijections"
-   }
-  },
-  {
-   "text": "Define $\\theta=\\Phi_U(1_U):U\\to V$ and $\\psi=\\Phi_V^{-1}(1_V):V\\to U$. Naturality gives $\\Phi_B(a)=\\theta\\circ a$ and $\\Phi_B^{-1}(b)=\\psi\\circ b$. Taking $B=U,a=1_U$ and then $B=V,b=1_V$ in the inverse identities yields $\\psi\\theta=1_U$ and $\\theta\\psi=1_V$. Hence $\\theta$ is the isomorphism represented by the displayed Hom bijections. This construction identifies $\\theta$ with the canonical $\\alpha_{f,M,K}$ named in [prop-asd-internal-adjunction]: it is precisely the canonical representative of the chain in that source, rather than an arbitrary isomorphism between $U$ and $V$. No evaluation formula is taken from the proof of that node as a black box; the preceding steps constructed the representing map.",
+   "text": "Use the existing canonical internal adjunction [prop-asd-internal-adjunction]. Its definition derivedHomRightDerivedLowerShriekIsoOfFinite specializes derivedHomRightDerivedLowerShriekIso, which is ParametrizedAdjunction.conjugateIso of the canonical projectionMap. At M this is conjugateEquiv a b t, with a the composite inverse-image, tensor-Hom, and exceptional adjunction, b the tensor-Hom adjunction for Rf_!M, and t the projection map at M. No resolutions or new choice of an isomorphism are required.",
    "uses": [
     "prop-asd-internal-adjunction"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-internal-adjunction.proof.md",
-    "place": "Proof, Yoneda sentence, expanded by evaluating the natural bijections and their inverses at identities"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply step 5 to $B=Q,a=h$. The map $p_Q=c(e\\circ f^*h)$ is the $p$ in the item, by steps 1 and 2. Step 6 gives $\\Phi_Q(h)=\\alpha_{f,M,K}\\circ h$. Apply $c_{Q,Rf_!M,K}$ to the equality of step 5; the consecutive $c,c^{-1}$ cancel. The resulting map is\n$$\\varepsilon_{f,K}\\circ Rf_!(p)\\circ\\Pi_{Q,M},$$\nwith the projection map of step 3 and the exceptional counit of step 4. This proves the asserted equality of morphisms for every $h$, on the ambient ordinary etale categories.",
+   "text": "For arbitrary adjunctions a:L1 left adjoint R1 and b:L2 left adjoint R2, a natural transformation t:L2 to L1 and h:Q to R1(K), the inverse b-Hom bijection of h followed by the conjugate of t equals t at Q followed by the inverse a-Hom bijection of h. Indeed expand both inverse Hom bijections using the counit formula [lem-weil-pbc-adjunction-of-natural-bijection], distribute L2 over composition, apply Mathlib conjugateEquiv_counit, then naturality of t. This is the proved private lemma transpose_conjugate.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the preceding identity to a,b,t. Adjunction.comp_homEquiv expands the inverse a-Hom bijection into the inverse ordinary inverse-image, tensor-Hom, and exceptional Hom bijections, in that order. The inverse exceptional bijection is Rf_! of the resulting pairing followed by the exceptional counit, by [lem-weil-pbc-adjunction-of-natural-bijection]. This is exactly the right-hand composite in the Lean statement. The proved private helper tensor_conjugate_evaluation packages this calculation for arbitrary parametrized tensor-Hom adjunctions, so the sheaf specialization need only unfold the two canonical-isomorphism wrappers.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Precompose the resulting equality with the displayed canonical tensor symmetry. Both sides use the same morphism, so congruence proves the formula in the tensor order of the statement.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-internal-adjunction.proof.md",
-    "place": "Proof, final evaluation/counit sentence; specializes the explicit Hom-bijection calculation to the given h"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-pur-rhom-global-sections",
-  "def-asd-compactifiable",
-  "def-weil-proper-morphism",
-  "def-weil-finite-type-morphism",
-  "pqf-lem-locnoeth-lft",
-  "lem-amb-proper-coproducts-projection",
-  "def-amb-etale-compact-support",
-  "lem-pur-etale-open-derived-tensor",
-  "thm-amb-etale-exceptional-adjoint",
-  "lem-weil-pbc-adjunction-of-natural-bijection",
-  "prop-asd-internal-adjunction"
+  "prop-asd-internal-adjunction",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-internal-adjunction.proof.md",
-  "place": "Proof, full Hom-bijection chain, Yoneda, and evaluation/counit sentence; expanded using Stacks Tags 07A6, 08J9, 08JA and 0037"
+  "place": "Full displayed Hom-bijection chain and final evaluation/counit sentence, realized using the existing conjugateIso definition and Mathlib conjugateEquiv_counit and Adjunction.comp_homEquiv."
  },
  "mathlib_searches": [
   {
@@ -261,13 +189,7 @@
    }
   ]
  },
- "tool_uses": [
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-pur-rhom-global-sections",
-  "pqf-lem-locnoeth-lft"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -295,5 +217,15 @@
   "group": "Q74",
   "result": "pass",
   "note": "Reviewed the immutable node, dependencies, source, Lean modules, docstrings, edge cases, route-pivot compliance, report sections, scompile evidence, and deliver2 dry run; no substantive or mechanical faults found.; reverted the delivery's change of existing node(s) def-weil-pbc-constructible-complexes (--revert-nodes; kept as on newtargets-dag)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261020T174849-L-811828",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
