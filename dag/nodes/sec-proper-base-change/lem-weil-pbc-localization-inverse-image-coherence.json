@@ -81,10 +81,9 @@
    }
   },
   {
-   "text": "Naturality and the fraction normalization follow from the construction, not from a choice of isomorphism. For $h:M\\to N$, both routes from $I(M[1/t])$ to $(IN)[1/t']$ extend $Ih$ followed by its localization unit; step 5 gives their equality. On a local fraction $m/t^n$, multiplication by $t^n$ equals the localization image of $m$. Apply $I$ to this equality using the transported scalar-action equation and then use $\\beta I(\\eta_M)=\\eta_{IM}$. Since $(t')^n$ is invertible on the target, its image is the inverse-image representative of $m$ divided by $(t')^n$. This argument is valid for representatives viewed as arrows from a sheafified representable, so it makes no assumption that $I$ is restriction or that the topoi have enough points. The same calculation with the ring multiplication gives $\\alpha_f(r/t^n)=I(r)/(t')^n$.",
+   "text": "Naturality of the comparisons is obtained as in step 5. For the generalized fraction formula, form the natural map from any test sheaf to the ring with constant value t^n on each object. Induction using ringOne and ringMul identifies its inverse image with the constant value (t′)^n; the hypothesis identifying the inverse-image section gives the induction step. Apply the moduleSMul graph equation to the given equality t^n q = eta(m). Naturality of moduleUnderlying transports the unit map, and the assumed unit-normalization equation for beta changes the result to the target localization unit. Componentwise linearity of beta gives the required equation. Exponent zero follows from ringOne. This uses generalized sections and no points.",
    "uses": [
-    "lem-weil-pbc-geometric-module-transport",
-    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "def-weil-pbc-algebraic-inverse-image",
     "def-weil-pbc-module-localization"
    ],
    "elementary": true,
@@ -94,11 +93,10 @@
    }
   },
   {
-   "text": "The inverse image on modules is exact. Its underlying set-sheaf functor is $I$, with addition and zero transported as in the module transport statement. Thus it is additive and preserves kernels: a module kernel is the equalizer of a map and the zero map on underlying sheaves, and $I$ preserves finite limits. Its module adjunction from step 5 makes it preserve cokernels by the left-adjoint colimit theorem, applied to the finite cokernel diagram. The module-sheaf limit and exact-forgetful descriptions identify these with the kernels and cokernels in the module categories. Additivity and preservation of kernels and cokernels prove exactness. In particular this argument applies over $R$, and over $R[1/t]$ with inverse-image ring identified by $\\alpha_f$; no flatness of a separate coefficient map is being assumed.",
+   "text": "Convert the given algebraic inverse-image presentation to the independent-universe presentation by the explicit ULift/down isomorphisms on set sheaves. Transport every ring and module graph equation across these isomorphisms. Apply geometric_inverse_image_exact to the geometric morphism made from the specified adjunction and finite-limit preservation. Its universal module clause supplies preservation of finite limits and finite colimits for this particular module functor. Finite-colimit preservation implies additivity. This proves the inverse-image part of localization_inverseImage_exact without reconstructing its module adjunction.",
    "uses": [
-    "lem-weil-pbc-geometric-module-transport",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-left-adjoint-preserves-colimits"
+    "def-weil-pbc-algebraic-inverse-image",
+    "lem-trf-geometric-inverse-image-exact"
    ],
    "elementary": true,
    "source": {
@@ -107,13 +105,13 @@
    }
   },
   {
-   "text": "Scalar localization is exact on either site. To check kernels, let $K=\\ker(N\\to N')$, computed sectionwise. On each object $U$ the sequence $0\\to K(U)\\to N(U)\\to N'(U)$ is exact, so ordinary module localization gives an exact sequence at its first two terms. Exact module sheafification and the model in step 1 identify its sheafification with $0\\to K[1/s]\\to N[1/s]\\to N'[1/s]$. This proves preservation of kernels. For cokernels, the ringed-topos module adjunction applied to the identity geometric morphism and $A\\to A[1/s]$ says that the actual functor $A[1/s]\\otimes_A-$ is left adjoint to restriction of scalars. It therefore preserves cokernels. The exact forgetful functors to abelian sheaves detect the resulting exactness regardless of whether the localized modules are regarded over $A$ or $A[1/s]$. Additivity is immediate from the fraction maps. This proves the second exactness assertion without assuming that a sheaf epimorphism is sectionwise surjective.",
+   "text": "For scalar localization, the presheaf of localized coefficients is sectionwise flat by IsLocalization.flat. Hence sectionwise tensoring with it preserves finite limits; evaluation jointly reflects presheaf-module limits. The module-sheafification adjunction is left exact, and monoidal sheafification together with its invertible counit identifies tensoring the sheafified localization with forgetting, tensoring the presheaf localization, and sheafifying. Thus tensoring the sheafified localization preserves finite limits. The explicit site tensor agrees with this monoidal tensor by siteSheafTensorRightIso. The cochain tensor API gives finite-colimit preservation and additivity of this tensor, and the isomorphism transports these properties to scalarLocalization. Apply the argument on both sites.",
    "uses": [
-    "lem-weil-pbc-localization-module-exact",
-    "lem-weil-pbc-ringed-site-module-sheafification-exact",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-weil-pbc-ringed-site-module-sheafification-exact"
    ],
    "elementary": false,
    "source": {
@@ -146,7 +144,7 @@
    }
   },
   {
-   "text": "Apply the exact-functor derived factorization to inverse image and scalar localization, using steps 7--8. They preserve quasi-isomorphisms and act on every unbounded cochain complex termwise; the exact-functor derived-functor theorem identifies these functors with their left and right derived functors. Naturality of $\\beta_f$ makes its degreewise components a chain isomorphism, since the square for every differential is its module naturality square. The localization universal property for natural transformations descends it to an isomorphism on the unbounded derived categories. It also descends the natural comparisons for exact coefficient reinterpretation and for identity and composition. The equations of steps 9--10 hold degreewise on all complexes; the faithfulness assertion for precomposition with the derived localization makes the descended equations equalities of natural transformations. Thus the specified coherence persists on the full ordinary derived categories, with no boundedness hypothesis or choice of resolution.",
+   "text": "Apply the exact-functor derived factorization to inverse image and scalar localization, using steps 7--8. They preserve quasi-isomorphisms and act on every unbounded cochain complex termwise; the exact-functor derived-functor theorem identifies these functors with their left and right derived functors. Naturality of $\\beta_f$ makes its degreewise components a chain isomorphism, since the square for every differential is its module naturality square. The localization universal property for natural transformations descends it to an isomorphism on the unbounded derived categories. It also descends the natural comparisons for exact coefficient reinterpretation and for identity and composition. The equations of steps 9--10 hold degreewise on all complexes; the faithfulness assertion for precomposition with the derived localization makes the descended equations equalities of natural transformations. Thus the specified coherence persists on the full ordinary derived categories, with no boundedness hypothesis or choice of resolution. For the derived unit equation, define privately the localization lift of an arbitrary natural transformation, prove its factorization equation on complexes, and use localization extensionality to prove naturality of the derived composition comparison under left and right whiskering. Apply these two equations to the original unit-normalization equation and cancel the identity/composition comparison isomorphisms. For localized-scalar full faithfulness, extend an original-ring-linear map objectwise across the ordinary localization by LinearMap.extendScalarsOfIsLocalization. The localization ring sheafification unit is locally surjective, as follows from its module sheafification comparison. Descend the pointwise extended map with restrictHomEquivOfIsLocallySurjective. Componentwise equality proves both its restriction equation and uniqueness.",
    "uses": [
     "lem-weil-pbc-exact-functor-derived-factorization",
     "lem-weil-pbc-exact-functor-derived-functor",
@@ -161,6 +159,7 @@
  ],
  "proof_deps": [
   "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-algebraic-inverse-image",
   "def-weil-pbc-composite-adjunction",
   "def-weil-pbc-module-localization",
   "def-weil-pbc-ringed-section-localization",
@@ -169,26 +168,25 @@
   "def-weil-sheaf-of-modules-category",
   "lem-pc-sites-module-sheafification-tensor",
   "lem-pc-sites-sheafification-underlying-sets",
+  "lem-trf-geometric-inverse-image-exact",
   "lem-weil-pbc-adjunction-lifts-group-ring-objects",
   "lem-weil-pbc-conjugate-iso-unit-equation",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-exact-functor-derived-functor",
   "lem-weil-pbc-geometric-module-transport",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
   "lem-weil-pbc-localization-away-universal-property",
-  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-localization-flat",
   "lem-weil-pbc-localization-tensor",
   "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "lem-weil-pbc-ringed-site-module-sheafification-exact",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
   "lem-weil-pbc-sheaf-algebraic-structures-objects"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Tags 03CY, 03D2, 03D3, 03D7, 03DA, 03DB, 03EI, 04JC and 0GMW, with sites.tex Tag 00YV; algebra.tex Tags 00CP, 00CS and 00DK; derived.tex Tag 015F",
-  "note": "Explicit fraction universal-property proof of the extracted statement and of its identity/composition and coefficient-identification equations; not a verbatim Stacks theorem."
+  "note": "Explicit fraction universal-property proof of the extracted statement and of its identity/composition and coefficient-identification equations; not a verbatim Stacks theorem. Stage-3 Y7: the five clauses proved in this delivery use graph-equation fraction transport, the existing universal geometric exactness theorem, flat presheaf tensor and monoidal sheafification, local-surjectivity descent for localized scalars, and direct localization of arbitrary natural transformations. Steps 1--5 retain the intended argument for the two original comparison holes; no new holes or statements are introduced."
  },
  "mathlib_searches": [
   {
@@ -349,36 +347,13 @@
   "note": "Every node clause matches the Lean: ring iso with unique unit normalization, natural module iso beta with unique unit normalization, fraction formula on generalized elements, exactness, composition and identity for any kappa (checked by hand), coefficient identification, unbounded derived comparison with unit, composition and identity. IsInverseImageSection is equivalent to t'=f^-1 t (terminal test sheaf). No extra assumptions, independent site universes, no hollow data, all theorems sorry with source, blueprint and proof docstrings, statement field verbatim. Both delivered files compile without errors (nt_compile, 18.8 s and 35.8 s). Finding H4: CategoryTheory.ringedSliceSectionOfUniverses in the §1(B) dependency module RingedSectionLocalizationOfUniverses duplicates the existing CategoryTheory.ringedSliceSection (same signature and body) and is unused. fixes/RingedSectionLocalizationOfUniverses.lean removes it; merge refit drops it from the dependency's lean.declarations. Fixed file plus item module recompiled without errors (6.2 s, 19.9 s). Remark: derived composition and identity are stated for strict composites; transport along kappa uses standard functoriality of mapDerivedCategoryNatIso, as the report says."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "C1",
+  "reviewer": "COMPILER",
+  "group": "Y7",
   "result": "pass",
-  "landing": "20261019T002511-L-2142719",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CategoryTheory.existsUnique_localizationInverseImage",
-   "CategoryTheory.existsUnique_localizationInverseImageRing",
-   "CategoryTheory.existsUnique_scalarLocalizationUnit",
-   "CategoryTheory.localizationComparisonDerived_comp",
-   "CategoryTheory.localizationComparisonDerived_id",
-   "CategoryTheory.localizationComparisonDerived_unit",
-   "CategoryTheory.localizationInverseImage_coefficient",
-   "CategoryTheory.localizationInverseImage_comp",
-   "CategoryTheory.localizationInverseImage_fraction",
-   "CategoryTheory.localizationInverseImage_id",
-   "CategoryTheory.localization_inverseImage_exact",
-   "CategoryTheory.localization_restrictScalars_fullyFaithful"
-  ],
-  "sorry_after": [
-   "CategoryTheory.existsUnique_localizationInverseImage",
-   "CategoryTheory.existsUnique_localizationInverseImageRing",
-   "CategoryTheory.existsUnique_scalarLocalizationUnit",
-   "CategoryTheory.localizationComparisonDerived_unit",
-   "CategoryTheory.localizationInverseImage_fraction",
-   "CategoryTheory.localization_inverseImage_exact",
-   "CategoryTheory.localization_restrictScalars_fullyFaithful"
-  ]
+  "landing": "20261020T131238-L-1265414",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
