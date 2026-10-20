@@ -33,7 +33,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "Stacks Project",
-  "place": "Tags 09RE and 0BC7 (2); M4 separated reverse-component lifting from finite-retract germ equality and proved the finite-support, null-homotopy, common-neighbourhood and natural-isomorphism assembly in Lean."
+  "place": "Tags 09RE and 0BC7 (2); the existing upstream proof applies single-homotopy spreading twice and transports through the canonical restriction comparisons. M2 reattaches the node to this stronger existing theorem, preserving both proof steps and the unit route."
  },
  "mathlib_searches": [
   {
@@ -91,14 +91,15 @@
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-cube",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PerfectOpenStalkInverseHomotopiesSpread",
-  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOpenStalkInverseHomotopiesSpread.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.PerfectOpenStalkInverseHomotopiesSpread",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PerfectOpenStalkInverseHomotopiesSpread.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_affine_perfect_open_stalk_inverse_homotopies_spread",
-  "statement": "theorem exists_affine_perfect_open_stalk_inverse_homotopies_spread\n    (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U) (hU : IsAffineOpen U)\n    (P Q : CochainComplex\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hP : IsStrictlyPerfect X U P) (hQ : IsStrictlyPerfect X U Q)\n    (f : P ⟶ Q) (V : X.Opens) (hxV : x ∈ V) (hV : IsAffineOpen V) (hVU : V ≤ U)\n    (g : ((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ)).obj Q ⟶\n      ((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ)).obj P)\n    (hfg : Nonempty (Homotopy\n      (((openModuleStalkFunctor X V ⟨x, hxV⟩).mapHomologicalComplex (.up ℤ)).map\n        ((((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n          (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ)).map f) ≫ g)) (𝟙 _)))\n    (hgf : Nonempty (Homotopy\n      (((openModuleStalkFunctor X V ⟨x, hxV⟩).mapHomologicalComplex (.up ℤ)).map\n        (g ≫ (((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n          (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ)).map f))) (𝟙 _))) :\n    ∃ (W : X.Opens) (_hxW : x ∈ W) (_hW : IsAffineOpen W) (hWU : W ≤ U),\n      let R := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hWU : W ⟶ U)).mapHomologicalComplex (.up ℤ)\n      ∃ (gW : R.obj Q ⟶ R.obj P),\n        Nonempty (Homotopy (R.map f ≫ gW) (𝟙 _)) ∧\n        Nonempty (Homotopy (gW ≫ R.map f) (𝟙 _))",
+  "statement": "theorem exists_affine_perfect_open_stalk_inverse_homotopies_spread\n    (X : Scheme.{u}) (U : X.Opens) (x : X)\n    (P Q : CochainComplex\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hP : IsStrictlyPerfect X U P) (hQ : IsStrictlyPerfect X U Q)\n    (f : P ⟶ Q) (V : X.Opens) (hxV : x ∈ V) (hVU : V ≤ U)\n    (g : ((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ)).obj Q ⟶\n      ((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ)).obj P)\n    (hfg : Nonempty (Homotopy\n      (((openModuleStalkFunctor X V ⟨x, hxV⟩).mapHomologicalComplex (.up ℤ)).map\n        ((((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n          (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ)).map f) ≫ g)) (𝟙 _)))\n    (hgf : Nonempty (Homotopy\n      (((openModuleStalkFunctor X V ⟨x, hxV⟩).mapHomologicalComplex (.up ℤ)).map\n        (g ≫ (((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n          (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ)).map f))) (𝟙 _))) :\n    ∃ (W : X.Opens) (_hxW : x ∈ W) (_hW : IsAffineOpen W) (hWU : W ≤ U),\n      let R := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hWU : W ⟶ U)).mapHomologicalComplex (.up ℤ)\n      ∃ (gW : R.obj Q ⟶ R.obj P),\n        Nonempty (Homotopy (R.map f ≫ gW) (𝟙 _)) ∧\n        Nonempty (Homotopy (gW ≫ R.map f) (𝟙 _))",
   "branch": "sheaf-dag",
-  "by": "M3",
-  "date": "2026-10-13"
+  "by": "M2",
+  "date": "2026-10-21",
+  "note": "Upstream proves the same conclusion without hxU, hU or hV; specialize to the node hypotheses. The Sheaf duplicate is withdrawn and its only consumer uses the upstream theorem directly."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -111,14 +112,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M4",
+  "reviewer": "C-c16e5",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261013T100034-L-2470521",
+  "landing": "20261020T221244-L-4164528",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Withdrawn Sheaf duplicate vs upstream WeilConjectures twin (verbatim lean.statement, stronger: drops hxU/hU/hV) and the minimal forced adaptation of the sole consumer PerfectStalkQuasiIsoDetection; both compile clean, upstream axioms standard"
  },
  "lean_audit": {
   "master": {

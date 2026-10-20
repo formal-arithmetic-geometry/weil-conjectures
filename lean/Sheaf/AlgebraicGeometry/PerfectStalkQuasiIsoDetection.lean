@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFreeProjective
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import Sheaf.AlgebraicGeometry.PerfectOpenStalkChainMapLift
-import Sheaf.AlgebraicGeometry.PerfectOpenStalkInverseHomotopiesSpread
+import WeilConjectures.AlgebraicGeometry.PerfectOpenStalkInverseHomotopiesSpread
 
 /-! # Detecting a quasi-isomorphism of strictly perfect complexes near a point
 
@@ -82,7 +82,7 @@ theorem exists_affine_restriction_quasiIso_of_perfect_stalk_quasiIso
   have : CochainComplex.IsKProjective (T.obj Q) :=
     perfect_stalk_isKProjective X U x hxU Q hQ
   obtain ⟨e, he⟩ := (CochainComplex.IsKProjective.quasiIso_iff (T.map f)).1 hf
-  obtain ⟨V, hxV, hV, hVU, c, g, hg⟩ :=
+  obtain ⟨V, hxV, _hV, hVU, c, g, hg⟩ :=
     exists_affine_perfect_open_stalk_chainMap_lift X U x hxU hU Q P hQ hP e.inv
   let R := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
     (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ)
@@ -107,7 +107,7 @@ theorem exists_affine_restriction_quasiIso_of_perfect_stalk_quasiIso
     convert! h using 1
   obtain ⟨W, hxW, hW, hWU, gW, ⟨hfgW⟩, ⟨hgfW⟩⟩ :=
     exists_affine_perfect_open_stalk_inverse_homotopies_spread
-      X U x hxU hU P Q hP hQ f V hxV hV hVU g hfg hgf
+      X U x P Q hP hQ f V hxV hVU g hfg hgf
   exact ⟨W, hxW, hW, hWU,
     (show HomotopyEquiv _ _ from
       ⟨_, gW, hfgW, hgfW⟩).quasiIso_hom⟩
