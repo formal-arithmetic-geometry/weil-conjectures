@@ -51,7 +51,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 |---|---|---|---|---|
 | `Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange` | 11 | 1 | repair | route |
 | `Sheaf.Paper.SfHomTriangulated` | - | 1 | repair | route |
-| `Sheaf.Paper.IntegralOperationsWellDefined` | - | 2 | repair | route |
 | `Sheaf.AlgebraicGeometry.BertiniGenericFibreChart` | 8 | 1 | proof | route |
 | `Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses` | - | 3 | proof | 1 |
 | `Sheaf.Algebra.Homology.ScalarInternalHomAdjunction` | - | 1 | proof | 1 |
@@ -86,6 +85,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.FiniteFreeCompletedScalarComparison` | - | 5 | proof | 2 |
 | `Sheaf.Paper.IntegralDerivedOperationsOnSlices` | - | 4 | proof | 2 |
 | `Sheaf.Paper.IntegralHomReductionComparison` | - | 1 | proof | 2 |
+| `Sheaf.Paper.IntegralOperationsWellDefined` | - | 2 | proof | 2 |
 | `Sheaf.Paper.IntegralScalarExtensionWellDefined` | - | 1 | proof | 2 |
 | `Sheaf.Paper.KoszulReconstruction` | - | 1 | proof | 2 |
 | `Sheaf.Paper.PointSectionsFiniteness` | - | 1 | proof | 2 |
