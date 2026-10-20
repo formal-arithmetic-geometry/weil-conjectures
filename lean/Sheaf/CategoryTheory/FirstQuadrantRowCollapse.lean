@@ -6,7 +6,7 @@ Authors: SHEAF group M1
 module
 
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
-public import Sheaf.CategoryTheory.Filtration
+public import WeilConjectures.CategoryTheory.CanonicalFiltration
 import WeilConjectures.CategoryTheory.Abelian.Filtration
 import WeilConjectures.CategoryTheory.PBCFiltration
 

@@ -3,7 +3,7 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 -/
 module
 
-public import Sheaf.CategoryTheory.Filtration
+public import WeilConjectures.CategoryTheory.CanonicalFiltration
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 import Sheaf.CategoryTheory.InjectiveGradedFiltrationSplits
 import WeilConjectures.CategoryTheory.Abelian.Filtration
@@ -350,7 +350,7 @@ private theorem filtered_extension {X Y I : FilteredObject C}
     simpa only [g₀, Category.assoc, biproduct.lift_π] using hgs n
   have heq : u.hom ≫ (g₀ ≫ θ.inv) = f.hom := by
     rw [← Category.assoc, hcomp, Category.assoc, Iso.hom_inv_id, Category.comp_id]
-  change (⟨u.hom ≫ (g₀ ≫ θ.inv), _⟩ : HomPreservingSteps X I) = f
+  change (⟨u.hom ≫ (g₀ ≫ θ.inv), _⟩ : Hom X I) = f
   cases f
   congr 1
 

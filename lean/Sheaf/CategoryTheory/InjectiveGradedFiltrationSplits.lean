@@ -5,7 +5,7 @@ Authors: SHEAF group N8
 -/
 module
 
-public import Sheaf.CategoryTheory.Filtration
+public import WeilConjectures.CategoryTheory.CanonicalFiltration
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.Data.Int.Interval
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact

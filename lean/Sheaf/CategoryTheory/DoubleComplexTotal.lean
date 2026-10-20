@@ -9,8 +9,7 @@ public import Mathlib.Algebra.Homology.TotalComplex
 public import Mathlib.CategoryTheory.Abelian.Basic
 public import Mathlib.CategoryTheory.Subobject.Limits
 public import Mathlib.Data.Int.Interval
-public import Sheaf.CategoryTheory.Filtration
-
+public import WeilConjectures.CategoryTheory.CanonicalFiltration
 /-!
 # The two filtrations of a first-quadrant total complex
 

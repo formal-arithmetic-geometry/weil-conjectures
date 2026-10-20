@@ -87,7 +87,7 @@ theorem coupleMorphism
             eqToHom (by congr 1; omega)) ∧
           (∀ n : ℤ, (B n).ι 0 ≫ eqToHom (hB n) =
             eqToHom (by congr 1; omega)) ∧
-          ∃ f : ∀ n : ℤ, FilteredObject.HomPreservingSteps
+          ∃ f : ∀ n : ℤ, FilteredObject.Hom
             (⟨(A n).obj, X.imageFiltration n (A n)⟩ : FilteredObject C)
             (⟨(B n).obj, Y.imageFiltration n (B n)⟩ : FilteredObject C),
             (∀ n : ℤ, (f n).hom =
@@ -167,7 +167,7 @@ theorem coupleMorphism
     · rw [← Category.assoc,
         eqToHom_naturality (fun pq : ℤ × ℤ ↦ tD pq.1 pq.2)
           (show (0, n - 0) = (0, n) by ext <;> omega)]
-  let F (n : ℤ) : FilteredObject.HomPreservingSteps
+  let F (n : ℤ) : FilteredObject.Hom
       (⟨(A n).obj, X.imageFiltration n (A n)⟩ : FilteredObject C)
       (⟨(B n).obj, Y.imageFiltration n (B n)⟩ : FilteredObject C) :=
     { hom := f n

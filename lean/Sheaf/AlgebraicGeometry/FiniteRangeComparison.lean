@@ -28,6 +28,8 @@ so it is the map induced by exchange, rather than an unrelated isomorphism.
 
 @[expose] public section
 
+set_option linter.privateModule false
+
 set_option autoImplicit false
 
 universe u
@@ -248,7 +250,7 @@ private theorem filtered_iso_of_graded
       gr p = lift p ≫
         cokernel.π (Subobject.ofLE _ _ (V.antitone_step (by omega : p ≤ p + 1))))
     (hU : U.IsFinite) (hV : V.IsFinite) (hi : ∀ p : ℤ, IsIso (gr p)) : IsIso t := by
-  let f : FilteredObject.HomPreservingSteps
+  let f : FilteredObject.Hom
       (⟨A, U⟩ : FilteredObject C) (⟨B, V⟩ : FilteredObject C) :=
     ⟨t, fun p ↦ ⟨lift p, hlift p⟩⟩
   apply (FilteredObject.finite_filtration_induction_steps _ _ f hU hV ?_).1

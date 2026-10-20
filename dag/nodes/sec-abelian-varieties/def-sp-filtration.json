@@ -255,7 +255,7 @@
   "by": "Q65",
   "date": "2026-10-17",
   "existing": true,
-  "note": "The recorded PBCDecreasingFiltration has the same mathematical notion but its type cannot be supplied to the recorded FilteredComplexSubquotients and FilteredObject.gradedMapSteps interfaces, which take the already existing DecreasingFiltration. Rebind to that exact upstream declaration (F and F_succ_le), with IsFinite, FilteredObject and induced/image/graded operations supplied by its existing compatibility modules. No new filtration is defined. This is a representation repair under §1(B), not a change of the mathematical notion."
+  "note": "The recorded PBCDecreasingFiltration has the same mathematical notion but its type cannot be supplied to the recorded FilteredComplexSubquotients and FilteredObject.gradedMapSteps interfaces, which take the already existing DecreasingFiltration. Rebind to that exact upstream declaration (F and F_succ_le), with IsFinite, FilteredObject and induced/image/graded operations supplied by its existing compatibility modules. No new filtration is defined. This is a representation repair under §1(B), not a change of the mathematical notion. 2026-10-20 X3: the duplicate Sheaf.CategoryTheory.Filtration is withdrawn; the additional step/antitone_step/induced/quotient/separated/exhaustive/gradedPiece API and the filtered-object category now come from WeilConjectures.CategoryTheory.CanonicalFiltration. Morphisms use the original FilteredObject.Hom from WeilConjectures.CategoryTheory.Filtration. No mathematical definition or unit route changes."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -270,5 +270,15 @@
   "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian]. A *decreasing\nfiltration* $F^\\bullet$ of an object $A\\in\\mathcal A$ is a family of\nsubobjects $F^nA\\subseteq A$ ($n\\in\\mathbb Z$) with\n$A\\supseteq\\cdots\\supseteq F^nA\\supseteq F^{n+1}A$; a *filtered object* is a\npair $(A,F)$. The *graded pieces* are\n$\\operatorname{gr}^nA:=F^nA/F^{n+1}A$. The filtration is *finite and\nseparated* on $A$ if $F^0A=A$, $F^NA=0$ for some $N$, and $\\bigcap_nF^nA=0$.",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-69894",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261020T161325-L-3477155",
+  "kind": "interface",
+  "note": "independent cc review: Lean/DAG files byte-identical to previously passed head 36e974bf (diff -r), compared with live (only HomPreservingSteps→FilteredObject.Hom, import, linter and stub changes); change-record Users now lists the QcoherentNormalized* modules (Scheme.IsSeparated) the landing named; 16 delivered + 27 live direct importers compile 43/43 clean"
  }
 }

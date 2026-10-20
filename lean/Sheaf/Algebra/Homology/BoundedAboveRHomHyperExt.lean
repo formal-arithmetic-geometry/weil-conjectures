@@ -153,7 +153,7 @@ theorem exists_boundedAbove_rhom_hyperExt
     ∃ a : ∀ (n : ℤ) {L M : (ObjectProperty.FullSubcategory (fun L : DerivedCategory
       (ringedSiteModules.{max uC vC u} ((sheafCompose J
       (forget₂ CommRingCat.{max uC vC u} RingCat.{max uC vC u})).obj R)) ↦ L.IsGE c))} (f : L ⟶ M),
-      FilteredObject.HomPreservingSteps
+      FilteredObject.Hom
         ⟨(ringedSiteRHomCohomology.{uC, vC, u, w} J R K n).obj L.obj, F L n⟩
         ⟨(ringedSiteRHomCohomology.{uC, vC, u, w} J R K n).obj M.obj, F M n⟩,
     ∃ conv : ∀ (L : (ObjectProperty.FullSubcategory (fun L : DerivedCategory (ringedSiteModules.{max

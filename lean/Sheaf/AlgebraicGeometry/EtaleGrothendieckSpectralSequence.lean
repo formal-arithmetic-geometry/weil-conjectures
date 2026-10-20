@@ -9,7 +9,7 @@ public import Mathlib.CategoryTheory.Abelian.FunctorCategory
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-public import Sheaf.CategoryTheory.Filtration
+public import WeilConjectures.CategoryTheory.CanonicalFiltration
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LeraySpectralSequence
 
 /-!

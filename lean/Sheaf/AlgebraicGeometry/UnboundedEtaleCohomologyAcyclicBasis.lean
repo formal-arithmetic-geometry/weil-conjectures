@@ -20,7 +20,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import WeilConjectures.CategoryTheory.ExactCoupleConvergence
-import Sheaf.CategoryTheory.Filtration
+import WeilConjectures.CategoryTheory.CanonicalFiltration
 import WeilConjectures.CategoryTheory.TruncationCouple
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses

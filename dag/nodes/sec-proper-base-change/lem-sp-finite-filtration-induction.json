@@ -197,7 +197,7 @@
   "module": "Sheaf.CategoryTheory.FiniteFiltrationInduction",
   "declaration": "CategoryTheory.FilteredObject.finite_filtration_induction_steps",
   "file": "lean/Sheaf/CategoryTheory/FiniteFiltrationInduction.lean",
-  "statement": "theorem finite_filtration_induction_steps (A B : FilteredObject C) (f : HomPreservingSteps A B) (hA : A.filtration.IsFinite) (hB : B.filtration.IsFinite) (hgraded : ∀ p : ℤ, IsIso (gradedMapSteps f p)) : IsIso f.hom ∧ ∀ p : ℤ, IsIso (restrictionSteps f p)",
+  "statement": "theorem finite_filtration_induction_steps (A B : FilteredObject C) (f : Hom A B) (hA : A.filtration.IsFinite) (hB : B.filtration.IsFinite) (hgraded : ∀ p : ℤ, IsIso (gradedMapSteps f p)) : IsIso f.hom ∧ ∀ p : ℤ, IsIso (restrictionSteps f p)",
   "branch": "sheaf-dag",
   "by": "M1",
   "date": "2026-10-11",
@@ -207,7 +207,8 @@
    "CategoryTheory.FilteredObject.exists_gradedMap_steps",
    "CategoryTheory.FilteredObject.gradedMapSteps",
    "CategoryTheory.FilteredObject.finite_filtration_induction_steps"
-  ]
+  ],
+  "note": " 2026-10-20 X3: after retiring Sheaf.CategoryTheory.Filtration, the filtered morphism type is the official FilteredObject.Hom; both fields are exactly the former HomPreservingSteps fields. The mathematical statement and hypotheses are unchanged."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -218,13 +219,13 @@
   "note": "C abelian, A B : FilteredObject (landed def-sp-filtration), f : Hom A B (not strict), hA/hB IsFinite each = common n<=m bounds, hgraded all p via cokernel-induced gradedMap, concl IsIso f.hom and all step restrictions (=> strict); gradedMap chosen from named sorry existence theorem per brief-stage2 H5 pattern"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "W2",
+  "reviewer": "C-69894",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261012T135332-L-1699441",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T161325-L-3477155",
+  "kind": "interface",
+  "note": "independent cc review: Lean/DAG files byte-identical to previously passed head 36e974bf (diff -r), compared with live (only HomPreservingSteps→FilteredObject.Hom, import, linter and stub changes); change-record Users now lists the QcoherentNormalized* modules (Scheme.IsSeparated) the landing named; 16 delivered + 27 live direct importers compile 43/43 clean"
  }
 }

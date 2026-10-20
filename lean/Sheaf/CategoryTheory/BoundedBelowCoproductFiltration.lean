@@ -119,7 +119,7 @@ private theorem oneStep_finite
 
 private noncomputable def oneStepHom
     {C : Type uB} [Category.{v} C] [Abelian C] {X Y : C} (f : X ⟶ Y) :
-    FilteredObject.HomPreservingSteps ⟨X, oneStep X⟩ ⟨Y, oneStep Y⟩ where
+    FilteredObject.Hom ⟨X, oneStep X⟩ ⟨Y, oneStep Y⟩ where
   hom := f
   preserves p := by
     change ∃ lift : (((oneStep X).step p) : C) ⟶ (((oneStep Y).step p) : C),
@@ -232,7 +232,7 @@ theorem exists_boundedBelow_coproduct_filtration
           (K i))))
       (FT : DecreasingFiltration
         ((F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B q).obj S))
-      (phi : FilteredObject.HomPreservingSteps ⟨_, FS⟩ ⟨_, FT⟩),
+      (phi : FilteredObject.Hom ⟨_, FS⟩ ⟨_, FT⟩),
       FS.IsFinite ∧ FT.IsFinite ∧
         phi.hom = Sigma.desc (fun i ↦
           (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B q).map (u i)) ∧

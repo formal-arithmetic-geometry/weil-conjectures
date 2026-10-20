@@ -6,7 +6,7 @@ Authors: SHEAF group T3
 module
 
 public import WeilConjectures.CategoryTheory.GrothendieckComposablePair
-public import Sheaf.CategoryTheory.Filtration
+public import WeilConjectures.CategoryTheory.CanonicalFiltration
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 
 /-! # Canonical image filtration of the Grothendieck spectral object

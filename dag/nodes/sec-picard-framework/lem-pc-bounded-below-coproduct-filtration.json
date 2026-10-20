@@ -107,7 +107,8 @@
   "branch": "sheaf-dag",
   "by": "S3",
   "date": "2026-10-12",
-  "statement": "theorem exists_boundedBelow_coproduct_filtration {A : Type uA} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A] [HasDerivedCategory.{wA} A] {B : Type uB} [Category.{v} B] [Abelian B] [IsGrothendieckAbelian.{v} B] [HasDerivedCategory.{wB} B] (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] (I : Type v) (K : I → DerivedCategory A) (S : DerivedCategory A) (u : ∀ i, K i ⟶ S) (a q : ℤ) (hK : ∀ (i : I) (r : ℤ), r < a → IsZero ((DerivedCategory.homologyFunctor A r).obj (K i))) (hS : ∀ r : ℤ, r < a → IsZero ((DerivedCategory.homologyFunctor A r).obj S)) (hE2 : ∀ (p : ℕ) (r : ℤ), IsIso (Sigma.desc (fun i ↦ (DerivedCategory.singleFunctor A 0 ⋙ F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B (p : ℤ)).map ((DerivedCategory.homologyFunctor A r).map (u i))))) : ∃ (FS : DecreasingFiltration (∐ (fun i ↦ (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B q).obj (K i)))) (FT : DecreasingFiltration ((F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B q).obj S)) (phi : FilteredObject.HomPreservingSteps ⟨_, FS⟩ ⟨_, FT⟩), FS.IsFinite ∧ FT.IsFinite ∧ phi.hom = Sigma.desc (fun i ↦ (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B q).map (u i)) ∧ ∀ p : ℤ, IsIso (FilteredObject.gradedMapSteps phi p)"
+  "statement": "theorem exists_boundedBelow_coproduct_filtration {A : Type uA} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A] [HasDerivedCategory.{wA} A] {B : Type uB} [Category.{v} B] [Abelian B] [IsGrothendieckAbelian.{v} B] [HasDerivedCategory.{wB} B] (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] (I : Type v) (K : I → DerivedCategory A) (S : DerivedCategory A) (u : ∀ i, K i ⟶ S) (a q : ℤ) (hK : ∀ (i : I) (r : ℤ), r < a → IsZero ((DerivedCategory.homologyFunctor A r).obj (K i))) (hS : ∀ r : ℤ, r < a → IsZero ((DerivedCategory.homologyFunctor A r).obj S)) (hE2 : ∀ (p : ℕ) (r : ℤ), IsIso (Sigma.desc (fun i ↦ (DerivedCategory.singleFunctor A 0 ⋙ F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B (p : ℤ)).map ((DerivedCategory.homologyFunctor A r).map (u i))))) : ∃ (FS : DecreasingFiltration (∐ (fun i ↦ (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B q).obj (K i)))) (FT : DecreasingFiltration ((F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B q).obj S)) (phi : FilteredObject.Hom ⟨_, FS⟩ ⟨_, FT⟩), FS.IsFinite ∧ FT.IsFinite ∧ phi.hom = Sigma.desc (fun i ↦ (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B q).map (u i)) ∧ ∀ p : ℤ, IsIso (FilteredObject.gradedMapSteps phi p)",
+  "note": " 2026-10-20 X3: after retiring Sheaf.CategoryTheory.Filtration, the filtered morphism type is the official FilteredObject.Hom; both fields are exactly the former HomPreservingSteps fields. The mathematical statement and hypotheses are unchanged."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -120,14 +121,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-6f8cf",
-  "group": "R1",
+  "reviewer": "C-69894",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261012T184336-L-4017367",
+  "landing": "20261020T161325-L-3477155",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with both DAG nodes, source claims, change record and report; compiled both modules and the unchanged direct importer; checked axioms."
+  "note": "independent cc review: Lean/DAG files byte-identical to previously passed head 36e974bf (diff -r), compared with live (only HomPreservingSteps→FilteredObject.Hom, import, linter and stub changes); change-record Users now lists the QcoherentNormalized* modules (Scheme.IsSeparated) the landing named; 16 delivered + 27 live direct importers compile 43/43 clean"
  },
  "lean_audit": {
   "master": {

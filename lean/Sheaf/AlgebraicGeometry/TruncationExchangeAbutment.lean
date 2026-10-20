@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.TruncationExchangeCouple
 public import Sheaf.CategoryTheory.ExactCoupleMorphism
-public import Sheaf.CategoryTheory.Filtration
+public import WeilConjectures.CategoryTheory.CanonicalFiltration
 import Sheaf.CategoryTheory.DerivedCoupleFunctoriality
 import WeilConjectures.CategoryTheory.HalfPlaneConvergence
 import WeilConjectures.CategoryTheory.DerivedCategory.PlusDevissage
@@ -23,6 +23,7 @@ lemma-weil-pbc-exact-couple-abutment, Detailed form; Stacks Tags 0DDE and 05TC
 @[expose] public section
 
 set_option autoImplicit false
+set_option linter.privateModule false
 
 universe u
 

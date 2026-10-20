@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.Algebra.Category.Grp.Colimits
 public import Sheaf.CategoryTheory.FiniteFiltrationInduction
-import Sheaf.CategoryTheory.Filtration
+import WeilConjectures.CategoryTheory.CanonicalFiltration
 import WeilConjectures.CategoryTheory.Abelian.Filtration
 import WeilConjectures.CategoryTheory.PBCFiltration
 
