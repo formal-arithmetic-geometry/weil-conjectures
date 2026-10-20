@@ -194,3 +194,16 @@ Importers taken out with them (9): `Sheaf.AlgebraicGeometry.BoundedConstructible
 ## Prefer upstream, round 3
 
 The upstream module(s) `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit`, `WeilConjectures.WeilSheaf.Finiteness` failed here while identical to the tip: the upstream files of their environment that this sync had merged with changes of ours take the tip's file: `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit`, `WeilConjectures.WeilSheaf.Finiteness`.
+
+## Quarantine, round 3 (2026-10-20T10:20:14Z)
+
+The global build of 7a12901c76 failed in 6 module(s); they and their importers, 26 module(s), were moved to quarantine/ (tools/rework.py, coord/rework.tsv):
+
+- `Sheaf.AlgebraicGeometry.LocallyFreeTensorSingle`: error: Sheaf/AlgebraicGeometry/LocallyFreeTensorSingle.lean:58:10: Unknown identifier `locallyFinitelyPresented_of_isZero` (nodes lem-sfb-locally-free-tensor-single)
+- `Sheaf.Paper.ContinuousAlgClConstructibleTor`: error: Sheaf/Paper/ContinuousAlgClConstructibleTor.lean:109:29: overloaded, errors (nodes det-sf-comp-continuous-algcl-constructible-tor)
+- `Sheaf.Paper.IntegralConstructibleKernels`: error: Sheaf/Paper/IntegralConstructibleKernels.lean:721:4: Unknown constant `CategoryTheory.ObjectProperty.IsClosedUnderKernels` (nodes lem-weil-pbc-integral-constructible-kernels)
+- `Sheaf.Paper.LisseFiniteHomLift`: error: Sheaf/Paper/LisseFiniteHomLift.lean:73:5: overloaded, errors (nodes lem-sfb-lisse-finite-hom-lift)
+- `Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquareEtalePathNormalization`: error: Sheaf/SixFunctors/ProEtale/BaseChange/ComparisonSquareEtalePathNormalization.lean:239:6: Unknown constant `AlgebraicGeometry.Etale.pullbackSquareComparison_def` (nodes stage3-proetale-comparison-square-etale-path-normalization)
+- `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility`: error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean:1195:0: unexpected token 'by'; expected command (nodes lem-weil-pbc-condensed-qbar-bounded-push)
+
+Importers taken out with them (20): `Sheaf.AlgebraicGeometry.BoundedConstructibleTensorSingle`, `Sheaf.AlgebraicGeometry.CompactSupportProperFactor`, `Sheaf.AlgebraicGeometry.CompactSupportSiteComparisonOpen`, `Sheaf.AlgebraicGeometry.EllAdicBoundedTriangulated`, `Sheaf.AlgebraicGeometry.LfpTensorSingle`, `Sheaf.AlgebraicGeometry.PadicIntegersBoundedTriangulated`, `Sheaf.Paper.CoefficientFiniteDescentLisse`, `Sheaf.Paper.CondensedFlatCoefficientCalculus`, `Sheaf.Paper.IntegralConstantModelHeartClosure`, `Sheaf.Paper.IntegralConstructibleSerre`, `Sheaf.Paper.IntegralLfpEventualFreeImage`, `Sheaf.Paper.IntegralLfpFiniteQuotientCharts`, `Sheaf.Paper.IntegralLfpLocalTorsionCharts`, `Sheaf.Paper.IntegralLfpLocallyFreeResolution`, `Sheaf.Paper.IntegralMatrixKernelLocallyFree`, `Sheaf.Paper.IntegralReductionConservative`, `Sheaf.Paper.IntegralReductionConstructible`, `Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquare`, `Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquareTransport`, `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange`
