@@ -17,80 +17,52 @@
  ],
  "proof": [
   {
-   "text": "On the ringed pro-etale site with coefficient sheaf $\\widehat R_X$, put $H=R\\mathcal Hom_{\\widehat R_X}$. The global-sections identification $H^0(R\\Gamma(X_{\\mathrm{proet}},R\\mathcal Hom(A,B)))\\cong\\operatorname{Hom}(A,B)$ and the natural currying isomorphism $H(L,H(P,Q))\\cong H(L\\otimes^L P,Q)$ give a natural chain $\\operatorname{Hom}(L,H(P,Q))\\cong\\operatorname{Hom}(L\\otimes^L P,Q)$. The canonical signed symmetry of the derived tensor changes the target to $\\operatorname{Hom}(P\\otimes^L L,Q)$. By the closed tensor-Hom model, the resulting bijection is the transpose of the evaluation counit, hence sends $\\varphi$ to $e_{P,Q}\\circ(1_P\\otimes^L\\varphi)$.",
+   "text": "For any partial closed structure, define the signed additive transpose by inverse closed transpose preceded by the specified braiding. Its inverse uses the inverse braiding. Parameter naturality identifies inverse transpose with evaluation, and tensor linearity upgrades this additive equivalence to a linear equivalence.",
    "uses": [
-    "lem-pur-rhom-global-sections",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pod-derived-automorphism-hom-evaluation",
+    "lem-coef-completed-tensor-scalar-linearity",
     "def-coef-ringed-tensor-hom-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08JA and 08J9; internal-Hom currying and global derived Hom"
-   }
+   "elementary": false
   },
   {
-   "text": "Put $\\mathcal O=\\widehat R_X$ and $B_n=(R/\\varpi^n)_X$. Choose flat-term K-flat representatives $A\\to P$ and $B\\to L$ as in [def-pur-integral-derived-operations]. The actual tensor identifications\n$$ (A\\otimes_{\\mathcal O}B)\\otimes_{\\mathcal O}B_n\n \\cong (A\\otimes_{\\mathcal O}B_n)\\otimes_{B_n}(B\\otimes_{\\mathcal O}B_n) $$\ncommute with the quotient transitions: both send $(a\\otimes b)\\otimes\\bar r$ to $(a\\otimes\\bar r)\\otimes(b\\otimes1)$ and apply the same quotient to $\\bar r$. The canonical K-flat total-tensor model in [def-coef-ringed-tensor-hom-model] therefore identifies the completed tensor construction with $\\widehat T=R\\lim_n\\operatorname{Res}_n(T\\otimes^L_{\\mathcal O}B_n)$, for $T=P\\otimes^L_{\\mathcal O}L$, respecting its unit $\\eta_T:T\\to\\widehat T$. The constant/completed-coefficient comparison identifies this quotient-tower completion, with its unit, with Koszul completion. The coefficient ring is the Noetherian DVR $R$ and the ideal is the principal ideal $(\\varpi)$, so this comparison applies. The reflector then gives a natural bijection $\\eta_T^*:\\operatorname{Hom}(\\widehat T,Q)\\to\\operatorname{Hom}(T,Q)$. The definition of derived completeness puts $Q$ isomorphically in this completion subcategory, so the reflector applies; no choice of a lift in an abstract Roos triangle is used to define $\\eta_T$. Compose the bijection of Step 1 with $(\\eta_T^*)^{-1}$. For $H=H(P,Q)$, completed evaluation is the unique extension of ambient evaluation along $\\eta_{P\\otimes^L H}$; the coefficient-system evaluation calculus preserves that evaluation comparison. Naturality of the completion unit gives\n$$ (1_P\\widehat\\otimes\\varphi)\\eta_T=\\eta_{P\\otimes^L H}(1_P\\otimes\\varphi). $$\nThus $e_{P,Q}(1_P\\widehat\\otimes\\varphi)$ restricts along $\\eta_T$ to the ambient transpose of $\\varphi$. Uniqueness in the reflector bijection proves that the resulting map is exactly the displayed completed evaluation transpose.",
+   "text": "Use the completed transpose normalization and the natural ordinary-to-completed tensor unit to transport ambient three-variable transpose naturality. Construct the integral braiding as a natural isomorphism from the system braiding and compare it with the prescribed integral braiding by its reduction counit normalization.",
    "uses": [
-    "def-weil-derived-pullback-tensor-hom",
-    "def-pur-integral-derived-operations",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-ringed-koszul-completion-reflector",
-    "def-weil-derived-complete",
+    "lem-pod-derived-automorphism-hom-evaluation",
+    "def-pur-completed-pullback-tensor-comparison",
+    "lem-pur-derived-pullback-tensor-iso",
     "lem-coef-derived-system-evaluation-calculus",
-    "def-coef-ringed-tensor-hom-model"
+    "def-weil-derived-pullback-tensor-hom"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099M (lemma-naive-completion), following 099L; with algebraization.tex Tags 099B and 0A0E, and Bhatt-Scholze p. 22, Definition 3.4.10 and Lemma 3.4.11."
-   }
+   "elementary": false
   },
   {
-   "text": "The ambient currying and its global-sections identification are natural in the three inputs, as are the completion unit and the evaluation comparisons cited in Steps 1--2. Uniqueness of extension through that unit transports these naturality equations to completed tensors. All these maps are $R$-linear. To check the symmetry convention, use the fixed K-flat tensor and Hom representative models. If $p$ has degree $a$ and $l$ degree $b$, the degree-zero map $\\varphi$ sends $l$ to a Hom element of degree $b$. Currying on $L\\otimes P$ sends $l\\otimes p$ to $\\varphi(l)(p)$. Precomposition with the signed symmetry on $P\\otimes L$ sends $p\\otimes l$ to $(-1)^{ab}\\varphi(l)(p)$. This is also evaluation on $P\\otimes H(P,Q)$: it is ordinary evaluation on $H(P,Q)\\otimes P$ preceded by its signed symmetry. Both transposition constructions therefore have the identical sign. The calculation respects quotient maps and localization of the representative complexes; uniqueness through completion proves the same equality for the completed tensors.",
+   "text": "The localized braiding is natural on all raw rational arrows. Rational tensor bilinearity gives scalar compatibility. The normalized rational evaluation equation gives inverse-transpose naturality. Apply the generic signed-transpose construction over the localized coefficient ring and restrict its scalar equation through the displayed equivalence with E.",
    "uses": [
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "def-pur-integral-derived-operations",
-    "lem-coef-derived-system-evaluation-calculus",
-    "def-coef-ringed-tensor-hom-model"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J9 (lemma-internal-hom), together with the K-flat total tensor and the representative evaluation normalization in def-coef-ringed-tensor-hom-model; completion uniqueness is algebraization.tex Tag 099B."
-   }
-  },
-  {
-   "text": "In the raw rationalization, the objects are unchanged and each Hom group is $\\operatorname{Hom}_{D^b_c(X,R)}(-,-)\\otimes_R E$. The integral tensor and internal-Hom maps, including evaluation, extend $E$-linearly by the rational operation definitions. Tensoring the integral natural $R$-linear bijection with the field $E$ therefore gives an $E$-linear bijection on the full rationalized Hom groups, for arbitrary rational morphisms; the naturality and signed-symmetry equations persist after scalar extension.",
-   "uses": [
-    "def-weil-rationalization-karoubi",
+    "lem-coef-localized-tensor-braiding-naturality",
+    "lem-coef-normalized-rational-evaluation-naturality",
     "def-weil-derived-pullback-tensor-hom",
-    "lem-fix-operation-reduction"
+    "def-weil-rationalization-karoubi"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-rationalization-karoubi.md",
-    "place": "Displayed Hom scalar-localization formula; rational operation formulas are the statement of def-weil-derived-pullback-tensor-hom. This step is scalar extension of the integral bijection, not a further completion theorem."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-coef-ringed-tensor-hom-model",
-  "def-pur-integral-derived-operations",
-  "def-weil-derived-complete",
+  "def-pur-completed-pullback-tensor-comparison",
   "def-weil-derived-pullback-tensor-hom",
   "def-weil-rationalization-karoubi",
+  "lem-coef-completed-tensor-scalar-linearity",
   "lem-coef-derived-system-evaluation-calculus",
-  "lem-fix-operation-reduction",
-  "lem-pur-rhom-global-sections",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-weil-pbc-ringed-koszul-completion-reflector"
+  "lem-coef-localized-tensor-braiding-naturality",
+  "lem-coef-normalized-rational-evaluation-naturality",
+  "lem-pod-derived-automorphism-hom-evaluation",
+  "lem-pur-derived-pullback-tensor-iso"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "p. 22, Definition 3.4.10 and Lemma 3.4.11; expanded using Stacks 08J9, 08JA, 099B, 0A0E and 099M, then raw scalar localization."
+  "place": "Definition 3.4.10 and Lemma 3.4.11, with rational localization and the tensor-Hom evaluation equations."
  },
  "mathlib_searches": [
   {
@@ -168,10 +140,10 @@
   "file": "lean/Sheaf/Paper/CompletedTensorHomTranspose.lean",
   "statement": "theorem completedTensorHomTranspose (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum) (E : Type u) [Field E] [Algebra ℚ_[C.l] E] [FiniteDimensional ℚ_[C.l] E] (X : Scheme.{u}) [X.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] : (∃ tau : ∀ (L : sfIntegralConstructibleCategory C.l E X) (P : (constructibleIntegralHomPairs C.l E X).FullSubcategory), (L ⟶ (constructibleIntegralHom C.l E X).obj P) ≃ₗ[ Padic.coefficientExtensionIntegers C.l E] ((@constructibleIntegralTensor C.l _ E _ _ _ X (coefficientTransposeUnits D C X)).obj (P.obj.1.unop, L) ⟶ P.obj.2), CoefficientTransposeLaws (@podIntegralClosed C.l _ E _ _ _ X (coefficientTransposeUnits D C X)) (@pullbackTensorIntegralBraiding C.l _ E _ _ _ X (coefficientTransposeUnits D C X)) (fun L P phi ↦ tau L P phi)) ∧ (∃ tau : ∀ (L : sfRationalConstructibleCategory C.l E X) (P : (constructibleRationalHomPairs C.l E X).FullSubcategory), (L ⟶ (rationalDerivedInternalHom C.l E X).obj P) ≃+ ((@rationalDerivedTensor C.l _ E _ _ _ X (coefficientTransposeUnits D C X)).obj (P.obj.1.unop, L) ⟶ P.obj.2), CoefficientTransposeLaws (@podRationalClosed C.l _ E _ _ _ X (coefficientTransposeUnits D C X)) (@pullbackTensorRationalBraiding C.l _ E _ _ _ X (coefficientTransposeUnits D C X)) (fun L P phi ↦ tau L P phi) ∧ ∀ L P (phi : L ⟶ (rationalDerivedInternalHom C.l E X).obj P) (c : E), tau L P ((sfRationalCoefficientEquiv C.l E).symm c • phi) = (sfRationalCoefficientEquiv C.l E).symm c • tau L P phi)",
   "branch": "sheaf-dag",
-  "by": "NL",
-  "date": "2026-10-19",
+  "by": "D2",
+  "date": "2026-10-20",
   "existing": false,
-  "note": "Section 1(B): the recorded source times out in the fixed 60-second server compile when imported by this consumer. The same transpose statement now names the canonical residue-field inverse once as coefficientTransposeUnits, instead of elaborating its identical base-change expression six times. All categories, normalized evaluation data, linearity and naturality/symmetry clauses are unchanged. This delivery compiles the dependency and the consumer separately."
+  "note": "Proof assembled from generic transpose laws and three declared lower results."
  },
  "reviewed_lean": {
   "date": "2026-10-19",
@@ -180,5 +152,15 @@
   "group": "NL",
   "result": "pass",
   "note": "Every clause matches the node: canonical duality/evaluation data with u and β pinned by ExtensionProperties, the uniquely normalized tensor comparison (inverse, node direction), the signed braiding, both transposes, both restriction identities and both inverse formulas with correct composition order; no extra hypotheses or universe restrictions; edge cases E=F, empty X, zero objects covered; not on the drop list; statement verbatim; docstrings and 6 proof steps present; proof is sorry only. Item compiles clean against the live published build (lcompile, 560 s limit: 197.6 s at load ~250); nt_compile hit its 60 s limit at load ~212, which is load. The edit to CompletedTensorHomTranspose (new def coefficientTransposeUnits) is not needed (the claimed timeout does not reproduce; 8.1 s vs 8.3 s live) but harmless: NL's own record, no importers, superset of declarations, definitionally equal. Maintainer may land with --revert-nodes lem-coef-completed-tensor-hom-transpose. Advisory: the private IntegralOperationsScalarExtension import is probably redundant; transposes are characterized by evaluation equations (node step 3) rather than the dependency's existential τ."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261020T051118-L-1564430",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
