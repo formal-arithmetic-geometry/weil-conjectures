@@ -18817,3 +18817,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:16 L: returned deliver/T5/Sheaf.Paper.FiniteFreeCoefficientExtension (reviewer RETURN: (the landing tools, head 33c8c7b2a) the delivery did not land: (d) user Sheaf.Paper.FiniteFreeCompactScalar (mentions We)
 - 21:16 L: returned deliver/U3/Sheaf.Paper.AcyclicFlatProperCoefficientModel (reviewer RETURN: (the landing tools, head 2e9d7b02c) the delivery did not land: lean/Sheaf/Paper/AcyclicFlatProperCoefficientModel.lean: )
 - 21:16 L: returned deliver/U6/Sheaf.CategoryTheory.RingedSitePerfectDuality (reviewer RETURN: (the landing tools, head 9f5a5a6b8) the delivery did not land: lean/Sheaf/CategoryTheory/RingedSitePerfectDuality.lean: )
+- 21:16 L: returned deliver/V2/Sheaf.SixFunctors.IntegralVerdier (reviewer RETURN: (the landing tools, head 2908ef777) the delivery did not land: (d) user Sheaf.Paper.RationalVerdierEvaluationAdjoints (m)
