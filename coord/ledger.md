@@ -17973,3 +17973,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:26 L: returned deliver/F7/Sheaf.AlgebraicGeometry.VectorBundleIntegration (reviewer RETURN: (reviewer C-139ac, head 139acf09c) Compile (brief: must compile, closest letter H10): (1) lean/Sheaf/AlgebraicGeometry/V)
 - 12:26 L: returned deliver/P1/Sheaf.Paper.IntegralConstructibleHeart (reviewer RETURN: (reviewer C-7e1f2, head 7e1f2c57e) H10/A1: does not compile on the current base. lcompile --all: IntegralHeartStratified)
 - 12:26 L: returned deliver/G2/Sheaf.Paper.ConstructibleExceptionalCoefficientCoherence (reviewer RETURN: (reviewer C-89ec6, head 89ec69eab) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.ConstructibleE)
+- 12:26 L: returned deliver/T2/Sheaf.Paper.RationalCoefficientCategoryComparison (reviewer RETURN: (reviewer C-b5fda, head b5fda20b1) H10: does not compile: every module of the delivery fails with 'object file Sheaf/Alg)
