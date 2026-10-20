@@ -1,0 +1,171 @@
+{
+ "id": "lem-trf-integral-pullback-reduction-counit",
+ "kind": "statement",
+ "title": "K-flat reduction-unit counit calculation for integral inverse image",
+ "statement": "Fix a prime ell, a finite extension E/Q_ell, a scheme isomorphism h:Z -> W, a normalized coefficient-derived system calculus S on W, a normalized Roos model rho on Z and a normalized pullback model F for h [lem-coef-derived-system-evaluation-calculus, def-trf-integral-comparison-realization-models]. For a flat-term K-flat complex P [def-pc-kflat-complex], let a_P be the exact inverse-image localization comparison followed by the explicit zero-homotopy Roos lift of the reduction family and by the inverse of the defining completed-pullback comparison [def-weil-inverse-image-pullback-comparison, def-pur-integral-derived-operations]. Then Delta_Z(a_P followed by F.realization at Q(P)), followed by the whole-tower derived-limit counit at h-star(S.reduction(Q(P))), equals the diagonal/inverse-image commutation followed by H_t(Delta_W(S.unit at Q(P)) followed by the whole-tower counit) and the termwise finite tensor unit at S.reduction(Q(P)) [def-trf-integral-tower-inverse-image-unit]. The equality is in the derived category of entire strict completed-coefficient towers. This is the reduction-unit computation on a K-flat complex, before transport through any resolution or composition with an arbitrary quotient-system morphism.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, with the whole-diagram coefficient adjunction of Tag 06YY; specialization of steps 1, 3 and 5 of lem-trf-integral-pullback-resolution-matching. Bhatt--Scholze, Lemma 6.5.9(4), supplies the defining Roos lift."
+ },
+ "stmt_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-trf-integral-comparison-realization-models",
+  "def-pc-kflat-complex",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-pur-integral-derived-operations",
+  "def-trf-integral-tower-inverse-image-unit"
+ ],
+ "proof": [
+  {
+   "text": "Choose a single strict quotient presentation C,e,kappa from S.reductionModel for the flat-term K-flat complex P. The presentation identifies all finite quotients and their transitions simultaneously. Apply F.normalization to this same presentation; it supplies the generator-preserving whole-tower isomorphism q and the realization equation.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the strict diagonal-to-restricted-quotient map r with the unit of whole-system coefficient extension on the sequence site. The diagonal of P is K-flat by the levelwise acyclicity test. The derived coefficient adjunction and left-adjoint uniqueness imply that r is Delta(S.unit) followed by the derived diagonal-limit counit, transported through e. This is an equality of morphisms in the derived category of the whole tower, before finite evaluation.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "def-pc-kflat-complex",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The generator equation of F.normalization, the section formula defining inverseImageReductionTheta, and the section formula defining integralTowerInverseImageUnit identify theta with inverse-image(r) followed by the finite tensor unit, transported by q. Check every section and every transition; these are strict chain maps, not unrelated maps in finite derived categories.",
+   "uses": [
+    "def-weil-inverse-image-pullback-comparison",
+    "def-trf-integral-tower-inverse-image-unit",
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve the pulled-back whole quotient tower by simultaneous K-injectives. The exact-products strict Roos comparison and rho.computes identify rho with the normalized inverse of the limit-to-Roos inclusion. The cone-counit theorem applied to the strict family theta says that the diagonal image of its Roos lift, followed by the derived-limit counit, is theta. Substitute the realization equation from the first step, the whole-system unit identity from the second step and the strict theta equation from the third step. Naturality of the exact-derived comparisons transports this identity to the displayed equality. No resolution of an arbitrary derived object and no map from the reduction to a second quotient system is involved.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-strict-roos-comparison",
+    "lem-trf-integral-cone-counit-realization",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "def-trf-integral-comparison-realization-models",
+  "def-trf-integral-tower-inverse-image-unit",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-pur-derived-change-of-rings",
+  "lem-trf-integral-cone-counit-realization",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison",
+  "lem-weil-tower-category-levelwise-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 0941; extracted reduction-unit computation, prior to the resolution and quotient-counit naturality calculations of the parent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "inverseImageRoosComparisonComplex|integralComparisonReductionFactor|integralConeCounitRealization",
+   "results": "No matching declarations.",
+   "date": "2026-10-19",
+   "verdict": "No theorem for the normalized whole-tower reduction-unit identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app",
+   "results": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app",
+   "date": "2026-10-19",
+   "verdict": "No theorem for the normalized whole-tower reduction-unit identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived limit counit of the zero-homotopy Roos lift of the quotient reduction unit is inverse image of the derived reduction unit followed by tensor unit",
+   "results": "CategoryTheory.Limits.lim_ε_π, CategoryTheory.Idempotents.DoldKan.hε, CategoryTheory.Idempotents.DoldKan.η_inv_app_f, CategoryTheory.Idempotents.DoldKan.hη, Rep.standardComplex.εToSingle₀_comp_eq, AlgebraicTopology.DoldKan.N₁Γ₀_inv_app, CategoryTheory.Idempotents.DoldKan.η_hom_app_f, SSet.hoFunctor.unitHomEquiv_eq",
+   "date": "2026-10-19",
+   "verdict": "No theorem for the normalized whole-tower reduction-unit identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived inverse limit counit of the Roos lift of the reduction unit on a K-flat complex is the tensor unit on its quotient tower",
+   "results": "CategoryTheory.Functor.totalLeftDerivedCounit; CategoryTheory.Adjunction.derivedη; CategoryTheory.Functor.totalRightDerivedUnit; HomologicalComplex.rightUnitor'; CategoryTheory.Limits.IsLimit.lift_comp_conePointUniqueUpToIso_inv; Condensed.profiniteSolidCounit; CategoryTheory.Idempotents.karoubiCochainComplexEquivalence_counitIso_inv; CategoryTheory.LiftLeftAdjoint.counitCoequalises",
+   "date": "2026-10-19",
+   "verdict": "No match: these are generic derived adjunction units and counits, not the normalized Roos-lift reduction-unit equation in the derived category of whole quotient towers."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPullbackResolutionMatching",
+  "date": "2026-10-20",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Global powers, lines 35-47; reduction-unit calculation needed for the normalized whole-tower comparison, extracted from steps 1, 3 and 5 of the resolution-matching argument.",
+   "via": [
+    "lem-trf-integral-pullback-resolution-matching",
+    "lem-trf-integral-inverse-image-comparison-composition",
+    "lem-trf-integral-point-transport-tower-powers",
+    "lem-trf-integral-compact-transport-recurrence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralPullbackReductionCounit",
+  "file": "lean/Sheaf/Paper/IntegralPullbackReductionCounit.lean",
+  "declaration": "WeilConjectures.integralPullbackKFlatReductionCounit",
+  "declarations": [
+   "WeilConjectures.integralPullbackKFlatReductionCounit"
+  ],
+  "statement": "theorem integralPullbackKFlatReductionCounit\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {W Z : Scheme.{u}} (h : Z ⟶ W) [IsIso h]\n    (S : CoefficientDerivedSystemCalculus l E W)\n    (ρ : IntegralComparisonRoosModel l E Z)\n    (F : IntegralComparisonPullbackModel l E h S ρ)\n    (P : (integralOperationsGoodComplex l E W).FullSubcategory) :\n    (integralComparisonConstantTower l E Z).map\n        ((inverseImageIntegralModules l E h).mapDerivedCategoryFactors.hom.app P.obj ≫\n          DerivedCategory.Q.map (inverseImageRoosComparisonComplex l E h P.obj) ≫\n          (integralDerivedPullbackComparison l E h).inv.app P ≫\n          F.realization.hom.app (DerivedCategory.Q.obj P.obj)) ≫\n        (integralComparisonTowerCounit l E Z).app\n          ((coefficientSequenceDerivedRestriction l E Z).obj\n            ((integralComparisonDerivedSequencePullback l E h).obj\n              (S.reduction.obj (DerivedCategory.Q.obj P.obj)))) =\n      (integralTowerInverseImageDiagonal l E h).hom.app (DerivedCategory.Q.obj P.obj) ≫\n        (integralDerivedTowerInverseImage l E h).map\n          ((integralComparisonConstantTower l E W).map\n              (S.adjunction.unit.app (DerivedCategory.Q.obj P.obj)) ≫\n            (integralComparisonTowerCounit l E W).app\n              ((coefficientSequenceDerivedRestriction l E W).obj\n                (S.reduction.obj (DerivedCategory.Q.obj P.obj)))) ≫\n        (integralDerivedTowerInverseImageUnit l E h).hom.app\n          (S.reduction.obj (DerivedCategory.Q.obj P.obj))",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261020T051029-L-1535578",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261020T051029-L-1535578",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

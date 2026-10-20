@@ -24,117 +24,44 @@
  ],
  "proof": [
   {
-   "text": "Put $C=C_{k,\\bullet}$, $D=h^*C$ and $H=h^{-1}$. All restrictions to the completed coefficient sheaf are implicit. Choose the flat-term K-flat resolution $q:P'\\to M$ actually used to define $F_{h,E}M$ and $\\kappa^h_M$, and put $B_m=P'\\otimes_{\\widehat{\\mathcal O}_{E,W}}(A_{E,m})_W$ and $C_h=h^*B_\\bullet$ [def-pur-integral-derived-operations]. Write $r:\\Delta P'\\to B_\\bullet$ for the strict quotient map and $u_B:HB_\\bullet\\to h^*B_\\bullet$ for the termwise finite unit. The compatible family defining the integral comparison is $\\theta^\\Delta=u_B\\circ H(r):\\Delta HP'\\to C_h$, by part (b) of [def-weil-inverse-image-pullback-comparison]. Thus $F_{h,E}M=R\\lim C_h$ and $\\kappa^h_M$ is the class of the cone lift of this family followed by $[H(q)]^{-1}$. In particular its defining cone is built from $C_h$, not from $D$. The resolution $P'$ of $M$ is separate from the representative of $N$ that produced $C$.",
+   "text": "Use the K-flat reduction-unit counit computation on the exact flat-term K-flat resolution already chosen by inverseImagePullbackComparisonDerived. Extract its representative, representative isomorphism and resolution directly from the defining expression, rather than making an independent choice.",
    "uses": [
-    "def-pur-integral-derived-operations",
+    "lem-trf-integral-pullback-reduction-counit",
     "def-weil-inverse-image-pullback-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
-    "place": "Global powers, agent expansion: distinguish the two completed-pullback resolutions"
-   }
+   "elementary": false
   },
   {
-   "text": "On either scheme the strict tower category is abelian and $\\Delta$ is exact, since kernels and cokernels are levelwise [lem-weil-tower-category-levelwise-abelian]. The ordinary bijection $\\operatorname{Hom}(X,\\lim T)\\cong\\operatorname{Hom}(\\Delta X,T)$ sends a map to its compatible projections. Apply [lem-pc-pre-derived-adjoint-functors-general] to $G=\\Delta$, $F=\\lim$. Here $L\\Delta=\\Delta$ by exactness and $R\\lim$ exists on the whole derived tower category and is computed by K-injective towers [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Its characterizing formula, using the identity resolution on the $\\Delta$ side, identifies the derived bijection with $e_T(a)=\\epsilon_T\\circ\\Delta(a)$: on $T\\to I$ it is precisely the ordinary limit cone transported through that resolution, as normalized in [lem-trf-integral-pullback-comparison-realization]. Functoriality in the tower variable therefore gives, for every derived tower morphism $\\psi:T\\to T'$, $$\\epsilon_{T'}\\circ\\Delta(R\\lim\\psi)=\\psi\\circ\\epsilon_T.$$ This applies to a derived morphism represented by a roof, as well as to a strict chain map.",
+   "text": "Form the natural transformations gamma and beta expressing the two counit composites as functions of the ambient derived input M. The defining chosen-resolution formula and naturality of the exact-derived inverse-image comparison give H(r) followed by a_M = a_P followed by completed-pullback(r), where r is Q(q) followed by the representative isomorphism. Precompose by the invertible Delta(H(r)), use naturality of gamma and beta, and cancel it. This transports the first-step identity from Q(P) to M.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let C be the first pullback tower and let v:S.reduction(M) -> C be integralComparisonPullbackCounit for k. Its definition and the adjunction triangle identity give S.unit_M followed by Rlim(v) = the specified realization for k. Counit naturality then identifies delta_M followed by U(v) with Delta(realization_k) followed by epsilon_C.",
    "uses": [
-    "lem-weil-tower-category-levelwise-abelian",
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
     "lem-trf-integral-pullback-comparison-realization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 0FND and 0DVC, functoriality of derived adjunction; with sites-cohomology.tex Tag 0941 for the K-injective tower computation"
-   }
+   "elementary": false
   },
   {
-   "text": "Keep the whole quotient diagram. Set $R=\\widehat{\\mathcal O}_{E,W}$ and $S_\\bullet=((A_{E,m})_W)_m$. Use the small diagram site of [lem-weil-pbc-diagram-site-realization], with $J=\\mathbf N_{\\geq1}^{\\mathrm{op}}$, so $\\Delta R\\to S_\\bullet$ is a morphism of sheaves of rings on that site. Indeed $S_\\bullet(m,U)=(A_{E,m})_W(U)$ is a sheaf because coverings are at fixed $m$. Its modules are quotient-coefficient diagrams; restriction $U$ to $\\Delta R$-modules is exact since underlying sheaves, kernels and cokernels are unchanged [def-pc-sheaf-restrict-scalars]. Change of rings $L$ on this site is computed by K-flat complexes [lem-pur-derived-change-of-rings]. The complex $\\Delta P'$ is K-flat: for an acyclic diagram $A$, each $A_m$ is acyclic by [lem-weil-tower-category-levelwise-abelian], and $(A\\otimes_{\\Delta R}\\Delta P')_m=A_m\\otimes_R P'$ is acyclic by [def-pc-kflat-complex]. Its terms are flat by the same levelwise test. Consequently $L(\\Delta P')=B_\\bullet$. The ordinary change-of-rings adjunction on this site is given by $f\\mapsto(x\\mapsto f(x\\otimes1))$, with inverse $g\\mapsto(x\\otimes a\\mapsto a g(x))$; these formulas respect restrictions and sheafification by [def-pur-sheaf-tensor-product], hence give inverse maps of Hom sets. Apply [lem-pc-pre-derived-adjoint-functors-general] with this exact restriction functor and the everywhere-defined $L$. Its fraction formula identifies the derived unit at $\\Delta P'$ with the strict map $r$. Thus derived adjunction sends $\\phi:B_\\bullet\\to C$ to $U(\\phi)\\circ r$, in the derived category of whole towers.",
-   "uses": [
-    "lem-weil-pbc-diagram-site-realization",
-    "def-pc-sheaf-restrict-scalars",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-tower-category-levelwise-abelian",
-    "def-pc-kflat-complex",
-    "def-pur-sheaf-tensor-product",
-    "lem-pc-pre-derived-adjoint-functors-general"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CZ, sheaf change-of-rings adjunction on the small tower site; derived.tex Tags 0FND/0DVC; sites-cohomology.tex Tag 06YY"
-   }
-  },
-  {
-   "text": "Let $e'=\\epsilon_C\\circ\\Delta[q]:\\Delta P'\\to UC$. Under the diagram adjunction of Step 3 let $\\phi:B_\\bullet\\to C$ be its adjunct. Explicitly this is $L(e')$ followed by the quotient-module action, the counit of change of rings. These are exactly the arrow and normalization used in [lem-trf-integral-pullback-comparison-realization]; K-flat computation is that of [lem-pur-derived-change-of-rings]. Hence $$\\eta_{h,k,N}=R\\lim(h^*\\phi):R\\lim C_h\\to R\\lim D.$$ By the characterizing adjunct formula in Step 3 (equivalently the unit-counit identity), $$U(\\phi)\\circ r=e'=\\epsilon_C\\circ\\Delta[q].$$ Both equalities concern derived morphisms of the entire quotient diagram. They do not assert that $\\phi$ can be chosen as a levelwise map of the given representatives. Suppress $U$ henceforth when reading $\\phi$ as a morphism of completed-coefficient towers.",
+   "text": "Unfold the recorded eta as realization_h followed by Rlim(h-star(v)). Apply whole-tower counit naturality to h-star(v), substitute the transported first-step identity, and use naturality of the finite tensor unit and the preceding triangle calculation. Associativity and functoriality give the original displayed equation, with no finite evaluation.",
    "uses": [
     "lem-trf-integral-pullback-comparison-realization",
-    "lem-pur-derived-change-of-rings"
+    "def-trf-integral-tower-inverse-image-unit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY, derived change of rings; agent specialization of the normalized comparison construction to the counit of C"
-   }
-  },
-  {
-   "text": "Countable products of completed module sheaves on $Z_{\\mathrm{proet}}$ are exact [lem-weil-proetale-countable-products-exact]. Therefore [lem-weil-strict-roos-comparison] identifies the cone used in part (b) of [def-weil-inverse-image-pullback-comparison] with $R\\lim C_h$, using precisely the cone map of a K-injective tower resolution followed by the inverse of the zero-shifted-component inclusion. Under this normalized identification the cone lift from Step 1 is $r_\\theta:HP'\\to R\\lim C_h$ of [lem-trf-integral-cone-counit-realization]. That lemma, applied to $C_h$ and its strict compatible family $\\theta$, gives $$\\epsilon_{C_h}\\circ\\Delta(r_\\theta)=\\theta^\\Delta=u_B\\circ H(r),\\qquad \\kappa^h_M=r_\\theta\\circ[H(q)]^{-1}.$$ It is $r_\\theta$, rather than $\\eta\\circ\\kappa^h_M$, to which the cone-counit identity applies.",
-   "uses": [
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-strict-roos-comparison",
-    "def-weil-inverse-image-pullback-comparison",
-    "lem-trf-integral-cone-counit-realization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, K-injective limit/cone comparison; agent application of the normalized cone-counit identity to C_h"
-   }
-  },
-  {
-   "text": "The finite map $u_T:HT\\to h^*T$ from part (a) of [def-weil-inverse-image-pullback-comparison] is natural in a quotient-coefficient tower complex $T$: for any chain map $v$, both $h^*v\\circ u_T$ and $u_{T'}\\circ H(v)$ send a section $x$ to $v(x)\\otimes1$. This equality survives sheafification and commutes with the quotient transitions, so it is an equality of strict tower chain maps. Both $H$ and the finite-level $h^*$ are exact [def-weil-inverse-image-pullback-comparison, def-pur-integral-derived-operations], and hence preserve quasi-isomorphisms of such diagrams, whose acyclicity is levelwise. For a roof $T\\xleftarrow{s}T''\\xrightarrow{v}T'$ the two strict naturality equalities for $s$ and $v$, after inverting $H(s)$ and $h^*(s)$, give the same square for the derived morphism $[v][s]^{-1}$. Apply this to $\\phi$ from Step 4. Then in the derived tower category $$h^*(\\phi)\\circ\\theta^\\Delta=h^*(\\phi)\\circ u_B\\circ H(r)=u_C\\circ H(\\phi\\circ r)=u_C\\circ H(\\epsilon_C)\\circ\\Delta[H(q)].$$ Here $H$ commutes with $\\Delta$ termwise, and the last equality is the whole-diagram adjunct identity of Step 4.",
-   "uses": [
-    "def-weil-inverse-image-pullback-comparison",
-    "def-pur-integral-derived-operations",
-    "lem-weil-tower-category-levelwise-abelian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D6, tensor-unit formula for module pullback; agent naturality calculation on complexes and roofs"
-   }
-  },
-  {
-   "text": "Apply Step 2 to the derived tower arrow $h^*\\phi:C_h\\to D$ and compose with $\\Delta(r_\\theta)$. Using Steps 4, 5 and 6 gives $$\\begin{aligned}\\epsilon_D\\circ\\Delta(\\eta_{h,k,N}\\circ\\kappa^h_M)\\circ\\Delta[H(q)]&=\\epsilon_D\\circ\\Delta(R\\lim(h^*\\phi))\\circ\\Delta(r_\\theta)\\\\&=h^*\\phi\\circ\\epsilon_{C_h}\\circ\\Delta(r_\\theta)\\\\&=h^*\\phi\\circ\\theta^\\Delta\\\\&=u_C\\circ H(\\epsilon_C)\\circ\\Delta[H(q)].\\end{aligned}$$ Exactness of $H$ makes $H(q)$ a quasi-isomorphism; cancel its invertible class on the right. Since $D=h^*C$ and $u_C=u_{h,C_k}$ this proves the requested identity in the derived category of strict towers. The description $x\\mapsto x\\otimes1$ refers to the actual unit $u_C$ after $H(\\epsilon_C)$; it does not describe a map on $H\\lim I$ defining $\\kappa$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Agent substitution of the preceding whole-tower identities and cancellation of the resolution isomorphism"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-kflat-complex",
-  "def-pc-sheaf-restrict-scalars",
-  "def-pur-integral-derived-operations",
-  "def-pur-sheaf-tensor-product",
+  "def-trf-integral-tower-inverse-image-unit",
   "def-weil-inverse-image-pullback-comparison",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "lem-pur-derived-change-of-rings",
-  "lem-trf-integral-cone-counit-realization",
   "lem-trf-integral-pullback-comparison-realization",
-  "lem-weil-pbc-diagram-site-realization",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-strict-roos-comparison",
-  "lem-weil-tower-category-levelwise-abelian"
+  "lem-trf-integral-pullback-reduction-counit"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
-  "place": "Global powers, lines 35-47 motivate naturality only; the counit argument is an agent expansion using Stacks Tags 0FND/0DVC, 0941, 03CZ and 06YY"
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 0941; K-flat reduction-unit computation followed by explicit resolution transport, adjunction triangle identity and naturality in the actual whole quotient system."
  },
  "mathlib_searches": [
   {
@@ -247,15 +174,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-tower-category-levelwise-abelian",
-  "lem-weil-pbc-diagram-site-realization",
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-strict-roos-comparison",
-  "lem-weil-proetale-countable-products-exact"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -287,5 +206,15 @@
   "group": "Q01",
   "result": "pass",
   "note": "Clause-by-clause match of the item node against integralPullbackResolutionMatching: the tower C_k, its identification of M = Lk^*N with Rlim C (written explicitly via (D.coefficient E).pullback k realization), h^*C, both derived-limit counits (K-injective-normalized), kappa applied to M, the recorded eta, and the termwise unit; correct composition order; the equality holds in the derived category of whole strict towers. D quantified over all normalized IntegralComparisonSystems, matching the existential realization lemma; the single universe u is inherited from that recorded interface. New def-trf-integral-tower-inverse-image-unit is genuinely absent elsewhere; its unit is fixed on every section as x tensor 1 by a named sorried existsUnique theorem (accepted pattern); derived unit and diagonal are canonical. Node fields unchanged except lean and the added stmt_dep; statements verbatim; docstrings, sources and blueprint tags present; only sorry proofs. Both modules compile clean via nt_compile --json (4.4 s, 3.5 s, exit 0). No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261020T051029-L-1535578",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
