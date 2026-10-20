@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.TorsionAbelianBaseChange
 public import Sheaf.AlgebraicGeometry.PrimeInjectiveAcyclicity
 import WeilConjectures.AlgebraicGeometry.ConstantRingModuleSheafEquivalence
 import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
-import Sheaf.AlgebraicGeometry.InjectiveModuleDirectImageAcyclic
+import WeilConjectures.AlgebraicGeometry.InjectiveModuleDirectImageAcyclic
 
 /-!
 # Proper base change implies injective acyclicity

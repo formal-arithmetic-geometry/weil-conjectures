@@ -23,7 +23,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedExchangeTermwise
 import Sheaf.Paper.KunBaseChange
 import Sheaf.AlgebraicGeometry.StalkFaithfulDerived
 import WeilConjectures.Mathlib.RingTheory.Adjoin.FG
-import Sheaf.AlgebraicGeometry.LimitFibreProducts
+import WeilConjectures.AlgebraicGeometry.LimitFibreProducts
 import Sheaf.Targets.BaseChangeTowardsFields
 import Sheaf.AlgebraicGeometry.UnboundedExchangeAgrees
 import Sheaf.AlgebraicGeometry.ExactUnboundedExchange

@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V2
 -/
 module
-public import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
+public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
@@ -12,7 +12,7 @@ import Sheaf.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent
 import Sheaf.AlgebraicGeometry.AffineCohomologySectionEquiv
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 import Sheaf.AlgebraicGeometry.FlatBaseChangeTargetLerayComparison
-import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
+import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import WeilConjectures.AlgebraicGeometry.TensorPullback
 /-! # Canonical affine section comparisons before flat base change

@@ -11,8 +11,8 @@ public import Mathlib.AlgebraicGeometry.Fiber
 import Sheaf.AlgebraicGeometry.AmpleAffineLimitDescent
 import Sheaf.AlgebraicGeometry.InvertibleAffineLimitDescent
 import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
-import Sheaf.AlgebraicGeometry.LimitFibreProducts
-import Sheaf.AlgebraicGeometry.LimitResidueField
+import WeilConjectures.AlgebraicGeometry.LimitFibreProducts
+import WeilConjectures.AlgebraicGeometry.LimitResidueField
 import Sheaf.AlgebraicGeometry.NoetherianFibreAmpleNeighbourhood
 import WeilConjectures.AlgebraicGeometry.ProperLimitNoetherian
 import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction

@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.RingTheory.Depth
 import WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoFiniteHomExtension
-import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteHomEquality
+import WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoFiniteHomEquality
 import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
 
 /-!

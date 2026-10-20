@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.AlgebraicGeometry.ProperLimitNoetherian
-import Sheaf.AlgebraicGeometry.LimitFibreProducts
+import WeilConjectures.AlgebraicGeometry.LimitFibreProducts
 import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! # Descent of a proper-fibre idempotent to a Noetherian model

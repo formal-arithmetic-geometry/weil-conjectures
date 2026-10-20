@@ -5,13 +5,13 @@ Authors: SHEAF group Y3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
+public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.FlatBaseChangeAffineDictionary
-import Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionSections
-import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoicesExist
+import WeilConjectures.AlgebraicGeometry.FlatBaseChangeResolutionSections
+import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoicesExist
 import Sheaf.AlgebraicGeometry.LerayDegenerateSections
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSectionsBijective
 import Sheaf.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent

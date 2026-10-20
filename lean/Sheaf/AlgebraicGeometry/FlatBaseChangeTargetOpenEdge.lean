@@ -5,7 +5,7 @@ Authors: SHEAF group U3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ResolutionSectionClassOpenRestriction
+public import WeilConjectures.AlgebraicGeometry.ResolutionSectionClassOpenRestriction
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde

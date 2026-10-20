@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.ReesAlgebra
 public import Mathlib.Algebra.DirectSum.Basic
 import Sheaf.AlgebraicGeometry.IdealPowersReesGradedData
-import Sheaf.AlgebraicGeometry.ModuleCohomologyScalarEndomorphism
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyScalarEndomorphism
 import Sheaf.Paper.GradedFinitenessCohomology
 import WeilConjectures.Blowup.Affine.ReesGrading
 

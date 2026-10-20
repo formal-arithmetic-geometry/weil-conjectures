@@ -6,8 +6,9 @@ Authors: SHEAF group M4
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
+public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 import all WeilConjectures.AlgebraicGeometry.FiniteFreeStalkMapEquality
+public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Shrinking stalk equality for a finite retract sheaf
 

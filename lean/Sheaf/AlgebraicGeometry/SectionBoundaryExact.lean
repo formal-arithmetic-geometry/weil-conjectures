@@ -5,7 +5,7 @@ Authors: SHEAF group H2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ModuleCohomologyBoundary
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyBoundary
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-! # Exactness of the canonical boundary on global sections

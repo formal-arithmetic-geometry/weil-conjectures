@@ -5,8 +5,9 @@ Authors: SHEAF groups B4 and P3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
+public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 import all Sheaf.AlgebraicGeometry.OpenModuleStalkRestrictionComparison
+public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Transporting a supplied subscheme morphism to the open slice site
 

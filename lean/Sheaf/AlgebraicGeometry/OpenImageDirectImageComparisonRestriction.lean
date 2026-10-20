@@ -6,7 +6,7 @@ Authors: SHEAF group V2
 module
 
 public import Sheaf.AlgebraicGeometry.OpenImageDirectImageComparisonUnit
-import all Sheaf.AlgebraicGeometry.OpenImageComplexComparisonRestriction
+import all WeilConjectures.AlgebraicGeometry.OpenImageComplexComparisonRestriction
 
 /-! # Compatibility of the ordinary open-image comparison with nested restriction
 

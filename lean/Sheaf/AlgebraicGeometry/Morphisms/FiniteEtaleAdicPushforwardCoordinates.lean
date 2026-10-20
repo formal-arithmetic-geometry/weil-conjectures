@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleAdicUniqueL
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeCoordinatesNaturality
 import WeilConjectures.AlgebraicGeometry.Modules.StructureBaseChangeSectionsNaturality
-import Sheaf.AlgebraicGeometry.Modules.CanonicalStructureBaseChangeIsIso
+import WeilConjectures.AlgebraicGeometry.Modules.CanonicalStructureBaseChangeIsIso
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackSectionFactorization
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 

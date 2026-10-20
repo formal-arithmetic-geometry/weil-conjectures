@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 import Sheaf.AlgebraicGeometry.KoszulAffineDetection
 import Sheaf.AlgebraicGeometry.DerivedOpenUnitCone
-import Sheaf.AlgebraicGeometry.KoszulPowersOrthogonality
+import WeilConjectures.AlgebraicGeometry.KoszulPowersOrthogonality
 import Sheaf.AlgebraicGeometry.KoszulRestrictionZero
 
 /-! # Koszul orthogonality detects extension from an open

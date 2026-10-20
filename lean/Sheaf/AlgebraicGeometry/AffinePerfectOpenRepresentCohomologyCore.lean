@@ -2,7 +2,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.KoszulOpenConeComparison
+import WeilConjectures.AlgebraicGeometry.KoszulOpenConeComparison
 import Sheaf.Paper.AffinePerfectKoszulPrincipalUnit
 
 @[expose] public section

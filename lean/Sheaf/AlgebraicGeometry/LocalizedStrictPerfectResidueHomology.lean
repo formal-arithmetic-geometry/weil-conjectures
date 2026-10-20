@@ -8,7 +8,7 @@ public import Sheaf.AlgebraicGeometry.LocalizedResidueHomology
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.CategoryTheory.Adjunction.Additive
-import Sheaf.AlgebraicGeometry.OpenModuleStalkFreeProjective
+import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFreeProjective
 import Sheaf.Algebra.Homology.KFlatStalkCriterion
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Mathlib.RingTheory.Flat.Basic

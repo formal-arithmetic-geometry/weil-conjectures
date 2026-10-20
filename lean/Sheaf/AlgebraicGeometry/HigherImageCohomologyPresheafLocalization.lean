@@ -6,7 +6,7 @@ Authors: SHEAF group F2
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
+public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
 public import Mathlib.Algebra.Module.LocalizedModule.Away
 import Sheaf.AlgebraicGeometry.SectionCohomologyPrincipalLocalization
 

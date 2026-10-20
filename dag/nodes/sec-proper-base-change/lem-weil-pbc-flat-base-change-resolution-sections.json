@@ -110,13 +110,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionSections",
-  "file": "lean/Sheaf/AlgebraicGeometry/FlatBaseChangeResolutionSections.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FlatBaseChangeResolutionSections",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FlatBaseChangeResolutionSections.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.flatBaseChangeResolutionBeta_sections",
   "statement": "theorem flatBaseChangeResolutionBeta_sections {X S S' : Scheme.{uBC}} (f : X ⟶ S) (g : S' ⟶ S)\n    [Flat g] [Flat (pullback.snd g f)] {F : X.Modules}\n    (I : InjectiveResolution F)\n    (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F))\n    (t : I.cocomplex ⟶ ((pushforward (pullback.snd g f)).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj J.cocomplex)\n    (ht : I.ι.f 0 ≫ t.f 0 =\n      (Classical.choose (exists_tensorPullbackAdjunction (pullback.snd g f))).unit.app F ≫\n        (pushforward (pullback.snd g f)).map (J.ι.f 0))\n    (p : ℕ) :\n    ∀ (V : S.Opens)\n        (D : FlatBaseChangeOpenChoices f g F I J V)\n        (xi : (forget₂ _ AddCommGrpCat.{uBC}).obj\n          ((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).obj\n            ((restrictFunctor (f ⁻¹ᵁ V).ι).obj F))),\n        Hom.app ((Classical.choose (exists_tensorPullbackAdjunction g)).homEquiv _ _\n          (flatBaseChangeResolutionBeta f g I J t p)) V\n          (D.sourceClass p xi) =\n        D.targetClass p\n          (moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V)\n            ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p xi)",
   "branch": "sheaf-dag",
   "by": "R2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionSections; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

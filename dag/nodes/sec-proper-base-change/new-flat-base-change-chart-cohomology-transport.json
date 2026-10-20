@@ -101,13 +101,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FlatBaseChangeChartCohomologyTransport",
-  "file": "lean/Sheaf/AlgebraicGeometry/FlatBaseChangeChartCohomologyTransport.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FlatBaseChangeChartCohomologyTransport",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FlatBaseChangeChartCohomologyTransport.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exists_flatBaseChange_chart_cohomology_transport",
   "statement": "theorem exists_flatBaseChange_chart_cohomology_transport\n    {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)\n    (F : X.Modules) (I : InjectiveResolution F)\n    (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F))\n    (p : ℕ) (V : S.Opens) (W : S'.Opens) (hV : IsAffineOpen V) (hW : IsAffineOpen W)\n    (eVW : W ≤ g ⁻¹ᵁ V) (D : FlatBaseChangeOpenChoices f g F I J V)\n    [Algebra Γ(S, V) Γ(S', W)]\n    (hAlgebra : algebraMap Γ(S, V) Γ(S', W) = (g.appLE V W eVW).hom) :\n    let h := f.resLE V (f ⁻¹ᵁ V) le_rfl ≫ V.toSpecΓ\n    let N := (pullback (f ⁻¹ᵁ V).ι).obj F\n    let T := baseChangedScheme (S := Γ(S', W)) h\n    let A := baseChangedModule (S := Γ(S', W)) h N\n    let C := RingedSpace.moduleCohomology T.toRingedSpace p\n    let G := (tensorPullback (pullback.snd g f)).obj F\n    let U := (pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)\n    let L := (pullback.fst g f) ⁻¹ᵁ W\n    let e : L ≤ U := by\n      change (pullback.fst g f) ⁻¹ᵁ W ≤ (pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)\n      rw [flatBaseChangeOpenEquality f g V]\n      exact (pullback.fst g f).preimage_mono eVW\n    let M := (restrictFunctor L.ι).obj G\n    let C' := RingedSpace.moduleCohomology L.toScheme.toRingedSpace p\n    let k := (pullback.fst g f).resLE W L le_rfl ≫ W.toSpecΓ\n    ∃ t : C.obj A ≃+ C'.obj M,\n      (∀ (a : Γ(S', W)) (y : C.obj A),\n        t ((C.map (A.smulHom (((Scheme.ΓSpecIso Γ(S', W)).inv ≫\n          (baseChangeSnd (S := Γ(S', W)) h).appTop).hom a))).hom y) =\n        ((C'.map (M.smulHom (((Scheme.ΓSpecIso Γ(S', W)).inv ≫ k.appTop).hom a))).hom\n          (t y))) ∧\n      (∀ x : (RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).obj\n          ((restrictFunctor (f ⁻¹ᵁ V).ι).obj F),\n        t (moduleCohomologyFMap (baseChangeFst (S := Γ(S', W)) h)\n          (baseChangeUnit (S := Γ(S', W)) h N) p\n          (((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).map\n            ((restrictFunctorIsoPullback (f ⁻¹ᵁ V).ι).app F).hom).hom x)) =\n        cohomologyOpenRestriction G U L e p\n          (moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V) U le_rfl)\n            D.psi p x))",
   "branch": "sheaf-dag",
   "by": "U3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.FlatBaseChangeChartCohomologyTransport; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

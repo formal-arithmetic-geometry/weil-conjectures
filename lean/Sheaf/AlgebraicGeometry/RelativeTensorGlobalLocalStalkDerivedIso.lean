@@ -6,12 +6,13 @@ Authors: SHEAF group H3
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
+public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # RelativeTensorGlobalLocalStalkDerivedIso
 

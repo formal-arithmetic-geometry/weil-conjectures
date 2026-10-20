@@ -5,13 +5,14 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.LerayEdgeCocycleData
+public import WeilConjectures.AlgebraicGeometry.LerayEdgeCocycleData
 public import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Sheaf.CategoryTheory.GrothendieckEdgeCocycle
 import Mathlib.Algebra.Category.ModuleCat.AB
 import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.AlgebraicGeometry.LeraySectionsResolutionComparison
+import WeilConjectures.AlgebraicGeometry.LeraySectionsResolutionComparison
+public import Sheaf.Paper.PQFCohomology
 
 /-! # Comparison of the cocycle Leray edge with the Grothendieck edge
 

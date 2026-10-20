@@ -5,8 +5,8 @@ Authors: SHEAF group S2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisExact
-public import Sheaf.AlgebraicGeometry.OpenImageComplexComparisonIso
+public import WeilConjectures.AlgebraicGeometry.KInjectiveMayerVietorisExact
+public import WeilConjectures.AlgebraicGeometry.OpenImageComplexComparisonIso
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
 public import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful

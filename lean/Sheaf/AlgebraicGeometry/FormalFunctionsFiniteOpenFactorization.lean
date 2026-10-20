@@ -6,9 +6,9 @@ Authors: SHEAF group X3
 module
 
 public import Sheaf.AlgebraicGeometry.FormalFunctionsFinitePullback
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import Sheaf.AlgebraicGeometry.FormalFunctionsFiniteOpenUnitPasting
-import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
+import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 

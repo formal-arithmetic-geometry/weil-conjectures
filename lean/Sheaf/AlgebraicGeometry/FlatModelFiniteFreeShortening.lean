@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Mathlib.AlgebraicGeometry.Restrict
-import Sheaf.AlgebraicGeometry.FlatModelFiniteFreeConstruction
+import WeilConjectures.AlgebraicGeometry.FlatModelFiniteFreeConstruction
 import Sheaf.AlgebraicGeometry.FlatModelFiniteFreeComparison
 
 /-! # Local nonnegative finite-free replacements of bounded flat complexes -/

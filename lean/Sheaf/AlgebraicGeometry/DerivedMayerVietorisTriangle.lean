@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
-import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisPresentation
+import WeilConjectures.AlgebraicGeometry.KInjectiveMayerVietorisPresentation
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 

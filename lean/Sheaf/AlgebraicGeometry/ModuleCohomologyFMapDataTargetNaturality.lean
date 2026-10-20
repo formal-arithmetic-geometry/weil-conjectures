@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 
 /-! # Target coefficient naturality for arbitrary resolution data
 

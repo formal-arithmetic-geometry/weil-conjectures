@@ -5,7 +5,7 @@ Authors: SHEAF group E4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
+public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
 
 /-! # The fixed untwisted comparison
 

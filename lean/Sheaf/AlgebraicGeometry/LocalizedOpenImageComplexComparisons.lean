@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.KInjectiveMayerVietorisData
 import Sheaf.AlgebraicGeometry.OpenDerivedLocalizationAdjunction
-import Sheaf.AlgebraicGeometry.OpenImageComplexComparisonUnit
+import WeilConjectures.AlgebraicGeometry.OpenImageComplexComparisonUnit
 import Mathlib.CategoryTheory.Adjunction.Restrict
 
 /-! # Localized-site comparisons for the concrete open-image complexes

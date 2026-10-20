@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
-import Sheaf.AlgebraicGeometry.ModuleCohomologyCoefficientTransport
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyCoefficientTransport
 import Sheaf.AlgebraicGeometry.ModuleCohomologyExtEdgeComparison
 
 /-! # Module and Ext cohomology comparisons compatible with scheme maps

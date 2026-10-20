@@ -5,7 +5,7 @@ Authors: SHEAF group P3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FormalFibreCohomology
+public import WeilConjectures.AlgebraicGeometry.FormalFibreCohomology
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian

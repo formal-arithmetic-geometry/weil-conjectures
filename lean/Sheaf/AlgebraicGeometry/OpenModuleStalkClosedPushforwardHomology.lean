@@ -5,13 +5,14 @@ Authors: SHEAF group T1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
+public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 import WeilConjectures.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
+public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Homology of a localized closed-pushforward stalk complex
 
