@@ -29,196 +29,43 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal A=\\operatorname{Mod}(\\mathcal O)$ and write $T(P,N)=\\operatorname{Tot}(P\\otimes_{\\mathcal O}N)$. By [lem-pc-sheaf-modules-tensor-closed], sheaf tensor is additive, symmetric monoidal and closed; by [prop-pur-kinjective-resolutions-exist], $\\mathcal A$ is Grothendieck and has all small colimits. Tensor preserves colimits: for fixed $F$, the adjunction identifies $\\operatorname{Hom}(F\\otimes\\operatorname{colim}G_i,H)$ with $\\operatorname{Hom}(\\operatorname{colim}G_i,\\mathcal Hom(F,H))=\\lim_i\\operatorname{Hom}(G_i,\\mathcal Hom(F,H))=\\lim_i\\operatorname{Hom}(F\\otimes G_i,H)$; symmetry gives the other variable. Thus [lem-sfb-total-tensor-homotopy] applies. It gives $T$, associators by reindexing triple direct sums, and unitors, on complexes and on their homotopy category $K(\\mathcal A)$, satisfying pentagon and triangle. The tensor and differential are exactly [def-pc-tensor-complex-sheaves].",
+   "text": "Use the fixed native monoidal structure, its symmetry, its natural one-K-flat tensor comparison and invertible unit comparison.",
    "uses": [
-    "lem-pc-sheaf-modules-tensor-closed",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-sfb-total-tensor-homotopy",
-    "def-pc-tensor-complex-sheaves"
+    "lem-sf-ringed-derived-native-tensor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0FPQ (lemma-symmetric-monoidal-cat-complexes), its unit and diagram hints; total tensor of Section 06YL"
-   }
+   "elementary": false
   },
   {
-   "text": "On a $(p,q)$ summand define $s_{P,N}(x\\otimes y)=(-1)^{pq}y\\otimes x$, using the sheaf symmetry of [lem-pc-sheaf-modules-tensor-closed]. Maps out of a sheaf tensor are determined by their maps on local pure tensors, and maps out of a direct sum by its summands, by the constructions [def-pur-sheaf-tensor-product, def-pc-tensor-complex-sheaves]. Both $d s$ and $s d$ send $x\\otimes y$ to $(-1)^{pq}dy\\otimes x+(-1)^{pq+q}y\\otimes dx$. Hence $s$ is a chain map. Its square has coefficient $(-1)^{pq+qp}=1$, so its inverse is $s_{N,P}$. A pair of degree-zero chain maps does not change $p,q$, proving naturality. This natural isomorphism also acts on the homotopy tensor of step 1: every homotopy-category arrow is a class of chain maps, so the same naturality equality applies to it.",
+   "text": "Construct the evaluation-normalized closed adjunction for the recorded derived internal Hom, retaining the fixed native monoidal structure and simultaneous K-flat comparison.",
    "uses": [
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-pur-sheaf-tensor-product",
-    "def-pc-tensor-complex-sheaves",
-    "lem-sfb-total-tensor-homotopy"
+    "lem-sf-ringed-derived-tensor-hom-adjunction"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0FPQ, commutativity constraints; More on Algebra section-sign-rules"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $\\mathcal P$ be the full subcategory of $K(\\mathcal A)$ of K-flat complexes with flat terms, as in [lem-weil-pbc-site-derived-tensor-descent]. It contains $\\mathcal O[0]$: tensor with $\\mathcal O$ is the identity, hence $\\mathcal O$ is flat by [def-pc-flat-sheaf-modules], and [lem-pc-kflat-closure] applies to this bounded-above complex. It is closed under $T$. Indeed for acyclic $B$ and K-flat $P,N$, associativity from step 1 identifies $T(B,T(P,N))$ with $T(T(B,P),N)$; first $T(B,P)$, then the latter tensor, is acyclic by [def-pc-kflat-complex]. For the terms, tensoring with $P^p\\otimes N^q$ is a composite of two exact functors, so it is flat. The degree-$n$ term of $T(P,N)$ is a countable sum of such flat sheaves and is flat by [lem-pc-kflat-closure]. All constraints in steps 1 and 2 therefore restrict to $\\mathcal P$.",
+   "text": "The native complex braiding, associator and unitors have exactly the required signed swap, sign-free reassociation and coefficient-multiplication formulas on the specified pure sections.",
    "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-pc-flat-sheaf-modules",
-    "lem-pc-kflat-closure",
-    "def-pc-kflat-complex",
-    "lem-sfb-total-tensor-homotopy"
+    "lem-sf-ringed-tensor-complex-constraints"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A2 (lemma-tensor-product-K-flat); Section 06YL, bounded-flat-K-flat and tensor construction"
-   }
+   "elementary": false
   },
   {
-   "text": "Use the equivalence $W^{-1}\\mathcal P\\simeq D(\\mathcal O)$ and the bifunctor comparison $QT(P,N)\\cong QP\\otimes^{\\mathbf L}QN$ of [lem-weil-pbc-site-derived-tensor-descent]. Its natural-transformation extension clause descends the swap of step 2, uniquely, to $\\sigma$. It descends the unitors as well (fix one factor to the unit). For the associator use this clause successively in the variables of the two iterated tensor bifunctors: for a third representative $R$, the comparison for $(T(P,N),R)$ is available because step 3 puts $T(P,N)$ in $\\mathcal P$. Extend first in two variables, then in the remaining variable. Naturality in the remaining variable holds because its two sides agree on representatives and extension is unique. Equivalently this is the localization universal property of [def-weil-abstract-derived-category] applied one variable at a time. Descend the inverse constraints by the same procedure; their inverse identities follow by uniqueness. This constructs the required natural associator, unitors and symmetry on the stated tensor bifunctor.",
+   "text": "The native inverse tensorator coherence identities transport those constraints to the derived category. Equality of the simultaneous comparison identifies its two-K-flat restriction with the chosen tensor model. Package the naturality, unit and constraint squares as RingedDerivedTensorCoherence. The existing native symmetric category supplies involutivity and both hexagons.",
    "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-weil-abstract-derived-category"
+    "lem-sf-ringed-derived-native-tensor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0FPT (lemma-symmetric-monoidal-derived), omitted descent expanded using Tags 06YS, 06YU and 0G7D"
-   }
-  },
-  {
-   "text": "The coherence equations can be checked on K-flat representatives: the localization equivalence makes every tuple of objects isomorphic to such a tuple, and all the constraints are natural. Pentagon and triangle are the images of the identities in [lem-sfb-total-tensor-homotopy]. The square of the symmetry is the image of the square computed in step 2. For the displayed hexagon, take homogeneous $x\\in P^p,y\\in N^q,z\\in R^r$ in $T(T(P,N),R)$. The left side sends $(x\\otimes y)\\otimes z$ to $(-1)^{p(q+r)}y\\otimes(z\\otimes x)$; the right side gives $(-1)^{pq+pr}y\\otimes(z\\otimes x)$, the same element. The inverse hexagon is checked by moving $z$ past $y,x$, with exponent $r(p+q)=rp+rq$. Swapping past the degree-zero unit has sign one. Equality on local pure-tensor summands gives equality of chain maps as in step 2, hence equality after localization. These are exactly the monoidal axioms of [def-sfb-monoidal-category] and the asserted symmetry identities.",
-   "uses": [
-    "lem-sfb-total-tensor-homotopy",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-sheaf-tensor-product",
-    "def-sfb-monoidal-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0FPQ and 0FPT, coherence verifications; More on Algebra section-sign-rules"
-   }
-  },
-  {
-   "text": "Check also the one-K-flat representative description in the statement. For a quasi-isomorphism $a:X\\to Y$, [lem-pur-quasi-iso-cone-acyclic] says $C(a)$ is acyclic. The formulas of [def-weil-abstract-derived-category, def-pc-tensor-complex-sheaves] identify $T(C(a),P)$ with $C(T(a,1_P))$: on $Y^i\\otimes P^j$ and $X^{i+1}\\otimes P^j$ use the identity after reindexing; the differential on the shifted $X$ summand is $-d_X\\otimes1+(-1)^i1\\otimes d_P$, the cone differential. If $P$ is K-flat this cone is acyclic, so tensoring with $P$ preserves every quasi-isomorphism. Step 2 gives the other tensor order. If $a$ is a quasi-isomorphism between K-flat complexes, its cone is also K-flat by [lem-pc-kflat-closure]; [lem-pur-acyclic-kflat-tensor-arbitrary] makes its tensor with any complex acyclic. Thus changing either representative in a tensor with one K-flat factor gives an invertible localized comparison. Resolve the arbitrary factor and, if needed, resolve the K-flat factor by [lem-pc-kflat-resolution]. The resulting two-flat-term model is the model in step 4. This proves agreement with the tensor specified in the statement, including for K-flat factors without flat terms.",
-   "uses": [
-    "lem-pur-quasi-iso-cone-acyclic",
-    "def-weil-abstract-derived-category",
-    "def-pc-tensor-complex-sheaves",
-    "def-pc-kflat-complex",
-    "lem-pc-kflat-closure",
-    "lem-pur-acyclic-kflat-tensor-arbitrary",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YP (lemma-K-flat-quasi-isomorphism), 06YT (lemma-derived-tor-quasi-isomorphism-other-side); Derived Categories Tag 05RT (lemma-acyclic)"
-   }
-  },
-  {
-   "text": "For the closed structure, represent $K,L$ by K-flat flat-term complexes $A,P$, using [lem-pc-kflat-resolution], and $M$ by a K-injective complex $I$, using [prop-pur-kinjective-resolutions-exist]. By [def-pur-derived-internal-hom], $H=\\mathcal Hom^\\bullet(P,I)$ represents $R\\mathcal Hom(L,M)$. It is K-injective by [lem-pur-hom-kflat-into-kinjective]. Consequently [lem-weil-pbc-kinjective-hom-derived] computes morphisms into both $QH$ and $QI$ by homotopy classes of chain maps. These hypotheses require only a small ringed site, as assumed here; no boundedness, constructibility or enough projectives is used.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "prop-pur-kinjective-resolutions-exist",
-    "def-pur-derived-internal-hom",
-    "lem-pur-hom-kflat-into-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J9 (lemma-internal-hom), representative choices; Tag 0A96 (lemma-RHom-from-K-flat-into-K-injective); Derived Categories Tag 070I"
-   }
-  },
-  {
-   "text": "Apply [lem-sc-derived-hom-tensor-total] to $A,P,I$. It gives an isomorphism of sheaf complexes $\\mathcal Hom^\\bullet(A,\\mathcal Hom^\\bullet(P,I))\\cong\\mathcal Hom^\\bullet(T(A,P),I)$. Apply ordinary global sections termwise and take ordinary $H^0$. By [lem-pur-hom-complex-global-homotopy], the resulting bijection is $\\operatorname{Hom}_{K(\\mathcal A)}(A,H)\\cong\\operatorname{Hom}_{K(\\mathcal A)}(T(A,P),I)$. The K-injective comparison from step 7 and the tensor comparison [lem-weil-pbc-site-derived-tensor-descent] identify this with $\\operatorname{Hom}_{D(\\mathcal O)}(K,R\\mathcal Hom(L,M))\\cong\\operatorname{Hom}_{D(\\mathcal O)}(K\\otimes^{\\mathbf L}L,M)$. Invert the bijection to obtain the direction displayed in the statement. No identification of ordinary global sections with derived global sections is made.",
-   "uses": [
-    "lem-sc-derived-hom-tensor-total",
-    "lem-pur-hom-complex-global-homotopy",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-pur-derived-internal-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A90 (lemma-compose), equation 0A8Z (equation-global-cohomology-hom-complex); Tag 08J9"
-   }
-  },
-  {
-   "text": "Make its normalization explicit. By [def-pur-hom-complex] a degree-zero chain map $\\varphi:A\\to H$ is a family of degree-$p$ graded maps $\\varphi(x):P\\to I$. Under the sheaf adjunction [lem-pc-sheaf-modules-tensor-closed], its uncurrying on the $(p,q)$ summand is $v(x\\otimes y)=\\varphi(x)(y)\\in I^{p+q}$, with no additional sign. The chain-map equation for $\\varphi$ is $d_I\\varphi(x)-(-1)^p\\varphi(x)d_P=\\varphi(d_Ax)$, hence $d_Iv(x\\otimes y)=v(d_Ax\\otimes y)+(-1)^p v(x\\otimes d_Py)$. Conversely this equation for all $p,q$ gives the curried chain map. The same formula in degree $-1$ takes a homotopy to a homotopy, because its Hom differential is $d_Ih+hd$. Thus the bijection in step 8 is precisely ordinary evaluation uncurrying on homotopy classes, with the specified total-tensor sign convention.",
-   "uses": [
-    "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "lem-sc-derived-hom-tensor-total",
-    "lem-pur-hom-complex-global-homotopy"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A90, currying from the definitions of Hom complexes in Section 0A8X and tensor in Section 06YL"
-   }
-  },
-  {
-   "text": "For chain maps $a:A'\\to A$, $b:P'\\to P$, $c:I\\to I'$ (with $I,I'$ K-injective), the formula in step 9 gives $v'(x'\\otimes y')=c(\\varphi(a x')(b y'))$. This is both the uncurrying of $\\mathcal Hom(b,c)\\varphi a$ and the composite $c\\,v\\,T(a,b)$. The isomorphism [lem-sc-derived-hom-tensor-total] and the global homotopy identification [lem-pur-hom-complex-global-homotopy] are natural, so the equality holds on homotopy classes. Every derived morphism in $K$ and $L$ is obtained from maps between K-flat flat-term representatives and inverses of their quasi-isomorphisms by [lem-weil-pbc-site-derived-tensor-descent]. Naturality squares for these inverse maps follow by inverting the squares for the maps. Every derived morphism in $M$ is a homotopy class of a map between K-injective representatives by [lem-weil-pbc-kinjective-hom-derived], with such representatives existing by [prop-pur-kinjective-resolutions-exist]. The Hom functor is the descended one of [def-pur-derived-internal-hom]. Thus the bijection is natural in all three derived variables, contravariantly in $K,L$ and covariantly in $M$.",
-   "uses": [
-    "lem-sc-derived-hom-tensor-total",
-    "lem-pur-hom-complex-global-homotopy",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "prop-pur-kinjective-resolutions-exist",
-    "def-pur-derived-internal-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J9, functoriality; Sections 06YL and 08J7, localization in both tensor variables and the internal Hom"
-   }
-  },
-  {
-   "text": "For fixed $L$ the natural bijection is an adjunction $-\\otimes^{\\mathbf L}L\\dashv R\\mathcal Hom(L,-)$. Define $e_{L,M}$ to be the image of $1_{R\\mathcal Hom(L,M)}$ under the inverse transpose. Its chain model is evaluation: with $P,I,H$ as in step 7, choose a K-flat flat-term resolution $t:S\\to H$ by [lem-pc-kflat-resolution]. The identity of $QH$ is represented by $Qt$ after identifying $QS$ with $QH$. Step 9 sends $t$ to $T(S,P)\\to I$, $s\\otimes y\\mapsto t(s)(y)$, precisely resolved evaluation. Naturality in the first variable, established in step 10, applied to $u:K\\to R\\mathcal Hom(L,M)$ gives $\\operatorname{uncurry}(u)=e_{L,M}\\circ(u\\otimes1_L)$. This identifies the counit and proves the final formula. Together with steps 4 and 5 it proves every clause of the item.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "def-pur-derived-internal-hom",
-    "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J9, equation-internal-hom; ordinary evaluation uncurrying in Tag 0A90 (lemma-compose)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-sheaf-modules-tensor-closed",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-sfb-total-tensor-homotopy",
-  "def-pc-tensor-complex-sheaves",
-  "def-pur-sheaf-tensor-product",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "def-pc-flat-sheaf-modules",
-  "lem-pc-kflat-closure",
-  "def-pc-kflat-complex",
-  "def-weil-abstract-derived-category",
-  "def-sfb-monoidal-category",
-  "lem-pur-quasi-iso-cone-acyclic",
-  "lem-pur-acyclic-kflat-tensor-arbitrary",
-  "lem-pc-kflat-resolution",
-  "def-pur-derived-internal-hom",
-  "lem-pur-hom-kflat-into-kinjective",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-sc-derived-hom-tensor-total",
-  "lem-pur-hom-complex-global-homotopy",
-  "def-pur-hom-complex"
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "lem-sf-ringed-tensor-complex-constraints"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0FPQ and 0FPT (omitted coherence/descent proved here), and 08J9 with 0A90, 0A96, 0A8Z (the source's K-flat/K-injective adjunction argument)."
+  "place": "Tags 06YT and 0FPT via the existing native localization tensor, Tag 0FPQ for the pure-section formulas, and Tag 08J9 for the evaluation-normalized adjunction."
  },
  "mathlib_searches": [
   {
@@ -378,19 +225,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pc-sheaf-modules-tensor-closed",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-sfb-total-tensor-homotopy",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-pc-kflat-closure",
-  "lem-pur-quasi-iso-cone-acyclic",
-  "lem-pur-acyclic-kflat-tensor-arbitrary",
-  "lem-pc-kflat-resolution",
-  "lem-pur-hom-kflat-into-kinjective",
-  "lem-sc-derived-hom-tensor-total",
-  "lem-pur-hom-complex-global-homotopy"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -431,5 +266,15 @@
   "group": "Q94",
   "result": "pass",
   "note": "Every node clause matches the Lean: one-K-flat tensor comparison (tensorIso, agreeing with T.iso, natural for all chain maps), unit = coefficient ring in degree 0 (unitIso), sign-free associator, coefficient-multiplication unitors, (-1)^{pq} symmetry, SymmetricCategory hexagon in Mathlib order, closed adjunction with the recorded derivedInternalHomOfUniverses natural in K,L,M, counit = evaluation with uncurry_model. No extra assumptions; site and coefficient universes independent. Edge cases admitted: empty site, zero ring, char 2, degree 0, K-flat factors without flat terms, pro-etale sizes. Upstream DerivedCategory monoidal instance needs HasFunctorialFlatResolution and graded-tensor instances, so not usable; landed def-coef-ringed-tensor-hom-model reused, no duplicates. Item node changes only lean plus stmt_deps gaining that landed node (permitted, no cycle); statement verbatim; all 12 declarations listed. Source/blueprint docstrings everywhere; 11-step proof in the theorem docstring; single sorry; no hollow data. Report has both required sections. nt_compile --json: exit 0, no messages, 22.1 s / 12.1 s (<60 s), so the earlier export timeout is resolved."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y5",
+  "result": "pass",
+  "landing": "20261020T211903-L-3515264",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

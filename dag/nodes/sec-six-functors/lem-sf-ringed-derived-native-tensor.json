@@ -1,0 +1,206 @@
+{
+ "id": "lem-sf-ringed-derived-native-tensor",
+ "kind": "statement",
+ "title": "Native symmetric derived tensor and one-K-flat localization comparisons",
+ "statement": "Let C be a category in object universe c and morphism universe v, J a topology, and R a commutative-ring sheaf in max(c,v,u), with the stated additive sheafification hypotheses. In any chosen derived-category universe w, the usual native localization tensor on the unbounded module-sheaf derived category is symmetric monoidal. The canonical lax tensorator of Q is invertible whenever either complex is K-flat in the acyclic-tensor sense. Its inverses give a natural comparison Q(Tot(P tensor L)) ≅ Q(P) tensor Q(L), agreeing with a simultaneous K-flat comparison. The unit comparison is invertible. These comparisons preserve the native complex braiding, associator and both unitors.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YT and 0FPT; generic monoidal localization and the usual Koszul signs."
+ },
+ "stmt_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "def-pc-kflat-complex",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing sheaf localization tensor and its symmetric structure. The independent-universe tensor-Hom adjunction implies colimit preservation in each variable; take countable colimits to totalize unbounded complexes and descend to homotopy classes.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-sfb-total-tensor-homotopy"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Koszul braiding on a (p,q) summand is (-1)^(pq) times the sheaf braiding. Applying it twice gives (-1)^(pq+qp)=1. Naturality extends this symmetry through the homotopy quotient.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Functorial flat resolutions give the generic derived monoidal localization. Equality of its braiding and inverse-braiding counits follows from symmetry on homotopy classes, so uniqueness of the derived natural transformations gives involutivity. The existing derived braided construction supplies the two hexagons.",
+   "uses": [
+    "lem-sfb-derived-monoidal",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a complex satisfying the recorded acyclic-tensor condition, symmetry gives the corresponding condition on the other side. The categorical K-flat criterion therefore applies. The derived tensor counit is invertible if either argument is categorically K-flat. Transport this assertion through the natural isomorphism from the complex quotient followed by the homotopy localization to Q.",
+   "uses": [
+    "lem-sfb-derived-monoidal",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Invert the lax tensorator on allowed pairs. Its naturality gives naturality of the comparison, and its restriction to pairs of K-flat representatives gives the fixed simultaneous comparison. Invertibility of the unit map follows from that of the quotient and derived localization unit comparisons.",
+   "uses": [
+    "lem-sfb-derived-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The lax associativity, braidedness and unitality equations can be cancelled against the invertible tensorators and unit map. This yields exactly the representative symmetry, associator and unitor squares. These constructions are valid for the empty site and zero coefficient ring and impose no boundedness or degreewise-flatness hypothesis.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-sfb-total-tensor-homotopy",
+  "lem-sfb-derived-monoidal",
+  "lem-pc-kflat-resolution",
+  "def-pc-kflat-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YT and 0FPT; generic monoidal localization and the usual Koszul signs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Symmetric monoidal localization of K flat complexes and tensor Hom adjunction for derived categories",
+   "results": "msearch.py returned eight Tor and ordinary sheaf-monoidal candidates; none states the derived localization comparison or normalized derived adjunction. The adopted source library does contain the generic derived monoidal construction, which this delivery uses.",
+   "date": "2026-10-21",
+   "verdict": "partial match: source-library localization used"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"tensor\"",
+   "results": "No hits for the valid quoted-name query. Rejected identifier queries are not evidence of absence.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg derived adjunction/tensor/MonoidalClosed in lean/WeilConjectures/CategoryTheory, lean/WeilConjectures/Algebra/Homology and Mathlib/Algebra/Homology",
+   "results": "Generic derived monoidal, derived braided, homotopy monoidal and Koszul summand lemmas found and used. No independent-coefficient normalized derived tensor-Hom adjunction.",
+   "date": "2026-10-21",
+   "verdict": "generic construction reused"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived category of sheaves of modules is closed symmetric monoidal with localization tensor and the Koszul signs",
+   "results": "Eight results: ordinary sheaf monoidal/symmetric structures, cartesian closed sheaves, and monoidal localization (including LocalizedMonoidal and tensorBifunctor). These provide the general constructions reused by the adopted library, not the stated ringed derived comparison or its sectionwise/evaluation normalization.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; general localization construction reused"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal",
+  "date": "2026-10-21",
+  "group": "Y5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-etale-geometric-biduality",
+   "place": "Proof paragraph 4: the closed symmetric monoidal structure used to cancel the invertible twist and compare the biduality arrows. Native symmetric derived tensor and one-K-flat localization comparisons.",
+   "via": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sf-etale-twisted-bidual-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedDerivedTensorNative",
+  "file": "lean/Sheaf/Algebra/Homology/RingedDerivedTensorNative.lean",
+  "declaration": "CategoryTheory.RingedDerivedNative.symmetry_square",
+  "statement": "theorem symmetry_square (P Q : CochainComplex (Modules.{c, v, u} J R) ℤ)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P)\n    (hQ : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) Q) :\n    (tensorIso.{c, v, u, w} J R P Q (Or.inl hP)).hom ≫\n        (β_ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)).hom =\n      DerivedCategory.Q.map (β_ P Q).hom ≫\n        (tensorIso.{c, v, u, w} J R Q P (Or.inl hQ)).hom",
+  "branch": "sheaf-dag",
+  "by": "Y5",
+  "date": "2026-10-21",
+  "declarations": [
+   "CategoryTheory.RingedDerivedNative.localizedSymmetric",
+   "CategoryTheory.RingedDerivedNative.complex_symmetry",
+   "CategoryTheory.RingedDerivedNative.inverse_naturality",
+   "CategoryTheory.RingedDerivedNative.inverse_associativity",
+   "CategoryTheory.RingedDerivedNative.inverse_leftUnitor",
+   "CategoryTheory.RingedDerivedNative.inverse_rightUnitor",
+   "CategoryTheory.RingedDerivedNative.inverse_associativity_tensor",
+   "CategoryTheory.RingedDerivedNative.inverse_leftUnitor_tensor",
+   "CategoryTheory.RingedDerivedNative.inverse_rightUnitor_tensor",
+   "CategoryTheory.RingedDerivedNative.inverse_braiding",
+   "CategoryTheory.RingedDerivedNative.laxBraidedOfIso",
+   "CategoryTheory.RingedDerivedNative.homotopySymmetric",
+   "CategoryTheory.RingedDerivedNative.kFlat_of_acyclic",
+   "CategoryTheory.RingedDerivedNative.quotientLaxBraided",
+   "CategoryTheory.RingedDerivedNative.localization_isIso_mu",
+   "CategoryTheory.RingedDerivedNative.localization_isIso_ε",
+   "CategoryTheory.RingedDerivedNative.derivedSymmetric",
+   "CategoryTheory.RingedDerivedNative.localizationLaxBraided",
+   "CategoryTheory.RingedDerivedNative.Modules",
+   "CategoryTheory.RingedDerivedNative.monoidal",
+   "CategoryTheory.RingedDerivedNative.lax",
+   "CategoryTheory.RingedDerivedNative.totalTensor_eq",
+   "CategoryTheory.RingedDerivedNative.kFlat",
+   "CategoryTheory.RingedDerivedNative.isIso_mu",
+   "CategoryTheory.RingedDerivedNative.tensorIso",
+   "CategoryTheory.RingedDerivedNative.tensorIso_hom",
+   "CategoryTheory.RingedDerivedNative.tensorIso_naturality",
+   "CategoryTheory.RingedDerivedNative.comparison",
+   "CategoryTheory.RingedDerivedNative.comparison_app",
+   "CategoryTheory.RingedDerivedNative.symmetric",
+   "CategoryTheory.RingedDerivedNative.laxBraided",
+   "CategoryTheory.RingedDerivedNative.symmetry_square",
+   "CategoryTheory.RingedDerivedNative.associator_square",
+   "CategoryTheory.RingedDerivedNative.isIso_ε",
+   "CategoryTheory.RingedDerivedNative.unitIso",
+   "CategoryTheory.RingedDerivedNative.unitIso_inv",
+   "CategoryTheory.RingedDerivedNative.leftUnitor_square",
+   "CategoryTheory.RingedDerivedNative.rightUnitor_square"
+  ]
+ },
+ "split_report": {
+  "blueprint": "The ancestor is thm-weil-etale-geometric-biduality, proof paragraph 4, through lem-sf-etale-twisted-bidual-transport and the parent closed symmetric monoidal result. This node supplies one part of that ambient categorical structure; it does not replace the unit biduality argument.",
+  "proof": "The numbered proof records the native localization argument and/or the indicated source lemma. See report.md for the exact Lean holes and the distinction between proved localization and remaining normalized closedness/section formulas.",
+  "mathlib": "Three search kinds recorded above; the generic adopted-source localization is reused. No claim of absence is based on an identifier pattern rejected by the search service."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-sfb-total-tensor-homotopy",
+  "lem-sfb-derived-monoidal",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y5",
+  "result": "pass",
+  "landing": "20261020T211903-L-3515264",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y5",
+  "result": "pass",
+  "landing": "20261020T211903-L-3515264",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,140 @@
+{
+ "id": "lem-sf-ringed-tensor-complex-constraints",
+ "kind": "statement",
+ "title": "Pure-section formulas for native complex tensor constraints",
+ "statement": "Let C be a category with object universe c and morphism universe v, J a Grothendieck topology on C, and R a commutative-ring sheaf in max(c,v,u). Assume additive sheafification and the locally bijective characterization of its local equivalences at that universe. Give R-module sheaves with sections in max(c,v,u) their canonical sheafification tensor [def-pur-sheaf-tensor-product], and give their unbounded cochain complexes the signed direct-sum total tensor. Let P,Q,N be arbitrary such complexes. On coefficientTensorGenerator(x,y) [def-coef-ringed-tensor-hom-model] in total degree p+q, the native complex braiding is (-1)^(pq) times coefficientTensorGenerator(y,x). The native associator sends the nested pure generator (x tensor y) tensor z to x tensor (y tensor z) in every compatible triple degree. The native left and right unitors send the degree-zero ring section a tensored with a section x, in either order, to a*x. These four formulas use the actual tensor-sheafification comparison and single-complex degree-zero comparison; no K-flatness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPQ, including its unit and coherence hints; More on Algebra, sign rules."
+ },
+ "stmt_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "The presheaf-to-sheaf functor is braided strong monoidal. Its right-adjoint forgetful functor has lax tensorator equal to the sheafification unit followed by the inverse tensor-sheafification comparison; this is the pairing in coefficientTensorGenerator. The triangle identity makes its unit map the identity on the ring presheaf.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the lax braidedness equation to the presheaf pure tensor x tensor y, then the formula for complex braiding on a (p,q) summand. The result is (-1)^(pq) times the generator with factors reversed.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply lax associativity to (x tensor y) tensor z and the total associator formula on a (p,q,r) summand. Naturality moves the inner summand inclusions through the pairing. The result is the nested generator x tensor (y tensor z), without any interchange or sign.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the complex unitor inverse formula on its sole degree-zero unit summand. The single-complex comparison carries a to the indicated degree-zero section. Lax unitality of the forgetful functor reduces both unitors to the ordinary module unitors, which send a tensor x and x tensor a to a*x. Apply the inverse identities to obtain the formulas for their forward maps. No elementwise generation claim for global sections after sheafification is required; these are identities on the specified pure sections only.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPQ, including its unit and coherence hints; More on Algebra, sign rules."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Koszul braiding and associator of complexes of sheaves act on pure tensor sections",
+   "results": "Eight candidates include HomologicalComplex.associator and sheaf braided structures. They supply the general maps, not the stated formulas on coefficientTensorGenerator. The existing source-library summand formulas are used in the proof plan.",
+   "date": "2026-10-21",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"braiding\", \"homological\"",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ι_braiding_hom|homComplex_tensorTotal_iso; rg pairing/braiding/associator in module-sheaf tensor files",
+   "results": "msearch grep returned zero Mathlib hits. Local source search found the Koszul summand formula, triple-summand associator formula and Mathlib complex unitor inverse formulas. No formula on coefficientTensorGenerator.",
+   "date": "2026-10-21",
+   "verdict": "general summand lemmas found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived category of sheaves of modules is closed symmetric monoidal with localization tensor and the Koszul signs",
+   "results": "Eight results: ordinary sheaf monoidal/symmetric structures, cartesian closed sheaves, and monoidal localization (including LocalizedMonoidal and tensorBifunctor). These provide the general constructions reused by the adopted library, not the stated ringed derived comparison or its sectionwise/evaluation normalization.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; general localization construction reused"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal",
+  "date": "2026-10-21",
+  "group": "Y5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-etale-geometric-biduality",
+   "place": "Proof paragraph 4: the closed symmetric monoidal structure used to cancel the invertible twist and compare the biduality arrows. Pure-section formulas for native complex tensor constraints.",
+   "via": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sf-etale-twisted-bidual-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedTensorComplexConstraints",
+  "file": "lean/Sheaf/Algebra/Homology/RingedTensorComplexConstraints.lean",
+  "declaration": "CategoryTheory.RingedDerivedNative.complexConstraints",
+  "statement": "theorem complexConstraints : ComplexConstraints.{c, v, u} J R",
+  "branch": "sheaf-dag",
+  "by": "Y5",
+  "date": "2026-10-21",
+  "declarations": [
+   "CategoryTheory.RingedDerivedNative.symmetryPure",
+   "CategoryTheory.RingedDerivedNative.associatorPure",
+   "CategoryTheory.RingedDerivedNative.leftUnitorPure",
+   "CategoryTheory.RingedDerivedNative.rightUnitorPure",
+   "CategoryTheory.RingedDerivedNative.ComplexConstraints",
+   "CategoryTheory.RingedDerivedNative.complexConstraints"
+  ]
+ },
+ "split_report": {
+  "blueprint": "The ancestor is thm-weil-etale-geometric-biduality, proof paragraph 4, through lem-sf-etale-twisted-bidual-transport and the parent closed symmetric monoidal result. This node supplies one part of that ambient categorical structure; it does not replace the unit biduality argument.",
+  "proof": "The numbered proof records the native localization argument and/or the indicated source lemma. See report.md for the exact Lean holes and the distinction between proved localization and remaining normalized closedness/section formulas.",
+  "mathlib": "Three search kinds recorded above; the generic adopted-source localization is reused. No claim of absence is based on an identifier pattern rejected by the search service."
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y5",
+  "result": "pass",
+  "landing": "20261020T211903-L-3515264",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y5",
+  "result": "pass",
+  "landing": "20261020T211903-L-3515264",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
