@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
-import Sheaf.AlgebraicGeometry.DeterminantDualPairingFunctional
+import WeilConjectures.AlgebraicGeometry.DeterminantDualPairingFunctional
 import Sheaf.AlgebraicGeometry.ExteriorSheafComparison
 
 /-! # Local alternating determinant functionals
@@ -50,7 +50,21 @@ theorem exterior_dual_pairing_local (X : Scheme.{u}) (M : X.Modules) (n : ℕ)
           (Matrix.of fun i j ↦ (show X.presheaf.obj (op V) from
             (φ j).app (op (Over.mk g)) (a i))).det := by
   classical
-  choose q hq huniq using exterior_dual_pairing_functional X M n U
+  choose q₀ hq₀ huniq₀ using exterior_dual_pairing_functional X M n U
+  let e := Scheme.Modules.exteriorSheafIsoExteriorPower M n
+  let F := PresheafOfModules.restrictOver X.sheaf.obj U
+  let q (φ : Fin n → (Scheme.Modules.dual M).val.obj (op U)) :
+      (Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n)).val.obj (op U) :=
+    F.map e.hom.val ≫ q₀ φ
+  have hq (φ : Fin n → (Scheme.Modules.dual M).val.obj (op U))
+      (V : X.Opens) (g : V ⟶ U) (a : Fin n → M.val.obj (op V)) :
+      (q φ).app (op (Over.mk g)) (Scheme.Modules.exteriorSheafSection M n V a) =
+        (Matrix.of fun i j ↦ (show X.presheaf.obj (op V) from
+          (φ j).app (op (Over.mk g)) (a i))).det := by
+    change (q₀ φ).app (op (Over.mk g))
+        (e.hom.val.app (op V) (Scheme.Modules.exteriorSheafSection M n V a)) = _
+    rw [Scheme.Modules.exteriorSheafIsoExteriorPower_hom_wedge]
+    exact hq₀ φ V g a
   let A : ((Scheme.Modules.dual M).val.obj (op U)) [⋀^Fin n]→ₗ[X.presheaf.obj (op U)]
       ((Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n)).val.obj (op U)) :=
     { toFun := q

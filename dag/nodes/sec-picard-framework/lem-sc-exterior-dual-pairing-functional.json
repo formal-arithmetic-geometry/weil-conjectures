@@ -30,13 +30,12 @@
    "elementary": false
   },
   {
-   "text": "Restrict the exterior sheafification unit to Over U. Its underlying abelian-presheaf map is toSheafify, hence locally bijective; restriction preserves local injectivity and local surjectivity because Over.forget is cocontinuous. The restricted structure sheaf is a sheaf because Over.forget is continuous. Apply PresheafOfModules.homEquivOfIsLocallyBijective to extend the determinant presheaf morphism. Evaluation of the inverse law on pure wedges gives the determinant formula. Uniqueness follows from exteriorSheaf_dual_ext applied to the two determinant formulas. The same argument covers n = 0, empty opens and zero rings. Here the upstream extensionality theorem is transported through the canonical wedge-preserving isomorphism exteriorSheafIsoExteriorPower, as exteriorSheaf_dual_ext_compat; this preserves the original exteriorSheaf statement.",
+   "text": "Restrict the exterior sheafification unit to Over U. Its underlying abelian-presheaf map is toSheafify, hence locally bijective; restriction preserves local injectivity and local surjectivity because Over.forget is cocontinuous. The restricted structure sheaf is a sheaf because Over.forget is continuous. Apply PresheafOfModules.homEquivOfIsLocallyBijective to extend the determinant presheaf morphism. Evaluation of the inverse law on pure wedges gives the determinant formula. Uniqueness follows from the upstream exteriorSheaf_dual_ext applied to the two determinant formulas, in the exteriorPower encoding. The same argument covers n = 0, empty opens and zero rings.",
    "uses": [
     "lem-pc-sites-module-sheafification-interface",
     "def-sc-sheaf-exterior-power",
     "def-pur-sheaf-hom",
-    "lem-sc-exterior-sheaf-dual-ext",
-    "lem-sc-exterior-sheaf-comparison"
+    "lem-sc-exterior-sheaf-dual-ext"
    ],
    "elementary": false
   }
@@ -46,13 +45,12 @@
   "def-sc-sheaf-exterior-power",
   "lem-pc-sites-module-sheafification-interface",
   "lem-sc-exterior-power-dual-pairing",
-  "lem-sc-exterior-sheaf-comparison",
   "lem-sc-exterior-sheaf-dual-ext"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/duality.tex; Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean",
-  "place": "Tags 03CY and 0BRT; implemented by U1 using the canonical sectionwise determinant pairing, restriction of locally bijective maps and the module Hom equivalence. C6 (2026-10-20): use the upstream dual extensionality theorem through the proved exterior-sheaf comparison."
+  "place": "Tags 03CY and 0BRT; the adopted upstream proof uses the sectionwise determinant pairing, restriction of locally bijective maps and the module Hom equivalence, with upstream exteriorSheaf_dual_ext for uniqueness. T1, 2026-10-20: retire the Sheaf duplicate and attach the node to this unchanged upstream declaration."
  },
  "mathlib_searches": [
   {
@@ -105,14 +103,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.DeterminantDualPairingFunctional",
-  "file": "lean/Sheaf/AlgebraicGeometry/DeterminantDualPairingFunctional.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.DeterminantDualPairingFunctional",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DeterminantDualPairingFunctional.lean",
   "declaration": "AlgebraicGeometry.exterior_dual_pairing_functional",
-  "statement": "theorem exterior_dual_pairing_functional (X : Scheme.{u}) (M : X.Modules) (n : ℕ)\n    (U : X.Opens) (φ : Fin n → (Scheme.Modules.dual M).val.obj (op U)) :\n    ∃! q : (Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n)).val.obj (op U),\n      ∀ (V : X.Opens) (g : V ⟶ U) (a : Fin n → M.val.obj (op V)),\n        q.app (op (Over.mk g)) (Scheme.Modules.exteriorSheafSection M n V a) =\n          (Matrix.of fun i j ↦ (show X.presheaf.obj (op V) from\n            (φ j).app (op (Over.mk g)) (a i))).det",
+  "statement": "theorem exterior_dual_pairing_functional (X : Scheme.{u}) (M : X.Modules) (n : ℕ)\n    (U : X.Opens) (φ : Fin n → (Scheme.Modules.dual M).val.obj (op U)) :\n    ∃! q : (Scheme.Modules.dual (Scheme.Modules.exteriorPower M n)).val.obj (op U),\n      ∀ (V : X.Opens) (g : V ⟶ U) (a : Fin n → M.val.obj (op V)),\n        q.app (op (Over.mk g)) (wedge (M := M) (r := n) (U := V) a) =\n          (Matrix.of fun i j ↦ (show X.presheaf.obj (op V) from\n            (φ j).app (op (Over.mk g)) (a i))).det",
   "branch": "sheaf-dag",
-  "by": "N1",
-  "date": "2026-10-12"
+  "by": "T1",
+  "date": "2026-10-20",
+  "note": "T1 retirement: use the unchanged upstream theorem on exteriorPower. The sole Sheaf consumer transports its functional by precomposition with exteriorSheafIsoExteriorPower.hom; the proved wedge formula identifies evaluations."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -127,12 +126,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-288ff",
-  "group": "C6",
+  "reviewer": "C-afe7e",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261020T144238-L-2258197",
+  "landing": "20261020T154939-L-3175302",
   "kind": "interface",
-  "note": "independent cc review: retired Sheaf exteriorSheaf_dual_ext vs upstream WeilConjectures twin (exteriorPower encoding) via proved ExteriorSheafComparison iso + exteriorSheaf_dual_ext_compat (old statement byte-identical); 3 unclaimed importers adapted only at import + 6 call sites, all compile clean; node lean record = upstream signature verbatim"
+  "note": "independent cc review: retired Sheaf exterior_dual_pairing_functional (exteriorSheaf) vs upstream WeilConjectures twin (exteriorPower); node lean record = upstream signature verbatim; sole consumer DeterminantDualAlternatingFamily adapted by precomposition with exteriorSheafIsoExteriorPower.hom, compiles 4.0 s, axioms clean; import-only counterfactual fails at 56:15 (forced)"
  },
  "lean_audit": {
   "master": {
