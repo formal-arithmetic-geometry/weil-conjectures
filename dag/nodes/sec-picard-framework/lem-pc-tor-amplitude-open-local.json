@@ -114,13 +114,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.TorAmplitudeOpenLocal",
-  "file": "lean/Sheaf/AlgebraicGeometry/TorAmplitudeOpenLocal.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.TorAmplitudeOpenLocal",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/TorAmplitudeOpenLocal.lean",
   "declaration": "AlgebraicGeometry.torAmplitude_of_open_neighbourhoods",
   "statement": "theorem torAmplitude_of_open_neighbourhoods (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    (E : schemeDerivedCategory X) (a b : ℤ) (hab : a ≤ b)\n    (h : ∀ x : X, ∃ U : X.Opens, x ∈ U ∧\n      ∀ (G : SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (i : ℤ),\n        i < a ∨ b < i → schemeDerivedTensorCohomologyVanishes U.toScheme\n          ((derivedPullback U.ι).obj E) G i) :\n    ∀ (G : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (i : ℤ),\n      i < a ∨ b < i → schemeDerivedTensorCohomologyVanishes X E G i",
   "branch": "sheaf-dag",
   "by": "U3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "Q4 rework: the unchanged public statement and complete proof already exist in the upstream module. The restored Sheaf path publicly re-exports that module, avoiding duplicate derived-pullback, tensor-vanishing and theorem declarations. The proof dependencies and the quarantined archive are preserved. The proof-only import all preserves access to the existing private K-flat and open-restriction helpers for import-all consumers, using the current IsKFlatTensor name."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -133,14 +134,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-c9be7",
-  "group": "P3",
+  "reviewer": "C-6ebb1",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261012T223412-L-1639169",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered module, node, report, and change record matched against the stage-3 brief; compilation and direct-importer checks passed."
+  "landing": "20261020T211817-L-3504910",
+  "kind": "proof",
+  "note": "independent cc review: delivered re-export shim Sheaf.AlgebraicGeometry.TorAmplitudeOpenLocal and node lean record vs upstream WeilConjectures.AlgebraicGeometry.TorAmplitudeOpenLocal (statement verbatim, private helpers reachable via import all probe, axioms clean), archived quarantine module and change record users"
  },
  "lean_audit": {
   "master": {
