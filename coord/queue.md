@@ -1,6 +1,6 @@
 # Work queue
 
-77 items; claim with `tools/claim.py next <group> [--stage N]`.
+92 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (26 clusters, 2117 modules)
 
@@ -37,24 +37,37 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 32, stage 3 152 items.
 
-## Stage 1: nodes to split (1)
+## Stage 1: nodes to split (0)
 
-| node | distance to a target | Lean state on the done branch |
-|---|---|---|
-| `new-proetale-derived-module-pullback-monoidal` | - | none |
 
 ## Stage 2: nodes to state (0)
 
 
 Not open yet: 302 nodes that below a finished node, not needed, 84 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (2)
+## Stage 3: modules to prove (18)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
 | module | distance to a target | sorry | kind | route / steps to the nearest route sorry |
 |---|---|---|---|---|
+| `Sheaf.Algebra.Homology.RingedSiteKFlatStalkCriterion` | - | 1 | proof | 1 |
+| `Sheaf.AlgebraicGeometry.ProEtaleEnoughPoints` | - | 1 | proof | 1 |
+| `Sheaf.Algebra.Homology.UniversalAcyclicModuleKFlat` | - | 1 | proof | 2 |
+| `Sheaf.AlgebraicGeometry.ProEtaleAffineSubsiteEquivalence` | - | 1 | proof | 2 |
+| `Sheaf.CategoryTheory.Sites.FinitarySliceEnoughPoints` | - | 1 | proof | 2 |
+| `Sheaf.CategoryTheory.Sites.FpStalkRealization` | - | 1 | proof | 2 |
+| `Sheaf.CategoryTheory.Sites.RingedSitePoint` | - | 1 | proof | 2 |
+| `Sheaf.CategoryTheory.Sites.ToposLocalizationSitePresentation` | - | 1 | proof | 2 |
+| `Sheaf.Algebra.ModuleDirectedColimitFinitePresentation` | - | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.VectorBundleZeroSection` | - | 3 | proof | 3 |
+| `Sheaf.Paper.FinitarySiteEnoughPoints` | - | 1 | proof | 3 |
+| `Sheaf.Paper.SitePointReconstructionSets` | - | 1 | proof | 3 |
+| `Sheaf.TraceFormula.SieveSheavesCoveringSite` | - | 1 | proof | 3 |
+| `Sheaf.CategoryTheory.PointSystemRefineAll` | - | 1 | proof | 4 |
+| `Sheaf.CategoryTheory.Sites.PointFamilyConservative` | - | 1 | proof | 4 |
+| `Sheaf.TraceFormula.InverseSystemSitePoint` | - | 1 | proof | 4 |
+| `Sheaf.Paper.PointSystemRefine` | - | 1 | proof | 5 |
 | `Sheaf.Paper.FiniteFieldDerivedTensorSummand` | - | 1 | proof | 6 |
 
 ## Stage 3: held for an open upstream PR (19)
