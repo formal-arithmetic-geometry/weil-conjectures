@@ -26,73 +26,48 @@
  ],
  "proof": [
   {
-   "text": "Put $L=f^{-1}$ and $R=f_*$. By the geometric-morphism definition, $L\\dashv R$ and $L$ preserves finite limits. The right-adjoint limit theorem gives preservation of finite products by $R$. Identify abelian sheaves with abelian group objects of the set-sheaf categories using the algebraic-structures equivalence. Apply the abelian-group-object adjunction theorem: it supplies $L_{\\rm Ab}\\dashv R_{\\rm Ab}$, with underlying functors $L,R$ and operations obtained by applying them to addition, zero and negation through the product and terminal comparison isomorphisms. This is precisely the induced inverse image in the statement, and uses no presentation of $f$ by a functor of sites.",
+   "text": "Give the inverse image L its Cartesian braided structure from finite-limit preservation. Regard each abelian sheaf as an internal commutative group, apply Functor.mapCommGrp, and evaluate its multiplication, unit and inverse sectionwise. Internal group diagrams give additive group laws and naturality makes restriction maps additive. Recognize the resulting presheaf as a sheaf after pulling back to a small model of the essentially small site; the underlying sheaf is unchanged. The finite-product and terminal comparison identities give the generalized-section addition and zero laws. This constructs the required abelian presentation with independent site and value universes.",
    "uses": [
     "def-trf-geometric-morphism",
-    "lem-weil-pbc-right-adjoint-preserves-limits",
-    "lem-weil-pbc-sheaf-algebraic-structures-objects",
-    "lem-weil-pbc-adjunction-lifts-abelian-group-objects"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, proof of (2); Tag 0038, categories-lemma-adjoint-exact for the right adjoint"
-   }
-  },
-  {
-   "text": "Finite limits of abelian sheaves are sectionwise limits, by the sheafification-exactness node (1). Their underlying sets are the compatible tuples in the product of the section groups, hence are the sectionwise limits of the underlying sets; the set-sheaf limit theorem identifies these with limits of set sheaves. Apply $L$ to a finite limiting cone of abelian sheaves. Its underlying cone is limiting because $L$ preserves finite limits. For any cone of abelian sheaves to this image diagram, the unique underlying set-sheaf factorization preserves addition: composing the two proposed addition maps with each limiting projection gives the same map, since the cone maps and projections are additive. Joint uniqueness in the limit proves equality. The same argument for zero and negation proves that the factorization is a morphism of abelian sheaves. Its uniqueness follows from underlying uniqueness. Thus $L_{\\rm Ab}$ preserves finite limits.",
-   "uses": [
-    "lem-weil-pbc-sheafification-exact",
-    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
-    "lem-weil-pbc-sheaf-algebraic-structures-objects",
-    "def-trf-geometric-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 04JC, lemma-flat-pullback-exact, first paragraph of proof, expanded via Sites Tag 00YV and sectionwise limits"
-   }
-  },
-  {
-   "text": "The lifted adjunction of step 1 and the left-adjoint colimit theorem show that $L_{\\rm Ab}$ preserves every existing small colimit, in particular finite colimits and cokernels. Together with step 2, this proves exactness in the finite-limit/finite-colimit sense. Abelian sheaves form abelian categories, so this also preserves exact sequences: the image of a map $a$ is $\\ker(\\operatorname{coker}a)$, both operations are preserved, and the equality of that image with the next kernel is preserved. Additivity follows from the transported addition: for $a,b:M\\to N$, the identity $a+b=+_N\\circ\\langle a,b\\rangle$ is carried by $L$ to the same identity with $L_{\\rm Ab}a,L_{\\rm Ab}b$.",
-   "uses": [
     "lem-weil-pbc-adjunction-lifts-abelian-group-objects",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "lem-weil-pbc-site-sheaves-enough-injectives",
-    "def-galois-exact-functor"
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 04JC, lemma-flat-pullback-exact, first assertion; Sites Tag 00YV(2); Categories Tag 0038, lemma-adjoint-exact"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $B=\\mathcal B$ and $M$ be a $B$-module sheaf. Its scalar action is a map $\\mu:B\\times M\\to M$ of set sheaves by the naturality required in the module definition. Give $LB$ its transported ring operations, and give $LM$ the action $L(\\mu)\\circ p_{B,M}^{-1}$, where $p_{B,M}:L(B\\times M)\\xrightarrow{\\sim}LB\\times LM$ is the product comparison. Apply $L$ to the diagrams for distributivity in both variables, associativity of the action and the unit law. After the canonical finite-product comparisons these are exactly the module-axiom diagrams for this action. The same argument for the linearity diagram of a module map shows that its image under $L$ is $LB$-linear; identities and composition follow from functoriality. This constructs the transported module functor $T$. Its underlying abelian sheaf has exactly the addition, zero and negation of $L_{\\rm Ab}M$, so, writing $V_B,V_{LB}$ for scalar forgetting, $V_{LB}T\\cong L_{\\rm Ab}V_B$ naturally, also on morphisms.",
+   "text": "For an exact functor G from an abelian category to source abelian sheaves, and an abelian-valued lift F with underlying set functor naturally isomorphic to G followed by L, the composite underlying functor preserves finite limits. Forgetting abelian sheaves preserves finite limits (sectionwise) and reflects isomorphisms, hence reflects these limits. Thus F preserves finite limits, in particular kernels and binary products. Preservation of binary products makes F additive. This applies to every presentation, without choosing an inverse-image right adjoint on abelian sheaves.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
     "def-trf-geometric-morphism",
-    "lem-weil-pbc-sheaf-algebraic-structures-objects",
-    "lem-weil-pbc-adjunction-lifts-abelian-group-objects"
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D2, lemma-pullback-module, statement and its two-line product-comparison proof; Sites Tag 00YV, ring-structure paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "Scalar forgetting preserves all small limits and colimits, by the module-sheaf forgetful theorem. It also reflects isomorphisms: the sectionwise inverse of a bijective linear map is linear, because if $v=\\alpha(u)$ then $\\alpha^{-1}(rv)=\\alpha^{-1}(\\alpha(ru))=ru$; inverses commute with restrictions by the inverse equations. For a finite module diagram $D$ with limit $P$, the canonical comparison $T(P)\\to\\lim T(D)$ becomes under $V_{LB}$ the isomorphism $L_{\\rm Ab}(\\lim V_BD)\\to\\lim L_{\\rm Ab}(V_BD)$ of step 2. Hence the module comparison is an isomorphism. For a finite colimit $Q$, the comparison $\\operatorname{colim}T(D)\\to T(Q)$ similarly becomes the isomorphism of step 3, and is itself an isomorphism. Thus $T$ preserves finite limits and finite colimits, including cokernels. By the natural identification in step 4 its effect on underlying abelian sheaves is exact as well. The module categories are abelian, and their forgetful functors preserve kernels and cokernels, so the image-as-kernel-of-cokernel argument of step 3 proves preservation of exact sequences of modules. This applies to the cokernel of any free-module relation map. Throughout the target ring is $LB=f^{-1}\\mathcal B$ itself.",
+   "text": "An epimorphism mapped by G remains an epimorphism and is locally surjective as a morphism of abelian sheaves. Its underlying set-sheaf map is locally surjective. The inverse-image local-family theorem applied to the singleton family shows that its image under the left adjoint L is locally surjective. Conjugating by the underlying natural isomorphism gives a locally surjective underlying map for F, hence an epimorphism. The faithful underlying functor reflects epimorphisms. Therefore F preserves epimorphisms and kernels. Mathlib Functor.preservesHomology_of_preservesEpis_and_kernels and Functor.preservesFiniteColimits_of_preservesHomology give finite-colimit preservation. Taking G to be the identity proves exactness for all abelian presentations.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "def-weil-sheaf-of-modules-category",
-    "def-galois-exact-functor"
+    "def-galois-exact-functor",
+    "lem-weil-pbc-inverse-image-local-families",
+    "lem-weil-pbc-site-sheaves-enough-injectives"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03DA and 03DB, lemma-abelian and lemma-limits-colimits, together with Tag 04JC, first assertion"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Express the ring sheaf B as an internal commutative ring by its sectionwise operations. Apply the finite-product ring transport construction and evaluate its operations on each section set to build the actual transported ring sheaf LB. The ring identities follow by evaluating the internal diagrams; its sheaf condition follows on a small model. Apply the explicit imageFunctor construction of geometric module transport to obtain the module functor and underlying natural isomorphism. The Cartesian lift and terminal comparison equations give ring addition, multiplication, zero, one, module addition, zero and scalar-action normalization for every test sheaf. Finally conjugate the underlying isomorphisms by the natural ULift.down/up isomorphisms to obtain AlgebraicInverseImageOfUniverses with coefficient and module universe w.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-finite-product-ring-functor",
+    "lem-weil-pbc-geometric-module-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any universe-explicit module presentation, remove the harmless ULifts from its moduleUnderlying isomorphism. Apply steps 2 and 3 with G the scalar-forgetting functor on source modules and F the presented module functor followed by scalar forgetting on the target. Scalar forgetting preserves finite limits and finite colimits by the module-sheaf forgetful theorem, so this underlying abelian-valued F is exact. The target scalar-forgetting functor also reflects isomorphisms, hence reflects the finite-limit and finite-colimit comparisons. The module inverse-image functor itself is therefore exact. This proves both universal module clauses and, with step 4, the existence clause. The transported ring remains the target ring throughout; no further scalar change occurs.",
+   "uses": [
+    "def-galois-exact-functor",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -100,18 +75,18 @@
   "def-trf-geometric-morphism",
   "def-weil-sheaf-of-modules-category",
   "lem-weil-pbc-adjunction-lifts-abelian-group-objects",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-finite-product-ring-functor",
+  "lem-weil-pbc-geometric-module-construction",
+  "lem-weil-pbc-inverse-image-local-families",
   "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-right-adjoint-preserves-limits",
-  "lem-weil-pbc-sheaf-algebraic-structures-objects",
   "lem-weil-pbc-sheafification-exact",
   "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
   "lem-weil-pbc-site-sheaves-enough-injectives"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 04JC, lemma-flat-pullback-exact, first assertion; the underlying algebraic-structure argument is Sites Tag 00YV, and transported module structure is Tag 03D2; module limits and colimits are Tags 03DA–03DB."
+  "place": "Tags 04JC, 03D2, 03DA and 03DB; Sites Tags 00YV and 00WL. B4 implements explicit Cartesian algebraic transport and sectionwise reconstruction, then proves exactness through finite limits and local surjectivity, using Mathlib homology preservation instead of lifting the full adjunction."
  },
  "mathlib_searches": [
   {
@@ -220,7 +195,6 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-sheaf-algebraic-structures-objects",
   "lem-weil-pbc-module-sheaves-colimits-forgetful"
  ],
  "reviewed": {
@@ -248,5 +222,15 @@
   "group": "Q29",
   "result": "pass",
   "note": "Statement field unchanged; only lean and stmt_deps changed, plus a new def node def-trf-abelian-inverse-image-presentation with real fields (functor, natural underlying iso with f.inverse, add/zero graph laws). Read against Stacks 04JC first assertion, 00YV(2) and 03D2. Since f.inverse preserves finite limits, every abelian presentation and every AlgebraicInverseImageOfUniverses (r=m=w) is forced to be the canonical transport, so the 'for all presentations' exactness clauses are true and no stronger than the node; the existence clauses prevent vacuity. No extra hypotheses: EssentiallySmall.{w} sites with independent universes, any CommRing sheaf B, no flatness. No duplicate found in Mathlib or the side Lean (ConstantLeftModuleInverseImageLift is constant-coefficient only, SitePullbackAbelianUnderlying needs a site functor, liftsGroupRingObjects is existence only). No cycle, the only sorry is the theorem proof, docstrings and blueprint tags present, lean.statement verbatim, report sections present. nt_compile.py --json on both files: rc 0, no errors or warnings; #print axioms shows sorryAx only from the theorem. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261020T151212-L-2646352",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

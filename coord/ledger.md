@@ -18494,3 +18494,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 23:10 L: batch 20261020T150635 dependency take-out
 - 15:12 L: merged deliver/A2/Sheaf.CategoryTheory.BraidedSheafTensorGenerators (stage 3; reviewer PASS; first push; landing 20261020T151210-L-2645917 (interface); batch 20261020T151206; modules 1; new nodes 0; change records: coord/changes/A2-braided-sheaf-tensor-generators-proof-scopes.md)
+- 15:12 L: merged deliver/B4/Sheaf.CategoryTheory.Sites.GeometricInverseImageExact (stage 3; reviewer PASS; after a return; landing 20261020T151212-L-2646352 (interface); batch 20261020T151206; modules 1; new nodes 0; change records: coord/changes/B4-geometric-inverse-image-exact-proof-support.md)
