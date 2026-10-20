@@ -18126,3 +18126,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:19 L: merged deliver/F5/Sheaf.CategoryTheory.DualizableJointlyConservativeLocality (stage 3; reviewer PASS; first push; landing 20261020T131955-L-1397126 (proof); batch 20261020T131932; modules 1; new nodes 0)
 - 13:19 L: merged deliver/F5/Sheaf.Paper.PurLisseMorphismRigidity (stage 3; reviewer PASS; first push; landing 20261020T131957-L-1397595 (interface); batch 20261020T131932; modules 1; new nodes 0; change records: coord/changes/purity-vanishing-at-component-let-bindings.md)
 - 13:20 L: merged deliver/F6/Sheaf.Paper.EtaleLisseFiltrationDevissage (stage 3; reviewer PASS; first push; landing 20261020T131959-L-1397984 (proof); batch 20261020T131932; modules 1; new nodes 0)
+- 13:20 L: merged deliver/F7/WeilConjectures.WeilSheaf.GrothendieckLefschetz (stage 3; reviewer PASS; first push; landing 20261020T132000-L-1398593 (proof); batch 20261020T131932; modules 1; new nodes 0)
