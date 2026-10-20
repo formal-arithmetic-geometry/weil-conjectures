@@ -115,19 +115,20 @@
    }
   },
   {
-   "text": "For the supplied resolutions $p:P\\to M$ and $p':P'\\to M$, take the finite category with three objects $0,1,2$ and only nonidentity arrows $0\\to2$, $1\\to2$. Its diagram of complexes is $P\\xrightarrow p M\\xleftarrow{p'}P'$. Apply the strict diagram replacement theorem on the given small ringed site. It supplies flat-term K-flat complexes $S_0,S_1,S_2$, arrows $a:S_0\\to S_2$, $b:S_1\\to S_2$, and quasi-isomorphisms $r:S_0\\to P$, $r':S_1\\to P'$, $q:S_2\\to M$, satisfying the actual chain equalities\n$$qa=pr,\\qquad qb=p'r'.$$\nOn every cohomology object, $H^j(q)H^j(a)=H^j(p)H^j(r)$; all three maps other than $H^j(a)$ are invertible, so $H^j(a)=H^j(q)^{-1}H^j(p)H^j(r)$ is invertible. Likewise $b$ is a quasi-isomorphism. All five sources $S_0,S_1,S_2,P,P'$ satisfy the model hypotheses of step 4.",
+   "text": "For the two quasi-isomorphisms p:P→M and p':P'→M, form their left fraction in the homotopy category. The calculus of fractions for quasi-isomorphisms gives a right fraction, represented by chain maps a:N→P and b:N→P' with a a quasi-isomorphism and ap homotopic to bp'. Homotopy invariance of cohomology and two-out-of-three imply b is a quasi-isomorphism. Apply the existing K-flat resolution theorem to N, obtaining q:S→N with S K-flat and flat terms. Convert its monoidal flatness to the site tensor flatness through the natural tensor comparison. Then qa:S→P and qb:S→P' are quasi-isomorphisms, and their composites with p,p' have equal images in the derived category.",
    "uses": [
-    "lem-weil-pbc-diagram-kflat-replacements",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
     "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 077J, lemma-resolution-by-direct-sums-extensions-by-zero, and Tag 06YS, lemma-K-flat-resolution; strict finite-diagram version supplied by lem-weil-pbc-diagram-kflat-replacements."
+    "place": "Tag 06YS, lemma-K-flat-resolution; the calculus of left and right fractions for quasi-isomorphisms in the homotopy category (Mathlib DerivedCategory.Fractions and Localization.CalculusOfFractions)."
    }
   },
   {
-   "text": "For clarity set $F=LG$, $H=G'T$, and $\\beta(p)=H(p)\\alpha_PF(p)^{-1}$. Step 1 and the localization definition make $F$ and $H$ functors on $D(\\mathcal O)$; therefore they carry each quasi-isomorphism of step 5 to an isomorphism. Apply step 4 to $r$ and to $a$:\n$$\\begin{aligned}\n\\beta(p)&=H(pr)\\alpha_{S_0}F(pr)^{-1}\\\\\n&=H(qa)\\alpha_{S_0}F(qa)^{-1}\\\\\n&=H(q)\\alpha_{S_2}F(q)^{-1}=\\beta(q).\n\\end{aligned}$$\nIndeed the first equality inserts $H(r)\\alpha_{S_0}=\\alpha_PF(r)$ and cancels $F(r)$; the third inserts $H(a)\\alpha_{S_0}=\\alpha_{S_2}F(a)$ and cancels $F(a)$. The same two cancellations with $r',b$ give $\\beta(p')=\\beta(q)$. Thus $\\beta(p)=\\beta(p')$. Every operation took place in $D(A)$ after the natural model identifications of step 4, so this is precisely the specified resolution independence. No inverse of an $\\alpha$ was taken.",
+   "text": "Set F=LG, H=G'T, and beta(p)=F(p)^(-1) alpha_P H(p) in Lean composition order. Naturality for a quasi-isomorphism a:S→P gives beta(p)=beta(ap) by functoriality and cancellation of F(a). Similarly beta(p')=beta(bp'). Step 5 gives Q(ap)=Q(bp'), so the two transported comparisons coincide. All inverses are images of quasi-isomorphisms or the stipulated K-flat model counits; no inverse of alpha is used.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -144,12 +145,13 @@
   "lem-pc-mixed-tensor-pointwise-left-derived",
   "lem-pc-derived-tensor-second-factor-functor",
   "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-diagram-kflat-replacements"
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Agent extraction of the exact-sections quotient coherence: natural derived counits (06YY and more-algebra 06Y6) and the existing strict finite-cospan K-flat replacement theorem."
+  "place": "Exact sectionwise quotient construction and natural derived counits (06YY, 06Y6), followed by a common homotopy refinement from calculus of fractions and one ordinary K-flat resolution (06YS). This avoids strict replacement of a finite diagram."
  },
  "mathlib_match": null,
  "status": "split",
@@ -198,8 +200,7 @@
  "tool_uses": [
   "lem-pc-mixed-tensor-pointwise-left-derived",
   "lem-pc-derived-tensor-second-factor-functor",
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-diagram-kflat-replacements"
+  "lem-pur-derived-change-of-rings"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -267,5 +268,15 @@
   "group": "NZ",
   "result": "fix",
   "note": "Item module matches the node clause by clause: site/final object, exact abelian sections, rho:R->O(U), A=R/(t), full short exact coefficient sequence via the uniquely characterised section multiplication, G/G' by restriction along the coefficient maps, T from the derived extension with E fixed to changeOfRings, L at A[0], theta uniquely normalised on pure tensors, c via leftDerivedUnique and the pointwise counit, alpha = L(factors) ; c ; Q(theta) ; factors'^-1 ; G'(K-flat counit^-1), both conjuncts with correct quantifiers; no invertibility of alpha; no hollow definitions; docstrings and the 6-step proof present; statement fields verbatim; node copies change only lean; report has Worker report and Second reading by NZ; edge cases (t unit, t=0, torsion, unbounded, separate universes) covered. Finding (H3): the §1(B) dependency module DerivedChangeOfRingsCochainModel omitted the 'everywhere defined' (HasPointwiseLeftDerivedFunctor) clause of lem-pur-derived-change-of-rings, which the old record stated, while calling the interface equivalent. Fixed: fixes/DerivedChangeOfRingsCochainModel.lean adds the pointwise field (Stacks 05SV/06XN) with docstrings; theorem signature unchanged. The dependency lean.note was left as delivered (no dependency JSON fix is accepted); it does not mention the new field. Not blocking: the rebind leaves the old sorry'd derivedChangeOfRingsIndependentCoefficients unowned, but it is now a corollary of the new structure. nt_compile --json: delivered pair 5.0/36.2 s and 16.0/42.7 s; fixed dependency + item 9.2/30.5 s; exit 0, no messages."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261020T132023-L-1402659",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
