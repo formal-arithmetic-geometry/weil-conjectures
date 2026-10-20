@@ -89,14 +89,15 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-prop-input-spreading",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.RootSplitCoverAwayDivisorCharts",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RootSplitCoverAwayDivisorCharts.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitCoverAwayDivisorCharts",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/RootSplitCoverAwayDivisorCharts.lean",
   "declaration": "AlgebraicGeometry.Scheme.root_split_cover_away_divisor_charts",
-  "statement": "theorem root_split_cover_away_divisor_charts\n    (R : CommRingCat.{u}) (g : R) (n : ℕ) (hn : 0 < n ∧ IsUnit (n : R))\n    {Y : Scheme.{u}} (p : Y ⟶ Spec R)\n    (hj : ∃ j : Y ⟶ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen g),\n      j ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen g) = p)\n    (d : ℕ) (y : Spec R) (hy : g ∉ y.asIdeal) :\n    let A := AdjoinRoot ((Polynomial.X : Polynomial R) ^ n - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap R A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap R A g)\n    ∀ (δ : pullback p (V.ι ≫ q) ≅ ∐ fun _ : Fin d ↦ V.toScheme),\n      δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 V.toScheme) =\n        pullback.snd p (V.ι ≫ q) →\n    ∃ (S : CommRingCat.{u}) (φ : R →+* S) (z : Spec S),\n      Etale (Spec.map (CommRingCat.ofHom φ)) ∧\n      (Spec.map (CommRingCat.ofHom φ)) z = y ∧\n      IsUnit (φ g) ∧\n        let N := Spec (CommRingCat.of (∀ k : Fin d,\n          AdjoinRoot ((Polynomial.X : Polynomial S) ^ (1 : ℕ) - Polynomial.C (φ g))))\n        let q := Spec.map (CommRingCat.ofHom\n          (algebraMap S (∀ k : Fin d,\n            AdjoinRoot ((Polynomial.X : Polynomial S) ^ (1 : ℕ) - Polynomial.C (φ g)))))\n        let V : N.Opens := PrimeSpectrum.basicOpen\n          (algebraMap S (∀ k : Fin d,\n            AdjoinRoot ((Polynomial.X : Polynomial S) ^ (1 : ℕ) - Polynomial.C (φ g))) (φ g))\n        ∃ γ : pullback p (Spec.map (CommRingCat.ofHom φ)) ≅ V.toScheme,\n          γ.hom ≫ V.ι ≫ q = pullback.snd p (Spec.map (CommRingCat.ofHom φ))",
+  "statement": "theorem root_split_cover_away_divisor_charts\n    (R : CommRingCat.{u}) (g : R) (n : ℕ) (hn : 0 < n ∧ IsUnit (n : R))\n    {Y : Scheme.{u}} (p : Y ⟶ Spec R)\n    (d : ℕ) (y : Spec R) (hy : g ∉ y.asIdeal) :\n    let A := AdjoinRoot ((Polynomial.X : Polynomial R) ^ n - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap R A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap R A g)\n    ∀ (δ : pullback p (V.ι ≫ q) ≅ ∐ fun _ : Fin d ↦ V.toScheme),\n      δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 V.toScheme) =\n        pullback.snd p (V.ι ≫ q) →\n    ∃ (S : CommRingCat.{u}) (φ : R →+* S) (z : Spec S),\n      Etale (Spec.map (CommRingCat.ofHom φ)) ∧\n      (Spec.map (CommRingCat.ofHom φ)) z = y ∧\n      IsUnit (φ g) ∧\n        let N := Spec (CommRingCat.of (Fin d →\n          AdjoinRoot ((Polynomial.X : Polynomial S) ^ (1 : ℕ) - Polynomial.C (φ g))))\n        let q := Spec.map (CommRingCat.ofHom\n          (algebraMap S (Fin d →\n            AdjoinRoot ((Polynomial.X : Polynomial S) ^ (1 : ℕ) - Polynomial.C (φ g)))))\n        let V : N.Opens := PrimeSpectrum.basicOpen\n          (algebraMap S (Fin d →\n            AdjoinRoot ((Polynomial.X : Polynomial S) ^ (1 : ℕ) - Polynomial.C (φ g))) (φ g))\n        ∃ γ : pullback p (Spec.map (CommRingCat.ofHom φ)) ≅ V.toScheme,\n          γ.hom ≫ V.ι ≫ q = pullback.snd p (Spec.map (CommRingCat.ofHom φ))",
   "branch": "sheaf-dag",
-  "by": "K3",
-  "date": "2026-10-13"
+  "by": "R8",
+  "date": "2026-10-20",
+  "note": "Retired the unused Sheaf twin. The upstream theorem proves the same conclusion without the redundant factorization hypothesis hj; a compiled specialization recovers the old signature verbatim. Its proof and both proof dependencies are sorry-free; #print axioms reports only propext, Classical.choice and Quot.sound. The upstream cyclic-chart consumer already imports and applies this stronger theorem."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -109,14 +110,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C1",
+  "reviewer": "C-74601",
+  "group": "R8",
   "result": "pass",
-  "landing": "20261013T141523-L-378249",
+  "landing": "20261020T135423-L-1821434",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: withdrawn Sheaf twin + node lean record (existing:true) vs upstream WeilConjectures theorem: statement byte-identical substring, old hj signature recovered by direct application (compiled), axioms propext/Classical.choice/Quot.sound, 0 importers, only the lean field changed"
  },
  "lean_audit": {
   "master": {
