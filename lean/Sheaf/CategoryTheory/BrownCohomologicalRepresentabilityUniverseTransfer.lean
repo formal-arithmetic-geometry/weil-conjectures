@@ -6,7 +6,7 @@ module
 
 public import WeilConjectures.CategoryTheory.CompactlyGenerated
 public import Mathlib.CategoryTheory.Triangulated.Yoneda
-import Sheaf.CategoryTheory.BrownCohomologicalRepresentabilityUniverseTransferAux
+import WeilConjectures.CategoryTheory.BrownCohomologicalRepresentabilityUniverseTransferAux
 
 /-!
 # Changing universes in the Brown representability criterion
@@ -24,6 +24,8 @@ open CategoryTheory.Pretriangulated.Opposite
 
 namespace CategoryTheory
 
+-- The source theorem no longer needs the retained Brown-principle parameter.
+set_option linter.unusedVariables false in
 theorem brownCohomologicalRepresentabilityUniverseTransfer
     (C : Type u) [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]
     [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
@@ -40,8 +42,9 @@ theorem brownCohomologicalRepresentabilityUniverseTransfer
       (∀ I : Type (max w v vH), PreservesLimitsOfShape (Discrete I) K) →
       ∃ G : A, Nonempty (K ≅ preadditiveYoneda.obj G)) :
     (H ⋙ forget AddCommGrpCat).IsRepresentable := by
+  clear hBrown
   obtain ⟨G, hG⟩ := brownCohomologicalRepresentabilityUniverseTransfer_aux
-    C hC H hH hBrown
+    C hC H hH
   exact ⟨⟨G, hG⟩⟩
 
 end CategoryTheory
