@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 import WeilConjectures.AlgebraicGeometry.FinitePresentationLocalMapLifts
-import Sheaf.AlgebraicGeometry.FinitePresentationLocalMapOverlapCompatibility
+import WeilConjectures.AlgebraicGeometry.FinitePresentationLocalMapOverlapCompatibility
 
 /-! # Local finite-presentation descent data
 
