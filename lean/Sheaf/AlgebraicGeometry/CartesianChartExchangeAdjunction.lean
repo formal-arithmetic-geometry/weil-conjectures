@@ -2,7 +2,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.CartesianChartClassPullback
 import all WeilConjectures.AlgebraicGeometry.CartesianChartExchangeCoefficients
 import all WeilConjectures.AlgebraicGeometry.CartesianChartExchangeCore
-import all Sheaf.AlgebraicGeometry.CartesianChartExchangeSource
+import all WeilConjectures.AlgebraicGeometry.CartesianChartExchangeSource
 import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc
 -- These comparison helpers are consumed through private proof imports.
