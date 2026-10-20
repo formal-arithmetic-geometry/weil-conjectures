@@ -1,6 +1,6 @@
 # Work queue
 
-771 items; claim with `tools/claim.py next <group> [--stage N]`.
+772 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -43,7 +43,7 @@
 
 Not open yet: 304 nodes that below a finished node, not needed, 85 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (740)
+## Stage 3: modules to prove (741)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -54,6 +54,8 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.SfHomTriangulated` | 7 | 1 | repair | route |
 | `Sheaf.SixFunctorsBasics.BrownHypotheses` | 5 | 1 | repair | route |
 | `Sheaf.Paper.IntegralOperationsWellDefined` | 6 | 3 | repair | route |
+| `Sheaf.Paper.CompleteResidueCohomologyBounds` | 8 | 1 | repair | route |
+| `Sheaf.Paper.RingedTopoiCanonicalTensorPullback` | 4 | 1 | repair | route |
 | `Sheaf.Paper.FlatRingedCechBaseChangeQuasiIso` | 7 | 1 | disputed | route |
 | `Sheaf.AlgebraicGeometry.CondensedClosedSupportAdjunction` | 8 | 1 | disputed | 6 |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 2 | proof | route |
@@ -621,7 +623,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.TorAmplitudeKFlatResolution` | 8 | 2 | proof | 4 |
 | `Sheaf.CategoryTheory.RingedPresentationTransport` | 8 | 1 | proof | 4 |
 | `Sheaf.Paper.CompactSupportSiteCoherence` | 8 | 1 | proof | 4 |
-| `Sheaf.Paper.CompleteResidueCohomologyBounds` | 8 | 1 | proof | 4 |
 | `Sheaf.Paper.CompletedReductionSquare` | 8 | 3 | proof | 4 |
 | `Sheaf.Paper.DerivedReductionResolutionIndependence` | 8 | 5 | proof | 4 |
 | `Sheaf.Paper.FiniteComparisonLocalizing` | 8 | 2 | proof | 4 |
