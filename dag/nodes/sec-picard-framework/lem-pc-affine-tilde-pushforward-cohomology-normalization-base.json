@@ -84,18 +84,19 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.Algebra.Homology.AffineTildePushforwardCohomologyNormalization",
-  "file": "lean/Sheaf/Algebra/Homology/AffineTildePushforwardCohomologyNormalization.lean",
+  "existing": true,
+  "module": "WeilConjectures.Algebra.Homology.AffineTildePushforwardCohomologyNormalization",
+  "file": "lean/WeilConjectures/Algebra/Homology/AffineTildePushforwardCohomologyNormalization.lean",
   "declaration": "AlgebraicGeometry.affineTildePushforwardCohomologyNormalization_base",
-  "statement": "theorem affineTildePushforwardCohomologyNormalization_base\n    (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ) :\n    ∃ d : affineDerivedCohomologyModules A i ⋙\n          (ModuleCat.restrictScalars φ ⋙ affineTildeFunctor B) ≅\n        (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙\n          schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ)) ⋙\n          DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i,\n      ∀ C : CochainComplex (ModuleCat.{u} A) ℤ,\n        affineTildePushforwardIdentityNormalization A B φ i d C",
+  "statement": "theorem affineTildePushforwardCohomologyNormalization_base\n    (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ) :\n    ∃ d : affineDerivedCohomologyModules A i ⋙\n          (ModuleCat.restrictScalars φ ⋙ affinePushforwardTilde B) ≅\n        (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙\n          schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ)) ⋙\n          DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i,\n      ∀ C : CochainComplex (ModuleCat.{u} A) ℤ,\n        affineTildePushforwardIdentityNormalization A B φ i d C",
   "branch": "sheaf-dag",
-  "by": "T4",
-  "date": "2026-10-14",
+  "by": "W2",
+  "date": "2026-10-21",
   "declarations": [
    "AlgebraicGeometry.affineTildePushforwardCohomologyNormalization_base",
    "AlgebraicGeometry.affineTildePushforwardIdentityNormalization"
-  ]
+  ],
+  "note": "The duplicate implementation is consolidated with the identical adopted source implementation. The Sheaf compatibility module retains affineTildeFunctor and its zero-map instance, and publicly re-exports every normalization declaration. The tilde abbreviations reduce to the same functor; no mathematical statement or definition changes."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -108,14 +109,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-dcd4f",
-  "group": "U1",
+  "reviewer": "C-1e790",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261013T211116-L-396106",
+  "landing": "20261020T230841-L-620461",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files, DAG nodes, report, and Lean compilation match the recorded stage-3 proof and interface changes; all checks pass."
+  "note": "independent cc review: Removed Sheaf normalization/helper/prebase bodies vs WeilConjectures twins (identical modulo tilde-abbrev rename and proof-irrelevant witnesses); node lean.statements vs WC Normalization; 3 direct importers compiled against delivered Normalization (all clean); baselines show pre-existing >60 s for Representative/Coordinates; #print axioms clean"
  },
  "lean_audit": {
   "master": {
