@@ -1,0 +1,129 @@
+{
+ "id": "lem-pod-module-hom-signed-evaluation",
+ "kind": "statement",
+ "title": "Signed evaluation for ordinary module Hom complexes",
+ "statement": "Let R be any commutative ring and let c,V be unbounded cochain complexes of R-modules. For the ordinary module Hom complex [def-sc-module-total-hom-complex] and the usual signed direct-sum total tensor there exists a chain map e:c tensor Hom_R(c,V) to V. On the tensor summand c^p tensor Hom_R(c,V)^j its value on x tensor h is (-1)^(p*j) h_p(x). This holds in all integer degrees with no boundedness, flatness or injectivity hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A8X, 08J7: Hom complexes and ordinary internal Hom"
+ },
+ "stmt_deps": [
+  "def-sc-module-total-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use the degree-p component of a module Hom cochain as a bilinear evaluation map, multiplied by (-1)^(pj). The tensor and direct-sum universal properties assemble these component maps into maps of each total degree.",
+   "uses": [
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8X, 08J7: Hom complexes and ordinary internal Hom"
+   }
+  },
+  {
+   "text": "Precompose the proposed chain identity with each tensor summand and check on pure tensors. Expand the tensor differential d_c tensor 1 plus (-1)^p times 1 tensor d_Hom and the Hom differential. The two h(d_c x) terms have opposite coefficients because (-1)^p(-1)^(p(j+1))=(-1)^(pj) and (-1)^((p+1)j)=(-1)^(pj)(-1)^j. The remaining term is d_V of the proposed evaluation. Tensor and coproduct extensionality give a chain map with the stated formula.",
+   "uses": [
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8X, 08J7: Hom complexes and ordinary internal Hom"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-total-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Expansion of the point comparison proof into the actual chain-level constructions; Tags 0A8X, 08J7, and (for K-flatness) 0G7E."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Signed evaluation maps for sheaf Hom complexes and module Hom complexes",
+   "results": "8 hits; top: LinearMap.evalAddMonoidHom, LinearMap.applyₗ, LinearMap.applyₗ', ComplexShape.ε, smoothSheaf.evalHom, smoothSheaf.eval, SheafOfModules.evaluation, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt; no theorem for the required construction and universes.",
+   "date": "2026-10-21",
+   "verdict": "no_match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The signed evaluation chain map from a complex tensor its Hom complex sends x tensor h to minus one to degree x times degree h times h x",
+   "results": "8 hits; top: HomologicalComplex.tensorHom, HomologicalComplex.ιTensorObj, HomologicalComplex.HasTensor, ComplexShape.TensorSigns.ε', HomologicalComplex.unit_tensor_d₁, HomologicalComplex.tensorObj, HomologicalComplex.tensor_unit_d₂, ComplexShape.ε₂_def; no theorem for the required construction and universes.",
+   "date": "2026-10-21",
+   "verdict": "no_match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKFlatIndependentCoefficients\"",
+   "results": "0 hits; top: ; no theorem for the required construction and universes.",
+   "date": "2026-10-21",
+   "verdict": "no_match"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Tt]ensor|[Tt]ensor.*evaluation",
+   "results": "16 hits; top: Mathlib/LinearAlgebra/Coevaluation.lean, Mathlib/LinearAlgebra/Coevaluation.lean, Mathlib/LinearAlgebra/Coevaluation.lean, Mathlib/LinearAlgebra/Coevaluation.lean, Mathlib/LinearAlgebra/Coevaluation.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/CategoryTheory/Monoidal/Limits/Preserves.lean, Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean; no theorem for the required construction and universes.",
+   "date": "2026-10-21",
+   "verdict": "no_match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointDerivedHomEvaluation",
+  "date": "2026-10-21",
+  "group": "A8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pod-identification-of-the-comparison",
+   "place": "Proof, third paragraph: the reverse canonical global-duality comparison is the inverse of the adjunction/evaluation map; Signed evaluation for ordinary module Hom complexes.",
+   "via": [
+    "lem-pod-point-derived-hom-evaluation",
+    "lem-pod-global-duality-map-identification"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleHomSignedEvaluation",
+  "file": "lean/Sheaf/Paper/ModuleHomSignedEvaluation.lean",
+  "declaration": "CochainComplex.module_hom_signed_evaluation",
+  "declarations": [
+   "CochainComplex.module_hom_signed_evaluation"
+  ],
+  "statement": "theorem module_hom_signed_evaluation :\n    ∃ e : HomologicalComplex.mapBifunctor c (moduleHomComplex c V) (curriedTensor _) (.up ℤ) ⟶ V,\n      ∀ (p j : ℤ) (x : c.X p) (h : (moduleHomComplex c V).X j),\n        (e.f (p + j)).hom\n          ((HomologicalComplex.ιMapBifunctor c (moduleHomComplex c V) (curriedTensor _) (.up ℤ)\n            p j (p + j) rfl).hom (x ⊗ₜ[R] h)) =\n          (p * j).negOnePow • (h.v p (p + j) rfl).hom x",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-2cbb4",
+  "group": "A8",
+  "result": "fix",
+  "landing": "20261020T235539-L-1188120",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-2cbb4",
+  "group": "A8",
+  "result": "fix",
+  "landing": "20261020T235539-L-1188120",
+  "kind": "interface",
+  "note": "independent cc review: delivered PointDerivedHomModels vs published item module (verbatim; Expr.hash of item type and moved defs equal); new lemmas vs their nodes; point_extension_kflat vs Stacks K-flat pullback (true); item proof uses vs proof_deps"
+ }
+}

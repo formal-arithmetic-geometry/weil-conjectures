@@ -29,120 +29,86 @@
  ],
  "proof": [
   {
-   "text": "View ordinary $R$-modules as module sheaves on the one-object site with only the maximal covering sieve. Let $a:\\operatorname{Sh}(s_{\\mathrm{proet}})\\to\\operatorname{Set}$ have inverse image the constant-sheaf functor: a map from the constant presheaf with value $T$ into a sheaf $F$ is precisely a function $T\\to F(s)$, and sheafification gives the same adjunction for constant sheaves [def-weil-pbc-constant-sheaf]. The constant-presheaf functor preserves finite limits objectwise; sheafification preserves finite limits by [lem-weil-pbc-sheafification-sets-exact]. Thus this is a geometric morphism. With ring map $\\underline R\\to B$, its module pullback is exactly $L_R$, by the displayed tensor construction. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the given K-flat complex $c$ with flat terms: $L_Rc$ is K-flat over $B$ (indeed has flat terms). This uses the general ringed-topos assertion, including its flat-term hypothesis, and does not identify the pro-etale topos with sets.",
+   "text": "Use the exact additive left adjoint L and its sections adjunction to preserve K-injectivity. Exactness of sections takes the coefficient resolution to a quasi-isomorphism, and the assumed scalar bijection makes its first comparison an isomorphism.",
    "uses": [
-    "def-weil-pbc-constant-sheaf",
-    "lem-weil-pbc-sheafification-sets-exact",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "def-pod-point-derived-hom-models"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E (lemma-pullback-K-flat); sites.tex Tag 00WJ (lemma-sheafification-exact)"
+    "place": "Tags 0A8X, 08J7: Hom complexes and ordinary internal Hom"
    }
   },
   {
-   "text": "By [def-pur-sheaf-hom] and the sectionwise products in [def-pur-hom-complex], the degree-$j$ sections of $\\mathcal Hom_B^\\bullet(L_Rc,I)$ are $\\prod_p\\operatorname{Hom}_B(L_Rc^p,I^{p+j})$. Apply the assumed explicit adjunction separately to each factor. It gives an $R$-linear bijection to $\\prod_p\\operatorname{Hom}_R(c^p,\\Gamma(s,I^{p+j}))$, sending $h^p$ to $x\\mapsto h_s^p(1\\otimes x)$. Its inverse sends a family $t^p$ to the sheaf maps locally given by $b\\otimes x\\mapsto b\\,t^p(x)|_U$, extended from constant sections by sheafification. These are mutual inverses by the assumed adjunction, with no finiteness requirement on the product or on $c^p$.",
+   "text": "Apply the point-extension K-flatness lemma to the given acyclic-tensor condition and flatness in every term.",
    "uses": [
-    "def-pur-sheaf-hom",
-    "def-pur-hom-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A8X (section-hom-complexes), definition of the terms; sites-modules.tex Tag 04TT (section-internal-hom)"
-   }
-  },
-  {
-   "text": "The degreewise bijections form a chain isomorphism $q_{c,I}$. In fact [def-pur-hom-complex] gives, for $h$ of degree $j$ and $x\\in c^p$,\n$$q(dh)^p(x)=d_I(h_s^p(1\\otimes x))-(-1)^j h_s^{p+1}(1\\otimes d_cx)=(d\\,q(h))^p(x).$$\nHere the differential on $L_Rc$ is $L_R(d_c)$, so it takes $1\\otimes x$ to $1\\otimes d_cx$. For chain maps $u:c'\\to c$ and $v:I\\to I'$, direct substitution gives $q_{c',I'}(vhu)=\\Gamma(v)q_{c,I}(h)u$ (with $L_Ru$ on the sheaf side). This proves naturality, including naturality of the inverse.",
-   "uses": [
-    "def-pur-hom-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A8X (section-hom-complexes), differential and componentwise composition"
-   }
-  },
-  {
-   "text": "The exact additive functor $L_R$ is left adjoint to $\\Gamma(s,-)$ by hypothesis. Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] with $\\mathcal A=\\operatorname{Mod}(B)$, $\\mathcal B=R\\text{-}\\operatorname{Mod}$, $v=L_R$, $u=\\Gamma(s,-)$. Since $I$ is K-injective, $\\Gamma(s,I)$ is K-injective. Both exactness and the adjunction used here are hypotheses of this item; no injectivity assertion for arbitrary sections functors is being used.",
-   "uses": [
-    "lem-weil-pbc-right-adjoint-preserves-kinjective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08BJ (lemma-adjoint-preserve-K-injectives)"
-   }
-  },
-  {
-   "text": "The resolution map $B\\to I$ is a quasi-isomorphism. By exactness of sections, in the precise complex form stated in [lem-weil-point-proetale-sections-exact], $\\Gamma(s,B)\\to\\Gamma(s,I)$ is a quasi-isomorphism. Composing it with the assumed constant-value identification $R\\xrightarrow{\\sim}\\Gamma(s,B)$ gives the specified quasi-isomorphism $R\\to\\Gamma(s,I)$. Thus the previous step supplies a K-injective resolution of the module complex $R[0]$.",
-   "uses": [
-    "lem-weil-point-proetale-sections-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08BJ (lemma-adjoint-preserve-K-injectives), together with the item hypothesis that sections are exact"
-   }
-  },
-  {
-   "text": "By [def-pur-derived-internal-hom], the sheaf complex $H=\\mathcal Hom_B^\\bullet(L_Rc,I)$ represents $R\\mathcal Hom_B(L_Rc,B)$, and the same definition on the one-object ringed site says that $\\operatorname{Hom}_R^\\bullet(c,\\Gamma(s,I))$ represents $R\\operatorname{Hom}_R(c,R)$. By [lem-weil-point-proetale-sections-exact], termwise sections preserve quasi-isomorphisms, so $\\Gamma(s,H)$ represents the sections of the former derived object. The chain isomorphism of steps 2--3 therefore gives the asserted derived isomorphism. Independence of the representatives follows from [lem-pur-rhom-well-defined] on each of the two ringed sites, and preservation of the resulting quasi-isomorphisms by sections. The naturality already proved on complexes consequently gives naturality of this comparison in the derived category.",
-   "uses": [
-    "def-pur-derived-internal-hom",
-    "lem-weil-point-proetale-sections-exact",
-    "lem-pur-rhom-well-defined"
+    "lem-pod-point-extension-kflat"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J7 (section-internal-hom), construction using K-injective targets; Tag 0A95 (lemma-RHom-well-defined)"
+    "place": "Tags 0A8X, 08J7: Hom complexes and ordinary internal Hom"
    }
   },
   {
-   "text": "Use the ordinary derived tensor and the closed structure of [lem-sf-ringed-derived-closed-symmetric-monoidal]. Since $L_Rc$ is K-flat, $L_Rc\\otimes_B H$ represents the sheaf derived evaluation's source; since $c$ is K-flat, $c\\otimes_R\\operatorname{Hom}_R^\\bullet(c,\\Gamma(s,I))$ represents its module counterpart. The evaluation with Hom first is the counit: on complexes it takes $h\\otimes y$ to $h(y)$, as follows by uncurrying the identity of the Hom complex. Reordering to put the argument first uses the specified symmetry of that cited node, and so gives $e(y\\otimes h)=(-1)^{pj}h^p(y)$ for $|y|=p$, $|h|=j$. This formula is a chain map: using [def-pc-tensor-complex-sheaves] and [def-pur-hom-complex], the two $h(dy)$ terms in $e(dy\\otimes h+(-1)^p y\\otimes dh)$ have coefficients $(-1)^{pj+j}$ and $-(-1)^{pj+j}$, while the remaining term is $(-1)^{pj}d_Ih(y)=d_Ie(y\\otimes h)$. This also checks the sign for the ordinary module version.",
+   "text": "Apply the chain-level Hom adjunction to obtain q with the prescribed normalization. Naturality follows by the Hom projection map formula and naturality of the adjunction unit, whose value is the extension generator.",
    "uses": [
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "def-pc-tensor-complex-sheaves",
+    "lem-pod-point-hom-complex-adjunction",
+    "lem-sc-hom-complex-projections",
+    "def-pod-point-derived-hom-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8X, 08J7: Hom complexes and ordinary internal Hom"
+   }
+  },
+  {
+   "text": "Apply the signed evaluation comparison to q. This supplies all three maps with their required formulas and the commuting evaluation square.",
+   "uses": [
+    "lem-pod-point-tensor-hom-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8X, 08J7: Hom complexes and ordinary internal Hom"
+   }
+  },
+  {
+   "text": "Map I to its fixed K-injective replacement, which exists because sheaf modules form a Grothendieck abelian category with functorial K-injective resolutions. This is a quasi-isomorphism between K-injectives; the Hom-complex quasi-isomorphism theorem makes its Hom map a quasi-isomorphism. Thus the canonical homModelMap is invertible after localization. All factors of derivedModelMap are consequently invertible, including the inverse of the image of the coefficient resolution. Compose its inverse with the localization of q to define d. The inverse identity proves derivedModelMap followed by d.hom equals Q.map q.hom.",
+   "uses": [
+    "lem-pur-rhom-well-defined-universes",
+    "def-pod-point-derived-hom-models",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-functorial-existence",
+    "lem-coef-integral-hom-reduction",
     "def-pur-hom-complex"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J7 (section-internal-hom), equation-internal-hom and its counit; Tag 0FPT (lemma-symmetric-monoidal-derived); Tag 0A8X (section-hom-complexes)"
-   }
-  },
-  {
-   "text": "The balancing map needed here is the chain map\n$$\\beta:c\\otimes_R\\Gamma(s,H)\\longrightarrow\\Gamma(s,L_Rc\\otimes_B H),\\qquad x\\otimes h\\longmapsto(1\\otimes x)\\otimes h.$$\nIt is induced by the unit $x\\mapsto1\\otimes x$ and by tensoring sections; balancing and restriction follow from [def-pur-sheaf-tensor-product]. On direct-sum total tensors [def-pc-tensor-complex-sheaves] it is defined on each summand, so no commutation of sections with infinite coproducts is assumed. Its chain-map identity follows from $d(1\\otimes x)=1\\otimes dx$ and the identical tensor signs on both sides. By step 7,\n$$\\Gamma(e)\\beta(x\\otimes h)=(-1)^{pj}h_s^p(1\\otimes x)=e_R(x\\otimes q_{c,I}(h)).$$\nPure tensors generate each summand of the module tensor, hence the two chain maps are equal. Passing to the derived category proves compatibility of the specified derived evaluations under $q_{c,I}$ and this balancing map. The target is $\\Gamma(s,I)\\simeq R$ from step 5. This computation uses ordinary tensor throughout and makes no assertion about derived completion.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J7 (section-internal-hom), evaluation counit; sites-modules.tex Tag 03EK (section-tensor-product)"
+    "place": "Tags 0A8X, 08J7: Hom complexes and ordinary internal Hom"
    }
   }
  ],
  "proof_deps": [
-  "def-pc-tensor-complex-sheaves",
-  "def-pur-derived-internal-hom",
+  "def-pod-point-derived-hom-models",
   "def-pur-hom-complex",
-  "def-pur-sheaf-hom",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-pbc-constant-sheaf",
-  "lem-pur-rhom-well-defined",
-  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-coef-integral-hom-reduction",
+  "lem-pod-point-extension-kflat",
+  "lem-pod-point-hom-complex-adjunction",
+  "lem-pod-point-tensor-hom-evaluation",
+  "lem-pur-rhom-well-defined-universes",
+  "lem-sc-hom-complex-projections",
+  "lem-weil-pbc-kinjective-functorial-existence",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-sheafification-sets-exact",
-  "lem-weil-point-proetale-sections-exact"
+  "prop-pur-kinjective-resolutions-exist"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Explicit adjunction and chain-level evaluation expansion of the blueprint point comparison, using Tags 0G7E, 0A8X, 0A95, 08J7, 0FPT; derived.tex Tag 08BJ; sites.tex Tag 00WJ."
+  "place": "The original point-comparison argument, with an explicit product Hom adjunction, direct signed module evaluation, naturality on generators and invertibility of the prescribed derived representative map. Tags 0A8X, 08J7, 0A95; derived.tex Tag 08BJ."
  },
  "mathlib_searches": [
   {
@@ -271,12 +237,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-sheafification-sets-exact",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-point-proetale-sections-exact",
-  "lem-pur-rhom-well-defined",
-  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -290,49 +251,6 @@
   "module": "Sheaf.Paper.PointDerivedHomEvaluation",
   "declaration": "WeilConjectures.PointDerivedHom.point_derived_hom_evaluation",
   "declarations": [
-   "WeilConjectures.PointDerivedHom.abSheafify",
-   "WeilConjectures.PointDerivedHom.abLocallyBijective",
-   "WeilConjectures.PointDerivedHom.ringLocallyBijective",
-   "WeilConjectures.PointDerivedHom.finalObject",
-   "WeilConjectures.PointDerivedHom.constantRing",
-   "WeilConjectures.PointDerivedHom.ring",
-   "WeilConjectures.PointDerivedHom.Modules",
-   "WeilConjectures.PointDerivedHom.constantUnit",
-   "WeilConjectures.PointDerivedHom.constantUnit_injective",
-   "WeilConjectures.PointDerivedHom.constantUnit_surjective",
-   "WeilConjectures.PointDerivedHom.constantPresheaf",
-   "WeilConjectures.PointDerivedHom.constantModules",
-   "WeilConjectures.PointDerivedHom.constantElement",
-   "WeilConjectures.PointDerivedHom.scalar",
-   "WeilConjectures.PointDerivedHom.sections",
-   "WeilConjectures.PointDerivedHom.sections_additive",
-   "WeilConjectures.PointDerivedHom.extensionElement",
-   "WeilConjectures.PointDerivedHom.sectionComplex",
-   "WeilConjectures.PointDerivedHom.sheafHom",
-   "WeilConjectures.PointDerivedHom.homValue",
-   "WeilConjectures.PointDerivedHom.total",
-   "WeilConjectures.PointDerivedHom.totalElement",
-   "WeilConjectures.PointDerivedHom.moduleTotal",
-   "WeilConjectures.PointDerivedHom.moduleTotalElement",
-   "WeilConjectures.PointDerivedHom.derivedSheaves",
-   "WeilConjectures.PointDerivedHom.derivedModules",
-   "WeilConjectures.PointDerivedHom.toFinal",
-   "WeilConjectures.PointDerivedHom.extensionObject",
-   "WeilConjectures.PointDerivedHom.extensionMorphism",
-   "WeilConjectures.PointDerivedHom.extensionComplex",
-   "WeilConjectures.PointDerivedHom.generator",
-   "WeilConjectures.PointDerivedHom.ExplicitAdjunction",
-   "WeilConjectures.PointDerivedHom.IsComparison",
-   "WeilConjectures.PointDerivedHom.ComparisonNatural",
-   "WeilConjectures.PointDerivedHom.coefficientSections",
-   "WeilConjectures.PointDerivedHom.sectionResolution",
-   "WeilConjectures.PointDerivedHom.EvaluationCompatible",
-   "WeilConjectures.PointDerivedHom.derivedModelMap",
-   "WeilConjectures.PointDerivedHom.ComparisonResult",
-   "WeilConjectures.PointDerivedHom.Statement",
-   "WeilConjectures.PointDerivedHom.coefficientRing",
-   "WeilConjectures.PointDerivedHom.coefficientSheaf",
-   "WeilConjectures.PointDerivedHom.coefficientMap",
    "WeilConjectures.PointDerivedHom.point_derived_hom_evaluation"
   ],
   "file": "lean/Sheaf/Paper/PointDerivedHomEvaluation.lean",
@@ -341,7 +259,7 @@
   "by": "Q125",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Both actual coefficient models, independent site/coefficient universes, explicitly normalized adjunction and Hom comparison, canonical derived representative comparison, and signed ordinary evaluation with the canonical sections-tensor balancing formula. Helper definitions in this owning module have blueprint/source docstrings and real data. L is rigidly specified on objects and maps as scalar extension of the existing constant-module construction; no arbitrary replacement functor or evaluation map is assumed. The derived module Hom is represented by Hom(c,ΓI), with ΓI explicitly asserted to be a K-injective resolution of R."
+  "note": "The unchanged models and declarations are publicly reexported from PointDerivedHomModels; the present module proves the original theorem with its unchanged signature."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -350,5 +268,15 @@
   "group": "Q125",
   "result": "pass",
   "note": "Read node, 18 dependency records, source place (lem-pod-point-dualizing-complex.proof.md second sentence), module (560 lines), report, and the dependency sources (IntegralHomReduction evaluate/totalTensor/totalPair/homModelMap, HomComplexProjections, ModuleHomComplex, KFlat, CoefficientExtension, CompletedIntegralCoefficients, CompletedIntegralConstantMapOfUniverses, PointProEtaleSectionsExact). Every clause renders the node: both coefficient models are the real ones (O_E/(ϖ)^n with unshifted n plus constant sheaf with identity; O_E plus the recorded limit-lift completed sheaf); site universes (t+1,t) kept with u independent; L fixed as changeOfRings of the recorded constant modules; explicit adjunction in both directions on every U; exactness and bijective constant-value map as hypotheses; c K-flat with flat terms; I K-injective (Mathlib match) with a quasi-iso resolution; conclusions Γ(I) K-injective, R→Γ(I) quasi-iso, L_R c K-flat (recorded), q normalized by h(1⊗x) and natural in both variables, derived iso induced by q via the canonical model map, chain-level evaluation compatibility with (−1)^{pj} and β fixed on generators. Signs checked by hand against Mathlib δ, mapBifunctor ε₂ and the projection differential. Gates: no hollow definitions (the landed projection choice is harmless here), one sorry, docstrings with source/blueprint and the 8-step proof, lines ≤100, universes bound. Node diff: only lean and stmt_deps changed (+4 landed nodes with lean records, no cycle); lean.statement matches the file verbatim. Compile via nt_compile.py --json: clean twice (46.9 s, 25.2 s); warn.sorry=false confirmed. Non-blocking: three dependency imports are redundant; global HasDerivedCategory.standard instances; the second reading is the author's own disclosed pass."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-2cbb4",
+  "group": "A8",
+  "result": "fix",
+  "landing": "20261020T235539-L-1188120",
+  "kind": "interface",
+  "note": "independent cc review: delivered PointDerivedHomModels vs published item module (verbatim; Expr.hash of item type and moved defs equal); new lemmas vs their nodes; point_extension_kflat vs Stacks K-flat pullback (true); item proof uses vs proof_deps"
  }
 }

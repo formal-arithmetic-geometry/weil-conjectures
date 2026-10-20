@@ -1,0 +1,179 @@
+{
+ "id": "def-pod-point-derived-hom-models",
+ "kind": "definition",
+ "title": "Ordinary point-extension and derived Hom models",
+ "statement": "For a field k, a commutative coefficient ring R, a sheaf B of commutative rings on (Spec k)_proet, and a map from the constant R-sheaf to B, construct the constant module functor, extension on objects and morphisms, sections with restricted scalars, ordinary Hom and total tensor complexes, their homogeneous elements, and the normalized comparison predicates. The exact definitions, including coefficient models and the canonical derived representative map, are those in the attached Lean declarations. These are real sheafification, scalar-extension, Hom projection, and localization constructions; this interface relocates the existing definitions without changing their data or meaning [def-weil-pbc-constant-sheaf, def-pur-sheaf-tensor-product, def-pur-hom-complex, lem-coef-integral-hom-reduction].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "Second sentence: Hom-complex sections comparison on K-flat/K-injective representatives, including evaluation and differential"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-hom-complex",
+  "lem-coef-integral-hom-reduction"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing constant-sheaf and module-sheafification units to define constant module sections and scalar extension; define sections by evaluation at the final object followed by scalar restriction.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: Hom-complex sections comparison on K-flat/K-injective representatives, including evaluation and differential"
+   }
+  },
+  {
+   "text": "Use the existing Hom products, tensor totalization, and canonical K-injective localization comparison to define the comparison predicates and derived representative map, exactly as in the former owning module.",
+   "uses": [
+    "def-pur-hom-complex",
+    "lem-coef-integral-hom-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: Hom-complex sections comparison on K-flat/K-injective representatives, including evaluation and differential"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-constant-sheaf",
+  "lem-coef-integral-hom-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Expansion of the point comparison proof into the actual chain-level constructions; Tags 0A8X, 08J7, and (for K-flatness) 0G7E."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Hom complex adjunction for extension from a point and global sections",
+   "results": "8 hits; top: PresheafOfModules.unitHomEquiv, CategoryTheory.constantSheafΓAdj, SheafOfModules.unitHomEquiv, CategoryTheory.Sheaf.ΓHomEquiv, CompHausLike.LocallyConstant.adjunction, ComplexShape.Embedding.homRestrict_comp_extendMap_assoc, CochainComplex.HomComplex, ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction; no theorem for the required construction and universes.",
+   "date": "2026-10-21",
+   "verdict": "no_match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor extension of a constant K-flat module complex with flat terms is K-flat on any ringed site",
+   "results": "8 hits; top: Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.of_flat_tensorProduct, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_flat_tensorProduct, Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier, Module.Flat.iff_rTensor_exact'; no theorem for the required construction and universes.",
+   "date": "2026-10-21",
+   "verdict": "no_match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKFlatIndependentCoefficients\"",
+   "results": "0 hits; top: ; no theorem for the required construction and universes.",
+   "date": "2026-10-21",
+   "verdict": "no_match"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Kk]Flat|[Kk]Flat.*constant",
+   "results": "0 hits; top: ; no theorem for the required construction and universes.",
+   "date": "2026-10-21",
+   "verdict": "no_match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointDerivedHomEvaluation",
+  "date": "2026-10-21",
+  "group": "A8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pod-identification-of-the-comparison",
+   "place": "Proof, third paragraph: the reverse canonical global-duality comparison is the inverse of the adjunction/evaluation map; Ordinary point-extension and derived Hom models.",
+   "via": [
+    "lem-pod-point-derived-hom-evaluation",
+    "lem-pod-global-duality-map-identification"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointDerivedHomModels",
+  "file": "lean/Sheaf/Paper/PointDerivedHomModels.lean",
+  "declaration": "WeilConjectures.PointDerivedHom.Statement",
+  "declarations": [
+   "WeilConjectures.PointDerivedHom.abSheafify",
+   "WeilConjectures.PointDerivedHom.abLocallyBijective",
+   "WeilConjectures.PointDerivedHom.ringLocallyBijective",
+   "WeilConjectures.PointDerivedHom.finalObject",
+   "WeilConjectures.PointDerivedHom.constantRing",
+   "WeilConjectures.PointDerivedHom.ring",
+   "WeilConjectures.PointDerivedHom.Modules",
+   "WeilConjectures.PointDerivedHom.constantUnit",
+   "WeilConjectures.PointDerivedHom.constantUnit_injective",
+   "WeilConjectures.PointDerivedHom.constantUnit_surjective",
+   "WeilConjectures.PointDerivedHom.constantPresheaf",
+   "WeilConjectures.PointDerivedHom.constantModules",
+   "WeilConjectures.PointDerivedHom.constantElement",
+   "WeilConjectures.PointDerivedHom.scalar",
+   "WeilConjectures.PointDerivedHom.sections",
+   "WeilConjectures.PointDerivedHom.sections_additive",
+   "WeilConjectures.PointDerivedHom.extensionElement",
+   "WeilConjectures.PointDerivedHom.sectionComplex",
+   "WeilConjectures.PointDerivedHom.sheafHom",
+   "WeilConjectures.PointDerivedHom.homValue",
+   "WeilConjectures.PointDerivedHom.total",
+   "WeilConjectures.PointDerivedHom.totalElement",
+   "WeilConjectures.PointDerivedHom.moduleTotal",
+   "WeilConjectures.PointDerivedHom.moduleTotalElement",
+   "WeilConjectures.PointDerivedHom.derivedSheaves",
+   "WeilConjectures.PointDerivedHom.derivedModules",
+   "WeilConjectures.PointDerivedHom.toFinal",
+   "WeilConjectures.PointDerivedHom.extensionObject",
+   "WeilConjectures.PointDerivedHom.extensionMorphism",
+   "WeilConjectures.PointDerivedHom.extensionComplex",
+   "WeilConjectures.PointDerivedHom.generator",
+   "WeilConjectures.PointDerivedHom.ExplicitAdjunction",
+   "WeilConjectures.PointDerivedHom.IsComparison",
+   "WeilConjectures.PointDerivedHom.ComparisonNatural",
+   "WeilConjectures.PointDerivedHom.coefficientSections",
+   "WeilConjectures.PointDerivedHom.sectionResolution",
+   "WeilConjectures.PointDerivedHom.EvaluationCompatible",
+   "WeilConjectures.PointDerivedHom.derivedModelMap",
+   "WeilConjectures.PointDerivedHom.ComparisonResult",
+   "WeilConjectures.PointDerivedHom.Statement",
+   "WeilConjectures.PointDerivedHom.coefficientRing",
+   "WeilConjectures.PointDerivedHom.coefficientSheaf",
+   "WeilConjectures.PointDerivedHom.coefficientMap"
+  ],
+  "statement": "def Statement : Prop",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-2cbb4",
+  "group": "A8",
+  "result": "fix",
+  "landing": "20261020T235539-L-1188120",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-2cbb4",
+  "group": "A8",
+  "result": "fix",
+  "landing": "20261020T235539-L-1188120",
+  "kind": "interface",
+  "note": "independent cc review: delivered PointDerivedHomModels vs published item module (verbatim; Expr.hash of item type and moved defs equal); new lemmas vs their nodes; point_extension_kflat vs Stacks K-flat pullback (true); item proof uses vs proof_deps"
+ }
+}

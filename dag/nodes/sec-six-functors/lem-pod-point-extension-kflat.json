@@ -1,0 +1,135 @@
+{
+ "id": "lem-pod-point-extension-kflat",
+ "kind": "statement",
+ "title": "K-flatness of the point extension of a flat-term module complex",
+ "statement": "Let k be any field and let R, B, alpha, L and its sections adjunction be the ordinary point-extension models [def-pod-point-derived-hom-models], with L identified on objects and morphisms with B tensor over the constant R-sheaf of the constant module. Let c be an unbounded R-module complex for which Tot(F tensor_R c) is acyclic for every acyclic R-module complex F, and suppose every c^p is a flat R-module. Then Lc is K-flat in the independent-coefficient sheaf-module sense [def-pc-kflat-complex]. No exactness of L or sections is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7E, lemma-pullback-K-flat; sites.tex Tag 00WJ, lemma-sheafification-exact"
+ },
+ "stmt_deps": [
+  "def-pod-point-derived-hom-models",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Identify ordinary R-modules with sheaves of modules on the one-object site with its trivial topology. The constant-sheaf functor is left adjoint to sections at the final object: a map out of a constant presheaf is determined by that component. Constant presheaves preserve finite limits, and associated sheafification is left exact.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-sheafification-sets-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E, lemma-pullback-K-flat; sites.tex Tag 00WJ, lemma-sheafification-exact"
+   }
+  },
+  {
+   "text": "Construct the induced algebraic inverse image and identify its modules and scalar extension along alpha with L using the specified object and morphism equalities. Transport tensor, flatness and acyclicity across the equivalence on the one-object site. Apply ringed-topos pullback of flat-term K-flat complexes to obtain K-flatness of Lc.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "def-pod-point-derived-hom-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E, lemma-pullback-K-flat; sites.tex Tag 00WJ, lemma-sheafification-exact"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pod-point-derived-hom-models",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-sheafification-sets-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7E, lemma-pullback-K-flat; sites.tex Tag 00WJ, lemma-sheafification-exact"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of a flat-term K-flat complex of modules is K-flat on a ringed site",
+   "results": "8 hits; top: AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.Flat.stalkMap, Module.Flat.lTensor_shortComplex_exact, Module.Flat.localizedModule, SheafOfModules.pullbackObjFreeIso, CategoryTheory.compatiblePreservingOfFlat, AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.Flat.iff_flat_stalkMap; no theorem for the required construction and universes.",
+   "date": "2026-10-21",
+   "verdict": "no_match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor extension of a constant K-flat module complex with flat terms is K-flat on any ringed site",
+   "results": "8 hits; top: Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.of_flat_tensorProduct, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_flat_tensorProduct, Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier, Module.Flat.iff_rTensor_exact'; no theorem for the required construction and universes.",
+   "date": "2026-10-21",
+   "verdict": "no_match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKFlatIndependentCoefficients\"",
+   "results": "0 hits; top: ; no theorem for the required construction and universes.",
+   "date": "2026-10-21",
+   "verdict": "no_match"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Tt]ensor|[Tt]ensor.*evaluation",
+   "results": "16 hits; top: Mathlib/LinearAlgebra/Coevaluation.lean, Mathlib/LinearAlgebra/Coevaluation.lean, Mathlib/LinearAlgebra/Coevaluation.lean, Mathlib/LinearAlgebra/Coevaluation.lean, Mathlib/LinearAlgebra/Coevaluation.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/CategoryTheory/Monoidal/Limits/Preserves.lean, Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean; no theorem for the required construction and universes.",
+   "date": "2026-10-21",
+   "verdict": "no_match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointDerivedHomEvaluation",
+  "date": "2026-10-21",
+  "group": "A8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pod-identification-of-the-comparison",
+   "place": "Proof, third paragraph: the reverse canonical global-duality comparison is the inverse of the adjunction/evaluation map; K-flatness of the point extension of a flat-term module complex.",
+   "via": [
+    "lem-pod-point-derived-hom-evaluation",
+    "lem-pod-global-duality-map-identification"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointExtensionKFlat",
+  "file": "lean/Sheaf/Paper/PointExtensionKFlat.lean",
+  "declaration": "WeilConjectures.PointDerivedHom.point_extension_kflat",
+  "declarations": [
+   "WeilConjectures.PointDerivedHom.point_extension_kflat"
+  ],
+  "statement": "theorem point_extension_kflat\n    (hc : ∀ F : CochainComplex (ModuleCat.{max u (t + 1)} R) ℤ,\n      F.Acyclic → (moduleTotal F c).Acyclic)\n    (hflat : ∀ p : ℤ, Module.Flat R (c.X p)) :\n    CochainComplex.IsKFlatIndependentCoefficients (R := B)\n      ((extensionComplex.{t, u} k B α L adj).obj c)",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-2cbb4",
+  "group": "A8",
+  "result": "fix",
+  "landing": "20261020T235539-L-1188120",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-2cbb4",
+  "group": "A8",
+  "result": "fix",
+  "landing": "20261020T235539-L-1188120",
+  "kind": "interface",
+  "note": "independent cc review: delivered PointDerivedHomModels vs published item module (verbatim; Expr.hash of item type and moved defs equal); new lemmas vs their nodes; point_extension_kflat vs Stacks K-flat pullback (true); item proof uses vs proof_deps"
+ }
+}
