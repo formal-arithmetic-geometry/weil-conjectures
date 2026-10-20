@@ -18801,3 +18801,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:21 L: returned deliver/NA/lem-weil-pbc-residue-perfect-finite-quotient-models (reviewer RETURN: L: independent stage-2 immutable head 4d08a4b5cc0d: Fourth identical re-push: module sha256 b38a303c is byte-identical t)
 - 18:25 L: returned deliver/NA/lem-weil-pbc-residue-perfect-finite-quotient-models (reviewer RETURN: L: independent stage-2 immutable head c1138501c7ee: A6/G4: fifth identical re-push; module sha256 b38a303c byte-identica)
 - 18:31 L: returned deliver/NA/lem-weil-pbc-residue-perfect-finite-quotient-models (reviewer RETURN: L: independent stage-2 immutable head 7e2a3f5255a2: A6/A7 + regression, seventh identical push: snapshot diff -rq vs the)
+- 18:31 L: returned deliver/B3/Sheaf.Paper.FinitePerfectAdicRealization (reviewer RETURN: (reviewer C-d4242, head d424245c5) Superseded (point 2/6): the live tree now holds L's full restore of lean/Sheaf/Paper/)
