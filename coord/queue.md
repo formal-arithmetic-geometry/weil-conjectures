@@ -1,8 +1,8 @@
 # Work queue
 
-79 items; claim with `tools/claim.py next <group> [--stage N]`.
+77 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (28 clusters, 2128 modules)
+## Rework: quarantined by the upstream sync (26 clusters, 2117 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -14,7 +14,6 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.StrictLocalLocalizedHomGerm` | 1 |  | error: Sheaf/AlgebraicGeometry/StrictLocalLocalizedHomGerm.lean:57:6: error: Application type mismatch: The argument | ((Scheme.strictHenselizationStructuralMap |
 | `Sheaf.AlgebraicGeometry.QcoherentNormalizedComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/QcoherentNormalizedComparison.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality f |
 | `Sheaf.AlgebraicGeometry.QcoherentNormalizedPullbackSquare` | 1 |  | error: Sheaf/AlgebraicGeometry/QcoherentNormalizedPullbackSquare.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturali |
-| `Sheaf.Paper.GlobalTensorPullbackDerivedData` | 1 |  | error: Sheaf/Paper/GlobalTensorPullbackDerivedData.lean:100:9: error(lean.unknownIdentifier): Unknown constant `CochainComplex.tensorPullbackRingMap` | | Note:  |
 | `Sheaf.Paper.GlobalTensorPullbackUnderivedData` | 1 |  | error: Sheaf/Paper/GlobalTensorPullbackUnderivedData.lean:6:0: error: import WeilConjectures.Algebra.Homology.KFlatPullback failed, environment already contains |
 | `Sheaf.RingTheory.AuslanderBuchsbaum` | 1 |  | error: Sheaf/RingTheory/AuslanderBuchsbaum.lean:52:8: error(lean.unknownIdentifier): Unknown identifier `depth_subsingleton` | Sheaf/RingTheory/AuslanderBuchsba |
 | `Sheaf.AlgebraicGeometry.QCohTensorResolutionChartComparisonIso` | 1 |  | error: Sheaf/AlgebraicGeometry/QCohTensorResolutionChartComparisonIso.lean:1:0: error: import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde failed, environment a |
@@ -25,7 +24,6 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootNormalizationFinite` | 1 |  | error: Sheaf/AlgebraicGeometry/Morphisms/StrictHenselRootNormalizationFinite.lean:190:28: error(lean.unknownIdentifier): Unknown identifier `strictHenselization |
 | `Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootNormalizationGenericEtale` | 1 |  | error: Sheaf/AlgebraicGeometry/Morphisms/StrictHenselRootNormalizationGenericEtale.lean:136:4: error(lean.unknownIdentifier): Unknown identifier `strictHenseliz |
 | `Sheaf.AlgebraicGeometry.ScalarExtCupInverseImage` | 1 |  | error: Sheaf/AlgebraicGeometry/ScalarExtCupInverseImage.lean:26:23: error(lean.unknownIdentifier): Unknown identifier `Field` | | Note: A public declaration `Fi |
-| `Sheaf.AlgebraicGeometry.SmoothDiagonalDualizingDeterminant` | 1 |  | error: Sheaf/AlgebraicGeometry/SmoothDiagonalDualizingDeterminant.lean:6:0: error: import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex failed, environme |
 | `Sheaf.Algebra.Homology.AffineTildeCoefficientPushforwardHomologyCoordinates` | 1 |  | error: Sheaf/Algebra/Homology/AffineTildeCoefficientPushforwardHomologyCoordinates.lean:31:25: error(lean.synthInstanceFailed): failed to synthesize instance of |
 | `Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryNormalizedComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryNormalizedComparison.lean:174:12: error(lean.invalidField): Invalid field `IsAcyclicTensorKFlat`: The en |
 | `Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDescentRepresentative` | 1 |  | error: Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryDescentRepresentative.lean:51:10: error(lean.invalidField): Invalid field `IsAcyclicTensorKFlat`: The en |
