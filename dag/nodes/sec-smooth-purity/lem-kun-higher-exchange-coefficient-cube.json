@@ -20,77 +20,71 @@
  ],
  "proof": [
   {
-   "text": "Put $K_0=F_0[0]$ and $K_1=F_1[0]$. Termwise inverse image identifies $a^{-1}K_0$ with $(a^{-1}F_0)[0]$, so $\\phi$ gives $\\widehat\\phi:a^{-1}K_0\\to K_1$. All these objects are bounded below. Apply [lem-kun-derived-exchange-cube] to the given eight schemes, their named arrows, and $K_0$. Its four comparison equalities are exactly the four equalities in the hypotheses. With $E_b,P,Q$ denoting the derived exchanges, and $\\chi^D:y^{-1}e_0^{-1}\\cong e_1^{-1}a^{-1}$, it gives\n$$E_{1,a^{-1}K_0}\\circ f_1^{-1}P_{K_0}=Rh_{1,*}(\\chi^D_{K_0})\\circ Q_{e_0^{-1}K_0}\\circ x^{-1}E_{0,K_0}.$$\nThe source comparison $x^{-1}f_0^{-1}\\cong f_1^{-1}s^{-1}$ is included on the left. The cited cube theorem requires only commuting faces, so no cartesianness of a comparison face is used.",
+   "text": "Derive the needed derived cube identity directly from horizontal pasting [lemma-weil-pbc-derived-exchange-coherence]. Form the two outer horizontal composites, apply derivedBaseChangeMapPlus_paste_horiz to each at F₀[0], and identify the outer squares using sqf.w and sqe.w. Transport along these equalities by equality elimination; the commutativity witnesses agree by proof irrelevance. Precompose and postcompose with the inverse-image composition isomorphisms, and cancel adjacent inverse pairs. Equality elimination for upperStarCompDerivedPlus expresses both resulting comparisons using the common composite. This is the already proved cube-pasting calculation in WeilConjectures.AlgebraicGeometry.AbelianExchangeCubeComparisons, reproduced as proved private helpers to avoid importing its unrelated declarations.",
    "uses": [
-    "def-weil-pbc-derived-inverse-image",
-    "lem-kun-derived-exchange-cube"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EYM, lemma-relative-colimit-general, first two proof paragraphs; Tag 0EZT, lemma-base-change-Rf-star-colim, final comparison; formal degreewise coefficient compatibility"
-   }
-  },
-  {
-   "text": "By [def-kun-commutative-derived-exchange], $E_1:f_1^{-1}Rg_{1,*}\\to Rh_{1,*}e_1^{-1}$ is a natural transformation. Its naturality equation at $\\widehat\\phi$ is\n$$E_{1,K_1}\\circ f_1^{-1}Rg_{1,*}(\\widehat\\phi)=Rh_{1,*}(e_1^{-1}\\widehat\\phi)\\circ E_{1,a^{-1}K_0}.$$\nPrecompose with $f_1^{-1}P_{K_0}$ and substitute step 1. Associativity gives\n$$E_{1,K_1}\\circ f_1^{-1}Rg_{1,*}(\\widehat\\phi)\\circ f_1^{-1}P_{K_0}=Rh_{1,*}(e_1^{-1}\\widehat\\phi)\\circ Rh_{1,*}(\\chi^D_{K_0})\\circ Q_{e_0^{-1}K_0}\\circ x^{-1}E_{0,K_0}.$$\nOnly naturality and composition have been used; $\\widehat\\phi$ is not inverted.",
-   "uses": [
-    "def-kun-commutative-derived-exchange"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EYM, lemma-relative-colimit-general, first two proof paragraphs; Tag 0EZT, lemma-base-change-Rf-star-colim, final comparison; formal degreewise coefficient compatibility"
-   }
-  },
-  {
-   "text": "Use the natural exact-functor cohomology isomorphism of [lem-weil-pbc-exact-functor-complex-cohomology] for each inverse image. Together with the termwise factorization in [def-weil-pbc-derived-inverse-image], it gives $\\lambda_{u,L}:\\mathcal H^q(u^{-1}L)\\cong u^{-1}\\mathcal H^q(L)$ on derived categories: apply part (2) of [lem-weil-pbc-localization-universal-property] to the cohomology functors and their isomorphism on complexes. They invert quasi-isomorphisms by the definition of cohomology and exactness. Thus $\\lambda$ is natural for derived morphisms as well. These identifications respect the composition comparisons of [lem-weil-pbc-derived-inverse-image-composition]. Indeed on a representative complex both paths act on cycles by the termwise sheaf composition map and then pass to the quotient by boundaries; the cycle inclusion and cohomology projection compatibility in the exact-functor lemma gives equality. Part (3) of the localization lemma gives the same equality on derived categories. In particular, $\\mathcal H^q(\\chi^D_L)$ is the sheaf comparison $\\chi$ after these identifications.",
-   "uses": [
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "def-weil-pbc-derived-inverse-image",
-    "lem-weil-pbc-localization-universal-property",
+    "lemma-weil-pbc-derived-exchange-coherence",
     "lem-weil-pbc-derived-inverse-image-composition"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EYM, lemma-relative-colimit-general, first two proof paragraphs; Tag 0EZT, lemma-base-change-Rf-star-colim, final comparison; formal degreewise coefficient compatibility"
+    "place": "Tag 0EYM, lemma-relative-colimit-general, first two proof paragraphs: exchange followed by the coefficient morphism; Tag 0EZT, lemma-base-change-Rf-star-colim, final comparison. Agent-extracted degreewise coefficient compatibility."
    }
   },
   {
-   "text": "Apply the functor $\\mathcal H^q$ to step 2 and use step 3. By [def-weil-pbc-direct-image], $\\mathcal H^q(Ru_*G[0])=R^qu_*G$, also on coefficient morphisms by functoriality. The cohomology of $P_{K_0}$ is $P^q_{F_0}$ and that of $Q_{e_0^{-1}K_0}$ is $Q^q_{e_0^{-1}F_0}$, precisely their definitions in the statement. Each square indexed by $b$ is cartesian, and for it $E_b$ is the exchange $\\Ex_{\\square_b}$ of [def-weil-pbc-derived-exchange]. Indeed both are the mate of a square isomorphism under the same adjunctions, by the same unit-isomorphism-counit formula. The sheaf-level $\\theta_{\\square_b}$ of [def-weil-pbc-cartesian-square] is the identification of both sides with the inverse image along the common composite, i.e. $c^{-1}\\circ c$. Hence the component of $\\theta^D_{\\square_b}$ [def-weil-pbc-derived-square-iso] at $QK^\\bullet$ is the class of the termwise $c^{-1}\\circ c$. By clause (2) of [lem-weil-pbc-derived-inverse-image-composition], that is also the component of the commutative-square $\\theta$. Part (3) of [lem-weil-pbc-localization-universal-property] makes the two isomorphisms equal, hence also their mates. Therefore [lem-kun-bc-map-on-cohomology] identifies $\\mathcal H^q(E_{0,K_0})$ with $\\beta_{0,F_0}$ and $\\mathcal H^q(E_{1,K_1})$ with $\\beta_{1,F_1}$. The other three factors become $f_1^{-1}(R^qg_{1,*}\\phi)$, $R^qh_{1,*}(e_1^{-1}\\phi)$ and $R^qh_{1,*}(\\chi_{F_0})$. Hence the equality obtained is exactly $\\beta_{1,F_1}\\circ U_\\phi=V_\\phi\\circ x^{-1}\\beta_{0,F_0}$. Cartesianness was used only for the two usual-map identifications, and no finiteness, torsion or isomorphism hypothesis was used.",
+   "text": "Use [def-kun-commutative-derived-exchange] naturality at the composite a⁻¹(F₀[0]) → (a⁻¹F₀)[0] → F₁[0]. Postcompose the derived cube equality with Rh₁,* of its inverse image under e₁ and the e₁ inverse-image/single-complex comparison. Apply naturality of that comparison to φ. Compatibility of exact-functor localization with single complexes identifies the target composition comparison with the single-complex image of the ordinary square comparison for sqe. Naturality of the exchange for sqh moves the e₀ single-complex comparison to the preceding factor. These operations use no invertibility of φ or of exchange.",
    "uses": [
-    "def-weil-pbc-direct-image",
-    "lem-kun-bc-map-on-cohomology",
-    "def-weil-pbc-derived-exchange",
-    "def-weil-pbc-cartesian-square",
-    "def-weil-pbc-derived-square-iso",
+    "def-kun-commutative-derived-exchange",
+    "def-weil-pbc-derived-inverse-image",
     "lem-weil-pbc-derived-inverse-image-composition",
-    "lem-weil-pbc-localization-universal-property"
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYM, lemma-relative-colimit-general, first two proof paragraphs: exchange followed by the coefficient morphism; Tag 0EZT, lemma-base-change-Rf-star-colim, final comparison. Agent-extracted degreewise coefficient compatibility."
+   }
+  },
+  {
+   "text": "Prove the exact inverse-image/cohomology composition compatibility needed here explicitly. For a short complex, compare the once-mapped and twice-mapped left homology data using identity maps on kernel and homology objects and the uniqueness of left homology map data. This proves composition compatibility of the canonical homology isomorphisms on complexes [lem-weil-pbc-exact-functor-complex-cohomology]. Descend to derived categories by natural-transformation extensionality along localization [lem-weil-pbc-localization-universal-property], using the factorization equation of the derived composition isomorphism. Restrict to bounded below categories. Combine this with naturality under an isomorphism of exact functors to obtain compatibility for upperStarCompDerivedPlus. Apply it twice and cancel inverse comparisons to get the square comparison for sqf. The parallel single-complex calculation follows by the same localization factorization and restriction to bounded below categories.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-derived-inverse-image-composition",
+    "def-weil-pbc-derived-inverse-image"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EYM, lemma-relative-colimit-general, first two proof paragraphs; Tag 0EZT, lemma-base-change-Rf-star-colim, final comparison; formal degreewise coefficient compatibility"
+    "place": "Tag 0EYM, lemma-relative-colimit-general, first two proof paragraphs: exchange followed by the coefficient morphism; Tag 0EZT, lemma-base-change-Rf-star-colim, final comparison. Agent-extracted degreewise coefficient compatibility."
+   }
+  },
+  {
+   "text": "Apply degree-q homology to the derived equality from step 2, and precompose with the x and f₀ exact-inverse-image/cohomology comparisons. Expand abelianHigherExchange, which is by definition the cohomology of the commutative derived mate. Naturality of the f₁ and x cohomology comparisons and the sqf compatibility from step 3 identify the two sides with the displayed statement. Functoriality identifies the coefficient maps with the homology of derived direct-image maps [def-weil-pbc-direct-image]. No separate identification with the resolution-model higher base-change map is required for this Lean statement.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "def-kun-commutative-derived-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYM, lemma-relative-colimit-general, first two proof paragraphs: exchange followed by the coefficient morphism; Tag 0EZT, lemma-base-change-Rf-star-colim, final comparison. Agent-extracted degreewise coefficient compatibility."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-derived-inverse-image",
-  "lem-kun-derived-exchange-cube",
+  "lemma-weil-pbc-derived-exchange-coherence",
   "def-kun-commutative-derived-exchange",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-weil-pbc-localization-universal-property",
+  "def-weil-pbc-derived-inverse-image",
   "lem-weil-pbc-derived-inverse-image-composition",
   "def-weil-pbc-direct-image",
-  "lem-kun-bc-map-on-cohomology",
-  "def-weil-pbc-derived-exchange",
-  "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-derived-square-iso"
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-localization-universal-property"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0EYM, lemma-relative-colimit-general, first two proof paragraphs; Tag 0EZT, lemma-base-change-Rf-star-colim, final comparison; formal degreewise coefficient compatibility"
+  "place": "Tag 0EYM, lemma-relative-colimit-general, first two proof paragraphs: exchange followed by the coefficient morphism; Tag 0EZT, lemma-base-change-Rf-star-colim, final comparison. Agent-extracted degreewise coefficient compatibility.; E2 formalization: two horizontal pasting identities, coefficient naturality, and explicit cohomology/single-complex coherence; private cube calculation reused from WeilConjectures.AlgebraicGeometry.AbelianExchangeCubeComparisons."
  },
  "mathlib_searches": [
   {
@@ -238,5 +232,15 @@
   "group": "NI",
   "result": "fix",
   "note": "Wrote review.md and a complete replacement report under fixes, repairing the placeholder second reading (H11). All statement clauses, dependencies, canonical maps, universes, and edge cases checked; Lean signature matches verbatim and scompile.py passed both module checks. Mathematics and Lean accepted unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261020T122106-L-476130",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
