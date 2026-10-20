@@ -6,45 +6,8 @@ Authors: SHEAF group Q39
 module
 
 public import Sheaf.AlgebraicGeometry.OrdinarySupportedKummerSystem
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.AlgebraicGeometry.ClosedSupportHom
-import Mathlib.Algebra.Homology.HomotopyCategory.Triangulated
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.CategoryTheory.Linear.FunctorCategory
-import Mathlib.CategoryTheory.Linear.Yoneda
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import Sheaf.AlgebraicGeometry.RelativeTorsorCohomology
-import Sheaf.CategoryTheory.Sites.TorsorWithSection
-import Mathlib.Algebra.Homology.Embedding.ExtendHomology
-import Mathlib.Algebra.Homology.HomologySequence
-import Sheaf.AlgebraicGeometry.DerivedCategories
-import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-import Sheaf.AlgebraicGeometry.FiniteEtaleTwistLine
-import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
-import Sheaf.AlgebraicGeometry.PullbackConstantModule
-import Sheaf.AlgebraicGeometry.GeometricStalkAsPullback
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
-import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
-import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.OpenClosed.Exact
-import WeilConjectures.SixFunctors.Finite.Exact
-import WeilConjectures.SixFunctors.Finite.Stalk
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.AlgebraicGeometry.SupportedCartierBoundaryExistence
 
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
-import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
-import Sheaf.AlgebraicGeometry.SupportedKummerCartierPullback
-import Sheaf.AlgebraicGeometry.SupportedKummerScalarSource
-import Sheaf.AlgebraicGeometry.SupportedKummerSupportHomNaturality
-import WeilConjectures.AlgebraicGeometry.EffectiveCartier
-import WeilConjectures.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
-import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 /-!
 # Existence of an ordinary supported Cartier Kummer map
 
@@ -209,6 +172,6 @@ theorem ordinary_supported_kummer_uniqueBoundary (T : Scheme.{u}) (N : ℕ) (hN 
     ∃! κ : Ext ((lowerStar (ModuleCat.{u + 1} A) i).obj (ordinaryFiniteConstant A D))
       (Scheme.finiteEtaleTateLine T N A hA) 2,
       SupportedKummerBoundary A N hA i hI hT κ := by
-  sorry
+  exact supported_cartier_boundary_existsUnique T N hN A hA hT i hI
 
 end AlgebraicGeometry.Etale

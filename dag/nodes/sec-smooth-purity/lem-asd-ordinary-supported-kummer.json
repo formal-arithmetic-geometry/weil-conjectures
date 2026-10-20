@@ -169,6 +169,13 @@
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md",
     "place": "Proof penultimate paragraph: Cartier-preserving base change"
    }
+  },
+  {
+   "text": "The auxiliary unique-boundary declaration in this module is proved by applying the separately proved normalized-boundary existence and uniqueness theorem [lem-asd-cartier-boundary-existence]. This does not discharge the remaining Chern, pullback, scalar and derived-arrow witnesses of the main theorem.",
+   "uses": [
+    "lem-asd-cartier-boundary-existence"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -192,7 +199,8 @@
   "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
   "lem-weil-pbc-open-closed-short-exact",
   "lemma-weil-pbc-finite-direct-image-exact",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-asd-cartier-boundary-existence"
  ],
  "proof_origin": {
   "by": "agent",
@@ -449,5 +457,15 @@
   "group": "Q35",
   "result": "pass",
   "note": "Re-delivery fixes the 1f7ae2a4 RETURN: H2 removed the lem-asd-etale-finite-twist-pullback stmt_dep; H13 no longer delivers EtaleFiniteTwistPullback.lean or its Q03 record; H4 deleted the four punctual-purity duplicates (owned by landed def-per-punctual-purity). The theorem matches ILO XVI 3.4.3 clause by clause: ℓ prime, ULift ZMod ℓ, regular Noetherian X,Y, ℓ a unit, IsFiniteLocallyFreeOfDegree d with d>0 and ℓ∤d, regular Cartier D via i.ker.IsInvertible, D' = nilradical subscheme of the pullback with regular Cartier hypotheses, IsIso of the transpose of the unique SupportedKummerBoundary class (the c=1 class of the class-calculus node) from (Y,D') to (X,D); no generic-étale assumption; lean.statement verbatim. Mechanical finding: lem-exc-closed-ambient (rightAdjoint of its IsLeftAdjoint instance) and lem-asd-ordinary-supported-kummer (Classical.choose of its ∃!) are genuine; both modules contain only theorems, so PASS on that point. §1(B) helper ordinary_supported_kummer_uniqueBoundary is the exact existence+uniqueness clause, with a sorry and a docstring. nt_compile --json at load ~61-79 clean: Kummer 24.1 s, RegularImmersionClassCalculus 42.8 s, item 37.3 s. Advisories: the Kummer record's by changed Q39→Q35 (provenance only); supportedExactDerivedMap belongs to def-asd-ordinary-supported-kummer-system, which is reached only through the cited Kummer node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261020T051055-L-1552413",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
