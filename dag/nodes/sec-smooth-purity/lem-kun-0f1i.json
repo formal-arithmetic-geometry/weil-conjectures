@@ -1,384 +1,299 @@
 {
-  "id": "lem-kun-0f1i",
-  "blueprint": {
-    "is": "lem-kun-0f1i",
-    "from": null,
-    "same_as": []
+ "id": "lem-kun-0f1i",
+ "blueprint": {
+  "is": "lem-kun-0f1i",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Base change towards spectra of fields",
+ "statement": "Let $K$ be a field and $f:X\\to\\operatorname{Spec}(K)$ a scheme of finite type over $K$ [def-weil-pbc-scheme-conventions]. Let $S'$ be a $K$-scheme and $g:T\\to S'$ a quasi-compact and quasi-separated morphism of $K$-schemes. Set $X'=X\\times_KS'$ and $Y=X'\\times_{S'}T$, with projections $f':X'\\to S'$, $h:Y\\to X'$ and $e:Y\\to T$. Thus both squares in\n$$\n\\begin{array}{ccccc}\nX&\\longleftarrow&X'&\\xleftarrow{\\;h\\;}&Y\\\\\n\\Big\\downarrow{\\scriptstyle f}&&\\Big\\downarrow{\\scriptstyle f'}&&\\Big\\downarrow{\\scriptstyle e}\\\\\n\\operatorname{Spec}(K)&\\longleftarrow&S'&\\xleftarrow{\\;g\\;}&T\n\\end{array}\n$$\nare cartesian. For every abelian sheaf $F$ on the small etale site $T_{\\mathrm{et}}$ [def-weil-pbc-etale-sheaves] whose geometric stalks are torsion of orders invertible in $K$ [def-kun-torsion-invertible], the canonical exchange morphism of [def-kun-unbounded-exchange], with abelian coefficients ($\\Lambda=\\mathbf Z$) and $F$ in degree zero,\n$$\n(f')^{-1}Rg_*F\\longrightarrow Rh_*e^{-1}F\n$$\nis an isomorphism. This is the finite-type-over-$K$ case of Stacks Project, Tag 0F1I (etale-cohomology-lemma-punctual-base-change); no finite-type hypothesis on $S'$ or $T$ is imposed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1i.md",
+  "place": "node lem-kun-0f1i, order 1777",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0F1I"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-kun-torsion-invertible",
+  "def-kun-unbounded-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Establish universal cumulative degree-zero exchange over K by perfect closure and reduction, descending only the underived exchange through universal-homeomorphism squares.",
+   "uses": [
+    "lem-kun-field-degree-zero"
+   ],
+   "elementary": false
   },
-  "kind": "statement",
-  "title": "Base change towards spectra of fields",
-  "statement": "Let $K$ be a field and $f:X\\to\\operatorname{Spec}(K)$ a scheme of finite type over $K$ [def-weil-pbc-scheme-conventions]. Let $S'$ be a $K$-scheme and $g:T\\to S'$ a quasi-compact and quasi-separated morphism of $K$-schemes. Set $X'=X\\times_KS'$ and $Y=X'\\times_{S'}T$, with projections $f':X'\\to S'$, $h:Y\\to X'$ and $e:Y\\to T$. Thus both squares in\n$$\n\\begin{array}{ccccc}\nX&\\longleftarrow&X'&\\xleftarrow{\\;h\\;}&Y\\\\\n\\Big\\downarrow{\\scriptstyle f}&&\\Big\\downarrow{\\scriptstyle f'}&&\\Big\\downarrow{\\scriptstyle e}\\\\\n\\operatorname{Spec}(K)&\\longleftarrow&S'&\\xleftarrow{\\;g\\;}&T\n\\end{array}\n$$\nare cartesian. For every abelian sheaf $F$ on the small etale site $T_{\\mathrm{et}}$ [def-weil-pbc-etale-sheaves] whose geometric stalks are torsion of orders invertible in $K$ [def-kun-torsion-invertible], the canonical exchange morphism of [def-kun-unbounded-exchange], with abelian coefficients ($\\Lambda=\\mathbf Z$) and $F$ in degree zero,\n$$\n(f')^{-1}Rg_*F\\longrightarrow Rh_*e^{-1}F\n$$\nis an isomorphism. This is the finite-type-over-$K$ case of Stacks Project, Tag 0F1I (etale-cohomology-lemma-punctual-base-change); no finite-type hypothesis on $S'$ or $T$ is imposed.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1i.md",
-    "place": "node lem-kun-0f1i, order 1777",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0F1I"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-pbc-etale-sheaves",
-    "def-kun-torsion-invertible",
-    "def-kun-unbounded-exchange"
-  ],
-  "proof": [
-    {
-      "text": "Work degree by degree. By [lem-kun-unbounded-exchange-agrees] the exchange at the sheaf $F[0]$ agrees with the bounded-below abelian exchange. By [lem-kun-bc-map-on-cohomology], its degree-$q$ map is\n$$\\beta^q_F:(f')^{-1}R^qg_*F\\longrightarrow R^qh_*e^{-1}F,$$\nand in negative degrees both sides are zero. By [lem-weil-pbc-unbounded-derived-iso-cohomology], it is enough to prove that $\\beta^q_F$ is an isomorphism for every $q\\geq0$. In the remaining steps all higher direct images and all exchange maps are those of abelian sheaves; annihilation by $n$ is a property of such a sheaf, not a change of coefficient category.",
-      "uses": [
-        "lem-kun-unbounded-exchange-agrees",
-        "lem-kun-bc-map-on-cohomology",
-        "lem-weil-pbc-unbounded-derived-iso-cohomology"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F1I, conclusion read on cohomology sheaves"
-      }
-    },
-    {
-      "text": "Reduce to bounded exponent, simultaneously for every $q$. By [lem-kun-invertible-orders-colimit], $F=\\varinjlim_{n\\in I_K}F[n]$, where $I_K$ is ordered by divisibility. This is filtered: $1\\in I_K$ and $nm$ is an upper bound of $n,m\\in I_K$. The sheaf $F[n]$ is annihilated by $n$. Inverse image is additive and exact by [prop-weil-pbc-inverse-image-exact], so $e^{-1}F[n]$ is also annihilated by $n$; its stalks are consequently torsion. The morphism $h$ is a base change of $g$, hence is quasi-compact and quasi-separated by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence]. Apply [lemma-weil-pbc-direct-image-filtered-colimit] to $g$ and $h$, and [lem-weil-pbc-inverse-image-preserves-colimits] to $f'$ and $e$. They identify the source and target of $\\beta^q_F$ with the colimits of the sources and targets of $\\beta^q_{F[n]}$. Naturality in $F$ of the canonical exchange identifies its map with the colimit map. A colimit of a natural family of isomorphisms is an isomorphism: the inverse maps are natural and induce its inverse. Thus it remains to treat every abelian $F$ annihilated by a fixed positive integer $n$ invertible in $K$.",
-      "uses": [
-        "lem-kun-invertible-orders-colimit",
-        "prop-weil-pbc-inverse-image-exact",
-        "lem-weil-pbc-qcqs-morphism-permanence",
-        "lemma-weil-pbc-direct-image-filtered-colimit",
-        "lem-weil-pbc-inverse-image-preserves-colimits",
-        "def-kun-unbounded-exchange"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F1I, reduction to Z/nZ coefficients"
-      }
-    },
-    {
-      "text": "Choose an algebraic closure $\\overline K$ of $K$ [def-weil-algebraic-closure]. Put bars on the four corners of the exchange square after base change to $\\overline K$, and write $a:\\overline{X'}\\to X'$, $b:\\overline{S'}\\to S'$, $c:\\overline T\\to T$ and $d:\\overline Y\\to Y$ for the projections. The morphisms $g,h$ are quasi-compact and quasi-separated by the preceding step, and $F,e^{-1}F$ are $n$-torsion; $n$ is invertible in both fields. Hence [lem-kun-0f1c], applied separately to $g$ and $h$, gives canonical isomorphisms\n$$B_g:b^{-1}Rg_*F\\xrightarrow{\\sim}R\\overline g_*c^{-1}F,\\qquad B_h:a^{-1}Rh_*e^{-1}F\\xrightarrow{\\sim}R\\overline h_*d^{-1}e^{-1}F.$$\nThese comparisons respect the exchange map as follows. Let $E$ be the original derived exchange and $\\overline E$ the exchange in the barred square at $c^{-1}F$. Under $a^{-1}(f')^{-1}=\\overline{f'}^{-1}b^{-1}$ and $d^{-1}e^{-1}=\\overline e^{-1}c^{-1}$, one has\n$$B_h\\circ a^{-1}E=\\overline E\\circ\\overline{f'}^{-1}B_g.$$\nIndeed, paste the inverse-image squares around this cube in either order. The two pasted inverse-image isomorphisms agree by [lem-weil-pbc-derived-square-iso-pasting]. Taking their mates, clause (1) of [lem-weil-pbc-mate-pasting] gives exactly the two displayed composites. Thus an isomorphism $\\overline E$ implies an isomorphism $a^{-1}E$. Moreover $\\overline X$ is still finite type over $\\overline K$: local finite type is preserved by [lem-weil-pbc-lft-base-change], and quasi-compactness by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence].",
-      "uses": [
-        "def-weil-algebraic-closure",
-        "lem-kun-0f1c",
-        "lem-weil-pbc-derived-square-iso-pasting",
-        "lem-weil-pbc-mate-pasting",
-        "lem-weil-pbc-lft-base-change",
-        "lem-weil-pbc-qcqs-morphism-permanence"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F1I, passage to the algebraic closure; Tag 0F1C for both direct images"
-      }
-    },
-    {
-      "text": "The functor $a^{-1}$ used in the preceding step is conservative on the objects in question. For every geometric point $x:\\operatorname{Spec}\\Omega\\to X'$, the induced field homomorphism $K\\to\\Omega$ extends to $\\overline K\\to\\Omega$ by [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed]. The pair consisting of $x$ and this field homomorphism defines a lift $\\overline x:\\operatorname{Spec}\\Omega\\to\\overline{X'}$ by the fibre-product property. If $a^{-1}E$ is an isomorphism, then $x^{-1}E=\\overline x^{-1}a^{-1}E$ is an isomorphism, using the composition isomorphisms of [lem-weil-pbc-derived-inverse-image-composition]. This holds for every $x$, so [lem-kun-stalk-faithful-derived] implies that $E$ is an isomorphism. We may therefore prove the assertion for algebraically closed $K$, retaining the fixed integer $n$ and the hypothesis $nF=0$.",
-      "uses": [
-        "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
-        "lem-weil-pbc-derived-inverse-image-composition",
-        "lem-kun-stalk-faithful-derived"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F1I, conservativity in the algebraic-closure reduction"
-      }
-    },
-    {
-      "text": "Now assume $K$ algebraically closed. Replace $X$ by $X_{\\mathrm{red}}$. By [lem-weil-pbc-reduction-universal-homeomorphism], $i:X_{\\mathrm{red}}\\to X$ is a universal homeomorphism and $X_{\\mathrm{red}}$ is reduced. Its base changes $i':X_{\\mathrm{red}}\\times_KS'\\to X'$ and $i_Y:X_{\\mathrm{red}}\\times_KT\\to Y$ are universal homeomorphisms by [lem-weil-pbc-universal-homeomorphism-base-change]. By [thm-weil-pbc-universal-homeomorphism-invariance], their inverse images are equivalences compatible with inverse image, direct image and cohomology. These equivalences identify $i'^{-1}(f')^{-1}Rg_*F$ with the reduced source and $i'^{-1}Rh_*e^{-1}F$ with the reduced target. They also identify the exchange arrows: the exchange is the adjoint mate of the inverse-image square followed by the counit [def-kun-unbounded-exchange], and transporting this adjunction through the stated equivalences preserves that square and counit. Thus the reduced exchange is an isomorphism if and only if the original one is. The reduction is still finite type over $K$: on a finite affine cover a finitely generated $K$-algebra is replaced by its quotient by the nilradical, which is generated by the images of the same generators. Henceforth $X$ is reduced and finite type over algebraically closed $K$.",
-      "uses": [
-        "lem-weil-pbc-reduction-universal-homeomorphism",
-        "lem-weil-pbc-universal-homeomorphism-base-change",
-        "thm-weil-pbc-universal-homeomorphism-invariance",
-        "def-kun-unbounded-exchange"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F1I, reduction of X and topological invariance"
-      }
-    },
-    {
-      "text": "Establish $BC(f,n,0)$ for $f:X\\to\\operatorname{Spec}K$, with the universal, cumulative meaning of [def-kun-bc-property]. The algebraically closed field $K$ is perfect: in positive characteristic every element has a $p$th root, and in characteristic zero fields are perfect. By [lem-kun-geometric-reduced-perfect], $f$ is flat and of finite presentation, and $X_L$ is reduced for every extension $L/K$. For any $S'\\to\\operatorname{Spec}K$, the morphism $f':X\\times_KS'\\to S'$ is flat by [lem-weil-pbc-flat-morphism-base-change], and locally of finite presentation by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence]. Its geometric fibre at a point of $S'$ with algebraically closed residue extension $\\Omega$ is $X_\\Omega$, which is reduced by the same geometric-reducedness lemma. Thus [lem-kun-0eys] applies to every square formed from this $f'$ and any quasi-compact quasi-separated $g:T\\to S'$, for every abelian sheaf annihilated by $n$. It gives an isomorphism in degree zero. By step 1 this is the degree-zero map in the definition of $BC(f,n,0)$; all negative degrees vanish. This proves that property for all base changes, not only for the particular $f'$ originally given.",
-      "uses": [
-        "def-kun-bc-property",
-        "lem-kun-geometric-reduced-perfect",
-        "lem-weil-pbc-flat-morphism-base-change",
-        "lem-weil-pbc-qcqs-morphism-permanence",
-        "lem-kun-0eys"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F1I, degree-zero base change after reduction; Tag 0EYS"
-      }
-    },
-    {
-      "text": "Prove $BC(f,n,q)$ for all integers $q\\geq0$ by induction. Step 6 is the base $q=0$. For $q\\geq1$ assume $BC(f,n,q-1)$. If $BC(f,n,q)$ failed, [lem-kun-0f1d] would produce an affine integral normal $K$-scheme $S''$ with algebraically closed function field $L$, an integer $d\\mid n$, and the projection\n$$h'':X\\times_K\\operatorname{Spec}L\\longrightarrow X\\times_KS''$$\nwith $R^qh''_*\\underline{\\mathbf Z/d\\mathbf Z}\\ne0$. The hypotheses of that lemma hold: $f$ is a morphism of schemes, $q\\geq1$, the preceding-degree property holds universally by the induction hypothesis, and $n$ is invertible on $\\operatorname{Spec}K$. Apply [lem-kun-0f1i-normal] to this same finite-type $K$-scheme $X$, this $S''$, this $L$ and this divisor $d$. It gives $R^qh''_*\\underline{\\mathbf Z/d\\mathbf Z}=0$, a contradiction. The equality of its projection with the one just displayed follows from $(X\\times_KS'')\\times_{S''}\\operatorname{Spec}L=X\\times_K\\operatorname{Spec}L$. Therefore the induction step holds. By [def-kun-bc-property], every original square and every $F$ with $nF=0$ has isomorphic degree-$q$ exchange maps for all $q\\geq0$.",
-      "uses": [
-        "def-kun-bc-property",
-        "lem-kun-0f1d",
-        "lem-kun-0f1i-normal"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F1I, application of Tag 0F1D and the final normal-integral vanishing reduction"
-      }
-    },
-    {
-      "text": "Step 7 proves the bounded-exponent assertion in the reduced algebraically closed case. Step 5 returns it to arbitrary finite-type $X$ over that algebraically closed field, and steps 3 and 4 return it to the original field $K$. Step 2 then proves every degree-$q$ exchange is an isomorphism for the original torsion sheaf $F$. Negative degrees vanish and [lem-weil-pbc-unbounded-derived-iso-cohomology], with the map identification of step 1, implies that the stated canonical derived exchange is an isomorphism.",
-      "uses": [
-        "lem-weil-pbc-unbounded-derived-iso-cohomology"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F1I, undoing the reductions"
-      }
-    }
-  ],
-  "proof_deps": [
-    "lem-kun-unbounded-exchange-agrees",
-    "lem-kun-bc-map-on-cohomology",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology",
-    "lem-kun-invertible-orders-colimit",
-    "prop-weil-pbc-inverse-image-exact",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lemma-weil-pbc-direct-image-filtered-colimit",
-    "lem-weil-pbc-inverse-image-preserves-colimits",
-    "def-kun-unbounded-exchange",
-    "def-weil-algebraic-closure",
-    "lem-kun-0f1c",
-    "lem-weil-pbc-derived-square-iso-pasting",
-    "lem-weil-pbc-mate-pasting",
-    "lem-weil-pbc-lft-base-change",
-    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
-    "lem-weil-pbc-derived-inverse-image-composition",
-    "lem-kun-stalk-faithful-derived",
-    "lem-weil-pbc-reduction-universal-homeomorphism",
-    "lem-weil-pbc-universal-homeomorphism-base-change",
-    "thm-weil-pbc-universal-homeomorphism-invariance",
+  {
+   "text": "Induct on the cumulative degree bound. A successor failure produces an affine integral normal scheme with algebraically closed function field and a divisor d of n with nonzero constant higher direct image. The normal generic-fibre theorem makes that object zero. Use the explicit Cartesian isomorphisms and constant-sheaf transport to identify the two models.",
+   "uses": [
     "def-kun-bc-property",
-    "lem-kun-geometric-reduced-perfect",
-    "lem-weil-pbc-flat-morphism-base-change",
-    "lem-kun-0eys",
-    "lem-kun-0f1d",
-    "lem-kun-0f1i-normal"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1i.md",
-    "place": "Proof reconstructed from the imported five proof steps and checked against the online Stacks Project Tag 0F1I; local blueprint and Stacks tex are absent (WANTED in report)."
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Etale cohomology base change for finite type schemes over a field with torsion coefficients of invertible order",
-      "results": "KaehlerDifferential.isBaseChange_of_formallyEtale, RingHom.Etale.isStableUnderBaseChange, Algebra.FormallyEtale.of_restrictScalars, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, Algebra.Etale.baseChange, Algebra.Etale.comp, Algebra.FormallyEtale.comp",
-      "date": "2026-10-16",
-      "verdict": "no match: retrieved ring/algebra base change or scheme permanence does not assert torsion etale higher-direct-image base change"
-    },
-    {
-      "tool": "grep",
-      "query": "baseChange|base_change|higherDirectImage",
-      "results": "Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean",
-      "date": "2026-10-16",
-      "verdict": "no match: retrieved ring/algebra base change or scheme permanence does not assert torsion etale higher-direct-image base change"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Etale cohomology base change over a field for invertible torsion sheaves",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "loogle",
-      "query": "AlgebraicGeometry.Etale, IsIso",
-      "results": "loogle: unknown identifier 'IsIso'",
-      "date": "2026-10-16",
-      "verdict": "no match: retrieved ring/algebra base change or scheme permanence does not assert torsion etale higher-direct-image base change"
-    },
-    {
-      "tool": "grep",
-      "query": "theorem lift|def lift|exists.*AlgHom",
-      "results": "Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/FieldTheory/IsAlgClosed/Basic.lean",
-      "date": "2026-10-16",
-      "verdict": "supporting fact only: existing leaf lem-weil-pbc-algebraic-extension-embeds-algebraically-closed; not a match for this item"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Every algebraic field extension embeds into any algebraically closed extension field",
-      "results": "Field.embEquivOfIsAlgClosed, NumberField.Embeddings.instNonemptyRingHomOfIsAlgebraicRatOfIsAlgClosed, IsAlgClosed.lift, AlgebraicClosure.isAlgClosed, Field.embProdEmbOfIsAlgebraic, IsAlgClosed.lift_def, algebraicClosure.isAlgClosure, Field.instInhabitedEmb",
-      "date": "2026-10-16",
-      "verdict": "supporting fact only: existing leaf lem-weil-pbc-algebraic-extension-embeds-algebraically-closed; not a match for this item"
-    },
-    {
-      "tool": "loogle",
-      "query": "IsAlgClosed.lift",
-      "results": "IsAlgClosed.lift, Field.absoluteGaloisGroup.map_toFun_apply, Field.absoluteGaloisGroup.map_toFun_symm_apply",
-      "date": "2026-10-16",
-      "verdict": "supporting fact only: existing leaf lem-weil-pbc-algebraic-extension-embeds-algebraically-closed; not a match for this item"
-    },
-    {
-      "tool": "grep",
-      "query": "etale.*cohom|cohom.*etale|baseChangeMap|baseChangeHomologyMap",
-      "results": "none",
-      "date": "2026-10-16",
-      "verdict": "no match: retrieved ring/algebra base change or scheme permanence does not assert torsion etale higher-direct-image base change"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Higher direct image of torsion etale sheaves commutes with base change by a finite type scheme over a field",
-      "results": "KaehlerDifferential.isBaseChange_of_formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, Algebra.FormallyEtale.of_restrictScalars, Algebra.IsEtaleAt.comp, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.comp, Algebra.Etale.comp",
-      "date": "2026-10-16",
-      "verdict": "no match: retrieved ring/algebra base change or scheme permanence does not assert torsion etale higher-direct-image base change"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"baseChange\"",
-      "results": "Submodule.baseChange, LinearMap.baseChange, LinearEquiv.baseChange, LinearMap.baseChange_id, Submodule.baseChange_bot, Submodule.baseChange_top, Submodule.tmul_mem_baseChange_of_mem, Submodule.baseChange_mono",
-      "date": "2026-10-16",
-      "verdict": "no match: retrieved ring/algebra base change or scheme permanence does not assert torsion etale higher-direct-image base change"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1777,
-  "blueprint_uses": [
-    "def-kun-bc-property",
-    "def-kun-separably-closed",
-    "def-kun-torsion-invertible",
-    "def-kun-unbounded-exchange",
-    "def-weil-pbc-hypercohomology-filtrations",
-    "def-weil-pbc-scheme-conventions",
-    "lem-kun-0eys",
-    "lem-kun-0f1c",
     "lem-kun-0f1d",
     "lem-kun-0f1i-normal",
-    "lem-kun-bc-base-change",
-    "lem-kun-bc-map-on-cohomology",
-    "lem-kun-geometric-reduced-perfect",
-    "lem-kun-invertible-orders-colimit",
-    "lem-kun-sep-closure-conservative",
-    "lem-kun-stalk-faithful-derived",
-    "lem-kun-unbounded-exchange-agrees",
-    "lem-kun-zn-sheaf-invertible-orders",
-    "lemma-weil-pbc-direct-image-filtered-colimit",
-    "thm-weil-pbc-universal-homeomorphism-invariance"
-  ],
-  "uses_not_cited": [
-    "def-kun-separably-closed",
-    "def-kun-unbounded-exchange",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof_split_by": "labels",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+    "lem-kun-constant-higher-direct-image-square-iso"
+   ],
+   "elementary": false
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-kunneth-ordinary",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "lem-kun-0f1i",
-    "worker": "stage1",
-    "summary": "Corrected the diagram labels (h is Y to X-prime, e is Y to T), kept every mathematical hypothesis and conclusion, and rewrote the five imported steps as eight explicit arguments. Reused all support nodes, avoided the overstrong arbitrary-pullback exchange assertion, proved conservativity for the algebraic rather than merely separable closure, and set up cumulative universal BC induction. No new nodes or Mathlib leaves. Checked every proof citation against its statement and supplied citations.json.",
-    "blueprint": "Steps 1-2 realize the degreewise and bounded-exponent reduction; steps 3-4 realize passage to the algebraic closure; step 5 realizes reduction of X; steps 6-7 realize degree zero and contraposition through the normal case; step 8 concludes. The imported affine-X reduction is unnecessary because X is already finite type and every subsequent cited statement applies to arbitrary finite-type X. The unit has no ordered proof steps to change."
+  {
+   "text": "A sheaf killed by n has canonical cyclic-module coefficients. Cohomology detection and the previous cumulative result prove module exchange invertible. The unbounded module/abelian comparison and the single-complex coefficient comparison give invertible abelian exchange.",
+   "uses": [
+    "lem-kun-n-torsion-module-lift",
+    "lem-kun-unbounded-abelian-exchange-comparison",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false
   },
-  "reviewed": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-Codex-Q28-6b6d9eeaf",
-    "group": "Q28",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q28-6b6d9eeaf (reviewer sub-agent of L); spot-checked: Mathematics and citations pass after checking all eight steps, the exact blueprint, Stacks Tags 0F1I/0F1C/0F1D, hypotheses, edge cases, coefficients, morphisms, and DAG duplicates. Removed worker-recorded cross-unit tool_uses from split_report per delivery-errors C8; corrected DAG JSON is in fixes/dag/nodes/sec-smooth-purity/lem-kun-0f1i.json. Review written to review.md.; 1 file(s) fixed by the reviewer"
-  },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-e3d614137",
-    "group": "Q07",
-    "result": "pass",
-    "note": "Reviewed node, source, Lean declaration, all four dependencies, docstrings, edge cases, searches, and report sections. Reproduced per-file compilation with scompile.py successfully; no substantive or mechanical findings."
-  },
-  "lean": {
-    "module": "Sheaf.Targets.BaseChangeTowardsFields",
-    "declaration": "AlgebraicGeometry.Etale.baseChange_towardsSpecField",
-    "file": "lean/Sheaf/Targets/BaseChangeTowardsFields.lean",
-    "statement": "theorem baseChange_towardsSpecField {K : Type u} [Field K] {X S' T : Scheme.{u}} (f : X ⟶ Spec (.of K)) [LocallyOfFiniteType f] [QuasiCompact f] [S'.Over (Spec (.of K))] [T.Over (Spec (.of K))] (g : T ⟶ S') [g.IsOver (Spec (.of K))] [QuasiCompact g] [QuasiSeparated g] (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : IsTorsionOfInvertibleOrder K (Over.mk (T ↘ Spec (.of K))) F) : IsIso (((exactDerivedBaseChangeMap AddCommGrpCat.{u + 1} (CommSq.mk (pullback.condition (f := pullback.snd f (S' ↘ Spec (.of K))) (g := g)).symm)).app ((DerivedCategory.singleFunctor (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj F)))",
-    "branch": "newtargets-dag",
-    "by": "Q07",
-    "date": "2026-10-16",
-    "existing": false,
-    "note": "Repair of immutable-head file-only compilation: use the published def-kun-torsion-invertible declaration AlgebraicGeometry.Etale.IsTorsionOfInvertibleOrder from Sheaf.AlgebraicGeometry.InvertibleTorsionOrders. The K-scheme argument is Over.mk of the recorded structure map. No dependency declaration is duplicated."
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $K$ be a field and let $X$ be a scheme of finite type over\n$K$. For any commutative diagram\n\n$$\n\\begin{array}{ccccc}\nX&\\longleftarrow&X'&\\longleftarrow&Y\\\\\n\\Big\\downarrow{\\scriptstyle f}&&\\Big\\downarrow{\\scriptstyle f'}&&\\Big\\downarrow{\\scriptstyle h}\\\\\n\\Spec(K)&\\longleftarrow&S'&\\longleftarrow&T\n\\end{array}\n$$\n\nof schemes over $K$ with $X'=X\\times_{\\Spec(K)}S'$ and\n$Y=X'\\times_{S'}T$ and with $g:T\\to S'$ quasi-compact and quasi-separated, and for every abelian sheaf $F$ on $T_{\\Et}$ whose\nstalks are torsion of orders invertible in $K$, the exchange\nmorphism\n\n$$\n(f')^{-1}Rg_*F\\longrightarrow Rh_*e^{-1}F\n$$\n\nis an isomorphism.",
-    "proof": [
-      {
-        "text": "*Reduction to affine $X$.* The question is local on $X$\n([lem-kun-stalk-faithful-derived] and\n[lem-kun-bc-base-change]), hence we may assume $X$ is affine.",
-        "uses": [
-          "lem-kun-stalk-faithful-derived",
-          "lem-kun-bc-base-change"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Reduction to $\\kunZn$-coefficients.* Similarly, we may\nwrite $F=\\varinjlim_{n\\in I_K}F[n]$\n([def-kun-torsion-invertible] and\n[lem-kun-invertible-orders-colimit]); since both sides of the exchange\nmorphism commute with filtered colimits in $F$\n([lemma-weil-pbc-direct-image-filtered-colimit] for the\nquasi-compact quasi-separated $g,h$, and exactness of the\ninverse images), the same argument reduces us to the case where\n$F$ is a sheaf of $\\kunZn$-modules for some $n$ invertible in\n$K$, which has orders invertible in $K$ by\n[lem-kun-zn-sheaf-invertible-orders].",
-        "uses": [
-          "def-kun-torsion-invertible",
-          "lem-kun-invertible-orders-colimit",
-          "lemma-weil-pbc-direct-image-filtered-colimit",
-          "lem-kun-zn-sheaf-invertible-orders"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Passage to the algebraic closure.* We may replace $K$ by\nits algebraic closure $\\bar K$: formation of the direct image\ncommutes with base change to $\\bar K$ by [lem-kun-0f1c]\n(this works for both $g$ and $h$), the exchange morphism is\ncompatible with this base change\n([lem-kun-bc-base-change]), and it suffices to prove the\nagreement after restriction to $X'_{\\bar K}$ by\n[lem-kun-sep-closure-conservative].",
-        "uses": [
-          "lem-kun-0f1c",
-          "lem-kun-bc-base-change",
-          "lem-kun-sep-closure-conservative"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Reduction of $X$.* Next, we may replace $X$ by its\nreduction, because étale cohomology is invariant under universal\nhomeomorphisms ([thm-weil-pbc-universal-homeomorphism-invariance]).\nAfter this replacement the morphism $X\\to\\Spec(K)$ is flat, of\nfinite presentation, with geometrically reduced fibres, and the same\nholds for any base change, in particular for $X'\\to S'$\n([lem-kun-geometric-reduced-perfect], where $K$ is\nalgebraically closed hence perfect). Hence\n$f^{-1}g_*F\\to h_*e^{-1}F$ is an isomorphism by\n[lem-kun-0eys]; in the notation of\n[def-kun-bc-property] this is $BC(f',n,0)$, the identification\nof the sheaf-level map with the zeroth cohomology sheaf of the derived\nexchange morphism being [lem-kun-unbounded-exchange-agrees].",
-        "uses": [
-          "thm-weil-pbc-universal-homeomorphism-invariance",
-          "lem-kun-geometric-reduced-perfect",
-          "lem-kun-0eys",
-          "def-kun-bc-property",
-          "lem-kun-unbounded-exchange-agrees"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Conclusion by contraposition.* Suppose for contradiction\nthat the derived exchange morphism is not an isomorphism for some\n$F$ as above. By the spectral sequences of\n[def-weil-pbc-hypercohomology-filtrations] (and\n[lem-kun-bc-base-change] together with\n[lem-kun-bc-map-on-cohomology], which identify the induced maps on\n$\\mathcal H^q$ with the maps of\n[def-kun-bc-property]), there is a minimal $q\\ge1$ such that\n$BC(f',n,q)$ fails while $BC(f',n,q-1)$ holds. At this point we\nmay apply [lem-kun-0f1d] to see that it suffices to prove:\ngiven a commutative diagram\n\n$$\n\\begin{array}{ccccc}\nX&\\longleftarrow&X'&\\longleftarrow&Y\\\\\n\\Big\\downarrow{\\scriptstyle f}&&\\Big\\downarrow{}&&\\Big\\downarrow{\\scriptstyle h}\\\\\n\\Spec(K)&\\longleftarrow&S'&\\longleftarrow&\\Spec(L)\n\\end{array}\n$$\n\nwith both squares cartesian, where $S'$ is affine, integral, and\nnormal with algebraically closed function field $L$, then\n$R^qh_*\\underline{\\mathbf Z/d\\mathbf Z}=0$ for $q>0$ and\n$d\\mid n$. (Indeed, if some $BC(f',n,q)$ failed,\n[lem-kun-0f1d] would produce such a diagram with\n$R^qh_*\\underline{\\mathbf Z/d\\mathbf Z}\\ne0$; note that\n$X''=X'\\times_{S'}S''=X\\times_KS''$ since\n$X'=X\\times_KS'$.) But this vanishing is exactly\n[lem-kun-0f1i-normal], which is already proved. This\ncontradiction shows that the derived exchange morphism is an\nisomorphism for every $F$, as desired.",
-        "uses": [
-          "def-weil-pbc-hypercohomology-filtrations",
-          "lem-kun-bc-base-change",
-          "lem-kun-bc-map-on-cohomology",
-          "def-kun-bc-property",
-          "lem-kun-0f1d",
-          "lem-kun-0f1i-normal"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Apply the torsion-kernel filtered passage. Each F[n] is killed by n: compose n times its identity with the monic kernel inclusion and use the kernel equation. The preceding step gives its exchange, so the colimit passage concludes for F.",
+   "uses": [
+    "lem-kun-torsion-exchange-filtered-passage"
+   ],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "lem-kun-field-degree-zero",
+  "def-kun-bc-property",
+  "lem-kun-0f1d",
+  "lem-kun-0f1i-normal",
+  "lem-kun-constant-higher-direct-image-square-iso",
+  "lem-kun-n-torsion-module-lift",
+  "lem-kun-unbounded-abelian-exchange-comparison",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-kun-torsion-exchange-filtered-passage"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F1I, shortened route: degree-zero perfect closure descent, cumulative contraposition over the original field, and filtered torsion kernels. The unit has no realized proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology base change for finite type schemes over a field with torsion coefficients of invertible order",
+   "results": "KaehlerDifferential.isBaseChange_of_formallyEtale, RingHom.Etale.isStableUnderBaseChange, Algebra.FormallyEtale.of_restrictScalars, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, Algebra.Etale.baseChange, Algebra.Etale.comp, Algebra.FormallyEtale.comp",
+   "date": "2026-10-16",
+   "verdict": "no match: retrieved ring/algebra base change or scheme permanence does not assert torsion etale higher-direct-image base change"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|base_change|higherDirectImage",
+   "results": "Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: retrieved ring/algebra base change or scheme permanence does not assert torsion etale higher-direct-image base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology base change over a field for invertible torsion sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, IsIso",
+   "results": "loogle: unknown identifier 'IsIso'",
+   "date": "2026-10-16",
+   "verdict": "no match: retrieved ring/algebra base change or scheme permanence does not assert torsion etale higher-direct-image base change"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem lift|def lift|exists.*AlgHom",
+   "results": "Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/FieldTheory/IsAlgClosed/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "supporting fact only: existing leaf lem-weil-pbc-algebraic-extension-embeds-algebraically-closed; not a match for this item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every algebraic field extension embeds into any algebraically closed extension field",
+   "results": "Field.embEquivOfIsAlgClosed, NumberField.Embeddings.instNonemptyRingHomOfIsAlgebraicRatOfIsAlgClosed, IsAlgClosed.lift, AlgebraicClosure.isAlgClosed, Field.embProdEmbOfIsAlgebraic, IsAlgClosed.lift_def, algebraicClosure.isAlgClosure, Field.instInhabitedEmb",
+   "date": "2026-10-16",
+   "verdict": "supporting fact only: existing leaf lem-weil-pbc-algebraic-extension-embeds-algebraically-closed; not a match for this item"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAlgClosed.lift",
+   "results": "IsAlgClosed.lift, Field.absoluteGaloisGroup.map_toFun_apply, Field.absoluteGaloisGroup.map_toFun_symm_apply",
+   "date": "2026-10-16",
+   "verdict": "supporting fact only: existing leaf lem-weil-pbc-algebraic-extension-embeds-algebraically-closed; not a match for this item"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*cohom|cohom.*etale|baseChangeMap|baseChangeHomologyMap",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: retrieved ring/algebra base change or scheme permanence does not assert torsion etale higher-direct-image base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct image of torsion etale sheaves commutes with base change by a finite type scheme over a field",
+   "results": "KaehlerDifferential.isBaseChange_of_formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, Algebra.FormallyEtale.of_restrictScalars, Algebra.IsEtaleAt.comp, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.comp, Algebra.Etale.comp",
+   "date": "2026-10-16",
+   "verdict": "no match: retrieved ring/algebra base change or scheme permanence does not assert torsion etale higher-direct-image base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\"",
+   "results": "Submodule.baseChange, LinearMap.baseChange, LinearEquiv.baseChange, LinearMap.baseChange_id, Submodule.baseChange_bot, Submodule.baseChange_top, Submodule.tmul_mem_baseChange_of_mem, Submodule.baseChange_mono",
+   "date": "2026-10-16",
+   "verdict": "no match: retrieved ring/algebra base change or scheme permanence does not assert torsion etale higher-direct-image base change"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1777,
+ "blueprint_uses": [
+  "def-kun-bc-property",
+  "def-kun-separably-closed",
+  "def-kun-torsion-invertible",
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-hypercohomology-filtrations",
+  "def-weil-pbc-scheme-conventions",
+  "lem-kun-0eys",
+  "lem-kun-0f1c",
+  "lem-kun-0f1d",
+  "lem-kun-0f1i-normal",
+  "lem-kun-bc-base-change",
+  "lem-kun-bc-map-on-cohomology",
+  "lem-kun-geometric-reduced-perfect",
+  "lem-kun-invertible-orders-colimit",
+  "lem-kun-sep-closure-conservative",
+  "lem-kun-stalk-faithful-derived",
+  "lem-kun-unbounded-exchange-agrees",
+  "lem-kun-zn-sheaf-invertible-orders",
+  "lemma-weil-pbc-direct-image-filtered-colimit",
+  "thm-weil-pbc-universal-homeomorphism-invariance"
+ ],
+ "uses_not_cited": [
+  "def-kun-separably-closed",
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "labels",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-0f1i",
+  "worker": "stage1",
+  "summary": "Corrected the diagram labels (h is Y to X-prime, e is Y to T), kept every mathematical hypothesis and conclusion, and rewrote the five imported steps as eight explicit arguments. Reused all support nodes, avoided the overstrong arbitrary-pullback exchange assertion, proved conservativity for the algebraic rather than merely separable closure, and set up cumulative universal BC induction. No new nodes or Mathlib leaves. Checked every proof citation against its statement and supplied citations.json.",
+  "blueprint": "Steps 1-2 realize the degreewise and bounded-exponent reduction; steps 3-4 realize passage to the algebraic closure; step 5 realizes reduction of X; steps 6-7 realize degree zero and contraposition through the normal case; step 8 concludes. The imported affine-X reduction is unnecessary because X is already finite type and every subsequent cited statement applies to arbitrary finite-type X. The unit has no ordered proof steps to change."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q28-6b6d9eeaf",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q28-6b6d9eeaf (reviewer sub-agent of L); spot-checked: Mathematics and citations pass after checking all eight steps, the exact blueprint, Stacks Tags 0F1I/0F1C/0F1D, hypotheses, edge cases, coefficients, morphisms, and DAG duplicates. Removed worker-recorded cross-unit tool_uses from split_report per delivery-errors C8; corrected DAG JSON is in fixes/dag/nodes/sec-smooth-purity/lem-kun-0f1i.json. Review written to review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e3d614137",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Reviewed node, source, Lean declaration, all four dependencies, docstrings, edge cases, searches, and report sections. Reproduced per-file compilation with scompile.py successfully; no substantive or mechanical findings."
+ },
+ "lean": {
+  "module": "Sheaf.Targets.BaseChangeTowardsFields",
+  "declaration": "AlgebraicGeometry.Etale.baseChange_towardsSpecField",
+  "file": "lean/Sheaf/Targets/BaseChangeTowardsFields.lean",
+  "statement": "theorem baseChange_towardsSpecField {K : Type u} [Field K] {X S' T : Scheme.{u}} (f : X ⟶ Spec (.of K)) [LocallyOfFiniteType f] [QuasiCompact f] [S'.Over (Spec (.of K))] [T.Over (Spec (.of K))] (g : T ⟶ S') [g.IsOver (Spec (.of K))] [QuasiCompact g] [QuasiSeparated g] (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : IsTorsionOfInvertibleOrder K (Over.mk (T ↘ Spec (.of K))) F) : IsIso (((exactDerivedBaseChangeMap AddCommGrpCat.{u + 1} (CommSq.mk (pullback.condition (f := pullback.snd f (S' ↘ Spec (.of K))) (g := g)).symm)).app ((DerivedCategory.singleFunctor (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj F)))",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Repair of immutable-head file-only compilation: use the published def-kun-torsion-invertible declaration AlgebraicGeometry.Etale.IsTorsionOfInvertibleOrder from Sheaf.AlgebraicGeometry.InvertibleTorsionOrders. The K-scheme argument is Over.mk of the recorded structure map. No dependency declaration is duplicated."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $K$ be a field and let $X$ be a scheme of finite type over\n$K$. For any commutative diagram\n\n$$\n\\begin{array}{ccccc}\nX&\\longleftarrow&X'&\\longleftarrow&Y\\\\\n\\Big\\downarrow{\\scriptstyle f}&&\\Big\\downarrow{\\scriptstyle f'}&&\\Big\\downarrow{\\scriptstyle h}\\\\\n\\Spec(K)&\\longleftarrow&S'&\\longleftarrow&T\n\\end{array}\n$$\n\nof schemes over $K$ with $X'=X\\times_{\\Spec(K)}S'$ and\n$Y=X'\\times_{S'}T$ and with $g:T\\to S'$ quasi-compact and quasi-separated, and for every abelian sheaf $F$ on $T_{\\Et}$ whose\nstalks are torsion of orders invertible in $K$, the exchange\nmorphism\n\n$$\n(f')^{-1}Rg_*F\\longrightarrow Rh_*e^{-1}F\n$$\n\nis an isomorphism.",
+  "proof": [
+   {
+    "text": "*Reduction to affine $X$.* The question is local on $X$\n([lem-kun-stalk-faithful-derived] and\n[lem-kun-bc-base-change]), hence we may assume $X$ is affine.",
+    "uses": [
+     "lem-kun-stalk-faithful-derived",
+     "lem-kun-bc-base-change"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Reduction to $\\kunZn$-coefficients.* Similarly, we may\nwrite $F=\\varinjlim_{n\\in I_K}F[n]$\n([def-kun-torsion-invertible] and\n[lem-kun-invertible-orders-colimit]); since both sides of the exchange\nmorphism commute with filtered colimits in $F$\n([lemma-weil-pbc-direct-image-filtered-colimit] for the\nquasi-compact quasi-separated $g,h$, and exactness of the\ninverse images), the same argument reduces us to the case where\n$F$ is a sheaf of $\\kunZn$-modules for some $n$ invertible in\n$K$, which has orders invertible in $K$ by\n[lem-kun-zn-sheaf-invertible-orders].",
+    "uses": [
+     "def-kun-torsion-invertible",
+     "lem-kun-invertible-orders-colimit",
+     "lemma-weil-pbc-direct-image-filtered-colimit",
+     "lem-kun-zn-sheaf-invertible-orders"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Passage to the algebraic closure.* We may replace $K$ by\nits algebraic closure $\\bar K$: formation of the direct image\ncommutes with base change to $\\bar K$ by [lem-kun-0f1c]\n(this works for both $g$ and $h$), the exchange morphism is\ncompatible with this base change\n([lem-kun-bc-base-change]), and it suffices to prove the\nagreement after restriction to $X'_{\\bar K}$ by\n[lem-kun-sep-closure-conservative].",
+    "uses": [
+     "lem-kun-0f1c",
+     "lem-kun-bc-base-change",
+     "lem-kun-sep-closure-conservative"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Reduction of $X$.* Next, we may replace $X$ by its\nreduction, because étale cohomology is invariant under universal\nhomeomorphisms ([thm-weil-pbc-universal-homeomorphism-invariance]).\nAfter this replacement the morphism $X\\to\\Spec(K)$ is flat, of\nfinite presentation, with geometrically reduced fibres, and the same\nholds for any base change, in particular for $X'\\to S'$\n([lem-kun-geometric-reduced-perfect], where $K$ is\nalgebraically closed hence perfect). Hence\n$f^{-1}g_*F\\to h_*e^{-1}F$ is an isomorphism by\n[lem-kun-0eys]; in the notation of\n[def-kun-bc-property] this is $BC(f',n,0)$, the identification\nof the sheaf-level map with the zeroth cohomology sheaf of the derived\nexchange morphism being [lem-kun-unbounded-exchange-agrees].",
+    "uses": [
+     "thm-weil-pbc-universal-homeomorphism-invariance",
+     "lem-kun-geometric-reduced-perfect",
+     "lem-kun-0eys",
+     "def-kun-bc-property",
+     "lem-kun-unbounded-exchange-agrees"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Conclusion by contraposition.* Suppose for contradiction\nthat the derived exchange morphism is not an isomorphism for some\n$F$ as above. By the spectral sequences of\n[def-weil-pbc-hypercohomology-filtrations] (and\n[lem-kun-bc-base-change] together with\n[lem-kun-bc-map-on-cohomology], which identify the induced maps on\n$\\mathcal H^q$ with the maps of\n[def-kun-bc-property]), there is a minimal $q\\ge1$ such that\n$BC(f',n,q)$ fails while $BC(f',n,q-1)$ holds. At this point we\nmay apply [lem-kun-0f1d] to see that it suffices to prove:\ngiven a commutative diagram\n\n$$\n\\begin{array}{ccccc}\nX&\\longleftarrow&X'&\\longleftarrow&Y\\\\\n\\Big\\downarrow{\\scriptstyle f}&&\\Big\\downarrow{}&&\\Big\\downarrow{\\scriptstyle h}\\\\\n\\Spec(K)&\\longleftarrow&S'&\\longleftarrow&\\Spec(L)\n\\end{array}\n$$\n\nwith both squares cartesian, where $S'$ is affine, integral, and\nnormal with algebraically closed function field $L$, then\n$R^qh_*\\underline{\\mathbf Z/d\\mathbf Z}=0$ for $q>0$ and\n$d\\mid n$. (Indeed, if some $BC(f',n,q)$ failed,\n[lem-kun-0f1d] would produce such a diagram with\n$R^qh_*\\underline{\\mathbf Z/d\\mathbf Z}\\ne0$; note that\n$X''=X'\\times_{S'}S''=X\\times_KS''$ since\n$X'=X\\times_KS'$.) But this vanishing is exactly\n[lem-kun-0f1i-normal], which is already proved. This\ncontradiction shows that the derived exchange morphism is an\nisomorphism for every $F$, as desired.",
+    "uses": [
+     "def-weil-pbc-hypercohomology-filtrations",
+     "lem-kun-bc-base-change",
+     "lem-kun-bc-map-on-cohomology",
+     "def-kun-bc-property",
+     "lem-kun-0f1d",
+     "lem-kun-0f1i-normal"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261020T051300-L-1619482",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

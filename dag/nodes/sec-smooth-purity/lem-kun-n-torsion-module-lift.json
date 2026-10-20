@@ -1,0 +1,106 @@
+{
+ "id": "lem-kun-n-torsion-module-lift",
+ "kind": "statement",
+ "title": "Canonical cyclic module coefficients on a sheaf killed by n",
+ "statement": "Let T be a scheme, n a natural number, and F an abelian etale sheaf [def-weil-pbc-etale-sheaves] with n times its identity zero. There exists a sheaf G of modules over ULift(Z/nZ) whose underlying abelian sheaf [def-pur-etale-module-abelian-forget] is isomorphic to F. The action is the canonical action on each group of sections; no arbitrary unproved witness is chosen.",
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-pur-etale-module-abelian-forget"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F1I, lemma-punctual-base-change, degree-zero and bounded-exponent reductions; Tag 073E, filtered colimits"
+ },
+ "proof": [
+  {
+   "text": "Evaluate the identity n id F=0 on each etale chart. AddCommGroup.zmodModule gives the canonical ZMod n action. All additive restriction maps are linear (AddMonoidHom.toZModLinearMap). Restrict scalars along the ULift ring equivalence. Forgetting to types gives precisely the original sheaf presheaf, so its sheaf condition gives the module sheaf condition, and the identity gives the desired underlying isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F1I, lemma-punctual-base-change, degree-zero and bounded-exponent reductions; Tag 073E, filtered colimits"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Abelian sheaves annihilated by n have a canonical ZMod n module structure",
+   "results": "AddCommGroup.zmodModule; AddCommMonoid.zmodModule; ModN.instModuleZMod; AddSubgroup.torsionBy.zmodModule; QuotientAddGroup.zmodModule; AddSubgroupClass.instZModModule; PresheafOfModules.Sheafify.module; ZMod.lift",
+   "date": "2026-10-20",
+   "verdict": "Supporting facts reused in the Lean proof; no complete match for this etale sheaf statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves annihilated by n are sheaves of ZMod n modules and higher direct images preserve filtered colimits",
+   "results": "CategoryTheory.Sheaf.H; LightCondensed.instIsGrothendieckAbelianLightCondMod; CategoryTheory.Sheaf.instIsGrothendieckAbelian; instAbelianCondensedMod; Condensed.instAB4CondensedMod; CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall; CategoryTheory.Sheaf.cohomologyPresheaf; Condensed.instAB4StarCondensedMod",
+   "date": "2026-10-20",
+   "verdict": "Supporting facts reused in the Lean proof; no complete match for this etale sheaf statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "AddCommGroup.zmodModule",
+   "results": "AddCommGroup.zmodModule",
+   "date": "2026-10-20",
+   "verdict": "Supporting facts reused in the Lean proof; no complete match for this etale sheaf statement."
+  },
+  {
+   "tool": "grep",
+   "query": "zmodModule|PreservesColimitsOfShape|rightDerivedFunctorPlus",
+   "results": "Mathlib/Data/ZMod/Basic.lean; Mathlib/Data/ZMod/Basic.lean; Mathlib/Data/ZMod/Basic.lean; Mathlib/Data/ZMod/Basic.lean; Mathlib/Data/ZMod/Basic.lean; Mathlib/Order/Category/PartOrdEmb.lean; Mathlib/GroupTheory/PGroup.lean; Mathlib/GroupTheory/PGroup.lean",
+   "date": "2026-10-20",
+   "verdict": "Supporting facts reused in the Lean proof; no complete match for this etale sheaf statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Targets.BaseChangeTowardsFields",
+  "group": "F9",
+  "date": "2026-10-20"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f1i",
+   "place": "Current proof reduction to Z/nZ coefficients: a bounded-exponent abelian sheaf is a cyclic-module sheaf.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NTorsionModuleLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/NTorsionModuleLift.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_moduleLift_of_nsmul_eq_zero",
+  "statement": "theorem exists_moduleLift_of_nsmul_eq_zero {T : Scheme.{u}} (n : ℕ)\n    (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : n • 𝟙 F = 0) :\n    ∃ G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n))),\n      Nonempty ((moduleAbelianForget (ULift.{u + 1} (ZMod n)) T).obj G ≅ F)",
+  "branch": "sheaf-dag",
+  "by": "F9",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261020T051300-L-1619482",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261020T051300-L-1619482",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
