@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 import WeilConjectures.AlgebraicGeometry.EtaleSectionsFilteredColimit
 import WeilConjectures.AlgebraicGeometry.EtaleFilteredInjectiveAcyclic
-import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
+import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.FilteredColimitSuccessor
 import Sheaf.AlgebraicGeometry.EtaleDirectedCohomologyColimit
 

@@ -6,7 +6,7 @@ Authors: SHEAF group Q58
 module
 
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
+public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
@@ -16,9 +16,9 @@ import Sheaf.Paper.InverseImageFreeEtaleModule
 import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimitStatement
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 import WeilConjectures.AlgebraicGeometry.EtaleFreeSheafDerivedSections
-import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
+import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
 import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
-import WeilConjectures.AlgebraicGeometry.LimitPullbackSectionsColimit
+import Sheaf.AlgebraicGeometry.LimitPullbackSectionsColimit
 import Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePresentation
 import Sheaf.AlgebraicGeometry.DerivedInverseImageComposition
 import Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison

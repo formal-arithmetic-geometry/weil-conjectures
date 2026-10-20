@@ -5,12 +5,12 @@ Authors: SHEAF group V1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 import Sheaf.AlgebraicGeometry.NoetherianDerivedDirectImageRightAdjoint
 import Sheaf.AlgebraicGeometry.SmoothDiagonalKoszulRegular
 import Sheaf.AlgebraicGeometry.PerfectDiagonalDualizingEvaluation

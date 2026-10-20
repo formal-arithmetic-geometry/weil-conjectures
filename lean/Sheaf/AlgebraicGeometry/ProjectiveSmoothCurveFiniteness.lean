@@ -11,7 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 import Sheaf.AlgebraicGeometry.GeometricFiberFinite
 import WeilConjectures.ConstructibleSheaf.Noetherian
 import Sheaf.Paper.ProjectiveCurveBettiCardinalities
-import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
+import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
 import WeilConjectures.AlgebraicGeometry.GeometricStalkComparisonConstant
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 

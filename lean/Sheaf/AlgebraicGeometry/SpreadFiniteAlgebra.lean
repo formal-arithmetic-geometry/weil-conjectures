@@ -6,7 +6,7 @@ Authors: SHEAF group NX
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import Mathlib.RingTheory.Localization.Away.Basic
@@ -15,11 +15,11 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 import WeilConjectures.RingTheory.LocalizationColimitPrincipalLocalizations
-import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Sheaf.AlgebraicGeometry.FinitePresentationModuleMapDescent
 import WeilConjectures.AlgebraicGeometry.TensorPullbackFinitePresentation
-import WeilConjectures.AlgebraicGeometry.FinitePresentationZeroMapDescent
+import Sheaf.AlgebraicGeometry.FinitePresentationZeroMapDescent
 import WeilConjectures.AlgebraicGeometry.CoherentLocalFinitePresentation
 import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage

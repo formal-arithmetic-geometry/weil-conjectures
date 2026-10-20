@@ -5,7 +5,7 @@ Authors: SHEAF group Y2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.CategoryTheory.Monoidal.Multifunctor
 import Sheaf.AlgebraicGeometry.DerivedPullbackKFlatTensorModel

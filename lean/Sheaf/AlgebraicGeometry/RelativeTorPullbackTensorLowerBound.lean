@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.FiniteTorDimensionOver
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Sheaf.AlgebraicGeometry.RelativeTensorPullbackHomologyComparison
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat

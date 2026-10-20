@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.RelativeTensorPullbackKFlatModel
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.AlgebraicGeometry.InverseImageExactKFlat

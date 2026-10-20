@@ -6,11 +6,11 @@ Authors: SHEAF group M1
 module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.Coherent
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.StrictPerfectTensorLocalCohomology
-import WeilConjectures.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
+import Sheaf.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Mathlib.Data.Finset.Max
 

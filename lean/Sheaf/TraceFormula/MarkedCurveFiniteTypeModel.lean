@@ -19,8 +19,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 import Mathlib.LinearAlgebra.Basis.VectorSpace
 import WeilConjectures.AlgebraicGeometry.FpqcDescentEtale
-import WeilConjectures.AlgebraicGeometry.DescendClosedImmersion
-import WeilConjectures.AlgebraicGeometry.DescendFlatFinitePresentation
+import Sheaf.AlgebraicGeometry.DescendClosedImmersion
+import Sheaf.AlgebraicGeometry.DescendFlatFinitePresentation
 import WeilConjectures.CategoryTheory.ExistsDirectedReindexing
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit

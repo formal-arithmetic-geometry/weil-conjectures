@@ -6,9 +6,9 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedInternalHomAdjunction
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.Algebra.Homology.RhomGlobalSections
 import Sheaf.AlgebraicGeometry.DerivedInternalHomPullbackMateSections
 import WeilConjectures.AlgebraicGeometry.InternalHomCounitMateIso

@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.KummerModuleCoefficients
 public import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Arrows
 public import Sheaf.AlgebraicGeometry.ComparisonDerivedPullbackFixed
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-public import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
+public import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
 public import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
 public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic

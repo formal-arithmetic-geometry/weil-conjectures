@@ -5,11 +5,11 @@ Authors: SHEAF group S1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.UniformInverseAffineSectionsBound
-import WeilConjectures.AlgebraicGeometry.DirectImageHomologyAffineDetection
-import WeilConjectures.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
+import Sheaf.AlgebraicGeometry.DirectImageHomologyAffineDetection
+import Sheaf.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 
 /-! # Uniform upper cohomological bound for quasi-coherent derived direct image

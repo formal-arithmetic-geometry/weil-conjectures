@@ -5,11 +5,11 @@ Authors: SHEAF group C1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.Paper.PQFCohomology
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import WeilConjectures.AlgebraicGeometry.FiniteTypeIdealH1Representatives
+import Sheaf.AlgebraicGeometry.FiniteTypeIdealH1Representatives
 import Sheaf.Paper.QuasiCompactH1Zero
 
 /-!

@@ -5,9 +5,9 @@ Authors: SHEAF group F1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.PseudoCoherentComplex
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherent
 import Sheaf.AlgebraicGeometry.DerivedInternalHomAdjunction
 import Sheaf.AlgebraicGeometry.PerfectTwoOutOfThree

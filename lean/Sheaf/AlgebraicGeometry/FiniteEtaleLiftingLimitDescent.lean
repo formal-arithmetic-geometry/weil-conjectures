@@ -8,8 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.FiniteEtaleLiftingApproximation
 import WeilConjectures.AlgebraicGeometry.DescendFinite
 import WeilConjectures.AlgebraicGeometry.EtaleInverseLimitDescent
-import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
-import WeilConjectures.AlgebraicGeometry.ProperLimitNoetherian
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.AlgebraicGeometry.ProperLimitNoetherian
 import Sheaf.RingTheory.FiniteTypeIntGRing
 import WeilConjectures.RingTheory.HenselizationColimit
 import Sheaf.RingTheory.HenselizationPairGRing

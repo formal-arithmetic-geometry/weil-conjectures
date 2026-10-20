@@ -5,8 +5,9 @@ Authors: SHEAF group F1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
+public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Sheaf.AlgebraicGeometry.AffinePushforwardColimit
+import Sheaf.AlgebraicGeometry.OpenModuleCohomologyDirectedColimit
 import WeilConjectures.AlgebraicGeometry.OpenModuleCohomologyDirectedColimit
 
 /-! # Quasi-coherent sections descend along affine inverse limits

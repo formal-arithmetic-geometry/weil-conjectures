@@ -22,9 +22,9 @@ public import Mathlib.RingTheory.LocalProperties.IntegrallyClosed
 public import Mathlib.AlgebraicGeometry.Fiber
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Sheaf.AlgebraicGeometry.FiniteDiagramLiftOfModels
-import WeilConjectures.AlgebraicGeometry.DescendFlatFinitePresentation
-import WeilConjectures.AlgebraicGeometry.DescendClosedImmersion
-import WeilConjectures.AlgebraicGeometry.EventuallyProper
+import Sheaf.AlgebraicGeometry.DescendFlatFinitePresentation
+import Sheaf.AlgebraicGeometry.DescendClosedImmersion
+import Sheaf.AlgebraicGeometry.EventuallyProper
 import Sheaf.TraceFormula.PureRelativeDimensionFiniteStage
 import Sheaf.AlgebraicGeometry.SemistableMarkedBaseChange
 import Mathlib.AlgebraicGeometry.Sites.Fpqc

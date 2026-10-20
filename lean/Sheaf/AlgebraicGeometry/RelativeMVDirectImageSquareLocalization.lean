@@ -5,7 +5,7 @@ Released under the Apache 2.0 license as described in the LICENSE file.
 module
 public import Sheaf.AlgebraicGeometry.RelativeMVMaps
 public import Sheaf.AlgebraicGeometry.MayerVietorisImageChainData
-public import WeilConjectures.AlgebraicGeometry.DirectImageSquareUnitTransport
+public import Sheaf.AlgebraicGeometry.DirectImageSquareUnitTransport
 import Sheaf.AlgebraicGeometry.DerivedDirectImageSquareMate
 /-! # Complex localization of the normalized direct-image square -/
 

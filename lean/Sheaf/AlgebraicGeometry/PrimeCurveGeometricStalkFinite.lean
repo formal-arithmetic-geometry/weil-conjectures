@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Field.ULift
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 import WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations
 import Sheaf.AlgebraicGeometry.GeometricFiberFinite
-import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
+import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.AlgebraicGeometry.Regular
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth

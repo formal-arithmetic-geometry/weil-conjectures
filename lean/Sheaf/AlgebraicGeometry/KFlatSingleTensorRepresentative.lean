@@ -6,7 +6,7 @@ Authors: SHEAF group S1
 module
 
 public import Sheaf.Algebra.Homology.KFlat
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 

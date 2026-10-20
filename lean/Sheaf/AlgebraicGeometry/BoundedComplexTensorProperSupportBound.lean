@@ -6,7 +6,7 @@ Authors: SHEAF groups M1 and Y2
 module
 
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseUnionPreimage
 import Sheaf.AlgebraicGeometry.DerivedTensorOpenRestrictionUniverses
 import Mathlib.Algebra.Category.Grp.Zero

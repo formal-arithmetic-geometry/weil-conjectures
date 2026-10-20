@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import WeilConjectures.AlgebraicGeometry.EtaleFixedAffineDegreeZeroKernel
+import Sheaf.AlgebraicGeometry.EtaleFixedAffineDegreeZeroKernel
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.AlgebraicGeometry.Limits
 

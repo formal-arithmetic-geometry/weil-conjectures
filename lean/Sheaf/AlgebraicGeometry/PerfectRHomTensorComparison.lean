@@ -5,8 +5,8 @@ Authors: SHEAF group C1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.DerivedInternalHomAdjunction
 public import Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalModel
 public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic

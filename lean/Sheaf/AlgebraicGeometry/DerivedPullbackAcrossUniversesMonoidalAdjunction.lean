@@ -6,8 +6,8 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullbackAcrossUniverses
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 import Sheaf.AlgebraicGeometry.SchemeDerivedStandardEquivalenceMonoidal
 import Sheaf.AlgebraicGeometry.DerivedPullbackAcrossUniversesLeftDerived
 import Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalModel

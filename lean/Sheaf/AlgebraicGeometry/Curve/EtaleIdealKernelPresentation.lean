@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf
 public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
 import Sheaf.AlgebraicGeometry.Curve.EtaleIdealKernelIso
 import WeilConjectures.AlgebraicGeometry.Curve.EtaleNestedIdealKernel
-public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsRightExact
+public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsRightExact
 
 /-! # Tensor presentation of the kernel of ideal restriction
 

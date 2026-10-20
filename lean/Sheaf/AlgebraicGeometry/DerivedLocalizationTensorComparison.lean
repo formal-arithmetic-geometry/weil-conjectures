@@ -6,7 +6,7 @@ Authors: SHEAF group Q2
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullbackAcrossUniverses
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 
 /-! # Tensor under the standard localization comparison
 

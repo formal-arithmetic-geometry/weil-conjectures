@@ -5,14 +5,14 @@ Authors: SHEAF group F2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
 import Sheaf.AlgebraicGeometry.StrictlyPerfectEvaluationModel
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.Algebra.Homology.DerivedInternalHom
 import Sheaf.Algebra.Homology.HomComplex
-import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.StrictlyPerfectDerivedInternalHom
 import Sheaf.Paper.DerivedInternalHomRestrictOpen
 

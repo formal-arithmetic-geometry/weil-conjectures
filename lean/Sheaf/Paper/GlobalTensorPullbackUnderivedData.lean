@@ -8,7 +8,7 @@ public import Sheaf.AlgebraicGeometry.GlobalDerivedHom
 public import Sheaf.Paper.ModuleCupNaiveMap
 public import Sheaf.Algebra.Homology.KFlatPullback
 import Sheaf.Paper.GlobalTensorPullbackMonoidalNormalization
-import WeilConjectures.Topology.PointModuleEvaluationEquivalence
+import Sheaf.Topology.PointModuleEvaluationEquivalence
 import Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackUnderived
 
 /-! # Transport of the ordinary global pullback

@@ -4,11 +4,11 @@ Released under the Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 import Mathlib.Algebra.Category.Grp.Zero
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
-import WeilConjectures.Algebra.Homology.OpenExtensionCounitStalk
+import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+import Sheaf.Algebra.Homology.OpenExtensionCounitStalk
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
 import Sheaf.AlgebraicGeometry.DerivedTensorStalkVanishing

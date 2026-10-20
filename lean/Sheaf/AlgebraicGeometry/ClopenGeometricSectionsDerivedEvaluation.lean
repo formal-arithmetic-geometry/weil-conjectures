@@ -15,7 +15,7 @@ public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 public import WeilConjectures.ConstructibleSheaf.OpenClosedStratification
-import WeilConjectures.AlgebraicGeometry.EtaleSheafClopenProduct
+import Sheaf.AlgebraicGeometry.EtaleSheafClopenProduct
 import Sheaf.CategoryTheory.KInjectiveTotalDerived
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors

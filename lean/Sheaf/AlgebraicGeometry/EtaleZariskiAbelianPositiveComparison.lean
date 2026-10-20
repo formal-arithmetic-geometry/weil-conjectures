@@ -13,7 +13,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.Algebra.Category.Grp.AB
 import WeilConjectures.AlgebraicGeometry.ZariskiEtaleCore
-import WeilConjectures.AlgebraicGeometry.EtaleTensorDirectImageIdentification
+import Sheaf.AlgebraicGeometry.EtaleTensorDirectImageIdentification
 import Sheaf.AlgebraicGeometry.EtaleTensorPositiveDirectImageVanishing
 import WeilConjectures.AlgebraicGeometry.EtaleZariskiNaturalAcyclicLeray
 
