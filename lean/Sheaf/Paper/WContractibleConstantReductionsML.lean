@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
+public import Sheaf.Algebra.Homology.AdicQuotientCohomologyML
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Sheaf.CategoryTheory.RingedSiteModules
@@ -21,6 +22,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleCoefficientPullbackUniverses
 public import Sheaf.CategoryTheory.SiteConstantModuleHom
 public import Mathlib.CategoryTheory.CofilteredSystem
 import Sheaf.Algebra.Homology.KFlatTelescopeClosure
+import Sheaf.Algebra.Homology.AdicQuotientCohomologyML
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
@@ -146,6 +148,37 @@ def mlHypercohomologyTower (W : Scheme.{u}) (A : Type (max v (u + 1))) [CommRing
     SheafOfModules.evaluation _ (op (AsSmall.up.obj (⊤_ W.ProEt))) ⋙
       CategoryTheory.forget (ModuleCat _)
 
+/-- The derived constant quotient tower admits finite comparisons with an algebraic
+Mittag--Leffler tower. The comparison may depend on the finite triple of indices.
+Source: Stacks Project, Tag 09C5.
+
+Proof: choose local algebraic markings, normalize finite chains of quotient maps, and
+apply complete perfect inverse-limit reconstruction. Artin--Rees gives stabilization of
+the bounded finite-projective quotient complex. Reducing one level-t marking to levels m
+and n gives the two comparison equations by tensor reassociation, so no compatible
+infinite family of markings is required.
+(blueprint: lem-sfb-wcontractible-constant-reductions-finite-comparison). -/
+theorem wcontractible_constant_reductions_finite_comparison
+    (W : Scheme.{u}) [IsAffine W]
+    (_hW : ∀ (F G : Sheaf (ProEt.topology W) (Type (u + 1))) (f : F ⟶ G),
+      Epi f → Function.Surjective (f.hom.app (op (⊤_ W.ProEt))))
+    (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] (J : Ideal A)
+    (H : ConstantCompletion.D
+      (ConstantCompletion.constant (coefficientProEtaleModelTopology.{u, v} W) A))
+    (_hcomplete : ConstantCompletion.IsComplete
+      (ConstantCompletion.quotient (coefficientProEtaleModelTopology.{u, v} W) A J 0) H)
+    (_hconstant : ∀ n : ℕ, ∃ E : MLAlgebraDerived (A ⧸ J ^ (n + 1)),
+      (n = 0 → MLAlgebraPerfect E) ∧
+      Nonempty
+        ((ConstantCompletion.extend
+            (ConstantCompletion.quotient (coefficientProEtaleModelTopology.{u, v} W) A J n)).obj H ≅
+          mlConstantDerivedObject W (A ⧸ J ^ (n + 1)) E)) (q : ℤ) :
+    ∃ U : ℕᵒᵖ ⥤ Type (max v (u + 1)),
+      U.IsMittagLeffler ∧
+      CategoryTheory.Functor.FiniteTripleComparison
+        (mlHypercohomologyTower W A J H q) U := by
+  sorry
+
 /-- The hypercohomology groups of individually constant derived quotient reductions
 satisfy Mittag--Leffler in every integer degree. The constant markings have no
 compatibility requirement, and the quotient rings need not have finite underlying sets.
@@ -218,6 +251,9 @@ theorem wcontractible_constant_reductions_mittagLeffler
             (ConstantCompletion.quotient (coefficientProEtaleModelTopology.{u, v} W) A J n)).obj H ≅
           mlConstantDerivedObject W (A ⧸ J ^ (n + 1)) E)) :
     ∀ q : ℤ, (mlHypercohomologyTower W A J H q).IsMittagLeffler := by
-  sorry
+  intro q
+  obtain ⟨U, hU, hcomparison⟩ :=
+    wcontractible_constant_reductions_finite_comparison W _hW A J H _hcomplete _hconstant q
+  exact CategoryTheory.Functor.isMittagLeffler_of_finiteTripleComparison hcomparison hU
 
 end AlgebraicGeometry.Scheme

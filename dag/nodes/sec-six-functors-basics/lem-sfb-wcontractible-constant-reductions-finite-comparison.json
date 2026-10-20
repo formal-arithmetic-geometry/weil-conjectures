@@ -1,0 +1,130 @@
+{
+ "id": "lem-sfb-wcontractible-constant-reductions-finite-comparison",
+ "kind": "statement",
+ "title": "Finite algebraic comparisons for constant reduction towers",
+ "statement": "Under the hypotheses of lem-sfb-wcontractible-constant-reductions-ml, for every integer q there exists an inverse system U of types in the coefficient universe such that U is Mittag-Leffler and the hypercohomology tower of the given constant reductions has a finite-triple comparison with U.",
+ "stmt_deps": [
+  "lem-sfb-wcontractible-constant-reductions-ml",
+  "lem-sfb-finite-triple-ml-transfer"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C5, local algebraicity, perfect inverse-limit reconstruction, and finite-triple comparison paragraph"
+ },
+ "proof": [
+  {
+   "text": "For each reduction choose the local algebraic marking supplied by the perfect-constant-map lemma and normalize the consecutive quotient maps using successive derived-quotient normalization. Complete the coefficient ring and apply perfect inverse-limit reconstruction to obtain a bounded finite-projective complex whose quotient cohomology tower is Mittag-Leffler by Artin-Rees. For each finite triple t ≥ m ≥ n reduce one level-t marking to m and n; tensor associativity identifies both arrows. The resulting bijections satisfy the finite-triple comparison equations, without requiring a compatible infinite family of markings.",
+   "uses": [
+    "lem-sfb-perfect-constant-derived-map-local",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-weil-pbc-rlim-perfect-complete",
+    "lem-weil-pbc-artin-rees",
+    "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
+    "lem-weil-pbc-constant-module-section-properties"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-perfect-constant-derived-map-local",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-pbc-rlim-perfect-complete",
+  "lem-weil-pbc-artin-rees",
+  "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
+  "lem-weil-pbc-constant-module-section-properties"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C5, lemma-weakly-contractible-locally-constant-ML"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite triple comparison and Mittag Leffler inverse systems",
+   "results": "No exact declaration beyond the eventual-range API; the project-specific transfer is proved in the delivered module.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite triple comparison transfers Mittag Leffler inverse systems",
+   "results": "No exact existing declaration; the delivered transfer theorem is proved from Mathlib's eventual-range characterization.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsMittagLeffler finite triple range comparison",
+   "results": "Mathlib provides IsMittagLeffler and eventual-range lemmas, but no finite-triple comparison theorem.",
+   "date": "2026-10-21",
+   "verdict": "component matches only"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteTripleComparison|finite triple MittagLeffler",
+   "results": "No existing project declaration.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WContractibleConstantReductionsML",
+  "date": "2026-10-21",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-wcontractible-constant-reductions-ml",
+   "place": "Proof steps 1-7, with the algebraic reconstruction isolated as a finite-comparison theorem.",
+   "via": [
+    "lem-sfb-wcontractible-constant-reductions-ml"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.WContractibleConstantReductionsML",
+  "file": "lean/Sheaf/Paper/WContractibleConstantReductionsML.lean",
+  "declaration": "AlgebraicGeometry.Scheme.wcontractible_constant_reductions_finite_comparison",
+  "statement": "theorem wcontractible_constant_reductions_finite_comparison (W : Scheme.{u}) [IsAffine W] (_hW : ∀ (F G : Sheaf (ProEt.topology W) (Type (u + 1))) (f : F ⟶ G), Epi f → Function.Surjective (f.hom.app (op (⊤_ W.ProEt)))) (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] (J : Ideal A) (H : ConstantCompletion.D (ConstantCompletion.constant (coefficientProEtaleModelTopology.{u, v} W) A)) (_hcomplete : ConstantCompletion.IsComplete (ConstantCompletion.quotient (coefficientProEtaleModelTopology.{u, v} W) A J 0) H) (_hconstant : ∀ n : ℕ, ∃ E : MLAlgebraDerived (A ⧸ J ^ (n + 1)), (n = 0 → MLAlgebraPerfect E) ∧ Nonempty ((ConstantCompletion.extend (ConstantCompletion.quotient (coefficientProEtaleModelTopology.{u, v} W) A J n)).obj H ≅ mlConstantDerivedObject W (A ⧸ J ^ (n + 1)) E)) (q : ℤ) : ∃ U : ℕᵒᵖ ⥤ Type (max v (u + 1)), U.IsMittagLeffler ∧ CategoryTheory.Functor.FiniteTripleComparison (mlHypercohomologyTower W A J H q) U",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261020T211844-L-3510823",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261020T211844-L-3510823",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
