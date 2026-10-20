@@ -19,103 +19,83 @@
  ],
  "proof": [
   {
-   "text": "For every edge and composite use the isomorphism $c_f:f^{-1}A_{\\mathrm{target}(f)}\\cong A_{\\mathrm{source}(f)}$ of [prop-weil-pbc-proetale-constant-ring-map]. Apply [lem-trf-constant-coefficient-composition] to $(j,h)$, $(h,k)$, $(j,k\\circ h)$ and $(h\\circ j,k)$. Thus each binary composite coefficient map is exactly the chosen canonical coefficient map of that composite. Consequently all four comparisons in the question are the comparisons of [lem-weil-pbc-proetale-derived-pullback-composition] with its required coefficient identifications. This includes empty source schemes.",
+   "text": "Use the existing proEtaleConstantRingCompositeCoefficients_eq specialization to transport the canonical derived comparison from its composite ring identification to the canonical constant-ring identification. Extract its normalized ordinary adjunctions, direct-image comparison d, conjugate a, and degreewise comparison b from the existing unique characterization. Each data witness is determined: normalized units determine the adjunctions, the section formula determines d, conjugation determines a, and degree maps determine b.",
    "uses": [
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "lem-trf-constant-coefficient-composition",
-    "lem-weil-pbc-proetale-derived-pullback-composition"
+    "pur713-def-pullback-comparison",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-weil-pbc-proetale-operations"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6D (lemma-derived-pullback-composition), hypothesis on the composite ringed-topos morphism; sites.tex Tags 03CB and 0H7J"
+    "place": "Tag 0D6D; existing canonical comparison and its K-flat normalization"
    }
   },
   {
-   "text": "Write $d_{f,g}:(g\\circ f)_*\\cong g_*f_*$ for the following ordinary module-direct-image isomorphism. By [def-weil-pbc-proetale-operations], its value on a module $N$ and a pro-etale object $U$ over the target of $g$ is induced by the canonical isomorphism $\\mathrm{source}(f)\\times_{\\mathrm{target}(g)}U\\cong\\mathrm{source}(f)\\times_{\\mathrm{source}(g)}(\\mathrm{source}(g)\\times_{\\mathrm{target}(g)}U)$. If $e_U$ denotes this isomorphism from the single fibre product to the iterated one, the component of $d_{f,g}$ is $N(e_U^{-1})$. These maps and their inverses are the unique maps preserving both projections [def-pc-fibre-product], hence are natural in $U,N$. For the three arrows, both ways of expanding the fibre product to $W\\times_Z(Z\\times_Y(Y\\times_XU))$ preserve the projection to $W$ and to $U$; the intervening projections to $Z,Y$ are forced to be $j$ and $h\\circ j$. The uniqueness in the fibre-product universal property makes the two expansions equal. Applying the contravariant sheaf $N$ proves coherence of $d$ in either direction. They are module maps: the scalar map on every expansion is restriction of a section of $A_X$ along the same map to $X$, and the composite action is the same by [lem-trf-constant-coefficient-composition]. This proves exactly the right-adjoint coherence hypothesis of [lem-trf-adjoint-composition-coherence], with the categories indexed by $X,Y,Z,W$.",
+   "text": "Compute both ordinary direct-image composition paths on a module N and a test object U. Apply the specified section formula for d, the sectionwise pushforward map and restriction formulas, and equality induction for transport along scheme associativity. The generic fibre-product identity MorphismProperty.Over.pullbackComp_assoc, with its equality transport made explicit, identifies the two pasting maps. The contravariant presheaf composition law then identifies the section maps. Extensionality gives coherence of the direct-image natural isomorphisms.",
    "uses": [
     "def-weil-pbc-proetale-operations",
     "def-pc-fibre-product",
-    "lem-trf-constant-coefficient-composition",
-    "lem-trf-adjoint-composition-coherence"
+    "def-weil-proetale-inverse-image"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D8 (lemma-push-pull-composition-modules), direct-image comparison; associativity written out using the fibre-product universal property"
+    "place": "Tag 03D8; fibre-product associativity implemented by WeilConjectures/Mathlib/CategoryTheory/MorphismProperty/OverAdjunction.lean, pullbackComp_assoc"
    }
   },
   {
-   "text": "Use the module adjunctions $f^*\\dashv f_*$ of [def-weil-pbc-proetale-operations]. By [def-weil-pbc-composite-adjunction] and [lem-weil-pbc-conjugate-iso-unit-equation], $d_{f,g}$ determines the unique isomorphism $a_{f,g}:f^*g^*\\cong(g\\circ f)^*$ carrying the two successive units to the single unit, under $d_{f,g}$. Its inverse $b_{f,g}:(g\\circ f)^*\\cong f^*g^*$ is the ordinary canonical module comparison: in the inverse-image/tensor presentation it sends $m\\otimes r$ to $(m\\otimes1)\\otimes r$. Indeed the successive units insert $1$ in each tensor factor, so this formula has precisely that unit equation. Its inverse is $(m\\otimes s)\\otimes r\\mapsto m\\otimes c_f(f^{-1}s)r$; tensor balancing and $c_f(1)=1$ check the two inverse identities. The composite coefficient identity in Step 1 is the balancing condition over the original ring. These formulas use the canonical inverse-image comparison for [def-weil-proetale-inverse-image] and specify the termwise comparison in [lem-weil-pbc-proetale-derived-pullback-composition].",
+   "text": "Compare any two normalized ordinary module adjunctions by equality of their units on every section. Hence a is the inverse of leftAdjointCompIso for fixed normalized adjunctions and d. Apply leftAdjointCompIso_assoc to the six adjunctions and the direct-image coherence equation. Equality induction handles the triple-composite transport. Invert the natural-isomorphism equality and evaluate it on modules to obtain the ordinary pullback cocycle.",
    "uses": [
-    "def-weil-pbc-proetale-operations",
+    "lem-trf-adjoint-composition-coherence",
     "def-weil-pbc-composite-adjunction",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "def-weil-proetale-inverse-image",
-    "lem-trf-constant-coefficient-composition",
-    "lem-weil-pbc-proetale-derived-pullback-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D8 (lemma-push-pull-composition-modules), with Tag 03D7 (lemma-adjoint-pullback-pushforward-modules); categories.tex Tag 0B65 (lemma-transformation-between-functors-and-adjoints)"
-   }
-  },
-  {
-   "text": "Apply [lem-trf-adjoint-composition-coherence] with $L_{01}=k^*$, $L_{12}=h^*$, $L_{23}=j^*$ and the three composite pullbacks for the remaining $L_{ij}$. The right comparisons are those of Step 2, and the $a$ are exactly those of Step 3 by their unit characterization. Invert its equality. Since functors preserve inverses, this gives, for every module sheaf $F$ on $X$,\n$$j^*(b_{h,k,F})\\circ b_{j,k\\circ h,F}=b_{j,h,k^*F}\\circ b_{h\\circ j,k,F}.$$\nThe associator is the canonical functor associator in that lemma.",
-   "uses": [
-    "lem-trf-adjoint-composition-coherence"
+    "lem-weil-pbc-conjugate-iso-unit-equation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0B65 (lemma-transformation-between-functors-and-adjoints); precise coherence: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean:170-184"
+    "place": "Tag 0B65; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, leftAdjointCompIso_assoc"
    }
   },
   {
-   "text": "Choose a complex $K$ representing $M$ and a K-flat resolution $P\\to K$ with flat terms by [lem-pc-kflat-resolution]. For each of $j,h,k$ and their composites, [prop-weil-pbc-proetale-constant-ring-map] gives a morphism of ringed pro-etale topoi with the requisite coefficient identification. Apply [lem-weil-pbc-ringed-pullback-preserves-kflat] successively: $k^*P$ and $h^*k^*P$ are K-flat with flat terms, and so are $(k\\circ h)^*P$ and all the other intermediate pullbacks. Thus [def-weil-pbc-proetale-operations] computes all the derived functors in the displayed equation on these same representatives. By the normalization in [lem-weil-pbc-proetale-derived-pullback-composition], each $c_{f,g}$ on them is the class of $b_{f,g}$ applied termwise. In particular $Lj^*(c_{h,k})$ is computed by $j^*$ applied termwise to $b_{h,k,P}$, since $Lj^*$ is induced by the exact termwise functor. Apply Step 4 to each $P^n$: its equality is an equality of complex maps, because every $b$ is natural and therefore commutes with the differential. Localization preserves composition and equalities, so it proves the required equality at $Q_XP$.",
+   "text": "The module pullbacks in this interface are exact, and their derived pullbacks are mapDerivedCategory. For a:H≅F⋙G, the composite mapDerivedCategoryNatIso a followed by mapDerivedCategoryCompIso F G satisfies the representative factorization on every complex: use mapDerivedCategoryCompIso_hom_app_factors and mapDerivedCategoryNatIso_fac. The termwise b equals mapHomologicalComplex a by extensionality on degrees. Retain the K-flat preservation and flatness conjuncts of the existing characterization. Its uniqueness therefore identifies each specified canonical derived comparison with this exact-derived composite. This verifies the original normalization without selecting a new resolution.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-proetale-derived-pullback-composition"
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-weil-pbc-proetale-operations"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), and 0D6D (lemma-derived-pullback-composition), representative computation"
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/MapDerivedCategoryMate.lean",
+    "place": "mapDerivedCategoryCompIso_hom_app_factors; Mathlib mapDerivedCategoryNatIso_fac, using the existing Stacks 0D6D normalization"
    }
   },
   {
-   "text": "Let $s:Q_XP\\xrightarrow{\\sim}M$ be the isomorphism from the resolution. Both sides of the desired equality are natural transformations $T=L(k\\circ h\\circ j)^*\\to S=Lj^*Lh^*Lk^*$, since the comparisons of [lem-weil-pbc-proetale-derived-pullback-composition] are natural. Denote them by $u,v$. Naturality gives $u_M\\circ T(s)=S(s)\\circ u_{Q_XP}=S(s)\\circ v_{Q_XP}=v_M\\circ T(s)$, using Step 5. Cancel the isomorphism $T(s)$ to conclude $u_M=v_M$. No restriction on the cohomological degrees of $M$ or on the scheme morphisms was used.",
+   "text": "Apply mapDerivedCategoryNatIso to the ordinary cocycle. Its compatibility with composition, left and right whiskering, together with mapDerivedCategoryCompIso_assoc, proves the derived cocycle as an equality of natural transformations. Equality induction identifies mapDerivedCategoryNatIso of the ordinary associativity transport with the transport of the derived pullback. Evaluate on M and replace each exact-derived comparison by the specified canonical comparison using the preceding uniqueness argument.",
    "uses": [
+    "def-weil-pbc-proetale-operations",
     "lem-weil-pbc-proetale-derived-pullback-composition"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6D (lemma-derived-pullback-composition), equality on representatives extended by naturality"
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/MapDerivedCategoryMate.lean",
+    "place": "mapDerivedCategoryNatIso_trans, mapDerivedCategoryNatIso_isoWhiskerLeft/Right, and mapDerivedCategoryCompIso_assoc"
    }
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "lem-trf-constant-coefficient-composition",
+  "pur713-def-pullback-comparison",
   "lem-weil-pbc-proetale-derived-pullback-composition",
   "def-weil-pbc-proetale-operations",
   "def-pc-fibre-product",
+  "def-weil-proetale-inverse-image",
   "lem-trf-adjoint-composition-coherence",
   "def-weil-pbc-composite-adjunction",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "def-weil-proetale-inverse-image",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat"
+  "lem-weil-pbc-conjugate-iso-unit-equation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0D6D representative proof, expanded with the adjunction coherence of Mathlib CategoryTheory.Adjunction.leftAdjointCompIso_assoc and the ordinary comparison of sites-modules.tex Tag 03D8."
+  "place": "Tag 0D6D and sites-modules.tex Tag 03D8; ordinary adjunction coherence followed by exact-derived descent, with the original K-flat normalization identified by uniqueness. Lean proof by P5, 2026-10-20."
  },
  "mathlib_searches": [
   {
@@ -199,10 +179,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat"
+  "lem-weil-pbc-proetale-derived-pullback-composition"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -230,5 +207,15 @@
   "group": "Q139",
   "result": "pass",
   "note": "Clause-by-clause check of proEtaleConstantRingDerivedPullback_composition_coherence against the node: j,h,k unrestricted; A : Type u, CommRing, Finite; M arbitrary in the unbounded derived category on the real small pro-etale site, no universe equality forced. c_{f,g} = (proEtaleConstantRingPullbackComposition f g A).inv : L(f≫g) ⟶ Lg ⋙ Lf, the selected canonical comparison transported along the canonical composite-coefficient equality, so no arbitrary choice. Both paths are in the correct order and the eqToIso along (Category.assoc j h k).symm goes the right way; both sides end at the same object by definition. Delivery changes only the item node (lean field; stmt_deps gains the landed pur713-def-pullback-comparison, allowed by brief §5, no cycle) and the new module; the 8 dependency nodes are byte-identical to the side clone. Statement field verbatim in the file. Docstrings have source place, blueprint tag and all six proof steps. No hollow definitions, only sorry, no pro-etale substitute. Stacks 0D6D read. Edge cases (empty W, identity arrows, zero ring, unbounded M, non-flat morphisms) covered. nt_compile.py --json exited 0 with no errors twice (7.8 s, 9.3 s); no sorry warning printed (apparently suppressed by tool options); a control copy with #check and a false example confirmed the file is elaborated. Not a fault here: two landed declarations state the same composite-coefficient fact."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261020T122122-L-480633",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
