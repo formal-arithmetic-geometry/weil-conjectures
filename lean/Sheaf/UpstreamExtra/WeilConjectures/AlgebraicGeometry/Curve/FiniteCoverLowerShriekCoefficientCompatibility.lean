@@ -1,14 +1,6 @@
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.FiniteCoverLowerShriekCoefficientCompatibility
-public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
-public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-public import WeilConjectures.AlgebraicGeometry.FiniteEtalePushforwardLocallyConstant
-public import WeilConjectures.ConstructibleSheaf.OpenClosed
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
-public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-! Declarations of ours that lived in the upstream file `WeilConjectures.AlgebraicGeometry.Curve.FiniteCoverLowerShriekCoefficientCompatibility` (moved out by the scheduled sync, tools/upstream_verbatim.py, 2026-10-20: upstream files are verbatim in live). -/
 

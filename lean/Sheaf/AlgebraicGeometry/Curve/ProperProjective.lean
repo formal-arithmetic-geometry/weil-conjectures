@@ -5,9 +5,7 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.Dimension
-public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 import Sheaf.AlgebraicGeometry.DimOneQuasiProjective
 
 /-!

@@ -8,7 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import WeilConjectures.AlgebraicGeometry.OpenUnionImageComplexExact
 import WeilConjectures.AlgebraicGeometry.LocalizedOpenImageComplexComparisons
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 
 /-! # Short exact presentation on an arbitrary open union

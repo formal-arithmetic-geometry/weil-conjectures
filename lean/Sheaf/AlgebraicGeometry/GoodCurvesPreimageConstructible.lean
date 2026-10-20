@@ -5,21 +5,11 @@ Authors: SHEAF group H5
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Noetherian
-public import Mathlib.AlgebraicGeometry.Limits
-public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
-public import Mathlib.Topology.KrullDimension
-public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 import WeilConjectures.ConstructibleSheaf.DenseOpenUnit
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
-import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
-import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 import Sheaf.AlgebraicGeometry.QuasiFiniteShriekConstructible
 import Sheaf.AlgebraicGeometry.EtaleCompactSupportOpenClosedTriangle
 import Sheaf.AlgebraicGeometry.GoodCurvesPreimageBoundary

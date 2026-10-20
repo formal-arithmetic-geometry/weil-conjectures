@@ -5,8 +5,6 @@ Authors: SHEAF group V1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisTriangle
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeMayerVietorisMaps
 import Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisSquares
 import Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisBoundary

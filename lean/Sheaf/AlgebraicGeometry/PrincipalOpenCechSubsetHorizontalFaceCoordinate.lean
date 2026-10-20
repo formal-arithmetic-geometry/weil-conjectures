@@ -6,7 +6,6 @@ Authors: SHEAF group B3
 module
 
 public import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetInsertion
-import Mathlib.Order.Interval.Finset.Fin
 
 /-! # One coordinate of the horizontal Čech differential
 

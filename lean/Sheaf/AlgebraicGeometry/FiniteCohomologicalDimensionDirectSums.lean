@@ -5,21 +5,9 @@ Authors: SHEAF group NO
 -/
 module
 
-public import Mathlib.Data.ZMod.Basic
-public import Mathlib.Algebra.Ring.ULift
-public import Mathlib.CategoryTheory.Sites.GlobalSections
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import Sheaf.AlgebraicGeometry.Sites.TorsionEtaleCohomologicalDimension
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import all WeilConjectures.CategoryTheory.CompactTestsRightAdjointCoproducts
 import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
 import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
 

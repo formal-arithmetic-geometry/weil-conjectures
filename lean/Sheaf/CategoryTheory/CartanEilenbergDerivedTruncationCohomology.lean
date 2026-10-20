@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.CategoryTheory.CartanEilenbergPresentation
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-public import Mathlib.Algebra.Homology.DerivedCategory.Plus
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Sheaf.CategoryTheory.CartanEilenbergTruncationResolution
 import WeilConjectures.CategoryTheory.CartanEilenbergMappedTotal

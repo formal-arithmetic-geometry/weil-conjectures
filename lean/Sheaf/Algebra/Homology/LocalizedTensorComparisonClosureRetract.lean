@@ -1,7 +1,6 @@
 module
 
 public import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonProperty
-public import Mathlib.CategoryTheory.Retract
 public import Mathlib.RingTheory.Flat.Basic
 import Sheaf.Algebra.Homology.LocalizedTensorComparisonClosureRetractCore
 

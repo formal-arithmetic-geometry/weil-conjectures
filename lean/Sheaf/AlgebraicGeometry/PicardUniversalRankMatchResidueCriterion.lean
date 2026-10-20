@@ -9,12 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.PicardUniversalRankMatch
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-public import Mathlib.AlgebraicGeometry.ResidueField
 import WeilConjectures.AlgebraicGeometry.FlatBaseChangeResolutionIso
 import WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSectionsLift
 import all WeilConjectures.AlgebraicGeometry.PicardPullbackLocalRanks
 import all WeilConjectures.AlgebraicGeometry.PicardUniversalRankMatchFiniteRanks
-import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 
 /-! # Residue-field criterion for universal Picard rank matching
 

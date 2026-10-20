@@ -7,11 +7,9 @@ module
 
 public import Sheaf.CategoryTheory.FilteredHomologyExactCouple
 public import WeilConjectures.CategoryTheory.FilteredComplexPageDifferential
-public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import Sheaf.CategoryTheory.FilteredHomologyTowerQuotients
 import Sheaf.CategoryTheory.FilteredHomologyTowerDifferential
 import WeilConjectures.CategoryTheory.FilteredComplexDifferentialRepresentativesCover
-import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 /-!
 # Derived homology-couple pages as representative quotients
 

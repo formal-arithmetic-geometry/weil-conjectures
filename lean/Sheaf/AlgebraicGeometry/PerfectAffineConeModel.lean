@@ -6,7 +6,6 @@ Authors: SHEAF group T3
 module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.AlgebraicGeometry.PerfectAffineMapRepresentative
 
 /-! # A strictly perfect model for a cone on an affine open

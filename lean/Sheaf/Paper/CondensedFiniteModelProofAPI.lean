@@ -5,9 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
-public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 import Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
-import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 import all Sheaf.AlgebraicGeometry.ProEtaleModuleConstructibleExtensionByZero
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 public import Sheaf.UpstreamExtra.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory

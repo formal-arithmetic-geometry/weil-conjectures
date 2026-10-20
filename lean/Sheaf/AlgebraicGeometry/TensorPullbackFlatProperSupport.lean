@@ -8,8 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 import WeilConjectures.AlgebraicGeometry.RelativelyFlatModulePullback
 import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportPullback
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties

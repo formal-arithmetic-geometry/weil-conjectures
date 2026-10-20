@@ -8,8 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.AlternatingCechTotalComplex
 public import Mathlib.Topology.Sheaves.Flasque
 import Sheaf.Paper.FlasqueAlternatingCechRowAugmentation
-import WeilConjectures.AlgebraicGeometry.InjectiveAlternatingCechRowAugmentation
-import WeilConjectures.Algebra.Homology.FiniteStripAugmentation
 import all WeilConjectures.AlgebraicGeometry.InjectiveTermsAlternatingCechAugmentation
 
 /-!

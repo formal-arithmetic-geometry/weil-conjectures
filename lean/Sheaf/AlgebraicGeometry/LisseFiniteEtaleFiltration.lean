@@ -7,22 +7,11 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
-public import Mathlib.RingTheory.Noetherian.Defs
-public import Mathlib.CategoryTheory.Subobject.Limits
 
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
-import WeilConjectures.Mathlib.AlgebraicGeometry.Limits
-import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper
-import WeilConjectures.Mathlib.Topology.NoetherianSpace
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.LinearAlgebra.Span.Basic
-import Mathlib.CategoryTheory.Abelian.Exact
 import Mathlib.CategoryTheory.Functor.ReflectsIso.Limits
-import Mathlib.CategoryTheory.Limits.FullSubcategory
-import Mathlib.Algebra.Category.ModuleCat.Products
 import Mathlib.RepresentationTheory.Invariants
 import Mathlib.RepresentationTheory.Coinvariants
-import Mathlib.RingTheory.Finiteness.Cardinality
 import WeilConjectures.AlgebraicGeometry.Sites.ModulePointFunctions
 import Sheaf.AlgebraicGeometry.FiniteRingTorsorModuleDescent
 import Sheaf.AlgebraicGeometry.FiniteRingTorsorModuleComparisons
@@ -32,10 +21,7 @@ import WeilConjectures.ConstructibleSheaf.ModuleConstantOfSetPullback
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import Sheaf.Paper.LisseModuleSheaves
-import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.RepresentationTheory.PrimaryPGroupFiltration
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.GroupTheory.Sylow
 
 /-!
 # Prime-to-primary finite étale filtration covers

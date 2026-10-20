@@ -10,10 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import WeilConjectures.AlgebraicGeometry.PicardTermwiseCompositeCounit
 import WeilConjectures.AlgebraicGeometry.FlatComplexDerivedPullback
 import WeilConjectures.AlgebraicGeometry.SingleComplexOpenRestrictionData
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 
 /-! # Coherence of the local perfect target model
 Source: Stacks Project, Tags 06YJ, 0D5S and 08DW.

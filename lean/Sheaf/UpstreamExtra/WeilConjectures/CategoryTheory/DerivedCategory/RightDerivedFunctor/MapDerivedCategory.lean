@@ -1,9 +1,6 @@
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! Declarations of ours that lived in the upstream file `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory` (moved out by the scheduled sync, tools/upstream_verbatim.py, 2026-10-20: upstream files are verbatim in live). -/
 

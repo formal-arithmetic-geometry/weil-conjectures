@@ -12,7 +12,6 @@ import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonRepresentativeS
 import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
-import WeilConjectures.Mathlib.Algebra.Homology.GrothendieckAbelian
 
 /-! # Coproduct closure of the localized tensor comparison predicate
 

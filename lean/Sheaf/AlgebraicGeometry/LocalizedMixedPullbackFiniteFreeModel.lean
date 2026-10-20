@@ -5,13 +5,10 @@ Authors: SHEAF group H3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import WeilConjectures.AlgebraicGeometry.LocalizedMixedDerivedPullback
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import Sheaf.AlgebraicGeometry.OpenRestrictionKFlatModel
-import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # Termwise finite-free models under localized derived pullback
 Source: Stacks Project, Tags 06YD, 06YJ and 08DW.

@@ -6,7 +6,6 @@ Authors: SHEAF group H4
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-public import Mathlib.CategoryTheory.Adjunction.Additive
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # The canonical homology comparison for associated sheaves over a field

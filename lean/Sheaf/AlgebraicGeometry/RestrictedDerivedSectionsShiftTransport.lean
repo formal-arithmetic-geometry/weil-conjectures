@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.RestrictedDerivedSectionZeroComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AdjunctionShift
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
-import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyComparisonMap
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Transport of restricted section pullback through the shift comparison
 

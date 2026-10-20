@@ -1,23 +1,7 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.EffectiveDescent
-public import Mathlib.AlgebraicGeometry.Geometrically.Integral
-public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import Mathlib.AlgebraicGeometry.Sites.Fpqc
-public import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 public import WeilConjectures.FieldTheory.CommonExtensionFields
-public import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
-public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
-public import Mathlib.CategoryTheory.Sites.Over
-public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.AffineLocal
-public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Gluing
-public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Group
-public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Neighbourhood
 public import WeilConjectures.AlgebraicGeometry.FieldExtensionDescent
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineNeighbourhood
-public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 
 /-! Declarations of ours that lived in the upstream file `WeilConjectures.AlgebraicGeometry.EffectiveDescent` (moved out by the scheduled sync, tools/upstream_verbatim.py, 2026-10-20: upstream files are verbatim in live). -/
 

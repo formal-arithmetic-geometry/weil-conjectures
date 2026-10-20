@@ -7,29 +7,12 @@ module
 
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 import Sheaf.CategoryTheory.RightDerivedFunctorUpperBound
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstructibleDirectImage
-import Mathlib.RingTheory.Noetherian.Basic
-import Mathlib.Algebra.CharP.Basic
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 import Sheaf.AlgebraicGeometry.FiniteTypeDirectImageConstructibility
 import Sheaf.AlgebraicGeometry.FiniteConstantProjectionFormula
 import Sheaf.AlgebraicGeometry.ResidueTorAmplitudeTest
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 /-!
 # Direct image and finite Tor amplitude

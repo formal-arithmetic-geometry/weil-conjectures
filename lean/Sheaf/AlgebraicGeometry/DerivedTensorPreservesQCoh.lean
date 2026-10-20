@@ -6,7 +6,6 @@ Authors: SHEAF group R1
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import Sheaf.Algebra.Homology.KFlat
 import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
 import WeilConjectures.AlgebraicGeometry.AffineModuleComplexRepresentative
 import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh

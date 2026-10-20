@@ -1,13 +1,7 @@
 module
 
-public import WeilConjectures.WeilSheaf.PoincareDualityLisse
-public import Mathlib.LinearAlgebra.PerfectPairing.Basic
-public import WeilConjectures.WeilSheaf.Cohomology
-public import WeilConjectures.WeilSheaf.Dual
-public import WeilConjectures.WeilSheaf.TateTwist
 public import WeilConjectures.WeilSheaf.VerdierDualFinite
 public import WeilConjectures.WeilSheaf.StalkRationalPoint
-public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 
 /-! Declarations of ours that lived in the upstream file `WeilConjectures.WeilSheaf.PoincareDualityLisse` (moved out by the scheduled sync, tools/upstream_verbatim.py, 2026-10-20: upstream files are verbatim in live). -/
 

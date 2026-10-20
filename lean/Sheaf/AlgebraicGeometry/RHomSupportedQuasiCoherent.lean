@@ -8,7 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.PseudoCoherentComplex
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.Paper.DerivedInternalHomRestrictOpen
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherentPseudoPart
 import WeilConjectures.AlgebraicGeometry.RHomSupportedQuasiCoherentPerfectPart
 import Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherentSupportPart

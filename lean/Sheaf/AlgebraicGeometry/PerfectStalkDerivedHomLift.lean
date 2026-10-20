@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 import WeilConjectures.AlgebraicGeometry.PerfectAffineMapRepresentative
 import Sheaf.AlgebraicGeometry.PerfectOpenStalkDerivedHomDescent
 import WeilConjectures.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
-public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Lifting a derived stalk morphism to a chain map between local perfect models
 

@@ -3,7 +3,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.AffineSpectrumCanonicalStalkRingCoordinates
 public import WeilConjectures.AlgebraicGeometry.IsoPullbackStalkCohomology
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
-import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 @[expose] public section
 
 /-! Existence of canonical spectrum chain coordinates -/ 

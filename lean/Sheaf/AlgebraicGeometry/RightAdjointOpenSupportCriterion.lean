@@ -6,12 +6,8 @@ Authors: SHEAF group G1
 module
 
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
-public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
 import Mathlib.CategoryTheory.Adjunction.Additive
-import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import WeilConjectures.AlgebraicGeometry.RightAdjointOpenUnitConeTest
 import Sheaf.AlgebraicGeometry.RightAdjointOpenSupportOfBounded
 

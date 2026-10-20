@@ -6,15 +6,10 @@ Authors: SHEAF group W2
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import WeilConjectures.AlgebraicGeometry.CompatiblePullbackSheafSystem
 import WeilConjectures.AlgebraicGeometry.EtaleLimitCanonicalCohomologyDiagram
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
-import Mathlib.CategoryTheory.Filtered.Final
-import Mathlib.CategoryTheory.Filtered.Connected
-import Mathlib.CategoryTheory.Limits.Connected
 import Mathlib.CategoryTheory.Presentable.Directed
-import Mathlib.CategoryTheory.Limits.ConcreteCategory.Filtered
 
 /-! # Descent of fixed-base étale cohomology classes
 

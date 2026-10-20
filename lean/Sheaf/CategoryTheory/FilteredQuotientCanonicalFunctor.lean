@@ -6,10 +6,7 @@ Authors: SHEAF group E1
 module
 
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
-public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import WeilConjectures.CategoryTheory.FilteredComplexPageDifferential
-import WeilConjectures.CategoryTheory.FilteredQuotientPageMaps
-import WeilConjectures.CategoryTheory.FilteredComplexNormalizedHomology
 import Sheaf.CategoryTheory.FilteredQuotientHomologyNaturality
 
 /-!

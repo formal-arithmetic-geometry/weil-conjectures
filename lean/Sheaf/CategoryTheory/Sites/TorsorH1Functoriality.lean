@@ -1,6 +1,5 @@
 module
 
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.CategoryTheory.Sites.Torsor
 public import WeilConjectures.Topology.ClosedImmersionPushforwardCohomology
 import Sheaf.CategoryTheory.Sites.TorsorH1FunctorialityParts

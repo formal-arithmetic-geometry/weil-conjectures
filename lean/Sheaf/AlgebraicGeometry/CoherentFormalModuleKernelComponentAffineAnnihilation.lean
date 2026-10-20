@@ -1,11 +1,8 @@
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
-public import Mathlib.Algebra.Category.ModuleCat.Limits
-public import Mathlib.RingTheory.Ideal.Operations
 import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleAffineProjections
 import WeilConjectures.RingTheory.KernelCokernelAnnihilatedModIdeal
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 @[expose] public section
 

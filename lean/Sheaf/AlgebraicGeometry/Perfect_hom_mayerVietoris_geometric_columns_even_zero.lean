@@ -5,13 +5,10 @@ Authors: SHEAF group A4
 -/
 module
 
-public import Mathlib.Algebra.Category.Grp.Colimits
 public import WeilConjectures.AlgebraicGeometry.PerfectHomPushPullCocone
 public import WeilConjectures.AlgebraicGeometry.PerfectHomMayerVietorisDiagram
 public import WeilConjectures.AlgebraicGeometry.PerfectHomLocalComparison
 public import WeilConjectures.AlgebraicGeometry.PerfectHomTriangleRow
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import WeilConjectures.AlgebraicGeometry.PerfectHomOpenStagePresentation
 import all WeilConjectures.AlgebraicGeometry.PerfectHomMayerVietorisGeometricColumnsOdd
 
 /-! # Local comparisons for the outer columns of geometric triangle diagrams

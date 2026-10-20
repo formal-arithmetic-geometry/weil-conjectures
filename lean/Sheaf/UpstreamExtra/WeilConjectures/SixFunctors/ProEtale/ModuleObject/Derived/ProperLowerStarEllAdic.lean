@@ -1,14 +1,7 @@
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarCoproducts
 public import Sheaf.AlgebraicGeometry.EllAdicProperBoundedBelowCoproducts
-public import Sheaf.AlgebraicGeometry.EllAdicProperHeartUniformBound
 public import Sheaf.AlgebraicGeometry.EllAdicProperConstructibleCohomology
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 
 /-! Declarations of ours that lived in the upstream file `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic` (moved out by the scheduled sync, tools/upstream_verbatim.py, 2026-10-20: upstream files are verbatim in live). -/
 

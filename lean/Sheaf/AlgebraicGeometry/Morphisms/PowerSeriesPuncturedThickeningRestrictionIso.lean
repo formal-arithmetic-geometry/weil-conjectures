@@ -6,7 +6,6 @@ Authors: SHEAF group J4
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleAdicSectionsTransfer
-public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import WeilConjectures.RingTheory.Depth
 import WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoHartogsRestriction
 import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesThickeningBoundaryDepth

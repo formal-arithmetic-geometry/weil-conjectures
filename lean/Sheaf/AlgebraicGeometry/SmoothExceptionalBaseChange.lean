@@ -6,25 +6,9 @@ Authors: SHEAF group NC
 module
 
 public import Sheaf.AlgebraicGeometry.SmoothTensorDuality
-public import Sheaf.Paper.RingedTopoiCanonicalTensorPullback
-public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
-public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import Sheaf.AlgebraicGeometry.CompactifiableOverField
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionExchange
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
-import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Unit
 public import Sheaf.SixFunctors.SmoothDualityBaseChangeCompat
 
 /-! # Arbitrary base change for smooth ambient duality

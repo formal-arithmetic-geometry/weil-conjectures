@@ -5,10 +5,7 @@ Authors: SHEAF group D2
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonProperty
 public import Mathlib.RingTheory.Flat.Basic
-public import Mathlib.Algebra.Homology.ExactSequence
-public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 public import WeilConjectures.Algebra.Homology.TensorConeFiveTermExact
 import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyTriangleRows
 import WeilConjectures.Algebra.Homology.TensorCoefficientConeBoundary

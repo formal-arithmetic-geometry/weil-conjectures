@@ -5,8 +5,6 @@ Authors: Claude, SHEAF group E1
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Mathlib.RingTheory.Noetherian.Defs
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import Sheaf.Paper.PQFCohomology
 import WeilConjectures.AlgebraicGeometry.AffineMorphismCohomologyEdge

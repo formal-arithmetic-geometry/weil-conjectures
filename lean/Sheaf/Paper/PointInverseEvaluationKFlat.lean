@@ -8,12 +8,7 @@ module
 public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import Sheaf.Algebra.Homology.KFlat
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
-public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
-public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
-public import Mathlib.Algebra.Category.ModuleCat.Colimits
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
-import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
-import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # K-flat complexes under inverse evaluation on a point

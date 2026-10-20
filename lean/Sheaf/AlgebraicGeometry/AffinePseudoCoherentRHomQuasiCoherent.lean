@@ -7,8 +7,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplex
 import WeilConjectures.Algebra.Homology.DerivedHomFiniteFreeModel
 import Sheaf.AlgebraicGeometry.AffineFiniteProjectiveHomModel
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree

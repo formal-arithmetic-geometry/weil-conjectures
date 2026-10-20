@@ -7,8 +7,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.CohomologyFractionPresentation
 public import WeilConjectures.AlgebraicGeometry.Ample
-public import WeilConjectures.AlgebraicGeometry.Coherent
-public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import WeilConjectures.Topology.ModuleMayerVietoris
 import Sheaf.Paper.NonvanishingSectionTrivializes
 import Sheaf.Paper.CohomologyFractionComparison

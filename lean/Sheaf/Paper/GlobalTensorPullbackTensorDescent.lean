@@ -8,7 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
-import WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.DerivesTwo
 import WeilConjectures.Mathlib.CategoryTheory.Whiskering
 
 /-! # Descent of the normalized global tensor comparison

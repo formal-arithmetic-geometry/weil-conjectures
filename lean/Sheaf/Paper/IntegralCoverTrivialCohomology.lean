@@ -1,7 +1,6 @@
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 import WeilConjectures.AlgebraicGeometry.GabberAbsolutelyAlgebraicallyClosed
 
 /-!

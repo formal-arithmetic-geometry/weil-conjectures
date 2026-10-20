@@ -1,12 +1,10 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import Mathlib.Topology.QuasiSeparated
 import WeilConjectures.AlgebraicGeometry.PerfectSupportedMapLift
 import WeilConjectures.AlgebraicGeometry.OpenDerivedRestrictionComparison
 import WeilConjectures.AlgebraicGeometry.PerfectPseudoCoherentLocallyFiniteTor
 import WeilConjectures.AlgebraicGeometry.PseudoCoherentQCoh
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 /-! # The detector on the localized smaller open
 
 Source: Stacks Project, Tag 0A9A, induction paragraphs.

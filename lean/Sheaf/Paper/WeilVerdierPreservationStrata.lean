@@ -8,24 +8,10 @@ module
 public import Sheaf.Paper.FiniteFieldFiber
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
-public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
-public import WeilConjectures.Compactification.NagataCompactification
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-public import Mathlib.Topology.KrullDimension
 
 import WeilConjectures.SixFunctors.Etale.Derived.VerdierPreservation
-import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 /-!
 # Verdier duality preserves finite-Tor constructible complexes

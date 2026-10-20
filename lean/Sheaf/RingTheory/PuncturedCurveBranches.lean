@@ -7,18 +7,12 @@ module
 public import Sheaf.AlgebraicGeometry.LocalCurveBranches
 public import Sheaf.RingTheory.ExcellentRing
 public import WeilConjectures.Mathlib.RingTheory.Henselian
-public import Mathlib.RingTheory.DiscreteValuationRing.Basic
-public import Mathlib.RingTheory.KrullDimension.Basic
-public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.AlgebraicGeometry.Limits
 
-import Mathlib.RingTheory.KrullDimension.Field
-import Mathlib.RingTheory.DiscreteValuationRing.TFAE
 import Sheaf.RingTheory.QuasiExcellentNagata
 import WeilConjectures.RingTheory.SemilocalNormalizationDimOne
 import WeilConjectures.RingTheory.ReducedNoetherianTotalRingFractions
 import Sheaf.RingTheory.LocalCurvePrincipalTotalFractions
-import Mathlib.AlgebraicGeometry.OpenImmersion
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct
 

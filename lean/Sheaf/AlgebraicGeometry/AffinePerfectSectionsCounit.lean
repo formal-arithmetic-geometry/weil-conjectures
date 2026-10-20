@@ -6,9 +6,7 @@ Authors: SHEAF group H4
 module
 
 public import WeilConjectures.AlgebraicGeometry.AffinePerfectModuleModel
-public import Mathlib.CategoryTheory.Adjunction.Additive
 import all WeilConjectures.AlgebraicGeometry.AffineFreeTerminalSectionsReconstruction
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # A natural reconstruction counit for strictly perfect affine complexes
 

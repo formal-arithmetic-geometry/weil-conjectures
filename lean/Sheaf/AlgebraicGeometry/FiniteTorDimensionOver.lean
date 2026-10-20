@@ -8,8 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.Algebra.Homology.KFlat
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
-public import Mathlib.Algebra.Homology.Single
 
 /-! # Finite Tor dimension over the inverse-image structure sheaf
 

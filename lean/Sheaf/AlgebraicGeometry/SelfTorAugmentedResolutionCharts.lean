@@ -4,9 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Mathlib.CategoryTheory.Abelian.Projective.Resolution
 public import Mathlib.Algebra.Category.ModuleCat.Projective
-public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure

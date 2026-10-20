@@ -6,15 +6,8 @@ Authors: Nailin Guan
 module
 
 public import Sheaf.AlgebraicGeometry.BaseChangeSurvivalClosedOpen
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.ClosedOpen
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Limit
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Colimits
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.EpiMono
 
 
-import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.CriticalMap
-import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
-import WeilConjectures.AlgebraicGeometry.BaseChangeOpenInjectiveCoefficientZero
 
 /-!
 # Survival of a cokernel element under base change

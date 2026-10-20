@@ -8,7 +8,6 @@ module
 public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
-public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import Sheaf.CategoryTheory.FilteredCohomologyDiagonalColimit
 import Sheaf.CategoryTheory.FiniteCoconeExactCouple
 

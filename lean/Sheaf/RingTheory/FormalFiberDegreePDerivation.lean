@@ -5,7 +5,6 @@ Authors: SHEAF group J2
 -/
 module
 
-public import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 public import Mathlib.RingTheory.MvPowerSeries.NoZeroDivisors
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
@@ -18,9 +17,6 @@ import WeilConjectures.RingTheory.Derivation.DetectNonPthPower
 import WeilConjectures.RingTheory.RegularRingNormal
 import WeilConjectures.RingTheory.PowerSeriesFieldCohenRegularComplete
 import WeilConjectures.RingTheory.RegularLocalLocalization
-import Mathlib.RingTheory.LocalProperties.IntegrallyClosed
-import Mathlib.Algebra.CharP.Reduced
-import Mathlib.Algebra.CharP.Algebra
 import Mathlib.RingTheory.RegularLocalRing.Polynomial
 
 /-!

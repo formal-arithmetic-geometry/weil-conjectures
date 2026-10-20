@@ -7,8 +7,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectHomContinuityOn
 import Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisComparison
-import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
-import Mathlib.CategoryTheory.Limits.Types.Filtered
 
 /-! # Mayer--Vietoris gluing for continuity of perfect Hom
 Source: Stacks Project, perfect.tex, Tag 09RE, quasi-compact-open induction step.

@@ -5,14 +5,7 @@ Authors: SHEAF group H1
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
-public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Morphisms.Flat
-public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
 import Sheaf.AlgebraicGeometry.PicardDirectImageFibreCohomologyNegative

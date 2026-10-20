@@ -11,7 +11,6 @@ public import Sheaf.Algebra.Homology.KFlat
 import WeilConjectures.Algebra.Homology.BoundedExactTermHomQuasiIso
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationDifferential
-import Mathlib.CategoryTheory.MorphismProperty.Retract
 import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 
 /-! # Exact Hom and K-flat dual computations for a strictly perfect local complex

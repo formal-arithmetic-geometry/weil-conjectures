@@ -6,23 +6,9 @@ Authors: SHEAF group Q34
 module
 
 public import Sheaf.AlgebraicGeometry.SmoothBaseChangeCoefficients
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
-public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Sheaf.AlgebraicGeometry.EtaleCompactSupportAmplitude
-public import Mathlib.Topology.KrullDimension
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.FiniteTypeDirectImageConstructibility
-import WeilConjectures.ConstructibleSheaf.OpenClosed
 import Sheaf.AlgebraicGeometry.ProperBoundedConstructible
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 

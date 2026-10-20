@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFreeProjective
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import Sheaf.AlgebraicGeometry.PerfectOpenStalkChainMapLift
 import Sheaf.AlgebraicGeometry.PerfectOpenStalkInverseHomotopiesSpread
-public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Detecting a quasi-isomorphism of strictly perfect complexes near a point
 

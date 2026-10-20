@@ -1,10 +1,7 @@
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.RingTheory.AdicCompletion.Basic
-public import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.Paper.AlgebraizeFiniteStructureAlgebra
 import WeilConjectures.AlgebraicGeometry.CoherentAlgebraAffineFiniteProper
 import WeilConjectures.AlgebraicGeometry.AffineAlgebraReductionsCartesian

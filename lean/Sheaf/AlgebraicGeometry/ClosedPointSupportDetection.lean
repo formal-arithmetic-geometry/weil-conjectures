@@ -5,19 +5,10 @@ Authors: SHEAF group Q07
 -/
 module
 
-public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.AlgebraicGeometry.EtaleSupport
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-public import Mathlib.CategoryTheory.Sites.Point.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import Sheaf.AlgebraicGeometry.ClosedPointSupportGlobalGeneration
 import Sheaf.AlgebraicGeometry.ClosedPointSupportVanishing
 import Sheaf.AlgebraicGeometry.UnboundedEtaleCohomologyAcyclicBasis

@@ -6,7 +6,6 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleLocalizingClosure
-public import Sheaf.AlgebraicGeometry.EllAdicCondensedCoefficient
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 import Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound
 import Sheaf.AlgebraicGeometry.EllAdicProperBoundedBelowCoproducts

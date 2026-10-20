@@ -7,8 +7,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
 import WeilConjectures.AlgebraicGeometry.FlatComplexDerivedPullback
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Degree-zero dimension of the derived residue of the structure sheaf
 

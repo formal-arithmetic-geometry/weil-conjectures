@@ -5,12 +5,7 @@ Authors: SHEAF group NP
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.Topology.KrullDimension
 public import Sheaf.AlgebraicGeometry.SmoothBaseChangeCoefficients
-public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison

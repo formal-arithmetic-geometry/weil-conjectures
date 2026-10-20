@@ -5,20 +5,12 @@ Authors: SHEAF group T8
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import Mathlib.AlgebraicGeometry.Geometrically.Connected
-public import Mathlib.Topology.KrullDimension
-public import Mathlib.Data.ZMod.Basic
-public import Mathlib.Algebra.Field.ULift
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 import WeilConjectures.AlgebraicGeometry.Curve.ArtinSchreierDimension
 import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
 import Sheaf.AlgebraicGeometry.GeometricFiberFinite
 import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
 import WeilConjectures.AlgebraicGeometry.Regular
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 
 /-!
 # Characteristic-prime vanishing above degree one in smooth proper curves

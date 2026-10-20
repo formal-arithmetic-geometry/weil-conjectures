@@ -7,18 +7,7 @@ module
 
 public import Sheaf.Paper.FiniteFieldFiber
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Mathlib.Algebra.CharP.CharAndCard
 
 /-!
 # Direct image and finite Tor amplitude without properness

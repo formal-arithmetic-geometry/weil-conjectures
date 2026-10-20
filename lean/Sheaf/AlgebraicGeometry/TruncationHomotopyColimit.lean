@@ -5,10 +5,6 @@ Authors: SHEAF group Q23
 -/
 module
 
-public import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 import Sheaf.CategoryTheory.SequentialTelescopeMono
 import Mathlib.CategoryTheory.Functor.OfSequence

@@ -5,22 +5,9 @@ Authors: SHEAF group NC
 -/
 module
 
-public import Mathlib.Algebra.Field.Defs
-public import Mathlib.AlgebraicGeometry.Scheme
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.AlgebraicGeometry.OpenImmersion
-public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 import Sheaf.AlgebraicGeometry.NowhereDenseDimensionDrop
-import WeilConjectures.ConstructibleSheaf.GenericConstancy
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 /-!

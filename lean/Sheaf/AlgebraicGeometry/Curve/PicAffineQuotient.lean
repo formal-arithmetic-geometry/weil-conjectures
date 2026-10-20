@@ -5,11 +5,8 @@ Authors: SHEAF group R1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Jacobian
-public import Mathlib.GroupTheory.QuotientGroup.Basic
 import WeilConjectures.AlgebraicGeometry.Curve.PicRestrictionBoundary
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-!
 # The Picard group of an affine curve as a Jacobian quotient

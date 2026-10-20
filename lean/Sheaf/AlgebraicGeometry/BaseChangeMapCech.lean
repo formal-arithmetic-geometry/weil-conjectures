@@ -1,7 +1,5 @@
 module
 
-public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import WeilConjectures.AlgebraicGeometry.DerivedModuleBaseChangeMap
 
 /-!

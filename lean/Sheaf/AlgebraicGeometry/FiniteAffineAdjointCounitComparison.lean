@@ -9,7 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Noetherian
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import WeilConjectures.AlgebraicGeometry.FiniteAffineDerivedEquivalence
 import WeilConjectures.AlgebraicGeometry.FiniteAffineDerivedFactorization
 import WeilConjectures.AlgebraicGeometry.FiniteScalarRightAdjointQCoh

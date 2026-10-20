@@ -6,10 +6,8 @@ Authors: SHEAF group C1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Coherent
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
-public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseUnionPreimage
 import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition

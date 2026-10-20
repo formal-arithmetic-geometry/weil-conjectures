@@ -5,8 +5,6 @@ Authors: SHEAF group X2
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.Curve.ConstantInvariance

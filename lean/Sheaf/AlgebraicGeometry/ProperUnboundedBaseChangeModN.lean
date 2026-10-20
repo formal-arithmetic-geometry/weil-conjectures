@@ -5,18 +5,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.Data.ZMod.Basic
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine
 import Sheaf.AlgebraicGeometry.TorsionAssembly
 import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishingTorsion
 import WeilConjectures.SixFunctors.BaseChange.DerivedUnboundedFac
-import WeilConjectures.SixFunctors.BaseChange.DerivedRestrictScalars
-import WeilConjectures.SixFunctors.BaseChange.DerivedForget
-import WeilConjectures.SixFunctors.BaseChange.Forget
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.AbTorsionSheaf
 
 /-! # Unbounded proper base change for finite cyclic coefficients -/
 

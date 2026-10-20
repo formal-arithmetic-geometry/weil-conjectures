@@ -5,17 +5,11 @@ Authors: SHEAF group Q04
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import Sheaf.Paper.ProEtaleFixedModuleConstructible
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekComparison
-public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Sheaf.AlgebraicGeometry.EtaleProEtaleExceptionalObjectComparison
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
-import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 
 /-!
 # Exceptional adjunction transport from etale to pro-etale sheaves

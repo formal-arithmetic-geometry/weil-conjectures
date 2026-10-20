@@ -6,8 +6,6 @@ Authors: SHEAF group N1
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedSectionPresheaf
-public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.Paper.QCohAcyclicDerivedSectionsComparisonSections
 import Sheaf.Paper.QCohAcyclicDerivedSectionsComparisonSheafification

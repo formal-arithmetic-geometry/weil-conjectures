@@ -6,8 +6,6 @@ Authors: SHEAF group A2
 module
 
 public import Sheaf.Paper.HigherDirectImagePresheaf
-public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import WeilConjectures.AlgebraicGeometry.OpenRestrictionModuleCohomology
 import WeilConjectures.AlgebraicGeometry.HigherDirectImageResolutionNaturality
 

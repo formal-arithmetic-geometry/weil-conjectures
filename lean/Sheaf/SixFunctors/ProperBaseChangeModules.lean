@@ -4,10 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 public import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedExchangeCompatibility
-public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
 import Sheaf.AlgebraicGeometry.ExchangeForgetCoefficients
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 

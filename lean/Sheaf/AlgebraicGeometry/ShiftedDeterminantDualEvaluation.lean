@@ -8,7 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import Sheaf.AlgebraicGeometry.DeterminantDualEvaluation
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit

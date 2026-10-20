@@ -3,8 +3,6 @@ module
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import WeilConjectures.AlgebraicGeometry.FormalSystemsPullback
 import WeilConjectures.AlgebraicGeometry.GrothendieckExistenceProjective

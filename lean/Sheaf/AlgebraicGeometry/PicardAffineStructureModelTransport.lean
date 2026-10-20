@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.AffinePerfectModuleModel
 
-import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import all WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 import Sheaf.AlgebraicGeometry.OpenImmersionRestrictionDerivedProperties
 import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso

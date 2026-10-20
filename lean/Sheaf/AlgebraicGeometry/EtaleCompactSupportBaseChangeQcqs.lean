@@ -5,13 +5,8 @@ Authors: SHEAF group NZ
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Scheme
-public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 import Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChange

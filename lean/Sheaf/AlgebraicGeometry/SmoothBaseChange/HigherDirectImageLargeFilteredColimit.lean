@@ -6,10 +6,8 @@ Authors: SHEAF groups U2 and H2
 module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
-public import Mathlib.CategoryTheory.Filtered.Basic
 import WeilConjectures.AlgebraicGeometry.Curve.EtaleSheafHLargeFilteredColimit
 import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
-import WeilConjectures.AlgebraicGeometry.EtaleFreeSheafDerivedSections
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
 
 /-!

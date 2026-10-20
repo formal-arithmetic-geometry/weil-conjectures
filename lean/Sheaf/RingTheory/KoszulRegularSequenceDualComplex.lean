@@ -9,7 +9,6 @@ public import WeilConjectures.RingTheory.KoszulConormalComparison
 public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
 public import Mathlib.Algebra.Category.ModuleCat.Ext.HasExt
-public import Mathlib.RingTheory.Localization.Defs
 import WeilConjectures.RingTheory.KoszulCoefficientExtension
 import WeilConjectures.RingTheory.KoszulRegularFlatBaseChange
 import Mathlib.RingTheory.Flat.Localization
@@ -19,7 +18,6 @@ import WeilConjectures.RingTheory.KoszulConormalBasis
 import WeilConjectures.RingTheory.KoszulConormalComparisonExistence
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.LinearAlgebra.Dual.Basis
-import Mathlib.Algebra.Homology.SingleHomology
 
 /-!
 # Duality for a Koszul-regular quotient

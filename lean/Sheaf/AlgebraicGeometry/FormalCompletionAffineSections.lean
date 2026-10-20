@@ -6,7 +6,6 @@ Authors: SHEAF group T1
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 public import Mathlib.RingTheory.AdicCompletion.Basic
 
 import WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections

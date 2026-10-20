@@ -5,9 +5,6 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-public import Mathlib.Algebra.Homology.HomologicalComplex
-public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase

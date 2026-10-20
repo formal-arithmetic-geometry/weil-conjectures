@@ -1,12 +1,6 @@
 module
 
 public import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
-public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
-public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
-public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
-public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
-public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorRegular
 
 /-! Declarations of ours that lived in the upstream file `WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian` (moved out by the scheduled sync, tools/upstream_verbatim.py, 2026-10-20: upstream files are verbatim in live). -/

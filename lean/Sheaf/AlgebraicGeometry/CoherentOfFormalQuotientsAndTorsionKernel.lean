@@ -9,11 +9,7 @@ import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import WeilConjectures.AlgebraicGeometry.CoherentAffineSectionsFinite
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.IdealPowerProductZeroAffineCover
-import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import all WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
-import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
-import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 
 /-! # Finiteness from formal quotients and a bounded torsion kernel
 

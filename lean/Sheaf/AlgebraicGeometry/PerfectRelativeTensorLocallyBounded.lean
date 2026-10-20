@@ -9,10 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.PerfectMorphism
 public import Sheaf.Algebra.Homology.KFlat
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
-public import Mathlib.Algebra.Homology.Single
 public import Mathlib.AlgebraicGeometry.Noetherian
-public import Mathlib.Topology.Sheaves.Abelian
 import WeilConjectures.AlgebraicGeometry.StalkTorDimensionLocallyUniform
 import Sheaf.AlgebraicGeometry.StrictlyPerfectRelativeTensorStalkBound
 

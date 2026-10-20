@@ -5,9 +5,6 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-public import Mathlib.CategoryTheory.Filtered.Basic
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import WeilConjectures.AlgebraicGeometry.ConstructibleModuleSheafColimit
 

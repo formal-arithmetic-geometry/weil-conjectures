@@ -5,24 +5,8 @@ Authors: SHEAF group Q10
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Scheme
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.AlgebraicGeometry.OpenImmersion
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import Mathlib.AlgebraicGeometry.Properties
-public import Mathlib.Topology.KrullDimension
-public import Mathlib.FieldTheory.Perfect
 public import Sheaf.AlgebraicGeometry.PureDimension
-import Mathlib.RingTheory.Jacobson.Artinian
-import WeilConjectures.Mathlib.RingTheory.Etale.Field
-import Mathlib.Topology.Irreducible
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Artinian
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Limits
-import WeilConjectures.AlgebraicGeometry.Dimension
 import Sheaf.AlgebraicGeometry.NowhereDenseDimZero
 
 /-!

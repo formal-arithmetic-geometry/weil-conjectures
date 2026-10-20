@@ -6,8 +6,6 @@ Authors: SHEAF group F1
 module
 
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
-public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.RelativeMVCanonicalTriangles
 
 /-! # Relative Mayer--Vietoris gluing for one complex

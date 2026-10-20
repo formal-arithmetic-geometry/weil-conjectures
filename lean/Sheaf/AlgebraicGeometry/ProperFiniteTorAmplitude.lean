@@ -5,21 +5,13 @@ Authors: SHEAF group Q01
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Over
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.FieldTheory.IsAlgClosed.Basic
-public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
-public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 import Sheaf.AlgebraicGeometry.ProperBoundedConstructible
 import Sheaf.AlgebraicGeometry.GeometricPointPullbackStalk
 import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
 import Sheaf.CategoryTheory.RightDerivedFunctorUpperBound
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
-import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstructibleDirectImage
 import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 

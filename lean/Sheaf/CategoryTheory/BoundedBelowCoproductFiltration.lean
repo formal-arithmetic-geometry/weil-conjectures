@@ -9,7 +9,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Sheaf.CategoryTheory.FiniteFiltrationInduction
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
-public import Mathlib.CategoryTheory.Limits.Shapes.Products
 
 import WeilConjectures.CategoryTheory.CoproductTruncationCouple
 import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four

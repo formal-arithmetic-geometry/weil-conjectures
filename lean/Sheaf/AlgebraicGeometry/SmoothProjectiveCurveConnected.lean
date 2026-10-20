@@ -6,8 +6,6 @@ Authors: SHEAF group F1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
-public import WeilConjectures.AlgebraicGeometry.Curve
-import WeilConjectures.AlgebraicGeometry.Dimension
 import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 
 /-!

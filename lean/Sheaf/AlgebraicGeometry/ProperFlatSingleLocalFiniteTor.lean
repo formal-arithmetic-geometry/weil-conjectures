@@ -12,8 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import WeilConjectures.AlgebraicGeometry.FiniteTorDimension
 import WeilConjectures.AlgebraicGeometry.FiniteAffineCechModelDerivedComparison
 import WeilConjectures.AlgebraicGeometry.FiniteAffineCechModelFlatOver
-import Mathlib.RingTheory.Flat.Stability
-import Mathlib.RingTheory.RingHom.Flat
 import WeilConjectures.AlgebraicGeometry.AffineFlatModuleTensorFlat
 import WeilConjectures.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
