@@ -1,0 +1,137 @@
+{
+ "id": "lem-sc-exterior-sheaf-tensor-quotient-comparison",
+ "kind": "statement",
+ "title": "Transport the official exterior tensor quotient to exteriorSheaf",
+ "statement": "For a scheme X, sheaves of modules A,B,C, an epimorphism g:B→C, and natural numbers r,s, the canonical comparison of exteriorSheaf with the official exteriorPower transports the official tensor exterior quotient to an epimorphism q:exteriorSheaf A r ⊗ exteriorSheaf B s → exteriorSheaf A r ⊗ exteriorSheaf C s. On every open U it sends the tensor of wedge sections from tuples a,c to the tensor of wedge sections from a and g(c), including r=0 or s=0.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph"
+ },
+ "stmt_deps": [
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof": [
+  {
+   "text": "Apply the official exteriorTensor_quotient_exists to obtain q with its epimorphy and pure-wedge formula. Let eAB and eAC be the tensors of the canonical exteriorSheafPowerIso comparisons, and define the transported map eAB.hom ≫ q ≫ eAC.inv. It is epi since q is epi and the comparisons are isomorphisms.",
+   "uses": [
+    "new-exterior-tensor-quotient",
+    "lem-sc-exterior-sheaf-power-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse tensor comparisons take official wedge tensors to tensors of exteriorSheafSection, by tensorHom_app_tmulSection and exteriorSheafPowerIso_inv_wedge. The equality eAB.inv ≫ transported q = q ≫ eAC.inv follows by cancelling the comparison isomorphism. Evaluate it on the official wedge tensor; substitute the inverse comparison formulas and the official quotient formula. This proves exactly the claimed section formula, without any additional assumptions. Degree-zero tuples, empty opens, the empty scheme and zero rings require no special case.",
+   "uses": [
+    "lem-sc-exterior-sheaf-power-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "new-exterior-tensor-quotient",
+  "lem-sc-exterior-sheaf-power-comparison"
+ ],
+ "proof_origin": {
+  "by": "V3",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph; agent-written canonical isomorphism transport required by the 2026-10-20 retirement hand-off"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport epimorphism on tensor products along isomorphisms and compute on pure tensor sections",
+   "results": "Returned 8 hits: TensorProduct.congr, Module.Invertible.rTensorInv, PiTensorProduct.congr_tprod, TensorProduct.congr_tmul, PiTensorProduct.congr, Module.Invertible.rTensorEquiv, PiTensorProduct.Eqv, Module.Invertible.rTensorEquiv_apply_apply",
+   "date": "2026-10-20",
+   "verdict": "Generic category/tensor tools only; no project-specific exterior sheaf quotient transport."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Epi, CategoryTheory.Iso",
+   "results": "Returned 12 hits: CategoryTheory.Limits.epi_of_target_iso_zero, CategoryTheory.Limits.isoZeroOfEpiZero, CategoryTheory.Limits.isoZeroOfEpiEqZero, CategoryTheory.Limits.cokernel.ofEpi, CategoryTheory.Limits.cokernelEpiComp, CategoryTheory.Limits.cokernelImageι, CategoryTheory.Preadditive.epi_of_cokernel_iso_zero, CategoryTheory.ShortComplex.HomologyData.ofEpiOfIsIsoOfMono'_iso",
+   "date": "2026-10-20",
+   "verdict": "Generic category/tensor tools only; no project-specific exterior sheaf quotient transport."
+  },
+  {
+   "tool": "grep",
+   "query": "exteriorTensor_quotient_exists|exteriorSheafPowerIso|tensorHom_app_tmulSection",
+   "results": "Returned 0 hits: ",
+   "date": "2026-10-20",
+   "verdict": "Generic category/tensor tools only; no project-specific exterior sheaf quotient transport."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An epimorphism conjugated by isomorphisms is an epimorphism",
+   "results": "Returned 8 hits: CategoryTheory.MorphismProperty.RespectsIso.epimorphisms, CategoryTheory.IsIso.epi_of_iso, CategoryTheory.instEffectiveEpiOfIsIso, CategoryTheory.epi_comp_iff_of_isIso, CategoryTheory.Epi.mk, CategoryTheory.Functor.preservesEpimorphisms.iso_iff, CategoryTheory.strongEpi_of_isIso, CategoryTheory.Functor.preservesEpimorphisms.of_iso",
+   "date": "2026-10-20",
+   "verdict": "Generic category/tensor tools only; no project-specific exterior sheaf quotient transport."
+  },
+  {
+   "tool": "grep",
+   "query": "rg exteriorTensor_quotient_exists|exteriorSheafPowerIso|tensorHom_app_tmulSection lean/WeilConjectures lean/Sheaf",
+   "results": "Official ExteriorTensorQuotient proves the quotient for exteriorPower/wedge; ExteriorSheafPowerComparison supplies the canonical isomorphism and inverse wedge formula. No quotient transport theorem already exists.",
+   "date": "2026-10-20",
+   "verdict": "Use the official theorem and existing comparison, without repeating its construction or local generation proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.ExteriorTensorQuotient",
+  "date": "2026-10-20",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-exterior-tensor-quotient",
+   "place": "Compatibility with the official exterior tensor quotient after retiring its older implementation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.ExteriorSheafTensorQuotientComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExteriorSheafTensorQuotientComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exteriorSheafTensor_quotient_exists",
+  "statement": "theorem exteriorSheafTensor_quotient_exists {X : Scheme.{v}} (A B C : X.Modules)\n    (g : B ⟶ C) [Epi g] (r s : ℕ) :\n    ∃ q : exteriorSheaf A r ⊗ exteriorSheaf B s ⟶\n        exteriorSheaf A r ⊗ exteriorSheaf C s,\n      Epi q ∧ ∀ (U : X.Opens) (a : Fin r → A.val.obj (op U))\n        (c : Fin s → B.val.obj (op U)),\n        q.val.app (op U)\n            (tmulSection (exteriorSheafSection A r U a) (exteriorSheafSection B s U c)) =\n          tmulSection (M := exteriorSheaf A r) (N := exteriorSheaf C s)\n            (exteriorSheafSection A r U a)\n            (exteriorSheafSection C s U (fun i ↦ g.val.app (op U) (c i)))",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-6138b",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261020T154054-L-3043145",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-6138b",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261020T154054-L-3043145",
+  "kind": "interface",
+  "note": "independent cc review: retire-items.tsv row retire:Sheaf.AlgebraicGeometry.Modules.ExteriorTensorQuotient + hand-off retire-sheaf-twins-20261020 vs delivered stub item, new proved transport exteriorSheafTensor_quotient_exists (twin conjugated by exteriorSheafPowerIso tensors) and 2 unclaimed consumers (one import + one call each, signatures unchanged); --all compile + 3 second-level importers clean, axioms clean"
+ }
+}

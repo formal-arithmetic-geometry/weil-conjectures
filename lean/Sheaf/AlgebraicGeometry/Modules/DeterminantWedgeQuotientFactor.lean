@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.AlgebraicGeometry.Modules.ExteriorTensorQuotient
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafTensorQuotientComparison
 import Sheaf.AlgebraicGeometry.Modules.ExteriorTensorKernelRelations
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRankWedgeZero
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPowerComparison
@@ -73,7 +73,7 @@ theorem determinant_wedge_quotient_factor {X : Scheme.{v}}
       q ≫ φ = ψ := by
   have hgepi : Epi S.g := hS.epi_g
   obtain ⟨q₀, hq₀epi, hq₀⟩ :=
-    exteriorTensor_quotient_exists S.X₁ S.X₂ S.X₃ S.g r₁ r₃
+    exteriorSheafTensor_quotient_exists S.X₁ S.X₂ S.X₃ S.g r₁ r₃
   have hqq : q = q₀ := by
     apply exteriorSheafTensor_lift_hom_ext (𝟙 S.X₂) r₁ r₃ q q₀
     intro U a c

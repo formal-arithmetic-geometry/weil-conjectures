@@ -4,7 +4,7 @@ public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.AlgebraicGeometry.Modules.ExteriorTensorQuotient
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafTensorQuotientComparison
 import Sheaf.AlgebraicGeometry.Modules.DeterminantLiftWedgeKernel
 
 @[expose] public section
@@ -47,7 +47,7 @@ theorem determinant_wedgeMorphism_glue_family {X : Scheme.{v}} (S : ShortComplex
             (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i)) := by
   clear φU hformula
   have : Epi S.g := hS.epi_g
-  obtain ⟨q, hqepi, hq⟩ := exteriorTensor_quotient_exists S.X₁ S.X₂ S.X₃ S.g r₁ r₃
+  obtain ⟨q, hqepi, hq⟩ := exteriorSheafTensor_quotient_exists S.X₁ S.X₂ S.X₃ S.g r₁ r₃
   have : Epi q := hqepi
   obtain ⟨w, hwzero, hw⟩ := determinant_liftWedge_kernel_exists S hS r₁ r₂ r₃ hr q hq
   let φ := Abelian.epiDesc q w hwzero
