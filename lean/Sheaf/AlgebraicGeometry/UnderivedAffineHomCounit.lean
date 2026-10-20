@@ -5,7 +5,7 @@ Authors: SHEAF group G3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree

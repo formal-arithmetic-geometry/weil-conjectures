@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 public import WeilConjectures.AlgebraicGeometry.OpenCoverTensorPullbackComparison
-import Sheaf.AlgebraicGeometry.AffineChartOrdinaryMapDescent
+import WeilConjectures.AlgebraicGeometry.AffineChartOrdinaryMapDescent
 import WeilConjectures.AlgebraicGeometry.ChartTensorPullbackLiftTransport
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 

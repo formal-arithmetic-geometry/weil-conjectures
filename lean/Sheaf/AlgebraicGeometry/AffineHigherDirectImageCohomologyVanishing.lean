@@ -5,13 +5,13 @@ Authors: SHEAF group H1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
-import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 
 /-! # The vanishing columns of Leray over an affine scheme

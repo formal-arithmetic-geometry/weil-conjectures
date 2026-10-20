@@ -6,7 +6,7 @@ Authors: SHEAF group H2
 module
 
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure

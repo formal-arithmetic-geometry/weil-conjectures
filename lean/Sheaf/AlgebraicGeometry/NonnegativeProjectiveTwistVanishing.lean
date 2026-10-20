@@ -6,8 +6,8 @@ Authors: Claude, SHEAF groups E1 and D2
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
-public import Sheaf.Topology.RingedSpaceModuleCohomology
-import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistSections
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts

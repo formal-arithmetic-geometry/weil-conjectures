@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 import Sheaf.AlgebraicGeometry.OpenPushforwardDerivedComparison
 

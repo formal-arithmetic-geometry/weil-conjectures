@@ -12,7 +12,7 @@ public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
 import Sheaf.AlgebraicGeometry.FiniteSchemeCohomologyTensor

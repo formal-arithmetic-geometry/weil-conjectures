@@ -6,7 +6,7 @@ Authors: SHEAF group E4
 module
 
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 

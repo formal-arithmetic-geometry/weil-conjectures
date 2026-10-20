@@ -6,7 +6,7 @@ module
 
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 import WeilConjectures.AlgebraicGeometry.ExtEvaluation
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
 import Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule

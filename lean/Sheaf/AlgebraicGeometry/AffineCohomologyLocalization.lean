@@ -8,8 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
 public import WeilConjectures.AlgebraicGeometry.Ample
 import WeilConjectures.AlgebraicGeometry.AffineCapSectionOpen
-import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
+import WeilConjectures.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
 import Sheaf.AlgebraicGeometry.AffineCohomologyLocalizationZero
+import Sheaf.Paper.PQFCohomology
 
 /-! # Localization of cohomology on an affine scheme
 

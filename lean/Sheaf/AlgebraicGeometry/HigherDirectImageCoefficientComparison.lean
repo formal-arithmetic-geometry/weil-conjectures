@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.HigherDirectImagePresheaf
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Sheaf.AlgebraicGeometry.OpenRestrictionModuleCohomology
+import WeilConjectures.AlgebraicGeometry.OpenRestrictionModuleCohomology
 import Sheaf.AlgebraicGeometry.HigherDirectImageResolutionNaturality
 
 /-! # Coefficient-natural comparison with resolution section cohomology

@@ -5,7 +5,7 @@ Authors: SHEAF group H1
 -/
 module
 
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 

@@ -5,12 +5,12 @@ Authors: SHEAF group A2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.AlgebraicGeometry.AffineAlgebraModuleAdjunctionFiniteLimits
-import Sheaf.AlgebraicGeometry.AffineAlgebraModuleAdjunctionUnitIso
-import Sheaf.AlgebraicGeometry.AffineAlgebraModuleAdjunctionCounitIso
+import WeilConjectures.AlgebraicGeometry.AffineAlgebraModuleAdjunctionUnitIso
+import WeilConjectures.AlgebraicGeometry.AffineAlgebraModuleAdjunctionCounitIso
 
 /-! # The underived affine algebra adjunction
 

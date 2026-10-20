@@ -6,8 +6,8 @@ Authors: SHEAF group A4
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import Mathlib.Algebra.Homology.SingleHomology
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective

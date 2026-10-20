@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.Algebra.Homology.HomComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree

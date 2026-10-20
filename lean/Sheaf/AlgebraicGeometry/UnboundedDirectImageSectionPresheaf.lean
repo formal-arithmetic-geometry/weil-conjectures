@@ -18,7 +18,7 @@ import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
 import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 import Sheaf.AlgebraicGeometry.RingedSpaceDirectImageKInjectiveAcyclic
-import Sheaf.AlgebraicGeometry.RingedSpaceSheafificationCohomology
+import WeilConjectures.AlgebraicGeometry.RingedSpaceSheafificationCohomology
 
 /-!
 # Unbounded direct images and the presheaf of local hypercohomology

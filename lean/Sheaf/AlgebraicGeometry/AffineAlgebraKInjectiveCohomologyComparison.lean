@@ -1,7 +1,7 @@
 module
 
-public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 import Sheaf.AlgebraicGeometry.QCohAcyclicDerivedPushforwardCohomology
 import Sheaf.Paper.DerivedSectionsLeftExactBottom
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism

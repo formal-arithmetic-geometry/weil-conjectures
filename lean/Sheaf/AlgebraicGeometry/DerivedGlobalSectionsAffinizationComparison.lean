@@ -6,7 +6,7 @@ Authors: SHEAF group M1
 module
 
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Sheaf.AlgebraicGeometry.GlobalSectionsDirectImageKInjectiveAcyclic

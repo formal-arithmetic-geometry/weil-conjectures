@@ -10,11 +10,12 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Sheaf.Paper.FiniteOrderedFlasqueCechComparison
 import Sheaf.Paper.ModuleCupGodementModelQuasiIso
 import Sheaf.Paper.ModuleCupGodementObjectFlasque
-import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
+import WeilConjectures.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
 import Sheaf.Paper.ModuleCupFlasqueAcyclicity
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
 import Sheaf.Paper.RingComplexCechData
 import WeilConjectures.Topology.RingedSpaceModuleEnoughInjectives
+import Sheaf.Paper.PQFCohomology
 
 /-! # The augmented ordered localization model of Godement ring complexes -/
 

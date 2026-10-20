@@ -6,7 +6,7 @@ Authors: SHEAF group Q41
 module
 
 public import Mathlib.CategoryTheory.CofilteredSystem
-public import Sheaf.CategoryTheory.Triangulated.MilnorSequence
+public import WeilConjectures.CategoryTheory.Triangulated.MilnorSequence
 public import Sheaf.Paper.PbcRoosTriangle
 public import Sheaf.Paper.SequentialDerivedInverseLimit
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure

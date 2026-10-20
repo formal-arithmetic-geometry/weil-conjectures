@@ -6,7 +6,7 @@ Authors: SHEAF group R3
 module
 
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-public import Sheaf.Topology.OpenModuleDerivedSections
+public import WeilConjectures.Topology.OpenModuleDerivedSections
 import Mathlib.Topology.Sheaves.Abelian
 import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 import Mathlib.Algebra.Category.Grp.AB

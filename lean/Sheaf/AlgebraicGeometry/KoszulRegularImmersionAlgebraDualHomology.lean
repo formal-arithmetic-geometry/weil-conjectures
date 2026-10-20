@@ -5,9 +5,9 @@ Authors: SHEAF group V2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.RingTheory.KoszulRegularSequence

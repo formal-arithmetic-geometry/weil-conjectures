@@ -5,11 +5,11 @@ Authors: SHEAF group G4
 -/
 module
 
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.CategoryTheory.Functor.Derived.Adjunction
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 

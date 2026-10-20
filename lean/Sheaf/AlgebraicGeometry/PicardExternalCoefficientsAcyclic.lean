@@ -14,7 +14,7 @@ import Sheaf.AlgebraicGeometry.LerayDegenerateSections
 import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 import Mathlib.Algebra.Category.Grp.Zero
 import Sheaf.AlgebraicGeometry.ModuleCechComparisonIsoAffine
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import Sheaf.Paper.HigherDirectImagePresheaf
 

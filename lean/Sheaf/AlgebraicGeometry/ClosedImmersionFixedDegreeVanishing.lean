@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.RingTheory.Noetherian.Defs
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 import Sheaf.AlgebraicGeometry.ClosedImmersionTwistCohomologyBound
 import Sheaf.AlgebraicGeometry.ClosedImmersionTwistVanishingStep
 

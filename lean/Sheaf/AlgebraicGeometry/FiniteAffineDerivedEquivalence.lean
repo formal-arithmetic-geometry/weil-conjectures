@@ -5,7 +5,7 @@ Authors: SHEAF group S1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 import WeilConjectures.AlgebraicGeometry.AffineModuleCorrespondence
 import Sheaf.AlgebraicGeometry.AffineDerivedCohomology

@@ -31,7 +31,7 @@ import Sheaf.RingTheory.PseudoCoherentNormalizedAlgebraTower
 import Mathlib.RingTheory.Finiteness.Defs
 import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.Paper.FiniteMittagLeffler
-import Sheaf.CategoryTheory.Triangulated.MilnorSequence
+import WeilConjectures.CategoryTheory.Triangulated.MilnorSequence
 import WeilConjectures.RingTheory.PseudoCoherentBoundedFiniteFreeModel
 import Sheaf.Paper.CompletedConstantFiniteComplexRealization
 import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit

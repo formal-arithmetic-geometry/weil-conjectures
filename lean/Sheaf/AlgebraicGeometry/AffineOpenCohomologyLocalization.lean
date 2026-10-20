@@ -9,9 +9,10 @@ public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.AffineOpenCohomologyLocalizationZero
-import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
+import WeilConjectures.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
 import WeilConjectures.AlgebraicGeometry.AffineCapSectionOpen
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
+import Sheaf.Paper.PQFCohomology
 
 /-! # Localization of cohomology on an ambient affine open
 

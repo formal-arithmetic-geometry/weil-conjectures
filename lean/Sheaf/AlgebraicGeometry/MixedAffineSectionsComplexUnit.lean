@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.MixedGlobalExtension
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.AlgebraicGeometry.AffineTildeDerivedSectionsUnitIsIso
+import WeilConjectures.AlgebraicGeometry.AffineTildeDerivedSectionsUnitIsIso
 import Sheaf.AlgebraicGeometry.AffineSectionsUnitTransport
 
 /-! # Sections comparison on ordinary affine chart complexes

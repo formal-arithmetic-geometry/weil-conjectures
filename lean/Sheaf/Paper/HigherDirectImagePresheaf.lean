@@ -3,9 +3,9 @@ module
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
-public import Sheaf.Topology.OpenModuleCohomology
+public import WeilConjectures.Topology.OpenModuleCohomology
 public import WeilConjectures.Topology.PresheafModuleStalkFunctor
 import Mathlib.Topology.Sheaves.Sheafify
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous

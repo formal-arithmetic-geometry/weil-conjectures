@@ -21,7 +21,7 @@ import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 import Sheaf.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.PerfectTensorBoundedCoherent
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 
 /-! # Pseudo-coherence of open restrictions of a proper relatively flat direct image
 

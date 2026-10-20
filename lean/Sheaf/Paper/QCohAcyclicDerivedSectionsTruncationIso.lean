@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 
 import Sheaf.Paper.QCohInverseAffineOpenVanishing
-import Sheaf.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
+import WeilConjectures.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory

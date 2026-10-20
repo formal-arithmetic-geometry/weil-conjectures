@@ -5,7 +5,7 @@ Authors: SHEAF group N3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.Algebra.Homology.KFlatPullback
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback

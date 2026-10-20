@@ -5,11 +5,11 @@ Authors: SHEAF group A2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.Algebra.Homology.KFlatPullback
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
 import Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackUnderived
-import Sheaf.AlgebraicGeometry.AffineAlgebraStalkFlat
+import WeilConjectures.AlgebraicGeometry.AffineAlgebraStalkFlat
 import Sheaf.AlgebraicGeometry.StalkFlatTensorPullbackKernels
 import Mathlib.CategoryTheory.Preadditive.LeftExact
 

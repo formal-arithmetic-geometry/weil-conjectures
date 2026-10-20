@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.SectionCohomologyThetaAcyclic
 import Sheaf.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
 import Sheaf.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent
-import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 
 /-! # Bijectivity of the normalized affine section class map

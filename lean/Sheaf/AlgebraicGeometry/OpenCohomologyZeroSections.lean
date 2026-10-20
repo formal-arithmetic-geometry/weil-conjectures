@@ -5,7 +5,7 @@ Authors: SHEAF group U1
 -/
 module
 
-public import Sheaf.Topology.OpenModuleCohomology
+public import WeilConjectures.Topology.OpenModuleCohomology
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 
 /-! # The degree-zero comparison for sections on an open

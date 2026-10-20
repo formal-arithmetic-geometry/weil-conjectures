@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PrincipalOpenCechTotal
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful

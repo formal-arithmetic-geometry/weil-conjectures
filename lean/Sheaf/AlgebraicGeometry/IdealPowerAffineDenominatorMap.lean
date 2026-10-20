@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import Mathlib.LinearAlgebra.Quotient.Basic
-import Sheaf.AlgebraicGeometry.AffineCompatibleDenominatorData
+import WeilConjectures.AlgebraicGeometry.AffineCompatibleDenominatorData
 import Sheaf.AlgebraicGeometry.IdealPowerNumeratorPresentation
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import Mathlib.LinearAlgebra.Isomorphisms

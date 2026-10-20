@@ -6,7 +6,7 @@ Authors: SHEAF group E1
 module
 
 public import Sheaf.AlgebraicGeometry.FiniteAffineCechModel
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated

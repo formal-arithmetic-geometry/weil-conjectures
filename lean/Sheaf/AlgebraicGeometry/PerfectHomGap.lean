@@ -19,7 +19,7 @@ import Sheaf.AlgebraicGeometry.DerivedTensorQCohClosure
 import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
 import Mathlib.Algebra.Category.Grp.Zero
 import Sheaf.AlgebraicGeometry.UniformInverseAffineSectionsBound
-import Sheaf.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
+import WeilConjectures.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure

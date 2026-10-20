@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplex
 import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
 import Sheaf.AlgebraicGeometry.AffineFiniteProjectiveHomModel
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
-import Sheaf.Topology.RingedSpaceModuleCohomology
+import WeilConjectures.Topology.RingedSpaceModuleCohomology
 
 /-! # Affine RHom of a pseudo-coherent complex is quasi-coherent
 

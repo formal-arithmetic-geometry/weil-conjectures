@@ -9,10 +9,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 import all WeilConjectures.AlgebraicGeometry.ProjectiveFiniteCohomologyPresentation
 import Sheaf.AlgebraicGeometry.NonnegativeProjectiveTwistVanishing
-import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 import WeilConjectures.AlgebraicGeometry.Cohomology.Exact
 
 /-! # A finite-twist presentation with an eventually acyclic middle term -/

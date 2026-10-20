@@ -16,7 +16,7 @@ public import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import Sheaf.Algebra.Homology.KInjectiveProductsTermwise
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-import Sheaf.CategoryTheory.Triangulated.MilnorSequence
+import WeilConjectures.CategoryTheory.Triangulated.MilnorSequence
 import WeilConjectures.CategoryTheory.DerivedLimitEventuallyIso
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Mathlib.CategoryTheory.Sites.LocallyBijective

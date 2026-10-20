@@ -7,8 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.DerivedInternalHom
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory

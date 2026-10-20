@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.UniformInverseAffineSectionsBound
 import Sheaf.AlgebraicGeometry.DirectImageHomologyAffineDetection
-import Sheaf.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
+import WeilConjectures.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 
 /-! # Uniform upper cohomological bound for quasi-coherent derived direct image

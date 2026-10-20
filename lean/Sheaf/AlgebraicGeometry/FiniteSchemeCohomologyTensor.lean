@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Coherent
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine

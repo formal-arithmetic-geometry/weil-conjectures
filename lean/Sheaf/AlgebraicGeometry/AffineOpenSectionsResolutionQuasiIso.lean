@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AlternatingCechTotalComplex
 public import WeilConjectures.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.AffineBasisSectionsDerivedUnit
+import WeilConjectures.AlgebraicGeometry.AffineBasisSectionsDerivedUnit
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 

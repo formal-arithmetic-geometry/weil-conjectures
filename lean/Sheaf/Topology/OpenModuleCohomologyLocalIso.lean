@@ -5,8 +5,8 @@ Authors: SHEAF group Q2
 -/
 module
 
-public import Sheaf.Topology.OpenModuleCohomology
-import Sheaf.Topology.RestrictInjectiveResolution
+public import WeilConjectures.Topology.OpenModuleCohomology
+import WeilConjectures.Topology.RestrictInjectiveResolution
 import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian

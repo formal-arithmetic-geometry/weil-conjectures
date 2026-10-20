@@ -5,15 +5,15 @@ Authors: SHEAF group X2
 -/
 module
 
-public import Sheaf.Topology.OpenModuleCohomology
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.Topology.OpenModuleCohomology
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.AlgebraicGeometry.LerayDegenerateSections
 import WeilConjectures.AlgebraicGeometry.OpenModuleCohomologyComparison
-import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 import Sheaf.AlgebraicGeometry.AffineHigherDirectImageCohomologyVanishing
 import Sheaf.AlgebraicGeometry.HigherDirectImageOpenRestriction
 

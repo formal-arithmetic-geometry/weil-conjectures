@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 public import WeilConjectures.AlgebraicGeometry.Modules.Ext
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Stalk
 public import Mathlib.RingTheory.AdicCompletion.Algebra

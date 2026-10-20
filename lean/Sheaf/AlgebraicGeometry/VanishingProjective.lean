@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FormalKernelPolynomialAction
 import Sheaf.AlgebraicGeometry.GradedSerreVanishing

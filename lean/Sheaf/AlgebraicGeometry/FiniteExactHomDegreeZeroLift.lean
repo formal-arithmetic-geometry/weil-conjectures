@@ -10,7 +10,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Noetherian
-public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 import Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule
 
 import Mathlib.CategoryTheory.Adjunction.Additive

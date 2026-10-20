@@ -3,7 +3,7 @@ module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.Algebra.Homology.QuasiIso
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 import WeilConjectures.AlgebraicGeometry.Cohomology.InjectiveFlasque
 import WeilConjectures.Topology.Sheaves.CechFlasque
 import WeilConjectures.Topology.Sheaves.CechComparison

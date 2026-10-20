@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent
 import Sheaf.AlgebraicGeometry.AffineCohomologySectionEquiv
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 import Sheaf.AlgebraicGeometry.FlatBaseChangeTargetLerayComparison
 import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap

@@ -6,7 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Coherent
-public import Sheaf.Topology.OpenModuleCohomology
+public import WeilConjectures.Topology.OpenModuleCohomology
 public import Mathlib.Algebra.Exact.Basic
 import Sheaf.Topology.ModuleMayerVietoris
 

@@ -6,7 +6,7 @@ Authors: SHEAF groups U3 and X2
 module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat

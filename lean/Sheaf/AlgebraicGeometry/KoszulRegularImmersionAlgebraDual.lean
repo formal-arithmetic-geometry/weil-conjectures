@@ -5,7 +5,7 @@ Authors: SHEAF group G2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.TensorPullback

@@ -33,7 +33,7 @@ import Mathlib.Algebra.Category.Ring.Colimits
 import Mathlib.Topology.Sheaves.Functors
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 import Mathlib.LinearAlgebra.TensorProduct.Map
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
@@ -59,7 +59,6 @@ import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 import WeilConjectures.AlgebraicGeometry.AffineConormalSections
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 /-!

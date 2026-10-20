@@ -1,11 +1,11 @@
 module
 
-public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-public import Sheaf.AlgebraicGeometry.AffineAlgebraKInjectiveCounitCompatibility
+public import WeilConjectures.AlgebraicGeometry.AffineAlgebraKInjectiveCounitCompatibility
 
-import Sheaf.AlgebraicGeometry.AffineAlgebraKInjectiveCycleClassEpi
+import WeilConjectures.AlgebraicGeometry.AffineAlgebraKInjectiveCycleClassEpi
 import Sheaf.AlgebraicGeometry.AffineAlgebraKInjectiveBoundaryExactness
 
 /-! # Identification of the canonical affine cohomology comparison
