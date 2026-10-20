@@ -20,7 +20,7 @@
  ],
  "proof": [
   {
-   "text": "Apply new-constant-ring-module-sheaf-equivalence to obtain E and the natural isomorphism e of underlying abelian sheaves. Set I = E.functor.obj J. Mathlib Equivalence.map_injective_iff transports injectivity from J to I.",
+   "text": "Apply new-constant-ring-module-sheaf-equivalence to obtain E and the natural isomorphism e of underlying abelian sheaves. Set I = E.functor.obj J. Mathlib Equivalence.map_injective_iff transports injectivity from J to I. The upstream theorem also returns the inverse underlying abelian sheaf isomorphism (e.app J).symm; forgetting that extra conjunct recovers the former Sheaf declaration.",
    "uses": [
     "new-constant-ring-module-sheaf-equivalence",
     "def-sp-injective-resolutions"
@@ -58,7 +58,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/03FD",
-  "place": "Original encoding/derived-evaluation plan, assembled in Lean using the equivalence and positive-degree bridge; degree zero and preservation of injectivity are proved directly with Mathlib."
+  "place": "Original encoding/derived-evaluation plan, assembled in Lean using the equivalence and positive-degree bridge; degree zero and preservation of injectivity are proved directly with Mathlib. Retirement: the same argument is proved in the upstream twin, including the extra underlying-sheaf isomorphism; the DAG attachment now follows that declaration."
  },
  "mathlib_searches": [
   {
@@ -135,13 +135,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ModuleValuedInjectiveCohomology",
-  "file": "lean/Sheaf/AlgebraicGeometry/ModuleValuedInjectiveCohomology.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ModuleValuedInjectiveCohomology",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ModuleValuedInjectiveCohomology.lean",
   "declaration": "AlgebraicGeometry.Etale.moduleValued_injective_cohomology_comparison",
-  "statement": "theorem moduleValued_injective_cohomology_comparison (X : Scheme.{u}) (r : ℕ)\n    (J : Sheaf X.smallEtaleTopology\n      (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))) [Injective J] :\n    ∃ I : SheafOfModules.{u + 1}\n      ((constantSheaf X.smallEtaleTopology RingCat.{u + 1}).obj\n        (RingCat.of (ULift.{u + 1, u} (ULift.{u} (ZMod r))))),\n      Injective I ∧ ∀ q : ℕ, Nonempty\n        (Sheaf.H\n          ((sheafCompose X.smallEtaleTopology\n            (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))\n              AddCommGrpCat.{u + 1})).obj J) q ≃+\n          (((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙\n            (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj\n              (Opposite.op (Scheme.Etale.mk (𝟙 X)))).rightDerived q).obj\n            ((SheafOfModules.toSheaf _).obj I)))",
+  "statement": "theorem moduleValued_injective_cohomology_comparison (X : Scheme.{u}) (r : ℕ)\n    (J : Sheaf X.smallEtaleTopology\n      (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))) [Injective J] :\n    ∃ I : SheafOfModules.{u + 1}\n      ((constantSheaf X.smallEtaleTopology RingCat.{u + 1}).obj\n        (RingCat.of (ULift.{u + 1, u} (ULift.{u} (ZMod r))))),\n      Injective I ∧\n      Nonempty ((SheafOfModules.toSheaf _).obj I ≅\n        (sheafCompose X.smallEtaleTopology\n          (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) AddCommGrpCat.{u + 1})).obj J) ∧\n      ∀ q : ℕ, Nonempty\n        (Sheaf.H\n          ((sheafCompose X.smallEtaleTopology\n            (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))\n              AddCommGrpCat.{u + 1})).obj J) q ≃+\n          (((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙\n            (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj\n              (Opposite.op (Scheme.Etale.mk (𝟙 X)))).rightDerived q).obj\n            ((SheafOfModules.toSheaf _).obj I)))",
   "branch": "sheaf-dag",
-  "by": "C1",
-  "date": "2026-10-12"
+  "by": "F8",
+  "date": "2026-10-21",
+  "note": "Retired the Sheaf duplicate under the human-approved retirement list. The upstream theorem has the same binders and cohomology conclusion, and additionally supplies the underlying abelian sheaf isomorphism. Discarding this extra conjunct recovers the old statement."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -154,14 +155,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E1",
+  "reviewer": "C-4d786",
+  "group": "F8",
   "result": "pass",
-  "landing": "20261012T032116-L-1384760",
+  "landing": "20261020T221146-L-4150778",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: the stub and node retarget of new-module-valued-injective-cohomology-comparison against the live upstream twin WeilConjectures.AlgebraicGeometry.ModuleValuedInjectiveCohomology (statement verbatim; it implies the old statement, checked in Lean with standard axioms) and against the live import graph and DAG (no importers, no other lean.module pointers)"
  },
  "lean_audit": {
   "master": {
