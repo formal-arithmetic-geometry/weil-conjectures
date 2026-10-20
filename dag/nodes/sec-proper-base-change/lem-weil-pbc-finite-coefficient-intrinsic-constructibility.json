@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-finite-coefficient-intrinsic-constructibility",
+ "kind": "statement",
+ "title": "Intrinsic finite constructibility in the fixed coefficient presentation",
+ "statement": "Let X be a Noetherian scheme and B a finite commutative ring in the site coefficient universe. For any isomorphism e from the constant B ring sheaf to the recorded function coefficient sheaf [def-weil-pbc-proetale-modules], let G be a fixed B-module-valued sheaf on the small pro-etale site. Realize G as a module over the recorded finite coefficient ring, restrict along finiteRingComparison and then e. If this module is intrinsically constructible [def-weil-proetale-constructible-sheaf], then G is constructible in the fixed-module finite-global-stratification sense. This assertion concerns a single sheaf and contains no derived object, bounds, or tower.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AJ and 099Y; associated-module-sheaf encoding via Tag 00YV; finite coefficient presentation transport"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-proetale-constructible-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Forget the supplied relative finite module models to sheaves of sets. The module inverse-image comparison identifies these with inverse images of the constant finite underlying sets. Coefficient realization and scalar restriction retain the underlying sheaf, by the sheafification counit, even for an arbitrary presenting ring isomorphism. Thus on each stratum the fixed-ring module sheaf has finite constant underlying set models. To recover constant module models, intersect the finitely many image covering sieves making the additions, zero and scalar multiples of its constant sections constant. Their restricted values form a finite submodule of the sections on each covering member. The resulting map from its constant module presheaf is locally injective and locally surjective: compare its underlying map with the locally bijective constant-set sheafification unit. Sheafification makes it an isomorphism. Compose these covers and transport along the equivalence between a slice of the pro-etale site and the pro-etale site of the covering object. The original finite constructible stratification now witnesses fixed-ring constructibility.",
+   "uses": [
+    "def-weil-pbc-proetale-modules",
+    "def-weil-proetale-constructible-sheaf",
+    "lem-weil-pbc-proetale-module-inverse-image-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-proetale-constructible-sheaf",
+  "lem-weil-pbc-proetale-module-inverse-image-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AJ, 099Y and 00YV; explicit finite submodule construction after a covering refinement; Lean proof completed by M7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite constructible sheaves of modules over a constant ring sheaf agree with finite constructible sheaves of modules with fixed coefficients",
+   "results": "8 hits: condensed constant modules, SheafOfModules.IsFiniteType, isFinitePresentation, IsFinitePresentation; no finite global stratification comparison",
+   "date": "2026-10-19",
+   "verdict": "No matching theorem; the fixed-module origin theorem is used only after this presentation comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"constantSheaf\"",
+   "results": "0 hits",
+   "date": "2026-10-19",
+   "verdict": "No matching finite-constructibility presentation theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*constant|constant.*constructible",
+   "results": "0 Mathlib hits; project rg finds proEtaleModuleRestriction_constructible_iff only for small rings and the different intrinsic geometric-stalk predicate.",
+   "date": "2026-10-19",
+   "verdict": "No theorem for the site-universe relative finite-model predicate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite constructible module sheaves over constant ring sheaves agree with constructible fixed coefficient module valued sheaves",
+   "results": "8 hits: SheafOfModules.IsFiniteType.mk, SheafOfModules.mk.inj, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule, SheafOfModules.IsFiniteType, SheafOfModules.mk, SheafOfModules.IsFinitePresentation.mk, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, SheafOfModules.hasLimit",
+   "date": "2026-10-19",
+   "verdict": "No matching finite-global-stratification or intrinsic fixed-coefficient constructibility comparison; these hits concern local generators, sheaf constructors, constant sheaves, and limits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedConstructibleTowerLocalEffectivity",
+  "group": "M7",
+  "date": "2026-10-19"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c), finite coefficient presentation transport",
+   "via": [
+    "lem-weil-pbc-normalized-constructible-local-effectivity",
+    "lem-weil-pbc-finite-coefficient-derived-origin-presentation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCoefficientIntrinsicConstructibility",
+  "file": "lean/Sheaf/Paper/FiniteCoefficientIntrinsicConstructibility.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteCoefficient_intrinsic_constructible",
+  "statement": "theorem finiteCoefficient_intrinsic_constructible\n    (X : Scheme.{u}) [IsNoetherian X]\n    (B : Type (u + 1)) [CommRing B] [Finite B]\n    (e : adicLisseConstantRing X B ≅ AdicCoefficients.coefficientRing X B) :\n    letI : TopologicalSpace B := ⊥\n    letI : DiscreteTopology B := discreteTopology_bot _\n    ∀ G : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} B),\n      IsConstructibleProEtaleCoefficientModuleSheaf X B\n        ((pbcRestrict e.hom).obj\n          ((SheafOfModules.restrictScalars\n            (AdicCoefficients.finiteRingComparison X B).hom).obj\n              ((ProEtale.finiteCoefficientRealization X B).obj G))) →\n      ProEtale.IsConstructible B G",
+  "branch": "sheaf-dag",
+  "by": "M7",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-77ef7",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261020T051519-L-1699457",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-77ef7",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261020T051519-L-1699457",
+  "kind": "interface",
+  "note": "independent cc review: diff vs returned head 2e50e3069563: only the ordered H9 deletion of the two imports in FiniteCoefficientDerivedOriginPresentation plus report text; 5 modules and the 6 direct importers of the item compiled; axioms rechecked; unit route still via LisseNormalizedTowerLocalModels/prop-weil-pbc-site-comparison-finite-level"
+ }
+}

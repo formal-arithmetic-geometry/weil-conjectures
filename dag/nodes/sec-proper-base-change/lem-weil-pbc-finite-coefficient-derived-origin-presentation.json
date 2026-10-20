@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-finite-coefficient-derived-origin-presentation",
+ "kind": "statement",
+ "title": "FiniteCoefficientDerivedOriginPresentation",
+ "statement": "Let X be a Noetherian scheme, B a finite commutative ring in the site coefficient universe, and e an isomorphism from the constant B ring sheaf to the continuous-function B coefficient sheaf [def-weil-pbc-proetale-modules]. Let K be a derived module over that coefficient sheaf. If all cohomology sheaves restricted along e are intrinsically constructible [def-weil-proetale-constructible-sheaf] and vanish outside integers a <= b, then there is a cochain complex C of the recorded finite-coefficient modules whose derived object has bounded constructible etale origin, and whose termwise scalar restriction along the canonical finiteRingComparison is isomorphic to K. This concerns one finite ring and one complex, with no normalized tower or local completed model.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AL, lemma-compare-constructible-derived; local-effectivity step 1, finite coefficient presentation transport"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Transfer K to J through the exact equivalence F = finiteCoefficientRealization followed by restriction along finiteRingComparison. Exactness and faithfulness reflect the interval [a,b]. The homology comparison and invariance of intrinsic constructibility under isomorphism reduce its hypotheses to the single-sheaf coefficient-presentation comparison.",
+   "uses": [
+    "lem-weil-pbc-finite-coefficient-intrinsic-constructibility",
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend each constructible fixed-ring cohomology sheaf and apply the existing boundedConstructible_of_homology theorem. Convert the etale predicate with isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf, and use the minimum and maximum of its bounds. Realize the source, compose the derived functor comparison isomorphisms, and extract a cochain representative by essential surjectivity of Q.",
+   "uses": [
+    "lem-weil-pbc-fixed-module-constructible-origin",
+    "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-coefficient-intrinsic-constructibility",
+  "def-weil-pbc-proetale-modules",
+  "lem-weil-pbc-fixed-module-constructible-origin",
+  "lem-weil-pbc-fixed-module-bounded-constructible-origin"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AL: exact coefficient realization, single-sheaf intrinsic comparison, and existing fixed-module bounded cohomology descent; no small-ring universe transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite stratification makes every level of a normalized bounded constructible adic complex locally constant, and lisse normalized towers admit bounded completed finite module models",
+   "results": "8 hits: AdicCompletion, AdicCompletion.instModuleOfIsScalarTower, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology, AdicCompletion.instIsScalarTower, IsAdicComplete.rec, CondensedMod.isDiscrete_tfae, IsAdicComplete.of_comp_lift, IsAdicComplete.casesOn; ",
+   "date": "2026-10-18",
+   "verdict": "no matching theorem; hits concern ordinary completion or ambient categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"AdicCompletion\"",
+   "results": "0 hits: ; ",
+   "date": "2026-10-18",
+   "verdict": "no matching theorem; hits concern ordinary completion or ambient categories"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*tower|adic.*lisse",
+   "results": "0 hits: ; ",
+   "date": "2026-10-18",
+   "verdict": "no matching theorem; hits concern ordinary completion or ambient categories"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedConstructibleTowerLocalEffectivity",
+  "group": "M7",
+  "date": "2026-10-19"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c), Tag 09AL, lemma-compare-constructible-derived; local-effectivity step 1, finite coefficient presentation transport",
+   "via": [
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCoefficientDerivedOriginPresentation",
+  "file": "lean/Sheaf/Paper/FiniteCoefficientDerivedOriginPresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteCoefficient_constructibleDerived_origin_presentation",
+  "statement": "theorem finiteCoefficient_constructibleDerived_origin_presentation\n    (X : Scheme.{u}) [IsNoetherian X]\n    (B : Type (u + 1)) [CommRing B] [Finite B]\n    (e : adicLisseConstantRing X B ≅ AdicCoefficients.coefficientRing X B)\n    (K : DerivedCategory (pbcModules X (AdicCoefficients.coefficientRing X B)))\n    (hconstructible : ∀ q : ℤ, IsConstructibleProEtaleCoefficientModuleSheaf X B\n      ((pbcRestrict e.hom).obj ((DerivedCategory.homologyFunctor _ q).obj K)))\n    (a b : ℤ) (_hab : a ≤ b)\n    (hbounded : ∀ q : ℤ, (q < a ∨ b < q) →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj K)) :\n    letI : TopologicalSpace B := ⊥\n    letI : DiscreteTopology B := discreteTopology_bot _\n    ∃ C : CochainComplex (ProEtale.FiniteCoefficientModules X B) ℤ,\n      ProEtale.isBoundedConstructibleFiniteCoefficient X B (DerivedCategory.Q.obj C) ∧\n      Nonempty (DerivedCategory.Q.obj\n        (((SheafOfModules.restrictScalars\n          (AdicCoefficients.finiteRingComparison X B).hom).mapHomologicalComplex\n            (.up ℤ)).obj C) ≅ K)",
+  "branch": "sheaf-dag",
+  "by": "M7",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-77ef7",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261020T051519-L-1699457",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-77ef7",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261020T051519-L-1699457",
+  "kind": "interface",
+  "note": "independent cc review: diff vs returned head 2e50e3069563: only the ordered H9 deletion of the two imports in FiniteCoefficientDerivedOriginPresentation plus report text; 5 modules and the 6 direct importers of the item compiled; axioms rechecked; unit route still via LisseNormalizedTowerLocalModels/prop-weil-pbc-site-comparison-finite-level"
+ }
+}

@@ -1,0 +1,149 @@
+{
+ "id": "lem-weil-pbc-lisse-normalized-tower-local-models",
+ "kind": "statement",
+ "title": "LisseNormalizedTowerLocalModels",
+ "statement": "Let X be a Noetherian scheme and g:Y -> X an immersion. Let d be an adic coefficient datum [def-weil-pbc-adic-coefficient-datum] and M a normalized adic tower [def-weil-pbc-bounded-constructible-tower] whose cohomology lies in [a,b], a <= b, at all levels. Suppose every cohomology sheaf of every level restricted to Y is relatively finite lisse over the inverse-image constant quotient coefficient ring. There is a covering sieve on the final object of Y's pro-etale site such that on each member U there is a single complex L over the inverse image of the completed coefficients on X. Its terms vanish outside [a,b], are relatively adic lisse, and its finite reductions have relatively finite-lisse cohomology. There are isomorphisms e_n from the reductions of L to the restricted M_n. For every m >= n, e_m followed by the restricted tower transition equals the local reduction transition followed by scalar restriction of e_n. No global stratification is asserted; the final inverse-isomorphism square is not part of this construction.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09BV and 09AV; local-effectivity steps 4--7, simultaneous trivializations, algebraic reconstruction and relative realization"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "identify the inverse images of the finite constant coefficient sheaves with\nthe constant coefficient sheaves on Y, and hence identify the inverse images of\nthe finite function coefficient sheaves with their canonical presentations on Y.\nTransport the restricted levels along these isomorphisms. The proved helpers\ntransport_normalization_in_image and transport_normalization preserve the\nuniversal Hom bijections under fully faithful coefficient functors and\nequivalences; universal_arrow_iff_bijective identifies these bijections with\nthe structured-arrow normalization witnesses. Their cohomology is\nfinite lisse, so the single whole-scheme stratum witnesses constructibility.\nApply finiteCoefficient_constructibleDerived_origin_presentation on Y to obtain\nbounded constructible etale sources K_n. The interval [a,b] is retained because\ninverse image is exact and the etale/pro-etale comparison detects zero sheaves.\nTensor-pullback identifies the\ncomparison of each derived etale reduction with the normalized restricted level.\nCheck boundedness of that reduction by exact cohomology comparison and detection\nof zero before applying bounded-below full faithfulness. Lift both directions of\neach normalization and each restricted transition uniquely. Faithfulness then\ngives their quotient cocycle. This constructs the normalized etale tower needed\nby compatible_finite_derived_trivializations; it makes no finite-Tor assumption.\nCover the Noetherian stratum by its finitely many connected components.\nAt a geometric point of a nonempty component take the derived stalks E_n.\nExactness and tensor-pullback give finite cohomology in [a,b] and the supplied\nnormalizations. Finite-ring-derived-local-constancy and compatible-finite-derived-\ntrivializations give a pro-etale cover and compatible constant identifications\nof every level with E_n. Restrict their scalars to the completion C and form\ntheir homotopy limit E. The proved completion_eval_ker and\ncompletionQuotientEquiv helpers identify every power quotient of C with A/I^n;\ncompletionQuotientEquiv_factor proves compatibility with every quotient transition.\nTake the product of the restricted E_n, form one minus\nthe transition shift, and complete it to a distinguished triangle. Its shifted\ncone and first arrow give the required derived-limit triangle and projections.\nThe proved helper exists_boundedFinite_normalizedTower assembles this algebraic\nconstruction. It applies pseudoCoherent_normalizedAlgebraTower to the triangle\nand retains its projection-induced reduction isomorphisms and compatibility. The private helper\nmodule_derivedLimit_interval proves vanishing outside [a,b]\ndirectly in the module category: homology commutes with the countable product,\nthe finite-group Mittag--Leffler theorem makes the preceding Roos operator\nsurjective, and the long exact sequence embeds each outside cohomology module\ninto a zero product. This avoids transporting a derived triangle to abelian groups.\nThe proved private helper\nexists_boundedFinite_model supplies a bounded finite representative directly from\npseudo-coherence: truncate its finite free model above b, using the finite kernel\nof the top differential over the Noetherian ring. Then truncate at a by replacing\nthe a-th term by the finite cokernel of the incoming differential. Both truncation\nmaps are quasi-isomorphisms by the cohomological bounds, giving a bounded finite\ncomplex Q. Realize Q\ntermwise by completed_constant_finite_complex_realization, using its relative\nclause for the inverse image of the completion on X. Finite terms give adic\nlissity and the finite reductions give finite-lisse cohomology. Compose the\nrealization comparisons\nwith the compatible trivializations\nto get isomorphisms from the realized reductions to the restricted tower.\nTheir two naturality squares give the displayed forward semilinear square.\nInverting this square is left to the caller. Generate a covering\nsieve from the composite covers and restrict these models to its arrows;\nexact pullback preserves the bounds, terms and compatibility. Empty components\ncontribute the empty covering sieve. No projectivity of the truncated first\nterm and no finite Tor dimension are used.",
+   "uses": [
+    "lem-weil-pbc-finite-coefficient-derived-origin-presentation",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "thm-weil-pbc-site-comparison",
+    "def-weil-pbc-proetale-modules",
+    "lem-weil-pbc-finite-ring-derived-local-constancy",
+    "lem-weil-pbc-compatible-finite-derived-trivializations",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-comparison-pullback",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-kun-stalk-as-pullback",
+    "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-pseudocoherent-normalized-algebra-tower",
+    "lem-weil-pbc-mittag-leffler",
+    "lem-weil-pbc-completed-constant-finite-complex-realization",
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-weil-derived-limit-products-core",
+    "lem-pc-derived-limit-roos-abelian-groups"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09BV and 09AV; local-effectivity steps 4--7, simultaneous trivializations, algebraic reconstruction and relative realization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-coefficient-derived-origin-presentation",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "thm-weil-pbc-site-comparison",
+  "def-weil-pbc-proetale-modules",
+  "lem-weil-pbc-finite-ring-derived-local-constancy",
+  "lem-weil-pbc-compatible-finite-derived-trivializations",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-comparison-pullback",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-kun-stalk-as-pullback",
+  "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-pseudocoherent-normalized-algebra-tower",
+  "lem-weil-pbc-mittag-leffler",
+  "lem-weil-pbc-completed-constant-finite-complex-realization",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-derived-limit-products-core",
+  "lem-pc-derived-limit-roos-abelian-groups"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09BV and 09AV; local-effectivity steps 4--7, simultaneous trivializations, algebraic reconstruction and relative realization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite stratification makes every level of a normalized bounded constructible adic complex locally constant, and lisse normalized towers admit bounded completed finite module models",
+   "results": "8 hits: AdicCompletion, AdicCompletion.instModuleOfIsScalarTower, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology, AdicCompletion.instIsScalarTower, IsAdicComplete.rec, CondensedMod.isDiscrete_tfae, IsAdicComplete.of_comp_lift, IsAdicComplete.casesOn; ",
+   "date": "2026-10-18",
+   "verdict": "no matching theorem; hits concern ordinary completion or ambient categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"AdicCompletion\"",
+   "results": "0 hits: ; ",
+   "date": "2026-10-18",
+   "verdict": "no matching theorem; hits concern ordinary completion or ambient categories"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*tower|adic.*lisse",
+   "results": "0 hits: ; ",
+   "date": "2026-10-18",
+   "verdict": "no matching theorem; hits concern ordinary completion or ambient categories"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedConstructibleTowerLocalEffectivity",
+  "group": "M7",
+  "date": "2026-10-19"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c), Tags 09BV and 09AV; local-effectivity steps 4--7, simultaneous trivializations, algebraic reconstruction and relative realization",
+   "via": [
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseNormalizedTowerLocalModels",
+  "file": "lean/Sheaf/Paper/LisseNormalizedTowerLocalModels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.lisseNormalizedTower_local_models",
+  "statement": "theorem lisseNormalizedTower_local_models\n    (X Y : Scheme.{u}) [IsNoetherian X] (g : Y ⟶ X) [IsImmersion g]\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)\n    (a b : ℤ) (hab : a ≤ b)\n    (hbounded : ∀ (n : ℕ) (q : ℤ), (q < a ∨ b < q) →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj (M.level n)))\n    (hlisse : ∀ (n : ℕ) (q : ℤ),\n      IsRelativelyFiniteLisseModule g (A ⧸ d.ideal ^ (n + 1))\n        ((pbcRestrict ((adicTowerInverseImage g).map\n          (pbcLevelConstantComparison X d n).hom)).obj\n            ((DerivedCategory.homologyFunctor _ q).obj\n              ((adicTowerPullback g ((pbcAdicRings X d).obj (op n))).obj (M.level n))))) :\n    ∃ V : Sieve (⊤_ Y.ProEt), V ∈ ProEt.topology Y (⊤_ Y.ProEt) ∧\n      ∀ (U : Y.ProEt) (f : U ⟶ ⊤_ Y.ProEt), V f →\n        ∃ L : CochainComplex (pbcModules U.left\n            ((adicTowerInverseImage (U.hom ≫ g)).obj (pbcAdicCompletion X d))) ℤ,\n          (∀ q : ℤ, (q < a ∨ b < q) → IsZero (L.X q)) ∧\n          (∀ q : ℤ, @IsRelativelyAdicLisseModule _ _ (U.hom ≫ g) A _\n            d.noetherian d.ideal\n            ((pbcRestrict ((adicTowerInverseImage (U.hom ≫ g)).map\n              (pbcCompletedComparison X d).hom)).obj (L.X q))) ∧\n          (∀ (n : ℕ) (q : ℤ),\n            IsRelativelyFiniteLisseModule (U.hom ≫ g) (A ⧸ d.ideal ^ (n + 1))\n              ((pbcRestrict ((adicTowerInverseImage (U.hom ≫ g)).map\n                (pbcLevelConstantComparison X d n).hom)).obj\n                  ((DerivedCategory.homologyFunctor _ q).obj\n                    (adicTowerLocalReduction d (U.hom ≫ g) L n)))) ∧\n          ∃ e : ∀ n : ℕ, adicTowerLocalReduction d (U.hom ≫ g) L n ≅\n              (adicTowerPullback (U.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj\n                (M.level n),\n            ∀ (m n : ℕ) (hnm : n ≤ m),\n              (e m).hom ≫ adicTowerRestrictedTransition d (U.hom ≫ g) M m n hnm =\n                adicTowerLocalTransition d (U.hom ≫ g) L m n hnm ≫\n                  (pbcDerivedRestrict ((adicTowerInverseImage (U.hom ≫ g)).map\n                    (pbcAdicQuotient X d m n hnm))).map (e n).hom",
+  "branch": "sheaf-dag",
+  "by": "M7",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-77ef7",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261020T051519-L-1699457",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-77ef7",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261020T051519-L-1699457",
+  "kind": "interface",
+  "note": "independent cc review: diff vs returned head 2e50e3069563: only the ordered H9 deletion of the two imports in FiniteCoefficientDerivedOriginPresentation plus report text; 5 modules and the 6 direct importers of the item compiled; axioms rechecked; unit route still via LisseNormalizedTowerLocalModels/prop-weil-pbc-site-comparison-finite-level"
+ }
+}
