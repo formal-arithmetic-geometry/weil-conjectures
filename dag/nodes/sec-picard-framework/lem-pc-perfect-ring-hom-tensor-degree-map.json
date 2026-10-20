@@ -1,140 +1,150 @@
 {
-  "id": "lem-pc-perfect-ring-hom-tensor-degree-map",
-  "kind": "statement",
-  "title": "Existence of the normalized degreewise evaluation map",
-  "statement": "For any commutative ring A and cochain complexes P,Q on the one-object bottom-topology ringed site [def-pc-perfect-rhom-base-change-map], and any integer n, there exists a morphism from the degree n of Tot(Hom(P,A[0]) tensor Q) to Hom(P,Q)^n satisfying the signed evaluation normalization [lem-pc-perfect-ring-hom-tensor-degree-condition]. No boundedness, finiteness, or projectivity hypothesis is needed.",
-  "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0A6A, lemma-base-change-RHom, clause (1), expanded chain-level evaluation; Tag 0ATK, lemma-base-change-evaluation-map, clause (1)"
-  },
-  "stmt_deps": [
+ "id": "lem-pc-perfect-ring-hom-tensor-degree-map",
+ "kind": "statement",
+ "title": "Existence of the normalized degreewise evaluation map",
+ "statement": "For any commutative ring A and cochain complexes P,Q on the one-object bottom-topology ringed site [def-pc-perfect-rhom-base-change-map], and any integer n, there exists a morphism from the degree n of Tot(Hom(P,A[0]) tensor Q) to Hom(P,Q)^n satisfying the signed evaluation normalization [lem-pc-perfect-ring-hom-tensor-degree-condition]. No boundedness, finiteness, or projectivity hypothesis is needed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A6A, lemma-base-change-RHom, clause (1), expanded chain-level evaluation; Tag 0ATK, lemma-base-change-evaluation-map, clause (1)"
+ },
+ "stmt_deps": [
+  "lem-pc-perfect-ring-hom-tensor-degree-condition",
+  "def-pc-perfect-rhom-base-change-map",
+  "def-pur-hom-complex",
+  "lem-pc-perfect-ring-dual-term-flat",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Identify internal Hom sections at the unique point with A-linear maps, reusing pointHomEquiv and pointLift from RingHomExtensionDegrees. The section tensor comparison is a linear equivalence: the bottom-topology sheafification unit is invertible, as is tensorObjIsoSheafification. Form the linear evaluation of each degree-r dual by composing the chosen Hom projection with pointHomEquiv and the degree-zero single-complex identification. Apply Mathlib dualTensorHom after tensoring this linear evaluation with the identity, multiply by (r*s).negOnePow, and transport Q^s to Q^(-r+n). Conjugating by the tensor comparison and internal-Hom equivalence constructs evaluation_block and proves its prescribed pure-tensor formula by cancellation of the equivalences.",
+   "uses": [
     "lem-pc-perfect-ring-hom-tensor-degree-condition",
-    "def-pc-perfect-rhom-base-change-map",
-    "def-pur-hom-complex",
     "lem-pc-perfect-ring-dual-term-flat",
-    "def-pc-tensor-complex-sheaves"
-  ],
-  "proof": [
-    {
-      "text": "use the product projections of Hom(P,A[0]) to evaluate its degree-r sections\non P^(-r), followed by the degree-zero single-complex identification with A.\nMultiplication on Q^s gives an A-bilinear pairing, hence a map from the sectionwise\ntensor. This pairing is natural under restriction. By the sheafification adjunction\nit descends to the sheaf tensor. For r+s=n, put this signed map in Hom coordinate\np=-r, transporting Q^s to Q^(p+n), and put zero in every other coordinate.\nThe product universal property gives a map from this tensor summand to Hom degree n.\nThe coproduct universal property defining the total tensor degree assembles all\nsummands. Its composites with projections vanish off the diagonal by construction;\non the diagonal its value on pure tensors is precisely the defining signed pairing.\nThe argument uses no bound, finite generation, or projectivity. Zero modules and the\nzero ring are included because the bilinear pairing and both universal properties\nstill apply.",
-      "uses": [
-        "lem-pc-perfect-ring-hom-tensor-degree-condition",
-        "def-pc-perfect-rhom-base-change-map",
-        "def-pur-hom-complex",
-        "lem-pc-perfect-ring-dual-term-flat",
-        "def-pc-tensor-complex-sheaves"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+    "lem-pc-ring-hom-extension-degrees"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the chosen limiting fan of Hom(P,Q)^n, reusing ringHomComplex_isLimit from PerfectRingDualTermFlat. For a tensor summand (r,s), put evaluation_block in coordinate -r and zero in every other coordinate, transporting along p=-r. Fan.IsLimit.lift assembles the coordinate maps. HomologicalComplex.mapBifunctorDesc assembles all tensor summands into the desired degree map. Its inclusion equation and Fan.IsLimit.fac give both off-diagonal vanishing and the diagonal signed evaluation formula, exactly PerfectRingHomTensorDegreeCondition. No finite-support, flatness, projectivity or boundedness theorem is used.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves",
     "lem-pc-perfect-ring-hom-tensor-degree-condition",
-    "def-pc-perfect-rhom-base-change-map",
-    "def-pur-hom-complex",
-    "lem-pc-perfect-ring-dual-term-flat",
-    "def-pc-tensor-complex-sheaves"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0A6A, lemma-base-change-RHom, clause (1), expanded chain-level evaluation; Tag 0ATK, lemma-base-change-evaluation-map, clause (1)",
-    "note": "Stage-3 extraction/decomposition of the degreewise comparison; interfaces unchanged."
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Bounded finite projective cochain complex tensor dual Hom degree evaluation isomorphism",
-      "date": "2026-10-13",
-      "results": "{\"t\": \"2026-10-13T10:35:41Z\", \"tool\": \"leanfinder\", \"query\": \"Bounded finite projective cochain complex tensor dual Hom degree evaluation isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.cochainComplexXIso\", \"CategoryTheory.ProjectiveResolution.Hom.hom'_f\", \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply\", \"CochainComplex.HomComplex.Cochain.toSingleEquiv\", \"CochainComplex.HomComplex.Cochain.fromSingleEquiv\", \"CategoryTheory.ProjectiveResolution.Hom.hom'_f_assoc\", \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_symm_apply\", \"CochainComplex.isKProjective_of_op\"], \"digest\": \"d6ea7983c0848bd0\"}",
-      "verdict": "No exact normalized sheaf-complex result. dualTensorHomEquiv supplies the finite-projective module block.",
-      "sub": ""
-    },
-    {
-      "tool": "loogle",
-      "query": "dualTensorHomEquiv",
-      "date": "2026-10-13",
-      "results": "{\"t\": \"2026-10-13T10:35:44Z\", \"tool\": \"loogle\", \"query\": \"dualTensorHomEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"dualTensorHomEquiv\", \"dualTensorHomEquivOfBasis_eq_dualTensorHomEquiv\", \"dualTensorHomEquiv_eq_dualTensorHomEquivOfBasis\", \"toLinearMap_dualTensorHomEquiv\", \"dualTensorHomEquiv_tmul\", \"dualTensorHom_dualTensorHomEquiv_symm\", \"dualTensorHomEquiv_symm_dualTensorHom\", \"LinearMap.trace_eq_contract'\"], \"digest\": \"a69926784dd38765\"}",
-      "verdict": "No exact normalized sheaf-complex result. dualTensorHomEquiv supplies the finite-projective module block.",
-      "sub": ""
-    },
-    {
-      "tool": "grep",
-      "query": "dualTensorHomEquiv|ringHomComplexProjection|ringHomEvaluate",
-      "date": "2026-10-13",
-      "results": "{\"t\": \"2026-10-13T10:35:44Z\", \"tool\": \"grep\", \"query\": \"dualTensorHomEquiv|ringHomComplexProjection|ringHomEvaluate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Trace.lean\", \"Mathlib/LinearAlgebra/Trace.lean\", \"Mathlib/LinearAlgebra/Trace.lean\", \"Mathlib/LinearAlgebra/Trace.lean\", \"Mathlib/LinearAlgebra/Trace.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Associator.lean\", \"Mathlib/LinearAlgebra/Contraction.lean\", \"Mathlib/LinearAlgebra/Contraction.lean\"], \"digest\": \"f69672702eff94ac\"}",
-      "verdict": "No exact normalized sheaf-complex result. dualTensorHomEquiv supplies the finite-projective module block.",
-      "sub": ""
-    },
-    {
-      "tool": "leansearch",
-      "query": "Evaluation from tensor of the dual of a cochain complex to its Hom complex",
-      "date": "2026-10-13",
-      "results": "{\"t\": \"2026-10-13T10:45:49Z\", \"tool\": \"leansearch\", \"query\": \"Evaluation from tensor of the dual of a cochain complex to its Hom complex\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-      "verdict": "unavailable",
-      "sub": ""
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.Algebra.Homology.PerfectRingHomTensorDegrees",
-    "date": "2026-10-13",
-    "group": "Q2"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-pc-perfect-ring-hom-tensor-degrees",
-      "place": "Separate evaluation construction from the finite-support invertibility argument"
-    },
-    "same_as": []
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-duality",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.Algebra.Homology.PerfectRingHomTensorDegreeMap",
-    "file": "lean/Sheaf/Algebra/Homology/PerfectRingHomTensorDegreeMap.lean",
-    "declaration": "CategoryTheory.perfectRingHom_tensorDual_degree_map_exists",
-    "declarations": [
-      "CategoryTheory.perfectRingHom_tensorDual_degree_map_exists"
-    ],
-    "statement": "theorem perfectRingHom_tensorDual_degree_map_exists {A : Type u} [CommRing A] (P Q : CochainComplex (RingSiteModules A) ℤ) (n : ℤ) : letI := SheafOfModules.monoidalCategory (CochainComplex.onePointRingSheaf A) ∃ f : (CochainComplex.mapBifunctor (perfectRingDual P) Q (curriedTensor _)).X n ⟶ (homComplex (R := CochainComplex.onePointRingSheaf A) P Q).X n, PerfectRingHomTensorDegreeCondition P Q n f",
-    "branch": "sheaf-dag",
-    "by": "Q2",
-    "date": "2026-10-13"
-  },
-  "reviewed": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "X-43b8b",
-    "group": "Q2",
-    "result": "pass",
-    "landing": "20261013T115432-L-3359892",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "X-43b8b",
-    "group": "Q2",
-    "result": "pass",
-    "landing": "20261013T115432-L-3359892",
-    "kind": "interface",
-    "note": "independent Codex review: Matched delivered definitions, theorem signatures, proof decomposition and node records with the original interfaces and mathematical statements; all four modules and the direct importer PerfectRingHomTensorDifferential compile cleanly; axiom checks show only standard axioms plus sorryAx for the two documented remaining lemmas."
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+    "lem-pc-perfect-ring-dual-term-flat"
+   ],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-ring-hom-tensor-degree-condition",
+  "lem-pc-perfect-ring-dual-term-flat",
+  "lem-pc-ring-hom-extension-degrees",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H3",
+  "date": "2026-10-20",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A6A, lemma-base-change-RHom, clause (1), expanded chain-level evaluation; Tag 0ATK, lemma-base-change-evaluation-map, clause (1)",
+  "note": "Complete Lean proof of the explicit signed degree map. Reuses established private point and product APIs via proof-only import all; no new holes, no statement or definition changes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bounded finite projective cochain complex tensor dual Hom degree evaluation isomorphism",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T10:35:41Z\", \"tool\": \"leanfinder\", \"query\": \"Bounded finite projective cochain complex tensor dual Hom degree evaluation isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.cochainComplexXIso\", \"CategoryTheory.ProjectiveResolution.Hom.hom'_f\", \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply\", \"CochainComplex.HomComplex.Cochain.toSingleEquiv\", \"CochainComplex.HomComplex.Cochain.fromSingleEquiv\", \"CategoryTheory.ProjectiveResolution.Hom.hom'_f_assoc\", \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_symm_apply\", \"CochainComplex.isKProjective_of_op\"], \"digest\": \"d6ea7983c0848bd0\"}",
+   "verdict": "No exact normalized sheaf-complex result. dualTensorHomEquiv supplies the finite-projective module block.",
+   "sub": ""
+  },
+  {
+   "tool": "loogle",
+   "query": "dualTensorHomEquiv",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T10:35:44Z\", \"tool\": \"loogle\", \"query\": \"dualTensorHomEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"dualTensorHomEquiv\", \"dualTensorHomEquivOfBasis_eq_dualTensorHomEquiv\", \"dualTensorHomEquiv_eq_dualTensorHomEquivOfBasis\", \"toLinearMap_dualTensorHomEquiv\", \"dualTensorHomEquiv_tmul\", \"dualTensorHom_dualTensorHomEquiv_symm\", \"dualTensorHomEquiv_symm_dualTensorHom\", \"LinearMap.trace_eq_contract'\"], \"digest\": \"a69926784dd38765\"}",
+   "verdict": "No exact normalized sheaf-complex result. dualTensorHomEquiv supplies the finite-projective module block.",
+   "sub": ""
+  },
+  {
+   "tool": "grep",
+   "query": "dualTensorHomEquiv|ringHomComplexProjection|ringHomEvaluate",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T10:35:44Z\", \"tool\": \"grep\", \"query\": \"dualTensorHomEquiv|ringHomComplexProjection|ringHomEvaluate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Trace.lean\", \"Mathlib/LinearAlgebra/Trace.lean\", \"Mathlib/LinearAlgebra/Trace.lean\", \"Mathlib/LinearAlgebra/Trace.lean\", \"Mathlib/LinearAlgebra/Trace.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Associator.lean\", \"Mathlib/LinearAlgebra/Contraction.lean\", \"Mathlib/LinearAlgebra/Contraction.lean\"], \"digest\": \"f69672702eff94ac\"}",
+   "verdict": "No exact normalized sheaf-complex result. dualTensorHomEquiv supplies the finite-projective module block.",
+   "sub": ""
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation from tensor of the dual of a cochain complex to its Hom complex",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T10:45:49Z\", \"tool\": \"leansearch\", \"query\": \"Evaluation from tensor of the dual of a cochain complex to its Hom complex\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "verdict": "unavailable",
+   "sub": ""
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.PerfectRingHomTensorDegrees",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-ring-hom-tensor-degrees",
+   "place": "Separate evaluation construction from the finite-support invertibility argument"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.PerfectRingHomTensorDegreeMap",
+  "file": "lean/Sheaf/Algebra/Homology/PerfectRingHomTensorDegreeMap.lean",
+  "declaration": "CategoryTheory.perfectRingHom_tensorDual_degree_map_exists",
+  "declarations": [
+   "CategoryTheory.perfectRingHom_tensorDual_degree_map_exists"
+  ],
+  "statement": "theorem perfectRingHom_tensorDual_degree_map_exists {A : Type u} [CommRing A] (P Q : CochainComplex (RingSiteModules A) ℤ) (n : ℤ) : letI := SheafOfModules.monoidalCategory (CochainComplex.onePointRingSheaf A) ∃ f : (CochainComplex.mapBifunctor (perfectRingDual P) Q (curriedTensor _)).X n ⟶ (homComplex (R := CochainComplex.onePointRingSheaf A) P Q).X n, PerfectRingHomTensorDegreeCondition P Q n f",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-43b8b",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T115432-L-3359892",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261020T132008-L-1400190",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }
