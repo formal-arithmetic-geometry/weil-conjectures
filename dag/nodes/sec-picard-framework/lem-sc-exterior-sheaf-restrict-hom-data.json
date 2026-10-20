@@ -12,7 +12,7 @@
  ],
  "proof": [
   {
-   "text": "Reduce the sheaf restriction hom data to the presheaf pullback comparison, then apply sheafification compatibility with pullback and the restriction pullback isomorphism; package the resulting categorical isomorphism as two mutually inverse morphisms.",
+   "text": "The old exteriorSheafPresheaf and upstream PresheafOfModules.exteriorPower have definitionally identical section modules, and their restrictions agree by uniqueness on pure wedges. Prove equality of the presheaves and rewrite the upstream exteriorPresheaf_open_pullback isomorphism into the old API. Apply sheafification compatibility with pullback and the restriction pullback isomorphism; package the resulting categorical isomorphism as two mutually inverse morphisms.",
    "uses": [
     "lem-sc-exterior-presheaf-open-pullback",
     "def-sc-sheaf-exterior-power"
@@ -29,9 +29,10 @@
   "def-sc-sheaf-exterior-power"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "B3",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Proof of (*), determinant paragraph"
+  "place": "Proof of (*), determinant paragraph",
+  "note": "Retirement adaptation: use the proved upstream presheaf theorem, moving the existing private equality bridge to the sole consumer without changing its public signature. The unit route and mathematical statements are preserved."
  },
  "mathlib_searches": [
   {
@@ -95,14 +96,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M2",
+  "reviewer": "C-62d66",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261012T184318-L-4009965",
+  "landing": "20261020T154036-L-3031447",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Retirement row 275 (Sheaf ExteriorPresheafOpenPullback → WeilConjectures twin) matched with the clone: sole importer ExteriorSheafRestrictHomData has its signature byte-identical, the private bridge moved verbatim, and node lean record = upstream signature verbatim; delivered set + importer ExteriorSheafRestrictIso compile; axioms clean"
  },
  "lean_audit": {
   "master": {
