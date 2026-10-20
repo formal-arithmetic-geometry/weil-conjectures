@@ -17708,3 +17708,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:39 L: returned deliver/U4/Sheaf.Paper.FiniteProperBaseChange (reviewer RETURN: (reviewer C-c49a5, head c49a52b58) 1 (H9, brief point 5): lean/Sheaf/Paper/FiniteProperGeometricCohomologicalBound.lean )
 - 03:40 L: returned deliver/P8/Sheaf.CategoryTheory.RingedSiteDualityMaps (reviewer RETURN: (reviewer C-f8100, head f8100e0cb) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.CategoryTheory.Ringe)
 - 03:49 L: returned deliver/Q05/lem-pur-weil-semilinear-exchange-reindexing (reviewer RETURN: L: independent stage-2 immutable head 8d0008293f27: Third delivery 8d0008293f27 is a real rewrite (new module sha). Comp)
+- 03:59 L: returned deliver/Q05/lem-pur-weil-semilinear-exchange-reindexing (reviewer RETURN: L: independent stage-2 immutable head 5f64716740ea: 5f647167 is a byte-identical re-push of the RETURNed 8d0008293f27: d)
