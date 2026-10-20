@@ -1,0 +1,107 @@
+{
+ "id": "def-pur-scalar-pullback-representative-data",
+ "kind": "definition",
+ "title": "Canonical scalar/pullback representative data",
+ "statement": "Let A and B be commutative rings, phi:A -> B a ring map, and f:Z -> W a morphism of schemes. In the ordinary small-etale module sheaf categories and their unbounded derived categories [def-weil-pbc-derived-categories], let E_T be ordinary scalar extension and S_T derived scalar extension [lem-pur-derived-change-of-rings], and let f_R^* and f_R,* be the ordinary geometric adjoints. Define scalarSheafPullbackIso to be the isomorphism E_W ; f_B^* ~= f_A^* ; E_Z conjugate, under the two composite scalar/geometric adjunctions, to the sectionwise identity comparing restriction and direct image [lem-sbc-canonical-restrict-scalars-functor-comparisons]. Define scalarSheafPullbackComplexIso by applying the mapHomologicalComplex composition comparison to this isomorphism and the inverse comparison for the identity of f_A^* ; E_Z. For an A-cochain complex P define scalarGeometricRepresentative A f P to be the geometric left-derived counit at the homotopy quotient of P followed by Qh of the mapHomotopyCategoryFactors comparison. Finally define scalarCoefficientPullbackIso from L(f_A^*)(B_W[0]) to B_Z[0] to be the composite of the comparison with exact derived inverse image, its single-functor comparison, and the single image of the ordinary restriction/pullback comparison at the B-unit followed by restriction of the inverse monoidal unit map for f_B^*. The coefficient B_T[0] is the single restricted B-unit sheaf of [lem-pur-derived-change-of-rings]. These are specified constructions, with no flatness or boundedness hypotheses.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "lem-pur-derived-change-of-rings",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "def-kun-projection-formula-map"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6 and 07A7: ordinary scalar/pullback and coefficient-unit identifications"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The natural isomorphism between left adjoints obtained by conjugating an isomorphism between the right adjoints",
+   "results": "8 hits including Adjunction.natIsoOfRightAdjointNatIso, Adjunction.leftAdjointUniq, and Adjunction.leftAdjointCompIso.",
+   "date": "2026-10-21",
+   "verdict": "Generic adjunction constructions exist and are used. The four etale specializations are already defined in the assigned source; this is only a shared definition module."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "results": "5 hits including conjugateIsoEquiv and its hom/inv computation lemmas.",
+   "date": "2026-10-21",
+   "verdict": "The generic construction is used verbatim by scalarSheafPullbackIso; the composite data are library-specific."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical scalar extension and inverse image comparison defined by conjugating the direct image and restriction of scalars identity",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.homEquiv, ModuleCat.extendRestrictScalarsAdj, its unit/toRestrictScalars, and the identity-extension Hom equivalence. No etale geometric comparison specialization.",
+   "date": "2026-10-21",
+   "verdict": "No replacement needed: preserve and share the existing constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarSheafPullbackIso|scalarSheafPullbackComplexIso|scalarGeometricRepresentative|scalarCoefficientPullbackIso",
+   "results": "Existing definitions in Sheaf.Paper.PurEtaleScalarMateProjection; consumers in Sheaf.Paper.AcyclicFlatProperCoefficientModel and Sheaf.SecSmoothPurity.ProperFiniteCoefficientExtension.",
+   "date": "2026-10-21",
+   "verdict": "Move unchanged constructions and preserve their original public reexport."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurEtaleScalarMateProjection",
+  "date": "2026-10-21",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-etale-scalar-mate-projection",
+   "place": "The specified scalar/pullback and coefficient identifications used by the representative calculation.",
+   "via": [
+    "lem-pur-etale-scalar-mate-projection"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarPullbackRepresentativeData",
+  "file": "lean/Sheaf/Paper/ScalarPullbackRepresentativeData.lean",
+  "declaration": "AlgebraicGeometry.Etale.scalarSheafPullbackIso",
+  "declarations": [
+   "AlgebraicGeometry.Etale.scalarSheafPullbackIso",
+   "AlgebraicGeometry.Etale.scalarSheafPullbackComplexIso",
+   "AlgebraicGeometry.Etale.scalarGeometricRepresentative",
+   "AlgebraicGeometry.Etale.scalarCoefficientPullbackIso"
+  ],
+  "statement": "def scalarSheafPullbackIso\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (φ : A →+* B) {Z W : Scheme.{u}} (f : Z ⟶ W) :\n    ProEtale.etaleSheafExtendScalars φ W ⋙ upperStar (ModuleCat.{u + 1} B) f ≅\n      upperStar (ModuleCat.{u + 1} A) f ⋙ ProEtale.etaleSheafExtendScalars φ Z",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-21",
+  "note": "Existing definitions moved verbatim from PurEtaleScalarMateProjection and publicly reexported there. No signature or value changes."
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0453a",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261020T233217-L-906112",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0453a",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261020T233217-L-906112",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item, data and normalization modules plus their node files, matched against the live clone: moved defs diffed byte-identical; all 6 direct importers compiled against the delivery (AcyclicFlatProperCoefficientModel only with the live EtaleDerivedScalarTensor, since it fails the same way against the published build); new sorry statement checked against the canonical definitions it uses"
+ }
+}

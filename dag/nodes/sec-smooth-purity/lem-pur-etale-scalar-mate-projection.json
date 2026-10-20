@@ -18,76 +18,65 @@
  ],
  "proof": [
   {
-   "text": "Put $F_A=f_A^{-1}$, $F_B=f_B^{-1}$, $R_A=Rf_{*,A}$, $R_B=Rf_{*,B}$ and $C=R_AJ$, $N=L_ZJ$, so $M=L_WC$. Write $e_{T,H}:U_TL_TH\\simeq H\\otimes_A^LB_T$ for the scalar/tensor identification. It is natural on morphisms: $e_{T,H'}\\,U_TL_T(v)=(v\\otimes1)e_{T,H}$. Indeed [lem-pur-change-of-rings-tensor-comparison] gives this identity on sheaves (with the tensor symmetry to put $B_T$ on the right). Apply it termwise to K-flat resolutions, which exist by [lem-pc-kflat-resolution] and compute scalar extension by [lem-pur-derived-change-of-rings]. Thus it gives precisely the canonical derived identification in the statement, including its action on morphisms. Let $a_H:F_AU_WH\\xrightarrow{\\sim}U_ZF_BH$ and $d_Q:U_WR_BQ\\xrightarrow{\\sim}R_AU_ZQ$ be the canonical comparisons of [lem-sbc-canonical-restrict-scalars-functor-comparisons], with these orientations. All uses of these comparisons below are on bounded-below objects: $M,N$ are bounded below by hypothesis, and the right derived images and exact inverse images of bounded-below objects are bounded below.",
+   "text": "On a K-flat cochain model, apply lem-pur-scalar-tensor-pullback-normalization to the defining equation of scalarPullbackIso_existsUnique. It gives the scalar/tensor pullback square at Q(P).",
    "uses": [
-    "lem-pur-change-of-rings-tensor-comparison",
-    "lem-pc-kflat-resolution",
-    "lem-pur-derived-change-of-rings",
-    "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+    "lem-pur-scalar-tensor-pullback-normalization",
+    "def-pur-etale-scalar-pullback-iso"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat), and 07A7 (remark-base-change); explicit counit calculation for the coefficient comparison mentioned in more-etale.tex, Tag 0GL6"
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings: the identification of scalar change with the projection formula, before the proper/open composition. The normalized map is the counit transpose of def-kun-projection-formula-map, using both identities of lem-sbc-restrict-scalars-derived-adjunction-identities."
    }
   },
   {
-   "text": "Let $c_C:F_BL_WC\\xrightarrow{\\sim}L_ZF_AC$ be the canonical scalar/pullback comparison specified in the statement, and let $t_C:F_A(C\\otimes_A^LB_W)\\xrightarrow{\\sim}F_AC\\otimes_A^LB_Z$ be the inverse monoidal comparison used in [def-kun-projection-formula-map]. Under $e$, forgetting $c_C$ has exactly this normalization:\n$$e_{Z,F_AC}\\,U_Z(c_C)\\,a_{L_WC}=t_C\\,F_A(e_{W,C}).$$\nTo check it, take a K-flat resolution $P$ with flat terms of a complex representing $C$ [lem-pc-kflat-resolution]. By [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], $F_AP$ remains K-flat with flat terms, and the derived tensor/pullback comparisons are the canonical comparisons on these models. Scalar extension is represented by $P\\otimes_AB_W$ [lem-pur-derived-change-of-rings]; inverse image is termwise exact as specified in [def-kun-projection-formula-map]. After forgetting coefficients both sides are the same ordinary comparison $F_A(P\\otimes_AB_W)\\to F_AP\\otimes_AB_Z$: the scalar/tensor identifications simply retain the tensor and its maps, with the fixed symmetry of step 1. This is a check of the two specified representatives, not an additional projection formula or an isomorphism assertion about direct image.",
+   "text": "The two sides of this square form natural transformations. Every cochain complex K receives a quasi-isomorphism P -> K from a flat-term K-flat complex. Naturality and cancellation of its invertible localized image give equality on Q(K). Localization extensionality extends this to all derived objects.",
    "uses": [
-    "def-kun-projection-formula-map",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-change-of-rings-tensor-comparison"
+    "lem-pc-kflat-resolution"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat), and 07A7 (remark-base-change); explicit counit calculation for the coefficient comparison mentioned in more-etale.tex, Tag 0GL6"
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings: the identification of scalar change with the projection formula, before the proper/open composition. The normalized map is the counit transpose of def-kun-projection-formula-map, using both identities of lem-sbc-restrict-scalars-derived-adjunction-identities."
    }
   },
   {
-   "text": "Put $b=d_N\\,U_W(\\beta_J):U_WM\\to R_AU_ZN$. The counit clause of [lem-sbc-restrict-scalars-derived-adjunction-identities], composed on the right with $F_A(d_N)$, reads\n$$\\varepsilon^A_{U_ZN}F_A(d_N)=U_Z(\\varepsilon^B_N)a_{R_BN}.$$\nConsequently the $A$-adjoint transpose of $b$ is\n$$\\begin{aligned}\n\\varepsilon^A_{U_ZN}F_A(b)\n&=U_Z(\\varepsilon^B_N)a_{R_BN}F_AU_W(\\beta_J)\\\\\n&=U_Z(\\varepsilon^B_N)U_ZF_B(\\beta_J)a_M\\\\\n&=U_Z\\bigl(L_Z(\\varepsilon^A_J)c_C\\bigr)a_M.\n\\end{aligned}$$\nThe second equality is naturality of $a$ [lem-sbc-canonical-restrict-scalars-functor-comparisons]; the third is the defining transpose equation for $\\beta_J$ under the canonical adjunction of [def-kun-projection-formula-map]. The counit identity applies with the bounded-below $B$-object $N$, and naturality applies to the morphism $\\beta_J$ between bounded-below $B$-objects $M$ and $R_BN$. Hence no comparison outside the domain of those cited nodes has been used. The counits $\\varepsilon^A,\\varepsilon^B$ of the cited identity are those of the inverse-image/direct-image adjunction of [sbc-def-base-change-map], which is the canonical derived adjunction of the termwise inverse image and $Ru_*K=Q(u_*I)$ on K-injective resolutions, restricted to $D^+$; [def-kun-unbounded-exchange] fixes this same canonical adjunction for the same functors on the unbounded module derived categories, and [def-kun-projection-formula-map] uses it. So on the bounded-below objects $U_ZN$, $N$ occurring here they are the counits of the adjunctions specified in the statement.",
+   "text": "Let b be the geometric mate of the scalar/pullback square and d the geometric mate of the restriction/pullback square. Apply the A-adjunction Hom equivalence to U(b);d, after postcomposition by the target scalar/tensor isomorphism. The two mate counit identities, naturality of the restriction/pullback square and of the target scalar/tensor isomorphism reduce this to the square of step 2 followed by tensor of the A-geometric counit. Cancel the target isomorphism. This argument holds on ambient derived categories.",
    "uses": [
-    "lem-sbc-restrict-scalars-derived-adjunction-identities",
     "lem-sbc-canonical-restrict-scalars-functor-comparisons",
-    "def-kun-projection-formula-map",
-    "sbc-def-base-change-map",
-    "def-kun-unbounded-exchange"
+    "def-pur-etale-scalar-pullback-iso",
+    "lem-pur-derived-change-of-rings"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat), and 07A7 (remark-base-change); explicit counit calculation for the coefficient comparison mentioned in more-etale.tex, Tag 0GL6"
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings: the identification of scalar change with the projection formula, before the proper/open composition. The normalized map is the counit transpose of def-kun-projection-formula-map, using both identities of lem-sbc-restrict-scalars-derived-adjunction-identities."
    }
   },
   {
-   "text": "Conjugate $b$ by $e_{W,C}$ on its source and $R_A(e_{Z,J})$ on its target. Naturality of the $A$-counit and step 3 say its transpose is\n$$e_{Z,J}U_ZL_Z(\\varepsilon^A_J)U_Z(c_C)a_MF_A(e_{W,C}^{-1})\n=(\\varepsilon^A_J\\otimes1_{B_Z})t_C,$$\nwhere the equality uses the naturality of $e$ from step 1 and the normalization from step 2. This is exactly the transpose defining $\\mathrm{PF}_f(J,B_W[0])$ in [def-kun-projection-formula-map]. The adjunction Hom bijection is injective, so the two original morphisms agree. Naturality is also on the stated domain: for $v:J\\to J'$ the naturality square for $\\varepsilon^A$ gives $v\\varepsilon^A_J=\\varepsilon^A_{J'}F_AR_A(v)$; applying $L_Z$, naturality of $c$ and the Hom bijection give $R_BL_Z(v)\\beta_J=\\beta_{J'}L_WR_A(v)$. The natural comparisons $d,e$ carry this square to the projection-morphism square. Only its endpoints must satisfy the hypotheses; no claim that arbitrary scalar extension preserves boundedness is needed.",
+   "text": "Naturality of derived tensor in the coefficient morphism moves scalarCoefficientPullbackIso past tensor of the geometric counit. Naturality of the adjunction Hom equivalence in its target identifies the transpose with the specified projection map followed by direct image of the coefficient identification. Combine with step 3 and compose with scalarTensorIso inverse to obtain the stated equality.",
    "uses": [
     "def-kun-projection-formula-map"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat), and 07A7 (remark-base-change); explicit counit calculation for the coefficient comparison mentioned in more-etale.tex, Tag 0GL6"
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings: the identification of scalar change with the projection formula, before the proper/open composition. The normalized map is the counit transpose of def-kun-projection-formula-map, using both identities of lem-sbc-restrict-scalars-derived-adjunction-identities."
    }
   }
  ],
  "proof_deps": [
-  "lem-pur-change-of-rings-tensor-comparison",
+  "lem-pur-scalar-tensor-pullback-normalization",
+  "def-pur-etale-scalar-pullback-iso",
   "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
   "lem-sbc-canonical-restrict-scalars-functor-comparisons",
-  "def-kun-projection-formula-map",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-sbc-restrict-scalars-derived-adjunction-identities",
-  "sbc-def-base-change-map",
-  "def-kun-unbounded-exchange"
+  "lem-pur-derived-change-of-rings",
+  "def-kun-projection-formula-map"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tag 0GL6, coefficient compatibility; expanded canonical-mate calculation using sites-cohomology.tex Tags 07A4, 0G7E, 07A7 and the existing restriction-of-scalars identities"
+  "place": "Representative square followed by a formal mate-counit calculation; Stacks Tags 07A4, 0G7E, 07A7 and 0GL6."
  },
  "mathlib_searches": [
   {
@@ -253,13 +242,10 @@
   ]
  },
  "tool_uses": [
-  "lem-pur-change-of-rings-tensor-comparison",
   "lem-pc-kflat-resolution",
   "lem-pur-derived-change-of-rings",
   "lem-sbc-canonical-restrict-scalars-functor-comparisons",
-  "def-kun-projection-formula-map",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-sbc-restrict-scalars-derived-adjunction-identities"
+  "def-kun-projection-formula-map"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -273,13 +259,9 @@
   "module": "Sheaf.Paper.PurEtaleScalarMateProjection",
   "declaration": "AlgebraicGeometry.Etale.scalarMate_restrict_eq_projection",
   "declarations": [
-   "AlgebraicGeometry.Etale.scalarSheafPullbackIso",
-   "AlgebraicGeometry.Etale.scalarSheafPullbackComplexIso",
-   "AlgebraicGeometry.Etale.scalarGeometricRepresentative",
    "AlgebraicGeometry.Etale.scalarPullbackIso_existsUnique",
    "AlgebraicGeometry.Etale.scalarPullbackIso",
    "AlgebraicGeometry.Etale.scalarMate",
-   "AlgebraicGeometry.Etale.scalarCoefficientPullbackIso",
    "AlgebraicGeometry.Etale.scalarMate_restrict_eq_projection"
   ],
   "file": "lean/Sheaf/Paper/PurEtaleScalarMateProjection.lean",
@@ -296,5 +278,15 @@
   "group": "Q158",
   "result": "pass",
   "note": "Statement, dependencies, source, docstrings, edge cases, canonical constructions, and combined side-overlay compilation checked; no findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0453a",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261020T233217-L-906112",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item, data and normalization modules plus their node files, matched against the live clone: moved defs diffed byte-identical; all 6 direct importers compiled against the delivery (AcyclicFlatProperCoefficientModel only with the live EtaleDerivedScalarTensor, since it fails the same way against the published build); new sorry statement checked against the canonical definitions it uses"
  }
 }
