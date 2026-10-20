@@ -35,3 +35,9 @@ Importers taken out with them (2336): `Sheaf.Algebra.Homology.DerivedTensorTrunc
 ## Quarantine, round 1 (2026-10-20T06:47:58Z)
 
 1 failing module(s): `WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.SubalgebraLimit` (error: WeilConjectures/AlgebraicGeometry/Sites/ArtinVanishing/SubalgebraLimit.lean:38:12: failed to synthesize); 2336 importer(s) taken out with them (list: coord/rework.tsv).
+
+## Quarantine, round 2 (2026-10-20T07:09:11Z)
+
+The global build of 4d32546529 failed in 1 module(s); they and their importers, 1 module(s), were moved to quarantine/ (tools/rework.py, coord/rework.tsv):
+
+- `Sheaf.AlgebraicGeometry.EtaleSumExtensionTensor`: error: Sheaf/AlgebraicGeometry/EtaleSumExtensionTensor.lean: bad import 'Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality' (nodes lem-asd-etale-sum-extension-tensor)
