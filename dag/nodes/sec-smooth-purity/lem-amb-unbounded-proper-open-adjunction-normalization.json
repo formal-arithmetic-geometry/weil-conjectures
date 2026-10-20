@@ -1,0 +1,136 @@
+{
+ "id": "lem-amb-unbounded-proper-open-adjunction-normalization",
+ "kind": "statement",
+ "title": "Adjunction normalization of unbounded proper/open interchange",
+ "statement": "Let A be a finite commutative ring. Work with ordinary constant-A module sheaves on the small etale sites of Noetherian schemes and their unbounded derived categories [def-weil-pbc-derived-categories]. For every commutative square Q with top open immersion k:U→V, bottom open immersion i:W→Z and proper vertical maps r:U→W and p:V→Z, fix natural isomorphisms theta_Q:r_*⋙i_! ≅ k_!⋙p_* and Gamma_Q:Rr_*⋙Di_! ≅ Dk_!⋙Rp_*. Assume the support normalization: theta_Q,F followed by p_*(k_!F→k_*F) and the direct-image compositor equals i_!r_*F→i_*r_*F followed by the compositor into (ir)_*F=(pk)_*F [lem-cbc-proper-support-sheaf-composition]. Assume also representative normalization: for every K-injective J on U and every quasi-isomorphism rho:k_!J→I with I K-injective, Gamma_Q,QJ is represented by i_!r_*J→p_*k_!J→p_*I, under the canonical K-injective and exact-functor identifications [lem-weil-pbc-kinjective-total-derived, lem-weil-pbc-extension-by-zero-exact]. For every cartesian Q, the natural transformation lambda_Q from i^*Rp_*Dk_! to Rr_* obtained by the specified unbounded adjunction-mate exchange followed by Rr_* of the inverse open unit is invertible. With lam its natural isomorphism, Gamma_Q is Di_!(lam.inv) followed by the counit of Di_!⊣i^*. This identifies the direction and the actual exchange map, not merely an unspecified isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B(b)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-derived-categories",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-extension-by-zero",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "def-weil-pbc-kinjective-resolutions",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-cbc-proper-support-sheaf-composition",
+  "def-pc-fibre-product",
+  "def-kun-unbounded-exchange",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof": [
+  {
+   "text": "For a cartesian square, apply the sheaf support normalization and restrict along i.\nUnder the open-unit identifications the ordinary exchange sends i*theta followed by the\nopen unit to r* of the other open unit. Resolve k!J by a K-injective I. Exact restriction\npreserves the resolution, and k*I is K-injective because restriction is right adjoint to\nexact extension by zero. The exchange representative formula and naturality along the\nresolution show that the displayed lambda, followed by the adjunct of Gamma, is identity.\nThe representative normalization makes Gamma an isomorphism. The open unit is also an\nisomorphism, so the adjunct is invertible. Its inverse is lambda. Descend the resulting\nnatural isomorphism and apply the inverse adjunction formula to get the asserted counit\nexpression. This works for unbounded J because no truncation occurs.",
+   "uses": [
+    "lem-weil-pbc-derived-exchange-module-termwise",
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-derived-exchange-module-termwise",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "def-kun-unbounded-exchange"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B(b); the normalized unbounded representative calculation of the parent proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For unbounded derived functors, normalized proper direct image and extension by zero comparisons commute with vertical and horizontal composition and base change",
+   "results": "8 hits, including Functor.mapDerivedCategoryFactorsh, Functor.mapDerivedCategoryFactors, and LocalizerMorphism.rightDerivedFunctorComparison. These provide localization comparison APIs but no geometric proper/open coherence theorem.",
+   "date": "2026-10-21",
+   "verdict": "No complete match; use the exact-functor factorization and derived transformation uniqueness APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRightDerivedFunctor\"",
+   "results": "12 hits, including Functor.IsRightDerivedFunctor, Functor.isRightDerivedFunctor_iff_of_iso, and the postcomposition-by-left-adjoint instance. These are the generic uniqueness APIs used in the proof, not a geometric proper/open coherence statement.",
+   "date": "2026-10-21",
+   "verdict": "Use generic right-derived uniqueness; no complete geometric match."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*(BaseChange|Pasting)|exactDerivedBaseChangeMap",
+   "results": "0 Mathlib hits. Local project search finds the derived composition and exact adjunction-mate APIs and bounded-below proper/open coherence; the latter does not imply the unbounded statement.",
+   "date": "2026-10-21",
+   "verdict": "No duplicate of these unbounded normalized coherence results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism between proper direct image and extension by zero on unbounded derived categories is the adjunct of the inverse base change map in a cartesian square",
+   "results": "8 hits. Top declarations: CategoryTheory.TwoSquare.isIso_lanBaseChange_app_iff, CategoryTheory.TwoSquare.isIso_lanBaseChange_app, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.e, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id, CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective, CategoryTheory.TwoSquare.lanBaseChange. Generic derived transformation APIs lie in Mathlib.CategoryTheory.Functor.Derived.RightDerived; Kan base-change hits lie in Mathlib.CategoryTheory.GuitartExact.KanExtension. None is the specified geometric proper/open statement.",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived comparison, identity and composition APIs help the proof, but do not specialize in one line to the required etale proper/open normalization or pasting equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.UnboundedProperOpenInterchange",
+  "date": "2026-10-21",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-unbounded-proper-open-interchange",
+   "place": "Proof step 4, separated as an independently stated source result."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UnboundedProperOpenAdjunctionNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnboundedProperOpenAdjunctionNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.unboundedProperOpenAdjunctionNormalization_of_normalization",
+  "statement": "theorem unboundedProperOpenAdjunctionNormalization_of_normalization\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (θ : ∀ {U V W Z : Scheme.{u}}\n        [IsNoetherian U] [IsNoetherian V] [IsNoetherian W] [IsNoetherian Z]\n        (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)\n        [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]\n        (_sq : CommSq k r p i),\n        (r)_*[ModuleCat.{u + 1} A] ⋙ (i)_!open[ModuleCat.{u + 1} A] ≅\n          (k)_!open[ModuleCat.{u + 1} A] ⋙ (p)_*[ModuleCat.{u + 1} A])\n    (Γ : ∀ {U V W Z : Scheme.{u}}\n        [IsNoetherian U] [IsNoetherian V] [IsNoetherian W] [IsNoetherian Z]\n        (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)\n        [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]\n        (_sq : CommSq k r p i),\n        R((r)_*[ModuleCat.{u + 1} A]) ⋙ D((i)_!open[ModuleCat.{u + 1} A]) ≅\n          D((k)_!open[ModuleCat.{u + 1} A]) ⋙ R((p)_*[ModuleCat.{u + 1} A]))\n    (hθ : (∀ {U V W Z : Scheme.{u}}\n        [IsNoetherian U] [IsNoetherian V] [IsNoetherian W] [IsNoetherian Z]\n        (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)\n        [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]\n        (sq : CommSq k r p i)\n        (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)),\n        (θ k r p i sq).hom.app F ≫\n            (p)_*[ModuleCat.{u + 1} A].map\n              ((openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) k).app F) ≫\n            (lowerStarComp (ModuleCat.{u + 1} A) k p).hom.app F =\n          (openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) i).app\n              ((r)_*[ModuleCat.{u + 1} A].obj F) ≫\n            (lowerStarComp (ModuleCat.{u + 1} A) r i (k ≫ p) sq.w).hom.app F))\n    (hΓ : (∀ {U V W Z : Scheme.{u}}\n        [IsNoetherian U] [IsNoetherian V] [IsNoetherian W] [IsNoetherian Z]\n        (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)\n        [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]\n        (sq : CommSq k r p i)\n        (J : CochainComplex (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ)\n        [J.IsKInjective]\n        (I : CochainComplex (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ)\n        [I.IsKInjective]\n        (ρ : ((k)_!open[ModuleCat.{u + 1} A].mapHomologicalComplex (.up ℤ)).obj J ⟶ I)\n        [QuasiIso ρ],\n        D((i)_!open[ModuleCat.{u + 1} A]).map\n            (((r)_*[ModuleCat.{u + 1} A]).rightDerivedFunctorObjQIso J).hom ≫\n          ((i)_!open[ModuleCat.{u + 1} A]).mapDerivedCategoryFactors.hom.app\n            (((r)_*[ModuleCat.{u + 1} A].mapHomologicalComplex (.up ℤ)).obj J) ≫\n          DerivedCategory.Q.map\n            ((NatTrans.mapHomologicalComplex (θ k r p i sq).hom (.up ℤ)).app J) ≫\n          DerivedCategory.Q.map\n            (((p)_*[ModuleCat.{u + 1} A].mapHomologicalComplex (.up ℤ)).map ρ) =\n        (Γ k r p i sq).hom.app (DerivedCategory.Q.obj J) ≫\n          R((p)_*[ModuleCat.{u + 1} A]).map\n            (((k)_!open[ModuleCat.{u + 1} A]).mapDerivedCategoryFactors.hom.app J ≫\n              DerivedCategory.Q.map ρ) ≫\n          (((p)_*[ModuleCat.{u + 1} A]).rightDerivedFunctorObjQIso I).hom)) :\n    (∀ {U V W Z : Scheme.{u}}\n        [IsNoetherian U] [IsNoetherian V] [IsNoetherian W] [IsNoetherian Z]\n        (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)\n        [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]\n        (sq : IsPullback k r p i),\n        ∃ lam : D((k)_!open[ModuleCat.{u + 1} A]) ⋙ R((p)_*[ModuleCat.{u + 1} A]) ⋙\n            D((i)^*[ModuleCat.{u + 1} A]) ≅ R((r)_*[ModuleCat.{u + 1} A]),\n          (∀ K : DerivedCategoryModule A U,\n            lam.hom.app K =\n              (exactDerivedBaseChangeMap (ModuleCat.{u + 1} A) sq.toCommSq).app\n                  (D((k)_!open[ModuleCat.{u + 1} A]).obj K) ≫\n                R((r)_*[ModuleCat.{u + 1} A]).map\n                  (inv ((derivedOpenImmersionLowerShriekUpperStarAdjunction\n                    (ModuleCat.{u + 1} A) k).unit.app K))) ∧\n          ∀ K : DerivedCategoryModule A U,\n            (Γ k r p i sq.toCommSq).hom.app K =\n              D((i)_!open[ModuleCat.{u + 1} A]).map (lam.inv.app K) ≫\n                (derivedOpenImmersionLowerShriekUpperStarAdjunction\n                  (ModuleCat.{u + 1} A) i).counit.app\n                    (R((p)_*[ModuleCat.{u + 1} A]).obj\n                      (D((k)_!open[ModuleCat.{u + 1} A]).obj K)))",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261020T221342-L-4177350",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261020T221342-L-4177350",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

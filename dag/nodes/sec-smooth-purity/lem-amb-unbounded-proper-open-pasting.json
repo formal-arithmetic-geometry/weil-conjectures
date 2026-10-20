@@ -1,0 +1,128 @@
+{
+ "id": "lem-amb-unbounded-proper-open-pasting",
+ "kind": "statement",
+ "title": "Pasting and identity normalizations of unbounded proper/open interchange",
+ "statement": "Let A be a finite commutative ring. Work with ordinary constant-A module sheaves on the small etale sites of Noetherian schemes and their unbounded derived categories [def-weil-pbc-derived-categories]. For every commutative square Q with top open immersion k:U→V, bottom open immersion i:W→Z and proper vertical maps r:U→W and p:V→Z, fix natural isomorphisms theta_Q:r_*⋙i_! ≅ k_!⋙p_* and Gamma_Q:Rr_*⋙Di_! ≅ Dk_!⋙Rp_*. Assume the support normalization: theta_Q,F followed by p_*(k_!F→k_*F) and the direct-image compositor equals i_!r_*F→i_*r_*F followed by the compositor into (ir)_*F=(pk)_*F [lem-cbc-proper-support-sheaf-composition]. Assume also unit normalization on every homotopy object X: Di_!(eta_r,X) followed by Gamma_Q,QhX equals the exact-functor factorization for i_!, followed by Qh(theta_Q,X), the derived unit for p_* on k_!X, and Rp_* of the inverse exact-functor factorization for k_!. For vertically composable Q1,Q2, Gamma_(Q2Q1) equals Di2_! of the inverse direct-image compositor for r1,r2, then Gamma_Q2 at Rr1_*K, then Rp2_*Gamma_Q1, then the direct-image compositor for p1,p2. For horizontally composable Q1,Q2, Gamma_(Q2Q1) equals the descended open-extension compositor for i,j, then Dj_!Gamma_Q1, then Gamma_Q2 at Dk_!K, then Rq_* of the inverse descended open-extension compositor for k,l. All equations use the canonical adjunction-defined derived direct-image compositors and exact termwise open-extension compositors. When the proper maps are identities, Gamma_k,id,id,k is Dk_! of the canonical R(id)_*→Id on U followed by the inverse canonical R(id)_*→Id on V. When the open maps are identities, Gamma_id,r,r,id is the canonical D(id)_!→Id on W followed by Rr_* of its inverse on U. The canonical proper-identity maps are rightDerivedFunctorIsoMapDerivedCategory, followed by descent of lowerStarId and the exact-derived identity compositor. The open-identity maps are descent of the left-adjoint identity isomorphism of the open adjunction, followed by the exact-derived identity compositor.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7C and 0F7D, including their identity specializations"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-derived-categories",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-extension-by-zero",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "def-weil-pbc-kinjective-resolutions",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-cbc-extension-zero-composition",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-extension-by-zero-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "The two composition equations are the conclusions of the separate composition theorem.\nFor proper identity edges, include the sheaf comparison into the common direct image.\nThe support normalization, naturality and the direct-image identity compositor imply\nthat theta followed by the target identity map is k! of the source identity map.\nFor open identity edges use the same monic-inclusion argument and the two open-adjunction\ntriangle identities to identify theta with the open identity comparisons. In either case,\nright-derived transformation uniqueness transports this ordinary identity to derived\ncategories: precompose with the derived unit, use the assumed unit normalization,\nmove the identity comparison past the unit by naturality, and use its termwise\nfactorization. The exact identity factorization follows from the exact-derived natural\nisomorphism and identity APIs; for proper identity maps also compose with the comparison\nbetween the right-derived and exact-derived functors. Cancel the resulting invertible\nidentity comparison to obtain each displayed formula. This argument uses K-injectives\nonly to establish the derivability structure and imposes no boundedness condition.",
+   "uses": [
+    "lem-amb-unbounded-proper-open-composition",
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-unbounded-proper-open-composition",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7C and 0F7D, including their identity specializations; the normalized unbounded representative calculation of the parent proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For unbounded derived functors, normalized proper direct image and extension by zero comparisons commute with vertical and horizontal composition and base change",
+   "results": "8 hits, including Functor.mapDerivedCategoryFactorsh, Functor.mapDerivedCategoryFactors, and LocalizerMorphism.rightDerivedFunctorComparison. These provide localization comparison APIs but no geometric proper/open coherence theorem.",
+   "date": "2026-10-21",
+   "verdict": "No complete match; use the exact-functor factorization and derived transformation uniqueness APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRightDerivedFunctor\"",
+   "results": "12 hits, including Functor.IsRightDerivedFunctor, Functor.isRightDerivedFunctor_iff_of_iso, and the postcomposition-by-left-adjoint instance. These are the generic uniqueness APIs used in the proof, not a geometric proper/open coherence statement.",
+   "date": "2026-10-21",
+   "verdict": "Use generic right-derived uniqueness; no complete geometric match."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*(BaseChange|Pasting)|exactDerivedBaseChangeMap",
+   "results": "0 Mathlib hits. Local project search finds the derived composition and exact adjunction-mate APIs and bounded-below proper/open coherence; the latter does not imply the unbounded statement.",
+   "date": "2026-10-21",
+   "verdict": "No duplicate of these unbounded normalized coherence results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized natural transformation between derived functors equals the identity for identity squares and respects pasting",
+   "results": "8 hits. Top declarations: CategoryTheory.NatTrans.rightDerived_id, CategoryTheory.NatTrans.leftDerived_id, CategoryTheory.Functor.rightDerivedNatTrans_id, CategoryTheory.Functor.leftDerivedNatTrans_id, CategoryTheory.TwoSquare.hId_app, CategoryTheory.NatTrans.leftDerivedToHomotopyCategory_id, CategoryTheory.NatTrans.naturality, CategoryTheory.NatTrans.id_app. Generic derived transformation APIs lie in Mathlib.CategoryTheory.Functor.Derived.RightDerived; Kan base-change hits lie in Mathlib.CategoryTheory.GuitartExact.KanExtension. None is the specified geometric proper/open statement.",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived comparison, identity and composition APIs help the proof, but do not specialize in one line to the required etale proper/open normalization or pasting equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.UnboundedProperOpenInterchange",
+  "date": "2026-10-21",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-unbounded-proper-open-interchange",
+   "place": "Proof step 7, separated as an independently stated source result."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UnboundedProperOpenPasting",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnboundedProperOpenPasting.lean",
+  "declaration": "AlgebraicGeometry.Etale.unboundedProperOpenPasting_of_normalization",
+  "statement": "theorem unboundedProperOpenPasting_of_normalization (A : Type (u + 1)) [CommRing A] [Finite A]\n    (θ : ∀ {U V W Z : Scheme.{u}}\n        [IsNoetherian U] [IsNoetherian V] [IsNoetherian W] [IsNoetherian Z]\n        (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)\n        [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]\n        (_sq : CommSq k r p i),\n        (r)_*[ModuleCat.{u + 1} A] ⋙ (i)_!open[ModuleCat.{u + 1} A] ≅\n          (k)_!open[ModuleCat.{u + 1} A] ⋙ (p)_*[ModuleCat.{u + 1} A])\n    (Γ : ∀ {U V W Z : Scheme.{u}}\n        [IsNoetherian U] [IsNoetherian V] [IsNoetherian W] [IsNoetherian Z]\n        (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)\n        [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]\n        (_sq : CommSq k r p i),\n        R((r)_*[ModuleCat.{u + 1} A]) ⋙ D((i)_!open[ModuleCat.{u + 1} A]) ≅\n          D((k)_!open[ModuleCat.{u + 1} A]) ⋙ R((p)_*[ModuleCat.{u + 1} A]))\n    (hθ : (∀ {U V W Z : Scheme.{u}}\n        [IsNoetherian U] [IsNoetherian V] [IsNoetherian W] [IsNoetherian Z]\n        (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)\n        [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]\n        (sq : CommSq k r p i)\n        (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)),\n        (θ k r p i sq).hom.app F ≫\n            (p)_*[ModuleCat.{u + 1} A].map\n              ((openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) k).app F) ≫\n            (lowerStarComp (ModuleCat.{u + 1} A) k p).hom.app F =\n          (openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) i).app\n              ((r)_*[ModuleCat.{u + 1} A].obj F) ≫\n            (lowerStarComp (ModuleCat.{u + 1} A) r i (k ≫ p) sq.w).hom.app F))\n    (hΓ : (∀ {U V W Z : Scheme.{u}}\n        [IsNoetherian U] [IsNoetherian V] [IsNoetherian W] [IsNoetherian Z]\n        (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)\n        [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]\n        (sq : CommSq k r p i)\n        (X : HomotopyCategory\n          (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (.up ℤ)),\n      ((i)_!open[ModuleCat.{u + 1} A]).mapDerivedCategory.map\n          (((r)_*[ModuleCat.{u + 1} A]).rightDerivedFunctorUnit.app X) ≫\n          (Γ k r p i sq).hom.app (DerivedCategory.Qh.obj X) =\n        ((i)_!open[ModuleCat.{u + 1} A]).mapDerivedCategoryFactorsh.hom.app\n          ((((r)_*[ModuleCat.{u + 1} A]).mapHomotopyCategory (.up ℤ)).obj X) ≫\n          DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory (θ k r p i sq).hom (.up ℤ)).app X) ≫\n          ((p)_*[ModuleCat.{u + 1} A]).rightDerivedFunctorUnit.app\n            ((((k)_!open[ModuleCat.{u + 1} A]).mapHomotopyCategory (.up ℤ)).obj X) ≫\n          ((p)_*[ModuleCat.{u + 1} A]).rightDerivedFunctor.map\n            (((k)_!open[ModuleCat.{u + 1} A]).mapDerivedCategoryFactorsh.inv.app X))) :\n    (∀ {U V W Z S T : Scheme.{u}}\n        [IsNoetherian U] [IsNoetherian V] [IsNoetherian W] [IsNoetherian Z]\n        [IsNoetherian S] [IsNoetherian T]\n        (k : U ⟶ V) (r₁ : U ⟶ W) (p₁ : V ⟶ Z) (i₁ : W ⟶ Z)\n        (r₂ : W ⟶ S) (p₂ : Z ⟶ T) (i₂ : S ⟶ T)\n        [IsOpenImmersion k] [IsOpenImmersion i₁] [IsOpenImmersion i₂]\n        [IsProper r₁] [IsProper p₁] [IsProper r₂] [IsProper p₂]\n        (sq₁ : CommSq k r₁ p₁ i₁) (sq₂ : CommSq i₁ r₂ p₂ i₂)\n        (K : DerivedCategoryModule A U),\n        (Γ k (r₁ ≫ r₂) (p₁ ≫ p₂) i₂ (sq₁.vert_comp sq₂)).hom.app K =\n          D((i₂)_!open[ModuleCat.{u + 1} A]).map\n              ((rightDerivedLowerStarComp (ModuleCat.{u + 1} A) r₁ r₂).inv.app K) ≫\n            (Γ i₁ r₂ p₂ i₂ sq₂).hom.app (R((r₁)_*[ModuleCat.{u + 1} A]).obj K) ≫\n            R((p₂)_*[ModuleCat.{u + 1} A]).map ((Γ k r₁ p₁ i₁ sq₁).hom.app K) ≫\n            (rightDerivedLowerStarComp (ModuleCat.{u + 1} A) p₁ p₂).hom.app\n              (D((k)_!open[ModuleCat.{u + 1} A]).obj K)) ∧\n    (∀ {U V T W Z S : Scheme.{u}}\n        [IsNoetherian U] [IsNoetherian V] [IsNoetherian T] [IsNoetherian W]\n        [IsNoetherian Z] [IsNoetherian S]\n        (k : U ⟶ V) (l : V ⟶ T) (r : U ⟶ W) (p : V ⟶ Z) (q : T ⟶ S)\n        (i : W ⟶ Z) (j : Z ⟶ S)\n        [IsOpenImmersion k] [IsOpenImmersion l] [IsOpenImmersion i] [IsOpenImmersion j]\n        [IsProper r] [IsProper p] [IsProper q]\n        (sq₁ : CommSq k r p i) (sq₂ : CommSq l p q j)\n        (K : DerivedCategoryModule A U),\n        (Γ (k ≫ l) r q (i ≫ j) (sq₁.horiz_comp sq₂)).hom.app K =\n          (Functor.mapDerivedCategoryNatIso\n              (openImmersionLowerShriekComp (ModuleCat.{u + 1} A) i j) ≪≫\n            Functor.mapDerivedCategoryCompIso _ _).hom.app\n              (R((r)_*[ModuleCat.{u + 1} A]).obj K) ≫\n            D((j)_!open[ModuleCat.{u + 1} A]).map ((Γ k r p i sq₁).hom.app K) ≫\n            (Γ l p q j sq₂).hom.app (D((k)_!open[ModuleCat.{u + 1} A]).obj K) ≫\n            R((q)_*[ModuleCat.{u + 1} A]).map\n              ((Functor.mapDerivedCategoryNatIso\n                  (openImmersionLowerShriekComp (ModuleCat.{u + 1} A) k l) ≪≫\n                Functor.mapDerivedCategoryCompIso _ _).inv.app K)) ∧\n    (∀ {U V : Scheme.{u}} [IsNoetherian U] [IsNoetherian V]\n        (k : U ⟶ V) [IsOpenImmersion k] (K : DerivedCategoryModule A U),\n        (Γ k (𝟙 U) (𝟙 V) k ⟨by simp⟩).hom.app K =\n          D((k)_!open[ModuleCat.{u + 1} A]).map\n              ((((𝟙 U)_*[ModuleCat.{u + 1} A]).rightDerivedFunctorIsoMapDerivedCategory ≪≫\n                Functor.mapDerivedCategoryNatIso (lowerStarId (ModuleCat.{u + 1} A) U) ≪≫\n                Functor.mapDerivedCategoryIdIso _).hom.app K) ≫\n            ((((𝟙 V)_*[ModuleCat.{u + 1} A]).rightDerivedFunctorIsoMapDerivedCategory ≪≫\n                Functor.mapDerivedCategoryNatIso (lowerStarId (ModuleCat.{u + 1} A) V) ≪≫\n                Functor.mapDerivedCategoryIdIso _).inv.app\n                  (D((k)_!open[ModuleCat.{u + 1} A]).obj K))) ∧\n    (∀ {U W : Scheme.{u}} [IsNoetherian U] [IsNoetherian W]\n        (r : U ⟶ W) [IsProper r] (K : DerivedCategoryModule A U),\n        (Γ (𝟙 U) r r (𝟙 W) ⟨by simp⟩).hom.app K =\n          (Functor.mapDerivedCategoryNatIso\n              (Adjunction.leftAdjointIdIso\n                (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) (𝟙 W))\n                (upperStarId (ModuleCat.{u + 1} A) W)) ≪≫\n            Functor.mapDerivedCategoryIdIso _).hom.app\n              (R((r)_*[ModuleCat.{u + 1} A]).obj K) ≫\n            R((r)_*[ModuleCat.{u + 1} A]).map\n              ((Functor.mapDerivedCategoryNatIso\n                  (Adjunction.leftAdjointIdIso\n                    (openImmersionLowerShriekUpperStarAdjunction\n                      (ModuleCat.{u + 1} A) (𝟙 U))\n                    (upperStarId (ModuleCat.{u + 1} A) U)) ≪≫\n                Functor.mapDerivedCategoryIdIso _).inv.app K))",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261020T221342-L-4177350",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261020T221342-L-4177350",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

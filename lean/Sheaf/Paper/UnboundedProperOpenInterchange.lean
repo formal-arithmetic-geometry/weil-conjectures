@@ -30,26 +30,20 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.BaseChange.Square
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
+import WeilConjectures.CategoryTheory.DerivedExactCompositionComparison
+import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import Sheaf.AlgebraicGeometry.UnboundedProperOpenAdjunctionNormalization
+import Sheaf.AlgebraicGeometry.UnboundedProperOpenPasting
+import Sheaf.AlgebraicGeometry.UnboundedProperOpenBaseChange
 import Sheaf.AlgebraicGeometry.OpenExtendedInjectiveProperAcyclic
-import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
-import Sheaf.CategoryTheory.FiniteCohomologicalDimensionAcyclicComplex
-import Sheaf.AlgebraicGeometry.ProperTorsionDirectImageBound
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
-import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
 import WeilConjectures.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
-import Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChangeUnderivedCompatibility
-import Sheaf.AlgebraicGeometry.EtaleUnderivedExchangeModuleLinear
-import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
 
 /-!
 # Unbounded proper/open interchange and its canonical normalizations
@@ -66,13 +60,401 @@ canonical composition isomorphisms. No boundedness of the input is imposed.
 
 @[expose] public section
 
-universe u
+universe u v w
 
 open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
+attribute [local instance 2000] Abelian.toPreadditive
+
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+set_option backward.defeqAttrib.useBackward true
+
+private theorem exists_sheafComparison (A : Type (u + 1)) [CommRing A]
+    {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
+    [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]
+    (sq : CommSq k r p i) :
+    ∃ θ : (r)_*[ModuleCat.{u + 1} A] ⋙ (i)_!open[ModuleCat.{u + 1} A] ≅
+        (k)_!open[ModuleCat.{u + 1} A] ⋙ (p)_*[ModuleCat.{u + 1} A],
+      ∀ F, θ.hom.app F ≫
+          (p)_*[ModuleCat.{u + 1} A].map
+            ((openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) k).app F) ≫
+          (lowerStarComp (ModuleCat.{u + 1} A) k p).hom.app F =
+        (openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) i).app
+            ((r)_*[ModuleCat.{u + 1} A].obj F) ≫
+          (lowerStarComp (ModuleCat.{u + 1} A) r i (k ≫ p) sq.w).hom.app F := by
+  classical
+  obtain ⟨L, ι, hι, hp, ho, c, e, hc, he, hce⟩ := properSupportSheafComposition A
+  have hproper {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] : IsIso (ι f) := by
+    have (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) : IsIso ((ι f).app F) :=
+      hp X Y f F
+    exact NatIso.isIso_of_isIso_app _
+  have := hproper r
+  have := hproper p
+  obtain ⟨ok, hk⟩ := ho U V k
+  obtain ⟨oi, hi⟩ := ho W Z i
+  let er : L r ≅ (r)_*[ModuleCat.{u + 1} A] := asIso (ι r)
+  let ep : L p ≅ (p)_*[ModuleCat.{u + 1} A] := asIso (ι p)
+  have hcomp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+      [IsSeparated f] [LocallyOfFiniteType f] [IsSeparated g] [LocallyOfFiniteType g]
+      (h : X ⟶ Z) [IsSeparated h] [LocallyOfFiniteType h] (hh : h = f ≫ g) :
+      ∃ co : L f ⋙ L g ≅ L h, ∀ F,
+        co.hom.app F ≫ (ι h).app F = (ι g).app ((L f).obj F) ≫
+          (g)_*[ModuleCat.{u + 1} A].map ((ι f).app F) ≫
+          (lowerStarComp (ModuleCat.{u + 1} A) f g h hh).hom.app F := by
+    subst h
+    exact ⟨c X Y Z f g, hc X Y Z f g⟩
+  obtain ⟨co, hco⟩ := hcomp r i (k ≫ p) sq.w
+  let t : (r)_*[ModuleCat.{u + 1} A] ⋙ (i)_!open[ModuleCat.{u + 1} A] ≅ L (k ≫ p) :=
+    Functor.isoWhiskerRight er.symm _ ≪≫ Functor.isoWhiskerLeft _ oi ≪≫ co
+  let b : (k)_!open[ModuleCat.{u + 1} A] ⋙ (p)_*[ModuleCat.{u + 1} A] ≅ L (k ≫ p) :=
+    Functor.isoWhiskerLeft _ ep.symm ≪≫ Functor.isoWhiskerRight ok _ ≪≫ c U V Z k p
+  refine ⟨t ≪≫ b.symm, fun F => ?_⟩
+  have ht : t.hom.app F ≫ (ι (k ≫ p)).app F =
+      (openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) i).app
+          ((r)_*[ModuleCat.{u + 1} A].obj F) ≫
+        (lowerStarComp (ModuleCat.{u + 1} A) r i (k ≫ p) sq.w).hom.app F := by
+    dsimp only [t, Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Iso.symm_hom]
+    simp only [Category.assoc]
+    rw [hco]
+    simp only [← Category.assoc, ← NatTrans.comp_app, hi]
+    rw [(openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) i).naturality]
+    simp only [Category.assoc]
+    change _ ≫ (i)_*[ModuleCat.{u + 1} A].map (er.inv.app F) ≫
+      (i)_*[ModuleCat.{u + 1} A].map (er.hom.app F) ≫ _ = _
+    rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app,
+      CategoryTheory.Functor.map_id, Category.id_comp]
+  have hb : b.hom.app F ≫ (ι (k ≫ p)).app F =
+      (p)_*[ModuleCat.{u + 1} A].map
+          ((openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) k).app F) ≫
+        (lowerStarComp (ModuleCat.{u + 1} A) k p).hom.app F := by
+    dsimp only [b, Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Iso.symm_hom]
+    simp only [Category.assoc]
+    rw [hc, reassoc_of% (ι p).naturality (ok.hom.app F)]
+    change ep.inv.app _ ≫ ep.hom.app _ ≫ _ = _
+    rw [Iso.inv_hom_id_app_assoc, ← Functor.map_comp_assoc, ← NatTrans.comp_app, hk]
+  dsimp only [Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom]
+  rw [← hb, Category.assoc, Iso.inv_hom_id_app_assoc]
+  exact ht
+
+private theorem exists_termwise_injective_resolution
+    {C : Type v} [Category.{w} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
+    (J : CochainComplex C ℤ) :
+    ∃ J' : CochainComplex C ℤ, J'.IsKInjective ∧
+      (∀ n, Injective (J'.X n)) ∧ ∃ a : J ⟶ J', QuasiIso a := by
+  refine ⟨(CochainComplex.kInjectiveResolutionFunctor.{w} C).obj J,
+    inferInstance, fun n => inferInstance,
+    (CochainComplex.toKInjectiveResolution.{w} C).app J,
+    (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{w} C J).2⟩
+
+private theorem derivedUnit_of_termwise_injective_resolution
+    {C₀ C₁ C₂ : Type v} [Category.{w} C₀] [Category.{w} C₁] [Category.{w} C₂]
+    [Abelian C₀] [Abelian C₁] [Abelian C₂]
+    [HasDerivedCategory C₀] [HasDerivedCategory C₁] [HasDerivedCategory C₂]
+    [IsGrothendieckAbelian.{w} C₀] [IsGrothendieckAbelian.{w} C₁]
+    [HasInjectiveResolutions C₁]
+    [Abelian.HasKInjectiveResolutions C₀] [Abelian.HasKInjectiveResolutions C₁]
+    (P : C₁ ⥤ C₂) (K : C₀ ⥤ C₁) [P.Additive] [K.Additive]
+    [PreservesFiniteLimits P]
+    (hacyclic : ∀ M : CochainComplex C₁ ℤ, M.Acyclic →
+      (∀ n, P.rightAcyclic (M.X n)) → ((P.mapHomologicalComplex (.up ℤ)).obj M).Acyclic)
+    (hterm : ∀ (F : C₀) [Injective F], P.rightAcyclic (K.obj F))
+    (J : CochainComplex C₀ ℤ) [J.IsKInjective] :
+    IsIso (P.rightDerivedFunctorUnit.app
+      ((K.mapHomotopyCategory (.up ℤ)).obj ((HomotopyCategory.quotient _ _).obj J))) := by
+  obtain ⟨J', hJ', hterms, a, hqa⟩ := exists_termwise_injective_resolution J
+  have := hJ'
+  have (n : ℤ) := hterms n
+  have := hqa
+  have ha : IsIso ((HomotopyCategory.quotient _ _).map a) := by
+    have h := (CochainComplex.IsKInjective.quasiIso_iff a).mp inferInstance
+    rwa [← HomotopyCategory.inverseImage_quotient_isomorphisms,
+      MorphismProperty.inverseImage_iff, MorphismProperty.isomorphisms.iff] at h
+  have hJ' : IsIso (P.rightDerivedFunctorUnit.app
+      ((HomotopyCategory.quotient _ _).obj
+        ((K.mapHomologicalComplex (.up ℤ)).obj J'))) :=
+    P.isIso_rightDerivedFunctorUnit_app_of_rightAcyclic_of_map_acyclic
+      hacyclic _ (fun n => hterm (J'.X n))
+  exact (NatTrans.isIso_app_iff_of_iso P.rightDerivedFunctorUnit
+    ((K.mapHomotopyCategory (.up ℤ)).mapIso
+      (asIso ((HomotopyCategory.quotient _ _).map a)))).2 hJ'
+
+private theorem openExtension_derivedUnit_isIso
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
+    [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]
+    (sq : CommSq k r p i)
+    (J : CochainComplex (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ)
+    [J.IsKInjective] :
+    IsIso (((p)_*[ModuleCat.{u + 1} A]).rightDerivedFunctorUnit.app
+      (((k)_!open[ModuleCat.{u + 1} A].mapHomotopyCategory (.up ℤ)).obj
+        ((HomotopyCategory.quotient _ _).obj J))) := by
+  let P := (p)_*[ModuleCat.{u + 1} A]
+  let K := (k)_!open[ModuleCat.{u + 1} A]
+  have hacyclic (M : CochainComplex (Sheaf V.smallEtaleTopology
+      (ModuleCat.{u + 1} A)) ℤ) (hM : M.Acyclic)
+      (hM' : ∀ n, P.rightAcyclic (M.X n)) :
+      ((P.mapHomologicalComplex (.up ℤ)).obj M).Acyclic := by
+    choose d hd using exists_isZero_upperStar_rightDerived_lowerStar_of_isProper A
+      (isAddTorsion_of_finite : IsAddTorsion A) p
+    exact hM.map_of_rightAcyclic_of_forall_isZero P
+      (fun z => (Z.algClosurePoint z)^*[ModuleCat.{u + 1} A])
+      (isZero_of_forall_isZero_upperStar_algClosurePoint A) d hd hM'
+  have hterm (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) [Injective F] :
+      P.rightAcyclic (K.obj F) := by
+    intro q
+    exact (isZero_higherDirectImage_openImmersionLowerShriek_injective A
+      k i r p sq.w F (q + 1) (by omega)).of_iso
+        (P.homologyRightDerivedFunctorPlusObjSingleFunctorIso (K.obj F) (q + 1)).symm
+  exact derivedUnit_of_termwise_injective_resolution
+    (C₀ := Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))
+    (C₁ := Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A))
+    (C₂ := Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A)) P K hacyclic hterm J
+
+private theorem comparison_representative
+    {C₀ C₁ C₂ C₃ : Type v}
+    [Category.{w} C₀] [Category.{w} C₁] [Category.{w} C₂] [Category.{w} C₃]
+    [Abelian C₀] [Abelian C₁] [Abelian C₂] [Abelian C₃]
+    [HasDerivedCategory C₀] [HasDerivedCategory C₁]
+    [HasDerivedCategory C₂] [HasDerivedCategory C₃]
+    [Abelian.HasKInjectiveResolutions C₀] [Abelian.HasKInjectiveResolutions C₁]
+    (R : C₀ ⥤ C₂) (P : C₁ ⥤ C₃) (K : C₀ ⥤ C₁) (E : C₂ ⥤ C₃)
+    [R.Additive] [P.Additive] [K.Additive] [E.Additive]
+    [PreservesFiniteLimits K] [PreservesFiniteColimits K]
+    [PreservesFiniteLimits E] [PreservesFiniteColimits E]
+    (θ : R ⋙ E ≅ K ⋙ P)
+    (Γ : R.rightDerivedFunctor ⋙ E.mapDerivedCategory ≅
+      K.mapDerivedCategory ⋙ P.rightDerivedFunctor)
+    (J : CochainComplex C₀ ℤ) [J.IsKInjective]
+    (I : CochainComplex C₁ ℤ) [I.IsKInjective]
+    (ρ : (K.mapHomologicalComplex (.up ℤ)).obj J ⟶ I) [QuasiIso ρ]
+    (h' :
+      E.mapDerivedCategory.map (R.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ (.up
+        ℤ)).obj J)) ≫
+          Γ.hom.app (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj J)) =
+        E.mapDerivedCategoryFactorsh.hom.app ((R.mapHomotopyCategory (.up ℤ)).obj
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj J)) ≫
+          DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory θ.hom (.up ℤ)).app
+            ((HomotopyCategory.quotient _ (.up ℤ)).obj J)) ≫
+          P.rightDerivedFunctorUnit.app ((K.mapHomotopyCategory (.up ℤ)).obj
+            ((HomotopyCategory.quotient _ (.up ℤ)).obj J)) ≫
+          P.rightDerivedFunctor.map (K.mapDerivedCategoryFactorsh.inv.app
+            ((HomotopyCategory.quotient _ (.up ℤ)).obj J))) :
+        E.mapDerivedCategory.map
+            ((R).rightDerivedFunctorObjQIso J).hom ≫
+          (E).mapDerivedCategoryFactors.hom.app
+            ((R.mapHomologicalComplex (.up ℤ)).obj J) ≫
+          DerivedCategory.Q.map
+            ((NatTrans.mapHomologicalComplex θ.hom (.up ℤ)).app J) ≫
+          DerivedCategory.Q.map
+            ((P.mapHomologicalComplex (.up ℤ)).map ρ) =
+        Γ.hom.app (DerivedCategory.Q.obj J) ≫
+          P.rightDerivedFunctor.map
+            ((K).mapDerivedCategoryFactors.hom.app J ≫
+              DerivedCategory.Q.map ρ) ≫
+          ((P).rightDerivedFunctorObjQIso I).hom := by
+  let qJ := (HomotopyCategory.quotient _ (.up ℤ)).obj J
+  have hK : K.mapDerivedCategoryFactorsh.inv.app qJ ≫
+      K.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso C₀).hom.app J) ≫
+        K.mapDerivedCategoryFactors.hom.app J =
+      (DerivedCategory.quotientCompQhIso C₁).hom.app
+        ((K.mapHomologicalComplex (.up ℤ)).obj J) := by
+    rw [← cancel_epi (K.mapDerivedCategoryFactorsh.hom.app qJ),
+      Iso.hom_inv_id_app_assoc, K.mapDerivedCategoryFactorsh_hom_app]
+    simp [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv]
+  have hE : E.mapDerivedCategory.map
+        ((DerivedCategory.quotientCompQhIso C₂).inv.app
+          ((R.mapHomologicalComplex (.up ℤ)).obj J)) ≫
+      E.mapDerivedCategoryFactorsh.hom.app ((R.mapHomotopyCategory (.up ℤ)).obj qJ) =
+      E.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj J) ≫
+        (DerivedCategory.quotientCompQhIso C₃).inv.app
+          ((E.mapHomologicalComplex (.up ℤ)).obj
+            ((R.mapHomologicalComplex (.up ℤ)).obj J)) := by
+    change E.mapDerivedCategory.map _ ≫ E.mapDerivedCategoryFactorsh.hom.app
+      ((HomotopyCategory.quotient _ _).obj
+        ((R.mapHomologicalComplex (.up ℤ)).obj J)) = _
+    rw [E.mapDerivedCategoryFactorsh_hom_app]
+    simp [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
+      ← Functor.map_comp_assoc]
+  have hn := Γ.hom.naturality ((DerivedCategory.quotientCompQhIso C₀).hom.app J)
+  have ht := (DerivedCategory.quotientCompQhIso C₃).inv.naturality
+    ((NatTrans.mapHomologicalComplex θ.hom (.up ℤ)).app J)
+  have hu : E.mapDerivedCategory.map (R.rightDerivedFunctorUnitQ J) ≫
+      Γ.hom.app (DerivedCategory.Q.obj J) ≫
+        P.rightDerivedFunctor.map (K.mapDerivedCategoryFactors.hom.app J) =
+      E.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj J) ≫
+        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex θ.hom (.up ℤ)).app J) ≫
+          P.rightDerivedFunctorUnitQ ((K.mapHomologicalComplex (.up ℤ)).obj J) := by
+    simp only [Functor.comp_map] at hn ht
+    simp only [Functor.rightDerivedFunctorUnitQ, Functor.map_comp, Category.assoc]
+    rw [reassoc_of% hn, reassoc_of% h']
+    simp only [← P.rightDerivedFunctor.map_comp]
+    rw [hK]
+    dsimp only [qJ] at hE
+    rw [reassoc_of% hE]
+    erw [← reassoc_of% ht]
+    rfl
+  rw [R.rightDerivedFunctorUnitQ_eq] at hu
+  have hρ := P.rightDerivedFunctorUnitQ_naturality ρ
+  rw [P.rightDerivedFunctorUnitQ_eq] at hρ
+  rw [← cancel_epi (E.mapDerivedCategory.map (R.rightDerivedFunctorObjQIso J).inv),
+    ← cancel_mono (P.rightDerivedFunctorObjQIso I).inv]
+  simp only [← E.mapDerivedCategory.map_comp_assoc, Iso.inv_hom_id,
+    CategoryTheory.Functor.map_id, Category.id_comp, Category.assoc,
+    Iso.hom_inv_id, Category.comp_id]
+  rw [hρ, ← reassoc_of% hu]
+  simp only [Functor.map_comp]
+
+
+private structure NormalizedDerivedComparison
+    {C₀ C₁ C₂ C₃ : Type v}
+    [Category.{w} C₀] [Category.{w} C₁] [Category.{w} C₂] [Category.{w} C₃]
+    [Abelian C₀] [Abelian C₁] [Abelian C₂] [Abelian C₃]
+    [HasDerivedCategory C₀] [HasDerivedCategory C₁]
+    [HasDerivedCategory C₂] [HasDerivedCategory C₃]
+    [Abelian.HasKInjectiveResolutions C₀] [Abelian.HasKInjectiveResolutions C₁]
+    (R : C₀ ⥤ C₂) (P : C₁ ⥤ C₃) (K : C₀ ⥤ C₁) (E : C₂ ⥤ C₃)
+    [R.Additive] [P.Additive] [K.Additive] [E.Additive]
+    [PreservesFiniteLimits K] [PreservesFiniteColimits K]
+    [PreservesFiniteLimits E] [PreservesFiniteColimits E]
+    (θ : R ⋙ E ≅ K ⋙ P) where
+  comparison : R.rightDerivedFunctor ⋙ E.mapDerivedCategory ≅
+        K.mapDerivedCategory ⋙ P.rightDerivedFunctor
+  unit_normalization : (∀ X : HomotopyCategory C₀ (.up ℤ),
+      E.mapDerivedCategory.map (R.rightDerivedFunctorUnit.app X) ≫
+          comparison.hom.app (DerivedCategory.Qh.obj X) =
+        E.mapDerivedCategoryFactorsh.hom.app ((R.mapHomotopyCategory (.up ℤ)).obj X) ≫
+          DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory θ.hom (.up ℤ)).app X) ≫
+          P.rightDerivedFunctorUnit.app ((K.mapHomotopyCategory (.up ℤ)).obj X) ≫
+          P.rightDerivedFunctor.map (K.mapDerivedCategoryFactorsh.inv.app X))
+  representative_normalization : ∀ (J : CochainComplex C₀ ℤ)
+        [J.IsKInjective]
+        (I : CochainComplex C₁ ℤ)
+        [I.IsKInjective]
+        (ρ : (K.mapHomologicalComplex (.up ℤ)).obj J ⟶ I)
+        [QuasiIso ρ],
+        E.mapDerivedCategory.map
+            ((R).rightDerivedFunctorObjQIso J).hom ≫
+          (E).mapDerivedCategoryFactors.hom.app
+            ((R.mapHomologicalComplex (.up ℤ)).obj J) ≫
+          DerivedCategory.Q.map
+            ((NatTrans.mapHomologicalComplex θ.hom (.up ℤ)).app J) ≫
+          DerivedCategory.Q.map
+            ((P.mapHomologicalComplex (.up ℤ)).map ρ) =
+        comparison.hom.app (DerivedCategory.Q.obj J) ≫
+          P.rightDerivedFunctor.map
+            ((K).mapDerivedCategoryFactors.hom.app J ≫
+              DerivedCategory.Q.map ρ) ≫
+          ((P).rightDerivedFunctorObjQIso I).hom
+
+@[irreducible]
+private noncomputable def constructedDerivedComparison
+    {C₀ C₁ C₂ C₃ : Type v}
+    [Category.{w} C₀] [Category.{w} C₁] [Category.{w} C₂] [Category.{w} C₃]
+    [Abelian C₀] [Abelian C₁] [Abelian C₂] [Abelian C₃]
+    [HasDerivedCategory C₀] [HasDerivedCategory C₁]
+    [HasDerivedCategory C₂] [HasDerivedCategory C₃]
+    [Abelian.HasKInjectiveResolutions C₀] [Abelian.HasKInjectiveResolutions C₁]
+    (R : C₀ ⥤ C₂) (P : C₁ ⥤ C₃) (K : C₀ ⥤ C₁) (E : C₂ ⥤ C₃)
+    [R.Additive] [P.Additive] [K.Additive] [E.Additive]
+    [PreservesFiniteLimits K] [PreservesFiniteColimits K]
+    [PreservesFiniteLimits E] [PreservesFiniteColimits E]
+    (hP : ∀ (J : CochainComplex C₀ ℤ) [J.IsKInjective],
+      IsIso (P.rightDerivedFunctorUnit.app ((K.mapHomotopyCategory (.up ℤ)).obj
+        ((HomotopyCategory.quotient _ _).obj J))))
+    (θ : R ⋙ E ≅
+      K ⋙ P) :
+    NormalizedDerivedComparison R P K E θ := by
+  let α := Functor.rightDerivedFunctorCompMapDerivedCategoryUnit R E
+  let β := Functor.mapDerivedCategoryCompRightDerivedFunctorUnit K P
+  have hβ : (K.mapDerivedCategory ⋙ P.rightDerivedFunctor).IsRightDerivedFunctor β
+      (HomotopyCategory.quasiIso _ (.up ℤ)) := by
+    refine (HomotopyCategory.KInjectives.localizerMorphism_derives
+      ((K ⋙ P).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)).isRightDerivedFunctor_of_isIso
+      β (fun X => ?_)
+    obtain ⟨J, _, rfl⟩ := HomotopyCategory.KInjectives.mk_surjective X
+    change IsIso (β.app ((HomotopyCategory.quotient _ _).obj J))
+    have hPJ : IsIso (P.rightDerivedFunctorUnit.app
+        ((K.mapHomotopyCategory (.up ℤ)).obj
+          ((HomotopyCategory.quotient _ _).obj J))) :=
+      hP J
+    dsimp only [β]
+    rw [Functor.mapDerivedCategoryCompRightDerivedFunctorUnit_app]
+    infer_instance
+  let θh : (R ⋙ E).mapHomotopyCategory (.up ℤ) ≅
+      (K ⋙ P).mapHomotopyCategory (.up ℤ) :=
+    { hom := NatTrans.mapHomotopyCategory θ.hom (.up ℤ)
+      inv := NatTrans.mapHomotopyCategory θ.inv (.up ℤ)
+      hom_inv_id := by rw [← NatTrans.mapHomotopyCategory_comp, θ.hom_inv_id,
+        NatTrans.mapHomotopyCategory_id]
+      inv_hom_id := by rw [← NatTrans.mapHomotopyCategory_comp, θ.inv_hom_id,
+        NatTrans.mapHomotopyCategory_id] }
+  let Γ := Functor.rightDerivedNatIso
+    (R.rightDerivedFunctor ⋙ E.mapDerivedCategory)
+    (K.mapDerivedCategory ⋙ P.rightDerivedFunctor) α β
+    (HomotopyCategory.quasiIso _ (.up ℤ))
+    (Functor.isoWhiskerRight θh DerivedCategory.Qh)
+  have hn (X : HomotopyCategory C₀ (.up ℤ)) :
+      E.mapDerivedCategory.map (R.rightDerivedFunctorUnit.app X) ≫
+          Γ.hom.app (DerivedCategory.Qh.obj X) =
+        E.mapDerivedCategoryFactorsh.hom.app ((R.mapHomotopyCategory (.up ℤ)).obj X) ≫
+          DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory θ.hom (.up ℤ)).app X) ≫
+          P.rightDerivedFunctorUnit.app ((K.mapHomotopyCategory (.up ℤ)).obj X) ≫
+          P.rightDerivedFunctor.map (K.mapDerivedCategoryFactorsh.inv.app X) := by
+    obtain ⟨J, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
+    have h := Functor.rightDerivedNatTrans_app
+      (R.rightDerivedFunctor ⋙ E.mapDerivedCategory)
+      (K.mapDerivedCategory ⋙ P.rightDerivedFunctor) α β
+      (HomotopyCategory.quasiIso _ (.up ℤ))
+      (Functor.whiskerRight (NatTrans.mapHomotopyCategory θ.hom (.up ℤ)) DerivedCategory.Qh)
+      ((HomotopyCategory.quotient _ _).obj J)
+    change α.app _ ≫ Γ.hom.app _ = _ at h
+    let qJ := (HomotopyCategory.quotient _ (.up ℤ)).obj J
+    have h' :
+        E.mapDerivedCategory.map (R.rightDerivedFunctorUnit.app qJ) ≫
+            Γ.hom.app (DerivedCategory.Qh.obj qJ) =
+          E.mapDerivedCategoryFactorsh.hom.app ((R.mapHomotopyCategory (.up ℤ)).obj qJ) ≫
+            DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory θ.hom (.up ℤ)).app qJ) ≫
+            P.rightDerivedFunctorUnit.app ((K.mapHomotopyCategory (.up ℤ)).obj qJ) ≫
+            P.rightDerivedFunctor.map (K.mapDerivedCategoryFactorsh.inv.app qJ) := by
+      have hα := Functor.rightDerivedFunctorCompMapDerivedCategoryUnit_app' R E qJ
+      have hβ : β.app qJ =
+          P.rightDerivedFunctorUnit.app ((K.mapHomotopyCategory (.up ℤ)).obj qJ) ≫
+            P.rightDerivedFunctor.map (K.mapDerivedCategoryFactorsh.inv.app qJ) := by
+        have hc : (Functor.mapHomotopyCategoryCompIso
+            (Iso.refl (K ⋙ P)) (.up ℤ)).inv.app qJ = 𝟙 _ := by
+          change (HomotopyCategory.quotient _ _).map (𝟙 _) = 𝟙 _
+          exact CategoryTheory.Functor.map_id _ _
+        dsimp only [β]
+        rw [Functor.mapDerivedCategoryCompRightDerivedFunctorUnit_app K P,
+          hc, CategoryTheory.Functor.map_id, Category.id_comp]
+      change α.app qJ ≫ Γ.hom.app (DerivedCategory.Qh.obj qJ) =
+        DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory θ.hom (.up ℤ)).app qJ) ≫
+          β.app qJ at h
+      conv_rhs at h => rw [hβ]
+      calc
+        _ = E.mapDerivedCategoryFactorsh.hom.app
+            ((R.mapHomotopyCategory (.up ℤ)).obj qJ) ≫
+            α.app qJ ≫ Γ.hom.app (DerivedCategory.Qh.obj qJ) := by
+          symm
+          rw [hα]
+          simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+        _ = _ := by
+          simpa only [Category.assoc] using
+            congrArg (fun f => E.mapDerivedCategoryFactorsh.hom.app
+              ((R.mapHomotopyCategory (.up ℤ)).obj qJ) ≫ f) h
+    exact h'
+  refine ⟨Γ, hn, fun J _ I _ ρ _ => ?_⟩
+  exact comparison_representative R P K E θ Γ J I ρ (hn _)
+
+set_option linter.unusedVariables false in
 /-- Unbounded proper/open interchange, including its representative, adjunction, pasting,
 identity and arbitrary base-change normalizations.
 Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D and 0F7F
@@ -80,186 +462,55 @@ Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D and 0F7F
 
 Proof:
 
-1. Write $\theta_Q:i_!r_*\cong p_*k_!$ for the sheaf identification in the statement. Indeed,
-properness includes separatedness and finite type, so the proper-support composition theorem
-applies to both paths $ir=pk$; its proper and open specializations identify both sides with the
-same subsheaf of $(ir)_*$. For an open immersion, the diagonal is an isomorphism, so it is
-separated; on an affine target, principal affine opens contained in the image cover the source and
-their coordinate rings are one-element localizations, hence finitely generated algebras. Thus the
-open edges are locally of finite type as required. Its naturality makes $\theta_Q$ an isomorphism
-of complexes on applying it termwise. Choose a K-injective representative $J$ of $K$ and a quasi-
-isomorphism $\rho:k_!J\to I$ with $I$ K-injective. Define $\Gamma_{Q,K}$ to be the class of
-$p_*\rho\circ\theta_{Q,J}$. The source is $Di_!Rr_*K$ and the target is $Rp_*Dk_!K$, by
-K-injective computation and exactness of extension by zero. This is independent of the resolutions
-and natural in $K$: a morphism of derived inputs has a unique homotopy-class representative
-$f:J\to J'$; the derived map induced by $k_!f$ has a unique representative $g:I\to I'$ with
-$g\rho=\rho'k_!f$ up to homotopy. Naturality of $\theta_Q$ gives the required commuting square
-after $p_*$. Additive functors preserve a homotopy $dh+hd$ termwise, so these equalities hold in
-the derived category. For a change of resolutions, $f$ and $g$ are homotopy equivalences, giving
-the same map under the canonical identifications.
+1. Construct the normalized sheaf comparison from properSupportSheafComposition: the two paths
+through the square identify r_* followed by i_! and k_! followed by p_* with the same
+proper-support functor for k≫p=r≫i. Use the proper identifications and the open identifications,
+and cancel the common composition isomorphism to obtain exactly the stated normalization into the
+common direct image. This is exists_sheafComparison in Lean.
 Uses: lem-cbc-proper-support-sheaf-composition, def-weil-proper-morphism, def-weil-open-immersion,
-def-weil-finite-type-morphism, prop-weil-pbc-kinjective-resolutions-exist, lem-weil-pbc-
-kinjective-total-derived, lem-weil-pbc-kinjective-hom-derived, lem-weil-pbc-extension-by-zero-
-exact.
+def-weil-finite-type-morphism.
 
-2. There is a finite cohomological-dimension bound for $p_*$ on all constant-$A$ module sheaves.
-The assumed finite affine cover of $Z$ is a finite cover by quasi-compact spaces, so $Z$ is quasi-
-compact. Since $p$ is of finite type, the fibre-dimension-bound theorem gives an integer $d\geq0$
-bounding the dimensions of all fibres of $p$. Choose $N\geq1$ with $N1_A=0$ (the additive order of
-$1_A$, and $N=1$ for the zero ring). Every $A$-module sheaf has torsion underlying abelian sheaf,
-since $Nm=(N1_A)m=0$. The proper torsion bound gives $R^qp_*U(M)=0$ for $q>2d$. The bounded-below
-module/abelian direct-image comparison, applied to the single sheaf $M$ and then to degree-$q$
-cohomology, identifies this with the underlying abelian sheaf of $R^qp_*M$; hence $R^qp_*M=0$ for
-$q>2d$. This use of the bounded-below comparison is only for sheaves in degree zero, not for
-unbounded complexes. Module sheaf categories are Grothendieck abelian and $p_*$ is additive and
-left exact, so the finite-cd acyclic-complex theorem applies with bound $2d$.
-Uses: lem-weil-pbc-affine-scheme-qcqs, def-weil-proper-morphism, lem-fin-finite-type-fibre-
-dimension-bound, lem-kun-proper-torsion-cd-bound, lem-weil-pbc-module-abelian-derived-direct-
-image-comparison, lem-weil-pbc-module-sheaves-grothendieck-abelian, def-weil-pbc-direct-image,
-lem-kun-finite-cd-acyclic-complex.
+2. For P=p_* and K=k_!, prove the derived unit on KJ is invertible for every K-injective J.
+Resolve J by a K-injective complex Jprime whose terms are injective. The open-extended-injective
+proper-acyclicity theorem says every term of KJprime is P-acyclic. For an exact complex of
+P-acyclic objects use the adopted-source pointwise bound
+exists_isZero_upperStar_rightDerived_lowerStar_of_isProper, the joint conservativity
+isZero_of_forall_isZero_upperStar_algClosurePoint, and
+HomologicalComplex.Acyclic.map_of_rightAcyclic_of_forall_isZero. Unlike the previous global-bound
+route, the bound may depend on the geometric point. The right-acyclic complex API makes the
+canonical unit invertible on KJprime. The resolution J→Jprime is a homotopy equivalence because
+both are K-injective, so naturality transports invertibility to KJ. This is
+openExtension_derivedUnit_isIso.
+Uses: lem-cbc-open-extended-injective-proper-acyclic, lem-pur-kinjective-degreewise-existence,
+lem-kun-pointwise-finite-cd-exact-complex, lem-weil-pbc-kinjective-hom-derived,
+lem-weil-pbc-module-sheaves-grothendieck-abelian.
 
-3. Choose $J$ in Step 1 to be K-injective with every term injective, using the injective-term
-K-injective resolution theorem in the Grothendieck category of module sheaves. For every degree
-$n$, the open-extended-injective acyclicity lemma applied to precisely $(p,r,i,k)$ gives
-$R^qp_*(k_!J^n)=0$ for $q>0$; it requires neither a cartesian square nor a dimension bound. Thus
-$k_!J$ is an unbounded complex of $p_*$-acyclic objects. The finite-cd theorem from Step 2 says
-that its canonical map to its total derived image is an isomorphism, and this map is represented
-by $p_*\rho:p_*k_!J\to p_*I$. Therefore $\Gamma_{Q,K}$ is an isomorphism. An arbitrary K-injective
-representative is homotopy equivalent to the chosen injective-term one; $r_*$, $i_!$ and $k_!$
-preserve this homotopy equivalence termwise. Resolution independence from Step 1 then gives the
-asserted formula and isomorphism for every K-injective representative. No boundedness of $K$ has
-been used.
-Uses: lem-weil-pbc-module-sheaves-grothendieck-abelian, lem-pur-kinjective-degreewise-existence,
-lem-cbc-open-extended-injective-proper-acyclic, lem-kun-finite-cd-acyclic-complex, lem-weil-pbc-
-kinjective-total-derived, lem-weil-pbc-kinjective-hom-derived.
+3. Work first with four abstract abelian categories. The canonical unit alpha for RR⋙DE is
+right-derived because E is exact. The unit beta for DK⋙RP is right-derived by the K-injective
+derivability structure: beta is invertible on K-injectives by the preceding step. Apply the
+universal-property rightDerivedNatIso to the termwise descent of theta. Its factorization
+equation, together with the exact-functor factorsh comparison, gives the unit normalization on
+every homotopy object. The private NormalizedDerivedComparison record retains the constructed
+isomorphism and both proved normalizations. Its irreducible constructor constructedDerivedComparison
+builds the isomorphism directly, and its fields provide the normalization API.
+Uses: lem-weil-pbc-extension-by-zero-exact, lem-weil-pbc-kinjective-total-derived,
+lem-weil-pbc-localization-universal-property.
 
-4. For cartesian $Q$ verify the open-adjunction normalization, including its direction. The sheaf
-adjunction $i_!\dashv i^*$ descends termwise to the homotopy categories and then to derived
-categories, since both functors are exact; the triangle identities descend with the units and
-counits. The open unit $1\to i^*Di_!$ is an isomorphism: on any etale object over the open, the
-extension-by-zero presheaf and all its covering restrictions are just the original sheaf. Open
-inverse image is restriction, compatibly with modules. Also $k^*$ takes K-injectives to
-K-injectives, being right adjoint to the exact functor $k_!$. On $k_!J\xrightarrow{\rho}I$, let
-$\eta_k:J\xrightarrow{\sim}k^*k_!J$ be the open unit and put $v=k^*\rho\circ\eta_k:J\to k^*I$.
-This is a quasi-isomorphism between K-injectives, hence $r_*v$ is a homotopy equivalence. In the
-formula for $\lambda_Q$, the exchange evaluated on $I$ is represented by
-$\operatorname{Ex}^0_{p,i,I}:i^*p_*I\to r_*k^*I$, and $\lambda_Q$ is
-$(r_*v)^{-1}\operatorname{Ex}^0_{p,i,I}$. This follows directly by taking the mate of the termwise
-counit in the definition of the unbounded exchange (the same calculation is written in Step 8). By
-restriction of sections and the definition of $\theta_Q$ as equality of underlying sections,
-$\operatorname{Ex}^0_{p,i,k_!J}\circ i^*\theta_{Q,J}\circ\eta_i=r_*\eta_k$. Naturality with
-respect to $\rho$ therefore gives $\operatorname{Ex}^0_{p,i,I}\circ
-i^*\Gamma_{Q,K}\circ\eta_i=r_*v$. Hence $\lambda_Q\circ i^*\Gamma_{Q,K}\circ\eta_i=1$. Since
-$\Gamma_Q$ and $\eta_i$ are isomorphisms, this says exactly that the adjunct of $\Gamma_Q$ is
-$\lambda_Q^{-1}$, and the inverse adjunction formula gives $\Gamma_Q=\varepsilon_i\circ
-Di_!(\lambda_Q^{-1})$.
-Uses: lem-weil-pbc-extension-by-zero-adjunction, lem-weil-pbc-extension-by-zero-exact, prop-weil-
-pbc-inverse-image-modules-exact, lem-weil-pbc-termwise-adjunction-homotopy, lem-weil-pbc-
-localization-universal-property, def-weil-pbc-extension-by-zero, lem-weil-pbc-etale-inverse-image-
-restriction, lem-weil-pbc-right-adjoint-preserves-kinjective, lem-weil-pbc-kinjective-hom-derived,
-def-kun-unbounded-exchange, def-weil-pbc-underived-exchange, lem-cbc-proper-support-sheaf-
-composition.
+4. Prove comparison_representative abstractly. Transport the unit normalization along
+quotientCompQhIso to the complex quotient Q, using the exact-functor factors. Apply naturality of
+the derived unit to any quasi-isomorphism rho:KJ→I with I K-injective. The
+rightDerivedFunctorObjQIso identifications on J and I turn the resulting equality into the
+representative formula of the statement. This works for every rho and J, not just the chosen
+resolutions. Apply the abstract construction to every geometric square.
+Uses: lem-weil-pbc-kinjective-total-derived, lem-weil-pbc-extension-by-zero-exact.
 
-5. The composites of the proper edges are proper by proper-composition stability. For vertical
-pasting choose $J$ K-injective on the top left, and $\rho:k_{1!}J\to I$ with $I$ K-injective on
-the top right. Direct images preserve K-injectives: they are right adjoints to exact constant-
-coefficient inverse images. Thus $r_{1,*}J$ and $p_{1,*}I$ compute the iterated derived direct
-images without another replacement. The map $a=p_{1,*}\rho\circ\theta_{Q_1,J}:i_{1!}r_{1,*}J\to
-p_{1,*}I$ is a quasi-isomorphism by Step 3, so it can itself be used as the K-injective resolution
-for computing $\Gamma_{Q_2}$ at $r_{1,*}J$. The resulting map is
-$p_{2,*}a\circ\theta_{Q_2,r_{1,*}J}$. For clarity, under the resolution $a$ the object
-$Rp_{2,*}(i_{1!}r_{1,*}J)$ is represented by $p_{2,*}p_{1,*}I$. The map $Rp_{2,*}\Gamma_{Q_1}$ is
-then represented by the identity of $p_{2,*}p_{1,*}I$: the square comparing $a$ with the identity
-resolution of $p_{1,*}I$ has top map $a$ and bottom map $1$. Consequently the claimed two-factor
-composite is precisely $p_{2,*}a\circ\theta_{Q_2,r_{1,*}J}$. Expanding $a$ gives
-$p_{2,*}p_{1,*}\rho\circ p_{2,*}\theta_{Q_1,J}\circ\theta_{Q_2,r_{1,*}J}$. The last two factors
-identify the same underlying sections in the common subsheaf of $(i_2r_2r_1)_*J$; associativity of
-sheaf composition therefore makes them $\theta_{Q_2Q_1,J}$. The remaining factor is precisely the
-representative for the outer rectangle. The derived direct-image composition isomorphisms have
-this resolution normalization, so inserting them gives the stated vertical equation.
-Uses: lem-weil-pbc-proper-composition, prop-weil-pbc-inverse-image-modules-exact, lem-weil-pbc-
-right-adjoint-preserves-kinjective, lem-cbc-proper-support-sheaf-composition, lem-weil-pbc-ringed-
-topoi-derived-pushforward-composition.
-
-6. For horizontal pasting take $J$ K-injective on $U$, $\rho:k_!J\to I$ K-injective on the middle
-top scheme, and $\sigma:l_!I\to H$ K-injective on the right top scheme. Since $l_!$ is exact,
-$u=\sigma\circ l_!\rho:l_!k_!J\to H$ is a quasi-isomorphism. The two consecutive interchange maps
-are represented by $j_!(p_*\rho\circ\theta_{Q_1,J})$ followed by $q_*\sigma\circ\theta_{Q_2,I}$.
-Naturality of $\theta_{Q_2}$ moves $\rho$ through this expression, giving $q_*\sigma\circ
-q_*l_!\rho\circ\theta_{Q_2,k_!J}\circ j_!\theta_{Q_1,J}$. The two $\theta$ factors identify
-sections in the same proper-support subsheaf of the common composite direct image, so their
-product is $\theta_{Q_2Q_1,J}$. Thus the composite is $q_*u\circ\theta_{Q_2Q_1,J}$, the outer
-comparison computed with the resolution $u$. The canonical open-extension composition maps
-identify $j_!i_!$ with $(ji)_!$ and $l_!k_!$ with $(lk)_!$, yielding exactly the horizontal
-equation in the statement.
-Uses: prop-weil-pbc-kinjective-resolutions-exist, lem-weil-pbc-extension-by-zero-exact, lem-cbc-
-proper-support-sheaf-composition, lem-cbc-extension-zero-composition.
-
-7. If the proper edges are identities, commutativity identifies the two open edges. The
-representative of Step 1 is then just the resolution $i_!J\to I$, hence gives the identity of
-$Di_!K$ under its derived identification. If the open edges are identities, the proper edges
-agree; choose $I=J$ and $\rho=1_J$, so the representative is the identity on $p_*J$. These give
-the asserted identity comparisons with the same normalization as the composition maps.
-Uses: lem-cbc-proper-support-sheaf-composition, lem-weil-pbc-kinjective-total-derived, lem-cbc-
-extension-zero-composition.
-
-8. Record explicitly the complex model for the exchange used in the final diagram. For a cartesian
-square with proper or arbitrary vertical map $h$, base map $b$, top projection $a$ and new
-vertical map $h_1$, let $L$ be K-injective and let $t:a^*L\to L_1$ be a K-injective resolution.
-Then the unbounded exchange of the statement is represented by
-$h_{1,*}t\circ\operatorname{Ex}^0_{h,b,L}:b^*h_*L\to h_{1,*}L_1$. To check this, the derived
-adjunction $h^*\dashv Rh_*$ computed with $L$ has counit represented by the ordinary termwise
-counit $h^*h_*L\to L$: this follows from the termwise Hom adjunction and the bijection from
-homotopy maps into a K-injective to derived maps. The defining mate of the unbounded exchange is
-therefore represented by $h_1^*b^*h_*L\cong a^*h^*h_*L\to a^*L\xrightarrow{t}L_1$. Applying the
-termwise adjunction $h_1^*\dashv h_{1,*}$ to this map gives exactly
-$h_{1,*}t\circ\operatorname{Ex}^0_{h,b,L}$. Localization preserves these unit, counit and
-naturality equations. All calculations are $A$-linear: the module inverse-image adjunction has the
-same underlying maps as the abelian adjunction. This proves the formula for arbitrary unbounded
-$L$ without invoking the bounded-below-only termwise-exchange lemma.
-Uses: def-kun-unbounded-exchange, def-weil-pbc-underived-exchange, prop-weil-pbc-inverse-image-
-modules-exact, lem-weil-pbc-termwise-adjunction-homotopy, lem-weil-pbc-kinjective-hom-derived,
-lem-weil-pbc-kinjective-total-derived, lem-weil-pbc-localization-universal-property.
-
-9. Finally consider arbitrary base change by $b:Z_1\to Z$. Properness and openness are preserved
-under base change. The new schemes remain Noetherian: $W_1$ is open in $Z_1$, $V_1$ is proper and
-hence finite type over $Z_1$, and $U_1$ is proper and finite type over $W_1$. Choose $J,I,\rho$ as
-in Step 1, a K-injective resolution $j:d^*J\to J_1$, and a K-injective resolution $t:a^*I\to I_1$.
-Put $s=k_{1!}j:k_{1!}d^*J\to k_{1!}J_1$ and $w=t\circ a^*\rho\circ e_{k,J}^{-1}:k_{1!}d^*J\to
-I_1$. Both $s,w$ are quasi-isomorphisms, by exact pullback and exact extension by zero. The
-K-injective Hom bijection gives a chain map $v:k_{1!}J_1\to I_1$ with $vs\simeq w$, unique up to
-homotopy; two-out-of-three says $v$ is a quasi-isomorphism. Compute $\Gamma_{Q_1}$ with this $v$.
-Before resolutions the following equality of maps of complexes holds:
-$$p_{1,*}e_{k,J}\circ\operatorname{Ex}^0_{p,b,k_!J}\circ b^*\theta_{Q,J}=\theta_{Q_1,d^*J}\circ
-i_{1!}\operatorname{Ex}^0_{r,c,J}\circ e_{i,r_*J}.$$ Indeed the proper-support identifications are
-equalities of subsheaves of the common composite direct image and commute with pullback. On their
-ambient direct images both paths restrict the same section along the projection for the base
-change of $pk=ir$; this is also the two pasting formulas for adjunction mates. Now apply
-$p_{1,*}v\circ p_{1,*}k_{1!}j$ to the displayed equality. Naturality of $\theta_{Q_1}$ moves $j$
-to $i_{1!}r_{1,*}j$ on its right-hand side. On its left-hand side, the equation $v\circ
-k_{1!}j\simeq t\circ a^*\rho\circ e_k^{-1}$ and naturality of the underived exchange replace the
-resulting path by $p_{1,*}t\circ\operatorname{Ex}^0_{p,b,I}\circ b^*(p_*\rho\circ\theta_{Q,J})$.
-Step 8 identifies this as $(Rp_{1,*}e_k)\circ(\operatorname{Ex}_{p,b}Dk_!)\circ(b^*\Gamma_Q)$
-after identifying $I_1$ as a representative of $Dk_{1!}d^*K$ via $v$. On the right, Step 8
-identifies $r_{1,*}j\circ\operatorname{Ex}^0_{r,c,J}$ as $\operatorname{Ex}_{r,c}$, and
-$p_{1,*}v\circ\theta_{Q_1,J_1}$ as $\Gamma_{Q_1}$. This is precisely the required base-change
-equation. Homotopies are preserved by all the termwise functors, so the equation holds in the
-derived category. To identify the specified degreewise maps, let $j$ be either open edge and write
-$b,c,j_1$ for its base-change diagram. Take the adjunct of the defining conjugate comparison
-$\beta:j_{1!}c^*\to b^*j_!$ under $j_{1!}\dashv j_1^*$. Substitution of the underived exchange
-formula and of the composite unit from the definition cancels the inverse-image/direct-image
-counit against its unit by the triangle identity; the resulting map is $c^*\eta_j:c^*\to
-c^*j^*j_!\cong j_1^*b^*j_!$. This is precisely the mate whose inverse is $e_j$ in the extension-
-zero base-change lemma. Thus $e_i,e_k$ are the inverses of the degreewise maps specified in the
-statement, including their normalization. This argument uses no invertibility, constructibility or
-bound on the dimensions of the schemes; the fibre bound in Step 2 was deduced from properness over
-the given quasi-compact base.
-Uses: lem-weil-pbc-proper-base-change, lem-weil-pbc-open-immersion-base-change, def-weil-proper-
-morphism, lem-weil-pbc-finite-type-over-noetherian, lem-weil-pbc-noetherian-open-subscheme-
-noetherian, prop-weil-pbc-kinjective-resolutions-exist, prop-weil-pbc-inverse-image-modules-exact,
-lem-weil-pbc-extension-by-zero-exact, lem-cbc-extension-zero-base-change, lem-weil-pbc-kinjective-
-hom-derived, lem-cbc-proper-support-sheaf-composition, def-weil-pbc-underived-exchange, lem-weil-
-pbc-mate-pasting, def-weil-pbc-etale-shriek-base-change-map.
+5. Apply the independent adjunction-normalization lemma, the independent normalized
+pasting-and-identities lemma, and the independent arbitrary base-change lemma to these same global
+families theta and Gamma. Their hypotheses are respectively the proved support normalization,
+representative normalization and homotopy-unit normalization. Assemble the eight clauses without
+changing any target signature.
+Uses: lem-amb-unbounded-proper-open-adjunction-normalization,
+lem-amb-unbounded-proper-open-pasting, lem-amb-unbounded-proper-open-base-change.
 -/
 theorem unboundedProperOpenInterchange (A : Type (u + 1)) [CommRing A] [Finite A] :
     ∃ (θ : ∀ {U V W Z : Scheme.{u}}
@@ -421,6 +672,113 @@ theorem unboundedProperOpenInterchange (A : Type (u + 1)) [CommRing A] [Finite A
             D((i₁)_!open[ModuleCat.{u + 1} A]).map
               ((exactDerivedBaseChangeMap (ModuleCat.{u + 1} A) sr.toCommSq).app K) ≫
             (Γ k₁ r₁ p₁ i₁ sq₁).hom.app (D((d)^*[ModuleCat.{u + 1} A]).obj K)) := by
-  sorry
+  classical
+  let θ : ∀ {U V W Z : Scheme.{u}}
+        [IsNoetherian U] [IsNoetherian V] [IsNoetherian W] [IsNoetherian Z]
+        (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
+        [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]
+        (sq : CommSq k r p i),
+        (r)_*[ModuleCat.{u + 1} A] ⋙ (i)_!open[ModuleCat.{u + 1} A] ≅
+          (k)_!open[ModuleCat.{u + 1} A] ⋙ (p)_*[ModuleCat.{u + 1} A] :=
+    fun {U V W Z} _ _ _ _ k r p i _ _ _ _ sq => (exists_sheafComparison A k r p i sq).choose
+  have hθ : (∀ {U V W Z : Scheme.{u}}
+        [IsNoetherian U] [IsNoetherian V] [IsNoetherian W] [IsNoetherian Z]
+        (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
+        [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]
+        (sq : CommSq k r p i)
+        (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)),
+        (θ k r p i sq).hom.app F ≫
+            (p)_*[ModuleCat.{u + 1} A].map
+              ((openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) k).app F) ≫
+            (lowerStarComp (ModuleCat.{u + 1} A) k p).hom.app F =
+          (openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) i).app
+              ((r)_*[ModuleCat.{u + 1} A].obj F) ≫
+            (lowerStarComp (ModuleCat.{u + 1} A) r i (k ≫ p) sq.w).hom.app F) := by
+    intro U V W Z _ _ _ _ k r p i _ _ _ _ sq F
+    exact (exists_sheafComparison A k r p i sq).choose_spec F
+  let Γ : ∀ {U V W Z : Scheme.{u}}
+        [IsNoetherian U] [IsNoetherian V] [IsNoetherian W] [IsNoetherian Z]
+        (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
+        [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]
+        (sq : CommSq k r p i),
+        R((r)_*[ModuleCat.{u + 1} A]) ⋙ D((i)_!open[ModuleCat.{u + 1} A]) ≅
+          D((k)_!open[ModuleCat.{u + 1} A]) ⋙ R((p)_*[ModuleCat.{u + 1} A]) :=
+    fun {U V W Z} _ _ _ _ k r p i _ _ _ _ sq =>
+      (constructedDerivedComparison
+        (C₀ := Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))
+        (C₁ := Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A))
+        (C₂ := Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A))
+        (C₃ := Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A))
+        (r)_*[ModuleCat.{u + 1} A] (p)_*[ModuleCat.{u + 1} A]
+        (k)_!open[ModuleCat.{u + 1} A] (i)_!open[ModuleCat.{u + 1} A]
+        (fun J _ => openExtension_derivedUnit_isIso A k r p i sq J) (θ k r p i sq)).comparison
+  have hΓ : (∀ {U V W Z : Scheme.{u}}
+        [IsNoetherian U] [IsNoetherian V] [IsNoetherian W] [IsNoetherian Z]
+        (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
+        [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]
+        (sq : CommSq k r p i)
+        (J : CochainComplex (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ)
+        [J.IsKInjective]
+        (I : CochainComplex (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ)
+        [I.IsKInjective]
+        (ρ : ((k)_!open[ModuleCat.{u + 1} A].mapHomologicalComplex (.up ℤ)).obj J ⟶ I)
+        [QuasiIso ρ],
+        D((i)_!open[ModuleCat.{u + 1} A]).map
+            (((r)_*[ModuleCat.{u + 1} A]).rightDerivedFunctorObjQIso J).hom ≫
+          ((i)_!open[ModuleCat.{u + 1} A]).mapDerivedCategoryFactors.hom.app
+            (((r)_*[ModuleCat.{u + 1} A].mapHomologicalComplex (.up ℤ)).obj J) ≫
+          DerivedCategory.Q.map
+            ((NatTrans.mapHomologicalComplex (θ k r p i sq).hom (.up ℤ)).app J) ≫
+          DerivedCategory.Q.map
+            (((p)_*[ModuleCat.{u + 1} A].mapHomologicalComplex (.up ℤ)).map ρ) =
+        (Γ k r p i sq).hom.app (DerivedCategory.Q.obj J) ≫
+          R((p)_*[ModuleCat.{u + 1} A]).map
+            (((k)_!open[ModuleCat.{u + 1} A]).mapDerivedCategoryFactors.hom.app J ≫
+              DerivedCategory.Q.map ρ) ≫
+          (((p)_*[ModuleCat.{u + 1} A]).rightDerivedFunctorObjQIso I).hom) := by
+    intro U V W Z _ _ _ _ k r p i _ _ _ _ sq J _ I _ ρ _
+    exact (constructedDerivedComparison
+      (C₀ := Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))
+      (C₁ := Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A))
+      (C₂ := Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A))
+      (C₃ := Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A))
+      (r)_*[ModuleCat.{u + 1} A] (p)_*[ModuleCat.{u + 1} A]
+      (k)_!open[ModuleCat.{u + 1} A] (i)_!open[ModuleCat.{u + 1} A]
+      (fun J _ => openExtension_derivedUnit_isIso A k r p i sq J)
+      (θ k r p i sq)).representative_normalization J I ρ
+  have hΓh : (∀ {U V W Z : Scheme.{u}}
+        [IsNoetherian U] [IsNoetherian V] [IsNoetherian W] [IsNoetherian Z]
+        (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
+        [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]
+        (sq : CommSq k r p i)
+        (X : HomotopyCategory
+          (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (.up ℤ)),
+      ((i)_!open[ModuleCat.{u + 1} A]).mapDerivedCategory.map
+          (((r)_*[ModuleCat.{u + 1} A]).rightDerivedFunctorUnit.app X) ≫
+          (Γ k r p i sq).hom.app (DerivedCategory.Qh.obj X) =
+        ((i)_!open[ModuleCat.{u + 1} A]).mapDerivedCategoryFactorsh.hom.app
+          ((((r)_*[ModuleCat.{u + 1} A]).mapHomotopyCategory (.up ℤ)).obj X) ≫
+          DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory (θ k r p i sq).hom (.up ℤ)).app X) ≫
+          ((p)_*[ModuleCat.{u + 1} A]).rightDerivedFunctorUnit.app
+            ((((k)_!open[ModuleCat.{u + 1} A]).mapHomotopyCategory (.up ℤ)).obj X) ≫
+          ((p)_*[ModuleCat.{u + 1} A]).rightDerivedFunctor.map
+            (((k)_!open[ModuleCat.{u + 1} A]).mapDerivedCategoryFactorsh.inv.app X)) := by
+    intro U V W Z _ _ _ _ k r p i _ _ _ _ sq X
+    exact (constructedDerivedComparison
+      (C₀ := Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))
+      (C₁ := Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A))
+      (C₂ := Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A))
+      (C₃ := Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A))
+      (r)_*[ModuleCat.{u + 1} A] (p)_*[ModuleCat.{u + 1} A]
+      (k)_!open[ModuleCat.{u + 1} A] (i)_!open[ModuleCat.{u + 1} A]
+      (fun J _ => openExtension_derivedUnit_isIso A k r p i sq J)
+      (θ k r p i sq)).unit_normalization X
+  clear_value Γ θ
+  obtain ⟨hv, hh, hip, hio⟩ :=
+    unboundedProperOpenPasting_of_normalization A @θ @Γ hθ hΓh
+  exact ⟨@θ, @Γ, hθ, hΓ,
+    unboundedProperOpenAdjunctionNormalization_of_normalization A @θ @Γ hθ hΓ,
+    hv, hh, hip, hio,
+    unboundedProperOpenBaseChange_of_normalization A @θ @Γ hθ hΓ⟩
 
 end AlgebraicGeometry.Etale
