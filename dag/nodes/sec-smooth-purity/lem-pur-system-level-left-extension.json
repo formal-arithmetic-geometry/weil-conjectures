@@ -28,7 +28,7 @@
  ],
  "proof": [
   {
-   "text": "Realize systems as modules on one small ringed site. Let $J$ be the ordered category of positive integers with one arrow $m\\to n$ for $m\\le n$, and give $\\mathcal C\\times J$ the coverings $\\{(U_i,n)\\to(U,n)\\}$ coming from coverings of $U$ in $\\mathcal C$. Pulling such a covering back along $(V,m)\\to(U,n)$ gives $\\{(V\\times_U U_i,m)\\to(V,m)\\}$, so the site axioms hold. Define $\\mathcal B(U,n)=B_n(U)$, with restriction along $(V,m)\\to(U,n)$ induced by $B_n\\to B_m$ and restriction to $V$. The sheaf condition is exactly the sheaf condition at each level. Consequently a $\\mathcal B$-module sheaf is exactly a strict semilinear system, and a complex of such sheaves is a strict complex of systems, including its maps. Apply [lem-pur-ringed-site-grothendieck-abelian] to this small site and sheaf of commutative rings. This proves that $\\mathscr S(B)$ is Grothendieck abelian. By [lem-weil-pbc-module-sheaves-colimits-forgetful], kernels are sectionwise, cokernels and colimits are sheafified sectionwise constructions. Since coverings never change the level, these constructions are the corresponding module-sheaf constructions at each level. Thus exactness, coproducts, and cohomology of complexes are componentwise.",
+   "text": "For the abelian and finite-exactness part, add and negate compatible linear maps componentwise. Construct finite cones and cocones from the limits and colimits of the module-sheaf categories at each level; exact scalar restriction supplies their transition maps. Evaluation preserves these constructions. A compatible map whose components are invertible has the compatible componentwise inverse, so evaluation jointly reflects isomorphisms. Mathlib CategoryTheory.Abelian.PreservesCoimageImageComparison.iso identifies every evaluated coimage-image comparison with the invertible comparison in the component abelian category. Thus CategoryTheory.Abelian.ofCoimageImageComparisonIsIso gives an abelian structure with additive evaluations. The normalized additive evaluations fix every component of addition. AddCommGroup.ext and Preadditive.ext identify the preadditive structures of any two normalized abelian structures; the other abelian fields are propositions. This proves SheafOfModules.strictRingSystem_abelian_exists and supplies the finite-exactness witnesses of systemEvaluation_exact directly, using the proved SheafOfModules.preservesFiniteColimits_toSheaf instance for underlying module sheaves. Realize systems as modules on one small ringed site. Let $J$ be the ordered category of positive integers with one arrow $m\\to n$ for $m\\le n$, and give $\\mathcal C\\times J$ the coverings $\\{(U_i,n)\\to(U,n)\\}$ coming from coverings of $U$ in $\\mathcal C$. Pulling such a covering back along $(V,m)\\to(U,n)$ gives $\\{(V\\times_U U_i,m)\\to(V,m)\\}$, so the site axioms hold. Define $\\mathcal B(U,n)=B_n(U)$, with restriction along $(V,m)\\to(U,n)$ induced by $B_n\\to B_m$ and restriction to $V$. The sheaf condition is exactly the sheaf condition at each level. Consequently a $\\mathcal B$-module sheaf is exactly a strict semilinear system, and a complex of such sheaves is a strict complex of systems, including its maps. Apply [lem-pur-ringed-site-grothendieck-abelian] to this small site and sheaf of commutative rings. This proves that $\\mathscr S(B)$ is Grothendieck abelian. By [lem-weil-pbc-module-sheaves-colimits-forgetful], kernels are sectionwise, cokernels and colimits are sheafified sectionwise constructions. Since coverings never change the level, these constructions are the corresponding module-sheaf constructions at each level. Thus exactness, coproducts, and cohomology of complexes are componentwise.",
    "uses": [
     "lem-pur-ringed-site-grothendieck-abelian",
     "lem-weil-pbc-module-sheaves-colimits-forgetful"
@@ -212,7 +212,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
-  "place": "Adic-stage paragraph, with Zheng Construction 4.1 printed p. 21 as the evaluation prototype. Ordinary ringed-tower K-flat resolutions, Stacks 06YS/0G7E/06XN/09T5, and ordinary composite adjunction transposes replace the withdrawn enhanced/model-category route."
+  "place": "Adic-stage paragraph, with Zheng Construction 4.1 printed p. 21 as the evaluation prototype. Ordinary ringed-tower K-flat resolutions, Stacks 06YS/0G7E/06XN/09T5, and ordinary composite adjunction transposes replace the withdrawn enhanced/model-category route. Z7, 2026-10-21: the abelian foundation and finite evaluation exactness are realized directly by componentwise finite constructions and the Mathlib coimage-image criterion; the Grothendieck and derived-extension construction remains the stated route."
  },
  "mathlib_searches": [
   {
@@ -506,31 +506,13 @@
   "note": "Read the node, 6 stmt deps (DerivedChangeOfRingsCochainModel with E pinned to changeOfRings; Mathlib Abelian, whose only data is Preadditive, so the ∃!-chosen abelian structure is unique, not hollow) and all 840 lines (identical to 8386e612; only report.md changed). Every clause matches: actual restrictScalars systems, IsGrothendieckAbelian.{w}, coproducts over any I including empty, componentwise cohomology, joint detection with one common bound, L_n/L_r as total left derived functors with transpose-normalized derived adjunctions, below/above/t(m) formulas, the selectedTransition arrow, a=b via transition_identity. No flatness/normalization/boundedness assumed; u, v, w independent; no duplicate notion (rg). Finding (H3, weaker conclusion): the node clause that the L_rL_s≅L_{r∘s} comparison is compatible with the canonical tensor associators was not stated (only composition_mate). FIX: added systemNextSelected_trans (t_{r∘s}=t_s∘t_r), systemSelectedTensor_trans (eqToHom witness) and the field extensionComposition_eval (e_m of the comparison = the derivedAssoc composite), all sorry theorems with source/blueprint/proof docstrings; main signature unchanged; lean-record lists all 50 declarations (script-checked against the file). nt_compile: delivered file clean 51.1 s, fixed file clean 41.6 s, no messages. Maintainer action: remove the four obsolete tool_uses ids inherited from main and reword 'enhanced section category' in source.place."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M8",
+  "group": "Z7",
   "result": "pass",
-  "landing": "20261019T005347-L-2757127",
+  "landing": "20261020T221409-L-4183604",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "SheafOfModules.strictRingSystem_abelian_exists",
-   "SheafOfModules.strictRingSystem_category_laws",
-   "SheafOfModules.strictRingSystem_comp_comm",
-   "SheafOfModules.strictRingSystem_id_comm",
-   "SheafOfModules.systemEvaluation_exact",
-   "SheafOfModules.systemLevelLeftExtensionTheory",
-   "SheafOfModules.systemNextSelected_mono",
-   "SheafOfModules.systemNextSelected_spec",
-   "SheafOfModules.systemNextSelected_trans",
-   "SheafOfModules.systemScalarRestriction_exact",
-   "SheafOfModules.systemSelectedTensor_trans",
-   "SheafOfModules.systemSubsequence_exact"
-  ],
-  "sorry_after": [
-   "SheafOfModules.strictRingSystem_abelian_exists",
-   "SheafOfModules.systemLevelLeftExtensionTheory"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
