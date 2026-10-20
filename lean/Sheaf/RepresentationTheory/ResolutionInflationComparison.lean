@@ -9,7 +9,7 @@ public import Mathlib.RepresentationTheory.Homological.GroupCohomology.Functoria
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 import Mathlib.RepresentationTheory.Homological.Resolution
 import Mathlib.CategoryTheory.Abelian.Projective.Resolution
-import Sheaf.Algebra.Homology.QuotientTensorResolutionLiftHomotopy
+import Sheaf.Algebra.Homology.AugmentedResolutionLiftHomotopy
 
 /-!
 # Projective resolution maps compute inflation

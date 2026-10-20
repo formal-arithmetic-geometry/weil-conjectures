@@ -15,7 +15,7 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
 import Sheaf.AlgebraicGeometry.SelfTorOrdinaryLocalizedComparisons
-import Sheaf.Algebra.Homology.QuotientTensorResolutionLiftHomotopy
+import WeilConjectures.Algebra.Homology.QuotientTensorResolutionLiftHomotopy
 
 /-! # Affine sections of ordinary tensor with a K-flat quotient resolution
 

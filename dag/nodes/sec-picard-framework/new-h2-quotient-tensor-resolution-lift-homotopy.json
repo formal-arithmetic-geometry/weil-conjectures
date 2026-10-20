@@ -20,10 +20,8 @@
    "elementary": true
   },
   {
-   "text": "Apply ModuleCat.augmented_lift_homotopy to P and the restricted exact augmented R-complex with the common augmentation equation from the preceding step. The generic helper gives a homotopy between a and a_prime without projectivity of the target terms. Its projective lifting induction is recorded in its own node, not asserted by the quotient-specialized statement.",
-   "uses": [
-    "new-t4-augmented-resolution-lift-homotopy"
-   ],
+   "text": "Use the upstream theorem's private augmented lifting induction: subtract a_prime from a, lift the degree-zero residual through the augmentation kernel, and inductively lift each residual through the next differential using exactness and source projectivity. Homotopy.mkInductive and Homotopy.equivSubZero assemble a homotopy between a and a_prime; target projectivity is never used. This is the same complete proof as before retirement, now read in the upstream module.",
+   "uses": [],
    "elementary": false
   },
   {
@@ -33,15 +31,15 @@
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-exact-sequence",
-  "new-t4-augmented-resolution-lift-homotopy"
+  "def-weil-pbc-exact-sequence"
  ],
  "proof_origin": {
   "by": "worker",
-  "agent": "H2",
-  "date": "2026-10-14",
+  "agent": "G1",
+  "date": "2026-10-20",
   "document": "https://stacks.math.columbia.edu/tag/00LS",
-  "place": "Tag 00LS(2), lemma-compare-resolutions: induction by lifting through differentials, applied to projectives and then quotient tensoring"
+  "place": "Tag 00LS(2), lemma-compare-resolutions: induction by lifting through differentials, applied to projectives and then quotient tensoring",
+  "group": "G1"
  },
  "mathlib_searches": [
   {
@@ -122,18 +120,18 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.Algebra.Homology.QuotientTensorResolutionLiftHomotopy",
-  "file": "lean/Sheaf/Algebra/Homology/QuotientTensorResolutionLiftHomotopy.lean",
+  "existing": true,
+  "module": "WeilConjectures.Algebra.Homology.QuotientTensorResolutionLiftHomotopy",
+  "file": "lean/WeilConjectures/Algebra/Homology/QuotientTensorResolutionLiftHomotopy.lean",
   "declaration": "ModuleCat.quotient_tensor_resolution_lift_homotopy",
   "statement": "theorem quotient_tensor_resolution_lift_homotopy\n    {A C : Type u} [CommRing A] [CommRing C]\n    (I : Ideal A) (J : Ideal C) (φ : A →+* C)\n    (P : ProjectiveResolution (ModuleCat.of A (A ⧸ I)))\n    (R : ProjectiveResolution (ModuleCat.of C (C ⧸ J))) :\n    let TA := (tensorRight (ModuleCat.of A (A ⧸ I))).mapHomologicalComplex (.down ℕ)\n    let TC := (tensorRight (ModuleCat.of C (C ⧸ J))).mapHomologicalComplex (.down ℕ)\n    ∀ (ψ : (A ⧸ I) →+* (C ⧸ J))\n      (a a' : P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex\n        (.down ℕ)).obj R.complex)\n      (k k' : TA.obj P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex\n        (.down ℕ)).obj (TC.obj R.complex)),\n      (∀ x : A, ψ (Ideal.Quotient.mk I x) = Ideal.Quotient.mk J (φ x)) →\n      (∀ x : P.complex.X 0, R.π.f 0 (a.f 0 x) = ψ (P.π.f 0 x)) →\n      (∀ x : P.complex.X 0, R.π.f 0 (a'.f 0 x) = ψ (P.π.f 0 x)) →\n      (∀ (j : ℕ) (x : P.complex.X j) (y : A ⧸ I),\n        k.f j (x ⊗ₜ[A] y) = (show R.complex.X j from a.f j x) ⊗ₜ[C] (ψ y)) →\n      (∀ (j : ℕ) (x : P.complex.X j) (y : A ⧸ I),\n        k'.f j (x ⊗ₜ[A] y) = (show R.complex.X j from a'.f j x) ⊗ₜ[C] (ψ y)) →\n      Nonempty (Homotopy k k')",
   "branch": "sheaf-dag",
-  "by": "H2",
-  "date": "2026-10-14",
+  "by": "G1",
+  "date": "2026-10-20",
   "declarations": [
    "ModuleCat.quotient_tensor_resolution_lift_homotopy"
   ],
-  "note": "The existing public generic helper is attached separately to new-t4-augmented-resolution-lift-homotopy. This node states and attaches only the quotient-specialized tensor homotopy theorem; no signature or proof body changes in the metadata repair."
+  "note": "Retired the duplicate Sheaf module in favor of its upstream twin. The quotient theorem has the identical public signature and a complete proof. Its generic lifting helper is private upstream; the public generic theorem is preserved in Sheaf.Algebra.Homology.AugmentedResolutionLiftHomotopy under its own node."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -146,14 +144,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-26d46",
-  "group": "T4",
+  "reviewer": "C-aafff",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261015T034824-L-298475",
+  "landing": "20261020T135406-L-1818602",
   "kind": "interface",
-  "note": "independent Codex review: Matched four DAG signatures and proof dependencies with Lean, verified unchanged existing signatures, compiled both deliveries and all five direct importers, and checked axioms and original/adapted shared modules."
+  "note": "independent cc review: moved ModuleCat.augmented_lift_homotopy byte-identical to the live Sheaf version; quotient theorem signature identical to the upstream WeilConjectures twin (whose generic helper is private); 2 adapted importers differ by one plain import each and compile; nodes new-h2/new-t4 changed only in lean/proof fields, which match the Lean; axioms clean"
  },
  "lean_audit": {
   "master": {

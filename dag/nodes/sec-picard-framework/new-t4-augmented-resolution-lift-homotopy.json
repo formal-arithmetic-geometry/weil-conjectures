@@ -96,14 +96,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.QuotientTensorResolutionLiftHomotopy",
-  "file": "lean/Sheaf/Algebra/Homology/QuotientTensorResolutionLiftHomotopy.lean",
+  "module": "Sheaf.Algebra.Homology.AugmentedResolutionLiftHomotopy",
+  "file": "lean/Sheaf/Algebra/Homology/AugmentedResolutionLiftHomotopy.lean",
   "declaration": "ModuleCat.augmented_lift_homotopy",
   "statement": "theorem augmented_lift_homotopy\n    {D : Type*} [Category D] [Abelian D] {M N : D}\n    (P : ProjectiveResolution M) (K : ChainComplex D ℕ) (π : K.X 0 ⟶ N)\n    (hz : K.d 1 0 ≫ π = 0)\n    (hzero : (ShortComplex.mk (K.d 1 0) π hz).Exact)\n    (hsucc : ∀ n : ℕ,\n      (ShortComplex.mk (K.d (n + 2) (n + 1)) (K.d (n + 1) n)\n        (K.d_comp_d _ _ _)).Exact)\n    (a a' : P.complex ⟶ K) (haug : a.f 0 ≫ π = a'.f 0 ≫ π) :\n    Nonempty (Homotopy a a')",
   "branch": "sheaf-dag",
-  "by": "T4",
-  "date": "2026-10-15",
-  "note": "Attachment to the existing declaration in its existing module; no duplicate Lean theorem or new proof obligation is introduced by this node."
+  "by": "G1",
+  "date": "2026-10-20",
+  "note": "Preserved the existing public generic theorem, with its signature and complete proof unchanged, in its own module when retiring the duplicate quotient module. The upstream quotient module has only a private version of this helper; the generic theorem remains needed by ResolutionInflationComparison."
  },
  "reviewed": {
   "date": "2026-10-15",
@@ -116,13 +116,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-26d46",
-  "group": "T4",
+  "reviewer": "C-aafff",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261015T034824-L-298475",
+  "landing": "20261020T135406-L-1818602",
   "kind": "interface",
-  "note": "independent Codex review: Matched four DAG signatures and proof dependencies with Lean, verified unchanged existing signatures, compiled both deliveries and all five direct importers, and checked axioms and original/adapted shared modules."
+  "note": "independent cc review: moved ModuleCat.augmented_lift_homotopy byte-identical to the live Sheaf version; quotient theorem signature identical to the upstream WeilConjectures twin (whose generic helper is private); 2 adapted importers differ by one plain import each and compile; nodes new-h2/new-t4 changed only in lean/proof fields, which match the Lean; axioms clean"
  }
 }
