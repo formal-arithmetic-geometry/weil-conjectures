@@ -1,0 +1,283 @@
+{
+ "id": "lem-asd-exceptional-base-change-affine-locality",
+ "kind": "statement",
+ "title": "Exceptional base change descends from affine opens of its base",
+ "statement": "Let Λ be a finite commutative ring. Let sq = (g' : X' → X, f' : X' → Y', f : X → Y, g : Y' → Y) be cartesian, with f and f' compactifiable and f' quasi-compact. Suppose that for every affine open immersion j : U → Y, every cartesian restriction sqU = (a : V → X, p : V → U, f, j) with p compactifiable, and every cartesian square sq' = (b : V' → V, p' : V' → U', p, c : U' → U) with p' compactifiable and quasi-compact, the canonical exceptional base-change transformation for sq' is invertible. Then the canonical exceptional base-change transformation for sq is invertible on the whole ordinary unbounded etale derived category.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
+  "place": "Coherences (i) and (iii): restriction of the compactification exchange to a base chart, transposition, and descent."
+ },
+ "stmt_deps": [
+  "def-asd-compactifiable",
+  "def-amb-etale-compact-support",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-inverse-image",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Take the affine cover j_i : U_i → Y. Define V_i = X ×_Y U_i, U'_i = U_i ×_Y Y', and V'_i = X' ×_{Y'} U'_i. Pullback pasting constructs b_i : V'_i → V_i and the square for p_i : V_i → U_i along c_i : U'_i → U_i. Compactifiability and quasi-compactness of p'_i are inherited from f'. For every x in X', choose an affine chart containing g(f'(x)). The range formula for base-changed open immersions gives a point of V'_i over x. Hence the open immersions a'_i : V'_i → X' are jointly surjective.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate the exceptional base-change transformation at K. For each chart, apply the open-restriction lemma, using the hypothesis for the local square. Thus La'_i* of the component at K is invertible. Exact etale pullback commutes with homology; the jointly surjective open cover detects isomorphisms of every homology sheaf. Hence the component at K, and therefore the natural transformation, is invertible. Lean uses the existing isIso_of_isIso_leftDerivedUpperStar_map_of_jointlySurjective theorem from SmoothDuality.Local for this last deduction.",
+   "uses": [
+    "lem-asd-exceptional-base-change-open-restriction",
+    "lem-weil-pbc-etale-cover-detects-iso",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-exceptional-base-change-open-restriction",
+  "lem-weil-pbc-etale-cover-detects-iso",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
+  "place": "Coherences (i) and (iii): restriction of the compactification exchange to a base chart, transposition, and descent. The generic compactification calculation is stated without quasi-compactness of the restricting open."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerivedUpperShriekBaseChangeMap|dualizingComplexBaseChange",
+   "date": "2026-10-19",
+   "results": {
+    "t": "2026-10-19T08:16:36Z",
+    "tool": "grep",
+    "query": "rightDerivedUpperShriekBaseChangeMap|dualizingComplexBaseChange",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "verdict": "No matching derived exceptional open-restriction compatibility theorem; the returned facts concern pullback geometry, inverse image, or general mate pasting."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, CategoryTheory.NatTrans",
+   "date": "2026-10-19",
+   "results": {
+    "t": "2026-10-19T08:16:37Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.IsIso, CategoryTheory.NatTrans",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "verdict": "No matching derived exceptional open-restriction compatibility theorem; the returned facts concern pullback geometry, inverse image, or general mate pasting."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPullback, IsIso",
+   "date": "2026-10-19",
+   "results": {
+    "t": "2026-10-19T09:46:34Z",
+    "tool": "loogle",
+    "query": "IsPullback, IsIso",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'IsPullback'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "verdict": "No matching derived exceptional open-restriction compatibility theorem; the returned facts concern pullback geometry, inverse image, or general mate pasting."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedUpperShriekBaseChangeMap.*(open|local|affine)",
+   "date": "2026-10-19",
+   "results": {
+    "t": "2026-10-19T09:46:34Z",
+    "tool": "grep",
+    "query": "rightDerivedUpperShriekBaseChangeMap.*(open|local|affine)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "verdict": "No matching derived exceptional open-restriction compatibility theorem; the returned facts concern pullback geometry, inverse image, or general mate pasting."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, CategoryTheory.NatTrans",
+   "date": "2026-10-19",
+   "results": {
+    "t": "2026-10-19T11:43:44Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.IsIso, CategoryTheory.NatTrans",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "verdict": "No matching derived exceptional open-restriction compatibility theorem; the returned facts concern pullback geometry, inverse image, or general mate pasting."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedUpperShriekBaseChangeMap.*cover|rightDerivedUpperShriekBaseChangeMap.*comp",
+   "date": "2026-10-19",
+   "results": {
+    "t": "2026-10-19T11:43:45Z",
+    "tool": "grep",
+    "query": "rightDerivedUpperShriekBaseChangeMap.*cover|rightDerivedUpperShriekBaseChangeMap.*comp",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "verdict": "No matching derived exceptional open-restriction compatibility theorem; the returned facts concern pullback geometry, inverse image, or general mate pasting."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso, rightDerivedUpperShriekBaseChangeMap",
+   "date": "2026-10-19",
+   "results": {
+    "t": "2026-10-19T13:43:31Z",
+    "tool": "loogle",
+    "query": "IsIso, rightDerivedUpperShriekBaseChangeMap",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'IsIso'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "verdict": "No matching derived exceptional open-restriction compatibility theorem; the returned facts concern pullback geometry, inverse image, or general mate pasting."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction to an open base of the canonical exceptional inverse image base change mate commutes with horizontal pasting",
+   "date": "2026-10-19",
+   "results": {
+    "t": "2026-10-19T14:42:28Z",
+    "tool": "leansearch",
+    "query": "Restriction to an open base of the canonical exceptional inverse image base change mate commutes with horizontal pasting",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Limits.pasteHorizIsPullback",
+     "AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict",
+     "AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict_assoc",
+     "AlgebraicGeometry.morphismRestrictRestrict",
+     "AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst_assoc",
+     "CategoryTheory.Limits.leftSquareIsPullback",
+     "CategoryTheory.Limits.pullbackLeftPullbackSndIso",
+     "AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict"
+    ],
+    "digest": "003f2415cb5c6d2d"
+   },
+   "verdict": "No matching derived exceptional open-restriction compatibility theorem; the returned facts concern pullback geometry, inverse image, or general mate pasting."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.IsIso",
+   "date": "2026-10-19",
+   "results": {
+    "t": "2026-10-19T14:55:37Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.mateEquiv, CategoryTheory.IsIso",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "verdict": "No matching derived exceptional open-restriction compatibility theorem; the returned facts concern pullback geometry, inverse image, or general mate pasting."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(paste|comp)|baseChange.*restriction",
+   "date": "2026-10-19",
+   "results": {
+    "t": "2026-10-19T14:55:38Z",
+    "tool": "grep",
+    "query": "mateEquiv.*(paste|comp)|baseChange.*restriction",
+    "sub": "",
+    "ok": true,
+    "n_hits": 15,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+     "Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+     "Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean"
+    ],
+    "digest": "1fa264d7adfe28dd"
+   },
+   "verdict": "No matching derived exceptional open-restriction compatibility theorem; the returned facts concern pullback geometry, inverse image, or general mate pasting."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.SmoothDualityBaseChangeCompat",
+  "date": "2026-10-19",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-asd-smooth-base-change",
+   "place": "Coherences (i) and (iii): restriction of the compactification exchange to a base chart, transposition, and descent.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ExceptionalBaseChangeAffineLocality",
+  "file": "lean/Sheaf/SixFunctors/ExceptionalBaseChangeAffineLocality.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_affine_open",
+  "statement": "theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_affine_open\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}\n    [HasCompactification f] [HasCompactification f'] [QuasiCompact f']\n    (sq : IsPullback g' f' f g)\n    (h : ∀ {U V : Scheme.{u}} (j : U ⟶ Y) [IsOpenImmersion j] [IsAffine U]\n      {a : V ⟶ X} {p : V ⟶ U} (_sqU : IsPullback a p f j) [HasCompactification p]\n      {V' U' : Scheme.{u}} {b : V' ⟶ V} {p' : V' ⟶ U'} {c : U' ⟶ U}\n      (sq' : IsPullback b p' p c) [HasCompactification p'] [QuasiCompact p'],\n      IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq')) :\n    IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261020T122116-L-478185",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261020T122116-L-478185",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

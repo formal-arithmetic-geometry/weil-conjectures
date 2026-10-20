@@ -5,12 +5,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
+import Sheaf.SixFunctors.ExceptionalBaseChangeAffineLocality
+import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothBaseChange
 
-/-! The upstream sync to slopmaster2 e9ba49ac4 moved
-`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`
-to `SmoothDuality/SmoothBaseChange` and added the hypothesis that the base is quasi-separated.
-This module keeps the earlier statement, which was also `sorry` upstream before the sync, under a new name
-for the Sheaf modules that use it. It is a stage-3 item. -/
+/-! The upstream sync moved the smooth base-change theorem and added quasi-separatedness.
+This module keeps the earlier statement under a new name for Sheaf users. -/
 
 @[expose] public section
 
@@ -28,12 +27,18 @@ include d in
 /-- Blueprint `prop-asd-smooth-base-change` without the quasi-separatedness of the base: the
 canonical morphism `Lg'^* Rf^! ⟶ Rf'^! Lg^*` is an isomorphism for `f` smooth of relative
 dimension `d` and quasi-compact `f'` (the statement of
-`isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension` before the sync to e9ba49ac4).
+`isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension` before the sync).
 (blueprint: prop-asd-smooth-base-change) -/
 theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension_general
     {X' Y' : Scheme.{u}} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : IsPullback g' f' f g)
     [HasCompactification f'] [QuasiCompact f'] :
-    IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq) :=
-  sorry
+    IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq) := by
+  apply isIso_rightDerivedUpperShriekBaseChangeMap_of_affine_open Λ sq
+  intro U V j _ _ a p sqU _ V' U' b p' c sq' _ _
+  have : SmoothOfRelativeDimension d p :=
+    (smoothOfRelativeDimension_isStableUnderBaseChange (n := d)).of_isPullback sqU
+      inferInstance
+  have : HasInvertibleExponent Λ V := HasInvertibleExponent.of_hom a
+  exact isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension Λ p d sq'
 
 end AlgebraicGeometry.Etale
