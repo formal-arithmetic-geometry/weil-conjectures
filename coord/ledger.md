@@ -18768,3 +18768,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:48 L: merged deliver/K9/Sheaf.AlgebraicGeometry.SeparableClosureConservative (stage 3; reviewer PASS; first push; landing 20261020T174820-L-802150 (proof); batch 20261020T174710; modules 1; new nodes 0)
 - 17:48 L: merged deliver/M3/Sheaf.Paper.PointSystemRefine (stage 3; reviewer PASS; after a return; landing 20261020T174823-L-803178 (interface); batch 20261020T174710; modules 1; new nodes 0; change records: coord/changes/point-system-refine-proof-imports.md)
 - 17:48 L: merged deliver/M8/Sheaf.Algebra.Homology.SplitCellComplexKFlat (stage 3; reviewer PASS; first push; landing 20261020T174825-L-803879 (proof); batch 20261020T174710; modules 1; new nodes 0)
+- 17:48 L: merged deliver/P1/Sheaf.Algebra.Homology.FilteredTensorGradedComparison (stage 3; reviewer PASS; first push; landing 20261020T174828-L-804893 (proof); batch 20261020T174710; modules 1; new nodes 0)
