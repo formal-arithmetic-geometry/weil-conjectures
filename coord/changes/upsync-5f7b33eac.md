@@ -211,3 +211,11 @@ Importers taken out with them (20): `Sheaf.AlgebraicGeometry.BoundedConstructibl
 ## Prefer upstream, round 4
 
 The upstream module(s) `WeilConjectures.ZetaFunction.TraceFormula` failed here while identical to the tip: the upstream files of their environment that this sync had merged with changes of ours take the tip's file: `WeilConjectures.WeilSheaf.LowerShriekFunctoriality`, `WeilConjectures.ZetaFunction.TraceFormula`.
+
+## Quarantine, round 5 (2026-10-20T11:07:07Z)
+
+The global build of bac6830da5 failed in 1 module(s); they and their importers, 4 module(s), were moved to quarantine/ (tools/rework.py, coord/rework.tsv):
+
+- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic`: error: failed in the global build (no message located) (nodes lem-sfb-proper-serre-heart-continuous,lem-sfb-proper-serre-heart-integral,lem-sfb-proper-serre-heart-qbar)
+
+Importers taken out with them (3): `Sheaf.AlgebraicGeometry.EllAdicProperLocalizingCoproducts`, `Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound`, `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic`
