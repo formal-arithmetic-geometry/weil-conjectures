@@ -1,0 +1,247 @@
+{
+ "id": "lem-kun-relative-higher-image-cohomology-kernel",
+ "kind": "statement",
+ "title": "Raw cohomological kernel maps to zero in the higher-image colimit",
+ "statement": "Let I be a nonempty directed partially ordered set, DV,DB:Iᵒᵖ→Scheme diagrams with affine transition morphisms, and η:DV→DB with every η_i quasi-compact and quasi-separated. Let cV,cB be limiting cones and v:cV.pt→cB.pt satisfy πV_i η_i=v πB_i. Let F_i be arbitrary abelian etale sheaves on DV_i with inverse-image coefficient maps φ_ij satisfying the identity and composition coherences. Let A be the coherent diagram of their inverse images on cV.pt, with specified isomorphisms eA_i and the corresponding arrow formula hA. Let cA be a colimit cocone and q a natural number. Let H be a diagram on cB.pt identified by eH_i with πB_i^* H^q(Rη_i,* F_i[0]); its arrows are the specified degree-q commutative-square exchange maps followed by coefficient transitions, conjugated by inverse-image composition and eH_i. Let cH be any colimit cocone of H. Fix i, put K_i=D(πB_i*)Rη_i,*F_i[0], m_i the derived projection/coefficient mate [def-kun-relative-higher-image-derived-map], and E_i:H_i≅H^q(K_i) the comparison [def-kun-relative-higher-image-homology-iso] after eH_i. For every affine etale test scheme V over cB.pt and raw class z:Z[V][0]→K_i[q], if z m_i[q]=0 then the cH coprojection sends E_i⁻¹τ_K_i(z) to zero on V. The conclusion concerns the sheaf colimit, not eventual zero at a finite index. Conventions and constructions: [def-weil-pbc-scheme-conventions], [def-weil-pbc-abelian-etale-sheaves], [def-weil-pbc-inverse-image], [def-weil-pbc-category-colimit], [def-weil-pbc-direct-image], [def-kun-commutative-derived-exchange], [pqf-def-affine-morphism], [def-pc-scheme], [def-weil-pbc-derived-categories], [def-kun-relative-higher-image-derived-map], [def-kun-relative-higher-image-exchange], [def-kun-relative-higher-image-homology-iso], [def-kun-derived-homology-sections-comparison], [def-kun-derived-homology-sections-functor].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EYM, lemma-relative-colimit-general, second proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-direct-image",
+  "def-kun-commutative-derived-exchange",
+  "pqf-def-affine-morphism",
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "def-kun-relative-higher-image-derived-map",
+  "def-kun-relative-higher-image-exchange",
+  "def-kun-relative-higher-image-homology-iso",
+  "def-kun-derived-homology-sections-comparison",
+  "def-kun-derived-homology-sections-functor"
+ ],
+ "proof": [
+  {
+   "text": "Use the given colimit L of H and its canonical coefficient/projection exchange legs. The given H arrow formula, coefficient coherence and mate pasting give the cocone law. Restrict to tail inverse-image affine opens and identify the restricted comparison by the localization cube. On a descended affine etale object U_j, degree-zero continuity on the colimit of affine etale sites gives L(U)=colim G_j(U_j), with G_j=R^qη_j,*F_j. The right-adjoint evaluation formula identifies the units and thus the actual transition maps. This is precisely the section formula in unit step 3, retained in the kernel argument.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-kun-derived-exchange-cube",
+    "lem-weil-pbc-etale-limit-tail-open-coefficients",
+    "lem-weil-pbc-affine-etale-site-topos",
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "lem-weil-pbc-cohomology-colimit-of-sites",
+    "lem-weil-pbc-etale-localization-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For this model set $T_j=V_j\\times_{B_j}U_j$ and $T=V\\times_BU$. Each $T_j$ is qcqs: $T_j\\to U_j$ is a base change of the qcqs $u_j$, and $U_j$ is affine. For $k\\ge j$, $T_k\\cong V_k\\times_{V_j}T_j$, because $U_k=U_j\\times_{B_j}B_k$ and the original square commutes. Thus $T_k\\to T_j$ is affine, even though $V_k\\to V_j$ need not be a base change of $B_k\\to B_j$. The projections exhibit $T=\\varprojlim_{j\\ge i}T_j$: maps to the $T_j$ amount to compatible maps to the $V_j$ and $U_j$ with equal images in the $B_j$, hence to maps to $V$ and $U$ with equal images in $B$. Restrict $A_j$ to $T_j$ and call it $A_{j,T_j}$. The induced coefficient system has limit coefficient $A|_T$, since inverse images compose and commute with colimits. The cohomology-continuity theorem for varying abelian sheaves consequently gives the canonical isomorphism\n$$\\alpha_U:\\varinjlim_{j\\ge i}H^q(T_j,A_{j,T_j})\\xrightarrow{\\sim}H^q(T,A|_T).$$\nThe maps are exactly pullback on cohomology followed by the coefficient transitions. This argument applies after any replacement of $U_i$ by an affine etale object at any later stage.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-derived-inverse-image-composition",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYM, lemma-relative-colimit-general, second proof, left vertical arrow in the cohomology/sheaf diagram"
+   }
+  },
+  {
+   "text": "Use the section formula to construct h_U from filtered chart cohomology to L(U). Locally lift the pullback homology section to a stage higher-image section and then to chart cohomology. Descend the etale refinements and maps. Local injectivity of the raw-section comparison identifies its raw representative with the given raw class after a further refinement. Its limit chart cohomology is therefore zero by the raw-zero hypothesis. Cohomology continuity is injective on colim P_j, so the class is zero in that colimit. The map h_U sends it to zero in L(U), and the actual mate chart identity identifies this with the given section image in L. The refinements cover the test scheme, so sheaf separatedness gives zero there. No finite-stage detection of sections is asserted here.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+    "lem-kun-commutative-exchange-chart",
+    "lem-kun-derived-homology-sections-comparison",
+    "sbc-lem-higher-direct-image-presheaf",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-mate-pasting",
+  "lem-kun-derived-exchange-cube",
+  "lem-weil-pbc-etale-limit-tail-open-coefficients",
+  "lem-weil-pbc-affine-etale-site-topos",
+  "lem-weil-pbc-affine-etale-site-colimit",
+  "lem-weil-pbc-cohomology-colimit-of-sites",
+  "lem-weil-pbc-etale-localization-exchange",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "lem-kun-commutative-exchange-chart",
+  "lem-kun-derived-homology-sections-comparison",
+  "sbc-lem-higher-direct-image-presheaf",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "prop-weil-pbc-derived-inverse-image-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EYM, lemma-relative-colimit-general, second proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"higherDirectImage\"",
+   "results": "0 hits: ",
+   "date": "2026-10-20",
+   "verdict": "No matching relative continuity statement. Hits include structure-sheaf limits, abelian cohomology and ordinary stalk APIs; none supplies the arbitrary varying-base coefficient mate comparison. Read the relevant library APIs and use the existing comparison proofs where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of abelian sheaves commute with directed colimits along affine inverse limits of schemes",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.preservesColimit_Γ, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType",
+   "date": "2026-10-20",
+   "verdict": "No matching relative continuity statement. Hits include structure-sheaf limits, abelian cohomology and ordinary stalk APIs; none supplies the arbitrary varying-base coefficient mate comparison. Read the relevant library APIs and use the existing comparison proofs where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|relative.*continuity",
+   "results": "0 hits: ",
+   "date": "2026-10-20",
+   "verdict": "No matching relative continuity statement. Hits include structure-sheaf limits, abelian cohomology and ordinary stalk APIs; none supplies the arbitrary varying-base coefficient mate comparison. Read the relevant library APIs and use the existing comparison proofs where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "(stalk|sheafFiber).*(colimit|zero)|(colimit|limit).*higher.*(image|cohomology)",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Spec.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+   "date": "2026-10-20",
+   "verdict": "No matching relative continuity statement. Hits include structure-sheaf limits, abelian cohomology and ordinary stalk APIs; none supplies the arbitrary varying-base coefficient mate comparison. Read the relevant library APIs and use the existing comparison proofs where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategoryPlus\"",
+   "results": "0 hits: ",
+   "date": "2026-10-20",
+   "verdict": "No matching relative continuity statement. Hits include structure-sheaf limits, abelian cohomology and ordinary stalk APIs; none supplies the arbitrary varying-base coefficient mate comparison. Read the relevant library APIs and use the existing comparison proofs where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local derived cohomology classes of abelian sheaves descend through affine inverse limits of schemes",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, CategoryTheory.Sheaf.H, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone",
+   "date": "2026-10-20",
+   "verdict": "No matching relative continuity statement. Hits include structure-sheaf limits, abelian cohomology and ordinary stalk APIs; none supplies the arbitrary varying-base coefficient mate comparison. Read the relevant library APIs and use the existing comparison proofs where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedHomToHomology|freeSheafSections|locally.*[Hh]omology",
+   "results": "0 hits: ",
+   "date": "2026-10-20",
+   "verdict": "No matching relative continuity statement. Hits include structure-sheaf limits, abelian cohomology and ordinary stalk APIs; none supplies the arbitrary varying-base coefficient mate comparison. Read the relevant library APIs and use the existing comparison proofs where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"preadditiveYoneda\", \"homologyFunctor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-20",
+   "verdict": "No matching relative continuity statement. Hits include structure-sheaf limits, abelian cohomology and ordinary stalk APIs; none supplies the arbitrary varying-base coefficient mate comparison. Read the relevant library APIs and use the existing comparison proofs where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homology sheaves are locally computed by derived morphisms from free representable abelian sheaves",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, SheafOfModules.generatorsOfIsCokernelFree_I, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.Sheaf.instAddCommGroupH",
+   "date": "2026-10-20",
+   "verdict": "No matching relative continuity statement. Hits include structure-sheaf limits, abelian cohomology and ordinary stalk APIs; none supplies the arbitrary varying-base coefficient mate comparison. Read the relevant library APIs and use the existing comparison proofs where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images of abelian etale sheaves commute with directed colimits over affine inverse limits of schemes",
+   "results": "8 hits: AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.colimitDesc_preimage, AlgebraicGeometry.instHasColimitOverScheme, AlgebraicGeometry.Scheme.AffineZariskiSite.isColimitCocone, AlgebraicGeometry.preservesColimit_Γ, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.preservesLimit_rightOp_Γ, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit",
+   "date": "2026-10-20",
+   "verdict": "No matching relative continuity statement. Hits include structure-sheaf limits, abelian cohomology and ordinary stalk APIs; none supplies the arbitrary varying-base coefficient mate comparison. Read the relevant library APIs and use the existing comparison proofs where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived homology sheaves are locally isomorphic to derived morphisms from free representable abelian sheaves, with natural postcomposition maps",
+   "results": "8 hits: SheafOfModules.freeHomEquiv_comp_apply, HasDerivedCategory.standard, CategoryTheory.Sheaf.freeYonedaHomEquiv, HasDerivedCategory, SheafOfModules.freeHomEquiv, SheafOfModules.freeHomEquiv_freeMap, SheafOfModules.freeFunctor, CategoryTheory.Functor.IsCoverDense.sheafHom",
+   "date": "2026-10-20",
+   "verdict": "No matching relative continuity statement. Hits include structure-sheaf limits, abelian cohomology and ordinary stalk APIs; none supplies the arbitrary varying-base coefficient mate comparison. Read the relevant library APIs and use the existing comparison proofs where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtered colimits of abelian sheaves: a zero section over a compact affine scheme is killed by a later transition map, uniformly for a finite family",
+   "results": "8 hits: ModuleCat.FilteredColimits.colimit_zero_eq, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.Limits.Concrete.colimit_rep_eq_zero, AddGrpCat.FilteredColimits.colimit_zero_eq, CategoryTheory.Sheaf.ab5ofSize, AddMonCat.FilteredColimits.colimitZero, SheafOfModules.Presentation.isColimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+   "date": "2026-10-20",
+   "verdict": "No matching relative continuity statement. Hits include structure-sheaf limits, abelian cohomology and ordinary stalk APIs; none supplies the arbitrary varying-base coefficient mate comparison. Read the relevant library APIs and use the existing comparison proofs where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric stalks detect isomorphisms of etale sheaves and preserve filtered colimits; local surjectivity gives germ representatives",
+   "results": "8 hits: TopCat.Presheaf.isIso_iff_stalkFunctor_map_iso, AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_hom_eq_germ_apply, TopCat.Presheaf.isIso_of_stalkFunctor_map_iso, TopCat.Presheaf.locally_surjective_iff_surjective_on_stalks, AlgebraicGeometry.PresheafedSpace.stalkMap.stalkIso, TopCat.Presheaf.germ, TopCat.Presheaf.app_isIso_of_stalkFunctor_map_iso, smoothSheafCommRing.forgetStalk",
+   "date": "2026-10-20",
+   "verdict": "No matching relative continuity statement. Hits include structure-sheaf limits, abelian cohomology and ordinary stalk APIs; none supplies the arbitrary varying-base coefficient mate comparison. Read the relevant library APIs and use the existing comparison proofs where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact inverse image homology comparison and derived base change exchange maps of abelian sheaves with coefficient maps",
+   "results": "8 hits: CategoryTheory.ShortComplex.mapHomologyIso_inv_naturality, CategoryTheory.Equivalence.sheafCongr.inverse_obj_val_map, CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app, CategoryTheory.ShortComplex.mapHomologyIso_inv_naturality_assoc, AlgebraicGeometry.PresheafedSpace.sheafIsoOfIso_inv, CategoryTheory.ShortComplex.LeftHomologyData.leftHomologyIso_inv_naturality, CategoryTheory.ShortComplex.leftHomologyIso_inv_naturality, HomologicalComplex.homologyMapIso_inv",
+   "date": "2026-10-20",
+   "verdict": "No matching relative continuity statement. Hits include structure-sheaf limits, abelian cohomology and ordinary stalk APIs; none supplies the arbitrary varying-base coefficient mate comparison. Read the relevant library APIs and use the existing comparison proofs where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeHigherDirectImageContinuity",
+  "date": "2026-10-21",
+  "group": "H5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0ezt",
+   "place": "Proof: invocation of Tag 0EYM, second proof, Raw cohomological kernel maps to zero in the higher-image colimit",
+   "via": [
+    "lem-kun-0eym"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-kun-relative-continuity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeHigherDirectImageCohomologyKernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeHigherDirectImageCohomologyKernel.lean",
+  "declaration": "AlgebraicGeometry.Etale.relativeHigherDirectImage_cohomology_kernel",
+  "statement": "theorem relativeHigherDirectImage_cohomology_kernel\n    {I : Type u} [PartialOrder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (DV DB : Iᵒᵖ ⥤ Scheme.{u}) (η : DV ⟶ DB)\n    [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (DV.map a)]\n    [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (DB.map a)]\n    [∀ i : Iᵒᵖ, QuasiCompact (η.app i)]\n    [∀ i : Iᵒᵖ, QuasiSeparated (η.app i)]\n    (cV : Cone DV) (hcV : IsLimit cV) (cB : Cone DB) (hcB : IsLimit cB)\n    (v : cV.pt ⟶ cB.pt)\n    (hu : ∀ i : Iᵒᵖ, cV.π.app i ≫ η.app i = v ≫ cB.π.app i)\n    (F : ∀ i : I, Sheaf (DV.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φ : ∀ {i j : I} (a : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (DV.map a.op)).obj (F i) ⟶ F j)\n    (hφid : ∀ i : I, φ (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (DV.map_id (op i)))).hom.app\n        (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (DV.obj (op i))).hom.app (F i))\n    (hφcomp : ∀ (i j k : I) (a : i ⟶ j) (b : j ⟶ k),\n      φ (a ≫ b) =\n        (upperStarComp AddCommGrpCat.{u + 1} (DV.map b.op) (DV.map a.op)\n          (DV.map (a ≫ b).op) (DV.map_comp b.op a.op)).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (DV.map b.op)).map (φ a) ≫ φ b)\n    (A : I ⥤ Sheaf cV.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (eA : ∀ i : I, A.obj i ≅\n      (upperStar AddCommGrpCat.{u + 1} (cV.π.app (op i))).obj (F i))\n    (hA : ∀ (i j : I) (a : i ⟶ j), A.map a =\n      (eA i).hom ≫\n        (upperStarComp AddCommGrpCat.{u + 1} (cV.π.app (op j)) (DV.map a.op)\n          (cV.π.app (op i)) (cV.w a.op).symm).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (cV.π.app (op j))).map (φ a) ≫ (eA j).inv)\n    (cA : Cocone A) (hcA : IsColimit cA) (q : ℕ)\n    (H : I ⥤ Sheaf cB.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (eH : ∀ i : I, H.obj i ≅\n      (upperStar AddCommGrpCat.{u + 1} (cB.π.app (op i))).obj\n        ((DerivedCategory.Plus.homologyFunctor\n          (Sheaf (DB.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)).obj\n          ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} (η.app (op i))).obj\n            ((DerivedCategory.Plus.singleFunctor\n              (Sheaf (DV.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj\n              (F i)))))\n    (hH : ∀ (i j : I) (a : i ⟶ j), H.map a =\n      (eH i).hom ≫\n        (upperStarComp AddCommGrpCat.{u + 1} (cB.π.app (op j)) (DB.map a.op)\n          (cB.π.app (op i)) (cB.w a.op).symm).hom.app\n          ((DerivedCategory.Plus.homologyFunctor\n            (Sheaf (DB.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)).obj\n            ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} (η.app (op i))).obj\n              ((DerivedCategory.Plus.singleFunctor\n                (Sheaf (DV.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj\n                (F i)))) ≫\n        (upperStar AddCommGrpCat.{u + 1} (cB.π.app (op j))).map\n          (relativeHigherDirectImageExchange ⟨η.naturality a.op⟩ (F i) (F j) (φ a) q) ≫\n        (eH j).inv)\n    (cH : Cocone H) (hcH : IsColimit cH) (i : I) :\n    let Kᵢ := (upperStar AddCommGrpCat.{u + 1} (cB.π.app (op i))).mapDerivedCategoryPlus.obj\n      ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} (η.app (op i))).obj\n        ((DerivedCategory.Plus.singleFunctor _ 0).obj (F i)))\n    let E : H.obj i ≅ (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj Kᵢ :=\n      eH i ≪≫ relativeHigherDirectImageHomologyIso (η.app (op i))\n        (cB.π.app (op i)) (F i) q\n    ∀ (V : cB.pt.Etale) [IsAffine V.left]\n      (z : ((derivedHomologySectionsFunctor cB.pt (q : ℤ)).obj Kᵢ).obj (op V)),\n      ((derivedHomologySectionsFunctor cB.pt (q : ℤ)).map\n        (relativeHigherDirectImageDerivedMap ⟨hu (op i)⟩ (F i) cA.pt\n          ((eA i).inv ≫ cA.ι.app i))).app (op V) z = 0 →\n      (cH.ι.app i).hom.app (op V)\n        (E.inv.hom.app (op V)\n          ((derivedHomologySectionsComparison cB.pt (q : ℤ) Kᵢ).app (op V) z)) = 0",
+  "branch": "sheaf-dag",
+  "by": "H5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-b702e",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261020T233151-L-901470",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-b702e",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261020T233151-L-901470",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof (stalk conservativity + germ descent/vanishing) and 8 new modules vs clone item module, the lem-kun-0eym node and its new nodes; verbatim moved relativeHigherDirectImageExchange vs old text; 2 retained sorry statements vs Stacks 0EYM/0EYL/09YQ; importer chain Preorder→ConeLaws→HigherDirectImagesLimits compiled against the delivered oleans"
+ }
+}
