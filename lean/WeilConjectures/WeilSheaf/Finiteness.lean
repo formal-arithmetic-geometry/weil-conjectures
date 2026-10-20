@@ -15,6 +15,17 @@ public import WeilConjectures.WeilSheaf.LowerStarPairing
 public import WeilConjectures.WeilSheaf.PoincareDuality
 public import WeilConjectures.WeilSheaf.ProperCohomology
 public import WeilConjectures.WeilSheaf.StalkPairing
+import Sheaf.Algebra.Homology.DerivedCategory.DVRComplexAmplitude
+import Sheaf.AlgebraicGeometry.EtaleDirectImageVanishing
+import Sheaf.AlgebraicGeometry.GeometricallyConnectedAlgebraicClosure
+import Sheaf.AlgebraicGeometry.PureDimension
+import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.Paper.FiniteFieldFiber
+import Sheaf.Paper.FiniteTorAmplitudeSites
+import Sheaf.Paper.GeometricHypotheses
+import Sheaf.Paper.PointFdComplexes
+import Sheaf.Paper.PointFgCompleteComplexes
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Finiteness of the cohomology of Weil complexes and Frobenius
