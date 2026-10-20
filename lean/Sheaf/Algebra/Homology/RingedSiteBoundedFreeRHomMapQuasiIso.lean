@@ -9,7 +9,7 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Sheaf.AlgebraicGeometry.StrictlyPerfectDerivedInternalHom
+import Mathlib.CategoryTheory.MorphismProperty.Retract
 import WeilConjectures.Algebra.Homology.BoundedExactTermHomQuasiIso
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
@@ -33,6 +33,31 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CategoryTheory
+
+/-- A retract of a short exact complex in an abelian category is short exact. -/
+private theorem shortExact_of_retract
+    {A : Type*} [Category A] [Abelian A] {S T : ShortComplex A}
+    (i : S ⟶ T) (r : T ⟶ S) (hir : i ≫ r = 𝟙 S) (hT : T.ShortExact) :
+    S.ShortExact := by
+  have h₁ : i.τ₁ ≫ r.τ₁ = 𝟙 S.X₁ := congrArg (fun f => f.τ₁) hir
+  have h₂ : i.τ₂ ≫ r.τ₂ = 𝟙 S.X₂ := congrArg (fun f => f.τ₂) hir
+  have h₃ : i.τ₃ ≫ r.τ₃ = 𝟙 S.X₃ := congrArg (fun f => f.τ₃) hir
+  have : Mono T.f := hT.mono_f
+  have : Epi T.g := hT.epi_g
+  refine { exact := ?_, mono_f := ?_, epi_g := ?_ }
+  · rw [S.exact_iff_isZero_homology, IsZero.iff_id_eq_zero]
+    rw [← ShortComplex.homologyMap_id, ← hir, ShortComplex.homologyMap_comp]
+    have hz := T.exact_iff_isZero_homology.mp hT.exact
+    rw [hz.eq_of_src (ShortComplex.homologyMap r) 0, comp_zero]
+  · exact (MorphismProperty.monomorphisms A).of_retract
+      { i := Arrow.homMk i.τ₁ i.τ₂ i.comm₁₂
+        r := Arrow.homMk r.τ₁ r.τ₂ r.comm₁₂
+        retract := by ext <;> assumption } inferInstance
+  · exact (MorphismProperty.epimorphisms A).of_retract
+      { i := Arrow.homMk i.τ₂ i.τ₃ i.comm₂₃
+        r := Arrow.homMk r.τ₂ r.τ₃ r.comm₂₃
+        retract := by ext <;> assumption } inferInstance
+
 
 variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
   {R : Sheaf J CommRingCat.{u}}
@@ -108,7 +133,7 @@ private theorem exact_homObj_of_retract
       comm₂₃ := by simp [TE, TF] }
   have hret : inc ≫ ret = 𝟙 TE := by
     ext <;> simp [inc, ret, hir, TE]
-  exact ⟨hzE, AlgebraicGeometry.Scheme.shortExact_of_retract inc ret hret hF⟩
+  exact ⟨hzE, shortExact_of_retract inc ret hret hF⟩
 
 private theorem isIso_of_fan_maps
     {A : Type*} [Category A] {X Y : ℤ → A} {T U : A}
