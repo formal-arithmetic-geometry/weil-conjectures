@@ -17800,3 +17800,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:13 L: merged deliver/G6/Sheaf.SixFunctors.FiniteCompactProetale (stage 3; reviewer PASS; first push; landing 20261020T051329-L-1639838 (interface); batch 20261020T050952; modules 3; new nodes 2)
 - 05:13 L: merged deliver/G7/Sheaf.AlgebraicGeometry.ProperKunnethGlobalSections (stage 3; reviewer PASS; first push; landing 20261020T051332-L-1642217 (proof); batch 20261020T050952; modules 1; new nodes 0)
 - 05:13 L: merged deliver/G7/Sheaf.Paper.BoundedSiteAdjunctionTranspose (stage 3; reviewer PASS; after a return; landing 20261020T051335-L-1644516 (proof); batch 20261020T050952; modules 1; new nodes 0)
+- 05:13 L: merged deliver/G8/Sheaf.Paper.PointSectionsReconstruction (stage 3; reviewer PASS; first push; landing 20261020T051339-L-1647414 (proof); batch 20261020T050952; modules 1; new nodes 0)

@@ -19,12 +19,11 @@
  ],
  "proof": [
   {
-   "text": "Use the displayed adjunction of the statement. Its unit is $m\\mapsto1\\otimes m$ and its counit is evaluation $b\\otimes x\\mapsto b\\,x|_U$. The tensor and constant-sheaf definitions give these maps on local generators; balancing and sheafification make them well-defined. The two triangle identities hold on $m$ and $b\\otimes m$, hence as sheaf maps. Exact-functor derived factorization applies to both functors by the assumed exactness. Apply the unit and counit termwise and localize: their naturality equations, including naturality with inverses of quasi-isomorphisms, and their triangle identities persist. Thus these are the actual derived adjunction maps. We use throughout that exact functors commute with cohomology.",
+   "text": "Use the given exact adjunction and its canonical termwise derived adjunction. Evaluation at 1 identifies maps from the coefficient regular module and maps from the unit sheaf with the same final-object sections, so the left adjoint sends the regular module to the unit sheaf. The scalar-section bijection makes the unit invertible on the regular module. Finite products and cokernels extend this to every finitely presented module. Exact homology comparison and the localization formulas for the actual adjunction unit and counit upgrade cohomology isomorphisms to derived isomorphisms.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-proetale-locally-constant-sheaf",
     "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-sp-exact-functor-preserves-homology"
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
    ],
    "elementary": false,
    "source": {
@@ -33,12 +32,12 @@
    }
   },
   {
-   "text": "First take $R=A_{E,n}$, so $B=\\underline R$. The coefficient DVR has finite residue field; its filtration by $(\\varpi_E^j)$ has successive quotients isomorphic to that residue field by $a\\mapsto\\varpi_E^j a$, so $R$ is finite. For a finite $R$-module $M$, choose a finite generating set and a surjection $R^b\\to M$. Its kernel is a finite set, since $R^b$ is finite; taking all kernel elements as generators gives $R^a\\to R^b\\to M\\to0$ with $a,b$ finite. On finite free modules the unit is the identity under $\\Gamma(s,B)=R$. Naturality gives a morphism of this presentation to its image under the exact functor $\\Gamma L_R$; taking cokernels proves the unit for $M$. The sheaf tensor unit identifies $L_RM$ with $\\underline M$. This is locally constant on the single stratum $s$, with finite stalk $M$ by the constant-stalk lemma, so is constructible.",
+   "text": "At finite level the quotient coefficient ring is finite. A finite module is finitely presented by Mathlib, so step 1 proves its unit invertible. The constant-module encoding identifies the left adjoint with ordinary constant sheafification by uniqueness of left adjoints. The constant module is finite locally constant on the etale point. Comparison preserves constructibility and constant sheaves, and the encoding transports this to intrinsic pro-etale module constructibility.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-finite-torsion-constructibility",
-    "lem-weil-proetale-constant-sheaf-stalk",
-    "lem-weil-l-adic-extension-integers-dvr"
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-proetale-constant-module-encoding",
+    "lem-weil-pbc-proetale-constant-module-constructibility",
+    "def-weil-finite-torsion-constructibility"
    ],
    "elementary": false,
    "source": {
@@ -47,14 +46,12 @@
    }
   },
   {
-   "text": "For a constructible finite-stage sheaf $F$, finite-ring constructible comparison writes $F\\cong\\nu_s^*G$ with $G$ constructible on $s_{\\mathrm{Et}}$. The algebraically closed-point theorem identifies $G$ canonically with the constant sheaf of $G(s)$. This identification respects addition and every scalar endomorphism by its naturality for those maps, so is an $R$-module identification. The comparison definition gives $(\\nu_{s,*}F)(s)=F(s)$, and the comparison unit gives $G\\cong\\nu_{s,*}\\nu_s^*G$; hence $G(s)=F(s)$. Pullback takes a constant sheaf to the constant sheaf with the same value: indeed maps from either to a sheaf $H$ are exactly maps from that value to $H(s)$, by the two adjunctions and the displayed formula for $\\nu_{s,*}$. Consequently $\\underline{F(s)}\\to F$ is an isomorphism. Its local formula is $x\\mapsto x|_U$, so after $L_RM=\\underline M$ it is precisely the evaluation counit.",
+   "text": "Finite-ring constructible origin writes each finite constructible pro-etale module as the comparison pullback of an etale constructible module. Forgetting module structure, the algebraically closed-point theorem makes the etale constant-sheaf counit invertible; compatibility with forgetting reflects this for modules. Finiteness of the constant etale module sheaf makes its value finitely generated, hence finite over the finite coefficient ring. Thus the original module is isomorphic to the constant realization of a finite module. The adjunction triangle identity and the invertible unit show that its actual counit is invertible.",
    "uses": [
     "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
     "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
-    "def-weil-pbc-site-comparison-morphism",
-    "prop-weil-pbc-site-comparison-finite-level",
-    "def-weil-proetale-locally-constant-sheaf",
-    "def-pur-sheaf-tensor-product"
+    "lem-weil-pbc-proetale-constant-module-encoding",
+    "lem-weil-pbc-proetale-constant-module-constructibility"
    ],
    "elementary": false,
    "source": {
@@ -63,11 +60,10 @@
    }
   },
   {
-   "text": "For $c$ with bounded finite cohomology, exactness identifies $\\mathcal H^i(L_Rc)$ with $L_RH^i(c)$, which is constructible by step 2 and zero outside the same interval. Thus $L_Rc\\in D^b_c(s,R)$. On cohomology the unit is the module unit of step 2, hence is invertible by the cohomological isomorphism criterion. For $C\\in D^b_c(s,R)$, point-sections finiteness gives bounded finite cohomology for $\\Gamma(s,C)$. On cohomology its counit is the sheaf counit of step 3, again an isomorphism. The same criterion proves the actual finite-stage derived counit invertible. In particular, a finite-stage constructible complex with zero sections is zero.",
+   "text": "Apply exact homology comparison to the finite-cohomology complex: the same finite support is preserved and step 2 gives constructibility in every degree. Step 1 gives the derived unit. For a constructible finite complex, step 3 makes every cohomology counit invertible, hence the derived counit is invertible. Also finite constructible modules with zero sections vanish: each is constant and the adjunction triangle identity makes it a retract of the constant object on its sections. Applying this degreewise shows finite constructible complexes with zero derived sections vanish.",
    "uses": [
     "lem-sp-exact-functor-preserves-homology",
     "def-weil-finite-torsion-constructibility",
-    "lem-weil-point-sections-finiteness",
     "lem-weil-pbc-unbounded-derived-iso-cohomology"
    ],
    "elementary": false,
@@ -77,12 +73,10 @@
    }
   },
   {
-   "text": "Now $R=\\mathcal O_E$. The valuation-ring lemma makes $R$ a DVR and a PID; the PID lemma makes it Noetherian. For any finitely generated $R$-module $M$, the finite-free-resolution lemma supplies a surjection $R^{b}\\to M$ whose kernel $N$ is the image of a finite free module, hence finitely generated. It is torsion-free: a nonzero scalar annihilating an element of $N\\subset R^b$ annihilates all its coordinates in the domain $R$, so that element is zero. The DVR torsion-free lemma makes $N$ finite free. Thus $0\\to N\\to R^b\\to M\\to0$ is a bounded finite-projective resolution. Apply perfect-cohomology assembly to the bounded finitely generated cohomology of $c$. By the definition of perfectness, $c$ has a bounded finite-projective representative $P$. This argument includes $M=0$ and the zero complex.",
+   "text": "The valuation ring is a PID domain. For each finite module choose a finite free surjection using Mathlib. Its kernel is finitely generated over the Noetherian PID and free as a submodule of a free module. The short exact sequence therefore gives a two-term finite-projective resolution. The single-object short exact triangle, perfect triangle closure and bounded perfect-cohomology assembly produce a bounded finite-projective representative of each complex with bounded finitely generated cohomology. Finite modules over the PID are finitely presented, so step 1 also proves the integral derived unit.",
    "uses": [
     "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-pid-noetherian-normal",
-    "lem-weil-pbc-finite-free-resolution-noetherian",
-    "lem-sc-dvr-fg-torsionfree-free",
+    "lem-sf-perfect-ring-triangle-closure",
     "lem-sf-perfect-cohomology-assembly",
     "def-pc-perfect-ring-complex"
    ],
@@ -93,14 +87,12 @@
    }
   },
   {
-   "text": "The scheme $s=\\operatorname{Spec}k$ is noetherian and has dimension zero, and $\\ell$ is invertible in $k$. Apply the integral stratified-perfect characterization with the single stratum $s$, its identity cover, and the perfect complex $P$ of step 5. The constant sheaf of each term of $P$ is a direct summand of a finite free $\\underline R$-module sheaf, so tensor with it is exact. The bounded-flat K-flat lemma therefore applies to $\\underline P$, and its ordinary tensor computes the derived tensor, so $L_RP=B\\otimes_{\\underline R}\\underline P$ satisfies condition (ii) there. The characterization supplies membership in exactly the integral category of the statement, with completeness, compatible finite-stage étale origins and a uniform interval for reductions. The interval can be taken to contain the degrees of $P$, since its reduction has those same term degrees. Exactness gives $L_RP\\cong L_Rc$. On a finite free module the integral unit is the identity under $\\Gamma(s,B)=R$. A finite projective module is a direct summand of a finite free module; naturality with its inclusion and projection restricts this identity to that summand. The unit is therefore an isomorphism termwise on $P$, and by naturality and exact derived factorization also for $c$.",
+   "text": "The completed regular coefficient sheaf in degree zero is integral constructible. Step 1 identifies it with extension of the regular coefficient module. Pull integral constructibility back along the exact derived extension functor. This object property is triangulated and isomorphism-closed. Finite products put all finite free modules in it. The PID presentations of step 5 and their short exact triangles put every finite module in degree zero in it. Bounded truncation devissage then puts every bounded finite-cohomology complex in it. Transport along the perfect representative isomorphism yields the final constructible representative clause.",
    "uses": [
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "def-pc-perfect-ring-complex",
-    "def-weil-derived-complete-integral-detailed",
+    "lem-weil-constant-coefficient-objects-constructible",
+    "lem-weil-integral-constructible-triangulated",
     "lem-weil-pbc-exact-functor-derived-factorization",
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-independent-bounded-flat-kflat"
+    "def-weil-derived-complete-integral-detailed"
    ],
    "elementary": false,
    "source": {
@@ -109,16 +101,15 @@
    }
   },
   {
-   "text": "Let $C\\in D^b_c(s,R)$ and $c=\\Gamma(s,C)$. Sections finiteness places $c$ in the module category required in step 5. By step 6, $L_Rc$ is integral constructible and its unit $\\eta_c$ is invertible. The triangle identity $\\Gamma(\\epsilon_C)\\circ\\eta_c=\\mathrm{id}_c$ implies that $\\Gamma(\\epsilon_C)$ is invertible. Let $K$ be a cone of the actual counit $\\epsilon_C:L_Rc\\to C$. Cone-closure in the stratified-perfect characterization gives $K\\in D^b_c(s,R)$. Exactness of sections and the cohomology long exact sequence give $\\Gamma(s,K)=0$. For each $n$, the sections/reduction comparison applies to this $K$ and yields $\\Gamma(s,K\\otimes_R^L A_{E,n})\\cong\\Gamma(s,K)\\otimes_R^L A_{E,n}=0$. Each reduction is bounded constructible by the integral definition, so step 4 forces it to be zero. In the derived-completeness triangle of $K$, both products of reductions are now zero. Its cohomology long exact sequence gives $H^i(K)=0$ for every $i$; the cohomological criterion gives $K=0$. The cone triangle and that same exact sequence then make every $H^i(\\epsilon_C)$ invertible, so $\\epsilon_C$ is an isomorphism.",
+   "text": "Sections finiteness puts sections of an integral constructible object in the bounded finitely generated module class. Compare the small and standard module localizations through a common cochain representative and their homology-factorization isomorphisms. Steps 5 and 6 give the invertible unit and constructibility of its extended sections. The right triangle identity makes sections of the actual counit invertible. Triangulated integral constructibility contains its cone Z. Exact sections kill Z. The sections/reduction comparison and exactness of derived quotient tensor imply that every finite reduction of Z has zero sections. Step 4 kills those reductions. Their restrictions are zero; their product is zero by the product universal property. The canonical completeness Roos triangle of Z has two zero vertices, hence Z is zero. The counit cone criterion proves the counit invertible.",
    "uses": [
     "lem-weil-point-sections-finiteness",
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "lem-weil-point-proetale-sections-exact",
-    "lem-sf-derived-homology-long-exact",
+    "lem-weil-integral-constructible-triangulated",
     "lem-pod-point-sections-derived-reduction",
-    "def-weil-derived-complete-integral-detailed",
+    "lem-pc-derived-tensor-second-factor-functor",
     "def-weil-derived-complete",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+    "def-weil-derived-complete-integral-detailed",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
    ],
    "elementary": false,
    "source": {
@@ -127,7 +118,7 @@
    }
   },
   {
-   "text": "For a module-complex map $f:c\\to c'$, the units satisfy $\\Gamma L_R(f)\\circ\\eta_c=\\eta_{c'}\\circ f$; for a sheaf-complex map $g:C\\to C'$, evaluation gives $g\\circ\\epsilon_C=\\epsilon_{C'}\\circ L_R\\Gamma(g)$ on every local generator $b\\otimes x$. These equations hold before localization and hence also for inverses of quasi-isomorphisms and their composites. They prove the requested naturality on the two derived categories, independently of any presentation or perfect representative chosen in the proof.",
+   "text": "The maps throughout are the given adjunction unit and counit and the canonical localized adjunction unit and counit. Their naturality and triangle equations are part of these natural transformations, so no representative choices change the resulting morphisms.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -138,35 +129,30 @@
  ],
  "proof_deps": [
   "def-pc-perfect-ring-complex",
-  "def-pur-sheaf-tensor-product",
   "def-weil-derived-complete",
   "def-weil-derived-complete-integral-detailed",
   "def-weil-finite-torsion-constructibility",
-  "def-weil-pbc-site-comparison-morphism",
-  "def-weil-proetale-locally-constant-sheaf",
+  "lem-pc-derived-tensor-second-factor-functor",
   "lem-pod-point-sections-derived-reduction",
-  "lem-sc-dvr-fg-torsionfree-free",
-  "lem-sf-derived-homology-long-exact",
   "lem-sf-perfect-cohomology-assembly",
+  "lem-sf-perfect-ring-triangle-closure",
   "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-weil-integral-constructible-triangulated",
   "lem-weil-l-adic-extension-integers-dvr",
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-finite-free-resolution-noetherian",
   "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
-  "lem-weil-pbc-independent-bounded-flat-kflat",
-  "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
+  "lem-weil-pbc-proetale-constant-module-encoding",
   "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
   "lem-weil-pbc-unbounded-derived-iso-cohomology",
-  "lem-weil-point-proetale-sections-exact",
-  "lem-weil-point-sections-finiteness",
-  "lem-weil-proetale-constant-sheaf-stalk",
-  "prop-weil-pbc-site-comparison-finite-level"
+  "lem-weil-point-sections-finiteness"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
-  "place": "second sentence: point-category identification by sections and extension of scalars"
+  "place": "Second sentence; G8 Lean proof: finite presentations, constant-module encoding, PID perfect models, triangulated devissage from the completed regular coefficient object, and counit-cone reduction/completeness."
  },
  "mathlib_searches": [
   {
@@ -319,18 +305,12 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-proetale-constant-sheaf-stalk",
   "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
   "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
-  "prop-weil-pbc-site-comparison-finite-level",
   "lem-weil-point-sections-finiteness",
   "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-finite-free-resolution-noetherian",
   "lem-sf-perfect-cohomology-assembly",
-  "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "lem-weil-point-proetale-sections-exact",
-  "lem-pod-point-sections-derived-reduction",
-  "lem-weil-pbc-independent-bounded-flat-kflat"
+  "lem-pod-point-sections-derived-reduction"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -362,5 +342,15 @@
    "WeilConjectures.pointSectionsReconstruction"
   ],
   "note": "Repair of H3/H11: the ordinary extension is fixed on objects and morphisms to the recorded constant-module sheafification followed by tensor change of rings. Both explicit hom-equivalence formulas are required; exactness is assumed for these actual functors, and every unit/counit is that adjunction’s canonical termwise derived unit/counit. The Boolean covers finite and completed integral coefficients; integral modules use the canonical ULift ring, with unchanged actions through its ring equivalence."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-5fb81",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261020T051339-L-1647414",
+  "kind": "proof",
+  "note": "independent cc review: Unchanged pointSectionsReconstructionResult/theorem header vs clone; proof compiled clean with 24.4 s CPU, axioms propext/sorryAx(from sorry'd point_sections_finiteness, point_sections_derived_reduction)/choice/Quot.sound; node proof/proof_deps vs private helpers; importer FinitePointInternalHomEvaluation clean; unit sk-thm-sf-package realized empty"
  }
 }
