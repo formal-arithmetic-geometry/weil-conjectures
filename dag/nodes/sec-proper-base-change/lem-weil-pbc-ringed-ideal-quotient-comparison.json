@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-ringed-ideal-quotient-comparison",
+ "kind": "statement",
+ "title": "Quotient criterion for the scalar-extension unit of an ideal subsheaf",
+ "statement": "Let R,B be commutative ring sheaves on a small site, phi:R -> B, and I an ideal subsheaf [def-weil-pbc-ringed-site-ideal]. If I.IsQuotientIso phi holds, the unit of the sheafified scalar-extension adjunction [def-weil-pbc-ringed-tensor-section-calculus] is invertible on the categorical cokernel of I.inclusion. Flatness and finite generation are not required.",
+ "stmt_deps": [
+  "def-weil-pbc-ringed-site-ideal",
+  "def-weil-pbc-ringed-tensor-section-calculus"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 and 03CY; the quotient hypothesis used in Algebraization Tag 099I"
+ },
+ "proof": [
+  {
+   "text": "Construct the sectionwise quotient presheaves, their projections, and their coefficient comparison. The kernel and lifting clauses of IsQuotientIso give injectivity and local surjectivity. Sheafification turns the comparison into an isomorphism; the explicit sheafified quotient cofork identifies it with the coefficient map on categorical cokernels.",
+   "uses": [
+    "def-weil-pbc-ringed-site-ideal",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the scalar extension of the ring module and its inverse using the scalar-extension adjunction and the unit-section equivalence. Construct the map from the extended source ideal to the target ideal. Every local finite sum of target coefficients times source ideal sections lifts through this map, so it is epic.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "def-weil-pbc-ringed-site-ideal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Scalar extension preserves cokernels. The epic ideal map and the ring-module isomorphism identify the extended source quotient with the target quotient. Check after the quotient projection that its composite with the adjunction unit is the coefficient quotient comparison. Cancel the target isomorphism.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-site-ideal",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-ringed-tensor-section-calculus"
+ ],
+ "proof_origin": {
+  "by": "R2 stage-3 worker",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 and 03CY; the quotient hypothesis used in Algebraization Tag 099I"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The unit of flat scalar extension is invertible on the quotient by an ideal when the ring quotients agree",
+   "results": "{\"t\": \"2026-10-20T13:43:37Z\", \"tool\": \"leanfinder\", \"query\": \"The unit of flat scalar extension is invertible on the quotient by an ideal when the ring quotients agree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.instInvertibleSubtypeMemSubmoduleSubmoduleAlgebra\", \"Module.FaithfullyFlat.self\", \"Algebra.TensorProduct.quotIdealMapEquivTensorQuot_mk\", \"Ideal.qoutMapEquivTensorQout\", \"RingHom.flat_algebraMap_iff\", \"Ideal.quotCotangent\", \"Module.flat_of_isLocalized_span\", \"RingHom.Flat\"], \"digest\": \"c9677774444a7f95\"}",
+   "date": "2026-10-20",
+   "verdict": "Ordinary tensor-quotient equivalences were found, but no corresponding module-sheaf unit comparison. Construct the sheaf quotient and its categorical cokernel."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cokernel\"",
+   "results": "{\"t\": \"2026-10-20T13:44:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"cokernel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.has_cokernel_pair_of_epi\", \"CategoryTheory.Limits.HasCokernels\", \"CategoryTheory.Limits.hasCokernels_of_hasCoequalizers\", \"CategoryTheory.Limits.CokernelCofork\", \"CategoryTheory.Limits.HasCokernel\", \"CategoryTheory.Limits.cokernel\", \"CategoryTheory.Limits.cokernel.zeroCokernelCofork\", \"CategoryTheory.Limits.HasCokernels.has_colimit\"], \"digest\": \"8efb9cb38b1bdf06\"}",
+   "date": "2026-10-20",
+   "verdict": "Generic cokernel constructors and uniqueness lemmas, used in the proof; no ideal-sheaf scalar unit theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*unit|unit.*quotient",
+   "results": "{\"t\": \"2026-10-20T13:43:46Z\", \"tool\": \"grep\", \"query\": \"quotient.*unit|unit.*quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean\", \"Mathlib/NumberTheory/NumberField/Ideal/Basic.lean\", \"Mathlib/NumberTheory/NumberField/Ideal/Basic.lean\", \"Mathlib/NumberTheory/NumberField/Ideal/Basic.lean\", \"Mathlib/NumberTheory/NumberField/Units/DirichletTheorem.lean\", \"Mathlib/Algebra/Lie/Free.lean\", \"Mathlib/Algebra/Lie/Free.lean\", \"Mathlib/Algebra/Lie/Free.lean\"], \"digest\": \"a3165fe1145c6575\"}",
+   "date": "2026-10-20",
+   "verdict": "Only unrelated unit/quotient results; repository search found no duplicate of this comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unit of scalar extension on a quotient by an ideal is an isomorphism when the ring quotients agree",
+   "results": "{\"t\": \"2026-10-20T13:52:29Z\", \"tool\": \"leansearch\", \"query\": \"The unit of scalar extension on a quotient by an ideal is an isomorphism when the ring quotients agree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.quotEquivOfEq.congr_simp\", \"Ideal.quotEquivOfEq\", \"Ideal.quotientEquiv\", \"Ideal.quotEquivOfEq_mk\", \"Ideal.quotEquivOfEq_eq_factor\", \"AlgEquiv.quotientBot\", \"Ideal.piQuotEquiv\", \"Ideal.qoutMapEquivTensorQout\"], \"digest\": \"fadc58927b220b36\"}",
+   "date": "2026-10-20",
+   "verdict": "Generic Mathlib additive, tensor-quotient, or homology APIs only; no exact ringed-site specialization. These generic APIs are reused rather than restated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FlatRingedCechBaseChangeQuasiIso",
+  "date": "2026-10-20",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-flat-ringed-cech-base-change-quasi-iso",
+   "place": "Quotient criterion for the scalar-extension unit of an ideal subsheaf"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedIdealQuotientComparison",
+  "file": "lean/Sheaf/Paper/RingedIdealQuotientComparison.lean",
+  "declaration": "CategoryTheory.RingedSiteIdeal.scalarExtension_unit_cokernel_isIso",
+  "statement": "theorem scalarExtension_unit_cokernel_isIso (I : RingedSiteIdeal R) (φ : R ⟶ B)\n    (hquot : I.IsQuotientIso φ) :\n    IsIso ((SheafOfModules.RingedTensor.tensorAdjunction φ).unit.app\n      (cokernel I.inclusion))",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-d249f",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261020T153020-L-2864097",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-d249f",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261020T153020-L-2864097",
+  "kind": "interface",
+  "note": "independent cc review: new canonical-unit statement of flat_ringedCech_baseChange_data_quasiIso vs change record, Stacks 099I and node statement_change (old statement false: K=R[0], u first inclusion into K⊞K); parent exists_flat_ringedCech_baseChange signature unchanged and its node lean.statement verbatim; 6 modules compile clean; original parent fails against new item (forced); axioms clean except sorryAx via pre-existing ringedOverFunctor_preservesFiniteColimits / exists_ringed_cech_koszul_colimit_iso"
+ }
+}

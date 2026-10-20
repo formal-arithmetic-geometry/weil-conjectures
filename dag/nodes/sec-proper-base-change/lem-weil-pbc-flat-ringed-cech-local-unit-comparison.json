@@ -1,0 +1,156 @@
+{
+ "id": "lem-weil-pbc-flat-ringed-cech-local-unit-comparison",
+ "kind": "statement",
+ "title": "Scalar-extension unit comparison on a finite generating slice",
+ "statement": "Let phi:R -> B be a map of commutative ring sheaves on a small site, I an ideal subsheaf [def-weil-pbc-ringed-site-ideal], and suppose the restricted B-module is flat and I.IsQuotientIso phi. Assume the source and source-slice derived categories exist. Let f be any finite list generating I on the slice U, and let K be an R-module cochain complex. An isomorphism in the slice derived category from ringedExtendedCech(R.over U,f) to ringedDerivedRestriction(R,U)(QK) implies that restriction to U of the canonical scalar-extension unit [def-weil-pbc-ringed-scalar-extension-complex-adjunction] on K is a quasi-isomorphism. No augmentation compatibility is needed for this local assertion.",
+ "stmt_deps": [
+  "def-weil-pbc-ringed-site-ideal",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-pbc-ringed-extended-cech",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-pbc-ringed-ideal-generators",
+  "def-weil-pbc-ringed-scalar-extension-complex-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099H and 099I"
+ },
+ "proof": [
+  {
+   "text": "Identify the underlying additive sheaf of scalar extension with tensor by the restricted target ring, by commuting the raw tensor factors and sheafifying. Check the scalar unit on pure tensors. Flatness then makes scalar extension exact; restriction of scalars is exact.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction to a slice commutes with scalar extension, via the module-sheafification comparison, and the comparison respects the unit. Flatness restricts to that slice. The ideal quotient criterion gives invertibility on the restricted ideal cokernel; the finite generating sections identify this cokernel with the ideal-row cokernel.",
+   "uses": [
+    "lem-weil-pbc-slice-module-sheafification",
+    "lem-weil-pbc-slice-restriction-flat",
+    "lem-weil-pbc-ringed-ideal-quotient-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordered Koszul stage has homology killed by the displayed ideal power. Reuse the proved exact-natural-transformation nilpotence induction and tensor-unit-on-killed-module argument to obtain invertibility of the tensor unit on this homology. Exact functors commute with homology, so every stage unit is a quasi-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ordered-koszul-homology-torsion",
+    "lem-weil-pbc-flat-localization-koszul-cohomology-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Sequential colimits of sheaf modules are exact, and tensor preserves them. The units on the finite stages therefore give a quasi-isomorphism on their colimit, which is the actual extended Cech complex. This includes the empty list.",
+   "uses": [
+    "lem-weil-pbc-ringed-cech-koszul-colimit-iso",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the given derived isomorphism and naturality on homology to transfer this statement to restricted K. Exact slice restriction and its scalar-extension unit compatibility identify that map with restriction of the global unit.",
+   "uses": [
+    "def-weil-pbc-ringed-derived-restriction",
+    "def-weil-pbc-ringed-scalar-extension-complex-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-slice-module-sheafification",
+  "lem-weil-pbc-slice-restriction-flat",
+  "lem-weil-pbc-ringed-ideal-quotient-comparison",
+  "lem-weil-pbc-ordered-koszul-homology-torsion",
+  "lem-weil-pbc-flat-localization-koszul-cohomology-comparison",
+  "lem-weil-pbc-ringed-cech-koszul-colimit-iso",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-pbc-ringed-scalar-extension-complex-adjunction"
+ ],
+ "proof_origin": {
+  "by": "R2 stage-3 worker",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099H and 099I"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact scalar extension unit is a quasi isomorphism on extended Cech complexes using Koszul filtered colimits",
+   "results": "{\"t\": \"2026-10-20T13:44:25Z\", \"tool\": \"leanfinder\", \"query\": \"An exact scalar extension unit is a quasi isomorphism on extended Cech complexes using Koszul filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.quasiIsoAt_extendMap_iff\", \"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"HomologicalComplex.instQuasiIsoExtendMap\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"HomologicalComplex.quasiIso_extendMap_iff\", \"Profinite.NobelingProof.succ_exact\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CochainComplex.cm5b.instQuasiIsoIntP\"], \"digest\": \"7ea9a3ebb2f3040e\"}",
+   "date": "2026-10-20",
+   "verdict": "No exact comparison theorem. Reuse the project ordered Koszul colimit and proved generic torsion-tensor helpers."
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiIso",
+   "results": "{\"t\": \"2026-10-20T01:33:57Z\", \"tool\": \"loogle\", \"query\": \"QuasiIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"QuasiIso\", \"HomotopyEquiv.quasiIso_hom\", \"HomotopyEquiv.quasiIso_inv\", \"QuasiIso.quasiIsoAt\", \"quasiIso_iff\", \"quasiIso_of_isIso\", \"QuasiIso.mk\", \"HomologicalComplex.mem_quasiIso_iff\"], \"digest\": \"66e3f9d01c2aba24\"}",
+   "date": "2026-10-20",
+   "verdict": "Mathlib quasi-isomorphism and homotopy-equivalence API supplies the homology criterion, not the ringed-site comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*colimit|colimit.*quasiIso",
+   "results": "{\"t\": \"2026-10-20T13:44:23Z\", \"tool\": \"grep\", \"query\": \"quasiIso.*colimit|colimit.*quasiIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-20",
+   "verdict": "No text hit; use the generic Mathlib MorphismProperty.colimitsOfShape_le and exact-colimit instances directly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat ringed site scalar extension unit is a quasi isomorphism on the extended Cech complex when the quotient rings agree",
+   "results": "{\"t\": \"2026-10-20T13:52:28Z\", \"tool\": \"leansearch\", \"query\": \"A flat ringed site scalar extension unit is a quasi isomorphism on the extended Cech complex when the quotient rings agree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat\", \"RingHom.Flat\", \"IsLocalizedModule.mapExtendScalars.congr_simp\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"HomologicalComplex.instQuasiIsoExtendMap\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv\", \"RingHom.Flat.respectsIso\"], \"digest\": \"feb81f1cfb9efa1e\"}",
+   "date": "2026-10-20",
+   "verdict": "Generic Mathlib additive, tensor-quotient, or homology APIs only; no exact ringed-site specialization. These generic APIs are reused rather than restated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FlatRingedCechBaseChangeQuasiIso",
+  "date": "2026-10-20",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-flat-ringed-cech-base-change-quasi-iso",
+   "place": "Scalar-extension unit comparison on a finite generating slice"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FlatRingedCechLocalComparison",
+  "file": "lean/Sheaf/Paper/FlatRingedCechLocalComparison.lean",
+  "declaration": "CategoryTheory.flat_ringedCech_local_unit_quasiIso",
+  "statement": "theorem flat_ringedCech_local_unit_quasiIso\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) (I : RingedSiteIdeal R)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (siteModuleRings R))]\n    [∀ U : C, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (siteModuleRings (R.over U)))]\n    (hflat : SheafOfModules.IsFlat\n      ((SheafOfModules.restrictScalars.{u}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj\n          (SheafOfModules.unit (siteModuleRings B))))\n    (hquot : I.IsQuotientIso φ) (U : C) (r : ℕ)\n    (f : Fin r → R.obj.obj (Opposite.op U))\n    (hf : IsRingedIdealGeneratingList R I.module I.inclusion U r f)\n    (K : ringedSiteComplex R)\n    (e : DerivedCategory.Q.obj\n        (ringedExtendedCech (R.over U) r (fun i ↦ ringedSliceSection R U (f i))).1 ≅\n      (ringedDerivedRestriction R U).obj (DerivedCategory.Q.obj K)) :\n    QuasiIso (((SheafOfModules.overFunctor.{u} (siteModuleRings R) U).mapHomologicalComplex\n      (.up ℤ)).map ((ringedScalarExtensionComplexAdjunction φ).unit.app K))",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-d249f",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261020T153020-L-2864097",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-d249f",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261020T153020-L-2864097",
+  "kind": "interface",
+  "note": "independent cc review: new canonical-unit statement of flat_ringedCech_baseChange_data_quasiIso vs change record, Stacks 099I and node statement_change (old statement false: K=R[0], u first inclusion into K⊞K); parent exists_flat_ringedCech_baseChange signature unchanged and its node lean.statement verbatim; 6 modules compile clean; original parent fails against new item (forced); axioms clean except sorryAx via pre-existing ringedOverFunctor_preservesFiniteColimits / exists_ringed_cech_koszul_colimit_iso"
+ }
+}

@@ -10,37 +10,55 @@
  },
  "kind": "statement",
  "title": "Quasi-isomorphism of flat ringed Cech base-change data",
- "statement": "Under the hypotheses of lem-weil-pbc-flat-ringed-cech-base-change, any scalar-extended augmented model (L,delta,u) satisfying the augmentation equation has u a quasi-isomorphism.",
+ "statement": "Let phi:R -> B be a map of commutative ring sheaves on a small site, and I an ideal subsheaf [def-weil-pbc-ringed-site-ideal] with locally finite-type underlying module [def-weil-pbc-module-finite-type-presentation]. Suppose the restricted B-module is flat [def-pc-flat-sheaf-modules] and I.IsQuotientIso phi. Let epsilon:K -> R[0] be an unbounded module complex [def-weil-sheaf-of-modules-category] having the augmented local extended Cech description [def-weil-pbc-local-extended-cech-description], with the source and source-slice derived categories [def-weil-abstract-derived-category] assumed to exist. Then the unit on K of the specified termwise scalar-extension adjunction [def-weil-pbc-ringed-scalar-extension-complex-adjunction] is a quasi-isomorphism. Restriction of scalars is as in [def-pc-sheaf-restrict-scalars]. This concerns the canonical scalar-extension map, not arbitrary augmentation-compatible maps.",
  "source": {
   "document": "literature/stacks-project/algebraization.tex",
   "place": "Tags 099I and 099H, local comparison and local-to-global conclusion"
  },
  "stmt_deps": [
-  "lem-weil-pbc-flat-ringed-cech-base-change-data",
-  "lem-weil-pbc-flat-extended-cech-comparison",
-  "lem-weil-pbc-site-restriction-exact",
-  "lem-weil-pbc-slice-restriction-flat"
+  "def-weil-pbc-ringed-site-ideal",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-local-extended-cech-description",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-ringed-scalar-extension-complex-adjunction"
  ],
  "proof": [
   {
-   "text": "Restrict to finite generating slices, identify the scalar-extended local terms with the extended localization complexes, apply the flat Cech comparison, and globalize the local vanishing of the kernel and cokernel of u.",
+   "text": "Choose local finite generating sections of I from its finite-type presentation, index each finite family by Fin r, and use the local description to obtain the derived Cech isomorphism on every generating slice.",
    "uses": [
-    "lem-weil-pbc-flat-extended-cech-comparison",
-    "lem-weil-pbc-site-restriction-exact",
-    "lem-weil-pbc-slice-restriction-flat"
+    "def-weil-pbc-module-finite-type-presentation",
+    "def-weil-pbc-local-extended-cech-description"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the scalar-extension-unit comparison on each finite generating slice.",
+   "uses": [
+    "lem-weil-pbc-flat-ringed-cech-local-unit-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact restriction identifies the homology maps with restrictions of the global homology map. The slices cover the site; Mathlib Sheaf.isIso_of_coversTop and reflection through the underlying additive sheaf show that every global homology map is invertible.",
+   "uses": [
+    "def-weil-pbc-ringed-derived-restriction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-flat-extended-cech-comparison",
-  "lem-weil-pbc-site-restriction-exact",
-  "lem-weil-pbc-slice-restriction-flat"
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-pbc-local-extended-cech-description",
+  "lem-weil-pbc-flat-ringed-cech-local-unit-comparison",
+  "def-weil-pbc-ringed-derived-restriction"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "R2 stage-3 worker",
   "document": "literature/stacks-project/algebraization.tex",
-  "place": "Tags 099I and 099H"
+  "place": "Tags 099H and 099I"
  },
  "mathlib_searches": [
   {
@@ -87,7 +105,7 @@
   "module": "Sheaf.Paper.FlatRingedCechBaseChangeQuasiIso",
   "file": "lean/Sheaf/Paper/FlatRingedCechBaseChangeQuasiIso.lean",
   "declaration": "CategoryTheory.flat_ringedCech_baseChange_data_quasiIso",
-  "statement": "theorem flat_ringedCech_baseChange_data_quasiIso\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) (I : RingedSiteIdeal R)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (siteModuleRings R))]\n    [∀ U : C, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (siteModuleRings (R.over U)))]\n    (hI : SheafOfModules.IsFiniteType.{u, u, u} I.module)\n    (hflat : SheafOfModules.IsFlat\n      ((SheafOfModules.restrictScalars.{u}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj\n          (SheafOfModules.unit (siteModuleRings B))))\n    (hquot : I.IsQuotientIso φ)\n    (K : ringedSiteComplex R) (ε : K ⟶ ringedSiteRingComplex R)\n    (hK : HasLocalExtendedCechDescription R I.module I.inclusion K ε) :\n    let r := SheafOfModules.restrictScalars.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)\n    let rc := r.mapHomologicalComplex (.up ℤ)\n    let σ : ringedSiteRingComplex R ⟶ rc.obj (ringedSiteRingComplex B) :=\n      (HomologicalComplex.single _ (.up ℤ) 0).map\n          (SheafOfModules.LocalizationCech.unitMap φ) ≫\n        (HomologicalComplex.singleMapHomologicalComplex r (.up ℤ) 0).inv.app\n          (SheafOfModules.unit (siteModuleRings B))\n    ∀ (L : ringedSiteComplex B) (δ : L ⟶ ringedSiteRingComplex B)\n      (u : K ⟶ rc.obj L), u ≫ rc.map δ = ε ≫ σ → QuasiIso u",
+  "statement": "theorem flat_ringedCech_baseChange_data_quasiIso\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) (I : RingedSiteIdeal R)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (siteModuleRings R))]\n    [∀ U : C, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (siteModuleRings (R.over U)))]\n    (hI : SheafOfModules.IsFiniteType.{u, u, u} I.module)\n    (hflat : SheafOfModules.IsFlat\n      ((SheafOfModules.restrictScalars.{u}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj\n          (SheafOfModules.unit (siteModuleRings B))))\n    (hquot : I.IsQuotientIso φ)\n    (K : ringedSiteComplex R) (ε : K ⟶ ringedSiteRingComplex R)\n    (hK : HasLocalExtendedCechDescription R I.module I.inclusion K ε) :\n    QuasiIso ((ringedScalarExtensionComplexAdjunction φ).unit.app K)",
   "branch": "sheaf-dag",
   "by": "Z5",
   "date": "2026-10-20"
@@ -103,19 +121,52 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S2",
+  "reviewer": "C-d249f",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261019T231334-L-575711",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CategoryTheory.flat_ringedCech_baseChange_data_quasiIso"
+  "landing": "20261020T153020-L-2864097",
+  "kind": "interface",
+  "note": "independent cc review: new canonical-unit statement of flat_ringedCech_baseChange_data_quasiIso vs change record, Stacks 099I and node statement_change (old statement false: K=R[0], u first inclusion into K⊞K); parent exists_flat_ringedCech_baseChange signature unchanged and its node lean.statement verbatim; 6 modules compile clean; original parent fails against new item (forced); axioms clean except sorryAx via pre-existing ringedOverFunctor_preservesFiniteColimits / exists_ringed_cech_koszul_colimit_iso"
+ },
+ "statement_change": {
+  "date": "2026-10-20",
+  "by": "R2 stage 2",
+  "old_statement": "Under the hypotheses of lem-weil-pbc-flat-ringed-cech-base-change, any scalar-extended augmented model (L,delta,u) satisfying the augmentation equation has u a quasi-isomorphism.",
+  "what": "The old universal statement is false: for phi=id, I=0 and K=R[0], the inclusion K -> K direct-sum K followed by first projection obeys the augmentation equation but is not a quasi-isomorphism when R is nonzero. Tag 099I specifies K prime = K tensor_R B. Replace the arbitrary augmented map by the canonical termwise scalar-extension unit, and adapt the sole consumer without changing its statement.",
+  "source": {
+   "document": "literature/stacks-project/algebraization.tex",
+   "place": "Tags 099H and 099I"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-flat-ringed-cech-base-change",
+    "holds": true,
+    "note": "Use actual scalar extension of K and the adjoint of epsilon followed by the coefficient map for its augmentation. The existential conclusion and every binder remain unchanged."
+   }
   ],
-  "sorry_after": [
-   "CategoryTheory.flat_ringedCech_baseChange_data_quasiIso"
+  "old_stmt_deps": [
+   "lem-weil-pbc-flat-ringed-cech-base-change-data",
+   "lem-weil-pbc-flat-extended-cech-comparison",
+   "lem-weil-pbc-site-restriction-exact",
+   "lem-weil-pbc-slice-restriction-flat"
+  ],
+  "old_proof": [
+   {
+    "text": "Restrict to finite generating slices, identify the scalar-extended local terms with the extended localization complexes, apply the flat Cech comparison, and globalize the local vanishing of the kernel and cokernel of u.",
+    "uses": [
+     "lem-weil-pbc-flat-extended-cech-comparison",
+     "lem-weil-pbc-site-restriction-exact",
+     "lem-weil-pbc-slice-restriction-flat"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-weil-pbc-flat-extended-cech-comparison",
+   "lem-weil-pbc-site-restriction-exact",
+   "lem-weil-pbc-slice-restriction-flat"
   ]
  }
 }

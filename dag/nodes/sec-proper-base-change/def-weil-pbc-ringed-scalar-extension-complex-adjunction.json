@@ -1,0 +1,117 @@
+{
+ "id": "def-weil-pbc-ringed-scalar-extension-complex-adjunction",
+ "kind": "definition",
+ "title": "Termwise scalar-extension adjunction on ringed-site complexes",
+ "statement": "For a morphism phi:R -> B of commutative ring sheaves on a small site, the sheafified scalar-extension adjunction of [def-weil-pbc-ringed-tensor-section-calculus] induces an adjunction between termwise scalar extension and termwise restriction on unbounded integer cochain complexes. Scalar extension is additive. This is the specified adjunction obtained by applying Adjunction.mapHomologicalComplex, not an arbitrary witness of existence.",
+ "stmt_deps": [
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099H and 099I"
+ },
+ "proof": [
+  {
+   "text": "Restriction of scalars is additive; Mathlib Adjunction.left_adjoint_additive makes its specified left adjoint additive.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing termwise adjunction construction to shape up Z. The definition retains the actual unit, counit and hom equivalence of that construction.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "proof_origin": {
+  "by": "R2 stage-3 worker",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099H and 099I"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive adjunction induces a termwise adjunction on homological complexes",
+   "results": "{\"t\": \"2026-10-20T13:46:02Z\", \"tool\": \"leanfinder\", \"query\": \"An additive adjunction induces a termwise adjunction on homological complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.right_adjoint_additive\", \"CategoryTheory.Adjunction.left_adjoint_additive\", \"CategoryTheory.Functor.map_homogical_complex_additive\", \"CategoryTheory.Adjunction.homAddEquiv\", \"CategoryTheory.Functor.mapHomologicalComplex_linear\", \"CategoryTheory.Adjunction.homAddEquiv_apply\", \"HomologicalComplex.instAdditiveSingle\", \"HomologicalComplex.dgoEquivHomologicalComplex_counitIso\"], \"digest\": \"2fe610d8341c5471\"}",
+   "date": "2026-10-20",
+   "verdict": "Use Adjunction.left_adjoint_additive, together with the existing source-library Adjunction.mapHomologicalComplex."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologicalComplex\"",
+   "results": "{\"t\": \"2026-10-20T13:46:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"mapHomologicalComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapHomologicalComplex\", \"CategoryTheory.Equivalence.mapHomologicalComplex\", \"CategoryTheory.Functor.mapHomologicalComplex_reflects_iso\", \"CategoryTheory.instPreservesZeroMorphismsHomologicalComplexMapHomologicalComplex\", \"CategoryTheory.Functor.mapHomologicalComplex_obj_X\", \"CategoryTheory.instFaithfulHomologicalComplexMapHomologicalComplex\", \"CategoryTheory.Functor.mapHomologicalComplexIdIso\", \"CategoryTheory.instAdditiveHomologicalComplexMapHomologicalComplex\"], \"digest\": \"b07c6179cfd73843\"}",
+   "date": "2026-10-20",
+   "verdict": "Mathlib supplies the additive prolongation. The source library supplies its adjunction, which is specialized here."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplex.*Adjunction|Adjunction.*mapHomologicalComplex",
+   "results": "{\"t\": \"2026-10-20T13:46:00Z\", \"tool\": \"grep\", \"query\": \"mapHomologicalComplex.*Adjunction|Adjunction.*mapHomologicalComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-20",
+   "verdict": "No Mathlib grep hit; repository search found the generic termwise construction, reused directly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive adjunction induces a termwise adjunction on homological complexes",
+   "results": "{\"t\": \"2026-10-20T13:52:28Z\", \"tool\": \"leansearch\", \"query\": \"An additive adjunction induces a termwise adjunction on homological complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.homAddEquiv_add\", \"CategoryTheory.Adjunction.homAddEquiv_apply\", \"CategoryTheory.Adjunction.homAddEquiv\", \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"CategoryTheory.Functor.map_homogical_complex_additive\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso\", \"CategoryTheory.Functor.mapHomotopyEquiv\", \"HomotopyCategory.instAdditiveHomologicalComplexQuotient\"], \"digest\": \"e01d4dfa6fc177e3\"}",
+   "date": "2026-10-20",
+   "verdict": "Generic Mathlib additive, tensor-quotient, or homology APIs only; no exact ringed-site specialization. These generic APIs are reused rather than restated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FlatRingedCechBaseChangeQuasiIso",
+  "date": "2026-10-20",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-flat-ringed-cech-base-change-quasi-iso",
+   "place": "Termwise scalar-extension adjunction on ringed-site complexes"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedScalarExtensionComplexAdjunction",
+  "file": "lean/Sheaf/Paper/RingedScalarExtensionComplexAdjunction.lean",
+  "declaration": "CategoryTheory.ringedScalarExtensionComplexAdjunction",
+  "statement": "def ringedScalarExtensionComplexAdjunction\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :\n    (SheafOfModules.RingedTensor.tensorFunctor φ).mapHomologicalComplex (.up ℤ) ⊣\n      (SheafOfModules.RingedTensor.restriction φ).mapHomologicalComplex (.up ℤ)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-d249f",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261020T153020-L-2864097",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-d249f",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261020T153020-L-2864097",
+  "kind": "interface",
+  "note": "independent cc review: new canonical-unit statement of flat_ringedCech_baseChange_data_quasiIso vs change record, Stacks 099I and node statement_change (old statement false: K=R[0], u first inclusion into K⊞K); parent exists_flat_ringedCech_baseChange signature unchanged and its node lean.statement verbatim; 6 modules compile clean; original parent fails against new item (forced); axioms clean except sorryAx via pre-existing ringedOverFunctor_preservesFiniteColimits / exists_ringed_cech_koszul_colimit_iso"
+ }
+}
