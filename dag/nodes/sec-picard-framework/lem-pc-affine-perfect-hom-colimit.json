@@ -23,7 +23,7 @@
  ],
  "proof": [
   {
-   "text": "Scalar extension preserves projectivity by the extension/restriction adjunction and preserves zero terms. Thus every extended E₀ is bounded above and projective. Apply [lem-pc-ring-derived-map-representative], Mathlib IsKProjective.Qh_map_bijective, to represent derived maps by chain maps and detect equality by homotopies. The private helpers prove these facts directly using the quotient comparison natural isomorphism.",
+   "text": "Scalar extension preserves projectivity by the extension/restriction adjunction and preserves zero terms. Thus every extended E₀ is bounded above and projective. Apply [lem-pc-ring-derived-map-representative] via the upstream DerivedCategory.Q_map_surjective_of_projective and DerivedCategory.Q_map_eq_Q_map_iff_of_projective wrappers to represent derived maps by chain maps and detect equality by homotopies. The wrappers prove these facts from Mathlib IsKProjective.Qh_map_bijective and the quotient comparison natural isomorphism.",
    "uses": [
     "lem-pc-ring-derived-map-representative"
    ],
@@ -127,15 +127,16 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-phc2904 (reviewer sub-agent of L); spot-checked: Statement change (K_0 K-flat -> bounded finite projective) named in second reading and matches the use in lem-pc-perfect-descend-morphisms Step 2 (Q_i[n] perfect, bounded finite projective via lem-pc-perfect-affine-bounded-projective); no duplication of sibling F1 lem-pc-fp-module-map-descent-affine, which is cited not restated; Step 3 H^0/filtered-colimit argument elementary and correct. FIX more, RETURN less: (1) C1 Step 1 used Hom_{D(R)}(L,M)=H^0(R Hom(L,M)) uncited (lem-sc-affine-projective-complex-derived-hom only represents R Hom by the Hom complex): now cites lem-pur-rhom-global-sections specialized to the one-point site (declared tool use, other unit, as generic tool), added to uses/proof_deps/tool_uses; (2) C4 Step 2 applied the directed-set node lem-pc-fp-module-map-descent-affine to a filtered system: added that the stages are indexed by a preorder (i>=0), and a filtered preorder is directed; also noted K_0^{p+n} finitely presented (both sides required) and dropped the irrelevant differential-relation clause (Hom^n terms are graded maps). Both missed by the second reading.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.AffinePerfectHomColimit",
+  "module": "WeilConjectures.AlgebraicGeometry.AffinePerfectHomColimit",
   "declaration": "CochainComplex.affine_perfect_hom_colimit",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffinePerfectHomColimit.lean",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffinePerfectHomColimit.lean",
   "statement": "theorem affine_perfect_hom_colimit {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (F : I ⥤ CommRingCat.{u}) (i₀ : I) [∀ i : I, HasDerivedCategory.{w} (ModuleCat.{u} (F.obj i))] [HasDerivedCategory.{w} (ModuleCat.{u} (colimit F : CommRingCat.{u}))] (E₀ K₀ : CochainComplex (ModuleCat.{u} (F.obj i₀)) ℤ) (hE : (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (E₀.X n)) ∧ ∀ n : ℤ, Module.Finite (F.obj i₀) (E₀.X n) ∧ Module.Projective (F.obj i₀) (E₀.X n)) (hK : (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (K₀.X n)) ∧ ∀ n : ℤ, Module.Finite (F.obj i₀) (K₀.X n) ∧ Module.Projective (F.obj i₀) (K₀.X n)) (H : Set.Ici i₀ ⥤ Type w) [HasColimit H] (ident : ∀ i : Set.Ici i₀, H.obj i ≃ (DerivedCategory.Q.obj ((Functor.mapHomologicalComplex (ModuleCat.extendScalars (F.map (homOfLE i.property)).hom) (.up ℤ)).obj E₀) ⟶ DerivedCategory.Q.obj ((Functor.mapHomologicalComplex (ModuleCat.extendScalars (F.map (homOfLE i.property)).hom) (.up ℤ)).obj K₀))) (htransition : ∀ (i j : Set.Ici i₀) (hij : i ≤ j) (f : (Functor.mapHomologicalComplex (ModuleCat.extendScalars (F.map (homOfLE i.property)).hom) (.up ℤ)).obj E₀ ⟶ (Functor.mapHomologicalComplex (ModuleCat.extendScalars (F.map (homOfLE i.property)).hom) (.up ℤ)).obj K₀), ident j (H.map (homOfLE hij) ((ident i).symm (DerivedCategory.Q.map f))) = DerivedCategory.Q.map (scalarExtensionHom (F.map (homOfLE i.property)).hom (F.map (homOfLE hij)).hom (F.map (homOfLE j.property)).hom (congrArg CommRingCat.Hom.hom (F.map_comp (homOfLE i.property) (homOfLE hij))) E₀ K₀ f)) (c : Cocone H) (e : c.pt ≃ (DerivedCategory.Q.obj ((Functor.mapHomologicalComplex (ModuleCat.extendScalars (colimit.ι F i₀).hom) (.up ℤ)).obj E₀) ⟶ DerivedCategory.Q.obj ((Functor.mapHomologicalComplex (ModuleCat.extendScalars (colimit.ι F i₀).hom) (.up ℤ)).obj K₀))) (hcanonical : ∀ (i : Set.Ici i₀) (f : (Functor.mapHomologicalComplex (ModuleCat.extendScalars (F.map (homOfLE i.property)).hom) (.up ℤ)).obj E₀ ⟶ (Functor.mapHomologicalComplex (ModuleCat.extendScalars (F.map (homOfLE i.property)).hom) (.up ℤ)).obj K₀), e (c.ι.app i ((ident i).symm (DerivedCategory.Q.map f))) = DerivedCategory.Q.map (scalarExtensionHom (F.map (homOfLE i.property)).hom (colimit.ι F i.val).hom (colimit.ι F i₀).hom (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE i.property)).symm) E₀ K₀ f)) : Function.Bijective (e ∘ colimit.desc H c)",
   "branch": "sheaf-dag",
   "by": "J1",
   "date": "2026-10-11",
-  "existing": false,
-  "fixed_by": "R-aph"
+  "existing": true,
+  "fixed_by": "R-aph",
+  "note": "Retired the duplicate Sheaf module in favor of the upstream theorem on 2026-10-20. The public theorem signatures agree verbatim; the three extra Sheaf declarations are proved private helpers, unused outside its own proof. The former consumer PerfectHomContinuityAffine already imports the upstream twin."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -158,13 +159,13 @@
   }
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G1",
+  "reviewer": "C-cece2",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261013T031537-L-3570228",
+  "landing": "20261020T132038-L-1406089",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Sheaf.AlgebraicGeometry.AffinePerfectHomColimit.affine_perfect_hom_colimit signature vs WeilConjectures twin (byte-identical); node lem-pc-affine-perfect-hom-colimit lean record/proof text vs twin proof; no importers of the retired module"
  }
 }
