@@ -18553,3 +18553,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 23:35 L: batch 20261020T152943 dependency take-out
 - 15:37 L: merged deliver/D2/Sheaf.AlgebraicGeometry.HigherDirectImageRawDiagram (stage 3; reviewer PASS; first push; landing 20261020T153746-L-2987711 (interface); batch 20261020T153742; modules 12; new nodes 0; change records: coord/changes/D2-raw-cohomology-canonical-upstream.md)
+- 15:37 L: merged deliver/H1/Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal (stage 3; reviewer PASS; first push; landing 20261020T153747-L-2988216 (proof); batch 20261020T153742; modules 1; new nodes 0; change records: coord/changes/H1-restore-derived-module-monoidal.md)

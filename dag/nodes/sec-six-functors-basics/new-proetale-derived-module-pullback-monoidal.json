@@ -19,14 +19,14 @@
    "elementary": true
   },
   {
-   "text": "Identify pullback with mapModComap along the inverse of the coefficient comparison. Transport flatness along extendScalarsIsoComapInv and apply inverseImageModule_preservesFlat. On the kFlatMap left derivability structure, the tensor counit is invertible. The two-variable derived universal property gives the comparison, and uniqueness identifies it with an isomorphism of derived bifunctors.",
+   "text": "Identify pullback with mapModComap along the inverse of the coefficient comparison. Transport flatness along extendScalarsIsoComapInv and apply inverseImageModule_preservesFlat. The generic canonical comparison is derived using flat preservation. For the original concrete right counit, retain the existing upstream two-variable derived universal-property instance and transport it through the explicit counit equality from step 3.",
    "uses": [
     "new-proetale-inverse-image-module-flat"
    ],
    "elementary": false
   },
   {
-   "text": "Use the proved generic residueDerivedMonoidal construction. Its canonical tensor comparison and counit satisfy the lax square, its coherence descends along kFlatMap resolutions, and its tensor and unit maps are invertible. The unit of Qh is the identity. Expand the homotopy functor unit comparison and its single-complex comparison to identify the descended unit map with leftDerivedTensorUnitIso. Copy the monoidal structure using these equal explicit unit maps. Specialize this constructed structure to the exact monoidal pullback using the flatness result of the preceding step. The abstract leftDerivedLift_eq_of_inverse lemma cancels the postcomposed natural isomorphism in the universal property. This proves leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison, identifying the original lift with the descended comonoidal map.",
+   "text": "Use the proved generic residueDerivedMonoidal construction. Its canonical tensor comparison and counit satisfy the lax square, its coherence descends along kFlatMap resolutions, and its tensor and unit maps are invertible. The unit of Qh is the identity. Expand the homotopy functor unit comparison and its single-complex comparison to identify the descended unit map with leftDerivedTensorUnitIso. Copy the monoidal structure using these equal explicit unit maps. Specialize this constructed structure to the exact monoidal pullback using the flatness result of the preceding step. For the generic lift, postcompose the canonical comparison's component formula with the inverse homotopy comonoidal comparison. Cancel the inverse pair and apply the derived bifunctor universal property. This proves homotopyTensorLeftDerivedLift_eq without the former general-purpose transport chain. After the upstream sync, identify the retained degreewise tensor map with mapCochainComplexμIso.hom using its summand formula. Cancel the homotopy comonoidal isomorphism to identify the homotopy counits; then identify both derived counits componentwise. Apply the two-variable derived uniqueness theorem with these equal counits to identify the original upstream lift with the generic canonical comparison. The upstream monoidal instance is retained in its source module without edits.",
    "uses": [
     "new-integral-residue-derived-monoidal"
    ],
@@ -40,9 +40,9 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/Monoidal.lean",
-  "place": "Tensor counits, flatness transport, unit compatibility and monoidal_leftDerivedUpperStar",
-  "note": "C2: complete proofs, reusing the existing generic descent construction; no new unproved statement."
+  "document": "lean/Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/Monoidal.lean",
+  "place": "Generic derived monoidal construction, flatness transport, and concrete/generic counit comparison",
+  "note": "H1 restoration after upstream sync: preserve the generic construction and all dependencies; repair the concrete comparison by explicit equality of the two counits and uniqueness of the lift. No upstream declaration is changed. The retained generic construction bodies are irreducible, with explicit unfolding at their component equations, to control checking cost."
  },
  "mathlib_searches": [
   {
@@ -97,7 +97,7 @@
   "existing": false,
   "module": "Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal",
   "file": "lean/Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/Monoidal.lean",
-  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.monoidal_leftDerivedUpperStar",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison",
   "declarations": [
    "CategoryTheory.Functor.tensorCounitOfNatTrans",
    "CategoryTheory.Functor.homotopyTensorCounit",
@@ -106,14 +106,13 @@
    "CategoryTheory.Functor.residueDerivedOplax_η_eq_tensorUnitIso",
    "CategoryTheory.Functor.leftDerivedMonoidalWithUnit",
    "AlgebraicGeometry.ProEtale.CondensedRing.upperStar_preservesFlat",
-   "AlgebraicGeometry.ProEtale.CondensedRing.monoidal_leftDerivedUpperStar",
    "CategoryTheory.Functor.homotopyTensorLeftDerivedLift_eq",
    "AlgebraicGeometry.ProEtale.CondensedRing.leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison"
   ],
-  "statement": "instance monoidal_leftDerivedUpperStar : L((f)^*⟦Λ⟧).Monoidal",
+  "statement": "lemma leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison :\n    letI := upperStar_preservesFlat Λ f\n    leftDerivedUpperStarTensor Λ f = (f)^*⟦Λ⟧.leftDerivedTensorComparison",
   "branch": "sheaf-dag",
-  "by": "C2",
-  "date": "2026-10-17"
+  "by": "H1",
+  "date": "2026-10-20"
  },
  "import_flags": [
   "unreachable"
@@ -122,5 +121,15 @@
   "date": "2026-10-18",
   "by": "L",
   "reason": "Apply the retained C2 complete implementation as a module maintenance repair; close seven pre-existing nested proof fields without changing public signatures. The Lean import closure reaches this module; this new DAG attachment has no incoming DAG edge."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261020T153747-L-2988216",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
