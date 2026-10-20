@@ -1,0 +1,136 @@
+{
+ "id": "lem-pur-derived-tensor-comparison",
+ "kind": "lemma",
+ "title": "Unique descent of an exact-functor tensor comparison",
+ "status": "split",
+ "statement": "Let C,D be Grothendieck abelian braided closed monoidal categories with the derived tensor of [def-weil-derived-tensor] and functorial flat resolutions. Let G,F₁,F₂:C→D be additive exact functors, with F₂ preserving flat objects and being a left adjoint. A natural tensor comparison on cochain complexes τ:G(P⊗Q)→F₁(P)⊗F₂(Q) induces a unique family t:DG(M⊗N)→DF₁(M)⊗DF₂(N), natural in both variables and compatible with τ on every pair of cochain representatives and the tensor-localization counits. The normalization retains the canonical identification of the monoidal complex tensor with the signed total tensor. Also a coefficient tensor comparison extends uniquely to signed total complexes with the prescribed map on every bidegree summand.",
+ "stmt_deps": [
+  "def-weil-derived-tensor",
+  "lem-sfb-derived-monoidal"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-pur-supported-exterior-product.md",
+  "place": "Signed total tensor and K-flat derivation of the supported exterior product"
+ },
+ "proof": [
+  {
+   "text": "Extend a natural coefficient comparison to complexes by mapBifunctorComparison. Its summand formula is map_ιMapBifunctor_mapBifunctorComparisonX. Uniqueness follows degreewise from mapBifunctor.hom_ext_of_map and preservation of the requisite coproducts.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use functorial flat resolutions in the second variable. F₂ preserves flat objects and colimits, so the image resolution is K-flat. The mixed tensor bifunctor on derived categories is a left derived bifunctor, with counit the two mapDerivedCategoryFactors followed by the tensor-localization counit. The latter is invertible when its second complex is K-flat.",
+   "uses": [
+    "lem-sfb-derived-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply leftDerived₂Lift to the composite of the source tensor-localization counit, the exact functor comparison of G, and τ. The resulting natural transformation supplies t. Its factorization equation is precisely the model normalization. Conversely a natural family yields a transformation; leftDerived₂_ext and that equation prove uniqueness. Use tensorHom_def to match curried tensor maps, and explicitly prove that the retained tensor-model identity maps to an identity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-derived-monoidal"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Y3",
+  "date": "2026-10-21",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-pur-supported-exterior-product.md",
+  "place": "Closed-support flatness and universal K-flat descent; all Lean proofs completed"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural tensor comparison of exact additive functors descends uniquely to derived categories if one functor preserves flat objects",
+   "results": "Eight exact-functor and mapDerivedCategoryFactors results; no mixed-tensor descent theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsLeftDerivedFunctor₂",
+   "results": "No results: identifier not indexed.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived₂Lift|leftDerived₂_ext|mapBifunctorComparison",
+   "results": "No Mathlib match. The source library supplies the universal properties used in this proof.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural comparison of tensor products for exact additive functors descends uniquely to derived categories when one functor preserves flat objects",
+   "results": "Eight hits: Module.Flat.lTensor_shortComplex_exact (Mathlib.RingTheory.Flat.CategoryTheory), flat module exactness lemmas (Mathlib.RingTheory.Flat.Basic), CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier (Mathlib.Algebra.Category.Ring.Under.Limits), and CategoryTheory.Tor / Tor' (Mathlib.CategoryTheory.Monoidal.Tor). None gives the natural comparison on unbounded derived categories or its unique model normalization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleSupportedExteriorProduct",
+  "date": "2026-10-21",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-proetale-supported-exterior-product",
+   "place": "K-flat descent of the supported coefficient comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedTensorComparison",
+  "file": "lean/Sheaf/CategoryTheory/DerivedTensorComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SupportedTensorDerivation.exists_unique_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SupportedTensorDerivation.ComplexHom",
+   "AlgebraicGeometry.ProEtale.SupportedTensorDerivation.ComplexCondition",
+   "AlgebraicGeometry.ProEtale.SupportedTensorDerivation.exists_unique_complex",
+   "AlgebraicGeometry.ProEtale.SupportedTensorDerivation.ComplexNatTrans",
+   "AlgebraicGeometry.ProEtale.SupportedTensorDerivation.ComplexComparison",
+   "AlgebraicGeometry.ProEtale.SupportedTensorDerivation.complex_comparison_spec",
+   "AlgebraicGeometry.ProEtale.SupportedTensorDerivation.ComparisonHom",
+   "AlgebraicGeometry.ProEtale.SupportedTensorDerivation.comparisonHom_tensor",
+   "AlgebraicGeometry.ProEtale.SupportedTensorDerivation.complexTensor_eq",
+   "AlgebraicGeometry.ProEtale.SupportedTensorDerivation.ComparisonFamilyCondition",
+   "AlgebraicGeometry.ProEtale.SupportedTensorDerivation.ComparisonCondition",
+   "AlgebraicGeometry.ProEtale.SupportedTensorDerivation.exists_unique_comparison"
+  ],
+  "statement": "theorem exists_unique_comparison\n    (G F₁ F₂ : C ⥤ D) [G.Additive] [F₁.Additive] [F₂.Additive]\n    [PreservesFiniteLimits G] [PreservesFiniteColimits G]\n    [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]\n    [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]\n    [F₂.PreservesFlat] [F₂.IsLeftAdjoint]\n    (τ : (Functor.postcompose₂.obj (G.mapHomologicalComplex (.up ℤ))).obj\n        (curriedTensor (CochainComplex C ℤ)) ⟶\n      (((Functor.whiskeringLeft₂ _).obj (F₁.mapHomologicalComplex (.up ℤ))).obj\n        (F₂.mapHomologicalComplex (.up ℤ))).obj (curriedTensor _)) :\n    ∃! t : ComparisonHom G F₁ F₂,\n      ComparisonCondition G F₁ F₂ τ t",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261020T233240-L-911048",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261020T233240-L-911048",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
