@@ -18,8 +18,45 @@
  ],
  "proof": [
   {
-   "text": "Apply the site-point reconstruction theorem to $p$. Put $u(V)=p^{-1}(h_V^\\#)$ and let $\\mathcal N$ have objects $(V,y)$ with $y\\in u(V)$ and arrows preserving these elements. It is small and cofiltered, and for every sheaf of sets $G$ its canonical section-to-germ map identifies $p^{-1}G$ with $\\varinjlim_{\\mathcal N^{\\mathrm{op}}}G(V)$. In particular every element of the underlying set of $R_p$ is represented by a section of $R$ on a pointed object. Only this set-valued assertion is used: no constant-coefficient hypothesis on $R$ is imposed.",
+   "text": "Reconstruct a Mathlib GrothendieckTopology.Point with fiber sitePointFunctor J p. Coverage jointly-surjectivity extends to all covering sieves by induction on the generated topology. Mathlib Point.over supplies the localized point with a skyscraper right adjoint. The fromOverFunctorElementsEquivalence identifies its fiber diagram with the diagram on Over n. Finality gives the displayed localized section-colimit functor, hence q with exactly the prescribed inverse image.",
    "uses": [
+    "lem-trf-site-point-reconstruction-sets",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04H2, lemma-point-localize; implemented using Mathlib Point.over and Point.skyscraperSheafAdjunction."
+   }
+  },
+  {
+   "text": "Normalize the original set-colimit comparison using the reconstruction theorem. Its germ formula determines the natural isomorphism. Finality of the opposite neighborhood forgetful functor gives the localized comparison. On module stalks use the corresponding finality isomorphism of additive colimits; represent a scalar and a module element at a common stage to prove linearity over the specified stalk-ring cocone. This gives the natural module comparison and both required germ formulas.",
+   "uses": [
+    "lem-trf-site-point-reconstruction-sets",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DEN, lemma-check-K-flat-stalks, proof of (1), local finite-presentation realization paragraph."
+   }
+  },
+  {
+   "text": "After forgetting modules to abelian groups, the localized module stalk is naturally isomorphic to the composite of the module-to-abelian-sheaf functor and the localized point sheaf fiber. Both preserve finite colimits, and module forgetting reflects them. The additive colimit comparison for the unit sheaf is linear and identifies its stalk with the stalk ring. Transporting the coproduct universal property therefore identifies finite free sheaf stalks with free modules; evaluate the coprojections at 1 to normalize this identification on basis germs.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Lemma 03DA (label lemma-abelian: Mod(O) abelian, forgetful functor to Ab(C) exact) and Lemma 03DB (label lemma-limits-colimits: limits and colimits exist and the forgetful functor commutes with them), with Lemma 03CO (label lemma-limits-colimits-abelian-sheaves) and Lemma 03CY (label lemma-sheafification-presheaf-modules)"
+   }
+  },
+  {
+   "text": "Use Module.FinitePresentation.exists_fin' to choose a right-exact finite free presentation of M. Represent every matrix coefficient in the filtered colimit ring and choose a common stage using IsFiltered.sup_objs_exists. This also supplies a stage when the finite indexing set is empty. The restricted representatives give the matrix over R(U), with exactly the chosen coefficients as germs.",
+   "uses": [
+    "def-sc-finitely-presented-module",
     "lem-trf-site-point-reconstruction-sets"
    ],
    "elementary": false,
@@ -29,52 +66,10 @@
    }
   },
   {
-   "text": "By finite presentation choose $a,b\\in\\mathbf N$ and an exact presentation $R_p^a\\xrightarrow A R_p^b\\to M\\to0$. Write the linear map in the standard bases as the finite matrix $(A_{ij})_{i<b,j<a}$. For each entry, step 1 supplies a pointed object $(U_{ij},x_{ij})$ and a section representing it. Cofilteredness supplies a common pointed object $(U,x)$ with arrows to these finitely many objects. Restrict the chosen sections along these arrows to obtain $r_{ij}\\in R(U)$ whose germs are $A_{ij}$. If $ab=0$, choose any object of the nonempty category $\\mathcal N$ and take the empty matrix. The germ map $R(U)\\to R_p$ is a ring homomorphism: a section is a sheaf map $h_U^\\#\\to R$, and applying the finite-product-preserving $p^{-1}$ to the addition and multiplication identities sends its value at $x$ to the corresponding sum or product of germs. Thus the lifted matrix maps to $A$ as a matrix over rings.",
-   "uses": [
-    "def-sc-finitely-presented-module",
-    "lem-trf-site-point-reconstruction-sets",
-    "def-trf-geometric-morphism"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0DEN, lemma-check-K-flat-stalks, proof of (1), local finite-presentation realization paragraph."
-   }
-  },
-  {
-   "text": "Set $H=h_U^\\#$ and $S=p^{-1}H$, so $x\\in S$. The slice-equivalence theorem gives $E_U:\\operatorname{Sh}(C/U)\\simeq\\operatorname{Sh}(C)/H$. The sheaf-limit theorem supplies finite limits in $\\operatorname{Sh}(C)$, and the slice-adjoint lemma applied to $p^{-1}\\dashv p_*$ gives a finite-limit-preserving left adjoint $P:\\operatorname{Sh}(C)/H\\to\\mathbf{Set}/S$, acting by $p^{-1}$ on arrows. Define $e_x:\\mathbf{Set}/S\\to\\mathbf{Set}$ by taking the fibre over $x$. This preserves finite limits, computed fibre by fibre. It has the explicit right adjoint assigning to a set $B$ the family with fibre $B$ at $x$ and a singleton at every $s\\ne x$: a map into that family is exactly a map from the $x$-fibre into $B$. Equivalences have their inverse as right adjoint and preserve limits. Hence $q^{-1}=e_x\\circ P\\circ E_U$ has a right adjoint (compose the three right adjoints in reverse order) and preserves finite limits. It defines a geometric morphism $q:\\mathbf{Set}\\to\\operatorname{Sh}(C/U)$.",
-   "uses": [
-    "lem-weil-pbc-localized-sheaves-over-representable",
-    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
-    "lem-sfb-left-exact-left-adjoint-slices",
-    "def-trf-geometric-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04H2, lemma-point-localize; explicit slice-adjunction construction using Tag 04H1, lemma-localize-morphism-topoi, and Tag 00Y1, lemma-essential-image-j-shriek."
-   }
-  },
-  {
-   "text": "For a set sheaf $G$, the quasi-inverse formula for $E_U$ sends $(G\\times H\\to H)$ at an object $v:V\\to U$ to the fibre of $G(V)\\times H(V)\\to H(V)$ over $\\eta(v)$, canonically $G(V)$. Thus $E_U(G|_U)\\cong(G\\times H\\to H)$, naturally in $G$. Applying $P$ gives $(p^{-1}G\\times S\\to S)$, because $p^{-1}$ preserves products, and applying $e_x$ gives the projection isomorphism $q^{-1}(G|_U)\\cong p^{-1}G$. These natural identifications give $j_Uq\\cong p$. Applied to the zero, unit, addition, multiplication and module-action maps, the same product identifications respect all operations. Consequently they identify $q^{-1}R_U$ with $R_p$ as rings and $q^{-1}(G|_U)$ with $p^{-1}G$ as $R_p$-modules, naturally in module sheaves $G$. For a section $r\\in R(U)$ its image under this ring identification is its germ $p^{-1}(r)(x)$: under $E_U$ the corresponding section of $R_U$ is the graph of $r:H\\to R$, and taking its $x$-fibre after $p^{-1}$ evaluates exactly at $x$. This checks the coefficient map used for the lifted matrix.",
-   "uses": [
-    "lem-weil-pbc-localized-sheaves-over-representable",
-    "def-pur-localized-ringed-site",
-    "def-trf-geometric-morphism"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04H2, lemma-point-localize, equality of stalk functors; Tag 00Y1, lemma-essential-image-j-shriek, explicit fibre formula."
-   }
-  },
-  {
-   "text": "On $C/U$ define $\\alpha:R_U^a\\to R_U^b$ at $v:V\\to U$ by $(t_j)_j\\mapsto(\\sum_j r_{ij}|_V\\,t_j)_i$. Restriction maps preserve these sums and products, so this is a morphism of module sheaves. Form its sheaf cokernel $F=\\operatorname{coker}(\\alpha)$ in the abelian module-sheaf category. For the geometric morphism $q$, transported module inverse image preserves cokernels. It also identifies $q^{-1}(R_U^n)$ with $R_p^n$ for each finite $n$, since these powers are finite products and $q^{-1}$ preserves finite limits (including the zero module when $n=0$). The coefficient calculation in step 4 identifies $q^{-1}\\alpha$ with $A$: on a tuple its $i$th coordinate is $\\sum_j A_{ij}t_j$. Therefore $q^{-1}F\\cong\\operatorname{coker}(A)\\cong M$ as $R_p$-modules, by the chosen exact presentation. This proves the assertion with the actual finite matrix $(r_{ij})$ over $R(U)$.",
+   "text": "Use the free-sheaf Hom equivalence and the sections given by sums of restricted coefficients times basis sections to construct alpha. Functoriality of R and the section identities prove naturality. On basis germs, linearity of colimit coprojections identifies the stalk matrix with the original presentation matrix. The localized module stalk preserves the cokernel; cokernel.mapIso and the cokernel cofork of the right-exact presentation identify its stalk with M. Choose F=cokernel alpha, retaining the exact matrix-section formula.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
-    "def-pur-localized-ringed-site",
-    "lem-trf-geometric-inverse-image-exact",
-    "def-trf-geometric-morphism"
+    "def-pur-localized-ringed-site"
    ],
    "elementary": false,
    "source": {
@@ -85,19 +80,16 @@
  ],
  "proof_deps": [
   "lem-trf-site-point-reconstruction-sets",
-  "def-sc-finitely-presented-module",
   "def-trf-geometric-morphism",
-  "lem-weil-pbc-localized-sheaves-over-representable",
-  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
-  "lem-sfb-left-exact-left-adjoint-slices",
   "def-pur-localized-ringed-site",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "def-weil-sheaf-of-modules-category",
-  "lem-trf-geometric-inverse-image-exact"
+  "def-sc-finitely-presented-module"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0DEN, lemma-check-K-flat-stalks, proof of (1), finite-presentation descent and passage to C/U; slice point made explicit using sites.tex Tags 04H1 and 04H2."
+  "place": "Tag 0DEN finite-presentation descent, with Mathlib Point.over/Skyscraper, finality of neighborhood forgetful functors, varying-ring module colimits, finite free coproducts, and preservation of cokernels. H4 formal proof keeps the unit route and replaces the planned slice-adjoint construction by Mathlib site points."
  },
  "mathlib_searches": [
   {
@@ -223,9 +215,7 @@
   ]
  },
  "tool_uses": [
-  "lem-trf-site-point-reconstruction-sets",
-  "lem-weil-pbc-localized-sheaves-over-representable",
-  "lem-trf-geometric-inverse-image-exact"
+  "lem-trf-site-point-reconstruction-sets"
  ],
  "reviewed": {
   "date": "2026-10-18",
@@ -270,5 +260,15 @@
   "group": "N3",
   "result": "pass",
   "note": "Every node clause matches the Lean statement and the node's statement text is unchanged. U and x are the existential n : sitePointNeighbourhood. q.inverse is the colimit over neighbourhoods mapping to (U,x). The comparisons e (j_U q ≅ p) and comparison (q^-1(G|_U) ≅ p^-1 G, natural) are fixed on section germs. The ring identification is the canonical initial-restriction cocone. Nonempty(q^-1F ≅ M) is R_p-linear. F ≅ cokernel α, with α pinned on every object over U to the matrix A over R(U). a=0/b=0 are allowed; one universe u; no extra hypotheses. Mechanical stmt_dep finding: the statement does depend on the theorem's conclusion, because stalkModules, localizedModules and localizedRingIsColimit use its IsCofiltered conjunct (.2.2.1), which colimitFunctor requires; so this passes. Docstrings carry source and blueprint; the only proof is sorry; the lean.statement appears verbatim; Worker report and Second reading sections are present (the second reading is a self-check by the same worker). nt_compile of the snapshot file: clean in 12.7 s; axioms are sorryAx plus the standard ones."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261020T211728-L-3494562",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
