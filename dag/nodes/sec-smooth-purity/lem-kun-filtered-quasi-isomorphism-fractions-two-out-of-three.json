@@ -1,0 +1,152 @@
+{
+ "id": "lem-kun-filtered-quasi-isomorphism-fractions-two-out-of-three",
+ "kind": "statement",
+ "title": "Graded quasi-isomorphisms contain identities and satisfy two-out-of-three",
+ "statement": "For every commutative ring R, the class W of graded quasi-isomorphisms in the globally finite filtered module homotopy category contains identity maps and satisfies two-out-of-three. Thus it is closed under composition. The notation is that of [def-kun-finite-filtered-module-homotopy], with filtrations [def-sp-filtration], graded pieces [def-sp-filtered-complex-subquotients], and ordinary quasi-isomorphisms [def-weil-abstract-derived-category].",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 05S1 and 05RM, and Tag 05RG right MS2/MS3; extracted from the indicated steps of lem-kun-filtered-quasi-isomorphism-fractions."
+ },
+ "stmt_deps": [
+  "def-kun-finite-filtered-module-homotopy",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Restrict a filtration-preserving chain homotopy to every filtration step using the unique lift through its monic inclusion. Monic cancellation verifies the homotopy identity and compatibility with the inclusions of consecutive steps. Descend those homotopy components through the cokernel in every degree; evaluation preserves cokernels. This gives equality of graded maps after the ordinary derived localization, so each graded functor descends through the filtered homotopy quotient. The existential representative condition defining W is equivalent to being an isomorphism under every descended graded functor. Identities and two-out-of-three follow grade by grade from the corresponding facts for isomorphisms. Implemented completely in Lean; no new holes.",
+   "uses": [
+    "def-kun-finite-filtered-module-homotopy",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-kun-finite-filtered-module-homotopy",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 05S1 and 05RM; graded homotopy invariance and two-out-of-three implemented by explicit restriction, cokernel descent and graded derived functors."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Morphism property defined by graded quasi-isomorphisms on filtered complexes has right calculus of fractions",
+   "digest": "a9404cfda7c14df0",
+   "date": "2026-10-19",
+   "verdict": "No direct filtered unbounded fraction result; ordinary homotopy fractions and generic triangulated fractions require a filtered cone/triangulated interface.",
+   "results": [
+    "DerivedCategory.instHasRightCalculusOfFractionsHomotopyCategoryIntUpQuasiIso",
+    "DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso",
+    "DerivedCategory.right_fac",
+    "HasDerivedCategory.standard",
+    "DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso",
+    "HomologicalComplexUpToQuasiIso",
+    "DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp",
+    "DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE"
+   ]
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasRightCalculusOfFractions\"",
+   "digest": "be8059ab7fd65e2b",
+   "date": "2026-10-19",
+   "verdict": "No direct filtered unbounded fraction result; ordinary homotopy fractions and generic triangulated fractions require a filtered cone/triangulated interface.",
+   "results": [
+    "CategoryTheory.MorphismProperty.HasRightCalculusOfFractions",
+    "CategoryTheory.MorphismProperty.HasRightCalculusOfFractions.toIsMultiplicative",
+    "CategoryTheory.MorphismProperty.instHasLeftCalculusOfFractionsOppositeOpOfHasRightCalculusOfFractions",
+    "CategoryTheory.MorphismProperty.instHasRightCalculusOfFractionsOppositeOpOfHasLeftCalculusOfFractions",
+    "CategoryTheory.MorphismProperty.instHasLeftCalculusOfFractionsUnopOfHasRightCalculusOfFractionsOpposite",
+    "CategoryTheory.MorphismProperty.instHasRightCalculusOfFractionsUnopOfHasLeftCalculusOfFractionsOpposite",
+    "CategoryTheory.Localization.essSurj_mapArrow_of_hasRightCalculusOfFractions",
+    "CategoryTheory.MorphismProperty.HasRightCalculusOfFractions.exists_rightFraction"
+   ]
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*[Qq]uasi|[Qq]uasi.*filtered|HasRightCalculusOfFractions",
+   "digest": "62ef8fa94ae15393",
+   "date": "2026-10-19",
+   "verdict": "No direct filtered unbounded fraction result; ordinary homotopy fractions and generic triangulated fractions require a filtered cone/triangulated interface.",
+   "results": [
+    "Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean",
+    "Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean",
+    "Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean",
+    "Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean",
+    "Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean",
+    "Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean",
+    "Mathlib/CategoryTheory/Localization/CalculusOfFractions/ComposableArrows.lean",
+    "Mathlib/CategoryTheory/Localization/CalculusOfFractions/ComposableArrows.lean"
+   ]
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtration preserving chain homotopies induce homotopies on associated graded complexes, and graded quasi-isomorphisms satisfy two out of three",
+   "results": "HomologicalComplex.instHasTwoOutOfThreePropertyQuasiIso; CategoryTheory.ShortComplex.QuasiIso.isIso; CategoryTheory.ShortComplex.quasiIso_iff_comp_left; quasiIsoAt_of_isIso; quasiIsoAt_comp; HomotopyCategory.mem_quasiIso_iff; HomologicalComplex.instRespectsIsoQuasiIso; Homotopy.toShortComplex",
+   "date": "2026-10-20",
+   "verdict": "No match: ordinary quasi-isomorphism and homotopy-category results do not provide the filtered homotopy quotient and its graded functors or filtered cone constructions. The ordinary isomorphism and quasi-isomorphism APIs are used in the proved two-out-of-three argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FilteredQuasiIsoFractions",
+  "date": "2026-10-19",
+  "group": "D6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-filtered-quasi-isomorphism-fractions",
+   "place": "Proof steps 1",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FilteredQuasiIsoTwoOutOfThree",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredQuasiIsoTwoOutOfThree.lean",
+  "declaration": "CochainComplex.finiteFilteredModuleQuasiIso_twoOutOfThree",
+  "declarations": [
+   "CochainComplex.finiteFilteredModuleQuasiIso_twoOutOfThree",
+   "CochainComplex.finiteFilteredModuleQuasiIso_id"
+  ],
+  "statement": "theorem finiteFilteredModuleQuasiIso_twoOutOfThree (R : Type u) [CommRing R] :\n    (finiteFilteredModuleQuasiIso R).HasTwoOutOfThreeProperty",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261020T051141-L-1578378",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261020T051141-L-1578378",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

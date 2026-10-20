@@ -1,0 +1,211 @@
+{
+ "id": "lem-kun-filtered-quasi-isomorphism-right-cancellation",
+ "kind": "statement",
+ "title": "Right cancellation for finite filtered module complexes",
+ "statement": "For a commutative ring R, write H_f(R) for the homotopy category of globally finite filtered module complexes and W for the maps inducing quasi-isomorphisms on all graded pieces. Given f₁,f₂:X → Y and s:Y → Z with s in W and f₁ followed by s equal to f₂ followed by s, there exist T in H_f(R) and t:T → X in W with t followed by f₁ equal to t followed by f₂. The notation is that of [def-kun-finite-filtered-module-homotopy], with filtrations [def-sp-filtration], graded pieces [def-sp-filtered-complex-subquotients], and ordinary quasi-isomorphisms [def-weil-abstract-derived-category].",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 05S1 and 05RM, and Tag 05RG right MS2/MS3; extracted from the indicated steps of lem-kun-filtered-quasi-isomorphism-fractions."
+ },
+ "stmt_deps": [
+  "def-kun-finite-filtered-module-homotopy",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use direct-sum filtrations for all finite sums and cones, and the unchanged filtration index for shifts: $F^i(K[m])^n=(F^iK)^{n+m}$. For a filtered chain map $v:A\\to B$, put $\\operatorname{Cone}(v)^n=B^n\\oplus A^{n+1}$ with $d(b,a)=(d_Bb+v(a),-d_Aa)$ [def-weil-abstract-derived-category]. The filtration $F^iB^n\\oplus F^iA^{n+1}$ is preserved by this differential. The map $[(b,a)]\\mapsto([b],[a])$ identifies its associated graded complex with $\\operatorname{Cone}(\\operatorname{gr}^i v)$, since both the quotient relation and differential agree componentwise [def-sp-filtered-complex-subquotients]. The same calculation identifies grading of a finite sum or shift with the sum or shift of the graded complexes. A common lower bound is the minimum of the lower bounds of the finitely many input objects, and a common upper bound is their maximum; these bounds work for sums, shifts and cones in every cochain degree [def-sp-filtration]. Finally a shift of an acyclic complex is acyclic, since its cycles and boundaries are those of the original complex in the shifted degree (a sign in the differential changes neither).",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E (definition-cone); Tag 05S1 (lemma-filtered-acyclic), restriction to the globally finite full subcategory"
+   }
+  },
+  {
+   "text": "We will use the following elementary cycle calculation, rather than introduce a new lemma node. If $p:B\\to A$ is a degreewise surjective chain map of $R$-module complexes whose kernel complex $E$ is acyclic, then $p$ is a quasi-isomorphism [def-weil-abstract-derived-category]. Indeed, lift a cocycle $a\\in A^n$ to $b\\in B^n$; then $db$ is a cocycle in $E^{n+1}$, so $db=de$ for some $e\\in E^n$ and $b-e$ is a cocycle lifting $a$. If a cocycle $b\\in B^n$ maps to a boundary $da_0$, lift $a_0$ to $b_0\\in B^{n-1}$; the cocycle $b-db_0$ lies in $E^n$, so it is $de_0$ for some $e_0\\in E^{n-1}$ and $b=d(b_0+e_0)$. This proves surjectivity and injectivity on every cohomology module. We apply this only after passing to an individual associated graded complex, where the displayed projections below remain surjective by their direct-sum form.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Elementary module-cycle calculation for the cone constructions underlying Tag 05RG (lemma-construct-multiplicative-system), right MS2 and MS3"
+   }
+  },
+  {
+   "text": "The filtered homotopy relation is a category congruence. Reflexivity is the zero homotopy, symmetry is negation, and transitivity is addition. The factorization of every homotopy component through the corresponding target filtration step is preserved by these operations. Precomposition and postcomposition with filtered chain maps preserve these factorizations by composing the corresponding step restrictions [def-kun-finite-filtered-module-homotopy]. The quotient of a congruence identifies two chain representatives exactly when they are related; therefore the equality in the hypothesis is represented by an actual filtered homotopy.",
+   "uses": [
+    "def-kun-finite-filtered-module-homotopy"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For cancellation choose chain representatives and write $a=f-g:X\\to Y$. The equality $sf=sg$ in the filtered homotopy category gives a filtration-preserving degree $-1$ map $H:X\\to Z$ with $sa=d_ZH+Hd_X$. Set $C^n=Y^n\\oplus Z^{n-1}$ and $d_C(y,z)=(d_Yy,-d_Zz-s(y))$, so $C=\\operatorname{Cone}(s)[-1]$ with the reordered summands [def-weil-abstract-derived-category]. Define $u:X\\to C$ by $u(x)=(a(x),-H(x))$ and $q:C\\to Y$ by $q(y,z)=y$. All these maps preserve the filtration [def-sp-filtration]. The first component of $d_Cu=ud_X$ is the chain-map identity for $a$, and the second is $d_ZH-sa=-Hd_X$, the displayed homotopy identity. Thus $u$ is a filtered chain map and $qu=a$ strictly. By the ordinary cone criterion, $s\\in W$ and [lem-pur-quasi-iso-cone-acyclic] imply that every $\\operatorname{gr}^i C$ is acyclic, using the grading and shift identifications of the componentwise graded formula [def-sp-filtered-complex-subquotients].",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "lem-pur-quasi-iso-cone-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RG (lemma-construct-multiplicative-system), dual of its MS3 factorization through the cone; Tags 014E (definition-cone) and 05RT (lemma-acyclic)"
+   }
+  },
+  {
+   "text": "Now take $T^n=X^n\\oplus C^{n-1}$ with $D(x,c)=(d_Xx,-d_Cc-u(x))$, the shifted cone $\\operatorname{Cone}(u)[-1]$ with reordered summands, and $t(x,c)=x$ [def-weil-abstract-derived-category]. The identity $d_Cu=ud_X$ gives $D^2=0$, and $t$ is a filtered chain map with kernel $C[-1]$. For each $i$, $\\operatorname{gr}^i t$ is degreewise surjective with kernel $(\\operatorname{gr}^i C)[-1]$, acyclic by the shifted cone construction, so the acyclic-kernel cycle calculation gives $t\\in W$. The degree $-1$ map $k:T\\to C$, $k(x,c)=-c$, is filtered and satisfies $d_Ck+kD=-d_Cc+d_Cc+u(x)=ut$. Since $q$ is a chain map, $qk$ is a filtered homotopy with $d_Y(qk)+(qk)D=qut=at=(f-g)t$. Thus $ft=gt$ in $\\mathcal H_f(R)$, proving right cancellation. In expanded coordinates $c=(y,z)$ the differential is $(x,y,z)\\mapsto(d_Xx,-d_Yy-a(x),d_Zz+s(y)+H(x))$ and the homotopy $qk$ is $-y$; these formulas also check every sign directly.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RG (lemma-construct-multiplicative-system), right MS3; Tag 014E (definition-cone), explicit shifted-cone null-homotopy"
+   }
+  },
+  {
+   "text": "The cancellation object has common lower bound min(a_X,a_Y,a_Z) and common upper bound max(b_X,b_Y,b_Z), since its summands are X, Y[-1], Z[-2] and cochain shifts do not change the filtration index [def-sp-filtration]. These bounds work in every cochain degree. The construction takes no infinite sum and includes zero inputs.",
+   "uses": [
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05S1 (lemma-filtered-acyclic), globally finite restriction; Tag 05RG (lemma-construct-multiplicative-system), right MS1–MS3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "def-kun-finite-filtered-module-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05RG, right MS3; the explicit filtered cone argument in the parent node, restricted to this separate fraction axiom."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Morphism property defined by graded quasi-isomorphisms on filtered complexes has right calculus of fractions",
+   "digest": "a9404cfda7c14df0",
+   "date": "2026-10-19",
+   "verdict": "No direct filtered unbounded fraction result; ordinary homotopy fractions and generic triangulated fractions require a filtered cone/triangulated interface.",
+   "results": [
+    "DerivedCategory.instHasRightCalculusOfFractionsHomotopyCategoryIntUpQuasiIso",
+    "DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso",
+    "DerivedCategory.right_fac",
+    "HasDerivedCategory.standard",
+    "DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso",
+    "HomologicalComplexUpToQuasiIso",
+    "DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp",
+    "DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE"
+   ]
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasRightCalculusOfFractions\"",
+   "digest": "be8059ab7fd65e2b",
+   "date": "2026-10-19",
+   "verdict": "No direct filtered unbounded fraction result; ordinary homotopy fractions and generic triangulated fractions require a filtered cone/triangulated interface.",
+   "results": [
+    "CategoryTheory.MorphismProperty.HasRightCalculusOfFractions",
+    "CategoryTheory.MorphismProperty.HasRightCalculusOfFractions.toIsMultiplicative",
+    "CategoryTheory.MorphismProperty.instHasLeftCalculusOfFractionsOppositeOpOfHasRightCalculusOfFractions",
+    "CategoryTheory.MorphismProperty.instHasRightCalculusOfFractionsOppositeOpOfHasLeftCalculusOfFractions",
+    "CategoryTheory.MorphismProperty.instHasLeftCalculusOfFractionsUnopOfHasRightCalculusOfFractionsOpposite",
+    "CategoryTheory.MorphismProperty.instHasRightCalculusOfFractionsUnopOfHasLeftCalculusOfFractionsOpposite",
+    "CategoryTheory.Localization.essSurj_mapArrow_of_hasRightCalculusOfFractions",
+    "CategoryTheory.MorphismProperty.HasRightCalculusOfFractions.exists_rightFraction"
+   ]
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*[Qq]uasi|[Qq]uasi.*filtered|HasRightCalculusOfFractions",
+   "digest": "62ef8fa94ae15393",
+   "date": "2026-10-19",
+   "verdict": "No direct filtered unbounded fraction result; ordinary homotopy fractions and generic triangulated fractions require a filtered cone/triangulated interface.",
+   "results": [
+    "Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean",
+    "Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean",
+    "Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean",
+    "Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean",
+    "Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean",
+    "Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean",
+    "Mathlib/CategoryTheory/Localization/CalculusOfFractions/ComposableArrows.lean",
+    "Mathlib/CategoryTheory/Localization/CalculusOfFractions/ComposableArrows.lean"
+   ]
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right cancellation for graded quasi-isomorphisms in the homotopy category of finite filtered module cochain complexes",
+   "results": "HomotopyCategory.quasiIso; quasiIso_iff_comp_right; CategoryTheory.ShortComplex.quasiIso_iff_comp_right; DerivedCategory.right_fac; DerivedCategory.instHasRightCalculusOfFractionsHomotopyCategoryIntUpQuasiIso; quasiIso_of_comp_left; CategoryTheory.ShortComplex.RightHomologyMapData.quasiIso_map_iff; CategoryTheory.ShortComplex.quasiIso_of_comp_left",
+   "date": "2026-10-20",
+   "verdict": "No match: ordinary quasi-isomorphism and homotopy-category results do not provide the filtered homotopy quotient and its graded functors or filtered cone constructions. The ordinary isomorphism and quasi-isomorphism APIs are used in the proved two-out-of-three argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FilteredQuasiIsoFractions",
+  "date": "2026-10-19",
+  "group": "D6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-filtered-quasi-isomorphism-fractions",
+   "place": "Proof steps 2, 3, 5, 6, 7",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FilteredQuasiIsoRightCancellation",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredQuasiIsoRightCancellation.lean",
+  "declaration": "CochainComplex.finiteFilteredModuleQuasiIso_rightCancellation",
+  "declarations": [
+   "CochainComplex.finiteFilteredModuleQuasiIso_rightCancellation"
+  ],
+  "statement": "theorem finiteFilteredModuleQuasiIso_rightCancellation (R : Type u) [CommRing R]\n    {X Y Z : FiniteFilteredModuleHomotopy R} (f₁ f₂ : X ⟶ Y) (s : Y ⟶ Z)\n    (hs : finiteFilteredModuleQuasiIso R s) (h : f₁ ≫ s = f₂ ≫ s) :\n    ∃ (T : FiniteFilteredModuleHomotopy R) (t : T ⟶ X),\n      finiteFilteredModuleQuasiIso R t ∧ t ≫ f₁ = t ≫ f₂",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261020T051141-L-1578378",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261020T051141-L-1578378",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

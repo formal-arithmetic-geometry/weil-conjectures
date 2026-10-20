@@ -1,0 +1,190 @@
+{
+ "id": "lem-kun-filtered-quasi-isomorphism-right-ore",
+ "kind": "statement",
+ "title": "Right Ore square for finite filtered module complexes",
+ "statement": "For a commutative ring R, write H_f(R) for the homotopy category of globally finite filtered module complexes and W for the maps inducing quasi-isomorphisms on all graded pieces. For any f:X → Z and s:Y → Z with s in W, there exist T in H_f(R), t:T → X in W and g:T → Y such that t followed by f equals g followed by s. The notation is that of [def-kun-finite-filtered-module-homotopy], with filtrations [def-sp-filtration], graded pieces [def-sp-filtered-complex-subquotients], and ordinary quasi-isomorphisms [def-weil-abstract-derived-category].",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 05S1 and 05RM, and Tag 05RG right MS2/MS3; extracted from the indicated steps of lem-kun-filtered-quasi-isomorphism-fractions."
+ },
+ "stmt_deps": [
+  "def-kun-finite-filtered-module-homotopy",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use direct-sum filtrations for all finite sums and cones, and the unchanged filtration index for shifts: $F^i(K[m])^n=(F^iK)^{n+m}$. For a filtered chain map $v:A\\to B$, put $\\operatorname{Cone}(v)^n=B^n\\oplus A^{n+1}$ with $d(b,a)=(d_Bb+v(a),-d_Aa)$ [def-weil-abstract-derived-category]. The filtration $F^iB^n\\oplus F^iA^{n+1}$ is preserved by this differential. The map $[(b,a)]\\mapsto([b],[a])$ identifies its associated graded complex with $\\operatorname{Cone}(\\operatorname{gr}^i v)$, since both the quotient relation and differential agree componentwise [def-sp-filtered-complex-subquotients]. The same calculation identifies grading of a finite sum or shift with the sum or shift of the graded complexes. A common lower bound is the minimum of the lower bounds of the finitely many input objects, and a common upper bound is their maximum; these bounds work for sums, shifts and cones in every cochain degree [def-sp-filtration]. Finally a shift of an acyclic complex is acyclic, since its cycles and boundaries are those of the original complex in the shifted degree (a sign in the differential changes neither).",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E (definition-cone); Tag 05S1 (lemma-filtered-acyclic), restriction to the globally finite full subcategory"
+   }
+  },
+  {
+   "text": "We will use the following elementary cycle calculation, rather than introduce a new lemma node. If $p:B\\to A$ is a degreewise surjective chain map of $R$-module complexes whose kernel complex $E$ is acyclic, then $p$ is a quasi-isomorphism [def-weil-abstract-derived-category]. Indeed, lift a cocycle $a\\in A^n$ to $b\\in B^n$; then $db$ is a cocycle in $E^{n+1}$, so $db=de$ for some $e\\in E^n$ and $b-e$ is a cocycle lifting $a$. If a cocycle $b\\in B^n$ maps to a boundary $da_0$, lift $a_0$ to $b_0\\in B^{n-1}$; the cocycle $b-db_0$ lies in $E^n$, so it is $de_0$ for some $e_0\\in E^{n-1}$ and $b=d(b_0+e_0)$. This proves surjectivity and injectivity on every cohomology module. We apply this only after passing to an individual associated graded complex, where the displayed projections below remain surjective by their direct-sum form.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Elementary module-cycle calculation for the cone constructions underlying Tag 05RG (lemma-construct-multiplicative-system), right MS2 and MS3"
+   }
+  },
+  {
+   "text": "For the right Ore square, choose chain representatives $f:X\\to Z$ and $s:Y\\to Z$. Define $T^n=X^n\\oplus Y^n\\oplus Z^{n-1}$ and $D(x,y,z)=(d_Xx,d_Yy,-d_Zz+f(x)-s(y))$, with componentwise filtration. The chain-map identities for $f,s$ give $D^2=0$. Let $t:T\\to X$ and $g:T\\to Y$ be the projections. They are filtered chain maps, and the filtered degree $-1$ map $h:T\\to Z$, $h(x,y,z)=z$, satisfies $d_Zh+hD=ft-sg$; hence $ft=sg$ in $\\mathcal H_f(R)$. The kernel of $t$ is the complex $(y,z)\\mapsto(d_Yy,-d_Zz-s(y))$, namely $\\operatorname{Cone}(s)[-1]$ after interchanging its two summands [def-weil-abstract-derived-category]. In each filtration degree its associated graded is $\\operatorname{Cone}(\\operatorname{gr}^i s)[-1]$ by step 1. Because $s\\in W$, the ordinary cone criterion [lem-pur-quasi-iso-cone-acyclic], applied to the $R$-module complexes $\\operatorname{gr}^iY,\\operatorname{gr}^iZ$, makes this kernel acyclic. The graded projection $\\operatorname{gr}^i t$ is degreewise surjective with exactly this kernel, by the direct-sum quotient formula of step 1. Step 2 therefore makes $\\operatorname{gr}^i t$ a quasi-isomorphism for every $i$, so $t\\in W$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "lem-pur-quasi-iso-cone-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05RG (lemma-construct-multiplicative-system), right MS2, and 014E (definition-cone); ordinary acyclic cone criterion underlying Tag 05RT (lemma-acyclic)"
+   }
+  },
+  {
+   "text": "The Ore object has common lower bound min(a_X,a_Y,a_Z) and common upper bound max(b_X,b_Y,b_Z). The componentwise filtration on the finite sum and cochain shift uses these bounds in every cochain degree [def-sp-filtration]. Thus the constructed object belongs to the globally finite full subcategory. This construction takes no infinite sum and imposes no cochain-degree bound, including for zero inputs.",
+   "uses": [
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05S1 (lemma-filtered-acyclic), globally finite restriction; Tag 05RG (lemma-construct-multiplicative-system), right MS1–MS3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "lem-pur-quasi-iso-cone-acyclic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05RG, right MS2; the explicit filtered cone argument in the parent node, restricted to this separate fraction axiom."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Morphism property defined by graded quasi-isomorphisms on filtered complexes has right calculus of fractions",
+   "digest": "a9404cfda7c14df0",
+   "date": "2026-10-19",
+   "verdict": "No direct filtered unbounded fraction result; ordinary homotopy fractions and generic triangulated fractions require a filtered cone/triangulated interface.",
+   "results": [
+    "DerivedCategory.instHasRightCalculusOfFractionsHomotopyCategoryIntUpQuasiIso",
+    "DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso",
+    "DerivedCategory.right_fac",
+    "HasDerivedCategory.standard",
+    "DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso",
+    "HomologicalComplexUpToQuasiIso",
+    "DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp",
+    "DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE"
+   ]
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasRightCalculusOfFractions\"",
+   "digest": "be8059ab7fd65e2b",
+   "date": "2026-10-19",
+   "verdict": "No direct filtered unbounded fraction result; ordinary homotopy fractions and generic triangulated fractions require a filtered cone/triangulated interface.",
+   "results": [
+    "CategoryTheory.MorphismProperty.HasRightCalculusOfFractions",
+    "CategoryTheory.MorphismProperty.HasRightCalculusOfFractions.toIsMultiplicative",
+    "CategoryTheory.MorphismProperty.instHasLeftCalculusOfFractionsOppositeOpOfHasRightCalculusOfFractions",
+    "CategoryTheory.MorphismProperty.instHasRightCalculusOfFractionsOppositeOpOfHasLeftCalculusOfFractions",
+    "CategoryTheory.MorphismProperty.instHasLeftCalculusOfFractionsUnopOfHasRightCalculusOfFractionsOpposite",
+    "CategoryTheory.MorphismProperty.instHasRightCalculusOfFractionsUnopOfHasLeftCalculusOfFractionsOpposite",
+    "CategoryTheory.Localization.essSurj_mapArrow_of_hasRightCalculusOfFractions",
+    "CategoryTheory.MorphismProperty.HasRightCalculusOfFractions.exists_rightFraction"
+   ]
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*[Qq]uasi|[Qq]uasi.*filtered|HasRightCalculusOfFractions",
+   "digest": "62ef8fa94ae15393",
+   "date": "2026-10-19",
+   "verdict": "No direct filtered unbounded fraction result; ordinary homotopy fractions and generic triangulated fractions require a filtered cone/triangulated interface.",
+   "results": [
+    "Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean",
+    "Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean",
+    "Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean",
+    "Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean",
+    "Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean",
+    "Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean",
+    "Mathlib/CategoryTheory/Localization/CalculusOfFractions/ComposableArrows.lean",
+    "Mathlib/CategoryTheory/Localization/CalculusOfFractions/ComposableArrows.lean"
+   ]
+  },
+  {
+   "tool": "leansearch",
+   "query": "Graded quasi-isomorphisms between finite filtered unbounded module complexes satisfy the right Ore square condition modulo filtration preserving homotopy",
+   "results": "HomologicalComplex.quasiIso; CategoryTheory.ShortComplex.QuasiIso.casesOn; CategoryTheory.ShortComplex.QuasiIso.isIso; QuasiIso; HomologicalComplex.mem_quasiIso_iff; quasiIso_comp; CategoryTheory.ShortComplex.quasiIso_iff_comp_left; HomotopyCategory.mem_quasiIso_iff",
+   "date": "2026-10-20",
+   "verdict": "No match: ordinary quasi-isomorphism and homotopy-category results do not provide the filtered homotopy quotient and its graded functors or filtered cone constructions. The ordinary isomorphism and quasi-isomorphism APIs are used in the proved two-out-of-three argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FilteredQuasiIsoFractions",
+  "date": "2026-10-19",
+  "group": "D6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-filtered-quasi-isomorphism-fractions",
+   "place": "Proof steps 2, 3, 4, 7",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FilteredQuasiIsoRightOre",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredQuasiIsoRightOre.lean",
+  "declaration": "CochainComplex.finiteFilteredModuleQuasiIso_rightOre",
+  "declarations": [
+   "CochainComplex.finiteFilteredModuleQuasiIso_rightOre"
+  ],
+  "statement": "theorem finiteFilteredModuleQuasiIso_rightOre (R : Type u) [CommRing R]\n    {X Y Z : FiniteFilteredModuleHomotopy R} (f : X ⟶ Z) (s : Y ⟶ Z)\n    (hs : finiteFilteredModuleQuasiIso R s) :\n    ∃ (T : FiniteFilteredModuleHomotopy R) (t : T ⟶ X) (g : T ⟶ Y),\n      finiteFilteredModuleQuasiIso R t ∧ t ≫ f = g ≫ s",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261020T051141-L-1578378",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261020T051141-L-1578378",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
