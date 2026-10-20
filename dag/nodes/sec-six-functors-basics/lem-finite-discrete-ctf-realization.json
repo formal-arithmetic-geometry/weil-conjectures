@@ -1,0 +1,114 @@
+{
+ "id": "lem-finite-discrete-ctf-realization",
+ "kind": "statement",
+ "title": "Finite discrete coefficient realization reflects constructible finite-Tor objects",
+ "statement": "Let X be a Noetherian scheme and A a finite discrete commutative ring. For the specified finiteComparisonRealization from fixed-scalar pro-etale sheaves to internal coefficient modules, any fixed-scalar complex whose realization is bounded constructible and of finite Tor amplitude is itself bounded constructible and of finite Tor amplitude. The internal condition is [sk-def-sfb-constructible], the derived category is [def-weil-abstract-derived-category], and the functor is the specified coefficient transport of [det-ctf-finite-comparison-localizing].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-compact/sk-prop-ctf-finite-compact-proetale.proof.md",
+  "place": "Opening coefficient-identification paragraph: exact coefficient equivalence preserves constructibility and finite Tor amplitude."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-constructible",
+  "def-weil-abstract-derived-category",
+  "det-ctf-finite-comparison-localizing"
+ ],
+ "proof": [
+  {
+   "text": "Construct the inverse section-action equivalence to finiteComparisonRealization by restricting scalars along the specified coefficient-ring isomorphism. Sheafification and restriction are inverse on finite discrete scalar modules, and the induced equivalence is exact on module sheaves and on unbounded derived categories.",
+   "uses": [
+    "det-ctf-finite-comparison-localizing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The equivalence preserves cohomology and finite constant local models on the same pro-etale covers and constructible strata. Its monoidal comparison identifies the two relative derived tensors, so the degree-zero tensor tests reflect every finite Tor interval. Therefore bounded constructibility and finite Tor amplitude reflect from the realization.",
+   "uses": [
+    "lem-sf-module-object-ordinary-coefficient-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-ctf-finite-comparison-localizing",
+  "lem-sf-module-object-ordinary-coefficient-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-compact/sk-prop-ctf-finite-compact-proetale.proof.md",
+  "place": "Coefficient-identification paragraph."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FiniteCompactProetale",
+  "date": "2026-10-20",
+  "group": "G6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "det-ctf-finite-compact-proetale"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-ctf-finite-compact",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteDiscreteCtfRealization",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteDiscreteCtfRealization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteDiscreteCtfRealization",
+  "statement": "theorem finiteDiscreteCtfRealization\n    (X : Scheme.{u}) [IsNoetherian X]\n    (A : Type) [CommRing A] [Finite A]\n    [TopologicalSpace A] [DiscreteTopology A] [IsTopologicalRing A]\n    (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1}\n      (coherentTopology Profinite.{u})\n      ((Functor.const Profinite.{u}ᵒᵖ).obj (RingCat.of (ULift.{u + 1} A))) ≅\n        Profinite.continuousMapRingObj.{u} A) [IsMonHom eR.hom]\n    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X)\n      (ModuleCat.{u + 1} (ULift.{u + 1} A))))\n    (hK : (constantModelBoundedConstructible (Profinite.continuousMapRingObj A) X ⊓\n      fun M ↦ DerivedCategory.finiteTorAmplitude _ M)\n        ((finiteComparisonRealization A X eR).mapDerivedCategory.obj K)) :\n    (DerivedCategory.TStructure.t.bounded K ∧\n      ∀ q : ℤ, IsConstructible (ULift.{u + 1} A)\n        ((DerivedCategory.homologyFunctor _ q).obj K)) ∧\n      DerivedCategory.finiteTorAmplitude _ K",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-20"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finiteComparisonRealization|ordinaryCtf|finiteTorAmplitude.*iff",
+   "results": "[]",
+   "date": "2026-10-19",
+   "verdict": "No theorem identifies the specified internal coefficient realization with the fixed-scalar constructible finite-Tor predicate."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"finiteTorAmplitude\"",
+   "results": "[]",
+   "date": "2026-10-19",
+   "verdict": "No theorem identifies the specified internal coefficient realization with the fixed-scalar constructible finite-Tor predicate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact monoidal equivalence of sheaf module categories reflects bounded constructibility and finite Tor amplitude",
+   "results": "['LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat', 'LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf', 'LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat', 'LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology', 'CategoryTheory.Sheaf.monoidalCategory', 'LightCondensed.instMonoidalCategoryLightCondMod', 'CategoryTheory.GrothendieckTopology.W.transport_isMonoidal', 'LightCondensed.instMonoidalLightCondSetLightCondModFree']",
+   "date": "2026-10-19",
+   "verdict": "No theorem identifies the specified internal coefficient realization with the fixed-scalar constructible finite-Tor predicate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite discrete constructible complexes of finite Tor amplitude on the pro-etale site descend to etale complexes via the exact coefficient realization equivalence",
+   "results": "['CondensedMod.isDiscrete_tfae', 'CondensedSet.isDiscrete_tfae', 'AlgebraicGeometry.Scheme.etalePretopology', 'Condensed.IsDiscrete', 'LightCondMod.isDiscrete_tfae', 'AlgebraicGeometry.Scheme.Etale', 'CondensedSet.LocallyConstant.iso', 'Algebra.FormallyEtale.recOn']",
+   "date": "2026-10-19",
+   "verdict": "No match: the discrete-condensed characterizations concern the profinite point, not bounded constructible finite-Tor complexes on a scheme or the specified internal module realization."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261020T051329-L-1639838",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261020T051329-L-1639838",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
