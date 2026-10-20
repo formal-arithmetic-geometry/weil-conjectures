@@ -12,7 +12,7 @@ import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Submodule
 import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 import Mathlib.RingTheory.Finiteness.Basic
 import Sheaf.RingTheory.FiniteHomogeneousGenerators
-import Sheaf.RingTheory.GradedKernelFinite
+import WeilConjectures.RingTheory.GradedKernelFinite
 
 /-!
 # Internal grading on a finite graded kernel
@@ -85,10 +85,11 @@ theorem graded_kernel_internal_finite {k : Type u} [Field k]
         (fun j ↦ (ℱ j).comap q.ker.subtype.toAddMonoidHom) x) ∧
       Submodule.span (MvPolynomial (Fin 2) k) s = ⊤ := by
   classical
+  have _ := hsmulM
+  have _ := hq
   let : DirectSum.Decomposition ℱ := hF.chooseDecomposition
-  obtain ⟨hhom, t, ht, _, htspan⟩ := graded_kernel_finite ℱ hF ℳ hM hsmulF hsmulM
-    (finite_homogeneous_spanning ℱ hF hsmulF)
-    (finite_homogeneous_spanning ℳ hM hsmulM) q hq hgraded
+  obtain ⟨hhom, t, ht, _, htspan⟩ := graded_kernel_finite ℱ hF ℳ hM hsmulF
+    (finite_homogeneous_spanning ℱ hF hsmulF) q hgraded
   let 𝒦 : ℤ → AddSubgroup q.ker :=
     fun j ↦ (ℱ j).comap q.ker.subtype.toAddMonoidHom
   let inc : ∀ j : ℤ, 𝒦 j →+ ℱ j := fun j ↦
