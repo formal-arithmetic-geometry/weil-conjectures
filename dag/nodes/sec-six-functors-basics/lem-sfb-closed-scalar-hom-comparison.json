@@ -1,0 +1,148 @@
+{
+ "id": "lem-sfb-closed-scalar-hom-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "Final paragraph: coefficient passage (inverting ell and descent to a finite extension); scalar-adjunction proof, Five Hom bijections and evaluation for a tensor-preserving left adjoint.",
+   "via": [
+    "lem-sfb-dc-hom-scalar-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Five Hom bijections and evaluation for a tensor-preserving left adjoint",
+ "statement": "Let A and B be categories with specified closed tensor-Hom structures S and T [def-coef-ringed-tensor-hom-model]. Let F:A→B be left adjoint to U:B→A and let μ:F(X tensor K)≅FX tensor FK be natural. Then U Hom_B(FK,N)≅Hom_A(K,UN) is natural in K,N. It represents exactly the five Hom bijections obtained from the two scalar transposes, the two closed transposes and μ. Its closed transpose is restricted evaluation after the scalar unit. This evaluation equation determines the comparison uniquely.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 and 08J9; scalar internal-Hom node steps 3–5."
+ },
+ "stmt_deps": [
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Compose the five Hom equivalences. Naturality of the scalar and closed hom equivalences and μ proves precomposition naturality, and naturality in K,N. Write out uncurrying as tensoring the map with the identity followed by evaluation.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 and 08J9; scalar internal-Hom node steps 3–5."
+   }
+  },
+  {
+   "text": "Evaluate the bijection at the source identity to define alpha and its inverse bijection at the target identity to define beta. Precomposition naturality and inverse-equivalence identities show both composites are identities. The other naturality identity makes these component isomorphisms natural.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 and 08J9; scalar internal-Hom node steps 3–5."
+   }
+  },
+  {
+   "text": "Expand the value at the identity. Move the scalar unit in the second factor through μ and the outer scalar unit by naturality. The scalar counit cancels that unit by the triangle identity. This is precisely the restriction tensor map followed by restricted evaluation. Injectivity of the closed transpose gives uniqueness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 and 08J9; scalar internal-Hom node steps 3–5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 and 08J9; scalar internal-Hom node steps 3–5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A strong monoidal left adjoint between closed categories induces an internal Hom isomorphism for its right adjoint",
+   "results": "CategoryTheory.ihom.adjunction; CategoryTheory.MonoidalClosed.internalHomAdjunction₂; CategoryTheory.Monoidal.Reflective.closed. Read the closed-category adjunction interfaces.",
+   "date": "2026-10-21",
+   "verdict": "No exact comparison with the two independent recorded closed structures and its evaluation normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"rightAdjointUniq\"",
+   "results": "Adjunction uniqueness declarations, including rightAdjointUniq; these supply uniqueness infrastructure, not this normalized construction.",
+   "date": "2026-10-21",
+   "verdict": "No exact statement; the explicit five-equivalence construction is needed."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*comp|homEquiv_leftAdjointUniq|internalHomAdjunction₂_adj",
+   "results": "25 hits, including Adjunction.homEquiv_leftAdjointUniq_hom_app, conjugateEquiv_comp, conjugateEquiv_symm_comp, and leftAdjointCompIso; read the adjunction uniqueness and mates declarations.",
+   "date": "2026-10-21",
+   "verdict": "Useful ingredients, no theorem for the separately recorded CoefficientClosedStructure API."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ScalarInternalHomAdjunction",
+  "date": "2026-10-21",
+  "group": "S7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ClosedScalarHomComparison",
+  "file": "lean/Sheaf/CategoryTheory/ClosedScalarHomComparison.lean",
+  "declaration": "CategoryTheory.ClosedScalarHom.iso",
+  "statement": "def iso : ((F.op.prod (𝟭 B)) ⋙ I ⋙ U) ≅ ((𝟭 Aᵒᵖ).prod U ⋙ H)",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-21",
+  "declarations": [
+   "CategoryTheory.ClosedScalarHom.bijection",
+   "CategoryTheory.ClosedScalarHom.bijection_precomp",
+   "CategoryTheory.ClosedScalarHom.bijection_naturality",
+   "CategoryTheory.ClosedScalarHom.component",
+   "CategoryTheory.ClosedScalarHom.component_rep",
+   "CategoryTheory.ClosedScalarHom.iso",
+   "CategoryTheory.ClosedScalarHom.representing",
+   "CategoryTheory.ClosedScalarHom.restrictionTensor",
+   "CategoryTheory.ClosedScalarHom.restrictedEvaluation",
+   "CategoryTheory.ClosedScalarHom.evaluation",
+   "CategoryTheory.ClosedScalarHom.unique"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-44c77",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261020T221348-L-4178240",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-44c77",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261020T221348-L-4178240",
+  "kind": "interface",
+  "note": "independent cc review: item proof and 12 new modules/nodes vs packet, live clone and published build: full pp.all #print diff of the 27 moved decls (only the declared normalization field + _proof_N aux names differ), #print axioms of all proved decls, scalarHomTensorCoherence against ScalarDerivedPair/ScalarHomTensorComparison pinnings, 11 direct importers compiled against the delivered modules (all rc 0)"
+ }
+}

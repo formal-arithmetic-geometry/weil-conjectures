@@ -1,0 +1,141 @@
+{
+ "id": "lem-sfb-scalar-tensor-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "Final paragraph: coefficient passage (inverting ell and descent to a finite extension); scalar-adjunction proof, Derived scalar tensor comparison on all K-flat representatives.",
+   "via": [
+    "lem-sfb-dc-hom-scalar-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Derived scalar tensor comparison on all K-flat representatives",
+ "statement": "For any simultaneous normalized scalar and tensor-Hom models M [def-sfb-scalar-hom-comparison-data] and arbitrary ring-sheaf map a:R→S, a ScalarHomTensorComparison M a exists. Its representative square holds for every pair of K-flat complexes, with the actual total-complex pure-generator formula and no flat-term assumption.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, final total-tensor display and descent; stronger all-K-flat normalization using the scalar-specific cancellation argument."
+ },
+ "stmt_deps": [
+  "def-sfb-scalar-hom-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Take the normalized ordinary scalar tensor comparison. The inverse comparisons in all bidegrees give tensorPullbackTotal. Its two differential identities follow by naturality, and scalar additivity preserves the signed differential. A left adjoint preserves the total coproducts, so this chain map is invertible. Its inverse sends scalar-unit pure summands to the indicated total pure summands.",
+   "uses": [
+    "lem-sfb-scalar-ordinary-tensor-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, final total-tensor display and descent; stronger all-K-flat normalization using the scalar-specific cancellation argument."
+   }
+  },
+  {
+   "text": "Use all K-flat complexes as representatives. Scalar extension preserves them; the universal scalar comparison computes on them and their total tensors. K-flat resolutions give the resolving representative class, so restriction of bifunctors is fully faithful. Descend the chain comparison using tensorComparisonDescent. Its defining square is exactly ScalarHomTensorNormalization.",
+   "uses": [
+    "lem-sfb-scalar-extension-kflat",
+    "lem-pc-kflat-resolution",
+    "def-coef-ringed-tensor-hom-model",
+    "lem-weil-pbc-resolving-representative-whiskering",
+    "lem-weil-pbc-tensor-comparison-descent-representatives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, final total-tensor display and descent; stronger all-K-flat normalization using the scalar-specific cancellation argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-scalar-ordinary-tensor-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-sfb-scalar-extension-kflat",
+  "lem-pc-kflat-resolution",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-weil-pbc-resolving-representative-whiskering",
+  "lem-weil-pbc-tensor-comparison-descent-representatives"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, final total-tensor display and descent; stronger all-K-flat normalization using the scalar-specific cancellation argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of sheaves of modules preserves K-flat complexes and the tensor product of unbounded complexes naturally",
+   "results": "ModuleCat.extendScalars; ModuleCat.ExtendScalars.obj'; Module.Flat.lTensor_shortComplex_exact; Module.Flat.rTensor_shortComplex_exact; Module.Flat.isBaseChange.",
+   "date": "2026-10-21",
+   "verdict": "These are ordinary modules; no unbounded sheaf-complex statement or independent-universe normalized comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"tensor\"",
+   "results": "Tensor-product restriction-of-scalars curry infrastructure; no ringed-site K-flat or total-complex comparison.",
+   "date": "2026-10-21",
+   "verdict": "No exact statement."
+  },
+  {
+   "tool": "grep",
+   "query": "cancelBaseChange|tensor.*restrictScalars|changeOfRings.*tensor",
+   "results": "25 hits, including TensorProduct.AlgebraTensorModule.cancelBaseChange, tensor restriction-of-scalars curry and base-change formulas. Read the ordinary module tensor cancellation interface.",
+   "date": "2026-10-21",
+   "verdict": "Use these ingredients; the present independent coefficient universe, ordinary tensor identification and all-K-flat normalization require the stated bridges."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ScalarInternalHomAdjunction",
+  "date": "2026-10-21",
+  "group": "S7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ScalarHomTensorComparison",
+  "file": "lean/Sheaf/Algebra/Homology/ScalarHomTensorComparison.lean",
+  "declaration": "CategoryTheory.ScalarHomTensor.scalarHomTensorComparison_exists",
+  "statement": "theorem scalarHomTensorComparison_exists : Nonempty (ScalarHomTensorComparison M a)",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-21"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-44c77",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261020T221348-L-4178240",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-44c77",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261020T221348-L-4178240",
+  "kind": "interface",
+  "note": "independent cc review: item proof and 12 new modules/nodes vs packet, live clone and published build: full pp.all #print diff of the 27 moved decls (only the declared normalization field + _proof_N aux names differ), #print axioms of all proved decls, scalarHomTensorCoherence against ScalarDerivedPair/ScalarHomTensorComparison pinnings, 11 direct importers compiled against the delivered modules (all rc 0)"
+ }
+}

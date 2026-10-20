@@ -1,0 +1,100 @@
+{
+ "id": "def-sfb-scalar-hom-canonical-iso",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "Final paragraph: coefficient passage (inverting ell and descent to a finite extension); scalar-adjunction proof, Canonical internal-Hom comparison from a normalized scalar tensor map.",
+   "via": [
+    "lem-sfb-dc-hom-scalar-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Canonical internal-Hom comparison from a normalized scalar tensor map",
+ "statement": "For a normalized scalar and tensor-Hom model M [def-sfb-scalar-hom-comparison-data] and a scalar tensor comparison mu for a:R→S, scalarHomCanonicalIso is the explicit closed-Hom isomorphism [lem-sfb-closed-scalar-hom-comparison] for the given scalar adjunction and mu.iso. Its body constructs the representing maps from five Hom equivalences and their inverses; it selects no arbitrary isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 and 08J9; five Hom bijections."
+ },
+ "stmt_deps": [
+  "def-sfb-scalar-hom-comparison-data",
+  "lem-sfb-closed-scalar-hom-comparison"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A strong monoidal left adjoint between closed categories induces an internal Hom isomorphism for its right adjoint",
+   "results": "CategoryTheory.ihom.adjunction; CategoryTheory.MonoidalClosed.internalHomAdjunction₂; CategoryTheory.Monoidal.Reflective.closed. Read the closed-category adjunction interfaces.",
+   "date": "2026-10-21",
+   "verdict": "No exact comparison with the two independent recorded closed structures and its evaluation normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"rightAdjointUniq\"",
+   "results": "Adjunction uniqueness declarations, including rightAdjointUniq; these supply uniqueness infrastructure, not this normalized construction.",
+   "date": "2026-10-21",
+   "verdict": "No exact statement; the explicit five-equivalence construction is needed."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*comp|homEquiv_leftAdjointUniq|internalHomAdjunction₂_adj",
+   "results": "25 hits, including Adjunction.homEquiv_leftAdjointUniq_hom_app, conjugateEquiv_comp, conjugateEquiv_symm_comp, and leftAdjointCompIso; read the adjunction uniqueness and mates declarations.",
+   "date": "2026-10-21",
+   "verdict": "Useful ingredients, no theorem for the separately recorded CoefficientClosedStructure API."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ScalarInternalHomAdjunction",
+  "date": "2026-10-21",
+  "group": "S7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ScalarHomCanonicalIso",
+  "file": "lean/Sheaf/Algebra/Homology/ScalarHomCanonicalIso.lean",
+  "declaration": "CategoryTheory.scalarHomCanonicalIso",
+  "statement": "def scalarHomCanonicalIso (a : R ⟶ S) (μ : ScalarHomTensorComparison M a) : scalarHomSource M a ≅ scalarHomTarget.{c, v, r, w} a",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-21"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-44c77",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261020T221348-L-4178240",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-44c77",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261020T221348-L-4178240",
+  "kind": "interface",
+  "note": "independent cc review: item proof and 12 new modules/nodes vs packet, live clone and published build: full pp.all #print diff of the 27 moved decls (only the declared normalization field + _proof_N aux names differ), #print axioms of all proved decls, scalarHomTensorCoherence against ScalarDerivedPair/ScalarHomTensorComparison pinnings, 11 direct importers compiled against the delivered modules (all rc 0)"
+ }
+}

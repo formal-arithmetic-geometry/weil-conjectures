@@ -1,0 +1,126 @@
+{
+ "id": "lem-sfb-closed-scalar-hom-composition",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "Final paragraph: coefficient passage (inverting ell and descent to a finite extension); scalar-adjunction proof, Composition of the five closed-Hom bijections.",
+   "via": [
+    "lem-sfb-dc-hom-scalar-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Composition of the five closed-Hom bijections",
+ "statement": "Let A,B,C have specified closed tensor-Hom structures [def-coef-ringed-tensor-hom-model], with adjunctions F⊣U and G⊣W and natural strong tensor comparisons mu and nu. Suppose the tensor comparison mu0 for GF is G(mu) followed by nu at each pair. Then the five-bijection comparison [lem-sfb-closed-scalar-hom-comparison] for the composite adjunction equals U of the comparison for G followed by the comparison for F. This is an equality of actual component maps, not an existence statement.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 and 0D6D; scalar internal-Hom node step 7, equality of the successive five Hom chains."
+ },
+ "stmt_deps": [
+  "lem-sfb-closed-scalar-hom-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use the representing identity for the first comparison and expand the five equivalences for the composite adjunction. Its hom equivalence is the composite of the two scalar hom equivalences. Cancel the final closed transpose and first scalar transpose by injectivity.",
+   "uses": [
+    "lem-sfb-closed-scalar-hom-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 and 0D6D; scalar internal-Hom node step 7, equality of the successive five Hom chains."
+   }
+  },
+  {
+   "text": "Move the first scalar counit through the second closed transpose by precomposition naturality. Write the second comparison as its value at the identity in the five-bijection formula, then cancel the intermediate closed equivalence with its inverse. Naturality of the second scalar transpose and nu leaves precisely G(mu) followed by nu. The stated tensor-composition equation identifies this with mu0.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 and 0D6D; scalar internal-Hom node step 7, equality of the successive five Hom chains."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-closed-scalar-hom-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 and 0D6D; scalar internal-Hom node step 7, equality of the successive five Hom chains."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A strong monoidal left adjoint between closed categories induces an internal Hom isomorphism for its right adjoint",
+   "results": "CategoryTheory.ihom.adjunction; CategoryTheory.MonoidalClosed.internalHomAdjunction₂; CategoryTheory.Monoidal.Reflective.closed. Read the closed-category adjunction interfaces.",
+   "date": "2026-10-21",
+   "verdict": "No exact comparison with the two independent recorded closed structures and its evaluation normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"rightAdjointUniq\"",
+   "results": "Adjunction uniqueness declarations, including rightAdjointUniq; these supply uniqueness infrastructure, not this normalized construction.",
+   "date": "2026-10-21",
+   "verdict": "No exact statement; the explicit five-equivalence construction is needed."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*comp|homEquiv_leftAdjointUniq|internalHomAdjunction₂_adj",
+   "results": "25 hits, including Adjunction.homEquiv_leftAdjointUniq_hom_app, conjugateEquiv_comp, conjugateEquiv_symm_comp, and leftAdjointCompIso; read the adjunction uniqueness and mates declarations.",
+   "date": "2026-10-21",
+   "verdict": "Useful ingredients, no theorem for the separately recorded CoefficientClosedStructure API."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ScalarInternalHomAdjunction",
+  "date": "2026-10-21",
+  "group": "S7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ClosedScalarHomComposition",
+  "file": "lean/Sheaf/CategoryTheory/ClosedScalarHomComposition.lean",
+  "declaration": "CategoryTheory.ClosedScalarHom.composition",
+  "statement": "theorem composition (K : A) (N : C) : (iso S V (adj.comp adj') μ₀).hom.app (op K, N) = U.map ((iso T V adj' ν).hom.app (op (F.obj K), N)) ≫ (iso S T adj μ).hom.app (op K, W.obj N)",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-21"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-44c77",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261020T221348-L-4178240",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-44c77",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261020T221348-L-4178240",
+  "kind": "interface",
+  "note": "independent cc review: item proof and 12 new modules/nodes vs packet, live clone and published build: full pp.all #print diff of the 27 moved decls (only the declared normalization field + _proof_N aux names differ), #print axioms of all proved decls, scalarHomTensorCoherence against ScalarDerivedPair/ScalarHomTensorComparison pinnings, 11 direct importers compiled against the delivered modules (all rc 0)"
+ }
+}

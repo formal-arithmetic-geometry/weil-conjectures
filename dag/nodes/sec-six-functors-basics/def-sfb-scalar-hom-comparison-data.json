@@ -1,0 +1,137 @@
+{
+ "id": "def-sfb-scalar-hom-comparison-data",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "Final paragraph: coefficient passage (inverting ell and descent to a finite extension); scalar-adjunction proof, Actual scalar-adjunction and normalized tensor-Hom comparison data.",
+   "via": [
+    "lem-sfb-dc-hom-scalar-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Actual scalar-adjunction and normalized tensor-Hom comparison data",
+ "statement": "On a site small in the module universe [def-weil-size-convention], package the ordinary module categories, actual termwise restriction, normalized ordinary scalar extension and its universal unbounded derived pair [lem-pur-sheaf-ring-derived-coefficient-adjunction, lem-pur-derived-change-of-rings]. For each ring sheaf the closed structure and its K-flat evaluation model are those of [def-coef-ringed-tensor-hom-model]. A scalar tensor comparison consists of preservation of all K-flat complexes, an actual chain tensor isomorphism with its pure-generator formula, and a natural derived tensor isomorphism satisfying the full representative square. ScalarHomTensorNormalization is exactly that square as a named Prop, with no change to its quantifiers or equations. ScalarInternalHomAdjunction records the five Hom bijections, evaluation, uniqueness, tower and identity coherence, and conservative restriction. This extracts the existing data declarations without changing the categories, functors or equations.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6, 07A4, 08J9 and 0D6D; the existing scalar internal-Hom node definitions."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-derived-internal-hom",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A strong monoidal left adjoint between closed categories induces an internal Hom isomorphism for its right adjoint",
+   "results": "CategoryTheory.ihom.adjunction; CategoryTheory.MonoidalClosed.internalHomAdjunction₂; CategoryTheory.Monoidal.Reflective.closed. Read the closed-category adjunction interfaces.",
+   "date": "2026-10-21",
+   "verdict": "No exact comparison with the two independent recorded closed structures and its evaluation normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"rightAdjointUniq\"",
+   "results": "Adjunction uniqueness declarations, including rightAdjointUniq; these supply uniqueness infrastructure, not this normalized construction.",
+   "date": "2026-10-21",
+   "verdict": "No exact statement; the explicit five-equivalence construction is needed."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*comp|homEquiv_leftAdjointUniq|internalHomAdjunction₂_adj",
+   "results": "25 hits, including Adjunction.homEquiv_leftAdjointUniq_hom_app, conjugateEquiv_comp, conjugateEquiv_symm_comp, and leftAdjointCompIso; read the adjunction uniqueness and mates declarations.",
+   "date": "2026-10-21",
+   "verdict": "Useful ingredients, no theorem for the separately recorded CoefficientClosedStructure API."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ScalarInternalHomAdjunction",
+  "date": "2026-10-21",
+  "group": "S7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ScalarInternalHomData",
+  "file": "lean/Sheaf/Algebra/Homology/ScalarInternalHomData.lean",
+  "declaration": "CategoryTheory.ScalarHomTensorNormalization",
+  "statement": "def ScalarHomTensorNormalization (a : R ⟶ S) (hE : ∀ (P : CochainComplex (scalarModules J R) ℤ), CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P → CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := S) ((scalarComplex (M.scalar a).extension (M.scalar a).extension_additive).obj P)) (e : ∀ (P Q : CochainComplex (scalarModules J R) ℤ), (scalarComplex (M.scalar a).extension (M.scalar a).extension_additive).obj ((coefficientTotalTensor.{r, c, v} J R).obj (P, Q)) ≅ (coefficientTotalTensor.{r, c, v} J S).obj ((scalarComplex (M.scalar a).extension (M.scalar a).extension_additive).obj P, (scalarComplex (M.scalar a).extension (M.scalar a).extension_additive).obj Q)) (μ : (M.closed R).tensor ⋙ (M.scalar a).derived ≅ ((M.scalar a).derived.prod (M.scalar a).derived) ⋙ (M.closed S).tensor) : Prop",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-21",
+  "declarations": [
+   "SheafOfModules.scalarModules",
+   "SheafOfModules.scalarRestriction",
+   "SheafOfModules.scalarRestriction_limits",
+   "SheafOfModules.scalarRestriction_colimits",
+   "SheafOfModules.scalarComplex",
+   "SheafOfModules.scalarHomotopy",
+   "SheafOfModules.scalarDerivedRestriction",
+   "SheafOfModules.scalarRestrictionComparison",
+   "SheafOfModules.scalarPairComplexComparison",
+   "SheafOfModules.scalarChainTranspose",
+   "SheafOfModules.ScalarDerivedPair",
+   "CategoryTheory.ScalarHomModels",
+   "CategoryTheory.scalarHomUnitSection",
+   "CategoryTheory.ScalarHomTensorComparison",
+   "CategoryTheory.scalarHomSource",
+   "CategoryTheory.scalarHomTarget",
+   "CategoryTheory.scalarHomBijection",
+   "CategoryTheory.scalarHomRestrictionTensor",
+   "CategoryTheory.scalarHomRestrictedEvaluation",
+   "CategoryTheory.scalarHomOrdinaryRestrictionComp",
+   "CategoryTheory.scalarHomRestrictionComp",
+   "CategoryTheory.scalarHomOrdinaryRestrictionId",
+   "CategoryTheory.scalarHomRestrictionId",
+   "CategoryTheory.scalarHomExtensionComp",
+   "CategoryTheory.scalarHomExtensionId",
+   "CategoryTheory.ScalarInternalHomAdjunction",
+   "CategoryTheory.ScalarHomTensorNormalization"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-44c77",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261020T221348-L-4178240",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-44c77",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261020T221348-L-4178240",
+  "kind": "interface",
+  "note": "independent cc review: item proof and 12 new modules/nodes vs packet, live clone and published build: full pp.all #print diff of the 27 moved decls (only the declared normalization field + _proof_N aux names differ), #print axioms of all proved decls, scalarHomTensorCoherence against ScalarDerivedPair/ScalarHomTensorComparison pinnings, 11 direct importers compiled against the delivered modules (all rc 0)"
+ }
+}

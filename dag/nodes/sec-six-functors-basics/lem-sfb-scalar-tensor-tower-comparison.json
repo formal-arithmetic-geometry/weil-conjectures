@@ -1,0 +1,130 @@
+{
+ "id": "lem-sfb-scalar-tensor-tower-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "Final paragraph: coefficient passage (inverting ell and descent to a finite extension); scalar-adjunction proof, Simultaneous normalized scalar tensor comparisons with coefficient coherence.",
+   "via": [
+    "lem-sfb-dc-hom-scalar-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Simultaneous normalized scalar tensor comparisons with coefficient coherence",
+ "statement": "For any simultaneous models M [def-sfb-scalar-hom-comparison-data], choose a normalized ScalarHomTensorComparison for every ring-sheaf map and require that the explicit five-bijection internal-Hom comparisons obey the coefficient-tower and identity equations. All K-flat, chain-generator and derived representative normalization fields are retained.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6 and 0D6D; scalar internal-Hom proof steps 1 and 6–7."
+ },
+ "stmt_deps": [
+  "def-sfb-scalar-hom-comparison-data",
+  "def-sfb-scalar-hom-canonical-iso"
+ ],
+ "proof": [
+  {
+   "text": "For each coefficient map take the normalized scalar tensor comparison. Its K-flat preservation, chain comparison, generator formula and derived representative square have been proved. These normalizations determine the comparison maps; proof fields are irrelevant. Select such a comparison for each map.",
+   "uses": [
+    "lem-sfb-scalar-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, 07A6 and 0D6D; scalar internal-Hom proof steps 1 and 6–7."
+   }
+  },
+  {
+   "text": "Apply the coefficient-tower and identity coherence theorem to this family. Pair its two conclusions with the chosen normalized tensor family.",
+   "uses": [
+    "lem-sfb-scalar-internal-hom-tower-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, 07A6 and 0D6D; scalar internal-Hom proof steps 1 and 6–7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-scalar-tensor-comparison",
+  "lem-sfb-scalar-internal-hom-tower-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6 and 0D6D; scalar internal-Hom proof steps 1 and 6–7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of sheaves of modules preserves K-flat complexes and the tensor product of unbounded complexes naturally",
+   "results": "ModuleCat.extendScalars; ModuleCat.ExtendScalars.obj'; Module.Flat.lTensor_shortComplex_exact; Module.Flat.rTensor_shortComplex_exact; Module.Flat.isBaseChange.",
+   "date": "2026-10-21",
+   "verdict": "These are ordinary modules; no unbounded sheaf-complex statement or independent-universe normalized comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"tensor\"",
+   "results": "Tensor-product restriction-of-scalars curry infrastructure; no ringed-site K-flat or total-complex comparison.",
+   "date": "2026-10-21",
+   "verdict": "No exact statement."
+  },
+  {
+   "tool": "grep",
+   "query": "cancelBaseChange|tensor.*restrictScalars|changeOfRings.*tensor",
+   "results": "25 hits, including TensorProduct.AlgebraTensorModule.cancelBaseChange, tensor restriction-of-scalars curry and base-change formulas. Read the ordinary module tensor cancellation interface.",
+   "date": "2026-10-21",
+   "verdict": "Use these ingredients; the present independent coefficient universe, ordinary tensor identification and all-K-flat normalization require the stated bridges."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ScalarInternalHomAdjunction",
+  "date": "2026-10-21",
+  "group": "S7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ScalarTensorTowerComparison",
+  "file": "lean/Sheaf/Algebra/Homology/ScalarTensorTowerComparison.lean",
+  "declaration": "CategoryTheory.scalarTensorTowerComparison_exists",
+  "statement": "theorem scalarTensorTowerComparison_exists : ∃ μ : ∀ {R S : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S), ScalarHomTensorComparison M a, (∀ {R S T : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S) (b : S ⟶ T) (K : DerivedCategory (scalarModules J R)) (N : DerivedCategory (scalarModules J T)), (scalarHomCanonicalIso M (a ≫ b) (μ (a ≫ b))).hom.app (op K, N) ≫ (derivedInternalHomOfUniverses.{c, v, r, w} J R).map (Prod.mkHom (𝟙 (op K)) ((scalarHomRestrictionComp.{c, v, r, w} a b).hom.app N)) = (scalarHomRestrictionComp.{c, v, r, w} a b).hom.app ((derivedInternalHomOfUniverses.{c, v, r, w} J T).obj (op ((M.scalar (a ≫ b)).derived.obj K), N)) ≫ (scalarDerivedRestriction a).map ((scalarDerivedRestriction b).map ((derivedInternalHomOfUniverses.{c, v, r, w} J T).map (Prod.mkHom ((scalarHomExtensionComp M a b).hom.app K).op (𝟙 N)))) ≫ (scalarDerivedRestriction a).map ((scalarHomCanonicalIso M b (μ b)).hom.app (op ((M.scalar a).derived.obj K), N)) ≫ (scalarHomCanonicalIso M a (μ a)).hom.app (op K, (scalarDerivedRestriction b).obj N)) ∧ (∀ (R : Sheaf J CommRingCat.{max c v r}) (K N : DerivedCategory (scalarModules J R)), (scalarHomCanonicalIso M (𝟙 R) (μ (𝟙 R))).hom.app (op K, N) ≫ (derivedInternalHomOfUniverses.{c, v, r, w} J R).map (Prod.mkHom (𝟙 (op K)) ((scalarHomRestrictionId.{c, v, r, w} R).hom.app N)) = (scalarHomRestrictionId.{c, v, r, w} R).hom.app ((derivedInternalHomOfUniverses.{c, v, r, w} J R).obj (op ((M.scalar (𝟙 R)).derived.obj K), N)) ≫ (derivedInternalHomOfUniverses.{c, v, r, w} J R).map (Prod.mkHom ((scalarHomExtensionId M R).inv.app K).op (𝟙 N)))",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-21"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-44c77",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261020T221348-L-4178240",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-44c77",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261020T221348-L-4178240",
+  "kind": "interface",
+  "note": "independent cc review: item proof and 12 new modules/nodes vs packet, live clone and published build: full pp.all #print diff of the 27 moved decls (only the declared normalization field + _proof_N aux names differ), #print axioms of all proved decls, scalarHomTensorCoherence against ScalarDerivedPair/ScalarHomTensorComparison pinnings, 11 direct importers compiled against the delivered modules (all rc 0)"
+ }
+}

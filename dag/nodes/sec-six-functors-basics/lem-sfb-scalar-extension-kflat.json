@@ -1,0 +1,133 @@
+{
+ "id": "lem-sfb-scalar-extension-kflat",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "Final paragraph: coefficient passage (inverting ell and descent to a finite extension); scalar-adjunction proof, Scalar extension preserves all K-flat sheaf complexes.",
+   "via": [
+    "lem-sfb-dc-hom-scalar-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Scalar extension preserves all K-flat sheaf complexes",
+ "statement": "Let R→S and its normalized scalar pair s be as in [def-sfb-scalar-hom-comparison-data]. For every K-flat unbounded R-complex P [def-pc-kflat-complex], termwise s.extension(P) is K-flat over S. No flat-term assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7E, K-flat pullback argument specialized to a coefficient map; tensor identity of sites-modules.tex Tag 05V4."
+ },
+ "stmt_deps": [
+  "def-sfb-scalar-hom-comparison-data",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Restriction leaves the underlying abelian sheaf unchanged, so it is exact, reflects isomorphisms, and commutes with the small coproducts forming total complexes. Transport tensor cancellation along the specified object and map identifications of s.extension.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "lem-sfb-scalar-tensor-cancellation-independent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E, K-flat pullback argument specialized to a coefficient map; tensor identity of sites-modules.tex Tag 05V4."
+   }
+  },
+  {
+   "text": "For an acyclic S-complex Z, form the natural double-complex cancellation isomorphism U(Z tensor_S E(P))≅UZ tensor_R P and then its total isomorphism. Cancellation naturality gives both differential equations, including signs. UZ is acyclic. K-flatness of P makes the right total acyclic. Underlying-sheaf exactness reflection makes the original total acyclic.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-sfb-scalar-tensor-cancellation-independent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E, K-flat pullback argument specialized to a coefficient map; tensor identity of sites-modules.tex Tag 05V4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "lem-sfb-scalar-tensor-cancellation-independent",
+  "def-pc-kflat-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7E, K-flat pullback argument specialized to a coefficient map; tensor identity of sites-modules.tex Tag 05V4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of sheaves of modules preserves K-flat complexes and the tensor product of unbounded complexes naturally",
+   "results": "ModuleCat.extendScalars; ModuleCat.ExtendScalars.obj'; Module.Flat.lTensor_shortComplex_exact; Module.Flat.rTensor_shortComplex_exact; Module.Flat.isBaseChange.",
+   "date": "2026-10-21",
+   "verdict": "These are ordinary modules; no unbounded sheaf-complex statement or independent-universe normalized comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"tensor\"",
+   "results": "Tensor-product restriction-of-scalars curry infrastructure; no ringed-site K-flat or total-complex comparison.",
+   "date": "2026-10-21",
+   "verdict": "No exact statement."
+  },
+  {
+   "tool": "grep",
+   "query": "cancelBaseChange|tensor.*restrictScalars|changeOfRings.*tensor",
+   "results": "25 hits, including TensorProduct.AlgebraTensorModule.cancelBaseChange, tensor restriction-of-scalars curry and base-change formulas. Read the ordinary module tensor cancellation interface.",
+   "date": "2026-10-21",
+   "verdict": "Use these ingredients; the present independent coefficient universe, ordinary tensor identification and all-K-flat normalization require the stated bridges."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ScalarInternalHomAdjunction",
+  "date": "2026-10-21",
+  "group": "S7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ScalarHomExtensionKFlat",
+  "file": "lean/Sheaf/Algebra/Homology/ScalarHomExtensionKFlat.lean",
+  "declaration": "SheafOfModules.scalarExtension_preservesKFlat",
+  "statement": "theorem scalarExtension_preservesKFlat (s : ScalarDerivedPair a) (P : CochainComplex (scalarModules J R) ℤ) (hP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P) : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := S) ((scalarComplex s.extension s.extension_additive).obj P)",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-21"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-44c77",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261020T221348-L-4178240",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-44c77",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261020T221348-L-4178240",
+  "kind": "interface",
+  "note": "independent cc review: item proof and 12 new modules/nodes vs packet, live clone and published build: full pp.all #print diff of the 27 moved decls (only the declared normalization field + _proof_N aux names differ), #print axioms of all proved decls, scalarHomTensorCoherence against ScalarDerivedPair/ScalarHomTensorComparison pinnings, 11 direct importers compiled against the delivered modules (all rc 0)"
+ }
+}

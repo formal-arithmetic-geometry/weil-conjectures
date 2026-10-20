@@ -21,123 +21,48 @@
  ],
  "proof": [
   {
-   "text": "Put $F=S\\otimes_R^{\\mathbf L}-$ and use $\\otimes_R,\\otimes_S$ below for derived tensors. The scalar-adjunction node gives $F\\dashv U$, with unit $\\eta$ and counit $\\varepsilon$, and says that $U$ is computed termwise, without flatness of $R\\to S$. Apply the ringed-topos tensor-pullback node to the identity geometric morphism of $\\operatorname{Sh}(\\mathcal C)$ equipped with $R\\to S$. Its module pullback is $S\\otimes_R-$, so its derived pullback is precisely $F$. Obtain the natural isomorphism $\\mu_{A,B}:F(A\\otimes_R B)\\xrightarrow{\\sim}FA\\otimes_S FB$. Both sites here are the given small site, and the coefficient rings are commutative, as that node requires.",
+   "text": "Construct simultaneous closed tensor-Hom models from ringedDerived_closed_symmetric_monoidal, retaining its actual representative evaluation. Construct each scalar pair from the universal independent-coefficient derived change-of-rings theorem and the normalized ordinary and derived extension-restriction adjunction. The homotopy normalization descends to the exact stated chain normalization; quotient factor comparisons are identities on representatives.",
    "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-pur-derived-change-of-rings",
     "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "def-sfb-scalar-hom-comparison-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A6 (lemma-adjoint) and 07A4 (lemma-pullback-tensor-product), specialized to the identity topos."
-   }
+   "elementary": false
   },
   {
-   "text": "For $T=R,S$, take global zeroth hypercohomology of the natural internal-Hom identity $H_T(A,H_T(B,C))\\cong H_T(A\\otimes_T B,C)$ in the internal-Hom calculus node. Applying the global-sections node to its two sides gives the canonical tensor-Hom bijection $\\operatorname{Hom}_T(A,H_T(B,C))\\cong\\operatorname{Hom}_T(A\\otimes_T B,C)$. These bijections are natural in the three inputs: the internal-Hom identity is natural, and taking global sections and identifying a degree-zero Hom class with its derived morphism commute with precomposition and postcomposition. Denote by $\\operatorname{ev}_{B,C}:H_T(B,C)\\otimes_T B\\to C$ the image of the identity under this bijection. Thus the transpose of $t:A\\to H_T(B,C)$ is $\\operatorname{ev}_{B,C}(t\\otimes1_B)$.",
+   "text": "Use the normalized scalar tensor comparison and its coefficient-tower/identity coherence. Construct the internal-Hom isomorphism by the generic five-equivalence construction. Its representing bijection, evaluation equation and uniqueness are exactly the generic comparison theorems; specialize them to each recorded scalar adjunction.",
    "uses": [
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-pur-rhom-global-sections"
+    "lem-sfb-scalar-tensor-tower-comparison",
+    "lem-sfb-closed-scalar-hom-comparison",
+    "def-sfb-scalar-hom-canonical-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J9 (lemma-internal-hom), equation-internal-hom; Tag 08JA (lemma-section-RHom-over-U), global assertion."
-   }
+   "elementary": false
   },
   {
-   "text": "For every $A\\in D(R)$ form the following chain of bijections, with each Hom taken in the displayed coefficient category:\n$$\\begin{aligned}\n\\operatorname{Hom}_R(A,UH_S(FK,N))\n&\\cong\\operatorname{Hom}_S(FA,H_S(FK,N))\\\\\n&\\cong\\operatorname{Hom}_S(FA\\otimes_S FK,N)\\\\\n&\\cong\\operatorname{Hom}_S(F(A\\otimes_R K),N)\\\\\n&\\cong\\operatorname{Hom}_R(A\\otimes_R K,UN)\\\\\n&\\cong\\operatorname{Hom}_R(A,H_R(K,UN)).\n\\end{aligned}$$\nUse $F\\dashv U$ for the first and fourth arrows, step 2 for the second and fifth, and precomposition with $\\mu_{A,K}$ for the third. Write $\\Phi_A$ for the composite. It is natural contravariantly in $A$ and $K$ and covariantly in $N$, since every constituent bijection and $\\mu$ is natural. All objects are unbounded ambient derived objects, so every cited assertion applies.",
-   "uses": [
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-pur-rhom-global-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A6, 07A4 and 08J9 (equation-internal-hom); the five displayed adjunction bijections."
-   }
-  },
-  {
-   "text": "Set $E=UH_S(FK,N)$ and $B=H_R(K,UN)$. Define $\\alpha=\\Phi_E(1_E):E\\to B$ and $\\beta=\\Phi_B^{-1}(1_B):B\\to E$. Naturality in the testing object gives $\\Phi_A(t)=\\alpha t$ and $\\Phi_A^{-1}(s)=\\beta s$. In particular $\\alpha\\beta=1_B$ and $\\beta\\alpha=1_E$, by evaluating at $A=B,E$. Hence $\\alpha$ is the desired isomorphism. The same formulas show uniqueness among maps inducing $\\Phi$ and naturality in $K,N$: composing either candidate naturality square with an arbitrary test arrow gives the naturality identity of step 3, and testing at the identity gives equality. This is the elementary representable-functor argument, including its inverse, rather than an invocation of a scheme-specific Yoneda lemma.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Elementary representability argument applied to step 3."
-   }
-  },
-  {
-   "text": "Write $H=H_S(FK,N)$, so $E=UH$. Unwinding step 3 at $1_E$, using the unit/counit formulas for adjunction bijections, the tensor-Hom transpose of $\\alpha$ is\n$$E\\otimes_R K\\xrightarrow{\\eta}UF(E\\otimes_R K)\\xrightarrow{U\\mu}U(FE\\otimes_S FK)\\xrightarrow{U(\\varepsilon_H\\otimes1)}U(H\\otimes_S FK)\\xrightarrow{U\\operatorname{ev}}UN.$$\nFor $H,V\\in D(S)$ define the canonical restriction tensor map\n$$\\lambda_{H,V}=U\\bigl((\\varepsilon_H\\otimes\\varepsilon_V)\\mu_{UH,UV}\\bigr)\\eta_{UH\\otimes_R UV}:UH\\otimes_R UV\\to U(H\\otimes_S V).$$\nThe displayed transpose equals $U(\\operatorname{ev})\\lambda_{H,FK}(1\\otimes\\eta_K)$. Indeed, move $1\\otimes\\eta_K$ past $\\eta$ and then $\\mu$ by their naturality; the resulting second-factor composite is $\\varepsilon_{FK}F(\\eta_K)=1_{FK}$ by the triangle identity. This is exactly restricted evaluation after the scalar-extension unit. Tensor-Hom transposition is bijective, so it also characterizes $\\alpha$ uniquely by this evaluation formula.",
-   "uses": [
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-adjunction-of-natural-bijection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A6 and 07A4; categories.tex Definition 0037 and the following unit/counit formulas."
-   }
-  },
-  {
-   "text": "For coefficient maps $R\\xrightarrow{a}S\\xrightarrow{b}T$ write $F_a,F_b,F_{ba}$ and $U_a,U_b,U_{ba}$ for extension and restriction. Restriction composes termwise, so $U_{ba}=U_aU_b$. On a K-flat resolution $P$ with flat terms, the tensor-pullback node says $S\\otimes_RP$ is again K-flat with flat terms. Thus both iterated and direct derived extension are computed by the actual complexes $T\\otimes_S(S\\otimes_RP)$ and $T\\otimes_RP$. Their canonical isomorphism $c:F_bF_a\\cong F_{ba}$ sends $t\\otimes(s\\otimes x)$ to $t\\,b(s)\\otimes x$; its inverse sends $t\\otimes x$ to $t\\otimes(1\\otimes x)$. The balancing relations prove the maps inverse and the degree-zero scalars make them commute with the differential. They commute with maps of $P$ and invert quasi-isomorphisms, so the resolving-class localization equivalence gives a natural comparison on $D(R)$. The normalized units satisfy $U_aU_b(c)\\,U_a(\\eta^b_{F_aK})\\eta^a_K=\\eta^{ba}_K$: on $P$ both maps send $x$ to $1\\otimes x$. Identity coefficient maps give the identity comparison.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6D (lemma-derived-pullback-composition), its K-flat-model proof; Tag 07A6 for the normalized scalar units; Tag 06YS for resolutions."
-   }
-  },
-  {
-   "text": "The comparisons of step 6 also respect the tensor maps $\\mu$: on K-flat inputs the two maps for a tower send $t\\otimes(s\\otimes(x\\otimes y))$ to $(t\\,b(s)\\otimes x)\\otimes(1\\otimes y)$. These are the usual scalar tensor comparisons on total tensor complexes; the equality descends by the tensor resolving-class node. Consequently the direct Hom chain of step 3 for $ba$ equals the successive chains for $b$ and $a$. More explicitly, the first scalar transpose of $t:A\\to U_aU_bH$ in the successive chain is $\\varepsilon^b_HF_b(\\varepsilon^a_{U_bH}F_a(t))$; this is the transpose under the composite adjunction. Its unit is the composite unit computed in step 6, hence under $c$ it is the direct scalar transpose. The middle tensor maps agree by the pure-tensor equality above. The final scalar transposes agree by the same unit formula, and the tensor-Hom transposes are those of step 2. Therefore, for $N\\in D(T)$, after identifying $F_bF_aK$ with $F_{ba}K$, one has\n$$\\alpha^{ba}_{K,N}=\\alpha^a_{K,U_bN}\\circ U_a(\\alpha^b_{F_aK,N}).$$\nHere the source is $U_aU_bH_T(F_bF_aK,N)$, and the target is $H_R(K,U_aU_bN)$. The identity-map case follows from the same Hom chain with identity adjunction. Thus the coefficient compatibility is the evaluation-normalized tower compatibility, without asserting any additional flat-base-change property for internal Hom.",
-   "uses": [
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-pbc-adjunction-of-natural-bijection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4 and 0D6D, canonical scalar tensor comparisons on K-flat representatives; Tag 07A6 and Definition 0037 for composite adjunction transposes."
-   }
-  },
-  {
-   "text": "Finally restriction of scalars preserves kernels and cokernels because it leaves the underlying abelian sheaves and maps unchanged. Hence it commutes with cohomology: $H^n(Uf)=U(H^n(f))$, first on complexes by the kernel/image quotient formula and then on the derived category by localization. A module-sheaf morphism whose restricted morphism is invertible is itself invertible: the inverse of an $S$-linear bijection of the underlying sheaves is $S$-linear, since $g(sm)=s\\,g(m)$ implies $g^{-1}(sn)=s\\,g^{-1}(n)$ locally. If $Uf$ is an isomorphism, all $H^n(Uf)$ are isomorphisms. Reflection on module sheaves makes every $H^n(f)$ an isomorphism, and the unbounded cohomology criterion makes $f$ an isomorphism in $D(S)$. This proves conservativity, including for unbounded complexes and nonflat ring maps.",
+   "text": "Restriction leaves the underlying abelian sheaf unchanged and reflects isomorphisms. The exact-functor cohomology comparison identifies H^n(Uf) with U(H^n(f)). If Uf is invertible, all restricted cohomology maps are invertible, hence all cohomology maps of f are invertible. The unbounded cohomology criterion proves conservativity.",
    "uses": [
     "def-pc-sheaf-restrict-scalars",
-    "def-weil-abstract-derived-category",
     "lem-weil-pbc-unbounded-derived-iso-cohomology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "derived.tex Tag 05RT (lemma-acyclic), cohomology criterion; unchanged underlying sheaves in restriction of scalars."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-pur-derived-change-of-rings",
   "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-pur-rhom-global-sections",
-  "lem-weil-pbc-adjunction-of-natural-bijection",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-sfb-scalar-hom-comparison-data",
+  "lem-sfb-scalar-tensor-tower-comparison",
+  "lem-sfb-closed-scalar-hom-comparison",
+  "def-sfb-scalar-hom-canonical-iso",
   "def-pc-sheaf-restrict-scalars",
-  "def-weil-abstract-derived-category",
   "lem-weil-pbc-unbounded-derived-iso-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Formal combination of Tags 07A6, 07A4, 08J9, 08JA and 0D6D; evaluation and tower formulas expanded explicitly. Conservativity uses derived.tex Tag 05RT."
+  "place": "Explicit five-Hom-bijection construction and evaluation, Tags 07A6, 07A4 and 08J9; tensor-tower coherence isolated as Tags 0D6D/07A4; conservativity by derived.tex Tag 05RT."
  },
  "mathlib_searches": [
   {
@@ -257,12 +182,7 @@
   ]
  },
  "tool_uses": [
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-pur-rhom-global-sections",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -276,41 +196,15 @@
   "module": "Sheaf.Algebra.Homology.ScalarInternalHomAdjunction",
   "declaration": "CategoryTheory.scalarInternalHomAdjunction_exists",
   "declarations": [
-   "SheafOfModules.scalarModules",
-   "SheafOfModules.scalarRestriction",
-   "SheafOfModules.scalarRestriction_limits",
-   "SheafOfModules.scalarRestriction_colimits",
-   "SheafOfModules.scalarComplex",
-   "SheafOfModules.scalarHomotopy",
-   "SheafOfModules.scalarDerivedRestriction",
-   "SheafOfModules.scalarRestrictionComparison",
-   "SheafOfModules.scalarPairComplexComparison",
-   "SheafOfModules.scalarChainTranspose",
-   "SheafOfModules.ScalarDerivedPair",
-   "CategoryTheory.ScalarHomModels",
-   "CategoryTheory.scalarHomUnitSection",
-   "CategoryTheory.ScalarHomTensorComparison",
-   "CategoryTheory.scalarHomSource",
-   "CategoryTheory.scalarHomTarget",
-   "CategoryTheory.scalarHomBijection",
-   "CategoryTheory.scalarHomRestrictionTensor",
-   "CategoryTheory.scalarHomRestrictedEvaluation",
-   "CategoryTheory.scalarHomOrdinaryRestrictionComp",
-   "CategoryTheory.scalarHomRestrictionComp",
-   "CategoryTheory.scalarHomOrdinaryRestrictionId",
-   "CategoryTheory.scalarHomRestrictionId",
-   "CategoryTheory.scalarHomExtensionComp",
-   "CategoryTheory.scalarHomExtensionId",
-   "CategoryTheory.ScalarInternalHomAdjunction",
    "CategoryTheory.scalarInternalHomAdjunction_exists"
   ],
   "file": "lean/Sheaf/Algebra/Homology/ScalarInternalHomAdjunction.lean",
   "statement": "theorem scalarInternalHomAdjunction_exists : ∃ (M : ScalarHomModels.{c, v, r, w} J) (μ : ∀ {R S : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S), ScalarHomTensorComparison M a), Nonempty (ScalarInternalHomAdjunction M μ)",
-  "branch": "newtargets-dag",
-  "by": "N2",
-  "date": "2026-10-17",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-21",
   "existing": false,
-  "note": "Canonical evaluation-normalized comparison, five representing Hom bijections, arbitrary coefficient-tower and identity coherence, and conservative exact restriction. Reuses the landed normalized scalar-adjunction and tensor-Hom representative model; helpers only package those actual operations."
+  "note": "Existing data declarations moved verbatim to ScalarInternalHomData, with the normalization square definitionally packaged as a named Prop; target theorem statement unchanged."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -319,5 +213,15 @@
   "group": "N2",
   "result": "fix",
   "note": "Mechanical H1/H11 report defect fixed in fixes/lem-sfb-dc-hom-scalar-adjunction.report.md; no mathematical or Lean correction needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-44c77",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261020T221348-L-4178240",
+  "kind": "interface",
+  "note": "independent cc review: item proof and 12 new modules/nodes vs packet, live clone and published build: full pp.all #print diff of the 27 moved decls (only the declared normalization field + _proof_N aux names differ), #print axioms of all proved decls, scalarHomTensorCoherence against ScalarDerivedPair/ScalarHomTensorComparison pinnings, 11 direct importers compiled against the delivered modules (all rc 0)"
  }
 }

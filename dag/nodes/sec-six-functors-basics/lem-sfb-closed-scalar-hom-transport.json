@@ -1,0 +1,132 @@
+{
+ "id": "lem-sfb-closed-scalar-hom-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "Final paragraph: coefficient passage (inverting ell and descent to a finite extension); scalar-adjunction proof, Transport of closed-Hom comparison along adjoint isomorphisms.",
+   "via": [
+    "lem-sfb-dc-hom-scalar-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Transport of closed-Hom comparison along adjoint isomorphisms",
+ "statement": "For the two closed tensor-Hom categories and the five-bijection comparison [lem-sfb-closed-scalar-hom-comparison], let F,Fprime be left adjoints to U,Uprime, with d:Uprime≅U and c:F≅Fprime. Suppose the scalar hom equivalences intertwine c and d, and the two strong tensor maps intertwine c in both inputs. Then their closed-Hom comparisons intertwine d in the output and c contravariantly in the first internal-Hom input. The canonical leftAdjointUniq map has the required scalar-transpose compatibility. For the identity adjunction and identity tensor comparison, the closed-Hom comparison is the identity.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 and 0D6D; the unit-normalized adjoint transport in scalar internal-Hom node steps 6–7."
+ },
+ "stmt_deps": [
+  "lem-sfb-closed-scalar-hom-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply the representing identity and naturality under precomposition. The outer closed transpose moves the output map d through by naturality. Scalar-transpose compatibility moves d across the scalar adjunction. Naturality of the inner uncurrying moves c in both tensor factors. The strong tensor compatibility identifies the resulting maps.",
+   "uses": [
+    "lem-sfb-closed-scalar-hom-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 and 0D6D; the unit-normalized adjoint transport in scalar internal-Hom node steps 6–7."
+   }
+  },
+  {
+   "text": "For the canonical left-adjoint uniqueness map, hom-equivalence naturality and its unit identity give precisely the scalar-transpose compatibility. For the identity, the scalar equivalences are identities and the closed equivalences cancel.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 and 0D6D; the unit-normalized adjoint transport in scalar internal-Hom node steps 6–7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-closed-scalar-hom-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 and 0D6D; the unit-normalized adjoint transport in scalar internal-Hom node steps 6–7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A strong monoidal left adjoint between closed categories induces an internal Hom isomorphism for its right adjoint",
+   "results": "CategoryTheory.ihom.adjunction; CategoryTheory.MonoidalClosed.internalHomAdjunction₂; CategoryTheory.Monoidal.Reflective.closed. Read the closed-category adjunction interfaces.",
+   "date": "2026-10-21",
+   "verdict": "No exact comparison with the two independent recorded closed structures and its evaluation normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"rightAdjointUniq\"",
+   "results": "Adjunction uniqueness declarations, including rightAdjointUniq; these supply uniqueness infrastructure, not this normalized construction.",
+   "date": "2026-10-21",
+   "verdict": "No exact statement; the explicit five-equivalence construction is needed."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*comp|homEquiv_leftAdjointUniq|internalHomAdjunction₂_adj",
+   "results": "25 hits, including Adjunction.homEquiv_leftAdjointUniq_hom_app, conjugateEquiv_comp, conjugateEquiv_symm_comp, and leftAdjointCompIso; read the adjunction uniqueness and mates declarations.",
+   "date": "2026-10-21",
+   "verdict": "Useful ingredients, no theorem for the separately recorded CoefficientClosedStructure API."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ScalarInternalHomAdjunction",
+  "date": "2026-10-21",
+  "group": "S7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ClosedScalarHomTransport",
+  "file": "lean/Sheaf/CategoryTheory/ClosedScalarHomTransport.lean",
+  "declaration": "CategoryTheory.ClosedScalarHom.transport",
+  "statement": "theorem transport (K : A) (N : B) : (iso S T adj' ν).hom.app (op K, N) ≫ H.map (Prod.mkHom (𝟙 (op K)) (d.hom.app N)) = d.hom.app (I.obj (op (F'.obj K), N)) ≫ U.map (I.map (Prod.mkHom (c.hom.app K).op (𝟙 N))) ≫ (iso S T adj μ).hom.app (op K, N)",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-21",
+  "declarations": [
+   "CategoryTheory.ClosedScalarHom.transport",
+   "CategoryTheory.ClosedScalarHom.adjunction_compatibility",
+   "CategoryTheory.ClosedScalarHom.identity",
+   "CategoryTheory.ClosedScalarHom.transport_identity"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-44c77",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261020T221348-L-4178240",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-44c77",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261020T221348-L-4178240",
+  "kind": "interface",
+  "note": "independent cc review: item proof and 12 new modules/nodes vs packet, live clone and published build: full pp.all #print diff of the 27 moved decls (only the declared normalization field + _proof_N aux names differ), #print axioms of all proved decls, scalarHomTensorCoherence against ScalarDerivedPair/ScalarHomTensorComparison pinnings, 11 direct importers compiled against the delivered modules (all rc 0)"
+ }
+}
