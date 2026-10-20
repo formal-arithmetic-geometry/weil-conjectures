@@ -13,7 +13,6 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Data.ZMod.Basic
 import Mathlib.CategoryTheory.Sites.Sheafification
 import Mathlib.CategoryTheory.Sites.Point.Basic
-import Sheaf.AlgebraicGeometry.PointedEtaleStalk
 
 /-!
 # Invertible orders of sheaves of Z/nZ-modules
@@ -54,6 +53,31 @@ theorem zmodSheaf_hasFieldInvertibleOrders (K : Type u) [Field K]
       ((constantSheaf T.left.smallEtaleTopology RingCat.{u + 1}).obj
         (RingCat.of (ULift.{u + 1} (ZMod n.val))))) :
     Etale.IsTorsionOfInvertibleOrder K T ((SheafOfModules.toSheaf _).obj F) := by
-  sorry
+  let R := (constantSheaf T.left.smallEtaleTopology RingCat.{u + 1}).obj
+    (RingCat.of (ULift.{u + 1} (ZMod n.val)))
+  have hsec (U : T.left.Etaleᵒᵖ) (z : F.val.obj U) : n.val • z = 0 := by
+    let c : ULift.{u + 1} (ZMod n.val) →+* R.obj.obj U :=
+      ((toSheafify T.left.smallEtaleTopology
+        ((Functor.const T.left.Etaleᵒᵖ).obj
+          (RingCat.of (ULift.{u + 1} (ZMod n.val))))).app U).hom
+    have hn : (n.val : ULift.{u + 1} (ZMod n.val)) = 0 := by
+      apply ULift.ext
+      exact ZMod.natCast_self n.val
+    have hnR : (n.val : R.obj.obj U) = 0 := by
+      rw [← map_natCast c n.val, hn, c.map_zero]
+    calc
+      n.val • z = (n.val : R.obj.obj U) • z := (Nat.cast_smul_eq_nsmul (R.obj.obj U) n.val z).symm
+      _ = 0 := by rw [hnR, zero_smul]
+  intro Ω _ _ s x
+  refine ⟨n.val, n.property, ?_⟩
+  let Φ := pointSmallEtale s
+  let P := F.val.presheaf
+  have h : n.val • 𝟙 (Φ.presheafFiber.obj P) = 0 := by
+    apply Φ.presheafFiber_hom_ext
+    intro U y
+    ext z
+    change n.val • (Φ.toPresheafFiber U y P).hom z = 0
+    rw [← map_nsmul, hsec, map_zero]
+  simpa using ConcreteCategory.congr_hom h x
 
 end AlgebraicGeometry.Scheme
