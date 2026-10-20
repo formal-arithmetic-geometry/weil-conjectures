@@ -1,0 +1,174 @@
+{
+ "id": "def-cbc-strict-tower-composition-maps",
+ "kind": "definition",
+ "title": "Canonical strict-tower composition comparison maps",
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "statement": "Let B be a commutative ring. Use the derived categories of strict towers of constant-B module sheaves, their normalized inverse images G and proper direct images R [def-cbc-strict-constant-tower-operations], and exact open extension J [def-cbc-strict-tower-open-extension], with normalized proper/open comparison gamma and cartesian open comparison beta [lem-cbc-strict-tower-proper-open-calculus]. For a compactification c of f:X→Y, with open c.i and proper c.g, put F_c=J_{c.i} followed by R_{c.g}. For a proper refinement r:c→d, with c.i followed by r.hom=d.i and r.hom followed by d.g=c.g, define C_r:F_d→F_c by the identity-left proper/open gamma square, followed by R_{d.g}, inserting the identity and direct-image compositors. Given a cartesian open face from c' to c over x:X'→X and y:Y'→Y with middle map s:c'.Z→c.Z, define E_c:G_y F_c→F_c' G_x by first the proper-square mate and then the open comparison beta, with functor associators inserted.\nFor f:X→Y and h:Y→Z take a compatible compactification tower T [lem-cbc-compactifiable-compatible-tower], with c:X→U, b:U→Xbar, i:Y→Ybar open, r:U→Y and p:Xbar→Ybar and q:Ybar→Z proper, b∘c=a, r∘c=f, q∘p the proper part of the compactification of hf, and the cartesian square (b,i,r,p). Set D_T:F_h F_f→F_hf to R_q gamma_(b,i,r,p) J_c with the open and proper compositors [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. A refinement of compatible towers consists of refinements w of f, u of h and v of hf satisfying v∘b_1=b_2∘w and p_2∘v=u∘p_1; the individual refinement equations also give w∘c_1=c_2, u∘i_1=i_2, v∘a_1=a_2, r_2∘w=r_1 and q_2∘u=q_1. Its horizontal comparison is H=(C_h F_f1)(F_h2 C_f), with the canonical whiskerings.\nA base change of compatible towers is supplied by maps x,y,g on X,Y,Z and middle maps d,t,s on their three compactifications with six cartesian open/proper faces. Apply E to the f, h and hf compactifications to define e_f,e_h,e_hf. Define the horizontal exchange e_h F_f followed by F_h' e_f, with canonical associators. Whenever gamma or beta is used, require quasi-compactness of each of its displayed open immersions, as in the normalized calculus: C requires quasi-compactness of c.i and d.i; E of c.i and c'.i; D of c, i and b; and the whiskered maps require the corresponding source and target open quasi-compactness. F itself imposes no quasi-compactness premise. These are specified natural transformations on the actual derived strict-tower categories; this definition asserts no invertibility, pasting equation or choice-independence theorem.",
+ "stmt_deps": [
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-open-extension",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7J (lemma-shriek-composition), compatible-tower comparison construction; 0F7B, 0F7C, 0F7D and 0F7F for refinement and base-change comparisons. The explicit normalized strict-tower maps are the existing constructions extracted from lem-cbc-complete-proetale-composition-pasting-coherence, not a new etale/proetale comparison assertion."
+ },
+ "proof": [
+  {
+   "text": "Compose J with R to construct F. Normalize the identity-left gamma by rId and rComp to construct C. Compose the proper mate with beta, inserting associators, to construct E. All data are the supplied normalized operations; no witness is chosen.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "def-cbc-strict-tower-open-extension",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the supplied compatible tower, its cartesian square and its open/proper composition equations to form D. Its formula is the whiskered gamma followed by jComp, jCongr, rComp and equality transport.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "def-cbc-strict-tower-open-extension",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-cbc-compactifiable-compatible-tower",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Record the three proper refinements and two compatibility equations as CompositionRefinement. Whisker the f comparison and then the h comparison to obtain H. Record the six cartesian faces as CompositionBaseChange. Apply E to each of the three compactifications and form the horizontally pasted exchange by whiskering and associators. These are literal functor-category constructions, with no theorem proof or unproved data.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "def-cbc-strict-tower-open-extension",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-cbc-compactifiable-compatible-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-open-extension",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/AlgebraicGeometry/StrictTowerCompositionPasting.lean",
+  "place": "Verbatim extraction of the existing canonical data preceding compositionPastingCoherence; mathematical formulas follow Stacks Tag 0F7J. No new construction or proof obligation."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical proper open composition, refinement and base change comparison maps on derived strict towers of constant coefficient sheaves",
+   "results": [
+    "CategoryTheory.constantCommuteCompose",
+    "CategoryTheory.instIsConstantObjSheafSheafCompose",
+    "IsBaseChange.of_comp",
+    "AlgebraicGeometry.SheafedSpace.comp_base",
+    "SheafOfModules.pullbackComp",
+    "AlgebraicGeometry.SheafedSpace.comp_c_app'",
+    "AlgebraicGeometry.SheafedSpace.comp_hom_base",
+    "KaehlerDifferential.cotangentComplexBaseChange"
+   ],
+   "date": "2026-10-21",
+   "verdict": "Component operations and unrelated base-change results; no strict-tower canonical map package. Preserve and extract the existing definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical proper open composition, refinement and base change comparison maps on derived strict towers of constant coefficient sheaves",
+   "results": [
+    "SheafOfModules.Presentation.map_π_eq",
+    "SheafOfModules.pullbackComp",
+    "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+    "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+    "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr",
+    "AlgebraicGeometry.PresheafedSpace.map_comp_c_app",
+    "SheafOfModules.pushforwardComp_hom_app_val_app",
+    "AlgebraicGeometry.Scheme.Modules.pushforwardComp"
+   ],
+   "date": "2026-10-21",
+   "verdict": "Component functor comparisons, not the strict-tower data package; preserve and extract the existing library constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor.whiskerRight\", \"Functor.associator\"",
+   "results": [],
+   "date": "2026-10-21",
+   "verdict": "No hits; generic whiskering and associators are used directly."
+  },
+  {
+   "tool": "grep",
+   "query": "properOpen|strictTower|compositionC|compositionD",
+   "results": [],
+   "date": "2026-10-21",
+   "verdict": "No Mathlib hits. Local source search finds the existing constructions in the item and their sibling consumer; this node attaches the extracted definition part, not a duplicate theorem."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictTowerCompositionPasting",
+  "date": "2026-10-21",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Proof, opening 'coherent for identities and pasted squares', and the last comparison-compatibility sentence: canonical maps underlying the composition and refinement equations.",
+   "via": [
+    "lem-cbc-complete-proetale-composition-pasting-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictTowerCompositionMaps",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictTowerCompositionMaps.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.compositionF",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.StrictTower.compositionF",
+   "AlgebraicGeometry.ProEtale.StrictTower.compositionD",
+   "AlgebraicGeometry.ProEtale.StrictTower.compositionC",
+   "AlgebraicGeometry.ProEtale.StrictTower.compositionE",
+   "AlgebraicGeometry.ProEtale.StrictTower.CompositionRefinement",
+   "AlgebraicGeometry.ProEtale.StrictTower.compositionH",
+   "AlgebraicGeometry.ProEtale.StrictTower.CompositionBaseChange",
+   "AlgebraicGeometry.ProEtale.StrictTower.compositionEf",
+   "AlgebraicGeometry.ProEtale.StrictTower.compositionEh",
+   "AlgebraicGeometry.ProEtale.StrictTower.compositionEhf",
+   "AlgebraicGeometry.ProEtale.StrictTower.compositionHorizontalE"
+  ],
+  "statement": "def compositionF {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) : Derived B X ⥤ Derived B Y",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Existing definitions relocated verbatim in their signatures and bodies; source docstrings now identify this definition node. The original coherence node retains the four theorem statements and the theorem-dependent common comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-4d356",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261020T221113-L-4144504",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-4d356",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261020T221113-L-4144504",
+  "kind": "interface",
+  "note": "independent cc review: moved 11 definitions vs live item (byte-identical except docstring tags); sibling vs live (one import line); compile of the delivered set and the importer CompleteCompactSupportProetale; #print axioms of the 2 new proofs (sorryAx only from still-open statements)"
+ }
+}

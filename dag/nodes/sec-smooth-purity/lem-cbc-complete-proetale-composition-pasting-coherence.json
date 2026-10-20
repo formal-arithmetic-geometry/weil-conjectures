@@ -132,11 +132,12 @@
    }
   },
   {
-   "text": "For the refinement square with top $a_1$, bottom $a_2$, left $1_X$, right $v$, the finite-origin clause of the calculus applied to $M$ makes $C_{hf}$ invertible. Step 2 makes both $D_j$ invertible. Hence step 6 makes $H=(C_hF_{f,1})(F_{h,2}C_f)=D_1^{-1}C_{hf}D_2$ invertible, without a separate finite-origin assumption on $F_fM$.\nThe calculus cube applied to the three refinement squares gives $C'_\\bullet e_{\\bullet,2}=e_{\\bullet,1}(G C_\\bullet)$ for $f,h,hf$: the cube equation is on all inputs, even when the isomorphism assertion is restricted. Naturality of $e_h$ with $C_f$ then gives\n$$H'G_x\\,(F_{h,2}'e_{f,2})(e_{h,2}F_{f,2})=(F_{h,1}'e_{f,1})(e_{h,1}F_{f,1})(G_gH).$$\nSubstitute this equality and $C'_{hf}e_{hf,2}=e_{hf,1}G_gC_{hf}$ into step 9, together with $C_{hf}D_2=D_1H$ and its primed version; the identity is thereby identified under refinement. The compatible-tower theorem supplies a common refining tower for any two choices. For its two maps the preceding equations identify both $D$ and step 9. The refinement/exchange theorem, applied only to the compactifications of $hf$ at $M$, gives independence and the cocycle of the $C_{hf}$ comparisons. Since $H=D_1^{-1}C_{hf}D_2$, these properties also hold for the corresponding horizontal comparisons. Thus the transport is independent of the common refinement. Every equality used is before evaluation.",
+   "text": "For the refinement square with top $a_1$, bottom $a_2$, left $1_X$, right $v$, the finite-origin clause of the calculus applied to $M$ makes $C_{hf}$ invertible. Step 2 makes both $D_j$ invertible. Hence step 6 makes $H=(C_hF_{f,1})(F_{h,2}C_f)=D_1^{-1}C_{hf}D_2$ invertible, without a separate finite-origin assumption on $F_fM$.\nThe calculus cube applied to the three refinement squares gives $C'_\\bullet e_{\\bullet,2}=e_{\\bullet,1}(G C_\\bullet)$ for $f,h,hf$: the cube equation is on all inputs, even when the isomorphism assertion is restricted. Naturality of $e_h$ with $C_f$ then gives\n$$H'G_x\\,(F_{h,2}'e_{f,2})(e_{h,2}F_{f,2})=(F_{h,1}'e_{f,1})(e_{h,1}F_{f,1})(G_gH).$$\nSubstitute this equality and $C'_{hf}e_{hf,2}=e_{hf,1}G_gC_{hf}$ into step 9, together with $C_{hf}D_2=D_1H$ and its primed version; the identity is thereby identified under refinement. The compatible-tower theorem supplies a common refining tower for any two choices. For its two maps the preceding equations identify both $D$ and step 9. The refinement/exchange theorem, applied only to the compactifications of $hf$ at $M$, gives independence and the cocycle of the $C_{hf}$ comparisons. Since $H=D_1^{-1}C_{hf}D_2$, these properties also hold for the corresponding horizontal comparisons. Thus the transport is independent of the common refinement. Every equality used is before evaluation. Lean implementation note (D2): compositionRefinement_isIso factors the hf comparison through the identity-left gamma and canonical isomorphisms, then cancels D_1 using the refinement clause of compositionPastingCoherence. compositionRefinementExchange applies the declared refinement/exchange theorem to f, h and hf, and uses naturality to combine the first two squares. Its transformation equalities do not depend on the finite-origin input demanded by other conjuncts of that theorem: a genuine zero finite-origin object, constructed with the finite zero coefficient ring, supplies that input.",
    "uses": [
     "lem-cbc-strict-tower-proper-open-calculus",
     "lem-cbc-complete-proetale-refinement-exchange-coherence",
-    "lem-cbc-compactifiable-compatible-tower"
+    "lem-cbc-compactifiable-compatible-tower",
+    "def-cbc-strict-tower-composition-maps"
    ],
    "elementary": false,
    "source": {
@@ -154,12 +155,13 @@
   "def-cbc-strict-constant-tower-operations",
   "lem-cbc-compactifiable-compatible-tower",
   "lem-weil-pbc-mate-pasting",
-  "lem-cbc-complete-proetale-refinement-exchange-coherence"
+  "lem-cbc-complete-proetale-refinement-exchange-coherence",
+  "def-cbc-strict-tower-composition-maps"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tags 0F7J (lemma-shriek-composition), 0F7C, 0F7D and 0F7F; explicit adaptation using the existing normalized strict-tower calculus. The source proves the etale case, not the strict-tower equations."
+  "place": "Tags 0F7J (lemma-shriek-composition), 0F7C, 0F7D and 0F7F; explicit adaptation using the existing normalized strict-tower calculus. The source proves the etale case, not the strict-tower equations. D2 stage 3: the two auxiliary refinement proofs implement step 10 from its declared dependencies; the main pasting and common-refinement plans remain."
  },
  "mathlib_searches": [
   {
@@ -281,17 +283,6 @@
   "module": "Sheaf.AlgebraicGeometry.StrictTowerCompositionPasting",
   "declaration": "AlgebraicGeometry.ProEtale.StrictTower.compositionPastingCoherence",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.StrictTower.compositionF",
-   "AlgebraicGeometry.ProEtale.StrictTower.compositionD",
-   "AlgebraicGeometry.ProEtale.StrictTower.compositionC",
-   "AlgebraicGeometry.ProEtale.StrictTower.compositionE",
-   "AlgebraicGeometry.ProEtale.StrictTower.CompositionRefinement",
-   "AlgebraicGeometry.ProEtale.StrictTower.compositionH",
-   "AlgebraicGeometry.ProEtale.StrictTower.CompositionBaseChange",
-   "AlgebraicGeometry.ProEtale.StrictTower.compositionEf",
-   "AlgebraicGeometry.ProEtale.StrictTower.compositionEh",
-   "AlgebraicGeometry.ProEtale.StrictTower.compositionEhf",
-   "AlgebraicGeometry.ProEtale.StrictTower.compositionHorizontalE",
    "AlgebraicGeometry.ProEtale.StrictTower.compositionPastingCoherence",
    "AlgebraicGeometry.ProEtale.StrictTower.compositionRefinement_isIso",
    "AlgebraicGeometry.ProEtale.StrictTower.compositionRefinementExchange",
@@ -304,6 +295,16 @@
   "by": "NA",
   "date": "2026-10-17",
   "existing": false,
-  "note": "The statement is distributed over the canonical F/D/C/E constructions and input-data packages, compositionPastingCoherence (invertibility, refinement, arbitrary-base-change interchange), compositionRefinement_isIso, compositionRefinementExchange, and compositionCommonCoherence (transport and common-refinement independence). CompositionRefinement deliberately does not use the stronger cartesian Triangle.Hom. No statement correction or dependency repair."
+  "note": "The statement is distributed over the canonical F/D/C/E constructions and input-data packages, compositionPastingCoherence (invertibility, refinement, arbitrary-base-change interchange), compositionRefinement_isIso, compositionRefinementExchange, and compositionCommonCoherence (transport and common-refinement independence). CompositionRefinement deliberately does not use the stronger cartesian Triangle.Hom. No statement correction or dependency repair. D2: the canonical F/D/C/E constructions and refinement/base-change input packages now live verbatim in Sheaf.AlgebraicGeometry.StrictTowerCompositionMaps, publicly reexported by this module. This breaks the former Lean import cycle with Sheaf.Paper.RefinementExchangeCoherence; all mathematical signatures and data stay unchanged. The moved data are attached to def-cbc-strict-tower-composition-maps."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-4d356",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261020T221113-L-4144504",
+  "kind": "interface",
+  "note": "independent cc review: moved 11 definitions vs live item (byte-identical except docstring tags); sibling vs live (one import line); compile of the delivered set and the importer CompleteCompactSupportProetale; #print axioms of the 2 new proofs (sorryAx only from still-open statements)"
  }
 }

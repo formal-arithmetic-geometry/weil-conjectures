@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictTowerCompositionPasting
+public import Sheaf.AlgebraicGeometry.StrictTowerCompositionMaps
 public import Sheaf.AlgebraicGeometry.FiniteConstantCoefficientTransport
 import WeilConjectures.Compactification.CategoryBaseChange
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact

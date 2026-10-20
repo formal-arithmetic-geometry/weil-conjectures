@@ -1,32 +1,20 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group NA
+Authors: SHEAF group NA, SHEAF group D2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus
-public import Sheaf.AlgebraicGeometry.CompactifiableCompatibleTower
-public import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
-import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CoherenceLegacy
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Mathlib.CategoryTheory.Adjunction.Mates
-import Sheaf.AlgebraicGeometry.FiniteConstantCoefficientTransport
-import Sheaf.AlgebraicGeometry.StrictConstantTowerOperations
-import Sheaf.AlgebraicGeometry.StrictTowerOpenExtension
+public import Sheaf.AlgebraicGeometry.StrictTowerCompositionMaps
+import Sheaf.Paper.RefinementExchangeCoherence
+import Mathlib.Algebra.Ring.PUnit
 
 /-!
 # Composition pasting for strict constant-coefficient towers
 
-Source: Stacks Project, Tags 0F7J, 0F7C, 0F7D and 0F7F, and the strict-tower adaptation
-in the blueprint (blueprint: lem-cbc-complete-proetale-composition-pasting-coherence).
-
-`Compactification.Triangle` names the node's maps as follows: `cf.i = c`, `cf.g = p_Y`,
-`cg.i = i`, `cg.g = q`, `cfg.i = a`, `q = b`, and `p = p`.
-All maps below are constructed in the derived category of strict towers, before evaluation.
+Source: Stacks Project, Tags 0F7J, 0F7C, 0F7D and 0F7F.
+The shared constructions live in `StrictTowerCompositionMaps`, so refinement
+independence can be used here without an import cycle.
 -/
 
 @[expose] public section
@@ -38,157 +26,11 @@ set_option backward.isDefEq.respectTransparency.types false
 universe u
 
 open CategoryTheory CategoryTheory.Limits
+open scoped ZeroObject
 
 namespace AlgebraicGeometry.ProEtale.StrictTower
 
 variable (B : Type (u + 1)) [CommRing B]
-
-/-- The supplied-compactification functor `R_p J_j`.
-Source: Stacks, Tag 0F7J
-(blueprint: lem-cbc-complete-proetale-composition-pasting-coherence). -/
-noncomputable def compositionF {X Y : Scheme.{u}} {f : X ⟶ Y}
-    (c : Compactification f) : Derived B X ⥤ Derived B Y := J B c.i ⋙ R B c.g
-
-/-- The actual composition comparison `R_q gamma_Q J_c`, including both compositors.
-Source: Stacks, Tag 0F7J
-(blueprint: lem-cbc-complete-proetale-composition-pasting-coherence). -/
-noncomputable def compositionD {X Y Z : Scheme.{u}} {f : X ⟶ Y} {h : Y ⟶ Z}
-    (T : Compactification.Triangle f h) [QuasiCompact T.cf.i] [QuasiCompact T.cg.i]
-    [QuasiCompact T.q] :
-    compositionF B T.cf ⋙ compositionF B T.cg ⟶ compositionF B T.cfg :=
-  (Functor.associator (J B T.cf.i) (R B T.cf.g) (J B T.cg.i ⋙ R B T.cg.g)).hom ≫
-  Functor.whiskerLeft (J B T.cf.i)
-    ((Functor.associator (R B T.cf.g) (J B T.cg.i) (R B T.cg.g)).inv ≫
-      Functor.whiskerRight (gamma B T.q T.cf.g T.p T.cg.i T.isPullback.w.symm)
-        (R B T.cg.g) ≫
-      (Functor.associator (J B T.q) (R B T.p) (R B T.cg.g)).hom) ≫
-  (Functor.associator (J B T.cf.i) (J B T.q) (R B T.p ⋙ R B T.cg.g)).inv ≫
-  Functor.whiskerRight
-    ((jComp B T.cf.i T.q).hom ≫ (jCongr B T.i_q).hom)
-    (R B T.p ⋙ R B T.cg.g) ≫
-  Functor.whiskerLeft (J B T.cfg.i)
-    ((rComp B T.p T.cg.g).hom ≫ (eqToIso (congrArg (R B) T.p_g)).hom)
-
-/-- The refinement comparison is gamma for the identity-left square, followed by R.
-Source: Stacks, Tag 0F7J, choice independence
-(blueprint: lem-cbc-complete-proetale-composition-pasting-coherence). -/
-noncomputable def compositionC {X Y : Scheme.{u}} {f : X ⟶ Y}
-    {c d : Compactification f} [QuasiCompact c.i] [QuasiCompact d.i]
-    (r : c.Refinement d) : compositionF B d ⟶ compositionF B c :=
-  Functor.whiskerRight
-    ((Functor.leftUnitor (J B d.i)).inv ≫
-      Functor.whiskerRight (rId B X).inv (J B d.i) ≫
-      gamma B c.i (𝟙 X) r.hom d.i (r.i_hom.trans (Category.id_comp d.i).symm))
-    (R B d.g) ≫
-  (Functor.associator (J B c.i) (R B r.hom) (R B d.g)).hom ≫
-  Functor.whiskerLeft (J B c.i)
-    ((rComp B r.hom d.g).hom ≫ (eqToIso (congrArg (R B) r.hom_g)).hom)
-
-/-- The specified exchange: first the proper-square mate, then the open comparison.
-Source: Stacks, Tag 0F7F
-(blueprint: lem-cbc-complete-proetale-composition-pasting-coherence). -/
-noncomputable def compositionE {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
-    (c : Compactification f) (c' : Compactification f')
-    (x : X' ⟶ X) (y : Y' ⟶ Y) (s : c'.Z ⟶ c.Z)
-    (wi : x ≫ c.i = c'.i ≫ s) (wp : s ≫ c.g = c'.g ≫ y)
-    (si : IsPullback x c'.i c.i s) :
-    compositionF B c ⋙ G B y ⟶ G B x ⋙ compositionF B c' :=
-  (Functor.associator (J B c.i) (R B c.g) (G B y)).hom ≫
-  Functor.whiskerLeft (J B c.i) (exchange B s c'.g c.g y wp) ≫
-  (Functor.associator (J B c.i) (G B s) (R B c'.g)).inv ≫
-  Functor.whiskerRight (beta B x c'.i c.i s wi si).hom (R B c'.g) ≫
-  (Functor.associator (G B x) (J B c'.i) (R B c'.g)).hom
-
-/-- A refinement of the supplied towers consists of the three existing compactification
-refinements and the two remaining compatibility equations. No cartesian condition is imposed.
-Source: Stacks, Tag 0F7J, refinement diagram; compatible-tower dependency
-(blueprint: lem-cbc-complete-proetale-composition-pasting-coherence). -/
-structure CompositionRefinement {X Y Z : Scheme.{u}} {f : X ⟶ Y} {h : Y ⟶ Z}
-    (T₁ T₂ : Compactification.Triangle f h) where
-  rf : T₁.cf.Refinement T₂.cf
-  rh : T₁.cg.Refinement T₂.cg
-  rfh : T₁.cfg.Refinement T₂.cfg
-  b_comm : T₁.q ≫ rfh.hom = rf.hom ≫ T₂.q
-  p_comm : rfh.hom ≫ T₂.p = T₁.p ≫ rh.hom
-
-/-- The horizontal refinement `(C_h F_f1)(F_h2 C_f)`.
-Source: Stacks, Tag 0F7J
-(blueprint: lem-cbc-complete-proetale-composition-pasting-coherence). -/
-noncomputable def compositionH {X Y Z : Scheme.{u}} {f : X ⟶ Y} {h : Y ⟶ Z}
-    {T₁ T₂ : Compactification.Triangle f h}
-    [QuasiCompact T₁.cf.i] [QuasiCompact T₁.cg.i]
-    [QuasiCompact T₂.cf.i] [QuasiCompact T₂.cg.i]
-    (r : CompositionRefinement T₁ T₂) :
-    compositionF B T₂.cf ⋙ compositionF B T₂.cg ⟶
-      compositionF B T₁.cf ⋙ compositionF B T₁.cg :=
-  Functor.whiskerRight (compositionC B r.rf) (compositionF B T₂.cg) ≫
-    Functor.whiskerLeft (compositionF B T₁.cf) (compositionC B r.rh)
-
-/-- The cartesian faces of a base change of a supplied compatible tower. All arrows
-are supplied projections; this does not choose a compactification or an arbitrary comparison.
-Source: Stacks, Tags 0F7J and 0F7F; compatible-tower dependency
-(blueprint: lem-cbc-complete-proetale-composition-pasting-coherence). -/
-structure CompositionBaseChange {X Y Z X' Y' Z' : Scheme.{u}}
-    {f : X ⟶ Y} {h : Y ⟶ Z} {f' : X' ⟶ Y'} {h' : Y' ⟶ Z'}
-    (T : Compactification.Triangle f h) (T' : Compactification.Triangle f' h')
-    (x : X' ⟶ X) (y : Y' ⟶ Y) (g : Z' ⟶ Z) where
-  d : T'.cf.Z ⟶ T.cf.Z
-  t : T'.cg.Z ⟶ T.cg.Z
-  s : T'.cfg.Z ⟶ T.cfg.Z
-  cf_i : IsPullback x T'.cf.i T.cf.i d
-  cf_g : IsPullback d T'.cf.g T.cf.g y
-  cg_i : IsPullback y T'.cg.i T.cg.i t
-  cg_g : IsPullback t T'.cg.g T.cg.g g
-  cfg_i : IsPullback x T'.cfg.i T.cfg.i s
-  cfg_g : IsPullback s T'.cfg.g T.cfg.g g
-  b : IsPullback d T'.q T.q s
-  p : IsPullback s T'.p T.p t
-
-/-- Exchange for f on the supplied pulled-back tower.
-Source: Stacks, Tag 0F7F
-(blueprint: lem-cbc-complete-proetale-composition-pasting-coherence). -/
-noncomputable def compositionEf {X Y Z X' Y' Z' : Scheme.{u}}
-    {f : X ⟶ Y} {h : Y ⟶ Z} {f' : X' ⟶ Y'} {h' : Y' ⟶ Z'}
-    {T : Compactification.Triangle f h} {T' : Compactification.Triangle f' h'}
-    {x : X' ⟶ X} {y : Y' ⟶ Y} {g : Z' ⟶ Z}
-    (A : CompositionBaseChange T T' x y g) :=
-  compositionE B T.cf T'.cf x y A.d A.cf_i.w A.cf_g.w A.cf_i
-
-/-- Exchange for h on the supplied pulled-back tower.
-Source: Stacks, Tag 0F7F
-(blueprint: lem-cbc-complete-proetale-composition-pasting-coherence). -/
-noncomputable def compositionEh {X Y Z X' Y' Z' : Scheme.{u}}
-    {f : X ⟶ Y} {h : Y ⟶ Z} {f' : X' ⟶ Y'} {h' : Y' ⟶ Z'}
-    {T : Compactification.Triangle f h} {T' : Compactification.Triangle f' h'}
-    {x : X' ⟶ X} {y : Y' ⟶ Y} {g : Z' ⟶ Z}
-    (A : CompositionBaseChange T T' x y g) :=
-  compositionE B T.cg T'.cg y g A.t A.cg_i.w A.cg_g.w A.cg_i
-
-/-- Exchange for hf on the supplied pulled-back tower.
-Source: Stacks, Tag 0F7F
-(blueprint: lem-cbc-complete-proetale-composition-pasting-coherence). -/
-noncomputable def compositionEhf {X Y Z X' Y' Z' : Scheme.{u}}
-    {f : X ⟶ Y} {h : Y ⟶ Z} {f' : X' ⟶ Y'} {h' : Y' ⟶ Z'}
-    {T : Compactification.Triangle f h} {T' : Compactification.Triangle f' h'}
-    {x : X' ⟶ X} {y : Y' ⟶ Y} {g : Z' ⟶ Z}
-    (A : CompositionBaseChange T T' x y g) :=
-  compositionE B T.cfg T'.cfg x g A.s A.cfg_i.w A.cfg_g.w A.cfg_i
-
-/-- The horizontal exchange `(F_h' e_f)(e_h F_f)` with explicit associators.
-Source: Stacks, Tag 0F7F
-(blueprint: lem-cbc-complete-proetale-composition-pasting-coherence). -/
-noncomputable def compositionHorizontalE {X Y Z X' Y' Z' : Scheme.{u}}
-    {f : X ⟶ Y} {h : Y ⟶ Z} {f' : X' ⟶ Y'} {h' : Y' ⟶ Z'}
-    {T : Compactification.Triangle f h} {T' : Compactification.Triangle f' h'}
-    {x : X' ⟶ X} {y : Y' ⟶ Y} {g : Z' ⟶ Z}
-    (A : CompositionBaseChange T T' x y g) :
-    (compositionF B T.cf ⋙ compositionF B T.cg) ⋙ G B g ⟶
-      G B x ⋙ (compositionF B T'.cf ⋙ compositionF B T'.cg) :=
-  (Functor.associator (compositionF B T.cf) (compositionF B T.cg) (G B g)).hom ≫
-  Functor.whiskerLeft (compositionF B T.cf) (compositionEh B A) ≫
-  (Functor.associator (compositionF B T.cf) (G B y) (compositionF B T'.cg)).inv ≫
-  Functor.whiskerRight (compositionEf B A) (compositionF B T'.cg) ≫
-  (Functor.associator (G B x) (compositionF B T'.cf) (compositionF B T'.cg)).hom
 
 /-- Composition pasting is invertible on the stated finite-origin inputs, commutes with
 all compatible proper refinements, and satisfies vertical interchange under arbitrary
@@ -258,6 +100,19 @@ theorem compositionPastingCoherence :
         compositionHorizontalE B A ≫ Functor.whiskerLeft (G B x) (compositionD B T')) := by
   sorry
 
+private theorem refinementFactor_isIso {A C D E : Type*}
+    [Category A] [Category C] [Category D] [Category E]
+    (J₁ : A ⥤ C) (J₂ : A ⥤ D) (R₀ : A ⥤ A) (R₁ : C ⥤ D) (R₂ : D ⥤ E)
+    (H : C ⥤ E) (e₀ : R₀ ≅ 𝟭 A) (e₁ : R₁ ⋙ R₂ ≅ H)
+    (g : R₀ ⋙ J₂ ⟶ J₁ ⋙ R₁) (a : J₂ ⋙ R₂ ⟶ J₁ ⋙ H)
+    (ha : a = Functor.whiskerRight
+        ((Functor.leftUnitor J₂).inv ≫ Functor.whiskerRight e₀.inv J₂ ≫ g) R₂ ≫
+      (Functor.associator J₁ R₁ R₂).hom ≫ Functor.whiskerLeft J₁ e₁.hom)
+    (M : A) (hg : IsIso (g.app M)) : IsIso (a.app M) := by
+  subst a
+  dsimp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+  infer_instance
+
 /-- Both boundaries of the refinement square are invertible on finite-origin objects.
 Source: Stacks, Tag 0F7J, choice independence
 (blueprint: lem-cbc-complete-proetale-composition-pasting-coherence).
@@ -276,7 +131,81 @@ theorem compositionRefinement_isIso {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Y �
     [QuasiCompact T₂.q] (r : CompositionRefinement T₁ T₂) (M : Derived B X)
     (hM : ∀ n : ℕ, Nonempty (ScalarEtaleOrigin B X ((ev B X n).obj M))) :
     IsIso ((compositionC B r.rfh).app M) ∧ IsIso ((compositionH B r).app M) := by
-  sorry
+  have hc : IsIso ((compositionC B r.rfh).app M) :=
+    refinementFactor_isIso (J B T₁.cfg.i) (J B T₂.cfg.i) (R B (𝟙 X))
+      (R B r.rfh.hom) (R B T₂.cfg.g) (R B T₁.cfg.g) (rId B X)
+      (rComp B r.rfh.hom T₂.cfg.g ≪≫ eqToIso (congrArg (R B) r.rfh.hom_g))
+      (gamma B T₁.cfg.i (𝟙 X) r.rfh.hom T₂.cfg.i
+        (r.rfh.i_hom.trans (Category.id_comp T₂.cfg.i).symm))
+      (compositionC B r.rfh) rfl M
+      (gamma_isIso B T₁.cfg.i (𝟙 X) r.rfh.hom T₂.cfg.i
+        (r.rfh.i_hom.trans (Category.id_comp T₂.cfg.i).symm) M hM)
+  have hd₁ := (compositionPastingCoherence B).1 f h T₁ M hM
+  have hd₂ := (compositionPastingCoherence B).1 f h T₂ M hM
+  have heq := congrArg (fun η => η.app M)
+    ((compositionPastingCoherence B).2.1 f h T₁ T₂ r)
+  simp only [NatTrans.comp_app] at heq
+  have hh : IsIso ((compositionH B r).app M ≫ (compositionD B T₁).app M) := by
+    rw [← heq]
+    infer_instance
+  exact ⟨hc, IsIso.of_isIso_comp_right _ ((compositionD B T₁).app M)⟩
+
+private theorem finiteOrigin_zero (X : Scheme.{u}) (n : ℕ) :
+    Nonempty (ScalarEtaleOrigin B X ((ev B X n).obj 0)) := by
+  let Λ := PUnit.{u + 2}
+  let : TopologicalSpace Λ := ⊥
+  let φ : B →+* Λ :=
+    { toFun := fun _ => PUnit.unit
+      map_one' := rfl
+      map_mul' := fun _ _ => rfl
+      map_zero' := rfl
+      map_add' := fun _ _ => rfl }
+  let L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) := 0
+  let F := (finiteCoefficientComparison X Λ).mapDerivedCategoryPlus.obj L
+  let w : ScalarEtaleOrigin B X
+      ((finiteRestriction B X Λ φ).mapDerivedCategory.obj F.obj) :=
+    { Λ := Λ
+      φ := φ
+      F := F
+      origin := ⟨L, Iso.refl _⟩
+      iso := Iso.refl _ }
+  have : (HD B X Λ φ).Additive := by
+    dsimp only [HD]
+    infer_instance
+  exact ⟨{ w with iso := (originIso B w).symm ≪≫
+    (HD B X Λ φ).mapZeroObject ≪≫ (ev B X n).mapZeroObject.symm }⟩
+
+private theorem horizontalRefinement
+    {A₁ A₂ C₁ C₂ E₁ E₂ : Type*}
+    [Category A₁] [Category A₂] [Category C₁] [Category C₂]
+    [Category E₁] [Category E₂]
+    (F₁ F₂ : A₁ ⥤ C₁) (H₁ H₂ : C₁ ⥤ E₁)
+    (F₁' F₂' : A₂ ⥤ C₂) (H₁' H₂' : C₂ ⥤ E₂)
+    (a : A₁ ⥤ A₂) (c : C₁ ⥤ C₂) (e : E₁ ⥤ E₂)
+    (r : F₂ ⟶ F₁) (s : H₂ ⟶ H₁) (r' : F₂' ⟶ F₁') (s' : H₂' ⟶ H₁')
+    (ef₁ : F₁ ⋙ c ⟶ a ⋙ F₁') (ef₂ : F₂ ⋙ c ⟶ a ⋙ F₂')
+    (eh₁ : H₁ ⋙ e ⟶ c ⋙ H₁') (eh₂ : H₂ ⋙ e ⟶ c ⋙ H₂')
+    (hf : ef₂ ≫ Functor.whiskerLeft a r' = Functor.whiskerRight r c ≫ ef₁)
+    (hh : eh₂ ≫ Functor.whiskerLeft c s' = Functor.whiskerRight s e ≫ eh₁)
+    (M : A₁) :
+    eh₂.app (F₂.obj M) ≫ H₂'.map (ef₂.app M) ≫
+        H₂'.map (r'.app (a.obj M)) ≫ s'.app (F₁'.obj (a.obj M)) =
+      e.map (H₂.map (r.app M)) ≫ e.map (s.app (F₁.obj M)) ≫
+        eh₁.app (F₁.obj M) ≫ H₁'.map (ef₁.app M) := by
+  have hfM := congrArg (fun η => η.app M) hf
+  have hhM := congrArg (fun η => η.app (F₁.obj M)) hh
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at hfM hhM
+  rw [← Functor.map_comp_assoc, hfM, Functor.map_comp]
+  have hn := eh₂.naturality (r.app M)
+  dsimp only [Functor.comp_map] at hn
+  simp only [Category.assoc]
+  rw [← Category.assoc (eh₂.app _) (H₂'.map (c.map (r.app M))), ← hn]
+  simp only [Category.assoc]
+  have hs := s'.naturality (ef₁.app M)
+  dsimp only [Functor.comp_obj] at hs
+  rw [hs]
+  rw [← Category.assoc (eh₂.app _) (s'.app _), hhM]
+  simp only [Category.assoc]
 
 /-- Refinement transport of both sides of the vertical interchange square, before evaluation.
 Source: Stacks, Tags 0F7F and 0F7J
@@ -310,7 +239,38 @@ theorem compositionRefinementExchange
       Functor.whiskerRight (compositionC B r.rfh) (G B g) ≫ compositionEhf B A₁ ∧
     compositionHorizontalE B A₂ ≫ Functor.whiskerLeft (G B x) (compositionH B r') =
       Functor.whiskerRight (compositionH B r) (G B g) ≫ compositionHorizontalE B A₁ := by
-  sorry
+  have sf : IsPullback x f' f y := by
+    simpa only [← T₁'.cf.comm, ← T₁.cf.comm] using A₁.cf_i.paste_vert A₁.cf_g
+  have sh : IsPullback y h' h g := by
+    simpa only [← T₁'.cg.comm, ← T₁.cg.comm] using A₁.cg_i.paste_vert A₁.cg_g
+  have sfh : IsPullback x (f' ≫ h') (f ≫ h) g := by
+    simpa only [← T₁'.cfg.comm, ← T₁.cfg.comm] using A₁.cfg_i.paste_vert A₁.cfg_g
+  have ef := (refinementExchangeCoherence B (f := f) 0 (finiteOrigin_zero B X)).2.2.2.1
+    x y sf T₁.cf T₂.cf T₁'.cf T₂'.cf A₁.d A₂.d
+    A₁.cf_i A₁.cf_g A₂.cf_i A₂.cf_g r.rf r'.rf wf
+  have eh := (refinementExchangeCoherence B (f := h) 0 (finiteOrigin_zero B Y)).2.2.2.1
+    y g sh T₁.cg T₂.cg T₁'.cg T₂'.cg A₁.t A₂.t
+    A₁.cg_i A₁.cg_g A₂.cg_i A₂.cg_g r.rh r'.rh wh
+  have ehf := (refinementExchangeCoherence B (f := f ≫ h) 0
+    (finiteOrigin_zero B X)).2.2.2.1
+    x g sfh T₁.cfg T₂.cfg T₁'.cfg T₂'.cfg A₁.s A₂.s
+    A₁.cfg_i A₁.cfg_g A₂.cfg_i A₂.cfg_g r.rfh r'.rfh wfh
+  simp only [refinementComparison] at ef eh ehf
+  refine ⟨ehf, ?_⟩
+  ext M
+  simpa only [compositionHorizontalE, compositionH, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, Functor.comp_obj, Functor.comp_map, Functor.map_comp,
+    Category.id_comp, Category.comp_id, Category.assoc] using
+    horizontalRefinement (compositionF B T₁.cf) (compositionF B T₂.cf)
+      (compositionF B T₁.cg) (compositionF B T₂.cg)
+      (compositionF B T₁'.cf) (compositionF B T₂'.cf)
+      (compositionF B T₁'.cg) (compositionF B T₂'.cg)
+      (G B x) (G B y) (G B g)
+      (compositionC B r.rf) (compositionC B r.rh)
+      (compositionC B r'.rf) (compositionC B r'.rh)
+      (compositionEf B A₁) (compositionEf B A₂)
+      (compositionEh B A₁) (compositionEh B A₂) ef eh M
 
 /-- The horizontal and hf comparisons from a common refining compatible tower, on a
 finite-origin input. In the node's right-to-left convention they are H₂⁻¹H₁ and C₂⁻¹C₁.
