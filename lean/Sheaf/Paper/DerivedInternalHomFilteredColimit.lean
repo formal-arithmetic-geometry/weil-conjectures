@@ -13,8 +13,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.GrothendieckAbelian
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+public import WeilConjectures.Algebra.Homology.HomComplexComponents
 
-import WeilConjectures.Algebra.Homology.HomComplexComponents
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Sheaf.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction
 /-! # Filtered finite-free coefficient passage for internal Hom
 
@@ -100,7 +101,7 @@ noncomputable def homValue (R : Sheaf J CommRingCat.{max u v r})
     (P Q : CochainComplex (Modules.{u, v, r} J R) ℤ) (n p q : ℤ) (h : p + n = q)
     (U : Cᵒᵖ) (f : ((homComplex (R := R) P Q).X n).val.obj U)
     (x : (P.X p).val.obj U) : (Q.X q).val.obj U :=
-  (((coefficientHomComponent.{r, u, v} J R P Q n p q h).val.app U f).app
+  (((homComplexπ.{u, v, max u v r, max u v r} (J := J) (R := R) P Q n p q h).val.app U f).app
     (op (Over.mk (𝟙 U.unop)))).hom x
 
 /-- The actual augmentation of the fixed K-injective replacement.
@@ -367,7 +368,7 @@ private theorem extensionUnit_exists {R S : Sheaf J CommRingCat.{max u v r}}
   refine ⟨a.unit, ?_⟩
   intro M U x
   have hx := ha M (E.obj M) (eqToHom (h M).symm) U x
-  simpa only [eqToHom_trans, eqToHom_refl, a.homEquiv_id, extensionGenerator] using hx
+  simpa only [eqToHom_trans, eqToHom_refl, a.homEquiv_id, extensionGenerator] using! hx
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -551,15 +552,6 @@ private theorem extension_to_homObj_ext {R S : Sheaf J CommRingCat.{max u v r}}
     (extensionGenerator.{u, v, r} J φ E h N (op W.unop.left) 1 x)
   exact hca.symm.trans (hh.trans hcb)
 
-omit [HasSheafify J AddCommGrpCat.{max u v r}]
-  [J.WEqualsLocallyBijective AddCommGrpCat.{max u v r}] in
-set_option backward.isDefEq.respectTransparency true in
-private theorem coefficientHomComponent_eq (R : Sheaf J CommRingCat.{max u v r})
-    (P Q : CochainComplex (Modules.{u, v, r} J R) ℤ) (n p q : ℤ) (hpq : p + n = q) :
-    coefficientHomComponent.{r, u, v} J R P Q n p q hpq =
-      homComplexπ.{u, v, max u v r, max u v r} (J := J) (R := R) P Q n p q hpq := by
-  rfl
-
 attribute [local irreducible] homComplexFunctor
 
 set_option backward.isDefEq.respectTransparency true in
@@ -590,7 +582,7 @@ private theorem scalar_hom_ext {R S : Sheaf J CommRingCat.{max u v r}}
   apply extension_to_homObj_ext.{u, v, r} J φ E h hmap M (P.X p) (Q.X q)
   intro U z x
   have hh := hab p q hpq U z x
-  unfold homValue coefficientHomComponent at hh
+  unfold homValue at hh
   simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app]
   erw [ModuleCat.comp_apply, ModuleCat.comp_apply]
   exact hh
@@ -627,10 +619,10 @@ private theorem homValue_map (R : Sheaf J CommRingCat.{max u v r})
       (((Functor.uncurry.obj
         (homComplexFunctor.{u, v, max u v r, max u v r} (J := J) (R := R))).map
           (X := (op P, Q)) (Y := (op P', Q')) (f.op, g)).f n) ≫
-          coefficientHomComponent.{r, u, v} J R P' Q' n p q hpq =
-        coefficientHomComponent.{r, u, v} J R P Q n p q hpq ≫
+          homComplexπ.{u, v, max u v r, max u v r} (J := J) (R := R) P' Q' n p q hpq =
+        homComplexπ.{u, v, max u v r, max u v r} (J := J) (R := R) P Q n p q hpq ≫
           SheafOfModules.homObjMap (J := J) (R := R) (f.f p) (g.f q) := by
-    simpa only [coefficientHomComponent_eq.{u, v, r} J R, Functor.uncurry] using!
+    simpa only [Functor.uncurry] using!
       (homComplexFunctor_map_f_π.{u, v, max u v r, max u v r}
         (J := J) (R := R) f g n p q hpq)
   have hh := congrArg
@@ -643,7 +635,7 @@ private theorem homValue_map (R : Sheaf J CommRingCat.{max u v r})
   exact hh.trans (homObjMap_evaluate.{u, v, r} J R
     (M := P.X p) (M' := P'.X p) (N := Q.X q) (N' := Q'.X q)
     (f.f p) (g.f q) U
-    ((coefficientHomComponent.{r, u, v} J R P Q n p q hpq).val.app U z) x)
+    ((homComplexπ.{u, v, max u v r, max u v r} (J := J) (R := R) P Q n p q hpq).val.app U z) x)
 
 private def ScalarEvaluation {R S : Sheaf J CommRingCat.{max u v r}}
     (φ : R ⟶ S) (E : Modules.{u, v, r} J R ⥤ Modules.{u, v, r} J S)
@@ -772,10 +764,518 @@ private theorem scalar_map_naturality {R S : Sheaf J CommRingCat.{max u v r}}
       (fun y : (V.X q).val.obj U ↦ (k.f q).val.app U y) hα))
   exact (hl₁.trans (hl₂.trans (hl₃.trans he))).trans hr.symm
 
-attribute [local semireducible] homComplexFunctor
+-- Scalar extension on local internal Hom sections.
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem extensionGenerator_restrict_all {R S : Sheaf J CommRingCat.{max u v r}}
+    (φ : R ⟶ S) (E : Modules.{u, v, r} J R ⥤ Modules.{u, v, r} J S)
+    (h : ∀ M : Modules.{u, v, r} J R, E.obj M = SheafOfModules.changeOfRings φ M)
+    (M : Modules.{u, v, r} J R) {U V : Cᵒᵖ} (i : U ⟶ V)
+    (s : S.obj.obj U) (x : M.val.obj U) :
+    (E.obj M).val.map i (extensionGenerator.{u, v, r} J φ E h M U s x) =
+      extensionGenerator.{u, v, r} J φ E h M V (S.obj.map i s) (M.val.map i x) := by
+  have hn := PresheafOfModules.naturality_apply
+    (extensionPresheafUnit.{u, v, r} J φ E h M) i
+    (s ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x)
+  have ht := Classical.choose_spec (SheafOfModules.exists_changeOfRingsMap φ M i) s x
+  change SheafOfModules.changeOfRingsMap φ M i _ = _ at ht
+  change (extensionPresheafUnit.{u, v, r} J φ E h M).app V
+      (SheafOfModules.changeOfRingsMap φ M i _) = _ at hn
+  rw [ht] at hn
+  rw [extensionPresheafUnit_apply.{u, v, r} J φ E h,
+    extensionPresheafUnit_apply.{u, v, r} J φ E h] at hn
+  exact hn.symm
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types false in
+private noncomputable def extensionHomRaw {R S : Sheaf J CommRingCat.{max u v r}}
+    (φ : R ⟶ S) (E : Modules.{u, v, r} J R ⥤ Modules.{u, v, r} J S)
+    (h : ∀ M : Modules.{u, v, r} J R, E.obj M = SheafOfModules.changeOfRings φ M)
+    (M N : Modules.{u, v, r} J R) (U : Cᵒᵖ)
+    (f : (SheafOfModules.homObj (R := R) M N).val.obj U) :
+    (PresheafOfModules.restrictOver S.obj U.unop).obj
+        (SheafOfModules.changeOfRingsPresheaf.{v, u, max u v r} (J := J) φ M) ⟶
+      (PresheafOfModules.restrictOver S.obj U.unop).obj (E.obj N).val where
+  app W := (ModuleCat.extendScalars (φ.hom.app (op W.unop.left)).hom).map (f.app W) ≫
+    (extensionPresheafUnit.{u, v, r} J φ E h N).app (op W.unop.left)
+  naturality := by
+    intro W V i
+    apply ModuleCat.ExtendScalars.hom_ext (f := (φ.hom.app (op W.unop.left)).hom)
+    intro x
+    let s : S.obj.obj (op W.unop.left) := 1
+    change (extensionPresheafUnit.{u, v, r} J φ E h N).app (op V.unop.left)
+        (((ModuleCat.extendScalars (φ.hom.app (op V.unop.left)).hom).map (f.app V))
+          (SheafOfModules.changeOfRingsMap φ M i.unop.left.op
+            (s ⊗ₜ[R.obj.obj (op W.unop.left),
+              (φ.hom.app (op W.unop.left)).hom] x))) = _
+    rw [show SheafOfModules.changeOfRingsMap φ M i.unop.left.op
+        (s ⊗ₜ[R.obj.obj (op W.unop.left),
+          (φ.hom.app (op W.unop.left)).hom] x) = _ from
+      Classical.choose_spec
+        (SheafOfModules.exists_changeOfRingsMap φ M i.unop.left.op) s x]
+    change (extensionPresheafUnit.{u, v, r} J φ E h N).app (op V.unop.left)
+        (S.obj.map i.unop.left.op s ⊗ₜ[R.obj.obj (op V.unop.left),
+          (φ.hom.app (op V.unop.left)).hom] (f.app V (M.val.map i.unop.left.op x))) = _
+    rw [extensionPresheafUnit_apply.{u, v, r} J φ E h]
+    change _ = (E.obj N).val.map i.unop.left.op
+      ((extensionPresheafUnit.{u, v, r} J φ E h N).app (op W.unop.left)
+        (s ⊗ₜ[R.obj.obj (op W.unop.left),
+          (φ.hom.app (op W.unop.left)).hom] (f.app W x)))
+    rw [extensionPresheafUnit_apply.{u, v, r} J φ E h,
+      extensionGenerator_restrict_all.{u, v, r} J φ E h]
+    exact congrArg (extensionGenerator.{u, v, r} J φ E h N (op V.unop.left)
+      (S.obj.map i.unop.left.op s)) (PresheafOfModules.naturality_apply f i x)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem extensionPresheafUnit_locallyInjective
+    {R S : Sheaf J CommRingCat.{max u v r}}
+    (φ : R ⟶ S) (E : Modules.{u, v, r} J R ⥤ Modules.{u, v, r} J S)
+    (h : ∀ M : Modules.{u, v, r} J R, E.obj M = SheafOfModules.changeOfRings φ M)
+    (M : Modules.{u, v, r} J R) :
+    Presheaf.IsLocallyInjective J ((PresheafOfModules.toPresheaf _).map
+      (extensionPresheafUnit.{u, v, r} J φ E h M)) := by
+  let A := SheafOfModules.changeOfRingsPresheaf.{v, u, max u v r} (J := J) φ M
+  let F := SheafOfModules.forget.{max u v r}
+    ((sheafCompose J (forget₂ CommRingCat.{max u v r} RingCat.{max u v r})).obj S) ⋙
+      PresheafOfModules.toPresheaf _
+  let c := F.map (eqToHom (h M).symm)
+  have : IsIso c := by dsimp only [c]; infer_instance
+  have he : (PresheafOfModules.toPresheaf _).map
+      (extensionPresheafUnit.{u, v, r} J φ E h M) = toSheafify J A.presheaf ≫ c := by
+    unfold extensionPresheafUnit
+    rfl
+  rw [he]
+  let : Presheaf.IsLocallyInjective J (toSheafify J A.presheaf) :=
+    (J.W_toSheafify A.presheaf).isLocallyInjective
+  let : Presheaf.IsLocallyInjective J c := inferInstance
+  exact Presheaf.isLocallyInjective_comp J (toSheafify J A.presheaf) c
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types false in
+private noncomputable def extensionHomSection {R S : Sheaf J CommRingCat.{max u v r}}
+    (φ : R ⟶ S) (E : Modules.{u, v, r} J R ⥤ Modules.{u, v, r} J S)
+    (h : ∀ M : Modules.{u, v, r} J R, E.obj M = SheafOfModules.changeOfRings φ M)
+    (M N : Modules.{u, v, r} J R) (U : Cᵒᵖ)
+    (f : (SheafOfModules.homObj (R := R) M N).val.obj U) :
+    (SheafOfModules.homObj (R := S) (E.obj M) (E.obj N)).val.obj U := by
+  let : (J.over U.unop).WEqualsLocallyBijective AddCommGrpCat.{max u v r} :=
+    SheafOfModules.wEqualsLocallyBijective_coefficientUniverse
+  let η := (PresheafOfModules.restrictOver S.obj U.unop).map
+    (extensionPresheafUnit.{u, v, r} J φ E h M)
+  have := extensionPresheafUnit_locallyInjective.{u, v, r} J φ E h M
+  have := extensionPresheafUnit_locallySurjective.{u, v, r} J φ E h M
+  have : PresheafOfModules.IsLocallyInjective (J.over U.unop) η :=
+    Presheaf.isLocallyInjective_whisker (J.over U.unop) J (Over.forget U.unop)
+      ((PresheafOfModules.toPresheaf _).map (extensionPresheafUnit.{u, v, r} J φ E h M))
+  have : PresheafOfModules.IsLocallySurjective (J.over U.unop) η :=
+    Presheaf.isLocallySurjective_whisker (J.over U.unop) J (Over.forget U.unop)
+      ((PresheafOfModules.toPresheaf _).map (extensionPresheafUnit.{u, v, r} J φ E h M))
+  exact (PresheafOfModules.homEquivOfIsLocallyBijective
+    (f := η) ((E.obj N).over U.unop).isSheaf).symm
+      (extensionHomRaw.{u, v, r} J φ E h M N U f)
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem extensionHomSection_apply {R S : Sheaf J CommRingCat.{max u v r}}
+    (φ : R ⟶ S) (E : Modules.{u, v, r} J R ⥤ Modules.{u, v, r} J S)
+    (h : ∀ M : Modules.{u, v, r} J R, E.obj M = SheafOfModules.changeOfRings φ M)
+    (M N : Modules.{u, v, r} J R) (U : Cᵒᵖ)
+    (f : (SheafOfModules.homObj (R := R) M N).val.obj U)
+    (W : (Over U.unop)ᵒᵖ) (s : S.obj.obj (op W.unop.left))
+    (x : M.val.obj (op W.unop.left)) :
+    (extensionHomSection.{u, v, r} J φ E h M N U f).app W
+        (extensionGenerator.{u, v, r} J φ E h M (op W.unop.left) s x) =
+      extensionGenerator.{u, v, r} J φ E h N (op W.unop.left) s (f.app W x) := by
+  let : (J.over U.unop).WEqualsLocallyBijective AddCommGrpCat.{max u v r} :=
+    SheafOfModules.wEqualsLocallyBijective_coefficientUniverse
+  let η := (PresheafOfModules.restrictOver S.obj U.unop).map
+    (extensionPresheafUnit.{u, v, r} J φ E h M)
+  have := extensionPresheafUnit_locallyInjective.{u, v, r} J φ E h M
+  have := extensionPresheafUnit_locallySurjective.{u, v, r} J φ E h M
+  have : PresheafOfModules.IsLocallyInjective (J.over U.unop) η :=
+    Presheaf.isLocallyInjective_whisker (J.over U.unop) J (Over.forget U.unop)
+      ((PresheafOfModules.toPresheaf _).map (extensionPresheafUnit.{u, v, r} J φ E h M))
+  have : PresheafOfModules.IsLocallySurjective (J.over U.unop) η :=
+    Presheaf.isLocallySurjective_whisker (J.over U.unop) J (Over.forget U.unop)
+      ((PresheafOfModules.toPresheaf _).map (extensionPresheafUnit.{u, v, r} J φ E h M))
+  have he := (PresheafOfModules.homEquivOfIsLocallyBijective
+    (f := (PresheafOfModules.restrictOver S.obj U.unop).map
+      (extensionPresheafUnit.{u, v, r} J φ E h M))
+    ((E.obj N).over U.unop).isSheaf).apply_symm_apply
+      (extensionHomRaw.{u, v, r} J φ E h M N U f)
+  have hv := congrArg (fun k ↦ k.app W
+    (show (SheafOfModules.changeOfRingsPresheaf.{v, u, max u v r}
+      (J := J) φ M).obj (op W.unop.left) from
+      s ⊗ₜ[R.obj.obj (op W.unop.left), (φ.hom.app (op W.unop.left)).hom] x)) he
+  change (extensionHomSection.{u, v, r} J φ E h M N U f).app W
+      ((extensionPresheafUnit.{u, v, r} J φ E h M).app (op W.unop.left) _) = _ at hv
+  rw [extensionPresheafUnit_apply.{u, v, r} J φ E h] at hv
+  have hr : (extensionHomRaw.{u, v, r} J φ E h M N U f).app W
+      (show (SheafOfModules.changeOfRingsPresheaf.{v, u, max u v r}
+        (J := J) φ M).obj (op W.unop.left) from
+        s ⊗ₜ[R.obj.obj (op W.unop.left), (φ.hom.app (op W.unop.left)).hom] x) =
+      extensionGenerator.{u, v, r} J φ E h N (op W.unop.left) s (f.app W x) := by
+    change (extensionPresheafUnit.{u, v, r} J φ E h N).app (op W.unop.left)
+      (s ⊗ₜ[R.obj.obj (op W.unop.left), (φ.hom.app (op W.unop.left)).hom] (f.app W x)) = _
+    exact extensionPresheafUnit_apply.{u, v, r} J φ E h N _ s _
+  exact hv.trans hr
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem extensionGenerator_add {R S : Sheaf J CommRingCat.{max u v r}}
+    (φ : R ⟶ S) (E : Modules.{u, v, r} J R ⥤ Modules.{u, v, r} J S)
+    (h : ∀ M : Modules.{u, v, r} J R, E.obj M = SheafOfModules.changeOfRings φ M)
+    (M : Modules.{u, v, r} J R) (U : Cᵒᵖ) (s : S.obj.obj U) (x y : M.val.obj U) :
+    extensionGenerator.{u, v, r} J φ E h M U s (x + y) =
+      extensionGenerator.{u, v, r} J φ E h M U s x +
+        extensionGenerator.{u, v, r} J φ E h M U s y := by
+  rw [← extensionPresheafUnit_apply.{u, v, r} J φ E h,
+    ← extensionPresheafUnit_apply.{u, v, r} J φ E h,
+    ← extensionPresheafUnit_apply.{u, v, r} J φ E h]
+  erw [TensorProduct.tmul_add, map_add]
+  rfl
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem extensionGenerator_smul {R S : Sheaf J CommRingCat.{max u v r}}
+    (φ : R ⟶ S) (E : Modules.{u, v, r} J R ⥤ Modules.{u, v, r} J S)
+    (h : ∀ M : Modules.{u, v, r} J R, E.obj M = SheafOfModules.changeOfRings φ M)
+    (M : Modules.{u, v, r} J R) (U : Cᵒᵖ) (s t : S.obj.obj U) (x : M.val.obj U) :
+    extensionGenerator.{u, v, r} J φ E h M U (s * t) x =
+      s • extensionGenerator.{u, v, r} J φ E h M U t x := by
+  rw [← extensionPresheafUnit_apply.{u, v, r} J φ E h,
+    ← extensionPresheafUnit_apply.{u, v, r} J φ E h]
+  have ht := ModuleCat.ExtendScalars.smul_tmul (φ.hom.app U).hom
+    (M := M.val.obj U) s t x
+  have hv := ((extensionPresheafUnit.{u, v, r} J φ E h M).app U).hom.map_smul s
+    (t ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x)
+  exact (congrArg ((extensionPresheafUnit.{u, v, r} J φ E h M).app U) ht).symm.trans hv
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem extensionGenerator_scalar {R S : Sheaf J CommRingCat.{max u v r}}
+    (φ : R ⟶ S) (E : Modules.{u, v, r} J R ⥤ Modules.{u, v, r} J S)
+    (h : ∀ M : Modules.{u, v, r} J R, E.obj M = SheafOfModules.changeOfRings φ M)
+    (M : Modules.{u, v, r} J R) (U : Cᵒᵖ) (a : R.obj.obj U) (x : M.val.obj U) :
+    extensionGenerator.{u, v, r} J φ E h M U 1 (a • x) =
+      (φ.hom.app U a) • extensionGenerator.{u, v, r} J φ E h M U 1 x := by
+  let : Module (R.obj.obj U) (S.obj.obj U) :=
+    Module.compHom (S.obj.obj U) (φ.hom.app U).hom
+  have ht : ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] (a • x)) =
+      ((φ.hom.app U a) ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x) := by
+    have he := TensorProduct.smul_tmul (R := R.obj.obj U)
+      (M := S.obj.obj U) a (1 : S.obj.obj U) x
+    change (φ.hom.app U a * 1) ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x = _ at he
+    simpa only [mul_one] using! he.symm
+  calc
+    _ = (extensionPresheafUnit.{u, v, r} J φ E h M).app U
+        ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] (a • x)) :=
+      (extensionPresheafUnit_apply.{u, v, r} J φ E h M U 1 (a • x)).symm
+    _ = (extensionPresheafUnit.{u, v, r} J φ E h M).app U
+        ((φ.hom.app U a) ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x) :=
+      congrArg ((extensionPresheafUnit.{u, v, r} J φ E h M).app U) ht
+    _ = extensionGenerator.{u, v, r} J φ E h M U (φ.hom.app U a) x :=
+      extensionPresheafUnit_apply.{u, v, r} J φ E h M U _ x
+    _ = _ := by
+      simpa only [mul_one] using
+        extensionGenerator_smul.{u, v, r} J φ E h M U (φ.hom.app U a) 1 x
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private noncomputable def extensionHomBase {R S : Sheaf J CommRingCat.{max u v r}}
+    (φ : R ⟶ S) (E : Modules.{u, v, r} J R ⥤ Modules.{u, v, r} J S)
+    (h : ∀ M : Modules.{u, v, r} J R, E.obj M = SheafOfModules.changeOfRings φ M)
+    (M N : Modules.{u, v, r} J R) :
+    SheafOfModules.homObj (R := R) M N ⟶
+      (SheafOfModules.restrictScalars
+        ((sheafCompose J (forget₂ CommRingCat.{max u v r} RingCat.{max u v r})).map φ)).obj
+          (SheafOfModules.homObj (R := S) (E.obj M) (E.obj N)) where
+  val :=
+    { app := fun U ↦ ModuleCat.ofHom (Y :=
+        (((SheafOfModules.restrictScalars
+          ((sheafCompose J (forget₂ CommRingCat.{max u v r}
+            RingCat.{max u v r})).map φ)).obj
+              (SheafOfModules.homObj (R := S) (E.obj M) (E.obj N))).val.obj U))
+        { toFun := extensionHomSection.{u, v, r} J φ E h M N U
+          map_add' := by
+            intro f g
+            apply extension_local_ext.{u, v, r} J φ E h M (E.obj N) U.unop
+            intro W x
+            change (extensionHomSection.{u, v, r} J φ E h M N U (f + g)).app W
+                (extensionGenerator.{u, v, r} J φ E h M (op W.unop.left) 1 x) =
+              (extensionHomSection.{u, v, r} J φ E h M N U f).app W
+                (extensionGenerator.{u, v, r} J φ E h M (op W.unop.left) 1 x) +
+              (extensionHomSection.{u, v, r} J φ E h M N U g).app W
+                (extensionGenerator.{u, v, r} J φ E h M (op W.unop.left) 1 x)
+            rw [extensionHomSection_apply.{u, v, r} J φ E h,
+              extensionHomSection_apply.{u, v, r} J φ E h,
+              extensionHomSection_apply]
+            exact extensionGenerator_add.{u, v, r} J φ E h N _ _ _ _
+          map_smul' := by
+            intro a f
+            apply extension_local_ext.{u, v, r} J φ E h M (E.obj N) U.unop
+            intro W x
+            change (extensionHomSection.{u, v, r} J φ E h M N U (a • f)).app W
+                (extensionGenerator.{u, v, r} J φ E h M (op W.unop.left) 1 x) =
+              (S.obj.map W.unop.hom.op (φ.hom.app U a)) •
+                (extensionHomSection.{u, v, r} J φ E h M N U f).app W
+                  (extensionGenerator.{u, v, r} J φ E h M (op W.unop.left) 1 x)
+            rw [extensionHomSection_apply.{u, v, r} J φ E h,
+              extensionHomSection_apply.{u, v, r} J φ E h]
+            change extensionGenerator.{u, v, r} J φ E h N _ 1
+                ((R.obj.map W.unop.hom.op a) • f.app W x) = _
+            rw [extensionGenerator_scalar.{u, v, r} J φ E h]
+            congr 1
+            exact ConcreteCategory.congr_hom (φ.hom.naturality W.unop.hom.op) a }
+      naturality := by
+        intro U V i
+        apply ModuleCat.hom_ext
+        apply LinearMap.ext
+        intro f
+        apply extension_local_ext.{u, v, r} J φ E h M (E.obj N) V.unop
+        intro W x
+        change (extensionHomSection.{u, v, r} J φ E h M N V
+            ((SheafOfModules.homObj (R := R) M N).val.map i f)).app W
+              (extensionGenerator.{u, v, r} J φ E h M (op W.unop.left) 1 x) =
+          (extensionHomSection.{u, v, r} J φ E h M N U f).app
+            (op ((Over.map i.unop).obj W.unop))
+              (extensionGenerator.{u, v, r} J φ E h M (op W.unop.left) 1 x)
+        rw [extensionHomSection_apply.{u, v, r} J φ E h]
+        exact (extensionHomSection_apply.{u, v, r} J φ E h M N U f
+          (op ((Over.map i.unop).obj W.unop)) 1 x).symm }
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem scalar_degree_exists {R S : Sheaf J CommRingCat.{max u v r}}
+    (φ : R ⟶ S) (E : Modules.{u, v, r} J R ⥤ Modules.{u, v, r} J S)
+    (h : ∀ M : Modules.{u, v, r} J R, E.obj M = SheafOfModules.changeOfRings φ M)
+    [E.Additive]
+    (a : E ⊣ SheafOfModules.restrictScalars
+      ((sheafCompose J (forget₂ CommRingCat.{max u v r} RingCat.{max u v r})).map φ))
+    (ha : ∀ (M : Modules.{u, v, r} J R) (U : Cᵒᵖ) (x : M.val.obj U),
+      (a.unit.app M).val.app U x = extensionGenerator.{u, v, r} J φ E h M U 1 x)
+    (P Q : CochainComplex (Modules.{u, v, r} J R) ℤ)
+    (V : CochainComplex (Modules.{u, v, r} J S) ℤ)
+    (τ : (E.mapHomologicalComplex (.up ℤ)).obj Q ⟶ V) (n : ℤ) :
+    ∃ t : E.obj ((homComplex (R := R) P Q).X n) ⟶
+        (homComplex (R := S) ((E.mapHomologicalComplex (.up ℤ)).obj P) V).X n,
+      ∀ (p q : ℤ) (hpq : p + n = q) (U : Cᵒᵖ)
+        (z : ((homComplex (R := R) P Q).X n).val.obj U) (x : (P.X p).val.obj U),
+        homValue.{u, v, r} J S ((E.mapHomologicalComplex (.up ℤ)).obj P) V n p q hpq U
+            (t.val.app U (extensionGenerator.{u, v, r} J φ E h _ U 1 z))
+            (extensionGenerator.{u, v, r} J φ E h (P.X p) U 1 x) =
+          (τ.f q).val.app U (extensionGenerator.{u, v, r} J φ E h (Q.X q) U 1
+            (homValue.{u, v, r} J R P Q n p q hpq U z x)) := by
+  let Uφ := SheafOfModules.restrictScalars
+    ((sheafCompose J (forget₂ CommRingCat.{max u v r} RingCat.{max u v r})).map φ)
+  let H := (homComplex (R := R) P Q).X n
+  let EP := (E.mapHomologicalComplex (.up ℤ)).obj P
+  let b (p : ℤ) : H ⟶ Uφ.obj
+      (SheafOfModules.homObj (R := S) (E.obj (P.X p)) (V.X (p + n))) :=
+    homComplexπ P Q n p (p + n) rfl ≫
+      extensionHomBase.{u, v, r} J φ E h (P.X p) (Q.X (p + n)) ≫
+        Uφ.map (SheafOfModules.homObjMap (R := S) (𝟙 (E.obj (P.X p))) (τ.f (p + n)))
+  let c (p : ℤ) := (a.homEquiv H _).symm (b p)
+  let t := Fan.IsLimit.lift (homComplexIsLimit (R := S) EP V n) c
+  refine ⟨t, ?_⟩
+  intro p q hpq U z x
+  subst q
+  have hπ : t ≫ homComplexπ EP V n p (p + n) rfl = c p :=
+    Fan.IsLimit.fac (homComplexIsLimit (R := S) EP V n) c p
+  have he : a.unit.app H ≫
+      Uφ.map (t ≫ homComplexπ EP V n p (p + n) rfl) = b p := by
+    rw [hπ]
+    exact (a.homEquiv H _).apply_symm_apply (b p)
+  have hv := congrArg (fun k : H ⟶ Uφ.obj
+      (SheafOfModules.homObj (R := S) (E.obj (P.X p)) (V.X (p + n))) ↦
+    ((k.val.app U z).app (op (Over.mk (𝟙 U.unop)))).hom
+      (extensionGenerator.{u, v, r} J φ E h (P.X p) U 1 x)) he
+  change (((homComplexπ EP V n p (p + n) rfl).val.app U
+        (t.val.app U ((a.unit.app H).val.app U z))).app
+        (op (Over.mk (𝟙 U.unop)))).hom
+      (extensionGenerator.{u, v, r} J φ E h (P.X p) U 1 x) =
+    (τ.f (p + n)).val.app U
+      (((extensionHomSection.{u, v, r} J φ E h (P.X p) (Q.X (p + n)) U
+        ((homComplexπ P Q n p (p + n) rfl).val.app U z)).app
+          (op (Over.mk (𝟙 U.unop)))).hom
+            (extensionGenerator.{u, v, r} J φ E h (P.X p) U 1 x)) at hv
+  rw [ha H U z] at hv
+  have hs := extensionHomSection_apply.{u, v, r} J φ E h (P.X p) (Q.X (p + n)) U
+    ((homComplexπ P Q n p (p + n) rfl).val.app U z) (op (Over.mk (𝟙 U.unop))) 1 x
+  unfold homValue
+  exact hv.trans (congrArg ((τ.f (p + n)).val.app U) hs)
+
+private theorem map_units {A B F : Type*} [AddCommGroup A] [AddCommGroup B]
+    [FunLike F A B] [AddMonoidHomClass F A B] (f : F) (e : ℤˣ) (x : A) :
+    f (e • x) = e • f x := map_zsmul f (e : ℤ) x
+
+omit [HasSheafify J AddCommGrpCat.{max u v r}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{max u v r}] in
+set_option backward.isDefEq.respectTransparency true in
+private theorem hom_section_sub_units (R : Sheaf J CommRingCat.{max u v r})
+    (A B D : Modules.{u, v, r} J R)
+    (f g : D ⟶ SheafOfModules.homObj (R := R) A B)
+    (e : ℤˣ) (U : Cᵒᵖ) (s : D.val.obj U) (x : A.val.obj U) :
+    ((((f - e • g).val.app U).hom s).app (op (Over.mk (𝟙 U.unop)))).hom x =
+      (((f.val.app U).hom s).app (op (Over.mk (𝟙 U.unop)))).hom x -
+        e • (((g.val.app U).hom s).app (op (Over.mk (𝟙 U.unop)))).hom x := by
+  let R₀ := (sheafCompose J
+    (forget₂ CommRingCat.{max u v r} RingCat.{max u v r})).obj R
+  let V := SheafOfModules.forget R₀ ⋙ PresheafOfModules.evaluation R₀.obj U
+  have he : ((f - e • g).val.app U).hom s =
+      (f.val.app U).hom s - e • (g.val.app U).hom s := by
+    change (V.map (f - e • g)).hom s = _
+    rw [Functor.map_sub]
+    simp only [Units.smul_def, Functor.map_zsmul, ModuleCat.hom_sub,
+      ModuleCat.hom_zsmul, LinearMap.sub_apply, LinearMap.smul_apply]
+    rfl
+  rw [he]
+  change (((((f.val.app U).hom s - (e : ℤ) • (g.val.app U).hom s) :
+    (PresheafOfModules.restrictOver R.obj U.unop).obj A.val ⟶
+      (PresheafOfModules.restrictOver R.obj U.unop).obj B.val).app
+        (op (Over.mk (𝟙 U.unop)))).hom x) = _
+  erw [PresheafOfModules.sub_app, PresheafOfModules.zsmul_app,
+    ModuleCat.hom_sub, ModuleCat.hom_zsmul, LinearMap.sub_apply, LinearMap.smul_apply]
+  rfl
+
+omit [HasSheafify J AddCommGrpCat.{max u v r}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{max u v r}] in
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem homValue_d (R : Sheaf J CommRingCat.{max u v r})
+    (P Q : CochainComplex (Modules.{u, v, r} J R) ℤ)
+    (n m p q q' p' : ℤ) (hnm : n + 1 = m) (hpq : p + m = q)
+    (hq' : p + n = q') (hp' : p' + n = q) (U : Cᵒᵖ)
+    (z : ((homComplex (R := R) P Q).X n).val.obj U) (x : (P.X p).val.obj U) :
+    homValue.{u, v, r} J R P Q m p q hpq U
+        (((homComplex (R := R) P Q).d n m).val.app U z) x =
+      (Q.d q' q).val.app U (homValue.{u, v, r} J R P Q n p q' hq' U z x) -
+        n.negOnePow • homValue.{u, v, r} J R P Q n p' q hp' U z
+          ((P.d p p').val.app U x) := by
+  have he := congrArg
+    (fun f : (homComplex (R := R) P Q).X n ⟶
+        SheafOfModules.homObj (R := R) (P.X p) (Q.X q) ↦
+      ((f.val.app U z).app (op (Over.mk (𝟙 U.unop)))).hom x)
+    (homComplex_d_π P Q n m p q q' p' hnm hpq hq' hp')
+  rw [hom_section_sub_units.{u, v, r} J R] at he
+  unfold homValue
+  exact he
+
+attribute [local irreducible] homValue
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem scalar_evaluation_exists {R S : Sheaf J CommRingCat.{max u v r}}
+    (φ : R ⟶ S) (E : Modules.{u, v, r} J R ⥤ Modules.{u, v, r} J S)
+    (h : ∀ M : Modules.{u, v, r} J R, E.obj M = SheafOfModules.changeOfRings φ M)
+    (hmap : ∀ {M N : Modules.{u, v, r} J R} (f : M ⟶ N), E.map f =
+      eqToHom (h M) ≫ SheafOfModules.changeOfRingsHom φ M f ≫ eqToHom (h N).symm)
+    [E.Additive] (P Q : CochainComplex (Modules.{u, v, r} J R) ℤ)
+    (V : CochainComplex (Modules.{u, v, r} J S) ℤ)
+    (τ : (E.mapHomologicalComplex (.up ℤ)).obj Q ⟶ V) :
+    ∃ α : (E.mapHomologicalComplex (.up ℤ)).obj (homComplex (R := R) P Q) ⟶
+        homComplex (R := S) ((E.mapHomologicalComplex (.up ℤ)).obj P) V,
+      ScalarEvaluation.{u, v, r} J φ E h P Q V τ α := by
+  classical
+  obtain ⟨_, _, hh⟩ :=
+    SheafOfModules.sheafRingCoefficientOrdinaryAdjunction.{max u v r, u, v} (J := J) φ
+  obtain ⟨a, ha⟩ := hh E h hmap
+  have hau (M : Modules.{u, v, r} J R) (U : Cᵒᵖ) (x : M.val.obj U) :
+      (a.unit.app M).val.app U x = extensionGenerator.{u, v, r} J φ E h M U 1 x := by
+    have hx := ha M (E.obj M) (eqToHom (h M).symm) U x
+    simpa only [eqToHom_trans, eqToHom_refl, a.homEquiv_id, extensionGenerator] using! hx
+  have hsub (M : Modules.{u, v, r} J R) (U : Cᵒᵖ)
+      (z z' : M.val.obj U) (e : ℤˣ) :
+      extensionGenerator.{u, v, r} J φ E h M U 1 (z - e • z') =
+        extensionGenerator.{u, v, r} J φ E h M U 1 z -
+          e • extensionGenerator.{u, v, r} J φ E h M U 1 z' := by
+    calc
+      _ = (a.unit.app M).val.app U (z - e • z') := (hau M U _).symm
+      _ = (a.unit.app M).val.app U z - e • (a.unit.app M).val.app U z' := by
+        erw [map_sub]
+        exact congrArg₂ (· - ·) rfl (map_units ((a.unit.app M).val.app U).hom e z')
+      _ = _ := by
+        rw [hau M U z, hau M U z']
+        rfl
+  choose t ht using scalar_degree_exists.{u, v, r} J φ E h a hau P Q V τ
+  let EP := (E.mapHomologicalComplex (.up ℤ)).obj P
+  let H := homComplex (R := R) P Q
+  let G := homComplex (R := S) EP V
+  have hc (n m : ℤ) (hnm : n + 1 = m) : t n ≫ G.d n m = E.map (H.d n m) ≫ t m := by
+    apply scalar_hom_ext.{u, v, r} J φ E h hmap (H.X n) P V m
+    intro p q hpq U z x
+    change homValue.{u, v, r} J S EP V m p q hpq U
+        ((G.d n m).val.app U ((t n).val.app U
+          (extensionGenerator.{u, v, r} J φ E h (H.X n) U 1 z)))
+        (extensionGenerator.{u, v, r} J φ E h (P.X p) U 1 x) =
+      homValue.{u, v, r} J S EP V m p q hpq U
+        ((t m).val.app U ((E.map (H.d n m)).val.app U
+          (extensionGenerator.{u, v, r} J φ E h (H.X n) U 1 z)))
+        (extensionGenerator.{u, v, r} J φ E h (P.X p) U 1 x)
+    conv_lhs =>
+      rw [homValue_d.{u, v, r} J S EP V n m p q (p + n) (p + 1)
+        hnm hpq rfl (by omega)]
+    conv_rhs =>
+      rw [extensionGenerator_map.{u, v, r} J φ E h hmap (H.d n m)]
+      rw [ht m p q hpq U ((H.d n m).val.app U z) x]
+      rw [homValue_d.{u, v, r} J R P Q n m p q (p + n) (p + 1)
+        hnm hpq rfl (by omega)]
+    conv_lhs =>
+      lhs
+      rw [ht n p (p + n) rfl U z x]
+    have hx := extensionGenerator_map.{u, v, r} J φ E h hmap (P.d p (p + 1)) U x
+    change (EP.d p (p + 1)).val.app U
+        (extensionGenerator.{u, v, r} J φ E h (P.X p) U 1 x) = _ at hx
+    conv_lhs =>
+      rhs
+      rw [hx, ht n (p + 1) q (by omega) U z ((P.d p (p + 1)).val.app U x)]
+    have htau := congrArg
+      (fun k : E.obj (Q.X (p + n)) ⟶ V.X q ↦ k.val.app U
+        (extensionGenerator.{u, v, r} J φ E h (Q.X (p + n)) U 1
+          (homValue.{u, v, r} J R P Q n p (p + n) rfl U z x)))
+      (τ.comm (p + n) q)
+    change (V.d (p + n) q).val.app U ((τ.f (p + n)).val.app U _) =
+      (τ.f q).val.app U ((E.map (Q.d (p + n) q)).val.app U _) at htau
+    have hτ := htau.trans (congrArg ((τ.f q).val.app U)
+      (extensionGenerator_map.{u, v, r} J φ E h hmap (Q.d (p + n) q) U
+        (homValue.{u, v, r} J R P Q n p (p + n) rfl U z x)))
+    conv_lhs =>
+      lhs
+      rw [hτ]
+    have he := congrArg ((τ.f q).val.app U)
+      (hsub (Q.X q) U
+        ((Q.d (p + n) q).val.app U
+          (homValue.{u, v, r} J R P Q n p (p + n) rfl U z x))
+        (homValue.{u, v, r} J R P Q n (p + 1) q (by omega) U z
+          ((P.d p (p + 1)).val.app U x)) n.negOnePow)
+    erw [map_sub, map_units] at he
+    exact he.symm
+  refine ⟨{ f := t, comm' := fun n m hnm ↦ hc n m hnm }, ?_⟩
+  exact fun n p q hpq U z x ↦ ht n p q hpq U z x
+
+omit [HasSheafify J AddCommGrpCat.{max u v r}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{max u v r}] in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem homValue_smul (R : Sheaf J CommRingCat.{max u v r})
+    (P Q : CochainComplex (Modules.{u, v, r} J R) ℤ)
+    (n p q : ℤ) (hpq : p + n = q) (U : Cᵒᵖ) (s t : R.obj.obj U)
+    (f : ((homComplex (R := R) P Q).X n).val.obj U) (x : (P.X p).val.obj U) :
+    homValue.{u, v, r} J R P Q n p q hpq U (s • f) (t • x) =
+      (s * t) • homValue.{u, v, r} J R P Q n p q hpq U f x := by
+  unfold homValue
+  erw [((homComplexπ.{u, v, max u v r, max u v r}
+    (J := J) (R := R) P Q n p q hpq).val.app U).hom.map_smul]
+  change (R.obj.map (𝟙 U.unop).op s) •
+      ((((homComplexπ.{u, v, max u v r, max u v r} (J := J) (R := R) P Q n p q hpq).val.app U f).app
+        (op (Over.mk (𝟙 U.unop)))).hom (t • x)) = _
+  rw [show R.obj.map (𝟙 U.unop).op s = s by simp]
+  rw [map_smul, smul_smul]
 
 /-- Pure-tensor normalization of the actual S-linear comparison on representatives.
 The output uses I_S(E(I_R(L))); the roof denominator is I_S(E(eta_L)).
@@ -849,7 +1349,49 @@ theorem scalarComparison_existsUnique {R S : Sheaf J CommRingCat.{max u v r}}
         ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj
           ((coefficientHomResolution.{r, u, v} J R).obj L)),
       ScalarNormalized.{u, v, r} J φ E h P L a := by
-  sorry
+  let IR := coefficientHomResolution.{r, u, v} J R
+  let EC := E.mapHomologicalComplex (.up ℤ)
+  let V := (coefficientHomResolution.{r, u, v} J S).obj (EC.obj (IR.obj L))
+  let τ := (resolutionUnit.{u, v, r} J S).app (EC.obj (IR.obj L))
+  obtain ⟨a, ha⟩ := scalar_evaluation_exists.{u, v, r} J φ E h hmap P (IR.obj L) V τ
+  have hn : ScalarNormalized.{u, v, r} J φ E h P L a := by
+    intro n p q hpq U s t f x
+    have hs : extensionGenerator.{u, v, r} J φ E h _ U s f =
+        s • extensionGenerator.{u, v, r} J φ E h _ U 1 f := by
+      simpa only [mul_one] using
+        extensionGenerator_smul.{u, v, r} J φ E h _ U s 1 f
+    have ht : extensionGenerator.{u, v, r} J φ E h _ U t x =
+        t • extensionGenerator.{u, v, r} J φ E h _ U 1 x := by
+      simpa only [mul_one] using
+        extensionGenerator_smul.{u, v, r} J φ E h _ U t 1 x
+    change homValue.{u, v, r} J S (EC.obj P) V n p q hpq U
+        ((a.f n).val.app U (extensionGenerator.{u, v, r} J φ E h _ U s f))
+        (extensionGenerator.{u, v, r} J φ E h _ U t x) =
+      (τ.f q).val.app U (extensionGenerator.{u, v, r} J φ E h _ U (s * t)
+        (homValue.{u, v, r} J R P (IR.obj L) n p q hpq U f x))
+    change extensionGenerator.{u, v, r} J φ E h
+      ((homComplex (R := R) P (IR.obj L)).X n) U s f = _ at hs
+    rw [hs, ht]
+    erw [((a.f n).val.app U).hom.map_smul]
+    rw [homValue_smul.{u, v, r} J S]
+    have he := ha n p q hpq U f x
+    erw [he]
+    rw [show extensionGenerator.{u, v, r} J φ E h _ U (s * t)
+        (homValue.{u, v, r} J R P (IR.obj L) n p q hpq U f x) =
+        (s * t) • extensionGenerator.{u, v, r} J φ E h _ U 1
+          (homValue.{u, v, r} J R P (IR.obj L) n p q hpq U f x) by
+      simpa only [mul_one] using extensionGenerator_smul.{u, v, r} J φ E h _ U (s * t) 1
+        (homValue.{u, v, r} J R P (IR.obj L) n p q hpq U f x)]
+    exact ((τ.f q).val.app U).hom.map_smul (s * t) _ |>.symm
+  refine ⟨a, hn, ?_⟩
+  intro b hb
+  apply HomologicalComplex.hom_ext
+  intro n
+  apply scalar_hom_ext.{u, v, r} J φ E h hmap
+    (((homFixed.{u, v, r} J R P).obj L).X n) P V n
+  intro p q hpq U z x
+  exact ((scalarNormalized_evaluation.{u, v, r} J φ E h P L b hb)
+    n p q hpq U z x).trans (ha n p q hpq U z x).symm
 
 /-- The canonical evaluation-transpose comparison, on its specified chain representatives.
 Its selection is from a uniqueness assertion, not from mere existence.
