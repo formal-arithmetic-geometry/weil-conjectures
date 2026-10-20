@@ -17693,3 +17693,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:34 L: returned deliver/Q04/lem-pur-weil-basechange-semilinear-pasting (reviewer RETURN: L: independent stage-2 immutable head 38c8449bd007: H3 (finite): FiniteClause equates StrictTower.ev n of strictLeft/str)
 - 01:39 L: merged deliver/NG/sk-rem-sf-pf-done (stage 2; reviewer PASS; parallel immutable checks)
 - 01:42 L: returned deliver/K4/Sheaf.AlgebraicGeometry.FiniteAffineProetaleRefinement (reviewer RETURN: (reviewer C-be70f, head be70f32eb) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Fi)
+- 01:45 L: returned deliver/R3/Sheaf.Paper.FiniteWindowBounded (reviewer RETURN: (reviewer C-f43cc, head f43ccaba1) Point 2 (hypothesis added to make the proof possible; brief-stage3 §4 'do not prove a)
