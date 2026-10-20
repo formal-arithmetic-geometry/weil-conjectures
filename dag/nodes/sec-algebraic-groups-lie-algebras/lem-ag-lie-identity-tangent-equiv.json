@@ -28,6 +28,11 @@
     "def-wf-lie-algebra-derivation"
    ],
    "elementary": false
+  },
+  {
+   "text": "The adopted upstream construction lieIdentityTangentEquiv implements the same linear equivalence with exactly this restricted scalar structure. Its defining formula is lieIdentityTangentEquiv_apply. Use this construction directly in the parent instead of the duplicate Sheaf Nonempty wrapper; the mathematical dependencies are unchanged.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -36,7 +41,7 @@
   "lem-ag-identity-tangent-transport"
  ],
  "proof_origin": {
-  "by": "F7 stage 3; use the upstream transport construction directly; all mathematical steps unchanged",
+  "by": "B5 stage 3; retire the duplicate existential wrapper in favor of the existing upstream construction",
   "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
   "place": "Identity tangent-space argument; explicit transport and operation compatibility"
  },
@@ -96,14 +101,19 @@
  "chapter": "sec-algebraic-groups-lie-algebras",
  "unit": "sk-i-cartier",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.GroupScheme.LieIdentityTangentEquiv",
-  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/LieIdentityTangentEquiv.lean",
-  "declaration": "AlgebraicGeometry.GrpObj.exists_lie_identity_tangent_linearEquiv",
-  "statement": "theorem exists_lie_identity_tangent_linearEquiv\n    {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :\n    let x := unitSection G (IsLocalRing.closedPoint k)\n    let r : k →+* G.left.residueField x :=\n      (StructureSheaf.toStalk k (G.hom x) ≫ G.hom.stalkMap x ≫ G.left.residue x).hom\n    letI : Module k (schemeTangentSpace k G.left G.hom x) :=\n      Module.compHom (schemeTangentSpace k G.left G.hom x) r\n    Nonempty (Lie G ≃ₗ[k] schemeTangentSpace k G.left G.hom x)",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.LieIdentityTangentEquiv",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/GroupScheme/LieIdentityTangentEquiv.lean",
+  "declaration": "AlgebraicGeometry.GrpObj.lieIdentityTangentEquiv",
+  "declarations": [
+   "AlgebraicGeometry.GrpObj.lieIdentityTangentEquiv",
+   "AlgebraicGeometry.GrpObj.lieIdentityTangentEquiv_apply"
+  ],
+  "statement": "def lieIdentityTangentEquiv {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :\n    let x := unitSection G (IsLocalRing.closedPoint k)\n    let r : k →+* G.left.residueField x :=\n      (StructureSheaf.toStalk k (G.hom x) ≫ G.hom.stalkMap x ≫ G.left.residue x).hom\n    letI : Module k (schemeTangentSpace k G.left G.hom x) :=\n      Module.compHom (schemeTangentSpace k G.left G.hom x) r\n    Lie G ≃ₗ[k] schemeTangentSpace k G.left G.hom x",
   "branch": "sheaf-dag",
-  "by": "Y3",
-  "date": "2026-10-12"
+  "by": "B5",
+  "date": "2026-10-21",
+  "note": "Retired the duplicated Sheaf existential wrapper. The upstream construction has exactly the displayed field, identity point and restricted scalar structure and supplies its witness directly, with the same transport-and-operations proof. The parent uses lieIdentityTangentEquiv directly."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -118,12 +128,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-bbf6a",
-  "group": "F7",
+  "reviewer": "C-e329c",
+  "group": "B5",
   "result": "pass",
-  "landing": "20261020T221145-L-4150425",
+  "landing": "20261020T233053-L-889724",
   "kind": "interface",
-  "note": "independent cc review: retired Sheaf exists_identity_tangent_transport vs upstream WeilConjectures identityTangentTransport/_val (node lean.statement byte-identical); adapted caller LieIdentityTangentEquiv vs original (statement, public imports unchanged; only import + witness lines); importer LieCotangentDual compiled vs delivery and base"
+  "note": "independent cc review: removed Sheaf exists_lie_identity_tangent_linearEquiv (Nonempty) vs upstream WeilConjectures lieIdentityTangentEquiv (identical type); adapted LieCotangentDual vs live (2 lines: import + witness), compiled with delivered item; node lean record vs upstream signature"
  },
  "lean_audit": {
   "master": {

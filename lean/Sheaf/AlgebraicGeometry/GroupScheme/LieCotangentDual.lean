@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.LinearAlgebra.Dual.Defs
 import WeilConjectures.AlgebraicGeometry.RationalPointTangentDerivationIdentification
 import WeilConjectures.AlgebraicGeometry.GroupScheme.LieCotangentDualResidue
-import Sheaf.AlgebraicGeometry.GroupScheme.LieIdentityTangentEquiv
+import WeilConjectures.AlgebraicGeometry.GroupScheme.LieIdentityTangentEquiv
 
 /-!
 # The Lie algebra and the cotangent dual at the identity
@@ -134,7 +134,7 @@ theorem exists_lie_identity_cotangent_dual_equiv
     inferInstanceAs (Module (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R))
   let : Module k (IsLocalRing.CotangentSpace R) :=
     Module.compHom (IsLocalRing.CotangentSpace R) ρ
-  obtain ⟨E⟩ := exists_lie_identity_tangent_linearEquiv G
+  let E := lieIdentityTangentEquiv G
   obtain ⟨F, _⟩ := exists_rationalPoint_tangent_cotangent_linearEquiv
     k G.left G.hom x hρ
   exact ⟨r, ⟨(E.trans F).trans (cotangentDualScalarEquiv r _)⟩⟩
