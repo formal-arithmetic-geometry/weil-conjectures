@@ -18915,3 +18915,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:05 L: returned deliver/D9/Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison (reviewer RETURN: (reviewer C-dbbc2, head dbbc27947) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Co)
 
 - 06:07 L: batch 20261020T211611 dependency take-out
+- 22:08 L: returned deliver/U7/Sheaf.Paper.AdicCoefficientDatum (reviewer RETURN: (reviewer C-b0635, head b0635f9c3) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.AdicCoefficien)
