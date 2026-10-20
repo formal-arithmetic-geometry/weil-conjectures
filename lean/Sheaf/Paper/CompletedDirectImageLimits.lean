@@ -11,22 +11,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import Mathlib.CategoryTheory.Adjunction.Whiskering
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
-import Sheaf.Algebra.Homology.KInjectiveProductsTermwise
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
-import Sheaf.CategoryTheory.DiagramSiteRealization
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.Paper.AdicCoefficientDatum
-import Sheaf.Paper.CompletedDerivedInverseLimit
-import Sheaf.Paper.IntrinsicCompletionCompleted
-import Sheaf.Paper.KoszulReconstruction
-import Sheaf.Paper.PerfectProjectionFormula
-import Sheaf.Paper.ProjectionFormulaBaseChangeNaturality
-import Sheaf.Paper.ProjectionMateExact
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import WeilConjectures.Algebra.Homology.RoosComplex
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
@@ -235,6 +219,8 @@ def completedOrdinaryReductionPullbackInv (n : ℕ) :
         (d.completedRing U) (d.finiteRing U n) (d.projection V n) (d.projection U n)
           (d.integralRingIso f) (d.finiteRingIso f n) (d.projection_comm f n))
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The normalized ordinary mate is the invertible tensor balancing map.
 Source: blueprint tower compatibility; Stacks 03EL and 06YY
 (blueprint: prop-weil-pbc-direct-image-limits).
@@ -244,7 +230,42 @@ The coefficient projection square makes the map quotient-linear. The reverse ten
 reassociation is inverse, as checked on pure tensors and then on sheafifications. -/
 theorem completedOrdinaryReductionPullbackInv_isIso (n : ℕ) :
     IsIso (completedOrdinaryReductionPullbackInv d f n) := by
-  sorry
+  let av := proEtaleRingExtensionAdjunction (d.projection V n)
+  let au := proEtaleRingExtensionAdjunction (d.projection U n)
+  let ar := proEtaleRingModuleAdjunction f (d.completedRing V) (d.completedRing U)
+    (d.integralRingIso f)
+  let az := proEtaleRingModuleAdjunction f (d.finiteRing V n) (d.finiteRing U n)
+    (d.finiteRingIso f n)
+  let b := proEtaleRingRestrictionPullbackInv f
+    (d.completedRing V) (d.finiteRing V n) (d.completedRing U) (d.finiteRing U n)
+    (d.projection V n) (d.projection U n) (d.integralRingIso f)
+    (d.finiteRingIso f n) (d.projection_comm f n)
+  let c := proEtaleRingRestrictionDirectImage f
+    (d.completedRing V) (d.finiteRing V n) (d.completedRing U) (d.finiteRing U n)
+    (d.projection V n) (d.projection U n) (d.integralRingIso f)
+    (d.finiteRingIso f n) (d.projection_comm f n)
+  let α := TwoSquare.mk _ _ _ _ b
+  have hm : mateEquiv az ar α = TwoSquare.mk _ _ _ _ c.hom := by
+    rw [← Equiv.eq_symm_apply]
+    apply TwoSquare.ext
+    intro M
+    simp only [α, b, mateEquiv_symm_apply, proEtaleRingRestrictionPullbackInv,
+      proEtaleRingRestrictionPullbackApp, NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
+      Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app, Functor.comp_map,
+      Category.id_comp]
+    simp only [TwoSquare.mk, CategoryTheory.Functor.map_id]
+    dsimp only [TwoSquare.natTrans, Functor.comp_obj]
+    simp only [Category.id_comp]
+    exact (Category.comp_id _).symm
+  let γ := (mateEquiv av au).symm α
+  have hγ : mateEquiv av au γ = α := (mateEquiv av au).apply_symm_apply α
+  have : IsIso (conjugateEquiv (av.comp az) (ar.comp au) γ.natTrans) := by
+    rw [← iterated_mateEquiv_conjugateEquiv av au ar az γ, hγ, hm]
+    change IsIso c.hom
+    infer_instance
+  change IsIso γ.natTrans
+  exact conjugateEquiv_of_iso (av.comp az) (ar.comp au) γ.natTrans
 
 attribute [instance] completedOrdinaryReductionPullbackInv_isIso
 
@@ -359,7 +380,6 @@ def AdicCoefficientDatum.towerProjection (K : d.derived U) :
       (completedReductionTower U d).map
         ((proEtaleRingDerivedAdjunction f (d.completedRing V) (d.completedRing U)
           (d.integralRingIso f)).counit.app K))
-
 
 /-- Evaluate the pushed reduction tower using its canonical K-injective evaluation
 comparison, the normalized reduction counit, and the specified scalar-restriction
