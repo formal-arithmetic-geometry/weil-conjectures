@@ -6,7 +6,7 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.CategoryTheory.FilteredComplexDecalageComplex
-public import Sheaf.CategoryTheory.DoubleComplexTotal
+public import WeilConjectures.CategoryTheory.DoubleComplexTotal
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 import Sheaf.CategoryTheory.GoodTruncationTotalImage
