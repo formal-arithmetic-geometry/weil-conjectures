@@ -33,7 +33,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/08HY",
-  "place": "E2 stage-3 repair: categorical isomorphism cancellation and naturality; same restriction compatibility route."
+  "place": "Existing upstream SingleComplexOpenRestrictedCounitCancellation proof, re-exported by S8 after the 2026-10-20 synchronization; same categorical cancellation and naturality route."
  },
  "mathlib_searches": [
   {
@@ -90,14 +90,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictedCounitCancellation",
+  "module": "WeilConjectures.AlgebraicGeometry.SingleComplexOpenRestrictedCounitCancellation",
   "declaration": "AlgebraicGeometry.singleComplexOpen_restricted_counit_cancellation",
-  "existing": false,
-  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenRestrictedCounitCancellation.lean",
+  "existing": true,
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SingleComplexOpenRestrictedCounitCancellation.lean",
   "statement": "theorem singleComplexOpen_restricted_counit_cancellation\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.Opens)\n    (I : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)) :\n    let _ : ∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z),\n      (Scheme.Modules.tensorPullback k).Additive :=\n      @Classical.choose _ _ exists_derivedPullbackComposition\n    let F := RingedSpace.moduleDirectImage f.toLRSHom.toShHom\n    let F₀ := RingedSpace.moduleDirectImage (f ∣_ V).toLRSHom.toShHom\n    let rY := schemeOpenRestriction Y V\n    let rX := schemeOpenRestriction X (f ⁻¹ᵁ V)\n    let a := @singleComplexOpenPinnedAdjunction.{u, w} _\n    let c := @singleComplexOpenPinnedComposition.{u, w} _\n    let ε := @Classical.choose _ _\n      (Classical.choose_spec exists_derivedPullbackComposition)\n    (derivedPullback (f ∣_ V)).map\n      (rY.mapDerivedCategoryFactorsh.inv.app ((F.mapHomotopyCategory (.up ℤ)).obj I)) ≫\n      ((derivedPullback (f ∣_ V)).mapIso\n          ((singleComplexOpenPullbackIso Y V).symm.app\n            (DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj I))) ≪≫\n        (c (f ∣_ V) V.ι).app (DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj I)) ≪≫\n        eqToIso (congrArg\n          (fun k ↦ (derivedPullback k).obj\n            (DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj I)))\n          (morphismRestrict_ι f V)) ≪≫\n        (c (f ⁻¹ᵁ V).ι f).symm.app\n          (DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj I)) ≪≫\n        (singleComplexOpenPullbackIso X (f ⁻¹ᵁ V)).app\n          ((derivedPullback f).obj\n            (DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj I)))).hom ≫\n      rX.mapDerivedCategory.map ((ε f).app ((F.mapHomotopyCategory (.up ℤ)).obj I)) ≫\n      rX.mapDerivedCategory.map (DerivedCategory.Qh.map\n        (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f))\n          |>.mapHomotopyCategory (.up ℤ)).counit.app I)) ≫\n      rX.mapDerivedCategoryFactorsh.hom.app I =\n    (ε (f ∣_ V)).app ((rY.mapHomotopyCategory (.up ℤ)).obj\n      ((F.mapHomotopyCategory (.up ℤ)).obj I)) ≫\n      DerivedCategory.Qh.map\n        ((openPinnedHomotopyTensorRestrictionIso f V (f ⁻¹ᵁ V) (f ∣_ V)\n            (morphismRestrict_ι f V)).inv.app ((F.mapHomotopyCategory (.up ℤ)).obj I) ≫\n          (rX.mapHomotopyCategory (.up ℤ)).map\n            (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f))\n              |>.mapHomotopyCategory (.up ℤ)).counit.app I))",
   "branch": "sheaf-dag",
-  "by": "M3",
-  "date": "2026-10-14"
+  "by": "S8",
+  "date": "2026-10-20",
+  "note": "Reuse the existing upstream theorem. Its signature and complete proof body equal the quarantined declaration verbatim; the Sheaf module re-exports it."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -110,14 +111,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-c6a9c",
-  "group": "E2",
+  "reviewer": "C-fa2c4",
+  "group": "S8",
   "result": "pass",
-  "landing": "20261014T080626-L-3795474",
-  "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged Lean signature with its node and original source, the proof with its recorded dependency and categorical identities; delivery compiled cleanly in 41.9 s, axiom checks passed, and sole direct importer Sheaf.AlgebraicGeometry.SingleComplexOpenPullbackCounitHomotopyFactorization compiled against the delivery in 23.4 s."
+  "landing": "20261020T150705-L-2574334",
+  "kind": "proof",
+  "note": "independent cc review: Sheaf re-export module + node lean record (existing:true) with upstream WeilConjectures.AlgebraicGeometry.SingleComplexOpenRestrictedCounitCancellation theorem (signature byte-identical to node statement, sorry-free, standard axioms); compiles 15.6 s; no importers"
  },
  "lean_audit": {
   "master": {
