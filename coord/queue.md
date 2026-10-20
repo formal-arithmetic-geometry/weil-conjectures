@@ -1,8 +1,8 @@
 # Work queue
 
-92 items; claim with `tools/claim.py next <group> [--stage N]`.
+88 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (26 clusters, 2117 modules)
+## Rework: quarantined by the upstream sync (25 clusters, 2112 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -30,7 +30,6 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.CoherentFrobeniusPullback` | 1 |  | error: Sheaf/AlgebraicGeometry/CoherentFrobeniusPullback.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality faile |
 | `Sheaf.AlgebraicGeometry.EtaleGenericDirectImageExchange` | 1 |  | error: Sheaf/AlgebraicGeometry/EtaleGenericDirectImageExchange.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleAbelianCoefficientComparison fail |
 | `Sheaf.AlgebraicGeometry.RawModuleScalarHomCompositeFormula` | 1 |  | error: Sheaf/AlgebraicGeometry/RawModuleScalarHomCompositeFormula.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.RawModuleScalarCoefficientFactors fa |
-| `Sheaf.AlgebraicGeometry.TensorRoofTransposition` | 1 |  | error: Sheaf/AlgebraicGeometry/TensorRoofTransposition.lean:106:9: error(lean.unknownIdentifier): Unknown identifier `Scheme` | | Note: A public declaration `Sc |
 | `Sheaf.Algebra.Homology.AffinePushforwardCohomologyEdgeIdentity` | 1 |  | error: Sheaf/Algebra/Homology/AffinePushforwardCohomologyEdgeIdentity.lean:5:0: error: import Sheaf.AlgebraicGeometry.AffineDerivedCohomologyPresentation failed |
 | `Sheaf.AlgebraicGeometry.RawModuleScalarPullbackFormulas` | 1 |  | error: Sheaf/AlgebraicGeometry/RawModuleScalarPullbackFormulas.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.RawModuleScalarCoefficientFactors faile |
 | `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/ProEtale/BaseChange/SmoothBaseChange.lean:1:0: error: import Sheaf.SixFunctors.ProEtale.BaseChange.Smooth |
