@@ -101,13 +101,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.StrictLocalSectionsUnitLeray",
-  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalSectionsUnitLeray.lean",
-  "declaration": "AlgebraicGeometry.Etale.strictLocalSections_unit_leray",
-  "statement": "theorem strictLocalSections_unit_leray {S : Scheme.{v}}\n    {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)\n    {Y : Scheme.{v}} (t : Y ⟶ Scheme.strictHenselizationScheme s)\n    (D : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)\n    (T : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}))\n    (r : DerivedCategory.Q.obj D ⟶ T.obj) :\n    let F := lowerStar AddCommGrpCat.{v + 1} t\n    let G := Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology\n      AddCommGrpCat.{v + 1}\n    let H := Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}\n    have := strictHenselization_globalSections_preservesFiniteColimits s\n    let V := F.rightDerivedFunctorPlus.obj T\n    let ℓ := DerivedCategory.Plus.ι.map\n        (G.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.inv.app V) ≫\n      G.rightDerivedFunctorPlusCompatibility.hom.app V ≫\n      G.rightDerivedFunctor.map (F.rightDerivedFunctorPlusCompatibility.hom.app T) ≫\n      (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso AddCommGrpCat.{v + 1}\n        t).hom.app T.obj\n    G.mapDerivedCategoryFactors.inv.app ((F.mapHomologicalComplex (.up ℤ)).obj D) ≫\n      G.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso _).inv.app\n        ((F.mapHomologicalComplex (.up ℤ)).obj D)) ≫\n      G.mapDerivedCategory.map\n        (F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj D)) ≫\n      G.mapDerivedCategory.map\n        (F.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso _).hom.app D)) ≫\n      G.mapDerivedCategory.map (F.rightDerivedFunctor.map r) ≫\n      G.mapDerivedCategory.map (F.rightDerivedFunctorPlusCompatibility.inv.app T) ≫ ℓ =\n    DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex\n      (lowerStarCompGlobalSectionsIso AddCommGrpCat.{v + 1} t).hom (.up ℤ)).app D) ≫\n      (DerivedCategory.quotientCompQhIso AddCommGrpCat.{v + 1}).inv.app\n        ((H.mapHomologicalComplex (.up ℤ)).obj D) ≫\n      H.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj D) ≫\n      H.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso _).hom.app D) ≫\n      H.rightDerivedFunctor.map r",
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalSectionsUnitLeray",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalSmallModel/StrictLocalSectionsUnitLeray.lean",
+  "declaration": "AlgebraicGeometry.Etale.smallModel_strictLocalSections_unit_leray",
+  "statement": "theorem smallModel_strictLocalSections_unit_leray {S : Scheme.{v}}\n    {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)\n    {Y : Scheme.{v}} (t : Y ⟶ Scheme.strictHenselizationScheme s)\n    (D : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)\n    (T : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}))\n    (r : DerivedCategory.Q.obj D ⟶ T.obj) :\n    let F := lowerStar AddCommGrpCat.{v + 1} t\n    let G := Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology\n      AddCommGrpCat.{v + 1}\n    let H := Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}\n    have := strictHenselization_globalSections_preservesFiniteColimits s\n    let V := F.rightDerivedFunctorPlus.obj T\n    let ℓ := DerivedCategory.Plus.ι.map\n        (G.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.inv.app V) ≫\n      G.rightDerivedFunctorPlusCompatibility.hom.app V ≫\n      G.rightDerivedFunctor.map (F.rightDerivedFunctorPlusCompatibility.hom.app T) ≫\n      (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso AddCommGrpCat.{v + 1}\n        t).hom.app T.obj\n    G.mapDerivedCategoryFactors.inv.app ((F.mapHomologicalComplex (.up ℤ)).obj D) ≫\n      G.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso _).inv.app\n        ((F.mapHomologicalComplex (.up ℤ)).obj D)) ≫\n      G.mapDerivedCategory.map\n        (F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj D)) ≫\n      G.mapDerivedCategory.map\n        (F.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso _).hom.app D)) ≫\n      G.mapDerivedCategory.map (F.rightDerivedFunctor.map r) ≫\n      G.mapDerivedCategory.map (F.rightDerivedFunctorPlusCompatibility.inv.app T) ≫ ℓ =\n    DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex\n      (lowerStarCompGlobalSectionsIso AddCommGrpCat.{v + 1} t).hom (.up ℤ)).app D) ≫\n      (DerivedCategory.quotientCompQhIso AddCommGrpCat.{v + 1}).inv.app\n        ((H.mapHomologicalComplex (.up ℤ)).obj D) ≫\n      H.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj D) ≫\n      H.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso _).hom.app D) ≫\n      H.rightDerivedFunctor.map r",
   "branch": "sheaf-dag",
-  "by": "K1",
-  "date": "2026-10-13"
+  "by": "E3",
+  "date": "2026-10-21",
+  "note": "Original small strict-henselization realization; upstream declarations remain unchanged."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -120,12 +121,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261013T082352-L-1638635",
+  "landing": "20261020T174747-L-792517",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

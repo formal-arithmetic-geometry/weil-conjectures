@@ -33,13 +33,14 @@
  ],
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.SourceStageSectionsNaturality",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/SourceStageSectionsNaturality.lean",
-  "declaration": "AlgebraicGeometry.Etale.sourceStageSectionsIso_naturality",
-  "statement": "theorem sourceStageSectionsIso_naturality {X S : Scheme.{v}} (f : X ⟶ S)\n    {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)\n    {i j : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)} (a : i ⟶ j)\n    (M : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ) :\n    (NatTrans.mapHomologicalComplex\n      ((sheafSections S.smallEtaleTopology AddCommGrpCat.{v + 1}).map\n        ((strictLocalNeighbourhoods s).map a).op) (.up ℤ)).app\n          (((lowerStar AddCommGrpCat.{v + 1} f).mapHomologicalComplex (.up ℤ)).obj M) ≫\n      (NatIso.mapHomologicalComplex (sourceStageSectionsIso f s i) (.up ℤ)).hom.app M =\n    (NatIso.mapHomologicalComplex (sourceStageSectionsIso f s j) (.up ℤ)).hom.app M ≫\n      ((NatTrans.mapHomologicalComplex\n        (sectionsPullbackNat ((strictLocalNeighbourhoodDiagram f s).map a))\n          (.up ℤ)).app\n            (((upperStar AddCommGrpCat.{v + 1}\n              ((strictLocalNeighbourhoodProjection f s).app j)).mapHomologicalComplex\n                (.up ℤ)).obj M) ≫\n        ((Sheaf.Γ ((strictLocalNeighbourhoodDiagram f s).obj i).smallEtaleTopology\n          AddCommGrpCat.{v + 1}).mapHomologicalComplex (.up ℤ)).map\n            ((NatIso.mapHomologicalComplex\n              (upperStarComp AddCommGrpCat.{v + 1}\n                ((strictLocalNeighbourhoodDiagram f s).map a)\n                ((strictLocalNeighbourhoodProjection f s).app j)\n                ((strictLocalNeighbourhoodProjection f s).app i)\n                ((Category.comp_id _).symm.trans\n                  ((strictLocalNeighbourhoodProjection f s).naturality a).symm))\n              (.up ℤ)).inv.app M))",
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalSmallModel.SourceStageSectionsNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalSmallModel/SourceStageSectionsNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.smallModel_sourceStageSectionsIso_naturality",
+  "statement": "theorem smallModel_sourceStageSectionsIso_naturality {X S : Scheme.{v}} (f : X ⟶ S)\n    {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)\n    {i j : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)} (a : i ⟶ j)\n    (M : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ) :\n    (NatTrans.mapHomologicalComplex\n      ((sheafSections S.smallEtaleTopology AddCommGrpCat.{v + 1}).map\n        ((strictLocalNeighbourhoods s).map a).op) (.up ℤ)).app\n          (((lowerStar AddCommGrpCat.{v + 1} f).mapHomologicalComplex (.up ℤ)).obj M) ≫\n      (NatIso.mapHomologicalComplex (smallModel_sourceStageSectionsIso f s i) (.up ℤ)).hom.app M =\n    (NatIso.mapHomologicalComplex (smallModel_sourceStageSectionsIso f s j) (.up ℤ)).hom.app M ≫\n      ((NatTrans.mapHomologicalComplex\n        (sectionsPullbackNat ((strictLocalNeighbourhoodDiagram f s).map a))\n          (.up ℤ)).app\n            (((upperStar AddCommGrpCat.{v + 1}\n              ((strictLocalNeighbourhoodProjection f s).app j)).mapHomologicalComplex\n                (.up ℤ)).obj M) ≫\n        ((Sheaf.Γ ((strictLocalNeighbourhoodDiagram f s).obj i).smallEtaleTopology\n          AddCommGrpCat.{v + 1}).mapHomologicalComplex (.up ℤ)).map\n            ((NatIso.mapHomologicalComplex\n              (upperStarComp AddCommGrpCat.{v + 1}\n                ((strictLocalNeighbourhoodDiagram f s).map a)\n                ((strictLocalNeighbourhoodProjection f s).app j)\n                ((strictLocalNeighbourhoodProjection f s).app i)\n                ((Category.comp_id _).symm.trans\n                  ((strictLocalNeighbourhoodProjection f s).naturality a).symm))\n              (.up ℤ)).inv.app M))",
   "branch": "sheaf-dag",
-  "by": "T1",
-  "date": "2026-10-13"
+  "by": "E3",
+  "date": "2026-10-21",
+  "note": "Original small strict-henselization realization; upstream declarations remain unchanged."
  },
  "stmt_deps": [
   "def-weil-pbc-strict-local-injective-source-comparison"
@@ -202,12 +203,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261012T223422-L-1642649",
+  "landing": "20261020T174747-L-792517",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
