@@ -9,7 +9,7 @@ public import Sheaf.Algebra.Homology.HomologyEvaluationDefinitions
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
 import Sheaf.Algebra.Homology.HomologyEvaluationRestrictionComparison
-import Sheaf.Algebra.Homology.HomologyEvaluationRoofNaturality
+import WeilConjectures.Algebra.Homology.HomologyEvaluationRoofNaturality
 
 /-! # Compatibility of homology evaluation with a quasi-isomorphism roof
 

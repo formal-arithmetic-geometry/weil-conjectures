@@ -5,7 +5,7 @@ Authors: SHEAF group E3
 -/
 module
 
-public import Sheaf.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplex
 public import Mathlib.CategoryTheory.Functor.Currying
 public import Sheaf.Algebra.Homology.RingedSiteZerothHypercohomologyOfUniverses
 import Sheaf.Algebra.Homology.DerivedInternalHomSectionsModel

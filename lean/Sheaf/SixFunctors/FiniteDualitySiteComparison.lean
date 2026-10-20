@@ -24,7 +24,7 @@ public import Sheaf.AlgebraicGeometry.SfFiniteExceptionalInverseImage
 public import Sheaf.AlgebraicGeometry.EvaluationHomSiteComparison
 
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison

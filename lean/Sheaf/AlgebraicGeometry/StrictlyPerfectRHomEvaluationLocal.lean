@@ -11,7 +11,7 @@ import Sheaf.AlgebraicGeometry.StrictlyPerfectEvaluationModel
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.Algebra.Homology.DerivedInternalHom
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.StrictlyPerfectDerivedInternalHom
 import Sheaf.Paper.DerivedInternalHomRestrictOpen

@@ -31,7 +31,7 @@ import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
 import Sheaf.CategoryTheory.RingedSiteDualityMaps
 import Sheaf.Paper.CoefficientRingedTensorHomModel
 import Sheaf.Paper.CoefficientHomRepresentativeEvaluation
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Mathlib.Algebra.Homology.BifunctorShift
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses

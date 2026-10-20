@@ -21,7 +21,7 @@ import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Sheaf.Paper.CoefficientRingedTensorHomModel
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import Sheaf.Paper.CoefficientHomRepresentativeEvaluation

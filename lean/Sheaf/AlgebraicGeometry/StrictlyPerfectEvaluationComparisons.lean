@@ -13,7 +13,7 @@ import Mathlib.CategoryTheory.MorphismProperty.Retract
 import Sheaf.AlgebraicGeometry.OrdinaryEvaluationDifferential
 import Sheaf.AlgebraicGeometry.StrictlyPerfectKInjectiveEvaluationComparisons
 import Sheaf.Algebra.Homology.DerivedInternalHom
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.PerfectComplex
 

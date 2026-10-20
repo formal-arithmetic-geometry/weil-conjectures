@@ -32,7 +32,7 @@ import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CoherenceLegacy
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.CategoryTheory.Triangulated.DerivedLimitProducts
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 import Sheaf.Paper.KoszulReconstruction
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation

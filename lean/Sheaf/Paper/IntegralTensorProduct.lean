@@ -21,7 +21,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExa
 import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Mathlib.Algebra.Homology.BifunctorShift
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses

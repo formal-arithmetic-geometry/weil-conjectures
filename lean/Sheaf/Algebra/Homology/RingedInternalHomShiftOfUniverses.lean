@@ -18,7 +18,7 @@ public import Mathlib.CategoryTheory.Triangulated.Functor
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 import Sheaf.Algebra.Homology.DerivedInternalHomShiftLeft
 import Sheaf.Algebra.Homology.DerivedInternalHomShiftRight
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.Algebra.Homology.HomComplexMappingCone
 import Sheaf.Algebra.Homology.HomTensorTotal
 import Sheaf.Algebra.Homology.KFlat

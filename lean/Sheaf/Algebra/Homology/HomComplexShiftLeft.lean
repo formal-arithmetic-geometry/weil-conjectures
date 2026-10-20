@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplex
 public import Mathlib.Algebra.Homology.HomotopyCategory.Shift
 import Sheaf.Algebra.Homology.HomComplexProjections
 

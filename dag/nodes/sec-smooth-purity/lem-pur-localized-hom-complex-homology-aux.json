@@ -103,13 +103,14 @@
  "unit": "sk-def-sf-operations",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.LocalizedHomComplexHomology",
-  "file": "lean/Sheaf/Algebra/Homology/LocalizedHomComplexHomology.lean",
+  "module": "WeilConjectures.Algebra.Homology.LocalizedHomComplexHomology",
+  "file": "lean/WeilConjectures/Algebra/Homology/LocalizedHomComplexHomology.lean",
   "declaration": "CategoryTheory.localizedHomComplex_homology_aux",
   "statement": "theorem localizedHomComplex_homology_aux\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    (R : Sheaf J CommRingCat.{max u v}) (U : C)\n    (L I : CochainComplex (SheafOfModules.{max u v}\n      ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ)\n    (hzero : Functor.PreservesZeroMorphisms\n      (SheafOfModules.overFunctor.{max u v}\n        ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R) U))\n    (e : let R₀ := (sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R\n      let H := homComplex (R := R) L I\n      let S := ((SheafOfModules.forget R₀ ⋙ PresheafOfModules.evaluation R₀.obj (op U) ⋙\n        forget₂ (ModuleCat.{max u v} (R₀.obj.obj (op U))) AddCommGrpCat).mapHomologicalComplex\n          (ComplexShape.up ℤ)).obj H\n      letI := hzero\n      let res := (SheafOfModules.overFunctor.{max u v} R₀ U).mapHomologicalComplex\n        (ComplexShape.up ℤ)\n      S.cycles 0 ≃ (res.obj L ⟶ res.obj I)) :\n    let R₀ := (sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R\n    let H := homComplex (R := R) L I\n    let π := Classical.choose (Classical.choose_spec\n      (homComplex_exists.{u, v, max u v, max u v} (J := J) (R := R)))\n    let S := ((SheafOfModules.forget R₀ ⋙ PresheafOfModules.evaluation R₀.obj (op U) ⋙\n      forget₂ (ModuleCat.{max u v} (R₀.obj.obj (op U))) AddCommGrpCat).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj H\n    letI := hzero\n    let res : CochainComplex (SheafOfModules.{max u v} R₀) ℤ ⥤\n        CochainComplex (SheafOfModules.{max u v} (R₀.over U)) ℤ :=\n      (SheafOfModules.overFunctor.{max u v} R₀ U).mapHomologicalComplex (ComplexShape.up ℤ)\n    let q := HomotopyCategory.quotient\n      (SheafOfModules.{max u v} (R₀.over U)) (ComplexShape.up ℤ)\n    (∀ (z : S.cycles 0) (p : ℤ) (W : (Over U)ᵒᵖ),\n      ((e z).f p).val.app W =\n        (((π L I 0 p p (add_zero p)).val.app (op U)) (S.iCycles 0 z)).app W) →\n    ∃ a : S.homology 0 ≃ (q.obj (res.obj L) ⟶ q.obj (res.obj I)),\n      ∀ z : S.cycles 0, a (S.homologyπ 0 z) = q.map (e z)",
   "branch": "sheaf-dag",
   "by": "P3",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.Algebra.Homology.LocalizedHomComplexHomology; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

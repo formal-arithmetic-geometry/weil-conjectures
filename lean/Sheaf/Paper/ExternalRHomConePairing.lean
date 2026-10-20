@@ -20,7 +20,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 public import Sheaf.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
 public import WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-public import Sheaf.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplex
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import Sheaf.Paper.KFlatMapFactorization
 public import Mathlib.CategoryTheory.Triangulated.Opposite.Functor

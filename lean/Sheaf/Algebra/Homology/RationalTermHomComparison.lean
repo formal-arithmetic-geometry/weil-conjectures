@@ -15,7 +15,7 @@ public import Sheaf.CategoryTheory.ScalarLocalizationDerivedHom
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import Sheaf.Algebra.Homology.RingedSiteBoundedFreeRHomModel
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 
 -- The high-priority successor-universe sheafification instance gets stuck on coefficient-universe goals.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall

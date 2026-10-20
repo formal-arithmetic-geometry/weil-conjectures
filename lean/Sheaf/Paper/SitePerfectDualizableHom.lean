@@ -11,7 +11,7 @@ public import Sheaf.Paper.SitePerfectComplex
 import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import Mathlib.Algebra.Homology.BifunctorShift
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.Paper.IntegralDerivedOperationsOnSlices
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients

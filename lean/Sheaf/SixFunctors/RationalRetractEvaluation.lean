@@ -19,7 +19,7 @@ import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.CategoryTheory.CoefficientBidualTriangles
 import Sheaf.CategoryTheory.ScalarLocalizationTriangulated
 import Mathlib.Algebra.Homology.DerivedCategory.Basic

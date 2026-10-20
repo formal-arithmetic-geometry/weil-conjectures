@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplex
 
 /-! # HomComplexProjections
 

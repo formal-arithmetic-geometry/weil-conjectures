@@ -30,7 +30,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
 
@@ -41,11 +40,10 @@ import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
 import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.Paper.ComparisonPullbackExact
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.HomTensorTotal

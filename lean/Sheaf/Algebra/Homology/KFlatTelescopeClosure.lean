@@ -16,7 +16,7 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorColimits
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.Algebra.Homology.KFlatClosure
-import Sheaf.CategoryTheory.RingedSiteGrothendieckAbelian
+import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 
 /-!

@@ -6,7 +6,7 @@ Authors: SHEAF group N1
 module
 
 public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
-public import Sheaf.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplex
 public import WeilConjectures.RingTheory.KoszulDualComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.AlgebraicGeometry.AffineFiniteFreeDualComplexComparison

@@ -5,7 +5,7 @@ Authors: SHEAF group J1
 -/
 module
 
-public import Sheaf.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplex
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.Algebra.Category.Grp.FilteredColimits

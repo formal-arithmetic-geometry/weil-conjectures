@@ -17,7 +17,7 @@ public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 import WeilConjectures.RingTheory.CohenPowerSeriesPresentation
 import Sheaf.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.Algebra.Homology.CoherentRHomFiniteInjectiveDimension
 import Sheaf.Algebra.Homology.DerivedEvaluationFiniteInjective
 import Sheaf.RingTheory.RegularLocalBoundedInjectiveResolution

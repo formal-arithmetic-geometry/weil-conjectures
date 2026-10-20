@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.RingHom.Flat
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.AlgebraicGeometry.MixedGlobalExtension
 import Sheaf.Algebra.Homology.ProjectiveHomEvaluationModel
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.Algebra.Homology.NormalizedRingHomExtension
 import Sheaf.Algebra.Homology.PerfectRHomBaseChangeMap
 import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits

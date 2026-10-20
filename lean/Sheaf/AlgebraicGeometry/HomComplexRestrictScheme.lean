@@ -5,7 +5,7 @@ Authors: SHEAF group N3
 -/
 module
 
-public import Sheaf.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplex
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Homology.Additive
 import Sheaf.AlgebraicGeometry.HomComplexRestrictSchemeTransport

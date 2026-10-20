@@ -11,7 +11,7 @@ public import WeilConjectures.Algebra.Homology.ModuleHomComplex
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Mathlib.CategoryTheory.Shift.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.KInjectiveHomComplex

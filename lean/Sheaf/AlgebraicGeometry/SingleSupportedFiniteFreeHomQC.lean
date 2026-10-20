@@ -6,7 +6,7 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
-public import Sheaf.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplex
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import Sheaf.AlgebraicGeometry.SingleSupportedFiniteFreeHomologyIso
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel

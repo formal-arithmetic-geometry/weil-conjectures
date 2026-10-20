@@ -5,7 +5,7 @@ Authors: SHEAF group D2
 -/
 module
 
-public import Sheaf.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplex
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 import Sheaf.Algebra.Homology.HomComplexUnitEvaluationIsIso

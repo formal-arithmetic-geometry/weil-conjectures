@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.RingHomExtensionDefs
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 
 /-! # Differential compatibility for normalized Hom degree maps
 

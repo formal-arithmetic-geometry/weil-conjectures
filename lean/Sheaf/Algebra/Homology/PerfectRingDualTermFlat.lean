@@ -10,7 +10,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 import Mathlib.LinearAlgebra.Dual.Lemmas
 import Mathlib.RingTheory.Flat.CategoryTheory
 import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 
 /-! # Flat terms of the finite-projective ring dual
 

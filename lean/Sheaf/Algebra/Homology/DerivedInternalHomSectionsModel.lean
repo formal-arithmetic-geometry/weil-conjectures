@@ -7,7 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.Algebra.Homology.KFlat
-public import Sheaf.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplex
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.Algebra.Homology.RingedSiteZerothHypercohomologyOfUniverses
 public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplex

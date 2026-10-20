@@ -38,7 +38,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 import Mathlib.CategoryTheory.Adjunction.Mates
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 
 /-! # Finite exceptional internal adjunction
 

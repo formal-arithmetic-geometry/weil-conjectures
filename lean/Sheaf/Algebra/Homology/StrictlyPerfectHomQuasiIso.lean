@@ -5,7 +5,7 @@ Authors: SHEAF group T2
 -/
 module
 
-public import Sheaf.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplex
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso

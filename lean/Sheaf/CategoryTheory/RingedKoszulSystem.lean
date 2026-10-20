@@ -6,7 +6,7 @@ Authors: SHEAF group NN
 module
 
 public import Sheaf.CategoryTheory.RingedExtendedCech
-public import Sheaf.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplex
 public import Sheaf.CategoryTheory.RingedCompletionUnit
 public import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
 public import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction

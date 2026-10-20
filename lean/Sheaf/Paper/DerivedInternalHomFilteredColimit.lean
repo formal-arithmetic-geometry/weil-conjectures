@@ -28,7 +28,7 @@ public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.ScalarInternalHomAdjunction
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients

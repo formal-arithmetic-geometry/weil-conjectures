@@ -14,7 +14,7 @@ public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom

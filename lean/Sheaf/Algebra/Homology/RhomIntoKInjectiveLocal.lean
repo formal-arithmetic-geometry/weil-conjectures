@@ -5,7 +5,7 @@ Authors: SHEAF group H1
 -/
 module
 
-public import Sheaf.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplex
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.Grp.Abelian
@@ -14,7 +14,7 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.CategoryTheory.Sites.LocallyBijective
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Sheaf.Algebra.Homology.LocalizedHomComplexHomotopy
+import WeilConjectures.Algebra.Homology.LocalizedHomComplexHomotopy
 import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 

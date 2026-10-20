@@ -6,7 +6,7 @@ Authors: SHEAF group Q2
 module
 
 public import Sheaf.Algebra.Homology.PerfectRingHomTensorDegreeCondition
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.Algebra.Homology.PerfectRHomBaseChangeMap
 import Sheaf.Algebra.Homology.PerfectRingDualTermFlat
 

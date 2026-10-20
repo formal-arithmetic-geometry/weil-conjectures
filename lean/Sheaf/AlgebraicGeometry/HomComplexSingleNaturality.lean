@@ -5,7 +5,7 @@ Authors: SHEAF group G3
 -/
 module
 
-public import Sheaf.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplex
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 import Sheaf.Algebra.Homology.HomComplexProjections
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree

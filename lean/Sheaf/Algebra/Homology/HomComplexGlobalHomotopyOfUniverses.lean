@@ -5,7 +5,7 @@ Authors: SHEAF group E3
 -/
 module
 
-public import Sheaf.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplex
 public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 public import Mathlib.CategoryTheory.Functor.Currying
 public import Mathlib.Algebra.Homology.HomotopyCategory

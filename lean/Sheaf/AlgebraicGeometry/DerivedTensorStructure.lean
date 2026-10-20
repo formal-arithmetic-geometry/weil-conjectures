@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 import Sheaf.AlgebraicGeometry.SchemeModuleFreeYonedaIso
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.ExtensionByZeroFlat
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ExtensionByZeroFlat
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory

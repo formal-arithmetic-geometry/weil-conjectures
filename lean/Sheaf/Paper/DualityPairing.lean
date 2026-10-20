@@ -22,7 +22,7 @@ import Sheaf.Algebra.Homology.RhomGlobalSections
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Mathlib.Algebra.Homology.BifunctorShift
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Sheaf.Algebra.Homology.KInjectiveHomComplex

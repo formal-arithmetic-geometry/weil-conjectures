@@ -16,7 +16,7 @@ import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import Sheaf.Algebra.Homology.KFlat
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-public import Sheaf.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.RingedInternalHomSignedCalculus

@@ -17,7 +17,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.Paper.FiniteTorAmplitudeSites
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.Paper.StrictPerfectCoefficientPackageOfUniverses
@@ -44,7 +43,7 @@ import Sheaf.Paper.FiniteConstructibleHom
 import Sheaf.AlgebraicGeometry.OpenImmersionHigherDirectImages
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Mathlib.Algebra.Homology.HomologySequence
 import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Paper.EtaleSitePerfectConstructibleHom

@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.OrdinaryEvaluationData
 import Sheaf.AlgebraicGeometry.OrdinaryEvaluationSourceBiproduct
 import Sheaf.AlgebraicGeometry.OrdinaryEvaluationTargetBiproduct
 import Sheaf.AlgebraicGeometry.OrdinaryEvaluationDiagonalBlock
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 
 /-! # Finite-support assembly of ordinary evaluation
 

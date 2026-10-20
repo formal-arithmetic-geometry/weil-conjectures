@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
 import Sheaf.Paper.SiteFiniteFreeTruncationModels
 import Sheaf.Paper.SiteTensorLocalModelComparison
-import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
+import WeilConjectures.CategoryTheory.LocalizedModuleAdjunctionExact
 import Mathlib.RingTheory.Noetherian.Basic
 import Mathlib.RingTheory.Finiteness.Basic
 import Mathlib.RingTheory.TensorProduct.Finite

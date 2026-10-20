@@ -24,7 +24,7 @@ import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 
 /-! # Internal Hom and pullback with a site-perfect first argument
 

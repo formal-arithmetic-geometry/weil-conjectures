@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 import Sheaf.Algebra.Homology.DerivedScalarExtensionCounitShift
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.Algebra.Homology.HomTensorTotal
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses

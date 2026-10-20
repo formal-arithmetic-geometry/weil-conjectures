@@ -5,7 +5,7 @@ Authors: SHEAF group B3
 -/
 module
 
-public import Sheaf.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplex
 public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.AlgebraicGeometry.InternalHomRestrictScheme

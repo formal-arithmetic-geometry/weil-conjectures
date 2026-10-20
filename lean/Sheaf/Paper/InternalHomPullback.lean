@@ -30,7 +30,7 @@ import Sheaf.Paper.CoefficientRingedTensorHomModel
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Paper.CoefficientHomRepresentativeEvaluation
 import Sheaf.Paper.RingedTopoiDerivedPullback
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 import Mathlib.CategoryTheory.Adjunction.Limits
 

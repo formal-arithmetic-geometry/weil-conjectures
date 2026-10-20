@@ -6,7 +6,7 @@ Authors: SHEAF group S1
 module
 
 public import Sheaf.Algebra.Homology.PerfectRingHomTensorDegrees
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.Algebra.Homology.PerfectRingDualTermFlat
 
 /-! # The postcomposition term of signed tensor-dual evaluation

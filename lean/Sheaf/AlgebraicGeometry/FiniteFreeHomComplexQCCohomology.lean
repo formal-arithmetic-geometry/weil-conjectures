@@ -6,7 +6,7 @@ Authors: SHEAF group D2
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
-public import Sheaf.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplex
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import Sheaf.AlgebraicGeometry.SingleSupportedFiniteFreeHomQC
 import Sheaf.AlgebraicGeometry.LocalizedComplexQCHomologyExtension

@@ -6,7 +6,7 @@ Authors: SHEAF group D2
 module
 
 public import WeilConjectures.RingTheory.KoszulQuotientCoefficientComplex
-public import Sheaf.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplex
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.AlgebraicGeometry.HomComplexToSingleCoefficientSquare

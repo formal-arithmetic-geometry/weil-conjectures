@@ -9,7 +9,7 @@ public import Sheaf.Paper.SixFunctorDualNotation
 public import Sheaf.Paper.SitePerfectComplex
 import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso
 import Sheaf.CategoryTheory.ScalarLocalizationTriangulated

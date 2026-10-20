@@ -17,7 +17,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.SixFunctors.Etale.Derived.Hom
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 import WeilConjectures.ConstructibleSheaf.Defs
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.Algebra.Homology.HomologySequence
 import WeilConjectures.ConstructibleSheaf.Refinement

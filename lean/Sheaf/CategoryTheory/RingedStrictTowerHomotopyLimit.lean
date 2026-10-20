@@ -6,7 +6,7 @@ Authors: SHEAF group NJ
 module
 
 public import Sheaf.CategoryTheory.RingedSiteModules
-public import Sheaf.CategoryTheory.RingedSiteGrothendieckAbelian
+public import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Triangulated.Functor

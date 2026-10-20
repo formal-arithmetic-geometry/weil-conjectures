@@ -18,7 +18,7 @@ public import Sheaf.CategoryTheory.RingedSectionLocalizationOfUniverses
 public import Sheaf.CategoryTheory.RingedIdealGenerators
 public import Sheaf.CategoryTheory.LocallyDerivedRingedIdealComplete
 public import Sheaf.CategoryTheory.LocalCoefficientLocalization
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal

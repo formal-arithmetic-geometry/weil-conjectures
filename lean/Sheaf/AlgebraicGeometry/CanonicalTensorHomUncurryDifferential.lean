@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHomModel
 import WeilConjectures.CategoryTheory.Monoidal.Closed.Preadditive
 import Sheaf.Algebra.Homology.HomComplexProjections
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 
 /-! # Differential compatibility of componentwise uncurrying
 

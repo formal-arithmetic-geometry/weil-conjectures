@@ -5,7 +5,7 @@ Authors: SHEAF group Y3
 -/
 module
 
-public import Sheaf.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplex
 public import Sheaf.Algebra.Homology.KFlat
 
 /-!

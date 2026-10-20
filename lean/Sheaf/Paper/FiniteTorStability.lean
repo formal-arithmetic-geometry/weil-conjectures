@@ -54,7 +54,7 @@ import Sheaf.Paper.CoefficientHomRepresentativeEvaluation
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.Paper.FiniteCoefficientFlatModel
 import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
@@ -65,7 +65,6 @@ import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 import Sheaf.AlgebraicGeometry.DerivedCategories
 import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 import WeilConjectures.SixFunctors.Etale.Derived.Hom

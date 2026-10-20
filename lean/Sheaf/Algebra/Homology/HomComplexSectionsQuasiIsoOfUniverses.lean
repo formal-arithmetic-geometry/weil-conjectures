@@ -7,7 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.Sites.RGammaDerivedLimit
 
-public import Sheaf.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplex
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.Algebra.Category.Ring.Limits

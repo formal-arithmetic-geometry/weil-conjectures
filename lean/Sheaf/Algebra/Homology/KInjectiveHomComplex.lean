@@ -6,7 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.Algebra.Homology.KFlat
-public import Sheaf.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplex
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import Sheaf.Algebra.Homology.HomTensorTotal
 import Sheaf.Algebra.Homology.HomComplexGlobalCochains

@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.AdjunctionShift
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
 import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal

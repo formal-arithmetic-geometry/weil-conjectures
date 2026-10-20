@@ -39,7 +39,7 @@ import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.Paper.KFlatRingedToposPullback
 import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 

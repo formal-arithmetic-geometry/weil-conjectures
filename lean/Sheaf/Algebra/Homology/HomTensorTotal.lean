@@ -5,7 +5,7 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplex
 public import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.HomTensorDifferential
 import Sheaf.Algebra.Homology.HomTensorNaturality

@@ -5,7 +5,7 @@ Authors: SHEAF groups X2 and B2
 -/
 module
 
-public import Sheaf.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplex
 public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplex
 public import Sheaf.Algebra.Homology.HomComplexProjections
 

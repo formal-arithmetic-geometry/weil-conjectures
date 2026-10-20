@@ -26,7 +26,7 @@ import Mathlib.CategoryTheory.Sites.Sheafification
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 -- The high-priority successor-universe sheafification instance gets stuck on coefficient-universe goals.

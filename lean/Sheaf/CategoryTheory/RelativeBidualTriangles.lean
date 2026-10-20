@@ -14,7 +14,7 @@ public import Mathlib.CategoryTheory.Triangulated.Subcategory
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective

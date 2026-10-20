@@ -15,7 +15,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 import Sheaf.Algebra.Homology.KFlatIndependentCoefficients

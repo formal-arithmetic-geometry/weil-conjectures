@@ -28,7 +28,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import Sheaf.Algebra.Homology.RingedSiteTorFlatModel
 import Sheaf.CategoryTheory.LocalizedModuleExactForSystems

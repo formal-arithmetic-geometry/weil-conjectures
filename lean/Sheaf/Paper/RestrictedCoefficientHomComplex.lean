@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.RestrictedCoefficientHom
 public import Sheaf.Algebra.Homology.BilinearHomComplex
-public import Sheaf.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplex
 public import Mathlib.Algebra.Homology.Functor
 import Sheaf.Algebra.Homology.HomComplexProjections
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products

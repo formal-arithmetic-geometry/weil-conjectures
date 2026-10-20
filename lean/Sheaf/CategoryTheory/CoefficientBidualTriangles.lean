@@ -25,7 +25,7 @@ import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.CategoryTheory.LocalizedModuleExactForSystems

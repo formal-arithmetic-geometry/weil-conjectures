@@ -5,7 +5,7 @@ Authors: SHEAF group S1
 -/
 module
 
-public import Sheaf.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplex
 public import Sheaf.Paper.DerivedHomMayerVietoris
 import Sheaf.Algebra.Homology.HomComplexRestrictOpenDifferential
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits

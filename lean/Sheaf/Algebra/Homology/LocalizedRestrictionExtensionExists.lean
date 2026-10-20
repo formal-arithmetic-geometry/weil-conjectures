@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
-public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
+public import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor

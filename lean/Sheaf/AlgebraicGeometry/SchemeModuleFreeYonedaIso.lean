@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
-public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
+public import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 
 /-! # Free Yoneda and extension-by-zero module sheaves
 

@@ -11,7 +11,7 @@ public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 
 /-!
 # Signed double internal Hom and mapping cones

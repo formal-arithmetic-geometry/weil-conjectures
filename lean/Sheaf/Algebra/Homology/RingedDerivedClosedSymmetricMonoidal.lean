@@ -30,7 +30,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Mathlib.Algebra.Homology.DerivedCategory.Plus
 import Sheaf.Algebra.Homology.HomTensorTotal
 import Sheaf.Algebra.Homology.HomComplexGlobalHomotopy
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses

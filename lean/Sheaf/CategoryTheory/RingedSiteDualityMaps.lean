@@ -15,7 +15,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.Algebra.Homology.HomComplexGlobalHomotopy
 import Sheaf.Algebra.Homology.HomComplexUnitIso
 import Sheaf.Algebra.Homology.HomTensorTotal

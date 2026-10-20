@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Category.Ring.Limits
 import Sheaf.Algebra.Homology.TruncationTelescope
-import Sheaf.CategoryTheory.RingedSiteGrothendieckAbelian
+import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.GrothendieckAxioms.Colim
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import WeilConjectures.FromJoel.Algebra.Homology.Embedding.CochainComplex

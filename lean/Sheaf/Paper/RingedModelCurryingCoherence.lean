@@ -6,7 +6,7 @@ Authors: SHEAF group W3
 module
 
 public import Sheaf.Paper.RingedModelRestriction
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.Algebra.Homology.HomTensorTotal
 import Sheaf.Algebra.Homology.KFlatRHomCurrying
 import Sheaf.Algebra.Homology.KInjectiveHomComplex

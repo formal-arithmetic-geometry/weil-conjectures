@@ -24,7 +24,7 @@ import Mathlib.Algebra.Category.Ring.Colimits
 import Mathlib.Topology.Sheaves.Functors
 import WeilConjectures.AlgebraicGeometry.Picard.Defs
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomComplex
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
