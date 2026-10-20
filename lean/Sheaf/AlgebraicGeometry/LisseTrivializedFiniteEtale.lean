@@ -20,7 +20,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Topology.Connected.Basic
-import Sheaf.AlgebraicGeometry.FundamentalGroup.OpenSubgroups
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.OpenSubgroups
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberCardDegree
 import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
 import Sheaf.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
 import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree

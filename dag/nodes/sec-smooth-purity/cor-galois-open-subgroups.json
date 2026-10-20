@@ -20,7 +20,7 @@
  ],
  "proof": [
   {
-   "text": "Use the existing finite-etale Galois-category instances (Basic.preGaloisCategory, fiberFunctor and galoisCategory). Mathlib PreGaloisCategory.functorToAction is full and faithful, and functorToContAction is an equivalence. A connected cover is a connected categorical object by isConnected_of_connectedSpace; Mathlib FiberFunctor.isPretransitive_of_isConnected makes its fibre transitive. This uses the already proved finite-etale interface directly and does not need the FLC/base-change clauses of thm-galois-fundamental.",
+   "text": "Use the existing finite étale Galois-category instances and the upstream FundamentalGroup.OpenSubgroups API. The upstream formulation allows a separably closed geometric point and any fundamental-group model G : Type u. Such a model exists by exists_isFundamentalGroup and is canonically topologically isomorphic to Aut(fiber s) by toAutContinuousMulEquiv, compatibly with evaluation. Hence it describes the same subgroups and fibres. ConnectedSpace P.obj.left and IsConnected P are equivalent by FundamentalGroup.Connected; connected fibres are transitive.",
    "uses": [
     "lem-fet-galois-category",
     "lem-galois-finite-etale-connected-object",
@@ -29,32 +29,17 @@
    "elementary": false
   },
   {
-   "text": "Conversely, suppose the fibre of P is nonempty and transitive. A noninitial monomorphism i:Z→P has a fibre point z. Given p in the fibre of P, move i(z) to p by an automorphism of the fibre functor; naturality gives a preimage of p. The fibre map is injective because i is mono, so it is bijective; conservativity makes i an isomorphism. Thus P is a connected object, and the already proved connectedSpace_of_isConnected in FundamentalGroup.Connected makes its underlying scheme connected. This replaces the clopen-to-two-copies detour.",
+   "text": "The proved upstream isOpen_stabilizer gives open fibre stabilizers. exists_isConnected_stabilizer_eq realizes an open subgroup by the finite continuous coset action G/H, using exists_fiber_equiv and the finite étale equivalenceContAction. Nonempty transitive fibre implies IsConnected by isConnected_of_isPretransitive; connectedSpace_of_isConnected gives scheme connectedness.",
    "uses": [
     "lem-fet-galois-category",
     "def-galois-connected-object",
-    "def-weil-connected-scheme"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The fibre has the discrete topology and the evaluation action is continuous, so Mathlib stabilizer_isOpen gives openness. The existing Mathlib index_stabilizer_of_transitive gives index equal to Nat.card of the fibre.",
-   "uses": [
+    "def-weil-connected-scheme",
     "def-galois-fibre-functor"
    ],
    "elementary": false
   },
   {
-   "text": "For an open subgroup H of G=Aut(fiber s), H.quotient_finite_of_isOpen makes G/H finite and QuotientGroup.discreteTopology gives its discrete topology. Its quotient action is continuous and transitive. Transfer it along an equivalence from a ULift of a finite ordinal, so the resulting finite continuous action has universe u even though G is larger. Essential surjectivity of Mathlib functorToContAction realizes this action by a cover P. Transfer the point 1H and transitivity through the action isomorphism; step 2 makes P connected and MulAction.stabilizer_quotient identifies its marked stabilizer with H.",
-   "uses": [
-    "lem-fet-galois-category",
-    "def-galois-fibre-functor",
-    "def-weil-connected-scheme"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For equal stabilizers, choose a transporter k(x) with k(x)p=x for each fibre point x, and define f(x)=k(x)q. The equality ap=bp iff aq=bq follows from equality of stabilizers applied to b⁻¹a. It proves independence, equivariance and injectivity; transitivity on the second fibre proves surjectivity. Fullness of functorToAction lifts f to a cover map; fibre conservativity makes it an isomorphism preserving the points. Conversely naturality and the injectivity of a fibre isomorphism preserve stabilizers. Finally transitivity expresses an arbitrary isomorphism image of p as gq; h fixes gq iff g⁻¹hg fixes q, which proves both directions of the conjugacy criterion from the pointed criterion.",
+   "text": "The proved upstream exists_equiv_of_stabilizer_eq constructs the pointed equivariant bijection by orbit-stabilizer. Full faithfulness of equivalenceContAction lifts it to an isomorphism of covers, yielding exists_iso_fiber_map_eq_iff. Conversely naturality and injectivity preserve stabilizers. The proved nonempty_iso_iff expresses the unpointed criterion as equality with the stabilizer of g • q. The action identity h fixes g • q iff g⁻¹hg fixes q is exactly the stated conjugacy relation.",
    "uses": [
     "lem-fet-galois-category",
     "lem-galois-finite-etale-connected-object",
@@ -63,11 +48,10 @@
    "elementary": false
   },
   {
-   "text": "A finite etale map f is finite locally free. The pullback universal property gives an explicit equivalence from (fiber s).obj P to the Ω-points of the affine geometric pullback h=pullback.snd f s. Compose with the existing, proved Scheme.Hom.overHomEquivAlgHom; the proved Algebra.Etale.natCard_algHom_eq_finrank computes the cardinality as h.finrankΓ. These library lemmas apply to arbitrary etale algebras and affine schemes, with no group-scheme hypothesis. Scheme.Hom.fiberDegree_of_isPullback and fiberDegree_eq_finrankΓ identify this with f.fiberDegree at the image of a point of Spec Ω. finiteLocallyFree_fiberDimension_isLocallyConstant is constant on the connected base, so every fibre degree equals this number. Step 3 identifies the number with the stabilizer index.",
+   "text": "The proved upstream natCard_fiber_eq_index identifies the fibre cardinality of a connected cover with the stabilizer index. The new, fully proved lem-fet-geometric-fiber-degree directly identifies this index with the finite locally free degree of the cover morphism, by a geometric-fibre computation and the same Mathlib orbit-stabilizer theorem. Thus the rank conclusion is preserved, not replaced merely by a set-cardinality convention. The lisse-trivialization consumer imports both the official classification and this degree comparison.",
    "uses": [
-    "def-weil-etale-morphism",
-    "def-pc-finite-locally-free",
-    "lem-weil-pbc-finite-locally-free-degree-locally-constant"
+    "def-galois-fibre-functor",
+    "lem-fet-geometric-fiber-degree"
    ],
    "elementary": false
   }
@@ -78,14 +62,12 @@
   "def-galois-connected-object",
   "def-weil-connected-scheme",
   "def-galois-fibre-functor",
-  "def-weil-etale-morphism",
-  "def-pc-finite-locally-free",
-  "lem-weil-pbc-finite-locally-free-degree-locally-constant"
+  "lem-fet-geometric-fiber-degree"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/pione.tex",
-  "place": "Tags 0BN4, 0BNB and 0BND; explicit transporter, quotient-action and degree proof by Y2, 2026-10-18. Degree local constancy: morphisms.tex, Tags 02K9 and 04MH."
+  "place": "Tags 0BN4, 0BNB and 0BND; official FundamentalGroup.OpenSubgroups classification. Rank comparison retained in lem-fet-geometric-fiber-degree (morphisms.tex Tags 02K9 and 04MH). Retirement and API comparison by F6, 2026-10-21."
  },
  "mathlib_searches": [
   {
@@ -232,14 +214,21 @@
   "note": "Checked immutable statements, dependencies, sources, exact declarations, edge cases, docstrings, report sections, and verbatim signature. Server scompile passed in 1.7 seconds with no diagnostics; all pilot gates satisfied."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.FundamentalGroup.OpenSubgroups",
-  "declaration": "AlgebraicGeometry.Scheme.FiniteEtale.connected_cover_open_subgroups",
-  "file": "lean/Sheaf/AlgebraicGeometry/FundamentalGroup/OpenSubgroups.lean",
-  "statement": "theorem connected_cover_open_subgroups {Y : Scheme.{u}} [ConnectedSpace Y] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y) : (∀ (P : Y.FiniteEtale), ConnectedSpace P.obj.left → ∀ p : (fiber s).obj P, IsOpen (MulAction.stabilizer (Aut (fiber s)) p : Set (Aut (fiber s))) ∧ P.obj.hom.IsFiniteLocallyFreeOfDegree (MulAction.stabilizer (Aut (fiber s)) p).index) ∧ (∀ H : Subgroup (Aut (fiber s)), IsOpen (H : Set (Aut (fiber s))) → ∃ (P : Y.FiniteEtale), ConnectedSpace P.obj.left ∧ ∃ p : (fiber s).obj P, MulAction.stabilizer (Aut (fiber s)) p = H) ∧ (∀ (P Q : Y.FiniteEtale), ConnectedSpace P.obj.left → ConnectedSpace Q.obj.left → ∀ (p : (fiber s).obj P) (q : (fiber s).obj Q), (∃ e : P ≅ Q, (fiber s).map e.hom p = q) ↔ MulAction.stabilizer (Aut (fiber s)) p = MulAction.stabilizer (Aut (fiber s)) q) ∧ (∀ (P Q : Y.FiniteEtale), ConnectedSpace P.obj.left → ConnectedSpace Q.obj.left → ∀ (p : (fiber s).obj P) (q : (fiber s).obj Q), Nonempty (P ≅ Q) ↔ ∃ g : Aut (fiber s), ∀ h : Aut (fiber s), h ∈ MulAction.stabilizer (Aut (fiber s)) p ↔ g⁻¹ * h * g ∈ MulAction.stabilizer (Aut (fiber s)) q)",
-  "branch": "newtargets-dag",
-  "by": "NO",
-  "date": "2026-10-15",
-  "existing": false
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.FundamentalGroup.OpenSubgroups",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FundamentalGroup/OpenSubgroups.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteEtale.galois_openSubgroups",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.FiniteEtale.galois_openSubgroups",
+   "AlgebraicGeometry.Scheme.FiniteEtale.exists_iso_fiber_map_eq_iff",
+   "AlgebraicGeometry.Scheme.FiniteEtale.exists_isConnected_stabilizer_eq",
+   "AlgebraicGeometry.Scheme.FiniteEtale.natCard_fiber_eq_index"
+  ],
+  "statement": "theorem galois_openSubgroups : (∀ (P : Y.FiniteEtale) (x : (fiber s).obj P), IsOpen (MulAction.stabilizer G x : Set G)) ∧ (∀ H : OpenSubgroup G, ∃ (P : Y.FiniteEtale) (x : (fiber s).obj P), IsConnected P ∧ MulAction.stabilizer G x = H) ∧ (∀ (P Q : Y.FiniteEtale) [IsConnected P] [IsConnected Q] (x : (fiber s).obj P) (y : (fiber s).obj Q), Nonempty (P ≅ Q) ↔ ∃ g : G, MulAction.stabilizer G x = MulAction.stabilizer G (g • y)) ∧ ∀ (P : Y.FiniteEtale) [IsConnected P] (x : (fiber s).obj P), Nat.card ((fiber s).obj P) = (MulAction.stabilizer G x).index",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-21",
+  "note": "Retired the Sheaf copy under the human 2026-10-20 hand-off. The upstream galois_openSubgroups gives realization, conjugacy classification and fibre-cardinality index; exists_iso_fiber_map_eq_iff gives the pointed criterion. IsConnected and scheme connectedness agree by FundamentalGroup.Connected. The upstream group is any small fundamental-group model; exists_isFundamentalGroup and toAutContinuousMulEquiv identify it canonically with Aut(fiber s), with the same evaluation action and topology. The finite locally free degree comparison is preserved, without sorry and for separably closed Ω, as AlgebraicGeometry.Scheme.FiniteEtale.isFiniteLocallyFreeOfDegree_index_stabilizer in Sheaf.AlgebraicGeometry.FundamentalGroup.FiberCardDegree (node lem-fet-geometric-fiber-degree). It directly states degree equal to stabilizer index, so the original rank meaning is retained. No caller of the retired connected_cover_open_subgroups declaration exists. The archived DenseOpenPiOneSurjective parent uses only the node in its proof plan and has no Lean call to that retired name; its rework must switch its archived proof import to this twin."
  },
  "blueprint_update": {
   "snapshot": "main-20261015",
@@ -259,13 +248,13 @@
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Y2",
+  "reviewer": "C-f14cf",
+  "group": "F6",
   "result": "pass",
-  "landing": "20261018T062952-L-692844",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T221142-L-4149887",
+  "kind": "interface",
+  "note": "independent cc review: retired Sheaf OpenSubgroups copy vs twin WeilConjectures.AlgebraicGeometry.FundamentalGroup.OpenSubgroups (galois_openSubgroups, exists_iso_fiber_map_eq_iff, exists_isConnected_stabilizer_eq) plus new proved FiberCardDegree degree=index lemma vs node cor-galois-open-subgroups statement; consumers diffed vs live (import lines only) and compiled"
  }
 }

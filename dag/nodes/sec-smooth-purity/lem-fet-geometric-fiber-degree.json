@@ -1,0 +1,146 @@
+{
+ "id": "lem-fet-geometric-fiber-degree",
+ "kind": "statement",
+ "title": "Connected finite étale degree equals stabilizer index",
+ "statement": "Let Y be a connected scheme [def-weil-connected-scheme], Ω a separably closed field, s : Spec Ω → Y a geometric point, and G a compact topological fundamental-group model of its finite étale fibre functor [def-galois-fibre-functor, lem-fet-galois-category]. Let P be a connected object [def-galois-connected-object] of the category of finite étale Y-schemes [def-galois-categories] and p a point of its geometric fibre. Then the structural map P → Y is finite locally free of degree [def-pc-finite-locally-free] equal to the index in G of the stabilizer of p.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 02K9 and 04MH; geometric fibre calculation in literature/stacks-project/pione.tex, Tag 0BNB. This is the degree-comparison part of cor-galois-open-subgroups, already proved by Y2 in its former private degree_eq_fiber_card helper."
+ },
+ "stmt_deps": [
+  "def-weil-connected-scheme",
+  "def-galois-fibre-functor",
+  "lem-fet-galois-category",
+  "def-galois-connected-object",
+  "def-galois-categories",
+  "def-pc-finite-locally-free"
+ ],
+ "proof": [
+  {
+   "text": "A finite étale map f is finite locally free. Pull it back along s, giving an affine étale Ω-scheme h. The pullback universal property identifies the geometric fibre of P with Ω-points of h over Spec Ω. The proved Scheme.Hom.overHomEquivAlgHom identifies these with Ω-algebra maps Γ(h) → Ω. The proved Algebra.Etale.natCard_algHom_eq_finrank equates their cardinality with h.finrankΓ. These constructions also work for the empty cover: its algebra is zero, its fibre has no points, and both numbers are zero.",
+   "uses": [
+    "def-galois-categories",
+    "def-pc-finite-locally-free",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a point of Spec Ω, which is nonempty because Ω is a field. Scheme.Hom.fiberDegree_of_isPullback and fiberDegree_eq_finrankΓ identify the degree of f at its image in Y with h.finrankΓ. By lem-weil-pbc-finite-locally-free-degree-locally-constant the fibre degree is locally constant on Y. Connectedness makes it constant, and its value at the chosen geometric point is the geometric fibre cardinality computed in step 1. This gives the required IsFiniteLocallyFreeOfDegree structure.",
+   "uses": [
+    "def-weil-connected-scheme",
+    "lem-weil-pbc-finite-locally-free-degree-locally-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since P is a connected categorical object, its fibre is a transitive G-set by the fundamental-group interface. The proved Mathlib index_stabilizer_of_transitive identifies the index of the stabilizer of p with the fibre cardinality. Rewrite by this equality and apply the private geometric-fibre degree comparison from steps 1 and 2. This uses no openness or algebraic closedness beyond separable closedness. For the identity cover both sides are 1; for a general finite disjoint union, steps 1 and 2 still compute its degree, whereas step 3 is used only for transitive fibres.",
+   "uses": [
+    "lem-fet-galois-category",
+    "def-galois-connected-object",
+    "def-galois-fibre-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-galois-categories",
+  "def-pc-finite-locally-free",
+  "def-weil-etale-morphism",
+  "def-weil-connected-scheme",
+  "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+  "lem-fet-galois-category",
+  "def-galois-connected-object",
+  "def-galois-fibre-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 02K9 and 04MH, together with pione.tex Tag 0BNB; proved Y2 degree_eq_fiber_card extracted and generalized from IsAlgClosed to IsSepClosed by F6, 2026-10-21."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "natCard_fiber_eq_index|galois_openSubgroups|exists_iso_fiber_map_eq_iff",
+   "results": "No matches",
+   "date": "2026-10-20",
+   "verdict": "No direct scheme-degree comparison. Mathlib supplies orbit-stabilizer and locally constant rank; the upstream library supplies the etale-algebra cardinality and fibre-degree APIs used by the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite etale cover of a connected scheme is finite locally free of degree the cardinality of its geometric fiber",
+   "results": "AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsFinite.instIsIntegralHom",
+   "date": "2026-10-20",
+   "verdict": "No direct scheme-degree comparison. Mathlib supplies orbit-stabilizer and locally constant rank; the upstream library supplies the etale-algebra cardinality and fibre-degree APIs used by the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the degree of a finite etale cover over a connected scheme equals the cardinality of its geometric fibre",
+   "results": "CategoryTheory.PreGaloisCategory.card_hom_le_card_fiber_of_connected, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.Etale.finitePresentation, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero",
+   "date": "2026-10-20",
+   "verdict": "No direct scheme-degree comparison. Mathlib supplies orbit-stabilizer and locally constant rank; the upstream library supplies the etale-algebra cardinality and fibre-degree APIs used by the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "fiber.*(card|finrank)|finrank.*fiber|isLocallyConstant_finrank",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean",
+   "date": "2026-10-20",
+   "verdict": "No direct scheme-degree comparison. Mathlib supplies orbit-stabilizer and locally constant rank; the upstream library supplies the etale-algebra cardinality and fibre-degree APIs used by the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fiberDegree\", \"card\"",
+   "results": "No matches",
+   "date": "2026-10-20",
+   "verdict": "No direct scheme-degree comparison. Mathlib supplies orbit-stabilizer and locally constant rank; the upstream library supplies the etale-algebra cardinality and fibre-degree APIs used by the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FundamentalGroup.OpenSubgroups",
+  "date": "2026-10-21",
+  "group": "F6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-galois-open-subgroups",
+   "place": "the finite locally free degree comparison in proof step 6"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FundamentalGroup.FiberCardDegree",
+  "file": "lean/Sheaf/AlgebraicGeometry/FundamentalGroup/FiberCardDegree.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteEtale.isFiniteLocallyFreeOfDegree_index_stabilizer",
+  "statement": "theorem isFiniteLocallyFreeOfDegree_index_stabilizer {Y : Scheme.{u}} [ConnectedSpace Y] {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G] (P : Y.FiniteEtale) [IsConnected P] (p : (fiber s).obj P) : P.obj.hom.IsFiniteLocallyFreeOfDegree (MulAction.stabilizer G p).index",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-f14cf",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261020T221142-L-4149887",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-f14cf",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261020T221142-L-4149887",
+  "kind": "interface",
+  "note": "independent cc review: retired Sheaf OpenSubgroups copy vs twin WeilConjectures.AlgebraicGeometry.FundamentalGroup.OpenSubgroups (galois_openSubgroups, exists_iso_fiber_map_eq_iff, exists_isConnected_stabilizer_eq) plus new proved FiberCardDegree degree=index lemma vs node cor-galois-open-subgroups statement; consumers diffed vs live (import lines only) and compiled"
+ }
+}

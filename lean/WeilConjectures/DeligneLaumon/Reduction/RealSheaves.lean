@@ -16,7 +16,7 @@ public import WeilConjectures.WeilSheaf.UpperStarPointwise
 import Sheaf.AlgebraicGeometry.ClosedPointField
 import Sheaf.AlgebraicGeometry.FiniteFieldClosedSubschemeDescent
 import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
-import Sheaf.AlgebraicGeometry.FundamentalGroup.OpenSubgroups
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.OpenSubgroups
 import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
 import Sheaf.CategoryTheory.Galois.GaloisTransitive
 import Sheaf.DeligneLaumon.SmoothAffineFrontierStratification
