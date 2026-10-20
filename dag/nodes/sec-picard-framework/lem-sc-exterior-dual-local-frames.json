@@ -23,14 +23,12 @@
    "elementary": false
   },
   {
-   "text": "Using overHomObjIso and homObjFreeUnitIso, the given trivialization gives a rank-r trivialization of the internal dual on U. Apply the local exterior comparison to M and its internal dual. Transport a.exteriorPower and phiBasis.exteriorPower through the bijective sheafification units on V to obtain d and b. Their basis-vector formulas are exactly exteriorPower.basis_apply followed by the definition of exteriorSheafSection. Use the official local comparison and rewrite its conclusion to the legacy exterior constructions using lem-sc-exterior-sheaf-presheaf-upstream-comparison, lem-sc-exterior-sheaf-upstream-comparison. These are equalities of the actual presheaves and sheaves, so this transport changes no hypothesis or conclusion.",
+   "text": "Using overHomObjIso and homObjFreeUnitIso, the given trivialization gives a rank-r trivialization of the internal dual on U. Apply the official local exterior comparison to M and its internal dual. Transport a.exteriorPower and phiBasis.exteriorPower through the bijective sheafification units on V to obtain d and b. Their basis-vector formulas are exteriorPower.basis_apply followed by the definition of wedge. All constructions here use the official exteriorPower and PresheafOfModules.exteriorPower directly.",
    "uses": [
     "def-pur-sheaf-hom",
     "lem-sc-exterior-sheaf-local-free-comparison",
     "lem-weil-pbc-exterior-power-free-basis",
-    "def-sc-sheaf-exterior-power",
-    "lem-sc-exterior-sheaf-presheaf-upstream-comparison",
-    "lem-sc-exterior-sheaf-upstream-comparison"
+    "def-sc-sheaf-exterior-power"
    ],
    "elementary": false
   },
@@ -49,14 +47,12 @@
   "def-pur-sheaf-hom",
   "lem-sc-exterior-sheaf-local-free-comparison",
   "lem-weil-pbc-exterior-power-free-basis",
-  "def-sc-sheaf-exterior-power",
-  "lem-sc-exterior-sheaf-presheaf-upstream-comparison",
-  "lem-sc-exterior-sheaf-upstream-comparison"
+  "def-sc-sheaf-exterior-power"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "dag/nodes/sec-picard-framework/lem-sc-exterior-dual-local-frames.json",
-  "place": "Formalized the three original coordinate steps: proved the generic local dual evaluation, transported exterior bases via the remaining local free comparison, and applied evaluation a second time to the exterior sheaf. K5 retirement, 2026-10-20: retain the same proof and transport the official comparison along the proved exterior-construction equalities."
+  "document": "lean/WeilConjectures/AlgebraicGeometry/DeterminantDualLocalFrames.lean",
+  "place": "Existing proved upstream coordinate argument. U4 retirement, 2026-10-20: attach the node to the official theorem; compatibility with the legacy exterior constructions is used only by the remaining consumer."
  },
  "mathlib_searches": [
   {
@@ -121,14 +117,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.DeterminantDualLocalFrames",
-  "file": "lean/Sheaf/AlgebraicGeometry/DeterminantDualLocalFrames.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.DeterminantDualLocalFrames",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DeterminantDualLocalFrames.lean",
   "declaration": "AlgebraicGeometry.exterior_dual_local_frames",
-  "statement": "theorem exterior_dual_local_frames (X : Scheme.{u}) (M : X.Modules) (n : ℕ)\n    (U : X.Opens) (r : ℕ)\n    (e : M.over U ≅ SheafOfModules.free (ULift.{u} (Fin r)))\n    (V : X.Opens) (g : V ⟶ U) :\n    ∃ (a : Module.Basis (Fin r) (X.presheaf.obj (op V)) (M.val.obj (op V)))\n      (φ : Fin r → (Scheme.Modules.dual M).val.obj (op V))\n      (b : Module.Basis (Set.powersetCard (Fin r) n) (X.presheaf.obj (op V))\n        ((Scheme.Modules.exteriorSheaf (Scheme.Modules.dual M) n).val.obj (op V)))\n      (d : Module.Basis (Set.powersetCard (Fin r) n) (X.presheaf.obj (op V))\n        ((Scheme.Modules.exteriorSheaf M n).val.obj (op V)))\n      (c : (Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n)).val.obj (op V) ≃ₗ[\n        X.presheaf.obj (op V)] Module.Dual (X.presheaf.obj (op V))\n          ((Scheme.Modules.exteriorSheaf M n).val.obj (op V))),\n      (∀ (j : Fin r) (x : M.val.obj (op V)),\n        (φ j).app (op (Over.mk (𝟙 V))) x = a.coord j x) ∧\n      (∀ s, b s = Scheme.Modules.exteriorSheafSection (Scheme.Modules.dual M) n V\n        (φ ∘ Set.powersetCard.ofFinEmbEquiv.symm s)) ∧\n      (∀ s, d s = Scheme.Modules.exteriorSheafSection M n V\n        (a ∘ Set.powersetCard.ofFinEmbEquiv.symm s)) ∧\n      (∀ (ψ : (Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n)).val.obj (op V))\n        (x : (Scheme.Modules.exteriorSheaf M n).val.obj (op V)),\n        c ψ x = ψ.app (op (Over.mk (𝟙 V))) x)",
+  "statement": "theorem exterior_dual_local_frames (X : Scheme.{u}) (M : X.Modules) (n : ℕ)\n    (U : X.Opens) (r : ℕ)\n    (e : M.over U ≅ SheafOfModules.free (ULift.{u} (Fin r)))\n    (V : X.Opens) (g : V ⟶ U) :\n    ∃ (a : Module.Basis (Fin r) (X.presheaf.obj (op V)) (M.val.obj (op V)))\n      (φ : Fin r → (Scheme.Modules.dual M).val.obj (op V))\n      (b : Module.Basis (Set.powersetCard (Fin r) n) (X.presheaf.obj (op V))\n        ((Scheme.Modules.exteriorPower (Scheme.Modules.dual M) n).val.obj (op V)))\n      (d : Module.Basis (Set.powersetCard (Fin r) n) (X.presheaf.obj (op V))\n        ((Scheme.Modules.exteriorPower M n).val.obj (op V)))\n      (c : (Scheme.Modules.dual (Scheme.Modules.exteriorPower M n)).val.obj (op V) ≃ₗ[\n        X.presheaf.obj (op V)] Module.Dual (X.presheaf.obj (op V))\n          ((Scheme.Modules.exteriorPower M n).val.obj (op V))),\n      (∀ (j : Fin r) (x : M.val.obj (op V)),\n        (φ j).app (op (Over.mk (𝟙 V))) x = a.coord j x) ∧\n      (∀ s, b s = wedge (M := (Scheme.Modules.dual M)) (r := n) (U := V)\n        (φ ∘ Set.powersetCard.ofFinEmbEquiv.symm s)) ∧\n      (∀ s, d s = wedge (M := M) (r := n) (U := V)\n        (a ∘ Set.powersetCard.ofFinEmbEquiv.symm s)) ∧\n      (∀ (ψ : (Scheme.Modules.dual (Scheme.Modules.exteriorPower M n)).val.obj (op V))\n        (x : (Scheme.Modules.exteriorPower M n).val.obj (op V)),\n        c ψ x = ψ.app (op (Over.mk (𝟙 V))) x)",
   "branch": "sheaf-dag",
   "by": "K3",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "Retired the Sheaf twin under coord/retire-items.tsv. The official theorem uses the upstream exteriorPower and wedge; the unchanged legacy consumer transports it with exteriorSheafPresheaf_eq_exteriorPower."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -143,11 +140,11 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-5849a",
-  "group": "K5",
+  "reviewer": "C-f5e4a",
+  "group": "U4",
   "result": "pass",
-  "landing": "20261020T144252-L-2260026",
+  "landing": "20261020T163316-L-3729203",
   "kind": "interface",
-  "note": "independent cc review: Retirement of the Sheaf twin against coord/retire-items.tsv:60; upstream WeilConjectures exteriorSheaf_local_free_comparison (sorry-free) plus two new proved equality lemmas; the 5 adapted direct importers diffed against live and compiled (all 8 modules exit 0); axioms clean; consumer nodes change only proof/proof_deps/proof_origin"
+  "note": "independent cc review: retire-items.tsv:223 retirement; node lean.statement vs WeilConjectures/AlgebraicGeometry/DeterminantDualLocalFrames.lean:55 (byte-identical); adapted DeterminantDualPairingLocal signature vs live (unchanged), compiled with its importer DeterminantExteriorDualIso; axioms clean"
  }
 }

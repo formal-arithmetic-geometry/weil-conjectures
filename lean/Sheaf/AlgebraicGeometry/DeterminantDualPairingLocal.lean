@@ -7,7 +7,9 @@ module
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
-import Sheaf.AlgebraicGeometry.DeterminantDualLocalFrames
+import WeilConjectures.AlgebraicGeometry.DeterminantDualLocalFrames
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPresheafComparison
+import Mathlib.Tactic.DepRewrite
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.LinearAlgebra.Dual.Basis
 
@@ -23,6 +25,15 @@ universe u
 open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
+-- The transport below has equal section objects but different presheaf restriction maps.
+-- Express its dependent recursors as casts, which simplify on the identical section types.
+private theorem rec_eq_cast {α : Sort*} {a b : α}
+    {β : (b : α) → a = b → Sort*} (h : a = b) (x : β a rfl) :
+    Eq.rec (motive := β) x h = cast (by cases h; rfl : β a rfl = β b h) x := by
+  cases h
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
 /-- A determinant-formula morphism is bijective on sections below an open on which M
 is finite free, in every exterior degree.
 Source: Stacks Project, Tag 0BRT, determinant pairing; Mathlib
@@ -58,7 +69,13 @@ theorem exterior_dual_pairing_app_bijective (X : Scheme.{u}) (M : X.Modules) (n 
     (V : X.Opens) (g : V ⟶ U) :
     Function.Bijective (f.val.app (op V)) := by
   classical
-  obtain ⟨a, φ, b, d, c, hφ, hb, hd, hc⟩ := exterior_dual_local_frames X M n U r e V g
+  have h := exterior_dual_local_frames X M n U r e V g
+  dsimp +instances only [Scheme.Modules.wedge, Scheme.Modules.toSheafificationObj,
+    Scheme.Modules.exteriorPower, Scheme.Modules.sheafificationObj] at h
+  rw! (castMode := .all) [← Scheme.Modules.exteriorSheafPresheaf_eq_exteriorPower M n,
+    ← Scheme.Modules.exteriorSheafPresheaf_eq_exteriorPower (Scheme.Modules.dual M) n] at h
+  obtain ⟨a, φ, b, d, c, hφ, hb, hd, hc⟩ := h
+  simp only [rec_eq_cast, cast_eq] at hb hd
   let targetBasis := d.dualBasis.map c.symm
   have hmap (s : Set.powersetCard (Fin r) n) : f.val.app (op V) (b s) = targetBasis s := by
     apply c.injective
@@ -83,7 +100,12 @@ theorem exterior_dual_pairing_app_bijective (X : Scheme.{u}) (M : X.Modules) (n 
           (Matrix.of fun i j ↦
             a.coord (Set.powersetCard.ofFinEmbEquiv.symm s j)
               (a (Set.powersetCard.ofFinEmbEquiv.symm t i))).det := by
-        rw [hc, hb, hd, hf]
+        rw [hc, hb, hd]
+        change (f.val.app (op V) (Scheme.Modules.exteriorSheafSection
+          (Scheme.Modules.dual M) n V (φ ∘ Set.powersetCard.ofFinEmbEquiv.symm s))).app
+            (op (Over.mk (𝟙 V))) (Scheme.Modules.exteriorSheafSection M n V
+              (a ∘ Set.powersetCard.ofFinEmbEquiv.symm t)) = _
+        rw [hf]
         simp only [Function.comp_apply, hφ]
       _ = d.dualBasis s (d t) := hdet
       _ = c (targetBasis s) (d t) := by simp [targetBasis]
@@ -91,7 +113,9 @@ theorem exterior_dual_pairing_app_bijective (X : Scheme.{u}) (M : X.Modules) (n 
       (b.equiv targetBasis (Equiv.refl _)).toLinearMap := by
     apply b.ext
     intro s
-    simpa using hmap s
+    change f.val.app (op V) (b s) = (b.equiv targetBasis (Equiv.refl _)) (b s)
+    rw [Module.Basis.equiv_apply]
+    exact hmap s
   rw [show (f.val.app (op V) : _ → _) = b.equiv targetBasis (Equiv.refl _) by
     exact congrArg DFunLike.coe heq]
   exact (b.equiv targetBasis (Equiv.refl _)).bijective
