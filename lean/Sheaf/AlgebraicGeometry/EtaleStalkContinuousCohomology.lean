@@ -11,7 +11,7 @@ public import Mathlib.FieldTheory.KrullTopology
 public import Mathlib.RepresentationTheory.Homological.ContCohomology.Basic
 import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
 import Sheaf.AlgebraicGeometry.EtaleGlobalSectionsGaloisInvariants
-import Sheaf.RepresentationTheory.DiscreteInvariantsContinuousComparison
+import WeilConjectures.RepresentationTheory.DiscreteInvariantsContinuousComparison
 import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 import WeilConjectures.FieldTheory.GaloisAutomorphismExtension
 import Mathlib.FieldTheory.Galois.Profinite
@@ -132,8 +132,8 @@ theorem nonempty_equiv_etale_cohomology_continuous_stalk
       ext z
       apply Subtype.ext
       exact ht X Y f z)
-  obtain ⟨e⟩ := Rep.nonempty_equiv_rightDerived_continuousCohomology.{u, u + 2, u + 1, u + 1, u}
-    (Gal(Ks/K)) _ E V η F M d.toIntLinearEquiv hd n
+  let e := (Rep.rightDerivedAddEquivContinuousCohomology.{u, u + 2, u + 1, u + 1, u}
+    (Gal(Ks/K)) _ E V η F M d.toIntLinearEquiv hd n).toEquiv
   have hH : Nonempty (Sheaf.H.{u + 1} F n ≃+ (V.rightDerived n).obj F) := by
     cases n with
     | zero =>

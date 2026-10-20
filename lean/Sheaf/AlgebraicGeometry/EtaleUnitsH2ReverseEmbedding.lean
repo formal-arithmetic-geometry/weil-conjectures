@@ -9,7 +9,7 @@ public import WeilConjectures.FieldTheory.GaloisUnitsCohomology
 import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
 import Sheaf.AlgebraicGeometry.EtaleFieldSectionsInvariants
 import Sheaf.AlgebraicGeometry.EtaleUnitsStalkRepresentation
-import Sheaf.RepresentationTheory.DiscreteInvariantsContinuousComparison
+import WeilConjectures.RepresentationTheory.DiscreteInvariantsContinuousComparison
 import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 import Mathlib.FieldTheory.Galois.Profinite
 
@@ -73,8 +73,8 @@ theorem nonempty_embedding_cohomologicalBrauerGroup_galoisUnitsH2 (K : Type u) [
     S.smallEtaleTopology (Scheme.Etale.mk (CategoryTheory.CategoryStruct.id S))
     (CategoryTheory.MorphismProperty.Over.mkIdTerminal _ S) S.gmSheaf 1
   have : DiscreteTopology (Field.galoisUnitsTopRep K).V := ⟨rfl⟩
-  obtain ⟨b⟩ := Rep.nonempty_equiv_rightDerived_continuousCohomology.{u, u + 2, u + 1, u + 1, u}
-    (Gal(SeparableClosure K/K)) _ E Γ η S.gmSheaf (Field.galoisUnitsTopRep K) e he 2
+  let b := (Rep.rightDerivedAddEquivContinuousCohomology.{u, u + 2, u + 1, u + 1, u}
+    (Gal(SeparableClosure K/K)) _ E Γ η S.gmSheaf (Field.galoisUnitsTopRep K) e he 2).toEquiv
   exact ⟨(a.toEquiv.trans b).toEmbedding⟩
 
 end AlgebraicGeometry.Scheme

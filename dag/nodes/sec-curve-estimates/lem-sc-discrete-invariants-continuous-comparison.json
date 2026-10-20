@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "Choose an injective resolution I of F. Define V to be the invariants functor after E, and deduce V.Additive from eta via Functor.additive_of_iso. InjectiveResolution.isoRightDerivedObj computes derived Gamma using Gamma(I). NatIso.mapHomologicalComplex eta identifies Gamma(I) with V(I); apply the homology functor to this complex isomorphism and take its underlying additive equivalence.",
+   "text": "Use the canonical injectiveResolution F as I. Define V to be the invariants functor after E, and deduce V.Additive from eta via Functor.additive_of_iso. InjectiveResolution.isoRightDerivedObj computes derived Gamma using Gamma(I). NatIso.mapHomologicalComplex eta identifies Gamma(I) with V(I); apply the homology functor to this complex isomorphism and take its underlying additive equivalence.",
    "uses": [
     "def-sp-injective-resolutions",
     "def-sp-left-exact-additive"
@@ -23,14 +23,14 @@
    "elementary": true
   },
   {
-   "text": "Give the underlying module E(F) the discrete topology and construct its continuous representation M directly, by viewing each action linear map as a continuous linear map. Apply the existing upstream invariantResolutionHomologyAddEquivContinuousCohomology construction to M with the identity coefficient equivalence, then use toEquiv. This identifies H^q(V(I)) with continuous cohomology of M in the same universe.",
+   "text": "Give the underlying module E(F) the discrete topology and construct its continuous representation M directly, by viewing each action linear map as a continuous linear map. Apply the existing upstream invariantResolutionHomologyAddEquivContinuousCohomology construction to M with the identity coefficient equivalence. This identifies H^q(V(I)) with continuous cohomology of M in the same universe.",
    "uses": [
     "lem-sc-discrete-resolution-continuous-cohomology"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the upstream continuousCohomologyAddEquivOfCoefficients construction to the given equivariant linear equivalence e from M to N, and forget its additive structure using toEquiv. Compose the three type equivalences to obtain the unchanged original conclusion.",
+   "text": "Apply continuousCohomologyAddEquivOfCoefficients to the given equivariant linear equivalence e from M to N. Compose the three additive equivalences to construct rightDerivedAddEquivContinuousCohomology in the adopted source. Its toEquiv, wrapped in Nonempty.intro, proves the unchanged conclusion. Both direct consumers now use this existing construction and toEquiv, so the duplicate Sheaf declaration is unnecessary.",
    "uses": [
     "lem-sc-continuous-cohomology-coefficient-equiv"
    ],
@@ -46,7 +46,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Section 0DVG; P3 formalizes resolution/natural-isomorphism transport and proves the cross-universe homogeneous coefficient transport; the same-universe profinite resolution comparison is a separate named theorem."
+  "place": "Section 0DVG; the adopted-source rightDerivedAddEquivContinuousCohomology constructs the additive comparison by resolution transport and coefficient transport. D7 retires the duplicate Sheaf theorem; forgetting additivity proves its unchanged statement."
  },
  "mathlib_searches": [
   {
@@ -95,14 +95,15 @@
  "chapter": "sec-curve-estimates",
  "unit": "sk-thm-br",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.RepresentationTheory.DiscreteInvariantsContinuousComparison",
-  "file": "lean/Sheaf/RepresentationTheory/DiscreteInvariantsContinuousComparison.lean",
-  "declaration": "Rep.nonempty_equiv_rightDerived_continuousCohomology",
-  "statement": "theorem nonempty_equiv_rightDerived_continuousCohomology (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (A : Type v) [Category.{w} A] [Abelian A] [HasInjectiveResolutions A] (E : A ≌ DiscreteContinuousRep.{0, u, max u s} ℤ G) (Γ : A ⥤ AddCommGrpCat.{max u s}) [Γ.Additive] (η : Γ ≅ E.functor ⋙ ObjectProperty.ι _ ⋙ Rep.invariantsFunctor ℤ G ⋙ forget₂ (ModuleCat.{max u s} ℤ) AddCommGrpCat) (F : A) (N : TopRep.{max u t} ℤ G) [DiscreteTopology N.V] (e : (E.functor.obj F).obj.V ≃ₗ[ℤ] N.V) (he : ∀ (g : G) (x : (E.functor.obj F).obj.V), e ((E.functor.obj F).obj.ρ g x) = N.ρ g (e x)) (q : ℕ) : Nonempty ((Γ.rightDerived q).obj F ≃ continuousCohomology q N)",
+  "existing": true,
+  "module": "WeilConjectures.RepresentationTheory.DiscreteInvariantsContinuousComparison",
+  "file": "lean/WeilConjectures/RepresentationTheory/DiscreteInvariantsContinuousComparison.lean",
+  "declaration": "Rep.rightDerivedAddEquivContinuousCohomology",
+  "statement": "noncomputable def rightDerivedAddEquivContinuousCohomology (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (A : Type v) [Category.{w} A] [Abelian A] [HasInjectiveResolutions A] (E : A ≌ DiscreteContinuousRep.{0, u, max u s} ℤ G) (Γ : A ⥤ AddCommGrpCat.{max u s}) [Γ.Additive] (η : Γ ≅ E.functor ⋙ ObjectProperty.ι _ ⋙ Rep.invariantsFunctor ℤ G ⋙ forget₂ (ModuleCat.{max u s} ℤ) AddCommGrpCat) (F : A) (N : TopRep.{max u t} ℤ G) [DiscreteTopology N.V] (e : (E.functor.obj F).obj.V ≃ₗ[ℤ] N.V) (he : ∀ (g : G) (x : (E.functor.obj F).obj.V), e ((E.functor.obj F).obj.ρ g x) = N.ρ g (e x)) (q : ℕ) : (Γ.rightDerived q).obj F ≃+ continuousCohomology q N",
   "branch": "sheaf-dag",
-  "by": "K3",
-  "date": "2026-10-12"
+  "by": "D7",
+  "date": "2026-10-21",
+  "note": "The upstream construction has the same universes and hypotheses and returns an additive equivalence. Taking toEquiv and Nonempty.intro proves the unchanged mathematical statement. The duplicate Sheaf theorem is retired and both direct consumers use the upstream construction."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -117,12 +118,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-85a83",
-  "group": "E1",
+  "reviewer": "C-93150",
+  "group": "D7",
   "result": "pass",
-  "landing": "20261020T163939-L-3833438",
+  "landing": "20261020T230729-L-605673",
   "kind": "interface",
-  "note": "independent cc review: removed Rep.nonempty_equiv_invariantResolution_continuousCohomology vs upstream WeilConjectures Rep.invariantResolutionHomologyAddEquivContinuousCohomology (same binders, ≃+ ⇒ .toEquiv); 3-line forced adaptation of sole consumer DiscreteInvariantsContinuousComparison (unclaimed) compiles; its importers EtaleStalkContinuousCohomology and EtaleUnitsH2ReverseEmbedding compile; nodes repointed existing:true; axioms clean"
+  "note": "independent cc review: removed Sheaf Rep.nonempty_equiv_rightDerived_continuousCohomology vs upstream WeilConjectures Rep.rightDerivedAddEquivContinuousCohomology (same binders/universes, ≃+ ⇒ .toEquiv); 2 forced adaptations of unclaimed consumers EtaleStalkContinuousCohomology and EtaleUnitsH2ReverseEmbedding compile individually with clean axioms; node repointed existing:true, only lean/proof/proof_origin changed"
  },
  "lean_audit": {
   "master": {
