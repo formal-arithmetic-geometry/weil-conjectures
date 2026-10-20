@@ -244,7 +244,7 @@ def main() -> int:
         except OSError: return ""
     rows = [(m, 3, "-", "", "retire-first", f"unblocks {n} rework roots")
             for m, n in sorted(rt_prio.items(), key=lambda x: (-x[1], x[0]))]
-    rows += [(c["item"], 3, "-", sum(qsorry(m) or 0 for m in c["members"]), "rework", f"cluster {len(c['members'])}")
+    rows += [(c["item"], 3, "-", sum(qsorry(m) or 0 for m in c["members"]), "rework", f"root; {c.get('waiting', 0)} quarantined importers wait")
              for c in rw_clusters]
     # retire items (the human, 2026-10-20; coord/retire-items.tsv): after the rework items, before every other queue
     rt_rows = rework.retire_rows()                       # open ones: every `after` copy gone

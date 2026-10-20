@@ -149,11 +149,14 @@ def open_items(rows=None, imports=None) -> list[str]:
 
 
 def clusters(rows=None, held: set | None = None) -> list[dict]:
-    """The rework items as CLUSTERS (the human, 2026-10-20): a root is a quarantined module whose fix has not landed and
-    that imports no other open rework module; its cluster is the root and every open rework module that imports it
-    (transitively, through rework modules: a library module importing a quarantined one is quarantined itself).
-    Clusters sharing members are merged. [{item: the representative root, roots: [...], members: [...] (roots first)}],
-    deepest (largest) first. One worker claims the whole cluster through its item."""
+    """The rework items (the human, 2026-10-20; corrected by the coordinator 2026-10-20 21:55): ONE item per root. A
+    root is a quarantined module whose fix has not landed and that imports no other open rework module. Its worker
+    fixes the root and adapts only the uses of the root declarations its fix changes; every other quarantined module
+    (an importer, also one shared by several roots) is assigned to no worker: tools/rework.py autorestore retries it
+    after green builds and it becomes an item of its own when it is a root that still fails. Roots used to be merged
+    when their importers overlapped: 65 independent roots became one 2,208-member item held by a single worker.
+    [{item: the root, roots: [root], members: [root], waiting: quarantined importers}], most importers first; a root
+    in `held` waits for a priority retire item."""
     rows = load() if rows is None else rows
     live = {m for m in rows if not landed(m)}
     if not live:
@@ -165,39 +168,16 @@ def clusters(rows=None, held: set | None = None) -> list[dict]:
         for i in ims:
             if i != m:
                 rev[i].add(m)
-    member_of = {}
-    for r in roots:
+    def waiting(r):
         seen, st = {r}, [r]
         while st:
             for p in rev.get(st.pop(), ()):
                 if p not in seen:
                     seen.add(p); st.append(p)
-        member_of[r] = seen
-    parent = {r: r for r in roots}
-    def find(x):
-        while parent[x] != x:
-            parent[x] = parent[parent[x]]; x = parent[x]
-        return x
-    owner = {}
-    for r in roots:
-        for m in member_of[r]:
-            if m in owner:
-                parent[find(r)] = find(owner[m])
-            else:
-                owner[m] = r
-    groups = collections.defaultdict(list)
-    for r in roots:
-        groups[find(r)].append(r)
-    out = []
-    for rs in groups.values():
-        rs = sorted(rs)
-        mem = set().union(*(member_of[r] for r in rs))
-        free = [r for r in rs if r not in (held or set())]
-        if held is not None and not free:
-            continue          # every root waits for a priority retire item
-        rs = free + [r for r in rs if r not in free]
-        out.append({"item": rs[0], "roots": rs, "members": rs + sorted(mem - set(rs))})
-    return sorted(out, key=lambda c: (-len(c["members"]), c["item"]))
+        return len(seen) - 1
+    out = [{"item": r, "roots": [r], "members": [r], "waiting": waiting(r)}
+           for r in roots if held is None or r not in held]
+    return sorted(out, key=lambda c: (-c["waiting"], c["item"]))
 
 
 RETIRE = ROOT / "coord" / "retire-items.tsv"
