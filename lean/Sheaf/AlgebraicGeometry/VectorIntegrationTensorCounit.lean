@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CompactProjectionExchange
 public import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Arrows
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
+public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
 
 /-! # The coefficient-first tensor-counit mate

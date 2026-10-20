@@ -68,9 +68,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   {Z U X : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X)
 
 /-- The sheaf `Γ_Z N = ker(N ⟶ j_* j^* N)` of sections of a pro-étale sheaf `N` on `X` with
-support in the complement of `j`, the kernel of the unit of `j^* ⊣ j_*`. With
-`AlgebraicGeometry.ProEtale.closedUpperShriek` and `AlgebraicGeometry.ProEtale.IsFlasqueFor`, this
-is the pro-étale form of blueprint `def-pur-flasque-support`. -/
+support in the complement of `j`, the kernel of the unit of `j^* ⊣ j_*`. -/
 noncomputable def sectionsWithSupport :
     Sheaf (ProEt.topology X) A ⥤ Sheaf (ProEt.topology X) A where
   obj N := kernel ((upperStarLowerStarAdjunction A j).unit.app N)
@@ -89,9 +87,7 @@ complementary open immersion `j`, the functor
 
 on pro-étale sheaves, the closed inverse image of the sheaf of sections with support in `Z`
 (`AlgebraicGeometry.ProEtale.sectionsWithSupport`). A morphism of sheaves acts through the
-induced map of kernels. It is also the functor `s^!` of blueprint `def-pur-flasque-support`
-(pro-étale form), with `s_* s^! ≅ 𝒢_Z`
-(`AlgebraicGeometry.ProEtale.closedUpperShriekCompLowerStarIso`). -/
+induced map of kernels. -/
 noncomputable def closedUpperShriek :
     Sheaf (ProEt.topology X) A ⥤ Sheaf (ProEt.topology Z) A :=
   sectionsWithSupport A j ⋙ (i)^*[A]

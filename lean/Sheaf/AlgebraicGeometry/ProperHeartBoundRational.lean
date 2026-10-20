@@ -44,7 +44,7 @@ import Sheaf.Paper.CartesianCoefficientsFiniteFree
 import Sheaf.Paper.CondensedModuleDerivedPushpull
 import Sheaf.Paper.ProperHeartBoundLattice
 import Sheaf.Paper.ProperHeartBoundReduction
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 
 /-!
 # Proper direct-image bound for rational constructible module sheaves

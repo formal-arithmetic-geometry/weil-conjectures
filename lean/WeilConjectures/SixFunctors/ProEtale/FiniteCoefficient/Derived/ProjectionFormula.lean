@@ -157,18 +157,21 @@ lemma plus_derivedTensor_leftDerivedUpperStar_of_comparison [Etale.UpperStarPres
       (((Etale.derivedTensor A Z).obj M₀).obj ((L(Etale.upperStar A g)).obj L₀)) := by
   let P := (L(ProEtale.upperStar A g)).obj L
   obtain ⟨p, q, hNpq⟩ := (_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded N).2 hN
-  have hNP := _root_.DerivedCategory.homologyConcentratedIn_tensor_of_torAmplitudeIn_right hNpq
-    (torAmplitudeIn_leftDerivedUpperStar A g a b hL)
+  have hPN := _root_.DerivedCategory.homologyConcentratedIn_tensor_of_torAmplitudeIn_left
+    (torAmplitudeIn_leftDerivedUpperStar A g a b hL) hNpq
+  obtain ⟨β⟩ := _root_.DerivedCategory.nonempty_braidedCategory
+    (Sheaf (Scheme.ProEt.topology Z) A)
   let e : D(ν^*(Z)[A]).obj
-      (((Etale.derivedTensor A Z).obj M₀).obj ((L(Etale.upperStar A g)).obj L₀)) ≅ N ⊗ P :=
+      (((Etale.derivedTensor A Z).obj M₀).obj ((L(Etale.upperStar A g)).obj L₀)) ≅ P ⊗ N :=
     ((ν^*(Z)[A]).leftDerivedFunctorIsoMapDerivedCategory.app _).symm ≪≫
       asIso (((ν^*(Z)[A]).leftDerivedTensorComparison.app M₀).app _) ≪≫
       tensorIso eM.symm (((leftDerivedComparisonUpperStarCompUpperStarIso A g).app L₀).symm ≪≫
-        (L(ProEtale.upperStar A g)).mapIso eL.symm)
+        (L(ProEtale.upperStar A g)).mapIso eL.symm) ≪≫
+      @BraidedCategory.braiding _ _ _ β N P
   have hb : _root_.DerivedCategory.TStructure.t.bounded (D(ν^*(Z)[A]).obj
       (((Etale.derivedTensor A Z).obj M₀).obj ((L(Etale.upperStar A g)).obj L₀))) :=
     _root_.DerivedCategory.TStructure.t.bounded.prop_of_iso e.symm
-      ((_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded _).1 ⟨_, _, hNP⟩)
+      ((_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded _).1 ⟨_, _, hPN⟩)
   exact ((ν^*(Z)[A]).bounded_of_bounded_mapDerivedCategory_obj hb).1
 
 omit [ProEtale.UpperStarPreservesFlat A] in
@@ -185,9 +188,12 @@ lemma _root_.AlgebraicGeometry.Etale.plus_derivedTensor_leftDerivedUpperStar
     _root_.DerivedCategory.TStructure.t.plus
       (((Etale.derivedTensor A Z).obj M).obj ((L(Etale.upperStar A g)).obj L)) := by
   obtain ⟨p, q, hMpq⟩ := (_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded M).2 hM
-  have hMP := _root_.DerivedCategory.homologyConcentratedIn_tensor_of_torAmplitudeIn_right hMpq
-    (Etale.torAmplitudeIn_leftDerivedUpperStar A g a b hL)
-  exact ((_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded _).1 ⟨_, _, hMP⟩).1
+  have hPM := _root_.DerivedCategory.homologyConcentratedIn_tensor_of_torAmplitudeIn_left
+    (Etale.torAmplitudeIn_leftDerivedUpperStar A g a b hL) hMpq
+  obtain ⟨β⟩ := _root_.DerivedCategory.nonempty_braidedCategory (Sheaf Z.smallEtaleTopology A)
+  exact (_root_.DerivedCategory.TStructure.t.bounded.prop_of_iso
+    (@BraidedCategory.braiding _ _ _ β _ _)
+    ((_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded _).1 ⟨_, _, hPM⟩)).1
 
 variable {A} in
 /-- **The pro-étale projection formula from the étale one.** Let `c = (X ⟶[i] Z ⟶[g] Y)` be a

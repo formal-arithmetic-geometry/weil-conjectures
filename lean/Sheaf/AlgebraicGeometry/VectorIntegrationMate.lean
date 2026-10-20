@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.VectorBundleIntegration
 public import Sheaf.AlgebraicGeometry.CompactProjectionExchange
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
+public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 import Sheaf.AlgebraicGeometry.VectorIntegrationTensorCounit
 import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula

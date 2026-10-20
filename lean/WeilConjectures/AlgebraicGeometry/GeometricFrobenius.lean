@@ -441,13 +441,7 @@ namespace Scheme.Hom
 
 variable {k} {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k))
 
-/-- Blueprint `def-weil-frobenius-detailed`: Arithmetic and geometric Frobenius.
-
-The arithmetic Frobenius `φ_q : k̄ → k̄, z ↦ z ^ q` is `FiniteField.frobeniusAlgEquivOfAlgebraic`,
-its inverse `γ = Frob_q = φ_q⁻¹` is `FiniteField.geometricFrobeniusAlgEquivOfAlgebraic` and
-`σ = Spec γ` is `AlgebraicGeometry.specGeometricFrobenius`.
-
-The geometric Galois Frobenius `g_X := 𝟙 X₀ × σ` of the geometric fiber
+/-- The geometric Galois Frobenius `g_X := 𝟙 X₀ × σ` of the geometric fiber
 `X = X₀ ×_{Spec k} Spec k̄` of a scheme over a finite field, acting through the geometric
 Frobenius on the coefficients only. It is an automorphism of `X` semilinear over `k̄`: it
 commutes with the projection to the model `X₀`
