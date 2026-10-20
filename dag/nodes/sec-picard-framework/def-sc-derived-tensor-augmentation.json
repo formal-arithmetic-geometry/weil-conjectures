@@ -84,14 +84,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.DerivedTensorAugmentation",
+  "module": "WeilConjectures.AlgebraicGeometry.DerivedTensorAugmentation",
   "declaration": "AlgebraicGeometry.Scheme.IsDerivedTensorAugmentation",
-  "file": "lean/Sheaf/AlgebraicGeometry/DerivedTensorAugmentation.lean",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DerivedTensorAugmentation.lean",
   "statement": "def IsDerivedTensorAugmentation (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (A I B : schemeDerivedCategory X) (β : B ⟶ A) : Prop",
   "branch": "sheaf-dag",
-  "by": "H1",
-  "date": "2026-10-11",
-  "existing": false
+  "by": "N2",
+  "date": "2026-10-20",
+  "existing": true,
+  "note": "Retired the unused Sheaf twin in favour of the upstream definition. The only body change is IsAcyclicTensorKFlat to IsKFlatTensor; those predicates have identical defining bodies, so the node statement is unchanged."
  },
  "reviewed": {
   "date": "2026-10-11",
@@ -108,5 +109,15 @@
   "group": "H1",
   "result": "fix",
   "note": "X affine IsAffine, U qc IsCompact, E' schemeDerivedQCohCategory, A IsPerfect; FIX: alpha/beta|U/gamma|U now via overFunctor ⋙ overEquiv U .mapDerivedCategory in D(O_U) as siblings E1 534dc09bd/F1 4e129afd2/G1 00e16b592 and citer J1 PerfectSupportedMapLift (+U.toScheme HasDerivedCategory binder); support clause rewritten from a second form (vanishing restrictions to opens disjoint from T) to the landed homology-stalk Subsingleton form (J1 PerfectSupportedMapLift, PerfectGenerationOpenInduction); tied existential bU.hom = R.map beta, alpha = bU.inv ≫ R.map gamma; I perfect + IsDerivedTensorAugmentation (new def: K-flat P,J, eB to Tot(P⊗J), u : J ⟶ O_X[0], beta = eB.inv ≫ Q(1⊗u) ≫ Q(rho) ≫ eA.hom; same mapBifunctor/curriedTensor form as def-pc-derived-tensor-complex-cohomology-vanishes; tensorClosed .some only selects Prop MonoidalPreadditive); combined sandbox compile 6.1 s"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-ca353",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261020T145531-L-2408249",
+  "kind": "interface",
+  "note": "independent cc review: removed Sheaf copy IsDerivedTensorAugmentation vs upstream WeilConjectures twin: Iff.rfl equivalence compiled; no importers; node lean repointed with matching statement"
  }
 }
