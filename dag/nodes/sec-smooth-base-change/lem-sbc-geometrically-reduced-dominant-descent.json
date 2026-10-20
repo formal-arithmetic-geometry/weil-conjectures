@@ -1,0 +1,119 @@
+{
+ "id": "lem-sbc-geometrically-reduced-dominant-descent",
+ "kind": "statement",
+ "title": "Geometric reducedness descends along schematic dominance",
+ "statement": "Let k be a field [def-weil-field], W and X schemes, h:W→X a quasi-compact morphism (inverse images of affine open subsets are quasi-compact), and p:X→Spec k [def-weil-affine-spectrum]. Suppose h is scheme-theoretically dominant [def-nagata-scheme-theoretic-image], meaning that the kernel of the map O_X→h_*O_W is zero. If the composite h;p is geometrically reduced [def-pc-geometrically-irreducible], then p is geometrically reduced: every field base change of X over k is reduced [def-pc-reduced-scheme]. No affineness, nonemptiness, or finite-type assumption on W or X is required.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 081I (lemma-flat-base-change-scheme-theoretic-image) and 056B (lemma-scheme-theoretic-image-reduced), applied after each field extension"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-nagata-scheme-theoretic-image",
+  "def-pc-geometrically-irreducible",
+  "def-pc-reduced-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Apply geometrically_iff_of_isClosedUnderIsomorphisms to test the reducedness of X×_k Spec K for each field K and map y:Spec K→Spec k. Its projection a to X is flat, since every morphism between spectra of fields is flat and flatness is stable under base change. In Lean, Flat a is inferred directly.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use pullbackRightPullbackFstIso p y h to identify W×_X(X×_k Spec K) with W×_k Spec K. The latter is reduced by the geometric reducedness hypothesis on h;p. Transport reducedness along this isomorphism using isReduced_of_isOpenImmersion.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The Mathlib instance IsSchemeTheoreticallyDominant.pullbackSnd makes the pullback of h along flat a scheme-theoretically dominant; quasi-compactness is also stable under base change. Apply IsSchemeTheoreticallyDominant.isReduced to this morphism to deduce reducedness of X×_k Spec K. This closes the geometric reducedness criterion. The argument never chooses a point, so also treats empty schemes.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Z6",
+  "date": "2026-10-20",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 081I and 056B; the existing fully proved public helper is moved unchanged from the retired Sheaf radicial module. Each Lean step uses only Mathlib."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Geometric reducedness descends along a quasi compact scheme theoretically dominant morphism to a scheme over a field",
+   "date": "2026-10-20",
+   "results": "{\"t\": \"2026-10-20T12:29:36Z\", \"tool\": \"leansearch\", \"query\": \"Geometric reducedness descends along a quasi compact scheme theoretically dominant morphism to a scheme over a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"Algebra.IsGeometricallyReduced.casesOn\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"Algebra.IsGeometricallyReduced.of_injective\", \"AlgebraicGeometry.isReduced_of_isOpenImmersion\"], \"digest\": \"ae84f0cfcaa238fb\"}",
+   "digest": "ae84f0cfcaa238fb",
+   "verdict": "No exact scheme-level descent theorem. Mathlib supplies geometric reducedness tests, flat base change of schematic dominance, and descent of reducedness; the displayed Lean proof combines these."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric reducedness descends along a quasi compact scheme theoretically dominant morphism over a field",
+   "date": "2026-10-20",
+   "results": "{\"t\": \"2026-10-20T12:29:37Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric reducedness descends along a quasi compact scheme theoretically dominant morphism over a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.of_injective\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"AlgebraicGeometry.IsReduced\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.isReduced_of_isOpenImmersion\"], \"digest\": \"438da32a0e0c5079\"}",
+   "digest": "438da32a0e0c5079",
+   "verdict": "No exact scheme-level descent theorem. Mathlib supplies geometric reducedness tests, flat base change of schematic dominance, and descent of reducedness; the displayed Lean proof combines these."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSchemeTheoreticallyDominant.(of_isPullback|isReduced)|geometricallyReduced.*[Dd]ominant|[Dd]ominant.*geometricallyReduced",
+   "date": "2026-10-20",
+   "results": "{\"t\": \"2026-10-20T12:29:36Z\", \"tool\": \"grep\", \"query\": \"IsSchemeTheoreticallyDominant.(of_isPullback|isReduced)|geometricallyReduced.*[Dd]ominant|[Dd]ominant.*geometricallyReduced\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\"], \"digest\": \"26921bac93d1bbf4\"}",
+   "digest": "26921bac93d1bbf4",
+   "verdict": "No exact scheme-level descent theorem. Mathlib supplies geometric reducedness tests, flat base change of schematic dominance, and descent of reducedness; the displayed Lean proof combines these."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RadicialReducedFlatGenericFibre",
+  "date": "2026-10-20",
+  "group": "Z6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "The geometric reducedness descent part of lem-sbc-radicial-reduced-flat-generic-fibre step 2; retain the already public general helper when retiring the upstream duplicate.",
+   "via": [
+    "lem-sbc-radicial-reduced-flat-generic-fibre"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GeometricallyReducedDominantDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricallyReducedDominantDescent.lean",
+  "declaration": "AlgebraicGeometry.geometricallyReduced_of_schemeTheoreticallyDominant",
+  "statement": "theorem geometricallyReduced_of_schemeTheoreticallyDominant\n    {k : Type u} [Field k] {W X : Scheme.{u}}\n    (h : W ⟶ X) (p : X ⟶ Spec (.of k))\n    [IsSchemeTheoreticallyDominant h] [QuasiCompact h]\n    (hred : GeometricallyReduced (h ≫ p)) : GeometricallyReduced p",
+  "branch": "sheaf-dag",
+  "by": "Z6",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-f9a50",
+  "group": "Z6",
+  "result": "pass",
+  "landing": "20261020T150715-L-2576908",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-f9a50",
+  "group": "Z6",
+  "result": "pass",
+  "landing": "20261020T150715-L-2576908",
+  "kind": "interface",
+  "note": "independent cc review: retired Sheaf module vs upstream WeilConjectures twin (identical statement/proof, upstream helper private); moved helper byte-identical in new module with node; one-line forced import adaptation in FiniteInseparableGeometricReduction (original fails at :234, adapted compiles); importers GenericGeometricallyReducedAffineModel and GenericSmoothBoundaryPreparation compile; axioms clean"
+ }
+}

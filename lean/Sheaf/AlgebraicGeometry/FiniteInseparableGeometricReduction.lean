@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
 import Sheaf.FieldTheory.FiniteFamilyCommonExtension
-import Sheaf.AlgebraicGeometry.RadicialReducedFlatGenericFibre
+import Sheaf.AlgebraicGeometry.GeometricallyReducedDominantDescent
 import WeilConjectures.FieldTheory.MakeSeparable
 import WeilConjectures.FieldTheory.SeparablyGeneratedTensorReduced
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme

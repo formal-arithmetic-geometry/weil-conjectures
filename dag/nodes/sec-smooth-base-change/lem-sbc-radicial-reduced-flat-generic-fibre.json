@@ -112,14 +112,15 @@
   "lem-weil-pbc-separably-generated-tensor-reduced"
  ],
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.RadicialReducedFlatGenericFibre",
-  "file": "lean/Sheaf/AlgebraicGeometry/RadicialReducedFlatGenericFibre.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.RadicialReducedFlatGenericFibre",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RadicialReducedFlatGenericFibre.lean",
   "declaration": "AlgebraicGeometry.exists_radicial_reduced_flat_generic_fibre",
   "statement": "theorem exists_radicial_reduced_flat_generic_fibre\n    {Z S : Scheme.{u}} [IsAffine Z] [IsReduced Z] [IsAffine S] [IsIntegral S]\n    (g : Z ⟶ S) [Flat g] [LocallyOfFinitePresentation g]\n    (η : S) (hη : IsGenericPoint η Set.univ)\n    (hgeom : GeometricallyIrreducible (g.fiberToSpecResidueField η)) :\n    ∃ (S' : Scheme.{u}) (q : S' ⟶ S),\n      IsAffine S' ∧ IsIntegral S' ∧ IsUniversalHomeomorphism q ∧\n      ∃ η' : S', IsGenericPoint η' Set.univ ∧ q η' = η ∧\n        GeometricallyReduced\n          (((pullback g q).nilradical.subschemeι ≫ pullback.snd g q).fiberToSpecResidueField\n            η')",
   "branch": "sheaf-dag",
   "by": "H1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (Z6): retire the duplicate Sheaf module and point at the identical, fully proved upstream theorem. The formerly public descent helper is preserved in Sheaf.AlgebraicGeometry.GeometricallyReducedDominantDescent."
  },
  "stmt_deps": [
   "def-pc-fibre-product",
@@ -137,7 +138,7 @@
   "by": "worker",
   "document": "Stacks Project",
   "place": "Tag 0559, second proof, and Tag 030U",
-  "note": "Lean completes the geometric reducedness step via tensor-reduced spectra and scheme-theoretically dominant flat base change; only the radicial separating-field construction is split off."
+  "note": "The existing upstream proof implements all three steps unchanged. The duplicate Sheaf module is retired; the public general descent helper used elsewhere is retained in a focused Sheaf module. The upstream theorem has only propext, Classical.choice and Quot.sound in its axiom audit."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -150,14 +151,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R2",
+  "reviewer": "C-f9a50",
+  "group": "Z6",
   "result": "pass",
-  "landing": "20261013T131328-L-4034824",
+  "landing": "20261020T150715-L-2576908",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired Sheaf module vs upstream WeilConjectures twin (identical statement/proof, upstream helper private); moved helper byte-identical in new module with node; one-line forced import adaptation in FiniteInseparableGeometricReduction (original fails at :234, adapted compiles); importers GenericGeometricallyReducedAffineModel and GenericSmoothBoundaryPreparation compile; axioms clean"
  },
  "lean_audit": {
   "master": {
