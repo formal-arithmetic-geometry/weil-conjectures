@@ -175,6 +175,27 @@
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tag 0941 evaluation; Tag 0A07 derived composite normalization; canonical scalar restriction and adjunction fraction computation"
    }
+  },
+  {
+   "text": "Original-site Lean implementation: quotient_comm follows from exchangeScalar_comm and the projection square. The ordinary quotient transition and augmentation are constructed and characterized on sheafified pure tensors using ConstantNormalization. Pointwise evaluation proves additivity. Apply the left-derived resolving-class theorem to K-flat complexes; scalar extension inverts resolving quasi-isomorphisms and exact restriction preserves them. Bundle the resulting universal pair and computation law in DerivedReductionModelData. The universal derived lift of the ordinary augmentation has the original normalization; uniqueness proves augmentation_eq_choose. The ordinary scalar pullback comparison is the conjugate of the coefficient-restriction/direct-image identity square, hence invertible. Its unit and tensor formulas prove compatibility with each adjacent quotient transition and therefore all inverse-sequence arrows. Descent on resolving complexes produces the derived pullback isomorphism, uniquely normalized by the complex counits; flat-term K-flat pullback is the existing ringed-topos K-flat theorem. The coefficient rings, all public theorem signatures and the original unit route remain unchanged.",
+   "uses": [
+    "lem-sf-cbc-constant-tower-direct-image-normalization",
+    "lem-pur-left-derived-from-kflat-class",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-weil-pbc-derived-reduction-model-data",
+    "lem-trf-right-fraction-dense-subcategory",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-sp-proetale-algebraic-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For projection_isIso apply the new one-coefficient perfect projection theorem at every op n. Its ordinary functor identifications are identity isomorphisms, its balancing square reduces definitionally to levelPullIso, and its derived normalization is reductionPullIso_existsUnique.choose_spec. To pass from these evaluated isomorphisms to the actual tower map, represent its arrow by a localized chain-map arrow (essential surjectivity of the quotient and localization arrow functors). Exact evaluation factorization and the evaluated isomorphisms make every evaluated chain map a quasi-isomorphism. The levelwise quasi-isomorphism criterion for complexes of diagrams makes the original chain map a quasi-isomorphism. Its localized map, and hence the isomorphic original arrow, is invertible. This proves joint conservativity without asserting faithfulness. The generic completionMateComparison restatement still uses the existing generic theorem and its original proof route.",
+   "uses": [
+    "lem-sf-cbc-perfect-constant-projection-evaluation",
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -198,12 +219,21 @@
   "lem-weil-pbc-ringed-projection-mate-exact",
   "def-weil-pbc-adjunction-conjugate",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-tower-evaluation-kinjective"
+  "lem-weil-tower-evaluation-kinjective",
+  "lem-sf-cbc-constant-tower-direct-image-normalization",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-weil-pbc-derived-reduction-model-data",
+  "lem-trf-right-fraction-dense-subcategory",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-sp-proetale-algebraic-inverse-image",
+  "lem-sf-cbc-perfect-constant-projection-evaluation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
-  "place": "Proof Step 4, missing integral completed-mate identification; explicit strict-diagram coherence and completion-unit transpose calculation, using Stacks 0941, 0A07, 0B56, 0944, 0E48, 099M and 099N"
+  "place": "Proof Step 4, missing integral completed-mate identification; explicit strict-diagram coherence and completion-unit transpose calculation, using Stacks 0941, 0A07, 0B56, 0944, 0E48, 099M and 099N",
+  "note": " G4 stage 3: nine original auxiliary holes are proved and the projection hole is decomposed into the genuine single-coefficient perfect projection node plus a complete joint-conservativity argument. The universal reduction model and explicit derived augmentation avoid repeated concrete unfolding. All original theorem signatures, the generic completion-mate restatement and the unit route are preserved."
  },
  "mathlib_searches": [
   {
@@ -532,7 +562,12 @@
    "AlgebraicGeometry.Scheme.OrderedExchange.H",
    "AlgebraicGeometry.Scheme.OrderedExchange.S",
    "AlgebraicGeometry.Scheme.OrderedExchange.T",
-   "CategoryTheory.AdicSites.OrderedExchangeInterface.completionMateComparison"
+   "CategoryTheory.AdicSites.OrderedExchangeInterface.completionMateComparison",
+   "AlgebraicGeometry.Scheme.OrderedExchange.reductionData_exists",
+   "AlgebraicGeometry.Scheme.OrderedExchange.reductionData",
+   "AlgebraicGeometry.Scheme.OrderedExchange.canonicalModelAugmentation",
+   "AlgebraicGeometry.Scheme.OrderedExchange.augmentation_normalized",
+   "AlgebraicGeometry.Scheme.OrderedExchange.augmentation_eq_choose"
   ],
   "file": "lean/Sheaf/Paper/ProEtaleConstantReductionTower.lean",
   "statement": "abbrev completionMateComparison {Y X Y' X' : Site.{u}} {f : Morphism Y X} {g : Morphism Y Y'} {h : Morphism X X'} {k : Morphism Y' X'} (sq : Square f g h k) (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (_hperfect : PerfectQuotients A I) : (∀ K : X.Complete A I, IsIso (projectionComparison (f := f) (g := g) A I K.obj)) ∧ (∀ (K : X.Complete A I) (n : ℕ), (Y'.evaluate A n).map (projectionComparison (f := f) (g := g) A I K.obj) ≫ (finiteSourceIso (f := f) (g := g) A I n K.obj).hom = (Y'.finiteEvaluationIso A I n).hom.app ((g.pull A).obj ((f.push A).obj K.obj)) ≫ (Y'.finiteRestriction A I n).map (finiteProjectionComparison (f := f) (g := g) A I n K.obj)) ∧ (Functor.whiskerRight (completeExchange sq A I) (ObjectProperty.ι (Y'.IsComplete A I)) ≫ (comparisonT (h := h) (k := k) A I).hom = comparisonS (f := f) (g := g) A I ≫ Functor.whiskerRight (Functor.whiskerLeft (ObjectProperty.ι (X.IsComplete A I) ⋙ X.reduction A I) (towerExchange sq A)) (Y'.rlim A)) ∧ (∀ (K : X.Complete A I) (n : ℕ), (Y'.evaluate A n).map ((towerExchange sq A).app ((X.reduction A I).obj K.obj)) ≫ (finiteTargetIso (h := h) (k := k) A I n K.obj).hom = (finiteSourceIso (f := f) (g := g) A I n K.obj).hom ≫ (Y'.finiteRestriction A I n).map ((ordinaryExchange sq (quotientRing A I n)).app ((X.finiteReduction A I n).obj K.obj)))",
@@ -562,5 +597,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261020T221158-L-4154121",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
